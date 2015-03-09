@@ -1,5 +1,5 @@
 {
-    "name": "tribe/square-one",
+    "name": "moderntribe/square-one",
     "type": "project",
     "description": "The starting point for Modern Tribe service works.",
     "license": "Private",
@@ -22,7 +22,7 @@
     ],
     "require": {
         "johnpbloch/wordpress": ">=4.1",
-        "tribe/tribe-glomar": "~1.0",
+        "moderntribe/tribe-glomar": "~1.0",
         "wpackagist-plugin/posts-to-posts": "*",
         "badcow/lorem-ipsum": "dev-master"
     },
