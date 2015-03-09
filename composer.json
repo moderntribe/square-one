@@ -14,15 +14,26 @@
     {
         "type": "vcs",
         "url": "git@github.com:moderntribe/glomar"
+    },
+    {
+        "type": "composer",
+        "url": "http://wpackagist.org"
     }
     ],
     "require": {
-        "tribe/tribe-glomar": "~1.0"
+        "johnpbloch/wordpress": ">=4.1",
+        "tribe/tribe-glomar": "~1.0",
+        "wpackagist-plugin/posts-to-posts": "*",
+        "badcow/lorem-ipsum": "dev-master"
     },
+    "config":{
+        "vendor-dir": "dev/vendor"
+        },
     "extra":{
         "installer-paths": {
             "content/plugins/{$name}/": ["type:wordpress-plugin"],
             "content/mu-plugins/{$name}/": ["type:wordpress-muplugin"]
-        }
+        },
+        "wordpress-install-dir": "wp"
     }
 }
