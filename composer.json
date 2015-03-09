@@ -1,0 +1,13 @@
+{
+    "name": "tribe/square-one",
+    "description": "The starting point for Modern Tribe service works.",
+    "license": "Private",
+    "authors": [
+        {
+            "name": "Modern Tribe",
+            "email": "peter@tri.be"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
