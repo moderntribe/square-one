@@ -1,5 +1,6 @@
 {
     "name": "tribe/square-one",
+    "type": "project",
     "description": "The starting point for Modern Tribe service works.",
     "license": "Private",
     "authors": [
@@ -9,5 +10,19 @@
         }
     ],
     "minimum-stability": "dev",
-    "require": {}
+    "repositories": [
+    {
+        "type": "vcs",
+        "url": "git@github.com:moderntribe/glomar"
+    }
+    ],
+    "require": {
+        "tribe/tribe-glomar": "dev-34003-composer"
+    },
+    "extra":{
+        "installer-paths": {
+            "content/plugins/{$name}/": ["type:wordpress-plugin"],
+            "content/mu-plugins/{$name}/": ["type:wordpress-muplugin"]
+        }
+    }
 }
