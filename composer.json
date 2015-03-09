@@ -17,7 +17,7 @@
     }
     ],
     "require": {
-        "tribe/tribe-glomar": "dev-34003-composer"
+        "tribe/tribe-glomar": "~1.0"
     },
     "extra":{
         "installer-paths": {

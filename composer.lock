@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d66e131f9d9235b4dca42d0d9c32ee91",
+    "hash": "c6a8488562193f593f886469d5eb0a24",
     "packages": [
         {
             "name": "composer/installers",
@@ -103,7 +103,7 @@
         },
         {
             "name": "tribe/tribe-glomar",
-            "version": "dev-34003-composer",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "git@github.com:moderntribe/glomar.git",
@@ -139,9 +139,7 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "tribe/tribe-glomar": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
