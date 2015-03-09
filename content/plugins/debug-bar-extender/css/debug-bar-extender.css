@@ -1,0 +1,50 @@
+#variable-lookup ul.debug-menu-links, #memcache-lookup ul.debug-menu-links {
+padding: 0;
+margin: 0;
+background: none !important;
+clear:both;
+}
+
+#variable-lookup ul.debug-menu-links li, #memcache-lookup ul.debug-menu-links li {
+float: left;
+margin-bottom: 10px !important;
+background: none !important;
+border: 1px solid #eee !important;
+color: #555 !important;
+line-height:16px;
+margin-right: 10px;
+padding:5px;
+}
+
+#variable-lookup ul.debug-menu-links li.current a, #memcache-lookup ul.debug-menu-links li.current a {
+background: #ccc !important;
+color: #333 !important;
+-webkit-border-top-right-radius: 0 !important;
+-webkit-border-top-left-radius: 0 !important;
+-moz-border-radius-topright: 0 !important;
+-moz-border-radius-topleft: 0 !important;
+}
+
+#variable-lookup ul.debug-menu-links li a, #memcache-lookup ul.debug-menu-links li a {
+background: none !important;
+color: #555 !important;
+overflow: hidden;
+}
+
+span.debug-note {
+display:block;
+margin-top: 20px !important;
+margin-bottom: 50px;
+font-size: 12px;
+line-height: 14px;
+clear:both;
+}
+
+#variable-lookup-menu-targets, #memcache-lookup-menu-targets {
+clear:both;
+}
+
+#variable-lookup-menu-targets pre, #memcache-lookup-menu-targets pre {
+word-wrap: break-word;
+overflow: auto;
+}

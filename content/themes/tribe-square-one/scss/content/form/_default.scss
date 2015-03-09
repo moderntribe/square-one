@@ -1,0 +1,117 @@
+
+// -----------------------------------------------------------------------------
+//
+// Label
+//
+// -----------------------------------------------------------------------------
+
+.label,
+%label {
+	
+}
+
+// -----------------------------------------------------------------------------
+//
+// Inputs
+//
+// -----------------------------------------------------------------------------
+
+input,
+button,
+textarea,
+select {
+	padding: 0 10px;
+	border: 1px solid $border;
+	display: block;
+    width: 100%;
+}
+
+%input-focus {
+	&:focus {
+		border: 1px solid $grey;
+		&::-webkit-input-placeholder {
+			color: lighten($text, 10%);
+		}
+		&:-moz-placeholder {
+			color: lighten($text, 10%);
+		}
+		&::-moz-placeholder {
+			color: lighten($text, 10%);
+		}
+		&:-ms-input-placeholder {
+			color: lighten($text, 10%);
+		}
+	}
+}
+
+input,
+select,
+button {
+	height: 40px;
+	.lt-ie9 & {
+		line-height: 40px;
+	}
+}
+
+// -----------------------------------------------------------------------------
+// Inputs: Radio & Checkbox
+// -----------------------------------------------------------------------------
+
+input {
+    &[type="radio"],
+    &[type="checkbox"] {
+        height: auto;
+        width: auto;
+        line-height: normal;
+        display: inline-block;
+    }
+}
+
+// -----------------------------------------------------------------------------
+// Textarea
+// -----------------------------------------------------------------------------
+
+textarea {
+	resize: none;
+	padding: 10px;
+}
+
+// -----------------------------------------------------------------------------
+// Select
+// -----------------------------------------------------------------------------
+
+select {
+	padding-right: 0;
+	width: 100%;
+	// CASE: Firefox
+	.is-firefox & {
+		padding-top: 8px;
+	}
+}
+
+// -----------------------------------------------------------------------------
+// Buttons & Submits
+// -----------------------------------------------------------------------------
+
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+	@extend %transition;
+	background-color: $primary;
+	border: 0;
+	color: $white;
+	&:hover {
+		background-color: darken($primary, 15%);
+	}
+}
+
+// -----------------------------------------------------------------------------
+// Placeholders
+// -----------------------------------------------------------------------------
+
+// Placeholders
+@include placeholder {
+	color: $grey;
+	opacity: 1;
+}

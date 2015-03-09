@@ -1,0 +1,63 @@
+
+// -----------------------------------------------------------------------------
+//
+// Globals
+//
+// -----------------------------------------------------------------------------
+
+html { 
+	background: $bgd;
+	height: 100%;
+}
+
+body {
+	background: $bgd-content;
+}
+
+body, 
+form, 
+button, 
+input, 
+select, 
+textarea { 
+	@include font($short: true);
+	color: $text; 
+}
+
+::-moz-selection { 
+	background: $primary; 
+	color: $white; 
+	text-shadow: none; 
+}
+
+::selection { 
+	background: $primary; 
+	color: $white; 
+	text-shadow: none; 
+}
+
+// -----------------------------------------------------------------------------
+//
+// Links
+//
+// -----------------------------------------------------------------------------
+
+a {
+	@extend %transition;
+	color: $link;
+	text-decoration: none;
+	background-color: transparent;
+	outline: 0;
+	&:visited { 
+		color: $link; 
+	}
+	&:hover { 
+		color: $link-hover; 
+	}
+	&:visited,
+	&:hover,
+	&:active,
+	&:focus {
+		outline: 0;
+	}
+}

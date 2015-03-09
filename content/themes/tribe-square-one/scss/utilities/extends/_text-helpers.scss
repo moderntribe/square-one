@@ -1,0 +1,35 @@
+
+// -----------------------------------------------------------------------------
+//
+// Split long words into multiple lines
+//
+// -----------------------------------------------------------------------------
+
+%wrap-text {
+  	word-wrap: break-word;
+ 	hyphens: auto;
+}
+
+// -----------------------------------------------------------------------------
+//
+// Truncate text to a single line, with an ellipsis
+//
+// -----------------------------------------------------------------------------
+
+%truncate-text {
+  	text-overflow: ellipsis;
+  	overflow: hidden;
+  	white-space: nowrap;
+}
+
+// -----------------------------------------------------------------------------
+//
+// Remove the default antialiased font-smoothing
+//
+// -----------------------------------------------------------------------------
+
+%subpixel-text {
+  	-webkit-font-smoothing: subpixel-antialiased;
+  	-moz-osx-font-smoothing: auto;
+  	font-smoothing: subpixel-antialiased;
+}

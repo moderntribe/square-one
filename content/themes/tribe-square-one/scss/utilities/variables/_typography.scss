@@ -1,0 +1,74 @@
+
+// -----------------------------------------------------------------------------
+//
+// Variables: Typography
+//
+// -----------------------------------------------------------------------------
+
+
+// -----------------------------------------------------------------------------
+// Font Stacks
+// -----------------------------------------------------------------------------
+
+$font-family-proxima-nova: "proxima-nova", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$font-family-sans-serif  : "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$font-family-base        : $font-family-proxima-nova;
+
+
+// -----------------------------------------------------------------------------
+// Font Sizing
+// -----------------------------------------------------------------------------
+
+$font-size-base		: 18px !default;
+
+$font-size-h1       : floor(($font-size-base * 2.25)) !default; // ~36px
+$font-size-h1-s     : 32px !default;
+
+$font-size-h2       : floor(($font-size-base * 2)) !default; // ~32px
+$font-size-h2-s     : 28px !default;
+
+$font-size-h3       : ceil(($font-size-base * 1.75)) !default; // ~28px
+$font-size-h3-s     : 24px !default;
+
+$font-size-h4       : ceil(($font-size-base * 1.375)) !default; // ~22px
+$font-size-h4-s     : 21px !default;
+
+$font-size-h5       : floor(($font-size-base * 1.25)) !default; // ~20px
+$font-size-h5-s     : 18px !default;
+
+$font-size-h6       : $font-size-base !default;
+$font-size-h6-s     : 16px !default;
+
+$font-size-content  : 18px !default;
+$font-size-content-s: 16px !default;
+
+$font-size-quote    : 32px !default;
+$font-size-quote-s  : 21px !default;
+
+
+// -----------------------------------------------------------------------------
+// Font Weights
+// -----------------------------------------------------------------------------
+
+$font-weight-light   : 300 !default;
+$font-weight-regular : 400 !default;
+$font-weight-semibold: 600 !default;
+$font-weight-bold    : 700 !default;
+
+
+// -----------------------------------------------------------------------------
+// Line Heights
+// -----------------------------------------------------------------------------
+
+$line-height-base   : 1.5 !default;
+$line-height-medium : 1.33 !default;
+$line-height-small  : 1.22 !default;
+$line-height-smaller: 1.15 !default;
+$line-height-even   : 1 !default;
+
+
+// -----------------------------------------------------------------------------
+// Margins
+// -----------------------------------------------------------------------------
+
+$margin: 1.75em !default;

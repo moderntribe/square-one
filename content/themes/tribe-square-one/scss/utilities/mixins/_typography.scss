@@ -1,0 +1,42 @@
+
+// -----------------------------------------------------------------------------
+//
+// Font Stacks
+//
+// + Setup site fonts, includes variable for font-family or font
+//
+// VARS:
+//
+// $family      - Font family. You can view the $font variables in variables/typography.scss.
+// $weight      - Font weight. Default: normal.
+// $style       - Font style. Default: normal.
+// $size        - Font size, recommend only using this for global, then using the font-size mixin. Default: 100%.
+// $line-height - $line-height. Default: $line-height-base.
+// $short       - If true, outputs font shorthand property, else font-family property. Default: false. Options: true, false.
+//
+// -----------------------------------------------------------------------------
+
+@mixin font(
+	$family     : $font-family-base, 
+	$weight     : $font-weight-regular, 
+	$style      : normal, 
+	$size       : 100%, 
+	$line-height: $line-height-base, 
+	$short      : false
+) {
+
+	// Property: font shorthand property
+    @if $short {
+
+        font: $weight $style #{$size}/#{$line-height} $family;
+
+    } 
+
+    // Property: font-family property
+    @else {
+    
+        font-family: $family;
+
+    }
+
+}

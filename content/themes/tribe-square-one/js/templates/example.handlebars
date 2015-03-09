@@ -1,0 +1,19 @@
+<aside class="example-wrap">
+    <header class="example-save">
+        {{save_message}}
+        <i><b class="icon icon-bookmark"></b></i>
+    </header>
+    {{#if related_products.length}}
+        <span class="example-relation"><span>{{relation_type}}</span></span>
+        <ul class="example-products clean-list">
+            {{#each related_products}}
+                <li>
+                    <a href="{{link}}" title="{{title}}">
+                        {{title}}
+                        <i class="icon icon-arrow-right"></i>
+                    </a>
+                </li>
+            {{/each}}
+        </ul>
+    {{/if}}
+</aside>

@@ -1,0 +1,27 @@
+
+
+.lt-ie9 body {
+  min-width: 960px;
+  overflow-x: visible;
+}
+
+.lt-ie9 .show-mobile-only {
+  display: none;
+  visibility: hidden;
+}
+
+.lt-ie9 .show-tablet-up {
+  display: block;
+  visibility: visible;
+}
+
+.lt-ie9 .show-desktop-up {
+  display: block;
+  visibility: visible;
+}
+
+.lt-ie9 input,
+.lt-ie9 select,
+.lt-ie9 button {
+  line-height: 40px;
+}

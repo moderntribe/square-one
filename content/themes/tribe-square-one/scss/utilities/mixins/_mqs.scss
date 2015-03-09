@@ -1,0 +1,70 @@
+
+// -----------------------------------------------------------------------------
+//
+// Media Queries
+//
+// + Assumes mobile first approach
+//
+// USAGE:
+//
+// There are several ways you can use this mixin, but by default the mixin 
+// assumes a min-width mq (see $width & $min options) so by using these
+// options as needed you can create a variety of different mqs to suit
+// your needs, EXAMPLE: @include mq(600px, false, false)
+// would be a mq of: (max-height: 600px)
+//
+// VARS:
+//
+// $point - Breakpoint in pixels (ex: 768px). Options: retina, #px.
+// $width - If this is a width mq, if not, it's a height mq. Default: true. Options: true, false.
+// $min   - If this is a min-# mq, if not, it's a max-# mq. Default: true. Options: true, false.
+// $no-mq - Whether to output mq styles in @media wrapper or not. Var is set in parent stylesheets with $legacy.
+//
+// -----------------------------------------------------------------------------
+
+@mixin mq($point, $width: true, $min: true) {
+    
+    // Width
+    @if $width {
+
+        // min-width
+        @if $min {
+            @media (min-width: $point) { @content; }
+        }
+        // max-width
+        @else {
+            @media (max-width: $point) { @content; }
+        }
+
+    }
+    // Height
+    @else {
+
+        // min-height
+        @if $min {
+            @media (min-height: $point) { @content; }
+        }
+        // max-height
+        @else {
+            @media (max-height: $point) { @content; }
+        }
+
+    }
+
+}
+
+// -----------------------------------------------------------------------------
+//
+// No Media Queries
+//
+// + Fallbacks for IE8 and browsers that do not support media queries
+//
+// -----------------------------------------------------------------------------
+
+@mixin no-mq {
+
+    .lt-ie9 & {
+        @content;
+    }
+
+}

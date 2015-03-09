@@ -1,0 +1,26 @@
+
+// -----------------------------------------------------------------------------
+//
+// Aspect Ratios
+//
+// -----------------------------------------------------------------------------
+
+%ratio-1x1 {
+	@include intrinsic-ratio(1, 1);
+}
+
+%ratio-2x1 {
+    @include intrinsic-ratio(2, 1);
+}
+
+%ratio-1x2 {
+	@include intrinsic-ratio(1, 2);
+}
+
+%ratio-4x3 {
+    @include intrinsic-ratio(4, 3);
+}
+
+%ratio-16x9 {
+	@include intrinsic-ratio(16, 9);
+}
