@@ -40,6 +40,7 @@
             "moderntribe/tribe-glomar": "~1.0",
             "wpackagist-plugin/posts-to-posts": "*",
             "wpackagist-plugin/limit-login-attempts": "*",
+            "wpackagist-plugin/regenerate-thumbnails": "*",
             "badcow/lorem-ipsum": "dev-master",
             "fancyguy/webroot-installer": "1.0.0"
         },
