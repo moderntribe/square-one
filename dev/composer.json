@@ -16,10 +16,6 @@
       "url": "git@github.com:moderntribe/glomar"
     },
     {
-      "type": "vcs",
-      "url": "git@github.com:jbrinley/wp-git-deploy"
-    },
-    {
       "type": "package",
       "package": {
         "name": "wordpress",
@@ -47,19 +43,18 @@
     "wpackagist-plugin/regenerate-thumbnails": "*",
     "wpackagist-plugin/wordpress-importer": "*",
     "badcow/lorem-ipsum": "dev-master",
-    "fancyguy/webroot-installer": "1.0.0",
-    "jbrinley/wp-git-deploy": "*"
+    "fancyguy/webroot-installer": "1.0.0"
   },
   "config": {
-    "vendor-dir": "dev/vendor"
+    "vendor-dir": "vendor"
   },
   "extra": {
     "installer-paths": {
-      "content/plugins/{$name}/": ["type:wordpress-plugin"],
-      "content/mu-plugins/{$name}/": ["type:wordpress-muplugin"],
-      "wp/": ["type"]
+      "../content/plugins/{$name}/": ["type:wordpress-plugin"],
+      "../content/mu-plugins/{$name}/": ["type:wordpress-muplugin"],
+      "../wp/": ["type"]
     },
-    "webroot-dir": "wp",
+    "webroot-dir": "../wp",
     "webroot-package": "wordpress"
   }
 }
