@@ -42,7 +42,6 @@
     "wpackagist-plugin/limit-login-attempts": "*",
     "wpackagist-plugin/regenerate-thumbnails": "*",
     "wpackagist-plugin/wordpress-importer": "*",
-    "badcow/lorem-ipsum": "dev-master",
     "fancyguy/webroot-installer": "1.0.0"
   },
   "config": {
