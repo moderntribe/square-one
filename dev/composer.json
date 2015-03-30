@@ -16,6 +16,26 @@
       "url": "git@github.com:moderntribe/glomar"
     },
     {
+      "type": "vcs",
+      "url": "git@github.com:moderntribe/tribe-admin-dashboard"
+    },
+    {
+      "type": "vcs",
+      "url": "git@github.com:moderntribe/tribe-branding"
+    },
+    {
+      "type": "vcs",
+      "url": "git@github.com:moderntribe/tribe-quick-profiler"
+    },
+    {
+      "type": "vcs",
+      "url": "git@github.com:moderntribe/tribe-roles"
+    },
+    {
+      "type": "vcs",
+      "url": "git@github.com:moderntribe/tribe-security"
+    },
+    {
       "type": "package",
       "package": {
         "name": "wordpress",

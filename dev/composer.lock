@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "27e69f1b4595efbe04ac6b340e3dead9",
+    "hash": "892de02a7af17436d425e44414652610",
     "packages": [
         {
             "name": "composer/installers",
@@ -144,6 +144,68 @@
             "time": "2013-01-29 22:51:45"
         },
         {
+            "name": "moderntribe/tribe-admin-dashboard",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:moderntribe/tribe-admin-dashboard.git",
+                "reference": "0c387dff78812dd62f408e7ecab5d3c61c68c381"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/moderntribe/tribe-admin-dashboard/zipball/0c387dff78812dd62f408e7ecab5d3c61c68c381",
+                "reference": "0c387dff78812dd62f408e7ecab5d3c61c68c381",
+                "shasum": ""
+            },
+            "type": "wordpress-plugin",
+            "license": [
+                "Private"
+            ],
+            "authors": [
+                {
+                    "name": "Peter Chester",
+                    "email": "peter@tri.be"
+                }
+            ],
+            "description": "Override the admin dashboard with a totally custom single screen admin.",
+            "support": {
+                "source": "https://github.com/moderntribe/tribe-admin-dashboard/tree/1.0.0",
+                "issues": "https://github.com/moderntribe/tribe-admin-dashboard/issues"
+            },
+            "time": "2015-03-30 16:16:29"
+        },
+        {
+            "name": "moderntribe/tribe-branding",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:moderntribe/tribe-branding.git",
+                "reference": "67dac08a2bb17277c77c95c253f6e1a95ccbdaa4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/moderntribe/tribe-branding/zipball/67dac08a2bb17277c77c95c253f6e1a95ccbdaa4",
+                "reference": "67dac08a2bb17277c77c95c253f6e1a95ccbdaa4",
+                "shasum": ""
+            },
+            "type": "wordpress-plugin",
+            "license": [
+                "Private"
+            ],
+            "authors": [
+                {
+                    "name": "Peter Chester",
+                    "email": "peter@tri.be"
+                }
+            ],
+            "description": "Update links and logos and social icons",
+            "support": {
+                "source": "https://github.com/moderntribe/tribe-branding/tree/1.0.0",
+                "issues": "https://github.com/moderntribe/tribe-branding/issues"
+            },
+            "time": "2015-03-30 16:25:13"
+        },
+        {
             "name": "moderntribe/tribe-glomar",
             "version": "1.0.0",
             "source": {
@@ -176,6 +238,99 @@
                 "issues": "https://github.com/moderntribe/glomar/issues"
             },
             "time": "2015-03-09 09:33:54"
+        },
+        {
+            "name": "moderntribe/tribe-quick-profiler",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/moderntribe/tribe-quick-profiler.git",
+                "reference": "fd0219931980e78663c32630ecfe4d18ed139ea3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/moderntribe/tribe-quick-profiler/zipball/fd0219931980e78663c32630ecfe4d18ed139ea3",
+                "reference": "fd0219931980e78663c32630ecfe4d18ed139ea3",
+                "shasum": ""
+            },
+            "type": "wordpress-plugin",
+            "license": [
+                "GPL-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Peter Chester",
+                    "email": "peter@tri.be"
+                }
+            ],
+            "description": "A tool to easily and rapidly profile WordPress load time and memory usage with an extremely low overhead.",
+            "support": {
+                "source": "https://github.com/moderntribe/tribe-quick-profiler/tree/1.0.1",
+                "issues": "https://github.com/moderntribe/tribe-quick-profiler/issues"
+            },
+            "time": "2015-03-30 16:37:29"
+        },
+        {
+            "name": "moderntribe/tribe-roles",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:moderntribe/tribe-roles.git",
+                "reference": "ebbd7dc3e7288122f01db862d1fa55ed5fd806e4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/moderntribe/tribe-roles/zipball/ebbd7dc3e7288122f01db862d1fa55ed5fd806e4",
+                "reference": "ebbd7dc3e7288122f01db862d1fa55ed5fd806e4",
+                "shasum": ""
+            },
+            "type": "wordpress-plugin",
+            "license": [
+                "Private"
+            ],
+            "authors": [
+                {
+                    "name": "Peter Chester",
+                    "email": "peter@tri.be"
+                }
+            ],
+            "description": "Refine and manage the available roles",
+            "support": {
+                "source": "https://github.com/moderntribe/tribe-roles/tree/1.0.0",
+                "issues": "https://github.com/moderntribe/tribe-roles/issues"
+            },
+            "time": "2015-03-30 17:11:51"
+        },
+        {
+            "name": "moderntribe/tribe-security",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:moderntribe/tribe-security.git",
+                "reference": "1e9ee736e30b8000862971a8fa5e8b71b099caa6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/moderntribe/tribe-security/zipball/1e9ee736e30b8000862971a8fa5e8b71b099caa6",
+                "reference": "1e9ee736e30b8000862971a8fa5e8b71b099caa6",
+                "shasum": ""
+            },
+            "type": "wordpress-plugin",
+            "license": [
+                "Private"
+            ],
+            "authors": [
+                {
+                    "name": "Peter Chester",
+                    "email": "peter@tri.be"
+                }
+            ],
+            "description": "Modern Tribe security tweaks.",
+            "support": {
+                "source": "https://github.com/moderntribe/tribe-security/tree/1.0.0",
+                "issues": "https://github.com/moderntribe/tribe-security/issues"
+            },
+            "time": "2015-03-30 16:54:00"
         },
         {
             "name": "wordpress",
@@ -1700,12 +1855,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/BrowserKit.git",
-                "reference": "c1569f6b960ea1f27e343ec9775e5f9e7b9ae46a"
+                "reference": "c135dd2a06216cfcbb00863770c3df075450992e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/BrowserKit/zipball/c1569f6b960ea1f27e343ec9775e5f9e7b9ae46a",
-                "reference": "c1569f6b960ea1f27e343ec9775e5f9e7b9ae46a",
+                "url": "https://api.github.com/repos/symfony/BrowserKit/zipball/c135dd2a06216cfcbb00863770c3df075450992e",
+                "reference": "c135dd2a06216cfcbb00863770c3df075450992e",
                 "shasum": ""
             },
             "require": {
@@ -1747,7 +1902,7 @@
             ],
             "description": "Symfony BrowserKit Component",
             "homepage": "http://symfony.com",
-            "time": "2015-03-13 13:22:05"
+            "time": "2015-03-30 15:55:07"
         },
         {
             "name": "symfony/console",
@@ -1756,12 +1911,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Console.git",
-                "reference": "acc66bf5f1a851285b6fa0355d65a9a464adb59d"
+                "reference": "780a2bc91e1b2188500ce1097f979c8f47dadf7f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Console/zipball/acc66bf5f1a851285b6fa0355d65a9a464adb59d",
-                "reference": "acc66bf5f1a851285b6fa0355d65a9a464adb59d",
+                "url": "https://api.github.com/repos/symfony/Console/zipball/780a2bc91e1b2188500ce1097f979c8f47dadf7f",
+                "reference": "780a2bc91e1b2188500ce1097f979c8f47dadf7f",
                 "shasum": ""
             },
             "require": {
@@ -1805,7 +1960,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "http://symfony.com",
-            "time": "2015-03-26 16:59:57"
+            "time": "2015-03-30 15:55:07"
         },
         {
             "name": "symfony/css-selector",
@@ -1981,12 +2136,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Finder.git",
-                "reference": "435d81791268b93e8a871e251f4f0e7377d3f8d2"
+                "reference": "492de776d92afc774f78cb3d47635b5da6ad2507"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Finder/zipball/435d81791268b93e8a871e251f4f0e7377d3f8d2",
-                "reference": "435d81791268b93e8a871e251f4f0e7377d3f8d2",
+                "url": "https://api.github.com/repos/symfony/Finder/zipball/492de776d92afc774f78cb3d47635b5da6ad2507",
+                "reference": "492de776d92afc774f78cb3d47635b5da6ad2507",
                 "shasum": ""
             },
             "require": {
@@ -2022,7 +2177,7 @@
             ],
             "description": "Symfony Finder Component",
             "homepage": "http://symfony.com",
-            "time": "2015-03-27 10:22:45"
+            "time": "2015-03-30 15:55:07"
         },
         {
             "name": "symfony/yaml",
@@ -2031,12 +2186,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Yaml.git",
-                "reference": "bc2504716cb3f7704dfff5d5dcb88df43282f414"
+                "reference": "3882af2f22672e347030b561cc6c5abc2b335566"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Yaml/zipball/bc2504716cb3f7704dfff5d5dcb88df43282f414",
-                "reference": "bc2504716cb3f7704dfff5d5dcb88df43282f414",
+                "url": "https://api.github.com/repos/symfony/Yaml/zipball/3882af2f22672e347030b561cc6c5abc2b335566",
+                "reference": "3882af2f22672e347030b561cc6c5abc2b335566",
                 "shasum": ""
             },
             "require": {
@@ -2072,7 +2227,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "http://symfony.com",
-            "time": "2015-03-22 16:57:18"
+            "time": "2015-03-30 15:55:07"
         }
     ],
     "aliases": [],
