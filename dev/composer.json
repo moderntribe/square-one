@@ -44,6 +44,10 @@
     "wpackagist-plugin/wordpress-importer": "*",
     "fancyguy/webroot-installer": "1.0.0"
   },
+  "require-dev": {
+    "codeception/codeception": "~2.0",
+    "lucatume/wp-browser": "~1.0"
+  },
   "config": {
     "vendor-dir": "vendor"
   },
