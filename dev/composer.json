@@ -42,6 +42,7 @@
     "moderntribe/tribe-branding": "~1.0",
     "moderntribe/tribe-quick-profiler": "~1.0",
     "moderntribe/tribe-roles": "~1.0",
+    "moderntribe/tribe-security": "~1.0",
     "wpackagist-plugin/posts-to-posts": "*",
     "wpackagist-plugin/limit-login-attempts": "*",
     "wpackagist-plugin/regenerate-thumbnails": "*",
