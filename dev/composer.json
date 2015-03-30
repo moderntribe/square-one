@@ -39,6 +39,7 @@
     "wordpress": "4.1",
     "moderntribe/tribe-glomar": "~1.0",
     "moderntribe/tribe-admin-dashboard": "~1.0",
+    "moderntribe/tribe-branding": "~1.0",
     "wpackagist-plugin/posts-to-posts": "*",
     "wpackagist-plugin/limit-login-attempts": "*",
     "wpackagist-plugin/regenerate-thumbnails": "*",
