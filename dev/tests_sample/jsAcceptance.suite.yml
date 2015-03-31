@@ -1,0 +1,6 @@
+class_name: JsAcceptanceTester
+modules:
+    enabled:
+        - \Helper\JsAcceptance
+        - WPWebDriver
+        - WPDb
