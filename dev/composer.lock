@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "892de02a7af17436d425e44414652610",
+    "hash": "5809ad0611633ba2e0bcdf0234abc121",
     "packages": [
         {
             "name": "composer/installers",
@@ -142,6 +142,37 @@
             "description": "A composer installer for libraries that live in an application webroot.",
             "homepage": "http://fancyguy.github.com/webroot-installer/",
             "time": "2013-01-29 22:51:45"
+        },
+        {
+            "name": "jbrinley/wp-git-deploy",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jbrinley/wp-git-deploy.git",
+                "reference": "ddff29d92773c42990e0f68694eb33e143a7b83d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jbrinley/wp-git-deploy/zipball/ddff29d92773c42990e0f68694eb33e143a7b83d",
+                "reference": "ddff29d92773c42990e0f68694eb33e143a7b83d",
+                "shasum": ""
+            },
+            "type": "wordpress-plugin",
+            "license": [
+                "GPL-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Jonathan Brinley",
+                    "email": "jonathan@flightless.us"
+                }
+            ],
+            "description": "Git Deployment via WordPress",
+            "support": {
+                "source": "https://github.com/jbrinley/wp-git-deploy/tree/master",
+                "issues": "https://github.com/jbrinley/wp-git-deploy/issues"
+            },
+            "time": "2015-03-31 01:46:06"
         },
         {
             "name": "moderntribe/tribe-admin-dashboard",
@@ -475,12 +506,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Codeception/Codeception.git",
-                "reference": "30082dfa4c1c782005705a6be138e8a3786900b0"
+                "reference": "ca4931fbad1c93871772c05c1a5b237355e13e6a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Codeception/Codeception/zipball/30082dfa4c1c782005705a6be138e8a3786900b0",
-                "reference": "30082dfa4c1c782005705a6be138e8a3786900b0",
+                "url": "https://api.github.com/repos/Codeception/Codeception/zipball/ca4931fbad1c93871772c05c1a5b237355e13e6a",
+                "reference": "ca4931fbad1c93871772c05c1a5b237355e13e6a",
                 "shasum": ""
             },
             "require": {
@@ -547,7 +578,7 @@
                 "functional testing",
                 "unit testing"
             ],
-            "time": "2015-03-25 02:44:59"
+            "time": "2015-03-31 01:07:08"
         },
         {
             "name": "doctrine/instantiator",
@@ -2023,12 +2054,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/DomCrawler.git",
-                "reference": "87a59b4ff7271aa930190551b4c64d334dbd979f"
+                "reference": "99f51e20e4d16100c68a0cf214d4d72da7e3e954"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/DomCrawler/zipball/87a59b4ff7271aa930190551b4c64d334dbd979f",
-                "reference": "87a59b4ff7271aa930190551b4c64d334dbd979f",
+                "url": "https://api.github.com/repos/symfony/DomCrawler/zipball/99f51e20e4d16100c68a0cf214d4d72da7e3e954",
+                "reference": "99f51e20e4d16100c68a0cf214d4d72da7e3e954",
                 "shasum": ""
             },
             "require": {
@@ -2068,7 +2099,7 @@
             ],
             "description": "Symfony DomCrawler Component",
             "homepage": "http://symfony.com",
-            "time": "2015-03-24 17:00:58"
+            "time": "2015-03-30 15:55:07"
         },
         {
             "name": "symfony/event-dispatcher",

@@ -36,6 +36,10 @@
       "url": "git@github.com:moderntribe/tribe-security"
     },
     {
+      "type": "vcs",
+      "url": "git@github.com:jbrinley/wp-git-deploy"
+    },
+    {
       "type": "package",
       "package": {
         "name": "wordpress",
@@ -63,6 +67,7 @@
     "moderntribe/tribe-quick-profiler": "~1.0",
     "moderntribe/tribe-roles": "~1.0",
     "moderntribe/tribe-security": "~1.0",
+    "jbrinley/wp-git-deploy": "*",
     "wpackagist-plugin/posts-to-posts": "*",
     "wpackagist-plugin/limit-login-attempts": "*",
     "wpackagist-plugin/regenerate-thumbnails": "*",
