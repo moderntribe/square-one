@@ -1,0 +1,93 @@
+{
+  "name": "moderntribe/square-one",
+  "type": "project",
+  "description": "The starting point for Modern Tribe service works.",
+  "license": "Private",
+  "authors": [
+    {
+      "name": "Modern Tribe",
+      "email": "peter@tri.be"
+    }
+  ],
+  "minimum-stability": "dev",
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "git@github.com:moderntribe/glomar"
+    },
+    {
+      "type": "vcs",
+      "url": "git@github.com:moderntribe/tribe-admin-dashboard"
+    },
+    {
+      "type": "vcs",
+      "url": "git@github.com:moderntribe/tribe-branding"
+    },
+    {
+      "type": "vcs",
+      "url": "git@github.com:moderntribe/tribe-quick-profiler"
+    },
+    {
+      "type": "vcs",
+      "url": "git@github.com:moderntribe/tribe-roles"
+    },
+    {
+      "type": "vcs",
+      "url": "git@github.com:moderntribe/tribe-security"
+    },
+    {
+      "type": "vcs",
+      "url": "git@github.com:jbrinley/wp-git-deploy"
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "wordpress",
+        "type": "webroot",
+        "version": "4.1",
+        "dist": {
+          "type": "zip",
+          "url": "https://wordpress.org/latest.zip"
+        },
+        "require": {
+          "fancyguy/webroot-installer": "1.0.0"
+        }
+      }
+    },
+    {
+      "type": "composer",
+      "url": "http://wpackagist.org"
+    }
+  ],
+  "require": {
+    "wordpress": "4.1",
+    "moderntribe/tribe-glomar": "~1.0",
+    "moderntribe/tribe-admin-dashboard": "~1.0",
+    "moderntribe/tribe-branding": "~1.0",
+    "moderntribe/tribe-quick-profiler": "~1.0",
+    "moderntribe/tribe-roles": "~1.0",
+    "moderntribe/tribe-security": "~1.0",
+    "jbrinley/wp-git-deploy": "*",
+    "wpackagist-plugin/posts-to-posts": "*",
+    "wpackagist-plugin/limit-login-attempts": "*",
+    "wpackagist-plugin/regenerate-thumbnails": "*",
+    "wpackagist-plugin/wordpress-importer": "*",
+    "fancyguy/webroot-installer": "1.0.0"
+  },
+  "require-dev": {
+    "codeception/codeception": "~2.0",
+    "lucatume/wp-browser": "~1.0"
+  },
+  "config": {
+    "vendor-dir": "vendor"
+  },
+  "extra": {
+    "installer-paths": {
+      "../content/plugins/{$name}/": ["type:wordpress-plugin"],
+      "../content/mu-plugins/{$name}/": ["type:wordpress-muplugin"],
+      "../wp/": ["type"]
+    },
+    "webroot-dir": "../wp",
+    "webroot-package": "wordpress"
+  }
+}
