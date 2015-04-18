@@ -79,7 +79,8 @@
     "lucatume/wp-browser": "~1.0"
   },
   "config": {
-    "vendor-dir": "vendor"
+    "vendor-dir": "vendor",
+    "preferred-install": "dist"
   },
   "extra": {
     "installer-paths": {
