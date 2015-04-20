@@ -17,9 +17,15 @@ t.core.execute_ready = function() {
 	t.core.initialize_plugins();
 	t.core.responsive_modules_init();
 
-	t.bind_events();
-
 	// module inits
+
+
+
+	// resize and load event dispatcher
+
+	t.$el.window
+		.on( 'resize', _.debounce( t.core.execute_resize, 200, false ) )
+		.on( 'load', t.core.execute_load );
 
 
 	// @ifdef DEBUG

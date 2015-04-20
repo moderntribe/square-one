@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "5809ad0611633ba2e0bcdf0234abc121",
+    "hash": "2bb9af211e2675ba02fb77a607e2d552",
     "packages": [
         {
             "name": "composer/installers",
@@ -175,195 +175,6 @@
             "time": "2015-03-31 01:46:06"
         },
         {
-            "name": "moderntribe/tribe-admin-dashboard",
-            "version": "1.0.0",
-            "source": {
-                "type": "git",
-                "url": "git@github.com:moderntribe/tribe-admin-dashboard.git",
-                "reference": "0c387dff78812dd62f408e7ecab5d3c61c68c381"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/tribe-admin-dashboard/zipball/0c387dff78812dd62f408e7ecab5d3c61c68c381",
-                "reference": "0c387dff78812dd62f408e7ecab5d3c61c68c381",
-                "shasum": ""
-            },
-            "type": "wordpress-plugin",
-            "license": [
-                "Private"
-            ],
-            "authors": [
-                {
-                    "name": "Peter Chester",
-                    "email": "peter@tri.be"
-                }
-            ],
-            "description": "Override the admin dashboard with a totally custom single screen admin.",
-            "support": {
-                "source": "https://github.com/moderntribe/tribe-admin-dashboard/tree/1.0.0",
-                "issues": "https://github.com/moderntribe/tribe-admin-dashboard/issues"
-            },
-            "time": "2015-03-30 16:16:29"
-        },
-        {
-            "name": "moderntribe/tribe-branding",
-            "version": "1.0.0",
-            "source": {
-                "type": "git",
-                "url": "git@github.com:moderntribe/tribe-branding.git",
-                "reference": "67dac08a2bb17277c77c95c253f6e1a95ccbdaa4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/tribe-branding/zipball/67dac08a2bb17277c77c95c253f6e1a95ccbdaa4",
-                "reference": "67dac08a2bb17277c77c95c253f6e1a95ccbdaa4",
-                "shasum": ""
-            },
-            "type": "wordpress-plugin",
-            "license": [
-                "Private"
-            ],
-            "authors": [
-                {
-                    "name": "Peter Chester",
-                    "email": "peter@tri.be"
-                }
-            ],
-            "description": "Update links and logos and social icons",
-            "support": {
-                "source": "https://github.com/moderntribe/tribe-branding/tree/1.0.0",
-                "issues": "https://github.com/moderntribe/tribe-branding/issues"
-            },
-            "time": "2015-03-30 16:25:13"
-        },
-        {
-            "name": "moderntribe/tribe-glomar",
-            "version": "1.0.0",
-            "source": {
-                "type": "git",
-                "url": "git@github.com:moderntribe/glomar.git",
-                "reference": "dbd3cfd5650866f0ed5cb6c19f48223d5453005f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/glomar/zipball/dbd3cfd5650866f0ed5cb6c19f48223d5453005f",
-                "reference": "dbd3cfd5650866f0ed5cb6c19f48223d5453005f",
-                "shasum": ""
-            },
-            "require": {
-                "composer/installers": "~1.0"
-            },
-            "type": "wordpress-plugin",
-            "license": [
-                "Private"
-            ],
-            "authors": [
-                {
-                    "name": "Modern Tribe",
-                    "email": "peter@tri.be"
-                }
-            ],
-            "description": "Modern Tribe Glomar plugin.",
-            "support": {
-                "source": "https://github.com/moderntribe/glomar/tree/34003-composer",
-                "issues": "https://github.com/moderntribe/glomar/issues"
-            },
-            "time": "2015-03-09 09:33:54"
-        },
-        {
-            "name": "moderntribe/tribe-quick-profiler",
-            "version": "1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/moderntribe/tribe-quick-profiler.git",
-                "reference": "fd0219931980e78663c32630ecfe4d18ed139ea3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/tribe-quick-profiler/zipball/fd0219931980e78663c32630ecfe4d18ed139ea3",
-                "reference": "fd0219931980e78663c32630ecfe4d18ed139ea3",
-                "shasum": ""
-            },
-            "type": "wordpress-plugin",
-            "license": [
-                "GPL-2.0"
-            ],
-            "authors": [
-                {
-                    "name": "Peter Chester",
-                    "email": "peter@tri.be"
-                }
-            ],
-            "description": "A tool to easily and rapidly profile WordPress load time and memory usage with an extremely low overhead.",
-            "support": {
-                "source": "https://github.com/moderntribe/tribe-quick-profiler/tree/1.0.1",
-                "issues": "https://github.com/moderntribe/tribe-quick-profiler/issues"
-            },
-            "time": "2015-03-30 16:37:29"
-        },
-        {
-            "name": "moderntribe/tribe-roles",
-            "version": "1.0.0",
-            "source": {
-                "type": "git",
-                "url": "git@github.com:moderntribe/tribe-roles.git",
-                "reference": "ebbd7dc3e7288122f01db862d1fa55ed5fd806e4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/tribe-roles/zipball/ebbd7dc3e7288122f01db862d1fa55ed5fd806e4",
-                "reference": "ebbd7dc3e7288122f01db862d1fa55ed5fd806e4",
-                "shasum": ""
-            },
-            "type": "wordpress-plugin",
-            "license": [
-                "Private"
-            ],
-            "authors": [
-                {
-                    "name": "Peter Chester",
-                    "email": "peter@tri.be"
-                }
-            ],
-            "description": "Refine and manage the available roles",
-            "support": {
-                "source": "https://github.com/moderntribe/tribe-roles/tree/1.0.0",
-                "issues": "https://github.com/moderntribe/tribe-roles/issues"
-            },
-            "time": "2015-03-30 17:11:51"
-        },
-        {
-            "name": "moderntribe/tribe-security",
-            "version": "1.0.0",
-            "source": {
-                "type": "git",
-                "url": "git@github.com:moderntribe/tribe-security.git",
-                "reference": "1e9ee736e30b8000862971a8fa5e8b71b099caa6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/tribe-security/zipball/1e9ee736e30b8000862971a8fa5e8b71b099caa6",
-                "reference": "1e9ee736e30b8000862971a8fa5e8b71b099caa6",
-                "shasum": ""
-            },
-            "type": "wordpress-plugin",
-            "license": [
-                "Private"
-            ],
-            "authors": [
-                {
-                    "name": "Peter Chester",
-                    "email": "peter@tri.be"
-                }
-            ],
-            "description": "Modern Tribe security tweaks.",
-            "support": {
-                "source": "https://github.com/moderntribe/tribe-security/tree/1.0.0",
-                "issues": "https://github.com/moderntribe/tribe-security/issues"
-            },
-            "time": "2015-03-30 16:54:00"
-        },
-        {
             "name": "wordpress",
             "version": "4.1",
             "dist": {
@@ -468,19 +279,25 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/samuelwilliams/LoremIpsum.git",
-                "reference": "568f94bada0f7c95f69fabd6e7007148f90c31b0"
+                "url": "https://github.com/Badcow/LoremIpsum.git",
+                "reference": "7e685497e92d71d0ebbd067d51892f3308cc72e1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/samuelwilliams/LoremIpsum/zipball/568f94bada0f7c95f69fabd6e7007148f90c31b0",
-                "reference": "568f94bada0f7c95f69fabd6e7007148f90c31b0",
+                "url": "https://api.github.com/repos/Badcow/LoremIpsum/zipball/7e685497e92d71d0ebbd067d51892f3308cc72e1",
+                "reference": "7e685497e92d71d0ebbd067d51892f3308cc72e1",
                 "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.9"
+            },
+            "suggest": {
+                "twig/twig": "Twig is a template language for PHP, released under the new BSD license (code and documentation)."
             },
             "type": "library",
             "autoload": {
-                "psr-0": {
-                    "Badcow": "lib/"
+                "psr-4": {
+                    "Badcow\\LoremIpsum\\": "lib/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -498,7 +315,7 @@
                 }
             ],
             "description": "Lorem ipsum generator.",
-            "time": "2013-03-05 07:52:52"
+            "time": "2015-04-10 00:15:43"
         },
         {
             "name": "codeception/codeception",
@@ -506,12 +323,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Codeception/Codeception.git",
-                "reference": "ca4931fbad1c93871772c05c1a5b237355e13e6a"
+                "reference": "28d6c9ea69f4a1302c11f45533e431d0635b4d37"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Codeception/Codeception/zipball/ca4931fbad1c93871772c05c1a5b237355e13e6a",
-                "reference": "ca4931fbad1c93871772c05c1a5b237355e13e6a",
+                "url": "https://api.github.com/repos/Codeception/Codeception/zipball/28d6c9ea69f4a1302c11f45533e431d0635b4d37",
+                "reference": "28d6c9ea69f4a1302c11f45533e431d0635b4d37",
                 "shasum": ""
             },
             "require": {
@@ -578,7 +395,7 @@
                 "functional testing",
                 "unit testing"
             ],
-            "time": "2015-03-31 01:07:08"
+            "time": "2015-04-16 00:56:41"
         },
         {
             "name": "doctrine/instantiator",
@@ -586,12 +403,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/instantiator.git",
-                "reference": "3d9669e597439e8d205baf315efb757038fb4dea"
+                "reference": "fc999e2f0508e434645ec2bfadeb89d39fa6453c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/instantiator/zipball/3d9669e597439e8d205baf315efb757038fb4dea",
-                "reference": "3d9669e597439e8d205baf315efb757038fb4dea",
+                "url": "https://api.github.com/repos/doctrine/instantiator/zipball/fc999e2f0508e434645ec2bfadeb89d39fa6453c",
+                "reference": "fc999e2f0508e434645ec2bfadeb89d39fa6453c",
                 "shasum": ""
             },
             "require": {
@@ -632,7 +449,7 @@
                 "constructor",
                 "instantiate"
             ],
-            "time": "2015-01-16 19:29:51"
+            "time": "2015-04-12 20:59:10"
         },
         {
             "name": "facebook/webdriver",
@@ -1039,12 +856,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/prophecy.git",
-                "reference": "8724cd239f8ef4c046f55a3b18b4d91cc7f3e4c5"
+                "reference": "c58c6dc07d1f76fd66e661418f66eecef931c2b1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/8724cd239f8ef4c046f55a3b18b4d91cc7f3e4c5",
-                "reference": "8724cd239f8ef4c046f55a3b18b4d91cc7f3e4c5",
+                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/c58c6dc07d1f76fd66e661418f66eecef931c2b1",
+                "reference": "c58c6dc07d1f76fd66e661418f66eecef931c2b1",
                 "shasum": ""
             },
             "require": {
@@ -1091,7 +908,7 @@
                 "spy",
                 "stub"
             ],
-            "time": "2015-03-27 19:31:25"
+            "time": "2015-04-17 14:44:34"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -1099,12 +916,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "4676604b851bfc6fc02bf3394bf350c727bcebf4"
+                "reference": "1678cee3b7f93f994da6acf7e998b23a98e955f1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/4676604b851bfc6fc02bf3394bf350c727bcebf4",
-                "reference": "4676604b851bfc6fc02bf3394bf350c727bcebf4",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/1678cee3b7f93f994da6acf7e998b23a98e955f1",
+                "reference": "1678cee3b7f93f994da6acf7e998b23a98e955f1",
                 "shasum": ""
             },
             "require": {
@@ -1127,7 +944,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0.x-dev"
+                    "dev-master": "2.1.x-dev"
                 }
             },
             "autoload": {
@@ -1153,7 +970,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2015-03-19 05:49:08"
+            "time": "2015-04-16 05:00:01"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -1294,12 +1111,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-token-stream.git",
-                "reference": "db32c18eba00b121c145575fcbcd4d4d24e6db74"
+                "reference": "eab81d02569310739373308137284e0158424330"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/db32c18eba00b121c145575fcbcd4d4d24e6db74",
-                "reference": "db32c18eba00b121c145575fcbcd4d4d24e6db74",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/eab81d02569310739373308137284e0158424330",
+                "reference": "eab81d02569310739373308137284e0158424330",
                 "shasum": ""
             },
             "require": {
@@ -1335,7 +1152,7 @@
             "keywords": [
                 "tokenizer"
             ],
-            "time": "2015-01-17 09:51:32"
+            "time": "2015-04-08 04:46:07"
         },
         {
             "name": "phpunit/phpunit",
@@ -1415,12 +1232,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit-mock-objects.git",
-                "reference": "55484334fb4c306ed24bfc3bdb0874685c29036f"
+                "reference": "74ffb87f527f24616f72460e54b595f508dccb5c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/55484334fb4c306ed24bfc3bdb0874685c29036f",
-                "reference": "55484334fb4c306ed24bfc3bdb0874685c29036f",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/74ffb87f527f24616f72460e54b595f508dccb5c",
+                "reference": "74ffb87f527f24616f72460e54b595f508dccb5c",
                 "shasum": ""
             },
             "require": {
@@ -1429,7 +1246,7 @@
                 "phpunit/php-text-template": "~1.2"
             },
             "require-dev": {
-                "phpunit/phpunit": "4.4.*@dev"
+                "phpunit/phpunit": "~4.4"
             },
             "suggest": {
                 "ext-soap": "*"
@@ -1437,7 +1254,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.4.x-dev"
+                    "dev-master": "2.3.x-dev"
                 }
             },
             "autoload": {
@@ -1462,7 +1279,7 @@
                 "mock",
                 "xunit"
             ],
-            "time": "2015-03-18 09:04:51"
+            "time": "2015-04-02 05:36:41"
         },
         {
             "name": "react/promise",
@@ -1846,16 +1663,16 @@
         },
         {
             "name": "sebastian/version",
-            "version": "1.0.4",
+            "version": "1.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/version.git",
-                "reference": "a77d9123f8e809db3fbdea15038c27a95da4058b"
+                "reference": "ab931d46cd0d3204a91e1b9a40c4bc13032b58e4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/version/zipball/a77d9123f8e809db3fbdea15038c27a95da4058b",
-                "reference": "a77d9123f8e809db3fbdea15038c27a95da4058b",
+                "url": "https://api.github.com/repos/sebastianbergmann/version/zipball/ab931d46cd0d3204a91e1b9a40c4bc13032b58e4",
+                "reference": "ab931d46cd0d3204a91e1b9a40c4bc13032b58e4",
                 "shasum": ""
             },
             "type": "library",
@@ -1877,21 +1694,21 @@
             ],
             "description": "Library that helps with managing the version number of Git-hosted PHP projects",
             "homepage": "https://github.com/sebastianbergmann/version",
-            "time": "2014-12-15 14:25:24"
+            "time": "2015-02-24 06:35:25"
         },
         {
             "name": "symfony/browser-kit",
-            "version": "2.7.x-dev",
+            "version": "2.8.x-dev",
             "target-dir": "Symfony/Component/BrowserKit",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/BrowserKit.git",
-                "reference": "c135dd2a06216cfcbb00863770c3df075450992e"
+                "reference": "e7ac73ecdd97f5b114152eb670607e96db7a2e17"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/BrowserKit/zipball/c135dd2a06216cfcbb00863770c3df075450992e",
-                "reference": "c135dd2a06216cfcbb00863770c3df075450992e",
+                "url": "https://api.github.com/repos/symfony/BrowserKit/zipball/e7ac73ecdd97f5b114152eb670607e96db7a2e17",
+                "reference": "e7ac73ecdd97f5b114152eb670607e96db7a2e17",
                 "shasum": ""
             },
             "require": {
@@ -1909,7 +1726,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.7-dev"
+                    "dev-master": "2.8-dev"
                 }
             },
             "autoload": {
@@ -1933,21 +1750,21 @@
             ],
             "description": "Symfony BrowserKit Component",
             "homepage": "http://symfony.com",
-            "time": "2015-03-30 15:55:07"
+            "time": "2015-04-10 08:56:33"
         },
         {
             "name": "symfony/console",
-            "version": "2.7.x-dev",
+            "version": "2.8.x-dev",
             "target-dir": "Symfony/Component/Console",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Console.git",
-                "reference": "780a2bc91e1b2188500ce1097f979c8f47dadf7f"
+                "reference": "32f19477d488649a77227d57a7f5775b17cb336b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Console/zipball/780a2bc91e1b2188500ce1097f979c8f47dadf7f",
-                "reference": "780a2bc91e1b2188500ce1097f979c8f47dadf7f",
+                "url": "https://api.github.com/repos/symfony/Console/zipball/32f19477d488649a77227d57a7f5775b17cb336b",
+                "reference": "32f19477d488649a77227d57a7f5775b17cb336b",
                 "shasum": ""
             },
             "require": {
@@ -1967,7 +1784,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.7-dev"
+                    "dev-master": "2.8-dev"
                 }
             },
             "autoload": {
@@ -1991,21 +1808,21 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "http://symfony.com",
-            "time": "2015-03-30 15:55:07"
+            "time": "2015-04-11 08:55:16"
         },
         {
             "name": "symfony/css-selector",
-            "version": "2.7.x-dev",
+            "version": "2.8.x-dev",
             "target-dir": "Symfony/Component/CssSelector",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/CssSelector.git",
-                "reference": "4af0110c47b5905944c3688a73e9452077e68a26"
+                "reference": "c315f95be51278f548d36664d51a8425e19e2cda"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/CssSelector/zipball/4af0110c47b5905944c3688a73e9452077e68a26",
-                "reference": "4af0110c47b5905944c3688a73e9452077e68a26",
+                "url": "https://api.github.com/repos/symfony/CssSelector/zipball/c315f95be51278f548d36664d51a8425e19e2cda",
+                "reference": "c315f95be51278f548d36664d51a8425e19e2cda",
                 "shasum": ""
             },
             "require": {
@@ -2017,7 +1834,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.7-dev"
+                    "dev-master": "2.8-dev"
                 }
             },
             "autoload": {
@@ -2045,21 +1862,21 @@
             ],
             "description": "Symfony CssSelector Component",
             "homepage": "http://symfony.com",
-            "time": "2015-03-22 16:57:18"
+            "time": "2015-04-10 08:56:33"
         },
         {
             "name": "symfony/dom-crawler",
-            "version": "2.7.x-dev",
+            "version": "2.8.x-dev",
             "target-dir": "Symfony/Component/DomCrawler",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/DomCrawler.git",
-                "reference": "99f51e20e4d16100c68a0cf214d4d72da7e3e954"
+                "reference": "c7bd5b7d8444175f04e4278fa220fd3470c851fe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/DomCrawler/zipball/99f51e20e4d16100c68a0cf214d4d72da7e3e954",
-                "reference": "99f51e20e4d16100c68a0cf214d4d72da7e3e954",
+                "url": "https://api.github.com/repos/symfony/DomCrawler/zipball/c7bd5b7d8444175f04e4278fa220fd3470c851fe",
+                "reference": "c7bd5b7d8444175f04e4278fa220fd3470c851fe",
                 "shasum": ""
             },
             "require": {
@@ -2075,7 +1892,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.7-dev"
+                    "dev-master": "2.8-dev"
                 }
             },
             "autoload": {
@@ -2099,21 +1916,21 @@
             ],
             "description": "Symfony DomCrawler Component",
             "homepage": "http://symfony.com",
-            "time": "2015-03-30 15:55:07"
+            "time": "2015-04-10 08:56:33"
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "2.7.x-dev",
+            "version": "2.8.x-dev",
             "target-dir": "Symfony/Component/EventDispatcher",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/EventDispatcher.git",
-                "reference": "186349c2966529804e38685f671e64746dde220b"
+                "reference": "15bbd5beed94cca89ffcce18fb76eeac38937240"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/186349c2966529804e38685f671e64746dde220b",
-                "reference": "186349c2966529804e38685f671e64746dde220b",
+                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/15bbd5beed94cca89ffcce18fb76eeac38937240",
+                "reference": "15bbd5beed94cca89ffcce18fb76eeac38937240",
                 "shasum": ""
             },
             "require": {
@@ -2134,7 +1951,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.7-dev"
+                    "dev-master": "2.8-dev"
                 }
             },
             "autoload": {
@@ -2158,21 +1975,21 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "http://symfony.com",
-            "time": "2015-03-13 17:50:01"
+            "time": "2015-04-10 08:56:33"
         },
         {
             "name": "symfony/finder",
-            "version": "2.7.x-dev",
+            "version": "2.8.x-dev",
             "target-dir": "Symfony/Component/Finder",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Finder.git",
-                "reference": "492de776d92afc774f78cb3d47635b5da6ad2507"
+                "reference": "ad159e0da47e9ffe719bafdc004159ad6e395567"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Finder/zipball/492de776d92afc774f78cb3d47635b5da6ad2507",
-                "reference": "492de776d92afc774f78cb3d47635b5da6ad2507",
+                "url": "https://api.github.com/repos/symfony/Finder/zipball/ad159e0da47e9ffe719bafdc004159ad6e395567",
+                "reference": "ad159e0da47e9ffe719bafdc004159ad6e395567",
                 "shasum": ""
             },
             "require": {
@@ -2184,7 +2001,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.7-dev"
+                    "dev-master": "2.8-dev"
                 }
             },
             "autoload": {
@@ -2208,21 +2025,21 @@
             ],
             "description": "Symfony Finder Component",
             "homepage": "http://symfony.com",
-            "time": "2015-03-30 15:55:07"
+            "time": "2015-04-10 08:56:33"
         },
         {
             "name": "symfony/yaml",
-            "version": "2.7.x-dev",
+            "version": "2.8.x-dev",
             "target-dir": "Symfony/Component/Yaml",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Yaml.git",
-                "reference": "3882af2f22672e347030b561cc6c5abc2b335566"
+                "reference": "fdded56dde4ca9efce6322887bf5eaa7bb0aae3e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Yaml/zipball/3882af2f22672e347030b561cc6c5abc2b335566",
-                "reference": "3882af2f22672e347030b561cc6c5abc2b335566",
+                "url": "https://api.github.com/repos/symfony/Yaml/zipball/fdded56dde4ca9efce6322887bf5eaa7bb0aae3e",
+                "reference": "fdded56dde4ca9efce6322887bf5eaa7bb0aae3e",
                 "shasum": ""
             },
             "require": {
@@ -2234,7 +2051,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.7-dev"
+                    "dev-master": "2.8-dev"
                 }
             },
             "autoload": {
@@ -2258,7 +2075,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "http://symfony.com",
-            "time": "2015-03-30 15:55:07"
+            "time": "2015-04-10 08:56:33"
         }
     ],
     "aliases": [],

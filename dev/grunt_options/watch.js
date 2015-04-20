@@ -15,10 +15,8 @@ module.exports = {
 		],
 		tasks: [
 			'sass:theme',
-			'pixrem:theme',
 			'combine_mq:theme',
 			'autoprefixer:theme',
-			'split_styles:legacy',
 			'clean:theme'
 		],
 		options: {
@@ -48,10 +46,15 @@ module.exports = {
 			'<%= pkg._themepath %>/js/scripts/browser.js',
 			'<%= pkg._themepath %>/js/scripts/data.js',
 			'<%= pkg._themepath %>/js/scripts/elements.js',
-			'<%= pkg._themepath %>/js/scripts/events.js',
+			'<%= pkg._themepath %>/js/scripts/keys.js',
 			'<%= pkg._themepath %>/js/scripts/plugins.js',
 			'<%= pkg._themepath %>/js/scripts/functions.js',
+			'<%= pkg._themepath %>/js/scripts/namespaces.js',
 			'<%= pkg._themepath %>/js/scripts/modules/**/*.js',
+			'<%= pkg._themepath %>/js/scripts/models/**/*.js',
+			'<%= pkg._themepath %>/js/scripts/views/**/*.js',
+			'<%= pkg._themepath %>/js/scripts/collections/**/*.js',
+			'<%= pkg._themepath %>/js/scripts/router.js',
 			'!<%= pkg._themepath %>/js/scripts/modules/example.js',
 			'<%= pkg._themepath %>/js/scripts/options.js',
 			'<%= pkg._themepath %>/js/scripts/state.js',
@@ -60,7 +63,9 @@ module.exports = {
 			'<%= pkg._themepath %>/js/scripts/init.js'
 		],
 		tasks  : [
-			'concat:scripts'
+			'concat:scripts',
+			'babel:theme',
+			'clean:theme'
 		],
 		options: {
 			spawn     : false,

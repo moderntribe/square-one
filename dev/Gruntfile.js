@@ -78,6 +78,7 @@ module.exports = function(grunt) {
 			'clean:thememinjs',
 			'concat:libs',
 			'concat:scripts',
+			'babel:theme',
 			'preprocess:themelibs',
 			'preprocess:themescripts',
 			'handlebars:theme',
@@ -90,7 +91,8 @@ module.exports = function(grunt) {
 			'autoprefixer:theme',
 			'split_styles:legacy',
 			'cssmin',
-			'clean:theme'
+			'clean:theme',
+			'setPHPConstant'
 		]);
 
 	grunt.registerTask(
@@ -99,6 +101,7 @@ module.exports = function(grunt) {
 			'clean:thememinjs',
 			'concat:libs',
 			'concat:scripts',
+			'babel:theme',
 			'preprocess:themelibs',
 			'preprocess:themescripts',
 			'handlebars:theme',
@@ -111,7 +114,8 @@ module.exports = function(grunt) {
 			'autoprefixer:theme',
 			'split_styles:legacy',
 			'cssmin',
-			'clean:theme'
+			'clean:theme',
+			'setPHPConstant'
 		]);
 
 };

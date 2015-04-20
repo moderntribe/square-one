@@ -15,7 +15,7 @@ t.subdirectory.example = {
 
 	// hook up this init in core/execute_ready or core/execute_load
 
-	init: function(){
+	init(){
 
 		// only bind events and setup this module if our target element exists on the page
 
@@ -33,14 +33,14 @@ t.subdirectory.example = {
 
 	},
 
-	_bind_events: function() {
+	_bind_events() {
 
 		t.$el.doc
 			.on( 'modern_tribe_resize_executed', this._execute_resize );
 
 	},
 
-	_execute_resize: function(){
+	_execute_resize(){
 
 		// resize code for this module that runs after global debounced resize functions are executed
 

@@ -12,7 +12,8 @@ module.exports = {
 		'<%= pkg._themepath %>/css/admin/editor-style-temp.css',
 		'<%= pkg._themepath %>/css/admin/login-temp.css',
 		'<%= pkg._themepath %>/js/libs.processed.js',
-		'<%= pkg._themepath %>/js/scripts.processed.js'
+		'<%= pkg._themepath %>/js/scripts.processed.js',
+		'<%= pkg._themepath %>/js/scripts-es6.js'
 	],
 
 	thememincss: [

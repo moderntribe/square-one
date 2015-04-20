@@ -39,6 +39,8 @@ module.exports = {
 			'<%= pkg._bowerpath %>/handlebars/handlebars.runtime.js',
 			'<%= pkg._bowerpath %>/verge/verge.js',
 
+			'dev/node_modules/babel/node_modules/babel-core/browser-polyfill.js.js',
+
 			'<%= pkg._themepath %>/js/libs/*.js'
 		],
 		dest: '<%= pkg._themepath %>/js/libs.js'
@@ -99,7 +101,7 @@ module.exports = {
 			'<%= pkg._themepath %>/js/scripts/browser.js',
 			'<%= pkg._themepath %>/js/scripts/data.js',
 			'<%= pkg._themepath %>/js/scripts/elements.js',
-			'<%= pkg._themepath %>/js/scripts/events.js',
+			'<%= pkg._themepath %>/js/scripts/keys.js',
 			'<%= pkg._themepath %>/js/scripts/namespaces.js',
 			'<%= pkg._themepath %>/js/scripts/modules/**/*.js',
 			'!<%= pkg._themepath %>/js/scripts/modules/example.js',
@@ -108,7 +110,7 @@ module.exports = {
 			'<%= pkg._themepath %>/js/scripts/tests.js',
 			'<%= pkg._themepath %>/js/scripts/init.js'
 		],
-		dest: '<%= pkg._themepath %>/js/scripts.js'
+		dest: '<%= pkg._themepath %>/js/scripts-es6.js'
 	}
 
 };
