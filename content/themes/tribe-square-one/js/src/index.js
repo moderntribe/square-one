@@ -1,8 +1,7 @@
 
 'use strict';
 
-import ready from './utils/ready';
+import ready from './core/ready';
+import dom_ready from './utils/dom-ready';
 
-ready( function() {
-	$('body').addClass('cool-shit');
-} );
+dom_ready( () => ready() );
