@@ -17,6 +17,7 @@ module.exports = {
 		},
 		files: {
 			'<%= pkg._themepath %>/js/dist/master.min.js' : [
+				'<%= pkg._themepath %>/js/browser-polyfill.js',
 				'<%= pkg._themepath %>/js/scripts.js'
 			]
 		}

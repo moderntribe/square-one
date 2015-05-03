@@ -1,2 +1,8 @@
 
-console.log('hello there bob is smal');
+'use strict';
+
+import ready from './utils/ready';
+
+ready( function() {
+	$('body').addClass('cool-shit');
+} );
