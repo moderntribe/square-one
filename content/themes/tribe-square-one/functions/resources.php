@@ -111,31 +111,21 @@ function enqueue_scripts() {
     $version = tribe_get_version();
 
     // JS
-    $modernizr   = 'modernizr-dev.js';
-    $libs        = 'libs.js';
-    $templates   = 'templates.js';
     $scripts     = 'scripts.js';
-    $scripts_dep = array( 'tribe-theme-libs', 'tribe-theme-templates' );
+
+	wp_deregister_script('jquery');
 
     // Production
     if ( ! defined( 'SCRIPT_DEBUG' ) || SCRIPT_DEBUG === false ) {
-
-        $modernizr   = 'modernizr.js';
         $scripts     = 'dist/master.min.js';
-        $scripts_dep = array( 'jquery' );
-
-    } else {
-
-        wp_enqueue_script( 'tribe-theme-libs', $js_dir . $libs, array( 'jquery' ), $version, true );
-        wp_enqueue_script( 'tribe-theme-templates', $js_dir . $templates, array( 'tribe-theme-libs' ), $version, true );
-    
     }
 
-    wp_enqueue_script( 'tribe-theme-modernizr', $js_dir . $modernizr, '', $version, false );
-    wp_enqueue_script( 'tribe-theme-scripts', $js_dir . $scripts, $scripts_dep, $version, true );
+    wp_enqueue_script( 'tribe-theme-modernizr', $js_dir . 'modernizr.js', '', $version, false );
+    wp_enqueue_script( 'tribe-theme-scripts', $js_dir . $scripts, array(), $version, true );
 
     wp_localize_script( 'tribe-theme-scripts' , 'modern_tribe_i18n', tribe_js_i18n() );
     wp_localize_script( 'tribe-theme-scripts' , 'modern_tribe_config', tribe_js_config() );
+
     wp_enqueue_script( 'tribe-theme-scripts' );
 
     // JS: Comments

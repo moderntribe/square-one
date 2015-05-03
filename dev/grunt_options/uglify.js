@@ -17,9 +17,7 @@ module.exports = {
 		},
 		files: {
 			'<%= pkg._themepath %>/js/dist/master.min.js' : [
-				'<%= pkg._themepath %>/js/libs.processed.js',
-				'<%= pkg._themepath %>/js/templates.js',
-				'<%= pkg._themepath %>/js/scripts.processed.js'
+				'<%= pkg._themepath %>/js/scripts.js'
 			]
 		}
 	}
