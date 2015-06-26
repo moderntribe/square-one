@@ -5,6 +5,12 @@
   "_bowerpath": "dev/bower_components",
   "_themepath": "content/themes/tribe-square-one",
   "_componentpath": "dev/dev_components",
+  "_deploypath": "dev/deploy",
+  "_dev_git_repo": "git@github.com:repo/repo.git",
+  "_staging_git_repo": "git@git.wpengine.com:production/staging-site.git",
+  "_production_git_repo": "git@git.wpengine.com:production/production-site.git",
+  "_slack_api_token": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+  "_slack_notification_channel": "#square1",
   "engines": {
     "node": "0.10.30",
     "npm": "1.4.23"
@@ -26,10 +32,13 @@
   },
   "devDependencies": {
     "grunt-combine-mq": "^0.4.0",
+    "grunt-contrib-copy": "^0.8.0",
     "grunt-contrib-cssmin": "^0.10.0",
+    "grunt-git": "^0.3.5",
     "grunt-modernizr": "^0.6.0",
     "grunt-php-set-constant": "0.0.15",
     "grunt-pixrem": "^0.1.2",
+    "grunt-slack-notifier": "^0.0.3",
     "grunt-split-styles": "^0.3.1"
   }
 }

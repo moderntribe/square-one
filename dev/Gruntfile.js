@@ -118,4 +118,20 @@ module.exports = function(grunt) {
 			'setPHPConstant'
 		]);
 
+	var target = grunt.option('target') || 'staging';
+	grunt.registerTask(
+		'deploy', [
+			'setPHPConstant',
+			'gitcheckout:' + target,
+			'gitpull:' + target,
+			'gittag:' + target,
+			'gitpush:tags',
+			'gitpush:' + target,
+			'clean:deploy',
+			'copy:deploy',
+			'gitadd:deploy',
+			'gitcommit:deploy',
+			'gitpush:server-' + target,
+			'slack_notifier:' + target
+		]);
 };
