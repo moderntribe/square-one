@@ -80,10 +80,8 @@ module.exports = function(grunt) {
 			'webpack:themedev',
 			'uglify:thememin',
 			'sass:theme',
-			'pixrem:theme',
 			'combine_mq:theme',
 			'autoprefixer:theme',
-			'split_styles:legacy',
 			'cssmin',
 			'clean:theme',
 			'setPHPConstant'
@@ -97,10 +95,8 @@ module.exports = function(grunt) {
 			'webpack:themedev',
 			'uglify:thememin',
 			'sass:theme',
-			'pixrem:theme',
 			'combine_mq:theme',
 			'autoprefixer:theme',
-			'split_styles:legacy',
 			'cssmin',
 			'clean:theme',
 			'setPHPConstant'

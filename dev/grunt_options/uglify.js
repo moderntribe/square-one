@@ -4,7 +4,6 @@
  * Documentation: https://npmjs.org/package/grunt-contrib-uglify
  *
  */
-
 module.exports = {
 
 	thememin: {

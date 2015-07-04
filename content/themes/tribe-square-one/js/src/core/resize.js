@@ -1,6 +1,11 @@
+'use strict';
+
+import events from '../utils/events';
 
 export default function resize() {
 
-	$( document ).trigger( 'modern_tribe_resize_executed' );
+	// code for resize events can go here
+
+	events.trigger( {event:'modern_tribe/resize_executed', native:false} );
 
 }

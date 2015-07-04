@@ -18,14 +18,18 @@ module.exports = {
 	},
 	module: {
 		loaders: [
-			{ test: /\.js$/,    loader: 'babel', exclude: /node_modules/}
+			{
+				test: /\.js$/,
+				loader: 'babel',
+				exclude: /node_modules/
+			}
 		]
 	},
 	plugins: [
-		new webpack.ProvidePlugin({
+		new webpack.ProvidePlugin( {
 			jQuery: "jquery",
-			$: "jquery",
-			_: "lodash"
-		})
+			$     : "jquery",
+			_     : "lodash"
+		} )
 	]
 };

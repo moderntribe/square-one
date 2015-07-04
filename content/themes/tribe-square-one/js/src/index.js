@@ -1,7 +1,5 @@
-
 'use strict';
 
-import ready from './core/ready';
-import dom_ready from './utils/dom-ready';
+import Ready from './core/ready';
 
-dom_ready( () => ready() );
+Ready();

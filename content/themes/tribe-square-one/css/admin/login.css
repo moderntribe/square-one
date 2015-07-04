@@ -6,11 +6,7 @@
  * This file is just a clearing-house, see the scss directory
  * and edit the source files found at: "admin/login.scss"
  *
- */
-
-.login.wp-core-ui .button-primary,
-.login #nav a,
-.login #backtoblog a {
+ */.login.wp-core-ui .button-primary,.login #nav a,.login #backtoblog a {
   transition: all 0.15s ease-in-out;
 }
 
@@ -81,19 +77,16 @@
   float: none;
 }
 
-.login #nav,
-.login #backtoblog {
+.login #nav,.login #backtoblog {
   padding: 3px 2px;
   margin: 0;
 }
 
-.login #nav a,
-.login #backtoblog a {
+.login #nav a,.login #backtoblog a {
   color: #21A6CB;
 }
 
-.login #nav a:hover,
-.login #backtoblog a:hover {
+.login #nav a:hover,.login #backtoblog a:hover {
   color: #1d94b5;
 }
 
@@ -110,4 +103,3 @@
   clear: both;
   display: block;
 }
-
