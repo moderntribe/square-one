@@ -28,6 +28,7 @@
 @import "mixins/mqs";
 @import "mixins/typography";
 @import "mixins/media";
+@import "mixins/shapes";
 
 // Extends
 @import "extends/utilities";
@@ -38,4 +39,3 @@
 
 // Helper Classes
 @import "helper-classes/utilities";
-@import "helper-classes/kitchen-sink";

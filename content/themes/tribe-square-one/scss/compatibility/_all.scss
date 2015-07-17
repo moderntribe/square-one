@@ -14,8 +14,3 @@
 @import "no-js";
 @import "devices-n-browsers";
 @import "legacy";
-
-// MQ: Print
-@media print { 
-	@import "print"; 
-}

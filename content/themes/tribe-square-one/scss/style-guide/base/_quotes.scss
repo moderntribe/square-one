@@ -1,0 +1,48 @@
+
+// -----------------------------------------------------------------------------
+//
+// Quotes & Blockquotes
+//
+// -----------------------------------------------------------------------------
+
+%quote-base {
+	border-top: 1px solid $border;
+	border-bottom: 1px solid $border;
+	padding: $spacer;
+}
+
+%quote-text {
+	font-size: $font-size-quote-s;
+	font-style: italic;
+	@include mq($mq-medium) {
+		font-size: $font-size-quote;
+	}
+}
+
+//q,
+.quote,
+%quote {
+	@extend %quote-base;
+	@extend %quote-text;
+	display: block;
+}
+
+//blockquote
+.blockquote,
+%blockquote {
+	@extend %quote-base;
+	p {
+		margin: 0 auto;
+		@extend %quote-text;
+		& ~ p {
+			margin-top: $spacer;
+		}
+	}
+}
+
+cite,
+.cite,
+%cite {
+	font-style: normal;
+	display: block;
+}

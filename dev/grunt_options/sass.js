@@ -15,6 +15,7 @@ module.exports = {
 		},
 		files  : {
 			'<%= pkg._themepath %>/css/master-temp.css'             : '<%= pkg._themepath %>/scss/master.scss',
+			'<%= pkg._themepath %>/css/print-temp.css'              : '<%= pkg._themepath %>/scss/print.scss',
 			'<%= pkg._themepath %>/css/admin/editor-style-temp.css' : '<%= pkg._themepath %>/scss/admin/editor-style.scss',
 			'<%= pkg._themepath %>/css/admin/login-temp.css'        : '<%= pkg._themepath %>/scss/admin/login.scss'
 		}

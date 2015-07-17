@@ -20,12 +20,13 @@
 // $behavior   - Row behavior. Default: false. Options: nest, collapse, nest-collapse, false
 // $no-columns - Does this row have columns? Default: false. Options: true, false.
 // $gutter     - Need to adjust the column gutter? Update here. Default: $column-gutter var. Options: value (px).
+// $row-w      - Row max width. Default: $row-width.
 //
 // @author: Zurb Foundation
 //
 // -----------------------------------------------------------------------------
 
-@mixin grid-row($behavior: false, $no-columns: false, $gutter: $column-gutter) {
+@mixin grid-row($behavior: false, $no-columns: false, $gutter: $column-gutter, $row-w: $row-width) {
 
     // use @include grid-row(nest); to include a nested row
     @if $behavior == nest {
@@ -41,7 +42,7 @@
     @else if $behavior == collapse {
         width: 100%;
         margin: 0;
-        max-width: $row-width;
+        max-width: $row-w;
     }
 
     // use @include grid-row(nest-collapse); to collapse outer margins on a nested row
@@ -58,7 +59,7 @@
         margin-#{$opposite-direction}: auto;
         margin-top: 0;
         margin-bottom: 0;
-        max-width: $row-width;
+        max-width: $row-w;
     }
 
     // if no columns in this row, apply container right & left padding

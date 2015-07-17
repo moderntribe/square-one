@@ -43,6 +43,7 @@ $black: #000 !default;
 
 $bgd        : $white !default;
 $bgd-content: $white !default;
+$bgd-inputs : $white !default;
 
 
 // -----------------------------------------------------------------------------
@@ -50,7 +51,7 @@ $bgd-content: $white !default;
 // -----------------------------------------------------------------------------
 
 $link      : $primary !default;
-$link-hover: darken($primary, 15%) !default;
+$link-hover: $secondary !default;
 
 
 // -----------------------------------------------------------------------------
@@ -64,13 +65,23 @@ $text: $black !default;
 // Borders
 // -----------------------------------------------------------------------------
 
-$border: $grey !default;
+$border            : $grey !default;
+$border-input      : $grey-light !default;
+$border-input-focus: $grey-light !default;
+
+
+// -----------------------------------------------------------------------------
+// Inputs
+// -----------------------------------------------------------------------------
+
+$placeholder: $text !default;
 
 
 // -----------------------------------------------------------------------------
 // Validation
 // -----------------------------------------------------------------------------
 
-$error  : red !default;
-$success: green !default;
+$error   : lighten(red, 10%) !default;
+$success : lighten(green, 10%) !default;
+$required: $error !default;
 

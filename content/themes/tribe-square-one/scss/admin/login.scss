@@ -11,23 +11,43 @@
 // Variables
 @import "../utilities/variables/paths";
 @import "../utilities/variables/colors";
+@import "../utilities/variables/typography";
 
 // Extends
 @import "../utilities/extends/transitions";
 
-.login { 
+* {
+	box-sizing: border-box;
+}
+
+.login {
 
 	height: 100%;
+	position: relative;
+	width: 100%;
+	display: table;
+	background: $bgd;
 
 	#login {
-		padding: 5em 0;
 		overflow: hidden;
+		position: relative;
+		z-index: 1;
+		padding: 80px 25px 100px;
+		display: table-cell;
+		width: 100%;
+		vertical-align: middle;
+		& > * {
+			max-width: 425px;
+			margin-left: auto;
+			margin-right: auto;
+		}
 	}
 
 	&.wp-core-ui {
 		.button-primary {
 			@extend %transition;
-			background: $link;
+			background: $primary;
+			font-family: $font-family-base;
 			color: $white;
 			border: 0;
 			border-radius: 0;
@@ -36,11 +56,12 @@
 			width: 100%;
 			padding: 10px;
 			margin: 15px auto 0;
+			font-size: 18px;
 			height: auto;
 			font-weight: bold;
 			float: none;
 			&:hover {
-				background-color: darken($link, 5%);
+				background-color: $secondary;
 			}
 		}
 	}
@@ -49,6 +70,7 @@
 		margin: 8px auto 10px;
 		padding: 20px 24px 24px;
 		backface-visibility: hidden;
+		position: relative !important;
 		.forgetmenot {
 			float: none;
 		}
@@ -57,20 +79,20 @@
 	/*
 	h1 {
 		padding: 8px;
-		margin: 40px auto 16px;
+		margin: 0 auto 16px;
 		a {  
 			line-height: 1;
 			background: url(#{$images-dir}/logos/logo-admin.png) 50% 50% no-repeat; 
-			width: 170px;
-			height: 35px;
+			width: 300px;
+			height: 57px;
 			margin: 0 auto;
 			// MQ: Retina & HDPI
-			@media 
-			(-webkit-min-device-pixel-ratio: 2), 
-			(min-resolution: 192dpi), 
+			@media
+			(-webkit-min-device-pixel-ratio: 2),
+			(min-resolution: 192dpi),
 			(min-resolution: 2dppx) {
 				background-image: url(#{$images-dir}/logos/logo-admin@2x.png);
-				background-size: 170px 35px;	
+				background-size: 300px 57px;
 			}
 		}
 		img {
@@ -87,11 +109,17 @@
 	#backtoblog {
 		padding: 3px 2px;
 		margin: 0;
+		font-family: $font-family-base;
+		font-size: 15px;
 		a {
 			@extend %transition;
-			color: $link;
-			&:hover {
-				color: darken($link, 5%);
+			padding: 3px 0;
+			margin: 0 auto;
+			text-align: center;
+			color: $white;
+			&:hover,
+			&:focus {
+				color: $primary;
 			}
 		}
 	}

@@ -98,6 +98,7 @@ module.exports = function(grunt) {
 			'combine_mq:theme',
 			'autoprefixer:theme',
 			'cssmin',
+			'header',
 			'clean:theme',
 			'setPHPConstant'
 		]);

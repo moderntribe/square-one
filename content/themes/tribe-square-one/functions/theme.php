@@ -28,6 +28,10 @@ function body_classes( $classes ) {
         return $classes;
     }
 
+    // Panel page check
+	if( ( function_exists( 'have_panels' ) && have_panels() ) && empty( $post->post_content ) )
+		$classes[] = 'is-panels-page';
+
     $classes[] = sanitize_html_class( $post->post_type . '-' . $post->post_name );
 
     return $classes;

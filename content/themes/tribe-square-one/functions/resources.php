@@ -85,18 +85,19 @@ function enqueue_styles() {
 
     // CSS
     $css_global = 'master.css';
-    $css_legacy = 'legacy.css';
+    $css_print  = 'print.css';
 
     // Production
     if ( ! defined( 'SCRIPT_DEBUG' ) || SCRIPT_DEBUG === false ) {
         $css_global = 'dist/master.min.css';
-        $css_legacy = 'dist/legacy.min.css';
+        $css_print  = 'dist/print.min.css';
     }
 
-    wp_enqueue_style( 'tribe-theme-base', $css_dir . $css_global, $version, 'all' );
-    wp_enqueue_style( 'tribe-theme-legacy', $css_dir . $css_legacy, $version, 'all'  );
-    global $wp_styles;
-    $wp_styles->add_data( 'tribe-theme-legacy' , 'conditional', 'lte IE 8' );
+    // CSS: base
+    wp_enqueue_style( 'tribe-theme-base', $css_dir . $css_global, array(), $version, 'all' );
+
+    // CSS: print
+    wp_enqueue_style( 'tribe-theme-print', $css_dir . $css_print, array(), $version, 'print' );
 
 }
 
@@ -180,30 +181,6 @@ function tribe_remove_static_resource_version( $resources ) {
 
 
 /**
- * tribe_js_i18n stores all text strings needed in the scripts.js file
- *
- * The code below is an example of structure. Check the theme readme js section for more info on how to use.
- *
- * @return array
- */
-
-function tribe_js_i18n() {
-
-    $js_i18n_array = array(
-        'help_text' => array(
-            'msg_limit'   => __( 'There is a limit to the messages you can post.' )
-        ),
-        'tooltips' => array(
-            'add_to_save'   => __( 'Add Photo to Saved Items' ),
-            'in_this_photo' => __( 'Products in this photo' )
-        )
-    );
-    return $js_i18n_array;
-
-}
-
-
-/**
  * Provides config data to be used by front-end JS
  *
  * @return array
@@ -214,8 +191,9 @@ function tribe_js_config() {
     static $data = array();
     if ( empty( $data ) ) {
         $data = array(
-            'images_url' => trailingslashit( get_template_directory_uri() ) . 'img/',
-            'template_url' => trailingslashit( get_template_directory_uri() )
+            'images_url'   => trailingslashit( get_template_directory_uri() ) . 'img/',
+            'template_url' => trailingslashit( get_template_directory_uri() ),
+            'home_url'     => esc_url( home_url( '/' ) )
         );
         $data = apply_filters( 'tribe_js_config', $data );
     }

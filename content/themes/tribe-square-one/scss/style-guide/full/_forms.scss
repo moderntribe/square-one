@@ -1,0 +1,27 @@
+
+// -------------------------------------------------------------------------
+//
+// Forms
+//
+// -------------------------------------------------------------------------
+
+form {
+	margin: $spacer auto;
+}
+
+label {
+	@extend %label;
+}
+
+input,
+textarea,
+select {
+	@extend %field-focus;
+}
+
+input {
+	&[type="radio"],
+	&[type="checkbox"] {
+		margin-bottom: 0;
+	}
+}

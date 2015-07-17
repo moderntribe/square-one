@@ -12524,13 +12524,13 @@
 	var _base2 = _interopRequireDefault(_base);
 	
 	var Events = (function (_Utils) {
+		_inherits(Events, _Utils);
+	
 		function Events(options) {
 			_classCallCheck(this, Events);
 	
 			_get(Object.getPrototypeOf(Events.prototype), 'constructor', this).call(this, options);
 		}
-	
-		_inherits(Events, _Utils);
 	
 		_createClass(Events, [{
 			key: 'on',
