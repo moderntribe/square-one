@@ -25,11 +25,12 @@ a {
 	text-decoration: none;
 	background-color: transparent;
 	outline: 0;
+	cursor: pointer;
 	&:visited { 
 		color: inherit; 
 	}
 	&:hover { 
-		color: inherit; 
+		color: $link; 
 	}
 	&:active,
 	&:focus {

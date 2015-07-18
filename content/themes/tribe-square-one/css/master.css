@@ -267,6 +267,7 @@ a {
   text-decoration: none;
   background-color: transparent;
   outline: 0;
+  cursor: pointer;
 }
 
 a:visited {
@@ -274,7 +275,7 @@ a:visited {
 }
 
 a:hover {
-  color: inherit;
+  color: #21A6CB;
 }
 
 a:active,a:focus {
@@ -536,6 +537,7 @@ td ~ td {
 
 .label,.context-content label,legend {
   display: block;
+  margin-bottom: 15px;
 }
 
 .required label:after {
@@ -563,6 +565,25 @@ td ~ td {
   line-height: normal;
   display: inline-block;
   padding: 0;
+  margin-right: 10px;
+}
+
+.checkbox,.radio {
+  display: block;
+}
+
+.checkbox label,.radio label {
+  cursor: pointer;
+  margin-bottom: 0;
+  display: inline-block;
+}
+
+.checkbox ~ .checkbox {
+  margin-top: 15px;
+}
+
+.radio ~ .radio {
+  margin-top: 15px;
 }
 
 input[type="file"] {

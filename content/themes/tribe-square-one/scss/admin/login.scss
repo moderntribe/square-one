@@ -26,7 +26,7 @@
 	position: relative;
 	width: 100%;
 	display: table;
-	background: $bgd;
+	background: $bgd-login;
 
 	#login {
 		overflow: hidden;
@@ -108,7 +108,8 @@
 	#nav, 
 	#backtoblog {
 		padding: 3px 2px;
-		margin: 0;
+		margin: 0 auto;
+		text-align: center;
 		font-family: $font-family-base;
 		font-size: 15px;
 		a {
@@ -116,20 +117,20 @@
 			padding: 3px 0;
 			margin: 0 auto;
 			text-align: center;
-			color: $white;
+			color: $primary;
 			&:hover,
 			&:focus {
-				color: $primary;
+				color: $secondary;
 			}
 		}
 	}
 
 	#nav {
-		float: right;
+		margin-top: 15px;
 	}
 
 	#backtoblog {
-		float: left;
+		margin-top: 8px;
 	}
 
 	.submit {

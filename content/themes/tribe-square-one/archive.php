@@ -16,8 +16,8 @@
 
 				<?php endwhile; ?>
 
-				<?php // Pagination
-				tribe_paging_nav(); ?>
+				<?php // Content: Pagination
+				get_template_part( 'content/pagination/loop' ); ?>
 
 			<?php else : ?>
 

@@ -15,10 +15,7 @@
 	if ( has_post_thumbnail() ) { ?>
 		<figure class="loop-item-featured-img">
 			<a href="<?php the_permalink(); ?>" rel="bookmark">
-    			<?php
-					$attr = array( 'class' => '' );
-					echo get_the_post_thumbnail( get_the_ID(), 'tribe-full', $attr );
-				?>
+    			<?php the_post_thumbnail( 'tribe-full' ); ?>
 			</a>
     	</figure><!-- .loop-item-featured-img -->
 	<?php } ?>

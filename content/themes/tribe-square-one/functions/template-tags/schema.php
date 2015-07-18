@@ -17,7 +17,7 @@ function get_schema_type( $post_type = null ) {
 	$schema_type = 'BlogPosting';
 
 	// CPT: Events
-	elseif( $post_type == 'tribe_events' )
+	if( $post_type == 'tribe_events' )
 		$schema_type = 'Event';
 
 	return $schema_type;
@@ -88,7 +88,7 @@ function the_webpage_schema_as_json_ld() {
 		"@context": "https://schema.org",
 		"@type": "<?php echo $schema_type; ?>",
 		<?php if ( ! empty( $name ) ) { ?>
-			"name": "<php echo $name; ?>",
+			"name": "<?php echo $name; ?>",
 		<?php } ?>
 		"url": "<?php echo trailingslashit( site_url() ); ?>",
 		<?php if ( ! empty( $content ) ) { ?>

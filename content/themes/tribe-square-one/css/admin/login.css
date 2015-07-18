@@ -19,7 +19,7 @@
   position: relative;
   width: 100%;
   display: table;
-  background: #fff;
+  background: #f1f1f1;
  /*
 	h1 {
 		padding: 8px;
@@ -101,7 +101,8 @@
 
 .login #nav,.login #backtoblog {
   padding: 3px 2px;
-  margin: 0;
+  margin: 0 auto;
+  text-align: center;
   font-family: "proxima-nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 15px;
 }
@@ -110,19 +111,19 @@
   padding: 3px 0;
   margin: 0 auto;
   text-align: center;
-  color: #fff;
-}
-
-.login #nav a:hover,.login #nav a:focus,.login #backtoblog a:hover,.login #backtoblog a:focus {
   color: #21A6CB;
 }
 
+.login #nav a:hover,.login #nav a:focus,.login #backtoblog a:hover,.login #backtoblog a:focus {
+  color: #1b89a8;
+}
+
 .login #nav {
-  float: right;
+  margin-top: 15px;
 }
 
 .login #backtoblog {
-  float: left;
+  margin-top: 8px;
 }
 
 .login .submit {

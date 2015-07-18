@@ -6,7 +6,7 @@
 		get_template_part( 'content/navigation/footer' ); ?>
 
 		<h6>
-			Copyright &copy; <?php echo date( 'Y' ); ?>
+			Copyright &copy; <?php echo date( 'Y' ); ?> 
 			<a href="<?php echo esc_url( home_url() ); ?>" rel="external">
 				<?php bloginfo( 'name' ); ?>
 			</a>

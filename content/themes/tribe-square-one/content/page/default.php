@@ -1,10 +1,7 @@
 <?php // Featured Image
 if ( has_post_thumbnail() ) { ?>
 	<figure class="page-featured-img">
-		<?php
-			$attr = array( 'class' => '' );
-			echo get_the_post_thumbnail( get_the_ID(), 'tribe-full', $attr );
-		?>
+		<?php the_post_thumbnail( 'tribe-full' ); ?>
    	</figure><!-- .page-featured-img -->
 <?php } ?>
 

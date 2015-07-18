@@ -5,17 +5,21 @@
 		<?php // Content: Sub-header
 		get_template_part( 'content/header/sub' ); ?>
 
-		<?php // If we have content, output our content block (for panels and odd spacing)
-		if( get_the_content() !== '' ) { ?>
+		<?php while ( have_posts() ) : the_post(); ?>
 
-			<div class="content-wrap">
+			<?php // If we have content, output our content block (for panels and odd spacing)
+			if( get_the_content() !== '' ) { ?>
 
-				<?php // Content: Page
-				get_template_part( 'content/page/default' ); ?>
+				<div class="content-wrap">
 
-			</div><!-- .content-wrap -->
+					<?php // Content: Page
+					get_template_part( 'content/page/default' ); ?>
 
-		<?php } ?>
+				</div><!-- .content-wrap -->
+
+			<?php } ?>
+
+		<?php endwhile; ?>
 
 		<?php // Panels
 		if( function_exists( 'have_panels' ) && have_panels() )

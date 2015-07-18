@@ -20,6 +20,7 @@
 .label,
 %label {
 	display: block;
+	margin-bottom: $spacer-xs;
 }
 
 // -----------------------------------------------------------------------------
@@ -90,14 +91,33 @@ legend {
     line-height: normal;
     display: inline-block;
     padding: 0;
+    margin-right: 10px;
 }
 
 .checkbox,
 .radio,
 %input-checkbox-radio {
+	display: block;
 	input[type="radio"],
 	input[type="checkbox"] {
 		@extend %input-checkbox-radio-ui;
+	}
+	label {
+		cursor: pointer;
+		margin-bottom: 0;
+		display: inline-block;
+	}
+}
+
+.checkbox {
+	& ~ .checkbox {
+		margin-top: $spacer-xs;
+	}
+}
+
+.radio {
+	& ~ .radio {
+		margin-top: $spacer-xs;
 	}
 }
 

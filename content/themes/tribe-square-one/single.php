@@ -12,8 +12,8 @@
 				<?php // Content: Post
 				get_template_part( 'content/single/post' ); ?>
 
-				<?php // Pagination
-				tribe_post_nav(); ?>
+				<?php // Content: Pagination
+				get_template_part( 'content/pagination/single' ); ?>
 
 				<?php // Comments
 				if ( comments_open() || get_comments_number() )
