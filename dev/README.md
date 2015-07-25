@@ -174,6 +174,7 @@ If you add a new task to this project, document it here!
 * `grunt modernizr:theme` scans the theme for references to modernizr tests, downloads the lates dev version and then builds a custom production version based on what was used.
 * `grunt preprocess:theme` strips all debug code from theme js.
 * `grunt uglify:theme` minifies all theme js.
+* `grunt deploy --target=[staging|production]` deploys code to the target, as configured in package.json.
 
 ## Installed Grunt Task Libraries
 
