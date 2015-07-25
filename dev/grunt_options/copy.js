@@ -30,7 +30,10 @@ module.exports = {
 			{
 				expand: true,
 				cwd: 'wp',
-				src: '**',
+				src: [
+					'**',
+					'!**/wp-content/**'
+				],
 				dest: '<%= pkg._deploypath %>/'
 			},
 
@@ -49,14 +52,22 @@ module.exports = {
 					'!**/phpunit.xml',
 					'!**/codeception.yml',
 					'!**/composer.json',
-					'!**/composer.lock'
+					'!**/composer.lock',
+					'!**/memcached.php',
+					'!**/object-cache.php'
 				],
 				dest: '<%= pkg._deploypath %>/wp-content/'
 			},
 
 			// config
 			{
+				nonull: true,
 				src: 'build-process.php',
+				dest: '<%= pkg._deploypath %>/'
+			},
+			{
+				nonull: true,
+				src: 'general-config.php',
 				dest: '<%= pkg._deploypath %>/'
 			}
 		]

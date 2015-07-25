@@ -12,6 +12,13 @@ module.exports = {
 		verbose:true
 	},
 
+	buildprocess: {
+		options: {
+			message: 'Update build-process.php before deployment',
+			allowEmpty: true
+		}
+	},
+
 	deploy: {
 		options: {
 			message: 'Deployment <%= grunt.template.today("isoDateTime") %>',

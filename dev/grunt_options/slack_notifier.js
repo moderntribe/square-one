@@ -25,5 +25,5 @@ module.exports = {
 		options: {
 			text: 'Deployment to production complete at <%= grunt.template.today("isoDateTime") %>'
 		}
-	},
+	}
 };

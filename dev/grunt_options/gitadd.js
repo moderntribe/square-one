@@ -12,6 +12,12 @@ module.exports = {
 		verbose:true
 	},
 
+	buildprocess: {
+		options: {
+			all: true
+		}
+	},
+
 	deploy: {
 		options: {
 			cwd: '<%= pkg._deploypath %>',

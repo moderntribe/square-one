@@ -14,13 +14,13 @@ module.exports = {
 
 	staging: {
 		options: {
-			tag:'staging/<%= grunt.template.today("isoDateTime") %>'.replace(/:/g, '.')
+			tag:'staging/<%= grunt.template.today("yyyy.mm.dd.h.MM") %>'
 		}
 	},
 
 	production: {
 		options: {
-			tag:'release/<%= grunt.template.today("isoDateTime") %>'.replace(/:/g, '.')
+			tag:'release/<%= grunt.template.today("yyyy.mm.dd.h.MM") %>'
 		}
 	}
 };

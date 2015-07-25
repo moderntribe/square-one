@@ -121,9 +121,11 @@ module.exports = function(grunt) {
 	var target = grunt.option('target') || 'staging';
 	grunt.registerTask(
 		'deploy', [
-			'setPHPConstant',
 			'gitcheckout:' + target,
 			'gitpull:' + target,
+			'setPHPConstant',
+			'gitadd:buildprocess',
+			'gitcommit:buildprocess',
 			'gittag:' + target,
 			'gitpush:tags',
 			'gitpush:' + target,
