@@ -12,15 +12,13 @@
  * Option: removes default link from uploaded 
  */
 
-update_option( 'image_default_link_type', 'none' );
-
+add_filter( 'pre_option_image_default_link_type', function() { return 'none'; } );
 
 /**
  * Option: enable gzip compressions for WordPress
  */
 
-update_option( 'gzipcompression', 1 );
-
+add_filter( 'pre_option_gzipcompression', function() { return 1; } );
 
 /**
  * Supports: enable Featured Images
