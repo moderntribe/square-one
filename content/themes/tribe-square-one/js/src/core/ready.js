@@ -1,17 +1,33 @@
 'use strict';
 
 import resize from './resize';
+import plugins from './plugins';
+import viewport_dims from './viewport-dims';
 import Events from '../utils/events';
+
+import example from './example';
 
 let events = new Events();
 
 function init() {
 
-	// initialize app here
+	// init external plugins
+
+	plugins();
+
+	// set initial states
+
+	viewport_dims();
+
+	// initialize global events
 
 	bind_events();
 
-	console.info( 'Initialized all javascript on that targeted document ready.' );
+	// initialize your modules here
+
+	example();
+
+	console.info( 'Initialized all javascript that targeted document ready.' );
 
 }
 

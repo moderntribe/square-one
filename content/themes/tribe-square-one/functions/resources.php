@@ -179,10 +179,14 @@ function tribe_js_config() {
 
 	static $data = array();
 	if ( empty( $data ) ) {
+		$template_url = trailingslashit( get_template_directory_uri() );
 		$data = array(
-			'images_url'   => trailingslashit( get_template_directory_uri() ) . 'img/',
-			'template_url' => trailingslashit( get_template_directory_uri() ),
-			'home_url'     => esc_url( home_url( '/' ) )
+			'images_url'        => $template_url . 'img/',
+			'home_url'          => esc_url( home_url() ),
+			'template_url'      => $template_url,
+			'post_type'         => get_post_type(),
+			'date_format'       => get_option( 'date_format' ),
+			'is_user_logged_in' => is_user_logged_in(),
 		);
 		$data = apply_filters( 'tribe_js_config', $data );
 	}
