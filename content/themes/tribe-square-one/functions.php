@@ -14,7 +14,7 @@ add_action( 'after_setup_theme', 'visual_editor_styles', 10 );
 
 
 /**
- * Theme Core Functionalty "Plugin"
+ * Theme Core Functionality "Plugin"
  */
 
 if ( ! function_exists( 'tribe_theme_setup' ) ):
@@ -23,11 +23,6 @@ function tribe_theme_setup() {
 
 	// Core & Architecture
 	include_once 'functions/core.php';
-	include_once 'functions/architecture.php';
-
-	// Admin
-	if ( is_admin() )
-		include_once 'functions/admin.php';
 
 	// Media
 	include_once 'functions/media.php';
