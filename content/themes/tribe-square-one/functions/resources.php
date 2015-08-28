@@ -22,6 +22,9 @@ add_action( 'wp_head', 'tribe_fonts' );
 add_filter( 'script_loader_src', 'tribe_remove_static_resource_version', 15, 1 );
 add_filter( 'style_loader_src', 'tribe_remove_static_resource_version', 15, 1 );
 
+// WP SEO: remove json_ld_search
+add_filter( 'disable_wpseo_json_ld_search', '__return_true' );
+
 
 /**
  * Gets the current site version.
