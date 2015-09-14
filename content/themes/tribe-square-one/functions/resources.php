@@ -20,8 +20,6 @@ add_action( 'wp_head', 'tribe_fonts' );
 
 // Site Resource Optimizations
 add_filter( 'wp_default_scripts', 'tribe_remove_jquery_migrate' );
-add_filter( 'script_loader_src', 'tribe_remove_static_resource_version', 15, 1 );
-add_filter( 'style_loader_src', 'tribe_remove_static_resource_version', 15, 1 );
 
 
 /**
@@ -168,20 +166,6 @@ function tribe_remove_jquery_migrate( $scripts ) {
     } else {
         return $scripts;
     }
-}
-
-
-/**
- * Remove WordPress static resource version number (production only)
- */
-
-function tribe_remove_static_resource_version( $resources ) {
-    if( is_admin() )
-        return $resources;
-    if ( ! defined( 'SCRIPT_DEBUG' ) || SCRIPT_DEBUG === false )
-        return remove_query_arg( 'ver', $resources );
-    else 
-        return $resources;
 }
 
 
