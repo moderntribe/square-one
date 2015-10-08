@@ -8,56 +8,83 @@
  * @param opts Object The options object. Check below for available and defaults.
  */
 
-export default function deepscroll( opts ) {
+let deepscroll = function( opts ) {
 
-	this.options = _.assign( {
-		attr         : 'data-url-key',
-		controller   : null,
-		targets      : null,
-		offset       : 0
-	}, opts );
+	let options = _.assign( {
+			attr         : 'data-url-key',
+			targets      : null,
+			offset       : 0
+		}, opts ),
+		url = `${document.location.protocol}//${document.location.hostname}${document.location.pathname}`,
+		items = [],
+		nodes;
 
-	this.url = sprintf( '%s//%s%s', document.location.protocol, document.location.hostname, document.location.pathname );
-	this.state = {};
-	this.items = [];
+	let _update_hash = ( el ) => {
 
-	this.init = () => {
+		if ( history.pushState ) {
 
-		if ( this.options.targets ) {
+			if( el ){
+				let hash = el.getAttribute( 'data-url-key' ) ? `#${el.getAttribute( 'data-url-key' )}` : window.location.pathname;
+				history.replaceState( '', '', hash );
+			} else {
+				history.replaceState( '', '', url );
+			}
 
-			this.nodes = [].slice.call( this.options.targets );
-			this.nodes.forEach( ( el ) => this._apply_waypoint( el ) );
-
-		} else {
-
-			console.info( 'Deepscroll plugin was called but no nav elements where found.' );
 
 		}
 
 	};
 
-	this._apply_waypoint = ( el ) => {
+	let _trigger_scrollby = ( el ) => {
 
-		let _this = this,
-			data = {},
-			url_key = el.getAttribute( this.options.attr ),
+		$( document ).trigger( 'modern_tribe/scrolledto',  { el: el } );
+
+	};
+
+	let _handle_waypoint_down = ( dir, el ) => {
+
+		if( dir === 'down' ){
+			_update_hash( el );
+			_trigger_scrollby( el );
+		}
+
+		if( dir === 'up' && $( el ).is( '.panel-count-0') ){
+			_update_hash( null );
+			_trigger_scrollby( null );
+		}
+
+	};
+
+	let _handle_waypoint_up = ( dir, el ) => {
+
+		if( dir === 'up' ){
+			_update_hash( el );
+			_trigger_scrollby( el );
+		}
+
+	};
+
+	let _apply_waypoint = ( el ) => {
+
+		let data = {},
+			url_key = el.getAttribute( options.attr ),
 			title = el.getAttribute( 'data-nav-title' );
 
 		data[ ( url_key ? url_key : _.uniqueId( 'way-' ) ) + '-down' ] = new Waypoint({
 			element: el,
-			handler: function( dir ) { this._handle_waypoint_down( dir, el ) }.bind( this ),
-			offset: this.options.offset + 'px'
+			handler: function( dir ) { _handle_waypoint_down( dir, el ) },
+			offset: options.offset + 'px'
 		});
 
 		data[ ( url_key ? url_key : _.uniqueId( 'way-' ) ) + '-up' ] = new Waypoint({
 			element: el,
-			handler: function( dir ) { this._handle_waypoint_up( dir, el ) }.bind( this ),
+			handler: function( dir ) { _handle_waypoint_up( dir, el ) },
 			offset: function() {
-				return -( this.element.clientHeight - _this.options.offset )
+				return -( this.element.clientHeight - options.offset )
 			}
 		});
 
-		this.items.push( {
+		items.push( {
 			has_data: el.innerHTML.trim() !== "",
 			url_key : url_key,
 			title   : title,
@@ -66,41 +93,36 @@ export default function deepscroll( opts ) {
 
 	};
 
-	this._handle_waypoint_down = ( dir, el ) => {
+	let _execute_resize = () => {
 
-		if( dir === 'down' ){
-			this._update_hash( el );
-			this._trigger_scrollby( el );
-		}
+		Waypoint.refreshAll();
 
 	};
 
-	this._handle_waypoint_up = ( dir, el ) => {
+	let _refresh = () => {
 
-		if( dir === 'up' ){
-			this._update_hash( el );
-			this._trigger_scrollby( el );
-		}
+		_.delay( () => Waypoint.refreshAll(), 1000 );
 
 	};
 
-	this._update_hash = ( el ) => {
+	let _bind_events = () => {
 
-		if ( history.pushState && ! this.options.controller.scrolling ) {
-
-			let hash = el.getAttribute( 'data-url-key' ) ? sprintf( '#%s', el.getAttribute( 'data-url-key' ) ) : window.location.pathname;
-			history.replaceState( '', '', hash );
-
-		}
+		document.addEventListener( 'modern_tribe/refresh_waypoints', _execute_resize );
+		document.addEventListener( 'modern_tribe/resize_executed', _execute_resize );
+		document.addEventListener( 'modern_tribe/accordion_animated', _execute_resize );
+		window.addEventListener( 'load', _refresh );
 
 	};
 
-	this._trigger_scrollby = ( el ) => {
+	if ( options.targets ) {
 
-		$( document ).trigger( 'modern_tribe_scrolledto',  { el: el } );
+		nodes = [].slice.call( options.targets );
+		nodes.forEach( ( el ) => _apply_waypoint( el ) );
 
-	};
+		_bind_events();
 
-	return this;
+	}
 
 };
+
+export default deepscroll;

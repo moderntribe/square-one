@@ -1,6 +1,6 @@
 'use strict';
 
-export default function query_to_json() {
+let query_to_json = () => {
 
 	var pairs = location.search.slice(1).split('&');
 
@@ -13,3 +13,4 @@ export default function query_to_json() {
 	return JSON.parse( JSON.stringify( result ) );
 };
 
+export default query_to_json;

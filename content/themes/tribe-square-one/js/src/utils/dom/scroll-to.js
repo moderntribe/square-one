@@ -6,7 +6,7 @@
  * @desc scroll_to allows equalized or duration based scrolling of the body to a supplied target with options.
  */
 
-export default function scroll_to( opts ) {
+let scroll_to = ( opts ) => {
 
 	let options = $.extend( {
 		auto           : false,
@@ -38,3 +38,5 @@ export default function scroll_to( opts ) {
 	}
 
 };
+
+export default scroll_to;

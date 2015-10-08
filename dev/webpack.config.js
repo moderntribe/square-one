@@ -7,7 +7,7 @@ module.exports = {
 	entry  : './<%= pkg._themepath %>/js/src/index.js',
 	output : {
 		filename: 'scripts.js',
-		path    : '<%= pkg._themepath %>/js'
+		path    : '<%= pkg._themepath %>/js/dist'
 	},
 	resolveLoader: {
 		root: path.join(__dirname, "node_modules") }
@@ -25,8 +25,12 @@ module.exports = {
 			}
 		]
 	},
+	externals: {
+		"jquery": "jQuery"
+	},
 	plugins: [
 		new webpack.ProvidePlugin( {
+			gsap  : "gsap",
 			_     : "lodash"
 		} )
 	]

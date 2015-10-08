@@ -92,6 +92,7 @@ dev/node_modules/
 dev/bower_components/
 dev/vendor/
 dev/composer.phar
+local-config.json
 
 # WP Engine #
 #############

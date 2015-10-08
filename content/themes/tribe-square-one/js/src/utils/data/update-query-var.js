@@ -1,6 +1,6 @@
 'use strict';
 
-export default function update_query_var( key, value, url = window.location.href ) {
+let update_query_var = ( key, value, url = window.location.href ) => {
 
 	var re = new RegExp( "([?&])" + key + "=.*?(&|#|$)(.*)", "gi" ),
 		hash;
@@ -33,3 +33,5 @@ export default function update_query_var( key, value, url = window.location.href
 		}
 	}
 };
+
+export default update_query_var;

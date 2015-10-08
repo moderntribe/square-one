@@ -1,10 +1,16 @@
+/**
+ * @module
+ * @exports viewport_dims
+ * @description Sets viewport dimensions using verge on shared state and detects mobile or desktop state.
+ */
+
 'use strict';
 
 import verge from 'verge';
 import state from '../config/state';
 import { MOBILE_BREAKPOINT } from '../config/options';
 
-export default function viewport_dims() {
+let viewport_dims = () => {
 
 	state.v_height = verge.viewportH();
 	state.v_width = verge.viewportW();
@@ -19,3 +25,5 @@ export default function viewport_dims() {
 	}
 
 };
+
+export default viewport_dims;

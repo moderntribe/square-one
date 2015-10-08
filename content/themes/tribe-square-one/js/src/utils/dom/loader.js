@@ -5,9 +5,9 @@
  * @desc A loader animation utility fo masking and displaying a loading system
  */
 
-import events from '../events';
+import { trigger } from '../events';
 
-export default function loader( opts ) {
+let loader = ( opts ) => {
 
 	let options = $.extend( {
 			background          : 'rgba(0, 0, 0, 0.3)',
@@ -53,12 +53,12 @@ export default function loader( opts ) {
 
 				if ( options.fade ) {
 					loader.$el.fadeOut( 300, function() {
-						events.trigger( {event:'modern_tribe/loader_hidden', native:false} );
+						trigger( {event:'modern_tribe/loader_hidden', native:false} );
 					} );
 				}
 				else {
 					loader.$el.hide();
-					events.trigger( {event:'modern_tribe/loader_hidden', native:false} );
+					trigger( {event:'modern_tribe/loader_hidden', native:false} );
 				}
 
 			},
@@ -102,3 +102,5 @@ export default function loader( opts ) {
 	};
 
 };
+
+export default loader;

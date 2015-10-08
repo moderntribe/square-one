@@ -1,0 +1,5 @@
+
+{
+  "_instructions": "Rename file to local-config.json. Set url below to your local dev url for browsersync to use.",
+  "proxy": "square.dev"
+}

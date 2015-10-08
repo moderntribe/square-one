@@ -6,7 +6,7 @@
  * @desc get_hidden_height gets the height of hidden objects.
  */
 
-export default function get_hidden_height( el ) {
+let get_hidden_height = ( el ) => {
 
 	let zindex = getComputedStyle(el)['z-index'],
 		pos = getComputedStyle(el)['position'],
@@ -27,3 +27,5 @@ export default function get_hidden_height( el ) {
 	return t_height;
 
 };
+
+export default get_hidden_height;

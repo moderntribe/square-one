@@ -26,8 +26,11 @@ module.exports = function(grunt) {
 	 *
 	 */
 
+	var dev = grunt.file.exists('local-config.json') ? grunt.file.readJSON('local-config.json') : {"proxy": "square.dev"};
+
 	var config = {
-		pkg: grunt.file.readJSON('package.json')
+		pkg: grunt.file.readJSON('package.json'),
+		dev: dev
 	};
 
 	/**
@@ -74,6 +77,7 @@ module.exports = function(grunt) {
 
 	grunt.registerTask(
 		'default', [
+			'auto_install:main',
 			'clean:thememincss',
 			'clean:thememinjs',
 			'copy:theme',
@@ -81,14 +85,16 @@ module.exports = function(grunt) {
 			'uglify:thememin',
 			'sass:theme',
 			'combine_mq:theme',
-			'autoprefixer:theme',
-			'cssmin',
+			'postcss:theme_prefix',
+			'postcss:theme_min',
+			'header',
 			'clean:theme',
 			'setPHPConstant'
 		]);
 
 	grunt.registerTask(
 		'dist', [
+			'auto_install:main',
 			'clean:thememincss',
 			'clean:thememinjs',
 			'copy:theme',
@@ -96,11 +102,17 @@ module.exports = function(grunt) {
 			'uglify:thememin',
 			'sass:theme',
 			'combine_mq:theme',
-			'autoprefixer:theme',
-			'cssmin',
+			'postcss:theme_prefix',
+			'postcss:theme_min',
 			'header',
 			'clean:theme',
 			'setPHPConstant'
+		]);
+
+	grunt.registerTask(
+		'dev', [
+			'browserSync',
+			'watch'
 		]);
 
 };
