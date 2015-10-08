@@ -5,14 +5,15 @@
 
 
 /**
- * Output proper title
+ * Sets up the proper title
  *
  * @since tribe-square-one 1.0
  * @return string
  */
-function the_page_title() {
 
-	if( is_front_page() || is_single() )
+function get_page_title() {
+
+	if( is_front_page() )
 		return;
 
 	$title = '';
@@ -37,10 +38,6 @@ function the_page_title() {
 	elseif( is_post_type_archive() )
 		$title = post_type_archive_title( '', false );
 
-	// Single
-	elseif( is_single() )
-		$title = get_post_type_object( get_post_type() )->labels->name;
-
 	// Search
 	elseif( is_search() )
 		$title = 'Search Results';
@@ -53,7 +50,93 @@ function the_page_title() {
 		$title = get_the_title();
 
 	if ( ! empty( $title ) )
-		echo '<h1 class="h1 page-title" itemprop="name">'. $title .'</h1>';
+		return $title;
+
+}
+
+
+/**
+ * Output proper title
+ *
+ * @since tribe-square-one 1.0
+ * @return string
+ */
+
+function the_page_title( $wrapper = true ) {
+
+	$title = get_page_title();
+
+	if( $wrapper )
+		$title = '<h1 class="page-title">'. $title .'</h1>';
+
+	if ( ! empty( $title ) )
+		echo $title;
+
+}
+
+
+/**
+ * Returns an image, has various options
+ *
+ * @param null   $post_id
+ * @param string $size
+ * @param bool   $schema
+ * @param bool   $lazyload
+ * @param bool   $shim
+ * @param bool   $classes
+ * @param null   $mobile_size
+ * @param null   $retina_size
+ *
+ * @return string|void
+ *
+ * @since tribe-square-one 1.0
+ */
+
+function get_featured_image( $post_id = null, $size = 'tribe-full', $lazyload = true, $shim = false, $classes = false, $mobile_size = null, $retina_size = null ) {
+
+	if ( empty( $post_id ) ) {
+		$post_id = get_the_ID();
+	}
+
+	$image_src = $image_src_mobile = $image_src_retina = '';
+	$class_lazyload = ( $lazyload ) ? 'lazyload' : '';
+	$shim_path      = trailingslashit( get_template_directory_uri() ) . 'img/shims/';
+	$image          = wp_get_attachment_image_src( $post_id, $size );
+	$alt            = get_post_meta( $post_id, '_wp_attachment_image_alt', true );
+	$alt_text       = ( $alt ) ? $alt : get_the_title( $post_id );
+
+	if( empty( $image ) )
+		return;
+
+	// Size: Mobile
+	if( $mobile_size ) {
+		$image_src_mobile = wp_get_attachment_image_src( $post_id, $mobile_size );
+	}
+
+	// Size: Retina
+	if( $retina_size ) {
+		$image_src_retina = wp_get_attachment_image_src( $post_id, $retina_size );
+	}
+
+	// If using lazyload and have a shim, use that as the image src
+	if( $lazyload && $shim ) {
+		$image_src = $shim_path . $shim;
+	}
+
+	// If not using lazyload, use regular image as the image src
+	if( ! $lazyload ) {
+		$image_src = $image[0];
+	}
+
+	return sprintf(
+		'<img %1$s%2$s%3$s%4$s%5$s alt="%6$s" />',
+		( ! empty( $image_src ) ) ? 'src="'. esc_attr( $image_src ) .'"' : '',
+		( $lazyload ) ? ' data-src="'. esc_attr( $image[0] ) .'" width="'. $image[1] .'" height="'. $image[2] .'"' : '',
+		( $mobile_size ) ? ' data-src-mobile="'. esc_attr( $image_src_mobile[0] ) .'"' : '',
+		( $retina_size ) ? ' data-src-retina="'. esc_attr( $image_src_retina[0] ) .'"' : '',
+		( $classes || $lazyload ) ? ' class="'. $class_lazyload . ' ' . $classes .'"': '',
+		esc_attr( $alt_text )
+	);
 
 }
 

@@ -15,7 +15,7 @@
 //
 // -----------------------------------------------------------------------------
 
-@function rem-calc($values, $base-value: $font-size-base) {
+@function rem-calc($values, $base-value: $font-size-base-rem) {
 
     $max: length($values);
     

@@ -13,6 +13,7 @@ module.exports = {
         },
         files:{
             '<%= pkg._themepath %>/css/master.css'             : '<%= pkg._themepath %>/css/master-temp.css',
+            '<%= pkg._themepath %>/css/print.css'              : '<%= pkg._themepath %>/css/print-temp.css',
             '<%= pkg._themepath %>/css/admin/editor-style.css' : '<%= pkg._themepath %>/css/admin/editor-style-temp.css',
             '<%= pkg._themepath %>/css/admin/login.css'        : '<%= pkg._themepath %>/css/admin/login-temp.css'
         }

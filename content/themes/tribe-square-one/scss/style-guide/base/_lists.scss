@@ -1,0 +1,41 @@
+
+// -----------------------------------------------------------------------------
+//
+// Lists
+//
+// -----------------------------------------------------------------------------
+
+ul, ol, dl {
+	@extend %body-content;
+}
+
+.list-bullet,
+%list-bullet {
+	list-style: disc outside;
+	padding-left: 1.5em;
+	padding-right: 0;
+	@include mq($mq-medium) {
+		padding-left: 3em;
+		padding-right: 3em;
+	}
+}
+
+.list-number,
+%list-number {
+	list-style: decimal outside;
+	padding-left: 1.5em;
+	padding-right: 0;
+	@include mq($mq-medium) {
+		padding-left: 3em;
+		padding-right: 3em;
+	}
+}
+
+// Definition Lists
+%dt {
+	font-weight: $font-weight-bold;
+}
+
+%dd {
+	margin-bottom: $spacer;
+}

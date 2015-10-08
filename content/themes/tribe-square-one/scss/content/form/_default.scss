@@ -1,13 +1,61 @@
 
 // -----------------------------------------------------------------------------
 //
+// Input Block / Wrapper
+//
+// -----------------------------------------------------------------------------
+
+.input,
+%input-wrap {
+	margin-bottom: $spacer;
+	line-height: $line-height-even;
+}
+
+// -----------------------------------------------------------------------------
+//
 // Label
 //
 // -----------------------------------------------------------------------------
 
 .label,
 %label {
-	
+	display: block;
+	margin-bottom: $spacer-xs;
+}
+
+// -----------------------------------------------------------------------------
+//
+// Required
+//
+// -----------------------------------------------------------------------------
+
+// Required
+.required {
+	label {
+		&:after {
+			@extend %required;
+			content: '*';
+		}
+	}
+}
+
+%required {
+	padding-left: 4px;
+	color: $required;
+}
+
+// -----------------------------------------------------------------------------
+//
+// Fieldset & Legend
+//
+// -----------------------------------------------------------------------------
+
+fieldset {
+
+}
+
+legend {
+	@extend %label;
 }
 
 // -----------------------------------------------------------------------------
@@ -16,55 +64,72 @@
 //
 // -----------------------------------------------------------------------------
 
-input,
-button,
-textarea,
-select {
-	padding: 0 10px;
-	border: 1px solid $border;
+//input,
+//button,
+//textarea,
+//select
+.field,
+%field {
+	padding: 0 14px;
+	border: 1px solid $border-input;
+	background-color: $bgd-inputs;
 	display: block;
-    width: 100%;
-}
-
-%input-focus {
-	&:focus {
-		border: 1px solid $grey;
-		&::-webkit-input-placeholder {
-			color: lighten($text, 10%);
-		}
-		&:-moz-placeholder {
-			color: lighten($text, 10%);
-		}
-		&::-moz-placeholder {
-			color: lighten($text, 10%);
-		}
-		&:-ms-input-placeholder {
-			color: lighten($text, 10%);
-		}
-	}
-}
-
-input,
-select,
-button {
-	height: 40px;
-	.lt-ie9 & {
-		line-height: 40px;
-	}
+	width: 100%;
+	height: 42px;
+	color: $text;
 }
 
 // -----------------------------------------------------------------------------
 // Inputs: Radio & Checkbox
 // -----------------------------------------------------------------------------
 
-input {
-    &[type="radio"],
-    &[type="checkbox"] {
-        height: auto;
-        width: auto;
-        line-height: normal;
-        display: inline-block;
-    }
+//input[type="radio"]
+//input[type="checkbox"]
+%input-checkbox-radio-ui {
+	height: auto;
+    width: auto;
+    line-height: normal;
+    display: inline-block;
+    padding: 0;
+    margin-right: 10px;
+}
+
+.checkbox,
+.radio,
+%input-checkbox-radio {
+	display: block;
+	input[type="radio"],
+	input[type="checkbox"] {
+		@extend %input-checkbox-radio-ui;
+	}
+	label {
+		cursor: pointer;
+		margin-bottom: 0;
+		display: inline-block;
+	}
+}
+
+.checkbox {
+	& ~ .checkbox {
+		margin-top: $spacer-xs;
+	}
+}
+
+.radio {
+	& ~ .radio {
+		margin-top: $spacer-xs;
+	}
+}
+
+// -----------------------------------------------------------------------------
+// Inputs: File
+// -----------------------------------------------------------------------------
+
+input[type="file"] {
+	@extend %field;
+	height: auto;
+	padding: 14px;
+	line-height: $line-height-even;
 }
 
 // -----------------------------------------------------------------------------
@@ -72,8 +137,10 @@ input {
 // -----------------------------------------------------------------------------
 
 textarea {
+	@extend %field;
 	resize: none;
-	padding: 10px;
+	padding: 12px 14px;
+	height: 180px;
 }
 
 // -----------------------------------------------------------------------------
@@ -81,11 +148,13 @@ textarea {
 // -----------------------------------------------------------------------------
 
 select {
+	@extend %field;
 	padding-right: 0;
-	width: 100%;
-	// CASE: Firefox
-	.is-firefox & {
-		padding-top: 8px;
+	cursor: pointer;
+	// CASE: multiple
+	&[multiple] {
+		height: 100px;
+		padding: 14px;
 	}
 }
 
@@ -93,25 +162,52 @@ select {
 // Buttons & Submits
 // -----------------------------------------------------------------------------
 
-button,
-input[type="button"],
-input[type="reset"],
-input[type="submit"] {
-	@extend %transition;
+//button
+//input[type="button"]
+//input[type="reset"]
+//input[type="submit"]
+.button,
+%button-submit {
 	background-color: $primary;
 	border: 0;
 	color: $white;
-	&:hover {
-		background-color: darken($primary, 15%);
+	width: 100%;
+	margin-top: $spacer;
+	@include mq($mq-medium) {
+		width: auto;
 	}
 }
 
 // -----------------------------------------------------------------------------
-// Placeholders
+// Placeholders & Focus
 // -----------------------------------------------------------------------------
 
 // Placeholders
 @include placeholder {
-	color: $grey;
+	color: $placeholder;
 	opacity: 1;
 }
+
+// Focus
+%field-focus {
+	&:focus {
+		border-color: $border-input-focus;
+		box-shadow: 0 0 0 1px $border-input-focus;
+		&::-webkit-input-placeholder {
+			color: lighten($placeholder, 12%);
+		}
+		&:-moz-placeholder {
+			color: lighten($placeholder, 12%);
+		}
+		&::-moz-placeholder {
+			color: lighten($placeholder, 12%);
+		}
+		&:-ms-input-placeholder {
+			color: lighten($placeholder, 12%);
+		}
+	}
+}
+
+
+
+

@@ -1,7 +1,6 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
-<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
-<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en"><![endif]-->
 <!--[if gt IE 8]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
 
@@ -30,30 +29,9 @@
 	<?php wp_head(); ?>
 
 </head>
-<body <?php body_class(); ?> itemscope itemtype="http://schema.org/WebPage">
+<body <?php body_class(); ?>>
 
 	<div id="site-wrap">
 
-		<header role="banner" itemscope itemtype="http://schema.org/WPHeader">
-			<div class="content-wrap">
-
-				<?php the_logo(); ?>
-
-				<nav role="navigation" aria-label="Main Navigation" itemscope itemtype="http://schema.org/SiteNavigationElement">
-					<h3 class="accessibility">Menu</h3>
-					<ol>
-						<?php  // Header Nav
-						$defaults = array(
-							'theme_location' => 'primary',
-							'container' => false,
-							'container_class' => '',
-							'menu_class' => '',
-							'menu_id' => '',
-							'items_wrap' => '%3$s',
-							'fallback_cb' => false );
-						wp_nav_menu( $defaults ); ?>
-					</ol>
-				</nav><!-- nav -->
-
-			</div><!-- .content-wrap -->
-		</header><!-- header -->
+		<?php // Content: Header
+		get_template_part( 'content/header/default' ); ?>

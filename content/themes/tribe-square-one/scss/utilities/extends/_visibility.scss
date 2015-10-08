@@ -13,10 +13,10 @@
 		visibility: hidden;
 	}
 	// NO MQ
-	@include no-mq {
-		display: none;
-		visibility: hidden;
-	}
+	//@include no-mq {
+	//	display: none;
+	//	visibility: hidden;
+	//}
 }
 
 // -----------------------------------------------------------------------------
@@ -35,10 +35,10 @@
 		visibility: visible;
 	}
 	// NO MQ
-	@include no-mq {
-		display: block;
-		visibility: visible;
-	}
+	//@include no-mq {
+	//	display: block;
+	//	visibility: visible;
+	//}
 }
 
 // -----------------------------------------------------------------------------
@@ -57,10 +57,10 @@
 		visibility: visible;
 	}
 	// NO MQ
-	@include no-mq {
-		display: block;
-		visibility: visible;
-	}
+	//@include no-mq {
+	//	display: block;
+	//	visibility: visible;
+	//}
 }
 
 // -----------------------------------------------------------------------------
@@ -85,7 +85,8 @@
 // -----------------------------------------------------------------------------
 
 %visually-hide,
-.accessibility {
+.accessibility,
+.screen-reader-text {
     border: 0;
     clip: rect(0 0 0 0);
     height: 1px;

@@ -1,0 +1,24 @@
+
+// -------------------------------------------------------------------------
+//
+// Quotes & Blockquotes
+//
+// -------------------------------------------------------------------------
+
+cite {
+	@extend %cite;
+}
+
+blockquote {
+	@extend %blockquote;
+}
+
+q {
+	@extend %quote;
+}
+
+blockquote, .blockquote,
+q, .quote {
+	margin: $spacer auto;
+}
+

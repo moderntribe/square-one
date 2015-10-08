@@ -58,10 +58,10 @@ body {
     min-width: 320px;
     overflow-x: hidden;
     // CASE: no support for MQ's
-    .lt-ie9 & {
-        min-width: 960px;
-        overflow-x: visible;
-    }
+    //.lt-ie9 & {
+    //    min-width: 960px;
+    //    overflow-x: visible;
+    //}
 }
 
 figure {
@@ -166,9 +166,9 @@ textarea {
     box-sizing: border-box;
     margin: 0;
     border-radius: 0;
-    &:focus {
-        outline: 0;
-    }
+    //&:focus {
+    //    outline: 0;
+    //}
 }
 
 input[type="number"]::-webkit-inner-spin-button,
@@ -246,10 +246,7 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 img {
-    line-height: 0;
-    -ms-interpolation-mode: bicubic; 
-    width: auto;
-    max-height: 100%; 
+    -ms-interpolation-mode: bicubic;  
     height: auto;
     max-width: 100%;
 }

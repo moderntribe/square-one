@@ -14,28 +14,33 @@ add_action( 'after_setup_theme', 'visual_editor_styles', 10 );
 
 
 /**
- * Theme Core Functionalty "Plugin"
+ * Theme Core Functionality "Plugin"
  */
 
 if ( ! function_exists( 'tribe_theme_setup' ) ):
 
 function tribe_theme_setup() {
 
-	// Admin
-	if ( is_admin() )
-		include_once 'functions/admin.php';
+	// Core & Architecture
+	include_once 'functions/core.php';
 
 	// Media
 	include_once 'functions/media.php';
+	include_once 'functions/embeds.php';
 
 	// Walkers
 	include_once 'functions/walkers/nav-clean.php';
 
+	// Localization
+	include_once 'functions/localization.php';
+
 	// Template Tags
+	include_once 'functions/template-tags/schema.php';
 	include_once 'functions/template-tags/helpers.php';
 	include_once 'functions/template-tags/content.php';
-	include_once 'functions/template-tags/pagination.php';
-	include_once 'functions/template-tags/logo.php';
+	include_once 'functions/template-tags/comments.php';
+	include_once 'functions/template-tags/panels.php';
+	include_once 'functions/template-tags/branding.php';
 	
 	// Theme
 	include_once 'functions/theme.php';

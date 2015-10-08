@@ -1,16 +1,19 @@
 
-		<footer role="contentinfo" itemscope itemtype="http://schema.org/WPFooter">
-			<div class="content-wrap">
+		<?php // Content: Footer
+		get_template_part( 'content/footer/default' ); ?>
 
-				<h6 itemscope itemtype="http://schema.org/Organization">
-					Copyright &copy; <?php echo date('Y'); ?> <a href="#" rel="external" itemprop="url"><span itemprop="name"><?php bloginfo( 'name' ); ?></span></a>
-				</h6>
-
-			</div><!-- .content-wrap -->
-		</footer><!-- footer -->
 	</div><!-- #site-wrap -->
 
 	<?php wp_footer(); ?>
+
+	<?php // Schema: WebSite
+	the_website_schema_as_json_ld(); ?>
+
+	<?php // Schema: WebPage
+	the_webpage_schema_as_json_ld(); ?>
+
+	<?php // Schema: Organization
+	the_organization_schema_as_json_ld(); ?>
 
 </body>
 </html>

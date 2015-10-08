@@ -1,0 +1,54 @@
+
+// -----------------------------------------------------------------------------
+//
+// Media
+//
+// -----------------------------------------------------------------------------
+
+// Caption: Wrapper
+.wp-caption {
+	margin: $spacer auto;
+	width: auto !important;
+	// Image Resets
+	img {
+		margin-bottom: 0;
+		margin-top: 0;
+	}
+}
+
+// Caption: Caption
+.wp-caption-text {
+	margin: $spacer-xs 0 0;
+	font-size: 14px;
+	line-height: $line-height-s;
+}
+
+// Media Alignments
+.aligncenter {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.alignleft,
+.alignright {
+	@include mq($mq-medium) {
+		margin-top: $spacer;
+		margin-bottom: $spacer;
+	}
+}
+
+.alignleft {
+	@include mq($mq-medium) {
+		float: left;
+		max-width: 30%;
+		margin-right: $spacer;
+	}
+}
+
+.alignright {
+	@include mq($mq-medium) {
+		float: right;
+		max-width: 30%;
+		margin-left: $spacer;
+	}
+}

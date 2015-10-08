@@ -1,16 +1,30 @@
 <?php get_header(); ?>
 
-	<main class="page-content" role="main" itemprop="mainContentOfPage">
-		<div class="content-wrap">
-		
-			<?php while ( have_posts() ) : the_post(); ?>
-		
-				<?php // Content: Page
-				get_template_part( '/content/page/default' ); ?>
-				
-			<?php endwhile; ?>
+	<main class="page-content" role="main">
 
-		</div><!-- .content-wrap -->
+		<?php // Content: Sub-header
+		get_template_part( 'content/header/sub' ); ?>
+
+		<?php while ( have_posts() ) : the_post(); ?>
+
+			<?php // If we have content, output our content block (for panels and odd spacing)
+			if( get_the_content() !== '' ) { ?>
+
+				<div class="content-wrap">
+
+					<?php // Content: Page
+					get_template_part( 'content/page/default' ); ?>
+
+				</div><!-- .content-wrap -->
+
+			<?php } ?>
+
+		<?php endwhile; ?>
+
+		<?php // Panels
+		if( function_exists( 'have_panels' ) && have_panels() )
+		do_action( 'the_panels' ); ?>
+
 	</main><!-- main -->
 
 	<?php get_sidebar(); ?>	

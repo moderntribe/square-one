@@ -1,0 +1,56 @@
+
+// -----------------------------------------------------------------------------
+//
+// Paragraph
+//
+// -----------------------------------------------------------------------------
+
+p,
+%body-content {
+	font-size: $font-size-content-s;
+    @include mq($mq-medium) {
+        font-size: $font-size-content;
+    }
+}
+
+// -----------------------------------------------------------------------------
+//
+// Links
+//
+// -----------------------------------------------------------------------------
+
+a {
+	@extend %transition;
+	color: inherit;
+	text-decoration: none;
+	background-color: transparent;
+	outline: 0;
+	cursor: pointer;
+	&:visited { 
+		color: inherit; 
+	}
+	&:hover { 
+		color: $link; 
+	}
+	&:active,
+	&:focus {
+		//outline: 1px dotted;
+		color: inherit;
+	}
+}
+
+// Link: Full Style
+.anchor,
+%a {
+	text-decoration: underline;
+}
+
+// -----------------------------------------------------------------------------
+//
+// HR
+//
+// -----------------------------------------------------------------------------
+
+hr {
+	border-top: 1px solid $border;
+}

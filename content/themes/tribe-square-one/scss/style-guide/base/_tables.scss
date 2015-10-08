@@ -1,0 +1,47 @@
+
+// -----------------------------------------------------------------------------
+//
+// Tables
+//
+// -----------------------------------------------------------------------------
+
+table {
+    @extend %body-content;
+    margin: $spacer auto;
+    border: 1px solid $grey;
+    text-align: left;
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;
+    @include mq(480px) {
+        table-layout: auto;
+    }
+}
+
+th {
+    padding: 14px 1em 12px;
+    font-weight: $font-weight-semibold;
+    line-height: $line-height-even;
+    & ~ th {
+        border-left: 1px solid $grey;
+    }
+}
+
+tr {
+	thead & {
+		border-bottom: 1px solid $grey;
+	}
+	& ~ tr {
+		border-top: 1px solid $grey;
+	}
+	&:nth-of-type(even) {
+		background-color: $grey-light;
+	}
+}
+
+td {
+    padding: 12px 1em 10px;
+    & ~ td {
+        border-left: 1px solid $grey;
+    }
+}

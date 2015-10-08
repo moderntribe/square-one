@@ -15,10 +15,11 @@
 @import "form/default";
 
 // Header
-@import "header/header";
+@import "header/default";
+@import "header/logo";
 
 // Footer
-@import "footer";
+@import "footer/default";
 
 // Page
 @import "page/default";
@@ -33,10 +34,12 @@
 // Panels
 @import "panel/default";
 
-// Modules
-
 // Sidebars
 @import "sidebar/default";
 
 // Widgets
 @import "widget/default";
+
+// Pagination
+@import "pagination/single";
+@import "pagination/loop";

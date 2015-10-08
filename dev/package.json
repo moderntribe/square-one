@@ -1,35 +1,39 @@
 {
   "name": "tribe-build",
-  "version": "1.1.0",
-  "repository": "moderntribe_git@git.tri.be:square-one",
-  "_bowerpath": "dev/bower_components",
+  "version": "1.2.0",
+  "repository": "https://github.com/moderntribe/square-one.git",
   "_themepath": "content/themes/tribe-square-one",
+  "_npmpath": "dev/node_modules",
   "_componentpath": "dev/dev_components",
   "engines": {
-    "node": "0.10.30",
-    "npm": "1.4.23"
+    "node": "0.12.0",
+    "npm": "2.5.1"
   },
   "dependencies": {
-    "babel": "^5.1.10",
-    "glob": "^4.5.3",
-    "grunt": "^0.4.5",
-    "grunt-autoprefixer": "^0.8.2",
-    "grunt-babel": "^5.0.0",
-    "grunt-contrib-clean": "~0.6.0",
-    "grunt-contrib-concat": "^0.5.1",
-    "grunt-contrib-handlebars": "^0.8.0",
-    "grunt-contrib-uglify": "^0.5.1",
-    "grunt-contrib-watch": "~0.6.1",
-    "grunt-preprocess": "^4.0.0",
-    "grunt-sass": "^0.16.1",
-    "load-grunt-tasks": "^0.6.0"
+    "fastclick": "^1.0.6",
+    "jquery": "^2.1.4",
+    "lodash": "^3.10.0",
+    "react": "^0.13.3",
+    "verge": "^1.9.1"
   },
   "devDependencies": {
-    "grunt-combine-mq": "^0.4.0",
+    "babel-core": "^5.6.15",
+    "babel-loader": "^5.2.1",
+    "glob": "^4.5.3",
+    "grunt": "^0.4.5",
+    "grunt-autoprefixer": "^3.0.3",
+    "grunt-combine-mq": "^0.9.0",
+    "grunt-contrib-clean": "~0.6.0",
+    "grunt-contrib-copy": "^0.8.0",
     "grunt-contrib-cssmin": "^0.10.0",
-    "grunt-modernizr": "^0.6.0",
+    "grunt-contrib-uglify": "^0.9.1",
+    "grunt-contrib-watch": "~0.6.1",
+    "grunt-header": "^1.0.0",
     "grunt-php-set-constant": "0.0.15",
-    "grunt-pixrem": "^0.1.2",
-    "grunt-split-styles": "^0.3.1"
+    "grunt-sass": "^1.0.0",
+    "grunt-webpack": "^1.0.11",
+    "load-grunt-tasks": "^0.6.0",
+    "webpack": "^1.10.1",
+    "webpack-dev-server": "^1.10.1"
   }
 }
