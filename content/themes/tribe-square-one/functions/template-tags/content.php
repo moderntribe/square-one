@@ -13,7 +13,7 @@
 
 function get_page_title() {
 
-	if( is_front_page() )
+	if ( is_front_page() )
 		return;
 
 	$title = '';
@@ -35,15 +35,15 @@ function get_page_title() {
 		$title = single_term_title( '', false );
 
 	// Post Type Archive
-	elseif( is_post_type_archive() )
+	elseif ( is_post_type_archive() )
 		$title = post_type_archive_title( '', false );
 
 	// Search
-	elseif( is_search() )
+	elseif ( is_search() )
 		$title = 'Search Results';
 
 	// 404
-	elseif( is_404() )
+	elseif ( is_404() )
 		$title = 'Page Not Found (404)';
 
 	else
@@ -66,7 +66,7 @@ function the_page_title( $wrapper = true ) {
 
 	$title = get_page_title();
 
-	if( $wrapper )
+	if ( $wrapper )
 		$title = '<h1 class="page-title">'. $title .'</h1>';
 
 	if ( ! empty( $title ) )
@@ -78,7 +78,7 @@ function the_page_title( $wrapper = true ) {
 /**
  * Returns an image, has various options
  *
- * @param null   $post_id
+ * @param null   $attachment_id
  * @param string $size
  * @param bool   $schema
  * @param bool   $lazyload
@@ -92,39 +92,47 @@ function the_page_title( $wrapper = true ) {
  * @since tribe-square-one 1.0
  */
 
-function get_featured_image( $post_id = null, $size = 'tribe-full', $lazyload = true, $shim = false, $classes = false, $mobile_size = null, $retina_size = null ) {
+function get_featured_image(
+	$attachment_id = null,
+	$size          = 'tribe-full',
+	$lazyload      = true,
+	$shim          = false,
+	$classes       = false,
+	$mobile_size   = null,
+	$retina_size   = null
+) {
 
-	if ( empty( $post_id ) ) {
-		$post_id = get_the_ID();
+	if ( empty( $attachment_id ) ) {
+		$attachment_id = get_the_ID();
 	}
 
 	$image_src = $image_src_mobile = $image_src_retina = '';
 	$class_lazyload = ( $lazyload ) ? 'lazyload' : '';
 	$shim_path      = trailingslashit( get_template_directory_uri() ) . 'img/shims/';
-	$image          = wp_get_attachment_image_src( $post_id, $size );
-	$alt            = get_post_meta( $post_id, '_wp_attachment_image_alt', true );
-	$alt_text       = ( $alt ) ? $alt : get_the_title( $post_id );
+	$image          = wp_get_attachment_image_src( $attachment_id, $size );
+	$alt            = get_post_meta( $attachment_id, '_wp_attachment_image_alt', true );
+	$alt_text       = ( $alt ) ? $alt : get_the_title( $attachment_id );
 
-	if( empty( $image ) )
+	if ( empty( $image ) )
 		return;
 
 	// Size: Mobile
-	if( $mobile_size ) {
+	if ( $mobile_size ) {
 		$image_src_mobile = wp_get_attachment_image_src( $post_id, $mobile_size );
 	}
 
 	// Size: Retina
-	if( $retina_size ) {
-		$image_src_retina = wp_get_attachment_image_src( $post_id, $retina_size );
+	if ( $retina_size ) {
+		$image_src_retina = wp_get_attachment_image_src( $attachment_id, $retina_size );
 	}
 
 	// If using lazyload and have a shim, use that as the image src
-	if( $lazyload && $shim ) {
+	if ( $lazyload && $shim ) {
 		$image_src = $shim_path . $shim;
 	}
 
 	// If not using lazyload, use regular image as the image src
-	if( ! $lazyload ) {
+	if ( ! $lazyload ) {
 		$image_src = $image[0];
 	}
 
@@ -132,8 +140,8 @@ function get_featured_image( $post_id = null, $size = 'tribe-full', $lazyload = 
 		'<img %1$s%2$s%3$s%4$s%5$s alt="%6$s" />',
 		( ! empty( $image_src ) ) ? 'src="'. esc_attr( $image_src ) .'"' : '',
 		( $lazyload ) ? ' data-src="'. esc_attr( $image[0] ) .'" width="'. $image[1] .'" height="'. $image[2] .'"' : '',
-		( $mobile_size ) ? ' data-src-mobile="'. esc_attr( $image_src_mobile[0] ) .'"' : '',
-		( $retina_size ) ? ' data-src-retina="'. esc_attr( $image_src_retina[0] ) .'"' : '',
+		( $mobile_size ) ? ' data-mobile-src="'. esc_attr( $image_src_mobile[0] ) .'"' : '',
+		( $retina_size ) ? ' data-retina-src="'. esc_attr( $image_src_retina[0] ) .'"' : '',
 		( $classes || $lazyload ) ? ' class="'. $class_lazyload . ' ' . $classes .'"': '',
 		esc_attr( $alt_text )
 	);

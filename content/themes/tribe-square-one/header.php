@@ -4,8 +4,7 @@
 <!--[if gt IE 8]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
 
-	<?php // TITLE ?>
-	<title><?php wp_title( '|', true, 'right' ); ?></title>
+	<?php // TITLE (added by theme support) ?>
 
 	<?php // MISC META ?>
 	<meta charset="utf-8">

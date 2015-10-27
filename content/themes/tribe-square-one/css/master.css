@@ -206,6 +206,12 @@ iframe,video,embed {
   position: relative;
 }
 
+.context-content img {
+  line-height: 0;
+  width: auto;
+  height: auto;
+}
+
 a {
   transition: all 0.15s ease-in-out;
 }

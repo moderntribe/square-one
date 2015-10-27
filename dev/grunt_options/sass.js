@@ -19,6 +19,16 @@ module.exports = {
 			'<%= pkg._themepath %>/css/admin/editor-style-temp.css' : '<%= pkg._themepath %>/scss/admin/editor-style.scss',
 			'<%= pkg._themepath %>/css/admin/login-temp.css'        : '<%= pkg._themepath %>/scss/admin/login.scss'
 		}
+	},
+
+	legacy: {
+		options: {
+			outputStyle: 'nested',
+			sourceMap  : false
+		},
+		files  : {
+			'<%= pkg._themepath %>/css/legacy-temp.css' : '<%= pkg._themepath %>/scss/legacy.scss'
+		}
 	}
 
 };

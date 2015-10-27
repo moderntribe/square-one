@@ -2,36 +2,6 @@
  *
  * Module: grunt-preprocess
  * Documentation: https://npmjs.org/package/grunt-preprocess
- * Example:
- *
- options: {
-    context : {
-      DEBUG: true
-    }
-  },
- html : {
-    src : 'test/test.html',
-    dest : 'test/test.processed.html'
-  },
- multifile : {
-    files : {
-      'test/test.processed.html' : 'test/test.html',
-      'test/test.processed.js'   : 'test/test.js'
-    }
-  },
- inline : {
-    src : [ 'processed/*.js' ],
-	options: {
-		inline : true,
-			context : {
-			DEBUG: false
-		}
-	}
-	},
- js : {
-		src : 'test/test.js',
-			dest : 'test/test.processed.js'
-	}
  *
  */
 
@@ -39,7 +9,7 @@ module.exports = {
 
 	// auto prefixing
 
-	theme_prefix:{
+	theme_prefix: {
 		options: {
 			map: false,
 			processors: [
@@ -54,9 +24,21 @@ module.exports = {
 		}
 	},
 
+	theme_legacy_prefix: {
+		options: {
+			map: false,
+			processors: [
+				require('autoprefixer')({browsers: ['last 20 versions', 'ie 6']})
+			]
+		},
+		files:{
+			'<%= pkg._themepath %>/css/legacy.css' : '<%= pkg._themepath %>/css/legacy-temp.css'
+		}
+	},
+
 	// minification
 
-	theme_min:{
+	theme_min: {
 		options: {
 			map: false,
 			processors: [
@@ -68,6 +50,18 @@ module.exports = {
 			'<%= pkg._themepath %>/css/dist/print.min.css'              : '<%= pkg._themepath %>/css/print.css',
 			'<%= pkg._themepath %>/css/admin/dist/editor-style.min.css' : '<%= pkg._themepath %>/css/admin/editor-style.css',
 			'<%= pkg._themepath %>/css/admin/dist/login.min.css'        : '<%= pkg._themepath %>/css/admin/login.css'
+		}
+	},
+
+	theme_legacy_min: {
+		options: {
+			map: false,
+			processors: [
+				require('cssnano')()
+			]
+		},
+		files:{
+			'<%= pkg._themepath %>/css/dist/legacy.min.css' : '<%= pkg._themepath %>/css/legacy.css'
 		}
 	}
 

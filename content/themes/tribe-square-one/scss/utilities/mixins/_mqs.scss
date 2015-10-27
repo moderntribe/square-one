@@ -18,35 +18,43 @@
 // $point - Breakpoint in pixels (ex: 768px). Options: retina, #px.
 // $width - If this is a width mq, if not, it's a height mq. Default: true. Options: true, false.
 // $min   - If this is a min-# mq, if not, it's a max-# mq. Default: true. Options: true, false.
-// $no-mq - Whether to output mq styles in @media wrapper or not. Var is set in parent stylesheets with $legacy.
 //
 // -----------------------------------------------------------------------------
 
 @mixin mq($point, $width: true, $min: true) {
-    
-    // Width
-    @if $width {
 
-        // min-width
-        @if $min {
-            @media (min-width: $point) { @content; }
-        }
-        // max-width
-        @else {
-            @media (max-width: $point) { @content; }
-        }
+    @if $point == $mq-retina {
+
+        @media #{$mq-retina} { @content; }
 
     }
-    // Height
     @else {
 
-        // min-height
-        @if $min {
-            @media (min-height: $point) { @content; }
+        // Width
+        @if $width {
+
+            // min-width
+            @if $min {
+                @media (min-width: $point) { @content; }
+            }
+                // max-width
+            @else {
+                @media (max-width: $point) { @content; }
+            }
+
         }
-        // max-height
+            // Height
         @else {
-            @media (max-height: $point) { @content; }
+
+            // min-height
+            @if $min {
+                @media (min-height: $point) { @content; }
+            }
+                // max-height
+            @else {
+                @media (max-height: $point) { @content; }
+            }
+
         }
 
     }

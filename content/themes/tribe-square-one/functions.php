@@ -58,13 +58,15 @@ endif; // tribe_theme_setup
 function visual_editor_styles() {
 
 	$css_dir    = trailingslashit( get_template_directory_uri() ) . 'css/admin/';
-    $editor_css = 'editor-style.css';
+	$editor_css = 'editor-style.css';
 
-    // Production
-    if ( ! defined( 'SCRIPT_DEBUG' ) || SCRIPT_DEBUG === false )
-        $css_dir = trailingslashit( get_template_directory_uri() ) . 'css/admin/dist/';
+	// Production
+	if ( ! defined( 'SCRIPT_DEBUG' ) || SCRIPT_DEBUG === false ) {
+		$css_dir    = trailingslashit( get_template_directory_uri() ) . 'css/admin/dist/';
+		$editor_css = 'editor-style.min.css';
+	}
 
-	add_editor_style( $css_dir . 'editor-style.css' );
+	add_editor_style( $css_dir . $editor_css );
 
 }
 

@@ -87,7 +87,10 @@ module.exports = function(grunt) {
 			'combine_mq:theme',
 			'postcss:theme_prefix',
 			'postcss:theme_min',
-			'header',
+			'header:themecss',
+			'header:printcss',
+			'header:themeeditor',
+			'header:themelogin',
 			'clean:theme',
 			'setPHPConstant'
 		]);
@@ -104,9 +107,21 @@ module.exports = function(grunt) {
 			'combine_mq:theme',
 			'postcss:theme_prefix',
 			'postcss:theme_min',
-			'header',
+			'header:themecss',
+			'header:printcss',
+			'header:themeeditor',
+			'header:themelogin',
 			'clean:theme',
 			'setPHPConstant'
+		]);
+
+	grunt.registerTask(
+		'legacy', [
+			'sass:legacy',
+			'postcss:theme_legacy_prefix',
+			'postcss:theme_legacy_min',
+			'header:legacycss',
+			'clean:legacy'
 		]);
 
 	grunt.registerTask(

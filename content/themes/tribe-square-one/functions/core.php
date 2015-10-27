@@ -28,6 +28,12 @@ add_filter( 'pre_option_gzipcompression', function() { return 1; } );
 
 add_theme_support( 'post-thumbnails' );
 
+/**
+ * Supports: enable Document Title Tag
+ */
+
+add_theme_support( 'title-tag' );
+
 
 /**
  * Support: switch core WordPress markup to output valid HTML5

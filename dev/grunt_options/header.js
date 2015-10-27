@@ -41,6 +41,15 @@ module.exports = {
 		files  : {
 			'<%= pkg._themepath %>/css/admin/dist/login.min.css' : ['<%= pkg._themepath %>/css/admin/dist/login.min.css']
 		}
+	},
+
+	legacycss: {
+		options: {
+			text: '/* Square One: Legacy Page CSS - <%= grunt.template.today("mm-dd-yyyy") %> */'
+		},
+		files  : {
+			'<%= pkg._themepath %>/css/dist/legacy.min.css' : ['<%= pkg._themepath %>/css/dist/legacy.min.css']
+		}
 	}
 
 };

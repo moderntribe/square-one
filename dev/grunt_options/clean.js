@@ -14,6 +14,10 @@ module.exports = {
 		'<%= pkg._themepath %>/css/admin/login-temp.css'
 	],
 
+	legacy: [
+		'<%= pkg._themepath %>/css/legacy-temp.css'
+	],
+
 	thememincss: [
 		'<%= pkg._themepath %>/css/dist/*.css',
 		'<%= pkg._themepath %>/css/admin/dist/*.css'
