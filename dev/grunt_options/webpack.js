@@ -1,9 +1,9 @@
 var webpackConfig = require("../webpack.config.js");
 
 module.exports = {
-	options: webpackConfig,
+	options : webpackConfig,
 	themedev: {
 		devtool: 'source-map',
-		debug: true
+		debug  : true
 	}
 };

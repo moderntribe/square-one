@@ -4,13 +4,14 @@
  * Documentation: https://npmjs.org/package/grunt-contrib-uglify
  *
  */
+
 module.exports = {
 
-	thememin: {
+	theme_min: {
 		options: {
-			banner: '/* Square One: JS Master - <%= grunt.template.today("mm-dd-yyyy") %> */\n',
+			banner   : '/* Square One: JS Master */\n',
 			sourceMap: false,
-			compress: {
+			compress : {
 				drop_console: true
 			}
 		},

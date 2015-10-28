@@ -77,51 +77,71 @@ module.exports = function(grunt) {
 
 	grunt.registerTask(
 		'default', [
-			'auto_install:main',
-			'clean:thememincss',
-			'clean:thememinjs',
-			'copy:theme',
-			'webpack:themedev',
-			'uglify:thememin',
-			'sass:theme',
-			'combine_mq:theme',
-			'postcss:theme_prefix',
-			'postcss:theme_min',
-			'header:themecss',
-			'header:printcss',
-			'header:themeeditor',
-			'header:themelogin',
-			'clean:theme',
-			'setPHPConstant'
+			'dist'
+		]);
+
+	grunt.registerTask(
+		'wp-editor', [
+			'sass:theme_wp_editor',
+			'combine_mq:theme_wp_editor',
+			'postcss:theme_wp_editor_prefix',
+			'postcss:theme_wp_editor_min',
+			'header:theme_wp_editor',
+			'clean:theme_wp_editor'
+		]);
+
+	grunt.registerTask(
+		'wp-login', [
+			'sass:theme_wp_login',
+			'combine_mq:theme_wp_login',
+			'postcss:theme_wp_login_prefix',
+			'postcss:theme_wp_login_min',
+			'header:theme_wp_login',
+			'clean:theme_wp_login'
+		]);
+
+	grunt.registerTask(
+		'legacy', [
+			'sass:theme_legacy',
+			'postcss:theme_legacy_prefix',
+			'postcss:theme_legacy_min',
+			'header:theme_legacy',
+			'clean:theme_legacy'
 		]);
 
 	grunt.registerTask(
 		'dist', [
 			'auto_install:main',
-			'clean:thememincss',
-			'clean:thememinjs',
+			'clean:theme_min_css',
+			'clean:theme_min_js',
 			'copy:theme',
 			'webpack:themedev',
-			'uglify:thememin',
+			'uglify:theme_min',
 			'sass:theme',
+			'sass:theme_wp_editor',
+			'sass:theme_wp_login',
+			'sass:theme_legacy',
 			'combine_mq:theme',
+			'combine_mq:theme_wp_editor',
+			'combine_mq:theme_wp_login',
 			'postcss:theme_prefix',
-			'postcss:theme_min',
-			'header:themecss',
-			'header:printcss',
-			'header:themeeditor',
-			'header:themelogin',
-			'clean:theme',
-			'setPHPConstant'
-		]);
-
-	grunt.registerTask(
-		'legacy', [
-			'sass:legacy',
+			'postcss:theme_wp_editor_prefix',
+			'postcss:theme_wp_login_prefix',
 			'postcss:theme_legacy_prefix',
+			'postcss:theme_min',
+			'postcss:theme_wp_editor_min',
+			'postcss:theme_wp_login_min',
 			'postcss:theme_legacy_min',
-			'header:legacycss',
-			'clean:legacy'
+			'header:theme',
+			'header:theme_print',
+			'header:theme_wp_editor',
+			'header:theme_wp_login',
+			'header:theme_legacy',
+			'clean:theme',
+			'clean:theme_wp_editor',
+			'clean:theme_wp_login',
+			'clean:theme_legacy',
+			'setPHPConstant'
 		]);
 
 	grunt.registerTask(

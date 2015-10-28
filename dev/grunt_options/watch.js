@@ -7,7 +7,7 @@
 
 module.exports = {
 
-	themecss: {
+	theme_css: {
 		files: [
 			'<%= pkg._themepath %>/scss/**/**/*.scss',
 			'<%= pkg._themepath %>/scss/**/*.scss',
@@ -16,20 +16,20 @@ module.exports = {
 		tasks: [
 			'sass:theme',
 			'combine_mq:theme',
-			'autoprefixer:theme',
+			'postcss:theme_prefix',
 			'clean:theme'
 		],
 		options: {
-			spawn: false,
+			spawn     : false,
 			livereload: true
 		}
 	},
 
-	themescripts   : {
-		files  : [
+	theme_scripts: {
+		files: [
 			'<%= pkg._themepath %>/js/src/**/*.js'
 		],
-		tasks  : [
+		tasks: [
 			'webpack:themedev'
 		],
 		options: {
@@ -38,8 +38,8 @@ module.exports = {
 		}
 	},
 
-	themetemplates : {
-		files  : [
+	theme_templates: {
+		files: [
 			'<%= pkg._themepath %>/**/*.php'
 		],
 		options: {

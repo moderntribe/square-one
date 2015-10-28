@@ -5,8 +5,8 @@
  *
  */
 
-
 module.exports = {
+
 	dev: {
 		bsFiles: {
 			src: [
@@ -36,5 +36,5 @@ module.exports = {
 			}
 		}
 	}
-};
 
+};
