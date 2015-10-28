@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 
-	<main class="loop-content" role="main">
+	<main>
 
 		<?php // Content: Sub-header
 		get_template_part( 'content/header/sub' ); ?>

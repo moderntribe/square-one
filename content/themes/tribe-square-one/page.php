@@ -1,14 +1,14 @@
 <?php get_header(); ?>
 
-	<main class="page-content" role="main">
+	<main>
 
 		<?php // Content: Sub-header
 		get_template_part( 'content/header/sub' ); ?>
 
 		<?php while ( have_posts() ) : the_post(); ?>
 
-			<?php // If we have content, output our content block (for panels and odd spacing)
-			if( get_the_content() !== '' ) { ?>
+			<?php // If we have content, output our content block (for panel pages)
+			if ( '' !== get_the_content() ) { ?>
 
 				<div class="content-wrap">
 
@@ -22,8 +22,9 @@
 		<?php endwhile; ?>
 
 		<?php // Panels
-		if( function_exists( 'have_panels' ) && have_panels() )
-		do_action( 'the_panels' ); ?>
+		if ( function_exists( 'have_panels' ) && have_panels() ) {
+			do_action( 'the_panels' );
+		} ?>
 
 	</main><!-- main -->
 

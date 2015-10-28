@@ -9,7 +9,7 @@ if ( empty( $next ) && empty( $previous ) )
 
 ?>
 
-<nav class="post-navigation" role="navigation" itemscope itemtype="https://schema.org/SiteNavigationElement">
+<nav class="post-navigation" itemscope itemtype="https://schema.org/SiteNavigationElement">
 	
 	<h3 class="accessibility">Post Pagination</h3>
 	

@@ -1,7 +1,7 @@
 <?php // Menu: Footer
 if( has_nav_menu( 'footer' ) ) { ?>
 
-	<nav role="navigation" aria-label="Secondary Navigation" itemscope itemtype="https://schema.org/SiteNavigationElement">
+	<nav aria-label="Secondary Navigation" itemscope itemtype="https://schema.org/SiteNavigationElement">
 
 		<h5 class="accessibility">Secondary Navigation</h5>
 

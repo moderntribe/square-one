@@ -1,6 +1,6 @@
 <?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) { ?>
 
-	<nav class="comment-navigation" role="navigation">
+	<nav class="comment-navigation">
 		
 		<h6 class="accessbility">Comments Navigation</h6>
 

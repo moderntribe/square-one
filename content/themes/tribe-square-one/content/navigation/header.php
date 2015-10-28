@@ -1,7 +1,7 @@
 <?php // Menu: Primary
 if( has_nav_menu( 'primary' ) ) { ?>
 
-	<nav role="navigation" aria-label="Primary Navigation" itemscope itemtype="https://schema.org/SiteNavigationElement">
+	<nav aria-label="Primary Navigation" itemscope itemtype="https://schema.org/SiteNavigationElement">
 
 		<h5 class="accessibility">Primary Navigation</h5>
 

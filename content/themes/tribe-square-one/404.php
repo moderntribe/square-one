@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 
-	<main class="page-content" role="main">
+	<main>
 
 		<?php // Content: Sub-header
 		get_template_part( 'content/header/sub' ); ?>
@@ -11,6 +11,6 @@
 
 		</div><!-- .content-wrap -->
 
-	</main><!-- main -->	
+	</main><!-- main -->
 
 <?php get_footer(); ?>

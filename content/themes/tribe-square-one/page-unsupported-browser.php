@@ -20,7 +20,7 @@
 	<link rel="shortcut icon" href="<?php echo trailingslashit( get_template_directory_uri() ); ?>img/branding/favicon.ico">
 
 </head>
-<body class="page-legacy">
+<body class="page-legacy" itemscope itemtype="https://schema.org/WebPage">
 
 <div class="site-wrap">
 
@@ -33,7 +33,7 @@
 		</div><!-- .content-wrap -->
 	</div><!-- .header -->
 
-	<div class="main" role="main" itemprop="mainContentOfPage">
+	<div class="main" itemprop="mainContentOfPage">
 		<div class="content-wrap">
 
 			<div itemprop="text">

@@ -8,7 +8,7 @@ if ( $wp_query->max_num_pages < 2 )
 
 ?>
 
-<nav class="loop-navigation" role="navigation" itemscope itemtype="https://schema.org/SiteNavigationElement">
+<nav class="loop-navigation" itemscope itemtype="https://schema.org/SiteNavigationElement">
 	
 	<h3 class="accessibility">Posts Pagination</h3>
 	

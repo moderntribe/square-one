@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en"><![endif]-->
-<!--[if gt IE 8]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<html lang="en">
 <head>
 
 	<?php // TITLE (added by theme support) ?>
@@ -21,9 +19,8 @@
 
 	<?php // PLATFORM META: IE ?>
 	<meta name="application-name" content="<?php bloginfo( 'name' ); ?>">
-	<meta name="msapplication-TileColor" content="#333">
 
-	<?php // FAVICON & ICONS (handled in tribe-core plugin) ?>
+	<?php // FAVICON & ICONS (handled in tribe-branding plugin) ?>
 
 	<?php wp_head(); ?>
 
