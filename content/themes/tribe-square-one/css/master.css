@@ -427,7 +427,7 @@ td ~ td {
   line-height: 1.25;
 }
 
-.aligncenter {
+.aligncenter,.alignnone {
   margin-left: auto;
   margin-right: auto;
 }
@@ -526,14 +526,6 @@ td ~ td {
 
 .context-content > *:last-child > img {
   margin-bottom: 0;
-}
-
-#wpadminbar {
-  position: fixed !important;
-}
-
-#wpadminbar #wp-admin-bar-user-info img.avatar {
-  max-height: none;
 }
 
 .input {

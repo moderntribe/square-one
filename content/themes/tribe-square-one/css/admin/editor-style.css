@@ -385,7 +385,7 @@ td ~ td {
   line-height: 1.25;
 }
 
-.aligncenter {
+.aligncenter,.alignnone {
   margin-left: auto;
   margin-right: auto;
 }
