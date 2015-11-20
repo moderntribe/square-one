@@ -401,6 +401,10 @@ td ~ td {
   border-left: 1px solid grey;
 }
 
+input[type="radio"],input[type="checkbox"] {
+  margin-bottom: 0;
+}
+
 .wp-image-wrap,.wp-caption {
   width: auto !important;
   max-width: none;
@@ -516,10 +520,6 @@ td ~ td {
 
 .context-content form {
   margin: 30px auto;
-}
-
-.context-content input[type="radio"],.context-content input[type="checkbox"] {
-  margin-bottom: 0;
 }
 
 .context-content > *:first-child {
@@ -644,19 +644,19 @@ select[multiple] {
   opacity: 1;
 }
 
-.context-content input:focus::-webkit-input-placeholder,.context-content textarea:focus::-webkit-input-placeholder,.context-content select:focus::-webkit-input-placeholder {
+input:focus::-webkit-input-placeholder,textarea:focus::-webkit-input-placeholder,select:focus::-webkit-input-placeholder {
   color: #1f1f1f;
 }
 
-.context-content input:focus:-moz-placeholder,.context-content textarea:focus:-moz-placeholder,.context-content select:focus:-moz-placeholder {
+input:focus:-moz-placeholder,textarea:focus:-moz-placeholder,select:focus:-moz-placeholder {
   color: #1f1f1f;
 }
 
-.context-content input:focus::-moz-placeholder,.context-content textarea:focus::-moz-placeholder,.context-content select:focus::-moz-placeholder {
+input:focus::-moz-placeholder,textarea:focus::-moz-placeholder,select:focus::-moz-placeholder {
   color: #1f1f1f;
 }
 
-.context-content input:focus:-ms-input-placeholder,.context-content textarea:focus:-ms-input-placeholder,.context-content select:focus:-ms-input-placeholder {
+input:focus:-ms-input-placeholder,textarea:focus:-ms-input-placeholder,select:focus:-ms-input-placeholder {
   color: #1f1f1f;
 }
 

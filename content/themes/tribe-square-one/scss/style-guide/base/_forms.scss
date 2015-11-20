@@ -5,10 +5,15 @@
 //
 // -------------------------------------------------------------------------
 
-form {
-	margin: $spacer auto;
+input,
+textarea,
+select {
+	@extend %field-focus;
 }
 
-label {
-	@extend %label;
+input {
+	&[type="radio"],
+	&[type="checkbox"] {
+		margin-bottom: 0;
+	}
 }

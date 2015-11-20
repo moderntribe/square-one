@@ -456,6 +456,9 @@ td {
   td ~ td {
     border-left: 1px solid grey; }
 
+input[type="radio"], input[type="checkbox"] {
+  margin-bottom: 0; }
+
 .wp-image-wrap,
 .wp-caption {
   width: auto !important;
@@ -579,9 +582,6 @@ td {
 
 .context-content form {
   margin: 30px auto; }
-
-.context-content input[type="radio"], .context-content input[type="checkbox"] {
-  margin-bottom: 0; }
 
 .context-content > *:first-child {
   margin-top: 0; }

@@ -359,6 +359,10 @@ td ~ td {
   border-left: 1px solid grey;
 }
 
+input[type="radio"],input[type="checkbox"] {
+  margin-bottom: 0;
+}
+
 .wp-image-wrap,.wp-caption {
   width: auto !important;
   max-width: none;
@@ -474,10 +478,6 @@ td ~ td {
 
 .context-content form,body form {
   margin: 30px auto;
-}
-
-.context-content input[type="radio"],.context-content input[type="checkbox"],body input[type="radio"],body input[type="checkbox"] {
-  margin-bottom: 0;
 }
 
 .context-content > *:first-child,body > *:first-child {
