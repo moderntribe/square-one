@@ -114,7 +114,6 @@ input,button,select,textarea,optgroup {
 }
 
 input,button,select,textarea {
-  outline: 0;
   box-sizing: border-box;
   margin: 0;
   border-radius: 0;
@@ -264,24 +263,23 @@ body,form,button,input,select,textarea {
   clear: both;
 }
 
-p,ul,ol,dl,table,.context-content p,.context-content ul,.context-content ol,.context-content dl {
+p,table,.context-content ul,.context-content ol,.context-content dl {
   font-size: 16px;
+}
+
+hr {
+  border-top: 1px solid grey;
 }
 
 a {
   color: inherit;
   text-decoration: none;
   background-color: transparent;
-  outline: 0;
   cursor: pointer;
 }
 
-a:visited {
+a:visited,a:hover {
   color: inherit;
-}
-
-a:hover {
-  color: #21A6CB;
 }
 
 a:active,a:focus {
@@ -290,14 +288,6 @@ a:active,a:focus {
 
 .anchor,.context-content a {
   text-decoration: underline;
-}
-
-hr {
-  border-top: 1px solid grey;
-}
-
-.h1,.context-content h1,.h2,.context-content h2,.h3,.context-content h3,.h4,.context-content h4,.h5,.context-content h5,.h6,.context-content h6 {
-  line-height: 1.25;
 }
 
 .h1,.context-content h1 {
@@ -411,14 +401,10 @@ td ~ td {
   border-left: 1px solid grey;
 }
 
-.wp-caption {
-  margin: 30px auto;
+.wp-image-wrap,.wp-caption {
   width: auto !important;
-}
-
-.wp-caption img {
-  margin-bottom: 0;
-  margin-top: 0;
+  max-width: none;
+  margin: 0 -25px;
 }
 
 .wp-caption-text {
@@ -428,8 +414,18 @@ td ~ td {
 }
 
 .aligncenter,.alignnone {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.aligncenter img,.alignnone img {
   margin-left: auto;
   margin-right: auto;
+}
+
+.alignleft,.alignright {
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
 
 .wp-embed {
@@ -458,25 +454,41 @@ td ~ td {
   margin-bottom: 30px;
 }
 
-.context-content ul,.context-content ol,.context-content dl {
-  margin-top: 30px;
-  margin-bottom: 30px;
-}
-
 .context-content hr {
   margin: 50px auto;
 }
 
-.context-content h1,.context-content .h1,.context-content h2,.context-content .h2,.context-content h3,.context-content .h3,.context-content h4,.context-content .h4,.context-content h5,.context-content .h5,.context-content h6,.context-content .h6 {
+.context-content h1,.context-content .h1 {
   margin-top: 30px;
   margin-bottom: 30px;
 }
 
-.context-content ul,.context-content ol {
-  line-height: inherit;
+.context-content h2,.context-content .h2 {
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
-.context-content ul ol,.context-content ul ul,.context-content ol ol,.context-content ol ul {
+.context-content h3,.context-content .h3 {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.context-content h4,.context-content .h4 {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.context-content h5,.context-content .h5 {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.context-content h6,.context-content .h6 {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.context-content ul,.context-content ol,.context-content dl {
   margin-top: 30px;
   margin-bottom: 30px;
 }
@@ -495,13 +507,11 @@ td ~ td {
 }
 
 .context-content img {
-  margin-top: 30px;
-  margin-bottom: 30px;
   display: block;
 }
 
 .context-content .wp-embed {
-  margin: 30px auto;
+  margin: 50px auto;
 }
 
 .context-content form {
@@ -606,7 +616,7 @@ select[multiple] {
   padding: 14px;
 }
 
-.button {
+.btn-submit {
   background-color: #21A6CB;
   border: 0;
   color: #fff;
@@ -632,11 +642,6 @@ select[multiple] {
 :-ms-input-placeholder {
   color: #000;
   opacity: 1;
-}
-
-.context-content input:focus,.context-content textarea:focus,.context-content select:focus {
-  border-color: #a6a6a6;
-  box-shadow: 0 0 0 1px #a6a6a6;
 }
 
 .context-content input:focus::-webkit-input-placeholder,.context-content textarea:focus::-webkit-input-placeholder,.context-content select:focus::-webkit-input-placeholder {
@@ -672,7 +677,7 @@ select[multiple] {
     visibility: visible;
   }
 
-  p,ul,ol,dl,table,.context-content p,.context-content ul,.context-content ol,.context-content dl {
+  p,table,.context-content ul,.context-content ol,.context-content dl {
     font-size: 18px;
   }
 
@@ -714,21 +719,25 @@ select[multiple] {
     font-size: 32px;
   }
 
+  .wp-image-wrap,.wp-caption {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   .alignleft,.alignright {
-    margin-top: 30px;
-    margin-bottom: 30px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    max-width: 30%;
   }
 
   .alignleft {
     float: left;
-    max-width: 30%;
-    margin-right: 30px;
+    margin-right: 50px;
   }
 
   .alignright {
     float: right;
-    max-width: 30%;
-    margin-left: 30px;
+    margin-left: 50px;
   }
 
   .context-content dl {
@@ -736,7 +745,7 @@ select[multiple] {
     padding-right: 3em;
   }
 
-  .button {
+  .btn-submit {
     width: auto;
   }
 }

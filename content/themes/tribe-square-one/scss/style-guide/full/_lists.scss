@@ -5,13 +5,10 @@
 //
 // -------------------------------------------------------------------------
 
-ul,
-ol {
-	line-height: inherit;
-	ol, ul {
-		margin-top: $spacer;
-		margin-bottom: $spacer;
-	}
+ul, ol, dl {
+	@extend %body-content;
+	margin-top: $spacer;
+	margin-bottom: $spacer;
 }
 
 li {

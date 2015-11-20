@@ -5,10 +5,6 @@
 //
 // -----------------------------------------------------------------------------
 
-ul, ol, dl {
-	@extend %body-content;
-}
-
 .list-bullet,
 %list-bullet {
 	list-style: disc outside;

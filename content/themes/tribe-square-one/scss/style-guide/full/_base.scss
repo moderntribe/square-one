@@ -1,18 +1,9 @@
 
 // -------------------------------------------------------------------------
-// Paragraph / List / Base Margins
+// Paragraph
 // -------------------------------------------------------------------------
 
 p {
-	@extend %body-content;
-	margin-bottom: $spacer;
-}
-
-ul,
-ol,
-dl {
-	@extend %body-content;
-	margin-top: $spacer;
 	margin-bottom: $spacer;
 }
 

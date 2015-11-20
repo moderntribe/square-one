@@ -5,14 +5,15 @@
 //
 // -----------------------------------------------------------------------------
 
-// Caption: Wrapper
+// Media Wrappers
+.wp-image-wrap,
 .wp-caption {
-	margin: $spacer auto;
 	width: auto !important;
-	// Image Resets
-	img {
-		margin-bottom: 0;
-		margin-top: 0;
+	max-width: none;
+	margin: 0 -25px;
+	@include mq($mq-medium) {
+		margin-left: auto;
+		margin-right: auto;
 	}
 }
 
@@ -26,30 +27,35 @@
 // Media Alignments
 .aligncenter,
 .alignnone {
-	margin-left: auto;
-	margin-right: auto;
+	margin-top: $spacer-lg;
+	margin-bottom: $spacer-lg;
+	img {
+		margin-left: auto;
+		margin-right: auto;
+	}
 }
 
 .alignleft,
 .alignright {
+	margin-top: $spacer-lg;
+	margin-bottom: $spacer-lg;
 	@include mq($mq-medium) {
-		margin-top: $spacer;
-		margin-bottom: $spacer;
+		margin-top: $spacer-xs;
+		margin-bottom: $spacer-xs;
+		max-width: 30%;
 	}
 }
 
 .alignleft {
 	@include mq($mq-medium) {
 		float: left;
-		max-width: 30%;
-		margin-right: $spacer;
+		margin-right: $spacer-lg;
 	}
 }
 
 .alignright {
 	@include mq($mq-medium) {
 		float: right;
-		max-width: 30%;
-		margin-left: $spacer;
+		margin-left: $spacer-lg;
 	}
 }

@@ -166,7 +166,7 @@ select {
 //input[type="button"]
 //input[type="reset"]
 //input[type="submit"]
-.button,
+.btn-submit,
 %button-submit {
 	background-color: $primary;
 	border: 0;
@@ -191,8 +191,8 @@ select {
 // Focus
 %field-focus {
 	&:focus {
-		border-color: $border-input-focus;
-		box-shadow: 0 0 0 1px $border-input-focus;
+		//border-color: $border-input-focus;
+		//box-shadow: 0 0 0 1px $border-input-focus;
 		&::-webkit-input-placeholder {
 			color: lighten($placeholder, 12%);
 		}
@@ -207,7 +207,3 @@ select {
 		}
 	}
 }
-
-
-
-

@@ -1,24 +1,33 @@
 
 // -----------------------------------------------------------------------------
 //
-// Paragraph
+// Anchors
 //
 // -----------------------------------------------------------------------------
 
-p,
-%body-content {
-	font-size: $font-size-content-s;
-    @include mq($mq-medium) {
-        font-size: $font-size-content;
-    }
+a {
+	@extend %transition;
+	color: inherit;
+	text-decoration: none;
+	background-color: transparent;
+	//outline: 0;
+	cursor: pointer;
+	&:visited,
+	&:hover {
+		color: inherit;
+	}
+	&:active,
+	&:focus {
+		//outline: 1px dotted;
+		color: inherit;
+	}
 }
 
 // -----------------------------------------------------------------------------
-//
-// HR
-//
+// Anchor: Full Styles
 // -----------------------------------------------------------------------------
 
-hr {
-	border-top: 1px solid $border;
+.anchor,
+%a {
+	text-decoration: underline;
 }

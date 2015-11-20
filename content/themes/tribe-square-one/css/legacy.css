@@ -128,7 +128,6 @@ input,
 button,
 select,
 textarea {
-  outline: 0;
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
           box-sizing: border-box;
@@ -288,54 +287,35 @@ textarea {
   text-shadow: none; }
 
 p,
-ul,
-ol,
-dl,
 table,
-.context-content p,
 .context-content ul,
 .context-content ol,
 .context-content dl {
   font-size: 16px; }
   @media (min-width: 768px) {
     p,
-    ul,
-    ol,
-    dl,
     table,
-    .context-content p,
     .context-content ul,
     .context-content ol,
     .context-content dl {
       font-size: 18px; } }
 
+hr {
+  border-top: 1px solid grey; }
+
 a {
   color: inherit;
   text-decoration: none;
   background-color: transparent;
-  outline: 0;
   cursor: pointer; }
-  a:visited {
+  a:visited, a:hover {
     color: inherit; }
-  a:hover {
-    color: #21A6CB; }
   a:active, a:focus {
     color: inherit; }
 
 .anchor,
 .context-content a {
   text-decoration: underline; }
-
-hr {
-  border-top: 1px solid grey; }
-
-.h1, .context-content h1,
-.h2, .context-content h2,
-.h3, .context-content h3,
-.h4, .context-content h4,
-.h5, .context-content h5,
-.h6, .context-content h6 {
-  line-height: 1.25; }
 
 .h1,
 .context-content h1 {
@@ -476,12 +456,16 @@ td {
   td ~ td {
     border-left: 1px solid grey; }
 
+.wp-image-wrap,
 .wp-caption {
-  margin: 30px auto;
-  width: auto !important; }
-  .wp-caption img {
-    margin-bottom: 0;
-    margin-top: 0; }
+  width: auto !important;
+  max-width: none;
+  margin: 0 -25px; }
+  @media (min-width: 768px) {
+    .wp-image-wrap,
+    .wp-caption {
+      margin-left: auto;
+      margin-right: auto; } }
 
 .wp-caption-text {
   margin: 15px 0 0;
@@ -490,26 +474,33 @@ td {
 
 .aligncenter,
 .alignnone {
-  margin-left: auto;
-  margin-right: auto; }
+  margin-top: 50px;
+  margin-bottom: 50px; }
+  .aligncenter img,
+  .alignnone img {
+    margin-left: auto;
+    margin-right: auto; }
 
-@media (min-width: 768px) {
-  .alignleft,
-  .alignright {
-    margin-top: 30px;
-    margin-bottom: 30px; } }
+.alignleft,
+.alignright {
+  margin-top: 50px;
+  margin-bottom: 50px; }
+  @media (min-width: 768px) {
+    .alignleft,
+    .alignright {
+      margin-top: 15px;
+      margin-bottom: 15px;
+      max-width: 30%; } }
 
 @media (min-width: 768px) {
   .alignleft {
     float: left;
-    max-width: 30%;
-    margin-right: 30px; } }
+    margin-right: 50px; } }
 
 @media (min-width: 768px) {
   .alignright {
     float: right;
-    max-width: 30%;
-    margin-left: 30px; } }
+    margin-left: 50px; } }
 
 .wp-embed {
   -webkit-column-break-inside: avoid;
@@ -534,32 +525,36 @@ td {
 .context-content p {
   margin-bottom: 30px; }
 
-.context-content ul,
-.context-content ol,
-.context-content dl {
-  margin-top: 30px;
-  margin-bottom: 30px; }
-
 .context-content hr {
   margin: 50px auto; }
 
-.context-content h1, .context-content .h1,
-.context-content h2, .context-content .h2,
-.context-content h3, .context-content .h3,
-.context-content h4, .context-content .h4,
-.context-content h5, .context-content .h5,
+.context-content h1, .context-content .h1 {
+  margin-top: 30px;
+  margin-bottom: 30px; }
+
+.context-content h2, .context-content .h2 {
+  margin-top: 30px;
+  margin-bottom: 30px; }
+
+.context-content h3, .context-content .h3 {
+  margin-top: 30px;
+  margin-bottom: 30px; }
+
+.context-content h4, .context-content .h4 {
+  margin-top: 30px;
+  margin-bottom: 30px; }
+
+.context-content h5, .context-content .h5 {
+  margin-top: 30px;
+  margin-bottom: 30px; }
+
 .context-content h6, .context-content .h6 {
   margin-top: 30px;
   margin-bottom: 30px; }
 
-.context-content ul,
-.context-content ol {
-  line-height: inherit; }
-  .context-content ul ol, .context-content ul ul,
-  .context-content ol ol,
-  .context-content ol ul {
-    margin-top: 30px;
-    margin-bottom: 30px; }
+.context-content ul, .context-content ol, .context-content dl {
+  margin-top: 30px;
+  margin-bottom: 30px; }
 
 .context-content li ~ li {
   margin-top: 15px; }
@@ -577,12 +572,10 @@ td {
   margin: 30px auto; }
 
 .context-content img {
-  margin-top: 30px;
-  margin-bottom: 30px;
   display: block; }
 
 .context-content .wp-embed {
-  margin: 30px auto; }
+  margin: 50px auto; }
 
 .context-content form {
   margin: 30px auto; }
