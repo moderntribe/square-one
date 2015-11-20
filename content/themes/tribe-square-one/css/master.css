@@ -405,10 +405,15 @@ input[type="radio"],input[type="checkbox"] {
   margin-bottom: 0;
 }
 
+img {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .wp-image-wrap,.wp-caption {
   width: auto !important;
   max-width: none;
-  margin: 0 -25px;
+  margin: 0 auto;
 }
 
 .wp-caption-text {
@@ -420,11 +425,6 @@ input[type="radio"],input[type="checkbox"] {
 .aligncenter,.alignnone {
   margin-top: 50px;
   margin-bottom: 50px;
-}
-
-.aligncenter img,.alignnone img {
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .alignleft,.alignright {
@@ -717,11 +717,6 @@ input:focus:-ms-input-placeholder,textarea:focus:-ms-input-placeholder,select:fo
 
   .quote,.context-content q,.blockquote p,.context-content blockquote p {
     font-size: 32px;
-  }
-
-  .wp-image-wrap,.wp-caption {
-    margin-left: auto;
-    margin-right: auto;
   }
 
   .alignleft,.alignright {
