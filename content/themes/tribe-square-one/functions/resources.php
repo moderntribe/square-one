@@ -101,18 +101,13 @@ function enqueue_styles() {
 
 	// CSS
 	$css_global = 'master.css';
-	$css_legacy = 'legacy.css';
 
 	// Production
 	if ( ! defined( 'SCRIPT_DEBUG' ) || SCRIPT_DEBUG === false ) {
 		$css_global = 'dist/master.min.css';
-		$css_legacy = 'dist/legacy.min.css';
 	}
 
 	wp_enqueue_style( 'tribe-theme-base', $css_dir . $css_global, $version, 'all' );
-	wp_enqueue_style( 'tribe-theme-legacy', $css_dir . $css_legacy, $version, 'all' );
-	global $wp_styles;
-	$wp_styles->add_data( 'tribe-theme-legacy', 'conditional', 'lte IE 8' );
 
 }
 
