@@ -101,13 +101,19 @@ function enqueue_styles() {
 
 	// CSS
 	$css_global = 'master.css';
+	$css_print  = 'print.css';
 
 	// Production
 	if ( ! defined( 'SCRIPT_DEBUG' ) || SCRIPT_DEBUG === false ) {
 		$css_global = 'dist/master.min.css';
+		$css_print  = 'dist/print.min.css';
 	}
 
-	wp_enqueue_style( 'tribe-theme-base', $css_dir . $css_global, $version, 'all' );
+	// CSS: base
+	wp_enqueue_style( 'tribe-theme-base', $css_dir . $css_global, array(), $version, 'all' );
+
+	// CSS: print
+	wp_enqueue_style( 'tribe-theme-print', $css_dir . $css_print, array(), $version, 'print' );
 
 }
 
