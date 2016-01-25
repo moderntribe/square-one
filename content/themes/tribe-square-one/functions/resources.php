@@ -142,7 +142,7 @@ function enqueue_scripts() {
 		$scripts     = 'dist/master.min.js';
 		$script_deps = array( 'jquery' );
 	} else {
-		wp_enqueue_script( 'babel-polyfill', $js_dir . 'vendor/browser-polyfill.js', array(), $version, true );
+		wp_enqueue_script( 'babel-polyfill', $js_dir . 'vendor/polyfill.js', array(), $version, true );
 	}
 
 	wp_register_script( 'jquery', $js_dir . $jquery, '', $version, false );

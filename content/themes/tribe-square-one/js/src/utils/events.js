@@ -47,10 +47,9 @@ let trigger = ( opts ) => {
 		event.initEvent( options.event, true, false );
 	}
 	else {
-		if ( window.CustomEvent ) {
+		try {
 			event = new CustomEvent( options.event, {detail: options.data} );
-		}
-		else {
+		} catch( e ) {
 			event = document.createEvent( 'CustomEvent' );
 			event.initCustomEvent( options.event, true, true, options.data );
 		}

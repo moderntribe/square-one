@@ -230,7 +230,7 @@ body {
 }
 
 body,form,button,input,select,textarea {
-  font: 400 normal 100%/1.5 "proxima-nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font: 400 normal 100% / 1.5 "proxima-nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #000;
 }
 

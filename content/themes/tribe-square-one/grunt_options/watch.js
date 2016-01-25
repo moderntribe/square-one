@@ -8,12 +8,12 @@
 module.exports = {
 
 	theme_css: {
-		files: [
-			'<%= pkg._themepath %>/scss/**/**/*.scss',
-			'<%= pkg._themepath %>/scss/**/*.scss',
-			'<%= pkg._themepath %>/scss/*.scss'
+		files  : [
+			'scss/**/**/*.scss',
+			'scss/**/*.scss',
+			'scss/*.scss'
 		],
-		tasks: [
+		tasks  : [
 			'sass:theme',
 			'combine_mq:theme',
 			'postcss:theme_prefix',
@@ -26,11 +26,11 @@ module.exports = {
 	},
 
 	theme_scripts: {
-		files: [
-			'<%= pkg._themepath %>/js/src/**/*.js'
+		files  : [
+			'js/src/**/*.js'
 		],
-		tasks: [
-			'webpack:themedev'
+		tasks  : [
+			'webpack:dev'
 		],
 		options: {
 			spawn     : false,
@@ -39,8 +39,8 @@ module.exports = {
 	},
 
 	theme_templates: {
-		files: [
-			'<%= pkg._themepath %>/**/*.php'
+		files  : [
+			'**/*.php'
 		],
 		options: {
 			spawn     : false,

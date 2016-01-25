@@ -49,6 +49,9 @@ content/wp-cache-config.php
 content/tests/
 content/logs/
 
+content/plugins/fakerpress/
+content/plugins/better-search-replace/
+
 wp-content/uploads/
 wp-content/blogs.dir/
 wp-content/upgrade/
@@ -108,4 +111,7 @@ wp-content/plugins/airplane-mode
 /nbproject/
 wp-content/plugins/sls-courses-import/Import/_cache/xml_feed.xml
 
+# Theme #
 
+/content/themes/tribe-square-one/node_modules/
+/content/themes/tribe-square-one/bower_components/

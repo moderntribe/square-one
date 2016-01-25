@@ -12,7 +12,7 @@ module.exports = {
 			text: '/* Square One: Global CSS */'
 		},
 		files  : {
-			'<%= pkg._themepath %>/css/dist/master.min.css' : ['<%= pkg._themepath %>/css/dist/master.min.css']
+			'css/dist/master.min.css' : ['css/dist/master.min.css']
 		}
 	},
 
@@ -21,7 +21,7 @@ module.exports = {
 			text: '/* Square One: Print CSS */'
 		},
 		files  : {
-			'<%= pkg._themepath %>/css/dist/print.min.css' : ['<%= pkg._themepath %>/css/dist/print.min.css']
+			'css/dist/print.min.css' : ['css/dist/print.min.css']
 		}
 	},
 
@@ -30,7 +30,7 @@ module.exports = {
 			text: '/* Square One: Visual Editor CSS */'
 		},
 		files  : {
-			'<%= pkg._themepath %>/css/admin/dist/editor-style.min.css' : ['<%= pkg._themepath %>/css/admin/dist/editor-style.min.css']
+			'css/admin/dist/editor-style.min.css' : ['css/admin/dist/editor-style.min.css']
 		}
 	},
 
@@ -39,7 +39,7 @@ module.exports = {
 			text: '/* Square One: WordPress Login CSS */'
 		},
 		files  : {
-			'<%= pkg._themepath %>/css/admin/dist/login.min.css' : ['<%= pkg._themepath %>/css/admin/dist/login.min.css']
+			'css/admin/dist/login.min.css' : ['css/admin/dist/login.min.css']
 		}
 	},
 
@@ -48,7 +48,7 @@ module.exports = {
 			text: '/* Square One: Legacy Page CSS */'
 		},
 		files  : {
-			'<%= pkg._themepath %>/css/dist/legacy.min.css' : ['<%= pkg._themepath %>/css/dist/legacy.min.css']
+			'css/dist/legacy.min.css' : ['css/dist/legacy.min.css']
 		}
 	}
 

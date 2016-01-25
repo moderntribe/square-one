@@ -15,10 +15,11 @@ module.exports = {
 				drop_console: true
 			}
 		},
-		files: {
-			'<%= pkg._themepath %>/js/dist/master.min.js' : [
-				'<%= pkg._themepath %>/js/vendor/browser-polyfill.js',
-				'<%= pkg._themepath %>/js/dist/scripts.js'
+		files  : {
+			'js/dist/master.min.js' : [
+				'js/vendor/polyfill.js',
+				'js/vendor/globals.js',
+				'js/vendor/scripts.js'
 			]
 		}
 	}

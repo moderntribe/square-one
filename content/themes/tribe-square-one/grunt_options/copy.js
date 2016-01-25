@@ -14,13 +14,14 @@ module.exports = {
 				expand : true,
 				flatten: true,
 				src    : [
-					'<%= pkg._npmpath %>/babel-core/browser-polyfill.js',
+					'<%= pkg._npmpath %>/babel-polyfill/dist/polyfill.js',
 					'<%= pkg._npmpath %>/jquery/dist/jquery.js',
 					'<%= pkg._npmpath %>/jquery/dist/jquery.min.js',
 					'<%= pkg._npmpath %>/jquery/dist/jquery.min.map',
+					'<%= pkg._componentpath %>/js/globals.js',
 					'<%= pkg._npmpath %>/tota11y/build/tota11y.min.js'
 				],
-				dest   : '<%= pkg._themepath %>/js/vendor/'
+				dest   : 'js/vendor/'
 			}
 		]
 	}

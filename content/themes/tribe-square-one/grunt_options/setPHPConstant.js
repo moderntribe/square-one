@@ -10,7 +10,7 @@ module.exports = {
 	config: {
 		constant: 'BUILD_THEME_ASSETS_TIMESTAMP',
 		value   : '<%= grunt.template.today("h.MM.mm.dd.yyyy") %>',
-		file    : 'build-process.php'
+		file    : '<%= pkg._rootpath %>/build-process.php'
 	}
 
 };

@@ -26,7 +26,7 @@ module.exports = function(grunt) {
 	 *
 	 */
 
-	var dev = grunt.file.exists('local-config.json') ? grunt.file.readJSON('local-config.json') : {"proxy": "square.dev"};
+	var dev = grunt.file.exists('local-config.json') ? grunt.file.readJSON('local-config.json') : {"proxy": "tribe.dev"};
 
 	var config = {
 		pkg: grunt.file.readJSON('package.json'),
@@ -60,13 +60,6 @@ module.exports = function(grunt) {
 
 	require('load-grunt-tasks')(grunt);
 
-	/**
-	 *
-	 * Now we need to set grunt base to parent directory since we wrapped up our tools in the dev folder.
-	 *
-	 */
-
-	grunt.file.setBase('../');
 
 	/**
 	 *
@@ -115,7 +108,7 @@ module.exports = function(grunt) {
 			'clean:theme_min_css',
 			'clean:theme_min_js',
 			'copy:theme',
-			'webpack:themedev',
+			'webpack:prod',
 			'uglify:theme_min',
 			'sass:theme',
 			'sass:theme_wp_editor',
@@ -146,6 +139,7 @@ module.exports = function(grunt) {
 
 	grunt.registerTask(
 		'dev', [
+			'auto_install:main',
 			'browserSync',
 			'watch'
 		]);

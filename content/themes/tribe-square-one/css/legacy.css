@@ -253,8 +253,7 @@ embed {
 
 a {
   -webkit-transition: all 0.15s ease-in-out;
-       -o-transition: all 0.15s ease-in-out;
-          transition: all 0.15s ease-in-out; }
+  transition: all 0.15s ease-in-out; }
 
 .clearfix:after {
   content: "";
@@ -273,7 +272,7 @@ button,
 input,
 select,
 textarea {
-  font: 400 normal 100%/1.5 "proxima-nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font: 400 normal 100% / 1.5 "proxima-nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #000; }
 
 ::-moz-selection {

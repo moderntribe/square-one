@@ -13,12 +13,12 @@ module.exports = {
 		options: {
 			map       : false,
 			processors: [
-				require('autoprefixer')({browsers: ['last 3 versions', 'ie 9']})
+				require('autoprefixer')({browsers: ['last 3 versions', 'ie 10']})
 			]
 		},
 		files  : {
-			'<%= pkg._themepath %>/css/master.css' : '<%= pkg._themepath %>/css/master-temp.css',
-			'<%= pkg._themepath %>/css/print.css'  : '<%= pkg._themepath %>/css/print-temp.css'
+			'css/master.css' : 'css/master-temp.css',
+			'css/print.css'  : 'css/print-temp.css'
 		}
 	},
 
@@ -26,11 +26,11 @@ module.exports = {
 		options: {
 			map: false,
 			processors: [
-				require('autoprefixer')({browsers: ['last 3 versions', 'ie 9']})
+				require('autoprefixer')({browsers: ['last 3 versions', 'ie 10']})
 			]
 		},
 		files  : {
-			'<%= pkg._themepath %>/css/admin/editor-style.css' : '<%= pkg._themepath %>/css/admin/editor-style-temp.css'
+			'css/admin/editor-style.css' : 'css/admin/editor-style-temp.css'
 		}
 	},
 
@@ -38,11 +38,11 @@ module.exports = {
 		options: {
 			map       : false,
 			processors: [
-				require('autoprefixer')({browsers: ['last 3 versions', 'ie 9']})
+				require('autoprefixer')({browsers: ['last 3 versions', 'ie 10']})
 			]
 		},
 		files  : {
-			'<%= pkg._themepath %>/css/admin/login.css' : '<%= pkg._themepath %>/css/admin/login-temp.css'
+			'css/admin/login.css' : 'css/admin/login-temp.css'
 		}
 	},
 
@@ -54,7 +54,7 @@ module.exports = {
 			]
 		},
 		files  : {
-			'<%= pkg._themepath %>/css/legacy.css' : '<%= pkg._themepath %>/css/legacy-temp.css'
+			'css/legacy.css' : 'css/legacy-temp.css'
 		}
 	},
 
@@ -68,8 +68,8 @@ module.exports = {
 			]
 		},
 		files  : {
-			'<%= pkg._themepath %>/css/dist/master.min.css' : '<%= pkg._themepath %>/css/master.css',
-			'<%= pkg._themepath %>/css/dist/print.min.css'  : '<%= pkg._themepath %>/css/print.css'
+			'css/dist/master.min.css' : 'css/master.css',
+			'css/dist/print.min.css'  : 'css/print.css'
 		}
 	},
 
@@ -81,7 +81,7 @@ module.exports = {
 			]
 		},
 		files  : {
-			'<%= pkg._themepath %>/css/admin/dist/editor-style.min.css' : '<%= pkg._themepath %>/css/admin/editor-style.css'
+			'css/admin/dist/editor-style.min.css' : 'css/admin/editor-style.css'
 		}
 	},
 
@@ -93,7 +93,7 @@ module.exports = {
 			]
 		},
 		files  : {
-			'<%= pkg._themepath %>/css/admin/dist/login.min.css' : '<%= pkg._themepath %>/css/admin/login.css'
+			'css/admin/dist/login.min.css' : 'css/admin/login.css'
 		}
 	},
 
@@ -105,7 +105,7 @@ module.exports = {
 			]
 		},
 		files  : {
-			'<%= pkg._themepath %>/css/dist/legacy.min.css' : '<%= pkg._themepath %>/css/legacy.css'
+			'css/dist/legacy.min.css' : 'css/legacy.css'
 		}
 	}
 

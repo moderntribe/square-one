@@ -14,8 +14,8 @@ module.exports = {
 			sourceMap  : false
 		},
 		files  : {
-			'<%= pkg._themepath %>/css/master-temp.css' : '<%= pkg._themepath %>/scss/master.scss',
-			'<%= pkg._themepath %>/css/print-temp.css'  : '<%= pkg._themepath %>/scss/print.scss'
+			'css/master-temp.css' : 'scss/master.scss',
+			'css/print-temp.css'  : 'scss/print.scss'
 		}
 	},
 
@@ -25,7 +25,7 @@ module.exports = {
 			sourceMap  : false
 		},
 		files  : {
-			'<%= pkg._themepath %>/css/admin/editor-style-temp.css' : '<%= pkg._themepath %>/scss/admin/editor-style.scss'
+			'css/admin/editor-style-temp.css' : 'scss/admin/editor-style.scss'
 		}
 	},
 
@@ -35,7 +35,7 @@ module.exports = {
 			sourceMap  : false
 		},
 		files  : {
-			'<%= pkg._themepath %>/css/admin/login-temp.css' : '<%= pkg._themepath %>/scss/admin/login.scss'
+			'css/admin/login-temp.css' : 'scss/admin/login.scss'
 		}
 	},
 
@@ -45,7 +45,7 @@ module.exports = {
 			sourceMap  : false
 		},
 		files  : {
-			'<%= pkg._themepath %>/css/legacy-temp.css' : '<%= pkg._themepath %>/scss/legacy.scss'
+			'css/legacy-temp.css' : 'scss/legacy.scss'
 		}
 	}
 

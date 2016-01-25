@@ -10,7 +10,7 @@ module.exports = {
 
 	main: {
 		options: {
-			cwd: 'dev'
+
 		}
 	}
 
