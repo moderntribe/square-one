@@ -20,4 +20,3 @@ function the_logo() {
 	);
 
 }
-

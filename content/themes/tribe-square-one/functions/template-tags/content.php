@@ -147,4 +147,3 @@ function get_featured_image(
 	);
 
 }
-

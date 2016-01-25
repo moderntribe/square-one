@@ -28,4 +28,3 @@ function the_panel_title( $title = null, $classes = null ) {
 	echo $panel_title;
 
 }
-

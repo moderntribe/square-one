@@ -177,16 +177,6 @@ iframe,video,embed {
   max-height: 100%;
 }
 
-.show-tablet-up {
-  display: none;
-  visibility: hidden;
-}
-
-.show-desktop-up {
-  display: none;
-  visibility: hidden;
-}
-
 .accessibility,.screen-reader-text {
   border: 0;
   clip: rect(0 0 0 0);
@@ -211,7 +201,7 @@ iframe,video,embed {
   height: auto;
 }
 
-a {
+a,.btn,a.btn {
   transition: all 0.15s ease-in-out;
 }
 
@@ -219,9 +209,32 @@ a {
   content: "";
   display: table;
   clear: both;
+}/*
+@font-face {
+	font-family: 'project-icons';
+	src: url('/content/themes/tribe-square-one/fonts/icons/wswd.eot?qnu61t');
+	src: url('/content/themes/tribe-square-one/fonts/icons/wswd.eot?qnu61t#iefix') format('embedded-opentype'),
+	url('/content/themes/tribe-square-one/fonts/icons/wswd.ttf?qnu61t') format('truetype'),
+	url('/content/themes/tribe-square-one/fonts/icons/wswd.woff?qnu61t') format('woff'),
+	url('/content/themes/tribe-square-one/fonts/icons/wswd.svg?qnu61t#wswd') format('svg');
+	font-weight: normal;
+	font-style: normal;
 }
 
-html {
+.icon,
+%icon {
+	font-family: 'project-icons';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-rendering: auto;
+}
+*/html {
   background: #fff;
 }
 
@@ -275,6 +288,7 @@ a {
   color: inherit;
   text-decoration: none;
   background-color: transparent;
+  outline: 0;
   cursor: pointer;
 }
 
@@ -283,6 +297,7 @@ a:visited,a:hover {
 }
 
 a:active,a:focus {
+  outline: 1px dotted;
   color: inherit;
 }
 
@@ -290,27 +305,27 @@ a:active,a:focus {
   text-decoration: underline;
 }
 
-.h1,.context-content h1 {
+.h1,.context-content h1,.context-content .h1 {
+  font-size: 36px;
+}
+
+.h2,.context-content h2,.context-content .h2 {
   font-size: 32px;
 }
 
-.h2,.context-content h2 {
+.h3,.context-content h3,.context-content .h3 {
   font-size: 28px;
 }
 
-.h3,.context-content h3 {
-  font-size: 24px;
+.h4,.context-content h4,.context-content .h4 {
+  font-size: 22px;
 }
 
-.h4,.context-content h4 {
-  font-size: 21px;
-}
-
-.h5,.context-content h5 {
+.h5,.context-content h5,.context-content .h5 {
   font-size: 20px;
 }
 
-.h6,.context-content h6 {
+.h6,.context-content h6,.context-content .h6 {
   font-size: 18px;
 }
 
@@ -341,7 +356,7 @@ a:active,a:focus {
 }
 
 .quote,.context-content q,.blockquote p,.context-content blockquote p {
-  font-size: 21px;
+  font-size: 32px;
   font-style: italic;
 }
 
@@ -522,6 +537,11 @@ img {
   margin: 30px auto;
 }
 
+.context-content .btn {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
 .context-content > *:first-child {
   margin-top: 0;
 }
@@ -536,6 +556,33 @@ img {
 
 .context-content > *:last-child > img {
   margin-bottom: 0;
+}
+
+.btn,a.btn {
+  width: auto;
+  display: inline-block;
+  line-height: 1;
+  font-weight: 700;
+  height: auto;
+  cursor: pointer;
+  text-decoration: none;
+  border: 0;
+  padding: 0;
+}
+
+.btn,a.btn {
+  background-color: #000;
+  text-align: center;
+  color: #fff;
+}
+
+.btn:visited,a.btn:visited {
+  color: #fff;
+}
+
+.btn:hover,.btn:focus,.btn:active,a.btn:hover,a.btn:focus,a.btn:active {
+  color: #fff;
+  background-color: #5a5a5a;
 }
 
 .input {
@@ -644,6 +691,11 @@ select[multiple] {
   opacity: 1;
 }
 
+input:focus,textarea:focus,select:focus {
+  border-color: #a6a6a6;
+  box-shadow: 0 0 0 1px #a6a6a6;
+}
+
 input:focus::-webkit-input-placeholder,textarea:focus::-webkit-input-placeholder,select:focus::-webkit-input-placeholder {
   color: #1f1f1f;
 }
@@ -667,41 +719,7 @@ input:focus:-ms-input-placeholder,textarea:focus:-ms-input-placeholder,select:fo
 }
 
 @media (min-width: 768px) {
-  .show-mobile-only {
-    display: none;
-    visibility: hidden;
-  }
-
-  .show-tablet-up {
-    display: block;
-    visibility: visible;
-  }
-
   p,table,.context-content ul,.context-content ol,.context-content dl {
-    font-size: 18px;
-  }
-
-  .h1,.context-content h1 {
-    font-size: 36px;
-  }
-
-  .h2,.context-content h2 {
-    font-size: 32px;
-  }
-
-  .h3,.context-content h3 {
-    font-size: 28px;
-  }
-
-  .h4,.context-content h4 {
-    font-size: 22px;
-  }
-
-  .h5,.context-content h5 {
-    font-size: 20px;
-  }
-
-  .h6,.context-content h6 {
     font-size: 18px;
   }
 
@@ -713,10 +731,6 @@ input:focus:-ms-input-placeholder,textarea:focus:-ms-input-placeholder,select:fo
   .list-number,.context-content ol,.context-content .list-number {
     padding-left: 3em;
     padding-right: 3em;
-  }
-
-  .quote,.context-content q,.blockquote p,.context-content blockquote p {
-    font-size: 32px;
   }
 
   .alignleft,.alignright {
@@ -742,12 +756,5 @@ input:focus:-ms-input-placeholder,textarea:focus:-ms-input-placeholder,select:fo
 
   .btn-submit {
     width: auto;
-  }
-}
-
-@media (min-width: 960px) {
-  .show-desktop-up {
-    display: block;
-    visibility: visible;
   }
 }

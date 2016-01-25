@@ -20,4 +20,3 @@ function customize_embed_oembed_html( $html, $url, $attr, $post_id ) {
 	return '<div class="wp-embed"><div class="wp-embed-wrap">' . $html . '</div></div>';
 
 }
-

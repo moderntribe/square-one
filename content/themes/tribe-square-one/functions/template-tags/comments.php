@@ -86,4 +86,3 @@ if ( ! function_exists( 'tribe_comment' ) ) :
 	}
 
 endif;
-

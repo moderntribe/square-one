@@ -202,32 +202,6 @@ embed {
   max-width: 100%;
   max-height: 100%; }
 
-@media (min-width: 768px) {
-  
-  .show-mobile-only {
-    display: none;
-    visibility: hidden; } }
-
-
-.show-tablet-up {
-  display: none;
-  visibility: hidden; }
-  @media (min-width: 768px) {
-    
-    .show-tablet-up {
-      display: block;
-      visibility: visible; } }
-
-
-.show-desktop-up {
-  display: none;
-  visibility: hidden; }
-  @media (min-width: 960px) {
-    
-    .show-desktop-up {
-      display: block;
-      visibility: visible; } }
-
 
 .accessibility,
 .screen-reader-text {
@@ -306,10 +280,12 @@ a {
   color: inherit;
   text-decoration: none;
   background-color: transparent;
+  outline: 0;
   cursor: pointer; }
   a:visited, a:hover {
     color: inherit; }
   a:active, a:focus {
+    outline: 1px dotted;
     color: inherit; }
 
 .anchor,
@@ -317,52 +293,34 @@ a {
   text-decoration: underline; }
 
 .h1,
-.context-content h1 {
-  font-size: 32px; }
-  @media (min-width: 768px) {
-    .h1,
-    .context-content h1 {
-      font-size: 36px; } }
+.context-content h1,
+.context-content .h1 {
+  font-size: 36px; }
 
 .h2,
-.context-content h2 {
-  font-size: 28px; }
-  @media (min-width: 768px) {
-    .h2,
-    .context-content h2 {
-      font-size: 32px; } }
+.context-content h2,
+.context-content .h2 {
+  font-size: 32px; }
 
 .h3,
-.context-content h3 {
-  font-size: 24px; }
-  @media (min-width: 768px) {
-    .h3,
-    .context-content h3 {
-      font-size: 28px; } }
+.context-content h3,
+.context-content .h3 {
+  font-size: 28px; }
 
 .h4,
-.context-content h4 {
-  font-size: 21px; }
-  @media (min-width: 768px) {
-    .h4,
-    .context-content h4 {
-      font-size: 22px; } }
+.context-content h4,
+.context-content .h4 {
+  font-size: 22px; }
 
 .h5,
-.context-content h5 {
+.context-content h5,
+.context-content .h5 {
   font-size: 20px; }
-  @media (min-width: 768px) {
-    .h5,
-    .context-content h5 {
-      font-size: 20px; } }
 
 .h6,
-.context-content h6 {
+.context-content h6,
+.context-content .h6 {
   font-size: 18px; }
-  @media (min-width: 768px) {
-    .h6,
-    .context-content h6 {
-      font-size: 18px; } }
 
 .list-bullet,
 .context-content ul,
@@ -402,11 +360,8 @@ a {
   padding: 30px; }
 
 .quote, .context-content q, .blockquote p, .context-content blockquote p {
-  font-size: 21px;
+  font-size: 32px;
   font-style: italic; }
-  @media (min-width: 768px) {
-    .quote, .context-content q, .blockquote p, .context-content blockquote p {
-      font-size: 32px; } }
 
 .quote,
 .context-content q {
@@ -576,6 +531,10 @@ img {
 
 .context-content form {
   margin: 30px auto; }
+
+.context-content .btn {
+  margin-top: 15px;
+  margin-bottom: 15px; }
 
 .context-content > *:first-child {
   margin-top: 0; }

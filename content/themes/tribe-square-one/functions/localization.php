@@ -31,4 +31,3 @@ function tribe_js_i18n() {
     return $js_i18n_array;
 
 }
-

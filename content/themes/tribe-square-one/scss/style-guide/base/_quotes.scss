@@ -12,11 +12,8 @@
 }
 
 %quote-text {
-	font-size: $font-size-quote-s;
+	font-size: 32px;
 	font-style: italic;
-	@include mq($mq-medium) {
-		font-size: $font-size-quote;
-	}
 }
 
 //q,

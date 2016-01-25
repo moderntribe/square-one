@@ -5,8 +5,7 @@
 //
 // -----------------------------------------------------------------------------
 
-%show-mobile-only,
-.show-mobile-only {
+%show-mobile-only {
 	// MQ: Tablet
 	@include mq($mq-medium) {
 		display: none;
@@ -25,8 +24,7 @@
 //
 // -----------------------------------------------------------------------------
 
-%show-tablet-up,
-.show-tablet-up {
+%show-tablet-up {
 	display: none;
 	visibility: hidden;
 	// MQ: Tablet
@@ -47,8 +45,7 @@
 //
 // -----------------------------------------------------------------------------
 
-%show-desktop-up,
-.show-desktop-up {
+%show-desktop-up {
 	display: none;
 	visibility: hidden;
 	// MQ: Desktop

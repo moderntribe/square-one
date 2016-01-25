@@ -41,4 +41,3 @@ function body_classes( $classes ) {
     return $classes;
 
 }
-

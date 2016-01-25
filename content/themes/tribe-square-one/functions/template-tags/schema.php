@@ -220,4 +220,3 @@ function the_posts_schema_as_json_ld() {
 	</script>
 
 <?php }
-

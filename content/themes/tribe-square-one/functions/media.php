@@ -65,4 +65,3 @@ function image_wrap_regex_callback( $matches ) {
 	return str_replace( $the_img, $updated_image, $full_match );
 
 }
-

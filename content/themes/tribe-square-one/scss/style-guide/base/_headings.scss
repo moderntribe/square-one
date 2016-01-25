@@ -7,48 +7,30 @@
 
 .h1,
 %h1 {
-    font-size: $font-size-h1-s;
-    @include mq($mq-medium) {
-        font-size: $font-size-h1; 
-    }
+    font-size: 36px;
 }
 
 .h2,
 %h2 {
-    font-size: $font-size-h2-s;
-    @include mq($mq-medium) {
-        font-size: $font-size-h2; 
-    }
+    font-size: 32px;
 }
 
 .h3,
 %h3 {
-    font-size: $font-size-h3-s;
-    @include mq($mq-medium) {
-        font-size: $font-size-h3; 
-    }
+    font-size: 28px;
 }
 
 .h4,
 %h4 {
-    font-size: $font-size-h4-s;
-    @include mq($mq-medium) {
-        font-size: $font-size-h4; 
-    }
+    font-size: 22px;
 }
 
 .h5,
 %h5 {
-    font-size: $font-size-h5;
-    @include mq($mq-medium) {
-        font-size: $font-size-h5; 
-    }
+    font-size: 20px;
 }
 
 .h6,
 %h6 {
-    font-size: $font-size-h6;
-    @include mq($mq-medium) {
-        font-size: $font-size-h6; 
-    }
+    font-size: 18px;
 }
