@@ -1,0 +1,66 @@
+actor: Tester
+paths:
+    tests: tests
+    log: tests/_output
+    data: tests/_data
+    helpers: tests/_support
+settings:
+    bootstrap: _bootstrap.php
+    colors: true
+    memory_limit: 1024M
+modules:
+    config:
+        Db:
+            dsn: 'mysql:host=127.0.0.1;dbname=tribe-tests'
+            user: root
+            password: root
+            dump: tests/_data/dump.sql
+        WPBrowser:
+            url: 'http://project.tribe'
+            adminUsername: admin
+            adminPassword: password
+            adminUrl: /wp-admin
+        WPDb:
+            dsn: 'mysql:host=127.0.0.1;dbname=tribe-tests'
+            user: root
+            password: root
+            dump: tests/_data/dump.sql
+            populate: true
+            cleanup: true
+            url: 'http://project.tribe'
+            tablePrefix: tribe_
+            checkExistence: true
+            update: true
+        WPLoader:
+            wpRootFolder: /var/www/wp
+            dbName: tribe-tests
+            dbHost: 127.0.0.1
+            dbUser: root
+            dbPassword: root
+            wpDebug: true
+            dbCharset: utf8
+            dbCollate: ''
+            tablePrefix: tribe_
+            domain: project.tribe
+            adminEmail: admin@project.tribe
+            title: 'WP Tests'
+            phpBinary: php
+            language: ''
+            configFile: tests-config.php
+            plugins:
+                - extended-cpts/extended-cpts.php
+                - extended-taxos/extended-taxos.php
+                - core/core.php
+            activatePlugins:
+                - extended-cpts/extended-cpts.php
+                - extended-taxos/extended-taxos.php
+                - core/core.php
+        WPWebDriver:
+            url: 'http://project.tribe'
+            browser: phantomjs
+            port: 4444
+            restart: true
+            wait: 2
+            adminUsername: admin
+            adminPassword: password
+            adminUrl: /wp-admin
