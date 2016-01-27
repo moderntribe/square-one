@@ -1,0 +1,3 @@
+[submodule "wp-content/plugins/core/vendor/moderntribe/tribe-libs"]
+	path = wp-content/plugins/core/vendor/moderntribe/tribe-libs
+	url = git@github.com:moderntribe/tribe-libs.git
