@@ -19,7 +19,8 @@ add_action( 'wp_enqueue_scripts', 'enqueue_scripts' );
 add_action( 'wp_head', 'old_browsers', 0, 0 );
 
 // Site Fonts
-add_action( 'wp_head', 'tribe_fonts' );
+add_action( 'wp_head', 'tribe_fonts', 0, 0 );
+add_action( 'login_head', 'tribe_fonts', 0, 0 );
 
 // Remove WP Emoji Scripts
 remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
@@ -145,7 +146,7 @@ function enqueue_scripts() {
 		wp_enqueue_script( 'babel-polyfill', $js_dir . 'vendor/polyfill.js', array(), $version, true );
 	}
 
-	wp_register_script( 'jquery', $js_dir . $jquery, '', $version, false );
+	wp_register_script( 'jquery', $js_dir . $jquery, array(), $version, false );
 
 	wp_enqueue_script( 'tribe-theme-scripts', $js_dir . $scripts, $script_deps, $version, true );
 
@@ -156,7 +157,7 @@ function enqueue_scripts() {
 
 	// Accessibility Testing
 	if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG === true ) {
-		wp_enqueue_script( 'tribe-theme-totally', $js_dir . 'vendor/tota11y.min.js', 'tribe-theme-scripts', $version, true );
+		wp_enqueue_script( 'tribe-theme-totally', $js_dir . 'vendor/tota11y.min.js', array( 'tribe-theme-scripts' ), $version, true );
 	}
 
 	// JS: Comments
