@@ -1,0 +1,445 @@
+# Limit Login Attempts German Translation
+# Copyright (C) 2009 Johan Eenfeldt
+# This file is distributed under the same license as the Wordpress package.
+# Johan Eenfeldt <johan.eenfeldt@kostdoktorn.se>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: limit-login-attempts 1.3\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/limit-login-attempts\n"
+"POT-Creation-Date: 2009-10-10 12:42+0000\n"
+"PO-Revision-Date: 2009-10-10 20:49+0200\n"
+"Last-Translator: Hristo Chakarov <ickata@ickata.net>\n"
+"Language-Team: iNetStudio <mail@ickata.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Bulgarian\n"
+"X-Poedit-Country: BULGARIA\n"
+"X-Poedit-KeywordsList: __;_e;_ngettext:1,2\n"
+
+#: limit-login-attempts.php:114
+msgid "Subscriber"
+msgstr "Потребител"
+
+#: limit-login-attempts.php:115
+msgid "Contributor"
+msgstr "Сътрудник"
+
+#: limit-login-attempts.php:116
+msgid "Author"
+msgstr "Автор"
+
+#: limit-login-attempts.php:117
+msgid "Editor"
+msgstr "Редактор"
+
+#: limit-login-attempts.php:118
+msgid "Administrator"
+msgstr "Администратор"
+
+#: limit-login-attempts.php:562
+#, fuzzy
+msgid "<strong>ERROR</strong>: Invalid username or e-mail."
+msgstr "<strong>ГРЕШКА</strong>: Грешно потребителско име или парола."
+
+#: limit-login-attempts.php:594
+#, php-format
+msgid "%d hour"
+msgid_plural "%d hours"
+msgstr[0] "%d час"
+msgstr[1] "%d часа"
+
+#: limit-login-attempts.php:600
+#, php-format
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] "%d минута"
+msgstr[1] "%d минути"
+
+#: limit-login-attempts.php:603
+#, php-format
+msgid "[%s] Too many failed login attempts"
+msgstr "[%s] Твърде много грешни опити за вход"
+
+#: limit-login-attempts.php:605
+#, php-format
+msgid "%d failed login attempts (%d lockout(s)) from IP: %s"
+msgstr "%d грешни опити за вход (%d заключвания) от IP: %s"
+
+#: limit-login-attempts.php:609
+#, php-format
+msgid "Last user attempted: %s"
+msgstr "Последно потребителя е опитал: %s"
+
+#: limit-login-attempts.php:612
+#, php-format
+msgid "IP was blocked for %s"
+msgstr "IP е блокирано за %s."
+
+#: limit-login-attempts.php:664
+#, fuzzy
+msgid "<strong>ERROR</strong>: Too many new user registrations."
+msgstr "<strong>ГРЕШКА</strong>: Твърде много грешни опита за вход."
+
+#: limit-login-attempts.php:685
+msgid "<strong>ERROR</strong>: Too many failed login attempts."
+msgstr "<strong>ГРЕШКА</strong>: Твърде много грешни опита за вход."
+
+#: limit-login-attempts.php:690
+msgid "Please try again later."
+msgstr "Моля, опитайте отново по-късно."
+
+#: limit-login-attempts.php:697
+#, php-format
+msgid "Please try again in %d hour."
+msgid_plural "Please try again in %d hours."
+msgstr[0] "Моля, опитайте пак след %d час."
+msgstr[1] "Моля, опитайте пак след %d часа."
+
+#: limit-login-attempts.php:699
+#, php-format
+msgid "Please try again in %d minute."
+msgid_plural "Please try again in %d minutes."
+msgstr[0] "Моля, опитайте пак след %d минута."
+msgstr[1] "Моля, опитайте пак след %d минути."
+
+#: limit-login-attempts.php:723
+#, php-format
+msgid "<strong>%d</strong> attempt remaining."
+msgid_plural "<strong>%d</strong> attempts remaining."
+msgstr[0] "Имате право на <strong>само %d</strong> опит!"
+msgstr[1] "Имате право на още <strong>%d</strong> опита."
+
+#: limit-login-attempts.php:801
+msgid "<strong>ERROR</strong>: Incorrect username or password."
+msgstr "<strong>ГРЕШКА</strong>: Грешно потребителско име или парола."
+
+#: limit-login-attempts.php:1018
+msgid "IP|Internet address"
+msgstr "IP"
+
+#: limit-login-attempts.php:1018
+msgid "Tried to log in as"
+msgstr "Опитва да влезе като"
+
+#: limit-login-attempts.php:1023
+#, php-format
+msgid "%d lockout"
+msgid_plural "%d lockouts"
+msgstr[0] "%d заключване"
+msgstr[1] "%d заключвания"
+
+#: limit-login-attempts.php:1084
+msgid "Account named admin should not have privileges"
+msgstr "Акаунтът \"admin\" не бива да има привилегии"
+
+#: limit-login-attempts.php:1086
+msgid "Make display name different from login name"
+msgstr "Направи името, което се показва в блога, различно от потребителското име за вход"
+
+#: limit-login-attempts.php:1088
+msgid "Make url name different from login name"
+msgstr "Направи url името различно от потребителското име за вход"
+
+#: limit-login-attempts.php:1090
+msgid "Make nickname different from login name"
+msgstr "Направи псевдонима различен от потребителското име за вход"
+
+#: limit-login-attempts.php:1103
+msgid "Privileged usernames, display names, url names and nicknames are ok"
+msgstr "Потребителите с привилегии, техните потребителски имена, имената, които се показват, url имената и псевдонимите са ОК."
+
+#: limit-login-attempts.php:1108
+#, fuzzy
+msgid "User Login"
+msgstr "Изчисти лог"
+
+#: limit-login-attempts.php:1110
+msgid "Role"
+msgstr "Роля"
+
+#: limit-login-attempts.php:1112
+msgid "Display Name"
+msgstr "Име, което се показва"
+
+#: limit-login-attempts.php:1114
+msgid "URL Name <small>(\"nicename\")</small>"
+msgstr "URL име <small>(\"nicename\")</small>"
+
+#: limit-login-attempts.php:1116
+#, fuzzy
+msgid "What is this?"
+msgstr "Статистики"
+
+#: limit-login-attempts.php:1118
+msgid "Nickname"
+msgstr "Псевдоним"
+
+#: limit-login-attempts.php:1170
+#, fuzzy
+msgid "URL names changed"
+msgstr "Настройките са запазени"
+
+#: limit-login-attempts.php:1175
+#, fuzzy
+msgid "No names changed"
+msgstr "Настройките са запазени"
+
+#: limit-login-attempts.php:1189
+msgid "bad name"
+msgstr "лошо име"
+
+#: limit-login-attempts.php:1299
+msgid "Cleared IP log"
+msgstr "IP логът беше зачистен"
+
+#: limit-login-attempts.php:1307
+msgid "Reset lockout count"
+msgstr "Нулирай броя заключвания"
+
+#: limit-login-attempts.php:1315
+msgid "Cleared current lockouts"
+msgstr "Заключванията са изчистени"
+
+#: limit-login-attempts.php:1323
+#, fuzzy
+msgid "Reset registration lockout count"
+msgstr "Нулирай броя заключвания"
+
+#: limit-login-attempts.php:1332
+#, fuzzy
+msgid "Cleared current registration lockouts"
+msgstr "Заключванията са изчистени"
+
+#: limit-login-attempts.php:1342
+msgid "Options changed"
+msgstr "Настройките са запазени"
+
+#: limit-login-attempts.php:1359
+#: limit-login-attempts.php:1395
+#, fuzzy, php-format
+msgid "<strong>NOTE:</strong> Only works in Wordpress %s or later"
+msgstr "<strong>ЗАБЕЛЕЖКА:</strong> Работи само с WordPress версия 2.7+"
+
+#: limit-login-attempts.php:1374
+#, php-format
+msgid "It appears the site is reached directly (from your IP: %s)"
+msgstr "Изглежда сайтът е достъпен директно (от IP: %s)"
+
+#: limit-login-attempts.php:1376
+#, php-format
+msgid "It appears the site is reached through a proxy server (proxy IP: %s, your IP: %s)"
+msgstr "Изглежда сайтът е достъпен през прокси сървър (IP на прокси сървъра: %s, IP на сайта: %s)"
+
+#: limit-login-attempts.php:1384
+#, php-format
+msgid "<strong>Current setting appears to be invalid</strong>. Please make sure it is correct. Further information can be found <a href=\"%s\" title=\"FAQ\">here</a>"
+msgstr "<strong>Настройките са невалидни</strong>. Повече информация <a href=\"%s\" title=\"FAQ\">тук</a>"
+
+#: limit-login-attempts.php:1444
+msgid "Limit Login Attempts Settings"
+msgstr "Limit Login Attempts Настройки"
+
+#: limit-login-attempts.php:1445
+msgid "Statistics"
+msgstr "Статистики"
+
+#: limit-login-attempts.php:1450
+msgid "Total lockouts"
+msgstr "Общо заключвания"
+
+#: limit-login-attempts.php:1453
+#: limit-login-attempts.php:1471
+msgid "Reset Counter"
+msgstr "Нулирай брояча"
+
+#: limit-login-attempts.php:1454
+#, php-format
+msgid "%d lockout since last reset"
+msgid_plural "%d lockouts since last reset"
+msgstr[0] "%d заключване от последното нулиране"
+msgstr[1] "%d заключвания от последното нулиране"
+
+#: limit-login-attempts.php:1455
+msgid "No lockouts yet"
+msgstr "Няма заключвания досега"
+
+#: limit-login-attempts.php:1460
+msgid "Active lockouts"
+msgstr "Активни заключвания"
+
+#: limit-login-attempts.php:1462
+#: limit-login-attempts.php:1480
+msgid "Restore Lockouts"
+msgstr "Поднови заключванията"
+
+#: limit-login-attempts.php:1463
+#, php-format
+msgid "%d IP is currently blocked from trying to log in"
+msgstr "%d IP е блокирано"
+
+#: limit-login-attempts.php:1469
+#, fuzzy
+msgid "Total registration lockouts"
+msgstr "Общо заключвания"
+
+#: limit-login-attempts.php:1472
+#, fuzzy, php-format
+msgid "%d registration lockout since last reset"
+msgid_plural "%d registration lockouts since last reset"
+msgstr[0] "%d заключване от последното нулиране"
+msgstr[1] "%d заключвания от последното нулиране"
+
+#: limit-login-attempts.php:1478
+#, fuzzy
+msgid "Active registration lockouts"
+msgstr "Активни заключвания"
+
+#: limit-login-attempts.php:1481
+#, fuzzy, php-format
+msgid "%d IP is currently blocked from registering new users"
+msgstr "%d IP е блокирано"
+
+#: limit-login-attempts.php:1487
+msgid "Options"
+msgstr "Настройки"
+
+#: limit-login-attempts.php:1492
+msgid "Lockout"
+msgstr "Заключване"
+
+#: limit-login-attempts.php:1494
+msgid "allowed retries"
+msgstr "позволени опити"
+
+#: limit-login-attempts.php:1495
+msgid "minutes lockout"
+msgstr "минути заключване"
+
+#: limit-login-attempts.php:1496
+msgid "lockouts increase lockout time to"
+msgstr "заключвания увеличават времето на заключване на "
+
+#: limit-login-attempts.php:1496
+#: limit-login-attempts.php:1543
+msgid "hours"
+msgstr "часа"
+
+#: limit-login-attempts.php:1497
+msgid "hours until retries are reset"
+msgstr "часа грешните опити се нулират"
+
+#: limit-login-attempts.php:1501
+#, fuzzy
+msgid "User cookie login"
+msgstr "Наблюдавай cookie login"
+
+#: limit-login-attempts.php:1503
+msgid "Handle cookie login"
+msgstr "Наблюдавай cookie login"
+
+#: limit-login-attempts.php:1508
+msgid "Site connection"
+msgstr "Връзка към сайта"
+
+#: limit-login-attempts.php:1514
+msgid "Direct connection"
+msgstr "Директна връзка"
+
+#: limit-login-attempts.php:1519
+msgid "From behind a reversy proxy"
+msgstr "През Прокси сървър"
+
+#: limit-login-attempts.php:1525
+msgid "Notify on lockout"
+msgstr "Уведомявай при заключване"
+
+#: limit-login-attempts.php:1527
+msgid "Log IP"
+msgstr "Log IP"
+
+#: limit-login-attempts.php:1528
+msgid "Email to admin after"
+msgstr "Прати Email до администратора след"
+
+#: limit-login-attempts.php:1528
+msgid "lockouts"
+msgstr "заключвания"
+
+#: limit-login-attempts.php:1532
+msgid "Password reset"
+msgstr "Възстановяване на парола"
+
+#: limit-login-attempts.php:1534
+msgid "Disable password reset using login name for user this level or higher"
+msgstr "Забрани възстановяването на парола чрез потребителско име за това или по-високо потребителско ниво"
+
+#: limit-login-attempts.php:1536
+msgid "Disable password reset for users this level or higher"
+msgstr "Забрани възстановяването на парола за това или по-високо потребителско ниво"
+
+#: limit-login-attempts.php:1541
+msgid "New user registration"
+msgstr "Регистрация на нов потребител"
+
+#: limit-login-attempts.php:1543
+msgid "Only allow"
+msgstr "Позволявай само"
+
+#: limit-login-attempts.php:1543
+msgid "new user registrations every"
+msgstr "нова(и) регистрация(и) всеки"
+
+#: limit-login-attempts.php:1548
+msgid "Change Options"
+msgstr "Обнови настройки"
+
+#: limit-login-attempts.php:1551
+msgid "Privileged users"
+msgstr "Потребители с права"
+
+#: limit-login-attempts.php:1557
+#, php-format
+msgid "I <a href=\"%s\">understand</a> the problems involved"
+msgstr "Наясно съм с <a href=\"%s\">проблемите</a>"
+
+#: limit-login-attempts.php:1557
+#, fuzzy
+msgid "Change Names"
+msgstr "Обнови настройки"
+
+#: limit-login-attempts.php:1565
+msgid "Lockout log"
+msgstr "Лог на заключванията"
+
+#: limit-login-attempts.php:1575
+msgid "Clear Log"
+msgstr "Изчисти лог"
+
+#. Plugin Name of an extension
+msgid "Limit Login Attempts"
+msgstr "Limit Login Attempts"
+
+#. Plugin URI of an extension
+msgid "http://devel.kostdoktorn.se/limit-login-attempts"
+msgstr "http://devel.kostdoktorn.se/limit-login-attempts"
+
+#. Description of an extension
+msgid "Limit rate of login attempts, including by way of cookies, for each IP."
+msgstr "Ограничава броя на опитите за вход, включително тези от cookies, за всяко различно IP."
+
+#. Author of an extension
+msgid "Johan Eenfeldt"
+msgstr "Johan Eenfeldt"
+
+#. Author URI of an extension
+msgid "http://devel.kostdoktorn.se"
+msgstr "http://devel.kostdoktorn.se"
+
+#~ msgid "Yes"
+#~ msgstr "Да"
+#~ msgid "No"
+#~ msgstr "Не"
+

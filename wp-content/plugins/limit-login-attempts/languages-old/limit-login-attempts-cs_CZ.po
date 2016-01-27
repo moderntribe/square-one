@@ -1,0 +1,281 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: limit-login-attempts 1.3\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/limit-login-attempts\n"
+"POT-Creation-Date: 2009-01-28 17:17+0000\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Jakub Jedelsky <jakub.jedelsky@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n>=2 && n<=4 ? 1 : 2;\n"
+"X-Poedit-Language: Czech\n"
+"X-Poedit-Country: Czech Republic\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: limit-login-attempts.php:372
+#, php-format
+msgid "%d hour"
+msgid_plural "%d hours"
+msgstr[0] "%d hodina"
+msgstr[1] "%d hodin"
+msgstr[2] "%d hodin"
+
+#: limit-login-attempts.php:378
+#, php-format
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] "%d minuta"
+msgstr[1] "%d minuty"
+msgstr[2] "%d minut"
+
+#: limit-login-attempts.php:381
+#, php-format
+msgid "[%s] Too many failed login attempts"
+msgstr "[%s] Příliš mnoho chybných pokusů o přihlášení"
+
+#: limit-login-attempts.php:383
+#, php-format
+msgid "%d failed login attempts (%d lockout(s)) from IP: %s"
+msgstr "%d špatných pokusů o přihlášení (zablokováno %d krát) z IP: %s"
+
+#: limit-login-attempts.php:387
+#, php-format
+msgid "Last user attempted: %s"
+msgstr "Poslední chybující uživatel: %s"
+
+#: limit-login-attempts.php:390
+#, php-format
+msgid "IP was blocked for %s"
+msgstr "IP adresa byla zablokována na %s"
+
+#: limit-login-attempts.php:445
+msgid "<strong>ERROR</strong>: Too many failed login attempts."
+msgstr "<strong>CHYBA:</strong> Příliš mnoho chybných pokusů o přihlášení"
+
+#: limit-login-attempts.php:449
+msgid "Please try again later."
+msgstr "Prosím, opakujte akci později."
+
+#: limit-login-attempts.php:456
+#, php-format
+msgid "Please try again in %d hour."
+msgid_plural "Please try again in %d hours."
+msgstr[0] "Prosím, opakujte akci za %d hodinu."
+msgstr[1] "Prosím, opakujte akci za %d hodiny."
+msgstr[2] "Prosím, opakujte akci za %d hodin."
+
+#: limit-login-attempts.php:458
+#, php-format
+msgid "Please try again in %d minute."
+msgid_plural "Please try again in %d minutes."
+msgstr[0] "Prosím, opakujte akci za %d minutu."
+msgstr[1] "Prosím, opakujte akci za %d minuty."
+msgstr[2] "Prosím, opakujte akci za %d minut."
+
+#: limit-login-attempts.php:487
+#, php-format
+msgid "<strong>%d</strong> attempt remaining."
+msgid_plural "<strong>%d</strong> attempts remaining."
+msgstr[0] "<strong>%d</strong> zbývající pokusů."
+msgstr[1] "<strong>%d</strong> zbývající pokusy."
+msgstr[2] "<strong>%d</strong> zbývajících pokusů."
+
+#: limit-login-attempts.php:551
+msgid "<strong>ERROR</strong>: Incorrect username or password."
+msgstr "<strong>CHYBA:</strong> Špatné uživatelské jméno nebo heslo."
+
+#: limit-login-attempts.php:714
+msgid "IP|Internet address"
+msgstr "IP|Internetové adresy"
+
+#: limit-login-attempts.php:714
+msgid "Tried to log in as"
+msgstr "Pokus o přihlášení jako"
+
+#: limit-login-attempts.php:719
+#, php-format
+msgid "%d lockout"
+msgid_plural "%d lockouts"
+msgstr[0] "%d uzamčení"
+msgstr[1] "%d uzamčení"
+msgstr[2] "%d uzamčení"
+
+#: limit-login-attempts.php:743
+msgid "Cleared IP log"
+msgstr "IP log smazán"
+
+#: limit-login-attempts.php:751
+msgid "Reset lockout count"
+msgstr "aktuální blokování bylo resetováno"
+
+#: limit-login-attempts.php:759
+msgid "Cleared current lockouts"
+msgstr "Aktuální blokování bylo promazáno"
+
+#: limit-login-attempts.php:788
+msgid "Options changed"
+msgstr "Nastavení změněno"
+
+#: limit-login-attempts.php:799
+msgid "<strong>NOTE:</strong> Only works in Wordpress 2.7 or later"
+msgstr "<strong>POZNÁMKA:</strong> Funguje pouze ve verzi Wordpress 2.7 a vyšší"
+
+#: limit-login-attempts.php:815
+#, php-format
+msgid "It appears the site is reached directly (from your IP: %s)"
+msgstr "Zdá se, že web je přímo dosažitelný (z Vaší IP: %s)"
+
+#: limit-login-attempts.php:817
+#, php-format
+msgid "It appears the site is reached through a proxy server (proxy IP: %s, your IP: %s)"
+msgstr "Zdá se, že web je dosažitelný přes proxy server (IP proxy: %s, Vaše IP: %s)"
+
+#: limit-login-attempts.php:825
+#, php-format
+msgid "<strong>Current setting appears to be invalid</strong>. Please make sure it is correct. Further information can be found <a href=\"%s\" title=\"FAQ\">here</a>"
+msgstr "<strong>Aktuální nastavení je zřejmě chybné.</strong> Prosím, ujistěte se o jeho správnosti. Další informace jsou k nalezení <a href=\"%s\" title=\"FAQ\">zde</a> (anglicky)."
+
+#: limit-login-attempts.php:833
+msgid "Limit Login Attempts Settings"
+msgstr "Nastavení Limit Login Attempts"
+
+#: limit-login-attempts.php:834
+msgid "Statistics"
+msgstr "Statistiky"
+
+#: limit-login-attempts.php:838
+msgid "Total lockouts"
+msgstr "Celkem blokováno"
+
+#: limit-login-attempts.php:841
+msgid "Reset Counter"
+msgstr "Reset počítadla"
+
+#: limit-login-attempts.php:842
+#, php-format
+msgid "%d lockout since last reset"
+msgid_plural "%d lockouts since last reset"
+msgstr[0] "%d blokování od posledního resetu"
+msgstr[1] "%d blokování od posledního resetu"
+msgstr[2] "%d blokování od posledního resetu"
+
+#: limit-login-attempts.php:843
+msgid "No lockouts yet"
+msgstr "Dosud nebylo nic blokováno"
+
+#: limit-login-attempts.php:848
+msgid "Active lockouts"
+msgstr "Aktivní blokování"
+
+#: limit-login-attempts.php:850
+msgid "Restore Lockouts"
+msgstr "Smazat blokování"
+
+#: limit-login-attempts.php:851
+#, php-format
+msgid "%d IP is currently blocked from trying to log in"
+msgstr "IP %d je aktuálně blokována z důvodu chybného přihlášení"
+
+#: limit-login-attempts.php:857
+msgid "Options"
+msgstr "Nastavení"
+
+#: limit-login-attempts.php:861
+msgid "Lockout"
+msgstr "Blokování"
+
+#: limit-login-attempts.php:863
+msgid "allowed retries"
+msgstr "povolených pokusů"
+
+#: limit-login-attempts.php:864
+msgid "minutes lockout"
+msgstr "minut blokován"
+
+#: limit-login-attempts.php:865
+msgid "lockouts increase lockout time to"
+msgstr "- počet blokovaných pokusů, po kterém se zvýší čas blokování na"
+
+#: limit-login-attempts.php:865
+msgid "hours"
+msgstr "hodin"
+
+#: limit-login-attempts.php:866
+msgid "hours until retries are reset"
+msgstr "- počet hodin, po kterém jsou chybné pokusy o přihlášení resetovány"
+
+#: limit-login-attempts.php:870
+msgid "Site connection"
+msgstr "Připojení webu"
+
+#: limit-login-attempts.php:876
+msgid "Direct connection"
+msgstr "Přímé připojení"
+
+#: limit-login-attempts.php:881
+msgid "From behind a reversy proxy"
+msgstr "Za proxy serverem"
+
+#: limit-login-attempts.php:887
+msgid "Handle cookie login"
+msgstr "Pracovat s přihlašovacím cookie"
+
+#: limit-login-attempts.php:889
+msgid "Yes"
+msgstr "Ano"
+
+#: limit-login-attempts.php:889
+msgid "No"
+msgstr "Ne"
+
+#: limit-login-attempts.php:894
+msgid "Notify on lockout"
+msgstr "Upozornění na blokování"
+
+#: limit-login-attempts.php:896
+msgid "Log IP"
+msgstr "Logovat IP"
+
+#: limit-login-attempts.php:897
+msgid "Email to admin after"
+msgstr "Poslat e-mail administrátorovi po"
+
+#: limit-login-attempts.php:897
+msgid "lockouts"
+msgstr "pokusech"
+
+#: limit-login-attempts.php:902
+msgid "Change Options"
+msgstr "Změnit nastavení"
+
+#: limit-login-attempts.php:910
+msgid "Lockout log"
+msgstr "Log blokování"
+
+#: limit-login-attempts.php:914
+msgid "Clear Log"
+msgstr "Smazat log"
+
+#. Plugin Name of an extension
+msgid "Limit Login Attempts"
+msgstr "Limit Login Attempts"
+
+#. Plugin URI of an extension
+msgid "http://devel.kostdoktorn.se/limit-login-attempts"
+msgstr "http://devel.kostdoktorn.se/limit-login-attempts"
+
+# Popis rozšíření v seznamu pluginů - z nějakého důvodu nefunguje
+#. Description of an extension
+msgid "Limit rate of login attempts, including by way of cookies, for each IP."
+msgstr "Omezení pokusů o přihlášení, mimo jiné prostřednictvím cookies, pro každou IP."
+
+#. Author of an extension
+msgid "Johan Eenfeldt"
+msgstr "Johan Eenfeldt"
+
+#. Author URI of an extension
+msgid "http://devel.kostdoktorn.se"
+msgstr "http://devel.kostdoktorn.se"
+
