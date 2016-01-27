@@ -1,16 +1,16 @@
-content/plugins/tribe-glomar
-content/plugins/posts-to-posts
-content/plugins/limit-login-attempts
-content/plugins/regenerate-thumbnails
-content/plugins/wordpress-importer
+wp-content/plugins/tribe-glomar
+wp-content/plugins/posts-to-posts
+wp-content/plugins/limit-login-attempts
+wp-content/plugins/regenerate-thumbnails
+wp-content/plugins/wordpress-importer
 wp
-content/plugins/tribe-admin-dashboard
-content/plugins/tribe-admin-ui
-content/plugins/tribe-branding
-content/plugins/tribe-quick-profiler
-content/plugins/tribe-roles
-content/plugins/tribe-security
-content/plugins/wp-git-deploy
+wp-content/plugins/tribe-admin-dashboard
+wp-content/plugins/tribe-admin-ui
+wp-content/plugins/tribe-branding
+wp-content/plugins/tribe-quick-profiler
+wp-content/plugins/tribe-roles
+wp-content/plugins/tribe-security
+wp-content/plugins/wp-git-deploy
 
 # OS generated files #
 ######################
@@ -37,21 +37,6 @@ Thumbs.db
 
 local-config.php
 cache-config.php
-content/uploads/
-content/blogs.dir/
-content/upgrade/
-content/backup-db/
-content/backups/
-content/object-cache.php
-content/cache/
-content/advanced-cache.php
-content/wp-cache-config.php
-content/tests/
-content/logs/
-
-content/plugins/fakerpress/
-content/plugins/better-search-replace/
-
 wp-content/uploads/
 wp-content/blogs.dir/
 wp-content/upgrade/
@@ -63,6 +48,9 @@ wp-content/advanced-cache.php
 wp-content/wp-cache-config.php
 wp-content/tests/
 wp-content/logs/
+
+wp-content/plugins/fakerpress/
+wp-content/plugins/better-search-replace/
 
 # Packages #
 ############
@@ -113,5 +101,5 @@ wp-content/plugins/sls-courses-import/Import/_cache/xml_feed.xml
 
 # Theme #
 
-/content/themes/tribe-square-one/node_modules/
-/content/themes/tribe-square-one/bower_components/
+wp-content/themes/tribe-square-one/node_modules/
+wp-content/themes/tribe-square-one/bower_components/
