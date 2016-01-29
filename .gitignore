@@ -101,5 +101,5 @@ wp-content/plugins/sls-courses-import/Import/_cache/xml_feed.xml
 
 # Theme #
 
-wp-content/themes/tribe-square-one/node_modules/
-wp-content/themes/tribe-square-one/bower_components/
+**/node_modules/
+**/bower_components/
