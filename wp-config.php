@@ -20,8 +20,8 @@ if ( file_exists( dirname( __FILE__ ) . '/local-config.php' ) )
 $config_defaults = array(
 
 	// Paths
-	'WP_CONTENT_DIR'          => dirname( __FILE__ ) . '/content',
-	'WP_CONTENT_URL'          => 'http://' . $_SERVER['HTTP_HOST'] . '/content',
+	'WP_CONTENT_DIR'          => dirname( __FILE__ ) . '/wp-content',
+	'WP_CONTENT_URL'          => 'http://' . $_SERVER['HTTP_HOST'] . '/wp-content',
 	'ABSPATH'                 => dirname( __FILE__ ) . '/wp/',
 
 	// Multisite
