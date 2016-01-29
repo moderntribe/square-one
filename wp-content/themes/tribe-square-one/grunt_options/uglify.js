@@ -19,7 +19,7 @@ module.exports = {
 			'js/dist/master.min.js' : [
 				'js/vendor/polyfill.js',
 				'js/vendor/globals.js',
-				'js/vendor/scripts.js'
+				'js/dist/scripts.js'
 			]
 		}
 	}

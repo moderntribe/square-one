@@ -1,6 +1,7 @@
 {
   "name": "tribe",
   "version": "0.0.2",
+  "description": "Tribe build process",
   "license": "GPL-2.0",
   "repository": "https://github.com/moderntribe/square-one.git",
   "_rootpath": "../../..",
