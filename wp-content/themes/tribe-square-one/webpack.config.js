@@ -9,6 +9,9 @@ module.exports = {
 		filename: 'scripts.js',
 		path    : './js/dist'
 	},
+	externals: {
+		"jquery": "jQuery"
+	},
 	resolveLoader: {
 		root: path.join(__dirname, "node_modules") }
 	,
