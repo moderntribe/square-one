@@ -32,7 +32,7 @@ add_theme_support( 'post-thumbnails' );
  * Supports: enable Document Title Tag
  */
 
-add_theme_support( 'title-tag' );
+//add_theme_support( 'title-tag' );
 
 
 /**

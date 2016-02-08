@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
 
-	<?php // TITLE (added by theme support) ?>
+	<?php // TITLE ?>
+	<title><?php wp_title( '|', true, 'right' ); ?></title>
 
 	<?php // MISC META ?>
 	<meta charset="utf-8">
