@@ -61,7 +61,7 @@
   ],
   "require": {
     "wordpress": "4.4.2",
-    "moderntribe/tribe-glomar": "~1.0",
+    "moderntribe/tribe-glomar": "*",
     "moderntribe/tribe-admin-dashboard": "~1.0",
     "moderntribe/tribe-branding": "~1.0",
     "moderntribe/tribe-quick-profiler": "~1.0",
