@@ -536,12 +536,21 @@ img {
   margin-top: 15px;
   margin-bottom: 15px; }
 
+.context-content > *:empty {
+  display: none; }
+
 .context-content > *:first-child {
   margin-top: 0; }
   .context-content > *:first-child > img {
     margin-top: 0; }
 
+.context-content > .wp-image-wrap:nth-child(2) img {
+  margin-top: 0; }
+
 .context-content > *:last-child {
   margin-bottom: 0; }
   .context-content > *:last-child > img {
     margin-bottom: 0; }
+
+.context-content > .wp-image-wrap:nth-last-child(2) img {
+  margin-bottom: 0; }

@@ -477,6 +477,10 @@ img {
   margin-bottom: 15px;
 }
 
+.context-content > *:empty,body > *:empty {
+  display: none;
+}
+
 .context-content > *:first-child,body > *:first-child {
   margin-top: 0;
 }
@@ -485,11 +489,19 @@ img {
   margin-top: 0;
 }
 
+.context-content > .wp-image-wrap:nth-child(2) img,body > .wp-image-wrap:nth-child(2) img {
+  margin-top: 0;
+}
+
 .context-content > *:last-child,body > *:last-child {
   margin-bottom: 0;
 }
 
 .context-content > *:last-child > img,body > *:last-child > img {
+  margin-bottom: 0;
+}
+
+.context-content > .wp-image-wrap:nth-last-child(2) img,body > .wp-image-wrap:nth-last-child(2) img {
   margin-bottom: 0;
 }
 

@@ -45,15 +45,26 @@
 	// Miscellaneous
 	// -------------------------------------------------------------------------
 
-	& > *:first-child {
-		margin-top: 0;
-		& > img {
+	& > {
+		*:empty {
+			display: none;
+		}
+		*:first-child {
+			margin-top: 0;
+			& > img {
+				margin-top: 0;
+			}
+		}
+		.wp-image-wrap:nth-child(2) img {
 			margin-top: 0;
 		}
-	}
-	& > *:last-child {
-		margin-bottom: 0;
-		& > img {
+		*:last-child {
+			margin-bottom: 0;
+			& > img {
+				margin-bottom: 0;
+			}
+		}
+		.wp-image-wrap:nth-last-child(2) img {
 			margin-bottom: 0;
 		}
 	}
