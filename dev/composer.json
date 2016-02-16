@@ -44,7 +44,7 @@
       "package": {
         "name": "wordpress",
         "type": "webroot",
-        "version": "4.1",
+        "version": "4.4.2",
         "dist": {
           "type": "zip",
           "url": "https://wordpress.org/latest.zip"
@@ -60,8 +60,8 @@
     }
   ],
   "require": {
-    "wordpress": "4.1",
-    "moderntribe/tribe-glomar": "~1.0",
+    "wordpress": "4.4.2",
+    "moderntribe/tribe-glomar": "*",
     "moderntribe/tribe-admin-dashboard": "~1.0",
     "moderntribe/tribe-branding": "~1.0",
     "moderntribe/tribe-quick-profiler": "~1.0",
@@ -72,6 +72,7 @@
     "wpackagist-plugin/limit-login-attempts": "*",
     "wpackagist-plugin/regenerate-thumbnails": "*",
     "wpackagist-plugin/wordpress-importer": "*",
+  	"wpackagist-plugin/configure-smtp": "3.1",
     "fancyguy/webroot-installer": "1.0.0"
   },
   "require-dev": {

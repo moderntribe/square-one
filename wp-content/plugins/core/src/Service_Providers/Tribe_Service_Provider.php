@@ -96,7 +96,7 @@ abstract class Tribe_Service_Provider implements ServiceProviderInterface {
 				$taxonomy_object = $container[ 'taxonomy.' . $type ];
 				$taxonomy = $taxonomy_object::NAME;
 				$post_types = $this->map_post_type_classes_to_ids( $post_types, $container );
-				if ( class_exists( $config_class_name ) ) {
+				if ( ! class_exists( $config_class_name ) ) {
 					$config_class_name = '\\Tribe\\Project\\Taxonomies\\Config\\External_Taxonomy_Config';
 				}
 				return new $config_class_name( $taxonomy, $post_types );
