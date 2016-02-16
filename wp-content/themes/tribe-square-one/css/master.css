@@ -542,7 +542,7 @@ img {
   margin-bottom: 15px;
 }
 
-.context-content > *:empty {
+.context-content > *:empty:not(hr):not(br) {
   display: none;
 }
 

@@ -536,7 +536,7 @@ img {
   margin-top: 15px;
   margin-bottom: 15px; }
 
-.context-content > *:empty {
+.context-content > *:empty:not(hr):not(br) {
   display: none; }
 
 .context-content > *:first-child {
