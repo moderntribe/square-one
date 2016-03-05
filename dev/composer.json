@@ -13,6 +13,14 @@
   "repositories": [
     {
       "type": "vcs",
+      "url": "git@github.com:moderntribe/panel-builder"
+    },
+    {
+      "type": "vcs",
+      "url": "git@github.com:flightless/attachment-helper"
+    },
+    {
+      "type": "vcs",
       "url": "git@github.com:moderntribe/glomar"
     },
     {
@@ -61,6 +69,8 @@
   ],
   "require": {
     "wordpress": "4.4.2",
+    "flightless/attachment-helper": "*",
+    "moderntribe/panel-builder": "*",
     "moderntribe/tribe-glomar": "*",
     "moderntribe/tribe-admin-dashboard": "~1.0",
     "moderntribe/tribe-branding": "~1.0",
