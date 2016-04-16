@@ -18,6 +18,8 @@ class Force_Plugin_Activation {
 	 */
 	private $force_active = array(
 		'limit-login-attempts/limit-login-attempts.php',
+		'attachment-helper/attachment-helper.php',
+		'panel-builder/tribe-panel-builder.php',
 		'tribe-admin-dashboard/tribe-admin-dashboard.php',
 		'tribe-admin-ui/tribe-admin-ui.php',
 		'tribe-object-cache/tribe-object-cache.php',
