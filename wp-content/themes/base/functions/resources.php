@@ -33,43 +33,6 @@ add_filter( 'wpseo_json_ld_output', '__return_false' );
 
 
 /**
- * Gets the current site version.
- *
- * If the Git_Info Plugin is active, it grabs the latest Git hash.
- * If not, it uses the give default.
- *
- * @param string $default
- *
- * @return string
- */
-
-function tribe_get_version( $default = '1.0' ) {
-
-	if ( ! defined( 'BUILD_THEME_ASSETS_TIMESTAMP' ) && file_exists( trailingslashit( ABSPATH ) . 'build-process.php' ) ) {
-		require_once( trailingslashit( ABSPATH ) . 'build-process.php' );
-	}
-
-	if ( defined( 'BUILD_THEME_ASSETS_TIMESTAMP' ) ) {
-		return BUILD_THEME_ASSETS_TIMESTAMP;
-	}
-
-	if ( ! class_exists( '\Git_Info_Plugin' ) ) {
-		return $default;
-	}
-
-	$version = wp_cache_get( 'tribe_site_version' );
-
-	if ( empty( $version ) ) {
-		$version = \Git_Info_Plugin::get_instance()->get_revision();
-		wp_cache_set( 'tribe_site_version', $version );
-	}
-
-	return $version;
-
-}
-
-
-/**
  * Add a stylesheet to the login page
  */
 
