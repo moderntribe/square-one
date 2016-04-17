@@ -1,8 +1,8 @@
 'use strict';
 
-let query_to_json = () => {
+let query_to_json = ( params = '' ) => {
 
-	var pairs = location.search.slice(1).split('&');
+	var pairs = params.length ? params.split('&') : location.search.slice(1).split('&');
 
 	var result = {};
 	pairs.forEach(function(pair) {

@@ -103,10 +103,11 @@ module.exports = function(grunt) {
 	grunt.registerTask(
 		'dist', [
 			'auto_install:main',
+			'mochacli:all',
 			'clean:theme_min_css',
 			'clean:theme_min_js',
 			'copy:theme',
-			'webpack:prod',
+			'webpack:themeprod',
 			'uglify:theme_min',
 			'sass:theme',
 			'sass:theme_wp_editor',
