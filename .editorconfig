@@ -1,0 +1,14 @@
+root = true
+
+# Indentation override for all JS under lib directory
+[wp-content/themes/base/js/src/**/*.js]
+indent_style = tab
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# Matches the exact files either package.json or .travis.yml
+[{package.json,.travis.yml}]
+indent_style = space
+indent_size = 2
