@@ -8,7 +8,7 @@
 
 module.exports = {
 
-	theme: {
+	themejs: {
 		files: [
 			{
 				expand : true,

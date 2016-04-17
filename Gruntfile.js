@@ -105,32 +105,7 @@ module.exports = function(grunt) {
 			'auto_install:main',
 			'mochacli:all',
 			'clean:theme_min_css',
-			'clean:theme_min_js',
-			'copy:theme',
-			'webpack:themeprod',
-			'uglify:theme_min',
-			'sass:theme',
-			'sass:theme_wp_editor',
-			'sass:theme_wp_login',
-			'sass:theme_legacy',
-			'postcss:theme_prefix',
-			'postcss:theme_wp_editor_prefix',
-			'postcss:theme_wp_login_prefix',
-			'postcss:theme_legacy_prefix',
-			'postcss:theme_min',
-			'postcss:theme_wp_editor_min',
-			'postcss:theme_wp_login_min',
-			'postcss:theme_legacy_min',
-			'header:theme',
-			'header:theme_print',
-			'header:theme_wp_editor',
-			'header:theme_wp_login',
-			'header:theme_legacy',
-			'clean:theme',
-			'clean:theme_wp_editor',
-			'clean:theme_wp_login',
-			'clean:theme_legacy',
-			'setPHPConstant'
+			'concurrent:dist'
 		]);
 
 	grunt.registerTask(

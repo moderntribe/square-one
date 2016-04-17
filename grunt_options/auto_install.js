@@ -8,10 +8,6 @@
 
 module.exports = {
 
-	main: {
-		options: {
-
-		}
-	}
+	main: {}
 
 };
