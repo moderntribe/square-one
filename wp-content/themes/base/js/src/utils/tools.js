@@ -5,8 +5,8 @@
 
 'use strict';
 
-let add_class = ( el, class_name ) => {
-	if( ! el ){
+const add_class = ( el, class_name ) => {
+	if ( ! el ) {
 		console.log( `Cant apply class ${class_name} on null element.` );
 		return null;
 	}
@@ -19,19 +19,19 @@ let add_class = ( el, class_name ) => {
 	return el;
 };
 
-let get_children = ( el ) => {
+const get_children = ( el ) => {
 	let children = [];
-	for ( var i = el.children.length; i--; ) {
-		if ( el.children[i].nodeType != 8 ) {
-			children.unshift( el.children[i] );
+	for ( var i = el.children.length; i --; ) {
+		if ( el.children[ i ].nodeType !== 8 ) {
+			children.unshift( el.children[ i ] );
 		}
 	}
 	return children;
 };
 
-let has_class = ( el, class_name ) => {
+const has_class = ( el, class_name ) => {
 
-	if( ! el ){
+	if ( ! el ) {
 		console.log( `Cant test class ${class_name} on null element.` );
 		return null;
 	}
@@ -45,9 +45,9 @@ let has_class = ( el, class_name ) => {
 
 };
 
-let remove_class = ( el, class_name ) => {
+const remove_class = ( el, class_name ) => {
 
-	if( ! el ){
+	if ( ! el ) {
 		console.log( `Cant remove class ${class_name} on null element.` );
 		return null;
 	}
@@ -62,22 +62,22 @@ let remove_class = ( el, class_name ) => {
 	return el;
 };
 
-let convert_elements = ( elements ) => {
+const convert_elements = ( elements ) => {
 
 	let converted = [];
-	for ( var i = elements.length; i--; converted.unshift( elements[i] ) ) {}
+	for ( var i = elements.length; i --; converted.unshift( elements[ i ] ) ) {}
 	return converted;
-	
+
 };
 
-let is_nodeList = ( elements  ) => {
+const is_nodeList = ( elements ) => {
 
 	let string_repr = Object.prototype.toString.call( elements );
 
 	return typeof elements === 'object' &&
 		/^\[object (HTMLCollection|NodeList|Object)\]$/.test( string_repr ) &&
 		elements.hasOwnProperty( 'length' ) &&
-		( elements.length === 0 || ( typeof elements[0] === "object" && elements[0].nodeType > 0 ) );
+		( elements.length === 0 || ( typeof elements[ 0 ] === "object" && elements[ 0 ].nodeType > 0 ) );
 
 };
 

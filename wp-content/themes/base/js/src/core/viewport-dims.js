@@ -10,7 +10,7 @@ import verge from 'verge';
 import state from '../config/state';
 import { MOBILE_BREAKPOINT } from '../config/options';
 
-let viewport_dims = () => {
+const viewport_dims = () => {
 
 	state.v_height = verge.viewportH();
 	state.v_width = verge.viewportW();

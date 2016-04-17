@@ -67,7 +67,7 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-		value: true
+	  value: true
 	});
 
 	var _debounce2 = __webpack_require__(2);
@@ -100,23 +100,23 @@
 
 	var init = function init() {
 
-		// init external plugins
+	  // init external plugins
 
-		(0, _plugins2.default)();
+	  (0, _plugins2.default)();
 
-		// set initial states
+	  // set initial states
 
-		(0, _viewportDims2.default)();
+	  (0, _viewportDims2.default)();
 
-		// initialize global events
+	  // initialize global events
 
-		bind_events();
+	  bind_events();
 
-		// initialize widgets
+	  // initialize widgets
 
-		// initialize the main scripts
+	  // initialize the main scripts
 
-		console.info('Initialized all javascript that targeted document ready.');
+	  console.info('Initialized all javascript that targeted document ready.');
 	};
 
 	/**
@@ -126,7 +126,7 @@
 
 	var bind_events = function bind_events() {
 
-		(0, _events.on)(window, 'resize', (0, _debounce3.default)(_resize2.default, 200, false));
+	  (0, _events.on)(window, 'resize', (0, _debounce3.default)(_resize2.default, 200, false));
 	};
 
 	/**
@@ -136,7 +136,7 @@
 
 	var dom_ready = function dom_ready() {
 
-		(0, _events.ready)(init);
+	  (0, _events.ready)(init);
 	};
 
 	exports.default = dom_ready;

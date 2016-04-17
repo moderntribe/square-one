@@ -7,7 +7,7 @@
 
 import { trigger } from '../events';
 
-let loader = ( opts ) => {
+const loader = ( opts ) => {
 
 	let options = $.extend( {
 			background          : 'rgba(0, 0, 0, 0.3)',
@@ -39,7 +39,7 @@ let loader = ( opts ) => {
 					loader.$el.show();
 				}
 				else {
-					loader.template = t.templates['loader'];
+					loader.template = t.templates[ 'loader' ];
 					loader.markup = loader.template( options );
 					loader.$el = $( loader.markup );
 
@@ -53,12 +53,12 @@ let loader = ( opts ) => {
 
 				if ( options.fade ) {
 					loader.$el.fadeOut( 300, function() {
-						trigger( {event:'modern_tribe/loader_hidden', native:false} );
+						trigger( { event: 'modern_tribe/loader_hidden', native: false } );
 					} );
 				}
 				else {
 					loader.$el.hide();
-					trigger( {event:'modern_tribe/loader_hidden', native:false} );
+					trigger( { event: 'modern_tribe/loader_hidden', native: false } );
 				}
 
 			},

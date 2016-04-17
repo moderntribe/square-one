@@ -1,17 +1,16 @@
-
-let put = ( key, value ) => {
+const put = ( key, value ) => {
 	window.localStorage.setItem( key, value );
 };
 
-let get = ( key ) => {
+const get = ( key ) => {
 	return window.localStorage.getItem( key );
 };
 
-let remove = ( key ) => {
+const remove = ( key ) => {
 	return window.localStorage.removeItem( key );
 };
 
-let clear = () => {
+const clear = () => {
 	window.localStorage.clear();
 };
 

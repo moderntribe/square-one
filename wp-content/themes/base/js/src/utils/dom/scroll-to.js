@@ -6,12 +6,13 @@
  * @desc scroll_to allows equalized or duration based scrolling of the body to a supplied target with options.
  */
 
-let scroll_to = ( opts ) => {
+const scroll_to = ( opts ) => {
 
 	let options = $.extend( {
 		auto           : false,
 		auto_coefficent: 2.5,
-		after_scroll   () {},
+		after_scroll   () {
+		},
 		duration       : 1000,
 		easing         : 'linear',
 		offset         : 0,
@@ -24,7 +25,7 @@ let scroll_to = ( opts ) => {
 
 		if ( options.auto ) {
 
-			var html_position =  $( 'html' ).scrollTop();
+			var html_position = $( 'html' ).scrollTop();
 
 			if ( position > html_position ) {
 				options.duration = (position - html_position) / options.auto_coefficent;
@@ -34,7 +35,7 @@ let scroll_to = ( opts ) => {
 			}
 		}
 
-		$( 'html, body' ).animate( {scrollTop: position}, options.duration, options.easing, options.after_scroll );
+		$( 'html, body' ).animate( { scrollTop: position }, options.duration, options.easing, options.after_scroll );
 	}
 
 };

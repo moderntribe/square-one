@@ -37,12 +37,12 @@ let _bind_events = () => {
 
 let _close_others = ( row ) => {
 
-	gs.to( row.parentNode.querySelectorAll( '.active .ac-content' ), options.speed, { height:0 } );
+	gs.to( row.parentNode.querySelectorAll( '.active .ac-content' ), options.speed, { height: 0 } );
 
 	Array.prototype.forEach.call( row.parentNode.querySelectorAll( '.active' ), ( row ) => {
 		remove_class( row, 'active' );
-		set_acc_inactive_attributes( row.querySelectorAll( '.ac-header' )[0], row.querySelectorAll( '.ac-content' )[0] );
-	});
+		set_acc_inactive_attributes( row.querySelectorAll( '.ac-header' )[ 0 ], row.querySelectorAll( '.ac-content' )[ 0 ] );
+	} );
 
 };
 
@@ -54,13 +54,13 @@ let _close_others = ( row ) => {
 
 let _set_offset = () => {
 
-	options.offset = -10;
+	options.offset = - 10;
 
-	if( has_class( document.body, 'admin-bar' ) ){
+	if ( has_class( document.body, 'admin-bar' ) ) {
 		options.offset = options.offset - 40;
 	}
 
-	if( pn ){
+	if ( pn ) {
 		options.offset = options.offset - pn.offsetHeight;
 	}
 
@@ -77,20 +77,21 @@ let _toggle_item = ( e ) => {
 	let header = e.currentTarget,
 		content = header.nextElementSibling;
 
-	if( has_class( header.parentNode, 'active' ) ){
+	if ( has_class( header.parentNode, 'active' ) ) {
 
 		remove_class( header.parentNode, 'active' );
 
 		set_acc_inactive_attributes( header, content );
 
 		gs.to( content, options.speed, {
-			height:0,
+			height    : 0,
 			onComplete: function() {
 				$( document ).trigger( 'modern_tribe/accordion_animated' );
 			}
 		} );
 
-	} else {
+	}
+	else {
 
 		_close_others( header.parentNode );
 
@@ -100,15 +101,17 @@ let _toggle_item = ( e ) => {
 
 		_set_offset();
 
-		gs.set( content, { height:"auto" } );
+		gs.set( content, { height: "auto" } );
 		gs.from( content, options.speed, {
-			height:0,
+			height    : 0,
 			onComplete: function() {
 				scroll_to( {
-					after_scroll:function(){$( document ).trigger( 'modern_tribe/accordion_animated' );},
-					offset  : options.offset,
-					duration: 300,
-					target  : $( header.parentNode )
+					after_scroll: function() {
+						$( document ).trigger( 'modern_tribe/accordion_animated' );
+					},
+					offset      : options.offset,
+					duration    : 300,
+					target      : $( header.parentNode )
 				} );
 			}
 		} );
@@ -129,7 +132,7 @@ let init = ( opts ) => {
 		speed: 0.3
 	}, opts );
 
-	if( options.el.length ){
+	if ( options.el.length ) {
 
 		_set_offset();
 		_bind_events();

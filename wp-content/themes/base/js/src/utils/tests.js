@@ -5,7 +5,7 @@
 
 'use strict';
 
-let is_json = ( str ) => {
+const is_json = ( str ) => {
 
 	try {
 		JSON.parse( str );
@@ -16,7 +16,7 @@ let is_json = ( str ) => {
 
 };
 
-let can_local_store = () => {
+const can_local_store = () => {
 
 	let mod, result;
 	try {
@@ -31,16 +31,16 @@ let can_local_store = () => {
 
 };
 
-let browser_tests = () => {
+const browser_tests = () => {
 	return {
-		android  : /Android/i.test(window.navigator.userAgent) && /Mobile/i.test(window.navigator.userAgent),
-		chrome   : !!window.chrome,
+		android  : /Android/i.test( window.navigator.userAgent ) && /Mobile/i.test( window.navigator.userAgent ),
+		chrome   : ! ! window.chrome,
 		firefox  : typeof InstallTrigger !== 'undefined',
 		ie       : /*@cc_on!@*/false || document.documentMode,
-		ios      : !!navigator.userAgent.match(/(iPod|iPhone|iPad)/i),
-		iosMobile: !!navigator.userAgent.match(/(iPod|iPhone)/i),
-		safari   : Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0,
-		opera    : !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0,
+		ios      : ! ! navigator.userAgent.match( /(iPod|iPhone|iPad)/i ),
+		iosMobile: ! ! navigator.userAgent.match( /(iPod|iPhone)/i ),
+		safari   : Object.prototype.toString.call( window.HTMLElement ).indexOf( 'Constructor' ) > 0,
+		opera    : ! ! window.opera || navigator.userAgent.indexOf( ' OPR/' ) >= 0,
 		os       : navigator.platform
 	};
 };

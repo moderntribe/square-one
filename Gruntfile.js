@@ -103,6 +103,7 @@ module.exports = function(grunt) {
 	grunt.registerTask(
 		'dist', [
 			'auto_install:main',
+			'eslint',
 			'mochacli:all',
 			'clean:theme_min_css',
 			'concurrent:dist'

@@ -1,8 +1,8 @@
 import * as tests from '../tests';
 
-let browser = tests.browser_tests();
+const browser = tests.browser_tests();
 let scroll = 0;
-let scroller = browser.edge || browser.ie || browser.firefox ? document.documentElement : document.body;
+const scroller = browser.edge || browser.ie || browser.firefox ? document.documentElement : document.body;
 
 /**
  * @function lock
@@ -10,7 +10,7 @@ let scroller = browser.edge || browser.ie || browser.firefox ? document.document
  * use margin to simulate original scroll position.
  */
 
-let lock = () => {
+const lock = () => {
 
 	scroll = scroller.scrollTop;
 	document.body.style.position = 'fixed';
@@ -22,7 +22,7 @@ let lock = () => {
  * @description Unlock the body and return it to its actual scroll position.
  */
 
-let unlock = () => {
+const unlock = () => {
 
 	document.body.style.marginTop = `0px`;
 	document.body.style.position = 'relative';

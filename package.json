@@ -44,6 +44,7 @@
     "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-uglify": "^1.0.1",
     "grunt-contrib-watch": "~1.0.0",
+    "grunt-eslint": "^18.1.0",
     "grunt-header": "^1.0.0",
     "grunt-mocha-cli": "^2.1.0",
     "grunt-php-set-constant": "0.0.15",

@@ -10,7 +10,7 @@ import { convert_elements, is_nodeList } from '../tools';
 
 import _ from "lodash";
 
-let scrollspy = ( options ) => {
+const scrollspy = ( options ) => {
 
 	let defaults = {
 		min      : 0,
@@ -27,15 +27,16 @@ let scrollspy = ( options ) => {
 
 	let opts = Object.assign( defaults, options );
 
-	if( ! opts.elements ){
+	if ( ! opts.elements ) {
 		return;
 	}
 
 	let elements = [];
 
-	if( is_nodeList( opts.elements ) ){
+	if ( is_nodeList( opts.elements ) ) {
 		elements = convert_elements( opts.elements );
-	} else {
+	}
+	else {
 		elements.push( opts.elements );
 	}
 
@@ -48,14 +49,14 @@ let scrollspy = ( options ) => {
 
 	elements.forEach( ( element ) => {
 
-		o.container.addEventListener( 'scroll', _.debounce( function(){
+		o.container.addEventListener( 'scroll', _.debounce( function() {
 
 			let position = {
-				top: element.scrollTop,
+				top : element.scrollTop,
 				left: element.scrollLeft
 			};
 
-			let xy = ( mode == 'vertical' ) ? position.top + buffer : position.left + buffer;
+			let xy = ( mode === 'vertical' ) ? position.top + buffer : position.left + buffer;
 			let max = o.max;
 			let min = o.min;
 
@@ -69,16 +70,16 @@ let scrollspy = ( options ) => {
 				min = o.min();
 			}
 
-			if ( max == 0 ) {
-				max = (mode == 'vertical') ? o.container.offsetHeight : o.container.offsetWidth + element.offsetWidth;
+			if ( parseInt( max ) === 0 ) {
+				max = (mode === 'vertical') ? o.container.offsetHeight : o.container.offsetWidth + element.offsetWidth;
 			}
 
 			/* if we have reached the minimum bound but are below the max ... */
 			if ( xy >= min && xy <= max ) {
 				/* trigger enter event */
-				if ( !inside ) {
+				if ( ! inside ) {
 					inside = true;
-					enters++;
+					enters ++;
 
 					/* fire enter event */
 					trigger( {
@@ -115,7 +116,7 @@ let scrollspy = ( options ) => {
 
 				if ( inside ) {
 					inside = false;
-					leaves++;
+					leaves ++;
 
 					trigger( {
 						el    : element,

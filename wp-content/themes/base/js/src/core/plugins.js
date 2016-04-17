@@ -16,9 +16,9 @@ let plugins = () => {
 
 	// lazyloading images, general. Use class 'lazyload' and attributes 'data-src' and 'data-retina-src'.
 
-	new Mtlazy({
+	new Mtlazy( {
 		fade: true
-	});
+	} );
 
 	// remove click delay on mobiles
 

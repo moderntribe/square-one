@@ -7,7 +7,7 @@
 
 import _ from "lodash";
 
-let on = ( el, name, handler ) => {
+const on = ( el, name, handler ) => {
 	if ( el.addEventListener ) {
 		el.addEventListener( name, handler );
 	}
@@ -18,7 +18,7 @@ let on = ( el, name, handler ) => {
 	}
 };
 
-let ready = ( fn ) => {
+const ready = ( fn ) => {
 	if ( document.readyState !== 'loading' ) {
 		fn();
 	}
@@ -34,7 +34,7 @@ let ready = ( fn ) => {
 	}
 };
 
-let trigger = ( opts ) => {
+const trigger = ( opts ) => {
 
 	let event,
 		options = _.assign( {
@@ -50,8 +50,8 @@ let trigger = ( opts ) => {
 	}
 	else {
 		try {
-			event = new CustomEvent( options.event, {detail: options.data} );
-		} catch( e ) {
+			event = new CustomEvent( options.event, { detail: options.data } );
+		} catch ( e ) {
 			event = document.createEvent( 'CustomEvent' );
 			event.initCustomEvent( options.event, true, true, options.data );
 		}

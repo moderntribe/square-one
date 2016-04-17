@@ -7,7 +7,7 @@
 'use strict';
 
 import _ from "lodash"; // you MUST do this in every module you use lodash in. A custom bundle of only the lodash
-						// you use will be built by babel. 
+                        // you use will be built by babel. 
 
 import resize from './resize';
 import plugins from './plugins';
@@ -35,12 +35,9 @@ let init = () => {
 	bind_events();
 
 	// initialize widgets
-	
-	
+
 
 	// initialize the main scripts
-
-
 
 
 	console.info( 'Initialized all javascript that targeted document ready.' );

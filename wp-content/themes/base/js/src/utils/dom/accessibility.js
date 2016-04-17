@@ -1,4 +1,3 @@
-
 /**
  * @function set_acc_active_attributes
  * @param {HTMLElement} target The domnode to modify.
@@ -6,7 +5,7 @@
  * @description Set the active aria attributes for accessibility on an accordion/toggle.
  */
 
-let set_acc_active_attributes = ( target, content ) => {
+const set_acc_active_attributes = ( target, content ) => {
 
 	target.setAttribute( 'tabindex', 0 );
 	target.setAttribute( 'aria-expanded', 'true' );
@@ -23,9 +22,9 @@ let set_acc_active_attributes = ( target, content ) => {
  * @description Set the inactive aria attributes for accessibility on an accordion/toggle.
  */
 
-let set_acc_inactive_attributes = ( target, content ) => {
+const set_acc_inactive_attributes = ( target, content ) => {
 
-	target.setAttribute( 'tabindex', -1 );
+	target.setAttribute( 'tabindex', - 1 );
 	target.setAttribute( 'aria-expanded', 'false' );
 	target.setAttribute( 'aria-selected', 'false' );
 

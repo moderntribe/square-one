@@ -6,16 +6,16 @@
  * @desc get_hidden_height gets the height of hidden objects.
  */
 
-let get_hidden_height = ( el ) => {
+const get_hidden_height = ( el ) => {
 
-	let zindex = getComputedStyle(el)['z-index'],
-		pos = getComputedStyle(el)['position'],
+	let zindex = getComputedStyle( el )[ 'z-index' ],
+		pos = getComputedStyle( el )[ 'position' ],
 		t_height = 0;
 
 	el.style.visibility = 'hidden';
 	el.style.height = 'auto';
 	el.style.position = 'fixed';
-	el.style.zIndex = -1;
+	el.style.zIndex = - 1;
 
 	t_height = el.offsetHeight;
 

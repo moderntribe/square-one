@@ -10,25 +10,26 @@ import _ from "lodash";
  * @param opts Object The options object. Check below for available and defaults.
  */
 
-let deepscroll = function( opts ) {
+const deepscroll = function( opts ) {
 
 	let options = _.assign( {
-			attr         : 'data-url-key',
-			targets      : null,
-			offset       : 0
+			attr   : 'data-url-key',
+			targets: null,
+			offset : 0
 		}, opts ),
 		url = `${document.location.protocol}//${document.location.hostname}${document.location.pathname}`,
 		items = [],
 		nodes;
 
-	let _update_hash = ( el ) => {
+	const _update_hash = ( el ) => {
 
 		if ( history.pushState ) {
 
-			if( el ){
+			if ( el ) {
 				let hash = el.getAttribute( 'data-url-key' ) ? `#${el.getAttribute( 'data-url-key' )}` : window.location.pathname;
 				history.replaceState( '', '', hash );
-			} else {
+			}
+			else {
 				history.replaceState( '', '', url );
 			}
 
@@ -37,54 +38,58 @@ let deepscroll = function( opts ) {
 
 	};
 
-	let _trigger_scrollby = ( el ) => {
+	const _trigger_scrollby = ( el ) => {
 
-		$( document ).trigger( 'modern_tribe/scrolledto',  { el: el } );
+		$( document ).trigger( 'modern_tribe/scrolledto', { el: el } );
 
 	};
 
-	let _handle_waypoint_down = ( dir, el ) => {
+	const _handle_waypoint_down = ( dir, el ) => {
 
-		if( dir === 'down' ){
+		if ( dir === 'down' ) {
 			_update_hash( el );
 			_trigger_scrollby( el );
 		}
 
-		if( dir === 'up' && $( el ).is( '.panel-count-0') ){
+		if ( dir === 'up' && $( el ).is( '.panel-count-0' ) ) {
 			_update_hash( null );
 			_trigger_scrollby( null );
 		}
 
 	};
 
-	let _handle_waypoint_up = ( dir, el ) => {
+	const _handle_waypoint_up = ( dir, el ) => {
 
-		if( dir === 'up' ){
+		if ( dir === 'up' ) {
 			_update_hash( el );
 			_trigger_scrollby( el );
 		}
 
 	};
 
-	let _apply_waypoint = ( el ) => {
+	const _apply_waypoint = ( el ) => {
 
 		let data = {},
 			url_key = el.getAttribute( options.attr ),
 			title = el.getAttribute( 'data-nav-title' );
 
-		data[ ( url_key ? url_key : _.uniqueId( 'way-' ) ) + '-down' ] = new Waypoint({
+		data[ ( url_key ? url_key : _.uniqueId( 'way-' ) ) + '-down' ] = new Waypoint( {
 			element: el,
-			handler: function( dir ) { _handle_waypoint_down( dir, el ) },
-			offset: options.offset + 'px'
-		});
+			handler: function( dir ) {
+				_handle_waypoint_down( dir, el )
+			},
+			offset : options.offset + 'px'
+		} );
 
-		data[ ( url_key ? url_key : _.uniqueId( 'way-' ) ) + '-up' ] = new Waypoint({
+		data[ ( url_key ? url_key : _.uniqueId( 'way-' ) ) + '-up' ] = new Waypoint( {
 			element: el,
-			handler: function( dir ) { _handle_waypoint_up( dir, el ) },
-			offset: function() {
-				return -( this.element.clientHeight - options.offset )
+			handler: function( dir ) {
+				_handle_waypoint_up( dir, el )
+			},
+			offset : function() {
+				return - ( this.element.clientHeight - options.offset )
 			}
-		});
+		} );
 
 		items.push( {
 			has_data: el.innerHTML.trim() !== "",
@@ -95,19 +100,19 @@ let deepscroll = function( opts ) {
 
 	};
 
-	let _execute_resize = () => {
+	const _execute_resize = () => {
 
 		Waypoint.refreshAll();
 
 	};
 
-	let _refresh = () => {
+	const _refresh = () => {
 
 		_.delay( () => Waypoint.refreshAll(), 1000 );
 
 	};
 
-	let _bind_events = () => {
+	const _bind_events = () => {
 
 		document.addEventListener( 'modern_tribe/refresh_waypoints', _execute_resize );
 		document.addEventListener( 'modern_tribe/resize_executed', _execute_resize );

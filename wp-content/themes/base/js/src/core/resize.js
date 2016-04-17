@@ -15,7 +15,7 @@ let resize = () => {
 
 	viewport_dims();
 
-	trigger( {event:'modern_tribe/resize_executed', native:false} );
+	trigger( { event: 'modern_tribe/resize_executed', native: false } );
 
 };
 

@@ -1,17 +1,16 @@
-
-let put = ( key, value ) => {
+const put = ( key, value ) => {
 	window.sessionStorage.setItem( key, value );
 };
 
-let get = ( key ) => {
+const get = ( key ) => {
 	return window.sessionStorage.getItem( key );
 };
 
-let remove = ( key ) => {
+const remove = ( key ) => {
 	return window.sessionStorage.removeItem( key );
 };
 
-let clear = () => {
+const clear = () => {
 	window.sessionStorage.clear();
 };
 
