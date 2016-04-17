@@ -31,22 +31,6 @@ let can_local_store = () => {
 
 };
 
-let is_external_link = ( url ) => {
-
-	let match = url.match( /^([^:\/?#]+:)?(?:\/\/([^\/?#]*))?([^?#]+)?(\?[^#]*)?(#.*)?/ );
-	if ( typeof match[1] === "string" && match[1].length > 0 && match[1].toLowerCase() !== location.protocol ) {
-		return true;
-	}
-	if ( typeof match[2] === "string" && match[2].length > 0 && match[2].replace( new RegExp( ":(" + {
-				"http:" : 80,
-				"https:": 443
-			}[location.protocol] + ")?$" ), "" ) !== location.host ) {
-		return true;
-	}
-	return false;
-
-};
-
 let browser_tests = () => {
 	return {
 		android  : /Android/i.test(window.navigator.userAgent) && /Mobile/i.test(window.navigator.userAgent),
@@ -61,4 +45,4 @@ let browser_tests = () => {
 	};
 };
 
-export { is_json, can_local_store, is_external_link, browser_tests }
+export { is_json, can_local_store, browser_tests }

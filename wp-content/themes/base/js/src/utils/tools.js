@@ -67,7 +67,18 @@ let convert_elements = ( elements ) => {
 	let converted = [];
 	for ( var i = elements.length; i--; converted.unshift( elements[i] ) ) {}
 	return converted;
+	
+};
+
+let is_nodeList = ( elements  ) => {
+
+	let string_repr = Object.prototype.toString.call( elements );
+
+	return typeof elements === 'object' &&
+		/^\[object (HTMLCollection|NodeList|Object)\]$/.test( string_repr ) &&
+		elements.hasOwnProperty( 'length' ) &&
+		( elements.length === 0 || ( typeof elements[0] === "object" && elements[0].nodeType > 0 ) );
 
 };
 
-export { add_class, get_children, has_class, remove_class, convert_elements }
+export { add_class, get_children, has_class, remove_class, convert_elements, is_nodeList }
