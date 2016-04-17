@@ -1,5 +1,5 @@
 var webpack = require( "webpack" );
-var webpackBaseThemeConfig = require( "../webpack.base.config.js" );
+var webpackBaseThemeConfig = require( "../webpack.config.js" );
 
 module.exports = {
 	

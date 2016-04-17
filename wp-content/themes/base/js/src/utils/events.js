@@ -5,6 +5,8 @@
 
 'use strict';
 
+import _ from "lodash";
+
 let on = ( el, name, handler ) => {
 	if ( el.addEventListener ) {
 		el.addEventListener( name, handler );

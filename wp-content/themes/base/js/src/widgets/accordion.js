@@ -5,6 +5,8 @@
 
 'use strict';
 
+import _ from "lodash";
+
 import { remove_class, add_class, has_class } from '../utils/tools';
 import { set_acc_active_attributes, set_acc_inactive_attributes } from '../utils/dom/accessibility';
 import scroll_to from '../utils/dom/scroll-to';

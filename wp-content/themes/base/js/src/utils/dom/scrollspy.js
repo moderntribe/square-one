@@ -8,6 +8,8 @@
 import { trigger } from '../events';
 import { convert_elements, is_nodeList } from '../tools';
 
+import _ from "lodash";
+
 let scrollspy = ( options ) => {
 
 	let defaults = {

@@ -1,5 +1,7 @@
 'use strict';
 
+import _ from "lodash";
+
 /**
  * @function deepscroll
  * @desc A plugin that updates the url as targets are scrolled by using the data attribute
