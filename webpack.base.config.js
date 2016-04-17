@@ -1,30 +1,25 @@
-
-var path = require("path");
-var webpack = require("webpack");
+var path = require( "path" );
+var webpack = require( "webpack" );
 
 module.exports = {
-	cache: true,
-	entry  : './js/src/index.js',
-	output : {
-		filename: 'scripts.js',
-		path    : './js/dist'
-	},
-	externals: {
+	cache        : true,
+	externals    : {
 		"jquery": "jQuery"
 	},
 	resolveLoader: {
-		root: path.join(__dirname, "node_modules") }
+		root: path.join( __dirname, "node_modules" )
+	}
 	,
-	resolve: {
-		extensions: ['', '.js', '.jsx', 'json'],
+	resolve      : {
+		extensions        : ['', '.js', '.jsx', 'json'],
 		modulesDirectories: ["node_modules"],
-		fallback: path.join(__dirname, "node_modules")
+		fallback          : path.join( __dirname, "node_modules" )
 	},
-	module: {
+	module       : {
 		loaders: [
 			{
-				test: /\.js$/,
-				loader: 'babel-loader',
+				test   : /\.js$/,
+				loader : 'babel-loader',
 				exclude: /node_modules/
 			},
 			{
@@ -33,11 +28,10 @@ module.exports = {
 			}
 		]
 	},
-	plugins: [
+	plugins      : [
 		new webpack.ProvidePlugin( {
-			jQuery       : "jquery",
-			$            : "jquery",
-			_            : "lodash"
+			jQuery: "jquery",
+			$     : "jquery"
 		} )
 	]
 };

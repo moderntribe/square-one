@@ -5,13 +5,25 @@
  *
  */
 
+var default_opts = {
+	spawn     : false,
+	livereload: true
+};
+
 module.exports = {
+
+	core_php: {
+		files  : [
+			'<%= pkg._basethemepath %>/**/*.php'
+		],
+		options: default_opts
+	},
 
 	theme_css: {
 		files  : [
-			'scss/**/**/*.scss',
-			'scss/**/*.scss',
-			'scss/*.scss'
+			'<%= pkg._basethemepath %>/scss/**/**/*.scss',
+			'<%= pkg._basethemepath %>/scss/**/*.scss',
+			'<%= pkg._basethemepath %>/scss/*.scss'
 		],
 		tasks  : [
 			'sass:theme',
@@ -19,33 +31,24 @@ module.exports = {
 			'postcss:theme_prefix',
 			'clean:theme'
 		],
-		options: {
-			spawn     : false,
-			livereload: true
-		}
+		options: default_opts
 	},
 
 	theme_scripts: {
 		files  : [
-			'js/src/**/*.js'
+			'<%= pkg._basethemepath %>/js/src/**/*.js'
 		],
 		tasks  : [
-			'webpack:dev'
+			'webpack:themedev'
 		],
-		options: {
-			spawn     : false,
-			livereload: true
-		}
+		options: default_opts
 	},
 
 	theme_templates: {
 		files  : [
-			'**/*.php'
+			'<%= pkg._basethemepath %>/**/*.php'
 		],
-		options: {
-			spawn     : false,
-			livereload: true
-		}
+		options: default_opts
 	}
 
 };

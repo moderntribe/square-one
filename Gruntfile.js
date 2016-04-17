@@ -26,7 +26,7 @@ module.exports = function(grunt) {
 	 *
 	 */
 
-	var dev = grunt.file.exists('local-config.json') ? grunt.file.readJSON('local-config.json') : {"proxy": "tribe.dev"};
+	var dev = grunt.file.exists('local-config.json') ? grunt.file.readJSON('local-config.json') : {"proxy": "square.dev"};
 
 	var config = {
 		pkg: grunt.file.readJSON('package.json'),
@@ -76,7 +76,6 @@ module.exports = function(grunt) {
 	grunt.registerTask(
 		'wp-editor', [
 			'sass:theme_wp_editor',
-			'combine_mq:theme_wp_editor',
 			'postcss:theme_wp_editor_prefix',
 			'postcss:theme_wp_editor_min',
 			'header:theme_wp_editor',
@@ -86,7 +85,6 @@ module.exports = function(grunt) {
 	grunt.registerTask(
 		'wp-login', [
 			'sass:theme_wp_login',
-			'combine_mq:theme_wp_login',
 			'postcss:theme_wp_login_prefix',
 			'postcss:theme_wp_login_min',
 			'header:theme_wp_login',
@@ -114,9 +112,6 @@ module.exports = function(grunt) {
 			'sass:theme_wp_editor',
 			'sass:theme_wp_login',
 			'sass:theme_legacy',
-			'combine_mq:theme',
-			'combine_mq:theme_wp_editor',
-			'combine_mq:theme_wp_login',
 			'postcss:theme_prefix',
 			'postcss:theme_wp_editor_prefix',
 			'postcss:theme_wp_login_prefix',

@@ -7,7 +7,7 @@
 'use strict';
 
 import Fastclick from 'fastclick';
-import gsap from 'gsap';
+// import gsap from 'gsap'; // uncomment to import gsap globally
 import Mtlazy from 'mtlazy';
 
 let plugins = () => {

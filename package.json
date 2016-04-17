@@ -4,12 +4,13 @@
   "description": "Tribe build process",
   "license": "GPL-2.0",
   "repository": "https://github.com/moderntribe/square-one.git",
-  "_themepath": "wp-content/themes/base",
+  "_basethemepath": "wp-content/themes/base",
+  "_corepluginpath": "wp-content/plugins/core",
   "_npmpath": "node_modules",
   "_componentpath": "dev_components",
   "engines": {
     "node": "4.4.3",
-    "npm": "2.14.2"
+    "npm": "2.15.1"
   },
   "dependencies": {
     "fastclick": "^1.0.6",
@@ -32,10 +33,9 @@
     "cssnano": "^3.4.0",
     "exports-loader": "^0.6.2",
     "glob": "^7.0.3",
-    "grunt": "^1.0.1",
+    "grunt": "^0.4.5",
     "grunt-auto-install": "^0.3.0",
     "grunt-browser-sync": "^2.2.0",
-    "grunt-combine-mq": "^0.9.0",
     "grunt-contrib-clean": "~1.0.0",
     "grunt-contrib-concat": "^1.0.0",
     "grunt-contrib-copy": "^1.0.0",
@@ -49,7 +49,7 @@
     "imports-loader": "^0.6.5",
     "json-loader": "^0.5.4",
     "load-grunt-tasks": "^3.4.0",
-    "webpack": "^1.12.12",
+    "webpack": "^1.13.0",
     "webpack-dev-server": "^1.14.1"
   }
 }

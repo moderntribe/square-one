@@ -5,44 +5,43 @@
  *
  */
 
+var autoprefixer_options = {
+	map       : false,
+	processors: [
+		require('autoprefixer')({browsers: ['last 3 versions', 'ie 10']})
+	]
+};
+
+var cssnano_options = {
+	map       : false,
+	processors: [
+		require('cssnano')({zindex:false})
+	]
+};
+
 module.exports = {
 
 	// Task: Auto Prefixing
 
 	theme_prefix: {
-		options: {
-			map       : false,
-			processors: [
-				require('autoprefixer')({browsers: ['last 3 versions', 'ie 10']})
-			]
-		},
+		options: autoprefixer_options,
 		files  : {
-			'css/master.css' : 'css/master-temp.css',
-			'css/print.css'  : 'css/print-temp.css'
+			'<%= pkg._basethemepath %>/css/master.css' : '<%= pkg._basethemepath %>/css/master-temp.css',
+			'<%= pkg._basethemepath %>/css/print.css'  : '<%= pkg._basethemepath %>/css/print-temp.css'
 		}
 	},
 
 	theme_wp_editor_prefix: {
-		options: {
-			map: false,
-			processors: [
-				require('autoprefixer')({browsers: ['last 3 versions', 'ie 10']})
-			]
-		},
+		options: autoprefixer_options,
 		files  : {
-			'css/admin/editor-style.css' : 'css/admin/editor-style-temp.css'
+			'<%= pkg._basethemepath %>/css/admin/editor-style.css' : '<%= pkg._basethemepath %>/css/admin/editor-style-temp.css'
 		}
 	},
 
 	theme_wp_login_prefix: {
-		options: {
-			map       : false,
-			processors: [
-				require('autoprefixer')({browsers: ['last 3 versions', 'ie 10']})
-			]
-		},
+		options: autoprefixer_options,
 		files  : {
-			'css/admin/login.css' : 'css/admin/login-temp.css'
+			'<%= pkg._basethemepath %>/css/admin/login.css' : '<%= pkg._basethemepath %>/css/admin/login-temp.css'
 		}
 	},
 
@@ -54,58 +53,38 @@ module.exports = {
 			]
 		},
 		files  : {
-			'css/legacy.css' : 'css/legacy-temp.css'
+			'<%= pkg._basethemepath %>/css/legacy.css' : '<%= pkg._basethemepath %>/css/legacy-temp.css'
 		}
 	},
 
 	// Task: Minification
 
 	theme_min: {
-		options: {
-			map       : false,
-			processors: [
-				require('cssnano')()
-			]
-		},
+		options: cssnano_options,
 		files  : {
-			'css/dist/master.min.css' : 'css/master.css',
-			'css/dist/print.min.css'  : 'css/print.css'
+			'<%= pkg._basethemepath %>/css/dist/master.min.css' : '<%= pkg._basethemepath %>/css/master.css',
+			'<%= pkg._basethemepath %>/css/dist/print.min.css'  : '<%= pkg._basethemepath %>/css/print.css'
 		}
 	},
 
 	theme_wp_editor_min: {
-		options: {
-			map       : false,
-			processors: [
-				require('cssnano')()
-			]
-		},
+		options: cssnano_options,
 		files  : {
-			'css/admin/dist/editor-style.min.css' : 'css/admin/editor-style.css'
+			'<%= pkg._basethemepath %>/css/admin/dist/editor-style.min.css' : '<%= pkg._basethemepath %>/css/admin/editor-style.css'
 		}
 	},
 
 	theme_wp_login_min: {
-		options: {
-			map       : false,
-			processors: [
-				require('cssnano')()
-			]
-		},
+		options: cssnano_options,
 		files  : {
-			'css/admin/dist/login.min.css' : 'css/admin/login.css'
+			'<%= pkg._basethemepath %>/css/admin/dist/login.min.css' : '<%= pkg._basethemepath %>/css/admin/login.css'
 		}
 	},
 
 	theme_legacy_min: {
-		options: {
-			map       : false,
-			processors: [
-				require('cssnano')()
-			]
-		},
+		options: cssnano_options,
 		files  : {
-			'css/dist/legacy.min.css' : 'css/legacy.css'
+			'<%= pkg._basethemepath %>/css/dist/legacy.min.css' : '<%= pkg._basethemepath %>/css/legacy.css'
 		}
 	}
 

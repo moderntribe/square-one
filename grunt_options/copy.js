@@ -21,7 +21,7 @@ module.exports = {
 					'<%= pkg._componentpath %>/js/globals.js',
 					'<%= pkg._npmpath %>/tota11y/build/tota11y.min.js'
 				],
-				dest   : 'js/vendor/'
+				dest   : '<%= pkg._basethemepath %>/js/vendor/'
 			}
 		]
 	}
