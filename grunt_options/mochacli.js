@@ -17,6 +17,6 @@ module.exports = {
 	},
 
 	all: [
-		'<%= pkg._basethemepath %>/tests/**/*.js'
+		'<%= pkg._corethemepath %>/tests/**/*.js'
 	]
 };

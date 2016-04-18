@@ -16,29 +16,29 @@ module.exports = {
 	theme: {
 		options: default_options,
 		files  : {
-			'<%= pkg._basethemepath %>/css/master-temp.css' : '<%= pkg._basethemepath %>/scss/master.scss',
-			'<%= pkg._basethemepath %>/css/print-temp.css'  : '<%= pkg._basethemepath %>/scss/print.scss'
+			'<%= pkg._corethemepath %>/css/master-temp.css' : '<%= pkg._corethemepath %>/scss/master.scss',
+			'<%= pkg._corethemepath %>/css/print-temp.css'  : '<%= pkg._corethemepath %>/scss/print.scss'
 		}
 	},
 
 	theme_wp_editor: {
 		options: default_options,
 		files  : {
-			'<%= pkg._basethemepath %>/css/admin/editor-style-temp.css' : '<%= pkg._basethemepath %>/scss/admin/editor-style.scss'
+			'<%= pkg._corethemepath %>/css/admin/editor-style-temp.css' : '<%= pkg._corethemepath %>/scss/admin/editor-style.scss'
 		}
 	},
 
 	theme_wp_login: {
 		options: default_options,
 		files  : {
-			'<%= pkg._basethemepath %>/css/admin/login-temp.css' : '<%= pkg._basethemepath %>/scss/admin/login.scss'
+			'<%= pkg._corethemepath %>/css/admin/login-temp.css' : '<%= pkg._corethemepath %>/scss/admin/login.scss'
 		}
 	},
 
 	theme_legacy: {
 		options: default_options,
 		files  : {
-			'<%= pkg._basethemepath %>/css/legacy-temp.css' : '<%= pkg._basethemepath %>/scss/legacy.scss'
+			'<%= pkg._corethemepath %>/css/legacy-temp.css' : '<%= pkg._corethemepath %>/scss/legacy.scss'
 		}
 	}
 

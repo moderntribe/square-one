@@ -16,10 +16,10 @@ module.exports = {
 			}
 		},
 		files  : {
-			'<%= pkg._basethemepath %>/js/dist/master.min.js' : [
-				'<%= pkg._basethemepath %>/js/vendor/polyfill.js',
-				'<%= pkg._basethemepath %>/js/vendor/globals.js',
-				'<%= pkg._basethemepath %>/js/dist/scripts.js'
+			'<%= pkg._corethemepath %>/js/dist/master.min.js' : [
+				'<%= pkg._corethemepath %>/js/vendor/polyfill.js',
+				'<%= pkg._corethemepath %>/js/vendor/globals.js',
+				'<%= pkg._corethemepath %>/js/dist/scripts.js'
 			]
 		}
 	}

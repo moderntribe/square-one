@@ -1,28 +1,28 @@
 var webpack = require( "webpack" );
-var webpackBaseThemeConfig = require( "../webpack.config.js" );
+var webpackCoreThemeConfig = require( "../webpack.config.js" );
 
 module.exports = {
 	
-	options: webpackBaseThemeConfig,
+	options: webpackCoreThemeConfig,
 
 	themedev: {
-		entry        : './wp-content/themes/base/js/src/index.js',
+		entry        : './wp-content/themes/core/js/src/index.js',
 		output       : {
 			filename: 'scripts.js',
-			path    : './wp-content/themes/base/js/dist/'
+			path    : './wp-content/themes/core/js/dist/'
 		},
 		devtool: 'eval-source-map',
 		debug  : true
 	},
 
 	themeprod: {
-		entry        : './wp-content/themes/base/js/src/index.js',
+		entry        : './wp-content/themes/core/js/src/index.js',
 		output       : {
 			filename: 'scripts.js',
-			path    : './wp-content/themes/base/js/dist/'
+			path    : './wp-content/themes/core/js/dist/'
 		},
 		debug  : false,
-		plugins: webpackBaseThemeConfig.plugins.concat(
+		plugins: webpackCoreThemeConfig.plugins.concat(
 			new webpack.DefinePlugin( {
 				'process.env': {NODE_ENV: JSON.stringify( "production" )}
 			} )

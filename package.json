@@ -4,7 +4,7 @@
   "description": "Tribe build process",
   "license": "GPL-2.0",
   "repository": "https://github.com/moderntribe/square-one.git",
-  "_basethemepath": "wp-content/themes/base",
+  "_corethemepath": "wp-content/themes/core",
   "_corepluginpath": "wp-content/plugins/core",
   "_npmpath": "node_modules",
   "_componentpath": "dev_components",

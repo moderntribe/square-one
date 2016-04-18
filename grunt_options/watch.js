@@ -14,16 +14,16 @@ module.exports = {
 
 	core_php: {
 		files  : [
-			'<%= pkg._basethemepath %>/**/*.php'
+			'<%= pkg._corethemepath %>/**/*.php'
 		],
 		options: default_opts
 	},
 
 	theme_css: {
 		files  : [
-			'<%= pkg._basethemepath %>/scss/**/**/*.scss',
-			'<%= pkg._basethemepath %>/scss/**/*.scss',
-			'<%= pkg._basethemepath %>/scss/*.scss'
+			'<%= pkg._corethemepath %>/scss/**/**/*.scss',
+			'<%= pkg._corethemepath %>/scss/**/*.scss',
+			'<%= pkg._corethemepath %>/scss/*.scss'
 		],
 		tasks  : [
 			'sass:theme',
@@ -36,7 +36,7 @@ module.exports = {
 
 	theme_scripts: {
 		files  : [
-			'<%= pkg._basethemepath %>/js/src/**/*.js'
+			'<%= pkg._corethemepath %>/js/src/**/*.js'
 		],
 		tasks  : [
 			'webpack:themedev'
@@ -46,7 +46,7 @@ module.exports = {
 
 	theme_templates: {
 		files  : [
-			'<%= pkg._basethemepath %>/**/*.php'
+			'<%= pkg._corethemepath %>/**/*.php'
 		],
 		options: default_opts
 	}
