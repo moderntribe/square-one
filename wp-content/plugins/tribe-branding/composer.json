@@ -1,0 +1,14 @@
+{
+    "name": "moderntribe/tribe-branding",
+    "description": "Update links and logos and social icons",
+    "type": "wordpress-plugin",
+    "license": "Private",
+    "authors": [
+        {
+            "name": "Peter Chester",
+            "email": "peter@tri.be"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}

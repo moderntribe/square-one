@@ -1,17 +1,3 @@
-wp-content/plugins/tribe-glomar
-wp-content/plugins/posts-to-posts
-wp-content/plugins/limit-login-attempts
-wp-content/plugins/regenerate-thumbnails
-wp-content/plugins/wordpress-importer
-wp
-wp-content/plugins/tribe-admin-dashboard
-wp-content/plugins/tribe-admin-ui
-wp-content/plugins/tribe-branding
-wp-content/plugins/tribe-quick-profiler
-wp-content/plugins/tribe-roles
-wp-content/plugins/tribe-security
-wp-content/plugins/wp-git-deploy
-
 # OS generated files #
 ######################
 
