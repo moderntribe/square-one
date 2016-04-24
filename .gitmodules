@@ -4,3 +4,6 @@
 [submodule "wp"]
 	path = wp
 	url = git@github.com:WordPress/WordPress.git
+[submodule "wp-content/plugins/panel-builder"]
+	path = wp-content/plugins/panel-builder
+	url = git@github.com:moderntribe/panel-builder.git
