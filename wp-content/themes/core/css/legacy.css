@@ -229,6 +229,33 @@ a {
   -webkit-transition: all 0.15s ease-in-out;
   transition: all 0.15s ease-in-out; }
 
+.context-content label {
+  display: block;
+  margin-bottom: 15px; }
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #a6a6a6;
+  -webkit-box-shadow: 0 0 0 1px #a6a6a6;
+          box-shadow: 0 0 0 1px #a6a6a6; }
+  input:focus::-webkit-input-placeholder,
+  textarea:focus::-webkit-input-placeholder,
+  select:focus::-webkit-input-placeholder {
+    color: #1f1f1f; }
+  input:focus:-moz-placeholder,
+  textarea:focus:-moz-placeholder,
+  select:focus:-moz-placeholder {
+    color: #1f1f1f; }
+  input:focus::-moz-placeholder,
+  textarea:focus::-moz-placeholder,
+  select:focus::-moz-placeholder {
+    color: #1f1f1f; }
+  input:focus:-ms-input-placeholder,
+  textarea:focus:-ms-input-placeholder,
+  select:focus:-ms-input-placeholder {
+    color: #1f1f1f; }
+
 .clearfix:after {
   content: "";
   display: table;
@@ -246,7 +273,7 @@ button,
 input,
 select,
 textarea {
-  font: 400 normal 100% / 1.5 "proxima-nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font: 400 normal 100%/1.5 "proxima-nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #000; }
 
 ::-moz-selection {

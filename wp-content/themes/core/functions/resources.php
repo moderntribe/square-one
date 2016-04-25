@@ -4,7 +4,7 @@
  *
  * Functions for handling scripts, styles, and any other needed resources
  *
- * @since tribe-square-one 1.0
+ * @since core 1.0
  */
 
 
@@ -19,8 +19,8 @@ add_action( 'wp_enqueue_scripts', 'enqueue_scripts' );
 add_action( 'wp_head', 'old_browsers', 0, 0 );
 
 // Site Fonts
-add_action( 'wp_head', 'tribe_fonts', 0, 0 );
-add_action( 'login_head', 'tribe_fonts', 0, 0 );
+add_action( 'wp_head', 'core_fonts', 0, 0 );
+add_action( 'login_head', 'core_fonts', 0, 0 );
 
 // Remove WP Emoji Scripts
 remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
@@ -49,7 +49,7 @@ function login_styles() {
 		$css_login = 'dist/login.min.css';
 	}
 
-	wp_enqueue_style( 'tribe-theme-login', $css_dir . $css_login, $version );
+	wp_enqueue_style( 'core-theme-login', $css_dir . $css_login, $version );
 
 }
 
@@ -74,10 +74,10 @@ function enqueue_styles() {
 	}
 
 	// CSS: base
-	wp_enqueue_style( 'tribe-theme-base', $css_dir . $css_global, array(), $version, 'all' );
+	wp_enqueue_style( 'core-theme-base', $css_dir . $css_global, array(), $version, 'all' );
 
 	// CSS: print
-	wp_enqueue_style( 'tribe-theme-print', $css_dir . $css_print, array(), $version, 'print' );
+	wp_enqueue_style( 'core-theme-print', $css_dir . $css_print, array(), $version, 'print' );
 
 }
 
@@ -107,21 +107,21 @@ function enqueue_scripts() {
 		$script_deps = array( 'jquery' );
 	} else {
 		wp_enqueue_script( 'babel-polyfill', $js_dir . 'vendor/polyfill.js', [], $version, true );
-		wp_enqueue_script( 'tribe-globals', $js_dir . 'vendor/globals.js', ['babel-polyfill'], $version, true );
+		wp_enqueue_script( 'core-globals', $js_dir . 'vendor/globals.js', ['babel-polyfill'], $version, true );
 	}
 
 	wp_register_script( 'jquery', $js_dir . $jquery, array(), $version, false );
 
-	wp_enqueue_script( 'tribe-theme-scripts', $js_dir . $scripts, $script_deps, $version, true );
+	wp_enqueue_script( 'core-theme-scripts', $js_dir . $scripts, $script_deps, $version, true );
 
-	wp_localize_script( 'tribe-theme-scripts', 'modern_tribe_i18n', tribe_js_i18n() );
-	wp_localize_script( 'tribe-theme-scripts', 'modern_tribe_config', tribe_js_config() );
+	wp_localize_script( 'core-theme-scripts', 'modern_tribe_i18n', core_js_i18n() );
+	wp_localize_script( 'core-theme-scripts', 'modern_tribe_config', core_js_config() );
 
-	wp_enqueue_script( 'tribe-theme-scripts' );
+	wp_enqueue_script( 'core-theme-scripts' );
 
 	// Accessibility Testing
 	if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG === true ) {
-		wp_enqueue_script( 'tribe-theme-totally', $js_dir . 'vendor/tota11y.min.js', array( 'tribe-theme-scripts' ), $version, true );
+		wp_enqueue_script( 'core-theme-totally', $js_dir . 'vendor/tota11y.min.js', array( 'core-theme-scripts' ), $version, true );
 	}
 
 	// JS: Comments
@@ -171,7 +171,7 @@ function old_browsers() {
  * Add any required fonts
  */
 
-function tribe_fonts() {
+function core_fonts() {
 
 
 }
@@ -183,7 +183,7 @@ function tribe_fonts() {
  * @return array
  */
 
-function tribe_js_config() {
+function core_js_config() {
 
 	static $data = array();
 	if ( empty( $data ) ) {
@@ -191,7 +191,7 @@ function tribe_js_config() {
 			'images_url'   => trailingslashit( get_template_directory_uri() ) . 'img/',
 			'template_url' => trailingslashit( get_template_directory_uri() )
 		);
-		$data = apply_filters( 'tribe_js_config', $data );
+		$data = apply_filters( 'core_js_config', $data );
 	}
 
 	return $data;

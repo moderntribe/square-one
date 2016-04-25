@@ -21,8 +21,6 @@
 	<?php // PLATFORM META: IE ?>
 	<meta name="application-name" content="<?php bloginfo( 'name' ); ?>">
 
-	<?php // FAVICON & ICONS (handled in tribe-branding plugin) ?>
-
 	<?php wp_head(); ?>
 
 </head>

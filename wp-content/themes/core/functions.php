@@ -2,12 +2,12 @@
 /**
  * Theme functions
  *
- * @since tribe-square-one 1.0
+ * @since core 1.0
  */
 
 
 // Core Theme Plugin
-add_action( 'after_setup_theme', 'tribe_theme_setup' );
+add_action( 'after_setup_theme', 'core_theme_setup' );
 
 // Miscellaneous
 add_action( 'after_setup_theme', 'visual_editor_styles', 10 );
@@ -17,9 +17,9 @@ add_action( 'after_setup_theme', 'visual_editor_styles', 10 );
  * Theme Core Functionality "Plugin"
  */
 
-if ( ! function_exists( 'tribe_theme_setup' ) ):
+if ( ! function_exists( 'core_theme_setup' ) ):
 
-function tribe_theme_setup() {
+function core_theme_setup() {
 
 	// Core & Architecture
 	include_once 'functions/core.php';
@@ -47,7 +47,7 @@ function tribe_theme_setup() {
 	
 }
 
-endif; // tribe_theme_setup
+endif; // core_theme_setup
 
 
 /**

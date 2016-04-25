@@ -7,7 +7,7 @@
 /**
  * Output the site logo, built for site SEO.
  *
- * @since tribe-square-one 1.0
+ * @since core 1.0
  */
 
 function the_logo() {

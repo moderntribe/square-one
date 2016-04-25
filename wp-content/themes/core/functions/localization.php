@@ -4,19 +4,19 @@
  *
  * Functions for translation, namespacing, and localization
  *
- * @since tribe-square-one 1.0
+ * @since core 1.0
  */
 
 
 /**
- * tribe_js_i18n stores all text strings needed in the scripts.js file
+ * core_js_i18n stores all text strings needed in the scripts.js file
  *
  * The code below is an example of structure. Check the theme readme js section for more info on how to use.
  *
  * @return array
  */
 
-function tribe_js_i18n() {
+function core_js_i18n() {
 
     $js_i18n_array = array(
         'help_text' => array(

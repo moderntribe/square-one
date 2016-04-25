@@ -15,7 +15,7 @@
 	if ( has_post_thumbnail() ) { ?>
 		<figure class="loop-item-featured-img">
 			<a href="<?php the_permalink(); ?>" rel="bookmark">
-    			<?php the_post_thumbnail( 'tribe-full' ); ?>
+    			<?php the_post_thumbnail( 'core-full' ); ?>
 			</a>
     	</figure><!-- .loop-item-featured-img -->
 	<?php } ?>

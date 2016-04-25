@@ -4,7 +4,7 @@
  *
  * Functions for handling embeds
  *
- * @since tribe-square-one 1.0
+ * @since core 1.0
  */
 
 

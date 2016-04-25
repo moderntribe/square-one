@@ -15,7 +15,7 @@ if( has_nav_menu( 'primary' ) ) { ?>
 				'menu_id'         => '',
 				'depth'           => 3,
 				'items_wrap'      => '%3$s',
-				'walker'          => new Tribe_Walker_Nav_Menu,
+				'walker'          => new Core_Walker_Nav_Menu,
 				'fallback_cb'     => false
 			);
 			wp_nav_menu( $defaults ); ?>

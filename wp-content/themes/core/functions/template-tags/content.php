@@ -7,7 +7,7 @@
 /**
  * Sets up the proper title
  *
- * @since tribe-square-one 1.0
+ * @since core 1.0
  * @return string
  */
 
@@ -58,7 +58,7 @@ function get_page_title() {
 /**
  * Output proper title
  *
- * @since tribe-square-one 1.0
+ * @since core 1.0
  * @return string
  */
 
@@ -89,12 +89,12 @@ function the_page_title( $wrapper = true ) {
  *
  * @return string|void
  *
- * @since tribe-square-one 1.0
+ * @since core 1.0
  */
 
 function get_featured_image(
 	$attachment_id = null,
-	$size          = 'tribe-full',
+	$size          = 'core-full',
 	$lazyload      = true,
 	$shim          = false,
 	$classes       = false,

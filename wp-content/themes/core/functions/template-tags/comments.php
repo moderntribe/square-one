@@ -8,9 +8,9 @@
  * Customize comment output
  */
 
-if ( ! function_exists( 'tribe_comment' ) ) :
+if ( ! function_exists( 'core_comment' ) ) :
 
-	function tribe_comment( $comment, $args, $depth ) {
+	function core_comment( $comment, $args, $depth ) {
 
 		$GLOBALS['comment'] = $comment;
 		switch ( $comment->comment_type ) :

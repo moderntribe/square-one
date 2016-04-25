@@ -3,7 +3,7 @@
 	<?php // Featured Image
 	if ( has_post_thumbnail() ) { ?>
 		<figure class="entry-featured-img">
-			<?php the_post_thumbnail( 'tribe-full' ); ?>
+			<?php the_post_thumbnail( 'core-full' ); ?>
     	</figure><!-- .entry-featured-img -->
 	<?php } ?>
 	

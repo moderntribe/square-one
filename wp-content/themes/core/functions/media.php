@@ -4,7 +4,7 @@
  *
  * Functions for dealing with media & embeds
  *
- * @since tribe-square-one 1.0
+ * @since core 1.0
  */
 
 
@@ -22,7 +22,7 @@ if( function_exists( 'wpseo_auto_load' ) ) {
  */
 
 // Full (to cut down on max-size, trim if we can)
-add_image_size( 'tribe-full', 1600, 0, true );
+add_image_size( 'core-full', 1600, 0, true );
 
 // For social sharing
 add_image_size( 'social-share', 1200, 630, true );

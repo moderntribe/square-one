@@ -15,7 +15,7 @@ if( has_nav_menu( 'footer' ) ) { ?>
 				'menu_id'         => '',
 				'depth'           => 1,
 				'items_wrap'      => '%3$s',
-				'walker'          => new Tribe_Walker_Nav_Menu,
+				'walker'          => new Core_Walker_Nav_Menu,
 				'fallback_cb'     => false
 			);
 			wp_nav_menu( $defaults ); ?>

@@ -60,7 +60,6 @@ module.exports = function(grunt) {
 
 	require('load-grunt-tasks')(grunt);
 
-
 	/**
 	 *
 	 * Tasks are registered here. Starts with default, which is run by simply running "grunt" in your cli.

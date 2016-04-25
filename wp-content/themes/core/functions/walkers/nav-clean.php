@@ -2,11 +2,11 @@
 /**
  * Customize WordPress Nav Menu Walker
  *
- * @since tribe-square-one 1.0
+ * @since core 1.0
  */
 
 
-class Tribe_Walker_Nav_Menu extends Walker_Nav_Menu {
+class Core_Walker_Nav_Menu extends Walker_Nav_Menu {
 
     function display_element( $element, &$children_elements, $max_depth, $depth = 0, $args, &$output ) {
         $id_field = $this->db_fields['id'];

@@ -224,6 +224,32 @@ a, .btn,
 a.btn {
   transition: all 0.15s ease-in-out; }
 
+.context-content label, .label, legend {
+  display: block;
+  margin-bottom: 15px; }
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #a6a6a6;
+  box-shadow: 0 0 0 1px #a6a6a6; }
+  input:focus::-webkit-input-placeholder,
+  textarea:focus::-webkit-input-placeholder,
+  select:focus::-webkit-input-placeholder {
+    color: #1f1f1f; }
+  input:focus:-moz-placeholder,
+  textarea:focus:-moz-placeholder,
+  select:focus:-moz-placeholder {
+    color: #1f1f1f; }
+  input:focus::-moz-placeholder,
+  textarea:focus::-moz-placeholder,
+  select:focus::-moz-placeholder {
+    color: #1f1f1f; }
+  input:focus:-ms-input-placeholder,
+  textarea:focus:-ms-input-placeholder,
+  select:focus:-ms-input-placeholder {
+    color: #1f1f1f; }
+
 .clearfix:after {
   content: "";
   display: table;
@@ -232,17 +258,16 @@ a.btn {
 /*
 @font-face {
 	font-family: 'project-icons';
-	src: url('/content/themes/tribe-square-one/fonts/icons/wswd.eot?qnu61t');
-	src: url('/content/themes/tribe-square-one/fonts/icons/wswd.eot?qnu61t#iefix') format('embedded-opentype'),
-	url('/content/themes/tribe-square-one/fonts/icons/wswd.ttf?qnu61t') format('truetype'),
-	url('/content/themes/tribe-square-one/fonts/icons/wswd.woff?qnu61t') format('woff'),
-	url('/content/themes/tribe-square-one/fonts/icons/wswd.svg?qnu61t#wswd') format('svg');
+	src: url('/wp-content/themes/core/fonts/icons/wswd.eot?qnu61t');
+	src: url('/wp-content/themes/core/fonts/icons/wswd.eot?qnu61t#iefix') format('embedded-opentype'),
+	url('/wp-content/themes/core/fonts/icons/wswd.ttf?qnu61t') format('truetype'),
+	url('/wp-content/themes/core/fonts/icons/wswd.woff?qnu61t') format('woff'),
+	url('/wp-content/themes/core/fonts/icons/wswd.svg?qnu61t#wswd') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
 
-.icon,
-%icon {
+.icon {
 	font-family: 'project-icons';
 	speak: none;
 	font-style: normal;
@@ -267,7 +292,7 @@ button,
 input,
 select,
 textarea {
-  font: 400 normal 100% / 1.5 "proxima-nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font: 400 normal 100%/1.5 "proxima-nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #000; }
 
 ::-moz-selection {
@@ -621,12 +646,6 @@ a.btn {
   margin-bottom: 30px;
   line-height: 1; }
 
-.label,
-.context-content label,
-legend {
-  display: block;
-  margin-bottom: 15px; }
-
 .required label:after {
   content: '*'; }
 
@@ -714,25 +733,3 @@ select {
 :-ms-input-placeholder {
   color: #000;
   opacity: 1; }
-
-input:focus,
-textarea:focus,
-select:focus {
-  border-color: #a6a6a6;
-  box-shadow: 0 0 0 1px #a6a6a6; }
-  input:focus::-webkit-input-placeholder,
-  textarea:focus::-webkit-input-placeholder,
-  select:focus::-webkit-input-placeholder {
-    color: #1f1f1f; }
-  input:focus:-moz-placeholder,
-  textarea:focus:-moz-placeholder,
-  select:focus:-moz-placeholder {
-    color: #1f1f1f; }
-  input:focus::-moz-placeholder,
-  textarea:focus::-moz-placeholder,
-  select:focus::-moz-placeholder {
-    color: #1f1f1f; }
-  input:focus:-ms-input-placeholder,
-  textarea:focus:-ms-input-placeholder,
-  select:focus:-ms-input-placeholder {
-    color: #1f1f1f; }

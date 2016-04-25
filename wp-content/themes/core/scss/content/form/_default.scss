@@ -17,10 +17,8 @@
 //
 // -----------------------------------------------------------------------------
 
-.label,
-%label {
-	display: block;
-	margin-bottom: $spacer-xs;
+.label {
+	@extend %label;
 }
 
 // -----------------------------------------------------------------------------
@@ -189,21 +187,4 @@ select {
 }
 
 // Focus
-%field-focus {
-	&:focus {
-		border-color: $border-input-focus;
-		box-shadow: 0 0 0 1px $border-input-focus;
-		&::-webkit-input-placeholder {
-			color: lighten($placeholder, 12%);
-		}
-		&:-moz-placeholder {
-			color: lighten($placeholder, 12%);
-		}
-		&::-moz-placeholder {
-			color: lighten($placeholder, 12%);
-		}
-		&:-ms-input-placeholder {
-			color: lighten($placeholder, 12%);
-		}
-	}
-}
+// See: utilities/extends/_form.scss
