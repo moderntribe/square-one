@@ -3,46 +3,44 @@
  * @description Some handy test for common issues.
  */
 
-'use strict';
-
-const is_json = ( str ) => {
+const isJson = (str) => {
 
 	try {
-		JSON.parse( str );
-	} catch ( e ) {
+		JSON.parse(str);
+	} catch (e) {
 		return false;
 	}
+
 	return true;
 
 };
 
-const can_local_store = () => {
+const canLocalStore = () => {
 
-	let mod, result;
+	let mod;
+	let result;
 	try {
 		mod = new Date;
-		localStorage.setItem( mod, mod.toString() );
-		result = localStorage.getItem( mod ) === mod.toString();
-		localStorage.removeItem( mod );
+		localStorage.setItem(mod, mod.toString());
+		result = localStorage.getItem(mod) === mod.toString();
+		localStorage.removeItem(mod);
 		return result;
-	} catch ( _error ) {
-		console.error( 'This browser doesn\'t support local storage or is not allowing writing to it.' );
+	} catch (_error) {
+		console.error('This browser doesn\'t support local storage or is not allowing writing to it.');
 	}
 
 };
 
-const browser_tests = () => {
-	return {
-		android  : /Android/i.test( window.navigator.userAgent ) && /Mobile/i.test( window.navigator.userAgent ),
-		chrome   : ! ! window.chrome,
-		firefox  : typeof InstallTrigger !== 'undefined',
-		ie       : /*@cc_on!@*/false || document.documentMode,
-		ios      : ! ! navigator.userAgent.match( /(iPod|iPhone|iPad)/i ),
-		iosMobile: ! ! navigator.userAgent.match( /(iPod|iPhone)/i ),
-		safari   : Object.prototype.toString.call( window.HTMLElement ).indexOf( 'Constructor' ) > 0,
-		opera    : ! ! window.opera || navigator.userAgent.indexOf( ' OPR/' ) >= 0,
-		os       : navigator.platform
-	};
-};
+const browserTests = () => ({
+	android: /Android/i.test(window.navigator.userAgent) && /Mobile/i.test(window.navigator.userAgent),
+	chrome: !!window.chrome,
+	firefox: typeof InstallTrigger !== 'undefined',
+	ie: /*@cc_on!@*/false || document.documentMode,
+	ios: !!navigator.userAgent.match(/(iPod|iPhone|iPad)/i),
+	iosMobile: !!navigator.userAgent.match(/(iPod|iPhone)/i),
+	safari: Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0,
+	opera: !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0,
+	os: navigator.platform,
+});
 
-export { is_json, can_local_store, browser_tests }
+export { isJson, canLocalStore, browserTests };

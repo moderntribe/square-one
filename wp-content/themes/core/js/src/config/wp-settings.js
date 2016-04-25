@@ -1,4 +1,3 @@
-'use strict';
 
 const wp = window.modern_tribe_config;
 

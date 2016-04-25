@@ -1,6 +1,5 @@
-'use strict';
 
-import _ from "lodash";
+import _ from 'lodash';
 
 /**
  * @function deepscroll
@@ -10,97 +9,98 @@ import _ from "lodash";
  * @param opts Object The options object. Check below for available and defaults.
  */
 
-const deepscroll = function( opts ) {
+const deepScroll = function (opts) {
 
-	let options = _.assign( {
-			attr   : 'data-url-key',
+	let options = _.assign({
+			attr: 'data-url-key',
 			targets: null,
-			offset : 0
-		}, opts ),
-		url = `${document.location.protocol}//${document.location.hostname}${document.location.pathname}`,
-		items = [],
-		nodes;
+			offset: 0,
+		}, opts);
+	let url = `${document.location.protocol}//${document.location.hostname}${document.location.pathname}`;
+	let items = [];
+	let nodes;
 
-	const _update_hash = ( el ) => {
+	const _updateHash = (el) => {
 
-		if ( history.pushState ) {
+		if (history.pushState) {
 
-			if ( el ) {
-				let hash = el.getAttribute( 'data-url-key' ) ? `#${el.getAttribute( 'data-url-key' )}` : window.location.pathname;
-				history.replaceState( '', '', hash );
+			if (el) {
+				let hash = el.getAttribute('data-url-key') ? `#${el.getAttribute('data-url-key')}` : window.location.pathname;
+				history.replaceState('', '', hash);
+			} else {
+				history.replaceState('', '', url);
 			}
-			else {
-				history.replaceState( '', '', url );
-			}
-
 
 		}
 
 	};
 
-	const _trigger_scrollby = ( el ) => {
+	const _triggerScrollby = (el) => {
 
-		$( document ).trigger( 'modern_tribe/scrolledto', { el: el } );
-
-	};
-
-	const _handle_waypoint_down = ( dir, el ) => {
-
-		if ( dir === 'down' ) {
-			_update_hash( el );
-			_trigger_scrollby( el );
-		}
-
-		if ( dir === 'up' && $( el ).is( '.panel-count-0' ) ) {
-			_update_hash( null );
-			_trigger_scrollby( null );
-		}
+		$(document).trigger('modern_tribe/scrolledto', { el: el });
 
 	};
 
-	const _handle_waypoint_up = ( dir, el ) => {
+	const _handleWaypointDown = (dir, el) => {
 
-		if ( dir === 'up' ) {
-			_update_hash( el );
-			_trigger_scrollby( el );
+		if (dir === 'down') {
+			_updateHash(el);
+			_triggerScrollby(el);
+		}
+
+		if (dir === 'up' && $(el).is('.panel-count-0')) {
+			_updateHash(null);
+			_triggerScrollby(null);
 		}
 
 	};
 
-	const _apply_waypoint = ( el ) => {
+	const _handleWaypointUp = (dir, el) => {
 
-		let data = {},
-			url_key = el.getAttribute( options.attr ),
-			title = el.getAttribute( 'data-nav-title' );
+		if (dir === 'up') {
+			_updateHash(el);
+			_triggerScrollby(el);
+		}
 
-		data[ ( url_key ? url_key : _.uniqueId( 'way-' ) ) + '-down' ] = new Waypoint( {
+	};
+
+	const _applyWaypoint = (el) => {
+
+		let data = {};
+		let urlKey = el.getAttribute(options.attr);
+		let title = el.getAttribute('data-nav-title');
+
+		data[(urlKey ? urlKey : _.uniqueId('way-')) + '-down'] = new Waypoint({
 			element: el,
-			handler: function( dir ) {
-				_handle_waypoint_down( dir, el )
+			handler: function (dir) {
+				_handleWaypointDown(dir, el);
 			},
-			offset : options.offset + 'px'
-		} );
 
-		data[ ( url_key ? url_key : _.uniqueId( 'way-' ) ) + '-up' ] = new Waypoint( {
+			offset: options.offset + 'px',
+		});
+
+		data[(urlKey ? urlKey : _.uniqueId('way-')) + '-up'] = new Waypoint({
 			element: el,
-			handler: function( dir ) {
-				_handle_waypoint_up( dir, el )
+			handler: function (dir) {
+				_handleWaypointUp(dir, el);
 			},
-			offset : function() {
-				return - ( this.element.clientHeight - options.offset )
-			}
-		} );
 
-		items.push( {
-			has_data: el.innerHTML.trim() !== "",
-			url_key : url_key,
-			title   : title,
-			waypoint: data
-		} );
+			offset: function () {
+				return -(this.element.clientHeight - options.offset);
+			},
+
+		});
+
+		items.push({
+			has_data: el.innerHTML.trim() !== '',
+			url_key: urlKey,
+			title: title,
+			waypoint: data,
+		});
 
 	};
 
-	const _execute_resize = () => {
+	const _executeResize = () => {
 
 		Waypoint.refreshAll();
 
@@ -108,28 +108,28 @@ const deepscroll = function( opts ) {
 
 	const _refresh = () => {
 
-		_.delay( () => Waypoint.refreshAll(), 1000 );
+		_.delay(() => Waypoint.refreshAll(), 1000);
 
 	};
 
-	const _bind_events = () => {
+	const _bindEvents = () => {
 
-		document.addEventListener( 'modern_tribe/refresh_waypoints', _execute_resize );
-		document.addEventListener( 'modern_tribe/resize_executed', _execute_resize );
-		document.addEventListener( 'modern_tribe/accordion_animated', _execute_resize );
-		window.addEventListener( 'load', _refresh );
+		document.addEventListener('modern_tribe/refresh_waypoints', _executeResize);
+		document.addEventListener('modern_tribe/resize_executed', _executeResize);
+		document.addEventListener('modern_tribe/accordion_animated', _executeResize);
+		window.addEventListener('load', _refresh);
 
 	};
 
-	if ( options.targets ) {
+	if (options.targets) {
 
-		nodes = [].slice.call( options.targets );
-		nodes.forEach( ( el ) => _apply_waypoint( el ) );
+		nodes = [].slice.call(options.targets);
+		nodes.forEach((el) => _applyWaypoint(el));
 
-		_bind_events();
+		_bindEvents();
 
 	}
 
 };
 
-export default deepscroll;
+export default deepScroll;

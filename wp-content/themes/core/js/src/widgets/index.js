@@ -3,8 +3,6 @@
  * @description Base content module for shared content js and props.
  */
 
-'use strict';
-
 import accordions from './accordion';
 
 /**

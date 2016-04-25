@@ -1,6 +1,6 @@
 import * as tests from '../tests';
 
-const browser = tests.browser_tests();
+const browser = tests.browserTests();
 let scroll = 0;
 const scroller = browser.edge || browser.ie || browser.firefox ? document.documentElement : document.body;
 
@@ -29,4 +29,4 @@ const unlock = () => {
 	scroller.scrollTop = scroll;
 };
 
-export { lock, unlock }
+export { lock, unlock };
