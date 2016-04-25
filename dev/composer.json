@@ -10,81 +10,6 @@
     }
   ],
   "minimum-stability": "dev",
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "git@github.com:moderntribe/panel-builder"
-    },
-    {
-      "type": "vcs",
-      "url": "git@github.com:flightless/attachment-helper"
-    },
-    {
-      "type": "vcs",
-      "url": "git@github.com:moderntribe/glomar"
-    },
-    {
-      "type": "vcs",
-      "url": "git@github.com:moderntribe/tribe-admin-dashboard"
-    },
-    {
-      "type": "vcs",
-      "url": "git@github.com:moderntribe/tribe-branding"
-    },
-    {
-      "type": "vcs",
-      "url": "git@github.com:moderntribe/tribe-quick-profiler"
-    },
-    {
-      "type": "vcs",
-      "url": "git@github.com:moderntribe/tribe-roles"
-    },
-    {
-      "type": "vcs",
-      "url": "git@github.com:moderntribe/tribe-security"
-    },
-    {
-      "type": "vcs",
-      "url": "git@github.com:jbrinley/wp-git-deploy"
-    },
-    {
-      "type": "package",
-      "package": {
-        "name": "wordpress",
-        "type": "webroot",
-        "version": "4.4.2",
-        "dist": {
-          "type": "zip",
-          "url": "https://wordpress.org/latest.zip"
-        },
-        "require": {
-          "fancyguy/webroot-installer": "1.0.0"
-        }
-      }
-    },
-    {
-      "type": "composer",
-      "url": "http://wpackagist.org"
-    }
-  ],
-  "require": {
-    "wordpress": "4.4.2",
-    "flightless/attachment-helper": "*",
-    "moderntribe/panel-builder": "*",
-    "moderntribe/tribe-glomar": "*",
-    "moderntribe/tribe-admin-dashboard": "~1.0",
-    "moderntribe/tribe-branding": "~1.0",
-    "moderntribe/tribe-quick-profiler": "~1.0",
-    "moderntribe/tribe-roles": "~1.0",
-    "moderntribe/tribe-security": "~1.0",
-    "jbrinley/wp-git-deploy": "*",
-    "wpackagist-plugin/posts-to-posts": "*",
-    "wpackagist-plugin/limit-login-attempts": "*",
-    "wpackagist-plugin/regenerate-thumbnails": "*",
-    "wpackagist-plugin/wordpress-importer": "*",
-  	"wpackagist-plugin/configure-smtp": "3.1",
-    "fancyguy/webroot-installer": "1.0.0"
-  },
   "require-dev": {
     "codeception/codeception": "~2.0",
     "lucatume/wp-browser": "~1.0"
@@ -92,14 +17,5 @@
   "config": {
     "vendor-dir": "vendor",
     "preferred-install": "dist"
-  },
-  "extra": {
-    "installer-paths": {
-      "../wp-content/plugins/{$name}/": ["type:wordpress-plugin"],
-      "../wp-content/mu-plugins/{$name}/": ["type:wordpress-muplugin"],
-      "../wp/": ["type"]
-    },
-    "webroot-dir": "../wp",
-    "webroot-package": "wordpress"
   }
 }
