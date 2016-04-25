@@ -17,13 +17,9 @@ class Force_Plugin_Activation {
 	 * Add elements as plugin path: directory/file.php
 	 */
 	private $force_active = array(
+		'core/core.php',
 		'limit-login-attempts/limit-login-attempts.php',
 		'tribe-admin-dashboard/tribe-admin-dashboard.php',
-		'tribe-admin-ui/tribe-admin-ui.php',
-		'tribe-object-cache/tribe-object-cache.php',
-		'tribe-panels/tribe-panels.php',
-		'tribe-roles/tribe-roles.php',
-		'tribe-security/tribe-security.php',
 	);
 
 	/**
