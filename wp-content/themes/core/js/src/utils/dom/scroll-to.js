@@ -6,8 +6,7 @@
  */
 
 const scrollTo = (opts) => {
-
-	let options = $.extend({
+	const options = $.extend({
 		auto: false,
 		auto_coefficent: 2.5,
 		afterScroll() {
@@ -18,14 +17,14 @@ const scrollTo = (opts) => {
 		offset: 0,
 		$target: $(),
 	}, opts);
+	let position;
+	let htmlPosition;
 
 	if (options.$target.length) {
-
-		var position = options.$target.offset().top + options.offset;
+		position = options.$target.offset().top + options.offset;
 
 		if (options.auto) {
-
-			var htmlPosition = $('html').scrollTop();
+			htmlPosition = $('html').scrollTop();
 
 			if (position > htmlPosition) {
 				options.duration = (position - htmlPosition) / options.auto_coefficent;
@@ -36,7 +35,6 @@ const scrollTo = (opts) => {
 
 		$('html, body').animate({ scrollTop: position }, options.duration, options.easing, options.after_scroll);
 	}
-
 };
 
 export default scrollTo;

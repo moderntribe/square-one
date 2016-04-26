@@ -11,46 +11,33 @@ import scrollTo from '../utils/dom/scroll-to';
 
 // setup shared variables
 
-let pn = document.getElementById('panel-navigation');
-let gs = TweenMax;
+/* global TweenMax */
+
+const pn = document.getElementById('panel-navigation');
+const gs = TweenMax;
 let options;
 
 /**
- * @function _bindEvents
- * @description Bind the events for this module here.
- */
-
-let _bindEvents = () => {
-
-	$(options.el)
-		.on('click', '.ac-header', (e) => _toggleItem(e));
-
-};
-
-/**
- * @function _closeOthers
+ * @function closeOthers
  * @param {HTMLElement} row The domnode to map from.
  * @description Close the other accordion toggles.
  */
 
-let _closeOthers = (row) => {
-
+const closeOthers = (row) => {
 	gs.to(row.parentNode.querySelectorAll('.active .ac-content'), options.speed, { height: 0 });
 
-	Array.prototype.forEach.call(row.parentNode.querySelectorAll('.active'), (row) => {
-		removeClass(row, 'active');
-		setAccInactiveAttributes(row.querySelectorAll('.ac-header')[0], row.querySelectorAll('.ac-content')[0]);
+	Array.prototype.forEach.call(row.parentNode.querySelectorAll('.active'), (childRow) => {
+		removeClass(childRow, 'active');
+		setAccInactiveAttributes(childRow.querySelectorAll('.ac-header')[0], childRow.querySelectorAll('.ac-content')[0]);
 	});
-
 };
 
 /**
- * @function _setOffset
+ * @function setOffset
  * @description We have to account for scroll offset due to admin bar and maybe a fixed panel nav when scrolling
  */
 
-let _setOffset = () => {
-
+const setOffset = () => {
 	options.offset = -10;
 
 	if (hasClass(document.body, 'admin-bar')) {
@@ -60,49 +47,40 @@ let _setOffset = () => {
 	if (pn) {
 		options.offset = options.offset - pn.offsetHeight;
 	}
-
 };
 
 /**
- * @function _toggleItem
+ * @function toggleItem
  * @param {Object} e The js event object.
  * @description Toggle the active accordion item using class methods.
  */
 
-let _toggleItem = (e) => {
-
-	let header = e.currentTarget;
-	let content = header.nextElementSibling;
+const toggleItem = (e) => {
+	const header = e.currentTarget;
+	const content = header.nextElementSibling;
 
 	if (hasClass(header.parentNode, 'active')) {
-
 		removeClass(header.parentNode, 'active');
-
 		setAccInactiveAttributes(header, content);
 
 		gs.to(content, options.speed, {
 			height: 0,
-			onComplete: function () {
+			onComplete: () => {
 				$(document).trigger('modern_tribe/accordion_animated');
 			},
 		});
-
 	} else {
-
-		_closeOthers(header.parentNode);
-
+		closeOthers(header.parentNode);
 		addClass(header.parentNode, 'active');
-
 		setAccActiveAttributes(header, content);
-
-		_setOffset();
+		setOffset();
 
 		gs.set(content, { height: 'auto' });
 		gs.from(content, options.speed, {
 			height: 0,
-			onComplete: function () {
+			onComplete: () => {
 				scrollTo({
-					after_scroll: function () {
+					after_scroll: () => {
 						$(document).trigger('modern_tribe/accordion_animated');
 					},
 
@@ -112,9 +90,17 @@ let _toggleItem = (e) => {
 				});
 			},
 		});
-
 	}
+};
 
+/**
+ * @function bindEvents
+ * @description Bind the events for this module here.
+ */
+
+const bindEvents = () => {
+	$(options.el)
+		.on('click', '.ac-header', (e) => toggleItem(e));
 };
 
 /**
@@ -122,17 +108,15 @@ let _toggleItem = (e) => {
  * @description Initializes the class if the element(s) to work on are found.
  */
 
-let init = (opts) => {
-
+const init = (opts) => {
 	options = _.assign({
 		el: document.getElementsByClassName('widget-accordion'),
 		speed: 0.3,
 	}, opts);
 
 	if (options.el.length) {
-
-		_setOffset();
-		_bindEvents();
+		setOffset();
+		bindEvents();
 
 		console.info('Initialized accordion widget class.');
 	}

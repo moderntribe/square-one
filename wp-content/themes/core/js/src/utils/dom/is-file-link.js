@@ -4,8 +4,7 @@
  */
 
 const isFileUrl = (url = '') => {
-
-	let ext = url.split('/').pop();
+	const ext = url.split('/').pop();
 	return ext.indexOf('.') !== -1;
 };
 

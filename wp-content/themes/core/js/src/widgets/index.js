@@ -10,10 +10,8 @@ import accordions from './accordion';
  * @description Kick off this modules functions
  */
 
-let init = () => {
-
+const init = () => {
 	accordions();
-
 };
 
 export default init;

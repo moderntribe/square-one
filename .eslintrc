@@ -10,11 +10,13 @@
       500,
       4
     ],
-    "no-underscore-dangle": [
-      "error",
-      {
-        "allow": []
-      }
-    ]
+    "no-console": 0,
+    "no-new": 0
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "mocha": true,
+    "jquery": true
   }
 }

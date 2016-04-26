@@ -7,14 +7,12 @@
 import { trigger } from '../utils/events';
 import viewportDims from './viewport-dims';
 
-let resize = () => {
-
+const resize = () => {
 	// code for resize events can go here
 
 	viewportDims();
 
 	trigger({ event: 'modern_tribe/resize_executed', native: false });
-
 };
 
 export default resize;

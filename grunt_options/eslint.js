@@ -9,7 +9,7 @@
 module.exports = {
 
 	dist: [
-		'<%= pkg._corethemepath %>/js/src/**/*.js'
-	]
+		'<%= pkg._corethemepath %>/js/src/**/*.js',
+	],
 
 };

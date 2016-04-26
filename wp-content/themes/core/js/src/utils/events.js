@@ -9,7 +9,7 @@ const on = (el, name, handler) => {
 	if (el.addEventListener) {
 		el.addEventListener(name, handler);
 	} else {
-		el.attachEvent('on' + name, function () {
+		el.attachEvent(`on${name}`, () => {
 			handler.call(el);
 		});
 	}
@@ -21,7 +21,7 @@ const ready = (fn) => {
 	} else if (document.addEventListener) {
 		document.addEventListener('DOMContentLoaded', fn);
 	} else {
-		document.attachEvent('onreadystatechange', function () {
+		document.attachEvent('onreadystatechange', () => {
 			if (document.readyState !== 'loading') {
 				fn();
 			}
@@ -30,14 +30,13 @@ const ready = (fn) => {
 };
 
 const trigger = (opts) => {
-
 	let event;
-	let options = _.assign({
-			data: {},
-			el: document,
-			event: '',
-			native: true,
-		}, opts);
+	const options = _.assign({
+		data: {},
+		el: document,
+		event: '',
+		native: true,
+	}, opts);
 
 	if (options.native) {
 		event = document.createEvent('HTMLEvents');
@@ -52,7 +51,6 @@ const trigger = (opts) => {
 	}
 
 	options.el.dispatchEvent(event);
-
 };
 
 export { on, ready, trigger };

@@ -9,127 +9,105 @@ import _ from 'lodash';
  * @param opts Object The options object. Check below for available and defaults.
  */
 
-const deepScroll = function (opts) {
+/* global Waypoint */
 
-	let options = _.assign({
-			attr: 'data-url-key',
-			targets: null,
-			offset: 0,
-		}, opts);
-	let url = `${document.location.protocol}//${document.location.hostname}${document.location.pathname}`;
-	let items = [];
+const deepScroll = (opts) => {
+	const options = _.assign({
+		attr: 'data-url-key',
+		targets: null,
+		offset: 0,
+	}, opts);
+	const url = `${document.location.protocol}//${document.location.hostname}${document.location.pathname}`;
+	const items = [];
 	let nodes;
 
-	const _updateHash = (el) => {
-
+	const updateHash = (el) => {
 		if (history.pushState) {
-
 			if (el) {
-				let hash = el.getAttribute('data-url-key') ? `#${el.getAttribute('data-url-key')}` : window.location.pathname;
+				const hash = el.getAttribute('data-url-key') ? `#${el.getAttribute('data-url-key')}` : window.location.pathname;
 				history.replaceState('', '', hash);
 			} else {
 				history.replaceState('', '', url);
 			}
-
 		}
-
 	};
 
-	const _triggerScrollby = (el) => {
-
-		$(document).trigger('modern_tribe/scrolledto', { el: el });
-
+	const triggerScrollby = (el) => {
+		$(document).trigger('modern_tribe/scrolledto', { el });
 	};
 
-	const _handleWaypointDown = (dir, el) => {
-
+	const handleWaypointDown = (dir, el) => {
 		if (dir === 'down') {
-			_updateHash(el);
-			_triggerScrollby(el);
+			updateHash(el);
+			triggerScrollby(el);
 		}
 
 		if (dir === 'up' && $(el).is('.panel-count-0')) {
-			_updateHash(null);
-			_triggerScrollby(null);
+			updateHash(null);
+			triggerScrollby(null);
 		}
-
 	};
 
-	const _handleWaypointUp = (dir, el) => {
-
+	const handleWaypointUp = (dir, el) => {
 		if (dir === 'up') {
-			_updateHash(el);
-			_triggerScrollby(el);
+			updateHash(el);
+			triggerScrollby(el);
 		}
-
 	};
 
-	const _applyWaypoint = (el) => {
+	const applyWaypoint = (el) => {
+		const data = {};
+		const urlKey = el.getAttribute(options.attr);
+		const objectId = urlKey || _.uniqueId('way-');
+		const title = el.getAttribute('data-nav-title');
 
-		let data = {};
-		let urlKey = el.getAttribute(options.attr);
-		let title = el.getAttribute('data-nav-title');
-
-		data[(urlKey ? urlKey : _.uniqueId('way-')) + '-down'] = new Waypoint({
+		data[`${objectId}-down`] = new Waypoint({
 			element: el,
-			handler: function (dir) {
-				_handleWaypointDown(dir, el);
+			handler: (dir) => {
+				handleWaypointDown(dir, el);
 			},
 
-			offset: options.offset + 'px',
+			offset: `${options.offset}px`,
 		});
 
-		data[(urlKey ? urlKey : _.uniqueId('way-')) + '-up'] = new Waypoint({
+		data[`${objectId}-up`] = new Waypoint({
 			element: el,
-			handler: function (dir) {
-				_handleWaypointUp(dir, el);
+			handler: (dir) => {
+				handleWaypointUp(dir, el);
 			},
 
-			offset: function () {
-				return -(this.element.clientHeight - options.offset);
-			},
-
+			offset: () => -(this.element.clientHeight - options.offset),
 		});
 
 		items.push({
 			has_data: el.innerHTML.trim() !== '',
-			url_key: urlKey,
-			title: title,
+			urlKey,
+			title,
 			waypoint: data,
 		});
-
 	};
 
-	const _executeResize = () => {
-
+	const executeResize = () => {
 		Waypoint.refreshAll();
-
 	};
 
-	const _refresh = () => {
-
+	const refresh = () => {
 		_.delay(() => Waypoint.refreshAll(), 1000);
-
 	};
 
-	const _bindEvents = () => {
-
-		document.addEventListener('modern_tribe/refresh_waypoints', _executeResize);
-		document.addEventListener('modern_tribe/resize_executed', _executeResize);
-		document.addEventListener('modern_tribe/accordion_animated', _executeResize);
-		window.addEventListener('load', _refresh);
-
+	const bindEvents = () => {
+		document.addEventListener('modern_tribe/refresh_waypoints', executeResize);
+		document.addEventListener('modern_tribe/resize_executed', executeResize);
+		document.addEventListener('modern_tribe/accordion_animated', executeResize);
+		window.addEventListener('load', refresh);
 	};
 
 	if (options.targets) {
-
 		nodes = [].slice.call(options.targets);
-		nodes.forEach((el) => _applyWaypoint(el));
+		nodes.forEach((el) => applyWaypoint(el));
 
-		_bindEvents();
-
+		bindEvents();
 	}
-
 };
 
 export default deepScroll;

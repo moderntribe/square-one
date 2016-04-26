@@ -9,8 +9,7 @@ import { convertElements, isNodelist } from '../tools';
 import _ from 'lodash';
 
 const scrollspy = (options) => {
-
-	let defaults = {
+	const defaults = {
 		min: 0,
 		max: 0,
 		debounce: 50,
@@ -23,7 +22,7 @@ const scrollspy = (options) => {
 		onTick: options.onTick ? options.onTick : [],
 	};
 
-	let opts = Object.assign(defaults, options);
+	const opts = Object.assign(defaults, options);
 
 	if (!opts.elements) {
 		return;
@@ -38,22 +37,20 @@ const scrollspy = (options) => {
 	}
 
 	let leaves;
-	let o = opts;
-	let mode = o.mode;
-	let buffer = o.buffer;
+	const o = opts;
+	const mode = o.mode;
+	const buffer = o.buffer;
 	let enters = leaves = 0;
 	let inside = false;
 
 	elements.forEach((element) => {
-
-		o.container.addEventListener('scroll', _.debounce(function () {
-
-			let position = {
+		o.container.addEventListener('scroll', _.debounce(() => {
+			const position = {
 				top: element.scrollTop,
 				left: element.scrollLeft,
 			};
 
-			let xy = (mode === 'vertical') ? position.top + buffer : position.left + buffer;
+			const xy = (mode === 'vertical') ? position.top + buffer : position.left + buffer;
 			let max = o.max;
 			let min = o.min;
 
@@ -67,7 +64,7 @@ const scrollspy = (options) => {
 				min = o.min();
 			}
 
-			if (parseInt(max) === 0) {
+			if (parseInt(max, 10) === 0) {
 				max = (mode === 'vertical') ? o.container.offsetHeight : o.container.offsetWidth + element.offsetWidth;
 			}
 
@@ -84,13 +81,12 @@ const scrollspy = (options) => {
 						event: 'scrollEnter',
 						native: false,
 						data: {
-							position: position,
+							position,
 						},
 					});
 					if (_.isFunction(o.onEnter)) {
 						o.onEnter(element, position);
 					}
-
 				}
 
 				/* trigger tick event */
@@ -99,17 +95,16 @@ const scrollspy = (options) => {
 					event: 'scrollTick',
 					native: false,
 					data: {
-						position: position,
-						inside: inside,
-						enters: enters,
-						leaves: leaves,
+						position,
+						inside,
+						enters,
+						leaves,
 					},
 				});
 				if (_.isFunction(o.onTick)) {
 					o.onTick(element, position, inside, enters, leaves);
 				}
 			} else {
-
 				if (inside) {
 					inside = false;
 					leaves++;
@@ -119,8 +114,8 @@ const scrollspy = (options) => {
 						event: 'scrollLeave',
 						native: false,
 						data: {
-							position: position,
-							leaves: leaves,
+							position,
+							leaves,
 						},
 					});
 
@@ -130,7 +125,6 @@ const scrollspy = (options) => {
 				}
 			}
 		}, o.debounce, false));
-
 	});
 };
 

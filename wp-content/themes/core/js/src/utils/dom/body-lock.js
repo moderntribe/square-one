@@ -11,7 +11,6 @@ const scroller = browser.edge || browser.ie || browser.firefox ? document.docume
  */
 
 const lock = () => {
-
 	scroll = scroller.scrollTop;
 	document.body.style.position = 'fixed';
 	document.body.style.marginTop = `-${scroll}px`;
@@ -23,8 +22,7 @@ const lock = () => {
  */
 
 const unlock = () => {
-
-	document.body.style.marginTop = `0px`;
+	document.body.style.marginTop = '0px';
 	document.body.style.position = 'relative';
 	scroller.scrollTop = scroll;
 };

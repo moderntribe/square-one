@@ -10,13 +10,13 @@ module.exports = {
 
 	options: {
 		compilers: ['js:babel-core/register'],
-		require  : ['expect'],
-		reporter : 'nyan',
-		bail     : true,
-		timeout  : 10000
+		require: ['expect'],
+		reporter: 'nyan',
+		bail: true,
+		timeout: 10000,
 	},
 
 	all: [
-		'<%= pkg._corethemepath %>/tests/**/*.js'
-	]
+		'<%= pkg._corethemepath %>/tests/**/*.js',
+	],
 };

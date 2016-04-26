@@ -1,46 +1,45 @@
-
 import expect from '../../../../../node_modules/expect/lib/index';
 
-import { add_class, has_class, remove_class, convert_elements } from '../../js/src/utils/tools';
+import { addClass, hasClass, removeClass } from '../../js/src/utils/tools';
 
-describe( '#add_class()', () => {
+describe('#addClass()', () => {
 
-	it( 'should add an html class string to the classlist of a dom element', () => {
+	it('should add an html class string to the classlist of a dom element', () => {
 
-		let div = document.createElement( 'div' );
+		let div = document.createElement('div');
 
-		add_class( div, 'test' );
+		addClass(div, 'test');
 
-		expect( div.classList.contains( 'test' ) ).toExist();
-
-	});
-
-});
-
-describe( '#remove_class()', () => {
-
-	it( 'should remove an html class string from the classlist of a dom element', () => {
-
-		let div = document.createElement( 'div' );
-
-		div.classList.add( 'test' );
-		remove_class( div, 'test' );
-
-		expect( div.classList.contains( 'test' ) ).toNotExist();
+		expect(div.classList.contains('test')).toExist();
 
 	});
 
 });
 
-describe( '#has_class()', () => {
+describe('#removeClass()', () => {
 
-	it( 'should test if a dom element has an html class', () => {
+	it('should remove an html class string from the classlist of a dom element', () => {
 
-		let div = document.createElement( 'div' );
+		let div = document.createElement('div');
 
-		div.classList.add( 'test' );
+		div.classList.add('test');
+		removeClass(div, 'test');
 
-		expect( has_class( div, 'test' ) ).toExist();
+		expect(div.classList.contains('test')).toNotExist();
+
+	});
+
+});
+
+describe('#hasClass()', () => {
+
+	it('should test if a dom element has an html class', () => {
+
+		let div = document.createElement('div');
+
+		div.classList.add('test');
+
+		expect(hasClass(div, 'test')).toExist();
 
 	});
 

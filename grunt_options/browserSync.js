@@ -6,7 +6,6 @@
  */
 
 module.exports = {
-
 	dev: {
 		bsFiles: {
 			src: [
@@ -18,21 +17,20 @@ module.exports = {
 
 				'<%= pkg._corepluginpath %>/assets/**/*.css',
 				'<%= pkg._corepluginpath %>/assets/**/*.js',
-				'<%= pkg._corepluginpath %>/**/*.php'
-			]
+				'<%= pkg._corepluginpath %>/**/*.php',
+			],
 		},
 		options: {
-			watchTask     : true,
-			debugInfo     : true,
+			watchTask: true,
+			debugInfo: true,
 			logConnections: true,
-			notify        : true,
-			proxy         : '<%= dev.proxy %>',
-			ghostMode     : {
+			notify: true,
+			proxy: '<%= dev.proxy %>',
+			ghostMode: {
 				scroll: true,
-				links : true,
-				forms : true
-			}
-		}
-	}
-
+				links: true,
+				forms: true,
+			},
+		},
+	},
 };

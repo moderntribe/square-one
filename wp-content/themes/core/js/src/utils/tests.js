@@ -4,7 +4,6 @@
  */
 
 const isJson = (str) => {
-
 	try {
 		JSON.parse(str);
 	} catch (e) {
@@ -12,13 +11,11 @@ const isJson = (str) => {
 	}
 
 	return true;
-
 };
 
 const canLocalStore = () => {
-
 	let mod;
-	let result;
+	let result = false;
 	try {
 		mod = new Date;
 		localStorage.setItem(mod, mod.toString());
@@ -27,15 +24,15 @@ const canLocalStore = () => {
 		return result;
 	} catch (_error) {
 		console.error('This browser doesn\'t support local storage or is not allowing writing to it.');
+		return result;
 	}
-
 };
 
 const browserTests = () => ({
 	android: /Android/i.test(window.navigator.userAgent) && /Mobile/i.test(window.navigator.userAgent),
 	chrome: !!window.chrome,
 	firefox: typeof InstallTrigger !== 'undefined',
-	ie: /*@cc_on!@*/false || document.documentMode,
+	ie: /* @cc_on!@ */false || document.documentMode,
 	ios: !!navigator.userAgent.match(/(iPod|iPhone|iPad)/i),
 	iosMobile: !!navigator.userAgent.match(/(iPod|iPhone)/i),
 	safari: Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0,

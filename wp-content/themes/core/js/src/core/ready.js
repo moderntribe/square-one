@@ -16,12 +16,20 @@ import viewportDims from './viewport-dims';
 import { on, ready } from '../utils/events';
 
 /**
+ * @function bindEvents
+ * @description Bind global event listeners here,
+ */
+
+const bindEvents = () => {
+	on(window, 'resize', _.debounce(resize, 200, false));
+};
+
+/**
  * @function init
  * @description The core dispatcher for init across the codebase.
  */
 
-let init = () => {
-
+const init = () => {
 	// init external plugins
 
 	plugins();
@@ -42,25 +50,12 @@ let init = () => {
 };
 
 /**
- * @function bind_events
- * @description Bind global event listeners here,
- */
-
-let bindEvents = () => {
-
-	on(window, 'resize', _.debounce(resize, 200, false));
-
-};
-
-/**
- * @function dom_ready
+ * @function domReady
  * @description Export our dom ready enabled init.
  */
 
-let domReady = () => {
-
+const domReady = () => {
 	ready(init);
-
 };
 
 export default domReady;

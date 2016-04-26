@@ -11,7 +11,6 @@ import Fastclick from 'fastclick';
 import Mtlazy from 'mtlazy';
 
 const plugins = () => {
-
 	// initialize global external plugins here
 
 	// lazyloading images, general. Use class 'lazyload'

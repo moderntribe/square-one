@@ -1,4 +1,4 @@
 
-import Ready from './core/ready';
+import ready from './core/ready';
 
-Ready();
+ready();

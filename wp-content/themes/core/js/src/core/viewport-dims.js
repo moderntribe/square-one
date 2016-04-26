@@ -10,7 +10,6 @@ import state from '../config/state';
 import { MOBILE_BREAKPOINT } from '../config/options';
 
 const viewportDims = () => {
-
 	state.v_height = verge.viewportH();
 	state.v_width = verge.viewportW();
 
@@ -21,7 +20,6 @@ const viewportDims = () => {
 		state.is_desktop = false;
 		state.is_mobile = true;
 	}
-
 };
 
 export default viewportDims;

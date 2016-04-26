@@ -58,12 +58,6 @@
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/**
-	 * @module
-	 * @exports ready
-	 * @description The core dispatcher for the dom ready event javascript.
-	 */
-
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
@@ -91,15 +85,29 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	/**
+	 * @function bindEvents
+	 * @description Bind global event listeners here,
+	 */
+
+	// you MUST do this in every module you use lodash in.
+	// A custom bundle of only the lodash you use will be built by babel.
+
+	var bindEvents = function bindEvents() {
+	  (0, _events.on)(window, 'resize', (0, _debounce3.default)(_resize2.default, 200, false));
+	};
+
+	/**
 	 * @function init
 	 * @description The core dispatcher for init across the codebase.
 	 */
 
-	// you MUST do this in every module you use lodash in. A custom bundle of only the lodash
-	// you use will be built by babel.
+	/**
+	 * @module
+	 * @exports ready
+	 * @description The core dispatcher for the dom ready event javascript.
+	 */
 
 	var init = function init() {
-
 	  // init external plugins
 
 	  (0, _plugins2.default)();
@@ -110,7 +118,7 @@
 
 	  // initialize global events
 
-	  bind_events();
+	  bindEvents();
 
 	  // initialize widgets
 
@@ -120,26 +128,15 @@
 	};
 
 	/**
-	 * @function bind_events
-	 * @description Bind global event listeners here,
-	 */
-
-	var bind_events = function bind_events() {
-
-	  (0, _events.on)(window, 'resize', (0, _debounce3.default)(_resize2.default, 200, false));
-	};
-
-	/**
-	 * @function dom_ready
+	 * @function domReady
 	 * @description Export our dom ready enabled init.
 	 */
 
-	var dom_ready = function dom_ready() {
-
+	var domReady = function domReady() {
 	  (0, _events.ready)(init);
 	};
 
-	exports.default = dom_ready;
+	exports.default = domReady;
 
 /***/ },
 /* 2 */
@@ -602,12 +599,6 @@
 /* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/**
-	 * @module
-	 * @exports resize
-	 * @description Kicks in any third party plugins that operate on a sitewide basis.
-	 */
-
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
@@ -622,8 +613,13 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var resize = function resize() {
+	/**
+	 * @module
+	 * @exports resize
+	 * @description Kicks in any third party plugins that operate on a sitewide basis.
+	 */
 
+	var resize = function resize() {
 	  // code for resize events can go here
 
 	  (0, _viewportDims2.default)();
@@ -636,11 +632,6 @@
 /***/ },
 /* 10 */
 /***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * @module
-	 * @description Some event functions for use in other modules
-	 */
 
 	'use strict';
 
@@ -663,7 +654,10 @@
 				handler.call(el);
 			});
 		}
-	};
+	}; /**
+	    * @module
+	    * @description Some event functions for use in other modules
+	    */
 
 	var ready = function ready(fn) {
 		if (document.readyState !== 'loading') {
@@ -680,9 +674,8 @@
 	};
 
 	var trigger = function trigger(opts) {
-
-		var event = void 0,
-		    options = (0, _assign3.default)({
+		var event = void 0;
+		var options = (0, _assign3.default)({
 			data: {},
 			el: document,
 			event: '',
@@ -1661,12 +1654,6 @@
 /* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/**
-	 * @module
-	 * @exports viewport_dims
-	 * @description Sets viewport dimensions using verge on shared state and detects mobile or desktop state.
-	 */
-
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
@@ -1685,8 +1672,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var viewport_dims = function viewport_dims() {
-
+	var viewportDims = function viewportDims() {
 		_state2.default.v_height = _verge2.default.viewportH();
 		_state2.default.v_width = _verge2.default.viewportW();
 
@@ -1697,9 +1683,14 @@
 			_state2.default.is_desktop = false;
 			_state2.default.is_mobile = true;
 		}
-	};
+	}; /**
+	    * @module
+	    * @exports viewportDims
+	    * @description Sets viewport dimensions using verge on shared state
+	    * and detects mobile or desktop state.
+	    */
 
-	exports.default = viewport_dims;
+	exports.default = viewportDims;
 
 /***/ },
 /* 37 */
@@ -1888,7 +1879,7 @@
 /* 39 */
 /***/ function(module, exports) {
 
-	'use strict';
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 		value: true
@@ -1906,24 +1897,19 @@
 /* 40 */
 /***/ function(module, exports) {
 
-	'use strict';
-
-	// breakpoint settings
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+
+	// breakpoint settings
+
 	var MOBILE_BREAKPOINT = exports.MOBILE_BREAKPOINT = 768;
 
 /***/ },
 /* 41 */
 /***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * @module
-	 * @exports plugins
-	 * @description Kicks in any third party plugins that operate ona sitewide basis.
-	 */
 
 	'use strict';
 
@@ -1941,11 +1927,18 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var plugins = function plugins() {
+	/**
+	 * @module
+	 * @exports plugins
+	 * @description Kicks in any third party plugins that operate on
+	 * a sitewide basis.
+	 */
 
+	var plugins = function plugins() {
 		// initialize global external plugins here
 
-		// lazyloading images, general. Use class 'lazyload' and attributes 'data-src' and 'data-retina-src'.
+		// lazyloading images, general. Use class 'lazyload'
+		// and attributes 'data-src' and 'data-retina-src'.
 
 		new _mtlazy2.default({
 			fade: true
@@ -1955,6 +1948,7 @@
 
 		_fastclick2.default.attach(document.body);
 	};
+
 	// import gsap from 'gsap'; // uncomment to import gsap globally
 
 
