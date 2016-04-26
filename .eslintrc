@@ -1,0 +1,22 @@
+{
+  "extends": "airbnb",
+  "rules": {
+    "indent": [
+      "error",
+      "tab"
+    ],
+    "max-len": [
+      "error",
+      500,
+      4
+    ],
+    "no-console": 0,
+    "no-new": 0
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "mocha": true,
+    "jquery": true
+  }
+}

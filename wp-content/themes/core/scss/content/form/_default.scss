@@ -1,0 +1,190 @@
+
+// -----------------------------------------------------------------------------
+//
+// Input Block / Wrapper
+//
+// -----------------------------------------------------------------------------
+
+.input,
+%input-wrap {
+	margin-bottom: $spacer;
+	line-height: $line-height-even;
+}
+
+// -----------------------------------------------------------------------------
+//
+// Label
+//
+// -----------------------------------------------------------------------------
+
+.label {
+	@extend %label;
+}
+
+// -----------------------------------------------------------------------------
+//
+// Required
+//
+// -----------------------------------------------------------------------------
+
+// Required
+.required {
+	label {
+		&:after {
+			@extend %required;
+			content: '*';
+		}
+	}
+}
+
+%required {
+	padding-left: 4px;
+	color: $required;
+}
+
+// -----------------------------------------------------------------------------
+//
+// Fieldset & Legend
+//
+// -----------------------------------------------------------------------------
+
+fieldset {
+
+}
+
+legend {
+	@extend %label;
+}
+
+// -----------------------------------------------------------------------------
+//
+// Inputs
+//
+// -----------------------------------------------------------------------------
+
+//input,
+//button,
+//textarea,
+//select
+.field,
+%field {
+	padding: 0 14px;
+	border: 1px solid $border-input;
+	background-color: $bgd-inputs;
+	display: block;
+	width: 100%;
+	height: 42px;
+	color: $text;
+}
+
+// -----------------------------------------------------------------------------
+// Inputs: Radio & Checkbox
+// -----------------------------------------------------------------------------
+
+//input[type="radio"]
+//input[type="checkbox"]
+%input-checkbox-radio-ui {
+	height: auto;
+    width: auto;
+    line-height: normal;
+    display: inline-block;
+    padding: 0;
+    margin-right: 10px;
+}
+
+.checkbox,
+.radio,
+%input-checkbox-radio {
+	display: block;
+	input[type="radio"],
+	input[type="checkbox"] {
+		@extend %input-checkbox-radio-ui;
+	}
+	label {
+		cursor: pointer;
+		margin-bottom: 0;
+		display: inline-block;
+	}
+}
+
+.checkbox {
+	& ~ .checkbox {
+		margin-top: $spacer-xs;
+	}
+}
+
+.radio {
+	& ~ .radio {
+		margin-top: $spacer-xs;
+	}
+}
+
+// -----------------------------------------------------------------------------
+// Inputs: File
+// -----------------------------------------------------------------------------
+
+input[type="file"] {
+	@extend %field;
+	height: auto;
+	padding: 14px;
+	line-height: $line-height-even;
+}
+
+// -----------------------------------------------------------------------------
+// Textarea
+// -----------------------------------------------------------------------------
+
+textarea {
+	@extend %field;
+	resize: none;
+	padding: 12px 14px;
+	height: 180px;
+}
+
+// -----------------------------------------------------------------------------
+// Select
+// -----------------------------------------------------------------------------
+
+select {
+	@extend %field;
+	padding-right: 0;
+	cursor: pointer;
+	// CASE: multiple
+	&[multiple] {
+		height: 100px;
+		padding: 14px;
+	}
+}
+
+// -----------------------------------------------------------------------------
+// Buttons & Submits
+// -----------------------------------------------------------------------------
+
+//button
+//input[type="button"]
+//input[type="reset"]
+//input[type="submit"]
+.btn-submit,
+%button-submit {
+	background-color: $primary;
+	border: 0;
+	color: $white;
+	width: 100%;
+	margin-top: $spacer;
+	@include mq($mq-medium) {
+		width: auto;
+	}
+}
+
+// -----------------------------------------------------------------------------
+// Placeholders & Focus
+// -----------------------------------------------------------------------------
+
+// Placeholders
+@include placeholder {
+	color: $placeholder;
+	opacity: 1;
+}
+
+// Focus
+// See: utilities/extends/_form.scss
