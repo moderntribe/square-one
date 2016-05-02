@@ -83,7 +83,7 @@ $config_defaults = array(
 
 	// Miscellaneous
 	'WP_POST_REVISIONS'       => true,
-	'WP_DEFAULT_THEME'        => 'tribe-square-one'
+	'WP_DEFAULT_THEME'        => 'core'
 );
 
 // ==============================================================
