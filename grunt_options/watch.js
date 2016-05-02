@@ -20,15 +20,25 @@ module.exports = {
 
 	theme_css: {
 		files: [
-			'<%= pkg._corethemepath %>/scss/**/**/*.scss',
-			'<%= pkg._corethemepath %>/scss/**/*.scss',
-			'<%= pkg._corethemepath %>/scss/*.scss',
+			'<%= pkg._corethemepath %>/pcss/**/**/*.pcss',
+			'<%= pkg._corethemepath %>/pcss/**/*.pcss',
+			'<%= pkg._corethemepath %>/pcss/*.pcss',
+			'!<%= pkg._corethemepath %>/pcss/admin/*.pcss',
 		],
 		tasks: [
-			'sass:theme',
-			'combine_mq:theme',
-			'postcss:theme_prefix',
-			'clean:theme',
+			'postcss:theme',
+			'postcss:theme_legacy',
+		],
+		options: defaultOpts,
+	},
+
+	theme_admin: {
+		files: [
+			'<%= pkg._corethemepath %>/pcss/admin/*.pcss',
+		],
+		tasks: [
+			'postcss:theme_editor',
+			'postcss:theme_login',
 		],
 		options: defaultOpts,
 	},
@@ -38,6 +48,7 @@ module.exports = {
 			'<%= pkg._corethemepath %>/js/src/**/*.js',
 		],
 		tasks: [
+			'eslint:dist',
 			'webpack:themedev',
 		],
 		options: defaultOpts,

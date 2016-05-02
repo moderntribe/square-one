@@ -19,6 +19,7 @@ module.exports = {
 					'<%= pkg._npmpath %>/jquery/dist/jquery.min.map',
 					'<%= pkg._componentpath %>/theme/js/globals.js',
 					'<%= pkg._npmpath %>/tota11y/build/tota11y.min.js',
+					'<%= pkg._npmpath %>/webfontloader/webfontloader.js',
 				],
 				dest: '<%= pkg._corethemepath %>/js/vendor/',
 			},

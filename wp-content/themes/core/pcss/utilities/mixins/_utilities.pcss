@@ -1,0 +1,17 @@
+@define-mixin field {
+    padding: 0 14px;
+    border: 1px solid $border-input;
+    background-color: $bgd-inputs;
+    display: block;
+    width: 100%;
+    height: 42px;
+    color: $text;
+}
+
+@define-mixin clearfix {
+    &:after { 
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
