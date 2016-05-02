@@ -1,15 +1,6 @@
 
 ############################
 
-<IfModule mod_rewrite.c>
-	RewriteEngine On
-	RewriteBase /
-	RewriteRule ^(wp-admin/.*)$ /wp/$1 [L]
-	RewriteRule ^(wp-[^/]+\.php)$ /wp/$1 [L]
-	RewriteRule ^xmlrpc\.php$ /wp/xmlrpc.php [L]
-	RewriteRule ^(wp-includes/.*)$ /wp/$1 [L]
-</IfModule>
-
 # BEGIN WordPress
 <IfModule mod_rewrite.c>
 	RewriteEngine On

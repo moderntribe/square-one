@@ -84,9 +84,9 @@ wp-content/mu-plugins/wpe_bnseosnvlsoier_private_ips.php
 wp-content/mysql.sql
 wp-content/plugins/airplane-mode
 /nbproject/
-wp-content/plugins/sls-courses-import/Import/_cache/xml_feed.xml
 
 # Theme #
+#######################
 
 **/node_modules/
 **/bower_components/
