@@ -67,6 +67,7 @@
     "postcss-color-function": "^2.0.1",
     "postcss-cssnext": "^2.5.2",
     "postcss-custom-media": "^5.0.1",
+    "postcss-custom-properties": "^5.0.1",
     "postcss-functions": "^2.1.0",
     "postcss-inline-comment": "^2.0.0",
     "postcss-mixins": "^4.0.1",

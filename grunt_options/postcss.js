@@ -13,6 +13,7 @@ var compileOptions = {
 		require('postcss-partial-import')({ extension: 'pcss', }),
 		require('postcss-inline-comment'),
 		require('postcss-mixins'),
+		require('postcss-custom-properties'),
 		require('postcss-simple-vars'),
 		require('postcss-custom-media'),
 		require('postcss-functions')({ functions: postcssFunctions }),
@@ -29,6 +30,7 @@ var legacyOptions = {
 	processors: [
 		require('postcss-partial-import')({ extension: 'pcss', }),
 		require('postcss-mixins'),
+		require('postcss-custom-properties'),
 		require('postcss-simple-vars'),
 		require('postcss-nested'),
 		require('postcss-cssnext')({ browsers: ['last 20 versions', 'ie 6'] }),
