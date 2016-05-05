@@ -1,4 +1,0 @@
-formatter.name: pretty
-suites:
-    function_mocker_suite:
-        namespace: tad\FunctionMocker
