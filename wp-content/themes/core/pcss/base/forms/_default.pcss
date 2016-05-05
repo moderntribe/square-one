@@ -1,0 +1,44 @@
+
+/* -------------------------------------------------------------------------
+ * Global Forms
+ * ------------------------------------------------------------------------- */
+
+form {
+	.context-content & {
+		margin: var(--spacer) auto;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ *
+ * Form: Input Block / Wrapper
+ *
+ * Example:
+ * <div class="input">
+ *   <label class="label" for="text">Label: Text Input</label>
+ *   <input name="text" class="field" type="text" />
+ * </div>
+ *
+ * ----------------------------------------------------------------------------- */
+
+.input {
+	margin-bottom: var(--spacer);
+	line-height: var(--line-height-even);
+}
+
+/* -----------------------------------------------------------------------------
+ *
+ * Form: Input Field
+ *
+ * Example:
+ * <input name="text" class="field" type="text" />
+ *
+ * ----------------------------------------------------------------------------- */
+
+//input,
+//button,
+//textarea,
+//select
+.field {
+	@mixin field;
+}

@@ -1,0 +1,37 @@
+input {
+	&[type="radio"],
+	&[type="checkbox"] {
+		margin-bottom: 0;
+	}
+}
+
+.checkbox,
+.radio {
+	display: block;
+	input[type="radio"],
+	input[type="checkbox"] {
+		height: auto;
+	    width: auto;
+	    line-height: normal;
+	    display: inline-block;
+	    padding: 0;
+	    margin-right: 10px;
+	}
+	label {
+		cursor: pointer;
+		margin-bottom: 0;
+		display: inline-block;
+	}
+}
+
+.checkbox {
+	& ~ .checkbox {
+		margin-top: var(--spacer-xs);
+	}
+}
+
+.radio {
+	& ~ .radio {
+		margin-top: var(--spacer-xs);
+	}
+}

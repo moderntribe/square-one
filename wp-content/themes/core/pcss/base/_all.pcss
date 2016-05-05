@@ -1,7 +1,44 @@
 
+/* -----------------------------------------------------------------------------
+ *
+ * Base
+ *
+ * This file is just a clearing-house.
+ * Make partials (start with an underscore) for any actual css code.
+ *
+ * ----------------------------------------------------------------------------- */
 
-@import "fonts";
-@import "icons";
-@import "globals";
-@import "layout";
-@import "typography";
+@import "fonts.pcss";
+@import "icons.pcss";
+@import "globals.pcss";
+
+/* Layouts */
+@import "layouts/default.pcss";
+
+/* Typography */
+@import "typography/default.pcss";
+@import "typography/anchors.pcss";
+@import "typography/headings.pcss";
+@import "typography/lists.pcss";
+@import "typography/quotes.pcss";
+@import "typography/tables.pcss";
+
+/* Media */
+@import "media/images.pcss";
+@import "media/embeds.pcss";
+
+/* Buttons */
+@import "buttons/default.pcss";
+@import "buttons/button.pcss";
+
+/* Forms */
+@import "forms/default.pcss";
+@import "forms/labels.pcss";
+@import "forms/fieldsets.pcss";
+@import "forms/accessibility.pcss";
+@import "forms/fields/radio-checkbox.pcss";
+@import "forms/fields/select.pcss";
+@import "forms/fields/file.pcss";
+@import "forms/fields/textarea.pcss";
+@import "forms/fields/submit.pcss";
+@import "forms/validation/required.pcss";

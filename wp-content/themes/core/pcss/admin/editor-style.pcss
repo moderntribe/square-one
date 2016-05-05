@@ -8,21 +8,30 @@
  *
  */
 
-@import "../base/reset";
-@import "../utilities/all";
-@import "../base/fonts";
+/* Reset */
+@import "../base/reset.pcss";
+
+/* Core */
+@import "../utilities/all.pcss";
+@import "../base/fonts.pcss";
+
+/* -----------------------------------------------------------------------------
+ *
+ * Body & Globals
+ *
+ * ----------------------------------------------------------------------------- */
 
 html .mceContentBody {
     padding: 15px !important;
 }
 
 body {
-    color: $text; 
-    background-color: $white;
-    font-weight: $font-weight-regular;
+    color: var(--text);
+    background-color: var(--white);
+    font-weight: var(--font-weight-regular);
     font-size: 100%;
-    line-height: $line-height-base;
-    font-family: $font-family-base;
+    line-height: var(--line-height-base);
+    font-family: var(--font-family-base);
     -webkit-font-smoothing: antialiased;
     -webkit-hyphens: auto;
     -moz-hyphens: auto;
@@ -30,7 +39,41 @@ body {
     hyphens: auto;
     text-rendering: optimizeLegibility;
     vertical-align: baseline;
+
+    // Typography
+    @import "../base/typography/default.pcss";
+    @import "../base/typography/anchors.pcss";
+    @import "../base/typography/headings.pcss";
+    @import "../base/typography/lists.pcss";
+    @import "../base/typography/quotes.pcss";
+    @import "../base/typography/tables.pcss";
+
+    // Media
+    @import "../base/media/images.pcss";
+    @import "../base/media/embeds.pcss";
+
+    // Buttons
+    @import "../base/buttons/default.pcss";
+
+    // Forms
+    @import "../base/forms/default.pcss";
+    @import "../base/forms/labels.pcss";
+    @import "../base/forms/fieldsets.pcss";
+    @import "../base/forms/accessibility.pcss";
+    @import "../base/forms/validation/default.pcss";
+    @import "../base/forms/fields/radio-checkbox.pcss";
+    @import "../base/forms/fields/select.pcss";
+    @import "../base/forms/fields/file.pcss";
+    @import "../base/forms/fields/textarea.pcss";
+    @import "../base/forms/fields/submit.pcss";
+
 }
+
+/* -----------------------------------------------------------------------------
+ *
+ * Media
+ *
+ * ----------------------------------------------------------------------------- */
 
 img,
 iframe,
@@ -38,9 +81,11 @@ object,
 embed,
 video {
     border: 0;
-    @extend %media-reset;
-    margin-top: $spacer;
-    margin-bottom: $spacer;
+    line-height: 0;
+    width: auto;
+    height: auto;
+    margin-top: var(--spacer);
+    margin-bottom: var(--spacer);
     display: block;
 }
 
@@ -54,13 +99,13 @@ img {
     }
     &.alignleft,
     &.alignright {
-        margin-top: $spacer;
-        margin-bottom: $spacer;
+        margin-top: var(--spacer);
+        margin-bottom: var(--spacer);
     }
 }
 
 .wp-caption {
-    margin: $spacer auto;
+    margin: var(--spacer) auto;
     width: auto !important;
     img {
         margin-bottom: 0;
@@ -91,16 +136,16 @@ img {
 .alignleft {
     float: left;
     &.wp-caption {
-        margin-top: $spacer;
-        margin-bottom: $spacer;
+        margin-top: var(--spacer);
+        margin-bottom: var(--spacer);
     }
 }
 .alignright {
     float: right;
     &img,
     &.wp-caption {
-        margin-top: $spacer;
-        margin-bottom: $spacer;
+        margin-top: var(--spacer);
+        margin-bottom: var(--spacer);
     }
 }
 
@@ -109,6 +154,6 @@ img {
     max-width: 35% !important;
     &img,
     &.wp-caption {
-        margin-bottom: $spacer;
+        margin-bottom: var(--spacer);
     }
 }

@@ -1,0 +1,74 @@
+
+/* -------------------------------------------------------------------------
+ * Global Lists
+ * ------------------------------------------------------------------------- */
+
+ul, ol, dl {
+	.context-content & {
+		@mixin body-content;
+		margin-top: var(--spacer);
+		margin-bottom: var(--spacer);
+	}
+}
+
+li {
+	& ~ li {
+		.context-content & {
+			margin-top: var(--spacer-xs);
+		}
+	}
+}
+
+/* -------------------------------------------------------------------------
+ * UL
+ * ------------------------------------------------------------------------- */
+
+.list-bullet,
+.context-content ul {
+	list-style: disc outside;
+	padding-left: 1.5em;
+	padding-right: 0;
+	@media (--viewport-m) {
+		padding-left: 3em;
+		padding-right: 3em;
+	}
+}
+
+/* -------------------------------------------------------------------------
+ * OL
+ * ------------------------------------------------------------------------- */
+
+.list-number,
+.context-content ol {
+	list-style: decimal outside;
+	padding-left: 1.5em;
+	padding-right: 0;
+	@media (--viewport-m) {
+		padding-left: 3em;
+		padding-right: 3em;
+	}
+}
+
+/* -------------------------------------------------------------------------
+ * DL
+ * ------------------------------------------------------------------------- */
+
+.dl,
+.context-content dl {
+	padding-left: 1.5em;
+	padding-right: 0;
+	@media (--viewport-m) {
+		padding-left: 3em;
+		padding-right: 3em;
+	}
+}
+
+.dt,
+.context-content dt {
+	font-weight: var(--font-weight-bold);
+}
+
+.dd,
+.context-content ddd {
+	margin-bottom: var(--spacer);
+}

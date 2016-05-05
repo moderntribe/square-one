@@ -8,9 +8,10 @@
  *
  */
 
-@import "../utilities/variables/paths";
-@import "../utilities/variables/colors";
-@import "../utilities/variables/typography";
+/* Variables */
+@import "../utilities/variables/paths.pcss";
+@import "../utilities/variables/colors.pcss";
+@import "../utilities/variables/typography.pcss";
 
 * {
 	box-sizing: border-box;
@@ -22,7 +23,7 @@
 	position: relative;
 	width: 100%;
 	display: table;
-	background: $bgd-login;
+	background: var(--bgd-login);
 
 	#login {
 		overflow: hidden;
@@ -41,9 +42,10 @@
 
 	&.wp-core-ui {
 		.button-primary {
-			background: $primary;
-			font-family: $font-family-base;
-			color: $white;
+			transition: var(--transition);
+			background: var(--primary);
+			font-family: var(--font-family-base);
+			color: var(--white);
 			border: 0;
 			border-radius: 0;
 			box-shadow: none;
@@ -56,7 +58,7 @@
 			font-weight: bold;
 			float: none;
 			&:hover {
-				background-color: $secondary;
+				background-color: var(--secondary);
 			}
 		}
 	}
@@ -71,21 +73,51 @@
 		}
 	}
 
+	/*
+	h1 {
+		padding: 8px;
+		margin: 0 auto 16px;
+		a {  
+			line-height: 1;
+			background: url(var(--dir-images)/logos/logo-admin.png) 50% 50% no-repeat;
+			width: 300px;
+			height: 57px;
+			margin: 0 auto;
+			// MQ: Retina & HDPI
+			@media
+			(-webkit-min-device-pixel-ratio: 2),
+			(min-resolution: 192dpi),
+			(min-resolution: 2dppx) {
+				background-image: url(var(--dir-images)/logos/logo-admin@2x.png);
+				background-size: 300px 57px;
+			}
+		}
+		img {
+			display: inline-block;
+			max-width: 100%; 
+			width: auto;
+			max-height: 100%; 
+			height: auto;
+		}
+	}
+	*/
+
 	#nav, 
 	#backtoblog {
 		padding: 3px 2px;
 		margin: 0 auto;
 		text-align: center;
-		font-family: $font-family-base;
+		font-family: var(--font-family-base);
 		font-size: 15px;
 		a {
+			transition: var(--transition);
 			padding: 3px 0;
 			margin: 0 auto;
 			text-align: center;
-			color: $primary;
+			color: var(--primary);
 			&:hover,
 			&:focus {
-				color: $secondary;
+				color: var(--secondary);
 			}
 		}
 	}

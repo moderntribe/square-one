@@ -1,17 +1,31 @@
-@define-mixin field {
-    padding: 0 14px;
-    border: 1px solid $border-input;
-    background-color: $bgd-inputs;
-    display: block;
-    width: 100%;
-    height: 42px;
-    color: $text;
-}
+
+/* -----------------------------------------------------------------------------
+ *
+ * Clearfix
+ *
+ * ----------------------------------------------------------------------------- */
 
 @define-mixin clearfix {
     &:after { 
-        content: "";
+        content: '';
         display: table;
         clear: both;
     }
+}
+
+/* -----------------------------------------------------------------------------
+ *
+ * Touch & Pointer Bug Fix
+ *
+ * + Disable text select on clickable elements for pointer & touch events
+ *
+ * NOTE:
+ * This should be utilized for elements that have a JS
+ * touchstart or pointerdown event bound to them
+ *
+ * ----------------------------------------------------------------------------- */
+
+@define-mixin touch {
+	-webkit-touch-callout: none;
+ 	user-select: none;
 }

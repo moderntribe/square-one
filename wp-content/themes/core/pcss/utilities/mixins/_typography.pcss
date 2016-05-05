@@ -1,0 +1,49 @@
+
+/* -----------------------------------------------------------------------------
+ *
+ * Icons
+ *
+ * ----------------------------------------------------------------------------- */
+
+@define-mixin icon {
+	font-family: var(--font-family-core-icons);
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-rendering: auto;
+}
+
+/* -------------------------------------------------------------------------
+ *
+ * Body Content
+ *
+ * ------------------------------------------------------------------------- */
+
+@define-mixin body-content {
+	font-size: var(--font-size-content-s);
+	@media (--viewport-m) {
+        font-size: var(--font-size-content);
+    }
+}
+
+/* -----------------------------------------------------------------------------
+ *
+ * Quotes & Blockquotes
+ *
+ * ----------------------------------------------------------------------------- */
+
+@define-mixin quote-base {
+	border-top: 1px solid var(--border);
+	border-bottom: 1px solid var(--border);
+	padding: var(--spacer);
+}
+
+@define-mixin quote-text {
+	font-size: 32px;
+	font-style: italic;
+}

@@ -1,9 +1,30 @@
 
-@import "variables/paths";
-@import "variables/colors";
-@import "variables/typography";
-@import "variables/mqs";
+/* -----------------------------------------------------------------------------
+ *
+ * Utilities
+ *
+ * This file is just a clearing-house.
+ * Make partials (start with an underscore) for any actual css code.
+ *
+ * ----------------------------------------------------------------------------- */
 
-@import "mixins/utilities";
+/* Variables */
+@import "variables/colors.pcss";
+@import "variables/grid.pcss";
+@import "variables/mqs.pcss";
+@import "variables/paths.pcss";
+@import "variables/transitions.pcss";
+@import "variables/typography.pcss";
 
-@import "helper-classes/utilities";
+/* Mixins */
+@import "mixins/buttons.pcss";
+@import "mixins/forms.pcss";
+@import "mixins/shapes.pcss";
+@import "mixins/text-helpers.pcss";
+@import "mixins/typography.pcss";
+@import "mixins/utilities.pcss";
+@import "mixins/visibility.pcss";
+
+/* Helper Classes */
+@import "helper-classes/utilities.pcss";
+@import "helper-classes/visibility.pcss";

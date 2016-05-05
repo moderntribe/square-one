@@ -1,0 +1,34 @@
+
+/* -----------------------------------------------------------------------------
+ * Placeholders
+ * ----------------------------------------------------------------------------- */
+
+@mixin placeholder {
+	color: var(--placeholder);
+	opacity: 1;
+}
+
+/* -----------------------------------------------------------------------------
+ * Focus
+ * ----------------------------------------------------------------------------- */
+
+input,
+textarea,
+select {
+	&:focus {
+		border-color: var(--border-input-focus);
+		box-shadow: 0 0 0 1px var(--border-input-focus);
+		&::-webkit-input-placeholder {
+			color: lighten(var(--placeholder), .1);
+		}
+		&:-moz-placeholder {
+			color: lighten(var(--placeholder), .1);
+		}
+		&::-moz-placeholder {
+			color: lighten(var(--placeholder), .1);
+		}
+		&:-ms-input-placeholder {
+			color: lighten(var(--placeholder), .1);
+		}
+	}
+}

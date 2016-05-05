@@ -173,6 +173,59 @@ function old_browsers() {
 
 function core_fonts() {
 
+	$typekit_id = 'xxxxxx';
+    $webfont_src  = trailingslashit( get_template_directory_uri() ) . 'js/webfontloader.js';
+
+    ?>
+
+    <script>
+        var modern_tribe = window.modern_tribe || {};
+        modern_tribe.fonts = {
+            state: {
+                loading : true,
+                active  : false
+            },
+            events: {
+                trigger:function( event_type, event_data, el ){
+                    var event;
+                    try {
+                        event = new CustomEvent( event_type, {detail: event_data} );
+                    } catch( e ) {
+                        event = document.createEvent( 'CustomEvent' );
+                        event.initCustomEvent( event_type, true, true, event_data );
+                    }
+                    el.dispatchEvent( event );
+                }
+            }
+        };
+        var WebFontConfig = {
+            typekit : {
+                id: '<?php echo $typekit_id; ?>'
+            },
+            loading : function() {
+                modern_tribe.fonts.state.loading = true;
+                modern_tribe.fonts.state.active = false;
+                modern_tribe.fonts.events.trigger( 'modern_tribe/fonts_loading', {}, document );
+            },
+            active  : function() {
+                modern_tribe.fonts.state.loading = false;
+                modern_tribe.fonts.state.active = true;
+                modern_tribe.fonts.events.trigger( 'modern_tribe/fonts_loaded', {}, document );
+            },
+            inactive: function() {
+                modern_tribe.fonts.state.loading = false;
+                modern_tribe.fonts.state.active = false;
+                modern_tribe.fonts.events.trigger( 'modern_tribe/fonts_failed', {}, document );
+            }
+        };
+        (function(d) {
+            var wf = d.createElement('script'), s = d.scripts[0];
+            wf.src = '<?php echo $webfont_src; ?>';
+            s.parentNode.insertBefore(wf, s);
+        })(document);
+    </script>
+
+    <?php
 
 }
 

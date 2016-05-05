@@ -1,0 +1,62 @@
+
+/* -----------------------------------------------------------------------------
+ * Table
+ * ----------------------------------------------------------------------------- */
+
+.table,
+.context-content table {
+	font-size: var(--font-size-content-s);
+    margin: var(--spacer) auto;
+    border: 1px solid var(--grey);
+    text-align: left;
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;
+	@media (--viewport-m) {
+		font-size: var(--font-size-content);
+        table-layout: auto;
+    }
+}
+
+/* -----------------------------------------------------------------------------
+ * TH
+ * ----------------------------------------------------------------------------- */
+
+.th,
+.context-content th {
+    padding: 14px 1em 12px;
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-even);
+    & ~ th {
+        border-left: 1px solid var(--grey);
+    }
+}
+
+/* -----------------------------------------------------------------------------
+ * TR
+ * ----------------------------------------------------------------------------- */
+
+.tr,
+.context-content tr {
+	thead & {
+		border-bottom: 1px solid var(--grey);
+	}
+	& ~ tr {
+		border-top: 1px solid var(--grey);
+	}
+	&:nth-of-type(even) {
+		background-color: var(--grey-light);
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * TD
+ * ----------------------------------------------------------------------------- */
+
+.td,
+.context-content td {
+    padding: 12px 1em 10px;
+    & ~ td {
+        border-left: 1px solid var(--grey);
+    }
+}
