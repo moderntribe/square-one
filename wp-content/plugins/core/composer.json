@@ -8,7 +8,6 @@
     "preferred-install": "dist"
   },
   "require": {
-    "phpunit/php-timer": "~1.0",
     "pimple/pimple": "~3.0@dev"
   },
   "autoload": {
