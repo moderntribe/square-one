@@ -8,48 +8,34 @@
  *
  */
 
-
+/* Reset */
+/* -----------------------------------------------------------------------------
+ *
+ * Global "Resets"
+ *
+ * ----------------------------------------------------------------------------- */
 * {
-
-
     -webkit-box-sizing: border-box;
-
-
        -moz-box-sizing: border-box;
-
-
-            box-sizing: border-box
+            box-sizing: border-box;
 }
-
-
 @-webkit-viewport {
-
-
-    width: device-width
+    width: device-width;
 }
-
-
 @-moz-viewport {
-
-
-    width: device-width
+    width: device-width;
 }
-
-
 @-ms-viewport {
-
-
-    width: device-width
+    width: device-width;
 }
-
-
 @viewport {
-
-
-    width: device-width
+    width: device-width;
 }
-
-
+/* -----------------------------------------------------------------------------
+ *
+ * HTML5 Elements
+ *
+ * ----------------------------------------------------------------------------- */
 article,
 aside,
 details,
@@ -58,170 +44,114 @@ figure,
 footer,
 header,
 main,
+menu,
 nav,
 section,
 summary {
-
-
-    display: block
+    display: block;
 }
-
-
+/* -----------------------------------------------------------------------------
+ *
+ * Normalize "Light"
+ *
+ * See normalize source code for clarity on rules
+ * https://github.com/necolas/normalize.css
+ *
+ * ----------------------------------------------------------------------------- */
 html {
-
-
     -ms-text-size-adjust: 100%;
-
-
     -webkit-text-size-adjust: 100%;
-
-
     font-size: 100%;
-
-
-    -webkit-tap-highlight-color: transparent
+    -webkit-tap-highlight-color: transparent;
 }
-
-
 body {
-
-
-    //-webkit-font-smoothing: antialiased;
-
-
-    //-moz-osx-font-smoothing: grayscale;
-
-
-    //font-smoothing: antialiased;
-
-
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-smoothing: antialiased;
     min-width: 320px;
-
-
-    overflow-x: hidden
+    overflow-x: hidden;
 }
-
-
 figure {
-
-
-    line-height: 0
+    line-height: 0;
 }
-
-
 figcaption {
-
-
-    line-height: normal
+    line-height: normal;
 }
-
-
 svg:not(:root) {
-
-
-    overflow: hidden
+    overflow: hidden;
 }
-
-
 audio,
 canvas,
 progress,
 video {
-
-
     display: inline-block;
-
-
-    vertical-align: baseline
 }
-
-
 audio:not([controls]) {
-
-
     display: none;
-
-
-    height: 0
+    height: 0;
 }
-
-
+progress {
+    vertical-align: baseline;
+}
+template,
+[hidden] {
+    display: none;
+}
+a {
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
+}
+abbr[title] {
+    border-bottom: none;
+    text-decoration: underline;
+    text-decoration: underline dotted;
+}
 pre {
-
-
-    overflow: auto
+    overflow: auto;
 }
-
-
 code,
 kbd,
 pre,
 samp {
-
-
     font-family: monospace, monospace;
-
-
-    font-size: 1em
+    font-size: 1em;
 }
-
-
 b,
 strong {
-
-
-    font-weight: bold
+    font-weight: inherit;
 }
-
-
+b,
+strong {
+    font-weight: bolder;
+}
+dfn {
+    font-style: italic;
+}
+mark {
+    background-color: #ff0;
+    color: #000;
+}
 small {
-
-
-    font-size: 80%
+    font-size: 80%;
 }
-
-
 sub,
 sup {
-
-
     font-size: 75%;
-
-
     line-height: 0;
-
-
     position: relative;
-
-
-    vertical-align: baseline
+    vertical-align: baseline;
 }
-
-
 sup {
-
-
-    top: -0.5em
+    top: -0.5em;
 }
-
-
 sub {
-
-
-    bottom: -0.25em
+    bottom: -0.25em;
 }
-
-
 hr {
-
-
     border: 0;
-
-
-    height: 0
+    height: 0;
 }
-
-
+/* Input: Kill browser input chrome */
 input[type="text"],
 input[type="email"],
 input[type="url"],
@@ -231,134 +161,76 @@ input[type="password"],
 input[type="reset"],
 input[type="button"],
 button,
+/*select,*/
 textarea {
-
-
     -webkit-appearance: none;
-
-
     -moz-appearance: none;
-
-
-    appearance: none
+    appearance: none;
 }
-
-
 input,
 button,
 select,
 textarea,
 optgroup {
-
-
     color: inherit;
-
-
     font: inherit;
-
-
     line-height: normal;
-
-
-    //-webkit-font-smoothing: antialiased
+    -webkit-font-smoothing: antialiased;
 }
-
-
 input,
 button,
 select,
 textarea {
-
-
-    //outline: 0;
-
-
+    outline: 0;
     -webkit-box-sizing: border-box;
-
-
        -moz-box-sizing: border-box;
-
-
             box-sizing: border-box;
-
-
     margin: 0;
-
-
     -webkit-border-radius: 0;
-
-
-            border-radius: 0
+            border-radius: 0;
 }
-
-
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
-
-
-    height: auto
+    height: auto;
 }
-
-
 select:-moz-focusring {
-
-
     color: transparent;
-
-
-    text-shadow: 0 0 0 #000
+    text-shadow: 0 0 0 #000;
 }
-
-
+legend {
+    color: inherit;
+    display: table;
+    max-width: 100%;
+    white-space: normal;
+}
 textarea {
-
-
     resize: none;
-
-
-    overflow: auto
+    overflow: auto;
 }
-
-
 optgroup {
-
-
-    font-weight: bold
+    font-weight: bold;
 }
-
-
 button,
 input[type="button"],
 input[type="reset"],
 input[type="submit"] {
-
-
     cursor: pointer;
-
-
-    overflow: visible
+    overflow: visible;
 }
-
-
 button[disabled],
 html input[disabled] {
-
-
-    cursor: default
+    cursor: default;
 }
-
-
 button::-moz-focus-inner,
 input::-moz-focus-inner {
-
-
     border: 0;
-
-
-    padding: 0
+    padding: 0;
 }
-
-
+/* -----------------------------------------------------------------------------
+ *
+ * Reset "Light"
+ *
+ * ----------------------------------------------------------------------------- */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -372,111 +244,325 @@ article, aside, canvas, details, embed,
 figure, figcaption, footer, header, main,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
-
-
     margin: 0;
-
-
     padding: 0;
-
-
-    border: 0
+    border: 0;
 }
-
-
 ol, 
 ul {
-
-
-    list-style: none
+    list-style: none;
 }
-
-
 h1, h2, h3, h4, h5, h6, p {
-
-
     font-weight: normal;
-
-
-    text-rendering: optimizeLegibility
+    text-rendering: optimizeLegibility;
 }
-
-
 img {
-
-
     -ms-interpolation-mode: bicubic;
-
-
     height: auto;
-
-
-    max-width: 100%
+    max-width: 100%;
+    border-style: none;
+}
+iframe,
+video,
+embed {
+    max-width: 100%;
+    max-height: 100%;
 }
 
-
-a {
-
-
-    text-decoration: none
+/* Utilities ($variables & @mixins) */
+/* -----------------------------------------------------------------------------
+ *
+ * Utilities
+ *
+ * This file is just a clearing-house.
+ * Make partials (start with an underscore) for any actual css code.
+ *
+ * ----------------------------------------------------------------------------- */
+/* Variables */
+:root {/* -----------------------------------------------------------------------------
+	 * Primary Palette
+	 * ----------------------------------------------------------------------------- *//* -----------------------------------------------------------------------------
+	 * Whites
+	 * ----------------------------------------------------------------------------- *//* -----------------------------------------------------------------------------
+	 * Greys
+	 * ----------------------------------------------------------------------------- *//* -----------------------------------------------------------------------------
+	 * Blacks
+	 * ----------------------------------------------------------------------------- *//* -----------------------------------------------------------------------------
+	 * Backgrounds
+	 * ----------------------------------------------------------------------------- *//* -----------------------------------------------------------------------------
+	 * Links
+	 * ----------------------------------------------------------------------------- *//* -----------------------------------------------------------------------------
+	 * Text
+	 * ----------------------------------------------------------------------------- *//* -----------------------------------------------------------------------------
+	 * Borders
+	 * ----------------------------------------------------------------------------- *//* -----------------------------------------------------------------------------
+	 * Inputs
+	 * ----------------------------------------------------------------------------- *//* -----------------------------------------------------------------------------
+	 * Validation
+	 * ----------------------------------------------------------------------------- */
 }
-/* Paths */
-/* Primary */
-/* Whites */
-/* Greys */
-/* Blacks */
-/* Backgrounds */
-/* Links */
-/* Text */
-/* Borders */
-/* Inputs */
-/* Validation */
-/* Stacks */
-/* Sizing */
-/* Weights */
-/* Line heights */
-/* Spacers */
-/* Media Queries */
+/* -----------------------------------------------------------------------------
+ *
+ * Lost Grid Settings
+ *
+ * ----------------------------------------------------------------------------- */
+@lost gutter var(--grid-gutter-small);
+@lost flexbox no-flex;
+@lost cycle auto;
+:root {/* -----------------------------------------------------------------------------
+	 * Font Stacks
+	 * ----------------------------------------------------------------------------- *//* -----------------------------------------------------------------------------
+	 * Font Sizing
+	 * ----------------------------------------------------------------------------- *//* -----------------------------------------------------------------------------
+	 * Font Weights
+	 * ----------------------------------------------------------------------------- *//* -----------------------------------------------------------------------------
+	 * Line Heights
+	 * ----------------------------------------------------------------------------- *//* -----------------------------------------------------------------------------
+	 * Spacers (margin & padding)
+	 * ----------------------------------------------------------------------------- */
+}
+/* Mixins */
+/* -----------------------------------------------------------------------------
+ *
+ * Form Placeholders
+ *
+ * ----------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ *
+ * Form Input Fields
+ *
+ * ----------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ *
+ * Triangles
+ *
+ * ----------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ *
+ * Split long words into multiple lines
+ *
+ * ----------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ *
+ * Truncate text to a single line, with an ellipsis
+ *
+ * ----------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ *
+ * Remove the default antialiased font-smoothing
+ *
+ * ----------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ *
+ * Icons
+ *
+ * ----------------------------------------------------------------------------- */
+/* -------------------------------------------------------------------------
+ *
+ * Body Content
+ *
+ * ------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ *
+ * Quotes & Blockquotes
+ *
+ * ----------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ *
+ * Clearfix
+ *
+ * ----------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ *
+ * Touch & Pointer Bug Fix
+ *
+ * + Disable text select on clickable elements for pointer & touch events
+ *
+ * NOTE:
+ * This should be utilized for elements that have a JS
+ * touchstart or pointerdown event bound to them
+ *
+ * ----------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ *
+ * Hide from both screenreaders and browsers
+ *
+ * @author: h5bp.com/u
+ *
+ * ----------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ *
+ * Hide only visually, but have it available for screenreaders
+ *
+ * @author: h5bp.com/v
+ *
+ * ----------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ *
+ * Show element after has been hidden with %visually-hide
+ *
+ * ----------------------------------------------------------------------------- */
+/* Helper Classes */
+/* -----------------------------------------------------------------------------
+ *
+ * Clearfix
+ *
+ * ----------------------------------------------------------------------------- */
+.clearfix:after {
+    content: '';
+    display: table;
+    clear: both;
+}
+/* -----------------------------------------------------------------------------
+ *
+ * Hide from screenreaders & browsers
+ *
+ * ----------------------------------------------------------------------------- */
+.hidden {
+    display: none !important;
+    visibility: hidden;
+}
+/* -----------------------------------------------------------------------------
+ *
+ * Hide from browsers & show for screenreaders
+ *
+ * ----------------------------------------------------------------------------- */
+.visual-hide,
+.screen-reader-text {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+/* -----------------------------------------------------------------------------
+ *
+ * Show for browsers & screenreaders
+ *
+ * ----------------------------------------------------------------------------- */
+.visual-show {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+/* Base */
+/* -----------------------------------------------------------------------------
+ *
+ * Globals: HTML & Body
+ *
+ * ----------------------------------------------------------------------------- */
 html {
-
-
-    background: #fff
+    background: #fff;
 }
 body {
-
-
-    background: #fff
+    background: #fff;/* CASE: "sticky" footer */
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    min-height: 100vh;
 }
+/* -----------------------------------------------------------------------------
+ *
+ * Globals: Font & Color
+ *
+ * ----------------------------------------------------------------------------- */
 body, 
 form, 
 button, 
 input, 
 select, 
 textarea {
-
-
-    //: #000
+    font: 400 normal 100%/1.5 "proxima-nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #000;
 }
+/* -----------------------------------------------------------------------------
+ *
+ * Globals: Text Selection
+ *
+ * ----------------------------------------------------------------------------- */
 ::-moz-selection {
-
-
-    background: #21A6CB;
-
-
+    background: #21a6cb;
     color: #fff;
-
-
-    text-shadow: none
+    text-shadow: none;
 }
 ::selection {
-
-
-    background: #21A6CB;
-
-
+    background: #21a6cb;
     color: #fff;
-
-
-    text-shadow: none
+    text-shadow: none;
 }
+
+/* Style Guide */
+/* -------------------------------------------------------------------------
+ * Paragraphs
+ * ------------------------------------------------------------------------- */
+p {
+    font-size: 16px;
+}
+@media (min-width: 768px) {
+    p {
+        font-size: 18px;
+    }
+}
+.context-content p {
+    margin-bottom: 30px;
+}
+/* -------------------------------------------------------------------------
+ * HR
+ * ------------------------------------------------------------------------- */
+hr {
+    border-top: 1px solid grey;
+}
+.context-content hr {
+    margin: 50px auto;
+}
+/* -------------------------------------------------------------------------
+ *
+ * Miscellaneous for items in the full kitchen sink
+ *
+ * Notes:
+ * + Remove top margin from first element (whether element or image)
+ * + Remove bottom margin from last element (whether element or image)
+ * + Due to our existing solution for adding a wrapper around WordPress
+ *   images without a caption, we end up with empty p tags, as such
+ *   we simply hide them
+ *
+ * ------------------------------------------------------------------------- */
+.context-content > *:empty:not(hr):not(br) {
+    display: none;
+}
+.context-content > *:first-child {
+    margin-top: 0;
+}
+.context-content > *:first-child > img {
+    margin-top: 0;
+}
+.context-content > .wp-image-wrap:nth-child(2) img {
+    margin-top: 0;
+}
+.context-content > *:last-child {
+    margin-bottom: 0;
+}
+.context-content > *:last-child > img {
+    margin-bottom: 0;
+}
+.context-content > .wp-image-wrap:nth-last-child(2) img {
+    margin-bottom: 0;
+}
+
+/* Compatibility */
 .page-legacy {}
