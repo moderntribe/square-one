@@ -13,44 +13,52 @@
 
 function get_page_title() {
 
-	if ( is_front_page() )
-		return;
-
-	$title = '';
+	if ( is_front_page() ) {
+		return '';
+	}
 
 	// Blog
-	if ( is_home() )
+	if ( is_home() ) {
 		$title = 'Blog';
+	}
 
 	// Category
-	elseif ( is_category() )
+	elseif ( is_category() ) {
 		$title = single_cat_title( '', false );
+	}
 
 	// Tags
-	elseif ( is_tag() )
+	elseif ( is_tag() ) {
 		$title = single_tag_title( '', false );
+	}
 
 	// Tax
-	elseif ( is_tax() )
+	elseif ( is_tax() ) {
 		$title = single_term_title( '', false );
+	}
 
 	// Post Type Archive
-	elseif ( is_post_type_archive() )
+	elseif ( is_post_type_archive() ) {
 		$title = post_type_archive_title( '', false );
+	}
 
 	// Search
-	elseif ( is_search() )
+	elseif ( is_search() ) {
 		$title = 'Search Results';
+	}
 
 	// 404
-	elseif ( is_404() )
+	elseif ( is_404() ) {
 		$title = 'Page Not Found (404)';
+	}
 
-	else
+	else {
 		$title = get_the_title();
+	}
 
-	if ( ! empty( $title ) )
+	if ( ! empty( $title ) ) {
 		return $title;
+	}
 
 }
 
@@ -66,11 +74,13 @@ function the_page_title( $wrapper = true ) {
 
 	$title = get_page_title();
 
-	if ( $wrapper )
-		$title = '<h1 class="page-title">'. $title .'</h1>';
+	if ( $wrapper ) {
+		$title = '<h1 class="page-title">' . $title . '</h1>';
+	}
 
-	if ( ! empty( $title ) )
+	if ( ! empty( $title ) ) {
 		echo $title;
+	}
 
 }
 
@@ -80,7 +90,6 @@ function the_page_title( $wrapper = true ) {
  *
  * @param null   $attachment_id
  * @param string $size
- * @param bool   $schema
  * @param bool   $lazyload
  * @param bool   $shim
  * @param bool   $classes

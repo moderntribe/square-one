@@ -157,7 +157,7 @@ function old_browsers() {
 				document.title.toLowerCase().indexOf('page not found') === -1
 			);
 		}
-		if (is_browser() && !window.atob && not_excluded_page()) {
+		if ( is_browser() && !window.atob && not_excluded_page() )  {
 			window.location = location.protocol + '//' + location.host + '/unsupported-browser/';
 		}
 	</script>

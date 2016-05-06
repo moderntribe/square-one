@@ -10,7 +10,7 @@ if ( $wp_query->max_num_pages < 2 )
 
 <nav class="loop-navigation" itemscope itemtype="https://schema.org/SiteNavigationElement">
 	
-	<h3 class="accessibility">Posts Pagination</h3>
+	<h3 class="visual-hide">Posts Pagination</h3>
 	
 	<ul>
 		<?php if ( get_next_posts_link() ) : ?>

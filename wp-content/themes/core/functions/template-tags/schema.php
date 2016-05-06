@@ -17,8 +17,9 @@ function get_schema_type( $post_type = null ) {
 	$schema_type = 'BlogPosting';
 
 	// CPT: Events
-	if( $post_type == 'tribe_events' )
+	if( $post_type == 'tribe_events' ) {
 		$schema_type = 'Event';
+	}
 
 	return $schema_type;
 

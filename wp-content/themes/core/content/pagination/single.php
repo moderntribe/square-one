@@ -11,7 +11,7 @@ if ( empty( $next ) && empty( $previous ) )
 
 <nav class="post-navigation" itemscope itemtype="https://schema.org/SiteNavigationElement">
 	
-	<h3 class="accessibility">Post Pagination</h3>
+	<h3 class="visual-hide">Post Pagination</h3>
 	
 	<ul>
 

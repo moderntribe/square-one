@@ -3,7 +3,7 @@ if( has_nav_menu( 'footer' ) ) { ?>
 
 	<nav aria-label="Secondary Navigation" itemscope itemtype="https://schema.org/SiteNavigationElement">
 
-		<h5 class="accessibility">Secondary Navigation</h5>
+		<h5 class="visual-hide">Secondary Navigation</h5>
 
 		<ol>
 			<?php
