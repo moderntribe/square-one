@@ -11,6 +11,7 @@ add_action( 'after_setup_theme', 'core_theme_setup' );
 
 // Miscellaneous
 add_action( 'after_setup_theme', 'visual_editor_styles', 10 );
+add_filter( 'tiny_mce_before_init', 'visual_editor_body_class' );
 
 
 /**
@@ -69,3 +70,15 @@ function visual_editor_styles() {
 
 }
 
+
+/**
+ * Visual Editor Body Class
+ */
+
+function visual_editor_body_class( $settings ) {
+
+    $settings['body_class'] .= ' context-content';
+
+    return $settings;
+
+}

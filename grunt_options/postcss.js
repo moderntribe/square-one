@@ -45,7 +45,6 @@ var cssnanoOptions = {
 };
 
 module.exports = {
-
 	theme: {
 		options: compileOptions,
 		files: {
