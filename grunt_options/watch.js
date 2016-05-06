@@ -11,14 +11,14 @@ var defaultOpts = {
 };
 
 module.exports = {
-	core_php: {
+	corePHP: {
 		files: [
 			'<%= pkg._corethemepath %>/**/*.php',
 		],
 		options: defaultOpts,
 	},
 
-	theme_css: {
+	themeCSS: {
 		files: [
 			'<%= pkg._corethemepath %>/pcss/**/**/*.pcss',
 			'<%= pkg._corethemepath %>/pcss/**/*.pcss',
@@ -27,34 +27,34 @@ module.exports = {
 		],
 		tasks: [
 			'postcss:theme',
-			'postcss:theme_legacy',
+			'postcss:themeLegacy',
 		],
 		options: defaultOpts,
 	},
 
-	theme_admin: {
+	themeAdmin: {
 		files: [
 			'<%= pkg._corethemepath %>/pcss/admin/*.pcss',
 		],
 		tasks: [
-			'postcss:theme_editor',
-			'postcss:theme_login',
+			'postcss:themeWPEditor',
+			'postcss:themeWPLogin',
 		],
 		options: defaultOpts,
 	},
 
-	theme_scripts: {
+	themeScripts: {
 		files: [
 			'<%= pkg._corethemepath %>/js/src/**/*.js',
 		],
 		tasks: [
 			'eslint:dist',
-			'webpack:themedev',
+			'webpack:themeDev',
 		],
 		options: defaultOpts,
 	},
 
-	theme_templates: {
+	themeTemplates: {
 		files: [
 			'<%= pkg._corethemepath %>/**/*.php',
 		],

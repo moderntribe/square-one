@@ -8,43 +8,43 @@
 module.exports = {
 	theme: {
 		options: {
-			text: '/* Square One: Global CSS */',
+			text: '/* Core: Global CSS */',
 		},
 		files: {
 			'<%= pkg._corethemepath %>/css/dist/master.min.css': ['<%= pkg._corethemepath %>/css/dist/master.min.css'],
 		},
 	},
 
-	theme_print: {
+	themePrint: {
 		options: {
-			text: '/* Square One: Print CSS */',
+			text: '/* Core: Print CSS */',
 		},
 		files: {
 			'<%= pkg._corethemepath %>/css/dist/print.min.css': ['<%= pkg._corethemepath %>/css/dist/print.min.css'],
 		},
 	},
 
-	theme_wp_editor: {
+	themeWPEditor: {
 		options: {
-			text: '/* Square One: Visual Editor CSS */',
+			text: '/* Core: Visual Editor CSS */',
 		},
 		files: {
 			'<%= pkg._corethemepath %>/css/admin/dist/editor-style.min.css': ['<%= pkg._corethemepath %>/css/admin/dist/editor-style.min.css'],
 		},
 	},
 
-	theme_wp_login: {
+	themeWPLogin: {
 		options: {
-			text: '/* Square One: WordPress Login CSS */',
+			text: '/* Core: WordPress Login CSS */',
 		},
 		files: {
 			'<%= pkg._corethemepath %>/css/admin/dist/login.min.css': ['<%= pkg._corethemepath %>/css/admin/dist/login.min.css'],
 		},
 	},
 
-	theme_legacy: {
+	themeLegacy: {
 		options: {
-			text: '/* Square One: Legacy Page CSS */',
+			text: '/* Core: Legacy Page CSS */',
 		},
 		files: {
 			'<%= pkg._corethemepath %>/css/dist/legacy.min.css': ['<%= pkg._corethemepath %>/css/dist/legacy.min.css'],

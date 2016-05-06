@@ -2,10 +2,9 @@ var webpack = require('webpack');
 var webpackCoreThemeConfig = require('../webpack.config.js');
 
 module.exports = {
-
 	options: webpackCoreThemeConfig,
 
-	themedev: {
+	themeDev: {
 		entry: './<%= pkg._corethemepath %>/js/src/index.js',
 		output: {
 			filename: 'scripts.js',
@@ -15,7 +14,7 @@ module.exports = {
 		debug: true,
 	},
 
-	themeprod: {
+	themeProd: {
 		entry: './<%= pkg._corethemepath %>/js/src/index.js',
 		output: {
 			filename: 'scripts.js',

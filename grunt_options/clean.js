@@ -6,13 +6,12 @@
  */
 
 module.exports = {
-
-	theme_min_css: [
+	themeMinCSS: [
 		'<%= pkg._corethemepath %>/css/dist/*.css',
 		'<%= pkg._corethemepath %>/css/admin/dist/*.css',
 	],
 
-	theme_min_js: [
+	themeMinJS: [
 		'<%= pkg._corethemepath %>/js/dist/*.js',
 	],
 };

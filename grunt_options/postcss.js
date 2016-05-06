@@ -54,21 +54,21 @@ module.exports = {
 		},
 	},
 
-	theme_wp_editor: {
+	themeWPEditor: {
 		options: compileOptions,
 		files: {
 			'<%= pkg._corethemepath %>/css/admin/editor-style.css': '<%= pkg._corethemepath %>/pcss/admin/editor-style.pcss',
 		},
 	},
 
-	theme_wp_login: {
+	themeWPLogin: {
 		options: compileOptions,
 		files: {
 			'<%= pkg._corethemepath %>/css/admin/login.css': '<%= pkg._corethemepath %>/pcss/admin/login.pcss',
 		},
 	},
 
-	theme_legacy: {
+	themeLegacy: {
 		options: legacyOptions,
 		files: {
 			'<%= pkg._corethemepath %>/css/legacy.css': '<%= pkg._corethemepath %>/pcss/legacy.pcss',
@@ -77,7 +77,7 @@ module.exports = {
 
 	// Task: Minification
 
-	theme_min: {
+	themeMin: {
 		options: cssnanoOptions,
 		files: {
 			'<%= pkg._corethemepath %>/css/dist/master.min.css': '<%= pkg._corethemepath %>/css/master.css',
@@ -85,21 +85,21 @@ module.exports = {
 		},
 	},
 
-	theme_wp_editor_min: {
+	themeWPEditorMin: {
 		options: cssnanoOptions,
 		files: {
 			'<%= pkg._corethemepath %>/css/admin/dist/editor-style.min.css': '<%= pkg._corethemepath %>/css/admin/editor-style.css',
 		},
 	},
 
-	theme_wp_login_min: {
+	themeWPLoginMin: {
 		options: cssnanoOptions,
 		files: {
 			'<%= pkg._corethemepath %>/css/admin/dist/login.min.css': '<%= pkg._corethemepath %>/css/admin/login.css',
 		},
 	},
 
-	theme_legacy_min: {
+	themeLegacyMin: {
 		options: cssnanoOptions,
 		files: {
 			'<%= pkg._corethemepath %>/css/dist/legacy.min.css': '<%= pkg._corethemepath %>/css/legacy.css',

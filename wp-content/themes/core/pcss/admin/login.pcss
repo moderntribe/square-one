@@ -9,8 +9,10 @@
  */
 
 /* Variables */
-@import "../utilities/variables/paths";
 @import "../utilities/variables/colors";
+@import "../utilities/variables/mqs";
+@import "../utilities/variables/paths";
+@import "../utilities/variables/transitions";
 @import "../utilities/variables/typography";
 
 * {
@@ -83,10 +85,7 @@
 			width: 300px;
 			height: 57px;
 			margin: 0 auto;
-			@media
-			(-webkit-min-device-pixel-ratio: 2),
-			(min-resolution: 192dpi),
-			(min-resolution: 2dppx) {
+			@media (--viewport-retina) {
 				background-image: url(var(--dir-images)/logos/logo-admin@2x.png);
 				background-size: 300px 57px;
 			}

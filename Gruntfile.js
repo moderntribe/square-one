@@ -1,5 +1,4 @@
 module.exports = function (grunt) {
-
 	/**
 	 *
 	 * Function to return object from grunt task options stored as files in the 'grunt_options' folder.
@@ -74,24 +73,23 @@ module.exports = function (grunt) {
 
 	grunt.registerTask(
 		'wp-editor', [
-			'postcss:theme_wp_editor',
-			'postcss:theme_wp_editor_min',
-			'header:theme_wp_editor',
+			'postcss:themeWPEditor',
+			'postcss:themeWPEditorMin',
+			'header:themeWPEditor',
 		]);
 
 	grunt.registerTask(
 		'wp-login', [
-			'postcss:theme_wp_login',
-			'postcss:theme_wp_login_min',
-			'header:theme_wp_login',
-			'clean:theme_wp_login',
+			'postcss:themeWPLogin',
+			'postcss:themeWPLoginMin',
+			'header:themeWPLogin',
 		]);
 
 	grunt.registerTask(
 		'legacy', [
-			'postcss:theme_legacy',
-			'postcss:theme_legacy_min',
-			'header:theme_legacy',
+			'postcss:themeLegacy',
+			'postcss:themeLegacyMin',
+			'header:themeLegacy',
 		]);
 
 	grunt.registerTask(
@@ -107,5 +105,4 @@ module.exports = function (grunt) {
 			'browserSync',
 			'watch',
 		]);
-
 };

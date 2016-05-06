@@ -6,9 +6,9 @@
  */
 
 module.exports = {
-	theme_min: {
+	themeMin: {
 		options: {
-			banner: '/* Square One: JS Master */\n',
+			banner: '/* Core: JS Master */\n',
 			sourceMap: false,
 			compress: {
 				drop_console: true,

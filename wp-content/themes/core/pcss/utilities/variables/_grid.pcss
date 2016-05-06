@@ -1,13 +1,11 @@
 :root {
-	--grid-width: 1200px;
 	--grid-gutter: 30px;
 	--grid-gutter-small: 20px;
+	--grid-width: calc(1200px + var(--grid-gutter) * 2);
 }
 
 /* -----------------------------------------------------------------------------
- *
  * Lost Grid Settings
- *
  * ----------------------------------------------------------------------------- */
 
 @lost gutter var(--grid-gutter-small);

@@ -33,4 +33,8 @@ main {
 	max-width: var(--grid-width);
 	margin: 0 auto;
 	width: 100%;
+	padding: 0 var(--grid-gutter-small);
+	@media(--viewport-medium) {
+		padding: 0 var(--grid-gutter);
+	}
 }
