@@ -12,12 +12,6 @@
 
 				<div class="content-wrap">
 
-					<div class="grid-test">
-						<div>Column 1</div>
-						<div>Column 2</div>
-						<div>Column 3</div>
-					</div>
-
 					<?php // Content: Page
 					get_template_part( 'content/page/default' ); ?>
 
