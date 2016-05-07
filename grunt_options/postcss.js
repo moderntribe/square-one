@@ -17,11 +17,11 @@ var compileOptions = {
 		require('postcss-simple-vars'),
 		require('postcss-custom-media'),
 		require('postcss-functions')({ functions: postcssFunctions }),
-		require('lost'),
 		require('postcss-quantity-queries'),
 		require('postcss-aspect-ratio'),
 		require('postcss-cssnext')({ browsers: ['last 3 versions', 'ie 10'] }),
 		require('postcss-nested'),
+		require('lost'),
 	],
 };
 

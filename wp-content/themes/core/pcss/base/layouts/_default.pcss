@@ -38,3 +38,16 @@ main {
 		padding: 0 var(--grid-gutter);
 	}
 }
+
+.grid-test {
+	lost-utility: clearfix;
+	& > * {
+		height: 300px;
+		background-color: red;
+		color: white;
+		lost-column: 1/3 auto 20px;
+		@media (--viewport-medium) {
+			lost-column: 1/3 auto 30px;
+		}
+	}
+}
