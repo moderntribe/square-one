@@ -3,7 +3,9 @@
  * Global Lists
  * ------------------------------------------------------------------------- */
 
-ul, ol, dl {
+ul,
+ol,
+dl {
 	.context-content & {
 		@mixin body-content;
 		margin-top: var(--spacer);
@@ -28,6 +30,7 @@ li {
 	list-style: disc outside;
 	padding-left: 1.5em;
 	padding-right: 0;
+
 	@media (--viewport-medium) {
 		padding-left: 3em;
 		padding-right: 3em;
@@ -43,6 +46,7 @@ li {
 	list-style: decimal outside;
 	padding-left: 1.5em;
 	padding-right: 0;
+
 	@media (--viewport-medium) {
 		padding-left: 3em;
 		padding-right: 3em;
@@ -57,6 +61,7 @@ li {
 .context-content dl {
 	padding-left: 1.5em;
 	padding-right: 0;
+
 	@media (--viewport-medium) {
 		padding-left: 3em;
 		padding-right: 3em;

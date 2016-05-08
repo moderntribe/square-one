@@ -19,12 +19,6 @@
        -moz-box-sizing: border-box;
             box-sizing: border-box;
 }
-@-webkit-viewport {
-    width: device-width;
-}
-@-moz-viewport {
-    width: device-width;
-}
 @-ms-viewport {
     width: device-width;
 }
@@ -59,8 +53,9 @@ summary {
  *
  * ----------------------------------------------------------------------------- */
 html {
-    -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+            text-size-adjust: 100%;
     font-size: 100%;
     -webkit-tap-highlight-color: transparent;
 }
@@ -142,10 +137,10 @@ sup {
     vertical-align: baseline;
 }
 sup {
-    top: -0.5em;
+    top: -.5em;
 }
 sub {
-    bottom: -0.25em;
+    bottom: -.25em;
 }
 hr {
     border: 0;
@@ -164,8 +159,8 @@ button,
 /*select,*/
 textarea {
     -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
+       -moz-appearance: none;
+            appearance: none;
 }
 input,
 button,
@@ -231,28 +226,102 @@ input::-moz-focus-inner {
  * Reset "Light"
  *
  * ----------------------------------------------------------------------------- */
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, main,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+main,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
     margin: 0;
     padding: 0;
     border: 0;
 }
-ol, 
+ol,
 ul {
     list-style: none;
 }
-h1, h2, h3, h4, h5, h6, p {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
     font-weight: normal;
     text-rendering: optimizeLegibility;
 }
@@ -480,11 +549,11 @@ embed {
  * ----------------------------------------------------------------------------- */
 @font-face {
     font-family: 'core-icons';
-    src: url(/wp-content/themes/core/fonts/icons-core/core-icons.eot?3y5h49);
-    src: url(/wp-content/themes/core/fonts/icons-core/core-icons.eot?3y5h49#iefix) format('embedded-opentype'),
-	     url(/wp-content/themes/core/fonts/icons-core/core-icons.ttf?3y5h49) format('truetype'),
-	     url(/wp-content/themes/core/fonts/icons-core/core-icons.woff?3y5h49) format('woff'),
-	     url(/wp-content/themes/core/fonts/icons-core/core-icons.svg?3y5h49#core-icons) format('svg');
+    src: url(''/wp-content/themes/core/fonts'/icons-core/core-icons.eot?3y5h49');
+    src: url(''/wp-content/themes/core/fonts'/icons-core/core-icons.eot?3y5h49#iefix') format('embedded-opentype'),
+		url(''/wp-content/themes/core/fonts'/icons-core/core-icons.ttf?3y5h49') format('truetype'),
+		url(''/wp-content/themes/core/fonts'/icons-core/core-icons.woff?3y5h49') format('woff'),
+		url(''/wp-content/themes/core/fonts'/icons-core/core-icons.svg?3y5h49#core-icons') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -529,11 +598,11 @@ body {
  * Globals: Font & Color
  *
  * ----------------------------------------------------------------------------- */
-body, 
-form, 
-button, 
-input, 
-select, 
+body,
+form,
+button,
+input,
+select,
 textarea {
     font: 400 normal 100%/1.5 "proxima-nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #000;
@@ -593,7 +662,7 @@ main {/* CASE: "sticky" footer */
     width: 100%;
     padding: 0 20px;
 }
-@media(min-width: 768px) {
+@media (min-width: 768px) {
     .content-wrap {
         padding: 0 30px;
     }
@@ -892,7 +961,7 @@ a:active,
 /* -----------------------------------------------------------------------------
  * Quotes
  * ----------------------------------------------------------------------------- */
-/*q,*/
+/* q */
 .quote,
 .context-content q {
     border-top: 1px solid grey;
@@ -905,7 +974,7 @@ a:active,
 /* -----------------------------------------------------------------------------
  * Blockquotes
  * ----------------------------------------------------------------------------- */
-/*blockquote,*/
+/* blockquote */
 .blockquote,
 .context-content blockquote {
     border-top: 1px solid grey;
@@ -913,9 +982,9 @@ a:active,
     padding: 30px;
 }
 .blockquote p, .context-content blockquote p {
-    margin: 0 auto;
     font-size: 32px;
     font-style: italic;
+    margin: 0 auto;
 }
 .blockquote p ~ p, .context-content blockquote p ~ p {
     margin-top: 30px;
@@ -923,7 +992,7 @@ a:active,
 /* -----------------------------------------------------------------------------
  * Cite
  * ----------------------------------------------------------------------------- */
-/*cite,*/
+/* cite */
 .cite,
 .context-content cite {
     font-style: normal;
@@ -1105,11 +1174,11 @@ a.btn {
     color: #fff;
 }
 .btn:hover,
-    .btn:focus,
-    .btn:active,
-    a.btn:hover,
-    a.btn:focus,
-    a.btn:active {
+	.btn:focus,
+	.btn:active,
+	a.btn:hover,
+	a.btn:focus,
+	a.btn:active {
     color: #fff;
     background-color: darken(grey, .15);
 }
@@ -1143,10 +1212,7 @@ a.btn {
  * <input name="text" class="field" type="text" />
  *
  * ----------------------------------------------------------------------------- */
-/*input,
-button,
-textarea,
-select*/
+/* input, button, textarea, select */
 .field {
     padding: 0 14px;
     border: 1px solid lighten(grey, .15);
@@ -1281,10 +1347,7 @@ textarea {
     padding: 12px 14px;
     height: 180px;
 }
-/*button
-input[type="button"]
-input[type="reset"]
-input[type="submit"]*/
+/* button, input[type="button"], input[type="reset"], input[type="submit"] */
 .btn-submit {
     width: 100%;
     margin-top: 30px;

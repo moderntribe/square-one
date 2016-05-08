@@ -83,19 +83,17 @@
 	h1 {
 		padding: 8px;
 		margin: 0 auto 16px;
-
 		a {
 			line-height: 1;
-			background: url(var(--dir-images)/logos/logo-admin.png) 50% 50% no-repeat;
+			background: url('$(dir-images)/logos/logo-admin.png') 50% 50% no-repeat;
 			width: 300px;
 			height: 57px;
 			margin: 0 auto;
 			@media (--viewport-retina) {
-				background-image: url(var(--dir-images)/logos/logo-admin@2x.png);
+				background-image: url('$(dir-images)/logos/logo-admin@2x.png');
 				background-size: 300px 57px;
 			}
 		}
-
 		img {
 			display: inline-block;
 			max-width: 100%;
@@ -113,14 +111,12 @@
 		text-align: center;
 		font-family: var(--font-family-base);
 		font-size: 15px;
-
 		a {
 			transition: var(--transition);
 			padding: 3px 0;
 			margin: 0 auto;
 			text-align: center;
 			color: var(--primary);
-
 			&:hover,
 			&:focus {
 				color: var(--secondary);

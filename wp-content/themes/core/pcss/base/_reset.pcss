@@ -5,15 +5,13 @@
  *
  * ----------------------------------------------------------------------------- */
 
-* { 
-    box-sizing: border-box;
+* {
+	box-sizing: border-box;
 }
 
-@-webkit-viewport { width : device-width; }
-@-moz-viewport { width : device-width; }
-@-ms-viewport { width : device-width; }
-@-o-viewport { width : device-width; }
-@viewport { width : device-width; }
+@viewport {
+	width: device-width;
+}
 
 /* -----------------------------------------------------------------------------
  *
@@ -33,7 +31,7 @@ menu,
 nav,
 section,
 summary {
-    display: block;
+	display: block;
 }
 
 /* -----------------------------------------------------------------------------
@@ -46,117 +44,117 @@ summary {
  * ----------------------------------------------------------------------------- */
 
 html {
-    -ms-text-size-adjust: 100%;
-    -webkit-text-size-adjust: 100%;
-    font-size: 100%;  
-    -webkit-tap-highlight-color: transparent;
+	text-size-adjust: 100%;
+	font-size: 100%;
+	-webkit-tap-highlight-color: transparent;
 }
 
 body {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-smoothing: antialiased;
-    min-width: 320px;
-    overflow-x: hidden;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-smoothing: antialiased;
+	min-width: 320px;
+	overflow-x: hidden;
 }
 
 figure {
-    line-height: 0;
+	line-height: 0;
 }
+
 figcaption {
-    line-height: normal;
+	line-height: normal;
 }
 
 svg:not(:root) {
-    overflow: hidden;
+	overflow: hidden;
 }
 
 audio,
 canvas,
 progress,
 video {
-    display: inline-block;
+	display: inline-block;
 }
 
 audio:not([controls]) {
-    display: none;
-    height: 0;
+	display: none;
+	height: 0;
 }
 
 progress {
-    vertical-align: baseline;
+	vertical-align: baseline;
 }
 
 template,
 [hidden] {
-    display: none;
+	display: none;
 }
 
 a {
-    background-color: transparent;
-    -webkit-text-decoration-skip: objects;
+	background-color: transparent;
+	-webkit-text-decoration-skip: objects;
 }
 
 abbr[title] {
-    border-bottom: none;
-    text-decoration: underline;
-    text-decoration: underline dotted;
+	border-bottom: none;
+	text-decoration: underline;
+	text-decoration: underline dotted;
 }
 
 pre {
-    overflow: auto;
+	overflow: auto;
 }
 
 code,
 kbd,
 pre,
 samp {
-  font-family: monospace, monospace;
-  font-size: 1em;
+	font-family: monospace, monospace;
+	font-size: 1em;
 }
 
 b,
 strong {
-    font-weight: inherit;
+	font-weight: inherit;
 }
 
 b,
 strong {
-    font-weight: bolder;
+	font-weight: bolder;
 }
 
 dfn {
-    font-style: italic;
+	font-style: italic;
 }
 
 mark {
-    background-color: #ff0;
-    color: #000;
+	background-color: #ff0;
+	color: #000;
 }
 
 small {
-    font-size: 80%;
+	font-size: 80%;
 }
 
 sub,
 sup {
-    font-size: 75%;
-    line-height: 0;
-    position: relative;
-    vertical-align: baseline;
+	font-size: 75%;
+	line-height: 0;
+	position: relative;
+	vertical-align: baseline;
 }
 
 sup {
-    top: -0.5em;
+	top: -.5em;
 }
 
 sub {
-    bottom: -0.25em;
+	bottom: -.25em;
 }
 
 hr {
-    border: 0;
-    height: 0;
+	border: 0;
+	height: 0;
 }
 
 /* Input: Kill browser input chrome */
@@ -171,9 +169,7 @@ input[type="button"],
 button,
 /*select,*/
 textarea {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
+	appearance: none;
 }
 
 input,
@@ -181,67 +177,67 @@ button,
 select,
 textarea,
 optgroup {
-    color: inherit;
-    font: inherit;
-    line-height: normal;
-    -webkit-font-smoothing: antialiased;
+	color: inherit;
+	font: inherit;
+	line-height: normal;
+	-webkit-font-smoothing: antialiased;
 }
 
 input,
 button,
 select,
 textarea {
-    outline: 0;
-    box-sizing: border-box;
-    margin: 0;
-    border-radius: 0;
+	outline: 0;
+	box-sizing: border-box;
+	margin: 0;
+	border-radius: 0;
 }
 
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
-    height: auto;
+	height: auto;
 }
 
 select {
-    &:-moz-focusring {
-        color: transparent;
-        text-shadow: 0 0 0 #000;
-    }
+	&:-moz-focusring {
+		color: transparent;
+		text-shadow: 0 0 0 #000;
+	}
 }
 
 legend {
-  color: inherit;
-  display: table;
-  max-width: 100%;
-  white-space: normal;
+	color: inherit;
+	display: table;
+	max-width: 100%;
+	white-space: normal;
 }
 
 textarea {
-    resize: none;
-    overflow: auto;
+	resize: none;
+	overflow: auto;
 }
 
 optgroup {
-    font-weight: bold;
+	font-weight: bold;
 }
 
 button,
 input[type="button"],
 input[type="reset"],
 input[type="submit"] {
-    cursor: pointer;
-    overflow: visible;
+	cursor: pointer;
+	overflow: visible;
 }
 
 button[disabled],
 html input[disabled] {
-    cursor: default;
+	cursor: default;
 }
 
 button::-moz-focus-inner,
 input::-moz-focus-inner {
-    border: 0;
-    padding: 0;
+	border: 0;
+	padding: 0;
 }
 
 /* -----------------------------------------------------------------------------
@@ -250,44 +246,118 @@ input::-moz-focus-inner {
  *
  * ----------------------------------------------------------------------------- */
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, main,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-    margin: 0;
-    padding: 0;
-    border: 0;
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+main,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+	margin: 0;
+	padding: 0;
+	border: 0;
 }
 
-ol, 
+ol,
 ul {
-    list-style: none;
+	list-style: none;
 }
 
-h1, h2, h3, h4, h5, h6, p {
-    font-weight: normal;
-    text-rendering: optimizeLegibility;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+	font-weight: normal;
+	text-rendering: optimizeLegibility;
 }
 
 img {
-    -ms-interpolation-mode: bicubic;  
-    height: auto;
-    max-width: 100%;
-    border-style: none;
+	-ms-interpolation-mode: bicubic;
+	height: auto;
+	max-width: 100%;
+	border-style: none;
 }
 
 iframe,
 video,
 embed {
-    max-width: 100%;
-    max-height: 100%;
+	max-width: 100%;
+	max-height: 100%;
 }

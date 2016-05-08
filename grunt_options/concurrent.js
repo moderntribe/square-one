@@ -19,6 +19,9 @@ module.exports = {
 			'mochacli:all',
 		],
 		[
+			'postcss:themeLint',
+		],
+		[
 			'clean:themeMinCSS',
 		],
 	],

@@ -20,9 +20,7 @@ module.exports = {
 
 	themeCSS: {
 		files: [
-			'<%= pkg._corethemepath %>/pcss/**/**/*.pcss',
 			'<%= pkg._corethemepath %>/pcss/**/*.pcss',
-			'<%= pkg._corethemepath %>/pcss/*.pcss',
 			'!<%= pkg._corethemepath %>/pcss/admin/*.pcss',
 		],
 		tasks: [

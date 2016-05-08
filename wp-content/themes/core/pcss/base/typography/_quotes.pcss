@@ -16,7 +16,7 @@ q {
  * Quotes
  * ----------------------------------------------------------------------------- */
 
-/*q,*/
+/* q */
 .quote,
 .context-content q {
 	@mixin quote-base;
@@ -28,13 +28,14 @@ q {
  * Blockquotes
  * ----------------------------------------------------------------------------- */
 
-/*blockquote,*/
+/* blockquote */
 .blockquote,
 .context-content blockquote {
 	@mixin quote-base;
 	p {
-		margin: 0 auto;
 		@mixin quote-text;
+		margin: 0 auto;
+
 		& ~ p {
 			margin-top: var(--spacer);
 		}
@@ -45,7 +46,7 @@ q {
  * Cite
  * ----------------------------------------------------------------------------- */
 
-/*cite,*/
+/* cite */
 .cite,
 .context-content cite {
 	font-style: normal;

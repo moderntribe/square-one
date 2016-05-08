@@ -6,16 +6,17 @@
 .table,
 .context-content table {
 	font-size: var(--font-size-content-s);
-    margin: var(--spacer) auto;
-    border: 1px solid var(--grey);
-    text-align: left;
-    border-collapse: collapse;
-    width: 100%;
-    table-layout: fixed;
+	margin: var(--spacer) auto;
+	border: 1px solid var(--grey);
+	text-align: left;
+	border-collapse: collapse;
+	width: 100%;
+	table-layout: fixed;
+
 	@media (--viewport-medium) {
 		font-size: var(--font-size-content);
-        table-layout: auto;
-    }
+		table-layout: auto;
+	}
 }
 
 /* -----------------------------------------------------------------------------
@@ -24,12 +25,12 @@
 
 .th,
 .context-content th {
-    padding: 14px 1em 12px;
-    font-weight: var(--font-weight-semibold);
-    line-height: var(--line-height-even);
-    & ~ th {
-        border-left: 1px solid var(--grey);
-    }
+	padding: 14px 1em 12px;
+	font-weight: var(--font-weight-semibold);
+	line-height: var(--line-height-even);
+	& ~ th {
+		border-left: 1px solid var(--grey);
+	}
 }
 
 /* -----------------------------------------------------------------------------
@@ -55,8 +56,8 @@
 
 .td,
 .context-content td {
-    padding: 12px 1em 10px;
-    & ~ td {
-        border-left: 1px solid var(--grey);
-    }
+	padding: 12px 1em 10px;
+	& ~ td {
+		border-left: 1px solid var(--grey);
+	}
 }

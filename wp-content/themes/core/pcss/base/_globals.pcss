@@ -1,4 +1,3 @@
-
 /* -----------------------------------------------------------------------------
  *
  * Globals: HTML & Body
@@ -11,6 +10,7 @@ html {
 
 body {
 	background: var(--bgd-content);
+
 	/* CASE: "sticky" footer */
 	display: flex;
 	flex-direction: column;
@@ -23,11 +23,11 @@ body {
  *
  * ----------------------------------------------------------------------------- */
 
-body, 
-form, 
-button, 
-input, 
-select, 
+body,
+form,
+button,
+input,
+select,
 textarea {
 	font: var(--font-weight-regular) normal 100%/var(--line-height-base) var(--font-family-base);
 	color: var(--text);
@@ -39,14 +39,8 @@ textarea {
  *
  * ----------------------------------------------------------------------------- */
 
-::-moz-selection { 
+::selection {
 	background: var(--primary);
 	color: var(--white);
-	text-shadow: none; 
-}
-
-::selection { 
-	background: var(--primary);
-	color: var(--white);
-	text-shadow: none; 
+	text-shadow: none;
 }
