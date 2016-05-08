@@ -7,9 +7,7 @@
  */
 
 module.exports = {
-
 	dist: [
 		'<%= pkg._corethemepath %>/js/src/**/*.js',
 	],
-
 };

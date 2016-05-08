@@ -1,0 +1,57 @@
+
+/* -----------------------------------------------------------------------------
+ *
+ * Layout: Staggered
+ *
+ * Notes: This should be paired up with (inside a) .content-wrap wrapper
+ *
+ * Usage: Post, Page, WYSIWYG Content
+ *
+ * Screenshot: https://cloudup.com/ctCRZpIxpbt
+ *
+ * Example:
+ * <div class="content-wrap">
+ *   <div class="cw-staggered">
+ *     ...
+ *   </div>
+ * </div>
+ *
+ * ----------------------------------------------------------------------------- */
+
+.cw-staggered {
+	& > * {
+		max-width: 800px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ *
+ * Layout: Staggered, Double
+ *
+ * Notes: This should be paired up with (inside a) .content-wrap wrapper
+ *
+ * Usage: Post, Page, WYSIWYG Content
+ *
+ * Screenshot: https://cloudup.com/ctCRZpIxpbt
+ *
+ * Example:
+ * <div class="content-wrap">
+ *   <div class="cw-staggered-double">
+ *     ...
+ *   </div>
+ * </div>
+ *
+ * ----------------------------------------------------------------------------- */
+
+.cw-staggered-double {
+	max-width: 800px;
+	margin-left: auto;
+	margin-right: auto;
+	& > * {
+		max-width: 700px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+}

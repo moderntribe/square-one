@@ -9,6 +9,7 @@
 
 
 add_filter( 'the_content', 'customize_wp_image_output', 12, 1 );
+add_action( 'init', 'disable_responsive_images' );
 
 
 // WP SEO
@@ -63,5 +64,31 @@ function image_wrap_regex_callback( $matches ) {
 	}
 
 	return str_replace( $the_img, $updated_image, $full_match );
+
+}
+
+
+/**
+ * Disable WP responsive images output (temporary for now)
+ */
+
+function disable_responsive_images() {
+
+	add_filter( 'wp_get_attachment_image_attributes', function ( $attr ) {
+		if ( isset( $attr['sizes'] ) ) {
+			unset( $attr['sizes'] );
+		}
+
+		if ( isset( $attr['srcset'] ) ) {
+			unset( $attr['srcset'] );
+		}
+
+		return $attr;
+
+	}, 999 );
+
+	add_filter( 'wp_calculate_image_sizes', '__return_false', 999 );
+	add_filter( 'wp_calculate_image_srcset', '__return_false', 999 );
+	remove_filter( 'the_content', 'wp_make_content_images_responsive' );
 
 }

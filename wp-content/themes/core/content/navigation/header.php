@@ -3,7 +3,7 @@ if( has_nav_menu( 'primary' ) ) { ?>
 
 	<nav aria-label="Primary Navigation" itemscope itemtype="https://schema.org/SiteNavigationElement">
 
-		<h5 class="accessibility">Primary Navigation</h5>
+		<h5 class="visual-hide">Primary Navigation</h5>
 
 		<ol>
 			<?php // Header Nav

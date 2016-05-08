@@ -29,7 +29,7 @@
 		<div class="content-wrap">
 			<h1>
 				<img src="<?php echo trailingslashit( get_template_directory_uri() ); ?>img/logos/logo-legacy.png" alt="<?php bloginfo( 'name' ); ?>" />
-				<span class="accessibility"><?php bloginfo( 'name' ); ?></span>
+				<span class="visual-hide"><?php bloginfo( 'name' ); ?></span>
 			</h1>
 		</div><!-- .content-wrap -->
 	</div><!-- .header -->

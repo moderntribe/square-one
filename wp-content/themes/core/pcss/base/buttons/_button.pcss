@@ -1,0 +1,32 @@
+
+/* -----------------------------------------------------------------------------
+ *
+ * Button: Default
+ *
+ * Notes:
+ * + Has background color
+ * + On hover/focus animate background color
+ *
+ * Example:
+ * <button class="btn">...</button>
+ * <a href="#" class="btn">...</a>
+ *
+ * ----------------------------------------------------------------------------- */
+
+.btn,
+a.btn {
+	@mixin button-global;
+	background-color: var(--black);
+	padding: 1em;
+	text-align: center;
+	color: var(--white);
+	&:visited {
+		color: var(--white);
+	}
+	&:hover,
+	&:focus,
+	&:active {
+		color: var(--white);
+		background-color: var(--grey-dark);
+	}
+}
