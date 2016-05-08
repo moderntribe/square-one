@@ -174,7 +174,7 @@ function old_browsers() {
 function core_fonts() {
 
 	$typekit_id = 'xxxxxx';
-    $webfont_src  = trailingslashit( get_template_directory_uri() ) . 'js/webfontloader.js';
+    $webfont_src  = trailingslashit( get_template_directory_uri() ) . 'js/vendor/webfontloader.js';
 
     ?>
 
