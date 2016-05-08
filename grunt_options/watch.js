@@ -11,39 +11,48 @@ var defaultOpts = {
 };
 
 module.exports = {
-	core_php: {
+	corePHP: {
 		files: [
 			'<%= pkg._corethemepath %>/**/*.php',
 		],
 		options: defaultOpts,
 	},
 
-	theme_css: {
+	themeCSS: {
 		files: [
-			'<%= pkg._corethemepath %>/scss/**/**/*.scss',
-			'<%= pkg._corethemepath %>/scss/**/*.scss',
-			'<%= pkg._corethemepath %>/scss/*.scss',
+			'<%= pkg._corethemepath %>/pcss/**/*.pcss',
+			'!<%= pkg._corethemepath %>/pcss/admin/*.pcss',
 		],
 		tasks: [
-			'sass:theme',
-			'combine_mq:theme',
-			'postcss:theme_prefix',
-			'clean:theme',
+			'postcss:theme',
+			'postcss:themeLegacy',
 		],
 		options: defaultOpts,
 	},
 
-	theme_scripts: {
+	themeAdmin: {
+		files: [
+			'<%= pkg._corethemepath %>/pcss/admin/*.pcss',
+		],
+		tasks: [
+			'postcss:themeWPEditor',
+			'postcss:themeWPLogin',
+		],
+		options: defaultOpts,
+	},
+
+	themeScripts: {
 		files: [
 			'<%= pkg._corethemepath %>/js/src/**/*.js',
 		],
 		tasks: [
-			'webpack:themedev',
+			'eslint:dist',
+			'webpack:themeDev',
 		],
 		options: defaultOpts,
 	},
 
-	theme_templates: {
+	themeTemplates: {
 		files: [
 			'<%= pkg._corethemepath %>/**/*.php',
 		],

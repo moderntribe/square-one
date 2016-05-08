@@ -7,7 +7,6 @@
  */
 
 module.exports = {
-
 	options: {
 		compilers: ['js:babel-core/register'],
 		require: ['expect'],
