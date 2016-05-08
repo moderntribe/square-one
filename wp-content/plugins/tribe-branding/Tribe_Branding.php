@@ -6,7 +6,6 @@
  * Update links and logos and social icons
  *
  * @todo      Make a global override admin for this on MS installs.
- * @todo      Support ogtags, twitter, google authors(?)... Anything else?
  * @version   1.0
  * @copyright Modern Tribe, Inc. 2013
  */
@@ -26,38 +25,20 @@ class Tribe_Branding {
 	 * Enqueue scripts and init filters.
 	 */
 	protected function add_hooks() {
-		//add_action( 'login_head', array( $this, 'set_login_logo' ) );
 		add_filter( 'login_headerurl', array( $this, 'set_login_header_url' ) );
 		add_filter( 'login_headertitle', array( $this, 'set_login_header_title' ) );
 		add_action( 'wp_head', array( $this, 'set_favicon' ) );
+		add_action( 'login_head', array( $this, 'set_favicon' ) );
+		add_action( 'admin_head', array( $this, 'set_favicon' ) );
+		add_action( 'wp_head', array( $this, 'set_android_icon' ), 10, 0 );
 		add_action( 'wp_head', array( $this, 'set_ios_icon' ), 10, 0 );
 		add_action( 'wp_head', array( $this, 'set_ie_metro_icon' ), 10, 0 );
-		//add_action( 'wp_head', array( $this, 'set_social_meta' ), 10, 0 );
-		add_action( 'customize_register', array( $this, 'theme_customizer' ) );
+		add_action( 'wp_head', array( $this, 'set_ie_metro_icon_bgd_color' ), 10, 0 );
+		add_action( 'wp_head', array( $this, 'set_android_theme_color' ), 10, 0 );
+		add_action( 'customize_register', array( $this, 'theme_customizer' ), 20 );
 		add_filter( 'upload_mimes', array( $this, 'support_ico_uploads' ) );
 		add_action( 'wp_footer', array( $this, 'tribe_attribute_credit' ), 999 );
 		add_filter( 'admin_footer_text', array( $this, 'edit_admin_footer_text' ), 10, 1 );
-	}
-
-	/**
-	 * Login Logo
-	 */
-	public function set_login_logo() {
-		$image = plugins_url( 'assets/logo_admin.png', dirname( __FILE__ ) );
-		$image = apply_filters( 'branding_login_logo', $image );
-		?>
-		<style type="text/css">
-			.login h1 {
-				margin : 0 -60px;
-			}
-
-			.login h1 a {
-				background      : transparent url(<?php echo $image; ?>) no-repeat scroll center center;
-				background-size : 320px 57px;
-				width           : auto;
-			}
-		</style>
-	<?php
 	}
 
 	/**
@@ -78,126 +59,124 @@ class Tribe_Branding {
 	 * Favicon
 	 */
 	public function set_favicon() {
-		$favicon = get_theme_mod( 'branding_customizer_icon_favicon' );
-		if ( empty( $favicon ) ) {
-			$favicon = plugins_url( 'assets/favicon.ico', dirname( __FILE__ ) );
-		}
-		$favicon = apply_filters( 'branding_favicon', $favicon );
-		echo '<link rel="shortcut icon" href="' . $favicon . '">';
+		$icon = get_theme_mod( 'branding_customizer_icon_favicon', get_stylesheet_directory_uri() . '/img/branding/favicon.ico' );
+		echo '<link rel="shortcut icon" href="' . $icon . '">';
+	}
+
+	/**
+	 * Android Icon
+	 */
+	public function set_android_icon() {
+		$icon = get_theme_mod( 'branding_customizer_icon_android', get_stylesheet_directory_uri() . '/img/branding/android-icon.png' );
+		echo '<link rel="icon" sizes="192x192" href="' . $icon . '">';
 	}
 
 	/**
 	 * iOS Icon
 	 */
 	public function set_ios_icon() {
-		$icon = get_theme_mod( 'branding_customizer_icon_ios' );
-		if ( ! empty( $icon ) )
-			echo '<link rel="apple-touch-icon-precomposed" href="' . $icon . '">';
+		$icon = get_theme_mod( 'branding_customizer_icon_ios', get_template_directory_uri() . '/img/branding/apple-touch-icon-precomposed.png' );
+		echo '<link rel="apple-touch-icon-precomposed" href="' . $icon . '">';
 	}
 
 	/**
 	 * IE Metro Icon
 	 */
 	public function set_ie_metro_icon() {
-		$icon = get_theme_mod( 'branding_customizer_icon_ie' );
-		if ( ! empty( $icon ) )
-			echo '<meta name="msapplication-TileImage" content="' . $icon . '">';
+		$icon = get_theme_mod( 'branding_customizer_icon_ie', get_template_directory_uri() . '/img/branding/ms-icon-144.png' );
+		echo '<meta name="msapplication-TileImage" content="' . $icon . '">';
 	}
 
 	/**
-	 * Set meta for the page thumbnail for social sharing
-	 * @return void
+	 * Android Theme Color
 	 */
-	public function set_social_meta() {
-		if ( is_singular() ) {
-			if ( has_post_thumbnail() ) {
-				$attachment_id = get_post_thumbnail_id();
-			}
-			if ( empty( $attachment_id ) && class_exists( 'MultiPostThumbnails' ) ) {
-				$attachment_id = MultiPostThumbnails::get_post_thumbnail_id( get_post_type(), 'small-thumbnail', get_the_ID() );
-			}
-			if ( !empty( $attachment_id ) ) {
-				$image = wp_get_attachment_image_src( $attachment_id, 'medium' );
-				if ( $image ) {
-					$image = $image[0];
-				}
-			}
-		}
-		if ( empty( $image ) ) {
-			$image = tribe_get_logo();
-		}
-		$image = apply_filters( 'tribe_social_image', $image );
-		if ( ! empty( $image ) ) {
-			printf( "\n" . '<meta name="twitter:image" content="%s" />', apply_filters( 'tribe_branding_twitter_image', $image ) );
-			printf( "\n" . '<meta name="og:image" content="%s" />', apply_filters( 'tribe_branding_og_image', $image ) );
-			echo "\n";
-		}
+	public function set_android_theme_color() {
+		$theme_color = get_theme_mod( 'branding_customizer_android_theme', '#000000' );
+		echo '<meta name="theme-color" content="' . $theme_color . '">';
 	}
 
 	/**
-	 * @return string URL to the logo
+	 * IE Metro Icon Background Color
 	 */
-	public function get_logo() {
-		// only do this once per page load
-		static $logo = FALSE;
-		if ( $logo !== FALSE ) {
-			return $logo;
-		}
-
-		// If a logo was cached, use it
-		//$logo = Tribe_ObjectCache::get('logo', 'tribe');
-		//if ( !empty($logo) ) return $logo;
-
-		// If logo is uploaded, use it
-		$logo = get_theme_mod('tribe_theme_customizer_logo');
-		if ( !empty($logo) ) {
-			//Tribe_ObjectCache::set('logo', -1, 'tribe');
-			return $logo;
-		}
-
-		// Fall back on hardcoded logo.
-		// todo: write fallback code here to look in theme branding folder and fall back on plugin assets/branding
-		return '';
+	public function set_ie_metro_icon_bgd_color() {
+		$icon_bgd_color = get_theme_mod( 'branding_customizer_icon_ie_bgd_color', '#000000' );
+		echo '<meta name="msapplication-TileColor" content="' . $icon_bgd_color . '">';
 	}
 
-
 	/**
-	 * Add an App Icons section to the Theme Customizer
+	 * Add a Branding Icons section to the Theme Customizer
+	 * and clean up a few other sections that are not needed
 	 *
 	 * @param $wp_customize
-	 *
-	 * @todo add toll tips etc to help user understand sizes etc.
 	 */
 	public function theme_customizer( $wp_customize ) {
 
+		// Clean up customizer a bit
+		$wp_customize->remove_section( 'colors' );
+		$wp_customize->remove_section( 'static_front_page' );
+		$wp_customize->remove_panel( 'nav_menus' );
+		$wp_customize->remove_panel( 'widgets' );
+		$wp_customize->remove_control( 'site_icon' );
+
+		// Add branding section
 		$wp_customize->add_section( 'branding_customizer', array(
 			'title'    => apply_filters( 'branding_customizer_title', __( 'Branding', 'tribe' ) ),
 			'priority' => apply_filters( 'branding_customizer_priority', 500 )
 		) );
 
-		// Fav Icon
+		// Icon: Favicon
 		$wp_customize->add_setting( 'branding_customizer_icon_favicon' );
 		$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'branding_customizer_icon_favicon', array(
-			'label'      => __( 'Favicon (64x64 ICO)', 'tribe' ),
-			'section'    => 'branding_customizer',
-			'settings'   => 'branding_customizer_icon_favicon',
-			'extensions' => array( 'ico' ),
+			'label'       => __( 'Favicon', 'tribe' ),
+			'description' => __( 'Recommended dimensions: 64px X 64px. Recommended file type: .ico.', 'tribe' ),
+			'section'     => 'branding_customizer',
+			'settings'    => 'branding_customizer_icon_favicon',
+			'extensions'  => array( 'ico' ),
 		) ) );
 
-		// iOS Icon
+		// Icon: Android
+		$wp_customize->add_setting( 'branding_customizer_icon_android' );
+		$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'branding_customizer_icon_android', array(
+			'label'       => __( 'Android Icon', 'tribe' ),
+			'description' => __( 'Recommended dimensions: 192px X 192px. Recommended file type: .png.', 'tribe' ),
+			'section'     => 'branding_customizer',
+			'settings'    => 'branding_customizer_icon_android'
+		) ) );
+
+		// Icon: iOS
 		$wp_customize->add_setting( 'branding_customizer_icon_ios' );
 		$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'branding_customizer_icon_ios', array(
-			'label'      => __( 'iOS Icon (512x512 PNG)', 'tribe' ),
-			'section'    => 'branding_customizer',
-			'settings'   => 'branding_customizer_icon_ios'
+			'label'       => __( 'iOS Icon', 'tribe' ),
+			'description' => __( 'Recommended dimensions: 512px X 512px. Recommended file type: .png.', 'tribe' ),
+			'section'     => 'branding_customizer',
+			'settings'    => 'branding_customizer_icon_ios'
 		) ) );
 
-		// IE Metro Icon
+		// Icon: IE
 		$wp_customize->add_setting( 'branding_customizer_icon_ie' );
 		$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'branding_customizer_icon_ie', array(
-			'label'      => __( 'IE Metro Icon (144x144 PNG)', 'tribe' ),
-			'section'    => 'branding_customizer',
-			'settings'   => 'branding_customizer_icon_ie'
+			'label'       => __( 'IE Metro Icon', 'tribe' ),
+			'description' => __( 'Recommended dimensions: 144px X 144px. Recommended file type: .png.', 'tribe' ),
+			'section'     => 'branding_customizer',
+			'settings'    => 'branding_customizer_icon_ie'
+		) ) );
+
+		// Android Theme
+		$wp_customize->add_setting( 'branding_customizer_android_theme' );
+		$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'branding_customizer_android_theme', array(
+			'label'       => __( 'Android Theme Color', 'tribe' ),
+			'description' => __( 'Select the theme color for android os while website is active in chrome.', 'tribe' ),
+			'section'     => 'branding_customizer',
+			'settings'    => 'branding_customizer_android_theme'
+		) ) );
+
+		// Icon Bgd: IE
+		$wp_customize->add_setting( 'branding_customizer_icon_ie_bgd_color' );
+		$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'branding_customizer_icon_ie_bgd_color', array(
+			'label'       => __( 'IE Metro Icon Background Color', 'tribe' ),
+			'description' => __( 'Select the background color to be used behind the IE Metro Icon.', 'tribe' ),
+			'section'     => 'branding_customizer',
+			'settings'    => 'branding_customizer_icon_ie_bgd_color'
 		) ) );
 
 	}
@@ -264,4 +243,3 @@ class Tribe_Branding {
 		return self::$instance;
 	}
 }
-
