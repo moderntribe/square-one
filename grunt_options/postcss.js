@@ -10,6 +10,7 @@ var postcssFunctions = require('../dev_components/theme/pcss/functions');
 var compileOptions = {
 	map: true,
 	processors: [
+		require('stylelint'),
 		require('postcss-partial-import')({ extension: 'pcss', }),
 		require('postcss-inline-comment'),
 		require('postcss-mixins'),
@@ -22,18 +23,21 @@ var compileOptions = {
 		require('postcss-cssnext')({ browsers: ['last 3 versions', 'ie 10'] }),
 		require('postcss-nested'),
 		require('lost'),
+		require('postcss-reporter')({ clearMessages: true, throwError: true, plugins: ['stylelint'], }),
 	],
 };
 
 var legacyOptions = {
 	map: false,
 	processors: [
+		require('stylelint'),
 		require('postcss-partial-import')({ extension: 'pcss', }),
 		require('postcss-mixins'),
 		require('postcss-custom-properties'),
 		require('postcss-simple-vars'),
 		require('postcss-nested'),
 		require('postcss-cssnext')({ browsers: ['last 20 versions', 'ie 6'] }),
+		require('postcss-reporter')({ clearMessages: true, throwError: true, plugins: ['stylelint'], }),
 	],
 };
 
