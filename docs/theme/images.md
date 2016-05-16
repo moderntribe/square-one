@@ -30,6 +30,8 @@ Lazyloading, srcset, background images, appending arbitrary html and more are av
 	'html'              => '',                // append an html string in the wrapper
 ```
 
+Doing animations/transitions to loaded images should be done with css if desired. When lazyloading the plugin applies the "lazyloading" class to the image during loading, and "lazyloaded" when complete. So you could set the image to opacity and drop a css transition on, then apply opacity 1 on the lazyloaded class. To adjust when the image is revealed adjust the "expand" attribut. Negative integers bring you into viewport, positive trigger it below viewport bottom. Default is 200 so images lazyload a bit before they come into view. To know more about the lazyload javascript go here [Lazysizes](https://github.com/aFarkas/lazysizes). Check the vendor directory of the theme to see which plugins are active, and check the copy grunt task to understand how to add more plugins. 
+
 Some example usage and generated output to help you along:
 
 Using: 
