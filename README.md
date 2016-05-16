@@ -1,13 +1,13 @@
 #  Tribe Square One ([1]) Development Framework
 
 
-[1] is a base development framework used by Modern Tribe when kicking off new WordPress projects. It contains a base for:
+[1] is a development framework created by Modern Tribe for use in our WordPress projects. It contains a base for:
 
-* Our build process (node, grunt & bower) | /dev
+* Our build process (node, grunt, webpack)
 * Theme independent core functionality plugin | /content/mu-plugins
-* Core plugins (used on every project) | /content/plugins
-* Theme (templates, markup & structure) | /content/themes/tribe-square-one
-* Front-end asset structure (JS, SCSS & CSS)
+* Core plugin | /content/plugins/core
+* Core theme | /content/themes/core
+* Front-end asset structure (JS, PostCSS & CSS)
 
 
 ## Getting Started
@@ -15,10 +15,7 @@
 
 To begin using [1]:
 
-1. Change the name of our WordPress theme from *tribe-square-one* to *tribe-clientname*
-2. Update the information in: *content/themes/tribe-clientname/style.css*
-3. Update the constant: *WP_DEFAULT_THEME* in *wp-config.php* to the updated theme name
-4. Update the variable *_themepath* found in: */dev/package.json* to be: *content/themes/tribe-clientname*
+Please refer to the documentation in the /docs folder.
 
 ### Setting up the Codeception test
 If you are going to write and/or run the [Codeception](http://codeception.com/) tests then those will need some set up too.  
@@ -46,9 +43,7 @@ Some tests are included in the `dev/test_sample` folder to offer examples.
 
 #### Using the build tools
 
-The build tools for themeing can be found in the */dev/* directory. Refer to its README for instructions on getting started with Grunt, Bower, and SASS.
-
-*NOTE: One helpful tip, all relevant directories will contain a readme outlining the directory contents as well as any relevant information, tips, and instructions.*
+The build tools for themeing can be found in the *root* directory. Refer to the docs for instructions on getting started with Grunt, Webpack, and PostCSS.
 
 
 ## Configurations
