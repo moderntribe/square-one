@@ -3,7 +3,7 @@
 * [Introduction](/README.md)
 * [Guides](/docs/guides.md)
   * [Node](/docs/guides/node.md)
-* [Installation](/docs/theme/README.md)
+* [Theme](/docs/theme/README.md)
   * [PostCSS](/docs/theme/postcss.md)
   * [Javascript](/docs/theme/javascript.md)
   * [Images](/docs/theme/images.md)
