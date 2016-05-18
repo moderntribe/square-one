@@ -7,6 +7,7 @@ namespace Tribe\Project\Service_Providers;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Tribe\Project\Theme\Body_Classes;
+use Tribe\Project\Theme\Image_Links;
 use Tribe\Project\Theme\Image_Sizes;
 use Tribe\Project\Theme\Image_Wrap;
 use Tribe\Project\Theme\Oembed_Wrap;
@@ -33,6 +34,9 @@ class Theme_Provider implements ServiceProviderInterface {
 		};
 		$container[ 'theme.images.wrap' ] = function( Container $container ) {
 			return new Image_Wrap();
+		};
+		$container[ 'theme.images.links' ] = function( Container $container ) {
+			return new Image_Links();
 		};
 		$container[ 'theme.images.responsive_disabler' ] = function( Container $container ) {
 			return new WP_Responsive_Image_Disabler();
@@ -76,6 +80,7 @@ class Theme_Provider implements ServiceProviderInterface {
 		$container[ 'service_loader' ]->enqueue( 'theme.body_classes', 'hook' );
 		$container[ 'service_loader' ]->enqueue( 'theme.images.sizes', 'hook' );
 		$container[ 'service_loader' ]->enqueue( 'theme.images.wrap', 'hook' );
+		$container[ 'service_loader' ]->enqueue( 'theme.images.links', 'hook' );
 		$container[ 'service_loader' ]->enqueue( 'theme.images.responsive_disabler', 'hook' );
 		$container[ 'service_loader' ]->enqueue( 'theme.oembed.wrap', 'hook' );
 		$container[ 'service_loader' ]->enqueue( 'theme.supports', 'hook' );
