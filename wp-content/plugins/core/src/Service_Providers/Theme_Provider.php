@@ -10,6 +10,7 @@ use Tribe\Project\Theme\Body_Classes;
 use Tribe\Project\Theme\Image_Sizes;
 use Tribe\Project\Theme\Image_Wrap;
 use Tribe\Project\Theme\Oembed_Wrap;
+use Tribe\Project\Theme\Resources\Editor_Styles;
 use Tribe\Project\Theme\Resources\Emoji_Disabler;
 use Tribe\Project\Theme\Resources\Fonts;
 use Tribe\Project\Theme\Resources\Legacy_Check;
@@ -64,6 +65,9 @@ class Theme_Provider implements ServiceProviderInterface {
 		$container[ 'theme.resources.styles' ] = function( Container $container ) {
 			return new Styles();
 		};
+		$container[ 'theme.resources.editor_styles' ] = function( Container $container ) {
+			return new Editor_Styles();
+		};
 
 		$this->hook( $container );
 	}
@@ -81,6 +85,7 @@ class Theme_Provider implements ServiceProviderInterface {
 		$container[ 'service_loader' ]->enqueue( 'theme.resources.fonts', 'hook' );
 		$container[ 'service_loader' ]->enqueue( 'theme.resources.scripts', 'hook' );
 		$container[ 'service_loader' ]->enqueue( 'theme.resources.styles', 'hook' );
+		$container[ 'service_loader' ]->enqueue( 'theme.resources.editor_styles', 'hook' );
 	}
 
 }
