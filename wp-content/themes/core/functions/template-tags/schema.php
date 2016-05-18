@@ -1,6 +1,8 @@
 <?php
 /**
  * Template Tags: Schema
+ *
+ * @todo Move to core plugin
  */
 
 

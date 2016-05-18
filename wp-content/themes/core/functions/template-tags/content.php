@@ -53,6 +53,8 @@ function the_page_title( $wrapper = true ) {
  * @return string|void
  *
  * @since core 1.0
+ *        
+ * @todo Move to core plugin
  */
 
 function get_featured_image(
