@@ -12,6 +12,12 @@
 
 function the_tribe_image( $image_id = 0, $options = [] ) {
 
+	// they didnt supply an image id
+
+	if ( empty( $image_id ) ) {
+		return '';
+	}
+
 	$defaults = [
 		'as_bg'             => false,             // us this as background on wrapper?
 		'auto_shim'         => true,              // if true, shim dir as set will be used, src_size will be used as filename, with png as filetype
@@ -39,12 +45,6 @@ function the_tribe_image( $image_id = 0, $options = [] ) {
 
 	$opts = wp_parse_args( $options, $defaults );
 
-	// they didnt supply an image id
-
-	if ( empty( $image_id ) ) {
-		return '';
-	}
-
 	// get the html
 
 	$html = get_the_image_html( $image_id, $opts );
@@ -68,90 +68,69 @@ function the_tribe_image( $image_id = 0, $options = [] ) {
  * @return string
  */
 
-function get_the_item_attributes( $image_id = 0, $options = [ ] ) {
+function get_the_item_attributes( $image_id, $options ) {
 
 	$src = '';
 	// we'll almost always set src, except if for some reason they wanted to only use srcset
+	$attrs = [];
 	if( $options['src'] ){
 		$src = wp_get_attachment_image_src( $image_id, $options['src_size'] );
 		$src = $src[0];
 	}
-	$additional_attr = ! empty( $options['img_attr'] ) ? sprintf( ' %s ', trim( $options['img_attr'] ) ) : '';
-	$img_alt_attr = $options['as_bg'] ? '' : sprintf( ' alt="%s" ', get_the_title( $image_id ) );
-	$srcset_attr = '';
-	$sizes_attr = '';
+	$attrs[] = ! empty( $options['img_attr'] ) ? trim( $options['img_attr'] ) : '';
+	$attrs[] = $options['as_bg'] ? '' : sprintf( 'alt="%s"', get_the_title( $image_id ) );
 
 	if ( $options['use_lazyload'] ) {
 
-		// get the shim
-		$shim_src = get_the_shim( $options );
-
 		// the expand attribute that controls threshold
-		$expand_attr = sprintf( ' data-expand="%s" ', $options['expand'] );
+		$attrs[] = sprintf( 'data-expand="%s"', $options['expand'] );
 
 		// the parent fit attribute if as_bg is used.
-		$parent_fit_attr = ! $options['as_bg'] ? sprintf( ' data-parent-fit="%s" ', $options['parent_fit'] ) : '';
+		$attrs[] = ! $options['as_bg'] ? sprintf( 'data-parent-fit="%s"', $options['parent_fit'] ) : '';
 
 		// set an src if true in options, since lazyloading this is "data-src"
-		$src_attr = ! $options['as_bg'] && $options['src'] ? sprintf( ' data-src="%s" ', $src ) : '';
+		$attrs[] = ! $options['as_bg'] && $options['src'] ? sprintf( 'data-src="%s"', $src ) : '';
 
 		// the shim attribute for srcset.
-		$srcset_shim_attr = '';
-
+		$shim_src = get_the_shim( $options );
 		if ( ! $options['as_bg'] && $options['use_srcset'] && ! empty( $options['srcset_sizes'] ) ) {
-			$srcset_shim_attr = sprintf( ' srcset="%s" ', $shim_src );
+			$attrs[] = sprintf( 'srcset="%s"', $shim_src );
 		}
 
+		// the sizes attribute for srcset
 		if ( $options['use_srcset'] && ! empty( $options['srcset_sizes'] ) ) {
 			$sizes_value = $options['auto_sizes_attr'] ? 'auto' : $options['srcset_sizes_attr'];
-			$sizes_attr = sprintf( ' data-sizes="%s" ', $sizes_value );
+			$attrs[] = sprintf( 'data-sizes="%s"', $sizes_value );
 		}
 
 		// generate the srcset attribute if wanted
 		if ( $options['use_srcset'] && ! empty( $options['srcset_sizes'] ) ) {
 			$attribute_name = $options['as_bg'] ? 'data-bgset' : 'data-srcset';
 			$srcset_urls = get_the_srcset_attribute( $image_id, $options['srcset_sizes'] );
-			$srcset_attr = sprintf( ' %s="%s" ', $attribute_name, $srcset_urls );
+			$attrs[] = sprintf( '%s="%s"', $attribute_name, $srcset_urls );
 		}
 
+		// setup the shim
 		if ( $options['as_bg'] ) {
-
-			$shim_attr = sprintf( ' style="background-image:url(\'%s\');" ', $shim_src );
+			$attrs[] = sprintf( 'style="background-image:url(\'%s\');"', $shim_src );
 		} else {
-
-			$shim_attr = sprintf( ' src="%s" ', $shim_src );
+			$attrs[] = sprintf( 'src="%s"', $shim_src );
 		}
-		return sprintf(
-			'%s%s%s%s%s%s%s%s%s',
-			$shim_attr,
-			$srcset_shim_attr,
-			$src_attr,
-			$srcset_attr,
-			$sizes_attr,
-			$expand_attr,
-			$parent_fit_attr,
-			$img_alt_attr,
-			$additional_attr
-		);
-
 	} else {
 
 		// no lazyloading, standard stuffs
-
 		if ( $options['as_bg'] ) {
-
-			return sprintf( ' style="background-image:url(\'%s\');" %s', $src, $additional_attr );
+			$attrs[] = sprintf( 'style="background-image:url(\'%s\');"', $src );
 		} else {
-
+			$attrs[] = $options['src'] ? sprintf( 'src="%s"', $src ) : '';
 			if ( $options['use_srcset'] && ! empty( $options['srcset_sizes'] ) ) {
-				$sizes_attr = sprintf( ' sizes="%s" ', $options['srcset_sizes_attr'] );
 				$srcset_urls = get_the_srcset_attribute( $image_id, $options['srcset_sizes'] );
-				$srcset_attr = sprintf( ' srcset="%s" ', $srcset_urls );
+				$attrs[] = sprintf( 'sizes="%s"', $options['srcset_sizes_attr'] );
+				$attrs[] = sprintf( 'srcset="%s"', $srcset_urls );
 			}
-
-			return sprintf( ' src="%s"%s%s%s%s', $src, $srcset_attr, $sizes_attr, $img_alt_attr, $additional_attr );
 		}
 	}
+	return implode( ' ', $attrs );
 }
 
 /**
@@ -163,7 +142,7 @@ function get_the_item_attributes( $image_id = 0, $options = [ ] ) {
  * @return string
  */
 
-function get_the_shim( $options = [] ) {
+function get_the_shim( $options ) {
 
 	$shim_dir = trailingslashit( get_template_directory_uri() ) . 'img/shims/';
 	$src = $options[ 'shim' ];
@@ -188,7 +167,7 @@ function get_the_shim( $options = [] ) {
  * @return string
  */
 
-function get_the_srcset_attribute( $image_id = 0, $sizes = [] ){
+function get_the_srcset_attribute( $image_id, $sizes ){
 
 	$attribute = '';
 	$i = 1;
@@ -196,7 +175,7 @@ function get_the_srcset_attribute( $image_id = 0, $sizes = [] ){
 	foreach( $sizes as $size ){
 		$src = wp_get_attachment_image_src( $image_id, $size );
 		$divider = $i === $length ? '' : ',';
-		$attribute .= sprintf( '%s %sw %sh %s', $src[0], $src[1], $src[2], $divider ) . "\n";
+		$attribute .= sprintf( '%s %dw %dh %s', $src[0], $src[1], $src[2], $divider ) . "\n";
 		$i++;
 	}
 
@@ -212,7 +191,7 @@ function get_the_srcset_attribute( $image_id = 0, $sizes = [] ){
  * @return string
  */
 
-function get_the_image_html( $image_id = 0, $options = [ ] ) {
+function get_the_image_html( $image_id, $options = [ ] ) {
 
 	$html = '';
 

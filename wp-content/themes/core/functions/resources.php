@@ -95,12 +95,6 @@ function enqueue_scripts() {
 	// We version 2 due to browser support & can save large amounts of weight
 	wp_deregister_script( 'jquery' );
 
-	// JS
-	$scripts     = 'dist/scripts.js';
-	$jquery      = 'vendor/jquery.js';
-	$localize_target = 'babel-polyfill';
-	$script_deps = array( 'jquery', 'babel-polyfill' );
-
 	// Production
 	if ( ! defined( 'SCRIPT_DEBUG' ) || SCRIPT_DEBUG === false ) {
 		$jquery      = 'vendor/jquery.min.js';
@@ -108,6 +102,11 @@ function enqueue_scripts() {
 		$localize_target = 'core-theme-scripts';
 		$script_deps = array( 'jquery' );
 	} else {
+		$scripts     = 'dist/scripts.js';
+		$jquery      = 'vendor/jquery.js';
+		$localize_target = 'babel-polyfill';
+		$script_deps = array( 'jquery', 'babel-polyfill' );
+
 		wp_enqueue_script( 'babel-polyfill', $js_dir . 'vendor/polyfill.js', [], $version, true );
 		wp_enqueue_script( 'core-globals', $js_dir . 'vendor/globals.js', ['babel-polyfill'], $version, true );
 		wp_enqueue_script( 'core-lazysizes-object-fit', $js_dir . 'vendor/ls.object-fit.js', ['core-globals'], $version, true );
