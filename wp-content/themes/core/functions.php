@@ -25,21 +25,12 @@ function core_theme_setup() {
 	// Core & Architecture
 	include_once 'functions/core.php';
 
-	// Walkers
-	include_once 'functions/walkers/nav-clean.php';
-
-	// Localization
-	include_once 'functions/localization.php';
-
 	// Template Tags
 	include_once 'functions/template-tags/schema.php';
 	include_once 'functions/template-tags/content.php';
 	include_once 'functions/template-tags/comments.php';
 	include_once 'functions/template-tags/panels.php';
 	include_once 'functions/template-tags/branding.php';
-	
-	// Theme
-	include_once 'functions/resources.php';
 	
 }
 

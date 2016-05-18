@@ -10,10 +10,18 @@ use Tribe\Project\Theme\Body_Classes;
 use Tribe\Project\Theme\Image_Sizes;
 use Tribe\Project\Theme\Image_Wrap;
 use Tribe\Project\Theme\Oembed_Wrap;
+use Tribe\Project\Theme\Resources\Emoji_Disabler;
+use Tribe\Project\Theme\Resources\Fonts;
+use Tribe\Project\Theme\Resources\Legacy_Check;
+use Tribe\Project\Theme\Resources\Login_Resources;
+use Tribe\Project\Theme\Resources\Scripts;
+use Tribe\Project\Theme\Resources\Styles;
 use Tribe\Project\Theme\Supports;
 use Tribe\Project\Theme\WP_Responsive_Image_Disabler;
 
 class Theme_Provider implements ServiceProviderInterface {
+
+	private $typekit_id = '';
 
 	public function register( Container $container ) {
 		$container[ 'theme.body_classes' ] = function( Container $container ) {
@@ -35,6 +43,28 @@ class Theme_Provider implements ServiceProviderInterface {
 			return new Supports();
 		};
 
+		$container[ 'theme.resources.login' ] = function( Container $container ) {
+			return new Login_Resources();
+		};
+		$container[ 'theme.resources.legacy' ] = function( Container $container ) {
+			return new Legacy_Check();
+		};
+		$container[ 'theme.resources.emoji_disabler' ] = function( Container $container ) {
+			return new Emoji_Disabler();
+		};
+
+		$container[ 'theme.resources.typekit_id' ] = $this->typekit_id;
+		$container[ 'theme.resources.fonts' ] = function( Container $container ) {
+			return new Fonts( $container[ 'theme.resources.typekit_id' ] );
+		};
+
+		$container[ 'theme.resources.scripts' ] = function( Container $container ) {
+			return new Scripts();
+		};
+		$container[ 'theme.resources.styles' ] = function( Container $container ) {
+			return new Styles();
+		};
+
 		$this->hook( $container );
 	}
 
@@ -45,6 +75,12 @@ class Theme_Provider implements ServiceProviderInterface {
 		$container[ 'service_loader' ]->enqueue( 'theme.images.responsive_disabler', 'hook' );
 		$container[ 'service_loader' ]->enqueue( 'theme.oembed.wrap', 'hook' );
 		$container[ 'service_loader' ]->enqueue( 'theme.supports', 'hook' );
+		$container[ 'service_loader' ]->enqueue( 'theme.resources.login', 'hook' );
+		$container[ 'service_loader' ]->enqueue( 'theme.resources.legacy', 'hook' );
+		$container[ 'service_loader' ]->enqueue( 'theme.resources.emoji_disabler', 'hook' );
+		$container[ 'service_loader' ]->enqueue( 'theme.resources.fonts', 'hook' );
+		$container[ 'service_loader' ]->enqueue( 'theme.resources.scripts', 'hook' );
+		$container[ 'service_loader' ]->enqueue( 'theme.resources.styles', 'hook' );
 	}
 
 }
