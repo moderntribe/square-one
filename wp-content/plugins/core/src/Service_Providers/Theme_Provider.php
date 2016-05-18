@@ -10,6 +10,7 @@ use Tribe\Project\Theme\Body_Classes;
 use Tribe\Project\Theme\Image_Sizes;
 use Tribe\Project\Theme\Image_Wrap;
 use Tribe\Project\Theme\Oembed_Wrap;
+use Tribe\Project\Theme\Supports;
 use Tribe\Project\Theme\WP_Responsive_Image_Disabler;
 
 class Theme_Provider implements ServiceProviderInterface {
@@ -30,6 +31,9 @@ class Theme_Provider implements ServiceProviderInterface {
 		$container[ 'theme.oembed.wrap' ] = function( Container $container ) {
 			return new Oembed_Wrap();
 		};
+		$container[ 'theme.supports' ] = function( Container $container ) {
+			return new Supports();
+		};
 
 		$this->hook( $container );
 	}
@@ -40,6 +44,7 @@ class Theme_Provider implements ServiceProviderInterface {
 		$container[ 'service_loader' ]->enqueue( 'theme.images.wrap', 'hook' );
 		$container[ 'service_loader' ]->enqueue( 'theme.images.responsive_disabler', 'hook' );
 		$container[ 'service_loader' ]->enqueue( 'theme.oembed.wrap', 'hook' );
+		$container[ 'service_loader' ]->enqueue( 'theme.supports', 'hook' );
 	}
 
 }
