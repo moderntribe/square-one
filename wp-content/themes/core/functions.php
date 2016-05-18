@@ -25,10 +25,6 @@ function core_theme_setup() {
 	// Core & Architecture
 	include_once 'functions/core.php';
 
-	// Media
-	include_once 'functions/media.php';
-	include_once 'functions/embeds.php';
-
 	// Walkers
 	include_once 'functions/walkers/nav-clean.php';
 
@@ -43,7 +39,6 @@ function core_theme_setup() {
 	include_once 'functions/template-tags/branding.php';
 	
 	// Theme
-	include_once 'functions/theme.php';
 	include_once 'functions/resources.php';
 	
 }
