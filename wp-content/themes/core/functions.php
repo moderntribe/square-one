@@ -38,6 +38,7 @@ function core_theme_setup() {
 	// Template Tags
 	include_once 'functions/template-tags/schema.php';
 	include_once 'functions/template-tags/content.php';
+	include_once 'functions/template-tags/images.php';
 	include_once 'functions/template-tags/comments.php';
 	include_once 'functions/template-tags/panels.php';
 	include_once 'functions/template-tags/branding.php';

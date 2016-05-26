@@ -95,27 +95,33 @@ function enqueue_scripts() {
 	// We version 2 due to browser support & can save large amounts of weight
 	wp_deregister_script( 'jquery' );
 
-	// JS
-	$scripts     = 'dist/scripts.js';
-	$jquery      = 'vendor/jquery.js';
-	$script_deps = array( 'jquery', 'babel-polyfill' );
-
 	// Production
 	if ( ! defined( 'SCRIPT_DEBUG' ) || SCRIPT_DEBUG === false ) {
 		$jquery      = 'vendor/jquery.min.js';
 		$scripts     = 'dist/master.min.js';
+		$localize_target = 'core-theme-scripts';
 		$script_deps = array( 'jquery' );
 	} else {
+		$scripts     = 'dist/scripts.js';
+		$jquery      = 'vendor/jquery.js';
+		$localize_target = 'babel-polyfill';
+		$script_deps = array( 'jquery', 'babel-polyfill' );
+
 		wp_enqueue_script( 'babel-polyfill', $js_dir . 'vendor/polyfill.js', [], $version, true );
 		wp_enqueue_script( 'core-globals', $js_dir . 'vendor/globals.js', ['babel-polyfill'], $version, true );
+		wp_enqueue_script( 'core-lazysizes-object-fit', $js_dir . 'vendor/ls.object-fit.js', ['core-globals'], $version, true );
+		wp_enqueue_script( 'core-lazysizes-parent-fit', $js_dir . 'vendor/ls.parent-fit.js', ['core-lazysizes-object-fit'], $version, true );
+		wp_enqueue_script( 'core-lazysizes-polyfill', $js_dir . 'vendor/ls.respimg.js', ['core-lazysizes-parent-fit'], $version, true );
+		wp_enqueue_script( 'core-lazysizes-bgset', $js_dir . 'vendor/ls.bgset.js', ['core-lazysizes-polyfill'], $version, true );
+		wp_enqueue_script( 'core-lazysizes', $js_dir . 'vendor/lazysizes.js', ['core-lazysizes-bgset'], $version, true );
 	}
 
 	wp_register_script( 'jquery', $js_dir . $jquery, array(), $version, false );
 
 	wp_enqueue_script( 'core-theme-scripts', $js_dir . $scripts, $script_deps, $version, true );
 
-	wp_localize_script( 'core-theme-scripts', 'modern_tribe_i18n', core_js_i18n() );
-	wp_localize_script( 'core-theme-scripts', 'modern_tribe_config', core_js_config() );
+	wp_localize_script( $localize_target, 'modern_tribe_i18n', core_js_i18n() );
+	wp_localize_script( $localize_target, 'modern_tribe_config', core_js_config() );
 
 	wp_enqueue_script( 'core-theme-scripts' );
 
