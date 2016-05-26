@@ -23,53 +23,59 @@ use Tribe\Project\Theme\WP_Responsive_Image_Disabler;
 
 class Theme_Provider implements ServiceProviderInterface {
 
-	private $typekit_id = '';
+	private $typekit_id   = '';
+	private $google_fonts = [ ];
 
 	public function register( Container $container ) {
-		$container[ 'theme.body_classes' ] = function( Container $container ) {
+		$container[ 'theme.body_classes' ] = function ( Container $container ) {
 			return new Body_Classes();
 		};
-		$container[ 'theme.images.sizes' ] = function( Container $container ) {
+		$container[ 'theme.images.sizes' ] = function ( Container $container ) {
 			return new Image_Sizes();
 		};
-		$container[ 'theme.images.wrap' ] = function( Container $container ) {
+		$container[ 'theme.images.wrap' ] = function ( Container $container ) {
 			return new Image_Wrap();
 		};
-		$container[ 'theme.images.links' ] = function( Container $container ) {
+		$container[ 'theme.images.links' ] = function ( Container $container ) {
 			return new Image_Links();
 		};
-		$container[ 'theme.images.responsive_disabler' ] = function( Container $container ) {
+		$container[ 'theme.images.responsive_disabler' ] = function ( Container $container ) {
 			return new WP_Responsive_Image_Disabler();
 		};
-		$container[ 'theme.oembed.wrap' ] = function( Container $container ) {
+		$container[ 'theme.oembed.wrap' ] = function ( Container $container ) {
 			return new Oembed_Wrap();
 		};
-		$container[ 'theme.supports' ] = function( Container $container ) {
+		$container[ 'theme.supports' ] = function ( Container $container ) {
 			return new Supports();
 		};
 
-		$container[ 'theme.resources.login' ] = function( Container $container ) {
+		$container[ 'theme.resources.login' ] = function ( Container $container ) {
 			return new Login_Resources();
 		};
-		$container[ 'theme.resources.legacy' ] = function( Container $container ) {
+		$container[ 'theme.resources.legacy' ] = function ( Container $container ) {
 			return new Legacy_Check();
 		};
-		$container[ 'theme.resources.emoji_disabler' ] = function( Container $container ) {
+		$container[ 'theme.resources.emoji_disabler' ] = function ( Container $container ) {
 			return new Emoji_Disabler();
 		};
 
 		$container[ 'theme.resources.typekit_id' ] = $this->typekit_id;
-		$container[ 'theme.resources.fonts' ] = function( Container $container ) {
-			return new Fonts( $container[ 'theme.resources.typekit_id' ] );
+		$container[ 'theme.resources.google_fonts' ] = $this->google_fonts;
+		$container[ 'theme.resources.fonts' ] = function ( Container $container ) {
+			return new Fonts( [
+					'typekit' => $container[ 'theme.resources.typekit_id' ],
+					'google'  => $container[ 'theme.resources.google_fonts' ],
+				]
+			);
 		};
 
-		$container[ 'theme.resources.scripts' ] = function( Container $container ) {
+		$container[ 'theme.resources.scripts' ] = function ( Container $container ) {
 			return new Scripts();
 		};
-		$container[ 'theme.resources.styles' ] = function( Container $container ) {
+		$container[ 'theme.resources.styles' ] = function ( Container $container ) {
 			return new Styles();
 		};
-		$container[ 'theme.resources.editor_styles' ] = function( Container $container ) {
+		$container[ 'theme.resources.editor_styles' ] = function ( Container $container ) {
 			return new Editor_Styles();
 		};
 

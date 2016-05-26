@@ -5,17 +5,17 @@ namespace Tribe\Project\Theme\Resources;
 
 
 class Fonts {
-	private $typekit_id = '';
+	private $fonts = [ ];
 
-	public function __construct( $typekit_id = '' ) {
-		$this->typekit_id = $typekit_id;
+	public function __construct( array $fonts = [ ] ) {
+		$this->fonts = $fonts;
 	}
 
 	public function hook() {
 		add_action( 'wp_head', [ $this, 'load_fonts' ], 0, 0 );
 		add_action( 'login_head', [ $this, 'load_fonts' ], 0, 0 );
 	}
-	
+
 	/**
 	 * Add any required fonts
 	 */
@@ -43,9 +43,16 @@ class Fonts {
 				}
 			};
 			var WebFontConfig = {
+				<?php if ( !empty( $this->fonts[ 'typekit' ] ) ) { ?>
 				typekit: {
-					id: '<?php echo $this->typekit_id; ?>'
+					id: '<?php echo $this->$this->fonts[ 'typekit' ]; ?>'
 				},
+				<?php } ?>
+				<?php if ( !empty( $this->fonts[ 'google' ] ) ) { ?>
+				google: {
+					families: <?php echo json_encode( $this->fonts[ 'google' ] ); ?>
+				},
+				<?php } ?>
 				loading: function () {
 					modern_tribe.fonts.state.loading = true;
 					modern_tribe.fonts.state.active = false;
