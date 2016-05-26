@@ -46,7 +46,6 @@ module.exports = {
 			'<%= pkg._corethemepath %>/js/src/**/*.js',
 		],
 		tasks: [
-			'eslint:dist',
 			'webpack:themeDev',
 		],
 		options: defaultOpts,

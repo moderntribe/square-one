@@ -17,15 +17,11 @@ class Force_Plugin_Activation {
 	 * Add elements as plugin path: directory/file.php
 	 */
 	private $force_active = array(
+		'core/core.php',
 		'limit-login-attempts/limit-login-attempts.php',
 		'attachment-helper/attachment-helper.php',
 		'panel-builder/tribe-panel-builder.php',
 		'tribe-admin-dashboard/tribe-admin-dashboard.php',
-		'tribe-admin-ui/tribe-admin-ui.php',
-		'tribe-object-cache/tribe-object-cache.php',
-		'tribe-panels/tribe-panels.php',
-		'tribe-roles/tribe-roles.php',
-		'tribe-security/tribe-security.php',
 	);
 
 	/**
@@ -104,8 +100,10 @@ class Force_Plugin_Activation {
 		// Add our force-activated plugins
 		$plugins = array_merge( (array) $plugins, $this->force_active );
 
-		// Remove our force-deactivated plguins
-		$plugins = array_diff( (array) $plugins, $this->force_deactive );
+		if ( ! defined( 'WP_DEBUG' ) || ! WP_DEBUG ) {
+			// Remove our force-deactivated plguins unless WP_DEBUG is on
+			$plugins = array_diff( (array)$plugins, $this->force_deactive );
+		}
 
 		// Deduplicate
 		$plugins = array_unique( $plugins );
@@ -135,8 +133,10 @@ class Force_Plugin_Activation {
 			unset( $actions['deactivate'] );
 		}
 
-		if ( in_array( $plugin_file, $this->force_deactive ) ) {
-			unset( $actions['activate'] );
+		if ( ! defined( 'WP_DEBUG' ) || ! WP_DEBUG ) {
+			if ( in_array( $plugin_file, $this->force_deactive ) ) {
+				unset( $actions[ 'activate' ] );
+			}
 		}
 
 		return $actions;
@@ -174,7 +174,4 @@ class Force_Plugin_Activation {
 
 }
 
-// We want to enfornce only on production, where WP_DEBUG is off.
-if ( ! defined( 'WP_DEBUG' ) || ! WP_DEBUG ) {
-	new Force_Plugin_Activation();
-}
+new Force_Plugin_Activation();
