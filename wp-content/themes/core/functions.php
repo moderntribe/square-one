@@ -9,11 +9,6 @@
 // Core Theme Plugin
 add_action( 'after_setup_theme', 'core_theme_setup' );
 
-// Miscellaneous
-add_action( 'after_setup_theme', 'visual_editor_styles', 10 );
-add_filter( 'tiny_mce_before_init', 'visual_editor_body_class' );
-
-
 /**
  * Theme Core Functionality "Plugin"
  */
@@ -22,64 +17,18 @@ if ( ! function_exists( 'core_theme_setup' ) ):
 
 function core_theme_setup() {
 
-	// Core & Architecture
-	include_once 'functions/core.php';
-
-	// Media
-	include_once 'functions/media.php';
-	include_once 'functions/embeds.php';
-
-	// Walkers
-	include_once 'functions/walkers/nav-clean.php';
-
-	// Localization
-	include_once 'functions/localization.php';
-
 	// Template Tags
-	include_once 'functions/template-tags/schema.php';
 	include_once 'functions/template-tags/content.php';
 	include_once 'functions/template-tags/images.php';
 	include_once 'functions/template-tags/comments.php';
 	include_once 'functions/template-tags/panels.php';
 	include_once 'functions/template-tags/branding.php';
-	
-	// Theme
-	include_once 'functions/theme.php';
-	include_once 'functions/resources.php';
+
+	// Remove WP SEO json-ld output in favor of the included functions
+	add_filter( 'wpseo_json_ld_output', '__return_false' );
+	include_once 'functions/template-tags/schema.php';
 	
 }
 
 endif; // core_theme_setup
 
-
-/**
- * Visual Editor Styles
- */
-
-function visual_editor_styles() {
-
-	$css_dir    = trailingslashit( get_template_directory_uri() ) . 'css/admin/';
-	$editor_css = 'editor-style.css';
-
-	// Production
-	if ( ! defined( 'SCRIPT_DEBUG' ) || SCRIPT_DEBUG === false ) {
-		$css_dir    = trailingslashit( get_template_directory_uri() ) . 'css/admin/dist/';
-		$editor_css = 'editor-style.min.css';
-	}
-
-	add_editor_style( $css_dir . $editor_css );
-
-}
-
-
-/**
- * Visual Editor Body Class
- */
-
-function visual_editor_body_class( $settings ) {
-
-    $settings['body_class'] .= ' context-content';
-
-    return $settings;
-
-}
