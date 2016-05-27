@@ -5,7 +5,7 @@ namespace Tribe\Project\Theme;
 class Body_Classes {
 
 	public function hook() {
-		add_filter( 'body_class', [ $this, 'body_classes' ], 10, 0 );
+		add_filter( 'body_class', [ $this, 'body_classes' ], 10, 1 );
 	}
 
 	public function body_classes( $classes ) {
