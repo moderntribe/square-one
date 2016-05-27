@@ -1,9 +1,6 @@
 <?php // Featured Image
-if ( has_post_thumbnail() ) { ?>
-	<figure class="page-featured-img">
-		<?php the_post_thumbnail( 'core-full' ); ?>
-   	</figure>
-<?php } ?>
+$options = [ 'wrapper_class' => 'page-featured-img' ];
+the_tribe_image( get_post_thumbnail_id(), $options ); ?>
 
 <?php // Content ?>
 <div class="context-content">

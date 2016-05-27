@@ -1,14 +1,8 @@
 <article class="<?php echo get_post_type() .'-'. get_the_ID(); ?>">
 
 	<?php // Featured Image
-	if ( has_post_thumbnail() ) {
-		the_tribe_image( get_post_thumbnail_id() );
-		/*
-		<figure class="entry-featured-img">
-			<?php the_post_thumbnail( 'core-full' ); ?>
-    	</figure><!-- .entry-featured-img -->
-		*/
-	} ?>
+	$options = [ 'wrapper_class' => 'entry-featured-img' ];
+	the_tribe_image( get_post_thumbnail_id(), $options ); ?>
 	
 	<?php // Content ?>		
 	<div class="context-content">

@@ -10,15 +10,10 @@
 		</h3>
 
 	</header>
-
+	
 	<?php // Featured Image
-	if ( has_post_thumbnail() ) { ?>
-		<figure class="loop-item-featured-img">
-			<a href="<?php the_permalink(); ?>" rel="bookmark">
-    			<?php the_post_thumbnail( 'core-full' ); ?>
-			</a>
-    	</figure>
-	<?php } ?>
+	$options = [ 'wrapper_class' => 'loop-item-featured-img', 'link' => get_permalink() ];
+	the_tribe_image( get_post_thumbnail_id(), $options ); ?>
 
 	<?php // Excerpt
 	the_excerpt(); ?>
