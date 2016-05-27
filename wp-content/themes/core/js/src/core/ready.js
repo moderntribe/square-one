@@ -15,6 +15,8 @@ import viewportDims from './viewport-dims';
 
 import { on, ready } from '../utils/events';
 
+import tribeLibs from '../../vendor/tribe-libs/index';
+
 /**
  * @function bindEvents
  * @description Bind global event listeners here,
@@ -42,7 +44,9 @@ const init = () => {
 
 	bindEvents();
 
-	// initialize widgets
+	// initialize the tribe lib scripts
+
+	tribeLibs();
 
 	// initialize the main scripts
 
