@@ -4,6 +4,6 @@
 		
 		<?php dynamic_sidebar( 'sidebar-main' ); ?>
 
-	</section><!-- complementary -->
+	</section>
 
 <?php } ?>

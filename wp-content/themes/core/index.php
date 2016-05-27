@@ -26,8 +26,8 @@
 
 			<?php endif; ?>
 
-		</div><!-- .content-wrap -->
+		</div>
 
-	</main><!-- main -->	
+	</main>
 
 <?php get_footer(); ?>

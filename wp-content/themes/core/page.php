@@ -15,7 +15,7 @@
 					<?php // Content: Page
 					get_template_part( 'content/page/default' ); ?>
 
-				</div><!-- .content-wrap -->
+				</div>
 
 			<?php } ?>
 
@@ -26,7 +26,7 @@
 			do_action( 'the_panels' );
 		} ?>
 
-	</main><!-- main -->
+	</main>
 
 	<?php get_sidebar(); ?>	
 

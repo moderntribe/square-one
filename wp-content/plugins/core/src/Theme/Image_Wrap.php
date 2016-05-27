@@ -6,7 +6,7 @@ namespace Tribe\Project\Theme;
 
 class Image_Wrap {
 	public function hook() {
-		add_filter( 'the_content', 'customize_wp_image_output', 12, 1 );
+		add_filter( 'the_content', [ $this, 'customize_wp_image_output' ], 12, 1 );
 	}
 
 	/**

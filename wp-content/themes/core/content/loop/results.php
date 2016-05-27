@@ -1,4 +1,4 @@
-<article class="<?php echo get_post_type() .'-'. get_the_ID(); ?> loop-item">
+<article class="loop-item">
 
 	<header>
 		
@@ -7,7 +7,7 @@
 			<a href="<?php the_permalink(); ?>" rel="bookmark">
 				<?php the_title(); ?>
 			</a>
-		</h3><!-- .loop-item-title -->
+		</h3>
 
 	</header>
 
@@ -17,7 +17,7 @@
 			<a href="<?php the_permalink(); ?>" rel="bookmark">
     			<?php the_post_thumbnail( 'core-full' ); ?>
 			</a>
-    	</figure><!-- .loop-item-featured-img -->
+    	</figure>
 	<?php } ?>
 
 	<?php // Excerpt
@@ -42,11 +42,8 @@
 				</a>
 			</li>
 
-		</ul><!-- .entry-meta -->
+		</ul>
 
 	</footer>
 
-	<?php // Schema: Posts
-	the_posts_schema_as_json_ld(); ?>
-
-</article><!-- .loop-item -->
+</article>

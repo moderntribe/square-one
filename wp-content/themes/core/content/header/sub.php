@@ -4,6 +4,6 @@
 
 		<?php the_page_title(); ?>
 
-	</div><!-- .content-wrap -->
+	</div>
 
-</header><!-- sub-header -->
+</header>

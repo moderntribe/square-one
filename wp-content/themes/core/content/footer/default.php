@@ -12,6 +12,6 @@
 			</a>
 		</h6>
 
-	</div><!-- .content-wrap -->
+	</div>
 
-</footer><!-- .site-footer -->
+</footer>

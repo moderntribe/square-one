@@ -19,14 +19,11 @@
 				if ( comments_open() || get_comments_number() ) {
 					comments_template();
 				} ?>
-
-				<?php // Schema: Posts
-				the_posts_schema_as_json_ld(); ?>
 				
 			<?php endwhile; ?>
 
-		</div><!-- .content-wrap -->
+		</div>
 
-	</main><!-- main -->	
+	</main>
 
 <?php get_footer(); ?>

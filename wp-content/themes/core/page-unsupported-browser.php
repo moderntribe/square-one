@@ -21,7 +21,8 @@
 	<link rel="shortcut icon" href="<?php echo trailingslashit( get_template_directory_uri() ); ?>img/branding/favicon.ico">
 
 	<?php // FONTS
-	core_fonts(); ?>
+	$fonts = new \Tribe\Project\Theme\Resources\Fonts();
+	$fonts->load_fonts(); ?>
 
 </head>
 <body class="page-legacy" itemscope itemtype="https://schema.org/WebPage">
@@ -34,8 +35,8 @@
 				<img src="<?php echo trailingslashit( get_template_directory_uri() ); ?>img/logos/logo-legacy.png" alt="<?php bloginfo( 'name' ); ?>" />
 				<span class="visual-hide"><?php bloginfo( 'name' ); ?></span>
 			</h1>
-		</div><!-- .content-wrap -->
-	</div><!-- .header -->
+		</div>
+	</div>
 
 	<div class="main" itemprop="mainContentOfPage">
 		<div class="content-wrap">
@@ -55,10 +56,10 @@
 
 			</div>
 
-		</div><!-- .content-wrap -->
-	</div><!-- .main -->
+		</div>
+	</div>
 
-</div><!-- .site-wrap -->
+</div>
 
 </body>
 </html>
