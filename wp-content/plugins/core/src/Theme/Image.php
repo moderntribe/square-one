@@ -179,8 +179,8 @@ class Image {
 		$shim_dir = trailingslashit( get_template_directory_uri() ) . 'img/shims/';
 		$src = $this->options[ 'shim' ];
 
-		if ( empty ( $options[ 'shim' ] ) ) {
-			if ( $options[ 'auto_shim' ] ) {
+		if ( empty ( $this->options[ 'shim' ] ) ) {
+			if ( $this->options[ 'auto_shim' ] ) {
 				$src = $shim_dir . $this->options[ 'src_size' ] . '.png';
 			} else {
 				$src = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
