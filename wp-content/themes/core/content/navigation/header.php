@@ -1,7 +1,4 @@
-<?php // Menu: Primary
-use Tribe\Project\Nav\Walker\Core_Walker_Nav_Menu;
-
-if( has_nav_menu( 'primary' ) ) { ?>
+<?php if( has_nav_menu( 'primary' ) ) { ?>
 
 	<nav>
 
@@ -17,7 +14,6 @@ if( has_nav_menu( 'primary' ) ) { ?>
 				'menu_id'         => '',
 				'depth'           => 3,
 				'items_wrap'      => '%3$s',
-				'walker'          => new Core_Walker_Nav_Menu,
 				'fallback_cb'     => false
 			);
 			wp_nav_menu( $defaults ); ?>
