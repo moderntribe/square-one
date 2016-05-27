@@ -3,7 +3,7 @@ use Tribe\Project\Nav\Walker\Core_Walker_Nav_Menu;
 
 if( has_nav_menu( 'primary' ) ) { ?>
 
-	<nav aria-label="Primary Navigation" itemscope itemtype="https://schema.org/SiteNavigationElement">
+	<nav>
 
 		<h5 class="visual-hide">Primary Navigation</h5>
 
@@ -23,6 +23,6 @@ if( has_nav_menu( 'primary' ) ) { ?>
 			wp_nav_menu( $defaults ); ?>
 		</ol>
 
-	</nav><!-- nav -->
+	</nav>
 
 <?php } ?>

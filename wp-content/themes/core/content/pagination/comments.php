@@ -12,6 +12,6 @@
 			<?php next_comments_link( 'Newer Comments &rarr;' ); ?>
 		</div>
 
-	</nav><!-- .comment-navigation -->
+	</nav>
 
 <?php } ?>

@@ -4,4 +4,4 @@
 		
 	<p>Sorry, but there are currently no posts to see at this time.</p>
 
-</aside><!-- .no-results -->
+</aside>
