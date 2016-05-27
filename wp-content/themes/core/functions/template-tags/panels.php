@@ -1,6 +1,0 @@
-<?php
-
-/**
- * Template Tags: Panels
- */
-

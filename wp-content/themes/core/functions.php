@@ -18,11 +18,10 @@ if ( ! function_exists( 'core_theme_setup' ) ):
 function core_theme_setup() {
 
 	// Template Tags
-	include_once 'functions/template-tags/content.php';
-	include_once 'functions/template-tags/images.php';
-	include_once 'functions/template-tags/comments.php';
-	include_once 'functions/template-tags/panels.php';
-	include_once 'functions/template-tags/branding.php';
+	include_once 'template-tags/titles.php';
+	include_once 'template-tags/images.php';
+	include_once 'template-tags/comments.php';
+	include_once 'template-tags/branding.php';
 
 	// Remove WP SEO json-ld output in favor of the included functions
 	add_filter( 'wpseo_json_ld_output', '__return_false' );

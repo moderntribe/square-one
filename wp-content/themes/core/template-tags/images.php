@@ -2,7 +2,8 @@
 
 /**
  * Reusable lazyload image get/print with srcset support. Supports src, srcset,
- * background image or inline, linkify or not, html append. Tied into the js lib lazysizes for lazyloading.
+ * background image or inline, linkify or not, html append. Tied into the js lib
+ * lazysizes for lazyloading.
  *
  * @param $image_id int
  * @param $options array
@@ -11,7 +12,7 @@
  */
 function the_tribe_image( $image_id = 0, $options = [] ) {
 
-	// they didn't supply an image id
+	// There is no image ID
 	if ( empty( $image_id ) ) {
 		return '';
 	}

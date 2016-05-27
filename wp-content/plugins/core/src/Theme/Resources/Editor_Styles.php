@@ -7,7 +7,7 @@ namespace Tribe\Project\Theme\Resources;
 class Editor_Styles {
 	public function hook() {
 		add_action( 'after_setup_theme', [ $this, 'visual_editor_styles' ], 10, 0 );
-		add_filter( 'tiny_mce_before_init', [ $this, 'visual_editor_body_class' ], 10, 0 );
+		add_filter( 'tiny_mce_before_init', [ $this, 'visual_editor_body_class' ], 10, 1 );
 	}
 
 	/**
