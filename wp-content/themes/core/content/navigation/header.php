@@ -1,4 +1,6 @@
 <?php // Menu: Primary
+use Tribe\Project\Nav\Walker\Core_Walker_Nav_Menu;
+
 if( has_nav_menu( 'primary' ) ) { ?>
 
 	<nav aria-label="Primary Navigation" itemscope itemtype="https://schema.org/SiteNavigationElement">

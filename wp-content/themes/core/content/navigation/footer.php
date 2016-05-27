@@ -1,4 +1,6 @@
 <?php // Menu: Footer
+use Tribe\Project\Nav\Walker\Core_Walker_Nav_Menu;
+
 if( has_nav_menu( 'footer' ) ) { ?>
 
 	<nav aria-label="Secondary Navigation" itemscope itemtype="https://schema.org/SiteNavigationElement">
