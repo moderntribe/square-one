@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Template Tags: Branding
  */
@@ -9,7 +10,6 @@
  *
  * @since core 1.0
  */
-
 function the_logo() {
 
 	printf(

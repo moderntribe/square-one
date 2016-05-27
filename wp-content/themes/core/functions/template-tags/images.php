@@ -9,7 +9,6 @@
  *
  * @return string
  */
-
 function the_tribe_image( $image_id = 0, $options = [] ) {
 
 	// they didn't supply an image id

@@ -7,15 +7,16 @@
  * @return string
  */
 
-function the_panel_title( $title = null, $classes = null ) {
+function the_panel_title( $title = null, $classes = 'panel-title' ) {
 
-	if ( empty( $title ) )
+	if ( empty( $title ) ) {
 		return;
+	}
 
 	static $panel_title = '';
 	$class = ( ! empty( $classes ) ) ? ' class="'. $classes .'"' : '';
 
-	if ( empty( $panel_title ) && ( ! is_front_page() ) ) {
+	if ( empty( $panel_title ) && ( get_the_content() == '' && ! is_front_page() ) ) {
 		$panel_title = '<h1'. $class .'>' . $title . '</h1>';
 	} else {
 		$panel_title = '<h2'. $class .'>' . $title . '</h2>';

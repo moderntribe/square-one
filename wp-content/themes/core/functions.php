@@ -26,7 +26,6 @@ function core_theme_setup() {
 
 	// Remove WP SEO json-ld output in favor of the included functions
 	add_filter( 'wpseo_json_ld_output', '__return_false' );
-	include_once 'functions/template-tags/schema.php';
 	
 }
 

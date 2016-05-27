@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Template Tags: Comments Output
  */
@@ -7,7 +8,6 @@
 /**
  * Customize comment output
  */
-
 if ( ! function_exists( 'core_comment' ) ) :
 
 	function core_comment( $comment, $args, $depth ) {
