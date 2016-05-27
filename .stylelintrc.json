@@ -11,7 +11,7 @@
     "declaration-block-semicolon-newline-before": "never-multi-line",
     "function-comma-newline-before": "never-multi-line",
     "function-parentheses-space-inside": "never",
-    "function-url-quotes": "single",
+    "function-url-quotes": "always",
     "indentation": "tab",
     "max-nesting-depth": [ 4, {
       "ignore": [ "at-rules-without-declaration-blocks" ]
