@@ -20,6 +20,9 @@
 	<?php // FAVICON ?>
 	<link rel="shortcut icon" href="<?php echo trailingslashit( get_template_directory_uri() ); ?>img/branding/favicon.ico">
 
+	<?php // FONTS
+	core_fonts(); ?>
+
 </head>
 <body class="page-legacy" itemscope itemtype="https://schema.org/WebPage">
 
