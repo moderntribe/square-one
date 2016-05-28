@@ -1,6 +1,6 @@
 /**
  * @module
- * @description Javascript that kicks in js specific to the social sharing of content.
+ * @description JavaScript specific to the social sharing of content.
  */
 
 import popup from '../../src/utils/dom/popup';

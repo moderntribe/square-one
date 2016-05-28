@@ -3,6 +3,7 @@
  * @description Base vendor module for the modern tribe libs js.
  */
 
+import embeds from './embeds';
 import socialShare from './social-share';
 
 /**
@@ -11,6 +12,7 @@ import socialShare from './social-share';
  */
 
 const init = () => {
+	embeds();
 	socialShare();
 };
 

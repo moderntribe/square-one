@@ -102,12 +102,12 @@ class Social {
 				break;
 
 			case "print":
-				return sprintf( '<a class="icon icon-printer" href="#" title="%1$s" onclick="window.print();return false;"><span%2$s>%1$s</span></a>',
+				return sprintf( '<a class="icon icon-print" href="#" title="%1$s" onclick="window.print();return false;"><span%2$s>%1$s</span></a>',
 					'Print this page', $class );
 				break;
 
 			case "google":
-				return sprintf( '<a class="social-share-popup icon icon-google" href="https://plus.google.com/share?url=%1$s" data-width="624" data-height="486" title="%2$s"><span%3$s>%2$s</span></a>',
+				return sprintf( '<a class="social-share-popup icon icon-google-plus" href="https://plus.google.com/share?url=%1$s" data-width="624" data-height="486" title="%2$s"><span%3$s>%2$s</span></a>',
 					$data['link'], 'Share on Google+', $class );
 				break;
 

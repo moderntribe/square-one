@@ -32,7 +32,7 @@
 
 		<li>
 			<a href="https://plus.google.com/#" rel="me" title="Follow us on Google+" target="_blank">
-				<i class="icon icon-google"></i>
+				<i class="icon icon-google-plus"></i>
 				<span class="accessibility">Follow us on Google +</span>
 			</a>
 		</li>

@@ -21,6 +21,7 @@ function core_theme_setup() {
 	// Port Me To Core
 	include_once 'port-me-to-core/Menus.php';
 	include_once 'port-me-to-core/Social.php';
+	include_once 'port-me-to-core/Embeds.php';
 
 	// Template Tags
 	include_once 'template-tags/titles.php';
