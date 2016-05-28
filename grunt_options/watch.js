@@ -44,6 +44,7 @@ module.exports = {
 	themeScripts: {
 		files: [
 			'<%= pkg._corethemepath %>/js/src/**/*.js',
+			'<%= pkg._corethemepath %>/js/vendor/tribe-libs/**/*.js',
 		],
 		tasks: [
 			'webpack:themeDev',

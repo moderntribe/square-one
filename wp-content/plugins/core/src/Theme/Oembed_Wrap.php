@@ -13,6 +13,6 @@ class Oembed_Wrap {
 	 * Add wrapper around embeds to setup CSS for embed aspect ratios
 	 */
 	function customize_embed_oembed_html( $html, $url, $attr, $post_id ) {
-		return '<div class="wp-embed"><div class="wp-embed-wrap">' . $html . '</div></div>';
+		return sprintf( '<div class="wp-embed"><div class="wp-embed-wrap">%s</div></div>', $html );
 	}
 }
