@@ -9,6 +9,7 @@ module.exports = {
 		var b = rgba[2] * darken;
 		return color([r, g, b]).toHexString();
 	},
+
 	lighten: function (value, frac) {
 		var lighten = 1 + parseFloat(frac);
 		var rgba = color(value).toRgbaArray();

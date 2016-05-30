@@ -19,6 +19,7 @@
     "lazysizes": "^2.0.0-rc1",
     "lodash": "^4.11.1",
     "lost": "^6.7.2",
+    "spin.js": "^2.3.2",
     "tota11y": "0.1.3",
     "verge": "^1.9.1",
     "webfontloader": "^1.6.24"

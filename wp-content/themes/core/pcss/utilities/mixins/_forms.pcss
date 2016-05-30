@@ -5,7 +5,7 @@
  *
  * ----------------------------------------------------------------------------- */
 
-@define-mixin placeholder {
+@define-mixin form-placeholder {
 	::-webkit-input-placeholder {
 		@mixin-content;
 	}
@@ -22,16 +22,21 @@
 
 /* -----------------------------------------------------------------------------
  *
- * Form Input Fields
+ * Form Widgets/Controls
  *
  * ----------------------------------------------------------------------------- */
 
-@define-mixin field {
-	padding: 0 14px;
-	border: 1px solid var(--border-input);
-	background-color: var(--bgd-inputs);
+@define-mixin form-control {
+	transition: var(--transition);
+	padding: var(--form-control-padding);
+	border: var(--form-control-border-size) solid var(--form-control-border-color);
+	border-radius: var(--form-control-border-radius);
+	background-color: var(--form-control-bgd-color);
 	display: block;
 	width: 100%;
-	height: 42px;
-	color: var(--text);
+	height: var(--form-control-height);
+	color: var(--form-control-color);
+	letter-spacing: var(--form-control-letter-spacing);
+	text-transform: var(--form-control-text-transform);
+	font: var(--form-control-font-style) var(--form-control-font-weight) var(--form-control-font-size) / var(--form-control-font-line-height) var(--form-control-font-family);
 }

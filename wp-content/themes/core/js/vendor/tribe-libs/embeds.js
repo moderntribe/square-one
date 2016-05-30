@@ -62,7 +62,7 @@ let setupOembeds = () => {
  */
 
 let setOembedDisplayMode = () => {
-	$el.each(() => {
+	$el.each(function () {
 		let $this = $(this);
 
 		if ($this.width() >= 500) {

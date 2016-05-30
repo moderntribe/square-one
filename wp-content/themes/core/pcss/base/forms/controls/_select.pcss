@@ -1,0 +1,32 @@
+
+/* -----------------------------------------------------------------------------
+ *
+ * Form Control: Select
+ *
+ * Example:
+ * <div class="form-field-group">
+ *   <label class="form-label" for="select">Select Control</label>
+ * 	 <div class="form-control-select">
+ * 	   <select id="select" name="select">
+ * 	     <option value="" hidden="" disabled="disabled" selected="selected">Placeholder</option>
+ * 	     <option value="">Option 1</option>
+ * 	     <option value="">Option 2</option>
+ *       <option value="">Option 3</option>
+ *      </select>
+ *   </div>
+ * </div>
+ *
+ * ----------------------------------------------------------------------------- */
+
+select {
+	@mixin form-control;
+	padding-right: 0;
+	cursor: pointer;
+
+	/* CASE: multiple */
+	&[multiple] {
+		font-size: var(--form-control-font-size);
+		height: var(--form-control-select-multiple-height);
+		padding: var(--form-control-select-multiple-padding);
+	}
+}
