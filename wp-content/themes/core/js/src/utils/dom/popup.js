@@ -9,7 +9,7 @@
 import _ from 'lodash';
 
 const popup = (opts) => {
-	const options = $.extend({
+	const options = _.assign({
 		event: null,
 		url: '',
 		center: true,

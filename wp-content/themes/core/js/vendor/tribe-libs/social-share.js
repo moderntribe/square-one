@@ -41,8 +41,8 @@ let launchSocialPopup = (e) => {
 	popup({
 		event: e,
 		specs: {
-			width: parseInt($(e.currentTarget).attr('data-width')),
-			height: parseInt($(e.currentTarget).attr('data-height')),
+			width: parseInt(e.currentTarget.getAttribute('data-width')),
+			height: parseInt(e.currentTarget.getAttribute('data-height')),
 		},
 	});
 };
