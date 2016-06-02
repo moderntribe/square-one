@@ -338,7 +338,7 @@ embed {
     max-height: 100%;
 }
 
-/* Utilities ($variables & @mixins) */
+/* Utilities */
 /* -----------------------------------------------------------------------------
  *
  * Utilities
@@ -949,7 +949,7 @@ a:active,
     font-weight: 700;
 }
 .dd,
-.context-content ddd {
+.context-content dd {
     margin-bottom: 30px;
 }
 /* -----------------------------------------------------------------------------
