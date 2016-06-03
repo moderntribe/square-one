@@ -2947,14 +2947,10 @@
 
 	var _forEach3 = _interopRequireDefault(_forEach2);
 
-	var _assign2 = __webpack_require__(11);
-
-	var _assign3 = _interopRequireDefault(_assign2);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var popup = function popup(opts) {
-		var options = (0, _assign3.default)({
+		var options = Object.assign({
 			event: null,
 			url: '',
 			center: true,

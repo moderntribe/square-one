@@ -5,10 +5,8 @@
  * @desc scrollTo allows equalized or duration based scrolling of the body to a supplied $target with options.
  */
 
-import _ from 'lodash';
-
 const scrollTo = (opts) => {
-	const options = _.assign({
+	const options = Object.assign({
 		auto: false,
 		auto_coefficent: 2.5,
 		afterScroll() {
