@@ -172,9 +172,9 @@ class Initializer {
 
 		// Add a nav title field to all panel types. This will be hidden on child panels with CSS.
 		$fields[] = new Fields\Text( [
-			'label'       => __( 'Navigation Title', 'conroe' ),
+			'label'       => __( 'Navigation Title', 'tribe' ),
 			'name'        => 'nav-title',
-			'description' => __( 'The title that will be used for the page navigation menu. Leave blank to exclude from the menu.', 'conroe' ),
+			'description' => __( 'The title that will be used for the page navigation menu. Leave blank to exclude from the menu.', 'tribe' ),
 		] );
 
 		return $fields;
