@@ -6,7 +6,7 @@
  */
 
 const scrollTo = (opts) => {
-	const options = $.extend({
+	const options = Object.assign({
 		auto: false,
 		auto_coefficent: 2.5,
 		afterScroll() {

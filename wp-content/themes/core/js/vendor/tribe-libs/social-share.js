@@ -5,8 +5,32 @@
 
 import popup from '../../src/utils/dom/popup';
 
-let el = document.getElementsByClassName('social-share-popup');
+const el = document.getElementsByClassName('social-share-popup');
 let $el;
+
+/**
+ * @function launchSocialPopup
+ * @description Init social share popups.
+ */
+
+const launchSocialPopup = (e) => {
+	popup({
+		event: e,
+		specs: {
+			width: parseInt(e.currentTarget.getAttribute('data-width'), 10),
+			height: parseInt(e.currentTarget.getAttribute('data-height'), 10),
+		},
+	});
+};
+
+/**
+ * @function bindEvents
+ * @description Bind the events for this module.
+ */
+
+const bindEvents = () => {
+	$el.on('click', (e) => launchSocialPopup(e));
+};
 
 /**
  * @function init
@@ -21,30 +45,6 @@ const socialShare = () => {
 
 		console.info('Initialized global social content sharing scripts.');
 	}
-};
-
-/**
- * @function bindEvents
- * @description Bind the events for this module.
- */
-
-let bindEvents = () => {
-	$el.on('click', (e) => launchSocialPopup(e));
-};
-
-/**
- * @function launchSocialPopup
- * @description Init social share popups.
- */
-
-let launchSocialPopup = (e) => {
-	popup({
-		event: e,
-		specs: {
-			width: parseInt($(e.currentTarget).attr('data-width')),
-			height: parseInt($(e.currentTarget).attr('data-height')),
-		},
-	});
 };
 
 export default socialShare;

@@ -2893,56 +2893,6 @@
 	var $el = void 0;
 
 	/**
-	 * @function init
-	 * @description Kick off this modules functions
-	 */
-
-	var embeds = function embeds() {
-		if (el) {
-			$el = $(el);
-
-			bindEvents();
-
-			setupOembeds();
-
-			console.info('Initialized embeds scripts.');
-		}
-	};
-
-	/**
-	 * @function bindEvents
-	 * @description Bind the events for this module here.
-	 */
-
-	var bindEvents = function bindEvents() {
-		$('body').on('click', '.wp-embed-lazy a', function (e) {
-			return playEmbed(e);
-		});
-
-		(0, _events.on)(document, 'modern_tribe/resize_executed', function (e) {
-			return executeResize(e);
-		});
-	};
-
-	/**
-	 * @function executeResize
-	 * @description Bind the events for this module that react to resize events here.
-	 */
-
-	var executeResize = function executeResize(e) {
-		setOembedDisplayMode();
-	};
-
-	/**
-	 * @function setupOembeds
-	 * @description Setup our embeds.
-	 */
-
-	var setupOembeds = function setupOembeds() {
-		setOembedDisplayMode();
-	};
-
-	/**
 	 * @function setOembedDisplayMode
 	 * @description Set display mode of embeds for small vs. regular.
 	 */
@@ -2957,6 +2907,23 @@
 				$this.addClass('small-display');
 			}
 		});
+	};
+
+	/**
+	 * @function resetEmbed
+	 * @description Reset embed.
+	 */
+
+	var resetEmbed = function resetEmbed() {
+		var $embed = $('.is-playing');
+
+		// Remove embed
+		$embed.removeClass('is-playing').find('iframe').remove();
+
+		// Fade in image/caption
+		$embed.find('.wp-embed-lazy').css('display', 'block').animate({
+			opacity: 1
+		}, 0);
 	};
 
 	/**
@@ -2995,20 +2962,44 @@
 	};
 
 	/**
-	 * @function resetEmbed
-	 * @description Reset embed.
+	 * @function executeResize
+	 * @description Bind the events for this module that react to resize events here.
 	 */
 
-	var resetEmbed = function resetEmbed() {
-		var $embed = $('.is-playing');
+	var executeResize = function executeResize() {
+		setOembedDisplayMode();
+	};
 
-		// Remove embed
-		$embed.removeClass('is-playing').find('iframe').remove();
+	/**
+	 * @function bindEvents
+	 * @description Bind the events for this module here.
+	 */
 
-		// Fade in image/caption
-		$embed.find('.wp-embed-lazy').css('display', 'block').animate({
-			opacity: 1
-		}, 0);
+	var bindEvents = function bindEvents() {
+		$('body').on('click', '.wp-embed-lazy a', function (e) {
+			return playEmbed(e);
+		});
+
+		(0, _events.on)(document, 'modern_tribe/resize_executed', function (e) {
+			return executeResize(e);
+		});
+	};
+
+	/**
+	 * @function init
+	 * @description Kick off this modules functions
+	 */
+
+	var embeds = function embeds() {
+		if (el) {
+			$el = $(el);
+
+			bindEvents();
+
+			setOembedDisplayMode();
+
+			console.info('Initialized embeds scripts.');
+		}
 	};
 
 	exports.default = embeds;
@@ -3590,18 +3581,18 @@
 	var $el = void 0;
 
 	/**
-	 * @function init
-	 * @description Kick off this modules functions
+	 * @function launchSocialPopup
+	 * @description Init social share popups.
 	 */
 
-	var socialShare = function socialShare() {
-		if (el) {
-			$el = $(el);
-
-			bindEvents();
-
-			console.info('Initialized global social content sharing scripts.');
-		}
+	var launchSocialPopup = function launchSocialPopup(e) {
+		(0, _popup2.default)({
+			event: e,
+			specs: {
+				width: parseInt(e.currentTarget.getAttribute('data-width'), 10),
+				height: parseInt(e.currentTarget.getAttribute('data-height'), 10)
+			}
+		});
 	};
 
 	/**
@@ -3616,18 +3607,18 @@
 	};
 
 	/**
-	 * @function launchSocialPopup
-	 * @description Init social share popups.
+	 * @function init
+	 * @description Kick off this modules functions
 	 */
 
-	var launchSocialPopup = function launchSocialPopup(e) {
-		(0, _popup2.default)({
-			event: e,
-			specs: {
-				width: parseInt($(e.currentTarget).attr('data-width')),
-				height: parseInt($(e.currentTarget).attr('data-height'))
-			}
-		});
+	var socialShare = function socialShare() {
+		if (el) {
+			$el = $(el);
+
+			bindEvents();
+
+			console.info('Initialized global social content sharing scripts.');
+		}
 	};
 
 	exports.default = socialShare;
@@ -3637,7 +3628,7 @@
 /* 51 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function($) {'use strict';
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 		value: true
@@ -3650,7 +3641,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var popup = function popup(opts) {
-		var options = $.extend({
+		var options = Object.assign({
 			event: null,
 			url: '',
 			center: true,
@@ -3701,7 +3692,6 @@
 	    */
 
 	exports.default = popup;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(46)))
 
 /***/ },
 /* 52 */
