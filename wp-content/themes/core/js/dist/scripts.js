@@ -2899,7 +2899,7 @@
 
 	var setOembedDisplayMode = function setOembedDisplayMode() {
 		$el.each(function () {
-			var $this = $(this);
+			var $this = $(undefined);
 
 			if ($this.width() >= 500) {
 				$this.removeClass('small-display');
@@ -3041,39 +3041,15 @@
 	var spinner = void 0;
 
 	/**
-	 * @function init
-	 * @description Kick off this modules functions
+	 * @function _scroll_submit
+	 * @description Adjusts gravity form submit top placement.
 	 */
 
-	var forms = function forms() {
-		if (el) {
-			$el = $(el);
-
-			spinner = new _spin2.default({
-				lines: 11,
-				length: 6,
-				width: 2,
-				radius: 5,
-				color: '#333333',
-				speed: 1.2
-			});
-
-			bindEvents();
-
-			console.info('Initialized global form scripts.');
-		}
-	};
-
-	/**
-	 * @function bindEvents
-	 * @description Bind the events for this module.
-	 */
-
-	var bindEvents = function bindEvents() {
-		$(document).on('gform_post_render', gravityFormPostRender).on('gform_confirmation_loaded', gravityFormConfirmationLoaded);
-
-		$el.on('click', '.gform_button', function (e) {
-			return spinOn(e);
+	var scrollSubmit = function scrollSubmit($form) {
+		(0, _scrollTo2.default)({
+			duration: 500,
+			offset: -60,
+			$target: $form
 		});
 	};
 
@@ -3098,7 +3074,7 @@
 		scrollSubmit($('#gforms_confirmation_message_' + formId));
 	};
 
-	/***
+	/**
 	 * @function _spin_on
 	 * @description Kicks off spinner for form submit.
 	 */
@@ -3108,16 +3084,40 @@
 	};
 
 	/**
-	 * @function _scroll_submit
-	 * @description Adjusts gravity form submit top placement.
+	 * @function bindEvents
+	 * @description Bind the events for this module.
 	 */
 
-	var scrollSubmit = function scrollSubmit($target) {
-		(0, _scrollTo2.default)({
-			duration: 500,
-			offset: -60,
-			$target: $target
+	var bindEvents = function bindEvents() {
+		$(document).on('gform_post_render', gravityFormPostRender).on('gform_confirmation_loaded', gravityFormConfirmationLoaded);
+
+		$el.on('click', '.gform_button', function (e) {
+			return spinOn(e);
 		});
+	};
+
+	/**
+	 * @function init
+	 * @description Kick off this modules functions
+	 */
+
+	var forms = function forms() {
+		if (el) {
+			$el = $(el);
+
+			spinner = new _spin2.default({
+				lines: 11,
+				length: 6,
+				width: 2,
+				radius: 5,
+				color: '#333333',
+				speed: 1.2
+			});
+
+			bindEvents();
+
+			console.info('Initialized global form scripts.');
+		}
 	};
 
 	exports.default = forms;
@@ -3523,7 +3523,7 @@
 	 */
 
 	var scrollTo = function scrollTo(opts) {
-		var options = $.extend({
+		var options = Object.assign({
 			auto: false,
 			auto_coefficent: 2.5,
 			afterScroll: function afterScroll() {},
