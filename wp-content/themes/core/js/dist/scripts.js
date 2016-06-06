@@ -2921,7 +2921,7 @@
 		$embed.removeClass('is-playing').find('iframe').remove();
 
 		// Fade in image/caption
-		$embed.find('.wp-embed-lazy').css('display', 'block').animate({
+		$embed.find('.wp-embed-lazy-launch').css('display', 'block').animate({
 			opacity: 1
 		}, 0);
 	};
