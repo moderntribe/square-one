@@ -41,7 +41,7 @@ const resetEmbed = () => {
 		.remove();
 
 	// Fade in image/caption
-	$embed.find('.wp-embed-lazy')
+	$embed.find('.wp-embed-lazy-launch')
 		.css('display', 'block')
 		.animate({
 			opacity: 1,
