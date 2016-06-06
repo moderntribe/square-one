@@ -409,6 +409,11 @@ embed {
 	Chosen colors for multiple and simplify
 	Clean up all the additional variables for controls and form settings based on form base stuff?
 	This all has to be simplified
+
+	Layouts for form fields (inline, horizontal field/label, grid, small space no label stacked, etc.) 
+	Validation stuff 
+	Skins? 
+	Deal with readonly & disabled?
 	*//* Control icons *//* Control icons *//* Select icon *//* Select, Checkbox, & Radio *//* Select *//* Select *//* Select *//* Label *//* Label *//* Helper Text & Descriptions *//* Helper Text & Descriptions */
 }
 :root {/* -----------------------------------------------------------------------------
