@@ -6,64 +6,17 @@
 
 import { on } from '../../src/utils/events';
 
-let el = document.getElementsByClassName('wp-embed-lazy');
+const el = document.getElementsByClassName('wp-embed-lazy');
 let $el;
-
-/**
- * @function init
- * @description Kick off this modules functions
- */
-
-const embeds = () => {
-	if (el) {
-		$el = $(el);
-
-		bindEvents();
-
-		setupOembeds();
-
-		console.info('Initialized embeds scripts.');
-	}
-};
-
-/**
- * @function bindEvents
- * @description Bind the events for this module here.
- */
-
-let bindEvents = () => {
-	$('body')
-		.on('click', '.wp-embed-lazy a', (e) => playEmbed(e));
-
-	on(document, 'modern_tribe/resize_executed', (e) => executeResize(e));
-};
-
-/**
- * @function executeResize
- * @description Bind the events for this module that react to resize events here.
- */
-
-let executeResize = (e) => {
-	setOembedDisplayMode();
-};
-
-/**
- * @function setupOembeds
- * @description Setup our embeds.
- */
-
-let setupOembeds = () => {
-	setOembedDisplayMode();
-};
 
 /**
  * @function setOembedDisplayMode
  * @description Set display mode of embeds for small vs. regular.
  */
 
-let setOembedDisplayMode = () => {
+const setOembedDisplayMode = () => {
 	$el.each(() => {
-		let $this = $(this);
+		const $this = $(this);
 
 		if ($this.width() >= 500) {
 			$this.removeClass('small-display');
@@ -74,11 +27,33 @@ let setOembedDisplayMode = () => {
 };
 
 /**
+ * @function resetEmbed
+ * @description Reset embed.
+ */
+
+const resetEmbed = () => {
+	const $embed = $('.is-playing');
+
+	// Remove embed
+	$embed
+		.removeClass('is-playing')
+		.find('iframe')
+		.remove();
+
+	// Fade in image/caption
+	$embed.find('.wp-embed-lazy')
+		.css('display', 'block')
+		.animate({
+			opacity: 1,
+		}, 0);
+};
+
+/**
  * @function playEmbed
  * @description Play embed.
  */
 
-let playEmbed = (e) => {
+const playEmbed = (e) => {
 	e.preventDefault();
 
 	// Reset embed if another is playing
@@ -86,16 +61,16 @@ let playEmbed = (e) => {
 		resetEmbed();
 	}
 
-	let $target = $(e.currentTarget);
-	let videoId = $target.attr('data-embed-id');
-	let iframeUrl = ($target.closest('.wp-embed-lazy').is('.youtube')) ? `https://www.youtube.com/embed/${videoId}?autoplay=1&autohide=1&fs=1&modestbranding=1&showinfo=0&controls=2&autoplay=1&rel=0&theme=light&vq=hd720` : `//player.vimeo.com/video/${videoId}?autoplay=1`;
-	let $iframe = $('<iframe/>', {
-			id: videoId,
-			frameborder: '0',
-			src: iframeUrl,
-			width: 1280,
-			height: 720,
-		});
+	const $target = $(e.currentTarget);
+	const videoId = $target.attr('data-embed-id');
+	const iframeUrl = ($target.closest('.wp-embed-lazy').is('.youtube')) ? `https://www.youtube.com/embed/${videoId}?autoplay=1&autohide=1&fs=1&modestbranding=1&showinfo=0&controls=2&autoplay=1&rel=0&theme=light&vq=hd720` : `//player.vimeo.com/video/${videoId}?autoplay=1`;
+	const $iframe = $('<iframe/>', {
+		id: videoId,
+		frameborder: '0',
+		src: iframeUrl,
+		width: 1280,
+		height: 720,
+	});
 
 	// Add & kickoff embed
 	$target
@@ -113,25 +88,41 @@ let playEmbed = (e) => {
 };
 
 /**
- * @function resetEmbed
- * @description Reset embed.
+ * @function executeResize
+ * @description Bind the events for this module that react to resize events here.
  */
 
-let resetEmbed = () => {
-	let $embed = $('.is-playing');
+const executeResize = () => {
+	setOembedDisplayMode();
+};
 
-	// Remove embed
-	$embed
-		.removeClass('is-playing')
-		.find('iframe')
-		.remove();
+/**
+ * @function bindEvents
+ * @description Bind the events for this module here.
+ */
 
-	// Fade in image/caption
-	$embed.find('.wp-embed-lazy')
-		.css('display', 'block')
-		.animate({
-			opacity: 1,
-		}, 0);
+const bindEvents = () => {
+	$('body')
+		.on('click', '.wp-embed-lazy a', (e) => playEmbed(e));
+
+	on(document, 'modern_tribe/resize_executed', (e) => executeResize(e));
+};
+
+/**
+ * @function init
+ * @description Kick off this modules functions
+ */
+
+const embeds = () => {
+	if (el) {
+		$el = $(el);
+
+		bindEvents();
+
+		setOembedDisplayMode();
+
+		console.info('Initialized embeds scripts.');
+	}
 };
 
 export default embeds;
