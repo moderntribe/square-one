@@ -45,3 +45,24 @@ form {
 .form-control-group {
 
 }
+
+/* -----------------------------------------------------------------------------
+ *
+ * Form: Control Group / Wrapper, radio & checkbox specific
+ *
+ * Example:
+ * <fieldset>
+ *   <legend>Legend for Checkboxes</legend>
+ * 	 <div class="form-field-group form-control-group-radio-checkbox">
+ * 	   <span class="form-control-checkbox">
+ * 	     <input id="checkboxOne" name="checkboxGroup" type="checkbox" value="checkboxOne" checked="checked" />
+ *	     <label for="checkboxOne">Checkbox One</label>
+ * 	   </span>
+ *   </div>
+ * </fieldset>
+ *
+ * ----------------------------------------------------------------------------- */
+
+.form-control-group-radio-checkbox {
+	@mixin form-control-group-radio-checkbox;
+}

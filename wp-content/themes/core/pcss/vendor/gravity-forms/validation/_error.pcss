@@ -1,0 +1,25 @@
+.validation_error {
+	display: none;
+}
+
+.gfield_error {
+	input,
+	textarea,
+	select {
+		border-color: var(--gf-state-error-border-color);
+		box-shadow: 0 0 0 var(--gf-validation-border-size) var(--gf-state-error-border-color);
+	}
+	.gfield_description {
+		& ~ .validation_message {
+			margin-top: var(--gf-validation-margin-top);
+		}
+	}
+	.validation_message {
+		color: var(--gf-state-error-color);
+		margin-top: var(--gf-validation-message-margin-top);
+		padding: var(--gf-validation-padding);
+		letter-spacing: var(--gf-validation-letter-spacing);
+		text-transform: var(--gf-validation-text-transform);
+		font: var(--gf-validation-font-style) var(--gf-validation-font-weight) var(--gf-validation-font-size) / var(--gf-validation-font-line-height) var(--gf-validation-font-family);
+	}
+}

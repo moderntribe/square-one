@@ -1,0 +1,32 @@
+
+/* -----------------------------------------------------------------------------
+ * Headings
+ * ----------------------------------------------------------------------------- */
+
+.gform_heading {
+	margin-bottom: var(--gf-heading-margin-bottom);
+}
+
+/* -----------------------------------------------------------------------------
+ * Descriptions
+ * ----------------------------------------------------------------------------- */
+
+.gform_description {
+	@mixin body-content;
+	text-rendering: optimizeLegibility;
+}
+
+/* -----------------------------------------------------------------------------
+ * Descriptions & Text Helpers
+ * ----------------------------------------------------------------------------- */
+
+.gfield_description,
+.instruction {
+	@mixin form-control-helper;
+	margin-bottom: var(--gf-description-margin-bottom);
+	max-width: var(--gf-description-max-width);
+}
+
+.instruction {
+	display: none;
+}

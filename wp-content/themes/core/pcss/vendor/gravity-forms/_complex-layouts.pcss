@@ -1,0 +1,71 @@
+.ginput_complex {
+	@mixin clearfix;
+	margin-bottom: var(--gf-control-complex-margin-bottom);
+	label {
+		@mixin form-control-helper;
+	}
+}
+
+.ginput_full {
+	display: block;
+}
+
+.ginput_right,
+.ginput_left,
+.name_first,
+.name_last {
+	@mixin clearfix;
+	display: block;
+
+	@media (--viewport-medium) {
+		width: 50%;
+	}
+}
+
+.ginput_left,
+.name_first {
+	@media (--viewport-medium) {
+		padding-right: var(--gf-control-complex-gutter);
+		float: left;
+	}
+}
+
+.ginput_right,
+.name_last {
+	@media (--viewport-medium) {
+		padding-left: var(--gf-control-complex-gutter);
+		float: right;
+	}
+}
+
+.gfield_date_dropdown_month,
+.gfield_date_month,
+.gfield_time_hour {
+	@media (--viewport-medium) {
+		padding-right: var(--gf-control-complex-gutter);
+	}
+}
+
+.gfield_date_dropdown_day,
+.gfield_date_day,
+.gfield_time_minute {
+	@media (--viewport-medium) {
+		padding-left: var(--gf-control-complex-gutter);
+		padding-right: var(--gf-control-complex-gutter);
+	}
+}
+
+.gfield_date_dropdown_year,
+.gfield_date_year,
+.gfield_time_ampm {
+	@media (--viewport-medium) {
+		padding-left: var(--gf-control-complex-gutter);
+	}
+	label {
+		margin-bottom: 0;
+
+		@media (--viewport-medium) {
+			margin-bottom: var(--gf-control-complex-gutter);
+		}
+	}
+}

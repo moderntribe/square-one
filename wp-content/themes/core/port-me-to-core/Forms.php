@@ -87,6 +87,10 @@ class Forms {
 
 			$classes .= ' gf-url';
 
+		} elseif( $field['type'] == 'fileupload' ) {
+
+			$classes .= ' gf-file';
+
 		}
 
 		return $classes;

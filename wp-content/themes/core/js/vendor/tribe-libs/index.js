@@ -15,7 +15,7 @@ import socialShare from './social-share';
 const init = () => {
 	embeds();
 
-	//forms();
+	forms();
 
 	socialShare();
 };

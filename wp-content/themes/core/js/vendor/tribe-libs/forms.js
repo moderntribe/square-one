@@ -86,7 +86,7 @@ let scrollSubmit = ($target) => {
 	scrollTo({
 		duration: 500,
 		offset: -60,
-		target: $target,
+		$target: $target,
 	});
 };
 

@@ -1,8 +1,7 @@
 .form-control-required {
 	label {
 		&:after {
-			padding-left: 4px;
-			color: var(--form-state-color-required);
+			@mixin required;
 			content: '*';
 		}
 	}

@@ -2862,7 +2862,7 @@
 	var init = function init() {
 	  (0, _embeds2.default)();
 
-	  //forms();
+	  (0, _forms2.default)();
 
 	  (0, _socialShare2.default)();
 	}; /**
@@ -3125,7 +3125,7 @@
 		(0, _scrollTo2.default)({
 			duration: 500,
 			offset: -60,
-			target: $target
+			$target: $target
 		});
 	};
 
