@@ -1,6 +1,4 @@
 
-import _ from 'lodash';
-
 /**
  * @function deepscroll
  * @desc A plugin that updates the url as targets are scrolled by using the data attribute
@@ -9,10 +7,12 @@ import _ from 'lodash';
  * @param opts Object The options object. Check below for available and defaults.
  */
 
+import _ from 'lodash';
+
 /* global Waypoint */
 
 const deepScroll = (opts) => {
-	const options = _.assign({
+	const options = Object.assign({
 		attr: 'data-url-key',
 		targets: null,
 		offset: 0,

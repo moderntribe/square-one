@@ -3073,8 +3073,8 @@
 		(0, _popup2.default)({
 			event: e,
 			specs: {
-				width: parseInt($(e.currentTarget).attr('data-width')),
-				height: parseInt($(e.currentTarget).attr('data-height'))
+				width: parseInt(e.currentTarget.getAttribute('data-width')),
+				height: parseInt(e.currentTarget.getAttribute('data-height'))
 			}
 		});
 	};
@@ -3086,7 +3086,7 @@
 /* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function($) {'use strict';
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 		value: true
@@ -3099,7 +3099,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var popup = function popup(opts) {
-		var options = $.extend({
+		var options = Object.assign({
 			event: null,
 			url: '',
 			center: true,
@@ -3150,7 +3150,6 @@
 	    */
 
 	exports.default = popup;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(46)))
 
 /***/ },
 /* 49 */
