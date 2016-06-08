@@ -12,6 +12,7 @@ class Forms {
 		add_filter( 'gform_field_css_class', [ $this, 'add_gf_select_field_class' ], 10, 3 );
 		add_filter( 'gform_pre_render', [ $this, 'deactivate_gf_animations' ] );
 		add_filter( 'gform_confirmation_anchor', '__return_false' );
+		add_filter( 'gform_tabindex', '__return_false' );
 
 	}
 
