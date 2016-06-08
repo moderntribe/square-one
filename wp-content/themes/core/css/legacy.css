@@ -404,6 +404,8 @@ embed {
 	GF input icons?
 	Sizing of checkbox/radio using math?
 
+	more vars for datepicker
+
 	Handle spacing / grids setup for forms + GF, have it all just work
 
 	Chosen colors for multiple and simplify
@@ -1573,7 +1575,7 @@ a.btn {
  *
  * Example:
  * <div class="form-field-group form-control-required">
- *   <label class="form-label" for="textFieldExample">Label</label>
+ *   <label class="form-control-label" for="textFieldExample">Label</label>
  *	 <input id="textFieldExample" class="form-control" name="textFieldExample" aria-describedby="textFieldExampleHelper" type="text" />
  *	 <p id="textFieldExampleHelper" class="form-control-helper">Helper text</p>
  * </div>
@@ -1590,7 +1592,7 @@ a.btn {
  * Example:
  * <div class="form-field-group form-control-required">
  *   <div class="form-control-group">
- *     <label class="form-label" for="textFieldExample">Label</label>
+ *     <label class="form-control-label" for="textFieldExample">Label</label>
  *	   <input id="textFieldExample" class="form-control" name="textFieldExample" aria-describedby="textFieldExampleHelper" type="text" />
  *	   <p id="textFieldExampleHelper" class="form-control-helper">Helper text</p>
  *   </div>
@@ -1689,7 +1691,7 @@ fieldset {}
 /* -------------------------------------------------------------------------
  * Label
  * ------------------------------------------------------------------------- */
-.form-label,
+.form-control-label,
 .context-content label {
     display: block;
     margin-bottom: 15px;
@@ -1766,7 +1768,7 @@ legend {
  *
  * Example:
  * <div class="form-field-group">
- *   <label class="form-label" for="textFieldExample">Label</label>
+ *   <label class="form-control-label" for="textFieldExample">Label</label>
  *   <div class="form-control-icon icon icon-phone">
  *	   <input id="textFieldExample" class="form-control" name="textFieldExample" aria-describedby="textFieldExampleHelper" type="text" />
  *   </div>
@@ -2034,7 +2036,7 @@ input[type="radio"],
  *
  * Example:
  * <div class="form-field-group">
- *   <label class="form-label" for="select">Select Control</label>
+ *   <label class="form-control-label" for="select">Select Control</label>
  * 	 <select id="select" name="select">
  * 	   <option value="" class="form-control-select-placeholder" hidden="" disabled="disabled" selected="selected">Placeholder</option>
  * 	   <option value="">Option 1</option>
@@ -2080,7 +2082,7 @@ option {
  *
  * Example:
  * <div class="form-field-group">
- *   <label class="form-label" for="select">Select Control</label>
+ *   <label class="form-control-label" for="select">Select Control</label>
  * 	 <div class="form-control-select">
  * 	   <select id="select" name="select">
  * 	     <option value="" hidden="" disabled="disabled" selected="selected">Placeholder</option>

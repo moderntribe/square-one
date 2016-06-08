@@ -1,5 +1,18 @@
 .gform_wrapper {
-	input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="submit"]):not([type="reset"]):not([type="button"]) {
+	input[type="text"],
+	input[type="color"],
+	input[type="date"],
+	input[type="datetime"],
+	input[type="datetime-local"],
+	input[type="email"],
+	input[type="month"],
+	input[type="number"],
+	input[type="range"],
+	input[type="search"],
+	input[type="tel"],
+	input[type="time"],
+	input[type="url"],
+	input[type="week"] {
 		@mixin form-control;
 	}
 }
