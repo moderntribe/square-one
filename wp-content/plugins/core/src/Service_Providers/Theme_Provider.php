@@ -26,6 +26,12 @@ class Theme_Provider implements ServiceProviderInterface {
 	private $typekit_id   = '';
 	private $google_fonts = [ ];
 
+	/**
+	 * Custom (self-hosted) fonts are sourced/imported in the theme: wp-content/themes/core/pcss/base/_fonts.pcss
+	 * Declare them here if they require webfont event support (loading, loaded, etc).
+	 */
+	private $custom_fonts = [ ];
+
 	public function register( Container $container ) {
 		$container[ 'theme.body_classes' ] = function ( Container $container ) {
 			return new Body_Classes();
@@ -61,10 +67,12 @@ class Theme_Provider implements ServiceProviderInterface {
 
 		$container[ 'theme.resources.typekit_id' ] = $this->typekit_id;
 		$container[ 'theme.resources.google_fonts' ] = $this->google_fonts;
+		$container[ 'theme.resources.custom_fonts' ] = $this->custom_fonts;
 		$container[ 'theme.resources.fonts' ] = function ( Container $container ) {
 			return new Fonts( [
 					'typekit' => $container[ 'theme.resources.typekit_id' ],
 					'google'  => $container[ 'theme.resources.google_fonts' ],
+					'custom'  => $container[ 'theme.resources.custom_fonts' ],
 				]
 			);
 		};
