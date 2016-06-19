@@ -5807,9 +5807,10 @@
 	var el = document.getElementById('site-wrap');
 	var $el = void 0;
 	var spinner = void 0;
+	var submitting = false;
 
 	/**
-	 * @function _scroll_submit
+	 * @function scrollSubmit
 	 * @description Adjusts gravity form submit top placement.
 	 */
 
@@ -5822,6 +5823,16 @@
 	};
 
 	/**
+	 * @function gravityFormSubmit
+	 * @description We only want post_render doing its thing if a submit is in play.
+	 * This takes care of that.
+	 */
+
+	var gravityFormSubmit = function gravityFormSubmit() {
+		submitting = true;
+	};
+
+	/**
 	 * @function gravityFormPostRender
 	 * @description executes every time the form is rendered including initial form load,
 	 * next/previous page for multi-page forms, form rendered with validation errors,
@@ -5829,13 +5840,18 @@
 	 */
 
 	var gravityFormPostRender = function gravityFormPostRender(e, formId) {
+		if (!submitting) {
+			return;
+		}
+
 		spinner.stop();
+		submitting = false;
 		scrollSubmit($('#gform_wrapper_' + formId));
 	};
 
 	/**
-	 * @function _gform_confirmation_loaded
-	 * @description@desc executes on AJAX-enabled forms when the confirmation page is loaded.
+	 * @function gravityFormConfirmationLoaded
+	 * @description executes on AJAX-enabled forms when the confirmation page is loaded.
 	 */
 
 	var gravityFormConfirmationLoaded = function gravityFormConfirmationLoaded(e, formId) {
@@ -5843,7 +5859,7 @@
 	};
 
 	/**
-	 * @function _spin_on
+	 * @function spinOn
 	 * @description Kicks off spinner for form submit.
 	 */
 
@@ -5857,7 +5873,7 @@
 	 */
 
 	var bindEvents = function bindEvents() {
-		$(document).on('gform_post_render', gravityFormPostRender).on('gform_confirmation_loaded', gravityFormConfirmationLoaded);
+		$(document).on('submit', '.gform_wrapper form', gravityFormSubmit).on('gform_post_render', gravityFormPostRender).on('gform_confirmation_loaded', gravityFormConfirmationLoaded);
 
 		$el.on('click', '.gform_button', function (e) {
 			return spinOn(e);
@@ -6284,6 +6300,8 @@
 		value: true
 	});
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	/**
 	 * @function scrollTo
 	 * @since 1.0
@@ -6291,7 +6309,7 @@
 	 */
 
 	var scrollTo = function scrollTo(opts) {
-		var options = Object.assign({
+		var options = _extends({
 			auto: false,
 			auto_coefficent: 2.5,
 			afterScroll: function afterScroll() {},
@@ -6406,10 +6424,12 @@
 
 	var _forEach3 = _interopRequireDefault(_forEach2);
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var popup = function popup(opts) {
-		var options = Object.assign({
+		var options = _extends({
 			event: null,
 			url: '',
 			center: true,

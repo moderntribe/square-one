@@ -93,14 +93,14 @@ if ( class_exists( 'GFForms' ) ) {
 			$scripts = array(
 				array(
 					'handle'  => 'gfwebapi_hmac_sha1',
-					'src'     => 'https://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/hmac-sha1.js',
+					'src'     => GFCommon::get_base_url() . '/includes/webapi/js/hmac-sha1.min.js',
 					'enqueue' => array(
 						array( 'admin_page' => array( 'plugin_settings' ) ),
 					)
 				),
 				array(
 					'handle'   => 'gfwebapi_enc_base64',
-					'src'      => 'https://crypto-js.googlecode.com/svn/tags/3.1.2/build/components/enc-base64-min.js',
+					'src'      => GFCommon::get_base_url() . '/includes/webapi/js/enc-base64-min.js',
 					'deps'     => array( 'gfwebapi_hmac_sha1' ),
 					'callback' => array( $this, 'localize_form_settings_scripts' ),
 					'enqueue'  => array(
@@ -149,7 +149,7 @@ if ( class_exists( 'GFForms' ) ) {
 
 		public function plugin_settings_fields() {
 
-			$args = apply_filters( 'gform_webapi_get_users_settings_page', array( 'number' => 200 ) );
+			$args = apply_filters( 'gform_webapi_get_users_settings_page', array( 'number' => 3000 ) );
 
 			$accounts = get_users( $args );
 
@@ -171,7 +171,7 @@ if ( class_exists( 'GFForms' ) ) {
 							array(
 								'id'    => 'save_button',
 								'type'  => 'save',
-								'value' => 'Update',
+								'value' => esc_attr__( 'Update', 'gravityforms' ),
 								'style' => 'display:none;',
 							),
 						)
@@ -185,11 +185,12 @@ if ( class_exists( 'GFForms' ) ) {
 					'description' => esc_html__( 'The Gravity Forms API allows developers to interact with this install via a JSON REST API.', 'gravityforms' ),
 					'fields'      => array(
 						array(
-							'type'    => 'checkbox',
-							'label'   => esc_html__( 'Enable access to the API', 'gravityforms' ),
-							'name'    => 'activate',
-							'onclick' => 'jQuery(this).parents("form").submit();',
-							'choices' => array(
+							'type'       => 'checkbox',
+							'label'      => esc_html__( 'Enable access to the API', 'gravityforms' ),
+							'name'       => 'activate',
+							'onclick'    => 'jQuery(this).parents("form").submit();',
+							'onkeypress' => 'jQuery(this).parents("form").submit();',
+							'choices'    => array(
 								array( 'label' => esc_html__( 'Enabled', 'gravityforms' ), 'name' => 'enabled' ),
 							)
 						),
@@ -242,7 +243,7 @@ if ( class_exists( 'GFForms' ) ) {
 						array(
 							'id'    => 'save_button',
 							'type'  => 'save',
-							'value' => 'Update',
+							'value' => esc_attr__( 'Update', 'gravityforms' ),
 						),
 					)
 				),
@@ -280,7 +281,7 @@ if ( class_exists( 'GFForms' ) ) {
 
 			?>
 			<script type="text/javascript">
-				var gfapiBaseUrl = '<?php echo esc_attr( GFWEBAPI_API_BASE_URL ) ?>';
+				var gfapiBaseUrl = <?php echo json_encode( GFWEBAPI_API_BASE_URL ) ?>;
 			</script>
 
 			<a title="Gravity Forms API: Developer Tools" class="thickbox"

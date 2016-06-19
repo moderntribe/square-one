@@ -9,9 +9,10 @@ import scrollTo from '../../src/utils/dom/scroll-to';
 const el = document.getElementById('site-wrap');
 let $el;
 let spinner;
+let submitting = false;
 
 /**
- * @function _scroll_submit
+ * @function scrollSubmit
  * @description Adjusts gravity form submit top placement.
  */
 
@@ -24,6 +25,16 @@ const scrollSubmit = ($form) => {
 };
 
 /**
+ * @function gravityFormSubmit
+ * @description We only want post_render doing its thing if a submit is in play.
+ * This takes care of that.
+ */
+
+const gravityFormSubmit = () => {
+	submitting = true;
+};
+
+/**
  * @function gravityFormPostRender
  * @description executes every time the form is rendered including initial form load,
  * next/previous page for multi-page forms, form rendered with validation errors,
@@ -31,13 +42,18 @@ const scrollSubmit = ($form) => {
  */
 
 const gravityFormPostRender = (e, formId) => {
+	if (!submitting) {
+		return;
+	}
+
 	spinner.stop();
+	submitting = false;
 	scrollSubmit($(`#gform_wrapper_${formId}`));
 };
 
 /**
- * @function _gform_confirmation_loaded
- * @description@desc executes on AJAX-enabled forms when the confirmation page is loaded.
+ * @function gravityFormConfirmationLoaded
+ * @description executes on AJAX-enabled forms when the confirmation page is loaded.
  */
 
 const gravityFormConfirmationLoaded = (e, formId) => {
@@ -45,7 +61,7 @@ const gravityFormConfirmationLoaded = (e, formId) => {
 };
 
 /**
- * @function _spin_on
+ * @function spinOn
  * @description Kicks off spinner for form submit.
  */
 
@@ -60,6 +76,7 @@ const spinOn = (e) => {
 
 const bindEvents = () => {
 	$(document)
+		.on('submit', '.gform_wrapper form', gravityFormSubmit)
 		.on('gform_post_render', gravityFormPostRender)
 		.on('gform_confirmation_loaded', gravityFormConfirmationLoaded);
 

@@ -156,7 +156,6 @@ input[type="password"],
 input[type="reset"],
 input[type="button"],
 button,
-/*select,*/
 textarea {
     -webkit-appearance: none;
        -moz-appearance: none;
@@ -364,18 +363,8 @@ embed {
 	 * Text
 	 * ----------------------------------------------------------------------------- *//* -----------------------------------------------------------------------------
 	 * Borders
-	 * ----------------------------------------------------------------------------- *//* -----------------------------------------------------------------------------
-	 * Inputs
-	 * ----------------------------------------------------------------------------- *//* -----------------------------------------------------------------------------
-	 * Validation
 	 * ----------------------------------------------------------------------------- */
 }
-/* -----------------------------------------------------------------------------
- * Lost Grid Settings
- * ----------------------------------------------------------------------------- */
-@lost gutter 20px;
-@lost flexbox no-flex;
-@lost cycle auto;
 :root {/* -----------------------------------------------------------------------------
 	 * Font Stacks
 	 * ----------------------------------------------------------------------------- *//* -----------------------------------------------------------------------------
@@ -388,7 +377,105 @@ embed {
 	 * Spacers (margin & padding)
 	 * ----------------------------------------------------------------------------- */
 }
+:root {/* -----------------------------------------------------------------------------
+	 * General
+	 * ----------------------------------------------------------------------------- *//* -----------------------------------------------------------------------------
+	 * Caption
+	 * ----------------------------------------------------------------------------- *//* -----------------------------------------------------------------------------
+	 * Prompt
+	 * ----------------------------------------------------------------------------- *//* -----------------------------------------------------------------------------
+	 * Icon
+	 * ----------------------------------------------------------------------------- */
+}
+/* -----------------------------------------------------------------------------
+ * Grid Variables
+ * ----------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ * Grid Settings
+ * ----------------------------------------------------------------------------- */
+@lost gutter 20px;
+@lost flexbox no-flex;
+@lost cycle auto;
+:root {/*
+	Test and make sure all looks good (natural form, advanced custom form, GF form)
+
+	Do a fade out of form with spinner?
+
+	GF input icons?
+	Sizing of checkbox/radio using math?
+
+	more vars for datepicker
+
+	Handle spacing / grids setup for forms + GF, have it all just work
+
+	Chosen colors for multiple and simplify
+	Clean up all the additional variables for controls and form settings based on form base stuff?
+	This all has to be simplified
+
+	Layouts for form fields (inline, horizontal field/label, grid, small space no label stacked, etc.) 
+	Validation stuff 
+	Skins? 
+	Deal with readonly & disabled?
+	*//* Control icons *//* Control icons *//* Select icon *//* Select, Checkbox, & Radio *//* Select *//* Select *//* Select *//* Label *//* Label *//* Helper Text & Descriptions *//* Helper Text & Descriptions */
+}
+:root {/* -----------------------------------------------------------------------------
+	 * Label
+	 * ----------------------------------------------------------------------------- *//* -----------------------------------------------------------------------------
+	 * Control Helper Text
+	 * ----------------------------------------------------------------------------- */
+}
+:root {/* -----------------------------------------------------------------------------
+	 * Legend
+	 * ----------------------------------------------------------------------------- *//* -----------------------------------------------------------------------------
+	 * Legend, styled
+	 * ----------------------------------------------------------------------------- */
+}
+:root {/* -----------------------------------------------------------------------------
+	 * Controls
+	 * ----------------------------------------------------------------------------- *//* -----------------------------------------------------------------------------
+	 * Control Icon
+	 * ----------------------------------------------------------------------------- *//* -----------------------------------------------------------------------------
+	 * Control: Textarea
+	 * ----------------------------------------------------------------------------- *//* -----------------------------------------------------------------------------
+	 * Control: Select
+	 * ----------------------------------------------------------------------------- *//* -----------------------------------------------------------------------------
+	 * Control: Radio & Checkbox
+	 * ----------------------------------------------------------------------------- *//* -----------------------------------------------------------------------------
+	 * Control: File
+	 * ----------------------------------------------------------------------------- *//* -----------------------------------------------------------------------------
+	 * Control: Submit & Buttons
+	 * ----------------------------------------------------------------------------- */
+}
+:root {/* -----------------------------------------------------------------------------
+	 * Placeholder
+	 * ----------------------------------------------------------------------------- */
+}
 /* Mixins */
+/* -----------------------------------------------------------------------------
+ *
+ * Global Button Resets
+ *
+ * ----------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ *
+ * Button Submit
+ *
+ * ----------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ *
+ * Form: Control Group / Wrapper, radio & checkbox specific
+ *
+ * ----------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ *
+ * Form Helper
+ *
+ * ----------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ *
+ * Required Fields
+ *
+ * ----------------------------------------------------------------------------- */
 /* -----------------------------------------------------------------------------
  *
  * Form Placeholders
@@ -396,7 +483,27 @@ embed {
  * ----------------------------------------------------------------------------- */
 /* -----------------------------------------------------------------------------
  *
- * Form Input Fields
+ * Form Widgets/Controls
+ *
+ * ----------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ *
+ * Form Control: Select
+ *
+ * ----------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ *
+ * Form Control: Radio & Checkbox, custom styled
+ *
+ * ----------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ *
+ * Form Control: Checkbox, custom styled
+ *
+ * ----------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ *
+ * Form Control: Radio, custom styled
  *
  * ----------------------------------------------------------------------------- */
 /* -----------------------------------------------------------------------------
@@ -470,6 +577,81 @@ embed {
  *
  * ----------------------------------------------------------------------------- */
 /* Helper Classes */
+/* -----------------------------------------------------------------------------
+ *
+ * Child Separators
+ *
+ * Notes: Works as a parent helper class and will add a separator for the
+ * direct children of the parent
+ *
+ * Example:
+ * <ul class="s-pipe">
+ *   <li>...</li>
+ *   <li>...</li>
+ * </ul>
+ *
+ * ----------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ * Child Separator: " | "
+ * ----------------------------------------------------------------------------- */
+.s-pipe > *:after {
+    content: '|';
+    display: inline;
+    padding: 0 3px;
+}
+.s-pipe > *:last-of-type:after {
+    content: none;
+}
+/* -----------------------------------------------------------------------------
+ * Child Separator: " / "
+ * ----------------------------------------------------------------------------- */
+.s-slash > *:after {
+    content: '/';
+    padding: 0 7px;
+}
+.s-slash > *:last-of-type:after {
+    content: none;
+}
+/* -----------------------------------------------------------------------------
+ * Child Separator: ", "
+ * ----------------------------------------------------------------------------- */
+.s-comma > *:after {
+    content: ',';
+    display: inline;
+    padding: 0;
+}
+.s-comma > *:last-of-type:after {
+    content: none;
+}
+/* -----------------------------------------------------------------------------
+ * Child Separator: " - "
+ * ----------------------------------------------------------------------------- */
+.s-dash > *:after {
+    content: ' - ';
+    display: inline;
+    padding: 0;
+}
+.s-dash > *:last-of-type:after {
+    content: none;
+}
+/* -----------------------------------------------------------------------------
+ * Child Separator: " · "
+ * ----------------------------------------------------------------------------- */
+.s-dot > *:after {
+    content: '';
+    height: 5px;
+    width: 5px;
+    -webkit-border-radius: 50%;
+            border-radius: 50%;
+    background-color: darken(grey, 0.15);
+    display: inline-block;
+    position: relative;
+    bottom: 3px;
+    margin: 0 10px;
+}
+.s-dot > *:last-of-type:after {
+    content: none;
+}
 /* -----------------------------------------------------------------------------
  *
  * Clearfix
@@ -549,11 +731,11 @@ embed {
  * ----------------------------------------------------------------------------- */
 @font-face {
     font-family: 'core-icons';
-    src: url(''/wp-content/themes/core/fonts'/icons-core/core-icons.eot?3y5h49');
-    src: url(''/wp-content/themes/core/fonts'/icons-core/core-icons.eot?3y5h49#iefix') format('embedded-opentype'),
-		url(''/wp-content/themes/core/fonts'/icons-core/core-icons.ttf?3y5h49') format('truetype'),
-		url(''/wp-content/themes/core/fonts'/icons-core/core-icons.woff?3y5h49') format('woff'),
-		url(''/wp-content/themes/core/fonts'/icons-core/core-icons.svg?3y5h49#core-icons') format('svg');
+    src: url('/wp-content/themes/core/fonts/icons-core/core-icons.eot?3y5h49');
+    src: url('/wp-content/themes/core/fonts/icons-core/core-icons.eot?3y5h49#iefix') format('embedded-opentype'),
+		url('/wp-content/themes/core/fonts/icons-core/core-icons.ttf?3y5h49') format('truetype'),
+		url('/wp-content/themes/core/fonts/icons-core/core-icons.woff?3y5h49') format('woff'),
+		url('/wp-content/themes/core/fonts/icons-core/core-icons.svg?3y5h49#core-icons') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -571,6 +753,75 @@ embed {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: auto;
+}
+.icon-arrow-left:before {
+    content: "\e094";
+}
+.icon-arrow-right:before {
+    content: "\e095";
+}
+.icon-arrow-up:before {
+    content: "\e096";
+}
+.icon-arrow-down:before {
+    content: "\e097";
+}
+.icon-plus:before {
+    content: "\e114";
+}
+.icon-minus:before {
+    content: "\e115";
+}
+.icon-check:before {
+    content: "\e116";
+}
+.icon-cross:before {
+    content: "\e117";
+}
+.icon-search:before {
+    content: "\e036";
+}
+.icon-chevron-down:before {
+    content: "\e900";
+}
+.icon-chevron-left:before {
+    content: "\e91a";
+}
+.icon-chevron-right:before {
+    content: "\e919";
+}
+.icon-chevron-up:before {
+    content: "\e904";
+}
+.icon-play:before {
+    content: "\e903";
+}
+.icon-mail:before {
+    content: "\f003";
+}
+.icon-print:before {
+    content: "\f02f";
+}
+.icon-twitter:before {
+    content: "\f099";
+}
+.icon-facebook:before {
+    content: "\f09a";
+}
+.icon-google-plus:before {
+    content: "\f0d5";
+}
+.icon-linkedin:before {
+    content: "\f0e1";
+}
+.icon-youtube:before {
+    content: "\f167";
+}
+.icon-instagram:before {
+    content: "\f16d";
+}
+.icon-pinterest:before {
+    content: "\f231";
 }
 /* -----------------------------------------------------------------------------
  *
@@ -1127,12 +1378,143 @@ img {
 .wp-embed-wrap {
     position: relative;
     aspect-ratio: '16:9';
+    overflow: hidden;
 }
 .wp-embed-wrap iframe,
 	.wp-embed-wrap object,
 	.wp-embed-wrap embed {
     width: 100%;
     height: 100%;
+}
+.wp-embed-lazy {
+    background: #333;
+}
+.wp-embed-lazy br,
+	.wp-embed-lazy p {
+    display: none;
+}
+.wp-embed-lazy .wp-embed-lazy-thumb {
+    margin: 0;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.wp-embed-lazy .wp-embed-lazy-thumb.lazyloaded ~ .wp-embed-lazy-caption {
+    opacity: 1;
+    -webkit-transition: opacity 250ms 300ms ease-in;
+    transition: opacity 250ms 300ms ease-in;
+}
+.wp-embed-lazy .wp-embed-lazy-launch {
+    display: block;
+    height: 100%;
+    -webkit-transition: all 0.15s ease-in-out;
+    transition: all 0.15s ease-in-out;
+}
+.wp-embed-lazy .wp-embed-lazy-launch:hover .icon-play, .wp-embed-lazy .wp-embed-lazy-launch:focus .icon-play {
+    border-color: #fff;
+}
+.wp-embed-lazy .wp-embed-lazy-launch:hover .icon-play:before, .wp-embed-lazy .wp-embed-lazy-launch:focus .icon-play:before {
+    -webkit-transform: scale(0.65);
+        -ms-transform: scale(0.65);
+            transform: scale(0.65);
+}
+.wp-embed-lazy .wp-embed-lazy-launch:focus:after {
+    height: 5px;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    content: '';
+    position: absolute;
+    background: #21a6cb;
+}
+.wp-embed-lazy .wp-embed-lazy-caption {
+    opacity: 0;
+    -webkit-transition: opacity 0.15s ease-in;
+    transition: opacity 0.15s ease-in;
+    position: absolute;
+    left: 25px;
+    bottom: 20px;
+    background: #000000;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    padding: 20px 25px 20px 75px;
+    max-width: 90%;
+}
+@media (min-width: 768px) {
+    .wp-embed-lazy .wp-embed-lazy-caption {
+        left: 20px;
+    }
+}
+.wp-embed-lazy .icon-play {
+    position: absolute;
+    font-size: 44px;
+    left: 15px;
+    top: 50%;
+    margin-top: -24px;
+    -webkit-transition: opacity 0.15s ease-in-out, border 0.425s;
+    transition: opacity 0.15s ease-in-out, border 0.425s;
+    border: 2px solid transparent;
+    -webkit-border-radius: 50%;
+            border-radius: 50%;
+}
+.wp-embed-lazy .icon-play:before {
+    display: inline-block;
+    position: relative;
+    left: 3px;
+    top: 1px;
+    -webkit-transition: opacity 0.15s ease-in-out, -webkit-transform 0.425s;
+    transition: opacity 0.15s ease-in-out, -webkit-transform 0.425s;
+    transition: opacity 0.15s ease-in-out, transform 0.425s;
+    transition: opacity 0.15s ease-in-out, transform 0.425s, -webkit-transform 0.425s;
+}
+.wp-embed-lazy .wp-embed-lazy-prompt {
+    display: block;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: #21a6cb;
+    font-size: 14px;
+}
+.wp-embed-lazy .wp-embed-lazy-title {
+    font-size: 18px;
+    letter-spacing: 0.02em;
+    display: block;
+    margin-top: 6px;
+    padding-top: 5px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+/* CASE: Low Resolution */
+.wp-embed-lazy.low-resolution .wp-embed-lazy-thumb {
+    margin-top: -9.4%;
+}
+/* CASE: Mobile */
+.wp-embed-lazy.small-display .wp-embed-lazy-caption {
+    background: #000000;
+    background: rgba(0, 0, 0, 0.4);
+    border: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    left: 0;
+    bottom: 0;
+}
+.wp-embed-lazy.small-display .wp-embed-lazy-title {
+    display: none;
+}
+.wp-embed-lazy.small-display .wp-embed-lazy-prompt {
+    color: #fff;
+    width: 100%;
+    bottom: 15%;
+    position: absolute;
+    text-align: center;
+}
+.wp-embed-lazy.small-display .icon-play {
+    left: 50%;
+    margin-left: -26px;
 }
 /* Buttons */
 .context-content a[class*="btn-"], .context-content button[class*="btn-"] {
@@ -1191,173 +1573,599 @@ a.btn {
 }
 /* -----------------------------------------------------------------------------
  *
- * Form: Input Block / Wrapper
+ * Form: Field Group / Wrapper
  *
  * Example:
- * <div class="input">
- *   <label class="label" for="text">Label: Text Input</label>
- *   <input name="text" class="field" type="text" />
+ * <div class="form-field-group form-control-required">
+ *   <label class="form-control-label" for="textFieldExample">Label</label>
+ *	 <input id="textFieldExample" class="form-control" name="textFieldExample" aria-describedby="textFieldExampleHelper" type="text" />
+ *	 <p id="textFieldExampleHelper" class="form-control-helper">Helper text</p>
  * </div>
  *
  * ----------------------------------------------------------------------------- */
-.input {
-    margin-bottom: 30px;
+.form-field-group {
+    margin-bottom: 28px;
     line-height: 1;
 }
 /* -----------------------------------------------------------------------------
  *
- * Form: Input Field
+ * Form: Control Group / Wrapper
  *
  * Example:
- * <input name="text" class="field" type="text" />
+ * <div class="form-field-group form-control-required">
+ *   <div class="form-control-group">
+ *     <label class="form-control-label" for="textFieldExample">Label</label>
+ *	   <input id="textFieldExample" class="form-control" name="textFieldExample" aria-describedby="textFieldExampleHelper" type="text" />
+ *	   <p id="textFieldExampleHelper" class="form-control-helper">Helper text</p>
+ *   </div>
+ * </div>
  *
  * ----------------------------------------------------------------------------- */
-/* input, button, textarea, select */
-.field {
-    padding: 0 14px;
-    border: 1px solid lighten(grey, 0.15);
-    background-color: #fff;
-    display: block;
-    width: 100%;
-    height: 42px;
-    color: #000;
-}
-.label,
-.context-content label {
-    display: block;
-    margin-bottom: 15px;
-}
-/* -------------------------------------------------------------------------
- * Fieldsets
- * ------------------------------------------------------------------------- */
-fieldset {}
-/* -------------------------------------------------------------------------
- * Legends
- * ------------------------------------------------------------------------- */
-legend {
-    display: block;
-    margin-bottom: 15px;
+.form-control-group {}
+/* -----------------------------------------------------------------------------
+ *
+ * Form: Control Group / Wrapper, radio & checkbox specific
+ *
+ * Example:
+ * <fieldset>
+ *   <legend>Legend for Checkboxes</legend>
+ * 	 <div class="form-field-group form-control-group-radio-checkbox">
+ * 	   <span class="form-control-checkbox">
+ * 	     <input id="checkboxOne" name="checkboxGroup" type="checkbox" value="checkboxOne" checked="checked" />
+ *	     <label for="checkboxOne">Checkbox One</label>
+ * 	   </span>
+ *   </div>
+ * </fieldset>
+ *
+ * ----------------------------------------------------------------------------- */
+.form-control-group-radio-checkbox {
+    padding-top: 8px;
+    padding-bottom: 4px;
 }
 /* -----------------------------------------------------------------------------
- * Placeholders
+ * Placeholder
  * ----------------------------------------------------------------------------- */
 ::-webkit-input-placeholder {
-    color: #000;
+    color: grey;
     opacity: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    font: normal 400 16px / inherit "proxima-nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 :-moz-placeholder {
-    color: #000;
+    color: grey;
     opacity: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    font: normal 400 16px / inherit "proxima-nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 ::-moz-placeholder {
-    color: #000;
+    color: grey;
     opacity: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    font: normal 400 16px / inherit "proxima-nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 :-ms-input-placeholder {
-    color: #000;
+    color: grey;
     opacity: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    font: normal 400 16px / inherit "proxima-nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 /* -----------------------------------------------------------------------------
  * Focus
  * ----------------------------------------------------------------------------- */
-input:focus, textarea:focus, select:focus {
-    border-color: lighten(grey, 0.15);
-    -webkit-box-shadow: 0 0 0 1px lighten(grey, 0.15);
-            box-shadow: 0 0 0 1px lighten(grey, 0.15);
+input:not([type="button"]):not([type="reset"]):not([type="submit"]):focus,
+textarea:focus,
+select:focus {
+    border: 1px solid darken(lightgrey, 0.25);
+    -webkit-box-shadow: 0 0 0 1px darken(lightgrey, 0.25);
+            box-shadow: 0 0 0 1px darken(lightgrey, 0.25);
 }
-input:focus::-webkit-input-placeholder, textarea:focus::-webkit-input-placeholder, select:focus::-webkit-input-placeholder {
-    color: lighten(#000, 0.1);
+input:not([type="button"]):not([type="reset"]):not([type="submit"]):focus::-webkit-input-placeholder, textarea:focus::-webkit-input-placeholder, select:focus::-webkit-input-placeholder {
+    color: lighten(grey, 0.25);
 }
-input:focus:-moz-placeholder, textarea:focus:-moz-placeholder, select:focus:-moz-placeholder {
-    color: lighten(#000, 0.1);
+input:not([type="button"]):not([type="reset"]):not([type="submit"]):focus:-moz-placeholder, textarea:focus:-moz-placeholder, select:focus:-moz-placeholder {
+    color: lighten(grey, 0.25);
 }
-input:focus::-moz-placeholder, textarea:focus::-moz-placeholder, select:focus::-moz-placeholder {
-    color: lighten(#000, 0.1);
+input:not([type="button"]):not([type="reset"]):not([type="submit"]):focus::-moz-placeholder, textarea:focus::-moz-placeholder, select:focus::-moz-placeholder {
+    color: lighten(grey, 0.25);
 }
-input:focus:-ms-input-placeholder, textarea:focus:-ms-input-placeholder, select:focus:-ms-input-placeholder {
-    color: lighten(#000, 0.1);
+input:not([type="button"]):not([type="reset"]):not([type="submit"]):focus:-ms-input-placeholder, textarea:focus:-ms-input-placeholder, select:focus:-ms-input-placeholder {
+    color: lighten(grey, 0.25);
 }
-input[type="radio"],
-	input[type="checkbox"] {
-    margin-bottom: 0;
+/* -------------------------------------------------------------------------
+ * Fieldset
+ * ------------------------------------------------------------------------- */
+fieldset {}
+/* -------------------------------------------------------------------------
+ * Fieldset, Styled
+ * Note: Styled fieldset to go along with styled legend
+ * ------------------------------------------------------------------------- */
+.form-fieldset {
+    margin: 0 0 28px;
+    padding: 20px 20px;
+    border: 1px solid lightgrey;
+    -webkit-border-radius: 0;
+            border-radius: 0;
 }
-.checkbox,
-.radio {
+/* -------------------------------------------------------------------------
+ * Label
+ * ------------------------------------------------------------------------- */
+.form-control-label,
+.context-content label {
     display: block;
+    margin-bottom: 15px;
+    color: #000;
+    letter-spacing: normal;
+    text-transform: none;
+    font: normal 700 14px / 1 "proxima-nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-.checkbox input[type="radio"],
-	.checkbox input[type="checkbox"],
-	.radio input[type="radio"],
-	.radio input[type="checkbox"] {
-    height: auto;
-    width: auto;
-    line-height: normal;
-    display: inline-block;
-    padding: 0;
-    margin-right: 10px;
+/* -------------------------------------------------------------------------
+ * Form Control Helper
+ * ------------------------------------------------------------------------- */
+.form-control-helper {
+    margin-top: 8px;
+    padding: 0 8px;
+    color: lighten(grey, 0.15);
+    letter-spacing: normal;
+    text-transform: none;
+    font: normal 600 13px / 1.15 "proxima-nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-.checkbox label, .radio label {
-    cursor: pointer;
-    margin-bottom: 0;
-    display: inline-block;
+/* -------------------------------------------------------------------------
+ * Legend
+ * Note: By default, styled to match the label
+ * ------------------------------------------------------------------------- */
+legend {
+    display: block;
+    margin-bottom: 15px;
+    color: #000;
+    letter-spacing: normal;
+    text-transform: none;
+    font: normal 700 14px / 1 "proxima-nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-.checkbox ~ .checkbox {
-    margin-top: 15px;
+/* -------------------------------------------------------------------------
+ * Legend, Styled
+ * Note: Styled legend to go along with styled fieldset
+ * ------------------------------------------------------------------------- */
+.form-legend {
+    color: #000;
+    margin-bottom: 15px;
+    padding: 0 8px;
+    text-align: left;
+    letter-spacing: normal;
+    text-transform: none;
+    font: normal 700 14px / 1 "proxima-nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-.radio ~ .radio {
-    margin-top: 15px;
-}
-select {
-    padding: 0 14px;
-    border: 1px solid lighten(grey, 0.15);
+/* -----------------------------------------------------------------------------
+ *
+ * Form: Control / Widget
+ *
+ * Note: applies by default to textarea, type="file", & select
+ *
+ * Example:
+ * <input name="text" class="form-control" type="text" />
+ *
+ * ----------------------------------------------------------------------------- */
+.form-control {
+    -webkit-transition: all 0.15s ease-in-out;
+    transition: all 0.15s ease-in-out;
+    padding: 0 20px;
+    border: 1px solid lightgrey;
+    -webkit-border-radius: 0;
+            border-radius: 0;
     background-color: #fff;
     display: block;
     width: 100%;
-    height: 42px;
+    height: 45px;
     color: #000;
-    padding-right: 0;
-    cursor: pointer;
+    letter-spacing: normal;
+    text-transform: none;
+    font: normal 400 16px / 1.5 "proxima-nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-/* CASE: multiple */
-select[multiple] {
-    height: 100px;
-    padding: 14px;
+/* -----------------------------------------------------------------------------
+ *
+ * Form: Control Icon
+ *
+ * Example:
+ * <div class="form-field-group">
+ *   <label class="form-control-label" for="textFieldExample">Label</label>
+ *   <div class="form-control-icon icon icon-phone">
+ *	   <input id="textFieldExample" class="form-control" name="textFieldExample" aria-describedby="textFieldExampleHelper" type="text" />
+ *   </div>
+ *   <p id="textFieldExampleHelper" class="form-control-helper">Helper text</p>
+ * </div>
+ *
+ * ----------------------------------------------------------------------------- */
+.form-control-icon {
+    position: relative;
 }
-input[type="file"] {
-    padding: 0 14px;
-    border: 1px solid lighten(grey, 0.15);
-    background-color: #fff;
-    display: block;
-    width: 100%;
-    height: 42px;
-    color: #000;
-    height: auto;
-    padding: 14px;
-    line-height: 1;
+.form-control-icon input,
+	.form-control-icon .form-control {
+    padding-right: 45px;
 }
-textarea {
-    padding: 0 14px;
-    border: 1px solid lighten(grey, 0.15);
-    background-color: #fff;
-    display: block;
-    width: 100%;
-    height: 42px;
-    color: #000;
-    resize: none;
-    padding: 12px 14px;
-    height: 180px;
+.form-control-icon:before {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    color: lightgrey;
+    height: 100%;
+    width: 45px;
+    line-height: 0;
+    text-align: center;
+    z-index: 1;
+    font-size: 20px;
 }
 /* button, input[type="button"], input[type="reset"], input[type="submit"] */
 .btn-submit {
+    -webkit-transition: all 0.15s ease-in-out;
+    transition: all 0.15s ease-in-out;
+    width: auto;
+    display: inline-block;
+    line-height: 1;
+    font-weight: 700;
+    height: auto;
+    cursor: pointer;
+    text-decoration: none;
+    border: 0;
+    padding: 0;
+    background-color: #000;
+    padding: 1em;
+    text-align: center;
+    color: #fff;
     width: 100%;
-    margin-top: 30px;
+    margin-top: 28px;
+}
+.btn-submit:visited {
+    color: #fff;
+}
+.btn-submit:hover,
+	.btn-submit:focus,
+	.btn-submit:active {
+    color: #fff;
+    background-color: darken(grey, 0.15);
 }
 @media (min-width: 768px) {
     .btn-submit {
         width: auto;
     }
 }
-.required label:after {
+input[type="file"] {
+    -webkit-transition: all 0.15s ease-in-out;
+    transition: all 0.15s ease-in-out;
+    padding: 0 20px;
+    border: 1px solid lightgrey;
+    -webkit-border-radius: 0;
+            border-radius: 0;
+    background-color: #fff;
+    display: block;
+    width: 100%;
+    height: 45px;
+    color: #000;
+    letter-spacing: normal;
+    text-transform: none;
+    font: normal 400 16px / 1.5 "proxima-nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    height: auto;
+    padding: 20px 20px;
+    line-height: 1;
+}
+input[type="password"] {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+/* -----------------------------------------------------------------------------
+ *
+ * Form Control: Radio & Checkbox, simple / default
+ *
+ * Example (Checkbox):
+ * <fieldset>
+ *   <legend>Legend for Checkboxes</legend>
+ * 	 <div class="form-field-group">
+ * 	   <span class="form-control-checkbox">
+ * 	     <input id="checkboxOne" name="checkboxGroup" type="checkbox" value="checkboxOne" checked="checked" />
+ *	     <label for="checkboxOne">Checkbox One</label>
+ * 	   </span>
+ * 	   <span class="form-control-checkbox">
+ * 	     <input id="checkboxTwo" name="checkboxGroup" type="checkbox" value="checkboxTwo" />
+ * 	     <label for="checkboxTwo">Checkbox two</label>
+ * 	   </span>
+ *   </div>
+ * </fieldset>
+ *
+ * Example (Radio):
+ * <div class="form-field-group">
+ *   <span class="form-control-radio">
+ *     <input id="radioExample" name="radioExample" type="radio" value="RadioExample" checked="checked" />
+ *     <label for="radioExample">Radio Example</label>
+ *   </span>
+ * </div>
+ *
+ * ----------------------------------------------------------------------------- */
+input[type="radio"],
+	input[type="checkbox"] {
+    margin-bottom: 0;
+}
+.form-control-checkbox,
+.form-control-radio {
+    display: block;
+}
+.form-control-checkbox input[type="radio"],
+	.form-control-checkbox input[type="checkbox"],
+	.form-control-radio input[type="radio"],
+	.form-control-radio input[type="checkbox"] {
+    height: auto;
+    width: auto;
+    display: inline-block;
+    line-height: normal;
+    padding: 0;
+}
+.form-control-checkbox label, .form-control-radio label {
+    color: #000;
+    cursor: pointer;
+    margin-bottom: 0;
+    display: inline-block;
+    letter-spacing: normal;
+    text-transform: none;
+    font: normal 400 14px / 1 "proxima-nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.form-control-checkbox input[type="radio"],
+	.form-control-checkbox input[type="checkbox"],
+	.form-control-radio input[type="radio"],
+	.form-control-radio input[type="checkbox"] {
+    margin-right: 10px;
+}
+.form-control-checkbox ~ .form-control-checkbox,
+.form-control-radio ~ .form-control-radio {
+    margin-top: 15px;
+}
+/* -----------------------------------------------------------------------------
+ *
+ * Form Control: Radio & Checkbox, custom styled
+ *
+ * Example (Checkbox):
+ * <fieldset>
+ *   <legend>Legend for Checkboxes</legend>
+ * 	 <div class="form-field-group">
+ * 	   <span class="form-control-checkbox form-control-custom-style">
+ * 	     <input id="checkboxOne" name="checkboxGroup" type="checkbox" value="checkboxOne" checked="checked" />
+ *	     <label for="checkboxOne">Checkbox One</label>
+ * 	   </span>
+ * 	   <span class="form-control-checkbox form-control-custom-style">
+ * 	     <input id="checkboxTwo" name="checkboxGroup" type="checkbox" value="checkboxTwo" />
+ * 	     <label for="checkboxTwo">Checkbox two</label>
+ * 	   </span>
+ *   </div>
+ * </fieldset>
+ *
+ * Example (Radio):
+ * <div class="form-field-group">
+ *   <span class="form-control-radio form-control-custom-style">
+ *     <input id="radioExample" name="radioExample" type="radio" value="RadioExample" checked="checked" />
+ *     <label for="radioExample">Radio Example</label>
+ *   </span>
+ * </div>
+ *
+ * ----------------------------------------------------------------------------- */
+.form-control-checkbox.form-control-custom-style, .form-control-radio.form-control-custom-style {
+    -webkit-transition: all 0.15s ease-in-out;
+    transition: all 0.15s ease-in-out;
+    position: relative;
+    padding-left: 34px;
+}
+.form-control-checkbox.form-control-custom-style input[type="radio"],
+	.form-control-checkbox.form-control-custom-style input[type="checkbox"],
+	.form-control-radio.form-control-custom-style input[type="radio"],
+	.form-control-radio.form-control-custom-style input[type="checkbox"] {
+    position: absolute;
+    left: 6px;
+    top: 2px;
+    font-size: 12px;
+}
+.form-control-checkbox.form-control-custom-style label, .form-control-radio.form-control-custom-style label {
+    max-width: 600px;
+}
+.form-control-checkbox.form-control-custom-style label:before,
+		.form-control-checkbox.form-control-custom-style label:after,
+		.form-control-radio.form-control-custom-style label:before,
+		.form-control-radio.form-control-custom-style label:after {
+    -webkit-transition: all 0.15s ease-in-out;
+    transition: all 0.15s ease-in-out;
+    content: '';
+    position: absolute;
+}
+.form-control-checkbox.form-control-custom-style label:before, .form-control-radio.form-control-custom-style label:before {
+    background-color: #fff;
+    width: 22.5px;
+    height: 22.5px;
+    top: -2px;
+    left: 0;
+    border: 1px solid lightgrey;
+}
+.form-control-checkbox.form-control-custom-style label:after, .form-control-radio.form-control-custom-style label:after {
+    opacity: 0;
+}
+.form-control-checkbox.form-control-custom-style input:focus + label:before, .form-control-radio.form-control-custom-style input:focus + label:before {
+    border-color: darken(lightgrey, 0.25);
+    -webkit-box-shadow: 0 0 0 1px darken(lightgrey, 0.25);
+            box-shadow: 0 0 0 1px darken(lightgrey, 0.25);
+}
+.form-control-checkbox.form-control-custom-style input:checked + label, .form-control-radio.form-control-custom-style input:checked + label {
+    color: #000;
+}
+.form-control-checkbox.form-control-custom-style input:checked + label:after, .form-control-radio.form-control-custom-style input:checked + label:after {
+    opacity: 1;
+}
+/* -----------------------------------------------------------------------------
+ * Form Control: Checkbox
+ * ----------------------------------------------------------------------------- */
+/* CASE: Custom Styled */
+.form-control-checkbox.form-control-custom-style label:before {
+    -webkit-border-radius: 0;
+            border-radius: 0;
+}
+.form-control-checkbox.form-control-custom-style label:after {
+    left: 7px;
+    top: 5px;
+    width: 9px;
+    height: 5px;
+    border: 2px solid darken(grey, 0.15);
+    border-top: none;
+    border-right: none;
+    -webkit-transform: rotate(-50deg);
+        -ms-transform: rotate(-50deg);
+            transform: rotate(-50deg);
+}
+/* -----------------------------------------------------------------------------
+ * Form Control: Radio
+ * ----------------------------------------------------------------------------- */
+/* CASE: Custom Styled */
+.form-control-radio.form-control-custom-style label:before,
+		.form-control-radio.form-control-custom-style label:after {
+    -webkit-border-radius: 50%;
+            border-radius: 50%;
+}
+.form-control-radio.form-control-custom-style label:after {
+    left: 8px;
+    top: 6px;
+    width: 8px;
+    height: 8px;
+    background-color: darken(grey, 0.15);
+}
+/* -----------------------------------------------------------------------------
+ *
+ * Form Control: Select, simple / default
+ *
+ * Example:
+ * <div class="form-field-group">
+ *   <label class="form-control-label" for="select">Select Control</label>
+ * 	 <select id="select" name="select">
+ * 	   <option value="" class="form-control-select-placeholder" hidden="" disabled="disabled" selected="selected">Placeholder</option>
+ * 	   <option value="">Option 1</option>
+ * 	   <option value="">Option 2</option>
+ *     <option value="">Option 3</option>
+ *   </select>
+ * </div>
+ *
+ * ----------------------------------------------------------------------------- */
+select {
+    -webkit-transition: all 0.15s ease-in-out;
+    transition: all 0.15s ease-in-out;
+    padding: 0 20px;
+    border: 1px solid lightgrey;
+    -webkit-border-radius: 0;
+            border-radius: 0;
+    background-color: #fff;
+    display: block;
+    width: 100%;
+    height: 45px;
+    color: #000;
+    letter-spacing: normal;
+    text-transform: none;
+    font: normal 400 16px / 1.5 "proxima-nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    padding-right: 0;
+    cursor: pointer;
+}
+/* CASE: multiple */
+select[multiple] {
+    font-size: 16px;
+    height: 100px;
+    padding: 20px 20px;
+}
+/* Sadly, as of now, you can't actually do this, but hopefully in the future
+option {
+	&.form-control-select-placeholder {
+	}
+}
+*/
+/* -----------------------------------------------------------------------------
+ *
+ * Form Control: Select, custom styled
+ *
+ * Example:
+ * <div class="form-field-group">
+ *   <label class="form-control-label" for="select">Select Control</label>
+ * 	 <div class="form-control-select">
+ * 	   <select id="select" name="select">
+ * 	     <option value="" hidden="" disabled="disabled" selected="selected">Placeholder</option>
+ * 	     <option value="">Option 1</option>
+ * 	     <option value="">Option 2</option>
+ *       <option value="">Option 3</option>
+ *      </select>
+ *   </div>
+ * </div>
+ *
+ * ----------------------------------------------------------------------------- */
+.form-control-select {
+    cursor: pointer;
+    position: relative;
+}
+.form-control-select:hover:after, .form-control-select:focus:after, .form-control-select:active:after {
+    background-color: darken(lightgrey, 0.25);
+}
+.form-control-select:after {
+    font-family: 'core-icons';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    -webkit-font-feature-settings: normal;
+       -moz-font-feature-settings: normal;
+            font-feature-settings: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: auto;
+    display: block;
+    -webkit-transition: all 0.15s ease-in-out;
+    transition: all 0.15s ease-in-out;
+    content: '\e900';
+    text-align: center;
+    height: 43px;
+    width: 45px;
+    line-height: 45px;
+    background-color: lightgrey;
+    color: darken(grey, 0.15);
+    position: absolute;
+    font-size: 25px;
+    right: 1px;
+    top: 1px;
+    pointer-events: none;
+    -webkit-border-top-right-radius: 0;
+            border-top-right-radius: 0;
+    -webkit-border-bottom-right-radius: 0;
+            border-bottom-right-radius: 0;
+}
+.form-control-select select {
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    padding-right: 65px;
+}
+.form-control-select select::-ms-expand {
+    display: none;
+}
+textarea {
+    -webkit-transition: all 0.15s ease-in-out;
+    transition: all 0.15s ease-in-out;
+    padding: 0 20px;
+    border: 1px solid lightgrey;
+    -webkit-border-radius: 0;
+            border-radius: 0;
+    background-color: #fff;
+    display: block;
+    width: 100%;
+    height: 45px;
+    color: #000;
+    letter-spacing: normal;
+    text-transform: none;
+    font: normal 400 16px / 1.5 "proxima-nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    resize: none;
+    padding: 14px 20px;
+    height: 225px;
+}
+.form-control-required label:after {
     padding-left: 4px;
     color: lighten(red, 0.1);
     content: '*';
