@@ -1378,6 +1378,7 @@ img {
 .wp-embed-wrap {
     position: relative;
     aspect-ratio: '16:9';
+    overflow: hidden;
 }
 .wp-embed-wrap iframe,
 	.wp-embed-wrap object,
@@ -1406,6 +1407,7 @@ img {
 }
 .wp-embed-lazy .wp-embed-lazy-launch {
     display: block;
+    height: 100%;
     -webkit-transition: all .15s ease-in-out;
     transition: all .15s ease-in-out;
 }
@@ -1628,28 +1630,28 @@ a.btn {
     opacity: 1;
     letter-spacing: normal;
     text-transform: none;
-    font: normal 400 16px / 1.5 "proxima-nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font: normal 400 16px / inherit "proxima-nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 :-moz-placeholder {
     color: grey;
     opacity: 1;
     letter-spacing: normal;
     text-transform: none;
-    font: normal 400 16px / 1.5 "proxima-nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font: normal 400 16px / inherit "proxima-nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 ::-moz-placeholder {
     color: grey;
     opacity: 1;
     letter-spacing: normal;
     text-transform: none;
-    font: normal 400 16px / 1.5 "proxima-nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font: normal 400 16px / inherit "proxima-nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 :-ms-input-placeholder {
     color: grey;
     opacity: 1;
     letter-spacing: normal;
     text-transform: none;
-    font: normal 400 16px / 1.5 "proxima-nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font: normal 400 16px / inherit "proxima-nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 /* -----------------------------------------------------------------------------
  * Focus
@@ -2140,6 +2142,9 @@ option {
        -moz-appearance: none;
             appearance: none;
     padding-right: 65px;
+}
+.form-control-select select::-ms-expand {
+    display: none;
 }
 textarea {
     -webkit-transition: all .15s ease-in-out;

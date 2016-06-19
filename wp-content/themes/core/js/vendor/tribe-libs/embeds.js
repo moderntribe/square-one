@@ -4,10 +4,10 @@
  * specifically YouTube & Vimeo oembeds.
  */
 
+import _ from 'lodash';
 import { on } from '../../src/utils/events';
 
 const el = document.getElementsByClassName('wp-embed-lazy');
-let $el;
 
 /**
  * @function setOembedDisplayMode
@@ -15,13 +15,11 @@ let $el;
  */
 
 const setOembedDisplayMode = () => {
-	$el.each(() => {
-		const $this = $(this);
-
-		if ($this.width() >= 500) {
-			$this.removeClass('small-display');
+	_.forEach(el, (embed) => {
+		if ($(embed).width() >= 500) {
+			$(embed).removeClass('small-display');
 		} else {
-			$this.addClass('small-display');
+			$(embed).addClass('small-display');
 		}
 	});
 };
@@ -115,8 +113,6 @@ const bindEvents = () => {
 
 const embeds = () => {
 	if (el) {
-		$el = $(el);
-
 		bindEvents();
 
 		setOembedDisplayMode();
