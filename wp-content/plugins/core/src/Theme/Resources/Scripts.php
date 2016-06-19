@@ -17,8 +17,7 @@ class Scripts {
 		$js_dir  = trailingslashit( get_template_directory_uri() ) . 'js/';
 		$version = tribe_get_version();
 
-		// Custom jQuery
-		// We version 2 due to browser support & can save large amounts of weight
+		// Custom jQuery (version 2.2.4, IE9+)
 		wp_deregister_script( 'jquery' );
 
 		if ( ! defined( 'SCRIPT_DEBUG' ) || SCRIPT_DEBUG === false ) { // Production
