@@ -1155,6 +1155,7 @@ img {
 .wp-embed-wrap {
     position: relative;
     aspect-ratio: '16:9';
+    overflow: hidden;
 }
 .wp-embed-wrap iframe,
 	.wp-embed-wrap object,
@@ -1185,6 +1186,7 @@ img {
     display: block;
     -webkit-transition: all .15s ease-in-out;
     transition: all .15s ease-in-out;
+    height: 100%;
 }
 .wp-embed-lazy .wp-embed-lazy-launch:hover .icon-play, .wp-embed-lazy .wp-embed-lazy-launch:focus .icon-play {
     border-color: #fff;
