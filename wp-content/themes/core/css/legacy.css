@@ -1184,17 +1184,17 @@ img {
 }
 .wp-embed-lazy .wp-embed-lazy-launch {
     display: block;
-    -webkit-transition: all .15s ease-in-out;
-    transition: all .15s ease-in-out;
+    -webkit-transition: all 0.15s ease-in-out;
+    transition: all 0.15s ease-in-out;
     height: 100%;
 }
 .wp-embed-lazy .wp-embed-lazy-launch:hover .icon-play, .wp-embed-lazy .wp-embed-lazy-launch:focus .icon-play {
     border-color: #fff;
 }
 .wp-embed-lazy .wp-embed-lazy-launch:hover .icon-play:before, .wp-embed-lazy .wp-embed-lazy-launch:focus .icon-play:before {
-    -webkit-transform: scale(.65);
-        -ms-transform: scale(.65);
-            transform: scale(.65);
+    -webkit-transform: scale(0.65);
+        -ms-transform: scale(0.65);
+            transform: scale(0.65);
 }
 .wp-embed-lazy .wp-embed-lazy-launch:focus:after {
     height: 5px;
@@ -1207,15 +1207,15 @@ img {
 }
 .wp-embed-lazy .wp-embed-lazy-caption {
     opacity: 0;
-    -webkit-transition: opacity .15s ease-in;
-    transition: opacity .15s ease-in;
+    -webkit-transition: opacity 0.15s ease-in;
+    transition: opacity 0.15s ease-in;
     position: absolute;
     left: 25px;
     bottom: 20px;
     background: #000000;
-    background: rgba(0, 0, 0, .7);
+    background: rgba(0, 0, 0, 0.7);
     border: 1px solid #ffffff;
-    border: 1px solid rgba(255, 255, 255, .2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     color: #fff;
     padding: 20px 25px 20px 75px;
     max-width: 90%;
@@ -1231,8 +1231,8 @@ img {
     left: 15px;
     top: 50%;
     margin-top: -24px;
-    -webkit-transition: opacity .15s ease-in-out, border .425s;
-    transition: opacity .15s ease-in-out, border .425s;
+    -webkit-transition: opacity 0.15s ease-in-out, border 0.425s;
+    transition: opacity 0.15s ease-in-out, border 0.425s;
     border: 2px solid transparent;
     -webkit-border-radius: 50%;
             border-radius: 50%;
@@ -1242,26 +1242,26 @@ img {
     position: relative;
     left: 3px;
     top: 1px;
-    -webkit-transition: opacity .15s ease-in-out, -webkit-transform .425s;
-    transition: opacity .15s ease-in-out, -webkit-transform .425s;
-    transition: opacity .15s ease-in-out, transform .425s;
-    transition: opacity .15s ease-in-out, transform .425s, -webkit-transform .425s;
+    -webkit-transition: opacity 0.15s ease-in-out, -webkit-transform 0.425s;
+    transition: opacity 0.15s ease-in-out, -webkit-transform 0.425s;
+    transition: opacity 0.15s ease-in-out, transform 0.425s;
+    transition: opacity 0.15s ease-in-out, transform 0.425s, -webkit-transform 0.425s;
 }
 .wp-embed-lazy .wp-embed-lazy-prompt {
     display: block;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: .02em;
+    letter-spacing: 0.02em;
     color: #21a6cb;
     font-size: 14px;
 }
 .wp-embed-lazy .wp-embed-lazy-title {
     font-size: 18px;
-    letter-spacing: .02em;
+    letter-spacing: 0.02em;
     display: block;
     margin-top: 6px;
     padding-top: 5px;
-    border-top: 1px solid rgba(255, 255, 255, .2);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 /* CASE: Low Resolution */
 .wp-embed-lazy.low-resolution .wp-embed-lazy-thumb {
@@ -1270,7 +1270,7 @@ img {
 /* CASE: Mobile */
 .wp-embed-lazy.small-display .wp-embed-lazy-caption {
     background: #000000;
-    background: rgba(0, 0, 0, .4);
+    background: rgba(0, 0, 0, 0.4);
     border: 0;
     padding: 0;
     width: 100%;
