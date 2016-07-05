@@ -17,6 +17,10 @@ class Embeds {
 
 	public function customize_oembed_output( $html, $data, $url ) {
 
+		if ( is_admin() ) {
+			return $html;
+		}
+
 		if ( ! in_array( $data->provider_name, [ 'YouTube', 'Vimeo' ], true ) ) {
 			return $html;
 		}
