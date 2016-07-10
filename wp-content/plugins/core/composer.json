@@ -16,7 +16,11 @@
     "psr-4": {
       "Tribe\\Project\\": "src/",
       "Tribe\\Libs\\": "vendor/moderntribe/tribe-libs/src/"
-    }
+    },
+    "files": [
+      "vendor/johnbillion/extended-cpts/extended-cpts.php",
+      "vendor/johnbillion/extended-taxos/extended-taxos.php"
+    ]
   },
   "require-dev": {
     "lucatume/wp-browser": "^1.9",
