@@ -1,7 +1,7 @@
 <?php
 namespace Tribe\Project\Settings;
 
-class General extends Abstract_Settings {
+class General extends Contracts\ACF_Settings {
 
 	const DEMO_SETTING_ONE = 'demo_setting_one';
 	const DEMO_SETTING_TWO = 'demo_setting_two';
@@ -18,7 +18,7 @@ class General extends Abstract_Settings {
 		return 'options-general.php';
 	}
 
-	protected function get_fields() {
+	public function get_fields() {
 		return [
 			[
 				'key'               => 'field_576ae96f654cf',
