@@ -11,6 +11,14 @@ namespace Tribe\Project\Settings\Contracts;
  */
 abstract class ACF_Settings extends Base_Settings {
 
+
+	/**
+	 * Return array of ACF fields
+	 *
+	 * @return array
+	 */
+	abstract public function get_fields();
+
 	/**
 	 * Get setting value
 	 *

@@ -25,13 +25,6 @@ interface Settings_Builder {
 	public function get_capability();
 
 	/**
-	 * Return array of ACF fields
-	 *
-	 * @return array
-	 */
-	public function get_fields();
-
-	/**
 	 * Return slug of the parent menu where you want the settings page
 	 *
 	 * @return string
