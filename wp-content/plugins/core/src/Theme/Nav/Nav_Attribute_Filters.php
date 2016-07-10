@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Tribe\Project\Nav;
+namespace Tribe\Project\Theme\Nav;
 
 /**
  * Class Nav_Attribute_Filters
@@ -77,6 +77,11 @@ class Nav_Attribute_Filters {
 	 */
 	public function customize_menu_item_atts( $atts, $item, $args, $depth ) {
 
+		/*
+		 *  WP Core docs claim that $args is an array, but it comes
+		 * in as an object thanks to casting in wp_nav_menu()
+		 */
+		$args = (array) $args;
 		// Primary / Site Navigation
 		if ( $args[ 'theme_location' ] === 'primary' ) {
 			// Top Level Items

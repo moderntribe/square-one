@@ -10,6 +10,7 @@ use Tribe\Project\Theme\Body_Classes;
 use Tribe\Project\Theme\Image_Links;
 use Tribe\Project\Theme\Image_Sizes;
 use Tribe\Project\Theme\Image_Wrap;
+use Tribe\Project\Theme\Nav\Nav_Attribute_Filters;
 use Tribe\Project\Theme\Oembed_Wrap;
 use Tribe\Project\Theme\Resources\Editor_Styles;
 use Tribe\Project\Theme\Resources\Emoji_Disabler;
@@ -79,6 +80,10 @@ class Theme_Provider implements ServiceProviderInterface {
 			return new Editor_Styles();
 		};
 
+		$container[ 'theme.nav.attribute_filters' ] = function( Container $container ) {
+			return new Nav_Attribute_Filters();
+		};
+
 		$this->hook( $container );
 	}
 
@@ -97,6 +102,7 @@ class Theme_Provider implements ServiceProviderInterface {
 		$container[ 'service_loader' ]->enqueue( 'theme.resources.scripts', 'hook' );
 		$container[ 'service_loader' ]->enqueue( 'theme.resources.styles', 'hook' );
 		$container[ 'service_loader' ]->enqueue( 'theme.resources.editor_styles', 'hook' );
+		$container[ 'service_loader' ]->enqueue( 'theme.nav.attribute_filters', 'hook' );
 	}
 
 }
