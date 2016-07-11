@@ -10,13 +10,14 @@ class Social_Links {
 
 	public function __construct( array $networks, $labeled = true ) {
 		$this->networks = $networks;
-		$this->labeled = (bool)$labeled;
+		$this->labeled = (bool) $labeled;
 	}
 
 	/**
 	 * Loops over enabled networks and builds an array of formatted
 	 * share links
 	 **
+	 *
 	 * @return array
 	 */
 	public function get_links() {
@@ -24,7 +25,7 @@ class Social_Links {
 		$data = $this->get_data();
 
 		if ( empty( $data ) ) {
-			return [];
+			return [ ];
 		}
 
 		$links = [ ];
@@ -46,7 +47,7 @@ class Social_Links {
 		if ( empty( $links ) ) {
 			return '';
 		}
-		$links = array_map( function( $link ) {
+		$links = array_map( function ( $link ) {
 			return '<li>' . $link . '</li>';
 		}, $links );
 		return '<ul class="social-share-networks">' . implode( $links ) . '</ul>';
@@ -113,8 +114,8 @@ class Social_Links {
 	/**
 	 * Tests the network and returns a formatted a tag for that network with post/loop data injected into it.
 	 *
-	 * @param string $network    The network key.
-	 * @param array  $data       Share data supplied by get_social_share_data()
+	 * @param string $network The network key.
+	 * @param array  $data    Share data supplied by get_social_share_data()
 	 * @return string
 	 */
 	private function build_link( $network, $data ) {
