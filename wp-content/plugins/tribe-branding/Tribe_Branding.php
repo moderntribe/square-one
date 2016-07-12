@@ -114,8 +114,8 @@ class Tribe_Branding {
 		// Clean up customizer a bit
 		$wp_customize->remove_section( 'colors' );
 		$wp_customize->remove_section( 'static_front_page' );
-		$wp_customize->remove_panel( 'nav_menus' );
-		$wp_customize->remove_panel( 'widgets' );
+		//$wp_customize->remove_panel( 'nav_menus' );
+		//$wp_customize->remove_panel( 'widgets' );
 		$wp_customize->remove_control( 'site_icon' );
 
 		// Add branding section
