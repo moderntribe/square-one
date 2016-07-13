@@ -30,6 +30,9 @@
 
 		</ul><!-- .entry-meta -->
 
+		<?php // Components: Social Share
+		get_template_part( 'components/social/share' ); ?>
+
 	</footer>
 
 </article><!-- post -->

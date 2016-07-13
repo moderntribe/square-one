@@ -1,7 +1,4 @@
-<?php // Menu: Footer
-use Tribe\Project\Nav\Walker\Core_Walker_Nav_Menu;
-
-if( has_nav_menu( 'footer' ) ) { ?>
+<?php if( has_nav_menu( 'secondary' ) ) { ?>
 
 	<nav>
 
@@ -10,17 +7,16 @@ if( has_nav_menu( 'footer' ) ) { ?>
 		<ol>
 			<?php
 			$defaults = array(
-				'theme_location'  => 'footer',
+				'theme_location'  => 'secondary',
 				'container'       => false,
 				'container_class' => '',
 				'menu_class'      => '',
 				'menu_id'         => '',
 				'depth'           => 1,
 				'items_wrap'      => '%3$s',
-				'walker'          => new Core_Walker_Nav_Menu,
 				'fallback_cb'     => false
 			);
-			wp_nav_menu( $defaults ); ?>
+			\Tribe\Project\Theme\Nav\Menu::menu( $defaults ); ?>
 		</ol>
 
 	</nav>

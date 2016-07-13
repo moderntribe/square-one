@@ -10,7 +10,8 @@ use Tribe\Project\Theme\Body_Classes;
 use Tribe\Project\Theme\Image_Links;
 use Tribe\Project\Theme\Image_Sizes;
 use Tribe\Project\Theme\Image_Wrap;
-use Tribe\Project\Theme\Oembed_Wrap;
+use Tribe\Project\Theme\Nav\Nav_Attribute_Filters;
+use Tribe\Project\Theme\Oembed_Filter;
 use Tribe\Project\Theme\Resources\Editor_Styles;
 use Tribe\Project\Theme\Resources\Emoji_Disabler;
 use Tribe\Project\Theme\Resources\Fonts;
@@ -48,8 +49,8 @@ class Theme_Provider implements ServiceProviderInterface {
 		$container[ 'theme.images.responsive_disabler' ] = function ( Container $container ) {
 			return new WP_Responsive_Image_Disabler();
 		};
-		$container[ 'theme.oembed.wrap' ] = function ( Container $container ) {
-			return new Oembed_Wrap();
+		$container[ 'theme.oembed' ] = function ( Container $container ) {
+			return new Oembed_Filter();
 		};
 		$container[ 'theme.supports' ] = function ( Container $container ) {
 			return new Supports();
@@ -87,6 +88,10 @@ class Theme_Provider implements ServiceProviderInterface {
 			return new Editor_Styles();
 		};
 
+		$container[ 'theme.nav.attribute_filters' ] = function( Container $container ) {
+			return new Nav_Attribute_Filters();
+		};
+
 		$this->hook( $container );
 	}
 
@@ -96,7 +101,7 @@ class Theme_Provider implements ServiceProviderInterface {
 		$container[ 'service_loader' ]->enqueue( 'theme.images.wrap', 'hook' );
 		$container[ 'service_loader' ]->enqueue( 'theme.images.links', 'hook' );
 		$container[ 'service_loader' ]->enqueue( 'theme.images.responsive_disabler', 'hook' );
-		$container[ 'service_loader' ]->enqueue( 'theme.oembed.wrap', 'hook' );
+		$container[ 'service_loader' ]->enqueue( 'theme.oembed', 'hook' );
 		$container[ 'service_loader' ]->enqueue( 'theme.supports', 'hook' );
 		$container[ 'service_loader' ]->enqueue( 'theme.resources.login', 'hook' );
 		$container[ 'service_loader' ]->enqueue( 'theme.resources.legacy', 'hook' );
@@ -105,6 +110,7 @@ class Theme_Provider implements ServiceProviderInterface {
 		$container[ 'service_loader' ]->enqueue( 'theme.resources.scripts', 'hook' );
 		$container[ 'service_loader' ]->enqueue( 'theme.resources.styles', 'hook' );
 		$container[ 'service_loader' ]->enqueue( 'theme.resources.editor_styles', 'hook' );
+		$container[ 'service_loader' ]->enqueue( 'theme.nav.attribute_filters', 'hook' );
 	}
 
 }

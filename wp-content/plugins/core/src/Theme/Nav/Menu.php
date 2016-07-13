@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Tribe\Project\Nav;
+namespace Tribe\Project\Theme\Nav;
 
 use Tribe\Libs\Cache\Cache;
 
