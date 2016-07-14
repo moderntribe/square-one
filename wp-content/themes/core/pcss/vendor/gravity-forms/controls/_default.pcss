@@ -16,3 +16,99 @@
 		@mixin form-control;
 	}
 }
+
+/* -----------------------------------------------------------------------------
+ *
+ * Form: Control Icon
+ *
+ * ----------------------------------------------------------------------------- */
+
+.form-control-icon .ginput_container,
+.form-control-icon-complex .ginput_complex span:not(.address_country) {
+	&:before {
+		@mixin icon;
+	}
+
+	@mixin form-control-icon;
+}
+
+/* Simple Fields */
+.ginput_container {
+	/* Phone */
+	.gf-phone.form-control-icon & {
+		&:before {
+			content: var(--gf-control-icon-phone);
+		}
+	}
+
+	/* Name */
+	.gf-name.form-control-icon & {
+		&:before {
+			content: var(--gf-control-icon-name);
+		}
+	}
+
+	/* Email */
+	.gf-email.form-control-icon & {
+		&:before {
+			content: var(--gf-control-icon-email);
+		}
+	}
+
+	/* Date */
+	.gf-date.form-control-icon & {
+		&:before {
+			content: var(--gf-control-icon-date);
+		}
+	}
+
+	/* Address */
+	.gf-address.form-control-icon & {
+		&:before {
+			content: var(--gf-control-icon-address);
+		}
+	}
+
+	/* Website / URL */
+	.gf-url.form-control-icon & {
+		&:before {
+			content: var(--gf-control-icon-url);
+		}
+	}
+
+}
+
+/* Complex Fields */
+.ginput_complex span:not(.address_country) {
+
+	.form-control-icon-complex & {
+		&:before {
+			right: var(--gf-control-icon-complex-position-right);
+		}
+		&:nth-of-type(even) {
+			&:before {
+				right: var(--form-control-icon-position-right);
+			}
+		}
+		&.ginput_full {
+			&:before {
+				right: var(--form-control-icon-position-right);
+			}
+		}
+	}
+
+	/* Name */
+	.gf-name.form-control-icon-complex & {
+		&:before {
+			content: var(--gf-control-icon-name);
+		}
+	}
+
+	/* Address */
+	.gf-address.form-control-icon-complex & {
+		&:before {
+			content: var(--gf-control-icon-address);
+		}
+	}
+
+}

@@ -30,21 +30,5 @@
  * ----------------------------------------------------------------------------- */
 
 .form-control-icon {
-	position: relative;
-	input,
-	.form-control {
-		padding-right: var(--form-control-icon-padding-right);
-	}
-	&:before {
-		position: absolute;
-		right: 0;
-		top: 50%;
-		color: var(--form-control-icon-color);
-		height: 100%;
-		width: var(--form-control-icon-width);
-		line-height: 0;
-		text-align: center;
-		z-index: 1;
-		font-size: var(--form-control-icon-font-size);
-	}
+	@mixin form-control-icon;
 }

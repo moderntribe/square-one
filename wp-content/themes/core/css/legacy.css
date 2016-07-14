@@ -508,6 +508,11 @@ embed {
  * ----------------------------------------------------------------------------- */
 /* -----------------------------------------------------------------------------
  *
+ * Form Control: Icons
+ *
+ * ----------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ *
  * Triangles
  *
  * ----------------------------------------------------------------------------- */
@@ -1781,18 +1786,17 @@ legend {
 .form-control-icon {
     position: relative;
 }
-.form-control-icon input,
-	.form-control-icon .form-control {
+.form-control-icon input {
     padding-right: 45px;
 }
 .form-control-icon:before {
     position: absolute;
     right: 0;
-    top: 50%;
+    top: 0;
     color: lightgrey;
     height: 100%;
     width: 45px;
-    line-height: 0;
+    line-height: 45px;
     text-align: center;
     z-index: 1;
     font-size: 20px;
