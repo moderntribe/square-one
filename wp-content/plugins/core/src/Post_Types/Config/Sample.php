@@ -18,9 +18,9 @@ class Sample extends Post_Type_Config {
 
 	public function get_labels() {
 		return [
-			'singular' => __( 'Sample', 'afs' ),
-			'plural'   => __( 'Samples', 'afs' ),
-			'slug'     => __( 'samples', 'afs' ),
+			'singular' => __( 'Sample', 'tribe' ),
+			'plural'   => __( 'Samples', 'tribe' ),
+			'slug'     => __( 'samples', 'tribe' ),
 		];
 	}
 

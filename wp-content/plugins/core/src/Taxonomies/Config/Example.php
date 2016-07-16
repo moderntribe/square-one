@@ -18,9 +18,9 @@ class Example extends Taxonomy_Config {
 
 	public function get_labels() {
 		return [
-			'singular' => __( 'Example', 'afs' ),
-			'plural' => __( 'Examples', 'afs' ),
-			'slug' => __( 'examples', 'afs' ),
+			'singular' => __( 'Example', 'tribe' ),
+			'plural' => __( 'Examples', 'tribe' ),
+			'slug' => __( 'examples', 'tribe' ),
 		];
 	}
 
