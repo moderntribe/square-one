@@ -59,7 +59,7 @@ final class Global_Service_Provider extends Tribe_Service_Provider {
 	];
 
 	protected $taxonomies = [
-		'Example',
+		'Example' => [ 'Sample' ],
 	];
 
 	public function register( Container $container ) {
