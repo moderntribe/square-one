@@ -12,9 +12,7 @@ class Oembed_Filter {
 	];
 
 	public function hook() {
-		if ( ! is_admin() ) {
-			add_filter( 'oembed_dataparse', [ $this, 'setup_lazyload_html' ], 10, 3 );
-		}
+		add_filter( 'oembed_dataparse', [ $this, 'setup_lazyload_html' ], 10, 3 );
 		add_filter( 'embed_oembed_html', [ $this, 'wrap_oembed_shortcode_output' ], 99, 4 );
 	}
 
