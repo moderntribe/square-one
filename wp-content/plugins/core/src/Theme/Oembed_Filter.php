@@ -55,7 +55,7 @@ class Oembed_Filter {
 
 		$html = '<figure class="'. esc_attr( $figure_class ) .'">';
 		$html .= '<a href="'. esc_url( $url ) .'" class="wp-embed-lazy-launch" title="'. esc_attr( $data->title ) .'" data-embed-id="'. esc_attr( $embed_id ) .'">';
-		$html .= '<img class="wp-embed-lazy-thumb lazyload" data-src="'. esc_url( $video_thumb ) .'" alt="'. esc_attr( $data->title ) .'" />';
+		$html .= '<img class="wp-embed-lazy-thumb lazyload" src="'. trailingslashit( get_template_directory_uri() ) . 'img/shims/16x9.png' .'" data-src="'. esc_url( $video_thumb ) .'" alt="'. esc_attr( $data->title ) .'" />';
 		$html .= '<figcaption class="wp-embed-lazy-caption">';
 		$html .= '<i class="icon icon-play"></i>';
 		$html .= '<span class="wp-embed-lazy-prompt">' . __( 'Play Video', 'tribe' ) . '</span>';
