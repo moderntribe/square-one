@@ -9,6 +9,8 @@ use Tribe\Project\Service_Providers\Cache_Provider;
 use Tribe\Project\Service_Providers\Panel_Intializer_Provider;
 use Tribe\Project\Service_Providers\Theme_Customizer_Provider;
 use Tribe\Project\Service_Providers\Global_Service_Provider;
+use Tribe\Project\Service_Providers\Theme_Provider;
+use Tribe\Project\Service_Providers\Settings_Provider;
 
 class Core {
 
@@ -44,9 +46,11 @@ class Core {
 	private function load_service_providers() {
 		$this->container->register( new Asset_Provider() );
 		$this->container->register( new Cache_Provider() );
+		$this->container->register( new Theme_Provider() );
 		$this->container->register( new Theme_Customizer_Provider() );
 		$this->container->register( new Panel_Intializer_Provider() );
 		$this->container->register( new Global_Service_Provider() );
+		$this->container->register( new Settings_Provider() );
 	}
 
 	public function container() {

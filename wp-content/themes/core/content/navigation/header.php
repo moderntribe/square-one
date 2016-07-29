@@ -1,7 +1,6 @@
-<?php // Menu: Primary
-if( has_nav_menu( 'primary' ) ) { ?>
+<?php if( has_nav_menu( 'primary' ) ) { ?>
 
-	<nav aria-label="Primary Navigation" itemscope itemtype="https://schema.org/SiteNavigationElement">
+	<nav>
 
 		<h5 class="visual-hide">Primary Navigation</h5>
 
@@ -15,12 +14,12 @@ if( has_nav_menu( 'primary' ) ) { ?>
 				'menu_id'         => '',
 				'depth'           => 3,
 				'items_wrap'      => '%3$s',
-				'walker'          => new Core_Walker_Nav_Menu,
 				'fallback_cb'     => false
 			);
-			wp_nav_menu( $defaults ); ?>
+			\Tribe\Project\Theme\Nav\Menu::menu( $defaults );
+			?>
 		</ol>
 
-	</nav><!-- nav -->
+	</nav>
 
 <?php } ?>

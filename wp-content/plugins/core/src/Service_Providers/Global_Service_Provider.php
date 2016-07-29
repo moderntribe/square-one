@@ -22,8 +22,8 @@ use Tribe\Project\P2P\Titles_Filter;
 final class Global_Service_Provider extends Tribe_Service_Provider {
 
 	protected $nav_menus = [
-		'primary' => 'Menu: Site',
-		'footer'  => 'Menu: Footer',
+		'primary'   => 'Menu: Site',
+		'secondary' => 'Menu: Footer',
 	];
 
 	protected $p2p_relationships = [
@@ -50,6 +50,7 @@ final class Global_Service_Provider extends Tribe_Service_Provider {
 	];
 
 	protected $post_types = [
+		'Sample',
 		'Page',
 		'Post',
 		'Event',
@@ -58,7 +59,7 @@ final class Global_Service_Provider extends Tribe_Service_Provider {
 	];
 
 	protected $taxonomies = [
-
+		'Example' => [ 'Sample' ],
 	];
 
 	public function register( Container $container ) {

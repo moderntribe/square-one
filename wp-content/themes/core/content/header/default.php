@@ -11,6 +11,6 @@
 		<?php // Search: Form
 		get_template_part( 'content/search/searchform' ); ?>
 
-	</div><!-- .content-wrap -->
+	</div>
 
-</header><!-- .site-header -->
+</header>

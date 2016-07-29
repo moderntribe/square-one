@@ -1,26 +1,24 @@
-<?php // Menu: Footer
-if( has_nav_menu( 'footer' ) ) { ?>
+<?php if( has_nav_menu( 'secondary' ) ) { ?>
 
-	<nav aria-label="Secondary Navigation" itemscope itemtype="https://schema.org/SiteNavigationElement">
+	<nav>
 
 		<h5 class="visual-hide">Secondary Navigation</h5>
 
 		<ol>
 			<?php
 			$defaults = array(
-				'theme_location'  => 'footer',
+				'theme_location'  => 'secondary',
 				'container'       => false,
 				'container_class' => '',
 				'menu_class'      => '',
 				'menu_id'         => '',
 				'depth'           => 1,
 				'items_wrap'      => '%3$s',
-				'walker'          => new Core_Walker_Nav_Menu,
 				'fallback_cb'     => false
 			);
-			wp_nav_menu( $defaults ); ?>
+			\Tribe\Project\Theme\Nav\Menu::menu( $defaults ); ?>
 		</ol>
 
-	</nav><!-- nav -->
+	</nav>
 
 <?php } ?>

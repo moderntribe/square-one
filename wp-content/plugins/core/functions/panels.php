@@ -3,19 +3,23 @@
 /**
  * Output panel title, built for SEO
  *
+ * @param string $title   Panel title
+ * @param string $classes Any CSS classes to apply to the title tag.
+ *
  * @since tribe-square-one 1.0
  * @return string
  */
 
-function the_panel_title( $title = null, $classes = null ) {
+function the_panel_title( $title = null, $classes = 'panel-title' ) {
 
-	if ( empty( $title ) )
+	if ( empty( $title ) ) {
 		return;
+	}
 
 	static $panel_title = '';
 	$class = ( ! empty( $classes ) ) ? ' class="'. $classes .'"' : '';
 
-	if ( empty( $panel_title ) && ( ! is_front_page() ) ) {
+	if ( empty( $panel_title ) && ( get_the_content() == '' && ! is_front_page() ) ) {
 		$panel_title = '<h1'. $class .'>' . $title . '</h1>';
 	} else {
 		$panel_title = '<h2'. $class .'>' . $title . '</h2>';
@@ -35,7 +39,7 @@ function the_panel_title( $title = null, $classes = null ) {
  *
  * @return bool|string  $tag                The link tag HTML.
  *
- * @since conroe 1.0
+ * @since tribe-square-one 1.0
  */
 function get_panel_link( $link, $alt_label = 'Read More', $force_alt_label = false, $css_class = '' ) {
 
@@ -61,7 +65,7 @@ function get_panel_link( $link, $alt_label = 'Read More', $force_alt_label = fal
  * @param bool          $force_alt_label    Force the alternate label display?
  * @param string        $css_class          Any CSS classes to apply to the <a> tag.
  *
- * @since conroe 1.0
+ * @since tribe-square-one 1.0
  */
 function the_panel_link( $link, $alt_label = 'Read More', $force_alt_label = false, $css_class = '' ) {
 	if ( isset( $link['url'] ) ) {

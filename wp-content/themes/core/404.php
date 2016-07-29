@@ -9,8 +9,8 @@
 
 			<p>Houston, we have a problem...</p>
 
-		</div><!-- .content-wrap -->
+		</div>
 
-	</main><!-- main -->
+	</main>
 
 <?php get_footer(); ?>

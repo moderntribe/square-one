@@ -9,10 +9,10 @@ class Tribe_AdminDashboard {
 	 * Set up the hooks
 	 */
 	private function add_hooks() {
-		add_action( 'do_meta_boxes', array( $this, 'hide_dashboard_widgets' ), 10, 3 );
-		add_filter( 'get_user_option_screen_layout_dashboard', array( $this, 'force_one_col' ) );
-		add_filter( 'get_user_metadata', array( $this, 'always_show_welcome' ), 10, 3 );
-		add_action( 'welcome_panel', array( $this, 'dashboard_panel' ) );
+		//add_action( 'do_meta_boxes', array( $this, 'hide_dashboard_widgets' ), 10, 3 );
+		//add_filter( 'get_user_option_screen_layout_dashboard', array( $this, 'force_one_col' ) );
+		//add_filter( 'get_user_metadata', array( $this, 'always_show_welcome' ), 10, 3 );
+		//add_action( 'welcome_panel', array( $this, 'dashboard_panel' ) );
 	}
 
 	/**
@@ -293,4 +293,3 @@ class Tribe_AdminDashboard {
 
 	protected function __construct() {}
 }
-

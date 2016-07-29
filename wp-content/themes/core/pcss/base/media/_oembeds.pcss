@@ -1,0 +1,145 @@
+.wp-embed-lazy {
+
+	background: var(--embed-bgd-color);
+
+	br,
+	p {
+		display: none;
+	}
+
+	.wp-embed-lazy-thumb {
+		margin: 0;
+		width: 100%;
+		height: 100%;
+		opacity: 0;
+		position: absolute;
+		top: 0;
+		left: 0;
+		&.lazyloaded ~ {
+			.wp-embed-lazy-caption {
+				opacity: 1;
+				transition: opacity 250ms 300ms ease-in;
+			}
+		}
+	}
+
+	.wp-embed-lazy-launch {
+		display: block;
+		transition: var(--transition);
+		height: 100%;
+		&:hover,
+		&:focus {
+			.icon-play {
+				border-color: var(--embed-icon-border-hover);
+				&:before {
+					transform: scale(0.65);
+				}
+			}
+		}
+		&:focus {
+			&:after {
+				height: 5px;
+				width: 100%;
+				left: 0;
+				bottom: 0;
+				content: '';
+				position: absolute;
+				background: var(--embed-color-focus);
+			}
+		}
+	}
+
+	.wp-embed-lazy-caption {
+		opacity: 0;
+		transition: opacity 0.15s ease-in;
+		position: absolute;
+		left: 25px;
+		bottom: 20px;
+		background: var(--embed-caption-bgd-color);
+		border: 1px solid var(--embed-caption-border);
+		color: var(--embed-caption-color);
+		padding: 20px 25px 20px 75px;
+		max-width: 90%;
+
+		@media (--viewport-medium) {
+			left: 20px;
+		}
+	}
+
+	.icon-play {
+		position: absolute;
+		font-size: 44px;
+		left: 15px;
+		top: 50%;
+		margin-top: -24px;
+		transition: opacity 0.15s ease-in-out, border 0.425s;
+		border: 2px solid var(--embed-icon-border);
+		border-radius: 50%;
+		&:before {
+			display: inline-block;
+			position: relative;
+			left: 3px;
+			top: 1px;
+			transition: opacity 0.15s ease-in-out, transform 0.425s;
+		}
+	}
+
+	.wp-embed-lazy-prompt {
+		display: block;
+		font-weight: var(--font-weight-bold);
+		text-transform: uppercase;
+		letter-spacing: 0.02em;
+		color: var(--embed-prompt);
+		font-size: 14px;
+	}
+
+	.wp-embed-lazy-title {
+		font-size: 18px;
+		letter-spacing: 0.02em;
+		display: block;
+		margin-top: 6px;
+		padding-top: 5px;
+		border-top: 1px solid var(--embed-caption-border);
+	}
+
+	/* CASE: Low Resolution */
+	&.low-resolution {
+		.wp-embed-lazy-thumb {
+			margin-top: -9.4%;
+		}
+	}
+
+	/* CASE: Mobile */
+	&.small-display {
+
+		.wp-embed-lazy-caption {
+			background: var(--embed-caption-bgd-color-mobile);
+			border: 0;
+			padding: 0;
+			width: 100%;
+			height: 100%;
+			max-width: 100%;
+			left: 0;
+			bottom: 0;
+		}
+
+		.wp-embed-lazy-title {
+			display: none;
+		}
+
+		.wp-embed-lazy-prompt {
+			color: var(--embed-prompt-mobile);
+			width: 100%;
+			bottom: 15%;
+			position: absolute;
+			text-align: center;
+		}
+
+		.icon-play {
+			left: 50%;
+			margin-left: -26px;
+		}
+
+	}
+
+}

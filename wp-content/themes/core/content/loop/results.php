@@ -1,4 +1,4 @@
-<article class="<?php echo get_post_type() .'-'. get_the_ID(); ?> loop-item">
+<article class="loop-item">
 
 	<header>
 		
@@ -7,18 +7,13 @@
 			<a href="<?php the_permalink(); ?>" rel="bookmark">
 				<?php the_title(); ?>
 			</a>
-		</h3><!-- .loop-item-title -->
+		</h3>
 
 	</header>
 
 	<?php // Featured Image
-	if ( has_post_thumbnail() ) { ?>
-		<figure class="loop-item-featured-img">
-			<a href="<?php the_permalink(); ?>" rel="bookmark">
-    			<?php the_post_thumbnail( 'core-full' ); ?>
-			</a>
-    	</figure><!-- .loop-item-featured-img -->
-	<?php } ?>
+	$options = [ 'wrapper_class' => 'loop-item-featured-img', 'link' => get_permalink() ];
+	the_tribe_image( get_post_thumbnail_id(), $options ); ?>
 
 	<?php // Excerpt
 	the_excerpt(); ?>
@@ -42,11 +37,8 @@
 				</a>
 			</li>
 
-		</ul><!-- .entry-meta -->
+		</ul>
 
 	</footer>
 
-	<?php // Schema: Posts
-	the_posts_schema_as_json_ld(); ?>
-
-</article><!-- .loop-item -->
+</article>
