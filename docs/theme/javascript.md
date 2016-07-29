@@ -6,7 +6,7 @@ There is a utils folder with common code we use, dont worry about not using anyt
 
 ## Linting
 
-When running the dist task that generates minified bundles a preflight task is run. One of the tasks lints the js folder to Airbnb's styleguide for javascript, the most widely used styleguide in jsland. We have tweaked a couple of settings, but just around tab spacing and a couple of react rules. You can read up on that guide [here](https://github.com/airbnb/javascript). We have added a jscs.json config at root to help you get your ide highlighting to this ruleset, please check the ide.md in guides to learn more.
+When running the dist task that generates minified bundles a preflight task is run. One of the tasks lints the js folder to Airbnb's styleguide for javascript, the most widely used styleguide in jsland. We have tweaked a couple of settings, but just around tab spacing and a couple of react rules. You can read up on that guide [here](https://github.com/airbnb/javascript). To get your ide highlighting/hinting to this ruleset, please have your ide parse the .eslintrc at root.
 
 ## Jquery
 
