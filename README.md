@@ -14,9 +14,11 @@
 * Guides
   * [Node](/docs/guides/node.md)
 * Theme
+  * [Overview](/docs/theme/overview.md)
+  * [Grunt Tasks](/docs/theme/grunt.md)
   * [PostCSS](/docs/theme/postcss.md)
   * [Javascript](/docs/theme/javascript.md)
-  * [Images](/docs/theme/images.md)
+  * [Image Handling](/docs/theme/images.md)
   * [Fonts](/docs/theme/fonts.md)
   * [Icons](/docs/theme/icons.md)
 * Tests and Code Quality
