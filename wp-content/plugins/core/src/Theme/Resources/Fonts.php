@@ -20,6 +20,11 @@ class Fonts {
 	 * Add any required fonts
 	 */
 	public function load_fonts() {
+
+		if( empty( $this->fonts[ 'typekit' ] ) && empty( $this->fonts[ 'google' ] ) && empty( $this->fonts[ 'custom' ] ) ) {
+			return;
+		}
+		
 		?>
 
 		<script>
@@ -51,6 +56,11 @@ class Fonts {
 				<?php if ( !empty( $this->fonts[ 'google' ] ) ) { ?>
 				google: {
 					families: <?php echo json_encode( $this->fonts[ 'google' ] ); ?>
+				},
+				<?php } ?>
+				<?php if ( !empty( $this->fonts[ 'custom' ] ) ) { ?>
+				custom: {
+					families: <?php echo json_encode( $this->fonts[ 'custom' ] ); ?>
 				},
 				<?php } ?>
 				loading: function () {

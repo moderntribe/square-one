@@ -50,6 +50,7 @@ final class Global_Service_Provider extends Tribe_Service_Provider {
 	];
 
 	protected $post_types = [
+		'Sample',
 		'Page',
 		'Post',
 		'Event',
@@ -58,7 +59,7 @@ final class Global_Service_Provider extends Tribe_Service_Provider {
 	];
 
 	protected $taxonomies = [
-
+		'Example' => [ 'Sample' ],
 	];
 
 	public function register( Container $container ) {

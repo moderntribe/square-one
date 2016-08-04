@@ -16,7 +16,7 @@
 				'items_wrap'      => '%3$s',
 				'fallback_cb'     => false
 			);
-			wp_nav_menu( $defaults ); ?>
+			\Tribe\Project\Theme\Nav\Menu::menu( $defaults ); ?>
 		</ol>
 
 	</nav>

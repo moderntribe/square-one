@@ -46,5 +46,192 @@
             "container",
             "dependency injection"
         ]
+    },
+    {
+        "name": "composer/installers",
+        "version": "v1.1.0",
+        "version_normalized": "1.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/composer/installers.git",
+            "reference": "a3595c5272a6f247228abb20076ed27321e4aae9"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/composer/installers/zipball/a3595c5272a6f247228abb20076ed27321e4aae9",
+            "reference": "a3595c5272a6f247228abb20076ed27321e4aae9",
+            "shasum": ""
+        },
+        "require": {
+            "composer-plugin-api": "^1.0"
+        },
+        "replace": {
+            "roundcube/plugin-installer": "*",
+            "shama/baton": "*"
+        },
+        "require-dev": {
+            "composer/composer": "1.0.*@dev",
+            "phpunit/phpunit": "4.1.*"
+        },
+        "time": "2016-07-05 06:18:20",
+        "type": "composer-plugin",
+        "extra": {
+            "class": "Composer\\Installers\\Plugin",
+            "branch-alias": {
+                "dev-master": "1.0-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Composer\\Installers\\": "src/Composer/Installers"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Kyle Robinson Young",
+                "email": "kyle@dontkry.com",
+                "homepage": "https://github.com/shama"
+            }
+        ],
+        "description": "A multi-framework Composer library installer",
+        "homepage": "https://composer.github.io/installers/",
+        "keywords": [
+            "Craft",
+            "Dolibarr",
+            "Hurad",
+            "ImageCMS",
+            "MODX Evo",
+            "Mautic",
+            "OXID",
+            "RadPHP",
+            "SMF",
+            "Thelia",
+            "WolfCMS",
+            "agl",
+            "aimeos",
+            "annotatecms",
+            "bitrix",
+            "cakephp",
+            "chef",
+            "codeigniter",
+            "concrete5",
+            "croogo",
+            "dokuwiki",
+            "drupal",
+            "elgg",
+            "expressionengine",
+            "fuelphp",
+            "grav",
+            "installer",
+            "joomla",
+            "kohana",
+            "laravel",
+            "lithium",
+            "magento",
+            "mako",
+            "mediawiki",
+            "modulework",
+            "moodle",
+            "phpbb",
+            "piwik",
+            "ppi",
+            "puppet",
+            "roundcube",
+            "shopware",
+            "silverstripe",
+            "symfony",
+            "typo3",
+            "wordpress",
+            "zend",
+            "zikula"
+        ]
+    },
+    {
+        "name": "johnbillion/extended-cpts",
+        "version": "3.0.2",
+        "version_normalized": "3.0.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/johnbillion/extended-cpts.git",
+            "reference": "34a7f6dd3a53c6c2e79de4bdddfbbe9c79ece7e7"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/johnbillion/extended-cpts/zipball/34a7f6dd3a53c6c2e79de4bdddfbbe9c79ece7e7",
+            "reference": "34a7f6dd3a53c6c2e79de4bdddfbbe9c79ece7e7",
+            "shasum": ""
+        },
+        "require": {
+            "composer/installers": "~1.0",
+            "php": ">=5.4"
+        },
+        "require-dev": {
+            "johnbillion/wp-docs-standards": "*",
+            "phpunit/phpunit": ">=3.7",
+            "satooshi/php-coveralls": ">=0.7.0"
+        },
+        "suggest": {
+            "johnbillion/extended-taxos": "Extended Taxonomies",
+            "wpackagist-plugin/rewrite-testing": "Rewrite Rule Testing"
+        },
+        "time": "2016-03-10 11:52:43",
+        "type": "library",
+        "installation-source": "dist",
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "GPL-2.0+"
+        ],
+        "authors": [
+            {
+                "name": "John Blackbourn",
+                "homepage": "https://johnblackbourn.com/"
+            }
+        ],
+        "description": "A library which provides extended functionality to WordPress custom post types, allowing developers to quickly build custom post types without having to write the same code again and again.",
+        "homepage": "https://github.com/johnbillion/extended-cpts/"
+    },
+    {
+        "name": "johnbillion/extended-taxos",
+        "version": "2.0.3",
+        "version_normalized": "2.0.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/johnbillion/extended-taxos.git",
+            "reference": "d9a060d7d1b4d1888604e210e72e84949dbf3ab0"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/johnbillion/extended-taxos/zipball/d9a060d7d1b4d1888604e210e72e84949dbf3ab0",
+            "reference": "d9a060d7d1b4d1888604e210e72e84949dbf3ab0",
+            "shasum": ""
+        },
+        "require": {
+            "composer/installers": "~1.0",
+            "johnbillion/extended-cpts": "~3.0",
+            "php": ">=5.4"
+        },
+        "suggest": {
+            "wpackagist-plugin/rewrite-testing": "Rewrite Rule Testing"
+        },
+        "time": "2016-02-22 09:55:23",
+        "type": "library",
+        "installation-source": "dist",
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "GPL-2.0+"
+        ],
+        "authors": [
+            {
+                "name": "John Blackbourn",
+                "homepage": "https://johnblackbourn.com/"
+            }
+        ],
+        "description": "A library which provides extended functionality to WordPress custom taxonomies, allowing you to quickly build custom taxonomies without having to write the same code again and again.",
+        "homepage": "https://github.com/johnbillion/extended-taxos/"
     }
 ]

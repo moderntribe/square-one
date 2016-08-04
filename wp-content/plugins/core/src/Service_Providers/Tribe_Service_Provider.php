@@ -8,7 +8,7 @@ use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Tribe\Libs\Nav\Menu_Location;
 use Tribe\Project\Service_Loader;
-use Tribe\Project\Nav;
+use Tribe\Project\Theme\Nav;
 use Tribe\Project\Theme_Customizer;
 
 abstract class Tribe_Service_Provider implements ServiceProviderInterface {

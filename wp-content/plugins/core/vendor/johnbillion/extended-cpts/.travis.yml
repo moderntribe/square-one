@@ -1,0 +1,40 @@
+# run on container environment
+sudo: false
+
+language: php
+
+notifications:
+    on_success: change
+    on_failure: always
+
+php:
+    - 7.0
+    - 5.6
+    - 5.4
+    - hhvm
+
+env:
+    # nightly:
+    - WP_VERSION=nightly WP_MULTISITE=0
+    - WP_VERSION=nightly WP_MULTISITE=1
+    # minimum supported version:
+    - WP_VERSION=4.4 WP_MULTISITE=0
+    - WP_VERSION=4.4 WP_MULTISITE=1
+
+matrix:
+    allow_failures:
+        # allow failures on nightlies:
+        - env: WP_VERSION=nightly WP_MULTISITE=0
+        - env: WP_VERSION=nightly WP_MULTISITE=1
+
+install:
+    - composer install --dev --no-interaction
+
+before_script:
+    - bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION 
+
+script:
+    - ./vendor/bin/phpunit --coverage-clover build/logs/clover.xml
+
+after_script:
+    - php vendor/bin/coveralls

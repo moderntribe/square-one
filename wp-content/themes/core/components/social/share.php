@@ -3,10 +3,8 @@
 	<h6>Share This</h6>
 
 	<?php
-	$social = new Social();
-	$social_links = $social->the_social_share_links( array( 'facebook', 'twitter', 'google', 'linkedin', 'email' ), false );
-	if ( ! empty( $social_links ) ) {
-		echo $social_links;
-	} ?>
+	$social = new \Tribe\Project\Theme\Social_Links( [ 'facebook', 'twitter', 'google', 'linkedin', 'email' ], false );
+	echo $social->format_links( $social->get_links() );
+	?>
 
 </aside>
