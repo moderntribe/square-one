@@ -6,13 +6,15 @@ namespace Tribe\Project\Theme;
 
 
 class Oembed_Filter {
+	const CACHE_PREFIX = '_oembed_filtered_';
 	private $supported_providers = [
 		'Vimeo',
 		'YouTube',
 	];
 
 	public function hook() {
-		add_filter( 'oembed_dataparse', [ $this, 'setup_lazyload_html' ], 10, 3 );
+		add_filter( 'oembed_dataparse', [ $this, 'setup_lazyload_html' ], 1000, 3 );
+		add_filter( 'embed_oembed_html', [ $this, 'filter_frontend_html_from_cache' ], 1, 4 );
 		add_filter( 'embed_oembed_html', [ $this, 'wrap_oembed_shortcode_output' ], 99, 4 );
 	}
 
@@ -51,19 +53,38 @@ class Oembed_Filter {
 			return $html; // with no thumbnail, we use the default embed
 		}
 
-		$html = '<figure class="'. esc_attr( $figure_class ) .'">';
-		$html .= '<a href="'. esc_url( $url ) .'" class="wp-embed-lazy-launch" title="'. esc_attr( $data->title ) .'" data-embed-id="'. esc_attr( $embed_id ) .'">';
-		$html .= '<img class="wp-embed-lazy-thumb lazyload" src="'. trailingslashit( get_template_directory_uri() ) . 'img/shims/16x9.png' .'" data-src="'. esc_url( $video_thumb ) .'" alt="'. esc_attr( $data->title ) .'" />';
-		$html .= '<figcaption class="wp-embed-lazy-caption">';
-		$html .= '<i class="icon icon-play"></i>';
-		$html .= '<span class="wp-embed-lazy-prompt">' . __( 'Play Video', 'tribe' ) . '</span>';
-		$html .= '<span class="wp-embed-lazy-title">'. esc_html( $data->title ) .'</span>';
-		$html .= '</figcaption>';
-		$html .= '</a>';
-		$html .= '</figure>';
+		$frontend_html = '<figure class="'. esc_attr( $figure_class ) .'">';
+		$frontend_html .= '<a href="'. esc_url( $url ) .'" class="wp-embed-lazy-launch" title="'. esc_attr( $data->title ) .'" data-embed-id="'. esc_attr( $embed_id ) .'">';
+		$frontend_html .= '<img class="wp-embed-lazy-thumb lazyload" src="'. trailingslashit( get_template_directory_uri() ) . 'img/shims/16x9.png' .'" data-src="'. esc_url( $video_thumb ) .'" alt="'. esc_attr( $data->title ) .'" />';
+		$frontend_html .= '<figcaption class="wp-embed-lazy-caption">';
+		$frontend_html .= '<i class="icon icon-play"></i>';
+		$frontend_html .= '<span class="wp-embed-lazy-prompt">' . __( 'Play Video', 'tribe' ) . '</span>';
+		$frontend_html .= '<span class="wp-embed-lazy-title">'. esc_html( $data->title ) .'</span>';
+		$frontend_html .= '</figcaption>';
+		$frontend_html .= '</a>';
+		$frontend_html .= '</figure>';
 
+		$this->cache_frontend_html( $frontend_html, $url );
+
+		/*
+		 * Don't return the updated value here. We want
+		 * WordPress to store its default HTML in its cache,
+		 * and we'll only overwrite it on the front end.
+		 */
 		return $html;
 
+	}
+
+	/**
+	 * If we've cached replacement HTML for a URL, override
+	 * the default with the cached value.
+	 */
+	public function filter_frontend_html_from_cache( $html, $url, $attr, $post_id ) {
+		if ( is_admin() ) {
+			return $html;
+		}
+		$cached = get_option( $this->get_cache_key( $url ), '' );
+		return empty( $cached ) ? $html : $cached;
 	}
 
 	/**
@@ -133,5 +154,30 @@ class Oembed_Filter {
 		preg_match( '/(https?:\/\/)?(www\.)?(player\.)?vimeo\.com\/([a-z]*\/)*([0-9]{6,11})[?]?.*/', $url, $video_id );
 
 		return ! empty( $video_id[5] ) ? $video_id[5] : '';
+	}
+
+	/**
+	 * Store the front-end HTML for a URL
+	 * in the options table
+	 *
+	 * WordPress will regenerate the oembed cache
+	 * whenever its cache expires. When it does so,
+	 * this filter will run again and update at the
+	 * same time.
+	 *
+	 * @param string $frontend_html
+	 * @param string $url
+	 */
+	private function cache_frontend_html( $frontend_html, $url ) {
+		update_option( $this->get_cache_key( $url ), $frontend_html );
+	}
+
+	/**
+	 * @param string $url
+	 * @return string The option name to use to store the cache for a URL
+	 */
+	private function get_cache_key( $url ) {
+		$hash = md5( $url );
+		return static::CACHE_PREFIX . $hash;
 	}
 }
