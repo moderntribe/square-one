@@ -1,0 +1,27 @@
+phpfpm:
+  image: moderntribe/php-fpm
+  volumes:
+    - /your/local/project/folder/:/www
+  links:
+    - mysql
+    - redis
+nginx:
+  image: moderntribe/nginx
+  volumes:
+    - /your/local/project/folder/dev/docker/nginx.conf:/etc/nginx/nginx.conf
+    - /your/local/project/folder:/www
+  ports:
+    - 80:80
+  links:
+    - phpfpm
+mysql:
+  image: moderntribe/mysql
+  ports:
+    - 3306:3306
+  volumes:
+    -  /your/local/project/folder/dev/docker/mysql:/var/lib/mysql/
+  environment:
+    - MYSQL_DATABASE=YourProjectName
+    - MYSQL_USER=user
+    - MYSQL_PASSWORD=pass
+    - MYSQL_ROOT_PASSWORD=root_pass
