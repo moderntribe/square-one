@@ -765,6 +765,7 @@ function remote_login_js() {
 			$key = md5( time() . mt_rand() );
 			$wpdb->query( $wpdb->prepare( "INSERT INTO {$wpdb->dmtablelogins} ( `id`, `user_id`, `blog_id`, `t` ) VALUES( %s, %d, %d, NOW() )", $key, $current_user->ID, $_GET[ 'blogid' ] ) );
 			$url = add_query_arg( array( 'action' => 'login', 'dm' => $hash, 'k' => $key, 't' => mt_rand() ), $_GET[ 'back' ] );
+			header("Content-Type: text/javascript");
 			echo "window.location = '$url'";
 			exit;
 		} elseif ( $_GET[ 'action' ] == 'login' ) {
