@@ -13,6 +13,7 @@
     "npm": "3.8.6"
   },
   "dependencies": {
+    "delegate": "^3.0.1",
     "fastclick": "^1.0.6",
     "gsap": "^1.18.3",
     "jquery": "^2.2.4",
