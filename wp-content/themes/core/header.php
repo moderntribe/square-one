@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
 
-	<?php // TITLE ?>
-	<title><?php wp_title( '|', true, 'right' ); ?></title>
+	<?php // TITLE: Handled by WP ?>
 
 	<?php // MISC META ?>
 	<meta charset="utf-8">
