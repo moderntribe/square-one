@@ -56,7 +56,7 @@ export const removeClass = (el, className) => {
 	return element;
 };
 
-export const convertElements = (elements) => {
+export const convertElements = (elements = []) => {
 	const converted = [];
 	let i = elements.length;
 	for (i; i--; converted.unshift(elements[i]));
@@ -75,9 +75,10 @@ export const isNodelist = (elements) => {
 
 export const getNodes = (selector = '', convert = false, node = document) => {
 	let nodes = node.querySelectorAll(`[data-js="${selector}"]`);
-	if (nodes.length && convert) {
+	if (convert) {
 		nodes = convertElements(nodes);
 	}
+
 	return nodes;
 };
 
@@ -90,6 +91,7 @@ export const closest = (el, selector) => {
 			matchesFn = fn;
 			return true;
 		}
+
 		return false;
 	});
 
@@ -98,6 +100,7 @@ export const closest = (el, selector) => {
 		if (parent && parent[matchesFn](selector)) {
 			return parent;
 		}
+
 		el = parent; // eslint-disable-line
 	}
 
@@ -105,7 +108,7 @@ export const closest = (el, selector) => {
 };
 
 export const insertAfter = (newNode, referenceNode) => {
-	referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+	referenceNode.parentNode.insertBefore(newNode, referenceNode.nextElementSibling);
 };
 
 export const insertBefore = (newNode, referenceNode) => {

@@ -1,4 +1,8 @@
 
+import _ from 'lodash';
+
+import { trigger } from '../events';
+
 /**
  * @function deepscroll
  * @desc A plugin that updates the url as targets are scrolled by using the data attribute
@@ -7,12 +11,10 @@
  * @param opts Object The options object. Check below for available and defaults.
  */
 
-import _ from 'lodash';
-
 /* global Waypoint */
 
 const deepScroll = (opts) => {
-	const options = Object.assign({
+	const options = _.assign({
 		attr: 'data-url-key',
 		targets: null,
 		offset: 0,
@@ -33,7 +35,7 @@ const deepScroll = (opts) => {
 	};
 
 	const triggerScrollby = (el) => {
-		$(document).trigger('modern_tribe/scrolledto', { el });
+		trigger({ event: 'modern_tribe/scrolledto', native: false, data: { el } });
 	};
 
 	const handleWaypointDown = (dir, el) => {
@@ -42,7 +44,7 @@ const deepScroll = (opts) => {
 			triggerScrollby(el);
 		}
 
-		if (dir === 'up' && $(el).is('.panel-count-0')) {
+		if (dir === 'up' && parseInt(el.getAttribute('data-index'), 10) === 0) {
 			updateHash(null);
 			triggerScrollby(null);
 		}
@@ -63,20 +65,14 @@ const deepScroll = (opts) => {
 
 		data[`${objectId}-down`] = new Waypoint({
 			element: el,
-			handler: (dir) => {
-				handleWaypointDown(dir, el);
-			},
-
+			handler: (dir) => handleWaypointDown(dir, el),
 			offset: `${options.offset}px`,
 		});
 
 		data[`${objectId}-up`] = new Waypoint({
 			element: el,
-			handler: (dir) => {
-				handleWaypointUp(dir, el);
-			},
-
-			offset: () => -(this.element.clientHeight - options.offset),
+			handler: (dir) => handleWaypointUp(dir, el),
+			offset: () => -(el.clientHeight - options.offset),
 		});
 
 		items.push({
@@ -88,7 +84,7 @@ const deepScroll = (opts) => {
 	};
 
 	const executeResize = () => {
-		Waypoint.refreshAll();
+		_.delay(() => Waypoint.refreshAll(), 200);
 	};
 
 	const refresh = () => {
