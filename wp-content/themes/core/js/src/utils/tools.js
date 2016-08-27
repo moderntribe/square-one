@@ -56,7 +56,7 @@ export const removeClass = (el, className) => {
 	return element;
 };
 
-export const convertElements = (elements) => {
+export const convertElements = (elements = []) => {
 	const converted = [];
 	let i = elements.length;
 	for (i; i--; converted.unshift(elements[i]));
@@ -75,7 +75,7 @@ export const isNodelist = (elements) => {
 
 export const getNodes = (selector = '', convert = false, node = document) => {
 	let nodes = node.querySelectorAll(`[data-js="${selector}"]`);
-	if (nodes.length && convert) {
+	if (convert) {
 		nodes = convertElements(nodes);
 	}
 
