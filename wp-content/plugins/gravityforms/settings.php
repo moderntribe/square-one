@@ -4,33 +4,10 @@ if ( ! class_exists( 'GFForms' ) ) {
 	die();
 }
 
-/**
- * Class GFSettings
- *
- * Generates the Gravity Forms settings page
- */
 class GFSettings {
 
-	/**
-	 * Settings pages associated with add-ons
-	 *
-	 * @public
-	 * @static
-	 * @var array $addon_pages
-	 */
 	public static $addon_pages = array();
 
-	/**
-	 * Adds a settings page to the Gravity Forms settings
-	 *
-	 * @access public
-	 * @static
-	 * @see GFSettings::$addon_pages
-	 *
-	 * @param string       $name      The settings page slug
-	 * @param string|array $handler   The callback function to run for this settings page
-	 * @param string       $icon_path The path to the icon for the settings tab
-	 */
 	public static function add_settings_page( $name, $handler, $icon_path ) {
 
 		$title = '';
@@ -56,26 +33,10 @@ class GFSettings {
 			$tab_label = $name;
 		}
 
-		/**
-		 * Adds additional actions after settings pages are registered
-		 *
-		 * @param string|array $handler The callback function being run.
-		 */
 		add_action( 'gform_settings_' . str_replace( ' ', '_', $name ), $handler );
 		self::$addon_pages[ $name ] = array( 'name' => $name, 'title' => $title, 'tab_label' => $tab_label, 'icon' => $icon_path );
 	}
 
-	/**
-	 * Determines the content displayed on the Gravity Forms settings page
-	 *
-	 * @access public
-	 * @static
-	 * @see GFSettings::get_subview
-	 * @see GFSettings::gravityforms_settings_page
-	 * @see GFSettings::settings_uninstall_page
-	 * @see GFSettings::page_header
-	 * @see GFSettings::page_footer
-	 */
 	public static function settings_page() {
 
 		$subview = self::get_subview();
@@ -100,65 +61,45 @@ class GFSettings {
 		}
 	}
 
-	/**
-	 * Displays the Gravity Forms uninstall page
-	 *
-	 * Called by GFSettings::settings_page
-	 *
-	 * @access public
-	 * @static
-	 * @see GFSettings::settings_page
-	 * @see GFSettings::page_header
-	 */
 	public static function settings_uninstall_page() {
 		self::page_header( __( 'Uninstall Gravity Forms', 'gravityforms' ), '' );
 		if ( isset( $_POST['uninstall'] ) ) {
-
-			check_admin_referer( 'gform_uninstall', 'gform_uninstall_nonce' );
 
 			if ( ! GFCommon::current_user_can_any( 'gravityforms_uninstall' ) || ( function_exists( 'is_multisite' ) && is_multisite() && ! is_super_admin() ) ) {
 				die( esc_html__( "You don't have adequate permission to uninstall Gravity Forms.", 'gravityforms' ) );
 			}
 
-			// Removing cron task
-			wp_clear_scheduled_hook( 'gravityforms_cron' );
-
-			// De-registering site
+			//De-registering site
 			GFForms::include_gravity_api();
 
-			// Remove association between site and license
+			//Remove association between site and license
 			gapi()->update_site( '' );
 
-			// Delete site key and site secret
+			//Delete site key and site secret
 			gapi()->purge_site_credentials();
 
-			// Dropping all tables
+			//dropping all tables
 			RGFormsModel::drop_tables();
 
-			// Removing options
+			//removing options
 			delete_option( 'rg_form_version' );
 			delete_option( 'rg_gforms_key' );
 			delete_option( 'rg_gforms_disable_css' );
 			delete_option( 'rg_gforms_enable_html5' );
 			delete_option( 'rg_gforms_captcha_public_key' );
 			delete_option( 'rg_gforms_captcha_private_key' );
-			delete_option( 'rg_gforms_captcha_site_key' );
-			delete_option( 'rg_gforms_captcha_secret_key' );
 			delete_option( 'rg_gforms_message' );
 			delete_option( 'gform_enable_noconflict' );
 			delete_option( 'gform_enable_background_updates' );
-			delete_option( 'gform_sticky_admin_messages' );
 			delete_option( 'gf_dismissed_upgrades' );
 			delete_option( 'rg_gforms_currency' );
 			delete_option( 'gform_api_count' );
 			delete_option( 'gform_email_count' );
-			delete_option( 'gform_enable_toolbar_menu' );
 
-
-			// Removing gravity forms upload folder
+			//removing gravity forms upload folder
 			GFCommon::delete_directory( RGFormsModel::get_upload_root() );
 
-			// Deactivating plugin
+			//Deactivating plugin
 			$plugin = 'gravityforms/gravityforms.php';
 			deactivate_plugins( $plugin );
 			update_option( 'recently_activated', array( $plugin => time() ) + (array) get_option( 'recently_activated' ) );
@@ -171,10 +112,7 @@ class GFSettings {
 		?>
 
 		<form action="" method="post">
-			<?php if ( GFCommon::current_user_can_any( 'gravityforms_uninstall' ) && ( ! function_exists( 'is_multisite' ) || ! is_multisite() || is_super_admin() ) ) {
-
-				wp_nonce_field( 'gform_uninstall', 'gform_uninstall_nonce' );
-				?>
+			<?php if ( GFCommon::current_user_can_any( 'gravityforms_uninstall' ) && ( ! function_exists( 'is_multisite' ) || ! is_multisite() || is_super_admin() ) ) { ?>
 				<h3><span><i class="fa fa-times"></i> <?php esc_html_e( 'Uninstall Gravity Forms', 'gravityforms' ); ?></span>
 				</h3>
 				<div class="delete-alert alert_red">
@@ -183,11 +121,11 @@ class GFSettings {
 						<i class="fa fa-exclamation-triangle gf_invalid"></i> <?php esc_html_e( 'Warning', 'gravityforms' ); ?>
 					</h3>
 
-					<div class="gf_delete_notice"><strong><?php esc_html_e( 'This operation deletes ALL Gravity Forms data.', 'gravityforms' ); ?></strong> <?php esc_html_e( 'If you continue, you will not be able to retrieve or restore your forms or entries.', 'gravityforms' ); ?>
+					<div class="gf_delete_notice"><strong><?php esc_html_e( 'This operation deletes ALL Gravity Forms data.', 'gravityforms' ); ?></strong> <?php esc_html_e( 'If you continue, You will not be able to retrieve or restore your forms or entries.', 'gravityforms' ); ?>
 				</div>
 
 				<?php
-				$uninstall_button = '<input type="submit" name="uninstall" value="' . esc_attr__( 'Uninstall Gravity Forms', 'gravityforms' ) . '" class="button" onclick="return confirm(\'' . esc_js( __( "Warning! ALL Gravity Forms data, including form entries will be deleted. This cannot be undone. 'OK' to delete, 'Cancel' to stop", 'gravityforms' ) ) . '\');" onkeypress="return confirm(\'' . esc_js( __( "Warning! ALL Gravity Forms data, including form entries will be deleted. This cannot be undone. 'OK' to delete, 'Cancel' to stop", 'gravityforms' ) ) . '\');"/>';
+				$uninstall_button = '<input type="submit" name="uninstall" value="' . esc_attr__( 'Uninstall Gravity Forms', 'gravityforms' ) . '" class="button" onclick="return confirm(\'' . esc_js( __( "Warning! ALL Gravity Forms data, including form entries will be deleted. This cannot be undone. 'OK' to delete, 'Cancel' to stop", 'gravityforms' ) ) . '\');"/>';
 
 				/**
 				 * Allows for the modification of the Gravity Forms uninstall button
@@ -205,16 +143,6 @@ class GFSettings {
 		self::page_footer();
 	}
 
-	/**
-	 * Displays the main Gravity Forms settings page
-	 *
-	 * Called by GFSettings::settings_page
-	 *
-	 * @access public
-	 * @static
-	 * @global $wpdb
-	 * @see GFSettings::settings_page
-	 */
 	public static function gravityforms_settings_page() {
 		global $wpdb;
 
@@ -241,12 +169,9 @@ class GFSettings {
 			update_option( 'rg_gforms_enable_html5', (bool) rgpost( 'gforms_enable_html5' ) );
 			update_option( 'gform_enable_noconflict', (bool) rgpost( 'gform_enable_noconflict' ) );
 			update_option( 'gform_enable_background_updates', (bool) rgpost( 'gform_enable_background_updates' ) );
-			update_option( 'gform_enable_toolbar_menu', (bool) rgpost( 'gform_enable_toolbar_menu' ) );
 			update_option( 'rg_gforms_enable_akismet', self::get_posted_akismet_setting() ); // do not cast to bool, option is enabled by default; need a "1" or a "0"
 			update_option( 'rg_gforms_captcha_public_key', sanitize_text_field( rgpost( 'gforms_captcha_public_key' ) ) );
 			update_option( 'rg_gforms_captcha_private_key', sanitize_text_field( rgpost( 'gforms_captcha_private_key' ) ) );
-			update_option( 'rg_gforms_captcha_site_key', sanitize_text_field( rgpost( 'gforms_captcha_site_key' ) ) );
-			update_option( 'rg_gforms_captcha_secret_key', sanitize_text_field( rgpost( 'gforms_captcha_secret_key' ) ) );
 
 			if ( ! rgempty( 'gforms_currency' ) && in_array( rgpost( 'gforms_currency' ), array_keys( RGCurrency::get_currencies() ) ) ) {
 				update_option( 'rg_gforms_currency', rgpost( 'gforms_currency' ) );
@@ -385,17 +310,6 @@ class GFSettings {
 						<span class="gf_settings_description"><?php esc_html_e( 'Set this to ON to allow Gravity Forms to download and install bug fixes and security updates automatically in the background. Requires a valid license key.', 'gravityforms' ); ?></span>
 					</td>
 				</tr>
-				<tr valign="top">
-					<th scope="row">
-						<label for="gform_toolbar_menu"><?php esc_html_e( 'Toolbar Menu', 'gravityforms' ); ?></label>  <?php gform_tooltip( 'settings_toolbar_menu' ) ?>
-					</th>
-					<td>
-						<input type="radio" name="gform_enable_toolbar_menu" value="1" <?php echo get_option( 'gform_enable_toolbar_menu' ) == 1 ? "checked='checked'" : '' ?> id="gform_enable_toolbar_menu" /> <?php esc_html_e( 'On', 'gravityforms' ); ?>&nbsp;&nbsp;
-						<input type="radio" name="gform_enable_toolbar_menu" value="0" <?php echo get_option( 'gform_enable_toolbar_menu' ) == 1 ? '' : "checked='checked'" ?> id="gform_disable_toolbar_menu" /> <?php esc_html_e( 'Off', 'gravityforms' ); ?>
-						<br />
-						<span class="gf_settings_description"><?php esc_html_e( 'Set this to ON to display the Forms menu in the WordPress top toolbar. The Forms menu will display the latest ten forms recently opened in the form editor.', 'gravityforms' ); ?></span>
-					</td>
-				</tr>
 			</table>
 
 			<div class="hr-divider"></div>
@@ -410,7 +324,7 @@ class GFSettings {
 
 				<tr valign="top">
 					<th scope="row">
-						<label for="gforms_captcha_public_key"><?php esc_html_e( 'Site Key', 'gravityforms' ); ?></label>  <?php gform_tooltip( 'settings_recaptcha_public' ) ?>
+						<label for="gforms_captcha_public_key"><?php esc_html_e( 'reCAPTCHA Public Key', 'gravityforms' ); ?></label>  <?php gform_tooltip( 'settings_recaptcha_public' ) ?>
 					</th>
 					<td>
 						<input type="text" name="gforms_captcha_public_key" style="width:350px;" value="<?php echo esc_attr( get_option( 'rg_gforms_captcha_public_key' ) ); ?>" /><br />
@@ -419,7 +333,7 @@ class GFSettings {
 				</tr>
 				<tr valign="top">
 					<th scope="row">
-						<label for="gforms_captcha_private_key"><?php esc_html_e( 'Secret Key', 'gravityforms' ); ?></label>  <?php gform_tooltip( 'settings_recaptcha_private' ) ?>
+						<label for="gforms_captcha_private_key"><?php esc_html_e( 'reCAPTCHA Private Key', 'gravityforms' ); ?></label>  <?php gform_tooltip( 'settings_recaptcha_private' ) ?>
 					</th>
 					<td>
 						<input type="text" name="gforms_captcha_private_key" style="width:350px;" value="<?php echo esc_attr( get_option( 'rg_gforms_captcha_private_key' ) ) ?>" /><br />
@@ -460,11 +374,6 @@ class GFSettings {
 			});
 		</script>
 		<?php
-		/**
-		 * Allows you to disable the Gravity Forms installation status section
-		 *
-		 * @param bool false Set to true to disable the installation status.  Defaults to false.
-		 */
 		if ( ! apply_filters( 'gform_disable_installation_status', false ) ) { ?>
 			<div class="hr-divider"></div>
 
@@ -586,14 +495,6 @@ class GFSettings {
 		self::page_footer();
 	}
 
-	/**
-	 * Handles license upgrades from the Settings page
-	 *
-	 * @access public
-	 * @static
-	 * @see GFCommon::post_to_manager
-	 * @see GFCommon::get_key
-	 */
 	public static function upgrade_license() {
 		$key                = GFCommon::get_key();
 		$body               = "key=$key";
@@ -623,17 +524,6 @@ class GFSettings {
 		exit;
 	}
 
-	/**
-	 * Outputs the settings page header
-	 *
-	 * @access public
-	 * @static
-	 * @see GFSettings::get_subview
-	 * @see GFSettings::$addon_page
-	 *
-	 * @param string $title   Optional. The page title to be used. Defaults to an empty string.
-	 * @param string $message Optional. The message to display in the header. Defaults to empty string.
-	 */
 	public static function page_header( $title = '', $message = '' ) {
 
 		$min = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG || isset( $_GET['gform_debug'] ) ? '' : '.min';
@@ -644,7 +534,7 @@ class GFSettings {
 
 		$current_tab = self::get_subview();
 
-		// Build left side options, always have GF Settings first and Uninstall last, put add-ons in the middle
+		//build left side options, always have GF Settings first and Uninstall last, put add-ons in the middle
 		$setting_tabs = array( '10' => array( 'name' => 'settings', 'label' => __( 'Settings', 'gravityforms' ) ) );
 
 		if ( ! empty( self::$addon_pages ) ) {
@@ -662,16 +552,8 @@ class GFSettings {
 			}
 		}
 
-		// Prevent Uninstall tab from being added for users that don't have gravityforms_uninstall capability
-		if ( GFCommon::current_user_can_any( 'gravityforms_uninstall' ) ) {
-			$setting_tabs[] = array( 'name' => 'uninstall', 'label' => __( 'Uninstall', 'gravityforms' ) );
-		}
+		$setting_tabs[] = array( 'name' => 'uninstall', 'label' => __( 'Uninstall', 'gravityforms' ) );
 
-		/**
-		 * Filters the Settings menu tabs
-		 *
-		 * @param array $setting_tabs The settings tab names and labels
-		 */
 		$setting_tabs = apply_filters( 'gform_settings_menu', $setting_tabs );
 		ksort( $setting_tabs, SORT_NUMERIC );
 
@@ -686,15 +568,13 @@ class GFSettings {
 
 		?>
 
-		<div class="wrap <?php echo GFCommon::get_browser_class() ?> gforms_settings_wrap">
+		<div class="wrap <?php echo GFCommon::get_browser_class() ?>">
 
 			<?php if ( $message ) { ?>
 				<div id="message" class="updated"><p><?php echo $message; ?></p></div>
 			<?php } ?>
 
 			<h2><?php echo esc_html( $title ) ?></h2>
-
-			<?php GFCommon::display_dismissible_message(); ?>
 
 			<div id="gform_tab_group" class="gform_tab_group vertical_tabs">
 				<ul id="gform_tabs" class="gform_tabs">
@@ -717,12 +597,6 @@ class GFSettings {
 	<?php
 	}
 
-	/**
-	 * Outputs the Settings page footer
-	 *
-	 * @access public
-	 * @static
-	 */
 	public static function page_footer() {
 					?>
 				</div>
@@ -746,17 +620,9 @@ class GFSettings {
 	<?php
 	}
 
-	/**
-	 * Gets the Settings page subview based on the query string
-	 *
-	 * @access public
-	 * @static
-	 *
-	 * @return string The subview
-	 */
 	public static function get_subview() {
 
-		// Default to subview, if no subview provided support
+		// default to subview, if no subview provided support
 		$subview = rgget( 'subview' ) ? rgget( 'subview' ) : rgget( 'addon' );
 
 		if ( ! $subview ) {
@@ -766,17 +632,6 @@ class GFSettings {
 		return $subview;
 	}
 
-	/**
-	 * Handles the enabling/disabling of the Akismet Integration setting
-	 *
-	 * Called from GFSettings::gravityforms_settings_page
-	 *
-	 * @access public
-	 * @static
-	 * @see GFSettings::gravityforms_settings_page
-	 *
-	 * @return string $akismet_setting '1' if turning on, '2' if turning off.
-	 */
 	public static function get_posted_akismet_setting() {
 
 		$akismet_setting = rgpost( 'gforms_enable_akismet' );
@@ -792,15 +647,6 @@ class GFSettings {
 		return $akismet_setting;
 	}
 
-	/**
-	 * Handles the deletion of the Gravity Forms key
-	 *
-	 * @access public
-	 * @static
-	 * @see GFForms::include_gravity_api
-	 * @see gapi()
-	 * @see Gravity_Api::update_site
-	 */
 	public static function action_delete_option_rg_gforms_key() {
 		GFForms::include_gravity_api();
 
@@ -809,20 +655,6 @@ class GFSettings {
 		}
 	}
 
-	/**
-	 * Handles updates to the Gravity Forms key
-	 *
-	 * @access public
-	 * @static
-	 * @see GFForms::include_gravity_api
-	 * @see gapi()
-	 * @see Gravity_Api::update_site
-	 *
-	 * @param string $value     The new key after edits
-	 * @param string $old_value The previous key
-	 *
-	 * @return string $value The new key
-	 */
 	public static function filter_pre_update_option_rg_gforms_key( $value, $old_value ){
 
 		if ( $value !== $old_value ) {

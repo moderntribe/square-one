@@ -5,7 +5,7 @@
  */
 
 import _ from 'lodash';
-import { on } from '../../src/utils/events';
+import { on } from '../utils/events';
 
 const el = document.getElementsByClassName('wp-embed-lazy');
 

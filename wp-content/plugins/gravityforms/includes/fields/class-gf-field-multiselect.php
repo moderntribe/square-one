@@ -201,7 +201,7 @@ class GF_Field_MultiSelect extends GF_Field {
 
 			if ( is_array( $items ) ) {
 				foreach ( $items as &$item ) {
-					$cat  = GFCommon::format_post_category( $item, $use_id );
+					$cat    = GFCommon::format_post_category( $item, $use_id );
 					$item = GFCommon::format_variable_value( $cat, $url_encode, $esc_html, $format );
 				}
 			}
@@ -211,13 +211,7 @@ class GF_Field_MultiSelect extends GF_Field {
 			}
 		}
 
-		$return = GFCommon::implode_non_blank( ', ', $items );
-
-		if ( $format == 'html' || $esc_html ) {
-			$return = esc_html( $return );
-		}
-
-		return $return;
+		return GFCommon::implode_non_blank( ', ', $items );
 	}
 
 	/**
@@ -266,6 +260,7 @@ class GF_Field_MultiSelect extends GF_Field {
 			$this->displayAllCategories = (bool) $this->displayAllCategories;
 		}
 	}
+
 }
 
 GF_Fields::register( new GF_Field_MultiSelect() );

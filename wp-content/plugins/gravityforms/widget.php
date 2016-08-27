@@ -13,19 +13,8 @@ if ( ! function_exists( 'gf_register_widget' ) ) {
 }
 
 if ( ! class_exists( 'GFWidget' ) ) {
-	/**
-	 * Class GFWidget
-	 *
-	 * Facilitates the creation of the Gravity Forms widget
-	 *
-	 * @see WP_Widget
-	 */
 	class GFWidget extends WP_Widget {
 
-		/**
-		 * GFWidget constructor.
-		 * @see WP_Widget::__construct
-		 */
 		function __construct() {
 
 			//load text domains
@@ -42,25 +31,10 @@ if ( ! class_exists( 'GFWidget' ) ) {
 
 		}
 
-		/**
-		 * Handles outputting of the widget content
-		 *
-		 * @see WP_Widget::widget
-		 * @see RGFormsModel::get_form_meta
-		 * @see RGForms::print_form_scripts
-		 * @see RGForms::get_form
-		 *
-		 * @param array $args     Arguments provided to the widget
-		 * @param array $instance Saved database values for the widget
-		 */
 		function widget( $args, $instance ) {
 
 			extract( $args );
 			echo $before_widget;
-			/**
-			 * Filters the widget title
-			 * @param string $instance['title'] The title
-			 */
 			$title = apply_filters( 'widget_title', $instance['title'] );
 
 			if ( $title ) {
@@ -69,7 +43,7 @@ if ( ! class_exists( 'GFWidget' ) ) {
 
 			$tabindex = is_numeric( $instance['tabindex'] ) ? $instance['tabindex'] : 1;
 
-			// Creating form
+			//creating form
 			$form = RGFormsModel::get_form_meta( $instance['form_id'] );
 
 			if ( empty( $instance['disable_scripts'] ) && ! is_admin() ) {
@@ -78,19 +52,11 @@ if ( ! class_exists( 'GFWidget' ) ) {
 
 			$form_markup = RGForms::get_form( $instance['form_id'], $instance['showtitle'], $instance['showdescription'], false, null, $instance['ajax'], $tabindex );
 
-			// Display form
+			//display form
 			echo $form_markup;
 			echo $after_widget;
 		}
 
-		/**
-		 * Handles updates to the widget content
-		 *
-		 * @param array $new_instance The new instance of the widget
-		 * @param array $old_instance The old instance of the widget
-		 *
-		 * @return array The widget instance, after changes have occurred
-		 */
 		function update( $new_instance, $old_instance ) {
 			$instance                    = $old_instance;
 			$instance['title']           = strip_tags( $new_instance['title'] );
@@ -104,13 +70,6 @@ if ( ! class_exists( 'GFWidget' ) ) {
 			return $instance;
 		}
 
-		/**
-		 * Outputs the form options for the widget
-		 *
-		 * @param array $instance The widget instance
-		 *
-		 * @return void
-		 */
 		function form( $instance ) {
 
 			$instance = wp_parse_args( (array) $instance, array( 'title' => __( 'Contact Us', 'gravityforms' ), 'tabindex' => '1' ) );

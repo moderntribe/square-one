@@ -4,7 +4,7 @@
  */
 
 import Spinner from 'spin.js';
-import scrollTo from '../../src/utils/dom/scroll-to';
+import scrollTo from '../utils/dom/scroll-to';
 
 const el = document.getElementById('site-wrap');
 let $el;

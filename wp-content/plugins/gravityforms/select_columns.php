@@ -1,7 +1,7 @@
 <?php
 
-// For backwards compatibility, load WordPress if it hasn't been loaded yet
-// Will be used if this file is being called directly
+//For backwards compatibility, load wordpress if it hasn't been loaded yet
+//Will be used if this file is being called directly
 if ( ! class_exists( 'RGForms' ) ) {
 	for ( $i = 0; $i < $depth = 10; $i ++ ) {
 		$wp_root_path = str_repeat( '../', $i );
@@ -16,19 +16,7 @@ if ( ! class_exists( 'RGForms' ) ) {
 	auth_redirect();
 }
 
-/**
- * Class GFSelectColumns
- *
- * Handles the changing of what columns are shown on the Entry page
- */
 class GFSelectColumns {
-
-	/**
-	 * Renders the column selection page
-	 *
-	 * @access public
-	 * @static
-	 */
 	public static function select_columns_page() {
 
 		$form_id = $_GET['id'];
@@ -37,7 +25,7 @@ class GFSelectColumns {
 			exit;
 		}
 
-		// Reading form metadata
+		//reading form metadata
 		$form = RGFormsModel::get_form_meta( $form_id );
 
 		?>
@@ -237,8 +225,8 @@ class GFSelectColumns {
 		</div>
 
 		<div class="panel-buttons">
-			<input type="button" value="  <?php esc_attr_e( 'Save', 'gravityforms' ); ?>  " class="button-primary" onclick="SelectColumns();" onkeypress="SelectColumns();" />&nbsp;
-			<input type="button" value="<?php esc_attr_e( 'Cancel', 'gravityforms' ); ?>" class="button" onclick="self.parent.tb_remove();" onkeypress="self.parent.tb_remove();" />
+			<input type="button" value="  <?php esc_attr_e( 'Save', 'gravityforms' ); ?>  " class="button-primary" onclick="SelectColumns();" />&nbsp;
+			<input type="button" value="<?php esc_attr_e( 'Cancel', 'gravityforms' ); ?>" class="button" onclick="self.parent.tb_remove();" />
 		</div>
 
 		</body>
@@ -247,17 +235,6 @@ class GFSelectColumns {
 	<?php
 	}
 
-	/**
-	 * Adds the entry meta to the Form object
-	 *
-	 * @access public
-	 * @static
-	 * @see GFFormsModel::get_entry_meta
-	 *
-	 * @param array $form The Form object
-	 *
-	 * @return array $form The Form object
-	 */
 	public static function get_selectable_entry_meta( $form ) {
 		$entry_meta = GFFormsModel::get_entry_meta( $form['id'] );
 		$keys       = array_keys( $entry_meta );

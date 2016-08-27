@@ -389,8 +389,8 @@ class GFAPI {
 	 *     $search_criteria['status'] = 'active';
 	 *
 	 *  Filter by date range
-	 *     $search_criteria['start_date'] = $start_date; // Using the time zone in the general settings.
-	 *     $search_criteria['end_date'] =  $end_date;    // Using the time zone in the general settings.
+	 *     $search_criteria['start_date'] = $start_date;
+	 *     $search_criteria['end_date'] =  $end_date;
 	 *
 	 *  Filter by any column in the main table
 	 *     $search_criteria['field_filters'][] = array("key" => 'currency', value => 'USD');
@@ -559,10 +559,7 @@ class GFAPI {
 	}
 
 	/**
-	 * Updates an entire single Entry object.
-	 *
-	 * If the date_created value is not set then the current time UTC will be used.
-	 * The date_created value, if set, is expected to be in 'Y-m-d H:i:s' format (UTC).
+	 * Updates a single Entry object.
 	 *
 	 * @since  1.8
 	 * @access public
@@ -1010,7 +1007,7 @@ class GFAPI {
 	 *
 	 *
 	 * @param int $form_id The Form ID
-	 * @param array $input_values An array of values. Not $_POST, that will be automatically merged with the $input_values.
+	 * @param array $input_values An array of values.
 	 * @param array $field_values Optional.
 	 * @param int $target_page Optional.
 	 * @param int $source_page Optional.
@@ -1157,7 +1154,7 @@ class GFAPI {
 
 		$results = $wpdb->query( $sql );
 		if ( false === $results ) {
-			return new WP_Error( 'error_deleting', sprintf( __( 'There was an error while deleting feed id %s', 'gravityforms' ), $feed_id ), $wpdb->last_error );
+			return new WP_Error( 'error_deleting', sprintf( __( 'There was an an error while deleting feed id %s', 'gravityforms' ), $feed_id ), $wpdb->last_error );
 		}
 
 		if ( 0 === $results ) {
@@ -1181,7 +1178,7 @@ class GFAPI {
 		$results = $wpdb->query( $sql );
 
 		if ( false === $results ) {
-			return new WP_Error( 'error_updating', sprintf( __( 'There was an error while updating feed id %s', 'gravityforms' ), $feed_id ), $wpdb->last_error );
+			return new WP_Error( 'error_updating', sprintf( __( 'There was an an error while updating feed id %s', 'gravityforms' ), $feed_id ), $wpdb->last_error );
 		}
 
 		if ( 0 === $results ) {
@@ -1214,7 +1211,7 @@ class GFAPI {
 		$results = $wpdb->query( $sql );
 
 		if ( false === $results ) {
-			return new WP_Error( 'error_inserting', __( 'There was an error while inserting a feed', 'gravityforms' ), $wpdb->last_error );
+			return new WP_Error( 'error_inserting', __( 'There was an an error while inserting a feed', 'gravityforms' ), $wpdb->last_error );
 		}
 
 		return $wpdb->insert_id;
@@ -1228,11 +1225,10 @@ class GFAPI {
 	 * @param $form
 	 * @param $entry
 	 * @param string $event Default = 'form_submission'
-	 * @param array  $data  Optional. Array of data which can be used in the notifications via the generic {object:property} merge tag.
 	 *
 	 * @return array
 	 */
-	public static function send_notifications( $form, $entry, $event = 'form_submission', $data = array() ) {
+	public static function send_notifications( $form, $entry, $event = 'form_submission' ) {
 
 		if ( rgempty( 'notifications', $form ) || ! is_array( $form['notifications'] ) ) {
 			return array();
@@ -1270,7 +1266,7 @@ class GFAPI {
 			$notifications_to_send[] = $notification['id'];
 		}
 
-		GFCommon::send_notifications( $notifications_to_send, $form, $entry, true, $event, $data );
+		GFCommon::send_notifications( $notifications_to_send, $form, $entry, true, $event );
 	}
 
 

@@ -3,7 +3,7 @@
  * @description JavaScript specific to the social sharing of content.
  */
 
-import popup from '../../src/utils/dom/popup';
+import popup from '../utils/dom/popup';
 
 const el = document.getElementsByClassName('social-share-popup');
 let $el;

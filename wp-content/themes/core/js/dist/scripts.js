@@ -128,7 +128,7 @@
 
 	  bindEvents();
 
-	  // initialize the tribe lib scripts
+	  // initialize the module scripts
 
 	  (0, _index2.default)();
 
