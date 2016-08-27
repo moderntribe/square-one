@@ -1,16 +1,14 @@
 <?php
-
 /**
  * Tribe Branding
  *
  * Update links and logos and social icons
  *
- * @todo      Make a global override admin for this on MS installs.
- * @version   1.0
- * @copyright Modern Tribe, Inc. 2013
+ * @version   2.0
+ * @copyright Modern Tribe, Inc.
  */
-class Tribe_Branding {
 
+class Tribe_Branding {
 
 	/********** CORE FUNCTIONS **********/
 
@@ -19,12 +17,15 @@ class Tribe_Branding {
 	 *
 	 * Enqueue scripts and init filters.
 	 */
-	protected function __construct() {}
+	protected function __construct() {
+	}
 
 	/**
 	 * Enqueue scripts and init filters.
 	 */
 	protected function add_hooks() {
+
+		add_action( 'login_enqueue_scripts', array( $this, 'set_login_logo' ) );
 		add_filter( 'login_headerurl', array( $this, 'set_login_header_url' ) );
 		add_filter( 'login_headertitle', array( $this, 'set_login_header_title' ) );
 		add_action( 'wp_head', array( $this, 'set_favicon' ) );
@@ -42,9 +43,35 @@ class Tribe_Branding {
 	}
 
 	/**
+	 * Login Logo
+	 */
+	public function set_login_logo() {
+
+		$logo = get_theme_mod( 'branding_customizer_icon_admin',
+			get_stylesheet_directory_uri() . '/img/logos/logo.png' );
+		if ( empty( $logo ) || ( file_exists( $logo ) === false ) ) {
+			return;
+		}
+		$logo_dimensions = getimagesize( $logo );
+		$ld_width        = $logo_dimensions[0] / 2 . 'px';
+		$ld_height       = $logo_dimensions[1] / 2 . 'px';
+		?>
+		<style type="text/css">
+			.login h1 a {
+				background: transparent url(<?php echo $logo; ?>) 50% 50% no-repeat !important;
+				width: <?php echo $ld_width; ?> !important;
+				height: <?php echo $ld_height; ?> !important;
+				background-size: <?php echo $ld_width . ' ' . $ld_height; ?> !important;
+			}
+		</style>
+		<?php
+	}
+
+	/**
 	 * Login Header Url
 	 */
 	public function set_login_header_url( $url = '' ) {
+
 		return get_home_url();
 	}
 
@@ -52,6 +79,7 @@ class Tribe_Branding {
 	 * Login Header Title
 	 */
 	public function set_login_header_title( $name = '' ) {
+
 		return get_bloginfo( 'name' );
 	}
 
@@ -59,6 +87,7 @@ class Tribe_Branding {
 	 * Favicon
 	 */
 	public function set_favicon() {
+
 		$icon = get_theme_mod( 'branding_customizer_icon_favicon', get_stylesheet_directory_uri() . '/img/branding/favicon.ico' );
 		echo '<link rel="shortcut icon" href="' . $icon . '">';
 	}
@@ -67,6 +96,7 @@ class Tribe_Branding {
 	 * Android Icon
 	 */
 	public function set_android_icon() {
+
 		$icon = get_theme_mod( 'branding_customizer_icon_android', get_stylesheet_directory_uri() . '/img/branding/android-icon.png' );
 		echo '<link rel="icon" sizes="192x192" href="' . $icon . '">';
 	}
@@ -75,6 +105,7 @@ class Tribe_Branding {
 	 * iOS Icon
 	 */
 	public function set_ios_icon() {
+
 		$icon = get_theme_mod( 'branding_customizer_icon_ios', get_template_directory_uri() . '/img/branding/apple-touch-icon-precomposed.png' );
 		echo '<link rel="apple-touch-icon-precomposed" href="' . $icon . '">';
 	}
@@ -83,6 +114,7 @@ class Tribe_Branding {
 	 * IE Metro Icon
 	 */
 	public function set_ie_metro_icon() {
+
 		$icon = get_theme_mod( 'branding_customizer_icon_ie', get_template_directory_uri() . '/img/branding/ms-icon-144.png' );
 		echo '<meta name="msapplication-TileImage" content="' . $icon . '">';
 	}
@@ -91,6 +123,7 @@ class Tribe_Branding {
 	 * Android Theme Color
 	 */
 	public function set_android_theme_color() {
+
 		$theme_color = get_theme_mod( 'branding_customizer_android_theme', '#000000' );
 		echo '<meta name="theme-color" content="' . $theme_color . '">';
 	}
@@ -99,6 +132,7 @@ class Tribe_Branding {
 	 * IE Metro Icon Background Color
 	 */
 	public function set_ie_metro_icon_bgd_color() {
+
 		$icon_bgd_color = get_theme_mod( 'branding_customizer_icon_ie_bgd_color', '#000000' );
 		echo '<meta name="msapplication-TileColor" content="' . $icon_bgd_color . '">';
 	}
@@ -114,8 +148,6 @@ class Tribe_Branding {
 		// Clean up customizer a bit
 		$wp_customize->remove_section( 'colors' );
 		$wp_customize->remove_section( 'static_front_page' );
-		$wp_customize->remove_panel( 'nav_menus' );
-		$wp_customize->remove_panel( 'widgets' );
 		$wp_customize->remove_control( 'site_icon' );
 
 		// Add branding section
@@ -124,33 +156,46 @@ class Tribe_Branding {
 			'priority' => apply_filters( 'branding_customizer_priority', 500 )
 		) );
 
+		// Icon: Login
+		$wp_customize->add_setting( 'branding_customizer_icon_admin' );
+		$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'branding_customizer_icon_admin',
+			array(
+				'label'       => __( 'Login Logo', 'tribe' ),
+				'description' => __( 'Recommended minimum width: 700px. Recommended file type: .png.', 'tribe' ),
+				'section'     => 'branding_customizer',
+				'settings'    => 'branding_customizer_icon_admin',
+			) ) );
+
 		// Icon: Favicon
 		$wp_customize->add_setting( 'branding_customizer_icon_favicon' );
-		$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'branding_customizer_icon_favicon', array(
-			'label'       => __( 'Favicon', 'tribe' ),
-			'description' => __( 'Recommended dimensions: 64px X 64px. Recommended file type: .ico.', 'tribe' ),
-			'section'     => 'branding_customizer',
-			'settings'    => 'branding_customizer_icon_favicon',
-			'extensions'  => array( 'ico' ),
-		) ) );
+		$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'branding_customizer_icon_favicon',
+			array(
+				'label'       => __( 'Favicon', 'tribe' ),
+				'description' => __( 'Recommended dimensions: 64px X 64px. Recommended file type: .ico.', 'tribe' ),
+				'section'     => 'branding_customizer',
+				'settings'    => 'branding_customizer_icon_favicon',
+				'extensions'  => array( 'ico' ),
+			) ) );
 
 		// Icon: Android
 		$wp_customize->add_setting( 'branding_customizer_icon_android' );
-		$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'branding_customizer_icon_android', array(
-			'label'       => __( 'Android Icon', 'tribe' ),
-			'description' => __( 'Recommended dimensions: 192px X 192px. Recommended file type: .png.', 'tribe' ),
-			'section'     => 'branding_customizer',
-			'settings'    => 'branding_customizer_icon_android'
-		) ) );
+		$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'branding_customizer_icon_android',
+			array(
+				'label'       => __( 'Android Icon', 'tribe' ),
+				'description' => __( 'Recommended dimensions: 192px X 192px. Recommended file type: .png.', 'tribe' ),
+				'section'     => 'branding_customizer',
+				'settings'    => 'branding_customizer_icon_android'
+			) ) );
 
 		// Icon: iOS
 		$wp_customize->add_setting( 'branding_customizer_icon_ios' );
-		$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'branding_customizer_icon_ios', array(
-			'label'       => __( 'iOS Icon', 'tribe' ),
-			'description' => __( 'Recommended dimensions: 512px X 512px. Recommended file type: .png.', 'tribe' ),
-			'section'     => 'branding_customizer',
-			'settings'    => 'branding_customizer_icon_ios'
-		) ) );
+		$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'branding_customizer_icon_ios',
+			array(
+				'label'       => __( 'iOS Icon', 'tribe' ),
+				'description' => __( 'Recommended dimensions: 512px X 512px. Recommended file type: .png.', 'tribe' ),
+				'section'     => 'branding_customizer',
+				'settings'    => 'branding_customizer_icon_ios'
+			) ) );
 
 		// Icon: IE
 		$wp_customize->add_setting( 'branding_customizer_icon_ie' );
@@ -163,21 +208,23 @@ class Tribe_Branding {
 
 		// Android Theme
 		$wp_customize->add_setting( 'branding_customizer_android_theme' );
-		$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'branding_customizer_android_theme', array(
-			'label'       => __( 'Android Theme Color', 'tribe' ),
-			'description' => __( 'Select the theme color for android os while website is active in chrome.', 'tribe' ),
-			'section'     => 'branding_customizer',
-			'settings'    => 'branding_customizer_android_theme'
-		) ) );
+		$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'branding_customizer_android_theme',
+			array(
+				'label'       => __( 'Android Theme Color', 'tribe' ),
+				'description' => __( 'Select the theme color for android os while website is active in chrome.', 'tribe' ),
+				'section'     => 'branding_customizer',
+				'settings'    => 'branding_customizer_android_theme'
+			) ) );
 
 		// Icon Bgd: IE
 		$wp_customize->add_setting( 'branding_customizer_icon_ie_bgd_color' );
-		$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'branding_customizer_icon_ie_bgd_color', array(
-			'label'       => __( 'IE Metro Icon Background Color', 'tribe' ),
-			'description' => __( 'Select the background color to be used behind the IE Metro Icon.', 'tribe' ),
-			'section'     => 'branding_customizer',
-			'settings'    => 'branding_customizer_icon_ie_bgd_color'
-		) ) );
+		$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize,
+			'branding_customizer_icon_ie_bgd_color', array(
+				'label'       => __( 'IE Metro Icon Background Color', 'tribe' ),
+				'description' => __( 'Select the background color to be used behind the IE Metro Icon.', 'tribe' ),
+				'section'     => 'branding_customizer',
+				'settings'    => 'branding_customizer_icon_ie_bgd_color'
+			) ) );
 
 	}
 
@@ -189,6 +236,7 @@ class Tribe_Branding {
 	 * @return array
 	 */
 	function support_ico_uploads( $existing_mimes = array() ) {
+
 		// Add file extension 'extension' with mime type 'mime/type'
 		$existing_mimes['ico'] = 'image/x-icon';
 
@@ -199,6 +247,7 @@ class Tribe_Branding {
 	 * Tribe attribution credit in an HTML comment.
 	 */
 	public function tribe_attribute_credit() {
+
 		echo "\n<!-- Hand crafted by Modern Tribe, Inc. (http://tri.be) -->\n\n";
 	}
 
@@ -206,7 +255,8 @@ class Tribe_Branding {
 	 * Edit the admin footer text
 	 */
 	public function edit_admin_footer_text() {
-		echo get_bloginfo( 'name' ) .' running on <a href="http://wordpress.org/">WordPress</a>';
+
+		echo get_bloginfo( 'name' ) . ' running on <a href="http://wordpress.org/" rel="external">WordPress</a>';
 	}
 
 	/********** SINGLETON FUNCTIONS **********/
@@ -225,6 +275,7 @@ class Tribe_Branding {
 	 * @return void
 	 */
 	public static function init() {
+
 		self::$instance = self::get_instance();
 		self::$instance->add_hooks();
 	}
@@ -236,6 +287,7 @@ class Tribe_Branding {
 	 * @return Tribe_Branding
 	 */
 	public static function get_instance() {
+
 		if ( ! is_a( self::$instance, __CLASS__ ) ) {
 			self::$instance = new self();
 		}

@@ -13,7 +13,7 @@ class Fonts {
 
 	public function hook() {
 		add_action( 'wp_head', [ $this, 'load_fonts' ], 0, 0 );
-		add_action( 'login_head', [ $this, 'load_fonts' ], 0, 0 );
+		//add_action( 'login_head', [ $this, 'load_fonts' ], 0, 0 );
 	}
 
 	/**
