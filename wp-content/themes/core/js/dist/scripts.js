@@ -6005,7 +6005,7 @@
 	 */
 
 	var bindEvents = function bindEvents() {
-		(0, _delegate2.default)(el.container, '[data-js="comment-form"]', 'click', validateCommentSubmit);
+		(0, _delegate2.default)(el.container, 'input[type="submit"]', 'click', validateCommentSubmit);
 	};
 
 	/**

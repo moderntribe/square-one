@@ -36,7 +36,7 @@ const validateCommentSubmit = (e) => {
  */
 
 const bindEvents = () => {
-	delegate(el.container, '[data-js="comment-form"]', 'click', validateCommentSubmit);
+	delegate(el.container, 'input[type="submit"]', 'click', validateCommentSubmit);
 };
 
 /**
