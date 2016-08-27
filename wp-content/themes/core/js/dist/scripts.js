@@ -6206,7 +6206,9 @@
 		return element;
 	};
 
-	var convertElements = exports.convertElements = function convertElements(elements) {
+	var convertElements = exports.convertElements = function convertElements() {
+		var elements = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
+
 		var converted = [];
 		var i = elements.length;
 		for (i; i--; converted.unshift(elements[i])) {}
@@ -6226,7 +6228,7 @@
 		var node = arguments.length <= 2 || arguments[2] === undefined ? document : arguments[2];
 
 		var nodes = node.querySelectorAll('[data-js="' + selector + '"]');
-		if (nodes.length && convert) {
+		if (convert) {
 			nodes = convertElements(nodes);
 		}
 
