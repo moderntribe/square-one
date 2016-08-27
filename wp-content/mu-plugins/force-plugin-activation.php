@@ -17,6 +17,7 @@ class Force_Plugin_Activation {
 	 * Add elements as plugin path: directory/file.php
 	 */
 	private $force_active = array(
+		'advanced-custom-fields-pro/acf.php',
 		'core/core.php',
 		'limit-login-attempts/limit-login-attempts.php',
 		'attachment-helper/attachment-helper.php',
@@ -47,6 +48,7 @@ class Force_Plugin_Activation {
 	 * Add elements as plugin path: directory/file.php
 	 */
 	private $force_network_only = array(
+		'advanced-custom-fields-pro/acf.php',
 		'debug-bar/debug-bar.php',
 		'debug-bar-action-hooks/debug-bar-action-hooks.php',
 		'debug-bar-console/debug-bar-console.php',

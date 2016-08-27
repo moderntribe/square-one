@@ -2,30 +2,20 @@
 	'use strict';
 
 	if(!window.addEventListener){return;}
-
 	var regDescriptors = /\s+(\d+)(w|h)\s+(\d+)(w|h)/;
 	var regCssFit = /parent-fit["']*\s*:\s*["']*(contain|cover|width)/;
 	var regCssObject = /parent-container["']*\s*:\s*["']*(.+?)(?=(\s|$|,|'|"|;))/;
 	var regPicture = /^picture$/i;
-
 	var getCSS = function (elem){
 		return (getComputedStyle(elem, null) || {});
 	};
-
 	var parentFit = {
-
 		getParent: function(element, parentSel){
-			var parent = element;
+			var parent;
 			var parentNode = element.parentNode;
 
-			if((!parentSel || parentSel == 'prev') && parentNode && regPicture.test(parentNode.nodeName || '')){
-				parentNode = parentNode.parentNode;
-			}
-
 			if(parentSel != 'self'){
-				if(parentSel == 'prev'){
-					parent = element.previousElementSibling;
-				} else if(parentSel && (parentNode.closest || window.jQuery)){
+				if(parentSel && (parentNode.closest || window.jQuery)){
 					parent = (parentNode.closest ?
 							parentNode.closest(parentSel) :
 							jQuery(parentNode).closest(parentSel)[0]) ||
@@ -33,12 +23,15 @@
 					;
 				} else {
 					parent = parentNode;
+
+					if(parent && regPicture.test(parent.nodeName || '')){
+						parent = parent.parentNode;
+					}
 				}
 			}
 
 			return parent;
 		},
-
 		getFit: function(element){
 			var tmpMatch, parentObj;
 			var css = getCSS(element);
@@ -67,7 +60,6 @@
 
 			return obj;
 		},
-
 		getImageRatio: function(element){
 			var i, srcset, media, ratio;
 			var parent = element.parentNode;
@@ -98,7 +90,6 @@
 
 			return ratio;
 		},
-
 		calculateSize: function(element, width){
 			var displayRatio, height, imageRatio, retWidth;
 			var fitObj = this.getFit(element);
@@ -130,7 +121,6 @@
 			return retWidth;
 		}
 	};
-
 	var extend = function(){
 		if(window.lazySizes){
 			if(!lazySizes.parentFit){
@@ -147,7 +137,5 @@
 		var element = e.target;
 		e.detail.width = parentFit.calculateSize(element, e.detail.width);
 	});
-
 	setTimeout(extend);
-
 })(window, document);
