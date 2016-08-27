@@ -17,6 +17,8 @@ import { on, ready } from '../utils/events';
 
 import tribeLibs from '../../vendor/tribe-libs/index';
 
+import single from '../single/index';
+
 /**
  * @function bindEvents
  * @description Bind global event listeners here,
@@ -49,6 +51,8 @@ const init = () => {
 	tribeLibs();
 
 	// initialize the main scripts
+
+	single();
 
 	console.info('Initialized all javascript that targeted document ready.');
 };
