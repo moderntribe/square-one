@@ -13,5 +13,5 @@ git remote set-url origin "git@github.com:moderntribe/$1.git"
 git remote add upstream "git@github.com:moderntribe/square-one.git"
 
 # create necessary branches
-git branch develop
 git branch server/dev
+git branch server/production
