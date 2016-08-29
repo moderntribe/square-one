@@ -14,9 +14,10 @@ class Gravity_Forms_Filter {
 	/**
 	 * @var bool Used to enable/disable CSS classes that control icon placement inside some field types.
 	 */
-	private $activate_icons = true;
+	private $activate_icons = false;
 
 	public function hook() {
+
 		add_filter( 'gform_enqueue_scripts', [ $this, 'enqueue_gravity_forms_jquery_ui_styles' ] );
 		add_filter( 'gform_field_choice_markup_pre_render', [ $this, 'customize_gf_choice_other' ], 10, 4 );
 		add_filter( 'gform_field_css_class', [ $this, 'add_gf_select_field_class' ], 10, 3 );
@@ -32,28 +33,26 @@ class Gravity_Forms_Filter {
 
 		global $wp_scripts;
 		$jquery_ui = $wp_scripts->query( 'jquery-ui-core' );
-		wp_enqueue_style( 'jquery-ui-smoothness', 'https://ajax.googleapis.com/ajax/libs/jqueryui/' . $jquery_ui->ver . '/themes/smoothness/jquery-ui.css', false, 'screen' );
+		wp_enqueue_style( 'jquery-ui-smoothness',
+			'https://ajax.googleapis.com/ajax/libs/jqueryui/' . $jquery_ui->ver . '/themes/smoothness/jquery-ui.css',
+			false, 'screen' );
 
 	}
 
 	/**
 	 * Add some custom markup to other option for radio & checkbox controls
+	 *
 	 * @link https://www.gravityhelp.com/documentation/article/gform_field_choice_markup_pre_render/
 	 */
 	public function customize_gf_choice_other( $choice_markup, $choice, $field, $value ) {
 
 		if ( ! empty( $choice['isOtherChoice'] ) ) {
 
-			$indices = array_keys( $field[ 'choices' ] );
-			$index = array_pop( $indices );
+			$indices = array_keys( $field['choices'] );
+			$index   = array_pop( $indices );
 
-			$new_markup = sprintf(
-				'<label for="choice_%1$s_%2$s_%3$s" class="gf-radio-checkbox-other-placeholder"><span class="visual-hide">%4$s</span></label></li>',
-				$field['formId'],
-				$field['id'],
-				$index,
-				__( 'Other', 'tribe' )
-			);
+			$new_markup = sprintf( '<label for="choice_%1$s_%2$s_%3$s" class="gf-radio-checkbox-other-placeholder"><span class="u-visual-hide">%4$s</span></label></li>',
+				$field['formId'], $field['id'], $index, __( 'Other', 'tribe' ) );
 
 			$choice_markup = str_replace( '</li>', $new_markup, $choice_markup );
 
@@ -65,6 +64,7 @@ class Gravity_Forms_Filter {
 
 	/**
 	 * Add a custom class to the Gravity Forms select field
+	 *
 	 * @link http://www.gravityhelp.com/documentation/page/Gform_field_css_class
 	 */
 	public function add_gf_select_field_class( $classes, $field, $form ) {
@@ -73,9 +73,9 @@ class Gravity_Forms_Filter {
 		$class_icon_complex = $this->activate_icons ? ' form-control-icon-complex' : '';
 
 		if ( $field['type'] === 'multiselect' || ( $field['type'] === 'post_custom_field' && $field['inputType'] === 'multiselect' ) ) {
-			$classes .= ' gf-multi-select' . $class_icon_simple;
+			$classes .= ' gf-multi-select';
 		} elseif ( $field['type'] === 'select' || ( $field['type'] === 'post_custom_field' && $field['inputType'] === 'select' ) ) {
-			$classes .= ' gf-select' . $class_icon_simple;
+			$classes .= ' gf-select';
 			// Not Chosen, regular select
 			if ( ! $field['enableEnhancedUI'] ) {
 				$classes .= ' gf-select-no-chosen';
@@ -88,7 +88,7 @@ class Gravity_Forms_Filter {
 			$classes .= ' gf-textarea';
 		} elseif ( $field['type'] === 'date' ) {
 			$class_date_icon = ( $field['dateType'] === 'datepicker' ) ? $class_icon_simple : '';
-			$classes .= ' gf-date gf-date-layout-'. $field['dateType'] . $class_date_icon;
+			$classes .= ' gf-date gf-date-layout-' . $field['dateType'] . $class_date_icon;
 		} elseif ( $field['type'] === 'time' ) {
 			$classes .= ' gf-time';
 		} elseif ( $field['type'] === 'phone' ) {
@@ -116,9 +116,17 @@ class Gravity_Forms_Filter {
 	 * collision between Gravity and GSAP jQuery plugin, our JS animation library, which is
 	 * worth the performance gain in animations used site wide over the Gravity
 	 * Forms conditional animations, which look terrible anyway.
+	 *
+	 * @param array $form
+	 *
+	 * @return array
 	 */
 	public function deactivate_gf_animations( $form = [] ) {
-		$form['enableAnimation'] = false;
+
+		if ( isset( $form['enableAnimation'] ) && $form['enableAnimation'] == true ) {
+			$form['enableAnimation'] = false;
+		}
+
 		return $form;
 	}
 
