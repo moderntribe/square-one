@@ -34,14 +34,14 @@ class Oembed_Filter {
 			return $html;
 		}
 
-		$figure_class = 'wp-embed-lazy ' . strtolower( $data->provider_name );
+		$figure_class = 'wp-embed-lazy';
 
 		if ( $data->provider_name === 'YouTube' ) {
 			$embed_id    = $this->get_youtube_embed_id( $url );
 			$video_thumb = $this->get_youtube_max_resolution_thumbnail( $url );
 
 			if ( strpos( $video_thumb, 'maxresdefault' ) === false ) {
-				$figure_class .= ' low-resolution';
+				$figure_class .= ' wp-embed-lazy--low-res';
 			}
 
 		} else {
@@ -53,13 +53,13 @@ class Oembed_Filter {
 			return $html; // with no thumbnail, we use the default embed
 		}
 
-		$frontend_html = '<figure class="'. esc_attr( $figure_class ) .'">';
-		$frontend_html .= '<a href="'. esc_url( $url ) .'" class="wp-embed-lazy-launch" title="'. esc_attr( $data->title ) .'" data-embed-id="'. esc_attr( $embed_id ) .'">';
-		$frontend_html .= '<img class="wp-embed-lazy-thumb lazyload" src="'. trailingslashit( get_template_directory_uri() ) . 'img/shims/16x9.png' .'" data-src="'. esc_url( $video_thumb ) .'" alt="'. esc_attr( $data->title ) .'" />';
-		$frontend_html .= '<figcaption class="wp-embed-lazy-caption">';
-		$frontend_html .= '<i class="icon icon-play"></i>';
-		$frontend_html .= '<span class="wp-embed-lazy-prompt">' . __( 'Play Video', 'tribe' ) . '</span>';
-		$frontend_html .= '<span class="wp-embed-lazy-title">'. esc_html( $data->title ) .'</span>';
+		$frontend_html = '<figure class="'. esc_attr( $figure_class ) .'" data-js="lazyload-embed" data-embed-provider="'. esc_attr( strtolower( $data->provider_name ) ) .'">';
+		$frontend_html .= '<a href="'. esc_url( $url ) .'" class="wp-embed-lazy__trigger" data-js="lazyload-trigger" title="'. esc_attr( $data->title ) .'" data-embed-id="'. esc_attr( $embed_id ) .'">';
+		$frontend_html .= '<img class="wp-embed-lazy__image lazyload" src="'. trailingslashit( get_template_directory_uri() ) . 'img/shims/16x9.png' .'" data-src="'. esc_url( $video_thumb ) .'" alt="'. esc_attr( $data->title ) .'" />';
+		$frontend_html .= '<figcaption class="wp-embed-lazy__caption">';
+		$frontend_html .= '<i class="wp-embed-lazy__icon icon icon-play"></i>';
+		$frontend_html .= '<span class="wp-embed-lazy__trigger-label">' . __( 'Play Video', 'tribe' ) . '</span>';
+		$frontend_html .= '<span class="wp-embed-lazy__title">'. esc_html( $data->title ) .'</span>';
 		$frontend_html .= '</figcaption>';
 		$frontend_html .= '</a>';
 		$frontend_html .= '</figure>';

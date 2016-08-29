@@ -7,7 +7,7 @@
 blockquote,
 .quote,
 q {
-	.context-content & {
+	.t-typography & {
 		margin: var(--spacer) auto;
 	}
 }
@@ -18,7 +18,7 @@ q {
 
 /* q */
 .quote,
-.context-content q {
+.t-typography q {
 	@mixin quote-base;
 	@mixin quote-text;
 	display: block;
@@ -30,7 +30,7 @@ q {
 
 /* blockquote */
 .blockquote,
-.context-content blockquote {
+.t-typography blockquote {
 	@mixin quote-base;
 	p {
 		@mixin quote-text;
@@ -48,7 +48,7 @@ q {
 
 /* cite */
 .cite,
-.context-content cite {
+.t-typography cite {
 	font-style: normal;
 	display: block;
 }

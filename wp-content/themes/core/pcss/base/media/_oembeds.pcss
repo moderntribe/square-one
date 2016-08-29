@@ -7,7 +7,7 @@
 		display: none;
 	}
 
-	.wp-embed-lazy-thumb {
+	.wp-embed-lazy__image {
 		margin: 0;
 		width: 100%;
 		height: 100%;
@@ -15,20 +15,20 @@
 		top: 0;
 		left: 0;
 		&.lazyloaded {
-			& ~ .wp-embed-lazy-caption {
+			& ~ .wp-embed-lazy__caption {
 				opacity: 1;
 				transition: opacity 250ms 300ms ease-in;
 			}
 		}
 	}
 
-	.wp-embed-lazy-launch {
+	.wp-embed-lazy__trigger {
 		display: block;
 		transition: var(--transition);
 		height: 100%;
 		&:hover,
 		&:focus {
-			.icon-play {
+			.wp-embed-lazy__icon {
 				border-color: var(--embed-icon-border-hover);
 				&:before {
 					transform: scale(0.65);
@@ -48,7 +48,7 @@
 		}
 	}
 
-	.wp-embed-lazy-caption {
+	.wp-embed-lazy__caption {
 		opacity: 0;
 		transition: opacity 0.15s ease-in;
 		position: absolute;
@@ -65,7 +65,7 @@
 		}
 	}
 
-	.icon-play {
+	.wp-embed-lazy__icon {
 		position: absolute;
 		font-size: 44px;
 		left: 15px;
@@ -83,7 +83,7 @@
 		}
 	}
 
-	.wp-embed-lazy-prompt {
+	.wp-embed-lazy__trigger-label {
 		display: block;
 		font-weight: var(--font-weight-bold);
 		text-transform: uppercase;
@@ -92,7 +92,7 @@
 		font-size: 14px;
 	}
 
-	.wp-embed-lazy-title {
+	.wp-embed-lazy__title {
 		font-size: 18px;
 		letter-spacing: 0.02em;
 		display: block;
@@ -102,16 +102,16 @@
 	}
 
 	/* CASE: Low Resolution */
-	&.low-resolution {
-		.wp-embed-lazy-thumb {
+	&.wp-embed-lazy--low-res {
+		.wp-embed-lazy__image {
 			margin-top: -9.4%;
 		}
 	}
 
 	/* CASE: Mobile */
-	&.small-display {
+	&.wp-embed-lazy--small {
 
-		.wp-embed-lazy-caption {
+		.wp-embed-lazy__caption {
 			background: var(--embed-caption-bgd-color-mobile);
 			border: 0;
 			padding: 0;
@@ -122,11 +122,11 @@
 			bottom: 0;
 		}
 
-		.wp-embed-lazy-title {
+		.wp-embed-lazy__title {
 			display: none;
 		}
 
-		.wp-embed-lazy-prompt {
+		.wp-embed-lazy__trigger-label {
 			color: var(--embed-prompt-mobile);
 			width: 100%;
 			bottom: 15%;
@@ -134,7 +134,7 @@
 			text-align: center;
 		}
 
-		.icon-play {
+		.wp-embed-lazy__icon {
 			left: 50%;
 			margin-left: -26px;
 		}

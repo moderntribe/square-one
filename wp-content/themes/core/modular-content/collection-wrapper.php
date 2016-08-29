@@ -15,4 +15,4 @@
 
 	<?php echo $panels; ?>
 
-</div><!-- .panels-collection -->
+</div>

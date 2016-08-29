@@ -5,7 +5,7 @@
 		<?php // Content: Sub-header
 		get_template_part( 'content/header/sub' ); ?>
 
-		<div class="content-wrap">
+		<div class="l-wrapper">
 		
 			<?php if ( have_posts() ) : ?>
 

@@ -21,7 +21,7 @@ if ( ! function_exists( 'core_comment' ) ) :
 					<p>
 						<strong>Pingback:</strong>
 						<?php comment_author_link(); ?>
-						<?php edit_comment_link( '(Edit)', '<span class="edit-link">', '</span>' ); ?>
+						<?php edit_comment_link( '(Edit)', '<span class="comment__action-edit">', '</span>' ); ?>
 					</p>
 
 				<?php break;
@@ -32,7 +32,7 @@ if ( ! function_exists( 'core_comment' ) ) :
 				<p>
 					<strong>Trackback:</strong>
 					<?php comment_author_link(); ?>
-					<?php edit_comment_link( '(Edit)', '<span class="edit-link">', '</span>' ); ?>
+					<?php edit_comment_link( '(Edit)', '<span class="comment__action-edit">', '</span>' ); ?>
 				</p>
 
 				<?php break;
@@ -41,24 +41,24 @@ if ( ! function_exists( 'core_comment' ) ) :
 
 				<li id="comment-<?php comment_ID(); ?>" <?php comment_class( 'post-interaction' ); ?>>
 
-					<header class="comment-header">
+					<header class="comment__header">
 
 						<?php // Gravatar
 						echo get_avatar( $comment, 150 ); ?>
 
-						<h5 class="comment-title" rel="author">
+						<h5 class="comment__title" rel="author">
 							<cite><?php echo get_comment_author(); ?></cite>
 						</h5>
 
-						<time class="comment-time" datetime="<?php echo get_comment_time( 'c' ); ?>">
+						<time class="comment__time" datetime="<?php echo get_comment_time( 'c' ); ?>">
 							<?php echo get_comment_time( 'g:i A - M j, Y' ); ?>
 						</time>
 
 					</header><!-- .comment-header -->
 
-					<div class="comment-text">
+					<div class="comment__text">
 
-						<?php edit_comment_link( 'Edit Comment', '<p>', '</p>' ); ?>
+						<?php edit_comment_link( 'Edit Comment', '<p class="comment__action-edit">', '</p>' ); ?>
 
 						<?php comment_text(); ?>
 
@@ -66,15 +66,15 @@ if ( ! function_exists( 'core_comment' ) ) :
 
 					<?php // Moderation text
 					if ( $comment->comment_approved == '0' ) { ?>
-						<p class="comment-moderation">Your comment is awaiting moderation.</p>
+						<p class="comment__message-moderation">Your comment is awaiting moderation.</p>
 					<?php } ?>
 
 					<?php // Reply
 					comment_reply_link(
 						array_merge( $args, array(
 							'reply_text' => 'Reply',
-							'before'	 => '<p class="reply">',
-							'after' 	 => '</p><!-- .reply -->',
+							'before'	 => '<p class="comment__action-reply">',
+							'after' 	 => '</p>',
 							'depth' 	 => $depth,
 							'max_depth'  => $args['max_depth']
 						) ) ); ?>

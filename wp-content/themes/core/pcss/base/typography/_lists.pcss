@@ -6,7 +6,7 @@
 ul,
 ol,
 dl {
-	.context-content & {
+	.t-typography & {
 		@mixin body-content;
 		margin-top: var(--spacer);
 		margin-bottom: var(--spacer);
@@ -15,7 +15,7 @@ dl {
 
 li {
 	& ~ li {
-		.context-content & {
+		.t-typography & {
 			margin-top: var(--spacer-xs);
 		}
 	}
@@ -26,7 +26,7 @@ li {
  * ------------------------------------------------------------------------- */
 
 .list-bullet,
-.context-content ul {
+.t-typography ul {
 	list-style: disc outside;
 	padding-left: 1.5em;
 	padding-right: 0;
@@ -42,7 +42,7 @@ li {
  * ------------------------------------------------------------------------- */
 
 .list-number,
-.context-content ol {
+.t-typography ol {
 	list-style: decimal outside;
 	padding-left: 1.5em;
 	padding-right: 0;
@@ -58,7 +58,7 @@ li {
  * ------------------------------------------------------------------------- */
 
 .dl,
-.context-content dl {
+.t-typography dl {
 	padding-left: 1.5em;
 	padding-right: 0;
 
@@ -69,11 +69,11 @@ li {
 }
 
 .dt,
-.context-content dt {
+.t-typography dt {
 	font-weight: var(--font-weight-bold);
 }
 
 .dd,
-.context-content dd {
+.t-typography dd {
 	margin-bottom: var(--spacer);
 }

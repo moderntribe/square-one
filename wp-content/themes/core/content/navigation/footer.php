@@ -1,10 +1,10 @@
 <?php if( has_nav_menu( 'secondary' ) ) { ?>
 
-	<nav>
+	<nav class="site-footer__nav" aria-labelledby="site-footer__nav-label">
 
-		<h5 class="visual-hide">Secondary Navigation</h5>
+		<h2 id="site-footer__nav-label" class="u-visual-hide">Secondary Navigation</h2>
 
-		<ol>
+		<ol class="site-footer__nav-list">
 			<?php
 			$defaults = array(
 				'theme_location'  => 'secondary',

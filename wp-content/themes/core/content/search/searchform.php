@@ -2,6 +2,6 @@
 	
 	<label for="s">Search</label>
 	<input type="text" name="s" />
-	<input type="submit" class="search-trigger" name="submit" value="Search" />
+	<input type="submit" name="submit" value="Search" />
 
 </form>

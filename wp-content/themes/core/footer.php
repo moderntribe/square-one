@@ -2,7 +2,7 @@
 		<?php // Content: Footer
 		get_template_part( 'content/footer/default' ); ?>
 
-	</div><!-- #site-wrap -->
+	</div><!-- .l-site-wrapper -->
 
 	<?php wp_footer(); ?>
 

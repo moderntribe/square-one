@@ -36,7 +36,7 @@ const validateCommentSubmit = (e) => {
  */
 
 const bindEvents = () => {
-	delegate(el.container, 'input[type="submit"]', 'click', validateCommentSubmit);
+	delegate(el.container, 'input[type="submit"]', 'click', (e) => validateCommentSubmit(e));
 };
 
 /**

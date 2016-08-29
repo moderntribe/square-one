@@ -10,7 +10,7 @@
 			<?php // If we have content, output our content block (for panel pages)
 			if ( '' !== get_the_content() ) { ?>
 
-				<div class="content-wrap">
+				<div class="l-wrapper">
 
 					<?php // Content: Page
 					get_template_part( 'content/page/default' ); ?>
