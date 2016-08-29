@@ -147,7 +147,7 @@
 	var throttle = function(fn){
 		var running;
 		var lastTime = 0;
-		var gDelay = 99;
+		var gDelay = 125;
 		var RIC_DEFAULT_TIMEOUT = 999;
 		var rICTimeout = RIC_DEFAULT_TIMEOUT;
 		var run = function(){
@@ -237,7 +237,7 @@
 		var currentExpand = 0;
 
 		var isLoading = 0;
-		var lowRuns = 0;
+		var lowRuns = -1;
 
 		var resetPreloading = function(e){
 			isLoading--;
@@ -287,17 +287,17 @@
 
 				if(preloadExpand == null){
 					if(!('expand' in lazySizesConfig)){
-						lazySizesConfig.expand = docElem.clientHeight > 600 ? docElem.clientWidth > 600 ? 550 : 410 : 359;
+						lazySizesConfig.expand = docElem.clientHeight > 500 ? 500 : 400;
 					}
 
 					defaultExpand = lazySizesConfig.expand;
 					preloadExpand = defaultExpand * lazySizesConfig.expFactor;
 				}
 
-				if(currentExpand < preloadExpand && isLoading < 1 && lowRuns > 3 && loadMode > 2){
+				if(currentExpand < preloadExpand && isLoading < 1 && lowRuns > 2 && loadMode > 2 && !document.hidden){
 					currentExpand = preloadExpand;
 					lowRuns = 0;
-				} else if(loadMode > 1 && lowRuns > 2 && isLoading < 6){
+				} else if(loadMode > 1 && lowRuns > 1 && isLoading < 6){
 					currentExpand = defaultExpand;
 				} else {
 					currentExpand = shrinkExpand;
@@ -636,7 +636,7 @@
 			minSize: 40,
 			customMedia: {},
 			init: true,
-			expFactor: 1.7,
+			expFactor: 1.5,
 			hFac: 0.8,
 			loadMode: 2
 		};
