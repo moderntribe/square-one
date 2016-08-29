@@ -1,0 +1,60 @@
+
+/* -----------------------------------------------------------------------------
+ *
+ * Form Control: Select, simple / default
+ *
+ * Example:
+ * <div class="form-field-group">
+ *   <label class="form-control-label" for="select">Select Control</label>
+ * 	 <select id="select" name="select">
+ * 	   <option value="" class="form-control-select-placeholder" hidden="" disabled="disabled" selected="selected">Placeholder</option>
+ * 	   <option value="">Option 1</option>
+ * 	   <option value="">Option 2</option>
+ *     <option value="">Option 3</option>
+ *   </select>
+ * </div>
+ *
+ * ----------------------------------------------------------------------------- */
+
+select {
+	@mixin form-control;
+	padding-right: 0;
+	cursor: pointer;
+
+	/* CASE: multiple */
+	&[multiple] {
+		font-size: var(--form-control-font-size);
+		height: var(--form-control-select-multiple-height);
+		padding: var(--form-control-select-multiple-padding);
+	}
+}
+
+/* Sadly, as of now, you can't actually do this, but hopefully in the future
+option {
+	&.form-control-select-placeholder {
+	}
+}
+*/
+
+/* -----------------------------------------------------------------------------
+ *
+ * Form Control: Select, custom styled
+ *
+ * Example:
+ * <div class="form-field-group">
+ *   <label class="form-control-label" for="select">Select Control</label>
+ * 	 <div class="form-control-select">
+ * 	   <select id="select" name="select">
+ * 	     <option value="" hidden="" disabled="disabled" selected="selected">Placeholder</option>
+ * 	     <option value="">Option 1</option>
+ * 	     <option value="">Option 2</option>
+ *       <option value="">Option 3</option>
+ *      </select>
+ *   </div>
+ * </div>
+ *
+ * ----------------------------------------------------------------------------- */
+
+.form-control-select {
+	@mixin form-control-select;
+}
