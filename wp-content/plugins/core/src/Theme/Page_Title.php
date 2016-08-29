@@ -1,10 +1,9 @@
 <?php
 
-
 namespace Tribe\Project\Theme;
 
-
 class Page_Title {
+
 	/**
 	 * @return string
 	 */
@@ -19,26 +18,6 @@ class Page_Title {
 			$title = 'Blog';
 		}
 
-		// Category
-		elseif ( is_category() ) {
-			$title = single_cat_title( '', false );
-		}
-
-		// Tags
-		elseif ( is_tag() ) {
-			$title = single_tag_title( '', false );
-		}
-
-		// Tax
-		elseif ( is_tax() ) {
-			$title = single_term_title( '', false );
-		}
-
-		// Post Type Archive
-		elseif ( is_post_type_archive() ) {
-			$title = post_type_archive_title( '', false );
-		}
-
 		// Search
 		elseif ( is_search() ) {
 			$title = 'Search Results';
@@ -49,10 +28,16 @@ class Page_Title {
 			$title = 'Page Not Found (404)';
 		}
 
-		else {
+		// Singular
+		elseif ( is_singular() ) {
 			$title = get_the_title();
 		}
-		
+
+		// Archives
+		else {
+			$title = get_the_archive_title();
+		}
+
 		return $title;
 	}
 }
