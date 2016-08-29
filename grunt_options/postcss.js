@@ -116,6 +116,9 @@ module.exports = {
 
 	themeLint: {
 		options: lintOptions,
-		src: '<%= pkg._corethemepath %>/pcss/**/*.pcss',
+		src: [
+			'<%= pkg._corethemepath %>/pcss/**/*.pcss',
+			'!<%= pkg._corethemepath %>/pcss/content/page/_legacy.pcss',
+		],
 	},
 };

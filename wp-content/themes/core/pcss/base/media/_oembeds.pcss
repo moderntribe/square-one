@@ -11,12 +11,11 @@
 		margin: 0;
 		width: 100%;
 		height: 100%;
-		opacity: 0;
 		position: absolute;
 		top: 0;
 		left: 0;
-		&.lazyloaded ~ {
-			.wp-embed-lazy-caption {
+		&.lazyloaded {
+			& ~ .wp-embed-lazy-caption {
 				opacity: 1;
 				transition: opacity 250ms 300ms ease-in;
 			}
