@@ -16,10 +16,6 @@ if [ -z "$1" ]; then
     exit
 fi
 
-# Initialize as a new repo
-rm -rf .git
-git init
-
 # re-add submodules
 git config -f .gitmodules --get-regexp '^submodule\..*\.path$' |
 while read path_key path
@@ -35,7 +31,8 @@ done
 git add .
 git commit -m "Initial commit after copy from square-one"
 
-git remote add origin "git@github.com:moderntribe/$1.git"
+git remote set-url origin "git@github.com:moderntribe/$1.git"
+git remote add upstream "git@github.com:moderntribe/square-one.git"
 
 # create necessary branches
 git branch develop
