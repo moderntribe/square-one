@@ -8,7 +8,7 @@ if ( post_password_required() ) {
 }
 ?>
 
-<div id="comments" class="comments-area">
+<div id="comments" class="comments-area" data-js="comment-form">
 
 	<?php if ( have_comments() ) : ?>
 

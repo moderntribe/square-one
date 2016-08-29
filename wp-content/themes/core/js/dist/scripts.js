@@ -86,6 +86,10 @@
 
 	var _index2 = _interopRequireDefault(_index);
 
+	var _index3 = __webpack_require__(135);
+
+	var _index4 = _interopRequireDefault(_index3);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	/**
@@ -93,11 +97,8 @@
 	 * @description Bind global event listeners here,
 	 */
 
-	/**
-	 * @module
-	 * @exports ready
-	 * @description The core dispatcher for the dom ready event javascript.
-	 */
+	// you MUST do this in every module you use lodash in.
+	// A custom bundle of only the lodash you use will be built by babel.
 
 	var bindEvents = function bindEvents() {
 	  (0, _events.on)(window, 'resize', (0, _debounce3.default)(_resize2.default, 200, false));
@@ -108,8 +109,11 @@
 	 * @description The core dispatcher for init across the codebase.
 	 */
 
-	// you MUST do this in every module you use lodash in.
-	// A custom bundle of only the lodash you use will be built by babel.
+	/**
+	 * @module
+	 * @exports ready
+	 * @description The core dispatcher for the dom ready event javascript.
+	 */
 
 	var init = function init() {
 	  // init external plugins
@@ -129,6 +133,8 @@
 	  (0, _index2.default)();
 
 	  // initialize the main scripts
+
+	  (0, _index4.default)();
 
 	  console.info('Initialized all javascript that targeted document ready.');
 	};
@@ -5911,6 +5917,356 @@
 	    */
 
 	exports.default = popup;
+
+/***/ },
+/* 135 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _comments = __webpack_require__(136);
+
+	var _comments2 = _interopRequireDefault(_comments);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * @function init
+	 * @description Kick off this modules functions
+	 */
+
+	var init = function init() {
+	  (0, _comments2.default)();
+	}; /**
+	    * @module
+	    * @description Base content module for shared content js and props.
+	    */
+
+	exports.default = init;
+
+/***/ },
+/* 136 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _delegate = __webpack_require__(137);
+
+	var _delegate2 = _interopRequireDefault(_delegate);
+
+	var _tools = __webpack_require__(140);
+
+	var tools = _interopRequireWildcard(_tools);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * @module
+	 * @description Javascript that handles WordPress comment form.
+	 */
+
+	var el = {
+		container: tools.getNodes('comment-form')[0]
+	};
+
+	/**
+	 * @function validateCommentSubmit
+	 * @description Simple comment form validation.
+	 */
+
+	var validateCommentSubmit = function validateCommentSubmit(e) {
+		var inputs = tools.convertElements(el.container.querySelectorAll('textarea, input[name="author"], input[name="email"]'));
+
+		if (!inputs.length) {
+			return;
+		}
+
+		inputs.forEach(function (input) {
+			var valueCheck = input.value ? input.value.trim() : '';
+			if (valueCheck.length === 0) {
+				e.preventDefault();
+			}
+		});
+	};
+
+	/**
+	 * @function bindEvents
+	 * @description Bind the events for this module here.
+	 */
+
+	var bindEvents = function bindEvents() {
+		(0, _delegate2.default)(el.container, 'input[type="submit"]', 'click', validateCommentSubmit);
+	};
+
+	/**
+	 * @function init
+	 * @description Initializes the class if the element(s) to work on are found.
+	 */
+
+	var init = function init() {
+		if (!el.container) {
+			return;
+		}
+
+		bindEvents();
+
+		console.info('Initialized comment form script.');
+	};
+
+	exports.default = init;
+
+/***/ },
+/* 137 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var closest = __webpack_require__(138);
+
+	/**
+	 * Delegates event to a selector.
+	 *
+	 * @param {Element} element
+	 * @param {String} selector
+	 * @param {String} type
+	 * @param {Function} callback
+	 * @param {Boolean} useCapture
+	 * @return {Object}
+	 */
+	function delegate(element, selector, type, callback, useCapture) {
+	    var listenerFn = listener.apply(this, arguments);
+
+	    element.addEventListener(type, listenerFn, useCapture);
+
+	    return {
+	        destroy: function() {
+	            element.removeEventListener(type, listenerFn, useCapture);
+	        }
+	    }
+	}
+
+	/**
+	 * Finds closest match and invokes callback.
+	 *
+	 * @param {Element} element
+	 * @param {String} selector
+	 * @param {String} type
+	 * @param {Function} callback
+	 * @return {Function}
+	 */
+	function listener(element, selector, type, callback) {
+	    return function(e) {
+	        e.delegateTarget = closest(e.target, selector, true);
+
+	        if (e.delegateTarget) {
+	            callback.call(element, e);
+	        }
+	    }
+	}
+
+	module.exports = delegate;
+
+
+/***/ },
+/* 138 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var matches = __webpack_require__(139)
+
+	module.exports = function (element, selector, checkYoSelf) {
+	  var parent = checkYoSelf ? element : element.parentNode
+
+	  while (parent && parent !== document) {
+	    if (matches(parent, selector)) return parent;
+	    parent = parent.parentNode
+	  }
+	}
+
+
+/***/ },
+/* 139 */
+/***/ function(module, exports) {
+
+	
+	/**
+	 * Element prototype.
+	 */
+
+	var proto = Element.prototype;
+
+	/**
+	 * Vendor function.
+	 */
+
+	var vendor = proto.matchesSelector
+	  || proto.webkitMatchesSelector
+	  || proto.mozMatchesSelector
+	  || proto.msMatchesSelector
+	  || proto.oMatchesSelector;
+
+	/**
+	 * Expose `match()`.
+	 */
+
+	module.exports = match;
+
+	/**
+	 * Match `el` to `selector`.
+	 *
+	 * @param {Element} el
+	 * @param {String} selector
+	 * @return {Boolean}
+	 * @api public
+	 */
+
+	function match(el, selector) {
+	  if (vendor) return vendor.call(el, selector);
+	  var nodes = el.parentNode.querySelectorAll(selector);
+	  for (var i = 0; i < nodes.length; ++i) {
+	    if (nodes[i] == el) return true;
+	  }
+	  return false;
+	}
+
+/***/ },
+/* 140 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+	/**
+	 * @module
+	 * @description Some vanilla js cross browser utils
+	 */
+
+	var addClass = exports.addClass = function addClass(el, className) {
+		var element = el;
+		if (!element) {
+			console.log('Cant apply class ' + className + ' on null element.');
+			return null;
+		}
+
+		if (element.classList) {
+			element.classList.add(className);
+		} else {
+			element.className += ' ' + className;
+		}
+
+		return element;
+	};
+
+	var getChildren = exports.getChildren = function getChildren(el) {
+		var children = [];
+		var i = el.children.length;
+		for (i; i--;) {
+			if (el.children[i].nodeType !== 8) {
+				children.unshift(el.children[i]);
+			}
+		}
+
+		return children;
+	};
+
+	var hasClass = exports.hasClass = function hasClass(el, className) {
+		if (!el) {
+			console.log('Cant test class ' + className + ' on null element.');
+			return null;
+		}
+
+		return el.classList ? el.classList.contains(className) : new RegExp('(^| )' + className + '( |$)', 'gi').test(el.className);
+	};
+
+	var removeClass = exports.removeClass = function removeClass(el, className) {
+		var element = el;
+		if (!element) {
+			console.log('Cant remove class ' + className + ' on null element.');
+			return null;
+		}
+
+		if (element.classList) {
+			element.classList.remove(className);
+		} else {
+			element.className = element.className.replace(new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
+		}
+
+		return element;
+	};
+
+	var convertElements = exports.convertElements = function convertElements() {
+		var elements = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
+
+		var converted = [];
+		var i = elements.length;
+		for (i; i--; converted.unshift(elements[i])) {}
+
+		return converted;
+	};
+
+	var isNodelist = exports.isNodelist = function isNodelist(elements) {
+		var stringRepr = Object.prototype.toString.call(elements);
+
+		return (typeof elements === 'undefined' ? 'undefined' : _typeof(elements)) === 'object' && /^\[object (HTMLCollection|NodeList|Object)\]$/.test(stringRepr) && elements.hasOwnProperty('length') && (elements.length === 0 || _typeof(elements[0]) === 'object' && elements[0].nodeType > 0);
+	};
+
+	var getNodes = exports.getNodes = function getNodes() {
+		var selector = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
+		var convert = arguments.length <= 1 || arguments[1] === undefined ? false : arguments[1];
+		var node = arguments.length <= 2 || arguments[2] === undefined ? document : arguments[2];
+
+		var nodes = node.querySelectorAll('[data-js="' + selector + '"]');
+		if (convert) {
+			nodes = convertElements(nodes);
+		}
+
+		return nodes;
+	};
+
+	var closest = exports.closest = function closest(el, selector) {
+		var matchesFn = void 0;
+		var parent = void 0;
+
+		['matches', 'webkitMatchesSelector', 'mozMatchesSelector', 'msMatchesSelector', 'oMatchesSelector'].some(function (fn) {
+			if (typeof document.body[fn] === 'function') {
+				matchesFn = fn;
+				return true;
+			}
+
+			return false;
+		});
+
+		while (el) {
+			parent = el.parentElement;
+			if (parent && parent[matchesFn](selector)) {
+				return parent;
+			}
+
+			el = parent; // eslint-disable-line
+		}
+
+		return null;
+	};
+
+	var insertAfter = exports.insertAfter = function insertAfter(newNode, referenceNode) {
+		referenceNode.parentNode.insertBefore(newNode, referenceNode.nextElementSibling);
+	};
+
+	var insertBefore = exports.insertBefore = function insertBefore(newNode, referenceNode) {
+		referenceNode.parentNode.insertBefore(newNode, referenceNode);
+	};
 
 /***/ }
 /******/ ]);
