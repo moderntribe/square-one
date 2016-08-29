@@ -11,6 +11,7 @@ class Image_Wrap {
 
 	/**
 	 * Customize WP image output
+	 * TODO: @backend code review this
 	 *
 	 * @param $html
 	 *
