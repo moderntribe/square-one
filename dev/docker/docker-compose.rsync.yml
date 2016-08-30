@@ -2,11 +2,11 @@ version: "2"
 services:
   php:
     volumes:
-      - cba-webroot-rsync-sync:/srv/www/public
+      - square1-webroot-rsync-sync:/srv/www/public
   nginx:
     volumes:
-      - cba-webroot-rsync-sync:/srv/www/public
+      - square1-webroot-rsync-sync:/srv/www/public
 
 volumes:
-  cba-webroot-rsync-sync:
+  square1-webroot-rsync-sync:
     external: true
