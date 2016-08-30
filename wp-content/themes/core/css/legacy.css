@@ -365,48 +365,7 @@ embed {
 	 * Borders
 	 * ----------------------------------------------------------------------------- */
 }
-:root {/* -----------------------------------------------------------------------------
-	 * Font Stacks
-	 * ----------------------------------------------------------------------------- *//* -----------------------------------------------------------------------------
-	 * Font Sizing
-	 * ----------------------------------------------------------------------------- *//* -----------------------------------------------------------------------------
-	 * Font Weights
-	 * ----------------------------------------------------------------------------- *//* -----------------------------------------------------------------------------
-	 * Line Heights
-	 * ----------------------------------------------------------------------------- *//* -----------------------------------------------------------------------------
-	 * Spacers (margin & padding)
-	 * ----------------------------------------------------------------------------- */
-}
-/* -----------------------------------------------------------------------------
- * Grid Variables
- * ----------------------------------------------------------------------------- */
-/* -----------------------------------------------------------------------------
- * Grid Settings
- * ----------------------------------------------------------------------------- */
-@lost gutter 20px;
-@lost flexbox no-flex;
-@lost cycle auto;
-:root {/*
-	Test and make sure all looks good (natural form, advanced custom form, GF form)
-
-	Do a fade out of form with spinner?
-
-	GF input icons?
-	Sizing of checkbox/radio using math?
-
-	more vars for datepicker
-
-	Handle spacing / grids setup for forms + GF, have it all just work
-
-	Chosen colors for multiple and simplify
-	Clean up all the additional variables for controls and form settings based on form base stuff?
-	This all has to be simplified
-
-	Layouts for form fields (inline, horizontal field/label, grid, small space no label stacked, etc.) 
-	Validation stuff 
-	Skins? 
-	Deal with readonly & disabled?
-	*//* Control icons *//* Control icons *//* Select icon *//* Select, Checkbox, & Radio *//* Select *//* Select *//* Select *//* Label *//* Label *//* Helper Text & Descriptions *//* Helper Text & Descriptions */
+:root {/* Control icons *//* Control icons *//* Select icon *//* Select, Checkbox, & Radio *//* Select *//* Select *//* Select *//* Label *//* Label *//* Helper Text & Descriptions *//* Helper Text & Descriptions */
 }
 :root {/* -----------------------------------------------------------------------------
 	 * Label
@@ -440,6 +399,27 @@ embed {
 	 * Placeholder
 	 * ----------------------------------------------------------------------------- */
 }
+/* -----------------------------------------------------------------------------
+ * Grid Variables
+ * ----------------------------------------------------------------------------- */
+:root {/* -----------------------------------------------------------------------------
+	 * Font Stacks
+	 * ----------------------------------------------------------------------------- *//* -----------------------------------------------------------------------------
+	 * Font Sizing
+	 * ----------------------------------------------------------------------------- *//* -----------------------------------------------------------------------------
+	 * Font Weights
+	 * ----------------------------------------------------------------------------- *//* -----------------------------------------------------------------------------
+	 * Line Heights
+	 * ----------------------------------------------------------------------------- */
+}
+:root {/* -----------------------------------------------------------------------------
+	 * Spacers (margin & padding)
+	 * ----------------------------------------------------------------------------- */
+}
+/* Settings */
+@lost gutter 20px;
+@lost flexbox no-flex;
+@lost cycle auto;
 /* Mixins */
 /* -----------------------------------------------------------------------------
  *
@@ -589,50 +569,50 @@ embed {
 /* -----------------------------------------------------------------------------
  * Child Separator: " | "
  * ----------------------------------------------------------------------------- */
-.s-pipe > *:after {
+.u-sep-pipe > *:after {
     content: '|';
     display: inline;
     padding: 0 3px;
 }
-.s-pipe > *:last-of-type:after {
+.u-sep-pipe > *:last-of-type:after {
     content: none;
 }
 /* -----------------------------------------------------------------------------
  * Child Separator: " / "
  * ----------------------------------------------------------------------------- */
-.s-slash > *:after {
+.u-sep-slash > *:after {
     content: '/';
     padding: 0 7px;
 }
-.s-slash > *:last-of-type:after {
+.u-sep-slash > *:last-of-type:after {
     content: none;
 }
 /* -----------------------------------------------------------------------------
  * Child Separator: ", "
  * ----------------------------------------------------------------------------- */
-.s-comma > *:after {
+.u-sep-comma > *:after {
     content: ',';
     display: inline;
     padding: 0;
 }
-.s-comma > *:last-of-type:after {
+.u-sep-comma > *:last-of-type:after {
     content: none;
 }
 /* -----------------------------------------------------------------------------
  * Child Separator: " - "
  * ----------------------------------------------------------------------------- */
-.s-dash > *:after {
+.u-sep-dash > *:after {
     content: ' - ';
     display: inline;
     padding: 0;
 }
-.s-dash > *:last-of-type:after {
+.u-sep-dash > *:last-of-type:after {
     content: none;
 }
 /* -----------------------------------------------------------------------------
  * Child Separator: " · "
  * ----------------------------------------------------------------------------- */
-.s-dot > *:after {
+.u-sep-dot > *:after {
     content: '';
     height: 5px;
     width: 5px;
@@ -644,7 +624,7 @@ embed {
     bottom: 3px;
     margin: 0 10px;
 }
-.s-dot > *:last-of-type:after {
+.u-sep-dot > *:last-of-type:after {
     content: none;
 }
 /* -----------------------------------------------------------------------------
@@ -652,7 +632,7 @@ embed {
  * Clearfix
  *
  * ----------------------------------------------------------------------------- */
-.clearfix:after {
+.u-clearfix:after {
     content: '';
     display: table;
     clear: both;
@@ -662,7 +642,7 @@ embed {
  * Hide from screenreaders & browsers
  *
  * ----------------------------------------------------------------------------- */
-.hidden {
+.u-hidden {
     display: none !important;
     visibility: hidden;
 }
@@ -671,8 +651,8 @@ embed {
  * Hide from browsers & show for screenreaders
  *
  * ----------------------------------------------------------------------------- */
-.visual-hide,
-.screen-reader-text {
+.u-visual-hide,
+.u-screen-reader-text {
     border: 0;
     clip: rect(0 0 0 0);
     height: 1px;
@@ -687,7 +667,7 @@ embed {
  * Show for browsers & screenreaders
  *
  * ----------------------------------------------------------------------------- */
-.visual-show {
+.u-visual-show {
     border: 0;
     clip: rect(0 0 0 0);
     height: 1px;
@@ -873,65 +853,79 @@ textarea {
  *
  * Layout: Global Site Wrap
  *
+ * Notes:
+ * 1. "sticky" footer
+ *
  * ----------------------------------------------------------------------------- */
-#site-wrap {/* CASE: "sticky" footer */
+.l-site-wrapper {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
-    display: flex;
-    min-height: 100vh;
+    display: flex;/* [1] */
+    min-height: 100vh;/* [1] */
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -webkit-flex-direction: column;
         -ms-flex-direction: column;
-            flex-direction: column;
+            flex-direction: column;/* [1] */
 }
 /* -----------------------------------------------------------------------------
  *
  * Layout: Main Content
  *
+ * Notes:
+ * 1. "sticky" footer
+ *
  * ----------------------------------------------------------------------------- */
-main {/* CASE: "sticky" footer */
+main {
     -webkit-box-flex: 1;
     -webkit-flex: 1 0 auto;
         -ms-flex: 1 0 auto;
-            flex: 1 0 auto;
+            flex: 1 0 auto;/* [1] */
 }
 /* -----------------------------------------------------------------------------
  *
  * Layout: Global Content Wrap
  *
  * ----------------------------------------------------------------------------- */
-.content-wrap {
+.l-wrapper {
     max-width: 1260px;
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 20px;
+    padding-right: 20px;
     width: 100%;
-    padding: 0 20px;
+}
+.l-wrapper:after {
+    content: '';
+    display: table;
+    clear: both;
 }
 @media (min-width: 768px) {
-    .content-wrap {
-        padding: 0 30px;
+    .l-wrapper {
+        padding-left: 30px;
+        padding-right: 30px;
     }
 }
 /* -----------------------------------------------------------------------------
  *
  * Layout: Staggered
  *
- * Notes: This should be paired up with (inside a) .content-wrap wrapper
+ * Notes: This should be paired up with (inside a) .l-wrapper wrapper
  *
  * Usage: Post, Page, WYSIWYG Content
  *
  * Screenshot: https://cloudup.com/ctCRZpIxpbt
  *
  * Example:
- * <div class="content-wrap">
- *   <div class="cw-staggered">
+ * <div class="l-wrapper">
+ *   <div class="l-wrapper__inner-stagger">
  *     ...
  *   </div>
  * </div>
  *
  * ----------------------------------------------------------------------------- */
-.cw-staggered > * {
+.l-wrapper__inner-stagger > * {
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
@@ -940,26 +934,26 @@ main {/* CASE: "sticky" footer */
  *
  * Layout: Staggered, Double
  *
- * Notes: This should be paired up with (inside a) .content-wrap wrapper
+ * Notes: This should be paired up with (inside a) .l-wrapper wrapper
  *
  * Usage: Post, Page, WYSIWYG Content
  *
  * Screenshot: https://cloudup.com/ctCRZpIxpbt
  *
  * Example:
- * <div class="content-wrap">
- *   <div class="cw-staggered-double">
+ * <div class="l-wrapper">
+ *   <div class="l-wrapper__inner-stagger-double">
  *     ...
  *   </div>
  * </div>
  *
  * ----------------------------------------------------------------------------- */
-.cw-staggered-double {
+.l-wrapper__inner-stagger-double {
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
 }
-.cw-staggered-double > * {
+.l-wrapper__inner-stagger-double > * {
     max-width: 700px;
     margin-left: auto;
     margin-right: auto;
@@ -976,7 +970,7 @@ p {
         font-size: 18px;
     }
 }
-.context-content p {
+.t-typography p {
     margin-bottom: 30px;
 }
 /* -------------------------------------------------------------------------
@@ -985,7 +979,7 @@ p {
 hr {
     border-top: 1px solid grey;
 }
-.context-content hr {
+.t-typography hr {
     margin: 50px auto;
 }
 /* -------------------------------------------------------------------------
@@ -1000,25 +994,25 @@ hr {
  *   we simply hide them
  *
  * ------------------------------------------------------------------------- */
-.context-content > *:empty:not(hr):not(br) {
+.t-typography > *:empty:not(hr):not(br) {
     display: none;
 }
-.context-content > *:first-child {
+.t-typography > *:first-child {
     margin-top: 0;
 }
-.context-content > *:first-child > img {
+.t-typography > *:first-child > img {
     margin-top: 0;
 }
-.context-content > .wp-image-wrap:nth-child(2) img {
+.t-typography > .wp-image-wrap:nth-child(2) img {
     margin-top: 0;
 }
-.context-content > *:last-child {
+.t-typography > *:last-child {
     margin-bottom: 0;
 }
-.context-content > *:last-child > img {
+.t-typography > *:last-child > img {
     margin-bottom: 0;
 }
-.context-content > .wp-image-wrap:nth-last-child(2) img {
+.t-typography > .wp-image-wrap:nth-last-child(2) img {
     margin-bottom: 0;
 }
 /* -------------------------------------------------------------------------
@@ -1045,25 +1039,25 @@ a:active,
  * Anchor: Full
  * ------------------------------------------------------------------------- */
 .anchor,
-.context-content a {
+.t-typography a {
     color: #21a6cb;
     text-decoration: underline;
 }
 .anchor:hover,
 	.anchor:focus,
-	.context-content a:hover,
-	.context-content a:focus {
+	.t-typography a:hover,
+	.t-typography a:focus {
     color: darken(#21a6cb, 0.08);
 }
 /* -------------------------------------------------------------------------
  * Heading: H1
  * ------------------------------------------------------------------------- */
 .h1,
-.context-content .h1,
-.context-content h1 {
+.t-typography .h1,
+.t-typography h1 {
     font-size: 36px;
 }
-.context-content h1, .context-content .h1 {
+.t-typography h1, .t-typography .h1 {
     margin-top: 30px;
     margin-bottom: 30px;
 }
@@ -1071,11 +1065,11 @@ a:active,
  * Heading: H2
  * ------------------------------------------------------------------------- */
 .h2,
-.context-content .h2,
-.context-content h2 {
+.t-typography .h2,
+.t-typography h2 {
     font-size: 32px;
 }
-.context-content h2, .context-content .h2 {
+.t-typography h2, .t-typography .h2 {
     margin-top: 30px;
     margin-bottom: 30px;
 }
@@ -1083,11 +1077,11 @@ a:active,
  * Heading: H3
  * ------------------------------------------------------------------------- */
 .h3,
-.context-content .h3,
-.context-content h3 {
+.t-typography .h3,
+.t-typography h3 {
     font-size: 28px;
 }
-.context-content h3, .context-content .h3 {
+.t-typography h3, .t-typography .h3 {
     margin-top: 30px;
     margin-bottom: 30px;
 }
@@ -1095,11 +1089,11 @@ a:active,
  * Heading: H4
  * ------------------------------------------------------------------------- */
 .h4,
-.context-content .h4,
-.context-content h4 {
+.t-typography .h4,
+.t-typography h4 {
     font-size: 22px;
 }
-.context-content h4, .context-content .h4 {
+.t-typography h4, .t-typography .h4 {
     margin-top: 30px;
     margin-bottom: 30px;
 }
@@ -1107,11 +1101,11 @@ a:active,
  * Heading: H5
  * ------------------------------------------------------------------------- */
 .h5,
-.context-content .h5,
-.context-content h5 {
+.t-typography .h5,
+.t-typography h5 {
     font-size: 20px;
 }
-.context-content h5, .context-content .h5 {
+.t-typography h5, .t-typography .h5 {
     margin-top: 30px;
     margin-bottom: 30px;
 }
@@ -1119,42 +1113,42 @@ a:active,
  * Heading: H6
  * ------------------------------------------------------------------------- */
 .h6,
-.context-content .h6,
-.context-content h6 {
+.t-typography .h6,
+.t-typography h6 {
     font-size: 18px;
 }
-.context-content h6, .context-content .h6 {
+.t-typography h6, .t-typography .h6 {
     margin-top: 30px;
     margin-bottom: 30px;
 }
 /* -------------------------------------------------------------------------
  * Global Lists
  * ------------------------------------------------------------------------- */
-.context-content ul, .context-content ol, .context-content dl {
+.t-typography ul, .t-typography ol, .t-typography dl {
     font-size: 16px;
     margin-top: 30px;
     margin-bottom: 30px;
 }
 @media (min-width: 768px) {
-    .context-content ul, .context-content ol, .context-content dl {
+    .t-typography ul, .t-typography ol, .t-typography dl {
         font-size: 18px;
     }
 }
-.context-content li ~ li {
+.t-typography li ~ li {
     margin-top: 15px;
 }
 /* -------------------------------------------------------------------------
  * UL
  * ------------------------------------------------------------------------- */
 .list-bullet,
-.context-content ul {
+.t-typography ul {
     list-style: disc outside;
     padding-left: 1.5em;
     padding-right: 0;
 }
 @media (min-width: 768px) {
     .list-bullet,
-.context-content ul {
+.t-typography ul {
         padding-left: 3em;
         padding-right: 3em;
     }
@@ -1163,14 +1157,14 @@ a:active,
  * OL
  * ------------------------------------------------------------------------- */
 .list-number,
-.context-content ol {
+.t-typography ol {
     list-style: decimal outside;
     padding-left: 1.5em;
     padding-right: 0;
 }
 @media (min-width: 768px) {
     .list-number,
-.context-content ol {
+.t-typography ol {
         padding-left: 3em;
         padding-right: 3em;
     }
@@ -1179,29 +1173,29 @@ a:active,
  * DL
  * ------------------------------------------------------------------------- */
 .dl,
-.context-content dl {
+.t-typography dl {
     padding-left: 1.5em;
     padding-right: 0;
 }
 @media (min-width: 768px) {
     .dl,
-.context-content dl {
+.t-typography dl {
         padding-left: 3em;
         padding-right: 3em;
     }
 }
 .dt,
-.context-content dt {
+.t-typography dt {
     font-weight: 700;
 }
 .dd,
-.context-content dd {
+.t-typography dd {
     margin-bottom: 30px;
 }
 /* -----------------------------------------------------------------------------
  * Global Quotes & Blockquotes
  * ----------------------------------------------------------------------------- */
-.context-content .blockquote, .context-content blockquote, .context-content .quote, .context-content q {
+.t-typography .blockquote, .t-typography blockquote, .t-typography .quote, .t-typography q {
     margin: 30px auto;
 }
 /* -----------------------------------------------------------------------------
@@ -1209,7 +1203,7 @@ a:active,
  * ----------------------------------------------------------------------------- */
 /* q */
 .quote,
-.context-content q {
+.t-typography q {
     border-top: 1px solid grey;
     border-bottom: 1px solid grey;
     padding: 30px;
@@ -1222,17 +1216,17 @@ a:active,
  * ----------------------------------------------------------------------------- */
 /* blockquote */
 .blockquote,
-.context-content blockquote {
+.t-typography blockquote {
     border-top: 1px solid grey;
     border-bottom: 1px solid grey;
     padding: 30px;
 }
-.blockquote p, .context-content blockquote p {
+.blockquote p, .t-typography blockquote p {
     font-size: 32px;
     font-style: italic;
     margin: 0 auto;
 }
-.blockquote p ~ p, .context-content blockquote p ~ p {
+.blockquote p ~ p, .t-typography blockquote p ~ p {
     margin-top: 30px;
 }
 /* -----------------------------------------------------------------------------
@@ -1240,7 +1234,7 @@ a:active,
  * ----------------------------------------------------------------------------- */
 /* cite */
 .cite,
-.context-content cite {
+.t-typography cite {
     font-style: normal;
     display: block;
 }
@@ -1248,7 +1242,7 @@ a:active,
  * Table
  * ----------------------------------------------------------------------------- */
 .table,
-.context-content table {
+.t-typography table {
     font-size: 16px;
     margin: 30px auto;
     border: 1px solid grey;
@@ -1259,7 +1253,7 @@ a:active,
 }
 @media (min-width: 768px) {
     .table,
-.context-content table {
+.t-typography table {
         font-size: 18px;
         table-layout: auto;
     }
@@ -1268,34 +1262,34 @@ a:active,
  * TH
  * ----------------------------------------------------------------------------- */
 .th,
-.context-content th {
+.t-typography th {
     padding: 14px 1em 12px;
     font-weight: 600;
     line-height: 1;
 }
-.th ~ th, .context-content th ~ th {
+.th ~ th, .t-typography th ~ th {
     border-left: 1px solid grey;
 }
 /* -----------------------------------------------------------------------------
  * TR
  * ----------------------------------------------------------------------------- */
-thead .tr, thead .context-content tr {
+thead .tr, thead .t-typography tr {
     border-bottom: 1px solid grey;
 }
-.tr ~ tr, .context-content tr ~ tr {
+.tr ~ tr, .t-typography tr ~ tr {
     border-top: 1px solid grey;
 }
-.tr:nth-of-type(even), .context-content tr:nth-of-type(even) {
+.tr:nth-of-type(even), .t-typography tr:nth-of-type(even) {
     background-color: lighten(grey, 0.15);
 }
 /* -----------------------------------------------------------------------------
  * TD
  * ----------------------------------------------------------------------------- */
 .td,
-.context-content td {
+.t-typography td {
     padding: 12px 1em 10px;
 }
-.td ~ td, .context-content td ~ td {
+.td ~ td, .t-typography td ~ td {
     border-left: 1px solid grey;
 }
 /* Media */
@@ -1306,7 +1300,7 @@ img {
     margin-left: auto;
     margin-right: auto;
 }
-.context-content img {
+.t-typography img {
     line-height: 0;
     width: auto;
     height: auto;
@@ -1367,7 +1361,7 @@ img {
     page-break-inside: avoid;
          break-inside: avoid-column;
 }
-.context-content .wp-embed {
+.t-typography .wp-embed {
     margin: 50px auto;
 }
 .wp-embed-wrap {
@@ -1388,7 +1382,11 @@ img {
 	.wp-embed-lazy p {
     display: none;
 }
-.wp-embed-lazy .wp-embed-lazy-thumb {
+/* CASE: Low Resolution */
+.wp-embed-lazy--low-res .wp-embed-lazy .wp-embed-lazy__image {
+    margin-top: -9.4%;
+}
+.wp-embed-lazy .wp-embed-lazy__image {
     margin: 0;
     width: 100%;
     height: 100%;
@@ -1396,26 +1394,21 @@ img {
     top: 0;
     left: 0;
 }
-.wp-embed-lazy .wp-embed-lazy-thumb.lazyloaded ~ .wp-embed-lazy-caption {
-    opacity: 1;
-    -webkit-transition: opacity 250ms 300ms ease-in;
-    transition: opacity 250ms 300ms ease-in;
-}
-.wp-embed-lazy .wp-embed-lazy-launch {
+.wp-embed-lazy__trigger {
     display: block;
     height: 100%;
     -webkit-transition: all 0.15s ease-in-out;
     transition: all 0.15s ease-in-out;
 }
-.wp-embed-lazy .wp-embed-lazy-launch:hover .icon-play, .wp-embed-lazy .wp-embed-lazy-launch:focus .icon-play {
+.wp-embed-lazy__trigger:hover .wp-embed-lazy__icon, .wp-embed-lazy__trigger:focus .wp-embed-lazy__icon {
     border-color: #fff;
 }
-.wp-embed-lazy .wp-embed-lazy-launch:hover .icon-play:before, .wp-embed-lazy .wp-embed-lazy-launch:focus .icon-play:before {
+.wp-embed-lazy__trigger:hover .wp-embed-lazy__icon:before, .wp-embed-lazy__trigger:focus .wp-embed-lazy__icon:before {
     -webkit-transform: scale(0.65);
         -ms-transform: scale(0.65);
             transform: scale(0.65);
 }
-.wp-embed-lazy .wp-embed-lazy-launch:focus:after {
+.wp-embed-lazy__trigger:focus:after {
     height: 5px;
     width: 100%;
     left: 0;
@@ -1424,7 +1417,29 @@ img {
     position: absolute;
     background: #21a6cb;
 }
-.wp-embed-lazy .wp-embed-lazy-caption {
+/* CASE: embed is playing */
+.wp-embed-lazy--is-playing .wp-embed-lazy__trigger {
+    opacity: 0;
+    -webkit-transition: opacity 0.25s ease-out;
+    transition: opacity 0.25s ease-out;
+}
+.wp-embed-lazy__trigger-label {
+    display: block;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: #21a6cb;
+    font-size: 14px;
+}
+/* CASE: Mobile */
+.wp-embed-lazy--small .wp-embed-lazy__trigger-label {
+    color: #fff;
+    width: 100%;
+    bottom: 15%;
+    position: absolute;
+    text-align: center;
+}
+.wp-embed-lazy__caption {
     opacity: 0;
     -webkit-transition: opacity 0.15s ease-in;
     transition: opacity 0.15s ease-in;
@@ -1440,11 +1455,29 @@ img {
     max-width: 90%;
 }
 @media (min-width: 768px) {
-    .wp-embed-lazy .wp-embed-lazy-caption {
+    .wp-embed-lazy__caption {
         left: 20px;
     }
 }
-.wp-embed-lazy .icon-play {
+/* CASE: lazyloaded */
+.lazyloaded ~ .wp-embed-lazy__caption {
+    opacity: 1;
+    -webkit-transition: opacity 250ms 300ms ease-in;
+    transition: opacity 250ms 300ms ease-in;
+}
+/* CASE: Mobile */
+.wp-embed-lazy--small .wp-embed-lazy__caption {
+    background: #000000;
+    background: rgba(0, 0, 0, 0.4);
+    border: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    left: 0;
+    bottom: 0;
+}
+.wp-embed-lazy__icon {
     position: absolute;
     font-size: 44px;
     left: 15px;
@@ -1456,7 +1489,7 @@ img {
     -webkit-border-radius: 50%;
             border-radius: 50%;
 }
-.wp-embed-lazy .icon-play:before {
+.wp-embed-lazy__icon:before {
     display: inline-block;
     position: relative;
     left: 3px;
@@ -1466,15 +1499,12 @@ img {
     transition: opacity 0.15s ease-in-out, transform 0.425s;
     transition: opacity 0.15s ease-in-out, transform 0.425s, -webkit-transform 0.425s;
 }
-.wp-embed-lazy .wp-embed-lazy-prompt {
-    display: block;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.02em;
-    color: #21a6cb;
-    font-size: 14px;
+/* CASE: Mobile */
+.wp-embed-lazy--small .wp-embed-lazy__icon {
+    left: 50%;
+    margin-left: -26px;
 }
-.wp-embed-lazy .wp-embed-lazy-title {
+.wp-embed-lazy__title {
     font-size: 18px;
     letter-spacing: 0.02em;
     display: block;
@@ -1482,35 +1512,9 @@ img {
     padding-top: 5px;
     border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
-/* CASE: Low Resolution */
-.wp-embed-lazy.low-resolution .wp-embed-lazy-thumb {
-    margin-top: -9.4%;
-}
 /* CASE: Mobile */
-.wp-embed-lazy.small-display .wp-embed-lazy-caption {
-    background: #000000;
-    background: rgba(0, 0, 0, 0.4);
-    border: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    max-width: 100%;
-    left: 0;
-    bottom: 0;
-}
-.wp-embed-lazy.small-display .wp-embed-lazy-title {
+.wp-embed-lazy--small .wp-embed-lazy__title {
     display: none;
-}
-.wp-embed-lazy.small-display .wp-embed-lazy-prompt {
-    color: #fff;
-    width: 100%;
-    bottom: 15%;
-    position: absolute;
-    text-align: center;
-}
-.wp-embed-lazy.small-display .icon-play {
-    left: 50%;
-    margin-left: -26px;
 }
 .gallery {
     margin: 0 -10px;
@@ -1520,7 +1524,7 @@ img {
         margin: 0 -15px;
     }
 }
-.context-content .gallery {
+.t-typography .gallery {
     margin-top: 50px;
     margin-bottom: 50px;
 }
@@ -1574,7 +1578,7 @@ img {
  * ----------------------------------------------------------------------------- */
 .gallery-caption {}
 /* Buttons */
-.context-content a[class*="btn-"], .context-content button[class*="btn-"] {
+.t-typography a[class*="btn-"], .t-typography button[class*="btn-"] {
     margin-top: 15px;
     margin-bottom: 15px;
 }
@@ -1625,7 +1629,7 @@ a.btn {
 /* -------------------------------------------------------------------------
  * Global Forms
  * ------------------------------------------------------------------------- */
-.context-content form {
+.t-typography form {
     margin: 30px auto;
 }
 /* -----------------------------------------------------------------------------
@@ -1751,7 +1755,7 @@ fieldset {}
  * Label
  * ------------------------------------------------------------------------- */
 .form-control-label,
-.context-content label {
+.t-typography label {
     display: block;
     margin-bottom: 15px;
     color: #000;

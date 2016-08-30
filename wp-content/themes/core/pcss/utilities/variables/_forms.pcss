@@ -1,34 +1,12 @@
 :root {
-	/*
-	Test and make sure all looks good (natural form, advanced custom form, GF form)
-
-	Do a fade out of form with spinner?
-
-	GF input icons?
-	Sizing of checkbox/radio using math?
-
-	more vars for datepicker
-
-	Handle spacing / grids setup for forms + GF, have it all just work
-
-	Chosen colors for multiple and simplify
-	Clean up all the additional variables for controls and form settings based on form base stuff?
-	This all has to be simplified
-
-	Layouts for form fields (inline, horizontal field/label, grid, small space no label stacked, etc.) 
-	Validation stuff 
-	Skins? 
-	Deal with readonly & disabled?
-	*/
-
 	--form-border-color: lightgrey;
 	--form-border-color-focus: darken(var(--form-border-color), 0.25);
 	--form-border-size: 1px;
 	--form-border-size-focus: var(--form-border-size);
 	--form-border-radius: 0;
 
-	--form-color: var(--text);
-	--form-color-secondary: var(--grey-light);
+	--form-color: var(--color-text);
+	--form-color-secondary: var(--color-grey-light);
 	--form-color-error: lighten(red, 0.1);
 	--form-color-required: var(--form-color-error);
 	--form-color-success: lighten(green, 0.1);
@@ -36,7 +14,7 @@
 
 	--form-ui-icon-color: lightgrey; /* Control icons */
 	--form-ui-icon-font-size: 20px; /* Control icons */
-	--form-ui-color: var(--grey-dark); /* Select icon */
+	--form-ui-color: var(--color-grey-dark); /* Select icon */
 	--form-ui-bgd-color: var(--form-border-color);  /* Select, Checkbox, & Radio */
 	--form-ui-bgd-color-focus: var(--form-border-color-focus);  /* Select */
 	--form-ui-icon-select: '\e900'; /* Select */

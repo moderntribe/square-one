@@ -7,7 +7,7 @@
 
 import Fastclick from 'fastclick';
 
-import gsap from 'gsap'; // eslint-disable-line no-unused-vars
+// import gsap from 'gsap'; // uncomment to import gsap globally
 
 const plugins = () => {
 	// initialize global external plugins here

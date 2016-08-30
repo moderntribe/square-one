@@ -4,10 +4,14 @@
  */
 
 import Spinner from 'spin.js';
+import delegate from 'delegate';
+import * as tools from '../utils/tools';
 import scrollTo from '../utils/dom/scroll-to';
 
-const el = document.getElementById('site-wrap');
-let $el;
+const el = {
+	container: tools.getNodes('site-wrap')[0],
+};
+
 let spinner;
 let submitting = false;
 
@@ -16,11 +20,11 @@ let submitting = false;
  * @description Adjusts gravity form submit top placement.
  */
 
-const scrollSubmit = ($form) => {
+const scrollSubmit = (form) => {
 	scrollTo({
 		duration: 500,
 		offset: -60,
-		$target: $form,
+		$target: $(form),
 	});
 };
 
@@ -48,7 +52,7 @@ const gravityFormPostRender = (e, formId) => {
 
 	spinner.stop();
 	submitting = false;
-	scrollSubmit($(`#gform_wrapper_${formId}`));
+	scrollSubmit(document.getElementById(`gform_wrapper_${formId}`));
 };
 
 /**
@@ -57,7 +61,7 @@ const gravityFormPostRender = (e, formId) => {
  */
 
 const gravityFormConfirmationLoaded = (e, formId) => {
-	scrollSubmit($(`#gforms_confirmation_message_${formId}`));
+	scrollSubmit(document.getElementById(`gforms_confirmation_message_${formId}`));
 };
 
 /**
@@ -66,7 +70,7 @@ const gravityFormConfirmationLoaded = (e, formId) => {
  */
 
 const spinOn = (e) => {
-	spinner.spin(e.currentTarget.parentNode);
+	spinner.spin(e.delegateTarget.parentNode);
 };
 
 /**
@@ -80,7 +84,7 @@ const bindEvents = () => {
 		.on('gform_post_render', gravityFormPostRender)
 		.on('gform_confirmation_loaded', gravityFormConfirmationLoaded);
 
-	$el.on('click', '.gform_button', (e) => spinOn(e));
+	delegate(el.container, '.gform_button', 'click', (e) => spinOn(e));
 };
 
 /**
@@ -89,22 +93,22 @@ const bindEvents = () => {
  */
 
 const forms = () => {
-	if (el) {
-		$el = $(el);
-
-		spinner = new Spinner({
-			lines: 11,
-			length: 6,
-			width: 2,
-			radius: 5,
-			color: '#333333',
-			speed: 1.2,
-		});
-
-		bindEvents();
-
-		console.info('Initialized global form scripts.');
+	if (!el.container) {
+		return;
 	}
+
+	spinner = new Spinner({
+		lines: 11,
+		length: 6,
+		width: 2,
+		radius: 5,
+		color: '#333333',
+		speed: 1.2,
+	});
+
+	bindEvents();
+
+	console.info('Initialized global form scripts.');
 };
 
 export default forms;
