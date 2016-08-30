@@ -1,4 +1,4 @@
-#  Theme Javascript
+#  Javascript Overview
 
 All theme javascript work is done in the js/src folder. You will need to run `grunt dev` or `grunt watch` during development from the project root. [Webpack](https://webpack.github.io/docs/) is used for bundling and es2015 module syntax is used. Organizing your code is up to you, but generally we create a tree structure that often relates to the php content structure and postcss partials structure. During development you'll also want to ensure you have SCRIPT_DEBUG set to true in your local-config.php.
 

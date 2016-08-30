@@ -16,14 +16,13 @@
 * Theme
   * [Overview](/docs/theme/overview.md)
   * [Grunt Tasks](/docs/theme/grunt.md)
-  * [PostCSS](/docs/theme/postcss.md)
-  * [Javascript](/docs/theme/javascript.md)
+  * [CSS](/docs/theme/css/postcss.md)
+  * [Javascript](/docs/theme/js/javascript.md)
   * [Markup and Style](/docs/theme/markup-and-style.md)
   * [Accessibility](/docs/theme/accessbility.md)
   * [Image Handling](/docs/theme/images.md)
   * [Fonts](/docs/theme/fonts.md)
   * [Icons](/docs/theme/icons.md)
-  * [Grid System](/docs/theme/grids.md)
 * Tests and Code Quality
   * [Codeception](/docs/tests/codeception.md)
 
