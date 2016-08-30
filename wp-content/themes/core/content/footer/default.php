@@ -1,6 +1,6 @@
 <footer class="site-footer">
 
-	<div class="content-wrap">
+	<div class="l-wrapper">
 
 		<?php // Menu: Footer
 		get_template_part( 'content/navigation/footer' ); ?>

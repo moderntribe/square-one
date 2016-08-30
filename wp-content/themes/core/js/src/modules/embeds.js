@@ -5,21 +5,33 @@
  */
 
 import _ from 'lodash';
+import delegate from 'delegate';
+import * as tools from '../utils/tools';
 import { on } from '../utils/events';
 
-const el = document.getElementsByClassName('wp-embed-lazy');
+const el = {
+	container: tools.getNodes('site-wrap')[0],
+};
 
 /**
- * @function setOembedDisplayMode
- * @description Set display mode of embeds for small vs. regular.
+ * @function setupOembeds
+ * @description Setup oembeds.
  */
 
-const setOembedDisplayMode = () => {
-	_.forEach(el, (embed) => {
-		if ($(embed).width() >= 500) {
-			$(embed).removeClass('small-display');
+const setupOembeds = () => {
+	el.embeds.forEach((embed) => {
+		const pStray = embed.querySelector('p');
+
+		// Remove errant WP induced P tag
+		if (pStray !== null) {
+			embed.removeChild(pStray);
+		}
+
+		// Set display mode of embeds for small vs. regular
+		if (embed.offsetWidth >= 500) {
+			embed.classList.remove('wp-embed-lazy--small');
 		} else {
-			$(embed).addClass('small-display');
+			embed.classList.add('wp-embed-lazy--small');
 		}
 	});
 };
@@ -30,20 +42,16 @@ const setOembedDisplayMode = () => {
  */
 
 const resetEmbed = () => {
-	const $embed = $('.is-playing');
+	const embed = document.getElementsByClassName('wp-embed-lazy--is-playing')[0];
+	const trigger = embed.querySelector('.wp-embed-lazy__trigger');
+	const iframe = embed.querySelector('iframe');
 
 	// Remove embed
-	$embed
-		.removeClass('is-playing')
-		.find('iframe')
-		.remove();
+	embed.removeChild(iframe);
+	embed.classList.remove('wp-embed-lazy--is-playing');
 
 	// Fade in image/caption
-	$embed.find('.wp-embed-lazy-launch')
-		.css('display', 'block')
-		.animate({
-			opacity: 1,
-		}, 0);
+	trigger.classList.remove('u-hidden');
 };
 
 /**
@@ -55,34 +63,31 @@ const playEmbed = (e) => {
 	e.preventDefault();
 
 	// Reset embed if another is playing
-	if ($('.is-playing').length) {
+	if (document.getElementsByClassName('wp-embed-lazy--is-playing').length) {
 		resetEmbed();
 	}
 
-	const $target = $(e.currentTarget);
-	const videoId = $target.attr('data-embed-id');
-	const iframeUrl = ($target.closest('.wp-embed-lazy').is('.youtube')) ? `https://www.youtube.com/embed/${videoId}?autoplay=1&autohide=1&fs=1&modestbranding=1&showinfo=0&controls=2&autoplay=1&rel=0&theme=light&vq=hd720` : `//player.vimeo.com/video/${videoId}?autoplay=1`;
-	const $iframe = $('<iframe/>', {
-		id: videoId,
-		frameborder: '0',
-		src: iframeUrl,
-		width: 1280,
-		height: 720,
-	});
+	const target = e.delegateTarget;
+	const parent = tools.closest(target, '.wp-embed-lazy');
+	const videoId = target.getAttribute('data-embed-id');
+	const iframeUrl = (parent.getAttribute('data-embed-provider') === 'youtube') ? `https://www.youtube.com/embed/${videoId}?autoplay=1&autohide=1&fs=1&modestbranding=1&showinfo=0&controls=2&autoplay=1&rel=0&theme=light&vq=hd720` : `//player.vimeo.com/video/${videoId}?autoplay=1`;
+	const iframe = document.createElement('iframe');
+	iframe.id = videoId;
+	iframe.frameBorder = 0;
+	iframe.src = iframeUrl;
+	iframe.width = 1280;
+	iframe.height = 720;
+	iframe.tabIndex = 0;
 
 	// Add & kickoff embed
-	$target
-		.closest('.wp-embed-lazy')
-		.addClass('is-playing')
-		.prepend($iframe);
+	parent.classList.add('wp-embed-lazy--is-playing');
+	tools.insertBefore(iframe, target);
+	iframe.focus();
 
 	// Fade out image/caption, avoid fouc
-	$target
-		.animate({
-			opacity: 0,
-		}, 250, () => {
-			$target.css('display', 'none');
-		});
+	_.delay(() => {
+		target.classList.add('u-hidden');
+	}, 250);
 };
 
 /**
@@ -91,7 +96,16 @@ const playEmbed = (e) => {
  */
 
 const executeResize = () => {
-	setOembedDisplayMode();
+	setupOembeds();
+};
+
+/**
+ * @function cacheElements
+ * @description Caches dom nodes this module uses.
+ */
+
+const cacheElements = () => {
+	el.embeds = tools.getNodes('lazyload-embed', true, el.container);
 };
 
 /**
@@ -100,8 +114,7 @@ const executeResize = () => {
  */
 
 const bindEvents = () => {
-	$('body')
-		.on('click', '.wp-embed-lazy a', (e) => playEmbed(e));
+	delegate(el.container, '[data-js="lazyload-trigger"]', 'click', (e) => playEmbed(e));
 
 	on(document, 'modern_tribe/resize_executed', (e) => executeResize(e));
 };
@@ -112,13 +125,20 @@ const bindEvents = () => {
  */
 
 const embeds = () => {
-	if (el) {
-		bindEvents();
-
-		setOembedDisplayMode();
-
-		console.info('Initialized embeds scripts.');
+	if (!el.container) {
+		return;
 	}
+
+	cacheElements();
+
+	if (!el.embeds.length) {
+		return;
+	}
+
+	bindEvents();
+	setupOembeds();
+
+	console.info('Initialized embeds scripts.');
 };
 
 export default embeds;

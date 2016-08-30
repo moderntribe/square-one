@@ -1,10 +1,10 @@
 <?php if( has_nav_menu( 'primary' ) ) { ?>
 
-	<nav>
+	<nav class="site-header__nav" aria-labelledby="site-header__nav-label">
 
-		<h5 class="visual-hide">Primary Navigation</h5>
+		<h2 id="site-header__nav-label" class="u-visual-hide">Primary Navigation</h2>
 
-		<ol>
+		<ol class="site-header__nav-list">
 			<?php // Header Nav
 			$defaults = array(
 				'theme_location'  => 'primary',

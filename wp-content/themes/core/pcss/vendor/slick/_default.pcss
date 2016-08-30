@@ -57,22 +57,20 @@
 	min-height: 1px;
 	display: none;
 
-	[dir="rtl"] & {
-		float: right;
-	}
 	img {
 		display: block;
 	}
+
 	&.slick-loading img {
 		display: none;
 	}
 
-	&:focus {
-		outline: none;
-	}
-
 	&.dragging img {
 		pointer-events: none;
+	}
+
+	&:focus {
+		outline: none;
 	}
 
 	.slick-initialized & {

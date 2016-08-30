@@ -8,13 +8,12 @@
  * @var string $html The rendered HTML of the panel
  */
 
-$zebra = ( $index % 2 == 0 ) ? 'odd' : 'even';
 $type  = esc_attr( $panel->get( 'type' ) );
 
 // Child Panel
 if( $panel->get_depth() >= 1 ) { ?>
 
-	<article class="panel-child panel-type-<?php echo $type; ?>">
+	<article class="panel-child panel--type-<?php echo $type; ?>">
 
 		<?php echo $html; ?>
 
@@ -25,7 +24,7 @@ if( $panel->get_depth() >= 1 ) { ?>
 // Parent Panel
 else { ?>
 
-	<section class="panel panel-count-<?php echo $index; ?> panel-type-<?php echo $type; ?> panel-<?php echo $zebra; ?>">
+	<section class="panel panel--type-<?php echo $type; ?>">
 
 		<?php echo $html; ?>
 

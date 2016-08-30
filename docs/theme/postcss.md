@@ -1,10 +1,10 @@
 #  Theme PostCSS
 
-This system uses [PostCSS](http://postcss.org/). Dont worry if you are coming from sass, we have worked to make most sass features available here. The file extension is pcss, and it lives in the pcss folder in the core theme. To make your ide parse pcss correctly you have options. 
+This system uses [PostCSS](http://postcss.org/). Don't worry if you are coming from sass, we have worked to make most sass features available here. The file extension is pcss, and it lives in the pcss folder in the core theme. To make your ide parse pcss correctly you have options. 
 
 * [Atom](https://atom.io/packages/language-postcss)
 * [Sublime Text](https://packagecontrol.io/packages/Syntax%20Highlighting%20for%20PostCSS)
-* Php/Webstorm. Coming soon! For now, select the pcss file and associate it with sass.
+* Php/Webstorm. [Coming soon!](https://blog.jetbrains.com/webstorm/2016/08/webstorm-2016-3-early-access-preview/#postcss) For now, select the pcss file and associate it with sass.
 
 ## Whats the same as sass?
 
@@ -16,7 +16,7 @@ This system uses [PostCSS](http://postcss.org/). Dont worry if you are coming fr
 ## Whats not the same as sass?
 * No extends. 
 * No for loops, but you can get postcss plugins for that if you really need them.
-* vars are to be declared in the css4 syntax, not sass syntax. `:root{ --my-var: #777}` and usage: `color: var(--my-var)`
+* Vars are to be declared in the css4 syntax, not sass syntax. `:root{ --my-var: #777}` and usage: `color: var(--my-var)`
 
 ## Whats different?
 

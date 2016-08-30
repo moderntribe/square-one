@@ -3,10 +3,13 @@
  * @description JavaScript specific to the social sharing of content.
  */
 
+import delegate from 'delegate';
+import * as tools from '../utils/tools';
 import popup from '../utils/dom/popup';
 
-const el = document.getElementsByClassName('social-share-popup');
-let $el;
+const el = {
+	container: tools.getNodes('social-share-networks')[0],
+};
 
 /**
  * @function launchSocialPopup
@@ -16,9 +19,10 @@ let $el;
 const launchSocialPopup = (e) => {
 	popup({
 		event: e,
+		url: e.delegateTarget.href,
 		specs: {
-			width: parseInt(e.currentTarget.getAttribute('data-width'), 10),
-			height: parseInt(e.currentTarget.getAttribute('data-height'), 10),
+			width: parseInt(e.delegateTarget.getAttribute('data-width'), 10),
+			height: parseInt(e.delegateTarget.getAttribute('data-height'), 10),
 		},
 	});
 };
@@ -29,7 +33,7 @@ const launchSocialPopup = (e) => {
  */
 
 const bindEvents = () => {
-	$el.on('click', (e) => launchSocialPopup(e));
+	delegate(el.container, '[data-js="social-share-popup"]', 'click', (e) => launchSocialPopup(e));
 };
 
 /**
@@ -38,13 +42,13 @@ const bindEvents = () => {
  */
 
 const socialShare = () => {
-	if (el) {
-		$el = $(el);
-
-		bindEvents();
-
-		console.info('Initialized global social content sharing scripts.');
+	if (!el.container) {
+		return;
 	}
+
+	bindEvents();
+
+	console.info('Initialized global social content sharing scripts.');
 };
 
 export default socialShare;

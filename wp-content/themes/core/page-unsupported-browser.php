@@ -27,10 +27,10 @@
 </head>
 <body class="page-legacy" itemscope itemtype="https://schema.org/WebPage">
 
-<div class="site-wrap">
+<div class="l-site-wrapper">
 
 	<div class="header">
-		<div class="content-wrap">
+		<div class="l-wrapper">
 			<h1>
 				<img src="<?php echo trailingslashit( get_template_directory_uri() ); ?>img/logos/logo-legacy.png" alt="<?php bloginfo( 'name' ); ?>" />
 				<span class="visual-hide"><?php bloginfo( 'name' ); ?></span>
@@ -39,7 +39,7 @@
 	</div>
 
 	<div class="main" itemprop="mainContentOfPage">
-		<div class="content-wrap">
+		<div class="l-wrapper">
 
 			<div itemprop="text">
 

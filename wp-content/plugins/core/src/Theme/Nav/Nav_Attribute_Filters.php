@@ -46,9 +46,10 @@ class Nav_Attribute_Filters {
 	 */
 	public function clean_nav_item_classes( $classes, $item, $args, $depth ) {
 
-		$classes[] = 'menu-item-depth-' . $depth;
+		$classes[] = 'menu-item--depth-' . $depth;
 
 		$allowed_class_names = array(
+			'menu-item',
 			'menu-item-has-children',
 			'current-menu-parent',
 			'current-menu-item',
@@ -86,11 +87,11 @@ class Nav_Attribute_Filters {
 		if ( $args[ 'theme_location' ] === 'primary' ) {
 			// Top Level Items
 			if ( 0 === $depth ) {
-				$atts['class'] = 'menu-item-top-level-action';
+				$atts['class'] = 'menu-item__anchor';
 
 				// Item has children
 				if ( in_array( 'menu-item-has-children', $item->classes ) ) {
-					$atts['class']      .= ' menu-item-parent-trigger';
+					$atts['class']      .= ' menu-item__anchor--child';
 					$atts['id']          = 'menu-item-' . $item->ID;
 					$atts['data-target'] = 'sub-menu-' . $item->ID;
 				}

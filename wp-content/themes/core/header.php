@@ -25,7 +25,7 @@
 </head>
 <body <?php body_class(); ?>>
 
-	<div id="site-wrap">
+	<div class="l-site-wrapper" data-js="site-wrap">
 
 		<?php // Content: Header
 		get_template_part( 'content/header/default' ); ?>

@@ -10,7 +10,7 @@
  * @return string
  */
 
-function the_panel_title( $title = null, $classes = 'panel-title' ) {
+function the_panel_title( $title = null, $classes = 'panel__title' ) {
 
 	if ( empty( $title ) ) {
 		return;

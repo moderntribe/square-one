@@ -1,6 +1,6 @@
 <header class="site-header">
 
-	<div class="content-wrap">
+	<div class="l-wrapper">
 
 		<?php // Logo
 		the_logo(); ?>
