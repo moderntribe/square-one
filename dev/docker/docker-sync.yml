@@ -1,0 +1,14 @@
+options:
+  compose-file-path: './docker-compose.yml'
+  compose-dev-file-path: './docker-compose.rsync.yml'
+  verbose: true
+syncs:
+  square1-webroot-rsync-sync: # TODO: change this per project
+    src: '../..'
+    dest: '/srv/www/public'
+    sync_strategy: 'rsync'
+    sync_excludes:  [ '.idea', '.git', '.sass-cache', 'wp-content/upgrade', 'dev']
+    watch_excludes: [ '.idea', '.*/.git', '.*/node_modules', '.*/bower_components', '.*/sass-cache', '.*/.sass-cache', '.scss', '.pcss', '.gitignore']
+    sync_host_port: 10871 # TODO: change this per project
+    sync_args:
+      - '-v'
