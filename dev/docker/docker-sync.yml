@@ -7,8 +7,8 @@ syncs:
     src: '../..'
     dest: '/srv/www/public'
     sync_strategy: 'rsync'
-    sync_excludes:  [ '.idea', '.git', '.sass-cache', 'wp-content/upgrade', 'dev']
-    watch_excludes: [ '.idea', '.*/.git', '.*/node_modules', '.*/bower_components', '.*/sass-cache', '.*/.sass-cache', '.scss', '.pcss', '.gitignore']
+    sync_excludes:  [ '.idea', '.git', '.sass-cache', 'wp-content/upgrade', 'wp-content/uploads', 'dev']
+    watch_excludes: [ '.idea', '.*/.git', '.*/node_modules', '.*/bower_components', '.sass-cache', '.*/.sass-cache', '.scss', '.pcss', '.gitignore', 'wp-content/upgrade', 'wp-content/uploads' ]
     sync_host_port: 10871 # TODO: change this per project
     sync_args:
       - '-v'

@@ -3,9 +3,11 @@ services:
   php:
     volumes:
       - square1-webroot-rsync-sync:/srv/www/public
+      - ../../wp-content/uploads:/srv/www/public/wp-content/uploads
   nginx:
     volumes:
       - square1-webroot-rsync-sync:/srv/www/public
+      - ../../wp-content/uploads:/srv/www/public/wp-content/uploads
 
 volumes:
   square1-webroot-rsync-sync:
