@@ -1,3 +1,9 @@
+<?php
+/**
+ * Template Name: Page - Unsupported Browser
+ */
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
