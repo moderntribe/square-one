@@ -15,7 +15,7 @@ if ( post_password_required() ) {
 		<h6 class="comments__title">
 			<?php
 			printf( 
-				_nx( '1 Response to &ldquo;%2$s&rdquo;', '%1$s Responses to &ldquo;%2$s&rdquo;', get_comments_number(), 'comments title' ),
+				_nx( __( '1 Response to &ldquo;%2$s&rdquo;', 'tribe' ), __( '%1$s Responses to &ldquo;%2$s&rdquo;', 'tribe' ), get_comments_number(), 'comments title' ),
 				number_format_i18n( get_comments_number() ), '<a href="'. get_permalink() .'" rel="bookmark">' . get_the_title() . '</a>' );
 			?>
 		</h6>
@@ -34,7 +34,7 @@ if ( post_password_required() ) {
 		get_template_part( 'content/pagination/comments' ); ?>
 
 		<?php if ( ! comments_open() ) { ?>
-			<p class="comments__none">Comments are closed.</p>
+			<p class="comments__none"><?php _e( 'Comments are closed.', 'tribe' ); ?></p>
 		<?php } ?>
 
 	<?php endif; ?>

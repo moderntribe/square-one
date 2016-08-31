@@ -2,7 +2,7 @@
 
 	<nav class="site-header__nav" aria-labelledby="site-header__nav-label">
 
-		<h2 id="site-header__nav-label" class="u-visual-hide">Primary Navigation</h2>
+		<h2 id="site-header__nav-label" class="u-visual-hide"><?php _e( 'Primary Navigation', 'tribe' ); ?></h2>
 
 		<ol class="site-header__nav-list">
 			<?php // Header Nav

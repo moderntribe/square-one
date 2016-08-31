@@ -7,7 +7,7 @@
 
 	<?php // MISC META ?>
 	<meta charset="utf-8">
-	<meta name="author" content="Stanford 125">
+	<meta name="author" content="<?php bloginfo( 'name' ); ?>">
 	<meta http-equiv="cleartype" content="on">
 	<meta name="robots" content="noindex, nofollow">
 
@@ -48,10 +48,10 @@
 				<?php endwhile; ?>
 
 				<ul class="browsers">
-					<li><a href="https://www.mozilla.org/en-US/firefox/new/" class="firefox" rel="external" target="_blank">Firefox</a></li>
-					<li><a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie" class="ie" rel="external" target="_blank">IE 9+</a></li>
-					<li><a href="http://www.google.com/chrome/" class="chrome" rel="external" target="_blank">Chrome</a></li>
-					<li><a href="https://support.apple.com/downloads/#safari" class="safari" rel="external" target="_blank">Safari 6+</a></li>
+					<li><a href="https://www.mozilla.org/en-US/firefox/new/" class="firefox" rel="external" target="_blank"><?php _e( 'Firefox', 'tribe' ); ?></a></li>
+					<li><a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie" class="ie" rel="external" target="_blank"><?php _e( 'IE 9+', 'tribe' ); ?></a></li>
+					<li><a href="http://www.google.com/chrome/" class="chrome" rel="external" target="_blank"><?php _e( 'Chrome', 'tribe' ); ?></a></li>
+					<li><a href="https://support.apple.com/downloads/#safari" class="safari" rel="external" target="_blank"><?php _e( 'Safari 6+', 'tribe' ); ?></a></li>
 				</ul>
 
 			</div>

@@ -15,17 +15,17 @@ class Page_Title {
 
 		// Blog
 		if ( is_home() ) {
-			$title = 'Blog';
+			$title = __( 'Blog', 'tribe' );
 		}
 
 		// Search
 		elseif ( is_search() ) {
-			$title = 'Search Results';
+			$title = __( 'Search Results', 'tribe' );
 		}
 
 		// 404
 		elseif ( is_404() ) {
-			$title = 'Page Not Found (404)';
+			$title = __( 'Page Not Found (404)', 'tribe' );
 		}
 
 		// Singular

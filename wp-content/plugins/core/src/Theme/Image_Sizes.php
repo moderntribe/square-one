@@ -11,6 +11,11 @@ class Image_Sizes {
 			'height' => 0,
 			'crop'   => true,
 		],
+		'core-mobile'  => [
+			'width'  => 1152,
+			'height' => 0,
+			'crop'   => true,
+		],
 		'social-share' => [
 			'width'  => 1200,
 			'height' => 630,

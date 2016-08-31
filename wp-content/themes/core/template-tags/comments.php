@@ -19,9 +19,9 @@ if ( ! function_exists( 'core_comment' ) ) :
 
 				<li id="comment-<?php comment_ID(); ?>" <?php comment_class( 'post-interaction' ); ?>>
 					<p>
-						<strong>Pingback:</strong>
+						<strong><?php _e( 'Pingback:', 'tribe' ); ?></strong>
 						<?php comment_author_link(); ?>
-						<?php edit_comment_link( '(Edit)', '<span class="comment__action-edit">', '</span>' ); ?>
+						<?php edit_comment_link( __( '(Edit)', 'tribe' ), '<span class="comment__action-edit">', '</span>' ); ?>
 					</p>
 
 				<?php break;
@@ -30,9 +30,9 @@ if ( ! function_exists( 'core_comment' ) ) :
 
 				<li id="comment-<?php comment_ID(); ?>" <?php comment_class( 'post-interaction' ); ?>>
 				<p>
-					<strong>Trackback:</strong>
+					<strong><?php _e( 'Trackback:', 'tribe' ); ?></strong>
 					<?php comment_author_link(); ?>
-					<?php edit_comment_link( '(Edit)', '<span class="comment__action-edit">', '</span>' ); ?>
+					<?php edit_comment_link( __( '(Edit)', 'tribe' ), '<span class="comment__action-edit">', '</span>' ); ?>
 				</p>
 
 				<?php break;
@@ -58,7 +58,7 @@ if ( ! function_exists( 'core_comment' ) ) :
 
 					<div class="comment__text">
 
-						<?php edit_comment_link( 'Edit Comment', '<p class="comment__action-edit">', '</p>' ); ?>
+						<?php edit_comment_link( __( 'Edit Comment', 'tribe' ), '<p class="comment__action-edit">', '</p>' ); ?>
 
 						<?php comment_text(); ?>
 
@@ -66,13 +66,13 @@ if ( ! function_exists( 'core_comment' ) ) :
 
 					<?php // Moderation text
 					if ( $comment->comment_approved == '0' ) { ?>
-						<p class="comment__message-moderation">Your comment is awaiting moderation.</p>
+						<p class="comment__message-moderation"><?php _e( 'Your comment is awaiting moderation.', 'tribe' ); ?></p>
 					<?php } ?>
 
 					<?php // Reply
 					comment_reply_link(
 						array_merge( $args, array(
-							'reply_text' => 'Reply',
+							'reply_text' => __( 'Reply', 'tribe' ),
 							'before'	 => '<p class="comment__action-reply">',
 							'after' 	 => '</p>',
 							'depth' 	 => $depth,
