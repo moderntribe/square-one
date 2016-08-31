@@ -217,80 +217,79 @@
 	.chosen-choices li {
 		float: left;
 		list-style: none;
-		&.search-field {
-			margin: 0;
+	}
+	li.search-field {
+		margin: 0;
+		padding: 0;
+		white-space: nowrap;
+		input[type="text"] {
+			margin: 1px 0;
 			padding: 0;
-			white-space: nowrap;
-			input[type="text"] {
-				margin: 1px 0;
-				padding: 0;
-				height: var(--chosen-multiple-min-height);
-				outline: 0;
+			height: var(--chosen-multiple-min-height) !important;
+			outline: 0;
+			border: 0 !important;
+			width: auto !important;
+			color: var(--chosen-placeholder-color);
+			line-height: normal;
+			&:focus {
+				color: var(--chosen-placeholder-color-focus);
 				border: 0 !important;
-				width: auto !important;
-				color: var(--chosen-placeholder-color);
-				line-height: normal;
-				&:focus {
-					color: var(--chosen-placeholder-color-focus);
-					border: 0;
-					box-shadow: none;
-				}
+				box-shadow: none !important;
 			}
 		}
-		&.search-choice {
-			position: relative;
-			margin: var(--chosen-multiple-choice-margin);
-			padding: var(--chosen-multiple-choice-padding);
-			max-width: 100%;
-			background-color: var(--chosen-multiple-choice-bgd-color);
-			color: var(--chosen-multiple-choice-color);
-			cursor: default;
-			overflow: hidden;
-			font: var(--chosen-multiple-choice-font-style) var(--chosen-multiple-choice-font-weight) var(--chosen-multiple-choice-font-size) / var(--chosen-multiple-choice-line-height) var(--chosen-multiple-choice-font-family);
-			span {
-				word-wrap: break-word;
-			}
-			.search-choice-close {
+	}
+	li.search-choice {
+		position: relative;
+		margin: var(--chosen-multiple-choice-margin);
+		padding: var(--chosen-multiple-choice-padding);
+		max-width: 100%;
+		background-color: var(--chosen-multiple-choice-bgd-color);
+		color: var(--chosen-multiple-choice-color);
+		cursor: default;
+		overflow: hidden;
+		height: 35px;
+		font: var(--chosen-multiple-choice-font-style) var(--chosen-multiple-choice-font-weight) var(--chosen-multiple-choice-font-size) / var(--chosen-multiple-choice-line-height) var(--chosen-multiple-choice-font-family);
+		span {
+			word-wrap: break-word;
+		}
+		.search-choice-close {
+			position: absolute;
+			top: 0;
+			right: 0;
+			display: block;
+			width: var(--chosen-multiple-choice-close-width);
+			height: 100%;
+			color: var(--chosen-multiple-choice-close-color);
+			text-align: center;
+			border: 0;
+			&:before {
+				@mixin icon;
+				content: var(--chosen-multiple-choice-close-icon);
+				color: var(--chosen-multiple-choice-close-color);
+				font-size: var(--chosen-multiple-choice-close-font-size);
 				position: absolute;
+				top: 50%;
+				width: var(--chosen-multiple-choice-close-width);
+				right: 0;
+				z-index: 1;
+				margin-top: var(--chosen-multiple-choice-close-margin-top);
+				height: var(--chosen-multiple-choice-close-height);
+			}
+
+			&:after {
+				transition: var(--transition);
+				content: '';
+				height: 100%;
+				position: absolute;
+				width: var(--chosen-multiple-choice-close-width);
+				background-color: var(--chosen-multiple-choice-close-bgd-color);
 				top: 0;
 				right: 0;
-				display: block;
-				width: var(--chosen-multiple-choice-close-width);
-				height: 100%;
-				color: var(--chosen-multiple-choice-close-color);
-				text-align: center;
-				border: 0;
-				&:before {
-					@mixin icon;
-					content: var(--chosen-multiple-choice-close-icon);
-					color: var(--chosen-multiple-choice-close-color);
-					font-size: var(--chosen-multiple-choice-close-font-size);
-					position: absolute;
-					top: 50%;
-					width: var(--chosen-multiple-choice-close-width);
-					right: 0;
-					z-index: 1;
-					margin-top: var(--chosen-multiple-choice-close-margin-top);
-					height: var(--chosen-multiple-choice-close-height);
-				}
+			}
 
-				&:after {
-					transition: var(--transition);
-					content: '';
-					height: 100%;
-					position: absolute;
-					width: var(--chosen-multiple-choice-close-width);
-					background-color: var(--chosen-multiple-choice-close-bgd-color);
-					top: 0;
-					right: 0;
-				}
-
-				&:hover,
-				&:focus {
-					&:after {
-						background-color: var(--chosen-multiple-choice-close-bgd-color-hover);
-					}
-				}
+			&:hover:after,
+			&:focus:after {
+				background-color: var(--chosen-multiple-choice-close-bgd-color-hover);
 			}
 		}
 	}
