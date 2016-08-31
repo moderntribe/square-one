@@ -518,6 +518,13 @@ html[dir="rtl"] input.acf-is-prepended.acf-is-appended {
   border-color: #5B9DD9;
 }
 /* description */
+.select2-drop {
+  /* search*/
+  /* result */
+}
+.select2-drop .select2-search {
+  padding: 4px 4px 0;
+}
 .select2-drop .select2-result {
   /* hover*/
 }

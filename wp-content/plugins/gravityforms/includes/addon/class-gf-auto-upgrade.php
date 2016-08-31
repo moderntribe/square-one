@@ -30,9 +30,6 @@ class GFAutoUpgrade {
 	public function init() {
 		if ( is_admin() ) {
 			load_plugin_textdomain( $this->_slug, false, $this->_slug . '/languages' );
-
-			add_filter( 'transient_update_plugins', array( $this, 'check_update' ) );
-			add_filter( 'site_transient_update_plugins', array( $this, 'check_update' ) );
 			add_action( 'install_plugins_pre_plugin-information', array( $this, 'display_changelog' ) );
 			add_action( 'gform_after_check_update', array( $this, 'flush_version_info' ) );
 			add_action( 'gform_updates', array( $this, 'display_updates' ) );
@@ -41,6 +38,10 @@ class GFAutoUpgrade {
 				add_action( 'after_plugin_row_' . $this->_path, array( $this, 'rg_plugin_row' ) );
 			}
 		}
+
+		// Check for updates. The check might not run the admin context. E.g. from WP-CLI.
+		add_filter( 'transient_update_plugins', array( $this, 'check_update' ) );
+		add_filter( 'site_transient_update_plugins', array( $this, 'check_update' ) );
 
 		// ManageWP premium update filters
 		add_filter( 'mwp_premium_update_notification', array( $this, 'premium_update_push' ) );
@@ -170,7 +171,7 @@ class GFAutoUpgrade {
 			'Content-Type'   => 'application/x-www-form-urlencoded; charset=' . get_option( 'blog_charset' ),
 			'Content-Length' => strlen( $body ),
 			'User-Agent'     => 'WordPress/' . get_bloginfo( 'version' ),
-			'Referer'        => get_bloginfo( 'url' )
+			'Referer'        => get_bloginfo( 'url' ),
 		);
 
 		$raw_response = GFCommon::post_to_manager( 'changelog.php', $this->get_remote_request_params( $this->_slug, $key, $this->_version ), $options );

@@ -106,6 +106,12 @@ http://support.advancedcustomfields.com/
 
 == Changelog ==
 
+= 5.4.3 =
+* WYSIWYG field: Fixed JS bug (since WP 4.6) causing conflicts with editor plugins
+* Google Maps field: Fixed JS error conflict with Divi theme
+* Radio field: Fixed bug (Chrome only) ignoring default values in cloned sub fields
+* Core: Fixed `wp_get_sites()` deprecated error (since WP 4.6) shown in network admin
+
 = 5.4.2 =
 * API: Fixed bug preventing post_title and post_content values saving in `acf_form()`
 

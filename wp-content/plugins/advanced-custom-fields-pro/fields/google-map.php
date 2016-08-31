@@ -292,11 +292,17 @@ class acf_field_google_map extends acf_field {
    	
    	function input_admin_footer() {
 	   	
+	   	// bail ealry if no qneueu
+	   	if( !acf_get_setting('enqueue_google_maps') ) return;
+	   	
+	   	
 	   	// vars
 	   	$api = array(
-			'libraries'		=> 'places',
-			'key'			=> acf_get_setting('google_api_key'),
-			'client'		=> acf_get_setting('google_api_client')
+			'key'		=> acf_get_setting('google_api_key'),
+			'client'	=> acf_get_setting('google_api_client'),
+			'libraries'	=> 'places',
+			'ver'		=> 3,
+			'callback'	=> ''
 	   	);
 	   	
 	   	
@@ -309,9 +315,12 @@ class acf_field_google_map extends acf_field {
 	   	if( empty($api['client']) ) unset($api['client']);
 	   	
 	   	
+	   	// construct url
+	   	$url = add_query_arg($api, 'https://maps.googleapis.com/maps/api/js');
+	   	
 ?>
 <script type="text/javascript">
-acf.fields.google_map.api = <?php echo json_encode($api); ?>;
+acf.fields.google_map.url = '<?php echo $url; ?>';
 </script>
 <?php
 	

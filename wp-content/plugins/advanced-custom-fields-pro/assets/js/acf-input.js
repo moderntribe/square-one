@@ -1926,6 +1926,63 @@ var acf;
 			
 			return $.extend({}, defaults, args);
 			
+		},
+		
+		
+		/*
+		*  enqueue_script
+		*
+		*  This function will append a script to the page
+		*
+		*  @source	https://www.nczonline.net/blog/2009/06/23/loading-javascript-without-blocking/
+		*  @type	function
+		*  @date	27/08/2016
+		*  @since	5.4.0
+		*
+		*  @param	url (string)
+		*  @param	callback (function)
+		*  @return	na
+		*/
+		
+		enqueue_script: function( url, callback ) {
+			
+			// vars
+		    var script = document.createElement('script');
+		    
+		    
+		    // atts
+		    script.type = "text/javascript";
+			script.src = url;
+		    script.async = true;
+			
+			
+			// ie
+		    if( script.readyState ) {
+			    
+		        script.onreadystatechange = function(){
+			        
+		            if( script.readyState == 'loaded' || script.readyState == 'complete' ){
+			            
+		                script.onreadystatechange = null;
+		                callback();
+		                
+		            }
+		            
+		        };
+		    
+		    // normal browsers
+		    } else {
+			    
+		        script.onload = function(){
+		            callback();
+		        };
+		        
+		    }
+		    
+		    
+		    // append
+		    document.body.appendChild(script);
+			
 		}
 		
 	};
@@ -2467,10 +2524,18 @@ var acf;
 		
 		refresh: function( $el ){
 			
-			//console.time('acf.width.render');
+			//console.log('acf.layout.refresh', $el);
 			
 			// defaults
 			$el = $el || false;
+			
+			
+			// if is '.acf-fields'
+			if( $el && $el.is('.acf-fields') ) {
+				
+				$el = $el.parent();
+				
+			}
 			
 			
 			// loop over visible fields
@@ -4856,10 +4921,7 @@ var acf;
 	acf.fields.google_map = acf.field.extend({
 		
 		type: 'google_map',
-		api: {
-			sensor:		false,
-			libraries:	'places'
-		},
+		url: '',
 		$el: null,
 		$search: null,
 		
@@ -4929,84 +4991,74 @@ var acf;
 			
 			
 			// ready
-			if( this.status == 'ready' ) {
+			if( this.status == 'ready' ) return true;
+			
+			
+			// loading
+			if( this.status == 'loading' ) return false;
+			
+			
+			// check exists (optimal)
+			if( acf.isset(window, 'google', 'maps', 'places') ) {
 				
+				this.status = 'ready';
 				return true;
 				
 			}
 			
 			
-			// loading
-			if( this.status == 'loading' ) {
+			// check exists (ok)
+			if( acf.isset(window, 'google', 'maps') ) {
 				
-				return false;
+				this.status = 'ready';
 				
 			}
 			
 			
-			// no google
-			if( !acf.isset(window, 'google', 'load') ) {
+			// attempt load google.maps.places
+			if( this.url ) {
 				
 				// set status
-				self.status = 'loading';
+				this.status = 'loading';
 				
 				
-				// load API
-				$.getScript('https://www.google.com/jsapi', function(){
+				// enqueue
+				acf.enqueue_script(this.url, function(){
 					
-					// load maps
-				    google.load('maps', '3', { other_params: $.param(self.api), callback: function(){
-				    	
-				    	// set status
-				    	self.status = 'ready';
-				    	
-				    	
-				    	// initialize pending
-				    	self.initialize_pending();
-				        
-				    }});
-				    
-				});
-				
-				return false;
-					
-			}
-			
-			
-			// no maps or places
-			if( !acf.isset(window, 'google', 'maps', 'places') ) {
-				
-				// set status
-				self.status = 'loading';
-				
-				
-				// load maps
-			    google.load('maps', '3', { other_params: $.param(self.api), callback: function(){
-			    	
-			    	// set status
+					// set status
 			    	self.status = 'ready';
 			    	
 			    	
 			    	// initialize pending
 			    	self.initialize_pending();
 			    	
-			    	
-			        
-			    }});
+				});
 				
-				return false;
-					
 			}
 			
 			
-			// google must exist already
-			this.status = 'ready';
+			// ready
+			if( this.status == 'ready' ) return true;
 			
 			
 			// return
-			return true;
+			return false;
 			
 		},
+		
+		
+		/*
+		*  initialize_pending
+		*
+		*  This function will initialize pending fields
+		*
+		*  @type	function
+		*  @date	27/08/2016
+		*  @since	5.4.0
+		*
+		*  @param	n/a
+		*  @return	n/a
+		*/
 		
 		initialize_pending: function(){
 			
@@ -5015,7 +5067,7 @@ var acf;
 			
 			this.$pending.each(function(){
 				
-				self.doFocus( $(this) ).initialize();
+				self.set('$field', $(this)).initialize();
 				
 			});
 			
@@ -5084,10 +5136,34 @@ var acf;
         	this.map = new google.maps.Map( this.$el.find('.canvas')[0], map_args);
 	        
 	        
-	        // add search
-			var autocomplete = new google.maps.places.Autocomplete( this.$search[0] );
-			autocomplete.bindTo('bounds', this.map);
-			this.map.autocomplete = autocomplete;
+	        // search
+	        if( acf.isset(window, 'google', 'maps', 'places', 'Autocomplete') ) {
+		        
+		        // vars
+		        var autocomplete = new google.maps.places.Autocomplete( this.$search[0] );
+				
+				
+				// bind
+				autocomplete.bindTo('bounds', this.map);
+				
+				
+				// event
+				google.maps.event.addListener(autocomplete, 'place_changed', function( e ) {
+				    
+				    // vars
+				    var place = this.getPlace();
+				    
+				    
+				    // search
+					self.search( place );
+				    
+				});
+				
+				
+				// append
+				this.map.autocomplete = autocomplete;
+				
+	        }
 			
 			
 			// marker
@@ -5121,18 +5197,6 @@ var acf;
 		    
 		    
 			// events
-			google.maps.event.addListener(autocomplete, 'place_changed', function( e ) {
-			    
-			    // vars
-			    var place = this.getPlace();
-			    
-			    
-			    // search
-				self.search( place );
-			    
-			});
-		    
-		    
 		    google.maps.event.addListener( this.map.marker, 'dragend', function(){
 		    	
 		    	// vars
@@ -7345,6 +7409,11 @@ var acf;
 		
 		$ul: null,
 		
+		actions: {
+			'ready':	'initialize',
+			'append':	'initialize'
+		},
+		
 		events: {
 			'click input[type="radio"]': 'click',
 		},
@@ -7357,6 +7426,30 @@ var acf;
 			
 			// get options
 			this.o = acf.get_data( this.$ul );
+			
+		},
+		
+		
+		/*
+		*  initialize
+		*
+		*  This function will fix a bug found in Chrome.
+		*  A radio input (for a given name) may only have 1 selected value. When used within a fc layout 
+		*  multiple times (clone field), the selected value (default value) will not be checked. 
+		*  This simply re-checks it.
+		*
+		*  @type	function
+		*  @date	30/08/2016
+		*  @since	5.4.0
+		*
+		*  @param	$post_id (int)
+		*  @return	$post_id (int)
+		*/
+		
+		initialize: function(){
+			
+			// find selected input and check it
+			this.$ul.find('.selected input').prop('checked', true);	
 			
 		},
 		
@@ -11307,18 +11400,66 @@ ed.on('ResizeEditor', function(e) {
 		
 	});
 	
-
-	$(document).ready(function(){
+	
+	/*
+	*  wysiwyg_manager
+	*
+	*  This model will handle validation of fields within a tab group
+	*
+	*  @type	function
+	*  @date	25/11/2015
+	*  @since	5.3.2
+	*
+	*  @param	$post_id (int)
+	*  @return	$post_id (int)
+	*/
+	
+	var acf_content = acf.model.extend({
 		
-		// move acf_content wysiwyg
-		if( $('#wp-acf_content-wrap').exists() ) {
+		$div: null,
+		
+		actions: {
+			'ready': 'ready'
+		},
+		
+		ready: function(){
 			
-			$('#wp-acf_content-wrap').parent().appendTo('body');
+			// vars
+			this.$div = $('#acf-hidden-wp-editor');
+			
+			
+			// bail early if doesn't exist
+			if( !this.$div.exists() ) return;
+			
+			
+			// move to footer
+			this.$div.appendTo('body');
+			
+			
+			// restore default activeEditor
+			tinymce.on('AddEditor', function( data ){
+				
+				// vars
+				var editor = data.editor;
+				
+				
+				// update WP var to match tinymce
+				wpActiveEditor = editor.id;
+				
+				
+				// bail early if not acf_content
+				if( editor.id !== 'acf_content' ) return;
+				
+				
+				// update global vars
+				tinymce.activeEditor = tinymce.editors.content || null;
+				wpActiveEditor = tinymce.editors.content ? 'content' : null;
+				
+			});
 			
 		}
 		
 	});
-
 
 })(jQuery);
 

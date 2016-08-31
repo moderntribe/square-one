@@ -47,10 +47,12 @@ class GF_Fields {
 	 * @return GF_Field
 	 */
 	public static function get( $field_type ) {
-		return self::get_instance($field_type);
+		return self::get_instance( $field_type );
 	}
 
 	/**
+	 * Return all the registered field types.
+	 *
 	 * @return GF_Field[]
 	 */
 	public static function get_all() {
@@ -58,21 +60,38 @@ class GF_Fields {
 	}
 
 	/**
-	 * @param $properties
+	 * Creates a Field object from an array of field properties.
+	 *
+	 * @param array|GF_Field $properties
 	 *
 	 * @return GF_Field | bool
 	 */
 	public static function create( $properties ) {
-		$type = isset($properties['type']) ? $properties['type'] : '';
-		$type = empty( $properties['inputType'] ) ? $type : $properties['inputType'];
-		if ( empty($type) || ! isset( self::$_fields[ $type ] ) ) {
+		if ( $properties instanceof GF_Field ) {
+			$type = $properties->type;
+			$type = empty( $properties->inputType ) ? $type : $properties->inputType;
+		} else {
+			$type = isset( $properties['type'] ) ? $properties['type'] : '';
+			$type = empty( $properties['inputType'] ) ? $type : $properties['inputType'];
+		}
+
+		if ( empty( $type ) || ! isset( self::$_fields[ $type ] ) ) {
 			return new GF_Field( $properties );
 		}
 		$class      = self::$_fields[ $type ];
 		$class_name = get_class( $class );
 		$field      = new $class_name( $properties );
 
-		return $field;
+		/**
+		 * Filter the GF_Field object after it is created.
+		 *
+		 * @since  1.9.18.2
+		 *
+		 * @param  GF_Field $field      A GF_Field object.
+		 * @param  array    $properties An array of field properties used to generate the GF_Field object.
+		 * @see    https://www.gravityhelp.com/documentation/article/gform_gf_field_create/
+		 */
+		return apply_filters( 'gform_gf_field_create', $field, $properties );
 
 	}
 }
