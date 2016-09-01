@@ -68,7 +68,7 @@ abstract class Tribe_Service_Provider implements ServiceProviderInterface {
 		foreach ( $this->post_types as $type ) {
 			$container[ 'post_type.' . $type ] = function ( $container ) use ( $type ) {
 				$post_type_class_name = '\\Tribe\\Project\\Post_Types\\' . $type;
-				return new $post_type_class_name;
+				return new $post_type_class_name( $container );
 			};
 			$container[ 'post_type.' . $type . '.config' ] = function ( $container ) use ( $type ) {
 				$config_class_name = '\\Tribe\\Project\\Post_Types\\Config\\' . $type;
