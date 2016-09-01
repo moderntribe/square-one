@@ -47,11 +47,14 @@ class Tribe_Branding {
 	 */
 	public function set_login_logo() {
 
-		$logo = get_theme_mod( 'branding_customizer_icon_admin',
-			get_stylesheet_directory_uri() . '/img/logos/logo.png' );
-		if ( empty( $logo ) || ( file_exists( $logo ) === false ) ) {
+		$logo_fallback_path = '/img/logos/logo-login.png';
+		$logo_fallback      = file_exists( get_stylesheet_directory() . $logo_fallback_path ) ? get_stylesheet_directory_uri() . $logo_fallback_path : false;
+
+		$logo = get_theme_mod( 'branding_customizer_icon_admin', $logo_fallback );
+		if ( empty( $logo ) ) {
 			return;
 		}
+
 		$logo_dimensions = getimagesize( $logo );
 		$ld_width        = $logo_dimensions[0] / 2 . 'px';
 		$ld_height       = $logo_dimensions[1] / 2 . 'px';
