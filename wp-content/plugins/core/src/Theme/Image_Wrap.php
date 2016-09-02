@@ -46,7 +46,14 @@ class Image_Wrap {
 				$content = '<p>' . $content . '</p>';
 			}
 
-			return sprintf( '<figure class="wp-image-wrap">%s</figure>%s', $image, $content );
+			// move alignment classes to our non-caption image wrapper & remove from image
+			// mimicks markup for captioned images
+			preg_match( '#class\s*=\s*"[^"]*(alignnone|alignleft|aligncenter|alignright)[^"]*"#', $image, $alignment_match );
+			$alignment = empty( $alignment_match[1] ) ? 'alignnone' : $alignment_match[1];
+
+			$image = str_replace( $alignment_match[1] . ' ', '', $image );
+
+			return sprintf( '<figure class="wp-image-wrap %s">%s</figure>%s', $alignment, $image, $content );
 		}, $html );
 
 	}
