@@ -136,7 +136,7 @@ abstract class Tribe_Service_Provider implements ServiceProviderInterface {
 	}
 
 	protected function post_type_is_user( $side ) {
-		return in_array( 'User', $side, true );
+		return ( in_array( 'User', $side ) || in_array( 'user', $side ) );
 	}
 
 	protected function map_post_type_classes_to_ids( $post_type_classes, $container ) {
