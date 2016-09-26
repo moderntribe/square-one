@@ -111,8 +111,8 @@ abstract class Tribe_Service_Provider implements ServiceProviderInterface {
 			$container[ 'p2p.' . $relationship ] = function ( $container ) use ( $relationship, $sides ) {
 				$relationship_class_name = '\\Tribe\\Project\\P2P\\Relationships\\' . $relationship;
 
-				$from = $this->map_post_type_classes_to_ids( $sides[ 'from' ], $container );
-				$to = $this->map_post_type_classes_to_ids( $sides[ 'to' ], $container );
+				$from = $this->post_type_is_user( $sides[ 'from' ] ) ? 'user' : $this->map_post_type_classes_to_ids( $sides[ 'from' ], $container );
+				$to   = $this->post_type_is_user( $sides[ 'to' ] ) ? 'user' : $this->map_post_type_classes_to_ids( $sides[ 'to' ], $container );
 				return new $relationship_class_name( $from, $to );
 			};
 
@@ -133,6 +133,10 @@ abstract class Tribe_Service_Provider implements ServiceProviderInterface {
 		foreach ( $this->panels as $panel ) {
 			$container[ 'panels.init' ]->add_panel_config( $panel );
 		}
+	}
+
+	protected function post_type_is_user( $side ) {
+		return ( in_array( 'User', $side ) || in_array( 'user', $side ) );
 	}
 
 	protected function map_post_type_classes_to_ids( $post_type_classes, $container ) {
