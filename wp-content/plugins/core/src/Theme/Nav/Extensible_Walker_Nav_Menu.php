@@ -12,29 +12,6 @@ namespace Tribe\Project\Theme\Nav;
 class Extensible_Walker_Nav_Menu extends \Walker_Nav_Menu {
 
 	/**
-	 * What the class handles.
-	 *
-	 * @since  3.0.0
-	 * @access public
-	 * @var string
-	 *
-	 * @see    Walker::$tree_type
-	 */
-	public $tree_type = array( 'post_type', 'taxonomy', 'custom' );
-
-	/**
-	 * Database fields to use.
-	 *
-	 * @since  3.0.0
-	 * @access public
-	 * @todo   Decouple this.
-	 * @var array
-	 *
-	 * @see    Walker::$db_fields
-	 */
-	public $db_fields = array( 'parent' => 'menu_item_parent', 'id' => 'db_id' );
-
-	/**
 	 * Starts the list before the elements are added.
 	 *
 	 * @since 3.0.0
