@@ -20,7 +20,6 @@ class Force_Plugin_Activation {
 		'advanced-custom-fields-pro/acf.php',
 		'core/core.php',
 		'limit-login-attempts/limit-login-attempts.php',
-		'attachment-helper/attachment-helper.php',
 		'panel-builder/tribe-panel-builder.php',
 		'tribe-admin-dashboard/tribe-admin-dashboard.php',
 	);
