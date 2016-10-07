@@ -3,7 +3,7 @@
 Plugin Name: Gravity Forms
 Plugin URI: http://www.gravityforms.com
 Description: Easily create web forms and manage form entries within the WordPress admin.
-Version: 2.0.6.9
+Version: 2.0.7.6
 Author: rocketgenius
 Author URI: http://www.rocketgenius.com
 Text Domain: gravityforms
@@ -139,7 +139,6 @@ if ( is_admin() && ( RGForms::is_gravity_page() || RGForms::is_gravity_ajax_acti
 
 add_action( 'plugins_loaded', array( 'GFForms', 'loaded' ) );
 
-register_activation_hook( __FILE__, array( 'GFForms', 'activation_hook' ) );
 register_deactivation_hook( __FILE__, array( 'GFForms', 'deactivation_hook' ) );
 
 /**
@@ -156,7 +155,7 @@ class GFForms {
 	 * @static
 	 * @var string $version The version number
 	 */
-	public static $version = '2.0.6.9';
+	public static $version = '2.0.7.6';
 
 	/**
 	 * Runs after Gravity Forms is loaded.
@@ -211,7 +210,7 @@ class GFForms {
 		GF_Download::maybe_process();
 
 		//load text domains
-		GFCommon::load_gf_text_domain( 'gravityforms' );
+		GFCommon::load_gf_text_domain();
 
 		add_filter( 'gform_logging_supported', array( 'RGForms', 'set_logging_supported' ) );
 		add_action( 'admin_head', array( 'GFCommon', 'maybe_output_gf_vars' ) );
@@ -411,17 +410,7 @@ class GFForms {
 	 */
 	public static function deactivation_hook() {
 		GFCache::flush( true );
-		delete_option( 'gravityforms_rewrite_rules_flushed' );
 		flush_rewrite_rules();
-	}
-
-	/**
-	 * Performs Gravity Forms activation tasks.
-	 * @access public
-	 * @static
-	 */
-	public static function activation_hook() {
-		update_option( 'gravityforms_rewrite_rules_flushed', false );
 	}
 
 	/**
@@ -585,8 +574,6 @@ class GFForms {
 			}
 
 			update_option( 'rg_form_version', GFCommon::$version );
-
-			update_option( 'gravityforms_rewrite_rules_flushed', false );
 
 			GFCommon::log_debug( "GFForms::setup(): Blog {$blog_id} - End of setup." );
 		}
@@ -1724,7 +1711,7 @@ SET d.value = l.value"
 
 		//Gravity Forms pages
 		$current_page = trim( strtolower( self::get( 'page' ) ) );
-		$gf_pages     = array( 'gf_edit_forms', 'gf_new_form', 'gf_entries', 'gf_settings', 'gf_export', 'gf_help' );
+		$gf_pages     = array( 'gf_edit_forms', 'gf_new_form', 'gf_entries', 'gf_settings', 'gf_export', 'gf_addons', 'gf_help' );
 
 		return in_array( $current_page, $gf_pages );
 	}

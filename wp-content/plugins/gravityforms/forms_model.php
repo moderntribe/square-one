@@ -3073,7 +3073,7 @@ class GFFormsModel {
 		$form_unique_id = self::get_form_unique_id( $form_id );
 		$pathinfo       = pathinfo( $uploaded_filename );
 
-		GFCommon::log_debug( 'Uploaded filename is ' . $uploaded_filename . ' and temporary filename is ' . $form_unique_id . '_' . $input_name . '.' . $pathinfo['extension'] );
+		GFCommon::log_debug( __METHOD__ . '(): Uploaded filename is ' . $uploaded_filename . ' and temporary filename is ' . $form_unique_id . '_' . $input_name . '.' . $pathinfo['extension'] );
 		return array( 'uploaded_filename' => $uploaded_filename, 'temp_filename' => "{$form_unique_id}_{$input_name}.{$pathinfo['extension']}" );
 
 	}
@@ -4428,7 +4428,14 @@ class GFFormsModel {
 						$field_ids[] = $field->id . '.3'; //adding first name
 						$field_ids[] = $field->id . '.6'; //adding last name
 					} else {
-						$field_ids[] = $field->inputs[0]['id']; //getting first input
+						foreach ( $inputs as $input ) {
+							if ( rgar( $input, 'isHidden' ) ) {
+								continue;
+							}
+
+							$field_ids[] = $input['id']; //getting first input
+							break;
+						}
 					}
 				} else {
 					$field_ids[] = $field->id;
@@ -4485,8 +4492,11 @@ class GFFormsModel {
 				default :
 					$field = self::get_field( $form, $field_id );
 					if ( $field ) {
-						$input_label_only = apply_filters( 'gform_entry_list_column_input_label_only', $input_label_only, $form, $field );
-						$columns[strval( $field_id )] = array( 'label' => self::get_label( $field, $field_id, $input_label_only ), 'type' => $field->type, 'inputType' => $field->inputType );
+						$input_label_only               = apply_filters( 'gform_entry_list_column_input_label_only', $input_label_only, $form, $field );
+						$columns[ strval( $field_id ) ] = array( 'label'     => self::get_label( $field, $field_id, $input_label_only ),
+						                                         'type'      => $field->type,
+						                                         'inputType' => $field->inputType
+						);
 					}
 			}
 		}
@@ -4507,10 +4517,12 @@ class GFFormsModel {
 		}
 		$field_label = ( IS_ADMIN || RG_CURRENT_PAGE == 'select_columns.php' || RG_CURRENT_PAGE == 'print-entry.php' || rgget( 'gf_page', $_GET ) == 'select_columns' || rgget( 'gf_page', $_GET ) == 'print-entry' ) && ! empty( $field->adminLabel ) && $allow_admin_label ? $field->adminLabel : $field->label;
 		$input       = self::get_input( $field, $input_id );
-		if ( self::get_input_type($field) == 'checkbox' && $input != null ) {
+		if ( self::get_input_type( $field ) == 'checkbox' && $input != null ) {
 			return $input['label'];
 		} else if ( $input != null ) {
-			return $input_only ? $input['label'] : $field_label . ' (' . $input['label'] . ')';
+			$input_label = rgar( $input, 'customLabel', rgar( $input, 'label' ) );
+
+			return $input_only ? $input_label : $field_label . ' (' . $input_label . ')';
 		} else {
 			return $field_label;
 		}

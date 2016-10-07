@@ -2,7 +2,7 @@
 Contributors: elliotcondon
 Tags: acf, advanced, custom, field, fields, custom field, custom fields, simple fields, magic fields, more fields, repeater, edit
 Requires at least: 3.6.0
-Tested up to: 4.6.0
+Tested up to: 4.7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -105,6 +105,35 @@ http://support.advancedcustomfields.com/
 
 
 == Changelog ==
+
+= 5.4.7-RC1 =
+* Time Picker field: Fixed bug preventing default time from being selected
+* Date Picker field: Improved compatibility with unix timestamp values
+* File field: Fixed validation bugs when used as a sub field (multiple selection)
+* API: Added new `add_sub_row()` function
+* API: Added new `update_sub_row()` function
+* API: Added new `delete_sub_row()` function
+* Core: Fixed bug causing 'sync' issues with sub clone fields
+* Core: Minor fixes and improvements
+
+= 5.4.6 =
+* Gallery field: Fixed bug where open sidebar fields were saved to post
+* Flexible Content field: Fixed bug causing Google map render issue within collapsed layout
+* Flexible Content field: Fixed bug during 'duplicate layout' where radio input values were lost
+* API: Fixed bug causing `get_row(true)` to return incorrect values
+* Core: Fixed bug where preview values did not load for a draft post
+* Core: Added notice when PRO license fails to validate URL
+* Core: Fixed bug where conditional logic would incorrectly enable select elements
+* Core: Minor fixes and improvements
+
+= 5.4.5 =
+* API: Fixed bug in `acf_form()` where AJAX validation ignored 'post_title'
+* API: Improved `update_field()` when saving a new value (when reference value does not yet exist)
+* Core: Added search input & toggle to admin field groups list
+* Core: Fixed bug where preview values did not load for a draft post
+
+= 5.4.4 =
+* WYSIWYG field: Fixed JS error when 'Disable the visual editor when writing' is checked
 
 = 5.4.3 =
 * WYSIWYG field: Fixed JS bug (since WP 4.6) causing conflicts with editor plugins

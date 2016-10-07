@@ -2775,19 +2775,11 @@ function acf_update_user_setting( $name, $value ) {
 	
 	
 	// get user settings
-	$settings = get_user_meta( $user_id, 'acf_user_settings', false );
+	$settings = get_user_meta( $user_id, 'acf_user_settings', true );
 	
 	
-	// find settings
-	if( isset($settings[0]) ) {
-	
-		$settings = $settings[0];
-	
-	} else {
-		
-		$settings = array();
-		
-	}
+	// ensure array
+	$settings = acf_get_array($settings);
 	
 	
 	// delete setting (allow 0 to save)
@@ -2829,19 +2821,19 @@ function acf_get_user_setting( $name = '', $default = false ) {
 	
 	
 	// get user settings
-	$settings = get_user_meta( $user_id, 'acf_user_settings', false );
+	$settings = get_user_meta( $user_id, 'acf_user_settings', true );
+	
+	
+	// ensure array
+	$settings = acf_get_array($settings);
 	
 	
 	// bail arly if no settings
-	if( !isset($settings[0][$name]) ) {
-		
-		return $default;
-		
-	}
+	if( !isset($settings[$name]) ) return $default;
 	
 	
 	// return
-	return $settings[0][$name];
+	return $settings[$name];
 	
 }
 
@@ -2977,6 +2969,17 @@ function acf_get_valid_post_id( $post_id = 0 ) {
 		if( $autosave && $autosave->post_parent == $post_id ) {
 		
 			$post_id = (int) $autosave->ID;
+			
+		}
+		
+	} elseif( isset($_GET['p']) && isset($_GET['preview']) ) {
+		
+		$revision = acf_get_post_latest_revision( $_GET['p'] );
+		
+		// save
+		if( $revision && $revision->post_parent == $post_id) {
+			
+			$post_id = (int) $revision->ID;
 			
 		}
 		
@@ -4757,8 +4760,153 @@ function acf_send_ajax_results( $response ) {
 	// return
 	wp_send_json( $response );
 	
-}		
+}
+
+
+/*
+*  acf_is_sequential_array
+*
+*  This function will return true if the array contains only numeric keys
+*
+*  @source	http://stackoverflow.com/questions/173400/how-to-check-if-php-array-is-associative-or-sequential
+*  @type	function
+*  @date	9/09/2016
+*  @since	5.4.0
+*
+*  @param	$array (array)
+*  @return	(boolean)
+*/
+
+function acf_is_sequential_array( $array ) {
+	
+	// bail ealry if not array
+	if( !is_array($array) ) return false;
+	
+	
+	// loop
+	foreach( $array as $key => $value ) {
 		
+		// bail ealry if is string
+		if( is_string($key) ) return false;
+	
+	}
+	
+	
+	// return
+	return true;
+	
+}
+
+
+/*
+*  acf_is_associative_array
+*
+*  This function will return true if the array contains one or more string keys
+*
+*  @source	http://stackoverflow.com/questions/173400/how-to-check-if-php-array-is-associative-or-sequential
+*  @type	function
+*  @date	9/09/2016
+*  @since	5.4.0
+*
+*  @param	$array (array)
+*  @return	(boolean)
+*/
+
+function acf_is_associative_array( $array ) {
+	
+	// bail ealry if not array
+	if( !is_array($array) ) return false;
+	
+	
+	// loop
+	foreach( $array as $key => $value ) {
+		
+		// bail ealry if is string
+		if( is_string($key) ) return true;
+	
+	}
+	
+	
+	// return
+	return false;
+	
+}
+
+
+/*
+*  acf_add_array_key_prefix
+*
+*  This function will add a prefix to all array keys
+*  Useful to preserve numeric keys when performing array_multisort
+*
+*  @type	function
+*  @date	15/09/2016
+*  @since	5.4.0
+*
+*  @param	$array (array)
+*  @param	$prefix (string)
+*  @return	(array)
+*/
+
+function acf_add_array_key_prefix( $array, $prefix ) {
+	
+	// vars
+	$array2 = array();
+	
+	
+	// loop
+	foreach( $array as $k => $v ) {
+		
+		$k2 = $prefix . $k;
+	    $array2[ $k2 ] = $v;
+	    
+	}
+	
+	
+	// return
+	return $array2;
+	
+}
+
+
+/*
+*  acf_remove_array_key_prefix
+*
+*  This function will remove a prefix to all array keys
+*  Useful to preserve numeric keys when performing array_multisort
+*
+*  @type	function
+*  @date	15/09/2016
+*  @since	5.4.0
+*
+*  @param	$array (array)
+*  @param	$prefix (string)
+*  @return	(array)
+*/
+
+function acf_remove_array_key_prefix( $array, $prefix ) {
+	
+	// vars
+	$array2 = array();
+	$l = strlen($prefix);
+	
+	
+	// loop
+	foreach( $array as $k => $v ) {
+		
+		$k2 = (substr($k, 0, $l) === $prefix) ? substr($k, $l) : $k;
+	    $array2[ $k2 ] = $v;
+	    
+	}
+	
+	
+	// return
+	return $array2;
+	
+}
+
+
+	
 
 add_filter("acf/settings/slug", '_acf_settings_slug');
 

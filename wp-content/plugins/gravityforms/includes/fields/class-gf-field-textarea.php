@@ -128,7 +128,7 @@ class GF_Field_Textarea extends GF_Field {
 
 		}
 
-		return sprintf( "<div class='ginput_container'>%s</div>", $input );
+		return sprintf( "<div class='ginput_container ginput_container_textarea'>%s</div>", $input );
 	}
 
 	public static function start_wp_tiny_mce_init_buffer() {

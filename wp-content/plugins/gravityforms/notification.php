@@ -358,8 +358,7 @@ Class GFNotification {
 		function IsNotificationConditionalLogicField(field) {
 			//this function is a duplicate of IsConditionalLogicField from form_editor.js
 			inputType = field.inputType ? field.inputType : field.type;
-			var supported_fields = ['checkbox', 'radio', 'select', 'text', 'website', 'textarea', 'email', 'hidden', 'number', 'phone', 'multiselect', 'post_title',
-				'post_tags', 'post_custom_field', 'post_content', 'post_excerpt'];
+			var supported_fields = <?php echo json_encode( self::get_routing_field_types() ); ?>;
 
 			var index = jQuery.inArray(inputType, supported_fields);
 
