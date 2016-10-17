@@ -90,11 +90,15 @@ embed,
 video {
 	border: 0;
 	line-height: 0;
-	width: auto;
 	height: auto;
 	margin-top: var(--spacer);
 	margin-bottom: var(--spacer);
 	display: block;
+	max-width: 100%;
+
+	/* Messes with WP editor image resizing
+	and don't think it's needed
+	width: auto; */
 }
 
 img {

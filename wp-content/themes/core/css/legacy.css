@@ -1287,9 +1287,10 @@ img {
 }
 .t-typography img {
     line-height: 0;
-    width: auto;
     height: auto;
-    display: block;
+    display: block;/* Messes with WP editor image resizing
+		and don't think it's needed
+		width: auto; */
 }
 /* -----------------------------------------------------------------------------
  * Media: Wrapper
