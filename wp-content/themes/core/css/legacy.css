@@ -997,19 +997,7 @@ hr {
 .t-typography > *:first-child {
     margin-top: 0;
 }
-.t-typography > *:first-child > img {
-    margin-top: 0;
-}
-.t-typography > .wp-image-wrap:nth-child(2) img {
-    margin-top: 0;
-}
 .t-typography > *:last-child {
-    margin-bottom: 0;
-}
-.t-typography > *:last-child > img {
-    margin-bottom: 0;
-}
-.t-typography > .wp-image-wrap:nth-last-child(2) img {
     margin-bottom: 0;
 }
 /* -------------------------------------------------------------------------
