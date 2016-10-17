@@ -994,9 +994,6 @@ hr {
  *   we simply hide them
  *
  * ------------------------------------------------------------------------- */
-.t-typography > *:empty:not(hr):not(br) {
-    display: none;
-}
 .t-typography > *:first-child {
     margin-top: 0;
 }
