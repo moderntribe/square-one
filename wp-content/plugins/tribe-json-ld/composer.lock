@@ -1,0 +1,52 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "e339154289ae1727475b0963bcc3187e",
+    "content-hash": "5f5ecec47e623c64da26402bafa38865",
+    "packages": [
+        {
+            "name": "flightless/attachment-helper",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/flightless/attachment-helper.git",
+                "reference": "8c325c8af6ec761e9e88dd112407d6f7261bad12"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/flightless/attachment-helper/zipball/8c325c8af6ec761e9e88dd112407d6f7261bad12",
+                "reference": "8c325c8af6ec761e9e88dd112407d6f7261bad12",
+                "shasum": ""
+            },
+            "type": "wordpress-muplugin",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jonathan Brinley",
+                    "email": "jbrinley@flightless.us"
+                }
+            ],
+            "description": "A library for adding a file upload field to an admin meta box",
+            "support": {
+                "source": "https://github.com/flightless/attachment-helper/tree/master",
+                "issues": "https://github.com/flightless/attachment-helper/issues"
+            },
+            "time": "2015-06-25 15:59:10"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "dev",
+    "stability-flags": {
+        "flightless/attachment-helper": 20
+    },
+    "prefer-stable": true,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}

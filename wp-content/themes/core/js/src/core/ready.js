@@ -15,7 +15,9 @@ import viewportDims from './viewport-dims';
 
 import { on, ready } from '../utils/events';
 
-import tribeLibs from '../../vendor/tribe-libs/index';
+import modules from '../modules/index';
+
+import single from '../single/index';
 
 /**
  * @function bindEvents
@@ -44,11 +46,13 @@ const init = () => {
 
 	bindEvents();
 
-	// initialize the tribe lib scripts
+	// initialize the module scripts
 
-	tribeLibs();
+	modules();
 
 	// initialize the main scripts
+
+	single();
 
 	console.info('Initialized all javascript that targeted document ready.');
 };

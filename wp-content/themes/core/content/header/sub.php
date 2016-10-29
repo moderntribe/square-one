@@ -1,6 +1,6 @@
 <header>
 
-	<div class="content-wrap">
+	<div class="l-wrapper">
 
 		<?php the_page_title(); ?>
 

@@ -1,0 +1,35 @@
+[
+    {
+        "name": "flightless/attachment-helper",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/flightless/attachment-helper.git",
+            "reference": "8c325c8af6ec761e9e88dd112407d6f7261bad12"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/flightless/attachment-helper/zipball/8c325c8af6ec761e9e88dd112407d6f7261bad12",
+            "reference": "8c325c8af6ec761e9e88dd112407d6f7261bad12",
+            "shasum": ""
+        },
+        "time": "2015-06-25 15:59:10",
+        "type": "wordpress-muplugin",
+        "installation-source": "source",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Jonathan Brinley",
+                "email": "jbrinley@flightless.us"
+            }
+        ],
+        "description": "A library for adding a file upload field to an admin meta box",
+        "support": {
+            "source": "https://github.com/flightless/attachment-helper/tree/master",
+            "issues": "https://github.com/flightless/attachment-helper/issues"
+        }
+    }
+]

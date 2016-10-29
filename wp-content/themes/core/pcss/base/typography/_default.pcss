@@ -5,7 +5,7 @@
 
 p {
 	@mixin body-content;
-	.context-content & {
+	.t-typography & {
 		margin-bottom: var(--spacer);
 	}
 }
@@ -15,8 +15,8 @@ p {
  * ------------------------------------------------------------------------- */
 
 hr {
-	border-top: 1px solid var(--border);
-	.context-content & {
+	border-top: 1px solid var(--color-border);
+	.t-typography & {
 		margin: var(--spacer-lg) auto;
 	}
 }
@@ -34,27 +34,12 @@ hr {
  *
  * ------------------------------------------------------------------------- */
 
-.context-content {
+.t-typography {
 	& > {
-		*:empty:not(hr):not(br) {
-			display: none;
-		}
 		*:first-child {
-			margin-top: 0;
-			& > img {
-				margin-top: 0;
-			}
-		}
-		.wp-image-wrap:nth-child(2) img {
 			margin-top: 0;
 		}
 		*:last-child {
-			margin-bottom: 0;
-			& > img {
-				margin-bottom: 0;
-			}
-		}
-		.wp-image-wrap:nth-last-child(2) img {
 			margin-bottom: 0;
 		}
 	}

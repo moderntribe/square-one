@@ -27,8 +27,8 @@ html .mceContentBody {
 }
 
 body {
-	color: var(--text);
-	background-color: var(--white);
+	color: var(--color-text);
+	background-color: var(--color-white);
 	font-weight: var(--font-weight-regular);
 	font-size: 100%;
 	line-height: var(--line-height-base);
@@ -64,14 +64,17 @@ body {
 
 /* Forms */
 @import "../base/forms/default";
-@import "../base/forms/labels";
-@import "../base/forms/fieldsets";
-@import "../base/forms/accessibility";
-@import "../base/forms/fields/radio-checkbox";
-@import "../base/forms/fields/select";
-@import "../base/forms/fields/file";
-@import "../base/forms/fields/textarea";
-@import "../base/forms/fields/submit";
+@import "../base/forms/attributes";
+@import "../base/forms/fieldset";
+@import "../base/forms/label";
+@import "../base/forms/legend";
+@import "../base/forms/controls/default";
+@import "../base/forms/controls/button";
+@import "../base/forms/controls/file";
+@import "../base/forms/controls/password";
+@import "../base/forms/controls/radio-checkbox";
+@import "../base/forms/controls/select";
+@import "../base/forms/controls/textarea";
 @import "../base/forms/validation/required";
 
 /* -----------------------------------------------------------------------------
@@ -87,11 +90,15 @@ embed,
 video {
 	border: 0;
 	line-height: 0;
-	width: auto;
 	height: auto;
 	margin-top: var(--spacer);
 	margin-bottom: var(--spacer);
 	display: block;
+	max-width: 100%;
+
+	/* Messes with WP editor image resizing
+	and don't think it's needed
+	width: auto; */
 }
 
 img {

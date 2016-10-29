@@ -3,7 +3,7 @@
  * @description Some vanilla js cross browser utils
  */
 
-const addClass = (el, className) => {
+export const addClass = (el, className) => {
 	const element = el;
 	if (!element) {
 		console.log(`Cant apply class ${className} on null element.`);
@@ -19,7 +19,7 @@ const addClass = (el, className) => {
 	return element;
 };
 
-const getChildren = (el) => {
+export const getChildren = (el) => {
 	const children = [];
 	let i = el.children.length;
 	for (i; i--;) {
@@ -31,7 +31,7 @@ const getChildren = (el) => {
 	return children;
 };
 
-const hasClass = (el, className) => {
+export const hasClass = (el, className) => {
 	if (!el) {
 		console.log(`Cant test class ${className} on null element.`);
 		return null;
@@ -40,7 +40,7 @@ const hasClass = (el, className) => {
 	return el.classList ? el.classList.contains(className) : new RegExp(`(^| )${className}( |$)`, 'gi').test(el.className);
 };
 
-const removeClass = (el, className) => {
+export const removeClass = (el, className) => {
 	const element = el;
 	if (!element) {
 		console.log(`Cant remove class ${className} on null element.`);
@@ -56,7 +56,7 @@ const removeClass = (el, className) => {
 	return element;
 };
 
-const convertElements = (elements) => {
+export const convertElements = (elements = []) => {
 	const converted = [];
 	let i = elements.length;
 	for (i; i--; converted.unshift(elements[i]));
@@ -64,7 +64,7 @@ const convertElements = (elements) => {
 	return converted;
 };
 
-const isNodelist = (elements) => {
+export const isNodelist = (elements) => {
 	const stringRepr = Object.prototype.toString.call(elements);
 
 	return typeof elements === 'object' &&
@@ -73,4 +73,44 @@ const isNodelist = (elements) => {
 		(elements.length === 0 || (typeof elements[0] === 'object' && elements[0].nodeType > 0));
 };
 
-export { addClass, getChildren, hasClass, removeClass, convertElements, isNodelist };
+export const getNodes = (selector = '', convert = false, node = document) => {
+	let nodes = node.querySelectorAll(`[data-js="${selector}"]`);
+	if (convert) {
+		nodes = convertElements(nodes);
+	}
+
+	return nodes;
+};
+
+export const closest = (el, selector) => {
+	let matchesFn;
+	let parent;
+
+	['matches', 'webkitMatchesSelector', 'mozMatchesSelector', 'msMatchesSelector', 'oMatchesSelector'].some((fn) => {
+		if (typeof document.body[fn] === 'function') {
+			matchesFn = fn;
+			return true;
+		}
+
+		return false;
+	});
+
+	while (el) {
+		parent = el.parentElement;
+		if (parent && parent[matchesFn](selector)) {
+			return parent;
+		}
+
+		el = parent; // eslint-disable-line
+	}
+
+	return null;
+};
+
+export const insertAfter = (newNode, referenceNode) => {
+	referenceNode.parentNode.insertBefore(newNode, referenceNode.nextElementSibling);
+};
+
+export const insertBefore = (newNode, referenceNode) => {
+	referenceNode.parentNode.insertBefore(newNode, referenceNode);
+};

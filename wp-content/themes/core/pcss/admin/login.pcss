@@ -15,6 +15,13 @@
 @import "../utilities/variables/paths";
 @import "../utilities/variables/transitions";
 @import "../utilities/variables/typography";
+@import "../utilities/variables/forms";
+@import "../utilities/variables/forms/label";
+@import "../utilities/variables/forms/legend";
+@import "../utilities/variables/forms/fieldset";
+@import "../utilities/variables/forms/controls";
+@import "../utilities/variables/forms/attributes";
+@import "../utilities/variables/forms/validation";
 
 * {
 	box-sizing: border-box;
@@ -26,7 +33,19 @@
 	position: relative;
 	width: 100%;
 	display: table;
-	background: var(--bgd-login);
+	background: var(--color-bgd-login);
+
+	a,
+	button,
+	input[type="submit"] {
+		transition: var(--transition);
+
+		&:focus,
+		&:active {
+			box-shadow: none;
+			outline: 1px dotted;
+		}
+	}
 
 	#login {
 		overflow: hidden;
@@ -47,24 +66,23 @@
 	&.wp-core-ui {
 
 		.button-primary {
-			transition: var(--transition);
-			background: var(--primary);
-			font-family: var(--font-family-base);
-			color: var(--white);
+			background: var(--color-primary);
+			color: var(--color-white);
 			border: 0;
-			border-radius: 0;
 			box-shadow: none;
 			display: block;
 			width: 100%;
 			padding: 10px;
 			margin: 15px auto 0;
-			font-size: 18px;
+			font-size: 16px;
 			height: auto;
-			font-weight: bold;
 			float: none;
+			text-shadow: none;
 
-			&:hover {
-				background-color: var(--secondary);
+			&:hover,
+			&:focus,
+			&:active {
+				background: var(--color-secondary);
 			}
 		}
 	}
@@ -80,47 +98,31 @@
 		}
 	}
 
-	/*
 	h1 {
 		padding: 8px;
 		margin: 0 auto 16px;
 		a {
 			line-height: 1;
-			background: url('var(--path-images)/logos/logo-admin.png') 50% 50% no-repeat;
-			width: 300px;
-			height: 57px;
 			margin: 0 auto;
-			@media (--viewport-retina) {
-				background-image: url('var(--path-images)/logos/logo-admin@2x.png');
-				background-size: 300px 57px;
-			}
-		}
-		img {
-			display: inline-block;
-			max-width: 100%;
-			width: auto;
-			max-height: 100%;
-			height: auto;
 		}
 	}
-	*/
 
 	#nav,
 	#backtoblog {
 		padding: 3px 2px;
 		margin: 0 auto;
 		text-align: center;
-		font-family: var(--font-family-base);
 		font-size: 15px;
 		a {
-			transition: var(--transition);
 			padding: 3px 0;
 			margin: 0 auto;
 			text-align: center;
-			color: var(--primary);
+			color: var(--color-primary);
+
 			&:hover,
-			&:focus {
-				color: var(--secondary);
+			&:focus,
+			&:active {
+				color: var(--color-secondary);
 			}
 		}
 	}

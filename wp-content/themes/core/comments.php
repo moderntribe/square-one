@@ -8,19 +8,19 @@ if ( post_password_required() ) {
 }
 ?>
 
-<div id="comments" class="comments-area">
+<div id="comments" class="comments" data-js="comment-form">
 
 	<?php if ( have_comments() ) : ?>
 
-		<h6 class="comments-title">
+		<h6 class="comments__title">
 			<?php
 			printf( 
-				_nx( '1 Response to &ldquo;%2$s&rdquo;', '%1$s Responses to &ldquo;%2$s&rdquo;', get_comments_number(), 'comments title' ),
+				_nx( __( '1 Response to &ldquo;%2$s&rdquo;', 'tribe' ), __( '%1$s Responses to &ldquo;%2$s&rdquo;', 'tribe' ), get_comments_number(), 'comments title' ),
 				number_format_i18n( get_comments_number() ), '<a href="'. get_permalink() .'" rel="bookmark">' . get_the_title() . '</a>' );
 			?>
 		</h6>
 
-		<ol class="comment-list">
+		<ol class="comments__list">
 			<?php
 				wp_list_comments( array(
 					'callback'   => 'core_comment',
@@ -28,17 +28,17 @@ if ( post_password_required() ) {
 					'short_ping' => true
 				) );
 			?>
-		</ol><!-- .comment-list -->
+		</ol>
 
 		<?php // Content: Pagination
 		get_template_part( 'content/pagination/comments' ); ?>
 
 		<?php if ( ! comments_open() ) { ?>
-			<p class="no-comments">Comments are closed.</p>
+			<p class="comments__none"><?php _e( 'Comments are closed.', 'tribe' ); ?></p>
 		<?php } ?>
 
-	<?php endif; // have_comments() ?>
+	<?php endif; ?>
 
 	<?php comment_form(); ?>
 
-</div><!-- #comments -->
+</div>

@@ -10,6 +10,7 @@ use Tribe\Project\Theme\Body_Classes;
 use Tribe\Project\Theme\Image_Links;
 use Tribe\Project\Theme\Image_Sizes;
 use Tribe\Project\Theme\Image_Wrap;
+use Tribe\Project\Theme\Gravity_Forms_Filter;
 use Tribe\Project\Theme\Nav\Nav_Attribute_Filters;
 use Tribe\Project\Theme\Oembed_Filter;
 use Tribe\Project\Theme\Resources\Editor_Styles;
@@ -92,6 +93,10 @@ class Theme_Provider implements ServiceProviderInterface {
 			return new Nav_Attribute_Filters();
 		};
 
+		$container[ 'theme.gravity_forms_filter' ] = function ( Container $container ) {
+			return new Gravity_Forms_Filter();
+		};
+
 		$this->hook( $container );
 	}
 
@@ -111,6 +116,7 @@ class Theme_Provider implements ServiceProviderInterface {
 		$container[ 'service_loader' ]->enqueue( 'theme.resources.styles', 'hook' );
 		$container[ 'service_loader' ]->enqueue( 'theme.resources.editor_styles', 'hook' );
 		$container[ 'service_loader' ]->enqueue( 'theme.nav.attribute_filters', 'hook' );
+		$container[ 'service_loader' ]->enqueue( 'theme.gravity_forms_filter', 'hook' );
 	}
 
 }

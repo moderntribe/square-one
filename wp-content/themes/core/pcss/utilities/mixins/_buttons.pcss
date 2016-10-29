@@ -1,3 +1,10 @@
+
+/* -----------------------------------------------------------------------------
+ *
+ * Global Button Resets
+ *
+ * ----------------------------------------------------------------------------- */
+
 @define-mixin button-global {
 	transition: var(--transition);
 	width: auto;
@@ -9,4 +16,27 @@
 	text-decoration: none;
 	border: 0;
 	padding: 0;
+}
+
+/* -----------------------------------------------------------------------------
+ *
+ * Button Submit
+ *
+ * ----------------------------------------------------------------------------- */
+
+@define-mixin button-submit {
+	@mixin button-global;
+	background-color: var(--color-black);
+	padding: 1em;
+	text-align: center;
+	color: var(--color-white);
+	&:visited {
+		color: var(--color-white);
+	}
+	&:hover,
+	&:focus,
+	&:active {
+		color: var(--color-white);
+		background-color: var(--color-grey-dark);
+	}
 }

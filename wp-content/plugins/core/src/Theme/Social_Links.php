@@ -48,9 +48,9 @@ class Social_Links {
 			return '';
 		}
 		$links = array_map( function ( $link ) {
-			return '<li>' . $link . '</li>';
+			return '<li class="social-share-networks__item">' . $link . '</li>';
 		}, $links );
-		return '<ul class="social-share-networks">' . implode( $links ) . '</ul>';
+		return '<ul class="social-share-networks" data-js="social-share-networks">' . implode( $links ) . '</ul>';
 	}
 
 
@@ -120,13 +120,13 @@ class Social_Links {
 	 */
 	private function build_link( $network, $data ) {
 
-		$class = $this->labeled ? '' : ' class="visual-hide"';
+		$class = $this->labeled ? '' : ' class="u-visual-hide"';
 
 		switch ( $network ) {
 
 			case "email":
 				return sprintf(
-					'<a class="icon icon-mail" href="mailto:?subject=%1$s&body=%2$s" title="%3$s"><span%4$s>%3$s</span></a>',
+					'<a class="social-share-networks__anchor icon icon-mail" href="mailto:?subject=%1$s&body=%2$s" title="%3$s"><span%4$s>%3$s</span></a>',
 					urlencode( $data[ 'title' ] ),
 					urlencode( esc_url_raw( $data[ 'link' ] ) ),
 					__( 'Share through Email', 'tribe' ),
@@ -135,14 +135,14 @@ class Social_Links {
 
 			case "print":
 				return sprintf(
-					'<a class="icon icon-print" href="#" title="%1$s" onclick="window.print();return false;"><span%2$s>%1$s</span></a>',
+					'<a class="social-share-networks__anchor icon icon-print" href="#" title="%1$s" onclick="window.print();return false;"><span%2$s>%1$s</span></a>',
 					__( 'Print this page', 'tribe' ),
 					$class
 				);
 
 			case "google":
 				return sprintf(
-					'<a class="social-share-popup icon icon-google-plus" href="https://plus.google.com/share?url=%1$s" data-width="624" data-height="486" title="%2$s"><span%3$s>%2$s</span></a>',
+					'<a class="social-share-networks__anchor icon icon-google-plus" href="https://plus.google.com/share?url=%1$s" data-js="social-share-popup" data-width="624" data-height="486" title="%2$s"><span%3$s>%2$s</span></a>',
 					urlencode( esc_url_raw( $data[ 'link' ] ) ),
 					__( 'Share on Google+', 'tribe' ),
 					$class
@@ -153,7 +153,7 @@ class Social_Links {
 					$link = '';
 				} else {
 					$link = sprintf(
-						'<a class="social-share-popup icon icon-pinterest" href="http://pinterest.com/pin/create/button/?url=%1$s&amp;media=%2$s&amp;description=%3$s" data-width="624" data-height="300" title="%4$s"><span%5$s>%4$s</span></a>',
+						'<a class="social-share-networks__anchor icon icon-pinterest" href="http://pinterest.com/pin/create/button/?url=%1$s&amp;media=%2$s&amp;description=%3$s" data-js="social-share-popup" data-width="624" data-height="300" title="%4$s"><span%5$s>%4$s</span></a>',
 						urlencode( esc_url_raw( $data[ 'link' ] ) ),
 						urlencode( esc_url_raw( $data[ 'image_src' ] ) ),
 						urlencode( $data[ 'title' ] ),
@@ -171,7 +171,7 @@ class Social_Links {
 				}
 
 				return sprintf(
-					'<a class="social-share-popup icon icon-twitter" href="https://twitter.com/share?url=%1$s&text=%2$s" data-width="550" data-height="450" title="%3$s"><span%4$s>%3$s</span></a>',
+					'<a class="social-share-networks__anchor icon icon-twitter" href="https://twitter.com/share?url=%1$s&text=%2$s" data-js="social-share-popup" data-width="550" data-height="450" title="%3$s"><span%4$s>%3$s</span></a>',
 					urlencode( esc_url( $data[ 'link' ] ) ),
 					urlencode( $text ),
 					__( 'Share on Twitter', 'tribe' ),
@@ -180,7 +180,7 @@ class Social_Links {
 
 			case "facebook":
 				return sprintf(
-					'<a class="social-share-popup icon icon-facebook" href="http://www.facebook.com/sharer.php?u=%1$s&t=%2$s" data-width="640" data-height="352" title="%3$s"><span%4$s>%3$s</span></a>',
+					'<a class="social-share-networks__anchor icon icon-facebook" href="http://www.facebook.com/sharer.php?u=%1$s&t=%2$s" data-js="social-share-popup" data-width="640" data-height="352" title="%3$s"><span%4$s>%3$s</span></a>',
 					urlencode( esc_url( $data[ 'link' ] ) ),
 					urlencode( $data[ 'title' ] ),
 					__( 'Share on Facebook', 'tribe' ),
@@ -189,7 +189,7 @@ class Social_Links {
 
 			case "linkedin":
 				return sprintf(
-					'<a class="social-share-popup icon icon-linkedin" href="http://www.linkedin.com/shareArticle?mini=true&url=%1$s&title=%2$s" data-width="640" data-height="352" title="%3$s"><span%4$s>%3$s</span></a>',
+					'<a class="social-share-networks__anchor icon icon-linkedin" href="http://www.linkedin.com/shareArticle?mini=true&url=%1$s&title=%2$s" data-js="social-share-popup" data-width="640" data-height="352" title="%3$s"><span%4$s>%3$s</span></a>',
 					urlencode( esc_url( $data[ 'link' ] ) ),
 					urlencode( $data[ 'title' ] ),
 					__( 'Share on LinkedIn', 'tribe' ),
