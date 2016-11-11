@@ -83,7 +83,10 @@ $config_defaults = array(
 
 	// Miscellaneous
 	'WP_POST_REVISIONS'       => true,
-	'WP_DEFAULT_THEME'        => 'core'
+	'WP_DEFAULT_THEME'        => 'core',
+
+	//Background Task Runner
+	'TASK_RUNNER'             => 'runner.runners.cron',
 );
 
 // ==============================================================

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tribe\Project\Cron\Tasks;
+namespace Tribe\Project\Runner\Tasks;
 
 use Tribe\Project\ElasticSearch\Config;
 
@@ -16,10 +16,10 @@ use Tribe\Project\ElasticSearch\Config;
  * @see \Tribe\Project\ElasticSearch\Re_Index
  *
  *
- * @package Tribe\Project\Cron\Tasks
+ * @package Tribe\Project\Runner_Interface\Tasks
  */
-class Re_Index implements _Task_Interface {
-	use _Task;
+class Re_Index implements Task_Interface {
+	use Task;
 
 	const MANUAL_INDEX_KEY = 'core_running_manual_es_re_index';
 
@@ -46,8 +46,8 @@ class Re_Index implements _Task_Interface {
 				'action'               => 'ep_index',
 				self::MANUAL_INDEX_KEY => true,
 			],
-			'sslverify' => false,
 			'timeout'   => MINUTE_IN_SECONDS,
+			'sslverify' => !defined( 'WP_DEBUG' ) || WP_DEBUG == false,
 		];
 
 		$response = wp_remote_post( admin_url( 'admin-ajax.php' ), $data );
@@ -89,7 +89,7 @@ class Re_Index implements _Task_Interface {
 	 * @return Re_Index
 	 */
 	public static function instance(){
-		return tribe_project()->container()[ 'cron.tasks.re_index' ];
+		return tribe_project()->container()[ 'runner.tasks.re_index' ];
 	}
 
 }

@@ -2,7 +2,7 @@
 
 namespace Tribe\Project\ElasticSearch;
 
-use Tribe\Project\Cron\Tasks\Re_Index;
+use Tribe\Project\Runner\Tasks\Re_Index;
 
 /**
  * Config
@@ -121,6 +121,6 @@ class Config {
 	 * @return Config
 	 */
 	public static function instance(){
-		return tribe_project()->container()[ 'search.config' ];
+		return tribe_project()->container()[ 'elasticsearch.config' ];
 	}
 }

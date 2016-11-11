@@ -19,7 +19,7 @@ namespace Tribe\Project\ElasticSearch;
  * Theoretically there should be no down time because the old index will load
  * for all non re-index related processes during the re-index.
  *
- * @see \Tribe\Project\Cron\Tasks\Re_Index
+ * @see \Tribe\Project\Runner\Tasks\Re_Index
  *
  * @package Tribe\Project\ElasticSearch
  */
@@ -157,7 +157,7 @@ class Re_Index {
 	 * @return bool
 	 */
 	private function is_running_reindex(){
-		return !empty( $_POST[ \Tribe\Project\Cron\Tasks\Re_Index::MANUAL_INDEX_KEY ] );
+		return !empty( $_POST[ \Tribe\Project\Runner\Tasks\Re_Index::MANUAL_INDEX_KEY ] );
 
 	}
 
@@ -168,7 +168,7 @@ class Re_Index {
 	 * @return void
 	 */
 	private function schedule_sync(){
-		\Tribe\Project\Cron\Tasks\Re_Index::instance()->schedule();
+		\Tribe\Project\Runner\Tasks\Re_Index::instance()->schedule();
 	}
 
 
@@ -206,7 +206,7 @@ class Re_Index {
 	 * @return Re_Index
 	 */
 	public static function instance(){
-		return tribe_project()->container()[ 'search.re_index' ];
+		return tribe_project()->container()[ 'elasticsearch.re_index' ];
 	}
 
 }

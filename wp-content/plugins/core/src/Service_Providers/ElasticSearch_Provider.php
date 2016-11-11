@@ -15,14 +15,14 @@ use Tribe\Project\ElasticSearch\Rest_Api;
  */
 class ElasticSearch_Provider  implements ServiceProviderInterface {
 	public function register( Container $container ){
-		$container[ 'search.config' ] = function ( Container $container ){
+		$container[ 'elasticsearch.config' ] = function ( Container $container ){
 			return new Config();
 		};
 
-		$container[ 'search.rest_api' ] = function ( Container $container ){
+		$container[ 'elasticsearch.rest_api' ] = function ( Container $container ){
 			return new Rest_Api();
 		};
-		$container[ 'search.re_index' ] = function ( Container $container ){
+		$container[ 'elasticsearch.re_index' ] = function ( Container $container ){
 			return new Re_Index();
 		};
 
@@ -30,8 +30,8 @@ class ElasticSearch_Provider  implements ServiceProviderInterface {
 	}
 
 	private function hook( Container $container ){
-		$container[ 'service_loader' ]->enqueue( 'search.config', 'hook' );
-		$container[ 'service_loader' ]->enqueue( 'search.rest_api', 'hook' );
-		$container[ 'service_loader' ]->enqueue( 'search.re_index', 'init' );
+		$container[ 'service_loader' ]->enqueue( 'elasticsearch.config', 'hook' );
+		$container[ 'service_loader' ]->enqueue( 'elasticsearch.rest_api', 'hook' );
+		$container[ 'service_loader' ]->enqueue( 'elasticsearch.re_index', 'init' );
 	}
 }

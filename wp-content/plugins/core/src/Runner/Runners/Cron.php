@@ -1,18 +1,19 @@
 <?php
 
-namespace Tribe\Project\Cron;
+namespace Tribe\Project\Runner\Runners;
+
+use Tribe\Project\Runner\Scheduled;
 
 /**
- * Scheduled_Cron
+ * Cron
  *
  * WP Cron handler for the scheduled tasks
  *
  * @see Scheduled::run_tasks()
  *
- *
- * @package Tribe\Project\Cron
+ * @package Tribe\Project\Runner_Interface
  */
-class Scheduled_Cron {
+class Cron implements Runner_Interface {
 	const CRON_HOOK = 'core_scheduled_cron';
 	const CRON_SCHEDULE = 'every_five_minutes';
 	const LAST_CRON_OPTION = 'core_scheduled_last_run_time';
@@ -22,9 +23,9 @@ class Scheduled_Cron {
 
 	public function hook(){
 		if( !empty( $_REQUEST[ self::MANUAL_RUN_URL_PARAM ] ) ){
-			add_action( 'init', [ $this, 'run_cron' ], 0, 9999 );
+			add_action( 'init', [ $this, 'run_tasks' ], 0, 9999 );
 		}
-		add_action( self::CRON_HOOK, [ $this, 'run_cron' ] );
+		add_action( self::CRON_HOOK, [ $this, 'run_tasks' ] );
 
 		add_filter( 'cron_schedules', [ $this, 'add_five_minutes' ] );
 	}
@@ -55,21 +56,21 @@ class Scheduled_Cron {
 	}
 
 
-	public function get_next_cron_time(){
+	public function get_next_run_time(){
 		$time = wp_next_scheduled( self::CRON_HOOK );
 
 		return $time;
 	}
 
 
-	public function get_last_cron_time(){
+	public function get_last_run_time(){
 		$time = get_option( self::LAST_CRON_OPTION );
 
 		return $time;
 	}
 
 
-	public function run_cron(){
+	public function run_tasks(){
 		update_option( self::LAST_CRON_OPTION, time() );
 		if( !defined( 'DOING_CRON' ) || !DOING_CRON ){
 			$this->reschedule_cron();
@@ -89,10 +90,10 @@ class Scheduled_Cron {
 	 *
 	 * @static
 	 *
-	 * @return Scheduled_Cron
+	 * @return Cron
 	 */
 	public static function instance(){
-		return tribe_project()->container()[ 'cron.scheduled_cron' ];
+		return tribe_project()->container()[ 'runner.runners.cron' ];
 	}
 
 }

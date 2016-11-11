@@ -1,21 +1,21 @@
 <?php
 
-namespace Tribe\Project\Cron\Tasks;
+namespace Tribe\Project\Runner\Tasks;
 
-use Tribe\Project\Cron\Scheduled;
+use Tribe\Project\Runner\Scheduled;
 
 /**
- * Interface _Task_Interface
+ * Interface Task_Interface
  *
  * Each task should implement this interface.
  * It contains the very minimum a task class should have.
  *
- * It is recommended to use the _Task trait along with this
+ * It is recommended to use the Task trait along with this
  * but it not required.
  *
- * @package Tribe\Project\Cron\Tasks
+ * @package Tribe\Project\Runner_Interface\Tasks
  */
-interface _Task_Interface {
+interface Task_Interface {
 
 	/**
 	 * Run by Scheduled

@@ -1,7 +1,7 @@
 <?php
-namespace Tribe\Project\Cron;
+namespace Tribe\Project\Runner;
 
-use Tribe\Project\Cron\Tasks\_Task_Interface;
+use Tribe\Project\Runner\Tasks\Task_Interface;
 
 /**
  * Scheduled
@@ -11,10 +11,11 @@ use Tribe\Project\Cron\Tasks\_Task_Interface;
  * To add a new task send the name of the class to $this->schedule_task()
  * Run all stored tasks by calling $this->run_tasks()
  *
- * By default this is called by the Scheduled_Cron WP_Cron
- * @see Scheduled_Cron::run_cron()
+ * By default this is called by the Cron WP_Cron
  *
- * @package Tribe\Project\Cron
+ * @see     Cron::run_tasks()
+ *
+ * @package Tribe\Project\Runner
  *
  */
 class Scheduled {
@@ -27,7 +28,7 @@ class Scheduled {
 
 		$tasks = $this->get_existing_tasks();
 		foreach( $tasks as $k => $_class ){
-			/** @var _Task_Interface $_class */
+			/** @var Task_Interface $_class */
 			$task = $_class::instance();
 			if( !$task->run_task() ){
 				throw( new \Exception( sprintf( __( "Schedule task %s did not complete", 'tribe' ), $_class ) ) );
@@ -44,12 +45,14 @@ class Scheduled {
 
 
 	public function schedule_task( $task_class ){
-		$tasks = $this->get_existing_tasks();
-		if( !in_array( $task_class, $tasks ) ){
-			$tasks[] = $task_class;
-			update_option( self::OPTION, $tasks );
+		if( is_a( $task_class, 'Tribe\Project\Runner\Tasks\Task_Interface' ) ){
+			$class_name = get_class( $task_class );
+			$tasks      = $this->get_existing_tasks();
+			if( !in_array( $class_name, $tasks ) ){
+				$tasks[] = $class_name;
+				update_option( self::OPTION, $tasks );
+			}
 		}
-
 	}
 
 
@@ -65,6 +68,6 @@ class Scheduled {
 	 * @return Scheduled
 	 */
 	public static function instance(){
-		return tribe_project()->container()[ 'cron.scheduled' ];
+		return tribe_project()->container()[ 'runner.scheduled' ];
 	}
 }
