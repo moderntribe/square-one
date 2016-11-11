@@ -52,6 +52,8 @@ class Scheduled {
 				$tasks[] = $class_name;
 				update_option( self::OPTION, $tasks );
 			}
+		} else {
+			throw new \Exception( __( 'Tasks must implement the Task_Interface', 'tribe' ) );
 		}
 	}
 
