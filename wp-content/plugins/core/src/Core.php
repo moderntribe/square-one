@@ -6,6 +6,8 @@ use Pimple\Container;
 use Tribe\Libs\Functions\Function_Includer;
 use Tribe\Project\Service_Providers\Asset_Provider;
 use Tribe\Project\Service_Providers\Cache_Provider;
+use Tribe\Project\Service_Providers\Cron_Service_Provider;
+use Tribe\Project\Service_Providers\ElasticSearch_Provider;
 use Tribe\Project\Service_Providers\Panel_Intializer_Provider;
 use Tribe\Project\Service_Providers\Theme_Customizer_Provider;
 use Tribe\Project\Service_Providers\Global_Service_Provider;
@@ -51,6 +53,8 @@ class Core {
 		$this->container->register( new Panel_Intializer_Provider() );
 		$this->container->register( new Global_Service_Provider() );
 		$this->container->register( new Settings_Provider() );
+		$this->container->register( new Cron_Service_Provider() );
+		$this->container->register( new ElasticSearch_Provider() );
 	}
 
 	public function container() {
