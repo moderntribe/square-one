@@ -114,9 +114,9 @@ const cacheElements = () => {
  */
 
 const bindEvents = () => {
-	delegate(el.container, '[data-js="lazyload-trigger"]', 'click', (e) => playEmbed(e));
+	delegate(el.container, '[data-js="lazyload-trigger"]', 'click', playEmbed);
 
-	on(document, 'modern_tribe/resize_executed', (e) => executeResize(e));
+	on(document, 'modern_tribe/resize_executed', executeResize);
 };
 
 /**

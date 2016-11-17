@@ -10,8 +10,7 @@ class ImageText extends Panel_Type_Config {
 		$panel->set_template_dir( $this->ViewFinder );
 		$panel->set_label( __( 'Image+Text', 'tribe' ) );
 		$panel->set_description( __( 'An image and text with several layout options.', 'tribe' ) );
-		$panel->set_icon( $this->handler->inactive_icon_url( 'module-imagetext.png' ), 'inactive' );
-		$panel->set_icon( $this->handler->active_icon_url( 'module-imagetext.png' ), 'active' );
+		$panel->set_thumbnail( $this->handler->inactive_icon_url( 'module-imagetext.png' ) );
 
 		// Panel Layout
 		$panel->add_field( $this->handler->field( 'ImageSelect', array(

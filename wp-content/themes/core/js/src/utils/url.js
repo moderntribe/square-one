@@ -21,7 +21,7 @@ let url;
 
 const getFilterString = (value, remove = false, urlKey) => {
 	query = queryToJson();
-	const values = query.hasOwnProperty(urlKey) ? query[urlKey].split(',') : [];
+	const values = {}.hasOwnProperty.call(query, urlKey) ? query[urlKey].split(',') : [];
 	if (remove) {
 		_.pull(values, value);
 	} else {

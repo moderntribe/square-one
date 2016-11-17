@@ -65,13 +65,13 @@ const deepScroll = (opts) => {
 
 		data[`${objectId}-down`] = new Waypoint({
 			element: el,
-			handler: (dir) => handleWaypointDown(dir, el),
+			handler: dir => handleWaypointDown(dir, el),
 			offset: `${options.offset}px`,
 		});
 
 		data[`${objectId}-up`] = new Waypoint({
 			element: el,
-			handler: (dir) => handleWaypointUp(dir, el),
+			handler: dir => handleWaypointUp(dir, el),
 			offset: () => -(el.clientHeight - options.offset),
 		});
 
@@ -100,7 +100,7 @@ const deepScroll = (opts) => {
 
 	if (options.targets) {
 		nodes = [].slice.call(options.targets);
-		nodes.forEach((el) => applyWaypoint(el));
+		nodes.forEach(el => applyWaypoint(el));
 
 		bindEvents();
 	}

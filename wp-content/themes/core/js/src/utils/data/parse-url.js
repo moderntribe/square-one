@@ -1,3 +1,4 @@
+/* eslint-disable */
 
 const parseUrl = (str, component) => {
 	// example: parse_url('http://username:password@hostname/path?arg=value#anchor');

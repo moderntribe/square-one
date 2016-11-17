@@ -5,7 +5,6 @@
 
 .gf-date-layout-datefield,
 .gf-time {
-
 	&.field_sublabel_above {
 		.clear-multi {
 			@media (--viewport-medium) {
@@ -13,6 +12,7 @@
 			}
 		}
 	}
+
 	&.field_sublabel_below {
 		.clear-multi {
 			@media (--viewport-medium) {
@@ -20,16 +20,16 @@
 			}
 		}
 	}
-
 }
 
 .gf-date,
 .gf-time {
-
 	.clear-multi {
 		@mixin clearfix;
+
 		.ginput_container {
 			display: block;
+
 			label {
 				@mixin form-control-helper;
 			}
@@ -40,7 +40,6 @@
 			}
 		}
 	}
-
 }
 
 .gfield_date_dropdown_month,
@@ -48,11 +47,13 @@
 .gfield_date_dropdown_year,
 .gfield_time_ampm {
 	@mixin form-control-select;
+
 	max-width: var(--gf-control-time-date-max-width);
 
 	@media (--viewport-medium) {
 		max-width: none;
 	}
+
 	&:after {
 		top: auto;
 		bottom: 1px;
@@ -67,6 +68,7 @@
 	/* Layout: Datepicker */
 	&.gf-date-layout-datepicker {
 		max-width: var(--gf-control-date-max-width);
+
 		.ginput_container {
 			position: relative;
 
