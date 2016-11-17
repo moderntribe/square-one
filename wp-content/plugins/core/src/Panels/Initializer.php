@@ -152,8 +152,9 @@ class Initializer {
 	}
 
 	public function set_available_query_taxonomies( $taxonomies ) {
-//		$taxonomies[] = 'category';
-//		sort( array_unique( $taxonomies ) );
+		$taxonomies[] = 'category';
+		$taxonomies = array_unique( $taxonomies );
+		sort( $taxonomies );
 
 		return $taxonomies;
 	}

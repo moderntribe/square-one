@@ -16,7 +16,6 @@
  * ----------------------------------------------------------------------------- */
 * {
     -webkit-box-sizing: border-box;
-       -moz-box-sizing: border-box;
             box-sizing: border-box;
 }
 @-ms-viewport {
@@ -177,7 +176,6 @@ select,
 textarea {
     outline: 0;
     -webkit-box-sizing: border-box;
-       -moz-box-sizing: border-box;
             box-sizing: border-box;
     margin: 0;
     -webkit-border-radius: 0;

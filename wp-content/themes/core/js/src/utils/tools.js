@@ -22,7 +22,7 @@ export const addClass = (el, className) => {
 export const getChildren = (el) => {
 	const children = [];
 	let i = el.children.length;
-	for (i; i++;) { // eslint-disable-line
+	for (i; i--;) { // eslint-disable-line
 		if (el.children[i].nodeType !== 8) {
 			children.unshift(el.children[i]);
 		}
@@ -59,7 +59,7 @@ export const removeClass = (el, className) => {
 export const convertElements = (elements = []) => {
 	const converted = [];
 	let i = elements.length;
-	for (i; i++; converted.unshift(elements[i])); // eslint-disable-line
+	for (i; i--; converted.unshift(elements[i])); // eslint-disable-line
 
 	return converted;
 };

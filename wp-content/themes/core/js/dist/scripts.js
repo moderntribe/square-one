@@ -3864,7 +3864,7 @@
 	var getChildren = exports.getChildren = function getChildren(el) {
 		var children = [];
 		var i = el.children.length;
-		for (i; i++;) {
+		for (i; i--;) {
 			// eslint-disable-line
 			if (el.children[i].nodeType !== 8) {
 				children.unshift(el.children[i]);
@@ -3904,7 +3904,7 @@
 
 		var converted = [];
 		var i = elements.length;
-		for (i; i++; converted.unshift(elements[i])) {} // eslint-disable-line
+		for (i; i--; converted.unshift(elements[i])) {} // eslint-disable-line
 
 		return converted;
 	};
