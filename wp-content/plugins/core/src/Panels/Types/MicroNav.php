@@ -10,8 +10,7 @@ class MicroNav extends Panel_Type_Config {
 		$panel->set_template_dir( $this->ViewFinder );
 		$panel->set_label( __( 'MicroNav', 'tribe' ) );
 		$panel->set_description( __( 'Display a set of links and related content.', 'tribe' ) );
-		$panel->set_icon( $this->handler->inactive_icon_url( 'module-micronav.png' ), 'inactive' );
-		$panel->set_icon( $this->handler->active_icon_url( 'module-micronav.png' ), 'active' );
+		$panel->set_thumbnail( $this->handler->inactive_icon_url( 'module-micronav.png' ) );
 
 		// Panel Layout
 		$panel->add_field( $this->handler->field( 'ImageSelect', array(

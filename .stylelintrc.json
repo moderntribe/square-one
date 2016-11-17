@@ -3,6 +3,7 @@
   "rules": {
     "at-rule-name-space-after": "always",
     "block-no-empty": null,
+    "property-no-unknown": null,
     "block-no-single-line": true,
     "custom-property-no-outside-root": true,
     "declaration-block-no-duplicate-properties": [ true, {

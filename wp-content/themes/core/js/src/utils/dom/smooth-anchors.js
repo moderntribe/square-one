@@ -28,7 +28,7 @@ const bindEvents = () => {
 		return;
 	}
 
-	anchorLinks.forEach((link) => link.addEventListener('click', handleAnchorClick));
+	anchorLinks.forEach(link => link.addEventListener('click', handleAnchorClick));
 };
 
 const init = () => {

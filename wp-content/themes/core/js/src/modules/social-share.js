@@ -33,7 +33,7 @@ const launchSocialPopup = (e) => {
  */
 
 const bindEvents = () => {
-	delegate(el.container, '[data-js="social-share-popup"]', 'click', (e) => launchSocialPopup(e));
+	delegate(el.container, '[data-js="social-share-popup"]', 'click', launchSocialPopup);
 };
 
 /**

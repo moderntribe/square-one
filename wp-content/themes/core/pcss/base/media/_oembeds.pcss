@@ -27,15 +27,18 @@
 	display: block;
 	height: 100%;
 	transition: var(--transition);
+
 	&:hover,
 	&:focus {
 		.wp-embed-lazy__icon {
 			border-color: var(--embed-icon-border-hover);
+
 			&:before {
 				transform: scale(0.65);
 			}
 		}
 	}
+
 	&:focus {
 		&:after {
 			height: 5px;
@@ -117,6 +120,7 @@
 	transition: opacity 0.15s ease-in-out, border 0.425s;
 	border: 2px solid var(--embed-icon-border);
 	border-radius: 50%;
+
 	&:before {
 		display: inline-block;
 		position: relative;

@@ -46,12 +46,15 @@
 	::-webkit-input-placeholder {
 		@mixin-content;
 	}
+
 	:-moz-placeholder {
 		@mixin-content;
 	}
+
 	::-moz-placeholder {
 		@mixin-content;
 	}
+
 	:-ms-input-placeholder {
 		@mixin-content;
 	}
@@ -87,6 +90,7 @@
 @define-mixin form-control-select {
 	cursor: pointer;
 	position: relative;
+
 	&:hover,
 	&:focus,
 	&:active {
@@ -94,8 +98,10 @@
 			background-color: var(--form-control-select-ui-bgd-color-hover);
 		}
 	}
+
 	&:after {
 		@mixin icon;
+
 		display: block;
 		transition: var(--transition);
 		content: var(--form-control-select-ui-icon);
@@ -113,10 +119,12 @@
 		border-top-right-radius: var(--form-control-select-ui-border-radius-top-right);
 		border-bottom-right-radius: var(--form-control-select-ui-border-radius-bottom-right);
 	}
+
 	select {
 		appearance: none;
 		padding-right: var(--form-control-select-padding-right);
 	}
+
 	select::-ms-expand {
 		display: none;
 	}
@@ -130,6 +138,7 @@
 
 @define-mixin form-control-radio-checkbox-base {
 	display: block;
+
 	input[type="radio"],
 	input[type="checkbox"] {
 		height: auto;
@@ -138,6 +147,7 @@
 		line-height: normal;
 		padding: 0;
 	}
+
 	label {
 		color: var(--form-control-radio-checkbox-label-color);
 		cursor: pointer;
@@ -153,6 +163,7 @@
 	transition: var(--transition);
 	position: relative;
 	padding-left: var(--form-control-radio-checkbox-ui-push-label-right);
+
 	input[type="radio"],
 	input[type="checkbox"] {
 		position: absolute;
@@ -160,14 +171,17 @@
 		top: var(--form-control-radio-checkbox-hide-browser-ui-position-top);
 		font-size: var(--form-control-radio-checkbox-hide-browser-ui-font-size);
 	}
+
 	label {
 		max-width: var(--form-control-radio-checkbox-label-max-width);
+
 		&:before,
 		&:after {
 			transition: var(--transition);
 			content: '';
 			position: absolute;
 		}
+
 		&:before {
 			background-color: var(--form-control-radio-checkbox-ui-bgd-color);
 			width: var(--form-control-radio-checkbox-ui-width);
@@ -176,16 +190,20 @@
 			left: var(--form-control-radio-checkbox-ui-position-left);
 			border: var(--form-control-radio-checkbox-ui-border-size) solid var(--form-control-radio-checkbox-ui-border-color);
 		}
+
 		&:after {
 			opacity: 0;
 		}
 	}
+
 	input:focus + label:before {
 		border-color: var(--form-control-radio-checkbox-ui-border-color-focus);
 		box-shadow: 0 0 0 var(--form-control-radio-checkbox-ui-border-size-focus) var(--form-control-radio-checkbox-ui-border-color-focus);
 	}
+
 	input:checked + label {
 		color: var(--form-control-radio-checkbox-label-color-checked);
+
 		&:after {
 			opacity: 1;
 		}
@@ -203,6 +221,7 @@
 		&:before {
 			border-radius: var(--form-control-checkbox-ui-border-radius);
 		}
+
 		&:after {
 			left: var(--form-control-checkbox-ui-position-left);
 			top: var(--form-control-checkbox-ui-position-top);
@@ -228,6 +247,7 @@
 		&:after {
 			border-radius: 50%;
 		}
+
 		&:after {
 			left: var(--form-control-radio-ui-position-left);
 			top: var(--form-control-radio-ui-position-top);
@@ -246,9 +266,11 @@
 
 @define-mixin form-control-icon {
 	position: relative;
+
 	input {
 		padding-right: var(--form-control-icon-padding-right);
 	}
+
 	&:before {
 		position: absolute;
 		right: var(--form-control-icon-position-right);

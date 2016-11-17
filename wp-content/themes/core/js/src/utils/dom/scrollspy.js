@@ -3,10 +3,10 @@
  * @description A vanilla js scrollspy
  */
 
+import _ from 'lodash';
+
 import { trigger } from '../events';
 import { convertElements, isNodelist } from '../tools';
-
-import _ from 'lodash';
 
 const scrollspy = (options) => {
 	const defaults = {
@@ -73,7 +73,7 @@ const scrollspy = (options) => {
 				/* trigger enter event */
 				if (!inside) {
 					inside = true;
-					enters++;
+					enters += 1;
 
 					/* fire enter event */
 					trigger({
@@ -104,24 +104,22 @@ const scrollspy = (options) => {
 				if (_.isFunction(o.onTick)) {
 					o.onTick(element, position, inside, enters, leaves);
 				}
-			} else {
-				if (inside) {
-					inside = false;
-					leaves++;
+			} else if (inside) {
+				inside = false;
+				leaves += 1;
 
-					trigger({
-						el: element,
-						event: 'scrollLeave',
-						native: false,
-						data: {
-							position,
-							leaves,
-						},
-					});
+				trigger({
+					el: element,
+					event: 'scrollLeave',
+					native: false,
+					data: {
+						position,
+						leaves,
+					},
+				});
 
-					if (_.isFunction(o.onLeave)) {
-						o.onLeave(element, position);
-					}
+				if (_.isFunction(o.onLeave)) {
+					o.onLeave(element, position);
 				}
 			}
 		}, o.debounce, false));

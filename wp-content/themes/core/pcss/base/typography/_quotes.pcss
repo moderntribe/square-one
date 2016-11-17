@@ -21,6 +21,7 @@ q {
 .t-typography q {
 	@mixin quote-base;
 	@mixin quote-text;
+
 	display: block;
 }
 
@@ -32,8 +33,10 @@ q {
 .blockquote,
 .t-typography blockquote {
 	@mixin quote-base;
+
 	p {
 		@mixin quote-text;
+
 		margin: 0 auto;
 
 		& ~ p {

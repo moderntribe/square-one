@@ -11,8 +11,7 @@ class Wysiwyg extends Panel_Type_Config {
 		$panel->set_template_dir( $this->ViewFinder );
 		$panel->set_label( __( 'WYSIWYG Editor', 'tribe' ) );
 		$panel->set_description( __( 'Displays custom content', 'tribe' ) );
-		$panel->set_icon( $this->handler->inactive_icon_url( 'module-wysiwyg.png' ), 'inactive' );
-		$panel->set_icon( $this->handler->active_icon_url( 'module-wysiwyg.png' ), 'active' );
+		$panel->set_thumbnail( $this->handler->inactive_icon_url( 'module-wysiwyg.png' ) );
 
 		// Field: Editor Columns
 		$group = new Fields\Repeater( array(

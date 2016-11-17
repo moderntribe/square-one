@@ -10,8 +10,7 @@ class ContentGrid extends Panel_Type_Config {
 		$panel->set_template_dir( $this->ViewFinder );
 		$panel->set_label( __( 'Content Grid', 'tribe' ) );
 		$panel->set_description( __( 'A grid of content with 2 layouts.', 'tribe' ) );
-		$panel->set_icon( $this->handler->inactive_icon_url( 'module-contentgrid.png' ), 'inactive' );
-		$panel->set_icon( $this->handler->active_icon_url( 'module-contentgrid.png' ), 'active' );
+		$panel->set_thumbnail( $this->handler->inactive_icon_url( 'module-contentgrid.png' ) );
 
 		// Panel Style
 		$panel->add_field( $this->handler->field( 'ImageSelect', array(

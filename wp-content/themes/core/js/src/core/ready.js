@@ -12,6 +12,7 @@ import _ from 'lodash';
 import resize from './resize';
 import plugins from './plugins';
 import viewportDims from './viewport-dims';
+import applyBrowserClasses from '../utils/dom/apply-browser-classes';
 
 import { on, ready } from '../utils/events';
 
@@ -34,6 +35,10 @@ const bindEvents = () => {
  */
 
 const init = () => {
+	// apply browser classes
+
+	applyBrowserClasses();
+
 	// init external plugins
 
 	plugins();

@@ -16,14 +16,12 @@ const updateQueryVar = (key, value, url = window.location.href) => {
 				parsedUrl += `#${hash[1]}`;
 			}
 		}
-	} else {
-		if (typeof value !== 'undefined' && value !== null) {
-			separator = url.indexOf('?') !== -1 ? '&' : '?';
-			hash = url.split('#');
-			parsedUrl = `${hash[0]}${separator}${key}=${value}`;
-			if (typeof hash[1] !== 'undefined' && hash[1] !== null) {
-				parsedUrl += `#${hash[1]}`;
-			}
+	} else if (typeof value !== 'undefined' && value !== null) {
+		separator = url.indexOf('?') !== -1 ? '&' : '?';
+		hash = url.split('#');
+		parsedUrl = `${hash[0]}${separator}${key}=${value}`;
+		if (typeof hash[1] !== 'undefined' && hash[1] !== null) {
+			parsedUrl += `#${hash[1]}`;
 		}
 	}
 

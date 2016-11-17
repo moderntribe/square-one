@@ -115,7 +115,7 @@
 			running = false;
 		};
 
-		return function(fn){
+		var rafBatch = function(fn){
 			if(running){
 				fn.apply(this, arguments);
 			} else {
@@ -127,6 +127,10 @@
 				}
 			}
 		};
+
+		rafBatch._lsFlush = run;
+
+		return rafBatch;
 	})();
 
 	var rAFIt = function(fn, simple){
@@ -148,7 +152,7 @@
 		var running;
 		var lastTime = 0;
 		var gDelay = 125;
-		var RIC_DEFAULT_TIMEOUT = 999;
+		var RIC_DEFAULT_TIMEOUT = 666;
 		var rICTimeout = RIC_DEFAULT_TIMEOUT;
 		var run = function(){
 			running = false;
@@ -170,7 +174,7 @@
 		return function(isPriority){
 			var delay;
 			if((isPriority = isPriority === true)){
-				rICTimeout = 66;
+				rICTimeout = 44;
 			}
 
 			if(running){
@@ -287,7 +291,7 @@
 
 				if(preloadExpand == null){
 					if(!('expand' in lazySizesConfig)){
-						lazySizesConfig.expand = docElem.clientHeight > 500 ? 500 : 400;
+						lazySizesConfig.expand = docElem.clientHeight > 500 && docElem.clientWidth > 500 ? 500 : 370;
 					}
 
 					defaultExpand = lazySizesConfig.expand;
@@ -539,7 +543,11 @@
 					setTimeout(onload, 20000);
 				}
 
-				throttledCheckElements(lazyloadElems.length > 0);
+				if(lazyloadElems.length){
+					checkElements();
+				} else {
+					throttledCheckElements();
+				}
 			},
 			checkElems: throttledCheckElements,
 			unveil: unveilElement

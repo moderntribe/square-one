@@ -10,8 +10,7 @@ class Gallery extends Panel_Type_Config {
 		$panel->set_template_dir( $this->ViewFinder );
 		$panel->set_label( __( 'Gallery', 'tribe' ) );
 		$panel->set_description( __( 'An image gallery slider.', 'tribe' ) );
-		$panel->set_icon( $this->handler->inactive_icon_url( 'module-gallery.png' ), 'inactive' );
-		$panel->set_icon( $this->handler->active_icon_url( 'module-gallery.png' ), 'active' );
+		$panel->set_thumbnail( $this->handler->inactive_icon_url( 'module-gallery.png' ) );
 
 		// Panel Description
 		$panel->add_field( new Fields\TextArea( array(
