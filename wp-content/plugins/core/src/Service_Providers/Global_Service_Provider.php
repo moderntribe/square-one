@@ -22,8 +22,8 @@ use Tribe\Project\P2P\Titles_Filter;
 final class Global_Service_Provider extends Tribe_Service_Provider {
 
 	protected $nav_menus = [
-		'primary'   => 'Menu: Site',
-		'secondary' => 'Menu: Footer',
+		'nav-primary'   => 'Menu: Site',
+		'nav-secondary' => 'Menu: Footer',
 	];
 
 	protected $p2p_relationships = [

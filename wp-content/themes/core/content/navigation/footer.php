@@ -1,13 +1,13 @@
-<?php if( has_nav_menu( 'secondary' ) ) { ?>
+<?php if( has_nav_menu( 'nav-secondary' ) ) { ?>
 
-	<nav class="site-footer__nav" aria-labelledby="site-footer__nav-label">
+	<nav class="nav-secondary" aria-labelledby="nav-secondary__label">
 
-		<h2 id="site-footer__nav-label" class="u-visual-hide"><?php _e( 'Secondary Navigation', 'tribe' ); ?></h2>
+		<h2 id="nav-secondary__label" class="u-visual-hide"><?php _e( 'Secondary Navigation', 'tribe' ); ?></h2>
 
-		<ol class="site-footer__nav-list">
+		<ol class="nav-secondary__list">
 			<?php
 			$defaults = array(
-				'theme_location'  => 'secondary',
+				'theme_location'  => 'nav-secondary',
 				'container'       => false,
 				'container_class' => '',
 				'menu_class'      => '',
