@@ -46,6 +46,7 @@ class Initializer {
 		$this->set_supported_post_types();
 		$this->set_view_directories();
 		require_once( dirname( $this->plugin_file ) . '/functions/panels.php' );
+		require_once( dirname( $this->plugin_file ) . '/functions/utility.php' );
 
 		add_filter( 'modular_content_default_fields', [ $this, 'set_default_fields' ], 10, 2 );
 		add_filter( 'modular_content_posts_field_taxonomy_options', [ $this, 'set_available_query_taxonomies', ], 10, 1 );

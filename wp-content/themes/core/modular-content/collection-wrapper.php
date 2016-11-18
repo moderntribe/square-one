@@ -1,18 +1,43 @@
 <?php
 /**
- * The default view for rendering a collection of modular panels.
- * Override this by creating modular-content/collection-wrapper.php in
- * your theme directory.
+ * A wrapper around each modular panel.
  *
- * The template MUST contain the string "[panels]", which will be replaced
- * with the contents of all panels in the collection.
- *
- * @var string $panels The rendered HTML of the panels
+ * @var \ModularContent\Panel $panel
+ * @var int $index 0-based count of panels rendered thus far
+ * @var string $type panel type
+ * @var string $html The rendered HTML of the panel
  */
+
+use Tribe\Project\Theme\Panel_Util;
+
+$panel_util = new Panel_Util();
+$classes = ['panel'];
+
+// Child Panel
+if( $panel->get_depth() >= 1 ) {
+
+	$classes[] = 'panel-child';
+
 ?>
 
-<div class="panels-collection">
+	<article <?php echo $panel_util->wrapper_classes( $panel, $classes ); ?>>
 
-	<?php echo $panels; ?>
+		<?php echo $html; ?>
 
-</div>
+	</article>
+
+<?php }
+
+// Parent Panel
+else { ?>
+
+	<section
+		<?php echo $panel_util->wrapper_classes( $panel, $classes ); ?>
+		data-type="<?php esc_attr_e( $panel->get( 'type' ) ); ?>"
+		data-modular-content>
+
+		<?php echo $html; ?>
+
+	</section>
+
+<?php } ?>

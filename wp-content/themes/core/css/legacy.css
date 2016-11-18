@@ -562,6 +562,28 @@ embed {
 /* Helper Classes */
 /* -----------------------------------------------------------------------------
  *
+ * Foreground Colors
+ *
+ * ----------------------------------------------------------------------------- */
+.u-fc-white {
+    color: #fff;
+}
+.u-fc-black {
+    color: #000;
+}
+/* -----------------------------------------------------------------------------
+ *
+ * Background Colors
+ *
+ * ----------------------------------------------------------------------------- */
+.u-bc-white {
+    background-color: #fff;
+}
+.u-bc-black {
+    background-color: #000;
+}
+/* -----------------------------------------------------------------------------
+ *
  * Child Separators
  *
  * Notes: Works as a parent helper class and will add a separator for the
@@ -966,48 +988,78 @@ main {
     margin-left: auto;
     margin-right: auto;
 }
-/* Typography */
-/* -------------------------------------------------------------------------
- * Paragraphs
- * ------------------------------------------------------------------------- */
-p {
-    font-size: 16px;
-}
-@media (min-width: 768px) {
-    p {
-        font-size: 18px;
-    }
-}
-.t-typography p {
-    margin-bottom: 30px;
-}
-/* -------------------------------------------------------------------------
- * HR
- * ------------------------------------------------------------------------- */
-hr {
-    border-top: 1px solid grey;
-}
-.t-typography hr {
-    margin: 50px auto;
-}
+/* Content */
 /* -------------------------------------------------------------------------
  *
- * Miscellaneous for items in the full kitchen sink
+ * Content: "Kitchen Sink"
  *
  * Notes:
- * + Remove top margin from first element (whether element or image)
- * + Remove bottom margin from last element (whether element or image)
- * + Due to our existing solution for adding a wrapper around WordPress
- *   images without a caption, we end up with empty p tags, as such
- *   we simply hide them
+ * + "t-content" is what used to be "context-content"
  *
  * ------------------------------------------------------------------------- */
-.t-typography > *:first-child {
+/* CASE: remove top margin from first element */
+.t-content > *:first-child {
     margin-top: 0;
 }
-.t-typography > *:last-child {
+/* CASE: remove bottom margin from bottom element */
+.t-content > *:last-child {
     margin-bottom: 0;
 }
+/* -------------------------------------------------------------------------
+ *
+ * Theme: Dark
+ *
+ * Notes:
+ * + Used by default in general, so not much probably needed here
+ * + This can be used anywhere or can be paired up with .t-content
+ * + Also see the other base partials for use of this class as a parent
+ *   selector (media, typography, etc.)
+ *
+ * Example:
+ * <div class="t-content--dark">
+ *   ...
+ *   <div class="t-content">
+ *     ...
+ *   </div>
+ * </div>
+ *
+ * Example:
+ * <div class="t-content t-content--dark">
+ *   ...
+ * </div>
+ *
+ * ------------------------------------------------------------------------- */
+.t-content--dark {}
+/* -------------------------------------------------------------------------
+ *
+ * Theme: Light
+ *
+ * Notes:
+ * + This can be used anywhere or can be paired up with .t-content
+ * + Also see the other base partials for use of this class as a parent
+ *   selector (media, typography, etc.)
+ *
+ * Example:
+ * <div class="t-content--light">
+ *   ...
+ *   <div class="t-content">
+ *     ...
+ *   </div>
+ * </div>
+ *
+ * Example:
+ * <div class="t-content t-content--light">
+ *   ...
+ * </div>
+ *
+ * ------------------------------------------------------------------------- */
+.t-content--light {
+    color: #fff;
+}
+.t-content--light * {
+    color: #fff;
+}
+/* Typography */
 /* -------------------------------------------------------------------------
  * Anchor: Defaults
  * ------------------------------------------------------------------------- */
@@ -1032,25 +1084,24 @@ a:active,
  * Anchor: Full
  * ------------------------------------------------------------------------- */
 .anchor,
-.t-typography a {
+.t-content a {
     color: #21a6cb;
     text-decoration: underline;
 }
 .anchor:hover,
 	.anchor:focus,
-	.t-typography a:hover,
-	.t-typography a:focus {
+	.t-content a:hover,
+	.t-content a:focus {
     color: darken(#21a6cb, 0.08);
 }
 /* -------------------------------------------------------------------------
  * Heading: H1
  * ------------------------------------------------------------------------- */
 .h1,
-.t-typography .h1,
-.t-typography h1 {
+.t-content h1 {
     font-size: 36px;
 }
-.t-typography h1, .t-typography .h1 {
+.t-content h1 {
     margin-top: 30px;
     margin-bottom: 30px;
 }
@@ -1058,11 +1109,10 @@ a:active,
  * Heading: H2
  * ------------------------------------------------------------------------- */
 .h2,
-.t-typography .h2,
-.t-typography h2 {
+.t-content h2 {
     font-size: 32px;
 }
-.t-typography h2, .t-typography .h2 {
+.t-content h2 {
     margin-top: 30px;
     margin-bottom: 30px;
 }
@@ -1070,11 +1120,10 @@ a:active,
  * Heading: H3
  * ------------------------------------------------------------------------- */
 .h3,
-.t-typography .h3,
-.t-typography h3 {
+.t-content h3 {
     font-size: 28px;
 }
-.t-typography h3, .t-typography .h3 {
+.t-content h3 {
     margin-top: 30px;
     margin-bottom: 30px;
 }
@@ -1082,11 +1131,10 @@ a:active,
  * Heading: H4
  * ------------------------------------------------------------------------- */
 .h4,
-.t-typography .h4,
-.t-typography h4 {
+.t-content h4 {
     font-size: 22px;
 }
-.t-typography h4, .t-typography .h4 {
+.t-content h4 {
     margin-top: 30px;
     margin-bottom: 30px;
 }
@@ -1094,11 +1142,10 @@ a:active,
  * Heading: H5
  * ------------------------------------------------------------------------- */
 .h5,
-.t-typography .h5,
-.t-typography h5 {
+.t-content h5 {
     font-size: 20px;
 }
-.t-typography h5, .t-typography .h5 {
+.t-content h5 {
     margin-top: 30px;
     margin-bottom: 30px;
 }
@@ -1106,42 +1153,47 @@ a:active,
  * Heading: H6
  * ------------------------------------------------------------------------- */
 .h6,
-.t-typography .h6,
-.t-typography h6 {
+.t-content h6 {
     font-size: 18px;
 }
-.t-typography h6, .t-typography .h6 {
+.t-content h6 {
     margin-top: 30px;
     margin-bottom: 30px;
+}
+hr {
+    border-top: 1px solid grey;
+}
+.t-content hr {
+    margin: 50px auto;
 }
 /* -------------------------------------------------------------------------
  * Global Lists
  * ------------------------------------------------------------------------- */
-.t-typography ul, .t-typography ol, .t-typography dl {
+.t-content ul, .t-content ol, .t-content dl {
     font-size: 16px;
     margin-top: 30px;
     margin-bottom: 30px;
 }
 @media (min-width: 768px) {
-    .t-typography ul, .t-typography ol, .t-typography dl {
+    .t-content ul, .t-content ol, .t-content dl {
         font-size: 18px;
     }
 }
-.t-typography li ~ li {
+.t-content li ~ li {
     margin-top: 15px;
 }
 /* -------------------------------------------------------------------------
  * UL
  * ------------------------------------------------------------------------- */
 .list-bullet,
-.t-typography ul {
+.t-content ul {
     list-style: disc outside;
     padding-left: 1.5em;
     padding-right: 0;
 }
 @media (min-width: 768px) {
     .list-bullet,
-.t-typography ul {
+.t-content ul {
         padding-left: 3em;
         padding-right: 3em;
     }
@@ -1150,14 +1202,14 @@ a:active,
  * OL
  * ------------------------------------------------------------------------- */
 .list-number,
-.t-typography ol {
+.t-content ol {
     list-style: decimal outside;
     padding-left: 1.5em;
     padding-right: 0;
 }
 @media (min-width: 768px) {
     .list-number,
-.t-typography ol {
+.t-content ol {
         padding-left: 3em;
         padding-right: 3em;
     }
@@ -1166,29 +1218,40 @@ a:active,
  * DL
  * ------------------------------------------------------------------------- */
 .dl,
-.t-typography dl {
+.t-content dl {
     padding-left: 1.5em;
     padding-right: 0;
 }
 @media (min-width: 768px) {
     .dl,
-.t-typography dl {
+.t-content dl {
         padding-left: 3em;
         padding-right: 3em;
     }
 }
 .dt,
-.t-typography dt {
+.t-content dt {
     font-weight: 700;
 }
 .dd,
-.t-typography dd {
+.t-content dd {
+    margin-bottom: 30px;
+}
+p {
+    font-size: 16px;
+}
+@media (min-width: 768px) {
+    p {
+        font-size: 18px;
+    }
+}
+.t-content p {
     margin-bottom: 30px;
 }
 /* -----------------------------------------------------------------------------
  * Global Quotes & Blockquotes
  * ----------------------------------------------------------------------------- */
-.t-typography .blockquote, .t-typography blockquote, .t-typography .quote, .t-typography q {
+.t-content .blockquote, .t-content blockquote, .t-content .quote, .t-content q {
     margin: 30px auto;
 }
 /* -----------------------------------------------------------------------------
@@ -1196,7 +1259,7 @@ a:active,
  * ----------------------------------------------------------------------------- */
 /* q */
 .quote,
-.t-typography q {
+.t-content q {
     border-top: 1px solid grey;
     border-bottom: 1px solid grey;
     padding: 30px;
@@ -1209,17 +1272,17 @@ a:active,
  * ----------------------------------------------------------------------------- */
 /* blockquote */
 .blockquote,
-.t-typography blockquote {
+.t-content blockquote {
     border-top: 1px solid grey;
     border-bottom: 1px solid grey;
     padding: 30px;
 }
-.blockquote p, .t-typography blockquote p {
+.blockquote p, .t-content blockquote p {
     font-size: 32px;
     font-style: italic;
     margin: 0 auto;
 }
-.blockquote p ~ p, .t-typography blockquote p ~ p {
+.blockquote p ~ p, .t-content blockquote p ~ p {
     margin-top: 30px;
 }
 /* -----------------------------------------------------------------------------
@@ -1227,7 +1290,7 @@ a:active,
  * ----------------------------------------------------------------------------- */
 /* cite */
 .cite,
-.t-typography cite {
+.t-content cite {
     font-style: normal;
     display: block;
 }
@@ -1235,7 +1298,7 @@ a:active,
  * Table
  * ----------------------------------------------------------------------------- */
 .table,
-.t-typography table {
+.t-content table {
     font-size: 16px;
     margin: 30px auto;
     border: 1px solid grey;
@@ -1246,7 +1309,7 @@ a:active,
 }
 @media (min-width: 768px) {
     .table,
-.t-typography table {
+.t-content table {
         font-size: 18px;
         table-layout: auto;
     }
@@ -1255,34 +1318,34 @@ a:active,
  * TH
  * ----------------------------------------------------------------------------- */
 .th,
-.t-typography th {
+.t-content th {
     padding: 14px 1em 12px;
     font-weight: 600;
     line-height: 1;
 }
-.th ~ th, .t-typography th ~ th {
+.th ~ th, .t-content th ~ th {
     border-left: 1px solid grey;
 }
 /* -----------------------------------------------------------------------------
  * TR
  * ----------------------------------------------------------------------------- */
-thead .tr, thead .t-typography tr {
+thead .tr, thead .t-content tr {
     border-bottom: 1px solid grey;
 }
-.tr ~ tr, .t-typography tr ~ tr {
+.tr ~ tr, .t-content tr ~ tr {
     border-top: 1px solid grey;
 }
-.tr:nth-of-type(even), .t-typography tr:nth-of-type(even) {
+.tr:nth-of-type(even), .t-content tr:nth-of-type(even) {
     background-color: lighten(grey, 0.15);
 }
 /* -----------------------------------------------------------------------------
  * TD
  * ----------------------------------------------------------------------------- */
 .td,
-.t-typography td {
+.t-content td {
     padding: 12px 1em 10px;
 }
-.td ~ td, .t-typography td ~ td {
+.td ~ td, .t-content td ~ td {
     border-left: 1px solid grey;
 }
 /* Media */
@@ -1293,7 +1356,7 @@ img {
     margin-left: auto;
     margin-right: auto;
 }
-.t-typography img {
+.t-content img {
     line-height: 0;
     height: auto;
     display: block;/* Messes with WP editor image resizing
@@ -1356,8 +1419,9 @@ img {
     page-break-inside: avoid;
          break-inside: avoid-column;
 }
-.t-typography .wp-embed {
+.t-content .wp-embed {
     margin: 50px auto;
+    max-width: none;
 }
 .wp-embed-wrap {
     position: relative;
@@ -1519,7 +1583,7 @@ img {
         margin: 0 -15px;
     }
 }
-.t-typography .gallery {
+.t-content .gallery {
     margin-top: 50px;
     margin-bottom: 50px;
 }
@@ -1573,7 +1637,7 @@ img {
  * ----------------------------------------------------------------------------- */
 .gallery-caption {}
 /* Buttons */
-.t-typography a[class*="btn-"], .t-typography button[class*="btn-"] {
+.t-content a[class*="btn-"], .t-content button[class*="btn-"] {
     margin-top: 15px;
     margin-bottom: 15px;
 }
@@ -1624,7 +1688,7 @@ a.btn {
 /* -------------------------------------------------------------------------
  * Global Forms
  * ------------------------------------------------------------------------- */
-.t-typography form {
+.t-content form {
     margin: 30px auto;
 }
 /* -----------------------------------------------------------------------------
@@ -1750,7 +1814,7 @@ fieldset {}
  * Label
  * ------------------------------------------------------------------------- */
 .form-control-label,
-.t-typography label {
+.t-content label {
     display: block;
     margin-bottom: 15px;
     color: #000;

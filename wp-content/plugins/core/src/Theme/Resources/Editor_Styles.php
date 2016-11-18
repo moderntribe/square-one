@@ -32,7 +32,7 @@ class Editor_Styles {
 	 */
 	public function visual_editor_body_class( $settings ) {
 
-		$settings['body_class'] .= ' t-typography';
+		$settings['body_class'] .= ' t-content';
 
 		return $settings;
 

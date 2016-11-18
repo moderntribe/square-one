@@ -1,33 +1,13 @@
 <?php
 /**
- * A wrapper around each modular panel.
+ * The default view for rendering a collection of modular panels.
  *
- * @var \ModularContent\Panel $panel
- * @var int $index 0-based count of panels rendered thus far
- * @var string $type panel type
- * @var string $html The rendered HTML of the panel
+ * IMPORTANT: the data attribute is REQUIRED for the live preview iframe to function.
+ *
+ * @var string $panels The rendered HTML of the panels
  */
+?>
 
-$type  = esc_attr( $panel->get( 'type' ) );
-
-// Child Panel
-if( $panel->get_depth() >= 1 ) { ?>
-
-	<article class="panel-child panel--type-<?php echo $type; ?>">
-
-		<?php echo $html; ?>
-
-	</article>
-
-<?php }
-
-// Parent Panel
-else { ?>
-
-	<section class="panel panel--type-<?php echo $type; ?>">
-
-		<?php echo $html; ?>
-
-	</section>
-
-<?php } ?>
+<div class="panel-collection" data-modular-content-collection>
+	<?php echo $panels; ?>
+</div>
