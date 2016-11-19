@@ -1,6 +1,6 @@
 <?php
 use Tribe\Project\Theme\Nav;
-if( has_nav_menu( 'nav-secondary' ) ) { ?>
+if( has_nav_menu( 'nav-primary' ) ) { ?>
 
 	<nav class="nav-primary" aria-labelledby="nav-primary__label">
 
@@ -9,7 +9,7 @@ if( has_nav_menu( 'nav-secondary' ) ) { ?>
 		<ol class="nav-primary__list">
 			<?php // Header Nav
 			$defaults = array(
-				'theme_location'  => 'nav-secondary',
+				'theme_location'  => 'nav-primary',
 				'container'       => false,
 				'container_class' => '',
 				'menu_class'      => '',

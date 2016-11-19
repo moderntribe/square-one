@@ -2,6 +2,8 @@
 
 namespace Tribe\Project\Theme\Nav;
 
+use Tribe\Project\Theme\Util;
+
 /**
  * Class Walker_Nav_Menu_Primary
  *
@@ -27,14 +29,23 @@ class Walker_Nav_Menu_Primary extends \Walker_Nav_Menu {
 	 */
 	public function start_lvl( &$output, $depth = 0, $args = array() ) {
 
+		/*
+		 *  WP Core docs claim that $args is an array, but it comes
+		 * in as an object thanks to casting in wp_nav_menu()
+		 */
+		$args = (array)$args;
+
 		// Setup sub-menu ID
 		$id = $this->current_item->ID ? ' id="menu-item-child-' . esc_attr( $this->current_item->ID ) . '"' : '';
 
 		// Setup sub-menu classes
-		$classes = 'navigation__list-child navigation__list-child--depth-' . $depth;
+		$classes = Util::class_attribute( [
+			$args[ 'theme_location' ] . '__list-child',
+			$args[ 'theme_location' ] . '__list-child--depth-' . $depth,
+		] );
 
 		$indent = str_repeat("\t", $depth);
-		$output .= "\n$indent<ul$id class=\"$classes\">\n";
+		$output .= "\n$indent<ul$id$classes>\n";
 
 	}
 
