@@ -47,14 +47,31 @@ class Nav_Attribute_Filters {
 		$args = (array) $args;
 
 		$classes[] = $args[ 'theme_location' ] . '__list-item';
+
+		// Depth
 		$classes[] .= $args[ 'theme_location' ] . '__list-item--depth-' . $depth;
+
+		// Has children items
+		if ( in_array( 'menu-item-has-children', $item->classes ) ) {
+			$classes[] = $args[ 'theme_location' ] . '__list-item--has-children';
+		}
+
+		// Is Parent Item
+		if ( in_array( 'current-menu-parent', $item->classes ) ) {
+			$classes[] = $args[ 'theme_location' ] . '__list-item--is-parent';
+		}
+
+		// Is Current Item
+		if ( in_array( 'current-menu-item', $item->classes ) ) {
+			$classes[] = $args[ 'theme_location' ] . '__list-item--is-current';
+		}
 
 		$allowed_class_names = [
 			$args[ 'theme_location' ] . '__list-item',
 			$args[ 'theme_location' ] . '__list-item--depth-' . $depth,
-			'menu-item-has-children',
-			'current-menu-parent',
-			'current-menu-item',
+			$args[ 'theme_location' ] . '__list-item--has-children',
+			$args[ 'theme_location' ] . '__list-item--is-parent',
+			$args[ 'theme_location' ] . '__list-item--is-current',
 		];
 
 		return array_intersect( $allowed_class_names, $classes );
