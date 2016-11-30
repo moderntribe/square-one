@@ -23,6 +23,9 @@ class Config {
 		add_filter( 'posts_request', [ $this, 'fix_query_search_args_for_p2p' ], 9, 2 );
 		add_action( 'pre_get_posts', [ $this, 'remove_es_from_woo_p2p_queries' ], 10, 1 );
 		add_filter( 'ep_skip_query_integration', [ $this, 'remove_es_from_p2p_queries' ], 99, 2 );
+		
+		//disable for panels
+		add_filter( 'panels_input_query_filter', [ $this, 'disable_es_for_panels' ], 99, 2 );
 	}
 
 
@@ -42,6 +45,23 @@ class Config {
 	}
 
 
+	/**
+	 * Panels have queries that use 'fields' => 'ids'
+	 * ElasticPress changes that to 'fields' => 'default' which breaks those queries
+	 *
+	 * @param [] $_query
+	 *
+	 * @return []
+	 */
+	public function disable_es_for_panels( $_query ){
+		if( $_query[ 'fields' ] = 'ids' ){
+			remove_action( 'pre_get_posts', 'ep_wc_translate_args', 11 );
+			add_filter( 'ep_skip_query_integration', '__return_true', 9999 );
+		}
+
+		return $_query;
+	}
+	
 	/**
 	 * Turn off es queries which are P2P and allow P2P to do it's
 	 * own thing. Allowing es to run during P2P queries causes
