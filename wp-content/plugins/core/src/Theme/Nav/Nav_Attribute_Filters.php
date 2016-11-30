@@ -58,7 +58,7 @@ class Nav_Attribute_Filters {
 
 		// Is Parent Item
 		if ( in_array( 'current-menu-parent', $item->classes ) ) {
-			$classes[] = $args[ 'theme_location' ] . '__list-item--is-parent';
+			$classes[] = $args[ 'theme_location' ] . '__list-item--is-current-parent';
 		}
 
 		// Is Current Item
@@ -70,7 +70,7 @@ class Nav_Attribute_Filters {
 			$args[ 'theme_location' ] . '__list-item',
 			$args[ 'theme_location' ] . '__list-item--depth-' . $depth,
 			$args[ 'theme_location' ] . '__list-item--has-children',
-			$args[ 'theme_location' ] . '__list-item--is-parent',
+			$args[ 'theme_location' ] . '__list-item--is-current-parent',
 			$args[ 'theme_location' ] . '__list-item--is-current',
 		];
 
@@ -157,14 +157,13 @@ class Nav_Attribute_Filters {
 			// If top level, turn <a> into <button>
 			// Add general trigger markup & accessibility attributes
 			$item_output = sprintf(
-				'<%1$s%2$s id="menu-item-%3$s" class="%4$s" data-js="trigger-child-menu" title="%6$s">%5$s %7$s</i></%1$s>',
+				'<%1$s%2$s id="menu-item-%3$s" class="%4$s" data-js="trigger-child-menu" title="%6$s">%5$s</%1$s>',
 				0 === $depth ? 'button' : 'a',
 				0 === $depth ? '' : ' href="'. esc_url( $item->url ) .'"',
 				$item->ID,
 				implode( ' ', array_unique( $classes ) ),
 				$item->title,
-				__( 'Toggle Sub-Menu', 'tribe' ),
-                '<i class="'. $args[ 'theme_location' ] .'__icon-child-nav" aria-hidden="true">'
+				__( 'Toggle Sub-Menu', 'tribe' )
 			);
 		}
 
