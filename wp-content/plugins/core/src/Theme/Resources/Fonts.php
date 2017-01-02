@@ -50,7 +50,7 @@ class Fonts {
 			var WebFontConfig = {
 				<?php if ( !empty( $this->fonts[ 'typekit' ] ) ) { ?>
 				typekit: {
-					id: '<?php echo $this->$this->fonts[ 'typekit' ]; ?>'
+					id: '<?php echo $this->fonts[ 'typekit' ]; ?>'
 				},
 				<?php } ?>
 				<?php if ( !empty( $this->fonts[ 'google' ] ) ) { ?>
