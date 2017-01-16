@@ -16,44 +16,60 @@
     "start_windows": "SET NODE_ENV=development && node server.js",
     "bundle_windows": "SET NODE_ENV=production webpack -p",
     "bundle": "NODE_ENV=production webpack -p",
-    "dev": "NODE_ENV=development node server.js",
-    "lint": "eslint ./ui/src || exit 0",
-    "dist": "npm prune && npm install && npm run lint && npm run test && npm run bundle",
-    "test": "node_modules/.bin/karma start karma.config.js",
-    "test:dev": "npm run test -- --watch"
+    "dev:assets": "NODE_ENV=development node server.js",
+    "dev:json": "json-server --watch api/db.json --port 3004",
+    "dev": "concurrently 'npm run dev:assets' 'npm run dev:json'",
+    "lint": "eslint src test/tests || exit 0",
+    "dist": "npm prune && npm install && npm run lint && npm run bundle",
+    "test": "npm run lint && jest",
+    "test:watch": "npm test -- --watch"
   },
   "dependencies": {
+    "axios": "^0.15.3",
+    "babel-polyfill": "^6.20.0",
     "classnames": "^2.2.5",
+    "enzyme": "^2.6.0",
+    "expect": "^1.20.2",
+    "lodash": "^4.17.4",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
     "react-redux": "^5.0.1",
     "redux": "^3.6.0",
-    "redux-logger": "^2.7.4"
+    "redux-actions": "^1.2.0",
+    "redux-logger": "^2.7.4",
+    "redux-saga": "^0.14.2"
   },
   "devDependencies": {
     "autoprefixer": "^6.5.4",
     "babel-core": "^6.21.0",
     "babel-eslint": "^7.1.1",
+    "babel-jest": "^18.0.0",
     "babel-loader": "^6.2.10",
+    "babel-plugin-istanbul": "^3.1.2",
     "babel-plugin-lodash": "^3.2.11",
-    "babel-polyfill": "^6.20.0",
     "babel-preset-es2015": "6.18.0",
     "babel-preset-react": "^6.16.0",
     "babel-preset-stage-0": "^6.5.0",
     "babel-register": "^6.18.0",
+    "concurrently": "^3.1.0",
     "css-loader": "^0.26.1",
     "cssnano": "^3.9.1",
-    "enzyme": "^2.6.0",
     "eslint": "^3.12.2",
     "eslint-config-airbnb": "^13.0.0",
+    "eslint-import-resolver-webpack": "^0.8.0",
     "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "^3.0.2",
+    "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.8.0",
     "exports-loader": "^0.6.3",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.9.0",
     "imports-loader": "^0.7.0",
+    "jest": "^18.1.0",
+    "jest-cli": "^18.1.0",
     "json-loader": "^0.5.4",
+    "json-server": "^0.9.4",
+    "lost": "^8.0.0",
+    "nyc": "^10.0.0",
     "postcss-aspect-ratio": "^1.0.0",
     "postcss-color-function": "^2.0.1",
     "postcss-cssnext": "^2.9.0",
@@ -75,5 +91,23 @@
     "webpack-dev-middleware": "^1.9.0",
     "webpack-dev-server": "^1.16.2",
     "webpack-hot-middleware": "^2.13.2"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "coverageDirectory": "<rootDir>/test/__coverage__",
+    "coverageReporters": [
+      "json",
+      "lcov",
+      "text-summary"
+    ],
+    "moduleNameMapper": {},
+    "modulePaths": [
+      "<rootDir>/src",
+      "<rootDir>/test"
+    ],
+    "setupFiles": [
+      "./test/setup.js"
+    ],
+    "testRegex": "test/tests/.*\\.test\\.js$"
   }
 }

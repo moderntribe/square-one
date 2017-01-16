@@ -8,11 +8,11 @@ var entry = DEBUG ? [
 	'react-hot-loader/patch',
 	'webpack-dev-server/client?http://localhost:3000',
 	'webpack/hot/only-dev-server',
-	'./src/index',
+	path.resolve(__dirname, 'src/index'),
 ] : [
 	'react-hot-loader/patch',
 	'babel-polyfill',
-	'./src/index',
+	path.resolve(__dirname, 'src/index'),
 ];
 var plugins = [
 	new webpack.ProvidePlugin({
@@ -46,6 +46,7 @@ module.exports = {
 		root: path.join(__dirname, 'node_modules'),
 	},
 	resolve: {
+		root: path.join(__dirname, 'src'),
 		extensions: ['', '.js', '.jsx', 'json', '.pcss'],
 		modulesDirectories: ['node_modules'],
 		fallback: path.join(__dirname, 'node_modules'),
@@ -61,7 +62,6 @@ module.exports = {
 			{
 				test: /\.js$/,
 				loader: 'babel',
-				include: path.join(__dirname, 'src'),
 				exclude: /node_modules/,
 				query: {
 					'plugins': ['lodash'],
