@@ -363,6 +363,8 @@ embed {
 	 * Borders
 	 * ----------------------------------------------------------------------------- */
 }
+:root {/* Easing: Sine *//* Easing: Quad *//* Easing: Cubic *//* Easing: Quart *//* Easing: Quint *//* Easing: Expo *//* Easing: Circ *//* Easing: Back */
+}
 :root {/* -----------------------------------------------------------------------------
 	 * Borders
 	 * ----------------------------------------------------------------------------- *//* -----------------------------------------------------------------------------
@@ -827,6 +829,15 @@ embed {
 }
 .icon-pinterest:before {
     content: "\f231";
+}
+/* -----------------------------------------------------------------------------
+ *
+ * SVG Icons: Icons (via PostCSS Inline SVG)
+ *
+ * ----------------------------------------------------------------------------- */
+.svg-icon {
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 /* -----------------------------------------------------------------------------
  *
@@ -1416,15 +1427,22 @@ img {
 }
 .wp-embed {
     -webkit-column-break-inside: avoid;
-    page-break-inside: avoid;
-         break-inside: avoid-column;
+       page-break-inside: avoid;
+            break-inside: avoid-column;
 }
 .t-content .wp-embed {
     margin: 50px auto;
     max-width: none;
 }
+/* CASE: Lazyloaded embed */
+.wp-embed--lazy {}
+/* CASE: Non-lazyloaded embed */
+.wp-embed--no-lazy {}
 .wp-embed-wrap {
     position: relative;
+}
+/* CASE: Non-lazyloaded embed */
+.wp-embed--no-lazy .wp-embed-wrap {
     aspect-ratio: '16:9';
     overflow: hidden;
 }

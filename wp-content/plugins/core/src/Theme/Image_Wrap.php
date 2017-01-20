@@ -5,7 +5,6 @@ namespace Tribe\Project\Theme;
 class Image_Wrap {
 
 	public function hook() {
-
 		add_filter( 'the_content', [ $this, 'customize_wp_image_non_captioned_output' ], 12, 1 );
 		add_filter( 'the_content', [ $this, 'customize_wp_image_captioned_output' ], 12, 1 );
 	}
@@ -19,6 +18,10 @@ class Image_Wrap {
 	 * @return mixed
 	 */
 	public function customize_wp_image_non_captioned_output( $html ) {
+
+		if ( ! is_singular() && ! in_the_loop() && ! is_main_query() ) {
+			return $html;
+		}
 
 		return preg_replace_callback( '/<p>((?:.(?!p>))*?)(<a[^>]*>)?\s*(<img[^>]+>)(<\/a>)?(.*?)<\/p>/is', function( $matches ) {
 
@@ -49,11 +52,10 @@ class Image_Wrap {
 
 			// move alignment classes to our non-caption image wrapper & remove from image
 			// mimicks markup for captioned images
-			preg_match( '#class\s*=\s*"[^"]*(alignnone|alignleft|aligncenter|alignright)[^"]*"#', $image,
-				$alignment_match );
+			preg_match( '#class\s*=\s*"[^"]*(alignnone|alignleft|aligncenter|alignright)[^"]*"#', $image, $alignment_match );
 			$alignment = empty( $alignment_match[1] ) ? 'alignnone' : $alignment_match[1];
 
-			$image = str_replace( $alignment_match[1] . ' ', '', $image );
+			$image = empty( $alignment_match[1] ) ? $image : str_replace( $alignment_match[1] . ' ', '', $image );
 
 			return sprintf( '<figure class="wp-image wp-image--no-caption %s">%s</figure>%s', $alignment, $image, $content );
 		}, $html );
@@ -69,6 +71,9 @@ class Image_Wrap {
 	 * @return mixed
 	 */
 	public function customize_wp_image_captioned_output( $html ) {
+		if ( ! is_singular() && ! in_the_loop() && ! is_main_query() ) {
+			return $html;
+		}
 
 		return preg_replace( '#wp-caption align#', 'wp-image wp-image--caption align', $html );
 	}
