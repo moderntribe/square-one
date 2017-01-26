@@ -30,4 +30,64 @@ module.exports = {
 			},
 		],
 	},
+
+	deploy: {
+		files: [
+			// WordPress core
+			{
+				expand: true,
+				cwd: 'wp',
+				src: [
+					'**',
+					'!**/wp-content/**',
+				],
+				dest: '<%= pkg._deploypath %>/',
+			},
+
+			// plugins and themes
+			{
+				expand: true,
+				cwd: 'wp-content',
+				src: [
+					'mu-plugins/**',
+					'plugins/**',
+					'themes/**',
+					'!**/dev/**',
+					'!**/tests/**',
+					'!**/*.sh',
+					'!**/.git',
+					'!**/phpunit.xml',
+					'!**/codeception.yml',
+					'!**/composer.json',
+					'!**/composer.lock',
+					'!**/memcached.php',
+					'!**/object-cache.php',
+					'!**/core/vendor/phpunit/**', // causes deploy errors on WP Engine
+					'!**/*.flv',
+					'!**/*.mp3',
+					'!**/*.mp4',
+					'!**/*.exe',
+					'!**/autoload_static.php',
+				],
+				dest: '<%= pkg._deploypath %>/wp-content/',
+			},
+
+			// config
+			{
+				nonull: true,
+				src: 'build-process.php',
+				dest: '<%= pkg._deploypath %>/',
+			},
+			{
+				nonull: true,
+				src: 'general-config.php',
+				dest: '<%= pkg._deploypath %>/',
+			},
+			{
+				nonull: true,
+				src: '.htaccess',
+				dest: '<%= pkg._deploypath %>/',
+			},
+		],
+	},
 };
