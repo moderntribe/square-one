@@ -93,3 +93,4 @@ wp-content/plugins/airplane-mode
 **/bower_components/
 **/__coverage__/
 dev_components/react-app/test/__coverage__/
+dev/deploy/
