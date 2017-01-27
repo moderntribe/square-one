@@ -83,6 +83,10 @@ class acf_field_date_and_time_picker extends acf_field {
 	
 	function input_admin_enqueue_scripts() {
 		
+		// bail ealry if no enqueue
+	   	if( !acf_get_setting('enqueue_datetimepicker') ) return;
+	   	
+	   	
 		// vars
 		$version = '1.6.1';
 		
@@ -112,10 +116,12 @@ class acf_field_date_and_time_picker extends acf_field {
 	function render_field( $field ) {
 		
 		// format value
+		$hidden_value = '';
 		$display_value = '';
 		
 		if( $field['value'] ) {
 			
+			$hidden_value = acf_format_date( $field['value'], 'Y-m-d H:i:s' );
 			$display_value = acf_format_date( $field['value'], $field['display_format'] );
 			
 		}
@@ -139,7 +145,7 @@ class acf_field_date_and_time_picker extends acf_field {
 			'class' 				=> 'input-alt',
 			'type'					=> 'hidden',
 			'name'					=> $field['name'],
-			'value'					=> $field['value'],
+			'value'					=> $hidden_value,
 		);
 		$input = array(
 			'class' 				=> 'input',
@@ -187,10 +193,10 @@ class acf_field_date_and_time_picker extends acf_field {
 			'name'			=> 'display_format',
 			'other_choice'	=> 1,
 			'choices'		=> array(
-				'd/m/Y g:i a'	=> date('d/m/Y g:i a'),
-				'm/d/Y g:i a'	=> date('m/d/Y g:i a'),
-				'F j, Y g:i a'	=> date('F j, Y g:i a'),
-				'Y-m-d H:i:s'	=> date('Y-m-d H:i:s'),
+				'd/m/Y g:i a'	=> date_i18n('d/m/Y g:i a'),
+				'm/d/Y g:i a'	=> date_i18n('m/d/Y g:i a'),
+				'F j, Y g:i a'	=> date_i18n('F j, Y g:i a'),
+				'Y-m-d H:i:s'	=> date_i18n('Y-m-d H:i:s'),
 			)
 		));
 				
@@ -203,10 +209,10 @@ class acf_field_date_and_time_picker extends acf_field {
 			'name'			=> 'return_format',
 			'other_choice'	=> 1,
 			'choices'		=> array(
-				'd/m/Y g:i a'	=> date('d/m/Y g:i a'),
-				'm/d/Y g:i a'	=> date('m/d/Y g:i a'),
-				'F j, Y g:i a'	=> date('F j, Y g:i a'),
-				'Y-m-d H:i:s'	=> date('Y-m-d H:i:s'),
+				'd/m/Y g:i a'	=> date_i18n('d/m/Y g:i a'),
+				'm/d/Y g:i a'	=> date_i18n('m/d/Y g:i a'),
+				'F j, Y g:i a'	=> date_i18n('F j, Y g:i a'),
+				'Y-m-d H:i:s'	=> date_i18n('Y-m-d H:i:s'),
 			)
 		));
 				

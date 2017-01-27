@@ -161,7 +161,10 @@ class WPSEO_GSC_Table extends WP_List_Table {
 	 */
 	protected function column_cb( $item ) {
 		return sprintf(
-			'<input type="checkbox" name="wpseo_crawl_issues[]" value="%s" />', $item['url']
+			'<input type="checkbox" name="wpseo_crawl_issues[]" id="cb-%1$s" value="%2$s" /><label for="cb-%1$s" class="screen-reader-text">%3$s</label>',
+			md5( $item['url'] ),
+			$item['url'],
+			__( 'Select redirect', 'wordpress-seo' )
 		);
 	}
 
@@ -206,7 +209,7 @@ class WPSEO_GSC_Table extends WP_List_Table {
 			$actions['create_redirect'] = '<a href="#TB_inline?width=600&height=' . $this->modal_heights[ $modal_height ] . '&inlineId=redirect-' . md5( $item['url'] ) . '" class="thickbox wpseo-open-gsc-redirect-modal aria-button-if-js">' . __( 'Create redirect', 'wordpress-seo' ) . '</a>';
 		}
 
-		$actions['view']        = '<a href="' . $item['url'] . '" target="_blank">' . __( 'View', 'wordpress-seo' ) . '</a>';
+		$actions['view']        = '<a href="' . home_url( $item['url'] ) . '" target="_blank">' . __( 'View', 'wordpress-seo' ) . '</a>';
 		$actions['markasfixed'] = '<a href="javascript:wpseo_mark_as_fixed(\'' . urlencode( $item['url'] ) . '\');">' . __( 'Mark as fixed', 'wordpress-seo' ) . '</a>';
 
 		return sprintf(

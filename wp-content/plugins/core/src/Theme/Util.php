@@ -5,6 +5,30 @@ namespace Tribe\Project\Theme;
 abstract class Util {
 
 	/**
+	 * Common use is trimming the_content from panels or some such
+	 *
+	 * @param array $options
+	 * @return string
+	 */
+	public static function get_clean_truncated_html( $options = [] ) {
+		$defaults = [
+			'content' => '',
+			'length'  => 55,
+			'more'    => null,
+			'autop'   => true,
+		];
+
+		$args = wp_parse_args( $options, $defaults );
+		$result = wp_trim_words( wp_strip_all_tags( strip_shortcodes( $args['content'] ) ), $args['length'], $args['more'] );
+
+		if ( $args['autop'] ) {
+			$result = wpautop( $result );
+		}
+
+		return $result;
+	}
+
+	/**
 	 * Convert an array into an HTML class attribute string
 	 *
 	 * @param array $classes
@@ -23,6 +47,30 @@ abstract class Util {
 			implode( ' ', array_unique( $classes ) ),
 			$attribute ? '"' : ''
 		);
+	}
+
+	/**
+	 * Make a best-effort at extracting the file extension from a URL
+	 *
+	 * @param $url
+	 *
+	 * @return mixed|null
+	 */
+	public static function file_extension( $url ) {
+
+		$extension = null;
+
+		if ( empty( $url ) ) {
+			return $extension;
+		}
+
+		$url_parts = parse_url( $url );
+
+		if ( ! empty( $url_parts['path'] ) ) {
+			$extension = pathinfo( $url_parts['path'], PATHINFO_EXTENSION );
+		}
+
+		return $extension;
 	}
 
 }

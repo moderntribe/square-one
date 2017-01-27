@@ -150,52 +150,51 @@ class acf_admin_field_groups {
 		}
 		
 		
-		// import field group
+		// vars
+		$ids = array();
+		
+		
+		// check single
 		if( $id = acf_maybe_get($_GET, 'acfduplicate') ) {
+			
+			$ids[] = $id;
+		
+		// check multiple
+		} elseif( acf_maybe_get($_GET, 'action2') === 'acfduplicate' ) {
+			
+			$ids = acf_maybe_get($_GET, 'post');
+			
+		}
+		
+		
+		// sync
+		if( !empty($ids) ) {
 			
 			// validate
 			check_admin_referer('bulk-posts');
 			
 			
-			// duplicate
-			$field_group = acf_duplicate_field_group( $id );
+			// vars
+			$new_ids = array();
+			
+			
+			// loop
+			foreach( $ids as $id ) {
+				
+				// duplicate
+				$field_group = acf_duplicate_field_group( $id );
+				
+				
+				// increase counter
+				$new_ids[] = $field_group['ID'];
+				
+			}
 			
 			
 			// redirect
-			wp_redirect( admin_url( $this->url . '&acfduplicatecomplete=' . $field_group['ID'] ) );
+			wp_redirect( admin_url( $this->url . '&acfduplicatecomplete=' . implode(',', $new_ids)) );
 			exit;
-			
-		} elseif( acf_maybe_get($_GET, 'action2') === 'acfduplicate' ) {
-		
-			// validate
-			check_admin_referer('bulk-posts');
 				
-			
-			// get ids
-			$ids = acf_maybe_get($_GET, 'post');
-			
-			if( !empty($ids) ) {
-				
-				// vars
-				$new_ids = array();
-				
-				foreach( $ids as $id ) {
-					
-					// duplicate
-					$field_group = acf_duplicate_field_group( $id );
-					
-					
-					// increase counter
-					$new_ids[] = $field_group['ID'];
-					
-				}
-				
-				
-				// redirect
-				wp_redirect( admin_url( $this->url . '&acfduplicatecomplete=' . implode(',', $new_ids)) );
-				exit;
-			}
-		
 		}
 		
 	}
@@ -241,11 +240,7 @@ class acf_admin_field_groups {
 		
 		
 		// bail early if no field groups
-		if( empty($groups) ) {
-			
-			return;
-			
-		}
+		if( empty($groups) ) return;
 		
 		
 		// find JSON field groups which have not yet been imported
@@ -276,85 +271,72 @@ class acf_admin_field_groups {
 		
 		
 		// bail if no sync needed
-		if( empty($this->sync) ) {
+		if( empty($this->sync) ) return;
+		
+		
+		// maybe sync
+		$sync_keys = array();
+		
+		
+		// check single
+		if( $key = acf_maybe_get($_GET, 'acfsync') ) {
 			
-			return;
+			$sync_keys[] = $key;
+		
+		// check multiple
+		} elseif( acf_maybe_get($_GET, 'action2') === 'acfsync' ) {
+			
+			$sync_keys = acf_maybe_get($_GET, 'post');
 			
 		}
-	
 		
-		// import field group
-		if( $key = acf_maybe_get($_GET, 'acfsync') ) {
+		
+		// sync
+		if( !empty($sync_keys) ) {
+			
+			// validate
+			check_admin_referer('bulk-posts');
+			
+			
+			// disable filters to ensure ACF loads raw data from DB
+			acf_disable_filters();
+			acf_enable_filter('local');
+			
 			
 			// disable JSON
 			// - this prevents a new JSON file being created and causing a 'change' to theme files - solves git anoyance
 			acf_update_setting('json', false);
 			
 			
-			// validate
-			check_admin_referer('bulk-posts');
-			
-			
-			// append fields
-			if( acf_have_local_fields( $key ) ) {
-				
-				$this->sync[ $key ]['fields'] = acf_get_local_fields( $key );
-				
-			}
-			
-			
-			// import
-			$field_group = acf_import_field_group( $this->sync[ $key ] );
-			
-			
-			// redirect
-			wp_redirect( admin_url( $this->url . '&acfsynccomplete=' . $field_group['ID'] ) );
-			exit;
-			
-		} elseif( acf_maybe_get($_GET, 'action2') === 'acfsync' ) {
-			
-			// validate
-			check_admin_referer('bulk-posts');
+			// vars
+			$new_ids = array();
 				
 			
-			// get ids
-			$keys = acf_maybe_get($_GET, 'post');
-			
-			if( !empty($keys) ) {
+			// loop
+			foreach( $sync_keys as $key ) {
 				
-				// disable JSON
-				// - this prevents a new JSON file being created and causing a 'change' to theme files - solves git anoyance
-				acf_update_setting('json', false);
-				
-				// vars
-				$new_ids = array();
-				
-				foreach( $keys as $key ) {
+				// append fields
+				if( acf_have_local_fields($key) ) {
 					
-					// append fields
-					if( acf_have_local_fields( $key ) ) {
-						
-						$this->sync[ $key ]['fields'] = acf_get_local_fields( $key );
-						
-					}
-					
-					
-					// import
-					$field_group = acf_import_field_group( $this->sync[ $key ] );
-										
-					
-					// append
-					$new_ids[] = $field_group['ID'];
+					$this->sync[ $key ]['fields'] = acf_get_local_fields( $key );
 					
 				}
 				
 				
-				// redirect
-				wp_redirect( admin_url( $this->url . '&acfsynccomplete=' . implode(',', $new_ids)) );
-				exit;
+				// import
+				$field_group = acf_import_field_group( $this->sync[ $key ] );
+									
+				
+				// append
+				$new_ids[] = $field_group['ID'];
 				
 			}
-		
+			
+			
+			// redirect
+			wp_redirect( admin_url( $this->url . '&acfsynccomplete=' . implode(',', $new_ids)) );
+			exit;
+			
 		}
 		
 		
@@ -582,7 +564,7 @@ class acf_admin_field_groups {
 				
 			} else {
 				
-				echo '<i class="acf-icon -minus yellow small acf-js-tooltip" title="' . __('Disabled', 'acf') . '"></i> ';
+				echo '<i class="acf-icon -minus yellow small acf-js-tooltip" title="' . __('Inactive', 'acf') . '"></i> ';
 				
 			}
 	    
@@ -612,9 +594,13 @@ class acf_admin_field_groups {
 	function admin_footer() {
 		
 		// vars
-		$www = 'https://www.advancedcustomfields.com/resources/';
+		$url_home = 'https://www.advancedcustomfields.com';
+		$url_support = 'https://support.advancedcustomfields.com';
+		$url_docs = $url_home . '/resources/';
 		
-?><script type="text/html" id="tmpl-acf-column-2">
+		
+?>
+<script type="text/html" id="tmpl-acf-column-2">
 <div class="acf-column-2">
 	<div class="acf-box">
 		<div class="inner">
@@ -625,21 +611,22 @@ class acf_admin_field_groups {
 			
 			<h3><?php _e("Resources",'acf'); ?></h3>
 			<ul>
-				<li><a href="<?php echo $www; ?>#getting-started" target="_blank"><?php _e("Getting Started",'acf'); ?></a></li>
-				<li><a href="<?php echo $www; ?>#updates" target="_blank"><?php _e("Updates",'acf'); ?></a></li>
-				<li><a href="<?php echo $www; ?>#field-types" target="_blank"><?php _e("Field Types",'acf'); ?></a></li>
-				<li><a href="<?php echo $www; ?>#functions" target="_blank"><?php _e("Functions",'acf'); ?></a></li>
-				<li><a href="<?php echo $www; ?>#actions" target="_blank"><?php _e("Actions",'acf'); ?></a></li>
-				<li><a href="<?php echo $www; ?>#filters" target="_blank"><?php _e("Filters",'acf'); ?></a></li>
-				<li><a href="<?php echo $www; ?>#how-to" target="_blank"><?php _e("'How to' guides",'acf'); ?></a></li>
-				<li><a href="<?php echo $www; ?>#tutorials" target="_blank"><?php _e("Tutorials",'acf'); ?></a></li>
-				<li><a href="<?php echo $www; ?>#faq" target="_blank"><?php _e("FAQ",'acf'); ?></a></li>
+				<li><a href="<?php echo $url_docs; ?>" target="_blank"><?php _e("Documentation",'acf'); ?></a></li>
+
+				<li><a href="<?php echo $url_docs; ?>#getting-started" target="_blank"><?php _e("Getting Started",'acf'); ?></a></li>
+				<li><a href="<?php echo $url_docs; ?>#field-types" target="_blank"><?php _e("Field Types",'acf'); ?></a></li>
+				<li><a href="<?php echo $url_docs; ?>#functions" target="_blank"><?php _e("Functions",'acf'); ?></a></li>
+				<li><a href="<?php echo $url_docs; ?>#actions" target="_blank"><?php _e("Actions",'acf'); ?></a></li>
+				<li><a href="<?php echo $url_docs; ?>#filters" target="_blank"><?php _e("Filters",'acf'); ?></a></li>
+				<li><a href="<?php echo $url_docs; ?>#features" target="_blank"><?php _e("Features",'acf'); ?></a></li>
+				<li><a href="<?php echo $url_docs; ?>#how-to" target="_blank"><?php _e("How to",'acf'); ?></a></li>
+				<li><a href="<?php echo $url_docs; ?>#tutorials" target="_blank"><?php _e("Tutorials",'acf'); ?></a></li>
+				<li><a href="<?php echo $url_docs; ?>#faq" target="_blank"><?php _e("FAQ",'acf'); ?></a></li>
+				<li><a href="<?php echo $url_support; ?>" target="_blank"><?php _e("Support",'acf'); ?></a></li>
 			</ul>
 		</div>
-		<div class="footer footer-blue">
-			<ul class="acf-hl">
-				<li><?php _e("Created by",'acf'); ?> Elliot Condon</li>
-			</ul>
+		<div class="footer -blue">
+			<p><?php echo sprintf( __('Thank you for creating with <a href="%s">ACF</a>.','acf'), $url_home ); ?></p>
 		</div>
 	</div>
 </div>

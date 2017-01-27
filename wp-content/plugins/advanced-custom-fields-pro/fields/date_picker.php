@@ -104,6 +104,10 @@ class acf_field_date_picker extends acf_field {
 	
 	function input_admin_enqueue_scripts() {
 		
+		// bail ealry if no enqueue
+	   	if( !acf_get_setting('enqueue_datepicker') ) return;
+	   	
+	   	
 		// script
 		wp_enqueue_script('jquery-ui-datepicker');
 		
@@ -129,10 +133,12 @@ class acf_field_date_picker extends acf_field {
 	function render_field( $field ) {
 		
 		// format value
+		$hidden_value = '';
 		$display_value = '';
 		
 		if( $field['value'] ) {
 			
+			$hidden_value = acf_format_date( $field['value'], 'Ymd' );
 			$display_value = acf_format_date( $field['value'], $field['display_format'] );
 			
 		}
@@ -150,15 +156,30 @@ class acf_field_date_picker extends acf_field {
 			'class' 				=> 'input-alt',
 			'type'					=> 'hidden',
 			'name'					=> $field['name'],
-			'value'					=> $field['value'],
+			'value'					=> $hidden_value,
 		);
 		$input = array(
 			'class' 				=> 'input',
 			'type'					=> 'text',
 			'value'					=> $display_value,
 		);
+		
+		
+		// save_format - compatibility with ACF < 5.0.0
+		if( !empty($field['save_format']) ) {
 			
-
+			// add custom JS save format
+			$div['data-save_format'] = $field['save_format'];
+			
+			// revert hidden input value to raw DB value
+			$hidden['value'] = $field['value'];
+			
+			// remove formatted value (will do this via JS)
+			$input['value'] = '';
+			
+		}
+		
+		
 		// html
 		$e .= '<div ' . acf_esc_attr($div) . '>';
 			$e .= '<input ' . acf_esc_attr($hidden). '/>';
@@ -198,27 +219,43 @@ class acf_field_date_picker extends acf_field {
 			'name'			=> 'display_format',
 			'other_choice'	=> 1,
 			'choices'		=> array(
-				'd/m/Y'			=> date('d/m/Y'),
-				'm/d/Y'			=> date('m/d/Y'),
-				'F j, Y'		=> date('F j, Y'),
+				'd/m/Y'			=> date_i18n('d/m/Y'),
+				'm/d/Y'			=> date_i18n('m/d/Y'),
+				'F j, Y'		=> date_i18n('F j, Y'),
 			)
 		));
 				
 		
-		// return_format
-		acf_render_field_setting( $field, array(
-			'label'			=> __('Return Format','acf'),
-			'instructions'	=> __('The format returned via template functions','acf'),
-			'type'			=> 'radio',
-			'name'			=> 'return_format',
-			'other_choice'	=> 1,
-			'choices'		=> array(
-				'd/m/Y'			=> date('d/m/Y'),
-				'm/d/Y'			=> date('m/d/Y'),
-				'F j, Y'		=> date('F j, Y'),
-				'Ymd'			=> date('Ymd'),
-			)
-		));
+		// save_format - compatibility with ACF < 5.0.0
+		if( !empty($field['save_format']) ) {
+			
+			// save_format
+			acf_render_field_setting( $field, array(
+				'label'			=> __('Save Format','acf'),
+				'instructions'	=> __('The format used when saving a value','acf'),
+				'type'			=> 'text',
+				'name'			=> 'save_format',
+				//'readonly'		=> 1 // this setting was not readonly in v4
+			));
+			
+		} else {
+			
+			// return_format
+			acf_render_field_setting( $field, array(
+				'label'			=> __('Return Format','acf'),
+				'instructions'	=> __('The format returned via template functions','acf'),
+				'type'			=> 'radio',
+				'name'			=> 'return_format',
+				'other_choice'	=> 1,
+				'choices'		=> array(
+					'd/m/Y'			=> date_i18n('d/m/Y'),
+					'm/d/Y'			=> date_i18n('m/d/Y'),
+					'F j, Y'		=> date_i18n('F j, Y'),
+					'Ymd'			=> date_i18n('Ymd'),
+				)
+			));
+			
+		}
 		
 		
 		// first_day
@@ -229,41 +266,6 @@ class acf_field_date_picker extends acf_field {
 			'name'			=> 'first_day',
 			'choices'		=> array_values( $wp_locale->weekday )
 		));
-		
-	}
-	
-	
-	/*
-	*  load_value()
-	*
-	*  This filter is applied to the $value after it is loaded from the db
-	*
-	*  @type	filter
-	*  @since	3.6
-	*  @date	23/01/13
-	*
-	*  @param	$value (mixed) the value found in the database
-	*  @param	$post_id (mixed) the $post_id from which the value was loaded
-	*  @param	$field (array) the field array holding all the field options
-	*  @return	$value
-	*/
-	
-	function load_value( $value, $post_id, $field ) {
-		
-		// bail ealry if no $value
-		if( !$value ) return $value;
-		
-		
-		// date field is currently saved as Ymd (not Y-m-d). Convert it
-		if( strlen($value) == 8 ) {
-			
-			$value = substr($value, 0, 4) . '-' . substr($value, 4, 2) . '-' . substr($value, 6, 2);
-			
-		}
-		
-		
-		// return
-		return $value;
 		
 	}
 	
@@ -286,39 +288,16 @@ class acf_field_date_picker extends acf_field {
 	
 	function format_value( $value, $post_id, $field ) {
 		
-		return acf_format_date( $value, $field['return_format'] );
-		
-	}
-	
-	
-	/*
-	*  update_value()
-	*
-	*  This filter is appied to the $value before it is updated in the db
-	*
-	*  @type	filter
-	*  @since	3.6
-	*  @date	23/01/13
-	*
-	*  @param	$value - the value which will be saved in the database
-	*  @param	$post_id - the $post_id of which the value will be saved
-	*  @param	$field - the field array holding all the field options
-	*
-	*  @return	$value - the modified value
-	*/
-	
-	function update_value( $value, $post_id, $field ) {
-	
-		// bail ealry if no $value
-		if( !$value ) return $value;
-		
-		
-		// remove '-'
-		$value = str_replace('-', '', $value);
+		// save_format - compatibility with ACF < 5.0.0
+		if( !empty($field['save_format']) ) {
+			
+			return $value;
+			
+		}
 		
 		
 		// return
-		return $value;
+		return acf_format_date( $value, $field['return_format'] );
 		
 	}
 	

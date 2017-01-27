@@ -11,6 +11,7 @@ use Tribe\Project\Service_Providers\Theme_Customizer_Provider;
 use Tribe\Project\Service_Providers\Global_Service_Provider;
 use Tribe\Project\Service_Providers\Theme_Provider;
 use Tribe\Project\Service_Providers\Settings_Provider;
+use Tribe\Project\Service_Providers\Util_Provider;
 
 class Core {
 
@@ -51,6 +52,7 @@ class Core {
 		$this->container->register( new Panel_Intializer_Provider() );
 		$this->container->register( new Global_Service_Provider() );
 		$this->container->register( new Settings_Provider() );
+		$this->container->register( new Util_Provider() );
 	}
 
 	public function container() {

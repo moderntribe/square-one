@@ -87,12 +87,11 @@ class WPSEO_Admin {
 		}
 
 		if ( WPSEO_Utils::is_api_available() ) {
-			$configuration = new WPSEO_Configuration_Page();
-
-			if ( filter_input( INPUT_GET, 'page' ) === self::PAGE_IDENTIFIER ) {
-				$configuration->catch_configuration_request();
-			}
+			$configuration = new WPSEO_Configuration_Page;
+			$configuration->catch_configuration_request();
 		}
+
+		$this->set_upsell_notice();
 	}
 
 	/**
@@ -268,6 +267,10 @@ class WPSEO_Admin {
 	public function enqueue_assets() {
 		$asset_manager = new WPSEO_Admin_Asset_Manager();
 		$asset_manager->enqueue_style( 'help-center' );
+
+		if ( 'wpseo_licenses' === filter_input( INPUT_GET, 'page' ) ) {
+			$asset_manager->enqueue_style( 'extensions' );
+		}
 	}
 
 	/**
@@ -601,6 +604,8 @@ class WPSEO_Admin {
 	 * @return array $stopwords array of stop words to check and / or remove from slug
 	 */
 	function stopwords() {
+		_deprecated_function( __METHOD__, 'WPSEO 3.1', 'WPSEO_Admin_Stop_Words::list_stop_words' );
+
 		$stop_words = new WPSEO_Admin_Stop_Words();
 		return $stop_words->list_stop_words();
 	}
@@ -617,6 +622,8 @@ class WPSEO_Admin {
 	 * @return bool|mixed
 	 */
 	function stopwords_check( $haystack, $checkingUrl = false ) {
+		_deprecated_function( __METHOD__, 'WPSEO 3.1' );
+
 		$stopWords = $this->stopwords();
 
 		if ( is_array( $stopWords ) && $stopWords !== array() ) {
@@ -703,12 +710,21 @@ class WPSEO_Admin {
 		$text = apply_filters( 'wpseo_premium_indicator_text', __( 'Disabled', 'wordpress-seo' ) );
 
 		$premium_indicator = sprintf(
-			"<span class='%s'><svg alt=\"\" width=\"1792\" height=\"1792\" viewBox=\"0 0 1792 1792\" xmlns=\"http://www.w3.org/2000/svg\"><path fill=\"currentColor\" d=\"M1728 647q0 22-26 48l-363 354 86 500q1 7 1 20 0 21-10.5 35.5t-30.5 14.5q-19 0-40-12l-449-236-449 236q-22 12-40 12-21 0-31.5-14.5t-10.5-35.5q0-6 2-20l86-500-364-354q-25-27-25-48 0-37 56-46l502-73 225-455q19-41 49-41t49 41l225 455 502 73q56 9 56 46z\"/></svg><span class='screen-reader-text'>%s</span></span>",
+			"<span class='%s' aria-hidden='true'><svg width=\"20\" height=\"20\" viewBox=\"0 0 1792 1792\" xmlns=\"http://www.w3.org/2000/svg\"><path fill=\"currentColor\" d=\"M1728 647q0 22-26 48l-363 354 86 500q1 7 1 20 0 21-10.5 35.5t-30.5 14.5q-19 0-40-12l-449-236-449 236q-22 12-40 12-21 0-31.5-14.5t-10.5-35.5q0-6 2-20l86-500-364-354q-25-27-25-48 0-37 56-46l502-73 225-455q19-41 49-41t49 41l225 455 502 73q56 9 56 46z\"/></svg></span><span class='screen-reader-text'>%s</span>",
 			esc_attr( implode( ' ', $classes ) ),
 			esc_html( $text )
 		);
 
 		return $premium_indicator;
+	}
+
+	/**
+	 * Sets the upsell notice.
+	 */
+	protected function set_upsell_notice() {
+		$upsell = new WPSEO_Product_Upsell_Notice();
+		$upsell->dismiss_notice_listener();
+		$upsell->initialize();
 	}
 
 	/********************** DEPRECATED METHODS **********************/
@@ -781,7 +797,7 @@ class WPSEO_Admin {
 	 * @deprecated 3.3
 	 */
 	function blog_public_warning() {
-		return;
+		_deprecated_function( __METHOD__, 'WPSEO 3.3.0' );
 	}
 
 	/**
