@@ -13,12 +13,5 @@ module.exports = {
 
 	themeMinJS: [
 		'<%= pkg._corethemepath %>/js/dist/*.js',
-	],
-
-	deploy: {
-		src: [
-			'<%= pkg._deploypath %>/*',
-			'!<%= pkg._deploypath %>/.git'
-		]
-	}
+	]
 };
