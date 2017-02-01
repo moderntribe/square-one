@@ -267,12 +267,8 @@ class Initializer {
 		];
 	}
 
-	public function inactive_icon_url( $filename ) {
-		return plugins_url( 'assets/panels/icons/standard/' . $filename, $this->plugin_file );
-	}
-
-	public function active_icon_url( $filename ) {
-		return plugins_url( 'assets/panels/icons/inverted/' . $filename, $this->plugin_file );
+	public function thumbnail_url( $filename ) {
+		return plugins_url( 'assets/panels/thumbnails/' . $filename, $this->plugin_file );
 	}
 
 	public function layout_icon_url( $filename ) {

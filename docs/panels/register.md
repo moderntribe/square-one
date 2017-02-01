@@ -1,5 +1,10 @@
-<?php
+# Register a Panel
 
+Panels are registered in individual class files per panel located in [this directory](/wp-content/plugins/core/src/Panels/Types). They extend the abstract class Panel_Type_Config also located in this same directory.
+
+An example of registering a panel that contains a repeater of wysiwyg fields with a maximum of 3 allowed:
+
+```php
 namespace Tribe\Project\Panels\Types;
 
 use ModularContent\Fields;
@@ -16,12 +21,13 @@ class Wysiwyg extends Panel_Type_Config {
 
 	protected function panel() {
 
-		$helper_text = '<p>' . __( 'Sometimes you need to lay out content your own way. This panel allows you to use the WordPress WYSIWYG editor to lay out text and images in a single column, two or even three columns.', 'tribe' ) . '</p><p><strong>' . __( 'GOOD FOR:', 'tribe' ) . '</strong> ' . __( 'Displaying text and images, embedding YouTube videos, or social media feeds.', 'tribe' ) . '</p>';
+		$helper_text = __( 'A simple wyiwyg panel that lets you free form', 'tribe' );
 		$panel       = $this->handler->factory( self::NAME, $helper_text );
+
 		$panel->set_template_dir( $this->ViewFinder );
 		$panel->set_label( __( 'WYSIWYG Editor', 'tribe' ) );
 		$panel->set_description( __( 'Displays custom content', 'tribe' ) );
-		$panel->set_thumbnail( $this->handler->thumbnail_url( 'module-wysiwyg.jpg' ) );
+		$panel->set_thumbnail( $this->handler->thumbnail_url( 'module-wysiwyg.png' ) );
 
 		// Panel Layout
 		$panel->add_settings_field( $this->handler->field( 'ImageSelect', [
@@ -54,3 +60,16 @@ class Wysiwyg extends Panel_Type_Config {
 		return $panel;
 	}
 }
+```
+
+Also note in this field that a "settings" field was added. The panel ui is separated into content and settings as soon as you use even one of these. This is makes the panel separate content and complex settings thereby reducing clutter. 
+
+Please use the helper function `$this->handler->field( 'FIELD_NAME', [...options] )` to add a field. 
+
+Refer to `/wp-content/plugins/panel-builder/readme.md#fields` for a list of all field types and their behavior.
+
+##Table of Contents
+
+* [Overview](/docs/panels/README.md)
+* [The Initializer](/docs/panels/initializer.md)
+* [Register A Panel](/docs/panels/register.md)

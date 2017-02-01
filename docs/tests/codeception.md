@@ -1,4 +1,5 @@
-### Setting up the Codeception test
+# Setting up the Codeception test
+
 If you are going to write and/or run the [Codeception](http://codeception.com/) tests then those will need some set up too.  
 Read the [Codeception](http://codeception.com/) and [WP Browser](https://github.com/lucatume/wp-browser) documentation if stuck, the specific tool guides are there: this is a guide to the particular set up.  
 The `tests_sample` folder contains the result of such a set up so use it as a guide.
@@ -21,3 +22,9 @@ To cover the missing testing possiblity offered by a JS enabled web driver gener
 the suite configuration file will appear and the folder with it. JS enabled tests will "drive" a web browser like Selenium or Chrome, or (faster) [PhantomJS](http://phantomjs.org/).  
 Again refer to [Codeception](http://codeception.com/) docs.  
 Some tests are included in the `dev/test_sample` folder to offer examples.
+
+##Table of Contents
+
+* [Overview](/docs/tests/README.md)
+* [Codeception](/docs/tests/codeception.md)
+* [Jest](/docs/tests/jest.md)

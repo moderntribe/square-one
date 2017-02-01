@@ -2,6 +2,7 @@
 
 
 namespace Tribe\Project\Panels\Types;
+
 use ModularContent\PanelViewFinder;
 use ModularContent\TypeRegistry;
 use ModularContent\Fields;
@@ -15,7 +16,7 @@ abstract class Panel_Type_Config {
 	 * The post types for which this panel will be available.
 	 * Empty array (default) == all post types that support panels
 	 */
-	protected $post_types = array();
+	protected $post_types = [];
 
 	/** @var \Tribe\Project\Panels\Initializer */
 	protected $handler = null;
@@ -32,10 +33,10 @@ abstract class Panel_Type_Config {
 	abstract protected function panel();
 
 	protected function background_color_group( $name, $label = '', $default_color = 'white' ) {
-		return $this->handler->field( 'ImageSelect', array(
+		return $this->handler->field( 'ImageSelect', [
 			'label'   => $label,
 			'name'    => $name,
-			'options' => array(
+			'options' => [
 				'black'     => $this->handler->swatch_icon_url( 'black.png' ),
 				'red'       => $this->handler->swatch_icon_url( 'red.png' ),
 				'blue'      => $this->handler->swatch_icon_url( 'blue.png' ),
@@ -46,8 +47,8 @@ abstract class Panel_Type_Config {
 				'grey-warm' => $this->handler->swatch_icon_url( 'grey-warm.png' ),
 				'grey'      => $this->handler->swatch_icon_url( 'grey.png' ),
 				'white'     => $this->handler->swatch_icon_url( 'white.png' )
-			),
+			],
 			'default' => $default_color
-		) );
+		] );
 	}
 }

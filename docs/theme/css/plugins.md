@@ -15,3 +15,10 @@ By default they are all "active" or imported into our theme's CSS. If you do not
 project, they are implemented in a way that allows you to comment them out or delete them altogether.
 
 TODO: potentially add documentation to go over lazy embeds and such
+
+## Table of Contents
+
+* [PostCSS](/docs/theme/css/postcss.md)
+* [Grids](/docs/theme/css/grids.md)
+* [Plugins](/docs/theme/css/plugins.md)
+* [Forms](/docs/theme/css/forms.md)
