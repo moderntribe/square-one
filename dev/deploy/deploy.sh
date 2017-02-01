@@ -9,10 +9,10 @@ if [ ! -f ".wpengine/config/$environment.cfg" ]; then
     exit 1
 fi
 
+source ".wpengine/config/common.cfg"
 source ".wpengine/config/$environment.cfg"
 deploy_timestamp=`date +%Y%m%d%H%M%S`
 repo_version=${2:-$repo_version}
-src_repo="git@github.com:moderntribe/tuniversity.git"
 
 echo "Preparing to deploy $repo_version to $environment"
 
