@@ -1,0 +1,5 @@
+repo_version="server/staging"
+domain=""
+gitremote="git@git.wpengine.com:staging/tuniversity.git"
+slacktoken=""
+slackchannel=""

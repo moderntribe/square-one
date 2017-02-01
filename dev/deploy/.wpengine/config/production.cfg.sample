@@ -1,0 +1,5 @@
+repo_version="server/production"
+domain=""
+gitremote="git@git.wpengine.com:production/example.git"
+slacktoken=""
+slackchannel=""
