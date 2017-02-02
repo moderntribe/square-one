@@ -23,7 +23,7 @@ if [ -d .deploy/src ]; then
     git submodule update
     cd ../..
 else
-    git clone $src_repo .deploy/src
+    git clone $dev_repo .deploy/src
 fi
 
 cd .deploy/src
@@ -42,7 +42,7 @@ if [ -d .deploy/build ]; then
     git submodule update
     cd ../..
 else
-    git clone $gitremote .deploy/build
+    git clone $deploy_repo .deploy/build
 fi
 
 GIT_SSH_COMMAND="ssh -i .wpengine/ansible_rsa -F /dev/null"
@@ -55,9 +55,9 @@ if [ ! -d .git ]; then
 fi
 
 if git config "remote.$environment.url" > /dev/null; then
-    git remote set-url $environment $gitremote
+    git remote set-url $environment $deploy_repo
 else
-    git remote add $environment $gitremote
+    git remote add $environment $deploy_repo
 fi
 git config core.autocrlf false
 git fetch $environment
@@ -116,8 +116,13 @@ git commit --allow-empty -m "Deployment $deploy_timestamp"
 echo "pushing to $environment"
 git push $environment master
 
-curl -F channel="$slackchannel" -F token="$slacktoken" -F text="Finished deploying \`$repo_version\` to $environment" -F username="Deployment Bot" -F link_names=1 https://slack.com/api/chat.postMessage
-echo
+if [ -z "$slackchannel" ] || [ -z "$slacktoken" ]; then
+    echo "Skipping slack notification"
+else
+    curl -F channel="$slackchannel" -F token="$slacktoken" -F text="Finished deploying \`$repo_version\` to $environment" -F username="Deployment Bot" -F link_names=1 https://slack.com/api/chat.postMessage
+    echo
+fi
+
 
 
 echo "done"

@@ -1,5 +1,3 @@
 repo_version="server/staging"
 domain=""
-gitremote="git@git.wpengine.com:staging/example.git"
-slacktoken=""
-slackchannel=""
+deploy_repo="git@git.wpengine.com:staging/example.git"
