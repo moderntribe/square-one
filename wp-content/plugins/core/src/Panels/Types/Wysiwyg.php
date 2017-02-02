@@ -24,7 +24,7 @@ class Wysiwyg extends Panel_Type_Config {
 		$panel->set_thumbnail( $this->handler->thumbnail_url( 'module-wysiwyg.jpg' ) );
 
 		// Panel Layout
-		$panel->add_settings_field( $this->handler->field( 'ImageSelect', [
+		$panel->add_settings_field( new Fields\ImageSelect( [
 			'name'    => self::FIELD_LAYOUT,
 			'label'   => __( 'Layout', 'tribe' ),
 			'options' => [
@@ -35,7 +35,7 @@ class Wysiwyg extends Panel_Type_Config {
 		] ) );
 
 		/** @var Fields\Repeater $group */
-		$group = $this->handler->field( 'Repeater', [
+		$group = new Fields\Repeater( [
 			'label'            => __( 'Columns', 'tribe' ),
 			'name'             => self::FIELD_COLUMNS,
 			'min'              => 1,
@@ -43,7 +43,7 @@ class Wysiwyg extends Panel_Type_Config {
 			'new_button_label' => __( 'Add Column', 'tribe' )
 		] );
 
-		$group->add_field( $this->handler->field( 'TextArea', [
+		$group->add_field( new Fields\TextArea( [
 			'label'    => __( 'Column', 'tribe' ),
 			'name'     => self::FIELD_COLUMN,
 			'richtext' => true

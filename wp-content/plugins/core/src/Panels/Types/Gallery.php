@@ -23,13 +23,13 @@ class Gallery extends Panel_Type_Config {
 		$panel->set_thumbnail( $this->handler->thumbnail_url( 'module-gallery.png' ) );
 
 		// Panel Description
-		$panel->add_field( $this->handler->field( 'TextArea', [
+		$panel->add_field( new Fields\TextArea( [
 			'name'  => self::FIELD_CONTENT,
 			'label' => __( 'Description', 'tribe' ),
 		] ) );
 
 		// Image Treatment
-		$panel->add_settings_field( $this->handler->field( 'Radio', [
+		$panel->add_settings_field( new Fields\Radio( [
 			'label'   => __( 'Image Treatment', 'tribe' ),
 			'name'    => self::FIELD_IMAGE_TREATMENT,
 			'options' => [
@@ -40,7 +40,7 @@ class Gallery extends Panel_Type_Config {
 		] ) );
 
 		// ImageGallery
-		$panel->add_field( $this->handler->field( 'ImageGallery', [
+		$panel->add_field( new Fields\ImageGallery( [
 			'label' => __( 'Image Gallery', 'tribe' ),
 			'name'  => self::FIELD_GALLERY,
 		] ) );

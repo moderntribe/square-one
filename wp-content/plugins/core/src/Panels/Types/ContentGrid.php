@@ -30,7 +30,7 @@ class ContentGrid extends Panel_Type_Config {
 		$panel->set_thumbnail( $this->handler->thumbnail_url( 'module-contentgrid.png' ) );
 
 		// Panel Style
-		$panel->add_settings_field( $this->handler->field( 'ImageSelect', [
+		$panel->add_settings_field( new Fields\ImageSelect( [
 			'name'    => self::FIELD_LAYOUT,
 			'label'   => __( 'Style', 'tribe' ),
 			'options' => [
@@ -42,14 +42,14 @@ class ContentGrid extends Panel_Type_Config {
 		] ) );
 
 		// Panel Description
-		$panel->add_field( $this->handler->field( 'TextArea', [
+		$panel->add_field( new Fields\TextArea( [
 			'name'  => self::FIELD_CONTENT,
 			'label' => __( 'Description', 'tribe' ),
 		] ) );
 
 		// Grid Columns
 		/** @var Fields\Group $columns */
-		$columns = $this->handler->field( 'Repeater', [
+		$columns = new Fields\Repeater( [
 			'label'            => __( 'Content Blocks', 'tribe' ),
 			'name'             => self::FIELD_COLUMNS,
 			'min'              => 2,
@@ -58,26 +58,26 @@ class ContentGrid extends Panel_Type_Config {
 		] );
 
 		// Column Title
-		$columns->add_field( $this->handler->field( 'Text', [
+		$columns->add_field( new Fields\Text( [
 			'name'  => self::FIELD_COLUMN_TITLE,
 			'label' => __( 'Column Title', 'tribe' ),
 		] ) );
 
 		// Column Text
-		$columns->add_field( $this->handler->field( 'TextArea', [
+		$columns->add_field( new Fields\TextArea( [
 			'name'     => self::FIELD_COLUMN_TEXT,
 			'label'    => __( 'Column Text', 'tribe' ),
 			'richtext' => true
 		] ) );
 
 		// Column CTA Link
-		$columns->add_field( $this->handler->field( 'Link', [
+		$columns->add_field( new Fields\Link( [
 			'name'  => self::FIELD_COLUMN_CTA,
 			'label' => __( 'Call To Action Link', 'tribe' ),
 		] ) );
 
 		// Column CTA Link Style
-		$columns->add_field( $this->handler->field( 'ImageSelect', [
+		$columns->add_field( new Fields\ImageSelect( [
 			'name'    => self::FIELD_COLUMN_CTA_STYLE,
 			'label'   => __( 'Call To Action Link Style', 'tribe' ),
 			'options' => [

@@ -2,6 +2,8 @@
 
 namespace Tribe\Project\Panels\Types;
 
+use ModularContent\Fields;
+
 class ImageText extends Panel_Type_Config {
 
 	const NAME = 'imagetext';
@@ -30,7 +32,7 @@ class ImageText extends Panel_Type_Config {
 		$panel->set_thumbnail( $this->handler->thumbnail_url( 'module-imagetext.png' ) );
 
 		// Panel Layout
-		$panel->add_settings_field( $this->handler->field( 'ImageSelect', [
+		$panel->add_settings_field( new Fields\ImageSelect( [
 			'name'    => self::FIELD_LAYOUT,
 			'label'   => __( 'Layout', 'tribe' ),
 			'options' => [
@@ -43,14 +45,14 @@ class ImageText extends Panel_Type_Config {
 		] ) );
 
 		// Content
-		$panel->add_field( $this->handler->field( 'TextArea', [
+		$panel->add_field( new Fields\TextArea( [
 			'name'     => self::FIELD_CONTENT,
 			'label'    => __( 'Description', 'tribe' ),
 			'richtext' => true
 		] ) );
 
 		// Image
-		$panel->add_field( $this->handler->field( 'Image', [
+		$panel->add_field( new Fields\Image( [
 			'name'        => self::FIELD_IMAGE,
 			'label'       => __( 'Image', 'tribe' ),
 			'description' => __( 'Optimal image sizes: 1500 x 1125 for Left/Right Aligned layouts; 1500 x 844 for Boxed/Hero layouts.', 'tribe' ),
@@ -58,7 +60,7 @@ class ImageText extends Panel_Type_Config {
 		] ) );
 
 		// Image Overlay
-		$panel->add_settings_field( $this->handler->field( 'ImageSelect', [
+		$panel->add_settings_field( new Fields\ImageSelect( [
 			'name'        => 'overlay',
 			'label'       => __( 'Image Overlay', 'tribe' ),
 			'description' => __( 'Apply a color over the image to improve text visibility. Only applies to Boxed/Hero layouts.', 'tribe' ),
@@ -72,13 +74,13 @@ class ImageText extends Panel_Type_Config {
 		] ) );
 
 		// CTA Link
-		$panel->add_field( $this->handler->field( 'Link', [
+		$panel->add_field( new Fields\Link( [
 			'name'  => self::FIELD_CTA,
 			'label' => __( 'Call To Action Link', 'tribe' ),
 		] ) );
 
 		// CTA Link Style
-		$panel->add_settings_field( $this->handler->field( 'ImageSelect', [
+		$panel->add_settings_field( new Fields\ImageSelect( [
 			'name'    => self::FIELD_CTA_STYLE,
 			'label'   => __( 'Call To Action Link Style', 'tribe' ),
 			'options' => [

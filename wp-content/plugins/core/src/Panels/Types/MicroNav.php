@@ -2,6 +2,8 @@
 
 namespace Tribe\Project\Panels\Types;
 
+use ModularContent\Fields;
+
 class MicroNav extends Panel_Type_Config {
 
 	const NAME = 'micronav';
@@ -21,7 +23,7 @@ class MicroNav extends Panel_Type_Config {
 		$panel->set_thumbnail( $this->handler->thumbnail_url( 'module-micronav.jpg' ) );
 
 		// Panel Layout
-		$panel->add_settings_field( $this->handler->field( 'ImageSelect', [
+		$panel->add_settings_field( new Fields\ImageSelect( [
 			'name'    => self::FIELD_LAYOUT,
 			'label'   => __( 'Style', 'tribe' ),
 			'options' => [
@@ -32,13 +34,13 @@ class MicroNav extends Panel_Type_Config {
 		] ) );
 
 		// Optional Content
-		$panel->add_field( $this->handler->field( 'TextArea', [
+		$panel->add_field( new Fields\TextArea( [
 			'name'     => self::FIELD_CONTENT,
 			'label'    => __( 'Content', 'tribe' ),
 			'richtext' => true
 		] ) );
 
-		$panel->add_field( $this->handler->field( 'Post_List', [
+		$panel->add_field( new Fields\Post_List( [
 			'name'             => self::FIELD_ITEMS,
 			'label'            => __( 'Links', 'tribe' ),
 			'max'              => 12,
