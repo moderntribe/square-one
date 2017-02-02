@@ -30,7 +30,7 @@ class Wysiwyg extends Panel_Type_Config {
 		$panel->set_thumbnail( $this->handler->thumbnail_url( 'module-wysiwyg.png' ) );
 
 		// Panel Layout
-		$panel->add_settings_field( $this->handler->field( 'ImageSelect', [
+		$panel->add_settings_field( new Fields\ImageSelect( [
 			'name'    => self::FIELD_LAYOUT,
 			'label'   => __( 'Layout', 'tribe' ),
 			'options' => [
@@ -41,7 +41,7 @@ class Wysiwyg extends Panel_Type_Config {
 		] ) );
 
 		/** @var Fields\Repeater $group */
-		$group = $this->handler->field( 'Repeater', [
+		$group = new Fields\Repeater( [
 			'label'            => __( 'Columns', 'tribe' ),
 			'name'             => self::FIELD_COLUMNS,
 			'min'              => 1,
@@ -49,7 +49,7 @@ class Wysiwyg extends Panel_Type_Config {
 			'new_button_label' => __( 'Add Column', 'tribe' )
 		] );
 
-		$group->add_field( $this->handler->field( 'TextArea', [
+		$group->add_field( new Fields\TextArea( [
 			'label'    => __( 'Column', 'tribe' ),
 			'name'     => self::FIELD_COLUMN,
 			'richtext' => true
@@ -63,8 +63,6 @@ class Wysiwyg extends Panel_Type_Config {
 ```
 
 Also note in this field that a "settings" field was added. The panel ui is separated into content and settings as soon as you use even one of these. This is makes the panel separate content and complex settings thereby reducing clutter. 
-
-Please use the helper function `$this->handler->field( 'FIELD_NAME', [...options] )` to add a field. 
 
 Refer to `/wp-content/plugins/panel-builder/readme.md#fields` for a list of all field types and their behavior.
 
