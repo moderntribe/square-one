@@ -15,18 +15,18 @@
   * [Image Handling](/docs/theme/images.md)
   * [Fonts](/docs/theme/fonts.md)
   * [Icons](/docs/theme/icons.md)
-* Css
-  * [Overview](/docs/theme/css/README.md)
-  * [PostCSS](/docs/theme/css/postcss.md)
-  * [Grids](/docs/theme/css/grids.md)
-  * [Plugins](/docs/theme/css/plugins.md)
-  * [Forms](/docs/theme/css/forms.md)
-* Javascript
-  * [Overview](/docs/theme/js/README.md)
-  * [Selectors](/docs/theme/js/selectors.md)
-  * [Events](/docs/theme/js/events.md)
-  * [Jquery](/docs/theme/js/jquery.md)
-* Tests and Code Quality
-  * [Overview](/docs/tests/README.md)
-  * [Codeception](/docs/tests/codeception.md)
-  * [Jest](/docs/tests/jest.md)
+  * CSS
+    * [Overview](/docs/theme/css/README.md)
+    * [PostCSS](/docs/theme/css/postcss.md)
+    * [Grids](/docs/theme/css/grids.md)
+    * [Plugins](/docs/theme/css/plugins.md)
+    * [Forms](/docs/theme/css/forms.md)
+  * Javascript
+    * [Overview](/docs/theme/js/README.md)
+    * [Selectors](/docs/theme/js/selectors.md)
+    * [Events](/docs/theme/js/events.md)
+    * [Jquery](/docs/theme/js/jquery.md)
+  * Tests and Code Quality
+    * [Overview](/docs/tests/README.md)
+    * [Codeception](/docs/tests/codeception.md)
+    * [Jest](/docs/tests/jest.md)
