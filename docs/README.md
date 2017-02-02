@@ -26,7 +26,7 @@
     * [Selectors](/docs/theme/js/selectors.md)
     * [Events](/docs/theme/js/events.md)
     * [Jquery](/docs/theme/js/jquery.md)
-  * Tests and Code Quality
-    * [Overview](/docs/tests/README.md)
-    * [Codeception](/docs/tests/codeception.md)
-    * [Jest](/docs/tests/jest.md)
+* Tests and Code Quality
+  * [Overview](/docs/tests/README.md)
+  * [Codeception](/docs/tests/codeception.md)
+  * [Jest](/docs/tests/jest.md)
