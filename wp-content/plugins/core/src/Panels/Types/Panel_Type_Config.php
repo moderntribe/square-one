@@ -33,7 +33,7 @@ abstract class Panel_Type_Config {
 	abstract protected function panel();
 
 	protected function background_color_group( $name, $label = '', $default_color = 'white' ) {
-		return $this->handler->field( 'ImageSelect', [
+		return new Fields\ImageSelect( [
 			'label'   => $label,
 			'name'    => $name,
 			'options' => [
