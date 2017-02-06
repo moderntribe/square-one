@@ -3,7 +3,21 @@
 SCRIPTDIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 cd "$SCRIPTDIR";
 
-environment="$1"
+environment=$1; shift
+forceyes=false
+branch=server/$environment
+
+while getopts "b:y" opt; do
+    case "$opt" in
+        b)
+            branch=$OPTARG
+            ;;
+        y)
+            forceyes=true
+            ;;
+    esac
+done
+
 if [ ! -f ".wpengine/config/$environment.cfg" ]; then
     echo "Unknown environment: $environment"
     exit 1
@@ -12,9 +26,8 @@ fi
 source ".wpengine/config/common.cfg"
 source ".wpengine/config/$environment.cfg"
 deploy_timestamp=`date +%Y%m%d%H%M%S`
-repo_version=${2:-$repo_version}
 
-echo "Preparing to deploy $repo_version to $environment"
+echo "Preparing to deploy $branch to $environment"
 
 if [ -d .deploy/src ]; then
     cd .deploy/src
@@ -28,8 +41,8 @@ fi
 
 cd .deploy/src
 git reset --hard HEAD
-git checkout $repo_version
-git pull origin $repo_version
+git checkout $branch
+git pull origin $branch
 git submodule update --init --recursive
 commit_hash=$(git rev-parse HEAD)
 cd ../..
@@ -102,14 +115,13 @@ cd .deploy/build
 mv .wpengine.htaccess .htaccess
 git add -Av
 
-read -p "Ready to deploy $repo_version to $environment. Have you made a backup? [Y/n]" -n 1 -r
-echo
-if [ -z "$REPLY" ]; then
-    REPLY="y"
-fi
-if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-    echo "Aborting..."
-    exit 1
+if [ $forceyes == false ]; then
+    read -p "Ready to deploy $branch to $environment. Have you made a backup? [Y/n] " yn
+    case $yn in
+        [Yy]* ) ;;
+        [Nn]* ) exit;;
+        * ) exit;;
+    esac
 fi
 
 git commit --allow-empty -m "Deployment $deploy_timestamp"
@@ -119,10 +131,8 @@ git push $environment master
 if [ -z "$slackchannel" ] || [ -z "$slacktoken" ]; then
     echo "Skipping slack notification"
 else
-    curl -F channel="$slackchannel" -F token="$slacktoken" -F text="Finished deploying \`$repo_version\` to $environment" -F username="Deployment Bot" -F link_names=1 https://slack.com/api/chat.postMessage
+    curl -F channel="$slackchannel" -F token="$slacktoken" -F text="Finished deploying \`$branch\` to $environment" -F username="Deployment Bot" -F link_names=1 https://slack.com/api/chat.postMessage
     echo
 fi
-
-
 
 echo "done"
