@@ -1,3 +1,2 @@
-repo_version="server/production"
 domain=""
 deploy_repo="git@git.wpengine.com:production/example.git"
