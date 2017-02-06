@@ -24,7 +24,13 @@ ansible-vault --vault-password-file=.vaultpass decrypt .wpengine/config/producti
 You can optionally specify a branch name (defaults to server/staging or server/production, as appropriate). E.g.:
 
 ```
-./deploy.sh staging sprint/1
+./deploy.sh staging -b sprint/1
+```
+
+You can also run this script forcing a "yes" answer to any questions:
+
+```
+./deploy.sh staging -b sprint/1 -y
 ```
 
 This will ask you for an ssh key passphrase that most platforms can save after entering it the first time.  You can find the passphrase in `.wpengine/ansible_rsa_password`.
