@@ -17,3 +17,24 @@ For accessible usage of font icons [see here](http://fontawesome.io/accessibilit
 * Overwrite all files in `/dev_components/theme/icons/core` with this new kit
 * Copy the files from `/dev_components/theme/icons/core/fonts` to `/wp-content/themes/core/fonts/icons-core`
 * Update `/wp-content/themes/core/pcss/base/_icons.pcss` with new values from `/dev_components/theme/icons/core/style.css`
+
+## Table of Contents
+
+* Theme
+  * [Overview](/docs/theme/README.md)
+  * [Markup and Style](/docs/theme/markup-and-style.md)
+  * [Accessibility](/docs/theme/accessbility.md)
+  * [Image Handling](/docs/theme/images.md)
+  * [Fonts](/docs/theme/fonts.md)
+  * [Icons](/docs/theme/icons.md)
+  * CSS
+    * [Overview](/docs/theme/css/README.md)
+    * [PostCSS](/docs/theme/css/postcss.md)
+    * [Grids](/docs/theme/css/grids.md)
+    * [Plugins](/docs/theme/css/plugins.md)
+    * [Forms](/docs/theme/css/forms.md)
+  * Javascript
+    * [Overview](/docs/theme/js/README.md)
+    * [Selectors](/docs/theme/js/selectors.md)
+    * [Events](/docs/theme/js/events.md)
+    * [Jquery](/docs/theme/js/jquery.md)
