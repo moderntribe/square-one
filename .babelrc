@@ -1,4 +1,16 @@
 {
-  "presets": ["es2015","stage-0","react"],
-  "plugins": ["lodash","transform-object-rest-spread","transform-object-assign"]
+  "presets": [
+    ["env", {
+      "targets": {
+        "browsers": ["last 3 versions", "safari >= 7", "ie >= 11"]
+      },
+      "useBuiltIns": true
+    }]
+  ],
+  "plugins": ["lodash","transform-object-rest-spread","transform-object-assign"],
+  "env": {
+    "test": {
+      "plugins": ["istanbul"]
+    }
+  }
 }

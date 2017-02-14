@@ -43,6 +43,7 @@
  * ----------------------------------------------------------------------------- */
 
 @define-mixin form-control-placeholder {
+
 	::-webkit-input-placeholder {
 		@mixin-content;
 	}
@@ -94,6 +95,7 @@
 	&:hover,
 	&:focus,
 	&:active {
+
 		&:after {
 			background-color: var(--form-control-select-ui-bgd-color-hover);
 		}
@@ -217,7 +219,9 @@
  * ----------------------------------------------------------------------------- */
 
 @define-mixin form-control-checkbox {
+
 	label {
+
 		&:before {
 			border-radius: var(--form-control-checkbox-ui-border-radius);
 		}
@@ -242,7 +246,9 @@
  * ----------------------------------------------------------------------------- */
 
 @define-mixin form-control-radio {
+
 	label {
+
 		&:before,
 		&:after {
 			border-radius: 50%;

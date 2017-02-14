@@ -6,7 +6,7 @@
 import _ from 'lodash';
 
 import { trigger } from '../events';
-import { convertElements, isNodelist } from '../tools';
+import { convertElements } from '../tools';
 
 const scrollspy = (options) => {
 	const defaults = {
@@ -28,19 +28,13 @@ const scrollspy = (options) => {
 		return;
 	}
 
-	let elements = [];
+	const elements = convertElements(opts.elements);
 
-	if (isNodelist(opts.elements)) {
-		elements = convertElements(opts.elements);
-	} else {
-		elements.push(opts.elements);
-	}
-
-	let leaves;
 	const o = opts;
 	const mode = o.mode;
 	const buffer = o.buffer;
-	let enters = leaves = 0;
+	let enters = 0;
+	let leaves = enters;
 	let inside = false;
 
 	elements.forEach((element) => {

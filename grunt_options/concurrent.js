@@ -16,9 +16,6 @@ module.exports = {
 			'eslint',
 		],
 		[
-			'mochacli:all',
-		],
-		[
 			'postcss:themeLint',
 		],
 		[
@@ -53,6 +50,8 @@ module.exports = {
 			'copy:themeJS',
 			'webpack:themeProd',
 			'uglify:themeMin',
+			'concat:themeMinVendors',
+			'clean:themeMinVendorJS'
 		],
 		'setPHPConstant',
 	],

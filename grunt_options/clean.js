@@ -12,6 +12,11 @@ module.exports = {
 	],
 
 	themeMinJS: [
-		'<%= pkg._corethemepath %>/js/dist/*.js',
-	]
+		'<%= pkg._corethemepath %>/js/dist/*.min.js',
+	],
+
+	themeMinVendorJS: [
+		'<%= pkg._corethemepath %>/js/dist/vendorGlobal.min.js',
+		'<%= pkg._corethemepath %>/js/dist/vendorWebpack.min.js'
+	],
 };

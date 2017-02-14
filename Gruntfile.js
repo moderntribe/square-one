@@ -93,15 +93,21 @@ module.exports = function (grunt) {
 		]);
 
 	grunt.registerTask(
+		'cheat', [
+			'shell:install',
+			'concurrent:dist',
+		]);
+
+	grunt.registerTask(
 		'dist', [
-			'auto_install:main',
+			'shell:install',
+			'shell:test',
 			'concurrent:preflight',
 			'concurrent:dist',
 		]);
 
 	grunt.registerTask(
 		'dev', [
-			'auto_install:main',
 			'browserSync',
 			'watch',
 		]);
