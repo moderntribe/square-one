@@ -13,7 +13,6 @@ var compileOptions = {
 		require('postcss-partial-import')({
 			extension: ".pcss",
 		}),
-		require('postcss-inline-comment'),
 		require('postcss-mixins'),
 		require('postcss-custom-properties'),
 		require('postcss-simple-vars'),

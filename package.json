@@ -77,7 +77,6 @@
     "postcss-custom-media": "^5.0.1",
     "postcss-custom-properties": "^5.0.1",
     "postcss-functions": "^2.1.1",
-    "postcss-inline-comment": "^3.0.0",
     "postcss-inline-svg": "^2.3.0",
     "postcss-mixins": "^5.4.0",
     "postcss-nested": "^1.0.0",
