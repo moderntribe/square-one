@@ -209,17 +209,16 @@ class Image {
 	 */
 	private function get_srcset_attribute() {
 
-		$attribute = '';
-		$i = 1;
-		$length = count( $this->options[ 'srcset_sizes' ] );
+		$attribute = [];
 		foreach ( $this->options[ 'srcset_sizes' ] as $size ) {
 			$src = wp_get_attachment_image_src( $this->image_id, $size );
-			$divider = $i === $length ? '' : ',';
-			$attribute .= sprintf( '%s %dw %dh %s', $src[ 0 ], $src[ 1 ], $src[ 2 ], $divider ) . "\n";
-			$i++;
+			// Don't add nonexistent intermediate sizes to the src_set. It ends up being the full-size URL.
+			if( 'full' !== $size && true == $src[3] ) {
+				$attribute[] = sprintf( '%s %dw %dh', $src[0], $src[1], $src[2] );
+			}
 		}
 
-		return $attribute;
+		return implode( ", \n", $attribute );
 	}
 
 }
