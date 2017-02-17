@@ -213,7 +213,7 @@ class Image {
 		foreach ( $this->options[ 'srcset_sizes' ] as $size ) {
 			$src = wp_get_attachment_image_src( $this->image_id, $size );
 			// Don't add nonexistent intermediate sizes to the src_set. It ends up being the full-size URL.
-			if( 'full' !== $size && true == $src[3] ) {
+			if( 'full' !== $size && true === $src[3] ) {
 				$attribute[] = sprintf( '%s %dw %dh', $src[0], $src[1], $src[2] );
 			}
 		}
