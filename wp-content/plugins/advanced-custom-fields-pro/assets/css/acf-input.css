@@ -3,6 +3,9 @@
 *	vars
 *
 *--------------------------------------------------------------------------------------------*/
+/* colors */
+/* acf-field */
+/* responsive */
 /*--------------------------------------------------------------------------------------------
 *
 *	acf-field
@@ -21,6 +24,11 @@
   /* input */
   /* error */
 }
+.acf-field p.description {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
 .acf-field .acf-label {
   vertical-align: top;
   margin: 0 0 10px;
@@ -28,21 +36,14 @@
 .acf-field .acf-label label {
   display: block;
   font-weight: bold;
-  font-size: 13px;
-  line-height: 1.4em;
   margin: 0 0 3px;
-}
-.acf-field .acf-label p {
-  color: #777777;
-  display: block;
-  font-size: 12px;
-  line-height: 1.4em;
-  font-style: normal;
-  margin: 3px 0 0 !important;
-  padding: 0 !important;
+  padding: 0;
 }
 .acf-field .acf-input {
   vertical-align: top;
+}
+.acf-field .acf-input > p.description {
+  margin-top: 5px;
 }
 .acf-field .acf-error-message {
   background: #F55E4F;
@@ -494,9 +495,6 @@ html[dir="rtl"] input.acf-is-prepended.acf-is-appended {
   margin: 0;
   padding: 5px 5px 5px 7px;
 }
-.select2-container.-acf .select2-search-choice-close {
-  margin-top: -1px;
-}
 .select2-container.-acf .select2-choice {
   border-color: #BBBBBB;
 }
@@ -516,6 +514,17 @@ html[dir="rtl"] input.acf-is-prepended.acf-is-appended {
 .select2-container.-acf.select2-dropdown-open .select2-choice {
   background: #fff;
   border-color: #5B9DD9;
+}
+/* rtl */
+html[dir="rtl"] .select2-container.-acf .select2-search-choice-close {
+  left: 24px;
+}
+html[dir="rtl"] .select2-container.-acf .select2-choice > .select2-chosen {
+  margin-left: 42px;
+}
+html[dir="rtl"] .select2-container.-acf .select2-choice .select2-arrow {
+  padding-left: 0;
+  padding-right: 1px;
 }
 /* description */
 .select2-drop {
@@ -559,6 +568,8 @@ ul.acf-checkbox-list {
   position: relative;
   padding: 1px;
   margin: 0;
+  /* hl */
+  /* rtl */
 }
 ul.acf-radio-list li,
 ul.acf-checkbox-list li {
@@ -567,38 +578,165 @@ ul.acf-checkbox-list li {
   margin: 0;
   position: relative;
   word-wrap: break-word;
-}
-ul.acf-hl.acf-radio-list li,
-ul.acf-hl.acf-checkbox-list li {
-  margin-right: 20px;
-  clear: none;
-}
-ul.acf-radio-list li input,
-ul.acf-checkbox-list li input {
-  margin: -1px 4px 0 0;
-  vertical-align: middle;
+  /* attachment sidebar fix*/
 }
 ul.acf-radio-list li label,
 ul.acf-checkbox-list li label {
   display: inline;
+}
+ul.acf-radio-list li input[type="checkbox"],
+ul.acf-checkbox-list li input[type="checkbox"],
+ul.acf-radio-list li input[type="radio"],
+ul.acf-checkbox-list li input[type="radio"] {
+  margin: -1px 4px 0 0;
+  vertical-align: middle;
+}
+ul.acf-radio-list li input[type="text"],
+ul.acf-checkbox-list li input[type="text"] {
+  width: auto;
+  vertical-align: middle;
   margin: 2px 0;
 }
-ul.acf-radio-list li input[type="text"] {
-  width: auto;
-}
-/* attachment sidebar fix*/
 ul.acf-radio-list li span,
 ul.acf-checkbox-list li span {
   float: none;
 }
-/* rtl */
-html[dir="rtl"] ul.acf-radio-list li input,
-html[dir="rtl"] ul.acf-checkbox-list li input {
+ul.acf-radio-list.acf-hl li,
+ul.acf-checkbox-list.acf-hl li {
+  margin-right: 20px;
+  clear: none;
+}
+html[dir="rtl"] ul.acf-radio-list input[type="checkbox"],
+html[dir="rtl"] ul.acf-checkbox-list input[type="checkbox"],
+html[dir="rtl"] ul.acf-radio-list input[type="radio"],
+html[dir="rtl"] ul.acf-checkbox-list input[type="radio"] {
   margin-left: 4px;
   margin-right: 0;
   padding: 0;
   margin: 0;
 }
+/*---------------------------------------------------------------------------------------------
+*
+*  Checkbox
+*
+*---------------------------------------------------------------------------------------------*/
+.acf-checkbox-list .button {
+  margin: 10px 0 0;
+}
+/*---------------------------------------------------------------------------------------------
+*
+*  True / False
+*
+*---------------------------------------------------------------------------------------------*/
+.acf-switch {
+  display: inline-block;
+  border-radius: 5px;
+  cursor: pointer;
+  position: relative;
+  background: #f1f1f1;
+  height: 30px;
+  vertical-align: middle;
+  box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.1);
+  -webkit-transition: background 0.25s ease;
+  -moz-transition: background 0.25s ease;
+  -o-transition: background 0.25s ease;
+  transition: background 0.25s ease;
+  /* hover */
+  /* active */
+  /* focus */
+  /* message */
+}
+.acf-switch span {
+  display: inline-block;
+  float: left;
+  text-align: center;
+  font-size: 13px;
+  line-height: 22px;
+  padding: 4px 10px;
+  min-width: 15px;
+}
+.acf-switch span i {
+  vertical-align: middle;
+}
+.acf-switch .acf-switch-on {
+  color: #fff;
+  text-shadow: #1f7db1 0 1px 0;
+}
+.acf-switch .acf-switch-slider {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  bottom: 3px;
+  right: 50%;
+  z-index: 1;
+  background: #fff;
+  border-radius: 3px;
+  border: #ccc solid 1px;
+  -webkit-transition: all 0.25s ease;
+  -moz-transition: all 0.25s ease;
+  -o-transition: all 0.25s ease;
+  transition: all 0.25s ease;
+}
+.acf-switch:hover {
+  background: #eeeeee;
+}
+.acf-switch.-on {
+  background: #2a9bd9;
+}
+.acf-switch.-on .acf-switch-slider {
+  left: 50%;
+  right: 3px;
+  border-color: #1f7db1;
+}
+.acf-switch.-focus .acf-switch-slider {
+  border-color: #5b9dd9;
+  box-shadow: 0 0 2px rgba(30, 140, 190, 0.5);
+}
+.acf-switch.-focus.-on .acf-switch-slider {
+  border-color: #185e85;
+  box-shadow: 0 0 2px #1f7db1;
+}
+.acf-switch + span {
+  margin-left: 6px;
+}
+/* checkbox */
+.acf-switch-input {
+  opacity: 0;
+  position: absolute;
+  margin: 0;
+}
+/*
+.acf-field[data-name="alt"] .acf-switch {
+	background: #fff;
+	border: #dddddd solid 1px;
+	height: 30px;
+	
+	span {
+		padding: 3px 10px;
+	}
+	
+	.acf-switch-slider { 
+		background: #f9f9f9;
+		border: #bbbbbb solid 1px;
+		box-shadow: none;
+		margin: 3px;
+	}
+	
+	
+	&.-on {
+		border-color: #2c91fc;
+		background: @acf_blue_input2;
+		
+		.acf-switch-slider {
+			background: #fff;
+			border-color: darken(@acf_blue_input2, 20%);
+			margin-left: -4px;
+		}
+	}
+
+	
+}
+*/
 /*--------------------------------------------------------------------------
 *
 *	Google Map
@@ -870,6 +1008,20 @@ html[dir="rtl"] .acf-relationship .selection .values .acf-icon {
 *	WYSIWYG
 *	
 *-------------------------------------------------------------------------*/
+.acf-editor-wrap {
+  /* delay */
+}
+.acf-editor-wrap.delay .acf-editor-toolbar {
+  content: "";
+  display: block;
+  background: #f5f5f5;
+  border-bottom: #dddddd solid 1px;
+  color: #555d66;
+  padding: 10px;
+}
+.acf-editor-wrap.delay textarea {
+  padding: 10px;
+}
 .acf-editor-wrap iframe {
   min-height: 200px;
 }
@@ -1536,18 +1688,21 @@ html[dir="rtl"] .acf-taxonomy-field[data-type="select"] .acf-icon {
   float: left;
 }
 .media-modal .compat-attachment-fields > tbody > .acf-field > .acf-label > label {
-  padding-top: 7px;
-  margin: 5px 0 0;
+  padding-top: 6px;
+  margin: 0;
   color: #666666;
   font-weight: 400;
   line-height: 16px;
 }
 .media-modal .compat-attachment-fields > tbody > .acf-field > .acf-input {
   width: 65%;
-  margin: 5px 0 0;
+  margin: 0;
   padding: 0;
   float: right;
   display: block;
+}
+.media-modal .compat-attachment-fields > tbody > .acf-field p.description {
+  margin: 0;
 }
 /* restricted selection (copy of WP .upload-errors)*/
 .acf-selection-error {
@@ -1587,8 +1742,7 @@ html[dir="rtl"] .acf-taxonomy-field[data-type="select"] .acf-icon {
   /* fix % margin which causes .acf-uploadedTo to drop down below select */
   /* allow line breaks in upload error */
   /* fix required span */
-  /* Sidebar: Collapse */
-  /* Create gallery fix */
+  /* sidebar */
   /* mobile md */
 }
 .media-modal .compat-field-acf-form-data,
@@ -1616,28 +1770,8 @@ html[dir="rtl"] .acf-taxonomy-field[data-type="select"] .acf-icon {
   float: none !important;
   color: #f00 !important;
 }
-.media-modal .compat-item .label {
-  margin: 0;
-}
-.media-modal .media-sidebar .setting span,
-.media-modal .compat-item label span,
-.media-modal .media-sidebar .setting input,
-.media-modal .media-sidebar .setting textarea,
-.media-modal .compat-item .field {
-  min-height: 0;
-  margin: 5px 0 0;
-}
-.media-modal .media-sidebar .setting span,
-.media-modal .compat-item label span {
-  padding-top: 7px;
-}
-.media-modal .attachment-display-settings .setting span {
-  margin-top: 0;
-  margin-right: 3%;
-}
-.media-modal .media-modal .media-sidebar .collection-settings .setting span {
-  padding-top: 8px;
-  margin: 0 10px 0 0;
+.media-modal .media-sidebar .compat-item {
+  padding-bottom: 20px;
 }
 @media (max-width: 900px) {
   .media-modal {
@@ -1833,8 +1967,8 @@ body.major-4 .acf-media-modal.-edit .media-frame-content {
 }
 .acf-media-modal.-edit .media-sidebar {
   padding: 0 16px;
-  /* reposition thumbnail */
-  /* add missing padding below fields */
+  /* WP details */
+  /* ACF fields */
 }
 .acf-media-modal.-edit .media-sidebar .attachment-details {
   overflow: visible;
@@ -1855,14 +1989,21 @@ body.major-4 .acf-media-modal.-edit .media-frame-content {
 .acf-media-modal.-edit .media-sidebar .attachment-details .thumbnail {
   margin: 0 16px 0 0;
 }
-.acf-media-modal.-edit .media-sidebar .attachment-details label {
+.acf-media-modal.-edit .media-sidebar .attachment-details .setting {
   display: block;
   overflow: hidden;
   float: none;
   width: auto;
+  margin: 0 0 5px;
 }
-.acf-media-modal.-edit .media-sidebar .compat-item {
-  padding-bottom: 16px;
+.acf-media-modal.-edit .media-sidebar .attachment-details .setting span {
+  margin: 0;
+}
+.acf-media-modal.-edit .media-sidebar .compat-attachment-fields > tbody > .acf-field {
+  margin: 0 0 5px;
+}
+.acf-media-modal.-edit .media-sidebar .compat-attachment-fields > tbody > .acf-field p.description {
+  margin-top: 3px;
 }
 @media (max-width: 900px) {
   .acf-media-modal.-edit {
@@ -1961,11 +2102,19 @@ p.submit .acf-spinner {
 *	Widget
 *
 *--------------------------------------------------------------------------------------------*/
+#widgets-right .widget .acf-field .description {
+  padding-left: 0;
+  padding-right: 0;
+}
+.widget .acf-field {
+  margin: 1em 0;
+}
 .widget .acf-field .acf-label {
-  margin: 0;
+  margin-bottom: 5px;
 }
 .widget .acf-field .acf-label label {
   font-weight: normal;
+  margin: 0;
 }
 .widget .widget-inside > form > .acf-error-message {
   margin-top: 15px;

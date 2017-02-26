@@ -91,7 +91,8 @@ class Oembed_Filter {
 	 * Add wrapper around embeds to setup CSS for embed aspect ratios
 	 */
 	public function wrap_oembed_shortcode_output( $html, $url, $attr, $post_id ) {
-		return sprintf( '<div class="wp-embed"><div class="wp-embed-wrap">%s</div></div>', $html );
+		$class_embed = strpos( $url, 'youtube' ) === false || strpos( $url, 'vimeo' ) === false ? ' wp-embed--lazy' : ' wp-embed--no-lazy';
+		return sprintf( '<div class="wp-embed%s"><div class="wp-embed-wrap">%s</div></div>', $class_embed, $html );
 	}
 
 

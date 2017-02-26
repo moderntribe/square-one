@@ -3,8 +3,8 @@ Contributors: ovann86
 Donate link: http://www.itsupportguides.com/
 Tags: gravity forms, wcag, accessibility, usability
 Requires at least: 4.1
-Tested up to: 4.5.1
-Stable tag: 1.4.6
+Tested up to: 4.7.0
+Stable tag: 1.5.1
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,16 +12,14 @@ Modifies Gravity Forms form fields and improves validation so that forms meet WC
 
 == Description ==
 
-> This plugin is an add-on for the <a href="https://www.e-junkie.com/ecom/gb.php?cl=54585&c=ib&aff=299380" target="_blank">Gravity Forms</a> plugin. If you haven't already bought Gravity Forms <a href="https://www.e-junkie.com/ecom/gb.php?cl=54585&c=ib&aff=299380" target="_blank">buy one now</a>!
-
-Modifies form fields and improves validation so that forms meet WCAG 2.0 accessibility requirements.
+> This plugin is an add-on for the <a href="https://www.e-junkie.com/ecom/gb.php?cl=54585&c=ib&aff=299380" target="_blank">Gravity Forms</a> (affiliate link) plugin. If you don't yet own a license for Gravity Forms - <a href="https://www.e-junkie.com/ecom/gb.php?cl=54585&c=ib&aff=299380" target="_blank">buy one now</a>! (affiliate link)
 
 **What does this plugin do?**
 
 * Wraps radio, checkbox and list (repeater) fields in a fieldset.
 * Improves form validation by displaying an on-page message that describes how many errors there were in the page. The message contains a list of the form fields with the errors, a description of the error and a link to the field.
 * Adds aria-describedby attributes for date and website fields - providing clear instructions for screen reader users of what format is required for the field.
-* Adds HTML5 'required' attribute and aria-required='true' for required fields
+* Adds aria-required='true' for required fields
 * Adds aria-describedby attributes for fields that have failed validation - providing clear instructions for screen reader users of what the field error is. Description used is the default validation message for the field, or if set, the validation message for the field.
 * Disables the Gravity Forms configured tabindex - this stops users from being able to tab between fields and on-page links.
 * Changes links in the form body, such as field descriptions or HTML fields, so they open in a new window. A title is added or appended to any existing title for screen reader users which reads 'this link will open in a new window'.
@@ -86,7 +84,7 @@ I'm concerned it would have a negative consequence on SEO, because:
 1. Search engines may down-rate your website, thinking you're attempting the black hat practice of stuffing a page with keywords that may not have any relevance to the content. 
 2. Search engines may index the links with the hidden text. For example, 'document title this link will open in a new window' instead of 'document title'.
 
-I'm willing to be convinced otherwise. But my goal is to make a Gravity Form as accessible for everyone - which needs to take into account how it affects search engines.
+I'm willing to be convinced otherwise. But my goal is to make a Gravity Form accessible for everyone - which needs to take into account how it affects search engines.
 
 **How is the plugin tested**
 
@@ -116,6 +114,15 @@ With that said, if you want to disable it you can add this code to your theme's 
 2. Shows list field with 'buttons' instead of images to add and delete rows - buttons are styled like the previous images but are keyboard accessible. 
 
 == Changelog ==
+
+= 1.5.1 =
+* Fix: resolve issue with radio field 'other' option displaying inconsistently.
+* Fix: resolve issue with validation (error) message not correctly display the number and list of failed fields.
+
+= 1.5.0 =
+* Maintenance: Updates for Gravity Forms 2+
+* Maintenance: Move JavaScript from footer to separate file
+* Maintenance: Add minified copies of JavaScript and CSS files
 
 = 1.4.6 =
 * Fix: Add support for left and right label placement

@@ -1,15 +1,31 @@
 .wp-embed {
-	-webkit-column-break-inside: avoid;
 	break-inside: avoid-column;
-	.t-typography & {
+
+	.t-content & {
 		margin: var(--spacer-lg) auto;
+		max-width: none;
 	}
+}
+
+/* CASE: Lazyloaded embed */
+.wp-embed--lazy {
+
+}
+
+/* CASE: Non-lazyloaded embed */
+.wp-embed--no-lazy {
+
 }
 
 .wp-embed-wrap {
 	position: relative;
-	aspect-ratio: '16:9';
-	overflow: hidden;
+
+	/* CASE: Non-lazyloaded embed */
+	.wp-embed--no-lazy & {
+		aspect-ratio: '16:9';
+		overflow: hidden;
+	}
+
 	iframe,
 	object,
 	embed {

@@ -1,0 +1,2 @@
+domain=""
+deploy_repo="git@git.wpengine.com:staging/example.git"

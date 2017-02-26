@@ -7,20 +7,22 @@
 .gf-time {
 
 	&.field_sublabel_above {
+
 		.clear-multi {
 			@media (--viewport-medium) {
 				margin-top: var(--gf-control-time-date-margin-bottom);
 			}
 		}
 	}
+
 	&.field_sublabel_below {
+
 		.clear-multi {
 			@media (--viewport-medium) {
 				margin-bottom: var(--gf-control-time-date-margin-bottom);
 			}
 		}
 	}
-
 }
 
 .gf-date,
@@ -28,8 +30,10 @@
 
 	.clear-multi {
 		@mixin clearfix;
+
 		.ginput_container {
 			display: block;
+
 			label {
 				@mixin form-control-helper;
 			}
@@ -40,7 +44,6 @@
 			}
 		}
 	}
-
 }
 
 .gfield_date_dropdown_month,
@@ -48,11 +51,13 @@
 .gfield_date_dropdown_year,
 .gfield_time_ampm {
 	@mixin form-control-select;
+
 	max-width: var(--gf-control-time-date-max-width);
 
 	@media (--viewport-medium) {
 		max-width: none;
 	}
+
 	&:after {
 		top: auto;
 		bottom: 1px;
@@ -67,6 +72,7 @@
 	/* Layout: Datepicker */
 	&.gf-date-layout-datepicker {
 		max-width: var(--gf-control-date-max-width);
+
 		.ginput_container {
 			position: relative;
 
@@ -104,6 +110,7 @@
 .gfield_date_dropdown_month,
 .gfield_date_dropdown_day,
 .gfield_date_dropdown_year {
+
 	& ~ * {
 		margin-top: var(--gf-control-date-margin-top);
 
@@ -115,6 +122,7 @@
 
 .gfield_date_dropdown_month,
 .gfield_date_dropdown_day {
+
 	&:after {
 		@media (--viewport-medium) {
 			right: var(--gf-control-date-position-right);
@@ -127,7 +135,9 @@
  * ----------------------------------------------------------------------------- */
 
 .gf-time {
+
 	.gfield_time_hour {
+
 		i {
 			display: none;
 		}

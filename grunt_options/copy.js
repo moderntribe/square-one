@@ -29,5 +29,5 @@ module.exports = {
 				dest: '<%= pkg._corethemepath %>/js/vendor/',
 			},
 		],
-	},
+	}
 };

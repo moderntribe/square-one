@@ -29,6 +29,7 @@
  * ----------------------------------------------------------------------------- */
 
 input {
+
 	&[type="radio"],
 	&[type="checkbox"] {
 		margin-bottom: 0;
@@ -38,6 +39,7 @@ input {
 .form-control-checkbox,
 .form-control-radio {
 	@mixin form-control-radio-checkbox-base;
+
 	input[type="radio"],
 	input[type="checkbox"] {
 		margin-right: var(--form-control-radio-checkbox-push-label-right);
@@ -80,6 +82,7 @@ input {
 
 .form-control-checkbox,
 .form-control-radio {
+
 	&.form-control-custom-style {
 		@mixin form-control-radio-checkbox;
 	}

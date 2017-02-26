@@ -29,10 +29,7 @@ html .mceContentBody {
 body {
 	color: var(--color-text);
 	background-color: var(--color-white);
-	font-weight: var(--font-weight-regular);
-	font-size: 100%;
-	line-height: var(--line-height-base);
-	font-family: var(--font-family-base);
+	font: var(--font-weight-regular) normal 100%/var(--line-height-base) var(--font-family-base);
 	-webkit-font-smoothing: antialiased;
 	hyphens: auto;
 	text-rendering: optimizeLegibility;
@@ -45,16 +42,21 @@ body {
  *
  * ----------------------------------------------------------------------------- */
 
+/* Content */
+@import "../base/content/default";
+
 /* Typography */
-@import "../base/typography/default";
 @import "../base/typography/anchors";
 @import "../base/typography/headings";
+@import "../base/typography/hr";
 @import "../base/typography/lists";
+@import "../base/typography/p";
 @import "../base/typography/quotes";
 @import "../base/typography/tables";
 
 /* Media */
 @import "../base/media/images";
+@import "../base/media/gallery-wp";
 @import "../base/media/embeds";
 @import "../base/media/oembeds";
 
@@ -102,6 +104,7 @@ video {
 }
 
 img {
+
 	&[class*="align"],
 	&[class*="wp-image-"],
 	&[class*="attachment-"] {
@@ -109,6 +112,7 @@ img {
 		display: block;
 		max-width: 100%;
 	}
+
 	&.alignleft,
 	&.alignright {
 		margin-top: var(--spacer);
@@ -119,6 +123,7 @@ img {
 .wp-caption {
 	margin: var(--spacer) auto;
 	width: auto !important;
+
 	img {
 		margin-bottom: 0;
 		margin-top: 0;
@@ -147,26 +152,56 @@ img {
 
 .alignleft {
 	float: left;
+
+	&img,
 	&.wp-caption {
-		margin-top: var(--spacer);
-		margin-bottom: var(--spacer);
+		margin-right: var(--spacer-m);
 	}
 }
 
 .alignright {
 	float: right;
+
 	&img,
 	&.wp-caption {
-		margin-top: var(--spacer);
-		margin-bottom: var(--spacer);
+		margin-left: var(--spacer-m);
 	}
 }
 
 .alignleft,
 .alignright {
 	max-width: 35% !important;
+
 	&img,
 	&.wp-caption {
+		margin-top: 5px;
 		margin-bottom: var(--spacer);
+	}
+}
+
+/* Gallery */
+.gallery {
+	margin: var(--spacer-lg) -6px !important;
+	padding: 0;
+
+	img {
+		margin: 0 auto;
+	}
+}
+
+/* Embeds */
+.wpview.wpview-wrap {
+	margin-top: calc(var(--spacer) * -1px);
+	margin-bottom: 0;
+
+	.wp-embed-wrap {
+		aspect-ratio: '16:9';
+		overflow: hidden;
+	}
+
+	iframe,
+	object,
+	embed {
+		margin: 0 auto;
 	}
 }

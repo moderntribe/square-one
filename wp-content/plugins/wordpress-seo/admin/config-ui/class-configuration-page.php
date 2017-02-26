@@ -4,7 +4,7 @@
  */
 
 /**
- * @class WPSEO_Configuration_Wizard Loads the Yoast onboarding wizard.
+ * @class WPSEO_Configuration_Wizard Loads the Yoast configuration wizard.
  */
 class WPSEO_Configuration_Page {
 
@@ -33,7 +33,10 @@ class WPSEO_Configuration_Page {
 	 * Check if the configuration is finished. If so, just remove the notification.
 	 */
 	public function catch_configuration_request() {
-		if ( filter_input( INPUT_GET, 'configuration' ) !== 'finished' ) {
+		$configuration_page = filter_input( INPUT_GET, 'configuration' );
+		$page          = filter_input( INPUT_GET, 'page' );
+
+		if ( ! ( $configuration_page === 'finished' && ( $page === WPSEO_Admin::PAGE_IDENTIFIER ) ) ) {
 			return;
 		}
 
@@ -98,25 +101,53 @@ class WPSEO_Configuration_Page {
 		<head>
 			<meta name="viewport" content="width=device-width"/>
 			<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-			<title><?php _e( 'Yoast SEO &rsaquo; Setup Wizard', 'wordpress-seo' ); ?></title>
+			<title><?php
+				printf(
+					/* translators: %s expands to Yoast SEO. */
+					__( '%s &rsaquo; Configuration Wizard', 'wordpress-seo' ),
+					'Yoast SEO'
+				);
+			?></title>
 			<?php
-				do_action( 'admin_print_styles' );
-				do_action( 'admin_print_scripts' );
-				do_action( 'admin_head' );
+			wp_print_head_scripts();
+			wp_print_styles( 'yoast-seo-yoast-components' );
+
+			/**
+			 * Is called before the closing </head> tag in the Yoast Configuration wizard.
+			 *
+			 * Allows users to add their own scripts or styles.
+			 *
+			 * @since 4.0
+			 */
+			do_action( 'wpseo_configuration_wizard_head' );
 			?>
 		</head>
 		<body class="wp-admin">
 		<div id="wizard"></div>
 		<a class="yoast-wizard-return-link" href="<?php echo $dashboard_url ?>">
-			<?php _e( 'Go back to the Yoast SEO dashboard.', 'wordpress-seo' ); ?>
-		</a>
-		<footer>
 			<?php
-			do_action( 'admin_print_footer_scripts' );
-			do_action( 'admin_footer' );
-			wp_print_scripts( 'yoast-seo-configuration-wizard' );
+			printf(
+				/* translators: %s expands to Yoast SEO. */
+				__( 'Go back to the %s dashboard.', 'wordpress-seo' ),
+				'Yoast SEO'
+			);
 			?>
-		</footer>
+		</a>
+		<?php
+			wp_print_media_templates();
+			wp_print_footer_scripts();
+
+			/**
+			 * Is called before the closing </body> tag in the Yoast Configuration wizard.
+			 *
+			 * Allows users to add their own scripts or content.
+			 *
+			 * @since 4.0
+			 */
+			do_action( 'wpseo_configuration_wizard_footer' );
+
+			wp_print_scripts( 'yoast-seo-configuration-wizard' );
+		?>
 		</body>
 		</html>
 		<?php
@@ -154,7 +185,7 @@ class WPSEO_Configuration_Page {
 	 * @returns array The translations for the configuration wizard.
 	 */
 	public function get_translations() {
-		$file = plugin_dir_path( WPSEO_FILE ) . 'languages/yoast-components-' . get_locale() . '.json';
+		$file = plugin_dir_path( WPSEO_FILE ) . 'languages/yoast-components-' . WPSEO_Utils::get_user_locale() . '.json';
 		if ( file_exists( $file ) && $file = file_get_contents( $file ) ) {
 			return json_decode( $file, true );
 		}
@@ -183,7 +214,7 @@ class WPSEO_Configuration_Page {
 	 *
 	 * @return Yoast_Notification
 	 */
-	private function get_notification() {
+	private static function get_notification() {
 		$message = sprintf(
 			__( 'Since you are new to %1$s you can configure the %2$splugin%3$s', 'wordpress-seo' ),
 			'Yoast SEO',
@@ -216,7 +247,7 @@ class WPSEO_Configuration_Page {
 	}
 
 	/**
-	 * Remove the options that triggers the notice for the onboarding wizard.
+	 * Remove the options that triggers the notice for the configuration wizard.
 	 */
 	private function remove_notification_option() {
 		$options = $this->get_options();

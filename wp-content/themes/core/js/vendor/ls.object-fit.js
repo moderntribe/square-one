@@ -6,6 +6,7 @@
 	var regCssFit = /object-fit["']*\s*:\s*["']*(contain|cover)/;
 	var regCssPosition = /object-position["']*\s*:\s*["']*(.+?)(?=($|,|'|"|;))/;
 	var blankSrc = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
+	var regBgUrlEscape = /\(|\)|'/;
 	var positionDefaults = {
 		center: 'center',
 		'50% 50%': 'center',
@@ -28,6 +29,8 @@
 	}
 
 	function initFix(element, config){
+		var switchClassesAdded;
+		var lazysizesCfg = lazySizes.cfg;
 		var styleElement = element.cloneNode(false);
 		var styleElementStyle = styleElement.style;
 
@@ -35,7 +38,13 @@
 			var src = element.currentSrc || element.src;
 
 			if(src){
-				styleElementStyle.backgroundImage = 'url(' + src + ')';
+				styleElementStyle.backgroundImage = 'url(' + (regBgUrlEscape.test(src) ? JSON.stringify(src) : src ) + ')';
+
+				if(!switchClassesAdded){
+					switchClassesAdded = true;
+					lazySizes.rC(styleElement, lazysizesCfg.loadingClass);
+					lazySizes.aC(styleElement, lazysizesCfg.loadedClass);
+				}
 			}
 		};
 
@@ -64,10 +73,18 @@
 				container = container.parentNode;
 			}
 
-			lazySizes.rC(styleElement, lazySizes.cfg.loadingClass);
-			lazySizes.rC(styleElement, lazySizes.cfg.loadedClass);
-			lazySizes.rC(styleElement, lazySizes.cfg.lazyClass);
-			lazySizes.aC(styleElement, lazySizes.cfg.objectFitClass || 'lazysizes-display-clone');
+			lazySizes.rC(styleElement, lazysizesCfg.loadedClass);
+			lazySizes.rC(styleElement, lazysizesCfg.lazyClass);
+			lazySizes.aC(styleElement, lazysizesCfg.loadingClass);
+			lazySizes.aC(styleElement, lazysizesCfg.objectFitClass || 'lazysizes-display-clone');
+
+			if(styleElement.getAttribute(lazysizesCfg.srcsetAttr)){
+				styleElement.setAttribute(lazysizesCfg.srcsetAttr, '');
+			}
+
+			if(styleElement.getAttribute(lazysizesCfg.srcAttr)){
+				styleElement.setAttribute(lazysizesCfg.srcAttr, '');
+			}
 
 			styleElement.src = blankSrc;
 			styleElement.srcset = '';

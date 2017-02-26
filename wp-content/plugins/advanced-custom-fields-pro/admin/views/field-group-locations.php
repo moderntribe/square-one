@@ -4,6 +4,7 @@
 $rule_types = apply_filters('acf/location/rule_types', array(
 	__("Post",'acf') => array(
 		'post_type'		=>	__("Post Type",'acf'),
+		'post_template'	=>	__("Post Template",'acf'),
 		'post_status'	=>	__("Post Status",'acf'),
 		'post_format'	=>	__("Post Format",'acf'),
 		'post_category'	=>	__("Post Category",'acf'),
@@ -30,6 +31,14 @@ $rule_types = apply_filters('acf/location/rule_types', array(
 	)
 ));
 
+
+// WP < 4.7
+if( acf_version_compare('wp', '<', '4.7') ) {
+	
+	unset( $rule_types[ __("Post",'acf') ]['post_template'] );
+	
+}
+
 $rule_operators = apply_filters( 'acf/location/rule_operators', array(
 	'=='	=>	__("is equal to",'acf'),
 	'!='	=>	__("is not equal to",'acf'),
@@ -39,7 +48,7 @@ $rule_operators = apply_filters( 'acf/location/rule_operators', array(
 <div class="acf-field">
 	<div class="acf-label">
 		<label><?php _e("Rules",'acf'); ?></label>
-		<p><?php _e("Create a set of rules to determine which edit screens will use these advanced custom fields",'acf'); ?></p>
+		<p class="description"><?php _e("Create a set of rules to determine which edit screens will use these advanced custom fields",'acf'); ?></p>
 	</div>
 	<div class="acf-input">
 		<div class="rule-groups">

@@ -84,7 +84,7 @@ const bindEvents = () => {
 		.on('gform_post_render', gravityFormPostRender)
 		.on('gform_confirmation_loaded', gravityFormConfirmationLoaded);
 
-	delegate(el.container, '.gform_button', 'click', (e) => spinOn(e));
+	delegate(el.container, '.gform_button', 'click', spinOn);
 };
 
 /**

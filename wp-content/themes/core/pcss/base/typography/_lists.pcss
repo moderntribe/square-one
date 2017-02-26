@@ -6,16 +6,20 @@
 ul,
 ol,
 dl {
-	.t-typography & {
+
+	.t-content & {
 		@mixin body-content;
+
 		margin-top: var(--spacer);
 		margin-bottom: var(--spacer);
 	}
 }
 
 li {
+
 	& ~ li {
-		.t-typography & {
+
+		.t-content & {
 			margin-top: var(--spacer-xs);
 		}
 	}
@@ -26,7 +30,7 @@ li {
  * ------------------------------------------------------------------------- */
 
 .list-bullet,
-.t-typography ul {
+.t-content ul {
 	list-style: disc outside;
 	padding-left: 1.5em;
 	padding-right: 0;
@@ -42,7 +46,7 @@ li {
  * ------------------------------------------------------------------------- */
 
 .list-number,
-.t-typography ol {
+.t-content ol {
 	list-style: decimal outside;
 	padding-left: 1.5em;
 	padding-right: 0;
@@ -58,7 +62,7 @@ li {
  * ------------------------------------------------------------------------- */
 
 .dl,
-.t-typography dl {
+.t-content dl {
 	padding-left: 1.5em;
 	padding-right: 0;
 
@@ -69,11 +73,11 @@ li {
 }
 
 .dt,
-.t-typography dt {
+.t-content dt {
 	font-weight: var(--font-weight-bold);
 }
 
 .dd,
-.t-typography dd {
+.t-content dd {
 	margin-bottom: var(--spacer);
 }

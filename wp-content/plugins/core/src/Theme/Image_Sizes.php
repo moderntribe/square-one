@@ -5,25 +5,29 @@ namespace Tribe\Project\Theme;
 
 
 class Image_Sizes {
+	const CORE_FULL             = 'core-full';
+	const CORE_MOBILE           = 'core-mobile';
+	const SOCIAL_SHARE          = 'social-share';
+
 	private $sizes = [
-		'core-full'    => [
+		self::CORE_FULL    => [
 			'width'  => 1600,
 			'height' => 0,
 			'crop'   => true,
 		],
-		'core-mobile'  => [
+		self::CORE_MOBILE  => [
 			'width'  => 1152,
 			'height' => 0,
 			'crop'   => true,
 		],
-		'social-share' => [
+		self::SOCIAL_SHARE => [
 			'width'  => 1200,
 			'height' => 630,
 			'crop'   => true,
 		],
 	];
 
-	private $opengraph_image_size = 'social-share';
+	private $opengraph_image_size = self::SOCIAL_SHARE;
 
 	public function hook() {
 		add_action( 'after_setup_theme', [ $this, 'register_sizes' ], 10, 0 );

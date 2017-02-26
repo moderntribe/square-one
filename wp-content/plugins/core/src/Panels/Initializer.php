@@ -46,6 +46,7 @@ class Initializer {
 		$this->set_supported_post_types();
 		$this->set_view_directories();
 		require_once( dirname( $this->plugin_file ) . '/functions/panels.php' );
+		require_once( dirname( $this->plugin_file ) . '/functions/utility.php' );
 
 		add_filter( 'modular_content_default_fields', [ $this, 'set_default_fields' ], 10, 2 );
 		add_filter( 'modular_content_posts_field_taxonomy_options', [ $this, 'set_available_query_taxonomies', ], 10, 1 );
@@ -153,7 +154,8 @@ class Initializer {
 
 	public function set_available_query_taxonomies( $taxonomies ) {
 		$taxonomies[] = 'category';
-		sort( array_unique( $taxonomies ) );
+		$taxonomies = array_unique( $taxonomies );
+		sort( $taxonomies );
 
 		return $taxonomies;
 	}
@@ -265,12 +267,8 @@ class Initializer {
 		];
 	}
 
-	public function inactive_icon_url( $filename ) {
-		return plugins_url( 'assets/panels/icons/standard/' . $filename, $this->plugin_file );
-	}
-
-	public function active_icon_url( $filename ) {
-		return plugins_url( 'assets/panels/icons/inverted/' . $filename, $this->plugin_file );
+	public function thumbnail_url( $filename ) {
+		return plugins_url( 'assets/panels/thumbnails/' . $filename, $this->plugin_file );
 	}
 
 	public function layout_icon_url( $filename ) {

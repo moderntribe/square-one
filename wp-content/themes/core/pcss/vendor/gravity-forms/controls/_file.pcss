@@ -7,11 +7,13 @@
 	line-height: 1;
 	border: var(--gf-control-file-border-size) solid var(--gf-control-file-border-color);
 	border-top: 0;
+
 	img {
 		margin: 0 2px 0 0;
 		display: inline-block;
 		vertical-align: middle;
 	}
+
 	strong {
 		display: inline-block;
 		vertical-align: middle;
@@ -20,8 +22,10 @@
 }
 
 .gf-file .validation_message {
+
 	li {
 		margin-bottom: 0;
+
 		& ~ li {
 			margin-top: 10px;
 		}
@@ -41,9 +45,11 @@
 	border: var(--gf-control-file-border-size) solid var(--gf-control-file-border-color);
 	padding: var(--gf-control-filemulti-padding);
 	background-color: var(--gf-control-file-bgd-color);
+
 	input[type="button"],
 	input[type="file"] {
 		@mixin button-submit;
+
 		margin-top: var(--gf-control-filemulti-margin-top);
 
 		@media (--viewport-medium) {

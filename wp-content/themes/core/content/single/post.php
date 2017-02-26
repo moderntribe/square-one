@@ -4,7 +4,7 @@
 	$options = [ 'wrapper_class' => 'item-single__image' ];
 	the_tribe_image( get_post_thumbnail_id(), $options ); ?>
 
-	<div class="item-single__content t-typography">
+	<div class="item-single__content t-content">
 		<?php the_content(); ?>
 	</div>
 	
