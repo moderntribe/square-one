@@ -18,4 +18,4 @@ docker run --rm -i \
  --network=global_default \
  -w="/srv/www/public" \
  --entrypoint="/usr/local/bin/wp" \
- moderntribe/php:7.0-fpm "$@"
+ moderntribe/php:7.0-fpm --allow-root "$@"

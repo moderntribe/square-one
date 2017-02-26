@@ -1,14 +1,24 @@
+version: "2"
 options:
   compose-file-path: './docker-compose.yml'
-  compose-dev-file-path: './docker-compose.rsync.yml'
-  verbose: true
+  compose-dev-file-path: './docker-compose.unison.yml'
+  verbose: false
 syncs:
-  square1-webroot-rsync-sync: # TODO: change this per project
+  square1-webroot-unison-sync: # TODO: change this per project
+    notify_terminal: true
     src: '../..'
     dest: '/srv/www/public'
-    sync_strategy: 'rsync'
-    sync_excludes:  [ '.idea', '.git', '.sass-cache', 'wp-content/upgrade', 'wp-content/uploads', 'dev']
-    watch_excludes: [ '.idea', '.*/.git', '.*/node_modules', '.*/bower_components', '.sass-cache', '.*/.sass-cache', '.scss', '.pcss', '.gitignore', 'wp-content/upgrade', 'wp-content/uploads' ]
-    sync_host_port: 10871 # TODO: change this per project
-    sync_args:
-      - '-v'
+    sync_strategy: 'unison'
+    sync_excludes:
+     - 'Name .*'
+     - 'Name node_modules'
+     - 'Path dev'
+     - 'Path docs'
+     - 'Path grunt_options'
+     - 'Path wp-content/uploads'
+    sync_excludes_type: 'none'
+    watch_excludes:
+     - '\.*'
+     - 'dev'
+     - 'wp-content/uploads'
+     - 'node_modules'

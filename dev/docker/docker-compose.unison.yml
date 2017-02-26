@@ -10,5 +10,5 @@ services:
       - ../../wp-content/uploads:/srv/www/public/wp-content/uploads
 
 volumes:
-  square1-webroot-rsync-sync:
+  square1-webroot-unison-sync:
     external: true
