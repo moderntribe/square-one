@@ -4,7 +4,7 @@ options:
   compose-dev-file-path: './docker-compose.unison.yml'
   verbose: false
 syncs:
-  square1-webroot-unison-sync: # TODO: change this per project
+  square1-webroot-sync: # TODO: change this per project here and in docker-compose.unison.yml
     notify_terminal: true
     src: '../..'
     dest: '/srv/www/public'
