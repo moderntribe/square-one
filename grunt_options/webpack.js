@@ -8,7 +8,6 @@ module.exports = {
 		entry: {
 			scripts: './<%= pkg._corethemepath %>/js/src/index.js',
 			vendor: [
-				'fastclick',
 				'delegate',
 				'verge',
 				'spin.js'
@@ -35,7 +34,6 @@ module.exports = {
 		entry: {
 			scripts: './<%= pkg._corethemepath %>/js/src/index.js',
 			vendorWebpack: [
-				'fastclick',
 				'delegate',
 				'verge',
 				'spin.js'

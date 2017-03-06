@@ -48,7 +48,7 @@ module.exports = {
 		[
 			'clean:themeMinJS',
 			'copy:themeJS',
-			'webpack:themeProd',
+			'webpack',
 			'uglify:themeMin',
 			'concat:themeMinVendors',
 			'clean:themeMinVendorJS'
