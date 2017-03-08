@@ -20,9 +20,10 @@ var compileOptions = {
 		require('postcss-functions')({ functions: postcssFunctions }),
 		require('postcss-quantity-queries'),
 		require('postcss-aspect-ratio'),
-		require('postcss-cssnext')({ browsers: ['last 3 versions', 'ie 11', 'iOS >= 8', 'Safari >= 8'] }),
 		require('postcss-nested'),
 		require('lost'),
+		require('postcss-inline-svg'),
+		require('postcss-cssnext'),
 	],
 };
 
