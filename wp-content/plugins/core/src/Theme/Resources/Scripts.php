@@ -58,7 +58,7 @@ class Scripts {
 
 		// Accessibility Testing
 		if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG === true ) {
-			wp_enqueue_script( 'core-theme-totally', $js_dir . 'vendor/tota11y.min.js', array( 'core-theme-scripts' ), $version, true );
+			wp_enqueue_script( 'core-theme-totally', $js_dir . 'vendor/tota11y.min.js', [ 'core-theme-scripts' ], $version, true );
 		}
 
 		// JS: Comments
