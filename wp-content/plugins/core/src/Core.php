@@ -34,9 +34,15 @@ class Core {
 	}
 
 	public function init() {
+		$this->load_libraries();
 		$this->load_functions();
 		$this->load_service_providers();
 		$this->container['service_loader']->initialize_services();
+	}
+
+	private function load_libraries() {
+		require_once( dirname( $this->container[ 'plugin_file' ] ) . '/vendor/johnbillion/extended-cpts/extended-cpts.php' );
+		require_once( dirname( $this->container[ 'plugin_file' ] ) . '/vendor/johnbillion/extended-taxos/extended-taxos.php' );
 	}
 
 	private function load_functions() {
