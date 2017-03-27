@@ -5,5 +5,5 @@ cd "$SCRIPTDIR";
 
 PROJECT_ID="square1"
 
-docker-compose --project-name=${PROJECT_ID} stop
+docker-compose --project-name=${PROJECT_ID} down
 
