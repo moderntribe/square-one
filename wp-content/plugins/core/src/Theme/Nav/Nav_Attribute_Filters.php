@@ -10,14 +10,6 @@ namespace Tribe\Project\Theme\Nav;
  */
 class Nav_Attribute_Filters {
 
-	public function hook() {
-
-		add_filter( 'nav_menu_item_id', [ $this, 'clean_nav_item_id' ], 10, 4 );
-		add_filter( 'nav_menu_css_class', [ $this, 'customize_nav_item_classes' ], 10, 4 );
-		add_filter( 'nav_menu_link_attributes', [ $this, 'customize_menu_item_atts' ], 10, 4 );
-
-	}
-
 
 	/**
 	 * Remove the ID attributed from the nav item
@@ -27,6 +19,7 @@ class Nav_Attribute_Filters {
 	 * @param array  $args    An array of wp_nav_menu() arguments.
 	 * @param int    $depth   Depth of menu item. Used for padding.
 	 * @return string
+	 * @filter nav_menu_item_id
 	 */
 	public function clean_nav_item_id( $menu_id, $item, $args, $depth ) {
 
@@ -42,6 +35,7 @@ class Nav_Attribute_Filters {
 	 * @param array  $args    An array of {@see wp_nav_menu()} arguments.
 	 * @param int    $depth   Depth of menu item. Used for padding.
 	 * @return array
+	 * @filter nav_menu_css_class
 	 */
 	public function customize_nav_item_classes( $classes, $item, $args, $depth ) {
 
@@ -74,6 +68,7 @@ class Nav_Attribute_Filters {
 	 * @param array  $args  An array of {@see wp_nav_menu()} arguments.
 	 * @param int    $depth Depth of menu item. Used for padding.
 	 * @return array
+	 * @filter nav_menu_link_attributes
 	 */
 	public function customize_menu_item_atts( $atts, $item, $args, $depth ) {
 

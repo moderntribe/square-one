@@ -9,12 +9,9 @@ class Legacy_Check {
 		$this->unsupported_browser_path = $unsupported_browser_path;
 	}
 
-	public function hook() {
-		add_action( 'wp_head', [ $this, 'old_browsers' ], 0, 0 );
-	}
-
 	/**
 	 * Redirect old browsers to a unique message page (IE9 and below)
+	 * @action wp_head
 	 */
 	public function old_browsers() {
 		?>

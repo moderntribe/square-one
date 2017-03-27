@@ -28,6 +28,10 @@ class Initializer {
 		$this->panel_types_to_initialize[] = $panel_type;
 	}
 
+	/**
+	 * @return void
+	 * @action plugins_loaded
+	 */
 	public function hook() {
 		add_action( 'panels_init', [ $this, 'initialize_panels' ], 10, 0 );
 

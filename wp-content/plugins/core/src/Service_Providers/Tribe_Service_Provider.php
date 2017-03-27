@@ -7,9 +7,6 @@ namespace Tribe\Project\Service_Providers;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Tribe\Libs\Nav\Menu_Location;
-use Tribe\Project\Service_Loader;
-use Tribe\Project\Theme\Nav;
-use Tribe\Project\Theme_Customizer;
 
 abstract class Tribe_Service_Provider implements ServiceProviderInterface {
 	/**
@@ -53,9 +50,6 @@ abstract class Tribe_Service_Provider implements ServiceProviderInterface {
 	 */
 	protected $taxonomies          = [ ];
 
-	/** @var Service_Loader */
-	protected $service_loader;
-
 	public function register( Container $container ) {
 		$this->post_types( $container );
 		$this->taxonomies( $container );
@@ -79,7 +73,9 @@ abstract class Tribe_Service_Provider implements ServiceProviderInterface {
 				return new $config_class_name( $post_type::NAME );
 			};
 
-			$container[ 'service_loader' ]->enqueue( 'post_type.' . $type . '.config', 'register' );
+			add_action( 'init', function() use ( $container, $type ) {
+				$container[ 'post_type.' . $type . '.config' ]->register();
+			}, 0, 0 );
 		}
 	}
 
@@ -102,7 +98,9 @@ abstract class Tribe_Service_Provider implements ServiceProviderInterface {
 				return new $config_class_name( $taxonomy, $post_types );
 			};
 
-			$container[ 'service_loader' ]->enqueue( 'taxonomy.' . $type . '.config', 'register' );
+			add_action( 'init', function() use ( $container, $type ) {
+				$container[ 'taxonomy.' . $type . '.config' ]->register();
+			}, 0, 0 );
 		}
 	}
 
@@ -115,8 +113,9 @@ abstract class Tribe_Service_Provider implements ServiceProviderInterface {
 				$to   = $this->post_type_is_user( $sides[ 'to' ] ) ? 'user' : $this->map_post_type_classes_to_ids( $sides[ 'to' ], $container );
 				return new $relationship_class_name( $from, $to );
 			};
-
-			$container[ 'service_loader' ]->enqueue( 'p2p.' . $relationship, 'hook' );
+			add_action( 'init', function() use ( $container, $relationship ) {
+				$container[ 'p2p.' . $relationship ]->hook();
+			}, 10, 0 );
 		}
 	}
 
@@ -125,14 +124,18 @@ abstract class Tribe_Service_Provider implements ServiceProviderInterface {
 			$container[ 'menu.' . $location ] = function ( $container ) use ( $location, $description ) {
 				return new Menu_Location( $location, $description );
 			};
-			$container[ 'service_loader' ]->enqueue( 'menu.' . $location, 'hook' );
+			add_action( 'init', function() use ( $container, $location ) {
+				$container[ 'menu.' . $location ]->hook();
+			}, 10, 0 );
 		}
 	}
 
 	protected function panels( Container $container ) {
-		foreach ( $this->panels as $panel ) {
-			$container[ 'panels.init' ]->add_panel_config( $panel );
-		}
+		add_action( 'init', function() use ( $container ) {
+			foreach ( $this->panels as $panel ) {
+				$container[ 'panels.init' ]->add_panel_config( $panel );
+			}
+		}, 10, 0 );
 	}
 
 	protected function post_type_is_user( $side ) {

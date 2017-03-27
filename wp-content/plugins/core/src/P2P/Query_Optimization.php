@@ -4,10 +4,16 @@
 namespace Tribe\Project\P2P;
 
 class Query_Optimization {
-	public function hook() {
-		add_action( 'p2p_init', [ $this, 'p2p_init' ], 10, 0 );  // after _p2p_load at 9
-	}
 
+	/**
+	 * Set hooks to optimize p2p queries.
+	 * Should run after _p2p_load
+	 *
+	 * @return void
+	 *
+	 * @action p2p_init
+	 * @priority 10
+	 */
 	public function p2p_init() {
 		remove_action( 'parse_query', array( 'P2P_Query_Post', 'parse_query' ), 20 );
 		add_action( 'parse_query', array( $this, 'parse_query' ), 20 );
