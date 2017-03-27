@@ -1,0 +1,35 @@
+version: "2"
+services:
+  memcached:
+    image: memcached:1.4-alpine
+    ports:
+      - "11211"
+  php:
+    image: moderntribe/php:7.0-fpm
+    volumes:
+      - ./php/php.ini:/etc/php7/conf.d/zz-php.ini:ro
+      - ./php/ext-xdebug.ini:/etc/php7/conf.d/zz-xdebug.ini:ro
+      - ../..:/srv/www/public
+    dns:
+      - 10.254.254.254
+      - 8.8.8.8
+    links:
+      - memcached
+    external_links:
+      - global_mysql_1:mysql
+  nginx:
+    image: nginx:stable-alpine
+    environment:
+      - VIRTUAL_HOST=square1.tribe,*.square1.tribe
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./nginx/php.conf:/etc/nginx/php.conf:ro
+      - ../..:/srv/www/public
+    links:
+      - php
+    ports:
+      - "80"
+networks:
+  default:
+    external:
+      name: global_default
