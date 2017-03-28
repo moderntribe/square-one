@@ -11,9 +11,9 @@ settings:
 modules:
     config:
         Db:
-            dsn: 'mysql:host=127.0.0.1;dbname=tribe-tests'
+            dsn: 'mysql:host=mysql;dbname=tribe_square1_tests'
             user: root
-            password: root
+            password: password
             dump: tests/_data/dump.sql
         WPBrowser:
             url: 'http://project.tribe'
@@ -21,42 +21,38 @@ modules:
             adminPassword: password
             adminUrl: /wp-admin
         WPDb:
-            dsn: 'mysql:host=127.0.0.1;dbname=tribe-tests'
+            dsn: 'mysql:host=mysql;dbname=tribe_square1_tests'
             user: root
-            password: root
+            password: password
             dump: tests/_data/dump.sql
             populate: true
             cleanup: true
-            url: 'http://project.tribe'
+            url: 'http://square1.tribe'
             tablePrefix: tribe_
             checkExistence: true
             update: true
         WPLoader:
-            wpRootFolder: /var/www/wp
-            dbName: tribe-tests
-            dbHost: 127.0.0.1
+            wpRootFolder: /srv/www/public/wp
+            dbName: tribe_square1_tests
+            dbHost: mysql
             dbUser: root
-            dbPassword: root
+            dbPassword: password
             wpDebug: true
             dbCharset: utf8
             dbCollate: ''
             tablePrefix: tribe_
-            domain: project.tribe
-            adminEmail: admin@project.tribe
+            domain: square1.tribe
+            adminEmail: admin@square1.tribe
             title: 'WP Tests'
             phpBinary: php
             language: ''
             configFile: tests-config.php
             plugins:
-                - extended-cpts/extended-cpts.php
-                - extended-taxos/extended-taxos.php
                 - core/core.php
             activatePlugins:
-                - extended-cpts/extended-cpts.php
-                - extended-taxos/extended-taxos.php
                 - core/core.php
         WPWebDriver:
-            url: 'http://project.tribe'
+            url: 'http://square1.tribe'
             browser: phantomjs
             port: 4444
             restart: true

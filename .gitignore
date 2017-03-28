@@ -23,6 +23,7 @@ Thumbs.db
 
 local-config.php
 cache-config.php
+tests-config.php
 wp-content/uploads/
 wp-content/blogs.dir/
 wp-content/upgrade/
