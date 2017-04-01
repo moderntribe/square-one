@@ -57,30 +57,10 @@ abstract class Tribe_Service_Provider implements ServiceProviderInterface {
 	protected $service_loader;
 
 	public function register( Container $container ) {
-		$this->post_types( $container );
 		$this->taxonomies( $container );
 		$this->p2p( $container );
 		$this->nav( $container );
 		$this->panels( $container );
-	}
-
-	protected function post_types( Container $container ) {
-		foreach ( $this->post_types as $type ) {
-			$container[ 'post_type.' . $type ] = function ( $container ) use ( $type ) {
-				$post_type_class_name = '\\Tribe\\Project\\Post_Types\\' . $type;
-				return new $post_type_class_name;
-			};
-			$container[ 'post_type.' . $type . '.config' ] = function ( $container ) use ( $type ) {
-				$config_class_name = '\\Tribe\\Project\\Post_Types\\Config\\' . $type;
-				$post_type = $container[ 'post_type.' . $type ];
-				if ( ! class_exists( $config_class_name ) ) {
-					$config_class_name = '\\Tribe\\Project\\Post_Types\\Config\\External_Post_Type_Config';
-				}
-				return new $config_class_name( $post_type::NAME );
-			};
-
-			$container[ 'service_loader' ]->enqueue( 'post_type.' . $type . '.config', 'register' );
-		}
 	}
 
 	protected function taxonomies( Container $container ) {
