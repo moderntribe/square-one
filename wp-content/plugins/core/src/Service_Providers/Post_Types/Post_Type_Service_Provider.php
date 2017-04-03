@@ -6,12 +6,25 @@ namespace Tribe\Project\Service_Providers\Post_Types;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
+use Tribe\Libs\Post_Type\Post_Object;
+use Tribe\Libs\Post_Type\Post_Type_Config;
 
 abstract class Post_Type_Service_Provider implements ServiceProviderInterface {
-	const NAME = '';
+
+	/**
+	 * @var Post_Object The class of the post object. Should have a NAME constant.
+	 */
 	protected $post_type_class;
+
+	/**
+	 * @var Post_Type_Config The post type configuration class
+	 */
 	protected $config_class;
-	protected $post_type;
+
+	/**
+	 * @var string The id of the post type
+	 */
+	protected $post_type = '';
 
 	public function __construct() {
 		if ( ! isset( $this->post_type_class ) ) {
@@ -24,9 +37,11 @@ abstract class Post_Type_Service_Provider implements ServiceProviderInterface {
 	}
 
 	public function register( Container $container ) {
-		$container[ 'post_type.' . $this->post_type ] = function ( $container )  {
+		$factory = function ( $container )  {
 			return new $this->post_type_class;
 		};
+		$container[ 'post_type.' . $this->post_type ] = $factory;
+		$container->factory( $factory );
 		$this->register_config( $container );
 	}
 

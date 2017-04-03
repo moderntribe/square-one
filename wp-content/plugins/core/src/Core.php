@@ -13,6 +13,7 @@ use Tribe\Project\Service_Providers\Post_Types\Page_Service_Provider;
 use Tribe\Project\Service_Providers\Post_Types\Post_Service_Provider;
 use Tribe\Project\Service_Providers\Post_Types\Sample_Post_Type_Service_Provider;
 use Tribe\Project\Service_Providers\Post_Types\Venue_Service_Provider;
+use Tribe\Project\Service_Providers\Taxonomies\Example_Taxonomy_Service_Provider;
 use Tribe\Project\Service_Providers\Theme_Customizer_Provider;
 use Tribe\Project\Service_Providers\Global_Service_Provider;
 use Tribe\Project\Service_Providers\Theme_Provider;
@@ -67,12 +68,24 @@ class Core {
 		$this->container->register( new Util_Provider() );
 
 		$this->load_post_type_providers();
+		$this->load_taxonomy_providers();
 	}
 
 	private function load_post_type_providers() {
 		$this->container->register( new Sample_Post_Type_Service_Provider() );
 
 		// externally registered post types
+		$this->container->register( new Event_Service_Provider() );
+		$this->container->register( new Organizer_Service_Provider() );
+		$this->container->register( new Page_Service_Provider() );
+		$this->container->register( new Post_Service_Provider() );
+		$this->container->register( new Venue_Service_Provider() );
+	}
+
+	private function load_taxonomy_providers() {
+		$this->container->register( new Example_Taxonomy_Service_Provider() );
+
+		// externally registered taxonomies
 		$this->container->register( new Event_Service_Provider() );
 		$this->container->register( new Organizer_Service_Provider() );
 		$this->container->register( new Page_Service_Provider() );

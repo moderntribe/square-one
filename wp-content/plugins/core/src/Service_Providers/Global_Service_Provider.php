@@ -49,19 +49,6 @@ final class Global_Service_Provider extends Tribe_Service_Provider {
 		'Wysiwyg',
 	];
 
-	protected $post_types = [
-		'Sample',
-		'Page',
-		'Post',
-		'Event',
-		'Organizer',
-		'Venue'
-	];
-
-	protected $taxonomies = [
-		'Example' => [ 'Sample' ],
-	];
-
 	public function register( Container $container ) {
 		parent::register( $container );
 	}

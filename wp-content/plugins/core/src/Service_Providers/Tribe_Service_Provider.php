@@ -31,59 +31,14 @@ abstract class Tribe_Service_Provider implements ServiceProviderInterface {
 	 *            \Tribe\Project\Panels\Types
 	 */
 	protected $panels = [ ];
-	/**
-	 * @var array Class names of post types to register
-	 *            Classes should be in the namespace
-	 *            \Tribe\Project\Post_Types and should have
-	 *            a configuration class in the namespace
-	 *            \Tribe\Project\Post_Types\Config (unless
-	 *            already registered by a 3rd-party plugin).
-	 */
-	protected $post_types = [ ];
-	/**
-	 * @var array Keys are class names of taxonomies to register.
-	 *            Classes should be in the namespace
-	 *            \Tribe\Project\Taxonomies and should have
-	 *            a configuration class in the namespace
-	 *            \Tribe\Project\Taxonomies\Config (unless
-	 *            already registered by a 3rd-party plugin).
-	 *
-	 *            Values should be an array of Post Type classes
-	 *            that will be registered to use the Taxonomy.
-	 */
-	protected $taxonomies          = [ ];
 
 	/** @var Service_Loader */
 	protected $service_loader;
 
 	public function register( Container $container ) {
-		$this->taxonomies( $container );
 		$this->p2p( $container );
 		$this->nav( $container );
 		$this->panels( $container );
-	}
-
-	protected function taxonomies( Container $container ) {
-		foreach ( $this->taxonomies as $type => $post_types ) {
-
-			$container[ 'taxonomy.' . $type ] = function ( $container ) use ( $type ) {
-				$taxonomy_class_name = '\\Tribe\\Project\\Taxonomies\\' . $type;
-				return new $taxonomy_class_name;
-			};
-
-			$container[ 'taxonomy.' . $type . '.config' ] = function ( $container ) use ( $type, $post_types ) {
-				$config_class_name = '\\Tribe\\Project\\Taxonomies\\Config\\' . $type;
-				$taxonomy_object = $container[ 'taxonomy.' . $type ];
-				$taxonomy = $taxonomy_object::NAME;
-				$post_types = $this->map_post_type_classes_to_ids( $post_types, $container );
-				if ( ! class_exists( $config_class_name ) ) {
-					$config_class_name = '\\Tribe\\Project\\Taxonomies\\Config\\External_Taxonomy_Config';
-				}
-				return new $config_class_name( $taxonomy, $post_types );
-			};
-
-			$container[ 'service_loader' ]->enqueue( 'taxonomy.' . $type . '.config', 'register' );
-		}
 	}
 
 	protected function p2p( Container $container ) {
