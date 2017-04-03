@@ -9,8 +9,7 @@ class Panel_Search_Filters {
 	/**
 	 * @return void
 	 *
-	 * @action wp_ajax_posts-field-p2p-options-search
-	 * @priority 0
+	 * @action wp_ajax_posts-field-p2p-options-search 0
 	 */
 	public function set_p2p_search_filters() {
 		add_action( 'pre_get_posts', array( $this, 'convert_global_search_to_title_search' ), 10, 1 );

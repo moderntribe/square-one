@@ -11,8 +11,7 @@ class Query_Optimization {
 	 *
 	 * @return void
 	 *
-	 * @action p2p_init
-	 * @priority 10
+	 * @action p2p_init 10
 	 */
 	public function p2p_init() {
 		remove_action( 'parse_query', array( 'P2P_Query_Post', 'parse_query' ), 20 );

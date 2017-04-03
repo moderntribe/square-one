@@ -25,8 +25,7 @@ class Oembed_Filter {
 	 * @param object $data A data object result from an oEmbed provider.
 	 * @param string $url  The URL of the content to be embedded.
 	 * @return string
-	 * @filter oembed_dataparse
-	 * @priority 1000
+	 * @filter oembed_dataparse 1000
 	 */
 	public function setup_lazyload_html( $html, $data, $url ) {
 
@@ -78,8 +77,7 @@ class Oembed_Filter {
 	/**
 	 * If we've cached replacement HTML for a URL, override
 	 * the default with the cached value.
-	 * @filter embed_oembed_html
-	 * @priority 1
+	 * @filter embed_oembed_html 1
 	 */
 	public function filter_frontend_html_from_cache( $html, $url, $attr, $post_id ) {
 		if ( is_admin() ) {
@@ -91,8 +89,7 @@ class Oembed_Filter {
 
 	/**
 	 * Add wrapper around embeds to setup CSS for embed aspect ratios
-	 * @filter embed_oembed_html
-	 * @priority 99
+	 * @filter embed_oembed_html 99
 	 */
 	public function wrap_oembed_shortcode_output( $html, $url, $attr, $post_id ) {
 		$class_embed = strpos( $url, 'youtube' ) === false || strpos( $url, 'vimeo' ) === false ? ' wp-embed--lazy' : ' wp-embed--no-lazy';
