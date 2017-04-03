@@ -59,7 +59,7 @@ abstract class Taxonomy_Service_Provider implements ServiceProviderInterface {
 			// ensures that the taxonomy is associated with appropriate post types, even
 			// if initial registration is from an external plugin
 			$container[ 'taxonomy.' . $this->taxonomy . '.config' ] = function ( $container ) {
-				return new class extends Taxonomy_Config {
+				return new class( $this->taxonomy, $this->post_types ) extends Taxonomy_Config {
 					public function get_args() {
 						return []; // already registered
 					}
