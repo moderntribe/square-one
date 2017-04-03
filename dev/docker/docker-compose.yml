@@ -4,6 +4,7 @@ services:
     image: memcached:1.4-alpine
     ports:
       - "11211"
+    network_mode: "bridge"
   php:
     image: moderntribe/php:7.0-fpm
     volumes:
@@ -17,6 +18,7 @@ services:
       - memcached
     external_links:
       - global_mysql_1:mysql
+    network_mode: "bridge"
   nginx:
     image: nginx:stable-alpine
     environment:
@@ -29,7 +31,4 @@ services:
       - php
     ports:
       - "80"
-networks:
-  default:
-    external:
-      name: global_default
+    network_mode: "bridge"
