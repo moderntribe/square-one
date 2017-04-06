@@ -3,10 +3,10 @@
  * Extended custom post types for WordPress.
  *
  * @package   ExtendedCPTs
- * @version   3.0.1
+ * @version   3.1.0
  * @author    John Blackbourn <https://johnblackbourn.com>
  * @link      https://github.com/johnbillion/extended-cpts
- * @copyright 2012-2016 John Blackbourn
+ * @copyright 2012-2017 John Blackbourn
  * @license   GPL v2 or later
  *
  * This program is free software; you can redistribute it and/or modify
@@ -183,12 +183,14 @@ class Extended_CPT {
 			'edit_item'             => sprintf( 'Edit %s', $this->post_singular ),
 			'new_item'              => sprintf( 'New %s', $this->post_singular ),
 			'view_item'             => sprintf( 'View %s', $this->post_singular ),
+			'view_items'            => sprintf( 'View %s', $this->post_plural ),
 			'search_items'          => sprintf( 'Search %s', $this->post_plural ),
 			'not_found'             => sprintf( 'No %s found.', $this->post_plural_low ),
 			'not_found_in_trash'    => sprintf( 'No %s found in trash.', $this->post_plural_low ),
 			'parent_item_colon'     => sprintf( 'Parent %s:', $this->post_singular ),
 			'all_items'             => sprintf( 'All %s', $this->post_plural ),
 			'archives'              => sprintf( '%s Archives', $this->post_singular ),
+			'attributes'            => sprintf( '%s Attributes', $this->post_singular ),
 			'insert_into_item'      => sprintf( 'Insert into %s', $this->post_singular_low ),
 			'uploaded_to_this_item' => sprintf( 'Uploaded to this %s', $this->post_singular_low ),
 			'filter_items_list'     => sprintf( 'Filter %s list', $this->post_plural_low ),
@@ -271,6 +273,15 @@ class Extended_CPT {
 			add_action( 'init', array( $this, 'register_post_type' ), 9 );
 			// @codeCoverageIgnoreEnd
 		}
+
+		/**
+		 * Fired when the extended post type instance is set up.
+		 *
+		 * @since 3.1.0
+		 *
+		 * @param Extended_CPT $instance The extended post type instance.
+		 */
+		do_action( "ext-cpts/{$post_type}/instance", $this );
 
 	}
 
@@ -584,10 +595,10 @@ class Extended_CPT {
 	/**
 	 * Action fired after a CPT is registered in order to set up the custom permalink structure for the post type.
 	 *
-	 * @param string $post_type Post type name.
-	 * @param object $args      Arguments used to register the post type.
+	 * @param string                $post_type Post type name.
+	 * @param stdClass|WP_Post_Type $args      Arguments used to register the post type.
 	 */
-	public function registered_post_type( $post_type, stdClass $args ) {
+	public function registered_post_type( $post_type, $args ) {
 		if ( $post_type !== $this->post_type ) {
 			return;
 		}
@@ -638,7 +649,7 @@ class Extended_CPT {
 				 * Filter the term that gets used in the `$tax` permalink token.
 				 * @TODO make this more betterer ^
 				 *
-				 * @param stdClass $term  The `$tax` term to use in the permalink.
+				 * @param WP_Term  $term  The `$tax` term to use in the permalink.
 				 * @param array    $terms Array of all `$tax` terms associated with the post.
 				 * @param WP_Post  $post  The post in question.
 				 */
@@ -656,7 +667,7 @@ class Extended_CPT {
 				 * @param string  $term The `$tax` term name to use in the permalink.
 				 * @param WP_Post $post The post in question.
 				 */
-				$default_term_name = apply_filters( "default_{$tax}", get_option( "default_{$tax}" ), $post );
+				$default_term_name = apply_filters( "default_{$tax}", get_option( "default_{$tax}", '' ), $post );
 				if ( $default_term_name ) {
 					if ( ! is_wp_error( $default_term = get_term( $default_term_name, $tax ) ) ) {
 						$term = $default_term->slug;
@@ -741,9 +752,9 @@ class Extended_CPT {
 	/**
 	 * Extends an existing post type object. Currently only handles labels.
 	 *
-	 * @param object $pto A post type object
+	 * @param stdClass|WP_Post_Type $pto A post type object
 	 */
-	public function extend( stdClass $pto ) {
+	public function extend( $pto ) {
 
 		# Merge core with overridden labels
 		$this->args['labels'] = array_merge( (array) get_post_type_labels( $pto ), $this->args['labels'] );

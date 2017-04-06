@@ -20,24 +20,17 @@ class Core {
 	/** @var Container */
 	protected $container = null;
 
-	/** @var Service_Loader */
-	protected $service_loader = null;
-
 	/**
 	 * @param Container $container
 	 */
 	public function __construct( $container ) {
 		$this->container                   = $container;
-		$this->container['service_loader'] = function ( $container ) {
-			return new Service_Loader( $container );
-		};
 	}
 
 	public function init() {
 		$this->load_libraries();
 		$this->load_functions();
 		$this->load_service_providers();
-		$this->container['service_loader']->initialize_services();
 	}
 
 	private function load_libraries() {

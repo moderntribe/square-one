@@ -10,10 +10,12 @@ use Tribe\Project\Panels;
 
 class Panel_Intializer_Provider implements ServiceProviderInterface {
 	public function register( Container $container ) {
-		$container['panels.init'] = function( $container ) {
-			return new Panels\Initializer( $container['plugin_file'] );
+		$container[ 'panels.init' ] = function ( $container ) {
+			return new Panels\Initializer( $container[ 'plugin_file' ] );
 		};
 
-		$container['service_loader']->enqueue( 'panels.init', 'hook' );
+		add_action( 'plugins_loaded', function () use ( $container ) {
+			$container[ 'panels.init' ]->hook();
+		} );
 	}
 }
