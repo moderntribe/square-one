@@ -5,12 +5,10 @@ namespace Tribe\Project\Theme\Resources;
 
 
 class Styles {
-	public function hook() {
-		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_styles' ], 10, 0 );
-	}
 
 	/**
 	 * Enqueue styles
+	 * @action wp_enqueue_scripts
 	 */
 	public function enqueue_styles() {
 

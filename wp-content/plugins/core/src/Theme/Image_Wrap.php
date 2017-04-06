@@ -4,11 +4,6 @@ namespace Tribe\Project\Theme;
 
 class Image_Wrap {
 
-	public function hook() {
-		add_filter( 'the_content', [ $this, 'customize_wp_image_non_captioned_output' ], 12, 1 );
-		add_filter( 'the_content', [ $this, 'customize_wp_image_captioned_output' ], 12, 1 );
-	}
-
 	/**
 	 * Customize WP non-captioned image output
 	 * TODO: @backend code review this
@@ -16,6 +11,7 @@ class Image_Wrap {
 	 * @param $html
 	 *
 	 * @return mixed
+	 * @filter the_content
 	 */
 	public function customize_wp_image_non_captioned_output( $html ) {
 
@@ -69,6 +65,7 @@ class Image_Wrap {
 	 * @param $html
 	 *
 	 * @return mixed
+	 * @filter the_content
 	 */
 	public function customize_wp_image_captioned_output( $html ) {
 		if ( ! is_singular() && ! in_the_loop() && ! is_main_query() ) {

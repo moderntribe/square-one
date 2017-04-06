@@ -7,6 +7,7 @@ class SVG_Support {
 
 	/**
 	 * Adds hooks for adding post type support
+	 * @action init
 	 */
 	public function hook() {
 		add_action( 'admin_init', [ $this, 'add_svg_upload' ] );

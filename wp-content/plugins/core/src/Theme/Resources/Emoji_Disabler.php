@@ -5,12 +5,9 @@ namespace Tribe\Project\Theme\Resources;
 
 
 class Emoji_Disabler {
-	public function hook() {
-		add_action( 'after_setup_theme', [ $this, 'remove_hooks' ], 10, 0 ) ;
-	}
-
 	/**
 	 * Remove WP Emoji Scripts
+	 * @action after_setup_theme
 	 */
 	public function remove_hooks() {
 		remove_action( 'wp_head', 'print_emoji_detection_script', 7 );

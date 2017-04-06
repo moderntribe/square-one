@@ -71,7 +71,8 @@ dev/bower_components/
 dev/vendor/
 dev/composer.phar
 local-config.json
-dev/docker/
+dev/docker/mysql/*
+!dev/docker/mysql/.gitkeep
 
 # WP Engine #
 #############

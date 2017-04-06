@@ -59,24 +59,45 @@ final class Global_Service_Provider extends Tribe_Service_Provider {
 			$p2p_types = $this->map_p2p_classes_to_ids( [ 'General_Relationship' ], $container );
 			return new Titles_Filter( $p2p_types );
 		};
+		add_action( 'init', function()  use ($container ) {
+			$container[ 'p2p.admin_titles_filter' ]->hook();
+		}, 10, 0 );
+
 		$container[ 'p2p.event_query_filters' ] = function ( $container ) {
 			return new Event_Query_Filters();
 		};
+		add_action( 'tribe_events_pre_get_posts', function( $query ) use ( $container ) {
+			$container[ 'p2p.event_query_filters' ]->remove_event_filters_from_p2p_query( $query );
+		}, 10, 1 );
+		add_action( 'wp_ajax_posts-field-p2p-options-search', function( ) use ( $container ) {
+			$container[ 'p2p.event_query_filters' ]->remove_event_filters_from_panel_p2p_requests(  );
+		}, 10, 0 );
+
 		$container[ 'p2p.panel_search_filters' ] = function ( $container ) {
 			return new Panel_Search_Filters();
 		};
+		add_action( 'wp_ajax_posts-field-p2p-options-search', function() use ( $container ) {
+			$container[ 'p2p.panel_search_filters' ]->set_p2p_search_filters();
+		}, 0, 0 );
+
 		$container[ 'p2p.query_optimization' ] = function ( $container ) {
 			return new Query_Optimization();
 		};
+		add_action( 'p2p_init', function() use ( $container ) {
+			$container[ 'p2p.query_optimization' ]->p2p_init();
+		}, 10, 0 );
 
 		$container[ 'p2p.admin_search_filtering.General_Relationship' ] = function( $container ) {
 			return new Admin_Search_Filtering( $container[ 'p2p.General_Relationship' ], 'both', $container[ 'assets' ] );
 		};
-
-		$container[ 'service_loader' ]->enqueue( 'p2p.admin_titles_filter', 'hook' );
-		$container[ 'service_loader' ]->enqueue( 'p2p.event_query_filters', 'hook' );
-		$container[ 'service_loader' ]->enqueue( 'p2p.panel_search_filters', 'hook' );
-		$container[ 'service_loader' ]->enqueue( 'p2p.query_optimization', 'hook' );
-		$container[ 'service_loader' ]->enqueue( 'p2p.admin_search_filtering.General_Relationship', 'hook' );
+		add_action( 'load-post.php', function() use ( $container ) {
+			$container[ 'p2p.admin_search_filtering.General_Relationship' ]->add_post_page_hooks();
+		}, 10, 0 );
+		add_action( 'load-post-new.php', function() use ( $container ) {
+			$container[ 'p2p.admin_search_filtering.General_Relationship' ]->add_post_page_hooks();
+		}, 10, 0 );
+		add_filter( 'p2p_connectable_args', function( $query_vars, $connection, $post ) use ( $container ) {
+			$container[ 'p2p.admin_search_filtering.General_Relationship' ]->filter_connectable_query_args( $query_vars, $connection, $post );
+		}, 10, 3 );
 	}
 }

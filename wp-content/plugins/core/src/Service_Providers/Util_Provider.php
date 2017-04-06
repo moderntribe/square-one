@@ -12,10 +12,12 @@ class Util_Provider implements ServiceProviderInterface {
 
 	public function register( Container $container ) {
 
-		$container['util.svg_support'] = function( $container ) {
+		$container[ 'util.svg_support' ] = function ( $container ) {
 			return new SVG_Support();
 		};
 
-		$container['service_loader']->enqueue( 'util.svg_support', 'hook' );
+		add_action( 'init', function () use ( $container ) {
+			$container[ 'util.svg_support' ]->hook();
+		}, 10, 0 );
 	}
 }

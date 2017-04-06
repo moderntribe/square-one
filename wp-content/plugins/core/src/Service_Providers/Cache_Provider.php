@@ -14,19 +14,21 @@ class Cache_Provider implements ServiceProviderInterface {
 
 	public function register( Container $container ) {
 
-		$container['cache'] = function( $container ) {
+		$container[ 'cache' ] = function ( $container ) {
 			return new Cache();
 		};
 
-		$container['cache.listener'] = function( $container ) {
-			return new Listener( $container['cache'] );
+		$container[ 'cache.listener' ] = function ( $container ) {
+			return new Listener( $container[ 'cache' ] );
 		};
 
-		$container['cache.purger'] = function( $container ) {
+		$container[ 'cache.purger' ] = function ( $container ) {
 			return new Purger();
 		};
 
-		$container['service_loader']->enqueue( 'cache.listener', 'hook' );
-		$container['service_loader']->enqueue( 'cache.purger', 'hook' );
+		add_action( 'init', function () use ( $container ) {
+			$container[ 'cache.listener' ]->hook();
+			$container[ 'cache.purger' ]->hook();
+		}, 0, 0 );
 	}
 }

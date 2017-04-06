@@ -15,6 +15,8 @@ class Theme_Customizer_Provider implements ServiceProviderInterface {
 			return new Theme_Customizer\Customizer_Loader();
 		};
 
-		$container['service_loader']->enqueue( 'theme_customizer.loader', 'hook' );
+		add_action( 'customize_register', function(  \WP_Customize_Manager $wp_customize  ) use ( $container ) {
+			$container['theme_customizer.loader']->register_customizer_controls( $wp_customize );
+		}, 10, 1 );
 	}
 }
