@@ -15,7 +15,6 @@ docker run --rm -i \
  --link="global_mysql_1:mysql" \
  --dns=10.254.254.254 \
  --dns=8.8.8.8 \
- --network=global_default \
  -w="/srv/www/public" \
  --entrypoint="/usr/local/bin/wp" \
  moderntribe/php:7.0-fpm --allow-root "$@"
