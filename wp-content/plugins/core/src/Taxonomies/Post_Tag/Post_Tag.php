@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Tribe\Project\Taxonomies;
+namespace Tribe\Project\Taxonomies\Post_Tag;
 
 
 class Post_Tag {

@@ -6,10 +6,9 @@ namespace Tribe\Project\Panels;
 
 use ModularContent\Fields;
 use ModularContent\PanelType;
-use Pimple\Container;
 use Tribe\Project\Panels\Types\Panel_Type_Config;
-use Tribe\Project\Post_Types\Event;
-use Tribe\Project\Post_Types\Page;
+use Tribe\Project\Post_Types\Event\Event;
+use Tribe\Project\Post_Types\Page\Page;
 
 class Initializer {
 	private $panel_types_to_initialize = [ ];

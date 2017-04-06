@@ -28,80 +28,11 @@ abstract class Tribe_Service_Provider implements ServiceProviderInterface {
 	 *            \Tribe\Project\Panels\Types
 	 */
 	protected $panels = [ ];
-	/**
-	 * @var array Class names of post types to register
-	 *            Classes should be in the namespace
-	 *            \Tribe\Project\Post_Types and should have
-	 *            a configuration class in the namespace
-	 *            \Tribe\Project\Post_Types\Config (unless
-	 *            already registered by a 3rd-party plugin).
-	 */
-	protected $post_types = [ ];
-	/**
-	 * @var array Keys are class names of taxonomies to register.
-	 *            Classes should be in the namespace
-	 *            \Tribe\Project\Taxonomies and should have
-	 *            a configuration class in the namespace
-	 *            \Tribe\Project\Taxonomies\Config (unless
-	 *            already registered by a 3rd-party plugin).
-	 *
-	 *            Values should be an array of Post Type classes
-	 *            that will be registered to use the Taxonomy.
-	 */
-	protected $taxonomies          = [ ];
 
 	public function register( Container $container ) {
-		$this->post_types( $container );
-		$this->taxonomies( $container );
 		$this->p2p( $container );
 		$this->nav( $container );
 		$this->panels( $container );
-	}
-
-	protected function post_types( Container $container ) {
-		foreach ( $this->post_types as $type ) {
-			$container[ 'post_type.' . $type ] = function ( $container ) use ( $type ) {
-				$post_type_class_name = '\\Tribe\\Project\\Post_Types\\' . $type;
-				return new $post_type_class_name;
-			};
-			$container[ 'post_type.' . $type . '.config' ] = function ( $container ) use ( $type ) {
-				$config_class_name = '\\Tribe\\Project\\Post_Types\\Config\\' . $type;
-				$post_type = $container[ 'post_type.' . $type ];
-				if ( ! class_exists( $config_class_name ) ) {
-					$config_class_name = '\\Tribe\\Project\\Post_Types\\Config\\External_Post_Type_Config';
-				}
-				return new $config_class_name( $post_type::NAME );
-			};
-
-			add_action( 'init', function() use ( $container, $type ) {
-				$container[ 'post_type.' . $type . '.config' ]->register();
-			}, 0, 0 );
-		}
-	}
-
-	protected function taxonomies( Container $container ) {
-		foreach ( $this->taxonomies as $type => $post_types ) {
-
-			$container[ 'taxonomy.' . $type ] = function ( $container ) use ( $type ) {
-				$taxonomy_class_name = '\\Tribe\\Project\\Taxonomies\\' . $type;
-				return new $taxonomy_class_name;
-			};
-
-			$container[ 'taxonomy.' . $type . '.config' ] = function ( $container ) use ( $type, $post_types ) {
-				$config_class_name = '\\Tribe\\Project\\Taxonomies\\Config\\' . $type;
-				$taxonomy_object = $container[ 'taxonomy.' . $type ];
-				$taxonomy = $taxonomy_object::NAME;
-				$post_types = $this->map_post_type_classes_to_ids( $post_types, $container );
-				if ( ! class_exists( $config_class_name ) ) {
-					$config_class_name = '\\Tribe\\Project\\Taxonomies\\Config\\External_Taxonomy_Config';
-				}
-				return new $config_class_name( $taxonomy, $post_types );
-			};
-
-			add_action( 'init', function() use ( $container, $type ) {
-				$container[ 'taxonomy.' . $type . '.config' ]->register();
-			}, 0, 0 );
-		}
 	}
 
 	protected function p2p( Container $container ) {

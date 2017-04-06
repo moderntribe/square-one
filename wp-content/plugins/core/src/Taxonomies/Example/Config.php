@@ -1,12 +1,12 @@
 <?php
 
 
-namespace Tribe\Project\Taxonomies\Config;
+namespace Tribe\Project\Taxonomies\Example;
 
 
 use Tribe\Libs\Taxonomy\Taxonomy_Config;
 
-class Example extends Taxonomy_Config {
+class Config extends Taxonomy_Config {
 
 	public function get_args() {
 		return [

@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Tribe\Project\Taxonomies;
+namespace Tribe\Project\Taxonomies\Example;
 
 
 class Example {
