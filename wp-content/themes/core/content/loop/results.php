@@ -27,7 +27,7 @@
 			</li>
 
 			<li class="item-loop__meta-author">
-				<?php _e( 'by', 'tribe' ); ?>
+				<?php esc_attr_e( 'by', 'tribe' ); ?>
 				<a href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ) ); ?>" rel="author">
 					<?php the_author(); ?>
 				</a>

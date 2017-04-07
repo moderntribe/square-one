@@ -11,7 +11,7 @@ if ( $wp_query->max_num_pages < 2 ) {
 
 <nav class="pagination pagination--loop" aria-labelledby="pagination__label-loop">
 
-	<h3 id="pagination__label-loop" class="u-visual-hide"><?php _e( 'Posts Pagination', 'tribe' ); ?></h3>
+	<h3 id="pagination__label-loop" class="u-visual-hide"><?php esc_attr_e( 'Posts Pagination', 'tribe' ); ?></h3>
 
 	<ol class="pagination__list">
 

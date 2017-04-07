@@ -19,7 +19,7 @@ if ( ! function_exists( 'core_comment' ) ) :
 
 				<li id="comment-<?php comment_ID(); ?>" <?php comment_class( 'post-interaction' ); ?>>
 					<p>
-						<strong><?php _e( 'Pingback:', 'tribe' ); ?></strong>
+						<strong><?php esc_attr_e( 'Pingback:', 'tribe' ); ?></strong>
 						<?php comment_author_link(); ?>
 						<?php edit_comment_link( __( '(Edit)', 'tribe' ), '<span class="comment__action-edit">', '</span>' ); ?>
 					</p>
@@ -30,7 +30,7 @@ if ( ! function_exists( 'core_comment' ) ) :
 
 				<li id="comment-<?php comment_ID(); ?>" <?php comment_class( 'post-interaction' ); ?>>
 				<p>
-					<strong><?php _e( 'Trackback:', 'tribe' ); ?></strong>
+					<strong><?php esc_attr_e( 'Trackback:', 'tribe' ); ?></strong>
 					<?php comment_author_link(); ?>
 					<?php edit_comment_link( __( '(Edit)', 'tribe' ), '<span class="comment__action-edit">', '</span>' ); ?>
 				</p>
@@ -66,7 +66,7 @@ if ( ! function_exists( 'core_comment' ) ) :
 
 					<?php // Moderation text
 					if ( $comment->comment_approved == '0' ) { ?>
-						<p class="comment__message-moderation"><?php _e( 'Your comment is awaiting moderation.', 'tribe' ); ?></p>
+						<p class="comment__message-moderation"><?php esc_attr_e( 'Your comment is awaiting moderation.', 'tribe' ); ?></p>
 					<?php } ?>
 
 					<?php // Reply
