@@ -54,10 +54,10 @@
 				<?php endwhile; ?>
 
 				<ul class="browsers">
-					<li><a href="https://www.mozilla.org/en-US/firefox/new/" class="firefox" rel="external" target="_blank"><?php esc_attr_e( 'Firefox', 'tribe' ); ?></a></li>
-					<li><a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie" class="ie" rel="external" target="_blank"><?php esc_attr_e( 'IE 9+', 'tribe' ); ?></a></li>
-					<li><a href="http://www.google.com/chrome/" class="chrome" rel="external" target="_blank"><?php esc_attr_e( 'Chrome', 'tribe' ); ?></a></li>
-					<li><a href="https://support.apple.com/downloads/#safari" class="safari" rel="external" target="_blank"><?php esc_attr_e( 'Safari 6+', 'tribe' ); ?></a></li>
+					<li><a href="https://www.mozilla.org/en-US/firefox/new/" class="firefox" rel="external" target="_blank"><?php esc_html_e( 'Firefox', 'tribe' ); ?></a></li>
+					<li><a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie" class="ie" rel="external" target="_blank"><?php esc_html_e( 'IE 9+', 'tribe' ); ?></a></li>
+					<li><a href="http://www.google.com/chrome/" class="chrome" rel="external" target="_blank"><?php esc_html_e( 'Chrome', 'tribe' ); ?></a></li>
+					<li><a href="https://support.apple.com/downloads/#safari" class="safari" rel="external" target="_blank"><?php esc_html_e( 'Safari 6+', 'tribe' ); ?></a></li>
 				</ul>
 
 			</div>
