@@ -10,14 +10,6 @@ namespace Tribe\Project\Theme\Nav;
  */
 class Nav_Attribute_Filters {
 
-	public function hook() {
-
-		add_filter( 'nav_menu_item_id', [ $this, 'clean_nav_item_id' ], 10, 4 );
-		add_filter( 'nav_menu_css_class', [ $this, 'clean_nav_item_classes' ], 10, 4 );
-		add_filter( 'nav_menu_link_attributes', [ $this, 'customize_menu_item_atts' ], 10, 4 );
-
-	}
-
 
 	/**
 	 * Remove the ID attributed from the nav item
@@ -27,6 +19,7 @@ class Nav_Attribute_Filters {
 	 * @param array  $args    An array of wp_nav_menu() arguments.
 	 * @param int    $depth   Depth of menu item. Used for padding.
 	 * @return string
+	 * @filter nav_menu_item_id
 	 */
 	public function clean_nav_item_id( $menu_id, $item, $args, $depth ) {
 
@@ -35,24 +28,25 @@ class Nav_Attribute_Filters {
 	}
 
 	/**
-	 * Limit the CSS classes applied to an <li> in the nav menu.
-	 * Only allow whitelisted classes.
+	 * Customize the CSS classes applied to an <li> in the nav menu.
 	 *
 	 * @param array  $classes The CSS classes that are applied to the menu item's `<li>` element.
 	 * @param object $item    The current menu item.
 	 * @param array  $args    An array of {@see wp_nav_menu()} arguments.
 	 * @param int    $depth   Depth of menu item. Used for padding.
 	 * @return array
+	 * @filter nav_menu_css_class
 	 */
-	public function clean_nav_item_classes( $classes, $item, $args, $depth ) {
+	public function customize_nav_item_classes( $classes, $item, $args, $depth ) {
 
-		$classes[] = 'menu-item-depth-' . $depth;
+		$classes[] = 'menu-item--depth-' . $depth;
 
 		$allowed_class_names = array(
+			'menu-item',
 			'menu-item-has-children',
 			'current-menu-parent',
 			'current-menu-item',
-			'menu-item-depth-' . $depth,
+			'menu-item--depth-' . $depth,
 		);
 
 		return array_intersect( $allowed_class_names, $classes );
@@ -74,6 +68,7 @@ class Nav_Attribute_Filters {
 	 * @param array  $args  An array of {@see wp_nav_menu()} arguments.
 	 * @param int    $depth Depth of menu item. Used for padding.
 	 * @return array
+	 * @filter nav_menu_link_attributes
 	 */
 	public function customize_menu_item_atts( $atts, $item, $args, $depth ) {
 
@@ -86,11 +81,11 @@ class Nav_Attribute_Filters {
 		if ( $args[ 'theme_location' ] === 'primary' ) {
 			// Top Level Items
 			if ( 0 === $depth ) {
-				$atts['class'] = 'menu-item-top-level-action';
+				$atts['class'] = 'menu-item__anchor';
 
 				// Item has children
 				if ( in_array( 'menu-item-has-children', $item->classes ) ) {
-					$atts['class']      .= ' menu-item-parent-trigger';
+					$atts['class']      .= ' menu-item__anchor--child';
 					$atts['id']          = 'menu-item-' . $item->ID;
 					$atts['data-target'] = 'sub-menu-' . $item->ID;
 				}

@@ -99,7 +99,7 @@
 		var ascendingSort = function( a, b ) {
 			return a.w - b.w;
 		};
-		var regPxLength = /^\s*\d+px\s*$/;
+		var regPxLength = /^\s*\d+\.*\d*px\s*$/;
 		var reduceCandidate = function (srces) {
 			var lowerCandidate, bonusFactor;
 			var len = srces.length;
@@ -189,7 +189,7 @@
 
 			if(!srcSet && isImage){
 				srcSet = !elem._lazypolyfill ?
-					(elem.getAttribute('src') || elem.getAttribute(config.srcAttr)) :
+					(elem.getAttribute(config.srcAttr) || elem.getAttribute('src')) :
 					elem._lazypolyfill._set
 				;
 			}
@@ -201,7 +201,7 @@
 					parsedSet.isPicture = elem.parentNode.nodeName.toUpperCase() == 'PICTURE';
 
 					if(parsedSet.isPicture){
-						if(window.matchMedia || (window.Modernizr && Modernizr.mq)){
+						if(window.matchMedia){
 							lazySizes.aC(elem, 'lazymatchmedia');
 							runMatchMedia();
 						}
@@ -227,8 +227,6 @@
 				matchesMedia = function(media){
 					return !media || (matchMedia(media) || {}).matches;
 				};
-			} else if(window.Modernizr && Modernizr.mq){
-				return !media || Modernizr.mq(media);
 			} else {
 				return !media;
 			}
@@ -258,9 +256,12 @@
 				width = source.getAttribute('sizes') || '';
 				width = regPxLength.test(width) && parseInt(width, 10) || lazySizes.gW(elem, elem.parentNode);
 				srces.d = getX(elem);
-				if(!srces.w || srces.w < width){
+				if(!srces.src || !srces.w || srces.w < width){
 					srces.w = width;
 					src = reduceCandidate(srces.sort(ascendingSort));
+					srces.src = src;
+				} else {
+					src = srces.src;
 				}
 			} else {
 				src = srces[0];

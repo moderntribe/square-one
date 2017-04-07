@@ -11,13 +11,24 @@ namespace Tribe\Project\Settings\Contracts;
  */
 abstract class ACF_Settings extends Base_Settings {
 
-
 	/**
 	 * Return array of ACF fields
 	 *
 	 * @return array
 	 */
 	abstract public function get_fields();
+
+	/**
+	 * @param int $priority
+	 */
+	public function hook( $priority = 10 ) {
+		// Don't load anything if ACF is not installed
+		if ( ! function_exists( 'acf_add_options_sub_page' ) ) {
+			return;
+		}
+
+		parent::hook( $priority );
+	}
 
 	/**
 	 * Get setting value

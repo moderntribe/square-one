@@ -7,24 +7,29 @@ module.exports = {
 		jquery: 'jQuery',
 	},
 	resolveLoader: {
-		root: path.join(__dirname, 'node_modules'),
+		modules: [
+			path.resolve(__dirname, 'node_modules'),
+		],
 	},
 	resolve: {
-		extensions: ['', '.js', '.jsx', 'json'],
-		modulesDirectories: ['node_modules'],
-		fallback: path.join(__dirname, 'node_modules'),
+		alias: {
+			masonry: 'masonry-layout',
+			isotope: 'isotope-layout',
+		},
+		modules: [
+			path.resolve('./wp-content/themes/core/js/src'),
+			path.resolve(__dirname, 'node_modules'),
+		],
+		extensions: ['.js', '.jsx'],
 	},
 	module: {
+		noParse: /node_modules\/vex-js\/dist\/js\/vex.js/,
 		loaders: [
 			{
 				test: /\.js$/,
 				loader: 'babel-loader',
 				exclude: /node_modules/,
-			},
-			{
-				include: /\.json$/,
-				loaders: ['json-loader'],
-			},
+			}
 		],
 	},
 	plugins: [

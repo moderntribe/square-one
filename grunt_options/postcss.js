@@ -10,8 +10,9 @@ var postcssFunctions = require('../dev_components/theme/pcss/functions');
 var compileOptions = {
 	map: true,
 	processors: [
-		require('postcss-partial-import')({ extension: 'pcss', }),
-		require('postcss-inline-comment'),
+		require('postcss-partial-import')({
+			extension: ".pcss",
+		}),
 		require('postcss-mixins'),
 		require('postcss-custom-properties'),
 		require('postcss-simple-vars'),
@@ -19,9 +20,10 @@ var compileOptions = {
 		require('postcss-functions')({ functions: postcssFunctions }),
 		require('postcss-quantity-queries'),
 		require('postcss-aspect-ratio'),
-		require('postcss-cssnext')({ browsers: ['last 3 versions', 'ie 10'] }),
 		require('postcss-nested'),
 		require('lost'),
+		require('postcss-inline-svg'),
+		require('postcss-cssnext'),
 	],
 };
 
@@ -116,6 +118,9 @@ module.exports = {
 
 	themeLint: {
 		options: lintOptions,
-		src: '<%= pkg._corethemepath %>/pcss/**/*.pcss',
+		src: [
+			'<%= pkg._corethemepath %>/pcss/**/*.pcss',
+			'!<%= pkg._corethemepath %>/pcss/content/page/_legacy.pcss',
+		],
 	},
 };

@@ -1,41 +1,68 @@
-
 /* -------------------------------------------------------------------------
  * Global Forms
  * ------------------------------------------------------------------------- */
 
 form {
-	.context-content & {
+
+	.t-content & {
 		margin: var(--spacer) auto;
 	}
 }
 
 /* -----------------------------------------------------------------------------
  *
- * Form: Input Block / Wrapper
+ * Form: Field Group / Wrapper
  *
  * Example:
- * <div class="input">
- *   <label class="label" for="text">Label: Text Input</label>
- *   <input name="text" class="field" type="text" />
+ * <div class="form-field-group form-control-required">
+ *   <label class="form-control-label" for="textFieldExample">Label</label>
+ *	 <input id="textFieldExample" class="form-control" name="textFieldExample" aria-describedby="textFieldExampleHelper" type="text" />
+ *	 <p id="textFieldExampleHelper" class="form-control-helper">Helper text</p>
  * </div>
  *
  * ----------------------------------------------------------------------------- */
 
-.input {
-	margin-bottom: var(--spacer);
+.form-field-group {
+	margin-bottom: var(--form-control-margin-bottom);
 	line-height: var(--line-height-even);
 }
 
 /* -----------------------------------------------------------------------------
  *
- * Form: Input Field
+ * Form: Control Group / Wrapper
  *
  * Example:
- * <input name="text" class="field" type="text" />
+ * <div class="form-field-group form-control-required">
+ *   <div class="form-control-group">
+ *     <label class="form-control-label" for="textFieldExample">Label</label>
+ *	   <input id="textFieldExample" class="form-control" name="textFieldExample" aria-describedby="textFieldExampleHelper" type="text" />
+ *	   <p id="textFieldExampleHelper" class="form-control-helper">Helper text</p>
+ *   </div>
+ * </div>
  *
  * ----------------------------------------------------------------------------- */
 
-/* input, button, textarea, select */
-.field {
-	@mixin field;
+.form-control-group {
+
+}
+
+/* -----------------------------------------------------------------------------
+ *
+ * Form: Control Group / Wrapper, radio & checkbox specific
+ *
+ * Example:
+ * <fieldset>
+ *   <legend>Legend for Checkboxes</legend>
+ * 	 <div class="form-field-group form-control-group-radio-checkbox">
+ * 	   <span class="form-control-checkbox">
+ * 	     <input id="checkboxOne" name="checkboxGroup" type="checkbox" value="checkboxOne" checked="checked" />
+ *	     <label for="checkboxOne">Checkbox One</label>
+ * 	   </span>
+ *   </div>
+ * </fieldset>
+ *
+ * ----------------------------------------------------------------------------- */
+
+.form-control-group-radio-checkbox {
+	@mixin form-control-group-radio-checkbox;
 }

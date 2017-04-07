@@ -6,23 +6,34 @@
 img {
 	margin-left: auto;
 	margin-right: auto;
-	.context-content & {
+
+	.t-content & {
 		line-height: 0;
-		width: auto;
 		height: auto;
 		display: block;
+
+		/* Messes with WP editor image resizing
+		and don't think it's needed
+		width: auto; */
 	}
 }
 
 /* -----------------------------------------------------------------------------
- * Media: Wrappers
+ * Media: Wrapper
  * ----------------------------------------------------------------------------- */
 
-.wp-image-wrap,
-.wp-caption {
+.wp-image {
 	width: auto !important;
 	max-width: none;
 	margin: 0 auto;
+}
+
+.wp-image--no-caption {
+
+}
+
+.wp-image--caption {
+
 }
 
 /* -----------------------------------------------------------------------------

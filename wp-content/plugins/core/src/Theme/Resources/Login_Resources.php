@@ -3,12 +3,10 @@
 namespace Tribe\Project\Theme\Resources;
 
 class Login_Resources {
-	public function hook() {
-		add_action( 'login_enqueue_scripts', [ $this, 'login_styles' ] );
-	}
 
 	/**
 	 * Add a stylesheet to the login page
+	 * @action login_enqueue_scripts
 	 */
 	public function login_styles() {
 

@@ -1,0 +1,60 @@
+div.uploaderSection {
+	position: relative;
+}
+
+div.current-uploaded-image {
+	width: 100%;
+	overflow: hidden;
+	margin-bottom: 10px;
+	position: relative;
+	display: none;
+}
+
+div.current-uploaded-image img {
+	height: auto !important;
+	display: block;
+	cursor: pointer;
+	
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+}
+
+
+div.current-uploaded-image .wp-caption {
+	cursor: pointer;
+}
+
+div.uploaderSection div.loading {
+	width: 32px;
+	height: 32px;
+	position: absolute;
+	top: 50%; left: 50%;
+	margin: -16px 0px 0px -16px;
+	display: none;
+}
+
+div.drag-drop-area {
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+}
+
+.drag-drop-area{
+	border: 4px dashed #bbb;
+}
+
+.drag-over .drag-drop-area {
+	background-color: #999;
+	background-color: rgba(0,0,0,0.4);
+}
+
+
+div.uploaderSection div.drag-drop-inside {
+	margin-top: 48px !important;
+}
+
+body.mp6 div.uploaderSection div.drag-drop-inside,
+body.wp38 div.uploaderSection div.drag-drop-inside {
+	margin-top: 25px !important;
+}

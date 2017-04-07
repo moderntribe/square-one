@@ -11,13 +11,6 @@ var defaultOpts = {
 };
 
 module.exports = {
-	corePHP: {
-		files: [
-			'<%= pkg._corethemepath %>/**/*.php',
-		],
-		options: defaultOpts,
-	},
-
 	themeCSS: {
 		files: [
 			'<%= pkg._corethemepath %>/pcss/**/*.pcss',
@@ -44,7 +37,6 @@ module.exports = {
 	themeScripts: {
 		files: [
 			'<%= pkg._corethemepath %>/js/src/**/*.js',
-			'<%= pkg._corethemepath %>/js/vendor/tribe-libs/**/*.js',
 		],
 		tasks: [
 			'webpack:themeDev',

@@ -12,10 +12,13 @@ import _ from 'lodash';
 import resize from './resize';
 import plugins from './plugins';
 import viewportDims from './viewport-dims';
+import applyBrowserClasses from '../utils/dom/apply-browser-classes';
 
 import { on, ready } from '../utils/events';
 
-import tribeLibs from '../../vendor/tribe-libs/index';
+import modules from '../modules/index';
+
+import single from '../single/index';
 
 /**
  * @function bindEvents
@@ -32,6 +35,10 @@ const bindEvents = () => {
  */
 
 const init = () => {
+	// apply browser classes
+
+	applyBrowserClasses();
+
 	// init external plugins
 
 	plugins();
@@ -44,11 +51,13 @@ const init = () => {
 
 	bindEvents();
 
-	// initialize the tribe lib scripts
+	// initialize the module scripts
 
-	tribeLibs();
+	modules();
 
 	// initialize the main scripts
+
+	single();
 
 	console.info('Initialized all javascript that targeted document ready.');
 };

@@ -5,6 +5,10 @@ namespace Tribe\Project\Theme;
 
 
 class WP_Responsive_Image_Disabler {
+	/**
+	 * @return void
+	 * @action init
+	 */
 	public function hook() {
 		add_filter( 'wp_get_attachment_image_attributes', [ $this, 'filter_image_attributes' ], 999, 1 );
 

@@ -16,17 +16,20 @@
 .btn,
 a.btn {
 	@mixin button-global;
-	background-color: var(--black);
+
+	background-color: var(--color-black);
 	padding: 1em;
 	text-align: center;
-	color: var(--white);
+	color: var(--color-white);
+
 	&:visited {
-		color: var(--white);
+		color: var(--color-white);
 	}
+
 	&:hover,
 	&:focus,
 	&:active {
-		color: var(--white);
-		background-color: var(--grey-dark);
+		color: var(--color-white);
+		background-color: var(--color-grey-dark);
 	}
 }

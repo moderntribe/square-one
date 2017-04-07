@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
 
-	<?php // TITLE ?>
-	<title><?php wp_title( '|', true, 'right' ); ?></title>
+	<?php // TITLE: Handled by WP ?>
 
 	<?php // MISC META ?>
 	<meta charset="utf-8">
@@ -26,7 +25,7 @@
 </head>
 <body <?php body_class(); ?>>
 
-	<div id="site-wrap">
+	<div class="l-site-wrapper" data-js="site-wrap">
 
 		<?php // Content: Header
 		get_template_part( 'content/header/default' ); ?>

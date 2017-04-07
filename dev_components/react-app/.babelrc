@@ -1,0 +1,9 @@
+{
+	"presets": ["es2015","stage-0","react"],
+	"plugins": ["lodash","react-hot-loader/babel"],
+	"env": {
+		"test": {
+			"plugins": ["istanbul"]
+		}
+	}
+}

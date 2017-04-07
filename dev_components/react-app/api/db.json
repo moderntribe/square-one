@@ -1,0 +1,53 @@
+{
+	"test": [{
+		"id": 1,
+		"label": "Do this",
+		"items": [{
+			"id": "1",
+			"image": "https://facebook.github.io/react/img/logo_og.png",
+			"title": "Central Park",
+			"address": "604 w st."
+		}, {
+			"id": "2",
+			"image": "https://facebook.github.io/react/img/logo_og.png",
+			"title": "Central Park",
+			"address": "604 w st."
+		}, {
+			"id": "3",
+			"image": "https://facebook.github.io/react/img/logo_og.png",
+			"title": "Hello Park",
+			"address": "604 w st."
+		}]
+	}, {
+		"id": 2,
+		"label": "Drink here",
+		"items": [{
+			"id": "3",
+			"image": "https://facebook.github.io/react/img/logo_og.png",
+			"title": "Where to have alcohol",
+			"address": "604 w st.",
+			"tags": "bar"
+		}, {
+			"id": "4",
+			"image": "https://facebook.github.io/react/img/logo_og.png",
+			"title": "The drinking hole",
+			"address": "604 w st.",
+			"tags": "bar"
+		}]
+	}, {
+		"id": 3,
+		"label": "Eat here",
+		"items": [{
+			"id": "5",
+			"image": "https://facebook.github.io/react/img/logo_og.png",
+			"title": "Central Park",
+			"address": "604 w st."
+		}, {
+			"id": "6",
+			"image": "https://facebook.github.io/react/img/logo_og.png",
+			"title": "Central Park",
+			"address": "604 w st."
+		}]
+	}]
+}
+

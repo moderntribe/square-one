@@ -1,16 +1,24 @@
 <?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) { ?>
 
-	<nav class="comment-navigation">
-		
-		<h6 class="accessbility">Comments Navigation</h6>
+	<nav class="pagination pagination--comments" aria-labelledby="pagination__label-comments">
 
-		<div class="nav-prev">
-			<?php previous_comments_link( '&larr; Older Comments' ); ?>
-		</div>
+		<h3 id="pagination__label-comments" class="u-visual-hide"><?php _e( 'Comments Pagination', 'tribe' ); ?></h3>
 
-		<div class="nav-next">
-			<?php next_comments_link( 'Newer Comments &rarr;' ); ?>
-		</div>
+		<ol class="pagination__list">
+
+			<?php if ( get_previous_comments_link() ) : ?>
+				<li class="pagination__item pagination__item--previous">
+					<?php previous_comments_link( __( '&larr; Older Comments', 'tribe' ) ); ?>
+				</li>
+			<?php endif; ?>
+
+			<?php if ( get_next_comments_link() ) : ?>
+				<li class="pagination__item pagination__item--next">
+					<?php next_comments_link( __( 'Newer Comments &rarr;', 'tribe' ) ); ?>
+				</li>
+			<?php endif; ?>
+
+		</ol>
 
 	</nav>
 

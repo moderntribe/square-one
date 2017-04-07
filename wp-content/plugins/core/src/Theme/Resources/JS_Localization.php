@@ -16,11 +16,11 @@ class JS_Localization {
 	public function get_data() {
 		$js_i18n_array = array(
 			'help_text' => array(
-				'msg_limit'   => __( 'There is a limit to the messages you can post.' )
+				'msg_limit'   => __( 'There is a limit to the messages you can post.', 'tribe' )
 			),
 			'tooltips' => array(
-				'add_to_save'   => __( 'Add Photo to Saved Items' ),
-				'in_this_photo' => __( 'Products in this photo' )
+				'add_to_save'   => __( 'Add Photo to Saved Items', 'tribe' ),
+				'in_this_photo' => __( 'Products in this photo', 'tribe' )
 			)
 		);
 

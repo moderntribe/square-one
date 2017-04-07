@@ -17,7 +17,7 @@ const canLocalStore = () => {
 	let mod;
 	let result = false;
 	try {
-		mod = new Date;
+		mod = new Date();
 		localStorage.setItem(mod, mod.toString());
 		result = localStorage.getItem(mod) === mod.toString();
 		localStorage.removeItem(mod);
@@ -28,16 +28,28 @@ const canLocalStore = () => {
 	}
 };
 
+const android = /(android)/i.test(navigator.userAgent);
+const chrome = !!window.chrome;
+const firefox = typeof InstallTrigger !== 'undefined';
+const ie = /* @cc_on!@ */false || document.documentMode;
+const edge = !ie && !!window.StyleMedia;
+const ios = !!navigator.userAgent.match(/(iPod|iPhone|iPad)/i);
+const iosMobile = !!navigator.userAgent.match(/(iPod|iPhone)/i);
+const opera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+const safari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0 || !chrome && !opera && window.webkitAudioContext !== 'undefined'; // eslint-disable-line
+const os = navigator.platform;
+
 const browserTests = () => ({
-	android: /Android/i.test(window.navigator.userAgent) && /Mobile/i.test(window.navigator.userAgent),
-	chrome: !!window.chrome,
-	firefox: typeof InstallTrigger !== 'undefined',
-	ie: /* @cc_on!@ */false || document.documentMode,
-	ios: !!navigator.userAgent.match(/(iPod|iPhone|iPad)/i),
-	iosMobile: !!navigator.userAgent.match(/(iPod|iPhone)/i),
-	safari: Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0,
-	opera: !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0,
-	os: navigator.platform,
+	android,
+	chrome,
+	edge,
+	firefox,
+	ie,
+	ios,
+	iosMobile,
+	opera,
+	safari,
+	os,
 });
 
 export { isJson, canLocalStore, browserTests };

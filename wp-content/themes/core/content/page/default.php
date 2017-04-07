@@ -1,8 +1,8 @@
 <?php // Featured Image
-$options = [ 'wrapper_class' => 'page-featured-img' ];
+$options = [ 'wrapper_class' => 'page__image' ];
 the_tribe_image( get_post_thumbnail_id(), $options ); ?>
 
 <?php // Content ?>
-<div class="context-content">
+<div class="t-content">
 	<?php the_content(); ?>
 </div>

@@ -41,11 +41,11 @@ const setOffset = () => {
 	options.offset = -10;
 
 	if (hasClass(document.body, 'admin-bar')) {
-		options.offset = options.offset - 40;
+		options.offset = -10 - 40;
 	}
 
 	if (pn) {
-		options.offset = options.offset - pn.offsetHeight;
+		options.offset = -10 - pn.offsetHeight;
 	}
 };
 
@@ -100,7 +100,7 @@ const toggleItem = (e) => {
 
 const bindEvents = () => {
 	$(options.el)
-		.on('click', '.ac-header', (e) => toggleItem(e));
+		.on('click', '.ac-header', e => toggleItem(e));
 };
 
 /**

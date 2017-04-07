@@ -7,7 +7,8 @@
 blockquote,
 .quote,
 q {
-	.context-content & {
+
+	.t-content & {
 		margin: var(--spacer) auto;
 	}
 }
@@ -18,9 +19,10 @@ q {
 
 /* q */
 .quote,
-.context-content q {
+.t-content q {
 	@mixin quote-base;
 	@mixin quote-text;
+
 	display: block;
 }
 
@@ -30,10 +32,12 @@ q {
 
 /* blockquote */
 .blockquote,
-.context-content blockquote {
+.t-content blockquote {
 	@mixin quote-base;
+
 	p {
 		@mixin quote-text;
+
 		margin: 0 auto;
 
 		& ~ p {
@@ -48,7 +52,7 @@ q {
 
 /* cite */
 .cite,
-.context-content cite {
+.t-content cite {
 	font-style: normal;
 	display: block;
 }

@@ -23,6 +23,7 @@ Thumbs.db
 
 local-config.php
 cache-config.php
+tests-config.php
 wp-content/uploads/
 wp-content/blogs.dir/
 wp-content/upgrade/
@@ -70,7 +71,8 @@ dev/bower_components/
 dev/vendor/
 dev/composer.phar
 local-config.json
-dev/docker/
+dev/docker/mysql/*
+!dev/docker/mysql/.gitkeep
 
 # WP Engine #
 #############
@@ -91,3 +93,6 @@ wp-content/plugins/airplane-mode
 
 **/node_modules/
 **/bower_components/
+**/__coverage__/
+dev_components/react-app/test/__coverage__/
+dev/deploy/.deploy
