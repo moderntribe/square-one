@@ -34,7 +34,7 @@ if ( post_password_required() ) {
 		get_template_part( 'content/pagination/comments' ); ?>
 
 		<?php if ( ! comments_open() ) { ?>
-			<p class="comments__none"><?php _e( 'Comments are closed.', 'tribe' ); ?></p>
+			<p class="comments__none"><?php esc_attr_e( 'Comments are closed.', 'tribe' ); ?></p>
 		<?php } ?>
 
 	<?php endif; ?>
