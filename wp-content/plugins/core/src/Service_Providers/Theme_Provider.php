@@ -210,7 +210,7 @@ class Theme_Provider implements ServiceProviderInterface {
 		}, 10, 0 );
 		add_filter( 'tiny_mce_before_init', function ( $settings ) use ( $container ) {
 			return $container[ 'theme.resources.editor_styles' ]->visual_editor_body_class( $settings );
-		}, 10, 0 );
+		}, 10, 1 );
 	}
 
 	private function nav_attributes( Container &$container ) {
