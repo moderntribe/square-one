@@ -55,7 +55,7 @@ abstract class Tribe_Service_Provider implements ServiceProviderInterface {
 			$container[ 'menu.' . $location ] = function ( $container ) use ( $location, $description ) {
 				return new Menu_Location( $location, $description );
 			};
-			add_action( 'init', function() use ( $container, $location ) {
+			add_action( 'plugins_loaded', function() use ( $container, $location ) {
 				$container[ 'menu.' . $location ]->hook();
 			}, 10, 0 );
 		}
