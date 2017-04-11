@@ -57,29 +57,29 @@ module.exports = {
 	theme: {
 		options: compileOptions,
 		files: {
-			'<%= pkg._corethemepath %>/css/master.css': '<%= pkg._corethemepath %>/pcss/master.pcss',
-			'<%= pkg._corethemepath %>/css/print.css': '<%= pkg._corethemepath %>/pcss/print.pcss',
+			'<%= pkg._core_theme_assets_path %>/css/master.css': '<%= pkg._core_theme_assets_path %>/pcss/master.pcss',
+			'<%= pkg._core_theme_assets_path %>/css/print.css': '<%= pkg._core_theme_assets_path %>/pcss/print.pcss',
 		},
 	},
 
 	themeWPEditor: {
 		options: compileOptions,
 		files: {
-			'<%= pkg._corethemepath %>/css/admin/editor-style.css': '<%= pkg._corethemepath %>/pcss/admin/editor-style.pcss',
+			'<%= pkg._core_theme_assets_path %>/css/admin/editor-style.css': '<%= pkg._core_theme_assets_path %>/pcss/admin/editor-style.pcss',
 		},
 	},
 
 	themeWPLogin: {
 		options: compileOptions,
 		files: {
-			'<%= pkg._corethemepath %>/css/admin/login.css': '<%= pkg._corethemepath %>/pcss/admin/login.pcss',
+			'<%= pkg._core_theme_assets_path %>/css/admin/login.css': '<%= pkg._core_theme_assets_path %>/pcss/admin/login.pcss',
 		},
 	},
 
 	themeLegacy: {
 		options: legacyOptions,
 		files: {
-			'<%= pkg._corethemepath %>/css/legacy.css': '<%= pkg._corethemepath %>/pcss/legacy.pcss',
+			'<%= pkg._core_theme_assets_path %>/css/legacy.css': '<%= pkg._core_theme_assets_path %>/pcss/legacy.pcss',
 		},
 	},
 
@@ -88,29 +88,29 @@ module.exports = {
 	themeMin: {
 		options: cssnanoOptions,
 		files: {
-			'<%= pkg._corethemepath %>/css/dist/master.min.css': '<%= pkg._corethemepath %>/css/master.css',
-			'<%= pkg._corethemepath %>/css/dist/print.min.css': '<%= pkg._corethemepath %>/css/print.css',
+			'<%= pkg._core_theme_assets_path %>/css/dist/master.min.css': '<%= pkg._core_theme_assets_path %>/css/master.css',
+			'<%= pkg._core_theme_assets_path %>/css/dist/print.min.css': '<%= pkg._core_theme_assets_path %>/css/print.css',
 		},
 	},
 
 	themeWPEditorMin: {
 		options: cssnanoOptions,
 		files: {
-			'<%= pkg._corethemepath %>/css/admin/dist/editor-style.min.css': '<%= pkg._corethemepath %>/css/admin/editor-style.css',
+			'<%= pkg._core_theme_assets_path %>/css/admin/dist/editor-style.min.css': '<%= pkg._core_theme_assets_path %>/css/admin/editor-style.css',
 		},
 	},
 
 	themeWPLoginMin: {
 		options: cssnanoOptions,
 		files: {
-			'<%= pkg._corethemepath %>/css/admin/dist/login.min.css': '<%= pkg._corethemepath %>/css/admin/login.css',
+			'<%= pkg._core_theme_assets_path %>/css/admin/dist/login.min.css': '<%= pkg._core_theme_assets_path %>/css/admin/login.css',
 		},
 	},
 
 	themeLegacyMin: {
 		options: cssnanoOptions,
 		files: {
-			'<%= pkg._corethemepath %>/css/dist/legacy.min.css': '<%= pkg._corethemepath %>/css/legacy.css',
+			'<%= pkg._core_theme_assets_path %>/css/dist/legacy.min.css': '<%= pkg._core_theme_assets_path %>/css/legacy.css',
 		},
 	},
 
@@ -119,8 +119,8 @@ module.exports = {
 	themeLint: {
 		options: lintOptions,
 		src: [
-			'<%= pkg._corethemepath %>/pcss/**/*.pcss',
-			'!<%= pkg._corethemepath %>/pcss/content/page/_legacy.pcss',
+			'<%= pkg._core_theme_assets_path %>/pcss/**/*.pcss',
+			'!<%= pkg._core_theme_assets_path %>/pcss/content/page/_legacy.pcss',
 		],
 	},
 };

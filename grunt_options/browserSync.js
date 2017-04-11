@@ -9,15 +9,15 @@ module.exports = {
 	dev: {
 		bsFiles: {
 			src: [
-				'<%= pkg._corethemepath %>/css/master.css',
-				'<%= pkg._corethemepath %>/**/*.php',
-				'<%= pkg._corethemepath %>/js/dist/*.js',
-				'<%= pkg._corethemepath %>/img/*.jpg',
-				'<%= pkg._corethemepath %>/img/*.png',
+				'<%= pkg._core_theme_assets_path %>/css/master.css',
+				'<%= pkg._core_theme_path %>/**/*.php',
+				'<%= pkg._core_theme_assets_path %>/js/dist/*.js',
+				'<%= pkg._core_theme_assets_path %>/img/*.jpg',
+				'<%= pkg._core_theme_assets_path %>/img/*.png',
 
-				'<%= pkg._corepluginpath %>/assets/**/*.css',
-				'<%= pkg._corepluginpath %>/assets/**/*.js',
-				'<%= pkg._corepluginpath %>/**/*.php',
+				'<%= pkg._core_plugin_path %>/assets/**/*.css',
+				'<%= pkg._core_plugin_path %>/assets/**/*.js',
+				'<%= pkg._core_plugin_path %>/**/*.php',
 			],
 		},
 		options: {

@@ -4,10 +4,11 @@
   "description": "Tribe build process",
   "license": "GPL-2.0",
   "repository": "https://github.com/moderntribe/square-one.git",
-  "_corethemepath": "wp-content/themes/core",
-  "_corepluginpath": "wp-content/plugins/core",
-  "_npmpath": "node_modules",
-  "_componentpath": "dev_components",
+  "_core_theme_path": "wp-content/themes/core",
+  "_core_theme_assets_path": "wp-content/plugins/core/assets/theme",
+  "_core_plugin_path": "wp-content/plugins/core",
+  "_npm_path": "node_modules",
+  "_component_path": "dev_components",
   "engines": {
     "node": "6.9.4",
     "npm": "3.10.10"
@@ -91,7 +92,7 @@
   },
   "jest": {
     "collectCoverage": true,
-    "coverageDirectory": "<rootDir>/wp-content/themes/core/js/test/__coverage__",
+    "coverageDirectory": "<rootDir>/wp-content/plugins/core/assets/theme/js/test/__coverage__",
     "coverageReporters": [
       "json",
       "lcov",
@@ -99,14 +100,14 @@
     ],
     "moduleNameMapper": {},
     "modulePaths": [
-      "<rootDir>/wp-content/themes/core/js/src",
-      "<rootDir>/wp-content/themes/core/js/test"
+      "<rootDir>/wp-content/plugins/core/assets/theme/js/src",
+      "<rootDir>/wp-content/plugins/core/assets/theme/js/test"
     ],
     "setupFiles": [
-      "<rootDir>/wp-content/themes/core/js/test/setup.js"
+      "<rootDir>/wp-content/plugins/core/assets/theme/js/test/setup.js"
     ],
     "testPathDirs": [
-      "<rootDir>/wp-content/themes/core/js/test"
+      "<rootDir>/wp-content/plugins/core/assets/theme/js/test"
     ],
     "testRegex": "test/tests/.*\\.test\\.js$"
   }

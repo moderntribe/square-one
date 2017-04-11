@@ -88,8 +88,8 @@ class Admin_Search_Filtering {
 		if ( empty( self::$post_type_options ) ) {
 			return;
 		}
-		self::$asset_loader->register_and_enqueue_script( 'p2p-posttype-filter', 'p2p/p2p-posttype-filter.js', [ 'jquery' ], '', true );
-		self::$asset_loader->register_and_enqueue_stylesheet( 'p2p-posttype-filter', 'p2p/p2p-posttype-filter.css' );
+		self::$asset_loader->register_and_enqueue_script( 'p2p-posttype-filter', 'admin/p2p/p2p-posttype-filter.js', [ 'jquery' ], '', true );
+		self::$asset_loader->register_and_enqueue_stylesheet( 'p2p-posttype-filter', 'admin/p2p/p2p-posttype-filter.css' );
 		wp_localize_script( 'p2p-posttype-filter', 'Tribe_P2P_Posttype_Filter', [
 			'relationships' => array_keys(self::$post_type_options),
 			'post_types'    => self::$post_type_options,

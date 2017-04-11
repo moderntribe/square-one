@@ -8,6 +8,6 @@
 
 module.exports = {
 	dist: [
-		'<%= pkg._corethemepath %>/js/src/**/*.js',
+		'<%= pkg._core_theme_assets_path %>/js/src/**/*.js',
 	],
 };

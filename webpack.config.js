@@ -17,7 +17,7 @@ module.exports = {
 			isotope: 'isotope-layout',
 		},
 		modules: [
-			path.resolve('./wp-content/themes/core/js/src'),
+			path.resolve('./wp-content/plugins/core/assets/theme/js/src'),
 			path.resolve(__dirname, 'node_modules'),
 		],
 		extensions: ['.js', '.jsx'],
