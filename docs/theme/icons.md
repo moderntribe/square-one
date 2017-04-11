@@ -15,8 +15,8 @@ For accessible usage of font icons [see here](http://fontawesome.io/accessibilit
 * Add your new icons to the kit
 * Generate fonts using the settings from last round
 * Overwrite all files in `/dev_components/theme/icons/core` with this new kit
-* Copy the files from `/dev_components/theme/icons/core/fonts` to `/wp-content/themes/core/fonts/icons-core`
-* Update `/wp-content/themes/core/pcss/base/_icons.pcss` with new values from `/dev_components/theme/icons/core/style.css`
+* Copy the files from `/dev_components/theme/icons/core/fonts` to `/wp-content/plugins/core/assets/theme/fonts/icons-core`
+* Update `/wp-content/plugins/core/assets/theme/pcss/base/_icons.pcss` with new values from `/dev_components/theme/icons/core/style.css`
 
 ## Table of Contents
 

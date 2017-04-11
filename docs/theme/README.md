@@ -2,9 +2,10 @@
 
 Check `local-config-sample.php` for how to setup your basic wp constants when initializing the project.
 
-The main theme for this system lives in `/wp-content/themes/core`. 
+The main theme for this system lives in `/wp-content/themes/core`.
+The assets (js/css/img/fonts) for this and its child themes live in `/wp-content/plugins/core/assets/theme`. 
 
-If needed base child themes off of this core. 
+If needed base child themes off of this core for the templates for now. 
 
 To begin theme work you must first have your node_modules installed and be on the correct version of node. Check the [Node](/docs/guides/node.md) and [Grunt](/docs/theme/grunt.md) readmes for details on the setup here and the development tasks you need to run.
 
