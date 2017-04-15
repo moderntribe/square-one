@@ -14,18 +14,29 @@ const el = {
 };
 
 /**
+ * @function removeErrantPTags
+ * @description Remove and clean up errant p tags added by WP auto P.
+ */
+
+const removeErrantPTags = (embed) => {
+	const pStray = tools.getNodes('p', true, embed, true);
+
+	if (pStray.length) {
+		pStray.forEach((node) => {
+			node.parentNode.removeChild(node);
+		});
+	}
+};
+
+/**
  * @function setupOembeds
  * @description Setup oembeds.
  */
 
 const setupOembeds = () => {
 	el.embeds.forEach((embed) => {
-		const pStray = embed.querySelector('p');
-
 		// Remove errant WP induced P tag
-		if (pStray !== null) {
-			embed.removeChild(pStray);
-		}
+		removeErrantPTags();
 
 		// Set display mode of embeds for small vs. regular
 		if (embed.offsetWidth >= 500) {
