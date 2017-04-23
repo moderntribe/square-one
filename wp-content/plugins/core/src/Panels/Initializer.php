@@ -271,14 +271,14 @@ class Initializer {
 	}
 
 	public function thumbnail_url( $filename ) {
-		return plugins_url( 'assets/panels/thumbnails/' . $filename, $this->plugin_file );
+		return plugins_url( 'assets/admin/panels/thumbnails/' . $filename, $this->plugin_file );
 	}
 
 	public function layout_icon_url( $filename ) {
-		return plugins_url( 'assets/panels/icons/standard/' . $filename, $this->plugin_file );
+		return plugins_url( 'assets/admin/panels/icons/standard/' . $filename, $this->plugin_file );
 	}
 
 	public function swatch_icon_url( $filename ) {
-		return plugins_url( 'assets/panels/icons/swatches/' . $filename, $this->plugin_file );
+		return plugins_url( 'assets/admin/panels/icons/swatches/' . $filename, $this->plugin_file );
 	}
 }

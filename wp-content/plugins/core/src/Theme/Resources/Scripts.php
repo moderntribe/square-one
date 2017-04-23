@@ -6,13 +6,20 @@ namespace Tribe\Project\Theme\Resources;
 
 class Scripts {
 
+	/** @var string Path to the root file of the plugin */
+	private $plugin_file = '';
+
+	public function __construct( $plugin_file = '' ) {
+		$this->plugin_file = $plugin_file;
+	}
+
 	/**
 	 * Enqueue scripts
 	 * @action wp_enqueue_scripts
 	 */
 	public function enqueue_scripts() {
 
-		$js_dir  = trailingslashit( get_template_directory_uri() ) . 'js/';
+		$js_dir  = $this->get_js_url();
 		$version = tribe_get_version();
 
 		// Custom jQuery (version 2.2.4, IE9+)
@@ -64,6 +71,10 @@ class Scripts {
 			wp_enqueue_script( 'comment-reply' );
 		}
 
+	}
+
+	private function get_js_url() {
+		return plugins_url( 'assets/theme/js/', $this->plugin_file );
 	}
 
 }

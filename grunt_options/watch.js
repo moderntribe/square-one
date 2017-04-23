@@ -13,8 +13,8 @@ var defaultOpts = {
 module.exports = {
 	themeCSS: {
 		files: [
-			'<%= pkg._corethemepath %>/pcss/**/*.pcss',
-			'!<%= pkg._corethemepath %>/pcss/admin/*.pcss',
+			'<%= pkg._core_theme_assets_path %>/pcss/**/*.pcss',
+			'!<%= pkg._core_theme_assets_path %>/pcss/admin/*.pcss',
 		],
 		tasks: [
 			'postcss:theme',
@@ -25,7 +25,7 @@ module.exports = {
 
 	themeAdmin: {
 		files: [
-			'<%= pkg._corethemepath %>/pcss/admin/*.pcss',
+			'<%= pkg._core_theme_assets_path %>/pcss/admin/*.pcss',
 		],
 		tasks: [
 			'postcss:themeWPEditor',
@@ -36,7 +36,7 @@ module.exports = {
 
 	themeScripts: {
 		files: [
-			'<%= pkg._corethemepath %>/js/src/**/*.js',
+			'<%= pkg._core_theme_assets_path %>/js/src/**/*.js',
 		],
 		tasks: [
 			'webpack:themeDev',
@@ -46,7 +46,7 @@ module.exports = {
 
 	themeTemplates: {
 		files: [
-			'<%= pkg._corethemepath %>/**/*.php',
+			'<%= pkg._core_theme_path %>/**/*.php',
 		],
 		options: defaultOpts,
 	},

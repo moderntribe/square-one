@@ -73,6 +73,8 @@ dev/composer.phar
 local-config.json
 dev/docker/mysql/*
 !dev/docker/mysql/.gitkeep
+wp-content/plugins/core/assets/theme/css
+wp-content/plugins/core/assets/theme/js/dist
 
 # WP Engine #
 #############

@@ -7,16 +7,16 @@
 
 module.exports = {
 	themeMinCSS: [
-		'<%= pkg._corethemepath %>/css/dist/*.css',
-		'<%= pkg._corethemepath %>/css/admin/dist/*.css',
+		'<%= pkg._core_theme_assets_path %>/css/dist/*.css',
+		'<%= pkg._core_theme_assets_path %>/css/admin/dist/*.css',
 	],
 
 	themeMinJS: [
-		'<%= pkg._corethemepath %>/js/dist/*.min.js',
+		'<%= pkg._core_theme_assets_path %>/js/dist/*.min.js',
 	],
 
 	themeMinVendorJS: [
-		'<%= pkg._corethemepath %>/js/dist/vendorGlobal.min.js',
-		'<%= pkg._corethemepath %>/js/dist/vendorWebpack.min.js'
+		'<%= pkg._core_theme_assets_path %>/js/dist/vendorGlobal.min.js',
+		'<%= pkg._core_theme_assets_path %>/js/dist/vendorWebpack.min.js'
 	],
 };

@@ -8,9 +8,9 @@
 module.exports = {
 	themeMinVendors: {
 		src: [
-			'<%= pkg._corethemepath %>/js/dist/vendorGlobal.min.js',
-			'<%= pkg._corethemepath %>/js/dist/vendorWebpack.min.js'
+			'<%= pkg._core_theme_assets_path %>/js/dist/vendorGlobal.min.js',
+			'<%= pkg._core_theme_assets_path %>/js/dist/vendorWebpack.min.js'
 		],
-		dest: '<%= pkg._corethemepath %>/js/dist/vendor.min.js',
+		dest: '<%= pkg._core_theme_assets_path %>/js/dist/vendor.min.js',
 	}
 };

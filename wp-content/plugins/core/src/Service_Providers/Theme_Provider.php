@@ -185,7 +185,7 @@ class Theme_Provider implements ServiceProviderInterface {
 
 	private function scripts( Container $container ) {
 		$container[ 'theme.resources.scripts' ] = function ( Container $container ) {
-			return new Scripts();
+			return new Scripts( $container[ 'plugin_file' ] );
 		};
 		add_action( 'wp_enqueue_scripts', function () use ( $container ) {
 			$container[ 'theme.resources.scripts' ]->enqueue_scripts();
@@ -194,7 +194,7 @@ class Theme_Provider implements ServiceProviderInterface {
 
 	private function styles( Container $container ) {
 		$container[ 'theme.resources.styles' ] = function ( Container $container ) {
-			return new Styles();
+			return new Styles( $container[ 'plugin_file' ] );
 		};
 		add_action( 'wp_enqueue_scripts', function () use ( $container ) {
 			$container[ 'theme.resources.styles' ]->enqueue_styles();
