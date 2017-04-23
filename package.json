@@ -18,6 +18,7 @@
     "test:watch": "npm test -- --watch"
   },
   "dependencies": {
+    "@vimeo/player": "^2.0.1",
     "babel-polyfill": "^6.22.0",
     "delegate": "^3.1.2",
     "gsap": "^1.19.1",
