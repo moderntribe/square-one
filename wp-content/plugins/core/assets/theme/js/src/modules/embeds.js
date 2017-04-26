@@ -36,7 +36,7 @@ const removeErrantPTags = (embed) => {
 const setupOembeds = () => {
 	el.embeds.forEach((embed) => {
 		// Remove errant WP induced P tag
-		removeErrantPTags();
+		removeErrantPTags(embed);
 
 		// Set display mode of embeds for small vs. regular
 		if (embed.offsetWidth >= 500) {
