@@ -90,4 +90,13 @@ class Fonts {
 	private function get_webfont_src() {
 		return trailingslashit( get_template_directory_uri() ) . 'js/vendor/webfontloader.js';
 	}
+
+    /**
+  	 * @return Fonts
+  	 */
+  	public static function instance() {
+  		$container = tribe_project()->container();
+
+  		return $container['theme.resources.fonts'];
+  	}
 }

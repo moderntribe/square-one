@@ -2,6 +2,8 @@
 /**
  * Template Name: Page - Unsupported Browser
  */
+
+use Tribe\Project\Theme\Resources\Fonts;
 ?>
 
 <!DOCTYPE html>
@@ -27,8 +29,7 @@
 	<link rel="shortcut icon" href="<?php echo trailingslashit( get_template_directory_uri() ); ?>img/branding/favicon.ico">
 
 	<?php // FONTS
-	$fonts = new \Tribe\Project\Theme\Resources\Fonts();
-	$fonts->load_fonts(); ?>
+    Fonts::instance()->load_fonts(); ?>
 
 </head>
 <body class="page-legacy" itemscope itemtype="https://schema.org/WebPage">
