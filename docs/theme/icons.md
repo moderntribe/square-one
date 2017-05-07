@@ -14,9 +14,9 @@ For accessible usage of font icons [see here](http://fontawesome.io/accessibilit
 * Import the `selection.json` in the dev folder
 * Add your new icons to the kit
 * Generate fonts using the settings from last round
-* Overwrite all files in `/dev_components/theme/icons/core` with this new kit
-* Copy the files from `/dev_components/theme/icons/core/fonts` to `/wp-content/plugins/core/assets/theme/fonts/icons-core`
-* Update `/wp-content/plugins/core/assets/theme/pcss/base/_icons.pcss` with new values from `/dev_components/theme/icons/core/style.css`
+* paste the zip file (it must be named core-icons.zip) in the root of the dev_components directory.
+* Run `grunt fonts`
+* Your _icons pcss and variables files will be auto generated for you and the fonts/kit directories updated, then dist will be ran to update your css
 
 ## Table of Contents
 

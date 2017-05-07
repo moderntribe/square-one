@@ -112,4 +112,20 @@ module.exports = function (grunt) {
 			'watch',
 		]);
 
+	grunt.registerTask(
+		'fonts', [
+			'clean:coreIconsStart',
+			'unzip:coreIcons',
+			'copy:coreIconsFonts',
+			'copy:coreIconsStyles',
+			'copy:coreIconsVariables',
+			'replace:coreIconsStyle',
+			'replace:coreIconsVariables',
+			'header:coreIconsStyle',
+			'header:coreIconsVariables',
+			'footer:coreIconsVariables',
+			'concurrent:dist',
+			'clean:coreIconsEnd',
+		]);
+
 };
