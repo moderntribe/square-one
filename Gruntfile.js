@@ -113,7 +113,7 @@ module.exports = function (grunt) {
 		]);
 
 	grunt.registerTask(
-		'fonts', [
+		'icons', [
 			'clean:coreIconsStart',
 			'unzip:coreIcons',
 			'copy:coreIconsFonts',
