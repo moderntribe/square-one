@@ -5,9 +5,13 @@ namespace Tribe\Project\Theme\Resources;
 
 
 class Fonts {
+
+    /** @var string Path to the root file of the plugin */
+   	private $plugin_file = '';
+
 	private $fonts = [ ];
 
-	public function __construct( array $fonts = [ ] ) {
+	public function __construct( $plugin_file = '', array $fonts = [ ] ) {
 		$this->fonts = $fonts;
 	}
 
@@ -87,9 +91,9 @@ class Fonts {
 
 	}
 
-	private function get_webfont_src() {
-		return trailingslashit( get_template_directory_uri() ) . 'js/vendor/webfontloader.js';
-	}
+    private function get_webfont_src() {
+           return plugins_url( 'assets/theme/js/vendor/webfontloader.js', $this->plugin_file );
+   	}
 
     /**
   	 * @return Fonts

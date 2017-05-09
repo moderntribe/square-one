@@ -167,7 +167,9 @@ class Theme_Provider implements ServiceProviderInterface {
 		$container[ 'theme.resources.google_fonts' ] = $this->google_fonts;
 		$container[ 'theme.resources.custom_fonts' ] = $this->custom_fonts;
 		$container[ 'theme.resources.fonts' ] = function ( Container $container ) {
-			return new Fonts( [
+			return new Fonts(
+				$container[ 'plugin_file' ],
+				[
 					'typekit' => $container[ 'theme.resources.typekit_id' ],
 					'google'  => $container[ 'theme.resources.google_fonts' ],
 					'custom'  => $container[ 'theme.resources.custom_fonts' ],
