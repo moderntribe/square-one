@@ -136,7 +136,7 @@ class Theme_Provider implements ServiceProviderInterface {
 
 	private function login_resources( Container $container ) {
 		$container[ 'theme.resources.login' ] = function ( Container $container ) {
-			return new Login_Resources();
+			return new Login_Resources( $container[ 'plugin_file' ] );
 		};
 		add_action( 'login_enqueue_scripts', function () use ( $container ) {
 			$container[ 'theme.resources.login' ]->login_styles();
@@ -203,7 +203,7 @@ class Theme_Provider implements ServiceProviderInterface {
 
 	private function editor_styles( Container &$container ) {
 		$container[ 'theme.resources.editor_styles' ] = function ( Container $container ) {
-			return new Editor_Styles();
+			return new Editor_Styles( $container[ 'plugin_file' ] );
 		};
 		add_action( 'after_setup_theme', function () use ( $container ) {
 			$container[ 'theme.resources.editor_styles' ]->visual_editor_styles();
