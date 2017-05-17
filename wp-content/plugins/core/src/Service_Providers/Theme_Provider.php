@@ -213,6 +213,12 @@ class Theme_Provider implements ServiceProviderInterface {
 		add_filter( 'tiny_mce_before_init', function ( $settings ) use ( $container ) {
 			return $container[ 'theme.resources.editor_styles' ]->visual_editor_body_class( $settings );
 		}, 10, 1 );
+		add_filter( 'mce_buttons', function ( $settings ) use ( $container ) {
+			return $container[ 'theme.resources.editor_styles' ]->mce_buttons( $settings );
+		}, 10, 1 );
+		add_filter( 'tiny_mce_before_init', function ( $settings ) use ( $container ) {
+			return $container[ 'theme.resources.editor_styles' ]->visual_editor_styles_dropdown( $settings );
+		}, 10, 1 );
 	}
 
 	private function nav_attributes( Container &$container ) {
