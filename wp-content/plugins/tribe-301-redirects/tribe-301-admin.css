@@ -1,0 +1,15 @@
+.tribe-redirects .dashicons-screenoptions {
+	line-height: 27px;
+	cursor: move;
+}
+.tribe-redirects .delete,
+.tribe-redirects .regex {
+	text-align: center;
+}
+
+.tribe-redirects .delete.iconified input {
+	display: none;
+}
+.tribe-redirects tr.deleted {
+	opacity: 0.25;
+}
