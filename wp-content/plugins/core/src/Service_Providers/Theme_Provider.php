@@ -52,7 +52,7 @@ class Theme_Provider implements ServiceProviderInterface {
 		$this->scripts( $container );
 		$this->styles( $container );
 		$this->editor_styles( $container );
-		$this->editor_formats( $container );
+		//$this->editor_formats( $container );
 
 		$this->nav_attributes( $container );
 
