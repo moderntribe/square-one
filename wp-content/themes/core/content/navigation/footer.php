@@ -2,7 +2,7 @@
 
 	<nav class="site-footer__nav" aria-labelledby="site-footer__nav-label">
 
-		<h2 id="site-footer__nav-label" class="u-visual-hide"><?php _e( 'Secondary Navigation', 'tribe' ); ?></h2>
+		<h2 id="site-footer__nav-label" class="u-visual-hide"><?php esc_html_e( 'Secondary Navigation', 'tribe' ); ?></h2>
 
 		<ol class="site-footer__nav-list">
 			<?php
