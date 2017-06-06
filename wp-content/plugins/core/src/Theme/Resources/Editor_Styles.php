@@ -24,7 +24,7 @@ class Editor_Styles {
 
 		// Production
 		if ( ! defined( 'SCRIPT_DEBUG' ) || SCRIPT_DEBUG === false ) {
-			$css_dir    = trailingslashit( get_template_directory_uri() ) . 'css/admin/dist/';
+			$css_dir    = $this->get_css_url() . 'dist/';
 			$editor_css = 'editor-style.min.css';
 		}
 

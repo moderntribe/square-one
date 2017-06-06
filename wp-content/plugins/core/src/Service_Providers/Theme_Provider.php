@@ -13,6 +13,7 @@ use Tribe\Project\Theme\Gravity_Forms_Filter;
 use Tribe\Project\Theme\Nav\Nav_Attribute_Filters;
 use Tribe\Project\Theme\Oembed_Filter;
 use Tribe\Project\Theme\Resources\Editor_Styles;
+use Tribe\Project\Theme\Resources\Editor_Formats;
 use Tribe\Project\Theme\Resources\Emoji_Disabler;
 use Tribe\Project\Theme\Resources\Fonts;
 use Tribe\Project\Theme\Resources\Legacy_Check;
@@ -51,6 +52,7 @@ class Theme_Provider implements ServiceProviderInterface {
 		$this->scripts( $container );
 		$this->styles( $container );
 		$this->editor_styles( $container );
+		//$this->editor_formats( $container );
 
 		$this->nav_attributes( $container );
 
@@ -212,6 +214,18 @@ class Theme_Provider implements ServiceProviderInterface {
 		}, 10, 0 );
 		add_filter( 'tiny_mce_before_init', function ( $settings ) use ( $container ) {
 			return $container[ 'theme.resources.editor_styles' ]->visual_editor_body_class( $settings );
+		}, 10, 1 );
+	}
+
+	private function editor_formats( Container &$container ) {
+		$container[ 'theme.resources.editor_formats' ] = function ( Container $container ) {
+			return new Editor_Formats();
+		};
+		add_filter( 'mce_buttons', function ( $settings ) use ( $container ) {
+			return $container[ 'theme.resources.editor_formats' ]->mce_buttons( $settings );
+		}, 10, 1 );
+		add_filter( 'tiny_mce_before_init', function ( $settings ) use ( $container ) {
+			return $container[ 'theme.resources.editor_formats' ]->visual_editor_styles_dropdown( $settings );
 		}, 10, 1 );
 	}
 
