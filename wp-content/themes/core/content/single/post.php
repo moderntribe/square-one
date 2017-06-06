@@ -19,7 +19,7 @@
 			</li>
 
 			<li class="item-single__meta-author">
-				<?php _e( 'by', 'tribe' ); ?>
+				<?php esc_html_e( 'by', 'tribe' ); ?>
 				<a href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ) ); ?>" rel="author">
 					<?php the_author(); ?>
 				</a>

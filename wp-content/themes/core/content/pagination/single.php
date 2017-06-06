@@ -12,7 +12,7 @@ if ( empty( $next ) && empty( $previous ) ) {
 
 <nav class="pagination pagination--single" aria-labelledby="pagination__label-single">
 
-	<h3 id="pagination__label-single" class="visual-hide"><?php _e( 'Post Pagination', 'tribe' ); ?></h3>
+	<h3 id="pagination__label-single" class="visual-hide"><?php esc_html_e( 'Post Pagination', 'tribe' ); ?></h3>
 
 	<ol class="pagination__list">
 

@@ -7,7 +7,7 @@
 
 		<div class="l-wrapper">
 
-			<p><?php _e( 'Houston, we have a problem...', 'tribe' ); ?></p>
+			<p><?php esc_html_e( 'Houston, we have a problem...', 'tribe' ); ?></p>
 
 		</div>
 
