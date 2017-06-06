@@ -37,6 +37,8 @@ class Extension extends \Twig_Extension {
 				return get_bloginfo( $show, $filter );
 			} ),
 			new \Twig_SimpleFunction( 'body_class', 'body_class' ),
+		    new \Twig_SimpleFunction( 'the_logo', 'the_logo' ),
+		    new \Twig_SimpleFunction( 'the_tribe_image', 'the_tribe_image' ),
 		];
 
 		return $functions;

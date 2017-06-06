@@ -15,7 +15,7 @@ class Twig_Service_Provider implements ServiceProviderInterface {
 			$stylesheet_path = get_stylesheet_directory();
 			$template_path   = get_template_directory();
 			$loader          = new \Twig_Loader_Filesystem( [ $stylesheet_path ] );
-			if ( $template_path != $stylesheet_path ) {
+			if ( $template_path !== $stylesheet_path ) {
 				$loader->addPath( $template_path );
 			}
 
@@ -23,6 +23,10 @@ class Twig_Service_Provider implements ServiceProviderInterface {
 		};
 
 		$container[ 'twig.cache' ] = function ( Container $container ) {
+			if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
+				return false;
+			}
+
 			return WP_CONTENT_DIR . '/cache/twig';
 		};
 

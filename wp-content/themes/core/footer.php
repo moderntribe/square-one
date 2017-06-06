@@ -1,10 +1,4 @@
+<?php
 
-		<?php // Content: Footer
-		get_template_part( 'content/footer/default' ); ?>
-
-	</div><!-- .l-site-wrapper -->
-
-	<?php wp_footer(); ?>
-
-</body>
-</html>
+$template = new \Tribe\Project\Templates\Base( 'footer.twig' );
+echo $template->render();

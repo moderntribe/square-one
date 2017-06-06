@@ -1,0 +1,25 @@
+{% block header %}
+	{{ include( 'header.twig' ) }}
+{% endblock %}
+
+<main>
+
+	{% block main %}
+
+		{% block subhead %}
+			{{ include( 'content/header/sub.twig' ) }}
+		{% endblock %}
+
+		{% block content %}
+			<div class="l-wrapper">
+				{{ include( 'content/no-results.twig' ) }}
+			</div>
+		{% endblock %}
+
+	{% endblock %}
+
+</main>
+
+{% block footer %}
+	{{ include( 'footer.twig' ) }}
+{% endblock %}
