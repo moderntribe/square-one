@@ -83,14 +83,6 @@ if (!class_exists("Tribe_301_Redirects")) {
 			}
 		}
 
-		public function migrate_simple_301_redirects() {
-			require_once( __DIR__ . '/Simple_301_Redirects_Migrator.php' );
-			$migrator = new Simple_301_Redirects_Migrator();
-			if ( $migrator->needs_migration() ) {
-				$migrator->migrate();
-			}
-		}
-
 		/**
 		 * utility function to get the normalized address of the current request
 		 * credit: http://www.phpro.org/examples/Get-Full-URL.html
@@ -123,7 +115,6 @@ if (!class_exists("Tribe_301_Redirects")) {
 		}
 
 		private function add_hooks() {
-			add_action( 'init', array( $this, 'migrate_simple_301_redirects' ), 11, 0 );
 			add_action( 'parse_request', array( $this, 'do_static_redirect' ), 1, 1 );
 			add_action( 'template_redirect', array( $this, 'do_regex_redirect' ), 1, 0 );
 
