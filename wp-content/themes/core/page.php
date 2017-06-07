@@ -1,33 +1,4 @@
-<?php get_header(); ?>
+<?php
 
-	<main>
-
-		<?php // Content: Sub-header
-		get_template_part( 'content/header/sub' ); ?>
-
-		<?php while ( have_posts() ) : the_post(); ?>
-
-			<?php // If we have content, output our content block (for panel pages)
-			if ( '' !== get_the_content() ) { ?>
-
-				<div class="l-wrapper">
-
-					<?php // Content: Page
-					get_template_part( 'content/page/default' ); ?>
-
-				</div>
-
-			<?php } ?>
-
-		<?php endwhile; ?>
-
-		<?php // Panels
-		if ( function_exists( 'have_panels' ) && have_panels() ) {
-			do_action( 'the_panels' );
-		} ?>
-
-	</main>
-
-	<?php get_sidebar(); ?>	
-
-<?php get_footer(); ?>
+$template = new \Tribe\Project\Templates\Page( 'page.twig' );
+echo $template->render();

@@ -211,7 +211,7 @@ class Initializer {
 					$query_args[ 'start_date' ] = $this->normalize_date_query_to_string( $dq[ 'after' ] );
 				}
 				if ( !empty( $dq[ 'before' ] ) ) {
-					$query_args[ 'end_date' ] = $this->normalize_date_query_to_string( $dq[ 'before' ] );;
+					$query_args[ 'end_date' ] = $this->normalize_date_query_to_string( $dq[ 'before' ] );
 				}
 			}
 		}

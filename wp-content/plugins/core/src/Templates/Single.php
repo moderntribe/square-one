@@ -4,11 +4,14 @@
 namespace Tribe\Project\Templates;
 
 
+use Tribe\Project\Theme\Social_Links;
+
 class Single extends Base {
 	public function get_data(): array {
 		$data               = parent::get_data();
 		$data[ 'post' ]     = $this->get_post();
 		$data[ 'comments' ] = $this->get_comments();
+		$data[ 'social_share' ] = $this->get_social_share();
 
 		return $data;
 	}
@@ -30,6 +33,11 @@ class Single extends Base {
 		}
 
 		return '';
+	}
+
+	protected function get_social_share() {
+		$social = new Social_Links( [ 'facebook', 'twitter', 'google', 'linkedin', 'email' ], false );
+		return $social->format_links( $social->get_links() );
 	}
 
 }

@@ -39,6 +39,7 @@ class Extension extends \Twig_Extension {
 			new \Twig_SimpleFunction( 'body_class', 'body_class' ),
 		    new \Twig_SimpleFunction( 'the_logo', 'the_logo' ),
 		    new \Twig_SimpleFunction( 'the_tribe_image', 'the_tribe_image' ),
+		    new \Twig_SimpleFunction( 'get_sidebar', 'get_sidebar' ),
 		];
 
 		return $functions;
