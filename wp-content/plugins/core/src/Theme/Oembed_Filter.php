@@ -123,8 +123,8 @@ class Oembed_Filter {
 		if ( $url === false ) {
 			$url = $maxthumburl;
 
-			$headers = get_headers( $maxthumburl );
-			if ( substr( $headers[0], 9, 3 ) === '404' ) {
+			$response = wp_remote_head( $maxthumburl );
+			if ( wp_remote_retrieve_response_code( $response ) == 404 ) {
 				$url = 'https://i.ytimg.com/vi/' . $video_id . '/0.jpg';
 			}
 
