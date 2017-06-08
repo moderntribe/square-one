@@ -6,6 +6,38 @@
  */
 
 module.exports = {
+	coreIconsStyle: {
+		options: {
+			text: '' +
+			'/* -----------------------------------------------------------------------------\n' +
+			' *\n' +
+			' * Font Icons: Icons (via IcoMoon)\n' +
+			' *\n' +
+			' * ----------------------------------------------------------------------------- */\n' +
+			'\n' +
+			'/* stylelint-disable */\n'
+		},
+		files: {
+			'<%= pkg._core_theme_assets_path %>/pcss/base/_icons.pcss': ['<%= pkg._core_theme_assets_path %>/pcss/base/_icons.pcss'],
+		},
+	},
+
+	coreIconsVariables: {
+		options: {
+			text: '' +
+			'/* -----------------------------------------------------------------------------\n' +
+			' * Font Icons (via IcoMoon)\n' +
+			' * ----------------------------------------------------------------------------- */\n' +
+			'\n' +
+			'/* stylelint-disable */\n' +
+			'\n' +
+			':root {'
+		},
+		files: {
+			'<%= pkg._core_theme_assets_path %>/pcss/utilities/variables/_icons.pcss': ['<%= pkg._core_theme_assets_path %>/pcss/utilities/variables/_icons.pcss'],
+		},
+	},
+
 	theme: {
 		options: {
 			text: '/* Core: Global CSS */',

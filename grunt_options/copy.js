@@ -7,6 +7,51 @@
  */
 
 module.exports = {
+	coreIconsFonts: {
+		files: [
+			{
+				expand: true,
+				flatten: true,
+				src: [
+					'<%= pkg._component_path %>/theme/icons/core/fonts/*',
+				],
+				dest: '<%= pkg._core_theme_assets_path %>/fonts/icons-core/',
+			},
+		],
+	},
+
+	coreIconsStyles: {
+		files: [
+			{
+				expand: true,
+				flatten: true,
+				src: [
+					'<%= pkg._component_path %>/theme/icons/core/style.css',
+				],
+				dest: '<%= pkg._core_theme_assets_path %>/pcss/base/',
+				rename: function(dest, src) {
+					return dest + src.replace('style.css','_icons.pcss');
+				},
+			},
+		],
+	},
+
+	coreIconsVariables: {
+		files: [
+			{
+				expand: true,
+				flatten: true,
+				src: [
+					'<%= pkg._component_path %>/theme/icons/core/variables.scss',
+				],
+				dest: '<%= pkg._core_theme_assets_path %>/pcss/utilities/variables/',
+				rename: function(dest, src) {
+					return dest + src.replace('variables.scss','_icons.pcss');
+				},
+			},
+		],
+	},
+
 	themeJS: {
 		files: [
 			{
