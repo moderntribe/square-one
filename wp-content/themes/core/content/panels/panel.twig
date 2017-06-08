@@ -1,0 +1,37 @@
+{% block panel %}
+	{% block start %}
+		<div class="panel panel-{{ type|esc_attr }}" data-depth="{{ depth|esc_attr }}">
+	{% endblock %}
+
+	{% block title %}
+		{% if panel.title %}
+			<h2>{{ panel.title }}</h2>
+		{% endif %}
+	{% endblock %}
+
+	{% block content %}
+		<dl>
+			{% for field, value in panel if field != 'title' %}
+				<dt>{{ field|esc_html }}</dt>
+				<dd>
+					<pre>{{ value|print_r }}</pre>
+				</dd>
+			{% endfor %}
+		</dl>
+	{% endblock %}
+
+	{% block children %}
+		{% if children|length > 0 %}
+			<div class="panel-children">
+				{% for child in children %}
+					{{ child }}
+				{% endfor %}
+			</div>
+		{% endif %}
+	{% endblock %}
+
+	{% block end %}
+		</div>
+	{% endblock %}
+	</div>
+{% endblock %}
