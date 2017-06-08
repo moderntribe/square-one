@@ -11,6 +11,8 @@ use Tribe\Project\Twig\Extension;
 
 class Twig_Service_Provider implements ServiceProviderInterface {
 	public function register( Container $container ) {
+		require_once( dirname( $container['plugin_file'] ) . '/functions/components.php' );
+
 		$container[ 'twig.loader' ] = function ( Container $container ) {
 			$stylesheet_path = get_stylesheet_directory();
 			$template_path   = get_template_directory();
@@ -54,12 +56,43 @@ class Twig_Service_Provider implements ServiceProviderInterface {
 		}, 0, 1 );
 
 		$this->load_templates( $container );
+
+		$this->set_component_contexts();
 	}
 
 	private function load_templates( Container $container ) {
 		$container[ 'twig.templates.content/panels/panel' ] = function ( Container $container ) {
 			return new Templates\Content\Panels\Panel( 'content/panels/panel.twig', $container[ 'twig' ] );
 		};
+	}
+
+	/**
+	 * Updates the current component context so that any loaded component can be context-aware.
+	 */
+	protected function set_component_contexts() {
+		add_action( 'wp_head', function () {
+			add_filter( 'component_context', function () {
+				return 'body';
+			} );
+		}, 999 );
+
+		add_action( 'wp_footer', function () {
+			add_filter( 'component_context', function () {
+				return 'footer';
+			} );
+		} );
+
+		add_action( 'dynamic_sidebar_before', function () {
+			add_filter( 'component_context', function () {
+				return 'sidebar';
+			} );
+		} );
+
+		add_action( 'dynamic_sidebar_after', function () {
+			add_filter( 'component_context', function () {
+				return 'body';
+			} );
+		} );
 	}
 
 }

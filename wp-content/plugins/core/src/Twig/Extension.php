@@ -40,6 +40,7 @@ class Extension extends \Twig_Extension {
 		    new \Twig_SimpleFunction( 'the_logo', 'the_logo' ),
 		    new \Twig_SimpleFunction( 'the_tribe_image', 'the_tribe_image' ),
 		    new \Twig_SimpleFunction( 'get_sidebar', 'get_sidebar' ),
+			new \Twig_SimpleFunction( 'load_component', 'load_component' ),
 		];
 
 		return $functions;
