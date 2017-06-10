@@ -4,9 +4,11 @@
 namespace Tribe\Project\Templates\Content\Panels;
 
 
+use Tribe\Project\Twig\Noop_Lazy_Strings;
 use Tribe\Project\Twig\Twig_Template;
 
 class Panel extends Twig_Template {
+
 	public function get_data(): array {
 		$panel = get_the_panel();
 		$data  = [
@@ -15,6 +17,7 @@ class Panel extends Twig_Template {
 			'type'     => $panel->get_type_object()->get_id(),
 			'children' => $this->get_children( $panel ),
 			'object'   => $panel,
+			'lang'     => new Noop_Lazy_Strings( 'tribe' ),
 		];
 
 		return $data;
