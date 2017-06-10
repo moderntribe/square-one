@@ -3,16 +3,12 @@
 
 namespace Tribe\Project\Templates;
 
-
-use Tribe\Project\Theme\Resources\Fonts;
-
 class Unsupported_Browser extends Base {
 
 	public function get_data(): array {
 		$data                     = parent::get_data();
 		$data['post']             = $this->get_post();
 		$data['comments']         = $this->get_comments();
-		$data['fonts']            = $this->load_fonts();
 		$data['css']              = $this->get_css();
 		$data['favicon']          = $this->get_favicon();
 		$data['legacy_image_url'] = trailingslashit( get_template_directory_uri() ) . 'img/logos/logo-legacy.png';
@@ -58,9 +54,5 @@ class Unsupported_Browser extends Base {
 		$css_legacy = ( ! defined( 'SCRIPT_DEBUG' ) || SCRIPT_DEBUG === false ) ? 'dist/legacy.min.css' : 'legacy.css';
 
 		return $css_dir . $css_legacy;
-	}
-
-	protected function load_fonts() {
-		Fonts::instance()->load_fonts();
 	}
 }

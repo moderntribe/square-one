@@ -182,6 +182,9 @@ class Theme_Provider implements ServiceProviderInterface {
 		add_action( 'wp_head', function () use ( $container ) {
 			$container[ 'theme.resources.fonts' ]->load_fonts();
 		}, 0, 0 );
+		add_action( 'tribe/unsupported_browser/head', function () use ( $container ) {
+			$container[ 'theme.resources.fonts' ]->load_fonts();
+		}, 0, 0 );
 		/* add_action( 'login_head', function() use ( $container ) {
 			$container[ 'theme.resources.fonts' ]->load_fonts();
 		}, 0, 0); */
