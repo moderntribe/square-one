@@ -46,8 +46,7 @@
       "wp-content/plugins/{$name}":[
         "type:wordpress-plugin",
         "moderntribe/panel-builder"
-      ],
-      "wp-content/themes/{$name}":[ "type:wordpress-theme"]
+      ]
     }
   }
 }
