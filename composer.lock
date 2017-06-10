@@ -1,0 +1,488 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "754f8a4b2a0866fbb42481f9a6ee90f4",
+    "packages": [
+        {
+            "name": "composer/installers",
+            "version": "v1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/composer/installers.git",
+                "reference": "79ad876c7498c0bbfe7eed065b8651c93bfd6045"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/composer/installers/zipball/79ad876c7498c0bbfe7eed065b8651c93bfd6045",
+                "reference": "79ad876c7498c0bbfe7eed065b8651c93bfd6045",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.0"
+            },
+            "replace": {
+                "roundcube/plugin-installer": "*",
+                "shama/baton": "*"
+            },
+            "require-dev": {
+                "composer/composer": "1.0.*@dev",
+                "phpunit/phpunit": "4.1.*"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "Composer\\Installers\\Plugin",
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Composer\\Installers\\": "src/Composer/Installers"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kyle Robinson Young",
+                    "email": "kyle@dontkry.com",
+                    "homepage": "https://github.com/shama"
+                }
+            ],
+            "description": "A multi-framework Composer library installer",
+            "homepage": "https://composer.github.io/installers/",
+            "keywords": [
+                "Craft",
+                "Dolibarr",
+                "Eliasis",
+                "Hurad",
+                "ImageCMS",
+                "Kanboard",
+                "MODX Evo",
+                "Mautic",
+                "Maya",
+                "OXID",
+                "Plentymarkets",
+                "Porto",
+                "RadPHP",
+                "SMF",
+                "Thelia",
+                "WolfCMS",
+                "agl",
+                "aimeos",
+                "annotatecms",
+                "attogram",
+                "bitrix",
+                "cakephp",
+                "chef",
+                "cockpit",
+                "codeigniter",
+                "concrete5",
+                "croogo",
+                "dokuwiki",
+                "drupal",
+                "elgg",
+                "expressionengine",
+                "fuelphp",
+                "grav",
+                "installer",
+                "itop",
+                "joomla",
+                "kohana",
+                "laravel",
+                "lavalite",
+                "lithium",
+                "magento",
+                "mako",
+                "mediawiki",
+                "modulework",
+                "moodle",
+                "phpbb",
+                "piwik",
+                "ppi",
+                "puppet",
+                "reindex",
+                "roundcube",
+                "shopware",
+                "silverstripe",
+                "sydes",
+                "symfony",
+                "typo3",
+                "wordpress",
+                "yawik",
+                "zend",
+                "zikula"
+            ],
+            "time": "2017-04-24T06:37:16+00:00"
+        },
+        {
+            "name": "humanmade/mercator",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/humanmade/Mercator.git",
+                "reference": "671f147"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/humanmade/Mercator/zipball/671f147",
+                "reference": "671f147",
+                "shasum": ""
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-muplugin",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Human Made Limited",
+                    "email": "support@humanmade.co.uk",
+                    "homepage": "http://hmn.md/"
+                }
+            ],
+            "description": "WordPress multisite domain mapping for the modern era.",
+            "homepage": "https://github.com/humanmade/Mercator",
+            "keywords": [
+                "wordpress"
+            ],
+            "support": {
+                "source": "https://github.com/humanmade/Mercator/tree/1.0.0",
+                "issues": "https://github.com/humanmade/Mercator/issues"
+            },
+            "time": "2017-06-05 13:08:32"
+        },
+        {
+            "name": "johnpbloch/wordpress-core",
+            "version": "4.7.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/johnpbloch/wordpress-core.git",
+                "reference": "9a88a4b4c65f689d78789ef6ff77a7ca0239ec02"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/johnpbloch/wordpress-core/zipball/9a88a4b4c65f689d78789ef6ff77a7ca0239ec02",
+                "reference": "9a88a4b4c65f689d78789ef6ff77a7ca0239ec02",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "type": "wordpress-core",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "WordPress Community",
+                    "homepage": "http://wordpress.org/about/"
+                }
+            ],
+            "description": "WordPress is web software you can use to create a beautiful website or blog.",
+            "homepage": "http://wordpress.org/",
+            "keywords": [
+                "blog",
+                "cms",
+                "wordpress"
+            ],
+            "time": "2017-05-16T22:48:08+00:00"
+        },
+        {
+            "name": "johnpbloch/wordpress-core-installer",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/johnpbloch/wordpress-core-installer.git",
+                "reference": "e9e767f2d9f994f358c34b41def2c410ad8717f2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/johnpbloch/wordpress-core-installer/zipball/e9e767f2d9f994f358c34b41def2c410ad8717f2",
+                "reference": "e9e767f2d9f994f358c34b41def2c410ad8717f2",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.0"
+            },
+            "conflict": {
+                "composer/installers": "<1.0.6"
+            },
+            "require-dev": {
+                "composer/composer": "^1.0",
+                "phpunit/phpunit": ">=4.8.35"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "johnpbloch\\Composer\\WordPressCorePlugin"
+            },
+            "autoload": {
+                "psr-0": {
+                    "johnpbloch\\Composer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "John P. Bloch",
+                    "email": "me@johnpbloch.com"
+                }
+            ],
+            "description": "A custom installer to handle deploying WordPress with composer",
+            "keywords": [
+                "wordpress"
+            ],
+            "time": "2017-05-31T18:42:33+00:00"
+        },
+        {
+            "name": "moderntribe/ajax-queue",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/moderntribe/ajax-queue.git",
+                "reference": "6579564c44d78b558d275c22eea40c0433fd5a17"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/moderntribe/ajax-queue/zipball/6579564c44d78b558d275c22eea40c0433fd5a17",
+                "reference": "6579564c44d78b558d275c22eea40c0433fd5a17",
+                "shasum": ""
+            },
+            "type": "project",
+            "autoload": {
+                "psr-0": {
+                    "AJAXQueue": "src/"
+                }
+            },
+            "license": [
+                "Private"
+            ],
+            "description": "Group ajax calls",
+            "support": {
+                "source": "https://github.com/moderntribe/ajax-queue/tree/master",
+                "issues": "https://github.com/moderntribe/ajax-queue/issues"
+            },
+            "time": "2015-08-21 06:25:04"
+        },
+        {
+            "name": "moderntribe/attachment-helper",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/moderntribe/attachment-helper.git",
+                "reference": "96e35fcb4c0883702d3f91e95b00985273a8eae7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/moderntribe/attachment-helper/zipball/96e35fcb4c0883702d3f91e95b00985273a8eae7",
+                "reference": "96e35fcb4c0883702d3f91e95b00985273a8eae7",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "AttachmentHelper\\": "AttachmentHelper"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jonathan Brinley",
+                    "email": "jonathan@tri.be"
+                }
+            ],
+            "description": "A library for adding a file upload field to an admin meta box",
+            "support": {
+                "source": "https://github.com/moderntribe/attachment-helper/tree/1.0.1"
+            },
+            "time": "2016-04-24T20:00:57+00:00"
+        },
+        {
+            "name": "moderntribe/panel-builder",
+            "version": "dev-3.2-branch",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:moderntribe/panel-builder.git",
+                "reference": "3f8b3673afdc66103e396cc2ecad929b4b1861a6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/moderntribe/panel-builder/zipball/3f8b3673afdc66103e396cc2ecad929b4b1861a6",
+                "reference": "3f8b3673afdc66103e396cc2ecad929b4b1861a6",
+                "shasum": ""
+            },
+            "require": {
+                "moderntribe/ajax-queue": "dev-master",
+                "moderntribe/attachment-helper": "^1.0.0"
+            },
+            "require-dev": {
+                "lucatume/wp-browser": "^1.10"
+            },
+            "type": "wordpress-plugin",
+            "autoload": {
+                "psr-4": {
+                    "ModularContent\\": "ModularContent/"
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "Modern Tribe",
+                    "email": "peter@tri.be"
+                }
+            ],
+            "description": "The Modern Tribe Panel Builder plugin",
+            "support": {
+                "source": "https://github.com/moderntribe/panel-builder/tree/3.2-branch",
+                "issues": "https://github.com/moderntribe/panel-builder/issues"
+            },
+            "time": "2017-06-08 20:58:47"
+        },
+        {
+            "name": "wpackagist-plugin/configure-smtp",
+            "version": "3.1",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/configure-smtp/",
+                "reference": "tags/3.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/configure-smtp.3.1.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/configure-smtp/"
+        },
+        {
+            "name": "wpackagist-plugin/gravity-forms-wcag-20-form-fields",
+            "version": "1.5.1",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/gravity-forms-wcag-20-form-fields/",
+                "reference": "trunk"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/gravity-forms-wcag-20-form-fields.zip?timestamp=1495375597",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/gravity-forms-wcag-20-form-fields/"
+        },
+        {
+            "name": "wpackagist-plugin/limit-login-attempts",
+            "version": "2.0beta3",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/limit-login-attempts/",
+                "reference": "tags/2.0beta3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/limit-login-attempts.2.0beta3.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/limit-login-attempts/"
+        },
+        {
+            "name": "wpackagist-plugin/posts-to-posts",
+            "version": "1.6.5",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/posts-to-posts/",
+                "reference": "tags/1.6.5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/posts-to-posts.1.6.5.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/posts-to-posts/"
+        },
+        {
+            "name": "wpackagist-plugin/regenerate-thumbnails",
+            "version": "2.2.6",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/regenerate-thumbnails/",
+                "reference": "tags/2.2.6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/regenerate-thumbnails.2.2.6.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/regenerate-thumbnails/"
+        },
+        {
+            "name": "wpackagist-plugin/wordpress-seo",
+            "version": "4.1",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/wordpress-seo/",
+                "reference": "tags/4.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/wordpress-seo.4.1.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/wordpress-seo/"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "dev",
+    "stability-flags": {
+        "moderntribe/panel-builder": 20,
+        "humanmade/mercator": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}
