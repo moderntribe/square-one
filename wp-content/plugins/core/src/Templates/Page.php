@@ -9,6 +9,7 @@ class Page extends Base {
 		$data               = parent::get_data();
 		$data[ 'post' ]     = $this->get_post();
 		$data[ 'comments' ] = $this->get_comments();
+		$data[ 'sidebar' ]  = $this->get_sidebar();
 
 		return $data;
 	}
@@ -40,6 +41,12 @@ class Page extends Base {
 		}
 
 		return '';
+	}
+
+	protected function get_sidebar() {
+		$sidebar = new Sidebar( $this->template, $this->twig, 'sidebar-main' );
+		$data = $sidebar->get_data();
+		return $data[ 'sidebar' ];
 	}
 
 }

@@ -1,4 +1,4 @@
 <?php
 
-$template = new \Tribe\Project\Templates\Sidebar( 'sidebar.twig' );
+$template = \Tribe\Project\Templates\Sidebar::instance();
 echo $template->render();

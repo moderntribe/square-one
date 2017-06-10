@@ -64,6 +64,10 @@ class Twig_Service_Provider implements ServiceProviderInterface {
 		$container[ 'twig.templates.content/panels/panel' ] = function ( Container $container ) {
 			return new Templates\Content\Panels\Panel( 'content/panels/panel.twig', $container[ 'twig' ] );
 		};
+
+		$container[ 'twig.templates.sidebar.main' ] = function ( Container $container ) {
+			return new Templates\Sidebar( 'sidebar.twig', $container[ 'twig' ], 'sidebar-main' );
+		};
 	}
 
 	/**
