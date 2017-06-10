@@ -3,8 +3,6 @@
 
 namespace Tribe\Project\Templates;
 
-use Tribe\Project\Twig\Stringable_Callable;
-
 class Sidebar extends Base {
 
 	protected $sidebar_id = 'sidebar-main';
@@ -20,13 +18,15 @@ class Sidebar extends Base {
 	protected function get_sidebar() {
 		$sidebar = [];
 
-		$sidebar['active']          = is_active_sidebar( $this->sidebar_id );
-		$sidebar['dynamic_sidebar'] = $this->get_dynamic_sidebar();
+		$sidebar['active']  = is_active_sidebar( $this->sidebar_id );
+		$sidebar['content'] = $sidebar['active'] ? $this->get_dynamic_sidebar() : '';
 
 		return $sidebar;
 	}
 
 	public function get_dynamic_sidebar() {
+		ob_start();
 		dynamic_sidebar( $this->sidebar_id );
+		return ob_get_clean();
 	}
 }
