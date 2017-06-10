@@ -12,6 +12,8 @@ ehthumbs.db
 Thumbs.db
 .DS_Store
 .idea
+vendor/
+wp/
 
 # Vim generated files #
 #######################
@@ -98,3 +100,14 @@ wp-content/plugins/airplane-mode
 **/__coverage__/
 dev_components/react-app/test/__coverage__/
 dev/deploy/.deploy
+
+wp-packagist
+#######################
+/wp-content/plugins/gravity-forms-wcag-20-form-fields/
+/wp-content/plugins/limit-login-attempts/
+/wp-content/plugins/configure-smtp/
+/wp-content/plugins/posts-to-posts/
+/wp-content/plugins/regenerate-thumbnails/
+/wp-content/plugins/wordpress-seo/
+/wp-content/plugins/panel-builder/
+/wp-content/mu-plugins/mercator/
