@@ -29,15 +29,3 @@ function core_theme_setup() {
 }
 
 endif; // core_theme_setup
-
-$args = array(
-	'name'          => __( 'Sidebar name', 'theme_text_domain' ),
-	'id'            => 'sidebar-main',
-	'description'   => '',
-        'class'         => '',
-	'before_widget' => '<li id="%1$s" class="widget %2$s">',
-	'after_widget'  => '</li>',
-	'before_title'  => '<h2 class="widgettitle">',
-	'after_title'   => '</h2>' );
-
-register_sidebar( $args );
