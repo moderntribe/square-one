@@ -36,7 +36,6 @@ class Extension extends \Twig_Extension {
 			new \Twig_SimpleFunction( 'bloginfo', function ( $show = '', $filter = 'raw' ) {
 				return get_bloginfo( $show, $filter );
 			} ),
-			new \Twig_SimpleFunction( 'body_class', 'body_class' ),
 			new \Twig_SimpleFunction( 'load_component', 'load_component' ),
 		];
 
