@@ -3,7 +3,7 @@
 
 namespace Tribe\Project\Templates;
 
-use Tribe\Project\Customizer\Pre_Footer;
+use Tribe\Project\Theme\Logo;
 use Tribe\Project\Twig\Noop_Lazy_Strings;
 use Tribe\Project\Twig\Stringable_Callable;
 use Tribe\Project\Twig\Template_Interface;
@@ -15,6 +15,7 @@ class Base extends Twig_Template {
 		$data = [
 			'page_title' => $this->get_page_title(),
 			'body_class' => $this->get_body_class(),
+			'logo'       => $this->get_logo(),
 			'menu'       => $this->get_nav_menus(),
 			'lang'       => $this->get_strings(),
 			'search_url' => $this->get_search_url(),
@@ -25,6 +26,7 @@ class Base extends Twig_Template {
 		foreach ( $this->get_components() as $component ) {
 			$data = array_merge( $data, $component->get_data() );
 		}
+
 		return $data;
 	}
 
@@ -41,6 +43,14 @@ class Base extends Twig_Template {
 
 	protected function get_body_class() {
 		return join( ' ', get_body_class() );
+	}
+
+	protected function get_logo() {
+		$args = [
+			'echo' => false,
+		];
+
+		return Logo::logo( $args );
 	}
 
 	protected function get_nav_menus() {
