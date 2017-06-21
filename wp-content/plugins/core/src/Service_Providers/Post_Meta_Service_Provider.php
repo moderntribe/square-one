@@ -37,9 +37,13 @@ class Post_Meta_Service_Provider implements ServiceProviderInterface {
 		$container[ 'post_meta.collection_repo' ] = function ( Container $container ) {
 			return new Meta_Repository( [
 				$container[ 'post_meta.sample_post_meta' ],
+				// $container[ 'post_meta.another_post_meta' ],
 			] );
 		};
 
+		/**
+		 * Hook all registered post meta
+		 */
 		add_action( 'plugins_loaded', function () use ( $container ) {
 			$container[ 'post_meta.collection_repo' ]->hook();
 		}, 1000, 0 );

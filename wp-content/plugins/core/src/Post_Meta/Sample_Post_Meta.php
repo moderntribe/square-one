@@ -69,6 +69,9 @@ class Sample_Post_Meta extends ACF\ACF_Meta_Group {
 		$group->set( 'position', 'normal' );
 		$group->set_post_types( $this->post_types );
 
+		/**
+		 * Field parameter is the index of meta key for field in const META_KEYS
+		 */
 		$group->add_field( $this->get_text_field( 0 ) );
 		$group->add_field( $this->get_radio_field( 1 ) );
 
