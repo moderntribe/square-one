@@ -12,11 +12,7 @@ use Tribe\Project\Post_Types\Sample\Sample;
  * Class Post_Meta_Service_Provider
  * @package Tribe\Project\Service_Providers\Post_Meta
  *
- * @author Chris Flannagan
- *
  * Register all post meta classes here.
- *
- * TODO: Make abstract and structure similar to the Post Types Service Providers
  */
 class Post_Meta_Service_Provider implements ServiceProviderInterface {
 
