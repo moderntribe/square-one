@@ -19,8 +19,8 @@ class Sample_Post_Meta extends ACF\ACF_Meta_Group {
 	 */
 	const NAME = 'sample_post_meta';
 	const META_KEYS = [
-		self::NAME . '_sample_text_field', // key index 0
-		self::NAME . '_sample_radio_field', // key index 1
+		'sample_text_field'  => self::NAME . '_sample_text_field',
+		'sample_radio_field' => self::NAME . '_sample_radio_field',
 	];
 
 	/**
@@ -48,8 +48,8 @@ class Sample_Post_Meta extends ACF\ACF_Meta_Group {
 	public function get_value( $post_id, $key ) {
 
 		// isset faster than in_array
-		if ( isset( array_flip( static::META_KEYS )[ $key ] ) ) {
-			return get_field( $key, $post_id );
+		if ( isset( static::META_KEYS[ $key ] ) ) {
+			return get_field( static::META_KEYS[ $key ], $post_id );
 		}
 
 		return '';
@@ -72,29 +72,28 @@ class Sample_Post_Meta extends ACF\ACF_Meta_Group {
 		/**
 		 * Field parameter is the index of meta key for field in const META_KEYS
 		 */
-		$group->add_field( $this->get_text_field( 0 ) );
-		$group->add_field( $this->get_radio_field( 1 ) );
+		$group->add_field( $this->get_text_field( 'sample_text_field' ) );
+		$group->add_field( $this->get_radio_field( 'sample_radio_field' ) );
 
 		return $group->get_attributes();
 
 	}
 
 	/**
-	 * @param int $key_index
+	 * @param string $key_index
 	 *
 	 * @return ACF\Field
 	 *
 	 * Generate a text input post meta field
 	 */
-	private function get_text_field( int $key_index ) {
+	private function get_text_field( string $key_index ) {
 
 		$field = new ACF\Field( static::META_KEYS[ $key_index ] );
 
 		$field->set_attributes( [
-			'label' => __( 'A Sample Text Field', 'tribe' ),
-			'name' => static::META_KEYS[ $key_index ],
-			'type' => 'text',
-			'layout' => 'horizontal',
+			'label'  => __( 'A Sample Text Field', 'tribe' ),
+			'name'   => static::META_KEYS[ $key_index ],
+			'type'   => 'text',
 		] );
 
 		return $field;
@@ -102,21 +101,21 @@ class Sample_Post_Meta extends ACF\ACF_Meta_Group {
 	}
 
 	/**
-	 * @param int $key_index
+	 * @param string $key_index
 	 *
 	 * @return ACF\Field
 	 *
 	 * Create a radio button post meta field
 	 */
-	private function get_radio_field( int $key_index ) {
+	private function get_radio_field( string $key_index ) {
 
 		$field = new ACF\Field( static::META_KEYS[ $key_index ] );
 
 		$field->set_attributes( [
-			'label' => __( 'A Sample Radio Field', 'tribe' ),
-			'name' => static::META_KEYS[ $key_index ],
-			'type' => 'radio',
-			'layout' => 'horizontal',
+			'label'   => __( 'A Sample Radio Field', 'tribe' ),
+			'name'    => static::META_KEYS[ $key_index ],
+			'type'    => 'radio',
+			'layout'  => 'horizontal',
 			'choices' => static::SAMPLE_OPTIONS,
 		] );
 
