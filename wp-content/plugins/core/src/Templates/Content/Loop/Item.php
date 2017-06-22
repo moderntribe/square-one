@@ -41,8 +41,8 @@ class Item extends Twig_Template {
 			'src_size'      => Image_Sizes::CORE_FULL,
 			'srcset_sizes'  => [
 				Image_Sizes::CORE_FULL,
-			    Image_Sizes::CORE_MOBILE,
-			    Image_Sizes::SOCIAL_SHARE,
+				Image_Sizes::CORE_MOBILE,
+				Image_Sizes::SOCIAL_SHARE,
 			],
 		];
 

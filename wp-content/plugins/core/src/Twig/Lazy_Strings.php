@@ -16,7 +16,7 @@ namespace Tribe\Project\Twig;
 class Lazy_Strings implements \ArrayAccess {
 	private $strings = [];
 
-	private $textdomain = 'default';
+	private $textdomain = 'tribe';
 
 	public function __construct( $textdomain ) {
 		$this->textdomain = $textdomain;
@@ -40,7 +40,7 @@ class Lazy_Strings implements \ArrayAccess {
 	 */
 	public function offsetGet( $string ) {
 		if ( ! array_key_exists( $string, $this->strings ) ) {
-			$this->strings[ $string ] = __( $string, 'core' );
+			$this->strings[ $string ] = __( $string, $this->textdomain );
 		}
 		return $this->strings[ $string ];
 	}
