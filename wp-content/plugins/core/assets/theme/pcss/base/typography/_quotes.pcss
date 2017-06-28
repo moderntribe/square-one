@@ -9,7 +9,15 @@ blockquote,
 q {
 
 	.t-content & {
-		margin: var(--spacer) auto;
+		margin: var(--spacer-xs) auto;
+
+		@media (--viewport-medium) {
+			margin-top: var(--spacer);
+		}
+	}
+
+	.l-wrapper__inner-stagger & {
+		max-width: 877px;
 	}
 }
 
@@ -39,10 +47,60 @@ q {
 		@mixin quote-text;
 
 		margin: 0 auto;
+		text-align: center;
 
 		& ~ p {
 			margin-top: var(--spacer);
 		}
+	}
+
+	cite {
+		color: var(--color-black);
+
+		@media (--viewport-full) {
+			text-align: center;
+		}
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Blockquotes: Modifier - Secondary
+ * ----------------------------------------------------------------------------- */
+
+.blockquote--secondary,
+.t-content .blockquote--secondary {
+	padding-left: 0;
+	padding-right: 0;
+	position: relative;
+
+	&:before {
+		color: var(--color-grey-light);
+		content: "\201c";
+		font-family: var(--font-family-base);
+		font-size: 170px;
+		font-weight: var(--font-weight-bold);
+		line-height: 0.8;
+		margin-right: var(--spacer);
+		position: absolute;
+		top: 30px;
+		left: 0;
+
+		@media (--viewport-full) {
+			font-size: 300px;
+		}
+	}
+
+	p {
+		padding-left: 90px;
+		text-align: left;
+
+		@media (--viewport-full) {
+			padding-left: 160px;
+		}
+	}
+
+	cite {
+		text-align: left;
 	}
 }
 
@@ -53,6 +111,17 @@ q {
 /* cite */
 .cite,
 .t-content cite {
-	font-style: normal;
 	display: block;
+	font-size: 14px;
+	font-style: normal;
+	font-family: var(--font-family-base);
+	font-weight: var(--font-weight-light);
+	margin-top: var(--spacer-s);
+	text-align: center;
+	text-transform: uppercase;
+
+	@media (--viewport-medium) {
+		font-size: var(--font-size-content-s);
+		line-height: var(--line-height-m);
+	}
 }

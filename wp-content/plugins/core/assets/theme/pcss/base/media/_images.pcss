@@ -41,9 +41,14 @@ img {
  * ----------------------------------------------------------------------------- */
 
 .wp-caption-text {
-	margin: var(--spacer-xs) 0 0;
+	color: var(--color-grey-light);
 	font-size: 14px;
-	line-height: var(--line-height-s);
+	margin: 10px 0 30px;
+	line-height: 1.42;
+
+	@media (--viewport-medium) {
+		margin-top: var(--spacer-xs);
+	}
 }
 
 /* -----------------------------------------------------------------------------
@@ -52,18 +57,23 @@ img {
 
 .aligncenter,
 .alignnone {
-	margin-top: var(--spacer-lg);
-	margin-bottom: var(--spacer-lg);
+	margin-top: var(--spacer-s);
+	margin-bottom: var(--spacer-s);
+
+	@media (--viewport-medium) {
+		margin-top: var(--spacer);
+		margin-bottom: var(--spacer);
+	}
 }
 
 .alignleft,
 .alignright {
-	margin-top: var(--spacer-lg);
-	margin-bottom: var(--spacer-lg);
+	margin-top: var(--spacer-s);
+	margin-bottom: var(--spacer-s);
 
 	@media (--viewport-medium) {
-		margin-top: var(--spacer-xs);
-		margin-bottom: var(--spacer-xs);
+		margin-top: 0;
+		margin-bottom: 0;
 		max-width: 30%;
 	}
 }
@@ -71,13 +81,13 @@ img {
 .alignleft {
 	@media (--viewport-medium) {
 		float: left;
-		margin-right: var(--spacer-lg);
+		margin-right: var(--spacer);
 	}
 }
 
 .alignright {
 	@media (--viewport-medium) {
 		float: right;
-		margin-left: var(--spacer-lg);
+		margin-left: var(--spacer);
 	}
 }

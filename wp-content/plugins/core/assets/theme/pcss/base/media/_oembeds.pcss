@@ -34,9 +34,11 @@
 
 		.wp-embed-lazy__icon {
 			border-color: var(--embed-icon-border-hover);
+			text-shadow: 1px 1px 1px #777;
+			transition: text-shadow 0.15s ease-in-out;
 
 			&:before {
-				transform: scale(0.65);
+				transform: scale(1.1);
 			}
 		}
 	}
@@ -62,7 +64,7 @@
 }
 
 .wp-embed-lazy__trigger-label {
-	display: block;
+	display: none;
 	font-weight: var(--font-weight-bold);
 	text-transform: uppercase;
 	letter-spacing: 0.02em;
@@ -83,16 +85,22 @@
 	opacity: 0;
 	transition: opacity 0.15s ease-in;
 	position: absolute;
-	left: 25px;
-	bottom: 20px;
-	background: var(--embed-caption-bgd-color);
-	border: 1px solid var(--embed-caption-border);
+	left: 50%;
+	top: 50%;
+	border-radius: 50%;
 	color: var(--embed-caption-color);
-	padding: 20px 25px 20px 75px;
-	max-width: 90%;
+	margin-left: 0;
+	padding: 25px 30px;
+	text-align: center;
+	transform: translateY(-50%);
+	height: 100px;
+	width: 100px;
+	z-index: 2;
 
 	@media (--viewport-medium) {
-		left: 20px;
+		height: 170px;
+		margin-left: -85px;
+		width: 170px;
 	}
 
 	/* CASE: lazyloaded */
@@ -103,7 +111,6 @@
 
 	/* CASE: Mobile */
 	.wp-embed-lazy--small & {
-		background: var(--embed-caption-bgd-color-mobile);
 		border: 0;
 		padding: 0;
 		width: 100%;
@@ -115,34 +122,39 @@
 }
 
 .wp-embed-lazy__icon {
+	opacity: 0.9;
 	position: absolute;
-	font-size: 44px;
-	left: 15px;
+	font-size: 70px;
+	left: 0;
 	top: 50%;
-	margin-top: -24px;
-	transition: opacity 0.15s ease-in-out, border 0.425s;
-	border: 2px solid var(--embed-icon-border);
-	border-radius: 50%;
+	text-shadow: 0 0 0 #777;
+	transition: all 0.15s ease-in-out;
+	transform: translate(-50%, -50%);
+	width: 100px;
 
 	&:before {
 		display: inline-block;
 		position: relative;
 		left: 3px;
 		top: 1px;
-		transition: opacity 0.15s ease-in-out, transform 0.425s;
+		transition: all 0.15s ease-in-out;
 	}
 
 	/* CASE: Mobile */
 	.wp-embed-lazy--small & {
 		left: 50%;
-		margin-left: -26px;
+	}
+
+	@media (--viewport-medium) {
+		font-size: 100px;
+		left: 50%;
 	}
 }
 
 .wp-embed-lazy__title {
+	display: none;
 	font-size: 18px;
 	letter-spacing: 0.02em;
-	display: block;
 	margin-top: 6px;
 	padding-top: 5px;
 	border-top: 1px solid var(--embed-caption-border);
