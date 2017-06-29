@@ -7,10 +7,10 @@
  * enabled on your local development checkouts
 */
 
-define( 'DB_NAME', 'local_db_name' );
-define( 'DB_USER', 'local_db_user' );
-define( 'DB_PASSWORD', 'local_db_password' );
-define( 'DB_HOST', 'localhost' );
+define( 'DB_NAME', '' );
+define( 'DB_USER', '' );
+define( 'DB_PASSWORD', '' );
+define( 'DB_HOST', '' );
 
 
 /*
@@ -22,6 +22,14 @@ define( 'SAVEQUERIES', true );
 define( 'WP_DEBUG_DISPLAY', true );
 define( 'SCRIPT_DEBUG', true );
 define( 'WP_CACHE', false );
+
+/*
+ * S3 Uploads
+ */
+define( 'S3_UPLOADS_BUCKET', '' );
+define( 'S3_UPLOADS_KEY', '' );
+define( 'S3_UPLOADS_SECRET', '' );
+define( 'S3_UPLOADS_REGION', '' );
 
 
 /*

@@ -17,11 +17,24 @@ if ( file_exists( dirname( __FILE__ ) . '/local-config.php' ) )
 // Assign default constant values
 // ==============================================================
 
+if ( !isset($_SERVER['HTTP_X_FORWARDED_PROTO']) ) $_SERVER['HTTP_X_FORWARDED_PROTO'] = '';
+if ( !isset($_SERVER['HTTP_HOST']) ) $_SERVER['HTTP_HOST'] = 'local-cli';
+
+if ( $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https' ) {
+	$_SERVER['HTTPS'] = 'on';
+	$_SERVER['SERVER_PORT'] = 443;
+}
+
+function tribe_isSSL() {
+	if ( !empty( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] != 'off' ) return true;
+	return false;
+}
+
 $config_defaults = array(
 
 	// Paths
 	'WP_CONTENT_DIR'          => dirname( __FILE__ ) . '/wp-content',
-	'WP_CONTENT_URL'          => 'http://' . $_SERVER['HTTP_HOST'] . '/wp-content',
+	'WP_CONTENT_URL'          => (tribe_isSSL() ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/wp-content',
 	'ABSPATH'                 => dirname( __FILE__ ) . '/wp/',
 
 	// Multisite
