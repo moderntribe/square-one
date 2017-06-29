@@ -21,6 +21,7 @@ Thumbs.db
 # WordPress #
 #############
 
+memcached.php
 local-config.php
 cache-config.php
 tests-config.php

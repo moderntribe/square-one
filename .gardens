@@ -1,0 +1,4 @@
+rds=true
+memcached=false
+redis=false
+alias=
