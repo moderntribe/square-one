@@ -22,7 +22,7 @@ if ( !isset($_SERVER['HTTP_HOST']) ) $_SERVER['HTTP_HOST'] = 'local-cli';
 
 if ( $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https' ) {
 	$_SERVER['HTTPS'] = 'on';
-  $_SERVER['SERVER_PORT'] = 443;
+	$_SERVER['SERVER_PORT'] = 443;
 }
 
 function tribe_isSSL() {
