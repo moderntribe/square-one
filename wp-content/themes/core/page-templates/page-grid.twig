@@ -1,0 +1,339 @@
+{# Page Template: Grid #}
+
+{% extends "base.twig" %}
+
+{% block content %}
+
+	<div class="t-content site-grid__staging">
+
+		<div class="l-wrapper">
+			<h1>Grid Layouts and Options</h1>
+			<p>Below are some examples of the default grid system within Square One. This should be used as a base and feel
+				free to add to it if your design calls for a different type of layout.</p>
+
+
+			<h2>1 Column Full</h2>
+			<div class="site-grid__row">
+				<div class="site-grid__container">
+					<div class="site-grid__col">
+						<div class="c-default">Component</div>
+					</div>
+				</div>
+			</div>
+
+			<h2>1 Column Fixed Width</h2>
+			<h3>One Fourth</h3>
+			<div class="site-grid__row">
+				<div class="site-grid__container">
+					<div class="site-grid__col site-grid__col--one-fourth">
+						<div class="c-default">Column 25%</div>
+					</div>
+				</div>
+			</div>
+
+			<h3>One Third</h3>
+			<div class="site-grid__row">
+				<div class="site-grid__container">
+					<div class="site-grid__col site-grid__col--one-third">
+						<div class="c-default">Column 33.33%</div>
+					</div>
+				</div>
+			</div>
+
+			<h3>One Half</h3>
+			<div class="site-grid__row">
+				<div class="site-grid__container">
+					<div class="site-grid__col site-grid__col--one-half">
+						<div class="c-default">Column 50%</div>
+					</div>
+				</div>
+			</div>
+
+			<h2>Column Alignment:</h2>
+			<p>To change the alignment, add these helper classes to the parent container:</p>
+
+			<div class="site-grid__row">
+				<div class="site-grid__container">
+					<div class="site-grid__col site-grid__col--one-third">
+						<div class="c-default"><mark>site-grid__pull-left</mark></div>
+					</div>
+				</div>
+			</div>
+			<div class="site-grid__row">
+				<div class="site-grid__container site-grid__center">
+					<div class="site-grid__col site-grid__col--one-third">
+						<div class="c-default"><mark>site-grid__center</mark></div>
+					</div>
+				</div>
+			</div>
+
+			<div class="site-grid__row">
+				<div class="site-grid__container site-grid__pull-right">
+					<div class="site-grid__col site-grid__col--one-third">
+						<div class="c-default"><mark>site-grid__right</mark></div>
+					</div>
+				</div>
+			</div>
+
+			<h2>2 Column</h2>
+			<div class="site-grid__row">
+				<div class="site-grid__container">
+					<div class="site-grid__col">
+						<div class="c-default">Component</div>
+					</div>
+					<div class="site-grid__col">
+						<div class="c-default">Component</div>
+					</div>
+				</div>
+			</div>
+
+			<h2>2 Column Wrap</h2>
+			<div class="site-grid__row">
+				<div class="site-grid__container">
+					<div class="site-layout site-layout--2-col">
+						<div class="site-grid__col">
+							<div class="c-default">Component</div>
+						</div>
+						<div class="site-grid__col">
+							<div class="c-default">Component</div>
+						</div>
+						<div class="site-grid__col">
+							<div class="c-default">Component</div>
+						</div>
+						<div class="site-grid__col">
+							<div class="c-default">Component</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<h2>3 Column</h2>
+			<div class="site-grid__row">
+				<div class="site-grid__container">
+					<div class="site-grid__col">
+						<div class="c-default">Component</div>
+					</div>
+					<div class="site-grid__col">
+						<div class="c-default">Component</div>
+					</div>
+					<div class="site-grid__col">
+						<div class="c-default">Component</div>
+					</div>
+				</div>
+			</div>
+
+			<h2>3 Column Wrap</h2>
+			<div class="site-grid__row">
+				<div class="site-grid__container">
+					<div class="site-layout site-layout--3-col">
+						<div class="site-grid__col">
+							<div class="c-default">Component</div>
+						</div>
+						<div class="site-grid__col">
+							<div class="c-default">Component</div>
+						</div>
+						<div class="site-grid__col">
+							<div class="c-default">Component</div>
+						</div>
+						<div class="site-grid__col">
+							<div class="c-default">Component</div>
+						</div>
+						<div class="site-grid__col">
+							<div class="c-default">Component</div>
+						</div>
+						<div class="site-grid__col">
+							<div class="c-default">Component</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<h2>4 Column</h2>
+			<div class="site-grid__row">
+				<div class="site-grid__container">
+					<div class="site-grid__col">
+						<div class="c-default">Component</div>
+					</div>
+					<div class="site-grid__col">
+						<div class="c-default">Component</div>
+					</div>
+					<div class="site-grid__col">
+						<div class="c-default">Component</div>
+					</div>
+					<div class="site-grid__col">
+						<div class="c-default">Component</div>
+					</div>
+				</div>
+			</div>
+
+			<h2>4 Column Wrap</h2>
+			<div class="site-grid__row">
+				<div class="site-grid__container">
+					<div class="site-layout site-layout--4-col">
+						<div class="site-grid__col">
+							<div class="c-default">Component</div>
+						</div>
+						<div class="site-grid__col">
+							<div class="c-default">Component</div>
+						</div>
+						<div class="site-grid__col">
+							<div class="c-default">Component</div>
+						</div>
+						<div class="site-grid__col">
+							<div class="c-default">Component</div>
+						</div>
+						<div class="site-grid__col">
+							<div class="c-default">Component</div>
+						</div>
+						<div class="site-grid__col">
+							<div class="c-default">Component</div>
+						</div>
+						<div class="site-grid__col">
+							<div class="c-default">Component</div>
+						</div>
+						<div class="site-grid__col">
+							<div class="c-default">Component</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<h2>5 Column</h2>
+			<div class="site-grid__row">
+				<div class="site-grid__container">
+					<div class="site-grid__col">
+						<div class="c-default">Component</div>
+					</div>
+					<div class="site-grid__col">
+						<div class="c-default">Component</div>
+					</div>
+					<div class="site-grid__col">
+						<div class="c-default">Component</div>
+					</div>
+					<div class="site-grid__col">
+						<div class="c-default">Component</div>
+					</div>
+					<div class="site-grid__col">
+						<div class="c-default">Component</div>
+					</div>
+				</div>
+			</div>
+
+			<h2>Sidebar Right</h2>
+			<div class="site-grid__row">
+				<div class="site-grid__container">
+					<div class="site-layout site-layout--sidebar-right">
+						<div class="site-grid__col">
+							<div class="c-default">Content</div>
+						</div>
+						<div class="site-grid__col">
+							<div class="c-default">Sidebar</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<h2>Sidebar Left</h2>
+			<div class="site-grid__row">
+				<div class="site-grid__container">
+					<div class="site-layout site-layout--sidebar-left">
+						<div class="site-grid__col">
+							<div class="c-default">Sidebar</div>
+						</div>
+						<div class="site-grid__col">
+							<div class="c-default">Content</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<h2>Grid within Grid</h2>
+			<div class="site-grid__row">
+				<div class="site-grid__container">
+					<div class="site-layout site-layout--sidebar-right">
+						<div class="site-grid__col">
+							<div class="c-default">
+								<h6>Another grid layout inside of a column.</h6>
+								<div class="site-grid__row">
+									<div class="site-grid__container">
+										<div class="site-grid__col">
+											<div class="c-default">Component</div>
+										</div>
+										<div class="site-grid__col">
+											<div class="c-default">Component</div>
+										</div>
+										<div class="site-grid__col">
+											<div class="c-default">Component</div>
+										</div>
+										<div class="site-grid__col">
+											<div class="c-default">Component</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="site-grid__col">
+							<div class="c-default">Sidebar</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<h2>Remove Gutters</h2>
+			<p>To remove gutters, add this helper class to the parent container: <mark>site-grid__no-gutters</mark></p>
+			<div class="site-grid__row">
+				<div class="site-grid__container site-grid__no-gutters">
+					<div class="site-grid__col">
+						<div class="c-default">Component</div>
+					</div>
+					<div class="site-grid__col">
+						<div class="c-default">Component</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="site-grid__row">
+				<div class="site-grid__container site-grid__no-gutters">
+					<div class="site-grid__col">
+						<div class="c-default">Component</div>
+					</div>
+					<div class="site-grid__col">
+						<div class="c-default">Component</div>
+					</div>
+					<div class="site-grid__col">
+						<div class="c-default">Component</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="site-grid__row">
+				<div class="site-grid__container site-grid__no-gutters">
+					<div class="site-grid__col">
+						<div class="c-default">Component</div>
+					</div>
+					<div class="site-grid__col">
+						<div class="c-default">Component</div>
+					</div>
+					<div class="site-grid__col">
+						<div class="c-default">Component</div>
+					</div>
+					<div class="site-grid__col">
+						<div class="c-default">Component</div>
+					</div>
+				</div>
+			</div>
+
+			<h2>Full Width Examples</h2>
+		</div>
+
+		<div class="site-grid__row">
+			<div class="site-grid__col">
+				<div class="c-default">Component</div>
+			</div>
+			<div class="site-grid__col">
+				<div class="c-default">Component</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

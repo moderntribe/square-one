@@ -1,9 +1,25 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Header: Default
+ *
+ * w/ Demo Content
+ *
+ * ----------------------------------------------------------------------------- */
+
 .site-header {
-	/* CASE: "sticky" footer */
-	flex: none;
+	background-color: var(--color-default-bg);
+	flex: none; /* CASE: "sticky" footer */
+	padding: var(--grid-gutter) 0;
+}
+
+.site-header__wrapper {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
 }
 
 /* WP Admin Bar */
+
 #wpadminbar {
 	position: fixed !important;
 }

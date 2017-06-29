@@ -1,0 +1,65 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Grid: Base
+ *
+ * ----------------------------------------------------------------------------- */
+
+/**
+
+Example Markup:
+
+<div class="site-grid__row">
+	<div class="site-grid__container">
+		<div class="site-grid__col">
+			<p>Component or another grid layout, perhaps?</p>
+		</div>
+	</div>
+</div>
+
+Example: Two Column Wrap layout
+
+<div class="site-grid__row">
+	<div class="site-grid__container">
+		<div class="site-layout site-layout--2-col">
+			<div class="site-grid__col">
+				<p>Component or another grid layout, perhaps?</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+*/
+
+.site-grid__row {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	width: 100%;
+
+	@media (--viewport-medium) {
+		flex-direction: row;
+		flex-wrap: nowrap;
+	}
+}
+
+.site-grid__container {
+	display: flex;
+	flex-direction: column;
+	max-width: var(--grid-width);
+	margin: 0 auto;
+	width: 100%;
+
+	@media (--viewport-medium) {
+		flex-direction: row;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Grid: Modifier Container Bleed
+ * ----------------------------------------------------------------------------- */
+
+.site-grid__container--bleed {
+	max-width: none;
+	padding-left: 0;
+	padding-right: 0;
+}

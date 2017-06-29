@@ -1,0 +1,50 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Section: Base
+ *
+ * ----------------------------------------------------------------------------- */
+
+/**
+
+Example Markup:
+
+<section class="site-section">
+	<div class="site-section__wrapper">
+		<header class="site-section__header">
+			<h2 class="site-section__title">Site Section 4 Column</h2>
+			<div class="site-section__desc"><p>Site Section Description</p></div>
+		</header>
+		<article class="site-section__content">
+			<p>Grid layout or single component goes here.</p>
+		</article>
+		<footer class="site-section__footer">
+			<a href="#" class="btn">CTA Button</a>
+		</footer>
+	</div>
+</section>
+
+*/
+
+.site-section {
+	padding-bottom: var(--default-section-padding);
+	padding-top: var(--default-section-padding);
+	width: 100%;
+
+	&:nth-child(odd) {
+		background-color: var(--color-section-odd);
+	}
+}
+
+.site-section__wrapper {
+	max-width: var(--grid-width);
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: var(--grid-gutter-small);
+	padding-right: var(--grid-gutter-small);
+	width: 100%;
+
+	@media (--viewport-medium) {
+		padding-left: var(--grid-gutter);
+		padding-right: var(--grid-gutter);
+	}
+}

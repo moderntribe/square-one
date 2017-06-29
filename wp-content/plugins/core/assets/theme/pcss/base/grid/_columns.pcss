@@ -1,0 +1,59 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Grid: Columns
+ *
+ * ----------------------------------------------------------------------------- */
+
+.site-grid__col {
+	background-color: var(--color-default-bg);
+	margin-bottom: var(--grid-gutter-small);
+	min-width: 0;
+	padding: 0;
+	position: relative;
+	width: 100%;
+
+	@media (--viewport-medium) {
+		flex: 1;
+		margin: 0 var(--grid-gutter) 0 0;
+
+		&:last-child {
+			margin-right: 0;
+		}
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Grid: Modifier Column (Keeps column at a fixed width of 33.33%.)
+ * ----------------------------------------------------------------------------- */
+
+.site-grid__col--one-third {
+	flex: none;
+
+	@media (--viewport-medium) {
+		width: calc(100% / 3);
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Grid: Modifier Column (Keeps column at a fixed width of 25%.)
+ * ----------------------------------------------------------------------------- */
+
+.site-grid__col--one-fourth {
+	flex: none;
+
+	@media (--viewport-medium) {
+		width: 25%;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Grid: Modifier Column (Keeps column at a fixed width of 50%.)
+ * ----------------------------------------------------------------------------- */
+
+.site-grid__col--one-half {
+	flex: none;
+
+	@media (--viewport-medium) {
+		width: 50%;
+	}
+}
