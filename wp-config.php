@@ -25,9 +25,8 @@ if ( $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https' ) {
   $_SERVER['SERVER_PORT'] = 443;
 }
 
-function isSSL() {
+function tribe_isSSL() {
   if ( !empty( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] != 'off' ) return true;
-  	return true;
   return false;
 }
 
@@ -35,7 +34,7 @@ $config_defaults = array(
 
 	// Paths
 	'WP_CONTENT_DIR'          => dirname( __FILE__ ) . '/wp-content',
-	'WP_CONTENT_URL'          => (isSSL() ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/wp-content',
+	'WP_CONTENT_URL'          => (tribe_isSSL() ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/wp-content',
 	'ABSPATH'                 => dirname( __FILE__ ) . '/wp/',
 
 	// Multisite
