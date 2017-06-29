@@ -6,9 +6,17 @@ ARG admin_email
 ARG title
 ARG url
 
+RUN apk add --update nodejs nodejs-npm && npm install npm@latest -g
+RUN npm install -g grunt-cli
+
 COPY ./ /srv/site
 RUN chown -R nginx:nginx /srv/site
-RUN cd /srv/site/wp && \
+RUN cd /srv/site && \
+    git submodule update --init && \
+    npm set progress=false && \
+    npm install && \
+    grunt && \
+    cd /srv/site/wp && \
     if ! $(wp --allow-root core is-installed); then wp --allow-root core install --admin_user=$admin_user --admin_password=$admin_password --admin_email=$admin_email --title=$title --url=$url --skip-email; fi && \
     wp --allow-root plugin activate S3-Uploads
 
