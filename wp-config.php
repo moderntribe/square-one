@@ -26,8 +26,8 @@ if ( $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https' ) {
 }
 
 function tribe_isSSL() {
-  if ( !empty( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] != 'off' ) return true;
-  return false;
+	if ( !empty( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] != 'off' ) return true;
+	return false;
 }
 
 $config_defaults = array(
