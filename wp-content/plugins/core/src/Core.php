@@ -6,6 +6,7 @@ use Pimple\Container;
 use Tribe\Libs\Functions\Function_Includer;
 use Tribe\Project\Service_Providers\Asset_Provider;
 use Tribe\Project\Service_Providers\Cache_Provider;
+use Tribe\Project\Service_Providers\Object_Meta_Provider;
 use Tribe\Project\Service_Providers\Panel_Intializer_Provider;
 use Tribe\Project\Service_Providers\Post_Types\Event_Service_Provider;
 use Tribe\Project\Service_Providers\Post_Types\Organizer_Service_Provider;
@@ -63,6 +64,7 @@ class Core {
 		$this->container->register( new Settings_Provider() );
 		$this->container->register( new Util_Provider() );
 		$this->container->register( new Twig_Service_Provider() );
+		$this->container->register( new Object_Meta_Provider() );
 
 		$this->load_post_type_providers();
 		$this->load_taxonomy_providers();

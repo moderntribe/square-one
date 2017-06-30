@@ -1,7 +1,9 @@
 <?php
 namespace Tribe\Project\Settings;
 
-class General extends Contracts\ACF_Settings {
+use Tribe\Libs\ACF\ACF_Settings;
+
+class General extends ACF_Settings {
 
 	const DEMO_SETTING_ONE = 'demo_setting_one';
 	const DEMO_SETTING_TWO = 'demo_setting_two';
