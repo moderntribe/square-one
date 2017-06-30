@@ -5,8 +5,3 @@ RUN npm install -g grunt-cli
 
 COPY ./ /srv/site
 RUN chown -R nginx:nginx /srv/site
-RUN cd /srv/site && \
-    git submodule update --init && \
-    npm set progress=false && \
-    npm install && \
-    grunt
