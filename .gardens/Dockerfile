@@ -1,4 +1,4 @@
-FROM moderntribe/square-one:latest
+FROM moderntribe/wordpress:nginx-php7-fpm
 
 ARG admin_user
 ARG admin_password
