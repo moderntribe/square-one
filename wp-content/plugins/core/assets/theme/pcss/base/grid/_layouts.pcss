@@ -35,15 +35,26 @@
 	}
 }
 
+/* -----------------------------------------------------------------------------
+ * Grid: Center columns in layout.
+ * ----------------------------------------------------------------------------- */
+
+.site-grid__layout--center {
+	justify-content: center;
+}
+
 /* Layout: Two Column Small (Mobile) */
 
 .site-grid__layout--2-col-sm {
 
 	> .site-grid__col {
-		margin: 0 var(--grid-gutter-small) var(--grid-gutter-small) 0;
 		width: calc(50% - (var(--grid-gutter-small) - (var(--grid-gutter-small) / 2)));
 
 		&:nth-child(2n) {
+			margin-right: 0;
+		}
+
+		&:last-child {
 			margin-right: 0;
 		}
 	}
@@ -55,10 +66,13 @@
 
 	> .site-grid__col {
 		@media (--viewport-medium) {
-			margin: 0 var(--grid-gutter) var(--grid-gutter) 0;
 			width: calc(50% - (var(--grid-gutter) - (var(--grid-gutter) / 2)));
 
 			&:nth-child(2n) {
+				margin-right: 0;
+			}
+
+			&:last-child {
 				margin-right: 0;
 			}
 		}
@@ -76,6 +90,10 @@
 			&:nth-child(3n) {
 				margin-right: 0;
 			}
+
+			&:last-child {
+				margin-right: 0;
+			}
 		}
 	}
 }
@@ -86,7 +104,6 @@
 
 	> .site-grid__col {
 		@media (--viewport-medium) {
-			margin: 0 var(--grid-gutter) var(--grid-gutter) 0;
 			width: calc(25% - (var(--grid-gutter) - (var(--grid-gutter) / 4)));
 
 			&:nth-child(2n) {
@@ -95,6 +112,10 @@
 			}
 
 			&:nth-child(4n) {
+				margin-right: 0;
+			}
+
+			&:last-child {
 				margin-right: 0;
 			}
 		}
