@@ -2,7 +2,7 @@
  *
  * Header: Default
  *
- * w/ Demo Content
+ * w/ Demo Styles
  *
  * ----------------------------------------------------------------------------- */
 
@@ -14,8 +14,12 @@
 
 .site-header__wrapper {
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	justify-content: space-between;
+
+	@media (--viewport-medium) {
+		flex-direction: row;
+	}
 }
 
 /* WP Admin Bar */

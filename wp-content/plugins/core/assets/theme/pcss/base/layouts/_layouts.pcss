@@ -2,6 +2,21 @@
  *
  * Layouts: Layout Types
  *
+ * Example Markup:
+ *
+ * <div class="site-grid__row">
+ *	  <div class="site-grid__container">
+ *		 <div class="site-layout site-layout--2-col">
+ *			<div class="site-grid__col">
+ *				<p>Component</p>
+ *			</div>
+ *			<div class="site-grid__col">
+ *				<p>Component</p>
+ *			</div>
+ *		 </div>
+ *	  </div>
+ * </div>
+ *
  * ----------------------------------------------------------------------------- */
 
 .site-layout {
@@ -21,12 +36,16 @@
 .site-layout--2-col {
 
 	> .site-grid__col {
-		@media (--viewport-medium) {
-			width: calc(50% - (var(--grid-gutter) - (var(--grid-gutter) / 2)));
+		margin: 0 var(--grid-gutter-small) var(--grid-gutter-small) 0;
+		width: calc(50% - (var(--grid-gutter-small) - (var(--grid-gutter-small) / 2)));
 
-			&:nth-child(2n) {
-				margin-right: 0;
-			}
+		&:nth-child(2n) {
+			margin-right: 0;
+		}
+
+		@media (--viewport-medium) {
+			margin: 0 var(--grid-gutter) var(--grid-gutter) 0;
+			width: calc(50% - (var(--grid-gutter) - (var(--grid-gutter) / 2)));
 		}
 	}
 }
