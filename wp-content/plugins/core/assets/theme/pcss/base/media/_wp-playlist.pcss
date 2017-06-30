@@ -1,0 +1,50 @@
+.wp-playlist {
+	border: 1px solid var(--embed-playlist-border);
+}
+
+.mejs-overlay-play {
+
+	&:hover,
+	&:focus {
+
+		.mejs-overlay-button {
+			transition: var(--transition);
+			transform: translate(-50%, -50%) scale(1.1);
+
+			&:before {
+				text-shadow: 1px 1px 1px #777;
+				transition: var(--transition);
+			}
+		}
+	}
+}
+
+.mejs-overlay-button {
+	background: none;
+	display: block;
+	height: auto;
+	margin: 0;
+	left: 50%;
+	opacity: 0.9;
+	position: relative;
+	top: 50%;
+	transform: translate(-50%, -50%) scale(1);
+	transition: var(--transition);
+
+	&:before {
+		color: var(--color-white);
+		content: "\e903";
+		font-family: var(--font-family-core-icons);
+		font-size: 100px;
+		transition: var(--transition);
+	}
+}
+
+.wp-playlist-item {
+	border-bottom: 1px solid var(--embed-playlist-border);
+
+	.wp-playlist-caption,
+	.wp-playlist-item-length {
+		padding: 10px 0;
+	}
+}

@@ -14,7 +14,7 @@
  *
  * ----------------------------------------------------------------------------- */
 
-.site-grid__row {
+.site-grid {
 	display: flex;
 	flex-direction: column;
 	flex-wrap: wrap;
@@ -26,7 +26,7 @@
 	}
 }
 
-.site-grid__container {
+.site-grid__wrapper {
 	display: flex;
 	flex-direction: column;
 	max-width: var(--grid-width);
@@ -39,10 +39,10 @@
 }
 
 /* -----------------------------------------------------------------------------
- * Grid: Modifier Container Bleed
+ * Grid: Modifier Wrapper Bleed
  * ----------------------------------------------------------------------------- */
 
-.site-grid__container--bleed {
+.site-grid__wrapper--bleed {
 	max-width: none;
 	padding-left: 0;
 	padding-right: 0;
