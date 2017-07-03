@@ -64,6 +64,8 @@
     "postcss-reporter": "^3.0.0",
     "postcss-simple-vars": "^3.0.0",
     "spin.js": "^2.3.2",
+    "stylelint": "^7.9.0",
+    "stylelint-config-standard": "^16.0.0",
     "tota11y": "0.1.6",
     "verge": "^1.10.2",
     "webfontloader": "^1.6.28",
