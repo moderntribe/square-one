@@ -10,7 +10,7 @@ COPY . /srv/site
 RUN chown -R nginx:nginx /srv/site
 RUN cd /srv/site/wp && \
     if ! $(wp --allow-root core is-installed); then wp --allow-root core install --admin_user=$admin_user --admin_password=$admin_password --admin_email=$admin_email --title=$title --url=$url --skip-email; fi && \
-    wp --allow-root plugin activate S3-Uploads
+    wp --allow-root plugin activate s3-uploads
 
 RUN mkdir -p /srv/site/wp-content/uploads
 RUN chown -R nginx:nginx /srv/site/wp-content/uploads
