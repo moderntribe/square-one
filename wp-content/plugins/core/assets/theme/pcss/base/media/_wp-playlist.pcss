@@ -27,6 +27,7 @@
 	left: 50%;
 	opacity: 0.9;
 	position: relative;
+	text-align: center;
 	top: 50%;
 	transform: translate(-50%, -50%) scale(1);
 	transition: var(--transition);
@@ -35,8 +36,12 @@
 		color: var(--color-white);
 		content: "\e903";
 		font-family: var(--font-family-core-icons);
-		font-size: 100px;
+		font-size: 75px;
 		transition: var(--transition);
+
+		@media (--viewport-medium) {
+			font-size: 100px;
+		}
 	}
 }
 
