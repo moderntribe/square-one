@@ -19,6 +19,12 @@ module.exports = {
 			'postcss:themeLint',
 		],
 		[
+			'accessibility',
+		],
+		[
+			'flow',
+		],
+		[
 			'clean:themeMinCSS',
 		],
 	],
