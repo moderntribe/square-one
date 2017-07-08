@@ -6,3 +6,5 @@ rds: yes
 memcached: yes
 redis: no
 elasticsearch: no
+slack:
+  channel:
