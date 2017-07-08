@@ -2,7 +2,7 @@
 version: '2'
 
 services:
-  {{ deployment }}_wordpress:
+  wordpress:
     image: {{ image }}
     ports:
       - "0:80"
