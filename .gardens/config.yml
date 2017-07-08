@@ -1,0 +1,8 @@
+alias:
+multisite:
+  enabled: no
+  subdomains: no
+rds: yes
+memcached: yes
+redis: no
+elasticsearch: no

@@ -1,0 +1,11 @@
+---
+version: '2'
+
+services:
+  {{ deployment }}_wordpress:
+    image: {{ image }}
+    ports:
+      - "0:80"
+    labels:
+      - "traefik.frontend.rule=Host:{{ deployment }}.{{ domain }}"
+      - "traefik.frontend.entryPoints=http,https"
