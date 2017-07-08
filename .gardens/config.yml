@@ -1,10 +1,10 @@
-alias:
+alias: null
 multisite:
-  enabled: no
-  subdomains: no
-rds: yes
-memcached: yes
-redis: no
-elasticsearch: no
+  enabled: false
+  subdomains: false
+rds: true
+memcached: false
+redis: false
+elasticsearch: false
 slack:
-  channel:
+  channel: null
