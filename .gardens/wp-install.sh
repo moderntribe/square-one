@@ -1,5 +1,4 @@
 #!/bin/bash
-# you modify this to suit the needs of your project, whatever needs to happen to build your project
 
 multisite_enabled="$1"
 domain="$2"
