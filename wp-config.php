@@ -30,6 +30,14 @@ function tribe_isSSL() {
 	return false;
 }
 
+function tribe_getenv($name, $default = null) {
+	$env = getenv($name);
+	if ( $env === false ) return $default;
+	if ( $env == "false" || $env == "true" ) return filter_var($env, FILTER_VALIDATE_BOOLEAN);
+	if ( is_numeric($env) ) return ($env - 0);
+	return $env;
+}
+
 $config_defaults = array(
 
 	// Paths
@@ -38,17 +46,21 @@ $config_defaults = array(
 	'ABSPATH'                 => dirname( __FILE__ ) . '/wp/',
 
 	// Multisite
-	//'WP_ALLOW_MULTISITE'    => true,
-	//'MULTISITE'             => true,
-	//'SUBDOMAIN_INSTALL'     => false,
-	//'DOMAIN_CURRENT_SITE'   => '%%PRIMARY_DOMAIN%%',
-	//'PATH_CURRENT_SITE'     => '/',
-	//'SITE_ID_CURRENT_SITE'  => 1,
-	//'BLOG_ID_CURRENT_SITE'  => 1,
+	'WP_ALLOW_MULTISITE'    	=> tribe_getenv('WP_ALLOW_MULTISITE', false),
+	'MULTISITE'             	=> tribe_getenv('WP_MULTISITE', false),
+	'SUBDOMAIN_INSTALL'     	=> tribe_getenv('SUBDOMAIN_INSTALL', false),
+	'DOMAIN_CURRENT_SITE'   	=> tribe_getenv('DOMAIN_CURRENT_SITE', '%%PRIMARY_DOMAIN%%'),
+	'PATH_CURRENT_SITE'     	=> tribe_getenv('PATH_CURRENT_SITE', '/'),
+	'SITE_ID_CURRENT_SITE'  	=> tribe_getenv('SITE_ID_CURRENT_SITE', 1),
+	'BLOG_ID_CURRENT_SITE'  	=> tribe_getenv('BLOG_ID_CURRENT_SITE', 1),
 
 	// DB settings
 	'DB_CHARSET'              => 'utf8',
 	'DB_COLLATE'              => '',
+	'DB_NAME' 								=> tribe_getenv('DB_NAME', ''),
+	'DB_USER' 								=> tribe_getenv('DB_USER', ''),
+	'DB_PASSWORD' 						=> tribe_getenv('DB_PASSWORD', ''),
+	'DB_HOST' 								=> tribe_getenv('DB_HOST', ''),
 
 	// Language
 	'WPLANG'                  => '',
@@ -82,21 +94,30 @@ $config_defaults = array(
 	'FILE_CACHE_MAX_FILE_AGE' => 315000000, // about 10 years
 
 	// Debug
-	'WP_DEBUG'                => true,
-	'WP_DEBUG_LOG'            => true,
-	'WP_DEBUG_DISPLAY'        => true,
-	'SAVEQUERIES'             => true,
-	'SCRIPT_DEBUG'            => true,
-	'CONCATENATE_SCRIPTS'     => false,
-	'COMPRESS_SCRIPTS'        => false,
-	'COMPRESS_CSS'            => false,
+	'WP_DEBUG'                => tribe_getenv('WP_DEBUG', true),
+	'WP_DEBUG_LOG'            => tribe_getenv('WP_DEBUG_LOG', true),
+	'WP_DEBUG_DISPLAY'        => tribe_getenv('WP_DEBUG_DISPLAY', true),
+	'SAVEQUERIES'             => tribe_getenv('SAVEQUERIES', true),
+	'SCRIPT_DEBUG'            => tribe_getenv('SCRIPT_DEBUG', true),
+	'CONCATENATE_SCRIPTS'     => tribe_getenv('CONCATENATE_SCRIPTS', false),
+	'COMPRESS_SCRIPTS'        => tribe_getenv('COMPRESS_SCRIPTS', false),
+	'COMPRESS_CSS'            => tribe_getenv('COMPRESS_CSS', false),
 
 	// Domain Mapping
 	//'SUNRISE'                 => true,
 
 	// Miscellaneous
 	'WP_POST_REVISIONS'       => true,
-	'WP_DEFAULT_THEME'        => 'core'
+	'WP_DEFAULT_THEME'        => 'core',
+
+	// S3
+	'S3_UPLOADS_BUCKET' 			=> tribe_getenv('S3_UPLOADS_BUCKET', ''),
+	'S3_UPLOADS_KEY' 					=> tribe_getenv('S3_UPLOADS_KEY', ''),
+	'S3_UPLOADS_SECRET' 			=> tribe_getenv('S3_UPLOADS_SECRET', ''),
+	'S3_UPLOADS_REGION' 			=> tribe_getenv('S3_UPLOADS_REGION', ''),
+
+	// Glomar
+	'TRIBE_GLOMAR' 						=> tribe_getenv('TRIBE_GLOMAR', '')
 );
 
 // ==============================================================
@@ -156,4 +177,4 @@ if ( file_exists( dirname( __FILE__ ) . '/cache-config.php' ) )
 // Bootstrap WordPress
 // ==============================================================
 
-require_once( ABSPATH . 'wp-settings.php' );
+//require_once( ABSPATH . 'wp-settings.php' );

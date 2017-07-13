@@ -23,14 +23,6 @@ define( 'WP_DEBUG_DISPLAY', true );
 define( 'SCRIPT_DEBUG', true );
 define( 'WP_CACHE', false );
 
-/*
- * S3 Uploads
- */
-define( 'S3_UPLOADS_BUCKET', '' );
-define( 'S3_UPLOADS_KEY', '' );
-define( 'S3_UPLOADS_SECRET', '' );
-define( 'S3_UPLOADS_REGION', '' );
-
 
 /*
  * Glomar
