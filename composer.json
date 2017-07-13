@@ -1,0 +1,12 @@
+{
+    "name": "moderntribe/square-one",
+    "authors": [
+        {
+            "name": "Modern Tribe",
+            "email": "admin@tri.be"
+        }
+    ],
+    "require": {
+        "vlucas/phpdotenv": "^2.4"
+    }
+}

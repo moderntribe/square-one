@@ -5,6 +5,8 @@
  * @link https://github.com/markjaquith/WordPress-Skeleton
  */
 
+$dotenv = new Dotenv\Dotenv(__DIR__);
+$dotenv->load();
 
 // ==============================================================
 // Load database info and local development parameters
