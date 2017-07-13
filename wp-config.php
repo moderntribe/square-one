@@ -179,4 +179,4 @@ if ( file_exists( dirname( __FILE__ ) . '/cache-config.php' ) )
 // Bootstrap WordPress
 // ==============================================================
 
-//require_once( ABSPATH . 'wp-settings.php' );
+require_once( ABSPATH . 'wp-settings.php' );
