@@ -1,6 +1,5 @@
 FROM moderntribe/wordpress:nginx-php7-fpm
 
-ARG domain
 ARG multisite_enabled
 
 ARG admin_user
@@ -18,7 +17,7 @@ ARG smtp_password
 COPY . /srv/site
 WORKDIR /srv/site
 RUN COMPOSER_ALLOW_SUPERUSER=1 composer install
-RUN /srv/site/.gardens/wp-install.sh $multisite_enabled $domain
+RUN /srv/site/.gardens/wp-install.sh $multisite_enabled
 
 RUN sed -i 's/^root=.*$/root=postmaster@'"$smtp_domain"'/g' /etc/ssmtp/ssmtp.conf
 RUN sed -i 's/^hostname=.*$/hostname='"$smtp_domain"'/g' /etc/ssmtp/ssmtp.conf
