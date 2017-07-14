@@ -9,3 +9,4 @@ services:
     labels:
       - "traefik.frontend.rule=Host:{{ deployment }}.{{ domain }}"
       - "traefik.frontend.entryPoints=http,https"
+      - "timestamp={{ timestamp }}"
