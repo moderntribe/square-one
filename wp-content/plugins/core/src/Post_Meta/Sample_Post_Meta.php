@@ -45,8 +45,8 @@ class Sample_Post_Meta extends ACF\ACF_Meta_Group {
 	 */
 	public function get_value( $post_id, $key ) {
 
-		if ( isset( $this->get_keys()[ $key ] ) ) {
-			return get_field( $this->get_keys()[ $key ], $post_id );
+		if ( in_array( $key, $this->get_keys() ) ) {
+			return get_field( $key , $post_id );
 		}
 
 		return '';
