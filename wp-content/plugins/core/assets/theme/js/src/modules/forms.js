@@ -8,7 +8,9 @@ import delegate from 'delegate';
 import * as tools from '../utils/tools';
 import scrollTo from '../utils/dom/scroll-to';
 
-const el = {
+const el: {
+	container: Node,
+} = {
 	container: tools.getNodes('site-wrap')[0],
 };
 
@@ -24,7 +26,7 @@ const scrollSubmit = (form) => {
 	scrollTo({
 		duration: 500,
 		offset: -60,
-		$target: $(form),
+		$target: window.$(form),
 	});
 };
 
@@ -79,7 +81,7 @@ const spinOn = (e) => {
  */
 
 const bindEvents = () => {
-	$(document)
+	window.$(document)
 		.on('submit', '.gform_wrapper form', gravityFormSubmit)
 		.on('gform_post_render', gravityFormPostRender)
 		.on('gform_confirmation_loaded', gravityFormConfirmationLoaded);

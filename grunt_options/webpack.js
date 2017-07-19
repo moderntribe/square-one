@@ -1,4 +1,5 @@
 var webpack = require('webpack');
+var path = require('path');
 var webpackCoreThemeConfig = require('../webpack.config.js');
 
 module.exports = {
@@ -16,7 +17,7 @@ module.exports = {
 		output: {
 			filename: '[name].js',
 			chunkFilename: '[name].js',
-			path: './<%= pkg._core_theme_assets_path %>/js/dist/',
+			path: path.resolve(__dirname + '/../', '<%= pkg._core_theme_assets_path %>/js/dist/'),
 			publicPath: '/<%= pkg._core_theme_assets_path %>/js/dist/',
 		},
 		devtool: 'eval-source-map',
@@ -42,7 +43,7 @@ module.exports = {
 		output: {
 			filename: '[name].min.js',
 			chunkFilename: '[name].min.js',
-			path: './<%= pkg._core_theme_assets_path %>/js/dist/',
+			path: path.resolve(__dirname + '/../', '<%= pkg._core_theme_assets_path %>/js/dist/'),
 			publicPath: '/<%= pkg._core_theme_assets_path %>/js/dist/',
 		},
 		plugins: webpackCoreThemeConfig.plugins.concat(

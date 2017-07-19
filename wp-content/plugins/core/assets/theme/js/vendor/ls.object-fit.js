@@ -1,4 +1,19 @@
-(function(){
+(function(window, factory) {
+	var globalInstall = function(initialEvent){
+		factory(window.lazySizes, initialEvent);
+		window.removeEventListener('lazyunveilread', globalInstall, true);
+	};
+
+	factory = factory.bind(null, window, window.document);
+
+	if(typeof module == 'object' && module.exports){
+		factory(require('lazysizes'));
+	} else if(window.lazySizes) {
+		globalInstall();
+	} else {
+		window.addEventListener('lazyunveilread', globalInstall, true);
+	}
+}(window, function(window, document, lazySizes, initialEvent) {
 	'use strict';
 	var style = document.createElement('a').style;
 	var fitSupport = 'objectFit' in style;
@@ -111,13 +126,21 @@
 	}
 
 	if(!fitSupport || !positionSupport){
-		addEventListener('lazyunveilread', function(e){
+		var onRead = function(e){
+			if(e.detail.instance != lazySizes){return;}
+
 			var element = e.target;
 			var obj = getObject(element);
 
 			if(obj.fit && (!fitSupport || (obj.position != 'center'))){
 				initFix(element, obj);
 			}
-		}, true);
+		};
+
+		window.addEventListener('lazyunveilread', onRead, true);
+
+		if(initialEvent && initialEvent.detail){
+			onRead(initialEvent);
+		}
 	}
-})();
+}));
