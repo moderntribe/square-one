@@ -9,39 +9,18 @@ use Tribe\Libs\ACF;
  * @package Tribe\Project\Post_Meta
  *
  * A sample class for creating post meta fields in square-one with Advanced Custom Fields
+ *
+ * Be sure to register your post meta in Service_Providers/Post_Meta_Service_Provider.php
  */
 class Sample_Post_Meta extends ACF\ACF_Meta_Group {
 
 	/**
-	 * Name your post meta group and setup field attributes
-	 *
-	 * All fields require key and meta_key.  Key is used for cleaner code when using the get_value method.
-	 * Meta key is to pseudo namespace the actual meta keys.
+	 * Name your post meta group and setup field keys
 	 */
 	const NAME = 'sample_post_meta';
-	const SAMPLE_TEXT = [
-		'key'      => 'sample_text_field',
-		'meta_key' => self::NAME . '_sample_text_field',
-		'label'    => 'A Sample Text Field',
-	];
-	const SAMPLE_RADIO = [
-		'key'      => 'sample_radio_field',
-		'meta_key' => self::NAME . '_sample_radio_field',
-		'label'    => 'A Sample Radio Field',
-		'type'     => 'radio',
-		'choices'  => [ 0, 1, 2, 3, 4, 5 ],
-		'layout'   => 'horizontal',
-	];
-	const SAMPLE_TRUE_FALSE = [
-		'key'      => 'sample_true_false',
-		'meta_key' => self::NAME . '_sample_true_false',
-		'label'    => 'A Sample True/False Field',
-		'type'     => 'true_false',
-	];
-	const SAMPLE_CUSTOM_FIELD = [
-		'key'      => 'sample_custom_field',
-		'meta_key' => self::NAME . '_sample_custom_field',
-	];
+	const SAMPLE_TEXT = 'sample_text';
+	const SAMPLE_RADIO = 'sample_radio';
+	const SAMPLE_BOOL = 'sample_true_false';
 
 	/**
 	 * @return array
@@ -50,10 +29,9 @@ class Sample_Post_Meta extends ACF\ACF_Meta_Group {
 	 */
 	public function get_keys(): array {
 		return [
-			self::SAMPLE_TEXT['key'],
-			self::SAMPLE_RADIO['key'],
-			self::SAMPLE_TRUE_FALSE['key'],
-			self::SAMPLE_CUSTOM_FIELD['key'],
+			self::SAMPLE_TEXT,
+			self::SAMPLE_RADIO,
+			self::SAMPLE_BOOL,
 		];
 	}
 
@@ -68,10 +46,21 @@ class Sample_Post_Meta extends ACF\ACF_Meta_Group {
 	public function get_value( $post_id, $key ) {
 
 		if ( isset( $this->get_keys()[ $key ] ) ) {
-			return get_field( $this->get_keys()[ $key ]['meta_key'], $post_id );
+			return get_field( $this->get_keys()[ $key ], $post_id );
 		}
 
 		return '';
+
+		/**
+		 * Example conditional return, if the text field is a person's name
+		 * You could return something like "Hi Roy!" where the user had just submitted "Roy"
+		 *
+		 * switch ( $key ) {
+		 *     case self::SAMPLE_TEXT
+		 *         return 'Hi ' . get_field( $key, $post_id ) . '!';
+		 *     case default:
+		 *         return get_field( $key, $post_id );
+		 */
 
 	}
 
@@ -80,7 +69,7 @@ class Sample_Post_Meta extends ACF\ACF_Meta_Group {
 	 *
 	 * Create a new ACF Group to contain post meta fields
 	 */
-	public function get_group_config() {
+	protected function get_group_config() {
 
 		$group = new ACF\Group( self::NAME );
 
@@ -91,37 +80,84 @@ class Sample_Post_Meta extends ACF\ACF_Meta_Group {
 		/**
 		 * Field parameter is the index of meta key for field in const META_KEYS
 		 */
-		$group->add_field( Post_Meta_Fields::get_simple_field( self::SAMPLE_TEXT ) );
-		$group->add_field( Post_Meta_Fields::get_simple_field( self::SAMPLE_TRUE_FALSE ) );
-		$group->add_field( Post_Meta_Fields::get_select_field( self::SAMPLE_RADIO ) );
-		$group->add_field( self::get_custom_field() );
+		$group->add_field( $this->get_sample_text_field() );
+		$group->add_field( $this->get_sample_bool_field() );
+		$group->add_field( $this->get_sample_radio_field() );
 
 		return $group->get_attributes();
+
+	}
+
+
+	/**
+	 * @return ACF\Field
+	 *
+	 * Generate a text input post meta field
+	 */
+	private function get_sample_text_field() {
+
+		$field = new ACF\Field( self::NAME . '_' . self::SAMPLE_TEXT );
+
+		$field->set_attributes( [
+			'label' => __( 'Input Your Text', 'tribe' ),
+			'name'  => self::SAMPLE_TEXT,
+			'type'  => 'text',
+		] );
+
+		return $field;
+
+	}
+
+
+	/**
+	 * @return ACF\Field
+	 *
+	 * Generate a text input post meta field
+	 */
+	private function get_sample_bool_field() {
+
+		$field = new ACF\Field( self::NAME . '_' . self::SAMPLE_BOOL );
+
+		$field->set_attributes( [
+			'label' => __( 'Make This True?', 'tribe' ),
+			'name'  => self::SAMPLE_BOOL,
+			'type'  => 'true_false',
+		] );
+
+		return $field;
 
 	}
 
 	/**
 	 * @return ACF\Field
 	 *
-	 * If no predefined field works you can create methods for generating custom fields
+	 * Create a selection post meta field
 	 */
-	public function get_custom_field() {
-		$field = new ACF\Field( self::SAMPLE_CUSTOM_FIELD['meta_key'] );
+	public static function get_sample_radio_field() {
+
+		$field = new ACF\Field( self::NAME . '_' . self::SAMPLE_RADIO );
+
 		$field->set_attributes( [
-			'label'          => __( 'Link URL', 'tribe' ),
-			'name'           => self::SAMPLE_CUSTOM_FIELD['meta_key'],
-			'type'           => 'page_link',
-			'post_type'      => [
-				0 => 'page',
+			'label'   => __( 'Select An Option', 'tribe' ),
+			'name'    => self::SAMPLE_RADIO,
+			'type'    => 'radio',
+			'layout'  => 'horizontal',
+			'choices' => [
+				'yes' => __( 'Yes', 'tribe' ),
+				'no'  => __( 'No', 'tribe' ),
+				'maybe' => __( 'Maybe', 'tribe' ),
 			],
-			'allow_null'     => 1,
-			'allow_archives' => 1,
-			'multiple'       => 0,
 		] );
 
 		return $field;
+
 	}
 
+	/**
+	 * @return mixed
+	 *
+	 * Return an instance of the post meta class store in the container
+	 */
 	public static function instance() {
 		return tribe_project()->container()[ 'post_meta.' . static::NAME ];
 	}

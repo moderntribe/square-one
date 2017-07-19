@@ -59,6 +59,8 @@ class Post_Meta_Service_Provider implements ServiceProviderInterface {
 			] );
 		};
 
+		//$container[ 'post_meta.another_post_meta' ] = function () { ...
+
 	}
 
 }
