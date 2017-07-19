@@ -30,9 +30,9 @@ class Post_Meta_Service_Provider implements ServiceProviderInterface {
 		 *
 		 * Add $container[ 'post_meta.NAME' ] to the Meta_Repository array parameter for ALL post meta classes
 		 */
-		$container['post_meta.collection_repo'] = function ( Container $container ) {
+		$container[ 'post_meta.collection_repo' ] = function ( Container $container ) {
 			return new Meta_Repository( [
-				$container['post_meta.sample_post_meta'],
+				$container[ 'post_meta.' . Sample_Post_Meta::NAME ],
 				// $container[ 'post_meta.another_post_meta' ],
 			] );
 		};
@@ -41,7 +41,7 @@ class Post_Meta_Service_Provider implements ServiceProviderInterface {
 		 * Hook all registered post meta in collection repo
 		 */
 		add_action( 'plugins_loaded', function () use ( $container ) {
-			$container['post_meta.collection_repo']->hook();
+			$container[ 'post_meta.collection_repo' ]->hook();
 		}, 1000, 0 );
 
 	}
@@ -53,7 +53,7 @@ class Post_Meta_Service_Provider implements ServiceProviderInterface {
 	 */
 	protected function post_meta( Container $container ) {
 
-		$container['post_meta.sample_post_meta'] = function () {
+		$container[ 'post_meta.' . Sample_Post_Meta::NAME ] = function () {
 			return new Sample_Post_Meta( [
 				Sample::NAME,
 			] );
