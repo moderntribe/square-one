@@ -23,7 +23,6 @@ class Wysiwyg extends Panel_Type_Config {
 		$panel->set_description( __( 'Displays custom content', 'tribe' ) );
 		$panel->set_thumbnail( $this->handler->thumbnail_url( 'module-wysiwyg.jpg' ) );
 
-		// Panel Layout
 		$panel->add_settings_field( new Fields\ImageSelect( [
 			'name'    => self::FIELD_LAYOUT,
 			'label'   => __( 'Layout', 'tribe' ),
@@ -34,19 +33,18 @@ class Wysiwyg extends Panel_Type_Config {
 			'default' => self::FIELD_LAYOUT_OPTION_RIGHT,
 		] ) );
 
-		/** @var Fields\Repeater $group */
 		$group = new Fields\Repeater( [
 			'label'            => __( 'Columns', 'tribe' ),
 			'name'             => self::FIELD_COLUMNS,
 			'min'              => 1,
 			'max'              => 3,
-			'new_button_label' => __( 'Add Column', 'tribe' )
+			'new_button_label' => __( 'Add Column', 'tribe' ),
 		] );
 
 		$group->add_field( new Fields\TextArea( [
 			'label'    => __( 'Column', 'tribe' ),
 			'name'     => self::FIELD_COLUMN,
-			'richtext' => true
+			'richtext' => true,
 		] ) );
 
 		$panel->add_field( $group );

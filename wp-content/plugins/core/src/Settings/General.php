@@ -1,12 +1,16 @@
 <?php
+
 namespace Tribe\Project\Settings;
 
 use Tribe\Libs\ACF\ACF_Settings;
+use Tribe\Libs\ACF\Field;
+use Tribe\Libs\ACF\Group;
 
 class General extends ACF_Settings {
 
-	const DEMO_SETTING_ONE = 'demo_setting_one';
-	const DEMO_SETTING_TWO = 'demo_setting_two';
+	const ADDRESS = 'contact_address';
+	const PHONE   = 'contact_phone';
+	const EMAIL   = 'contact_email';
 
 	public function get_title() {
 		return 'General Settings';
@@ -20,52 +24,62 @@ class General extends ACF_Settings {
 		return 'options-general.php';
 	}
 
-	public function get_fields() {
-		return [
-			[
-				'key'               => 'field_576ae96f654cf',
-				'label'             => 'Demo Setting One',
-				'name'              => self::DEMO_SETTING_ONE,
-				'type'              => 'text',
-				'instructions'      => '',
-				'required'          => 0,
-				'conditional_logic' => 0,
-				'wrapper'           => [
-					'width' => '',
-					'class' => '',
-					'id'    => '',
+	public function register_fields() {
+		acf_add_local_field_group( $this->get_contact_info_box() );
+	}
+
+	private function get_contact_info_box() {
+		$box = new Group( 'contact_info' );
+		$box->set_attributes( [
+			'title'    => __( 'Contact Info', 'tribe' ),
+			'location' => [
+				[
+					[
+						'param'    => 'options_page',
+						'operator' => '==',
+						'value'    => $this->slug,
+					],
 				],
-				'default_value'     => '',
-				'placeholder'       => '',
-				'prepend'           => '',
-				'append'            => '',
-				'maxlength'         => '',
-				'readonly'          => 0,
-				'disabled'          => 0,
 			],
-			[
-				'key'               => 'field_576ae9ae654d0',
-				'label'             => 'Demo Setting Two',
-				'name'              => self::DEMO_SETTING_TWO,
-				'type'              => 'number',
-				'instructions'      => '',
-				'required'          => 0,
-				'conditional_logic' => 0,
-				'wrapper'           => [
-					'width' => '',
-					'class' => '',
-					'id'    => '',
-				],
-				'default_value'     => 5,
-				'placeholder'       => '',
-				'prepend'           => '',
-				'append'            => '',
-				'min'               => '',
-				'max'               => '',
-				'step'              => '',
-				'readonly'          => 0,
-				'disabled'          => 0,
-			],
-		];
+		] );
+		$box->add_field( $this->get_address_field() );
+		$box->add_field( $this->get_phone_field() );
+		$box->add_field( $this->get_email_field() );
+
+		return $box->get_attributes();
+	}
+
+	private function get_address_field() {
+		$field = new Field( 'contact_info_address' );
+		$field->set_attributes( [
+			'label' => __( 'Address', 'tribe' ),
+			'type'  => 'textarea',
+			'rows'  => 4,
+			'name'  => static::ADDRESS,
+		] );
+
+		return $field;
+	}
+
+	private function get_phone_field() {
+		$field = new Field( 'contact_info_phone' );
+		$field->set_attributes( [
+			'label' => __( 'Telephone', 'tribe' ),
+			'type'  => 'text',
+			'name'  => static::PHONE,
+		] );
+
+		return $field;
+	}
+
+	private function get_email_field() {
+		$field = new Field( 'contact_info_email' );
+		$field->set_attributes( [
+			'label' => __( 'Email', 'tribe' ),
+			'type'  => 'email',
+			'name'  => static::EMAIL,
+		] );
+
+		return $field;
 	}
 }

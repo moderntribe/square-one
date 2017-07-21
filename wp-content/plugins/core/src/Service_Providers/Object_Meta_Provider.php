@@ -6,7 +6,7 @@ namespace Tribe\Project\Service_Providers;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
-use Tribe\Libs\Post_Meta\Meta_Repository;
+use Tribe\Libs\Object_Meta\Meta_Repository;
 use Tribe\Project\Post_Types;
 use Tribe\Project\Taxonomies;
 use Tribe\Project\Settings;
