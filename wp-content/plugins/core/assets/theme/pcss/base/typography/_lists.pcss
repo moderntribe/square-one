@@ -10,12 +10,13 @@ dl {
 	.t-content & {
 		@mixin body-content;
 
-		margin-top: var(--spacer);
-		margin-bottom: var(--spacer);
+		margin-top: var(--spacer-m);
+		margin-bottom: var(--spacer-m);
 	}
 }
 
 li {
+	padding-left: var(--spacer-s);
 
 	& ~ li {
 
@@ -32,11 +33,33 @@ li {
 .list-bullet,
 .t-content ul {
 	list-style: disc outside;
-	padding-left: 1.5em;
+	padding-left: 1em;
 	padding-right: 0;
 
+	&.list-checked {
+		list-style: none;
+
+		li {
+			list-style: none;
+			position: relative;
+
+			&:before {
+				border: solid var(--color-primary);
+				border-width: 0 2px 2px 0;
+				content: '';
+				display: block;
+				height: 9px;
+				left: auto;
+				margin-left: -33px;
+				position: absolute;
+				top: 5px;
+				transform: rotate(45deg);
+				width: 5px;
+			}
+		}
+	}
+
 	@media (--viewport-medium) {
-		padding-left: 3em;
 		padding-right: 3em;
 	}
 }
@@ -48,12 +71,36 @@ li {
 .list-number,
 .t-content ol {
 	list-style: decimal outside;
-	padding-left: 1.5em;
+	padding-left: 0;
 	padding-right: 0;
 
 	@media (--viewport-medium) {
-		padding-left: 3em;
 		padding-right: 3em;
+	}
+
+	li {
+		counter-increment: item;
+		font-size: var(--font-size-content-s);
+		list-style-type: none;
+		padding-left: 40px;
+		position: relative;
+
+		@media (--viewport-medium) {
+			font-size: var(--font-size-content);
+		}
+
+		&:before {
+			content: counter(item) ".";
+			font-family: var(--font-family-base);
+			font-weight: var(--font-weight-bold);
+			left: 0;
+			position: absolute;
+			top: 0;
+
+			@media (--viewport-medium) {
+				font-size: 21px;
+			}
+		}
 	}
 }
 
@@ -63,12 +110,13 @@ li {
 
 .dl,
 .t-content dl {
-	padding-left: 1.5em;
+	margin-top: 24px;
+	padding-left: 0;
 	padding-right: 0;
 
 	@media (--viewport-medium) {
-		padding-left: 3em;
-		padding-right: 3em;
+		margin-top: 43px;
+		padding-right: 0;
 	}
 }
 
@@ -79,5 +127,5 @@ li {
 
 .dd,
 .t-content dd {
-	margin-bottom: var(--spacer);
+	margin-bottom: var(--spacer-xs);
 }

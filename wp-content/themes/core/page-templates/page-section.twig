@@ -1,0 +1,128 @@
+{# Page Template: Section #}
+
+{% extends "base.twig" %}
+
+{% block content %}
+
+	<div class="t-content">
+
+		<div class="l-wrapper">
+			<h1>Sections</h1>
+			<p>This is the standard "Layer cake" architecture. This markup can be used for panels or for other
+				sections outside of the panel plugin.</p>
+		</div>
+
+		<section class="site-section">
+			<div class="site-section__wrapper">
+				<header class="site-section__header">
+					<h2 class="site-section__title">Site Section 4 Column</h2>
+					<div class="site-section__desc"><p>Site Section Description</p></div>
+				</header>
+				<article class="site-section__content">
+					<div class="site-grid">
+						<div class="site-grid__wrapper">
+							<div class="site-grid__col">
+								<div class="c-default">Component</div>
+							</div>
+							<div class="site-grid__col">
+								<div class="c-default">Component</div>
+							</div>
+							<div class="site-grid__col">
+								<div class="c-default">Component</div>
+							</div>
+							<div class="site-grid__col">
+								<div class="c-default">Component</div>
+							</div>
+						</div>
+					</div>
+				</article>
+				<footer class="site-section__footer">
+					<a href="#" class="btn">CTA Button</a>
+				</footer>
+			</div>
+		</section>
+
+		<section class="site-section">
+			<div class="site-section__wrapper">
+				<header class="site-section__header">
+					<h2 class="site-section__title">Site Section 2 Column</h2>
+					<div class="site-section__desc"><p>Site Section Description</p></div>
+				</header>
+				<article class="site-section__content">
+					<div class="site-grid">
+						<div class="site-grid__wrapper">
+							<div class="site-grid__col">
+								<div class="c-default">Component</div>
+							</div>
+							<div class="site-grid__col">
+								<div class="c-default">Component</div>
+							</div>
+						</div>
+					</div>
+				</article>
+				<footer class="site-section__footer">
+					<a href="#" class="cta">CTA Link</a>
+				</footer>
+			</div>
+		</section>
+
+		<section class="site-section">
+			<div class="site-section__wrapper">
+				<header class="site-section__header">
+					<h2 class="site-section__title">Site Section Centered Component</h2>
+					<div class="site-section__desc"><p>Site Section Description</p></div>
+				</header>
+				<article class="site-section__content">
+					<div class="site-grid">
+						<div class="site-grid__wrapper site-grid__center">
+							<div class="site-grid__col site-grid__col--one-third">
+								<div class="c-default">Component</div>
+							</div>
+						</div>
+					</div>
+				</article>
+				<footer class="site-section__footer">
+					<a href="#" class="btn">CTA Button</a>
+				</footer>
+			</div>
+		</section>
+
+		<section class="site-section">
+			<div class="site-section__wrapper">
+				<article class="site-section__content">
+					<div class="site-grid">
+						<div class="site-grid__wrapper site-grid__center">
+							<div class="site-grid__col site-grid__col--one-third">
+								<div class="c-default">Site Section No Header or Footer</div>
+							</div>
+						</div>
+					</div>
+				</article>
+			</div>
+		</section>
+
+		<section class="site-section">
+			<header class="site-section__header">
+				<h2 class="site-section__title">Site Section Full Width</h2>
+				<div class="site-section__desc"><p>Site Section Description</p></div>
+			</header>
+			<article class="site-section__content">
+				<div class="site-grid site-grid__no-gutters">
+					<div class="site-grid__col">
+						<div class="c-default">Component</div>
+					</div>
+					<div class="site-grid__col">
+						<div class="c-default">Component</div>
+					</div>
+				</div>
+			</article>
+			<footer class="site-section__footer">
+				<a href="#" class="cta">CTA Link</a>
+			</footer>
+		</section>
+
+	</div>
+
+
+
+{% endblock %}

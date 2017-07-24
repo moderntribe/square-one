@@ -1,0 +1,122 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Navigation: Primary
+ *
+ * w/ Demo Styles
+ *
+ * ----------------------------------------------------------------------------- */
+
+.site-header__nav {
+	align-items: center;
+	display: flex;
+	margin-top: 20px;
+	width: 100%;
+
+	@media (--viewport-medium) {
+		justify-content: flex-end;
+		margin-top: 0;
+		width: 80%;
+	}
+
+	.site-header__nav-list {
+
+		li {
+			display: inline-block;
+			position: relative;
+
+			&:first-child {
+				padding-left: 0;
+			}
+
+			&:after {
+				bottom: -20px;
+				content: "";
+				left: 0;
+				padding-bottom: 20px;
+				position: absolute;
+				width: 100%;
+			}
+
+			&:hover ul {
+				opacity: 1;
+				pointer-events: auto;
+				transform: translateY(0);
+				transition: var(--transition);
+				visibility: visible;
+			}
+
+			a {
+				color: var(--color-link);
+
+				&:visited {
+					color: var(--color-link);
+				}
+
+				&:focus,
+				&:hover {
+					color: var(--color-link-hover);
+				}
+			}
+
+			/* First level sub menu */
+
+			.sub-menu {
+				background: var(--color-primary);
+				left: 50%;
+				margin-left: -70px;
+				opacity: 0;
+				padding: 15px 20px;
+				position: absolute;
+				text-align: left;
+				top: 40px;
+				transform: translateY(-5%);
+				transition: var(--transition);
+				visibility: hidden;
+				width: 160px;
+				z-index: 10;
+
+				&:after {
+					border-left: 14px solid transparent;
+					border-right: 14px solid transparent;
+					border-bottom: 14px solid var(--color-primary);
+					top: -10px;
+					content: "";
+					height: 0;
+					margin-left: -16px;
+					position: absolute;
+					left: 50%;
+					width: 0;
+				}
+
+				li {
+					display: block;
+					font-size: 16px;
+					margin-bottom: 10px;
+					padding: 0;
+					text-transform: none;
+
+					&:last-child {
+						margin-bottom: 0;
+					}
+
+					&.menu-item-has-children {
+						padding-bottom: 10px;
+					}
+
+					&.menu-item-has-children > a {
+						color: var(--color-primary);
+						cursor: default;
+						padding-bottom: 5px;
+						text-transform: uppercase;
+					}
+
+					a {
+						color: var(--color-white);
+						font-weight: var(--font-weight-regular);
+						padding: 0;
+					}
+				}
+			}
+		}
+	}
+}

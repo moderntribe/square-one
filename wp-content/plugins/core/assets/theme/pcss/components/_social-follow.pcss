@@ -1,0 +1,32 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Components: Social Follow
+ *
+ * w/ Demo Styles
+ *
+ * ----------------------------------------------------------------------------- */
+
+.c-social-follow {
+	padding-bottom: 10px;
+
+	.c-social-follow__list {
+		display: flex;
+		flex-direction: row;
+
+		li {
+
+			&:first-child {
+				padding-left: 0;
+			}
+
+			a {
+				color: var(--color-link);
+
+				&:focus,
+				&:hover {
+					color: var(--color-link-hover);
+				}
+			}
+		}
+	}
+}

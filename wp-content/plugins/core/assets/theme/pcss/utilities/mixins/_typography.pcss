@@ -39,12 +39,21 @@
  * ----------------------------------------------------------------------------- */
 
 @define-mixin quote-base {
-	border-top: 1px solid var(--color-border);
-	border-bottom: 1px solid var(--color-border);
+	max-width: 800px;
 	padding: var(--spacer);
 }
 
 @define-mixin quote-text {
-	font-size: 32px;
-	font-style: italic;
+	color: var(--color-black);
+	font-family: var(--font-family-base);
+	font-size: 28px;
+	font-style: normal;
+	font-weight: var(--font-weight-bold);
+	line-height: var(--line-height-s);
+	text-align: center;
+
+	@media (--viewport-medium) {
+		font-size: 36px;
+		line-height: var(--line-height-s);
+	}
 }
