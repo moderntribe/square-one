@@ -1,3 +1,2 @@
 <?php
-
 define( 'BUILD_THEME_ASSETS_TIMESTAMP', '9.35.07.01.2017' );

@@ -1,0 +1,13 @@
+[include]
+/wp-content/plugins/core/assets/theme/js/src
+
+[ignore]
+<PROJECT_ROOT>/docs/*
+<PROJECT_ROOT>/dev/*
+<PROJECT_ROOT>/dev_components/*
+<PROJECT_ROOT>/grunt_options/*
+<PROJECT_ROOT>/node_modules/[^dlv].*
+<PROJECT_ROOT>/wp_content/mu-plugins/*
+<PROJECT_ROOT>/wp_content/themes/*
+<PROJECT_ROOT>/wp_content/uploads/*
+<PROJECT_ROOT>/wp/*
