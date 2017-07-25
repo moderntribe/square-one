@@ -24,8 +24,7 @@ class Editor_Styles {
 
 		// Production
 		if ( ! defined( 'SCRIPT_DEBUG' ) || SCRIPT_DEBUG === false ) {
-			$css_dir    = $this->get_css_url() . 'dist/';
-			$editor_css = 'editor-style.min.css';
+			$editor_css = 'dist/editor-style.min.css';
 		}
 
 		add_editor_style( $css_dir . $editor_css );

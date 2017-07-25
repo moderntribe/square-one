@@ -41,6 +41,8 @@ class Initializer {
 		add_filter( 'modular_content_plural_label', function () {
 			return __( 'Panels', 'tribe' );
 		} );
+
+		add_filter( 'panels_js_config', [ $this, 'modify_js_config' ] );
 	}
 
 	public function initialize_panels() {
@@ -52,6 +54,7 @@ class Initializer {
 		require_once( dirname( $this->plugin_file ) . '/functions/utility.php' );
 
 		add_filter( 'modular_content_default_fields', [ $this, 'set_default_fields' ], 10, 2 );
+		add_filter( 'modular_content_default_settings_fields', [ $this, 'set_default_settings' ], 10, 2 );
 		add_filter( 'modular_content_posts_field_taxonomy_options', [ $this, 'set_available_query_taxonomies', ], 10, 1 );
 		add_filter( 'modular_content_posts_field_p2p_options', [ $this, 'filter_p2p_options' ], 10, 1 );
 		add_filter( 'panels_query_post_type_options', [ $this, 'add_post_type_options_for_queries' ], 10, 1 );
@@ -59,6 +62,18 @@ class Initializer {
 		add_filter( 'panels_input_query_filter', [ $this, 'rewrite_date_query_for_events' ], 10, 3 );
 
 		$this->register_panels( \ModularContent\Plugin::instance()->registry() );
+	}
+
+	/**
+	 * Modify the scroll offset for the iframe to the themes needs (fixed nav)
+	 *
+	 * @param array $data Any js config data from the plugin
+	 *
+	 * @return array
+	 */
+	public function modify_js_config( $data = [] ) {
+		$data['iframe_scroll_offset'] = 120;
+		return $data;
 	}
 
 	/**
@@ -174,14 +189,10 @@ class Initializer {
 	}
 
 	public function set_default_fields( $fields, $panel_type ) {
+		return $fields;
+	}
 
-		// Add a nav title field to all panel types. This will be hidden on child panels with CSS.
-		$fields[] = new Fields\Text( [
-			'label'       => __( 'Navigation Title', 'tribe' ),
-			'name'        => 'nav-title',
-			'description' => __( 'The title that will be used for the page navigation menu. Leave blank to exclude from the menu.', 'tribe' ),
-		] );
-
+	public function set_default_settings( $fields, $panel_type ) {
 		return $fields;
 	}
 

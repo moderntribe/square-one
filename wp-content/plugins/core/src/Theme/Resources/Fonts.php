@@ -49,17 +49,17 @@ class Fonts {
 				}
 			};
 			var WebFontConfig = {
-				<?php if ( !empty( $this->fonts[ 'typekit' ] ) ) { ?>
+				<?php if ( ! empty( $this->fonts[ 'typekit' ] ) ) { ?>
 				typekit: {
 					id: '<?php echo $this->fonts[ 'typekit' ]; ?>'
 				},
 				<?php } ?>
-				<?php if ( !empty( $this->fonts[ 'google' ] ) ) { ?>
+				<?php if ( ! empty( $this->fonts[ 'google' ] ) ) { ?>
 				google: {
 					families: <?php echo json_encode( $this->fonts[ 'google' ] ); ?>
 				},
 				<?php } ?>
-				<?php if ( !empty( $this->fonts[ 'custom' ] ) ) { ?>
+				<?php if ( ! empty( $this->fonts[ 'custom' ] ) ) { ?>
 				custom: {
 					families: <?php echo json_encode( $this->fonts[ 'custom' ] ); ?>
 				},
@@ -92,7 +92,7 @@ class Fonts {
 	}
 
     private function get_webfont_src() {
-           return plugins_url( 'assets/theme/js/vendor/webfontloader.js', $this->plugin_file );
+       return plugins_url( 'assets/theme/js/vendor/webfontloader.js', $this->plugin_file );
    	}
 
     /**

@@ -73,4 +73,29 @@ abstract class Util {
 		return $extension;
 	}
 
+	/**
+	 * Output the first page ID for the page using the specified page template
+	 * Really only useful in the case where one page uses a specific page template
+	 *
+	 * @param $template
+	 *
+	 * @return string
+	 */
+	public static function get_page_template_ID( $template ) {
+		$page_ID = '';
+		$args    = [
+			'meta_key'   => '_wp_page_template',
+			'meta_value' => $template,
+		];
+		$pages   = get_pages( $args );
+		if ( ! empty( $pages ) ) {
+			foreach ( $pages as $page ) {
+				$page_ID = $page->ID;
+				break;
+			}
+		}
+
+		return $page_ID;
+	}
+
 }
