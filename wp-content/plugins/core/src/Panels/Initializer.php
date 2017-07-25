@@ -51,7 +51,6 @@ class Initializer {
 		$this->set_supported_post_types();
 		$this->set_view_directories();
 		require_once( dirname( $this->plugin_file ) . '/functions/panels.php' );
-		require_once( dirname( $this->plugin_file ) . '/functions/utility.php' );
 
 		add_filter( 'modular_content_default_fields', [ $this, 'set_default_fields' ], 10, 2 );
 		add_filter( 'modular_content_default_settings_fields', [ $this, 'set_default_settings' ], 10, 2 );
