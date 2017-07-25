@@ -10,14 +10,14 @@ module.exports = {
 		reportLevels: {
 			notice: false,
 			warning: false,
-			error: true
-		}
+			error: true,
+		},
 	},
 	report: {
 		options: {
 			urls: [
-				'http://<%= dev.proxy %>'
-			]
-		}
-	}
+				//'http://<%= dev.proxy %>'
+			],
+		},
+	},
 };
