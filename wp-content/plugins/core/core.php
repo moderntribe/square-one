@@ -12,7 +12,6 @@ require_once trailingslashit( __DIR__ ) . 'vendor/autoload.php';
 
 // Start the core plugin
 add_action( 'plugins_loaded', function () {
-	require __DIR__ . '/functions/utility.php';
 	tribe_project()->init();
 }, 1, 0 );
 

@@ -20,6 +20,7 @@ use Tribe\Project\Theme\Resources\Legacy_Check;
 use Tribe\Project\Theme\Resources\Login_Resources;
 use Tribe\Project\Theme\Resources\Scripts;
 use Tribe\Project\Theme\Resources\Styles;
+use Tribe\Project\Theme\Resources\Template_Tags;
 use Tribe\Project\Theme\Supports;
 use Tribe\Project\Theme\WP_Responsive_Image_Disabler;
 
@@ -35,6 +36,7 @@ class Theme_Provider implements ServiceProviderInterface {
 	private $custom_fonts = [];
 
 	public function register( Container $container ) {
+		$this->template_tags( $container );
 		$this->body_classes( $container );
 		$this->image_sizes( $container );
 		$this->image_wrap( $container );
@@ -57,6 +59,12 @@ class Theme_Provider implements ServiceProviderInterface {
 		$this->nav_attributes( $container );
 
 		$this->gravity_forms( $container );
+	}
+
+	private function template_tags( Container $container ) {
+		$container[ 'theme.resources.template-tags'] = function( Container $container ) {
+			return new Template_Tags();
+		};
 	}
 
 	private function body_classes( Container $container ) {
