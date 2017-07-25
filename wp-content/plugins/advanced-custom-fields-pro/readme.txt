@@ -2,7 +2,7 @@
 Contributors: elliotcondon
 Tags: acf, advanced, custom, field, fields, custom field, custom fields, simple fields, magic fields, more fields, repeater, edit
 Requires at least: 3.6.0
-Tested up to: 4.7.0
+Tested up to: 4.8.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -105,6 +105,73 @@ http://support.advancedcustomfields.com/
 
 
 == Changelog ==
+
+= 5.5.14 =
+* Core: Minor bug fixes
+
+= 5.5.13 =
+* Clone field: Improved 'Fields' setting to show all fields within a matching field group search
+* Flexible Content field: Fixed bug causing 'layout_title' filter to fail when field is cloned
+* Flexible Content field: Added missing 'translate_field' function
+* WYSIWYG field: Fixed JS error when using CKEditor plugin
+* Date Picker field: Improved 'Display Format' and 'Return Format' settings UI
+* Time Picker field: Same as above
+* Datetime Picker field: Same as above
+* Core: Added new 'remove_wp_meta_box' setting
+* Core: Added constants ACF, ACF_PRO, ACF_VERSION and ACF_PATH
+* Core: Improved compatibility with Select2 v4 including sortable functionality
+* Language: Updated Portuguese translation - thanks to Pedro Mendonça
+
+= 5.5.12 =
+* Tab field: Allowed HTML within field label to show in tab
+* Core: Improved plugin update class
+* Language: Updated Portuguese translation - thanks to Pedro Mendonça
+* Language: Updated Brazilian Portuguese translation - thanks to Rafael Ribeiro
+
+= 5.5.11 =
+* Google Map field: Added new 'google_map_init' JS action
+* Core: Minor fixes and improvements
+* Language: Updated Swiss German translation - thanks to Raphael Hüni
+* Language: Updated French translation - thanks to Maxime Bernard-Jacquet
+
+= 5.5.10 =
+* API: Added new functionality to the `acf_form()` function:
+* - added new 'html_updated_message' setting
+* - added new 'html_submit_button' setting
+* - added new 'html_submit_spinner' setting
+* - added new 'acf/pre_submit_form' filter run when form is successfully submit (before saving $_POST)
+* - added new 'acf/submit_form' action run when form is successfully submit (after saving $_POST)
+* - added new '%post_id%' replace string to the 'return' setting
+* - added new encryption logic to prevent $_POST exploits
+* - added new `acf_register_form()` function
+* Core: Fixed bug preventing values being loaded on a new post/page preview
+* Core: Fixed missing 'Bulk Actions' dropdown on sync screen when no field groups exist
+* Core: Fixed bug ignoring PHP field groups if exists in JSON
+* Core: Minor fixes and improvements
+
+= 5.5.9 =
+* Core: Fixed bug causing ACF4 PHP field groups to be ignored if missing ‘key’ setting
+
+= 5.5.8 =
+* Flexible Content: Added logic to better 'clean up' data when re-ordering layouts
+* oEmbed field: Fixed bug causing incorrect width and height settings in embed HTML
+* Core: Fixed bug causing incorrect Select2 CSS version loading for WooCommerce 2.7
+* Core: Fixed bug preventing 'min-height' style being applied to floating width fields
+* Core: Added new JS 'init' actions for wysiwyg, date, datetime, time and select2 fields
+* Core: Minor fixes and improvements
+
+= 5.5.7 =
+* Core: Fixed bug causing `get_field()` to return incorrect data for sub fields registered via PHP code.
+
+= 5.5.6 =
+* Core: Fixed bug causing license key to be ignored after changing url from http to https
+* Core: Fixed Select2 (v4) bug where 'allow null' setting would not correctly save empty value
+* Core: Added new 'acf/validate_field' filter
+* Core: Added new 'acf/validate_field_group' filter
+* Core: Added new 'acf/validate_post_id' filter
+* Core: Added new 'row_index_offset' setting
+* Core: Fixed bug causing value loading issues for a taxonomy term in WP < 4.4
+* Core: Minor fixes and improvements
 
 = 5.5.5 =
 * File field: Fixed bug creating draft post when saving an empty value

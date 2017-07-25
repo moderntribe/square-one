@@ -1,6 +1,6 @@
 === WCAG 2.0 form fields for Gravity Forms ===
 Contributors: ovann86
-Donate link: http://www.itsupportguides.com/
+Donate link: https://www.itsupportguides.com/donate/
 Tags: gravity forms, wcag, accessibility, usability
 Requires at least: 4.1
 Tested up to: 4.7.0

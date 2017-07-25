@@ -346,8 +346,12 @@ function InitializeFieldSettings(){
 		SetFieldLabel(this.value);
 	});
 
-	jQuery('#field_description').on('input propertychange', function(){
-		SetFieldDescription(this.value);
+	jQuery('#field_description').on('blur', function(){
+		var field = GetSelectedField();
+		if ( field.description != this.value ) {
+			SetFieldDescription(this.value);
+			RefreshSelectedFieldPreview();
+		}
 	});
 
 	jQuery('#field_content').on('input propertychange', function(){
@@ -437,13 +441,13 @@ function InitializeForm(form){
 		jQuery( '#no-fields').detach().appendTo( '#no-fields-stash');
 	}
 
-    if(form.lastPageButton && form.lastPageButton.type == "image")
-        jQuery("#last_page_button_image").prop("checked", true);
-    else if(!form.lastPageButton || form.lastPageButton.type != "image")
-        jQuery("#last_page_button_text").prop("checked", true);
+    if(form.lastPageButton && form.lastPageButton.type === 'image')
+        jQuery('#last_page_button_image').prop('checked', true);
+    else if(!form.lastPageButton || form.lastPageButton.type !== 'image')
+        jQuery('#last_page_button_text').prop('checked', true);
 
-    jQuery("#last_page_button_text_input").val(form.lastPageButton ? form.lastPageButton.text : gf_vars["previousLabel"]);
-    jQuery("#last_page_button_image_url").val(form.lastPageButton ? form.lastPageButton.imageUrl : "");
+    jQuery('#last_page_button_text_input').val(form.lastPageButton ? form.lastPageButton.text : gf_vars['previousLabel']);
+    jQuery('#last_page_button_image_url').val(form.lastPageButton ? form.lastPageButton.imageUrl : '');
     TogglePageButton('last_page', true);
 
     if(form.postStatus)
@@ -453,7 +457,7 @@ function InitializeForm(form){
         jQuery('#field_post_author').val(form.postAuthor);
 
     //default to checked
-    if(form.useCurrentUserAsAuthor == undefined)
+    if(form.useCurrentUserAsAuthor === undefined)
         form.useCurrentUserAsAuthor = true;
 
     jQuery('#gfield_current_user_as_author').prop('checked', form.useCurrentUserAsAuthor ? true : false);
@@ -465,44 +469,44 @@ function InitializeForm(form){
         jQuery('#field_post_format').val(form.postFormat);
 
     if(form.postContentTemplateEnabled){
-        jQuery('#gfield_post_content_enabled').prop("checked", true);
+        jQuery('#gfield_post_content_enabled').prop('checked', true);
         jQuery('#field_post_content_template').val(form.postContentTemplate);
     }
     else{
-        jQuery('#gfield_post_content_enabled').prop("checked", false);
-        jQuery('#field_post_content_template').val("");
+        jQuery('#gfield_post_content_enabled').prop('checked', false);
+        jQuery('#field_post_content_template').val('');
     }
     TogglePostContentTemplate(true);
 
     if(form.postTitleTemplateEnabled){
-        jQuery('#gfield_post_title_enabled').prop("checked", true);
+        jQuery('#gfield_post_title_enabled').prop('checked', true);
         jQuery('#field_post_title_template').val(form.postTitleTemplate);
     }
     else{
-        jQuery('#gfield_post_title_enabled').prop("checked", false);
-        jQuery('#field_post_title_template').val("");
+        jQuery('#gfield_post_title_enabled').prop('checked', false);
+        jQuery('#field_post_title_template').val('');
     }
     TogglePostTitleTemplate(true);
 
-    jQuery("#gform_last_page_settings").bind("click", function(){FieldClick(this);});
-    jQuery("#gform_pagination").bind("click", function(){FieldClick(this);});
-    jQuery(".gfield").bind("click", function(){FieldClick(this);});
+    jQuery('#gform_last_page_settings').click(function () {FieldClick(this);});
+    jQuery('#gform_pagination').click(function () {FieldClick(this);});
+    jQuery('#gform_fields').on('click', '.gfield', function () {FieldClick(this);});
 
-    var paginationType = form["pagination"] && form["pagination"]["type"] ? form["pagination"]["type"] : "percentage";
-    var paginationSteps = paginationType == "steps" ? true : false;
-    var paginationPercentage = paginationType == "percentage" ? true : false;
-    var paginationNone = paginationType == "none" ? true : false;
+    var paginationType = form['pagination'] && form['pagination']['type'] ? form['pagination']['type'] : 'percentage';
+    var paginationSteps = paginationType === 'steps' ? true : false;
+    var paginationPercentage = paginationType === 'percentage' ? true : false;
+    var paginationNone = paginationType === 'none' ? true : false;
 
     if(paginationSteps)
-        jQuery("#pagination_type_steps").prop("checked", true);
+        jQuery('#pagination_type_steps').prop('checked', true);
     else if(paginationPercentage)
-        jQuery("#pagination_type_percentage").prop("checked", true);
+        jQuery('#pagination_type_percentage').prop('checked', true);
     else if(paginationNone)
-        jQuery("#pagination_type_none").prop("checked", true);
+        jQuery('#pagination_type_none').prop('checked', true);
 
-    jQuery("#first_page_css_class").val(form["firstPageCssClass"]);
+    jQuery('#first_page_css_class').val(form['firstPageCssClass']);
 
-    jQuery("#field_settings, #last_page_settings, #pagination_settings").tabs({selected:0});
+    jQuery('#field_settings, #last_page_settings, #pagination_settings').tabs({selected:0});
 
     TogglePageBreakSettings();
     InitPaginationOptions(true);
@@ -537,8 +541,8 @@ function LoadFieldSettings(){
     jQuery("#field_default_value_textarea").val(field.defaultValue == undefined ? "" : field.defaultValue);
     jQuery("#field_description").val(field.description == undefined ? "" : field.description);
     jQuery("#field_css_class").val(field.cssClass == undefined ? "" : field.cssClass);
-    jQuery("#field_range_min").val(field.rangeMin);
-    jQuery("#field_range_max").val(field.rangeMax);
+    jQuery("#field_range_min").val( field.rangeMin == undefined || field.rangeMin === false ? "" : field.rangeMin);
+    jQuery("#field_range_max").val(field.rangeMax == undefined  || field.rangeMax === false ? "" : field.rangeMax);
     jQuery("#field_name_format").val(field.nameFormat);
     jQuery('#field_force_ssl').prop('checked', field.forceSSL ? true : false);
     jQuery('#credit_card_style').val(field.creditCardStyle ? field.creditCardStyle : "style1");
@@ -573,11 +577,8 @@ function LoadFieldSettings(){
         jQuery('#field_description_placement_container').show();
     }
 
-    if(field.adminOnly){
-        jQuery("#field_visibility_admin").prop("checked", true);
-    } else {
-        jQuery("#field_visibility_everyone").prop("checked", true);
-    }
+    // field.adminOnly is the old property which stored the visibility setting; only reference if field.visibility is not set
+    SetFieldVisibility( field.visibility, true );
 
     if(typeof field.placeholder == 'undefined'){
         field.placeholder = '';
@@ -1214,8 +1215,7 @@ function UpdateAddressFields(){
     }
 
     //hide country drop down if this address type applies to a specific country
-    var countryInput = GetInput(field, field.id + ".6");
-    var hide_country = jQuery("#field_address_country_" + addressType).val() != "" || countryInput.isHidden;
+    var hide_country = jQuery("#field_address_country_" + addressType).val() != "";
 
     if(hide_country){
         jQuery('.field_selected #input_' + field.id + '_6_container').hide();
@@ -1765,15 +1765,75 @@ function SortFields(){
     form.fields = fields;
 }
 
-function StartDeleteField(element){
+/**
+* Mark a field for deletion upon save.
+*
+* @param element The field element being deleted.
+*/
+function DeleteField( element ) {
 
-    var fieldId = jQuery(element)[0].id.split("_")[2];
+	// Get field ID from element.
+	var fieldId = jQuery( element )[0].id.split( '_' )[2];
 
-    // if cond logic dependency is found, confirm that user is aware and wants to proceed, otherwise bail
-    if( HasConditionalLogicDependency(fieldId) && !confirm(gf_vars.conditionalLogicDependency) )
-        return;
+	// Confirm that user is aware about entry data being deleted.
+	if ( ! HasConditionalLogicDependency( fieldId ) && ! confirm( gf_vars.confirmationDeleteField ) ) {
+		return;
+	}
 
-    DeleteField(fieldId);
+	// If conditional logic dependency is found, confirm that user is aware and wants to proceed.
+	if ( HasConditionalLogicDependency( fieldId ) && ! confirm( gf_vars.conditionalLogicDependency ) ) {
+		return;
+	}
+
+	// Initialize deleted field property.
+	if ( ! form.deletedFields ) {
+		form.deletedFields = [];
+	}
+
+	// Add field ID to form object.
+	form.deletedFields.push( fieldId );
+
+	// Loop through form fields.
+	for ( var i = 0; i < form.fields.length; i++ ) {
+
+		// If field ID matches the one to be deleted, delete it.
+		if ( form.fields[i].id == fieldId ) {
+
+			// Remove the field.
+			form.fields.splice(i, 1);
+
+			// Move field settings element outside of the field before it is deleted.
+			jQuery( '#field_settings').insertBefore( '#gform_fields' );
+
+			// Fade out field, then remove.
+			jQuery( '#field_' + fieldId ).fadeOut( 'slow', function() {
+
+				// Remove field element.
+				jQuery( '#field_' + fieldId ).remove();
+
+				// Show no fields placeholder if there are no form fields.
+				if ( form.fields.length === 0 ) {
+					jQuery( '#no-fields' ).detach().appendTo( '#gform_fields' ).show();
+				}
+
+			} );
+
+			// Hide field settings panel.
+			HideSettings( 'field_settings' );
+
+			break;
+
+		}
+
+	}
+
+
+	// Toggle page break settings.
+	TogglePageBreakSettings();
+
+	// Run field deleted action.
+	jQuery( document).trigger( 'gform_field_deleted', [ form, fieldId ] );
+
 }
 
 /**
@@ -1797,7 +1857,7 @@ function StartDeleteField(element){
 function HasConditionalLogicDependencyLegwork(fieldId, value) {
 
     // check form button conditional logic
-    if( ObjectHasConditionalLogicDependency(form.button, fieldId, value) )
+    if(form.button && ObjectHasConditionalLogicDependency(form.button, fieldId, value) )
         return true;
 
     // check confirmations conditional logic
@@ -1957,82 +2017,6 @@ function CheckChoiceConditionalLogicDependency(input) {
 
 }
 
-function EndDeleteField(fieldId){
-
-    var product_dependencies = new Array();
-    var first_product = "";
-
-    for(var i=0; i<form.fields.length; i++){
-
-        //removing conditional logic rules that are based on the deleted field
-        if(form.fields[i]["conditionalLogic"]){
-            for(var j=0; j < form.fields[i]["conditionalLogic"]["rules"].length; j++){
-                if(form.fields[i]["conditionalLogic"]["rules"][j]["fieldId"] == fieldId){
-                    form.fields[i]["conditionalLogic"]["rules"].splice(j,1);
-                }
-            }
-
-            if(form.fields[i]["conditionalLogic"]["rules"].length == 0)
-                form.fields[i]["conditionalLogic"] = false;
-        }
-
-        //Getting first product and compiling a list of options and quantities dependent on this field
-        if(form.fields[i]["type"] == "product" && form.fields[i]["id"] != fieldId && first_product == "")
-            first_product = form.fields[i]["id"];
-
-        if(form.fields[i]["productField"] == fieldId)
-            product_dependencies.push(i);
-    }
-
-    //Updating all options and quantities that were linked to the deleted product so that the are linked to another product
-    for(var i=0; i<product_dependencies.length; i++){
-        form.fields[product_dependencies[i]]["productField"] = first_product;
-    }
-
-    //removing notification routing associated with this field
-    if(form["notification"] && form["notification"]["routing"]){
-        for(var j=0; j < form["notification"]["routing"].length; j++){
-            if(form["notification"]["routing"][j]["fieldId"] == fieldId){
-                form["notification"]["routing"].splice(j,1);
-            }
-        }
-
-        if(form["notification"]["routing"].length == 0)
-            form["notification"]["routing"] = null;
-    }
-
-    //removing field
-    for(var i=0; i<form.fields.length; i++){
-        if(form.fields[i].id == fieldId){
-
-            //removing the field
-            form.fields.splice(i, 1);
-
-            //moving field_settings outside the field before it is deleted
-            jQuery("#field_settings").insertBefore("#gform_fields");
-
-            jQuery('#field_' + fieldId).fadeOut('slow',
-                function(){
-                    jQuery('#field_' + fieldId).remove();
-					// Show no fields placeholder if there are no form fields.
-					if ( form.fields.length === 0 ) {
-						jQuery( '#no-fields' ).detach().appendTo( '#gform_fields').show();
-					}
-                }
-            );
-
-            HideSettings("field_settings");
-            break;
-        }
-    }
-    TogglePageBreakSettings();
-    
-
-	jQuery(document).trigger('gform_field_deleted', [form, fieldId]);
-
-
-}
-
 function StartDuplicateField(element) {
 
     var sourcefieldId = jQuery(element)[0].id.split("_")[2];
@@ -2059,15 +2043,20 @@ function StartDuplicateField(element) {
 
                     var id = field.inputs[inputIndex]['id'] + "";
                     field.inputs[inputIndex]['id'] = id.replace(/(\d+\.)/, field.id + '.');
-                    /*
-                    if(inputId % 10 == 0)
-                        inputId++;
-
-                    field.inputs[inputIndex]['id'] = field.id + '.' + inputId;
-                    inputId++;*/
 
                 }
             }
+
+	        /**
+	         * Modify the field that is being duplicated.
+	         *
+	         * @param object field The duplicated field.
+	         * @param object form  The current form object.
+	         *
+	         * @since @todo
+	         */
+	        field = gform.applyFilters( 'gform_duplicate_field', field, form );
+	        field = gform.applyFilters( 'gform_duplicate_field_{0}'.format( GetInputType( field ) ), field, form );
 
             form.fields.splice(fieldIndex, 0, field);
             DuplicateField(field, sourcefieldId);
@@ -2080,17 +2069,15 @@ function EndDuplicateField(field, fieldString, sourceFieldId) {
 
     //sets up DOM for new field
     jQuery('#gform_fields li#field_' + sourceFieldId).after(fieldString);
-    var newFieldElement = jQuery("#field_" + field.id);
+    var newFieldElement = jQuery('#field_' + field.id);
 
     //highlighting animation
-    newFieldElement.animate({ backgroundColor: '#FFFBCC' }, 'fast', function(){jQuery(this).animate({backgroundColor: '#FFF'}, 'fast', function(){jQuery(this).css('background-color', '');})})
-
-    newFieldElement.bind("click", function(){FieldClick(this);});
+    newFieldElement.animate({ backgroundColor: '#FFFBCC' }, 'fast', function(){jQuery(this).animate({backgroundColor: '#FFF'}, 'fast', function(){jQuery(this).css('background-color', '');})});
 
     //Closing editors
-    HideSettings("field_settings");
-    HideSettings("form_settings");
-    HideSettings("last_page_settings");
+    HideSettings('field_settings');
+    HideSettings('form_settings');
+    HideSettings('last_page_settings');
 
     TogglePageBreakSettings();
 
@@ -2113,12 +2100,20 @@ function GetNextFieldId(){
         if(parseFloat(form.fields[i].id) > max)
             max = parseFloat(form.fields[i].id);
     }
+
+	if (form.deletedFields) {
+		for (var i = 0; i < form.deletedFields.length; i++) {
+			if (parseFloat(form.deletedFields[i]) > max)
+				max = parseFloat(form.deletedFields[i]);
+		}
+	}
+
     return parseFloat(max) + 1;
 }
 
 function EndAddField(field, fieldString, index){
 
-    gf_vars["currentlyAddingField"] = false;
+    gf_vars['currentlyAddingField'] = false;
 
     jQuery('#gform_adding_field_spinner').remove();
 
@@ -2126,19 +2121,18 @@ function EndAddField(field, fieldString, index){
     if(typeof index != 'undefined'){
         form.fields.splice(index, 0, field);
         if (index === 0) {
-            jQuery("#gform_fields").prepend(fieldString);
+            jQuery('#gform_fields').prepend(fieldString);
         } else {
-            jQuery("#gform_fields").children().eq(index - 1).after(fieldString);
+            jQuery('#gform_fields').children().eq(index - 1).after(fieldString);
         }
     } else {
-        jQuery("#gform_fields").append(fieldString);
+        jQuery('#gform_fields').append(fieldString);
         //creates new javascript field
         form.fields.push(field);
     }
 
-    var newFieldElement = jQuery("#field_" + field.id);
+    var newFieldElement = jQuery('#field_' + field.id);
     newFieldElement.animate({ backgroundColor: '#FFFBCC' }, 'fast', function(){jQuery(this).animate({backgroundColor: '#FFF'}, 'fast', function(){jQuery(this).css('background-color', '');})})
-    newFieldElement.bind("click", function(){FieldClick(this);});
 
 	if ( jQuery( '#no-fields-stash li').length === 0 ) {
 		// Stash the "no fields" placeholder away from the fields to avoid a sortable wobble.
@@ -2146,15 +2140,15 @@ function EndAddField(field, fieldString, index){
 	}
 
     //Unselects all fields
-    jQuery(".selectable").removeClass("field_selected");
+    jQuery('.selectable').removeClass('field_selected');
 
     //Closing editors
-    HideSettings("field_settings");
-    HideSettings("form_settings");
-    HideSettings("last_page_settings");
+    HideSettings('field_settings');
+    HideSettings('form_settings');
+    HideSettings('last_page_settings');
 
     //Select current field
-    newFieldElement.addClass("field_selected");
+    newFieldElement.addClass('field_selected');
 
     //initializes new field with default data
     SetFieldSize(field.size);
@@ -2163,7 +2157,7 @@ function EndAddField(field, fieldString, index){
 
     InitializeFields();
 
-    newFieldElement.removeClass("field_selected");
+    newFieldElement.removeClass('field_selected');
 
 	jQuery(document).trigger('gform_field_added', [form, field]);
 }
@@ -2257,21 +2251,21 @@ function EndChangeInputType(params){
 
 function InitializeFields(){
     //Border on/off logic on mouse over
-    jQuery(".selectable").hover(
+    jQuery('.selectable').hover(
       function () {
-        jQuery(this).addClass("field_hover");
+        jQuery(this).addClass('field_hover');
       },
       function () {
-        jQuery(this).removeClass("field_hover");
+        jQuery(this).removeClass('field_hover');
       }
     );
 
-    jQuery(".field_delete_icon, .field_duplicate_icon").bind("click", function(event){
+    jQuery('.field_delete_icon, .field_duplicate_icon').click(function(event){
         event.stopPropagation();
     });
 
 
-    jQuery("#field_settings, #form_settings, #last_page_settings, #pagination_settings, .captcha_message, .form_delete_icon, .all-merge-tags").bind("click", function(event){
+    jQuery('#field_settings, #form_settings, #last_page_settings, #pagination_settings, .captcha_message, .form_delete_icon, .all-merge-tags').click(function(event){
         event.stopPropagation();
     });
 
@@ -2493,14 +2487,41 @@ function LoadCustomChoices(){
             if(!gform_custom_choices.hasOwnProperty(key))
                 continue;
 
-            str += "<li class='bulk_custom_choice'><a href='javascript:void(0);' onclick='SelectCustomChoice(\"" + key + "\");' onkeypress='SelectCustomChoice(\"" + key + "\");' class='bulk-choice bulk_custom_choice'>" + key + "</a></li>";
+			var selectChoiceAction = 'SelectCustomChoice( jQuery(this).data("key") );';
+
+			str += "<li class='bulk_custom_choice'><a href='javascript:void(0);' data-key='" + escapeAttr( key ) + "' onclick='" + selectChoiceAction + "' onkeypress='" + selectChoiceAction + "' class='bulk-choice bulk_custom_choice'>" + escapeHtml( key ) + "</a></li>";
         }
         str += "<li class='choice_section_header'>" + gf_vars.predefinedChoices + "</li>";
         jQuery("#bulk_items").prepend(str);
     }
 }
 
-function SelectCustomChoice(name){
+
+var entityMap = {
+	'&': '&amp;',
+	'<': '&lt;',
+	'>': '&gt;',
+	'"': '&quot;',
+	"'": '&#39;',
+	'/': '&#x2F;',
+	'`': '&#x60;',
+	'=': '&#x3D;'
+};
+
+function escapeAttr (string) {
+
+	return String(string).replace(/["']/g, function (s) {
+		return entityMap[s];
+	});
+}
+
+function escapeHtml (string) {
+	return String(string).replace(/[&<>"'`=\/]/g, function (s) {
+		return entityMap[s];
+	});
+}
+
+function SelectCustomChoice( name ){
 
     jQuery("#gfield_bulk_add_input").val(gform_custom_choices[name].join("\n"));
     gform_selected_custom_choice = name;
@@ -2822,9 +2843,13 @@ function GetFieldType(fieldId){
     return fieldId.substr(0, fieldId.lastIndexOf("_"));
 }
 
-function GetSelectedField(){
-    var id = jQuery(".field_selected")[0].id.substr(6);
-    return GetFieldById(id);
+function GetSelectedField() {
+	var $field = jQuery( '.field_selected' );
+	if( $field.length <= 0 ) {
+		return false;
+	}
+    var id = $field[0].id.substr( 6 );
+    return GetFieldById( id );
 }
 
 function SetPasswordProperty(isChecked){
@@ -3278,26 +3303,34 @@ function SetFieldSubLabelPlacement(subLabelPlacement){
     RefreshSelectedFieldPreview();
 }
 
-function SetFieldAdminOnly( isAdminOnly ) {
+function SetFieldVisibility( visibility, handleInputs, isInit ) {
 
-    var setProp = true;
-
-    if( isAdminOnly && HasConditionalLogicDependency( field.id ) ) {
+    if (!isInit && visibility == 'administrative' && HasConditionalLogicDependency(field.id)) {
         if( ! confirm( gf_vars.conditionalLogicDependencyAdminOnly ) ) {
-            setProp = false;
+            return false;
         }
     }
 
-    if( setProp ) {
-        SetFieldProperty( 'adminOnly', isAdminOnly );
-        if( isAdminOnly ) {
-            jQuery( '.field_selected' ).addClass( 'field_admin_only' );
-        } else {
-            jQuery( '.field_selected' ).removeClass( 'field_admin_only' );
+    var isWhitelisted = false;
+    for( var i = 0; i < gf_vars.visibilityOptions.length; i++ ) {
+        if( gf_vars.visibilityOptions[i].value == visibility ) {
+            isWhitelisted = true;
+            break;
         }
     }
 
-    return setProp;
+    if( ! isWhitelisted ) {
+        visibility = 'visible';
+    }
+
+    SetFieldProperty( 'visibility', visibility );
+
+    if( handleInputs ) {
+        var $inputs = jQuery( 'input[name="field_visibility"]' );
+        $inputs.prop( 'checked', false );
+        $inputs.filter( '[value="' + visibility + '"]' ).prop( 'checked', true );
+    }
+
 }
 
 function SetFieldDefaultValue(defaultValue){
@@ -3336,8 +3369,6 @@ function SetFieldPlaceholder(placeholder){
 function SetFieldDescription(description){
     if(description == undefined)
         description = "";
-
-    jQuery(".field_selected .gfield_description, .field_selected .gsection_description").html(description);
 
     SetFieldProperty('description', description);
 }
@@ -3646,7 +3677,7 @@ jQuery.fn.gfSlide = function(direction) {
  */
 gform.addFilter( 'gform_is_conditional_logic_field', function( isConditionalLogicField, field ) {
 
-    if( field.adminOnly ) {
+    if( field.visibility == 'administrative' ) {
         isConditionalLogicField = false;
     } else if( field.id == GetSelectedField().id ) {
         isConditionalLogicField = false;

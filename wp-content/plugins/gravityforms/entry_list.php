@@ -182,7 +182,7 @@ class GFEntryList {
 
 		$option_values = get_user_option( 'gform_entries_screen_options' );
 
-		if ( empty( $option_values ) ) {
+		if ( empty( $option_values ) || ! is_array( $option_values ) ) {
 			$option_values = array();
 		}
 		$option_values = array_merge( $default_values, $option_values );
@@ -219,8 +219,6 @@ class GFEntryList {
 
 			<?php
 			GFForms::top_toolbar();
-
-			if ( $table->has_items() ) :
 				?>
 
 				<div id="entry_search_container">
@@ -229,8 +227,6 @@ class GFEntryList {
 					   href="javascript:Search('<?php echo esc_js( $table->get_orderby() ); ?>', '<?php echo esc_js( $table->get_order() ) ?>', <?php echo absint( $form_id ); ?>, jQuery('.gform-filter-value').val(), '<?php echo esc_js( $table->get_filter() ) ?>', jQuery('.gform-filter-field').val(), jQuery('.gform-filter-operator').val());"><?php esc_html_e( 'Search', 'gravityforms' ) ?></a>
 
 				</div>
-
-			<?php endif; ?>
 
 			<form id="entry_list_form" method="post">
 				<?php
@@ -644,11 +640,28 @@ final class GF_Entry_List_Table extends WP_List_Table {
 		$paging      = array( 'offset' => $first_item_index, 'page_size' => $page_size );
 		$total_count = 0;
 
-		$entries = GFAPI::get_entries( $form_id, $search_criteria, $sorting, $paging, $total_count );
+		/**
+		 * Filter the arguments that will be used to fetch entries for display on the Entry List view.
+		 *
+		 * @since 2.2.3.4
+		 *
+		 * @param array $args {
+		 *
+		 *     Array of arguments that will be passed to GFAPI::get_entries() to fetch the entries to be displayed.
+		 *
+		 *     @var int $form_id The form ID for which entries will be loaded.
+		 *     @var array $search_criteria An array of search critiera that will be used to filter entries.
+		 *     @var array $sorting An array containing properties that specify how the entries will be sorted.
+		 *     @var array $paging An array containing properties that specify how the entries will be paginated.
+		 * }
+		 */
+		$args = gf_apply_filters( array( 'gform_get_entries_args_entry_list', $form_id ), compact( 'form_id', 'search_criteria', 'sorting', 'paging' ) );
+
+		$entries = GFAPI::get_entries( $args['form_id'], $args['search_criteria'], $args['sorting'], $args['paging'], $total_count );
 
 		$this->set_pagination_args( array(
 			'total_items' => $total_count,
-			'per_page'    => $page_size,
+			'per_page'    => $args['paging']['page_size'],
 		) );
 
 		$this->items = $entries;
@@ -927,8 +940,8 @@ final class GF_Entry_List_Table extends WP_List_Table {
 		$search_field_id = rgget( 'field_id' );
 		$search_operator = rgget( 'operator' );
 
-		$orderby = $this->get_order();
-		$order   = $this->get_orderby();
+		$order   = $this->get_order();
+		$orderby = $this->get_orderby();
 
 		$search_qs  = empty( $search ) ? '' : '&s=' . esc_attr( urlencode( $search ) );
 		$orderby_qs = empty( $orderby ) ? '' : '&orderby=' . esc_attr( $orderby );
@@ -941,7 +954,7 @@ final class GF_Entry_List_Table extends WP_List_Table {
 
 		$position = ( $page_size * $page_index ) + $this->row_index;
 
-		$edit_url = 'page=gf_entries&view=entry&id=' . absint( $form_id ) . '&lid=' . esc_attr( $entry['id'] . $search_qs . $orderby_qs . $order_qs . $filter_qs ) . '&paged=' . $page_num .'&pos=' . $position .'&field_id=' . esc_attr( $search_field_id ) .  '&operator=' .  esc_attr( $search_operator );
+		$edit_url = 'page=gf_entries&view=entry&id=' . absint( $form_id ) . '&lid=' . esc_attr( $entry['id'] ) . $search_qs . $orderby_qs . $order_qs . $filter_qs . '&paged=' . $page_num .'&pos=' . $position .'&field_id=' . esc_attr( $search_field_id ) .  '&operator=' .  esc_attr( $search_operator );
 		return $edit_url;
 	}
 
@@ -954,7 +967,8 @@ final class GF_Entry_List_Table extends WP_List_Table {
 	 */
 	function get_detail_url( $entry ) {
 		$query_string = $this->get_detail_query_string( $entry );
-		$url = admin_url( 'admin.php?' . $query_string );
+		$url          = admin_url( 'admin.php?' . $query_string );
+
 		return $url;
 	}
 
@@ -1169,6 +1183,7 @@ final class GF_Entry_List_Table extends WP_List_Table {
 	 * @return array
 	 */
 	function get_bulk_actions() {
+
 		$actions = array();
 
 		switch ( $this->filter ) {
@@ -1196,7 +1211,20 @@ final class GF_Entry_List_Table extends WP_List_Table {
 					$actions['trash'] = esc_html__( 'Trash', 'gravityforms' );
 				}
 		}
-		return $actions;
+
+		// Get the current form ID.
+		$form_id = $this->get_form_id();
+
+		/**
+		 * Modifies available bulk actions for the entries list.
+		 *
+		 * @since 2.2.3.12
+		 *
+		 * @param array $actions Bulk actions.
+		 * @param int   $form_id The ID of the current form.
+		 */
+		return gf_apply_filters( array( 'gform_entry_list_bulk_actions', $form_id ), $actions, $form_id );
+
 	}
 
 	/**
@@ -1265,6 +1293,16 @@ final class GF_Entry_List_Table extends WP_List_Table {
 					break;
 
 			}
+
+			/**
+			 * Fires after the default entry list actions have been processed.
+			 *
+			 * @param string $action  Action being performed.
+			 * @param array  $entries The entry IDs the action is being applied to.
+			 * @param int    $form_id The current form ID.
+			 */
+			gf_do_action( array( 'gform_entry_list_action', $single_action, $form_id ), $single_action, array( $entry_id ), $form_id );
+
 		} elseif ( $bulk_action ) {
 
 			$select_all  = rgpost( 'all_entries' );
@@ -1325,6 +1363,16 @@ final class GF_Entry_List_Table extends WP_List_Table {
 					break;
 
 			}
+
+			/**
+			 * Fires after the default entry list actions have been processed.
+			 *
+			 * @param string $action  Action being performed.
+			 * @param array  $entries The entry IDs the action is being applied to.
+			 * @param int    $form_id The current form ID.
+			 */
+			gf_do_action( array( 'gform_entry_list_action', $bulk_action, $form_id ), $bulk_action, $entries, $form_id );
+
 		}
 
 		if ( ! empty( $message ) ) {
@@ -1367,8 +1415,8 @@ final class GF_Entry_List_Table extends WP_List_Table {
 	function output_scripts() {
 
 		$form_id = $this->get_form_id();
-		$form       = $this->get_form();
-		$search     = stripslashes( rgget( 's' ) );
+		$form    = $this->get_form();
+		$search  = isset( $_GET['s'] ) ? stripslashes( $_GET['s'] ) : null;
 
 		$orderby      = empty( $_GET['orderby'] ) ? 0 : $_GET['orderby'];
 		$order = empty( $_GET['order'] ) ? 'ASC' : strtoupper( $_GET['order'] );

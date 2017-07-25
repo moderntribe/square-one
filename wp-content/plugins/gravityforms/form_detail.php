@@ -36,8 +36,6 @@ class GFFormDetail {
 			$update_result = self::save_form_info( $form_id, rgpost( 'gform_meta', false ) );
 		}
 
-		require_once( GFCommon::get_base_path() . '/currency.php' );
-
 		wp_print_styles( array( 'thickbox' ) );
 
 		/* @var GF_Field_Address $gf_address_field  */
@@ -2267,17 +2265,19 @@ class GFFormDetail {
 		?>
 		<li class="visibility_setting field_setting">
 			<label for="visibility" class="section_label"><?php esc_html_e( 'Visibility', 'gravityforms' ); ?> <?php gform_tooltip( 'form_field_visibility' ) ?></label>
-
 			<div>
-				<input type="radio" name="field_visibility" id="field_visibility_everyone" size="10" onclick="return SetFieldAdminOnly(!this.checked);" onkeypress="return SetFieldAdminOnly(!this.checked);" />
-				<label for="field_visibility_everyone" class="inline">
-					<?php esc_html_e( 'Everyone', 'gravityforms' ); ?>
-				</label>
-				&nbsp;&nbsp;
-				<input type="radio" name="field_visibility" id="field_visibility_admin" size="10" onclick="return SetFieldAdminOnly(this.checked);" onkeypress="return SetFieldAdminOnly(this.checked);" />
-				<label for="field_visibility_admin" class="inline">
-					<?php esc_html_e( 'Admin Only', 'gravityforms' ); ?>
-				</label>
+				<?php foreach( GFCommon::get_visibility_options() as $visibility_option ):
+					$slug = sanitize_title_with_dashes( $visibility_option['value'] );
+
+					?>
+
+					<input type="radio" name="field_visibility" id="field_visibility_<?php echo $slug; ?>" size="10" value="<?php echo $visibility_option['value']; ?>" onclick="return SetFieldVisibility( this.value );" onkeypress="return SetFieldVisibility( this.value );" />
+					<label for="field_visibility_<?php echo $slug; ?>" class="inline">
+						<?php echo esc_html( $visibility_option['label'] ); ?>
+					</label>
+					&nbsp;&nbsp;
+				<?php endforeach; ?>
+
 			</div>
 			<br class="clear" />
 		</li>
@@ -2358,85 +2358,7 @@ class GFFormDetail {
 					<ul id="sidebarmenu1" class="menu collapsible expandfirst">
 
 						<?php
-						$standard_fields = array(
-							array( 'class' => 'button', 'data-type' => 'text', 'value' => GFCommon::get_field_type_title( 'text' ) ),
-							array( 'class' => 'button', 'data-type' => 'textarea', 'value' => GFCommon::get_field_type_title( 'textarea' ) ),
-							array( 'class' => 'button', 'data-type' => 'select', 'value' => GFCommon::get_field_type_title( 'select' ) ),
-							array( 'class' => 'button', 'data-type' => 'multiselect', 'value' => GFCommon::get_field_type_title( 'multiselect' ) ),
-							array( 'class' => 'button', 'data-type' => 'number', 'value' => GFCommon::get_field_type_title( 'number' ) ),
-							array( 'class' => 'button', 'data-type' => 'checkbox', 'value' => GFCommon::get_field_type_title( 'checkbox' ) ),
-							array( 'class' => 'button', 'data-type' => 'radio', 'value' => GFCommon::get_field_type_title( 'radio' ) ),
-							array( 'class' => 'button', 'data-type' => 'hidden', 'value' => GFCommon::get_field_type_title( 'hidden' ) ),
-							array( 'class' => 'button', 'data-type' => 'html', 'value' => GFCommon::get_field_type_title( 'html' ) ),
-							array( 'class' => 'button', 'data-type' => 'section', 'value' => GFCommon::get_field_type_title( 'section' ) ),
-							array( 'class' => 'button', 'data-type' => 'page', 'value' => GFCommon::get_field_type_title( 'page' ) ),
-						);
-
-
-						$advanced_fields = array(
-							array( 'class' => 'button', 'data-type' => 'name', 'value' => GFCommon::get_field_type_title( 'name' ) ),
-							array( 'class' => 'button', 'data-type' => 'date', 'value' => GFCommon::get_field_type_title( 'date' ) ),
-							array( 'class' => 'button', 'data-type' => 'time', 'value' => GFCommon::get_field_type_title( 'time' ) ),
-							array( 'class' => 'button', 'data-type' => 'phone', 'value' => GFCommon::get_field_type_title( 'phone' ) ),
-							array( 'class' => 'button', 'data-type' => 'address', 'value' => GFCommon::get_field_type_title( 'address' ) ),
-							array( 'class' => 'button', 'data-type' => 'website', 'value' => GFCommon::get_field_type_title( 'website' ) ),
-							array( 'class' => 'button', 'data-type' => 'email', 'value' => GFCommon::get_field_type_title( 'email' ) ),
-						);
-
-						if ( apply_filters( 'gform_enable_password_field', false ) ) {
-							$advanced_fields[] = array(
-								'class'     => 'button',
-								'data-type' => 'password',
-								'value'     => GFCommon::get_field_type_title( 'password' )
-							);
-						}
-
-
-						$advanced_fields[] = array( 'class' => 'button', 'data-type' => 'fileupload', 'value' => GFCommon::get_field_type_title( 'fileupload' ) );
-						$advanced_fields[] = array( 'class' => 'button', 'data-type' => 'captcha', 'value' => GFCommon::get_field_type_title( 'captcha' ) );
-						$advanced_fields[] = array( 'class' => 'button', 'data-type' => 'list', 'value' => GFCommon::get_field_type_title( 'list' ) );
-
-						$post_fields = array(
-							array( 'class' => 'button', 'data-type' => 'post_title', 'value' => GFCommon::get_field_type_title( 'post_title' ) ),
-							array( 'class' => 'button', 'data-type' => 'post_content', 'value' => GFCommon::get_field_type_title( 'post_content' ) ),
-							array( 'class' => 'button', 'data-type' => 'post_excerpt', 'value' => GFCommon::get_field_type_title( 'post_excerpt' ) ),
-							array( 'class' => 'button', 'data-type' => 'post_tags', 'value' => GFCommon::get_field_type_title( 'post_tags' ) ),
-							array( 'class' => 'button', 'data-type' => 'post_category', 'value' => GFCommon::get_field_type_title( 'post_category' ) ),
-							array( 'class' => 'button', 'data-type' => 'post_image', 'value' => GFCommon::get_field_type_title( 'post_image' ) ),
-							array( 'class' => 'button', 'data-type' => 'post_custom_field', 'value' => GFCommon::get_field_type_title( 'post_custom_field' ) ),
-						);
-
-						$pricing_fields = array(
-							array( 'class' => 'button', 'data-type' => 'product', 'value' => GFCommon::get_field_type_title( 'product' ) ),
-							array( 'class' => 'button', 'data-type' => 'quantity', 'value' => GFCommon::get_field_type_title( 'quantity' ) ),
-							array( 'class' => 'button', 'data-type' => 'option', 'value' => GFCommon::get_field_type_title( 'option' ) ),
-							array( 'class' => 'button', 'data-type' => 'shipping', 'value' => GFCommon::get_field_type_title( 'shipping' ) ),
-							array( 'class' => 'button', 'data-type' => 'total', 'value' => GFCommon::get_field_type_title( 'total' ) ),
-						);
-
-						if ( apply_filters( 'gform_enable_credit_card_field', false ) ) {
-							$pricing_fields[] = array(
-								'class'     => 'button',
-								'data-type' => 'creditcard',
-								'value'     => GFCommon::get_field_type_title( 'creditcard' )
-							);
-						}
-
-
-						$field_groups = array(
-							array( 'name' => 'standard_fields', 'label' => __( 'Standard Fields', 'gravityforms' ), 'fields' => $standard_fields, 'tooltip_class' => 'tooltip_bottomleft' ),
-							array( 'name' => 'advanced_fields', 'label' => __( 'Advanced Fields', 'gravityforms' ), 'fields' => $advanced_fields ),
-							array( 'name' => 'post_fields', 'label' => __( 'Post Fields', 'gravityforms' ), 'fields' => $post_fields ),
-						);
-
-
-						$field_groups[] = array( 'name' => 'pricing_fields', 'label' => __( 'Pricing Fields', 'gravityforms' ), 'fields' => $pricing_fields );
-
-						foreach ( GF_Fields::get_all() as $gf_field ) {
-							$field_groups = $gf_field->add_button( $field_groups );
-						}
-
-						$field_groups = apply_filters( 'gform_add_field_buttons', $field_groups );
+						$field_groups = self::get_field_groups();
 
 						foreach ( $field_groups as $group ) {
 							$tooltip_class = empty( $group['tooltip_class'] ) ? 'tooltip_left' : $group['tooltip_class'];
@@ -2461,6 +2383,28 @@ class GFFormDetail {
 					<!--end add button boxes -->
 
 					<?php
+					$save_button_text = __( 'Update', 'gravityforms' );
+
+					$save_button      = '<input type="button" class="button button-large button-primary update-form" value="' . $save_button_text . '" onclick="SaveForm();" onkeypress="SaveForm();" />';
+
+					/**
+					 * A filter to allow you to modify the Form Save button
+					 *
+					 * @param string $save_button The Form Save button HTML
+					 */
+					$save_button = apply_filters( 'gform_save_form_button', $save_button );
+					echo $save_button;
+
+					$cancel_button = '<a href="' . admin_url( 'admin.php?page=gf_edit_forms' ) . '" class="button button-large cancel-update-form">' . esc_html__( 'Cancel', 'gravityforms' ) . '</a>';
+
+					/**
+					 * A filter to allow you to modify the Form Cancel button
+					 *
+					 * @param string $cancel_button The Form Cancel button HTML
+					 */
+					$cancel_button = apply_filters( 'gform_cancel_form_button', $cancel_button );
+					echo $cancel_button;
+
 					if ( GFCommon::current_user_can_any( 'gravityforms_delete_forms' ) ) {
 						$trash_link = '<a class="submitdelete" title="' . __( 'Move this form to the trash', 'gravityforms' ) . '" onclick="gf_vars.isFormTrash = true; jQuery(\'#form_trash\')[0].submit();" onkeypress="gf_vars.isFormTrash = true; jQuery(\'#form_trash\')[0].submit();">' . __( 'Move to Trash', 'gravityforms' ) . '</a>';
 
@@ -2470,24 +2414,16 @@ class GFFormDetail {
 						$trash_link = apply_filters( 'gform_form_delete_link', $trash_link );
 
 						/**
-						 * Allows for modification of the Form Trash Link
+						 * Allows for modification of the Form Trash Link.
 						 *
-						 * @param string $trash_link The Trash link HTML
+						 * @since 2.1.2.3 Added the $form_id param.
+						 * @since 1.8
+						 *
+						 * @param string $trash_link The Trash link HTML.
+						 * @param int    $form_id    The ID of the form being edited.
 						 */
-						echo apply_filters( 'gform_form_trash_link', $trash_link );
+						echo apply_filters( 'gform_form_trash_link', $trash_link, $form_id );
 					}
-
-					$button_text = rgar( $form, 'id' ) > 0 ? __( 'Update Form', 'gravityforms' ) : __( 'Save Form', 'gravityforms' );
-					$isNew = rgar( $form, 'id' ) > 0 ? 0 : 1;
-					$save_button = '<input type="button" class="button button-large button-primary update-form" value="' . $button_text . '" onclick="SaveForm(' . $isNew . ');" onkeypress="SaveForm(' . $isNew . ');" />';
-
-					/**
-					 * A filter to aloow you to modify the Form Save button
-					 *
-					 * @param string $save_button The Form Save button HTML
-					 */
-					$save_button = apply_filters( 'gform_save_form_button', $save_button );
-					echo $save_button;
 					?>
 
 					<span id="please_wait_container" style="display:none;"><i class='gficon-gravityforms-spinner-icon gficon-spin'></i></span>
@@ -2543,6 +2479,115 @@ class GFFormDetail {
 		self::inline_scripts( $form );
 
 		require_once( GFCommon::get_base_path() . '/js.php' );
+
+	}
+
+	/**
+	 * Prepare form field groups.
+	 *
+	 * @since  2.0.7.7
+	 * @access public
+	 *
+	 * @return array
+	 */
+	public static function get_field_groups() {
+
+		// Set initial field groups.
+		$field_groups = array(
+			'standard_fields' => array(
+				'name'          => 'standard_fields',
+				'label'         => __( 'Standard Fields', 'gravityforms' ),
+				'tooltip_class' => 'tooltip_bottomleft',
+				'fields'        => array(
+					array( 'class' => 'button', 'data-type' => 'text',        'value' => GFCommon::get_field_type_title( 'text' ) ),
+					array( 'class' => 'button', 'data-type' => 'textarea',    'value' => GFCommon::get_field_type_title( 'textarea' ) ),
+					array( 'class' => 'button', 'data-type' => 'select',      'value' => GFCommon::get_field_type_title( 'select' ) ),
+					array( 'class' => 'button', 'data-type' => 'multiselect', 'value' => GFCommon::get_field_type_title( 'multiselect' ) ),
+					array( 'class' => 'button', 'data-type' => 'number',      'value' => GFCommon::get_field_type_title( 'number' ) ),
+					array( 'class' => 'button', 'data-type' => 'checkbox',    'value' => GFCommon::get_field_type_title( 'checkbox' ) ),
+					array( 'class' => 'button', 'data-type' => 'radio',       'value' => GFCommon::get_field_type_title( 'radio' ) ),
+					array( 'class' => 'button', 'data-type' => 'hidden',      'value' => GFCommon::get_field_type_title( 'hidden' ) ),
+					array( 'class' => 'button', 'data-type' => 'html',        'value' => GFCommon::get_field_type_title( 'html' ) ),
+					array( 'class' => 'button', 'data-type' => 'section',     'value' => GFCommon::get_field_type_title( 'section' ) ),
+					array( 'class' => 'button', 'data-type' => 'page',        'value' => GFCommon::get_field_type_title( 'page' ) ),
+				),
+			),
+			'advanced_fields' => array(
+				'name'   => 'advanced_fields',
+				'label'  => __( 'Advanced Fields', 'gravityforms' ),
+				'fields' => array(
+					array( 'class' => 'button', 'data-type' => 'name',       'value' => GFCommon::get_field_type_title( 'name' ) ),
+					array( 'class' => 'button', 'data-type' => 'date',       'value' => GFCommon::get_field_type_title( 'date' ) ),
+					array( 'class' => 'button', 'data-type' => 'time',       'value' => GFCommon::get_field_type_title( 'time' ) ),
+					array( 'class' => 'button', 'data-type' => 'phone',      'value' => GFCommon::get_field_type_title( 'phone' ) ),
+					array( 'class' => 'button', 'data-type' => 'address',    'value' => GFCommon::get_field_type_title( 'address' ) ),
+					array( 'class' => 'button', 'data-type' => 'website',    'value' => GFCommon::get_field_type_title( 'website' ) ),
+					array( 'class' => 'button', 'data-type' => 'email',      'value' => GFCommon::get_field_type_title( 'email' ) ),
+					array( 'class' => 'button', 'data-type' => 'fileupload', 'value' => GFCommon::get_field_type_title( 'fileupload' ) ),
+					array( 'class' => 'button', 'data-type' => 'captcha',    'value' => GFCommon::get_field_type_title( 'captcha' ) ),
+					array( 'class' => 'button', 'data-type' => 'list',       'value' => GFCommon::get_field_type_title( 'list' ) ),
+				),
+			),
+			'post_fields'     => array(
+				'name'   => 'post_fields',
+				'label'  => __( 'Post Fields', 'gravityforms' ),
+				'fields' => array(
+					array( 'class' => 'button', 'data-type' => 'post_title',        'value' => GFCommon::get_field_type_title( 'post_title' ) ),
+					array( 'class' => 'button', 'data-type' => 'post_content',      'value' => GFCommon::get_field_type_title( 'post_content' ) ),
+					array( 'class' => 'button', 'data-type' => 'post_excerpt',      'value' => GFCommon::get_field_type_title( 'post_excerpt' ) ),
+					array( 'class' => 'button', 'data-type' => 'post_tags',         'value' => GFCommon::get_field_type_title( 'post_tags' ) ),
+					array( 'class' => 'button', 'data-type' => 'post_category',     'value' => GFCommon::get_field_type_title( 'post_category' ) ),
+					array( 'class' => 'button', 'data-type' => 'post_image',        'value' => GFCommon::get_field_type_title( 'post_image' ) ),
+					array( 'class' => 'button', 'data-type' => 'post_custom_field', 'value' => GFCommon::get_field_type_title( 'post_custom_field' ) ),
+				),
+			),
+			'pricing_fields'   => array(
+				'name'   => 'pricing_fields',
+				'label'  => __( 'Pricing Fields', 'gravityforms' ),
+				'fields' => array(
+					array( 'class' => 'button', 'data-type' => 'product',  'value' => GFCommon::get_field_type_title( 'product' ) ),
+					array( 'class' => 'button', 'data-type' => 'quantity', 'value' => GFCommon::get_field_type_title( 'quantity' ) ),
+					array( 'class' => 'button', 'data-type' => 'option',   'value' => GFCommon::get_field_type_title( 'option' ) ),
+					array( 'class' => 'button', 'data-type' => 'shipping', 'value' => GFCommon::get_field_type_title( 'shipping' ) ),
+					array( 'class' => 'button', 'data-type' => 'total',    'value' => GFCommon::get_field_type_title( 'total' ) ),
+				),
+			),
+		);
+
+		// If enabled insert the password field between the email and fileupload fields.
+		if ( apply_filters( 'gform_enable_password_field', false ) ) {
+			$password = array(
+				'class'     => 'button',
+				'data-type' => 'password',
+				'value'     => GFCommon::get_field_type_title( 'password' )
+			);
+
+			array_splice( $field_groups['advanced_fields']['fields'], 7, 0, array( $password ) );
+		}
+
+		// Add credit card field, if enabled.
+		if ( apply_filters( 'gform_enable_credit_card_field', false ) ) {
+			$field_groups['pricing_fields']['fields'][] = array(
+				'class'     => 'button',
+				'data-type' => 'creditcard',
+				'value'     => GFCommon::get_field_type_title( 'creditcard' )
+			);
+		}
+
+		// Remove array keys from field groups array.
+		$field_groups = array_values( $field_groups );
+
+		// Add buttons to fields.
+		foreach ( GF_Fields::get_all() as $gf_field ) {
+			$field_groups = $gf_field->add_button( $field_groups );
+		}
+
+		/**
+		 * Add/edit/remove "Add Field" buttons from the form editor's floating toolbox.
+		 *
+		 * @param array $field_groups The field groups, including group name, label and fields.
+		 */
+		return apply_filters( 'gform_add_field_buttons', $field_groups );
 
 	}
 
@@ -2738,15 +2783,6 @@ class GFFormDetail {
 		die( $args_json );
 	}
 
-	public static function delete_field() {
-		check_ajax_referer( 'rg_delete_field', 'rg_delete_field' );
-		$form_id  = absint( $_POST['form_id'] );
-		$field_id = absint( $_POST['field_id'] );
-
-		RGFormsModel::delete_field( $form_id, $field_id );
-		die( "EndDeleteField($field_id);" );
-	}
-
 	public static function change_input_type() {
 		check_ajax_referer( 'rg_change_input_type', 'rg_change_input_type' );
 		$field_json       = stripslashes_deep( $_POST['field'] );
@@ -2771,8 +2807,10 @@ class GFFormDetail {
 		$field_json       = stripslashes_deep( $_POST['field'] );
 		$field_properties = GFCommon::json_decode( $field_json, true );
 		$field            = GF_Fields::create( $field_properties );
+		$field->sanitize_settings();
 		$form_id          = absint( $_POST['formId'] );
 		$form             = GFFormsModel::get_form_meta( $form_id );
+		$form             = GFFormsModel::maybe_sanitize_form_settings( $form );
 
 		require_once( GFCommon::get_base_path() . '/form_display.php' );
 		$field_content       = GFFormDisplay::get_field_content( $field, '', true, $form_id, $form );
@@ -2802,46 +2840,80 @@ class GFFormDetail {
 	 * @return array
 	 */
 	public static function save_form_info( $id, $form_json ) {
+
 		global $wpdb;
+
+		// Clean up form meta JSON.
 		$form_json = stripslashes( $form_json );
 		$form_json = nl2br( $form_json );
 
 		GFCommon::log_debug( 'GFFormDetail::save_form_info(): Form meta json: ' . $form_json );
 
+		// Convert form meta JSON to array.
 		$form_meta = json_decode( $form_json, true );
 		$form_meta = GFFormsModel::convert_field_objects( $form_meta );
 
+		// Set version of Gravity Forms form was created with.
 		if ( $id === 0 ) {
-			$form_meta['version'] = GFForms::$version; // update version on save
+			$form_meta['version'] = GFForms::$version;
 		}
 
+		// Sanitize form settings.
 		$form_meta = GFFormsModel::maybe_sanitize_form_settings( $form_meta );
 
+		// Extract deleted field IDs.
+		$deleted_fields = rgar( $form_meta, 'deletedFields' );
+		unset( $form_meta['deletedFields'] );
 
 		GFCommon::log_debug( 'GFFormDetail::save_form_info(): Form meta => ' . print_r( $form_meta, true ) );
 
+		// If form meta is not found, exit.
 		if ( ! $form_meta ) {
 			return array( 'status' => 'invalid_json', 'meta' => null );
 		}
 
+		// Get form table name.
+		$form_table_name = GFFormsModel::get_form_table_name();
 
-		$form_table_name = $wpdb->prefix . 'rg_form';
+		// Get all forms.
+		$forms = GFFormsModel::get_forms();
 
-		// Making sure title is not duplicate
-		$forms = RGFormsModel::get_forms();
+		// Loop through forms.
 		foreach ( $forms as $form ) {
+
+			// If form has a duplicate title, exit.
 			if ( strtolower( $form->title ) == strtolower( $form_meta['title'] ) && rgar( $form_meta, 'id' ) != $form->id ) {
 				return array( 'status' => 'duplicate_title', 'meta' => $form_meta );
 			}
+
 		}
 
+		// If an ID exists, update existing form.
 		if ( $id > 0 ) {
+
+			// Trim form meta values.
 			$form_meta = GFFormsModel::trim_form_meta_values( $form_meta );
-			RGFormsModel::update_form_meta( $id, $form_meta );
 
-			//updating form title
-			$wpdb->query( $wpdb->prepare( "UPDATE $form_table_name SET title=%s WHERE id=%d", $form_meta['title'], $form_meta['id'] ) );
+			// Save form meta.
+			GFFormsModel::update_form_meta( $id, $form_meta );
 
+			// Update form title.
+			GFAPI::update_form_property( $id, 'title', $form_meta['title'] );
+
+			// Delete fields.
+			if ( ! empty( $deleted_fields ) ) {
+
+				// Loop through fields.
+				foreach ( $deleted_fields as $deleted_field ) {
+
+					// Delete field.
+					GFFormsModel::delete_field( $id, $deleted_field );
+
+				}
+
+			}
+
+			// Get form meta.
 			$form_meta = RGFormsModel::get_form_meta( $id );
 
             /**
@@ -2855,6 +2927,7 @@ class GFFormDetail {
 			do_action( 'gform_after_save_form', $form_meta, false );
 
 			return array( 'status' => $id, 'meta' => $form_meta );
+
 		} else {
 
 			//inserting form
@@ -2898,9 +2971,10 @@ class GFFormDetail {
 			GFFormsModel::save_form_confirmations( $id, $confirmations );
 
 			//updating form meta
-			RGFormsModel::update_form_meta( $id, $form_meta );
+			GFFormsModel::update_form_meta( $id, $form_meta );
 
-			$form_meta = RGFormsModel::get_form_meta( $id );
+			// Get form meta.
+			$form_meta = GFFormsModel::get_form_meta( $id );
 
             /**
              * Fires after a form is saved
@@ -3001,23 +3075,6 @@ class GFFormDetail {
 	 * @param $form_id
 	 */
 	public static function update_recent_forms( $form_id ) {
-		if ( ! get_option( 'gform_enable_toolbar_menu' ) ) {
-			return;
-		}
-		$current_user_id = get_current_user_id();
-		$recent_form_ids = get_user_meta( $current_user_id, 'gform_recent_forms', true );
-
-		$i = array_search( $form_id, $recent_form_ids );
-
-		if ( $i !== false ) {
-			unset( $recent_form_ids[ $i ] );
-			$recent_form_ids = array_values( $recent_form_ids );
-		}
-
-		array_unshift($recent_form_ids,$form_id);
-
-		$recent_form_ids = array_slice( $recent_form_ids, 0, 10 );
-
-		update_user_meta( $current_user_id, 'gform_recent_forms', $recent_form_ids );
+		GFFormsModel::update_recent_forms( $form_id );
 	}
 }

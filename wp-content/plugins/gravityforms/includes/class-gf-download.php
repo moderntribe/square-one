@@ -50,6 +50,21 @@ class GF_Download {
 			return false;
 		}
 
+		/**
+		 * Allows login to be required to access the file.
+		 *
+		 * @since 2.2.3.16
+		 *
+		 * @param bool $require_login Does the user need to be logged in to access the file? Default false.
+		 * @param int  $form_id       The ID of the form used to upload the requested file.
+		 * @param int  $field_id      The ID of the field used to upload the requested file.
+		 */
+		$require_login = apply_filters( 'gform_require_login_pre_download', false, $form_id, $field_id );
+
+		if ( $require_login && ! is_user_logged_in() ) {
+			return false;
+		}
+
 		$hash_check = GFCommon::generate_download_hash( $form_id, $field_id, $file );
 		$valid      = hash_equals( $hash, $hash_check );
 
@@ -80,6 +95,10 @@ class GF_Download {
 			header( 'Content-Description: File Transfer' );
 			header( 'Content-Disposition: ' . $content_disposition . '; filename="' . basename( $file ) . '"' );
 			header( 'Content-Transfer-Encoding: binary' );
+			// Clear buffer AND turn off output buffering before starting delivery of files requested for download to prevent third-parties to corrupt the file content.
+			if ( ob_get_contents() ) {
+				ob_end_clean();
+			}
 			self::readfile_chunked( $file_path );
 			die();
 		} else {
