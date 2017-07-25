@@ -188,7 +188,7 @@ class Image {
 	 */
 	private function get_shim() {
 
-		$shim_dir = trailingslashit( get_template_directory_uri() ) . 'img/shims/';
+		$shim_dir = trailingslashit( get_assets_url( 'theme/img/shims' ) );
 		$src = $this->options[ 'shim' ];
 
 		if ( empty ( $this->options[ 'shim' ] ) ) {

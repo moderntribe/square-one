@@ -57,5 +57,5 @@ function is_array_empty( $data, $keys_to_check = false ) {
  * @return string
  */
 function get_assets_url( $path = '' ) {
-	return tribe_project()->container()['theme.resources.template-tags']->get_assets_url( $path );
+	return tribe_project()->container()['theme.resources.template_tags']->get_assets_url( $path );
 }

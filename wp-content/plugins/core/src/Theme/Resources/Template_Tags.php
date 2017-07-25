@@ -6,7 +6,7 @@ class Template_Tags {
 	public function get_assets_url( $path = '' ) {
 		$stem = '/core/assets/';
 		if( ! empty( $path ) ) {
-			$path = trailingslashit($stem . $path );
+			$path = $stem . $path;
 		} else {
 			$path = $stem;
 		}
