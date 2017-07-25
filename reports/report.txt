@@ -1,4 +1,4 @@
-http://square.dev
+http://dev.square-one.com
 heading|issue|element|id|class|line|column|description
 ERROR|WCAG2AA.Principle4.Guideline4_1.4_1_2.H91.InputText.Name|<input type="text" name="s">|||1|0|This text input element does not have a name available to an accessibility API. Valid names are: label element, title attribute.
 ERROR|WCAG2AA.Principle1.Guideline1_3.1_3_1.F68|<input type="text" name="s">|||1|0|This form field should be labelled in some way. Use the label element (either with a "for" attribute or wrapped around the form field), or "title", "aria-label" or "aria-labelledby" attributes as appropriate.

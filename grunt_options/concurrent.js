@@ -22,9 +22,6 @@ module.exports = {
 			'accessibility',
 		],
 		[
-			'flow',
-		],
-		[
 			'clean:themeMinCSS',
 		],
 	],

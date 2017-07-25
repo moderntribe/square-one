@@ -1,5 +1,3 @@
-// @flow
-
 /**
  * @module
  * @description Base vendor module for the modern tribe libs js.
