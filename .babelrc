@@ -1,6 +1,5 @@
 {
   "presets": [
-    "flow",
     ["env", {
       "targets": {
         "browsers": ["last 3 versions", "safari >= 9", "ie >= 11"]
@@ -8,7 +7,7 @@
       "useBuiltIns": true
     }]
   ],
-  "plugins": ["transform-flow-strip-types","lodash","transform-object-rest-spread","transform-object-assign"],
+  "plugins": ["lodash","transform-object-rest-spread","transform-object-assign"],
   "env": {
     "test": {
       "plugins": ["istanbul"]

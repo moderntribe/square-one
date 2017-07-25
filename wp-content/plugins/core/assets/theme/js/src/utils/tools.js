@@ -11,7 +11,7 @@
  * @returns {*} Node or false
  */
 
-export const addClass = (el: HTMLElement, className: string = '') => {
+export const addClass = (el, className = '') => {
 	const element = el;
 	if (!element) {
 		return false;
@@ -29,7 +29,7 @@ export const addClass = (el: HTMLElement, className: string = '') => {
  * @returns {Array} Iterable array of dom nodes
  */
 
-export const getChildren = (el: HTMLElement) => {
+export const getChildren = (el) => {
 	const children = [];
 	let i = el.children.length;
 	for (i; i--;) { // eslint-disable-line
@@ -50,7 +50,7 @@ export const getChildren = (el: HTMLElement) => {
  * @returns {boolean}
  */
 
-export const hasClass = (el: HTMLElement, className:string = '') => {
+export const hasClass = (el, className = '') => {
 	if (!el) {
 		return false;
 	}
@@ -66,7 +66,7 @@ export const hasClass = (el: HTMLElement, className:string = '') => {
  * @returns {*} returns false or el if passed
  */
 
-export const removeClass = (el: HTMLElement, className: string) => {
+export const removeClass = (el, className) => {
 	const element = el;
 	if (!element) {
 		return false;
@@ -83,7 +83,7 @@ export const removeClass = (el: HTMLElement, className: string) => {
  * @param string
  */
 
-export const removeClassThatContains = (el: HTMLElement, string:string = '') => {
+export const removeClassThatContains = (el, string = '') => {
 	for (let i = 0; i < el.classList.length; i++) {
 		if (el.classList.item(i).indexOf(string) !== -1) {
 			el.classList.remove(el.classList.item(i));
@@ -99,7 +99,7 @@ export const removeClassThatContains = (el: HTMLElement, string:string = '') => 
  * @param suffix optional suffix string
  */
 
-export const hasClassFromArray = (el: HTMLElement, arr: Array<string> = [], prefix: string = '', suffix: string = '') => arr.some(c => el.classList.contains(`${prefix}${c}${suffix}`));
+export const hasClassFromArray = (el, arr = [], prefix = '', suffix = '') => arr.some(c => el.classList.contains(`${prefix}${c}${suffix}`));
 
 /**
  * Highly efficient function to convert a nodelist into a standard array. Allows you to run Array.forEach
@@ -108,7 +108,7 @@ export const hasClassFromArray = (el: HTMLElement, arr: Array<string> = [], pref
  * @returns {Array} Of converted elements
  */
 
-export const convertElements = (elements: NodeList<HTMLElement>) => {
+export const convertElements = (elements = []) => {
 	const converted = [];
 	let i = elements.length;
 	for (i; i--; converted.unshift(elements[i])); // eslint-disable-line
@@ -126,7 +126,7 @@ export const convertElements = (elements: NodeList<HTMLElement>) => {
  * @returns {NodeList}
  */
 
-export const getNodes = (selector: string = '', convert: boolean = false, node: Document = document, custom: boolean = false) => {
+export const getNodes = (selector = '', convert = false, node = document, custom = false) => {
 	const selectorString = custom ? selector : `[data-js="${selector}"]`;
 	let nodes = node.querySelectorAll(selectorString);
 	if (convert) {
@@ -143,12 +143,12 @@ export const getNodes = (selector: string = '', convert: boolean = false, node: 
  * @returns {*}
  */
 
-export const closest = (el: HTMLElement, selector: string) => {
+export const closest = (el, selector) => {
 	let matchesFn;
 	let parent;
 
 	['matches', 'webkitMatchesSelector', 'mozMatchesSelector', 'msMatchesSelector', 'oMatchesSelector'].some((fn) => {
-		if (document.body && typeof document.body[fn] === 'function') {
+		if (typeof document.body[fn] === 'function') {
 			matchesFn = fn;
 			return true;
 		}
@@ -158,7 +158,7 @@ export const closest = (el: HTMLElement, selector: string) => {
 
 	while (el) {
 		parent = el.parentElement;
-		if (parent && matchesFn && parent[matchesFn](selector)) {
+		if (parent && parent[matchesFn](selector)) {
 			return parent;
 		}
 
@@ -174,7 +174,7 @@ export const closest = (el: HTMLElement, selector: string) => {
  * @param newNode {Element|NodeList}
  * @param referenceNode {Element|NodeList}
  */
-export const insertAfter = (newNode: HTMLElement, referenceNode: HTMLElement) => {
+export const insertAfter = (newNode, referenceNode) => {
 	referenceNode.parentNode.insertBefore(newNode, referenceNode.nextElementSibling);
 };
 
@@ -185,6 +185,6 @@ export const insertAfter = (newNode: HTMLElement, referenceNode: HTMLElement) =>
  * @param referenceNode {Element|NodeList}
  */
 
-export const insertBefore = (newNode: HTMLElement, referenceNode: HTMLElement) => {
+export const insertBefore = (newNode, referenceNode) => {
 	referenceNode.parentNode.insertBefore(newNode, referenceNode);
 };

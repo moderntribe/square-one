@@ -1,5 +1,3 @@
-// @flow
-
 /**
  * @module
  * @description Javascript that handles WordPress comment form.

@@ -1,5 +1,3 @@
-// @flow
-
 /**
  * @module
  * @description JavaScript specific to the_content embeds,
@@ -11,10 +9,7 @@ import delegate from 'delegate';
 import * as tools from '../utils/tools';
 import { on } from '../utils/events';
 
-const el: {
-	container: Node,
-	embeds: Array<HTMLElement>,
-} = {
+const el = {
 	container: tools.getNodes('site-wrap')[0],
 	embeds: [],
 };
@@ -24,7 +19,7 @@ const el: {
  * @description Remove and clean up errant p tags added by WP auto P.
  */
 
-const removeErrantPTags = (embed: HTMLElement) => {
+const removeErrantPTags = (embed) => {
 	const pStray = tools.getNodes('p', true, embed, true);
 
 	if (pStray.length) {
@@ -97,10 +92,10 @@ const playEmbed = (e) => {
 	const iframeUrl = (parent.getAttribute('data-embed-provider') === 'youtube') ? `https://www.youtube.com/embed/${videoId}?autoplay=1&autohide=1&fs=1&modestbranding=1&showinfo=0&controls=2&autoplay=1&rel=0&theme=light&vq=hd720` : `//player.vimeo.com/video/${videoId}?autoplay=1`;
 	const iframe = document.createElement('iframe');
 	iframe.id = videoId;
-	iframe.frameBorder = '0';
+	iframe.frameBorder = 0;
 	iframe.src = iframeUrl;
-	iframe.width = '1280';
-	iframe.height = '720';
+	iframe.width = 1280;
+	iframe.height = 720;
 	iframe.tabIndex = 0;
 
 	// Add & kickoff embed
