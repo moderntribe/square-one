@@ -82,20 +82,17 @@ abstract class Util {
 	 * @return string
 	 */
 	public static function get_page_template_ID( $template ) {
-		$page_ID = '';
-		$args    = [
+		$args = [
 			'meta_key'   => '_wp_page_template',
 			'meta_value' => $template,
 		];
-		$pages   = get_pages( $args );
-		if ( ! empty( $pages ) ) {
-			foreach ( $pages as $page ) {
-				$page_ID = $page->ID;
-				break;
-			}
+		$pages = get_pages( $args );
+
+		if ( empty( $pages ) ) {
+		    return '';
 		}
 
-		return $page_ID;
+		return $pages[0]->ID;
 	}
 
 }
