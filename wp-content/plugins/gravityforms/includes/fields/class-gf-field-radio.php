@@ -36,13 +36,13 @@ class GF_Field_Radio extends GF_Field {
 	}
 
 	public function validate( $value, $form ) {
-		if ( $this->enableOtherChoice && $value == 'gf_other_choice' ) {
+		if ( $this->isRequired && $this->enableOtherChoice && $value == 'gf_other_choice' ) {
 			$value = rgpost( "input_{$this->id}_other" );
-		}
 
-		if ( $this->isRequired && $this->enableOtherChoice && $value == GFCommon::get_other_choice_value() ) {
-			$this->failed_validation  = true;
-			$this->validation_message = empty( $this->errorMessage ) ? esc_html__( 'This field is required.', 'gravityforms' ) : $this->errorMessage;
+			if ( empty( $value ) || strtolower( $value ) == strtolower( GFCommon::get_other_choice_value( $this ) ) ) {
+				$this->failed_validation  = true;
+				$this->validation_message = empty( $this->errorMessage ) ? esc_html__( 'This field is required.', 'gravityforms' ) : $this->errorMessage;
+			}
 		}
 	}
 
@@ -77,7 +77,7 @@ class GF_Field_Radio extends GF_Field {
 
 			// add 'other' choice to choices if enabled
 			if ( $this->enableOtherChoice ) {
-				$other_default_value = GFCommon::get_other_choice_value();
+				$other_default_value = GFCommon::get_other_choice_value( $this );
 				$this->choices[]     = array( 'text' => $other_default_value, 'value' => 'gf_other_choice', 'isSelected' => false, 'isOtherChoice' => true );
 			}
 
@@ -99,7 +99,7 @@ class GF_Field_Radio extends GF_Field {
 					$field_value .= '|' . $price;
 				}
 
-				if ( rgblank( $value ) && RG_CURRENT_VIEW != 'entry' ) {
+				if ( rgblank( $value ) && rgget('view') != 'entry' ) {
 					$checked = rgar( $choice, 'isSelected' ) ? "checked='checked'" : '';
 				} else {
 					$checked = RGFormsModel::choice_value_match( $this, $choice, $value ) ? "checked='checked'" : '';
@@ -180,13 +180,39 @@ class GF_Field_Radio extends GF_Field {
 		return GFCommon::selection_display( $value, $this, $currency, $use_text );
 	}
 
+	/**
+	 * Gets merge tag values.
+	 *
+	 * @since  Unknown
+	 * @access public
+	 *
+	 * @uses GFCommon::to_money()
+	 * @uses GFCommon::format_post_category()
+	 * @uses GFFormsModel::is_field_hidden()
+	 * @uses GFFormsModel::get_choice_text()
+	 * @uses GFCommon::format_variable_value()
+	 * @uses GFCommon::implode_non_blank()
+	 *
+	 * @param array|string $value      The value of the input.
+	 * @param string       $input_id   The input ID to use.
+	 * @param array        $entry      The Entry Object.
+	 * @param array        $form       The Form Object
+	 * @param string       $modifier   The modifier passed.
+	 * @param array|string $raw_value  The raw value of the input.
+	 * @param bool         $url_encode If the result should be URL encoded.
+	 * @param bool         $esc_html   If the HTML should be escaped.
+	 * @param string       $format     The format that the value should be.
+	 * @param bool         $nl2br      If the nl2br function should be used.
+	 *
+	 * @return string The processed merge tag.
+	 */
 	public function get_value_merge_tag( $value, $input_id, $entry, $form, $modifier, $raw_value, $url_encode, $esc_html, $format, $nl2br ) {
 		$use_value       = $modifier == 'value';
 		$use_price       = in_array( $modifier, array( 'price', 'currency' ) );
 		$format_currency = $modifier == 'currency';
 
 		if ( is_array( $raw_value ) && (string) intval( $input_id ) != $input_id ) {
-			$items = array( $input_id => $value ); //float input Ids. (i.e. 4.1 ). Used when targeting specific checkbox items
+			$items = array( $input_id => $value ); // Float input Ids. (i.e. 4.1 ). Used when targeting specific checkbox items.
 		} elseif ( is_array( $raw_value ) ) {
 			$items = $raw_value;
 		} else {

@@ -16,71 +16,86 @@ class GFFormsModel {
 	/**
 	 * Stores the values containing and uploaded files for later access
 	 *
+	 * @since  Unknwon
 	 * @access public
-	 * @static
 	 *
 	 * @var array Defaults to an empty array.
 	 */
 	public static $uploaded_files = array();
 	/**
-	 * Stores unique form IDs found
+	 * Stores unique form IDs found.
 	 *
+	 * @since  Unknown
 	 * @access public
-	 * @static
 	 *
-	 * @var array Defaults to an empty array
+	 * @var array Defaults to an empty array.
 	 */
 	public static $unique_ids = array();
 
 	/**
-	 * Stores confirmations found
+	 * Stores confirmations found.
 	 *
+	 * @since  Unknown
 	 * @access private
-	 * @static
 	 *
-	 * @var array Defaults to an empty array
+	 * @var array Defaults to an empty array.
 	 */
 	private static $_confirmations = array();
 
 	/**
 	 * An in-memory cache for the form meta for the current blog.
-	 *  Use "{Blog ID}_{Form ID}" as the key.
-	 *  Example: $_current_forms['1_2']
 	 *
-	 * @access private
-	 * @static
+	 *  Use "{Blog ID}_{Form ID}" as the key.
+	 *
+	 * @since   Unknown
+	 * @access  private
+	 * @example $_current_forms['1_2']
 	 *
 	 * @var array $_current_forms
 	 */
 	private static $_current_forms = array();
 
 	/**
-	 * The entry data for the current site
-	 *
+	 * The entry data for the current site.
+	 *.
 	 * @access private
-	 * @static
 	 *
-	 * @var null Defaults to null
+	 * @var null Defaults to null.
 	 */
 	private static $_current_lead = null;
 
 	/**
-	 * Flushes the data stored within GFFormsModel::$_current_forms
+	 * Returns the current database version.
 	 *
+	 * @return string
+	 */
+	public static function get_database_version() {
+		return get_option( 'gf_db_version' );
+	}
+
+	/**
+	 * Flushes the data stored within GFFormsModel::$_current_forms.
+	 *
+	 * @since  Unknown
 	 * @access public
-	 * @static
-	 * @see GFFormsModel::$_current_forms
+	 *
+	 * @uses GFFormsModel::$_current_forms
+	 *
+	 * @return void
 	 */
 	public static function flush_current_forms() {
 		self::$_current_forms = null;
 	}
 
 	/**
-	 * Flushes the data stored within GFFormsModel::$_current_lead
+	 * Flushes the data stored within GFFormsModel::$_current_lead.
 	 *
+	 * @since  Unknown
 	 * @access public
-	 * @static
-	 * @see GFFormsModel::$_current_lead
+	 *
+	 * @uses GFFormsModel::$_current_lead
+	 *
+	 * @return void
 	 */
 	public static function flush_current_lead() {
 		self::$_current_lead = null;
@@ -89,9 +104,12 @@ class GFFormsModel {
 	/**
 	 * Flushes the data stored within GFFormsModel::$_confirmations
 	 *
+	 * @since  Unknown
 	 * @access public
-	 * @static
-	 * @see GFFormsModel::$_confirmations
+	 *
+	 * @uses GFFormsModel::$_confirmations
+	 *
+	 * @return void
 	 */
 	public static function flush_confirmations() {
 		self::$_confirmations = null;
@@ -100,8 +118,8 @@ class GFFormsModel {
 	/**
 	 * Gets the form table name, including the site's database prefix.
 	 *
+	 * @since  Unknown
 	 * @access public
-	 * @static
 	 * @global $wpdb
 	 *
 	 * @return string The form table name.
@@ -113,13 +131,13 @@ class GFFormsModel {
 	}
 
 	/**
-	 * Gets the form meta table, including the site's database prefix
+	 * Gets the form meta table, including the site's database prefix.
 	 *
+	 * @since  Unknown
 	 * @access public
-	 * @static
 	 * @global $wpdb
 	 *
-	 * @return string The form meta table
+	 * @return string The form meta table.
 	 */
 	public static function get_meta_table_name() {
 		global $wpdb;
@@ -128,13 +146,13 @@ class GFFormsModel {
 	}
 
 	/**
-	 * Gets the form view table name, including the site's database prefix
+	 * Gets the form view table name, including the site's database prefix.
 	 *
+	 * @since  Unknown
 	 * @access public
-	 * @static
 	 * @global $wpdb
 	 *
-	 * @return string The form view table name
+	 * @return string The form view table name.
 	 */
 	public static function get_form_view_table_name() {
 		global $wpdb;
@@ -143,13 +161,13 @@ class GFFormsModel {
 	}
 
 	/**
-	 * Gets the lead (entries) table name, including the site's database prefix
+	 * Gets the lead (entries) table name, including the site's database prefix.
 	 *
+	 * @since  Unknown
 	 * @access public
-	 * @static
 	 * @global $wpdb
 	 *
-	 * @return string The lead (entry) table name
+	 * @return string The lead (entry) table name.
 	 */
 	public static function get_lead_table_name() {
 		global $wpdb;
@@ -158,13 +176,13 @@ class GFFormsModel {
 	}
 
 	/**
-	 * Gets the lead (entry) meta table name, including the site's database prefix
+	 * Gets the lead (entry) meta table name, including the site's database prefix.
 	 *
+	 * @since  Unknown
 	 * @access public
-	 * @static
 	 * @global $wpdb
 	 *
-	 * @return string The lead (entry) meta table name
+	 * @return string The lead (entry) meta table name.
 	 */
 	public static function get_lead_meta_table_name() {
 		global $wpdb;
@@ -173,13 +191,13 @@ class GFFormsModel {
 	}
 
 	/**
-	 * Gets the lead (entry) notes table name, including the site's database prefix
+	 * Gets the lead (entry) notes table name, including the site's database prefix.
 	 *
+	 * @since  Unknown
 	 * @access public
-	 * @static
 	 * @global $wpdb
 	 *
-	 * @return string The lead (entry) notes table name
+	 * @return string The lead (entry) notes table name.
 	 */
 	public static function get_lead_notes_table_name() {
 		global $wpdb;
@@ -188,13 +206,13 @@ class GFFormsModel {
 	}
 
 	/**
-	 * Gets the lead (entry) details table name, including the site's database prefix
+	 * Gets the lead (entry) details table name, including the site's database prefix.
 	 *
+	 * @since  Unknown
 	 * @access public
-	 * @static
 	 * @global $wpdb
 	 *
-	 * @return string The lead (entry) details table name
+	 * @return string The lead (entry) details table name.
 	 */
 	public static function get_lead_details_table_name() {
 		global $wpdb;
@@ -203,13 +221,13 @@ class GFFormsModel {
 	}
 
 	/**
-	 * Gets the lead (entry) details long table name, including the site's database prefix
+	 * Gets the lead (entry) details long table name, including the site's database prefix.
 	 *
+	 * @since  Unknown
 	 * @access public
-	 * @static
 	 * @global $wpdb
 	 *
-	 * @return string The lead (entry) details long table name
+	 * @return string The lead (entry) details long table name.
 	 */
 	public static function get_lead_details_long_table_name() {
 		global $wpdb;
@@ -218,13 +236,13 @@ class GFFormsModel {
 	}
 
 	/**
-	 * Gets the lead (entry) view table name, including the site's database prefix
+	 * Gets the lead (entry) view table name, including the site's database prefix.
 	 *
+	 * @since  Unknown
 	 * @access public
-	 * @static
 	 * @global $wpdb
 	 *
-	 * @return string The lead (entry) view table name
+	 * @return string The lead (entry) view table name.
 	 */
 	public static function get_lead_view_name() {
 		global $wpdb;
@@ -233,13 +251,13 @@ class GFFormsModel {
 	}
 
 	/**
-	 * Gets the incomplete submissions table name, including the site's database prefix
+	 * Gets the incomplete submissions table name, including the site's database prefix.
 	 *
+	 * @since  Unknown
 	 * @access public
-	 * @static
 	 * @global $wpdb
 	 *
-	 * @return string The incomplete submissions table name
+	 * @return string he incomplete submissions table name.
 	 */
 	public static function get_incomplete_submissions_table_name() {
 		global $wpdb;
@@ -248,15 +266,16 @@ class GFFormsModel {
 	}
 
 	/**
-	 * Gets all forms
+	 * Gets all forms.
 	 *
+	 * @since  Unknown
 	 * @access public
-	 * @static
 	 * @global $wpdb
-	 * @see GFFormsModel::get_form_table_name
-	 * @see GFFormsModel::get_form_db_columns
-	 * @see GFFormsModel::get_entry_count_per_form
-	 * @see GFFormsModel::get_view_count_per_form
+	 *
+	 * @uses GFFormsModel::get_form_table_name()
+	 * @uses GFFormsModel::get_form_db_columns()
+	 * @uses GFFormsModel::get_entry_count_per_form()
+	 * @uses GFFormsModel::get_view_count_per_form()
 	 *
 	 * @param bool   $is_active   Optional. Defines if inactive forms should be displayed. Defaults to null.
 	 * @param string $sort_column Optional. The column to be used for sorting the forms. Defaults to 'title'.
@@ -321,16 +340,95 @@ class GFFormsModel {
 	}
 
 	/**
-	 * Gets the number of entries per form.
-	 *
-	 * First attempts to read from cache. If unavailable, gets the entry count, caches it, and returns it.
+	 * Searches form titles based on query.
 	 *
 	 * @access public
 	 * @static
 	 * @global $wpdb
-	 * @see GFFormsModel::get_lead_table_name
-	 * @see GFCache::get
-	 * @see GFCache::set
+	 * @see GFFormsModel::get_form_table_name
+	 * @see GFFormsModel::get_form_db_columns
+	 * @see GFFormsModel::get_entry_count_per_form
+	 * @see GFFormsModel::get_view_count_per_form
+	 *
+	 * @param string $query       Optional. The query to search.
+	 * @param bool   $is_active   Optional. Defines if inactive forms should be displayed. Defaults to null.
+	 * @param string $sort_column Optional. The column to be used for sorting the forms. Defaults to 'title'.
+	 * @param string $sort_dir    Optional. Defines the direction that sorting should occur. Defaults to 'ASC' (ascending). Use 'DESC' for descending.
+	 * @param bool   $is_trash    Optional. Defines if forms within the trash should be displayed. Defaults to false.
+	 *
+	 * @return array $forms All forms found.
+	 */
+	public static function search_forms( $query = '', $is_active = null, $sort_column = 'title', $sort_dir = 'ASC', $is_trash = false ) {
+		global $wpdb;
+		$form_table_name = self::get_form_table_name();
+
+		$where_arr   = array();
+		$where_arr[] = $wpdb->prepare( 'is_trash=%d', $is_trash );
+		if ( $is_active !== null ) {
+			$where_arr[] = $wpdb->prepare( 'is_active=%d', $is_active );
+		}
+
+		if ( ! rgblank( $query ) ) {
+			$where_arr[] = $wpdb->prepare( 'title LIKE %s', '%' . $query . '%' );
+		}
+
+		$where_clause = 'WHERE ' . join( ' AND ', $where_arr );
+		$sort_keyword = $sort_dir == 'ASC' ? 'ASC' : 'DESC';
+
+		$db_columns = self::get_form_db_columns();
+
+		if ( ! in_array( strtolower( $sort_column ), $db_columns ) ) {
+			$sort_column = 'title';
+		}
+
+		$order_by     = ! empty( $sort_column ) ? "ORDER BY $sort_column $sort_keyword" : '';
+
+		$sql = "SELECT f.id, f.title, f.date_created, f.is_active, 0 as lead_count, 0 view_count
+                FROM $form_table_name f
+                $where_clause
+                $order_by";
+
+		//Getting all forms
+		$forms = $wpdb->get_results( $sql );
+
+		//Getting entry count per form
+		$entry_count = self::get_entry_count_per_form();
+
+		//Getting view count per form
+		$view_count = self::get_view_count_per_form();
+
+		//Adding entry counts and to form array
+		foreach ( $forms as &$form ) {
+			foreach ( $view_count as $count ) {
+				if ( $count->form_id == $form->id ) {
+					$form->view_count = $count->view_count;
+					break;
+				}
+			}
+
+			foreach ( $entry_count as $count ) {
+				if ( $count->form_id == $form->id ) {
+					$form->lead_count = $count->lead_count;
+					break;
+				}
+			}
+		}
+
+		return $forms;
+	}
+
+	/**
+	 * Gets the number of entries per form.
+	 *
+	 * First attempts to read from cache. If unavailable, gets the entry count, caches it, and returns it.
+	 *
+	 * @since  Unknown
+	 * @access public
+	 * @global $wpdb
+	 *
+	 * @uses GFFormsModel::get_lead_table_name()
+	 * @uses GFCache::get()
+	 * @uses GFCache::set()
 	 *
 	 * @return array $entry_count Array of forms, containing the form ID and the entry count
 	 */
@@ -355,12 +453,13 @@ class GFFormsModel {
 	 *
 	 * Checks the cache first.  If not there, gets the count from the database, stores it in the cache, and returns it.
 	 *
+	 * @since  Unknown
 	 * @access public
-	 * @static
 	 * @global $wpdb
-	 * @see GFFormsModel::get_form_view_table_name
-	 * @see GFCache::get
-	 * @see GFCache::set
+	 *
+	 * @uses GFFormsModel::get_form_view_table_name()
+	 * @uses GFCache::get()
+	 * @uses GFCache::set()
 	 *
 	 * @return array $view_count Array of forms, containing the form ID and the view count
 	 */
@@ -382,8 +481,8 @@ class GFFormsModel {
 	/**
 	 * Returns the form database columns.
 	 *
+	 * @since  Unknown
 	 * @access public
-	 * @static
 	 *
 	 * @return array The column IDs
 	 */
@@ -408,16 +507,17 @@ class GFFormsModel {
 	}
 
 	/**
-	 * Gets the payment totals for a particular form ID
+	 * Gets the payment totals for a particular form ID.
 	 *
+	 * @since  Unknown
 	 * @access public
-	 * @static
 	 * @global $wpdb
-	 * @see GFFormsModel::get_lead_table_name
 	 *
-	 * @param int $form_id The form ID to get payment totals for
+	 * @uses GFFormsModel::get_lead_table_name()
 	 *
-	 * @return array $totals The payment totals found
+	 * @param int $form_id The form ID to get payment totals for.
+	 *
+	 * @return array $totals The payment totals found.
 	 */
 	public static function get_form_payment_totals( $form_id ) {
 		global $wpdb;
@@ -449,17 +549,18 @@ class GFFormsModel {
 	}
 
 	/**
-	 * Gets the total, unread, starred, spam, and trashed entry counts
+	 * Gets the total, unread, starred, spam, and trashed entry counts.
 	 *
+	 * @since  Unknown
 	 * @access public
-	 * @static
 	 * @global $wpdb
-	 * @see GFFormsModel::get_lead_table_name
-	 * @see GFFormsModel::get_lead_details_table_name
 	 *
-	 * @param int $form_id The ID of the form to check
+	 * @uses GFFormsModel::get_lead_table_name()
+	 * @uses GFFormsModel::get_lead_details_table_name()
 	 *
-	 * @return array $results[0] The form counts
+	 * @param int $form_id The ID of the form to check.
+	 *
+	 * @return array $results[0] The form counts.
 	 */
 	public static function get_form_counts( $form_id ) {
 		global $wpdb;
@@ -483,13 +584,14 @@ class GFFormsModel {
 	}
 
 	/**
-	 * Gets the form summary for all forms
+	 * Gets the form summary for all forms.
 	 *
+	 * @since  Unknown
 	 * @access public
-	 * @static
 	 * @global $wpdb
-	 * @see GFFormsModel::get_form_table_name
-	 * @see GFFormsModel::get_lead_table_name
+	 *
+	 * @uses GFFormsModel::get_form_table_name()
+	 * @uses GFFormsModel::get_lead_table_name()
 	 *
 	 * @return array $forms Contains the form summary for all forms.
 	 */
@@ -513,7 +615,7 @@ class GFFormsModel {
 
 		$lead_date_results = $wpdb->get_results( $sql, ARRAY_A );
 
-		$sql = "SELECT id, title, '' as last_lead_date, 0 as unread_count
+		$sql = "SELECT id, title, is_trash, '' as last_lead_date, 0 as unread_count
                 FROM $form_table_name
                 WHERE is_active=1
                 ORDER BY title";
@@ -548,12 +650,13 @@ class GFFormsModel {
 	/**
 	 * Gets the total, active, inactive, and trashed form counts.
 	 *
+	 * @since  Unknown
 	 * @access public
-	 * @static
 	 * @global $wpdb
-	 * @see GFFormsModel::get_form_table_name
 	 *
-	 * @return array The form counts
+	 * @uses GFFormsModel::get_form_table_name()
+	 *
+	 * @return array The form counts.
 	 */
 	public static function get_form_count() {
 		global $wpdb;
@@ -577,13 +680,14 @@ class GFFormsModel {
 	}
 
 	/**
-	 * Gets the form ID based on the form title
+	 * Gets the form ID based on the form title.
 	 *
+	 * @since  Unknown
 	 * @access public
-	 * @static
-	 * @see GFFormsModel::get_forms
 	 *
-	 * @param string $form_title The form title to search for
+	 * @uses GFFormsModel::get_forms()
+	 *
+	 * @param string $form_title The form title to search for.
 	 *
 	 * @return int The form ID. Returns 0 if not found.
 	 */
@@ -600,12 +704,13 @@ class GFFormsModel {
 	}
 
 	/**
-	 * Gets a form based on the form ID
+	 * Gets a form based on the form ID.
 	 *
+	 * @since  Unknown
 	 * @access public
-	 * @static
 	 * @global $wpdb
-	 * @see GFFormsModel::get_form_table_name
+	 *
+	 * @uses GFFormsModel::get_form_table_name()
 	 *
 	 * @param int  $form_id     The ID of the form to get.
 	 * @param bool $allow_trash Optional. Set to true to allow trashed results. Defaults to false.
@@ -622,14 +727,14 @@ class GFFormsModel {
 	}
 
 	/**
-	 * Converts a serialized string or JSON for access in PHP
+	 * Converts a serialized string or JSON for access in PHP.
 	 *
+	 * @since  Unknown
 	 * @access public
-	 * @static
 	 *
-	 * @param string $string The string to convert
+	 * @param string $string The string to convert.
 	 *
-	 * @return object|array The object that the string was converted to
+	 * @return object|array The object that the string was converted to.
 	 */
 	public static function unserialize( $string ) {
 
@@ -643,20 +748,21 @@ class GFFormsModel {
 	}
 
 	/**
-	 * Gets the form meta based on the form ID
+	 * Gets the form meta based on the form ID.
 	 *
+	 * @since  Unknown
 	 * @access public
-	 * @static
 	 * @global $wpdb
-	 * @see GFFormsModel::get_meta_table_name
-	 * @see GFFormsModel::unserialize
-	 * @see GFFormsModel::convert_field_objects
-	 * @see GFFormsModel::load_notifications_from_legacy
-	 * @see GFFormsModel::$_current_forms
 	 *
-	 * @param int $form_id The form ID
+	 * @uses GFFormsModel::get_meta_table_name()
+	 * @uses GFFormsModel::unserialize()
+	 * @uses GFFormsModel::convert_field_objects()
+	 * @uses GFFormsModel::load_notifications_from_legacy()
+	 * @uses GFFormsModel::$_current_forms
 	 *
-	 * @return array|null $form Form object if found. Null if not found
+	 * @param int $form_id The form ID.
+	 *
+	 * @return array|null $form Form object if found. Null if not found.
 	 */
 	public static function get_form_meta( $form_id ) {
 		global $wpdb;
@@ -711,33 +817,40 @@ class GFFormsModel {
 	}
 
 	/**
-	 * Converts all field objects in a form, based on field type
+	 * Converts all field objects in a form, based on field type.
 	 *
+	 * @since  Unknown
 	 * @access public
-	 * @static
-	 * @see GF_Field_CreditCard::maybe_upgrade_inputs
 	 *
-	 * @param array $form The Form object
+	 * @uses GF_Field_CreditCard::maybe_upgrade_inputs()
 	 *
-	 * @return array $form The Form object after the field objects are converted
+	 * @param array $form The Form object.
+	 *
+	 * @return array $form The Form object after the field objects are converted.
 	 */
 	public static function convert_field_objects( $form ) {
 		$page_number = 1;
 		if ( is_array( rgar( $form, 'fields' ) ) ) {
 			foreach ( $form['fields'] as &$field ) {
+
+				// convert adminOnly property to visibility
+				if ( ! isset( $field['visibility'] ) ) {
+					$field['visibility'] = isset( $field['adminOnly'] ) && $field['adminOnly'] ? 'administrative' : 'visible';
+					unset( $field['adminOnly'] );
+				}
+
 				$field = GF_Fields::create( $field );
 				if ( isset( $form['id'] ) ) {
 					$field->formId = $form['id'];
 				}
+
 				$field->pageNumber = $page_number;
 				if ( $field->type == 'page' ) {
 					$page_number ++;
 					$field->pageNumber = $page_number;
 				}
 
-				if ( $field->type == 'creditcard' ) {
-					$field->maybe_upgrade_inputs();
-				}
+				$field->post_convert_field();
 			}
 		}
 
@@ -745,17 +858,18 @@ class GFFormsModel {
 	}
 
 	/**
-	 * Gets the form meta for multiple forms based on an array for form IDs
+	 * Gets the form meta for multiple forms based on an array for form IDs.
 	 *
+	 * @since  Unknown
 	 * @access public
-	 * @static
 	 * @global $wpdb
-	 * @see GFFormsModel::get_form_table_name
-	 * @see GFFormsModel::get_meta_table_name
-	 * @see GFFormsModel::unserialize
-	 * @see GFFormsModel::convert_field_objects
 	 *
-	 * @param array $ids Array of form IDs
+	 * @uses GFFormsModel::get_form_table_name()
+	 * @uses GFFormsModel::get_meta_table_name()
+	 * @uses GFFormsModel::unserialize()
+	 * @uses GFFormsModel::convert_field_objects()
+	 *
+	 * @param array $ids Array of form IDs.
 	 *
 	 * @return array $results
 	 */
@@ -790,14 +904,14 @@ class GFFormsModel {
 	}
 
 	/**
-	 * Converts current notification structure to legacy
+	 * Converts current notification structure to legacy.
 	 *
+	 * @since  Unknown
 	 * @access private
-	 * @static
 	 *
-	 * @param array $form The Form object
+	 * @param array $form The Form object.
 	 *
-	 * @return array $form The Form object
+	 * @return array $form The Form object.
 	 */
 	private static function load_notifications_to_legacy( $form ) {
 		if ( ! is_array( rgar( $form, 'notifications' ) ) ) {
@@ -834,18 +948,19 @@ class GFFormsModel {
 	}
 
 	/**
-	 * Loads notifications using from the legacy format
+	 * Loads notifications using from the legacy format.
 	 *
+	 * @since  Unknown
 	 * @access private
-	 * @static
-	 * @see GFCommon::has_admin_notification
-	 * @see GFFormsModel::convert_property_to_merge_tag
-	 * @see GFCommon::has_user_notification
-	 * @see GFFormsModel::save_form_notifications
 	 *
-	 * @param array $form The Form object
+	 * @uses GFCommon::has_admin_notification()
+	 * @uses GFFormsModel::convert_property_to_merge_tag()
+	 * @uses GFCommon::has_user_notification()
+	 * @uses GFFormsModel::save_form_notifications()
 	 *
-	 * @return array $form The Form object
+	 * @param array $form The Form object.
+	 *
+	 * @return array $form The Form object.
 	 */
 	private static function load_notifications_from_legacy( $form ) {
 
@@ -907,18 +1022,19 @@ class GFFormsModel {
 	}
 
 	/**
-	 * Converts a form property to the merge tag format
+	 * Converts a form property to the merge tag format.
 	 *
+	 * @since  Unknown
 	 * @access private
-	 * @static
-	 * @see GFFormsModel::get_field_merge_tag
 	 *
-	 * @param array  $form            The Form object
-	 * @param array  $array           Array of properties to search through
-	 * @param string $target_property The property to move the value to
-	 * @param string $source_property The property to search for
+	 * @uses GFFormsModel::get_field_merge_tag()
 	 *
-	 * @return array $array The array that was searched through
+	 * @param array  $form            The Form object.
+	 * @param array  $array           Array of properties to search through.
+	 * @param string $target_property The property to move the value to.
+	 * @param string $source_property The property to search for.
+	 *
+	 * @return array $array The array that was searched through.
 	 */
 	private static function convert_property_to_merge_tag( $form, $array, $target_property, $source_property ) {
 		$merge_tag = self::get_field_merge_tag( $form, rgar( $array, $source_property ) );
@@ -931,15 +1047,16 @@ class GFFormsModel {
 	}
 
 	/**
-	 * Gets a formatted merge tag for a field
+	 * Gets a formatted merge tag for a field.
 	 *
+	 * @since  Unknown
 	 * @access private
-	 * @static
-	 * @see GFFormsModel::get_field
-	 * @see GFCommon::get_label
 	 *
-	 * @param array $form The Form object
-	 * @param int $field_id The field ID
+	 * @uses GFFormsModel::get_field()
+	 * @uses GFCommon::get_label()
+	 *
+	 * @param array $form     The Form object.
+	 * @param int   $field_id The field ID.
 	 *
 	 * @return string|false The merge tag if found. False if not found.
 	 */
@@ -962,7 +1079,7 @@ class GFFormsModel {
 
 		if ( is_array( rgar( $form, 'fields' ) ) ) {
 			$all_fields = array(
-				'adminLabel'        => '', 'adminOnly' => '', 'allowsPrepopulate' => '', 'defaultValue' => '', 'description' => '', 'content' => '', 'cssClass' => '',
+				'adminLabel'        => '', 'allowsPrepopulate' => '', 'defaultValue' => '', 'description' => '', 'content' => '', 'cssClass' => '',
 				'errorMessage'      => '', 'id' => '', 'inputName' => '', 'isRequired' => '', 'label' => '', 'noDuplicates' => '',
 				'size'              => '', 'type' => '', 'postCustomFieldName' => '', 'displayAllCategories' => '', 'displayCaption' => '', 'displayDescription' => '',
 				'displayTitle'      => '', 'inputType' => '', 'rangeMin' => '', 'rangeMax' => '', 'calendarIconType' => '',
@@ -970,6 +1087,7 @@ class GFFormsModel {
 				'defaultState'      => '', 'hideAddress2' => '', 'hideCountry' => '', 'hideState' => '', 'inputs' => '', 'nameFormat' => '', 'allowedExtensions' => '',
 				'captchaType'       => '', 'pageNumber' => '', 'captchaTheme' => '', 'simpleCaptchaSize' => '', 'simpleCaptchaFontColor' => '', 'simpleCaptchaBackgroundColor' => '',
 				'failed_validation' => '', 'productField' => '', 'enablePasswordInput' => '', 'maxLength' => '', 'enablePrice' => '', 'basePrice' => '',
+				'visibility'        => 'visible'
 			);
 
 			foreach ( $form['fields'] as &$field ) {
@@ -983,14 +1101,15 @@ class GFFormsModel {
 	}
 
 	/**
-	 * Gets the column info for the entry listing page
+	 * Gets the column info for the entry listing page.
 	 *
+	 * @since  Unknown
 	 * @access public
-	 * @static
-	 * @global
-	 * @see GFFormsModel::get_meta_table_name
+	 * @global $wpdb
 	 *
-	 * @param int $form_id The ID of the form that entries are coming from
+	 * @uses GFFormsModel::get_meta_table_name()
+	 *
+	 * @param int $form_id The ID of the form that entries are coming from.
 	 *
 	 * @return mixed
 	 */
@@ -1037,7 +1156,7 @@ class GFFormsModel {
 			 */
 			do_action( 'gform_post_form_activated', $form_id );
 		} else {
-			
+
 			/**
 			 * Fires after an active form gets marked as inactive
 			 *
@@ -1365,6 +1484,8 @@ class GFFormsModel {
 		 */
 		do_action( 'gform_post_form_trashed', $form_id );
 
+		self::update_recent_forms( $form_id, true );
+
 		return $success;
 	}
 
@@ -1392,42 +1513,77 @@ class GFFormsModel {
 		return $success;
 	}
 
+	/**
+	 * Duplicate form.
+	 *
+	 * @access public
+	 * @static
+	 * @param  int $form_id Form ID to duplicate.
+	 *
+	 * @return int $new_id New form ID.
+	 */
 	public static function duplicate_form( $form_id ) {
+
 		global $wpdb;
 
-		if ( ! GFCommon::current_user_can_any( 'gravityforms_create_form' ) ) {
-			die( esc_html__( "You don't have adequate permission to create forms.", 'gravityforms' ) );
+		// Get form to be duplicated.
+		$form = self::get_form( $form_id );
+
+		// Set initial form title.
+		$title = $form->title;
+
+		// Check for form count in form title.
+		preg_match_all( '/(\\(([0-9])*\\))$/mi', $title, $count_exists_in_title );
+
+		// If count does not exist, set count to 1.
+		if ( empty( $count_exists_in_title[0] ) ) {
+
+			// Set initial count.
+			$count = 1;
+
+		} else {
+
+			// Set existing count to current count plus one.
+			$count = (int) $count_exists_in_title[2][0] + 1;
+
+			// Remove existing count from title.
+			$title = preg_replace( '/(\\(([0-9])*\\))$/mi', null, $title );
+
 		}
 
-		//finding unique title
-		$form  = self::get_form( $form_id );
-		$count = 2;
-		$title = $form->title . ' - ' . esc_html__( 'Copy 1', 'gravityforms' );
-		while ( ! self::is_unique_title( $title ) ) {
-			$title = $form->title . ' - ' . sprintf( esc_html__( 'Copy %d', 'gravityforms' ), $count );
-			$count ++;
+		// Trim title.
+		$title = trim( $title );
+
+		// Add copy count to form title.
+		$new_title = $title . " ($count)";
+
+		// If new form title is not unique, increment the count until a unique form title is created.
+		while ( ! self::is_unique_title( $new_title ) ) {
+			$count++;
+			$new_title = $title . " ($count)";
 		}
 
-		//creating new form
-		$new_id = self::insert_form( $title );
+		// Create new form.
+		$new_id = self::insert_form( $new_title );
 
-		//copying form meta
+		// Copying form meta to new form.
 		$meta          = self::get_form_meta( $form_id );
-		$meta['title'] = $title;
+		$meta['title'] = $new_title;
 		$meta['id']    = $new_id;
 
-		$notifications = $meta['notifications'];
-		$confirmations = $meta['confirmations'];
+		// Add notifications to new form.
+		self::update_form_meta( $new_id, $meta['notifications'], 'notifications' );
 		unset( $meta['notifications'] );
+
+		// Add confirmations to new form.
+		self::update_form_meta( $new_id, $meta['confirmations'], 'confirmations' );
 		unset( $meta['confirmations'] );
+
+		// Save form meta.
 		self::update_form_meta( $new_id, $meta );
 
-		//copying notification meta
-		self::update_form_meta( $new_id, $notifications, 'notifications' );
-
-		//copying confirmation meta
-		self::update_form_meta( $new_id, $confirmations, 'confirmations' );
-
+		// Set active state.
+		self::update_form_active( $new_id, $form->is_active );
 
 		// The gform_after_duplicate_form action is deprecated since version 1.9. Please use gform_post_form_duplicated instead
 
@@ -1445,14 +1601,15 @@ class GFFormsModel {
 		 */
 		do_action( 'gform_post_form_duplicated', $form_id, $new_id );
 
-
 		return $new_id;
+
 	}
 
-	public static function is_unique_title( $title ) {
+
+	public static function is_unique_title( $title, $form_id=0 ) {
 		$forms = self::get_forms();
 		foreach ( $forms as $form ) {
-			if ( strtolower( $form->title ) == strtolower( $title ) ) {
+			if ( strtolower( $form->title ) === strtolower( $title ) && $form->id !== $form_id ) {
 				return false;
 			}
 		}
@@ -1466,7 +1623,7 @@ class GFFormsModel {
 		$form_count      = $wpdb->get_var( "SELECT count(0) FROM {$form_table_name}" );
 		if ( $wpdb->last_error ) {
 			GFCommon::log_debug( 'GFFormsModel::ensure_tables_exist(): Blog ' . get_current_blog_id() . ' - Form database table does not exist. Forcing database setup.' );
-			GFForms::setup_database();
+			gf_upgrade()->upgrade_schema();
 		}
 	}
 
@@ -1556,7 +1713,7 @@ class GFFormsModel {
 	public static function delete_files_by_form( $form_id, $status = '' ) {
 		global $wpdb;
 		$form   = self::get_form_meta( $form_id );
-		
+
 		// Default field types to delete
 		$field_types = array( 'fileupload', 'post_image' );
 
@@ -1626,16 +1783,33 @@ class GFFormsModel {
 			return;
 		}
 
-		//Convert from url to physical path
+		$file_path = self::get_physical_file_path( $url );
+
+		/**
+		 * Allow the file path to be overridden so files stored outside the /wp-content/uploads/gravity_forms/ directory can be deleted.
+		 *
+		 * @since 2.2.3.1
+		 *
+		 * @param string $file_path The path of the file to be deleted.
+		 * @param string $url       The URL of the file to be deleted.
+		 */
+		$file_path = apply_filters( 'gform_file_path_pre_delete_file', $file_path, $url );
+
+		if ( file_exists( $file_path ) ) {
+			unlink( $file_path );
+		}
+	}
+
+	public static function get_physical_file_path( $url ) {
+
+		// convert from url to physical path
 		if ( is_multisite() && get_site_option( 'ms_files_rewriting' ) ) {
 			$file_path = preg_replace( "|^(.*?)/files/gravity_forms/|", BLOGUPLOADDIR . 'gravity_forms/', $url );
 		} else {
 			$file_path = str_replace( WP_CONTENT_URL, WP_CONTENT_DIR, $url );
 		}
 
-		if ( file_exists( $file_path ) ) {
-			unlink( $file_path );
-		}
+		return $file_path;
 	}
 
 	public static function delete_field( $form_id, $field_id ) {
@@ -1837,19 +2011,30 @@ class GFFormsModel {
 		}
 	}
 
+	/**
+	 * Gets the IP to be used within the entry.
+	 *
+	 * @since 2.2 Using $_SERVER['REMOTE_ADDR'].
+	 *
+	 * @return string The IP to be stored in the entry.
+	 */
 	public static function get_ip() {
 
-		$ip      = '';
-		$headers = array( 'HTTP_CLIENT_IP', 'HTTP_X_FORWARDED_FOR', 'REMOTE_ADDR' );
+		$ip = rgar( $_SERVER, 'REMOTE_ADDR' );
 
-		foreach ( $headers as $header ) {
-			$ip = rgar( $_SERVER, $header );
-			if ( $ip ) {
-				break;
-			}
-		}
+		/**
+		 * Allows the IP address of the client to be modified.
+		 *
+		 * Use this filter if the server is behind a proxy.
+		 *
+		 * @since 2.2
+		 * @example https://www.gravityhelp.com/documentation/article/gform_ip_address/
+		 *
+		 * @param string $ip The IP being used.
+		 */
+		$ip = apply_filters( 'gform_ip_address', $ip );
 
-		// HTTP_X_FORWARDED_FOR can return a comma separated list of IPs; using the first one
+		// HTTP_X_FORWARDED_FOR can return a comma separated list of IPs; use the first one
 		$ips = explode( ',', $ip );
 
 		return $ips[0];
@@ -2107,7 +2292,7 @@ class GFFormsModel {
 		$is_entry_detail = GFCommon::is_entry_detail();
 		$is_admin = $is_form_editor || $is_entry_detail;
 
-		if ( empty( $value ) && $field->adminOnly && ! $is_admin ) {
+		if ( empty( $value ) && $field->is_administrative() && ! $is_admin ) {
 			$value = self::get_default_value( $field, $input_id );
 		}
 
@@ -2264,17 +2449,33 @@ class GFFormsModel {
 		return null;
 	}
 
+    /**
+	 * Determines if the field value matches the conditional logic rule value.
+	 *
+	 * @param mixed         $field_value  The field value to be checked.
+	 * @param mixed         $target_value The conditional logic rule value.
+	 * @param string        $operation    The conditional logic rule operator.
+	 * @param null|GF_Field $source_field The field the rule is based on.
+	 * @param null|array    $rule         The conditional logic rule properties.
+	 * @param null|array    $form         The current form.
+	 *
+	 * @return bool
+	 */
 	public static function is_value_match( $field_value, $target_value, $operation = 'is', $source_field = null, $rule = null, $form = null ) {
 
 		$is_match = false;
 
-		if ( $source_field && is_subclass_of( $source_field, 'GF_Field' ) && $source_field->type == 'post_category' ) {
-			$field_value = GFCommon::prepare_post_category_value( $field_value, $source_field, 'conditional_logic' );
+		if ( $source_field && is_subclass_of( $source_field, 'GF_Field' ) ) {
+			if ( $source_field->type == 'post_category' ) {
+				$field_value = GFCommon::prepare_post_category_value( $field_value, $source_field, 'conditional_logic' );
+			} elseif ( $source_field->type == 'multiselect' && ! empty( $field_value ) && ! is_array( $field_value ) ) {
+				// Convert the comma-delimited string into an array.
+				$field_value = $source_field->to_array( $field_value );
+			} elseif ( $source_field->get_input_type() != 'checkbox' && is_array( $field_value ) && $source_field->id != $rule['fieldId'] && is_array( $source_field->get_entry_inputs() ) ) {
+				// Get the specific input value from the full field value.
+				$field_value = rgar( $field_value, $rule['fieldId'] );
+			}
 		}
-
-		if ( ! empty( $field_value ) && ! is_array( $field_value ) && is_subclass_of( $source_field, 'GF_Field' ) && $source_field->type == 'multiselect' ) {
-			$field_value = explode( ',', $field_value );
-		} // convert the comma-delimited string into an array
 
 		$form_id = $source_field instanceof GF_Field ? $source_field->formId : 0;
 
@@ -2282,15 +2483,15 @@ class GFFormsModel {
 
 
 		if ( is_array( $field_value ) ) {
-			$field_value = array_values( $field_value ); //returning array values, ignoring keys if array is associative
+			$field_value = array_values( $field_value ); // Returning array values, ignoring keys if array is associative.
 			$match_count = 0;
 			foreach ( $field_value as $val ) {
-				$val = GFFormsModel::maybe_trim_input( GFCommon::get_selection_value( $val ), rgar( $source_field, 'formId' ), $source_field );
+				$val = GFFormsModel::maybe_trim_input( GFCommon::get_selection_value( $val ), $form_id, $source_field );
 				if ( self::matches_operation( $val, $target_value, $operation ) ) {
 					$match_count ++;
 				}
 			}
-			// if operation is Is Not, none of the values in the array can match the target value.
+			// If operation is Is Not, none of the values in the array can match the target value.
 			$is_match = $operation == 'isnot' ? $match_count == count( $field_value ) : $match_count > 0;
 		} else if ( self::matches_operation( GFFormsModel::maybe_trim_input( GFCommon::get_selection_value( $field_value ), $form_id, $source_field ), $target_value, $operation ) ) {
 			$is_match = true;
@@ -2311,13 +2512,13 @@ class GFFormsModel {
 			return GFCommon::clean_number( $text, $number_format );
 		}
 		*/
-		
+
 		$number_format = 'decimal_dot';
 		if ( GFCommon::is_numeric( $text, $number_format ) ) {
 			return GFCommon::clean_number( $text, $number_format );
 		}
 
-		return $text;
+		return 0;
 	}
 
 	public static function matches_operation( $val1, $val2, $operation ) {
@@ -2351,7 +2552,7 @@ class GFFormsModel {
 				break;
 
 			case 'contains' :
-				return ! empty( $val2 ) && strpos( $val1, $val2 ) !== false;
+				return ! rgblank( $val2 ) && strpos( $val1, $val2 ) !== false;
 				break;
 
 			case 'starts_with' :
@@ -2399,12 +2600,6 @@ class GFFormsModel {
 		foreach ( $logic['rules'] as $rule ) {
 			$source_field = RGFormsModel::get_field( $form, $rule['fieldId'] );
 			$field_value  = empty( $lead ) ? self::get_field_value( $source_field, $field_values ) : self::get_lead_field_value( $lead, $source_field );
-
-			// if rule fieldId is input specific, get the specified input's value
-			if( is_array( $field_value ) && isset( $field_value[ $rule['fieldId'] ] ) ) {
-				$field_value = rgar( $field_value, $rule['fieldId'] );
-			}
-
 			$is_value_match = self::is_value_match( $field_value, $rule['value'], $rule['operator'], $source_field, $rule, $form );
 
 			if ( $is_value_match ) {
@@ -2474,12 +2669,32 @@ class GFFormsModel {
 	public static function purge_expired_incomplete_submissions( $expiration_days = 30 ) {
 		global $wpdb;
 
+		/**
+		 * Overrides the number of days until incomplete submissions are purged.
+		 *
+		 * @since 1.9
+		 *
+		 * @param int $expiration_days The number of days until expiration. Defaults to 30.
+		 */
 		$expiration_days = apply_filters( 'gform_incomplete_submissions_expiration_days', $expiration_days );
-
 		$expiration_date = gmdate( 'Y-m-d H:i:s', time() - ( $expiration_days * 24 * 60 * 60 ) );
 
-		$table  = self::get_incomplete_submissions_table_name();
-		$result = $wpdb->query( "DELETE FROM $table WHERE date_created < '$expiration_date'" );
+		$query = array(
+			'delete' => 'DELETE',
+			'from'   => sprintf( 'FROM %s', self::get_incomplete_submissions_table_name() ),
+			'where'  => $wpdb->prepare( 'WHERE date_created < %s', $expiration_date ),
+		);
+
+		/**
+		 * Allows the query used to purge expired incomplete (save and continue) submissions to be overridden.
+		 *
+		 * @since 2.1.1.20
+		 *
+		 * @param array $query The delete, from, and where arguments to be used when the query is performed.
+		 */
+		$query = apply_filters( 'gform_purge_expired_incomplete_submissions_query', $query );
+
+		$result = $wpdb->query( implode( "\n", $query ) );
 
 		return $result;
 	}
@@ -2671,8 +2886,8 @@ class GFFormsModel {
 	}
 
 	public static function get_parameter_value( $name, $field_values, $field ) {
-		$value = stripslashes( rgget( $name ) );
-		if ( empty( $value ) ) {
+		$value = stripslashes_deep( rgget( $name ) );
+		if ( rgblank( $value ) ) {
 			$value = rgget( $name, $field_values );
 		}
 
@@ -3180,10 +3395,12 @@ class GFFormsModel {
 
 		// inserting post
 		GFCommon::log_debug( 'GFFormsModel::create_post(): Inserting post via wp_insert_post().' );
-		$post_id = wp_insert_post( $post_data );
-		GFCommon::log_debug( "GFFormsModel::create_post(): Result from wp_insert_post(): {$post_id}." );
+		$post_id = wp_insert_post( $post_data, true );
+		GFCommon::log_debug( 'GFFormsModel::create_post(): Result from wp_insert_post(): ' . print_r( $post_id, 1 ) );
 
 		if ( is_wp_error( $post_id ) ) {
+			GFCommon::log_debug( __METHOD__ . '(): $post_data => ' . print_r( $post_data, 1 ) );
+
 			return false;
 		}
 
@@ -3247,8 +3464,8 @@ class GFFormsModel {
 				$custom_field = self::get_custom_field( $form, $meta_name, $meta_index );
 
 				//replacing template variables if template is enabled
-				if ( $custom_field && rgget( 'customFieldTemplateEnabled', $custom_field ) ) {
-					$value = self::process_post_template( $custom_field['customFieldTemplate'], 'post_custom_field', $post_images, $post_data, $form, $lead );
+				if ( $custom_field && $custom_field->customFieldTemplateEnabled ) {
+					$value = self::process_post_template( $custom_field->customFieldTemplate, 'post_custom_field', $post_images, $post_data, $form, $lead );
 				}
 				switch ( RGFormsModel::get_input_type( $custom_field ) ) {
 					case 'list' :
@@ -3576,9 +3793,9 @@ class GFFormsModel {
 		$multiple_files = $field->multipleFiles;
 		$uploaded_files = GFFormsModel::$uploaded_files;
 		$form_id        = $form['id'];
-		if ( RG_CURRENT_VIEW == 'entry' && $type == 'fileupload' && ( ( ! $multiple_files && empty( $_FILES[ $input_name ]['name'] ) ) || ( $multiple_files && ! isset( $uploaded_files[ $form_id ][ $input_name ] ) ) ) ) {
+		if ( rgget( 'view' ) == 'entry' && $type == 'fileupload' && ( ( ! $multiple_files && empty( $_FILES[ $input_name ]['name'] ) ) || ( $multiple_files && ! isset( $uploaded_files[ $form_id ][ $input_name ] ) ) ) ) {
 			return;
-		} else if ( RG_CURRENT_VIEW == 'entry' && in_array( $field->type, array( 'post_category', 'post_title', 'post_content', 'post_excerpt', 'post_tags', 'post_custom_field', 'post_image' ) ) ) {
+		} else if ( rgget( 'view' ) == 'entry' && in_array( $field->type, array( 'post_category', 'post_title', 'post_content', 'post_excerpt', 'post_tags', 'post_custom_field', 'post_image' ) ) ) {
 			return;
 		}
 
@@ -3586,7 +3803,7 @@ class GFFormsModel {
 		$is_entry_detail = GFCommon::is_entry_detail();
 		$is_admin = $is_form_editor || $is_entry_detail;
 
-		if ( empty( $value ) && $field->adminOnly && ! $is_admin ) {
+		if ( empty( $value ) && $field->is_administrative() && ! $is_admin ) {
 			$value = self::get_default_value( $field, $input_id );
 		}
 
@@ -3648,8 +3865,20 @@ class GFFormsModel {
 		$form_id                = $form['id'];
 		$lead_detail_table      = self::get_lead_details_table_name();
 
-		if ( ! rgblank( $value ) ) {
+		// Add emoji support.
+		if ( version_compare( get_bloginfo( 'version' ), 4.2, '>=' ) ) {
 
+			// Get charset for lead detail value column .
+			$charset = $wpdb->get_col_charset( $lead_detail_table, 'value' );
+
+			// If lead detail value column is UTF-8, encode emoji.
+			if ( 'utf8' === $charset ) {
+				$value = wp_encode_emoji( $value );
+			}
+
+		}
+
+		if ( ! rgblank( $value ) ) {
 
 			if ( $lead_detail_id > 0 ) {
 
@@ -3665,6 +3894,7 @@ class GFFormsModel {
 				}
 
 			}
+
 		} else {
 			//Deleting details for this field
 			$sql    = $wpdb->prepare( "DELETE FROM $lead_detail_table WHERE lead_id=%d AND field_number BETWEEN %s AND %s ", $lead_id, doubleval( $input_id ) - 0.0001, doubleval( $input_id ) + 0.0001 );
@@ -3892,7 +4122,7 @@ class GFFormsModel {
 
 		$lead_detail_table_name = self::get_lead_details_table_name();
 		$lead_table_name        = self::get_lead_table_name();
-
+		$sql_comparison         = 'ld.value = %s';
 
 		switch ( GFFormsModel::get_input_type( $field ) ) {
 			case 'time':
@@ -3920,7 +4150,7 @@ class GFFormsModel {
 
 		$inner_sql_template .= "WHERE l.form_id=%d AND ld.form_id=%d
                                 AND ld.field_number between %s AND %s
-                                AND status='active' AND ld.value = %s";
+                                AND status='active' AND {$sql_comparison}";
 
 		$sql = "SELECT count(distinct input) as match_count FROM ( ";
 
@@ -4599,7 +4829,7 @@ class GFFormsModel {
 			$field_id = intval( $field_id );
 		} //removing floating part of field (i.e 1.3 -> 1) to return field by input id
 
-		if ( ! is_array( $form['fields'] ) ) {
+		if ( ! isset( $form['fields'] ) || ! isset( $form['id'] ) || ! is_array( $form['fields'] ) ) {
 			return null;
 		}
 
@@ -4786,6 +5016,7 @@ class GFFormsModel {
 		return $leads;
 	}
 
+
 	public static function search_lead_ids( $form_id, $search_criteria = array() ) {
 		global $wpdb;
 
@@ -4902,7 +5133,7 @@ class GFFormsModel {
 		if ( false === empty( $entry_meta ) && array_key_exists( $sort_field, $entry_meta ) ) {
 			$entry_meta_sql_join      = $wpdb->prepare(
 				"
-                INNER JOIN
+                LEFT JOIN
                 (
                 SELECT
                      lead_id, meta_value as $sort_field
@@ -5059,11 +5290,12 @@ class GFFormsModel {
 			if ( 'entry_id' === $key ) {
 				$key = 'id';
 			}
+
 			if ( in_array( $key, $info_column_keys ) ) {
 				continue;
 			}
 
-			$val      = rgar( $search, 'value' );
+			$val = rgar( $search, 'value' );
 
 			$operator = self::is_valid_operator( rgar( $search, 'operator' ) ) ? strtolower( $search['operator'] ) : '=';
 
@@ -5115,7 +5347,7 @@ class GFFormsModel {
 						$search_term = ''; // Set to blank, still gets passed to wpdb::prepare below but isn't used
 					}
 
-					$upper_field_number_limit = (string) (int) $key === $key ? (float) $key + 0.9999 : (float) $key + 0.0001;
+					$upper_field_number_limit = (string) (int) $key === (string) $key ? (float) $key + 0.9999 : (float) $key + 0.0001;
 					/* doesn't support "<>" for checkboxes */
 					$field_query = $wpdb->prepare(
 						"
@@ -5409,17 +5641,38 @@ class GFFormsModel {
 		return $wpdb->get_var( $sql );
 	}
 
-	public static function dbDelta( $sql ) {
+	public static function get_entry_meta_counts() {
 		global $wpdb;
 
-		require_once( ABSPATH . '/wp-admin/includes/upgrade.php' );
+		$detail_table_name = self::get_lead_details_table_name();
+		$meta_table_name = self::get_lead_meta_table_name();
+		$notes_table_name = self::get_lead_notes_table_name();
 
-		//Fixes issue with dbDelta lower-casing table names, which cause problems on case sensitive DB servers.
-		add_filter( 'dbdelta_create_queries', array( 'GFForms', 'dbdelta_fix_case' ) );
+		$results = $wpdb->get_results(
+			"
+            SELECT
+            (SELECT count(0) FROM $detail_table_name) as details,
+            (SELECT count(0) FROM $meta_table_name) as meta,
+            (SELECT count(0) FROM $notes_table_name) as notes
+            "
+		);
 
-		dbDelta( $sql );
+		return array(
+			'details' => intval( $results[0]->details ),
+			'meta'    => intval( $results[0]->meta ),
+			'notes'   => intval( $results[0]->notes ),
+		);
 
-		remove_filter( 'dbdelta_create_queries', array( 'GFForms', 'dbdelta_fix_case' ) );
+	}
+
+	/**
+	 * @deprecated Use gf_upgrade()->dbDelta() instead
+	 */
+	public static function dbDelta( $sql ) {
+		_deprecated_function( 'This function has been deprecated. Use gf_upgrade()->dbDelta() instead', '2.2', 'gf_upgrade()->dbDelta()' );
+
+		gf_upgrade()->dbDelta( $sql );
+
 	}
 
 	public static function get_db_charset() {
@@ -5813,8 +6066,91 @@ class GFFormsModel {
 		return $fields;
 	}
 
+	/**
+	 * Checks whether the conditional logic operator passed in is valid.
+	 *
+	 * @since  2.0.7.20 Refactored and added filter gform_is_valid_conditional_logic_operator.
+	 * @access public
+	 *
+	 * @param string $operator Conditional logic operator.
+	 *
+	 * @return bool true if a valid operator, false if not.
+	 */
 	public static function is_valid_operator( $operator ) {
-		return in_array( strtolower( $operator ) , array( 'is', 'isnot', '<>', 'not in', 'in', '>', '<', 'contains', 'starts_with', 'ends_with', 'like', '>=', '<=' ) );
+		$operators = array( 'is', 'isnot', '<>', 'not in', 'in', '>', '<', 'contains', 'starts_with', 'ends_with', 'like', '>=', '<=' );
+		$is_valid = in_array( strtolower( $operator ), $operators );
+		/**
+		 * Filter which checks whether the operator is valid.
+		 *
+		 * Allows custom operators to be validated.
+		 *
+		 * @since 2.0.7.20
+		 *
+		 * @param bool   $is_valid Whether the operator is valid or not.
+		 * @param string $operator The conditional logic operator.
+		 */
+		return apply_filters( 'gform_is_valid_conditional_logic_operator', $is_valid, $operator );
+	}
+
+	/**
+	 * Update the recent forms list for the current user when a form is edited or trashed.
+	 *
+	 * @since 2.0.7.14
+	 *
+	 * @param int $form_id The ID of the current form.
+	 * @param bool $trashed Indicates if the form was trashed. Default is false, form was opened for editing.
+	 */
+	public static function update_recent_forms( $form_id, $trashed = false ) {
+		if ( ! get_option( 'gform_enable_toolbar_menu' ) ) {
+			return;
+		}
+
+		$current_user_id = get_current_user_id();
+		$recent_form_ids = self::get_recent_forms( $current_user_id );
+
+		$i = array_search( $form_id, $recent_form_ids );
+
+		if ( $i !== false ) {
+			unset( $recent_form_ids[ $i ] );
+			$recent_form_ids = array_values( $recent_form_ids );
+		}
+
+		if ( ! $trashed ) {
+			// Add the current form to the top of the list.
+			array_unshift( $recent_form_ids, $form_id );
+
+			$recent_form_ids = array_slice( $recent_form_ids, 0, 10 );
+		}
+
+		update_user_meta( $current_user_id, 'gform_recent_forms', $recent_form_ids );
+	}
+
+	/**
+	 * Get the recent forms list for the current user.
+	 *
+	 * @since 2.2.1.14
+	 *
+	 * @param int $current_user_id The ID of the currently logged in user.
+	 *
+	 * @return array
+	 */
+	public static function get_recent_forms( $current_user_id = 0 ) {
+		if ( ! $current_user_id ) {
+			$current_user_id = get_current_user_id();
+		}
+
+		$recent_form_ids = get_user_meta( $current_user_id, 'gform_recent_forms', true );
+
+		if ( empty( $recent_form_ids ) ) {
+			$all_form_ids    = self::get_form_ids();
+			$all_form_ids    = array_reverse( $all_form_ids );
+			$recent_form_ids = array_slice( $all_form_ids, 0, 10 );
+			if ( $recent_form_ids ) {
+				update_user_meta( $current_user_id, 'gform_recent_forms', $recent_form_ids );
+			}
+		}
+
+		return $recent_form_ids;
 	}
 }
 
@@ -5854,7 +6190,7 @@ function gform_get_meta_values_for_entries( $entry_ids, $meta_keys ) {
 	$meta_key_select_array = array();
 
 	foreach ( $meta_keys as $meta_key ) {
-		$meta_key_select_array[] = "max(case when meta_key = '$meta_key' then meta_value end) as $meta_key";
+		$meta_key_select_array[] = "max(case when meta_key = '$meta_key' then meta_value end) as `$meta_key`";
 	}
 
 	$entry_ids_str = join( ',', $entry_ids );
@@ -5893,6 +6229,11 @@ function gform_get_meta_values_for_entries( $entry_ids, $meta_keys ) {
  */
 function gform_update_meta( $entry_id, $meta_key, $meta_value, $form_id = null ) {
 	global $wpdb, $_gform_lead_meta;
+
+	if( intval( $entry_id ) <= 0 ) {
+		return;
+	}
+
 	$table_name = RGFormsModel::get_lead_meta_table_name();
 	if ( false === $meta_value ) {
 		$meta_value = '0';
@@ -5932,6 +6273,11 @@ function gform_update_meta( $entry_id, $meta_key, $meta_value, $form_id = null )
  */
 function gform_add_meta( $entry_id, $meta_key, $meta_value, $form_id = null ) {
 	global $wpdb, $_gform_lead_meta;
+
+	if( intval( $entry_id ) <= 0 ) {
+		return;
+	}
+
 	$table_name = RGFormsModel::get_lead_meta_table_name();
 	if ( false === $meta_value ) {
 		$meta_value = '0';
@@ -5959,4 +6305,3 @@ function gform_delete_meta( $entry_id, $meta_key = '' ) {
 	//clears cache.
 	$_gform_lead_meta = array();
 }
-
