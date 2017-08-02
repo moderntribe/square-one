@@ -136,10 +136,7 @@ class acf_form_taxonomy {
 	function add_term( $taxonomy ) {
 		
 		// vars
-		$post_id = "{$taxonomy}_0";
-		$args = array(
-			'taxonomy' => $taxonomy
-		);
+		$post_id = acf_get_term_post_id( $taxonomy, 0 );
 		
 		
 		// update vars
@@ -147,17 +144,22 @@ class acf_form_taxonomy {
 		
 		
 		// get field groups
-		$field_groups = acf_get_field_groups( $args );
+		$field_groups = acf_get_field_groups(array(
+			'taxonomy' => $taxonomy
+		));
 		
 		
 		// render
 		if( !empty($field_groups) ) {
 			
+			// data
 			acf_form_data(array( 
 				'post_id'	=> $post_id, 
 				'nonce'		=> 'taxonomy',
 			));
 			
+			
+			// loop
 			foreach( $field_groups as $field_group ) {
 				
 				$fields = acf_get_fields( $field_group );
@@ -187,10 +189,7 @@ class acf_form_taxonomy {
 	function edit_term( $term, $taxonomy ) {
 		
 		// vars
-		$post_id = "{$taxonomy}_{$term->term_id}";
-		$args = array(
-			'taxonomy' => $taxonomy
-		);
+		$post_id = acf_get_term_post_id( $term->taxonomy, $term->term_id );
 		
 		
 		// update vars
@@ -198,7 +197,9 @@ class acf_form_taxonomy {
 		
 		
 		// get field groups
-		$field_groups = acf_get_field_groups( $args );
+		$field_groups = acf_get_field_groups(array(
+			'taxonomy' => $taxonomy
+		));
 		
 		
 		// render
@@ -386,21 +387,20 @@ class acf_form_taxonomy {
 	
 	function save_term( $term_id, $tt_id, $taxonomy ) {
 		
+		// vars
+		$post_id = acf_get_term_post_id( $taxonomy, $term_id );
+		
+		
 		// verify and remove nonce
-		if( ! acf_verify_nonce('taxonomy') ) {
+		if( !acf_verify_nonce('taxonomy') ) return $term_id;
+		
+	    
+	    // valied and show errors
+		acf_validate_save_post( true );
 			
-			return $term_id;
-		
-		}
-		
-		
-	    
-	    // save data
-	    if( acf_validate_save_post(true) ) {
-	    
-			acf_save_post("{$taxonomy}_{$term_id}");
-		
-		}
+			
+	    // save
+		acf_save_post( $post_id );
 			
 	}
 	
@@ -420,11 +420,30 @@ class acf_form_taxonomy {
 	
 	function delete_term( $term, $tt_id, $taxonomy, $deleted_term ) {
 		
+		// bail early if termmeta table exists
+		if( acf_isset_termmeta() ) return $term;
+		
+		
+		// globals
 		global $wpdb;
 		
-		$values = $wpdb->query($wpdb->prepare(
-			"DELETE FROM $wpdb->options WHERE option_name LIKE %s",
-			'%' . $taxonomy . '_' . $term . '%'
+		
+		// vars
+		$search = $taxonomy . '_' . $term . '_%';
+		$_search = '_' . $search;
+		
+		
+		// escape '_'
+		// http://stackoverflow.com/questions/2300285/how-do-i-escape-in-sql-server
+		$search = str_replace('_', '\_', $search);
+		$_search = str_replace('_', '\_', $_search);
+		
+		
+		// delete
+		$result = $wpdb->query($wpdb->prepare(
+			"DELETE FROM $wpdb->options WHERE option_name LIKE %s OR option_name LIKE %s",
+			$search,
+			$_search 
 		));
 		
 	}
@@ -434,5 +453,6 @@ class acf_form_taxonomy {
 new acf_form_taxonomy();
 
 endif;
+
 
 ?>

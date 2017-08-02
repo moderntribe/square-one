@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	{# // TITLE: Handled by WP #}
+
+	{# // MISC Meta #}
+	<meta charset="utf-8">
+	<meta name="author" content="{{ bloginfo( 'name' )|esc_attr }}">
+	<meta http-equiv="cleartype" content="on">
+	<link rel="pingback" href="{{ bloginfo( 'pingback_url' )|esc_url }}">
+
+	<link rel="stylesheet" href="{{ css|esc_url }}" type="text/css" media="all">
+	<link rel="shortcut icon" href="{{ favicon|esc_url }}">
+
+	{{ do_action( 'tribe/unsupported_browser/head') }}
+
+</head>
+<body class="page-legacy" itemscope itemtype="https://schema.org/WebPage">
+
+<div class="l-site-wrapper">
+
+	<div class="header">
+		<div class="l-wrapper">
+			<h1>
+				<img src="{{ legacy_image_url|esc_url }}" alt="{{ bloginfo( 'name' )|esc_attr }}" />
+				<span class="visual-hide">{{ bloginfo( 'name' ) }}</span>
+			</h1>
+		</div>
+	</div>
+
+	<div class="main" itemprop="mainContentOfPage">
+		<div class="l-wrapper">
+
+			<div itemprop="text">
+
+				{{ post.content }}
+
+				<ul class="browsers">
+					<li><a href="https://www.mozilla.org/en-US/firefox/new/" class="firefox" rel="external" target="_blank">{{ lang['Firefox'] }}</a></li>
+					<li><a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie" class="ie" rel="external" target="_blank">{{ lang['IE 9+'] }}</a></li>
+					<li><a href="http://www.google.com/chrome/" class="chrome" rel="external" target="_blank">{{ lang['Chrome'] }}</a></li>
+					<li><a href="https://support.apple.com/downloads/#safari" class="safari" rel="external" target="_blank">{{ lang['Safari 6+'] }}</a></li>
+				</ul>
+
+			</div>
+
+		</div>
+	</div>
+
+</div>
+
+</body>
+</html>

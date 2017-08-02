@@ -6,10 +6,9 @@ namespace Tribe\Project\Panels;
 
 use ModularContent\Fields;
 use ModularContent\PanelType;
-use Pimple\Container;
 use Tribe\Project\Panels\Types\Panel_Type_Config;
-use Tribe\Project\Post_Types\Event;
-use Tribe\Project\Post_Types\Page;
+use Tribe\Project\Post_Types\Event\Event;
+use Tribe\Project\Post_Types\Page\Page;
 
 class Initializer {
 	private $panel_types_to_initialize = [ ];
@@ -28,6 +27,10 @@ class Initializer {
 		$this->panel_types_to_initialize[] = $panel_type;
 	}
 
+	/**
+	 * @return void
+	 * @action plugins_loaded
+	 */
 	public function hook() {
 		add_action( 'panels_init', [ $this, 'initialize_panels' ], 10, 0 );
 
@@ -208,7 +211,7 @@ class Initializer {
 					$query_args[ 'start_date' ] = $this->normalize_date_query_to_string( $dq[ 'after' ] );
 				}
 				if ( !empty( $dq[ 'before' ] ) ) {
-					$query_args[ 'end_date' ] = $this->normalize_date_query_to_string( $dq[ 'before' ] );;
+					$query_args[ 'end_date' ] = $this->normalize_date_query_to_string( $dq[ 'before' ] );
 				}
 			}
 		}
@@ -267,19 +270,15 @@ class Initializer {
 		];
 	}
 
-	public function inactive_icon_url( $filename ) {
-		return plugins_url( 'assets/panels/icons/standard/' . $filename, $this->plugin_file );
-	}
-
-	public function active_icon_url( $filename ) {
-		return plugins_url( 'assets/panels/icons/inverted/' . $filename, $this->plugin_file );
+	public function thumbnail_url( $filename ) {
+		return plugins_url( 'assets/admin/panels/thumbnails/' . $filename, $this->plugin_file );
 	}
 
 	public function layout_icon_url( $filename ) {
-		return plugins_url( 'assets/panels/icons/standard/' . $filename, $this->plugin_file );
+		return plugins_url( 'assets/admin/panels/icons/standard/' . $filename, $this->plugin_file );
 	}
 
 	public function swatch_icon_url( $filename ) {
-		return plugins_url( 'assets/panels/icons/swatches/' . $filename, $this->plugin_file );
+		return plugins_url( 'assets/admin/panels/icons/swatches/' . $filename, $this->plugin_file );
 	}
 }

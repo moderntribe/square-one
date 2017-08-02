@@ -3,7 +3,7 @@
 Plugin Name: Advanced Custom Fields PRO
 Plugin URI: https://www.advancedcustomfields.com/
 Description: Customise WordPress with powerful, professional and intuitive fields
-Version: 5.4.6
+Version: 5.5.14
 Author: Elliot Condon
 Author URI: http://www.elliotcondon.com/
 Copyright: Elliot Condon
@@ -16,6 +16,9 @@ if( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 if( ! class_exists('acf') ) :
 
 class acf {
+	
+	// vars
+	var $version = '5.5.14';
 	
 	
 	/*
@@ -58,37 +61,49 @@ class acf {
 			
 			// basic
 			'name'				=> __('Advanced Custom Fields', 'acf'),
-			'version'			=> '5.4.6',
+			'version'			=> $this->version,
 						
 			// urls
+			'file'				=> __FILE__,
 			'basename'			=> plugin_basename( __FILE__ ),
 			'path'				=> plugin_dir_path( __FILE__ ),
 			'dir'				=> plugin_dir_url( __FILE__ ),
 			
 			// options
-			'show_admin'		=> true,
-			'show_updates'		=> true,
-			'stripslashes'		=> false,
-			'local'				=> true,
-			'json'				=> true,
-			'save_json'			=> '',
-			'load_json'			=> array(),
-			'default_language'	=> '',
-			'current_language'	=> '',
-			'capability'		=> 'manage_options',
-			'uploader'			=> 'wp',
-			'autoload'			=> false,
-			'l10n'				=> true,
-			'l10n_textdomain'	=> '',
-			'google_api_key'	=> '',
-			'google_api_client'	=> '',
-			'enqueue_google_maps'	=> true,
-			'enqueue_select2'		=> true,
+			'show_admin'				=> true,
+			'show_updates'				=> true,
+			'stripslashes'				=> false,
+			'local'						=> true,
+			'json'						=> true,
+			'save_json'					=> '',
+			'load_json'					=> array(),
+			'default_language'			=> '',
+			'current_language'			=> '',
+			'capability'				=> 'manage_options',
+			'uploader'					=> 'wp',
+			'autoload'					=> false,
+			'l10n'						=> true,
+			'l10n_textdomain'			=> '',
+			'google_api_key'			=> '',
+			'google_api_client'			=> '',
+			'enqueue_google_maps'		=> true,
+			'enqueue_select2'			=> true,
+			'enqueue_datepicker'		=> true,
+			'enqueue_datetimepicker'	=> true,
+			'select2_version'			=> 3,
+			'row_index_offset'			=> 1,
+			'remove_wp_meta_box'		=> false // todo: set to true in 5.6.0
 		);
 		
 		
+		// constants
+		$this->define( 'ACF', 			true );
+		$this->define( 'ACF_VERSION', 	$this->settings['version'] );
+		$this->define( 'ACF_PATH', 		$this->settings['path'] );
+		
+		
 		// include helpers
-		include_once('api/api-helpers.php');
+		include_once( ACF_PATH . 'api/api-helpers.php');
 		
 		
 		// api
@@ -101,8 +116,11 @@ class acf {
 		// core
 		acf_include('core/ajax.php');
 		acf_include('core/cache.php');
-		acf_include('core/fields.php');
+		acf_include('core/compatibility.php');
+		acf_include('core/deprecated.php');
 		acf_include('core/field.php');
+		acf_include('core/fields.php');
+		acf_include('core/form.php');
 		acf_include('core/input.php');
 		acf_include('core/validation.php');
 		acf_include('core/json.php');
@@ -111,7 +129,6 @@ class acf {
 		acf_include('core/loop.php');
 		acf_include('core/media.php');
 		acf_include('core/revisions.php');
-		acf_include('core/compatibility.php');
 		acf_include('core/third_party.php');
 		acf_include('core/updates.php');
 		
@@ -131,11 +148,17 @@ class acf {
 			acf_include('admin/admin.php');
 			acf_include('admin/field-group.php');
 			acf_include('admin/field-groups.php');
-			acf_include('admin/update.php');
-			acf_include('admin/update-network.php');
+			acf_include('admin/install.php');
 			acf_include('admin/settings-tools.php');
-			//acf_include('admin/settings-addons.php');
 			acf_include('admin/settings-info.php');
+			
+			
+			// network
+			if( is_network_admin() ) {
+				
+				acf_include('admin/install-network.php');
+				
+			}
 		}
 		
 		
@@ -172,16 +195,13 @@ class acf {
 	
 	function init() {
 		
-		// bail early if a plugin called get_field early
+		// bail early if too early
+		// ensures all plugins have a chance to add fields, etc
 		if( !did_action('plugins_loaded') ) return;
 		
 		
 		// bail early if already init
-		if( acf_get_setting('init') ) return;
-		
-		
-		// only run once
-		acf_update_setting('init', true);
+		if( acf_has_done('init') ) return;
 		
 		
 		// vars
@@ -193,16 +213,12 @@ class acf {
 		acf_update_setting('dir', plugin_dir_url( __FILE__ ));
 		
 		
-		// set text domain
-		load_textdomain( 'acf', acf_get_path( 'lang/acf-' . get_locale() . '.mo' ) );
+		// textdomain
+		$this->load_plugin_textdomain();
 		
 		
 		// include wpml support
-		if( defined('ICL_SITEPRESS_VERSION') ) {
-		
-			acf_include('core/wpml.php');
-			
-		}
+		if( defined('ICL_SITEPRESS_VERSION') ) acf_include('core/wpml.php');
 		
 		
 		// field types
@@ -245,6 +261,37 @@ class acf {
 		// action for 3rd party
 		do_action('acf/init');
 			
+	}
+	
+	
+	/*
+	*  load_plugin_textdomain
+	*
+	*  This function will load the textdomain file
+	*
+	*  @type	function
+	*  @date	3/5/17
+	*  @since	5.5.13
+	*
+	*  @param	n/a
+	*  @return	n/a
+	*/
+	
+	function load_plugin_textdomain() {
+		
+		// vars
+		$domain = 'acf';
+		$locale = apply_filters( 'plugin_locale', acf_get_locale(), $domain );
+		$mofile = $domain . '-' . $locale . '.mo';
+		
+		
+		// load from the languages directory first
+		load_textdomain( $domain, WP_LANG_DIR . '/plugins/' . $mofile );
+		
+		
+		// load from plugin lang folder
+		load_textdomain( $domain, acf_get_path( 'lang/' . $mofile ) );
+		
 	}
 	
 	
@@ -350,12 +397,12 @@ class acf {
 		
 		// acf-disabled
 		register_post_status('acf-disabled', array(
-			'label'                     => __( 'Disabled', 'acf' ),
+			'label'                     => __( 'Inactive', 'acf' ),
 			'public'                    => true,
 			'exclude_from_search'       => false,
 			'show_in_admin_all_list'    => true,
 			'show_in_admin_status_list' => true,
-			'label_count'               => _n_noop( 'Disabled <span class="count">(%s)</span>', 'Disabled <span class="count">(%s)</span>', 'acf' ),
+			'label_count'               => _n_noop( 'Inactive <span class="count">(%s)</span>', 'Inactive <span class="count">(%s)</span>', 'acf' ),
 		));
 		
 	}
@@ -441,6 +488,27 @@ class acf {
 	    // return
 	    return $where;
 	    
+	}
+	
+	
+	/*
+	*  define
+	*
+	*  This function will safely define a constant
+	*
+	*  @type	function
+	*  @date	3/5/17
+	*  @since	5.5.13
+	*
+	*  @param	$name (string)
+	*  @param	$value (mixed)
+	*  @return	n/a
+	*/
+	
+	function define( $name, $value = true ) {
+		
+		if( !defined($name) ) define( $name, $value );
+		
 	}
 	
 	

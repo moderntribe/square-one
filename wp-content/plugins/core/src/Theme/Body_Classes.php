@@ -4,10 +4,11 @@ namespace Tribe\Project\Theme;
 
 class Body_Classes {
 
-	public function hook() {
-		add_filter( 'body_class', [ $this, 'body_classes' ], 10, 1 );
-	}
-
+	/**
+	 * @param $classes
+	 * @return array
+	 * @filter body_class
+	 */
 	public function body_classes( $classes ) {
 
 		if ( ! $this->is_singular() ) {

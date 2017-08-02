@@ -8,7 +8,6 @@
 
 module.exports = {
 	dist: [
-		'<%= pkg._corethemepath %>/js/src/**/*.js',
-		'<%= pkg._corethemepath %>/js/vendor/tribe-libs/**/*.js',
+		'<%= pkg._core_theme_assets_path %>/js/src/**/*.js',
 	],
 };

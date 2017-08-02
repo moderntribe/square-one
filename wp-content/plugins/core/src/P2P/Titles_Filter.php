@@ -21,6 +21,11 @@ class Titles_Filter {
 		$this->connection_types = $connection_types;
 	}
 
+	/**
+	 * @return void
+	 *
+	 * @action init
+	 */
 	public function hook() {
 		if ( $this->connection_types ) {
 			add_filter( 'p2p_connected_title', [ $this, 'filter_connection_name' ], 10, 3 );

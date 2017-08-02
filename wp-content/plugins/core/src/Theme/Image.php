@@ -30,14 +30,18 @@ class Image {
 			'html'              => '',                // append an html string in the wrapper
 			'img_class'         => '',                // pass classes for image tag. if lazyload is true class "lazyload" is auto added
 			'img_attr'          => '',                // additional image attributes
+			'img_alt_text'      => '',                // pass specific image alternate text. if not included, will default to image title
 			'link'              => '',                // pass a link to wrap the image
+			'link_class'        => '',                // pass link classes
 			'link_target'       => '_self',           // pass a link target
+			'link_title'        => '',                // pass a link title
 			'parent_fit'        => 'width',           // if lazyloading this combines with object fit css and the object fit polyfill
 			'shim'              => '',                // supply a manually specified shim for lazyloading. Will override auto_shim whether true/false.
 			'src'               => true,              // set to false to disable the src attribute. this is a fallback for non srcset browsers
 			'src_size'          => 'large',           // this is the main src registered image size
 			'srcset_sizes'      => [ ],                // this is registered sizes array for srcset.
 			'srcset_sizes_attr' => '(min-width: 1260px) 1260px, 100vw', // this is the srcset sizes attribute string used if auto is false.
+			'use_h&w_attr'      => false,             // this will set the width and height attributes on the img to be half the origal for retina/hdpi. Only for not lazyloading and when src exists.
 			'use_lazyload'      => true,              // lazyload this game?
 			'use_srcset'        => true,              // srcset this game?
 			'use_wrapper'       => true,              // use the wrapper if image
@@ -72,12 +76,12 @@ class Image {
 		if ( $this->options[ 'use_wrapper' ] || $this->options[ 'as_bg' ] ) {
 			$wrapper_class = $this->options[ 'use_lazyload' ] && $this->options[ 'as_bg' ] && !empty( $this->image_id ) ? $this->options[ 'wrapper_class' ] . ' lazyload' : $this->options[ 'wrapper_class' ];
 			$html .= '<' . $tag;
-			$html .= $this->options[ 'as_bg' ] ? $img_attributes : ' ' . $this->options[ 'wrapper_attr' ];
+			$html .= $this->options[ 'as_bg' ] ? $img_attributes . ' ' . $this->options[ 'wrapper_attr' ] : ' ' . $this->options[ 'wrapper_attr' ];
 			$html .= sprintf( ' class="%s">', $wrapper_class );
 		}
 
 		// maybe link open
-		$html .= !empty( $this->options[ 'link' ] ) ? sprintf( '<a href="%s" target="%s">', $this->options[ 'link' ], $this->options[ 'link_target' ] ) : '';
+		$html .= !empty( $this->options[ 'link' ] ) ? sprintf( '<a href="%s" target="%s"%s%s>', $this->options[ 'link' ], $this->options[ 'link_target' ], ! empty( $this->options[ 'link_title' ] ) ? ' title="'. $this->options[ 'link_title' ] .'"' : '', ! empty( $this->options[ 'link_class' ] ) ? ' class="'. $this->options[ 'link_class' ] .'"' : '' ) : '';
 
 		// maybe img
 		$html .= !$this->options[ 'as_bg' ] ? sprintf( '<img class="%s"%s />', $img_class, $img_attributes ) : '';
@@ -108,11 +112,16 @@ class Image {
 		// we'll almost always set src, except if for some reason they wanted to only use srcset
 		$attrs = [ ];
 		if ( $this->options[ 'src' ] ) {
-			$src = wp_get_attachment_image_src( $this->image_id, $this->options[ 'src_size' ] );
-			$src = $src[ 0 ];
+			$src        = wp_get_attachment_image_src( $this->image_id, $this->options['src_size'] );
+			$src_width  = $src[1];
+			$src_height = $src[2];
+			$src        = $src[0];
 		}
 		$attrs[] = !empty( $this->options[ 'img_attr' ] ) ? trim( $this->options[ 'img_attr' ] ) : '';
-		$attrs[] = $this->options[ 'as_bg' ] ? '' : sprintf( 'alt="%s"', get_the_title( $this->image_id ) );
+
+		// the alt text
+		$alt_text = ! empty( $this->options[ 'img_alt_text' ] ) ? $this->options[ 'img_alt_text' ] : get_the_title( $this->image_id );
+		$attrs[] = $this->options[ 'as_bg' ] ? sprintf( 'role="img" aria-label="%s"', $alt_text ) : sprintf( 'alt="%s"', $alt_text );
 
 		if ( $this->options[ 'use_lazyload' ] ) {
 
@@ -143,7 +152,6 @@ class Image {
 				$srcset_urls = $this->get_srcset_attribute();
 				$attrs[] = sprintf( '%s="%s"', $attribute_name, $srcset_urls );
 			}
-
 			// setup the shim
 			if ( $this->options[ 'as_bg' ] ) {
 				$attrs[] = sprintf( 'style="background-image:url(\'%s\');"', $shim_src );
@@ -161,6 +169,10 @@ class Image {
 					$srcset_urls = $this->get_srcset_attribute();
 					$attrs[] = sprintf( 'sizes="%s"', $this->options[ 'srcset_sizes_attr' ] );
 					$attrs[] = sprintf( 'srcset="%s"', $srcset_urls );
+				}
+				if ( $this->options[ 'use_h&w_attr' ] && $this->options[ 'src' ] ) {
+					$attrs[] = sprintf( 'width="%s"', $src_width / 2 );
+					$attrs[] = sprintf( 'height="%s"', $src_height / 2 );
 				}
 			}
 		}
@@ -197,17 +209,16 @@ class Image {
 	 */
 	private function get_srcset_attribute() {
 
-		$attribute = '';
-		$i = 1;
-		$length = count( $this->options[ 'srcset_sizes' ] );
+		$attribute = [];
 		foreach ( $this->options[ 'srcset_sizes' ] as $size ) {
 			$src = wp_get_attachment_image_src( $this->image_id, $size );
-			$divider = $i === $length ? '' : ',';
-			$attribute .= sprintf( '%s %dw %dh %s', $src[ 0 ], $src[ 1 ], $src[ 2 ], $divider ) . "\n";
-			$i++;
+			// Don't add nonexistent intermediate sizes to the src_set. It ends up being the full-size URL.
+			if( 'full' !== $size && true === $src[3] ) {
+				$attribute[] = sprintf( '%s %dw %dh', $src[0], $src[1], $src[2] );
+			}
 		}
 
-		return $attribute;
+		return implode( ", \n", $attribute );
 	}
 
 }

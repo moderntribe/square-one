@@ -1,0 +1,33 @@
+.panel-imagetext__image-container {
+	width: 50%;
+
+	.panel-imagetext--layout-image-right & {
+		float: right;
+	}
+
+	.panel-imagetext--layout-image-left & {
+		float: left;
+	}
+}
+
+.panel-imagetext__image-wrap {
+	aspect-ratio: '16:9';
+	background: var(--color-grey);
+}
+
+.panel-imagetext__image {
+	background-size: cover;
+	background-position: 50% 50%;
+}
+
+.panel-imagetext__text {
+	width: 50%;
+
+	.panel-imagetext--layout-image-right & {
+		float: left;
+	}
+
+	.panel-imagetext--layout-image-left & {
+		float: right;
+	}
+}

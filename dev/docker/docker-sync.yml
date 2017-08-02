@@ -1,0 +1,24 @@
+version: "2"
+options:
+  compose-file-path: './docker-compose.yml'
+  compose-dev-file-path: './docker-compose.unison.yml'
+  verbose: false
+syncs:
+  square1-webroot-sync: # TODO: change this per project here and in docker-compose.unison.yml
+    notify_terminal: true
+    src: '../..'
+    dest: '/srv/www/public'
+    sync_strategy: 'unison'
+    sync_excludes:
+     - 'Name .*'
+     - 'Name node_modules'
+     - 'Path dev'
+     - 'Path docs'
+     - 'Path grunt_options'
+     - 'Path wp-content/uploads'
+    sync_excludes_type: 'none'
+    watch_excludes:
+     - '\.*'
+     - 'dev'
+     - 'wp-content/uploads'
+     - 'node_modules'

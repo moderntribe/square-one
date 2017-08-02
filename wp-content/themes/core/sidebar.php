@@ -1,9 +1,4 @@
-<?php if ( is_active_sidebar( 'sidebar-main' ) ) { ?>
-	
-	<section class="sidebar" role="complementary">
-		
-		<?php dynamic_sidebar( 'sidebar-main' ); ?>
+<?php
 
-	</section>
-
-<?php } ?>
+$template = \Tribe\Project\Templates\Sidebar::instance();
+echo $template->render();

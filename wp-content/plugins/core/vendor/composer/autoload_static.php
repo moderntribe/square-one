@@ -7,15 +7,19 @@ namespace Composer\Autoload;
 class ComposerStaticInit999f2dbed4e96b85679bcc2d59b6ea6b
 {
     public static $files = array (
-        '19805834e6801b645614c2575924c07e' => __DIR__ . '/..' . '/johnbillion/extended-cpts/extended-cpts.php',
-        '3e2800b92d656e90c642d6920768459d' => __DIR__ . '/..' . '/johnbillion/extended-taxos/extended-taxos.php',
+        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
     );
 
     public static $prefixLengthsPsr4 = array (
         'T' => 
         array (
+            'Twig\\' => 5,
             'Tribe\\Project\\' => 14,
             'Tribe\\Libs\\' => 11,
+        ),
+        'S' => 
+        array (
+            'Symfony\\Polyfill\\Mbstring\\' => 26,
         ),
         'C' => 
         array (
@@ -24,6 +28,10 @@ class ComposerStaticInit999f2dbed4e96b85679bcc2d59b6ea6b
     );
 
     public static $prefixDirsPsr4 = array (
+        'Twig\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/twig/twig/src',
+        ),
         'Tribe\\Project\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
@@ -32,6 +40,10 @@ class ComposerStaticInit999f2dbed4e96b85679bcc2d59b6ea6b
         array (
             0 => __DIR__ . '/..' . '/moderntribe/tribe-libs/src',
         ),
+        'Symfony\\Polyfill\\Mbstring\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
+        ),
         'Composer\\Installers\\' => 
         array (
             0 => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers',
@@ -39,6 +51,13 @@ class ComposerStaticInit999f2dbed4e96b85679bcc2d59b6ea6b
     );
 
     public static $prefixesPsr0 = array (
+        'T' => 
+        array (
+            'Twig_' => 
+            array (
+                0 => __DIR__ . '/..' . '/twig/twig/lib',
+            ),
+        ),
         'P' => 
         array (
             'Pimple' => 

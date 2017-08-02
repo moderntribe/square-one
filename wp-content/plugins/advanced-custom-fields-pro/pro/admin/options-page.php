@@ -1,6 +1,10 @@
 <?php
 
-class acf_pro_options_page {
+if( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
+if( ! class_exists('acf_admin_options_page') ) :
+
+class acf_admin_options_page {
 	
 	var $page;
 	
@@ -101,8 +105,8 @@ class acf_pro_options_page {
 	*  @date	24/02/2014
 	*  @since	5.0.0
 	*
-	*  @param	$post_id (int)
-	*  @return	$post_id (int)
+	*  @param	
+	*  @return	
 	*/
 	
 	function rule_match( $match, $rule, $options ) {
@@ -155,8 +159,8 @@ class acf_pro_options_page {
 	*  @date	24/02/2014
 	*  @since	5.0.0
 	*
-	*  @param	$post_id (int)
-	*  @return	$post_id (int)
+	*  @param	
+	*  @return	
 	*/
 	
 	function admin_menu() {
@@ -212,28 +216,28 @@ class acf_pro_options_page {
 		
 		// vars
 		$this->page = acf_get_options_page($plugin_page);
-		    	
-		    	
+		
+		
+		// get post_id (allow lang modification)
+		$this->page['post_id'] = acf_get_valid_post_id($this->page['post_id']);
+		
+		
 		// verify and remove nonce
 		if( acf_verify_nonce('options') ) {
 		
 			// save data
 		    if( acf_validate_save_post(true) ) {
 		    	
-		    	// get post_id (allow lang modification)
-		    	$post_id = acf_get_valid_post_id($this->page['post_id']);
-		    	
-		    	
 		    	// set autoload
 		    	acf_update_setting('autoload', $this->page['autoload']);
 		    	
 		    	
 		    	// save
-				acf_save_post( $post_id );
+				acf_save_post( $this->page['post_id'] );
 				
 				
 				// redirect
-				wp_redirect( admin_url("admin.php?page={$plugin_page}&message=1") );
+				wp_redirect( add_query_arg(array('message' => '1')) );
 				exit;
 				
 			}
@@ -247,7 +251,7 @@ class acf_pro_options_page {
 		
 		// actions
 		add_action( 'acf/input/admin_enqueue_scripts',		array($this,'admin_enqueue_scripts') );
-		add_action( 'acf/input/admin_head',		array($this,'admin_head') );
+		add_action( 'acf/input/admin_head',					array($this,'admin_head') );
 		
 		
 		// add columns support
@@ -265,8 +269,8 @@ class acf_pro_options_page {
 	*  @date	23/03/2016
 	*  @since	5.3.2
 	*
-	*  @param	$post_id (int)
-	*  @return	$post_id (int)
+	*  @param	
+	*  @return	
 	*/
 	
 	function admin_enqueue_scripts() {
@@ -312,7 +316,7 @@ class acf_pro_options_page {
 		
 		if( empty($field_groups) ) {
 		
-			acf_add_admin_notice(__("No Custom Field Groups found for this options page",'acf') . '. <a href="' . admin_url() . 'post-new.php?post_type=acf-field-group">' . __("Create a Custom Field Group",'acf') . '</a>', 'error');
+			acf_add_admin_notice( sprintf( __('No Custom Field Groups found for this options page. <a href="%s">Create a Custom Field Group</a>', 'acf'), admin_url() . 'post-new.php?post_type=acf-field-group' ), 'error');
 		
 		} else {
 			
@@ -364,8 +368,8 @@ class acf_pro_options_page {
 	*  @date	23/03/2016
 	*  @since	5.3.2
 	*
-	*  @param	$post_id (int)
-	*  @return	$post_id (int)
+	*  @param	n/a
+	*  @return	n/a
 	*/
 	
 	function postbox_submitdiv( $post, $args ) {
@@ -395,8 +399,9 @@ class acf_pro_options_page {
 	*  @date	24/02/2014
 	*  @since	5.0.0
 	*
-	*  @param	$post_id (int)
-	*  @return	$post_id (int)
+	*  @param	$post (object)
+	*  @param	$args (array)
+	*  @return	n/a
 	*/
 	
 	function postbox_acf( $post, $args ) {
@@ -418,11 +423,6 @@ class acf_pro_options_page {
 		);
 		
 		
-		// get post_id (allow lang modification)
-		$post_id = acf_get_valid_post_id($this->page['post_id']);
-		
-		
-		
 		// edit_url
 		if( $field_group['ID'] && acf_current_user_can_admin() ) {
 			
@@ -436,7 +436,7 @@ class acf_pro_options_page {
 		
 		
 		// render
-		acf_render_fields( $post_id, $fields, 'div', $field_group['instruction_placement'] );
+		acf_render_fields( $this->page['post_id'], $fields, 'div', $field_group['instruction_placement'] );
 		
 		
 		
@@ -463,20 +463,17 @@ if( typeof acf !== 'undefined' ) {
 	
 	function html() {
 		
-		// vars
-		$view = array(
-			'page'	=> $this->page
-		);
-		
-		
 		// load view
-		acf_pro_get_view('options-page', $view);
+		acf_get_view(dirname(__FILE__) . '/views/options-page.php', $this->page);
 				
 	}
 	
 	
 }
 
-new acf_pro_options_page();
+// initialize
+new acf_admin_options_page();
+
+endif; // class_exists check
 
 ?>

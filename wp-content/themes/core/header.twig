@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	{# // TITLE: Handled by WP #}
+
+	{# // MISC Meta #}
+	<meta charset="utf-8">
+	<meta name="author" content="{{ bloginfo( 'name' ) }}">
+	<meta http-equiv="cleartype" content="on">
+	<link rel="pingback" href="{{ bloginfo( 'pingback_url' ) }}">
+
+	{# // MOBILE META #}
+	<meta name="HandheldFriendly" content="True">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	{# // PLATFORM META: iOS & Android #}
+	<meta name="apple-mobile-web-app-title" content="{{ page_title|esc_attr }}">
+
+	{# // PLATFORM META: IE #}
+	<meta name="application-name" content="{{ bloginfo( 'name' ) }}">
+
+	{{ do_action( 'wp_head' ) }}
+
+</head>
+<body class="{{ body_class }}">
+
+<div class="l-site-wrapper" data-js="site-wrap">
+
+	{{ include("content/header/default.twig") }}

@@ -9,7 +9,17 @@ if ( ! defined( 'WPSEO_VERSION' ) ) {
 	exit();
 }
 
-$features = array(
+$feature_toggles = array(
+	(object) array(
+		'name'    => __( 'Readability analysis', 'wordpress-seo' ),
+		'setting' => 'content_analysis_active',
+		'label'   => __( 'Removes the readability tab from the metabox and disables all readability-related suggestions.', 'wordpress-seo' ),
+	),
+	(object) array(
+		'name'    => __( 'Keyword analysis', 'wordpress-seo' ),
+		'setting' => 'keyword_analysis_active',
+		'label'   => __( 'Removes the keyword tab from the metabox and disables all keyword-related suggestions.', 'wordpress-seo' ),
+	),
 	(object) array(
 		'name'    => __( 'Advanced settings pages', 'wordpress-seo' ),
 		'setting' => 'enable_setting_pages',
@@ -27,16 +37,42 @@ $features = array(
 		/* translators: %1$s expands to Yoast SEO*/
 		'label'   => sprintf( __( 'The %1$s admin bar menu contains useful links to third-party tools for analyzing pages and makes it easy to see if you have new notifications.', 'wordpress-seo' ), 'Yoast SEO' ),
 	),
+	(object) array(
+		'name'    => __( 'Cornerstone content', 'wordpress-seo' ),
+		'setting' => 'enable_cornerstone_content',
+		/* translators: 1: open link tag 2: close link tag */
+		'label'   => sprintf(
+			__( 'The Cornerstone content functionality enables you to mark and filter cornerstone content on your website. %1$sRead more about how cornerstone content can help you improve your site structure.%2$s', 'wordpress-seo' ),
+			'<a href="' .  WPSEO_Shortlinker::get( 'https://yoa.st/dashboard-help-cornerstone' ) . '" target="_blank">',
+			'</a>'
+		),
+	),
+	(object) array(
+		'name'    => __( 'Text link counter', 'wordpress-seo' ),
+		'setting' => 'enable_text_link_counter',
+		'label'   => sprintf(
+			__( 'This feature helps you improve the internal link structure of your site. If you want to know more about the why and how of internal linking, check out the %1$sarticle about internal linking on Yoast.com%2$s.', 'wordpress-seo' ),
+			'<a href="' .  WPSEO_Shortlinker::get( 'https://yoa.st/17g' ) . '" target="_blank">',
+			'</a>'
+		),
+	),
 );
 
+/**
+ * Filter to add feature toggles from add-ons.
+ *
+ * @param array $feature_toggles Array with feature toggle objects where each object should have a `name`, `setting` and `label` property.
+ */
+$feature_toggles = apply_filters( 'wpseo_feature_toggles', $feature_toggles );
+
 ?>
-<h2>Features</h2>
+<h2><?php esc_html_e( 'Features', 'wordpress-seo' ); ?></h2>
 
 <?php echo esc_html( sprintf(
 	__( '%1$s comes with a lot of features. You can enable / disable some of them below.', 'wordpress-seo' ),
 	'Yoast SEO'
 ) ) ?>
-<?php foreach ( $features as $feature ) : ?>
+<?php foreach ( $feature_toggles as $feature ) : ?>
 <h3><?php echo esc_html( $feature->name ); ?></h3>
 <p>
 	<?php

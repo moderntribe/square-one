@@ -5,10 +5,11 @@ namespace Tribe\Project\Theme;
 
 
 class Supports {
-	public function hook() {
-		add_action( 'after_setup_theme', [ $this, 'add_theme_supports' ], 10, 0 );
-	}
 
+	/**
+	 * @return void
+	 * @action after_setup_theme
+	 */
 	public function add_theme_supports() {
 		$this->support_thumbnails();
 		$this->support_title_tag();

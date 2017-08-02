@@ -27,8 +27,15 @@ class GFEntryDetail {
 	 */
 	private static $_total_count = 0;
 
+	/**
+	 * Prepare meta boxes and screen options.
+	 */
 	public static function add_meta_boxes() {
-		// Prepare meta boxes and screen options.
+
+		$entry = self::get_current_entry();
+		if ( is_wp_error( $entry ) ) {
+			return;
+		}
 
 		$meta_boxes = array(
 			'submitdiv'     => array(
@@ -36,12 +43,15 @@ class GFEntryDetail {
 				'callback' => array( 'GFEntryDetail', 'meta_box_entry_info' ),
 				'context'  => 'side',
 			),
-			'notifications' => array(
+		);
+
+		if ( GFCommon::current_user_can_any( 'gravityforms_edit_entry_notes' ) ) {
+			$meta_boxes['notifications'] = array(
 				'title'    => esc_html__( 'Notifications', 'gravityforms' ),
 				'callback' => array( 'GFEntryDetail', 'meta_box_notifications' ),
 				'context'  => 'side',
-			),
-		);
+			);
+		}
 
 		if ( GFCommon::current_user_can_any( 'gravityforms_view_entry_notes' ) ) {
 			$meta_boxes['notes'] = array(
@@ -51,9 +61,6 @@ class GFEntryDetail {
 			);
 		}
 
-		$entry = self::get_current_entry();
-		$form  = self::get_current_form();
-
 		if ( ! empty( $entry['payment_status'] ) ) {
 			$meta_boxes['payment'] = array(
 				'title'    => $entry['transaction_type'] == 2 ? esc_html__( 'Subscription Details', 'gravityforms' ) : esc_html__( 'Payment Details', 'gravityforms' ),
@@ -62,14 +69,16 @@ class GFEntryDetail {
 			);
 		}
 
+		$form = self::get_current_form();
+
 		/**
 		 * Allow custom meta boxes to be added to the entry detail page.
 		 *
 		 * @since 2.0-beta-3
 		 *
 		 * @param array $meta_boxes The properties for the meta boxes.
-		 * @param array $entry The entry currently being viewed/edited.
-		 * @param array $form The form object used to process the current entry.
+		 * @param array $entry      The entry currently being viewed/edited.
+		 * @param array $form       The form object used to process the current entry.
 		 */
 		$meta_boxes = apply_filters( 'gform_entry_detail_meta_boxes', $meta_boxes, $entry, $form );
 
@@ -109,17 +118,17 @@ class GFEntryDetail {
 		if ( isset( self::$_entry ) ) {
 			return self::$_entry;
 		}
-		$form = self::get_current_form();
+		$form    = self::get_current_form();
 		$form_id = absint( $form['id'] );
-		$lead_id = rgpost( 'entry_id' ) ? absint( rgpost( 'entry_id' ) ): absint( rgget( 'lid' ) );
+		$lead_id = rgpost( 'entry_id' ) ? absint( rgpost( 'entry_id' ) ) : absint( rgget( 'lid' ) );
 
 		$filter = rgget( 'filter' );
 		$status = in_array( $filter, array( 'trash', 'spam' ) ) ? $filter : 'active';
 
 		$position       = rgget( 'pos' ) ? rgget( 'pos' ) : 0;
-		$sort_direction = rgget( 'dir' ) ? rgget( 'dir' ) : 'DESC';
+		$sort_direction = rgget( 'order' ) ? rgget( 'order' ) : 'DESC';
 
-		$sort_field      = empty( $_GET['sort'] ) ? 0 : $_GET['sort'];
+		$sort_field      = empty( $_GET['orderby'] ) ? 0 : $_GET['orderby'];
 		$sort_field_meta = RGFormsModel::get_field( $form, $sort_field );
 		$is_numeric      = $sort_field_meta['type'] == 'number';
 
@@ -164,17 +173,17 @@ class GFEntryDetail {
 		/**
 		 * Allow the entry list search criteria to be overridden.
 		 *
-		 * @since  1.9.14.30
+		 * @since 1.9.14.30
 		 *
 		 * @param array $search_criteria An array containing the search criteria.
-		 * @param int $form_id The ID of the current form.
+		 * @param int   $form_id         The ID of the current form.
 		 */
 		$search_criteria = gf_apply_filters( array( 'gform_search_criteria_entry_list', $form_id ), $search_criteria, $form_id );
 
 		$paging = array( 'offset' => $position, 'page_size' => 1 );
 
 		if ( ! empty( $sort_field ) ) {
-			$sorting = array( 'key' => $_GET['sort'], 'direction' => $sort_direction, 'is_numeric' => $is_numeric );
+			$sorting = array( 'key' => $sort_field, 'direction' => $sort_direction, 'is_numeric' => $is_numeric );
 		} else {
 			$sorting = array();
 		}
@@ -650,8 +659,8 @@ class GFEntryDetail {
 
 		if ( rgpost( 'action' ) == 'update' ) {
 			?>
-			<div class="updated fade" style="padding:6px;">
-				<?php esc_html_e( 'Entry Updated.', 'gravityforms' ); ?>
+			<div class="updated fade">
+				<p><?php esc_html_e( 'Entry Updated.', 'gravityforms' ); ?></p>
 			</div>
 			<?php
 		}
@@ -707,7 +716,18 @@ class GFEntryDetail {
 								break;
 						}
 
-						$content = apply_filters( 'gform_field_content', $content, $field, $value, $lead['id'], $form['id'] );
+						/**
+						 * Filters the field content.
+						 *
+						 * @since 2.1.2.14 Added form and field ID modifiers.
+						 *
+						 * @param string $content    The field content.
+						 * @param array  $field      The Field Object.
+						 * @param string $value      The field value.
+						 * @param int    $lead['id'] The entry ID.
+						 * @param int    $form['id'] The form ID.
+						 */
+						$content = gf_apply_filters( array( 'gform_field_content', $form['id'], $field->id ), $content, $field, $value, $lead['id'], $form['id'] );
 
 						echo $content;
 					}
@@ -920,11 +940,11 @@ class GFEntryDetail {
 					case 'html':
 					case 'password':
 					case 'page':
-						//ignore captcha, html, password, page field
+						// Ignore captcha, html, password, page field.
 						break;
 
 					default :
-						//ignore product fields as they will be grouped together at the end of the grid
+						// Ignore product fields as they will be grouped together at the end of the grid.
 						if ( GFCommon::is_product_field( $field->type ) ) {
 							$has_product_fields = true;
 							continue;
@@ -933,6 +953,16 @@ class GFEntryDetail {
 						$value         = RGFormsModel::get_lead_field_value( $lead, $field );
 						$display_value = GFCommon::get_lead_field_display( $field, $value, $lead['currency'] );
 
+						/**
+						 * Filters a field value displayed within an entry.
+						 *
+						 * @since 1.5
+						 *
+						 * @param string   $display_value The value to be displayed.
+						 * @param GF_Field $field         The Field Object.
+						 * @param array    $lead          The Entry Object.
+						 * @param array    $form          The Form Object.
+						 */
 						$display_value = apply_filters( 'gform_entry_field_value', $display_value, $field, $lead, $form );
 
 						if ( $display_empty_fields || ! empty( $display_value ) || $display_value === '0' ) {
@@ -953,7 +983,18 @@ class GFEntryDetail {
 						break;
 				}
 
-				$content = apply_filters( 'gform_field_content', $content, $field, $value, $lead['id'], $form['id'] );
+				/**
+				 * Filters the field content.
+				 *
+				 * @since 2.1.2.14 Added form and field ID modifiers.
+				 *
+				 * @param string $content    The field content.
+				 * @param array  $field      The Field Object.
+				 * @param string $value      The field value.
+				 * @param int    $lead['id'] The entry ID.
+				 * @param int    $form['id'] The form ID.
+				 */
+				$content = gf_apply_filters( array( 'gform_field_content', $form['id'], $field->id ), $content, $field, $value, $lead['id'], $form['id'] );
 
 				echo $content;
 			}
@@ -962,6 +1003,7 @@ class GFEntryDetail {
 			if ( $has_product_fields ) {
 				$products = GFCommon::get_product_fields( $form, $lead );
 				if ( ! empty( $products['products'] ) ) {
+				    ob_start();
 					?>
 					<tr>
 						<td colspan="2" class="entry-view-field-name"><?php echo esc_html( gf_apply_filters( array( 'gform_order_label', $form_id ), __( 'Order', 'gravityforms' ), $form_id ) ); ?></td>
@@ -992,12 +1034,12 @@ class GFEntryDetail {
 											<div class="product_name"><?php echo esc_html( $product['name'] ); ?></div>
 											<ul class="product_options">
 												<?php
-												$price = GFCommon::to_number( $product['price'] );
+												$price = GFCommon::to_number( $product['price'], $lead['currency'] );
 												if ( is_array( rgar( $product, 'options' ) ) ) {
 													$count = sizeof( $product['options'] );
 													$index = 1;
 													foreach ( $product['options'] as $option ) {
-														$price += GFCommon::to_number( $option['price'] );
+														$price += GFCommon::to_number( $option['price'], $lead['currency'] );
 														$class = $index == $count ? " class='lastitem'" : '';
 														$index ++;
 														?>
@@ -1046,8 +1088,21 @@ class GFEntryDetail {
 							</table>
 						</td>
 					</tr>
-
 					<?php
+					/**
+					 * Filter the markup of the order summary which appears on the Entry Detail, the {all_fields} merge tag and the {pricing_fields} merge tag.
+                     *
+                     * @since 2.1.2.5
+                     * @see   https://www.gravityhelp.com/documentation/article/gform_order_summary/
+					 *
+					 * @var string $markup          The order summary markup.
+					 * @var array  $form            Current form object.
+					 * @var array  $lead            Current entry object.
+					 * @var array  $products        Current order summary object.
+					 * @var string $format          Format that should be used to display the summary ('html' or 'text').
+					 */
+                    $order_summary = gf_apply_filters( array( 'gform_order_summary', $form['id'] ), ob_get_clean(), $form, $lead, $products, 'html' );
+                    echo $order_summary;
 				}
 			}
 			?>
@@ -1174,7 +1229,7 @@ class GFEntryDetail {
 
 	public static function meta_box_notes( $args, $metabox ) {
 		$entry = $args['entry'];
-		$form = $args['form'];
+		$form  = $args['form'];
 		?>
 		<form method="post">
 			<?php wp_nonce_field( 'gforms_update_note', 'gforms_update_note' ) ?>
@@ -1201,9 +1256,9 @@ class GFEntryDetail {
 	}
 
 	public static function meta_box_entry_info( $args, $metabox ) {
-		$form = $args['form'];
+		$form  = $args['form'];
 		$entry = $args['entry'];
-		$mode = $args['mode'];
+		$mode  = $args['mode'];
 		?>
 		<div id="submitcomment" class="submitbox">
 			<div id="minor-publishing" style="padding:10px;">
@@ -1321,7 +1376,7 @@ class GFEntryDetail {
 	}
 
 	public static function meta_box_notifications( $args, $metabox ){
-		$form = $args['form'];
+		$form    = $args['form'];
 		$form_id = $form['id'];
 
 		if ( ! GFCommon::current_user_can_any( 'gravityforms_edit_entry_notes' ) ) {
@@ -1388,7 +1443,7 @@ class GFEntryDetail {
 		if ( $allow_display_empty_fields ) {
 			$display_empty_fields = rgget( 'gf_display_empty_fields', $_COOKIE );
 		}
-		
+
 		if ( ! $lead ) {
 			$lead = self::get_current_entry();
 		}

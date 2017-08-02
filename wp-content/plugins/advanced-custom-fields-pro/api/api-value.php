@@ -348,10 +348,18 @@ function acf_update_value( $value = null, $post_id = 0, $field ) {
 	// filter for 3rd party customization
 	$value = apply_filters( "acf/update_value", $value, $post_id, $field );
 	$value = apply_filters( "acf/update_value/type={$field['type']}", $value, $post_id, $field );
-	$value = apply_filters( "acf/update_value/name={$field['name']}", $value, $post_id, $field );
+	$value = apply_filters( "acf/update_value/name={$field['_name']}", $value, $post_id, $field );
 	$value = apply_filters( "acf/update_value/key={$field['key']}", $value, $post_id, $field );
 	
-
+	
+	// allow null to delete
+	if( $value === null ) {
+		
+		return acf_delete_value( $post_id, $field );
+		
+	}
+	
+	
 	// update value
 	$return = acf_update_metadata( $post_id, $field['name'], $value );
 	
@@ -479,5 +487,35 @@ function acf_copy_postmeta( $from_post_id, $to_post_id ) {
 	}
 
 }
+
+
+/*
+*  acf_preview_value
+*
+*  This function will return a human freindly 'preview' for a given field value
+*
+*  @type	function
+*  @date	24/10/16
+*  @since	5.5.0
+*
+*  @param	$value (mixed)
+*  @param	$post_id (mixed)
+*  @param	$field (array)
+*  @return	(string)
+*/
+
+function acf_preview_value( $value, $post_id, $field ) {
+	
+	// apply filters
+	$value = apply_filters( "acf/preview_value", $value, $post_id, $field );
+	$value = apply_filters( "acf/preview_value/type={$field['type']}", $value, $post_id, $field );
+	$value = apply_filters( "acf/preview_value/name={$field['_name']}", $value, $post_id, $field );
+	$value = apply_filters( "acf/preview_value/key={$field['key']}", $value, $post_id, $field );
+	
+	
+	// return
+	return $value;
+	
+} 
 
 ?>

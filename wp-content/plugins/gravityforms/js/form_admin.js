@@ -315,12 +315,13 @@ function GetRuleValues(objectType, ruleIndex, selectedFieldId, selectedValue, in
 
         var dropdown = jQuery('#' + dropdownId + ".gfield_category_dropdown");
 
-        //don't load category drop down if it already exists (to avoid unecessary ajax requests)
+        //don't load category drop down if it already exists (to avoid unnecessary ajax requests)
         if(dropdown.length > 0){
 
-            var options = dropdown.html();
-            options = options.replace("value=\"" + selectedValue + "\"", "value=\"" + selectedValue + "\" selected=\"selected\"");
-            str = "<select id='" + dropdownId + "' class='gfield_rule_select gfield_rule_value_dropdown gfield_category_dropdown'>" + options + "</select>";
+	        var options = dropdown.html();
+	        options = options.replace(/ selected="selected"/g, '');
+	        options = options.replace("value=\"" + selectedValue + "\"", "value=\"" + selectedValue + "\" selected=\"selected\"");
+	        str = "<select id='" + dropdownId + "' class='gfield_rule_select gfield_rule_value_dropdown gfield_category_dropdown'>" + options + "</select>";
         }
         else{
             var placeholderName = inputName == false ? "gfield_ajax_placeholder_" + ruleIndex : inputName + "_placeholder";
@@ -356,9 +357,10 @@ function GetRuleValues(objectType, ruleIndex, selectedFieldId, selectedValue, in
         //loading categories via AJAX
         jQuery.post( ajaxurl, {
             action:       'gf_get_address_rule_values_select',
-            address_type: field.addressType,
+            address_type: field.addressType ? field.addressType : gf_vars.defaultAddressType,
             value:        selectedValue,
-            id:           dropdownId
+            id:           dropdownId,
+            form_id:      field.formId
         }, function( selectMarkup ) {
             if( selectMarkup ) {
                 $select = jQuery( selectMarkup.trim() );
@@ -379,7 +381,7 @@ function GetRuleValues(objectType, ruleIndex, selectedFieldId, selectedValue, in
         selectedValue = selectedValue ? selectedValue.replace(/'/g, "&#039;") : "";
 
         //create a text field for fields that don't have choices (i.e text, textarea, number, email, etc...)
-        str = "<input type='text' placeholder='" + gf_vars["enterValue"] + "' class='gfield_rule_select' id='" + dropdownId + "' name='" + dropdownId + "' value='" + selectedValue.replace(/'/g, "&#039;") + "' onchange='SetRuleProperty(\"" + objectType + "\", " + ruleIndex + ", \"value\", jQuery(this).val());' onkeyup='SetRuleProperty(\"" + objectType + "\", " + ruleIndex + ", \"value\", jQuery(this).val());'>";
+        str = "<input type='text' placeholder='" + gf_vars["enterValue"] + "' class='gfield_rule_select gfield_rule_input' id='" + dropdownId + "' name='" + dropdownId + "' value='" + selectedValue.replace(/'/g, "&#039;") + "' onchange='SetRuleProperty(\"" + objectType + "\", " + ruleIndex + ", \"value\", jQuery(this).val());' onkeyup='SetRuleProperty(\"" + objectType + "\", " + ruleIndex + ", \"value\", jQuery(this).val());'>";
     }
 
     str = gform.applyFilters( 'gform_conditional_logic_values_input', str, objectType, ruleIndex, selectedFieldId, selectedValue )
@@ -399,18 +401,17 @@ function IsAddressSelect( inputId, field ) {
         return false;
     }
 
-    switch( field.addressType ) {
-        case '':
-        case 'international':
-            selectInputId = field.id + '.6';
-            break;
-        case 'us':
-        case 'canadian':
-            selectInputId = field.id + '.4';
-            break;
+    var addressType = field.addressType ? field.addressType : gf_vars.defaultAddressType;
+
+    if( ! gf_vars.addressTypes[ addressType ] ) {
+        return false;
     }
 
-    return inputId == selectInputId;
+    var addressTypeObj = gf_vars.addressTypes[ addressType ],
+        isCountryInput = inputId == field.id + '.6',
+        isStateInput   = inputId == field.id + '.4';
+
+    return ( isCountryInput && addressType == 'international' ) || ( isStateInput && typeof addressTypeObj.states == 'object' );
 }
 
 function GetFirstRuleField(){
@@ -515,8 +516,8 @@ function TruncateRuleText(text){
 
 function gfAjaxSpinner(elem, imageSrc, inlineStyles) {
 
-    var imageSrc = typeof imageSrc == 'undefined' ? '/images/ajax-loader.gif': imageSrc;
-    var inlineStyles = typeof inlineStyles != 'undefined' ? inlineStyles : '';
+    imageSrc     = typeof imageSrc == 'undefined' || ! imageSrc ? gf_vars.baseUrl + '/images/spinner.gif': imageSrc;
+    inlineStyles = typeof inlineStyles != 'undefined' ? inlineStyles : '';
 
     this.elem = elem;
     this.image = '<img class="gfspinner" src="' + imageSrc + '" style="' + inlineStyles + '" />';

@@ -1,6 +1,6 @@
 #  Theme Images
 
-Images for the theme usually live in a folder named "img" at root of theme. 
+Images for the themes live in a folder named "img" at `wp-content/plugins/core/assets/theme/img`. 
 
 ## Template Tags
 
@@ -156,3 +156,24 @@ Yields:
     </a>
 </article>
 ```
+
+## Table of Contents
+
+* Theme
+  * [Overview](/docs/theme/README.md)
+  * [Markup and Style](/docs/theme/markup-and-style.md)
+  * [Accessibility](/docs/theme/accessbility.md)
+  * [Image Handling](/docs/theme/images.md)
+  * [Fonts](/docs/theme/fonts.md)
+  * [Icons](/docs/theme/icons.md)
+  * CSS
+    * [Overview](/docs/theme/css/README.md)
+    * [PostCSS](/docs/theme/css/postcss.md)
+    * [Grids](/docs/theme/css/grids.md)
+    * [Plugins](/docs/theme/css/plugins.md)
+    * [Forms](/docs/theme/css/forms.md)
+  * Javascript
+    * [Overview](/docs/theme/js/README.md)
+    * [Selectors](/docs/theme/js/selectors.md)
+    * [Events](/docs/theme/js/events.md)
+    * [Jquery](/docs/theme/js/jquery.md)

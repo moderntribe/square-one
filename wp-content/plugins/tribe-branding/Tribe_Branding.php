@@ -40,15 +40,24 @@ class Tribe_Branding {
 		add_filter( 'upload_mimes', array( $this, 'support_ico_uploads' ) );
 		add_action( 'wp_footer', array( $this, 'tribe_attribute_credit' ), 999 );
 		add_filter( 'admin_footer_text', array( $this, 'edit_admin_footer_text' ), 10, 1 );
+
+		// Set WordPress SEO plugin default OG meta image
+		if ( function_exists( 'wpseo_auto_load' ) ) {
+			add_filter( 'option_wpseo_social', array( $this, 'set_wpseo_og_default_image' ), 10, 1 );
+		}
 	}
+
+    private function get_branding_assets_url() {
+  		return get_stylesheet_directory_uri() . '/branding-assets/';
+  	}
 
 	/**
 	 * Login Logo
 	 */
 	public function set_login_logo() {
 
-		$logo_fallback_path = '/img/logos/logo-login.png';
-		$logo_fallback      = file_exists( get_stylesheet_directory() . $logo_fallback_path ) ? get_stylesheet_directory_uri() . $logo_fallback_path : false;
+		$logo_fallback_path = 'logo-login.png';
+		$logo_fallback      = file_exists( $this->get_branding_assets_url() . $logo_fallback_path ) ? $this->get_branding_assets_url() . $logo_fallback_path : false;
 
 		$logo = get_theme_mod( 'branding_customizer_icon_admin', $logo_fallback );
 		if ( empty( $logo ) ) {
@@ -91,7 +100,7 @@ class Tribe_Branding {
 	 */
 	public function set_favicon() {
 
-		$icon = get_theme_mod( 'branding_customizer_icon_favicon', get_stylesheet_directory_uri() . '/img/branding/favicon.ico' );
+		$icon = get_theme_mod( 'branding_customizer_icon_favicon', $this->get_branding_assets_url() . 'favicon.ico' );
 		echo '<link rel="shortcut icon" href="' . $icon . '">';
 	}
 
@@ -100,7 +109,7 @@ class Tribe_Branding {
 	 */
 	public function set_android_icon() {
 
-		$icon = get_theme_mod( 'branding_customizer_icon_android', get_stylesheet_directory_uri() . '/img/branding/android-icon.png' );
+		$icon = get_theme_mod( 'branding_customizer_icon_android', $this->get_branding_assets_url() . 'android-icon.png' );
 		echo '<link rel="icon" sizes="192x192" href="' . $icon . '">';
 	}
 
@@ -109,7 +118,7 @@ class Tribe_Branding {
 	 */
 	public function set_ios_icon() {
 
-		$icon = get_theme_mod( 'branding_customizer_icon_ios', get_template_directory_uri() . '/img/branding/apple-touch-icon-precomposed.png' );
+		$icon = get_theme_mod( 'branding_customizer_icon_ios', $this->get_branding_assets_url() . 'apple-touch-icon-precomposed.png' );
 		echo '<link rel="apple-touch-icon-precomposed" href="' . $icon . '">';
 	}
 
@@ -118,7 +127,7 @@ class Tribe_Branding {
 	 */
 	public function set_ie_metro_icon() {
 
-		$icon = get_theme_mod( 'branding_customizer_icon_ie', get_template_directory_uri() . '/img/branding/ms-icon-144.png' );
+		$icon = get_theme_mod( 'branding_customizer_icon_ie', $this->get_branding_assets_url() . 'ms-icon-144.png' );
 		echo '<meta name="msapplication-TileImage" content="' . $icon . '">';
 	}
 
@@ -127,7 +136,7 @@ class Tribe_Branding {
 	 */
 	public function set_android_theme_color() {
 
-		$theme_color = get_theme_mod( 'branding_customizer_android_theme', '#000000' );
+		$theme_color = get_theme_mod( 'branding_customizer_android_theme', '#ffffff' );
 		echo '<meta name="theme-color" content="' . $theme_color . '">';
 	}
 
@@ -136,7 +145,7 @@ class Tribe_Branding {
 	 */
 	public function set_ie_metro_icon_bgd_color() {
 
-		$icon_bgd_color = get_theme_mod( 'branding_customizer_icon_ie_bgd_color', '#000000' );
+		$icon_bgd_color = get_theme_mod( 'branding_customizer_icon_ie_bgd_color', '#ffffff' );
 		echo '<meta name="msapplication-TileColor" content="' . $icon_bgd_color . '">';
 	}
 
@@ -260,6 +269,20 @@ class Tribe_Branding {
 	public function edit_admin_footer_text() {
 
 		echo get_bloginfo( 'name' ) . ' running on <a href="http://wordpress.org/" rel="external">WordPress</a>';
+	}
+
+	/**
+	 * Customize WP SEO default OG meta settings, turn on by default
+	 */
+
+	function set_wpseo_og_default_image( $option_names ) {
+
+		if ( empty( $option_names['og_default_image'] ) ) {
+			$option_names['og_default_image'] = $this->get_branding_assets_url() . 'social-share.jpg';
+		}
+
+		return $option_names;
+
 	}
 
 	/********** SINGLETON FUNCTIONS **********/

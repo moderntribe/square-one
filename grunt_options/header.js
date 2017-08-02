@@ -6,12 +6,44 @@
  */
 
 module.exports = {
+	coreIconsStyle: {
+		options: {
+			text: '' +
+			'/* -----------------------------------------------------------------------------\n' +
+			' *\n' +
+			' * Font Icons: Icons (via IcoMoon)\n' +
+			' *\n' +
+			' * ----------------------------------------------------------------------------- */\n' +
+			'\n' +
+			'/* stylelint-disable */\n'
+		},
+		files: {
+			'<%= pkg._core_theme_assets_path %>/pcss/base/_icons.pcss': ['<%= pkg._core_theme_assets_path %>/pcss/base/_icons.pcss'],
+		},
+	},
+
+	coreIconsVariables: {
+		options: {
+			text: '' +
+			'/* -----------------------------------------------------------------------------\n' +
+			' * Font Icons (via IcoMoon)\n' +
+			' * ----------------------------------------------------------------------------- */\n' +
+			'\n' +
+			'/* stylelint-disable */\n' +
+			'\n' +
+			':root {'
+		},
+		files: {
+			'<%= pkg._core_theme_assets_path %>/pcss/utilities/variables/_icons.pcss': ['<%= pkg._core_theme_assets_path %>/pcss/utilities/variables/_icons.pcss'],
+		},
+	},
+
 	theme: {
 		options: {
 			text: '/* Core: Global CSS */',
 		},
 		files: {
-			'<%= pkg._corethemepath %>/css/dist/master.min.css': ['<%= pkg._corethemepath %>/css/dist/master.min.css'],
+			'<%= pkg._core_theme_assets_path %>/css/dist/master.min.css': ['<%= pkg._core_theme_assets_path %>/css/dist/master.min.css'],
 		},
 	},
 
@@ -20,7 +52,7 @@ module.exports = {
 			text: '/* Core: Print CSS */',
 		},
 		files: {
-			'<%= pkg._corethemepath %>/css/dist/print.min.css': ['<%= pkg._corethemepath %>/css/dist/print.min.css'],
+			'<%= pkg._core_theme_assets_path %>/css/dist/print.min.css': ['<%= pkg._core_theme_assets_path %>/css/dist/print.min.css'],
 		},
 	},
 
@@ -29,7 +61,7 @@ module.exports = {
 			text: '/* Core: Visual Editor CSS */',
 		},
 		files: {
-			'<%= pkg._corethemepath %>/css/admin/dist/editor-style.min.css': ['<%= pkg._corethemepath %>/css/admin/dist/editor-style.min.css'],
+			'<%= pkg._core_theme_assets_path %>/css/admin/dist/editor-style.min.css': ['<%= pkg._core_theme_assets_path %>/css/admin/dist/editor-style.min.css'],
 		},
 	},
 
@@ -38,7 +70,7 @@ module.exports = {
 			text: '/* Core: WordPress Login CSS */',
 		},
 		files: {
-			'<%= pkg._corethemepath %>/css/admin/dist/login.min.css': ['<%= pkg._corethemepath %>/css/admin/dist/login.min.css'],
+			'<%= pkg._core_theme_assets_path %>/css/admin/dist/login.min.css': ['<%= pkg._core_theme_assets_path %>/css/admin/dist/login.min.css'],
 		},
 	},
 
@@ -47,7 +79,7 @@ module.exports = {
 			text: '/* Core: Legacy Page CSS */',
 		},
 		files: {
-			'<%= pkg._corethemepath %>/css/dist/legacy.min.css': ['<%= pkg._corethemepath %>/css/dist/legacy.min.css'],
+			'<%= pkg._core_theme_assets_path %>/css/dist/legacy.min.css': ['<%= pkg._core_theme_assets_path %>/css/dist/legacy.min.css'],
 		},
 	},
 };

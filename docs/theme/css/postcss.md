@@ -4,7 +4,7 @@ This system uses [PostCSS](http://postcss.org/). Don't worry if you are coming f
 
 * [Atom](https://atom.io/packages/language-postcss)
 * [Sublime Text](https://packagecontrol.io/packages/Syntax%20Highlighting%20for%20PostCSS)
-* Php/Webstorm. [Coming soon!](https://blog.jetbrains.com/webstorm/2016/08/webstorm-2016-3-early-access-preview/#postcss) For now, select the pcss file and associate it with sass.
+* [Php/Webstorm](https://plugins.jetbrains.com/idea/plugin/8578-postcss-support)
 
 ## Whats the same as sass?
 
@@ -27,3 +27,10 @@ This system uses [PostCSS](http://postcss.org/). Don't worry if you are coming f
 ## Linting
 
 This systems `grunt dist` task will lint your postcss. Check the .stylelintrc.json at root to see what rules have been added beyond the [standard config](https://github.com/stylelint/stylelint-config-standard).
+
+## Table of Contents
+
+* [PostCSS](/docs/theme/css/postcss.md)
+* [Grids](/docs/theme/css/grids.md)
+* [Plugins](/docs/theme/css/plugins.md)
+* [Forms](/docs/theme/css/forms.md)

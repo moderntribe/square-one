@@ -1,0 +1,28 @@
+.gform_wrapper {
+
+	.spinner {
+		position: absolute !important;
+		top: auto !important;
+		bottom: -25px !important;
+		left: 50% !important;
+
+		@media (--viewport-medium) {
+			top: 50% !important;
+			bottom: auto !important;
+			left: auto !important;
+			right: 23px !important;
+		}
+	}
+}
+
+.gform_footer {
+	position: relative;
+
+	@media (--viewport-medium) {
+		padding-right: 50px;
+	}
+}
+
+[id*="gform_ajax_spinner_"] {
+	display: none !important;
+}

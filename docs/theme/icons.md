@@ -14,6 +14,27 @@ For accessible usage of font icons [see here](http://fontawesome.io/accessibilit
 * Import the `selection.json` in the dev folder
 * Add your new icons to the kit
 * Generate fonts using the settings from last round
-* Overwrite all files in `/dev_components/theme/icons/core` with this new kit
-* Copy the files from `/dev_components/theme/icons/core/fonts` to `/wp-content/themes/core/fonts/icons-core`
-* Update `/wp-content/themes/core/pcss/base/_icons.pcss` with new values from `/dev_components/theme/icons/core/style.css`
+* paste the zip file (it must be named core-icons.zip) in the root of the dev_components directory.
+* Run `grunt icons`
+* Your _icons pcss and variables files will be auto generated for you and the fonts/kit directories updated, then dist will be ran to update your css
+
+## Table of Contents
+
+* Theme
+  * [Overview](/docs/theme/README.md)
+  * [Markup and Style](/docs/theme/markup-and-style.md)
+  * [Accessibility](/docs/theme/accessbility.md)
+  * [Image Handling](/docs/theme/images.md)
+  * [Fonts](/docs/theme/fonts.md)
+  * [Icons](/docs/theme/icons.md)
+  * CSS
+    * [Overview](/docs/theme/css/README.md)
+    * [PostCSS](/docs/theme/css/postcss.md)
+    * [Grids](/docs/theme/css/grids.md)
+    * [Plugins](/docs/theme/css/plugins.md)
+    * [Forms](/docs/theme/css/forms.md)
+  * Javascript
+    * [Overview](/docs/theme/js/README.md)
+    * [Selectors](/docs/theme/js/selectors.md)
+    * [Events](/docs/theme/js/events.md)
+    * [Jquery](/docs/theme/js/jquery.md)

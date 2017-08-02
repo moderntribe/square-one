@@ -7,25 +7,39 @@ module.exports = {
 		jquery: 'jQuery',
 	},
 	resolveLoader: {
-		root: path.join(__dirname, 'node_modules'),
+		modules: [
+			path.resolve(__dirname, 'node_modules'),
+		],
 	},
 	resolve: {
-		extensions: ['', '.js', '.jsx', 'json'],
-		modulesDirectories: ['node_modules'],
-		fallback: path.join(__dirname, 'node_modules'),
+		alias: {
+			masonry: 'masonry-layout',
+			isotope: 'isotope-layout',
+		},
+		modules: [
+			path.resolve(__dirname, 'wp-content/plugins/core/assets/theme/js/src'),
+			path.resolve(__dirname, 'node_modules'),
+		],
+		extensions: ['.js', '.jsx'],
 	},
 	module: {
-		loaders: [
+		noParse: /node_modules\/vex-js\/dist\/js\/vex.js/,
+		rules: [
 			{
 				test: /\.js$/,
-				loader: 'babel-loader',
 				exclude: /node_modules/,
-			},
-			{
-				include: /\.json$/,
-				loaders: ['json-loader'],
-			},
-		],
+				use: [
+					{
+						loader: 'babel-loader',
+						options: {
+							presets: [
+								["es2015", { "modules": false }] // IMPORTANT
+							]
+						}
+					}
+				]
+			}
+		]
 	},
 	plugins: [
 		new webpack.ProvidePlugin({
