@@ -68,12 +68,11 @@ class Walker_Nav_Menu_Primary extends \Walker_Nav_Menu {
 		//var_dump( $item );
 
 		// Setup our parent item
-        $this->current_item = $item;
+		$this->current_item = $item;
 
 		$indent = ( $depth ) ? str_repeat( "\t", $depth ) : '';
 
 		$classes   = empty( $item->classes ) ? array() : (array)$item->classes;
-		$classes[] = 'menu-item-' . $item->ID;
 
 		/**
 		 * Filters the arguments for a single nav menu item.
@@ -122,6 +121,7 @@ class Walker_Nav_Menu_Primary extends \Walker_Nav_Menu {
 		$atts['target'] = ! empty( $item->target ) ? $item->target : '';
 		$atts['rel']    = ! empty( $item->xfn ) ? $item->xfn : '';
 		$atts['href']   = ! empty( $item->url ) ? $item->url : '';
+		$atts[ 'id' ] = 'menu-item-' . $item->ID;
 
 		/**
 		 * Filters the HTML attributes applied to a menu item's anchor element.
@@ -143,6 +143,18 @@ class Walker_Nav_Menu_Primary extends \Walker_Nav_Menu {
 		 * @param int    $depth  Depth of menu item. Used for padding.
 		 */
 		$atts = apply_filters( 'nav_menu_link_attributes', $atts, $item, $args, $depth );
+
+		$has_children = in_array( 'menu-item-has-children', $item->classes );
+
+		// don't link top-level items with children in the primary nav
+		if ( $has_children && $depth === 0 ) {
+			unset( $atts[ 'href' ] );
+		}
+
+		if ( $has_children ) {
+			$atts[ 'data-js' ] = 'trigger-child-menu';
+			$atts[ 'title' ] = __( 'Toggle Sub-Menu', 'tribe' );
+		}
 
 		$attributes = '';
 		foreach ( $atts as $attr => $value ) {
@@ -167,10 +179,15 @@ class Walker_Nav_Menu_Primary extends \Walker_Nav_Menu {
 		 */
 		$title = apply_filters( 'nav_menu_item_title', $title, $item, $args, $depth );
 
+		$tag_name = 'a';
+		if ( $has_children && 0 === $depth ) {
+			$tag_name = 'button';
+		}
+
 		$item_output = $args->before;
-		$item_output .= '<a' . $attributes . '>';
+		$item_output .= '<' . $tag_name . $attributes . '>';
 		$item_output .= $args->link_before . $title . $args->link_after;
-		$item_output .= '</a>';
+		$item_output .= '</' . $tag_name . '>';
 		$item_output .= $args->after;
 
 		/**

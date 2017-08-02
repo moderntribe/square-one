@@ -5,7 +5,6 @@ namespace Tribe\Project\Service_Providers;
 
 
 use Pimple\Container;
-use Tribe\Project\Nav;
 use Tribe\Project\P2P\Admin_Search_Filtering;
 use Tribe\Project\P2P\Event_Query_Filters;
 use Tribe\Project\P2P\Panel_Search_Filters;
@@ -20,11 +19,6 @@ use Tribe\Project\P2P\Titles_Filter;
  * @package Tribe\Project\Service_Providers
  */
 final class Global_Service_Provider extends Tribe_Service_Provider {
-
-	protected $nav_menus = [
-		'nav-primary'   => 'Menu: Site',
-		'nav-secondary' => 'Menu: Footer',
-	];
 
 	protected $p2p_relationships = [
 		'General_Relationship' => [

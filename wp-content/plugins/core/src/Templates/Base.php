@@ -3,6 +3,7 @@
 
 namespace Tribe\Project\Templates;
 
+use Tribe\Project\Service_Providers\Nav_Menu_Provider;
 use Tribe\Project\Theme\Logo;
 use Tribe\Project\Twig\Noop_Lazy_Strings;
 use Tribe\Project\Twig\Stringable_Callable;
@@ -55,14 +56,14 @@ class Base extends Twig_Template {
 
 	protected function get_nav_menus() {
 		return [
-			'primary'   => new Stringable_Callable( [ $this, 'get_primary_nav_menu' ] ),
-			'secondary' => new Stringable_Callable( [ $this, 'get_secondary_nav_menu' ] ),
+			Nav_Menu_Provider::PRIMARY   => new Stringable_Callable( [ $this, 'get_primary_nav_menu' ] ),
+			Nav_Menu_Provider::SECONDARY => new Stringable_Callable( [ $this, 'get_secondary_nav_menu' ] ),
 		];
 	}
 
 	public function get_primary_nav_menu() {
 		$args = [
-			'theme_location'  => 'primary',
+			'theme_location'  => Nav_Menu_Provider::PRIMARY,
 			'container'       => false,
 			'container_class' => '',
 			'menu_class'      => '',
@@ -71,7 +72,7 @@ class Base extends Twig_Template {
 			'items_wrap'      => '%3$s',
 			'fallback_cb'     => false,
 			'echo'            => false,
-			'walker'          => new \Tribe\Project\Theme\Nav\Extensible_Walker_Nav_Menu,
+			'walker'          => new \Tribe\Project\Theme\Nav\Walker_Nav_Menu_Primary(),
 		];
 
 		return \Tribe\Project\Theme\Nav\Menu::menu( $args );
@@ -79,7 +80,7 @@ class Base extends Twig_Template {
 
 	public function get_secondary_nav_menu() {
 		$args = [
-			'theme_location'  => 'secondary',
+			'theme_location'  => Nav_Menu_Provider::SECONDARY,
 			'container'       => false,
 			'container_class' => '',
 			'menu_class'      => '',

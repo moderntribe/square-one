@@ -238,7 +238,7 @@ class Theme_Provider implements ServiceProviderInterface {
 		};
 
 		add_filter( 'nav_menu_item_id', function ( $menu_id, $item, $args, $depth ) use ( $container ) {
-			return $container[ 'theme.nav.attribute_filters' ]->clean_nav_item_id( $menu_id, $item, $args, $depth );
+			return $container[ 'theme.nav.attribute_filters' ]->customize_nav_item_id( $menu_id, $item, $args, $depth );
 		}, 10, 4 );
 
 		add_filter( 'nav_menu_css_class', function ( $classes, $item, $args, $depth ) use ( $container ) {
@@ -249,9 +249,9 @@ class Theme_Provider implements ServiceProviderInterface {
 			return $container[ 'theme.nav.attribute_filters' ]->customize_nav_item_anchor_atts( $atts, $item, $args, $depth );
 		}, 10, 4 );
 
-		add_filter( 'walker_nav_menu_start_el', function ( $item_output, $item, $depth, $args ) use ( $container ) {
-			return $container[ 'theme.nav.attribute_filters' ]->customize_nav_item_start_el( $item_output, $item, $depth, $args );
-		}, 10, 4 );
+//		add_filter( 'walker_nav_menu_start_el', function ( $item_output, $item, $depth, $args ) use ( $container ) {
+//			return $container[ 'theme.nav.attribute_filters' ]->customize_nav_item_start_el( $item_output, $item, $depth, $args );
+//		}, 10, 4 );
 	}
 
 	private function gravity_forms( Container $container ) {
