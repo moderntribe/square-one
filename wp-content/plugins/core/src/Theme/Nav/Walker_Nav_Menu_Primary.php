@@ -147,9 +147,6 @@ class Walker_Nav_Menu_Primary extends \Walker_Nav_Menu {
 		// don't link top-level items with children in the primary nav
 		if ( $has_children && $depth === 0 ) {
 			unset( $atts[ 'href' ] );
-		}
-
-		if ( $has_children ) {
 			$atts[ 'data-js' ] = 'trigger-child-menu';
 			$atts[ 'title' ] = __( 'Toggle Sub-Menu', 'tribe' );
 		}
