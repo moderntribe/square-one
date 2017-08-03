@@ -79,7 +79,7 @@ abstract class Util {
 	 *
 	 * @param $template
 	 *
-	 * @return string
+	 * @return int
 	 */
 	public static function get_page_template_ID( $template ) {
 		$args = [
@@ -89,7 +89,7 @@ abstract class Util {
 		$pages = get_pages( $args );
 
 		if ( empty( $pages ) ) {
-		    return '';
+		    return 0;
 		}
 
 		return $pages[0]->ID;
