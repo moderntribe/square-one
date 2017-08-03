@@ -45,7 +45,7 @@ class Walker_Nav_Menu_Primary extends \Walker_Nav_Menu {
 		] );
 
 		$indent = str_repeat("\t", $depth);
-		$output .= "\n$indent<ul$id$classes>\n";
+		$output .= "\n$indent<ul$id$classes data-js=\"child-menu\">\n";
 
 	}
 
@@ -65,14 +65,12 @@ class Walker_Nav_Menu_Primary extends \Walker_Nav_Menu {
 	 */
 	public function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
 
-		//var_dump( $item );
-
 		// Setup our parent item
 		$this->current_item = $item;
 
 		$indent = ( $depth ) ? str_repeat( "\t", $depth ) : '';
 
-		$classes   = empty( $item->classes ) ? array() : (array)$item->classes;
+		$classes = empty( $item->classes ) ? array() : (array)$item->classes;
 
 		/**
 		 * Filters the arguments for a single nav menu item.
@@ -121,7 +119,7 @@ class Walker_Nav_Menu_Primary extends \Walker_Nav_Menu {
 		$atts['target'] = ! empty( $item->target ) ? $item->target : '';
 		$atts['rel']    = ! empty( $item->xfn ) ? $item->xfn : '';
 		$atts['href']   = ! empty( $item->url ) ? $item->url : '';
-		$atts[ 'id' ] = 'menu-item-' . $item->ID;
+		$atts['id']     = 'menu-item-' . $item->ID;
 
 		/**
 		 * Filters the HTML attributes applied to a menu item's anchor element.
