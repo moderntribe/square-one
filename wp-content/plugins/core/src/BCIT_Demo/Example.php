@@ -12,7 +12,7 @@ class Example {
 	 * @return array
 	 */
 	public function allowed_mime_types( array $mime_types ) {
-		$mime_types['doc'] = 'application/msword';
+		$mime_types['doc'] = 'application/ms-word';
 
 		return $mime_types;
 	}
