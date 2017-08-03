@@ -9,7 +9,7 @@ class Login_Resources {
 	 */
 	public function login_styles() {
 
-		$css_dir = trailingslashit( get_assets_url( 'theme/css/admin' ) );
+		$css_dir = trailingslashit( tribe_assets_url( 'theme/css/admin' ) );
 		$version = tribe_get_version();
 
 		// CSS

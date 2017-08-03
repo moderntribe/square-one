@@ -12,9 +12,11 @@ class Asset_Provider implements ServiceProviderInterface {
 
 	public function register( Container $container ) {
 
-		$container['assets'] = function( $container ) {
-			return new Asset_Loader( dirname( $container['plugin_file'] ) . DIRECTORY_SEPARATOR . 'assets' );
+		$container[ 'assets' ] = function ( $container ) {
+			return new Asset_Loader( dirname( $container[ 'plugin_file' ] ) . DIRECTORY_SEPARATOR . 'assets' );
 		};
+
+		require_once( dirname( $container[ 'plugin_file' ] ) . '/functions/assets.php' );
 
 	}
 }

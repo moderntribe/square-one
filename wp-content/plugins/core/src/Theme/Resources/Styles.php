@@ -11,7 +11,7 @@ class Styles {
 	 */
 	public function enqueue_styles() {
 
-		$css_dir = trailingslashit( get_assets_url( 'theme/css' ) );
+		$css_dir = trailingslashit( tribe_assets_url( 'theme/css' ) );
 		$version = tribe_get_version();
 
 		if ( ! defined( 'SCRIPT_DEBUG' ) || SCRIPT_DEBUG === false ) { // Production

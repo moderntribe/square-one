@@ -9,7 +9,7 @@
  *
  * @return string
  */
-function get_assets_url( $path = '' ) {
+function tribe_assets_url( $path = '' ) {
 	/** @var \Tribe\Libs\Assets\Asset_Loader $assets */
 	$assets = tribe_project()->container()['assets'];
 	return $assets->get_url( $path );

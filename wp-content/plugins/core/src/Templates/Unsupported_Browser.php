@@ -10,7 +10,7 @@ class Unsupported_Browser extends Base {
 		$data['post']             = $this->get_post();
 		$data['css']              = $this->get_css();
 		$data['favicon']          = $this->get_favicon();
-		$data['legacy_image_url'] = trailingslashit( get_assets_url( 'theme/img/logos/logo-legacy.png' ) );
+		$data['legacy_image_url'] = trailingslashit( tribe_assets_url( 'theme/img/logos/logo-legacy.png' ) );
 
 		return $data;
 	}
@@ -27,7 +27,7 @@ class Unsupported_Browser extends Base {
 	}
 
 	protected function get_css() {
-		$css_dir    = trailingslashit( get_assets_url( 'theme/css' ) );
+		$css_dir    = trailingslashit( tribe_assets_url( 'theme/css' ) );
 		$css_legacy = ( ! defined( 'SCRIPT_DEBUG' ) || SCRIPT_DEBUG === false ) ? 'dist/legacy.min.css' : 'legacy.css';
 
 		return $css_dir . $css_legacy;
