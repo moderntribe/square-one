@@ -11,7 +11,7 @@ class Scripts {
 	 */
 	public function enqueue_scripts() {
 
-		$js_dir  = trailingslashit( get_assets_url( 'theme/js' ) );
+		$js_dir  = trailingslashit( tribe_assets_url( 'theme/js' ) );
 		$version = tribe_get_version();
 
 		// Custom jQuery (version 2.2.4, IE9+)

@@ -44,7 +44,6 @@ class Core {
 	}
 
 	private function load_libraries() {
-		require_once( dirname( $this->container[ 'plugin_file' ] ) . '/functions/utility.php' );
 		require_once( dirname( $this->container[ 'plugin_file' ] ) . '/vendor/johnbillion/extended-cpts/extended-cpts.php' );
 		require_once( dirname( $this->container[ 'plugin_file' ] ) . '/vendor/johnbillion/extended-taxos/extended-taxos.php' );
 	}

@@ -89,7 +89,7 @@ class Fonts {
 	}
 
     private function get_webfont_src() {
-	    return get_assets_url( 'theme/js/vendor/webfontloader.js' );
+	    return tribe_assets_url( 'theme/js/vendor/webfontloader.js' );
    	}
 
     /**

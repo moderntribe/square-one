@@ -64,10 +64,10 @@ abstract class Util {
 			return $extension;
 		}
 
-		$url_parts = parse_url( $url );
+		$path = parse_url( $url, PHP_URL_PATH );
 
-		if ( ! empty( $url_parts['path'] ) ) {
-			$extension = pathinfo( $url_parts['path'], PATHINFO_EXTENSION );
+		if ( ! empty( $path ) ) {
+			$extension = pathinfo( $path, PATHINFO_EXTENSION );
 		}
 
 		return $extension;
@@ -79,7 +79,7 @@ abstract class Util {
 	 *
 	 * @param $template
 	 *
-	 * @return string
+	 * @return int
 	 */
 	public static function get_page_template_ID( $template ) {
 		$args = [
@@ -89,7 +89,7 @@ abstract class Util {
 		$pages = get_pages( $args );
 
 		if ( empty( $pages ) ) {
-		    return '';
+		    return 0;
 		}
 
 		return $pages[0]->ID;

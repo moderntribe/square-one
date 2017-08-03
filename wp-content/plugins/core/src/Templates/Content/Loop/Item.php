@@ -37,7 +37,7 @@ class Item extends Twig_Template {
 			'as_bg'         => true,
 			'echo'          => false,
 			'wrapper_class' => 'item__image',
-			'shim'          => get_assets_url( 'theme/img/shims/16.9.png' ),
+			'shim'          => tribe_assets_url( 'theme/img/shims/16.9.png' ),
 			'src_size'      => Image_Sizes::CORE_FULL,
 			'srcset_sizes'  => [
 				Image_Sizes::CORE_FULL,
