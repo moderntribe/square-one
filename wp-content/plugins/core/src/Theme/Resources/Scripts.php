@@ -5,39 +5,31 @@ namespace Tribe\Project\Theme\Resources;
 
 
 class Scripts {
-
-	/** @var string Path to the root file of the plugin */
-	private $plugin_file = '';
-
-	public function __construct( $plugin_file = '' ) {
-		$this->plugin_file = $plugin_file;
-	}
-
 	/**
 	 * Enqueue scripts
 	 * @action wp_enqueue_scripts
 	 */
 	public function enqueue_scripts() {
 
-		$js_dir  = $this->get_js_url();
+		$js_dir  = trailingslashit( tribe_assets_url( 'theme/js' ) );
 		$version = tribe_get_version();
 
 		// Custom jQuery (version 2.2.4, IE9+)
 		wp_deregister_script( 'jquery' );
 
 		if ( ! defined( 'SCRIPT_DEBUG' ) || SCRIPT_DEBUG === false ) { // Production
-			$jquery      = 'vendor/jquery.min.js';
-			$scripts     = 'dist/scripts.min.js';
+			$jquery          = 'vendor/jquery.min.js';
+			$scripts         = 'dist/scripts.min.js';
 			$localize_target = 'core-theme-scripts';
-			$script_deps = [ 'core-webpack-vendors' ];
+			$script_deps     = [ 'core-webpack-vendors' ];
 			wp_enqueue_script( 'core-webpack-manifest', $js_dir . 'dist/manifest.min.js', ['jquery'], $version, true );
 			wp_enqueue_script( 'core-webpack-vendors', $js_dir . 'dist/vendor.min.js', ['core-webpack-manifest'], $version, true );
 		} else { // Dev
 			// Dev
-			$scripts     = 'dist/scripts.js';
-			$jquery      = 'vendor/jquery.js';
+			$scripts         = 'dist/scripts.js';
+			$jquery          = 'vendor/jquery.js';
 			$localize_target = 'babel-polyfill';
-			$script_deps = [ 'jquery', 'core-webpack-vendors' ];
+			$script_deps     = [ 'jquery', 'core-webpack-vendors' ];
 
 			wp_enqueue_script( 'babel-polyfill', $js_dir . 'vendor/polyfill.js', [], $version, true );
 			wp_enqueue_script( 'core-globals', $js_dir . 'vendor/globals.js', ['babel-polyfill'], $version, true );
@@ -72,9 +64,4 @@ class Scripts {
 		}
 
 	}
-
-	private function get_js_url() {
-		return plugins_url( 'assets/theme/js/', $this->plugin_file );
-	}
-
 }

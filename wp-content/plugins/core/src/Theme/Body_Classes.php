@@ -22,6 +22,8 @@ class Body_Classes {
 			$classes[] = 'has-panels';
 			if ( empty( $post->post_content ) ) {
 				$classes[] = 'is-panels-page';
+			} else {
+				$classes[] = 'has-page-content';
 			}
 		}
 

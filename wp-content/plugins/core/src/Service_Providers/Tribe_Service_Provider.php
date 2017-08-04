@@ -6,14 +6,8 @@ namespace Tribe\Project\Service_Providers;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
-use Tribe\Libs\Nav\Menu_Location;
 
 abstract class Tribe_Service_Provider implements ServiceProviderInterface {
-	/**
-	 * @var array The nav menus to register.
-	 *            [ 'menu_id' => 'Menu Label' ]
-	 */
-	protected $nav_menus = [ ];
 	/**
 	 * @var array P2P relationships to register
 	 *            Keys should be the name of a Relationship subclass in
@@ -31,7 +25,6 @@ abstract class Tribe_Service_Provider implements ServiceProviderInterface {
 
 	public function register( Container $container ) {
 		$this->p2p( $container );
-		$this->nav( $container );
 		$this->panels( $container );
 	}
 
@@ -46,17 +39,6 @@ abstract class Tribe_Service_Provider implements ServiceProviderInterface {
 			};
 			add_action( 'init', function() use ( $container, $relationship ) {
 				$container[ 'p2p.' . $relationship ]->hook();
-			}, 10, 0 );
-		}
-	}
-
-	protected function nav( Container $container ) {
-		foreach ( $this->nav_menus as $location => $description ) {
-			$container[ 'menu.' . $location ] = function ( $container ) use ( $location, $description ) {
-				return new Menu_Location( $location, $description );
-			};
-			add_action( 'plugins_loaded', function() use ( $container, $location ) {
-				$container[ 'menu.' . $location ]->hook();
 			}, 10, 0 );
 		}
 	}
