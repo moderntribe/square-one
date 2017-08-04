@@ -1,8 +1,8 @@
 <?php
 /**
- * Post Meta
+ * Example Meta
  *
- * Creates a collection of meta fields used on the Blog posts
+ * An example of how to register object meta.
  */
 
 namespace Tribe\Project\Object_Meta;
