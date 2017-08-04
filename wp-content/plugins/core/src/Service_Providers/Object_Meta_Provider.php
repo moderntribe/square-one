@@ -20,7 +20,7 @@ class Object_Meta_Provider implements ServiceProviderInterface {
 			'Example' => [
 				'post_types'     => [ Post_Types\Page\Page::NAME, Post_Types\Post\Post::NAME ],
 				'taxonomies'     => [ Taxonomies\Category\Category::NAME ],
-				'settings_pages' => [ tribe_project()->container()['settings.general']->get_slug() ],
+				'settings_pages' => [ Settings\General::instance()->get_slug() ],
 				'users'          => true,
 			],
 		];
