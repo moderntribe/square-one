@@ -10,6 +10,7 @@
  */
 
 function the_panel_title( $title = null, $options = [] ) {
+
 	if ( empty( $title ) && ! is_panel_preview() ) {
 		return;
 	}
@@ -24,6 +25,8 @@ function the_panel_title( $title = null, $options = [] ) {
 
 	$options = wp_parse_args( $options, $defaults );
 
+	static $panel_title = '';
+
 	$h_level = 'h2';
 
 	if ( empty( $panel_title ) && ( get_the_content() == '' && ! is_front_page() ) ) {
@@ -36,13 +39,15 @@ function the_panel_title( $title = null, $options = [] ) {
 	$data_attrs .= ( true === $options[ 'data_livetext' ] ) ? sprintf( ' data-depth="%d"', $options[ 'depth' ] ) : '';
 	$data_attrs .= ( true === $options[ 'data_livetext' ] ) ? sprintf( ' data-index="%d"', $options[ 'index' ] ) : '';
 
-	printf(
+	$panel_title = sprintf(
 		'<%1$s%2$s%3$s>%4$s</%1$s>',
 		esc_attr( $h_level ),
 		$class,
 		$data_attrs,
 		$title
 	);
+
+	echo $panel_title;
 }
 
 /**
