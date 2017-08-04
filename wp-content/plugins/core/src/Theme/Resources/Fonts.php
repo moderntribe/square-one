@@ -6,12 +6,9 @@ namespace Tribe\Project\Theme\Resources;
 
 class Fonts {
 
-    /** @var string Path to the root file of the plugin */
-   	private $plugin_file = '';
-
 	private $fonts = [ ];
 
-	public function __construct( $plugin_file = '', array $fonts = [ ] ) {
+	public function __construct( array $fonts = [ ] ) {
 		$this->fonts = $fonts;
 	}
 
@@ -49,17 +46,17 @@ class Fonts {
 				}
 			};
 			var WebFontConfig = {
-				<?php if ( !empty( $this->fonts[ 'typekit' ] ) ) { ?>
+				<?php if ( ! empty( $this->fonts[ 'typekit' ] ) ) { ?>
 				typekit: {
 					id: '<?php echo $this->fonts[ 'typekit' ]; ?>'
 				},
 				<?php } ?>
-				<?php if ( !empty( $this->fonts[ 'google' ] ) ) { ?>
+				<?php if ( ! empty( $this->fonts[ 'google' ] ) ) { ?>
 				google: {
 					families: <?php echo json_encode( $this->fonts[ 'google' ] ); ?>
 				},
 				<?php } ?>
-				<?php if ( !empty( $this->fonts[ 'custom' ] ) ) { ?>
+				<?php if ( ! empty( $this->fonts[ 'custom' ] ) ) { ?>
 				custom: {
 					families: <?php echo json_encode( $this->fonts[ 'custom' ] ); ?>
 				},
@@ -92,7 +89,7 @@ class Fonts {
 	}
 
     private function get_webfont_src() {
-           return plugins_url( 'assets/theme/js/vendor/webfontloader.js', $this->plugin_file );
+	    return tribe_assets_url( 'theme/js/vendor/webfontloader.js' );
    	}
 
     /**

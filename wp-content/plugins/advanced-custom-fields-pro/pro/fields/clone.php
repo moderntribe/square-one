@@ -849,6 +849,9 @@ class acf_field_clone extends acf_field {
 	
 	function render_field_settings( $field ) {
 		
+		// temp enable 'local' to allow .json fields to be displayed
+		acf_enable_filter('local');
+		
 		// default_value
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Fields', 'acf'),
@@ -863,6 +866,8 @@ class acf_field_clone extends acf_field {
 			'ajax_action'	=> 'acf/fields/clone/query',
 			'placeholder'	=> '',
 		));
+		
+		acf_disable_filter('local');
 		
 		
 		// display
@@ -1176,6 +1181,7 @@ class acf_field_clone extends acf_field {
 			
 			// vars
 			$fields = false;
+			$ignore_s = false;
 			$data = array(
 				'text'		=> $field_group['title'],
 				'children'	=> array()
@@ -1199,6 +1205,14 @@ class acf_field_clone extends acf_field {
 			if( !$fields ) continue;
 			
 			
+			// show all children for field group search match
+			if( $s !== false && stripos($data['text'], $s) !== false ) {
+				
+				$ignore_s = true;
+				
+			}
+			
+			
 			// populate children
 			$children = array();
 			$children[] = $field_group['key'];
@@ -1217,7 +1231,7 @@ class acf_field_clone extends acf_field {
 				
 				
 				// bail early if is search, and $text does not contain $s
-				if( $s !== false ) {
+				if( $s !== false && !$ignore_s ) {
 					
 					// get early
 					$text = $this->get_clone_setting_choice( $child );

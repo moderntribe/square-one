@@ -154,19 +154,24 @@ jQuery.fn.repeater = function( options ) {
     self.populateSelects = function( item, index ) {
 
         // after appending the row, check each property to see if it is a select and then populate
-        for( var property in item ) {
+        for ( var property in item ) {
 
-            if( ! item.hasOwnProperty( property ) )
+            if ( ! item.hasOwnProperty( property ) ) {
                 continue;
+			}
 
             var input = self.elem.find( '.' + property + '_' + index );
-            if( input.is( 'select' ) ){
-                if(jQuery.isArray(item[property])){
-                    input.val(item[property]);
-                } else {
-                    input.find( 'option[value="' + item[property] + '"]' ).prop( 'selected', true );
-                }
+
+            if ( ! input.is( 'select' ) ) {
+	            continue;
             }
+            
+            if ( jQuery.isArray( item[ property ] ) ) {
+                input.val( item[ property ] );
+            } else {
+                input.find( 'option[value="' + item[ property ] + '"]' ).prop( 'selected', true );
+            }
+            
         }
 
     }
@@ -174,7 +179,7 @@ jQuery.fn.repeater = function( options ) {
     self.addNewItem = function( elemOrItem, index ) {
 
         var isElem = self.isElement( elemOrItem ),
-            index  = parseInt( typeof index != 'undefined' ? index : ( isElem ? jQuery( elemOrItem ).attr( 'data-index' ) + 1 : self.items.length ) ),
+            index  = parseInt( typeof index !== 'undefined' ? index : ( isElem ? parseInt( jQuery( elemOrItem ).attr( 'data-index' ), 10 ) + 1 : self.items.length ), 10 ),
             item   = isElem ? self.getBaseObject() : elemOrItem;
 
         self.callbacks.beforeAddNew( self, index );

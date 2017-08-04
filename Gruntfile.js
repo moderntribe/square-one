@@ -92,10 +92,12 @@ module.exports = function (grunt) {
 			'header:themeLegacy',
 		]);
 
+	var le = grunt.option('le') || 'mac';
 	grunt.registerTask(
 		'cheat', [
 			'shell:install',
 			'concurrent:dist',
+			'lineending:' + le,
 		]);
 
 	grunt.registerTask(
@@ -104,6 +106,7 @@ module.exports = function (grunt) {
 			'shell:test',
 			'concurrent:preflight',
 			'concurrent:dist',
+			'lineending:' + le,
 		]);
 
 	grunt.registerTask(

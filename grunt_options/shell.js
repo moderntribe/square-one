@@ -17,6 +17,6 @@ module.exports = {
 		options: {
 			stderr: false
 		},
-		command: 'yarn test'
+		command: 'npm run test'
 	}
 };

@@ -11,6 +11,7 @@ import { on } from '../utils/events';
 
 const el = {
 	container: tools.getNodes('site-wrap')[0],
+	embeds: [],
 };
 
 /**
@@ -54,8 +55,15 @@ const setupOembeds = () => {
 
 const resetEmbed = () => {
 	const embed = document.getElementsByClassName('wp-embed-lazy--is-playing')[0];
+	if (!embed) {
+		return;
+	}
+
 	const trigger = embed.querySelector('.wp-embed-lazy__trigger');
 	const iframe = embed.querySelector('iframe');
+	if (!iframe || !trigger) {
+		return;
+	}
 
 	// Remove embed
 	embed.removeChild(iframe);
@@ -116,6 +124,9 @@ const executeResize = () => {
  */
 
 const cacheElements = () => {
+	if (!el.embeds) {
+		return;
+	}
 	el.embeds = tools.getNodes('lazyload-embed', true, el.container);
 };
 
