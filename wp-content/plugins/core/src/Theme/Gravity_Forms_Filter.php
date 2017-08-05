@@ -16,9 +16,13 @@ class Gravity_Forms_Filter {
 	 */
 	private $activate_icons = false;
 
+	/**
+	 * @return void
+	 * @action init
+	 */
 	public function hook() {
 
-		add_filter( 'gform_enqueue_scripts', [ $this, 'enqueue_gravity_forms_jquery_ui_styles' ] );
+		add_action( 'gform_enqueue_scripts', [ $this, 'enqueue_gravity_forms_jquery_ui_styles' ] );
 		add_filter( 'gform_field_choice_markup_pre_render', [ $this, 'customize_gf_choice_other' ], 10, 4 );
 		add_filter( 'gform_field_css_class', [ $this, 'add_gf_select_field_class' ], 10, 3 );
 		add_filter( 'gform_pre_render', [ $this, 'deactivate_gf_animations' ] );

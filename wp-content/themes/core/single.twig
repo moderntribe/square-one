@@ -1,0 +1,23 @@
+{% extends "base.twig" %}
+
+{% block main %}
+
+
+	{% block subhead %}
+		{{ include( 'content/header/sub.twig' ) }}
+	{% endblock %}
+
+	{% block content %}
+		<div class="l-wrapper">
+			{{ include( 'content/single/post.twig') }}
+
+			{{ include( 'content/pagination/single.twig') }}
+		</div>
+
+		{{ do_action( 'the_panels') }}
+	{% endblock %}
+
+	{{ comments }}
+
+
+{% endblock %}

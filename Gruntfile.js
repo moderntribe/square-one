@@ -92,10 +92,12 @@ module.exports = function (grunt) {
 			'header:themeLegacy',
 		]);
 
+	var le = grunt.option('le') || 'mac';
 	grunt.registerTask(
 		'cheat', [
 			'shell:install',
 			'concurrent:dist',
+			'lineending:' + le,
 		]);
 
 	grunt.registerTask(
@@ -104,12 +106,29 @@ module.exports = function (grunt) {
 			'shell:test',
 			'concurrent:preflight',
 			'concurrent:dist',
+			'lineending:' + le,
 		]);
 
 	grunt.registerTask(
 		'dev', [
 			'browserSync',
 			'watch',
+		]);
+
+	grunt.registerTask(
+		'icons', [
+			'clean:coreIconsStart',
+			'unzip:coreIcons',
+			'copy:coreIconsFonts',
+			'copy:coreIconsStyles',
+			'copy:coreIconsVariables',
+			'replace:coreIconsStyle',
+			'replace:coreIconsVariables',
+			'header:coreIconsStyle',
+			'header:coreIconsVariables',
+			'footer:coreIconsVariables',
+			'concurrent:dist',
+			'clean:coreIconsEnd',
 		]);
 
 };

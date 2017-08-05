@@ -4,10 +4,11 @@ namespace Tribe\Project\Theme;
 
 class Body_Classes {
 
-	public function hook() {
-		add_filter( 'body_class', [ $this, 'body_classes' ], 10, 1 );
-	}
-
+	/**
+	 * @param $classes
+	 * @return array
+	 * @filter body_class
+	 */
 	public function body_classes( $classes ) {
 
 		if ( ! $this->is_singular() ) {
@@ -21,6 +22,8 @@ class Body_Classes {
 			$classes[] = 'has-panels';
 			if ( empty( $post->post_content ) ) {
 				$classes[] = 'is-panels-page';
+			} else {
+				$classes[] = 'has-page-content';
 			}
 		}
 

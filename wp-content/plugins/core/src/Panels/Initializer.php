@@ -6,10 +6,9 @@ namespace Tribe\Project\Panels;
 
 use ModularContent\Fields;
 use ModularContent\PanelType;
-use Pimple\Container;
 use Tribe\Project\Panels\Types\Panel_Type_Config;
-use Tribe\Project\Post_Types\Event;
-use Tribe\Project\Post_Types\Page;
+use Tribe\Project\Post_Types\Event\Event;
+use Tribe\Project\Post_Types\Page\Page;
 
 class Initializer {
 	private $panel_types_to_initialize = [ ];
@@ -28,6 +27,10 @@ class Initializer {
 		$this->panel_types_to_initialize[] = $panel_type;
 	}
 
+	/**
+	 * @return void
+	 * @action plugins_loaded
+	 */
 	public function hook() {
 		add_action( 'panels_init', [ $this, 'initialize_panels' ], 10, 0 );
 
@@ -38,6 +41,8 @@ class Initializer {
 		add_filter( 'modular_content_plural_label', function () {
 			return __( 'Panels', 'tribe' );
 		} );
+
+		add_filter( 'panels_js_config', [ $this, 'modify_js_config' ] );
 	}
 
 	public function initialize_panels() {
@@ -46,9 +51,9 @@ class Initializer {
 		$this->set_supported_post_types();
 		$this->set_view_directories();
 		require_once( dirname( $this->plugin_file ) . '/functions/panels.php' );
-		require_once( dirname( $this->plugin_file ) . '/functions/utility.php' );
 
 		add_filter( 'modular_content_default_fields', [ $this, 'set_default_fields' ], 10, 2 );
+		add_filter( 'modular_content_default_settings_fields', [ $this, 'set_default_settings' ], 10, 2 );
 		add_filter( 'modular_content_posts_field_taxonomy_options', [ $this, 'set_available_query_taxonomies', ], 10, 1 );
 		add_filter( 'modular_content_posts_field_p2p_options', [ $this, 'filter_p2p_options' ], 10, 1 );
 		add_filter( 'panels_query_post_type_options', [ $this, 'add_post_type_options_for_queries' ], 10, 1 );
@@ -56,6 +61,18 @@ class Initializer {
 		add_filter( 'panels_input_query_filter', [ $this, 'rewrite_date_query_for_events' ], 10, 3 );
 
 		$this->register_panels( \ModularContent\Plugin::instance()->registry() );
+	}
+
+	/**
+	 * Modify the scroll offset for the iframe to the themes needs (fixed nav)
+	 *
+	 * @param array $data Any js config data from the plugin
+	 *
+	 * @return array
+	 */
+	public function modify_js_config( $data = [] ) {
+		$data['iframe_scroll_offset'] = 120;
+		return $data;
 	}
 
 	/**
@@ -171,14 +188,10 @@ class Initializer {
 	}
 
 	public function set_default_fields( $fields, $panel_type ) {
+		return $fields;
+	}
 
-		// Add a nav title field to all panel types. This will be hidden on child panels with CSS.
-		$fields[] = new Fields\Text( [
-			'label'       => __( 'Navigation Title', 'tribe' ),
-			'name'        => 'nav-title',
-			'description' => __( 'The title that will be used for the page navigation menu. Leave blank to exclude from the menu.', 'tribe' ),
-		] );
-
+	public function set_default_settings( $fields, $panel_type ) {
 		return $fields;
 	}
 
@@ -208,7 +221,7 @@ class Initializer {
 					$query_args[ 'start_date' ] = $this->normalize_date_query_to_string( $dq[ 'after' ] );
 				}
 				if ( !empty( $dq[ 'before' ] ) ) {
-					$query_args[ 'end_date' ] = $this->normalize_date_query_to_string( $dq[ 'before' ] );;
+					$query_args[ 'end_date' ] = $this->normalize_date_query_to_string( $dq[ 'before' ] );
 				}
 			}
 		}
@@ -268,14 +281,14 @@ class Initializer {
 	}
 
 	public function thumbnail_url( $filename ) {
-		return plugins_url( 'assets/panels/thumbnails/' . $filename, $this->plugin_file );
+		return plugins_url( 'assets/admin/panels/thumbnails/' . $filename, $this->plugin_file );
 	}
 
 	public function layout_icon_url( $filename ) {
-		return plugins_url( 'assets/panels/icons/standard/' . $filename, $this->plugin_file );
+		return plugins_url( 'assets/admin/panels/icons/standard/' . $filename, $this->plugin_file );
 	}
 
 	public function swatch_icon_url( $filename ) {
-		return plugins_url( 'assets/panels/icons/swatches/' . $filename, $this->plugin_file );
+		return plugins_url( 'assets/admin/panels/icons/swatches/' . $filename, $this->plugin_file );
 	}
 }

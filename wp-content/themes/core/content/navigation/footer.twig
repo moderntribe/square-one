@@ -1,0 +1,13 @@
+{% if menu.secondary %}
+
+	<nav class="site-footer__nav" aria-labelledby="site-footer__nav-label">
+
+		<h2 id="site-footer__nav-label" class="u-visual-hide">{{ lang[ 'Secondary Navigation' ]|esc_html }}</h2>
+
+		<ol class="site-footer__nav-list">
+			{{ menu.secondary }}
+		</ol>
+
+	</nav>
+
+{% endif %}

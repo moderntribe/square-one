@@ -28,7 +28,7 @@ function the_page_title( $wrapper = true ) {
 	$title = get_page_title();
 
 	if ( $wrapper ) {
-		$title = '<h1 class="page-title">' . $title . '</h1>';
+		$title = '<h1 class="page-title">' . esc_html( $title ) . '</h1>';
 	}
 
 	if ( ! empty( $title ) ) {

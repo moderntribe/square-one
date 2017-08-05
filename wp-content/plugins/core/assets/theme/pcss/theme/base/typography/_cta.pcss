@@ -1,0 +1,55 @@
+
+/* -------------------------------------------------------------------------
+ * Anchor: CTA
+ * ------------------------------------------------------------------------- */
+
+a.cta,
+.t-content a.cta {
+	border-bottom: none;
+	color: var(--color-link);
+	display: inline-block;
+	font-size: var(--font-size-content-s);
+	font-weight: var(--font-weight-bold);
+	letter-spacing: 0.04em;
+	line-height: var(--line-height-base);
+	text-decoration: none;
+	text-transform: uppercase;
+
+	&:after {
+		content: var(--icon-arrow-right);
+		font-family: var(--font-family-core-icons);
+		font-weight: var(--font-weight-light);
+		margin-left: 5px;
+	}
+
+	&:visited {
+		color: var(--color-link);
+	}
+
+	&:focus,
+	&:hover {
+		color: var(--color-secondary);
+	}
+
+	@media (--viewport-medium) {
+		font-size: var(--font-size-content);
+	}
+}
+
+/* -------------------------------------------------------------------------
+ * Anchor: Modifier - CTA Inverse
+ * ------------------------------------------------------------------------- */
+
+a.cta--inverse,
+.t-content a.cta--inverse {
+	color: var(--color-white);
+
+	&:visited {
+		color: var(--color-white);
+	}
+
+	&:focus,
+	&:hover {
+		color: darken(var(--color-white), 0.08);
+	}
+}

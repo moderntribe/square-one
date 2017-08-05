@@ -45,13 +45,12 @@ class Admin_Search_Filtering {
 		}
 	}
 
-	public function hook() {
-		add_action( 'load-post.php', [ $this, 'add_post_page_hooks' ], 10, 0 );
-		add_action( 'load-post-new.php', [ $this, 'add_post_page_hooks' ], 10, 0 );
-
-		add_filter( 'p2p_connectable_args', [ $this, 'filter_connectable_query_args' ], 10, 3 );
-	}
-
+	/**
+	 * @return void
+	 *
+	 * @action load-post.php
+	 * @action load-post-new.php
+	 */
 	public function add_post_page_hooks() {
 		add_action( 'admin_enqueue_scripts', [ $this, 'prepare_js_data' ], 10, 0 );
 		add_action( 'admin_enqueue_scripts', [ __CLASS__, 'enqueue_assets' ], 11, 0 );
@@ -89,8 +88,8 @@ class Admin_Search_Filtering {
 		if ( empty( self::$post_type_options ) ) {
 			return;
 		}
-		self::$asset_loader->register_and_enqueue_script( 'p2p-posttype-filter', 'p2p/p2p-posttype-filter.js', [ 'jquery' ], '', true );
-		self::$asset_loader->register_and_enqueue_stylesheet( 'p2p-posttype-filter', 'p2p/p2p-posttype-filter.css' );
+		self::$asset_loader->register_and_enqueue_script( 'p2p-posttype-filter', 'admin/p2p/p2p-posttype-filter.js', [ 'jquery' ], '', true );
+		self::$asset_loader->register_and_enqueue_stylesheet( 'p2p-posttype-filter', 'admin/p2p/p2p-posttype-filter.css' );
 		wp_localize_script( 'p2p-posttype-filter', 'Tribe_P2P_Posttype_Filter', [
 			'relationships' => array_keys(self::$post_type_options),
 			'post_types'    => self::$post_type_options,
@@ -123,6 +122,14 @@ class Admin_Search_Filtering {
 		return $options;
 	}
 
+	/**
+	 * @param $query_vars
+	 * @param $connection
+	 * @param $post
+	 * @return mixed
+	 *
+	 * @filter p2p_connectable_args
+	 */
 	public function filter_connectable_query_args( $query_vars, $connection, $post ) {
 		if ( $this->should_filter_query_args() ) {
 			$query_vars['post_type'] = $_REQUEST['post_type'];

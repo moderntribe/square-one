@@ -64,13 +64,35 @@ abstract class Util {
 			return $extension;
 		}
 
-		$url_parts = parse_url( $url );
+		$path = parse_url( $url, PHP_URL_PATH );
 
-		if ( ! empty( $url_parts['path'] ) ) {
-			$extension = pathinfo( $url_parts['path'], PATHINFO_EXTENSION );
+		if ( ! empty( $path ) ) {
+			$extension = pathinfo( $path, PATHINFO_EXTENSION );
 		}
 
 		return $extension;
+	}
+
+	/**
+	 * Output the first page ID for the page using the specified page template
+	 * Really only useful in the case where one page uses a specific page template
+	 *
+	 * @param $template
+	 *
+	 * @return int
+	 */
+	public static function get_page_template_ID( $template ) {
+		$args = [
+			'meta_key'   => '_wp_page_template',
+			'meta_value' => $template,
+		];
+		$pages = get_pages( $args );
+
+		if ( empty( $pages ) ) {
+		    return 0;
+		}
+
+		return $pages[0]->ID;
 	}
 
 }

@@ -1,0 +1,14 @@
+version: "2"
+services:
+  php:
+    volumes:
+      - square1-webroot-sync:/srv/www/public
+      - ../../wp-content/uploads:/srv/www/public/wp-content/uploads
+  nginx:
+    volumes:
+      - square1-webroot-sync:/srv/www/public
+      - ../../wp-content/uploads:/srv/www/public/wp-content/uploads
+
+volumes:
+  square1-webroot-sync:
+    external: true

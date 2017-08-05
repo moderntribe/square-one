@@ -23,6 +23,7 @@ Thumbs.db
 
 local-config.php
 cache-config.php
+tests-config.php
 wp-content/uploads/
 wp-content/blogs.dir/
 wp-content/upgrade/
@@ -70,7 +71,10 @@ dev/bower_components/
 dev/vendor/
 dev/composer.phar
 local-config.json
-dev/docker/
+dev/docker/mysql/*
+!dev/docker/mysql/.gitkeep
+wp-content/plugins/core/assets/theme/css
+wp-content/plugins/core/assets/theme/js/dist
 
 # WP Engine #
 #############

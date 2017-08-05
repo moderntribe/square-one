@@ -1,6 +1,6 @@
 #  Theme Images
 
-Images for the theme usually live in a folder named "img" at root of theme. 
+Images for the themes live in a folder named "img" at `wp-content/plugins/core/assets/theme/img`. 
 
 ## Template Tags
 

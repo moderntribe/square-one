@@ -3,16 +3,13 @@
 namespace Tribe\Project\Theme\Resources;
 
 class Login_Resources {
-	public function hook() {
-		add_action( 'login_enqueue_scripts', [ $this, 'login_styles' ] );
-	}
-
 	/**
 	 * Add a stylesheet to the login page
+	 * @action login_enqueue_scripts
 	 */
 	public function login_styles() {
 
-		$css_dir = trailingslashit( get_template_directory_uri() ) . 'css/admin/';
+		$css_dir = trailingslashit( tribe_assets_url( 'theme/css/admin' ) );
 		$version = tribe_get_version();
 
 		// CSS

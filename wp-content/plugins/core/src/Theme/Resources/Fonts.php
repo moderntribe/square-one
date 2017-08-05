@@ -5,19 +5,17 @@ namespace Tribe\Project\Theme\Resources;
 
 
 class Fonts {
+
 	private $fonts = [ ];
 
 	public function __construct( array $fonts = [ ] ) {
 		$this->fonts = $fonts;
 	}
 
-	public function hook() {
-		add_action( 'wp_head', [ $this, 'load_fonts' ], 0, 0 );
-		//add_action( 'login_head', [ $this, 'load_fonts' ], 0, 0 );
-	}
-
 	/**
 	 * Add any required fonts
+	 * @action wp_head
+	 * @action login_head
 	 */
 	public function load_fonts() {
 
@@ -48,17 +46,17 @@ class Fonts {
 				}
 			};
 			var WebFontConfig = {
-				<?php if ( !empty( $this->fonts[ 'typekit' ] ) ) { ?>
+				<?php if ( ! empty( $this->fonts[ 'typekit' ] ) ) { ?>
 				typekit: {
 					id: '<?php echo $this->fonts[ 'typekit' ]; ?>'
 				},
 				<?php } ?>
-				<?php if ( !empty( $this->fonts[ 'google' ] ) ) { ?>
+				<?php if ( ! empty( $this->fonts[ 'google' ] ) ) { ?>
 				google: {
 					families: <?php echo json_encode( $this->fonts[ 'google' ] ); ?>
 				},
 				<?php } ?>
-				<?php if ( !empty( $this->fonts[ 'custom' ] ) ) { ?>
+				<?php if ( ! empty( $this->fonts[ 'custom' ] ) ) { ?>
 				custom: {
 					families: <?php echo json_encode( $this->fonts[ 'custom' ] ); ?>
 				},
@@ -90,7 +88,16 @@ class Fonts {
 
 	}
 
-	private function get_webfont_src() {
-		return trailingslashit( get_template_directory_uri() ) . 'js/vendor/webfontloader.js';
-	}
+    private function get_webfont_src() {
+	    return tribe_assets_url( 'theme/js/vendor/webfontloader.js' );
+   	}
+
+    /**
+  	 * @return Fonts
+  	 */
+  	public static function instance() {
+  		$container = tribe_project()->container();
+
+  		return $container['theme.resources.fonts'];
+  	}
 }

@@ -29,17 +29,21 @@ class Image_Sizes {
 
 	private $opengraph_image_size = self::SOCIAL_SHARE;
 
-	public function hook() {
-		add_action( 'after_setup_theme', [ $this, 'register_sizes' ], 10, 0 );
-		add_filter( 'wpseo_opengraph_image_size', [ $this, 'customize_wpseo_image_size' ], 10, 1 );
-	}
-
+	/**
+	 * @return void
+	 * @action after_setup_theme
+	 */
 	public function register_sizes() {
 		foreach ( $this->sizes as $key => $attributes ) {
 			add_image_size( $key, $attributes[ 'width' ], $attributes[ 'height' ], $attributes[ 'crop' ] );
 		}
 	}
 
+	/**
+	 * @param $size
+	 * @return string
+	 * @filter wpseo_opengraph_image_size
+	 */
 	public function customize_wpseo_image_size( $size ) {
 		return $this->opengraph_image_size;
 	}

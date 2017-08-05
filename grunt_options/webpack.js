@@ -1,4 +1,5 @@
 var webpack = require('webpack');
+var path = require('path');
 var webpackCoreThemeConfig = require('../webpack.config.js');
 
 module.exports = {
@@ -6,9 +7,8 @@ module.exports = {
 
 	themeDev: {
 		entry: {
-			scripts: './<%= pkg._corethemepath %>/js/src/index.js',
+			scripts: './<%= pkg._core_theme_assets_path %>/js/src/index.js',
 			vendor: [
-				'fastclick',
 				'delegate',
 				'verge',
 				'spin.js'
@@ -17,8 +17,8 @@ module.exports = {
 		output: {
 			filename: '[name].js',
 			chunkFilename: '[name].js',
-			path: './<%= pkg._corethemepath %>/js/dist/',
-			publicPath: '/<%= pkg._corethemepath %>/js/dist/',
+			path: path.resolve(__dirname + '/../', '<%= pkg._core_theme_assets_path %>/js/dist/'),
+			publicPath: '/<%= pkg._core_theme_assets_path %>/js/dist/',
 		},
 		devtool: 'eval-source-map',
 		plugins: webpackCoreThemeConfig.plugins.concat(
@@ -33,9 +33,8 @@ module.exports = {
 
 	themeProd: {
 		entry: {
-			scripts: './<%= pkg._corethemepath %>/js/src/index.js',
+			scripts: './<%= pkg._core_theme_assets_path %>/js/src/index.js',
 			vendorWebpack: [
-				'fastclick',
 				'delegate',
 				'verge',
 				'spin.js'
@@ -44,8 +43,8 @@ module.exports = {
 		output: {
 			filename: '[name].min.js',
 			chunkFilename: '[name].min.js',
-			path: './<%= pkg._corethemepath %>/js/dist/',
-			publicPath: '/<%= pkg._corethemepath %>/js/dist/',
+			path: path.resolve(__dirname + '/../', '<%= pkg._core_theme_assets_path %>/js/dist/'),
+			publicPath: '/<%= pkg._core_theme_assets_path %>/js/dist/',
 		},
 		plugins: webpackCoreThemeConfig.plugins.concat(
 			new webpack.DefinePlugin({

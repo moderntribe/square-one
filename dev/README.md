@@ -89,7 +89,7 @@ Outside of that object you will note something like this:
 	"version": "1.0.0",
 	"_bowerpath": "dev/bower_components",
 	"_themepath": "content/themes/tribe-square-one",
-	"_componentpath": "dev/dev_components",
+	"_component_path": "dev/dev_components",
 	"engines"       : {
 	"node": "0.10.25",
 	"npm" : "1.3.26"
