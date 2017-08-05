@@ -3,10 +3,10 @@
 @font-face {
   font-family: 'core-icons';
   src:
-    url('#{$icomoon-font-path}/core-icons.woff2?2gdrsw') format('woff2'),
-    url('#{$icomoon-font-path}/core-icons.ttf?2gdrsw') format('truetype'),
-    url('#{$icomoon-font-path}/core-icons.woff?2gdrsw') format('woff'),
-    url('#{$icomoon-font-path}/core-icons.svg?2gdrsw#core-icons') format('svg');
+    url('#{$icomoon-font-path}/core-icons.woff2?7u95zp') format('woff2'),
+    url('#{$icomoon-font-path}/core-icons.ttf?7u95zp') format('truetype'),
+    url('#{$icomoon-font-path}/core-icons.woff?7u95zp') format('woff'),
+    url('#{$icomoon-font-path}/core-icons.svg?7u95zp#core-icons') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -26,6 +26,26 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-audio-mute {
+  &:before {
+    content: $icon-audio-mute;
+  }
+}
+.icon-audio {
+  &:before {
+    content: $icon-audio;
+  }
+}
+.icon-pause {
+  &:before {
+    content: $icon-pause;
+  }
+}
+.icon-play {
+  &:before {
+    content: $icon-play;
+  }
+}
 .icon-arrow-left {
   &:before {
     content: $icon-arrow-left;
@@ -89,11 +109,6 @@
 .icon-chevron-up {
   &:before {
     content: $icon-chevron-up;
-  }
-}
-.icon-play {
-  &:before {
-    content: $icon-play;
   }
 }
 .icon-mail {
