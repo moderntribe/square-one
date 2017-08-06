@@ -74,7 +74,7 @@ class ImageText extends Panel {
 	}
 
 	protected function get_panel_attrs() {
-		$content_attrs = sprintf( 'data-name="%s" data-index="%s" data-autop="true" data-livetext',
+		$content_attrs = sprintf( 'data-depth="0" data-name="%s" data-autop="true" data-livetext',
 			esc_attr( ImageTextPanel::FIELD_CONTENT ),
 			esc_attr( get_nest_index() )
 		);
