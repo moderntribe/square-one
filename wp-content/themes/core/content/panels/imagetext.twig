@@ -1,0 +1,18 @@
+{# Panel: Image + Text #}
+
+<div class="site-section site-section--no-padding">
+
+	<div class="site-grid site-grid--no-gutters {{ wrapper_classes }}">
+
+		{% if image is not empty %}
+			<div class="site-grid__col">
+				{{ include('components/image.twig') }}
+			</div>
+		{% endif %}
+
+		<div class="site-grid__col site-grid__col--vertical-center">
+			{{ include('components/text.twig') }}
+		</div>
+
+	</div>
+</div>
