@@ -7,46 +7,45 @@ use ModularContent\Fields;
 class Wysiwyg extends Panel_Type_Config {
 
 	const NAME = 'wysiwyg';
-
-	const FIELD_LAYOUT              = 'layout';
-	const FIELD_LAYOUT_OPTION_LEFT  = 'left';
-	const FIELD_LAYOUT_OPTION_RIGHT = 'right';
-	const FIELD_COLUMNS             = 'columns';
-	const FIELD_COLUMN              = 'column';
+	
+	const FIELD_TITLE          = 'title';
+	const FIELD_CONTENT        = 'content';
+	const FIELD_COLUMNS        = 'columns';
+	const FIELD_COLUMN_CONTENT = 'column_content';
 
 	protected function panel() {
 
-		$helper_text = '<p>' . __( 'Sometimes you need to lay out content your own way. This panel allows you to use the WordPress WYSIWYG editor to lay out text and images in a single column, two or even three columns.', 'tribe' ) . '</p><p><strong>' . __( 'GOOD FOR:', 'tribe' ) . '</strong> ' . __( 'Displaying text and images, embedding YouTube videos, or social media feeds.', 'tribe' ) . '</p>';
+		$helper_text = '<p>' . __( 'Sometimes you need to lay out content your own way. This panel allows you to use the WordPress WYSIWYG editor to lay out text and images in a single column, two or even three columns.',
+				'tribe' ) . '</p><p><strong>' . __( 'GOOD FOR:',
+				'tribe' ) . '</strong> ' . __( 'Displaying text and images, embedding YouTube videos, or social media feeds.', 'tribe' ) . '</p>';
 		$panel       = $this->handler->factory( self::NAME, $helper_text );
 		$panel->set_template_dir( $this->ViewFinder );
 		$panel->set_label( __( 'WYSIWYG Editor', 'tribe' ) );
-		$panel->set_description( __( 'Displays custom content', 'tribe' ) );
+		$panel->set_description( __( 'Displays custom content in columns', 'tribe' ) );
 		$panel->set_thumbnail( $this->handler->thumbnail_url( 'module-wysiwyg.jpg' ) );
 
-		// Panel Layout
-		$panel->add_settings_field( new Fields\ImageSelect( [
-			'name'    => self::FIELD_LAYOUT,
-			'label'   => __( 'Layout', 'tribe' ),
-			'options' => [
-				self::FIELD_LAYOUT_OPTION_RIGHT => $this->handler->layout_icon_url( 'module-imagetext-right.png' ),
-				self::FIELD_LAYOUT_OPTION_LEFT  => $this->handler->layout_icon_url( 'module-imagetext-left.png' ),
-			],
-			'default' => self::FIELD_LAYOUT_OPTION_RIGHT,
+		$panel->add_field( new Fields\TextArea( [
+			'label'    => __( 'Content', 'tribe' ),
+			'name'     => self::FIELD_CONTENT,
+			'richtext' => true,
 		] ) );
 
-		/** @var Fields\Repeater $group */
 		$group = new Fields\Repeater( [
 			'label'            => __( 'Columns', 'tribe' ),
 			'name'             => self::FIELD_COLUMNS,
 			'min'              => 1,
 			'max'              => 3,
-			'new_button_label' => __( 'Add Column', 'tribe' )
+			'new_button_label' => __( 'Add Column', 'tribe' ),
+			'strings'          => [
+				'label.row_index' => 'Column %{index} |||| Column %{index}',
+				'button.delete'   => __( 'Delete Column', 'tribe' ),
+			],
 		] );
 
 		$group->add_field( new Fields\TextArea( [
-			'label'    => __( 'Column', 'tribe' ),
-			'name'     => self::FIELD_COLUMN,
-			'richtext' => true
+			'label'    => __( 'Column Content', 'tribe' ),
+			'name'     => self::FIELD_COLUMN_CONTENT,
+			'richtext' => true,
 		] ) );
 
 		$panel->add_field( $group );

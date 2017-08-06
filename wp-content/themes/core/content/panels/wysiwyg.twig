@@ -1,0 +1,49 @@
+{# Panel: WYSIWYG #}
+
+<div class="site-section">
+	<div class="l-wrapper">
+		<header class="site-section__header">
+
+			{{ title }}
+
+			{% if content is not empty %}
+				<div class="site-section__desc t-content"
+				     data-depth="0"
+				     data-name="content"
+				     data-autop
+				     data-livetext>
+					{{ content }}
+				</div>
+			{% endif %}
+
+		</header>
+
+		<div class="site-section__content">
+			<div class="site-grid">
+
+				<div class="site-grid__wrapper"
+				     data-depth="0"
+				     data-name="columns"
+				     data-livetext>
+
+					{% for col in columns %}
+						<div class="site-grid__col">
+
+							{% if col.content is not empty %}
+								<div class="t-content"
+								     data-depth="0"
+								     data-index="{{ loop.index0 }}"
+								     data-autop="true"
+								     data-name="column_content"
+								     data-livetext>
+									{{ col.content }}</div>
+							{% endif %}
+
+						</div>
+					{% endfor %}
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
