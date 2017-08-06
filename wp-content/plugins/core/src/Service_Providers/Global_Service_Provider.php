@@ -36,7 +36,7 @@ final class Global_Service_Provider extends Tribe_Service_Provider {
 	];
 
 	protected $panels = [
-		'ContentGrid',
+		'CardGrid',
 		'Gallery',
 		'ImageText',
 		'MicroNav',

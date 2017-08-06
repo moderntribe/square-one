@@ -1,0 +1,24 @@
+{# Component: Card #}
+
+<div class="c-card">
+
+	{% include('components/image.twig') %}
+
+	<div class="c-card__content">
+
+		{{ title }}
+
+		{% if description is not empty %}
+			<div class="c-card__desc" {{ card_desc_attrs }}>
+				{{ description }}
+			</div>
+		{% endif %}
+
+		{% if url is not empty %}
+			<a href="{{ url }}" target="{{ target }}">
+				{{ label }}
+			</a>
+		{% endif %}
+
+	</div>
+</div>

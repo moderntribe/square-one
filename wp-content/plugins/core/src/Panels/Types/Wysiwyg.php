@@ -7,9 +7,9 @@ use ModularContent\Fields;
 class Wysiwyg extends Panel_Type_Config {
 
 	const NAME = 'wysiwyg';
-	
+
 	const FIELD_TITLE          = 'title';
-	const FIELD_CONTENT        = 'content';
+	const FIELD_DESCRIPTION    = 'description';
 	const FIELD_COLUMNS        = 'columns';
 	const FIELD_COLUMN_CONTENT = 'column_content';
 
@@ -25,8 +25,8 @@ class Wysiwyg extends Panel_Type_Config {
 		$panel->set_thumbnail( $this->handler->thumbnail_url( 'module-wysiwyg.jpg' ) );
 
 		$panel->add_field( new Fields\TextArea( [
-			'label'    => __( 'Content', 'tribe' ),
-			'name'     => self::FIELD_CONTENT,
+			'label'    => __( 'Description', 'tribe' ),
+			'name'     => self::FIELD_DESCRIPTION,
 			'richtext' => true,
 		] ) );
 

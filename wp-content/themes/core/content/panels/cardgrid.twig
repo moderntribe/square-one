@@ -1,4 +1,4 @@
-{# Panel: WYSIWYG #}
+{# Panel: Card Grid #}
 
 <div class="site-section">
 	<div class="l-wrapper">
@@ -10,7 +10,7 @@
 				<div class="site-section__desc t-content"
 				     data-depth="0"
 				     data-name="description"
-				     data-autop
+				     data-autop="true"
 				     data-livetext>
 					{{ description }}
 				</div>
@@ -23,22 +23,21 @@
 
 				<div class="site-grid__wrapper"
 				     data-depth="0"
-				     data-name="columns"
+				     data-name="cards"
 				     data-livetext>
 
-					{% for col in columns %}
+					{% for card in cards %}
 						<div class="site-grid__col">
-
-							{% if col.content is not empty %}
-								<div class="t-content"
-								     data-depth="0"
-								     data-index="{{ loop.index0 }}"
-								     data-autop="true"
-								     data-name="column_content"
-								     data-livetext>
-									{{ col.content }}</div>
-							{% endif %}
-
+							{% include('components/card.twig') with {
+								'image' : card.image,
+								'title' : card.title,
+								'description' : card.description,
+								'card_desc_attrs' : card.card_desc_attrs,
+								'url' : card.url,
+								'target' : card.target,
+								'label' : card.label
+								}
+							%}
 						</div>
 					{% endfor %}
 

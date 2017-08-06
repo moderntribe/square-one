@@ -6,12 +6,12 @@
 
 		{% if image is not empty %}
 			<div class="site-grid__col">
-				{{ include('components/image.twig') }}
+				{% include('components/image.twig') %}
 			</div>
 		{% endif %}
 
 		<div class="site-grid__col site-grid__col--vertical-center">
-			{{ include('components/text.twig') }}
+			{% include('components/text.twig') %}
 		</div>
 
 	</div>

@@ -18,13 +18,13 @@ class ImageText extends Panel {
 	protected function get_mapped_panel_data(): array {
 
 		$data = [
-			'image'             => $this->get_panel_image(),
-			'wrapper_classes'   => $this->get_panel_classes(),
-			'component_classes' => $this->get_panel_component_classes(),
-			'content'           => ! empty( $this->panel_vars[ ImageTextPanel::FIELD_CONTENT ] ) ? $this->panel_vars[ ImageTextPanel::FIELD_CONTENT ] : false,
-			'content_attr'      => $this->get_panel_attrs(),
-			'title'             => $this->get_panel_title(),
-			'cta'               => ! empty( $this->panel_vars[ ImageTextPanel::FIELD_CTA ] ) && ! empty( $this->panel_vars[ ImageTextPanel::FIELD_CTA ]['url'] ) ? $this->panel_vars[ ImageTextPanel::FIELD_CTA ] : false,
+			'image'               => $this->get_panel_image(),
+			'wrapper_classes'     => $this->get_panel_classes(),
+			'component_modifiers' => $this->get_panel_component_modifiers(),
+			'content'             => ! empty( $this->panel_vars[ ImageTextPanel::FIELD_CONTENT ] ) ? $this->panel_vars[ ImageTextPanel::FIELD_CONTENT ] : false,
+			'content_attr'        => $this->get_panel_attrs(),
+			'title'               => $this->get_panel_title(),
+			'cta'                 => ! empty( $this->panel_vars[ ImageTextPanel::FIELD_CTA ] ) && ! empty( $this->panel_vars[ ImageTextPanel::FIELD_CTA ]['url'] ) ? $this->panel_vars[ ImageTextPanel::FIELD_CTA ] : false,
 		];
 
 		return $data;
@@ -62,12 +62,12 @@ class ImageText extends Panel {
 		return the_panel_title( esc_html( $this->panel_vars[ ImageTextPanel::FIELD_TITLE ] ), 'c-text__title', 'title', true, 0, esc_attr( get_nest_index() ) );
 	}
 
-	protected function get_panel_component_classes() {
+	protected function get_panel_component_modifiers() {
 
-		$classes = [ 'c-image' ];
+		$classes = [];
 
 		if ( ! empty( ImageTextPanel::NAME ) ) {
-			$classes[] = 'c-image--rect';
+			$classes[] = 'c-image--bg-rect';
 		}
 
 		return implode( ' ', $classes );
