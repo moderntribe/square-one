@@ -18,7 +18,7 @@ class Button extends Twig_Template {
 		$defaults = [
 			'url'         => '',
 			'type'        => 'button',
-			'target'      => '_self',
+			'target'      => '',
 			'attrs'       => [],
 			'label'       => false,
 			'btn_as_link' => false,
@@ -30,10 +30,10 @@ class Button extends Twig_Template {
 	public function get_data(): array {
 		$data = [
 			'tag'     => $this->options['btn_as_link'] ? 'a' : 'button',
-			'url'     => $this->options['url'],
+			'url'     => $this->options['btn_as_link'] ? $this->options['url'] : '',
 			'classes' => $this->get_classes(),
-			'type'    => ! empty( $this->options['btn_as_link'] ) ? '' : $this->options['type'],
-			'target'  => $this->options['target'],
+			'type'    => $this->options['btn_as_link'] ? '' : $this->options['type'],
+			'target'  => $this->options['btn_as_link'] ? $this->options['target'] : '',
 			'attrs'   => '',
 			'label'   => $this->options['label'],
 		];
