@@ -33,6 +33,8 @@ class Image extends Twig_Template {
 			'auto_shim'         => true,
 			// if true, shim dir as set will be used, src_size will be used as filename, with png as filetype
 			'auto_sizes_attr'   => false,
+			// pass a specific class to use for the component wrapper
+			'component_class'   => '',
 			// if lazyloading the lib can auto create sizes attribute.
 			'echo'              => true,
 			// whether to echo or return the html
@@ -92,8 +94,8 @@ class Image extends Twig_Template {
 	 */
 	public function get_data(): array {
 		$data = [];
-
-		$data['component_classes'] = 'c-image';
+		
+		$data['component_classes'] = $this->options['component_class'];
 		$data['img']               = $this->get_image();
 		$data['wrapper']           = $this->get_wrapper();
 		$data['link']              = $this->get_link();

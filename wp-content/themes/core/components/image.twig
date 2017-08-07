@@ -1,6 +1,6 @@
 {# Component: Image #}
 
-<div class="{{ component_classes }}">
+<div {% if component_classes %}class="{{ component_classes }}"{% endif %}>
 	{% if wrapper is not empty %}
 	<{{ wrapper.tag }} {{ wrapper.attributes }} class="{{ wrapper.class }}">
 	{% endif %}
