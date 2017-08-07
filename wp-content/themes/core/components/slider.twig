@@ -1,0 +1,31 @@
+{#
+
+Component: Slider
+
+Description: Use this wherever you need a slider with carousel or not.
+
+Attributes:
+	{
+        slider_show_carousel: true, // true/false. show carousel
+        slider_slides: [], // array. array of image html.... not final, we need to move the image function to twig?
+    }
+ #}
+
+<div class="c-slider">
+	<div class="c-slider__main" data-js="c-slider">
+		{% for image in slider_slides %}
+			<div class="c-slider__slide">
+				{% include('components/image.twig') %}
+			</div>
+		{% endfor %}
+	</div>
+	{% if slider_show_carousel %}
+		<div class="c-slider__carousel" data-js="c-slider-carousel">
+			{% for image in slider_slides %}
+				<button class="c-slider__thumbnail" data-js="c-slider-thumb-trigger" data-index="{{ loop.index0 }}">
+					{% include('components/image.twig') %}
+				</button>
+			{% endfor %}
+		</div>
+	{% endif %}
+</div>
