@@ -30,11 +30,34 @@ class CardGrid extends Panel {
 
 		if ( ! empty( $this->panel_vars[ CardG::FIELD_CARDS ] ) ) {
 			foreach ( $this->panel_vars[ CardG::FIELD_CARDS ] as $card ) {
+
+				$title_attrs       = [];
+				$description_attrs = [];
+
+				if ( is_panel_preview() ) {
+					$title_attrs = [
+						'data-depth'    => $this->panel->get_depth(),
+						'data-name'     => CardG::FIELD_CARD_TITLE,
+						'data-index'    => esc_attr( get_nest_index() ),
+						'data-livetext' => true,
+					];
+
+					$description_attrs = [
+						'data-depth'    => $this->panel->get_depth(),
+						'data-name'     => CardG::FIELD_CARD_DESCRIPTION,
+						'data-index'    => esc_attr( get_nest_index() ),
+						'data-autop'    => 'true',
+						'data-livetext' => true,
+					];
+				}
+
 				$options = [
-					Card::TITLE       => $card[ CardG::FIELD_CARD_TITLE ],
-					Card::DESCRIPTION => $card[ CardG::FIELD_CARD_DESCRIPTION ],
-					Card::IMAGE       => $card[ CardG::FIELD_CARD_IMAGE ],
-					Card::CTA         => $card[ CardG::FIELD_CARD_CTA ],
+					Card::TITLE             => $card[ CardG::FIELD_CARD_TITLE ],
+					Card::DESCRIPTION       => $card[ CardG::FIELD_CARD_DESCRIPTION ],
+					Card::IMAGE             => $card[ CardG::FIELD_CARD_IMAGE ],
+					Card::CTA               => $card[ CardG::FIELD_CARD_CTA ],
+					Card::TITLE_ATTRS       => $title_attrs,
+					Card::DESCRIPTION_ATTRS => $description_attrs,
 				];
 
 				$card_obj = Card::factory( $options );

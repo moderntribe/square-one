@@ -7,13 +7,21 @@ use Tribe\Project\Twig\Twig_Template;
 
 class Card extends Twig_Template {
 
-	const TITLE       = 'title';
-	const DESCRIPTION = 'description';
-	const IMAGE       = 'image';
-	const CTA         = 'cta';
-	const CTA_URL     = 'url';
-	const CTA_LABEL   = 'label';
-	const CTA_TARGET  = 'target';
+	const TITLE               = 'title';
+	const DESCRIPTION         = 'description';
+	const IMAGE               = 'image';
+	const CLASSES             = 'classes';
+	const TITLE_CLASSES       = 'title_classes';
+	const HEADER_CLASSES      = 'header_classes';
+	const CONTENT_CLASSES     = 'content_classes';
+	const IMAGE_CLASSES       = 'image_classes';
+	const DESCRIPTION_CLASSES = 'description_classes';
+	const TITLE_ATTRS         = 'title_attrs';
+	const DESCRIPTION_ATTRS   = 'description_attrs';
+	const CTA                 = 'cta';
+	const CTA_URL             = 'url';
+	const CTA_LABEL           = 'label';
+	const CTA_TARGET          = 'target';
 
 	protected $card = [];
 
@@ -57,7 +65,7 @@ class Card extends Twig_Template {
 	protected function get_card_image( $img ): string {
 
 		if ( empty( $img ) ) {
-			return false;
+			return '';
 		}
 
 		$options = [
@@ -93,11 +101,19 @@ class Card extends Twig_Template {
 	protected function get_card_classes(): string {
 		$classes = [ 'c-card' ];
 
+		if ( ! empty( $this->card[ self::CLASSES ] ) ) {
+			$classes = array_merge( $classes, $this->card[ self::CLASSES ] );
+		}
+
 		return implode( ' ', $classes );
 	}
 
 	protected function get_card_header_classes(): string {
 		$classes = [ 'c-card__header' ];
+
+		if ( ! empty( $this->card[ self::HEADER_CLASSES ] ) ) {
+			$classes = array_merge( $classes, $this->card[ self::HEADER_CLASSES ] );
+		}
 
 		return implode( ' ', $classes );
 	}
@@ -105,28 +121,57 @@ class Card extends Twig_Template {
 	protected function get_image_classes(): string {
 		$classes = [ 'c-image' ];
 
+		if ( ! empty( $this->card[ self::IMAGE_CLASSES ] ) ) {
+			$classes = array_merge( $classes, $this->card[ self::IMAGE_CLASSES ] );
+		}
+
 		return implode( ' ', $classes );
 	}
 
 	protected function get_card_title_classes(): array {
 		$classes = [ 'c-card__title' ];
 
-		return $classes;
-	}
+		if ( ! empty( $this->card[ self::TITLE_CLASSES ] ) ) {
+			$classes = array_merge( $classes, $this->card[ self::TITLE_CLASSES ] );
+		}
 
-	protected function get_card_title_attrs(): array {
-		return [
-			'data-depth'    => 0,
-			'data-name'     => CardGrid::FIELD_CARD_TITLE,
-			'data-index'    => esc_attr( get_nest_index() ),
-			'data-livetext' => true,
-		];
+		return $classes;
 	}
 
 	protected function get_card_content_classes(): string {
 		$classes = [ 'c-card__content' ];
 
+		if ( ! empty( $this->card[ self::CONTENT_CLASSES ] ) ) {
+			$classes = array_merge( $classes, $this->card[ self::CONTENT_CLASSES ] );
+		}
+
 		return implode( ' ', $classes );
+	}
+
+	protected function get_card_description_classes(): array {
+		$classes = [ 'c-card__desc' ];
+
+		if ( ! empty( $this->card[ self::DESCRIPTION_CLASSES ] ) ) {
+			$classes = array_merge( $classes, $this->card[ self::DESCRIPTION_CLASSES ] );
+		}
+
+		return $classes;
+	}
+
+	protected function get_card_title_attrs(): array {
+		if ( empty( $this->card[ self::TITLE_ATTRS ] ) ) {
+			return [];
+		}
+
+		return $this->card[ self::TITLE_ATTRS ];
+	}
+
+	protected function get_card_description_attrs(): array {
+		if ( empty( $this->card[ self::DESCRIPTION_ATTRS ] ) ) {
+			return [];
+		}
+
+		return $this->card[ self::DESCRIPTION_ATTRS ];
 	}
 
 	protected function get_card_description(): string {
@@ -135,18 +180,8 @@ class Card extends Twig_Template {
 			return '';
 		}
 
-		$classes = [ 'c-card__desc' ];
-		$attrs   = [];
-
-		if ( is_panel_preview() ) {
-			$attrs = [
-				'data-depth'    => 0,
-				'data-name'     => CardGrid::FIELD_CARD_DESCRIPTION,
-				'data-index'    => esc_attr( get_nest_index() ),
-				'data-autop'    => 'true',
-				'data-livetext' => true,
-			];
-		}
+		$classes = $this->get_card_description_classes();
+		$attrs   = $this->get_card_description_attrs();
 
 		$desc_object = Description::factory( $this->card[ self::DESCRIPTION ], $classes, $attrs );
 

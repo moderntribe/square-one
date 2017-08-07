@@ -12,17 +12,7 @@
 
 			{{ image }}
 
-			<div class="site-grid__col site-grid__col--vertical-center">
-				{% include('components/card.twig') with {
-				'image' : false,
-				'card_classes' : desc_classes,
-				'card_attrs' : desc_classes,
-				'title' : title,
-				'btn_url' : url,
-				'btn_target' : target,
-				'btn_label' : label
-				} %}
-			</div>
+			{{ card }}
 
 		</div>
 
