@@ -1,0 +1,20 @@
+{# Component: Content Block #}
+
+<div class="{{ content_block_classes }}">
+
+	<div class="{{ content_block_content_classes }}">
+
+		{% if title %}
+			{% include('components/title.twig') %}
+		{% endif %}
+
+		{% if description %}
+			{{ description }}
+		{% endif %}
+
+		{% if button is not empty %}
+			{{ button }}
+		{% endif %}
+
+	</div>
+</div>
