@@ -2,6 +2,7 @@
 
 namespace Tribe\Project\Templates\Components;
 
+use Tribe\Project\Theme\Util;
 use Tribe\Project\Twig\Twig_Template;
 
 class Button extends Twig_Template {
@@ -57,17 +58,7 @@ class Button extends Twig_Template {
 			return '';
 		}
 
-		$attributes = $this->options['attrs'];
-
-		$attrs = array_map( function ( $key ) use ( $attributes ) {
-			if ( is_bool( $attributes[ $key ] ) ) {
-				return $attributes[ $key ] ? $key : '';
-			}
-
-			return $key . '="' . esc_attr( $attributes[ $key ] ) . '"';
-		}, array_keys( $attributes ) );
-
-		return implode( ' ', $attrs );
+		return Util::array_to_attributes( $this->options['attrs'] );
 	}
 
 	/**
