@@ -6,7 +6,6 @@ namespace Tribe\Project\Templates\Content\Panels;
 use Tribe\Project\Panels\Types\ImageText as ImageTextPanel;
 use Tribe\Project\Templates\Components\Card;
 use Tribe\Project\Templates\Components\Image;
-use Tribe\Project\Templates\Components\Title;
 
 class ImageText extends Panel {
 
