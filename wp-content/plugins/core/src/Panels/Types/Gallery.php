@@ -8,6 +8,7 @@ class Gallery extends Panel_Type_Config {
 
 	const NAME = 'gallery';
 
+	const FIELD_TITLE                            = 'title';
 	const FIELD_CONTENT                          = 'content';
 	const FIELD_IMAGE_TREATMENT                  = 'image_treatment';
 	const FIELD_IMAGE_TREATMENT_OPTION_CROP      = 'crop';
