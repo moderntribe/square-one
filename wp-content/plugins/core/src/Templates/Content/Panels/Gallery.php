@@ -37,18 +37,20 @@ class Gallery extends Panel {
 
 	protected function get_slider(): string {
 		$options = [
-			'slides'        => $this->get_slides(),
-			'thumbnails'    => $this->get_slides( 'thumbnail' ),
-			'show_carousel' => true,
-			'show_arrows'   => true,
+			SliderComponent::SLIDES        => $this->get_slides(),
+			SliderComponent::THUMBNAILS    => $this->get_slides( 'thumbnail' ),
+			SliderComponent::SHOW_CAROUSEL => true,
+			SliderComponent::SHOW_ARROWS   => true,
+			SliderComponent::MAIN_CLASSES  => $this->get_slider_main_classes(),
 		];
 
 		$slider = SliderComponent::factory( $options );
+
 		return $slider->render();
 	}
 
 	protected function get_slides( $size = 'full' ): array {
-		$slide_ids = $this->panel_vars[GalleryPanel::FIELD_GALLERY];
+		$slide_ids = $this->panel_vars[ GalleryPanel::FIELD_GALLERY ];
 
 		if ( empty( $slide_ids ) ) {
 			return [];
@@ -63,7 +65,13 @@ class Gallery extends Panel {
 			];
 
 			$image = ImageComponent::factory( $slide_id, $options );
+
 			return $image->render();
 		}, $slide_ids );
+	}
+
+	protected function get_slider_main_classes() {
+		$classes =  [ sprintf( 'c-slider__main--%s', $this->panel_vars[ GalleryPanel::FIELD_IMAGE_TREATMENT ] ) ];
+		return $classes;
 	}
 }

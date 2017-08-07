@@ -9,7 +9,9 @@
 		<a href="{{ link.url }}" target="{{ link.target }}" title="{{ link.title }}" class="{{ link.class }}">
 		{% endif %}
 
-			<img class="{{ img.class }}" {{ img.attributes }} />
+		{% if img is not empty %}
+		<img class="{{ img.class }}" {{ img.attributes }} />
+		{% endif %}
 
 		{% if link is not empty %}
 		</a>

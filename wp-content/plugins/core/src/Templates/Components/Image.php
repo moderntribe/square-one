@@ -103,6 +103,11 @@ class Image extends Twig_Template {
 	}
 
 	protected function get_image(): array {
+
+		if ( $this->options['as_bg'] ) {
+			return [];
+		}
+
 		return [
 			'attributes' => $this->get_attributes(),
 			'class'      => $this->options['use_lazyload'] && ! $this->options['as_bg'] && ! empty( $this->image_id ) ? $this->options['img_class'] . ' lazyload' : $this->options['img_class'],
