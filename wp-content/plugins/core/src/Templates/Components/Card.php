@@ -6,6 +6,14 @@ use Tribe\Project\Twig\Twig_Template;
 
 class Card extends Twig_Template {
 
+	const TITLE       = 'title';
+	const DESCRIPTION = 'description';
+	const IMAGE       = 'image';
+	const CTA         = 'cta';
+	const CTA_URL     = 'url';
+	const CTA_LABEL   = 'label';
+	const CTA_TARGET  = 'target';
+
 	protected $card = [];
 
 	public function __construct( $card, $template, \Twig_Environment $twig = null ) {
@@ -18,15 +26,15 @@ class Card extends Twig_Template {
 		$data = [
 			'card_classes'         => $this->get_card_classes(),
 			'card_header_classes'  => $this->get_card_header_classes(),
-			'title'                => esc_html( $this->card['title'] ),
+			'title'                => esc_html( $this->card[ self::TITLE ] ),
 			'card_title_classes'   => $this->get_card_title_classes(),
 			'heading_tag'          => 'h3',
 			'title_attrs'          => $this->get_card_title_attrs(),
 			'card_content_classes' => $this->get_card_content_classes(),
-			'description'          => $this->card['description'],
+			'description'          => $this->card[ self::DESCRIPTION ],
 			'desc_classes'         => $this->get_card_desc_classes(),
 			'desc_attrs'           => $this->get_card_desc_attrs(),
-			'image'                => $this->get_card_image( $this->card['image'] ),
+			'image'                => $this->get_card_image( $this->card[ self::IMAGE ] ),
 			'image_classes'        => $this->get_image_classes(),
 			'button'               => $this->get_button(),
 		];
@@ -54,18 +62,19 @@ class Card extends Twig_Template {
 
 	protected function get_button() {
 
-		if ( empty( $this->card['cta']['url'] ) ) {
+		if ( empty( $this->card[ self::CTA ][ self::CTA_URL ] ) ) {
 			return '';
 		}
 
 		$options = [
-			'url'         => esc_url( $this->card['cta']['url'] ),
-			'label'       => esc_html( $this->card['cta']['label'] ),
-			'target'      => esc_attr( $this->card['cta']['target'] ),
+			'url'         => esc_url( $this->card[ self::CTA ][ self::CTA_URL ] ),
+			'label'       => esc_html( $this->card[ self::CTA ][ self::CTA_LABEL ] ),
+			'target'      => esc_attr( $this->card[ self::CTA ][ self::CTA_TARGET ] ),
 			'btn_as_link' => true,
 		];
 
 		$button = Button::factory( $options );
+
 		return $button->render();
 	}
 
@@ -94,7 +103,7 @@ class Card extends Twig_Template {
 	}
 
 	protected function get_card_title_attrs() {
-		$card_title_attrs = sprintf( 'class="c-card__title" data-depth="0" data-name="%s" data-index="%s" data-livetext', 'title',
+		$card_title_attrs = sprintf( 'class="c-card__title" data-depth="0" data-name="%s" data-index="%s" data-livetext', self::TITLE,
 			esc_attr( get_nest_index() ) );
 
 		return $card_title_attrs;
