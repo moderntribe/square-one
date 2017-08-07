@@ -93,7 +93,7 @@ class Image extends Twig_Template {
 	public function get_data(): array {
 		$data = [];
 
-		$data['component_classes'] = 'component component--image';
+		$data['component_classes'] = 'c-image';
 		$data['img']               = $this->get_image();
 		$data['wrapper']           = $this->get_wrapper();
 		$data['link']              = $this->get_link();

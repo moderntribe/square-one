@@ -52,7 +52,7 @@ class Card extends Twig_Template {
 			return '';
 		}
 
-		$title   = esc_html( $this->card[ self::TITLE ] );
+		$title   = $this->card[ self::TITLE ];
 		$classes = $this->get_card_title_classes();
 		$attrs   = $this->get_card_title_attrs();
 		$tag     = 'h3';

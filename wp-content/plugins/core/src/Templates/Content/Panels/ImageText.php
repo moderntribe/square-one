@@ -36,7 +36,7 @@ class ImageText extends Panel {
 		}
 
 		$options = [
-			Card::TITLE       => $this->panel_vars[ ImageTextPanel::FIELD_TITLE ],
+			Card::TITLE       => the_panel_title( esc_html( $this->panel_vars[ ImageTextPanel::FIELD_TITLE ] ), 'site-section__title', 'title', true, 0, 0 ),
 			Card::DESCRIPTION => $this->panel_vars[ ImageTextPanel::FIELD_DESCRIPTION ],
 			Card::IMAGE       => false,
 			Card::CTA         => $this->panel_vars[ ImageTextPanel::FIELD_CTA ],
