@@ -6,22 +6,22 @@ Description: Use this wherever you need a link styled as a button or a standard 
 
 Attributes:
 	{
-        as_link: true, // true/false. use link tag? Defaults to button
+        btn_as_link: true, // true/false. use link tag? Defaults to button
         btn_attrs: 'data-js="nav-trigger" aria-controls="etc"', // string. data atts, aria etc
         btn_classes: 'btn--large icon icon-checkmark icon--after', // string. additional classes for the button, icon classes etc
-		label: 'Click Here', // string. the button text
-		target: '_blank' // string. if type is link you can pass in target
-		type: 'submit' // string. if tag is button, you can set type
-		url: 'http://google.com' // string. if type is link you can set url
+		btn_label: 'Click Here', // string. the button text
+		btn_target: '_blank' // string. if type is link you can pass in target
+		btn_type: 'submit' // string. if tag is button, you can set type
+		btn_url: 'http://google.com' // string. if type is link you can set url
     }
  #}
 
-<{% if as_link %}a{% else %}button{% endif %}
-	class="btn {{ btn_classes }}"
-	{% if type %}type="{{ type }}"{% endif %}
-	{% if url %}href="{{ url }}"{% endif %}
-	{% if target %}target="{{ target }}"{% endif %}
+<{% if btn_as_link %}a{% else %}button{% endif %}
+	class="btn {{ btn_classes|esc_attr }}"
+	{% if btn_type %}type="{{ btn_type|esc_attr }}"{% endif %}
+	{% if btn_url %}href="{{ btn_url|esc_url }}"{% endif %}
+	{% if btn_target %}target="{{ btn_target|esc_attr }}"{% endif %}
 	{{ btn_attrs }}
 >
-	<span class="btn__text">{{ label }}</span>
-</{% if as_link %}a{% else %}button{% endif %}>
+	{% if btn_label %}<span class="btn__text">{{ btn_label|esc_html }}</span>{% endif %}
+</{% if btn_as_link %}a{% else %}button{% endif %}>

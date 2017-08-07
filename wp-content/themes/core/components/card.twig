@@ -18,8 +18,10 @@
 			{% include('components/description.twig') %}
 		{% endif %}
 
-		{% if url %}
-			{% include('components/button.twig') %}
+		{% if btn_url %}
+			{% include('components/button.twig') with {
+				btn_as_link: true,
+			} %}
 		{% endif %}
 
 	</div>
