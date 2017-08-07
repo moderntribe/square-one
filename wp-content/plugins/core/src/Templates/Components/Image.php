@@ -26,7 +26,7 @@ class Image extends Twig_Template {
 		return null;
 	}
 
-	private function parse_args( $options ) {
+	private function parse_args( $options ): array {
 		$defaults = [
 			'as_bg'             => false,
 			// us this as background on wrapper?
@@ -102,17 +102,17 @@ class Image extends Twig_Template {
 		return $data;
 	}
 
-	protected function get_image() {
+	protected function get_image(): array {
 		return [
 			'attributes' => $this->get_attributes(),
 			'class'      => $this->options['use_lazyload'] && ! $this->options['as_bg'] && ! empty( $this->image_id ) ? $this->options['img_class'] . ' lazyload' : $this->options['img_class'],
 		];
 	}
 
-	protected function get_wrapper() {
+	protected function get_wrapper(): array {
 
 		if ( ! $this->options['use_wrapper'] && ! $this->options['as_bg'] ) {
-			return false;
+			return [];
 		}
 
 		return [
@@ -122,9 +122,9 @@ class Image extends Twig_Template {
 		];
 	}
 
-	protected function get_link() {
+	protected function get_link(): array {
 		if ( empty( $this->options['link'] ) ) {
-			return false;
+			return [];
 		}
 
 		return [
@@ -140,7 +140,7 @@ class Image extends Twig_Template {
 	 *
 	 * @return string
 	 */
-	private function get_attributes() {
+	private function get_attributes(): string {
 
 		$src = '';
 		// we'll almost always set src, except if for some reason they wanted to only use srcset
@@ -221,7 +221,7 @@ class Image extends Twig_Template {
 	 *
 	 * @return string
 	 */
-	private function get_shim() {
+	private function get_shim(): string {
 
 		$shim_dir = trailingslashit( tribe_assets_url( 'theme/img/shims' ) );
 		$src      = $this->options['shim'];
@@ -242,7 +242,7 @@ class Image extends Twig_Template {
 	 *
 	 * @return string
 	 */
-	private function get_srcset_attribute() {
+	private function get_srcset_attribute(): string {
 
 		$attribute = [];
 		foreach ( $this->options['srcset_sizes'] as $size ) {

@@ -15,7 +15,7 @@ class Button extends Twig_Template {
 		$this->options = $this->parse_args( $options );
 	}
 
-	protected function parse_args( $options ) {
+	protected function parse_args( $options ): array {
 		$defaults = [
 			'url'         => '',
 			'type'        => 'button',
@@ -42,7 +42,7 @@ class Button extends Twig_Template {
 		return $data;
 	}
 
-	protected function get_classes() {
+	protected function get_classes(): string {
 		$classes = [ 'btn' ];
 
 		if ( ! empty( $this->options['classes'] ) ) {
@@ -52,7 +52,7 @@ class Button extends Twig_Template {
 		return implode( ' ', $classes );
 	}
 
-	protected function get_attrs() {
+	protected function get_attrs(): string {
 
 		if ( empty( $this->options['attrs'] ) ) {
 			return '';
