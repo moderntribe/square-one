@@ -20,7 +20,7 @@ class ImageText extends Panel {
 		$data = [
 			'wrapper_classes'      => $this->get_panel_classes(),
 			'image'                => $this->get_panel_image(),
-			'image_modifiers'      => $this->get_image_classes(),
+			'image_classes'        => $this->get_image_classes(),
 			'card_content_classes' => $this->get_card_content_classes(),
 			'description'          => $this->panel_vars[ ImageTextPanel::FIELD_DESCRIPTION ],
 			'desc_classes'         => $this->get_description_classes(),

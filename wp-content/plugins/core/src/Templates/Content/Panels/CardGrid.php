@@ -42,6 +42,7 @@ class CardGrid extends Panel {
 					'desc_classes'         => $this->get_card_desc_classes(),
 					'desc_attrs'           => $this->get_card_desc_attrs(),
 					'image'                => $this->get_card_image( $card[ CardG::FIELD_CARD_IMAGE ] ),
+					'image_classes'        => $this->get_image_classes(),
 					'url'                  => esc_url( $card[ CardG::FIELD_CARD_CTA ]['url'] ),
 					'label'                => esc_html( $card[ CardG::FIELD_CARD_CTA ]['label'] ),
 					'target'               => esc_attr( $card[ CardG::FIELD_CARD_CTA ]['target'] ),
@@ -62,7 +63,6 @@ class CardGrid extends Panel {
 			'as_bg'         => false,
 			'use_lazyload'  => false,
 			'echo'          => false,
-			'wrapper_class' => 'c-image',
 			'src_size'      => 'component-card',
 		];
 
@@ -83,6 +83,17 @@ class CardGrid extends Panel {
 	protected function get_card_header_classes() {
 
 		$classes = [ 'c-card__header' ];
+
+		if ( ! empty( CardG::NAME ) ) {
+			$classes[] = '';
+		}
+
+		return implode( ' ', $classes );
+	}
+
+	protected function get_image_classes() {
+
+		$classes = [ 'c-image' ];
 
 		if ( ! empty( CardG::NAME ) ) {
 			$classes[] = '';
