@@ -112,7 +112,7 @@ class Image extends Twig_Template {
 	protected function get_wrapper(): array {
 
 		if ( ! $this->options['use_wrapper'] && ! $this->options['as_bg'] ) {
-			return false;
+			return [];
 		}
 
 		return [
@@ -124,7 +124,7 @@ class Image extends Twig_Template {
 
 	protected function get_link(): array {
 		if ( empty( $this->options['link'] ) ) {
-			return false;
+			return [];
 		}
 
 		return [
