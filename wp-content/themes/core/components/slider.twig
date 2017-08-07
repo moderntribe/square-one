@@ -13,11 +13,11 @@ Attributes:
     }
  #}
 
-<div class="c-slider">
-	<div class="c-slider__main swiper-container" data-js="c-slider">
-		<div class="swiper-wrapper">
+<div class="{{ slider_classes }}">
+	<div class="{{ slider_main_classes }}" {{ slider_main_attrs }}>
+		<div class="{{ slider_main_wrapper_classes }}">
 			{% for slide in slides %}
-				<div class="c-slider__slide swiper-slide">
+				<div class="{{ slider_main_slide_classes }}">
 					{{ slide }}
 				</div>
 			{% endfor %}

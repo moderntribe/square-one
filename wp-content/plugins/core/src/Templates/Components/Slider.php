@@ -6,145 +6,75 @@ use Tribe\Project\Twig\Twig_Template;
 
 class Slider extends Twig_Template {
 
-	const TITLE       = 'title';
-	const DESCRIPTION = 'description';
-	const IMAGE       = 'image';
-	const CTA         = 'cta';
-	const CTA_URL     = 'url';
-	const CTA_LABEL   = 'label';
-	const CTA_TARGET  = 'target';
+	const SHOW_CAROUSEL = 'show_carousel';
+	const SHOW_ARROWS   = 'show_arrows';
+	const SLIDES        = 'slides';
+	const THUMBNAILS    = 'thumbnails';
 
-	protected $card = [];
+	protected $slider = [];
 
-	public function __construct( $card, $template, \Twig_Environment $twig = null ) {
+	public function __construct( $slider, $template, \Twig_Environment $twig = null ) {
 		parent::__construct( $template, $twig );
 
-		$this->card = $card;
+		$this->slider = $slider;
 	}
 
 	public function get_data(): array {
 		$data = [
-			'card_classes'         => $this->get_card_classes(),
-			'card_header_classes'  => $this->get_card_header_classes(),
-			'title'                => esc_html( $this->card[ self::TITLE ] ),
-			'card_title_classes'   => $this->get_card_title_classes(),
-			'heading_tag'          => 'h3',
-			'title_attrs'          => $this->get_card_title_attrs(),
-			'card_content_classes' => $this->get_card_content_classes(),
-			'description'          => $this->get_card_description(),
-			'image'                => $this->get_card_image( $this->card[ self::IMAGE ] ),
-			'image_classes'        => $this->get_image_classes(),
-			'button'               => $this->get_button(),
+			'slides'                      => $this->slider[self::SLIDES],
+			'thumbnails'                  => $this->slider[self::THUMBNAILS],
+			'show_carousel'               => $this->slider[self::SHOW_CAROUSEL],
+			'show_arrows'                 => $this->slider[self::SHOW_ARROWS],
+			'slider_classes'              => $this->get_slider_classes(),
+			'slider_main_classes'         => $this->get_slider_main_classes(),
+			'slider_main_wrapper_classes' => $this->get_slider_main_wrapper_classes(),
+			'slider_main_slide_classes'   => $this->get_slider_main_slide_classes(),
+			'slider_main_attrs'           => $this->get_slider_main_attrs(),
 		];
 
 		return $data;
 	}
 
-	protected function get_card_image( $img ) {
-
-		if ( empty( $img ) ) {
-			return false;
-		}
-
-		$options = [
-			'as_bg'        => false,
-			'use_lazyload' => false,
-			'echo'         => false,
-			'src_size'     => 'component-card',
-		];
-
-		$image = Image::factory( $img, $options );
-
-		return $image->render();
-	}
-
-	protected function get_button() {
-
-		if ( empty( $this->card[ self::CTA ][ self::CTA_URL ] ) ) {
-			return '';
-		}
-
-		$options = [
-			'url'         => esc_url( $this->card[ self::CTA ][ self::CTA_URL ] ),
-			'label'       => esc_html( $this->card[ self::CTA ][ self::CTA_LABEL ] ),
-			'target'      => esc_attr( $this->card[ self::CTA ][ self::CTA_TARGET ] ),
-			'btn_as_link' => true,
-		];
-
-		$button = Button::factory( $options );
-
-		return $button->render();
-	}
-
-	protected function get_card_classes() {
-		$classes = [ 'c-card' ];
+	protected function get_slider_classes(): string {
+		$classes = [ 'c-slider' ];
 
 		return implode( ' ', $classes );
 	}
 
-	protected function get_card_header_classes() {
-		$classes = [ 'c-card__header' ];
+	protected function get_slider_main_classes(): string {
+		$classes = [ 'c-slider__main' ];
+		$classes[] = 'swiper-container';
 
 		return implode( ' ', $classes );
 	}
 
-	protected function get_image_classes() {
-		$classes = [ 'c-image' ];
+	protected function get_slider_main_slide_classes(): string {
+		$classes = [ 'c-slider__slide' ];
+		$classes[] = 'swiper-slide';
 
 		return implode( ' ', $classes );
 	}
 
-	protected function get_card_title_classes() {
-		$classes = [ 'c-card__title' ];
+	protected function get_slider_main_wrapper_classes(): string {
+		$classes = [ 'c-slider__wrapper' ];
+		$classes[] = 'swiper-wrapper';
 
 		return implode( ' ', $classes );
 	}
 
-	protected function get_card_title_attrs() {
-		$card_title_attrs = sprintf( 'class="c-card__title" data-depth="0" data-name="%s" data-index="%s" data-livetext', CardGrid::FIELD_CARD_TITLE,
-			esc_attr( get_nest_index() ) );
-
-		return $card_title_attrs;
-	}
-
-	protected function get_card_content_classes() {
-		$classes = [ 'c-card__content' ];
-
-		return implode( ' ', $classes );
-	}
-
-	protected function get_card_description() {
-
-		if ( empty( $this->card[ self::DESCRIPTION ] ) ) {
-			return '';
-		}
-
-		$classes = [ 'c-card__desc' ];
-		$attrs   = [];
-
-		if ( is_panel_preview() ) {
-			$attrs = [
-				'data-depth'    => 0,
-				'data-name'     => CardGrid::FIELD_CARD_DESCRIPTION,
-				'data-index'    => esc_attr( get_nest_index() ),
-				'data-autop'    => 'true',
-				'data-livetext' => true,
-			];
-		}
-
-		$desc_object = Description::factory( $this->card[ self::DESCRIPTION ], $classes, $attrs );
-		return $desc_object->render();
+	protected function get_slider_main_attrs(): string {
+		return 'data-js="c-slider"';
 	}
 
 	/**
 	 * Get an instance of this controller bound to the correct data.
 	 *
-	 * @param        $card
+	 * @param        $slider
 	 * @param string $template
 	 *
 	 * @return static
 	 */
-	public static function factory( $card, $template = 'components/card.twig' ) {
-		return new static( $card, $template );
+	public static function factory( $slider, $template = 'components/slider.twig' ) {
+		return new static( $slider, $template );
 	}
 }
