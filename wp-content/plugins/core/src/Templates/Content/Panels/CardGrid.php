@@ -29,8 +29,9 @@ class CardGrid extends Panel {
 		$cards = [];
 
 		if ( ! empty( $this->panel_vars[ CardG::FIELD_CARDS ] ) ) {
-			foreach ( $this->panel_vars[ CardG::FIELD_CARDS ] as $card ) {
+			for ( $i = 0; $i < count( $this->panel_vars[ CardG::FIELD_CARDS ] ); $i++ ) {
 
+				$card              = $this->panel_vars[ CardG::FIELD_CARDS ][ $i ];
 				$title_attrs       = [];
 				$description_attrs = [];
 
@@ -38,14 +39,14 @@ class CardGrid extends Panel {
 					$title_attrs = [
 						'data-depth'    => $this->panel->get_depth(),
 						'data-name'     => CardG::FIELD_CARD_TITLE,
-						'data-index'    => esc_attr( get_nest_index() ),
+						'data-index'    => $i,
 						'data-livetext' => true,
 					];
 
 					$description_attrs = [
 						'data-depth'    => $this->panel->get_depth(),
 						'data-name'     => CardG::FIELD_CARD_DESCRIPTION,
-						'data-index'    => esc_attr( get_nest_index() ),
+						'data-index'    => $i,
 						'data-autop'    => 'true',
 						'data-livetext' => true,
 					];
