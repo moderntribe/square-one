@@ -13,25 +13,7 @@
 			     data-livetext>
 
 				{% for card in cards %}
-					<div class="site-grid__col">
-						{% include('components/card.twig') with {
-						'card_classes' : card.card_classes,
-						'card_header_classes' : card.card_header_classes,
-						'image' : card.image,
-						'image_classes' : card.image_classes,
-						'title' : card.title,
-						'title_classes' : card_title_classes,
-						'heading_tag' : card.heading_tag,
-						'title_attrs' : card.title_attrs,
-						'card_content_classes' : card.card_content_classes,
-						'desc_classes' : card.desc_classes,
-						'description' : card.description,
-						'desc_attrs' : card.desc_attrs,
-						'btn_url' : card.url,
-						'btn_target' : card.target,
-						'btn_label' : card.label
-						} %}
-					</div>
+					{{ card }}
 				{% endfor %}
 
 			</div>
