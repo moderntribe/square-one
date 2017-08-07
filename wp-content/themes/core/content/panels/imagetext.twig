@@ -18,14 +18,10 @@
 
 			<div class="site-grid__col site-grid__col--vertical-center">
 				{% include('components/card.twig') with {
-				'image' : '',
+				'image' : false,
 				'card_classes' : desc_classes,
 				'card_attrs' : desc_classes,
-				'card_content_classes' : card_content_classes,
 				'title' : title,
-				'description' : description,
-				'desc_classes' : desc_classes,
-				'desc_attrs' : desc_attrs,
 				'btn_url' : url,
 				'btn_target' : target,
 				'btn_label' : label

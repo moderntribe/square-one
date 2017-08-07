@@ -1,5 +1,7 @@
 {# Component: Title #}
 
-<{{ heading_tag }} class="{{ title_classes }}" {{ title_attrs }}>
+{{ heading_tag ? '<' ~ heading_tag }} {{ title_classes ? 'class="' ~ title_classes ~ '"' : '' }} {{ title_attrs }} {{ heading_tag ? '>' : '' }}
 	{{ title }}
-</{{ heading_tag }}>
+{{ heading_tag ? '</' ~ heading_tag ~ '>' }}
+
+

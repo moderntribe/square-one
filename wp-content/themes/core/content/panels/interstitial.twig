@@ -1,0 +1,31 @@
+{# Panel: Hero Layout #}
+
+{% extends "content/panels/panel.twig" %}
+
+{% block header %}{% endblock %}
+
+{% block wrapper_start %}{% endblock %}
+
+	{% block content %}
+
+		{% include('components/image.twig') %}
+
+		<div class="l-wrapper">
+			<div class="site-grid {{ wrapper_classes }}">
+				<div class="site-grid__col--one-half">
+					{% include('components/card.twig') with {
+					'image' : false,
+					'card_classes' : desc_classes,
+					'card_attrs' : desc_classes,
+					'title' : title,
+					'btn_url' : url,
+					'btn_target' : target,
+					'btn_label' : label
+					} %}
+				</div>
+			</div>
+		</div>
+
+	{% endblock %}
+
+{% block wrapper_end %}{% endblock %}
