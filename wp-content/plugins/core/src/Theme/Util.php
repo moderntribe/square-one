@@ -50,6 +50,25 @@ abstract class Util {
 	}
 
 	/**
+	 * Convert an array of key => value pairs into an attributes string.
+	 *
+	 * @param $array
+	 *
+	 * @return string
+	 */
+	public static function array_to_attributes( $array ) {
+		$attrs = array_map( function ( $key ) use ( $array ) {
+			if ( is_bool( $array[ $key ] ) ) {
+				return $array[ $key ] ? $key : '';
+			}
+
+			return $key . '="' . esc_attr( $array[ $key ] ) . '"';
+		}, array_keys( $array ) );
+
+		return implode( ' ', $attrs );
+	}
+
+	/**
 	 * Make a best-effort at extracting the file extension from a URL
 	 *
 	 * @param $url

@@ -2,6 +2,7 @@
 
 namespace Tribe\Project\Templates\Components;
 
+use Tribe\Project\Panels\Types\CardGrid;
 use Tribe\Project\Twig\Twig_Template;
 
 class Card extends Twig_Template {
@@ -31,9 +32,7 @@ class Card extends Twig_Template {
 			'heading_tag'          => 'h3',
 			'title_attrs'          => $this->get_card_title_attrs(),
 			'card_content_classes' => $this->get_card_content_classes(),
-			'description'          => $this->card[ self::DESCRIPTION ],
-			'desc_classes'         => $this->get_card_desc_classes(),
-			'desc_attrs'           => $this->get_card_desc_attrs(),
+			'description'          => $this->get_card_description(),
 			'image'                => $this->get_card_image( $this->card[ self::IMAGE ] ),
 			'image_classes'        => $this->get_image_classes(),
 			'button'               => $this->get_button(),
@@ -103,7 +102,7 @@ class Card extends Twig_Template {
 	}
 
 	protected function get_card_title_attrs() {
-		$card_title_attrs = sprintf( 'class="c-card__title" data-depth="0" data-name="%s" data-index="%s" data-livetext', self::TITLE,
+		$card_title_attrs = sprintf( 'class="c-card__title" data-depth="0" data-name="%s" data-index="%s" data-livetext', CardGrid::FIELD_CARD_TITLE,
 			esc_attr( get_nest_index() ) );
 
 		return $card_title_attrs;
@@ -115,17 +114,27 @@ class Card extends Twig_Template {
 		return implode( ' ', $classes );
 	}
 
-	protected function get_card_desc_classes() {
+	protected function get_card_description() {
+
+		if ( empty( $this->card[ self::DESCRIPTION ] ) ) {
+			return '';
+		}
+
 		$classes = [ 'c-card__desc' ];
+		$attrs   = [];
 
-		return implode( ' ', $classes );
-	}
+		if ( is_panel_preview() ) {
+			$attrs = [
+				'data-depth'    => 0,
+				'data-name'     => CardGrid::FIELD_CARD_DESCRIPTION,
+				'data-index'    => esc_attr( get_nest_index() ),
+				'data-autop'    => 'true',
+				'data-livetext' => true,
+			];
+		}
 
-	protected function get_card_desc_attrs() {
-		$card_desc_attrs = sprintf( 'data-depth="0" data-name="%s" data-index="%s" data-autop="true" data-livetext', 'description',
-			esc_attr( get_nest_index() ) );
-
-		return $card_desc_attrs;
+		$desc_object = Description::factory( $this->card[ self::DESCRIPTION ], $classes, $attrs );
+		return $desc_object->render();
 	}
 
 	/**
