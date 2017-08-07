@@ -12,20 +12,26 @@ Attributes:
  #}
 
 <div class="c-slider">
-	<div class="c-slider__main" data-js="c-slider">
-		{% for image in slider_slides %}
-			<div class="c-slider__slide">
-				{% include('components/image.twig') %}
-			</div>
-		{% endfor %}
+	<div class="c-slider__main swiper-container" data-js="c-slider">
+		<div class="swiper-wrapper">
+			{% for image in slider_slides %}
+				<div class="c-slider__slide swiper-slide">
+					{% include('components/image.twig') %}
+				</div>
+			{% endfor %}
+		</div>
+		<div class="c-slider__button c-slider__button--next swiper-button-next"></div>
+		<div class="c-slider__button c-slider__button--prev swiper-button-prev"></div>
 	</div>
 	{% if slider_show_carousel %}
-		<div class="c-slider__carousel" data-js="c-slider-carousel">
-			{% for image in slider_slides %}
-				<button class="c-slider__thumbnail" data-js="c-slider-thumb-trigger" data-index="{{ loop.index0 }}">
-					{% include('components/image.twig') %}
-				</button>
-			{% endfor %}
+		<div class="c-slider__carousel swiper-container" data-js="c-slider-carousel">
+			<div class="swiper-wrapper">
+				{% for image in slider_slides %}
+					<button class="c-slider__thumbnail swiper-slide" data-js="c-slider-thumb-trigger" data-index="{{ loop.index0 }}">
+						{% include('components/image.twig') %}
+					</button>
+				{% endfor %}
+			</div>
 		</div>
 	{% endif %}
 </div>
