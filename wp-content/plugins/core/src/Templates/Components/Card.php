@@ -27,10 +27,7 @@ class Card extends Twig_Template {
 		$data = [
 			'card_classes'         => $this->get_card_classes(),
 			'card_header_classes'  => $this->get_card_header_classes(),
-			'title'                => esc_html( $this->card[ self::TITLE ] ),
-			'card_title_classes'   => $this->get_card_title_classes(),
-			'heading_tag'          => 'h3',
-			'title_attrs'          => $this->get_card_title_attrs(),
+			'title'                => $this->get_title(),
 			'card_content_classes' => $this->get_card_content_classes(),
 			'description'          => $this->get_card_description(),
 			'image'                => $this->get_card_image( $this->card[ self::IMAGE ] ),
@@ -39,6 +36,22 @@ class Card extends Twig_Template {
 		];
 
 		return $data;
+	}
+
+	protected function get_title() {
+
+		if ( empty( $this->card[ self::TITLE ] ) ) {
+			return '';
+		}
+
+		$title   = esc_html( $this->card[ self::TITLE ] );
+		$classes = $this->get_card_title_classes();
+		$attrs   = $this->get_card_title_attrs();
+		$tag     = 'h3';
+
+		$title_obj = Title::factory( $title, $tag, $classes, $attrs );
+
+		return $title_obj->render();
 	}
 
 	protected function get_card_image( $img ) {
@@ -98,14 +111,16 @@ class Card extends Twig_Template {
 	protected function get_card_title_classes() {
 		$classes = [ 'c-card__title' ];
 
-		return implode( ' ', $classes );
+		return $classes;
 	}
 
 	protected function get_card_title_attrs() {
-		$card_title_attrs = sprintf( 'class="c-card__title" data-depth="0" data-name="%s" data-index="%s" data-livetext', CardGrid::FIELD_CARD_TITLE,
-			esc_attr( get_nest_index() ) );
-
-		return $card_title_attrs;
+		return [
+			'data-depth'    => 0,
+			'data-name'     => CardGrid::FIELD_CARD_TITLE,
+			'data-index'    => esc_attr( get_nest_index() ),
+			'data-livetext' => true,
+		];
 	}
 
 	protected function get_card_content_classes() {
@@ -134,6 +149,7 @@ class Card extends Twig_Template {
 		}
 
 		$desc_object = Description::factory( $this->card[ self::DESCRIPTION ], $classes, $attrs );
+
 		return $desc_object->render();
 	}
 

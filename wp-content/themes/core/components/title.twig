@@ -1,7 +1,13 @@
 {# Component: Title #}
 
-{{ heading_tag ? '<' ~ heading_tag }} {{ title_classes ? 'class="' ~ title_classes ~ '"' : '' }} {{ title_attrs }} {{ heading_tag ? '>' : '' }}
+<{{ tag }}
+	{% if classes %}
+	class="{{ classes }}"
+	{% endif %}
+	{% if attrs %}
+	{{ attrs }}
+	{% endif %}>
+
 	{{ title }}
-{{ heading_tag ? '</' ~ heading_tag ~ '>' }}
 
-
+</{{ tag }}>
