@@ -1,7 +1,23 @@
 {# Component: Image #}
 
-{% if image %}
-	<div class="{{ image_classes }}">
-		{{ image }}
-	</div>
-{% endif %}
+<div class="{{ component_classes }}">
+	{% if wrapper is not empty %}
+	<{{ wrapper.tag }} {{ wrapper.attributes }} class="{{ wrapper.class }}">
+	{% endif %}
+
+		{% if link is not empty %}
+		<a href="{{ link.url }}" target="{{ link.target }}" title="{{ link.title }}" class="{{ link.class }}">
+		{% endif %}
+
+			<img class="{{ img.class }}" {{ img.attributes }} />
+
+		{% if link is not empty %}
+		</a>
+		{% endif %}
+
+		{{ html }}
+
+	{% if wrapper is not empty %}
+	</{{ wrapper.tag }}>
+	{% endif %}
+</div>
