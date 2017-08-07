@@ -29,22 +29,9 @@ if( $panel->get_depth() >= 1 ) {
 
 <?php }
 
-// Parent Panel
+// Parent Panel.
 else { ?>
 
-	<?php // Zebra striping
-	$classes[] = $index % 2 == 0 ? 'panel--even' : 'panel--odd'; ?>
-
-	<section
-		<?php echo $panel_util->wrapper_classes( $panel, $classes ); ?>
-		data-index="<?php echo $index; ?>"
-		data-js="panel"
-		data-type="<?php esc_attr_e( $panel->get( 'type' ) ); ?>"
-		data-modular-content
-	>
-
 		<?php echo $html; ?>
-
-	</section>
 
 <?php } ?>

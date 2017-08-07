@@ -1,49 +1,31 @@
 {# Panel: WYSIWYG #}
 
-<div class="site-section">
-	<div class="l-wrapper">
-		<header class="site-section__header">
+{% extends "content/panels/panel.twig" %}
 
-			{{ title }}
+{% block content %}
 
-			{% if description is not empty %}
-				<div class="site-section__desc t-content"
-				     data-depth="0"
-				     data-name="description"
-				     data-autop
-				     data-livetext>
-					{{ description }}
-				</div>
-			{% endif %}
+	<div class="site-section__content">
+		<div class="site-grid">
 
-		</header>
+			<div class="site-grid__wrapper"
+			     data-depth="0"
+			     data-name="columns"
+			     data-livetext>
 
-		<div class="site-section__content">
-			<div class="site-grid">
+				{% for col in columns %}
+					<div class="site-grid__col">
 
-				<div class="site-grid__wrapper"
-				     data-depth="0"
-				     data-name="columns"
-				     data-livetext>
+						{% include('components/wysiwyg.twig') with {
+						'wysiwyg' : col.content,
+						'wysiwyg_classes' : col.wysiwyg_classes,
+						'wysiwyg_attrs' : col.wysiwyg_attrs
+						} %}
 
-					{% for col in columns %}
-						<div class="site-grid__col">
+					</div>
+				{% endfor %}
 
-							{% if col.content is not empty %}
-								<div class="t-content"
-								     data-depth="0"
-								     data-index="{{ loop.index0 }}"
-								     data-autop="true"
-								     data-name="column_content"
-								     data-livetext>
-									{{ col.content }}</div>
-							{% endif %}
-
-						</div>
-					{% endfor %}
-
-				</div>
 			</div>
 		</div>
 	</div>
-</div>
+
+{% endblock %}

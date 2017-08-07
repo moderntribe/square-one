@@ -18,13 +18,18 @@ class ImageText extends Panel {
 	protected function get_mapped_panel_data(): array {
 
 		$data = [
-			'image'               => $this->get_panel_image(),
-			'wrapper_classes'     => $this->get_panel_classes(),
-			'component_modifiers' => $this->get_panel_component_modifiers(),
-			'content'             => ! empty( $this->panel_vars[ ImageTextPanel::FIELD_CONTENT ] ) ? $this->panel_vars[ ImageTextPanel::FIELD_CONTENT ] : false,
-			'content_attr'        => $this->get_panel_attrs(),
-			'title'               => $this->get_panel_title(),
-			'cta'                 => ! empty( $this->panel_vars[ ImageTextPanel::FIELD_CTA ] ) && ! empty( $this->panel_vars[ ImageTextPanel::FIELD_CTA ]['url'] ) ? $this->panel_vars[ ImageTextPanel::FIELD_CTA ] : false,
+			'wrapper_classes'      => $this->get_panel_classes(),
+			'image'                => $this->get_panel_image(),
+			'image_modifiers'      => $this->get_image_classes(),
+			'card_content_classes' => $this->get_card_content_classes(),
+			'description'          => $this->panel_vars[ ImageTextPanel::FIELD_DESCRIPTION ],
+			'desc_classes'         => $this->get_description_classes(),
+			'desc_attrs'           => $this->get_card_desc_attrs(),
+			'title'                => $this->get_panel_title(),
+			'url'                  => esc_url( $this->panel_vars[ ImageTextPanel::FIELD_CTA ]['url'] ),
+			'label'                => esc_html( $this->panel_vars[ ImageTextPanel::FIELD_CTA ]['label'] ),
+			'target'               => esc_attr( $this->panel_vars[ ImageTextPanel::FIELD_CTA ]['target'] ),
+			'cta_classes'          => $this->get_cta_classes(),
 		];
 
 		return $data;
@@ -59,12 +64,12 @@ class ImageText extends Panel {
 
 	protected function get_panel_title() {
 
-		return the_panel_title( esc_html( $this->panel_vars[ ImageTextPanel::FIELD_TITLE ] ), 'c-text__title', 'title', true, 0, esc_attr( get_nest_index() ) );
+		return the_panel_title( esc_html( $this->panel_vars[ ImageTextPanel::FIELD_TITLE ] ), 'c-text__title', 'title', true, 0, 0 );
 	}
 
-	protected function get_panel_component_modifiers() {
+	protected function get_image_classes() {
 
-		$classes = [];
+		$classes = [ 'c-image' ];
 
 		if ( ! empty( ImageTextPanel::NAME ) ) {
 			$classes[] = 'c-image--bg-rect';
@@ -73,13 +78,55 @@ class ImageText extends Panel {
 		return implode( ' ', $classes );
 	}
 
-	protected function get_panel_attrs() {
-		$content_attrs = sprintf( 'data-depth="0" data-name="%s" data-autop="true" data-livetext',
-			esc_attr( ImageTextPanel::FIELD_CONTENT ),
-			esc_attr( get_nest_index() )
-		);
+	protected function get_card_content_classes() {
 
-		return $content_attrs;
+		$classes = [ 'c-card__content' ];
+
+		if ( ! empty( ImageTextPanel::NAME ) ) {
+			$classes[] = '';
+		}
+
+		return implode( ' ', $classes );
 	}
 
+	protected function get_title_classes() {
+
+		$classes = [ 'c-title' ];
+
+		if ( ! empty( ImageTextPanel::NAME ) ) {
+			$classes[] = '';
+		}
+
+		return implode( ' ', $classes );
+	}
+
+	protected function get_description_classes() {
+
+		$classes = [ 'c-description' ];
+
+		if ( ! empty( ImageTextPanel::NAME ) ) {
+			$classes[] = '';
+		}
+
+		return implode( ' ', $classes );
+	}
+
+	protected function get_card_desc_attrs() {
+		$card_desc_attrs = sprintf( 'data-depth="0" data-name="%s" data-autop="true" data-livetext',
+			esc_attr( ImageTextPanel::FIELD_DESCRIPTION )
+		);
+
+		return $card_desc_attrs;
+	}
+
+	protected function get_cta_classes() {
+
+		$classes = [ 'c-cta' ];
+
+		if ( ! empty( ImageTextPanel::NAME ) ) {
+			$classes[] = '';
+		}
+
+		return implode( ' ', $classes );
+	}
 }

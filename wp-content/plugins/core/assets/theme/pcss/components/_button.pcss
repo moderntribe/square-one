@@ -1,4 +1,3 @@
-
 /* -----------------------------------------------------------------------------
  *
  * Button: Default
@@ -12,6 +11,17 @@
  * <a href="#" class="btn">...</a>
  *
  * ----------------------------------------------------------------------------- */
+
+a[class*="btn-"],
+button[class*="btn-"] {
+
+	.t-content & {
+		margin-top: var(--spacer-xs);
+		margin-bottom: var(--spacer-xs);
+	}
+}
+
+/* TODO: Might want to namspace this with c- */
 
 .btn,
 a.btn {

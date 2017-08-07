@@ -12,7 +12,7 @@ class ImageText extends Panel_Type_Config {
 	const FIELD_LAYOUT_OPTION_IMAGE_RIGHT = 'image-right';
 	const FIELD_LAYOUT_OPTION_IMAGE_LEFT  = 'image-left';
 	const FIELD_TITLE                     = 'title';
-	const FIELD_CONTENT                   = 'content';
+	const FIELD_DESCRIPTION               = 'description';
 	const FIELD_IMAGE                     = 'image';
 	const FIELD_CTA                       = 'cta';
 
@@ -35,14 +35,12 @@ class ImageText extends Panel_Type_Config {
 			'default' => self::FIELD_LAYOUT_OPTION_IMAGE_LEFT,
 		] ) );
 
-		// Content.
 		$panel->add_field( new Fields\TextArea( [
-			'name'     => self::FIELD_CONTENT,
-			'label'    => __( 'Content', 'tribe' ),
+			'name'     => self::FIELD_DESCRIPTION,
+			'label'    => __( 'Description', 'tribe' ),
 			'richtext' => true,
 		] ) );
 
-		// Image.
 		$panel->add_field( new Fields\Image( [
 			'name'        => self::FIELD_IMAGE,
 			'label'       => __( 'Image', 'tribe' ),
@@ -50,7 +48,6 @@ class ImageText extends Panel_Type_Config {
 			'size'        => 'medium', // the size displayed in the admin.
 		] ) );
 
-		// CTA Link.
 		$panel->add_field( new Fields\Link( [
 			'name'  => self::FIELD_CTA,
 			'label' => __( 'Call To Action Link', 'tribe' ),

@@ -1,18 +1,39 @@
 {# Panel: Image + Text #}
 
-<div class="site-section site-section--no-padding">
+{% extends "content/panels/panel.twig" %}
 
-	<div class="site-grid site-grid--no-gutters {{ wrapper_classes }}">
+{% block header %}{% endblock %}
 
-		{% if image is not empty %}
+{% block wrapper_start %}{% endblock %}
+
+	{% block content %}
+
+		<div class="site-grid site-grid--no-gutters {{ wrapper_classes }}">
+
 			<div class="site-grid__col">
-				{% include('components/image.twig') %}
+				{% if image %}
+					{% include('components/image.twig') %}
+				{% endif %}
 			</div>
-		{% endif %}
 
-		<div class="site-grid__col site-grid__col--vertical-center">
-			{% include('components/text.twig') %}
+			<div class="site-grid__col site-grid__col--vertical-center">
+				{% include('components/card.twig') with {
+				'image' : '',
+				'card_classes' : desc_classes,
+				'card_attrs' : desc_classes,
+				'card_content_classes' : card_content_classes,
+				'title' : title,
+				'description' : description,
+				'desc_classes' : desc_classes,
+				'desc_attrs' : desc_attrs,
+				'url' : url,
+				'target' : target,
+				'label' : label
+				} %}
+			</div>
+
 		</div>
 
-	</div>
-</div>
+	{% endblock %}
+
+{% block wrapper_end %}{% endblock %}

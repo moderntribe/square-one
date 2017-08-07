@@ -1,48 +1,40 @@
 {# Panel: Card Grid #}
 
-<div class="site-section">
-	<div class="l-wrapper">
-		<header class="site-section__header">
+{% extends "content/panels/panel.twig" %}
 
-			{{ title }}
+{% block content %}
 
-			{% if description is not empty %}
-				<div class="site-section__desc t-content"
-				     data-depth="0"
-				     data-name="description"
-				     data-autop="true"
-				     data-livetext>
-					{{ description }}
-				</div>
-			{% endif %}
+	<div class="site-section__content">
+		<div class="site-grid">
 
-		</header>
+			<div class="site-grid__wrapper"
+			     data-depth="0"
+			     data-name="cards"
+			     data-livetext>
 
-		<div class="site-section__content">
-			<div class="site-grid">
+				{% for card in cards %}
+					<div class="site-grid__col">
+						{% include('components/card.twig') with {
+						'card_classes' : card.card_classes,
+						'card_header_classes' : card.card_header_classes,
+						'image' : card.image,
+						'title' : card.title,
+						'title_classes' : card_title_classes,
+						'heading_tag' : card.heading_tag,
+						'title_attrs' : card.title_attrs,
+						'card_content_classes' : card.card_content_classes,
+						'desc_classes' : card.desc_classes,
+						'description' : card.description,
+						'desc_attrs' : card.desc_attrs,
+						'url' : card.url,
+						'target' : card.target,
+						'label' : card.label
+						} %}
+					</div>
+				{% endfor %}
 
-				<div class="site-grid__wrapper"
-				     data-depth="0"
-				     data-name="cards"
-				     data-livetext>
-
-					{% for card in cards %}
-						<div class="site-grid__col">
-							{% include('components/card.twig') with {
-								'image' : card.image,
-								'title' : card.title,
-								'description' : card.description,
-								'card_desc_attrs' : card.card_desc_attrs,
-								'url' : card.url,
-								'target' : card.target,
-								'label' : card.label
-								}
-							%}
-						</div>
-					{% endfor %}
-
-				</div>
 			</div>
 		</div>
 	</div>
-</div>
+
+{% endblock %}

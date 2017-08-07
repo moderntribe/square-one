@@ -31,13 +31,20 @@ class CardGrid extends Panel {
 			foreach ( $this->panel_vars[ CardG::FIELD_CARDS ] as $card ) {
 
 				$cards[] = [
-					'title'           => the_panel_title( esc_html( $card[ CardG::FIELD_CARD_TITLE ] ), 'c-card__title', 'title', true, 0, esc_attr( get_nest_index() ) ),
-					'description'     => $card[ CardG::FIELD_CARD_DESCRIPTION ],
-					'card_desc_attrs' => $this->get_card_content_attrs(),
-					'image'           => $this->get_card_image( $card[ CardG::FIELD_CARD_IMAGE ] ),
-					'url'             => esc_url( $card[ CardG::FIELD_CARD_CTA ]['url'] ),
-					'label'           => esc_html( $card[ CardG::FIELD_CARD_CTA ]['label'] ),
-					'target'          => esc_attr( $card[ CardG::FIELD_CARD_CTA ]['target'] ),
+					'card_classes'         => $this->get_card_classes(),
+					'card_header_classes'  => $this->get_card_header_classes(),
+					'title'                => esc_html( $card[ CardG::FIELD_CARD_TITLE ] ),
+					'card_title_classes'   => $this->get_card_title_classes(),
+					'heading_tag'          => 'h3',
+					'title_attrs'          => $this->get_card_title_attrs(),
+					'card_content_classes' => $this->get_card_content_classes(),
+					'description'          => $card[ CardG::FIELD_CARD_DESCRIPTION ],
+					'desc_classes'         => $this->get_card_desc_classes(),
+					'desc_attrs'           => $this->get_card_desc_attrs(),
+					'image'                => $this->get_card_image( $card[ CardG::FIELD_CARD_IMAGE ] ),
+					'url'                  => esc_url( $card[ CardG::FIELD_CARD_CTA ]['url'] ),
+					'label'                => esc_html( $card[ CardG::FIELD_CARD_CTA ]['label'] ),
+					'target'               => esc_attr( $card[ CardG::FIELD_CARD_CTA ]['target'] ),
 				];
 			}
 		}
@@ -62,7 +69,71 @@ class CardGrid extends Panel {
 		return the_tribe_image( $img, $options );
 	}
 
-	protected function get_card_content_attrs() {
+	protected function get_card_classes() {
+
+		$classes = [ 'c-card' ];
+
+		if ( ! empty( CardG::NAME ) ) {
+			$classes[] = '';
+		}
+
+		return implode( ' ', $classes );
+	}
+
+	protected function get_card_header_classes() {
+
+		$classes = [ 'c-card__header' ];
+
+		if ( ! empty( CardG::NAME ) ) {
+			$classes[] = '';
+		}
+
+		return implode( ' ', $classes );
+	}
+
+	protected function get_card_title_classes() {
+
+		$classes = [ 'c-card__title' ];
+
+		if ( ! empty( CardG::NAME ) ) {
+			$classes[] = '';
+		}
+
+		return implode( ' ', $classes );
+	}
+
+	protected function get_card_title_attrs() {
+		$card_title_attrs = sprintf( 'class="c-card__title" data-depth="0" data-name="%s" data-index="%s" data-livetext',
+			esc_attr( CardG::FIELD_CARD_TITLE ),
+			esc_attr( get_nest_index() )
+		);
+
+		return $card_title_attrs;
+	}
+
+	protected function get_card_content_classes() {
+
+		$classes = [ 'c-card__content' ];
+
+		if ( ! empty( CardG::NAME ) ) {
+			$classes[] = '';
+		}
+
+		return implode( ' ', $classes );
+	}
+
+	protected function get_card_desc_classes() {
+
+		$classes = [ 'c-card__desc' ];
+
+		if ( ! empty( CardG::NAME ) ) {
+			$classes[] = '';
+		}
+
+		return implode( ' ', $classes );
+	}
+
+	protected function get_card_desc_attrs() {
 		$card_desc_attrs = sprintf( 'data-depth="0" data-name="%s" data-index="%s" data-autop="true" data-livetext',
 			esc_attr( CardG::FIELD_CARD_DESCRIPTION ),
 			esc_attr( get_nest_index() )

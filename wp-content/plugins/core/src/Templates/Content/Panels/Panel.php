@@ -18,6 +18,7 @@ class Panel extends Twig_Template {
 			'panel'    => $this->panel_vars,
 			'depth'    => $this->panel->get_depth(),
 			'type'     => $this->panel->get_type_object()->get_id(),
+			'index'    => get_nest_index(),
 			'children' => $this->get_children( $this->panel ),
 			'object'   => $this->panel,
 			'lang'     => new Noop_Lazy_Strings( 'tribe' ),
