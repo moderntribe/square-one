@@ -6,29 +6,33 @@ Description: Use this wherever you need a slider with carousel or not.
 
 Attributes:
 	{
-        slider_show_carousel: true, // true/false. show carousel
-        slider_slides: [], // array. array of image html.... not final, we need to move the image function to twig?
+        show_carousel: true, // true/false. show carousel
+        show_arrows: true, // true/false. show carousel
+        slides: [], // array. slide html
+        thumbnails: [], // array. thumb html
     }
  #}
 
 <div class="c-slider">
 	<div class="c-slider__main swiper-container" data-js="c-slider">
 		<div class="swiper-wrapper">
-			{% for image in slider_slides %}
+			{% for slide in slides %}
 				<div class="c-slider__slide swiper-slide">
-					{% include('components/image.twig') %}
+					{{ slide }}
 				</div>
 			{% endfor %}
 		</div>
-		<div class="c-slider__button c-slider__button--next swiper-button-next"></div>
-		<div class="c-slider__button c-slider__button--prev swiper-button-prev"></div>
+		{% if show_arrows %}
+			<div class="c-slider__button c-slider__button--next swiper-button-next"></div>
+			<div class="c-slider__button c-slider__button--prev swiper-button-prev"></div>
+		{% endif %}
 	</div>
-	{% if slider_show_carousel %}
+	{% if show_carousel %}
 		<div class="c-slider__carousel swiper-container" data-js="c-slider-carousel">
 			<div class="swiper-wrapper">
-				{% for image in slider_slides %}
+				{% for thumbnail in thumbnails %}
 					<button class="c-slider__thumbnail swiper-slide" data-js="c-slider-thumb-trigger" data-index="{{ loop.index0 }}">
-						{% include('components/image.twig') %}
+						{{ thumbnail }}
 					</button>
 				{% endfor %}
 			</div>
