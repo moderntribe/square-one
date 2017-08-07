@@ -6,10 +6,15 @@ use Tribe\Project\Twig\Twig_Template;
 
 class Slider extends Twig_Template {
 
-	const SHOW_CAROUSEL = 'show_carousel';
-	const SHOW_ARROWS   = 'show_arrows';
-	const SLIDES        = 'slides';
-	const THUMBNAILS    = 'thumbnails';
+	const SHOW_CAROUSEL   = 'show_carousel';
+	const SHOW_ARROWS     = 'show_arrows';
+	const SLIDES          = 'slides';
+	const THUMBNAILS      = 'thumbnails';
+	const CLASSES         = 'classes';
+	const MAIN_CLASSES    = 'main_classes';
+	const WRAPPER_CLASSES = 'wrapper_classes';
+	const SLIDE_CLASSES   = 'slide_classes';
+	const MAIN_ATTRS      = 'main_attrs';
 
 	protected $slider = [];
 
@@ -21,10 +26,10 @@ class Slider extends Twig_Template {
 
 	public function get_data(): array {
 		$data = [
-			'slides'                      => $this->slider[self::SLIDES],
-			'thumbnails'                  => $this->slider[self::THUMBNAILS],
-			'show_carousel'               => $this->slider[self::SHOW_CAROUSEL],
-			'show_arrows'                 => $this->slider[self::SHOW_ARROWS],
+			'slides'                      => $this->slider[ self::SLIDES ],
+			'thumbnails'                  => $this->slider[ self::THUMBNAILS ],
+			'show_carousel'               => $this->slider[ self::SHOW_CAROUSEL ],
+			'show_arrows'                 => $this->slider[ self::SHOW_ARROWS ],
 			'slider_classes'              => $this->get_slider_classes(),
 			'slider_main_classes'         => $this->get_slider_main_classes(),
 			'slider_main_wrapper_classes' => $this->get_slider_main_wrapper_classes(),
@@ -38,26 +43,39 @@ class Slider extends Twig_Template {
 	protected function get_slider_classes(): string {
 		$classes = [ 'c-slider' ];
 
+		if ( ! empty( $this->slider[ self::CLASSES ] ) ) {
+			$classes = array_merge( $classes, $this->slider[ self::CLASSES ] );
+		}
+
 		return implode( ' ', $classes );
 	}
 
 	protected function get_slider_main_classes(): string {
-		$classes = [ 'c-slider__main' ];
-		$classes[] = 'swiper-container';
+		$classes = [ 'c-slider__main', 'swiper-container' ];
+
+		if ( ! empty( $this->slider[ self::MAIN_CLASSES ] ) ) {
+			$classes = array_merge( $classes, $this->slider[ self::MAIN_CLASSES ] );
+		}
 
 		return implode( ' ', $classes );
 	}
 
 	protected function get_slider_main_slide_classes(): string {
-		$classes = [ 'c-slider__slide' ];
-		$classes[] = 'swiper-slide';
+		$classes = [ 'c-slider__slide', 'swiper-slide' ];
+
+		if ( ! empty( $this->slider[ self::SLIDE_CLASSES ] ) ) {
+			$classes = array_merge( $classes, $this->slider[ self::SLIDE_CLASSES ] );
+		}
 
 		return implode( ' ', $classes );
 	}
 
 	protected function get_slider_main_wrapper_classes(): string {
-		$classes = [ 'c-slider__wrapper' ];
-		$classes[] = 'swiper-wrapper';
+		$classes = [ 'c-slider__wrapper', 'swiper-wrapper' ];
+
+		if ( ! empty( $this->slider[ self::WRAPPER_CLASSES ] ) ) {
+			$classes = array_merge( $classes, $this->slider[ self::WRAPPER_CLASSES ] );
+		}
 
 		return implode( ' ', $classes );
 	}
