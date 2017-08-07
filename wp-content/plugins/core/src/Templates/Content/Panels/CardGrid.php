@@ -30,8 +30,15 @@ class CardGrid extends Panel {
 
 		if ( ! empty( $this->panel_vars[ CardG::FIELD_CARDS ] ) ) {
 			foreach ( $this->panel_vars[ CardG::FIELD_CARDS ] as $card ) {
-				$card_obj = Card::factory( $card );
-				$cards[] = $card_obj->render();
+				$options = [
+					Card::TITLE       => $card[ CardG::FIELD_CARD_TITLE ],
+					Card::DESCRIPTION => $card[ CardG::FIELD_CARD_DESCRIPTION ],
+					Card::IMAGE       => $card[ CardG::FIELD_CARD_IMAGE ],
+					Card::CTA         => $card[ CardG::FIELD_CARD_CTA ],
+				];
+
+				$card_obj = Card::factory( $options );
+				$cards[]  = $card_obj->render();
 			}
 		}
 

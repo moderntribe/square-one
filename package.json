@@ -62,6 +62,7 @@
     "postcss-reporter": "^3.0.0",
     "postcss-simple-vars": "^3.0.0",
     "spin.js": "^2.3.2",
+    "swiper": "^3.4.2",
     "tota11y": "0.1.6",
     "verge": "^1.10.2",
     "webfontloader": "^1.6.28"

@@ -16,7 +16,17 @@ Attributes:
     }
  #}
 
-<{{ tag }} class="{{ classes }}" type="{{ type }}" href="{{ url }}" target="{{ target }}" {{ attrs }}>
+<{{ tag }} class="{{ classes }}"
+	{% if type %}
+	type="{{ type }}"
+	{% endif %}
+	{% if url %}
+	href="{{ url }}"
+	{% endif %}
+	{% if target %}
+	target="{{ target }}"
+	{% endif %}
+	{{ attrs }}>
 	{% if label is not empty %}
 		<span class="btn__text">{{ label }}</span>
 	{% endif %}
