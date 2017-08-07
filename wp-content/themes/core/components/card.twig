@@ -4,7 +4,7 @@
 
 	{% if image %}
 		<header class="{{ card_header_classes }}">
-			{% include('components/image.twig') %}
+			{{ image }}
 		</header>
 	{% endif %}
 
@@ -18,8 +18,8 @@
 			{% include('components/description.twig') %}
 		{% endif %}
 
-		{% if btn_url %}
-			{% include('components/button.twig') %}
+		{% if button is not empty %}
+			{{ button }}
 		{% endif %}
 
 	</div>

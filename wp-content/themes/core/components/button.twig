@@ -16,12 +16,8 @@ Attributes:
     }
  #}
 
-<{% if btn_as_link %}a{% else %}button{% endif %}
-	class="btn {{ btn_classes|esc_attr }}"
-	{% if btn_type %}type="{{ btn_type|esc_attr }}"{% endif %}
-	{% if btn_url %}href="{{ btn_url|esc_url }}"{% endif %}
-	{% if btn_target %}target="{{ btn_target|esc_attr }}"{% endif %}
-	{{ btn_attrs }}
->
-	{% if btn_label %}<span class="btn__text">{{ btn_label|esc_html }}</span>{% endif %}
-</{% if btn_as_link %}a{% else %}button{% endif %}>
+<{{ tag }} class="{{ classes }}" type="{{ type }}" href="{{ url }}" target="{{ target }}" {{ attrs }}>
+	{% if label is not empty %}
+		<span class="btn__text">{{ label }}</span>
+	{% endif %}
+</{{ tag }}>
