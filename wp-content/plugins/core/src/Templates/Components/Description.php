@@ -29,11 +29,11 @@ class Description extends Twig_Template {
 		return $data;
 	}
 
-	protected function get_classes() {
+	protected function get_classes(): string {
 		return implode( ' ', $this->classes );
 	}
 
-	protected function get_attrs() {
+	protected function get_attrs(): string {
 
 		if ( empty( $this->attrs ) ) {
 			return '';

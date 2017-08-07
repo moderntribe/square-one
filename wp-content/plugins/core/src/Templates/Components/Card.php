@@ -38,7 +38,7 @@ class Card extends Twig_Template {
 		return $data;
 	}
 
-	protected function get_title() {
+	protected function get_title(): string {
 
 		if ( empty( $this->card[ self::TITLE ] ) ) {
 			return '';
@@ -54,7 +54,7 @@ class Card extends Twig_Template {
 		return $title_obj->render();
 	}
 
-	protected function get_card_image( $img ) {
+	protected function get_card_image( $img ): string {
 
 		if ( empty( $img ) ) {
 			return false;
@@ -72,7 +72,7 @@ class Card extends Twig_Template {
 		return $image->render();
 	}
 
-	protected function get_button() {
+	protected function get_button(): string {
 
 		if ( empty( $this->card[ self::CTA ][ self::CTA_URL ] ) ) {
 			return '';
@@ -90,31 +90,31 @@ class Card extends Twig_Template {
 		return $button->render();
 	}
 
-	protected function get_card_classes() {
+	protected function get_card_classes(): string {
 		$classes = [ 'c-card' ];
 
 		return implode( ' ', $classes );
 	}
 
-	protected function get_card_header_classes() {
+	protected function get_card_header_classes(): string {
 		$classes = [ 'c-card__header' ];
 
 		return implode( ' ', $classes );
 	}
 
-	protected function get_image_classes() {
+	protected function get_image_classes(): string {
 		$classes = [ 'c-image' ];
 
 		return implode( ' ', $classes );
 	}
 
-	protected function get_card_title_classes() {
+	protected function get_card_title_classes(): array {
 		$classes = [ 'c-card__title' ];
 
 		return $classes;
 	}
 
-	protected function get_card_title_attrs() {
+	protected function get_card_title_attrs(): array {
 		return [
 			'data-depth'    => 0,
 			'data-name'     => CardGrid::FIELD_CARD_TITLE,
@@ -123,13 +123,13 @@ class Card extends Twig_Template {
 		];
 	}
 
-	protected function get_card_content_classes() {
+	protected function get_card_content_classes(): string {
 		$classes = [ 'c-card__content' ];
 
 		return implode( ' ', $classes );
 	}
 
-	protected function get_card_description() {
+	protected function get_card_description(): string {
 
 		if ( empty( $this->card[ self::DESCRIPTION ] ) ) {
 			return '';

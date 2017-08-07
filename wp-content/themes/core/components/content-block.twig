@@ -5,14 +5,14 @@
 	<div class="{{ content_block_content_classes }}">
 
 		{% if title %}
-			{% include('components/title.twig') %}
+			{{ title }}
 		{% endif %}
 
 		{% if description %}
 			{{ description }}
 		{% endif %}
 
-		{% if button is not empty %}
+		{% if button %}
 			{{ button }}
 		{% endif %}
 

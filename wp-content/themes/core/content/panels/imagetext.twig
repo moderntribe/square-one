@@ -10,11 +10,7 @@
 
 		<div class="site-grid site-grid--no-gutters {{ wrapper_classes }}">
 
-			<div class="site-grid__col">
-				{% if image %}
-					{% include('components/image.twig') %}
-				{% endif %}
-			</div>
+			{{ image }}
 
 			<div class="site-grid__col site-grid__col--vertical-center">
 				{% include('components/card.twig') with {
