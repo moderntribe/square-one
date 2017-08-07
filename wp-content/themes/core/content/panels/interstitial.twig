@@ -8,20 +8,14 @@
 
 	{% block content %}
 
-		{% include('components/image.twig') %}
+		{{ image }}
 
 		<div class="l-wrapper">
-			<div class="site-grid {{ wrapper_classes }}">
+			<div class="site-grid">
 				<div class="site-grid__col--one-half">
-					{% include('components/card.twig') with {
-					'image' : false,
-					'card_classes' : desc_classes,
-					'card_attrs' : desc_classes,
-					'title' : title,
-					'btn_url' : url,
-					'btn_target' : target,
-					'btn_label' : label
-					} %}
+					<div class="site-panel--interstitial-container">
+
+					</div>
 				</div>
 			</div>
 		</div>
