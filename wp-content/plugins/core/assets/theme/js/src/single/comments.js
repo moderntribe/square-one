@@ -51,7 +51,7 @@ const init = () => {
 
 	bindEvents();
 
-	console.info('Initialized comment form script.');
+	console.info('Modern Tribe FE: Initialized comment form script.');
 };
 
 export default init;

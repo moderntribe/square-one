@@ -1,9 +1,9 @@
 /**
  * @module
- * @description Base content module for shared content js and props.
+ * @description Base module to kick off all component js
  */
 
-import accordions from './accordion';
+import accordion from './accordion';
 
 /**
  * @function init
@@ -11,7 +11,7 @@ import accordions from './accordion';
  */
 
 const init = () => {
-	accordions();
+	accordion();
 };
 
 export default init;

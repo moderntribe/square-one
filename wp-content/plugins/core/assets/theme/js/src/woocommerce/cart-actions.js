@@ -59,7 +59,7 @@ const cartActions = () => {
 
 	bindEvents();
 
-	console.info('Initialized WC cart actions script.');
+	console.info('Modern Tribe FE: Initialized WC cart actions script.');
 };
 
 export default cartActions;

@@ -48,7 +48,7 @@ const socialShare = () => {
 
 	bindEvents();
 
-	console.info('Initialized global social content sharing scripts.');
+	console.info('Modern Tribe FE: Initialized global social content sharing scripts.');
 };
 
 export default socialShare;
