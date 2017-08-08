@@ -2,7 +2,6 @@
 
 namespace Tribe\Project\Templates\Components;
 
-use Tribe\Project\Panels\Types\CardGrid;
 use Tribe\Project\Twig\Twig_Template;
 
 class Card extends Twig_Template {

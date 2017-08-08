@@ -8,7 +8,6 @@ class LogoFarm extends Panel_Type_Config {
 
 	const NAME = 'logofarm';
 
-	const FIELD_LAYOUT      = 'layout';
 	const FIELD_TITLE       = 'title';
 	const FIELD_DESCRIPTION = 'description';
 	const FIELD_LOGOS       = 'logos';
@@ -33,7 +32,7 @@ class LogoFarm extends Panel_Type_Config {
 			'label'            => __( 'Logos', 'tribe' ),
 			'name'             => self::FIELD_LOGOS,
 			'min'              => 2,
-			'max'              => 8,
+			'max'              => 6,
 			'new_button_label' => __( 'Add Logo', 'tribe' ),
 			'strings'          => [
 				'label.row_index' => 'Logo %{index} |||| Logo %{index}',

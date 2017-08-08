@@ -3,7 +3,7 @@
 namespace Tribe\Project\Templates\Content\Panels;
 
 use Tribe\Project\Panels\Types\LogoFarm as Logo;
-use Tribe\Project\Templates\Components\Image;
+use Tribe\Project\Templates\Components\Card;
 
 class LogoFarm extends Panel {
 
@@ -25,36 +25,21 @@ class LogoFarm extends Panel {
 		return $title;
 	}
 
-	protected function get_logo( $logo ): string {
-
-		if ( empty( $logo ) ) {
-			return '';
-		}
-
-		$options = [
-			'component_class' => 'c-image',
-			'as_bg'           => true,
-			'use_lazyload'    => false,
-			'echo'            => false,
-		];
-
-		$image_obj = Image::factory( $logo, $options );
-
-		return $image_obj->render();
-	}
-
 	public function get_the_logos(): array {
 		$logos = [];
 
 		if ( ! empty( $this->panel_vars[ Logo::FIELD_LOGOS ] ) ) {
+			for ( $i = 0; $i < count( $this->panel_vars[ Logo::FIELD_LOGOS ] ); $i++ ) {
 
-			foreach ( $this->panel_vars[ Logo::FIELD_LOGOS ] as $logo ) {
+				$logo = $this->panel_vars[ Logo::FIELD_LOGOS ][ $i ];
 
-				$logos[] = [
-					'logo'        => $logo[ Logo::FIELD_LOGO_IMAGE ],
-					'logo_url'    => $logo[ Logo::FIELD_LOGO_CTA ]['url'],
-					'logo_target' => $logo[ Logo::FIELD_LOGO_CTA ]['target'],
+				$options = [
+					Card::IMAGE => $logo[ Logo::FIELD_LOGO_IMAGE ],
+					Card::CTA   => $logo[ Logo::FIELD_LOGO_CTA ],
 				];
+
+				$logo_obj = Card::factory( $options );
+				$logos[]  = $logo_obj->render();
 			}
 		}
 
