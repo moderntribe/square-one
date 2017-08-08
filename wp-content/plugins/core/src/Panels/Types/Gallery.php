@@ -21,7 +21,7 @@ class Gallery extends Panel_Type_Config {
 		$panel->set_template_dir( $this->ViewFinder );
 		$panel->set_label( __( 'Gallery', 'tribe' ) );
 		$panel->set_description( __( 'An image gallery slider.', 'tribe' ) );
-		$panel->set_thumbnail( $this->handler->thumbnail_url( 'module-gallery.png' ) );
+		$panel->set_thumbnail( $this->handler->thumbnail_url( 'gallery.svg' ) );
 
 		// Panel Description
 		$panel->add_field( new Fields\TextArea( [

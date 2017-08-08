@@ -24,7 +24,7 @@ class Accordion extends Panel_Type_Config {
 		$panel->set_template_dir( $this->ViewFinder );
 		$panel->set_label( __( 'Accordion', 'tribe' ) );
 		$panel->set_description( __( 'Display a series of accordions.', 'tribe' ) );
-		$panel->set_thumbnail( $this->handler->thumbnail_url( 'module-accordion.jpg' ) );
+		$panel->set_thumbnail( $this->handler->thumbnail_url( 'accordion.svg' ) );
 
 		// Panel Layout.
 		$panel->add_settings_field( new Fields\ImageSelect( [

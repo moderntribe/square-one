@@ -24,7 +24,7 @@ class Interstitial extends Panel_Type_Config {
 		$panel->set_template_dir( $this->ViewFinder );
 		$panel->set_label( __( 'Interstitial', 'tribe' ) );
 		$panel->set_description( __( 'Content overlay with a background image and 3 layout options.', 'tribe' ) );
-		$panel->set_thumbnail( $this->handler->thumbnail_url( 'module-interstitial.jpg' ) );
+		$panel->set_thumbnail( $this->handler->thumbnail_url( 'interstitial.svg' ) );
 
 		// Panel Layout.
 		$panel->add_settings_field( new Fields\ImageSelect( [

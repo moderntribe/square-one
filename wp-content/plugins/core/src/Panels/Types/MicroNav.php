@@ -20,7 +20,7 @@ class MicroNav extends Panel_Type_Config {
 		$panel->set_template_dir( $this->ViewFinder );
 		$panel->set_label( __( 'MicroNav', 'tribe' ) );
 		$panel->set_description( __( 'Display a set of links and related content.', 'tribe' ) );
-		$panel->set_thumbnail( $this->handler->thumbnail_url( 'module-micronav.jpg' ) );
+		$panel->set_thumbnail( $this->handler->thumbnail_url( 'micronav.svg' ) );
 
 		// Panel Layout
 		$panel->add_settings_field( new Fields\ImageSelect( [
