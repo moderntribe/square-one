@@ -22,7 +22,7 @@ class Wysiwyg extends Panel_Type_Config {
 		$panel->set_template_dir( $this->ViewFinder );
 		$panel->set_label( __( 'WYSIWYG Editor', 'tribe' ) );
 		$panel->set_description( __( 'Displays custom content in columns', 'tribe' ) );
-		$panel->set_thumbnail( $this->handler->thumbnail_url( 'module-wysiwyg.jpg' ) );
+		$panel->set_thumbnail( $this->handler->thumbnail_url( 'wysiwyg.svg' ) );
 
 		$panel->add_field( new Fields\TextArea( [
 			'label'    => __( 'Description', 'tribe' ),

@@ -36,10 +36,11 @@ final class Global_Service_Provider extends Tribe_Service_Provider {
 	];
 
 	protected $panels = [
-		'Interstitial',
+		'Accordion',
 		'CardGrid',
 		'Gallery',
 		'ImageText',
+		'Interstitial',
 		'MicroNav',
 		'Wysiwyg',
 	];

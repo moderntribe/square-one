@@ -23,7 +23,7 @@ class CardGrid extends Panel_Type_Config {
 		$panel->set_template_dir( $this->ViewFinder );
 		$panel->set_label( __( 'Card Grid', 'tribe' ) );
 		$panel->set_description( __( 'A grid of card components.', 'tribe' ) );
-		$panel->set_thumbnail( $this->handler->thumbnail_url( 'module-cardgrid.png' ) );
+		$panel->set_thumbnail( $this->handler->thumbnail_url( 'card-grid.svg' ) );
 
 		$panel->add_field( new Fields\TextArea( [
 			'name'     => self::FIELD_DESCRIPTION,

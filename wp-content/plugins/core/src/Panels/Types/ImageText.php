@@ -22,7 +22,7 @@ class ImageText extends Panel_Type_Config {
 		$panel->set_template_dir( $this->ViewFinder );
 		$panel->set_label( __( 'Image + Text', 'tribe' ) );
 		$panel->set_description( __( 'An image and text with 2 layout options.', 'tribe' ) );
-		$panel->set_thumbnail( $this->handler->thumbnail_url( 'module-image-text.jpg' ) );
+		$panel->set_thumbnail( $this->handler->thumbnail_url( 'image-text.svg' ) );
 
 		// Panel Layout.
 		$panel->add_settings_field( new Fields\ImageSelect( [
