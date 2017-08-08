@@ -6,7 +6,6 @@ namespace Tribe\Project\Templates\Content\Panels;
 use Tribe\Project\Panels\Types\ImageText as ImageTextPanel;
 use Tribe\Project\Templates\Components\Card;
 use Tribe\Project\Templates\Components\Image;
-use Tribe\Project\Templates\Components\Title;
 
 class ImageText extends Panel {
 
@@ -36,7 +35,7 @@ class ImageText extends Panel {
 		}
 
 		$options = [
-			Card::TITLE       => $this->panel_vars[ ImageTextPanel::FIELD_TITLE ],
+			Card::TITLE       => the_panel_title( esc_html( $this->panel_vars[ ImageTextPanel::FIELD_TITLE ] ), 'site-section__title', 'title', true, 0, 0 ),
 			Card::DESCRIPTION => $this->panel_vars[ ImageTextPanel::FIELD_DESCRIPTION ],
 			Card::IMAGE       => false,
 			Card::CTA         => $this->panel_vars[ ImageTextPanel::FIELD_CTA ],
