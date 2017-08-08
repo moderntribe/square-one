@@ -2,27 +2,27 @@
 
 namespace Tribe\Project\Templates\Components;
 
-use Tribe\Project\Theme\Util;
-use Tribe\Project\Twig\Twig_Template;
+class Button extends Component {
 
-class Button extends Twig_Template {
+	const TEMPLATE_NAME = 'components/button.twig';
 
-	protected $options = [];
+	const URL         = 'url';
+	const TYPE        = 'type';
+	const TARGET      = 'target';
+	const CLASSES     = 'classes';
+	const ATTRS       = 'attrs';
+	const LABEL       = 'label';
+	const BTN_AS_LINK = 'btn_as_link';
 
-	public function __construct( $options, $template, \Twig_Environment $twig = null ) {
-		parent::__construct( $template, $twig );
-
-		$this->options = $this->parse_args( $options );
-	}
-
-	protected function parse_args( $options ): array {
+	protected function parse_options( array $options ): array {
 		$defaults = [
-			'url'         => '',
-			'type'        => 'button',
-			'target'      => '',
-			'attrs'       => [],
-			'label'       => false,
-			'btn_as_link' => false,
+			static::URL         => '',
+			static::TYPE        => 'button',
+			static::TARGET      => '',
+			static::CLASSES     => [],
+			static::ATTRS       => [],
+			static::LABEL       => false,
+			static::BTN_AS_LINK => false,
 		];
 
 		return wp_parse_args( $options, $defaults );
@@ -32,44 +32,13 @@ class Button extends Twig_Template {
 		$data = [
 			'tag'     => $this->options['btn_as_link'] ? 'a' : 'button',
 			'url'     => $this->options['btn_as_link'] ? $this->options['url'] : '',
-			'classes' => $this->get_classes(),
+			'classes' => $this->merge_classes( [ 'btn' ], $this->options[ static::CLASSES ], true ),
+			'attrs'   => $this->merge_attrs( [], $this->options[ static::ATTRS ], true ),
 			'type'    => $this->options['btn_as_link'] ? '' : $this->options['type'],
 			'target'  => $this->options['btn_as_link'] ? $this->options['target'] : '',
-			'attrs'   => '',
 			'label'   => $this->options['label'],
 		];
 
 		return $data;
-	}
-
-	protected function get_classes(): string {
-		$classes = [ 'btn' ];
-
-		if ( ! empty( $this->options['classes'] ) ) {
-			$classes = array_merge( $classes, $this->options['classes'] );
-		}
-
-		return implode( ' ', $classes );
-	}
-
-	protected function get_attrs(): string {
-
-		if ( empty( $this->options['attrs'] ) ) {
-			return '';
-		}
-
-		return Util::array_to_attributes( $this->options['attrs'] );
-	}
-
-	/**
-	 * Get an instance of this controller bound to the correct data.
-	 *
-	 * @param        $options
-	 * @param string $template
-	 *
-	 * @return static
-	 */
-	public static function factory( $options, $template = 'components/button.twig' ) {
-		return new static( $options, $template );
 	}
 }

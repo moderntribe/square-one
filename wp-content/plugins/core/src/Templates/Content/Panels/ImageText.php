@@ -53,6 +53,7 @@ class ImageText extends Panel {
 		}
 
 		$options = [
+			'img_id'          => $this->panel_vars[ ImageTextPanel::FIELD_IMAGE ],
 			'component_class' => 'c-image c-image--rect',
 			'as_bg'           => true,
 			'use_lazyload'    => false,
@@ -60,7 +61,7 @@ class ImageText extends Panel {
 			'wrapper_class'   => 'c-image__bg',
 		];
 
-		$image_obj = Image::factory( $this->panel_vars[ ImageTextPanel::FIELD_IMAGE ], $options );
+		$image_obj = Image::factory( $options );
 
 		return $image_obj->render();
 	}

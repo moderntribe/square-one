@@ -2,55 +2,31 @@
 
 namespace Tribe\Project\Templates\Components;
 
-use Tribe\Project\Theme\Util;
-use Tribe\Project\Twig\Twig_Template;
+class Description extends Component {
 
-class Description extends Twig_Template {
+	const TEMPLATE_NAME = 'components/description.twig';
 
-	protected $description = '';
-	protected $classes     = [];
-	protected $attrs       = [];
+	const DESCRIPTION = 'description';
+	const CLASSES     = 'classes';
+	const ATTRS       = 'attrs';
 
-	public function __construct( $description, $classes, $attrs, $template, \Twig_Environment $twig = null ) {
-		parent::__construct( $template, $twig );
+	protected function parse_options( array $options ): array {
+		$defaults = [
+			static::DESCRIPTION => '',
+			static::CLASSES     => [],
+			static::ATTRS       => [],
+		];
 
-		$this->description = $description;
-		$this->classes     = $classes;
-		$this->attrs       = $attrs;
+		return wp_parse_args( $options, $defaults );
 	}
 
 	public function get_data(): array {
 		$data = [
-			'content' => $this->description,
-			'classes' => $this->get_classes(),
-			'attrs'   => $this->get_attrs(),
+			'content' => $this->options[ static::DESCRIPTION ],
+			'classes' => $this->merge_classes( [], $this->options[ static::CLASSES ], true ),
+			'attrs'   => $this->merge_attrs( [], $this->options[ static::ATTRS ], true ),
 		];
 
 		return $data;
-	}
-
-	protected function get_classes(): string {
-		return implode( ' ', $this->classes );
-	}
-
-	protected function get_attrs(): string {
-
-		if ( empty( $this->attrs ) ) {
-			return '';
-		}
-
-		return Util::array_to_attributes( $this->attrs );
-	}
-
-	/**
-	 * Get an instance of this controller bound to the correct data.
-	 *
-	 * @param        $description
-	 * @param string $template
-	 *
-	 * @return static
-	 */
-	public static function factory( $description, $classes, $attrs, $template = 'components/description.twig' ) {
-		return new static( $description, $classes, $attrs, $template );
 	}
 }

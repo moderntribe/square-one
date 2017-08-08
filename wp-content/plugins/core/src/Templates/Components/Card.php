@@ -2,9 +2,9 @@
 
 namespace Tribe\Project\Templates\Components;
 
-use Tribe\Project\Twig\Twig_Template;
+class Card extends Component {
 
-class Card extends Twig_Template {
+	const TEMPLATE_NAME = 'components/card.twig';
 
 	const TITLE               = 'title';
 	const DESCRIPTION         = 'description';
@@ -22,15 +22,7 @@ class Card extends Twig_Template {
 	const CTA_LABEL           = 'label';
 	const CTA_TARGET          = 'target';
 
-	protected $card = [];
-
-	public function __construct( $card, $template, \Twig_Environment $twig = null ) {
-		parent::__construct( $template, $twig );
-
-		$this->card = $this->parse_args( $card );
-	}
-
-	protected function parse_args( $options ) {
+	protected function parse_options( array $options ): array {
 		$defaults = [
 			self::TITLE               => '',
 			self::DESCRIPTION         => '',
@@ -52,12 +44,12 @@ class Card extends Twig_Template {
 	public function get_data(): array {
 		$data = [
 			'title'                => $this->get_title(),
-			'card_classes'         => implode( ' ', array_merge( [ 'c-card' ], $this->card[ self::CLASSES ] ) ),
-			'card_header_classes'  => implode( ' ', array_merge( [ 'c-card__header' ], $this->card[ self::HEADER_CLASSES ] ) ),
-			'card_content_classes' => implode( ' ', array_merge( [ 'c-card__content' ], $this->card[ self::CONTENT_CLASSES ] ) ),
-			'image_classes'        => implode( ' ', array_merge( [ 'c-image' ], $this->card[ self::IMAGE_CLASSES ] ) ),
+			'card_classes'         => $this->merge_classes( [ 'c-card' ], $this->options[ self::CLASSES ], true ),
+			'card_header_classes'  => $this->merge_classes( [ 'c-card__header' ], $this->options[ self::HEADER_CLASSES ], true ),
+			'card_content_classes' => $this->merge_classes( [ 'c-card__content' ], $this->options[ self::CONTENT_CLASSES ], true ),
+			'image_classes'        => $this->merge_classes( [ 'c-image' ], $this->options[ self::IMAGE_CLASSES ], true ),
 			'description'          => $this->get_card_description(),
-			'image'                => $this->get_card_image( $this->card[ self::IMAGE ] ),
+			'image'                => $this->get_card_image( $this->options[ self::IMAGE ] ),
 			'button'               => $this->get_button(),
 		];
 
@@ -66,16 +58,18 @@ class Card extends Twig_Template {
 
 	protected function get_title(): string {
 
-		if ( empty( $this->card[ self::TITLE ] ) ) {
+		if ( empty( $this->options[ self::TITLE ] ) ) {
 			return '';
 		}
 
-		$title   = $this->card[ self::TITLE ];
-		$classes = array_merge( [ 'c-card__title' ], $this->card[ self::TITLE_CLASSES ] );
-		$attrs   = $this->card[ self::TITLE_ATTRS ];
-		$tag     = 'h3';
+		$options = [
+			Title::TITLE   => $this->options[ self::TITLE ],
+			Title::CLASSES => $this->merge_classes( [ 'c-card__title' ], $this->options[ self::TITLE_CLASSES ] ),
+			Title::ATTRS   => $this->options[ self::TITLE_ATTRS ],
+			Title::TAG     => 'h3',
+		];
 
-		$title_obj = Title::factory( $title, $tag, $classes, $attrs );
+		$title_obj = Title::factory( $options );
 
 		return $title_obj->render();
 	}
@@ -87,27 +81,28 @@ class Card extends Twig_Template {
 		}
 
 		$options = [
+			'img_id' => $img,
 			'as_bg'        => false,
 			'use_lazyload' => false,
 			'echo'         => false,
 			'src_size'     => 'component-card',
 		];
 
-		$image = Image::factory( $img, $options );
+		$image = Image::factory( $options );
 
 		return $image->render();
 	}
 
 	protected function get_button(): string {
 
-		if ( empty( $this->card[ self::CTA ][ self::CTA_URL ] ) ) {
+		if ( empty( $this->options[ self::CTA ][ self::CTA_URL ] ) ) {
 			return '';
 		}
 
 		$options = [
-			'url'         => esc_url( $this->card[ self::CTA ][ self::CTA_URL ] ),
-			'label'       => esc_html( $this->card[ self::CTA ][ self::CTA_LABEL ] ),
-			'target'      => esc_attr( $this->card[ self::CTA ][ self::CTA_TARGET ] ),
+			'url'         => esc_url( $this->options[ self::CTA ][ self::CTA_URL ] ),
+			'label'       => esc_html( $this->options[ self::CTA ][ self::CTA_LABEL ] ),
+			'target'      => esc_attr( $this->options[ self::CTA ][ self::CTA_TARGET ] ),
 			'btn_as_link' => true,
 		];
 
@@ -118,27 +113,18 @@ class Card extends Twig_Template {
 
 	protected function get_card_description(): string {
 
-		if ( empty( $this->card[ self::DESCRIPTION ] ) ) {
+		if ( empty( $this->options[ self::DESCRIPTION ] ) ) {
 			return '';
 		}
 
-		$classes = array_merge( [ 'c-card__desc' ], $this->card[ self::DESCRIPTION_CLASSES ] );
-		$attrs   = $this->card[ self::DESCRIPTION_ATTRS ];
+		$options = [
+			Description::DESCRIPTION => $this->options[ self::DESCRIPTION ],
+			Description::CLASSES     => $this->merge_classes( [ 'c-card__desc' ], $this->options[ self::DESCRIPTION_CLASSES ] ),
+			Description::ATTRS       => $this->options[ self::DESCRIPTION_ATTRS ],
+		];
 
-		$desc_object = Description::factory( $this->card[ self::DESCRIPTION ], $classes, $attrs );
+		$desc_object = Description::factory( $options );
 
 		return $desc_object->render();
-	}
-
-	/**
-	 * Get an instance of this controller bound to the correct data.
-	 *
-	 * @param        $card
-	 * @param string $template
-	 *
-	 * @return static
-	 */
-	public static function factory( $card, $template = 'components/card.twig' ) {
-		return new static( $card, $template );
 	}
 }

@@ -2,9 +2,9 @@
 
 namespace Tribe\Project\Templates\Components;
 
-use Tribe\Project\Twig\Twig_Template;
+class Slider extends Component {
 
-class Slider extends Twig_Template {
+	const TEMPLATE_NAME = 'components/slider.twig';
 
 	const SHOW_CAROUSEL   = 'show_carousel';
 	const SHOW_ARROWS     = 'show_arrows';
@@ -16,83 +16,35 @@ class Slider extends Twig_Template {
 	const SLIDE_CLASSES   = 'slide_classes';
 	const MAIN_ATTRS      = 'main_attrs';
 
-	protected $slider = [];
+	protected function parse_options( array $options ): array {
+		$defaults = [
+			static::SHOW_CAROUSEL   => true,
+			static::SHOW_ARROWS     => true,
+			static::SLIDES          => [],
+			static::THUMBNAILS      => [],
+			static::CLASSES         => [],
+			static::MAIN_CLASSES    => [],
+			static::WRAPPER_CLASSES => [],
+			static::SLIDE_CLASSES   => [],
+			static::MAIN_ATTRS      => [],
+		];
 
-	public function __construct( $slider, $template, \Twig_Environment $twig = null ) {
-		parent::__construct( $template, $twig );
-
-		$this->slider = $slider;
+		return wp_parse_args( $options, $defaults );
 	}
 
 	public function get_data(): array {
 		$data = [
-			'slides'                      => $this->slider[ self::SLIDES ],
-			'thumbnails'                  => $this->slider[ self::THUMBNAILS ],
-			'show_carousel'               => $this->slider[ self::SHOW_CAROUSEL ],
-			'show_arrows'                 => $this->slider[ self::SHOW_ARROWS ],
-			'slider_classes'              => $this->get_slider_classes(),
-			'slider_main_classes'         => $this->get_slider_main_classes(),
-			'slider_main_wrapper_classes' => $this->get_slider_main_wrapper_classes(),
-			'slider_main_slide_classes'   => $this->get_slider_main_slide_classes(),
-			'slider_main_attrs'           => $this->get_slider_main_attrs(),
+			static::SLIDES          => $this->options[ self::SLIDES ],
+			static::THUMBNAILS      => $this->options[ self::THUMBNAILS ],
+			static::SHOW_CAROUSEL   => $this->options[ self::SHOW_CAROUSEL ],
+			static::SHOW_ARROWS     => $this->options[ self::SHOW_ARROWS ],
+			static::CLASSES         => $this->merge_classes( [ 'c-slider' ], $this->options[ static::CLASSES ], true ),
+			static::MAIN_CLASSES    => $this->merge_classes( [ 'c-slider__main', 'swiper-container' ], $this->options[ static::MAIN_CLASSES ], true ),
+			static::SLIDE_CLASSES   => $this->merge_classes( [ 'c-slider__slide', 'swiper-slide' ], $this->options[ static::SLIDE_CLASSES ], true ),
+			static::WRAPPER_CLASSES => $this->merge_classes( [ 'c-slider__wrapper', 'swiper-wrapper' ], $this->options[ static::WRAPPER_CLASSES ], true ),
+			static::MAIN_ATTRS      => $this->merge_attrs( [ 'data-js' => 'c-slider' ], $this->options[ static::MAIN_ATTRS ], true ),
 		];
 
 		return $data;
-	}
-
-	protected function get_slider_classes(): string {
-		$classes = [ 'c-slider' ];
-
-		if ( ! empty( $this->slider[ self::CLASSES ] ) ) {
-			$classes = array_merge( $classes, $this->slider[ self::CLASSES ] );
-		}
-
-		return implode( ' ', $classes );
-	}
-
-	protected function get_slider_main_classes(): string {
-		$classes = [ 'c-slider__main', 'swiper-container' ];
-
-		if ( ! empty( $this->slider[ self::MAIN_CLASSES ] ) ) {
-			$classes = array_merge( $classes, $this->slider[ self::MAIN_CLASSES ] );
-		}
-
-		return implode( ' ', $classes );
-	}
-
-	protected function get_slider_main_slide_classes(): string {
-		$classes = [ 'c-slider__slide', 'swiper-slide' ];
-
-		if ( ! empty( $this->slider[ self::SLIDE_CLASSES ] ) ) {
-			$classes = array_merge( $classes, $this->slider[ self::SLIDE_CLASSES ] );
-		}
-
-		return implode( ' ', $classes );
-	}
-
-	protected function get_slider_main_wrapper_classes(): string {
-		$classes = [ 'c-slider__wrapper', 'swiper-wrapper' ];
-
-		if ( ! empty( $this->slider[ self::WRAPPER_CLASSES ] ) ) {
-			$classes = array_merge( $classes, $this->slider[ self::WRAPPER_CLASSES ] );
-		}
-
-		return implode( ' ', $classes );
-	}
-
-	protected function get_slider_main_attrs(): string {
-		return 'data-js="c-slider"';
-	}
-
-	/**
-	 * Get an instance of this controller bound to the correct data.
-	 *
-	 * @param        $slider
-	 * @param string $template
-	 *
-	 * @return static
-	 */
-	public static function factory( $slider, $template = 'components/slider.twig' ) {
-		return new static( $slider, $template );
 	}
 }

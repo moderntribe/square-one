@@ -58,20 +58,22 @@ class Gallery extends Panel {
 
 		return array_map( function ( $slide_id ) use ( $size ) {
 			$options = [
+				'img_id'       => $slide_id,
 				'as_bg'        => false,
 				'use_lazyload' => false,
 				'echo'         => false,
 				'src_size'     => $size,
 			];
 
-			$image = ImageComponent::factory( $slide_id, $options );
+			$image = ImageComponent::factory( $options );
 
 			return $image->render();
 		}, $slide_ids );
 	}
 
 	protected function get_slider_main_classes() {
-		$classes =  [ sprintf( 'c-slider__main--%s', $this->panel_vars[ GalleryPanel::FIELD_IMAGE_TREATMENT ] ) ];
+		$classes = [ sprintf( 'c-slider__main--%s', $this->panel_vars[ GalleryPanel::FIELD_IMAGE_TREATMENT ] ) ];
+
 		return $classes;
 	}
 }
