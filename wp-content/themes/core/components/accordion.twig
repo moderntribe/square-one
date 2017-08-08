@@ -1,31 +1,31 @@
 {# Component: Accordion #}
 
 <div
-	class="c-accordion"
+	class="{{ accordion_classes }}"
 	role="tablist"
 	aria-multiselectable="true"
-	data-js="c-accordion"
+	{{ accordion_attrs }}
 >
 	{% for row in rows %}
-		<article class="accordion__row">
+		<article class="{{ accordion_row_classes }}">
 			<button
 				aria-controls="{{ row.content_id|esc_attr }}"
 				aria-expanded="false"
 				aria-selected="false"
-				class="c-accordion__header"
+				class="{{ accordion_row_header_classes }}"
 				id="{{ row.header_id|esc_attr }}"
 				role="tab"
 			>
-				<span class="c-accordion__header-inner">{{ row.header_text }}</span>
+				<span class="{{ accordion_row_header_inner_classes }}">{{ row.header_text }}</span>
 			</button>
 			<div
 				aria-hidden="true"
 				aria-labelledby="{{ row.header_id|esc_attr }}"
-				class="c-accordion__content"
+				class="{{ accordion_row_content_classes }}"
 				id="{{ row.content_id|esc_attr }}"
 				role="tabpanel"
 			>
-				<div class="c-accordion__content-inner">
+				<div class="{{ accordion_row_content_inner_classes }}">
 					{{ row.content }}
 				</div>
 			</div>
