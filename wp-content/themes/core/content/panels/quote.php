@@ -1,5 +1,5 @@
 <?php
 
-$template = new \Tribe\Project\Templates\Content\Panels\ImageText( 'content/panels/quote.twig' );
-
-echo $template->render();
+//$template = new \Tribe\Project\Templates\Content\Panels\Quote( 'content/panels/quote.twig' );
+//
+//echo $template->render();

@@ -53,7 +53,7 @@ class ImageText extends Panel {
 		}
 
 		$options = [
-			'component_class' => 'c-image c-image--rect',
+			'component_class' => 'c-image',
 			'as_bg'           => true,
 			'use_lazyload'    => false,
 			'echo'            => false,

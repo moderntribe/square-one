@@ -4,6 +4,7 @@
 namespace Tribe\Project\Templates\Content\Panels;
 
 use Tribe\Project\Panels\Types\Interstitial as Interstice;
+use Tribe\Project\Templates\Components\Image;
 
 class Interstitial extends Panel {
 
@@ -29,7 +30,9 @@ class Interstitial extends Panel {
 			'wrapper_class'   => 'c-image__bg',
 		];
 
-		return the_tribe_image( $this->panel_vars[ Interstice::FIELD_IMAGE ], $options );
+		$image_obj = Image::factory( $this->panel_vars[ Interstice::FIELD_IMAGE ], $options );
+
+		return $image_obj->render();
 	}
 
 	protected function get_layout() {
