@@ -22,10 +22,11 @@ class Interstitial extends Panel {
 		}
 
 		$options = [
-			'as_bg'         => true,
-			'use_lazyload'  => false,
-			'echo'          => false,
-			'wrapper_class' => 'c-image__bg',
+			'component_class' => 'c-image',
+			'as_bg'           => true,
+			'use_lazyload'    => false,
+			'echo'            => false,
+			'wrapper_class'   => 'c-image__bg',
 		];
 
 		return the_tribe_image( $this->panel_vars[ Interstice::FIELD_IMAGE ], $options );
