@@ -6,7 +6,6 @@
  */
 
 const setAccActiveAttributes = (target, content) => {
-	target.setAttribute('tabindex', 0);
 	target.setAttribute('aria-expanded', 'true');
 	target.setAttribute('aria-selected', 'true');
 
@@ -21,7 +20,6 @@ const setAccActiveAttributes = (target, content) => {
  */
 
 const setAccInactiveAttributes = (target, content) => {
-	target.setAttribute('tabindex', -1);
 	target.setAttribute('aria-expanded', 'false');
 	target.setAttribute('aria-selected', 'false');
 

@@ -160,7 +160,7 @@ const embeds = () => {
 	bindEvents();
 	setupOembeds();
 
-	console.info('Initialized embeds scripts.');
+	console.info('Modern Tribe FE: Initialized embeds scripts.');
 };
 
 export default embeds;

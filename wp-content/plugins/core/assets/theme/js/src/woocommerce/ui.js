@@ -41,7 +41,7 @@ const refineUI = () => {
 
 	customizeCheckboxLoginRemember();
 
-	console.info('Initialized WC UI script.');
+	console.info('Modern Tribe FE: Initialized WC UI script.');
 };
 
 export default refineUI;

@@ -58,7 +58,7 @@ const checkoutActions = () => {
 
 	bindEvents();
 
-	console.info('Initialized WC checkout actions script.');
+	console.info('Modern Tribe FE: Initialized WC checkout actions script.');
 };
 
 export default checkoutActions;
