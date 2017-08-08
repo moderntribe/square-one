@@ -6,30 +6,29 @@
 	aria-multiselectable="true"
 	data-js="c-accordion"
 >
-	<article class="accordion__row site-panel__accordion-item ">
-		{% for row in rows %}
+	{% for row in rows %}
+		<article class="accordion__row">
 			<button
-					aria-controls="{{ row.content_id|esc_attr }}"
-					aria-expanded="false"
-					aria-selected="false"
-					class="c-accordion__header"
-					id="{{ row.header_id|esc_attr }}"
-					role="tab"
+				aria-controls="{{ row.content_id|esc_attr }}"
+				aria-expanded="false"
+				aria-selected="false"
+				class="c-accordion__header"
+				id="{{ row.header_id|esc_attr }}"
+				role="tab"
 			>
 				<span class="c-accordion__header-inner">{{ row.header_text }}</span>
 			</button>
 			<div
-					aria-hidden="true"
-					aria-labelledby="{{ row.header_id|esc_attr }}"
-					class="accordion__content site-panel__accordion-content context-content "
-					id="{{ row.content_id|esc_attr }}"
-					role="tabpanel"
+				aria-hidden="true"
+				aria-labelledby="{{ row.header_id|esc_attr }}"
+				class="c-accordion__content"
+				id="{{ row.content_id|esc_attr }}"
+				role="tabpanel"
 			>
-				<div class="accordion__content-inner context-content">
+				<div class="c-accordion__content-inner">
 					{{ row.content }}
 				</div>
 			</div>
-		{% endfor %}
-	</article>
-
+		</article>
+	{% endfor %}
 </div>
