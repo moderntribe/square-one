@@ -26,7 +26,7 @@ use Tribe\Project\Theme\WP_Responsive_Image_Disabler;
 
 class Theme_Provider implements ServiceProviderInterface {
 
-	private $typekit_id   = 'bjq5pjx'; // temporarily adding typekit ID for testing
+	private $typekit_id   = '';
 	private $google_fonts = [];
 
 	/**
