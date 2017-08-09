@@ -26,7 +26,7 @@ use Tribe\Project\Theme\WP_Responsive_Image_Disabler;
 
 class Theme_Provider implements ServiceProviderInterface {
 
-	private $typekit_id   = '';
+	private $typekit_id   = 'bjq5pjx'; // temporarily adding typekit ID for testing
 	private $google_fonts = [];
 
 	/**
@@ -185,6 +185,12 @@ class Theme_Provider implements ServiceProviderInterface {
 		add_action( 'tribe/unsupported_browser/head', function () use ( $container ) {
 			$container[ 'theme.resources.fonts' ]->load_fonts();
 		}, 0, 0 );
+		add_action( 'admin_head', function () use ( $container ) {
+			$container[ 'theme.resources.fonts' ]->localize_typekit_tinymce( $this->typekit_id );
+		}, 0, 0 );
+		add_filter( 'mce_external_plugins', function ( $plugin_array ) use ( $container ) {
+			$container[ 'theme.resources.fonts' ]->add_typekit_to_editor( $plugin_array );
+		} , 10, 1 );
 		/* add_action( 'login_head', function() use ( $container ) {
 			$container[ 'theme.resources.fonts' ]->load_fonts();
 		}, 0, 0); */
