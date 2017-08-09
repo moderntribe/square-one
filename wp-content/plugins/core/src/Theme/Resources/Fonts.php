@@ -16,12 +16,12 @@ class Fonts {
 	 * Add Typekit to Editor
 	 * @filter mce_external_plugins
 	 */
-	public function add_typekit_to_editor( $plugin_array ) {
+	public function add_typekit_to_editor( $plugins ) {
 		if( ! empty( $this->fonts[ 'typekit' ] ) ) {
-			$plugin_array['typekit'] = tribe_assets_url( 'theme/js/vendor/typekit.tinymce.js' );
+			$plugins['typekit'] = tribe_assets_url( 'admin/editor/typekit.tinymce.js' );
 		}
 
-		return $plugin_array;
+		return $plugins;
 	}
 	/**
 	 * Localize Typekit TinyMCE
