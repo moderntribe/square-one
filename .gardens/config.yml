@@ -1,0 +1,9 @@
+alias: null
+multisite:
+  enabled: false
+rds: true
+memcached: false
+redis: false
+elasticsearch: false
+slack:
+  channel: null
