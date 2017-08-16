@@ -63,10 +63,10 @@ $config_defaults = array(
 	// DB settings
 	'DB_CHARSET'              => 'utf8',
 	'DB_COLLATE'              => '',
-	'DB_NAME' 								=> tribe_getenv('DB_NAME', ''),
-	'DB_USER' 								=> tribe_getenv('DB_USER', ''),
-	'DB_PASSWORD' 						=> tribe_getenv('DB_PASSWORD', ''),
-	'DB_HOST' 								=> tribe_getenv('DB_HOST', ''),
+	'DB_NAME'                 => tribe_getenv('DB_NAME', ''),
+	'DB_USER'                 => tribe_getenv('DB_USER', ''),
+	'DB_PASSWORD'             => tribe_getenv('DB_PASSWORD', ''),
+	'DB_HOST'                 => tribe_getenv('DB_HOST', ''),
 
 	// Language
 	'WPLANG'                  => '',
