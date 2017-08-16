@@ -8,6 +8,7 @@ use Tribe\Project\Service_Providers\Asset_Provider;
 use Tribe\Project\Service_Providers\Cache_Provider;
 use Tribe\Project\Service_Providers\Nav_Menu_Provider;
 use Tribe\Project\Service_Providers\Panel_Intializer_Provider;
+use Tribe\Project\Service_Providers\Post_Meta_Service_Provider;
 use Tribe\Project\Service_Providers\Post_Types\Event_Service_Provider;
 use Tribe\Project\Service_Providers\Post_Types\Organizer_Service_Provider;
 use Tribe\Project\Service_Providers\Post_Types\Page_Service_Provider;
@@ -67,6 +68,7 @@ class Core {
 		$this->container->register( new Twig_Service_Provider() );
 
 		$this->load_post_type_providers();
+		$this->load_post_meta_providers();
 		$this->load_taxonomy_providers();
 	}
 
@@ -79,6 +81,10 @@ class Core {
 		$this->container->register( new Page_Service_Provider() );
 		$this->container->register( new Post_Service_Provider() );
 		$this->container->register( new Venue_Service_Provider() );
+	}
+
+	private function load_post_meta_providers() {
+		$this->container->register( new Post_Meta_Service_Provider() );
 	}
 
 	private function load_taxonomy_providers() {
