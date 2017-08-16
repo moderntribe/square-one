@@ -117,10 +117,10 @@ $config_defaults = array(
 	'WP_DEFAULT_THEME'        => 'core',
 
 	// S3
-	'S3_UPLOADS_BUCKET' 			=> tribe_getenv('S3_UPLOADS_BUCKET', ''),
-	'S3_UPLOADS_KEY' 					=> tribe_getenv('S3_UPLOADS_KEY', ''),
-	'S3_UPLOADS_SECRET' 			=> tribe_getenv('S3_UPLOADS_SECRET', ''),
-	'S3_UPLOADS_REGION' 			=> tribe_getenv('S3_UPLOADS_REGION', ''),
+	'S3_UPLOADS_BUCKET'       => tribe_getenv('S3_UPLOADS_BUCKET', ''),
+	'S3_UPLOADS_KEY'          => tribe_getenv('S3_UPLOADS_KEY', ''),
+	'S3_UPLOADS_SECRET'       => tribe_getenv('S3_UPLOADS_SECRET', ''),
+	'S3_UPLOADS_REGION'       => tribe_getenv('S3_UPLOADS_REGION', ''),
 
 	// Glomar
 	'TRIBE_GLOMAR' 						=> tribe_getenv('TRIBE_GLOMAR', '')
