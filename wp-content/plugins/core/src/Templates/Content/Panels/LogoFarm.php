@@ -3,7 +3,7 @@
 namespace Tribe\Project\Templates\Content\Panels;
 
 use Tribe\Project\Panels\Types\LogoFarm as Logo;
-use Tribe\Project\Templates\Components\Card;
+use Tribe\Project\Templates\Components\Image;
 
 class LogoFarm extends Panel {
 
@@ -34,11 +34,13 @@ class LogoFarm extends Panel {
 				$logo = $this->panel_vars[ Logo::FIELD_LOGOS ][ $i ];
 
 				$options = [
-					Card::IMAGE => $logo[ Logo::FIELD_LOGO_IMAGE ],
-					Card::CTA   => $logo[ Logo::FIELD_LOGO_CTA ],
+					Image::IMG_ID      => $logo[ Logo::FIELD_LOGO_IMAGE ],
+					Image::LINK        => esc_url( $logo[ Logo::FIELD_LOGO_CTA ]['url'] ),
+					Image::LINK_TARGET => esc_attr( $logo[ Logo::FIELD_LOGO_CTA ]['target'] ),
+					Image::LINK_TITLE  => esc_attr( $logo[ Logo::FIELD_LOGO_CTA ]['label'] ),
 				];
 
-				$logo_obj = Card::factory( $options );
+				$logo_obj = Image::factory( $options );
 				$logos[]  = $logo_obj->render();
 			}
 		}

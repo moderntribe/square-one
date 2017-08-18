@@ -4,8 +4,8 @@
 namespace Tribe\Project\Templates\Content\Panels;
 
 use Tribe\Project\Panels\Types\ImageText as ImageTextPanel;
-use Tribe\Project\Templates\Components\Card;
 use Tribe\Project\Templates\Components\Image;
+use Tribe\Project\Templates\Components\Content_Block;
 
 class ImageText extends Panel {
 
@@ -17,33 +17,38 @@ class ImageText extends Panel {
 		return $data;
 	}
 
-	protected function get_mapped_panel_data(): array {
+	protected function get_content_block() {
 
-		$data = [
-			'wrapper_classes' => $this->get_panel_classes(),
-			'image'           => $this->get_panel_image(),
-			'card'            => $this->get_card(),
-		];
+		$title_attrs       = [];
+		$description_attrs = [];
 
-		return $data;
-	}
+		if ( is_panel_preview() ) {
 
-	protected function get_card(): string {
+			$title_attrs = [
+				'data-depth'    => $this->panel->get_depth(),
+				'data-name'     => esc_attr( ImageTextPanel::FIELD_TITLE ),
+				'data-livetext' => true,
+			];
 
-		if ( empty( $this->panel_vars[ ImageTextPanel::FIELD_DESCRIPTION ] ) ) {
-			return '';
+			$description_attrs = [
+				'data-depth'    => $this->panel->get_depth(),
+				'data-name'     => esc_attr( ImageTextPanel::FIELD_DESCRIPTION ),
+				'data-autop'    => 'true',
+				'data-livetext' => true,
+			];
 		}
 
 		$options = [
-			Card::TITLE       => the_panel_title( esc_html( $this->panel_vars[ ImageTextPanel::FIELD_TITLE ] ), 'site-section__title', 'title', true, 0, 0 ),
-			Card::DESCRIPTION => $this->panel_vars[ ImageTextPanel::FIELD_DESCRIPTION ],
-			Card::IMAGE       => false,
-			Card::CTA         => $this->panel_vars[ ImageTextPanel::FIELD_CTA ],
+			Content_Block::TITLE             => esc_html( $this->panel_vars[ ImageTextPanel::FIELD_TITLE ] ),
+			Content_Block::DESCRIPTION       => $this->panel_vars[ ImageTextPanel::FIELD_DESCRIPTION ],
+			Content_Block::CTA               => $this->panel_vars[ ImageTextPanel::FIELD_CTA ],
+			Content_Block::TITLE_ATTRS       => esc_attr( $title_attrs ),
+			Content_Block::DESCRIPTION_ATTRS => esc_attr( $description_attrs ),
 		];
 
-		$card_obj = Card::factory( $options );
+		$content_block_obj = Content_Block::factory( $options );
 
-		return $card_obj->render();
+		return $content_block_obj->render();
 	}
 
 	protected function get_panel_image(): string {
@@ -85,8 +90,18 @@ class ImageText extends Panel {
 		return [
 			'data-depth'    => 0,
 			'data-name'     => ImageTextPanel::FIELD_TITLE,
-			'data-index'    => esc_attr( get_nest_index() ),
 			'data-livetext' => true,
 		];
+	}
+
+	protected function get_mapped_panel_data(): array {
+
+		$data = [
+			'wrapper_classes' => $this->get_panel_classes(),
+			'image'           => $this->get_panel_image(),
+			'content_block'   => $this->get_content_block(),
+		];
+
+		return $data;
 	}
 }
