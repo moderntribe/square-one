@@ -1,0 +1,39 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Component: Slider
+ *
+ * ----------------------------------------------------------------------------- */
+
+/* Container */
+
+.c-slider {
+	width: 100%;
+}
+
+/* Main Slider */
+
+.c-slider__main {
+
+	&:not(.initialized) {
+
+		.c-slider__slide {
+			display: none;
+
+			&:first-child {
+				display: block;
+			}
+		}
+	}
+}
+
+/* Carousel */
+
+.c-slider__carousel {
+
+	.c-slider__thumbnail {
+		width: 12%;
+		padding: 0;
+		border: 0;
+		background: none;
+	}
+}

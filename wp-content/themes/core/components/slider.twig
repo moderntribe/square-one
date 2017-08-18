@@ -8,6 +8,7 @@ Attributes:
 	{
         show_carousel: true, // true/false. show carousel
         show_arrows: true, // true/false. show carousel
+        show_pagination: false, // true/false. show the pagination dots
         slides: [], // array. slide html
         thumbnails: [], // array. thumb html
     }
@@ -15,9 +16,9 @@ Attributes:
 
 <div class="{{ classes }}">
 	<div class="{{ main_classes }}" {{ main_attrs }}>
-		<div class="{{ slide_classes }}">
+		<div class="{{ wrapper_classes }}">
 			{% for slide in slides %}
-				<div class="{{ wrapper_classes }}">
+				<div class="{{ slide_classes }}">
 					{{ slide }}
 				</div>
 			{% endfor %}
@@ -26,14 +27,17 @@ Attributes:
 			<div class="c-slider__button c-slider__button--next swiper-button-next"></div>
 			<div class="c-slider__button c-slider__button--prev swiper-button-prev"></div>
 		{% endif %}
+		{% if show_pagination %}
+			<div class="c-slider__pagination swiper-pagination" data-js="c-slider-pagination"></div>
+		{% endif %}
 	</div>
 	{% if show_carousel %}
 		<div class="c-slider__carousel swiper-container" data-js="c-slider-carousel">
 			<div class="swiper-wrapper">
 				{% for thumbnail in thumbnails %}
-					<button class="c-slider__thumbnail swiper-slide" data-js="c-slider-thumb-trigger" data-index="{{ loop.index0 }}">
+					<div class="c-slider__thumbnail swiper-slide" data-js="c-slider-thumb-trigger">
 						{{ thumbnail }}
-					</button>
+					</div>
 				{% endfor %}
 			</div>
 		</div>

@@ -37,11 +37,12 @@ class Gallery extends Panel {
 
 	protected function get_slider(): string {
 		$options = [
-			SliderComponent::SLIDES        => $this->get_slides(),
-			SliderComponent::THUMBNAILS    => $this->get_slides( 'thumbnail' ),
-			SliderComponent::SHOW_CAROUSEL => true,
-			SliderComponent::SHOW_ARROWS   => true,
-			SliderComponent::MAIN_CLASSES  => $this->get_slider_main_classes(),
+			SliderComponent::SLIDES          => $this->get_slides(),
+			SliderComponent::THUMBNAILS      => $this->get_slides( 'thumbnail' ),
+			SliderComponent::SHOW_CAROUSEL   => true,
+			SliderComponent::SHOW_ARROWS     => true,
+			SliderComponent::SHOW_PAGINATION => true,
+			SliderComponent::MAIN_CLASSES    => $this->get_slider_main_classes(),
 		];
 
 		$slider = SliderComponent::factory( $options );
@@ -73,7 +74,6 @@ class Gallery extends Panel {
 
 	protected function get_slider_main_classes() {
 		$classes = [ sprintf( 'c-slider__main--%s', $this->panel_vars[ GalleryPanel::FIELD_IMAGE_TREATMENT ] ) ];
-
 		return $classes;
 	}
 }

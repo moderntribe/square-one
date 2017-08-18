@@ -4,6 +4,7 @@
  */
 
 import accordion from './accordion';
+import slider from './slider';
 
 /**
  * @function init
@@ -12,6 +13,7 @@ import accordion from './accordion';
 
 const init = () => {
 	accordion();
+	slider();
 };
 
 export default init;
