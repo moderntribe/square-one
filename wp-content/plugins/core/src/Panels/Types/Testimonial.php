@@ -4,10 +4,11 @@ namespace Tribe\Project\Panels\Types;
 
 use ModularContent\Fields;
 
-class Quote extends Panel_Type_Config {
+class Testimonial extends Panel_Type_Config {
 
-	const NAME = 'quote';
-
+	const NAME = 'testimonial';
+	
+	const FIELD_TITLE  = 'title';
 	const FIELD_QUOTES = 'quotes';
 	const FIELD_QUOTE  = 'quote';
 	const FIELD_CITE   = 'cite';
@@ -16,12 +17,12 @@ class Quote extends Panel_Type_Config {
 
 		$panel = $this->handler->factory( self::NAME );
 		$panel->set_template_dir( $this->ViewFinder );
-		$panel->set_label( __( 'Quote', 'tribe' ) );
-		$panel->set_description( __( 'A series of quotes.', 'tribe' ) );
+		$panel->set_label( __( 'Testimonial', 'tribe' ) );
+		$panel->set_description( __( 'A series of testimonials or quotes.', 'tribe' ) );
 		$panel->set_thumbnail( $this->handler->thumbnail_url( 'module-quote.svg' ) );
 
 		$quote = new Fields\Repeater( [
-			'label'            => __( 'Cards', 'tribe' ),
+			'label'            => __( 'Testimonials', 'tribe' ),
 			'name'             => self::FIELD_QUOTES,
 			'min'              => 2,
 			'max'              => 4,
@@ -41,6 +42,8 @@ class Quote extends Panel_Type_Config {
 			'name'  => self::FIELD_CITE,
 			'label' => __( 'Cite', 'tribe' ),
 		] ) );
+
+		$panel->add_field( $quote );
 
 		return $panel;
 

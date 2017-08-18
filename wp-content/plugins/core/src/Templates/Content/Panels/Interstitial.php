@@ -80,19 +80,30 @@ class Interstitial extends Panel {
 		}
 
 		if ( Interstice::FIELD_LAYOUT_OPTION_CONTENT_CENTER === $this->panel_vars[ Interstice::FIELD_LAYOUT ] ) {
-			$classes[] = 'site-grid--center';
+			$classes[] = 'site-grid--center u-text-center';
 		}
 
 		return implode( ' ', $classes );
 	}
 
-	protected function get_title() {
+	protected function text_color() {
 
-		return the_panel_title( esc_html( $this->panel_vars[ Interstice::FIELD_TITLE ] ), 'c-text__title', 'title', true, 0, 0 );
+		$classes = [];
+
+		if ( Interstice::FIELD_TEXT_WHITE === $this->panel_vars[ Interstice::FIELD_TEXT_COLOR ] ) {
+			$classes[] = 't-content--light';
+		}
+
+		if ( Interstice::FIELD_TEXT_BLACK === $this->panel_vars[ Interstice::FIELD_TEXT_COLOR ] ) {
+			$classes[] = 't-content--dark';
+		}
+
+		return implode( ' ', $classes );
 	}
 
 	public function get_mapped_panel_data(): array {
 		$data = [
+			'text_color'    => $this->text_color(),
 			'layout'        => $this->get_layout(),
 			'image'         => $this->get_image(),
 			'content_block' => $this->get_content_block(),

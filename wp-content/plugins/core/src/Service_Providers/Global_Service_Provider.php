@@ -44,7 +44,7 @@ final class Global_Service_Provider extends Tribe_Service_Provider {
 		'MicroNav',
 		'Wysiwyg',
 		'LogoFarm',
-		'Quote',
+		'Testimonial',
 	];
 
 	public function register( Container $container ) {

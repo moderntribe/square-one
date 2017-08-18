@@ -7,16 +7,19 @@
 	<div class="site-section__content">
 
 		<div class="site-grid">
-			<div class="site-grid__wrapper"
-			     data-depth="0"
-			     data-name="logos"
-			     data-livetext>
+			<div class="site-grid__wrapper">
 
-				{% for logo in logos %}
-					<div class="site-grid__col">
-						{{ logo }}
-					</div>
-				{% endfor %}
+				<div class="site-grid__layout site-grid__layout--2-col-sm"
+				     data-depth="0"
+				     data-name="logos"
+				     data-livetext>
+
+					{% for logo in logos %}
+						<div class="site-grid__col site-grid__col--horizontal-center">
+							{{ logo }}
+						</div>
+					{% endfor %}
+				</div>
 
 			</div>
 		</div>

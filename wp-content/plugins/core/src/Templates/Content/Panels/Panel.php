@@ -22,7 +22,7 @@ class Panel extends Twig_Template {
 			'children' => $this->get_children( $this->panel ),
 			'object'   => $this->panel,
 			'lang'     => new Noop_Lazy_Strings( 'tribe' ),
-			'title'    => isset( $this->panel_vars['title'] ) ? $this->panel_vars['title'] : false,
+			'title'    => isset( $this->panel_vars['title'] ) ? the_panel_title( esc_html( $this->panel_vars['title'] ), 'site-section__title', 'title', true, 0, 0 ) : false,
 		];
 
 		return $data;

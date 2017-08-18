@@ -40,7 +40,7 @@ class Content_Block extends Component {
 			'title'                         => $this->get_title(),
 			'content_block_classes'         => $this->merge_classes( [ 'c-content-block' ], $this->options[ self::CONTENT_BLOCK_CLASSES ], true ),
 			'content_block_content_classes' => $this->merge_classes( [ 'c-content-block__content' ], $this->options[ self::CONTENT_BLOCK_CONTENT_CLASSES ], true ),
-			'description'                   => $this->get_card_description(),
+			'description'                   => $this->get_content_block_description(),
 			'button'                        => $this->get_button(),
 		];
 
@@ -55,9 +55,9 @@ class Content_Block extends Component {
 
 		$options = [
 			Title::TITLE   => $this->options[ self::TITLE ],
-			Title::CLASSES => $this->merge_classes( [ 'c-content-block__title' ], $this->options[ self::TITLE_CLASSES ] ),
+			Title::CLASSES => $this->merge_classes( [ 'c-content-block__title h2' ], $this->options[ self::TITLE_CLASSES ] ),
 			Title::ATTRS   => $this->options[ self::TITLE_ATTRS ],
-			Title::TAG     => 'h3',
+			Title::TAG     => 'h2',
 		];
 
 		$title_obj = Title::factory( $options );
@@ -83,7 +83,7 @@ class Content_Block extends Component {
 		return $button->render();
 	}
 
-	protected function get_card_description(): string {
+	protected function get_content_block_description(): string {
 
 		if ( empty( $this->options[ self::DESCRIPTION ] ) ) {
 			return '';

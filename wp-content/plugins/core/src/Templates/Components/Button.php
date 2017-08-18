@@ -32,7 +32,7 @@ class Button extends Component {
 		$data = [
 			'tag'     => $this->options['btn_as_link'] ? 'a' : 'button',
 			'url'     => $this->options['btn_as_link'] ? $this->options['url'] : '',
-			'classes' => $this->merge_classes( [ 'btn' ], $this->options[ static::CLASSES ], true ),
+			'classes' => $this->merge_classes( [ 'c-btn' ], $this->options[ static::CLASSES ], true ),
 			'attrs'   => $this->merge_attrs( [], $this->options[ static::ATTRS ], true ),
 			'type'    => $this->options['btn_as_link'] ? '' : $this->options['type'],
 			'target'  => $this->options['btn_as_link'] ? $this->options['target'] : '',

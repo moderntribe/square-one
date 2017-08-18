@@ -12,11 +12,13 @@ class Interstitial extends Panel_Type_Config {
 	const FIELD_LAYOUT_OPTION_CONTENT_RIGHT  = 'content-right';
 	const FIELD_LAYOUT_OPTION_CONTENT_CENTER = 'content-center';
 	const FIELD_LAYOUT_OPTION_CONTENT_LEFT   = 'content-left';
-	const FIELD_OPACITY                      = 'opacity';
 	const FIELD_TITLE                        = 'title';
 	const FIELD_DESCRIPTION                  = 'description';
 	const FIELD_IMAGE                        = 'image';
 	const FIELD_CTA                          = 'cta';
+	const FIELD_TEXT_COLOR                   = 'text_color';
+	const FIELD_TEXT_WHITE                   = 't-content--light';
+	const FIELD_TEXT_BLACK                   = 't-content--dark';
 
 	protected function panel() {
 
@@ -31,17 +33,21 @@ class Interstitial extends Panel_Type_Config {
 			'name'    => self::FIELD_LAYOUT,
 			'label'   => __( 'Layout', 'tribe' ),
 			'options' => [
-				self::FIELD_LAYOUT_OPTION_CONTENT_LEFT   => $this->handler->layout_icon_url( 'module-imagetext-left.png' ),
-				self::FIELD_LAYOUT_OPTION_CONTENT_CENTER => $this->handler->layout_icon_url( 'module-imagetext-boxed.png' ),
-				self::FIELD_LAYOUT_OPTION_CONTENT_RIGHT  => $this->handler->layout_icon_url( 'module-imagetext-right.png' ),
+				self::FIELD_LAYOUT_OPTION_CONTENT_LEFT   => $this->handler->layout_icon_url( 'card-left.svg' ),
+				self::FIELD_LAYOUT_OPTION_CONTENT_CENTER => $this->handler->layout_icon_url( 'card-center.svg' ),
+				self::FIELD_LAYOUT_OPTION_CONTENT_RIGHT  => $this->handler->layout_icon_url( 'card-right.svg' ),
 			],
 			'default' => self::FIELD_LAYOUT_OPTION_CONTENT_CENTER,
 		] ) );
 
-		$panel->add_settings_field( new Fields\Text( [
-			'name'    => self::FIELD_OPACITY,
-			'label'   => __( 'Opacity Level', 'tribe' ),
-			'description' => __( 'Change the level of the opacity overlay', 'tribe' ),
+		$panel->add_settings_field( new Fields\Radio( [
+			'name'    => self::FIELD_TEXT_COLOR,
+			'label'   => __( 'Text Color', 'tribe' ),
+			'options' => [
+				self::FIELD_TEXT_WHITE => __( 'White', 'tribe' ),
+				self::FIELD_TEXT_BLACK => __( 'Black', 'tribe' ),
+			],
+			'default' => self::FIELD_TEXT_BLACK,
 		] ) );
 
 		$panel->add_field( new Fields\TextArea( [

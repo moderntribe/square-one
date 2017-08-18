@@ -29,8 +29,8 @@ class ImageText extends Panel_Type_Config {
 			'name'    => self::FIELD_LAYOUT,
 			'label'   => __( 'Layout', 'tribe' ),
 			'options' => [
-				self::FIELD_LAYOUT_OPTION_IMAGE_LEFT  => $this->handler->layout_icon_url( 'module-imagetext-left.png' ),
-				self::FIELD_LAYOUT_OPTION_IMAGE_RIGHT => $this->handler->layout_icon_url( 'module-imagetext-right.png' ),
+				self::FIELD_LAYOUT_OPTION_IMAGE_LEFT  => $this->handler->layout_icon_url( 'imagetext-left.svg' ),
+				self::FIELD_LAYOUT_OPTION_IMAGE_RIGHT => $this->handler->layout_icon_url( 'imagetext-right.svg' ),
 			],
 			'default' => self::FIELD_LAYOUT_OPTION_IMAGE_LEFT,
 		] ) );
