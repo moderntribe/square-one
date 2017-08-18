@@ -40,6 +40,7 @@ final class Global_Service_Provider extends Tribe_Service_Provider {
 		'CardGrid',
 		'Gallery',
 		'ImageText',
+		'VideoText',
 		'Interstitial',
 		'MicroNav',
 		'Wysiwyg',

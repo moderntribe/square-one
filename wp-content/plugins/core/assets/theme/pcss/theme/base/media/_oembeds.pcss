@@ -34,12 +34,23 @@
 
 		.wp-embed-lazy__icon {
 			border-color: var(--embed-icon-border-hover);
-			text-shadow: 1px 1px 1px #777;
-			transition: text-shadow 0.15s ease-in-out;
 
 			&:before {
-				transform: scale(1.1);
+				transform: scale(0.65);
 			}
+		}
+	}
+
+	&:focus {
+
+		&:after {
+			height: 5px;
+			width: 100%;
+			left: 0;
+			bottom: 0;
+			content: '';
+			position: absolute;
+			background: var(--embed-color-focus);
 		}
 	}
 
@@ -69,77 +80,76 @@
 }
 
 .wp-embed-lazy__caption {
-	left: 50%;
+	border: none;
+	bottom: auto;
 	opacity: 0;
+	transition: opacity 0.15s ease-in;
 	position: absolute;
-	transition: opacity 0.25s ease-out;
+	left: 50%;
+	background: none;
 	color: var(--embed-caption-color);
-	margin-left: 0;
-	padding: 25px 30px;
-	text-align: center;
+	padding: 20px 25px 20px 75px;
+	max-width: none;
 	top: 50%;
-	transform: translate(-50%, -50%);
-	z-index: 2;
+	width: 100px;
+	height: 100px;
+	margin-left: -50px;
+	transform: translateY(-50%);
 
 	/* CASE: lazyloaded */
 	.lazyloaded ~ & {
 		opacity: 1;
-		transition: opacity 0.25s ease-out;
+		transition: opacity 250ms 300ms ease-in;
 	}
 
 	/* CASE: Mobile */
 	.wp-embed-lazy--small & {
+		background: var(--embed-caption-bgd-color-mobile);
 		border: 0;
 		padding: 0;
 		width: 100%;
-		height: auto;
+		height: 100%;
 		max-width: 100%;
-		left: 50%;
-		bottom: auto;
-		top: 50%;
+		left: 0;
+		bottom: 0;
 	}
 }
 
 .wp-embed-lazy__icon {
-	opacity: 0.9;
-	font-size: 70px;
-	left: 0;
-	text-shadow: 0 0 0 #777;
-	transition: var(--transition);
-	width: 100px;
+	position: absolute;
+	font-size: 58px;
+	left: 15px;
+	top: 50%;
+	margin-top: -24px;
+	transition: opacity 0.15s ease-in-out, border 0.425s;
+	border: 2px solid var(--embed-icon-border);
+	border-radius: 50%;
 
 	&:before {
 		display: inline-block;
 		position: relative;
 		left: 3px;
 		top: 1px;
-		transition: var(--transition);
+		transition: opacity 0.15s ease-in-out, transform 0.425s;
 	}
 
 	/* CASE: Mobile */
 	.wp-embed-lazy--small & {
 		left: 50%;
-	}
-
-	@media (--viewport-medium) {
-		font-size: 100px;
-		left: 50%;
+		margin-left: -26px;
 	}
 }
 
 .wp-embed-lazy__title {
-	display: block;
+	display: none;
 	font-size: 18px;
-	font-weight: var(--font-weight-semibold);
 	letter-spacing: 0.02em;
 	margin-top: 6px;
 	padding-top: 5px;
-	border-top: 1px solid var(--embed-caption-border);
-	text-transform: uppercase;
+	border: none;
 
 	/* CASE: Mobile */
 	.wp-embed-lazy--small & {
-		display: block;
-		font-size: 11px;
+		display: none;
 	}
 }
