@@ -4,6 +4,7 @@
  */
 
 import _ from 'lodash';
+import delegate from 'delegate';
 import Swiper from 'swiper';
 
 import * as tools from '../utils/tools';
@@ -56,11 +57,51 @@ const getMainOptsForSlider = (slider, swiperId) => {
 };
 
 /**
+ * @function syncMainSlider
+ * @description Sync the main slider to the carousel.
+ * Too bad swiper has a bug with this and we have to resort this this stuff
+ * https://github.com/nolimits4web/Swiper/issues/1658
+ */
+
+const syncMainSlider = (e) => {
+	const carousel = tools.closest(e.delegateTarget, '.swiper-container');
+	instances.swipers[carousel.dataset.controls].slideTo(e.delegateTarget.dataset.index);
+};
+
+/**
+ * @module bindCarouselEvents
+ * @description Bind Carousel Events.
+ */
+
+const bindCarouselEvents = (swiperThumbId, swiperMainId) => {
+	instances.swipers[swiperMainId].on('slideChangeStart', (instance) => {
+		instances.swipers[swiperThumbId].slideTo(instance.activeIndex);
+	});
+	delegate(instances.swipers[swiperThumbId].wrapper[0], '[data-js="c-slider-thumb-trigger"]', 'click', syncMainSlider);
+};
+
+/**
+ * @function initCarousel
+ * @description Init the carousel
+ */
+
+const initCarousel = (slider, swiperMainId) => {
+	const carousel = slider.nextElementSibling;
+	const swiperThumbId = _.uniqueId('swiper-carousel-');
+	instances.swipers[swiperThumbId] = new Swiper(carousel, options.swiperThumbs());
+	slider.setAttribute('data-controls', swiperThumbId);
+	carousel.setAttribute('data-id', swiperThumbId);
+	carousel.setAttribute('data-controls', swiperMainId);
+	carousel.classList.add('initialized');
+	bindCarouselEvents(swiperThumbId, swiperMainId);
+};
+
+/**
  * @module
  * @description Swiper init.
  */
 
-const initSlider = () => {
+const initSliders = () => {
 	tools.getNodes('[data-js="c-slider"]:not(.initialized)', true, document, true).forEach((slider) => {
 		const swiperMainId = _.uniqueId('swiper-');
 		instances.swipers[swiperMainId] = new Swiper(slider, getMainOptsForSlider(slider, swiperMainId));
@@ -69,13 +110,7 @@ const initSlider = () => {
 		if (!slider.classList.contains('c-slider__main--has-carousel')) {
 			return;
 		}
-		const carousel = slider.nextElementSibling;
-		const swiperThumbId = _.uniqueId('swiper-carousel-');
-		instances.swipers[swiperThumbId] = new Swiper(carousel, options.swiperThumbs());
-		carousel.setAttribute('data-id', swiperThumbId);
-		carousel.classList.add('initialized');
-		instances.swipers[swiperMainId].params.control = instances.swipers[swiperThumbId];
-		instances.swipers[swiperThumbId].params.control = instances.swipers[swiperMainId];
+		initCarousel(slider, swiperMainId);
 	});
 };
 
@@ -85,14 +120,14 @@ const initSlider = () => {
  */
 
 const bindEvents = () => {
-	document.addEventListener('modular_content/panel_preview_updated', initSlider);
+	document.addEventListener('modular_content/panel_preview_updated', initSliders);
 };
 
 const init = () => {
 	if (!tools.getNodes('c-slider')[0]) {
 		return;
 	}
-	initSlider();
+	initSliders();
 	bindEvents();
 
 	console.info('Modern Tribe FE: Initialized slider components.');

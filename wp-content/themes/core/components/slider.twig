@@ -35,9 +35,9 @@ Attributes:
 		<div class="c-slider__carousel swiper-container" data-js="c-slider-carousel">
 			<div class="swiper-wrapper">
 				{% for thumbnail in thumbnails %}
-					<div class="c-slider__thumbnail swiper-slide" data-js="c-slider-thumb-trigger">
+					<button class="c-slider__thumbnail swiper-slide" data-js="c-slider-thumb-trigger" data-index="{{ loop.index0 }}">
 						{{ thumbnail }}
-					</div>
+					</button>
 				{% endfor %}
 			</div>
 		</div>
