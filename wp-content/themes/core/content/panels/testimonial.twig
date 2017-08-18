@@ -1,4 +1,4 @@
-{# Panel: Quote #}
+{# Panel: Testimonial #}
 
 {% extends "content/panels/panel.twig" %}
 
@@ -9,7 +9,9 @@
 
 			<div class="site-grid__wrapper">
 
-				{{ quote }}
+				{% for quote in quotes %}
+					{{ quote }}
+				{% endfor %}
 
 			</div>
 		</div>

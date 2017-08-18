@@ -25,14 +25,14 @@ class ImageText extends Panel {
 		if ( is_panel_preview() ) {
 
 			$title_attrs = [
-				'data-depth'    => $this->panel->get_depth(),
-				'data-name'     => esc_attr( ImageTextPanel::FIELD_TITLE ),
+				'data-depth'    => 0,
+				'data-name'     => ImageTextPanel::FIELD_TITLE,
 				'data-livetext' => true,
 			];
 
 			$description_attrs = [
-				'data-depth'    => $this->panel->get_depth(),
-				'data-name'     => esc_attr( ImageTextPanel::FIELD_DESCRIPTION ),
+				'data-depth'    => 0,
+				'data-name'     => ImageTextPanel::FIELD_DESCRIPTION,
 				'data-autop'    => 'true',
 				'data-livetext' => true,
 			];
@@ -42,8 +42,8 @@ class ImageText extends Panel {
 			Content_Block::TITLE             => esc_html( $this->panel_vars[ ImageTextPanel::FIELD_TITLE ] ),
 			Content_Block::DESCRIPTION       => $this->panel_vars[ ImageTextPanel::FIELD_DESCRIPTION ],
 			Content_Block::CTA               => $this->panel_vars[ ImageTextPanel::FIELD_CTA ],
-			Content_Block::TITLE_ATTRS       => esc_attr( $title_attrs ),
-			Content_Block::DESCRIPTION_ATTRS => esc_attr( $description_attrs ),
+			Content_Block::TITLE_ATTRS       => $title_attrs,
+			Content_Block::DESCRIPTION_ATTRS => $description_attrs,
 		];
 
 		$content_block_obj = Content_Block::factory( $options );

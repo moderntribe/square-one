@@ -104,6 +104,7 @@ class Card extends Component {
 			'label'       => esc_html( $this->options[ self::CTA ][ self::CTA_LABEL ] ),
 			'target'      => esc_attr( $this->options[ self::CTA ][ self::CTA_TARGET ] ),
 			'btn_as_link' => true,
+			'classes'     => [ 'c-btn--sm' ],
 		];
 
 		$button = Button::factory( $options );

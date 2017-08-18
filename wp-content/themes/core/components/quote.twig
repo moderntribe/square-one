@@ -1,6 +1,6 @@
 {# Component: Quote #}
 
-<blockquote class="c-quote">
-	<p class="c-quote__p">{{ quote }}</p>
-	<cite class="c-quote__cite">{{ cite }}</cite>
+<blockquote class="{{ classes }}">
+	<p class="c-quote__text" {{ quote_attrs }}>{{ quote }}</p>
+	<cite class="c-quote__cite" {{ cite_attrs }}>{{ cite }}</cite>
 </blockquote>

@@ -19,7 +19,7 @@ class CardGrid extends Panel {
 		$title = '';
 
 		if ( ! empty( $this->panel_vars[ CardG::FIELD_TITLE ] ) ) {
-			$title = the_panel_title( esc_html( $this->panel_vars[ CardG::FIELD_TITLE ] ), 'section__title', 'title', true, 0, 0 );
+			$title = the_panel_title( esc_html( $this->panel_vars[ CardG::FIELD_TITLE ] ), 'site-section__title h2', 'title', true, 0, 0 );
 		}
 
 		return $title;

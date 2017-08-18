@@ -5,7 +5,7 @@
  * Example Markup:
  *
  * <div class="site-grid__row">
- *	  <div class="site-grid__container">
+ *	  <div class="site-grid__wrapper">
  *		 <div class="site-grid__layout site-grid__layout--2-col">
  *			<div class="site-grid__col">
  *				<p>Component</p>
@@ -56,6 +56,19 @@
 
 		&:last-child {
 			margin-right: 0;
+		}
+
+		@media (--viewport-medium) {
+			flex: 1;
+			margin: 0 var(--grid-gutter) var(--grid-gutter) 0;
+
+			&:nth-child(2n) {
+				margin-right: var(--grid-gutter);
+			}
+
+			&:last-child {
+				margin-right: 0;
+			}
 		}
 	}
 }
