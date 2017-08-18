@@ -10,13 +10,14 @@ class Gallery implements Shortcode {
 	public function render( array $attr, int $instance ): string {
 		$post = get_post();
 		$atts = shortcode_atts( [
-			'order'         => 'ASC',
-			'orderby'       => 'menu_order ID',
-			'id'            => $post ? $post->ID : 0,
-			'include'       => '',
-			'exclude'       => '',
-			'show_carousel' => true,
-			'show_arrows'   => true,
+			'order'           => 'ASC',
+			'orderby'         => 'menu_order ID',
+			'id'              => $post ? $post->ID : 0,
+			'include'         => '',
+			'exclude'         => '',
+			'show_carousel'   => true,
+			'show_arrows'     => true,
+			'show_pagination' => false,
 		], $attr, 'gallery' );
 
 		$attachments = $this->get_attachments( $atts );
@@ -28,11 +29,12 @@ class Gallery implements Shortcode {
 		$ids = wp_list_pluck( $attachments, 'ID' );
 
 		$options = [
-			Slider::SLIDES        => $this->get_slides( $ids ),
-			Slider::THUMBNAILS    => $this->get_slides( $ids, 'thumbnail' ),
-			Slider::SHOW_CAROUSEL => $atts['show_carousel'],
-			Slider::SHOW_ARROWS   => $atts['show_arrows'],
-			Slider::MAIN_CLASSES  => [],
+			Slider::SLIDES          => $this->get_slides( $ids ),
+			Slider::THUMBNAILS      => $this->get_slides( $ids, 'thumbnail' ),
+			Slider::SHOW_CAROUSEL   => $atts['show_carousel'],
+			Slider::SHOW_ARROWS     => $atts['show_arrows'],
+			Slider::SHOW_PAGINATION => $atts['show_pagination'],
+			Slider::MAIN_CLASSES    => [],
 		];
 
 		$slider = Slider::factory( $options );
