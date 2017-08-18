@@ -20,7 +20,7 @@ class LogoFarm extends Panel_Type_Config {
 		$panel->set_template_dir( $this->ViewFinder );
 		$panel->set_label( __( 'Logo farm', 'tribe' ) );
 		$panel->set_description( __( 'A collection of logos.', 'tribe' ) );
-		$panel->set_thumbnail( $this->handler->thumbnail_url( 'logo-farm.svg' ) );
+		$panel->set_thumbnail( $this->handler->thumbnail_url( 'logofarm.svg' ) );
 
 		$panel->add_field( new Fields\TextArea( [
 			'name'     => self::FIELD_DESCRIPTION,

@@ -7,7 +7,7 @@ use ModularContent\Fields;
 class Testimonial extends Panel_Type_Config {
 
 	const NAME = 'testimonial';
-	
+
 	const FIELD_TITLE  = 'title';
 	const FIELD_QUOTES = 'quotes';
 	const FIELD_QUOTE  = 'quote';
@@ -19,7 +19,7 @@ class Testimonial extends Panel_Type_Config {
 		$panel->set_template_dir( $this->ViewFinder );
 		$panel->set_label( __( 'Testimonial', 'tribe' ) );
 		$panel->set_description( __( 'A series of testimonials or quotes.', 'tribe' ) );
-		$panel->set_thumbnail( $this->handler->thumbnail_url( 'module-quote.svg' ) );
+		$panel->set_thumbnail( $this->handler->thumbnail_url( 'testimonial.svg' ) );
 
 		$quote = new Fields\Repeater( [
 			'label'            => __( 'Testimonials', 'tribe' ),
