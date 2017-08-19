@@ -43,6 +43,8 @@ class Gallery extends Panel {
 			SliderComponent::SHOW_ARROWS     => true,
 			SliderComponent::SHOW_PAGINATION => true,
 			SliderComponent::MAIN_CLASSES    => $this->get_slider_main_classes(),
+			SliderComponent::MAIN_ATTRS      => ['data-swiper-options' => '{"speed":600}'],
+			SliderComponent::CAROUSEL_ATTRS  => ['data-swiper-options' => '{"speed":600}'],
 		];
 
 		$slider = SliderComponent::factory( $options );

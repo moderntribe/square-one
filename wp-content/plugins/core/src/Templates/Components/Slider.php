@@ -16,6 +16,7 @@ class Slider extends Component {
 	const WRAPPER_CLASSES = 'wrapper_classes';
 	const SLIDE_CLASSES   = 'slide_classes';
 	const MAIN_ATTRS      = 'main_attrs';
+	const CAROUSEL_ATTRS  = 'carousel_attrs';
 
 	protected function parse_options( array $options ): array {
 		$defaults = [
@@ -29,6 +30,7 @@ class Slider extends Component {
 			static::WRAPPER_CLASSES => [],
 			static::SLIDE_CLASSES   => [],
 			static::MAIN_ATTRS      => [],
+			static::CAROUSEL_ATTRS  => [],
 		];
 
 		return wp_parse_args( $options, $defaults );
@@ -60,7 +62,9 @@ class Slider extends Component {
 			static::SLIDE_CLASSES   => $this->merge_classes( [ 'c-slider__slide', 'swiper-slide' ], $this->options[ static::SLIDE_CLASSES ], true ),
 			static::WRAPPER_CLASSES => $this->merge_classes( [ 'c-slider__wrapper', 'swiper-wrapper' ], $this->options[ static::WRAPPER_CLASSES ], true ),
 			static::MAIN_ATTRS      => $this->merge_attrs( [ 'data-js' => 'c-slider' ], $this->options[ static::MAIN_ATTRS ], true ),
+			static::CAROUSEL_ATTRS  => $this->merge_attrs( [ 'data-js' => 'c-slider-carousel' ], $this->options[ static::CAROUSEL_ATTRS ], true ),
 		];
+
 
 		return $data;
 	}
