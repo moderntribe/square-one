@@ -8,10 +8,14 @@ class Testimonial extends Panel_Type_Config {
 
 	const NAME = 'testimonial';
 
-	const FIELD_TITLE  = 'title';
-	const FIELD_QUOTES = 'quotes';
-	const FIELD_QUOTE  = 'quote';
-	const FIELD_CITE   = 'cite';
+	const FIELD_TITLE      = 'title';
+	const FIELD_IMAGE      = 'image';
+	const FIELD_QUOTES     = 'quotes';
+	const FIELD_QUOTE      = 'quote';
+	const FIELD_CITE       = 'cite';
+	const FIELD_TEXT_COLOR = 'text_color';
+	const FIELD_TEXT_WHITE = 't-content--light';
+	const FIELD_TEXT_BLACK = 't-content--dark';
 
 	protected function panel() {
 
@@ -21,10 +25,27 @@ class Testimonial extends Panel_Type_Config {
 		$panel->set_description( __( 'A series of testimonials or quotes.', 'tribe' ) );
 		$panel->set_thumbnail( $this->handler->thumbnail_url( 'testimonial.svg' ) );
 
+		$panel->add_settings_field( new Fields\Radio( [
+			'name'    => self::FIELD_TEXT_COLOR,
+			'label'   => __( 'Text Color', 'tribe' ),
+			'options' => [
+				self::FIELD_TEXT_WHITE => __( 'White', 'tribe' ),
+				self::FIELD_TEXT_BLACK => __( 'Black', 'tribe' ),
+			],
+			'default' => self::FIELD_TEXT_BLACK,
+		] ) );
+
+		$panel->add_field( new Fields\Image( [
+			'name'        => self::FIELD_IMAGE,
+			'label'       => __( 'Background Image', 'tribe' ),
+			'description' => __( 'Optimal image sizes: 1500 x 1125 for Left/Right Aligned layouts; 1500 x 844 for Boxed/Hero layouts.', 'tribe' ),
+			'size'        => 'medium', // the size displayed in the admin.
+		] ) );
+
 		$quote = new Fields\Repeater( [
 			'label'            => __( 'Testimonials', 'tribe' ),
 			'name'             => self::FIELD_QUOTES,
-			'min'              => 2,
+			'min'              => 1,
 			'max'              => 4,
 			'new_button_label' => __( 'Add Quote', 'tribe' ),
 			'strings'          => [

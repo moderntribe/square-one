@@ -2,16 +2,20 @@
 
 {% extends "content/panels/panel.twig" %}
 
+{% block wrapper_start %}
+	<div class="site-section__inner site-panel--testimonial__inner {{ text_color }}">
+{% endblock %}
+
 {% block content %}
+
+	{{ image }}
 
 	<div class="site-section__content">
 		<div class="site-grid">
 
 			<div class="site-grid__wrapper">
 
-				{% for quote in quotes %}
-					{{ quote }}
-				{% endfor %}
+				{{ slider }}
 
 			</div>
 		</div>
