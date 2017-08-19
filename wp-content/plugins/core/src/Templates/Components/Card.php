@@ -81,7 +81,7 @@ class Card extends Component {
 		}
 
 		$options = [
-			'img_id' => $img,
+			'img_id'       => $img,
 			'as_bg'        => false,
 			'use_lazyload' => false,
 			'echo'         => false,

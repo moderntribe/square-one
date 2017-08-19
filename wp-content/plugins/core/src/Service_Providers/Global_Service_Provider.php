@@ -42,7 +42,7 @@ final class Global_Service_Provider extends Tribe_Service_Provider {
 		'ImageText',
 		'VideoText',
 		'Interstitial',
-		'MicroNav',
+		'MicroNavButtons',
 		'Wysiwyg',
 		'LogoFarm',
 		'Testimonial',

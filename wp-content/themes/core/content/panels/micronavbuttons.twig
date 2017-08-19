@@ -1,4 +1,4 @@
-{# Panel: Card Grid #}
+{# Panel: Micro Navigation Buttons #}
 
 {% extends "content/panels/panel.twig" %}
 
@@ -10,14 +10,14 @@
 			<div class="site-grid__wrapper">
 				<div class="site-grid__layout site-grid__layout--center site-grid__layout--2-col-full"
 				     data-depth="0"
-				     data-name="cards"
+				     data-name="items"
 				     data-livetext>
 
-				{% for card in cards %}
-					<div class="site-grid__col">
-						{{ card }}
-					</div>
-				{% endfor %}
+					{% for item in items %}
+						<div class="site-grid__col">
+							{{ item }}
+						</div>
+					{% endfor %}
 				</div>
 
 			</div>
