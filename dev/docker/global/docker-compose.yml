@@ -1,0 +1,83 @@
+version: '2'
+
+services:
+
+  dns-external:
+    image: andyshinn/dnsmasq:latest
+    container_name: tribe-dns-external
+    command:   --address=/tribe/10.0.75.1
+    labels:
+      - "traefik.enable=false"
+    cap_add:  
+      - NET_ADMIN
+    ports:
+      - "53:53/udp"
+      - "53:53/tcp"
+    network_mode: bridge
+
+  dns-internal:
+    image: andyshinn/dnsmasq:latest
+    container_name: tribe-dns-internal
+    command:   --address=/tribe/172.20.10.100 --address=/mysql.tribe/172.20.10.200 --address=/smtp.tribe/172.20.10.90
+    labels:
+      - "traefik.enable=false"
+    cap_add:  
+      - NET_ADMIN
+    ports:
+      - "53/udp"
+      - "53/tcp"
+    networks:
+      proxy:
+        ipv4_address: 172.20.10.250
+
+  mysql:
+    image: mysql:8.0
+    container_name: tribe-mysql
+    labels:
+      - "traefik.enable=false"
+    volumes:
+      - ~/mysql_data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+    ports:
+      - "3306:3306"
+    networks:
+      proxy:
+        ipv4_address: 172.20.10.200
+  
+  traefik:
+    image: traefik
+    container_name: tribe-proxy
+    labels:
+      - "traefik.frontend.rule=Host:proxy.tribe"
+      - "traefik.port=8080"
+    command: --web --docker --docker.domain=tribe --logLevel=DEBUG
+    networks:
+      proxy:
+        ipv4_address: 172.20.10.100
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /dev/null:/traefik.toml
+
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: tribe-mail
+    labels:
+      - "traefik.frontend.rule=Host:mailhog.tribe"
+      - "traefik.docker.network=proxy"
+      - "traefik.port=8025"
+    networks:
+      proxy:
+        ipv4_address: 172.20.10.90
+    ports:
+      - "1025:1025"
+
+networks:
+  proxy:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.10.0/24
