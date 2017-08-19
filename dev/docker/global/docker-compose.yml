@@ -1,11 +1,11 @@
-version: '2'
+version: '2.1'
 
 services:
 
   dns-external:
     image: andyshinn/dnsmasq:latest
     container_name: tribe-dns-external
-    command:   --address=/tribe/10.0.75.1
+    command:   --address=/tribe/${HOSTIP:-10.0.75.1}
     labels:
       - "traefik.enable=false"
     cap_add:  
