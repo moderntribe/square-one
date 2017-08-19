@@ -39,7 +39,7 @@ class Gallery extends Panel {
 		$options = [
 			SliderComponent::SLIDES          => $this->get_slides(),
 			SliderComponent::THUMBNAILS      => $this->get_slides( 'thumbnail' ),
-			SliderComponent::SHOW_CAROUSEL   => true,
+			SliderComponent::SHOW_CAROUSEL   => $this->show_carousel(),
 			SliderComponent::SHOW_ARROWS     => true,
 			SliderComponent::SHOW_PAGINATION => true,
 			SliderComponent::MAIN_CLASSES    => $this->get_slider_main_classes(),
@@ -50,6 +50,28 @@ class Gallery extends Panel {
 		return $slider->render();
 	}
 
+	public function show_carousel(): bool {
+		$show_carousel = true;
+
+		if ( ! empty( $this->panel_vars[ GalleryPanel::FIELD_CAROUSEL ] ) &&
+			$this->panel_vars[ GalleryPanel::FIELD_CAROUSEL ] == GalleryPanel::FIELD_CAROUSEL_HIDE ) {
+			$show_carousel = false;
+		}
+
+		return $show_carousel;
+	}
+
+	public function use_crop(): bool {
+		$use_crop = true;
+
+		if ( ! empty( $this->panel_vars[ GalleryPanel::FIELD_IMAGE_TREATMENT ] ) &&
+			$this->panel_vars[ GalleryPanel::FIELD_IMAGE_TREATMENT ] == GalleryPanel::FIELD_IMAGE_TREATMENT_OPTION_LETTERBOX ) {
+			$use_crop = false;
+		}
+
+		return $use_crop;
+	}
+
 	protected function get_slides( $size = 'full' ): array {
 		$slide_ids = $this->panel_vars[ GalleryPanel::FIELD_GALLERY ];
 
@@ -58,9 +80,10 @@ class Gallery extends Panel {
 		}
 
 		return array_map( function ( $slide_id ) use ( $size ) {
+			$crop = $this->use_crop();
 			$options = [
 				'img_id'       => $slide_id,
-				'as_bg'        => false,
+				'as_bg'        => $crop && $size == 'full',
 				'use_lazyload' => false,
 				'echo'         => false,
 				'src_size'     => $size,
