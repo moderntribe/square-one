@@ -15,9 +15,10 @@ const instances = {
 
 const options = {
 	swiperMain: () => ({
-
+		a11y: true,
 	}),
 	swiperThumbs: () => ({
+		a11y: true,
 		slidesPerView: 'auto',
 		touchRatio: 0.2,
 		slideToClickedSlide: true,
@@ -88,11 +89,11 @@ const bindCarouselEvents = (swiperThumbId, swiperMainId) => {
 const initCarousel = (slider, swiperMainId) => {
 	const carousel = slider.nextElementSibling;
 	const swiperThumbId = _.uniqueId('swiper-carousel-');
+	carousel.classList.add('initialized');
 	instances.swipers[swiperThumbId] = new Swiper(carousel, options.swiperThumbs());
 	slider.setAttribute('data-controls', swiperThumbId);
 	carousel.setAttribute('data-id', swiperThumbId);
 	carousel.setAttribute('data-controls', swiperMainId);
-	carousel.classList.add('initialized');
 	bindCarouselEvents(swiperThumbId, swiperMainId);
 };
 
@@ -104,9 +105,9 @@ const initCarousel = (slider, swiperMainId) => {
 const initSliders = () => {
 	tools.getNodes('[data-js="c-slider"]:not(.initialized)', true, document, true).forEach((slider) => {
 		const swiperMainId = _.uniqueId('swiper-');
+		slider.classList.add('initialized');
 		instances.swipers[swiperMainId] = new Swiper(slider, getMainOptsForSlider(slider, swiperMainId));
 		slider.setAttribute('data-id', swiperMainId);
-		slider.classList.add('initialized');
 		if (!slider.classList.contains('c-slider__main--has-carousel')) {
 			return;
 		}

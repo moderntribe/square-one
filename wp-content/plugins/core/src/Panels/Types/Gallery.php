@@ -13,6 +13,9 @@ class Gallery extends Panel_Type_Config {
 	const FIELD_IMAGE_TREATMENT                  = 'image_treatment';
 	const FIELD_IMAGE_TREATMENT_OPTION_CROP      = 'crop';
 	const FIELD_IMAGE_TREATMENT_OPTION_LETTERBOX = 'letterbox';
+	const FIELD_CAROUSEL                         = 'carousel';
+	const FIELD_CAROUSEL_SHOW                    = 'carousel_show';
+	const FIELD_CAROUSEL_HIDE                    = 'carousel_hide';
 	const FIELD_GALLERY                          = 'gallery';
 
 	protected function panel() {
@@ -30,14 +33,25 @@ class Gallery extends Panel_Type_Config {
 		] ) );
 
 		// Image Treatment
-		$panel->add_settings_field( new Fields\Radio( [
+		$panel->add_settings_field( new Fields\ImageSelect( [
 			'label'   => __( 'Image Treatment', 'tribe' ),
 			'name'    => self::FIELD_IMAGE_TREATMENT,
 			'options' => [
-				self::FIELD_IMAGE_TREATMENT_OPTION_CROP      => __( 'Crop', 'tribe' ),
-				self::FIELD_IMAGE_TREATMENT_OPTION_LETTERBOX => __( 'Letterbox', 'tribe' ),
+				self::FIELD_IMAGE_TREATMENT_OPTION_CROP      => $this->handler->layout_icon_url( 'gallery-crop.svg' ),
+				self::FIELD_IMAGE_TREATMENT_OPTION_LETTERBOX => $this->handler->layout_icon_url( 'gallery-no-crop.svg' ),
 			],
 			'default' => self::FIELD_IMAGE_TREATMENT_OPTION_CROP,
+		] ) );
+
+		// Carousel
+		$panel->add_settings_field( new Fields\ImageSelect( [
+			'label'   => __( 'Show Carousel', 'tribe' ),
+			'name'    => self::FIELD_CAROUSEL,
+			'options' => [
+				self::FIELD_CAROUSEL_SHOW => $this->handler->layout_icon_url( 'gallery-carousel.svg' ),
+				self::FIELD_CAROUSEL_HIDE => $this->handler->layout_icon_url( 'gallery-no-carousel.svg' ),
+			],
+			'default' => self::FIELD_CAROUSEL_SHOW,
 		] ) );
 
 		// ImageGallery
