@@ -13,14 +13,12 @@
 			     data-livetext>
 
 				{% for col in columns %}
-					<div class="site-grid__col">
-
-						{% include('components/wysiwyg.twig') with {
-						'wysiwyg' : col.content,
-						'wysiwyg_classes' : col.wysiwyg_classes,
-						'wysiwyg_attrs' : col.wysiwyg_attrs
-						} %}
-
+					<div class="site-grid__col t-content"
+					     data-depth="{{ loop.index0 }}"
+					     data-name="content"
+					     data-autop="true"
+					     data-livetext="true">
+						 {{ col.content }}
 					</div>
 				{% endfor %}
 

@@ -1,11 +1,9 @@
 <?php
 
-
 namespace Tribe\Project\Templates\Content\Panels;
 
 use Tribe\Project\Panels\Types\Hero as HeroPanel;
 use Tribe\Project\Templates\Components\Image;
-use Tribe\Project\Templates\Components\Title;
 use Tribe\Project\Templates\Components\Content_Block;
 
 class Hero extends Panel {
@@ -43,7 +41,9 @@ class Hero extends Panel {
 		$title_attrs       = [];
 		$description_attrs = [];
 
-		if ( is_panel_preview() ) {
+		if ( $this->panel_vars[ HeroPanel::FIELD_TITLE ] ||
+		     $this->panel_vars[ HeroPanel::FIELD_DESCRIPTION ] ||
+		     is_panel_preview() ) {
 
 			$title_attrs = [
 				'data-depth'    => $this->panel->get_depth(),
@@ -92,11 +92,11 @@ class Hero extends Panel {
 
 		$classes = [];
 
-		if ( HeroPanel::FIELD_TEXT_WHITE === $this->panel_vars[ HeroPanel::FIELD_TEXT_COLOR ] ) {
+		if ( HeroPanel::FIELD_TEXT_LIGHT === $this->panel_vars[ HeroPanel::FIELD_TEXT_COLOR ] ) {
 			$classes[] = 't-content--light';
 		}
 
-		if ( HeroPanel::FIELD_TEXT_BLACK === $this->panel_vars[ HeroPanel::FIELD_TEXT_COLOR ] ) {
+		if ( HeroPanel::FIELD_TEXT_DARK === $this->panel_vars[ HeroPanel::FIELD_TEXT_COLOR ] ) {
 			$classes[] = 't-content--dark';
 		}
 
@@ -105,7 +105,6 @@ class Hero extends Panel {
 
 	public function get_mapped_panel_data(): array {
 		$data = [
-			'title'         => '',
 			'text_color'    => $this->text_color(),
 			'layout'        => $this->get_layout(),
 			'image'         => $this->get_image(),

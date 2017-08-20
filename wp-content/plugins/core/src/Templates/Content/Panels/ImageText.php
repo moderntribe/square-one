@@ -22,7 +22,9 @@ class ImageText extends Panel {
 		$title_attrs       = [];
 		$description_attrs = [];
 
-		if ( is_panel_preview() ) {
+		if ( $this->panel_vars[ ImageTextPanel::FIELD_TITLE ] ||
+		     $this->panel_vars[ ImageTextPanel::FIELD_DESCRIPTION ] ||
+		     is_panel_preview() ) {
 
 			$title_attrs = [
 				'data-depth'    => 0,
@@ -44,7 +46,7 @@ class ImageText extends Panel {
 			Content_Block::DESCRIPTION       => $this->panel_vars[ ImageTextPanel::FIELD_DESCRIPTION ],
 			Content_Block::CTA               => $this->panel_vars[ ImageTextPanel::FIELD_CTA ],
 			Content_Block::TITLE_ATTRS       => $title_attrs,
-			Content_Block::TITLE_CLASSES     => [ 'h3' ],
+			Content_Block::TITLE_CLASSES     => [ 'h2' ],
 			Content_Block::DESCRIPTION_ATTRS => $description_attrs,
 			Content_Block::CTA_CLASSES       => [ 'c-btn--sm' ],
 		];
@@ -83,18 +85,6 @@ class ImageText extends Panel {
 		}
 
 		return implode( ' ', $classes );
-	}
-
-	protected function get_title_attrs() {
-		if ( ! is_panel_preview() ) {
-			return [];
-		}
-
-		return [
-			'data-depth'    => 0,
-			'data-name'     => ImageTextPanel::FIELD_TITLE,
-			'data-livetext' => true,
-		];
 	}
 
 	protected function get_mapped_panel_data(): array {

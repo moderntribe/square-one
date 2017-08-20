@@ -31,34 +31,12 @@ class Wysiwyg extends Panel {
 			foreach ( $this->panel_vars[ Wysi::FIELD_COLUMNS ] as $col ) {
 
 				$columns[] = [
-					'content'         => $col[ Wysi::FIELD_COLUMN_CONTENT ],
-					'wysiwyg_classes' => $this->get_wysiwyg_classes(),
-					'wysiwyg_attrs'   => $this->get_wysiwyg_attrs(),
+					'content' => $col[ Wysi::FIELD_COLUMN_CONTENT ],
 				];
 			}
 		}
 
 		return $columns;
-	}
-
-	protected function get_wysiwyg_attrs() {
-		$content_attrs = sprintf( 'data-depth="0" data-name="%s" data-index="%s" data-autop="true" data-livetext',
-			esc_attr( Wysi::FIELD_COLUMN_CONTENT ),
-			esc_attr( get_nest_index() )
-		);
-
-		return $content_attrs;
-	}
-
-	protected function get_wysiwyg_classes() {
-
-		$classes = [ 'c-wysiwyg' ];
-
-		if ( ! empty( Wysi::NAME ) ) {
-			$classes[] = 't-content';
-		}
-
-		return implode( ' ', $classes );
 	}
 
 	public function get_mapped_panel_data(): array {
