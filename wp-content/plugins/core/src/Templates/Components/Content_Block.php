@@ -7,6 +7,7 @@ class Content_Block extends Component {
 	const TEMPLATE_NAME = 'components/contentblock.twig';
 
 	const TITLE                         = 'title';
+	const TITLE_TAG                     = 'title_tag';
 	const DESCRIPTION                   = 'description';
 	const TITLE_CLASSES                 = 'title_classes';
 	const CONTENT_BLOCK_CLASSES         = 'content_block_classes';
@@ -18,10 +19,12 @@ class Content_Block extends Component {
 	const CTA_URL                       = 'url';
 	const CTA_LABEL                     = 'label';
 	const CTA_TARGET                    = 'target';
+	const CTA_CLASSES                   = 'classes';
 
 	protected function parse_options( array $options ): array {
 		$defaults = [
 			self::TITLE                         => '',
+			self::TITLE_TAG                     => '',
 			self::DESCRIPTION                   => '',
 			self::TITLE_CLASSES                 => [],
 			self::CONTENT_BLOCK_CLASSES         => [],
@@ -30,6 +33,7 @@ class Content_Block extends Component {
 			self::TITLE_ATTRS                   => [],
 			self::DESCRIPTION_ATTRS             => [],
 			self::CTA                           => [],
+			self::CTA_CLASSES                   => [],
 		];
 
 		return wp_parse_args( $options, $defaults );
@@ -54,10 +58,10 @@ class Content_Block extends Component {
 		}
 
 		$options = [
-			Title::TITLE   => $this->options[ self::TITLE ],
-			Title::CLASSES => $this->merge_classes( [ 'c-content-block__title h2' ], $this->options[ self::TITLE_CLASSES ] ),
-			Title::ATTRS   => $this->options[ self::TITLE_ATTRS ],
-			Title::TAG     => 'h2',
+			Title::TITLE         => $this->options[ self::TITLE ],
+			Title::CLASSES       => $this->merge_classes( [ 'c-content-block__title' ], $this->options[ self::TITLE_CLASSES ] ),
+			Title::ATTRS         => $this->options[ self::TITLE_ATTRS ],
+			Title::TAG           => $this->options[ self::TITLE_TAG ],
 		];
 
 		$title_obj = Title::factory( $options );
@@ -75,6 +79,7 @@ class Content_Block extends Component {
 			'url'         => esc_url( $this->options[ self::CTA ][ self::CTA_URL ] ),
 			'label'       => esc_html( $this->options[ self::CTA ][ self::CTA_LABEL ] ),
 			'target'      => esc_attr( $this->options[ self::CTA ][ self::CTA_TARGET ] ),
+			'classes'     => $this->options[ self::CTA_CLASSES ],
 			'btn_as_link' => true,
 		];
 

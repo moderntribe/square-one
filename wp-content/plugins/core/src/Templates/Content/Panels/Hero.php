@@ -3,11 +3,12 @@
 
 namespace Tribe\Project\Templates\Content\Panels;
 
-use Tribe\Project\Panels\Types\Interstitial as Interstice;
+use Tribe\Project\Panels\Types\Hero as HeroPanel;
 use Tribe\Project\Templates\Components\Image;
+use Tribe\Project\Templates\Components\Title;
 use Tribe\Project\Templates\Components\Content_Block;
 
-class Interstitial extends Panel {
+class Hero extends Panel {
 
 	public function get_data(): array {
 		$data       = parent::get_data();
@@ -19,12 +20,12 @@ class Interstitial extends Panel {
 
 	protected function get_image() {
 
-		if ( empty( $this->panel_vars[ Interstice::FIELD_IMAGE ] ) ) {
+		if ( empty( $this->panel_vars[ HeroPanel::FIELD_IMAGE ] ) ) {
 			return false;
 		}
 
 		$options = [
-			'img_id'          => $this->panel_vars[ Interstice::FIELD_IMAGE ],
+			'img_id'          => $this->panel_vars[ HeroPanel::FIELD_IMAGE ],
 			'component_class' => 'c-image',
 			'as_bg'           => true,
 			'use_lazyload'    => false,
@@ -46,25 +47,25 @@ class Interstitial extends Panel {
 
 			$title_attrs = [
 				'data-depth'    => $this->panel->get_depth(),
-				'data-name'     => esc_attr( Interstice::FIELD_TITLE ),
+				'data-name'     => esc_attr( HeroPanel::FIELD_TITLE ),
 				'data-livetext' => true,
 			];
 
 			$description_attrs = [
 				'data-depth'    => $this->panel->get_depth(),
-				'data-name'     => esc_attr( Interstice::FIELD_DESCRIPTION ),
+				'data-name'     => esc_attr( HeroPanel::FIELD_DESCRIPTION ),
 				'data-autop'    => 'true',
 				'data-livetext' => true,
 			];
 		}
 
 		$options = [
-			Content_Block::TITLE             => $this->panel_vars[ Interstice::FIELD_TITLE ],
-			Content_Block::TITLE_TAG         => 'h2',
-			Content_Block::DESCRIPTION       => $this->panel_vars[ Interstice::FIELD_DESCRIPTION ],
-			Content_Block::CTA               => $this->panel_vars[ Interstice::FIELD_CTA ],
+			Content_Block::TITLE             => $this->panel_vars[ HeroPanel::FIELD_TITLE ],
+			Content_Block::DESCRIPTION       => $this->panel_vars[ HeroPanel::FIELD_DESCRIPTION ],
+			Content_Block::CTA               => $this->panel_vars[ HeroPanel::FIELD_CTA ],
 			Content_Block::TITLE_ATTRS       => $title_attrs,
 			Content_Block::DESCRIPTION_ATTRS => $description_attrs,
+			Content_Block::TITLE_TAG         => 'h1',
 		];
 
 		$content_block_obj = Content_Block::factory( $options );
@@ -76,11 +77,11 @@ class Interstitial extends Panel {
 
 		$classes = [];
 
-		if ( Interstice::FIELD_LAYOUT_OPTION_CONTENT_RIGHT === $this->panel_vars[ Interstice::FIELD_LAYOUT ] ) {
+		if ( HeroPanel::FIELD_LAYOUT_OPTION_CONTENT_RIGHT === $this->panel_vars[ HeroPanel::FIELD_LAYOUT ] ) {
 			$classes[] = 'site-grid--pull-right';
 		}
 
-		if ( Interstice::FIELD_LAYOUT_OPTION_CONTENT_CENTER === $this->panel_vars[ Interstice::FIELD_LAYOUT ] ) {
+		if ( HeroPanel::FIELD_LAYOUT_OPTION_CONTENT_CENTER === $this->panel_vars[ HeroPanel::FIELD_LAYOUT ] ) {
 			$classes[] = 'site-grid--center u-text-center';
 		}
 
@@ -91,11 +92,11 @@ class Interstitial extends Panel {
 
 		$classes = [];
 
-		if ( Interstice::FIELD_TEXT_WHITE === $this->panel_vars[ Interstice::FIELD_TEXT_COLOR ] ) {
+		if ( HeroPanel::FIELD_TEXT_WHITE === $this->panel_vars[ HeroPanel::FIELD_TEXT_COLOR ] ) {
 			$classes[] = 't-content--light';
 		}
 
-		if ( Interstice::FIELD_TEXT_BLACK === $this->panel_vars[ Interstice::FIELD_TEXT_COLOR ] ) {
+		if ( HeroPanel::FIELD_TEXT_BLACK === $this->panel_vars[ HeroPanel::FIELD_TEXT_COLOR ] ) {
 			$classes[] = 't-content--dark';
 		}
 
@@ -104,6 +105,7 @@ class Interstitial extends Panel {
 
 	public function get_mapped_panel_data(): array {
 		$data = [
+			'title'         => '',
 			'text_color'    => $this->text_color(),
 			'layout'        => $this->get_layout(),
 			'image'         => $this->get_image(),

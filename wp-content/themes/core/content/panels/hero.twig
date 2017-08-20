@@ -1,0 +1,23 @@
+{# Panel: Hero #}
+
+{% extends "content/panels/panel.twig" %}
+
+{% block header %}{% endblock %}
+
+{% block wrapper_start %}{% endblock %}
+
+	{% block content %}
+
+		{{ image }}
+
+		<div class="l-wrapper u-vertical-padding">
+			<div class="site-grid site-grid--vertical-center {{ layout }}">
+				<div class="t-content {{ text_color }}">
+					{{ content_block }}
+				</div>
+			</div>
+		</div>
+
+	{% endblock %}
+
+{% block wrapper_end %}{% endblock %}
