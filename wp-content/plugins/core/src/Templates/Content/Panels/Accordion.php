@@ -4,6 +4,7 @@ namespace Tribe\Project\Templates\Content\Panels;
 
 use Tribe\Project\Panels\Types\Accordion as AccordionPanel;
 use Tribe\Project\Templates\Components\Accordion as AccordionComponent;
+use Tribe\Project\Theme\Util;
 
 class Accordion extends Panel {
 
@@ -27,11 +28,24 @@ class Accordion extends Panel {
 
 	public function get_mapped_panel_data(): array {
 		$data = [
-			'title'     => $this->get_title(),
-			'accordion' => $this->get_accordion(),
+			'title'        => $this->get_title(),
+			'content'      => $this->panel_vars[AccordionPanel::FIELD_CONTENT],
+			'layout'       => $this->panel_vars[AccordionPanel::FIELD_LAYOUT],
+			'accordion'    => $this->get_accordion(),
+			'grid_classes' => $this->get_grid_classes(),
 		];
 
 		return $data;
+	}
+
+	protected function get_grid_classes(): string {
+		$classes = 'site-grid__layout site-grid__layout--center';
+
+		if ( ! empty( $this->panel_vars[ AccordionPanel::FIELD_LAYOUT ] ) && $this->panel_vars[ AccordionPanel::FIELD_LAYOUT ] !== AccordionPanel::FIELD_LAYOUT_OPTION_CENTER ) {
+			$classes .= ' site-grid__layout--2-col-full';
+		}
+
+		return $classes;
 	}
 
 	protected function get_accordion(): string {

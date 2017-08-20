@@ -14,8 +14,8 @@ class Accordion extends Panel_Type_Config {
 	const FIELD_ACCORDION_TITLE      = 'title';
 	const FIELD_ACCORDION_CONTENT    = 'accordion_content';
 	const FIELD_LAYOUT               = 'layout';
-	const FIELD_LAYOUT_OPTION_RIGHT  = 'accordion-right';
-	const FIELD_LAYOUT_OPTION_LEFT   = 'accordion-left';
+	const FIELD_LAYOUT_OPTION_RIGHT  = 'right';
+	const FIELD_LAYOUT_OPTION_LEFT   = 'left';
 	const FIELD_LAYOUT_OPTION_CENTER = 'center';
 
 	protected function panel() {
@@ -31,9 +31,9 @@ class Accordion extends Panel_Type_Config {
 			'name'    => self::FIELD_LAYOUT,
 			'label'   => __( 'Layout', 'tribe' ),
 			'options' => [
-				self::FIELD_LAYOUT_OPTION_RIGHT  => $this->handler->layout_icon_url( 'module-accordion-right.png' ),
-				self::FIELD_LAYOUT_OPTION_LEFT   => $this->handler->layout_icon_url( 'module-accordion-left.png' ),
-				self::FIELD_LAYOUT_OPTION_CENTER => $this->handler->layout_icon_url( 'module-accordion-center.png' ),
+				self::FIELD_LAYOUT_OPTION_RIGHT  => $this->handler->layout_icon_url( 'accordion-right.svg' ),
+				self::FIELD_LAYOUT_OPTION_LEFT   => $this->handler->layout_icon_url( 'accordion-left.svg' ),
+				self::FIELD_LAYOUT_OPTION_CENTER => $this->handler->layout_icon_url( 'accordion-center.svg' ),
 			],
 			'default' => self::FIELD_LAYOUT_OPTION_RIGHT,
 		] ) );
