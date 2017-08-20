@@ -62,7 +62,7 @@ abstract class Util {
 				return $array[ $key ] ? $key : '';
 			}
 
-			return $key . '="' . esc_attr( $array[ $key ] ) . '"';
+			return $key . '=\'' . esc_attr( $array[ $key ] ) . '\'';
 		}, array_keys( $array ) );
 
 		return implode( ' ', $attrs );

@@ -40,7 +40,7 @@ class Gallery extends Panel_Type_Config {
 				self::FIELD_IMAGE_TREATMENT_OPTION_CROP      => $this->handler->layout_icon_url( 'gallery-crop.svg' ),
 				self::FIELD_IMAGE_TREATMENT_OPTION_LETTERBOX => $this->handler->layout_icon_url( 'gallery-no-crop.svg' ),
 			],
-			'default' => self::FIELD_IMAGE_TREATMENT_OPTION_CROP,
+			'default' => self::FIELD_IMAGE_TREATMENT_OPTION_LETTERBOX,
 		] ) );
 
 		// Carousel

@@ -7,9 +7,26 @@
 	<div class="site-section__content">
 		<div class="site-grid">
 			<div class="site-grid__wrapper">
-
-				{{ accordion }}
-
+				<div class="{{ grid_classes }}"
+				     data-depth="0"
+				     data-name="accordions"
+				     data-livetext>
+					{% if layout == 'left' %}
+						<div class="site-grid__col">
+							{{ accordion }}
+						</div>
+						<div class="site-grid__col">
+							{{ content }}
+						</div>
+					{% else %}
+						<div class="site-grid__col">
+							{{ content }}
+						</div>
+						<div class="site-grid__col">
+							{{ accordion }}
+						</div>
+					{% endif %}
+				</div>
 			</div>
 		</div>
 	</div>

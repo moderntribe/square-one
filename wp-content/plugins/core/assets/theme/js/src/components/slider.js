@@ -8,6 +8,7 @@ import delegate from 'delegate';
 import Swiper from 'swiper';
 
 import * as tools from '../utils/tools';
+import * as tests from '../utils/tests';
 
 const instances = {
 	swipers: {},
@@ -54,6 +55,9 @@ const getMainOptsForSlider = (slider, swiperId) => {
 		opts.paginationClickable = true;
 		updatePagination(slider, swiperId);
 	}
+	if (slider.dataset.swiperOptions && tests.isJson(slider.dataset.swiperOptions)) {
+		Object.assign(opts, JSON.parse(slider.dataset.swiperOptions));
+	}
 	return opts;
 };
 
@@ -90,7 +94,11 @@ const initCarousel = (slider, swiperMainId) => {
 	const carousel = slider.nextElementSibling;
 	const swiperThumbId = _.uniqueId('swiper-carousel-');
 	carousel.classList.add('initialized');
-	instances.swipers[swiperThumbId] = new Swiper(carousel, options.swiperThumbs());
+	const opts = options.swiperThumbs();
+	if (carousel.dataset.swiperOptions && tests.isJson(carousel.dataset.swiperOptions)) {
+		Object.assign(opts, JSON.parse(carousel.dataset.swiperOptions));
+	}
+	instances.swipers[swiperThumbId] = new Swiper(carousel, opts);
 	slider.setAttribute('data-controls', swiperThumbId);
 	carousel.setAttribute('data-id', swiperThumbId);
 	carousel.setAttribute('data-controls', swiperMainId);
