@@ -40,10 +40,13 @@ class ImageText extends Panel {
 
 		$options = [
 			Content_Block::TITLE             => esc_html( $this->panel_vars[ ImageTextPanel::FIELD_TITLE ] ),
+			Content_Block::TITLE_TAG         => 'h2',
 			Content_Block::DESCRIPTION       => $this->panel_vars[ ImageTextPanel::FIELD_DESCRIPTION ],
 			Content_Block::CTA               => $this->panel_vars[ ImageTextPanel::FIELD_CTA ],
 			Content_Block::TITLE_ATTRS       => $title_attrs,
+			Content_Block::TITLE_CLASSES     => [ 'h3' ],
 			Content_Block::DESCRIPTION_ATTRS => $description_attrs,
+			Content_Block::CTA_CLASSES       => [ 'c-btn--sm' ],
 		];
 
 		$content_block_obj = Content_Block::factory( $options );
