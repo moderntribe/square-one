@@ -1,0 +1,27 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Grid: Wrappers
+ *
+ * ----------------------------------------------------------------------------- */
+
+.site-grid__wrapper {
+	display: flex;
+	flex-direction: column;
+	max-width: var(--grid-width);
+	margin: 0 auto;
+	width: 100%;
+
+	@media (--viewport-medium) {
+		flex-direction: row;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Wrappers: Modifier Wrapper Bleed
+ * ----------------------------------------------------------------------------- */
+
+.site-grid__wrapper--bleed {
+	max-width: none;
+	padding-left: 0;
+	padding-right: 0;
+}

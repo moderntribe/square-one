@@ -59,12 +59,12 @@ class Interstitial extends Panel {
 		}
 
 		$options = [
-			Content_Block::TITLE             => $this->panel_vars[ Interstice::FIELD_TITLE ],
-			Content_Block::TITLE_TAG         => 'h2',
-			Content_Block::DESCRIPTION       => $this->panel_vars[ Interstice::FIELD_DESCRIPTION ],
-			Content_Block::CTA               => $this->panel_vars[ Interstice::FIELD_CTA ],
-			Content_Block::TITLE_ATTRS       => $title_attrs,
-			Content_Block::DESCRIPTION_ATTRS => $description_attrs,
+			Content_Block::TITLE       => $this->panel_vars[ Interstice::FIELD_TITLE ],
+			Content_Block::TITLE_TAG   => 'h2',
+			Content_Block::TEXT        => $this->panel_vars[ Interstice::FIELD_DESCRIPTION ],
+			Content_Block::CTA         => $this->panel_vars[ Interstice::FIELD_CTA ],
+			Content_Block::TITLE_ATTRS => $title_attrs,
+			Content_Block::TEXT_ATTRS  => $description_attrs,
 		];
 
 		$content_block_obj = Content_Block::factory( $options );

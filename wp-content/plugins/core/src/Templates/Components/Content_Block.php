@@ -8,13 +8,13 @@ class Content_Block extends Component {
 
 	const TITLE                         = 'title';
 	const TITLE_TAG                     = 'title_tag';
-	const DESCRIPTION                   = 'description';
+	const TEXT                          = 'text';
 	const TITLE_CLASSES                 = 'title_classes';
 	const CONTENT_BLOCK_CLASSES         = 'content_block_classes';
 	const CONTENT_BLOCK_CONTENT_CLASSES = 'content_block_content_classes';
-	const DESCRIPTION_CLASSES           = 'description_classes';
+	const TEXT_CLASSES                  = 'text_classes';
 	const TITLE_ATTRS                   = 'title_attrs';
-	const DESCRIPTION_ATTRS             = 'description_attrs';
+	const TEXT_ATTRS                    = 'text_attrs';
 	const CTA                           = 'cta';
 	const CTA_URL                       = 'url';
 	const CTA_LABEL                     = 'label';
@@ -25,13 +25,13 @@ class Content_Block extends Component {
 		$defaults = [
 			self::TITLE                         => '',
 			self::TITLE_TAG                     => '',
-			self::DESCRIPTION                   => '',
+			self::TEXT                          => '',
 			self::TITLE_CLASSES                 => [],
 			self::CONTENT_BLOCK_CLASSES         => [],
 			self::CONTENT_BLOCK_CONTENT_CLASSES => [],
-			self::DESCRIPTION_CLASSES           => [],
+			self::TEXT_CLASSES                  => [],
 			self::TITLE_ATTRS                   => [],
-			self::DESCRIPTION_ATTRS             => [],
+			self::TEXT_ATTRS                    => [],
 			self::CTA                           => [],
 			self::CTA_CLASSES                   => [],
 		];
@@ -44,7 +44,7 @@ class Content_Block extends Component {
 			'title'                         => $this->get_title(),
 			'content_block_classes'         => $this->merge_classes( [ 'c-content-block' ], $this->options[ self::CONTENT_BLOCK_CLASSES ], true ),
 			'content_block_content_classes' => $this->merge_classes( [ 'c-content-block__content' ], $this->options[ self::CONTENT_BLOCK_CONTENT_CLASSES ], true ),
-			'description'                   => $this->get_content_block_description(),
+			'text'                          => $this->get_content_block_text(),
 			'button'                        => $this->get_button(),
 		];
 
@@ -88,20 +88,20 @@ class Content_Block extends Component {
 		return $button->render();
 	}
 
-	protected function get_content_block_description(): string {
+	protected function get_content_block_text(): string {
 
-		if ( empty( $this->options[ self::DESCRIPTION ] ) ) {
+		if ( empty( $this->options[ self::TEXT ] ) ) {
 			return '';
 		}
 
 		$options = [
-			Description::DESCRIPTION => $this->options[ self::DESCRIPTION ],
-			Description::CLASSES     => $this->merge_classes( [ 'c-content-block__desc' ], $this->options[ self::DESCRIPTION_CLASSES ] ),
-			Description::ATTRS       => $this->options[ self::DESCRIPTION_ATTRS ],
+			Text::TEXT => $this->options[ self::TEXT ],
+			Text::CLASSES     => $this->merge_classes( [ 'c-content-block__desc' ], $this->options[ self::TEXT_CLASSES ] ),
+			Text::ATTRS       => $this->options[ self::TEXT_ATTRS ],
 		];
 
-		$desc_object = Description::factory( $options );
+		$text_object = Text::factory( $options );
 
-		return $desc_object->render();
+		return $text_object->render();
 	}
 }

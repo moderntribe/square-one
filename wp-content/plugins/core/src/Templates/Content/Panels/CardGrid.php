@@ -53,12 +53,12 @@ class CardGrid extends Panel {
 				}
 
 				$options = [
-					Card::TITLE             => $card[ CardGridPanel::FIELD_CARD_TITLE ],
-					Card::DESCRIPTION       => $card[ CardGridPanel::FIELD_CARD_DESCRIPTION ],
-					Card::IMAGE             => $card[ CardGridPanel::FIELD_CARD_IMAGE ],
-					Card::CTA               => $card[ CardGridPanel::FIELD_CARD_CTA ],
-					Card::TITLE_ATTRS       => $title_attrs,
-					Card::DESCRIPTION_ATTRS => $description_attrs,
+					Card::TITLE       => $card[ CardGridPanel::FIELD_CARD_TITLE ],
+					Card::TEXT        => $card[ CardGridPanel::FIELD_CARD_DESCRIPTION ],
+					Card::IMAGE       => $card[ CardGridPanel::FIELD_CARD_IMAGE ],
+					Card::CTA         => $card[ CardGridPanel::FIELD_CARD_CTA ],
+					Card::TITLE_ATTRS => $title_attrs,
+					Card::TEXT_ATTRS  => $description_attrs,
 				];
 
 				$card_obj = Card::factory( $options );

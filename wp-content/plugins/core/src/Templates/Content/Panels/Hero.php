@@ -60,12 +60,12 @@ class Hero extends Panel {
 		}
 
 		$options = [
-			Content_Block::TITLE             => $this->panel_vars[ HeroPanel::FIELD_TITLE ],
-			Content_Block::DESCRIPTION       => $this->panel_vars[ HeroPanel::FIELD_DESCRIPTION ],
-			Content_Block::CTA               => $this->panel_vars[ HeroPanel::FIELD_CTA ],
-			Content_Block::TITLE_ATTRS       => $title_attrs,
-			Content_Block::DESCRIPTION_ATTRS => $description_attrs,
-			Content_Block::TITLE_TAG         => 'h1',
+			Content_Block::TITLE       => $this->panel_vars[ HeroPanel::FIELD_TITLE ],
+			Content_Block::TEXT        => $this->panel_vars[ HeroPanel::FIELD_DESCRIPTION ],
+			Content_Block::CTA         => $this->panel_vars[ HeroPanel::FIELD_CTA ],
+			Content_Block::TITLE_ATTRS => $title_attrs,
+			Content_Block::TEXT_ATTRS  => $description_attrs,
+			Content_Block::TITLE_TAG   => 'h1',
 		];
 
 		$content_block_obj = Content_Block::factory( $options );

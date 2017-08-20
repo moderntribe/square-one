@@ -6,36 +6,36 @@ class Card extends Component {
 
 	const TEMPLATE_NAME = 'components/card.twig';
 
-	const TITLE               = 'title';
-	const DESCRIPTION         = 'description';
-	const IMAGE               = 'image';
-	const CLASSES             = 'classes';
-	const TITLE_CLASSES       = 'title_classes';
-	const HEADER_CLASSES      = 'header_classes';
-	const CONTENT_CLASSES     = 'content_classes';
-	const IMAGE_CLASSES       = 'image_classes';
-	const DESCRIPTION_CLASSES = 'description_classes';
-	const TITLE_ATTRS         = 'title_attrs';
-	const DESCRIPTION_ATTRS   = 'description_attrs';
-	const CTA                 = 'cta';
-	const CTA_URL             = 'url';
-	const CTA_LABEL           = 'label';
-	const CTA_TARGET          = 'target';
+	const TITLE           = 'title';
+	const TEXT            = 'text';
+	const IMAGE           = 'image';
+	const CLASSES         = 'classes';
+	const TITLE_CLASSES   = 'title_classes';
+	const HEADER_CLASSES  = 'header_classes';
+	const CONTENT_CLASSES = 'content_classes';
+	const IMAGE_CLASSES   = 'image_classes';
+	const TEXT_CLASSES    = 'text_classes';
+	const TITLE_ATTRS     = 'title_attrs';
+	const TEXT_ATTRS      = 'text_attrs';
+	const CTA             = 'cta';
+	const CTA_URL         = 'url';
+	const CTA_LABEL       = 'label';
+	const CTA_TARGET      = 'target';
 
 	protected function parse_options( array $options ): array {
 		$defaults = [
-			self::TITLE               => '',
-			self::DESCRIPTION         => '',
-			self::IMAGE               => '',
-			self::CLASSES             => [],
-			self::TITLE_CLASSES       => [],
-			self::HEADER_CLASSES      => [],
-			self::CONTENT_CLASSES     => [],
-			self::IMAGE_CLASSES       => [],
-			self::DESCRIPTION_CLASSES => [],
-			self::TITLE_ATTRS         => [],
-			self::DESCRIPTION_ATTRS   => [],
-			self::CTA                 => [],
+			self::TITLE           => '',
+			self::TEXT            => '',
+			self::IMAGE           => '',
+			self::CLASSES         => [],
+			self::TITLE_CLASSES   => [],
+			self::HEADER_CLASSES  => [],
+			self::CONTENT_CLASSES => [],
+			self::IMAGE_CLASSES   => [],
+			self::TEXT_CLASSES    => [],
+			self::TITLE_ATTRS     => [],
+			self::TEXT_ATTRS      => [],
+			self::CTA             => [],
 		];
 
 		return wp_parse_args( $options, $defaults );
@@ -48,7 +48,7 @@ class Card extends Component {
 			'card_header_classes'  => $this->merge_classes( [ 'c-card__header' ], $this->options[ self::HEADER_CLASSES ], true ),
 			'card_content_classes' => $this->merge_classes( [ 'c-card__content' ], $this->options[ self::CONTENT_CLASSES ], true ),
 			'image_classes'        => $this->merge_classes( [ 'c-image' ], $this->options[ self::IMAGE_CLASSES ], true ),
-			'description'          => $this->get_card_description(),
+			'text'                 => $this->get_card_text(),
 			'image'                => $this->get_card_image( $this->options[ self::IMAGE ] ),
 			'button'               => $this->get_button(),
 		];
@@ -112,20 +112,20 @@ class Card extends Component {
 		return $button->render();
 	}
 
-	protected function get_card_description(): string {
+	protected function get_card_text(): string {
 
-		if ( empty( $this->options[ self::DESCRIPTION ] ) ) {
+		if ( empty( $this->options[ self::TEXT ] ) ) {
 			return '';
 		}
 
 		$options = [
-			Description::DESCRIPTION => $this->options[ self::DESCRIPTION ],
-			Description::CLASSES     => $this->merge_classes( [ 'c-card__desc' ], $this->options[ self::DESCRIPTION_CLASSES ] ),
-			Description::ATTRS       => $this->options[ self::DESCRIPTION_ATTRS ],
+			Text::TEXT    => $this->options[ self::TEXT ],
+			Text::CLASSES => $this->merge_classes( [ 'c-card__desc' ], $this->options[ self::TEXT_CLASSES ] ),
+			Text::ATTRS   => $this->options[ self::TEXT_ATTRS ],
 		];
 
-		$desc_object = Description::factory( $options );
+		$text_object = Text::factory( $options );
 
-		return $desc_object->render();
+		return $text_object->render();
 	}
 }
