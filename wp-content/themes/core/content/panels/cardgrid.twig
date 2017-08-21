@@ -7,18 +7,16 @@
 	<div class="site-section__content">
 		<div class="site-grid">
 
-			<div class="site-grid__wrapper">
-				<div class="site-grid__layout site-grid__layout--center site-grid__layout--2-col-full"
-				     data-depth="0"
-				     data-name="cards"
-				     data-livetext>
+			<div class="site-grid__wrapper site-grid__1-col site-grid__2-col--min-small site-grid__4-col--min-full"
+			     data-depth="0"
+				 data-name="cards"
+				 data-livetext>
 
 				{% for card in cards %}
 					<div class="site-grid__col">
 						{{ card }}
 					</div>
 				{% endfor %}
-				</div>
 
 			</div>
 		</div>

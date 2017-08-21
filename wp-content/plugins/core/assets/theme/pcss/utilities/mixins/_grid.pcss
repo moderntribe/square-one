@@ -1,0 +1,87 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Grid: Columns
+ *
+ * ----------------------------------------------------------------------------- */
+
+@define-mixin one-col-wrap {
+	flex-wrap: wrap;
+
+	> .site-grid__col {
+		flex: none;
+		margin-right: 0;
+		width: 100%;
+	}
+}
+
+@define-mixin two-col-wrap {
+	flex-wrap: wrap;
+
+	> .site-grid__col {
+		flex: none;
+		margin-right: var(--grid-gutter);
+		width: calc(50% - (var(--grid-gutter) - (var(--grid-gutter) / 2)));
+
+		&:nth-child(2n),
+		&:last-child {
+			margin-right: 0;
+		}
+	}
+}
+
+@define-mixin three-col-wrap {
+
+	> .site-grid__col {
+		flex: none;
+		margin-right: var(--grid-gutter);
+		width: calc(100% / 3 - (var(--grid-gutter) - (var(--grid-gutter) / 3)));
+
+		&:nth-child(2n) {
+			margin-right: var(--grid-gutter);
+		}
+
+		&:nth-child(3n),
+		&:last-child {
+			margin-right: 0;
+		}
+	}
+}
+
+@define-mixin four-col-wrap {
+
+	> .site-grid__col {
+		flex: 1;
+		margin-right: var(--grid-gutter);
+		width: calc(25% - (var(--grid-gutter) - (var(--grid-gutter) / 4)));
+
+		&:nth-child(2n),
+		&:nth-child(3n) {
+			margin-right: var(--grid-gutter);
+		}
+
+		&:nth-child(4n),
+		&:last-child {
+			margin-right: 0;
+		}
+	}
+}
+
+@define-mixin kill-col-wrap {
+
+	> .site-grid__col {
+		flex: 1;
+		margin: 0 var(--grid-gutter) var(--grid-gutter) 0;
+		min-width: 0;
+		padding: 0;
+		position: relative;
+		width: 100%;
+
+		&:nth-child(1n) {
+			margin-right: var(--grid-gutter);
+		}
+
+		&:last-child {
+			margin-right: 0;
+		}
+	}
+}

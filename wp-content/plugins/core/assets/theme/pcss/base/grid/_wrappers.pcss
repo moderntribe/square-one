@@ -6,7 +6,7 @@
 
 .site-grid__wrapper {
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	max-width: var(--grid-width);
 	margin: 0 auto;
 	width: 100%;
@@ -24,4 +24,12 @@
 	max-width: none;
 	padding-left: 0;
 	padding-right: 0;
+}
+
+/* -----------------------------------------------------------------------------
+ * Wrappers: Modifier Justify Content (Center)
+ * ----------------------------------------------------------------------------- */
+
+.site-grid__wrapper--center {
+	justify-content: center;
 }

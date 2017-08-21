@@ -4,9 +4,9 @@
  *
  * Example Markup:
  *
- * <div class="site-grid__row">
+ * <div class="site-grid">
  *	  <div class="site-grid__wrapper">
- *		 <div class="site-grid__layout site-grid__layout--2-col">
+ *		 <div class="site-grid__2-col">
  *			<div class="site-grid__col">
  *				<p>Component</p>
  *			</div>
@@ -19,212 +19,130 @@
  *
  * ----------------------------------------------------------------------------- */
 
-.site-grid__layout {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	width: 100%;
+/* -----------------------------------------------------------------------------
+ * Layout: 1 Column Wrap
+ * ----------------------------------------------------------------------------- */
+
+.site-grid__1-col {
+	@mixin one-col-wrap;
+}
+
+/* -----------------------------------------------------------------------------
+ * Layout: 2 Column Wrap
+ * ----------------------------------------------------------------------------- */
+
+.site-grid__2-col {
+	@mixin two-col-wrap;
+}
+
+/* Break to a 2 col at breakpoint small */
+
+.site-grid__2-col--min-small {
+	@media (--viewport-small) {
+		@mixin two-col-wrap;
+	}
+}
+
+/* Break to a 2 col at breakpoint medium */
+
+.site-grid__2-col--min-medium {
+	@media (--viewport-medium) {
+		@mixin two-col-wrap;
+	}
+}
+
+/* Break to a 2 col at breakpoint full */
+
+.site-grid__2-col--min-full {
+	@media (--viewport-full) {
+		@mixin two-col-wrap;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Layout: 3 Column Wrap
+ * ----------------------------------------------------------------------------- */
+
+.site-grid__3-col {
+	@mixin three-col-wrap;
+}
+
+/* Break to a 3 col at breakpoint full */
+
+.site-grid__3-col--min-full {
+	@media (--viewport-full) {
+		@mixin three-col-wrap;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Layout: 4 Column Wrap
+ * ----------------------------------------------------------------------------- */
+
+.site-grid__4-col {
+	@mixin four-col-wrap;
+}
+
+/* Break to a 4 col at breakpoint full */
+
+.site-grid__4-col--min-full {
+	@media (--viewport-full) {
+		@mixin four-col-wrap;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Layout: Weighted Left
+ * ----------------------------------------------------------------------------- */
+
+.site-grid__weighted-right {
 
 	> .site-grid__col {
 		flex: none;
-		margin: 0 var(--grid-gutter-small) var(--grid-gutter-small) 0;
-
-		@media (--viewport-medium) {
-			margin: 0 var(--grid-gutter) var(--grid-gutter) 0;
-		}
-	}
-}
-
-/* -----------------------------------------------------------------------------
- * Layout: Modifier Center columns in layout.
- * ----------------------------------------------------------------------------- */
-
-.site-grid__layout--center {
-	justify-content: center;
-}
-
-/* -----------------------------------------------------------------------------
- * Layout: Modifier 2 Column Wrap
- * ----------------------------------------------------------------------------- */
-
-.site-grid__layout--2-col {
-
-	> .site-grid__col {
-		@media (--viewport-medium) {
-			width: calc(50% - (var(--grid-gutter) - (var(--grid-gutter) / 2)));
-
-			&:nth-child(2n) {
-				margin-right: 0;
-			}
-
-			&:last-child {
-				margin-right: 0;
-			}
-		}
-	}
-}
-
-/* -----------------------------------------------------------------------------
- * Layout: Modifier 3 Column Wrap
- * ----------------------------------------------------------------------------- */
-
-.site-grid__layout--3-col {
-
-	> .site-grid__col {
-		@media (--viewport-medium) {
-			width: calc(100% / 3 - (var(--grid-gutter) - (var(--grid-gutter) / 3)));
-
-			&:nth-child(3n) {
-				margin-right: 0;
-			}
-
-			&:last-child {
-				margin-right: 0;
-			}
-		}
-	}
-}
-
-/* -----------------------------------------------------------------------------
- * Layout: Modifier 4 Column Wrap
- * ----------------------------------------------------------------------------- */
-
-.site-grid__layout--4-col {
-
-	> .site-grid__col {
-		@media (--viewport-medium) {
-			width: calc(25% - (var(--grid-gutter) - (var(--grid-gutter) / 4)));
-
-			&:nth-child(2n) {
-				/* Handles the two column small class if added to 4 column layout. */
-				margin-right: var(--grid-gutter);
-			}
-
-			&:nth-child(4n) {
-				margin-right: 0;
-			}
-
-			&:last-child {
-				margin-right: 0;
-			}
-		}
-	}
-}
-
-/* -----------------------------------------------------------------------------
- * Layout: Modifier Sidebar Right
- * ----------------------------------------------------------------------------- */
-
-.site-grid__layout--sidebar-right {
-
-	> .site-grid__col {
 
 		&:first-child {
-			@media (--viewport-full) {
-				margin-right: var(--grid-gutter);
-				width: calc(70% - (var(--grid-gutter) - (var(--grid-gutter) / 2)));
-			}
+			width: calc(30% - (var(--grid-gutter) - (var(--grid-gutter) / 2)));
 		}
 
 		&:last-child {
-			@media (--viewport-full) {
-				width: calc(30% - (var(--grid-gutter) - (var(--grid-gutter) / 2)));
-			}
+			margin-right: var(--grid-gutter);
+			width: calc(70% - (var(--grid-gutter) - (var(--grid-gutter) / 2)));
 		}
 	}
 }
 
 /* -----------------------------------------------------------------------------
- * Layout: Modifier Sidebar Left
+ * Layout: Weighted Left
  * ----------------------------------------------------------------------------- */
 
-.site-grid__layout--sidebar-left {
+.site-grid__weighted-left {
 	flex-direction: row;
 	flex-wrap: wrap;
 
 	> .site-grid__col {
+		flex: none;
 
 		&:first-child {
-			@media (--viewport-full) {
-				margin-right: var(--grid-gutter);
-				width: calc(30% - (var(--grid-gutter) - (var(--grid-gutter) / 2)));
-			}
+			width: calc(70% - (var(--grid-gutter) - (var(--grid-gutter) / 2)));
 		}
 
 		&:last-child {
-			@media (--viewport-full) {
-				width: calc(70% - (var(--grid-gutter) - (var(--grid-gutter) / 2)));
-			}
+			margin-right: var(--grid-gutter);
+			width: calc(30% - (var(--grid-gutter) - (var(--grid-gutter) / 2)));
 		}
 	}
 }
 
 /* -----------------------------------------------------------------------------
- * Layout: Modifier Mobile 2 Column Wrap
+ * Layout: Kill columns and wraps and just flex.
  * ----------------------------------------------------------------------------- */
 
-.site-grid__layout--2-col-sm {
-
-	> .site-grid__col {
-		width: calc(50% - (var(--grid-gutter-small) - (var(--grid-gutter-small) / 2)));
-
-		&:nth-child(2n) {
-			margin-right: 0;
-		}
-
-		&:last-child {
-			margin-right: 0;
-		}
-
-		@media (--viewport-medium) {
-			flex: 1;
-			margin: 0 var(--grid-gutter) var(--grid-gutter) 0;
-
-			&:nth-child(2n) {
-				margin-right: var(--grid-gutter);
-			}
-
-			&:last-child {
-				margin-right: 0;
-			}
-		}
-	}
+.site-grid__kill-col-wrap {
+	@mixin kill-col-wrap;
 }
 
-/* -----------------------------------------------------------------------------
- * Layout: Modifier Mobile 1 Column -> Tablet 2 Column Wrap
- * ----------------------------------------------------------------------------- */
-
-.site-grid__layout--2-col-full {
-
-	> .site-grid__col {
-		flex: none;
-		margin: 0 0 var(--grid-gutter-small) 0;
-
-		@media (--viewport-xsmall) {
-			margin-right: var(--grid-gutter-small);
-			width: calc(50% - (var(--grid-gutter-small) - (var(--grid-gutter-small) / 2)));
-
-			&:nth-child(2n) {
-				margin-right: 0;
-			}
-
-			&:last-child {
-				margin-right: 0;
-			}
-		}
-
-		@media (--viewport-large) {
-			flex: 1;
-			margin: 0 var(--grid-gutter) var(--grid-gutter) 0;
-
-			&:nth-child(2n) {
-				margin-right: var(--grid-gutter);
-			}
-
-			&:last-child {
-				margin-right: 0;
-			}
-		}
+.site-grid__kill-col--min-medium {
+	@media (--viewport-medium) {
+		@mixin kill-col-wrap;
 	}
 }
