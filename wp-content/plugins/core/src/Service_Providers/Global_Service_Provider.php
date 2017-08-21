@@ -47,6 +47,7 @@ final class Global_Service_Provider extends Tribe_Service_Provider {
 		'Wysiwyg',
 		'LogoFarm',
 		'Testimonial',
+		'PostLoop',
 	];
 
 	public function register( Container $container ) {
