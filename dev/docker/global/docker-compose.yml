@@ -5,7 +5,7 @@ services:
   dns-external:
     image: andyshinn/dnsmasq:latest
     container_name: tribe-dns-external
-    command:   --address=/tribe/${HOSTIP}
+    command:   --address=/tribe/${HOSTIP:-10.0.75.1}
     labels:
       - "traefik.enable=false"
     cap_add:  

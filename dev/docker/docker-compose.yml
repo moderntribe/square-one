@@ -1,6 +1,20 @@
 version: "3.3"
 services:
 
+    redis:
+      image: redis:alpine
+      labels:
+        - "traefik.enable=false"
+      networks:
+        - proxy
+
+    elasticsearch:
+      image: elasticsearch:5.3-alpine
+      labels:
+        - "traefik.enable=false"
+      networks:
+        - proxy
+
     memcached:
       image: memcached:alpine
       labels:
@@ -23,6 +37,8 @@ services:
         - ./phpdocker/php-fpm/php-ini-overrides.ini:/etc/php/7.0/fpm/conf.d/99-overrides.ini
       links:
         - memcached
+        - redis
+        - elasticsearch
       external_links:
         - "tribe-mysql:mysql"
         - "tribe-mail:mail"
