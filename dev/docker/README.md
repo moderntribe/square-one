@@ -1,3 +1,12 @@
+While I write the real docs, some notes for JB and whoever wants to test this:
+
+1) Make sure you're running the latest EDGE version of Docker
+2) Run global from your main square-one clone, keep it up to date
+3) Run project specific from your proyect. Duh!
+4) The only setting you need to make on your computer is: Primary DNS = 127.0.0.1 / Secondary DNS = 8.8.8.8 (so your computer still works when you are not running the global compose)
+ 
+Have fun!
+
 # Install
 ## Instalation on OSX
 ## Instalation on Windows
