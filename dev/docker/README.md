@@ -4,7 +4,11 @@ While I write the real docs, some notes for JB and whoever wants to test this:
 2) Run global from your main square-one clone, keep it up to date
 3) Run project specific from your proyect. Duh!
 4) The only setting you need to make on your computer is: Primary DNS = 127.0.0.1 / Secondary DNS = 8.8.8.8 (so your computer still works when you are not running the global compose)
- 
+5) The double-DNS allows us tu use, for instance, "mysql.tribe" as the host for mysql, and that will resolve correctly both from inside the containers and your own machine to use sequel pro or wp-cli
+6) Have fun. Look at http://proxy.tribe and http://mailhog.tribe
+
+
+
 Have fun!
 
 # Install
