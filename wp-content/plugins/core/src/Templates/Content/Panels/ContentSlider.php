@@ -2,11 +2,12 @@
 
 namespace Tribe\Project\Templates\Content\Panels;
 
-use Tribe\Project\Panels\Types\ImgSlider as ImgSliderPanel;
+use Tribe\Project\Panels\Types\ContentSlider as ImgSliderPanel;
+use Tribe\Project\Templates\Components\Content_Block;
 use Tribe\Project\Templates\Components\Slider as SliderComponent;
 use Tribe\Project\Templates\Components\Image;
 
-class ImgSlider extends Panel {
+class ContentSlider extends Panel {
 
 	public function get_data(): array {
 		$data       = parent::get_data();
@@ -45,9 +46,10 @@ class ImgSlider extends Panel {
 		$slides = [];
 
 		if ( ! empty( $this->panel_vars[ ImgSliderPanel::FIELD_SLIDES ] ) ) {
-			for ( $i = 0; $i < count( $this->panel_vars[ ImgSliderPanel::FIELD_SLIDES ] ); $i++ ) {
+			for ( $i = 0; $i < count( $this->panel_vars[ ImgSliderPanel::FIELD_SLIDES ] ); $i ++ ) {
 
-				$slide = $this->panel_vars[ ImgSliderPanel::FIELD_SLIDES ][ $i ];
+				$slide_markup = '';
+				$slide        = $this->panel_vars[ ImgSliderPanel::FIELD_SLIDES ][ $i ];
 
 				$options = [
 					Image::IMG_ID        => $slide[ ImgSliderPanel::FIELD_SLIDE_IMAGE ],
@@ -56,8 +58,23 @@ class ImgSlider extends Panel {
 					Image::WRAPPER_CLASS => 'c-image__bg',
 				];
 
-				$slide_obj = Image::factory( $options );
-				$slides[]  = $slide_obj->render();
+				$image_obj    = Image::factory( $options );
+				$slide_markup .= $image_obj->render();
+
+				$options = [
+					Content_Block::TITLE         => esc_html( $slide[ ImgSliderPanel::FIELD_SLIDE_TITLE ] ),
+					Content_Block::TITLE_TAG     => 'h2',
+					Content_Block::TEXT          => $slide[ ImgSliderPanel::FIELD_SLIDE_CONTENT ],
+					Content_Block::CTA           => $slide[ ImgSliderPanel::FIELD_SLIDE_CTA ],
+					Content_Block::TITLE_CLASSES => [ 'h2' ],
+					Content_Block::CTA_CLASSES   => [ 'c-btn--sm' ],
+				];
+
+				$content_block_obj = Content_Block::factory( $options );
+
+				$slide_markup .= $content_block_obj->render();
+
+				$slides[] = $slide_markup;
 			}
 		}
 
@@ -66,6 +83,7 @@ class ImgSlider extends Panel {
 
 	protected function get_slider_main_classes() {
 		$classes = [ 'c-slider__main' ];
+
 		return $classes;
 	}
 

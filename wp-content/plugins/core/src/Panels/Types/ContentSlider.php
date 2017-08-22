@@ -4,9 +4,9 @@ namespace Tribe\Project\Panels\Types;
 
 use ModularContent\Fields;
 
-class ImgSlider extends Panel_Type_Config {
+class ContentSlider extends Panel_Type_Config {
 
-	const NAME = 'imgslider';
+	const NAME = 'content-slider';
 
 	const FIELD_TITLE         = 'title';
 	const FIELD_DESCRIPTION   = 'description';
