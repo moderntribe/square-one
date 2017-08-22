@@ -1,0 +1,25 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Quotes & Blockquotes
+ *
+ * ----------------------------------------------------------------------------- */
+
+@define-mixin quote-base {
+	max-width: 800px;
+	padding: var(--spacer);
+}
+
+@define-mixin quote-text {
+	color: var(--color-black);
+	font-family: var(--font-family-base);
+	font-size: 28px;
+	font-style: normal;
+	font-weight: var(--font-weight-bold);
+	line-height: var(--line-height-s);
+	text-align: center;
+
+	@media (--viewport-medium) {
+		font-size: 36px;
+		line-height: var(--line-height-s);
+	}
+}

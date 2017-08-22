@@ -1,0 +1,72 @@
+/* -------------------------------------------------------------------------
+ * Button: Ghost
+ * ------------------------------------------------------------------------- */
+
+.btn-ghost,
+a.btn-ghost {
+	@mixin button-global;
+
+	background-color: transparent;
+	border: 2px solid var(--color-primary);
+	border-radius: 4px;
+	color: var(--color-primary);
+	font-family: var(--font-family-base);
+	font-size: var(--font-size-content-s);
+	letter-spacing: 0.05em;
+	line-height: var(--line-height-base);
+	padding: 17px 24px;
+	text-align: center;
+	text-transform: uppercase;
+
+	&:visited {
+		color: var(--color-primary);
+	}
+
+	&:hover,
+	&:focus,
+	&:active {
+		border-color: var(--color-link-hover);
+	}
+
+	@media (--viewport-medium) {
+		border-width: 3px;
+		font-size: var(--font-size-content);
+		line-height: var(--line-height-base);
+		padding: 19px 24px;
+	}
+}
+
+/* -------------------------------------------------------------------------
+ * Button: Modifier - Ghost Small
+ * ------------------------------------------------------------------------- */
+
+.btn-ghost--sm,
+a.btn-ghost--sm {
+	font-size: var(--font-size-content-s);
+	padding: 16px 18px;
+
+	@media (--viewport-medium) {
+		border-width: 3px;
+	}
+}
+
+/* -------------------------------------------------------------------------
+ * Button: Modifier - Ghost Inverted
+ * ------------------------------------------------------------------------- */
+
+.btn-ghost--inverted,
+a.btn-ghost--inverted {
+	border: 2px solid var(--color-white);
+	color: var(--color-white);
+
+	&:visited {
+		color: var(--color-white);
+	}
+
+	&:hover,
+	&:focus,
+	&:active {
+		border-color: darken(var(--color-white), 0.5);
+		color: darken(var(--color-white), 0.5);
+	}
+}

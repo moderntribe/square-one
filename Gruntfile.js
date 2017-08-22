@@ -129,6 +129,7 @@ module.exports = function (grunt) {
 			'footer:coreIconsVariables',
 			'concurrent:dist',
 			'clean:coreIconsEnd',
+			'lineending:' + le,
 		]);
 
 };

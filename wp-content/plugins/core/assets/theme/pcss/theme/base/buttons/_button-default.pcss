@@ -1,0 +1,73 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Button: Default
+ *
+ * ----------------------------------------------------------------------------- */
+
+.btn,
+a.btn {
+	@mixin button-global;
+
+	background-color: var(--color-primary);
+	border-bottom: none;
+	color: var(--color-white);
+	font-family: var(--font-family-base);
+	font-size: var(--font-size-content-s);
+	letter-spacing: 0.05em;
+	line-height: var(--line-height-base);
+	padding: 17px 24px;
+	text-align: center;
+	text-transform: uppercase;
+
+	&:visited {
+		color: var(--color-white);
+	}
+
+	&:hover,
+	&:focus,
+	&:active {
+		background-color: var(--color-link-hover);
+		color: var(--color-white);
+	}
+
+	@media (--viewport-medium) {
+		font-size: var(--font-size-base);
+		line-height: var(--line-height-base);
+		padding: 19px 24px;
+	}
+}
+
+/* -------------------------------------------------------------------------
+ * Button: Modifier - Small
+ * ------------------------------------------------------------------------- */
+
+.btn--sm,
+a.btn--sm {
+	font-size: var(--font-size-content-s);
+	padding: 16px 18px;
+
+	@media (--viewport-medium) {
+		font-size: var(--font-size-content-s);
+	}
+}
+
+/* -------------------------------------------------------------------------
+ * Button: Modifier - Inverted
+ * ------------------------------------------------------------------------- */
+
+.btn--inverted,
+a.btn--inverted {
+	background-color: var(--color-white);
+	color: var(--color-primary);
+
+	&:visited {
+		color: var(--color-primary);
+	}
+
+	&:hover,
+	&:focus,
+	&:active {
+		background-color: var(--color-white);
+		color: var(--color-link-hover);
+	}
+}
