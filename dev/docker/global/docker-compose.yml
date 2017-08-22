@@ -18,7 +18,7 @@ services:
   dns-internal:
     image: andyshinn/dnsmasq:latest
     container_name: tribe-dns-internal
-    command:   --address=/tribe/172.20.10.100 --address=/mysql.tribe/172.20.10.200 --address=/smtp.tribe/172.20.10.90
+    command:  --log-facility=/proc/self/fd/2  --no-resolv --server=8.8.8.8 --address=/tribe/172.20.10.100 --address=/mysql.tribe/172.20.10.200 --address=/smtp.tribe/172.20.10.90
     labels:
       - "traefik.enable=false"
     cap_add:  
