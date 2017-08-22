@@ -45,6 +45,7 @@ final class Global_Service_Provider extends Tribe_Service_Provider {
 		'Interstitial',
 		'MicroNavButtons',
 		'Wysiwyg',
+		'ImgSlider',
 		'LogoFarm',
 		'Testimonial',
 		'PostLoop',

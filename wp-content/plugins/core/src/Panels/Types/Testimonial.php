@@ -38,7 +38,7 @@ class Testimonial extends Panel_Type_Config {
 		$panel->add_field( new Fields\Image( [
 			'name'        => self::FIELD_IMAGE,
 			'label'       => __( 'Background Image', 'tribe' ),
-			'description' => __( 'Optimal image sizes: 1500 x 1125 for Left/Right Aligned layouts; 1500 x 844 for Boxed/Hero layouts.', 'tribe' ),
+			'description' => __( 'Optimal image sizes: 1700 x 600 pixels', 'tribe' ),
 			'size'        => 'medium', // the size displayed in the admin.
 		] ) );
 
