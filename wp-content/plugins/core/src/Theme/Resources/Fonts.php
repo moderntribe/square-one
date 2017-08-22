@@ -13,6 +13,29 @@ class Fonts {
 	}
 
 	/**
+	 * Add Typekit to Editor
+	 * @filter mce_external_plugins
+	 */
+	public function add_typekit_to_editor( $plugins ) {
+		if( ! empty( $this->fonts[ 'typekit' ] ) ) {
+			$plugins['typekit'] = tribe_assets_url( 'admin/editor/typekit.tinymce.js' );
+		}
+
+		return $plugins;
+	}
+	/**
+	 * Localize Typekit TinyMCE
+	 * @filter admin_head
+	 */
+	public function localize_typekit_tinymce() {
+		if( empty( $this->fonts[ 'typekit' ] ) ) {
+			return;
+		}
+
+		printf( '<script type="text/javascript">var tinymce_typekit_id = \'%s\';</script>', $this->fonts[ 'typekit' ] );
+	}
+
+	/**
 	 * Add any required fonts
 	 * @action wp_head
 	 * @action login_head
