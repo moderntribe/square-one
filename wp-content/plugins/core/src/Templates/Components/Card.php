@@ -9,6 +9,8 @@ class Card extends Component {
 	const TITLE           = 'title';
 	const TEXT            = 'text';
 	const IMAGE           = 'image';
+	const PRE_TITLE       = 'pre_title';
+	const POST_TITLE      = 'post_title';
 	const CLASSES         = 'classes';
 	const TITLE_CLASSES   = 'title_classes';
 	const HEADER_CLASSES  = 'header_classes';
@@ -27,6 +29,8 @@ class Card extends Component {
 			self::TITLE           => '',
 			self::TEXT            => '',
 			self::IMAGE           => '',
+			self::PRE_TITLE       => '',
+			self::POST_TITLE      => '',
 			self::CLASSES         => [],
 			self::TITLE_CLASSES   => [],
 			self::HEADER_CLASSES  => [],
@@ -44,6 +48,8 @@ class Card extends Component {
 	public function get_data(): array {
 		$data = [
 			'title'                => $this->get_title(),
+			'pre_title'            => $this->options[ static::PRE_TITLE ],
+			'post_title'           => $this->options[ static::POST_TITLE ],
 			'card_classes'         => $this->merge_classes( [ 'c-card' ], $this->options[ self::CLASSES ], true ),
 			'card_header_classes'  => $this->merge_classes( [ 'c-card__header' ], $this->options[ self::HEADER_CLASSES ], true ),
 			'card_content_classes' => $this->merge_classes( [ 'c-card__content' ], $this->options[ self::CONTENT_CLASSES ], true ),

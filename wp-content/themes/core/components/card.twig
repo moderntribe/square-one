@@ -10,8 +10,16 @@
 
 	<div class="{{ card_content_classes }}">
 
+		{% if pre_title %}
+			{{ pre_title }}
+		{% endif %}
+
 		{% if title %}
 			{{ title }}
+		{% endif %}
+
+		{% if post_title %}
+			{{ post_title }}
 		{% endif %}
 
 		{% if text %}
