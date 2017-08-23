@@ -10,7 +10,7 @@ This component has these features out of box:
 * Intelligent editing support during live panel preview, rows expand according to the current one being editing in the panel ui.
 * One item open at a time, with scrolling to keep items on screen. Easily switchable in the js.
 
-### Arguments
+### Options
 
 * `container_classes` 
   * **Default:** _c-accordion_ 
