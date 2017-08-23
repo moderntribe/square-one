@@ -47,6 +47,7 @@ class Slider extends Component {
 		if ( $this->options[ self::SHOW_PAGINATION ] ) {
 			$classes[] = 'c-slider__main--has-pagination';
 		}
+
 		return $classes;
 	}
 

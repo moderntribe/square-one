@@ -9,6 +9,7 @@ class Content_Block extends Component {
 	const TITLE                         = 'title';
 	const TITLE_TAG                     = 'title_tag';
 	const TEXT                          = 'text';
+	const BUTTON                        = 'button';
 	const TITLE_CLASSES                 = 'title_classes';
 	const CONTENT_BLOCK_CLASSES         = 'content_block_classes';
 	const CONTENT_BLOCK_CONTENT_CLASSES = 'content_block_content_classes';
@@ -26,6 +27,7 @@ class Content_Block extends Component {
 			self::TITLE                         => '',
 			self::TITLE_TAG                     => '',
 			self::TEXT                          => '',
+			self::BUTTON                        => '',
 			self::TITLE_CLASSES                 => [],
 			self::CONTENT_BLOCK_CLASSES         => [],
 			self::CONTENT_BLOCK_CONTENT_CLASSES => [],
@@ -41,11 +43,11 @@ class Content_Block extends Component {
 
 	public function get_data(): array {
 		$data = [
-			'title'                         => $this->get_title(),
-			'content_block_classes'         => $this->merge_classes( [ 'c-content-block' ], $this->options[ self::CONTENT_BLOCK_CLASSES ], true ),
-			'content_block_content_classes' => $this->merge_classes( [ 'c-content-block__content' ], $this->options[ self::CONTENT_BLOCK_CONTENT_CLASSES ], true ),
-			'text'                          => $this->get_content_block_text(),
-			'button'                        => $this->get_button(),
+			static::TITLE                         => $this->get_title(),
+			static::CONTENT_BLOCK_CLASSES         => $this->merge_classes( [ 'c-content-block' ], $this->options[ self::CONTENT_BLOCK_CLASSES ], true ),
+			static::CONTENT_BLOCK_CONTENT_CLASSES => $this->merge_classes( [ 'c-content-block__content' ], $this->options[ self::CONTENT_BLOCK_CONTENT_CLASSES ], true ),
+			static::TEXT                          => $this->get_content_block_text(),
+			static::BUTTON                        => $this->get_button(),
 		];
 
 		return $data;
@@ -58,10 +60,10 @@ class Content_Block extends Component {
 		}
 
 		$options = [
-			Title::TITLE         => $this->options[ self::TITLE ],
-			Title::CLASSES       => $this->merge_classes( [ 'c-content-block__title' ], $this->options[ self::TITLE_CLASSES ] ),
-			Title::ATTRS         => $this->options[ self::TITLE_ATTRS ],
-			Title::TAG           => $this->options[ self::TITLE_TAG ],
+			Title::TITLE   => $this->options[ self::TITLE ],
+			Title::CLASSES => $this->merge_classes( [ 'c-content-block__title' ], $this->options[ self::TITLE_CLASSES ] ),
+			Title::ATTRS   => $this->options[ self::TITLE_ATTRS ],
+			Title::TAG     => $this->options[ self::TITLE_TAG ],
 		];
 
 		$title_obj = Title::factory( $options );
@@ -95,9 +97,9 @@ class Content_Block extends Component {
 		}
 
 		$options = [
-			Text::TEXT => $this->options[ self::TEXT ],
-			Text::CLASSES     => $this->merge_classes( [ 'c-content-block__desc' ], $this->options[ self::TEXT_CLASSES ] ),
-			Text::ATTRS       => $this->options[ self::TEXT_ATTRS ],
+			Text::TEXT    => $this->options[ self::TEXT ],
+			Text::CLASSES => $this->merge_classes( [ 'c-content-block__desc' ], $this->options[ self::TEXT_CLASSES ] ),
+			Text::ATTRS   => $this->options[ self::TEXT_ATTRS ],
 		];
 
 		$text_object = Text::factory( $options );

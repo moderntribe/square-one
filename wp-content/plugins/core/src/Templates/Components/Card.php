@@ -11,14 +11,15 @@ class Card extends Component {
 	const IMAGE           = 'image';
 	const PRE_TITLE       = 'pre_title';
 	const POST_TITLE      = 'post_title';
-	const CLASSES         = 'classes';
+	const CLASSES         = 'card_classes';
 	const TITLE_CLASSES   = 'title_classes';
-	const HEADER_CLASSES  = 'header_classes';
-	const CONTENT_CLASSES = 'content_classes';
+	const HEADER_CLASSES  = 'card_header_classes';
+	const CONTENT_CLASSES = 'card_content_classes';
 	const IMAGE_CLASSES   = 'image_classes';
 	const TEXT_CLASSES    = 'text_classes';
 	const TITLE_ATTRS     = 'title_attrs';
 	const TEXT_ATTRS      = 'text_attrs';
+	const BUTTON          = 'button';
 	const CTA             = 'cta';
 	const CTA_URL         = 'url';
 	const CTA_LABEL       = 'label';
@@ -39,6 +40,7 @@ class Card extends Component {
 			self::TEXT_CLASSES    => [],
 			self::TITLE_ATTRS     => [],
 			self::TEXT_ATTRS      => [],
+			self::BUTTON          => '',
 			self::CTA             => [],
 		];
 
@@ -47,16 +49,16 @@ class Card extends Component {
 
 	public function get_data(): array {
 		$data = [
-			'title'                => $this->get_title(),
-			'pre_title'            => $this->options[ static::PRE_TITLE ],
-			'post_title'           => $this->options[ static::POST_TITLE ],
-			'card_classes'         => $this->merge_classes( [ 'c-card' ], $this->options[ self::CLASSES ], true ),
-			'card_header_classes'  => $this->merge_classes( [ 'c-card__header' ], $this->options[ self::HEADER_CLASSES ], true ),
-			'card_content_classes' => $this->merge_classes( [ 'c-card__content' ], $this->options[ self::CONTENT_CLASSES ], true ),
-			'image_classes'        => $this->merge_classes( [ 'c-image' ], $this->options[ self::IMAGE_CLASSES ], true ),
-			'text'                 => $this->get_card_text(),
-			'image'                => $this->get_card_image( $this->options[ self::IMAGE ] ),
-			'button'               => $this->get_button(),
+			static::TITLE           => $this->get_title(),
+			static::PRE_TITLE       => $this->options[ static::PRE_TITLE ],
+			static::POST_TITLE      => $this->options[ static::POST_TITLE ],
+			static::CLASSES         => $this->merge_classes( [ 'c-card' ], $this->options[ self::CLASSES ], true ),
+			static::HEADER_CLASSES  => $this->merge_classes( [ 'c-card__header' ], $this->options[ self::HEADER_CLASSES ], true ),
+			static::CONTENT_CLASSES => $this->merge_classes( [ 'c-card__content' ], $this->options[ self::CONTENT_CLASSES ], true ),
+			static::IMAGE_CLASSES   => $this->merge_classes( [ 'c-image' ], $this->options[ self::IMAGE_CLASSES ], true ),
+			static::TEXT            => $this->get_card_text(),
+			static::IMAGE           => $this->get_card_image( $this->options[ self::IMAGE ] ),
+			static::BUTTON          => $this->get_button(),
 		];
 
 		return $data;

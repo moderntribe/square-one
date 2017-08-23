@@ -6,7 +6,7 @@ class Text extends Component {
 
 	const TEMPLATE_NAME = 'components/text.twig';
 
-	const TEXT    = 'text';
+	const TEXT    = 'content';
 	const CLASSES = 'classes';
 	const ATTRS   = 'attrs';
 
@@ -22,9 +22,9 @@ class Text extends Component {
 
 	public function get_data(): array {
 		$data = [
-			'content' => $this->options[ static::TEXT ],
-			'classes' => $this->merge_classes( [], $this->options[ static::CLASSES ], true ),
-			'attrs'   => $this->merge_attrs( [], $this->options[ static::ATTRS ], true ),
+			static::TEXT    => $this->options[ static::TEXT ],
+			static::CLASSES => $this->merge_classes( [], $this->options[ static::CLASSES ], true ),
+			static::ATTRS   => $this->merge_attrs( [], $this->options[ static::ATTRS ], true ),
 		];
 
 		return $data;
