@@ -2,7 +2,7 @@
 
 namespace Tribe\Project\Templates\Content\Panels;
 
-use Tribe\Project\Panels\Types\ContentSlider as ImgSliderPanel;
+use Tribe\Project\Panels\Types\ContentSlider as ContentSliderPanel;
 use Tribe\Project\Templates\Components\Content_Block;
 use Tribe\Project\Templates\Components\Slider as SliderComponent;
 use Tribe\Project\Templates\Components\Image;
@@ -20,8 +20,8 @@ class ContentSlider extends Panel {
 	public function get_title(): string {
 		$title = '';
 
-		if ( ! empty( $this->panel_vars[ ImgSliderPanel::FIELD_TITLE ] ) ) {
-			$title = the_panel_title( esc_html( $this->panel_vars[ ImgSliderPanel::FIELD_TITLE ] ), 'section__title', 'title', true, 0, 0 );
+		if ( ! empty( $this->panel_vars[ ContentSliderPanel::FIELD_TITLE ] ) ) {
+			$title = the_panel_title( esc_html( $this->panel_vars[ ContentSliderPanel::FIELD_TITLE ] ), 'section__title', 'title', true, 0, 0 );
 		}
 
 		return $title;
@@ -45,14 +45,14 @@ class ContentSlider extends Panel {
 	protected function get_slides(): array {
 		$slides = [];
 
-		if ( ! empty( $this->panel_vars[ ImgSliderPanel::FIELD_SLIDES ] ) ) {
-			for ( $i = 0; $i < count( $this->panel_vars[ ImgSliderPanel::FIELD_SLIDES ] ); $i ++ ) {
+		if ( ! empty( $this->panel_vars[ ContentSliderPanel::FIELD_SLIDES ] ) ) {
+			for ( $i = 0; $i < count( $this->panel_vars[ ContentSliderPanel::FIELD_SLIDES ] ); $i ++ ) {
 
 				$slide_markup = '';
-				$slide        = $this->panel_vars[ ImgSliderPanel::FIELD_SLIDES ][ $i ];
+				$slide        = $this->panel_vars[ ContentSliderPanel::FIELD_SLIDES ][ $i ];
 
 				$options = [
-					Image::IMG_ID        => $slide[ ImgSliderPanel::FIELD_SLIDE_IMAGE ],
+					Image::IMG_ID        => $slide[ ContentSliderPanel::FIELD_SLIDE_IMAGE ],
 					Image::AS_BG         => true,
 					Image::USE_LAZYLOAD  => false,
 					Image::WRAPPER_CLASS => 'c-image__bg',
@@ -62,10 +62,10 @@ class ContentSlider extends Panel {
 				$slide_markup .= $image_obj->render();
 
 				$options = [
-					Content_Block::TITLE         => esc_html( $slide[ ImgSliderPanel::FIELD_SLIDE_TITLE ] ),
+					Content_Block::TITLE         => esc_html( $slide[ ContentSliderPanel::FIELD_SLIDE_TITLE ] ),
 					Content_Block::TITLE_TAG     => 'h2',
-					Content_Block::TEXT          => $slide[ ImgSliderPanel::FIELD_SLIDE_CONTENT ],
-					Content_Block::CTA           => $slide[ ImgSliderPanel::FIELD_SLIDE_CTA ],
+					Content_Block::TEXT          => $slide[ ContentSliderPanel::FIELD_SLIDE_CONTENT ],
+					Content_Block::CTA           => $slide[ ContentSliderPanel::FIELD_SLIDE_CTA ],
 					Content_Block::TITLE_CLASSES => [ 'h2' ],
 					Content_Block::CTA_CLASSES   => [ 'c-btn--sm' ],
 				];

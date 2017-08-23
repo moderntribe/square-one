@@ -4,7 +4,6 @@ namespace Tribe\Project\Templates\Content\Panels;
 
 use Tribe\Project\Panels\Types\Accordion as AccordionPanel;
 use Tribe\Project\Templates\Components\Accordion as AccordionComponent;
-use Tribe\Project\Theme\Util;
 
 class Accordion extends Panel {
 
@@ -19,8 +18,8 @@ class Accordion extends Panel {
 	public function get_title(): string {
 		$title = '';
 
-		if ( ! empty( $this->panel_vars[ AccordionPanel::FIELD_ACCORDION_TITLE ] ) ) {
-			$title = the_panel_title( esc_html( $this->panel_vars[ AccordionPanel::FIELD_ACCORDION_TITLE ] ), 'section__title', 'title', true, 0, 0 );
+		if ( ! empty( $this->panel_vars[AccordionPanel::FIELD_ACCORDION_TITLE] ) ) {
+			$title = the_panel_title( esc_html( $this->panel_vars[AccordionPanel::FIELD_ACCORDION_TITLE] ), 'section__title', 'title', true, 0, 0 );
 		}
 
 		return $title;
@@ -41,7 +40,7 @@ class Accordion extends Panel {
 	protected function get_grid_classes(): string {
 		$classes = 'site-grid__layout site-grid__layout--center';
 
-		if ( ! empty( $this->panel_vars[ AccordionPanel::FIELD_LAYOUT ] ) && $this->panel_vars[ AccordionPanel::FIELD_LAYOUT ] !== AccordionPanel::FIELD_LAYOUT_OPTION_CENTER ) {
+		if ( ! empty( $this->panel_vars[AccordionPanel::FIELD_LAYOUT] ) && $this->panel_vars[AccordionPanel::FIELD_LAYOUT] !== AccordionPanel::FIELD_LAYOUT_OPTION_CENTER ) {
 			$classes .= ' site-grid__layout--2-col-full';
 		}
 
@@ -59,7 +58,7 @@ class Accordion extends Panel {
 	}
 
 	protected function get_rows(): array {
-		$rows = $this->panel_vars[ AccordionPanel::FIELD_ACCORDIONS ];
+		$rows = $this->panel_vars[AccordionPanel::FIELD_ACCORDIONS];
 
 		if ( empty( $rows ) ) {
 			return [];
@@ -72,8 +71,8 @@ class Accordion extends Panel {
 			return [
 				'header_id'   => $header_id,
 				'content_id'  => $content_id,
-				'header_text' => $row[ AccordionPanel::FIELD_ACCORDION_TITLE ],
-				'content'     => $row[ AccordionPanel::FIELD_ACCORDION_CONTENT ],
+				'header_text' => $row[AccordionPanel::FIELD_ACCORDION_TITLE],
+				'content'     => $row[AccordionPanel::FIELD_ACCORDION_CONTENT],
 			];
 		}, $rows );
 	}

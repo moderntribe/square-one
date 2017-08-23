@@ -12,7 +12,7 @@ class Accordion extends Panel_Type_Config {
 	const FIELD_CONTENT              = 'content';
 	const FIELD_ACCORDIONS           = 'accordions';
 	const FIELD_ACCORDION_TITLE      = 'title';
-	const FIELD_ACCORDION_CONTENT    = 'accordion_content';
+	const FIELD_ACCORDION_CONTENT    = 'row_content';
 	const FIELD_LAYOUT               = 'layout';
 	const FIELD_LAYOUT_OPTION_RIGHT  = 'right';
 	const FIELD_LAYOUT_OPTION_LEFT   = 'left';
