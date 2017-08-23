@@ -15,11 +15,23 @@
 						<div class="site-grid__col">
 							{{ accordion }}
 						</div>
-						<div class="site-grid__col">
+						<div
+							class="site-grid__col"
+							data-depth="0"
+							data-name="content"
+							data-autop="true"
+							data-livetext
+						>
 							{{ content }}
 						</div>
 					{% else %}
-						<div class="site-grid__col">
+						<div
+							class="site-grid__col"
+							data-depth="0"
+							data-name="content"
+							data-autop="true"
+							data-livetext
+						>
 							{{ content }}
 						</div>
 						<div class="site-grid__col">

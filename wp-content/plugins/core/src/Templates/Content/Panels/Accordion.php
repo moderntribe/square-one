@@ -4,7 +4,6 @@ namespace Tribe\Project\Templates\Content\Panels;
 
 use Tribe\Project\Panels\Types\Accordion as AccordionPanel;
 use Tribe\Project\Templates\Components\Accordion as AccordionComponent;
-use Tribe\Project\Theme\Util;
 
 class Accordion extends Panel {
 
