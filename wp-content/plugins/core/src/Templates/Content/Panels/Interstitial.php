@@ -17,6 +17,17 @@ class Interstitial extends Panel {
 		return $data;
 	}
 
+	public function get_mapped_panel_data(): array {
+		$data = [
+			'text_color'    => $this->text_color(),
+			'layout'        => $this->get_layout(),
+			'image'         => $this->get_image(),
+			'content_block' => $this->get_content_block(),
+		];
+
+		return $data;
+	}
+
 	protected function get_image() {
 
 		if ( empty( $this->panel_vars[ Interstice::FIELD_IMAGE ] ) ) {
@@ -100,16 +111,5 @@ class Interstitial extends Panel {
 		}
 
 		return implode( ' ', $classes );
-	}
-
-	public function get_mapped_panel_data(): array {
-		$data = [
-			'text_color'    => $this->text_color(),
-			'layout'        => $this->get_layout(),
-			'image'         => $this->get_image(),
-			'content_block' => $this->get_content_block(),
-		];
-
-		return $data;
 	}
 }

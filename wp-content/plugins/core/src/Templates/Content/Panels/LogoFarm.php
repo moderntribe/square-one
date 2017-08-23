@@ -15,6 +15,16 @@ class LogoFarm extends Panel {
 		return $data;
 	}
 
+	public function get_mapped_panel_data(): array {
+		$data = [
+			'title'       => $this->get_title(),
+			'description' => ! empty( $this->panel_vars[ Logo::FIELD_DESCRIPTION ] ) ? $this->panel_vars[ Logo::FIELD_DESCRIPTION ] : false,
+			'logos'       => $this->get_the_logos(),
+		];
+
+		return $data;
+	}
+
 	public function get_title(): string {
 		$title = '';
 
@@ -29,7 +39,7 @@ class LogoFarm extends Panel {
 		$logos = [];
 
 		if ( ! empty( $this->panel_vars[ Logo::FIELD_LOGOS ] ) ) {
-			for ( $i = 0; $i < count( $this->panel_vars[ Logo::FIELD_LOGOS ] ); $i++ ) {
+			for ( $i = 0; $i < count( $this->panel_vars[ Logo::FIELD_LOGOS ] ); $i ++ ) {
 
 				$logo = $this->panel_vars[ Logo::FIELD_LOGOS ][ $i ];
 
@@ -46,15 +56,5 @@ class LogoFarm extends Panel {
 		}
 
 		return $logos;
-	}
-
-	public function get_mapped_panel_data(): array {
-		$data = [
-			'title'       => $this->get_title(),
-			'description' => ! empty( $this->panel_vars[ Logo::FIELD_DESCRIPTION ] ) ? $this->panel_vars[ Logo::FIELD_DESCRIPTION ] : false,
-			'logos'       => $this->get_the_logos(),
-		];
-
-		return $data;
 	}
 }

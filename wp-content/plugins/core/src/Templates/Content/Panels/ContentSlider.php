@@ -17,6 +17,14 @@ class ContentSlider extends Panel {
 		return $data;
 	}
 
+	public function get_mapped_panel_data(): array {
+		$data = [
+			'slider' => $this->get_slider(),
+		];
+
+		return $data;
+	}
+
 	public function get_title(): string {
 		$title = '';
 
@@ -85,13 +93,5 @@ class ContentSlider extends Panel {
 		$classes = [ 'c-slider__main' ];
 
 		return $classes;
-	}
-
-	public function get_mapped_panel_data(): array {
-		$data = [
-			'slider' => $this->get_slider(),
-		];
-
-		return $data;
 	}
 }

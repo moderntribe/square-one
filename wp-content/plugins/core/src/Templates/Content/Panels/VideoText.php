@@ -16,14 +16,23 @@ class VideoText extends Panel {
 		return $data;
 	}
 
+	protected function get_mapped_panel_data(): array {
+
+		$data = [
+			'wrapper_classes' => $this->get_panel_classes(),
+			'video'           => $this->get_panel_video(),
+			'content_block'   => $this->get_content_block(),
+		];
+
+		return $data;
+	}
+
 	protected function get_content_block() {
 
 		$title_attrs       = [];
 		$description_attrs = [];
 
-		if ( $this->panel_vars[ VideoTextPanel::FIELD_TITLE ] ||
-		     $this->panel_vars[ VideoTextPanel::FIELD_DESCRIPTION ] ||
-		     is_panel_preview() ) {
+		if ( is_panel_preview() ) {
 
 			$title_attrs = [
 				'data-depth'    => 0,
@@ -75,16 +84,5 @@ class VideoText extends Panel {
 		}
 
 		return implode( ' ', $classes );
-	}
-
-	protected function get_mapped_panel_data(): array {
-
-		$data = [
-			'wrapper_classes' => $this->get_panel_classes(),
-			'video'           => $this->get_panel_video(),
-			'content_block'   => $this->get_content_block(),
-		];
-
-		return $data;
 	}
 }

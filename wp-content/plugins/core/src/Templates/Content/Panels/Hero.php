@@ -16,6 +16,17 @@ class Hero extends Panel {
 		return $data;
 	}
 
+	public function get_mapped_panel_data(): array {
+		$data = [
+			'text_color'    => $this->text_color(),
+			'layout'        => $this->get_layout(),
+			'image'         => $this->get_image(),
+			'content_block' => $this->get_content_block(),
+		];
+
+		return $data;
+	}
+
 	protected function get_image() {
 
 		if ( empty( $this->panel_vars[ HeroPanel::FIELD_IMAGE ] ) ) {
@@ -41,9 +52,7 @@ class Hero extends Panel {
 		$title_attrs       = [];
 		$description_attrs = [];
 
-		if ( $this->panel_vars[ HeroPanel::FIELD_TITLE ] ||
-		     $this->panel_vars[ HeroPanel::FIELD_DESCRIPTION ] ||
-		     is_panel_preview() ) {
+		if ( is_panel_preview() ) {
 
 			$title_attrs = [
 				'data-depth'    => $this->panel->get_depth(),
@@ -101,16 +110,5 @@ class Hero extends Panel {
 		}
 
 		return implode( ' ', $classes );
-	}
-
-	public function get_mapped_panel_data(): array {
-		$data = [
-			'text_color'    => $this->text_color(),
-			'layout'        => $this->get_layout(),
-			'image'         => $this->get_image(),
-			'content_block' => $this->get_content_block(),
-		];
-
-		return $data;
 	}
 }

@@ -17,6 +17,17 @@ class Testimonial extends Panel {
 		return $data;
 	}
 
+	public function get_mapped_panel_data(): array {
+		$data = [
+			'title'      => $this->get_title(),
+			'text_color' => $this->text_color(),
+			'image'      => $this->get_image(),
+			'slider'     => $this->get_slider(),
+		];
+
+		return $data;
+	}
+
 	public function get_title(): string {
 		$title = '';
 
@@ -65,7 +76,7 @@ class Testimonial extends Panel {
 		$quotes = [];
 
 		if ( ! empty( $this->panel_vars[ TestimonialPanel::FIELD_QUOTES ] ) ) {
-			for ( $i = 0; $i < count( $this->panel_vars[ TestimonialPanel::FIELD_QUOTES ] ); $i++ ) {
+			for ( $i = 0; $i < count( $this->panel_vars[ TestimonialPanel::FIELD_QUOTES ] ); $i ++ ) {
 
 				$quote       = $this->panel_vars[ TestimonialPanel::FIELD_QUOTES ][ $i ];
 				$quote_attrs = [];
@@ -120,17 +131,7 @@ class Testimonial extends Panel {
 
 	protected function get_slider_main_classes() {
 		$classes = [ 'c-slider__main' ];
+
 		return $classes;
-	}
-
-	public function get_mapped_panel_data(): array {
-		$data = [
-			'title'      => $this->get_title(),
-			'text_color' => $this->text_color(),
-			'image'      => $this->get_image(),
-			'slider'     => $this->get_slider(),
-		];
-
-		return $data;
 	}
 }

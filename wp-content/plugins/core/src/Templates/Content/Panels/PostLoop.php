@@ -15,6 +15,16 @@ class PostLoop extends Panel {
 		return $data;
 	}
 
+	public function get_mapped_panel_data(): array {
+		$data = [
+			'title'       => $this->get_title(),
+			'description' => ! empty( $this->panel_vars[ PostLoopPanel::FIELD_DESCRIPTION ] ) ? $this->panel_vars[ PostLoopPanel::FIELD_DESCRIPTION ] : false,
+			'posts'       => $this->get_the_posts(),
+		];
+
+		return $data;
+	}
+
 	public function get_title(): string {
 		$title = '';
 
@@ -50,15 +60,5 @@ class PostLoop extends Panel {
 		}
 
 		return $posts;
-	}
-
-	public function get_mapped_panel_data(): array {
-		$data = [
-			'title'       => $this->get_title(),
-			'description' => ! empty( $this->panel_vars[ PostLoopPanel::FIELD_DESCRIPTION ] ) ? $this->panel_vars[ PostLoopPanel::FIELD_DESCRIPTION ] : false,
-			'posts'       => $this->get_the_posts(),
-		];
-
-		return $data;
 	}
 }

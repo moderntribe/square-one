@@ -14,6 +14,16 @@ class Wysiwyg extends Panel {
 		return $data;
 	}
 
+	public function get_mapped_panel_data(): array {
+		$data = [
+			'title'       => $this->get_title(),
+			'description' => ! empty( $this->panel_vars[ Wysi::FIELD_DESCRIPTION ] ) ? $this->panel_vars[ Wysi::FIELD_DESCRIPTION ] : false,
+			'columns'     => $this->get_the_columns(),
+		];
+
+		return $data;
+	}
+
 	public function get_title(): string {
 		$title = '';
 
@@ -37,15 +47,5 @@ class Wysiwyg extends Panel {
 		}
 
 		return $columns;
-	}
-
-	public function get_mapped_panel_data(): array {
-		$data = [
-			'title'       => $this->get_title(),
-			'description' => ! empty( $this->panel_vars[ Wysi::FIELD_DESCRIPTION ] ) ? $this->panel_vars[ Wysi::FIELD_DESCRIPTION ] : false,
-			'columns'     => $this->get_the_columns(),
-		];
-
-		return $data;
 	}
 }

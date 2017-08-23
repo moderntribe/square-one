@@ -16,6 +16,15 @@ class Gallery extends Panel {
 		return $data;
 	}
 
+	public function get_mapped_panel_data(): array {
+		$data = [
+			'title'  => $this->get_title(),
+			'slider' => $this->get_slider(),
+		];
+
+		return $data;
+	}
+
 	public function get_title(): string {
 		$title = '';
 
@@ -26,15 +35,6 @@ class Gallery extends Panel {
 		return $title;
 	}
 
-	public function get_mapped_panel_data(): array {
-		$data = [
-			'title'  => $this->get_title(),
-			'slider' => $this->get_slider(),
-		];
-
-		return $data;
-	}
-
 	protected function get_slider(): string {
 		$options = [
 			SliderComponent::SLIDES          => $this->get_slides(),
@@ -43,8 +43,8 @@ class Gallery extends Panel {
 			SliderComponent::SHOW_ARROWS     => true,
 			SliderComponent::SHOW_PAGINATION => true,
 			SliderComponent::MAIN_CLASSES    => $this->get_slider_main_classes(),
-			SliderComponent::MAIN_ATTRS      => ['data-swiper-options' => '{"speed":600}'],
-			SliderComponent::CAROUSEL_ATTRS  => ['data-swiper-options' => '{"speed":600}'],
+			SliderComponent::MAIN_ATTRS      => [ 'data-swiper-options' => '{"speed":600}' ],
+			SliderComponent::CAROUSEL_ATTRS  => [ 'data-swiper-options' => '{"speed":600}' ],
 		];
 
 		$slider = SliderComponent::factory( $options );
@@ -55,8 +55,7 @@ class Gallery extends Panel {
 	public function show_carousel(): bool {
 		$show_carousel = true;
 
-		if ( ! empty( $this->panel_vars[ GalleryPanel::FIELD_CAROUSEL ] ) &&
-			$this->panel_vars[ GalleryPanel::FIELD_CAROUSEL ] == GalleryPanel::FIELD_CAROUSEL_HIDE ) {
+		if ( ! empty( $this->panel_vars[ GalleryPanel::FIELD_CAROUSEL ] ) && $this->panel_vars[ GalleryPanel::FIELD_CAROUSEL ] == GalleryPanel::FIELD_CAROUSEL_HIDE ) {
 			$show_carousel = false;
 		}
 
@@ -66,8 +65,7 @@ class Gallery extends Panel {
 	public function use_crop(): bool {
 		$use_crop = true;
 
-		if ( ! empty( $this->panel_vars[ GalleryPanel::FIELD_IMAGE_TREATMENT ] ) &&
-			$this->panel_vars[ GalleryPanel::FIELD_IMAGE_TREATMENT ] == GalleryPanel::FIELD_IMAGE_TREATMENT_OPTION_LETTERBOX ) {
+		if ( ! empty( $this->panel_vars[ GalleryPanel::FIELD_IMAGE_TREATMENT ] ) && $this->panel_vars[ GalleryPanel::FIELD_IMAGE_TREATMENT ] == GalleryPanel::FIELD_IMAGE_TREATMENT_OPTION_LETTERBOX ) {
 			$use_crop = false;
 		}
 
@@ -82,10 +80,9 @@ class Gallery extends Panel {
 		}
 
 		return array_map( function ( $slide_id ) use ( $size ) {
-			$crop = $this->use_crop();
 			$options = [
 				'img_id'       => $slide_id,
-				'as_bg'        => $crop && $size == 'full',
+				'as_bg'        => $this->use_crop() && $size == 'full',
 				'use_lazyload' => false,
 				'echo'         => false,
 				'src_size'     => $size,
@@ -99,6 +96,7 @@ class Gallery extends Panel {
 
 	protected function get_slider_main_classes() {
 		$classes = [ sprintf( 'c-slider__main--%s', $this->panel_vars[ GalleryPanel::FIELD_IMAGE_TREATMENT ] ) ];
+
 		return $classes;
 	}
 }

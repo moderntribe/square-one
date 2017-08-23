@@ -17,14 +17,23 @@ class ImageText extends Panel {
 		return $data;
 	}
 
+	protected function get_mapped_panel_data(): array {
+
+		$data = [
+			'wrapper_classes' => $this->get_panel_classes(),
+			'image'           => $this->get_panel_image(),
+			'content_block'   => $this->get_content_block(),
+		];
+
+		return $data;
+	}
+
 	protected function get_content_block() {
 
 		$title_attrs       = [];
 		$description_attrs = [];
 
-		if ( $this->panel_vars[ ImageTextPanel::FIELD_TITLE ] ||
-		     $this->panel_vars[ ImageTextPanel::FIELD_DESCRIPTION ] ||
-		     is_panel_preview() ) {
+		if ( is_panel_preview() ) {
 
 			$title_attrs = [
 				'data-depth'    => 0,
@@ -85,16 +94,5 @@ class ImageText extends Panel {
 		}
 
 		return implode( ' ', $classes );
-	}
-
-	protected function get_mapped_panel_data(): array {
-
-		$data = [
-			'wrapper_classes' => $this->get_panel_classes(),
-			'image'           => $this->get_panel_image(),
-			'content_block'   => $this->get_content_block(),
-		];
-
-		return $data;
 	}
 }

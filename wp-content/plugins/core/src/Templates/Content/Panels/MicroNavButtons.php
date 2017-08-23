@@ -15,6 +15,16 @@ class MicroNavButtons extends Panel {
 		return $data;
 	}
 
+	public function get_mapped_panel_data(): array {
+		$data = [
+			'title'       => $this->get_title(),
+			'description' => ! empty( $this->panel_vars[ Micro::FIELD_DESCRIPTION ] ) ? $this->panel_vars[ Micro::FIELD_DESCRIPTION ] : false,
+			'items'       => $this->get_list_items(),
+		];
+
+		return $data;
+	}
+
 	public function get_title(): string {
 		$title = '';
 
@@ -29,14 +39,14 @@ class MicroNavButtons extends Panel {
 		$btns = [];
 
 		if ( ! empty( $this->panel_vars[ Micro::FIELD_ITEMS ] ) ) {
-			for ( $i = 0; $i < count( $this->panel_vars[ Micro::FIELD_ITEMS ] ); $i++ ) {
+			for ( $i = 0; $i < count( $this->panel_vars[ Micro::FIELD_ITEMS ] ); $i ++ ) {
 
 				$btn = $this->panel_vars[ Micro::FIELD_ITEMS ][ $i ];
 
 				$options = [
-					Button::URL    => esc_url( $btn[ Micro::FIELD_ITEM_CTA ]['url'] ),
-					Button::TARGET => esc_attr( $btn[ Micro::FIELD_ITEM_CTA ]['target'] ),
-					Button::LABEL  => esc_attr( $btn[ Micro::FIELD_ITEM_CTA ]['label'] ),
+					Button::URL     => esc_url( $btn[ Micro::FIELD_ITEM_CTA ]['url'] ),
+					Button::TARGET  => esc_attr( $btn[ Micro::FIELD_ITEM_CTA ]['target'] ),
+					Button::LABEL   => esc_attr( $btn[ Micro::FIELD_ITEM_CTA ]['label'] ),
 					Button::CLASSES => [ 'c-btn--full c-btn--lg' ],
 				];
 
@@ -46,15 +56,5 @@ class MicroNavButtons extends Panel {
 		}
 
 		return $btns;
-	}
-
-	public function get_mapped_panel_data(): array {
-		$data = [
-			'title'       => $this->get_title(),
-			'description' => ! empty( $this->panel_vars[ Micro::FIELD_DESCRIPTION ] ) ? $this->panel_vars[ Micro::FIELD_DESCRIPTION ] : false,
-			'items'       => $this->get_list_items(),
-		];
-
-		return $data;
 	}
 }
