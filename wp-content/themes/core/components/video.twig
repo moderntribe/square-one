@@ -1,5 +1,34 @@
 {# Component: Video #}
 
-<div class="c-video">
-
+<div
+	{{ container_classes }}
+	{{ container_attrs }}
+	{% if id is not empty %}data-id="{{ id }}"{% endif %}
+>
+	<div {{ content_wrap_classes }}>
+		<div class="video__embed-wrap">
+			<figure {{ figure_classes }}>
+				<a
+					href="{{ video_url|esc_url }}"
+					class="video__trigger"
+					data-js="video-trigger"
+					title="{{ title|esc_html }}"
+				>
+					<img
+						class="video__image lazyload"
+						src="{{ shim|esc_url }}"
+						data-src="{{ thumbnail_url|esc_url }}"
+						role="presentation"
+					/>
+					<figcaption class="video__caption">
+						<i class="video__icon icon icon-play"></i>
+						<span class="video__trigger-label">{{ play_text|esc_html }}</span>
+					</figcaption>
+				</a>
+			</figure>
+		</div>
+	</div>
+	{% if style_block is not empty %}
+		{{ style_block }}
+	{% endif %}
 </div>

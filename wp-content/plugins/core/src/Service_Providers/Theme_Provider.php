@@ -116,15 +116,13 @@ class Theme_Provider implements ServiceProviderInterface {
 			] );
 		};
 
-		add_filter( 'oembed_dataparse', function ( $html, $data, $url ) use ( $container ) {
-			return $container[ 'theme.oembed' ]->setup_lazyload_html( $html, $data, $url );
-		}, 1000, 3 );
+		add_filter( 'oembed_dataparse', function( $html, $data, $url ) use ( $container ) {
+			return $container['theme.oembed']->get_video_component( $html, $data, $url );
+		}, 999, 3 );
+
 		add_filter( 'embed_oembed_html', function ( $html, $url, $attr, $post_id ) use ( $container ) {
 			return $container[ 'theme.oembed' ]->filter_frontend_html_from_cache( $html, $url, $attr, $post_id );
 		}, 1, 4 );
-		add_filter( 'embed_oembed_html', function ( $html, $url, $attr, $post_id ) use ( $container ) {
-			return $container[ 'theme.oembed' ]->wrap_oembed_shortcode_output( $html, $url, $attr, $post_id );
-		}, 99, 4 );
 	}
 
 	private function supports( Container $container ) {
