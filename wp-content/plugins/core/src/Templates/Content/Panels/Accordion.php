@@ -17,7 +17,7 @@ class Accordion extends Panel {
 
 	public function get_mapped_panel_data(): array {
 		$data = [
-			'title'        => $this->get_title(),
+			'title'        => $this->get_title( AccordionPanel::FIELD_ACCORDION_TITLE, [ 'section__title' ] ),
 			'content'      => $this->panel_vars[ AccordionPanel::FIELD_CONTENT ],
 			'layout'       => $this->panel_vars[ AccordionPanel::FIELD_LAYOUT ],
 			'accordion'    => $this->get_accordion(),
@@ -25,16 +25,6 @@ class Accordion extends Panel {
 		];
 
 		return $data;
-	}
-
-	public function get_title(): string {
-		$title = '';
-
-		if ( ! empty( $this->panel_vars[ AccordionPanel::FIELD_ACCORDION_TITLE ] ) ) {
-			$title = the_panel_title( esc_html( $this->panel_vars[ AccordionPanel::FIELD_ACCORDION_TITLE ] ), 'section__title', 'title', true, 0, 0 );
-		}
-
-		return $title;
 	}
 
 	protected function get_grid_classes(): string {

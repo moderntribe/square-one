@@ -19,23 +19,13 @@ class Testimonial extends Panel {
 
 	public function get_mapped_panel_data(): array {
 		$data = [
-			'title'      => $this->get_title(),
+			'title'      => $this->get_title( TestimonialPanel::FIELD_TITLE, [ 'site-section__title', 'h5' ] ),
 			'text_color' => $this->text_color(),
 			'image'      => $this->get_image(),
 			'slider'     => $this->get_slider(),
 		];
 
 		return $data;
-	}
-
-	public function get_title(): string {
-		$title = '';
-
-		if ( ! empty( $this->panel_vars[ TestimonialPanel::FIELD_TITLE ] ) ) {
-			$title = the_panel_title( esc_html( $this->panel_vars[ TestimonialPanel::FIELD_TITLE ] ), 'site-section__title h5', 'title', true, 0, 0 );
-		}
-
-		return $title;
 	}
 
 	protected function get_image() {

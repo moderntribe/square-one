@@ -18,21 +18,11 @@ class Gallery extends Panel {
 
 	public function get_mapped_panel_data(): array {
 		$data = [
-			'title'  => $this->get_title(),
+			'title'  => $this->get_title( GalleryPanel::FIELD_TITLE, [ 'section__title' ] ),
 			'slider' => $this->get_slider(),
 		];
 
 		return $data;
-	}
-
-	public function get_title(): string {
-		$title = '';
-
-		if ( ! empty( $this->panel_vars[ GalleryPanel::FIELD_TITLE ] ) ) {
-			$title = the_panel_title( esc_html( $this->panel_vars[ GalleryPanel::FIELD_TITLE ] ), 'section__title', 'title', true, 0, 0 );
-		}
-
-		return $title;
 	}
 
 	protected function get_slider(): string {

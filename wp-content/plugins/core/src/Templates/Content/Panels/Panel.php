@@ -36,6 +36,18 @@ class Panel extends Twig_Template {
 		return $children;
 	}
 
+	protected function get_title( $field_name, $classes = [] ): string {
+		$title = '';
+
+		if ( empty( $this->panel_vars[ $field_name ] ) ) {
+			return $title;
+		}
+
+		$title = the_panel_title( esc_html( $this->panel_vars[ $field_name ] ), implode( ' ', $classes ), 'title', true, 0, 0 );
+
+		return $title;
+	}
+
 	public static function instance() {
 		return tribe_project()->container()[ 'twig.templates.content/panels/panel' ];
 	}

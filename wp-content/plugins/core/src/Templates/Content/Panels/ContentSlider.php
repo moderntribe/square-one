@@ -25,16 +25,6 @@ class ContentSlider extends Panel {
 		return $data;
 	}
 
-	public function get_title(): string {
-		$title = '';
-
-		if ( ! empty( $this->panel_vars[ ContentSliderPanel::FIELD_TITLE ] ) ) {
-			$title = the_panel_title( esc_html( $this->panel_vars[ ContentSliderPanel::FIELD_TITLE ] ), 'section__title', 'title', true, 0, 0 );
-		}
-
-		return $title;
-	}
-
 	protected function get_slider(): string {
 		$options = [
 			SliderComponent::SLIDES          => $this->get_slides(),

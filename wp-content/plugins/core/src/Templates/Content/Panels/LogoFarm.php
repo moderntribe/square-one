@@ -17,22 +17,12 @@ class LogoFarm extends Panel {
 
 	public function get_mapped_panel_data(): array {
 		$data = [
-			'title'       => $this->get_title(),
+			'title'       => $this->get_title( Logo::FIELD_TITLE, [ 'site-section__title', 'h2' ] ),
 			'description' => ! empty( $this->panel_vars[ Logo::FIELD_DESCRIPTION ] ) ? $this->panel_vars[ Logo::FIELD_DESCRIPTION ] : false,
 			'logos'       => $this->get_the_logos(),
 		];
 
 		return $data;
-	}
-
-	public function get_title(): string {
-		$title = '';
-
-		if ( ! empty( $this->panel_vars[ Logo::FIELD_TITLE ] ) ) {
-			$title = the_panel_title( esc_html( $this->panel_vars[ Logo::FIELD_TITLE ] ), 'site-section__title h2', 'title', true, 0, 0 );
-		}
-
-		return $title;
 	}
 
 	public function get_the_logos(): array {
