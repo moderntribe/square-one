@@ -71,7 +71,44 @@ This component has these features out of box:
 
 ### Example Usage
 
-Example panel controller using the accordion component
+An accordion panel twig file, being passed the 'accordion' var that was assembled by the panel controller using the accordion component.
+
+```twig
+{# Panel: Accordion #}
+
+{% extends "content/panels/panel.twig" %}
+
+{% block content %}
+
+	<div class="site-section__content">
+		<div class="site-grid">
+			<div class="site-grid__wrapper">
+				<div class="{{ grid_classes }}"
+				     data-depth="0"
+				     data-name="accordions"
+				     data-livetext
+				>
+					<div
+						class="site-grid__col"
+						data-depth="0"
+						data-name="content"
+						data-autop="true"
+						data-livetext
+					>
+						{{ content }}
+					</div>
+					<div class="site-grid__col">
+						{{ accordion }}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
+```
+
+And the panel controller using the accordion component
 
 ```php
 namespace Tribe\Project\Templates\Content\Panels;
