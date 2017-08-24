@@ -1,21 +1,21 @@
 version: "3.3"
 services:
 
-    rabbitmq:
-      image: "rabbitmq:3-management-alpine"
-      environment:
-        RABBITMQ_ERLANG_COOKIE: "SWQOKODSQALRPCLNMEQG"
-        RABBITMQ_DEFAULT_USER: "rabbitmq"
-        RABBITMQ_DEFAULT_PASS: "rabbitmq"
-        RABBITMQ_DEFAULT_VHOST: "/"
-      volumes:
-        - "./rabbitmq/enabled_plugins:/etc/rabbitmq/enabled_plugins"
-      networks:
-        - proxy
-      labels:
-        - "traefik.frontend.rule=Host:rabbitmq.tribe"
-        - "traefik.docker.network=proxy"
-        - "traefik.port=15672"
+    #  rabbitmq:
+    #    image: "rabbitmq:3-management-alpine"
+    #    environment:
+    #      RABBITMQ_ERLANG_COOKIE: "SWQOKODSQALRPCLNMEQG"
+    #      RABBITMQ_DEFAULT_USER: "rabbitmq"
+    #      RABBITMQ_DEFAULT_PASS: "rabbitmq"
+    #      RABBITMQ_DEFAULT_VHOST: "/"
+    #    volumes:
+    #      - ./rabbitmq/enabled_plugins:/etc/rabbitmq/enabled_plugins
+    #    networks:
+    #      - proxy
+    #    labels:
+    #      - "traefik.frontend.rule=Host:rabbitmq.square1.tribe"
+    #      - "traefik.docker.network=proxy"
+    #      - "traefik.port=15672"
 
     redis:
       image: redis:alpine
@@ -25,9 +25,30 @@ services:
         - proxy
 
     elasticsearch:
-      image: elasticsearch:5.3-alpine
+      image: docker.elastic.co/elasticsearch/elasticsearch:5.2.2
+      environment:
+        - cluster.name=square1
+        - xpack.security.enabled=false
+        - bootstrap.memory_lock=true
+        - script.inline=false
+        - script.stored=false
+        - script.file=true
+        - script.engine.mustache.inline.search=true
+        - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
       labels:
         - "traefik.enable=false"
+      ulimits:
+        memlock:
+          soft: -1
+          hard: -1
+        nofile:
+          soft: 65536
+          hard: 65536
+        mem_limit: 1g
+      ports:
+        - "9200"
+      volumes:
+        - elasticsearchindex:/usr/share/elasticsearch/data
       networks:
         - proxy
 
@@ -49,8 +70,9 @@ services:
         - proxy
       dns: 172.20.10.250
       volumes:
-        - ../..:/application:cached
+        - ../..:/application/www:cached
         - ./phpdocker/php-fpm/php-ini-overrides.ini:/etc/php/7.0/fpm/conf.d/99-overrides.ini
+        - ./wp-cli.yml:/application/wp-cli.yml
       links:
         - memcached
         - redis
@@ -60,14 +82,17 @@ services:
         - "tribe-mail:mail"
 
     webserver:
-      image: nginx:alpine
+      image: nginx:stable-alpine
       working_dir: /application
+      environment:
+        - VIRTUAL_HOST=square1.tribe,*.square1.tribe
       labels:
-        - "traefik.frontend.rule=Host:project-name.tribe"
+        - "traefik.frontend.rule=Host:square1.tribe"
         - "traefik.docker.network=proxy"
       volumes:
-        - ../..:/application:cached
+        - ../..:/application/www:cached
         - ./phpdocker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+        - ./phpdocker/nginx/fastcgi.conf:/etc/nginx/fastcgi_params
       networks:
         - proxy
       links:
@@ -77,3 +102,6 @@ networks:
   proxy:
     external:
       name: global_proxy
+
+volumes:
+  elasticsearchindex:

@@ -18,7 +18,7 @@ services:
   dns-internal:
     image: andyshinn/dnsmasq:latest
     container_name: tribe-dns-internal
-    command:  --log-facility=/proc/self/fd/2  --no-resolv --server=8.8.8.8 --address=/tribe/172.20.10.100 --address=/mysql.tribe/172.20.10.200 --address=/smtp.tribe/172.20.10.90
+    command:  --log-facility=/proc/self/fd/2 --no-resolv --server=8.8.8.8 --address=/tribe/172.20.10.100 --address=/mysql.tribe/172.20.10.200 --address=/mailhog.tribe/172.20.10.90 --address=/smtp.tribe/172.20.10.90 --address=/host.tribe/${HOSTIP:-172.20.10.1}
     labels:
       - "traefik.enable=false"
     cap_add:  
@@ -31,7 +31,7 @@ services:
         ipv4_address: 172.20.10.250
 
   mysql:
-    image: mysql:8.0
+    image: mysql:5.7
     container_name: tribe-mysql
     labels:
       - "traefik.enable=false"
@@ -44,23 +44,24 @@ services:
     networks:
       proxy:
         ipv4_address: 172.20.10.200
-  
-  traefik:
-    image: traefik
+        aliases:
+          - global_mysql_1
+
+  reverse-proxy:
+    image: jwilder/nginx-proxy:alpine
     container_name: tribe-proxy
-    labels:
-      - "traefik.frontend.rule=Host:proxy.tribe"
-      - "traefik.port=8080"
-    command: --web --docker --docker.domain=tribe --logLevel=DEBUG
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/proxy_settings.conf:/etc/nginx/conf.d/proxy_settings.conf:ro
+      - ./nginx/nginx.tmpl:/app/nginx.tmpl:ro
+      - ./certs:/etc/nginx/certs
+      - /var/run/docker.sock:/tmp/docker.sock
     networks:
       proxy:
         ipv4_address: 172.20.10.100
-    ports:
-      - "80:80"
-      - "8080:8080"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - /dev/null:/traefik.toml
 
   mailhog:
     image: mailhog/mailhog:latest
@@ -81,3 +82,4 @@ networks:
     ipam:
       config:
         - subnet: 172.20.10.0/24
+
