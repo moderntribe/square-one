@@ -66,7 +66,7 @@ This component has these features out of box:
 
 ### Example Usage
 
-An gallery panel twig file, being passed the 'slides' var that was assembled by the panel controller using the slider component.
+A gallery panel twig file, being passed the 'slider' var that was assembled by the panel controller using the slider component.
 
 ```twig
 {# Panel: Gallery #}
