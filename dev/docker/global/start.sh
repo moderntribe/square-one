@@ -23,11 +23,6 @@ if [ ! -f "${SCRIPTDIR}/.env" ]; then
 	fi;
 fi;
 
-if [ ! -f "${SCRIPTDIR}/traefik/acme.json" ]; then
-	touch "${SCRIPTDIR}/traefik/acme.json";
-	chmod 600 "${SCRIPTDIR}/traefik/acme.json";
-fi;
-
 if [ ! -f "${SCRIPTDIR}/certs/tribeCA.key" ]; then
 	echo "Generating certificate authority"
 
