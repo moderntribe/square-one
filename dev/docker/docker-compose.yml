@@ -1,22 +1,6 @@
 version: "3.3"
 services:
 
-    #  rabbitmq:
-    #    image: "rabbitmq:3-management-alpine"
-    #    environment:
-    #      RABBITMQ_ERLANG_COOKIE: "SWQOKODSQALRPCLNMEQG"
-    #      RABBITMQ_DEFAULT_USER: "rabbitmq"
-    #      RABBITMQ_DEFAULT_PASS: "rabbitmq"
-    #      RABBITMQ_DEFAULT_VHOST: "/"
-    #    volumes:
-    #      - ./rabbitmq/enabled_plugins:/etc/rabbitmq/enabled_plugins
-    #    networks:
-    #      - proxy
-    #    labels:
-    #      - "traefik.frontend.rule=Host:rabbitmq.square1.tribe"
-    #      - "traefik.docker.network=proxy"
-    #      - "traefik.port=15672"
-
     redis:
       image: redis:alpine
       labels:
@@ -105,3 +89,4 @@ networks:
 
 volumes:
   elasticsearchindex:
+
