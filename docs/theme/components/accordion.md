@@ -10,64 +10,71 @@ This component has these features out of box:
 * Intelligent editing support during live panel preview, rows expand according to the current one being editing in the panel ui.
 * One item open at a time, with scrolling to keep items on screen. Easily switchable in the js.
 
+### File Locations
+
+* **Template:** `wp-content\themes\core\components\accordion.twig`
+* **Controller:** `wp-content\plugins\core\src\Templates\Components\Accordion.php`
+* **Javascript:** `wp-content\plugins\core\assets\theme\js\src\components\accordion.js`
+* **PostCSS:** `wp-content\plugins\core\assets\theme\pcss\components\_accordion.pcss`
+
 ### Options
 
-* `container_classes` 
-  * **Default:** _c-accordion_ 
-  * **Type:** _string_ 
-  * **Description:** the wrapper classes
-* `container_attrs` 
-  * **Default:** _data-js="c-accordion"_ 
-  * **Type:** _string_ 
-  * **Description:** any additional data or other attributes
-* `row_classes` 
-  * **Default:** _c-accordion__row_
-  * **Type:** _string_ 
-  * **Description:** the row classes
-* `row_content_classes` 
-  * **Default:** _c-accordion__content_ 
-  * **Type:** _string_ 
-  * **Description:** the row content wrapper classes
-* `row_content_inner_classes` 
-  * **Default:** _c-accordion__content-inner_ 
-  * **Type:** _string_ 
-  * **Description:** the row content inner classes
-* `row_content_name` 
-  * **Default:** _accordion_content_ 
-  * **Type:** _string_ 
-  * **Description:** the content name attribute, if used in panel supply row content field name
-* `row_header_classes` 
-  * **Default:** _c-accordion__header_ 
-  * **Type:** _string_ 
-  * **Description:** the row header classes
-* `row_header_inner_classes` 
-  * **Default:** _c-accordion__header-inner_ 
-  * **Type:** _string_ 
-  * **Description:** The row header inner classes. wraps the row title text
-* `row_header_name` 
-  * **Default:** _title_ 
-  * **Type:** _string_ 
-  * **Description:** the header name attribute, if used in panel supply row header text field name
-* `rows` 
-  * **Default:** _[]_ 
-  * **Type:** _array_ 
-  * **Description:** an array of accordion rows.
-* `rows[].content` 
-  * **Default:** _''_ 
-  * **Type:** _string_ 
-  * **Description:** The row content. HTML or what have you.
-* `rows[].content_id` 
-  * **Default:** _''_ 
-  * **Type:** _string_ 
-  * **Description:** Unique id for the content.
-* `rows[].header_id`
-  * **Default:** _''_ 
-  * **Type:** _string_ 
-  * **Description:** Unique id for the header.
-* `rows[].header_text` 
-  * **Default:** _''_ 
-  * **Type:** _string_ 
-  * **Description:** The header text.
+#### `container_classes` 
+* **Default:** _c-accordion_ 
+* **Type:** _string_ 
+* **Description:** the wrapper classes
+#### `container_attrs` 
+* **Default:** _data-js="c-accordion"_ 
+* **Type:** _string_ 
+* **Description:** any additional data or other attributes
+#### `row_classes` 
+* **Default:** _c-accordion__row_
+* **Type:** _string_ 
+* **Description:** the row classes
+#### `row_content_classes` 
+* **Default:** _c-accordion__content_ 
+* **Type:** _string_ 
+* **Description:** the row content wrapper classes
+#### `row_content_inner_classes` 
+* **Default:** _c-accordion__content-inner_ 
+* **Type:** _string_ 
+* **Description:** the row content inner classes
+#### `row_content_name` 
+* **Default:** _accordion_content_ 
+* **Type:** _string_ 
+* **Description:** the content name attribute, if used in panel supply row content field name
+#### `row_header_classes` 
+* **Default:** _c-accordion__header_ 
+* **Type:** _string_ 
+* **Description:** the row header classes
+#### `row_header_inner_classes` 
+* **Default:** _c-accordion__header-inner_ 
+* **Type:** _string_ 
+* **Description:** The row header inner classes. wraps the row title text
+#### `row_header_name` 
+* **Default:** _title_ 
+* **Type:** _string_ 
+* **Description:** the header name attribute, if used in panel supply row header text field name
+#### `rows` 
+* **Default:** _[]_ 
+* **Type:** _array_ 
+* **Description:** an array of accordion rows.
+#### `rows[].content` 
+* **Default:** _''_ 
+* **Type:** _string_ 
+* **Description:** The row content. HTML or what have you.
+#### `rows[].content_id` 
+* **Default:** _''_ 
+* **Type:** _string_ 
+* **Description:** Unique id for the content.
+#### `rows[].header_id`
+* **Default:** _''_ 
+* **Type:** _string_ 
+* **Description:** Unique id for the header.
+#### `rows[].header_text` 
+* **Default:** _''_ 
+* **Type:** _string_ 
+* **Description:** The header text.
 
 ### Example Usage
 

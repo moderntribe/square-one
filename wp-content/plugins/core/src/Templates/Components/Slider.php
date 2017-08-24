@@ -11,7 +11,7 @@ class Slider extends Component {
 	const SHOW_PAGINATION = 'show_pagination';
 	const SLIDES          = 'slides';
 	const THUMBNAILS      = 'thumbnails';
-	const CLASSES         = 'classes';
+	const CLASSES         = 'container_classes';
 	const MAIN_CLASSES    = 'main_classes';
 	const WRAPPER_CLASSES = 'wrapper_classes';
 	const SLIDE_CLASSES   = 'slide_classes';
