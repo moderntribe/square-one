@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'core-icons';
   src:
-    url('fonts/core-icons.woff2?2gdrsw') format('woff2'),
-    url('fonts/core-icons.ttf?2gdrsw') format('truetype'),
-    url('fonts/core-icons.woff?2gdrsw') format('woff'),
-    url('fonts/core-icons.svg?2gdrsw#core-icons') format('svg');
+    url('fonts/core-icons.woff2?7u95zp') format('woff2'),
+    url('fonts/core-icons.ttf?7u95zp') format('truetype'),
+    url('fonts/core-icons.woff?7u95zp') format('woff'),
+    url('fonts/core-icons.svg?7u95zp#core-icons') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -24,6 +24,18 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-audio-mute:before {
+  content: "\e901";
+}
+.icon-audio:before {
+  content: "\e902";
+}
+.icon-pause:before {
+  content: "\e905";
+}
+.icon-play:before {
+  content: "\e903";
+}
 .icon-arrow-left:before {
   content: "\e094";
 }
@@ -63,9 +75,6 @@
 .icon-chevron-up:before {
   content: "\e904";
 }
-.icon-play:before {
-  content: "\e903";
-}
 .icon-mail:before {
   content: "\f003";
 }
@@ -93,4 +102,3 @@
 .icon-pinterest:before {
   content: "\f231";
 }
-
