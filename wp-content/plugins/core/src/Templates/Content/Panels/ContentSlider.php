@@ -44,10 +44,10 @@ class ContentSlider extends Panel {
 		$slides = [];
 
 		if ( ! empty( $this->panel_vars[ ContentSliderPanel::FIELD_SLIDES ] ) ) {
-			for ( $i = 0; $i < count( $this->panel_vars[ ContentSliderPanel::FIELD_SLIDES ] ); $i ++ ) {
+
+			foreach( $this->panel_vars[ ContentSliderPanel::FIELD_SLIDES ] as $slide ) {
 
 				$slide_markup = '';
-				$slide        = $this->panel_vars[ ContentSliderPanel::FIELD_SLIDES ][ $i ];
 
 				$options = [
 					Image::IMG_ID        => $slide[ ContentSliderPanel::FIELD_SLIDE_IMAGE ],
