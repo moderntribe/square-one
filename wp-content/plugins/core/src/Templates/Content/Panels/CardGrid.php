@@ -25,7 +25,7 @@ class CardGrid extends Panel {
 		return $data;
 	}
 
-	public function get_the_cards(): array {
+	protected function get_the_cards(): array {
 		$cards = [];
 
 		if ( ! empty( $this->panel_vars[ CardGridPanel::FIELD_CARDS ] ) ) {

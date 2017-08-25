@@ -42,7 +42,7 @@ class Gallery extends Panel {
 		return $slider->render();
 	}
 
-	public function show_carousel(): bool {
+	protected function show_carousel(): bool {
 		$show_carousel = true;
 
 		if ( ! empty( $this->panel_vars[ GalleryPanel::FIELD_CAROUSEL ] ) && $this->panel_vars[ GalleryPanel::FIELD_CAROUSEL ] == GalleryPanel::FIELD_CAROUSEL_HIDE ) {
@@ -52,7 +52,7 @@ class Gallery extends Panel {
 		return $show_carousel;
 	}
 
-	public function use_crop(): bool {
+	protected function use_crop(): bool {
 		$use_crop = true;
 
 		if ( ! empty( $this->panel_vars[ GalleryPanel::FIELD_IMAGE_TREATMENT ] ) && $this->panel_vars[ GalleryPanel::FIELD_IMAGE_TREATMENT ] == GalleryPanel::FIELD_IMAGE_TREATMENT_OPTION_LETTERBOX ) {

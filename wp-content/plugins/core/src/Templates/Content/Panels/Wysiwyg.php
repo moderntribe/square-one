@@ -24,7 +24,7 @@ class Wysiwyg extends Panel {
 		return $data;
 	}
 
-	public function get_the_columns(): array {
+	protected function get_the_columns(): array {
 		$columns = [];
 
 		if ( ! empty( $this->panel_vars[ Wysi::FIELD_COLUMNS ] ) ) {

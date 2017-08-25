@@ -25,7 +25,7 @@ class PostLoop extends Panel {
 		return $data;
 	}
 
-	public function get_the_posts(): array {
+	protected function get_the_posts(): array {
 		$posts = [];
 
 		if ( ! empty( $this->panel_vars[ PostLoopPanel::FIELD_POSTS ] ) ) {

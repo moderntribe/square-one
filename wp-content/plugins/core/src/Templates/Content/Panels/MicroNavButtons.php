@@ -25,7 +25,7 @@ class MicroNavButtons extends Panel {
 		return $data;
 	}
 
-	public function get_list_items(): array {
+	protected function get_list_items(): array {
 		$btns = [];
 
 		if ( ! empty( $this->panel_vars[ Micro::FIELD_ITEMS ] ) ) {

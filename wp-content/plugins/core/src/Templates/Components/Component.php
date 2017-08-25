@@ -14,11 +14,11 @@ abstract class Component extends Twig_Template {
 	/**
 	 * Component constructor.
 	 *
-	 * @param array                  $options
-	 * @param \Twig_Environment      $template
+	 * @param string      $template
 	 * @param \Twig_Environment|null $twig
+	 * @param array                  $options
 	 */
-	public function __construct( $options, $template, \Twig_Environment $twig = null ) {
+	public function __construct( $template, \Twig_Environment $twig = null, $options ) {
 		parent::__construct( $template, $twig );
 
 		$this->options = $this->parse_options( $options );
@@ -59,8 +59,9 @@ abstract class Component extends Twig_Template {
 	public static function factory( $options, $template = '' ) {
 
 		$template = empty( $template ) ? static::TEMPLATE_NAME : $template;
+		$twig     = apply_filters( 'tribe/project/twig', null );
 
-		return new static( $options, $template );
+		return new static( $template, $twig, $options );
 	}
 
 }

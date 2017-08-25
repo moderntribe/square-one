@@ -62,7 +62,7 @@ class Testimonial extends Panel {
 		return $slider->render();
 	}
 
-	public function get_slides(): array {
+	protected function get_slides(): array {
 		$quotes = [];
 
 		if ( ! empty( $this->panel_vars[ TestimonialPanel::FIELD_QUOTES ] ) ) {

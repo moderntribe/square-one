@@ -25,7 +25,7 @@ class LogoFarm extends Panel {
 		return $data;
 	}
 
-	public function get_the_logos(): array {
+	protected function get_the_logos(): array {
 		$logos = [];
 
 		if ( ! empty( $this->panel_vars[ Logo::FIELD_LOGOS ] ) ) {
