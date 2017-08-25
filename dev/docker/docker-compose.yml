@@ -32,7 +32,7 @@ services:
       ports:
         - "9200"
       volumes:
-        - elasticsearchindex:/usr/share/elasticsearch/data
+        - ./elasticsearch/data:/usr/share/elasticsearch/data:delegated
       networks:
         - proxy
 
@@ -87,6 +87,4 @@ networks:
     external:
       name: global_proxy
 
-volumes:
-  elasticsearchindex:
 
