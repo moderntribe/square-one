@@ -15,7 +15,7 @@ echo "Generating SSL certificate for $DOMAIN";
 openssl req -new -nodes -sha256 -newkey rsa:4096 -days 3650 \
 	-keyout "${SCRIPTDIR}/certs/${DOMAIN}.key" \
 	-out "${SCRIPTDIR}/certs/${DOMAIN}.csr" \
-	-subj "/C=US/ST=California/L=Santa Cruz/O=Modern Tribe/OU=Dev/CN=proxy.tribe";
+	-subj "/C=US/ST=California/L=Santa Cruz/O=Modern Tribe/OU=Dev/CN=${DOMAIN}";
 
 cat > "${SCRIPTDIR}/certs/${DOMAIN}.ext" <<-EOF
 	authorityKeyIdentifier=keyid,issuer
