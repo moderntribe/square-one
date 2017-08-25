@@ -44,8 +44,6 @@ services:
     networks:
       proxy:
         ipv4_address: 172.20.10.200
-        aliases:
-          - global_mysql_1
 
   reverse-proxy:
     image: jwilder/nginx-proxy:alpine
