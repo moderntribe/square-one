@@ -7,6 +7,16 @@ use Tribe\Project\Templates\Components\Slider;
 
 class Gallery implements Shortcode {
 
+	/**
+	 * Render the [gallery] shortcode when placed in content areas.
+	 *
+	 * @filter post_gallery 10 3
+	 *
+	 * @param array $attr
+	 * @param int   $instance
+	 *
+	 * @return string
+	 */
 	public function render( array $attr, int $instance ): string {
 		$post = get_post();
 		$atts = shortcode_atts( [
