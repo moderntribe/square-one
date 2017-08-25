@@ -52,7 +52,7 @@ class Accordion extends Panel_Type_Config {
 			'strings' => [
 				'button.new'      => __( 'Add Accordion Row', 'tribe' ),
 				'button.delete'   => __( 'Delete Accordion Row', 'tribe' ),
-				'label.row_index' => _x( 'Accordion Row %{index} |||| Row %{index}', 'tribe' ),
+				'label.row_index' => __( 'Accordion Row %{index} |||| Accordion Row %{index}', 'tribe' ),
 			],
 		] );
 

@@ -49,7 +49,7 @@ class Testimonial extends Panel_Type_Config {
 			'max'              => 4,
 			'new_button_label' => __( 'Add Quote', 'tribe' ),
 			'strings'          => [
-				'label.row_index' => 'Quote %{index} |||| Quote %{index}',
+				'label.row_index' => __( 'Quote %{index} |||| Quote %{index}', 'tribe' ),
 				'button.delete'   => __( 'Delete Quote', 'tribe' ),
 			],
 		] );

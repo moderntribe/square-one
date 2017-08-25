@@ -37,7 +37,7 @@ class Wysiwyg extends Panel_Type_Config {
 			'max'              => 3,
 			'new_button_label' => __( 'Add Column', 'tribe' ),
 			'strings'          => [
-				'label.row_index' => 'Column %{index} |||| Column %{index}',
+				'label.row_index' => __( 'Column %{index} |||| Column %{index}', 'tribe' ),
 				'button.delete'   => __( 'Delete Column', 'tribe' ),
 			],
 		] );

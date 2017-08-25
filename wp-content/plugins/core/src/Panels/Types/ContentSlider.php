@@ -37,7 +37,7 @@ class ContentSlider extends Panel_Type_Config {
 			'max'              => 5,
 			'new_button_label' => __( 'Add Slide', 'tribe' ),
 			'strings'          => [
-				'label.row_index' => 'Slide %{index} |||| Slide %{index}',
+				'label.row_index' => __( 'Slide %{index} |||| Slide %{index}', 'tribe' ),
 				'button.delete'   => __( 'Delete Slide', 'tribe' ),
 			],
 		] );

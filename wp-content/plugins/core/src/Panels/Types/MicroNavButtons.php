@@ -34,7 +34,7 @@ class MicroNavButtons extends Panel_Type_Config {
 			'max'              => 4,
 			'new_button_label' => __( 'Add Item', 'tribe' ),
 			'strings'          => [
-				'label.row_index' => 'Item %{index} |||| Item %{index}',
+				'label.row_index' => __( 'Item %{index} |||| Item %{index}', 'tribe' ),
 				'button.delete'   => __( 'Delete Item', 'tribe' ),
 			],
 		] );
