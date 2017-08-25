@@ -51,4 +51,8 @@ class PostLoop extends Panel {
 
 		return $posts;
 	}
+
+	public static function instance() {
+		return tribe_project()->container()['twig.templates.content/panels/postloop'];
+	}
 }

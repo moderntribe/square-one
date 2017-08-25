@@ -112,4 +112,8 @@ class Interstitial extends Panel {
 
 		return implode( ' ', $classes );
 	}
+
+	public static function instance() {
+		return tribe_project()->container()['twig.templates.content/panels/interstitial'];
+	}
 }

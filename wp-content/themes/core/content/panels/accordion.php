@@ -1,5 +1,5 @@
 <?php
 
-$template = new \Tribe\Project\Templates\Content\Panels\Accordion( 'content/panels/accordion.twig' );
+$template = \Tribe\Project\Templates\Content\Panels\Accordion::instance();
 
 echo $template->render();

@@ -38,4 +38,8 @@ class Wysiwyg extends Panel {
 
 		return $columns;
 	}
+
+	public static function instance() {
+		return tribe_project()->container()['twig.templates.content/panels/wysiwyg'];
+	}
 }

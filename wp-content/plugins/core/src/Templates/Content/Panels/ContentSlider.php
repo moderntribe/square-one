@@ -45,7 +45,7 @@ class ContentSlider extends Panel {
 
 		if ( ! empty( $this->panel_vars[ ContentSliderPanel::FIELD_SLIDES ] ) ) {
 
-			foreach( $this->panel_vars[ ContentSliderPanel::FIELD_SLIDES ] as $slide ) {
+			foreach ( $this->panel_vars[ ContentSliderPanel::FIELD_SLIDES ] as $slide ) {
 
 				$slide_markup = '';
 
@@ -83,5 +83,9 @@ class ContentSlider extends Panel {
 		$classes = [ 'c-slider__main' ];
 
 		return $classes;
+	}
+
+	public static function instance() {
+		return tribe_project()->container()['twig.templates.content/panels/content-slider'];
 	}
 }

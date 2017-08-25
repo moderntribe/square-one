@@ -1,5 +1,5 @@
 <?php
 
-$template = new \Tribe\Project\Templates\Content\Panels\LogoFarm( 'content/panels/logofarm.twig' );
+$template = \Tribe\Project\Templates\Content\Panels\LogoFarm::instance();
 
 echo $template->render();

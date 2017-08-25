@@ -32,7 +32,7 @@ class CardGrid extends Panel {
 
 			$i = 0;
 
-			foreach( $this->panel_vars[ CardGridPanel::FIELD_CARDS ] as $card ) {
+			foreach ( $this->panel_vars[ CardGridPanel::FIELD_CARDS ] as $card ) {
 
 				$title_attrs       = [];
 				$description_attrs = [];
@@ -66,10 +66,14 @@ class CardGrid extends Panel {
 				$card_obj = Card::factory( $options );
 				$cards[]  = $card_obj->render();
 
-				$i++;
+				$i ++;
 			}
 		}
 
 		return $cards;
+	}
+
+	public static function instance() {
+		return tribe_project()->container()['twig.templates.content/panels/cardgrid'];
 	}
 }

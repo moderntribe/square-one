@@ -1,4 +1,4 @@
 <?php
-$template = new \Tribe\Project\Templates\Content\Panels\Wysiwyg( 'content/panels/wysiwyg.twig' );
+$template = \Tribe\Project\Templates\Content\Panels\Wysiwyg::instance();
 
 echo $template->render();

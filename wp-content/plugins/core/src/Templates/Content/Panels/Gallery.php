@@ -89,4 +89,8 @@ class Gallery extends Panel {
 
 		return $classes;
 	}
+
+	public static function instance() {
+		return tribe_project()->container()['twig.templates.content/panels/gallery'];
+	}
 }

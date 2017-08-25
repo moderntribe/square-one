@@ -1,5 +1,5 @@
 <?php
 
-$template = new \Tribe\Project\Templates\Content\Panels\PostLoop( 'content/panels/postloop.twig' );
+$template = \Tribe\Project\Templates\Content\Panels\PostLoop::instance();
 
 echo $template->render();

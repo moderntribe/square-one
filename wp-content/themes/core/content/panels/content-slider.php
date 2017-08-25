@@ -1,5 +1,5 @@
 <?php
 
-$template = new \Tribe\Project\Templates\Content\Panels\ContentSlider( 'content/panels/content-slider.twig' );
+$template = \Tribe\Project\Templates\Content\Panels\ContentSlider::instance();
 
 echo $template->render();

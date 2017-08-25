@@ -1,5 +1,5 @@
 <?php
 
-$template = new \Tribe\Project\Templates\Content\Panels\CardGrid( 'content/panels/cardgrid.twig' );
+$template = \Tribe\Project\Templates\Content\Panels\CardGrid::instance();
 
 echo $template->render();
