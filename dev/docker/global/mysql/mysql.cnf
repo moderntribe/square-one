@@ -14,3 +14,4 @@ skip-host-cache
 skip-name-resolve
 
 sql-mode=NO_AUTO_CREATE_USER
+show_compatibility_56=ON
