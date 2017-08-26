@@ -36,7 +36,7 @@ services:
     labels:
       - "traefik.enable=false"
     volumes:
-      - ~/mysql_data:/var/lib/mysql
+      - ${TRIBE_MYSQL_DATA_DIR:-~/mysql_data}:/var/lib/mysql
       - ./mysql/mysql.cnf:/etc/mysql/conf.d/mysql.cnf:ro
     environment:
       - MYSQL_ROOT_PASSWORD=password
