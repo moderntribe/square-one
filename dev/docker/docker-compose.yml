@@ -3,8 +3,6 @@ services:
 
     redis:
       image: redis:alpine
-      labels:
-        - "traefik.enable=false"
       networks:
         - proxy
 
@@ -19,8 +17,6 @@ services:
         - script.file=true
         - script.engine.mustache.inline.search=true
         - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-      labels:
-        - "traefik.enable=false"
       ulimits:
         memlock:
           soft: -1
@@ -38,8 +34,6 @@ services:
 
     memcached:
       image: memcached:alpine
-      labels:
-        - "traefik.enable=false"
       networks:
         - proxy
 
@@ -47,8 +41,6 @@ services:
       build:
         context: .
         dockerfile: phpdocker/php-fpm/Dockerfile
-      labels:
-        - "traefik.enable=false"
       working_dir: /application
       networks:
         - proxy
@@ -70,9 +62,6 @@ services:
       working_dir: /application
       environment:
         - VIRTUAL_HOST=square1.tribe,*.square1.tribe
-      labels:
-        - "traefik.frontend.rule=Host:square1.tribe"
-        - "traefik.docker.network=proxy"
       volumes:
         - ../..:/application/www:cached
         - ./phpdocker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf

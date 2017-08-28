@@ -6,9 +6,7 @@ services:
     image: andyshinn/dnsmasq:latest
     container_name: tribe-dns-external
     command: --log-facility=/proc/self/fd/2  --no-resolv --server=8.8.8.8 --address=/tribe/127.0.0.1
-    labels:
-      - "traefik.enable=false"
-    cap_add:  
+    cap_add:
       - NET_ADMIN
     ports:
       - "53:53/udp"
@@ -19,9 +17,7 @@ services:
     image: andyshinn/dnsmasq:latest
     container_name: tribe-dns-internal
     command:  --log-facility=/proc/self/fd/2 --no-resolv --server=8.8.8.8 --address=/tribe/172.20.10.100 --address=/mysql.tribe/172.20.10.200 --address=/mailhog.tribe/172.20.10.90 --address=/smtp.tribe/172.20.10.90 --address=/host.tribe/${HOSTIP:-172.20.10.1}
-    labels:
-      - "traefik.enable=false"
-    cap_add:  
+    cap_add:
       - NET_ADMIN
     ports:
       - "53/udp"
@@ -33,8 +29,6 @@ services:
   mysql:
     image: mysql:5.7
     container_name: tribe-mysql
-    labels:
-      - "traefik.enable=false"
     volumes:
       - ${TRIBE_MYSQL_DATA_DIR:-~/mysql_data}:/var/lib/mysql
       - ./mysql/mysql.cnf:/etc/mysql/conf.d/mysql.cnf:ro
@@ -65,10 +59,6 @@ services:
   mailhog:
     image: mailhog/mailhog:latest
     container_name: tribe-mail
-    labels:
-      - "traefik.frontend.rule=Host:mailhog.tribe"
-      - "traefik.docker.network=proxy"
-      - "traefik.port=8025"
     networks:
       proxy:
         ipv4_address: 172.20.10.90
