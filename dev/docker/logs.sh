@@ -6,4 +6,12 @@ cd "$SCRIPTDIR"
 
 PROJECT_ID=$(cat ./.projectID)
 
-docker-compose --project-name=${PROJECT_ID} logs --follow
+if [[ "$OSTYPE" == "darwin"* ]]; then
+	DC_COMMAND="docker-compose"
+elif [[ $(which docker.exe) ]]; then
+	DC_COMMAND="docker-compose.exe"
+else
+	DC_COMMAND="docker-compose"
+fi;
+
+${DC_COMMAND} --project-name=${PROJECT_ID} logs --follow
