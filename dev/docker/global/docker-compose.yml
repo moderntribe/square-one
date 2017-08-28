@@ -59,6 +59,9 @@ services:
   mailhog:
     image: mailhog/mailhog:latest
     container_name: tribe-mail
+    environment:
+      - VIRTUAL_HOST=mailhog.tribe
+      - VIRTUAL_PORT=8025
     networks:
       proxy:
         ipv4_address: 172.20.10.90
