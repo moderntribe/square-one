@@ -7,4 +7,14 @@ cd "$SCRIPTDIR"
 PROJECT_ID=$(cat ./.projectID)
 
 echo "Starting docker-compose project: ${PROJECT_ID}"
-docker-compose --project-name=${PROJECT_ID} up -d
+
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+	DC_COMMAND="docker-compose"
+elif [[ $(which docker.exe) ]]; then
+	DC_COMMAND="docker-compose.exe"
+else
+	DC_COMMAND="docker-compose"
+fi;
+
+${DC_COMMAND} --project-name=${PROJECT_ID} up -d
