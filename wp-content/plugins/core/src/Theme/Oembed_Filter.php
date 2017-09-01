@@ -24,14 +24,14 @@ class Oembed_Filter {
 		 */
 		$cache = tribe_project()->container()['cache'];
 
-		$figure_classes = [ 'video__embed', 'wp-embed-lazy' ];
+		$container_classes = [ 'c-video--lazy' ];
 
 		if ( $data->provider_name === 'YouTube' ) {
 			$embed_id    = $this->get_youtube_embed_id( $url );
 			$video_thumb = $this->get_youtube_max_resolution_thumbnail( $url );
 
 			if ( strpos( $video_thumb, 'maxresdefault' ) === false ) {
-				$figure_classes[] = 'wp-embed-lazy--low-res';
+				$container_classes[] = 'c-video--lazy-low-res';
 			}
 
 		} else {
@@ -40,11 +40,12 @@ class Oembed_Filter {
 		}
 
 		$options = [
-			Video::THUMBNAIL_URL   => $video_thumb,
-			Video::CONTAINER_ATTRS => $this->get_layout_container_attrs( $data->provider_name, $embed_id ),
-			Video::FIGURE_CLASSES  => $figure_classes,
-			Video::TITLE           => $data->title,
-			Video::VIDEO_URL       => $url,
+			Video::THUMBNAIL_URL     => $video_thumb,
+			Video::CONTAINER_ATTRS   => $this->get_layout_container_attrs( $data->provider_name, $embed_id ),
+			Video::CONTAINER_CLASSES => $container_classes,
+			Video::TITLE             => __( 'Play Video', 'tribe' ),
+			Video::VIDEO_URL         => $url,
+			Video::PLAY_TEXT         => $data->title,
 		];
 
 		$video_obj = Video::factory( $options );
@@ -57,7 +58,7 @@ class Oembed_Filter {
 
 	private function get_layout_container_attrs( $provider_name, $embed_id ): array {
 		return [
-			'data-js'             => 'video',
+			'data-js'             => 'c-video',
 			'data-embed-id'       => $embed_id,
 			'data-embed-provider' => $provider_name,
 		];

@@ -41,9 +41,9 @@ const setupOembeds = () => {
 
 		// Set display mode of embeds for small vs. regular
 		if (embed.offsetWidth >= 500) {
-			embed.classList.remove('wp-embed-lazy--small');
+			embed.classList.remove('c-video--is-small');
 		} else {
-			embed.classList.add('wp-embed-lazy--small');
+			embed.classList.add('c-video--is-small');
 		}
 	});
 };
@@ -54,20 +54,21 @@ const setupOembeds = () => {
  */
 
 const resetEmbed = () => {
-	const embed = document.getElementsByClassName('wp-embed-lazy--is-playing')[0];
+	const embed = document.getElementsByClassName('c-video--is-playing')[0];
 	if (!embed) {
 		return;
 	}
 
-	const trigger = embed.querySelector('.wp-embed-lazy__trigger');
+	const trigger = embed.querySelector('.c-video__trigger');
+	const parent = embed.querySelector('.c-video__embed');
 	const iframe = embed.querySelector('iframe');
 	if (!iframe || !trigger) {
 		return;
 	}
 
 	// Remove embed
-	embed.removeChild(iframe);
-	embed.classList.remove('wp-embed-lazy--is-playing');
+	parent.removeChild(iframe);
+	embed.classList.remove('c-video--is-playing');
 
 	// Fade in image/caption
 	trigger.classList.remove('u-hidden');
@@ -82,14 +83,14 @@ const playEmbed = (e) => {
 	e.preventDefault();
 
 	// Reset embed if another is playing
-	if (document.getElementsByClassName('wp-embed-lazy--is-playing').length) {
+	if (document.getElementsByClassName('c-video--is-playing').length) {
 		resetEmbed();
 	}
 
 	const target = e.delegateTarget;
-	const parent = tools.closest(target, '.wp-embed-lazy');
-	const videoId = target.getAttribute('data-embed-id');
-	const iframeUrl = (parent.getAttribute('data-embed-provider') === 'youtube') ? `https://www.youtube.com/embed/${videoId}?autoplay=1&autohide=1&fs=1&modestbranding=1&showinfo=0&controls=2&autoplay=1&rel=0&theme=light&vq=hd720` : `//player.vimeo.com/video/${videoId}?autoplay=1`;
+	const parent = tools.closest(target, '.c-video');
+	const videoId = parent.getAttribute('data-embed-id');
+	const iframeUrl = (parent.getAttribute('data-embed-provider') === 'YouTube') ? `https://www.youtube.com/embed/${videoId}?autoplay=1&autohide=1&fs=1&modestbranding=1&showinfo=0&controls=2&autoplay=1&rel=0&theme=light&vq=hd720` : `//player.vimeo.com/video/${videoId}?autoplay=1`;
 	const iframe = document.createElement('iframe');
 	iframe.id = videoId;
 	iframe.frameBorder = 0;
@@ -99,7 +100,7 @@ const playEmbed = (e) => {
 	iframe.tabIndex = 0;
 
 	// Add & kickoff embed
-	parent.classList.add('wp-embed-lazy--is-playing');
+	parent.classList.add('c-video--is-playing');
 	tools.insertBefore(iframe, target);
 	iframe.focus();
 
@@ -127,7 +128,7 @@ const cacheElements = () => {
 	if (!el.embeds) {
 		return;
 	}
-	el.embeds = tools.getNodes('lazyload-embed', true, el.container);
+	el.embeds = tools.getNodes('c-video', true, el.container);
 };
 
 /**
@@ -136,7 +137,7 @@ const cacheElements = () => {
  */
 
 const bindEvents = () => {
-	delegate(el.container, '[data-js="lazyload-trigger"]', 'click', playEmbed);
+	delegate(el.container, '[data-js="c-video-trigger"]', 'click', playEmbed);
 
 	on(document, 'modern_tribe/resize_executed', executeResize);
 };

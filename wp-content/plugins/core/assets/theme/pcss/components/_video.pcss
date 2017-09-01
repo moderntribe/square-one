@@ -5,5 +5,209 @@
  * ----------------------------------------------------------------------------- */
 
 .c-video {
+	break-inside: avoid-column;
+
+	&.c-video--lazy {
+
+	}
+
+	.t-content & {
+		margin: var(--spacer-lg) auto;
+		max-width: none;
+	}
+
+	br,
+	p {
+		display: none;
+	}
+}
+
+.c-video__wrapper {
+	position: relative;
+	aspect-ratio: '16:9';
+	overflow: hidden;
+
+	iframe,
+	object,
+	embed {
+		width: 100%;
+		height: 100%;
+	}
+}
+
+.c-video__embed {
+	background: var(--embed-bgd-color);
+}
+
+.c-video__trigger {
+	display: block;
+	height: 100%;
+	transition: var(--transition);
+
+	&:hover,
+	&:focus {
+
+		.c-video__icon {
+			border-color: var(--embed-icon-border-hover);
+
+			&:before {
+				transform: scale(0.65);
+			}
+		}
+	}
+
+	&:focus {
+
+		&:after {
+			height: 5px;
+			width: 100%;
+			left: 0;
+			bottom: 0;
+			content: '';
+			position: absolute;
+			background: var(--embed-color-focus);
+		}
+	}
+
+	.c-video--is-playing & {
+		opacity: 0;
+		transition: opacity 0.25s ease-out;
+	}
+}
+
+.c-video__image {
+	margin: 0;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	&.lazyload,
+	&.lazyloading {
+
+	}
+
+	&.lazyloaded {
+
+	}
+
+	.c-video--lazy-low-res & {
+		margin-top: -9.4%;
+	}
+}
+
+.c-video__caption {
+
+
+	.lazyloaded ~ & {
+
+	}
+
+	.c-video--is-small & {
+
+	}
+}
+
+.c-video__icon {
 
 }
+
+.c-video__trigger-label {
+
+
+	.c-video--is-small & {
+		display: none;
+	}
+}
+
+
+/*
+TODO - We need some default embed styles, ported these over, but not sure
+.wp-embed-lazy__trigger-label {
+	display: block;
+	font-weight: var(--font-weight-bold);
+	text-transform: uppercase;
+	letter-spacing: 0.02em;
+	color: var(--embed-prompt);
+	font-size: 14px;
+
+	.wp-embed-lazy--small & {
+		color: var(--embed-prompt-mobile);
+		width: 100%;
+		bottom: 15%;
+		position: absolute;
+		text-align: center;
+	}
+}
+
+.wp-embed-lazy__caption {
+	opacity: 0;
+	transition: opacity 0.15s ease-in;
+	position: absolute;
+	left: 25px;
+	bottom: 20px;
+	background: var(--embed-caption-bgd-color);
+	border: 1px solid var(--embed-caption-border);
+	color: var(--embed-caption-color);
+	padding: 20px 25px 20px 75px;
+	max-width: 90%;
+
+	@media (--viewport-medium) {
+		left: 20px;
+	}
+
+	.lazyloaded ~ & {
+		opacity: 1;
+		transition: opacity 250ms 300ms ease-in;
+	}
+
+	.wp-embed-lazy--small & {
+		background: var(--embed-caption-bgd-color-mobile);
+		border: 0;
+		padding: 0;
+		width: 100%;
+		height: 100%;
+		max-width: 100%;
+		left: 0;
+		bottom: 0;
+	}
+}
+
+.wp-embed-lazy__icon {
+	position: absolute;
+	font-size: 44px;
+	left: 15px;
+	top: 50%;
+	margin-top: -24px;
+	transition: opacity 0.15s ease-in-out, border 0.425s;
+	border: 2px solid var(--embed-icon-border);
+	border-radius: 50%;
+
+	&:before {
+		display: inline-block;
+		position: relative;
+		left: 3px;
+		top: 1px;
+		transition: opacity 0.15s ease-in-out, transform 0.425s;
+	}
+
+	.wp-embed-lazy--small & {
+		left: 50%;
+		margin-left: -26px;
+	}
+}
+
+.wp-embed-lazy__title {
+	font-size: 18px;
+	letter-spacing: 0.02em;
+	display: block;
+	margin-top: 6px;
+	padding-top: 5px;
+	border-top: 1px solid var(--embed-caption-border);
+
+	.wp-embed-lazy--small & {
+		display: none;
+	}
+}
+ */

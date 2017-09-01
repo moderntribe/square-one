@@ -37,7 +37,7 @@ class Editor_Formats {
 			[
 				'title'    => __( 'Button', 'tribe' ),
 				'selector' => 'a',
-				'classes'  => 'btn',
+				'classes'  => 'c-btn',
 				'wrapper'  => false,
 			],
 			/* Example multi-level format */
