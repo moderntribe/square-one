@@ -124,7 +124,7 @@ class P2P_Provider implements ServiceProviderInterface {
 			}, 10, 0 );
 
 			add_filter( 'p2p_connectable_args', function ( $query_vars, $connection, $post ) use ( $container, $relationship ) {
-				$container[ 'p2p.admin_search_filtering.' . $relationship ]->filter_connectable_query_args( $query_vars, $connection, $post );
+				return $container[ 'p2p.admin_search_filtering.' . $relationship ]->filter_connectable_query_args( $query_vars, $connection, $post );
 			}, 10, 3 );
 		}
 
