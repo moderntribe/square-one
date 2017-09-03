@@ -47,7 +47,7 @@ class Editor_Formats {
 					[
 						'title'    => __( 'CTA Link', 'tribe' ),
 						'selector' => 'a',
-						'classes'  => 'cta',
+						'classes'  => 'c-btn-text',
 						'wrapper'  => false,
 					],
 					[

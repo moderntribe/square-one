@@ -2,6 +2,7 @@
  * Media: Audio (!importants needed to override js sizing)
  * ----------------------------------------------------------------------------- */
 
+.wp-playlist.wp-audio-playlist .mejs-container,
 .wp-audio-shortcode.mejs-container {
 	background: transparent;
 	height: 34px !important;
@@ -13,7 +14,6 @@
 	.mejs-inner,
 	.mejs-mediaelement,
 	.mejs-controls {
-		max-width: 480px;
 		background: var(--audio-bg);
 	}
 
@@ -169,5 +169,16 @@
 	.mejs-duration {
 		font-size: 11px;
 		letter-spacing: 0.075em;
+	}
+}
+
+.wp-audio-shortcode.mejs-container {
+	margin-top: var(--spacer-lg);
+	margin-bottom: var(--spacer-lg);
+
+	.mejs-inner,
+	.mejs-mediaelement,
+	.mejs-controls {
+		max-width: 480px;
 	}
 }

@@ -2,16 +2,10 @@
  * Media: Playlists
  * ----------------------------------------------------------------------------- */
 
-/*
 .wp-playlist {
-	border: 1px solid var(--color-storm-grey);
-	margin-top: 30px;
-	margin-bottom: 30px;
-
-	@media (--viewport-medium) {
-		margin-top: 48px;
-		margin-bottom: 48px;
-	}
+	border: 1px solid var(--color-border);
+	margin-top: var(--spacer-lg);
+	margin-bottom: var(--spacer-lg);
 
 	.wp-playlist-tracks {
 		margin-top: 2px;
@@ -24,14 +18,14 @@
 	&:focus {
 
 		.mejs-overlay-button {
-			background-color: var(--color-denim);
+			background-color: var(--color-secondary);
 			transform: translate(-50%, -50%) scale(1.1);
 		}
 	}
 }
 
 .mejs-overlay-button {
-	font-size: 28px;
+	font-size: 36px;
 	border-radius: var(--border-radius-round);
 	background: var(--color-primary);
 	width: 70px;
@@ -43,10 +37,10 @@
 	position: relative;
 	top: 50%;
 	transform: translate(-50%, -50%);
-	transition: background-color 0.2s, transform 0.2s ease;
+	transition: var(--transition-wp-playlist-icon);
 
 	@media (--viewport-full) {
-		font-size: 38px;
+		font-size: 60px;
 		width: 100px;
 		height: 100px;
 	}
@@ -78,12 +72,7 @@
 	}
 
 	a {
-		@mixin anchor-styled-reset;
-
-		&:hover,
-		&:focus {
-			color: var(--color-link);
-		}
+		text-decoration: none;
+		border-bottom: none;
 	}
 }
-*/
