@@ -19,7 +19,7 @@ use Tribe\Project\Service_Providers\Taxonomies\Category_Service_Provider;
 use Tribe\Project\Service_Providers\Taxonomies\Example_Taxonomy_Service_Provider;
 use Tribe\Project\Service_Providers\Taxonomies\Post_Tag_Service_Provider;
 use Tribe\Project\Service_Providers\Theme_Customizer_Provider;
-use Tribe\Project\Service_Providers\Global_Service_Provider;
+use Tribe\Project\Service_Providers\P2P_Provider;
 use Tribe\Project\Service_Providers\Theme_Provider;
 use Tribe\Project\Service_Providers\Settings_Provider;
 use Tribe\Project\Service_Providers\Twig_Service_Provider;
@@ -61,7 +61,7 @@ class Core {
 		$this->container->register( new Theme_Provider() );
 		$this->container->register( new Theme_Customizer_Provider() );
 		$this->container->register( new Panels_Provider() );
-		$this->container->register( new Global_Service_Provider() );
+		$this->container->register( new P2P_Provider() );
 		$this->container->register( new Nav_Menu_Provider() );
 		$this->container->register( new Settings_Provider() );
 		$this->container->register( new Util_Provider() );
