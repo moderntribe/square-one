@@ -41,12 +41,6 @@ class Oembed_Filter {
 			return $html;
 		}
 
-		// Return the normal iframe markup if we're renewing the admin cache of the oembed.
-		if ( apply_filters( 'is_oembed_cache', false ) ) {
-			add_filter( 'is_oembed_cache', '__return_false' );
-			return $html;
-		}
-
 		$container_classes = [ 'c-video--lazy' ];
 
 		if ( $data->provider_name === 'YouTube' ) {
@@ -71,10 +65,10 @@ class Oembed_Filter {
 			Video::PLAY_TEXT         => $data->title,
 		];
 
-		$video_obj = Video::factory( $options );
-		$html      = $video_obj->render();
+		$video_obj     = Video::factory( $options );
+		$frontend_html = $video_obj->render();
 
-		$this->cache_frontend_html( $html, $url );
+		$this->cache_frontend_html( $frontend_html, $url );
 
 		return $html;
 	}
@@ -100,13 +94,13 @@ class Oembed_Filter {
 
 		$cached = get_option( $this->get_cache_key( $url ), '' );
 
+		// If cache is empty, try generating new HTML.
 		if ( empty( $cached ) ) {
-			$fresh = $this->get_fresh_frontend_html( $html, $url, $attr );
-			$this->cache_frontend_html( $fresh, $url );
-			return $fresh;
+			$this->get_fresh_frontend_html( $html, $url, $attr );
+			$cached = get_option( $this->get_cache_key( $url ), '' );
 		}
 
-		return $cached;
+		return empty( $cached ) ? $html : $cached;
 	}
 
 
