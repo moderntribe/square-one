@@ -123,6 +123,10 @@ class Theme_Provider implements ServiceProviderInterface {
 		add_filter( 'embed_oembed_html', function ( $html, $url, $attr, $post_id ) use ( $container ) {
 			return $container[ 'theme.oembed' ]->filter_frontend_html_from_cache( $html, $url, $attr, $post_id );
 		}, 1, 4 );
+
+		add_filter( 'embed_oembed_html', function ( $html, $url, $attr, $post_id ) use ( $container ) {
+			return $container[ 'theme.oembed' ]->wrap_admin_oembed( $html, $url, $attr, $post_id );
+		}, 99, 4 );
 	}
 
 	private function supports( Container $container ) {

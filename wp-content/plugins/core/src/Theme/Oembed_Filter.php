@@ -83,6 +83,18 @@ class Oembed_Filter {
 	}
 
 	/**
+	 * Add wrapper around embeds for admin visual editor styling
+	 * @filter embed_oembed_html 99
+	 */
+	public function wrap_admin_oembed( $html, $url, $attr, $post_id ) {
+		if ( ! is_admin() ) {
+			return $html;
+		}
+
+		return sprintf( '<div class="wp-embed"><div class="wp-embed-wrap">%s</div></div>', $html );
+	}
+
+	/**
 	 * Get the highest resolution thumbnail we can get for
 	 * a YouTube video
 	 *
