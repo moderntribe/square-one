@@ -35,14 +35,6 @@ final class Global_Service_Provider extends Tribe_Service_Provider {
 		],
 	];
 
-	protected $panels = [
-		'ContentGrid',
-		'Gallery',
-		'ImageText',
-		'MicroNav',
-		'Wysiwyg',
-	];
-
 	public function register( Container $container ) {
 		parent::register( $container );
 	}

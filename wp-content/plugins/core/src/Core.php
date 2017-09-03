@@ -8,7 +8,7 @@ use Tribe\Project\Service_Providers\Asset_Provider;
 use Tribe\Project\Service_Providers\Cache_Provider;
 use Tribe\Project\Service_Providers\Object_Meta_Provider;
 use Tribe\Project\Service_Providers\Nav_Menu_Provider;
-use Tribe\Project\Service_Providers\Panel_Intializer_Provider;
+use Tribe\Project\Service_Providers\Panels_Provider;
 use Tribe\Project\Service_Providers\Post_Types\Event_Service_Provider;
 use Tribe\Project\Service_Providers\Post_Types\Organizer_Service_Provider;
 use Tribe\Project\Service_Providers\Post_Types\Page_Service_Provider;
@@ -60,7 +60,7 @@ class Core {
 		$this->container->register( new Cache_Provider() );
 		$this->container->register( new Theme_Provider() );
 		$this->container->register( new Theme_Customizer_Provider() );
-		$this->container->register( new Panel_Intializer_Provider() );
+		$this->container->register( new Panels_Provider() );
 		$this->container->register( new Global_Service_Provider() );
 		$this->container->register( new Nav_Menu_Provider() );
 		$this->container->register( new Settings_Provider() );

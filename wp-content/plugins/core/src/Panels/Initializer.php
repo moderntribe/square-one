@@ -9,6 +9,7 @@ use ModularContent\PanelType;
 use Tribe\Project\Panels\Types\Panel_Type_Config;
 use Tribe\Project\Post_Types\Event\Event;
 use Tribe\Project\Post_Types\Page\Page;
+use Tribe\Project\Taxonomies\Category\Category;
 
 class Initializer {
 	private $panel_types_to_initialize = [ ];
@@ -23,17 +24,15 @@ class Initializer {
 		$this->plugin_file = $plugin_file;
 	}
 
-	public function add_panel_config( $panel_type ) {
-		$this->panel_types_to_initialize[] = $panel_type;
+	public function add_panel_config( $classname ) {
+		$this->panel_types_to_initialize[] = $classname;
 	}
 
 	/**
 	 * @return void
-	 * @action plugins_loaded
+	 * @action plugins_loaded 9
 	 */
-	public function hook() {
-		add_action( 'panels_init', [ $this, 'initialize_panels' ], 10, 0 );
-
+	public function set_labels() {
 		// these have to register early (before plugins_loaded:10)
 		add_filter( 'modular_content_singular_label', function () {
 			return __( 'Panel', 'tribe' );
@@ -41,12 +40,16 @@ class Initializer {
 		add_filter( 'modular_content_plural_label', function () {
 			return __( 'Panels', 'tribe' );
 		} );
-
-		add_filter( 'panels_js_config', [ $this, 'modify_js_config' ] );
 	}
 
-	public function initialize_panels() {
-		\ModularContent\Plugin::instance()->do_not_filter_the_content();
+	/**
+	 * @param \ModularContent\Plugin $plugin
+	 *
+	 * @return void
+	 * @action panels_init
+	 */
+	public function initialize_panels( \ModularContent\Plugin $plugin ) {
+		$plugin->do_not_filter_the_content();
 
 		$this->set_supported_post_types();
 		$this->set_view_directories();
@@ -60,19 +63,7 @@ class Initializer {
 		add_filter( 'panels_input_query_filter', [ $this, 'set_order_for_queries' ], 10, 3 );
 		add_filter( 'panels_input_query_filter', [ $this, 'rewrite_date_query_for_events' ], 10, 3 );
 
-		$this->register_panels( \ModularContent\Plugin::instance()->registry() );
-	}
-
-	/**
-	 * Modify the scroll offset for the iframe to the themes needs (fixed nav)
-	 *
-	 * @param array $data Any js config data from the plugin
-	 *
-	 * @return array
-	 */
-	public function modify_js_config( $data = [] ) {
-		$data['iframe_scroll_offset'] = 120;
-		return $data;
+		$this->register_panels( $plugin->registry() );
 	}
 
 	/**
@@ -107,9 +98,8 @@ class Initializer {
 	 */
 	private function register_panels( $registry ) {
 		foreach ( $this->panel_types_to_initialize as $class ) {
-			$classname = '\\Tribe\\Project\\Panels\\Types\\' . $class;
 			/** @var Panel_Type_Config $panel_type */
-			$panel_type = new $classname( $this );
+			$panel_type = new $class( $this );
 			if ( $panel_type instanceof Panel_Type_Config ) {
 				$panel_type->register( $registry, $this->ViewFinder );
 			}
@@ -124,7 +114,7 @@ class Initializer {
 	 */
 	public function factory( $panel_type_id, $helper_text = '' ) {
 		if ( $helper_text ) {
-			$helper_field = $this->field( 'HTML', [
+			$helper_field = new Fields\HTML( [
 				'name'        => 'panel-helper',
 				'label'       => '',
 				'description' => $helper_text,
@@ -142,26 +132,6 @@ class Initializer {
 		return $panel;
 	}
 
-	/**
-	 * @param $type
-	 * @param $args
-	 *
-	 * @return \ModularContent\Fields\Field
-	 */
-	public function field( $type, $args = [ ] ) {
-		$overrides = 'Tribe\\Project\\Panels\\Fields\\' . $type;
-		$base = 'ModularContent\\Fields\\' . $type;
-
-		if ( class_exists( $overrides ) ) {
-			$object = new $overrides( $args );
-		} else {
-			$object = new $base( $args );
-		}
-
-		return $object;
-	}
-
-
 	public function add_post_type_options_for_queries( $post_types ) {
 		$post_types[ Event::NAME ] = get_post_type_object( Event::NAME );
 		$post_types[ Page::NAME ] = get_post_type_object( Page::NAME );
@@ -170,7 +140,7 @@ class Initializer {
 	}
 
 	public function set_available_query_taxonomies( $taxonomies ) {
-		$taxonomies[] = 'category';
+		$taxonomies[] = Category::NAME;
 		$taxonomies = array_unique( $taxonomies );
 		sort( $taxonomies );
 
@@ -290,5 +260,17 @@ class Initializer {
 
 	public function swatch_icon_url( $filename ) {
 		return plugins_url( 'assets/admin/panels/icons/swatches/' . $filename, $this->plugin_file );
+	}
+
+	/**
+	 * @param string $hook_suffix
+	 *
+	 * @return void
+	 * @action admin_enqueue_scripts
+	 */
+	public function enqueue_admin_css( $hook_suffix ) {
+		if ( $hook_suffix === 'post.php' || $hook_suffix === 'post-new.php' ) {
+			wp_enqueue_style( 'core-panels-admin', plugins_url( 'assets/admin/panels/panels.css', $this->plugin_file ), [], tribe_get_version() );
+		}
 	}
 }

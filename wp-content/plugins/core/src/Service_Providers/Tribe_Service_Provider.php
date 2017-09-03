@@ -16,16 +16,9 @@ abstract class Tribe_Service_Provider implements ServiceProviderInterface {
 	 *            and "to", each containing an array of Post Type classes
 	 */
 	protected $p2p_relationships = [ ];
-	/**
-	 * @var array Class names of panel configs to register.
-	 *            Classes should be in the namespace
-	 *            \Tribe\Project\Panels\Types
-	 */
-	protected $panels = [ ];
 
 	public function register( Container $container ) {
 		$this->p2p( $container );
-		$this->panels( $container );
 	}
 
 	protected function p2p( Container $container ) {
@@ -41,14 +34,6 @@ abstract class Tribe_Service_Provider implements ServiceProviderInterface {
 				$container[ 'p2p.' . $relationship ]->hook();
 			}, 10, 0 );
 		}
-	}
-
-	protected function panels( Container $container ) {
-		add_action( 'init', function() use ( $container ) {
-			foreach ( $this->panels as $panel ) {
-				$container[ 'panels.init' ]->add_panel_config( $panel );
-			}
-		}, 10, 0 );
 	}
 
 	protected function post_type_is_user( $side ) {
