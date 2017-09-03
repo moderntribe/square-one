@@ -18,11 +18,34 @@ class Oembed_Filter {
 		$this->supported_providers = $supported_providers;
 	}
 
+	/**
+	 * Get custom video component markup.
+	 *
+	 * @param $html
+	 * @param $data
+	 * @param $url
+	 *
+	 * @filter oembed_dataparse 999 3
+	 *
+	 * @return string
+	 */
 	public function get_video_component( $html, $data, $url ) {
-		/**
-		 * @var $cache Cache
-		 */
-		$cache = tribe_project()->container()['cache'];
+
+		// Admin should not get custom markup.
+		if ( is_admin() ) {
+			return $html;
+		}
+
+		// Only generate markup for supported providers.
+		if ( ! in_array( $data->provider_name, $this->supported_providers ) ) {
+			return $html;
+		}
+
+		// Return the normal iframe markup if we're renewing the admin cache of the oembed.
+		if ( apply_filters( 'is_oembed_cache', false ) ) {
+			add_filter( 'is_oembed_cache', '__return_false' );
+			return $html;
+		}
 
 		$container_classes = [ 'c-video--lazy' ];
 
@@ -51,7 +74,7 @@ class Oembed_Filter {
 		$video_obj = Video::factory( $options );
 		$html      = $video_obj->render();
 
-		$cache->set( $url, $html, 'video_data_objects' );
+		$this->cache_frontend_html( $html, $url );
 
 		return $html;
 	}
@@ -75,15 +98,42 @@ class Oembed_Filter {
 			return $html;
 		}
 
-		$cache = tribe_project()->container()['cache'];
+		$cached = get_option( $this->get_cache_key( $url ), '' );
 
-		$cached = $cache->get( $url, 'video_data_objects' );
+		if ( empty( $cached ) ) {
+			$fresh = $this->get_fresh_frontend_html( $html, $url, $attr );
+			$this->cache_frontend_html( $fresh, $url );
+			return $fresh;
+		}
 
-		return empty( $cached ) ? $html : $cached;
+		return $cached;
+	}
+
+
+	/**
+	 * Get a fresh copy of our custom markup if our cache doesn't exist.
+	 *
+	 * @param $html
+	 * @param $url
+	 * @param $attr
+	 *
+	 * @return string
+	 */
+	protected function get_fresh_frontend_html( $html, $url, $attr ) {
+
+		/**
+		 * @var \WP_oEmbed $oembed.
+		 */
+		$oembed   = _wp_oembed_get_object();
+		$provider = $oembed->get_provider( $url, $attr );
+		$data     = $oembed->fetch( $provider, $url, $attr );
+
+		return $this->get_video_component( $html, $data, $url );
 	}
 
 	/**
 	 * Add wrapper around embeds for admin visual editor styling
+	 *
 	 * @filter embed_oembed_html 99
 	 */
 	public function wrap_admin_oembed( $html, $url, $attr, $post_id ) {

@@ -127,6 +127,17 @@ class Theme_Provider implements ServiceProviderInterface {
 		add_filter( 'embed_oembed_html', function ( $html, $url, $attr, $post_id ) use ( $container ) {
 			return $container[ 'theme.oembed' ]->wrap_admin_oembed( $html, $url, $attr, $post_id );
 		}, 99, 4 );
+
+		// If we're grabbing the oembed for admin caching, note that so we don't save our custom markup.
+		add_filter( 'pre_oembed_result', function( $html, $url, $args ) {
+			if ( is_admin() ) {
+				return $html;
+			}
+
+			add_filter( 'is_oembed_cache', '__return_true' );
+
+			return $html;
+		}, 10, 3 );
 	}
 
 	private function supports( Container $container ) {
