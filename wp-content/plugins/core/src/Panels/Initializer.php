@@ -67,6 +67,20 @@ class Initializer {
 	}
 
 	/**
+	 * Modify the scroll offset for the iframe to the themes needs (fixed nav)
+	 *
+	 * @param array $data Any js config data from the plugin
+	 *
+	 * @return array
+	 *
+	 * @filter panels_js_config
+	 */
+	public function modify_js_config( $data = [] ) {
+		$data['iframe_scroll_offset'] = 120;
+		return $data;
+	}
+
+	/**
 	 * Set default post types that support panels. Additional
 	 * post types can be added here, or when registering the
 	 * post type.

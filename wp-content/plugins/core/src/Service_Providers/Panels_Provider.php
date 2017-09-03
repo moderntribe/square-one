@@ -44,5 +44,9 @@ class Panels_Provider implements ServiceProviderInterface {
 		add_action( 'admin_enqueue_scripts', function ( $hook_suffix ) use ( $container ) {
 			$container[ 'panels.init' ]->enqueue_admin_css( $hook_suffix );
 		}, 10, 1 );
+
+		add_filter( 'panels_js_config', function( $data ) use ( $container ) {
+			return $container[ 'panels.init' ]->modify_js_config( $data );
+		}, 10, 1 );
 	}
 }
