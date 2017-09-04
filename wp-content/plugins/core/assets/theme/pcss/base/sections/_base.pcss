@@ -4,16 +4,16 @@
  *
  * Example Markup:
  *
- * <div class="site-section">
- *		<div class="l-wrapper">
- *			<header class="site-section__header">
+ * <div class="s-wrapper">
+ *		<div class="l-container">
+ *			<header class="s-header">
  *				<h2 class="site-section__title">Site Section</h2>
- *				<p class="site-section__desc">Site Section Description</p>
+ *				<p class="s-desc">Site Section Description</p>
  *			</header>
- *			<div class="site-section__content">
+ *			<div class="s-content">
  *				<p>Grid layout or single component goes here.</p>
  *			</div>
- *			<footer class="site-section__footer">
+ *			<footer class="s-footer">
  *				<a href="#" class="btn">CTA Button</a>
  *			</footer>
  *		</div>
@@ -21,16 +21,14 @@
  *
  * ----------------------------------------------------------------------------- */
 
-.site-section {
+.s-wrapper {
 	position: relative;
 	width: 100%;
-}
-
-.site-section__inner {
-	padding-bottom: var(--spacer-lg);
 	padding-top: var(--spacer-lg);
+	padding-bottom: var(--spacer-lg);
 }
 
-.site-section__inner--no-padding {
-	padding: 0;
+.s-wrapper--no-padding {
+	padding-top: 0;
+	padding-bottom: 0;
 }

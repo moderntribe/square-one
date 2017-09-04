@@ -75,13 +75,11 @@ A gallery panel twig file, being passed the 'slider' var that was assembled by t
 
 {% block content %}
 
-	<div class="site-section__content">
-		<div class="site-grid">
-			<div class="site-grid__wrapper">
+	<div class="s-content">
+		<div class="g-row">
 
-				{{ slider }}
+			{{ slider }}
 
-			</div>
 		</div>
 	</div>
 

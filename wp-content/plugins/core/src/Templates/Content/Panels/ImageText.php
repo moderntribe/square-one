@@ -90,7 +90,7 @@ class ImageText extends Panel {
 		$classes = [];
 
 		if ( ImageTextPanel::FIELD_LAYOUT_OPTION_IMAGE_RIGHT === $this->panel_vars[ ImageTextPanel::FIELD_LAYOUT ] ) {
-			$classes[] = 'site-grid--reorder-2-col';
+			$classes[] = 'g-row--reorder-2-col';
 		}
 
 		return implode( ' ', $classes );

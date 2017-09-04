@@ -88,11 +88,11 @@ class Interstitial extends Panel {
 		$classes = [];
 
 		if ( Interstice::FIELD_LAYOUT_OPTION_CONTENT_RIGHT === $this->panel_vars[ Interstice::FIELD_LAYOUT ] ) {
-			$classes[] = 'site-grid--pull-right';
+			$classes[] = 'g-row--pull-right';
 		}
 
 		if ( Interstice::FIELD_LAYOUT_OPTION_CONTENT_CENTER === $this->panel_vars[ Interstice::FIELD_LAYOUT ] ) {
-			$classes[] = 'site-grid--center u-text-center';
+			$classes[] = 'g-row--center u-text-align-center';
 		}
 
 		return implode( ' ', $classes );
