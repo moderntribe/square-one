@@ -116,14 +116,16 @@ class Theme_Provider implements ServiceProviderInterface {
 			] );
 		};
 
-		add_filter( 'oembed_dataparse', function ( $html, $data, $url ) use ( $container ) {
-			return $container[ 'theme.oembed' ]->setup_lazyload_html( $html, $data, $url );
-		}, 1000, 3 );
+		add_filter( 'oembed_dataparse', function( $html, $data, $url ) use ( $container ) {
+			return $container['theme.oembed']->get_video_component( $html, $data, $url );
+		}, 999, 3 );
+
 		add_filter( 'embed_oembed_html', function ( $html, $url, $attr, $post_id ) use ( $container ) {
 			return $container[ 'theme.oembed' ]->filter_frontend_html_from_cache( $html, $url, $attr, $post_id );
 		}, 1, 4 );
+
 		add_filter( 'embed_oembed_html', function ( $html, $url, $attr, $post_id ) use ( $container ) {
-			return $container[ 'theme.oembed' ]->wrap_oembed_shortcode_output( $html, $url, $attr, $post_id );
+			return $container[ 'theme.oembed' ]->wrap_admin_oembed( $html, $url, $attr, $post_id );
 		}, 99, 4 );
 	}
 
@@ -185,6 +187,12 @@ class Theme_Provider implements ServiceProviderInterface {
 		add_action( 'tribe/unsupported_browser/head', function () use ( $container ) {
 			$container[ 'theme.resources.fonts' ]->load_fonts();
 		}, 0, 0 );
+		add_action( 'admin_head', function () use ( $container ) {
+			$container[ 'theme.resources.fonts' ]->localize_typekit_tinymce();
+		}, 0, 0 );
+		add_filter( 'mce_external_plugins', function ( $plugins ) use ( $container ) {
+			return $container[ 'theme.resources.fonts' ]->add_typekit_to_editor( $plugins );
+		} , 10, 1 );
 		/* add_action( 'login_head', function() use ( $container ) {
 			$container[ 'theme.resources.fonts' ]->load_fonts();
 		}, 0, 0); */

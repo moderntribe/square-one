@@ -5,9 +5,10 @@ namespace Tribe\Project\Theme;
 
 
 class Image_Sizes {
-	const CORE_FULL             = 'core-full';
-	const CORE_MOBILE           = 'core-mobile';
-	const SOCIAL_SHARE          = 'social-share';
+	const CORE_FULL      = 'core-full';
+	const CORE_MOBILE    = 'core-mobile';
+	const SOCIAL_SHARE   = 'social-share';
+	const COMPONENT_CARD = 'component-card';
 
 	private $sizes = [
 		self::CORE_FULL    => [
@@ -25,6 +26,11 @@ class Image_Sizes {
 			'height' => 630,
 			'crop'   => true,
 		],
+		self::COMPONENT_CARD => [
+			'width'  => 600,
+			'height' => 400,
+			'crop'   => true,
+		]
 	];
 
 	private $opengraph_image_size = self::SOCIAL_SHARE;

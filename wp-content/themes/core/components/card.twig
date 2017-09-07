@@ -1,0 +1,34 @@
+{# Component: Card #}
+
+<div class="{{ card_classes }}">
+
+	{% if image %}
+		<header class="{{ card_header_classes }}">
+			{{ image }}
+		</header>
+	{% endif %}
+
+	<div class="{{ card_content_classes }}">
+
+		{% if pre_title %}
+			{{ pre_title }}
+		{% endif %}
+
+		{% if title %}
+			{{ title }}
+		{% endif %}
+
+		{% if post_title %}
+			{{ post_title }}
+		{% endif %}
+
+		{% if text %}
+			{{ text }}
+		{% endif %}
+
+		{% if button %}
+			{{ button }}
+		{% endif %}
+
+	</div>
+</div>

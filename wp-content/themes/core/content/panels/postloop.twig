@@ -1,0 +1,25 @@
+{# Panel: Post Loop #}
+
+{% extends "content/panels/panel.twig" %}
+
+{% block content %}
+
+	<div class="site-section__content">
+		<div class="site-grid">
+
+			<div class="site-grid__wrapper site-grid__wrapper--center site-grid__1-col site-grid__2-col--min-small site-grid__4-col--min-full"
+			     data-depth="0"
+			     data-name="posts"
+			     data-livetext>
+
+				{% for post in posts %}
+					<div class="site-grid__col">
+						{{ post }}
+					</div>
+				{% endfor %}
+
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

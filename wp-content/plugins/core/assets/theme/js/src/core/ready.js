@@ -20,6 +20,8 @@ import modules from '../modules/index';
 
 import single from '../single/index';
 
+import components from '../components/index';
+
 /**
  * @function bindEvents
  * @description Bind global event listeners here,
@@ -57,9 +59,10 @@ const init = () => {
 
 	// initialize the main scripts
 
+	components();
 	single();
 
-	console.info('Initialized all javascript that targeted document ready.');
+	console.info('Modern Tribe FE: Initialized all javascript that targeted document ready.');
 };
 
 /**

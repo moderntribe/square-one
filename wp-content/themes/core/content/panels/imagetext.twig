@@ -1,0 +1,27 @@
+{# Panel: Image + Text #}
+
+{% extends "content/panels/panel.twig" %}
+
+{% block header %}{% endblock %}
+
+{% block wrapper_start %}{% endblock %}
+
+	{% block content %}
+
+		<div class="site-grid site-grid--no-gutters {{ wrapper_classes }}">
+
+			<div class="site-grid__col">
+				{{ image }}
+			</div>
+
+			<div class="site-grid__col site-grid__col--vertical-center">
+				<div class="site-panel__imgtxt-content">
+					{{ content_block }}
+				</div>
+			</div>
+
+		</div>
+
+	{% endblock %}
+
+{% block wrapper_end %}{% endblock %}

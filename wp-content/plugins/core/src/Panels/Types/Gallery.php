@@ -8,10 +8,14 @@ class Gallery extends Panel_Type_Config {
 
 	const NAME = 'gallery';
 
+	const FIELD_TITLE                            = 'title';
 	const FIELD_CONTENT                          = 'content';
 	const FIELD_IMAGE_TREATMENT                  = 'image_treatment';
 	const FIELD_IMAGE_TREATMENT_OPTION_CROP      = 'crop';
 	const FIELD_IMAGE_TREATMENT_OPTION_LETTERBOX = 'letterbox';
+	const FIELD_CAROUSEL                         = 'carousel';
+	const FIELD_CAROUSEL_SHOW                    = 'carousel_show';
+	const FIELD_CAROUSEL_HIDE                    = 'carousel_hide';
 	const FIELD_GALLERY                          = 'gallery';
 
 	protected function panel() {
@@ -20,7 +24,7 @@ class Gallery extends Panel_Type_Config {
 		$panel->set_template_dir( $this->ViewFinder );
 		$panel->set_label( __( 'Gallery', 'tribe' ) );
 		$panel->set_description( __( 'An image gallery slider.', 'tribe' ) );
-		$panel->set_thumbnail( $this->handler->thumbnail_url( 'module-gallery.png' ) );
+		$panel->set_thumbnail( $this->handler->thumbnail_url( 'gallery.svg' ) );
 
 		// Panel Description
 		$panel->add_field( new Fields\TextArea( [
@@ -29,14 +33,25 @@ class Gallery extends Panel_Type_Config {
 		] ) );
 
 		// Image Treatment
-		$panel->add_settings_field( new Fields\Radio( [
+		$panel->add_settings_field( new Fields\ImageSelect( [
 			'label'   => __( 'Image Treatment', 'tribe' ),
 			'name'    => self::FIELD_IMAGE_TREATMENT,
 			'options' => [
-				self::FIELD_IMAGE_TREATMENT_OPTION_CROP      => __( 'Crop', 'tribe' ),
-				self::FIELD_IMAGE_TREATMENT_OPTION_LETTERBOX => __( 'Letterbox', 'tribe' ),
+				self::FIELD_IMAGE_TREATMENT_OPTION_CROP      => $this->handler->layout_icon_url( 'gallery-crop.svg' ),
+				self::FIELD_IMAGE_TREATMENT_OPTION_LETTERBOX => $this->handler->layout_icon_url( 'gallery-no-crop.svg' ),
 			],
-			'default' => self::FIELD_IMAGE_TREATMENT_OPTION_CROP,
+			'default' => self::FIELD_IMAGE_TREATMENT_OPTION_LETTERBOX,
+		] ) );
+
+		// Carousel
+		$panel->add_settings_field( new Fields\ImageSelect( [
+			'label'   => __( 'Show Carousel', 'tribe' ),
+			'name'    => self::FIELD_CAROUSEL,
+			'options' => [
+				self::FIELD_CAROUSEL_SHOW => $this->handler->layout_icon_url( 'gallery-carousel.svg' ),
+				self::FIELD_CAROUSEL_HIDE => $this->handler->layout_icon_url( 'gallery-no-carousel.svg' ),
+			],
+			'default' => self::FIELD_CAROUSEL_SHOW,
 		] ) );
 
 		// ImageGallery

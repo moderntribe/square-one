@@ -1,0 +1,22 @@
+{# Panel: Logofarm #}
+
+{% extends "content/panels/panel.twig" %}
+
+{% block content %}
+
+	<div class="site-section__content">
+		<div class="site-grid">
+			<div class="site-grid__wrapper site-grid__2-col site-grid__kill-col--min-medium"
+			     data-depth="0"
+			     data-name="logos"
+				 data-livetext>
+				{% for logo in logos %}
+					<div class="site-grid__col site-grid__col--horizontal-center">
+						{{ logo }}
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

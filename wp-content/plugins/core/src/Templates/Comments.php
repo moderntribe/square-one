@@ -52,7 +52,7 @@ class Comments extends Twig_Template {
 			'title_reply_before' => '<h3 id="reply-title" class="comment-reply-title h4">',
 			'class_form'         => 'comment-form t-content',
 			'logged_in_as'       => sprintf( '<p class="logged-in-as">%s</p>', $logged_in_as ),
-			'class_submit'       => 'submit btn',
+			'class_submit'       => 'submit c-btn',
 		] );
 
 		return ob_get_clean();

@@ -1,0 +1,20 @@
+{# Component: Content Block #}
+
+<div class="{{ content_block_classes }}">
+
+	<div class="{{ content_block_content_classes }}">
+
+		{% if title %}
+			{{ title }}
+		{% endif %}
+
+		{% if text %}
+			{{ text }}
+		{% endif %}
+
+		{% if button %}
+			{{ button }}
+		{% endif %}
+
+	</div>
+</div>
