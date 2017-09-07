@@ -13,10 +13,10 @@ module.exports = {
 			error: true,
 		},
 	},
-	report: {
+	test: {
 		options: {
 			urls: [
-				'https://<%= dev.proxy %>/'
+				'https://<%= dev.proxy %>'
 			],
 		},
 	},
