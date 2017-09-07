@@ -1,3 +1,8 @@
+/**
+ * Temporary workaround for ssl issues
+ * https://github.com/mzabriskie/axios/issues/535#issuecomment-262299969
+ */
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 module.exports = function (grunt) {
 	/**
 	 *
@@ -25,7 +30,7 @@ module.exports = function (grunt) {
 	 *
 	 */
 
-	var dev = grunt.file.exists('local-config.json') ? grunt.file.readJSON('local-config.json') : { proxy: 'square.dev' };
+	var dev = grunt.file.exists('local-config.json') ? grunt.file.readJSON('local-config.json') : { proxy: 'square1.tribe', certs_path: '' };
 
 	var config = {
 		pkg: grunt.file.readJSON('package.json'),

@@ -16,7 +16,7 @@ module.exports = {
 	report: {
 		options: {
 			urls: [
-				//'http://<%= dev.proxy %>'
+				'https://<%= dev.proxy %>/'
 			],
 		},
 	},
