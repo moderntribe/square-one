@@ -26,7 +26,7 @@ module.exports = {
 			logConnections: true,
 			notify: true,
 			open: 'external',
-			host: '<%= dev.proxy %>',
+			host: '<%= dev.proxy %>', /* https://192.168.1.199:3000/ will still work for mobile device testing */
 			proxy: 'https://<%= dev.proxy %>',
 			https: {
 				key: '<%= dev.certs_path %>/<%= dev.proxy %>.key',
