@@ -5,5 +5,161 @@
  * ----------------------------------------------------------------------------- */
 
 .c-video {
+	break-inside: avoid-column;
 
+	.t-content & {
+		margin: var(--spacer-lg) auto;
+		max-width: none;
+	}
+
+	br,
+	p {
+		display: none;
+	}
+}
+
+.c-video__wrapper {
+	position: relative;
+	aspect-ratio: '16:9';
+	overflow: hidden;
+
+	iframe,
+	object,
+	embed {
+		width: 100%;
+		height: 100%;
+	}
+}
+
+.c-video__embed {
+	background: var(--embed-bgd-color);
+
+	a {
+		text-decoration: none;
+	}
+}
+
+.c-video__trigger {
+	display: block;
+	height: 100%;
+	transition: var(--transition);
+
+	&:hover,
+	&:focus {
+
+		.c-video__icon {
+			background-color: var(--color-secondary);
+			transform: scale(1.1);
+		}
+	}
+
+	.c-video--is-playing & {
+		opacity: 0;
+		transition: var(--transition-ease-out-opacity);
+	}
+
+	&:before {
+		content: '';
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		background-color: var(--color-black-a-40);
+		z-index: 1;
+	}
+}
+
+.c-video__image {
+	margin: 0;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	&.lazyload,
+	&.lazyloading {
+		opacity: 0;
+	}
+
+	&.lazyloaded {
+		opacity: 1;
+		transition: var(--transition-opacity);
+	}
+
+	.c-video--lazy-low-res & {
+		margin-top: -9.4%;
+	}
+}
+
+.c-video__caption {
+	opacity: 0;
+	transition: opacity 0.15s ease-in;
+	position: absolute;
+	color: var(--embed-caption-color);
+	padding: 20px 25px;
+	text-align: center;
+	left: 0;
+	right: 0;
+	top: 50%;
+	width: 100%;
+	transform: translateY(-50%);
+	z-index: 1;
+
+	.lazyloaded ~ & {
+		opacity: 1;
+		transition: var(--transition-ease-in-opacity);
+	}
+
+	.c-video--is-small & {
+		padding: 0;
+	}
+}
+
+.c-video__icon {
+	font-size: 36px;
+	transition: var(--transition-embed-icon);
+	border-radius: var(--border-radius-round);
+	background-color: var(--color-primary);
+	width: 70px;
+	height: 70px;
+	text-align: center;
+	display: inline-block;
+
+	@media (--viewport-full) {
+		font-size: 60px;
+		width: 100px;
+		height: 100px;
+	}
+
+	&:before {
+		display: inline-block;
+		position: relative;
+		left: 3px;
+		top: 1px;
+		line-height: 70px;
+		backface-visibility: hidden;
+
+		@media (--viewport-full) {
+			line-height: 100px;
+			left: 5px;
+		}
+	}
+}
+
+.c-video__trigger-label {
+	font-size: 18px;
+	font-weight: var(--font-weight-bold);
+	display: block;
+	margin: 18px auto 0;
+	text-transform: uppercase;
+	line-height: 1.25;
+	max-width: 600px;
+
+	.c-video--is-small & {
+		display: none;
+	}
 }

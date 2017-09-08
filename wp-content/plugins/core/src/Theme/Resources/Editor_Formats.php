@@ -37,7 +37,7 @@ class Editor_Formats {
 			[
 				'title'    => __( 'Button', 'tribe' ),
 				'selector' => 'a',
-				'classes'  => 'btn',
+				'classes'  => 'c-btn',
 				'wrapper'  => false,
 			],
 			/* Example multi-level format */
@@ -47,7 +47,7 @@ class Editor_Formats {
 					[
 						'title'    => __( 'CTA Link', 'tribe' ),
 						'selector' => 'a',
-						'classes'  => 'cta',
+						'classes'  => 'c-btn-text',
 						'wrapper'  => false,
 					],
 					[

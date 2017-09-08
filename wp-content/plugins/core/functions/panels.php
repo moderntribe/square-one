@@ -3,18 +3,27 @@
 /**
  * Output panel title, built for SEO
  *
- * @param string $title   Panel title
- * @param string $classes Any CSS classes to apply to the title tag.
+ * @param string $title  Panel title
+ * @param array $options An array of optional attributes & values to apply to the title element markup.
  *
  * @since tribe-square-one 1.0
- * @return string
  */
 
-function the_panel_title( $title = null, $classes = 'panel-title', $data_name = null, $data_livetext = false, $depth = 0, $index = 0 ) {
+function the_panel_title( $title = null, $options = [] ) {
 
 	if ( empty( $title ) && ! is_panel_preview() ) {
 		return;
 	}
+
+	$defaults = [
+		'classes'       => 'panel__title',  // String: Space-separated CSS classes to apply to the HTML element
+		'data_name'     => null,            // String: data-name attribute value used in live preview mode to identify the title that should be updated.
+		'data_livetext' => false,           // Bool: Should this panel title be live-update enabled for live previews?
+		'depth'         => 0,               // Int: The depth value for this panel when live-updating in preview mode.
+		'index'         => 0,               // Int: The index valu for this panel when live-updating in preview mode.
+	];
+
+	$options = wp_parse_args( $options, $defaults );
 
 	static $panel_title = '';
 
@@ -33,21 +42,21 @@ function the_panel_title( $title = null, $classes = 'panel-title', $data_name = 
 		$h_level = 'h1';
 	}
 
-	$attr = ( ! empty( $classes ) ) ? ' class="'. $classes .'"' : '';
-	$data_attrs = ( ! empty( $data_name ) ) ? ' data-name="'. $data_name . '"' : '';
-	$data_attrs .= ( $data_livetext ) ? ' data-livetext' : '';
-	$data_attrs .= ( $data_livetext ) ? sprintf( ' data-depth="%s"', $depth ) : '';
-	$data_attrs .= ( $data_livetext ) ? sprintf( ' data-index="%s"', $index ) : '';
+	$class      = ( ! empty( $options[ 'classes' ] ) ) ? ' class="' . esc_attr( $options[ 'classes' ] ) . '"' : '';
+	$data_attrs = ( ! empty( $options[ 'data_name' ] ) ) ? ' data-name="' . esc_attr( $options[ 'data_name' ] ) . '"' : '';
+	$data_attrs .= ( true === $options[ 'data_livetext' ] ) ? ' data-livetext' : '';
+	$data_attrs .= ( true === $options[ 'data_livetext' ] ) ? sprintf( ' data-depth="%d"', $options[ 'depth' ] ) : '';
+	$data_attrs .= ( true === $options[ 'data_livetext' ] ) ? sprintf( ' data-index="%d"', $options[ 'index' ] ) : '';
 
 	$panel_title = sprintf(
 		'<%1$s%2$s%3$s>%4$s</%1$s>',
-		$h_level,
-		$attr,
+		esc_attr( $h_level ),
+		$class,
 		$data_attrs,
 		$title
 	);
 
-	return $panel_title;
+	echo $panel_title;
 }
 
 /**

@@ -1,7 +1,7 @@
 {% extends "base.twig" %}
 
 {% block content %}
-	<div class="l-wrapper">
+	<div class="l-container">
 		{% if posts|length > 0 %}
 			{% for post in posts %}
 				{{ include( 'content/search/search.twig') }}

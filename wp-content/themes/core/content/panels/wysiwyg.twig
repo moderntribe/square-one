@@ -4,16 +4,15 @@
 
 {% block content %}
 
-	<div class="site-section__content">
-		<div class="site-grid">
-
-			<div class="site-grid__wrapper site-grid__1-col site-grid__2-col--min-medium site-grid__3-col--min-full"
+	<div class="s-content">
+		<div class="g-row">
+			<div class="g-row--col-2--min-medium g-row--col-3--min-full"
 			     data-depth="0"
 			     data-name="columns"
 			     data-livetext>
 
 				{% for col in columns %}
-					<div class="site-grid__col t-content"
+					<div class="g-col t-content"
 					     data-depth="{{ loop.index0 }}"
 					     data-name="content"
 					     data-autop="true"

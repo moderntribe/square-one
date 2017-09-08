@@ -1,14 +1,14 @@
 /* -----------------------------------------------------------------------------
  *
- * Section: Descriptions (This is the block of content after the panel title.)
+ * Component: Button
  *
  * ----------------------------------------------------------------------------- */
 
-.s-desc {
-	margin: 0 auto;
-	max-width: 800px;
+a[class*="c-btn"],
+button[class*="c-btn"] {
 
-	p:only-of-type {
-		margin-bottom: 0;
+	.t-content & {
+		margin-top: var(--spacer-xs);
+		margin-bottom: var(--spacer-xs);
 	}
 }

@@ -18,20 +18,37 @@ class Oembed_Filter {
 		$this->supported_providers = $supported_providers;
 	}
 
+	/**
+	 * Get custom video component markup.
+	 *
+	 * @param $html
+	 * @param $data
+	 * @param $url
+	 *
+	 * @filter oembed_dataparse 999 3
+	 *
+	 * @return string
+	 */
 	public function get_video_component( $html, $data, $url ) {
-		/**
-		 * @var $cache Cache
-		 */
-		$cache = tribe_project()->container()['cache'];
 
-		$figure_classes = [ 'video__embed', 'wp-embed-lazy' ];
+		// Admin should not get custom markup.
+		if ( is_admin() ) {
+			return $html;
+		}
+
+		// Only generate markup for supported providers.
+		if ( ! in_array( $data->provider_name, $this->supported_providers ) ) {
+			return $html;
+		}
+
+		$container_classes = [ 'c-video--lazy' ];
 
 		if ( $data->provider_name === 'YouTube' ) {
 			$embed_id    = $this->get_youtube_embed_id( $url );
 			$video_thumb = $this->get_youtube_max_resolution_thumbnail( $url );
 
 			if ( strpos( $video_thumb, 'maxresdefault' ) === false ) {
-				$figure_classes[] = 'wp-embed-lazy--low-res';
+				$container_classes[] = 'c-video--lazy-low-res';
 			}
 
 		} else {
@@ -40,24 +57,25 @@ class Oembed_Filter {
 		}
 
 		$options = [
-			Video::THUMBNAIL_URL   => $video_thumb,
-			Video::CONTAINER_ATTRS => $this->get_layout_container_attrs( $data->provider_name, $embed_id ),
-			Video::FIGURE_CLASSES  => $figure_classes,
-			Video::TITLE           => $data->title,
-			Video::VIDEO_URL       => $url,
+			Video::THUMBNAIL_URL     => $video_thumb,
+			Video::CONTAINER_ATTRS   => $this->get_layout_container_attrs( $data->provider_name, $embed_id ),
+			Video::CONTAINER_CLASSES => $container_classes,
+			Video::TITLE             => __( 'Play Video', 'tribe' ),
+			Video::VIDEO_URL         => $url,
+			Video::PLAY_TEXT         => $data->title,
 		];
 
-		$video_obj = Video::factory( $options );
-		$html      = $video_obj->render();
+		$video_obj     = Video::factory( $options );
+		$frontend_html = $video_obj->render();
 
-		$cache->set( $url, $html, 'video_data_objects' );
+		$this->cache_frontend_html( $frontend_html, $url );
 
 		return $html;
 	}
 
 	private function get_layout_container_attrs( $provider_name, $embed_id ): array {
 		return [
-			'data-js'             => 'video',
+			'data-js'             => 'c-video',
 			'data-embed-id'       => $embed_id,
 			'data-embed-provider' => $provider_name,
 		];
@@ -74,11 +92,50 @@ class Oembed_Filter {
 			return $html;
 		}
 
-		$cache = tribe_project()->container()['cache'];
+		$cached = get_option( $this->get_cache_key( $url ), '' );
 
-		$cached = $cache->get( $url, 'video_data_objects' );
+		// If cache is empty, try generating new HTML.
+		if ( empty( $cached ) ) {
+			$this->get_fresh_frontend_html( $html, $url, $attr );
+			$cached = get_option( $this->get_cache_key( $url ), '' );
+		}
 
 		return empty( $cached ) ? $html : $cached;
+	}
+
+
+	/**
+	 * Get a fresh copy of our custom markup if our cache doesn't exist.
+	 *
+	 * @param $html
+	 * @param $url
+	 * @param $attr
+	 *
+	 * @return string
+	 */
+	protected function get_fresh_frontend_html( $html, $url, $attr ) {
+
+		/**
+		 * @var \WP_oEmbed $oembed.
+		 */
+		$oembed   = _wp_oembed_get_object();
+		$provider = $oembed->get_provider( $url, $attr );
+		$data     = $oembed->fetch( $provider, $url, $attr );
+
+		return $this->get_video_component( $html, $data, $url );
+	}
+
+	/**
+	 * Add wrapper around embeds for admin visual editor styling
+	 *
+	 * @filter embed_oembed_html 99
+	 */
+	public function wrap_admin_oembed( $html, $url, $attr, $post_id ) {
+		if ( ! is_admin() ) {
+			return $html;
+		}
+
+		return sprintf( '<div class="wp-embed"><div class="wp-embed-wrap">%s</div></div>', $html );
 	}
 
 	/**
