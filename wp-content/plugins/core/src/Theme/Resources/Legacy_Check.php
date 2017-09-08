@@ -47,7 +47,7 @@ class Legacy_Check {
 	 */
 	public function add_unsupported_rewrite() {
 	    $regex = sprintf( '^%s/?', str_replace( '/', '', $this->unsupported_browser_path ) );
-		add_rewrite_rule( $regex, 'index.php?pagename=unsupported-browser', 'top' );
+		add_rewrite_rule( $regex, 'index.php?page=unsupported-browser', 'top' );
 	}
 
 	/**
@@ -63,7 +63,7 @@ class Legacy_Check {
 
 		global $wp_query;
 
-		if ( ! array_key_exists( 'pagename', $wp_query->query ) || 'unsupported-browser' !== $wp_query->query['pagename'] ) {
+		if ( ! array_key_exists( 'page', $wp_query->query ) || 'unsupported-browser' !== $wp_query->query['page'] ) {
 			return $template;
 		}
 
