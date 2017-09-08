@@ -14,14 +14,15 @@ class Base extends Twig_Template {
 
 	public function get_data(): array {
 		$data = [
-			'page_title' => $this->get_page_title(),
-			'body_class' => $this->get_body_class(),
-			'logo'       => $this->get_logo(),
-			'menu'       => $this->get_nav_menus(),
-			'lang'       => $this->get_strings(),
-			'search_url' => $this->get_search_url(),
-			'home_url'   => $this->get_home_url(),
-			'copyright'  => $this->get_copyright(),
+			'page_title'          => $this->get_page_title(),
+			'language_attributes' => $this->get_language_attributes(),
+			'body_class'          => $this->get_body_class(),
+			'logo'                => $this->get_logo(),
+			'menu'                => $this->get_nav_menus(),
+			'lang'                => $this->get_strings(),
+			'search_url'          => $this->get_search_url(),
+			'home_url'            => $this->get_home_url(),
+			'copyright'           => $this->get_copyright(),
 		];
 
 		foreach ( $this->get_components() as $component ) {
@@ -40,6 +41,10 @@ class Base extends Twig_Template {
 
 	protected function get_page_title() {
 		return get_page_title();
+	}
+
+	protected function get_language_attributes() {
+		return language_attributes();
 	}
 
 	protected function get_body_class() {

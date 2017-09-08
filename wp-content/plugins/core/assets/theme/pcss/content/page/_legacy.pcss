@@ -1,3 +1,199 @@
-.page-legacy {
+/* -----------------------------------------------------------------------------
+ *
+ * Globals: HTML & Body
+ *
+ * ----------------------------------------------------------------------------- */
 
+html {
+	background: var(--legacy-bgd-footer);
+}
+
+body {
+	font: var(--font-weight-regular) normal 100%/var(--line-height-base) var(--font-family-base);
+	color: var(--legacy-color-text);
+	background: var(--legacy-bgd-content);
+	overflow-x: auto;
+	min-width: var(--legacy-min-width);
+}
+
+/* -----------------------------------------------------------------------------
+ *
+ * Globals: Text Selection
+ *
+ * ----------------------------------------------------------------------------- */
+
+::selection {
+	background: var(--color-bgd-selection);
+	color: var(--color-text-selection);
+	text-shadow: none;
+}
+
+/* -----------------------------------------------------------------------------
+ *
+ * Globals: Anchor
+ *
+ * ----------------------------------------------------------------------------- */
+
+a {
+	transition: var(--transition);
+	color: var(--legacy-color-link);
+	text-decoration: none;
+	outline: 0;
+	cursor: pointer;
+
+	&:visited {
+		color: var(--legacy-color-link);
+	}
+
+	&:hover,
+	&:focus {
+		color: var(--legacy-color-link-hover);
+	}
+
+	&:focus {
+		outline: 1px dotted;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ *
+ * Layout: Global Content Wrap
+ *
+ * ----------------------------------------------------------------------------- */
+
+.l-container {
+	max-width: var(--grid-width);
+	margin: 0 auto;
+	padding: 0 var(--grid-gutter);
+	width: 100%;
+	text-align: center;
+}
+
+/* -----------------------------------------------------------------------------
+ *
+ * Site: Header
+ *
+ * ----------------------------------------------------------------------------- */
+
+.site-header {
+	background-color: var(--legacy-bgd-header);
+	padding: var(--legacy-header-padding);
+}
+
+/* -----------------------------------------------------------------------------
+ *
+ * Site: Content
+ *
+ * ----------------------------------------------------------------------------- */
+
+.site-content {
+	padding: var(--legacy-content-padding);
+	max-width: var(--legacy-max-width);
+	margin: 0 auto;
+}
+
+.site-content__content {
+
+	* {
+		font-size: var(--legacy-content-font-size);
+		font-weight: var(--legacy-content-font-weight);
+		line-height: var(--legacy-content-line-height);
+		margin: var(--legacy-content-spacing);
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		color: var(--legacy-color-heading);
+		line-height: var(--legacy-heading-line-height);
+		font-size: var(--legacy-heading-font-size);
+		font-family: var(--legacy-heading-font-family);
+		font-weight: var(--legacy-heading-font-weight);
+		margin: var(--legacy-heading-spacing);
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ *
+ * Site: Footer
+ *
+ * ----------------------------------------------------------------------------- */
+
+.site-footer {
+	background-color: var(--legacy-bgd-footer);
+	color: var(--legacy-color-footer);
+	padding: var(--legacy-footer-padding);
+}
+
+.site-footer__copy {
+	font-size: var(--legacy-footer-content-font-size);
+	line-height: var(--legacy-footer-content-line-height);
+}
+
+/* -----------------------------------------------------------------------------
+ *
+ * Site: Logos
+ *
+ * ----------------------------------------------------------------------------- */
+
+.site-brand {
+	line-height: 0;
+}
+
+.site-logo {
+
+}
+
+.site-logo--header {
+
+}
+
+.site-logo--footer {
+	margin: var(--legacy-footer-logo-spacing);
+}
+
+/* -----------------------------------------------------------------------------
+ *
+ * Site: Browser List
+ *
+ * ----------------------------------------------------------------------------- */
+
+.browser-list {
+	margin: 70px -10px 0;
+	*zoom: 1;
+
+	&:before,
+	&:after {
+		content: " ";
+		display: table;
+	}
+
+	&:after {
+		clear: both;
+	}
+}
+
+.browser-list__item {
+	float: left;
+	width: 25%;
+	padding: 0 10px;
+	font-size: var(--legacy-browser-list-font-size);
+	font-weight: var(--legacy-browser-list-font-weight);
+}
+
+.browser-list__item-anchor {
+	display: block;
+}
+
+.browser-list__item-image {
+	display: block;
+	margin: var(--legacy-browser-list-image-spacing);
+	border: var(--legacy-browser-list-image-border);
+	background-color: var(--legacy-browser-list-image-bgd);
+	border-radius: var(--legacy-browser-list-image-border-radius);
+	line-height: 0;
+	padding: var(--legacy-browser-list-image-padding);
 }
