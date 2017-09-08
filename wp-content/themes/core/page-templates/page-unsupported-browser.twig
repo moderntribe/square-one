@@ -2,7 +2,7 @@
 <html {{ language_attributes }}>
 <head>
 
-    <title>{{ lang['Unsupported Browser'] }} - {{ bloginfo( 'name' ) }}</title>
+    <title>{{ lang['Unsupported Browser'] }} | {{ bloginfo( 'name' ) }}</title>
 
     {# // MISC Meta #}
     <meta charset="utf-8">
@@ -23,7 +23,7 @@
             <h1 class="site-brand">
                 <img src="{{ legacy_logo_header|esc_url }}"
                      class="site-logo site-logo--header"
-                     alt="{{ bloginfo( 'name' )|esc_attr }}"/>
+                     alt="{{ bloginfo( 'name' )|esc_attr }} {{ lang['logo'] }}"/>
             </h1>
         </div>
     </div>
@@ -31,11 +31,10 @@
     <div class="site-content">
         <div class="l-container">
 
-            {% if post.content %}
-                <div class="site-content__content">
-                    {{ post.content }}
-                </div>
-            {% endif %}
+            <div class="site-content__content">
+                <h2>{{ legacy_browser_title }}</h2>
+                <p>{{ legacy_browser_content }}</p>
+            </div>
 
             <ul class="browser-list">
                 <li class="browser-list__item">
@@ -96,7 +95,7 @@
 
             <img src="{{ legacy_logo_footer|esc_url }}"
                  class="site-logo site-logo--footer"
-                 alt="{{ bloginfo( 'name' )|esc_attr }}"/>
+                 alt="{{ bloginfo( 'name' )|esc_attr }} {{ lang['logo'] }}"/>
 
             <p class="site-footer__copy">{{ copyright }} {{ bloginfo( 'name' ) }}.</p>
 
