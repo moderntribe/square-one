@@ -1,52 +1,107 @@
 <!DOCTYPE html>
-<html lang="en">
+<html {{ language_attributes }}>
 <head>
 
-	<title>{{ lang['Unsupported Browser'] }} - {{ bloginfo( 'name' ) }}</title>
+    <title>{{ lang['Unsupported Browser'] }} - {{ bloginfo( 'name' ) }}</title>
 
-	{# // MISC Meta #}
-	<meta charset="utf-8">
-	<meta name="author" content="{{ bloginfo( 'name' )|esc_attr }}">
-	<meta http-equiv="cleartype" content="on">
-	<link rel="pingback" href="{{ bloginfo( 'pingback_url' )|esc_url }}">
+    {# // MISC Meta #}
+    <meta charset="utf-8">
+    <meta name="author" content="{{ bloginfo( 'name' )|esc_attr }}">
+    <meta http-equiv="cleartype" content="on">
+    <meta name="robots" content="noindex, nofollow">
 
-	<link rel="stylesheet" href="{{ css|esc_url }}" type="text/css" media="all">
-	<link rel="shortcut icon" href="{{ favicon|esc_url }}">
+    <link rel="stylesheet" href="{{ css|esc_url }}" type="text/css" media="all">
+    <link rel="shortcut icon" href="{{ favicon|esc_url }}">
 
-	{{ do_action( 'tribe/unsupported_browser/head') }}
+    {{ do_action( 'tribe/unsupported_browser/head') }}
 
 </head>
-<body class="page-legacy" itemscope itemtype="https://schema.org/WebPage">
+<body>
 
-<div class="l-site-wrapper">
+    <div class="site-header">
+        <div class="l-container">
+            <h1 class="site-brand">
+                <img src="{{ legacy_logo_header|esc_url }}"
+                     class="site-logo site-logo--header"
+                     alt="{{ bloginfo( 'name' )|esc_attr }}"/>
+            </h1>
+        </div>
+    </div>
 
-	<div class="header">
-		<div class="l-wrapper">
-			<h1>
-				<img src="{{ legacy_image_url|esc_url }}" alt="{{ bloginfo( 'name' )|esc_attr }}" />
-				<span class="visual-hide">{{ bloginfo( 'name' ) }}</span>
-			</h1>
-		</div>
-	</div>
+    <div class="site-content">
+        <div class="l-container">
 
-	<div class="main" itemprop="mainContentOfPage">
-		<div class="l-wrapper">
+            {% if post.content %}
+                <div class="site-content__content">
+                    {{ post.content }}
+                </div>
+            {% endif %}
 
-			<div itemprop="text">
+            <ul class="browser-list">
+                <li class="browser-list__item">
+                    <a href="http://www.google.com/chrome/"
+                       class="browser-list__item-anchor"
+                       rel="external"
+                       target="_blank">
+                           <span class="browser-list__item-image">
+                               <img src="{{ legacy_browser_icon_chrome|esc_url }}"
+                                    alt="{{ lang['Chrome browser logo'] }}"/>
+                           </span>
+                        {{ lang['Chrome'] }}
+                    </a>
+                </li>
+                <li class="browser-list__item">
+                    <a href="https://www.mozilla.org/firefox/new/"
+                       class="browser-list__item-anchor"
+                       rel="external"
+                       target="_blank">
+                           <span class="browser-list__item-image">
+                               <img src="{{ legacy_browser_icon_firefox|esc_url }}"
+                                    alt="{{ lang['Firefox browser logo'] }}"/>
+                           </span>
+                        {{ lang['Firefox'] }}
+                    </a>
+                </li>
+                <li class="browser-list__item">
+                    <a href="https://support.apple.com/downloads/#safari"
+                       class="browser-list__item-anchor"
+                       rel="external"
+                       target="_blank">
+                           <span class="browser-list__item-image">
+                               <img src="{{ legacy_browser_icon_safari|esc_url }}"
+                                    alt="{{ lang['Safari browser logo'] }}"/>
+                           </span>
+                        {{ lang['Safari'] }}
+                    </a>
+                </li>
+                <li class="browser-list__item">
+                    <a href="http://windows.microsoft.com/internet-explorer/download-ie"
+                       class="browser-list__item-anchor"
+                       rel="external"
+                       target="_blank">
+                           <span class="browser-list__item-image">
+                               <img src="{{ legacy_browser_icon_ie|esc_url }}"
+                                    alt="{{ lang['Internet Explorer browser logo'] }}"/>
+                           </span>
+                        {{ lang['Internet Explorer'] }}
+                    </a>
+                </li>
+            </ul>
 
-				<ul class="browsers">
-					<li><a href="https://www.mozilla.org/en-US/firefox/new/" class="firefox" rel="external" target="_blank">{{ lang['Firefox'] }}</a></li>
-					<li><a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie" class="ie" rel="external" target="_blank">{{ lang['IE 9+'] }}</a></li>
-					<li><a href="http://www.google.com/chrome/" class="chrome" rel="external" target="_blank">{{ lang['Chrome'] }}</a></li>
-					<li><a href="https://support.apple.com/downloads/#safari" class="safari" rel="external" target="_blank">{{ lang['Safari 6+'] }}</a></li>
-				</ul>
+        </div>
+    </div>
 
-			</div>
+    <div class="site-footer">
+        <div class="l-container">
 
-		</div>
-	</div>
+            <img src="{{ legacy_logo_footer|esc_url }}"
+                 class="site-logo site-logo--footer"
+                 alt="{{ bloginfo( 'name' )|esc_attr }}"/>
 
-</div>
+            <p class="site-footer__copy">{{ copyright }} {{ bloginfo( 'name' ) }}.</p>
+
+        </div>
+    </div>
 
 </body>
 </html>
