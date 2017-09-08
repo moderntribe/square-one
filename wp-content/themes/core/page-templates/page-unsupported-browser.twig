@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 
-	{# // TITLE: Handled by WP #}
+	<title>{{ lang['Unsupported Browser'] }} - {{ bloginfo( 'name' ) }}</title>
 
 	{# // MISC Meta #}
 	<meta charset="utf-8">
@@ -33,8 +33,6 @@
 		<div class="l-wrapper">
 
 			<div itemprop="text">
-
-				{{ post.content }}
 
 				<ul class="browsers">
 					<li><a href="https://www.mozilla.org/en-US/firefox/new/" class="firefox" rel="external" target="_blank">{{ lang['Firefox'] }}</a></li>

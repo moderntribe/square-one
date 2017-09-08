@@ -156,6 +156,14 @@ class Theme_Provider implements ServiceProviderInterface {
 		add_action( 'wp_head', function () use ( $container ) {
 			$container[ 'theme.resources.legacy' ]->old_browsers();
 		}, 0, 0 );
+
+		add_action( 'init', function() use ( $container ) {
+			$container[ 'theme.resources.legacy' ]->add_unsupported_rewrite();
+		} );
+
+		add_filter( 'template_include', function( $template ) use ( $container ) {
+			return $container['theme.resources.legacy']->load_unsupported_template( $template );
+		} );
 	}
 
 	private function disable_emoji( Container $container ) {
