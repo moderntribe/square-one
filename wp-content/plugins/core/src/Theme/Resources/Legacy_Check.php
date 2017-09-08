@@ -46,8 +46,9 @@ class Legacy_Check {
 	 * Adds the rewrite rule for the unsupported-browser permalink.
 	 */
 	public function add_unsupported_rewrite() {
+        add_rewrite_tag('%unsupported%', '([^&]+)');
 	    $regex = sprintf( '^%s/?', str_replace( '/', '', $this->unsupported_browser_path ) );
-		add_rewrite_rule( $regex, 'index.php?page=unsupported-browser', 'top' );
+		add_rewrite_rule( $regex, 'index.php?unsupported=1', 'top' );
 	}
 
 	/**
@@ -63,7 +64,7 @@ class Legacy_Check {
 
 		global $wp_query;
 
-		if ( ! array_key_exists( 'page', $wp_query->query ) || 'unsupported-browser' !== $wp_query->query['page'] ) {
+		if ( ! array_key_exists( 'unsupported', $wp_query->query ) || '1' != $wp_query->query['unsupported'] ) {
 			return $template;
 		}
 
