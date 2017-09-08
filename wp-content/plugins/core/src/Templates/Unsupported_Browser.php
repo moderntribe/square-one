@@ -16,10 +16,7 @@ class Unsupported_Browser extends Base {
 	}
 
 	protected function get_post() {
-		the_post();
-		return [
-			'content' => apply_filters( 'the_content', get_the_content() ),
-		];
+		return [];
 	}
 
 	protected function get_favicon() {
