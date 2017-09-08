@@ -21,16 +21,19 @@ class Legacy_Check {
         <script type="text/javascript">
             function is_browser() {
                 return (
-                    navigator.userAgent.indexOf("Chrome") !== - 1 || navigator.userAgent.indexOf("Opera") !== - 1 || navigator.userAgent.indexOf(
-                        "Firefox") !== - 1 || navigator.userAgent.indexOf("MSIE") !== - 1 || navigator.userAgent.indexOf(
-                        "Safari") !== - 1 || navigator.userAgent.indexOf("Edge") !== - 1
+                    navigator.userAgent.indexOf("Chrome") !== - 1 ||
+                    navigator.userAgent.indexOf("Opera") !== - 1 ||
+                    navigator.userAgent.indexOf("Firefox") !== - 1 ||
+                    navigator.userAgent.indexOf("MSIE") !== - 1 ||
+                    navigator.userAgent.indexOf("Safari") !== - 1 ||
+                    navigator.userAgent.indexOf("Edge") !== - 1
                 );
             }
 
             function not_excluded_page() {
                 return (
-                    window.location.href.indexOf("<?php echo $this->unsupported_browser_path; ?>") === - 1 && document.title.toLowerCase().indexOf(
-                        'page not found') === - 1
+                    window.location.href.indexOf("<?php echo $this->unsupported_browser_path; ?>") === - 1 &&
+                    document.title.toLowerCase().indexOf('page not found') === - 1
                 );
             }
 
