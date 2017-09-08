@@ -43,9 +43,11 @@ class Panel extends Twig_Template {
 			return $title;
 		}
 
-		$title = the_panel_title( esc_html( $this->panel_vars[ $field_name ] ), [ implode( ' ', $classes ), 'title', true, 0, 0 ] );
+		ob_start();
 
-		return $title;
+		the_panel_title( esc_html( $this->panel_vars[ $field_name ] ), [ implode( ' ', $classes ), 'title', true, 0, 0 ] );
+
+		return ob_get_clean();
 	}
 
 	public static function instance() {
