@@ -22,7 +22,7 @@ class Panel extends Twig_Template {
 			'children' => $this->get_children( $this->panel ),
 			'object'   => $this->panel,
 			'lang'     => new Noop_Lazy_Strings( 'tribe' ),
-			'title'    => isset( $this->panel_vars['title'] ) ? the_panel_title( esc_html( $this->panel_vars['title'] ), [ 'site-section__title', 'title', true, 0, 0 ] ) : false,
+			'title'    => isset( $this->panel_vars['title'] ) ? $this->get_title( $this->panel_vars['title'] ) : false,
 		];
 
 		return $data;
@@ -45,7 +45,14 @@ class Panel extends Twig_Template {
 
 		ob_start();
 
-		the_panel_title( esc_html( $this->panel_vars[ $field_name ] ), [ implode( ' ', $classes ), 'title', true, 0, 0 ] );
+		the_panel_title(
+			esc_html( $this->panel_vars[ $field_name ] ),
+			[
+				'classes'       => implode( ' ', $classes ),
+				'data_name'     => 'title',
+				'data_livetext' => true,
+			]
+		);
 
 		return ob_get_clean();
 	}
