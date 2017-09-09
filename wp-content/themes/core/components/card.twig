@@ -1,4 +1,27 @@
-{# Component: Card #}
+{#
+
+Component: Card
+
+Documentation: docs\theme\components\card.md
+
+Controller: wp-content\plugins\core\src\Templates\Components\Card.php
+PostCSS: wp-content\plugins\core\assets\theme\pcss\components\_card.pcss
+
+Description: A common layout, the card is used in loops, query panels etc quite often. It may or may not have an image along with headlines, text and cta/meta
+
+Attributes:
+	{
+        card_classes: 'c-card', // string. wrapper classes
+        image: '', // image html, probably composed with the image component
+        card_header_classes: 'c-card__header', // string. the card header classes if an image is set
+		card_content_classes: 'c-card__content', // string. the classes for the card content container
+		pre_title: '' // string. an html string to output before the title
+		title: '' // string. the title
+		post_title: '' // string. an html string to output after the title
+		text: '' // string. text/html string that is the body of the card
+		button: '' // string. button html, probably composed using the button component
+    }
+ #}
 
 <div class="{{ card_classes }}">
 
