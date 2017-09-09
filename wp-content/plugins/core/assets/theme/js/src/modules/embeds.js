@@ -161,7 +161,7 @@ const embeds = () => {
 	bindEvents();
 	setupOembeds();
 
-	console.info('Modern Tribe FE: Initialized embeds scripts.');
+	console.info('Square One FE: Initialized embeds scripts.');
 };
 
 export default embeds;

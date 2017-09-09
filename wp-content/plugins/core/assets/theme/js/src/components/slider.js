@@ -136,7 +136,7 @@ const init = () => {
 	initSliders();
 	bindEvents();
 
-	console.info('Modern Tribe FE: Initialized slider component scripts.');
+	console.info('Square One FE: Initialized slider component scripts.');
 };
 
 export default init;
