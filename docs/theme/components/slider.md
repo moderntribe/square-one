@@ -75,13 +75,11 @@ A gallery panel twig file, being passed the 'slider' var that was assembled by t
 
 {% block content %}
 
-	<div class="site-section__content">
-		<div class="site-grid">
-			<div class="site-grid__wrapper">
+	<div class="s-content">
+		<div class="g-row">
 
-				{{ slider }}
+			{{ slider }}
 
-			</div>
 		</div>
 	</div>
 
@@ -191,7 +189,7 @@ class Gallery extends Panel {
 * [Accordion](/docs/theme/components/accordion.md)
 * [Button](/docs/theme/components/button.md)
 * [Card](/docs/theme/components/card.md)
-* [CTA](/docs/theme/components/cta.md)
+* [Content Block](/docs/theme/components/content_block.md)
 * [Follow](/docs/theme/components/follow.md)
 * [Image](/docs/theme/components/image.md)
 * [Quote](/docs/theme/components/quote.md)

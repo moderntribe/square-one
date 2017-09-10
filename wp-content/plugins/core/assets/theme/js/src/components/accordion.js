@@ -147,7 +147,7 @@ const init = () => {
 	setOffset();
 	bindEvents();
 
-	console.info('Modern Tribe FE: Initialized accordion component scripts.');
+	console.info('Square One FE: Initialized accordion component scripts.');
 };
 
 export default init;

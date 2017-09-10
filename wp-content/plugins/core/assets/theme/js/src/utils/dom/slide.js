@@ -8,6 +8,10 @@ import _ from 'lodash';
 
 import getHiddenHeight from './get-hidden-height';
 
+const options = {
+	timeoutDelay: 25,
+};
+
 /**
  * Like jQuery's slideDown function - uses CSS3 transitions
  * @param  {Node} elem Element to show and hide
@@ -19,10 +23,10 @@ export const down = (elem, time = 400) => {
 	_.delay(() => {
 		elem.style.maxHeight = `${height}px`;
 		elem.style.opacity = '1';
-	}, 25);
+	}, options.timeoutDelay);
 	_.delay(() => {
 		elem.style.maxHeight = 'none';
-	}, (time + 25));
+	}, (time + options.timeoutDelay));
 };
 
 /**
@@ -34,8 +38,8 @@ export const up = (elem, time = 400) => {
 	elem.style.maxHeight = `${elem.offsetHeight}px`;
 	_.delay(() => {
 		elem.style.maxHeight = '0';
-	}, 25);
+	}, options.timeoutDelay);
 	_.delay(() => {
 		elem.style.opacity = '0';
-	}, (time + 25));
+	}, (time + options.timeoutDelay));
 };

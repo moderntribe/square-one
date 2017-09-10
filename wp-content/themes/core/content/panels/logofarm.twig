@@ -4,18 +4,16 @@
 
 {% block content %}
 
-	<div class="site-section__content">
-		<div class="site-grid">
-			<div class="site-grid__wrapper site-grid__2-col site-grid__kill-col--min-medium"
-			     data-depth="0"
-			     data-name="logos"
-				 data-livetext>
-				{% for logo in logos %}
-					<div class="site-grid__col site-grid__col--horizontal-center">
-						{{ logo }}
-					</div>
-				{% endfor %}
-			</div>
+	<div class="s-content">
+		<div class="g-row g-row--col-2 g-row--col-reset--min-medium"
+			 data-depth="0"
+			 data-name="logos"
+			 data-livetext>
+			{% for logo in logos %}
+				<div class="g-col g-col--horizontal-center">
+					{{ logo }}
+				</div>
+			{% endfor %}
 		</div>
 	</div>
 

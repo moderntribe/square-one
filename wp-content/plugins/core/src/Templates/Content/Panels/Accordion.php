@@ -28,10 +28,10 @@ class Accordion extends Panel {
 	}
 
 	protected function get_grid_classes(): string {
-		$classes = 'site-grid__layout site-grid__layout--center';
+		$classes = 'g-row--vertical-center';
 
 		if ( ! empty( $this->panel_vars[ AccordionPanel::FIELD_LAYOUT ] ) && $this->panel_vars[ AccordionPanel::FIELD_LAYOUT ] !== AccordionPanel::FIELD_LAYOUT_OPTION_CENTER ) {
-			$classes .= ' site-grid__layout--2-col-full';
+			$classes .= ' g-row--col-2--min-full';
 		}
 
 		return $classes;

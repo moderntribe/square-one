@@ -4,16 +4,15 @@
 
 {% block content %}
 
-	<div class="site-section__content">
-		<div class="site-grid">
-
-			<div class="site-grid__wrapper site-grid__wrapper--center site-grid__1-col site-grid__2-col--min-small site-grid__4-col--min-full"
+	<div class="s-content">
+		<div class="g-row g-row--center">
+			<div class="g-row--col-2--min-small g-row--col-4--min-full"
 			     data-depth="0"
 			     data-name="posts"
 			     data-livetext>
 
 				{% for post in posts %}
-					<div class="site-grid__col">
+					<div class="g-col">
 						{{ post }}
 					</div>
 				{% endfor %}

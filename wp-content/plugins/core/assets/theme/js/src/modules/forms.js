@@ -108,7 +108,7 @@ const forms = () => {
 
 	bindEvents();
 
-	console.info('Modern Tribe FE: Initialized global form scripts.');
+	console.info('Square One FE: Initialized global form scripts.');
 };
 
 export default forms;

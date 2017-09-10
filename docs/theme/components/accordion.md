@@ -87,16 +87,16 @@ An accordion panel twig file, being passed the 'accordion' var that was assemble
 
 {% block content %}
 
-	<div class="site-section__content">
-		<div class="site-grid">
-			<div class="site-grid__wrapper">
+	<div class="s-content">
+		<div class="l-container">
+			<div class="g-row">
 				<div class="{{ grid_classes }}"
-				     data-depth="0"
-				     data-name="accordions"
-				     data-livetext
+					 data-depth="0"
+					 data-name="accordions"
+					 data-livetext
 				>
 					<div
-						class="site-grid__col"
+						class="g-col"
 						data-depth="0"
 						data-name="content"
 						data-autop="true"
@@ -104,7 +104,7 @@ An accordion panel twig file, being passed the 'accordion' var that was assemble
 					>
 						{{ content }}
 					</div>
-					<div class="site-grid__col">
+					<div class="g-col">
 						{{ accordion }}
 					</div>
 				</div>
@@ -181,7 +181,7 @@ class Accordion extends Panel {
 * [Accordion](/docs/theme/components/accordion.md)
 * [Button](/docs/theme/components/button.md)
 * [Card](/docs/theme/components/card.md)
-* [CTA](/docs/theme/components/cta.md)
+* [Content Block](/docs/theme/components/content_block.md)
 * [Follow](/docs/theme/components/follow.md)
 * [Image](/docs/theme/components/image.md)
 * [Quote](/docs/theme/components/quote.md)

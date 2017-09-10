@@ -80,7 +80,7 @@ class VideoText extends Panel {
 		$classes = [];
 
 		if ( VideoTextPanel::FIELD_LAYOUT_OPTION_VIDEO_RIGHT === $this->panel_vars[ VideoTextPanel::FIELD_LAYOUT ] ) {
-			$classes[] = 'site-grid--reorder-2-col';
+			$classes[] = 'g-row--reorder-2-col';
 		}
 
 		return implode( ' ', $classes );
