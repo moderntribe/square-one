@@ -4,9 +4,9 @@ A common layout, the Card component is used in loops, query panels etc quite oft
 
 This component has these features out of box:  
 
-* optional image, pre and post title strings, a title, a main text block and optional cta.
+* optional image
 * pre and post title strings
-* a title
+* title
 * main text block
 * cta button
 
@@ -65,7 +65,7 @@ This component has these features out of box:
 
 ### Example Usage
 
-An Card Grid panel twig file, being passed the 'cards' var that was assembled by the panel controller using the card component.
+A Card Grid panel twig file, being passed the 'cards' var that was assembled by the panel controller using the card component.
 
 ```twig
 {# Panel: Card Grid #}
