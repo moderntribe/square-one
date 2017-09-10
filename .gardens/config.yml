@@ -1,6 +1,6 @@
 alias: sq1
 scripts:
-  # block of commands to build this repo/branch on the CI server
+  # block of commands to build this repo/branch on the CI server for deploying
   build: |
     npm set progress=false
     npm install --production &> /dev/null
@@ -10,6 +10,8 @@ scripts:
   test: |
     npm set progress=false
     npm install &> /dev/null
+    ./node_modules/.bin/grunt
+    composer install
     ./node_modules/.bin/jest -i
   # block of commands to execute after this repo/branch is cloned to the CI server
   after_clone: ""
