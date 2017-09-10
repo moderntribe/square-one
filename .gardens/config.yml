@@ -1,9 +1,59 @@
-alias: null
+alias: sq1
+scripts:
+  # block of commands to build this repo/branch on the CI server
+  build: |
+    npm set progress=false
+    npm install --production &> /dev/null
+    ./node_modules/.bin/grunt
+    composer install
+  # block of commands to test this repo/branch on the CI server
+  test: |
+    npm set progress=false
+    npm install &> /dev/null
+    ./node_modules/.bin/jest -i
+  # block of commands to execute after this repo/branch is cloned to the CI server
+  after_clone: ""
+  # block of commands to execute on the CI server before building the image of this project and deploying this repo/branch to the garden
+  before_deploy: |
+    source ~/scripts/helper.sh
+    multisite_enabled=$(./yaml-reader.py $(pwd)/.gardens/config.yml multsite.enabled)
+    db_password=$(set_cached_password "$deployment_cache_path" "db_password")
+    admin_password=$(set_cached_password "$deployment_cache_path" "admin_password")
+    echo "Ensuring that our database exists for the deployment, will create it if not found, do nothing if it's already there"
+    provision_db "$RDS_HOST" "$RDS_PORT" "$subdomain" "$db_password"
+    custom_image_build=true
+    echo "Building $local_image docker image..."
+    cp .gardens/Dockerfile Dockerfile
+    docker build -f ./.garden-Dockerfile --pull -t "$local_image" \
+                 --build-arg admin_user="admin" \
+                 --build-arg multisite_enabled="$multisite_enabled" \
+                 --build-arg admin_password="$admin_password" \
+                 --build-arg admin_email="admin@${DOMAIN}" \
+                 --build-arg title="$repo" \
+                 --build-arg url="https://${subdomain}.${DOMAIN}" \
+                 --build-arg smtp_domain="${DOMAIN}" \
+                 --build-arg smtp_host="smtp.mailgun.org" \
+                 --build-arg smtp_port="587" \
+                 --build-arg smtp_user="postmaster@${DOMAIN}" \
+                 --build-arg smtp_password="${SMTP_PASSWORD}" .
+    echo "Setting any necessary environment variables in .env..."
+    cp .gardens/.env .env
+    set_env "DB_NAME" "$subdomain" "$(pwd)/.env"
+    set_env "DB_USER" "$subdomain" "$(pwd)/.env"
+    set_env "DB_PASSWORD" "$db_password" "$(pwd)/.env"
+    set_env "DB_HOST" "${RDS_HOST}:${RDS_HOST}" "$(pwd)/.env"
+    set_env "S3_UPLOADS_BUCKET" "${S3_BUCKET_PRIMARY}/${subdomain}" "$(pwd)/.env"
+    set_env "S3_UPLOADS_KEY" "$S3_ACCESS_KEY_ID" "$(pwd)/.env"
+    set_env "S3_UPLOADS_SECRET" "$S3_SECRET_ACCESS_KEY" "$(pwd)/.env"
+    set_env "S3_UPLOADS_REGION" "$AWS_REGION" "$(pwd)/.env"
+    set_env "DOMAIN_CURRENT_SITE" "${subdomain}.${DOMAIN}" "$(pwd)/.env"
+    cp .env "$deployment_cache_path/"
+  # block of commands to execute after a successful deploy of container(s)
+  after_deploy: |
+    echo "Your Wordpress instance admin password is $admin_password"
+  # block of commands to execute on the CI server before removing a deployment of this repo/branch
+  before_remove: ""
+slack:
+  channel:
 multisite:
   enabled: false
-rds: true
-memcached: false
-redis: false
-elasticsearch: false
-slack:
-  channel: null

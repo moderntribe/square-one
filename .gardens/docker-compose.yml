@@ -3,10 +3,10 @@ version: '2'
 
 services:
   wordpress:
-    image: {{ image }}
+    image: "{{ image }}"
     ports:
       - "0:80"
     labels:
-      - "traefik.frontend.rule=Host:{{ deployment }}.{{ domain }}"
+      - "traefik.frontend.rule=Host:{{ subdomain }}.{{ domain }}"
       - "traefik.frontend.entryPoints=http,https"
       - "timestamp={{ timestamp }}"
