@@ -27,7 +27,6 @@ class Content_Block extends Component {
 			self::TITLE           => '',
 			self::TITLE_TAG       => '',
 			self::TEXT            => '',
-			self::BUTTON          => '',
 			self::TITLE_CLASSES   => [],
 			self::CLASSES         => [],
 			self::CONTENT_CLASSES => [],

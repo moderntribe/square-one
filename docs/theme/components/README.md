@@ -17,7 +17,7 @@ There is a large amount of example data and documentation available to you here 
 * [Accordion](/docs/theme/components/accordion.md)
 * [Button](/docs/theme/components/button.md)
 * [Card](/docs/theme/components/card.md)
-* [CTA](/docs/theme/components/cta.md)
+* [Content Block](/docs/theme/components/content_block.md)
 * [Follow](/docs/theme/components/follow.md)
 * [Image](/docs/theme/components/image.md)
 * [Quote](/docs/theme/components/quote.md)
