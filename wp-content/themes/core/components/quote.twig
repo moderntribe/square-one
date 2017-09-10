@@ -1,6 +1,27 @@
-{# Component: Quote #}
+{#
+
+Component: Quote
+
+Documentation: docs\theme\components\quote.md
+
+Controller: wp-content\plugins\core\src\Templates\Components\Quote.php
+PostCSS: wp-content\plugins\core\assets\theme\pcss\components\_quote.pcss
+
+Description: A simple quote component to be used wherever you need a quote, with an optional cite attribute
+
+Attributes:
+	{
+		classes: c-quote', // string. The wrapper classes
+		quote: '', // string. The quote string.
+		quote_attrs: '', // string. Data attributes for the quote block. You'll want to pass in livetext attrs if using in panels
+		cite: '', // string. The optional cite
+		cite_attrs: '', // string. Data attributes for cite block. You'll want to pass in livetext attrs if using in panels
+    }
+ #}
 
 <blockquote class="{{ classes }}">
 	<p class="c-quote__text" {{ quote_attrs }}>{{ quote }}</p>
-	<cite class="c-quote__cite" {{ cite_attrs }}>{{ cite }}</cite>
+	{% if cite %}
+		<cite class="c-quote__cite" {{ cite_attrs }}>{{ cite }}</cite>
+	{% endif %}
 </blockquote>
