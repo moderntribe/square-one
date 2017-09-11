@@ -4,6 +4,7 @@ scripts:
   build: |
     nvm install
     nvm use
+    npm install -g yarn
     npm set progress=false
     npm install --production &> /dev/null
     ./node_modules/.bin/grunt
@@ -12,6 +13,7 @@ scripts:
   test: |
     nvm install
     nvm use
+    npm install -g yarn
     npm set progress=false
     npm install &> /dev/null
     ./node_modules/.bin/grunt
