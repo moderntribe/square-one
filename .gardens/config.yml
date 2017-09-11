@@ -2,12 +2,16 @@ alias: sq1
 scripts:
   # block of commands to build this repo/branch on the CI server for deploying
   build: |
+    nvm install
+    nvm use
     npm set progress=false
     npm install --production &> /dev/null
     ./node_modules/.bin/grunt
     composer install
   # block of commands to test this repo/branch on the CI server
   test: |
+    nvm install
+    nvm use
     npm set progress=false
     npm install &> /dev/null
     ./node_modules/.bin/grunt
