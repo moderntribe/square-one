@@ -2,6 +2,7 @@ alias: sq1
 scripts:
   # block of commands to build this repo/branch on the CI server for deploying
   build: |
+    source ~/scripts/helper.sh
     nvm install
     nvm use
     install_node_global_dependencies
