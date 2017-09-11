@@ -7,9 +7,8 @@ scripts:
     if ! npm list -g | grep yarn@; then
       npm install -g yarn
     fi
-    npm set progress=false
-    npm install --production &> /dev/null
-    composer install
+    yarn install --production
+    composer update
     ./node_modules/.bin/grunt
   # block of commands to test this repo/branch on the CI server
   test: |
@@ -18,10 +17,9 @@ scripts:
     if ! npm list -g | grep yarn@; then
       npm install -g yarn
     fi
-    npm set progress=false
-    npm install &> /dev/null
+    yarn install
     ./node_modules/.bin/grunt
-    composer install
+    composer update
     ./node_modules/.bin/jest -i
   # block of commands to execute after this repo/branch is cloned to the CI server
   after_clone: ""
