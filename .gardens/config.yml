@@ -53,7 +53,7 @@ scripts:
     cp .gardens/update-env.sh .garden-update-env.sh
     custom_image_build=true
     echo "Building $local_image docker image..."
-    docker build -f ./.garden-Dockerfile --pull -t "$local_image" \
+    docker build -f ./Dockerfile --pull -t "$local_image" \
                  --build-arg admin_user="admin" \
                  --build-arg multisite_enabled="$multisite_enabled" \
                  --build-arg admin_password="$admin_password" \
