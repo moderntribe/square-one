@@ -4,23 +4,19 @@ scripts:
   build: |
     nvm install
     nvm use
-    if ! npm list -g | grep yarn@; then
-      npm install -g yarn
-    fi
+    install_node_global_dependencies
     yarn install --production
     composer update
-    ./node_modules/.bin/grunt
+    grunt dist
   # block of commands to test this repo/branch on the CI server
   test: |
+    source ~/scripts/helper.sh
     nvm install
     nvm use
-    if ! npm list -g | grep yarn@; then
-      npm install -g yarn
-    fi
+    install_node_global_dependencies
     yarn install
-    ./node_modules/.bin/grunt
     composer update
-    ./node_modules/.bin/jest -i
+    grunt
   # block of commands to execute after this repo/branch is cloned to the CI server
   after_clone: ""
   # block of commands to execute on the CI server before building the image of this project and deploying this repo/branch to the garden
