@@ -4,16 +4,20 @@ scripts:
   build: |
     nvm install
     nvm use
-    npm install -g yarn
+    if ! npm list -g | grep yarn@; then
+      npm install -g yarn
+    fi
     npm set progress=false
     npm install --production &> /dev/null
-    ./node_modules/.bin/grunt
     composer install
+    ./node_modules/.bin/grunt
   # block of commands to test this repo/branch on the CI server
   test: |
     nvm install
     nvm use
-    npm install -g yarn
+    if ! npm list -g | grep yarn@; then
+      npm install -g yarn
+    fi
     npm set progress=false
     npm install &> /dev/null
     ./node_modules/.bin/grunt
@@ -29,20 +33,6 @@ scripts:
     admin_password=$(set_cached_password "$deployment_cache_path" "admin_password")
     echo "Ensuring that our database exists for the deployment, will create it if not found, do nothing if it's already there"
     provision_db "$RDS_HOST" "$RDS_PORT" "$subdomain" "$db_password"
-    custom_image_build=true
-    echo "Building $local_image docker image..."
-    docker build -f ./.garden-Dockerfile --pull -t "$local_image" \
-                 --build-arg admin_user="admin" \
-                 --build-arg multisite_enabled="$multisite_enabled" \
-                 --build-arg admin_password="$admin_password" \
-                 --build-arg admin_email="admin@${DOMAIN}" \
-                 --build-arg title="$repo" \
-                 --build-arg url="https://${subdomain}.${DOMAIN}" \
-                 --build-arg smtp_domain="${DOMAIN}" \
-                 --build-arg smtp_host="smtp.mailgun.org" \
-                 --build-arg smtp_port="587" \
-                 --build-arg smtp_user="postmaster@${DOMAIN}" \
-                 --build-arg smtp_password="${SMTP_PASSWORD}" .
     echo "Setting any necessary environment variables in .env..."
     cp .gardens/.env .env
     set_env "DB_NAME" "$subdomain" "$(pwd)/.env"
@@ -60,6 +50,21 @@ scripts:
       set_env "SUBDOMAIN_INSTALL" "false" "$(pwd)/.env"
     fi
     cp .env "$deployment_cache_path/"
+    cp .gardens/update-env.sh .garden-update-env.sh
+    custom_image_build=true
+    echo "Building $local_image docker image..."
+    docker build -f ./.garden-Dockerfile --pull -t "$local_image" \
+                 --build-arg admin_user="admin" \
+                 --build-arg multisite_enabled="$multisite_enabled" \
+                 --build-arg admin_password="$admin_password" \
+                 --build-arg admin_email="admin@${DOMAIN}" \
+                 --build-arg title="$repo" \
+                 --build-arg url="https://${subdomain}.${DOMAIN}" \
+                 --build-arg smtp_domain="${DOMAIN}" \
+                 --build-arg smtp_host="smtp.mailgun.org" \
+                 --build-arg smtp_port="587" \
+                 --build-arg smtp_user="postmaster@${DOMAIN}" \
+                 --build-arg smtp_password="${SMTP_PASSWORD}" .
   # block of commands to execute after a successful deploy of container(s)
   after_deploy: |
     echo "Your Wordpress instance admin password is $admin_password"
