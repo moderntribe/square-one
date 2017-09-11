@@ -31,7 +31,6 @@ scripts:
     provision_db "$RDS_HOST" "$RDS_PORT" "$subdomain" "$db_password"
     custom_image_build=true
     echo "Building $local_image docker image..."
-    cp .gardens/Dockerfile Dockerfile
     docker build -f ./.garden-Dockerfile --pull -t "$local_image" \
                  --build-arg admin_user="admin" \
                  --build-arg multisite_enabled="$multisite_enabled" \
