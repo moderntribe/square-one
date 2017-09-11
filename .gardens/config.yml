@@ -54,12 +54,31 @@ scripts:
     set_env "S3_UPLOADS_SECRET" "$S3_SECRET_ACCESS_KEY" "$(pwd)/.env"
     set_env "S3_UPLOADS_REGION" "$AWS_REGION" "$(pwd)/.env"
     set_env "DOMAIN_CURRENT_SITE" "${subdomain}.${DOMAIN}" "$(pwd)/.env"
+    if $multisite_enabled; then
+      set_env "WP_ALLOW_MULTISITE" "true" "$(pwd)/.env"
+      set_env "WP_MULTISITE" "true" "$(pwd)/.env"
+      set_env "SUBDOMAIN_INSTALL" "false" "$(pwd)/.env"
+    fi
     cp .env "$deployment_cache_path/"
   # block of commands to execute after a successful deploy of container(s)
   after_deploy: |
     echo "Your Wordpress instance admin password is $admin_password"
   # block of commands to execute on the CI server before removing a deployment of this repo/branch
-  before_remove: ""
+  before_remove: |
+    if $Backup; then
+      echo "Backing up the deployment first..."
+      mysqldump -h "$RDS_HOST" -P "$RDS_PORT" "$subdomain" > "$deployment_cache_path/db.sql"
+      aws s3 sync "s3://${S3_BUCKET_PRIMARY}/${subdomain}" "$deployment_cache_path/files"
+      tar -zczf - "$deployment_cache_path" | aws s3 cp - "s3://${S3_BUCKET_BACKUPS}/${timestamp}-${subdomain}.tar.gz"
+    fi
+    echo "Removing database and files on s3..."
+    mysql -h "$RDS_HOST" -P "$RDS_PORT" -e "DROP DATABASE \`$subdomain\`; DROP USER \`$subdomain\`; FLUSH PRIVILEGES;"
+    aws s3 rm "s3://${S3_BUCKET_PRIMARY}/${subdomain}" --recursive
+  # block of commands to execute on the CI server after removing a deployment of this repo/branch
+  after_remove: |
+    if $Backup; then
+      echo "Backup saved to s3://${S3_BUCKET_BACKUPS}/${timestamp}-${subdomain}.tar.gz"
+    fi
 slack:
   channel:
 multisite:
