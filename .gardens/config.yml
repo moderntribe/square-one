@@ -39,7 +39,7 @@ scripts:
     set_env "S3_UPLOADS_SECRET" "$GARDEN_S3_SECRET_ACCESS_KEY" "$(pwd)/.env"
     set_env "S3_UPLOADS_REGION" "$GARDEN_AWS_REGION" "$(pwd)/.env"
     set_env "DOMAIN_CURRENT_SITE" "${subdomain}.${GARDEN_DOMAIN}" "$(pwd)/.env"
-    if $multisite_enabled; then
+    if "$multisite_enabled"; then
       set_env "WP_ALLOW_MULTISITE" "true" "$(pwd)/.env"
       set_env "WP_MULTISITE" "true" "$(pwd)/.env"
       set_env "SUBDOMAIN_INSTALL" "false" "$(pwd)/.env"
