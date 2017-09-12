@@ -24,8 +24,8 @@ scripts:
   before_deploy: |
     source ~/scripts/helper.sh
     multisite_enabled=$(./yaml-reader.py $(pwd)/.gardens/config.yml multsite.enabled)
-    db_password=$(set_cached_password "$deployment_cache_path" "db_password")
-    admin_password=$(set_cached_password "$deployment_cache_path" "admin_password")
+    db_password=$(cached_password "$deployment_cache_path" "db_password")
+    admin_password=$(cached_password "$deployment_cache_path" "admin_password")
     echo "Ensuring that our database exists for the deployment, will create it if not found, do nothing if it's already there"
     provision_db "$GARDEN_RDS_HOST" "$GARDEN_RDS_PORT" "$subdomain" "$db_password"
     echo "Setting any necessary environment variables in .env..."
