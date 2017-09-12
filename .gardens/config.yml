@@ -3,20 +3,20 @@ scripts:
   # block of commands to build this repo/branch on the CI server for deploying
   build: |
     source ~/scripts/helper.sh
+    composer update
     nvm install
     nvm use
     install_node_global_dependencies
     yarn install --production
-    composer update
     grunt dist
   # block of commands to test this repo/branch on the CI server
   test: |
     source ~/scripts/helper.sh
+    composer update
     nvm install
     nvm use
     install_node_global_dependencies
     yarn install
-    composer update
     grunt
   # block of commands to execute after this repo/branch is cloned to the CI server
   after_clone: ""
