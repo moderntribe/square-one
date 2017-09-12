@@ -6,7 +6,7 @@ scripts:
     composer update
     nvm install
     nvm use
-    install_node_global_dependencies
+    ensure_node_globals_installed
     yarn install --production
     grunt dist
   # block of commands to test this repo/branch on the CI server
@@ -15,7 +15,7 @@ scripts:
     composer update
     nvm install
     nvm use
-    install_node_global_dependencies
+    ensure_node_globals_installed
     yarn install
     grunt shell:test
   # block of commands to execute after this repo/branch is cloned to the CI server
