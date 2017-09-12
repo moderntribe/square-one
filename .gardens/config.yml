@@ -23,7 +23,7 @@ scripts:
   # block of commands to execute on the CI server before building the image of this project and deploying this repo/branch to the garden
   before_deploy: |
     source ~/scripts/helper.sh
-    multisite_enabled=$(./yaml-reader.py $(pwd)/.gardens/config.yml multsite.enabled)
+    multisite_enabled=$(~/scripts/yaml-reader.py $(pwd)/.gardens/config.yml multisite.enabled)
     db_password=$(cached_password "$deployment_cache_path" "db_password")
     admin_password=$(cached_password "$deployment_cache_path" "admin_password")
     echo "Ensuring that our database exists for the deployment, will create it if not found, do nothing if it's already there"
@@ -33,7 +33,7 @@ scripts:
     set_env "DB_NAME" "$subdomain" "$(pwd)/.env"
     set_env "DB_USER" "$subdomain" "$(pwd)/.env"
     set_env "DB_PASSWORD" "$db_password" "$(pwd)/.env"
-    set_env "DB_HOST" "${GARDEN_RDS_HOST}:${GARDEN_RDS_HOST}" "$(pwd)/.env"
+    set_env "DB_HOST" "${GARDEN_RDS_HOST}:${GARDEN_RDS_PORT}" "$(pwd)/.env"
     set_env "S3_UPLOADS_BUCKET" "${GARDEN_S3_BUCKET_PRIMARY}/${subdomain}" "$(pwd)/.env"
     set_env "S3_UPLOADS_KEY" "$GARDEN_S3_ACCESS_KEY_ID" "$(pwd)/.env"
     set_env "S3_UPLOADS_SECRET" "$GARDEN_S3_SECRET_ACCESS_KEY" "$(pwd)/.env"
@@ -48,7 +48,8 @@ scripts:
     cp .gardens/update-env.sh .garden-update-env.sh
     custom_image_build=true
     echo "Building $local_image docker image..."
-    docker build -f ./Dockerfile --pull -t "$local_image" \
+    cp .gardens/Dockerfile Dockerfile
+    docker build -f Dockerfile --pull -t "$local_image" \
                  --build-arg admin_user="admin" \
                  --build-arg multisite_enabled="$multisite_enabled" \
                  --build-arg admin_password="$admin_password" \
