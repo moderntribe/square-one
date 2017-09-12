@@ -38,7 +38,7 @@ scripts:
     set_env "S3_UPLOADS_KEY" "$GARDEN_S3_ACCESS_KEY_ID" "$(pwd)/.env"
     set_env "S3_UPLOADS_SECRET" "$GARDEN_S3_SECRET_ACCESS_KEY" "$(pwd)/.env"
     set_env "S3_UPLOADS_REGION" "$GARDEN_AWS_REGION" "$(pwd)/.env"
-    set_env "DOMAIN_CURRENT_SITE" "${subdomain}.${DOMAIN}" "$(pwd)/.env"
+    set_env "DOMAIN_CURRENT_SITE" "${subdomain}.${GARDEN_DOMAIN}" "$(pwd)/.env"
     if $multisite_enabled; then
       set_env "WP_ALLOW_MULTISITE" "true" "$(pwd)/.env"
       set_env "WP_MULTISITE" "true" "$(pwd)/.env"
@@ -55,7 +55,7 @@ scripts:
                  --build-arg admin_email="admin@${GARDEN_DOMAIN}" \
                  --build-arg title="$repo" \
                  --build-arg url="https://${subdomain}.${GARDEN_DOMAIN}" \
-                 --build-arg smtp_domain="${DOMAIN}" \
+                 --build-arg smtp_domain="${GARDEN_DOMAIN}" \
                  --build-arg smtp_host="smtp.mailgun.org" \
                  --build-arg smtp_port="587" \
                  --build-arg smtp_user="postmaster@${GARDEN_DOMAIN}" \
