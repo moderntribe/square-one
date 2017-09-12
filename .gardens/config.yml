@@ -17,7 +17,7 @@ scripts:
     nvm use
     install_node_global_dependencies
     yarn install
-    grunt
+    grunt shell:test
   # block of commands to execute after this repo/branch is cloned to the CI server
   after_clone: ""
   # block of commands to execute on the CI server before building the image of this project and deploying this repo/branch to the garden
