@@ -78,10 +78,7 @@ scripts:
     mysql -h "$GARDEN_RDS_HOST" -P "$GARDEN_RDS_PORT" -e "DROP DATABASE \`$subdomain\`; DROP USER \`$subdomain\`; FLUSH PRIVILEGES;"
     aws s3 rm "s3://${GARDEN_S3_BUCKET_PRIMARY}/${subdomain}" --recursive
   # block of commands to execute on the CI server after removing a deployment of this repo/branch
-  after_remove: |
-    if $Backup; then
-      echo "Backup of database and files saved to s3://${GARDEN_S3_BUCKET_BACKUPS}/${timestamp}-${subdomain}.tar.gz"
-    fi
+  after_remove: ""
 slack:
   channel:
 multisite:
