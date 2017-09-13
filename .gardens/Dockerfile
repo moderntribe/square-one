@@ -28,4 +28,8 @@ RUN mkdir -p /srv/site/wp-content/uploads
 RUN chown -R nginx:nginx /srv/site/wp-content/uploads
 RUN chmod -R 0775 /srv/site/wp-content/uploads
 
+RUN mkdir -p /srv/site/wp-content/cache
+RUN chown -R nginx:nginx /srv/site/wp-content/cache
+RUN chmod -R 0775 /srv/site/wp-content/cache
+
 RUN chown -R nginx:nginx /srv/site

@@ -50,6 +50,10 @@ scripts:
     fi
     cp .env "$deployment_cache_path/"
     cp .gardens/update-env.sh .garden-update-env.sh
+    mkdir -p wp-content/uploads
+    chmod 0775 wp-content/uploads
+    mkdir -p wp-content/cache
+    chmod 0775 wp-content/cache
     if [ $Build == true ] || [ $new_deployment == true ]; then
       custom_image_build=true
       echo "Building $local_image docker image..."
