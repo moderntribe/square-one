@@ -7,7 +7,7 @@ services:
     ports:
       - "0:80"
     volumes:
-      - "/opt/{{ subdomain }}:/srv/site"
+      - "/opt/deployments/{{ subdomain }}:/srv/site"
     labels:
       - "traefik.frontend.rule=Host:{{ subdomain }}.{{ domain }}"
       - "traefik.frontend.entryPoints=http,https"
