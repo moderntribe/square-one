@@ -72,9 +72,7 @@ scripts:
   before_remove: |
     if $Backup; then
       echo "Backing up the deployment first..."
-      mysqldump -h "$GARDEN_RDS_HOST" -P "$GARDEN_RDS_PORT" "$subdomain" > "$deployment_cache_path/db.sql"
-      aws s3 sync "s3://${GARDEN_S3_BUCKET_PRIMARY}/${subdomain}" "$deployment_cache_path/files"
-      tar -zczf - "$deployment_cache_path" | aws s3 cp - "s3://${GARDEN_S3_BUCKET_BACKUPS}/${timestamp}-${subdomain}.tar.gz"
+      Deployment="$subdomain" Type="everything" S3=true ~/scripts/deployment-backup.sh
     fi
     echo "Removing database and files on s3..."
     mysql -h "$GARDEN_RDS_HOST" -P "$GARDEN_RDS_PORT" -e "DROP DATABASE \`$subdomain\`; DROP USER \`$subdomain\`; FLUSH PRIVILEGES;"
