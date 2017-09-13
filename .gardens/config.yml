@@ -2,7 +2,7 @@ alias: sq1
 scripts:
   # block of commands to build this repo/branch on the CI server for deploying
   build: |
-    source ~/scripts/helper.sh
+    source ~/scripts/nursery-helper.sh
     composer update
     nvm install
     nvm use
@@ -13,7 +13,7 @@ scripts:
     grunt dist
   # block of commands to test this repo/branch on the CI server
   test: |
-    source ~/scripts/helper.sh
+    source ~/scripts/nursery-helper.sh
     composer update
     nvm install
     nvm use
@@ -26,7 +26,7 @@ scripts:
   after_clone: ""
   # block of commands to execute on the CI server before building the image of this project and deploying this repo/branch to the garden
   before_deploy: |
-    source ~/scripts/helper.sh
+    source ~/scripts/nursery-helper.sh
     multisite_enabled=$(~/scripts/yaml-reader.py $(pwd)/.gardens/config.yml multisite.enabled)
     db_password=$(cached_password "$deployment_cache_path" "db_password")
     admin_password=$(cached_password "$deployment_cache_path" "admin_password")
@@ -50,21 +50,23 @@ scripts:
     fi
     cp .env "$deployment_cache_path/"
     cp .gardens/update-env.sh .garden-update-env.sh
-    custom_image_build=true
-    echo "Building $local_image docker image..."
-    cp .gardens/Dockerfile Dockerfile
-    docker build -f Dockerfile --pull -t "$local_image" \
-                 --build-arg admin_user="admin" \
-                 --build-arg multisite_enabled="$multisite_enabled" \
-                 --build-arg admin_password="$admin_password" \
-                 --build-arg admin_email="admin@${GARDEN_DOMAIN}" \
-                 --build-arg title="$repo" \
-                 --build-arg url="https://${subdomain}.${GARDEN_DOMAIN}" \
-                 --build-arg smtp_domain="${GARDEN_DOMAIN}" \
-                 --build-arg smtp_host="smtp.mailgun.org" \
-                 --build-arg smtp_port="587" \
-                 --build-arg smtp_user="postmaster@${GARDEN_DOMAIN}" \
-                 --build-arg smtp_password="${GARDEN_SMTP_PASSWORD}" .
+    if [ $Build == true ] || [ $new_deployment == true ]; then
+      custom_image_build=true
+      echo "Building $local_image docker image..."
+      cp .gardens/Dockerfile Dockerfile
+      docker build -f Dockerfile --pull -t "$local_image" \
+                   --build-arg admin_user="admin" \
+                   --build-arg multisite_enabled="$multisite_enabled" \
+                   --build-arg admin_password="$admin_password" \
+                   --build-arg admin_email="admin@${GARDEN_DOMAIN}" \
+                   --build-arg title="$repo" \
+                   --build-arg url="https://${subdomain}.${GARDEN_DOMAIN}" \
+                   --build-arg smtp_domain="${GARDEN_DOMAIN}" \
+                   --build-arg smtp_host="smtp.mailgun.org" \
+                   --build-arg smtp_port="587" \
+                   --build-arg smtp_user="postmaster@${GARDEN_DOMAIN}" \
+                   --build-arg smtp_password="${GARDEN_SMTP_PASSWORD}" .
+    fi
   # block of commands to execute after a successful deploy of container(s)
   after_deploy: |
     echo "Your Wordpress instance admin password is $admin_password"
