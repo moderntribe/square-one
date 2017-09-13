@@ -6,6 +6,8 @@ services:
     image: "{{ image }}"
     ports:
       - "0:80"
+    volumes:
+      - "/var/{{ subdomain }}:/srv/site"
     labels:
       - "traefik.frontend.rule=Host:{{ subdomain }}.{{ domain }}"
       - "traefik.frontend.entryPoints=http,https"
