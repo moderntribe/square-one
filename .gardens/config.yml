@@ -48,13 +48,15 @@ scripts:
       set_env "WP_MULTISITE" "true" "$(pwd)/.env"
       set_env "SUBDOMAIN_INSTALL" "false" "$(pwd)/.env"
     fi
-    cp .env "$deployment_cache_path/"
+    if [ -f "$deployment_cache_path/.set-env" ]; then
+      cat "$deployment_cache_path/.set-env" >> .env
+    fi
     cp .gardens/update-env.sh .garden-update-env.sh
     mkdir -p wp-content/uploads
     chmod 0775 wp-content/uploads
     mkdir -p wp-content/cache
     chmod 0775 wp-content/cache
-    if [ $Build == true ] || [ $new_deployment == true ]; then
+    if [ $Build == true ] || [ $new_clone == true ]; then
       custom_image_build=true
       echo "Building $local_image docker image..."
       cp .gardens/Dockerfile Dockerfile
