@@ -2,7 +2,7 @@ alias: sq1
 scripts:
   # block of commands to build this repo/branch on the CI server for deploying
   build: |
-    source ~/scripts/nursery-helper.sh
+    source $JENKINS_HOME/scripts/nursery-helper.sh
     composer update
     nvm install
     nvm use
@@ -13,7 +13,7 @@ scripts:
     grunt dist
   # block of commands to test this repo/branch on the CI server
   test: |
-    source ~/scripts/nursery-helper.sh
+    source $JENKINS_HOME/scripts/nursery-helper.sh
     composer update
     nvm install
     nvm use
@@ -26,8 +26,8 @@ scripts:
   after_clone: ""
   # block of commands to execute on the CI server before building the image of this project and deploying this repo/branch to the garden
   before_deploy: |
-    source ~/scripts/nursery-helper.sh
-    multisite_enabled=$(~/scripts/yaml-reader.py $(pwd)/.gardens/config.yml multisite.enabled)
+    source $JENKINS_HOME/scripts/nursery-helper.sh
+    multisite_enabled=$($JENKINS_HOME/scripts/yaml-reader.py $(pwd)/.gardens/config.yml multisite.enabled)
     db_password=$(cached_password "$deployment_cache_path" "db_password")
     admin_password=$(cached_password "$deployment_cache_path" "admin_password")
     echo "Ensuring that our database exists for the deployment, will create it if not found, do nothing if it's already there"
@@ -80,7 +80,7 @@ scripts:
   before_remove: |
     if $Backup; then
       echo "Backing up the deployment first..."
-      Deployment="$subdomain" Type="everything" S3=true ~/scripts/deployment-backup.sh
+      Deployment="$subdomain" Type="everything" S3=true $JENKINS_HOME/scripts/deployment-backup.sh
     fi
     echo "Removing database and files on s3..."
     mysql -h "$GARDEN_RDS_HOST" -P "$GARDEN_RDS_PORT" -e "DROP DATABASE \`$subdomain\`; DROP USER \`$subdomain\`; FLUSH PRIVILEGES;"
