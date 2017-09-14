@@ -80,7 +80,7 @@ scripts:
   before_remove: |
     if $Backup; then
       echo "Backing up the deployment first..."
-      Deployment="$subdomain" Type="everything" S3=true $JENKINS_HOME/scripts/deployment-backup.sh
+      Deployment="$subdomain" S3=true $JENKINS_HOME/scripts/deployment-backup.sh
     fi
     echo "Removing database and files on s3..."
     mysql -h "$GARDEN_RDS_HOST" -P "$GARDEN_RDS_PORT" -e "DROP DATABASE \`$subdomain\`; DROP USER \`$subdomain\`; FLUSH PRIVILEGES;"
