@@ -4,10 +4,12 @@
 namespace Tribe\Project\Theme;
 
 
+use Tribe\Project\Templates\Components\Video;
 
 class Oembed_Filter {
-	const CACHE_PREFIX = '_oembed_filtered_';
-	const PROVIDER_VIMEO = 'Vimeo';
+
+	const CACHE_PREFIX     = '_oembed_filtered_';
+	const PROVIDER_VIMEO   = 'Vimeo';
 	const PROVIDER_YOUTUBE = 'YouTube';
 
 	private $supported_providers = [];
@@ -17,93 +19,133 @@ class Oembed_Filter {
 	}
 
 	/**
-	 * Replace oembed HTML with a lazyload container
-	 * 
-	 * Currently supports YouTube and Vimeo embeds.
-	 * 
-	 * @param string $html The returned oEmbed HTML.
-	 * @param object $data A data object result from an oEmbed provider.
-	 * @param string $url  The URL of the content to be embedded.
+	 * Get custom video component markup.
+	 *
+	 * @param $html
+	 * @param $data
+	 * @param $url
+	 *
+	 * @filter oembed_dataparse 999 3
+	 *
 	 * @return string
-	 * @filter oembed_dataparse 1000
 	 */
-	public function setup_lazyload_html( $html, $data, $url ) {
+	public function get_video_component( $html, $data, $url ) {
 
-		if ( ! in_array( $data->provider_name, $this->supported_providers, true ) ) {
+		// Admin should not get custom markup.
+		if ( is_admin() ) {
 			return $html;
 		}
 
-		$figure_class = 'wp-embed-lazy';
+		// Only generate markup for supported providers.
+		if ( ! in_array( $data->provider_name, $this->supported_providers ) ) {
+			return $html;
+		}
 
-		if ( $data->provider_name === self::PROVIDER_YOUTUBE ) {
+		$container_classes = [ 'c-video--lazy' ];
+
+		if ( $data->provider_name === 'YouTube' ) {
 			$embed_id    = $this->get_youtube_embed_id( $url );
 			$video_thumb = $this->get_youtube_max_resolution_thumbnail( $url );
 
 			if ( strpos( $video_thumb, 'maxresdefault' ) === false ) {
-				$figure_class .= ' wp-embed-lazy--low-res';
+				$container_classes[] = 'c-video--lazy-low-res';
 			}
 
-		} elseif ( $data->provider_name === self::PROVIDER_VIMEO) {
+		} else {
 			$embed_id    = $this->get_vimeo_embed_id( $url );
 			$video_thumb = $data->thumbnail_url;
 		}
 
-		if ( empty( $video_thumb ) ) {
-			return $html; // with no thumbnail, we use the default embed
-		}
+		$options = [
+			Video::THUMBNAIL_URL     => $video_thumb,
+			Video::CONTAINER_ATTRS   => $this->get_layout_container_attrs( $data->provider_name, $embed_id ),
+			Video::CONTAINER_CLASSES => $container_classes,
+			Video::TITLE             => __( 'Play Video', 'tribe' ),
+			Video::VIDEO_URL         => $url,
+			Video::PLAY_TEXT         => $data->title,
+		];
 
-		$frontend_html = '<figure class="'. esc_attr( $figure_class ) .'" data-js="lazyload-embed" data-embed-provider="'. esc_attr( strtolower( $data->provider_name ) ) .'">';
-		$frontend_html .= '<a href="'. esc_url( $url ) .'" class="wp-embed-lazy__trigger" data-js="lazyload-trigger" title="'. esc_attr( $data->title ) .'" data-embed-id="'. esc_attr( $embed_id ) .'">';
-		$frontend_html .= '<img class="wp-embed-lazy__image lazyload" src="' . tribe_assets_url( 'theme/img/shims/16x9.png' ) . '" data-src="' . esc_url( $video_thumb ) . '" alt="' . esc_attr( $data->title ) . '" />';
-		$frontend_html .= '<figcaption class="wp-embed-lazy__caption">';
-		$frontend_html .= '<i class="wp-embed-lazy__icon icon icon-play"></i>';
-		$frontend_html .= '<span class="wp-embed-lazy__trigger-label">' . __( 'Play Video', 'tribe' ) . '</span>';
-		$frontend_html .= '<span class="wp-embed-lazy__title">'. esc_html( $data->title ) .'</span>';
-		$frontend_html .= '</figcaption>';
-		$frontend_html .= '</a>';
-		$frontend_html .= '</figure>';
+		$video_obj     = Video::factory( $options );
+		$frontend_html = $video_obj->render();
 
 		$this->cache_frontend_html( $frontend_html, $url );
 
-		/*
-		 * Don't return the updated value here. We want
-		 * WordPress to store its default HTML in its cache,
-		 * and we'll only overwrite it on the front end.
-		 */
 		return $html;
+	}
 
+	private function get_layout_container_attrs( $provider_name, $embed_id ): array {
+		return [
+			'data-js'             => 'c-video',
+			'data-embed-id'       => $embed_id,
+			'data-embed-provider' => $provider_name,
+		];
 	}
 
 	/**
 	 * If we've cached replacement HTML for a URL, override
 	 * the default with the cached value.
+	 *
 	 * @filter embed_oembed_html 1
 	 */
 	public function filter_frontend_html_from_cache( $html, $url, $attr, $post_id ) {
 		if ( is_admin() ) {
 			return $html;
 		}
+
 		$cached = get_option( $this->get_cache_key( $url ), '' );
+
+		// If cache is empty, try generating new HTML.
+		if ( empty( $cached ) ) {
+			$this->get_fresh_frontend_html( $html, $url, $attr );
+			$cached = get_option( $this->get_cache_key( $url ), '' );
+		}
+
 		return empty( $cached ) ? $html : $cached;
 	}
 
+
 	/**
-	 * Add wrapper around embeds to setup CSS for embed aspect ratios
-	 * @filter embed_oembed_html 99
+	 * Get a fresh copy of our custom markup if our cache doesn't exist.
+	 *
+	 * @param $html
+	 * @param $url
+	 * @param $attr
+	 *
+	 * @return string
 	 */
-	public function wrap_oembed_shortcode_output( $html, $url, $attr, $post_id ) {
-		$class_embed = strpos( $url, 'youtube' ) === false || strpos( $url, 'vimeo' ) === false ? ' wp-embed--lazy' : ' wp-embed--no-lazy';
-		return sprintf( '<div class="wp-embed%s"><div class="wp-embed-wrap">%s</div></div>', $class_embed, $html );
+	protected function get_fresh_frontend_html( $html, $url, $attr ) {
+
+		/**
+		 * @var \WP_oEmbed $oembed.
+		 */
+		$oembed   = _wp_oembed_get_object();
+		$provider = $oembed->get_provider( $url, $attr );
+		$data     = $oembed->fetch( $provider, $url, $attr );
+
+		return $this->get_video_component( $html, $data, $url );
 	}
 
+	/**
+	 * Add wrapper around embeds for admin visual editor styling
+	 *
+	 * @filter embed_oembed_html 99
+	 */
+	public function wrap_admin_oembed( $html, $url, $attr, $post_id ) {
+		if ( ! is_admin() ) {
+			return $html;
+		}
+
+		return sprintf( '<div class="wp-embed"><div class="wp-embed-wrap">%s</div></div>', $html );
+	}
 
 	/**
 	 * Get the highest resolution thumbnail we can get for
 	 * a YouTube video
 	 *
 	 * @todo Use \Tribe\Libs\Oembed\YouTube when it's working
-	 * 
+	 *
 	 * @param string $url
+	 *
 	 * @return string
 	 */
 	private function get_youtube_max_resolution_thumbnail( $url ) {
@@ -136,8 +178,9 @@ class Oembed_Filter {
 
 	/**
 	 * Extract the video ID from a YouTube URL
-	 * 
+	 *
 	 * @param string $url
+	 *
 	 * @return string
 	 */
 	private function get_youtube_embed_id( $url ) {
@@ -148,8 +191,9 @@ class Oembed_Filter {
 
 	/**
 	 * Extract the video ID from a vimeo URL
-	 * 
+	 *
 	 * @param string $url
+	 *
 	 * @return string
 	 */
 	private function get_vimeo_embed_id( $url ) {
@@ -176,10 +220,12 @@ class Oembed_Filter {
 
 	/**
 	 * @param string $url
+	 *
 	 * @return string The option name to use to store the cache for a URL
 	 */
 	private function get_cache_key( $url ) {
 		$hash = md5( $url );
+
 		return static::CACHE_PREFIX . $hash;
 	}
 }

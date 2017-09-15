@@ -27,9 +27,18 @@ function the_panel_title( $title = null, $options = [] ) {
 
 	static $panel_title = '';
 
+	// Panel Preview AJAX calls send along an index value for determining positon.
+	if ( is_panel_preview() && defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+		$preview_index = (integer) filter_input( INPUT_POST, 'index', FILTER_SANITIZE_NUMBER_INT );
+	} else {
+		$preview_index = null;
+	}
+
+	$is_first_panel = ( $preview_index === 0 || ( is_null( $preview_index ) && empty( $panel_title ) ) );
+
 	$h_level = 'h2';
 
-	if ( empty( $panel_title ) && ( get_the_content() == '' && ! is_front_page() ) ) {
+	if ( get_the_content() === '' && $is_first_panel ) {
 		$h_level = 'h1';
 	}
 
