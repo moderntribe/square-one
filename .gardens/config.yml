@@ -9,6 +9,9 @@ scripts:
     ensure_node_global_installed yarn
     ensure_node_global_installed grunt
     ensure_node_global_installed jest
+    if $FlushDependencies; then
+      rm -rf node_modules
+    fi
     yarn install --production
     grunt dist
   # block of commands to test this repo/branch on the CI server
