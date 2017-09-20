@@ -33,6 +33,7 @@ scripts:
   # block of commands to execute on the CI server before building the image of this project and deploying this repo/branch to the garden
   before_deploy: |
     source $JENKINS_HOME/scripts/nursery-helper.sh
+    admin_username="tribe"
     multisite_enabled=$($JENKINS_HOME/scripts/yaml-reader.py $(pwd)/.gardens/config.yml multisite.enabled)
     db_password=$(cached_password "$deployment_cache_path" "db_password")
     admin_password=$(cached_password "$deployment_cache_path" "admin_password")
@@ -68,7 +69,7 @@ scripts:
       echo "Building $local_image docker image..."
       cp .gardens/Dockerfile Dockerfile
       docker build -f Dockerfile --pull -t "$local_image" \
-                   --build-arg admin_user="admin" \
+                   --build-arg admin_user="$admin_username" \
                    --build-arg multisite_enabled="$multisite_enabled" \
                    --build-arg admin_password="$admin_password" \
                    --build-arg admin_email="admin@${GARDEN_DOMAIN}" \
@@ -82,7 +83,7 @@ scripts:
     fi
   # block of commands to execute after a successful deploy of container(s)
   after_deploy: |
-    echo "Your Wordpress instance admin password is $admin_password"
+    echo "Your Wordpress instance admin username/password is ${admin_username}/${admin_password}"
   # block of commands to execute on the CI server before removing a deployment of this repo/branch
   before_remove: |
     if $Backup; then
