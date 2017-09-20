@@ -16,7 +16,6 @@ ARG smtp_password
 
 COPY . /srv/site
 WORKDIR /srv/site
-RUN COMPOSER_ALLOW_SUPERUSER=1 composer install
 RUN /srv/site/.gardens/wp-install.sh $multisite_enabled
 
 RUN sed -i 's/^root=.*$/root=postmaster@'"$smtp_domain"'/g' /etc/ssmtp/ssmtp.conf
@@ -28,5 +27,9 @@ RUN sed -i 's/^AuthPass=.*$/AuthPass='"$smtp_password"'/g' /etc/ssmtp/ssmtp.conf
 RUN mkdir -p /srv/site/wp-content/uploads
 RUN chown -R nginx:nginx /srv/site/wp-content/uploads
 RUN chmod -R 0775 /srv/site/wp-content/uploads
+
+RUN mkdir -p /srv/site/wp-content/cache
+RUN chown -R nginx:nginx /srv/site/wp-content/cache
+RUN chmod -R 0775 /srv/site/wp-content/cache
 
 RUN chown -R nginx:nginx /srv/site

@@ -11,3 +11,5 @@ if ! $(wp --allow-root core is-installed); then
   fi
 fi
 wp --allow-root plugin activate s3-uploads
+wp --allow-root rewrite structure '/%postname%'
+wp --allow-root rewrite flush
