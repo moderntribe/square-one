@@ -44,6 +44,11 @@ function tribe_getenv($name, $default = null) {
 	return $env;
 }
 
+// make sure our environment variables are also accessible as PHP constants
+foreach ($_ENV as $key => $value) {
+	define( $key, $value );
+}
+
 $config_defaults = array(
 
 	// Paths
