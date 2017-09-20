@@ -38,6 +38,7 @@ scripts:
     admin_password=$(cached_password "$deployment_cache_path" "admin_password")
     echo "Ensuring that our database exists for the deployment, will create it if not found, do nothing if it's already there"
     provision_db "$GARDEN_RDS_HOST" "$GARDEN_RDS_PORT" "$subdomain" "$db_password"
+    env_decrypt "$(pwd)" "$JENKINS_HOME/.garden/repo-keys/$repo_formatted"
     echo "Setting any necessary environment variables in .env..."
     cp .gardens/.env .env
     set_env "DB_NAME" "$subdomain" "$(pwd)/.env"
