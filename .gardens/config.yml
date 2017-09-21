@@ -37,7 +37,7 @@ scripts:
     db_password=$(cached_password "$deployment_cache_path" "db_password")
     admin_username=$(cached_string "$deployment_cache_path" "admin_username" "tribe")
     admin_password=$(cached_password "$deployment_cache_path" "admin_password")
-    commit_hash=$(cached_string "$deployment_cache_path", "commit_hash" "$(git rev-parse HEAD)")
+    commit_hash=$(cached_string "$deployment_cache_path" "commit_hash" "$(git rev-parse HEAD)")
     echo "Ensuring that our database exists for the deployment, will create it if not found, do nothing if it's already there"
     provision_db "$GARDEN_RDS_HOST" "$GARDEN_RDS_PORT" "$subdomain" "$db_password"
     env_decrypt "$(pwd)" "$JENKINS_HOME/.garden/repo-keys/$repo_formatted"
