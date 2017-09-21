@@ -39,7 +39,7 @@ function tribe_isSSL() {
 function tribe_getenv($name, $default = null) {
 	$env = getenv($name);
 	if ( $env === false ) return $default;
-	if ( $env == "false" || $env == "true" ) return filter_var($env, FILTER_VALIDATE_BOOLEAN);
+	if ( strtolower(trim($env)) == "false" || strtolower(trim($env)) == "true" ) return filter_var(strtolower(trim($env)), FILTER_VALIDATE_BOOLEAN);
 	if ( is_numeric($env) ) return ($env - 0);
 	return $env;
 }
