@@ -1,5 +1,5 @@
 {
-  "_instructions": "Rename file to local-config.json. Set `proxy` below to your local dev url for local browsersync and `certs_path` to the docker global certs directory on your local machine, or follow these instructions for multi device network sync: http://sheelahb.com/blog/simplify-your-cross-device-and-browser-testing-with-browser-sync/",
+  "_instructions": "Rename file to local-config.json. Set `proxy` below to your local dev url for local browsersync and `certs_path` to your docker global certs directory, or follow these instructions for multi device network sync: http://sheelahb.com/blog/simplify-your-cross-device-and-browser-testing-with-browser-sync/",
   "proxy": "square1.tribe",
   "certs_path": ""
 }
