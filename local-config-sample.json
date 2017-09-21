@@ -1,5 +1,4 @@
 {
   "_instructions": "Rename file to local-config.json. Set url below to your local dev url for local browsersync and the path to the square-one repo on your local for the dockers certs, or follow these instructions for multi device network sync: http://sheelahb.com/blog/simplify-your-cross-device-and-browser-testing-with-browser-sync/",
   "proxy": "square1.tribe",
-  "certs_path": "/Users/ryan/Repos/square-one/dev/docker/global/certs"
 }
