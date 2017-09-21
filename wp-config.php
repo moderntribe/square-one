@@ -44,11 +44,6 @@ function tribe_getenv($name, $default = null) {
 	return $env;
 }
 
-// make sure our environment variables are also accessible as PHP constants
-foreach ($_ENV as $key => $value) {
-	define( $key, $value );
-}
-
 $config_defaults = array(
 
 	// Paths
@@ -153,6 +148,10 @@ if ( defined( 'ENVIRONMENT' ) && ENVIRONMENT == 'PRODUCTION' ) {
 foreach ( $config_defaults AS $config_default_key => $config_default_value ) {
 	if ( ! defined( $config_default_key ) )
 		define( $config_default_key, $config_default_value );
+}
+foreach ($_ENV as $key => $value) {
+	if ( ! defined( key ) )
+		define( $key, tribe_getenv($key) );
 }
 
 // ==============================================================
