@@ -13,7 +13,7 @@ scripts:
       rm -rf node_modules
     fi
     yarn install --production
-    grunt dist
+    grunt build
   # block of commands to test this repo/branch on the CI server
   test: |
     source $JENKINS_HOME/scripts/nursery-helper.sh
@@ -27,7 +27,8 @@ scripts:
       rm -rf node_modules
     fi
     yarn install
-    grunt shell:test
+    grunt lint
+    grunt test
   # block of commands to execute after this repo/branch is cloned to the CI server
   after_clone: ""
   # block of commands to execute on the CI server before building the image of this project and deploying this repo/branch to the garden

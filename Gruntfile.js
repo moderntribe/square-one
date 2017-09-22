@@ -90,6 +90,46 @@ module.exports = function (grunt) {
 			'header:themeWPLogin',
 		]);
 
+	var le = grunt.option('le') || 'mac';
+
+	grunt.registerTask(
+		'build', [
+			'clean:themeMinCSS',
+			'postcss:theme',
+			'postcss:themeMin',
+			'header:themePrint',
+			'header:theme',
+			'postcss:themeWPEditor',
+			'postcss:themeWPEditorMin',
+			'header:themeWPEditor',
+			'postcss:themeWPLogin',
+			'postcss:themeWPLoginMin',
+			'header:themeWPLogin',
+			'postcss:themeLegacy',
+			'postcss:themeLegacyMin',
+			'header:themeLegacy',
+			'clean:themeMinJS',
+			'copy:themeJS',
+			'webpack',
+			'uglify:themeMin',
+			'concat:themeMinVendors',
+			'clean:themeMinVendorJS',
+			'lineending:' + le,
+			'setPHPConstant',
+		]);
+
+	grunt.registerTask(
+		'test', [
+			'accessibility',
+			'shell:test',
+		]);
+
+	grunt.registerTask(
+		'lint', [
+			'eslint',
+			'postcss:themeLint',
+		]);
+
 	grunt.registerTask(
 		'legacy', [
 			'postcss:themeLegacy',
@@ -97,7 +137,6 @@ module.exports = function (grunt) {
 			'header:themeLegacy',
 		]);
 
-	var le = grunt.option('le') || 'mac';
 	grunt.registerTask(
 		'cheat', [
 			'shell:install',
