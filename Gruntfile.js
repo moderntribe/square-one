@@ -120,7 +120,7 @@ module.exports = function (grunt) {
 
 	grunt.registerTask(
 		'test', [
-			'accessibility',
+			// 'accessibility',
 			'shell:test',
 		]);
 
