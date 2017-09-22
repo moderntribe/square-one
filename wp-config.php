@@ -39,7 +39,7 @@ function tribe_isSSL() {
 function tribe_getenv($name, $default = null) {
 	$env = getenv($name);
 	if ( $env === false ) return $default;
-	if ( $env == "false" || $env == "true" ) return filter_var($env, FILTER_VALIDATE_BOOLEAN);
+	if ( strtolower(trim($env)) == "false" || strtolower(trim($env)) == "true" ) return filter_var(strtolower(trim($env)), FILTER_VALIDATE_BOOLEAN);
 	if ( is_numeric($env) ) return ($env - 0);
 	return $env;
 }
@@ -148,6 +148,11 @@ if ( defined( 'ENVIRONMENT' ) && ENVIRONMENT == 'PRODUCTION' ) {
 foreach ( $config_defaults AS $config_default_key => $config_default_value ) {
 	if ( ! defined( $config_default_key ) )
 		define( $config_default_key, $config_default_value );
+}
+// make sure our environment variables are also accessible as PHP constants
+foreach ($_ENV as $key => $value) {
+	if ( ! defined( $key ) )
+		define( $key, tribe_getenv($key) );
 }
 
 // ==============================================================
