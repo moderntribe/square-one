@@ -89,13 +89,13 @@ class WPSEO_Link_Notifier {
 				__(
 					'To make sure all the links in your texts are counted, we need to analyze all your texts.
 					All you have to do is press the following button and we\'ll go through all your texts for you.
-					
+
 					%3$sCount links%4$s
-					
+
 					The Text link counter feature provides insights in how many links are found in your text and how many links are referring to your text. This is very helpful when you are improving your %1$sinternal linking%2$s.',
 					'wordpress-seo'
 				),
-				'<a href="' . WPSEO_Shortlinker::get( 'https://yoa.st/15m' ). '" target="_blank">',
+				'<a href="' . WPSEO_Shortlinker::get( 'https://yoa.st/15m' ) . '" target="_blank">',
 				'</a>',
 				'<button type="button" id="noticeRunLinkIndex" class="button">',
 				'</button>'

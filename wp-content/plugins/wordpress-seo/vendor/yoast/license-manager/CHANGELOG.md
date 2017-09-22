@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) 
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.6.0] - 2017-08-22
+
+### Added
+- Added a way to overwrite the result of the license manager in the implementing plugin. This is done by applying `yoast-license-valid` and `yoast-show-license-notice` filters.
+
+### Fixed
+- Fixed activation of licenses on multisites and on wpml installations.
+
 ## [1.5.0] - 2017-02-28
 ### Added
 - Add a `custom_message` option to the response which will be shown as a custom message after the default message.

@@ -9,6 +9,9 @@ scripts:
     ensure_node_global_installed yarn
     ensure_node_global_installed grunt
     ensure_node_global_installed jest
+    if $FlushDependencies; then
+      rm -rf node_modules
+    fi
     yarn install --production
     grunt dist
   # block of commands to test this repo/branch on the CI server
@@ -32,9 +35,12 @@ scripts:
     source $JENKINS_HOME/scripts/nursery-helper.sh
     multisite_enabled=$($JENKINS_HOME/scripts/yaml-reader.py $(pwd)/.gardens/config.yml multisite.enabled)
     db_password=$(cached_password "$deployment_cache_path" "db_password")
+    admin_username=$(cached_string "$deployment_cache_path" "admin_username" "tribe")
     admin_password=$(cached_password "$deployment_cache_path" "admin_password")
+    commit_hash=$(cached_string "$deployment_cache_path" "commit_hash" "$(git rev-parse HEAD)")
     echo "Ensuring that our database exists for the deployment, will create it if not found, do nothing if it's already there"
     provision_db "$GARDEN_RDS_HOST" "$GARDEN_RDS_PORT" "$subdomain" "$db_password"
+    env_decrypt "$(pwd)" "$JENKINS_HOME/.garden/repo-keys/$repo_formatted"
     echo "Setting any necessary environment variables in .env..."
     cp .gardens/.env .env
     set_env "DB_NAME" "$subdomain" "$(pwd)/.env"
@@ -64,7 +70,7 @@ scripts:
       echo "Building $local_image docker image..."
       cp .gardens/Dockerfile Dockerfile
       docker build -f Dockerfile --pull -t "$local_image" \
-                   --build-arg admin_user="admin" \
+                   --build-arg admin_user="$admin_username" \
                    --build-arg multisite_enabled="$multisite_enabled" \
                    --build-arg admin_password="$admin_password" \
                    --build-arg admin_email="admin@${GARDEN_DOMAIN}" \
@@ -78,7 +84,7 @@ scripts:
     fi
   # block of commands to execute after a successful deploy of container(s)
   after_deploy: |
-    echo "Your Wordpress instance admin password is $admin_password"
+    echo "Your Wordpress instance admin username/password is ${admin_username}/${admin_password}"
   # block of commands to execute on the CI server before removing a deployment of this repo/branch
   before_remove: |
     if $Backup; then

@@ -4,9 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [1.0.2]
-### Fixed
-* When multiple plugins containing whip are activated, the message is no longer shown multiple times, props [Andrea](https://github.com/sciamannikoo).
+## [1.1.0]
+### Added
+* Allow WordPress messages to be dismissed for a period of 4 weeks.
 
 ## [1.0.1]
 ### Fixed

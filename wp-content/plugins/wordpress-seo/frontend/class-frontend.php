@@ -155,7 +155,10 @@ class WPSEO_Frontend {
 		$primary_category = new WPSEO_Frontend_Primary_Category();
 		$primary_category->register_hooks();
 
-		$this->hooks = array( $primary_category );
+		$json_ld = new WPSEO_JSON_LD();
+		$json_ld->register_hooks();
+
+		$this->hooks = array( $primary_category, $json_ld );
 	}
 
 	/**
@@ -166,7 +169,6 @@ class WPSEO_Frontend {
 			return;
 		}
 
-		new WPSEO_JSON_LD;
 		add_action( 'wpseo_head', array( $this, 'webmaster_tools_authentication' ), 90 );
 	}
 
@@ -1031,6 +1033,15 @@ class WPSEO_Frontend {
 			return;
 		}
 
+		/**
+		 * Filter: 'wpseo_disable_adjacent_rel_links' - Allows disabling of Yoast adjacent links if this is being handled by other code.
+		 *
+		 * @api bool $links_generated Indicates if other code has handled adjacent links.
+		 */
+		if ( true === apply_filters( 'wpseo_disable_adjacent_rel_links', false ) ) {
+			return;
+		}
+
 		global $wp_query;
 
 		if ( ! is_singular() ) {
@@ -1339,7 +1350,7 @@ class WPSEO_Frontend {
 				$post_data = $term;
 			}
 		}
-		else if ( ( ! is_string( $metadesc ) || '' === $metadesc ) && '' !== $template ) {
+		elseif ( ( ! is_string( $metadesc ) || '' === $metadesc ) && '' !== $template ) {
 			if ( ! isset( $term ) ) {
 				$term = $wp_query->get_queried_object();
 			}
@@ -1691,12 +1702,12 @@ class WPSEO_Frontend {
 
 		$author_link = '';
 		if ( is_object( $post ) ) {
-			$author_link = '<a ' . $no_follow_attr . 'href="' . esc_url( get_author_posts_url( $post->post_author ) ) . '">' . get_the_author() . '</a>';
+			$author_link = '<a ' . $no_follow_attr . 'href="' . esc_url( get_author_posts_url( $post->post_author ) ) . '">' . esc_html( get_the_author() ) . '</a>';
 		}
 
-		$post_link      = '<a ' . $no_follow_attr . 'href="' . esc_url( get_permalink() ) . '">' . get_the_title() . '</a>';
-		$blog_link      = '<a ' . $no_follow_attr . 'href="' . esc_url( get_bloginfo( 'url' ) ) . '">' . get_bloginfo( 'name' ) . '</a>';
-		$blog_desc_link = '<a ' . $no_follow_attr . 'href="' . esc_url( get_bloginfo( 'url' ) ) . '">' . get_bloginfo( 'name' ) . ' - ' . strip_tags( get_bloginfo( 'description' ) ) . '</a>';
+		$post_link      = '<a ' . $no_follow_attr . 'href="' . esc_url( get_permalink() ) . '">' . esc_html( get_the_title() ) . '</a>';
+		$blog_link      = '<a ' . $no_follow_attr . 'href="' . esc_url( get_bloginfo( 'url' ) ) . '">' . esc_html( get_bloginfo( 'name' ) ) . '</a>';
+		$blog_desc_link = '<a ' . $no_follow_attr . 'href="' . esc_url( get_bloginfo( 'url' ) ) . '">' . esc_html( get_bloginfo( 'name' ) ) . ' - ' . esc_html( get_bloginfo( 'description' ) ) . '</a>';
 
 		$content = stripslashes( trim( $content ) );
 		$content = str_replace( '%%AUTHORLINK%%', $author_link, $content );
