@@ -29,7 +29,7 @@ const canLocalStore = () => {
 };
 
 const android = /(android)/i.test(navigator.userAgent);
-const chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
+const chrome = !!window.chrome;
 const firefox = typeof InstallTrigger !== 'undefined';
 const ie = /* @cc_on!@ */false || document.documentMode;
 const edge = !ie && !!window.StyleMedia;

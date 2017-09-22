@@ -15,12 +15,12 @@ const applyBrowserClasses = () => {
 		classes.add('device-ios');
 	}
 
-	if (browser.chrome) {
+	if (browser.edge) {
+		classes.add('browser-edge');
+	} else if (browser.chrome) {
 		classes.add('browser-chrome');
 	} else if (browser.firefox) {
 		classes.add('browser-firefox');
-	} else if (browser.edge) {
-		classes.add('browser-edge');
 	} else if (browser.ie) {
 		classes.add('browser-ie');
 	} else if (browser.opera) {
