@@ -1,0 +1,19 @@
+{# Panel: Testimonial #}
+
+{% extends "content/panels/panel.twig" %}
+
+{% block wrapper_start %}
+	<div class="site-panel--testimonial__inner {{ text_color }}">
+{% endblock %}
+
+{% block content %}
+
+	{{ image }}
+
+	<div class="s-content">
+		<div class="g-row">
+			{{ slider }}
+		</div>
+	</div>
+
+{% endblock %}

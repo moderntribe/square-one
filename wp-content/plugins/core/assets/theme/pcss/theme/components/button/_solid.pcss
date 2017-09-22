@@ -1,0 +1,98 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Button: Solid
+ *
+ * ----------------------------------------------------------------------------- */
+
+.c-btn,
+a.c-btn {
+	@mixin button-global;
+
+	background-color: var(--color-primary);
+	border-bottom: none;
+	border-radius: 5px;
+	color: var(--color-white);
+	font-family: var(--font-family-base);
+	font-size: var(--font-size-content-s);
+	letter-spacing: 0.05em;
+	line-height: var(--line-height-base);
+	padding: 17px 24px;
+	text-align: center;
+	text-transform: uppercase;
+
+	&:visited {
+		color: var(--color-white);
+	}
+
+	&:hover,
+	&:focus,
+	&:active {
+		background-color: var(--color-link-hover);
+		color: var(--color-white);
+	}
+
+	@media (--viewport-medium) {
+		font-size: var(--font-size-base);
+		line-height: var(--line-height-base);
+		padding: 19px 24px;
+	}
+}
+
+/* -------------------------------------------------------------------------
+ * Button: Modifier - Full Width
+ * ------------------------------------------------------------------------- */
+
+.c-btn--full,
+a.c-btn--full {
+	width: 100%;
+}
+
+/* -------------------------------------------------------------------------
+ * Button: Modifier - Small
+ * ------------------------------------------------------------------------- */
+
+.c-btn--sm,
+a.c-btn--sm {
+	font-size: var(--font-size-content-s);
+	padding: 16px 18px;
+
+	@media (--viewport-medium) {
+		font-size: var(--font-size-content-s);
+	}
+}
+
+/* -------------------------------------------------------------------------
+ * Button: Modifier - Large
+ * ------------------------------------------------------------------------- */
+
+.c-btn--lg,
+a.c-btn--lg {
+	font-size: var(--font-size-content-s);
+	padding: 19px 24px;
+
+	@media (--viewport-medium) {
+		font-size: var(--font-size-base);
+		padding: 24px 28px;
+	}
+}
+
+/* -------------------------------------------------------------------------
+ * Button: Modifier - Inverted
+ * ------------------------------------------------------------------------- */
+
+.c-btn--inverted,
+a.c-btn--inverted {
+	background-color: var(--color-white);
+	color: var(--color-primary);
+
+	&:visited {
+		color: var(--color-primary);
+	}
+
+	&:hover,
+	&:focus,
+	&:active {
+		background-color: var(--color-white);
+		color: var(--color-link-hover);
+	}
+}

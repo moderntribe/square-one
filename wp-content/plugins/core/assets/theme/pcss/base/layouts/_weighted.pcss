@@ -1,0 +1,72 @@
+
+/* -----------------------------------------------------------------------------
+ *
+ * Layout: Weighted
+ *
+ * Usage: Loop (results + sidebar, etc.)
+ *
+ * Example:
+ * <div class="l-weighted-right">
+ *   <div>
+ *     ...
+ *   </div>
+  *  <div>
+ *     ...
+ *   </div>
+ * </div>
+ *
+ * ----------------------------------------------------------------------------- */
+
+/* Layout: Weighted Right */
+
+.l-weighted-right {
+	@media (--viewport-full) {
+		display: flex;
+	}
+
+	& > * {
+
+		&:first-child {
+			@media (--viewport-full) {
+				width: calc(30% - (var(--grid-gutter) - (var(--grid-gutter) / 2)));
+			}
+		}
+
+		&:last-child {
+			margin-top: var(--spacer);
+
+			@media (--viewport-full) {
+				margin-top: 0;
+				margin-left: var(--grid-gutter);
+				width: calc(70% - (var(--grid-gutter) - (var(--grid-gutter) / 2)));
+			}
+		}
+	}
+}
+
+/* Layout: Weighted Left */
+
+.l-weighted-left {
+	@media (--viewport-full) {
+		display: flex;
+	}
+
+	& > * {
+
+		&:first-child {
+			@media (--viewport-full) {
+				width: calc(70% - (var(--grid-gutter) - (var(--grid-gutter) / 2)));
+			}
+		}
+
+		&:last-child {
+			margin-top: var(--spacer);
+
+			@media (--viewport-full) {
+				margin-top: 0;
+				margin-left: var(--grid-gutter);
+				width: calc(30% - (var(--grid-gutter) - (var(--grid-gutter) / 2)));
+			}
+		}
+	}
+}

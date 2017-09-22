@@ -1,0 +1,4 @@
+https://square1.tribe
+heading|issue|element|id|class|line|column|description
+ERROR|WCAG2AA.Principle2.Guideline2_4.2_4_2.H25.1.NoTitleEl|<head></head>|||1|0|A title should be provided for the document, using a non-empty title element in the head section.
+ERROR|WCAG2AA.Principle3.Guideline3_1.3_1_1.H57.2|<html><head></head><body></body></html>|||1|0|The html element should have a lang or xml:lang attribute which describes the language of the document.

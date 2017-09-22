@@ -1,0 +1,38 @@
+{#
+
+Component: Button
+
+Documentation: docs\theme\components\button.md
+
+Controller: wp-content\plugins\core\src\Templates\Components\Button.php
+PostCSS: wp-content\plugins\core\assets\theme\pcss\components\_button.pcss
+
+Description: Use this wherever you need a button or link styled as button.
+
+Attributes:
+	{
+        btn_as_link: true, // true/false. use link tag? Defaults to button
+        attrs: 'data-js="nav-trigger" aria-controls="etc"', // string. data atts, aria etc
+        classes: 'c-btn--large icon icon-checkmark icon--after', // string. additional classes for the button/link, icon classes etc
+		label: 'Click Here', // string. the button text
+		target: '_blank' // string. if type is link you can pass in target
+		type: 'submit' // string. if tag is button, you can set type
+		url: 'http://google.com' // string. if type is link you can set url
+    }
+ #}
+
+<{{ tag }} class="{{ classes }}"
+	{% if type %}
+	type="{{ type }}"
+	{% endif %}
+	{% if url %}
+	href="{{ url }}"
+	{% endif %}
+	{% if target %}
+	target="{{ target }}"
+	{% endif %}
+	{{ attrs }}>
+	{% if label is not empty %}
+		<span class="c-btn__text">{{ label }}</span>
+	{% endif %}
+</{{ tag }}>

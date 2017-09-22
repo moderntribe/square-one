@@ -30,7 +30,9 @@ var compileOptions = {
 var legacyOptions = {
 	map: false,
 	processors: [
-		require('postcss-partial-import')({ extension: 'pcss', }),
+		require('postcss-partial-import')({
+			extension: ".pcss",
+		}),
 		require('postcss-mixins'),
 		require('postcss-custom-properties'),
 		require('postcss-simple-vars'),

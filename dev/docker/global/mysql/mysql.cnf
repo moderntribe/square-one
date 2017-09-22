@@ -1,0 +1,17 @@
+[mysqld]
+
+innodb_file_per_table=1
+innodb_buffer_pool_size=2G
+query_cache_type=0
+tmp_table_size=256M
+max_heap_table_size=512M
+thread_cache_size=4
+table_open_cache=1024
+
+# WordPress's database includes many fields that support MEDIUMTEXT (i.e., ~16M)
+max_allowed_packet=16M
+skip-host-cache
+skip-name-resolve
+
+sql-mode=NO_AUTO_CREATE_USER
+show_compatibility_56=ON

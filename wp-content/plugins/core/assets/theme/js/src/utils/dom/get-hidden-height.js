@@ -6,21 +6,23 @@
  */
 
 const getHiddenHeight = (el) => {
-	const zindex = getComputedStyle(el)['z-index'];
-	const pos = getComputedStyle(el).position;
+	const width = el.clientWidth;
 	const element = el;
 
 	element.style.visibility = 'hidden';
 	element.style.height = 'auto';
+	element.style.maxHeight = 'none';
 	element.style.position = 'fixed';
-	element.style.zIndex = -1;
+	element.style.width = `${width}px`;
 
 	const tHeight = element.offsetHeight;
 
-	element.style.visibility = 'visible';
-	element.style.height = 0;
-	element.style.position = pos;
-	element.style.zIndex = zindex;
+	element.style.visibility = '';
+	element.style.height = '';
+	element.style.maxHeight = '';
+	element.style.width = '';
+	element.style.position = '';
+	element.style.zIndex = '';
 
 	return tHeight;
 };
