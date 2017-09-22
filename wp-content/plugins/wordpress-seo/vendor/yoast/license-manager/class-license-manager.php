@@ -86,12 +86,34 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 			// catch POST requests from license form
 			add_action( 'admin_init', array( $this, 'catch_post_request' ) );
 
+			// Adds the plugin to the active extensions.
+			add_filter( 'yoast-active-extensions', array( $this, 'set_active_extension' ) );
+
 			// setup item type (plugin|theme) specific hooks
 			$this->specific_hooks();
 
 			// setup the auto updater
 			$this->setup_auto_updater();
+		}
 
+		/**
+		 * Checks if the license is valid and put it into the list with extensions.
+		 *
+		 * @param array $extensions The extensions used in Yoast SEO.
+		 *
+		 * @return array
+		 */
+		public function set_active_extension( $extensions ) {
+			if ( ! $this->license_is_valid() ) {
+				$this->set_license_key( 'yoast-dummy-license' );
+				$this->activate_license();
+			}
+
+			if ( $this->license_is_valid() ) {
+				$extensions[] = $this->product->get_slug();
+			}
+
+			return $extensions;
 		}
 
 		/**
@@ -107,7 +129,7 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 			}
 
 			// show notice if license is invalid
-			if ( ! $this->license_is_valid() ) {
+			if ( $this->show_license_notice() && ! $this->license_is_valid() ) {
 				if ( $this->get_license_key() == '' ) {
 					$message = __( '<b>Warning!</b> You didn\'t set your %s license key yet, which means you\'re missing out on updates and support! <a href="%s">Enter your license key</a> or <a href="%s" target="_blank">get a license here</a>.' );
 				} else {
@@ -172,7 +194,9 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 				// Append custom HTML message to default message.
 				$message .= $this->get_custom_message( $result );
 
-				$this->set_notice( $message, $success );
+				if ( $this->show_license_notice() ) {
+					$this->set_notice( $message, $success );
+				}
 
 				$this->set_license_status( $result->license );
 			}
@@ -202,12 +226,52 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 				$message .= $this->get_custom_message( $result );
 
 				// Append custom HTML message to default message.
-				$this->set_notice( $message, $success );
+				if ( $this->show_license_notice() ) {
+					$this->set_notice( $message, $success );
+				}
 
 				$this->set_license_status( $result->license );
 			}
 
 			return ( $this->get_license_status() === 'deactivated' );
+		}
+
+		/**
+		 * Returns the home url with the following modifications:
+		 *
+		 * In case of a multisite setup we return the network_home_url.
+		 * In case of no multisite setup we return the home_url while overriding the WPML filter.
+		 */
+		public function get_url() {
+			// Add a new filter to undo WPML's changing of home url.
+			add_filter( 'wpml_get_home_url', array( $this, 'wpml_get_home_url' ), 10, 2 );
+
+			// If the plugin is network activated, use the network home URL.
+			if ( $this->is_network_activated ) {
+				$url = network_home_url();
+			}
+
+			// Otherwise use the home URL for this specific site.
+			if ( ! $this->is_network_activated ) {
+				$url = home_url();
+			}
+
+			remove_filter( 'wpml_get_home_url', array( $this, 'wpml_get_home_url' ), 10 );
+
+			return $url;
+		}
+
+		/**
+		 * Returns the original URL instead of the language-enriched URL.
+		 * This method gets automatically triggered by the wpml_get_home_url filter.
+		 *
+		 * @param string $home_url The url altered by WPML. Unused.
+		 * @param string $url      The url that isn't altered by WPML.
+		 *
+		 * @return string The original url.
+		 */
+		public function wpml_get_home_url( $home_url, $url ) {
+			return $url;
 		}
 
 		/**
@@ -227,7 +291,7 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 				'edd_action' => $action . '_license',
 				'license'    => $this->get_license_key(),
 				'item_name'  => urlencode( trim( $this->product->get_item_name() ) ),
-				'url'        => get_option( 'home' )
+				'url'        => $this->get_url()
 				// grab the URL straight from the option to prevent filters from breaking it.
 			);
 
@@ -697,6 +761,20 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 			}
 
 			return $message;
+		}
+
+		/**
+		 * Returns true when a license notice should be shown.
+		 *
+		 * @return bool
+		 */
+		protected function show_license_notice() {
+			/**
+			 * Filter: 'yoast-show-license-notice' - Show the license notice.
+			 *
+			 * @api bool $show True if notices should be shown.
+			 */
+			return ( bool ) apply_filters( 'yoast-show-license-notice', true );
 		}
 	}
 
