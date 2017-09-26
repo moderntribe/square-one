@@ -185,7 +185,11 @@ class WPSEO_Admin_Init {
 	public function has_default_tagline() {
 		$blog_description = get_bloginfo( 'description' );
 		$default_blog_description    = 'Just another WordPress site';
+
+		// We are checking against the WordPress internal translation.
+		// @codingStandardsIgnoreLine
 		$translated_blog_description = __( 'Just another WordPress site' );
+
 		return $translated_blog_description === $blog_description || $default_blog_description === $blog_description;
 	}
 
@@ -430,24 +434,60 @@ class WPSEO_Admin_Init {
 			// Only register the yoast i18n when the page is a Yoast SEO page.
 			if ( WPSEO_Utils::is_yoast_seo_free_page( filter_input( INPUT_GET, 'page' ) ) ) {
 				$this->register_i18n_promo_class();
+				$this->register_premium_upsell_admin_block();
 			}
 		}
 	}
 
 	/**
-	 * Register the promotion class for our GlotPress instance
+	 * Registers the Premium Upsell Admin Block.
+	 *
+	 * @return void
+	 */
+	private function register_premium_upsell_admin_block() {
+		if ( ! WPSEO_Utils::is_yoast_seo_premium() ) {
+			$upsell_block = new Premium_Upsell_Admin_Block( 'wpseo_admin_promo_footer' );
+			$upsell_block->register_hooks();
+		}
+	}
+
+	/**
+	 * Registers the promotion class for our GlotPress instance, then creates a notification with the i18n promo.
 	 *
 	 * @link https://github.com/Yoast/i18n-module
 	 */
 	private function register_i18n_promo_class() {
 		// BC, because an older version of the i18n-module didn't have this class.
-		new Yoast_I18n_WordPressOrg_v2(
+		$i18n_module = new Yoast_I18n_WordPressOrg_v3(
 			array(
 				'textdomain'  => 'wordpress-seo',
 				'plugin_name' => 'Yoast SEO',
 				'hook'        => 'wpseo_admin_promo_footer',
+			), false
+		);
+
+		$message = $i18n_module->get_promo_message();
+
+		if ( $message !== '' ) {
+			$message .= $i18n_module->get_dismiss_i18n_message_button();
+		}
+
+		$notification_center = Yoast_Notification_Center::get();
+
+		$notification = new Yoast_Notification(
+			$message,
+			array(
+				'type' => Yoast_Notification::WARNING,
+				'id'   => 'i18nModuleTranslationAssistance',
 			)
 		);
+
+		if ( $message ) {
+			$notification_center->add_notification( $notification );
+			return;
+		}
+
+		$notification_center->remove_notification( $notification );
 	}
 
 	/**
@@ -480,7 +520,6 @@ class WPSEO_Admin_Init {
 
 		// WordPress hooks that have been deprecated in Yoast SEO 3.0.
 		$deprecated_30 = array(
-			'wpseo_pre_analysis_post_content',
 			'wpseo_metadesc_length',
 			'wpseo_metadesc_length_reason',
 			'wpseo_body_length_score',

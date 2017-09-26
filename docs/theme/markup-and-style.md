@@ -18,23 +18,34 @@ can read about BEM and get up to speed here:
 
 ## Namespacing / Prefixing
 
-In addition to BEM we also have some additional namespacing / prefixing of certain classes to provide 
+In addition to BEM we also have some additional namespacing (prefixing & suffixing) of certain classes to provide 
 additional clarity and insight to our classes and what they do:
 
 | Type             | Prefix         | Example                          |
 | ---------------- | -------------- | -------------------------------- |
 | Utility / Helper | u-             | u-clearfix, u-color-blue         |
-| Layout           | l-             | l-wrapper                        |
-| Theme / Skin     | t-             | t-content, t-dark, t-light    |
+| Layout           | l-             | l-wrapper, l-container           |
+| Grid             | g-             | g-row, g-col, g-row--col-2       |
+| Section          | s-             | s-wrapper, s-content, s-header   |
+| Component        | c-             | c-card, c-video                  |
+| Theme / Skin     | t-             | t-content, t-content--light      |
 
 These are to be used as follows:
 
 * Utility / Helper: used for globally available helpers that do single, defined things and can be safely
 used anywhere
-* Layout: used for any sort of globally defined layouts, consists of the general site content wrapper, but 
-can also include additionally setup, globally used layouts
+* Layout: used for any sort of globally defined layouts, consists of the general site content container, but 
+can also include additionally setup, globally used layouts; used for more page-level layouts
+* Grid: used for more granular layouts, typical column based grids
+* Section: used for site section layer cake, think panels or general page
+* Component: used for all things components and patterns, think reusable modules
 * Theme / Skin: used for styles that are essentially skins or themes and will typically be used in specific 
 scenarios along with other helpers that should be documented (more to come on this and better define it later)
+
+| Type                                 | Suffix                                         | Example                          |
+| ------------------------------------ | ---------------------------------------------- | -------------------------------- |
+| Min-width BP declaration or modifier | -min-{breakpoint-variable-name} or --min-{...} | g-row--col-2--min-medium         |
+| Max-width BP declaration or modifier | -max-{breapoint-variable-name} or --max-{...}  | g-row--col-3--max-medium         |
 
 ## Table of Contents
 

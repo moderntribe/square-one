@@ -13,10 +13,24 @@
 @import "svg-icons";
 @import "globals";
 
+/* Grid */
+@import "grid/rows";
+@import "grid/columns";
+@import "grid/structures/dynamic";
+@import "grid/structures/fixed";
+
 /* Layouts */
 @import "layouts/default";
-@import "layouts/wrapper";
 @import "layouts/staggered";
+@import "layouts/weighted";
+
+/* Sections */
+@import "sections/base";
+@import "sections/header";
+@import "sections/title";
+@import "sections/desc";
+@import "sections/content";
+@import "sections/footer";
 
 /* Content */
 @import "content/default";
@@ -28,6 +42,7 @@
 @import "typography/headings";
 @import "typography/hr";
 @import "typography/lists";
+@import "typography/mark";
 @import "typography/p";
 @import "typography/quotes";
 @import "typography/tables";
@@ -35,13 +50,7 @@
 /* Media */
 @import "media/audio";
 @import "media/images";
-@import "media/embeds";
-@import "media/oembeds";
-@import "media/gallery-wp";
-
-/* Buttons */
-@import "buttons/default";
-@import "buttons/button";
+@import "media/wp-playlist";
 
 /* Forms */
 @import "forms/default";

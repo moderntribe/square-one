@@ -11,11 +11,19 @@ use Tribe\Project\Panels;
 class Panels_Provider implements ServiceProviderInterface {
 
 	protected $panels = [
-		Panels\Types\ContentGrid::class,
+		Panels\Types\Hero::class,
+		Panels\Types\Accordion::class,
+		Panels\Types\CardGrid::class,
 		Panels\Types\Gallery::class,
 		Panels\Types\ImageText::class,
-		Panels\Types\MicroNav::class,
+		Panels\Types\VideoText::class,
+		Panels\Types\Interstitial::class,
+		Panels\Types\MicroNavButtons::class,
 		Panels\Types\Wysiwyg::class,
+		Panels\Types\ContentSlider::class,
+		Panels\Types\LogoFarm::class,
+		Panels\Types\Testimonial::class,
+		Panels\Types\PostLoop::class,
 	];
 
 	public function register( Container $container ) {

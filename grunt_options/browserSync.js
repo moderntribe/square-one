@@ -25,7 +25,13 @@ module.exports = {
 			debugInfo: true,
 			logConnections: true,
 			notify: true,
-			proxy: '<%= dev.proxy %>',
+			open: 'external',
+			host: '<%= dev.proxy %>', /* https://192.168.1.199:3000/ will still work for mobile device testing */
+			proxy: 'https://<%= dev.proxy %>',
+			https: {
+				key: '<%= dev.certs_path %>/<%= dev.proxy %>.key',
+				cert: '<%= dev.certs_path %>/<%= dev.proxy %>.crt'
+			},
 			ghostMode: {
 				scroll: true,
 				links: true,

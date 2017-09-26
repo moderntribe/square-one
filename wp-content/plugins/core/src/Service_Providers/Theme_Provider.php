@@ -116,14 +116,16 @@ class Theme_Provider implements ServiceProviderInterface {
 			] );
 		};
 
-		add_filter( 'oembed_dataparse', function ( $html, $data, $url ) use ( $container ) {
-			return $container[ 'theme.oembed' ]->setup_lazyload_html( $html, $data, $url );
-		}, 1000, 3 );
+		add_filter( 'oembed_dataparse', function( $html, $data, $url ) use ( $container ) {
+			return $container['theme.oembed']->get_video_component( $html, $data, $url );
+		}, 999, 3 );
+
 		add_filter( 'embed_oembed_html', function ( $html, $url, $attr, $post_id ) use ( $container ) {
 			return $container[ 'theme.oembed' ]->filter_frontend_html_from_cache( $html, $url, $attr, $post_id );
 		}, 1, 4 );
+
 		add_filter( 'embed_oembed_html', function ( $html, $url, $attr, $post_id ) use ( $container ) {
-			return $container[ 'theme.oembed' ]->wrap_oembed_shortcode_output( $html, $url, $attr, $post_id );
+			return $container[ 'theme.oembed' ]->wrap_admin_oembed( $html, $url, $attr, $post_id );
 		}, 99, 4 );
 	}
 
@@ -154,6 +156,14 @@ class Theme_Provider implements ServiceProviderInterface {
 		add_action( 'wp_head', function () use ( $container ) {
 			$container[ 'theme.resources.legacy' ]->old_browsers();
 		}, 0, 0 );
+
+		add_action( 'init', function() use ( $container ) {
+			$container[ 'theme.resources.legacy' ]->add_unsupported_rewrite();
+		} );
+
+		add_filter( 'template_include', function( $template ) use ( $container ) {
+			return $container['theme.resources.legacy']->load_unsupported_template( $template );
+		} );
 	}
 
 	private function disable_emoji( Container $container ) {

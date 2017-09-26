@@ -1,9 +1,103 @@
-alias: null
+alias: sq1
+scripts:
+  # block of commands to build this repo/branch on the CI server for deploying
+  build: |
+    source $JENKINS_HOME/scripts/nursery-helper.sh
+    composer update
+    nvm install
+    nvm use
+    ensure_node_global_installed yarn
+    ensure_node_global_installed grunt
+    ensure_node_global_installed jest
+    if $FlushDependencies; then
+      rm -rf node_modules
+    fi
+    yarn install --production
+    grunt build
+  # block of commands to test this repo/branch on the CI server
+  test: |
+    source $JENKINS_HOME/scripts/nursery-helper.sh
+    composer update
+    nvm install
+    nvm use
+    ensure_node_global_installed yarn
+    ensure_node_global_installed grunt
+    ensure_node_global_installed jest
+    if $Flush_Dependencies; then
+      rm -rf node_modules
+    fi
+    yarn install
+    grunt lint
+    grunt test
+  # block of commands to execute after this repo/branch is cloned to the CI server
+  after_clone: ""
+  # block of commands to execute on the CI server before building the image of this project and deploying this repo/branch to the garden
+  before_deploy: |
+    source $JENKINS_HOME/scripts/nursery-helper.sh
+    multisite_enabled=$($JENKINS_HOME/scripts/yaml-reader.py $(pwd)/.gardens/config.yml multisite.enabled)
+    db_password=$(cached_password "$deployment_cache_path" "db_password")
+    admin_username=$(cached_string "$deployment_cache_path" "admin_username" "tribe")
+    admin_password=$(cached_password "$deployment_cache_path" "admin_password")
+    commit_hash=$(cached_string "$deployment_cache_path" "commit_hash" "$(git rev-parse HEAD)")
+    echo "Ensuring that our database exists for the deployment, will create it if not found, do nothing if it's already there"
+    provision_db "$GARDEN_RDS_HOST" "$GARDEN_RDS_PORT" "$subdomain" "$db_password"
+    env_decrypt "$(pwd)" "$JENKINS_HOME/.garden/repo-keys/$repo_formatted"
+    echo "Setting any necessary environment variables in .env..."
+    cp .gardens/.env .env
+    set_env "DB_NAME" "$subdomain" "$(pwd)/.env"
+    set_env "DB_USER" "$subdomain" "$(pwd)/.env"
+    set_env "DB_PASSWORD" "$db_password" "$(pwd)/.env"
+    set_env "DB_HOST" "${GARDEN_RDS_HOST}:${GARDEN_RDS_PORT}" "$(pwd)/.env"
+    set_env "S3_UPLOADS_BUCKET" "${GARDEN_S3_BUCKET_PRIMARY}/${subdomain}" "$(pwd)/.env"
+    set_env "S3_UPLOADS_KEY" "$GARDEN_S3_ACCESS_KEY_ID" "$(pwd)/.env"
+    set_env "S3_UPLOADS_SECRET" "$GARDEN_S3_SECRET_ACCESS_KEY" "$(pwd)/.env"
+    set_env "S3_UPLOADS_REGION" "$GARDEN_AWS_REGION" "$(pwd)/.env"
+    set_env "DOMAIN_CURRENT_SITE" "${subdomain}.${GARDEN_DOMAIN}" "$(pwd)/.env"
+    if "$multisite_enabled"; then
+      set_env "WP_ALLOW_MULTISITE" "true" "$(pwd)/.env"
+      set_env "WP_MULTISITE" "true" "$(pwd)/.env"
+      set_env "SUBDOMAIN_INSTALL" "false" "$(pwd)/.env"
+    fi
+    if [ -f "$deployment_cache_path/.set-env" ]; then
+      cat "$deployment_cache_path/.set-env" >> .env
+    fi
+    cp .gardens/update-env.sh .garden-update-env.sh
+    mkdir -p wp-content/uploads
+    chmod 0775 wp-content/uploads
+    mkdir -p wp-content/cache
+    chmod 0775 wp-content/cache
+    if $Build; then
+      custom_image_build=true
+      echo "Building $local_image docker image..."
+      cp .gardens/Dockerfile Dockerfile
+      docker build -f Dockerfile --pull -t "$local_image" \
+                   --build-arg admin_user="$admin_username" \
+                   --build-arg multisite_enabled="$multisite_enabled" \
+                   --build-arg admin_password="$admin_password" \
+                   --build-arg admin_email="admin@${GARDEN_DOMAIN}" \
+                   --build-arg title="$repo" \
+                   --build-arg url="https://${subdomain}.${GARDEN_DOMAIN}" \
+                   --build-arg smtp_domain="${GARDEN_DOMAIN}" \
+                   --build-arg smtp_host="smtp.mailgun.org" \
+                   --build-arg smtp_port="587" \
+                   --build-arg smtp_user="postmaster@${GARDEN_DOMAIN}" \
+                   --build-arg smtp_password="${GARDEN_SMTP_PASSWORD}" .
+    fi
+  # block of commands to execute after a successful deploy of container(s)
+  after_deploy: |
+    echo "Your Wordpress instance admin username/password is ${admin_username}/${admin_password}"
+  # block of commands to execute on the CI server before removing a deployment of this repo/branch
+  before_remove: |
+    if $Backup; then
+      echo "Backing up the deployment first..."
+      Deployment="$subdomain" S3=true $JENKINS_HOME/scripts/deployment-backup.sh
+    fi
+    echo "Removing database and files on s3..."
+    mysql -h "$GARDEN_RDS_HOST" -P "$GARDEN_RDS_PORT" -e "DROP DATABASE \`$subdomain\`; DROP USER \`$subdomain\`; FLUSH PRIVILEGES;"
+    aws s3 rm "s3://${GARDEN_S3_BUCKET_PRIMARY}/${subdomain}" --recursive
+  # block of commands to execute on the CI server after removing a deployment of this repo/branch
+  after_remove: ""
+slack:
+  channel:
 multisite:
   enabled: false
-rds: true
-memcached: false
-redis: false
-elasticsearch: false
-slack:
-  channel: null

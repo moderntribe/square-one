@@ -1,0 +1,48 @@
+{#
+
+Component: Content Block
+
+Documentation: docs\theme\components\content_block.md
+
+Controller: wp-content\plugins\core\src\Templates\Components\Content_Block.php
+PostCSS: wp-content\plugins\core\assets\theme\pcss\components\_content-block.pcss
+
+Description: A component comprised of the title, text and button components. These are all optional, consider this a parent component for a common pattern. Note the button component is used in link mode and considered a cta here. Also note the agrs shown here are not the ones that you see below, but what the controller needs to produce the block. We may revisit this blocks architecture...
+
+Attributes:
+	{
+		classes: '', // string. The wrapper classes
+		cta_classes: '', // string. The buttons in cta mode classes
+		content_classes: '', // string. The content classes for the title, text and button wrapper
+		cta: '', // array. The array that contains the cta url, label and target
+		url: '', // string. Lives in the cta array. The url.
+		label: '', // string. Lives in the cta array. The link text
+		target: '', // string. Lives in the cta array The link target
+		text: '', // string. The text string
+		text_attrs: '', // string. Data attributes for the text block. You'll want to pass in livetext attrs if using in panels
+		text_classes: '', // string. Classes for the wrapper on the text block
+		title: '', // string. The title string
+		title_attrs: '', // string. Data attributes on title. You'll want to pass in livetext attrs if using in panels
+		title_classes: '', // string. Classes on title
+		title_tag: '', // string. The tag for the title (h1, h2 etc)
+    }
+ #}
+
+<div class="{{ classes }}">
+
+	<div class="{{ content_classes }}">
+
+		{% if title %}
+			{{ title }}
+		{% endif %}
+
+		{% if text %}
+			{{ text }}
+		{% endif %}
+
+		{% if button %}
+			{{ button }}
+		{% endif %}
+
+	</div>
+</div>
