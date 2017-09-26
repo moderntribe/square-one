@@ -1,63 +1,5 @@
 [
     {
-        "name": "jbzoo/pimpledumper",
-        "version": "1.2.1",
-        "version_normalized": "1.2.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/JBZoo/PimpleDumper.git",
-            "reference": "44fad95411373b7e411beedc0ee9c3fa5b82b205"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/JBZoo/PimpleDumper/zipball/44fad95411373b7e411beedc0ee9c3fa5b82b205",
-            "reference": "44fad95411373b7e411beedc0ee9c3fa5b82b205",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.10",
-            "pimple/pimple": "^3.0"
-        },
-        "require-dev": {
-            "jbzoo/phpunit": "^1.0"
-        },
-        "time": "2016-06-30T10:34:40+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "JBZoo\\PimpleDumper\\": "src"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "SmetDenis",
-                "email": "denis@jbzoo.com",
-                "role": "lead"
-            }
-        ],
-        "description": "Easy way to auto create pimple.json and .phpstorm.meta.php for Pimple Container",
-        "keywords": [
-            "ArrayAccess",
-            "autocomplete",
-            "container",
-            "di",
-            "idea",
-            "phpstorm",
-            "pimple",
-            "silex"
-        ]
-    },
-    {
         "name": "composer/installers",
         "version": "v1.4.0",
         "version_normalized": "1.4.0.0",
@@ -490,6 +432,64 @@
         "homepage": "http://twig.sensiolabs.org",
         "keywords": [
             "templating"
+        ]
+    },
+    {
+        "name": "jbzoo/pimpledumper",
+        "version": "1.2.1",
+        "version_normalized": "1.2.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/JBZoo/PimpleDumper.git",
+            "reference": "44fad95411373b7e411beedc0ee9c3fa5b82b205"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/JBZoo/PimpleDumper/zipball/44fad95411373b7e411beedc0ee9c3fa5b82b205",
+            "reference": "44fad95411373b7e411beedc0ee9c3fa5b82b205",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.10",
+            "pimple/pimple": "^3.0"
+        },
+        "require-dev": {
+            "jbzoo/phpunit": "^1.0"
+        },
+        "time": "2016-06-30T10:34:40+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "JBZoo\\PimpleDumper\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "SmetDenis",
+                "email": "denis@jbzoo.com",
+                "role": "lead"
+            }
+        ],
+        "description": "Easy way to auto create pimple.json and .phpstorm.meta.php for Pimple Container",
+        "keywords": [
+            "ArrayAccess",
+            "autocomplete",
+            "container",
+            "di",
+            "idea",
+            "phpstorm",
+            "pimple",
+            "silex"
         ]
     }
 ]
