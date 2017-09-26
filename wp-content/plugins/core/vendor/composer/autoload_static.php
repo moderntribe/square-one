@@ -8,6 +8,7 @@ class ComposerStaticInit832c304df78b6d54281b9d2fb32919ae
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
+        'a2c48002d05f7782d8b603bd2bcb5252' => __DIR__ . '/..' . '/johnbillion/extended-cpts/extended-cpts.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -28,10 +29,6 @@ class ComposerStaticInit832c304df78b6d54281b9d2fb32919ae
         'J' => 
         array (
             'JBZoo\\PimpleDumper\\' => 19,
-        ),
-        'C' => 
-        array (
-            'Composer\\Installers\\' => 20,
         ),
     );
 
@@ -59,10 +56,6 @@ class ComposerStaticInit832c304df78b6d54281b9d2fb32919ae
         'JBZoo\\PimpleDumper\\' => 
         array (
             0 => __DIR__ . '/..' . '/jbzoo/pimpledumper/src',
-        ),
-        'Composer\\Installers\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers',
         ),
     );
 
