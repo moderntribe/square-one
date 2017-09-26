@@ -1,0 +1,362 @@
+[
+    {
+        "name": "assets",
+        "type": "class",
+        "value": "Tribe\\Libs\\Assets\\Asset_Loader"
+    },
+    {
+        "name": "cache",
+        "type": "class",
+        "value": "Tribe\\Libs\\Cache\\Cache"
+    },
+    {
+        "name": "cache.listener",
+        "type": "class",
+        "value": "Tribe\\Project\\Cache\\Listener"
+    },
+    {
+        "name": "cache.purger",
+        "type": "class",
+        "value": "Tribe\\Libs\\Cache\\Purger"
+    },
+    {
+        "name": "cli.pimple_dump",
+        "type": "class",
+        "value": "Tribe\\Project\\CLI\\Pimple_Dump"
+    },
+    {
+        "name": "menu.primary",
+        "type": "class",
+        "value": "Tribe\\Libs\\Nav\\Menu_Location"
+    },
+    {
+        "name": "menu.secondary",
+        "type": "class",
+        "value": "Tribe\\Libs\\Nav\\Menu_Location"
+    },
+    {
+        "name": "object_meta.collection_repo",
+        "type": "class",
+        "value": "Tribe\\Libs\\Object_Meta\\Meta_Repository"
+    },
+    {
+        "name": "object_meta.example",
+        "type": "class",
+        "value": "Tribe\\Project\\Object_Meta\\Example"
+    },
+    {
+        "name": "p2p.General_Relationship",
+        "type": "class",
+        "value": "Tribe\\Project\\P2P\\Relationships\\General_Relationship"
+    },
+    {
+        "name": "p2p.admin_search_filtering.General_Relationship",
+        "type": "class",
+        "value": "Tribe\\Project\\P2P\\Admin_Search_Filtering"
+    },
+    {
+        "name": "p2p.admin_titles_filter",
+        "type": "class",
+        "value": "Tribe\\Project\\P2P\\Titles_Filter"
+    },
+    {
+        "name": "p2p.event_query_filters",
+        "type": "class",
+        "value": "Tribe\\Project\\P2P\\Event_Query_Filters"
+    },
+    {
+        "name": "p2p.panel_search_filters",
+        "type": "class",
+        "value": "Tribe\\Project\\P2P\\Panel_Search_Filters"
+    },
+    {
+        "name": "p2p.query_optimization",
+        "type": "class",
+        "value": "Tribe\\Project\\P2P\\Query_Optimization"
+    },
+    {
+        "name": "panels.init",
+        "type": "class",
+        "value": "Tribe\\Project\\Panels\\Initializer"
+    },
+    {
+        "name": "plugin_file",
+        "type": "string",
+        "value": "\/mnt\/c\/Users\/danie\/Code\/square-one\/wp-content\/plugins\/core\/core.php"
+    },
+    {
+        "name": "post_type.page",
+        "type": "class",
+        "value": "Tribe\\Project\\Post_Types\\Page\\Page"
+    },
+    {
+        "name": "post_type.post",
+        "type": "class",
+        "value": "Tribe\\Project\\Post_Types\\Post\\Post"
+    },
+    {
+        "name": "post_type.sample_post_type",
+        "type": "class",
+        "value": "Tribe\\Project\\Post_Types\\Sample\\Sample"
+    },
+    {
+        "name": "post_type.sample_post_type.config",
+        "type": "class",
+        "value": "Tribe\\Project\\Post_Types\\Sample\\Config"
+    },
+    {
+        "name": "post_type.tribe_events",
+        "type": "class",
+        "value": "Tribe\\Project\\Post_Types\\Event\\Event"
+    },
+    {
+        "name": "post_type.tribe_organizer",
+        "type": "class",
+        "value": "Tribe\\Project\\Post_Types\\Organizer\\Organizer"
+    },
+    {
+        "name": "post_type.tribe_venue",
+        "type": "class",
+        "value": "Tribe\\Project\\Post_Types\\Venue\\Venue"
+    },
+    {
+        "name": "settings.general",
+        "type": "class",
+        "value": "Tribe\\Project\\Settings\\General"
+    },
+    {
+        "name": "shortcode.gallery",
+        "type": "class",
+        "value": "Tribe\\Project\\Shortcodes\\Gallery"
+    },
+    {
+        "name": "taxonomy.category",
+        "type": "class",
+        "value": "Tribe\\Project\\Taxonomies\\Category\\Category"
+    },
+    {
+        "name": "taxonomy.category.config",
+        "type": "class",
+        "value": "class@anonymous\u0000\/mnt\/c\/Users\/danie\/Code\/square-one\/wp-content\/plugins\/core\/src\/Service_Providers\/Taxonomies\/Taxonomy_Service_Provider.php0x7f9efd5947eb"
+    },
+    {
+        "name": "taxonomy.example_taxonomy",
+        "type": "class",
+        "value": "Tribe\\Project\\Taxonomies\\Example\\Example"
+    },
+    {
+        "name": "taxonomy.example_taxonomy.config",
+        "type": "class",
+        "value": "Tribe\\Project\\Taxonomies\\Example\\Config"
+    },
+    {
+        "name": "taxonomy.post_tag",
+        "type": "class",
+        "value": "Tribe\\Project\\Taxonomies\\Post_Tag\\Post_Tag"
+    },
+    {
+        "name": "taxonomy.post_tag.config",
+        "type": "class",
+        "value": "class@anonymous\u0000\/mnt\/c\/Users\/danie\/Code\/square-one\/wp-content\/plugins\/core\/src\/Service_Providers\/Taxonomies\/Taxonomy_Service_Provider.php0x7f9efd5947eb"
+    },
+    {
+        "name": "theme.body_classes",
+        "type": "class",
+        "value": "Tribe\\Project\\Theme\\Body_Classes"
+    },
+    {
+        "name": "theme.gravity_forms_filter",
+        "type": "class",
+        "value": "Tribe\\Project\\Theme\\Gravity_Forms_Filter"
+    },
+    {
+        "name": "theme.images.responsive_disabler",
+        "type": "class",
+        "value": "Tribe\\Project\\Theme\\WP_Responsive_Image_Disabler"
+    },
+    {
+        "name": "theme.images.sizes",
+        "type": "class",
+        "value": "Tribe\\Project\\Theme\\Image_Sizes"
+    },
+    {
+        "name": "theme.images.wrap",
+        "type": "class",
+        "value": "Tribe\\Project\\Theme\\Image_Wrap"
+    },
+    {
+        "name": "theme.nav.attribute_filters",
+        "type": "class",
+        "value": "Tribe\\Project\\Theme\\Nav\\Nav_Attribute_Filters"
+    },
+    {
+        "name": "theme.oembed",
+        "type": "class",
+        "value": "Tribe\\Project\\Theme\\Oembed_Filter"
+    },
+    {
+        "name": "theme.resources.custom_fonts",
+        "type": "array",
+        "value": ""
+    },
+    {
+        "name": "theme.resources.editor_styles",
+        "type": "class",
+        "value": "Tribe\\Project\\Theme\\Resources\\Editor_Styles"
+    },
+    {
+        "name": "theme.resources.emoji_disabler",
+        "type": "class",
+        "value": "Tribe\\Project\\Theme\\Resources\\Emoji_Disabler"
+    },
+    {
+        "name": "theme.resources.fonts",
+        "type": "class",
+        "value": "Tribe\\Project\\Theme\\Resources\\Fonts"
+    },
+    {
+        "name": "theme.resources.google_fonts",
+        "type": "array",
+        "value": ""
+    },
+    {
+        "name": "theme.resources.legacy",
+        "type": "class",
+        "value": "Tribe\\Project\\Theme\\Resources\\Legacy_Check"
+    },
+    {
+        "name": "theme.resources.login",
+        "type": "class",
+        "value": "Tribe\\Project\\Theme\\Resources\\Login_Resources"
+    },
+    {
+        "name": "theme.resources.scripts",
+        "type": "class",
+        "value": "Tribe\\Project\\Theme\\Resources\\Scripts"
+    },
+    {
+        "name": "theme.resources.styles",
+        "type": "class",
+        "value": "Tribe\\Project\\Theme\\Resources\\Styles"
+    },
+    {
+        "name": "theme.resources.typekit_id",
+        "type": "string",
+        "value": ""
+    },
+    {
+        "name": "theme.supports",
+        "type": "class",
+        "value": "Tribe\\Project\\Theme\\Supports"
+    },
+    {
+        "name": "theme_customizer.loader",
+        "type": "class",
+        "value": "Tribe\\Project\\Theme_Customizer\\Customizer_Loader"
+    },
+    {
+        "name": "twig",
+        "type": "class",
+        "value": "Twig_Environment"
+    },
+    {
+        "name": "twig.cache",
+        "type": "string",
+        "value": "\/mnt\/c\/Users\/danie\/Code\/square-one\/wp-content\/cache\/twig"
+    },
+    {
+        "name": "twig.extension",
+        "type": "class",
+        "value": "Tribe\\Project\\Twig\\Extension"
+    },
+    {
+        "name": "twig.loader",
+        "type": "class",
+        "value": "Twig_Loader_Filesystem"
+    },
+    {
+        "name": "twig.options",
+        "type": "array",
+        "value": ""
+    },
+    {
+        "name": "twig.templates.content\/panels\/accordion",
+        "type": "class",
+        "value": "Tribe\\Project\\Templates\\Content\\Panels\\Accordion"
+    },
+    {
+        "name": "twig.templates.content\/panels\/cardgrid",
+        "type": "class",
+        "value": "Tribe\\Project\\Templates\\Content\\Panels\\CardGrid"
+    },
+    {
+        "name": "twig.templates.content\/panels\/content-slider",
+        "type": "class",
+        "value": "Tribe\\Project\\Templates\\Content\\Panels\\ContentSlider"
+    },
+    {
+        "name": "twig.templates.content\/panels\/gallery",
+        "type": "class",
+        "value": "Tribe\\Project\\Templates\\Content\\Panels\\Gallery"
+    },
+    {
+        "name": "twig.templates.content\/panels\/hero",
+        "type": "class",
+        "value": "Tribe\\Project\\Templates\\Content\\Panels\\Hero"
+    },
+    {
+        "name": "twig.templates.content\/panels\/imagetext",
+        "type": "class",
+        "value": "Tribe\\Project\\Templates\\Content\\Panels\\ImageText"
+    },
+    {
+        "name": "twig.templates.content\/panels\/interstitial",
+        "type": "class",
+        "value": "Tribe\\Project\\Templates\\Content\\Panels\\Interstitial"
+    },
+    {
+        "name": "twig.templates.content\/panels\/logofarm",
+        "type": "class",
+        "value": "Tribe\\Project\\Templates\\Content\\Panels\\LogoFarm"
+    },
+    {
+        "name": "twig.templates.content\/panels\/micronavbuttons",
+        "type": "class",
+        "value": "Tribe\\Project\\Templates\\Content\\Panels\\MicroNavButtons"
+    },
+    {
+        "name": "twig.templates.content\/panels\/panel",
+        "type": "class",
+        "value": "Tribe\\Project\\Templates\\Content\\Panels\\Panel"
+    },
+    {
+        "name": "twig.templates.content\/panels\/postloop",
+        "type": "class",
+        "value": "Tribe\\Project\\Templates\\Content\\Panels\\PostLoop"
+    },
+    {
+        "name": "twig.templates.content\/panels\/testimonial",
+        "type": "class",
+        "value": "Tribe\\Project\\Templates\\Content\\Panels\\Testimonial"
+    },
+    {
+        "name": "twig.templates.content\/panels\/videotext",
+        "type": "class",
+        "value": "Tribe\\Project\\Templates\\Content\\Panels\\VideoText"
+    },
+    {
+        "name": "twig.templates.content\/panels\/wysiwyg",
+        "type": "class",
+        "value": "Tribe\\Project\\Templates\\Content\\Panels\\Wysiwyg"
+    },
+    {
+        "name": "twig.templates.sidebar.main",
+        "type": "class",
+        "value": "Tribe\\Project\\Templates\\Sidebar"
+    },
+    {
+        "name": "util.svg_support",
+        "type": "class",
+        "value": "Tribe\\Project\\Util\\SVG_Support"
+    }
+]
