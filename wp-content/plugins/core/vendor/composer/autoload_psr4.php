@@ -10,5 +10,6 @@ return array(
     'Tribe\\Project\\' => array($baseDir . '/src'),
     'Tribe\\Libs\\' => array($vendorDir . '/moderntribe/tribe-libs/src'),
     'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
+    'JBZoo\\PimpleDumper\\' => array($vendorDir . '/jbzoo/pimpledumper/src'),
     'Composer\\Installers\\' => array($vendorDir . '/composer/installers/src/Composer/Installers'),
 );

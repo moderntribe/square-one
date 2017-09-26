@@ -11,7 +11,8 @@
     "pimple/pimple": "~3.0@dev",
     "johnbillion/extended-cpts": "^3.0",
     "johnbillion/extended-taxos": "^2.0",
-    "twig/twig": "^2.4"
+    "twig/twig": "^2.4",
+    "jbzoo/pimpledumper": "^1.2"
   },
   "autoload": {
     "psr-4": {
