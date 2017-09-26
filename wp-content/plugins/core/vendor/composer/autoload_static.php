@@ -21,6 +21,10 @@ class ComposerStaticInit999f2dbed4e96b85679bcc2d59b6ea6b
         array (
             'Symfony\\Polyfill\\Mbstring\\' => 26,
         ),
+        'J' => 
+        array (
+            'JBZoo\\PimpleDumper\\' => 19,
+        ),
         'C' => 
         array (
             'Composer\\Installers\\' => 20,
@@ -43,6 +47,10 @@ class ComposerStaticInit999f2dbed4e96b85679bcc2d59b6ea6b
         'Symfony\\Polyfill\\Mbstring\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
+        ),
+        'JBZoo\\PimpleDumper\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/jbzoo/pimpledumper/src',
         ),
         'Composer\\Installers\\' => 
         array (

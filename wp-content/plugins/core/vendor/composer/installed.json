@@ -20,7 +20,7 @@
         "require-dev": {
             "symfony/phpunit-bridge": "^3.2"
         },
-        "time": "2017-03-24 14:13:45",
+        "time": "2017-03-24T14:13:45+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -73,7 +73,7 @@
         "suggest": {
             "wpackagist-plugin/rewrite-testing": "Rewrite Rule Testing"
         },
-        "time": "2016-02-22 09:55:23",
+        "time": "2016-02-22T09:55:23+00:00",
         "type": "library",
         "installation-source": "dist",
         "notification-url": "https://packagist.org/downloads/",
@@ -87,7 +87,8 @@
             }
         ],
         "description": "A library which provides extended functionality to WordPress custom taxonomies, allowing you to quickly build custom taxonomies without having to write the same code again and again.",
-        "homepage": "https://github.com/johnbillion/extended-taxos/"
+        "homepage": "https://github.com/johnbillion/extended-taxos/",
+        "abandoned": "johnbillion/extended-cpts"
     },
     {
         "name": "composer/installers",
@@ -115,7 +116,7 @@
             "composer/composer": "1.0.*@dev",
             "phpunit/phpunit": "4.1.*"
         },
-        "time": "2016-08-13 20:53:52",
+        "time": "2016-08-13T20:53:52+00:00",
         "type": "composer-plugin",
         "extra": {
             "class": "Composer\\Installers\\Plugin",
@@ -226,7 +227,7 @@
             "johnbillion/extended-taxos": "Extended Taxonomies",
             "wpackagist-plugin/rewrite-testing": "Rewrite Rule Testing"
         },
-        "time": "2017-03-21 18:22:43",
+        "time": "2017-03-21T18:22:43+00:00",
         "type": "library",
         "installation-source": "dist",
         "notification-url": "https://packagist.org/downloads/",
@@ -263,7 +264,7 @@
         "suggest": {
             "ext-mbstring": "For best performance"
         },
-        "time": "2016-11-14 01:06:16",
+        "time": "2016-11-14T01:06:16+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -327,7 +328,7 @@
             "symfony/debug": "~2.7",
             "symfony/phpunit-bridge": "~3.3@dev"
         },
-        "time": "2017-06-06 03:58:14",
+        "time": "2017-06-06T03:58:14+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -369,6 +370,64 @@
         "homepage": "http://twig.sensiolabs.org",
         "keywords": [
             "templating"
+        ]
+    },
+    {
+        "name": "jbzoo/pimpledumper",
+        "version": "1.2.1",
+        "version_normalized": "1.2.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/JBZoo/PimpleDumper.git",
+            "reference": "44fad95411373b7e411beedc0ee9c3fa5b82b205"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/JBZoo/PimpleDumper/zipball/44fad95411373b7e411beedc0ee9c3fa5b82b205",
+            "reference": "44fad95411373b7e411beedc0ee9c3fa5b82b205",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.10",
+            "pimple/pimple": "^3.0"
+        },
+        "require-dev": {
+            "jbzoo/phpunit": "^1.0"
+        },
+        "time": "2016-06-30T10:34:40+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "JBZoo\\PimpleDumper\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "SmetDenis",
+                "email": "denis@jbzoo.com",
+                "role": "lead"
+            }
+        ],
+        "description": "Easy way to auto create pimple.json and .phpstorm.meta.php for Pimple Container",
+        "keywords": [
+            "ArrayAccess",
+            "autocomplete",
+            "container",
+            "di",
+            "idea",
+            "phpstorm",
+            "pimple",
+            "silex"
         ]
     }
 ]
