@@ -1,0 +1,45 @@
+{
+    "name": "wp-cli/language-command",
+    "description": "Manage language packs.",
+    "type": "wp-cli-package",
+    "homepage": "https://github.com/wp-cli/language-command",
+    "support": {
+        "issues": "https://github.com/wp-cli/language-command/issues"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Daniel Bachhuber",
+            "email": "daniel@runcommand.io",
+            "homepage": "https://runcommand.io"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "": "src/"
+        },
+        "files": [
+            "language-command.php"
+        ]
+    },
+    "require": {},
+    "require-dev": {
+        "behat/behat": "~2.5",
+        "wp-cli/wp-cli": "*"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.x-dev"
+        },
+        "commands": [
+            "language core activate",
+            "language core install",
+            "language core list",
+            "language core uninstall",
+            "language core update"
+        ],
+        "bundled": true
+    }
+}

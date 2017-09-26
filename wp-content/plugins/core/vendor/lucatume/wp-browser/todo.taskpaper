@@ -1,0 +1,6 @@
+Add:
+    - add/overwrite wpcept specific commands using Codeception provided events
+    - "WPLoder" using suites should run each in isolation
+    - gherkin translation of all WPBrowser methods
+	- WpWebDriver:
+		- ui/admin acceptance classes

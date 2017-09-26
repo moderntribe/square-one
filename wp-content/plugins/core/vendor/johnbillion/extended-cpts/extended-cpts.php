@@ -3,7 +3,7 @@
  * Extended custom post types for WordPress.
  *
  * @package   ExtendedCPTs
- * @version   3.1.0
+ * @version   3.2.1
  * @author    John Blackbourn <https://johnblackbourn.com>
  * @link      https://github.com/johnbillion/extended-cpts
  * @copyright 2012-2017 John Blackbourn
@@ -73,7 +73,7 @@ function register_extended_post_type( $post_type, array $args = array(), array $
 	$cpt = new Extended_CPT( $post_type, $args, $names );
 
 	if ( is_admin() ) {
-		new Extended_CPT_Admin( $cpt, $args );
+		new Extended_CPT_Admin( $cpt, $cpt->args );
 	}
 
 	return $cpt;
@@ -1758,7 +1758,10 @@ class Extended_CPT_Admin {
 			case 'post_modified':
 			case 'post_modified_gmt':
 				if ( '0000-00-00 00:00:00' !== get_post_field( $field, $post ) ) {
-					echo esc_html( mysql2date( get_option( 'date_format' ), get_post_field( $field, $post ) ) );
+					if ( ! isset( $args['date_format'] ) ) {
+						$args['date_format'] = get_option( 'date_format' );
+					}
+					echo esc_html( mysql2date( $args['date_format'], get_post_field( $field, $post ) ) );
 				}
 				break;
 
@@ -1864,7 +1867,7 @@ class Extended_CPT_Admin {
 
 		if ( ! isset( $_post->$field ) ) {
 			if ( $type = p2p_type( $connection ) ) {
-				$type->each_connected( $wp_query, $meta, $field );
+				$type->each_connected( array( $_post ), $meta, $field );
 			} else {
 				echo esc_html( sprintf(
 					__( 'Invalid connection type: %s', 'extended-cpts' ),
@@ -1874,7 +1877,7 @@ class Extended_CPT_Admin {
 			}
 		}
 
-		foreach ( $wp_query->post->$field as $post ) {
+		foreach ( $_post->$field as $post ) {
 
 			setup_postdata( $post );
 

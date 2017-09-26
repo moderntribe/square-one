@@ -1,0 +1,27 @@
+{
+    "name": "lucatume/codeception-setup-local",
+    "description": "Flexible local setup for Codeception",
+    "type": "library",
+    "require": {
+        "codeception/codeception": "^2.1",
+        "lucatume/wp-browser-commons": "^1.0"
+    },
+    "require-dev": {
+        "codeception/codeception": "^2.1",
+        "mikey179/vfsStream": "^1.6"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Luca Tumedei",
+            "email": "luca@theaveragedev.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "tad\\Codeception\\Command\\" : "src/Command",
+            "tad\\Codeception\\Command\\Helpers\\" : "src/Helpers"
+        }
+    }
+}

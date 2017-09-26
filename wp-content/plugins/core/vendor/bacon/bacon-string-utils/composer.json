@@ -1,0 +1,36 @@
+{
+    "name": "bacon/bacon-string-utils",
+    "description": "BaconStringUtils contain utitilies to work with strings.",
+    "homepage": "https://github.com/Bacon/BaconStringUtils",
+    "license" : "BSD-2-Clause",
+    "authors": [
+        {
+            "name": "Ben Scholzen 'DASPRiD'",
+            "email": "mail@dasprids.de",
+            "homepage": "http://www.dasprids.de",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3"
+    },
+    "require-dev": {
+        "zendframework/zendframework": "~2.0",
+        "phpunit/phpunit": "~3.7",
+        "squizlabs/php_codesniffer": "~1.5",
+        "satooshi/php-coveralls": "~0.6"
+    },
+    "suggest": {
+        "zendframework/zend-filter": "To use the Slugifier as a Zend\\Filter instance."
+    },
+    "autoload": {
+        "psr-0": {
+            "BaconStringUtils": "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}

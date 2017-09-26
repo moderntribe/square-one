@@ -1,0 +1,42 @@
+{
+    "name": "wp-cli/cron-command",
+    "description": "Manage WP-Cron events and schedules.",
+    "type": "wp-cli-package",
+    "homepage": "https://github.com/wp-cli/cron-command",
+    "support": {
+        "issues": "https://github.com/wp-cli/cron-command/issues"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Daniel Bachhuber",
+            "email": "daniel@runcommand.io",
+            "homepage": "https://runcommand.io"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {"": "src/"},
+        "files": [ "cron-command.php" ]
+    },
+    "require": {},
+    "require-dev": {
+        "wp-cli/wp-cli": "*",
+        "behat/behat": "~2.5"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.x-dev"
+        },
+        "bundled": true,
+        "commands": [
+            "cron test",
+            "cron event delete",
+            "cron event list",
+            "cron event run",
+            "cron event schedule",
+            "cron schedule list"
+        ]
+    }
+}

@@ -1,0 +1,43 @@
+{
+    "name": "wp-cli/rewrite-command",
+    "description": "Manage rewrite rules.",
+    "type": "wp-cli-package",
+    "homepage": "https://github.com/wp-cli/rewrite-command",
+    "support": {
+        "issues": "https://github.com/wp-cli/rewrite-command/issues"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Daniel Bachhuber",
+            "email": "daniel@runcommand.io",
+            "homepage": "https://runcommand.io"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "": "src/"
+        },
+        "files": [
+            "rewrite-command.php"
+        ]
+    },
+    "require": {},
+    "require-dev": {
+        "behat/behat": "~2.5",
+        "wp-cli/wp-cli": "*"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.x-dev"
+        },
+        "commands": [
+            "rewrite flush",
+            "rewrite list",
+            "rewrite structure"
+        ],
+        "bundled": true
+    }
+}

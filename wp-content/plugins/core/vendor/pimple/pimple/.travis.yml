@@ -14,7 +14,6 @@ php:
   - 5.6
   - 7.0
   - 7.1
-  - hhvm
 
 before_script:
   - composer self-update
@@ -25,13 +24,16 @@ before_script:
 script:
   - cd ext/pimple
   - if [ "$PIMPLE_EXT" == "yes" ]; then yes n | make test | tee output ; grep -E 'Tests failed +. +0' output; fi
+  - if [ "$PIMPLE_EXT" == "yes" ]; then export SYMFONY_DEPRECATIONS_HELPER=weak; fi
   - cd ../..
   - ./vendor/bin/simple-phpunit
 
 matrix:
-  exclude:
+  include:
     - php: hhvm
-      env: PIMPLE_EXT=yes
+      dist: trusty
+      env: PIMPLE_EXT=no
+  exclude:
     - php: 7.0
       env: PIMPLE_EXT=yes
     - php: 7.1

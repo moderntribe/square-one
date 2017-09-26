@@ -1,0 +1,67 @@
+{
+    "name": "wp-cli/extension-command",
+    "description": "Manage WordPress plugins and themes.",
+    "type": "wp-cli-package",
+    "homepage": "https://github.com/wp-cli/extension-command",
+    "support": {
+        "issues": "https://github.com/wp-cli/extension-command/issues"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Daniel Bachhuber",
+            "email": "daniel@runcommand.io",
+            "homepage": "https://runcommand.io"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "": "src/",
+            "WP_CLI\\": "src/WP_CLI"
+        },
+        "files": [ "extension-command.php" ]
+    },
+    "require": {},
+    "require-dev": {
+        "behat/behat": "~2.5",
+        "wp-cli/wp-cli": "*"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.x-dev"
+        },
+		"bundled": true,
+        "commands": [
+            "plugin activate",
+            "plugin deactivate",
+            "plugin delete",
+            "plugin get",
+            "plugin install",
+            "plugin is-installed",
+            "plugin list",
+            "plugin path",
+            "plugin search",
+            "plugin status",
+            "plugin toggle",
+            "plugin uninstall",
+            "plugin update",
+            "theme activate",
+            "theme delete",
+            "theme disable",
+            "theme enable",
+            "theme get",
+            "theme install",
+            "theme is-installed",
+            "theme list",
+            "theme mod get",
+            "theme mod set",
+            "theme mod remove",
+            "theme path",
+            "theme search",
+            "theme status",
+            "theme update"
+        ]
+    }
+}

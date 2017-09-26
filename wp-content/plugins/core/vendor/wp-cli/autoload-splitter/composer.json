@@ -1,0 +1,29 @@
+{
+	"name": "wp-cli/autoload-splitter",
+	"description": "Composer plugin for splitting a generated autoloader into two distinct parts.",
+	"type": "composer-plugin",
+	"license": "MIT",
+	"homepage": "https://wp-cli.org",
+	"authors": [
+		{
+			"name": "Alain Schlesser",
+			"email": "alain.schlesser@gmail.com",
+			"homepage": "https://www.alainschlesser.com"
+		}
+	],
+	"support": {
+		"source": "https://github.com/wp-cli/autoload-splitter",
+		"issues": "https://github.com/wp-cli/autoload-splitter/issues"
+	},
+	"autoload": {
+		"psr-4": {
+			"WP_CLI\\AutoloadSplitter\\": "src"
+		}
+	},
+	"extra": {
+		"class": "WP_CLI\\AutoloadSplitter\\ComposerPlugin"
+	},
+	"require": {
+		"composer-plugin-api": "^1.1"
+	}
+}

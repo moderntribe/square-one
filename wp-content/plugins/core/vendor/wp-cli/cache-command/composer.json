@@ -1,0 +1,40 @@
+{
+    "name": "wp-cli/cache-command",
+    "description": "Manage object and transient caches.",
+    "type": "wp-cli-package",
+    "homepage": "https://github.com/wp-cli/cache-command",
+    "support": {
+        "issues": "https://github.com/wp-cli/cache-command/issues"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Daniel Bachhuber",
+            "email": "daniel@runcommand.io",
+            "homepage": "https://runcommand.io"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "": "src/"
+        },
+        "files": [ "cache-command.php" ]
+    },
+    "require": {},
+    "require-dev": {
+        "behat/behat": "~2.5",
+        "wp-cli/wp-cli": "*"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.x-dev"
+        },
+        "bundled": true,
+        "commands": [
+            "cache",
+            "transient"
+        ]
+    }
+}

@@ -1,0 +1,42 @@
+{
+    "name": "wp-cli/server-command",
+    "description": "Launch PHP's built-in web server for this specific WordPress installation.",
+    "type": "wp-cli-package",
+    "homepage": "https://github.com/wp-cli/server-command",
+    "support": {
+        "issues": "https://github.com/wp-cli/server-command/issues"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Daniel Bachhuber",
+            "email": "daniel@runcommand.io",
+            "homepage": "https://runcommand.io"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "": "src/"
+        },
+        "files": [
+            "server-command.php"
+        ]
+    },
+    "require": {
+        "wp-cli/wp-cli": "*"
+    },
+    "require-dev": {
+        "behat/behat": "~2.5"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.x-dev"
+        },
+        "commands": [
+            "server"
+        ],
+        "bundled": true
+    }
+}

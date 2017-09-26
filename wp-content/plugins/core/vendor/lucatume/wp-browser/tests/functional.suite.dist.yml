@@ -1,0 +1,26 @@
+# Codeception Test Suite Configuration
+
+# suite for functional (integration) tests.
+# emulate web requests and make application process them.
+# Include one of framework modules (Symfony2, Yii2, Laravel4) to use it.
+
+class_name: FunctionalTester
+modules:
+    enabled:
+      - FunctionalHelper
+      - WPDb
+      - Asserts
+      - WPFilesystem
+    config:
+      WPDb:
+        dsn: 'mysql:host=%DB_HOST%;dbname=%DB_NAME%'
+        user: %DB_USER%
+        password: %DB_PASSWORD%
+        dump: 'tests/_data/dump.sql'
+        populate: true
+        cleanup: true
+        reconnect: false
+        url: '%WP_URL%'
+        tablePrefix: 'wp_'
+      WPFilesystem:
+        wpRootFolder: %WP_ROOT_FOLDER%

@@ -1,0 +1,47 @@
+{
+    "name": "wp-cli/core-command",
+    "description": "Download, install, update and manage a WordPress install.",
+    "type": "wp-cli-package",
+    "homepage": "https://github.com/wp-cli/core-command",
+    "support": {
+        "issues": "https://github.com/wp-cli/core-command/issues"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Daniel Bachhuber",
+            "email": "daniel@runcommand.io",
+            "homepage": "https://runcommand.io"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "": "src/"
+        },
+        "files": [ "core-command.php" ]
+    },
+    "require": {},
+    "require-dev": {
+        "behat/behat": "~2.5",
+        "wp-cli/wp-cli": "*"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.x-dev"
+        },
+        "bundled": true,
+        "commands": [
+            "core check-update",
+            "core download",
+            "core install",
+            "core is-installed",
+            "core multisite-convert",
+            "core multisite-install",
+            "core update",
+            "core update-db",
+            "core version"
+        ]
+    }
+}

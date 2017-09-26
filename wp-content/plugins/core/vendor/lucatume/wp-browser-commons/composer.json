@@ -1,0 +1,30 @@
+{
+  "name": "lucatume/wp-browser-commons",
+  "description": "Common libraries of the WP-Browser package.",
+  "type": "library",
+  "license": "GPL v2.0",
+  "authors": [
+    {
+      "name": "Luca Tumedei",
+      "email": "luca@theaveragedev.com"
+    }
+  ],
+  "minimum-stability": "stable",
+  "autoload": {
+    "psr-4": {
+      "tad\\": "src\\tad"
+    }
+  },
+  "require": {
+    "php": ">=5.4.0",
+    "bacon/bacon-string-utils": "~1.0",
+    "codeception/codeception": "~2.1",
+    "symfony/filesystem": "^2.7",
+    "mikemclin/laravel-wp-password": "~2.0.0",
+    "xamin/handlebars.php": "~0.10",
+    "dg/mysql-dump": "^1.3"
+  },
+  "require-dev": {
+    "mikey179/vfsStream": "^1.6"
+  }
+}

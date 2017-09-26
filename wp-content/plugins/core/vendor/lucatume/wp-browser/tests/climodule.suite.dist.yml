@@ -1,0 +1,25 @@
+class_name: ClimoduleTester
+modules:
+    enabled:
+        - \Helper\Climodule
+        - WPCLI
+        - WPDb
+        - WPBrowser
+    config:
+        WPCLI:
+            path: '%WP_ROOT_FOLDER%'
+        WPDb:
+              dsn: 'mysql:host=%DB_HOST%;dbname=%DB_NAME%'
+              user: %DB_USER%
+              password: %DB_PASSWORD%
+              dump: 'tests/_data/dump.sql'
+              populate: true
+              cleanup: true
+              reconnect: false
+              url: '%WP_URL%'
+              tablePrefix: 'wp_'
+        WPBrowser:
+              url: '%WP_URL%'
+              adminUsername: 'admin'
+              adminPassword: 'admin'
+              adminPath: '/wp-admin'

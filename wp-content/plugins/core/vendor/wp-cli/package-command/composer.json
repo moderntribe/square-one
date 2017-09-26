@@ -1,0 +1,47 @@
+{
+    "name": "wp-cli/package-command",
+    "description": "Manage WP-CLI packages.",
+    "type": "wp-cli-package",
+    "homepage": "https://github.com/wp-cli/package-command",
+    "support": {
+        "issues": "https://github.com/wp-cli/package-command/issues"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Daniel Bachhuber",
+            "email": "daniel@runcommand.io",
+            "homepage": "https://runcommand.io"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "": "src/"
+        },
+        "files": [
+            "package-command.php"
+        ]
+    },
+    "require": {
+        "wp-cli/wp-cli": "*",
+        "composer/composer": "^1.2.0"
+    },
+    "require-dev": {
+        "behat/behat": "~2.5"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.x-dev"
+        },
+        "commands": [
+            "package browse",
+            "package install",
+            "package list",
+            "package update",
+            "package uninstall"
+        ],
+        "bundled": true
+    }
+}

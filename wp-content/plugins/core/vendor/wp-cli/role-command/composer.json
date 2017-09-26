@@ -1,0 +1,48 @@
+{
+    "name": "wp-cli/role-command",
+    "description": "Manage user roles and capabilities.",
+    "type": "wp-cli-package",
+    "homepage": "https://github.com/wp-cli/role-command",
+    "support": {
+        "issues": "https://github.com/wp-cli/role-command/issues"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Daniel Bachhuber",
+            "email": "daniel@runcommand.io",
+            "homepage": "https://runcommand.io"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "": "src/"
+        },
+        "files": [
+            "role-command.php"
+        ]
+    },
+    "require": {},
+    "require-dev": {
+        "behat/behat": "~2.5",
+        "wp-cli/wp-cli": "*"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.x-dev"
+        },
+        "commands": [
+            "role create",
+            "role delete",
+            "role exists",
+            "role list",
+            "role reset",
+            "cap add",
+            "cap list",
+            "cap remove"
+        ],
+        "bundled": true
+    }
+}

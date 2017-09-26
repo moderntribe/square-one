@@ -19,9 +19,5 @@
       "Tribe\\Project\\": "src/",
       "Tribe\\Libs\\": "vendor/moderntribe/tribe-libs/src/"
     }
-  },
-  "require-dev": {
-    "lucatume/wp-browser": "^1.9",
-    "lucatume/function-mocker": "~1.0"
   }
 }
