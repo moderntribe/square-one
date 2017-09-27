@@ -38,5 +38,8 @@ download it from [here](https://store.docker.com/editions/community/docker-ce-de
 3. Delete `dev/docker/global`
 4. Change .projectID on `dev/docker` to a representative slug for the project.
 5. Replace `square1.tribe` with whatever domain you want for the project in `docker-composer.yml` and `phpdocker/nginx/nginx.conf`
+6. Replace `square1.tribe` also in wp-cli.yml
+7. If you need to change the Dockerfile for building the php-fpm image, change the image name from `image: tribe-phpfpm:7.0` to whatever makes sense on your docker-compose.yml
 6. That's it. Be happy.
+
 
