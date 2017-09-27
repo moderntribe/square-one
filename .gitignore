@@ -12,6 +12,8 @@ ehthumbs.db
 Thumbs.db
 .DS_Store
 .idea
+pimple.json
+.phpstorm.meta.php
 
 # Vim generated files #
 #######################
