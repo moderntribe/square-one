@@ -16,7 +16,6 @@ download it from [here](https://store.docker.com/editions/community/docker-ce-de
 6. Open your mysql client (SequelPro, HeidiSQL, etc). Try to connect to your new MySQL server with this info: `host: mysql.tribe - port: 3306 - username: root - password: password`. Open a browser and go to http://mailhog.tribe. Hopefully it all works. If it doesn't try clearing your OS DNS cache. If it still doesn't work submit a bug report (ie: talk to Daniel or Jonathan).
 7. You're done. You can go back to the terminal and run `bash stop.sh` or just leave global running if you're planning on doing some work.
 
-
 # Your first run for each new project
 
 1. Clone the the repo for the new project
