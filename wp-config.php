@@ -193,7 +193,7 @@ if ( ! defined( 'WP_DEBUG_DISPLAY' ) || ! WP_DEBUG_DISPLAY ) {
 // Load a Memcached config if we have one
 // ==============================================================
 
-if ( __DIR__ . '/memcached.php' ) {
+if ( file_exists( __DIR__ . '/memcached.php' ) ) {
 	$memcached_servers = include __DIR__ . '/memcached.php';
 }
 
