@@ -8,6 +8,7 @@ use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Tribe\Libs\Object_Meta\Meta_Repository;
 use Tribe\Project\Object_Meta\Example;
+use Tribe\Project\Object_Meta\Place;
 use Tribe\Project\Post_Types;
 use Tribe\Project\Settings;
 use Tribe\Project\Taxonomies;
@@ -15,13 +16,16 @@ use Tribe\Project\Taxonomies;
 class Object_Meta_Provider implements ServiceProviderInterface {
 	const REPO    = 'object_meta.collection_repo';
 	const EXAMPLE = 'object_meta.example';
+	const PLACE   = 'ojbect_meta.place';
 
 	private $keys = [
 		self::EXAMPLE,
+		self::PLACE,
 	];
 
 	public function register( Container $container ) {
 		$this->example( $container );
+		$this->posts( $container );
 
 		$container[ self::REPO ] = function ( Container $container ) {
 			$meta_repo = array_map( function ( $key ) use ( $container ) {
@@ -50,6 +54,17 @@ class Object_Meta_Provider implements ServiceProviderInterface {
 				'settings_pages' => [ Settings\General::instance()->get_slug() ],
 				'users'          => true,
 			] );
+		};
+	}
+
+	private function posts ( Container $container ) {
+		$container[ self::PLACE ] = function ( Container $container ) {
+			return new Place( [
+				'post_types'     => [ Post_Types\Place\Place::NAME ],
+				'taxonomies'     => [ Taxonomies\Category\Category::NAME ],
+				'settings_pages' => [ Settings\General::instance()->get_slug() ],
+				'users'          => true,
+			]);
 		};
 	}
 }

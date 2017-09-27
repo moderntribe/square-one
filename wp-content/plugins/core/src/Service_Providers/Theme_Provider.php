@@ -23,6 +23,7 @@ use Tribe\Project\Theme\Resources\Styles;
 use Tribe\Project\Theme\Resources\Template_Tags;
 use Tribe\Project\Theme\Supports;
 use Tribe\Project\Theme\WP_Responsive_Image_Disabler;
+use Tribe\Project\Templates\Components\Place;
 
 class Theme_Provider implements ServiceProviderInterface {
 
@@ -58,6 +59,17 @@ class Theme_Provider implements ServiceProviderInterface {
 		$this->nav_attributes( $container );
 
 		$this->gravity_forms( $container );
+
+		$this->places( $container );
+	}
+
+	private function places( Container $container ) {
+		$container[ 'templates.components.place' ] = function ( Container $container ) {
+			return new Place( $container );
+		};
+		add_action( 'init', function () use ( $container ) {
+			$container[ 'templates.components.place' ]->parse_args();
+		}, 10, 0 );
 	}
 
 	private function body_classes( Container $container ) {
