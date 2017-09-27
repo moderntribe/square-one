@@ -8,6 +8,6 @@
     "preferred-install": "dist"
   },
   "require-dev": {
-    "lucatume/wp-browser": "^1.9"
+    "lucatume/wp-browser": "^1.21"
   }
 }
