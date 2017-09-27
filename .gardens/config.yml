@@ -85,7 +85,7 @@ scripts:
     fi
   # block of commands to execute after a successful deploy of container(s)
   after_deploy: |
-    echo "Your Wordpress instance admin username/password is ${admin_username}/${admin_password}"
+    echo "Your WordPress instance admin username/password is ${admin_username}/${admin_password}"
   # block of commands to execute on the CI server before removing a deployment of this repo/branch
   before_remove: |
     if $Backup; then
