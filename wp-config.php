@@ -190,22 +190,6 @@ if ( ! defined( 'WP_DEBUG_DISPLAY' ) || ! WP_DEBUG_DISPLAY ) {
 }
 
 // ==============================================================
-// Load a Memcached config if we have one
-// ==============================================================
-
-if ( file_exists( __DIR__ . '/memcached.php' ) ) {
-	$memcached_servers = include __DIR__ . '/memcached.php';
-}
-
-// ==============================================================
-// Load a Cache config if we have one
-// ==============================================================
-
-if ( file_exists( __DIR__ . 'cache-config.php' ) ) {
-	include __DIR__ . '/cache-config.php' ;
-}
-
-// ==============================================================
 // Bootstrap WordPress
 // ==============================================================
 
