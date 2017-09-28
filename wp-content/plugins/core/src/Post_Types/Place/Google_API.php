@@ -85,7 +85,7 @@ class Google_API implements API_Interface {
 	}
 
 	private function search() {
-		$location = rawurlencode( trim( preg_replace( '/[^0-9a-zA-Z -]/', '', $this->get_search_string() ) ) );
+		$location = trim( preg_replace( '/[^0-9a-zA-Z -]/', '', $this->get_search_string() ) );
 		$response = wp_remote_get( esc_url_raw( "https://maps.googleapis.com/maps/api/place/autocomplete/json?input={$location}&key={$this->api_key}" ) );
 		return $this->parse_json( wp_remote_retrieve_body( $response ) );
 	}
