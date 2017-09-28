@@ -7,10 +7,10 @@
  * enabled on your local development checkouts
 */
 
-define( 'DB_NAME', '' );
-define( 'DB_USER', '' );
-define( 'DB_PASSWORD', '' );
-define( 'DB_HOST', '' );
+define( 'DB_NAME', 'tribe_square1' );
+define( 'DB_USER', 'root' );
+define( 'DB_PASSWORD', 'password' );
+define( 'DB_HOST', 'mysql' );
 
 
 /*
@@ -22,6 +22,8 @@ define( 'SAVEQUERIES', true );
 define( 'WP_DEBUG_DISPLAY', true );
 define( 'SCRIPT_DEBUG', true );
 define( 'WP_CACHE', false );
+
+$GLOBALS[ 'memcached_servers' ] = [ 'memcached:11211' ];
 
 
 /*
