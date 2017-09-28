@@ -23,14 +23,16 @@ download it from [here](https://store.docker.com/editions/community/docker-ce-de
 2. Find domain your BE lead chose for the project when they set it up the first time on `dev/docker/docker-compose.yml`. You can find it in the line that reads: `- VIRTUAL_HOST={something}.tribe` in the `website` service. Take note of that domain.
 3. Go to *your main Square One* clone, the one you use to run the global containers from. Go to the `dev/docker/global folder` and run `bash cert.sh something.tribe` obviously using the right domain you found in the previous point.
 4. Connect to MySQL and create a new DB for it, or import an existing one. Remember the connection info for your local-config.php is: `host: mysql.tribe - port: 3306 - username: root - password: password`
+5. **For FE Devs:** To use Browsersnyc, follow the instructions in the `local-config-sample.json`. You will need to add your local path to the global certs directory (where your certs from step 3 are installed) to the `certs_path` parameter.
 
 # Day to Day usage
 
 1. Make sure you are running your Global containers from your main Square One clone. If you're not just run `bash start.sh`. If you're unsure just run `bash stop.sh` and then `bash start.sh`. Wait until they start (about 10 seconds). You don't really need to stop this often, you can just leave it running and start it again after you restart you computer.
 2. Go to the folder of the project you want to work on and in `dev/docker` you'll find another `start.sh`. Run it with `bash start.sh`. That's it. You should be able to load the project in the browser.
 3. Get into the habit of having a terminal window running `bash logs.sh` from the same folder. There's important information there. Most notably, PHP errors.
-4. You don't *need* to `bash stop.sh` when you stop working, but it's not a bad idea to do so and to start it again next time, so if someone on the team pushed changes to the infrastructure you'll get them automatically.
-5. **Just for BE leads:** `docker-compose up` doesn't look for changes on the PHP Dockerfile, so if you change how the PHP image is built (ie: add an extension or update PHP version) you need to instruct your team to go to the docker folder on the project and run `docker-compose build`. This is probably not going to happen often.
+4. To use WPCLI commands from outside of the project container, use `wp.sh` from `dev/docker`. Usage example: `bash wp.sh media regenerate`. This script can handle all commands and arguments available from WPCLI. `--allow-root` is a default flag executed from within the script.
+5. You don't *need* to `bash stop.sh` when you stop working, but it's not a bad idea to do so and to start it again next time, so if someone on the team pushed changes to the infrastructure you'll get them automatically.
+6. **Just for BE leads:** `docker-compose up` doesn't look for changes on the PHP Dockerfile, so if you change how the PHP image is built (ie: add an extension or update PHP version) you need to instruct your team to go to the docker folder on the project and run `docker-compose build`. This is probably not going to happen often.
 
 # If you're creating a new project (ie: forking Square One)
 
