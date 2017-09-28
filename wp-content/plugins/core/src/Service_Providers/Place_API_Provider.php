@@ -12,7 +12,6 @@ namespace Tribe\Project\Service_Providers;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Tribe\Project\Places_API\Google_API;
-use Tribe\Project\Post_Types\Place\Place;
 
 class Place_API_Provider implements ServiceProviderInterface {
 

@@ -1,8 +1,6 @@
 <?php
 /**
- * Example Meta
- *
- * An example of how to register object meta.
+ * Place Meta.
  */
 
 namespace Tribe\Project\Object_Meta;
