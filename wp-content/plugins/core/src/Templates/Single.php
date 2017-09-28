@@ -16,6 +16,12 @@ class Single extends Base {
 		return $data;
 	}
 
+	protected function get_components() {
+		return [
+			new Components\Place( $this->template, $this->twig, [] ),
+		];
+	}
+
 	protected function get_post() {
 		// can't use get_components because we need to setup global postdata first
 		$template = new Content\Single\Post( $this->template, $this->twig );

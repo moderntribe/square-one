@@ -18,6 +18,7 @@ class Index extends Base {
 	protected function get_components() {
 		return [
 			new Pagination\Loop( $this->template, $this->twig ),
+			new Components\Place( $this->template, $this->twig, [] ),
 		];
 	}
 

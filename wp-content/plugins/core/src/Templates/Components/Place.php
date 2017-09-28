@@ -7,8 +7,10 @@ class Place extends Component {
 
 	const TEMPLATE_NAME = 'components/place.twig';
 
-	const NAME    = 'name';
+	const NAME = 'name';
 	const ADDRESS = 'address';
+	const GOOGLE_PLACE_ID = 'place_id';
+
 
 	public function parse_options( array $options ): array {
 		$defaults = [
@@ -23,16 +25,24 @@ class Place extends Component {
 		$data = [
 			static::NAME    => $this->get_name(),
 			static::ADDRESS => $this->get_address(),
+			static::GOOGLE_PLACE_ID => $this->get_google_place_id(),
 		];
 
 		return $data;
 	}
 
 	private function get_name() {
-		return get_field( Object_Meta\Place::PLACE );
+		$place_object = \Tribe\Project\Post_Types\Place\Place::factory( get_the_ID() );
+		return $place_object->get_meta( Object_Meta\Place::PLACE );
 	}
 
 	private function get_address() {
-		return get_field( Object_Meta\Place::ADDRESS );
+		$place_object = \Tribe\Project\Post_Types\Place\Place::factory( get_the_ID() );
+		return $place_object->get_meta( Object_Meta\Place::ADDRESS );
+	}
+
+	private function get_google_place_id() {
+		$place_object = \Tribe\Project\Post_Types\Place\Place::factory( get_the_ID() );
+		return $place_object->get_meta( Object_Meta\Place::PLACE_ID );
 	}
 }
