@@ -4,7 +4,6 @@ namespace Tribe\Project\Post_Types\Place;
 
 use Tribe\Project\Object_Meta;
 use Tribe\Project\Settings\Places_Settings;
-use \Tribe\Project\Post_Types\Place\Place;
 
 class Google_API implements API_Interface {
 
@@ -13,13 +12,12 @@ class Google_API implements API_Interface {
 	private $post_id = 0;
 	private $place_object = null;
 
-	public function __construct( $container ) {
-		$this->setup_api_key( $container );
+	public function __construct( Places_Settings $settings ) {
+		$this->setup_api_key( $settings );
 	}
 
-	private function setup_api_key( $container ) {
-		$api_key_setting = $container[ 'settings.google_api' ];
-		$this->api_key = $api_key_setting->get_setting( Places_Settings::API_KEY );
+	private function setup_api_key( Places_Settings $settings ) {
+		$this->api_key = $settings->get_setting( Places_Settings::API_KEY );
 	}
 
 	/**
@@ -54,9 +52,6 @@ class Google_API implements API_Interface {
 		// Setup the place object we'll be using.
 		$this->place_object = Place::factory( $this->post_id );
 
-		// Setup the string we'll be using.
-		$this->search_string = $this->get_search_string();
-
 		// Are the old and new values equal?
 		return ! $this->values_are_equal();
 	}
@@ -69,7 +64,7 @@ class Google_API implements API_Interface {
 	 * @return bool
 	 */
 	private function values_are_equal() {
-		return $this->place_object->get_meta( Object_Meta\Place::HASHED_NAME_AND_ID ) === md5( $this->place_object->get_meta( Object_Meta\Place::PLACE_ID ) . $this->search_string );
+		return $this->place_object->get_meta( Object_Meta\Place::HASHED_NAME_AND_ID ) === md5( $this->place_object->get_meta( Object_Meta\Place::PLACE_ID ) . $this->get_search_string() );
 	}
 
 	private function is_place_cpt() {
@@ -77,16 +72,20 @@ class Google_API implements API_Interface {
 	}
 
 	private function get_search_string() {
-		return $this->place_object->get_meta( Object_Meta\Place::PLACE );
+		if ( empty ( $this->search_string ) ) {
+			$this->search_string = $this->place_object->get_meta( Object_Meta\Place::PLACE );
+		}
+
+		return $this->search_string;
 	}
 
 	private function update_fields( $google_place_id ) {
 		update_field( Object_Meta\Place::PLACE_ID, $google_place_id, $this->post_id );
-		update_field( Object_Meta\Place::HASHED_NAME_AND_ID, md5( $google_place_id . $this->search_string ) , $this->post_id );
+		update_field( Object_Meta\Place::HASHED_NAME_AND_ID, md5( $google_place_id . $this->get_search_string() ) , $this->post_id );
 	}
 
 	private function search() {
-		$location = rawurlencode( trim( preg_replace( '/[^0-9a-zA-Z -]/', '', $this->search_string ) ) );
+		$location = rawurlencode( trim( preg_replace( '/[^0-9a-zA-Z -]/', '', $this->get_search_string() ) ) );
 		$response = wp_remote_get( esc_url_raw( "https://maps.googleapis.com/maps/api/place/autocomplete/json?input={$location}&key={$this->api_key}" ) );
 		return $this->parse_json( wp_remote_retrieve_body( $response ) );
 	}

@@ -20,7 +20,7 @@ class Place_API_Provider implements ServiceProviderInterface {
 
 	private function register_google_api_settings( $container ) {
 		$container[ 'places_api.google_api' ] = function( Container $container ) {
-			return new Google_API( $container );
+			return new Google_API( $container['settings.google_api'] );
 		};
 
 		add_action( 'acf/save_post', function ( $post_id ) use ( $container ) {
