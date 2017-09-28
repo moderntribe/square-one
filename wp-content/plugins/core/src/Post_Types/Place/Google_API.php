@@ -1,10 +1,10 @@
 <?php
 
-namespace Tribe\Project\Places_API;
+namespace Tribe\Project\Post_Types\Place;
 
 use Tribe\Project\Object_Meta;
-use Tribe\Project\Post_Types\Place\Place;
 use Tribe\Project\Settings\Places_Settings;
+use \Tribe\Project\Post_Types\Place\Place;
 
 class Google_API implements API_Interface {
 
@@ -13,12 +13,12 @@ class Google_API implements API_Interface {
 	private $post_id = 0;
 	private $place_object = null;
 
-	public function __construct() {
-		$this->setup_api_key();
+	public function __construct( $container ) {
+		$this->setup_api_key( $container );
 	}
 
-	private function setup_api_key() {
-		$api_key_setting = new Places_Settings();
+	private function setup_api_key( $container ) {
+		$api_key_setting = $container[ 'settings.google_api' ];
 		$this->api_key = $api_key_setting->get_setting( Places_Settings::API_KEY );
 	}
 
@@ -45,24 +45,20 @@ class Google_API implements API_Interface {
 	 *
 	 * @return bool
 	 */
-	private function should_update() {
+	private function should_update() : bool {
 		// Check the post type.
 		if ( ! $this->is_place_cpt( $this->post_id ) ) {
 			return false;
 		}
 
 		// Setup the place object we'll be using.
-		$this->place_object = \Tribe\Project\Post_Types\Place\Place::factory( $this->post_id );
+		$this->place_object = Place::factory( $this->post_id );
 
 		// Setup the string we'll be using.
 		$this->search_string = $this->get_search_string();
 
 		// Are the old and new values equal?
-		if ( $this->values_are_equal() ) {
-			return false;
-		}
-
-		return true;
+		return ! $this->values_are_equal();
 	}
 
 	/**
@@ -91,7 +87,7 @@ class Google_API implements API_Interface {
 
 	private function search() {
 		$location = rawurlencode( trim( preg_replace( '/[^0-9a-zA-Z -]/', '', $this->search_string ) ) );
-		$response = wp_remote_get( "https://maps.googleapis.com/maps/api/place/autocomplete/json?input={$location}&key={$this->api_key}" );
+		$response = wp_remote_get( esc_url_raw( "https://maps.googleapis.com/maps/api/place/autocomplete/json?input={$location}&key={$this->api_key}" ) );
 		return $this->parse_json( wp_remote_retrieve_body( $response ) );
 	}
 

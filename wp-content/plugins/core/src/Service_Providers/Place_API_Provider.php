@@ -8,10 +8,9 @@
 
 namespace Tribe\Project\Service_Providers;
 
-
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
-use Tribe\Project\Places_API\Google_API;
+use Tribe\Project\Post_Types\Place\Google_API;
 
 class Place_API_Provider implements ServiceProviderInterface {
 
@@ -21,7 +20,7 @@ class Place_API_Provider implements ServiceProviderInterface {
 
 	private function register_google_api_settings( $container ) {
 		$container[ 'places_api.google_api' ] = function( Container $container ) {
-			return new Google_API();
+			return new Google_API( $container );
 		};
 
 		add_action( 'acf/save_post', function ( $post_id ) use ( $container ) {

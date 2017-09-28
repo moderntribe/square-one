@@ -2,6 +2,7 @@
 
 namespace Tribe\Project\Templates\Components;
 use Tribe\Project\Object_Meta;
+use Tribe\Project\Post_Types\Place\Place as Place_CPT;
 
 class Place extends Component {
 
@@ -32,17 +33,17 @@ class Place extends Component {
 	}
 
 	private function get_name() {
-		$place_object = \Tribe\Project\Post_Types\Place\Place::factory( get_the_ID() );
+		$place_object = Place_CPT::factory( get_the_ID() );
 		return $place_object->get_meta( Object_Meta\Place::PLACE );
 	}
 
 	private function get_address() {
-		$place_object = \Tribe\Project\Post_Types\Place\Place::factory( get_the_ID() );
+		$place_object = Place_CPT::factory( get_the_ID() );
 		return $place_object->get_meta( Object_Meta\Place::ADDRESS );
 	}
 
 	private function get_google_place_id() {
-		$place_object = \Tribe\Project\Post_Types\Place\Place::factory( get_the_ID() );
+		$place_object = Place_CPT::factory( get_the_ID() );
 		return $place_object->get_meta( Object_Meta\Place::PLACE_ID );
 	}
 }
