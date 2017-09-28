@@ -25,7 +25,7 @@ class Object_Meta_Provider implements ServiceProviderInterface {
 
 	public function register( Container $container ) {
 		$this->example( $container );
-		$this->posts( $container );
+		$this->places( $container );
 
 		$container[ self::REPO ] = function ( Container $container ) {
 			$meta_repo = array_map( function ( $key ) use ( $container ) {
@@ -51,18 +51,16 @@ class Object_Meta_Provider implements ServiceProviderInterface {
 			return new Example( [
 				'post_types'     => [ Post_Types\Page\Page::NAME, Post_Types\Post\Post::NAME ],
 				'taxonomies'     => [ Taxonomies\Category\Category::NAME ],
-				'settings_pages' => [ Settings\General::instance()->get_slug() ],
 				'users'          => true,
 			] );
 		};
 	}
 
-	private function posts ( Container $container ) {
+	private function places ( Container $container ) {
 		$container[ self::PLACE ] = function ( Container $container ) {
 			return new Place( [
 				'post_types'     => [ Post_Types\Place\Place::NAME ],
 				'taxonomies'     => [ Taxonomies\Category\Category::NAME ],
-				'settings_pages' => [ Settings\General::instance()->get_slug() ],
 				'users'          => true,
 			]);
 		};
