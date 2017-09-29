@@ -32,8 +32,8 @@ class Config extends Taxonomy_Config {
 	 */
 	public function default_terms() {
 		return [
-			'first' => 'First Required Term',
-			'second' => 'Second Required Term',
+			'first' => 'First Default Term',
+			'second' => 'Second Default Term',
 		];
 	}
 }
