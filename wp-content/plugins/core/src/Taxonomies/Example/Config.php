@@ -8,6 +8,9 @@ use Tribe\Libs\Taxonomy\Taxonomy_Config;
 
 class Config extends Taxonomy_Config {
 
+	/**
+	 * meta_box can be 'simple', 'radio', 'dropdown', or a callable.
+	 */
 	public function get_args() {
 		return [
 			'hierarchical' => false,
@@ -24,8 +27,13 @@ class Config extends Taxonomy_Config {
 		];
 	}
 
+	/**
+	 * Supply initial terms needed in this taxonomy.
+	 */
 	public function default_terms() {
 		return [
+			'first' => 'First Required Term',
+			'second' => 'Second Required Term',
 		];
 	}
 }
