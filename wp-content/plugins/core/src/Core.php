@@ -16,6 +16,7 @@ use Tribe\Project\Service_Providers\Post_Types\Page_Service_Provider;
 use Tribe\Project\Service_Providers\Post_Types\Post_Service_Provider;
 use Tribe\Project\Service_Providers\Post_Types\Sample_Post_Type_Service_Provider;
 use Tribe\Project\Service_Providers\Post_Types\Venue_Service_Provider;
+use Tribe\Project\Service_Providers\Post_Types\Place_Service_Provider;
 use Tribe\Project\Service_Providers\Shortcode_Provider;
 use Tribe\Project\Service_Providers\Taxonomies\Category_Service_Provider;
 use Tribe\Project\Service_Providers\Taxonomies\Example_Taxonomy_Service_Provider;
@@ -26,6 +27,7 @@ use Tribe\Project\Service_Providers\Theme_Provider;
 use Tribe\Project\Service_Providers\Settings_Provider;
 use Tribe\Project\Service_Providers\Twig_Service_Provider;
 use Tribe\Project\Service_Providers\Util_Provider;
+use Tribe\Project\Service_Providers\Place_API_Provider;
 
 class Core {
 
@@ -70,6 +72,7 @@ class Core {
 		$this->container->register( new Shortcode_Provider() );
 		$this->container->register( new Object_Meta_Provider() );
 		$this->container->register( new CLI_Provider() );
+		$this->container->register( new Place_API_Provider() );
 
 		$this->load_post_type_providers();
 		$this->load_taxonomy_providers();
@@ -77,6 +80,7 @@ class Core {
 
 	private function load_post_type_providers() {
 		$this->container->register( new Sample_Post_Type_Service_Provider() );
+		$this->container->register( new Place_Service_Provider() );
 
 		// externally registered post types
 		$this->container->register( new Event_Service_Provider() );

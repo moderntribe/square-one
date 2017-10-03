@@ -15,11 +15,15 @@ class Settings_Provider implements ServiceProviderInterface {
 	}
 
 	public function register_pages( Container $container ) {
-		$container[ 'settings.general' ] = function ( Container $container ) {
-			return new Settings\General();
+		$container[ 'settings.google_api' ] = function ( Container $container ) {
+			return new Settings\Places_Settings();
 		};
+
 		add_action( 'init', function () use ( $container ) {
-			$container[ 'settings.general' ]->hook();
-		}, 0, 0 );
+			$container['settings.google_api']->register_settings();
+		}, 10, 0 );
+		add_action( 'init', function () use ( $container ) {
+			$container['settings.google_api']->register_fields();
+		}, 10, 0 );
 	}
 }
