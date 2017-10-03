@@ -3,7 +3,6 @@
 namespace Tribe\Project\CLI;
 
 use Pimple\Container;
-use Tribe\Libs\Post_Type\Post_Object;
 
 class CPT_Generator extends \WP_CLI_Command {
 

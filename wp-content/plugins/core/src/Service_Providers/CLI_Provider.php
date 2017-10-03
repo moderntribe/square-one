@@ -15,6 +15,7 @@ class CLI_Provider implements ServiceProviderInterface {
 		$container['cli.pimple_dump'] = function ( $container ) {
 			return new Pimple_Dump( $container );
 		};
+
 		$container['cli.cpt-generator'] = function ( $container ) {
 			return new CPT_Generator( $container );
 		};
@@ -26,6 +27,7 @@ class CLI_Provider implements ServiceProviderInterface {
 
 			\WP_CLI::add_command( 'pimple', $container['cli.pimple_dump'] );
 			\WP_CLI::add_command( 's1', $container['cli.cpt-generator'] );
+
 		}, 0, 0 );
 	}
 }
