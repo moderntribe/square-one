@@ -8,7 +8,7 @@ use Tribe\Libs\Taxonomy\Taxonomy_Config;
 
 class Config extends Taxonomy_Config {
 
-	private $version = 1;
+	protected $version = 1;
 
 	/**
 	 * Arguments to pass when registering the taxonomy.
