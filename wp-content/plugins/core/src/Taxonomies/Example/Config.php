@@ -8,6 +8,8 @@ use Tribe\Libs\Taxonomy\Taxonomy_Config;
 
 class Config extends Taxonomy_Config {
 
+	private $version = 1;
+
 	/**
 	 * Arguments to pass when registering the taxonomy.
 	 *
@@ -31,9 +33,6 @@ class Config extends Taxonomy_Config {
 	}
 
 	public function default_terms() {
-
-		$this->version++;
-
 		return [
 			'first' => __( 'First Default Term', 'tribe' ),
 			'second' => __( 'Second Default Term', 'tribe' ),
