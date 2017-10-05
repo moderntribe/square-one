@@ -3,9 +3,12 @@
 namespace Tribe\Project\Templates\Content\Panels;
 
 use Tribe\Project\Panels\Types\ContentSlider as ContentSliderPanel;
+use Tribe\Project\Templates\Components\Button;
 use Tribe\Project\Templates\Components\Content_Block;
 use Tribe\Project\Templates\Components\Slider as SliderComponent;
 use Tribe\Project\Templates\Components\Image;
+use Tribe\Project\Templates\Components\Text;
+use Tribe\Project\Templates\Components\Title;
 
 class ContentSlider extends Panel {
 
@@ -60,12 +63,11 @@ class ContentSlider extends Panel {
 				$slide_markup .= $image_obj->render();
 
 				$options = [
-					Content_Block::TITLE         => esc_html( $slide[ ContentSliderPanel::FIELD_SLIDE_TITLE ] ),
-					Content_Block::TITLE_TAG     => 'h2',
-					Content_Block::TEXT          => $slide[ ContentSliderPanel::FIELD_SLIDE_CONTENT ],
-					Content_Block::CTA           => $slide[ ContentSliderPanel::FIELD_SLIDE_CTA ],
-					Content_Block::TITLE_CLASSES => [ 'h2' ],
-					Content_Block::CTA_CLASSES   => [ 'c-btn--sm' ],
+					Content_Block::TITLE           => $this->get_content_block_title( $slide ),
+					Content_Block::TEXT            => $this->get_content_block_text( $slide ),
+					Content_Block::CLASSES         => [],
+					Content_Block::CONTENT_CLASSES => [],
+					Content_Block::BUTTON          => $this->get_content_block_button( $slide ),
 				];
 
 				$content_block_obj = Content_Block::factory( $options );
@@ -83,6 +85,47 @@ class ContentSlider extends Panel {
 		$classes = [ 'c-slider__main' ];
 
 		return $classes;
+	}
+
+	protected function get_content_block_title( $slide ) {
+		$options = [
+			Title::CLASSES => [ 'h2' ],
+			Title::TITLE   => esc_html( $slide[ ContentSliderPanel::FIELD_SLIDE_TITLE ] ),
+			Title::ATTRS   => '',
+			Title::TAG     => 'h2',
+		];
+
+		$title_object = Title::factory( $options );
+
+		return $title_object->render();
+	}
+
+	protected function get_content_block_text( $slide ) {
+		$options = [
+			Text::ATTRS   => '',
+			Text::CLASSES => [],
+			Text::TEXT    => $slide[ ContentSliderPanel::FIELD_SLIDE_CONTENT ],
+		];
+
+		$text_object = Text::factory( $options );
+
+		return $text_object->render();
+	}
+
+	protected function get_content_block_button( $slide ) {
+		$options = [
+			Button::CLASSES     => [ 'c-btn--sm' ],
+			Button::ATTRS       => '',
+			Button::TAG         => '',
+			Button::TARGET      => $slide[ ContentSliderPanel::FIELD_SLIDE_CTA ][ Button::TARGET ],
+			Button::LABEL       => $slide[ ContentSliderPanel::FIELD_SLIDE_CTA ][ Button::LABEL ],
+			Button::URL         => $slide[ ContentSliderPanel::FIELD_SLIDE_CTA ][ Button::URL ],
+			Button::BTN_AS_LINK => true,
+		];
+
+		$button_object = Button::factory( $options );
+
+		return $button_object->render();
 	}
 
 	public static function instance() {
