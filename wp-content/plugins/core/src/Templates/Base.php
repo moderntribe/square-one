@@ -122,12 +122,16 @@ class Base extends Twig_Template {
 	}
 
 	protected function get_search(): string {
-		$get_submit_button = $this->get_search_button();
+		$get_submit_button = $this->submit_button();
 
 		$form_attrs = [
 			'role'   => 'search',
 			'method' => 'get',
 			'action' => esc_url( get_home_url() ),
+		];
+
+		$label_attrs = [
+			'for' => 's',
 		];
 
 		$input_attrs = [
@@ -140,7 +144,7 @@ class Base extends Twig_Template {
 			Search::FORM_CLASSES  => [ 'c-search' ],
 			Search::FORM_ATTRS    => $form_attrs,
 			Search::LABEL_CLASSES => [ 'c-search__label' ],
-			Search::LABEL_ATTRS   => [ 'for' => 's' ],
+			Search::LABEL_ATTRS   => $label_attrs,
 			Search::LABEL_TEXT    => [ 'Search' ],
 			Search::INPUT_CLASSES => [ 'c-search__input' ],
 			Search::INPUT_ATTRS   => $input_attrs,
@@ -152,7 +156,7 @@ class Base extends Twig_Template {
 		return $search->render();
 	}
 
-	protected function get_search_button(): string {
+	protected function submit_button(): string {
 
 		$btn_attr = [
 			'type'  => 'submit',
