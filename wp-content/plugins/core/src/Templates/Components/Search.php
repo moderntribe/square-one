@@ -10,8 +10,10 @@ class Search extends Component {
 	const FORM_ATTRS    = 'form_attrs';
 	const LABEL_CLASSES = 'label_classes';
 	const LABEL_ATTRS   = 'label_attrs';
+	const LABEL_TEXT    = 'label_text';
 	const INPUT_CLASSES = 'input_classes';
 	const INPUT_ATTRS   = 'input_attrs';
+	const SUBMIT_BUTTON = 'submit_button';
 
 	protected function parse_options( array $options ): array {
 		$defaults = [
@@ -19,6 +21,7 @@ class Search extends Component {
 			static::FORM_ATTRS    => [],
 			static::LABEL_CLASSES => [],
 			static::LABEL_ATTRS   => [],
+			static::LABEL_TEXT    => [],
 			static::INPUT_CLASSES => [],
 			static::INPUT_ATTRS   => [],
 		];
@@ -32,8 +35,10 @@ class Search extends Component {
 			static::FORM_ATTRS    => $this->merge_attrs( [], $this->options[ self::FORM_ATTRS ], true ),
 			static::LABEL_CLASSES => $this->merge_classes( [], $this->options[ static::LABEL_CLASSES ], true ),
 			static::LABEL_ATTRS   => $this->merge_attrs( [], $this->options[ self::LABEL_ATTRS ], true ),
+			static::LABEL_TEXT    => $this->merge_classes( [], $this->options[ static::LABEL_TEXT ], true ),
 			static::INPUT_CLASSES => $this->merge_classes( [], $this->options[ static::INPUT_CLASSES ], true ),
 			static::INPUT_ATTRS   => $this->merge_attrs( [], $this->options[ self::INPUT_ATTRS ], true ),
+			static::SUBMIT_BUTTON => $this->options[ self::SUBMIT_BUTTON ],
 		];
 
 		return $data;

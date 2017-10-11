@@ -5,6 +5,8 @@ namespace Tribe\Project\Templates;
 
 use Tribe\Project\Service_Providers\Nav_Menu_Provider;
 use Tribe\Project\Theme\Logo;
+use Tribe\Project\Templates\Components\Search;
+use Tribe\Project\Templates\Components\Button;
 use Tribe\Project\Twig\Noop_Lazy_Strings;
 use Tribe\Project\Twig\Stringable_Callable;
 use Tribe\Project\Twig\Template_Interface;
@@ -23,6 +25,7 @@ class Base extends Twig_Template {
 			'home_url'            => $this->get_home_url(),
 			'copyright'           => $this->get_copyright(),
 			'language_attributes' => $this->get_language_attributes(),
+			'search'              => $this->get_search(),
 		];
 
 		foreach ( $this->get_components() as $component ) {
@@ -116,5 +119,55 @@ class Base extends Twig_Template {
 		ob_start();
 		language_attributes();
 		return ob_get_clean();
+	}
+
+	protected function get_search(): string {
+		$get_submit_button = $this->get_search_button();
+
+		$form_attrs = [
+			'role'   => 'search',
+			'method' => 'get',
+			'action' => esc_url( get_home_url() ),
+		];
+
+		$input_attrs = [
+			'type' => 'text',
+			'id'   => 's',
+			'name' => 's',
+		];
+
+		$options = [
+			Search::FORM_CLASSES  => [ 'c-search' ],
+			Search::FORM_ATTRS    => $form_attrs,
+			Search::LABEL_CLASSES => [ 'c-search__label' ],
+			Search::LABEL_ATTRS   => [ 'for' => 's' ],
+			Search::LABEL_TEXT    => [ 'Search' ],
+			Search::INPUT_CLASSES => [ 'c-search__input' ],
+			Search::INPUT_ATTRS   => $input_attrs,
+			Search::SUBMIT_BUTTON => $get_submit_button,
+		];
+
+		$search = Search::factory( $options );
+
+		return $search->render();
+	}
+
+	protected function get_search_button(): string {
+
+		$btn_attr = [
+			'type'  => 'submit',
+			'name'  => 'submit',
+			'value' => __( 'Search', 'tribe' ),
+		];
+
+		$options = [
+			Button::LABEL   => __( 'Search', 'tribe' ),
+			Button::CLASSES => [ 'c-button' ],
+			Button::ATTRS   => $btn_attr,
+		];
+
+		$button = Button::factory( $options );
+
+		return $button->render();
 	}
 }

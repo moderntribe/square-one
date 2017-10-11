@@ -9,7 +9,7 @@
     es6-collections "0.5.6"
     native-promise-only "0.8.1"
 
-"HTML_CodeSniffer@github:squizlabs/HTML_CodeSniffer#2.0.7":
+HTML_CodeSniffer@squizlabs/HTML_CodeSniffer#2.0.7:
   version "2.0.7"
   resolved "https://codeload.github.com/squizlabs/HTML_CodeSniffer/tar.gz/d209ce54876657858a8a01528ad812cd234f37f0"
 
