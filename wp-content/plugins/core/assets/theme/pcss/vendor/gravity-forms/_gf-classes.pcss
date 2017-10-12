@@ -1,0 +1,242 @@
+
+/* -----------------------------------------------------------------------------
+ * Gravity Forms Specific Classes
+ *
+ * Described here: https://www.gravityhelp.com/css-ready-classes-for-gravity-forms/
+ * ----------------------------------------------------------------------------- */
+
+@media (--viewport-medium) {
+
+	.gform_wrapper {
+
+		ul li.gf_left_third {
+			float: left;
+			width: 33.33%;
+			padding-right: var(--gf-control-complex-gutter);
+		}
+
+		ul li.gf_middle_third {
+			float: left;
+			width: 33.33%;
+			padding-left: var(--gf-control-complex-gutter);
+			padding-right: var(--gf-control-complex-gutter);
+		}
+
+		ul li.gf_right_third {
+			float: right;
+			width: 33.33%;
+			padding-left: var(--gf-control-complex-gutter);
+
+			& + li.gfield {
+				display: block;
+				clear: both;
+			}
+		}
+
+		ul li.gf_left_half {
+			float: left;
+			width: 50%;
+			padding-right: var(--gf-control-complex-gutter);
+		}
+
+		ul li.gf_right_half {
+			float: right;
+			width: 50%;
+			padding-left: var(--gf-control-complex-gutter);
+
+			& + li.gfield {
+				display: block;
+				clear: both;
+			}
+		}
+	}
+}
+
+.gf_hide_charleft .charleft {
+	display: none;
+}
+
+.gf_hide_ampm .clear-multi {
+	@media (--viewport-medium) {
+
+		.gfield_time_hour,
+		.gfield_time_minute {
+			width: 50%;
+		}
+
+		.gfield_time_minute {
+			padding-right: 0;
+		}
+	}
+
+	.gfield_time_ampm {
+		display: none;
+	}
+}
+
+.gf_scroll_text {
+	overflow: scroll;
+	height: 150px;
+
+	@media (--viewport-medium) {
+		height: 250px;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Lists
+ * ----------------------------------------------------------------------------- */
+
+.gfield.gf_list_inline {
+
+	ul {
+		@mixin clearfix;
+	}
+
+	.gfield_checkbox li,
+	.gfield_radio li {
+		float: left;
+		margin: 10px 30px 10px 0;
+
+		&.gf_other_choice_item {
+			position: relative;
+			top: -11px;
+
+			input[type="text"] {
+				width: 100%;
+			}
+		}
+	}
+}
+
+.gfield.gf_list_inline legend {
+	margin-bottom: 10px;
+}
+
+@media (--viewport-medium) {
+
+	.gf_list_2col,
+	.gf_list_3col,
+	.gf_list_4col,
+	.gf_list_5col {
+
+		.gfield_checkbox,
+		.gfield_radio {
+			@mixin clearfix;
+
+			li {
+				display: block;
+				margin-top: 0;
+				margin-bottom: 10px;
+				float: left;
+
+				&.gf_other_choice_item {
+					position: relative;
+					top: -11px;
+
+					input[type="text"] {
+						width: 100%;
+					}
+				}
+			}
+		}
+	}
+
+	.gf_list_2col {
+
+		.gfield_checkbox li,
+		.gfield_radio li {
+			width: 50%;
+		}
+	}
+
+	.gf_list_3col {
+
+		.gfield_checkbox li,
+		.gfield_radio li {
+			width: 33.33%;
+		}
+	}
+
+	.gf_list_4col {
+
+		.gfield_checkbox li,
+		.gfield_radio li {
+			width: 25%;
+		}
+	}
+
+	.gf_list_5col {
+
+		.gfield_checkbox li,
+		.gfield_radio li {
+			width: 20%;
+		}
+	}
+}
+
+.gf_list_height_25 {
+
+	.gfield_checkbox,
+	.gfield_radio {
+
+		li {
+			height: 25px;
+		}
+	}
+}
+
+.gf_list_height_50 {
+
+	.gfield_checkbox,
+	.gfield_radio {
+
+		li {
+			height: 50px;
+		}
+	}
+}
+
+.gf_list_height_75 {
+
+	.gfield_checkbox,
+	.gfield_radio {
+
+		li {
+			height: 75px;
+		}
+	}
+}
+
+.gf_list_height_100 {
+
+	.gfield_checkbox,
+	.gfield_radio {
+
+		li {
+			height: 100px;
+		}
+	}
+}
+
+.gf_list_height_125 {
+
+	.gfield_checkbox,
+	.gfield_radio {
+
+		li {
+			height: 125px;
+		}
+	}
+}
+
+.gf_list_height_150 {
+
+	.gfield_checkbox,
+	.gfield_radio {
+
+		li {
+			height: 150px;
+		}
+	}
+}
