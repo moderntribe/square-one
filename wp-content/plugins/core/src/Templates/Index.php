@@ -68,6 +68,20 @@ class Index extends Base {
 	}
 
 	public function get_pagination(): string {
+		$links = $this->get_pagination_numbers();
+
+		$options = [
+			Pagination::LIST_CLASSES       => [ 'g-row', 'g-row--no-gutters', 'c-pagination__list' ],
+			Pagination::LIST_ITEM_CLASSES  => [ 'g-col', 'c-pagination__item' ],
+			Pagination::WRAPPER_CLASSES    => [ 'c-pagination', 'c-pagination--loop' ],
+			Pagination::WRAPPER_ATTRS      => [ 'aria-labelledby' => 'c-pagination__label-single' ],
+			Pagination::PAGINATION_NUMBERS => $links,
+		];
+
+		return Pagination::factory( $options )->render();
+	}
+
+	public function get_pagination_numbers(): array {
 		$links = [];
 
 		$numbers = Util::get_pagination_links( 2, true, false, false );
@@ -102,14 +116,6 @@ class Index extends Base {
 			$links[] = Button::factory( $options )->render();
 		}
 
-		$options = [
-			Pagination::LIST_CLASSES       => [ 'g-row', 'g-row--no-gutters', 'c-pagination__list' ],
-			Pagination::LIST_ITEM_CLASSES  => [ 'g-col', 'c-pagination__item' ],
-			Pagination::WRAPPER_CLASSES    => [ 'c-pagination', 'c-pagination--loop' ],
-			Pagination::WRAPPER_ATTRS      => [ 'aria-labelledby' => 'c-pagination__label-single' ],
-			Pagination::PAGINATION_NUMBERS => $links,
-		];
-
-		return Pagination::factory( $options )->render();
+		return $links;
 	}
 }
