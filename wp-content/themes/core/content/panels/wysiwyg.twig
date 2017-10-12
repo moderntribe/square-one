@@ -10,18 +10,18 @@
 		     data-name="columns"
 		     data-livetext>
 
-				{% for col in columns %}
-					<div class="g-col t-content"
-					     data-depth="{{ loop.index0 }}"
-					     data-name="content"
-					     data-autop="true"
-					     data-livetext="true">
-						 {{ col.content }}
-					</div>
-				{% endfor %}
+			{% for col in columns %}
+				<div class="g-col t-content"
+				     data-depth="{{ loop.index0 }}"
+				     data-name="content"
+				     data-autop="true"
+				     data-livetext="true">
+					{{ col.content }}
+				</div>
+			{% endfor %}
 
-			</div>
 		</div>
 	</div>
+
 
 {% endblock %}
