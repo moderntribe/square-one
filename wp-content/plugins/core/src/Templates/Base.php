@@ -59,7 +59,7 @@ class Base extends Twig_Template {
 
 	protected function get_nav_menus() {
 		return [
-			Primary_Menu::NAME   => ( new Primary_Menu() )->get_menu(),
+		    Primary_Menu::NAME   => ( new Primary_Menu() )->get_menu(),
             Secondary_Menu::NAME => ( new Secondary_Menu() )->get_menu(),
 		];
 	}
