@@ -46,10 +46,9 @@ class Menu {
 		$menu = new self( $args );
 		$html = $menu->get_html();
 		$echo = isset($args['echo']) ? $args['echo'] : TRUE;
-		if ( $echo ) {
-			echo $html;
-		} else {
-			return $html;
+		if ( ! $echo ) {
+            return $html;
 		}
+		echo $html;
 	}
 }

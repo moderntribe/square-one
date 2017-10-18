@@ -29,11 +29,10 @@ class Logo {
 		$logo = new self( $args );
 		$html = $logo->get_logo();
 		$echo = isset($args['echo']) ? $args['echo'] : TRUE;
-		if ( $echo ) {
-			echo $html;
-		} else {
+		if ( ! $echo ) {
 			return $html;
 		}
+		echo $html;
 	}
 
 }
