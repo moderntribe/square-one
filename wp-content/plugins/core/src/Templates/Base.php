@@ -5,6 +5,8 @@ namespace Tribe\Project\Templates;
 
 use Tribe\Project\Service_Providers\Nav_Menu_Provider;
 use Tribe\Project\Theme\Logo;
+use Tribe\Project\Theme\Nav\Menu\Primary_Menu;
+use Tribe\Project\Theme\Nav\Menu\Secondary_Menu;
 use Tribe\Project\Twig\Noop_Lazy_Strings;
 use Tribe\Project\Twig\Stringable_Callable;
 use Tribe\Project\Twig\Template_Interface;
@@ -57,43 +59,9 @@ class Base extends Twig_Template {
 
 	protected function get_nav_menus() {
 		return [
-			Nav_Menu_Provider::PRIMARY   => new Stringable_Callable( [ $this, 'get_primary_nav_menu' ] ),
-			Nav_Menu_Provider::SECONDARY => new Stringable_Callable( [ $this, 'get_secondary_nav_menu' ] ),
+			Primary_Menu::NAME   => ( new Primary_Menu() )->get_menu(),
+            Secondary_Menu::NAME => ( new Secondary_Menu() )->get_menu(),
 		];
-	}
-
-	public function get_primary_nav_menu() {
-		$args = [
-			'theme_location'  => Nav_Menu_Provider::PRIMARY,
-			'container'       => false,
-			'container_class' => '',
-			'menu_class'      => '',
-			'menu_id'         => '',
-			'depth'           => 3,
-			'items_wrap'      => '%3$s',
-			'fallback_cb'     => false,
-			'echo'            => false,
-			'walker'          => new \Tribe\Project\Theme\Nav\Walker_Nav_Menu_Primary(),
-		];
-
-		return \Tribe\Project\Theme\Nav\Menu::menu( $args );
-	}
-
-	public function get_secondary_nav_menu() {
-		$args = [
-			'theme_location'  => Nav_Menu_Provider::SECONDARY,
-			'container'       => false,
-			'container_class' => '',
-			'menu_class'      => '',
-			'menu_id'         => '',
-			'depth'           => 1,
-			'items_wrap'      => '%3$s',
-			'fallback_cb'     => false,
-			'echo'            => false,
-			'item_spacing'    => 'discard',
-		];
-
-		return \Tribe\Project\Theme\Nav\Menu::menu( $args );
 	}
 
 	protected function get_strings() {
