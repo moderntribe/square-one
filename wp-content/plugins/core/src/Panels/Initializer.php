@@ -127,23 +127,24 @@ class Initializer {
 	 * @return PanelType
 	 */
 	public function factory( $panel_type_id, $helper_text = '' ) {
-		if ( $helper_text ) {
-			$helper_field = new Fields\HTML( [
-				'name'        => 'panel-helper',
-				'label'       => '',
-				'description' => $helper_text,
-			] );
+        if ( ! $helper_text ) {
+            return new PanelType( $panel_type_id );
+        }
 
-			$default_fields_filter = function ( $fields, $panel_type ) use ( $helper_field ) {
-				return array_merge( [ $helper_field ], $fields );
-			};
-			add_filter( 'modular_content_default_fields', $default_fields_filter, 20, 2 );
-			$panel = new PanelType( $panel_type_id );
-			remove_filter( 'modular_content_default_fields', $default_fields_filter, 20 );
-		} else {
-			$panel = new PanelType( $panel_type_id );
-		}
-		return $panel;
+        $helper_field = new Fields\HTML( [
+            'name'        => 'panel-helper',
+            'label'       => '',
+            'description' => $helper_text,
+        ] );
+
+        $default_fields_filter = function ( $fields, $panel_type ) use ( $helper_field ) {
+            return array_merge( [ $helper_field ], $fields );
+        };
+        add_filter( 'modular_content_default_fields', $default_fields_filter, 20, 2 );
+        $panel = new PanelType( $panel_type_id );
+        remove_filter( 'modular_content_default_fields', $default_fields_filter, 20 );
+
+        return $panel;
 	}
 
 	public function add_post_type_options_for_queries( $post_types ) {
@@ -213,17 +214,18 @@ class Initializer {
 	}
 
 	private function normalize_date_query_to_string( $input ) {
-		if ( is_array( $input ) ) {
-			$date = isset( $input[ 'year' ] ) ? sprintf( '%04d', $input[ 'year' ] ) : date( 'Y' );
-			$date .= '-';
-			$date .= isset( $input[ 'month' ] ) ? sprintf( '%02d', $input[ 'month' ] ) : date( 'm' );
-			$date .= '-';
-			$date .= isset( $input[ 'day' ] ) ? sprintf( '%02d', $input[ 'day' ] ) : date( 'd' );
-			$date .= " 23:59:59";
-			return $date;
-		} else {
-			return (string)$input;
+		if ( ! is_array( $input ) ) {
+            return (string) $input;
 		}
+
+        $date = isset( $input[ 'year' ] ) ? sprintf( '%04d', $input[ 'year' ] ) : date( 'Y' );
+        $date .= '-';
+        $date .= isset( $input[ 'month' ] ) ? sprintf( '%02d', $input[ 'month' ] ) : date( 'm' );
+        $date .= '-';
+        $date .= isset( $input[ 'day' ] ) ? sprintf( '%02d', $input[ 'day' ] ) : date( 'd' );
+        $date .= " 23:59:59";
+        return $date;
+
 	}
 
 	/**

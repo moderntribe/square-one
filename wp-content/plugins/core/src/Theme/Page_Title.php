@@ -15,29 +15,25 @@ class Page_Title {
 
 		// Blog
 		if ( is_home() ) {
-			$title = __( 'Blog', 'tribe' );
+			return __( 'Blog', 'tribe' );
 		}
 
 		// Search
 		elseif ( is_search() ) {
-			$title = __( 'Search Results', 'tribe' );
+			return __( 'Search Results', 'tribe' );
 		}
 
 		// 404
 		elseif ( is_404() ) {
-			$title = __( 'Page Not Found (404)', 'tribe' );
+			return __( 'Page Not Found (404)', 'tribe' );
 		}
 
 		// Singular
 		elseif ( is_singular() ) {
-			$title = get_the_title();
+			return get_the_title();
 		}
 
 		// Archives
-		else {
-			$title = get_the_archive_title();
-		}
-
-		return $title;
+		return get_the_archive_title();
 	}
 }
