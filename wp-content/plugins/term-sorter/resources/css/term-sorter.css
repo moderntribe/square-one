@@ -1,0 +1,33 @@
+#the-list.ui-sortable tr {
+	cursor: move;
+}
+
+#the-list.ts-updating tr {
+	cursor: default;
+}
+#the-list .ui-sortable-placeholder {
+	border: 0;
+	height: 51px;
+	background: #808080;
+	background-image: -webkit-gradient(linear, left bottom, left top, from(#6d6d6d), to(#808080));
+	background-image: -webkit-linear-gradient(bottom, #6d6d6d, #808080);
+	background-image:    -moz-linear-gradient(bottom, #6d6d6d, #808080);
+	background-image:      -o-linear-gradient(bottom, #6d6d6d, #808080);
+	background-image: linear-gradient(to top, #6d6d6d, #808080);
+	visibility: visible !important;
+}
+#the-list .ui-sortable-helper {
+	background-color: #fff;
+	margin-left: -1px;
+	border: 1px solid #dfdfdf;
+}
+#the-list .ui-sortable-helper th,
+#the-list .ui-sortable-helper td {
+	border-bottom-width: 0 !important;
+}
+
+
+
+#the-list .ts-updating-row .check-column input {
+	visibility: hidden;
+}
