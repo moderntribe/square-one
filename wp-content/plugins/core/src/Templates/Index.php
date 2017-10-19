@@ -92,8 +92,6 @@ class Index extends Base {
 
 		foreach ( $numbers as $number ) {
 
-			$number['classes'][] = 'c-pagination__link';
-
 			if ( $number['active'] ) {
 				$number['classes'][] = 'active';
 			}

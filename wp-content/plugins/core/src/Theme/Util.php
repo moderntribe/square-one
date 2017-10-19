@@ -171,7 +171,7 @@ abstract class Util {
 				'active'  => false,
 				'next'    => false,
 				'prev'    => false,
-				'classes' => [ 'first' ],
+				'classes' => [ 'c-pagination__link c-pagination__link--first' ],
 			];
 		}
 
@@ -182,7 +182,7 @@ abstract class Util {
 				'active'  => false,
 				'next'    => false,
 				'prev'    => true,
-				'classes' => [ 'prev' ],
+				'classes' => [ 'c-pagination__link c-pagination__link--prev' ],
 			];
 		}
 
@@ -193,7 +193,7 @@ abstract class Util {
 				'active'  => false,
 				'next'    => false,
 				'prev'    => false,
-				'classes' => [ 'ellipses' ],
+				'classes' => [ 'c-pagination__link c-pagination__link--ellipses' ],
 			];
 		}
 
@@ -217,7 +217,7 @@ abstract class Util {
 				'active'  => false,
 				'next'    => false,
 				'prev'    => false,
-				'classes' => [ 'ellipses' ],
+				'classes' => [ 'c-pagination__link c-pagination__link--ellipses' ],
 			];
 		}
 
@@ -228,7 +228,7 @@ abstract class Util {
 				'active'  => false,
 				'next'    => true,
 				'prev'    => false,
-				'classes' => [ 'next' ],
+				'classes' => [ 'c-pagination__link c-pagination__link--next' ],
 			];
 		}
 
@@ -239,7 +239,7 @@ abstract class Util {
 				'active'  => false,
 				'next'    => false,
 				'prev'    => false,
-				'classes' => [ 'last' ],
+				'classes' => [ 'c-pagination__link c-pagination__link--last' ],
 			];
 		}
 
