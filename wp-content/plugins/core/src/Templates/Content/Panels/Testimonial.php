@@ -17,14 +17,15 @@ class Testimonial extends Panel {
 		return $data;
 	}
 
-	public function get_title(): string {
-		$title = '';
+	public function get_mapped_panel_data(): array {
+		$data = [
+			'title'      => $this->get_title( TestimonialPanel::FIELD_TITLE, [ 'site-section__title', 'h5' ] ),
+			'text_color' => $this->text_color(),
+			'image'      => $this->get_image(),
+			'slider'     => $this->get_slider(),
+		];
 
-		if ( ! empty( $this->panel_vars[ TestimonialPanel::FIELD_TITLE ] ) ) {
-			$title = the_panel_title( esc_html( $this->panel_vars[ TestimonialPanel::FIELD_TITLE ] ), 'site-section__title h5', 'title', true, 0, 0 );
-		}
-
-		return $title;
+		return $data;
 	}
 
 	protected function get_image() {
@@ -61,11 +62,11 @@ class Testimonial extends Panel {
 		return $slider->render();
 	}
 
-	public function get_slides(): array {
+	protected function get_slides(): array {
 		$quotes = [];
 
 		if ( ! empty( $this->panel_vars[ TestimonialPanel::FIELD_QUOTES ] ) ) {
-			for ( $i = 0; $i < count( $this->panel_vars[ TestimonialPanel::FIELD_QUOTES ] ); $i++ ) {
+			for ( $i = 0; $i < count( $this->panel_vars[ TestimonialPanel::FIELD_QUOTES ] ); $i ++ ) {
 
 				$quote       = $this->panel_vars[ TestimonialPanel::FIELD_QUOTES ][ $i ];
 				$quote_attrs = [];
@@ -107,11 +108,11 @@ class Testimonial extends Panel {
 
 		$classes = [];
 
-		if ( TestimonialPanel::FIELD_TEXT_WHITE === $this->panel_vars[ TestimonialPanel::FIELD_TEXT_COLOR ] ) {
+		if ( TestimonialPanel::FIELD_TEXT_LIGHT === $this->panel_vars[ TestimonialPanel::FIELD_TEXT_COLOR ] ) {
 			$classes[] = 't-content--light';
 		}
 
-		if ( TestimonialPanel::FIELD_TEXT_BLACK === $this->panel_vars[ TestimonialPanel::FIELD_TEXT_COLOR ] ) {
+		if ( TestimonialPanel::FIELD_TEXT_DARK === $this->panel_vars[ TestimonialPanel::FIELD_TEXT_COLOR ] ) {
 			$classes[] = 't-content--dark';
 		}
 
@@ -120,17 +121,11 @@ class Testimonial extends Panel {
 
 	protected function get_slider_main_classes() {
 		$classes = [ 'c-slider__main' ];
+
 		return $classes;
 	}
 
-	public function get_mapped_panel_data(): array {
-		$data = [
-			'title'      => $this->get_title(),
-			'text_color' => $this->text_color(),
-			'image'      => $this->get_image(),
-			'slider'     => $this->get_slider(),
-		];
-
-		return $data;
+	public static function instance() {
+		return tribe_project()->container()['twig.templates.content/panels/testimonial'];
 	}
 }

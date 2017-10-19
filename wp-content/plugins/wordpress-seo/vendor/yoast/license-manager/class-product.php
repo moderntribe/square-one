@@ -80,11 +80,11 @@ if ( ! class_exists( "Yoast_Product", false ) ) {
 			$this->set_slug( $slug );
 			$this->set_version( $version );
 			$this->set_item_url( $item_url );
-			$this->set_license_page_url( $license_page_url );
 			$this->set_text_domain( $text_domain );
 			$this->set_author( $author );
 			$this->set_file( $file );
 			$this->set_product_id( $product_id );
+			$this->set_license_page_url( $license_page_url );
 		}
 
 		/**
@@ -158,7 +158,7 @@ if ( ! class_exists( "Yoast_Product", false ) ) {
 					require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
 				}
 
-				if ( is_plugin_active_for_network( $this->get_slug() ) ) {
+				if ( is_plugin_active_for_network( $this->get_file() ) ) {
 					$this->license_page_url = network_admin_url( $license_page_url );
 
 					return;

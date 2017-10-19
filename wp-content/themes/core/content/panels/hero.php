@@ -1,5 +1,5 @@
 <?php
 
-$template = new \Tribe\Project\Templates\Content\Panels\Hero( 'content/panels/hero.twig' );
+$template = \Tribe\Project\Templates\Content\Panels\Hero::instance();
 
 echo $template->render();

@@ -4,23 +4,19 @@
 
 {% block content %}
 
-	<div class="site-section__content">
-		<div class="site-grid">
-
-			<div class="site-grid__wrapper"
-			     data-depth="0"
-			     data-name="columns"
-			     data-livetext>
+	<div class="s-content">
+		<div class="g-row g-row--center g-row--col-3--min-full"
+		     data-depth="0"
+		     data-name="columns"
+		     data-livetext>
 
 				{% for col in columns %}
-					<div class="site-grid__col">
-
-						{% include('components/wysiwyg.twig') with {
-						'wysiwyg' : col.content,
-						'wysiwyg_classes' : col.wysiwyg_classes,
-						'wysiwyg_attrs' : col.wysiwyg_attrs
-						} %}
-
+					<div class="g-col t-content"
+					     data-depth="{{ loop.index0 }}"
+					     data-name="content"
+					     data-autop="true"
+					     data-livetext="true">
+						 {{ col.content }}
 					</div>
 				{% endfor %}
 

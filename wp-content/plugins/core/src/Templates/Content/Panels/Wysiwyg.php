@@ -14,26 +14,24 @@ class Wysiwyg extends Panel {
 		return $data;
 	}
 
-	public function get_title(): string {
-		$title = '';
+	public function get_mapped_panel_data(): array {
+		$data = [
+			'title'       => $this->get_title( Wysi::FIELD_TITLE, [ 'site-section__title', 'h2' ] ),
+			'description' => ! empty( $this->panel_vars[ Wysi::FIELD_DESCRIPTION ] ) ? $this->panel_vars[ Wysi::FIELD_DESCRIPTION ] : false,
+			'columns'     => $this->get_the_columns(),
+		];
 
-		if ( ! empty( $this->panel_vars[ Wysi::FIELD_TITLE ] ) ) {
-			$title = the_panel_title( esc_html( $this->panel_vars[ Wysi::FIELD_TITLE ] ), 'site-section__title h2', 'title', true, 0, 0 );
-		}
-
-		return $title;
+		return $data;
 	}
 
-	public function get_the_columns(): array {
+	protected function get_the_columns(): array {
 		$columns = [];
 
 		if ( ! empty( $this->panel_vars[ Wysi::FIELD_COLUMNS ] ) ) {
 			foreach ( $this->panel_vars[ Wysi::FIELD_COLUMNS ] as $col ) {
 
 				$columns[] = [
-					'content'         => $col[ Wysi::FIELD_COLUMN_CONTENT ],
-					'wysiwyg_classes' => $this->get_wysiwyg_classes(),
-					'wysiwyg_attrs'   => $this->get_wysiwyg_attrs(),
+					'content' => $col[ Wysi::FIELD_COLUMN_CONTENT ],
 				];
 			}
 		}
@@ -41,33 +39,7 @@ class Wysiwyg extends Panel {
 		return $columns;
 	}
 
-	protected function get_wysiwyg_attrs() {
-		$content_attrs = sprintf( 'data-depth="0" data-name="%s" data-index="%s" data-autop="true" data-livetext',
-			esc_attr( Wysi::FIELD_COLUMN_CONTENT ),
-			esc_attr( get_nest_index() )
-		);
-
-		return $content_attrs;
-	}
-
-	protected function get_wysiwyg_classes() {
-
-		$classes = [ 'c-wysiwyg' ];
-
-		if ( ! empty( Wysi::NAME ) ) {
-			$classes[] = 't-content';
-		}
-
-		return implode( ' ', $classes );
-	}
-
-	public function get_mapped_panel_data(): array {
-		$data = [
-			'title'       => $this->get_title(),
-			'description' => ! empty( $this->panel_vars[ Wysi::FIELD_DESCRIPTION ] ) ? $this->panel_vars[ Wysi::FIELD_DESCRIPTION ] : false,
-			'columns'     => $this->get_the_columns(),
-		];
-
-		return $data;
+	public static function instance() {
+		return tribe_project()->container()['twig.templates.content/panels/wysiwyg'];
 	}
 }

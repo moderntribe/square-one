@@ -1,5 +1,5 @@
 <?php
 
-$template = new \Tribe\Project\Templates\Content\Panels\Interstitial( 'content/panels/interstitial.twig' );
+$template = \Tribe\Project\Templates\Content\Panels\Interstitial::instance();
 
 echo $template->render();

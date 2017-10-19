@@ -1,8 +1,7 @@
 <?php
+
 /**
  * Tribe Branding
- *
- * Update links and logos and social icons
  *
  * @version   2.0
  * @copyright Modern Tribe, Inc.
@@ -51,29 +50,36 @@ class Tribe_Branding {
   		return get_stylesheet_directory_uri() . '/branding-assets/';
   	}
 
-	/**
-	 * Login Logo
-	 */
+    /**
+   	 * Login Logo
+   	 *
+   	 * If the customizer logo is a url and not stored as an option we upload as an attachment to a temp post
+   	 * and store that attachment id for the logo file.  Then we can use the WP media api for detecting size.
+   	 */
 	public function set_login_logo() {
 
-		$logo_fallback_path = 'logo-login.png';
-		$logo_fallback      = file_exists( $this->get_branding_assets_url() . $logo_fallback_path ) ? $this->get_branding_assets_url() . $logo_fallback_path : false;
+		$logo_id = get_theme_mod( 'branding_customizer_icon_admin' );
 
-		$logo = get_theme_mod( 'branding_customizer_icon_admin', $logo_fallback );
-		if ( empty( $logo ) ) {
+		if ( empty( $logo_id ) ) {
 			return;
 		}
 
-		$logo_dimensions = getimagesize( $logo );
-		$ld_width        = $logo_dimensions[0] / 2 . 'px';
-		$ld_height       = $logo_dimensions[1] / 2 . 'px';
+        $logo_data = wp_get_attachment_image_src( $logo_id, 'full' );
+
+		if ( ! $logo_data ) {
+			return;
+		}
+
+		$logo_width  = $logo_data[1] / 2 . 'px';
+		$logo_height = $logo_data[2] / 2 . 'px';
+
 		?>
 		<style type="text/css">
 			.login h1 a {
-				background: transparent url(<?php echo $logo; ?>) 50% 50% no-repeat !important;
-				width: <?php echo $ld_width; ?> !important;
-				height: <?php echo $ld_height; ?> !important;
-				background-size: <?php echo $ld_width . ' ' . $ld_height; ?> !important;
+				background: transparent url(<?php echo esc_url( $logo_data[0] ); ?>) 50% 50% no-repeat !important;
+				width: <?php esc_attr_e( $logo_width ); ?> !important;
+				height: <?php esc_attr_e( $logo_height ); ?> !important;
+				background-size: <?php esc_attr_e( $logo_width . ' ' . $logo_height ); ?> !important;
 			}
 		</style>
 		<?php
@@ -83,7 +89,6 @@ class Tribe_Branding {
 	 * Login Header Url
 	 */
 	public function set_login_header_url( $url = '' ) {
-
 		return get_home_url();
 	}
 
@@ -91,7 +96,6 @@ class Tribe_Branding {
 	 * Login Header Title
 	 */
 	public function set_login_header_title( $name = '' ) {
-
 		return get_bloginfo( 'name' );
 	}
 
@@ -170,12 +174,13 @@ class Tribe_Branding {
 
 		// Icon: Login
 		$wp_customize->add_setting( 'branding_customizer_icon_admin' );
-		$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'branding_customizer_icon_admin',
+		$wp_customize->add_control( new WP_Customize_Media_Control( $wp_customize, 'branding_customizer_icon_admin',
 			array(
 				'label'       => __( 'Login Logo', 'tribe' ),
 				'description' => __( 'Recommended minimum width: 700px. Recommended file type: .png.', 'tribe' ),
 				'section'     => 'branding_customizer',
 				'settings'    => 'branding_customizer_icon_admin',
+                'mime_type'   => 'image',
 			) ) );
 
 		// Icon: Favicon
@@ -259,7 +264,6 @@ class Tribe_Branding {
 	 * Tribe attribution credit in an HTML comment.
 	 */
 	public function tribe_attribute_credit() {
-
 		echo "\n<!-- Hand crafted by Modern Tribe, Inc. (http://tri.be) -->\n\n";
 	}
 
@@ -267,7 +271,6 @@ class Tribe_Branding {
 	 * Edit the admin footer text
 	 */
 	public function edit_admin_footer_text() {
-
 		echo get_bloginfo( 'name' ) . ' running on <a href="http://wordpress.org/" rel="external">WordPress</a>';
 	}
 
@@ -276,7 +279,6 @@ class Tribe_Branding {
 	 */
 
 	function set_wpseo_og_default_image( $option_names ) {
-
 		if ( empty( $option_names['og_default_image'] ) ) {
 			$option_names['og_default_image'] = $this->get_branding_assets_url() . 'social-share.jpg';
 		}

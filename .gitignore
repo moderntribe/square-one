@@ -12,6 +12,8 @@ ehthumbs.db
 Thumbs.db
 .DS_Store
 .idea
+pimple.json
+.phpstorm.meta.php
 
 # Vim generated files #
 #######################
@@ -35,6 +37,7 @@ wp-content/advanced-cache.php
 wp-content/wp-cache-config.php
 wp-content/tests/
 wp-content/logs/
+wp-content/mu-plugins/mu.local.php
 
 wp-content/plugins/fakerpress/
 wp-content/plugins/better-search-replace/
@@ -98,3 +101,11 @@ wp-content/plugins/airplane-mode
 **/__coverage__/
 dev_components/react-app/test/__coverage__/
 dev/deploy/.deploy
+
+# DevOps #
+#######################
+/.garden-*
+/.env
+/vendor
+/composer.lock
+dev/docker/global/.env

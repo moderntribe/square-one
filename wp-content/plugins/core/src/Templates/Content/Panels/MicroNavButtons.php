@@ -15,29 +15,29 @@ class MicroNavButtons extends Panel {
 		return $data;
 	}
 
-	public function get_title(): string {
-		$title = '';
+	public function get_mapped_panel_data(): array {
+		$data = [
+			'title'       => $this->get_title( Micro::FIELD_TITLE, [ 'site-section__title', 'h2' ] ),
+			'description' => ! empty( $this->panel_vars[ Micro::FIELD_DESCRIPTION ] ) ? $this->panel_vars[ Micro::FIELD_DESCRIPTION ] : false,
+			'items'       => $this->get_list_items(),
+		];
 
-		if ( ! empty( $this->panel_vars[ Micro::FIELD_TITLE ] ) ) {
-			$title = the_panel_title( esc_html( $this->panel_vars[ Micro::FIELD_TITLE ] ), 'site-section__title h2', 'title', true, 0, 0 );
-		}
-
-		return $title;
+		return $data;
 	}
 
-	public function get_list_items(): array {
+	protected function get_list_items(): array {
 		$btns = [];
 
 		if ( ! empty( $this->panel_vars[ Micro::FIELD_ITEMS ] ) ) {
-			for ( $i = 0; $i < count( $this->panel_vars[ Micro::FIELD_ITEMS ] ); $i++ ) {
+			for ( $i = 0; $i < count( $this->panel_vars[ Micro::FIELD_ITEMS ] ); $i ++ ) {
 
 				$btn = $this->panel_vars[ Micro::FIELD_ITEMS ][ $i ];
 
 				$options = [
-					Button::URL    => esc_url( $btn[ Micro::FIELD_ITEM_CTA ]['url'] ),
-					Button::TARGET => esc_attr( $btn[ Micro::FIELD_ITEM_CTA ]['target'] ),
-					Button::LABEL  => esc_attr( $btn[ Micro::FIELD_ITEM_CTA ]['label'] ),
-					Button::CLASSES => [ 'c-btn--full' ],
+					Button::URL     => esc_url( $btn[ Micro::FIELD_ITEM_CTA ]['url'] ),
+					Button::TARGET  => esc_attr( $btn[ Micro::FIELD_ITEM_CTA ]['target'] ),
+					Button::LABEL   => esc_attr( $btn[ Micro::FIELD_ITEM_CTA ]['label'] ),
+					Button::CLASSES => [ 'c-btn--full c-btn--lg' ],
 				];
 
 				$btn_obj = Button::factory( $options );
@@ -48,13 +48,7 @@ class MicroNavButtons extends Panel {
 		return $btns;
 	}
 
-	public function get_mapped_panel_data(): array {
-		$data = [
-			'title'       => $this->get_title(),
-			'description' => ! empty( $this->panel_vars[ Micro::FIELD_DESCRIPTION ] ) ? $this->panel_vars[ Micro::FIELD_DESCRIPTION ] : false,
-			'items'       => $this->get_list_items(),
-		];
-
-		return $data;
-	}
+	public static function instance() {
+			return tribe_project()->container()['twig.templates.content/panels/micronavbuttons'];
+		}
 }

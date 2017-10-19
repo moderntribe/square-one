@@ -133,13 +133,10 @@ const bindEvents = () => {
 };
 
 const init = () => {
-	if (!tools.getNodes('c-slider')[0]) {
-		return;
-	}
 	initSliders();
 	bindEvents();
 
-	console.info('Modern Tribe FE: Initialized slider components.');
+	console.info('Square One FE: Initialized slider component scripts.');
 };
 
 export default init;

@@ -35,6 +35,6 @@ It's important to keep proper namespacing.
 
 ### Notes
 
-The **Global_Service_Provider** class handles the classes that work with the **Posts 2 Posts** plugin. 
+The **P2P_Provider** class handles the classes that work with the **Posts 2 Posts** plugin. 
 
 Learn more about Post 2 Post here and usage in this project here: [Posts 2 Posts](p2p.md)

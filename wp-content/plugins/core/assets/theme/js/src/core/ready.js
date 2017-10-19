@@ -62,7 +62,7 @@ const init = () => {
 	components();
 	single();
 
-	console.info('Modern Tribe FE: Initialized all javascript that targeted document ready.');
+	console.info('Square One FE: Initialized all javascript that targeted document ready.');
 };
 
 /**

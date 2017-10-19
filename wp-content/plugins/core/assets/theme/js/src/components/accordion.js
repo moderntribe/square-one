@@ -12,10 +12,11 @@ import * as slide from '../utils/dom/slide';
 import * as tools from '../utils/tools';
 import * as events from '../utils/events';
 
-// setup shared variables
-
+const siteWrap = tools.getNodes('site-wrap')[0];
 const pn = document.getElementById('panel-navigation');
-let options;
+const options = {
+	speed: 300,
+};
 
 /**
  * @function closeOthers
@@ -94,6 +95,22 @@ const closeAccordion = (header, content) => {
 };
 
 /**
+ * @function handlePanelEvents
+ * @description
+ */
+
+const handlePanelEvents = (e) => {
+	console.log(e);
+	const panel = document.querySelectorAll('.site-panel--accordion[class*="collection-preview__active"]')[0];
+	if (!panel) {
+		return;
+	}
+	const header = tools.getNodes(`.c-accordion__header[data-index="${e.detail.rowIndex}"]`, false, panel, true)[0];
+	closeOthers(header.parentNode);
+	openAccordion(header, header.nextElementSibling);
+};
+
+/**
  * @function toggleItem
  * @param {Object} e The js event object.
  * @description Toggle the active accordion item using class methods.
@@ -116,7 +133,9 @@ const toggleItem = (e) => {
  */
 
 const bindEvents = () => {
-	options.el.forEach(accordion => delegate(accordion, '.c-accordion__header', 'click', toggleItem));
+	delegate(siteWrap, '.c-accordion__header', 'click', toggleItem);
+	document.addEventListener('modular_content/repeater_row_activated', handlePanelEvents);
+	document.addEventListener('modular_content/repeater_row_added', handlePanelEvents);
 };
 
 /**
@@ -124,18 +143,11 @@ const bindEvents = () => {
  * @description Initializes the class if the element(s) to work on are found.
  */
 
-const init = (opts) => {
-	options = Object.assign({
-		el: tools.getNodes('c-accordion', true),
-		speed: 300,
-	}, opts);
+const init = () => {
+	setOffset();
+	bindEvents();
 
-	if (options.el.length) {
-		setOffset();
-		bindEvents();
-
-		console.info('Modern Tribe FE: Initialized accordion components.');
-	}
+	console.info('Square One FE: Initialized accordion component scripts.');
 };
 
 export default init;

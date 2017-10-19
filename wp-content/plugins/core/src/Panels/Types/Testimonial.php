@@ -14,8 +14,8 @@ class Testimonial extends Panel_Type_Config {
 	const FIELD_QUOTE      = 'quote';
 	const FIELD_CITE       = 'cite';
 	const FIELD_TEXT_COLOR = 'text_color';
-	const FIELD_TEXT_WHITE = 't-content--light';
-	const FIELD_TEXT_BLACK = 't-content--dark';
+	const FIELD_TEXT_LIGHT = 't-content--light';
+	const FIELD_TEXT_DARK  = 't-content--dark';
 
 	protected function panel() {
 
@@ -29,16 +29,16 @@ class Testimonial extends Panel_Type_Config {
 			'name'    => self::FIELD_TEXT_COLOR,
 			'label'   => __( 'Text Color', 'tribe' ),
 			'options' => [
-				self::FIELD_TEXT_WHITE => __( 'White', 'tribe' ),
-				self::FIELD_TEXT_BLACK => __( 'Black', 'tribe' ),
+				self::FIELD_TEXT_LIGHT => __( 'Light', 'tribe' ),
+				self::FIELD_TEXT_DARK  => __( 'Dark', 'tribe' ),
 			],
-			'default' => self::FIELD_TEXT_BLACK,
+			'default' => self::FIELD_TEXT_DARK,
 		] ) );
 
 		$panel->add_field( new Fields\Image( [
 			'name'        => self::FIELD_IMAGE,
 			'label'       => __( 'Background Image', 'tribe' ),
-			'description' => __( 'Optimal image sizes: 1500 x 1125 for Left/Right Aligned layouts; 1500 x 844 for Boxed/Hero layouts.', 'tribe' ),
+			'description' => __( 'Optimal image sizes: 1700 x 600 pixels', 'tribe' ),
 			'size'        => 'medium', // the size displayed in the admin.
 		] ) );
 
@@ -49,7 +49,7 @@ class Testimonial extends Panel_Type_Config {
 			'max'              => 4,
 			'new_button_label' => __( 'Add Quote', 'tribe' ),
 			'strings'          => [
-				'label.row_index' => 'Quote %{index} |||| Quote %{index}',
+				'label.row_index' => __( 'Quote %{index} |||| Quote %{index}', 'tribe' ),
 				'button.delete'   => __( 'Delete Quote', 'tribe' ),
 			],
 		] );

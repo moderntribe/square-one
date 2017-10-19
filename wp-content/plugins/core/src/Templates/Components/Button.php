@@ -6,6 +6,7 @@ class Button extends Component {
 
 	const TEMPLATE_NAME = 'components/button.twig';
 
+	const TAG         = 'tag';
 	const URL         = 'url';
 	const TYPE        = 'type';
 	const TARGET      = 'target';
@@ -30,13 +31,13 @@ class Button extends Component {
 
 	public function get_data(): array {
 		$data = [
-			'tag'     => $this->options['btn_as_link'] ? 'a' : 'button',
-			'url'     => $this->options['btn_as_link'] ? $this->options['url'] : '',
-			'classes' => $this->merge_classes( [ 'c-btn' ], $this->options[ static::CLASSES ], true ),
-			'attrs'   => $this->merge_attrs( [], $this->options[ static::ATTRS ], true ),
-			'type'    => $this->options['btn_as_link'] ? '' : $this->options['type'],
-			'target'  => $this->options['btn_as_link'] ? $this->options['target'] : '',
-			'label'   => $this->options['label'],
+			static::TAG     => $this->options['btn_as_link'] ? 'a' : 'button',
+			static::URL     => $this->options['btn_as_link'] ? $this->options['url'] : '',
+			static::CLASSES => $this->merge_classes( [ 'c-btn' ], $this->options[ static::CLASSES ], true ),
+			static::ATTRS   => $this->merge_attrs( [], $this->options[ static::ATTRS ], true ),
+			static::TYPE    => $this->options['btn_as_link'] ? '' : $this->options['type'],
+			static::TARGET  => $this->options['btn_as_link'] ? $this->options['target'] : '',
+			static::LABEL   => $this->options['label'],
 		];
 
 		return $data;

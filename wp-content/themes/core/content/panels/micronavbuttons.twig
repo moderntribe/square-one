@@ -4,21 +4,17 @@
 
 {% block content %}
 
-	<div class="site-section__content">
-		<div class="site-grid">
+	<div class="s-content">
+		<div class="g-row g-row--center g-row--col-2 g-row--col-4--min-full"
+		     data-depth="0"
+			 data-name="items"
+			 data-livetext>
 
-			<div class="site-grid__wrapper">
-				<div class="site-grid__layout site-grid__layout--center site-grid__layout--2-col-full"
-				     data-depth="0"
-				     data-name="items"
-				     data-livetext>
-
-					{% for item in items %}
-						<div class="site-grid__col site-grid__col--horizontal-center">
-							{{ item }}
-						</div>
-					{% endfor %}
-				</div>
+				{% for item in items %}
+					<div class="g-col g-col--horizontal-center">
+						{{ item }}
+					</div>
+				{% endfor %}
 
 			</div>
 		</div>

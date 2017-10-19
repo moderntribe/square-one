@@ -1,0 +1,77 @@
+version: '2.1'
+
+services:
+
+  dns-external:
+    image: andyshinn/dnsmasq:latest
+    container_name: tribe-dns-external
+    command: --log-facility=/proc/self/fd/2  --no-resolv --server=8.8.8.8 --address=/tribe/127.0.0.1
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - "53:53/udp"
+      - "53:53/tcp"
+    network_mode: bridge
+
+  dns-internal:
+    image: andyshinn/dnsmasq:latest
+    container_name: tribe-dns-internal
+    command:  --log-facility=/proc/self/fd/2 --no-resolv --server=8.8.8.8 --address=/tribe/172.20.10.100 --address=/mysql.tribe/172.20.10.200 --address=/mailhog.tribe/172.20.10.90 --address=/smtp.tribe/172.20.10.90 --address=/host.tribe/${HOSTIP:-172.20.10.1}
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - "53/udp"
+      - "53/tcp"
+    networks:
+      proxy:
+        ipv4_address: 172.20.10.250
+
+  mysql:
+    image: mysql:5.7
+    container_name: tribe-mysql
+    volumes:
+      - ${TRIBE_MYSQL_DATA_DIR:-~/mysql_data}:/var/lib/mysql
+      - ./mysql/mysql.cnf:/etc/mysql/conf.d/mysql.cnf:ro
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+    ports:
+      - "3306:3306"
+    networks:
+      proxy:
+        ipv4_address: 172.20.10.200
+
+  reverse-proxy:
+    image: jwilder/nginx-proxy:alpine
+    container_name: tribe-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/proxy_settings.conf:/etc/nginx/conf.d/proxy_settings.conf:ro
+      - ./nginx/nginx.tmpl:/app/nginx.tmpl:ro
+      - ./certs:/etc/nginx/certs
+      - /var/run/docker.sock:/tmp/docker.sock
+    networks:
+      proxy:
+        ipv4_address: 172.20.10.100
+
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: tribe-mail
+    environment:
+      - VIRTUAL_HOST=mailhog.tribe
+      - VIRTUAL_PORT=8025
+    networks:
+      proxy:
+        ipv4_address: 172.20.10.90
+    ports:
+      - "1025:1025"
+
+networks:
+  proxy:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.10.0/24
+

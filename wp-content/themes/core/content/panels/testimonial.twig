@@ -3,22 +3,41 @@
 {% extends "content/panels/panel.twig" %}
 
 {% block wrapper_start %}
-	<div class="site-section__inner site-panel--testimonial__inner {{ text_color }}">
-{% endblock %}
+<div class="l-container {{ text_color }}">
+	{% endblock %}
 
-{% block content %}
+	{% block header %}
 
-	{{ image }}
+		{% if title or description %}
+			<header class="s-header s-header--no-padding">
 
-	<div class="site-section__content">
-		<div class="site-grid">
+				{{ title }}
 
-			<div class="site-grid__wrapper">
+				{% block description %}
+					{% if description %}
+						<div class="s-desc t-content"
+						     data-depth="0"
+						     data-name="description"
+						     data-autop="true"
+						     data-livetext>
+							{{ description }}
+						</div>
+					{% endif %}
+				{% endblock %}
 
+			</header>
+		{% endif %}
+
+	{% endblock %}
+
+	{% block content %}
+
+		{{ image }}
+
+		<div class="s-content">
+			<div class="g-row">
 				{{ slider }}
-
 			</div>
 		</div>
-	</div>
 
-{% endblock %}
+	{% endblock %}

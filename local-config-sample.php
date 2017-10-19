@@ -7,10 +7,10 @@
  * enabled on your local development checkouts
 */
 
-define( 'DB_NAME', '' );
-define( 'DB_USER', '' );
-define( 'DB_PASSWORD', '' );
-define( 'DB_HOST', '' );
+define( 'DB_NAME', 'tribe_square1' );
+define( 'DB_USER', 'root' );
+define( 'DB_PASSWORD', 'password' );
+define( 'DB_HOST', 'mysql' );
 
 
 /*
@@ -23,13 +23,7 @@ define( 'WP_DEBUG_DISPLAY', true );
 define( 'SCRIPT_DEBUG', true );
 define( 'WP_CACHE', false );
 
-/*
- * S3 Uploads
- */
-define( 'S3_UPLOADS_BUCKET', '' );
-define( 'S3_UPLOADS_KEY', '' );
-define( 'S3_UPLOADS_SECRET', '' );
-define( 'S3_UPLOADS_REGION', '' );
+$GLOBALS[ 'memcached_servers' ] = [ 'memcached:11211' ];
 
 
 /*

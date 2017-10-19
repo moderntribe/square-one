@@ -1,5 +1,5 @@
 <?php
 
-$template = new \Tribe\Project\Templates\Content\Panels\Testimonial( 'content/panels/testimonial.twig' );
+$template = \Tribe\Project\Templates\Content\Panels\Testimonial::instance();
 
 echo $template->render();

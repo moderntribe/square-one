@@ -98,8 +98,7 @@ class WPSEO_Admin_Banner_Sidebar {
 			'<li><strong>' . __( 'No ads!', 'wordpress-seo' ) . '</strong></li>' .
 			'</ul>' .
 			/* translators: %s expands to Yoast SEO Premium */
-		    '<a id="wpseo-premium-button" class="button button-primary" href="' . $premium_uri . '">' . sprintf( __( 'Get %s now!', 'wordpress-seo' ), 'Yoast SEO Premium' ) . '</a><br/>' .
-			'<small>' . __( 'Prices start as low as 69,- for one site', 'wordpress-seo' ) . '</small><br/><br/>'
+		    '<a id="wpseo-premium-button" class="button button-primary" href="' . $premium_uri . '" target="_blank">' . sprintf( __( 'Get %s now!', 'wordpress-seo' ), 'Yoast SEO Premium' ) . '</a><br/>'
 		);
 
 		/*
@@ -330,16 +329,6 @@ class WPSEO_Admin_Banner_Sidebar {
 				261,
 				152,
 				__( 'Take the online SEO Copywriting Training course and learn how to write awesome copy that ranks!', 'wordpress-seo' )
-			)
-		);
-
-		$courses_spot->add_banner(
-			new WPSEO_Admin_Banner(
-				WPSEO_Shortlinker::get( 'https://yoa.st/jx' ),
-				'keyword-research-training.png',
-				261,
-				152,
-				__( 'Take the online Keyword Research Training course and learn how to rank with your keywords!', 'wordpress-seo' )
 			)
 		);
 

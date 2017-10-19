@@ -7,6 +7,16 @@ use Tribe\Project\Templates\Components\Slider;
 
 class Gallery implements Shortcode {
 
+	/**
+	 * Render the [gallery] shortcode when placed in content areas.
+	 *
+	 * @filter post_gallery 10 3
+	 *
+	 * @param array $attr
+	 * @param int   $instance
+	 *
+	 * @return string
+	 */
 	public function render( array $attr, int $instance ): string {
 		$post = get_post();
 		$atts = shortcode_atts( [
@@ -26,11 +36,9 @@ class Gallery implements Shortcode {
 			return '';
 		}
 
-		$ids = wp_list_pluck( $attachments, 'ID' );
-
 		$options = [
-			Slider::SLIDES          => $this->get_slides( $ids ),
-			Slider::THUMBNAILS      => $this->get_slides( $ids, 'thumbnail' ),
+			Slider::SLIDES          => $this->get_slides( $attachments ),
+			Slider::THUMBNAILS      => $this->get_slides( $attachments, 'thumbnail' ),
 			Slider::SHOW_CAROUSEL   => $atts['show_carousel'],
 			Slider::SHOW_ARROWS     => $atts['show_arrows'],
 			Slider::SHOW_PAGINATION => $atts['show_pagination'],
@@ -46,19 +54,15 @@ class Gallery implements Shortcode {
 		$id = (int) $atts['id'];
 
 		if ( ! empty( $atts['include'] ) ) {
-			$_attachments = get_posts( [
+			$attachments = get_posts( [
 				'include'        => $atts['include'],
 				'post_status'    => 'inherit',
 				'post_type'      => 'attachment',
 				'post_mime_type' => 'image',
 				'order'          => $atts['order'],
 				'orderby'        => $atts['orderby'],
+				'fields'         => 'ids',
 			] );
-
-			$attachments = [];
-			foreach ( $_attachments as $key => $val ) {
-				$attachments[ $val->ID ] = $_attachments[ $key ];
-			}
 		} elseif ( ! empty( $atts['exclude'] ) ) {
 			$attachments = get_children( [
 				'post_parent'    => $id,
@@ -68,6 +72,7 @@ class Gallery implements Shortcode {
 				'post_mime_type' => 'image',
 				'order'          => $atts['order'],
 				'orderby'        => $atts['orderby'],
+				'fields'         => 'ids',
 			] );
 		} else {
 			$attachments = get_children( [
@@ -77,6 +82,7 @@ class Gallery implements Shortcode {
 				'post_mime_type' => 'image',
 				'order'          => $atts['order'],
 				'orderby'        => $atts['orderby'],
+				'fields'         => 'ids',
 			] );
 		}
 

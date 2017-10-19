@@ -22,7 +22,7 @@ class Panel extends Twig_Template {
 			'children' => $this->get_children( $this->panel ),
 			'object'   => $this->panel,
 			'lang'     => new Noop_Lazy_Strings( 'tribe' ),
-			'title'    => isset( $this->panel_vars['title'] ) ? the_panel_title( esc_html( $this->panel_vars['title'] ), 'site-section__title', 'title', true, 0, 0 ) : false,
+			'title'    => isset( $this->panel_vars['title'] ) ? $this->get_title( $this->panel_vars['title'] ) : false,
 		];
 
 		return $data;
@@ -34,6 +34,27 @@ class Panel extends Twig_Template {
 		}, $panel->get_children() );
 
 		return $children;
+	}
+
+	protected function get_title( $field_name, $classes = [] ): string {
+		$title = '';
+
+		if ( empty( $this->panel_vars[ $field_name ] ) ) {
+			return $title;
+		}
+
+		ob_start();
+
+		the_panel_title(
+			esc_html( $this->panel_vars[ $field_name ] ),
+			[
+				'classes'       => implode( ' ', $classes ),
+				'data_name'     => 'title',
+				'data_livetext' => true,
+			]
+		);
+
+		return ob_get_clean();
 	}
 
 	public static function instance() {

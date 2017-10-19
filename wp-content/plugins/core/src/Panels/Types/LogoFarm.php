@@ -35,7 +35,7 @@ class LogoFarm extends Panel_Type_Config {
 			'max'              => 6,
 			'new_button_label' => __( 'Add Logo', 'tribe' ),
 			'strings'          => [
-				'label.row_index' => 'Logo %{index} |||| Logo %{index}',
+				'label.row_index' => __( 'Logo %{index} |||| Logo %{index}', 'tribe' ),
 				'button.delete'   => __( 'Delete Logo', 'tribe' ),
 			],
 		] );

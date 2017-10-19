@@ -4,29 +4,23 @@
 
 {% block content %}
 
-	<div class="site-section__content">
-		<div class="site-grid">
-			<div class="site-grid__wrapper">
-				<div class="{{ grid_classes }}"
-				     data-depth="0"
-				     data-name="accordions"
-				     data-livetext>
-					{% if layout == 'left' %}
-						<div class="site-grid__col">
-							{{ accordion }}
-						</div>
-						<div class="site-grid__col">
-							{{ content }}
-						</div>
-					{% else %}
-						<div class="site-grid__col">
-							{{ content }}
-						</div>
-						<div class="site-grid__col">
-							{{ accordion }}
-						</div>
-					{% endif %}
-				</div>
+	<div class="s-content">
+		<div class="g-row"
+			 data-depth="0"
+			 data-name="accordions"
+			 data-livetext
+		>
+			<div
+				class="g-col"
+				data-depth="0"
+				data-name="content"
+				data-autop="true"
+				data-livetext
+			>
+				{{ content }}
+			</div>
+			<div class="g-col">
+				{{ accordion }}
 			</div>
 		</div>
 	</div>

@@ -4,7 +4,6 @@ namespace Tribe\Project\Templates\Content\Panels;
 
 use Tribe\Project\Panels\Types\Accordion as AccordionPanel;
 use Tribe\Project\Templates\Components\Accordion as AccordionComponent;
-use Tribe\Project\Theme\Util;
 
 class Accordion extends Panel {
 
@@ -16,21 +15,11 @@ class Accordion extends Panel {
 		return $data;
 	}
 
-	public function get_title(): string {
-		$title = '';
-
-		if ( ! empty( $this->panel_vars[ AccordionPanel::FIELD_ACCORDION_TITLE ] ) ) {
-			$title = the_panel_title( esc_html( $this->panel_vars[ AccordionPanel::FIELD_ACCORDION_TITLE ] ), 'section__title', 'title', true, 0, 0 );
-		}
-
-		return $title;
-	}
-
 	public function get_mapped_panel_data(): array {
 		$data = [
-			'title'        => $this->get_title(),
-			'content'      => $this->panel_vars[AccordionPanel::FIELD_CONTENT],
-			'layout'       => $this->panel_vars[AccordionPanel::FIELD_LAYOUT],
+			'title'        => $this->get_title( AccordionPanel::FIELD_ACCORDION_TITLE, [ 'section__title' ] ),
+			'content'      => $this->panel_vars[ AccordionPanel::FIELD_CONTENT ],
+			'layout'       => $this->panel_vars[ AccordionPanel::FIELD_LAYOUT ],
 			'accordion'    => $this->get_accordion(),
 			'grid_classes' => $this->get_grid_classes(),
 		];
@@ -39,10 +28,10 @@ class Accordion extends Panel {
 	}
 
 	protected function get_grid_classes(): string {
-		$classes = 'site-grid__layout site-grid__layout--center';
+		$classes = 'g-row--vertical-center';
 
 		if ( ! empty( $this->panel_vars[ AccordionPanel::FIELD_LAYOUT ] ) && $this->panel_vars[ AccordionPanel::FIELD_LAYOUT ] !== AccordionPanel::FIELD_LAYOUT_OPTION_CENTER ) {
-			$classes .= ' site-grid__layout--2-col-full';
+			$classes .= ' g-row--col-2--min-full';
 		}
 
 		return $classes;
@@ -76,5 +65,9 @@ class Accordion extends Panel {
 				'content'     => $row[ AccordionPanel::FIELD_ACCORDION_CONTENT ],
 			];
 		}, $rows );
+	}
+
+	public static function instance() {
+		return tribe_project()->container()['twig.templates.content/panels/accordion'];
 	}
 }

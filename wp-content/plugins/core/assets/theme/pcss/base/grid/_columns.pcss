@@ -4,85 +4,26 @@
  *
  * ----------------------------------------------------------------------------- */
 
-.site-grid__col {
-	margin-bottom: var(--grid-gutter-small);
+.g-col {
 	min-width: 0;
-	padding: 0;
 	position: relative;
 	width: 100%;
-
-	@media (--viewport-medium) {
-		flex: 1;
-		margin: 0 var(--grid-gutter) var(--grid-gutter) 0;
-
-		&:last-child {
-			margin-right: 0;
-		}
-	}
 }
 
 /* -----------------------------------------------------------------------------
- * Grid: Modifier Vertical center content | NOTE: This is a safari fix too.
+ * Columns: Modifier Vertical center content | NOTE: This is a safari fix too.
  * ----------------------------------------------------------------------------- */
 
-.site-grid__col--vertical-center {
+.g-col--vertical-center {
 	align-items: center;
 	display: flex;
 }
 
 /* -----------------------------------------------------------------------------
- * Grid: Modifier Horizontally center content
+ * Columns: Modifier Horizontally center content
  * ----------------------------------------------------------------------------- */
 
-.site-grid__col--horizontal-center {
+.g-col--horizontal-center {
 	justify-content: center;
 	display: flex;
-}
-
-/* -----------------------------------------------------------------------------
- * Grid: Modifier Column (Keeps column at a fixed width of 33.33%.)
- * ----------------------------------------------------------------------------- */
-
-.site-grid__col--one-third {
-	flex: none;
-
-	@media (--viewport-medium) {
-		width: calc(100% / 3);
-	}
-}
-
-/* -----------------------------------------------------------------------------
- * Grid: Modifier Column (Keeps column at a fixed width of 25%.)
- * ----------------------------------------------------------------------------- */
-
-.site-grid__col--one-fourth {
-	flex: none;
-
-	@media (--viewport-medium) {
-		width: 25%;
-	}
-}
-
-/* -----------------------------------------------------------------------------
- * Grid: Modifier Column (Keeps column at a fixed width of 50%.)
- * ----------------------------------------------------------------------------- */
-
-.site-grid__col--one-half {
-	flex: none;
-
-	@media (--viewport-medium) {
-		width: 50%;
-	}
-}
-
-/* -----------------------------------------------------------------------------
- * Grid: Modifier Column (Keeps column at a fixed width of 75%.)
- * ----------------------------------------------------------------------------- */
-
-.site-grid__col--three-fourths {
-	flex: none;
-
-	@media (--viewport-medium) {
-		width: 75%;
-	}
 }

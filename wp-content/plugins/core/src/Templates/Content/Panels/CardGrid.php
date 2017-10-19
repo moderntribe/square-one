@@ -2,7 +2,7 @@
 
 namespace Tribe\Project\Templates\Content\Panels;
 
-use Tribe\Project\Panels\Types\CardGrid as CardG;
+use Tribe\Project\Panels\Types\CardGrid as CardGridPanel;
 use Tribe\Project\Templates\Components\Card;
 
 class CardGrid extends Panel {
@@ -15,37 +15,39 @@ class CardGrid extends Panel {
 		return $data;
 	}
 
-	public function get_title(): string {
-		$title = '';
+	public function get_mapped_panel_data(): array {
+		$data = [
+			'title'       => $this->get_title( CardGridPanel::FIELD_TITLE, [ 'site-section__title', 'h2' ] ),
+			'description' => ! empty( $this->panel_vars[ CardGridPanel::FIELD_DESCRIPTION ] ) ? $this->panel_vars[ CardGridPanel::FIELD_DESCRIPTION ] : false,
+			'cards'       => $this->get_the_cards(),
+		];
 
-		if ( ! empty( $this->panel_vars[ CardG::FIELD_TITLE ] ) ) {
-			$title = the_panel_title( esc_html( $this->panel_vars[ CardG::FIELD_TITLE ] ), 'site-section__title h2', 'title', true, 0, 0 );
-		}
-
-		return $title;
+		return $data;
 	}
 
-	public function get_the_cards(): array {
+	protected function get_the_cards(): array {
 		$cards = [];
 
-		if ( ! empty( $this->panel_vars[ CardG::FIELD_CARDS ] ) ) {
-			for ( $i = 0; $i < count( $this->panel_vars[ CardG::FIELD_CARDS ] ); $i++ ) {
+		if ( ! empty( $this->panel_vars[ CardGridPanel::FIELD_CARDS ] ) ) {
 
-				$card              = $this->panel_vars[ CardG::FIELD_CARDS ][ $i ];
+			$i = 0;
+
+			foreach ( $this->panel_vars[ CardGridPanel::FIELD_CARDS ] as $card ) {
+
 				$title_attrs       = [];
 				$description_attrs = [];
 
 				if ( is_panel_preview() ) {
 					$title_attrs = [
 						'data-depth'    => $this->panel->get_depth(),
-						'data-name'     => CardG::FIELD_CARD_TITLE,
+						'data-name'     => CardGridPanel::FIELD_CARD_TITLE,
 						'data-index'    => $i,
 						'data-livetext' => true,
 					];
 
 					$description_attrs = [
 						'data-depth'    => $this->panel->get_depth(),
-						'data-name'     => CardG::FIELD_CARD_DESCRIPTION,
+						'data-name'     => CardGridPanel::FIELD_CARD_DESCRIPTION,
 						'data-index'    => $i,
 						'data-autop'    => 'true',
 						'data-livetext' => true,
@@ -53,29 +55,25 @@ class CardGrid extends Panel {
 				}
 
 				$options = [
-					Card::TITLE             => $card[ CardG::FIELD_CARD_TITLE ],
-					Card::DESCRIPTION       => $card[ CardG::FIELD_CARD_DESCRIPTION ],
-					Card::IMAGE             => $card[ CardG::FIELD_CARD_IMAGE ],
-					Card::CTA               => $card[ CardG::FIELD_CARD_CTA ],
-					Card::TITLE_ATTRS       => $title_attrs,
-					Card::DESCRIPTION_ATTRS => $description_attrs,
+					Card::TITLE       => $card[ CardGridPanel::FIELD_CARD_TITLE ],
+					Card::TEXT        => $card[ CardGridPanel::FIELD_CARD_DESCRIPTION ],
+					Card::IMAGE       => $card[ CardGridPanel::FIELD_CARD_IMAGE ],
+					Card::CTA         => $card[ CardGridPanel::FIELD_CARD_CTA ],
+					Card::TITLE_ATTRS => $title_attrs,
+					Card::TEXT_ATTRS  => $description_attrs,
 				];
 
 				$card_obj = Card::factory( $options );
 				$cards[]  = $card_obj->render();
+
+				$i ++;
 			}
 		}
 
 		return $cards;
 	}
 
-	public function get_mapped_panel_data(): array {
-		$data = [
-			'title'       => $this->get_title(),
-			'description' => ! empty( $this->panel_vars[ CardG::FIELD_DESCRIPTION ] ) ? $this->panel_vars[ CardG::FIELD_DESCRIPTION ] : false,
-			'cards'       => $this->get_the_cards(),
-		];
-
-		return $data;
+	public static function instance() {
+		return tribe_project()->container()['twig.templates.content/panels/cardgrid'];
 	}
 }

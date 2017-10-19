@@ -26,11 +26,11 @@ class Quote extends Component {
 
 	public function get_data(): array {
 		$data = [
-			'quote'       => $this->options[ static::QUOTE ],
-			'cite'        => $this->options[ static::CITE ],
-			'classes'     => $this->merge_classes( [ 'c-quote' ], $this->options[ static::CLASSES ], true ),
-			'quote_attrs' => $this->merge_attrs( [], $this->options[ static::QUOTE_ATTRS ], true ),
-			'cite_attrs'  => $this->merge_attrs( [], $this->options[ static::CITE_ATTRS ], true ),
+			static::QUOTE       => $this->options[ static::QUOTE ],
+			static::CITE        => $this->options[ static::CITE ],
+			static::CLASSES     => $this->merge_classes( [ 'c-quote' ], $this->options[ static::CLASSES ], true ),
+			static::QUOTE_ATTRS => $this->merge_attrs( [], $this->options[ static::QUOTE_ATTRS ], true ),
+			static::CITE_ATTRS  => $this->merge_attrs( [], $this->options[ static::CITE_ATTRS ], true ),
 		];
 
 		return $data;

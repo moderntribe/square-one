@@ -4,26 +4,18 @@
 
 {% block content %}
 
-	<div class="site-section__content">
+	<div class="s-content">
+		<div class="g-row g-row--nowrap"
+			 data-depth="0"
+			 data-name="logos"
+			 data-livetext>
 
-		<div class="site-grid">
-			<div class="site-grid__wrapper">
-
-				<div class="site-grid__layout site-grid__layout--2-col-sm"
-				     data-depth="0"
-				     data-name="logos"
-				     data-livetext>
-
-					{% for logo in logos %}
-						<div class="site-grid__col site-grid__col--horizontal-center">
-							{{ logo }}
-						</div>
-					{% endfor %}
+			{% for logo in logos %}
+				<div class="g-col g-col--horizontal-center">
+					{{ logo }}
 				</div>
-
-			</div>
+			{% endfor %}
 		</div>
-
 	</div>
 
 {% endblock %}

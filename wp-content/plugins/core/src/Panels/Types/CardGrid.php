@@ -38,7 +38,7 @@ class CardGrid extends Panel_Type_Config {
 			'max'              => 4,
 			'new_button_label' => __( 'Add Card', 'tribe' ),
 			'strings'          => [
-				'label.row_index' => 'Card %{index} |||| Card %{index}',
+				'label.row_index' => __( 'Card %{index} |||| Card %{index}', 'tribe' ),
 				'button.delete'   => __( 'Delete Card', 'tribe' ),
 			],
 		] );

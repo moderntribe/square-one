@@ -4,7 +4,10 @@
 namespace Tribe\Project\Templates\Content\Panels;
 
 use Tribe\Project\Panels\Types\VideoText as VideoTextPanel;
+use Tribe\Project\Templates\Components\Button;
 use Tribe\Project\Templates\Components\Content_Block;
+use Tribe\Project\Templates\Components\Text;
+use Tribe\Project\Templates\Components\Title;
 
 class VideoText extends Panel {
 
@@ -12,6 +15,17 @@ class VideoText extends Panel {
 		$data       = parent::get_data();
 		$panel_data = $this->get_mapped_panel_data();
 		$data       = array_merge( $data, $panel_data );
+
+		return $data;
+	}
+
+	protected function get_mapped_panel_data(): array {
+
+		$data = [
+			'wrapper_classes' => $this->get_panel_classes(),
+			'video'           => $this->get_panel_video(),
+			'content_block'   => $this->get_content_block(),
+		];
 
 		return $data;
 	}
@@ -38,19 +52,58 @@ class VideoText extends Panel {
 		}
 
 		$options = [
-			Content_Block::TITLE             => esc_html( $this->panel_vars[ VideoTextPanel::FIELD_TITLE ] ),
-			Content_Block::TITLE_TAG         => 'h2',
-			Content_Block::DESCRIPTION       => $this->panel_vars[ VideoTextPanel::FIELD_DESCRIPTION ],
-			Content_Block::CTA               => $this->panel_vars[ VideoTextPanel::FIELD_CTA ],
-			Content_Block::TITLE_ATTRS       => $title_attrs,
-			Content_Block::TITLE_CLASSES     => [ 'h3' ],
-			Content_Block::DESCRIPTION_ATTRS => $description_attrs,
-			Content_Block::CTA_CLASSES       => [ 'c-btn--sm' ],
+			Content_Block::TITLE           => $this->get_video_text_title( $title_attrs ),
+			Content_Block::TEXT            => $this->get_video_text_text( $description_attrs ),
+			Content_Block::CONTENT_CLASSES => '',
+			Content_Block::BUTTON          => $this->get_video_text_button(),
+			Content_Block::CLASSES         => '',
 		];
 
 		$content_block_obj = Content_Block::factory( $options );
 
 		return $content_block_obj->render();
+	}
+
+	protected function get_video_text_title( $title_attributes ) {
+		$options = [
+			Title::TITLE   => esc_html( $this->panel_vars[ VideoTextPanel::FIELD_TITLE ] ),
+			Title::TAG     => 'h2',
+			Title::CLASSES => [ 'h2' ],
+			Title::ATTRS   => $title_attributes,
+		];
+
+		$title_obj = Title::factory( $options );
+
+		return $title_obj->render();
+	}
+
+	protected function get_video_text_text( $description_attrs ) {
+		$options = [
+			Text::ATTRS   => $description_attrs,
+			Text::CLASSES => '',
+			Text::TEXT    => $this->panel_vars[ VideoTextPanel::FIELD_DESCRIPTION ],
+		];
+
+		$text_object = Text::factory( $options );
+
+		return $text_object->render();
+	}
+
+	protected function get_video_text_button() {
+		$options = [
+			Button::TAG         => '',
+			Button::URL         => $this->panel_vars[ VideoTextPanel::FIELD_CTA ][ Button::URL ],
+			Button::TYPE        => '',
+			Button::TARGET      => $this->panel_vars[ VideoTextPanel::FIELD_CTA ][ Button::TARGET ],
+			Button::CLASSES     => [ 'c-btn--sm' ],
+			Button::ATTRS       => '',
+			Button::LABEL       => $this->panel_vars[ VideoTextPanel::FIELD_CTA ][ Button::LABEL ],
+			Button::BTN_AS_LINK => true,
+		];
+
+		$button_object = Button::factory( $options );
+
+		return $button_object->render();
 	}
 
 	protected function get_panel_video() {
@@ -69,32 +122,13 @@ class VideoText extends Panel {
 		$classes = [];
 
 		if ( VideoTextPanel::FIELD_LAYOUT_OPTION_VIDEO_RIGHT === $this->panel_vars[ VideoTextPanel::FIELD_LAYOUT ] ) {
-			$classes[] = 'site-grid--reorder-2-col';
+			$classes[] = 'g-row--reorder-2-col';
 		}
 
 		return implode( ' ', $classes );
 	}
 
-	protected function get_title_attrs() {
-		if ( ! is_panel_preview() ) {
-			return [];
-		}
-
-		return [
-			'data-depth'    => 0,
-			'data-name'     => VideoTextPanel::FIELD_TITLE,
-			'data-livetext' => true,
-		];
-	}
-
-	protected function get_mapped_panel_data(): array {
-
-		$data = [
-			'wrapper_classes' => $this->get_panel_classes(),
-			'video'           => $this->get_panel_video(),
-			'content_block'   => $this->get_content_block(),
-		];
-
-		return $data;
+	public static function instance() {
+		return tribe_project()->container()['twig.templates.content/panels/videotext'];
 	}
 }

@@ -1,5 +1,5 @@
 <?php
 
-$template = new \Tribe\Project\Templates\Content\Panels\MicroNavButtons( 'content/panels/micronavbuttons.twig' );
+$template = \Tribe\Project\Templates\Content\Panels\MicroNavButtons::instance();
 
 echo $template->render();

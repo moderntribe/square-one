@@ -4,6 +4,8 @@
 namespace Tribe\Project\Taxonomies\Category;
 
 
-class Category {
+use Tribe\Libs\Taxonomy\Term_Object;
+
+class Category extends Term_Object {
 	const NAME = 'category';
 }

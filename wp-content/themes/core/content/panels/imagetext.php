@@ -1,5 +1,5 @@
 <?php
 
-$template = new \Tribe\Project\Templates\Content\Panels\ImageText( 'content/panels/imagetext.twig' );
+$template = \Tribe\Project\Templates\Content\Panels\ImageText::instance();
 
 echo $template->render();

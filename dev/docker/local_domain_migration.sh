@@ -4,17 +4,30 @@ SCRIPTDIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
 cd "$SCRIPTDIR";
 
-SOURCE_DOMAIN="production.com"
-TARGET_DOMAIN="square1.tribe"
-DB_PREFIX="tribe_"
-DB_NAME="tribe_square1"
+PROJECT_ID=$(cat ./.projectID)
 
-docker run --rm -i \
- --link="global_mysql_1:mysql" \
- --entrypoint="/usr/local/mysql/bin/mysql" \
- moderntribe/mysql:5.5 \
- -uroot -ppassword -hmysql $DB_NAME \
- -e "UPDATE ${DB_PREFIX}blogs SET domain='$TARGET_DOMAIN' WHERE blog_id=1"
+TARGET_DOMAIN="${PROJECT_ID}.tribe"
+DB_PREFIX="tribe_"
+DB_NAME="tribe_${PROJECT_ID}"
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+	D_COMMAND="docker"
+elif [[ $(which docker.exe) ]]; then
+	D_COMMAND="docker.exe"
+else
+	D_COMMAND="docker"
+fi;
+
+${DC_COMMAND}
+
+SOURCE_DOMAIN=$(${D_COMMAND} exec tribe-mysql \
+ mysql -uroot -ppassword $DB_NAME \
+ -Ne "SELECT option_value FROM ${DB_PREFIX}options WHERE option_name='siteurl'" \
+ | cut -d'/' -f3)
+
+${D_COMMAND} exec tribe-mysql \
+ mysql -uroot -ppassword $DB_NAME \
+ -Ne "UPDATE ${DB_PREFIX}options SET option_value=REPLACE( 'option_value', '$SOURCE_DOMAIN', '$TARGET_DOMAIN' ) WHERE option_name='siteurl'"
 
 /bin/bash $SCRIPTDIR/wp.sh \
  search-replace "$SOURCE_DOMAIN" "$TARGET_DOMAIN" --all-tables-with-prefix --verbose

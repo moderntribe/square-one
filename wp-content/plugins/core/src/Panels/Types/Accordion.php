@@ -12,7 +12,7 @@ class Accordion extends Panel_Type_Config {
 	const FIELD_CONTENT              = 'content';
 	const FIELD_ACCORDIONS           = 'accordions';
 	const FIELD_ACCORDION_TITLE      = 'title';
-	const FIELD_ACCORDION_CONTENT    = 'accordion_content';
+	const FIELD_ACCORDION_CONTENT    = 'row_content';
 	const FIELD_LAYOUT               = 'layout';
 	const FIELD_LAYOUT_OPTION_RIGHT  = 'right';
 	const FIELD_LAYOUT_OPTION_LEFT   = 'left';
@@ -52,7 +52,7 @@ class Accordion extends Panel_Type_Config {
 			'strings' => [
 				'button.new'      => __( 'Add Accordion Row', 'tribe' ),
 				'button.delete'   => __( 'Delete Accordion Row', 'tribe' ),
-				'label.row_index' => _x( 'Accordion Row %{index} |||| Row %{index}', 'tribe' ),
+				'label.row_index' => __( 'Accordion Row %{index} |||| Accordion Row %{index}', 'tribe' ),
 			],
 		] );
 

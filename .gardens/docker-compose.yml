@@ -1,0 +1,14 @@
+---
+version: '2'
+
+services:
+  wordpress:
+    image: "{{ image }}"
+    ports:
+      - "0:80"
+    volumes:
+      - "/opt/deployments/{{ subdomain }}:/srv/site:rw"
+    labels:
+      - "traefik.frontend.rule=Host:{{ subdomain }}.{{ domain }}"
+      - "traefik.frontend.entryPoints=http,https"
+      - "timestamp={{ timestamp }}"

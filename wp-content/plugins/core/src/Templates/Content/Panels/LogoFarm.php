@@ -15,21 +15,21 @@ class LogoFarm extends Panel {
 		return $data;
 	}
 
-	public function get_title(): string {
-		$title = '';
+	public function get_mapped_panel_data(): array {
+		$data = [
+			'title'       => $this->get_title( Logo::FIELD_TITLE, [ 'site-section__title', 'h2' ] ),
+			'description' => ! empty( $this->panel_vars[ Logo::FIELD_DESCRIPTION ] ) ? $this->panel_vars[ Logo::FIELD_DESCRIPTION ] : false,
+			'logos'       => $this->get_the_logos(),
+		];
 
-		if ( ! empty( $this->panel_vars[ Logo::FIELD_TITLE ] ) ) {
-			$title = the_panel_title( esc_html( $this->panel_vars[ Logo::FIELD_TITLE ] ), 'site-section__title h2', 'title', true, 0, 0 );
-		}
-
-		return $title;
+		return $data;
 	}
 
-	public function get_the_logos(): array {
+	protected function get_the_logos(): array {
 		$logos = [];
 
 		if ( ! empty( $this->panel_vars[ Logo::FIELD_LOGOS ] ) ) {
-			for ( $i = 0; $i < count( $this->panel_vars[ Logo::FIELD_LOGOS ] ); $i++ ) {
+			for ( $i = 0; $i < count( $this->panel_vars[ Logo::FIELD_LOGOS ] ); $i ++ ) {
 
 				$logo = $this->panel_vars[ Logo::FIELD_LOGOS ][ $i ];
 
@@ -48,13 +48,7 @@ class LogoFarm extends Panel {
 		return $logos;
 	}
 
-	public function get_mapped_panel_data(): array {
-		$data = [
-			'title'       => $this->get_title(),
-			'description' => ! empty( $this->panel_vars[ Logo::FIELD_DESCRIPTION ] ) ? $this->panel_vars[ Logo::FIELD_DESCRIPTION ] : false,
-			'logos'       => $this->get_the_logos(),
-		];
-
-		return $data;
+	public static function instance() {
+		return tribe_project()->container()['twig.templates.content/panels/logofarm'];
 	}
 }
