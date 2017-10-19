@@ -12,7 +12,7 @@ scripts:
     if $FlushDependencies; then
       rm -rf node_modules
     fi
-    yarn install --production
+    yarn install
     grunt build
   # block of commands to test this repo/branch on the CI server
   test: |
