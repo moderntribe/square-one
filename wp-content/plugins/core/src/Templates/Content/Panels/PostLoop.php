@@ -32,16 +32,15 @@ class PostLoop extends Panel {
 			for ( $i = 0; $i < count( $this->panel_vars[ PostLoopPanel::FIELD_POSTS ] ); $i ++ ) {
 
 				$post = $this->panel_vars[ PostLoopPanel::FIELD_POSTS ][ $i ];
+				$title = sprintf( '<a href="%s">%s</a>', esc_url( get_the_permalink( $post['post_id'] ) ), esc_html( get_the_title( $post['post_id'] ) ) );
 
 				$options = [
-					Card::TITLE     => esc_html( get_the_title( $post['post_id'] ) ),
-					Card::IMAGE     => esc_html( get_post_thumbnail_id( $post['post_id'] ) ),
-					Card::PRE_TITLE => get_the_category_list( '', '', $post['post_id'] ),
-					Card::CTA       => [
-						Card::CTA_URL    => get_the_permalink( $post['post_id'] ),
-						Card::CTA_LABEL  => __( 'View Post', 'tribe' ),
-						Card::CTA_TARGET => '__self',
-					],
+					Card::CLASSES         => [ 'c-card--postlist' ],
+					Card::CONTENT_CLASSES => [ 't-content', 'c-card__content--postlist' ],
+					Card::TITLE           => $title,
+					Card::TITLE_CLASSES   => [ 'c-card__title--postlist' ],
+					Card::IMAGE           => esc_html( get_post_thumbnail_id( $post['post_id'] ) ),
+					Card::PRE_TITLE       => get_the_category_list( '', '', $post['post_id'] ),
 				];
 
 				$post_obj = Card::factory( $options );

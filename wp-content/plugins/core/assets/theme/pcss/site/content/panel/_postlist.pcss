@@ -1,0 +1,55 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Panels: Postlist
+ *
+ * ----------------------------------------------------------------------------- */
+
+.c-card--postlist {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+.c-card__title--postlist {
+
+	.t-content & {
+		font-size: 22px;
+		margin-top: 0;
+
+		a {
+			color: var(--color-blue-dark);
+			border: none;
+			text-decoration: none;
+
+			&:focus,
+			&:hover {
+				color: var(--color-blue);
+			}
+		}
+	}
+}
+
+.c-card__content--postlist {
+	background: var(--color-white-ivory);
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	padding: 20px;
+
+	.post-categories {
+		margin: 0 0 5px;
+		padding: 0;
+
+		li {
+			display: inline-block;
+			list-style: none;
+			margin: 0 5px 0 0;
+			padding: 0;
+
+			a {
+				border: none;
+				text-decoration: none;
+			}
+		}
+	}
+}
