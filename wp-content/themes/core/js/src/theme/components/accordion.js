@@ -6,11 +6,11 @@
 import _ from 'lodash';
 import delegate from 'delegate';
 
-import { setAccActiveAttributes, setAccInactiveAttributes } from '../utils/dom/accessibility';
-import scrollTo from '../utils/dom/scroll-to';
-import * as slide from '../utils/dom/slide';
-import * as tools from '../utils/tools';
-import * as events from '../utils/events';
+import { setAccActiveAttributes, setAccInactiveAttributes } from '../../utils/dom/accessibility';
+import scrollTo from '../../utils/dom/scroll-to';
+import * as slide from '../../utils/dom/slide';
+import * as tools from '../../utils/tools';
+import * as events from '../../utils/events';
 
 const siteWrap = tools.getNodes('site-wrap')[0];
 const pn = document.getElementById('panel-navigation');

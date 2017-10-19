@@ -4,7 +4,7 @@
  */
 
 import delegate from 'delegate';
-import * as tools from '../utils/tools';
+import * as tools from '../../utils/tools';
 
 const el = {
 	container: tools.getNodes('comment-form')[0],

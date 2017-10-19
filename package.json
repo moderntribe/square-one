@@ -5,7 +5,14 @@
   "license": "GPL-2.0",
   "repository": "https://github.com/moderntribe/square-one.git",
   "_core_theme_path": "wp-content/themes/core",
-  "_core_theme_assets_path": "wp-content/plugins/core/assets/theme",
+  "_core_theme_css_path": "wp-content/themes/core/css/",
+  "_core_theme_js_dist_path": "wp-content/themes/core/js/dist/",
+  "_core_theme_js_src_path": "wp-content/themes/core/js/src/theme/",
+  "_core_theme_pcss_path": "wp-content/themes/core/pcss/",
+  "_core_admin_css_path": "wp-content/themes/core/css/admin/",
+  "_core_admin_js_src_path": "wp-content/themes/core/js/src/admin/",
+  "_core_admin_js_dist_path": "wp-content/themes/core/js/dist/admin/",
+  "_core_admin_pcss_path": "wp-content/themes/core/pcss/admin/",
   "_core_plugin_path": "wp-content/plugins/core",
   "_npm_path": "node_modules",
   "_component_path": "dev_components",
@@ -30,7 +37,8 @@
     "swiper": "^3.4.2",
     "tota11y": "0.1.6",
     "verge": "^1.10.2",
-    "webfontloader": "^1.6.28"
+    "webfontloader": "^1.6.28",
+    "webpack": "3.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
@@ -95,7 +103,6 @@
     "postcss-simple-vars": "^3.0.0",
     "stylelint": "^7.9.0",
     "stylelint-config-standard": "^16.0.0",
-    "webpack": "3.0.0",
     "webpack-dev-middleware": "^1.11.0",
     "webpack-dev-server": "2.5.0"
   },

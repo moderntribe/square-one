@@ -1,5 +1,5 @@
-var path = require('path');
-var webpack = require('webpack');
+const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
 	cache: true,
@@ -10,17 +10,6 @@ module.exports = {
 		modules: [
 			path.resolve(__dirname, 'node_modules'),
 		],
-	},
-	resolve: {
-		alias: {
-			masonry: 'masonry-layout',
-			isotope: 'isotope-layout',
-		},
-		modules: [
-			path.resolve(__dirname, 'wp-content/plugins/core/assets/theme/js/src'),
-			path.resolve(__dirname, 'node_modules'),
-		],
-		extensions: ['.js', '.jsx'],
 	},
 	module: {
 		noParse: /node_modules\/vex-js\/dist\/js\/vex.js/,
@@ -33,13 +22,13 @@ module.exports = {
 						loader: 'babel-loader',
 						options: {
 							presets: [
-								["es2015", { "modules": false }] // IMPORTANT
-							]
-						}
-					}
-				]
-			}
-		]
+								['es2015', { modules: false }], // IMPORTANT
+							],
+						},
+					},
+				],
+			},
+		],
 	},
 	plugins: [
 		new webpack.ProvidePlugin({

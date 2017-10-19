@@ -6,8 +6,8 @@
 
 import _ from 'lodash';
 import delegate from 'delegate';
-import * as tools from '../utils/tools';
-import { on } from '../utils/events';
+import * as tools from '../../utils/tools';
+import { on } from '../../utils/events';
 
 const el = {
 	container: tools.getNodes('site-wrap')[0],
