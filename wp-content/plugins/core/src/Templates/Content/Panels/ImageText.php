@@ -56,7 +56,7 @@ class ImageText extends Panel {
 			Content_Block::TITLE           => $this->get_image_text_title( $title_attrs ),
 			Content_Block::CLASSES         => '',
 			Content_Block::BUTTON          => $this->get_image_text_button(),
-			Content_Block::CONTENT_CLASSES => '',
+			Content_Block::CONTENT_CLASSES => [ 't-content' ],
 			Content_Block::TEXT            => $this->get_image_text_text( $description_attrs ),
 		];
 
@@ -96,7 +96,6 @@ class ImageText extends Panel {
 			Button::URL         => $this->panel_vars[ ImageTextPanel::FIELD_CTA ][Button::URL],
 			Button::TYPE        => '',
 			Button::TARGET      => $this->panel_vars[ ImageTextPanel::FIELD_CTA ][Button::TARGET],
-			Button::CLASSES     => [ 'c-btn--sm' ],
 			Button::ATTRS       => '',
 			Button::LABEL       => $this->panel_vars[ ImageTextPanel::FIELD_CTA ][Button::LABEL],
 			Button::BTN_AS_LINK => true,

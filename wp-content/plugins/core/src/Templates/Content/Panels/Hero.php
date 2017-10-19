@@ -76,7 +76,7 @@ class Hero extends Panel {
 			Content_Block::TEXT            => $this->get_hero_text( $description_attrs ),
 			Content_Block::BUTTON          => $this->get_hero_button(),
 			Content_Block::CLASSES         => [],
-			Content_Block::CONTENT_CLASSES => [],
+			Content_Block::CONTENT_CLASSES => [ 'c-content-block__desc--hero' ],
 		];
 
 		$content_block_obj = Content_Block::factory( $options );

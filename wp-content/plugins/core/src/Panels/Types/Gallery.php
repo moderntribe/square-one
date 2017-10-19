@@ -28,8 +28,9 @@ class Gallery extends Panel_Type_Config {
 
 		// Panel Description
 		$panel->add_field( new Fields\TextArea( [
-			'name'  => self::FIELD_CONTENT,
-			'label' => __( 'Description', 'tribe' ),
+			'name'     => self::FIELD_CONTENT,
+			'label'    => __( 'Description', 'tribe' ),
+			'richtext' => true,
 		] ) );
 
 		// Image Treatment

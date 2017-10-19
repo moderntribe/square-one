@@ -19,7 +19,7 @@ class Testimonial extends Panel {
 
 	public function get_mapped_panel_data(): array {
 		$data = [
-			'title'      => $this->get_title( TestimonialPanel::FIELD_TITLE, [ 'site-section__title', 'h5' ] ),
+			'title'      => $this->get_title( TestimonialPanel::FIELD_TITLE, [ 'site-section__title', 'site-panel--testimonial-subtitle' ] ),
 			'text_color' => $this->text_color(),
 			'image'      => $this->get_image(),
 			'slider'     => $this->get_slider(),
@@ -92,6 +92,7 @@ class Testimonial extends Panel {
 				$options = [
 					Quote::QUOTE       => $quote[ TestimonialPanel::FIELD_QUOTE ],
 					Quote::CITE        => $quote[ TestimonialPanel::FIELD_CITE ],
+					Quote::CLASSES     => [ 'c-quote--testimonial' ],
 					Quote::QUOTE_ATTRS => $quote_attrs,
 					Quote::CITE_ATTRS  => $cite_attrs,
 				];
@@ -109,11 +110,11 @@ class Testimonial extends Panel {
 		$classes = [];
 
 		if ( TestimonialPanel::FIELD_TEXT_LIGHT === $this->panel_vars[ TestimonialPanel::FIELD_TEXT_COLOR ] ) {
-			$classes[] = 't-content--light';
+			$classes[] = 't-content t-content--light';
 		}
 
 		if ( TestimonialPanel::FIELD_TEXT_DARK === $this->panel_vars[ TestimonialPanel::FIELD_TEXT_COLOR ] ) {
-			$classes[] = 't-content--dark';
+			$classes[] = 't-content t-content--dark';
 		}
 
 		return implode( ' ', $classes );

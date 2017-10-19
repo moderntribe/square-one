@@ -1,0 +1,30 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Panels: Hero
+ *
+ * ----------------------------------------------------------------------------- */
+
+.site-panel--hero {
+	position: relative;
+
+	&:before {
+		background: var(--color-black-a-40);
+		bottom: 0;
+		content: "";
+		left: 0;
+		position: absolute;
+		right: 0;
+		top: 0;
+		width: 100%;
+		z-index: 1;
+	}
+
+	@media (--viewport-medium) {
+		height: 100vh;
+	}
+}
+
+.c-content-block__desc--hero {
+	margin: 0 auto;
+	max-width: 800px;
+}

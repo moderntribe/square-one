@@ -17,7 +17,7 @@ class Accordion extends Panel {
 
 	public function get_mapped_panel_data(): array {
 		$data = [
-			'title'        => $this->get_title( AccordionPanel::FIELD_ACCORDION_TITLE, [ 'section__title' ] ),
+			'title'        => $this->get_title( AccordionPanel::FIELD_ACCORDION_TITLE, [ 'site-section__title', 'h2' ] ),
 			'content'      => $this->panel_vars[ AccordionPanel::FIELD_CONTENT ],
 			'layout'       => $this->panel_vars[ AccordionPanel::FIELD_LAYOUT ],
 			'accordion'    => $this->get_accordion(),

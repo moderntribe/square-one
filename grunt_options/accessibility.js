@@ -16,7 +16,7 @@ module.exports = {
 	test: {
 		options: {
 			urls: [
-				'https://<%= dev.proxy %>'
+				'http://<%= dev.proxy %>'
 			],
 		},
 	},
