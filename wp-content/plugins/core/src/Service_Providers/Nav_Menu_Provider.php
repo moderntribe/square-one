@@ -7,17 +7,17 @@ namespace Tribe\Project\Service_Providers;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Tribe\Libs\Nav\Menu_Location;
+use Tribe\Project\Theme\Nav\Menu\Primary_Menu;
+use Tribe\Project\Theme\Nav\Menu\Secondary_Menu;
 
 class Nav_Menu_Provider implements ServiceProviderInterface {
-	const PRIMARY   = 'primary';
-	const SECONDARY = 'secondary';
 
 	protected $nav_menus = [];
 
 	public function __construct() {
 		$this->nav_menus = [
-			self::PRIMARY   => __( 'Menu: Site', 'tribe' ),
-			self::SECONDARY => __( 'Menu: Footer', 'tribe' ),
+			Primary_Menu::NAME   => __( 'Menu: Site', 'tribe' ),
+			Secondary_Menu::NAME => __( 'Menu: Footer', 'tribe' ),
 		];
 	}
 
