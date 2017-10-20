@@ -4,6 +4,7 @@ namespace Tribe\Project;
 
 use Pimple\Container;
 use Tribe\Libs\Functions\Function_Includer;
+use Tribe\Project\Service_Providers\Admin_Provider;
 use Tribe\Project\Service_Providers\Asset_Provider;
 use Tribe\Project\Service_Providers\Cache_Provider;
 use Tribe\Project\Service_Providers\CLI_Provider;
@@ -57,6 +58,7 @@ class Core {
 	}
 
 	private function load_service_providers() {
+		$this->container->register( new Admin_Provider() );
 		$this->container->register( new Asset_Provider() );
 		$this->container->register( new Cache_Provider() );
 		$this->container->register( new Theme_Provider() );

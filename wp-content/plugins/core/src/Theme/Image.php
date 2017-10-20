@@ -188,7 +188,7 @@ class Image {
 	 */
 	private function get_shim() {
 
-		$shim_dir = trailingslashit( tribe_assets_url( 'theme/img/shims' ) );
+		$shim_dir = trailingslashit( get_stylesheet_directory_uri() ) . 'img/theme/shims';
 		$src = $this->options[ 'shim' ];
 
 		if ( empty ( $this->options[ 'shim' ] ) ) {

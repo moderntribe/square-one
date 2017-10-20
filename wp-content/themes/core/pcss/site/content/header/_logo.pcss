@@ -1,0 +1,27 @@
+.logo {
+	background: svg-inline(logo-blue) center center no-repeat;
+	background-size: contain;
+	width: 60px;
+	height: 70px;
+	position: absolute;
+	top: 0;
+	left: 20px;
+
+	.home & {
+		background: svg-inline(logo-white) center center no-repeat;
+		background-size: contain;
+	}
+
+	@media (--viewport-medium) {
+		width: 80px;
+		height: 90px;
+		left: 30px;
+	}
+
+	a {
+		display: block;
+		height: 100%;
+		opacity: 0;
+		overflow: hidden;
+	}
+}
