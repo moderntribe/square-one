@@ -4,8 +4,8 @@
  */
 
 import delegate from 'delegate';
-import * as tools from '../../utils/tools';
-import popup from '../../utils/dom/popup';
+import * as tools from 'utils/tools';
+import popup from 'utils/dom/popup';
 
 const el = {
 	container: tools.getNodes('social-share-networks')[0],

@@ -5,8 +5,8 @@
 
 import Spinner from 'spin.js';
 import delegate from 'delegate';
-import * as tools from '../../utils/tools';
-import scrollTo from '../../utils/dom/scroll-to';
+import * as tools from 'utils/tools';
+import scrollTo from 'utils/dom/scroll-to';
 
 const el = {
 	container: tools.getNodes('site-wrap')[0],

@@ -6,6 +6,12 @@ module.exports = {
 	externals: {
 		jquery: 'jQuery',
 	},
+	resolve: {
+		alias: {
+			utils: path.resolve(__dirname, 'wp-content/themes/core/js/src/utils'),
+		},
+		extensions: ['.js'],
+	},
 	resolveLoader: {
 		modules: [
 			path.resolve(__dirname, 'node_modules'),

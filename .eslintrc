@@ -6,12 +6,12 @@
     "plugin:import/warnings"
   ],
   "plugins": [
-    "react",
+    "react"
   ],
   "settings": {
     "import/ignore": [
       "node_modules",
-      "\\.(html|json|properties)$",
+      "\\.(html|json|properties)$"
     ],
     "import/resolver": {
       "webpack": {
@@ -22,8 +22,11 @@
   "rules": {
     "eqeqeq": [2, "allow-null"],
     "func-names": 0,
+    "import/extensions": 0,
+    "import/no-unresolved": 0,
     "import/no-named-as-default": 0,
     "import/prefer-default-export": 0,
+    "import/no-extraneous-dependencies": 0,
     "no-useless-escape": 0,
     "no-tabs": 0,
     "indent": [

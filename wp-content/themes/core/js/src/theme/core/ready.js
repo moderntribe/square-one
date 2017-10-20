@@ -5,6 +5,8 @@
  */
 
 import _ from 'lodash';
+import { on, ready } from 'utils/events';
+import applyBrowserClasses from 'utils/dom/apply-browser-classes';
 
 // you MUST do this in every module you use lodash in.
 // A custom bundle of only the lodash you use will be built by babel.
@@ -12,9 +14,6 @@ import _ from 'lodash';
 import resize from './resize';
 import plugins from './plugins';
 import viewportDims from './viewport-dims';
-import applyBrowserClasses from '../../utils/dom/apply-browser-classes';
-
-import { on, ready } from '../../utils/events';
 
 import modules from '../modules/index';
 
