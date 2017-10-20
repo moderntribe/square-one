@@ -1,0 +1,21 @@
+<footer class="site-footer">
+
+	<div class="l-container">
+
+		{{ include( 'content/navigation/footer.twig' ) }}
+
+	</div>
+
+</footer>
+
+<div class="site-copyright">
+	<div class="l-container">
+		<p>
+			{{ copyright }}
+			<a href="{{ home_url|esc_url }}" rel="external">
+				{{ bloginfo( 'name' ) }}
+			</a>
+		</p>
+
+	</div>
+</div>
