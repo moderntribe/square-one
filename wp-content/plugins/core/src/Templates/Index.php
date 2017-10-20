@@ -6,6 +6,8 @@ namespace Tribe\Project\Templates;
 use Tribe\Project\Templates\Components\Button;
 use Tribe\Project\Templates\Components\Breadcrumbs;
 use Tribe\Project\Templates\Components\Pagination;
+
+use Tribe\Project\Theme\Pagination_Util;
 use Tribe\Project\Theme\Util;
 
 class Index extends Base {
@@ -84,10 +86,11 @@ class Index extends Base {
 	public function get_pagination_numbers(): array {
 		$links = [];
 
-		$numbers = Util::get_pagination_links( 2, true, false, false );
+		$pagination = new Pagination_Util();
+		$numbers = $pagination->numbers( 2, true, false, false );
 
 		if ( empty( $numbers ) ) {
-			return '';
+			return $links;
 		}
 
 		foreach ( $numbers as $number ) {
