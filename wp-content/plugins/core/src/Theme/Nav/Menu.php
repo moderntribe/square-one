@@ -45,9 +45,9 @@ class Menu {
 	public static function menu( $args ) {
 		$menu = new self( $args );
 		$html = $menu->get_html();
-		$echo = isset($args['echo']) ? $args['echo'] : TRUE;
-		if ( ! $echo ) {
-            return $html;
+		$echo = isset( $args[ 'echo' ] ) ? $args[ 'echo' ] : TRUE;
+		if ( !$echo ) {
+			return $html;
 		}
 		echo $html;
 	}

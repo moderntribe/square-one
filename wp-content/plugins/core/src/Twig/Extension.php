@@ -21,7 +21,7 @@ class Extension extends \Twig_Extension {
 			new \Twig_SimpleFilter( 'esc_attr', 'esc_attr' ),
 			new \Twig_SimpleFilter( 'esc_html', 'esc_html' ),
 			new \Twig_SimpleFilter( 'esc_js', 'esc_js' ),
-			new \Twig_SimpleFilter( 'print_r', function( $arg ) {
+			new \Twig_SimpleFilter( 'print_r', function ( $arg ) {
 				return print_r( $arg, true );
 			} ),
 		];
