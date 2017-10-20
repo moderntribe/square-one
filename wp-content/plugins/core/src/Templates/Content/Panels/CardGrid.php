@@ -55,6 +55,7 @@ class CardGrid extends Panel {
 				}
 
 				$options = [
+					Card::CLASSES         => [ 'a-levitate' ],
 					Card::CONTENT_CLASSES => [ 't-content', 'c-card__content--cardgrid' ],
 					Card::TITLE           => $card[ CardGridPanel::FIELD_CARD_TITLE ],
 					Card::TEXT            => $card[ CardGridPanel::FIELD_CARD_DESCRIPTION ],

@@ -1,0 +1,18 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Animations
+ *
+ * ----------------------------------------------------------------------------- */
+
+.a-levitate {
+	@media (--viewport-full) {
+		transition: var(--transition);
+
+		&:hover,
+		&:focus {
+			box-shadow: 0 15px 20px rgba(0, 0, 0, 0.2);
+			transform: translate(0, -4px);
+			transition: var(--transition);
+		}
+	}
+}
