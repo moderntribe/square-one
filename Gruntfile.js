@@ -163,7 +163,13 @@ module.exports = function (grunt) {
 
 	grunt.registerTask(
 		'dev', [
-			'browserSync',
+			'browserSync:dev',
+			'watch',
+		]);
+
+	grunt.registerTask(
+		'devDocker', [
+			'browserSync:devDocker',
 			'watch',
 		]);
 
