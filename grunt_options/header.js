@@ -18,7 +18,7 @@ module.exports = {
 			'/* stylelint-disable */\n'
 		},
 		files: {
-			'<%= pkg._core_theme_assets_path %>/pcss/base/_icons.pcss': ['<%= pkg._core_theme_assets_path %>/pcss/base/_icons.pcss'],
+			'<%= pkg._core_theme_pcss_path %>base/_icons.pcss': ['<%= pkg._core_theme_pcss_path %>base/_icons.pcss'],
 		},
 	},
 
@@ -34,7 +34,7 @@ module.exports = {
 			':root {'
 		},
 		files: {
-			'<%= pkg._core_theme_assets_path %>/pcss/utilities/variables/_icons.pcss': ['<%= pkg._core_theme_assets_path %>/pcss/utilities/variables/_icons.pcss'],
+			'<%= pkg._core_theme_pcss_path %>utilities/variables/_icons.pcss': ['<%= pkg._core_theme_pcss_path %>utilities/variables/_icons.pcss'],
 		},
 	},
 
@@ -43,7 +43,7 @@ module.exports = {
 			text: '/* Core: Global CSS */',
 		},
 		files: {
-			'<%= pkg._core_theme_assets_path %>/css/dist/master.min.css': ['<%= pkg._core_theme_assets_path %>/css/dist/master.min.css'],
+			'<%= pkg._core_theme_css_dist_path %>master.min.css': ['<%= pkg._core_theme_css_dist_path %>master.min.css'],
 		},
 	},
 
@@ -52,7 +52,7 @@ module.exports = {
 			text: '/* Core: Print CSS */',
 		},
 		files: {
-			'<%= pkg._core_theme_assets_path %>/css/dist/print.min.css': ['<%= pkg._core_theme_assets_path %>/css/dist/print.min.css'],
+			'<%= pkg._core_theme_css_dist_path %>print.min.css': ['<%= pkg._core_theme_css_dist_path %>print.min.css'],
 		},
 	},
 
@@ -61,7 +61,7 @@ module.exports = {
 			text: '/* Core: Visual Editor CSS */',
 		},
 		files: {
-			'<%= pkg._core_theme_assets_path %>/css/admin/dist/editor-style.min.css': ['<%= pkg._core_theme_assets_path %>/css/admin/dist/editor-style.min.css'],
+			'<%= pkg._core_admin_css_dist_path %>editor-style.min.css': ['<%= pkg._core_admin_css_dist_path %>editor-style.min.css'],
 		},
 	},
 
@@ -70,7 +70,7 @@ module.exports = {
 			text: '/* Core: WordPress Login CSS */',
 		},
 		files: {
-			'<%= pkg._core_theme_assets_path %>/css/admin/dist/login.min.css': ['<%= pkg._core_theme_assets_path %>/css/admin/dist/login.min.css'],
+			'<%= pkg._core_admin_css_dist_path %>login.min.css': ['<%= pkg._core_admin_css_dist_path %>login.min.css'],
 		},
 	},
 
@@ -79,7 +79,7 @@ module.exports = {
 			text: '/* Core: Legacy Page CSS */',
 		},
 		files: {
-			'<%= pkg._core_theme_assets_path %>/css/dist/legacy.min.css': ['<%= pkg._core_theme_assets_path %>/css/dist/legacy.min.css'],
+			'<%= pkg._core_theme_css_dist_path %>legacy.min.css': ['<%= pkg._core_theme_css_dist_path %>legacy.min.css'],
 		},
 	},
 };

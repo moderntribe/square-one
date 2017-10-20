@@ -13,8 +13,8 @@ var defaultOpts = {
 module.exports = {
 	themeCSS: {
 		files: [
-			'<%= pkg._core_theme_assets_path %>/pcss/**/*.pcss',
-			'!<%= pkg._core_theme_assets_path %>/pcss/admin/*.pcss',
+			'<%= pkg._core_theme_pcss_path %>**/*.pcss',
+			'!<%= pkg._core_admin_pcss_path %>**/*.pcss',
 		],
 		tasks: [
 			'postcss:theme',
@@ -23,20 +23,41 @@ module.exports = {
 		options: defaultOpts,
 	},
 
-	themeAdmin: {
+	themeLogin: {
 		files: [
-			'<%= pkg._core_theme_assets_path %>/pcss/admin/*.pcss',
+			'<%= pkg._core_admin_pcss_path %>login.pcss',
+		],
+		tasks: [
+			'postcss:themeWPLogin',
+		],
+		options: defaultOpts,
+	},
+
+	themeEditor: {
+		files: [
+			'<%= pkg._core_admin_pcss_path %>editor-styles.pcss',
 		],
 		tasks: [
 			'postcss:themeWPEditor',
-			'postcss:themeWPLogin',
+		],
+		options: defaultOpts,
+	},
+
+	themeAdmin: {
+		files: [
+			'<%= pkg._core_admin_pcss_path %>**/*.pcss',
+			'!<%= pkg._core_admin_pcss_path %>editor-styles.pcss',
+			'!<%= pkg._core_admin_pcss_path %>login.pcss',
+		],
+		tasks: [
+			'postcss:themeWPAdmin',
 		],
 		options: defaultOpts,
 	},
 
 	themeScripts: {
 		files: [
-			'<%= pkg._core_theme_assets_path %>/js/src/**/*.js',
+			'<%= pkg._core_theme_js_src_path %>**/*.js',
 		],
 		tasks: [
 			'webpack:themeDev',
@@ -44,9 +65,31 @@ module.exports = {
 		options: defaultOpts,
 	},
 
+	adminScripts: {
+		files: [
+			'<%= pkg._core_admin_js_src_path %>**/*.js',
+		],
+		tasks: [
+			'webpack:adminDev',
+		],
+		options: defaultOpts,
+	},
+
+	utilScripts: {
+		files: [
+			'<%= pkg._core_theme_js_util_path %>**/*.js',
+		],
+		tasks: [
+			'webpack:themeDev',
+			'webpack:adminDev',
+		],
+		options: defaultOpts,
+	},
+
 	themeTemplates: {
 		files: [
 			'<%= pkg._core_theme_path %>/**/*.php',
+			'<%= pkg._core_theme_path %>/**/*.twig',
 		],
 		options: defaultOpts,
 	},

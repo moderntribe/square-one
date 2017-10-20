@@ -101,6 +101,8 @@ module.exports = function (grunt) {
 			'header:theme',
 			'postcss:themeWPEditor',
 			'postcss:themeWPEditorMin',
+			'postcss:themeWPAdmin',
+			'postcss:themeWPAdminMin',
 			'header:themeWPEditor',
 			'postcss:themeWPLogin',
 			'postcss:themeWPLoginMin',
