@@ -31,6 +31,10 @@ module.exports = {
 			'header:theme',
 		],
 		[
+			'postcss:themeWPAdmin',
+			'postcss:themeWPAdminMin',
+		],
+		[
 			'postcss:themeWPEditor',
 			'postcss:themeWPEditorMin',
 			'header:themeWPEditor',

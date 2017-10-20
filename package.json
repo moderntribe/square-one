@@ -115,7 +115,7 @@
   },
   "jest": {
     "collectCoverage": true,
-    "coverageDirectory": "<rootDir>/wp-content/plugins/core/assets/theme/js/test/__coverage__",
+    "coverageDirectory": "<rootDir>/wp-content/themes/core/js/test/__coverage__",
     "coverageReporters": [
       "json",
       "lcov",
@@ -123,14 +123,14 @@
     ],
     "moduleNameMapper": {},
     "modulePaths": [
-      "<rootDir>/wp-content/plugins/core/assets/theme/js/src",
-      "<rootDir>/wp-content/plugins/core/assets/theme/js/test"
+      "<rootDir>/wp-content/themes/core/js/src",
+      "<rootDir>/wp-content/themes/core/js/test"
     ],
     "setupFiles": [
-      "<rootDir>/wp-content/plugins/core/assets/theme/js/test/setup.js"
+      "<rootDir>/wp-content/themes/core/js/test/setup.js"
     ],
     "roots": [
-      "<rootDir>/wp-content/plugins/core/assets/theme/js/test"
+      "<rootDir>/wp-content/themes/core/js/test"
     ],
     "testRegex": "test/tests/.*\\.test\\.js$"
   }

@@ -77,6 +77,12 @@ module.exports = function (grunt) {
 		]);
 
 	grunt.registerTask(
+		'wp-admin', [
+			'postcss:themeWPAdmin',
+			'postcss:themeWPAdminMin',
+		]);
+
+	grunt.registerTask(
 		'wp-editor', [
 			'postcss:themeWPEditor',
 			'postcss:themeWPEditorMin',
