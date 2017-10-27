@@ -1,4 +1,4 @@
-#  Tribe Square One ([1]) Development Framework
+![./example/example.svg](./logo.svg)
 
 
 [1] is a development framework created by Modern Tribe for use in our WordPress projects. It contains a base for:

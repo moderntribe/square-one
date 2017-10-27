@@ -8,6 +8,6 @@
 module.exports = {
 	coreIcons: {
 		src: '<%= pkg._component_path %>/core-icons.zip',
-		dest: '<%= pkg._component_path %>/theme/icons/core'
+		dest: '<%= pkg._component_path %>/theme/icons/core',
 	},
 };

@@ -7,11 +7,9 @@ module.exports = {
 		},
 		files: {
 			'': [
-				'<%= pkg._core_theme_assets_path %>/js/vendor/**/*',
-				'<%= pkg._core_plugin_assets_path %>/js/dist/**/*',
-				'<%= pkg._core_plugin_assets_path %>/css/**/*',
-				'<%= pkg._core_plugin_assets_path %>/fonts/**/*',
-				'<%= pkg._component_path %>/theme/icons/**/*',
+				'<%= pkg._core_theme_js_vendor_path %>**/*',
+				'<%= pkg._core_theme_js_dist_path %>**/*',
+				'<%= pkg._core_theme_css_path %>**/*',
 			],
 		},
 	},

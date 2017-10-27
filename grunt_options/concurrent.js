@@ -19,9 +19,6 @@ module.exports = {
 			'postcss:themeLint',
 		],
 		[
-			'accessibility',
-		],
-		[
 			'clean:themeMinCSS',
 		],
 	],
@@ -32,6 +29,10 @@ module.exports = {
 			'postcss:themeMin',
 			'header:themePrint',
 			'header:theme',
+		],
+		[
+			'postcss:themeWPAdmin',
+			'postcss:themeWPAdminMin',
 		],
 		[
 			'postcss:themeWPEditor',
@@ -54,7 +55,7 @@ module.exports = {
 			'webpack',
 			'uglify:themeMin',
 			'concat:themeMinVendors',
-			'clean:themeMinVendorJS'
+			'clean:themeMinVendorJS',
 		],
 		'setPHPConstant',
 	],

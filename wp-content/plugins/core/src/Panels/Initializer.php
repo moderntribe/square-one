@@ -267,26 +267,14 @@ class Initializer {
 	}
 
 	public function thumbnail_url( $filename ) {
-		return plugins_url( 'assets/admin/panels/thumbnails/' . $filename, $this->plugin_file );
+		return trailingslashit( get_stylesheet_directory_uri() ) . 'img/admin/panels/thumbnails/' . $filename;
 	}
 
 	public function layout_icon_url( $filename ) {
-		return plugins_url( 'assets/admin/panels/icons/standard/' . $filename, $this->plugin_file );
+		return trailingslashit( get_stylesheet_directory_uri() ) . 'img/admin/panels/icons/standard/' . $filename;
 	}
 
 	public function swatch_icon_url( $filename ) {
-		return plugins_url( 'assets/admin/panels/icons/swatches/' . $filename, $this->plugin_file );
-	}
-
-	/**
-	 * @param string $hook_suffix
-	 *
-	 * @return void
-	 * @action admin_enqueue_scripts
-	 */
-	public function enqueue_admin_css( $hook_suffix ) {
-		if ( $hook_suffix === 'post.php' || $hook_suffix === 'post-new.php' ) {
-			wp_enqueue_style( 'core-panels-admin', plugins_url( 'assets/admin/panels/panels.css', $this->plugin_file ), [], tribe_get_version() );
-		}
+		return trailingslashit( get_stylesheet_directory_uri() ) . 'img/admin/panels/icons/swatches/' . $filename;
 	}
 }
