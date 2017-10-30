@@ -159,6 +159,7 @@ class Image extends Component {
 			'target' => $this->options[ static::LINK_TARGET ],
 			'title'  => ! empty( $this->options[ static::LINK_TITLE ] ) ? $this->options[ static::LINK_TITLE ] : '',
 			'class'  => ! empty( $this->options[ static::LINK_CLASS ] ) ? $this->options[ static::LINK_CLASS ] : '',
+			'rel'    => $this->options[ static::LINK_TARGET ] === '_blank' ? 'rel="noopener"' : '';
 		];
 	}
 

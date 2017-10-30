@@ -6,7 +6,7 @@
 	{% endif %}
 
 		{% if link is not empty %}
-		<a href="{{ link.url }}" target="{{ link.target }}" title="{{ link.title }}" class="{{ link.class }}" rel="noopener">
+		<a href="{{ link.url }}" target="{{ link.target }}" title="{{ link.title }}" class="{{ link.class }}" {{ rel }}>
 		{% endif %}
 
 		{% if img is not empty %}
