@@ -112,6 +112,7 @@ class CPT_Generator extends \WP_CLI_Command {
 			\WP_CLI::error( 'Sorry...something unexpected happened when we tried to write the file' );
 		}
 
+		$this->service_provider_class = ucfirst( $this->slug );
 		$this->service_provider_handle = $handle;
 	}
 
@@ -125,10 +126,10 @@ class CPT_Generator extends \WP_CLI_Command {
 
 namespace Tribe\Project\Service_Providers\Post_Types;
 
-use Tribe\Project\Post_Types\{$this->class_name};
+use Tribe\Project\Post_Types\\{$this->class_name};
 
-class {$this->class_name}_Post_Type_Service_Provider extends Post_Type_Service_Provider {
-	protected \$post_type_class = {$this->class_name}\{$this->class_name}::class;
+class {$this->service_provider_class}_Service_Provider extends Post_Type_Service_Provider {
+	protected \$post_type_class = {$this->class_name}\\{$this->class_name}::class;
 	protected \$config_class = {$this->class_name}\Config::class;
 }
 SERVICE_PROVIDER;
