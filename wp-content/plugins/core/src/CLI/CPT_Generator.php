@@ -13,6 +13,8 @@ class CPT_Generator extends \WP_CLI_Command {
 	private $namespace;
 	private $assoc_args;
 	private $handle;
+	private $config_handle;
+	private $service_provider_handle;
 
 	public function __construct( Container $container ) {
 		$this->container = $container;
@@ -31,7 +33,7 @@ class CPT_Generator extends \WP_CLI_Command {
 	 * : The name of the CPT.
 	 *
 	 * [--config]
-	 * : Whether or not to create a config file by default.
+	 * : Whether or not to create a config file by default. Defaults to true, pass --no-config if you don't need one.
      *
 	 * [--single=<single>]
 	 * : Singular CPT.
@@ -102,22 +104,34 @@ class CPT_Generator extends \WP_CLI_Command {
 	}
 
 	private function new_service_provider_file(){
+		$new_service_provider = trailingslashit( dirname( __DIR__, 1 ) ) . 'Service_Providers/Post_Types/' . ucfirst( $this->slug ) . '_Service_Provider.php';
+		if ( file_exists ( $new_service_provider ) ) {
+			\WP_CLI::error( 'Sorry...this service provider apparently already exists.' );
+		}
+		if ( ! $handle = fopen( $new_service_provider, 'w' ) ) {
+			\WP_CLI::error( 'Sorry...something unexpected happened when we tried to write the file' );
+		}
 
-		
-		//trailingslashit( dirname( __DIR__, 1 ) ) . 'Post_Types/' . ucfirst( $this->slug )
-
-//		$new_service_provider = trailingslashit( $this->service_provider_directory ) . ucfirst( $this->slug ) . '_Service_Provider.php';
-//		if ( file_exists( $new_class ) ) {
-//			\WP_CLI::error( 'Sorry...this class apparently already exists' );
-//		}
-//		if ( ! $handle = fopen( $new_class, 'w' ) ) {
-//			\WP_CLI::error( 'Sorry...something went wrong when we tried to write to the new class' );
-//		}
-//		$this->handle = $handle;
+		$this->service_provider_handle = $handle;
 	}
 
 	private function write_service_provider_file(){
+		fwrite( $this->service_provider_handle, $this->get_service_provider_contents() );
+	}
 
+	private function get_service_provider_contents() {
+		return <<< SERVICE_PROVIDER
+<?php
+
+namespace Tribe\Project\Service_Providers\Post_Types;
+
+use Tribe\Project\Post_Types\{$this->class_name};
+
+class {$this->class_name}_Post_Type_Service_Provider extends Post_Type_Service_Provider {
+	protected \$post_type_class = {$this->class_name}\{$this->class_name}::class;
+	protected \$config_class = {$this->class_name}\Config::class;
+}
+SERVICE_PROVIDER;
 	}
 
 	private function new_post_object_class_file() {
