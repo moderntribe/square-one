@@ -35,7 +35,10 @@ class ContentSlider extends Panel {
 			SliderComponent::SHOW_CAROUSEL   => false,
 			SliderComponent::SHOW_ARROWS     => true,
 			SliderComponent::SHOW_PAGINATION => false,
+			SliderComponent::CLASSES         => [ 'c-slider--content-slider' ],
+			SliderComponent::WRAPPER_CLASSES => [ 'c-slider__wrapper--content-slider' ],
 			SliderComponent::MAIN_CLASSES    => $this->get_slider_main_classes(),
+			SliderComponent::SLIDE_CLASSES   => [ 'c-slider__slide--content-slider' ],
 		];
 
 		$slider = SliderComponent::factory( $options );
@@ -65,8 +68,8 @@ class ContentSlider extends Panel {
 				$options = [
 					Content_Block::TITLE           => $this->get_content_block_title( $slide ),
 					Content_Block::TEXT            => $this->get_content_block_text( $slide ),
-					Content_Block::CLASSES         => [],
-					Content_Block::CONTENT_CLASSES => [],
+					Content_Block::CLASSES         => [ 'c-content-block--content-slider' ],
+					Content_Block::CONTENT_CLASSES => [ 't-content t-content--light u-text-align-center c-content-block__desc--content-slider' ],
 					Content_Block::BUTTON          => $this->get_content_block_button( $slide ),
 				];
 
@@ -82,7 +85,7 @@ class ContentSlider extends Panel {
 	}
 
 	protected function get_slider_main_classes() {
-		$classes = [ 'c-slider__main' ];
+		$classes = [ 'c-slider__main c-slider__main--content-slider' ];
 
 		return $classes;
 	}

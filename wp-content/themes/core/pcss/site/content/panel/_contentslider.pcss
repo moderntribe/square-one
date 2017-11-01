@@ -1,0 +1,70 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Panels: Content Slider
+ *
+ * ----------------------------------------------------------------------------- */
+
+.site-panel--content-slider {
+
+	.swiper-button-next,
+	.swiper-container-rtl .swiper-button-prev {
+		right: 30px;
+	}
+
+	.swiper-button-prev,
+	.swiper-container-rtl .swiper-button-next {
+		left: 30px;
+	}
+}
+
+/* Slider Component Overrides */
+
+.c-slider--content-slider {
+	height: 90vh;
+	max-height: 700px;
+	position: relative;
+}
+
+.c-slider__main--content-slider {
+	height: 100%;
+	position: relative;
+}
+
+.c-slider__wrapper--content-slider {
+	position: relative;
+}
+
+/* Content Block Component Overrides */
+
+.c-content-block--content-slider {
+	align-items: center;
+	display: flex;
+	height: 100%;
+}
+
+.c-content-block__desc--content-slider {
+	margin: 0 auto;
+	max-width: 800px;
+	padding: 0 80px;
+	position: relative;
+
+	@include bp(viewport-medium) {
+		padding: 0 30px;
+	}
+}
+
+.c-slider__slide--content-slider {
+	position: relative;
+
+	&:before {
+		background: var(--color-black-a-60);
+		bottom: 0;
+		content: "";
+		left: 0;
+		position: absolute;
+		right: 0;
+		top: 0;
+		width: 100%;
+		z-index: 1;
+	}
+}

@@ -31,7 +31,7 @@ class ContentSlider extends Panel_Type_Config {
 		] ) );
 
 		$slides = new Fields\Repeater( [
-			'label'            => __( 'Logos', 'tribe' ),
+			'label'            => __( 'Slides', 'tribe' ),
 			'name'             => self::FIELD_SLIDES,
 			'min'              => 2,
 			'max'              => 5,
@@ -62,7 +62,7 @@ class ContentSlider extends Panel_Type_Config {
 
 		$slides->add_field( new Fields\Link( [
 			'name'  => self::FIELD_SLIDE_CTA,
-			'label' => __( 'Logo Link', 'tribe' ),
+			'label' => __( 'Slide CTA', 'tribe' ),
 		] ) );
 
 		$panel->add_field( $slides );

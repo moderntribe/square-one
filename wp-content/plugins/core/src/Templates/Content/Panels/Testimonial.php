@@ -49,11 +49,14 @@ class Testimonial extends Panel {
 	}
 
 	protected function get_slider(): string {
+
 		$options = [
 			Slider::SLIDES          => $this->get_slides(),
 			Slider::SHOW_CAROUSEL   => false,
 			Slider::SHOW_ARROWS     => false,
 			Slider::SHOW_PAGINATION => true,
+			Slider::CLASSES         => [ 'c-slider--testimonial' ],
+			Slider::WRAPPER_CLASSES => [ 'c-slider__wrapper--testimonial' ],
 			Slider::MAIN_CLASSES    => $this->get_slider_main_classes(),
 		];
 
