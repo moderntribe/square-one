@@ -76,7 +76,9 @@ class Image_Wrap {
 		 *
 		 * Pattern #1:
 		 * Update any <figcaption> whose parent <figure> has `style="width: 000px"` applied by applying the same
-		 * style attribute to the <figcaption> tag. Related issue: https://central.tri.be/issues/85190
+		 * style attribute to the <figcaption> tag.
+		 *
+		 * Example: http://p.tri.be/gK8px/3zENyNPO becomes: http://p.tri.be/VS5DMO/y5RMRKVc
 		 *
 		 * Group    Regex                                       Description
 		 *          <figure                                     Start the figure tag match
@@ -96,7 +98,7 @@ class Image_Wrap {
 		 *          s modifier                                  allows . to match multiple lines (important for 5th group)
 		 *
 		 * Pattern #2:
-		 * Replace WP's default CSS <figure> classes with our BEM-ified classes
+		 * Replace WP's default CSS <figure> classes with our BEMified classes
 		 */
 
 		$patterns = [
