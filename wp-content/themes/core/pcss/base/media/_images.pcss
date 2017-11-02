@@ -41,6 +41,7 @@ img {
  * ----------------------------------------------------------------------------- */
 
 .wp-caption-text {
+	max-width: 100%;
 	margin: var(--spacer-xs) 0 0;
 	font-size: 14px;
 	line-height: var(--line-height-s);
@@ -65,6 +66,19 @@ img {
 		margin-top: 5px;
 		margin-bottom: var(--spacer-lg);
 		max-width: 30%;
+	}
+
+	/**
+	 * CASE: Left or right aligned captioned images shouldn't be centered inside the container.
+	 * This can cause a misalignment between the image and the caption text if the image is smaller
+	 * than the size defined by WordPress's caption shortcode.
+	 */
+	&.wp-image--caption {
+
+		img {
+			margin-left: 0;
+			margin-right: 0;
+		}
 	}
 }
 
