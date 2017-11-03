@@ -47,7 +47,7 @@ class Tribe_Branding {
 	}
 
     private function get_branding_assets_url() {
-  		return get_stylesheet_directory_uri() . '/branding-assets/';
+  		return get_stylesheet_directory_uri() . '/img/theme/branding-assets/';
   	}
 
     /**

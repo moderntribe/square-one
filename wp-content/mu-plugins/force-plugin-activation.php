@@ -22,6 +22,7 @@ class Force_Plugin_Activation {
 		'limit-login-attempts/limit-login-attempts.php',
 		'panel-builder/tribe-panel-builder.php',
 		'tribe-admin-dashboard/tribe-admin-dashboard.php',
+		'tribe-branding/tribe-branding.php',
 	);
 
 	/**

@@ -4,7 +4,7 @@ Plugin Name: Tribe Branding
 Description: Update links, logos, and social icons
 Author: Modern Tribe, Inc.
 Author URI: http://tri.be
-Version: 1.0
+Version: 2.0
 */
 
 /**
