@@ -6,7 +6,7 @@ namespace Tribe\Project\Twig;
 
 class Extension extends \Twig_Extension {
 	public function getFilters() {
-		$filters = [
+		return [
 			new \Twig_SimpleFilter( 'strip_shortcodes', 'strip_shortcodes' ),
 			new \Twig_SimpleFilter( 'wp_trim_words', 'wp_trim_words' ),
 			new \Twig_SimpleFilter( 'sanitize_title', 'sanitize_title' ),
@@ -21,24 +21,20 @@ class Extension extends \Twig_Extension {
 			new \Twig_SimpleFilter( 'esc_attr', 'esc_attr' ),
 			new \Twig_SimpleFilter( 'esc_html', 'esc_html' ),
 			new \Twig_SimpleFilter( 'esc_js', 'esc_js' ),
-			new \Twig_SimpleFilter( 'print_r', function( $arg ) {
+			new \Twig_SimpleFilter( 'print_r', function ( $arg ) {
 				return print_r( $arg, true );
 			} ),
 		];
-
-		return $filters;
 	}
 
 	public function getFunctions() {
-		$functions = [
+		return [
 			new \Twig_SimpleFunction( 'do_action', 'do_action' ),
 			new \Twig_SimpleFunction( 'do_shortcode', 'do_shortcode' ),
 			new \Twig_SimpleFunction( 'bloginfo', function ( $show = '', $filter = 'raw' ) {
 				return get_bloginfo( $show, $filter );
 			} ),
 		];
-
-		return $functions;
 	}
 
 

@@ -3,7 +3,7 @@
 Check `local-config-sample.php` for how to setup your basic wp constants when initializing the project.
 
 The main theme for this system lives in `/wp-content/themes/core`.
-The assets (js/css/img/fonts) for this and its child themes live in `/wp-content/plugins/core/assets/theme`. 
+The assets (js/css/img/fonts) for this and its child themes live in `/wp-content/themes/core`. 
 
 If needed base child themes off of this core for the templates for now. 
 

@@ -77,6 +77,12 @@ module.exports = function (grunt) {
 		]);
 
 	grunt.registerTask(
+		'wp-admin', [
+			'postcss:themeWPAdmin',
+			'postcss:themeWPAdminMin',
+		]);
+
+	grunt.registerTask(
 		'wp-editor', [
 			'postcss:themeWPEditor',
 			'postcss:themeWPEditorMin',
@@ -101,6 +107,8 @@ module.exports = function (grunt) {
 			'header:theme',
 			'postcss:themeWPEditor',
 			'postcss:themeWPEditorMin',
+			'postcss:themeWPAdmin',
+			'postcss:themeWPAdminMin',
 			'header:themeWPEditor',
 			'postcss:themeWPLogin',
 			'postcss:themeWPLoginMin',
@@ -155,7 +163,13 @@ module.exports = function (grunt) {
 
 	grunt.registerTask(
 		'dev', [
-			'browserSync',
+			'browserSync:dev',
+			'watch',
+		]);
+
+	grunt.registerTask(
+		'devDocker', [
+			'browserSync:devDocker',
 			'watch',
 		]);
 
