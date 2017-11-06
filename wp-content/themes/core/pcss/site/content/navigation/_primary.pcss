@@ -1,25 +1,22 @@
 .site-header__nav {
-	display: none;
-
-	@media (--viewport-medium) {
-		display: block;
-		height: 90px;
-	}
+	display: block;
+	height: 90px;
 }
 
 .site-header__nav-list {
+	display: flex;
+	height: 100%;
+	flex-direction: row;
+	align-items: center;
+	margin-left: 70px;
+
 	@media (--viewport-medium) {
-		display: flex;
-		height: 100%;
-		flex-direction: row;
-		align-items: center;
+		margin-left: 0;
 	}
 }
 
 .primary__list-child {
-	@media (--viewport-medium) {
-		display: none;
-	}
+	display: none;
 }
 
 button.primary__action--has-children {
@@ -36,6 +33,8 @@ button.primary__action--has-children {
 
 .primary__list-item,
 button.primary__action--has-children {
+	font-size: 14px;
+	padding-left: 10px;
 
 	&:hover {
 		color: var(--color-link);
@@ -43,5 +42,10 @@ button.primary__action--has-children {
 
 	.home & {
 		color: var(--color-white);
+	}
+
+	@media (--viewport-medium) {
+		font-size: 18px;
+		padding-left: 30px;
 	}
 }

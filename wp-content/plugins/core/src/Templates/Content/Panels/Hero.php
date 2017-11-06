@@ -152,6 +152,10 @@ class Hero extends Panel {
 
 		$button_object = Button::factory( $options );
 
+		if ( empty( $this->panel_vars[ HeroPanel::FIELD_CTA ][ Button::URL ] ) ) {
+			return [];
+		}
+
 		return $button_object->render();
 	}
 

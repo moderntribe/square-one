@@ -29,6 +29,11 @@ class ContentSlider extends Panel {
 	}
 
 	protected function get_slider(): string {
+
+		$main_attrs = [
+			'data-swiper-options' => '{"effect":"coverflow"}',
+		];
+
 		$options = [
 			SliderComponent::SLIDES          => $this->get_slides(),
 			SliderComponent::THUMBNAILS      => false,
@@ -39,6 +44,7 @@ class ContentSlider extends Panel {
 			SliderComponent::WRAPPER_CLASSES => [ 'c-slider__wrapper--content-slider' ],
 			SliderComponent::MAIN_CLASSES    => $this->get_slider_main_classes(),
 			SliderComponent::SLIDE_CLASSES   => [ 'c-slider__slide--content-slider' ],
+			SliderComponent::MAIN_ATTRS      => $main_attrs,
 		];
 
 		$slider = SliderComponent::factory( $options );
@@ -127,6 +133,10 @@ class ContentSlider extends Panel {
 		];
 
 		$button_object = Button::factory( $options );
+
+		if ( empty( $slide[ ContentSliderPanel::FIELD_SLIDE_CTA ][ Button::URL ] ) ) {
+			return [];
+		}
 
 		return $button_object->render();
 	}

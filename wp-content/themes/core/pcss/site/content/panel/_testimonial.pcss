@@ -48,8 +48,14 @@
 .c-quote--testimonial {
 
 	.c-quote__text {
-		font-size: 42px;
+		font-size: 38px;
+		line-height: 1.2;
 		font-weight: var(--font-weight-bold);
+
+		@media (--viewport-medium) {
+			font-size: 42px;
+			line-height: 1.4;
+		}
 	}
 
 	.t-content & {
