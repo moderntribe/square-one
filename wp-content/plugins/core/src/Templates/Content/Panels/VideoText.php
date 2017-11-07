@@ -6,6 +6,7 @@ namespace Tribe\Project\Templates\Content\Panels;
 use Tribe\Project\Panels\Types\VideoText as VideoTextPanel;
 use Tribe\Project\Templates\Components\Button;
 use Tribe\Project\Templates\Components\Content_Block;
+use Tribe\Project\Templates\Components\Video;
 use Tribe\Project\Templates\Components\Text;
 use Tribe\Project\Templates\Components\Title;
 
@@ -108,13 +109,13 @@ class VideoText extends Panel {
 
 	protected function get_panel_video() {
 
-		$video = false;
+		$options = [
+			Video::VIDEO_URL => esc_html( $this->panel_vars[ VideoTextPanel::FIELD_VIDEO ] ),
+		];
 
-		if ( ! empty( $this->panel_vars[ VideoTextPanel::FIELD_VIDEO ] ) ) {
-			$video = apply_filters( 'the_content', $this->panel_vars[ VideoTextPanel::FIELD_VIDEO ] );
-		}
+		$video = Video::factory( $options );
 
-		return $video;
+		return $video->render();
 	}
 
 	protected function get_panel_classes() {

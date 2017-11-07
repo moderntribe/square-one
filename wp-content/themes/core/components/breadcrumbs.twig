@@ -1,0 +1,14 @@
+{# Component: Breadcrumbs #}
+
+<div class="{{ wrapper_classes }}" {{ wrapper_attrs }}>
+	<ul class="{{ main_classes }}">
+
+		{% for item in items %}
+			<li class="{{ item_classes }}">
+				<a href="{{ item.url }}" class="{{ link_classes }}" {{ link_attrs }}>
+					{{ item.label }}
+				</a>
+			</li>
+		{% endfor %}
+	</ul>
+</div>
