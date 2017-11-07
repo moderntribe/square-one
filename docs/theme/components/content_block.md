@@ -15,70 +15,25 @@ A component comprised of the title, text and button components. These are all op
 * **Type:** _string_ 
 * **Description:** The wrapper classes
 
-#### `cta_classes` 
-* **Default:** _''_ 
-* **Type:** _string_ 
-* **Description:** The buttons - in cta mode - additional classes
-
 #### `content_classes` 
 * **Default:** _c-content-block__content_ 
 * **Type:** _string_ 
 * **Description:** The content classes for the title, text and button wrapper
 
-#### `cta` 
-* **Default:** _[]_ 
-* **Type:** _array_ 
-* **Description:** The array that contains the cta url, label and target
-
-#### `url` 
-* **Default:** _''_ 
+#### `button` 
+* **Default:** ''
 * **Type:** _string_ 
-* **Description:**  Lives in the cta array. The url.
-
-#### `label` 
-* **Default:** _''_ 
-* **Type:** _string_ 
-* **Description:** Lives in the cta array. The link text
-
-#### `target` 
-* **Default:** _''_ 
-* **Type:** _string_ 
-* **Description:** Lives in the cta array The link target
-
-#### `text` 
-* **Default:** _''_ 
-* **Type:** _string_ 
-* **Description:** The text/html string that makes up the main content area
-
-#### `text_attrs` 
-* **Default:** _''_ 
-* **Type:** _string_ 
-* **Description:** Data attributes for the text block. You'll want to pass in livetext attrs if using in panels
-
-#### `text_classes` 
-* **Default:** _c-content-block__desc_ 
-* **Type:** _string_ 
-* **Description:** Classes for the wrapper on the text block
+* **Description:** A rendered button component.
 
 #### `title` 
 * **Default:** _''_ 
 * **Type:** _string_ 
-* **Description:** The title string
+* **Description:**  A rendered title component.
 
-#### `title_attrs` 
+#### `text` 
 * **Default:** _''_ 
 * **Type:** _string_ 
-* **Description:** Data attributes on title. You'll want to pass in livetext attrs if using in panels
-
-#### `title_classes` 
-* **Default:** _c-content-block__title_ 
-* **Type:** _string_ 
-* **Description:** Classes on title
-
-#### `title_tag` 
-* **Default:** _''_ 
-* **Type:** _string_ 
-* **Description:** The tag for the title (h1, h2 etc)
+* **Description:** A rendered text component.
 
 ### Example Usage
 
@@ -117,7 +72,11 @@ And the panel controller using the  component
 namespace Tribe\Project\Templates\Content\Panels;
 
 use Tribe\Project\Panels\Types\Hero as HeroPanel;
+use Tribe\Project\Templates\Components\Button;
+use Tribe\Project\Templates\Components\Image;
 use Tribe\Project\Templates\Components\Content_Block;
+use Tribe\Project\Templates\Components\Text;
+use Tribe\Project\Templates\Components\Title;
 
 class Hero extends Panel {
 
@@ -131,10 +90,33 @@ class Hero extends Panel {
 
 	public function get_mapped_panel_data(): array {
 		$data = [
+			'text_color'    => $this->text_color(),
+			'layout'        => $this->get_layout(),
+			'image'         => $this->get_image(),
 			'content_block' => $this->get_content_block(),
 		];
 
 		return $data;
+	}
+
+	protected function get_image() {
+
+		if ( empty( $this->panel_vars[ HeroPanel::FIELD_IMAGE ] ) ) {
+			return false;
+		}
+
+		$options = [
+			'img_id'          => $this->panel_vars[ HeroPanel::FIELD_IMAGE ],
+			'component_class' => 'c-image',
+			'as_bg'           => true,
+			'use_lazyload'    => false,
+			'echo'            => false,
+			'wrapper_class'   => 'c-image__bg',
+		];
+
+		$image_obj = Image::factory( $options );
+
+		return $image_obj->render();
 	}
 
 	protected function get_content_block() {
@@ -159,17 +141,87 @@ class Hero extends Panel {
 		}
 
 		$options = [
-			Content_Block::TITLE       => $this->panel_vars[ HeroPanel::FIELD_TITLE ],
-			Content_Block::TEXT        => $this->panel_vars[ HeroPanel::FIELD_DESCRIPTION ],
-			Content_Block::CTA         => $this->panel_vars[ HeroPanel::FIELD_CTA ],
-			Content_Block::TITLE_ATTRS => $title_attrs,
-			Content_Block::TEXT_ATTRS  => $description_attrs,
-			Content_Block::TITLE_TAG   => 'h1',
+			Content_Block::TITLE           => $this->get_hero_title( $title_attrs ),
+			Content_Block::TEXT            => $this->get_hero_text( $description_attrs ),
+			Content_Block::BUTTON          => $this->get_hero_button(),
+			Content_Block::CLASSES         => [],
+			Content_Block::CONTENT_CLASSES => [],
 		];
 
 		$content_block_obj = Content_Block::factory( $options );
 
 		return $content_block_obj->render();
+	}
+
+	protected function get_layout() {
+
+		$classes = [];
+
+		if ( HeroPanel::FIELD_LAYOUT_OPTION_CONTENT_RIGHT === $this->panel_vars[ HeroPanel::FIELD_LAYOUT ] ) {
+			$classes[] = 'g-row--pull-right';
+		}
+
+		if ( HeroPanel::FIELD_LAYOUT_OPTION_CONTENT_CENTER === $this->panel_vars[ HeroPanel::FIELD_LAYOUT ] ) {
+			$classes[] = 'g-row--center u-text-align-center';
+		}
+
+		return implode( ' ', $classes );
+	}
+
+	protected function text_color() {
+
+		$classes = [];
+
+		if ( HeroPanel::FIELD_TEXT_LIGHT === $this->panel_vars[ HeroPanel::FIELD_TEXT_COLOR ] ) {
+			$classes[] = 't-content--light';
+		}
+
+		if ( HeroPanel::FIELD_TEXT_DARK === $this->panel_vars[ HeroPanel::FIELD_TEXT_COLOR ] ) {
+			$classes[] = 't-content--dark';
+		}
+
+		return implode( ' ', $classes );
+	}
+
+	protected function get_hero_title( $title_attrs ) {
+		$options = [
+			Title::CLASSES => [],
+			Title::TAG     => 'h1',
+			Title::ATTRS   => $title_attrs,
+			Title::TITLE   => $this->panel_vars[ HeroPanel::FIELD_TITLE ],
+		];
+
+		$title_object = Title::factory( $options );
+
+		return $title_object->render();
+	}
+
+	protected function get_hero_text( $description_attrs ) {
+		$options = [
+			Text::ATTRS   => $description_attrs,
+			Text::CLASSES => [],
+			Text::TEXT    => $this->panel_vars[ HeroPanel::FIELD_DESCRIPTION ],
+		];
+
+		$text_object = Text::factory( $options );
+
+		return $text_object->render();
+	}
+
+	protected function get_hero_button() {
+		$options = [
+			Button::CLASSES     => [],
+			Button::ATTRS       => '',
+			Button::TAG         => '',
+			Button::TARGET      => $this->panel_vars[ HeroPanel::FIELD_CTA ][ Button::TARGET ],
+			Button::BTN_AS_LINK => true,
+			Button::URL         => $this->panel_vars[ HeroPanel::FIELD_CTA ][ Button::URL ],
+			Button::LABEL       => $this->panel_vars[ HeroPanel::FIELD_CTA ][ Button::LABEL ],
+		];
+
+		$button_object = Button::factory( $options );
+
+		return $button_object->render();
 	}
 
 	public static function instance() {

@@ -11,7 +11,7 @@ class Editor_Styles {
 	 */
 	public function visual_editor_styles() {
 
-		$css_dir    = trailingslashit( tribe_assets_url( 'theme/css/admin' ) );
+		$css_dir    = trailingslashit( get_stylesheet_directory_uri() ) . 'css/admin/';
 		$editor_css = 'editor-style.css';
 
 		// Production

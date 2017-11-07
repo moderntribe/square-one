@@ -11,10 +11,10 @@ module.exports = {
 			patterns: [
 				{
 					match: /url\('fonts\//g,
-					replacement: function () {
+					replacement () {
 						return 'url(\'var(--path-fonts)/icons-core/';
-					}
-				}
+					},
+				},
 			],
 		},
 		files: [
@@ -22,26 +22,26 @@ module.exports = {
 				expand: true,
 				flatten: true,
 				src: [
-					'<%= pkg._core_theme_assets_path %>/pcss/base/_icons.pcss'
+					'<%= pkg._core_theme_pcss_path %>base/_icons.pcss',
 				],
-				dest: '<%= pkg._core_theme_assets_path %>/pcss/base/'
-			}
-		]
+				dest: '<%= pkg._core_theme_pcss_path %>base/',
+			},
+		],
 	},
 	coreIconsVariables: {
 		options: {
 			patterns: [
 				{
 					match: /\$/g,
-					replacement: function () {
+					replacement () {
 						return '--';
-					}
+					},
 				},
 				{
 					match: /\$icomoon-font-path: "fonts" !default;/g,
-					replacement: function () {
+					replacement () {
 						return '';
-					}
+					},
 				},
 			],
 		},
@@ -50,10 +50,10 @@ module.exports = {
 				expand: true,
 				flatten: true,
 				src: [
-					'<%= pkg._core_theme_assets_path %>/pcss/utilities/variables/_icons.pcss'
+					'<%= pkg._core_theme_pcss_path %>utilities/variables/_icons.pcss',
 				],
-				dest: '<%= pkg._core_theme_assets_path %>/pcss/utilities/variables/'
-			}
-		]
+				dest: '<%= pkg._core_theme_pcss_path %>utilities/variables/',
+			},
+		],
 	},
 };
