@@ -21,13 +21,8 @@ class CLI_Provider implements ServiceProviderInterface {
 		};
 
 		add_action( 'init', function () use ( $container ) {
-			if ( ! defined( 'WP_CLI' ) || ! WP_CLI ) {
-				return;
-			}
-
-			\WP_CLI::add_command( 'pimple', $container['cli.pimple_dump'] );
-			\WP_CLI::add_command( 's1', $container['cli.cpt-generator'] );
-
+			$container['cli.pimple_dump']->register();
+			$container['cli.cpt-generator']->register();
 		}, 0, 0 );
 	}
 }
