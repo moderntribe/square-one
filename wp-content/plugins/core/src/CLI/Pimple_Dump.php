@@ -5,7 +5,7 @@ namespace Tribe\Project\CLI;
 use Pimple\Container;
 use JBZoo\PimpleDumper\PimpleDumper;
 
-class Pimple_Dump extends \WP_CLI_Command {
+class Pimple_Dump extends Square_One_Command {
 
 	private $container;
 
@@ -14,16 +14,22 @@ class Pimple_Dump extends \WP_CLI_Command {
 		parent::__construct();
 	}
 
-	/**
-	 * Dumps the files needed to autocomplete Pimple names
-	 * to be able to use this plugin: https://plugins.jetbrains.com/plugin/7809-silex-pimple-plugin
-	 *
-	 * ## EXAMPLES
-	 *
-	 *     wp pimple dump
-	 *
-	 * @when after_wp_load
-	 */
+	protected function command() {
+		return 'pimple dump';
+	}
+
+	protected function callback() {
+		return [ $this, 'dump' ];
+	}
+
+	protected function description() {
+		return 'Dumps the files needed to autocomplete Pimple names to be able to use this plugin: https://plugins.jetbrains.com/plugin/7809-silex-pimple-plugin';
+	}
+
+	protected function arguments() {
+		return [];
+	}
+
 	public function dump() {
 		$dumper = new PimpleDumper();
 		$dumper->dumpPimple( $this->container );
