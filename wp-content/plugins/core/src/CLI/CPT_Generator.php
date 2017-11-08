@@ -47,15 +47,15 @@ class CPT_Generator extends Square_One_Command {
 				'default'     => true,
 			],
 			[
-				'type'     => 'assoc',
-				'name'     => 'single',
-				'optional' => true,
+				'type'        => 'generic',
+				'name'        => 'single',
+				'optional'    => true,
 				'description' => 'Singular CPT.',
 			],
 			[
-				'type'     => 'assoc',
-				'name'     => 'plural',
-				'optional' => true,
+				'type'        => 'generic',
+				'name'        => 'plural',
+				'optional'    => true,
 				'description' => 'Plural CPT.',
 			],
 		];
@@ -77,6 +77,8 @@ class CPT_Generator extends Square_One_Command {
 
 		// Create service provider.
 		$this->new_service_provider();
+
+		\WP_CLI::success( 'Way to go! ' . \WP_CLI::colorize( "%W{$this->slug}%n" ) . ' post type has been created' );
 	}
 
 	private function sanitize_slug( $args ) {
