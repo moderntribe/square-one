@@ -70,7 +70,16 @@ class Taxonomy_Generator extends Square_One_Command {
 	public function taxonomy( $args, $assoc_args ) {
 		$this->setup( $args, $assoc_args );
 
+		// Create directory.
 		$this->create_taxonomy_directory();
+
+		// Write file(s).
+		$this->create_taxonomy_class();
+
+		// Write Service Provider.
+		$this->create_service_provider();
+
+		\WP_CLI::success( 'Way to go! ' . \WP_CLI::colorize( "%W{$this->slug}%n" ) . ' taxonomy has been created' );
 	}
 
 	protected function setup( $args, $assoc_args ) {
@@ -104,13 +113,113 @@ class Taxonomy_Generator extends Square_One_Command {
 			return self::POST_TYPES;
 		}
 
-		return explode( ',', $assoc_args['post_types'] );
+		$post_types = explode( ',', $assoc_args['post_types'] );
+		foreach ( $post_types as $post_type ) {
+			if ( ! post_type_exists( $post_type ) ) {
+				\WP_CLI::error( 'Sorry...post type ' . $post_type . ' does not exist.' );
+			}
+		}
+
+		return $post_types;
 	}
 
 	private function create_taxonomy_directory() {
 		$directory = trailingslashit( dirname( __DIR__ ) ) . 'Taxonomies/' . ucfirst( $this->slug );
 		$this->taxonomy_directory = $directory;
 		$this->create_directory( $directory );
+	}
+
+	private function create_taxonomy_class() {
+		$this->new_taxonomy_class_file();
+		if ( $this->assoc_args['config'] ) {
+			$this->new_taxonomy_config_file();
+		}
+	}
+
+	private function create_service_provider() {
+		$service_provider_file = trailingslashit( dirname( __DIR__, 1 ) ) . 'Service_Providers/Taxonomies/' . ucfirst( $this->slug ) . '_Service_Provider.php';
+		$this->write_file( $service_provider_file, $this->get_service_provider_contents() );
+	}
+
+	private function new_taxonomy_class_file() {
+		$class_file = trailingslashit( $this->taxonomy_directory ) . ucfirst( $this->slug ) . '.php';
+		$this->write_file( $class_file, $this->get_taxonomy_class_contents() );
+	}
+
+	private function new_taxonomy_config_file() {
+		$config_file = trailingslashit( $this->taxonomy_directory ) . 'Config.php';
+		$this->write_file( $config_file, $this->get_taxonomy_cofig_contents() );
+	}
+
+	private function get_taxonomy_class_contents() {
+		return "<?php 
+		
+		namespace {$this->namespace};
+		
+		use Tribe\Libs\Taxonomy\Term_Object;
+		
+		class {$this->class_name} extends Term_Object {
+			const NAME = '{$this->slug}';
+		}";
+	}
+
+	private function get_taxonomy_cofig_contents() {
+		return "<?php 
+		
+		namespace {$this->namespace};
+		
+		use Tribe\Libs\Taxonomy\Taxonomy_Config;
+		
+		class Config extends Taxonomy_Config {
+			public function get_args() {
+				return [
+					'hierarchical' => false,
+				];
+			}
+		
+			public function get_labels() {
+				return [
+					'singular' => __( '{$this->assoc_args['single']}', 'tribe' ),
+					'plural'   => __( '{$this->assoc_args['plural']}', 'tribe' ),
+					'slug'     => __( '{$this->slug}', 'tribe' ),
+				];
+			}
+		
+			public function default_terms() {
+				return [
+				];
+			}
+		}";
+	}
+
+	private function get_service_provider_contents() {
+		$post_types = $this->format_post_types();
+
+		return "<?php
+
+		namespace Tribe\Project\Service_Providers\Taxonomies;
+
+		use {$this->namespace};
+
+		class {$this->class_name}_Service_Provider extends Taxonomy_Service_Provider {
+			protected \$taxonomy_class = {$this->class_name}\\{$this->class_name}::class;
+			protected \$config_class = {$this->class_name}\Config::class;
+			{$post_types}
+		}";
+	}
+
+	private function format_post_types() {
+		if ( empty( $this->assoc_args['post_types'] ) ) {
+			return '';
+		}
+
+		$post_types = 'protected $post_types = [ ';
+		foreach ( $this->assoc_args['post_types'] as $post_type ) {
+			$post_types .= '\'' . $post_type . '\', ';
+		}
+		$post_types .= '];' . PHP_EOL;
+
+		return $post_types;
 	}
 
 }
