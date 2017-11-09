@@ -1,9 +1,9 @@
 <?php
 
-namespace %s%1;
+namespace %1$s;
 
 use Tribe\Libs\Taxonomy\Term_Object;
 
-class %s%2 extends Term_Object {
-	const NAME = '%s%2';
+class %2$s extends Term_Object {
+	const NAME = '%2$s';
 }

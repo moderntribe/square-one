@@ -161,7 +161,6 @@ class Taxonomy_Generator extends Square_One_Command {
 			$this->class_name,
 			$this->slug
 		);
-
 	}
 
 	private function get_taxonomy_config_contents() {
