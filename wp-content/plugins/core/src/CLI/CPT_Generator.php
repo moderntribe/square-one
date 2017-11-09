@@ -55,9 +55,9 @@ class CPT_Generator extends Square_One_Command {
 
 	public function cpt( $args, $assoc_args ) {
 		// Validate the slug.
-		$this->slug = $this->sanitize_slug( $args );
+		$this->slug       = $this->sanitize_slug( $args );
 		$this->class_name = ucfirst( $this->slug );
-		$this->namespace = 'Tribe\Project\Post_Types\\' . $this->class_name;
+		$this->namespace  = 'Tribe\Project\Post_Types\\' . $this->class_name;
 		// Set up associate args with some defaults.
 		$this->assoc_args = $this->parse_assoc_args( $assoc_args );
 
@@ -75,6 +75,7 @@ class CPT_Generator extends Square_One_Command {
 
 	private function sanitize_slug( $args ) {
 		list( $slug ) = $args;
+
 		return sanitize_title( $slug );
 	}
 
@@ -90,6 +91,7 @@ class CPT_Generator extends Square_One_Command {
 			'plural' => ucfirst( $this->slug ) . 's',
 			'config' => true,
 		];
+
 		return wp_parse_args( $assoc_args, $defaults );
 	}
 
@@ -104,8 +106,8 @@ class CPT_Generator extends Square_One_Command {
 		$this->new_service_provider_file();
 	}
 
-	private function new_service_provider_file(){
-		$new_service_provider = trailingslashit( dirname( __DIR__, 1 ) ) . 'Service_Providers/Post_Types/' . ucfirst( $this->slug ) . '_Service_Provider.php';
+	private function new_service_provider_file() {
+		$new_service_provider         = trailingslashit( dirname( __DIR__, 1 ) ) . 'Service_Providers/Post_Types/' . ucfirst( $this->slug ) . '_Service_Provider.php';
 		$this->service_provider_class = ucfirst( $this->slug );
 		$this->write_file( $new_service_provider, $this->get_service_provider_contents() );
 	}
