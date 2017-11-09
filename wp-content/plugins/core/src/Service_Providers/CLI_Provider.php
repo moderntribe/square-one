@@ -5,9 +5,7 @@ namespace Tribe\Project\Service_Providers;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
-use Tribe\Project\CLI\CPT_Generator;
 use Tribe\Project\CLI\Pimple_Dump;
-use Tribe\Project\CLI\Taxonomy_Generator;
 
 class CLI_Provider implements ServiceProviderInterface {
 
@@ -17,18 +15,13 @@ class CLI_Provider implements ServiceProviderInterface {
 			return new Pimple_Dump( $container );
 		};
 
-		$container['cli.cpt-generator'] = function ( $container ) {
-			return new CPT_Generator();
-		};
-
-		$container['cli.taxonomy-generator'] = function ( $container ) {
-			return new Taxonomy_Generator();
-		};
-
 		add_action( 'init', function () use ( $container ) {
-			$container['cli.pimple_dump']->register();
-			$container['cli.cpt-generator']->register();
-			$container['cli.taxonomy-generator']->register();
+			if ( ! defined( 'WP_CLI' ) || ! WP_CLI ) {
+				return;
+			}
+
+			\WP_CLI::add_command( 'pimple', $container['cli.pimple_dump'] );
+
 		}, 0, 0 );
 	}
 }
