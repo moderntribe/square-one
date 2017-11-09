@@ -1,9 +1,9 @@
 <?php
 
-namespace %s$1;
+namespace %1$s;
 
 use Tribe\Libs\Post_Type\Post_Object;
 
-class %s$2 extends Post_Object {
-	const NAME = '%s$3';
+class %2$s extends Post_Object {
+	const NAME = '%3$s';
 }
