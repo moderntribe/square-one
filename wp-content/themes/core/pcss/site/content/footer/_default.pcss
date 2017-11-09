@@ -5,10 +5,12 @@
 	background: var(--color-white) svg-inline(logo-darker-blue) 50% 135% repeat-x;
 	background-size: auto 65%;
 	height: 200px;
+	transition: transform 300ms cubic-bezier(1, 0, 0, 1);
 
 	@media (--viewport-medium) {
 		padding: 50px 0;
 		height: 280px;
+		//transition: none;
 	}
 
 	.l-container {

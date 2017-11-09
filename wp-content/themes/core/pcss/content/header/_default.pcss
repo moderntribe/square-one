@@ -1,5 +1,13 @@
 .site-header {
+	height: 70px;
+	transition: transform 300ms cubic-bezier(1, 0, 0, 1);
 
+	@media (--viewport-medium) {
+		position: relative;
+		height: 90px;
+		z-index: 2;
+		//transition: none;
+	}
 }
 
 /* WP Admin Bar */

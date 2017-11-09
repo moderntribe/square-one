@@ -35,6 +35,7 @@
     "@vimeo/player": "^2.1.0",
     "delegate": "^3.1.3",
     "gsap": "^1.19.1",
+    "hoverintent": "^2.0.0",
     "imports-loader": "^0.7.1",
     "jquery": "2.2.4",
     "lazysizes": "^4.0.0-rc3",

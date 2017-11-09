@@ -21,6 +21,8 @@ import single from '../single/index';
 
 import components from '../components/index';
 
+import site from '../site/index';
+
 /**
  * @function bindEvents
  * @description Bind global event listeners here,
@@ -59,6 +61,7 @@ const init = () => {
 	// initialize the main scripts
 
 	components();
+	site();
 	single();
 
 	console.info('Square One FE: Initialized all javascript that targeted document ready.');

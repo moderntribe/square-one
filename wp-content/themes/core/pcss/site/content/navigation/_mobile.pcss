@@ -1,0 +1,29 @@
+.site-header__mobile-trigger {
+	position: absolute;
+	right: 0;
+	top: 0;
+	border: 0;
+	height: 70px;
+	width: 70px;
+	background-color: var(--color-white);
+	transition: all 150ms;
+
+	@media (--viewport-medium) {
+		display: none;
+	}
+
+	.icon {
+		font-size: 32px;
+		color: var(--color-primary);
+		transition: all 150ms;
+	}
+
+	&:hover,
+	&:focus {
+		background-color: var(--color-primary);
+
+		.icon {
+			color: var(--color-white);
+		}
+	}
+}
