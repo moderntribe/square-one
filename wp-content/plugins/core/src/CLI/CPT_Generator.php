@@ -2,22 +2,14 @@
 
 namespace Tribe\Project\CLI;
 
-use Pimple\Container;
-
 class CPT_Generator extends Square_One_Command {
 	use File_System;
 
-	private $container;
 	private $cpt_directory;
 	private $slug;
 	private $class_name;
 	private $namespace;
 	private $assoc_args;
-
-	public function __construct( Container $container ) {
-		$this->container = $container;
-		parent::__construct();
-	}
 
 	public function description() {
 		return 'Generates a CPT.';

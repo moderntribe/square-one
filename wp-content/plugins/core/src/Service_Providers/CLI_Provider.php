@@ -17,7 +17,7 @@ class CLI_Provider implements ServiceProviderInterface {
 		};
 
 		$container['cli.cpt-generator'] = function ( $container ) {
-			return new CPT_Generator( $container );
+			return new CPT_Generator();
 		};
 
 		add_action( 'init', function () use ( $container ) {
