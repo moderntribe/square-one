@@ -148,64 +148,45 @@ class Taxonomy_Generator extends Square_One_Command {
 
 	private function new_taxonomy_config_file() {
 		$config_file = trailingslashit( $this->taxonomy_directory ) . 'Config.php';
-		$this->write_file( $config_file, $this->get_taxonomy_cofig_contents() );
+		$this->write_file( $config_file, $this->get_taxonomy_config_contents() );
 	}
 
 	private function get_taxonomy_class_contents() {
-		return "<?php 
-		
-		namespace {$this->namespace};
-		
-		use Tribe\Libs\Taxonomy\Term_Object;
-		
-		class {$this->class_name} extends Term_Object {
-			const NAME = '{$this->slug}';
-		}";
+
+		$taxonomy_file = file_get_contents( trailingslashit( dirname( __DIR__, 1 ) ) . 'CLI/templates/taxonomies/taxonomy.php' );
+
+		return sprintf(
+			$taxonomy_file,
+			$this->namespace,
+			$this->class_name,
+			$this->slug
+		);
+
 	}
 
-	private function get_taxonomy_cofig_contents() {
-		return "<?php 
-		
-		namespace {$this->namespace};
-		
-		use Tribe\Libs\Taxonomy\Taxonomy_Config;
-		
-		class Config extends Taxonomy_Config {
-			public function get_args() {
-				return [
-					'hierarchical' => false,
-				];
-			}
-		
-			public function get_labels() {
-				return [
-					'singular' => __( '{$this->assoc_args['single']}', 'tribe' ),
-					'plural'   => __( '{$this->assoc_args['plural']}', 'tribe' ),
-					'slug'     => __( '{$this->slug}', 'tribe' ),
-				];
-			}
-		
-			public function default_terms() {
-				return [
-				];
-			}
-		}";
+	private function get_taxonomy_config_contents() {
+
+		$config_file = file_get_contents( trailingslashit( dirname( __DIR__, 1 ) ) . 'CLI/templates/taxonomies/config.php' );
+
+		return sprintf(
+			$config_file,
+			$this->namespace,
+			$this->assoc_args['single'],
+			$this->assoc_args['plural'],
+			$this->slug
+		);
 	}
 
 	private function get_service_provider_contents() {
 		$post_types = $this->format_post_types();
 
-		return "<?php
-
-		namespace Tribe\Project\Service_Providers\Taxonomies;
-
-		use {$this->namespace};
-
-		class {$this->class_name}_Service_Provider extends Taxonomy_Service_Provider {
-			protected \$taxonomy_class = {$this->class_name}\\{$this->class_name}::class;
-			protected \$config_class = {$this->class_name}\Config::class;
-			{$post_types}
-		}";
+		$service_provider = file_get_contents( trailingslashit( dirname( __DIR__, 1 ) ) . 'CLI/templates/taxonomies/service_provider.php' );
+		return sprintf(
+			$service_provider,
+			$this->namespace,
+			$this->class_name,
+			$post_types
+		);
 	}
 
 	private function format_post_types() {
