@@ -123,64 +123,57 @@ class CPT_Generator extends Square_One_Command {
 	///------------templates---------------///
 
 	private function get_class_contents() {
-		return <<<PHP
-<?php 
-
-namespace {$this->namespace};
-
-use Tribe\Libs\Post_Type\Post_Object;
-
-class {$this->class_name} extends Post_Object {
-	const NAME = '{$this->slug}';
-}
-PHP;
+		return "<?php 
+		
+		namespace {$this->namespace};
+		
+		use Tribe\Libs\Post_Type\Post_Object;
+		
+		class {$this->class_name} extends Post_Object {
+			const NAME = '{$this->slug}';
+		}";
 	}
 
 	private function get_config_contents() {
-		return <<<PHP
-<?php
+		return "<?php
 
-namespace {$this->namespace};
+		namespace {$this->namespace};
 
-use Tribe\Libs\Post_Type\Post_Type_Config;
+		use Tribe\Libs\Post_Type\Post_Type_Config;
 
-class Config extends Post_Type_Config {
-	public function get_args() {
-		return [
-			'hierarchical'     => false,
-			'enter_title_here' => __( '{$this->class_name}', 'tribe' ),
-			'map_meta_cap'     => true,
-			'supports'         => [ 'title', 'editor' ],
-			'capability_type'  => 'post', // to use default WP caps
-		];
-	}
-
-	public function get_labels() {
-		return [
-			'singular' => __( '{$this->assoc_args['single']}', 'tribe' ),
-			'plural'   => __( '{$this->assoc_args['plural']}', 'tribe' ),
-			'slug'     => __( '{$this->slug}', 'tribe' ),
-		];
-	}
-
-}
-
-PHP;
+		class Config extends Post_Type_Config {
+			public function get_args() {
+				return [
+					'hierarchical'     => false,
+					'enter_title_here' => __( '{$this->class_name}', 'tribe' ),
+					'map_meta_cap'     => true,
+					'supports'         => [ 'title', 'editor' ],
+					'capability_type'  => 'post', // to use default WP caps
+				];
+			}
+		
+			public function get_labels() {
+				return [
+					'singular' => __( '{$this->assoc_args['single']}', 'tribe' ),
+					'plural'   => __( '{$this->assoc_args['plural']}', 'tribe' ),
+					'slug'     => __( '{$this->slug}', 'tribe' ),
+				];
+			}
+		
+		}";
 	}
 
 	private function get_service_provider_contents() {
-		return <<< SERVICE_PROVIDER
-<?php
-
-namespace Tribe\Project\Service_Providers\Post_Types;
-
-use Tribe\Project\Post_Types\\{$this->class_name};
-
-class {$this->service_provider_class}_Service_Provider extends Post_Type_Service_Provider {
-	protected \$post_type_class = {$this->class_name}\\{$this->class_name}::class;
-	protected \$config_class = {$this->class_name}\Config::class;
-}
-SERVICE_PROVIDER;
+		return "<?php
+		
+		namespace Tribe\Project\Service_Providers\Post_Types;
+		
+		use Tribe\Project\Post_Types\\{$this->class_name};
+		
+		class {$this->service_provider_class}_Service_Provider extends Post_Type_Service_Provider {
+			protected \$post_type_class = {$this->class_name}\\{$this->class_name}::class;
+			protected \$config_class = {$this->class_name}\Config::class;
+		}";
 	}
 
 }
