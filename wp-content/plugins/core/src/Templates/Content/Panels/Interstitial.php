@@ -112,17 +112,18 @@ class Interstitial extends Panel {
 
 	protected function get_interstitial_button() {
 		$options = [
-			Button::TAG         => '',
-			Button::URL         => $this->panel_vars[ Interstice::FIELD_CTA ][Button::URL],
-			Button::TYPE        => '',
-			Button::TARGET      => $this->panel_vars[ Interstice::FIELD_CTA ][Button::TARGET],
+			Button::URL         => $this->panel_vars[ Interstice::FIELD_CTA ][ Button::URL ],
+			Button::TARGET      => $this->panel_vars[ Interstice::FIELD_CTA ][ Button::TARGET ],
 			Button::CLASSES     => [ 'c-btn--sm' ],
-			Button::ATTRS       => '',
-			Button::LABEL       => $this->panel_vars[ Interstice::FIELD_CTA ][Button::LABEL],
+			Button::LABEL       => $this->panel_vars[ Interstice::FIELD_CTA ][ Button::LABEL ],
 			Button::BTN_AS_LINK => true,
 		];
 
 		$button_object = Button::factory( $options );
+
+		if ( empty( $this->panel_vars[ Interstice::FIELD_CTA ][ Button::URL ] ) ) {
+			return [];
+		}
 
 		return $button_object->render();
 	}

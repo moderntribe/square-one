@@ -2,16 +2,22 @@
 
 {% extends "content/panels/panel.twig" %}
 
+{% block start %}
+<section class="panel s-wrapper s-wrapper--no-padding site-panel site-panel--{{ type|esc_attr }}"
+         data-index="{{ index }}"
+         data-js="panel"
+         data-type="{{ type|esc_attr }}"
+         data-modular-content>
+	{% endblock %}
+
 {% block wrapper_start %}{% endblock %}
 
 	{% block header %}{% endblock %}
 
 	{% block content %}
 
-		<div class="s-content">
-			<div class="g-row">
-				{{ slider }}
-			</div>
+		<div class="g-row">
+			{{ slider }}
 		</div>
 
 	{% endblock %}

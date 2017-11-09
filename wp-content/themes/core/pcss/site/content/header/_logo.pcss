@@ -1,18 +1,14 @@
 .logo {
 	background: svg-inline(logo-blue) center center no-repeat;
 	background-size: contain;
+	position: absolute;
 	width: 60px;
 	height: 70px;
-	position: absolute;
-	top: 0;
+	top: 10px;
 	left: 20px;
 
-	.home & {
-		background: svg-inline(logo-white) center center no-repeat;
-		background-size: contain;
-	}
-
 	@media (--viewport-medium) {
+		top: 0;
 		width: 80px;
 		height: 90px;
 		left: 30px;

@@ -37,6 +37,7 @@
 	display: block;
 
 	@media (--viewport-medium) {
+		transform: translateX(calc(100vw + 320px));
 		position: absolute;
 		z-index: -9999;
 		opacity: 0;
@@ -70,6 +71,7 @@ button.primary__action--has-children {
 		&:focus {
 
 			.primary__list-child {
+				transform: translateX(0);
 				z-index: 1;
 				opacity: 1;
 				background-color: var(--color-grey-light);
