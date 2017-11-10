@@ -12,7 +12,7 @@ class CPT_Generator extends Square_One_Command {
 	private $assoc_args;
 
 	public function description() {
-		return 'Generates a CPT.';
+		return __( 'Generates a CPT.', 'tribe' );
 	}
 
 	public function callback() {
@@ -29,26 +29,26 @@ class CPT_Generator extends Square_One_Command {
 				'type'        => 'positional',
 				'name'        => 'cpt',
 				'optional'    => false,
-				'description' => 'The name of the CPT.',
+				'description' => __( 'The name of the CPT.', 'tribe' ),
 			],
 			[
 				'type'        => 'flag',
 				'name'        => 'config',
 				'optional'    => true,
-				'description' => 'Whether or not to create a config file by default. Defaults to true, pass --no-config if you don\'t need one.',
+				'description' => __( 'Whether or not to create a config file by default. Defaults to true, pass --no-config if you don\'t need one.', 'tribe' ),
 				'default'     => true,
 			],
 			[
-				'type'        => 'generic',
+				'type'        => 'assoc',
 				'name'        => 'single',
 				'optional'    => true,
-				'description' => 'Singular CPT.',
+				'description' => __( 'Singular CPT.', 'tribe' ),
 			],
 			[
-				'type'        => 'generic',
+				'type'        => 'assoc',
 				'name'        => 'plural',
 				'optional'    => true,
-				'description' => 'Plural CPT.',
+				'description' => __( 'Plural CPT.', 'tribe' ),
 			],
 		];
 	}
