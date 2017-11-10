@@ -34,12 +34,22 @@ class Button extends Component {
 			static::TAG     => $this->options['btn_as_link'] ? 'a' : 'button',
 			static::URL     => $this->options['btn_as_link'] ? $this->options['url'] : '',
 			static::CLASSES => $this->merge_classes( [ 'c-btn' ], $this->options[ static::CLASSES ], true ),
-			static::ATTRS   => $this->merge_attrs( [], $this->options[ static::ATTRS ], true ),
+			static::ATTRS   => $this->get_attrs(),
 			static::TYPE    => $this->options['btn_as_link'] ? '' : $this->options['type'],
 			static::TARGET  => $this->options['btn_as_link'] ? $this->options['target'] : '',
 			static::LABEL   => $this->options['label'],
 		];
 
 		return $data;
+	}
+
+	protected function get_attrs(): string {
+		$attrs = [];
+
+		if( $this->options['btn_as_link'] && $this->options['target'] === '_blank' ) {
+			$attrs[ 'rel' ] = 'noopener';
+		}
+
+		return $this->merge_attrs( $attrs, $this->options[ static::ATTRS ], true );
 	}
 }

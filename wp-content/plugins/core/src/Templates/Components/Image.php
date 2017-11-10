@@ -159,6 +159,7 @@ class Image extends Component {
 			'target' => $this->options[ static::LINK_TARGET ],
 			'title'  => ! empty( $this->options[ static::LINK_TITLE ] ) ? $this->options[ static::LINK_TITLE ] : '',
 			'class'  => ! empty( $this->options[ static::LINK_CLASS ] ) ? $this->options[ static::LINK_CLASS ] : '',
+			'rel'    => $this->options[ static::LINK_TARGET ] === '_blank' ? 'rel="noopener"' : '';
 		];
 	}
 
@@ -250,7 +251,7 @@ class Image extends Component {
 	 */
 	private function get_shim(): string {
 
-		$shim_dir = trailingslashit( tribe_assets_url( 'theme/img/shims' ) );
+		$shim_dir = trailingslashit( get_stylesheet_directory_uri() ) . 'img/theme/shims/';
 		$src      = $this->options[ static::SHIM ];
 
 		if ( empty ( $this->options[ static::SHIM ] ) ) {
