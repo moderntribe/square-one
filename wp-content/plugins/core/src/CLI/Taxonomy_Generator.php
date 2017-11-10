@@ -40,7 +40,7 @@ class Taxonomy_Generator extends Square_One_Command {
 				'description' => __( 'The name of the Taxonomy.', 'tribe' ),
 			],
 			[
-				'type'        => 'assoc',
+				'type'        => 'optional',
 				'name'        => 'post_types',
 				'optional'    => true,
 				'description' => __( 'Comma seperated list of post types to register this taxonomy to.', 'tribe' ),
@@ -53,13 +53,13 @@ class Taxonomy_Generator extends Square_One_Command {
 				'default'     => true,
 			],
 			[
-				'type'        => 'assoc',
+				'type'        => 'optional',
 				'name'        => 'single',
 				'optional'    => true,
 				'description' => __( 'Singular taxonomy.', 'tribe' ),
 			],
 			[
-				'type'        => 'assoc',
+				'type'        => 'optional',
 				'name'        => 'plural',
 				'optional'    => true,
 				'description' => __( 'Plural taxonomy.', 'tribe' ),
