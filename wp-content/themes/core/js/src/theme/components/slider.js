@@ -47,12 +47,14 @@ const updatePagination = (slider, swiperId) => {
 const getMainOptsForSlider = (slider, swiperId) => {
 	const opts = options.swiperMain();
 	if (slider.classList.contains('c-slider__main--has-arrows')) {
-		opts.nextButton = '.c-slider__button--next';
-		opts.prevButton = '.c-slider__button--prev';
+		opts.navigation = {};
+		opts.navigation.nextEl = '.c-slider__button--next';
+		opts.navigation.prevEl = '.c-slider__button--prev';
 	}
 	if (slider.classList.contains('c-slider__main--has-pagination')) {
-		opts.pagination = `.c-slider__pagination[data-id="${swiperId}"]`;
-		opts.paginationClickable = true;
+		opts.pagination = {};
+		opts.pagination.el = `.c-slider__pagination[data-id="${swiperId}"]`;
+		opts.pagination.clickable = true;
 		updatePagination(slider, swiperId);
 	}
 	if (slider.dataset.swiperOptions && tests.isJson(slider.dataset.swiperOptions)) {
@@ -82,7 +84,7 @@ const bindCarouselEvents = (swiperThumbId, swiperMainId) => {
 	instances.swipers[swiperMainId].on('slideChangeStart', (instance) => {
 		instances.swipers[swiperThumbId].slideTo(instance.activeIndex);
 	});
-	delegate(instances.swipers[swiperThumbId].wrapper[0], '[data-js="c-slider-thumb-trigger"]', 'click', syncMainSlider);
+	delegate(instances.swipers[swiperThumbId].wrapperEl, '[data-js="c-slider-thumb-trigger"]', 'click', syncMainSlider);
 };
 
 /**
