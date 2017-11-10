@@ -56,7 +56,7 @@ class CPT_Generator extends Square_One_Command {
 	public function cpt( $args, $assoc_args ) {
 		// Validate the slug.
 		$this->slug       = $this->sanitize_slug( $args );
-		$this->class_name = ucfirst( $this->slug );
+		$this->class_name = $this->ucwords( $this->slug );
 		$this->namespace  = 'Tribe\Project\Post_Types\\' . $this->class_name;
 		// Set up associate args with some defaults.
 		$this->assoc_args = $this->parse_assoc_args( $assoc_args );
@@ -76,19 +76,19 @@ class CPT_Generator extends Square_One_Command {
 	private function sanitize_slug( $args ) {
 		list( $slug ) = $args;
 
-		return sanitize_title( $slug );
+		return str_replace( '-', '_', sanitize_title( $slug ) );
 	}
 
 	private function create_cpt_directory() {
-		$new_directory = trailingslashit( dirname( __DIR__, 1 ) ) . 'Post_Types/' . ucfirst( $this->slug );
+		$new_directory = trailingslashit( dirname( __DIR__, 1 ) ) . 'Post_Types/' . $this->ucwords( $this->slug );
 		$this->create_directory( $new_directory );
 		$this->cpt_directory = $new_directory;
 	}
 
 	private function parse_assoc_args( $assoc_args ) {
 		$defaults = [
-			'single' => ucfirst( $this->slug ),
-			'plural' => ucfirst( $this->slug ) . 's',
+			'single' => $this->ucwords( $this->slug ),
+			'plural' => $this->ucwords( $this->slug ) . 's',
 			'config' => true,
 		];
 
@@ -107,13 +107,13 @@ class CPT_Generator extends Square_One_Command {
 	}
 
 	private function new_service_provider_file() {
-		$new_service_provider         = trailingslashit( dirname( __DIR__, 1 ) ) . 'Service_Providers/Post_Types/' . ucfirst( $this->slug ) . '_Service_Provider.php';
-		$this->service_provider_class = ucfirst( $this->slug );
+		$new_service_provider         = trailingslashit( dirname( __DIR__, 1 ) ) . 'Service_Providers/Post_Types/' . $this->ucwords( $this->slug ) . '_Service_Provider.php';
+		$this->service_provider_class = $this->ucwords( $this->slug );
 		$this->write_file( $new_service_provider, $this->get_service_provider_contents() );
 	}
 
 	private function new_post_object_class_file() {
-		$class_file = trailingslashit( $this->cpt_directory ) . ucfirst( $this->slug ) . '.php';
+		$class_file = trailingslashit( $this->cpt_directory ) . $this->ucwords( $this->slug ) . '.php';
 		$this->write_file( $class_file, $this->get_class_contents() );
 	}
 

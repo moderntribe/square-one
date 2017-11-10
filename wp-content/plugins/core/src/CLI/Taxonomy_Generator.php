@@ -85,7 +85,7 @@ class Taxonomy_Generator extends Square_One_Command {
 	protected function setup( $args, $assoc_args ) {
 		$this->slug = $this->sanitize_slug( $args );
 
-		$this->class_name = ucfirst( $this->slug );
+		$this->class_name = $this->ucwords( $this->slug );
 		$this->namespace  = 'Tribe\Project\Taxonomies\\' . $this->class_name;
 
 		$this->assoc_args = $this->parse_assoc_args( $assoc_args );
@@ -94,13 +94,13 @@ class Taxonomy_Generator extends Square_One_Command {
 	private function sanitize_slug( $args ) {
 		list( $slug ) = $args;
 
-		return sanitize_title( $slug );
+		return str_replace( '-', '_', sanitize_title( $slug ) );
 	}
 
 	private function parse_assoc_args( $assoc_args ) {
 		$defaults = [
-			'single'     => ucfirst( $this->slug ),
-			'plural'     => ucfirst( $this->slug ) . 's',
+			'single'     => $this->ucwords( $this->slug ),
+			'plural'     => $this->ucwords( $this->slug ) . 's',
 			'config'     => true,
 			'post_types' => $this->get_post_types( $assoc_args ),
 		];
@@ -124,7 +124,7 @@ class Taxonomy_Generator extends Square_One_Command {
 	}
 
 	private function create_taxonomy_directory() {
-		$directory = trailingslashit( dirname( __DIR__ ) ) . 'Taxonomies/' . ucfirst( $this->slug );
+		$directory = trailingslashit( dirname( __DIR__ ) ) . 'Taxonomies/' . $this->ucwords( $this->slug );
 		$this->taxonomy_directory = $directory;
 		$this->create_directory( $directory );
 	}
@@ -137,12 +137,12 @@ class Taxonomy_Generator extends Square_One_Command {
 	}
 
 	private function create_service_provider() {
-		$service_provider_file = trailingslashit( dirname( __DIR__, 1 ) ) . 'Service_Providers/Taxonomies/' . ucfirst( $this->slug ) . '_Service_Provider.php';
+		$service_provider_file = trailingslashit( dirname( __DIR__, 1 ) ) . 'Service_Providers/Taxonomies/' . $this->ucwords( $this->slug ) . '_Service_Provider.php';
 		$this->write_file( $service_provider_file, $this->get_service_provider_contents() );
 	}
 
 	private function new_taxonomy_class_file() {
-		$class_file = trailingslashit( $this->taxonomy_directory ) . ucfirst( $this->slug ) . '.php';
+		$class_file = trailingslashit( $this->taxonomy_directory ) . $this->ucwords( $this->slug ) . '.php';
 		$this->write_file( $class_file, $this->get_taxonomy_class_contents() );
 	}
 
