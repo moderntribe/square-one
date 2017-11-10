@@ -39,13 +39,13 @@ class CPT_Generator extends Square_One_Command {
 				'default'     => true,
 			],
 			[
-				'type'        => 'optional',
+				'type'        => 'assoc',
 				'name'        => 'single',
 				'optional'    => true,
 				'description' => __( 'Singular CPT.', 'tribe' ),
 			],
 			[
-				'type'        => 'optional',
+				'type'        => 'assoc',
 				'name'        => 'plural',
 				'optional'    => true,
 				'description' => __( 'Plural CPT.', 'tribe' ),

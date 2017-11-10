@@ -15,7 +15,7 @@ class Pimple_Dump extends Square_One_Command {
 	}
 
 	protected function command() {
-		return 'pimple dump';
+		return 'pimple';
 	}
 
 	protected function callback() {
