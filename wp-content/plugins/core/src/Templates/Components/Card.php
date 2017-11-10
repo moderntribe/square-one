@@ -6,6 +6,8 @@ class Card extends Component {
 
 	const TEMPLATE_NAME = 'components/card.twig';
 
+	const BEFORE_CARD     = 'before_card';
+	const AFTER_CARD      = 'after_card';
 	const TITLE           = 'title';
 	const TEXT            = 'text';
 	const IMAGE           = 'image';
@@ -18,6 +20,8 @@ class Card extends Component {
 
 	protected function parse_options( array $options ): array {
 		$defaults = [
+			self::BEFORE_CARD     => '',
+			self::AFTER_CARD      => '',
 			self::TITLE           => '',
 			self::TEXT            => '',
 			self::IMAGE           => '',
@@ -34,6 +38,8 @@ class Card extends Component {
 
 	public function get_data(): array {
 		$data = [
+			static::BEFORE_CARD     => $this->options[ self::BEFORE_CARD ],
+			static::AFTER_CARD      => $this->options[ self::AFTER_CARD ],
 			static::TITLE           => $this->options[ self::TITLE ],
 			static::PRE_TITLE       => $this->options[ self::PRE_TITLE ],
 			static::POST_TITLE      => $this->options[ self::POST_TITLE ],

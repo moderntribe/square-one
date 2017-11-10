@@ -11,19 +11,25 @@ Description: A common layout, the card is used in loops, query panels etc quite 
 
 Attributes:
 	{
-        card_classes: 'c-card', // string. wrapper classes
-        image: '', // image html, probably composed with the image component
-        card_header_classes: 'c-card__header', // string. the card header classes if an image is set
+		card_classes: 'c-card', // string. wrapper classes
+		before_card: // string. an HTML string to output before the card content.
+		image: '', // image html, probably composed with the image component
+		card_header_classes: 'c-card__header', // string. the card header classes if an image is set
 		card_content_classes: 'c-card__content', // string. the classes for the card content container
 		pre_title: '' // string. an html string to output before the title
 		title: '' // string. the title
 		post_title: '' // string. an html string to output after the title
 		text: '' // string. text/html string that is the body of the card
 		button: '' // string. button html, probably composed using the button component
+		after_card: // strng. an HTML string to output after the card content.
     }
  #}
 
 <div class="{{ card_classes }}">
+
+	{% if before_card %}
+		{{ before_card }}
+	{% endif %}
 
 	{% if image %}
 		<header class="{{ card_header_classes }}">
@@ -54,4 +60,9 @@ Attributes:
 		{% endif %}
 
 	</div>
+
+	{% if after_card %}
+		{{ after_card }}
+	{% endif %}
+
 </div>

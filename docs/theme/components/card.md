@@ -4,6 +4,7 @@ A common layout, the Card component is used in loops, query panels etc quite oft
 
 This component has these features out of box:  
 
+* before and after card strings
 * optional image
 * pre and post title strings
 * title
@@ -22,6 +23,16 @@ This component has these features out of box:
 * **Default:** _'c-card'_ 
 * **Type:** _string_ 
 * **Description:** wrapper classes
+
+#### `before_card` 
+* **Default:** _''_ 
+* **Type:** _string_ 
+* **Description:** An html string that to output before the card header. Typically used to wrap the whole card in a link.
+
+#### `after_card` 
+* **Default:** _''_ 
+* **Type:** _string_ 
+* **Description:** An html string that to output after the card content. Typically used to wrap the whole card in a link.
 
 #### `image` 
 * **Default:** _''_ 
