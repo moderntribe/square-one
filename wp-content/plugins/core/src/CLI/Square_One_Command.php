@@ -20,4 +20,11 @@ abstract class Square_One_Command extends \WP_CLI_Command {
 	abstract protected function callback();
 	abstract protected function description();
 	abstract protected function arguments();
+
+	public function ucwords( $slug ) {
+		$uc_words = array_map( function( $word ) {
+			return ucfirst( $word );
+		}, explode( '_', $slug ) );
+		return implode( '_', $uc_words );
+	}
 }
