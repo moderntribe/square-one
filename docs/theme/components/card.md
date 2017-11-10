@@ -27,12 +27,12 @@ This component has these features out of box:
 #### `before_card` 
 * **Default:** _''_ 
 * **Type:** _string_ 
-* **Description:** An html string that to output before the card header. Typically used to wrap the whole card in a link.
+* **Description:** An html string to output before the card header. Typically used to wrap the whole card in a link.
 
 #### `after_card` 
 * **Default:** _''_ 
 * **Type:** _string_ 
-* **Description:** An html string that to output after the card content. Typically used to wrap the whole card in a link.
+* **Description:** An html string to output after the card content. Typically used to wrap the whole card in a link.
 
 #### `image` 
 * **Default:** _''_ 
