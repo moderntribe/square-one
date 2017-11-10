@@ -26,5 +26,26 @@ trait File_System {
 		return $handle;
 	}
 
+	protected function insert_into_existing_file( $file, $new_line, $below_line ) {
+		if ( ! $handle = fopen( $file, 'r+' ) ) {
+			\WP_CLI::error( 'Sorry.. ' . $file . ' could not be opened.' );
+		}
+
+		$contents = '';
+		while (! feof ( $handle ) ) {
+			$line = fgets( $handle );
+			$contents .= $line;
+			if ( strpos( $line, $below_line ) !== false ) {
+				$contents .= $new_line;
+			}
+		}
+
+		if ( ! fclose( $handle ) ) {
+			\WP_CLI::error( 'Sorry.. ' . $file . ' an error has occurred.' );
+		}
+
+		$this->write_file( $file, $contents, true );
+	}
+
 
 }
