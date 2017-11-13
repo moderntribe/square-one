@@ -60,7 +60,7 @@ class CLI_Generator extends Square_One_Command {
 	}
 
 	protected function create_cli_file() {
-		$new_cli_command = trailingslashit( dirname( __DIR__, 1 ) ) . 'CLI/' . $this->ucwords( $this->slug ) . '_Generator.php';
+		$new_cli_command = trailingslashit( dirname( __DIR__, 1 ) ) . 'CLI/' . $this->ucwords( $this->slug ) . '.php';
 		$this->write_file( $new_cli_command, $this->get_cli_file_contents() );
 	}
 
