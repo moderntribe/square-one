@@ -43,7 +43,7 @@ class Taxonomy_Generator extends Square_One_Command {
 				'type'        => 'optional',
 				'name'        => 'post_types',
 				'optional'    => true,
-				'description' => __( 'Comma seperated list of post types to register this taxonomy to.', 'tribe' ),
+				'description' => __( 'Comma separated list of post types to register this taxonomy to.', 'tribe' ),
 			],
 			[
 				'type'        => 'flag',
