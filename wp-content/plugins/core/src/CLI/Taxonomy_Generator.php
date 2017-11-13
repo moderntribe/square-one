@@ -20,7 +20,7 @@ class Taxonomy_Generator extends Command {
 	protected $assoc_args         = [];
 
 	public function command() {
-		return 'tax';
+		return 'generate tax';
 	}
 
 	public function callback() {

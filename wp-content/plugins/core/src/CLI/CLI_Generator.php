@@ -11,7 +11,7 @@ class CLI_Generator extends Command {
 	protected $assoc_args = [];
 
 	public function command() {
-		return 'cli';
+		return 'generate cli';
 	}
 
 	public function description() {

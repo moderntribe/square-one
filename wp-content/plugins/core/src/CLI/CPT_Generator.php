@@ -20,7 +20,7 @@ class CPT_Generator extends Command {
 	}
 
 	public function command() {
-		return 'cpt';
+		return 'generate cpt';
 	}
 
 	public function arguments() {
