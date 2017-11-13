@@ -2,7 +2,7 @@
 
 namespace Tribe\Project\CLI;
 
-class %1$s extends Square_One_Command {
+class %1$s extends Command {
 	use File_System;
 
 	public function description() {
