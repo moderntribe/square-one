@@ -10,6 +10,19 @@ SCRIPTDIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd );
 
 cd "$SCRIPTDIR";
 
+if [ ! -f "${SCRIPTDIR}/certs/tribeCA.key" ]; then
+	echo "Generating certificate authority"
+
+	openssl req -x509 -new -nodes -sha256 -newkey rsa:4096 -days 3650 \
+		-keyout "${SCRIPTDIR}/certs/tribeCA.key" \
+		-out "${SCRIPTDIR}/certs/tribeCA.pem" \
+		-subj "/C=US/ST=California/L=Santa Cruz/O=Modern Tribe/OU=Dev/CN=tri.be";
+
+	if [[ $OSTYPE == darwin* ]]; then
+		sudo security add-trusted-cert -d -r trustRoot -e hostnameMismatch -k /Library/Keychains/System.keychain "${SCRIPTDIR}/certs/tribeCA.pem";
+	fi;
+fi;
+
 echo "Generating SSL certificate for $DOMAIN";
 
 openssl req -new -nodes -sha256 -newkey rsa:4096 -days 3650 \
