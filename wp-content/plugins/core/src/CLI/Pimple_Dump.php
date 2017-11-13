@@ -18,10 +18,6 @@ class Pimple_Dump extends Command {
 		return 'pimple';
 	}
 
-	protected function callback() {
-		return [ $this, 'dump' ];
-	}
-
 	protected function description() {
 		return 'Dumps the files needed to autocomplete Pimple names to be able to use this plugin: https://plugins.jetbrains.com/plugin/7809-silex-pimple-plugin';
 	}
@@ -30,7 +26,7 @@ class Pimple_Dump extends Command {
 		return [];
 	}
 
-	public function dump() {
+	public function run_command( $args, $assoc_args ) {
 		$dumper = new PimpleDumper();
 		$dumper->dumpPimple( $this->container );
 		$dumper->dumpPhpstorm( $this->container );

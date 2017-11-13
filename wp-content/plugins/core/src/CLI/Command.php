@@ -10,7 +10,7 @@ abstract class Command extends \WP_CLI_Command {
 			return;
 		}
 
-		WP_CLI::add_command( 's1 ' . $this->command(), $this->run_command(), [
+		WP_CLI::add_command( 's1 ' . $this->command(), [ $this, 'run_command' ], [
 			'shortdesc' => $this->description(),
 			'synopsis'  => $this->arguments(),
 		] );

@@ -7,7 +7,7 @@ WP-CLI is an indispensable tool for managing sites but is equally as useful for 
 ## Writing a command
 To add a command to S1, extend `Command`. Note that the return values from 4 abstract methods are used to generate the command.<BR>
 __command__ returns a text slug for the command. ex: `cli`<BR>
-__callback__ returns the public callable method. ex: `[ $this, 'command' ]`<BR>
+__run_command__ is the called method and takes the params $args and $assoc_args.<BR>
 __description__ returns a text description for the command. ex: `Generates a new CLI command`<BR>
 __arguments__ returns an array of arguments accepted by the callback. ex: 
 ```
