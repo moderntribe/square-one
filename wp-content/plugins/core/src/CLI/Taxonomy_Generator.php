@@ -23,10 +23,6 @@ class Taxonomy_Generator extends Command {
 		return 'generate tax';
 	}
 
-	public function callback() {
-		return [ $this, 'taxonomy' ];
-	}
-
 	public function description() {
 		return 'Generates a Taxonomy';
 	}
@@ -67,7 +63,7 @@ class Taxonomy_Generator extends Command {
 		];
 	}
 
-	public function taxonomy( $args, $assoc_args ) {
+	public function run_command( $args, $assoc_args ) {
 		$this->setup( $args, $assoc_args );
 
 		// Create directory.

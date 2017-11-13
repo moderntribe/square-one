@@ -9,10 +9,6 @@ class Meta_Generator extends Command {
 		return __( 'Generates object meta.', 'tribe' );
 	}
 
-	public function callback() {
-		return [ $this, 'meta' ];
-	}
-
 	public function command() {
 		return 'meta';
 	}
@@ -27,7 +23,7 @@ class Meta_Generator extends Command {
 		];
 	}
 
-	public function meta( $args, $assoc_args ) {
+	public function run_command( $args, $assoc_args ) {
 		print_r($assoc_args);
 	}
 }

@@ -18,10 +18,6 @@ class CLI_Generator extends Command {
 		return 'Generates a new CLI command';
 	}
 
-	public function callback() {
-		return [ $this, 'cli' ];
-	}
-
 	public function arguments() {
 		return [
 			[
@@ -39,7 +35,7 @@ class CLI_Generator extends Command {
 		];
 	}
 
-	public function cli( $args, $assoc_args ) {
+	public function run_command( $args, $assoc_args ) {
 		$this->slug       = $this->sanitize_slug( $args );
 		$this->class_name = $this->ucwords( $this->slug );
 		$this->namespace  = 'Tribe\Project\CLI\\' . $this->class_name;

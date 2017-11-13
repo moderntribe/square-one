@@ -15,10 +15,6 @@ class CPT_Generator extends Command {
 		return __( 'Generates a CPT.', 'tribe' );
 	}
 
-	public function callback() {
-		return [ $this, 'cpt' ];
-	}
-
 	public function command() {
 		return 'generate cpt';
 	}
@@ -53,7 +49,7 @@ class CPT_Generator extends Command {
 		];
 	}
 
-	public function cpt( $args, $assoc_args ) {
+	public function run_command( $args, $assoc_args ) {
 		// Validate the slug.
 		$this->slug       = $this->sanitize_slug( $args );
 		$this->class_name = $this->ucwords( $this->slug );

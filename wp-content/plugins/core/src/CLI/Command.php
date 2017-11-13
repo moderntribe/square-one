@@ -10,16 +10,16 @@ abstract class Command extends \WP_CLI_Command {
 			return;
 		}
 
-		WP_CLI::add_command( 's1 ' . $this->command(), $this->callback(), [
+		WP_CLI::add_command( 's1 ' . $this->command(), $this->run_command(), [
 			'shortdesc' => $this->description(),
 			'synopsis'  => $this->arguments(),
 		] );
 	}
 
 	abstract protected function command();
-	abstract protected function callback();
 	abstract protected function description();
 	abstract protected function arguments();
+	abstract protected function run_command( $args, $assoc_args );
 
 	public function ucwords( $slug ) {
 		$uc_words = array_map( function( $word ) {
