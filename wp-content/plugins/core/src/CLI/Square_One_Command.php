@@ -27,4 +27,10 @@ abstract class Square_One_Command extends \WP_CLI_Command {
 		}, explode( '_', $slug ) );
 		return implode( '_', $uc_words );
 	}
+
+	protected function sanitize_slug( $args ) {
+		list( $slug ) = $args;
+
+		return str_replace( '-', '_', sanitize_title( $slug ) );
+	}
 }

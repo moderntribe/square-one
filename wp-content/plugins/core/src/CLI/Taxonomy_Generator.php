@@ -91,12 +91,6 @@ class Taxonomy_Generator extends Square_One_Command {
 		$this->assoc_args = $this->parse_assoc_args( $assoc_args );
 	}
 
-	private function sanitize_slug( $args ) {
-		list( $slug ) = $args;
-
-		return str_replace( '-', '_', sanitize_title( $slug ) );
-	}
-
 	private function parse_assoc_args( $assoc_args ) {
 		$defaults = [
 			'single'     => $this->ucwords( $this->slug ),

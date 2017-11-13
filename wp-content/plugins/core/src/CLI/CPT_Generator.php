@@ -68,15 +68,9 @@ class CPT_Generator extends Square_One_Command {
 		$this->new_post_object_class();
 
 		// Create service provider.
-		$this->new_service_provider();
+		$this->new_service_provider_file();
 
 		\WP_CLI::success( 'Way to go! ' . \WP_CLI::colorize( "%W{$this->slug}%n" ) . ' post type has been created' );
-	}
-
-	private function sanitize_slug( $args ) {
-		list( $slug ) = $args;
-
-		return str_replace( '-', '_', sanitize_title( $slug ) );
 	}
 
 	private function create_cpt_directory() {
@@ -100,10 +94,6 @@ class CPT_Generator extends Square_One_Command {
 		if ( $this->assoc_args['config'] ) {
 			$this->new_post_object_config_file();
 		}
-	}
-
-	private function new_service_provider() {
-		$this->new_service_provider_file();
 	}
 
 	private function new_service_provider_file() {
