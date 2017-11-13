@@ -112,7 +112,7 @@ class CPT_Generator extends Command {
 
 	private function get_class_contents() {
 
-		$post_type_file = file_get_contents( trailingslashit( dirname( __DIR__, 1 ) ) . 'CLI/templates/post_type/post_type.php' );
+		$post_type_file = file_get_contents( trailingslashit( dirname( __DIR__, 1 ) ) . 'assets/templates/cli/post_type/post_type.php' );
 
 		return sprintf(
 			$post_type_file,
@@ -125,7 +125,7 @@ class CPT_Generator extends Command {
 
 	private function get_config_contents() {
 
-		$config_file = file_get_contents( trailingslashit( dirname( __DIR__, 1 ) ) . 'CLI/templates/post_type/config.php' );
+		$config_file = file_get_contents( trailingslashit( dirname( __DIR__, 1 ) ) . 'assets/templates/cli/post_type/config.php' );
 
 		return sprintf(
 			$config_file,
@@ -140,7 +140,7 @@ class CPT_Generator extends Command {
 
 	private function get_service_provider_contents() {
 
-		$service_provider_file = file_get_contents( trailingslashit( dirname( __DIR__, 1 ) ) . 'CLI/templates/post_type/service_provider.php' );
+		$service_provider_file = file_get_contents( trailingslashit( dirname( __DIR__, 1 ) ) . 'assets/templates/cli/post_type/service_provider.php' );
 
 		return sprintf(
 			$service_provider_file,
