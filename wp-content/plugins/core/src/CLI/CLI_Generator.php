@@ -79,7 +79,7 @@ class CLI_Generator extends Square_One_Command {
 		$cli_service_provider = trailingslashit( dirname( __DIR__, 1 ) ) . 'Service_Providers/CLI_Provider.php';
 
 		// Use.
-		$this->insert_into_existing_file( $cli_service_provider, 'use ' . $this->namespace, 'use Tribe\Project\CLI\CPT_Generator;' . PHP_EOL );
+		$this->insert_into_existing_file( PHP_EOL . $cli_service_provider, 'use ' . $this->namespace . ';' . PHP_EOL, 'use Tribe\Project\CLI\CLI_Generator;' );
 //
 //		// Add class to pimple container.
 //		$container_partial_file = file_get_contents( trailingslashit( dirname( __DIR__, 1 ) ) . 'CLI/templates/cli/container_partial.php' );
