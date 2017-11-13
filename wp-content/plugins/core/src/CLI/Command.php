@@ -21,6 +21,16 @@ abstract class Command extends \WP_CLI_Command {
 	abstract protected function arguments();
 	abstract protected function run_command( $args, $assoc_args );
 
+	/**
+	 * converts a multi-word lowercase _ separated slug in
+	 * multi-word upper case first format.
+	 *
+	 * multi_word_slug becomes Multi_Word_Slug
+	 *
+	 * @param string $slug lowercase words separated by _.
+	 *
+	 * @return string
+	 */
 	public function ucwords( $slug ) {
 		$uc_words = array_map( function( $word ) {
 			return ucfirst( $word );
