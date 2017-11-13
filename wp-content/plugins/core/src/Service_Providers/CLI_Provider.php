@@ -27,6 +27,7 @@ class CLI_Provider implements ServiceProviderInterface {
 		$container['cli.cli-generator'] = function ( $container ) {
 			return new CLI_Generator();
 		};
+
 		add_action( 'init', function () use ( $container ) {
 			$container['cli.pimple_dump']->register();
 			$container['cli.cpt-generator']->register();
