@@ -38,12 +38,23 @@ class CardGrid extends Panel {
 			$i = 0;
 
 			foreach ( $this->panel_vars[ CardGridPanel::FIELD_CARDS ] as $card ) {
-				$options = [
-					Card::TITLE  => $this->get_card_title( $card[ CardGridPanel::FIELD_CARD_TITLE ], $i ),
-					Card::TEXT   => $this->get_card_text( $card[ CardGridPanel::FIELD_CARD_DESCRIPTION ], $i ),
-					Card::IMAGE  => $this->get_card_image( $card[ CardGridPanel::FIELD_CARD_IMAGE ] ),
-					Card::BUTTON => $this->get_card_button( $card[ CardGridPanel::FIELD_CARD_CTA ] ),
-				];
+				$options = [];
+
+				if ( ! empty( $card[ CardGridPanel::FIELD_CARD_TITLE ] ) ) {
+					$options[ Card::TITLE ] = $this->get_card_title( $card[ CardGridPanel::FIELD_CARD_TITLE ], $i );
+				}
+
+				if ( ! empty( $card[ CardGridPanel::FIELD_CARD_DESCRIPTION ] ) ) {
+					$options[ Card::TEXT ] = $this->get_card_text( $card[ CardGridPanel::FIELD_CARD_DESCRIPTION ], $i );
+				}
+
+				if ( ! empty( $card[ CardGridPanel::FIELD_CARD_IMAGE ] ) ) {
+					$options[ Card::IMAGE ] = $this->get_card_image( $card[ CardGridPanel::FIELD_CARD_IMAGE ] );
+				}
+
+				if ( ! empty( $card[ CardGridPanel::FIELD_CARD_CTA ] ) ) {
+					$options[ Card::BUTTON ] = $this->get_card_button( $card[ CardGridPanel::FIELD_CARD_CTA ] );
+				}
 
 				$card_obj = Card::factory( $options );
 				$cards[]  = $card_obj->render();
