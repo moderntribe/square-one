@@ -85,8 +85,8 @@ class CLI_Generator extends Square_One_Command {
 		$container_partial_file = file_get_contents( trailingslashit( dirname( __DIR__, 1 ) ) . 'CLI/templates/cli/container_partial.php' );
 		$container_partial = sprintf( $container_partial_file, $this->slug, $this->class_name );
 		$this->insert_into_existing_file( $cli_service_provider, $container_partial, 'return new CLI_Generator();' );
-//
-//		// Add to hook.
-//		$this->insert_into_existing_file( $cli_service_provider, '$container[\'cli.' . $this->slug . '-generator\']->register();', '$container[\'cli.cli-generator\']->register();' );
+
+		// Add to hook.
+		$this->insert_into_existing_file( $cli_service_provider, "\t\t\t" . '$container[\'cli.' . $this->slug . '\']->register();' . PHP_EOL , '$container[\'cli.cli-generator\']->register();' );
 	}
 }
