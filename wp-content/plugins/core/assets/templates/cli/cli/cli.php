@@ -9,10 +9,6 @@ class %1$s extends Square_One_Command {
 		return __( '%2$s', 'tribe' );
 	}
 
-	public function callback() {
-		return [ $this, '%3$s' ];
-	}
-
 	public function command() {
 		return '%3$s';
 	}
@@ -28,7 +24,7 @@ class %1$s extends Square_One_Command {
 		];
 	}
 
-	public function %3$s( $args, $assoc_args ) {
+	public function run_command( $args, $assoc_args ) {
 		$this->slug       = $this->sanitize_slug( $args );
 		$this->class_name = $this->ucwords( $this->slug );
 	}
