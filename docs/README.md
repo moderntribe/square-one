@@ -35,6 +35,7 @@
     * [Post & Taxonomy Meta](/docs/backend/post-meta.md)
     * [Service Providers](/docs/backend/service-providers.md)
     * [Template Controllers](/docs/backend/data.md)
+    * [CLI](/docs/backend/cli.md)
   * Plugins/Extenstions
     * [Twig](https://twig.symfony.com/)
     * [Posts 2 Post](https://github.com/scribu/wp-posts-to-posts/wiki)
