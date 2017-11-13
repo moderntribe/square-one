@@ -3,7 +3,7 @@
 namespace Tribe\Project\CLI;
 use WP_CLI;
 
-abstract class Square_One_Command extends \WP_CLI_Command {
+abstract class Command extends \WP_CLI_Command {
 
 	public function register() {
 		if ( ! defined( 'WP_CLI' ) || ! WP_CLI ) {

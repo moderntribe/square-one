@@ -5,7 +5,7 @@ namespace Tribe\Project\CLI;
 use Pimple\Container;
 use JBZoo\PimpleDumper\PimpleDumper;
 
-class Pimple_Dump extends Square_One_Command {
+class Pimple_Dump extends Command {
 
 	private $container;
 

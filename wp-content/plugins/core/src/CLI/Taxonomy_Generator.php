@@ -5,7 +5,7 @@ namespace Tribe\Project\CLI;
 use Tribe\Project\Post_Types\Page\Page;
 use Tribe\Project\Post_Types\Post\Post;
 
-class Taxonomy_Generator extends Square_One_Command {
+class Taxonomy_Generator extends Command {
 	use File_System;
 
 	const POST_TYPES = [

@@ -2,7 +2,7 @@
 
 namespace Tribe\Project\CLI;
 
-class Meta_Generator extends Square_One_Command {
+class Meta_Generator extends Command {
 	use File_System;
 
 	public function description() {

@@ -2,7 +2,7 @@
 
 namespace Tribe\Project\CLI;
 
-class CLI_Generator extends Square_One_Command {
+class CLI_Generator extends Command {
 	use File_System;
 
 	protected $slug = '';

@@ -2,7 +2,7 @@
 
 namespace Tribe\Project\CLI;
 
-class CPT_Generator extends Square_One_Command {
+class CPT_Generator extends Command {
 	use File_System;
 
 	private $cpt_directory;
