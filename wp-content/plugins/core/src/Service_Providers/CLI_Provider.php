@@ -6,6 +6,7 @@ use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Tribe\Project\CLI\CLI_Generator;
 use Tribe\Project\CLI\CPT_Generator;
+use Tribe\Project\CLI\Meta\Importer;
 use Tribe\Project\CLI\Pimple_Dump;
 use Tribe\Project\CLI\Taxonomy_Generator;
 
@@ -28,11 +29,20 @@ class CLI_Provider implements ServiceProviderInterface {
 			return new CLI_Generator();
 		};
 
+		$container['cli.meta.importer'] = function ( $container ) {
+			return new Importer();
+		};
+
 		add_action( 'init', function () use ( $container ) {
+			if ( ! defined( 'WP_CLI' ) || ! WP_CLI ) {
+				return;
+			}
+
 			$container['cli.pimple_dump']->register();
 			$container['cli.cpt-generator']->register();
 			$container['cli.taxonomy-generator']->register();
 			$container['cli.cli-generator']->register();
+			$container['cli.meta.importer']->register();
 		}, 0, 0 );
 	}
 }
