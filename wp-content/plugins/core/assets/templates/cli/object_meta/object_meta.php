@@ -12,7 +12,7 @@ class %1$s extends ACF\ACF_Meta_Group {
 
 	public function get_keys() {
 		return [
-			%4$s
+%4$s
 		];
 	}
 
