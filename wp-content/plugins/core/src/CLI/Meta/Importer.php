@@ -94,7 +94,7 @@ class Importer extends Command {
 		$this->insert_into_existing_file( $object_meta_service_provider, 'use ' . $this->namespace . ';' . PHP_EOL, 'use Tribe\Libs\Object_Meta\Meta_Repository;' );
 
 		// Constant.
-		$constant = "\tconst {$this->const_name} = '{$this->pimple_key}';";
+		$constant = "\tconst {$this->const_name} = '{$this->pimple_key}';" . PHP_EOL;
 		$this->insert_into_existing_file( $object_meta_service_provider, $constant, 'const REPO    = \'object_meta.collection_repo\';' );
 
 		// public function register( Container $container ) {
