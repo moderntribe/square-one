@@ -8,9 +8,14 @@ use Tribe\Project\CLI\File_System;
 class Importer extends Command {
 	use File_System;
 
-	protected $args = [];
+	protected $args       = [];
 	protected $assoc_args = [];
-	protected $group = [];
+	protected $group      = [];
+	protected $key        = '';
+	protected $title      = '';
+	protected $slug       = '';
+	protected $class_name = '';
+	protected $namespace  = '';
 
 	public function description() {
 		return __( 'Generates object meta.', 'tribe' );
@@ -57,6 +62,8 @@ class Importer extends Command {
 	protected function get_dynamic_field_groups() {
 		$field_groups = [];
 		foreach ( acf_get_field_groups() as $field_group ) {
+
+			// If it's already a php field group we won't do anything with it.
 			if ( ! isset( $field_group['local'] ) || 'php' !== $field_group['local'] ) {
 				$field_groups[ $field_group['key'] ] = $field_group['title'];
 			}
