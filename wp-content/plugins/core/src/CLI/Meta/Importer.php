@@ -73,12 +73,33 @@ class Importer extends Command {
 	}
 
 	protected function setup_field_group() {
-		$group           = acf_get_field_group( $this->args[0] );
-		$group['fields'] = acf_get_fields( $group );
-		$this->group     = acf_prepare_field_group_for_export( $group );
+		$group            = acf_get_field_group( $this->args[0] );
+		$group['fields']  = acf_get_fields( $group );
+		$this->group      = acf_prepare_field_group_for_export( $group );
+		$this->key        = $this->group['key'];
+		$this->title      = $this->group['title'];
+		$this->slug       = $this->sanitize_slug( $this->title );
+		$this->class_name = $this->ucwords( $this->slug );
+		$this->namespace  = 'Tribe\Project\Object_Meta\\' . $this->class_name;
 	}
 
 	protected function update_service_provider() {
+		$object_meta_service_provider = trailingslashit( dirname( __DIR__, 2 ) ) . 'Service_Providers/Object_Meta_Provider.php';
+		echo $object_meta_service_provider;die;
+		// use Tribe\Libs\Object_Meta\Meta_Repository;
+
+		// const REPO    = 'object_meta.collection_repo';
+
+		// public function register( Container $container ) {
+
+
+	}
+
+	protected function create_object_class() {
+
+	}
+
+	protected function delete_field_group() {
 
 	}
 }
