@@ -138,7 +138,6 @@ class Importer extends Command {
 
 	protected function create_object_class() {
 		$object_class = trailingslashit( dirname( __DIR__, 2 ) ) . 'Object_Meta/' . $this->class_name . '.php';
-		$object_class = trailingslashit( dirname( __DIR__, 2 ) ) . 'Object_Meta/' . $this->class_name . '.php';
 		$this->write_file( $object_class, $this->class_file_template() );
 	}
 
@@ -200,6 +199,6 @@ class Importer extends Command {
 	}
 
 	protected function delete_field_group() {
-		acf_delete_field_group( $this->group );
+		acf_delete_field_group( acf_get_field_group_id( $this->group ) );
 	}
 }
