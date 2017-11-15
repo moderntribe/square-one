@@ -137,12 +137,13 @@ class Importer extends Command {
 	}
 
 	protected function create_object_class() {
-		$object_class = trailingslashit( dirname( __DIR__, 3 ) ) . 'Object_Meta/' . $this->class_name . '.php';
+		$object_class = trailingslashit( dirname( __DIR__, 2 ) ) . 'Object_Meta/' . $this->class_name . '.php';
+		$object_class = trailingslashit( dirname( __DIR__, 2 ) ) . 'Object_Meta/' . $this->class_name . '.php';
 		$this->write_file( $object_class, $this->class_file_template() );
 	}
 
 	protected function class_file_template() {
-		$class_file = file_get_contents( trailingslashit( dirname( __DIR__, 2 ) ) . 'assets/templates/cli/object_meta/object_meta.php' );
+		$class_file = file_get_contents( trailingslashit( dirname( __DIR__, 3 ) ) . 'assets/templates/cli/object_meta/object_meta.php' );
 
 		return sprintf(
 			$class_file,
