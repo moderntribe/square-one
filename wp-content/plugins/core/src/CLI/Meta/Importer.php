@@ -16,6 +16,8 @@ class Importer extends Command {
 	protected $slug       = '';
 	protected $class_name = '';
 	protected $namespace  = '';
+	protected $const_name = '';
+	protected $pimple_key = '';
 
 	public function description() {
 		return __( 'Generates object meta.', 'tribe' );
@@ -81,15 +83,19 @@ class Importer extends Command {
 		$this->slug       = $this->sanitize_slug( [ $this->title ] );
 		$this->class_name = $this->ucwords( $this->slug );
 		$this->namespace  = 'Tribe\Project\Object_Meta\\' . $this->class_name;
+		$this->const_name = strtoupper( str_replace( '_', '', $this->slug ) );
+		$this->pimple_key = strtolower( 'object_meta.' . $this->const_name );
 	}
 
 	protected function update_service_provider() {
 		$object_meta_service_provider = trailingslashit( dirname( __DIR__, 2 ) ) . 'Service_Providers/Object_Meta_Provider.php';
 
 		// Insert the Use.
-		$this->insert_into_existing_file($object_meta_service_provider, 'use ' . $this->namespace . ';' . PHP_EOL, 'use Tribe\Libs\Object_Meta\Meta_Repository;' );
+		$this->insert_into_existing_file( $object_meta_service_provider, 'use ' . $this->namespace . ';' . PHP_EOL, 'use Tribe\Libs\Object_Meta\Meta_Repository;' );
 
-		// const REPO    = 'object_meta.collection_repo';
+		// Constant.
+		$constant = "\tconst {$this->const_name} = '{$this->pimple_key}';";
+		$this->insert_into_existing_file( $object_meta_service_provider, $constant, 'const REPO    = \'object_meta.collection_repo\';' );
 
 		// public function register( Container $container ) {
 
