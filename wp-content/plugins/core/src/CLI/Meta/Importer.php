@@ -134,7 +134,39 @@ class Importer extends Command {
 	}
 
 	protected function create_object_class() {
+		$object_class = trailingslashit( dirname( __DIR__, 3 ) ) . 'Object_Meta/' . $this->class_name . '.php';
+		$this->write_file( $object_class, $this->class_file_template() );
+	}
 
+	protected function class_file_template() {
+		$class_file = file_get_contents( trailingslashit( dirname( __DIR__, 3 ) ) . 'assets/templates/cli/object_meta/object_meta.php' );
+
+		return sprintf(
+			$class_file,
+			$this->class_name,
+			$this->slug,
+			$this->field_constants(),
+			$this->field_keys(),
+			$this->title,
+			$this->add_field_functions(),
+			$this->field_functions()
+		);
+	}
+
+	protected function field_constants() {
+
+	}
+
+	protected function field_keys() {
+
+	}
+
+	protected function add_field_functions() {
+
+	}
+
+	protected function field_functions() {
+		
 	}
 
 	protected function delete_field_group() {
