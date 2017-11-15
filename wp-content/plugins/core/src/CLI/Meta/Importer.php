@@ -46,7 +46,7 @@ class Importer extends Command {
 			$this->setup_field_group();
 
 			// Sanity check.
-			WP_CLI::confirm( 'Are you sure you want to delete the databse entry ' . $this->title . ' field group and convert it to php?';
+			\WP_CLI::confirm( 'Are you sure you want to delete the databse entry ' . $this->title . ' field group and convert it to php?', $assoc_args );
 			
 			// Write the meta files.
 			$this->update_service_provider();
