@@ -44,6 +44,7 @@ class Importer extends Command {
 		if ( count( $args ) ) {
 			// Setup and import the field groups.
 			$this->setup_field_group();
+			print_r($this->group['fields']);die;
 
 			// Write the meta files.
 			$this->update_service_provider();
@@ -163,15 +164,36 @@ class Importer extends Command {
 	}
 
 	protected function field_keys() {
-
+		$keys = '';
+		foreach ( $this->group['fields'] as $field ) {
+			$keys .= "\t\t\tstatic::" . $this->constant_from_class( $this->sanitize_slug( [ $field['label'] ] ) ) . ';' . PHP_EOL;
+		}
+		return $keys;
 	}
 
 	protected function add_field_functions() {
+		$functions = '';
+		foreach ( $this->group['fields'] as $field ) {
+			$functions .= '$group->add_field( $this->get_field_' . $this->sanitize_slug( [$field['label']] ) . '() );';
+		}
 
+		return $functions;
 	}
 
 	protected function field_functions() {
-		
+		$function_partial = file_get_contents( trailingslashit( dirname( __DIR__, 3 ) ) . 'assets/templates/cli/object_meta/field_function_partial.php' );
+
+		$functions = '';
+		foreach ( $this->group['fields'] as $field ) {
+			$functions .= sprintf(
+				$function_partial,
+				$this->sanitize_slug( [ $field['label'] ] ),
+				$this->constant_from_class( $this->sanitize_slug( [ $field['label'] ] ) ),
+				$field['label'],
+				$field['type']
+			);
+		}
+		return $functions;
 	}
 
 	protected function delete_field_group() {
