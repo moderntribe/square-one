@@ -44,8 +44,7 @@ class Importer extends Command {
 		if ( count( $args ) ) {
 			// Setup and import the field groups.
 			$this->setup_field_group();
-			print_r($this->group['fields']);die;
-
+			
 			// Write the meta files.
 			$this->update_service_provider();
 			$this->create_object_class();
