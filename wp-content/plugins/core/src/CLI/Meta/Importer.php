@@ -102,8 +102,34 @@ class Importer extends Command {
 		$this->insert_into_existing_file( $object_meta_service_provider, $key, 'private $keys = [' );
 
 		// public function register( Container $container ) {
+		$this->build_object_array();
 
 
+	}
+
+	protected function build_object_array() {
+		$locations = [];
+		foreach( $this->group['location'] as $location ) {
+			if ( count( $location ) > 1 ) {
+				\WP_CLI::error( 'Sorry, this importer does not yet support conditional location logic' );
+			}
+			switch ( $location[0]['param'] ) {
+				case 'post_type':
+					$locations['post_types'][] = $location[0]['value'];
+					break;
+				case 'post_category':
+					$locations['taxonomies'][] = substr( $location[0]['value'], strpos( $location[0]['value'], ':' ) + 1 );
+					break;
+				case 'options_page':
+					$locations['settings_pages'][] = $location[0]['value'];
+					break;
+				case 'user_form':
+					$locations['users'] = true;
+					break;
+			}
+		}
+
+		return $locations;
 	}
 
 	protected function create_object_class() {
