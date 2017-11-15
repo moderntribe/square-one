@@ -59,4 +59,8 @@ trait File_System {
 		return $modified_string;
 	}
 
+	protected function constant_from_class( $class_name ) {
+		return strtoupper( str_replace( '_', '', $class_name ) );
+	}
+
 }
