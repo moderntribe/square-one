@@ -142,7 +142,7 @@ class Importer extends Command {
 	}
 
 	protected function class_file_template() {
-		$class_file = file_get_contents( trailingslashit( dirname( __DIR__, 3 ) ) . 'assets/templates/cli/object_meta/object_meta.php' );
+		$class_file = file_get_contents( trailingslashit( dirname( __DIR__, 2 ) ) . 'assets/templates/cli/object_meta/object_meta.php' );
 
 		return sprintf(
 			$class_file,
