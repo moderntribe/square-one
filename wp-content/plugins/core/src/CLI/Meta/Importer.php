@@ -97,6 +97,10 @@ class Importer extends Command {
 		$constant = "\tconst {$this->const_name} = '{$this->pimple_key}';" . PHP_EOL;
 		$this->insert_into_existing_file( $object_meta_service_provider, $constant, 'const REPO    = \'object_meta.collection_repo\';' );
 
+		// Keys.
+		$key = "\t\tself::" . $this->const_name . ',' . PHP_EOL;
+		$this->insert_into_existing_file( $object_meta_service_provider, $key, 'private $keys = [' );
+
 		// public function register( Container $container ) {
 
 
