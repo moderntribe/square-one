@@ -68,7 +68,7 @@ class CPT_Generator extends Command {
 	}
 
 	private function create_cpt_directory() {
-		$new_directory = trailingslashit( dirname( __DIR__, 1 ) ) . 'Post_Types/' . $this->ucwords( $this->slug );
+		$new_directory = $this->src_path . 'Post_Types/' . $this->ucwords( $this->slug );
 		$this->file_system->create_directory( $new_directory );
 		$this->cpt_directory = $new_directory;
 	}
@@ -110,7 +110,7 @@ class CPT_Generator extends Command {
 
 	private function get_class_contents() {
 
-		$post_type_file = file_get_contents( trailingslashit( dirname( __DIR__, 1 ) ) . 'assets/templates/cli/post_type/post_type.php' );
+		$post_type_file = file_get_contents( $this->templates_path . 'post_type/post_type.php' );
 
 		return sprintf(
 			$post_type_file,
@@ -123,7 +123,7 @@ class CPT_Generator extends Command {
 
 	private function get_config_contents() {
 
-		$config_file = file_get_contents( trailingslashit( dirname( __DIR__, 1 ) ) . 'assets/templates/cli/post_type/config.php' );
+		$config_file = file_get_contents( $this->templates_path . 'post_type/config.php' );
 
 		return sprintf(
 			$config_file,
@@ -138,7 +138,7 @@ class CPT_Generator extends Command {
 
 	private function get_service_provider_contents() {
 
-		$service_provider_file = file_get_contents( trailingslashit( dirname( __DIR__, 1 ) ) . 'assets/templates/cli/post_type/service_provider.php' );
+		$service_provider_file = file_get_contents( $this->templates_path . 'post_type/service_provider.php' );
 
 		return sprintf(
 			$service_provider_file,

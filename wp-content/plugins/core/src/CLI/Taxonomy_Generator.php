@@ -113,7 +113,7 @@ class Taxonomy_Generator extends Command {
 	}
 
 	private function create_taxonomy_directory() {
-		$directory = trailingslashit( dirname( __DIR__ ) ) . 'Taxonomies/' . $this->ucwords( $this->slug );
+		$directory = trailingslashit( $this->src_path ) . 'Taxonomies/' . $this->ucwords( $this->slug );
 		$this->taxonomy_directory = $directory;
 		$this->file_system->create_directory( $directory );
 	}
@@ -126,7 +126,7 @@ class Taxonomy_Generator extends Command {
 	}
 
 	private function create_service_provider() {
-		$service_provider_file = trailingslashit( dirname( __DIR__, 1 ) ) . 'Service_Providers/Taxonomies/' . $this->ucwords( $this->slug ) . '_Service_Provider.php';
+		$service_provider_file = $this->src_path . 'Service_Providers/Taxonomies/' . $this->ucwords( $this->slug ) . '_Service_Provider.php';
 		$this->file_system->write_file( $service_provider_file, $this->get_service_provider_contents() );
 	}
 
@@ -142,7 +142,7 @@ class Taxonomy_Generator extends Command {
 
 	private function get_taxonomy_class_contents() {
 
-		$taxonomy_file = file_get_contents( trailingslashit( dirname( __DIR__, 1 ) ) . 'assets/templates/cli/taxonomies/taxonomy.php' );
+		$taxonomy_file = file_get_contents( $this->templates_path . 'taxonomies/taxonomy.php' );
 
 		return sprintf(
 			$taxonomy_file,
@@ -154,7 +154,7 @@ class Taxonomy_Generator extends Command {
 
 	private function get_taxonomy_config_contents() {
 
-		$config_file = file_get_contents( trailingslashit( dirname( __DIR__, 1 ) ) . 'assets/templates/cli/taxonomies/config.php' );
+		$config_file = file_get_contents( $this->templates_path . 'taxonomies/config.php' );
 
 		return sprintf(
 			$config_file,
@@ -168,7 +168,7 @@ class Taxonomy_Generator extends Command {
 	private function get_service_provider_contents() {
 		$post_types = $this->format_post_types();
 
-		$service_provider = file_get_contents( trailingslashit( dirname( __DIR__, 1 ) ) . 'assets/templates/cli/taxonomies/service_provider.php' );
+		$service_provider = file_get_contents( $this->templates_path . 'taxonomies/service_provider.php' );
 		return sprintf(
 			$service_provider,
 			$this->namespace,
