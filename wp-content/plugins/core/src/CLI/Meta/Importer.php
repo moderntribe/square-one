@@ -168,7 +168,7 @@ class Importer extends Command {
 	protected function field_keys() {
 		$keys = '';
 		foreach ( $this->group['fields'] as $field ) {
-			$keys .= "\t\t\tstatic::" . $this->constant_from_class( $this->sanitize_slug( [ $field['label'] ] ) ) . ';' . PHP_EOL;
+			$keys .= "\t\t\tstatic::" . $this->constant_from_class( $this->sanitize_slug( [ $field['label'] ] ) ) . ',' . PHP_EOL;
 		}
 		return $keys;
 	}
