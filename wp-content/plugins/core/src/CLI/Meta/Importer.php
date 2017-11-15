@@ -44,7 +44,7 @@ class Importer extends Command {
 			$this->setup_field_group();
 
 			// Write the meta files.
-			$this->update_service_provider();
+			$this->update_service_provider();die;
 			$this->create_object_class();
 
 			// Delete the field group.
@@ -85,8 +85,9 @@ class Importer extends Command {
 
 	protected function update_service_provider() {
 		$object_meta_service_provider = trailingslashit( dirname( __DIR__, 2 ) ) . 'Service_Providers/Object_Meta_Provider.php';
-		echo $object_meta_service_provider;die;
-		// use Tribe\Libs\Object_Meta\Meta_Repository;
+
+		// Insert the Use.
+		$this->insert_into_existing_file($object_meta_service_provider, 'use ' . $this->namespace . ';' . PHP_EOL, 'use Tribe\Libs\Object_Meta\Meta_Repository;' );
 
 		// const REPO    = 'object_meta.collection_repo';
 
