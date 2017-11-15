@@ -46,7 +46,7 @@ class Importer extends Command {
 			$this->setup_field_group();
 
 			// Write the meta files.
-			$this->update_service_provider();die;
+			$this->update_service_provider();
 			$this->create_object_class();
 
 			// Delete the field group.
