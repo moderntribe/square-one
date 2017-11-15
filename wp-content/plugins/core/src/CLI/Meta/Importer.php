@@ -102,7 +102,7 @@ class Importer extends Command {
 		$this->insert_into_existing_file( $object_meta_service_provider, $key, 'private $keys = [' );
 
 		// public function register( Container $container ) {
-		$container_partial_file = file_get_contents( trailingslashit( dirname( __DIR__, 2 ) ) . 'assets/templates/cli/object_meta/container_partial.php' );
+		$container_partial_file = file_get_contents( trailingslashit( dirname( __DIR__, 3 ) ) . 'assets/templates/cli/object_meta/container_partial.php' );
 		$container_partial = sprintf( $container_partial_file, $this->class_name, $this->build_object_array() );
 		$this->insert_into_existing_file( $object_meta_service_provider, $container_partial, 'public function register( Container $container ) {' );
 
