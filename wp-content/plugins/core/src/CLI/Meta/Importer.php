@@ -83,7 +83,7 @@ class Importer extends Command {
 		$this->slug       = $this->sanitize_slug( [ $this->title ] );
 		$this->class_name = $this->ucwords( $this->slug );
 		$this->namespace  = 'Tribe\Project\Object_Meta\\' . $this->class_name;
-		$this->const_name = strtoupper( str_replace( '_', '', $this->slug ) );
+		$this->const_name = $this->constant_from_class( $this->slug );
 		$this->pimple_key = strtolower( 'object_meta.' . $this->const_name );
 	}
 
@@ -154,7 +154,12 @@ class Importer extends Command {
 	}
 
 	protected function field_constants() {
+		$constants = '';
 
+		foreach ( $this->group['fields'] as $field ) {
+			$constants .= "\tconst " . $this->constant_from_class( $this->sanitize_slug( [$field['label']] ) ) . ' = ' . '\'' . $this->slug . '_' . $this->sanitize_slug( $field['label'] ) . '\';' . PHP_EOL;
+		}
+		return $constants;
 	}
 
 	protected function field_keys() {
