@@ -78,7 +78,7 @@ class Importer extends Command {
 		$this->group      = acf_prepare_field_group_for_export( $group );
 		$this->key        = $this->group['key'];
 		$this->title      = $this->group['title'];
-		$this->slug       = $this->sanitize_slug( $this->title );
+		$this->slug       = str_replace( '-', '_', sanitize_title( $this->title ) );
 		$this->class_name = $this->ucwords( $this->slug );
 		$this->namespace  = 'Tribe\Project\Object_Meta\\' . $this->class_name;
 	}
