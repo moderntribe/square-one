@@ -3,7 +3,6 @@
 namespace Tribe\Project\CLI;
 
 class CLI_Generator extends Command {
-	use File_System;
 
 	protected $slug = '';
 	protected $class_name = '';
@@ -57,7 +56,7 @@ class CLI_Generator extends Command {
 
 	protected function create_cli_file() {
 		$new_cli_command = trailingslashit( dirname( __DIR__, 1 ) ) . 'CLI/' . $this->ucwords( $this->slug ) . '.php';
-		$this->write_file( $new_cli_command, $this->get_cli_file_contents() );
+		$this->file_system->write_file( $new_cli_command, $this->get_cli_file_contents() );
 	}
 
 	protected function get_cli_file_contents() {
@@ -75,14 +74,14 @@ class CLI_Generator extends Command {
 		$cli_service_provider = trailingslashit( dirname( __DIR__, 1 ) ) . 'Service_Providers/CLI_Provider.php';
 
 		// Use.
-		$this->insert_into_existing_file($cli_service_provider, 'use ' . $this->namespace . ';' . PHP_EOL, 'use Tribe\Project\CLI\CLI_Generator;' );
+		$this->file_system->insert_into_existing_file($cli_service_provider, 'use ' . $this->namespace . ';' . PHP_EOL, 'use Tribe\Project\CLI\CLI_Generator;' );
 
 		// Add class to pimple container.
 		$container_partial_file = file_get_contents( trailingslashit( dirname( __DIR__, 2 ) ) . 'assets/templates/cli/cli/container_partial.php' );
 		$container_partial = sprintf( $container_partial_file, $this->slug, $this->class_name );
-		$this->insert_into_existing_file( $cli_service_provider, $container_partial, 'return new CLI_Generator();' );
+		$this->file_system->insert_into_existing_file( $cli_service_provider, $container_partial, 'return new CLI_Generator();' );
 
 		// Add to hook.
-		$this->insert_into_existing_file( $cli_service_provider, "\t\t\t" . '$container[\'cli.' . $this->slug . '\']->register();' . PHP_EOL , '$container[\'cli.cli-generator\']->register();' );
+		$this->file_system->insert_into_existing_file( $cli_service_provider, "\t\t\t" . '$container[\'cli.' . $this->slug . '\']->register();' . PHP_EOL , '$container[\'cli.cli-generator\']->register();' );
 	}
 }

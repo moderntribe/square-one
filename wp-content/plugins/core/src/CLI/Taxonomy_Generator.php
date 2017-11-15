@@ -6,7 +6,6 @@ use Tribe\Project\Post_Types\Page\Page;
 use Tribe\Project\Post_Types\Post\Post;
 
 class Taxonomy_Generator extends Command {
-	use File_System;
 
 	const POST_TYPES = [
 		Post::NAME,
@@ -116,7 +115,7 @@ class Taxonomy_Generator extends Command {
 	private function create_taxonomy_directory() {
 		$directory = trailingslashit( dirname( __DIR__ ) ) . 'Taxonomies/' . $this->ucwords( $this->slug );
 		$this->taxonomy_directory = $directory;
-		$this->create_directory( $directory );
+		$this->file_system->create_directory( $directory );
 	}
 
 	private function create_taxonomy_class() {
@@ -128,17 +127,17 @@ class Taxonomy_Generator extends Command {
 
 	private function create_service_provider() {
 		$service_provider_file = trailingslashit( dirname( __DIR__, 1 ) ) . 'Service_Providers/Taxonomies/' . $this->ucwords( $this->slug ) . '_Service_Provider.php';
-		$this->write_file( $service_provider_file, $this->get_service_provider_contents() );
+		$this->file_system->write_file( $service_provider_file, $this->get_service_provider_contents() );
 	}
 
 	private function new_taxonomy_class_file() {
 		$class_file = trailingslashit( $this->taxonomy_directory ) . $this->ucwords( $this->slug ) . '.php';
-		$this->write_file( $class_file, $this->get_taxonomy_class_contents() );
+		$this->file_system->write_file( $class_file, $this->get_taxonomy_class_contents() );
 	}
 
 	private function new_taxonomy_config_file() {
 		$config_file = trailingslashit( $this->taxonomy_directory ) . 'Config.php';
-		$this->write_file( $config_file, $this->get_taxonomy_config_contents() );
+		$this->file_system->write_file( $config_file, $this->get_taxonomy_config_contents() );
 	}
 
 	private function get_taxonomy_class_contents() {

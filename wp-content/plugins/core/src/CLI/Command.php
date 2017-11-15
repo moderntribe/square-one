@@ -5,6 +5,13 @@ use WP_CLI;
 
 abstract class Command extends \WP_CLI_Command {
 
+	protected $file_system = null;
+
+	public function __construct( File_System $file_system ) {
+		$this->file_system = $file_system;
+		parent::__construct();
+	}
+
 	public function register() {
 		if ( ! defined( 'WP_CLI' ) || ! WP_CLI ) {
 			return;

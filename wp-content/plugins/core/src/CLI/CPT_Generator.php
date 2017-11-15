@@ -3,8 +3,6 @@
 namespace Tribe\Project\CLI;
 
 class CPT_Generator extends Command {
-	use File_System;
-
 	private $cpt_directory;
 	private $slug;
 	private $class_name;
@@ -71,7 +69,7 @@ class CPT_Generator extends Command {
 
 	private function create_cpt_directory() {
 		$new_directory = trailingslashit( dirname( __DIR__, 1 ) ) . 'Post_Types/' . $this->ucwords( $this->slug );
-		$this->create_directory( $new_directory );
+		$this->file_system->create_directory( $new_directory );
 		$this->cpt_directory = $new_directory;
 	}
 
@@ -95,17 +93,17 @@ class CPT_Generator extends Command {
 	private function new_service_provider_file() {
 		$new_service_provider         = trailingslashit( dirname( __DIR__, 1 ) ) . 'Service_Providers/Post_Types/' . $this->ucwords( $this->slug ) . '_Service_Provider.php';
 		$this->service_provider_class = $this->ucwords( $this->slug );
-		$this->write_file( $new_service_provider, $this->get_service_provider_contents() );
+		$this->file_system->write_file( $new_service_provider, $this->get_service_provider_contents() );
 	}
 
 	private function new_post_object_class_file() {
 		$class_file = trailingslashit( $this->cpt_directory ) . $this->ucwords( $this->slug ) . '.php';
-		$this->write_file( $class_file, $this->get_class_contents() );
+		$this->file_system->write_file( $class_file, $this->get_class_contents() );
 	}
 
 	private function new_post_object_config_file() {
 		$config = trailingslashit( $this->cpt_directory ) . 'Config.php';
-		$this->write_file( $config, $this->get_config_contents() );
+		$this->file_system->write_file( $config, $this->get_config_contents() );
 	}
 
 	///------------templates---------------///

@@ -3,7 +3,6 @@
 namespace Tribe\Project\CLI;
 
 class Meta_Generator extends Command {
-	use File_System;
 
 	public function description() {
 		return __( 'Generates object meta.', 'tribe' );
