@@ -142,7 +142,7 @@ class Taxonomy_Generator extends Command {
 
 	private function get_taxonomy_class_contents() {
 
-		$taxonomy_file = file_get_contents( $this->templates_path . 'taxonomies/taxonomy.php' );
+		$taxonomy_file = $this->file_system->get_file( $this->templates_path . 'taxonomies/taxonomy.php' );
 
 		return sprintf(
 			$taxonomy_file,
@@ -154,7 +154,7 @@ class Taxonomy_Generator extends Command {
 
 	private function get_taxonomy_config_contents() {
 
-		$config_file = file_get_contents( $this->templates_path . 'taxonomies/config.php' );
+		$config_file = $this->file_system->get_file( $this->templates_path . 'taxonomies/config.php' );
 
 		return sprintf(
 			$config_file,
@@ -168,7 +168,7 @@ class Taxonomy_Generator extends Command {
 	private function get_service_provider_contents() {
 		$post_types = $this->format_post_types();
 
-		$service_provider = file_get_contents( $this->templates_path . 'taxonomies/service_provider.php' );
+		$service_provider = $this->file_system->get_file( $this->templates_path . 'taxonomies/service_provider.php' );
 		return sprintf(
 			$service_provider,
 			$this->namespace,

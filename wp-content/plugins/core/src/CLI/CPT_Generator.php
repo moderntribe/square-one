@@ -110,7 +110,7 @@ class CPT_Generator extends Command {
 
 	private function get_class_contents() {
 
-		$post_type_file = file_get_contents( $this->templates_path . 'post_type/post_type.php' );
+		$post_type_file = $this->file_system->get_file( $this->templates_path . 'post_type/post_type.php' );
 
 		return sprintf(
 			$post_type_file,
@@ -123,7 +123,7 @@ class CPT_Generator extends Command {
 
 	private function get_config_contents() {
 
-		$config_file = file_get_contents( $this->templates_path . 'post_type/config.php' );
+		$config_file = $this->file_system->get_file( $this->templates_path . 'post_type/config.php' );
 
 		return sprintf(
 			$config_file,
@@ -138,7 +138,7 @@ class CPT_Generator extends Command {
 
 	private function get_service_provider_contents() {
 
-		$service_provider_file = file_get_contents( $this->templates_path . 'post_type/service_provider.php' );
+		$service_provider_file = $this->file_system->get_file( $this->templates_path . 'post_type/service_provider.php' );
 
 		return sprintf(
 			$service_provider_file,

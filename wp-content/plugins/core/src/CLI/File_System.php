@@ -47,5 +47,8 @@ class File_System {
 		$this->write_file( $file, $contents, true );
 	}
 
+	public function get_file( $path ) {
+		return file_get_contents( $path );
+	}
 
 }

@@ -60,7 +60,7 @@ class CLI_Generator extends Command {
 	}
 
 	protected function get_cli_file_contents() {
-		$command_file = file_get_contents( $this->templates_path . 'cli/cli.php' );
+		$command_file = $this->file_system->get_file( $this->templates_path . 'cli/cli.php' );
 
 		return sprintf(
 			$command_file,
@@ -77,7 +77,7 @@ class CLI_Generator extends Command {
 		$this->file_system->insert_into_existing_file($cli_service_provider, 'use ' . $this->namespace . ';' . PHP_EOL, 'use Tribe\Project\CLI\CLI_Generator;' );
 
 		// Add class to pimple container.
-		$container_partial_file = file_get_contents( $this->templates_path . 'cli/container_partial.php' );
+		$container_partial_file = $this->file_system->get_file( $this->templates_path . 'cli/container_partial.php' );
 		$container_partial = sprintf( $container_partial_file, $this->slug, $this->class_name );
 		$this->file_system->insert_into_existing_file( $cli_service_provider, $container_partial, 'return new CLI_Generator();' );
 
