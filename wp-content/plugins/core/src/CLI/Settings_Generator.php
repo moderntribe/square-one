@@ -56,7 +56,7 @@ class Settings_Generator extends Command {
 
 	protected function update_service_provider() {
 		$service_provider = $this->src_path . 'Service_Providers/Settings_Provider.php';
-		
+
 		// Add class to pimple container.
 		$container_partial_file = $this->file_system->get_file( $this->templates_path . 'settings/container_partial.php' );
 		$container_partial = sprintf( $container_partial_file, $this->slug, $this->class_name );

@@ -6,4 +6,4 @@
 		};
 		add_action( 'init', function () use ( $container ) {
 			$container[ 'settings.%1$s' ]->hook();
-	}, 0, 0 );
+		}, 0, 0 );
