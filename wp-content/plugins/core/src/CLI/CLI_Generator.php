@@ -79,7 +79,7 @@ class CLI_Generator extends Command {
 		// Add class to pimple container.
 		$container_partial_file = $this->file_system->get_file( $this->templates_path . 'cli/container_partial.php' );
 		$container_partial = sprintf( $container_partial_file, $this->slug, $this->class_name );
-		$this->file_system->insert_into_existing_file( $cli_service_provider, $container_partial, 'return new CLI_Generator();' );
+		$this->file_system->insert_into_existing_file( $cli_service_provider, $container_partial, 'return new CLI_Generator' );
 
 		// Add to hook.
 		$this->file_system->insert_into_existing_file( $cli_service_provider, "\t\t\t" . '$container[\'cli.' . $this->slug . '\']->register();' . PHP_EOL , '$container[\'cli.cli-generator\']->register();' );
