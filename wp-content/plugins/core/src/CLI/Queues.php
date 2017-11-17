@@ -2,6 +2,7 @@
 
 namespace Tribe\Project\CLI;
 
+use cli\Table;
 use Tribe\Project\Queues\Contracts\Queue;
 
 class Queues extends \WP_CLI_Command {
@@ -16,14 +17,20 @@ class Queues extends \WP_CLI_Command {
 	public function list() {
 		$queues = [];
 		foreach ( Queue::instances() as $queue ) {
-			/** var Tribe\Project\Queues\Contracts\Queue $queue */
-			$queues[]=[
-				'Queue' => $queue->get_name(),
-				'Backend' => $queue->get_backend_type()
+			/** @var Queue $queue */
+
+			$parts    = explode( '\\', $queue->get_backend_type() );
+			$queues[] = [
+				'Queue'        => $queue->get_name(),
+				'Backend'      => end( $parts ),
+				'Pending Jobs' => $queue->count(),
 			];
 		}
 
-		\WP_CLI::table( $queues );
+
+		$table = new Table( $queues );
+		$table->display();
+
 	}
 
 }

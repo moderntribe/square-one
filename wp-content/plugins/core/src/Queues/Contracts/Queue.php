@@ -31,6 +31,10 @@ abstract class Queue {
 		return $message;
 	}
 
+	public function count():int{
+		return $this->backend->count( $this->get_name() );
+	}
+
 	public function ack( $job_id ) {
 		$this->backend->ack( $job_id, $this->get_name() );
 	}
@@ -43,7 +47,7 @@ abstract class Queue {
 		return self::$instances;
 	}
 
-	public static function instance() {
+	public static function instance(): Queue {
 		return tribe_project()->container()[ 'queues.' . __CLASS__ ];
 	}
 

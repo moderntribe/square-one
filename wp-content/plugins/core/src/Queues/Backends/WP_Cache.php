@@ -123,4 +123,10 @@ class WP_Cache implements Backend {
 	public function get_type(): string {
 		return self::class;
 	}
+
+	public function count( string $queue_name ): int {
+		$queue = $this->get_queue( $queue_name );
+
+		return \count( $queue );
+	}
 }

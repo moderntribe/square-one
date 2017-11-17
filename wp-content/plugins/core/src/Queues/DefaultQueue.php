@@ -11,5 +11,4 @@ class DefaultQueue extends Queue {
 	public function get_name(): string {
 		return self::NAME;
 	}
-
 }

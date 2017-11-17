@@ -15,4 +15,6 @@ interface Backend {
 	public function nack( string $job_id, string $queue_name );
 
 	public function get_type(): string;
+
+	public function count( string $queue_name ): int;
 }
