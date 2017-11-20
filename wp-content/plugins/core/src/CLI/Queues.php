@@ -39,12 +39,22 @@ class Queues extends \WP_CLI_Command {
 		global $wpdb;
 
 		$table_exists = $wpdb->query( $wpdb->prepare(
-			'SHOW TABLES LIKE \'%s\'',
-			self::DB_TABLE
+			'SHOW TABLES LIKE %s',
+			$wpdb->prefix . self::DB_TABLE
 		) );
 
+		// Create table.
 		if ( ! $table_exists ) {
-			// Create table.
+			$wpdb->query( sprintf (
+				'CREATE TABLE %s (
+					id bigint(20) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
+					task_handler varchar(255) NOT NULL,
+					args text NOT NULL,
+					priority int(3) NOT NULL,
+					taken int(10)
+				)',
+				$wpdb->prefix . self::DB_TABLE
+			) );
 			
 		}
 
