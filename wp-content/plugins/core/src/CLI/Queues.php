@@ -4,10 +4,9 @@ namespace Tribe\Project\CLI;
 
 use cli\Table;
 use Tribe\Project\Queues\Contracts\Queue;
+use Tribe\Project\Queues\Backends\Mysql;
 
 class Queues extends \WP_CLI_Command {
-
-	const DB_TABLE = 's1_queue';
 
 	/**
 	 * ## EXAMPLES
@@ -40,7 +39,7 @@ class Queues extends \WP_CLI_Command {
 
 		$table_exists = $wpdb->query( $wpdb->prepare(
 			'SHOW TABLES LIKE %s',
-			$wpdb->prefix . self::DB_TABLE
+			$wpdb->prefix . Mysql::DB_TABLE
 		) );
 
 		// Create table.
@@ -53,7 +52,7 @@ class Queues extends \WP_CLI_Command {
 					priority int(3) NOT NULL,
 					taken int(10)
 				)',
-				$wpdb->prefix . self::DB_TABLE
+				$wpdb->prefix . Mysql::DB_TABLE
 			) );
 
 			\WP_CLI::success( __( 'Task table successfully created.', 'tribe' ) );

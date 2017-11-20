@@ -7,6 +7,14 @@ use Tribe\Project\Queues\Message;
 
 class Mysql implements Backend {
 
+	const DB_TABLE = 's1_queue';
+
+	public function __construct() {
+		global $wpdb;
+
+		$this->table_name = $wpdb->prefix . self::DB_TABLE;
+	}
+
 	public function enqueue( string $queue_name, Message $message ) {
 
 	}
