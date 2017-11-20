@@ -96,7 +96,7 @@ class WP_Cache implements Backend {
         if ( $queue === false ) {
 	        $queue = [];
         } else {
-	        $queue = json_decode( $queue );
+	        $queue = json_decode( $queue, true );
         }
 
         return $queue;
