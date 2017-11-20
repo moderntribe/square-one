@@ -16,7 +16,17 @@ class Mysql implements Backend {
 	}
 
 	public function enqueue( string $queue_name, Message $message ) {
+		global $wpdb;
 
+		return $wpdb->insert( $this->table_name, $this->prepare_data( $message ) );
+	}
+
+	private function prepare_data( $message ) {
+		return [
+			'task_handler' => $message->get_task_handler(),
+			'args'         => $message->get_args(),
+			'priority'     => $message->get_priority(),
+		];
 	}
 
 	public function dequeue( string $queue_name ) {
