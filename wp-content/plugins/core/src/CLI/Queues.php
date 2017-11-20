@@ -7,6 +7,8 @@ use Tribe\Project\Queues\Contracts\Queue;
 
 class Queues extends \WP_CLI_Command {
 
+	const DB_TABLE = 's1_queue';
+
 	/**
 	 * ## EXAMPLES
 	 *
@@ -30,6 +32,21 @@ class Queues extends \WP_CLI_Command {
 
 		$table = new Table( $queues );
 		$table->display();
+
+	}
+
+	public function add_table() {
+		global $wpdb;
+
+		$table_exists = $wpdb->query( $wpdb->prepare(
+			'SHOW TABLES LIKE \'%s\'',
+			self::DB_TABLE
+		) );
+
+		if ( ! $table_exists ) {
+			// Create table.
+			
+		}
 
 	}
 
