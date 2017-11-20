@@ -42,10 +42,15 @@ class Mysql implements Backend {
 	}
 
 	public function get_type(): string {
-
+		return self::class;
 	}
 
 	public function count( string $queue_name ): int {
+		global $wpdb;
 
+		return $wpdb->query( $wpdb->prepare(
+			'SELECT COUNT(id) FROM %s',
+			$this->table_name
+		) );
 	}
 }
