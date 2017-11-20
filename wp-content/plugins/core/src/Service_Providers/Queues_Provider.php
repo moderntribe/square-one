@@ -7,6 +7,7 @@ use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Tribe\Project\Queues\Backends\WP_Cache;
 use Tribe\Project\Queues\DefaultQueue;
+use Tribe\Project\Queues\Tasks\Null_Task;
 
 class Queues_Provider implements ServiceProviderInterface {
 
@@ -27,6 +28,28 @@ class Queues_Provider implements ServiceProviderInterface {
 
 		add_action( 'plugins_loaded', function () use ($container) {
 			$container['queues.DefaultQueue'];
+
+			// Add the item to the queue.
+			$container['queues.DefaultQueue']->dispatch( Null_Task::class, [ 'fake' => 'task' ], 10 );
+
+			// Pull the queue item.
+			$job = $container['queues.DefaultQueue']->reserve();
+
+			// Verify we can dispatch the task.
+			$task_class = $job->get_task_handler();
+			if ( ! class_exists( $task_class ) ) {
+				return;
+			}
+
+			// Process the task.
+			$task = new $task_class();
+			if ( $task->handle( $job->get_args() ) ) {
+				// Acknowledge.
+				$container['queues.DefaultQueue']->ack( $job->get_job_id() );
+			} else {
+				$container['queues.DefaultQueue']->nack( $job->get_job_id() );
+			}
+
 		} );
 	}
 }
