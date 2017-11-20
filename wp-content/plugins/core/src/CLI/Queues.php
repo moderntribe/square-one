@@ -55,9 +55,11 @@ class Queues extends \WP_CLI_Command {
 				)',
 				$wpdb->prefix . self::DB_TABLE
 			) );
-			
+
+			\WP_CLI::success( __( 'Task table successfully created.', 'tribe' ) );
 		}
 
+		\WP_CLI::success( __( 'Task table already exists.', 'tribe' ) );
 	}
 
 }
