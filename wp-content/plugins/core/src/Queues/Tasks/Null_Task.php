@@ -6,6 +6,7 @@ use Tribe\Project\Queues\Contracts\Task;
 
 class Null_Task implements Task {
 	public function handle( array $args ) {
+		\WP_CLI::line( '' );
 		return true;
 	}
 }
