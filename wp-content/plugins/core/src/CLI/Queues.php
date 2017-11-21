@@ -6,7 +6,7 @@ use cli\Table;
 use Pimple\Container;
 use Tribe\Project\Queues\Contracts\Queue;
 use Tribe\Project\Queues\Backends\Mysql;
-use Tribe\Project\Queues\Tasks\Null_Task;
+use Tribe\Project\Queues\Tasks\Noop;
 
 class Queues extends \WP_CLI_Command {
 
@@ -75,7 +75,7 @@ class Queues extends \WP_CLI_Command {
 	public function add_tasks() {
 		$task_count = rand( 1, 50 );
 		for ( $i = 1; $i < $task_count; $i ++ ) {
-			$this->container['queues.TestingQueue']->dispatch( Null_Task::class, [ 'fake' => 'task' . $i ], $i );
+			$this->container['queues.TestingQueue']->dispatch( Noop::class, [ 'fake' => 'task' . $i ], $i );
 		}
 	}
 

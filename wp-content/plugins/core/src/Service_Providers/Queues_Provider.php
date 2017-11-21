@@ -8,7 +8,7 @@ use Pimple\ServiceProviderInterface;
 use Tribe\Project\Queues\Backends\Mysql;
 use Tribe\Project\Queues\Backends\WP_Cache;
 use Tribe\Project\Queues\DefaultQueue;
-use Tribe\Project\Queues\Tasks\Null_Task;
+use Tribe\Project\Queues\Tasks\Noop;
 use Tribe\Project\Queues\TestingQueue;
 
 class Queues_Provider implements ServiceProviderInterface {
