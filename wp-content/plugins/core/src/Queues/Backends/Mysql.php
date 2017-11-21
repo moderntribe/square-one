@@ -18,7 +18,10 @@ class Mysql implements Backend {
 	public function enqueue( string $queue_name, Message $message ) {
 		global $wpdb;
 
-		return $wpdb->insert( $this->table_name, $this->prepare_data( $message ) );
+		$data = $this->prepare_data( $message );
+		$data['queue'] = $queue_name;
+
+		return $wpdb->insert( $this->table_name, $data );
 	}
 
 	private function prepare_data( $message ) {
