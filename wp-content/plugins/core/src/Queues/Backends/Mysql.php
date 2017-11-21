@@ -34,6 +34,30 @@ class Mysql implements Backend {
 	}
 
 	public function dequeue( string $queue_name ) {
+		global $wpdb;
+
+		$queue = $wpdb->get_row(
+			$wpdb->prepare(
+				"SELECT * FROM $this->table_name
+				WHERE queue = %s
+				AND taken < %d
+				ORDER BY priority ASC
+				LIMIT 0,1
+				",
+				$queue_name,
+				time()
+			),
+			'ARRAY_A'
+		);
+		$queue['args'] = unserialize( $queue['args'] );
+
+		$wpdb->update(
+			$this->table_name,
+			[ 'taken' => time() ],
+			[ 'id' => $queue['id'] ]
+		);
+
+		return new Message( $queue['task_handler'], $queue['args'], $queue['priority'], $queue['id'] );
 
 	}
 
