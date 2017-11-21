@@ -27,8 +27,9 @@ class Mysql implements Backend {
 	private function prepare_data( $message ) {
 		return [
 			'task_handler' => $message->get_task_handler(),
-			'args'         => $message->get_args(),
+			'args'         => serialize( $message->get_args() ),
 			'priority'     => $message->get_priority(),
+			'taken'        => 0,
 		];
 	}
 
