@@ -89,22 +89,30 @@ class Queues extends \WP_CLI_Command {
 			if ( $queue->get_name() === $args[0] ) {
 				$queue_class = get_class( $queue );
 				$backend_class = $queue->get_backend_type();
+			}
+		}
 
-				$tasks = new $queue_class( new $backend_class() );
-				$job = $tasks->reserve();
+		if ( ! class_exists( $queue_class ) || !class_exists( $backend_class ) ) {
+			\WP_CLI::error( __( 'The queue and/or backend in question could not be found.', 'tribe' ) );
+		}
 
-				$task_class = $job->get_task_handler();
-		        if ( ! class_exists( $task_class ) ) {
-					return;
-		        }
-				$task = new $task_class();
+		$tasks = new $queue_class( new $backend_class() );
 
-		        if ( $task->handle( $job->get_args() ) ) {
-					// Acknowledge.
-					$task_class->ack( $job->get_job_id() );
-				} else {
-					$task_class->nack( $job->get_job_id() );
-				}
+		// Run forever...or until the queue is empty.
+		while ( 0 != $tasks->count() ) {
+			$job = $tasks->reserve();
+
+			$task_class = $job->get_task_handler();
+			if ( ! class_exists( $task_class ) ) {
+				return;
+			}
+			$task = new $task_class();
+
+			if ( $task->handle( $job->get_args() ) ) {
+				// Acknowledge.
+				$queue->ack( $job->get_job_id() );
+			} else {
+				$queue->nack( $job->get_job_id() );
 			}
 		}
 
