@@ -105,9 +105,8 @@ class Mysql implements Backend {
 	public function count( string $queue_name ): int {
 		global $wpdb;
 
-		return $wpdb->query( $wpdb->prepare(
-			'SELECT COUNT(id) FROM %s',
-			$this->table_name
-		) );
+		return $wpdb->get_var(
+			"SELECT COUNT(*) FROM $this->table_name"
+		);
 	}
 }

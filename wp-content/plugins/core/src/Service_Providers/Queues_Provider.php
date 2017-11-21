@@ -5,6 +5,7 @@ namespace Tribe\Project\Service_Providers;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
+use Tribe\Project\Queues\Backends\Mysql;
 use Tribe\Project\Queues\Backends\WP_Cache;
 use Tribe\Project\Queues\DefaultQueue;
 use Tribe\Project\Queues\Tasks\Null_Task;
@@ -17,11 +18,16 @@ class Queues_Provider implements ServiceProviderInterface {
 			return new WP_Cache();
 		};
 
+		$container['queues.backend.mysql'] = function() {
+			return new Mysql();
+		};
+
 		$container['queues.DefaultQueue'] = function ( $container ) {
 
 			// We probably want a constant based conditional/switch here
 			// to allow easy backend change in different environments
 			$backend = $container['queues.backend.wp_cache'];
+			$backend = $container['queues.backend.mysql'];
 
 			return new DefaultQueue( $backend );
 		};
