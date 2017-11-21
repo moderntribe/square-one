@@ -71,7 +71,31 @@ class Mysql implements Backend {
 	}
 
 	public function nack( string $job_id, string $queue_name ) {
+		global $wpdb;
 
+		$wpdb->update(
+			$this->table_name,
+			[ 'taken' => null ],
+			[ 'id' => $job_id ]
+		);
+	}
+
+	public function cleanup() {
+		global $wpdb;
+
+		$stale = $wpdb->get_col(
+			$wpdb->prepare(
+				'SELECT id FROM %s
+				WHERE taken > %d
+				',
+				$this->table_name,
+				time() - 5 * DAY_IN_SECONDS
+			)
+		);
+
+		foreach ( $stale as $id ) {
+			$this->nack( $id, 'null' );
+		}
 	}
 
 	public function get_type(): string {
