@@ -49,6 +49,11 @@ class Mysql implements Backend {
 			),
 			'ARRAY_A'
 		);
+
+		if ( empty( $queue ) ) {
+			return;
+		}
+
 		$queue['args'] = unserialize( $queue['args'] );
 
 		$wpdb->update(
@@ -75,7 +80,7 @@ class Mysql implements Backend {
 
 		$wpdb->update(
 			$this->table_name,
-			[ 'taken' => null ],
+			[ 'taken' => 0 ],
 			[ 'id' => $job_id ]
 		);
 	}
