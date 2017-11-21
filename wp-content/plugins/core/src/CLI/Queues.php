@@ -53,17 +53,17 @@ class Queues extends \WP_CLI_Command {
 
 		// Create table.
 		if ( ! $table_exists ) {
-			$wpdb->query( sprintf (
-				'CREATE TABLE %s (
+			$table_name = $wpdb->prefix . Mysql::DB_TABLE;
+			$wpdb->query(
+				"CREATE TABLE $table_name (
 					id bigint(20) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
 					queue varchar(255) NOT NULL,
 					task_handler varchar(255) NOT NULL,
 					args text NOT NULL,
-					priority int(3) NOT NULL,
-					taken int(10) 
-				)',
-				$wpdb->prefix . Mysql::DB_TABLE
-			) );
+					priority int(3),
+					taken int(10) NOT NULL DEFAULT 0
+				)"
+			);
 
 			\WP_CLI::success( __( 'Task table successfully created.', 'tribe' ) );
 			return;
@@ -89,6 +89,7 @@ class Queues extends \WP_CLI_Command {
 			if ( $queue->get_name() === $args[0] ) {
 				$queue_class = get_class( $queue );
 				$backend_class = $queue->get_backend_type();
+				break;
 			}
 		}
 

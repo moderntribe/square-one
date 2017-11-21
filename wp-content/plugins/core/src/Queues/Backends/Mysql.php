@@ -90,11 +90,10 @@ class Mysql implements Backend {
 
 		$stale = $wpdb->get_col(
 			$wpdb->prepare(
-				'SELECT id FROM %s
+				"SELECT id FROM $this->table_name
 				WHERE taken > %d
-				',
-				$this->table_name,
-				time() - 5 * DAY_IN_SECONDS
+				",
+				time() - 300
 			)
 		);
 
