@@ -47,6 +47,7 @@ class Queues extends \WP_CLI_Command {
 			$wpdb->query( sprintf (
 				'CREATE TABLE %s (
 					id bigint(20) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
+					queue varchar(255) NOT NULL,
 					task_handler varchar(255) NOT NULL,
 					args text NOT NULL,
 					priority int(3) NOT NULL,
