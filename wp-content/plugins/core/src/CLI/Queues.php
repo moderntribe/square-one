@@ -60,15 +60,54 @@ class Queues extends \WP_CLI_Command {
 					task_handler varchar(255) NOT NULL,
 					args text NOT NULL,
 					priority int(3) NOT NULL,
-					taken int(10)
+					taken int(10) 
 				)',
 				$wpdb->prefix . Mysql::DB_TABLE
 			) );
 
 			\WP_CLI::success( __( 'Task table successfully created.', 'tribe' ) );
+			return;
 		}
 
 		\WP_CLI::success( __( 'Task table already exists.', 'tribe' ) );
+	}
+
+	public function add_tasks() {
+		$task_count = rand( 1, 50 );
+		for ( $i = 1; $i < $task_count; $i ++ ) {
+			$this->container['queues.TestingQueue']->dispatch( Null_Task::class, [ 'fake' => 'task' . $i ], $i );
+		}
+	}
+
+	public function process( $args ) {
+
+		if ( ! isset( $args[0] ) ) {
+			\WP_CLI::error( __( 'You must specify which queue you wish to process.', 'tribe' ) );
+		}
+
+		foreach( Queue::instances() as $queue ) {
+			if ( $queue->get_name() === $args[0] ) {
+				$queue_class = get_class( $queue );
+				$backend_class = $queue->get_backend_type();
+
+				$tasks = new $queue_class( new $backend_class() );
+				$job = $tasks->reserve();
+
+				$task_class = $job->get_task_handler();
+		        if ( ! class_exists( $task_class ) ) {
+					return;
+		        }
+				$task = new $task_class();
+
+		        if ( $task->handle( $job->get_args() ) ) {
+					// Acknowledge.
+					$task_class->ack( $job->get_job_id() );
+				} else {
+					$task_class->nack( $job->get_job_id() );
+				}
+			}
+		}
+
 	}
 
 }
