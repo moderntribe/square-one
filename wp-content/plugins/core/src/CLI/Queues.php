@@ -85,23 +85,17 @@ class Queues extends \WP_CLI_Command {
 			\WP_CLI::error( __( 'You must specify which queue you wish to process.', 'tribe' ) );
 		}
 
-		foreach( Queue::instances() as $queue ) {
-			if ( $queue->get_name() === $args[0] ) {
-				$queue_class = get_class( $queue );
-				$backend_class = $queue->get_backend_type();
-				break;
-			}
+		$queue_name = $args[0];
+
+		if ( ! array_key_exists( $queue_name, Queue::instances() ) ) {
+			\WP_CLI::error( __( 'That queue name doesn\'t appear to be valid.', 'tribe' ) );
 		}
 
-		if ( ! class_exists( $queue_class ) || !class_exists( $backend_class ) ) {
-			\WP_CLI::error( __( 'The queue and/or backend in question could not be found.', 'tribe' ) );
-		}
-
-		$tasks = new $queue_class( new $backend_class() );
+		$queue = Queue::get_instance( $queue_name );
 
 		// Run forever...or until the queue is empty.
-		while ( 0 != $tasks->count() ) {
-			$job = $tasks->reserve();
+		while ( 0 != $queue->count() ) {
+			$job = $queue->reserve();
 
 			$task_class = $job->get_task_handler();
 			if ( ! class_exists( $task_class ) ) {
