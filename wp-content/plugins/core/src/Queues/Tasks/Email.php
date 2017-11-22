@@ -7,7 +7,7 @@ use Tribe\Project\Queues\Contracts\Task;
 class Email implements Task {
 
 	public function handle( array $args ) {
-		wp_mail( $args['to'], $args['subject'], $args['message'], $args['headers'], $args['attachments'] );
+		return wp_mail( $args['to'], $args['subject'], $args['message'], $args['headers'], $args['attachments'] );
 	}
 
 	public static function mail( $args, $queue_name = 'default' ) {
