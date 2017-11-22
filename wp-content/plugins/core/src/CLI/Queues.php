@@ -72,10 +72,27 @@ class Queues extends \WP_CLI_Command {
 		\WP_CLI::success( __( 'Task table already exists.', 'tribe' ) );
 	}
 
-	public function add_tasks() {
-		$task_count = rand( 1, 50 );
-		for ( $i = 1; $i < $task_count; $i ++ ) {
-			$this->container['queues.TestingQueue']->dispatch( Noop::class, [ 'fake' => 'task' . $i ], $i );
+	public function add_tasks( $args, $assoc_args ) {
+
+		if ( ! isset( $args[0] ) ) {
+			$args[0] = 'default';
+		}
+
+		if ( ! isset( $assoc_args['count'] ) ) {
+			$assoc_args['count'] = rand( 1, 50 );
+		}
+
+		$queue_name = $args[0];
+
+		if ( ! array_key_exists( $queue_name, Queue::instances() ) ) {
+			\WP_CLI::error( __( 'That queue name doesn\'t appear to be valid.', 'tribe' ) );
+		}
+
+		$queue = Queue::get_instance( $queue_name );
+
+
+		for ( $i = 1; $i < $assoc_args['count']; $i ++ ) {
+			$queue->dispatch( Noop::class, [ 'fake' => 'task' . microtime() ], $i );
 		}
 	}
 
