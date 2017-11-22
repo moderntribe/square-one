@@ -48,7 +48,11 @@ abstract class Queue {
 	}
 
 	public static function get_instance( $queue_name ) {
-		return self::instances()[$queue_name];
+		if ( isset( self::instances()[ $queue_name ] ) ) {
+			return self::instances()[ $queue_name ];
+		}
+
+		return false;
 	}
 
 	public static function instance(): Queue {
