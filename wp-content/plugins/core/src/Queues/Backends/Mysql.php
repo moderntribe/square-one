@@ -107,10 +107,12 @@ class Mysql implements Backend {
 	}
 
 	public function count( string $queue_name ): int {
+		echo 'counting';
 		global $wpdb;
 
-		return $wpdb->get_var(
-			"SELECT COUNT(*) FROM $this->table_name"
-		);
+		return $wpdb->get_var( $wpdb->prepare (
+			"SELECT COUNT(*) FROM $this->table_name WHERE queue = %s",
+			$queue_name
+		) );
 	}
 }
