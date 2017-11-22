@@ -13,7 +13,7 @@ abstract class Queue {
 
 	public function __construct( Backend $backend ) {
 		$this->backend     = $backend;
-		self::$instances[] = $this;
+		self::$instances[ $this->get_name() ] = $this;
 	}
 
 	public function get_backend_type(): string {
@@ -45,6 +45,10 @@ abstract class Queue {
 
 	public static function instances(): array {
 		return self::$instances;
+	}
+
+	public static function get_instance( $queue_name ) {
+		return self::instances()[$queue_name];
 	}
 
 	public static function instance(): Queue {
