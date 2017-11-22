@@ -23,21 +23,12 @@ class Queues_Provider implements ServiceProviderInterface {
 		};
 
 		$container['queues.DefaultQueue'] = function ( $container ) {
-
-			// We probably want a constant based conditional/switch here
-			// to allow easy backend change in different environments
 			$backend = $container['queues.backend.mysql'];
-
 			return new DefaultQueue( $backend );
-		};
-
-		$container['queues.TestingQueue'] = function( $container ) {
-			return new TestingQueue( $container['queues.backend.mysql'] );
 		};
 
 		add_action( 'plugins_loaded', function () use ($container) {
 			$container['queues.DefaultQueue'];
-			$container['queues.TestingQueue'];
 		} );
 	}
 }
