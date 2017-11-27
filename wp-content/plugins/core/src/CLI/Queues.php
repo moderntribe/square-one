@@ -97,7 +97,7 @@ class Queues extends \WP_CLI_Command {
 
 
 		for ( $i = 1; $i < $assoc_args['count']; $i ++ ) {
-			$queue->dispatch( Noop::class, [ 'fake' => 'task' . microtime() ], $i );
+			$queue->dispatch( Noop::class, [ 'noop' => 'task' . microtime() ], $i );
 		}
 	}
 
