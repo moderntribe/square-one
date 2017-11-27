@@ -16,13 +16,10 @@ if ( ! function_exists( 'wp_mail' ) &&
 			'attachments' => $attachments,
 		];
 
-		if ( defined( 'QUEUE_MAIL_QUEUE_NAME') ) {
-			$queue_name = QUEUE_MAIL_QUEUE_NAME;
-		} else {
-			$queue_name = 'default';
-		}
+		$queue_name = defined( 'QUEUE_MAIL_QUEUE_NAME' ) ? QUEUE_MAIL_QUEUE_NAME : 'default';
+		$queue      = \Tribe\Project\Queues\Contracts\Queue::get_instance( $queue_name );
 
-		if( $queue = \Tribe\Project\Queues\Contracts\Queue::get_instance( $queue_name ) ) {
+		if ( $queue ) {
 			$queue->dispatch( \Tribe\Project\Queues\Tasks\Email::class, $args );
 		}
 
