@@ -71,8 +71,8 @@ class MySQL implements Backend {
 
 		$wpdb->update(
 			$this->table_name,
-			[ 'id' => $job_id ],
-			[ 'done' => time() ]
+			[ 'done' => time() ],
+			[ 'id' => $job_id ]
 		);
 	}
 
