@@ -115,8 +115,15 @@ class Queues extends \WP_CLI_Command {
 
 		$queue = Queue::get_instance( $queue_name );
 
-		// Run forever...or until the queue is empty.
-		while ( 0 != $queue->count() ) {
+		// Run forever.
+		while ( 1 ) {
+
+			// If the queue is empty, sleep on it and then clear it again.
+			if ( ! $queue->count() ) {
+				sleep( 1 );
+				continue;
+			}
+
 			$job = $queue->reserve();
 
 			$task_class = $job->get_task_handler();
