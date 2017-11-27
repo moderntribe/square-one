@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * ATTENTION! This is not an ordinary WP pluggable function replacement.
+ * Instead of sending a message we are adding the message to our queue system.
+ */
 if ( ! function_exists( 'wp_mail' ) &&
      ! ( defined( 'WP_CLI' ) && WP_CLI ) &&
      ( defined( 'QUEUE_MAIL' ) && QUEUE_MAIL ) ) {
