@@ -5,7 +5,7 @@ namespace Tribe\Project\Queues\Backends;
 use Tribe\Project\Queues\Contracts\Backend;
 use Tribe\Project\Queues\Message;
 
-class Mysql implements Backend {
+class MySQL implements Backend {
 
 	const DB_TABLE = 's1_queue';
 

@@ -5,7 +5,7 @@ namespace Tribe\Project\Service_Providers;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
-use Tribe\Project\Queues\Backends\Mysql;
+use Tribe\Project\Queues\Backends\MySQL;
 use Tribe\Project\Queues\Backends\WP_Cache;
 use Tribe\Project\Queues\DefaultQueue;
 use Tribe\Project\Queues\TestingQueue;
@@ -19,7 +19,7 @@ class Queues_Provider implements ServiceProviderInterface {
 		};
 
 		$container['queues.backend.mysql'] = function() {
-			return new Mysql();
+			return new MySQL();
 		};
 
 		$container['queues.DefaultQueue'] = function ( $container ) {

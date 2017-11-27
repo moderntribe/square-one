@@ -5,7 +5,7 @@ namespace Tribe\Project\CLI;
 use cli\Table;
 use Pimple\Container;
 use Tribe\Project\Queues\Contracts\Queue;
-use Tribe\Project\Queues\Backends\Mysql;
+use Tribe\Project\Queues\Backends\MySQL;
 use Tribe\Project\Queues\Tasks\Noop;
 
 class Queues extends \WP_CLI_Command {
@@ -48,12 +48,12 @@ class Queues extends \WP_CLI_Command {
 
 		$table_exists = $wpdb->query( $wpdb->prepare(
 			'SHOW TABLES LIKE %s',
-			$wpdb->prefix . Mysql::DB_TABLE
+			$wpdb->prefix . MySQL::DB_TABLE
 		) );
 
 		// Create table.
 		if ( ! $table_exists ) {
-			$table_name = $wpdb->prefix . Mysql::DB_TABLE;
+			$table_name = $wpdb->prefix . MySQL::DB_TABLE;
 			$wpdb->query(
 				"CREATE TABLE $table_name (
 					id bigint(20) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
