@@ -127,9 +127,12 @@ class Queues extends \WP_CLI_Command {
 			$job = $queue->reserve();
 
 			$task_class = $job->get_task_handler();
+
 			if ( ! class_exists( $task_class ) ) {
+				$queue->nack( $job->get_job_id() );
 				return;
 			}
+
 			$task = new $task_class();
 
 			if ( $task->handle( $job->get_args() ) ) {
