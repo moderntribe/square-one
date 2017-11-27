@@ -72,11 +72,16 @@ class Queues extends \WP_CLI_Command {
 		\WP_CLI::success( __( 'Task table already exists.', 'tribe' ) );
 	}
 
+	/**
+	 * ## OPTIONS
+	 *
+	 * <queue_name>
+	 * : The name of the queue to add the tasks to.
+	 *
+	 * [--count=<count>]
+	 * : How many tasks to add.
+	 */
 	public function add_tasks( $args, $assoc_args ) {
-
-		if ( ! isset( $args[0] ) ) {
-			$args[0] = 'default';
-		}
 
 		if ( ! isset( $assoc_args['count'] ) ) {
 			$assoc_args['count'] = rand( 1, 50 );
