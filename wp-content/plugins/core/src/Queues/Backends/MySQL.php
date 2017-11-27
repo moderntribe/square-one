@@ -27,7 +27,7 @@ class MySQL implements Backend {
 	private function prepare_data( $message ) {
 		return [
 			'task_handler' => $message->get_task_handler(),
-			'args'         => serialize( $message->get_args() ),
+			'args'         => json_encode( $message->get_args() ),
 			'priority'     => $message->get_priority(),
 			'taken'        => 0,
 		];
@@ -53,7 +53,7 @@ class MySQL implements Backend {
 			return;
 		}
 
-		$queue['args'] = unserialize( $queue['args'] );
+		$queue['args'] = json_decode( $queue['args'], 1 );
 
 		$wpdb->update(
 			$this->table_name,
