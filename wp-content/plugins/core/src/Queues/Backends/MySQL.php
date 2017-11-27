@@ -40,12 +40,11 @@ class MySQL implements Backend {
 			$wpdb->prepare(
 				"SELECT * FROM $this->table_name
 				WHERE queue = %s
-				AND taken < %d
+				AND ( taken = 0 OR taken = null ) 
 				ORDER BY priority ASC
 				LIMIT 0,1
 				",
-				$queue_name,
-				time()
+				$queue_name
 			),
 			'ARRAY_A'
 		);
