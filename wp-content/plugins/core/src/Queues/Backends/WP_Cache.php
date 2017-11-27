@@ -25,7 +25,7 @@ class WP_Cache implements Backend {
 		];
 
 		// Sort by priority
-		usort( $queue, function( $first, $second ) {
+		usort( $queue, function ( $first, $second ) {
 			return $first['priority'] > $second['priority'];
 		} );
 
@@ -95,15 +95,15 @@ class WP_Cache implements Backend {
 
 	protected function get_queue( string $queue_name ): array {
 		$queue = wp_cache_get( 'queue.new.' . $queue_name );
-        
-        if ( $queue === false ) {
-	        $queue = [];
-        } else {
-	        $queue = json_decode( $queue, true );
-        }
 
-        return $queue;
-    }
+		if ( $queue === false ) {
+			$queue = [];
+		} else {
+			$queue = json_decode( $queue, true );
+		}
+
+		return $queue;
+	}
 
 	protected function save_queue( string $queue_name, array $queue ) {
 		wp_cache_set( 'queue.new.' . $queue_name, json_encode( $queue ) );
