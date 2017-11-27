@@ -61,7 +61,8 @@ class Queues extends \WP_CLI_Command {
 					task_handler varchar(255) NOT NULL,
 					args text NOT NULL,
 					priority int(3),
-					taken int(10) NOT NULL DEFAULT 0
+					taken int(10) NOT NULL DEFAULT 0,
+					done int(10)
 				)"
 			);
 

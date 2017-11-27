@@ -40,7 +40,8 @@ class MySQL implements Backend {
 			$wpdb->prepare(
 				"SELECT * FROM $this->table_name
 				WHERE queue = %s
-				AND ( taken = 0 OR taken = null ) 
+				AND ( taken = 0 OR taken IS NULL ) 
+				AND done IS NULL
 				ORDER BY priority ASC
 				LIMIT 0,1
 				",
@@ -68,9 +69,10 @@ class MySQL implements Backend {
 	public function ack( string $job_id, string $queue_name ) {
 		global $wpdb;
 
-		$wpdb->delete(
+		$wpdb->update(
 			$this->table_name,
-			[ 'id' => $job_id ]
+			[ 'id' => $job_id ],
+			[ 'done' => time() ]
 		);
 	}
 
@@ -109,8 +111,9 @@ class MySQL implements Backend {
 		global $wpdb;
 
 		return $wpdb->get_var( $wpdb->prepare (
-			"SELECT COUNT(*) FROM $this->table_name WHERE queue = %s",
+			"SELECT COUNT(*) FROM $this->table_name WHERE queue = %s AND done IS NULL",
 			$queue_name
 		) );
+
 	}
 }
