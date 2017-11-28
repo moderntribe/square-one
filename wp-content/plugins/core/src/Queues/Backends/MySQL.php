@@ -95,7 +95,7 @@ class MySQL implements Backend {
 				"SELECT id FROM $this->table_name
 				WHERE taken < %d
 				",
-				time() - 300
+				time() + 300
 			)
 		);
 
