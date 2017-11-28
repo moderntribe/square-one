@@ -6,11 +6,26 @@ php:
   - 5.5
   - 5.6
   - 7.0
+  - '7.1.0alpha1'
   - hhvm
 
-script:
-  - composer update-all
-  - composer test
+matrix:
+  fast_finish: true
+  allow_failures:
+    - php: '7.1.0alpha1'
+    - php: hhvm
+  include:
+    - php: 5.6
+      env: XDEBUG_OFF="yes"
+    - php: 7.0
+      env: XDEBUG_OFF="yes"
 
-after_script:
-  - composer coveralls
+before_script:
+  - if [[ $XDEBUG_OFF = yes ]]; then phpenv config-rm xdebug.ini; fi;
+
+script:
+  - make
+  - make test-all
+
+after_success:
+  - make coveralls

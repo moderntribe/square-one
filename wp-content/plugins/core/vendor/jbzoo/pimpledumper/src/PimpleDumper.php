@@ -304,6 +304,10 @@ class PimpleDumper implements ServiceProviderInterface
     {
         $fileName = $this->_root . DIRECTORY_SEPARATOR . self::FILE_PHPSTORM;
 
+        if (is_dir($fileName)) {
+            $fileName .= DIRECTORY_SEPARATOR . 'pimple.meta.php';
+        }
+
         $list = array();
         foreach ($map as $data) {
             if ($data['type'] === 'class') {

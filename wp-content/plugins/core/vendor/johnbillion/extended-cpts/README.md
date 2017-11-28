@@ -1,6 +1,7 @@
 [![Build Status](https://travis-ci.org/johnbillion/extended-cpts.svg?branch=master)](https://travis-ci.org/johnbillion/extended-cpts)
 [![Stable Release](https://img.shields.io/packagist/v/johnbillion/extended-cpts.svg)](https://packagist.org/packages/johnbillion/extended-cpts)
 [![License](https://img.shields.io/badge/license-GPL_v2%2B-blue.svg)](https://github.com/johnbillion/extended-cpts/blob/master/LICENSE)
+![License](https://img.shields.io/badge/php-7-blue.svg)
 
 # Extended CPTs #
 
@@ -88,7 +89,7 @@ And you can register a taxonomy with just two parameters:
 ```php
 add_action( 'init', function() {
 	register_extended_taxonomy( 'location', 'post' );
-) };
+} );
 ```
 
 Try it. You'll have a hierarchical public post type with an admin UI, a hierarchical public taxonomy with an admin UI, and all the labels and updated messages for them will be automatically generated.

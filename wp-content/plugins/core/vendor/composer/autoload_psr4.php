@@ -10,6 +10,7 @@ return array(
     'Tribe\\Project\\' => array($baseDir . '/src'),
     'Tribe\\Libs\\' => array($vendorDir . '/moderntribe/tribe-libs/src'),
     'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
+    'Sunra\\PhpSimple\\' => array($vendorDir . '/sunra/php-simp[le-html-dom-parser/Src/Sunra/PhpSimple'),
     'Psr\\Container\\' => array($vendorDir . '/psr/container/src'),
     'JBZoo\\PimpleDumper\\' => array($vendorDir . '/jbzoo/pimpledumper/src'),
 );
