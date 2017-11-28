@@ -26,7 +26,7 @@ class WP_Cache implements Backend {
 
 		// Sort by priority
 		usort( $queue, function ( $first, $second ) {
-			return $first['priority'] > $second['priority'];
+			return $first['priority'] <=> $second['priority'];
 		} );
 
 		$this->save_queue( $queue_name, $queue );
