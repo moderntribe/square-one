@@ -3,8 +3,8 @@
 namespace Tribe\Project\CLI;
 
 use cli\Table;
+use Pimple\Container;
 use Tribe\Project\Queues\Contracts\Queue;
-use Tribe\Project\Queues\Backends\MySQL;
 use Tribe\Project\Queues\Tasks\Noop;
 
 class Queues extends \WP_CLI_Command {
