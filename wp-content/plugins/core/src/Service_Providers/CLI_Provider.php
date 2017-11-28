@@ -16,7 +16,7 @@ class CLI_Provider implements ServiceProviderInterface {
 			return new Pimple_Dump( $container );
 		};
 		$container['cli.queues'] = function ( $container ) {
-			return new Queues( $container );
+			return new Queues( $container['queues.backend.mysql'] );
 		};
 
 		add_action( 'init', function () use ( $container ) {

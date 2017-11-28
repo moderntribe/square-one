@@ -116,4 +116,32 @@ class MySQL implements Backend {
 		) );
 
 	}
+
+	public function table_exists() {
+		global $wpdb;
+
+		$table_exists = $wpdb->query( $wpdb->prepare(
+			'SHOW TABLES LIKE %s',
+			$wpdb->prefix . MySQL::DB_TABLE
+		) );
+
+		return $table_exists ?: false;
+	}
+
+	public function create_table() {
+		global $wpdb;
+
+		$table_name = $wpdb->prefix . MySQL::DB_TABLE;
+		$wpdb->query(
+			"CREATE TABLE $table_name (
+					id bigint(20) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
+					queue varchar(255) NOT NULL,
+					task_handler varchar(255) NOT NULL,
+					args text NOT NULL,
+					priority int(3),
+					taken int(10) NOT NULL DEFAULT 0,
+					done int(10)
+				)"
+		);
+	}
 }

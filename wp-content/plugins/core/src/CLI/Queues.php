@@ -9,6 +9,13 @@ use Tribe\Project\Queues\Tasks\Noop;
 
 class Queues extends \WP_CLI_Command {
 
+	protected $mysql;
+
+	public function __construct( Container $container ) {
+		$this->mysql = $container;
+		parent::__construct();
+	}
+
 	/**
 	 * ## EXAMPLES
 	 *
@@ -36,33 +43,14 @@ class Queues extends \WP_CLI_Command {
 	}
 
 	public function add_table() {
-		global $wpdb;
-
-		$table_exists = $wpdb->query( $wpdb->prepare(
-			'SHOW TABLES LIKE %s',
-			$wpdb->prefix . MySQL::DB_TABLE
-		) );
-
-		// Create table.
-		if ( ! $table_exists ) {
-			$table_name = $wpdb->prefix . MySQL::DB_TABLE;
-			$wpdb->query(
-				"CREATE TABLE $table_name (
-					id bigint(20) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
-					queue varchar(255) NOT NULL,
-					task_handler varchar(255) NOT NULL,
-					args text NOT NULL,
-					priority int(3),
-					taken int(10) NOT NULL DEFAULT 0,
-					done int(10)
-				)"
-			);
-
-			\WP_CLI::success( __( 'Task table successfully created.', 'tribe' ) );
+		if ( $this->mysql->table_exists() ) {
+			\WP_CLI::success( __( 'Task table already exists.', 'tribe' ) );
 			return;
 		}
 
-		\WP_CLI::success( __( 'Task table already exists.', 'tribe' ) );
+		$this->mysql->create_table();
+		\WP_CLI::success( __( 'Task table successfully created.', 'tribe' ) );
+
 	}
 
 	/**
