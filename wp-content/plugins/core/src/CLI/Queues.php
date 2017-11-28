@@ -9,10 +9,10 @@ use Tribe\Project\Queues\Tasks\Noop;
 
 class Queues extends \WP_CLI_Command {
 
-	protected $mysql;
+	protected $backend;
 
 	public function __construct( Backend $container ) {
-		$this->mysql = $container;
+		$this->backend = $container;
 		parent::__construct();
 	}
 
@@ -43,12 +43,16 @@ class Queues extends \WP_CLI_Command {
 	}
 
 	public function add_table() {
-		if ( $this->mysql->table_exists() ) {
+		if ( ! 'MySQL' === get_class( $this->backend ) ) {
+			\WP_CLI::error( __( 'You cannot add a table a non-MySQL backend' ) );
+		}
+
+		if ( $this->backend->table_exists() ) {
 			\WP_CLI::success( __( 'Task table already exists.', 'tribe' ) );
 			return;
 		}
 
-		$this->mysql->create_table();
+		$this->backend->create_table();
 		\WP_CLI::success( __( 'Task table successfully created.', 'tribe' ) );
 
 	}
