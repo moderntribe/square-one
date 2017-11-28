@@ -10,9 +10,4 @@ class Email implements Task {
 		return wp_mail( $args['to'], $args['subject'], $args['message'], $args['headers'], $args['attachments'] );
 	}
 
-	public static function mail( $args, $queue_name = 'default' ) {
-		if( $queue = Queue::get_instance( $queue_name ) ) {
-			$queue->dispatch( self::class, $args );
-		}
-	}
 }
