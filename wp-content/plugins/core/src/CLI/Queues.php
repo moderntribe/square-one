@@ -43,7 +43,7 @@ class Queues extends \WP_CLI_Command {
 	}
 
 	public function add_table() {
-		if ( ! 'MySQL' === get_class( $this->backend ) ) {
+		if ( 'Tribe\Project\Queues\Backends\MySQL' !== get_class( $this->backend ) ) {
 			\WP_CLI::error( __( 'You cannot add a table a non-MySQL backend' ) );
 		}
 
