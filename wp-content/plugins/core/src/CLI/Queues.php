@@ -95,7 +95,7 @@ class Queues extends \WP_CLI_Command {
 
 		$queue_name = $args[0];
 
-		if ( ! array_key_exists( $queue_name, Queue::instances() ) ) {
+		if ( ! array_key_exists( $queue_name, Queue_Collection::instances() ) ) {
 			\WP_CLI::error( __( 'That queue name doesn\'t appear to be valid.', 'tribe' ) );
 		}
 
