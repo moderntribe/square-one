@@ -81,8 +81,8 @@ class Queues extends \WP_CLI_Command {
 
 		$queue = Queue_Collection::get_instance( $queue_name );
 
-
 		for ( $i = 1; $i < $assoc_args['count']; $i ++ ) {
+			print_r($queue);die;
 			$queue->dispatch( Noop::class, [ 'noop' => 'task' . microtime() ], $i );
 		}
 	}
