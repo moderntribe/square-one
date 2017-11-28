@@ -9,9 +9,11 @@ class Action implements Task {
 	public function handle( array $args ) : bool {
 		$action = $args['hook'];
 		unset( $args['hook'] );
-		if ( do_action_ref_array( $action, $args ) ) {
+		try {
+			do_action_ref_array( $action, $args );
 			return true;
+		} catch ( \Exception $e ) {
+			return false;
 		}
-		return false;
 	}
 }
