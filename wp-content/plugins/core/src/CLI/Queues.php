@@ -3,8 +3,7 @@
 namespace Tribe\Project\CLI;
 
 use cli\Table;
-use Tribe\Project\Queues\Contracts\Queue;
-use Tribe\Project\Queues\Backends\MySQL;
+use Tribe\Project\Queues\Queue_Collection;
 use Tribe\Project\Queues\Tasks\Noop;
 
 class Queues extends \WP_CLI_Command {
@@ -25,7 +24,7 @@ class Queues extends \WP_CLI_Command {
 	 */
 	public function list() {
 		$queues = [];
-		foreach ( Queue::instances() as $queue ) {
+		foreach ( Queue_Collection::instances() as $queue ) {
 			/** @var Queue $queue */
 
 			$parts    = explode( '\\', $queue->get_backend_type() );
@@ -70,11 +69,11 @@ class Queues extends \WP_CLI_Command {
 
 		$queue_name = $args[0];
 
-		if ( ! array_key_exists( $queue_name, Queue::instances() ) ) {
+		if ( ! array_key_exists( $queue_name, Queue_Collection::instances() ) ) {
 			\WP_CLI::error( __( 'That queue name doesn\'t appear to be valid.', 'tribe' ) );
 		}
 
-		$queue = Queue::get_instance( $queue_name );
+		$queue = Queue_Collection::get_instance( $queue_name );
 
 
 		for ( $i = 1; $i < $assoc_args['count']; $i ++ ) {
@@ -94,7 +93,7 @@ class Queues extends \WP_CLI_Command {
 			\WP_CLI::error( __( 'That queue name doesn\'t appear to be valid.', 'tribe' ) );
 		}
 
-		$queue = Queue::get_instance( $queue_name );
+		$queue = Queue_Collection::get_instance( $queue_name );
 
 		// Run forever.
 		while ( 1 ) {

@@ -7,13 +7,11 @@ use Tribe\Project\Queues\Message;
 abstract class Queue {
 
 	protected $backend;
-	protected static $instances = [];
 
 	abstract public function get_name(): string;
 
 	public function __construct( Backend $backend ) {
-		$this->backend     = $backend;
-		self::$instances[ $this->get_name() ] = $this;
+		$this->backend = $backend;
 	}
 
 	public function get_backend_type(): string {
@@ -41,22 +39,6 @@ abstract class Queue {
 
 	public function nack( $job_id ) {
 		$this->backend->nack( $job_id, $this->get_name() );
-	}
-
-	public static function instances(): array {
-		return self::$instances;
-	}
-
-	public static function get_instance( $queue_name ) {
-		if ( isset( self::instances()[ $queue_name ] ) ) {
-			return self::instances()[ $queue_name ];
-		}
-
-		return false;
-	}
-
-	public static function instance(): Queue {
-		return tribe_project()->container()[ 'queues.' . __CLASS__ ];
 	}
 
 }

@@ -8,6 +8,7 @@ use Pimple\ServiceProviderInterface;
 use Tribe\Project\Queues\Backends\MySQL;
 use Tribe\Project\Queues\Backends\WP_Cache;
 use Tribe\Project\Queues\DefaultQueue;
+use Tribe\Project\Queues\Queue_Collection;
 use Tribe\Project\Queues\TestingQueue;
 
 class Queues_Provider implements ServiceProviderInterface {
@@ -27,8 +28,13 @@ class Queues_Provider implements ServiceProviderInterface {
 			return new DefaultQueue( $backend );
 		};
 
+		$container['queues.collection'] = function( $container ) {
+			$collection = new Queue_Collection( $container['queues.DefaultQueue'] );
+			return $collection;
+		};
+
 		add_action( 'plugins_loaded', function () use ($container) {
-			$container['queues.DefaultQueue'];
+			$container['queues.collection'];
 		} );
 	}
 }
