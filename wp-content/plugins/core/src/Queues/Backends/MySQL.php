@@ -92,7 +92,7 @@ class MySQL implements Backend {
 		$stale = $wpdb->get_col(
 			$wpdb->prepare(
 				"SELECT id FROM $this->table_name
-				WHERE taken > %d
+				WHERE taken < %d
 				",
 				time() - 300
 			)
