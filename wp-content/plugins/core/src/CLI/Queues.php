@@ -3,7 +3,7 @@
 namespace Tribe\Project\CLI;
 
 use cli\Table;
-use Tribe\Project\Queues\Backends\MySQL;
+use Tribe\Project\Queues\Contracts\Backend;
 use Tribe\Project\Queues\Contracts\Queue;
 use Tribe\Project\Queues\Tasks\Noop;
 
@@ -11,7 +11,7 @@ class Queues extends \WP_CLI_Command {
 
 	protected $mysql;
 
-	public function __construct( MySQL $container ) {
+	public function __construct( Backend $container ) {
 		$this->mysql = $container;
 		parent::__construct();
 	}
@@ -53,8 +53,20 @@ class Queues extends \WP_CLI_Command {
 
 	}
 
-	public function cleanup() {
-		$this->mysql->cleanup();
+	public function cleanup( $args ) {
+		if ( ! isset( $args[0] ) ) {
+			\WP_CLI::error( __( 'You must specify which queue you wish to process.', 'tribe' ) );
+		}
+
+		$queue_name = $args[0];
+
+		if ( ! array_key_exists( $queue_name, Queue::instances() ) ) {
+			\WP_CLI::error( __( 'That queue name doesn\'t appear to be valid.', 'tribe' ) );
+		}
+
+		$queue = Queue::get_instance( $queue_name );
+
+		$queue->cleanup();
 	}
 
 	/**

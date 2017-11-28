@@ -17,4 +17,6 @@ interface Backend {
 	public function get_type(): string;
 
 	public function count( string $queue_name ): int;
+
+	public function cleanup();
 }

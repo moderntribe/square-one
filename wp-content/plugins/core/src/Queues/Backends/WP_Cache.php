@@ -132,4 +132,8 @@ class WP_Cache implements Backend {
 
 		return \count( $queue );
 	}
+
+	public function cleanup() {
+		null;
+	}
 }
