@@ -4,13 +4,15 @@ namespace Tribe\Project\CLI;
 
 use cli\Table;
 use Tribe\Project\Queues\Queue_Collection;
+use Tribe\Project\Queues\Backends\MySQL;
+use Tribe\Project\Queues\Contracts\Queue;
 use Tribe\Project\Queues\Tasks\Noop;
 
 class Queues extends \WP_CLI_Command {
 
 	protected $mysql;
 
-	public function __construct( Container $container ) {
+	public function __construct( MySQL $container ) {
 		$this->mysql = $container;
 		parent::__construct();
 	}
@@ -50,6 +52,10 @@ class Queues extends \WP_CLI_Command {
 		$this->mysql->create_table();
 		\WP_CLI::success( __( 'Task table successfully created.', 'tribe' ) );
 
+	}
+
+	public function cleanup() {
+		$this->mysql->cleanup();
 	}
 
 	/**
