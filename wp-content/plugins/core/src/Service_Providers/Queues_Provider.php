@@ -29,12 +29,12 @@ class Queues_Provider implements ServiceProviderInterface {
 		};
 
 		$container['queues.collection'] = function( $container ) {
-			$collection = new Queue_Collection( $container['queues.DefaultQueue'] );
-			return $collection;
+			return new Queue_Collection();
 		};
 
-		add_action( 'plugins_loaded', function () use ($container) {
-			$container['queues.collection'];
-		} );
+		add_action( 'init', function() use ( $container ) {
+			$container['queues.collection']->add($container['queues.DefaultQueue']);
+		}, 0, 0 );
+
 	}
 }
