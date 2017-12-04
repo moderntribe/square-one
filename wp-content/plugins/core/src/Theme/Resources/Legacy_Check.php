@@ -37,7 +37,7 @@ class Legacy_Check {
                 );
             }
 
-            if (is_browser() && Function('/*@cc_on return document.documentMode===10@*/')() && not_excluded_page()) {
+            if (is_browser() && Function('/*@cc_on return document.documentMode===10@*/') && not_excluded_page()) {
                 window.location = location.protocol + '//' + location.host + '<?php echo $this->unsupported_browser_path; ?>';
             }
         </script>
