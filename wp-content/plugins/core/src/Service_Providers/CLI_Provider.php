@@ -16,7 +16,7 @@ class CLI_Provider implements ServiceProviderInterface {
 			return new Pimple_Dump( $container );
 		};
 		$container['cli.queues'] = function ( $container ) {
-			return new Queues( $container['queues.backend.mysql'] );
+			return new Queues( $container['queues.backend.mysql'], $container['queues.collection'] );
 		};
 
 		add_action( 'init', function () use ( $container ) {
@@ -27,6 +27,6 @@ class CLI_Provider implements ServiceProviderInterface {
 			\WP_CLI::add_command( 'pimple', $container['cli.pimple_dump'] );
 			\WP_CLI::add_command( 'queues', $container['cli.queues'] );
 
-		}, 0, 0 );
+		}, 1, 0 );
 	}
 }
