@@ -6,22 +6,28 @@ use Tribe\Project\Queues\Contracts\Queue;
 
 class Queue_Collection {
 
-	protected static $instances = [];
+	protected $instances = [];
 
-	public function __construct( Queue $queue ) {
-		self::$instances[ $queue->get_name() ] = $queue;
+	public function add( Queue $queue ) {
+		$this->instances[ $queue->get_name() ] = $queue;
 	}
 
-	public static function instances(): array {
-		return self::$instances;
+	public function queues() {
+		return $this->instances;
 	}
 
-	public static function get_instance( $queue_name ) {
-		if ( isset( self::instances()[ $queue_name ] ) ) {
-			return self::instances()[ $queue_name ];
+	public function get( $queue_name ) {
+		if ( isset( $this->instances[ $queue_name ] ) ) {
+			return $this->instances[ $queue_name ];
 		}
 
 		return false;
+	}
+
+	public function remove( $queue_name ) {
+		if ( isset( $this->instances[ $queue_name ] ) ) {
+			unset ( $this->instances[ $queue_name ] );
+		}
 	}
 
 }
