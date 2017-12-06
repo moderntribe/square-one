@@ -19,22 +19,6 @@ class Queues extends \WP_CLI_Command {
 		parent::__construct();
 	}
 
-	public function cleanup( $args ) {
-		if ( ! isset( $args[0] ) ) {
-			\WP_CLI::error( __( 'You must specify which queue you wish to process.', 'tribe' ) );
-		}
-
-		$queue_name = $args[0];
-
-		if ( ! array_key_exists( $queue_name, $this->queues->queues() ) ) {
-			\WP_CLI::error( __( 'That queue name doesn\'t appear to be valid.', 'tribe' ) );
-		}
-
-		$queue = $this->queues->get( $queue_name );
-
-		$queue->cleanup();
-	}
-
 	/**
 	 * ## OPTIONS
 	 *
