@@ -218,6 +218,11 @@ class Image {
 			}
 		}
 
+		if ( empty( $attribute ) ) {
+			$src = wp_get_attachment_image_src( $this->image_id, 'full' );
+			$attribute[] = sprintf( '%s %dw %dh', $src[0], $src[1], $src[2] );
+		}
+
 		return implode( ", \n", $attribute );
 	}
 

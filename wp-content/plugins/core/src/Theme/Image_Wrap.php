@@ -51,7 +51,7 @@ class Image_Wrap {
 			preg_match( '#class\s*=\s*"[^"]*(alignnone|alignleft|aligncenter|alignright)[^"]*"#', $image, $alignment_match );
 			$alignment = empty( $alignment_match[1] ) ? 'alignnone' : $alignment_match[1];
 
-			$image = empty( $alignment_match[1] ) ? $image : str_replace( $alignment_match[1] . ' ', '', $image );
+			$image = empty( $alignment_match[1] ) ? $image : str_replace( $alignment_match[1], '', $image );
 
 			return sprintf( '<figure class="wp-image wp-image--no-caption %s">%s</figure>%s', $alignment, $image, $content );
 		}, $html );

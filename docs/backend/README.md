@@ -15,6 +15,7 @@ The core plugin will be where the majority of back end development takes place:
     * [Service Providers](service-providers.md)
     * [Template Controllers](data.md)
     * [Components](components.md)
+    * [CLI](cli.md)
     * [Queues](queues.md)
   * Plugins/Extenstions
     * [Twig](https://twig.symfony.com/)

@@ -281,6 +281,11 @@ class Image extends Component {
 			}
 		}
 
+		if ( empty( $attribute ) ) {
+			$src = wp_get_attachment_image_src( $this->options[ static::IMG_ID ], 'full' );
+			$attribute[] = sprintf( '%s %dw %dh', $src[0], $src[1], $src[2] );
+		}
+
 		return implode( ", \n", $attribute );
 	}
 }
