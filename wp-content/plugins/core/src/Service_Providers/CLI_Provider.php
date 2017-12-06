@@ -9,6 +9,7 @@ use Tribe\Project\CLI\CLI_Generator;
 use Tribe\Project\CLI\CPT_Generator;
 use Tribe\Project\CLI\File_System;
 use Tribe\Project\CLI\Pimple_Dump;
+use Tribe\Project\CLI\Queues\Cleanup;
 use Tribe\Project\CLI\Taxonomy_Generator;
 use Tribe\Project\CLI\Queues\Table;
 use Tribe\Project\CLI\Queues\MySQL_Table;
@@ -30,6 +31,10 @@ class CLI_Provider implements ServiceProviderInterface {
 
 		$container['cli.queues.add_table'] = function ( $container ) {
 			return new MySQL_Table( $container['queues.backend.mysql'] );
+		};
+
+		$container['cli.queues.cleanup'] = function ( $container ) {
+			return new Cleanup( $container['queues.collection'] );
 		};
 
 		$container['cli.cpt-generator'] = function ( $container ) {
@@ -56,6 +61,7 @@ class CLI_Provider implements ServiceProviderInterface {
 			$container['cli.cli-generator']->register();
 			$container['cli.queues.list']->register();
 			$container['cli.queues.add_table']->register();
+			$container['cli.queues.cleanup']->register();
 		}, 0, 0 );
 	}
 }
