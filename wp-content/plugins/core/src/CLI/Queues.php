@@ -19,47 +19,6 @@ class Queues extends \WP_CLI_Command {
 		parent::__construct();
 	}
 
-//	/**
-//	 * ## EXAMPLES
-//	 *
-//	 *     wp queues list
-//	 *
-//	 * @when after_wp_load
-//	 */
-//	public function list() {
-//		$queues = [];
-//		foreach ( $this->queues->queues() as $queue ) {
-//
-//
-//			$parts    = explode( '\\', $queue->get_backend_type() );
-//			$queues[] = [
-//				'Queue'        => $queue->get_name(),
-//				'Backend'      => end( $parts ),
-//				'Pending Jobs' => $queue->count(),
-//			];
-//		}
-//
-//
-//		$table = new Table( $queues );
-//		$table->display();
-//
-//	}
-
-	public function add_table() {
-		if ( 'Tribe\Project\Queues\Backends\MySQL' !== get_class( $this->backend ) ) {
-			\WP_CLI::error( __( 'You cannot add a table a non-MySQL backend' ) );
-		}
-
-		if ( $this->backend->table_exists() ) {
-			\WP_CLI::success( __( 'Task table already exists.', 'tribe' ) );
-			return;
-		}
-
-		$this->backend->create_table();
-		\WP_CLI::success( __( 'Task table successfully created.', 'tribe' ) );
-
-	}
-
 	public function cleanup( $args ) {
 		if ( ! isset( $args[0] ) ) {
 			\WP_CLI::error( __( 'You must specify which queue you wish to process.', 'tribe' ) );
