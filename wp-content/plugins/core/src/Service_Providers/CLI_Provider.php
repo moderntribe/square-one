@@ -11,6 +11,7 @@ use Tribe\Project\CLI\File_System;
 use Tribe\Project\CLI\Pimple_Dump;
 use Tribe\Project\CLI\Taxonomy_Generator;
 use Tribe\Project\CLI\Queues;
+use Tribe\Project\CLI\Queues\Table;
 
 class CLI_Provider implements ServiceProviderInterface {
 
@@ -24,6 +25,10 @@ class CLI_Provider implements ServiceProviderInterface {
 		};
 		$container['cli.queues'] = function ( $container ) {
 			return new Queues( $container['queues.backend.mysql'], $container['queues.collection'] );
+		};
+
+		$container['cli.queues.list'] = function ( $container ) {
+			return new Table( $container['queues.collection'] );
 		};
 
 		$container['cli.cpt-generator'] = function ( $container ) {
@@ -44,12 +49,13 @@ class CLI_Provider implements ServiceProviderInterface {
 				return;
 			}
 
-			\WP_CLI::add_command( 'queues', $container['cli.queues'] );
+			//\WP_CLI::add_command( 'queues', $container['cli.queues'] );
 
 			$container['cli.pimple_dump']->register();
 			$container['cli.cpt-generator']->register();
 			$container['cli.taxonomy-generator']->register();
 			$container['cli.cli-generator']->register();
+			$container['cli.queues.list']->register();
 		}, 0, 0 );
 	}
 }

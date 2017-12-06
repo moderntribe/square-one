@@ -19,31 +19,31 @@ class Queues extends \WP_CLI_Command {
 		parent::__construct();
 	}
 
-	/**
-	 * ## EXAMPLES
-	 *
-	 *     wp queues list
-	 *
-	 * @when after_wp_load
-	 */
-	public function list() {
-		$queues = [];
-		foreach ( $this->queues->queues() as $queue ) {
-			/** @var Queue $queue */
-
-			$parts    = explode( '\\', $queue->get_backend_type() );
-			$queues[] = [
-				'Queue'        => $queue->get_name(),
-				'Backend'      => end( $parts ),
-				'Pending Jobs' => $queue->count(),
-			];
-		}
-
-
-		$table = new Table( $queues );
-		$table->display();
-
-	}
+//	/**
+//	 * ## EXAMPLES
+//	 *
+//	 *     wp queues list
+//	 *
+//	 * @when after_wp_load
+//	 */
+//	public function list() {
+//		$queues = [];
+//		foreach ( $this->queues->queues() as $queue ) {
+//
+//
+//			$parts    = explode( '\\', $queue->get_backend_type() );
+//			$queues[] = [
+//				'Queue'        => $queue->get_name(),
+//				'Backend'      => end( $parts ),
+//				'Pending Jobs' => $queue->count(),
+//			];
+//		}
+//
+//
+//		$table = new Table( $queues );
+//		$table->display();
+//
+//	}
 
 	public function add_table() {
 		if ( 'Tribe\Project\Queues\Backends\MySQL' !== get_class( $this->backend ) ) {
