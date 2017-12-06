@@ -159,6 +159,7 @@ class Image extends Component {
 			'target' => $this->options[ static::LINK_TARGET ],
 			'title'  => ! empty( $this->options[ static::LINK_TITLE ] ) ? $this->options[ static::LINK_TITLE ] : '',
 			'class'  => ! empty( $this->options[ static::LINK_CLASS ] ) ? $this->options[ static::LINK_CLASS ] : '',
+			'rel'    => $this->options[ static::LINK_TARGET ] === '_blank' ? 'rel="noopener"' : '';
 		];
 	}
 
@@ -250,7 +251,7 @@ class Image extends Component {
 	 */
 	private function get_shim(): string {
 
-		$shim_dir = trailingslashit( tribe_assets_url( 'theme/img/shims' ) );
+		$shim_dir = trailingslashit( get_stylesheet_directory_uri() ) . 'img/theme/shims/';
 		$src      = $this->options[ static::SHIM ];
 
 		if ( empty ( $this->options[ static::SHIM ] ) ) {
@@ -278,6 +279,11 @@ class Image extends Component {
 			if ( 'full' !== $size && true === $src[3] ) {
 				$attribute[] = sprintf( '%s %dw %dh', $src[0], $src[1], $src[2] );
 			}
+		}
+
+		if ( empty( $attribute ) ) {
+			$src = wp_get_attachment_image_src( $this->options[ static::IMG_ID ], 'full' );
+			$attribute[] = sprintf( '%s %dw %dh', $src[0], $src[1], $src[2] );
 		}
 
 		return implode( ", \n", $attribute );

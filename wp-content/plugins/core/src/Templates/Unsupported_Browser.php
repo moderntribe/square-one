@@ -12,12 +12,12 @@ class Unsupported_Browser extends Base {
 		$data['favicon']                     = $this->get_favicon();
 		$data['legacy_browser_title']        = $this->get_legacy_page_title();
 		$data['legacy_browser_content']      = $this->get_legacy_page_content();
-		$data['legacy_logo_header']          = tribe_assets_url( 'theme/img/legacy-browser/logo-header.png' );
-		$data['legacy_logo_footer']          = tribe_assets_url( 'theme/img/legacy-browser/logo-footer.png' );
-		$data['legacy_browser_icon_chrome']  = tribe_assets_url( 'theme/img/legacy-browser/chrome.png' );
-		$data['legacy_browser_icon_firefox'] = tribe_assets_url( 'theme/img/legacy-browser/firefox.png' );
-		$data['legacy_browser_icon_safari']  = tribe_assets_url( 'theme/img/legacy-browser/safari.png' );
-		$data['legacy_browser_icon_ie']      = tribe_assets_url( 'theme/img/legacy-browser/ie.png' );
+		$data['legacy_logo_header']          = $this->get_legacy_image_url( 'logo-header.png' );
+		$data['legacy_logo_footer']          = $this->get_legacy_image_url( 'logo-footer.png' );
+		$data['legacy_browser_icon_chrome']  = $this->get_legacy_image_url( 'chrome.png' );
+		$data['legacy_browser_icon_firefox'] = $this->get_legacy_image_url( 'firefox.png' );
+		$data['legacy_browser_icon_safari']  = $this->get_legacy_image_url( 'safari.png' );
+		$data['legacy_browser_icon_ie']      = $this->get_legacy_image_url( 'ie.png' );
 
 		return $data;
 	}
@@ -27,11 +27,11 @@ class Unsupported_Browser extends Base {
 	}
 
 	protected function get_favicon() {
-		return tribe_assets_url( 'theme/img/branding/favicon.ico' );
+		return trailingslashit( get_stylesheet_directory_uri() ) . 'img/branding/favicon.ico';
 	}
 
 	protected function get_css() {
-		$css_dir    = trailingslashit( tribe_assets_url( 'theme/css' ) );
+		$css_dir    = trailingslashit( get_stylesheet_directory_uri() ) . 'css/';
 		$css_legacy = ( ! defined( 'SCRIPT_DEBUG' ) || SCRIPT_DEBUG === false ) ? 'dist/legacy.min.css' : 'legacy.css';
 
 		return $css_dir . $css_legacy;
@@ -47,5 +47,13 @@ class Unsupported_Browser extends Base {
 			__( 'You are viewing this site in a browser that is no longer supported or secure. For the best possible experience, we recommend that you', 'tribe' ),
 			__( 'update or use a modern browser', 'tribe' )
 		);
+	}
+	
+	protected function get_legacy_image_url( $filename ) {
+		if ( empty( $filename ) ) {
+			return false;
+		}
+		
+		return esc_url( trailingslashit( get_stylesheet_directory_uri() ) . 'img/theme/legacy-browser/' . $filename );
 	}
 }

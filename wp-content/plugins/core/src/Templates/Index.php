@@ -3,22 +3,23 @@
 
 namespace Tribe\Project\Templates;
 
+use Tribe\Project\Templates\Components\Button;
+use Tribe\Project\Templates\Components\Breadcrumbs;
+use Tribe\Project\Templates\Components\Pagination;
 
-use Tribe\Project\Templates\Content\Pagination;
+use Tribe\Project\Theme\Pagination_Util;
+use Tribe\Project\Theme\Util;
 
 class Index extends Base {
+
 	public function get_data(): array {
-		$data               = parent::get_data();
-		$data[ 'posts' ]    = $this->get_posts();
-		$data[ 'page_num' ] = $this->get_current_page();
+		$data                = parent::get_data();
+		$data['posts']       = $this->get_posts();
+		$data['page_num']    = $this->get_current_page();
+		$data['breadcrumbs'] = $this->get_breadcrumbs();
+		$data['pagination']  = $this->get_pagination();
 
 		return $data;
-	}
-
-	protected function get_components() {
-		return [
-			new Pagination\Loop( $this->template, $this->twig ),
-		];
 	}
 
 	protected function get_posts() {
@@ -42,5 +43,80 @@ class Index extends Base {
 
 	protected function get_current_page() {
 		return max( 1, get_query_var( 'paged' ) );
+	}
+
+	protected function get_breadcrumbs() {
+
+		if ( ! is_archive() ) {
+			return '';
+		}
+
+		$news_url = get_permalink( get_option( 'page_for_posts' ) );
+
+		$items = [
+			[
+				'url'   => $news_url,
+				'label' => __( 'All News', 'tribe' ),
+			],
+		];
+
+		$options = [
+			Breadcrumbs::ITEMS => $items,
+		];
+
+		$crumbs = Breadcrumbs::factory( $options );
+
+		return $crumbs->render();
+	}
+
+	public function get_pagination(): string {
+		$links = $this->get_pagination_numbers();
+
+		$options = [
+			Pagination::LIST_CLASSES       => [ 'g-row', 'g-row--no-gutters', 'c-pagination__list' ],
+			Pagination::LIST_ITEM_CLASSES  => [ 'g-col', 'c-pagination__item' ],
+			Pagination::WRAPPER_CLASSES    => [ 'c-pagination', 'c-pagination--loop' ],
+			Pagination::WRAPPER_ATTRS      => [ 'aria-labelledby' => 'c-pagination__label-single' ],
+			Pagination::PAGINATION_NUMBERS => $links,
+		];
+
+		return Pagination::factory( $options )->render();
+	}
+
+	public function get_pagination_numbers(): array {
+		$links = [];
+
+		$pagination = new Pagination_Util();
+		$numbers = $pagination->numbers( 2, true, false, false );
+
+		if ( empty( $numbers ) ) {
+			return $links;
+		}
+
+		foreach ( $numbers as $number ) {
+
+			if ( $number['active'] ) {
+				$number['classes'][] = 'active';
+			}
+
+			if ( $number['prev'] ) {
+				$number['classes'][] = 'icon icon-cal-arrow-left';
+			}
+
+			if ( $number['next'] ) {
+				$number['classes'][] = 'icon icon-cal-arrow-right';
+			}
+
+			$options = [
+				Button::CLASSES     => $number['classes'],
+				Button::URL         => $number['url'],
+				Button::LABEL       => $number['label'],
+				Button::BTN_AS_LINK => true,
+			];
+
+			$links[] = Button::factory( $options )->render();
+		}
+
+		return $links;
 	}
 }

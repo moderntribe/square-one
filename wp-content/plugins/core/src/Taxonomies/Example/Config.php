@@ -8,6 +8,14 @@ use Tribe\Libs\Taxonomy\Taxonomy_Config;
 
 class Config extends Taxonomy_Config {
 
+	protected $version = 1;
+
+	/**
+	 * Arguments to pass when registering the taxonomy.
+	 *
+	 * @see register_extended_taxonomy() for accepted args.
+	 * @return array
+	 */
 	public function get_args() {
 		return [
 			'hierarchical' => false,
@@ -26,6 +34,8 @@ class Config extends Taxonomy_Config {
 
 	public function default_terms() {
 		return [
+			'first' => __( 'First Default Term', 'tribe' ),
+			'second' => __( 'Second Default Term', 'tribe' ),
 		];
 	}
 }
