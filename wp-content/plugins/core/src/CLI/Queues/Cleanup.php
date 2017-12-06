@@ -2,11 +2,8 @@
 
 namespace Tribe\Project\CLI\Queues;
 
-use cli\Table as CLI_Table;
 use Tribe\Project\CLI\Command;
-use Tribe\Project\CLI\File_System;
 use Tribe\Project\Queues\Queue_Collection;
-use Tribe\Project\Queues\Contracts\Queue;
 
 class Cleanup extends Command {
 

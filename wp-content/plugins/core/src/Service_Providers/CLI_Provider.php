@@ -9,6 +9,7 @@ use Tribe\Project\CLI\CLI_Generator;
 use Tribe\Project\CLI\CPT_Generator;
 use Tribe\Project\CLI\File_System;
 use Tribe\Project\CLI\Pimple_Dump;
+use Tribe\Project\CLI\Queues\Add_Tasks;
 use Tribe\Project\CLI\Queues\Cleanup;
 use Tribe\Project\CLI\Queues\Process;
 use Tribe\Project\CLI\Taxonomy_Generator;
@@ -42,6 +43,10 @@ class CLI_Provider implements ServiceProviderInterface {
 			return new Process( $container['queues.collection'] );
 		};
 
+		$container['cli.queues.add_tasks'] = function ( $container ) {
+			return new Add_Tasks( $container['queues.collection'] );
+		};
+
 		$container['cli.cpt-generator'] = function ( $container ) {
 			return new CPT_Generator( $container['cli.file-system'] );
 		};
@@ -68,6 +73,8 @@ class CLI_Provider implements ServiceProviderInterface {
 			$container['cli.queues.add_table']->register();
 			$container['cli.queues.cleanup']->register();
 			$container['cli.queues.process']->register();
+			$container['cli.queues.add_tasks']->register();
+
 		}, 0, 0 );
 	}
 }
