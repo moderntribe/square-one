@@ -3,7 +3,6 @@
 namespace Tribe\Project\CLI\Queues;
 
 use Tribe\Project\CLI\Command;
-use Tribe\Project\CLI\File_System;
 use Tribe\Project\Queues\Queue_Collection;
 
 class Process extends Command {
