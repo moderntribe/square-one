@@ -10,7 +10,7 @@ class Config extends Post_Type_Config {
 			'hierarchical'     => false,
 			'enter_title_here' => __( '%2$s', 'tribe' ),
 			'map_meta_cap'     => true,
-			'supports'         => [ 'title', 'editor' ],
+			'supports'         => [ 'title', 'editor', 'author', 'thumbnail', 'page-attributes', 'excerpt', 'revisions', ],
 			'capability_type'  => 'post', // to use default WP caps
 		];
 	}
