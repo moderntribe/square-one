@@ -9,6 +9,7 @@ class Config extends Post_Type_Config {
 		return [
 			'hierarchical'     => false,
 			'enter_title_here' => __( '%2$s', 'tribe' ),
+			'menu_icon'        => 'dashicons-warning',
 			'map_meta_cap'     => true,
 			'supports'         => [ 'title', 'editor', 'author', 'thumbnail', 'page-attributes', 'excerpt', 'revisions', ],
 			'capability_type'  => 'post', // to use default WP caps
