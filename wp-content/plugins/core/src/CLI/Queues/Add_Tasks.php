@@ -48,7 +48,11 @@ class Add_Tasks extends Command {
 			\WP_CLI::error( __( 'That queue name doesn\'t appear to be valid.', 'tribe' ) );
 		}
 
-		$queue = $this->queues->get( $queue_name );
+		try {
+			$queue = $this->queues->get( $queue_name );
+		} catch ( \Exception $e ) {
+			\WP_CLI::error( $e->getMessage() );
+		}
 
 		for ( $i = 1; $i < $assoc_args['count']; $i ++ ) {
 			$queue->dispatch( Noop::class, [ 'noop' => 'task' . microtime() ], $i );
