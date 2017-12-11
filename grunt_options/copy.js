@@ -58,7 +58,6 @@ module.exports = {
 				expand: true,
 				flatten: true,
 				src: [
-					'<%= pkg._npm_path %>/babel-polyfill/dist/polyfill.js',
 					'<%= pkg._npm_path %>/jquery/dist/jquery.js',
 					'<%= pkg._npm_path %>/jquery/dist/jquery.min.js',
 					'<%= pkg._npm_path %>/jquery/dist/jquery.min.map',

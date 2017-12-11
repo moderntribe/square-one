@@ -31,6 +31,14 @@ const bindEvents = () => {
 };
 
 /**
+ * @function browserSupportsAllFeatures
+ * @description Add feature detects here like window.IntersectionObserver || window.Fetch etc
+ */
+
+const browserSupportsAllFeatures = () =>
+	window.IntersectionObserver;
+
+/**
  * @function init
  * @description The core dispatcher for init across the codebase.
  */
@@ -65,12 +73,25 @@ const init = () => {
 };
 
 /**
+ * @function setupEnivironment
+ * @description
+ */
+
+const setupEnvironment = () => {
+	if (browserSupportsAllFeatures()) {
+		init();
+		return;
+	}
+	import('./polyfills' /* webpackChunkName:"polyfills" */).then(() => init());
+};
+
+/**
  * @function domReady
  * @description Export our dom ready enabled init.
  */
 
 const domReady = () => {
-	ready(init);
+	ready(setupEnvironment);
 };
 
 export default domReady;
