@@ -19,7 +19,7 @@ class Add_Tasks extends Command {
 	}
 
 	public function command() {
-		return 'queues add_tasks';
+		return 'queues add-tasks';
 	}
 
 	public function description() {

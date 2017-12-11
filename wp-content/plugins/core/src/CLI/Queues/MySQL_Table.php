@@ -18,7 +18,7 @@ class MySQL_Table extends Command {
 	}
 
 	public function command() {
-		return 'queues add_table';
+		return 'queues add-table';
 	}
 
 	public function arguments() {
