@@ -1,7 +1,6 @@
 <?php
 namespace Tribe\Project\CLI;
 
-use Pimple\Container;
 use Sunra\PhpSimple\HtmlDomParser;
 
 /**
@@ -9,13 +8,6 @@ use Sunra\PhpSimple\HtmlDomParser;
  * @package Tribe\Project\CLI
  */
 class Cache_Prime extends Command {
-
-	private $container;
-
-	public function __construct( Container $container ) {
-		$this->container = $container;
-		parent::__construct();
-	}
 
 	protected function command() {
 		return 'cache-prime';
