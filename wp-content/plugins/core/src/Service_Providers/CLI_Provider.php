@@ -34,8 +34,8 @@ class CLI_Provider implements ServiceProviderInterface {
 			return new CLI_Generator( $container['cli.file-system'] );
 		};
 
-		$container['cli.cache-prime'] = function( $container ) {
-			return new Cache_Prime( $container );
+		$container['cli.cache-prime'] = function() {
+			return new Cache_Prime();
 		};
 
 		add_action( 'init', function () use ( $container ) {
