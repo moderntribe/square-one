@@ -5,6 +5,14 @@ namespace Tribe\Project\Theme\Resources;
 
 
 class Scripts {
+	public function add_early_polyfills() {
+		$js_dir  = trailingslashit( get_stylesheet_directory_uri() ) . 'js/';
+		?>
+		<script>window.Promise ||
+			document.write('<script src="<?php echo esc_url( $js_dir ); ?>vendor/es6-promise.auto.js"><\/script>');
+		</script>
+		<?php
+	}
 	/**
 	 * Enqueue scripts
 	 * @action wp_enqueue_scripts
