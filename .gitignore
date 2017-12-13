@@ -23,6 +23,8 @@ pimple.json
 # WordPress #
 #############
 
+wp/
+
 local-config.php
 cache-config.php
 tests-config.php
