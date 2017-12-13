@@ -1,0 +1,38 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Component: Quote
+ *
+ * ----------------------------------------------------------------------------- */
+
+.c-quote {
+	text-align: center;
+}
+
+.c-quote__text {
+	font-size: 24px;
+	font-weight: var(--font-weight-bold);
+	line-height: 1.3;
+	padding: 0 20px;
+
+	@media (--viewport-medium) {
+		font-size: 30px;
+		padding: 0 30px;
+	}
+
+	@media (--viewport-full) {
+		font-size: 38px;
+	}
+}
+
+.c-quote__cite {
+	display: block;
+	font-size: var(--font-size-content-s);
+	font-weight: var(--font-weight-semibold);
+	font-style: normal;
+	margin-top: var(--spacer);
+
+	@media (--viewport-medium) {
+		font-size: var(--font-size-content);
+		padding: 0 30px;
+	}
+}

@@ -1,5 +1,11 @@
 {
   "name": "moderntribe/square-one",
+  "authors": [
+    {
+      "name": "Modern Tribe",
+      "email": "admin@tri.be"
+    }
+  ],
   "description": "Modern Tribe's Square One WordPress setup",
   "type": "project",
   "license": "Proprietary",
@@ -37,7 +43,8 @@
     "wpackagist-plugin/regenerate-thumbnails": "2.2.6",
     "wpackagist-plugin/wordpress-seo": "4.1",
     "moderntribe/panel-builder": "dev-3.2-branch",
-    "humanmade/mercator":"dev-master#671f147"
+    "humanmade/mercator":"dev-master#671f147",
+    "vlucas/phpdotenv": "^2.4"
   },
   "extra": {
     "wordpress-install-dir": "wp",

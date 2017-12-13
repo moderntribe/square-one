@@ -5,21 +5,13 @@ namespace Tribe\Project\Theme\Resources;
 
 
 class Styles {
-
-	/** @var string Path to the root file of the plugin */
-	private $plugin_file = '';
-
-	public function __construct( $plugin_file = '' ) {
-		$this->plugin_file = $plugin_file;
-	}
-
 	/**
 	 * Enqueue styles
 	 * @action wp_enqueue_scripts
 	 */
 	public function enqueue_styles() {
 
-		$css_dir = $this->get_css_url();
+		$css_dir = trailingslashit( get_stylesheet_directory_uri() ) . 'css/';
 		$version = tribe_get_version();
 
 		if ( ! defined( 'SCRIPT_DEBUG' ) || SCRIPT_DEBUG === false ) { // Production
@@ -36,9 +28,5 @@ class Styles {
 		// CSS: print
 		wp_enqueue_style( 'core-theme-print', $css_dir . $css_print, array(), $version, 'print' );
 
-	}
-
-	private function get_css_url() {
-		return plugins_url( 'assets/theme/css/', $this->plugin_file );
 	}
 }

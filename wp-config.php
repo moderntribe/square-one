@@ -2,40 +2,86 @@
 /**
  * Modern Tribe Skeleton configuration
  * Based on Mark Jaquith's Skeleton repository
+ *
  * @link https://github.com/markjaquith/WordPress-Skeleton
  */
 
+function tribe_isSSL() {
+	return ( ! empty( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] !== 'off' );
+}
+
+function tribe_getenv( $name, $default = null ) {
+	$env = getenv( $name );
+	if ( $env === false ) {
+		return $default;
+	}
+
+	$env_str = strtolower( trim( $env ) );
+	if ( $env_str === 'false' || $env_str === 'true' ) {
+		return filter_var( $env_str, FILTER_VALIDATE_BOOLEAN );
+	}
+
+	if ( is_numeric( $env ) ) {
+		return ( $env - 0 );
+	}
+
+	return $env;
+}
+
+
+if ( file_exists( __DIR__ . '/.env' ) ) {
+	require_once __DIR__ . '/vendor/autoload.php';
+	$dotenv = new Dotenv\Dotenv( __DIR__ );
+	$dotenv->load();
+}
 
 // ==============================================================
 // Load database info and local development parameters
 // ==============================================================
 
-if ( file_exists( dirname( __FILE__ ) . '/local-config.php' ) )
-	include( dirname( __FILE__ ) . '/local-config.php' );
+if ( file_exists( __DIR__ . '/local-config.php' ) ) {
+	include __DIR__ . '/local-config.php';
+}
 
 // ==============================================================
 // Assign default constant values
 // ==============================================================
 
-$config_defaults = array(
+if ( ! isset( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) ) {
+	$_SERVER['HTTP_X_FORWARDED_PROTO'] = '';
+}
+if ( ! isset( $_SERVER['HTTP_HOST'] ) ) {
+	$_SERVER['HTTP_HOST'] = 'local-cli';
+}
+
+if ( $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https' ) {
+	$_SERVER['HTTPS']       = 'on';
+	$_SERVER['SERVER_PORT'] = 443;
+}
+
+$config_defaults = [
 
 	// Paths
-	'WP_CONTENT_DIR'          => dirname( __FILE__ ) . '/wp-content',
-	'WP_CONTENT_URL'          => 'http://' . $_SERVER['HTTP_HOST'] . '/wp-content',
-	'ABSPATH'                 => dirname( __FILE__ ) . '/wp/',
+	'WP_CONTENT_DIR'          => __DIR__ . '/wp-content',
+	'WP_CONTENT_URL'          => ( tribe_isSSL() ? 'https' : 'http' ) . '://' . $_SERVER['HTTP_HOST'] . '/wp-content',
+	'ABSPATH'                 => __DIR__ . '/wp/',
 
 	// Multisite
-	//'WP_ALLOW_MULTISITE'    => true,
-	//'MULTISITE'             => true,
-	//'SUBDOMAIN_INSTALL'     => false,
-	//'DOMAIN_CURRENT_SITE'   => '%%PRIMARY_DOMAIN%%',
-	//'PATH_CURRENT_SITE'     => '/',
-	//'SITE_ID_CURRENT_SITE'  => 1,
-	//'BLOG_ID_CURRENT_SITE'  => 1,
+	'WP_ALLOW_MULTISITE'      => tribe_getenv( 'WP_ALLOW_MULTISITE', false ),
+	'MULTISITE'               => tribe_getenv( 'WP_MULTISITE', false ),
+	'SUBDOMAIN_INSTALL'       => tribe_getenv( 'SUBDOMAIN_INSTALL', false ),
+	'DOMAIN_CURRENT_SITE'     => tribe_getenv( 'DOMAIN_CURRENT_SITE', '%%PRIMARY_DOMAIN%%' ),
+	'PATH_CURRENT_SITE'       => tribe_getenv( 'PATH_CURRENT_SITE', '/' ),
+	'SITE_ID_CURRENT_SITE'    => tribe_getenv( 'SITE_ID_CURRENT_SITE', 1 ),
+	'BLOG_ID_CURRENT_SITE'    => tribe_getenv( 'BLOG_ID_CURRENT_SITE', 1 ),
 
 	// DB settings
 	'DB_CHARSET'              => 'utf8',
 	'DB_COLLATE'              => '',
+	'DB_NAME'                 => tribe_getenv( 'DB_NAME', '' ),
+	'DB_USER'                 => tribe_getenv( 'DB_USER', '' ),
+	'DB_PASSWORD'             => tribe_getenv( 'DB_PASSWORD', '' ),
+	'DB_HOST'                 => tribe_getenv( 'DB_HOST', '' ),
 
 	// Language
 	'WPLANG'                  => '',
@@ -69,28 +115,37 @@ $config_defaults = array(
 	'FILE_CACHE_MAX_FILE_AGE' => 315000000, // about 10 years
 
 	// Debug
-	'WP_DEBUG'                => true,
-	'WP_DEBUG_LOG'            => true,
-	'WP_DEBUG_DISPLAY'        => true,
-	'SAVEQUERIES'             => true,
-	'SCRIPT_DEBUG'            => true,
-	'CONCATENATE_SCRIPTS'     => false,
-	'COMPRESS_SCRIPTS'        => false,
-	'COMPRESS_CSS'            => false,
+	'WP_DEBUG'                => tribe_getenv( 'WP_DEBUG', true ),
+	'WP_DEBUG_LOG'            => tribe_getenv( 'WP_DEBUG_LOG', true ),
+	'WP_DEBUG_DISPLAY'        => tribe_getenv( 'WP_DEBUG_DISPLAY', true ),
+	'SAVEQUERIES'             => tribe_getenv( 'SAVEQUERIES', true ),
+	'SCRIPT_DEBUG'            => tribe_getenv( 'SCRIPT_DEBUG', true ),
+	'CONCATENATE_SCRIPTS'     => tribe_getenv( 'CONCATENATE_SCRIPTS', false ),
+	'COMPRESS_SCRIPTS'        => tribe_getenv( 'COMPRESS_SCRIPTS', false ),
+	'COMPRESS_CSS'            => tribe_getenv( 'COMPRESS_CSS', false ),
 
 	// Domain Mapping
 	//'SUNRISE'                 => true,
 
 	// Miscellaneous
 	'WP_POST_REVISIONS'       => true,
-	'WP_DEFAULT_THEME'        => 'core'
-);
+	'WP_DEFAULT_THEME'        => 'core',
+
+	// S3
+	'S3_UPLOADS_BUCKET'       => tribe_getenv( 'S3_UPLOADS_BUCKET', '' ),
+	'S3_UPLOADS_KEY'          => tribe_getenv( 'S3_UPLOADS_KEY', '' ),
+	'S3_UPLOADS_SECRET'       => tribe_getenv( 'S3_UPLOADS_SECRET', '' ),
+	'S3_UPLOADS_REGION'       => tribe_getenv( 'S3_UPLOADS_REGION', '' ),
+
+	// Glomar
+	'TRIBE_GLOMAR'            => tribe_getenv( 'TRIBE_GLOMAR', '' ),
+];
 
 // ==============================================================
 // Assign default constant value overrides for production
 // ==============================================================
 
-if ( defined( 'ENVIRONMENT' ) && ENVIRONMENT == 'PRODUCTION' ) {
+if ( defined( 'ENVIRONMENT' ) && ENVIRONMENT === 'PRODUCTION' ) {
 	$config_defaults['WP_CACHE']            = true;
 	$config_defaults['WP_DEBUG']            = false;
 	$config_defaults['WP_DEBUG_LOG']        = false;
@@ -106,8 +161,15 @@ if ( defined( 'ENVIRONMENT' ) && ENVIRONMENT == 'PRODUCTION' ) {
 // ==============================================================
 
 foreach ( $config_defaults AS $config_default_key => $config_default_value ) {
-	if ( ! defined( $config_default_key ) )
+	if ( ! defined( $config_default_key ) ) {
 		define( $config_default_key, $config_default_value );
+	}
+}
+// make sure our environment variables are also accessible as PHP constants
+foreach ( $_ENV as $key => $value ) {
+	if ( ! defined( $key ) ) {
+		define( $key, tribe_getenv( $key ) );
+	}
 }
 
 // ==============================================================
@@ -115,32 +177,20 @@ foreach ( $config_defaults AS $config_default_key => $config_default_value ) {
 // Change this if you have multiple installs in the same database
 // ==============================================================
 
-if ( empty( $table_prefix ) )
+if ( empty( $table_prefix ) ) {
 	$table_prefix = 'tribe_';
+}
 
 // ==============================================================
 // Manually back up the WP_DEBUG_DISPLAY directive
 // ==============================================================
 
-if ( ! defined( 'WP_DEBUG_DISPLAY' ) || WP_DEBUG_DISPLAY == false )
+if ( ! defined( 'WP_DEBUG_DISPLAY' ) || ! WP_DEBUG_DISPLAY ) {
 	ini_set( 'display_errors', 0 );
-
-// ==============================================================
-// Load a Memcached config if we have one
-// ==============================================================
-
-if ( file_exists( dirname( __FILE__ ) . '/memcached.php' ) )
-	$memcached_servers = include( dirname( __FILE__ ) . '/memcached.php' );
-
-// ==============================================================
-// Load a Cache config if we have one
-// ==============================================================
-
-if ( file_exists( dirname( __FILE__ ) . '/cache-config.php' ) )
-	include( dirname( __FILE__ ) . '/cache-config.php' );
+}
 
 // ==============================================================
 // Bootstrap WordPress
 // ==============================================================
 
-require_once( ABSPATH . 'wp-settings.php' );
+require_once ABSPATH . 'wp-settings.php';

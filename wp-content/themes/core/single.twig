@@ -1,0 +1,28 @@
+{% extends "base.twig" %}
+
+{% block main %}
+
+	{% block breadcrumbs %}
+		{% if breadcrumbs %}
+			{{ breadcrumbs }}
+		{% endif %}
+	{% endblock %}
+
+	{% block subhead %}
+		{{ include( 'content/header/sub.twig' ) }}
+	{% endblock %}
+
+	{% block content %}
+		<div class="l-container">
+			{{ include( 'content/single/post.twig') }}
+
+			{{ include( 'content/pagination/single.twig') }}
+		</div>
+
+		{{ do_action( 'the_panels') }}
+	{% endblock %}
+
+	{{ comments }}
+
+
+{% endblock %}

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Tribe\Project\Theme\Nav;
 
 /**
@@ -9,7 +8,6 @@ namespace Tribe\Project\Theme\Nav;
  * Filters the attributes applied to HTML elements in a nav menu
  */
 class Nav_Attribute_Filters {
-
 
 	/**
 	 * Remove the ID attributed from the nav item
@@ -21,10 +19,8 @@ class Nav_Attribute_Filters {
 	 * @return string
 	 * @filter nav_menu_item_id
 	 */
-	public function clean_nav_item_id( $menu_id, $item, $args, $depth ) {
-
+	public function customize_nav_item_id( $menu_id, $item, $args, $depth ) {
 		return '';
-
 	}
 
 	/**
@@ -39,17 +35,52 @@ class Nav_Attribute_Filters {
 	 */
 	public function customize_nav_item_classes( $classes, $item, $args, $depth ) {
 
-		$classes[] = 'menu-item--depth-' . $depth;
+		/*
+		 *  WP Core docs claim that $args is an array, but it comes
+		 * in as an object thanks to casting in wp_nav_menu()
+		 */
+		$args = (array) $args;
 
-		$allowed_class_names = array(
-			'menu-item',
-			'menu-item-has-children',
-			'current-menu-parent',
-			'current-menu-item',
-			'menu-item--depth-' . $depth,
-		);
+		$classes[] = $args[ 'theme_location' ] . '__list-item';
 
-		return array_intersect( $allowed_class_names, $classes );
+		// Depth
+		$classes[] .= $args[ 'theme_location' ] . '__list-item--depth-' . $depth;
+
+		// Has children items
+		if ( in_array( 'menu-item-has-children', $item->classes ) ) {
+			$classes[] = $args[ 'theme_location' ] . '__list-item--has-children';
+		}
+
+		// Is Parent Item
+		if ( in_array( 'current-menu-parent', $item->classes ) ) {
+			$classes[] = $args[ 'theme_location' ] . '__list-item--is-current-parent';
+		}
+
+		// Is Current Item
+		if ( in_array( 'current-menu-item', $item->classes ) ) {
+			$classes[] = $args[ 'theme_location' ] . '__list-item--is-current';
+		}
+
+		/**
+		 * Filter the array of classes to remove the classes added by WP Core.
+		 * Regex is designed to filter all classes defined in `_wp_menu_item_classes_by_context()`;
+		 */
+		$classes = array_filter( $classes, function ( $class ) {
+
+			/**
+			 * Patterns used for matching:
+			 *
+			 * ^menu-item[\w|-]*$         Matches classes that start with `menu-item` and may or may not have additional modifiers.
+			 * ^current[-|_][\w|-]*$      Matches classes that start with `current-` or `current_` and have additional modifiers.
+			 * ^page[-|_]item[\w|-]*$     Matches classes that start with `page-item` or `page_item` and may or may not have additional modifiers.
+			 */
+
+			$pattern = '/^menu-item[\w|-]*$|^current[-|_][\w|-]*$|^page[-|_]item[\w|-]*$/iU';
+
+			return ! preg_match( $pattern, $class );
+		});
+
+		return $classes;
 
 	}
 
@@ -70,27 +101,25 @@ class Nav_Attribute_Filters {
 	 * @return array
 	 * @filter nav_menu_link_attributes
 	 */
-	public function customize_menu_item_atts( $atts, $item, $args, $depth ) {
+	public function customize_nav_item_anchor_atts( $atts, $item, $args, $depth ) {
 
 		/*
 		 *  WP Core docs claim that $args is an array, but it comes
 		 * in as an object thanks to casting in wp_nav_menu()
 		 */
 		$args = (array) $args;
-		// Primary / Site Navigation
-		if ( $args[ 'theme_location' ] === 'primary' ) {
-			// Top Level Items
-			if ( 0 === $depth ) {
-				$atts['class'] = 'menu-item__anchor';
 
-				// Item has children
-				if ( in_array( 'menu-item-has-children', $item->classes ) ) {
-					$atts['class']      .= ' menu-item__anchor--child';
-					$atts['id']          = 'menu-item-' . $item->ID;
-					$atts['data-target'] = 'sub-menu-' . $item->ID;
-				}
-			}
+		$classes = [
+			$args[ 'theme_location' ] . '__action',
+			$args[ 'theme_location' ] . '__action--depth-' . $depth,
+		];
+
+		// Has children items
+		if ( in_array( 'menu-item-has-children', $item->classes ) ) {
+			$classes[] = $args[ 'theme_location' ] . '__action--has-children';
 		}
+
+		$atts['class'] = implode( ' ', array_unique( $classes ) );
 
 		return $atts;
 

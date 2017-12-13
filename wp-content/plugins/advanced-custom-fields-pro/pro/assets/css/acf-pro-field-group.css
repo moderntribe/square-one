@@ -59,6 +59,7 @@
   /* group */
   /* seamless */
 }
+.acf-field-object-clone[data-display="seamless"] .acf-field-setting-instructions,
 .acf-field-object-clone[data-display="seamless"] .acf-field-setting-layout,
 .acf-field-object-clone[data-display="seamless"] .acf-field-setting-wrapper,
 .acf-field-object-clone[data-display="seamless"] .acf-field-setting-conditional_logic {

@@ -12,8 +12,8 @@ ehthumbs.db
 Thumbs.db
 .DS_Store
 .idea
-vendor/
-wp/
+pimple.json
+.phpstorm.meta.php
 
 # Vim generated files #
 #######################
@@ -37,6 +37,7 @@ wp-content/advanced-cache.php
 wp-content/wp-cache-config.php
 wp-content/tests/
 wp-content/logs/
+wp-content/mu-plugins/mu.local.php
 
 wp-content/plugins/fakerpress/
 wp-content/plugins/better-search-replace/
@@ -75,8 +76,8 @@ dev/composer.phar
 local-config.json
 dev/docker/mysql/*
 !dev/docker/mysql/.gitkeep
-wp-content/plugins/core/assets/theme/css
-wp-content/plugins/core/assets/theme/js/dist
+wp-content/themes/core/css
+wp-content/themes/core/js/dist
 
 # WP Engine #
 #############
@@ -101,13 +102,10 @@ wp-content/plugins/airplane-mode
 dev_components/react-app/test/__coverage__/
 dev/deploy/.deploy
 
-wp-packagist
+# DevOps #
 #######################
-/wp-content/plugins/gravity-forms-wcag-20-form-fields/
-/wp-content/plugins/limit-login-attempts/
-/wp-content/plugins/configure-smtp/
-/wp-content/plugins/posts-to-posts/
-/wp-content/plugins/regenerate-thumbnails/
-/wp-content/plugins/wordpress-seo/
-/wp-content/plugins/panel-builder/
-/wp-content/mu-plugins/mercator/
+/.garden-*
+/.env
+/vendor
+/composer.lock
+dev/docker/global/.env

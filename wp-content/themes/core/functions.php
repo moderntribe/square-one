@@ -21,7 +21,6 @@ function core_theme_setup() {
 	include_once 'template-tags/titles.php';
 	include_once 'template-tags/images.php';
 	include_once 'template-tags/comments.php';
-	include_once 'template-tags/branding.php';
 
 	// Remove WP SEO json-ld output in favor of the included functions
 	add_filter( 'wpseo_json_ld_output', '__return_false' );
@@ -29,4 +28,3 @@ function core_theme_setup() {
 }
 
 endif; // core_theme_setup
-

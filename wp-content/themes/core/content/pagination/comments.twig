@@ -1,0 +1,25 @@
+{% if pagination.paged %}
+
+	<nav class="pagination pagination--comments" aria-labelledby="pagination__label-comments">
+
+		<h3 id="pagination__label-comments" class="u-visual-hide">{{ lang['Comments Pagination'] }}</h3>
+
+		<ol class="pagination__list">
+
+			{% if pagination.previous %}
+				<li class="pagination__item pagination__item--previous">
+					{{ pagination.previous }}
+				</li>
+			{% endif %}
+
+			{% if pagination.next %}
+				<li class="pagination__item pagination__item--next">
+					{{ pagination.next }}
+				</li>
+			{% endif %}
+
+		</ol>
+
+	</nav>
+
+{% endif %}

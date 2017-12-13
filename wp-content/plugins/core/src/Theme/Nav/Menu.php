@@ -45,11 +45,10 @@ class Menu {
 	public static function menu( $args ) {
 		$menu = new self( $args );
 		$html = $menu->get_html();
-		$echo = isset($args['echo']) ? $args['echo'] : TRUE;
-		if ( $echo ) {
-			echo $html;
-		} else {
+		$echo = isset( $args[ 'echo' ] ) ? $args[ 'echo' ] : TRUE;
+		if ( !$echo ) {
 			return $html;
 		}
+		echo $html;
 	}
 }

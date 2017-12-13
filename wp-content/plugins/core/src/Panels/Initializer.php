@@ -9,6 +9,7 @@ use ModularContent\PanelType;
 use Tribe\Project\Panels\Types\Panel_Type_Config;
 use Tribe\Project\Post_Types\Event\Event;
 use Tribe\Project\Post_Types\Page\Page;
+use Tribe\Project\Taxonomies\Category\Category;
 
 class Initializer {
 	private $panel_types_to_initialize = [ ];
@@ -23,17 +24,15 @@ class Initializer {
 		$this->plugin_file = $plugin_file;
 	}
 
-	public function add_panel_config( $panel_type ) {
-		$this->panel_types_to_initialize[] = $panel_type;
+	public function add_panel_config( $classname ) {
+		$this->panel_types_to_initialize[] = $classname;
 	}
 
 	/**
 	 * @return void
-	 * @action plugins_loaded
+	 * @action plugins_loaded 9
 	 */
-	public function hook() {
-		add_action( 'panels_init', [ $this, 'initialize_panels' ], 10, 0 );
-
+	public function set_labels() {
 		// these have to register early (before plugins_loaded:10)
 		add_filter( 'modular_content_singular_label', function () {
 			return __( 'Panel', 'tribe' );
@@ -43,22 +42,42 @@ class Initializer {
 		} );
 	}
 
-	public function initialize_panels() {
-		\ModularContent\Plugin::instance()->do_not_filter_the_content();
+	/**
+	 * @param \ModularContent\Plugin $plugin
+	 *
+	 * @return void
+	 * @action panels_init
+	 */
+	public function initialize_panels( \ModularContent\Plugin $plugin ) {
+		$plugin->do_not_filter_the_content();
 
 		$this->set_supported_post_types();
 		$this->set_view_directories();
 		require_once( dirname( $this->plugin_file ) . '/functions/panels.php' );
-		require_once( dirname( $this->plugin_file ) . '/functions/utility.php' );
 
 		add_filter( 'modular_content_default_fields', [ $this, 'set_default_fields' ], 10, 2 );
+		add_filter( 'modular_content_default_settings_fields', [ $this, 'set_default_settings' ], 10, 2 );
 		add_filter( 'modular_content_posts_field_taxonomy_options', [ $this, 'set_available_query_taxonomies', ], 10, 1 );
 		add_filter( 'modular_content_posts_field_p2p_options', [ $this, 'filter_p2p_options' ], 10, 1 );
 		add_filter( 'panels_query_post_type_options', [ $this, 'add_post_type_options_for_queries' ], 10, 1 );
 		add_filter( 'panels_input_query_filter', [ $this, 'set_order_for_queries' ], 10, 3 );
 		add_filter( 'panels_input_query_filter', [ $this, 'rewrite_date_query_for_events' ], 10, 3 );
 
-		$this->register_panels( \ModularContent\Plugin::instance()->registry() );
+		$this->register_panels( $plugin->registry() );
+	}
+
+	/**
+	 * Modify the scroll offset for the iframe to the themes needs (fixed nav)
+	 *
+	 * @param array $data Any js config data from the plugin
+	 *
+	 * @return array
+	 *
+	 * @filter panels_js_config
+	 */
+	public function modify_js_config( $data = [] ) {
+		$data['iframe_scroll_offset'] = 120;
+		return $data;
 	}
 
 	/**
@@ -93,9 +112,8 @@ class Initializer {
 	 */
 	private function register_panels( $registry ) {
 		foreach ( $this->panel_types_to_initialize as $class ) {
-			$classname = '\\Tribe\\Project\\Panels\\Types\\' . $class;
 			/** @var Panel_Type_Config $panel_type */
-			$panel_type = new $classname( $this );
+			$panel_type = new $class( $this );
 			if ( $panel_type instanceof Panel_Type_Config ) {
 				$panel_type->register( $registry, $this->ViewFinder );
 			}
@@ -109,44 +127,25 @@ class Initializer {
 	 * @return PanelType
 	 */
 	public function factory( $panel_type_id, $helper_text = '' ) {
-		if ( $helper_text ) {
-			$helper_field = $this->field( 'HTML', [
-				'name'        => 'panel-helper',
-				'label'       => '',
-				'description' => $helper_text,
-			] );
-
-			$default_fields_filter = function ( $fields, $panel_type ) use ( $helper_field ) {
-				return array_merge( [ $helper_field ], $fields );
-			};
-			add_filter( 'modular_content_default_fields', $default_fields_filter, 20, 2 );
-			$panel = new PanelType( $panel_type_id );
-			remove_filter( 'modular_content_default_fields', $default_fields_filter, 20 );
-		} else {
-			$panel = new PanelType( $panel_type_id );
+		if ( !$helper_text ) {
+			return new PanelType( $panel_type_id );
 		}
+
+		$helper_field = new Fields\HTML( [
+			'name'        => 'panel-helper',
+			'label'       => '',
+			'description' => $helper_text,
+		] );
+
+		$default_fields_filter = function ( $fields, $panel_type ) use ( $helper_field ) {
+			return array_merge( [ $helper_field ], $fields );
+		};
+		add_filter( 'modular_content_default_fields', $default_fields_filter, 20, 2 );
+		$panel = new PanelType( $panel_type_id );
+		remove_filter( 'modular_content_default_fields', $default_fields_filter, 20 );
+
 		return $panel;
 	}
-
-	/**
-	 * @param $type
-	 * @param $args
-	 *
-	 * @return \ModularContent\Fields\Field
-	 */
-	public function field( $type, $args = [ ] ) {
-		$overrides = 'Tribe\\Project\\Panels\\Fields\\' . $type;
-		$base = 'ModularContent\\Fields\\' . $type;
-
-		if ( class_exists( $overrides ) ) {
-			$object = new $overrides( $args );
-		} else {
-			$object = new $base( $args );
-		}
-
-		return $object;
-	}
-
 
 	public function add_post_type_options_for_queries( $post_types ) {
 		$post_types[ Event::NAME ] = get_post_type_object( Event::NAME );
@@ -156,7 +155,7 @@ class Initializer {
 	}
 
 	public function set_available_query_taxonomies( $taxonomies ) {
-		$taxonomies[] = 'category';
+		$taxonomies[] = Category::NAME;
 		$taxonomies = array_unique( $taxonomies );
 		sort( $taxonomies );
 
@@ -174,14 +173,10 @@ class Initializer {
 	}
 
 	public function set_default_fields( $fields, $panel_type ) {
+		return $fields;
+	}
 
-		// Add a nav title field to all panel types. This will be hidden on child panels with CSS.
-		$fields[] = new Fields\Text( [
-			'label'       => __( 'Navigation Title', 'tribe' ),
-			'name'        => 'nav-title',
-			'description' => __( 'The title that will be used for the page navigation menu. Leave blank to exclude from the menu.', 'tribe' ),
-		] );
-
+	public function set_default_settings( $fields, $panel_type ) {
 		return $fields;
 	}
 
@@ -211,7 +206,7 @@ class Initializer {
 					$query_args[ 'start_date' ] = $this->normalize_date_query_to_string( $dq[ 'after' ] );
 				}
 				if ( !empty( $dq[ 'before' ] ) ) {
-					$query_args[ 'end_date' ] = $this->normalize_date_query_to_string( $dq[ 'before' ] );;
+					$query_args[ 'end_date' ] = $this->normalize_date_query_to_string( $dq[ 'before' ] );
 				}
 			}
 		}
@@ -219,17 +214,18 @@ class Initializer {
 	}
 
 	private function normalize_date_query_to_string( $input ) {
-		if ( is_array( $input ) ) {
-			$date = isset( $input[ 'year' ] ) ? sprintf( '%04d', $input[ 'year' ] ) : date( 'Y' );
-			$date .= '-';
-			$date .= isset( $input[ 'month' ] ) ? sprintf( '%02d', $input[ 'month' ] ) : date( 'm' );
-			$date .= '-';
-			$date .= isset( $input[ 'day' ] ) ? sprintf( '%02d', $input[ 'day' ] ) : date( 'd' );
-			$date .= " 23:59:59";
-			return $date;
-		} else {
-			return (string)$input;
+		if ( !is_array( $input ) ) {
+			return (string) $input;
 		}
+
+		$date = isset( $input[ 'year' ] ) ? sprintf( '%04d', $input[ 'year' ] ) : date( 'Y' );
+		$date .= '-';
+		$date .= isset( $input[ 'month' ] ) ? sprintf( '%02d', $input[ 'month' ] ) : date( 'm' );
+		$date .= '-';
+		$date .= isset( $input[ 'day' ] ) ? sprintf( '%02d', $input[ 'day' ] ) : date( 'd' );
+		$date .= " 23:59:59";
+		return $date;
+
 	}
 
 	/**
@@ -271,14 +267,14 @@ class Initializer {
 	}
 
 	public function thumbnail_url( $filename ) {
-		return plugins_url( 'assets/admin/panels/thumbnails/' . $filename, $this->plugin_file );
+		return trailingslashit( get_stylesheet_directory_uri() ) . 'img/admin/panels/thumbnails/' . $filename;
 	}
 
 	public function layout_icon_url( $filename ) {
-		return plugins_url( 'assets/admin/panels/icons/standard/' . $filename, $this->plugin_file );
+		return trailingslashit( get_stylesheet_directory_uri() ) . 'img/admin/panels/icons/standard/' . $filename;
 	}
 
 	public function swatch_icon_url( $filename ) {
-		return plugins_url( 'assets/admin/panels/icons/swatches/' . $filename, $this->plugin_file );
+		return trailingslashit( get_stylesheet_directory_uri() ) . 'img/admin/panels/icons/swatches/' . $filename;
 	}
 }

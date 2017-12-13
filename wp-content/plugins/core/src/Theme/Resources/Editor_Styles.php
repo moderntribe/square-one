@@ -5,27 +5,18 @@ namespace Tribe\Project\Theme\Resources;
 
 
 class Editor_Styles {
-
-	/** @var string Path to the root file of the plugin */
-	private $plugin_file = '';
-
-	public function __construct( $plugin_file = '' ) {
-		$this->plugin_file = $plugin_file;
-	}
-
 	/**
 	 * Visual Editor Styles
 	 * @action after_setup_theme
 	 */
 	public function visual_editor_styles() {
 
-		$css_dir    = $this->get_css_url();
+		$css_dir    = trailingslashit( get_stylesheet_directory_uri() ) . 'css/admin/';
 		$editor_css = 'editor-style.css';
 
 		// Production
 		if ( ! defined( 'SCRIPT_DEBUG' ) || SCRIPT_DEBUG === false ) {
-			$css_dir    = $this->get_css_url() . 'dist/';
-			$editor_css = 'editor-style.min.css';
+			$editor_css = 'dist/editor-style.min.css';
 		}
 
 		add_editor_style( $css_dir . $editor_css );
@@ -41,9 +32,5 @@ class Editor_Styles {
 
 		return $settings;
 
-	}
-
-	private function get_css_url() {
-		return plugins_url( 'assets/theme/css/admin/', $this->plugin_file );
 	}
 }

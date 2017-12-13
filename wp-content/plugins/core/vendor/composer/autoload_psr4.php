@@ -6,7 +6,10 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Twig\\' => array($vendorDir . '/twig/twig/src'),
     'Tribe\\Project\\' => array($baseDir . '/src'),
     'Tribe\\Libs\\' => array($vendorDir . '/moderntribe/tribe-libs/src'),
-    'Composer\\Installers\\' => array($vendorDir . '/composer/installers/src/Composer/Installers'),
+    'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
+    'Psr\\Container\\' => array($vendorDir . '/psr/container/src'),
+    'JBZoo\\PimpleDumper\\' => array($vendorDir . '/jbzoo/pimpledumper/src'),
 );

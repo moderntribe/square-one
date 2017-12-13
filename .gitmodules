@@ -7,3 +7,6 @@
 [submodule "wp-content/plugins/panel-builder"]
 	path = wp-content/plugins/panel-builder
 	url = git@github.com:moderntribe/panel-builder.git
+[submodule "wp-content/plugins/s3-uploads"]
+	path = wp-content/plugins/s3-uploads
+	url = git@github.com:humanmade/S3-Uploads.git

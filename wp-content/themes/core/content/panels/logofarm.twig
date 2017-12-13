@@ -1,0 +1,21 @@
+{# Panel: Logofarm #}
+
+{% extends "content/panels/panel.twig" %}
+
+{% block content %}
+
+	<div class="s-content">
+		<div class="g-row g-row--nowrap"
+			 data-depth="0"
+			 data-name="logos"
+			 data-livetext>
+
+			{% for logo in logos %}
+				<div class="g-col g-col--horizontal-center">
+					{{ logo }}
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+
+{% endblock %}

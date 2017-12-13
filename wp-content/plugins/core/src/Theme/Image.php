@@ -188,7 +188,7 @@ class Image {
 	 */
 	private function get_shim() {
 
-		$shim_dir = trailingslashit( get_template_directory_uri() ) . 'img/shims/';
+		$shim_dir = trailingslashit( get_stylesheet_directory_uri() ) . 'img/theme/shims';
 		$src = $this->options[ 'shim' ];
 
 		if ( empty ( $this->options[ 'shim' ] ) ) {
@@ -216,6 +216,11 @@ class Image {
 			if( 'full' !== $size && true === $src[3] ) {
 				$attribute[] = sprintf( '%s %dw %dh', $src[0], $src[1], $src[2] );
 			}
+		}
+
+		if ( empty( $attribute ) ) {
+			$src = wp_get_attachment_image_src( $this->image_id, 'full' );
+			$attribute[] = sprintf( '%s %dw %dh', $src[0], $src[1], $src[2] );
 		}
 
 		return implode( ", \n", $attribute );

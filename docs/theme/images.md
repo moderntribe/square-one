@@ -1,6 +1,6 @@
 #  Theme Images
 
-Images for the themes live in a folder named "img" at `wp-content/plugins/core/assets/theme/img`. 
+Images for the themes live in a folder named "img" at `/wp-content/themes/core/img/theme`. 
 
 ## Template Tags
 
@@ -104,8 +104,8 @@ Yields:
 <figure class="tribe-image">
 	<img 
 	class="lazyload" 
-	src="http://square.dev/wp-content/themes/core/img/shims/slider-small.png"  
-	srcset="http://square.dev/wp-content/themes/core/img/shims/slider-small.png"  
+	src="http://square1.tribe/wp-content/themes/core/img/shims/slider-small.png"  
+	srcset="http://square1.tribe/wp-content/themes/core/img/shims/slider-small.png"  
 	data-src="SRC TO SMALL"  
 	data-srcset="
 		SRC TO SMALL 800w 450h ,
@@ -141,8 +141,8 @@ Yields:
 	<a href="http://www.google.com" target="_self">
 		<img 
 		class="lazyload" 
-		src="http://square.dev/wp-content/themes/core/img/shims/slider-small.png"  
-		srcset="http://square.dev/wp-content/themes/core/img/shims/slider-small.png"  
+		src="http://square1.tribe/wp-content/themes/core/img/shims/slider-small.png"  
+		srcset="http://square1.tribe/wp-content/themes/core/img/shims/slider-small.png"  
 		data-src="SRC TO SMALL"  
 		data-srcset="
 			SRC TO SMALL 800w 450h ,

@@ -115,14 +115,16 @@ class Theme_Provider implements ServiceProviderInterface {
 			] );
 		};
 
-		add_filter( 'oembed_dataparse', function ( $html, $data, $url ) use ( $container ) {
-			return $container[ 'theme.oembed' ]->setup_lazyload_html( $html, $data, $url );
-		}, 1000, 3 );
+		add_filter( 'oembed_dataparse', function( $html, $data, $url ) use ( $container ) {
+			return $container['theme.oembed']->get_video_component( $html, $data, $url );
+		}, 999, 3 );
+
 		add_filter( 'embed_oembed_html', function ( $html, $url, $attr, $post_id ) use ( $container ) {
 			return $container[ 'theme.oembed' ]->filter_frontend_html_from_cache( $html, $url, $attr, $post_id );
 		}, 1, 4 );
+
 		add_filter( 'embed_oembed_html', function ( $html, $url, $attr, $post_id ) use ( $container ) {
-			return $container[ 'theme.oembed' ]->wrap_oembed_shortcode_output( $html, $url, $attr, $post_id );
+			return $container[ 'theme.oembed' ]->wrap_admin_oembed( $html, $url, $attr, $post_id );
 		}, 99, 4 );
 	}
 
@@ -138,7 +140,7 @@ class Theme_Provider implements ServiceProviderInterface {
 
 	private function login_resources( Container $container ) {
 		$container[ 'theme.resources.login' ] = function ( Container $container ) {
-			return new Login_Resources( $container[ 'plugin_file' ] );
+			return new Login_Resources();
 		};
 		add_action( 'login_enqueue_scripts', function () use ( $container ) {
 			$container[ 'theme.resources.login' ]->login_styles();
@@ -153,6 +155,14 @@ class Theme_Provider implements ServiceProviderInterface {
 		add_action( 'wp_head', function () use ( $container ) {
 			$container[ 'theme.resources.legacy' ]->old_browsers();
 		}, 0, 0 );
+
+		add_action( 'init', function() use ( $container ) {
+			$container[ 'theme.resources.legacy' ]->add_unsupported_rewrite();
+		} );
+
+		add_filter( 'template_include', function( $template ) use ( $container ) {
+			return $container['theme.resources.legacy']->load_unsupported_template( $template );
+		} );
 	}
 
 	private function disable_emoji( Container $container ) {
@@ -170,7 +180,6 @@ class Theme_Provider implements ServiceProviderInterface {
 		$container[ 'theme.resources.custom_fonts' ] = $this->custom_fonts;
 		$container[ 'theme.resources.fonts' ] = function ( Container $container ) {
 			return new Fonts(
-				$container[ 'plugin_file' ],
 				[
 					'typekit' => $container[ 'theme.resources.typekit_id' ],
 					'google'  => $container[ 'theme.resources.google_fonts' ],
@@ -182,6 +191,15 @@ class Theme_Provider implements ServiceProviderInterface {
 		add_action( 'wp_head', function () use ( $container ) {
 			$container[ 'theme.resources.fonts' ]->load_fonts();
 		}, 0, 0 );
+		add_action( 'tribe/unsupported_browser/head', function () use ( $container ) {
+			$container[ 'theme.resources.fonts' ]->load_fonts();
+		}, 0, 0 );
+		add_action( 'admin_head', function () use ( $container ) {
+			$container[ 'theme.resources.fonts' ]->localize_typekit_tinymce();
+		}, 0, 0 );
+		add_filter( 'mce_external_plugins', function ( $plugins ) use ( $container ) {
+			return $container[ 'theme.resources.fonts' ]->add_typekit_to_editor( $plugins );
+		} , 10, 1 );
 		/* add_action( 'login_head', function() use ( $container ) {
 			$container[ 'theme.resources.fonts' ]->load_fonts();
 		}, 0, 0); */
@@ -189,7 +207,7 @@ class Theme_Provider implements ServiceProviderInterface {
 
 	private function scripts( Container $container ) {
 		$container[ 'theme.resources.scripts' ] = function ( Container $container ) {
-			return new Scripts( $container[ 'plugin_file' ] );
+			return new Scripts();
 		};
 		add_action( 'wp_enqueue_scripts', function () use ( $container ) {
 			$container[ 'theme.resources.scripts' ]->enqueue_scripts();
@@ -198,7 +216,7 @@ class Theme_Provider implements ServiceProviderInterface {
 
 	private function styles( Container $container ) {
 		$container[ 'theme.resources.styles' ] = function ( Container $container ) {
-			return new Styles( $container[ 'plugin_file' ] );
+			return new Styles();
 		};
 		add_action( 'wp_enqueue_scripts', function () use ( $container ) {
 			$container[ 'theme.resources.styles' ]->enqueue_styles();
@@ -207,7 +225,7 @@ class Theme_Provider implements ServiceProviderInterface {
 
 	private function editor_styles( Container &$container ) {
 		$container[ 'theme.resources.editor_styles' ] = function ( Container $container ) {
-			return new Editor_Styles( $container[ 'plugin_file' ] );
+			return new Editor_Styles();
 		};
 		add_action( 'after_setup_theme', function () use ( $container ) {
 			$container[ 'theme.resources.editor_styles' ]->visual_editor_styles();
@@ -235,7 +253,7 @@ class Theme_Provider implements ServiceProviderInterface {
 		};
 
 		add_filter( 'nav_menu_item_id', function ( $menu_id, $item, $args, $depth ) use ( $container ) {
-			return $container[ 'theme.nav.attribute_filters' ]->clean_nav_item_id( $menu_id, $item, $args, $depth );
+			return $container[ 'theme.nav.attribute_filters' ]->customize_nav_item_id( $menu_id, $item, $args, $depth );
 		}, 10, 4 );
 
 		add_filter( 'nav_menu_css_class', function ( $classes, $item, $args, $depth ) use ( $container ) {
@@ -243,7 +261,7 @@ class Theme_Provider implements ServiceProviderInterface {
 		}, 10, 4 );
 
 		add_filter( 'nav_menu_link_attributes', function ( $atts, $item, $args, $depth ) use ( $container ) {
-			return $container[ 'theme.nav.attribute_filters' ]->customize_menu_item_atts( $atts, $item, $args, $depth );
+			return $container[ 'theme.nav.attribute_filters' ]->customize_nav_item_anchor_atts( $atts, $item, $args, $depth );
 		}, 10, 4 );
 	}
 

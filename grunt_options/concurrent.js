@@ -31,6 +31,10 @@ module.exports = {
 			'header:theme',
 		],
 		[
+			'postcss:themeWPAdmin',
+			'postcss:themeWPAdminMin',
+		],
+		[
 			'postcss:themeWPEditor',
 			'postcss:themeWPEditorMin',
 			'header:themeWPEditor',
@@ -51,7 +55,7 @@ module.exports = {
 			'webpack',
 			'uglify:themeMin',
 			'concat:themeMinVendors',
-			'clean:themeMinVendorJS'
+			'clean:themeMinVendorJS',
 		],
 		'setPHPConstant',
 	],

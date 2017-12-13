@@ -9,17 +9,14 @@
   },
   "require": {
     "pimple/pimple": "~3.0@dev",
-    "johnbillion/extended-cpts": "^3.0",
-    "johnbillion/extended-taxos": "^2.0"
+    "johnbillion/extended-cpts": "^4.0",
+    "twig/twig": "^2.4",
+    "jbzoo/pimpledumper": "^1.2"
   },
   "autoload": {
     "psr-4": {
       "Tribe\\Project\\": "src/",
       "Tribe\\Libs\\": "vendor/moderntribe/tribe-libs/src/"
     }
-  },
-  "require-dev": {
-    "lucatume/wp-browser": "^1.9",
-    "lucatume/function-mocker": "~1.0"
   }
 }
