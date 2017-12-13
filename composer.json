@@ -60,5 +60,10 @@
       ],
       "wp-content/plugins/s3-uploads": [ "humanmade/S3-Uploads" ]
     }
+  },
+  "autoload": {
+    "psr-4": {
+      "Tribe\\Project":"wp-content/plugins/core/src"
+    }
   }
 }
