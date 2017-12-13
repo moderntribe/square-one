@@ -33,18 +33,19 @@
     }
   ],
   "require": {
-    "composer/installers":"1.3.0",
+    "composer/installers":"1.4.0",
     "johnpbloch/wordpress-core-installer":"1.0.0",
-    "johnpbloch/wordpress-core": "4.7.5",
+    "johnpbloch/wordpress-core": "4.9.1",
     "wpackagist-plugin/configure-smtp": "3.1",
-    "wpackagist-plugin/gravity-forms-wcag-20-form-fields": "1.5.1",
+    "wpackagist-plugin/gravity-forms-wcag-20-form-fields": "1.6.0",
     "wpackagist-plugin/limit-login-attempts": "2.0beta3",
     "wpackagist-plugin/posts-to-posts": "1.6.5",
-    "wpackagist-plugin/regenerate-thumbnails": "2.2.6",
-    "wpackagist-plugin/wordpress-seo": "4.1",
-    "moderntribe/panel-builder": "dev-3.2-branch",
-    "humanmade/mercator":"dev-master#671f147",
-    "vlucas/phpdotenv": "^2.4"
+    "wpackagist-plugin/regenerate-thumbnails": "2.3.1",
+    "wpackagist-plugin/wordpress-seo": "5.9.3",
+    "moderntribe/panel-builder": "dev-3.3-branch",
+    "humanmade/mercator":"dev-master#7f3846a",
+    "vlucas/phpdotenv": "^2.4.0",
+    "humanmade/S3-Uploads":"1.1.0"
   },
   "extra": {
     "wordpress-install-dir": "wp",
@@ -53,7 +54,8 @@
       "wp-content/plugins/{$name}":[
         "type:wordpress-plugin",
         "moderntribe/panel-builder"
-      ]
+      ],
+      "wp-content/plugins/s3-uploads": [ "humanmade/S3-Uploads" ]
     }
   }
 }
