@@ -41,6 +41,16 @@ wp-content/mu-plugins/mu.local.php
 
 wp-content/plugins/fakerpress/
 wp-content/plugins/better-search-replace/
+wp-content/plugins/configure-smtp/
+wp-content/plugins/gravity-forms-wcag-20-form-fields/
+wp-content/plugins/limit-login-attempts/
+wp-content/plugins/posts-to-posts/
+wp-content/plugins/regenerate-thumbnails/
+wp-content/plugins/wordpress-seo/
+wp-content/plugins/panel-builder
+wp-content/plugins/s3-uploads
+wp-content/mu-plugins/mercator/
+
 
 # Packages #
 ############
@@ -78,6 +88,7 @@ dev/docker/mysql/*
 !dev/docker/mysql/.gitkeep
 wp-content/themes/core/css
 wp-content/themes/core/js/dist
+vendor/
 
 # WP Engine #
 #############
@@ -109,3 +120,4 @@ dev/deploy/.deploy
 /vendor
 /composer.lock
 dev/docker/global/.env
+/.gitmodules
