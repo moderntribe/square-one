@@ -44,6 +44,7 @@
     "wpackagist-plugin/posts-to-posts": "1.6.5",
     "wpackagist-plugin/regenerate-thumbnails": "2.3.1",
     "wpackagist-plugin/wordpress-seo": "5.9.3",
+    "wpackagist-plugin/user-switching": "1.3.0",
     "moderntribe/panel-builder": "dev-3.3-branch",
     "humanmade/mercator":"dev-master#7f3846a",
     "vlucas/phpdotenv": "^2.4.0",
