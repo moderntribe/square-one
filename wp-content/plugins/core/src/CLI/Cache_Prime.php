@@ -74,7 +74,7 @@ class Cache_Prime extends Command {
 	public function get_optimus_prime() {
 		ob_start();
 		?>
-		
+
 		───────────▄▄▄▄▄▄▄▄▄───────────
 		────────▄█████████████▄────────
 		█████──█████████████████──█████
