@@ -21,7 +21,6 @@ class ComposerStaticInit832c304df78b6d54281b9d2fb32919ae
         'S' => 
         array (
             'Symfony\\Polyfill\\Mbstring\\' => 26,
-            'Sunra\\PhpSimple\\' => 16,
         ),
         'P' => 
         array (
@@ -50,10 +49,6 @@ class ComposerStaticInit832c304df78b6d54281b9d2fb32919ae
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
         ),
-        'Sunra\\PhpSimple\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/sunra/php-simp[le-html-dom-parser/Src/Sunra/PhpSimple',
-        ),
         'Psr\\Container\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/container/src',
@@ -70,13 +65,6 @@ class ComposerStaticInit832c304df78b6d54281b9d2fb32919ae
             'Twig_' => 
             array (
                 0 => __DIR__ . '/..' . '/twig/twig/lib',
-            ),
-        ),
-        'S' => 
-        array (
-            'Sunra\\PhpSimple\\HtmlDomParser' => 
-            array (
-                0 => __DIR__ . '/..' . '/sunra/php-simple-html-dom-parser/Src',
             ),
         ),
         'P' => 
