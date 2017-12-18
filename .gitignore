@@ -41,18 +41,9 @@ wp-content/tests/
 wp-content/logs/
 wp-content/mu-plugins/mu.local.php
 
-wp-content/plugins/fakerpress/
-wp-content/plugins/better-search-replace/
-wp-content/plugins/configure-smtp/
-wp-content/plugins/gravity-forms-wcag-20-form-fields/
-wp-content/plugins/limit-login-attempts/
-wp-content/plugins/posts-to-posts/
-wp-content/plugins/regenerate-thumbnails/
-wp-content/plugins/wordpress-seo/
-wp-content/plugins/panel-builder
-wp-content/plugins/s3-uploads
 wp-content/mu-plugins/mercator/
-wp-content/plugins/user-switching/
+wp-content/plugins/
+!wp-content/plugins/core
 
 # Packages #
 ############
