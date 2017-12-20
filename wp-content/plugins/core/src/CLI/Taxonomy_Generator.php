@@ -35,8 +35,8 @@ class Taxonomy_Generator extends Command {
 				'description' => __( 'The name of the Taxonomy.', 'tribe' ),
 			],
 			[
-				'type'        => 'optional',
-				'name'        => 'post_types',
+				'type'        => 'assoc',
+				'name'        => 'post-types',
 				'optional'    => true,
 				'description' => __( 'Comma separated list of post types to register this taxonomy to.', 'tribe' ),
 			],
@@ -48,13 +48,13 @@ class Taxonomy_Generator extends Command {
 				'default'     => true,
 			],
 			[
-				'type'        => 'optional',
+				'type'        => 'assoc',
 				'name'        => 'single',
 				'optional'    => true,
 				'description' => __( 'Singular taxonomy.', 'tribe' ),
 			],
 			[
-				'type'        => 'optional',
+				'type'        => 'assoc',
 				'name'        => 'plural',
 				'optional'    => true,
 				'description' => __( 'Plural taxonomy.', 'tribe' ),
