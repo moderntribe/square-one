@@ -41,13 +41,6 @@ class Taxonomy_Generator extends Command {
 				'description' => __( 'Comma separated list of post types to register this taxonomy to.', 'tribe' ),
 			],
 			[
-				'type'        => 'flag',
-				'name'        => 'config',
-				'optional'    => true,
-				'description' => __( 'Whether or not to create a config file by default. Defaults to true, pass --no-config if you don\'t need one.', 'tribe' ),
-				'default'     => true,
-			],
-			[
 				'type'        => 'assoc',
 				'name'        => 'single',
 				'optional'    => true,
@@ -58,6 +51,13 @@ class Taxonomy_Generator extends Command {
 				'name'        => 'plural',
 				'optional'    => true,
 				'description' => __( 'Plural taxonomy.', 'tribe' ),
+			],
+			[
+				'type'        => 'flag',
+				'name'        => 'config',
+				'optional'    => true,
+				'description' => __( 'Whether or not to create a config file by default. Defaults to true, pass --no-config if you don\'t need one.', 'tribe' ),
+				'default'     => true,
 			],
 		];
 	}

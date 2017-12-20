@@ -26,13 +26,6 @@ class CPT_Generator extends Command {
 				'description' => __( 'The name of the CPT.', 'tribe' ),
 			],
 			[
-				'type'        => 'flag',
-				'name'        => 'config',
-				'optional'    => true,
-				'description' => __( 'Whether or not to create a config file by default. Defaults to true, pass --no-config if you don\'t need one.', 'tribe' ),
-				'default'     => true,
-			],
-			[
 				'type'        => 'assoc',
 				'name'        => 'single',
 				'optional'    => true,
@@ -43,6 +36,13 @@ class CPT_Generator extends Command {
 				'name'        => 'plural',
 				'optional'    => true,
 				'description' => __( 'Plural CPT.', 'tribe' ),
+			],
+			[
+				'type'        => 'flag',
+				'name'        => 'config',
+				'optional'    => true,
+				'description' => __( 'Whether or not to create a config file by default. Defaults to true, pass --no-config if you don\'t need one.', 'tribe' ),
+				'default'     => true,
 			],
 		];
 	}
