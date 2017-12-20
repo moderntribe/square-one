@@ -91,18 +91,18 @@ class Taxonomy_Generator extends Command {
 			'single'     => $this->ucwords( $this->slug ),
 			'plural'     => $this->ucwords( $this->slug ) . 's',
 			'config'     => true,
-			'post_types' => $this->get_post_types( $assoc_args ),
+			'post-types' => $this->get_post_types( $assoc_args ),
 		];
 
 		return wp_parse_args( $assoc_args, $defaults );
 	}
 
 	private function get_post_types( $assoc_args ) {
-		if ( ! isset( $assoc_args['post_types'] ) ) {
+		if ( ! isset( $assoc_args['post-types'] ) ) {
 			return self::POST_TYPES;
 		}
 
-		$post_types = explode( ',', $assoc_args['post_types'] );
+		$post_types = explode( ',', $assoc_args['post-types'] );
 		foreach ( $post_types as $post_type ) {
 			if ( ! post_type_exists( $post_type ) ) {
 				\WP_CLI::error( 'Sorry...post type ' . $post_type . ' does not exist.' );
@@ -178,12 +178,12 @@ class Taxonomy_Generator extends Command {
 	}
 
 	private function format_post_types() {
-		if ( empty( $this->assoc_args['post_types'] ) ) {
+		if ( empty( $this->assoc_args['post-types'] ) ) {
 			return '';
 		}
 
 		$post_types = 'protected $post_types = [ ';
-		foreach ( $this->assoc_args['post_types'] as $post_type ) {
+		foreach ( $this->assoc_args['post-types'] as $post_type ) {
 			$post_types .= '\'' . $post_type . '\', ';
 		}
 		$post_types .= '];' . PHP_EOL;
