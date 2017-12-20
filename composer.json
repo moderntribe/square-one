@@ -63,7 +63,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Tribe\\Project":"wp-content/plugins/core/src"
+      "Tribe\\Project\\":"wp-content/plugins/core/src"
     }
   }
 }
