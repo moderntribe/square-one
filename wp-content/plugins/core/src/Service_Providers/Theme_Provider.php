@@ -209,6 +209,9 @@ class Theme_Provider implements ServiceProviderInterface {
 		$container[ 'theme.resources.scripts' ] = function ( Container $container ) {
 			return new Scripts();
 		};
+		add_action( 'wp_footer', function () use ( $container ) {
+			$container[ 'theme.resources.scripts' ]->add_early_polyfills();
+		}, 10, 0 );
 		add_action( 'wp_enqueue_scripts', function () use ( $container ) {
 			$container[ 'theme.resources.scripts' ]->enqueue_scripts();
 		}, 10, 0 );
