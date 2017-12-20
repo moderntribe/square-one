@@ -91,9 +91,9 @@ class Taxonomy_Generator extends Command {
 			'single'     => $this->ucwords( $this->slug ),
 			'plural'     => $this->ucwords( $this->slug ) . 's',
 			'config'     => true,
-			'post-types' => $this->get_post_types( $assoc_args ),
 		];
 
+		$assoc_args['post-types'] = $this->get_post_types( $assoc_args );
 		return wp_parse_args( $assoc_args, $defaults );
 	}
 
