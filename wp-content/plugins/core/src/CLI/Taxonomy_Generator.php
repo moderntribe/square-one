@@ -137,11 +137,11 @@ class Taxonomy_Generator extends Command {
 	private function update_core() {
 		$core_file = $this->src_path . 'Core.php';
 
-		$new_service_provider_registration   = "\t\t" . '$this->container->register( new ' . $this->class_name . '_Provider() );' . PHP_EOL;
+		$new_service_provider_registration   = "\t\t" . '$this->container->register( new ' . $this->class_name . '_Service_Provider() );' . PHP_EOL;
 		$below_service_provider_registration = 'private function load_taxonomy_providers() {';
 
-		$below_use = 'use Tribe\Project\Service_Providers\Taxonomies\Category_Service_Provide';
-		$use       = 'use Tribe\Project\Service_Providers\Taxonomies\\' . $this->class_name . ';';
+		$below_use = 'use Tribe\Project\Service_Providers\Taxonomies\Category_Service_Provider';
+		$use       = 'use Tribe\Project\Service_Providers\Taxonomies\\' . $this->class_name . '_Service_Provider;';
 
 		$this->file_system->insert_into_existing_file( $core_file, $new_service_provider_registration, $below_service_provider_registration );
 		$this->file_system->insert_into_existing_file( $core_file, $use, $below_use );
