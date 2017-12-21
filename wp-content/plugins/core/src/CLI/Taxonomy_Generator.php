@@ -91,12 +91,13 @@ class Taxonomy_Generator extends Command {
 
 	private function parse_assoc_args( $assoc_args ) {
 		$defaults = [
-			'single'     => $this->ucwords( $this->slug ),
-			'plural'     => $this->ucwords( $this->slug ) . 's',
-			'config'     => true,
+			'single' => $this->ucwords( $this->slug ),
+			'plural' => $this->ucwords( $this->slug ) . 's',
+			'config' => true,
 		];
 
 		$assoc_args['post-types'] = $this->get_post_types( $assoc_args );
+
 		return wp_parse_args( $assoc_args, $defaults );
 	}
 
@@ -116,7 +117,7 @@ class Taxonomy_Generator extends Command {
 	}
 
 	private function create_taxonomy_directory() {
-		$directory = trailingslashit( $this->src_path ) . 'Taxonomies/' . $this->ucwords( $this->slug );
+		$directory                = trailingslashit( $this->src_path ) . 'Taxonomies/' . $this->ucwords( $this->slug );
 		$this->taxonomy_directory = $directory;
 		$this->file_system->create_directory( $directory );
 	}
@@ -138,12 +139,12 @@ class Taxonomy_Generator extends Command {
 
 		$new_service_provider_registration   = "\t\t" . '$this->container->register( new ' . $this->class_name . '_Provider() );' . PHP_EOL;
 		$below_service_provider_registration = 'private function load_taxonomy_providers() {';
-		
-		$below_use = 'use Tribe\Project\Service_Providers\Taxonomies\\';
-		$use       = 'use Tribe\Project\Service_Providers\Taxonomies\\' . $this->class_name;
+
+		$below_use = 'use Tribe\Project\Service_Providers\Taxonomies\Category_Service_Provide';
+		$use       = 'use Tribe\Project\Service_Providers\Taxonomies\\' . $this->class_name . ';';
 
 		$this->file_system->insert_into_existing_file( $core_file, $new_service_provider_registration, $below_service_provider_registration );
-		$this->file_system->insert_into_existing_file( $core_file, $below_use, $use );
+		$this->file_system->insert_into_existing_file( $core_file, $use, $below_use );
 	}
 
 	private function new_taxonomy_class_file() {
@@ -185,6 +186,7 @@ class Taxonomy_Generator extends Command {
 		$post_types = $this->format_post_types();
 
 		$service_provider = $this->file_system->get_file( $this->templates_path . 'taxonomies/service_provider.php' );
+
 		return sprintf(
 			$service_provider,
 			$this->namespace,
