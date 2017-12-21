@@ -17,7 +17,8 @@ if ( ! function_exists( 'wp_mail' ) &&
 		];
 
 		$queue_name = defined( 'QUEUE_MAIL_QUEUE_NAME' ) ? QUEUE_MAIL_QUEUE_NAME : 'default';
-		$queue      = \Tribe\Project\Queues\Contracts\Queue::get_instance( $queue_name );
+		$collection = new \Tribe\Project\Queues\Queue_Collection();
+		$queue      = $collection->get( $queue_name );
 
 		if ( $queue ) {
 			$queue->dispatch( \Tribe\Project\Queues\Tasks\Email::class, $args );
