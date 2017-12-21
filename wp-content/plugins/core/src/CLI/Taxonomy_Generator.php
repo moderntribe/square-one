@@ -128,6 +128,12 @@ class Taxonomy_Generator extends Command {
 	private function create_service_provider() {
 		$service_provider_file = $this->src_path . 'Service_Providers/Taxonomies/' . $this->ucwords( $this->slug ) . '_Service_Provider.php';
 		$this->file_system->write_file( $service_provider_file, $this->get_service_provider_contents() );
+
+		// Update the core service provider.
+		$new_line  = '\t\t$this->container->register( new ' . $this->class_name . '_Provider() );';
+		$below     = 'private function load_taxonomy_providers() {';
+		$core_file = $this->src_path . 'Core.php';
+		$this->file_system->insert_into_existing_file( $core_file, $new_line, $below );
 	}
 
 	private function new_taxonomy_class_file() {
