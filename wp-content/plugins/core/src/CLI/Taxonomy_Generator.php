@@ -141,7 +141,7 @@ class Taxonomy_Generator extends Command {
 		$below_service_provider_registration = 'private function load_taxonomy_providers() {';
 
 		$below_use = 'use Tribe\Project\Service_Providers\Taxonomies\Category_Service_Provider';
-		$use       = 'use Tribe\Project\Service_Providers\Taxonomies\\' . $this->class_name . '_Service_Provider;';
+		$use       = 'use Tribe\Project\Service_Providers\Taxonomies\\' . $this->class_name . '_Service_Provider;' . PHP_EOL;
 
 		$this->file_system->insert_into_existing_file( $core_file, $new_service_provider_registration, $below_service_provider_registration );
 		$this->file_system->insert_into_existing_file( $core_file, $use, $below_use );
