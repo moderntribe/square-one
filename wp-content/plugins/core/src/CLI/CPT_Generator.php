@@ -26,13 +26,6 @@ class CPT_Generator extends Command {
 				'description' => __( 'The name of the CPT.', 'tribe' ),
 			],
 			[
-				'type'        => 'flag',
-				'name'        => 'config',
-				'optional'    => true,
-				'description' => __( 'Whether or not to create a config file by default. Defaults to true, pass --no-config if you don\'t need one.', 'tribe' ),
-				'default'     => true,
-			],
-			[
 				'type'        => 'assoc',
 				'name'        => 'single',
 				'optional'    => true,
@@ -43,6 +36,13 @@ class CPT_Generator extends Command {
 				'name'        => 'plural',
 				'optional'    => true,
 				'description' => __( 'Plural CPT.', 'tribe' ),
+			],
+			[
+				'type'        => 'flag',
+				'name'        => 'config',
+				'optional'    => true,
+				'description' => __( 'Whether or not to create a config file by default. Defaults to true, pass --no-config if you don\'t need one.', 'tribe' ),
+				'default'     => true,
 			],
 		];
 	}
@@ -63,6 +63,9 @@ class CPT_Generator extends Command {
 
 		// Create service provider.
 		$this->new_service_provider_file();
+
+		// Update Core.
+		$this->update_core();
 
 		\WP_CLI::success( 'Way to go! ' . \WP_CLI::colorize( "%W{$this->slug}%n" ) . ' post type has been created' );
 	}
@@ -94,6 +97,19 @@ class CPT_Generator extends Command {
 		$new_service_provider         = trailingslashit( dirname( __DIR__, 1 ) ) . 'Service_Providers/Post_Types/' . $this->ucwords( $this->slug ) . '_Service_Provider.php';
 		$this->service_provider_class = $this->ucwords( $this->slug );
 		$this->file_system->write_file( $new_service_provider, $this->get_service_provider_contents() );
+	}
+
+	private function update_core() {
+		$core_file = $this->src_path . 'Core.php';
+
+		$new_service_provider_registration   = "\t\t" . '$this->container->register( new ' . $this->class_name . '_Service_Provider() );' . PHP_EOL;
+		$below_service_provider_registration = 'private function load_post_type_providers() {';
+
+		$below_use = 'use Tribe\Project\Service_Providers\Post_Types\Post_Service_Provider';
+		$use       = 'use Tribe\Project\Service_Providers\Post_Types\\' . $this->class_name . '_Service_Provider;' . PHP_EOL;
+
+		$this->file_system->insert_into_existing_file( $core_file, $new_service_provider_registration, $below_service_provider_registration );
+		$this->file_system->insert_into_existing_file( $core_file, $use, $below_use );
 	}
 
 	private function new_post_object_class_file() {
