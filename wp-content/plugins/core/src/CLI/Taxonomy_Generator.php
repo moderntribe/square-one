@@ -74,6 +74,9 @@ class Taxonomy_Generator extends Command {
 		// Write Service Provider.
 		$this->create_service_provider();
 
+		// Update Core.
+		$this->update_core();
+
 		\WP_CLI::success( 'Way to go! ' . \WP_CLI::colorize( "%W{$this->slug}%n" ) . ' taxonomy has been created' );
 	}
 
@@ -128,12 +131,19 @@ class Taxonomy_Generator extends Command {
 	private function create_service_provider() {
 		$service_provider_file = $this->src_path . 'Service_Providers/Taxonomies/' . $this->ucwords( $this->slug ) . '_Service_Provider.php';
 		$this->file_system->write_file( $service_provider_file, $this->get_service_provider_contents() );
+	}
 
-		// Update the core service provider.
-		$new_line  = '\t\t$this->container->register( new ' . $this->class_name . '_Provider() );';
-		$below     = 'private function load_taxonomy_providers() {';
+	private function update_core() {
 		$core_file = $this->src_path . 'Core.php';
-		$this->file_system->insert_into_existing_file( $core_file, $new_line, $below );
+
+		$new_service_provider_registration   = "\t\t" . '$this->container->register( new ' . $this->class_name . '_Provider() );' . PHP_EOL;
+		$below_service_provider_registration = 'private function load_taxonomy_providers() {';
+		
+		$below_use = 'use Tribe\Project\Service_Providers\Taxonomies\\';
+		$use       = 'use Tribe\Project\Service_Providers\Taxonomies\\' . $this->class_name;
+
+		$this->file_system->insert_into_existing_file( $core_file, $new_service_provider_registration, $below_service_provider_registration );
+		$this->file_system->insert_into_existing_file( $core_file, $below_use, $use );
 	}
 
 	private function new_taxonomy_class_file() {
