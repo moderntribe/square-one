@@ -58,11 +58,11 @@ module.exports = {
 				expand: true,
 				flatten: true,
 				src: [
-					'<%= pkg._npm_path %>/babel-polyfill/dist/polyfill.js',
 					'<%= pkg._npm_path %>/jquery/dist/jquery.js',
 					'<%= pkg._npm_path %>/jquery/dist/jquery.min.js',
 					'<%= pkg._npm_path %>/jquery/dist/jquery.min.map',
 					'<%= pkg._component_path %>/theme/js/globals.js',
+					'<%= pkg._npm_path %>/es6-promise/dist/es6-promise.auto.js',
 					'<%= pkg._npm_path %>/lazysizes/plugins/object-fit/ls.object-fit.js',
 					'<%= pkg._npm_path %>/lazysizes/plugins/parent-fit/ls.parent-fit.js',
 					'<%= pkg._npm_path %>/lazysizes/plugins/respimg/ls.respimg.js',
