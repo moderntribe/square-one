@@ -1,8 +1,17 @@
 {% extends "base.twig" %}
 
-{% block content %}
-	<div class="l-container">
-		<p>{{ lang['Houston, we have a problem...']|esc_html }}</p>
-	</div>
+{% block main %}
+
+	{% block subhead %}
+        {{ include( 'content/header/sub.twig' ) }}
+    {% endblock %}
+
+	{% block content %}
+		<div class="l-container">
+			<h2>{{ error_404_browser_title }}</h2>
+			<p>{{ error_404_browser_content }}</p>
+		</div>
+	{% endblock %}
+
 {% endblock %}
 
