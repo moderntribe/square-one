@@ -29,7 +29,7 @@ if [ ! -f ${CONFIG_FILE} ]; then
     echo "We have detected that you have not setup a GitHub oAuth token. Please go to https://github.com/settings/tokens/new?scopes=repo&description=Square%20One and create one. Then enter it here and press [ENTER]: "
     read githubtoken
     touch ${CONFIG_FILE}
-    printf '{ "github-oauth": { "github.com": "%" } }\n' "$githubtoken" >> ${CONFIG_FILE}
+    printf '{ "github-oauth": { "github.com": "%s" } }\n' "$githubtoken" >> ${CONFIG_FILE}
 fi
 
 ${DC_COMMAND} --project-name=${PROJECT_ID} up -d --force-recreate
