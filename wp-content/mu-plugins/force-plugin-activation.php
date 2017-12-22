@@ -19,7 +19,6 @@ class Force_Plugin_Activation {
 	private $force_active = array(
 		'advanced-custom-fields-pro/acf.php',
 		'core/core.php',
-		'limit-login-attempts/limit-login-attempts.php',
 		'panel-builder/tribe-panel-builder.php',
 		'tribe-admin-dashboard/tribe-admin-dashboard.php',
 	);
@@ -69,6 +68,7 @@ class Force_Plugin_Activation {
 		// The next *if* is not the same as an *else* on the previous one.
 		if ( defined( 'ENVIRONMENT' ) && ENVIRONMENT == 'PRODUCTION' ) {
 			$this->force_deactive[] = 'tribe-glomar/tribe-glomar.php';
+			$this->force_active[]   = 'limit-login-attempts/limit-login-attempts.php';
 		}
 
 
