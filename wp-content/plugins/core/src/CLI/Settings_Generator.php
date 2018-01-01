@@ -62,8 +62,8 @@ class Settings_Generator extends Command {
 		$container_partial = sprintf( $container_partial_file, $this->slug, $this->class_name );
 		$this->file_system->insert_into_existing_file( $service_provider, $container_partial, '}, 0, 0 );' );
 
-		$method = "\tpublic function {$this->class_name}()";
-		$this->file_system->insert_into_existing_file( $service_provider, $method, 'public function register' );
+		$method = "\t\t\$this->{$this->slug}( \$container );" . PHP_EOL;
+		$this->file_system->insert_into_existing_file( $service_provider, $method, 'public function register(' );
 	}
 
 }
