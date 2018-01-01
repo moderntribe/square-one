@@ -5,13 +5,21 @@ namespace Tribe\Project\Theme\Resources;
 
 
 class Scripts {
+	public function add_early_polyfills() {
+		$js_dir  = trailingslashit( get_stylesheet_directory_uri() ) . 'js/';
+		?>
+		<script>window.Promise ||
+			document.write('<script src="<?php echo esc_url( $js_dir ); ?>vendor/es6-promise.auto.js"><\/script>');
+		</script>
+		<?php
+	}
 	/**
 	 * Enqueue scripts
 	 * @action wp_enqueue_scripts
 	 */
 	public function enqueue_scripts() {
 
-		$js_dir  = trailingslashit( tribe_assets_url( 'theme/js' ) );
+		$js_dir  = trailingslashit( get_stylesheet_directory_uri() ) . 'js/';
 		$version = tribe_get_version();
 
 		// Custom jQuery (version 2.2.4, IE9+)
@@ -28,11 +36,10 @@ class Scripts {
 			// Dev
 			$scripts         = 'dist/scripts.js';
 			$jquery          = 'vendor/jquery.js';
-			$localize_target = 'babel-polyfill';
+			$localize_target = 'core-globals';
 			$script_deps     = [ 'jquery', 'core-webpack-vendors' ];
 
-			wp_enqueue_script( 'babel-polyfill', $js_dir . 'vendor/polyfill.js', [], $version, true );
-			wp_enqueue_script( 'core-globals', $js_dir . 'vendor/globals.js', ['babel-polyfill'], $version, true );
+			wp_enqueue_script( 'core-globals', $js_dir . 'vendor/globals.js', [], $version, true );
 			wp_enqueue_script( 'core-lazysizes-object-fit', $js_dir . 'vendor/ls.object-fit.js', ['core-globals'], $version, true );
 			wp_enqueue_script( 'core-lazysizes-parent-fit', $js_dir . 'vendor/ls.parent-fit.js', ['core-lazysizes-object-fit'], $version, true );
 			wp_enqueue_script( 'core-lazysizes-polyfill', $js_dir . 'vendor/ls.respimg.js', ['core-lazysizes-parent-fit'], $version, true );

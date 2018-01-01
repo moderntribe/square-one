@@ -22,7 +22,7 @@ class Video extends Component {
 			static::VIDEO_URL              => '',
 			static::THUMBNAIL_URL          => '',
 			static::PLAY_TEXT              => __( 'Play Video', 'tribe' ),
-			static::SHIM                   => '/wp-content/plugins/core/assets/theme/img/shims/16x9.png',
+			static::SHIM                   => trailingslashit( get_stylesheet_directory_uri() ) . 'img/theme/shims/16x9.png',
 			static::FIGURE_CLASSES         => [],
 			static::CONTAINER_ATTRS        => [],
 			static::CONTAINER_CLASSES      => [],

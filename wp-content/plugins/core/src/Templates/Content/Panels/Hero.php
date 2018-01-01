@@ -3,8 +3,11 @@
 namespace Tribe\Project\Templates\Content\Panels;
 
 use Tribe\Project\Panels\Types\Hero as HeroPanel;
+use Tribe\Project\Templates\Components\Button;
 use Tribe\Project\Templates\Components\Image;
 use Tribe\Project\Templates\Components\Content_Block;
+use Tribe\Project\Templates\Components\Text;
+use Tribe\Project\Templates\Components\Title;
 
 class Hero extends Panel {
 
@@ -69,12 +72,11 @@ class Hero extends Panel {
 		}
 
 		$options = [
-			Content_Block::TITLE       => $this->panel_vars[ HeroPanel::FIELD_TITLE ],
-			Content_Block::TEXT        => $this->panel_vars[ HeroPanel::FIELD_DESCRIPTION ],
-			Content_Block::CTA         => $this->panel_vars[ HeroPanel::FIELD_CTA ],
-			Content_Block::TITLE_ATTRS => $title_attrs,
-			Content_Block::TEXT_ATTRS  => $description_attrs,
-			Content_Block::TITLE_TAG   => 'h1',
+			Content_Block::TITLE           => $this->get_hero_title( $title_attrs ),
+			Content_Block::TEXT            => $this->get_hero_text( $description_attrs ),
+			Content_Block::BUTTON          => $this->get_hero_button(),
+			Content_Block::CLASSES         => [],
+			Content_Block::CONTENT_CLASSES => [],
 		];
 
 		$content_block_obj = Content_Block::factory( $options );
@@ -110,6 +112,47 @@ class Hero extends Panel {
 		}
 
 		return implode( ' ', $classes );
+	}
+
+	protected function get_hero_title( $title_attrs ) {
+		$options = [
+			Title::CLASSES => [],
+			Title::TAG     => 'h1',
+			Title::ATTRS   => $title_attrs,
+			Title::TITLE   => $this->panel_vars[ HeroPanel::FIELD_TITLE ],
+		];
+
+		$title_object = Title::factory( $options );
+
+		return $title_object->render();
+	}
+
+	protected function get_hero_text( $description_attrs ) {
+		$options = [
+			Text::ATTRS   => $description_attrs,
+			Text::CLASSES => [],
+			Text::TEXT    => $this->panel_vars[ HeroPanel::FIELD_DESCRIPTION ],
+		];
+
+		$text_object = Text::factory( $options );
+
+		return $text_object->render();
+	}
+
+	protected function get_hero_button() {
+		$options = [
+			Button::CLASSES     => [],
+			Button::ATTRS       => '',
+			Button::TAG         => '',
+			Button::TARGET      => $this->panel_vars[ HeroPanel::FIELD_CTA ][ Button::TARGET ],
+			Button::BTN_AS_LINK => true,
+			Button::URL         => $this->panel_vars[ HeroPanel::FIELD_CTA ][ Button::URL ],
+			Button::LABEL       => $this->panel_vars[ HeroPanel::FIELD_CTA ][ Button::LABEL ],
+		];
+
+		$button_object = Button::factory( $options );
+
+		return $button_object->render();
 	}
 
 	public static function instance() {
