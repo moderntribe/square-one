@@ -61,6 +61,9 @@ class Settings_Generator extends Command {
 		$container_partial_file = $this->file_system->get_file( $this->templates_path . 'settings/container_partial.php' );
 		$container_partial = sprintf( $container_partial_file, $this->slug, $this->class_name );
 		$this->file_system->insert_into_existing_file( $service_provider, $container_partial, '}, 0, 0 );' );
+
+		$method = "\tpublic function {$this->class_name}()";
+		$this->file_system->insert_into_existing_file( $service_provider, $method, 'public function register' );
 	}
 
 }
