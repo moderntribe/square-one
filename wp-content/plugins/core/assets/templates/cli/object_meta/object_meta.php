@@ -8,12 +8,11 @@ class %1$s extends ACF\ACF_Meta_Group {
 
 	const NAME = '%2$s';
 
-	%3$s
+%3$s
 
 	public function get_keys() {
 		return [
-%4$s
-		];
+%4$s    ];
 	}
 
 	public function get_group_config() {
