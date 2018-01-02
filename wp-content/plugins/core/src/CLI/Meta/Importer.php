@@ -41,6 +41,10 @@ class Importer extends Command {
 		$this->args = $args;
 		$this->assoc_args = $assoc_args;
 
+		if ( empty( $this->get_dynamic_field_groups() ) ) {
+			\WP_CLI::error( __( 'There are zero field groups available to import', 'tribe' ) );
+		}
+
 		if ( count( $args ) ) {
 			// Setup and import the field groups.
 			$this->setup_field_group();
@@ -57,10 +61,6 @@ class Importer extends Command {
 
 			// Success!
 			\WP_CLI::line( 'We did it!');
-		}
-
-		if ( empty( $this->get_dynamic_field_groups() ) ) {
-			\WP_CLI::error( __( 'There are zero field groups available to import', 'tribe' ) );
 		}
 
 		foreach( $this->get_dynamic_field_groups() as $field_group_id => $field_group_name ) {
