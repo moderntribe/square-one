@@ -196,7 +196,7 @@ class Importer extends Command {
 				$function_partial,
 				$this->sanitize_slug( [ $field['label'] ] ),
 				$this->constant_from_class( $this->sanitize_slug( [ $field['label'] ] ) ),
-				print_r( $field, 1 )
+				var_export( $field, 1 )
 			);
 		}
 
