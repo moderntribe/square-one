@@ -195,6 +195,7 @@ class Importer extends Command {
 			$functions .= sprintf(
 				$function_partial,
 				$this->sanitize_slug( [ $field['label'] ] ),
+				$this->constant_from_class( $this->sanitize_slug( [ $field['label'] ] ) ),
 				print_r( $field, 1 )
 			);
 		}
