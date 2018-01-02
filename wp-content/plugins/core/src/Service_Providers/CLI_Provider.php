@@ -35,7 +35,7 @@ class CLI_Provider implements ServiceProviderInterface {
 		};
 
 		$container['cli.meta.importer'] = function ( $container ) {
-			return new Importer();
+			return new Importer( $container['cli.file-system'] );
 		};
 
 		add_action( 'init', function () use ( $container ) {
