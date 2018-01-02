@@ -59,6 +59,10 @@ class Importer extends Command {
 			\WP_CLI::line( 'We did it!');
 		}
 
+		if ( empty( $this->get_dynamic_field_groups() ) ) {
+			\WP_CLI::error( __( 'There are zero field groups available to import', 'tribe' ) );
+		}
+
 		foreach( $this->get_dynamic_field_groups() as $field_group_id => $field_group_name ) {
 			\WP_CLI::line( 'You can import ' . $field_group_name . ' with `wp s1 import meta ' . $field_group_id . '`');
 		}
