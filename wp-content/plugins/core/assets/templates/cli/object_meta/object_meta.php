@@ -24,6 +24,6 @@ class %1$s extends ACF\ACF_Meta_Group {
 		return $group->get_attributes();
 	}
 
-	%7$s
+%7$s
 
 }
