@@ -51,7 +51,7 @@ class File_System {
 		return file_get_contents( $path );
 	}
 
-	protected function format_array_for_file( $array, $tab_leader = 1 ) {
+	public function format_array_for_file( $array, $tab_leader = 1 ) {
 		$text_array = var_export( $array, 1 );
 		$lines = explode( PHP_EOL, $text_array );
 
@@ -63,7 +63,7 @@ class File_System {
 		return $modified_string;
 	}
 
-	protected function constant_from_class( $class_name ) {
+	public function constant_from_class( $class_name ) {
 		return strtoupper( str_replace( '_', '', $class_name ) );
 	}
 
