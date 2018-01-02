@@ -50,6 +50,7 @@ class File_System {
 	public function get_file( $path ) {
 		return file_get_contents( $path );
 	}
+
 	protected function format_array_for_file( $array, $tab_leader = 1 ) {
 		$text_array = var_export( $array, 1 );
 		$lines = explode( PHP_EOL, $text_array );
