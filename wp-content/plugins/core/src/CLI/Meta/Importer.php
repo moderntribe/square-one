@@ -160,7 +160,7 @@ class Importer extends Command {
 		$constants = '';
 
 		foreach ( $this->group['fields'] as $field ) {
-			$constants .= "\tconst " . $this->constant_from_class( $this->sanitize_slug( [$field['label']] ) ) . ' = ' . '\'' . $this->slug . '_' . $this->sanitize_slug( $field['label'] ) . '\';' . PHP_EOL;
+			$constants .= "\tconst " . $this->constant_from_class( $this->sanitize_slug( [$field['label']] ) ) . ' = ' . '\'' . $this->slug . '_' . $field['name'] . '\';' . PHP_EOL;
 		}
 		return $constants;
 	}
