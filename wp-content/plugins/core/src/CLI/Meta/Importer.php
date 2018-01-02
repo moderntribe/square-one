@@ -191,14 +191,14 @@ class Importer extends Command {
 
 		$functions = '';
 		foreach ( $this->group['fields'] as $field ) {
+			unset( $field['key'] );
 			$functions .= sprintf(
 				$function_partial,
 				$this->sanitize_slug( [ $field['label'] ] ),
-				$this->constant_from_class( $this->sanitize_slug( [ $field['label'] ] ) ),
-				$field['label'],
-				$field['type']
+				print_r( $field, 1 )
 			);
 		}
+
 		return $functions;
 	}
 
