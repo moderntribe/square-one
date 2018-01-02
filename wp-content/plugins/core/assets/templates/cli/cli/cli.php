@@ -2,15 +2,10 @@
 
 namespace Tribe\Project\CLI;
 
-class %1$s extends Square_One_Command {
-	use File_System;
+class %1$s extends Command {
 
 	public function description() {
 		return __( '%2$s', 'tribe' );
-	}
-
-	public function callback() {
-		return [ $this, '%3$s' ];
 	}
 
 	public function command() {
@@ -28,7 +23,7 @@ class %1$s extends Square_One_Command {
 		];
 	}
 
-	public function %3$s( $args, $assoc_args ) {
+	public function run_command( $args, $assoc_args ) {
 		$this->slug       = $this->sanitize_slug( $args );
 		$this->class_name = $this->ucwords( $this->slug );
 	}

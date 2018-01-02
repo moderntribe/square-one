@@ -15,7 +15,7 @@ module.exports = {
 				src: [
 					'<%= pkg._component_path %>/theme/icons/core/fonts/*',
 				],
-				dest: '<%= pkg._core_theme_assets_path %>/fonts/icons-core/',
+				dest: '<%= pkg._core_theme_fonts_path %>icons-core/',
 			},
 		],
 	},
@@ -28,9 +28,9 @@ module.exports = {
 				src: [
 					'<%= pkg._component_path %>/theme/icons/core/style.css',
 				],
-				dest: '<%= pkg._core_theme_assets_path %>/pcss/base/',
+				dest: '<%= pkg._core_theme_pcss_path %>base/',
 				rename: function(dest, src) {
-					return dest + src.replace('style.css','_icons.pcss');
+					return dest + src.replace('style.css', '_icons.pcss');
 				},
 			},
 		],
@@ -44,9 +44,9 @@ module.exports = {
 				src: [
 					'<%= pkg._component_path %>/theme/icons/core/variables.scss',
 				],
-				dest: '<%= pkg._core_theme_assets_path %>/pcss/utilities/variables/',
+				dest: '<%= pkg._core_theme_pcss_path %>utilities/variables/',
 				rename: function(dest, src) {
-					return dest + src.replace('variables.scss','_icons.pcss');
+					return dest + src.replace('variables.scss', '_icons.pcss');
 				},
 			},
 		],
@@ -58,11 +58,11 @@ module.exports = {
 				expand: true,
 				flatten: true,
 				src: [
-					'<%= pkg._npm_path %>/babel-polyfill/dist/polyfill.js',
 					'<%= pkg._npm_path %>/jquery/dist/jquery.js',
 					'<%= pkg._npm_path %>/jquery/dist/jquery.min.js',
 					'<%= pkg._npm_path %>/jquery/dist/jquery.min.map',
 					'<%= pkg._component_path %>/theme/js/globals.js',
+					'<%= pkg._npm_path %>/es6-promise/dist/es6-promise.auto.js',
 					'<%= pkg._npm_path %>/lazysizes/plugins/object-fit/ls.object-fit.js',
 					'<%= pkg._npm_path %>/lazysizes/plugins/parent-fit/ls.parent-fit.js',
 					'<%= pkg._npm_path %>/lazysizes/plugins/respimg/ls.respimg.js',
@@ -71,7 +71,7 @@ module.exports = {
 					'<%= pkg._npm_path %>/tota11y/build/tota11y.min.js',
 					'<%= pkg._npm_path %>/webfontloader/webfontloader.js',
 				],
-				dest: '<%= pkg._core_theme_assets_path %>/js/vendor/',
+				dest: '<%= pkg._core_theme_js_vendor_path %>',
 			},
 		],
 	}

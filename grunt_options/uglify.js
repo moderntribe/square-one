@@ -15,14 +15,13 @@ module.exports = {
 			},
 		},
 		files: {
-			'<%= pkg._core_theme_assets_path %>/js/dist/vendorGlobal.min.js': [
-				'<%= pkg._core_theme_assets_path %>/js/vendor/polyfill.js',
-				'<%= pkg._core_theme_assets_path %>/js/vendor/globals.js',
-				'<%= pkg._core_theme_assets_path %>/js/vendor/ls.object-fit.js',
-				'<%= pkg._core_theme_assets_path %>/js/vendor/ls.parent-fit.js',
-				'<%= pkg._core_theme_assets_path %>/js/vendor/ls.respimg.js',
-				'<%= pkg._core_theme_assets_path %>/js/vendor/ls.bgset.js',
-				'<%= pkg._core_theme_assets_path %>/js/vendor/lazysizes.js',
+			'<%= pkg._core_theme_js_dist_path %>vendorGlobal.min.js': [
+				'<%= pkg._core_theme_js_vendor_path %>globals.js',
+				'<%= pkg._core_theme_js_vendor_path %>ls.object-fit.js',
+				'<%= pkg._core_theme_js_vendor_path %>ls.parent-fit.js',
+				'<%= pkg._core_theme_js_vendor_path %>ls.respimg.js',
+				'<%= pkg._core_theme_js_vendor_path %>ls.bgset.js',
+				'<%= pkg._core_theme_js_vendor_path %>lazysizes.js',
 			],
 		},
 	},

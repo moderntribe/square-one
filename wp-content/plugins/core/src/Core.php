@@ -4,6 +4,7 @@ namespace Tribe\Project;
 
 use Pimple\Container;
 use Tribe\Libs\Functions\Function_Includer;
+use Tribe\Project\Service_Providers\Admin_Provider;
 use Tribe\Project\Service_Providers\Asset_Provider;
 use Tribe\Project\Service_Providers\Cache_Provider;
 use Tribe\Project\Service_Providers\CLI_Provider;
@@ -14,7 +15,7 @@ use Tribe\Project\Service_Providers\Post_Types\Event_Service_Provider;
 use Tribe\Project\Service_Providers\Post_Types\Organizer_Service_Provider;
 use Tribe\Project\Service_Providers\Post_Types\Page_Service_Provider;
 use Tribe\Project\Service_Providers\Post_Types\Post_Service_Provider;
-use Tribe\Project\Service_Providers\Post_Types\Sample_Post_Type_Service_Provider;
+use Tribe\Project\Service_Providers\Post_Types\Sample_Service_Provider;
 use Tribe\Project\Service_Providers\Post_Types\Venue_Service_Provider;
 use Tribe\Project\Service_Providers\Shortcode_Provider;
 use Tribe\Project\Service_Providers\Taxonomies\Category_Service_Provider;
@@ -57,6 +58,7 @@ class Core {
 	}
 
 	private function load_service_providers() {
+		$this->container->register( new Admin_Provider() );
 		$this->container->register( new Asset_Provider() );
 		$this->container->register( new Cache_Provider() );
 		$this->container->register( new Theme_Provider() );
@@ -76,7 +78,7 @@ class Core {
 	}
 
 	private function load_post_type_providers() {
-		$this->container->register( new Sample_Post_Type_Service_Provider() );
+		$this->container->register( new Sample_Service_Provider() );
 
 		// externally registered post types
 		$this->container->register( new Event_Service_Provider() );

@@ -83,7 +83,7 @@ class Tribe_AdminDashboard {
 	 * @todo handle styling externally
 	 * @todo dynamically manage welcome content per site, globally, and possibly per user role.
 	 */
-	function dashboard_panel() {
+	public function dashboard_panel() {
 		?>
 		
 		<style>

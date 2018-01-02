@@ -8,15 +8,15 @@
 module.exports = {
 	install: {
 		options: {
-			stderr: false
+			stderr: false,
 		},
-		command: 'yarn install'
+		command: 'yarn install',
 	},
 
 	test: {
 		options: {
-			stderr: false
+			stderr: false,
 		},
-		command: 'npm run test'
-	}
+		command: 'npm run test',
+	},
 };

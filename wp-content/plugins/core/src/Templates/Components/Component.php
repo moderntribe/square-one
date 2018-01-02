@@ -18,7 +18,7 @@ abstract class Component extends Twig_Template {
 	 * @param \Twig_Environment|null $twig
 	 * @param array                  $options
 	 */
-	public function __construct( $template, \Twig_Environment $twig = null, $options ) {
+	public function __construct( $template, \Twig_Environment $twig = null, $options = [] ) {
 		parent::__construct( $template, $twig );
 
 		$this->options = $this->parse_options( $options );

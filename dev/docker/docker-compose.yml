@@ -41,6 +41,7 @@ services:
       build:
         context: .
         dockerfile: phpdocker/php-fpm/Dockerfile
+      image: tribe-phpfpm:7.0-rev2
       working_dir: /application
       networks:
         - proxy
@@ -48,6 +49,7 @@ services:
       volumes:
         - ../..:/application/www:cached
         - ./phpdocker/php-fpm/php-ini-overrides.ini:/etc/php/7.0/fpm/conf.d/99-overrides.ini
+        - ./phpdocker/php-fpm/ssmtp.conf:/etc/ssmtp/ssmtp.conf:ro
         - ./wp-cli.yml:/application/wp-cli.yml
       links:
         - memcached

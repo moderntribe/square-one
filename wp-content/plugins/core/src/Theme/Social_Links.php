@@ -150,19 +150,17 @@ class Social_Links {
 
 			case "pinterest";
 				if ( empty( $data[ 'image_src' ] ) ) {
-					$link = '';
-				} else {
-					$link = sprintf(
-						'<a class="social-share-networks__anchor icon icon-pinterest" href="http://pinterest.com/pin/create/button/?url=%1$s&amp;media=%2$s&amp;description=%3$s" data-js="social-share-popup" data-width="624" data-height="300" title="%4$s"><span%5$s>%4$s</span></a>',
-						urlencode( esc_url_raw( $data[ 'link' ] ) ),
-						urlencode( esc_url_raw( $data[ 'image_src' ] ) ),
-						urlencode( $data[ 'title' ] ),
-						__( 'Share on Pinterest', 'tribe' ),
-						$class
-					);
+					return '';
 				}
 
-				return $link;
+				return sprintf(
+					'<a class="social-share-networks__anchor icon icon-pinterest" href="http://pinterest.com/pin/create/button/?url=%1$s&amp;media=%2$s&amp;description=%3$s" data-js="social-share-popup" data-width="624" data-height="300" title="%4$s"><span%5$s>%4$s</span></a>',
+					urlencode( esc_url_raw( $data[ 'link' ] ) ),
+					urlencode( esc_url_raw( $data[ 'image_src' ] ) ),
+					urlencode( $data[ 'title' ] ),
+					__( 'Share on Pinterest', 'tribe' ),
+					$class
+				);
 
 			case "twitter":
 				$text = substr( $data[ 'title' ], 0, 140 - strlen( $data[ 'link' ] ) - 4 );

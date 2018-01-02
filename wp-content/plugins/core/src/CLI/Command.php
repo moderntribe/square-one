@@ -5,6 +5,17 @@ use WP_CLI;
 
 abstract class Command extends \WP_CLI_Command {
 
+	protected $file_system = null;
+	protected $templates_path = '';
+	protected $src_path = '';
+
+	public function __construct( File_System $file_system = null ) {
+		$this->file_system = $file_system;
+		$this->templates_path = trailingslashit( trailingslashit( dirname( __DIR__, 2 ) ) . 'assets/templates/cli' );
+		$this->src_path = trailingslashit( dirname( __DIR__, 1 ) );
+		parent::__construct();
+	}
+
 	public function register() {
 		WP_CLI::add_command( 's1 ' . $this->command(), [ $this, 'run_command' ], [
 			'shortdesc' => $this->description(),

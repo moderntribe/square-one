@@ -4,7 +4,11 @@
 namespace Tribe\Project\Templates\Content\Panels;
 
 use Tribe\Project\Panels\Types\VideoText as VideoTextPanel;
+use Tribe\Project\Templates\Components\Button;
 use Tribe\Project\Templates\Components\Content_Block;
+use Tribe\Project\Templates\Components\Video;
+use Tribe\Project\Templates\Components\Text;
+use Tribe\Project\Templates\Components\Title;
 
 class VideoText extends Panel {
 
@@ -49,14 +53,11 @@ class VideoText extends Panel {
 		}
 
 		$options = [
-			Content_Block::TITLE         => esc_html( $this->panel_vars[ VideoTextPanel::FIELD_TITLE ] ),
-			Content_Block::TITLE_TAG     => 'h2',
-			Content_Block::TEXT          => $this->panel_vars[ VideoTextPanel::FIELD_DESCRIPTION ],
-			Content_Block::CTA           => $this->panel_vars[ VideoTextPanel::FIELD_CTA ],
-			Content_Block::TITLE_ATTRS   => $title_attrs,
-			Content_Block::TITLE_CLASSES => [ 'h2' ],
-			Content_Block::TEXT_ATTRS    => $description_attrs,
-			Content_Block::CTA_CLASSES   => [ 'c-btn--sm' ],
+			Content_Block::TITLE           => $this->get_video_text_title( $title_attrs ),
+			Content_Block::TEXT            => $this->get_video_text_text( $description_attrs ),
+			Content_Block::CONTENT_CLASSES => '',
+			Content_Block::BUTTON          => $this->get_video_text_button(),
+			Content_Block::CLASSES         => '',
 		];
 
 		$content_block_obj = Content_Block::factory( $options );
@@ -64,15 +65,57 @@ class VideoText extends Panel {
 		return $content_block_obj->render();
 	}
 
+	protected function get_video_text_title( $title_attributes ) {
+		$options = [
+			Title::TITLE   => esc_html( $this->panel_vars[ VideoTextPanel::FIELD_TITLE ] ),
+			Title::TAG     => 'h2',
+			Title::CLASSES => [ 'h2' ],
+			Title::ATTRS   => $title_attributes,
+		];
+
+		$title_obj = Title::factory( $options );
+
+		return $title_obj->render();
+	}
+
+	protected function get_video_text_text( $description_attrs ) {
+		$options = [
+			Text::ATTRS   => $description_attrs,
+			Text::CLASSES => '',
+			Text::TEXT    => $this->panel_vars[ VideoTextPanel::FIELD_DESCRIPTION ],
+		];
+
+		$text_object = Text::factory( $options );
+
+		return $text_object->render();
+	}
+
+	protected function get_video_text_button() {
+		$options = [
+			Button::TAG         => '',
+			Button::URL         => $this->panel_vars[ VideoTextPanel::FIELD_CTA ][ Button::URL ],
+			Button::TYPE        => '',
+			Button::TARGET      => $this->panel_vars[ VideoTextPanel::FIELD_CTA ][ Button::TARGET ],
+			Button::CLASSES     => [ 'c-btn--sm' ],
+			Button::ATTRS       => '',
+			Button::LABEL       => $this->panel_vars[ VideoTextPanel::FIELD_CTA ][ Button::LABEL ],
+			Button::BTN_AS_LINK => true,
+		];
+
+		$button_object = Button::factory( $options );
+
+		return $button_object->render();
+	}
+
 	protected function get_panel_video() {
 
-		$video = false;
+		$options = [
+			Video::VIDEO_URL => esc_html( $this->panel_vars[ VideoTextPanel::FIELD_VIDEO ] ),
+		];
 
-		if ( ! empty( $this->panel_vars[ VideoTextPanel::FIELD_VIDEO ] ) ) {
-			$video = apply_filters( 'the_content', $this->panel_vars[ VideoTextPanel::FIELD_VIDEO ] );
-		}
+		$video = Video::factory( $options );
 
-		return $video;
+		return $video->render();
 	}
 
 	protected function get_panel_classes() {

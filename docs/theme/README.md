@@ -3,7 +3,7 @@
 Check `local-config-sample.php` for how to setup your basic wp constants when initializing the project.
 
 The main theme for this system lives in `/wp-content/themes/core`.
-The assets (js/css/img/fonts) for this and its child themes live in `/wp-content/plugins/core/assets/theme`. 
+The assets (js/css/img/fonts) for this and its child themes live in `/wp-content/themes/core`. 
 
 If needed base child themes off of this core for the templates for now. 
 
@@ -32,6 +32,8 @@ For your system setup you must define `SCRIPT_DEBUG` as true in your `local-conf
     * [Forms](/docs/theme/css/forms.md)
   * Javascript
     * [Overview](/docs/theme/js/README.md)
+    * [Code Splitting](/docs/theme/js/code-splitting.md)
+    * [Polyfills](/docs/theme/js/polyfills.md)
     * [Selectors](/docs/theme/js/selectors.md)
     * [Events](/docs/theme/js/events.md)
     * [Jquery](/docs/theme/js/jquery.md)

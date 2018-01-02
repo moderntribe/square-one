@@ -2,9 +2,9 @@
 
 namespace Tribe\Project\CLI;
 
-trait File_System {
+class File_System {
 
-	protected function create_directory( $directory ) {
+	public function create_directory( $directory ) {
 		clearstatcache();
 		if ( file_exists( $directory ) ) {
 			\WP_CLI::error( 'Sorry... ' . $directory . ' directory already exists' );
@@ -14,7 +14,7 @@ trait File_System {
 		}
 	}
 
-	protected function write_file( $file, $contents, $overwrite = false ) {
+	public function write_file( $file, $contents, $overwrite = false ) {
 		if ( file_exists( $file) && ! $overwrite ) {
 			\WP_CLI::error( 'Sorry... ' . $file . ' already exists.' );
 		}
@@ -26,7 +26,7 @@ trait File_System {
 		return $handle;
 	}
 
-	protected function insert_into_existing_file( $file, $new_line, $below_line ) {
+	public function insert_into_existing_file( $file, $new_line, $below_line ) {
 		if ( ! $handle = fopen( $file, 'r+' ) ) {
 			\WP_CLI::error( 'Sorry.. ' . $file . ' could not be opened.' );
 		}
@@ -47,6 +47,9 @@ trait File_System {
 		$this->write_file( $file, $contents, true );
 	}
 
+	public function get_file( $path ) {
+		return file_get_contents( $path );
+	}
 	protected function format_array_for_file( $array, $tab_leader = 1 ) {
 		$text_array = var_export( $array, 1 );
 		$lines = explode( PHP_EOL, $text_array );
