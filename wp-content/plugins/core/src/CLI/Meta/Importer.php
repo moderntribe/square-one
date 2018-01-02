@@ -3,10 +3,8 @@
 namespace Tribe\Project\CLI\Meta;
 
 use Tribe\Project\CLI\Command;
-use Tribe\Project\CLI\File_System;
 
 class Importer extends Command {
-	use File_System;
 
 	protected $args       = [];
 	protected $assoc_args = [];
@@ -90,7 +88,7 @@ class Importer extends Command {
 		$this->slug       = $this->sanitize_slug( [ $this->title ] );
 		$this->class_name = $this->ucwords( $this->slug );
 		$this->namespace  = 'Tribe\Project\Object_Meta\\' . $this->class_name;
-		$this->const_name = $this->constant_from_class( $this->slug );
+		$this->const_name = $this->file_system->constant_from_class( $this->slug );
 		$this->pimple_key = strtolower( 'object_meta.' . $this->const_name );
 	}
 
@@ -98,20 +96,20 @@ class Importer extends Command {
 		$object_meta_service_provider = trailingslashit( dirname( __DIR__, 2 ) ) . 'Service_Providers/Object_Meta_Provider.php';
 
 		// Insert the Use.
-		$this->insert_into_existing_file( $object_meta_service_provider, 'use ' . $this->namespace . ';' . PHP_EOL, 'use Tribe\Libs\Object_Meta\Meta_Repository;' );
+		$this->file_system->insert_into_existing_file( $object_meta_service_provider, 'use ' . $this->namespace . ';' . PHP_EOL, 'use Tribe\Libs\Object_Meta\Meta_Repository;' );
 
 		// Constant.
 		$constant = "\tconst {$this->const_name} = '{$this->pimple_key}';" . PHP_EOL;
-		$this->insert_into_existing_file( $object_meta_service_provider, $constant, 'const REPO    = \'object_meta.collection_repo\';' );
+		$this->file_system->insert_into_existing_file( $object_meta_service_provider, $constant, 'const REPO    = \'object_meta.collection_repo\';' );
 
 		// Keys.
 		$key = "\t\tself::" . $this->const_name . ',' . PHP_EOL;
-		$this->insert_into_existing_file( $object_meta_service_provider, $key, 'private $keys = [' );
+		$this->file_system->insert_into_existing_file( $object_meta_service_provider, $key, 'private $keys = [' );
 
 		// public function register( Container $container ) {
 		$container_partial_file = file_get_contents( trailingslashit( dirname( __DIR__, 3 ) ) . 'assets/templates/cli/object_meta/container_partial.php' );
-		$container_partial = sprintf( $container_partial_file, $this->class_name, $this->format_array_for_file( $this->build_object_array(), 4 ), $this->const_name );
-		$this->insert_into_existing_file( $object_meta_service_provider, $container_partial, 'public function register( Container $container ) {' );
+		$container_partial = sprintf( $container_partial_file, $this->class_name, $this->file_system->format_array_for_file( $this->build_object_array(), 4 ), $this->const_name );
+		$this->file_system->insert_into_existing_file( $object_meta_service_provider, $container_partial, 'public function register( Container $container ) {' );
 
 	}
 
@@ -142,7 +140,7 @@ class Importer extends Command {
 
 	protected function create_object_class() {
 		$object_class = trailingslashit( dirname( __DIR__, 2 ) ) . 'Object_Meta/' . $this->class_name . '.php';
-		$this->write_file( $object_class, $this->class_file_template() );
+		$this->file_system->write_file( $object_class, $this->class_file_template() );
 	}
 
 	protected function class_file_template() {
@@ -164,7 +162,7 @@ class Importer extends Command {
 		$constants = '';
 
 		foreach ( $this->group['fields'] as $field ) {
-			$constants .= "\tconst " . $this->constant_from_class( $this->sanitize_slug( [$field['label']] ) ) . ' = ' . '\'' . $this->slug . '_' . $field['name'] . '\';' . PHP_EOL;
+			$constants .= "\tconst " . $this->file_system->constant_from_class( $this->sanitize_slug( [$field['label']] ) ) . ' = ' . '\'' . $this->slug . '_' . $field['name'] . '\';' . PHP_EOL;
 		}
 		return $constants;
 	}
@@ -172,7 +170,7 @@ class Importer extends Command {
 	protected function field_keys() {
 		$keys = '';
 		foreach ( $this->group['fields'] as $field ) {
-			$keys .= "\t\t\tstatic::" . $this->constant_from_class( $this->sanitize_slug( [ $field['label'] ] ) ) . ',' . PHP_EOL;
+			$keys .= "\t\t\tstatic::" . $this->file_system->constant_from_class( $this->sanitize_slug( [ $field['label'] ] ) ) . ',' . PHP_EOL;
 		}
 		return $keys;
 	}
@@ -195,8 +193,8 @@ class Importer extends Command {
 			$functions .= sprintf(
 				$function_partial,
 				$this->sanitize_slug( [ $field['label'] ] ),
-				$this->constant_from_class( $this->sanitize_slug( [ $field['label'] ] ) ),
-				var_export( $field, 1 )
+				$this->file_system->constant_from_class( $this->sanitize_slug( [ $field['label'] ] ) ),
+				$this->file_system->format_array_for_file( $field, 2 )
 			);
 		}
 
