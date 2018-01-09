@@ -16,7 +16,6 @@ module.exports = {
 		},
 		files: {
 			'<%= pkg._core_theme_js_dist_path %>vendorGlobal.min.js': [
-				'<%= pkg._core_theme_js_vendor_path %>polyfill.js',
 				'<%= pkg._core_theme_js_vendor_path %>globals.js',
 				'<%= pkg._core_theme_js_vendor_path %>ls.object-fit.js',
 				'<%= pkg._core_theme_js_vendor_path %>ls.parent-fit.js',
