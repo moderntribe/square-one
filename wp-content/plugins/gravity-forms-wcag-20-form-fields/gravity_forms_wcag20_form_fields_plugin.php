@@ -3,7 +3,7 @@
 Plugin Name: WCAG 2.0 form fields for Gravity Forms
 Description: Extends the Gravity Forms plugin. Modifies fields and improves validation so that forms meet WCAG 2.0 accessibility requirements.
 Tags: Gravity Forms, wcag, accessibility, forms
-Version: 1.5.1
+Version: 1.6.0
 Author: Adrian Gordon
 Author URI: https://www.itsupportguides.com
 License: GPL2
@@ -191,7 +191,7 @@ if ( ! class_exists( 'ITSP_GF_WCAG20_Form_Fields' ) ) {
 							if ( $isotherchoice ) {
 								$choice_position = $key;
 								// add label to radio
-								$content = str_replace( "<li class='gchoice_{$form_id}_{$field_id}_" . $choice_position . "'><input name='input_" . $field_id . "' ", "<li class='gchoice_{$form_id}_{$field_id}_" . $choice_position . "'><label id='label_{$form_id}_{$field_id}_" . $choice_position . "' for='choice_{$form_id}_{$field_id}_" . $choice_position . "' class='sr-only'>" . __( 'Other', 'gravity-forms-wcag-20-form-fields' )." </label><input name='input_" . $field_id . "' ", $content );
+								$content = str_replace( "<li class='gchoice_{$form_id}_{$field_id}_" . $choice_position . "'><input name='input_" . $field_id . "' ", "<li class='gchoice_{$form_id}_{$field_id}_" . $choice_position . "'><label id='label_{$form_id}_{$field_id}_" . $choice_position . "' for='choice_{$form_id}_{$field_id}_" . $choice_position . "' class='sr-only'>" . __( 'Other', 'gravity-forms-wcag-20-form-fields' )." </label><label id='label_{$form_id}_{$field_id}_other' for='input_{$form_id}_{$field_id}_other' class='sr-only'>" . __( 'Other', 'gravity-forms-wcag-20-form-fields' )." </label><input name='input_" . $field_id . "' ", $content );
 								// add label to text input
 								//$content = str_replace( "<input id='input_{$form_id}_{$field_id}_other' ", "<label id='label_{$form_id}_{$field_id}_other' for='input_{$form_id}_{$field_id}_other' class='sr-only'>" . __( 'Other', 'gravity-forms-wcag-20-form-fields' ) . " </label><input id='input_{$form_id}_{$field_id}_other' ", $content );
 								// change radio jQuery
@@ -305,12 +305,12 @@ if ( ! class_exists( 'ITSP_GF_WCAG20_Form_Fields' ) ) {
 
 					$text_add_remove_row = __( 'Add or remove row', 'gravity-forms-wcag-20-form-fields' );
 					$content = str_replace( "<th>&nbsp;</th></tr></thead>", "<th><span class='sr-only'>{$text_add_remove_row}</span></th></tr></thead>", $content );
-					
+
 					$content = str_replace( "<input type='text' id='input_{$form_id}_{$field_id}_shim'", "<input type='hidden' id='input_{$form_id}_{$field_id}_shim'", $content );
 
 					$content .= "</fieldset>";
-				} 
-				
+				}
+
 				// WEBSITE field
 				//
 				// add description for website field
@@ -320,7 +320,7 @@ if ( ! class_exists( 'ITSP_GF_WCAG20_Form_Fields' ) ) {
 					// attach to aria-described-by
 					$content = str_replace( " name='input_", " aria-describedby='field_{$form_id}_{$field_id}_dmessage' name='input_", $content );
 				}
-				
+
 				// DATE FIELD
 				//
 				// add description for date field
@@ -339,27 +339,27 @@ if ( ! class_exists( 'ITSP_GF_WCAG20_Form_Fields' ) ) {
 						$date_format = 'yyyy.mm.dd';
 					} else {
 						$date_format = 'mm/dd/yyyy';
-					} 
+					}
 
 				$content = str_replace( "<label class='gfield_label' for='input_{$form_id}_{$field_id}' >{$field_label}", "<label class='gfield_label' for='input_{$form_id}_{$field_id}' >{$field_label} <span id='field_{$form_id}_{$field_id}_dmessage' class='sr-only'> - " . sprintf( __( 'must be %s format', 'gravity-forms-wcag-20-form-fields' ), $date_format ) . "</span>", $content );
 
 					// attach to aria-described-by
 					$content = str_replace( " name='input_", " aria-describedby='field_{$form_id}_{$field_id}_dmessage' name='input_", $content);
 				}
-				
+
 				// ALL FIELDS
-				
+
 				// add screen reader text for required fields
 				if( $field_required ) {
-					if ( ( true !== strpos( strtolower( $content ), "aria-required='true'" ) ) && ( 'checkbox' != $field_type ) && ( 'radio' != $field_type ) ) {
+					/*if ( ( true !== strpos( strtolower( $content ), "aria-required='true'" ) ) && ( 'checkbox' != $field_type ) && ( 'radio' != $field_type ) ) {
 						//add aria-required='true'
 						$content = str_replace( " name='input_", " aria-required='true' name='input_", $content );
-					}
+					}*/
 					$text_required =  __( 'Required', 'gravity-forms-wcag-20-form-fields' );
 					//add screen reader only 'Required' message to asterisk
 					$content = str_replace( "*</span>", " * <span class='sr-only'> {$text_required}</span></span>", $content );
 				}
-				
+
 				// use field description as aria-describedby
 				if( ! empty( $field_description ) && 'Infobox' != $field_type ) {
 				// if field has a description, link description to field using aria-describedby
@@ -384,7 +384,7 @@ if ( ! class_exists( 'ITSP_GF_WCAG20_Form_Fields' ) ) {
 		public static function queue_scripts( $form, $is_ajax ) {
 			if ( ! is_admin() ) {
 				$min = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG || isset( $_GET['gform_debug'] ) ? '' : '.min';
-				
+
 				/*
 			     * CSS styles - remove border, margin and padding from fieldset
 				 */
@@ -395,11 +395,11 @@ if ( ! class_exists( 'ITSP_GF_WCAG20_Form_Fields' ) ) {
 				 * changes them to open in a new window and adds/appends
 				 * 'this link will open in a new window' to title for screen reader users.
 				 */
-				
+
 				wp_register_script( 'gf_wcag20_form_fields_js', plugins_url( "/js/gf_wcag20_form_fields{$min}.js", __FILE__ ),  array( 'jquery' ) );
-				
+
 				$failed_validation = false;
-				
+
 				foreach ( $form['fields'] as $field ) {
 					$failed_validation = $field->failed_validation;
 					if ( $failed_validation ) {
@@ -440,14 +440,7 @@ if ( ! class_exists( 'ITSP_GF_WCAG20_Form_Fields' ) ) {
          * Check if GF is installed
          */
         private static function is_gravityforms_installed() {
-			if ( !function_exists( 'is_plugin_active' ) || !function_exists( 'is_plugin_active_for_network' ) ) {
-				require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
-			}
-			if ( is_multisite() ) {
-				return ( is_plugin_active_for_network( 'gravityforms/gravityforms.php' ) || is_plugin_active( 'gravityforms/gravityforms.php' ) );
-			} else {
-				return is_plugin_active( 'gravityforms/gravityforms.php' );
-			}
+			return class_exists( 'GFCommon' );
         } // END is_gravityforms_installed
 	}
     $ITSP_GF_WCAG20_Form_Fields = new ITSP_GF_WCAG20_Form_Fields();
