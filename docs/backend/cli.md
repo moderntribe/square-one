@@ -44,6 +44,11 @@ Creates a new Taxonomy and accepts single/plural strings and a comma separated l
 usage: `wp s1 tax <tax> [--single=<single>] [--plural=<plural>] [--post_types=<post_type,post_type>] [--config]`
 
 #### Utility ####
+`wp s1 import meta`<BR>
+Lists all the ACF Custom Field groups created in wp-admin and provides commands to convert them to code.
+usage: `wp s1 import meta`<BR>
+`wp s1 import meta [group_identifier]` 
+
 `wp s1 pimple`<BR>
 Dumps the files needed for [silex-pimple-plugin](https://plugins.jetbrains.com/plugin/7809-silex-pimple-plugin) to provide jump-to definition in PHP Storm.
 usage: `wp s1 pimple`

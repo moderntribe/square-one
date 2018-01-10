@@ -51,4 +51,20 @@ class File_System {
 		return file_get_contents( $path );
 	}
 
+	public function format_array_for_file( $array, $tab_leader = 1 ) {
+		$text_array = var_export( $array, 1 );
+		$lines = explode( PHP_EOL, $text_array );
+
+		$modified_string = '';
+		foreach ( $lines as $line ) {
+			$modified_string .= str_repeat( "\t", $tab_leader ) . $line . PHP_EOL;
+		}
+
+		return $modified_string;
+	}
+
+	public function constant_from_class( $class_name ) {
+		return strtoupper( str_replace( '_', '', $class_name ) );
+	}
+
 }
