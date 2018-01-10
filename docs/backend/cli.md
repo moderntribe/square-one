@@ -45,6 +45,7 @@ usage: `wp s1 generate tax <tax> [--single=<single>] [--plural=<plural>] [--post
 
 `wp s1 generate settings`<BR>
 Creates a new empty settings page.
+Page name value should be treated like a cpt/tax name. 
 usage: `wp s1 generate settings <settings-page-name>`
 
 #### Utility ####
