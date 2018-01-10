@@ -48,7 +48,7 @@ class Importer extends Command {
 			$this->setup_field_group();
 
 			// Sanity check.
-			\WP_CLI::confirm( 'Are you sure you want to delete the database entry ' . $this->title . ' field group and convert it to php?', $assoc_args );
+			\WP_CLI::confirm( sprintf( __( 'Are you sure you want to delete the database entry %s field group and convert it to php?', 'tribe' ), $this->title ), $assoc_args );
 			
 			// Write the meta files.
 			$this->update_service_provider();
@@ -58,10 +58,10 @@ class Importer extends Command {
 			$this->delete_field_group();
 
 			// Success!
-			\WP_CLI::line( 'We did it!');
+			\WP_CLI::line( __( 'We did it!', 'tribe' ) );
 		} else {
 			foreach( $this->get_dynamic_field_groups() as $field_group_id => $field_group_name ) {
-				\WP_CLI::line( 'You can import ' . $field_group_name . ' with `wp s1 import meta ' . $field_group_id . '`');
+				\WP_CLI::line( sprintf( __( 'You can import %s with `wp s1 import meta %s`', 'tribe' ), $field_group_name, $field_group_id ) );
 			}
 		}
 
