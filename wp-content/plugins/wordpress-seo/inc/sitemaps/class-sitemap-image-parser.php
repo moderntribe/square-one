@@ -91,8 +91,8 @@ class WPSEO_Sitemap_Image_Parser {
 
 		if ( 'attachment' === $post->post_type && wp_attachment_is_image( $post ) ) {
 
-			$src      = $this->get_absolute_url( $this->image_url( $post->ID ) );
-			$alt      = get_post_meta( $post->ID, '_wp_attachment_image_alt', true );
+			$src = $this->get_absolute_url( $this->image_url( $post->ID ) );
+			$alt = get_post_meta( $post->ID, '_wp_attachment_image_alt', true );
 
 			$images[] = $this->get_image_item( $post, $src, $post->post_title, $alt );
 		}
@@ -212,7 +212,7 @@ class WPSEO_Sitemap_Image_Parser {
 	 *
 	 * @return array Set of attachment objects.
 	 */
-	private function parse_galleries( $content, $post_id = 0 ) {
+	protected function parse_galleries( $content, $post_id = 0 ) {
 
 		$attachments = array();
 		$galleries   = $this->get_content_galleries( $content );
@@ -236,7 +236,12 @@ class WPSEO_Sitemap_Image_Parser {
 			$attachments = array_merge( $attachments, $gallery_attachments );
 		}
 
-		return array_unique( $attachments, SORT_REGULAR );
+		if ( PHP_VERSION_ID >= 50209 ) {
+			// phpcs:ignore PHPCompatibility.PHP.NewFunctionParameters.array_unique_sort_flagsFound -- Wrapped in version check.
+			return array_unique( $attachments, SORT_REGULAR );
+		}
+
+		return $attachments;
 	}
 
 	/**
@@ -487,7 +492,7 @@ class WPSEO_Sitemap_Image_Parser {
 
 		$args = wp_parse_args( $args, $default_args );
 
-		$get_attachments = new WP_Query;
+		$get_attachments = new WP_Query();
 		return $get_attachments->query( $args );
 	}
 

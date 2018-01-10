@@ -25,7 +25,7 @@ class WPSEO_Admin_Pages {
 	/**
 	 * Class constructor, which basically only hooks the init function on the init hook
 	 */
-	function __construct() {
+	public function __construct() {
 		add_action( 'init', array( $this, 'init' ), 20 );
 		$this->asset_manager = new WPSEO_Admin_Asset_Manager();
 	}
@@ -33,17 +33,15 @@ class WPSEO_Admin_Pages {
 	/**
 	 * Make sure the needed scripts are loaded for admin pages
 	 */
-	function init() {
+	public function init() {
 		if ( filter_input( INPUT_GET, 'wpseo_reset_defaults' ) && wp_verify_nonce( filter_input( INPUT_GET, 'nonce' ), 'wpseo_reset_defaults' ) && current_user_can( 'manage_options' ) ) {
 			WPSEO_Options::reset();
 			wp_redirect( admin_url( 'admin.php?page=' . WPSEO_Admin::PAGE_IDENTIFIER ) );
 		}
 
-		if ( WPSEO_Utils::grant_access() ) {
-			add_action( 'admin_init', array( $this, 'admin_init' ) );
-			add_action( 'admin_enqueue_scripts', array( $this, 'config_page_scripts' ) );
-			add_action( 'admin_enqueue_scripts', array( $this, 'config_page_styles' ) );
-		}
+		add_action( 'admin_init', array( $this, 'admin_init' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'config_page_scripts' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'config_page_styles' ) );
 	}
 
 	/**
@@ -63,7 +61,7 @@ class WPSEO_Admin_Pages {
 	/**
 	 * Loads the required styles for the config page.
 	 */
-	function config_page_styles() {
+	public function config_page_styles() {
 		wp_enqueue_style( 'dashboard' );
 		wp_enqueue_style( 'thickbox' );
 		wp_enqueue_style( 'global' );
@@ -71,17 +69,14 @@ class WPSEO_Admin_Pages {
 		$this->asset_manager->enqueue_style( 'select2' );
 
 		$this->asset_manager->enqueue_style( 'admin-css' );
-
-		$this->asset_manager->enqueue_style( 'kb-search' );
 	}
 
 	/**
 	 * Loads the required scripts for the config page.
 	 */
-	function config_page_scripts() {
+	public function config_page_scripts() {
 		$this->asset_manager->enqueue_script( 'admin-script' );
-
-		wp_localize_script( WPSEO_Admin_Asset_Manager::PREFIX . 'admin-script', 'wpseoAdminL10n', WPSEO_Help_Center::get_translated_texts() );
+		$this->asset_manager->enqueue_script( 'help-center' );
 
 		wp_enqueue_script( 'dashboard' );
 		wp_enqueue_script( 'thickbox' );
@@ -90,7 +85,7 @@ class WPSEO_Admin_Pages {
 
 		wp_localize_script( WPSEO_Admin_Asset_Manager::PREFIX . 'admin-script', 'wpseoSelect2Locale', WPSEO_Utils::get_language( WPSEO_Utils::get_user_locale() ) );
 
-		if ( in_array( $page, array( 'wpseo_social', WPSEO_Admin::PAGE_IDENTIFIER ) ) ) {
+		if ( in_array( $page, array( 'wpseo_social', WPSEO_Admin::PAGE_IDENTIFIER ), true ) ) {
 			wp_enqueue_media();
 
 			$this->asset_manager->enqueue_script( 'admin-media' );
@@ -134,7 +129,7 @@ class WPSEO_Admin_Pages {
 	private function do_yoast_export() {
 		check_admin_referer( WPSEO_Export::NONCE_ACTION, WPSEO_Export::NONCE_NAME );
 
-		if ( ! current_user_can( 'manage_options' ) ) {
+		if ( ! WPSEO_Capability_Utils::current_user_can( 'wpseo_manage_options' ) ) {
 			return;
 		}
 
@@ -241,7 +236,7 @@ class WPSEO_Admin_Pages {
 	 * @param string $label  The label to show for the variable.
 	 * @param string $option The option the variable belongs to.
 	 */
-	function textinput( $var, $label, $option = '' ) {
+	public function textinput( $var, $label, $option = '' ) {
 		_deprecated_function( __METHOD__, 'WPSEO 2.0', 'This method is deprecated, please use the <code>Yoast_Form</code> class.' );
 
 		if ( $option !== '' ) {
@@ -260,7 +255,7 @@ class WPSEO_Admin_Pages {
 	 * @param string $option The option the variable belongs to.
 	 * @param array  $attr   The CSS class to assign to the textarea.
 	 */
-	function textarea( $var, $label, $option = '', $attr = array() ) {
+	public function textarea( $var, $label, $option = '', $attr = array() ) {
 		_deprecated_function( __METHOD__, 'WPSEO 2.0', 'This method is deprecated, please use the <code>Yoast_Form</code> class.' );
 
 		if ( $option !== '' ) {
@@ -278,7 +273,7 @@ class WPSEO_Admin_Pages {
 	 * @param string $var    The variable within the option to create the hidden input for.
 	 * @param string $option The option the variable belongs to.
 	 */
-	function hidden( $var, $option = '' ) {
+	public function hidden( $var, $option = '' ) {
 		_deprecated_function( __METHOD__, 'WPSEO 2.0', 'This method is deprecated, please use the <code>Yoast_Form</code> class.' );
 
 		if ( $option !== '' ) {
@@ -298,7 +293,7 @@ class WPSEO_Admin_Pages {
 	 * @param array  $values The select options to choose from.
 	 * @param string $option The option the variable belongs to.
 	 */
-	function select( $var, $label, $values, $option = '' ) {
+	public function select( $var, $label, $values, $option = '' ) {
 		_deprecated_function( __METHOD__, 'WPSEO 2.0', 'This method is deprecated, please use the <code>Yoast_Form</code> class.' );
 
 		if ( $option !== '' ) {
@@ -317,7 +312,7 @@ class WPSEO_Admin_Pages {
 	 * @param string $label  The label to show for the variable.
 	 * @param string $option The option the variable belongs to.
 	 */
-	function file_upload( $var, $label, $option = '' ) {
+	public function file_upload( $var, $label, $option = '' ) {
 		_deprecated_function( __METHOD__, 'WPSEO 2.0', 'This method is deprecated, please use the <code>Yoast_Form</code> class.' );
 
 		if ( $option !== '' ) {
@@ -336,7 +331,7 @@ class WPSEO_Admin_Pages {
 	 * @param string $label  Label message.
 	 * @param string $option Optional option key.
 	 */
-	function media_input( $var, $label, $option = '' ) {
+	public function media_input( $var, $label, $option = '' ) {
 		_deprecated_function( __METHOD__, 'WPSEO 2.0', 'This method is deprecated, please use the <code>Yoast_Form</code> class.' );
 
 		if ( $option !== '' ) {
@@ -356,7 +351,7 @@ class WPSEO_Admin_Pages {
 	 * @param string $label  The label to show for the variable.
 	 * @param string $option The option the variable belongs to.
 	 */
-	function radio( $var, $values, $label, $option = '' ) {
+	public function radio( $var, $values, $label, $option = '' ) {
 		_deprecated_function( __METHOD__, 'WPSEO 2.0', 'This method is deprecated, please use the <code>Yoast_Form</code> class.' );
 
 		if ( $option !== '' ) {
@@ -375,7 +370,7 @@ class WPSEO_Admin_Pages {
 	 * @param string $title   Title of the postbox.
 	 * @param string $content Content of the postbox.
 	 */
-	function postbox( $id, $title, $content ) {
+	public function postbox( $id, $title, $content ) {
 		_deprecated_function( __METHOD__, 'WPSEO 2.0', 'This method is deprecated, please re-implement the admin pages.' );
 
 		?>
@@ -395,7 +390,7 @@ class WPSEO_Admin_Pages {
 	 *
 	 * @return string
 	 */
-	function form_table( $rows ) {
+	public function form_table( $rows ) {
 		_deprecated_function( __METHOD__, 'WPSEO 2.0', 'This method is deprecated, please re-implement the admin pages.' );
 
 		if ( ! is_array( $rows ) || $rows === array() ) {
@@ -405,13 +400,13 @@ class WPSEO_Admin_Pages {
 		$content = '<table class="form-table">';
 		foreach ( $rows as $row ) {
 			$content .= '<tr><th scope="row">';
-			if ( isset( $row['id'] ) && $row['id'] != '' ) {
+			if ( ! empty( $row['id'] ) ) {
 				$content .= '<label for="' . esc_attr( $row['id'] ) . '">' . esc_html( $row['label'] ) . ':</label>';
 			}
 			else {
 				$content .= esc_html( $row['label'] );
 			}
-			if ( isset( $row['desc'] ) && $row['desc'] != '' ) {
+			if ( ! empty( $row['desc'] ) ) {
 				$content .= '<br/><small>' . esc_html( $row['desc'] ) . '</small>';
 			}
 			$content .= '</th><td>';
@@ -431,7 +426,7 @@ class WPSEO_Admin_Pages {
 	 * @deprecated use WPSEO_Options::reset()
 	 * @see        WPSEO_Options::reset()
 	 */
-	function reset_defaults() {
+	public function reset_defaults() {
 		_deprecated_function( __METHOD__, 'WPSEO 1.5.0', 'WPSEO_Options::reset()' );
 		WPSEO_Options::reset();
 	}

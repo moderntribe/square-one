@@ -8,7 +8,14 @@
  */
 class WPSEO_License_Page_Manager implements WPSEO_WordPress_Integration {
 
+	/**
+	 * @var string Version number for License Page Manager.
+	 */
 	const VERSION_LEGACY = '1';
+
+	/**
+	 * @var string Version number for License Page Manager.
+	 */
 	const VERSION_BACKWARDS_COMPATIBILITY = '2';
 
 	/**
@@ -43,7 +50,7 @@ class WPSEO_License_Page_Manager implements WPSEO_WordPress_Integration {
 		}
 
 		$extension_list = new WPSEO_Extensions();
-		$extensions = $extension_list->get();
+		$extensions     = $extension_list->get();
 
 		$notification_center = Yoast_Notification_Center::get();
 
@@ -66,7 +73,7 @@ class WPSEO_License_Page_Manager implements WPSEO_WordPress_Integration {
 	 */
 	public function remove_faulty_notifications() {
 		$extension_list = new WPSEO_Extensions();
-		$extensions = $extension_list->get();
+		$extensions     = $extension_list->get();
 
 		$notification_center = Yoast_Notification_Center::get();
 
@@ -88,7 +95,7 @@ class WPSEO_License_Page_Manager implements WPSEO_WordPress_Integration {
 	public function handle_response( array $response, $request_arguments, $url ) {
 		$response_code = wp_remote_retrieve_response_code( $response );
 
-		if ( $response_code === 200 && $this->is_expected_endpoint( $url )  ) {
+		if ( $response_code === 200 && $this->is_expected_endpoint( $url ) ) {
 			$response_data = $this->parse_response( $response );
 			$this->detect_version( $response_data );
 		}
@@ -102,11 +109,7 @@ class WPSEO_License_Page_Manager implements WPSEO_WordPress_Integration {
 	 * @return string The page to use.
 	 */
 	public function get_license_page() {
-		if ( $this->get_version() === self::VERSION_BACKWARDS_COMPATIBILITY ) {
-			return 'licenses';
-		}
-
-		return 'licenses-legacy';
+		return 'licenses';
 	}
 
 	/**
@@ -115,7 +118,7 @@ class WPSEO_License_Page_Manager implements WPSEO_WordPress_Integration {
 	 * @return int The version number
 	 */
 	protected function get_version() {
-		return get_option( $this->get_option_name(), self::VERSION_LEGACY );
+		return get_option( $this->get_option_name(), self::VERSION_BACKWARDS_COMPATIBILITY );
 	}
 
 	/**
@@ -187,16 +190,16 @@ class WPSEO_License_Page_Manager implements WPSEO_WordPress_Integration {
 	protected function create_notification( $product_name ) {
 		$notification_options = array(
 			'type'         => Yoast_Notification::ERROR,
-			'id'           => 'wpseo-dismiss-' . sanitize_title_with_dashes( $product_name,  null, 'save' ),
-			'capabilities' => 'manage_options',
+			'id'           => 'wpseo-dismiss-' . sanitize_title_with_dashes( $product_name, null, 'save' ),
+			'capabilities' => 'wpseo_manage_options',
 		);
 
 		$notification = new Yoast_Notification(
-		/* translators: %1$s expands to the product name. %2$s expands to a link to My Yoast  */
 			sprintf(
+				/* translators: %1$s expands to the product name. %2$s expands to a link to My Yoast  */
 				__( 'You are not receiving updates or support! Fix this problem by adding this site and enabling %1$s for it in %2$s.', 'wordpress-seo' ),
 				$product_name,
-				'<a href="https://yoa.st/13j" target="_blank">My Yoast</a>'
+				'<a href="' . WPSEO_Shortlinker::get( 'https://yoa.st/13j' ) . '" target="_blank">My Yoast</a>'
 			),
 			$notification_options
 		);
