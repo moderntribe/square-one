@@ -8,6 +8,7 @@ The core plugin will be where the majority of back end development takes place:
 
 * Backend Development
   * [Overview](README.md)
+  * [Videos](videos.md)
     * [Container / Core.php](container.md)
     * [Custom Post Types](post-types.md)
     * [Custom Taxonomies](taxonomies.md)

@@ -19,6 +19,7 @@ For your system setup you must define `SCRIPT_DEBUG` as true in your `local-conf
 
 * Theme
   * [Overview](/docs/theme/README.md)
+  * [Videos](/docs/theme/videos.md)
   * [Markup and Style](/docs/theme/markup-and-style.md)
   * [Accessibility](/docs/theme/accessbility.md)
   * [Image Handling](/docs/theme/images.md)

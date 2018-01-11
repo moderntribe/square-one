@@ -11,4 +11,5 @@ All Modern Tribe Videos use the password **tribevideos**
 - Settings: [BE Settings](https://vimeo.com/226474522/36a42d11c4)
 - Components: [BE Components](https://vimeo.com/239124767)
 - Create CLI Commands: [BE Create CLI Commands](https://vimeo.com/249398359)
-- Running CLI Commands: [BE Running CLI COmmands](https://vimeo.com/249398812) 
+- Running CLI Commands: [BE Running CLI Commands](https://vimeo.com/249398812) 
+- Queue Tasks: [BE Queue](https://vimeo.com/249397520)
