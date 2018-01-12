@@ -4,6 +4,9 @@
   * [Overview](/docs/build/README.md)
   * [Node](/docs/build/node.md)
   * [Grunt Tasks](/docs/build/grunt.md)
+* Videos
+  * [Frontend Videos](/docs/theme/videos.md)
+  * [Backend Videos](/docs/backend/videos.md)
 * Panel Builder
   * [Overview](/docs/panels/README.md)
   * [The Initializer](/docs/panels/initializer.md)
