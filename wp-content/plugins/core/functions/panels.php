@@ -16,11 +16,11 @@ function the_panel_title( $title = null, $options = [] ) {
 	}
 
 	$defaults = [
-		'classes'       => 'panel__title',  // String: Space-separated CSS classes to apply to the HTML element
-		'data_name'     => null,            // String: data-name attribute value used in live preview mode to identify the title that should be updated.
-		'data_livetext' => false,           // Bool: Should this panel title be live-update enabled for live previews?
-		'depth'         => 0,               // Int: The depth value for this panel when live-updating in preview mode.
-		'index'         => 0,               // Int: The index valu for this panel when live-updating in preview mode.
+		'classes'       => '',    // String: Space-separated CSS classes to apply to the HTML element
+		'data_name'     => null,  // String: data-name attribute value used in live preview mode to identify the title that should be updated.
+		'data_livetext' => false, // Bool: Should this panel title be live-update enabled for live previews?
+		'depth'         => 0,     // Int: The depth value for this panel when live-updating in preview mode.
+		'index'         => 0,     // Int: The index value for this panel when live-updating in preview mode.
 	];
 
 	$options = wp_parse_args( $options, $defaults );
@@ -42,7 +42,7 @@ function the_panel_title( $title = null, $options = [] ) {
 		$h_level = 'h1';
 	}
 
-	$class      = ( ! empty( $options[ 'classes' ] ) ) ? ' class="' . esc_attr( $options[ 'classes' ] ) . '"' : '';
+	$class      = ' class="site-panel__title ' . esc_attr( $options[ 'classes' ] ) . '"';
 	$data_attrs = ( ! empty( $options[ 'data_name' ] ) ) ? ' data-name="' . esc_attr( $options[ 'data_name' ] ) . '"' : '';
 	$data_attrs .= ( true === $options[ 'data_livetext' ] ) ? ' data-livetext' : '';
 	$data_attrs .= ( true === $options[ 'data_livetext' ] ) ? sprintf( ' data-depth="%d"', $options[ 'depth' ] ) : '';
@@ -57,6 +57,49 @@ function the_panel_title( $title = null, $options = [] ) {
 	);
 
 	echo $panel_title;
+}
+
+/**
+ * Output panel description
+ *
+ * @param string $content  Panel content
+ * @param array $options An array of optional attributes & values to apply to the description element markup.
+ *
+ * @since tribe-square-one 1.0
+ */
+
+function the_panel_description( $content = null, $options = [] ) {
+
+	if ( empty( $content ) && ! is_panel_preview() ) {
+		return;
+	}
+
+	$defaults = [
+		'classes'       => '',    // String: Space-separated CSS classes to apply to the HTML element
+		'data_name'     => null,  // String: data-name attribute value used in live preview mode to identify the field that should be updated.
+		'data_livetext' => false, // Bool: Should this panel description be live-update enabled for live previews?
+		'data_autop'    => false, // Bool: Is this panel description powered by a WYSIWYG field?
+		'depth'         => 0,     // Int: The depth value for this panel when live-updating in preview mode.
+		'index'         => 0,     // Int: The index value for this panel when live-updating in preview mode.
+	];
+
+	$options = wp_parse_args( $options, $defaults );
+
+	$class      = ' class="site-panel__description ' . esc_attr( $options[ 'classes' ] ) . '"';
+	$data_attrs = ( ! empty( $options[ 'data_name' ] ) ) ? ' data-name="' . esc_attr( $options[ 'data_name' ] ) . '"' : '';
+	$data_attrs .= ( true === $options[ 'data_livetext' ] ) ? ' data-livetext' : '';
+	$data_attrs .= ( true === $options[ 'data_livetext' ] ) ? sprintf( ' data-depth="%d"', $options[ 'depth' ] ) : '';
+	$data_attrs .= ( true === $options[ 'data_livetext' ] ) ? sprintf( ' data-index="%d"', $options[ 'index' ] ) : '';
+	$data_attrs .= ( true === $options[ 'data_livetext' ] ) ? sprintf( ' data-autop="%d"', $options[ 'data_autop' ] ) : '';
+
+	$panel_description = sprintf(
+		'<div%1$s%2$s>%3$s</div>',
+		$class,
+		$data_attrs,
+		$content
+	);
+
+	echo $panel_description;
 }
 
 /**

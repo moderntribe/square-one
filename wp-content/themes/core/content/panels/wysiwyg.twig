@@ -12,8 +12,9 @@
 
 			{% for col in columns %}
 				<div class="g-col t-content"
-				     data-depth="{{ loop.index0 }}"
-				     data-name="content"
+				     data-depth="1"
+					 data-index="{{ loop.index0 }}"
+				     data-name="column_content"
 				     data-autop="true"
 				     data-livetext="true">
 					{{ col.content }}
