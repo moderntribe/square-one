@@ -33,15 +33,15 @@ __arguments__ returns an array of arguments accepted by the callback. ex:
 `wp s1 generate cli`<BR>
 Is used to create a new CLI command. This is a good jumping off point for something simple.
 In addition to creating the command, it updates the CLI Service Provider to include the new command.
-usage: `wp s1 cli <command>`
+usage: `wp s1 generate cli <command>`
 
 `wp s1 generate cpt`<BR>
 Creates a new CPT and accepts single/plural strings. Further, the creation of a config file is optional (defaults to true).
-usage: `wp s1 cpt <cpt> [--single=<single>] [--plural=<plural>] [--config]`
+usage: `wp s1 generate cpt <cpt> [--single=<single>] [--plural=<plural>] [--config]`
 
 `wp s1 generate tax`<BR>
 Creates a new Taxonomy and accepts single/plural strings and a comma separated list of post-types to associate with. Further the creation of a config file is optional (defaults to true).
-usage: `wp s1 tax <tax> [--single=<single>] [--plural=<plural>] [--post_types=<post_type,post_type>] [--config]`
+usage: `wp s1 generate tax <tax> [--single=<single>] [--plural=<plural>] [--post_types=<post_type,post_type>] [--config]`
 
 #### Utility ####
 `wp s1 pimple`<BR>
