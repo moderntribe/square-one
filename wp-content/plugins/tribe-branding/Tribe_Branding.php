@@ -46,16 +46,16 @@ class Tribe_Branding {
 		}
 	}
 
-    private function get_branding_assets_url() {
-  		return get_stylesheet_directory_uri() . '/img/theme/branding-assets/';
-  	}
+	private function get_branding_assets_url() {
+		return trailingslashit( get_stylesheet_directory_uri() ) . 'img/theme/branding-assets/';
+	}
 
-    /**
-   	 * Login Logo
-   	 *
-   	 * If the customizer logo is a url and not stored as an option we upload as an attachment to a temp post
-   	 * and store that attachment id for the logo file.  Then we can use the WP media api for detecting size.
-   	 */
+	/**
+	 * Login Logo
+	 *
+	 * If the customizer logo is a url and not stored as an option we upload as an attachment to a temp post
+	 * and store that attachment id for the logo file.  Then we can use the WP media api for detecting size.
+	 */
 	public function set_login_logo() {
 
 		$logo_id = get_theme_mod( 'branding_customizer_icon_admin' );
@@ -64,7 +64,7 @@ class Tribe_Branding {
 			return;
 		}
 
-        $logo_data = wp_get_attachment_image_src( $logo_id, 'full' );
+		$logo_data = wp_get_attachment_image_src( $logo_id, 'full' );
 
 		if ( ! $logo_data ) {
 			return;
@@ -180,7 +180,7 @@ class Tribe_Branding {
 				'description' => __( 'Recommended minimum width: 700px. Recommended file type: .png.', 'tribe' ),
 				'section'     => 'branding_customizer',
 				'settings'    => 'branding_customizer_icon_admin',
-                'mime_type'   => 'image',
+				'mime_type'   => 'image',
 			) ) );
 
 		// Icon: Favicon
