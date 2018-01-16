@@ -14,7 +14,9 @@
 				{{ include( 'content/loop/results.twig' ) }}
 			{% endfor %}
 
-			{{ include( 'content/pagination/loop.twig' ) }}
+			{% if pagination %}
+				{{ pagination }}
+			{% endif %}
 
 		{% else %}
 

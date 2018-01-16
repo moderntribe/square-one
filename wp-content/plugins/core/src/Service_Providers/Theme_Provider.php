@@ -20,7 +20,6 @@ use Tribe\Project\Theme\Resources\Legacy_Check;
 use Tribe\Project\Theme\Resources\Login_Resources;
 use Tribe\Project\Theme\Resources\Scripts;
 use Tribe\Project\Theme\Resources\Styles;
-use Tribe\Project\Theme\Resources\Template_Tags;
 use Tribe\Project\Theme\Supports;
 use Tribe\Project\Theme\WP_Responsive_Image_Disabler;
 
@@ -210,6 +209,9 @@ class Theme_Provider implements ServiceProviderInterface {
 		$container[ 'theme.resources.scripts' ] = function ( Container $container ) {
 			return new Scripts();
 		};
+		add_action( 'wp_footer', function () use ( $container ) {
+			$container[ 'theme.resources.scripts' ]->add_early_polyfills();
+		}, 10, 0 );
 		add_action( 'wp_enqueue_scripts', function () use ( $container ) {
 			$container[ 'theme.resources.scripts' ]->enqueue_scripts();
 		}, 10, 0 );

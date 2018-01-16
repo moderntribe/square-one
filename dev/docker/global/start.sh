@@ -23,17 +23,10 @@ if [ ! -f "${SCRIPTDIR}/.env" ]; then
 	fi;
 fi;
 
-if [ ! -f "${SCRIPTDIR}/certs/tribeCA.key" ]; then
-	echo "Generating certificate authority"
-
-	openssl req -x509 -new -nodes -sha256 -newkey rsa:4096 -days 3650 \
-		-keyout "${SCRIPTDIR}/certs/tribeCA.key" \
-		-out "${SCRIPTDIR}/certs/tribeCA.pem" \
-		-subj "/C=US/ST=California/L=Santa Cruz/O=Modern Tribe/OU=Dev/CN=tri.be";
-
-	if [[ $OSTYPE == darwin* ]]; then
-		sudo security add-trusted-cert -d -r trustRoot -e hostnameMismatch -k /Library/Keychains/System.keychain "${SCRIPTDIR}/certs/tribeCA.pem";
-	fi;
+# Newer versions of Docker change the Host IP address. Replace in place on start
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    HOSTIP=`docker run -it alpine nslookup docker.for.mac.localhost | grep "Address 1" | awk  '{ print $3 }' | tail -1`
+    perl -pi -e "s/HOSTIP=.*?$/HOSTIP=${HOSTIP}/" "$SCRIPTDIR/.env"
 fi;
 
 if [[ "$OSTYPE" == "darwin"* ]]; then

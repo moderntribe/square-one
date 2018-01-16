@@ -111,16 +111,16 @@ class Fonts {
 
 	}
 
-    private function get_webfont_src() {
-	    return tribe_assets_url( 'theme/js/vendor/webfontloader.js' );
-   	}
+	private function get_webfont_src() {
+		return trailingslashit( get_stylesheet_directory_uri() ) . 'js/vendor/webfontloader.js';
+	}
 
-    /**
-  	 * @return Fonts
-  	 */
-  	public static function instance() {
-  		$container = tribe_project()->container();
+	/**
+	 * @return Fonts
+	 */
+	public static function instance() {
+		$container = tribe_project()->container();
 
-  		return $container['theme.resources.fonts'];
-  	}
+		return $container['theme.resources.fonts'];
+	}
 }

@@ -3,7 +3,10 @@
 namespace Tribe\Project\Templates\Content\Panels;
 
 use Tribe\Project\Panels\Types\PostLoop as PostLoopPanel;
+use Tribe\Project\Templates\Components\Button;
 use Tribe\Project\Templates\Components\Card;
+use Tribe\Project\Templates\Components\Image;
+use Tribe\Project\Theme\Image_Sizes;
 
 class PostLoop extends Panel {
 
@@ -19,13 +22,13 @@ class PostLoop extends Panel {
 		$data = [
 			'title'       => $this->get_title( PostLoopPanel::FIELD_TITLE, [ 'site-section__title', 'h2' ] ),
 			'description' => ! empty( $this->panel_vars[ PostLoopPanel::FIELD_DESCRIPTION ] ) ? $this->panel_vars[ PostLoopPanel::FIELD_DESCRIPTION ] : false,
-			'posts'       => $this->get_the_posts(),
+			'posts'       => $this->get_posts(),
 		];
 
 		return $data;
 	}
 
-	protected function get_the_posts(): array {
+	protected function get_posts(): array {
 		$posts = [];
 
 		if ( ! empty( $this->panel_vars[ PostLoopPanel::FIELD_POSTS ] ) ) {
@@ -34,14 +37,10 @@ class PostLoop extends Panel {
 				$post = $this->panel_vars[ PostLoopPanel::FIELD_POSTS ][ $i ];
 
 				$options = [
-					Card::TITLE     => esc_html( get_the_title( $post['post_id'] ) ),
-					Card::IMAGE     => esc_html( get_post_thumbnail_id( $post['post_id'] ) ),
-					Card::PRE_TITLE => get_the_category_list( '', '', $post['post_id'] ),
-					Card::CTA       => [
-						Card::CTA_URL    => get_the_permalink( $post['post_id'] ),
-						Card::CTA_LABEL  => __( 'View Post', 'tribe' ),
-						Card::CTA_TARGET => '__self',
-					],
+					Card::TITLE     => esc_html( get_the_title( $post[ 'post_id' ] ) ),
+					Card::IMAGE     => $this->get_post_image( get_post_thumbnail_id( $post[ 'post_id' ] ) ),
+					Card::PRE_TITLE => get_the_category_list( '', '', $post[ 'post_id' ] ),
+					Card::BUTTON    => $this->get_post_button( $post[ 'post_id' ] ),
 				];
 
 				$post_obj = Card::factory( $options );
@@ -50,6 +49,36 @@ class PostLoop extends Panel {
 		}
 
 		return $posts;
+	}
+
+	protected function get_post_image( $image_id ) {
+		if ( empty( $image_id ) ) {
+			return false;
+		}
+
+		$options = [
+			Image::IMG_ID       => $image_id,
+			Image::AS_BG        => false,
+			Image::USE_LAZYLOAD => false,
+			Image::ECHO         => false,
+			Image::SRC_SIZE     => Image_Sizes::COMPONENT_CARD,
+		];
+
+		$image_obj = Image::factory( $options );
+
+		return $image_obj->render();
+	}
+
+	protected function get_post_button( $post_id ) {
+		$options = [
+			Button::URL    => esc_url( get_the_permalink( $post_id ) ),
+			Button::LABEL  => __( 'View Post', 'tribe' ),
+			Button::TARGET => '_self',
+		];
+
+		$button_obj = Button::factory( $options );
+
+		return $button_obj->render();
 	}
 
 	public static function instance() {

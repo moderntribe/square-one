@@ -13,11 +13,17 @@ echo '<h2>' . esc_html__( 'User sitemap settings', 'wordpress-seo' ) . '</h2>';
 
 $yform->toggle_switch(
 	'disable_author_sitemap',
-	array( 'off' => __( 'Enabled', 'wordpress-seo' ), 'on' => __( 'Disabled', 'wordpress-seo' ) ),
+	array(
+		'off' => __( 'Enabled', 'wordpress-seo' ),
+		'on'  => __( 'Disabled', 'wordpress-seo' ),
+	),
 	__( 'Author / user sitemap', 'wordpress-seo' )
 );
 
-printf( '<p class="expl">%s</p>', __( 'The user sitemap contains the author archive URLs for every user on your site.', 'wordpress-seo' ) );
+printf(
+	'<p class="expl">%s</p>',
+	esc_html__( 'The user sitemap contains the author archive URLs for every user on your site.', 'wordpress-seo' )
+);
 
 echo '<div id="xml_user_block">';
 
@@ -27,7 +33,10 @@ $switch_values = array(
 );
 $yform->toggle_switch( 'disable_author_noposts', $switch_values, __( 'Users without posts', 'wordpress-seo' ) );
 
-printf( '<p class="expl">%s</p>', __( 'You can choose to not include users without posts.', 'wordpress-seo' ) );
+printf(
+	'<p class="expl">%s</p>',
+	esc_html__( 'You can choose to not include users without posts.', 'wordpress-seo' )
+);
 
 $roles = WPSEO_Utils::get_roles();
 unset( $roles['subscriber'] );

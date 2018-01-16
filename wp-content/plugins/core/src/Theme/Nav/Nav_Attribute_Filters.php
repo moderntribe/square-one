@@ -61,15 +61,26 @@ class Nav_Attribute_Filters {
 			$classes[] = $args[ 'theme_location' ] . '__list-item--is-current';
 		}
 
-		$allowed_class_names = [
-			$args[ 'theme_location' ] . '__list-item',
-			$args[ 'theme_location' ] . '__list-item--depth-' . $depth,
-			$args[ 'theme_location' ] . '__list-item--has-children',
-			$args[ 'theme_location' ] . '__list-item--is-current-parent',
-			$args[ 'theme_location' ] . '__list-item--is-current',
-		];
+		/**
+		 * Filter the array of classes to remove the classes added by WP Core.
+		 * Regex is designed to filter all classes defined in `_wp_menu_item_classes_by_context()`;
+		 */
+		$classes = array_filter( $classes, function ( $class ) {
 
-		return array_intersect( $allowed_class_names, $classes );
+			/**
+			 * Patterns used for matching:
+			 *
+			 * ^menu-item[\w|-]*$         Matches classes that start with `menu-item` and may or may not have additional modifiers.
+			 * ^current[-|_][\w|-]*$      Matches classes that start with `current-` or `current_` and have additional modifiers.
+			 * ^page[-|_]item[\w|-]*$     Matches classes that start with `page-item` or `page_item` and may or may not have additional modifiers.
+			 */
+
+			$pattern = '/^menu-item[\w|-]*$|^current[-|_][\w|-]*$|^page[-|_]item[\w|-]*$/iU';
+
+			return ! preg_match( $pattern, $class );
+		});
+
+		return $classes;
 
 	}
 

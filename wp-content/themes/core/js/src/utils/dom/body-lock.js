@@ -2,7 +2,7 @@ import * as tests from '../tests';
 
 const browser = tests.browserTests();
 let scroll = 0;
-const scroller = browser.edge || browser.ie || browser.firefox ? document.documentElement : document.body;
+const scroller = browser.ie || browser.firefox || (browser.chrome && !browser.edge) ? document.documentElement : document.body;
 
 /**
  * @function lock

@@ -30,6 +30,13 @@ class Legacy_Check {
                 );
             }
 
+            function less_than_ie11() {
+                return (
+                    !window.atob || // IE9 and below
+                    Function('/*@cc_on return document.documentMode===10@*/')() // IE10
+                );
+            }
+
             function not_excluded_page() {
                 return (
                     window.location.href.indexOf("<?php echo $this->unsupported_browser_path; ?>") === - 1 &&
@@ -37,7 +44,7 @@ class Legacy_Check {
                 );
             }
 
-            if (is_browser() && ! window.atob && not_excluded_page()) {
+            if (is_browser() && less_than_ie11() && not_excluded_page()) {
                 window.location = location.protocol + '//' + location.host + '<?php echo $this->unsupported_browser_path; ?>';
             }
         </script>
