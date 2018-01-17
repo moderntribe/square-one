@@ -72,7 +72,7 @@ class P2P_Provider implements ServiceProviderInterface {
 			 * @var Connections $connections
 			 */
 			$connections = tribe_project()->container()['p2p.connections'];
-			$ids = $connections->get_from( 12 );
+			$ids = $connections->get_from( 12, [ 'type' => [ Sample_To_Page::NAME, General_Relationship::NAME ], 'order' => 'ASC', 'orderby' => 'ids' ] );
 
 			foreach ( $ids as $id ) {
 				echo '<h2>' . $id . '</h2>';

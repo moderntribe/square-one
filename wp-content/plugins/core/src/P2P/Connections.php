@@ -30,7 +30,7 @@ class Connections {
 	 * @param int|string $to_id
 	 * @param array $args
 	 *
-	 * $args['type'] => Specify a p2p connection type
+	 * $args['type'] => Specify a p2p connection type or array of types
 	 * $args['order'] => Optionally return results ordered by p2p_id using 'ASC' or 'DESC'
 	 *
 	 * @return array
@@ -81,15 +81,25 @@ class Connections {
 		global $wpdb;
 		$select = esc_sql( $select );
 		$where = esc_sql( $where );
-		$sql = $wpdb->prepare( "SELECT $select FROM {$wpdb->p2p} WHERE $where=%d", $id );
+		$sql = "SELECT $select FROM {$wpdb->p2p}";
+
+		//@TODO: add joins for tax/meta queries on the posts in connections
+
+		$sql .= $wpdb->prepare( " WHERE $where=%d", $id );
 
 		if ( isset( $args['type'] ) ) {
-			$sql .= $wpdb->prepare( " AND p2p_type=%s", $args['type'] );
+			$type = is_array( $args['type'] ) ? ' IN ("' . implode( '","', esc_sql( $args['type'] ) ) . '")' : '="' . esc_sql( $args['type'] ) . '"';
+			$sql .= ' AND p2p_type' . $type;
+		}
+
+		if ( isset( $args['orderby'] ) && $args['orderby'] === 'ids' ) {
+			$orderby = $select;
 		}
 
 		if ( isset( $args['order'] ) ) {
 			$order = esc_sql( $args['order'] );
-			$sql .= " ORDER BY p2p_id $order";
+			$orderby = isset( $orderby ) ? esc_sql( $orderby ) : 'p2p_id';
+			$sql .= " ORDER BY $orderby $order";
 		}
 
 		return $wpdb->get_col( $sql );
