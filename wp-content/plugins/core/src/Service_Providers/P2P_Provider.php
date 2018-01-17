@@ -7,14 +7,17 @@ namespace Tribe\Project\Service_Providers;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Tribe\Project\P2P\Admin_Search_Filtering;
+use Tribe\Project\P2P\Connections;
 use Tribe\Project\P2P\Event_Query_Filters;
 use Tribe\Project\P2P\Panel_Search_Filters;
 use Tribe\Project\P2P\Query_Optimization;
 use Tribe\Project\P2P\Relationships\General_Relationship;
+use Tribe\Project\P2P\Relationships\Sample_To_Page;
 use Tribe\Project\P2P\Titles_Filter;
 use Tribe\Project\Post_Types\Event\Event;
 use Tribe\Project\Post_Types\Page\Page;
 use Tribe\Project\Post_Types\Post\Post;
+use Tribe\Project\Post_Types\Sample\Sample;
 
 /**
  * Class P2P_Provider
@@ -42,11 +45,42 @@ class P2P_Provider implements ServiceProviderInterface {
 				Event::NAME,
 			],
 		],
+		Sample_To_Page::class => [
+			'from' => [
+				Sample::NAME,
+			],
+			'to' => [
+				Page::NAME,
+			],
+		]
 	];
 
 	public function register( Container $container ) {
 		$this->relationships( $container );
 		$this->filters( $container );
+
+		$container['p2p.connections'] = function ( $container ) {
+			return new Connections();
+		};
+
+		////// FOR TESTING WHILE BUILDING P2P CONNECTION
+		////// TO BE REMOVED BEFORE PR
+
+		add_filter( 'the_content', function() {
+			ob_start();
+			/**
+			 * @var Connections $connections
+			 */
+			$connections = tribe_project()->container()['p2p.connections'];
+			$ids = $connections->get_from( 12 );
+
+			foreach ( $ids as $id ) {
+				echo '<h2>' . $id . '</h2>';
+			}
+
+			echo '<h2>' . var_dump( $connections->get_newest_connection( Sample_To_Page::NAME ) ) . '</h2>';
+			return ob_get_clean();
+		});
 	}
 
 	protected function relationships( Container $container ) {
