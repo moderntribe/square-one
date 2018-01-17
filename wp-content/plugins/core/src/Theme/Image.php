@@ -35,6 +35,7 @@ class Image {
 			'link_class'        => '',                // pass link classes
 			'link_target'       => '_self',           // pass a link target
 			'link_title'        => '',                // pass a link title
+			'mime_type'         => '',                // the file mime-type.
 			'parent_fit'        => 'width',           // if lazyloading this combines with object fit css and the object fit polyfill
 			'shim'              => '',                // supply a manually specified shim for lazyloading. Will override auto_shim whether true/false.
 			'src'               => true,              // set to false to disable the src attribute. this is a fallback for non srcset browsers
@@ -116,6 +117,7 @@ class Image {
 			$src_width  = $src[1];
 			$src_height = $src[2];
 			$src        = $src[0];
+			$this->options[ 'mime_type' ] = wp_check_filetype( $src );
 		}
 		$attrs[] = !empty( $this->options[ 'img_attr' ] ) ? trim( $this->options[ 'img_attr' ] ) : '';
 
@@ -170,7 +172,7 @@ class Image {
 					$attrs[] = sprintf( 'sizes="%s"', $this->options[ 'srcset_sizes_attr' ] );
 					$attrs[] = sprintf( 'srcset="%s"', $srcset_urls );
 				}
-				if ( $this->options[ 'use_h&w_attr' ] && $this->options[ 'src' ] ) {
+				if ( $this->options[ 'use_h&w_attr' ] && $this->options[ 'src' ] && 'image/svg' !== $this->options['mime_type']['type']  ) {
 					$attrs[] = sprintf( 'width="%s"', $src_width / 2 );
 					$attrs[] = sprintf( 'height="%s"', $src_height / 2 );
 				}
