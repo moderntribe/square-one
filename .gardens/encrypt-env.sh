@@ -13,7 +13,7 @@ fi
 
 read -p "Please enter a key to encrypt the .env file: " key
 if [ ! -z $key ]; then
-  openssl enc -aes-256-cbc -in .env -out .env.enc -k $key
+  openssl enc -aes-256-cbc -md sha256 -in .env -out .env.enc -k $key
   mv .env.enc .env
   printf "\033[32m\nEncrypted .env file with your new key: $key\033[0m\n"
   printf "\033[33m\nIMPORTANT: Please save these key somewhere safe\n"
