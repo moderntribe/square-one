@@ -48,9 +48,12 @@ class Cache_Prime extends Command {
         }
 
         $html = wp_remote_retrieve_body( $request );
+		if( empty( $html ) ) {
+		    \WP_CLI::error( __( 'Cannot parse HRML', 'tribe' ) );
+        }
 
 		$dom = new \DOMDocument();
-		$dom->loadHTML( $html );
+		$dom->loadHTML( $html, LIBXML_NOWARNING );
 
 		foreach( $dom->getElementsByTagName( 'a' ) as $anchor ) {
 		    if( empty( $anchor->getAttribute( 'href') ) ) {

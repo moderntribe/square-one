@@ -11,11 +11,13 @@
     "pimple/pimple": "~3.0@dev",
     "johnbillion/extended-cpts": "^4.0",
     "twig/twig": "^2.4",
-    "jbzoo/pimpledumper": "^1.2"
+    "jbzoo/pimpledumper": "^1.2",
+    "sunra/php-simple-html-dom-parser": "1.5.2"
   },
   "autoload": {
     "psr-4": {
       "Tribe\\Project\\": "src/",
+      "Sunra\\PhpSimple\\":"vendor/sunra/php-simp[le-html-dom-parser/Src/Sunra/PhpSimple/",
       "Tribe\\Libs\\": "vendor/moderntribe/tribe-libs/src/"
     }
   }
