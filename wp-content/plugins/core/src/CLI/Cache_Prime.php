@@ -1,5 +1,6 @@
 <?php
 namespace Tribe\Project\CLI;
+use Sunra\PhpSimple\HtmlDomParser;
 
 /**
  * A WP-CLI command to manage cache operations. In it's most basic form, it will retrieve URLs on a given page an request them priming page or object caches that may exist.
@@ -36,34 +37,21 @@ class Cache_Prime extends Command {
 			$url = $assoc_args['target-url'];
 		}
 
-
 		if( ! filter_var( $url, FILTER_VALIDATE_URL ) ) {
 			\WP_CLI::error( __( 'If you pass the --target-url argument, it must be a valid URL. Note, if you omit this argument, the home page URL will be used.', 'tribe' ) );
 		}
-
-		// file_get_contents() has a long-known SSL implementation bug. So instead, we use a HTTP request with sslverify off
-        $request = wp_remote_get( $url , [ 'sslverify' => false ] );
-		if( is_wp_error( $request ) ) {
-		    \WP_CLI::error( __( $request->get_error_message(), 'tribe' ) );
+		
+		$request = wp_remote_get( $url );
+		if( 200 !== wp_remote_retrieve_response_code( $request ) ) {
+		    \WP_CLI::error( __( 'URL does not appear to be valid', 'tribe' ) );
         }
+        $html = HtmlDomParser::str_get_html( wp_remote_retrieve_body( $request ) );
 
-        $html = wp_remote_retrieve_body( $request );
-		if( empty( $html ) ) {
-		    \WP_CLI::error( __( 'Cannot parse HRML', 'tribe' ) );
-        }
-
-		$dom = new \DOMDocument();
-		$dom->loadHTML( $html, LIBXML_NOWARNING );
-
-		foreach( $dom->getElementsByTagName( 'a' ) as $anchor ) {
-		    if( empty( $anchor->getAttribute( 'href') ) ) {
-		        continue;
-            }
-
-			$response = wp_remote_get( $anchor->getAttribute( 'href'), [ 'blocking' => false] );
+		foreach( $html->find( 'a' ) as $anchor ) {
+			$response = wp_remote_get( $anchor->href );
 			$http_code = (int) wp_remote_retrieve_response_code( $response );
 			if( 200 === $http_code ) {
-				\WP_CLI::success( esc_attr__( sprintf( '%s has been primed', esc_url( $anchor->getAttribute( 'href') ) ), 'tribe' ) );
+				\WP_CLI::success( esc_attr__( sprintf( '%s has been primed', esc_url( $anchor->href ) ), 'tribe' ) );
 			}
 		}
 
