@@ -29,8 +29,6 @@ class Cache_Prime extends Command {
 
 	public function run_command( $args, $assoc_args ) {
 
-		$url = '';
-
 		if( empty( $assoc_args['target-url'] ) ) {
 			$url = home_url();
 		} else {
@@ -40,7 +38,7 @@ class Cache_Prime extends Command {
 		if( ! filter_var( $url, FILTER_VALIDATE_URL ) ) {
 			\WP_CLI::error( __( 'If you pass the --target-url argument, it must be a valid URL. Note, if you omit this argument, the home page URL will be used.', 'tribe' ) );
 		}
-		
+
 		$request = wp_remote_get( $url );
 		if( 200 !== wp_remote_retrieve_response_code( $request ) ) {
 		    \WP_CLI::error( __( 'URL does not appear to be valid', 'tribe' ) );
