@@ -7,7 +7,8 @@ any piece of meta will be the same, whether you're adding it to a Post, a User, 
 ## Registering Object Meta
 
 The first step to setting up Object Meta is to create the Class that will define the fields for this particular Meta Group. Keep in mind that each Object Meta Class 
-you register will function as an ACF Meta Group; it will be contained in a single metabox and formatted with standard ACF parameters such as position, priority, and layout.
+you register will function as an ACF Meta Group by default; it will be contained in a single metabox and formatted with standard ACF parameters such as position, 
+priority, and layout. For advanced use-cases, this can be overridden by overwriting the base class's `register_group()` method to register more than one Meta Group/metabox.
 
 Object Meta classes should all go in the `core/src/Object_Meta` directory. Since Object Meta can be (and often is) shared amongst multiple Post Types or even Object Types,
 it's always best practice to try to choose a name that is general enough to apply to each context it will be used, but specific enough to make it easy to tell what
@@ -54,7 +55,8 @@ public function get_keys() {
 }
 ```
 
-Note that we simply return an array of the constants we defined for our field keys. 
+Note that we simply return an array of the constants we defined for our field keys. This will allow all of our keys to be exposed to other pieces of the codebase.
+Depending on your needs and what you wish to expose, you may wish to include only a subset of your meta keys in this array.
 
 ### get_group_config()
 
