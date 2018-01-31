@@ -2,6 +2,8 @@
 
 namespace Tribe\Project\Templates\Components;
 
+use Tribe\Project\Twig\Noop_Lazy_Strings;
+
 class Slider extends Component {
 
 	const TEMPLATE_NAME = 'components/slider.twig';
@@ -17,6 +19,7 @@ class Slider extends Component {
 	const SLIDE_CLASSES   = 'slide_classes';
 	const MAIN_ATTRS      = 'main_attrs';
 	const CAROUSEL_ATTRS  = 'carousel_attrs';
+	const LANG            = 'lang';
 
 	protected function parse_options( array $options ): array {
 		$defaults = [
@@ -31,6 +34,7 @@ class Slider extends Component {
 			static::SLIDE_CLASSES   => [],
 			static::MAIN_ATTRS      => [],
 			static::CAROUSEL_ATTRS  => [],
+			static::LANG            => [],
 		];
 
 		return wp_parse_args( $options, $defaults );
@@ -64,9 +68,14 @@ class Slider extends Component {
 			static::WRAPPER_CLASSES => $this->merge_classes( [ 'c-slider__wrapper', 'swiper-wrapper' ], $this->options[ static::WRAPPER_CLASSES ], true ),
 			static::MAIN_ATTRS      => $this->merge_attrs( [ 'data-js' => 'c-slider' ], $this->options[ static::MAIN_ATTRS ], true ),
 			static::CAROUSEL_ATTRS  => $this->merge_attrs( [ 'data-js' => 'c-slider-carousel' ], $this->options[ static::CAROUSEL_ATTRS ], true ),
+			static::LANG            => $this->get_strings(),
 		];
 
 
 		return $data;
+	}
+
+	protected function get_strings() {
+		return new Noop_Lazy_Strings( 'tribe' );
 	}
 }
