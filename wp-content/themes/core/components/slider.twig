@@ -47,7 +47,12 @@ Attributes:
 		<div class="c-slider__carousel swiper-container" {{ carousel_attrs }}>
 			<div class="swiper-wrapper">
 				{% for thumbnail in thumbnails %}
-					<button class="c-slider__thumbnail swiper-slide" data-js="c-slider-thumb-trigger" data-index="{{ loop.index0 }}">
+					<button
+						class="c-slider__thumbnail swiper-slide"
+						data-js="c-slider-thumb-trigger"
+						data-index="{{ loop.index0 }}"
+						aria-label="{{ lang[ 'Go to slide ' ]|esc_attr }}{{ loop.index|esc_attr }}"
+					>
 						{{ thumbnail }}
 					</button>
 				{% endfor %}

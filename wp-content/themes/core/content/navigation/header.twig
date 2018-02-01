@@ -1,8 +1,6 @@
 {% if menu.primary %}
 
-	<nav class="site-header__nav" aria-labelledby="site-header__nav-label">
-
-		<h2 id="site-header__nav-label" class="u-visual-hide">{{ lang[ 'Primary Navigation' ]|esc_html }}</h2>
+	<nav class="site-header__nav" aria-label="{{ lang[ 'Primary Navigation' ]|esc_html }}">
 
 		<ol class="site-header__nav-list">
 			{{ menu.primary }}
