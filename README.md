@@ -57,7 +57,7 @@
   * [Codeception](/docs/tests/codeception.md)
   * [Jest](/docs/tests/jest.md)
 * **Local Dev Envoriment**
-  * [Docker](/dev/docker/readme.md)
+  * [Docker](/dev/docker/README.md)
 
 
 
