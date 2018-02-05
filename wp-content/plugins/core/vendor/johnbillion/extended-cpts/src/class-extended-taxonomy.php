@@ -104,8 +104,17 @@ class Extended_Taxonomy {
 		$this->tax_slug    = strtolower( $this->tax_slug );
 
 		# Build our base taxonomy names:
-		$this->tax_singular_low = strtolower( $this->tax_singular );
-		$this->tax_plural_low   = strtolower( $this->tax_plural );
+		# Lower-casing is not forced if the name looks like an initialism, eg. FAQ.
+		if ( ! preg_match( '/[A-Z]{2,}/', $this->tax_singular ) ) {
+			$this->tax_singular_low = strtolower( $this->tax_singular );
+		} else {
+			$this->tax_singular_low = $this->tax_singular;
+		}
+		if ( ! preg_match( '/[A-Z]{2,}/', $this->tax_plural ) ) {
+			$this->tax_plural_low = strtolower( $this->tax_plural );
+		} else {
+			$this->tax_plural_low = $this->tax_plural;
+		}
 
 		# Build our labels:
 		$this->defaults['labels'] = array(
@@ -130,6 +139,7 @@ class Extended_Taxonomy {
 			'items_list_navigation'      => sprintf( '%s list navigation', $this->tax_plural ),
 			'items_list'                 => sprintf( '%s list', $this->tax_plural ),
 			'most_used'                  => 'Most Used',
+			'back_to_items'              => sprintf( '&larr; Back to %s', $this->tax_plural ),
 			'no_item'                    => sprintf( 'No %s', $this->tax_singular_low ), # Custom label
 		);
 
