@@ -10,7 +10,7 @@ As such, Square one provides the `composer.sh` script that mirrors the native `c
 ## Setting Up Square One
 When you [initially start your docker containers](/dev/docker/README.md) using the `./dev/docker/start.sh` command, composer will look for a `composer-config.json` file in your `dev/docker` directory. This is a specially formatted JSON file used to authenticate against Github for private repo access. If it doesn't exist, you will be prompted to visit a URL on Github that will grant an oAuth token. Copy this token and paste it onto the command line at the prompt, and then create the `composer-config.json` file.
 
-This will automatically also run `composer install` and setup Square One transparently. However, there may be times where, say, a version of WordPress needs to be bumped or a plugin needs updating. Make the change in `composer.json` and run `sh ./dev/docker/composer.sh update`. This will download the updated packages and install in place. It will also upddate the `composer.lock` file which should be committed.
+This will automatically also run `composer install` and setup Square One transparently. However, there may be times where, say, a version of WordPress needs to be bumped or a plugin needs updating. Make the change in `composer.json` and run `sh ./composer.sh update` from inside the `dev/docker` directory. This will download the updated packages and install in place. It will also upddate the `composer.lock` file which should be committed.
 
 
 ##Table of Contents
