@@ -758,16 +758,16 @@
         },
         {
             "name": "mailgun/mailgun-php",
-            "version": "v2.4.0",
+            "version": "2.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mailgun/mailgun-php.git",
-                "reference": "20783215042b181b0dec92c9e01947b93cb5d085"
+                "reference": "ef3dc6b8bf78b1f760da16b6860c4072c798d286"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mailgun/mailgun-php/zipball/20783215042b181b0dec92c9e01947b93cb5d085",
-                "reference": "20783215042b181b0dec92c9e01947b93cb5d085",
+                "url": "https://api.github.com/repos/mailgun/mailgun-php/zipball/ef3dc6b8bf78b1f760da16b6860c4072c798d286",
+                "reference": "ef3dc6b8bf78b1f760da16b6860c4072c798d286",
                 "shasum": ""
             },
             "require": {
@@ -801,7 +801,7 @@
                 }
             ],
             "description": "The Mailgun SDK provides methods for all API functions.",
-            "time": "2017-12-07T21:05:43+00:00"
+            "time": "2018-02-01T22:58:55+00:00"
         },
         {
             "name": "moderntribe/ajax-queue",
@@ -874,12 +874,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:moderntribe/panel-builder.git",
-                "reference": "d3a73633656797b06c7a71f73773ee9b526f8393"
+                "reference": "12ebb7f6b7fd4f5f2bd85739d3b50766feeabc3b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/panel-builder/zipball/d3a73633656797b06c7a71f73773ee9b526f8393",
-                "reference": "d3a73633656797b06c7a71f73773ee9b526f8393",
+                "url": "https://api.github.com/repos/moderntribe/panel-builder/zipball/12ebb7f6b7fd4f5f2bd85739d3b50766feeabc3b",
+                "reference": "12ebb7f6b7fd4f5f2bd85739d3b50766feeabc3b",
                 "shasum": ""
             },
             "require": {
@@ -909,7 +909,7 @@
                 "source": "https://github.com/moderntribe/panel-builder/tree/3.3-branch",
                 "issues": "https://github.com/moderntribe/panel-builder/issues"
             },
-            "time": "2017-12-06T17:00:40+00:00"
+            "time": "2018-01-04T21:53:51+00:00"
         },
         {
             "name": "moderntribe/tribe-libs",
@@ -917,12 +917,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:moderntribe/tribe-libs.git",
-                "reference": "cb02f7afe564ef8c37e7abb896b896c7270fbcb4"
+                "reference": "b282f0be370fcd77865cfad449e5b1756efe17d6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/tribe-libs/zipball/cb02f7afe564ef8c37e7abb896b896c7270fbcb4",
-                "reference": "cb02f7afe564ef8c37e7abb896b896c7270fbcb4",
+                "url": "https://api.github.com/repos/moderntribe/tribe-libs/zipball/b282f0be370fcd77865cfad449e5b1756efe17d6",
+                "reference": "b282f0be370fcd77865cfad449e5b1756efe17d6",
                 "shasum": ""
             },
             "require": {
@@ -942,7 +942,7 @@
                 "source": "https://github.com/moderntribe/tribe-libs/tree/master",
                 "issues": "https://github.com/moderntribe/tribe-libs/issues"
             },
-            "time": "2017-08-04T14:45:41+00:00"
+            "time": "2018-01-17T19:05:36+00:00"
         },
         {
             "name": "mtdowling/jmespath.php",
@@ -1118,16 +1118,16 @@
         },
         {
             "name": "php-http/discovery",
-            "version": "dev-master",
+            "version": "1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/discovery.git",
-                "reference": "0ecc08360e6011a4454dc60077db6e9f412be94c"
+                "reference": "9a6cb24de552bfe1aa9d7d1569e2d49c5b169a33"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/discovery/zipball/0ecc08360e6011a4454dc60077db6e9f412be94c",
-                "reference": "0ecc08360e6011a4454dc60077db6e9f412be94c",
+                "url": "https://api.github.com/repos/php-http/discovery/zipball/9a6cb24de552bfe1aa9d7d1569e2d49c5b169a33",
+                "reference": "9a6cb24de552bfe1aa9d7d1569e2d49c5b169a33",
                 "shasum": ""
             },
             "require": {
@@ -1176,7 +1176,7 @@
                 "message",
                 "psr7"
             ],
-            "time": "2017-11-22T21:17:04+00:00"
+            "time": "2018-02-06T10:55:24+00:00"
         },
         {
             "name": "php-http/httplug",
@@ -1240,12 +1240,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/message.git",
-                "reference": "977edb516e3c0419d3477610b4b718c8a9da1575"
+                "reference": "c7f6a70444057810b418dab14478b01c482d5707"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/message/zipball/977edb516e3c0419d3477610b4b718c8a9da1575",
-                "reference": "977edb516e3c0419d3477610b4b718c8a9da1575",
+                "url": "https://api.github.com/repos/php-http/message/zipball/c7f6a70444057810b418dab14478b01c482d5707",
+                "reference": "c7f6a70444057810b418dab14478b01c482d5707",
                 "shasum": ""
             },
             "require": {
@@ -1304,7 +1304,7 @@
                 "message",
                 "psr-7"
             ],
-            "time": "2017-11-25T06:38:46+00:00"
+            "time": "2018-01-22T17:52:04+00:00"
         },
         {
             "name": "php-http/message-factory",
@@ -1312,12 +1312,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/message-factory.git",
-                "reference": "a2809d4fe294ebe8879aec8d4d5bf21faa029344"
+                "reference": "2494018caaff513d36f9ee4413eece71a22534bc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/message-factory/zipball/a2809d4fe294ebe8879aec8d4d5bf21faa029344",
-                "reference": "a2809d4fe294ebe8879aec8d4d5bf21faa029344",
+                "url": "https://api.github.com/repos/php-http/message-factory/zipball/2494018caaff513d36f9ee4413eece71a22534bc",
+                "reference": "2494018caaff513d36f9ee4413eece71a22534bc",
                 "shasum": ""
             },
             "require": {
@@ -1354,7 +1354,7 @@
                 "stream",
                 "uri"
             ],
-            "time": "2016-02-03T08:16:31+00:00"
+            "time": "2018-01-04T12:23:13+00:00"
         },
         {
             "name": "php-http/multipart-stream-builder",
@@ -1469,12 +1469,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/silexphp/Pimple.git",
-                "reference": "b5e5c1809fc323428715aa6a66ddca180e0adc0f"
+                "reference": "77e63f56742802485f0ac90f34da3dc3c3f775f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silexphp/Pimple/zipball/b5e5c1809fc323428715aa6a66ddca180e0adc0f",
-                "reference": "b5e5c1809fc323428715aa6a66ddca180e0adc0f",
+                "url": "https://api.github.com/repos/silexphp/Pimple/zipball/77e63f56742802485f0ac90f34da3dc3c3f775f6",
+                "reference": "77e63f56742802485f0ac90f34da3dc3c3f775f6",
                 "shasum": ""
             },
             "require": {
@@ -1511,7 +1511,7 @@
                 "container",
                 "dependency injection"
             ],
-            "time": "2017-08-23T11:42:00+00:00"
+            "time": "2018-01-21T10:38:34+00:00"
         },
         {
             "name": "psr/container",
@@ -1618,12 +1618,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/options-resolver.git",
-                "reference": "4576693efc58c022c3fe9f144aa61d204c86ad2c"
+                "reference": "f3109a6aedd20e35c3a33190e932c2b063b7b50e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/options-resolver/zipball/4576693efc58c022c3fe9f144aa61d204c86ad2c",
-                "reference": "4576693efc58c022c3fe9f144aa61d204c86ad2c",
+                "url": "https://api.github.com/repos/symfony/options-resolver/zipball/f3109a6aedd20e35c3a33190e932c2b063b7b50e",
+                "reference": "f3109a6aedd20e35c3a33190e932c2b063b7b50e",
                 "shasum": ""
             },
             "require": {
@@ -1664,7 +1664,7 @@
                 "configuration",
                 "options"
             ],
-            "time": "2017-12-14T19:40:10+00:00"
+            "time": "2018-01-11T07:56:07+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -1672,12 +1672,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "750a2b259dd68436e3b918a4241e80b023a80663"
+                "reference": "78be803ce01e55d3491c1397cf1c64beb9c1b63b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/750a2b259dd68436e3b918a4241e80b023a80663",
-                "reference": "750a2b259dd68436e3b918a4241e80b023a80663",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/78be803ce01e55d3491c1397cf1c64beb9c1b63b",
+                "reference": "78be803ce01e55d3491c1397cf1c64beb9c1b63b",
                 "shasum": ""
             },
             "require": {
@@ -1689,7 +1689,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.6-dev"
+                    "dev-master": "1.7-dev"
                 }
             },
             "autoload": {
@@ -1723,7 +1723,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2017-12-17T16:08:10+00:00"
+            "time": "2018-01-30T19:27:44+00:00"
         },
         {
             "name": "twig/twig",
@@ -1731,12 +1731,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "0b9a64d842bf7f15c9f3964909100a6663e97db2"
+                "reference": "45990c3644032f255824a6a3819ba5d828236eef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/0b9a64d842bf7f15c9f3964909100a6663e97db2",
-                "reference": "0b9a64d842bf7f15c9f3964909100a6663e97db2",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/45990c3644032f255824a6a3819ba5d828236eef",
+                "reference": "45990c3644032f255824a6a3819ba5d828236eef",
                 "shasum": ""
             },
             "require": {
@@ -1789,7 +1789,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2017-11-12T18:48:08+00:00"
+            "time": "2018-01-30T13:51:48+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -1847,12 +1847,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/webmozart/assert.git",
-                "reference": "4a8bf11547e139e77b651365113fc12850c43d9a"
+                "reference": "0df1908962e7a3071564e857d86874dad1ef204a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webmozart/assert/zipball/4a8bf11547e139e77b651365113fc12850c43d9a",
-                "reference": "4a8bf11547e139e77b651365113fc12850c43d9a",
+                "url": "https://api.github.com/repos/webmozart/assert/zipball/0df1908962e7a3071564e857d86874dad1ef204a",
+                "reference": "0df1908962e7a3071564e857d86874dad1ef204a",
                 "shasum": ""
             },
             "require": {
@@ -1889,7 +1889,7 @@
                 "check",
                 "validate"
             ],
-            "time": "2016-11-23T20:04:41+00:00"
+            "time": "2018-01-29T19:49:41+00:00"
         },
         {
             "name": "wpackagist-plugin/configure-smtp",
