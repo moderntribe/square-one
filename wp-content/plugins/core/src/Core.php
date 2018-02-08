@@ -8,6 +8,7 @@ use Tribe\Project\Service_Providers\Admin_Provider;
 use Tribe\Project\Service_Providers\Asset_Provider;
 use Tribe\Project\Service_Providers\Cache_Provider;
 use Tribe\Project\Service_Providers\CLI_Provider;
+use Tribe\Project\Service_Providers\Content_Provider;
 use Tribe\Project\Service_Providers\Object_Meta_Provider;
 use Tribe\Project\Service_Providers\Nav_Menu_Provider;
 use Tribe\Project\Service_Providers\Panels_Provider;
@@ -71,6 +72,7 @@ class Core {
 		$this->container->register( new Twig_Service_Provider() );
 		$this->container->register( new Shortcode_Provider() );
 		$this->container->register( new Object_Meta_Provider() );
+		$this->container->register( new Content_Provider() );
 		$this->container->register( new CLI_Provider() );
 
 		$this->load_post_type_providers();
