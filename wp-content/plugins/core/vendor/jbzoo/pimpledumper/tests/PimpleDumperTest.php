@@ -33,7 +33,13 @@ class PimpleDumperTest extends PHPUnit
 
         $file = PROJECT_ROOT . '/.phpstorm.meta.php';
         if (file_exists($file)) {
-            unlink($file);
+            if (is_dir($file)) {
+                unlink($file . DIRECTORY_SEPARATOR . 'pimple.meta.php');
+                rmdir($file);
+            }
+            else {
+                unlink($file);
+            }
         }
     }
 
@@ -186,6 +192,19 @@ class PimpleDumperTest extends PHPUnit
 
     public function testPhpstorm()
     {
+        $pimple = new Container();
+        $dumper = new PimpleDumper();
+
+        $pimple['f_class'] = function () {
+            return new \stdClass();
+        };
+
+        isFile($dumper->dumpPhpstorm($pimple));
+    }
+
+    public function testPhpstormFile()
+    {
+        mkdir('.phpstorm.meta.php');
         $pimple = new Container();
         $dumper = new PimpleDumper();
 

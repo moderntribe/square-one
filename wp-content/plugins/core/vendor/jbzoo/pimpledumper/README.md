@@ -6,7 +6,7 @@
 
 ### Install
 ```sh
-composer require jbzoo/pimpledumper:"1.x-dev"
+composer require jbzoo/pimpledumper
 ```
 
 Install and activate [Silex Plugin](https://plugins.jetbrains.com/plugin/7809?pr=) in PhpStorm settings
@@ -80,8 +80,8 @@ namespace PHPSTORM_META {
 
 ### Unit tests and check code style
 ```sh
-composer update-all
-composer test
+make
+make test-all
 ```
 
 

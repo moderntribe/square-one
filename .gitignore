@@ -107,5 +107,4 @@ dev/deploy/.deploy
 /.garden-*
 /.env
 /vendor
-/composer.lock
 dev/docker/global/.env

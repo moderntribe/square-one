@@ -37,7 +37,7 @@
     * [Container / Core.php](/docs/backend/container.md)
     * [Custom Post Types](/docs/backend/post-types.md)
     * [Custom Taxonomies](/docs/backend/taxonomies.md)
-    * [Post & Taxonomy Meta](/docs/backend/post-meta.md)
+    * [Object Meta](/docs/backend/object-meta.md)
     * [Service Providers](/docs/backend/service-providers.md)
     * [Template Controllers](/docs/backend/data.md)
     * [CLI](/docs/backend/cli.md)

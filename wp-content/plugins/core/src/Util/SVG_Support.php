@@ -2,7 +2,6 @@
 
 namespace Tribe\Project\Util;
 
-
 class SVG_Support {
 
 	/**
