@@ -43,10 +43,10 @@ if ( ! function_exists( 'yoast_breadcrumb' ) ) {
 
 if ( ! function_exists( 'yoast_get_primary_term_id' ) ) {
 	/**
-	 * Get the primary term ID
+	 * Get the primary term ID.
 	 *
 	 * @param string           $taxonomy Optional. The taxonomy to get the primary term ID for. Defaults to category.
-	 * @param null|int|WP_Post $post Optional. Post to get the primary term ID for.
+	 * @param null|int|WP_Post $post     Optional. Post to get the primary term ID for.
 	 *
 	 * @return bool|int
 	 */
@@ -60,10 +60,10 @@ if ( ! function_exists( 'yoast_get_primary_term_id' ) ) {
 
 if ( ! function_exists( 'yoast_get_primary_term' ) ) {
 	/**
-	 * Get the primary term name
+	 * Get the primary term name.
 	 *
 	 * @param string           $taxonomy Optional. The taxonomy to get the primary term for. Defaults to category.
-	 * @param null|int|WP_Post $post Optional. Post to get the primary term for.
+	 * @param null|int|WP_Post $post     Optional. Post to get the primary term for.
 	 *
 	 * @return string Name of the primary term.
 	 */
@@ -80,66 +80,22 @@ if ( ! function_exists( 'yoast_get_primary_term' ) ) {
 }
 
 /**
- * Add the bulk edit capability to the proper default roles.
- */
-function wpseo_add_capabilities() {
-	$roles = array(
-		'administrator',
-		'editor',
-	);
-
-	$roles = apply_filters( 'wpseo_bulk_edit_roles', $roles );
-
-	foreach ( $roles as $role ) {
-		$r = get_role( $role );
-		if ( $r ) {
-			$r->add_cap( 'wpseo_bulk_edit' );
-		}
-	}
-}
-
-
-/**
- * Remove the bulk edit capability from the proper default roles.
+ * Replace `%%variable_placeholders%%` with their real value based on the current requested page/post/cpt.
  *
- * Contributor is still removed for legacy reasons.
- */
-function wpseo_remove_capabilities() {
-	$roles = array(
-		'administrator',
-		'editor',
-		'author',
-		'contributor',
-	);
-
-	$roles = apply_filters( 'wpseo_bulk_edit_roles', $roles );
-
-	foreach ( $roles as $role ) {
-		$r = get_role( $role );
-		if ( $r ) {
-			$r->remove_cap( 'wpseo_bulk_edit' );
-		}
-	}
-}
-
-
-/**
- * Replace `%%variable_placeholders%%` with their real value based on the current requested page/post/cpt
- *
- * @param string $string the string to replace the variables in.
- * @param object $args   the object some of the replacement values might come from, could be a post, taxonomy or term.
- * @param array  $omit   variables that should not be replaced by this function.
+ * @param string $string The string to replace the variables in.
+ * @param object $args   The object some of the replacement values might come from, could be a post, taxonomy or term.
+ * @param array  $omit   Variables that should not be replaced by this function.
  *
  * @return string
  */
 function wpseo_replace_vars( $string, $args, $omit = array() ) {
-	$replacer = new WPSEO_Replace_Vars;
+	$replacer = new WPSEO_Replace_Vars();
 
 	return $replacer->replace( $string, $args, $omit );
 }
 
 /**
- * Register a new variable replacement
+ * Register a new variable replacement.
  *
  * This function is for use by other plugins/themes to easily add their own additional variables to replace.
  * This function should be called from a function on the 'wpseo_register_extra_replacements' action hook.
@@ -179,7 +135,7 @@ function wpseo_replace_vars( $string, $args, $omit = array() ) {
  * @param  string $type             Type of variable: 'basic' or 'advanced', defaults to 'advanced'.
  * @param  string $help_text        Help text to be added to the help tab for this variable.
  *
- * @return bool  Whether the replacement function was succesfully registered
+ * @return bool  Whether the replacement function was succesfully registered.
  */
 function wpseo_register_var_replacement( $var, $replace_function, $type = 'advanced', $help_text = '' ) {
 	return WPSEO_Replace_Vars::register_replacement( $var, $replace_function, $type, $help_text );
@@ -235,7 +191,7 @@ function wpseo_wpml_config( $config ) {
 add_filter( 'icl_wpml_config_array', 'wpseo_wpml_config' );
 
 /**
- * Yoast SEO breadcrumb shortcode
+ * Yoast SEO breadcrumb shortcode.
  * [wpseo_breadcrumb]
  *
  * @return string
@@ -247,8 +203,8 @@ function wpseo_shortcode_yoast_breadcrumb() {
 add_shortcode( 'wpseo_breadcrumb', 'wpseo_shortcode_yoast_breadcrumb' );
 
 /**
- * Emulate PHP native ctype_digit() function for when the ctype extension would be disabled *sigh*
- * Only emulates the behaviour for when the input is a string, does not handle integer input as ascii value
+ * Emulate PHP native ctype_digit() function for when the ctype extension would be disabled *sigh*.
+ * Only emulates the behaviour for when the input is a string, does not handle integer input as ascii value.
  *
  * @param    string $string
  *

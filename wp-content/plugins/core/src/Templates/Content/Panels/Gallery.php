@@ -18,7 +18,7 @@ class Gallery extends Panel {
 
 	public function get_mapped_panel_data(): array {
 		$data = [
-			'title'  => $this->get_title( GalleryPanel::FIELD_TITLE, [ 'section__title' ] ),
+			'title'  => $this->get_title( $this->panel_vars[ GalleryPanel::FIELD_TITLE ], [ 'section__title' ] ),
 			'slider' => $this->get_slider(),
 		];
 

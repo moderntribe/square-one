@@ -22,6 +22,7 @@ class Force_Plugin_Activation {
 		'limit-login-attempts/limit-login-attempts.php',
 		'panel-builder/tribe-panel-builder.php',
 		'tribe-admin-dashboard/tribe-admin-dashboard.php',
+		'tribe-branding/tribe-branding.php',
 	);
 
 	/**
@@ -82,12 +83,17 @@ class Force_Plugin_Activation {
 	/**
 	 * Enforce the active/deactive plugin rules
 	 *
-	 * @param array $plugins
+	 * @param array|bool $plugins
 	 *
-	 * @return array
+	 * @return array|bool
 	 */
 	function force_plugins( $plugins ) {
-
+		/*
+		 * Occasionally it seems a boolean can be passed in here.
+		 */
+		if ( ! is_array( $plugins ) ) {
+			return $plugins;
+		}
 		/*
 		 * WordPress works in mysterious ways
 		 * active_plugins has the plugin paths as array key and a number as value

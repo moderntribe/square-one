@@ -9,7 +9,6 @@ class ContentSlider extends Panel_Type_Config {
 	const NAME = 'content-slider';
 
 	const FIELD_TITLE         = 'title';
-	const FIELD_DESCRIPTION   = 'description';
 	const FIELD_SLIDES        = 'slides';
 	const FIELD_SLIDE_IMAGE   = 'slide_img';
 	const FIELD_SLIDE_TITLE   = 'slide_title';
@@ -25,13 +24,13 @@ class ContentSlider extends Panel_Type_Config {
 		$panel->set_thumbnail( $this->handler->thumbnail_url( 'slider.svg' ) );
 
 		$panel->add_field( new Fields\Text( [
-			'name'     => self::FIELD_TITLE,
-			'label'    => __( 'Title', 'tribe' ),
+			'name'        => self::FIELD_TITLE,
+			'label'       => __( 'Title', 'tribe' ),
 			'description' => __( 'Title does not display on the front-end of the website.', 'tribe' ),
 		] ) );
 
 		$slides = new Fields\Repeater( [
-			'label'            => __( 'Logos', 'tribe' ),
+			'label'            => __( 'Slides', 'tribe' ),
 			'name'             => self::FIELD_SLIDES,
 			'min'              => 2,
 			'max'              => 5,
@@ -62,7 +61,7 @@ class ContentSlider extends Panel_Type_Config {
 
 		$slides->add_field( new Fields\Link( [
 			'name'  => self::FIELD_SLIDE_CTA,
-			'label' => __( 'Logo Link', 'tribe' ),
+			'label' => __( 'Link', 'tribe' ),
 		] ) );
 
 		$panel->add_field( $slides );

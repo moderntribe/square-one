@@ -26,8 +26,10 @@ class WPSEO_Configuration_Storage {
 			new WPSEO_Config_Field_Environment(),
 			new WPSEO_Config_Field_Site_Type(),
 			new WPSEO_Config_Field_Multiple_Authors(),
+			new WPSEO_Config_Field_Title_Intro(),
 			new WPSEO_Config_Field_Site_Name(),
 			new WPSEO_Config_Field_Separator(),
+			new WPSEO_Config_Field_Google_Search_Console_Intro(),
 			new WPSEO_Config_Field_Social_Profiles_Intro(),
 			new WPSEO_Config_Field_Profile_URL_Facebook(),
 			new WPSEO_Config_Field_Profile_URL_Twitter(),
@@ -45,7 +47,7 @@ class WPSEO_Configuration_Storage {
 		);
 
 		$post_type_factory = new WPSEO_Config_Factory_Post_Type();
-		$fields = array_merge( $fields, $post_type_factory->get_fields() );
+		$fields            = array_merge( $fields, $post_type_factory->get_fields() );
 
 		foreach ( $fields as $field ) {
 			$this->add_field( $field );

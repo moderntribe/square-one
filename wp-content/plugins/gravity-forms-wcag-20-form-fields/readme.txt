@@ -2,9 +2,9 @@
 Contributors: ovann86
 Donate link: https://www.itsupportguides.com/donate/
 Tags: gravity forms, wcag, accessibility, usability
-Requires at least: 4.1
-Tested up to: 4.7.0
-Stable tag: 1.5.1
+Requires at least: 4.7
+Tested up to: 4.8
+Stable tag: 1.6.0
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -19,7 +19,6 @@ Modifies Gravity Forms form fields and improves validation so that forms meet WC
 * Wraps radio, checkbox and list (repeater) fields in a fieldset.
 * Improves form validation by displaying an on-page message that describes how many errors there were in the page. The message contains a list of the form fields with the errors, a description of the error and a link to the field.
 * Adds aria-describedby attributes for date and website fields - providing clear instructions for screen reader users of what format is required for the field.
-* Adds aria-required='true' for required fields
 * Adds aria-describedby attributes for fields that have failed validation - providing clear instructions for screen reader users of what the field error is. Description used is the default validation message for the field, or if set, the validation message for the field.
 * Disables the Gravity Forms configured tabindex - this stops users from being able to tab between fields and on-page links.
 * Changes links in the form body, such as field descriptions or HTML fields, so they open in a new window. A title is added or appended to any existing title for screen reader users which reads 'this link will open in a new window'.
@@ -114,6 +113,11 @@ With that said, if you want to disable it you can add this code to your theme's 
 2. Shows list field with 'buttons' instead of images to add and delete rows - buttons are styled like the previous images but are keyboard accessible. 
 
 == Changelog ==
+
+= 1.6.0 =
+* Fix: make radio 'other' option accessible by applying hidden label to both the radio and input fields.
+* Maintenance: remove redundant aria-required changes, now provided natively in Gravity Forms.
+* Maintenance: Change how plugin detects if Gravity Forms is installed and active.
 
 = 1.5.1 =
 * Fix: resolve issue with radio field 'other' option displaying inconsistently.

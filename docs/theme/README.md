@@ -19,6 +19,7 @@ For your system setup you must define `SCRIPT_DEBUG` as true in your `local-conf
 
 * Theme
   * [Overview](/docs/theme/README.md)
+  * [Videos](/docs/theme/videos.md)
   * [Markup and Style](/docs/theme/markup-and-style.md)
   * [Accessibility](/docs/theme/accessbility.md)
   * [Image Handling](/docs/theme/images.md)
@@ -32,6 +33,8 @@ For your system setup you must define `SCRIPT_DEBUG` as true in your `local-conf
     * [Forms](/docs/theme/css/forms.md)
   * Javascript
     * [Overview](/docs/theme/js/README.md)
+    * [Code Splitting](/docs/theme/js/code-splitting.md)
+    * [Polyfills](/docs/theme/js/polyfills.md)
     * [Selectors](/docs/theme/js/selectors.md)
     * [Events](/docs/theme/js/events.md)
     * [Jquery](/docs/theme/js/jquery.md)
