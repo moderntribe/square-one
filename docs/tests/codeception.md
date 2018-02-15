@@ -12,7 +12,7 @@
     composer install --ignore-platform-reqs
     ```
     
-3. Change /tests-config-sample.php to /tests-config.php
+3. Copy /tests-config-sample.php to /tests-config.php
  - You will want to create a blank tests database, usually projectname_tests
  - Adjust the database name in your tests-config.php file to the tests db
 
