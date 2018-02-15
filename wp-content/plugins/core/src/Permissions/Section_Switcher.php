@@ -4,6 +4,7 @@
 namespace Tribe\Project\Permissions;
 
 
+use Tribe\Project\Permissions\Object_Meta\Default_Section;
 use Tribe\Project\Permissions\Object_Meta\Section_Properties;
 use Tribe\Project\Permissions\Taxonomies\Section\Section;
 use Tribe\Project\Permissions\Users\User;
@@ -30,8 +31,35 @@ class Section_Switcher {
 			wp_die( __( 'You are not a member of this section. Please ask an administrator if you think you should have access', 'tribe' ) );
 		}
 		update_user_option( $wp_user->ID, self::FIELD_NAME, $selection );
-		wp_safe_redirect( $_POST[ '_wp_http_referer' ] ?? admin_url() );
+		$redirect = $this->get_redirect_after_switch( $section, $_POST );
+		wp_safe_redirect( $redirect );
 		exit();
+	}
+
+	private function get_redirect_after_switch( Section $sction, $submission ) {
+		if ( empty( $_POST[ '_wp_http_referer' ] ) ) {
+			return admin_url();
+		}
+		$parsed = parse_url( $_POST[ '_wp_http_referer' ] );
+		if ( empty( $parsed[ 'path' ] ) ) {
+			return admin_url();
+		}
+		// if a single post admin, redirect to the list for that post type
+		if ( $parsed[ 'path' ] == '/wp-admin/post.php' ) {
+			parse_str( $parsed[ 'query' ], $query );
+			$post_id = $query[ 'post' ] ?? 0;
+			if ( $post_id ) {
+				switch( get_post_type( $post_id ) ) {
+					case 'post':
+						return admin_url( 'edit.php' );
+					default:
+						return add_query_arg( [ 'post_type' => get_post_type( $post_id ) ], admin_url( 'edit.php' ) );
+				}
+			} else {
+				return admin_url();
+			}
+		}
+		return $_POST[ '_wp_http_referer' ];
 	}
 
 	/**
@@ -182,5 +210,33 @@ class Section_Switcher {
 			$item[4] .= ' menu-tribe-content';
 		}
 		return $menu;
+	}
+
+	/**
+	 * If the user doesn't have a current section set, set one
+	 *
+	 * @return void
+	 * @action admin_init
+	 */
+	public function set_default_section_on_login() {
+		$current_user = wp_get_current_user();
+		$current_section = get_user_option( self::FIELD_NAME, $current_user->ID );
+		if ( ! empty( $current_section ) ) {
+			return;
+		}
+		$default = (int) get_option( Default_Section::TERM_ID, 0 );
+		$sections     = $this->get_section_list( $current_user );
+		if ( empty( $sections ) ) {
+			return; // nothing we can do
+		}
+		$found_default = array_filter( $sections, function( $term ) use ( $default ) {
+			return $term->term_id == $default;
+		});
+		if ( ! empty( $found_default ) ) {
+			update_user_option( $current_user->ID, self::FIELD_NAME, $default );
+			return;
+		}
+		$first = reset( $sections );
+		update_user_option( $current_user->ID, self::FIELD_NAME, $first->term_id );
 	}
 }

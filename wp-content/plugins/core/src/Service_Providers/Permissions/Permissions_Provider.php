@@ -153,6 +153,10 @@ class Permissions_Provider implements ServiceProviderInterface {
 		add_filter( 'add_menu_classes', function ( $menu ) use ( $container ) {
 			return $container[ self::SECTION_SWITCHER ]->add_menu_classes( $menu );
 		}, 10, 1 );
+
+		add_action( 'admin_init', function() use ( $container ) {
+			return $container[ self::SECTION_SWITCHER ]->set_default_section_on_login();
+		}, 10, 1 );
 	}
 
 	private function section_assigner( Container $container ) {
