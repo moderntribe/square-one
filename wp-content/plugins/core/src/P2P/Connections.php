@@ -53,6 +53,30 @@ class Connections {
 	}
 
 	/**
+	 * @param string $meta_key
+	 * @param string|bool $meta_value
+	 * @param array $args
+	 *
+	 * @return array|null|object
+	 */
+	public function get_connections_by_p2p_meta( $meta_key, $meta_value = false, $args = [] ) {
+		global $wpdb;
+		$sql = $wpdb->prepare( "SELECT * FROM {$wpdb->p2p} LEFT JOIN {$wpdb->p2pmeta} AS p2pm ON p2pm.meta_key=%s", $meta_key );
+
+		if ( ! empty( $meta_value ) ) {
+			$sql .= $wpdb->prepare( " AND p2pm.meta_value=%s", $meta_value );
+		}
+
+		$sql .= "WHERE {$wpdb->p2p}.p2p_id = p2pm.p2p_id";
+
+		if ( isset( $args['type'] ) ) {
+			$sql .= $wpdb->prepare( " AND {$wpdb->p2p}.p2p_type=%s", $args['type'] );
+		}
+
+		return $wpdb->get_results( $sql );
+	}
+
+	/**
 	 * Grab the newest connection made for a p2p_type
 	 *
 	 * @param $p2p_type
@@ -81,7 +105,6 @@ class Connections {
 	private function get_ids( $direction, $where, $id, $args = [] ) {
 		global $wpdb;
 		$direction = esc_sql( $direction );
-		$where = esc_sql( $where );
 		$sql = "SELECT $direction FROM {$wpdb->p2p}";
 
 		if ( isset( $args['meta']['key'] ) ) {
@@ -89,6 +112,7 @@ class Connections {
 			$sql .= ' ' . $this->prepare_meta_join( $direction, $args['meta']['key'], $value );
 		}
 
+		$where = esc_sql( $where );
 		$sql .= apply_filters( 'tribe_p2p_where_sql', $wpdb->prepare( " WHERE $where=%d", $id ) );
 
 		/** Set the connection type (relationship) */
@@ -126,8 +150,6 @@ class Connections {
 		global $wpdb;
 
 		$direction = esc_sql( $direction );
-		$meta_key = esc_sql( $meta_key );
-		$meta_value = esc_sql( $meta_value );
 		$join = $wpdb->prepare( "
 			LEFT JOIN {$wpdb->postmeta} AS pm
 			ON {$wpdb->p2p}.$direction = pm.post_id AND pm.meta_key=%s

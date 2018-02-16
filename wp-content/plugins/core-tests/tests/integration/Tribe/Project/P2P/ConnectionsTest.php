@@ -16,6 +16,7 @@ use Codeception\TestCase\WPTestCase;
 class ConnectionsTest extends WPTestCase {
 
 	const META_KEY = 'test_meta_key';
+	const META_VALUE = 'test meta value';
 
 	private $connection_id;
 	private $connection_2_id;
@@ -45,12 +46,14 @@ class ConnectionsTest extends WPTestCase {
 			'post_type' => Page::NAME,
 		] );
 
-		add_post_meta( $this->page_2_id, self::META_KEY, 'test meta value' );
+		add_post_meta( $this->page_2_id, self::META_KEY, self::META_VALUE );
 
 		$connect = [ 'from' => $this->sample_id, 'to' => $this->page_id ];
 		$this->connection_id = p2p_create_connection( Sample_To_Page::NAME, $connect );
 		$connect = [ 'from' => $this->sample_id, 'to' => $this->page_2_id ];
 		$this->connection_2_id = p2p_create_connection( Sample_To_Page::NAME, $connect );
+
+		p2p_add_meta( $this->connection_2_id, self::META_KEY, self::META_VALUE );
 	}
 
 	public function tearDown() {
@@ -73,15 +76,14 @@ class ConnectionsTest extends WPTestCase {
 			]
 		);
 
-		ob_start();
-		var_dump( $ids );
-		codecept_debug( ob_get_clean() );
-
 		$this->assertTrue( count( $ids ) === 2 );
 		$this->assertTrue( $this->page_id === $ids[0] );
 		$this->assertTrue( $this->page_2_id === $ids[1] );
 	}
 
+	/**
+	 * Test getting id's from p2p with requirements on post meta
+	 */
 	public function test_get_meta_connection() {
 		$connections = tribe_project()->container()['p2p.connections'];
 		$ids = $connections->get_from(
@@ -96,15 +98,24 @@ class ConnectionsTest extends WPTestCase {
 			]
 		);
 
-		ob_start();
-		var_dump( $this->page_2_id, $ids );
-		codecept_debug( ob_get_clean() );
-
 		$this->assertTrue( $this->page_2_id === $ids[0] );
 	}
 
-	public function test_setup_multiple_type_connections() {
+	/**
+	 * Test getting connections based on p2p meta
+	 */
+	public function test_get_connections_by_p2p_meta() {
+		$connections = tribe_project()->container()['p2p.connections'];
+		$results = $connections->get_connections_by_p2p_meta( self::META_KEY );
 
+		$this->assertTrue( $this->connection_2_id === (int) $results[0]->p2p_id );
+
+		$results = $connections->get_connections_by_p2p_meta( self::META_KEY, self::META_VALUE );
+
+		$this->assertTrue( $this->connection_2_id === (int) $results[0]->p2p_id );
+
+		$results = $connections->get_connections_by_p2p_meta( self::META_KEY, 'not a meta value' );
+		$this->assertEmpty( $results );
 	}
 
 }
