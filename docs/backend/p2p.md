@@ -127,4 +127,22 @@ In both the get_from() and get_to methods the 2nd $args parameter has some usefu
 - **type**: This can be a string of a single connection type or an array of multiple connection types
 - **order**: This can be set to 'ASC' or 'DESC' and will order by the p2p_id field unless specified in orderby
 - **orderby**: This can be set to 'ids' to sort by the resulting ids from the query
+- **meta**: This is an array that can return only results that have a specific meta key and optionally a value for that key
+
+Here's an example using the meta arguments
+
+```php
+$p2p = tribe_project()->container['p2p.connections'];
+$args = [
+    'type' => Sample_To_Page::NAME,
+    'meta' => [
+        'key' => 'some_meta_key',
+        'value' => 'optional meta value',
+    ],
+];
+$page_ids = $p2p->get_from( $post_id, $args );
+
+foreach( $page_ids as $page_id ) {
+...
+```
 
