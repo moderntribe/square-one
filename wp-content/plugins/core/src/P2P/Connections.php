@@ -7,10 +7,10 @@ namespace Tribe\Project\P2P;
  * @package Tribe\Project\P2P
  *
  * Connections is a class of helper functions for extracting p2p data while bypassing some of the more complex
- * methods need using the native p2p functionality.
+ * methods needed for using the native p2p functionality.
  *
  * These methods should be used for simple needs.  If building complicated p2p integration make sure there's
- * no standard methodoligy.  If simply needing some connections and post ids this will allow you to bypass
+ * no standard methodology.  If simply needing some connections and post ids this will allow you to bypass
  * some of the more complex query building and filtering that p2p core does when using functionality like
  *
  * new WP_Query( [ 'connected_type' => ####, 'connected_items' => get_queried_object() ] );
@@ -32,10 +32,11 @@ class Connections {
 	 *
 	 * $args['type'] => Specify a p2p connection type or array of types
 	 * $args['order'] => Optionally return results ordered by p2p_id using 'ASC' or 'DESC'
+	 * $args['meta'] => Optional array with key & optional value to filter results [ 'key' => '###', 'value' => '###' ]
 	 *
 	 * @return array
 	 */
-	public function get_from( $to_id, $args = [] ) : array {
+	public function get_from( $to_id, $args = [] ) {
 		return $this->get_ids( 'p2p_to', 'p2p_from', $to_id, $args );
 	}
 
@@ -47,7 +48,7 @@ class Connections {
 	 *
 	 * @return array
 	 */
-	public function get_to( $from_id, $args = [] ) : array {
+	public function get_to( $from_id, $args = [] ) {
 		return $this->get_ids( 'p2p_from', 'p2p_to', $from_id, $args );
 	}
 
@@ -58,7 +59,7 @@ class Connections {
 	 *
 	 * @return array
 	 */
-	public function get_newest_connection( $p2p_type ) : array {
+	public function get_newest_connection( $p2p_type ) {
 		global $wpdb;
 		$sql = $wpdb->prepare( "SELECT * FROM {$wpdb->p2p} WHERE p2p_type=%s ORDER BY p2p_id DESC LIMIT 1", $p2p_type );
 
@@ -70,39 +71,79 @@ class Connections {
 	//////////////////////////////////////
 
 	/**
-	 * @param $select
-	 * @param $where
-	 * @param $id
+	 * @param string $direction 'p2p_to' or 'p2p_from'
+	 * @param string $where 'p2p_to' or 'p2p_from'
+	 * @param string $id
 	 * @param array $args
 	 *
 	 * @return array
 	 */
-	private function get_ids( $select, $where, $id, $args = [] ) : array {
+	private function get_ids( $direction, $where, $id, $args = [] ) {
 		global $wpdb;
-		$select = esc_sql( $select );
+		$direction = esc_sql( $direction );
 		$where = esc_sql( $where );
-		$sql = "SELECT $select FROM {$wpdb->p2p}";
+		$sql = "SELECT $direction FROM {$wpdb->p2p}";
 
-		//@TODO: add joins for tax/meta queries on the posts in connections
+		if ( isset( $args['meta']['key'] ) ) {
+			$value = isset( $args['meta']['value'] ) ? $args['meta']['value'] : false;
+			$sql .= ' ' . $this->prepare_meta_join( $direction, $args['meta']['key'], $value );
+		}
 
-		$sql .= $wpdb->prepare( " WHERE $where=%d", $id );
+		$sql .= apply_filters( 'tribe_p2p_where_sql', $wpdb->prepare( " WHERE $where=%d", $id ) );
 
+		/** Set the connection type (relationship) */
 		if ( isset( $args['type'] ) ) {
 			$type = is_array( $args['type'] ) ? ' IN ("' . implode( '","', esc_sql( $args['type'] ) ) . '")' : '="' . esc_sql( $args['type'] ) . '"';
-			$sql .= ' AND p2p_type' . $type;
+			$sql .= apply_filters( 'tribe_p2p_type_sql', ' AND p2p_type' . $type );
 		}
 
+		/** Set order by */
 		if ( isset( $args['orderby'] ) && $args['orderby'] === 'ids' ) {
-			$orderby = $select;
+			$orderby = $direction;
 		}
 
+		/** Set order */
 		if ( isset( $args['order'] ) ) {
 			$order = esc_sql( $args['order'] );
 			$orderby = isset( $orderby ) ? esc_sql( $orderby ) : 'p2p_id';
 			$sql .= " ORDER BY $orderby $order";
 		}
 
-		return $wpdb->get_col( $sql );
+		/** Allow filtering of entire sql statement before query */
+		$sql = apply_filters( 'tribe_p2p_get_ids_sql', $sql );
+
+		return array_map( 'intval', $wpdb->get_col( $sql ) );
+	}
+
+	/**
+	 * @param string $direction
+	 * @param string $meta_key
+	 * @param bool|string $meta_value
+	 *
+	 * @return string
+	 */
+	private function prepare_meta_join( $direction, $meta_key, $meta_value = false ) {
+		global $wpdb;
+
+		$direction = esc_sql( $direction );
+		$meta_key = esc_sql( $meta_key );
+		$meta_value = esc_sql( $meta_value );
+		$join = $wpdb->prepare( "
+			LEFT JOIN {$wpdb->postmeta} AS pm
+			ON {$wpdb->p2p}.$direction = pm.post_id AND pm.meta_key=%s
+		", $meta_key );
+
+		if ( ! empty( $meta_value ) ) {
+			$join .= $wpdb->prepare( " AND pm.meta_value=%s", $meta_value );
+		}
+
+		$inject_where = function( $where ) use ( $direction ) {
+			global $wpdb;
+			return $where . " AND pm.post_id = {$wpdb->p2p}.$direction";
+		};
+		add_filter( 'tribe_p2p_where_sql', $inject_where );
+
+		return $join;
 	}
 
 }

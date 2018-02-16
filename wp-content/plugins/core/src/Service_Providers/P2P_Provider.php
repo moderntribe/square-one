@@ -62,25 +62,6 @@ class P2P_Provider implements ServiceProviderInterface {
 		$container['p2p.connections'] = function ( $container ) {
 			return new Connections();
 		};
-
-		////// FOR TESTING WHILE BUILDING P2P CONNECTION
-		////// TO BE REMOVED BEFORE PR
-
-		add_filter( 'the_content', function() {
-			ob_start();
-			/**
-			 * @var Connections $connections
-			 */
-			$connections = tribe_project()->container()['p2p.connections'];
-			$ids = $connections->get_from( 12, [ 'type' => [ Sample_To_Page::NAME, General_Relationship::NAME ], 'order' => 'ASC', 'orderby' => 'ids' ] );
-
-			foreach ( $ids as $id ) {
-				echo '<h2>' . $id . '</h2>';
-			}
-
-			echo '<h2>' . var_dump( $connections->get_newest_connection( Sample_To_Page::NAME ) ) . '</h2>';
-			return ob_get_clean();
-		});
 	}
 
 	protected function relationships( Container $container ) {

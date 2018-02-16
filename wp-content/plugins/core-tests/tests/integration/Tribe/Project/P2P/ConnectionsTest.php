@@ -15,9 +15,13 @@ use Codeception\TestCase\WPTestCase;
  */
 class ConnectionsTest extends WPTestCase {
 
+	const META_KEY = 'test_meta_key';
+
 	private $connection_id;
+	private $connection_2_id;
 	private $sample_id;
 	private $page_id;
+	private $page_2_id;
 
 	public function setUp() {
 		// before
@@ -35,21 +39,30 @@ class ConnectionsTest extends WPTestCase {
 			'post_type' => Page::NAME,
 		] );
 
+		$this->page_2_id = wp_insert_post( [
+			'post_title' => 'Test Page Two With Meta',
+			'post_status' => 'publish',
+			'post_type' => Page::NAME,
+		] );
+
+		add_post_meta( $this->page_2_id, self::META_KEY, 'test meta value' );
+
 		$connect = [ 'from' => $this->sample_id, 'to' => $this->page_id ];
 		$this->connection_id = p2p_create_connection( Sample_To_Page::NAME, $connect );
+		$connect = [ 'from' => $this->sample_id, 'to' => $this->page_2_id ];
+		$this->connection_2_id = p2p_create_connection( Sample_To_Page::NAME, $connect );
 	}
 
 	public function tearDown() {
 		// your tear down methods here
 
-		// then
 		parent::tearDown();
 	}
 
 	/**
 	 * Test retrieving connections of specific type and from post id
 	 */
-	public function get_connection_test() {
+	public function test_get_connection() {
 		$connections = tribe_project()->container()['p2p.connections'];
 		$ids = $connections->get_from(
 			$this->sample_id,
@@ -60,10 +73,37 @@ class ConnectionsTest extends WPTestCase {
 			]
 		);
 
-		$this->assertTrue( 1 === $ids );
+		ob_start();
+		var_dump( $ids );
+		codecept_debug( ob_get_clean() );
+
+		$this->assertTrue( count( $ids ) === 2 );
+		$this->assertTrue( $this->page_id === $ids[0] );
+		$this->assertTrue( $this->page_2_id === $ids[1] );
 	}
 
-	public function setup_multiple_type_connections() {
+	public function test_get_meta_connection() {
+		$connections = tribe_project()->container()['p2p.connections'];
+		$ids = $connections->get_from(
+			$this->sample_id,
+			[
+				'type' => [
+					Sample_To_Page::NAME,
+				],
+				'meta' => [
+					'key' => self::META_KEY,
+				],
+			]
+		);
+
+		ob_start();
+		var_dump( $this->page_2_id, $ids );
+		codecept_debug( ob_get_clean() );
+
+		$this->assertTrue( $this->page_2_id === $ids[0] );
+	}
+
+	public function test_setup_multiple_type_connections() {
 
 	}
 
