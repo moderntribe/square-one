@@ -19,7 +19,7 @@ class Testimonial extends Panel {
 
 	public function get_mapped_panel_data(): array {
 		$data = [
-			'title'      => $this->get_title( $this->panel_vars[ TestimonialPanel::FIELD_TITLE ], [ 'site-section__title', 'h5' ] ),
+			'title'      => $this->get_title( $this->panel_vars[ TestimonialPanel::FIELD_TITLE ], [ 's-title', 'h5' ] ),
 			'text_color' => $this->text_color(),
 			'image'      => $this->get_image(),
 			'slider'     => $this->get_slider(),

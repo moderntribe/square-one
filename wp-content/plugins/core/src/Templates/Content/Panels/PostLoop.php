@@ -6,6 +6,7 @@ use Tribe\Project\Panels\Types\PostLoop as PostLoopPanel;
 use Tribe\Project\Templates\Components\Button;
 use Tribe\Project\Templates\Components\Card;
 use Tribe\Project\Templates\Components\Image;
+use Tribe\Project\Templates\Components\Title;
 use Tribe\Project\Theme\Image_Sizes;
 
 class PostLoop extends Panel {
@@ -20,7 +21,7 @@ class PostLoop extends Panel {
 
 	public function get_mapped_panel_data(): array {
 		$data = [
-			'title' => $this->get_title( $this->panel_vars[ PostLoopPanel::FIELD_TITLE ], [ 'site-section__title', 'h2' ] ),
+			'title' => $this->get_title( $this->panel_vars[ PostLoopPanel::FIELD_TITLE ], [ 's-title', 'h2' ] ),
 			'posts' => $this->get_posts(),
 		];
 
@@ -36,10 +37,10 @@ class PostLoop extends Panel {
 				$post = $this->panel_vars[ PostLoopPanel::FIELD_POSTS ][ $i ];
 
 				$options = [
-					Card::TITLE     => esc_html( get_the_title( $post[ 'post_id' ] ) ),
-					Card::IMAGE     => $this->get_post_image( get_post_thumbnail_id( $post[ 'post_id' ] ) ),
-					Card::PRE_TITLE => get_the_category_list( '', '', $post[ 'post_id' ] ),
-					Card::BUTTON    => $this->get_post_button( $post[ 'post_id' ] ),
+					Card::POST_TITLE => $this->get_post_title( esc_html( get_the_title( $post['post_id'] ) ), $i ),
+					Card::IMAGE      => $this->get_post_image( get_post_thumbnail_id( $post['post_id'] ) ),
+					Card::PRE_TITLE  => get_the_category_list( '', '', $post['post_id'] ),
+					Card::BUTTON     => $this->get_post_button( $post['post_id'] ),
 				];
 
 				$post_obj = Card::factory( $options );
@@ -48,6 +49,30 @@ class PostLoop extends Panel {
 		}
 
 		return $posts;
+	}
+
+	protected function get_post_title( $title, $index ) {
+		$attrs = [];
+
+		if ( is_panel_preview() ) {
+			$attrs = [
+				'data-depth'    => $this->panel->get_depth(),
+				'data-name'     => $title,
+				'data-index'    => $index,
+				'data-livetext' => true,
+			];
+		}
+
+		$options = [
+			Title::TITLE   => $title,
+			Title::CLASSES => [],
+			Title::ATTRS   => $attrs,
+			Title::TAG     => 'h3',
+		];
+
+		$title_obj = Title::factory( $options );
+
+		return $title_obj->render();
 	}
 
 	protected function get_post_image( $image_id ) {

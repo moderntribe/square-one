@@ -6,8 +6,8 @@ use Tribe\Project\Panels\Types\CardGrid as CardGridPanel;
 use Tribe\Project\Templates\Components\Button;
 use Tribe\Project\Templates\Components\Card;
 use Tribe\Project\Templates\Components\Image;
-use Tribe\Project\Templates\Components\Text;
 use Tribe\Project\Templates\Components\Title;
+use Tribe\Project\Templates\Components\Text;
 use Tribe\Project\Theme\Image_Sizes;
 
 class CardGrid extends Panel {
@@ -22,7 +22,7 @@ class CardGrid extends Panel {
 
 	public function get_mapped_panel_data(): array {
 		$data = [
-			'title' => $this->get_title( $this->panel_vars[ CardGridPanel::FIELD_TITLE ], [ 'site-section__title', 'h2' ] ),
+			'title' => $this->get_title( $this->panel_vars[ CardGridPanel::FIELD_TITLE ], [ 's-title', 'h2' ] ),
 			'cards' => $this->get_cards(),
 		];
 
