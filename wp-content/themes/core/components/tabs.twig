@@ -1,0 +1,59 @@
+{#
+
+Component: Tabs
+
+Documentation: docs\theme\components\tabs.md
+
+Controller: content\plugins\core\src\Templates\Components\Tabs.php
+Javascript: content\themes\bamco\js\src\theme\components\tabs.js
+PostCSS: content\themes\bamco\pcss\components\_tabs.pcss
+
+Description: Use this wherever you need a tab component. Check the docs for example usage.
+
+Attributes:
+	{
+		container_classes: 'c-tabs', // { string } the wrapper classes
+		tab_id: 'c-tabs', // { string } the id
+		tablist_classes : 'c-tab__list', // { string } the list classes
+		container_attrs: 'data-js="c-tabs"', // { string }. any additional attributes
+		tab_classes: 'c-tab__row', // { string } the row classes
+		tab_content_classes: 'c-tab__content', // { string } the row content wrapper classes
+		tab_content_inner_classes: 'c-tab__content-inner', // { string } the row content inner classes
+		tab_content_name: 'tab_content', // { string } the content name attribute, if used in panel supply row content field name
+		tab_button_classes: 'c-tab__button', // { string } the row header classes
+		tab_button_inner_classes: 'c-accordion__header-inner'.  // { string } The row header inner classes. wraps the row title text
+		tab_button_name: 'title', // { string } the header name attribute, if used in panel supply row header text field name
+		tabs: [], // { array }. an array of accordion rows.
+		tabs[].content: '', // { string } The row content. HTML or what have you.
+		tabs[].content_id: '', // { string } Unique id for the content.
+		tabs[].tab_id: '', // { string } Unique id for the header.
+		tabs[].tab_text: '', // { string } The header text.
+	}
+ #}
+
+<div class="{{ container_classes|esc_attr }}" id="{{ tab_id|esc_attr }}" {{ container_attrs }}>
+	<div class="{{ tab_list_classes|esc_attr }}" role="tablist">
+		{% for tab in tabs %}
+			<button class="{{ tab_button_classes|esc_attr }} {% if loop.index0 == 0 %}{{ tab_button_active_classes|esc_attr }}{% endif %}"
+					role="tab"
+					aria-selected="{% if loop.index0 == 0 %}true{% else %}false{% endif %}"
+					aria-controls="{{ tab.content_id|esc_attr }}"
+					id="{{ tab.tab_id|esc_attr }}">
+				{{ tab.tab_text }}
+			</button>
+		{% endfor %}
+	</div>
+
+	{% for tab in tabs %}
+		<article class="{{ tab_content_classes|esc_attr }} {% if loop.index0 == 0 %}{{ tab_content_active_classes|esc_attr }}{% endif %}"
+				tabindex="0"
+				role="tabpanel"
+				aria-hidden="{% if loop.index0 == 0 %}false{% else %}true{% endif %}"
+				id="{{ tab.content_id|esc_attr }}"
+				aria-labelledby="{{ tab.tab_id|esc_attr }}">
+			<div class="{{ tab_content_inner_classes }}">
+				{{ tab.content }}
+			</div>
+		</article>
+	{% endfor %}
+</div>
