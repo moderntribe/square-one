@@ -13,7 +13,6 @@ class Tabs extends Component {
 	const TAB_LIST_CLASSES           = 'tab_list_classes';
 	const TAB_BUTTON_CLASSES         = 'tab_button_classes';
 	const TAB_BUTTON_ACTIVE_CLASSES  = 'tab_button_active_classes';
-	const TAB_BUTTON_INNER_CLASSES   = 'tab_button_inner_classes';
 	const TAB_CONTENT_CLASSES        = 'tab_content_classes';
 	const TAB_CONTENT_ACTIVE_CLASSES = 'tab_content_active_classes';
 	const TAB_CONTENT_INNER_CLASSES  = 'tab_content_inner_classes';
@@ -29,7 +28,6 @@ class Tabs extends Component {
 			self::TAB_LIST_CLASSES           => [],
 			self::TAB_BUTTON_CLASSES         => [],
 			self::TAB_BUTTON_ACTIVE_CLASSES  => [],
-			self::TAB_BUTTON_INNER_CLASSES   => [],
 			self::TAB_CONTENT_CLASSES        => [],
 			self::TAB_CONTENT_ACTIVE_CLASSES => [],
 			self::TAB_CONTENT_INNER_CLASSES  => [],
@@ -49,7 +47,6 @@ class Tabs extends Component {
 			self::TAB_LIST_CLASSES           => $this->merge_classes( [ 'c-tab__list' ], $this->options[self::TAB_LIST_CLASSES], true ),
 			self::TAB_BUTTON_CLASSES         => $this->merge_classes( [ 'c-tab__button' ], $this->options[self::TAB_BUTTON_CLASSES], true ),
 			self::TAB_BUTTON_ACTIVE_CLASSES  => $this->merge_classes( [ 'c-tab__button--active' ], $this->options[self::TAB_BUTTON_ACTIVE_CLASSES], true ),
-			self::TAB_BUTTON_INNER_CLASSES   => $this->merge_classes( [ 'c-tab__button-inner' ], $this->options[self::TAB_BUTTON_INNER_CLASSES], true ),
 			self::TAB_CONTENT_CLASSES        => $this->merge_classes( [ 'c-tab__content' ], $this->options[self::TAB_CONTENT_CLASSES], true ),
 			self::TAB_CONTENT_ACTIVE_CLASSES => $this->merge_classes( [ 'c-tab__content--active' ], $this->options[self::TAB_CONTENT_ACTIVE_CLASSES], true ),
 			self::TAB_CONTENT_INNER_CLASSES  => $this->merge_classes( [ 'c-tab__content-inner' ], $this->options[self::TAB_CONTENT_INNER_CLASSES], true ),

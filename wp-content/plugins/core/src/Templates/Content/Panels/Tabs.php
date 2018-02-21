@@ -30,9 +30,9 @@ class Tabs extends Panel {
 			TabsComponent::TABS => $this->get_rows(),
 		];
 
-		$accordion = TabsComponent::factory( $options );
+		$tabs = TabsComponent::factory( $options );
 
-		return $accordion->render();
+		return $tabs->render();
 	}
 
 	protected function get_rows(): array {
