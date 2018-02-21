@@ -57,7 +57,7 @@ $container[ 'service_loader' ]->enqueue( 'foobar_class', 'hook' );
 
 // Within Foobar_Class
 public function hook() {
-   add_action( 'save_post', [ $this, 'do_save_post_action' ], 20 );
+   add_action( 'save_post', [ $this, 'do_save_post_action' ], 20, 1 );
 }
 
 public function do_save_post_action( $post_id ) {
@@ -78,8 +78,8 @@ $container['foobar_class'] = function( $container ) {
 }
 
 add_action( 'save_post', function( $post_id ) use ( $container ) {
-   $container['foobar_class']->do_init_action( $post_id );
-}, 20 );
+   $container['foobar_class']->do_save_post_action( $post_id );
+}, 20, 1 );
 
 // In Foobar_Class
 public function do_save_post_action( $post_id ) {
@@ -171,7 +171,7 @@ $container['posts.fork'] = function ( Container $container ) {
 // Note that the argument for the closure is whatever the particular filter passes for arguments
 add_filter( 'manage_posts_columns', function ( $columns ) use ( $container ) {
 	return $container['posts.fork']->replace_title_column( $columns );
-}, 10 );
+}, 10, 1 );
 
 // Fork
 public function replace_title_column( $columns ) {
