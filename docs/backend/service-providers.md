@@ -200,3 +200,26 @@ public function add_quick_edit_links( $actions, \WP_Post $post ) {
 	// do stuff
 }
 ```
+
+*Passing an indeterminate number of arguments*
+
+There are times when you may wish to pass an indeterminate number of arguments to your action or filter. This can be accomplished
+using the `...$args` parameter pattern. Keep in mind that it's important to set the final argument of `add__filter()` to 
+something large (here we use 99) to ensure WordPress passes all of your arguments.
+
+```
+// Service Provider
+$container['posts.fork'] = function ( Container $container ) {
+	return new Fork();
+};
+
+// Note the use of ...$args here. This will pass any # of arguments through the closure to the call on the container's class.
+add_filter( 'post_row_actions', function ( ...$args ) use ( $container ) {
+	return $container['posts.fork']->add_quick_edit_links( ...$args );
+}, 10, 99 );
+
+// Fork
+public function add_quick_edit_links( $actions, \WP_Post $post ) {
+	// do stuff
+}
+```
