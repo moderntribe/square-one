@@ -78,7 +78,7 @@ class Gravity_Forms_Filter {
 
 		if ( $field['type'] === 'multiselect' || ( $field['type'] === 'post_custom_field' && $field['inputType'] === 'multiselect' ) ) {
 			$classes .= ' gf-multi-select';
-		} elseif ( $field['type'] === 'select' || ( $field['type'] === 'post_custom_field' && $field['inputType'] === 'select' ) ) {
+		} elseif ( $field['type'] === 'select' || ( $field['type'] === 'post_custom_field' && $field['inputType'] === 'select' ) || ( $field['type'] === 'product' && $field['inputType'] === 'select' ) ) {
 			$classes .= ' gf-select';
 			// Not Chosen, regular select
 			if ( ! $field['enableEnhancedUI'] ) {
@@ -86,7 +86,7 @@ class Gravity_Forms_Filter {
 			}
 		} elseif ( $field['type'] === 'checkbox' ) {
 			$classes .= ' gf-checkbox';
-		} elseif ( $field['type'] === 'radio' || ( $field['type'] === 'product' && get_class( $field ) === 'GF_Field_Radio' ) ) {
+		} elseif ( $field['type'] === 'radio' || ( $field['type'] === 'product' && $field['inputType'] === 'radio' ) ) {
 			$classes .= ' gf-radio';
 		} elseif ( $field['type'] === 'textarea' ) {
 			$classes .= ' gf-textarea';
