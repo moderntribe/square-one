@@ -86,7 +86,7 @@ class Gravity_Forms_Filter {
 			}
 		} elseif ( $field['type'] === 'checkbox' ) {
 			$classes .= ' gf-checkbox';
-		} elseif ( $field['type'] === 'radio' ) {
+		} elseif ( $field['type'] === 'radio' || ( $field['type'] === 'product' && get_class( $field ) === 'GF_Field_Radio' ) ) {
 			$classes .= ' gf-radio';
 		} elseif ( $field['type'] === 'textarea' ) {
 			$classes .= ' gf-textarea';
