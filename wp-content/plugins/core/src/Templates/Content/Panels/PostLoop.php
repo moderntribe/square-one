@@ -67,7 +67,7 @@ class PostLoop extends Panel {
 			Title::TITLE   => $title,
 			Title::CLASSES => [],
 			Title::ATTRS   => $attrs,
-			Title::TAG     => 'h3',
+			Title::TAG     => 'h5',
 		];
 
 		$title_obj = Title::factory( $options );
@@ -95,9 +95,11 @@ class PostLoop extends Panel {
 
 	protected function get_post_button( $post_id ) {
 		$options = [
-			Button::URL    => esc_url( get_the_permalink( $post_id ) ),
-			Button::LABEL  => __( 'View Post', 'tribe' ),
-			Button::TARGET => '_self',
+			Button::URL    		=> esc_url( get_the_permalink( $post_id ) ),
+			Button::LABEL  		=> __( 'View Post', 'tribe' ),
+			Button::TARGET 		=> '_self',
+			Button::BTN_AS_LINK => true,
+			Button::CLASSES     => [ 'c-cta' ],
 		];
 
 		$button_obj = Button::factory( $options );

@@ -130,7 +130,7 @@ class Hero extends Panel {
 	protected function get_hero_text( $description_attrs ) {
 		$options = [
 			Text::ATTRS   => $description_attrs,
-			Text::CLASSES => [],
+			Text::CLASSES => [ 'site-panel--hero__desc' ],
 			Text::TEXT    => $this->panel_vars[ HeroPanel::FIELD_DESCRIPTION ],
 		];
 
@@ -141,7 +141,7 @@ class Hero extends Panel {
 
 	protected function get_hero_button() {
 		$options = [
-			Button::CLASSES     => [],
+			Button::CLASSES     => [ 'c-btn' ],
 			Button::ATTRS       => '',
 			Button::TAG         => '',
 			Button::TARGET      => $this->panel_vars[ HeroPanel::FIELD_CTA ][ Button::TARGET ],

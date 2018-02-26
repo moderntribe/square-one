@@ -140,7 +140,7 @@ class CardGrid extends Panel {
 			Button::LABEL       => esc_html( $cta[ Button::LABEL ] ),
 			Button::TARGET      => esc_attr( $cta[ Button::TARGET ] ),
 			Button::BTN_AS_LINK => true,
-			Button::CLASSES     => [ 'c-btn--sm' ],
+			Button::CLASSES     => [ 'c-btn c-btn--sm' ],
 		];
 
 		$button_obj = Button::factory( $options );
