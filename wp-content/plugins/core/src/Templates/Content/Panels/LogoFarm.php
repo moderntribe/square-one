@@ -19,9 +19,24 @@ class LogoFarm extends Panel {
 		$data = [
 			'title' => $this->get_title( $this->panel_vars[ Logo::FIELD_TITLE ], [ 's-title', 'h2' ] ),
 			'logos' => $this->get_the_logos(),
+			'attrs' => $this->get_logofarm_attributes(),
 		];
 
 		return $data;
+	}
+
+	protected function get_logofarm_attributes() {
+		$attrs = '';
+
+		if ( is_panel_preview() ) {
+			$attrs = 'data-depth=' . $this->panel->get_depth() . ' data-name="' . Logo::FIELD_LOGOS . '" data-index="0" ' . 'data-livetext="true"';
+		}
+
+		if ( empty( $attrs ) ) {
+			return '';
+		}
+
+		return $attrs;
 	}
 
 	protected function get_the_logos(): array {

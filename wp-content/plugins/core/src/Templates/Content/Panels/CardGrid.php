@@ -24,6 +24,7 @@ class CardGrid extends Panel {
 		$data = [
 			'title' => $this->get_title( $this->panel_vars[ CardGridPanel::FIELD_TITLE ], [ 's-title', 'h2' ] ),
 			'cards' => $this->get_cards(),
+			'attrs' => $this->get_cardgrid_attributes(),
 		];
 
 		return $data;
@@ -63,6 +64,20 @@ class CardGrid extends Panel {
 		}
 
 		return $cards;
+	}
+
+	protected function get_cardgrid_attributes() {
+		$attrs = '';
+
+		if ( is_panel_preview() ) {
+			$attrs = 'data-depth=' . $this->panel->get_depth() . ' data-name="' . CardGridPanel::FIELD_CARDS . '" data-index="0" ' . 'data-livetext="true"';
+		}
+
+		if ( empty( $attrs ) ) {
+			return '';
+		}
+
+		return $attrs;
 	}
 
 	protected function get_card_image( $image_id ) {

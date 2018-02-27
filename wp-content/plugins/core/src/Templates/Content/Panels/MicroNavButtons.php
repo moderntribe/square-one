@@ -19,9 +19,24 @@ class MicroNavButtons extends Panel {
 		$data = [
 			'title' => $this->get_title( $this->panel_vars[ Micro::FIELD_TITLE ], [ 's-title', 'h2' ] ),
 			'items' => $this->get_list_items(),
+			'attrs' => $this->get_micronavbutton_attributes(),
 		];
 
 		return $data;
+	}
+
+	protected function get_micronavbutton_attributes() {
+		$attrs = '';
+
+		if ( is_panel_preview() ) {
+			$attrs = 'data-depth=' . $this->panel->get_depth() . ' data-name="' . Micro::FIELD_ITEMS . '" data-index="0" ' . 'data-livetext="true"';
+		}
+
+		if ( empty( $attrs ) ) {
+			return '';
+		}
+
+		return $attrs;
 	}
 
 	protected function get_list_items(): array {
