@@ -21,9 +21,24 @@ class Accordion extends Panel {
 			'layout'       => $this->panel_vars[ AccordionPanel::FIELD_LAYOUT ],
 			'accordion'    => $this->get_accordion(),
 			'grid_classes' => $this->get_grid_classes(),
+			'attrs'        => $this->get_accordion_attributes(),
 		];
 
 		return $data;
+	}
+
+	protected function get_accordion_attributes() {
+		$attrs = '';
+
+		if ( is_panel_preview() ) {
+			$attrs = 'data-depth=' . $this->panel->get_depth() . ' data-name="' . AccordionPanel::FIELD_ACCORDIONS . '" data-index="0" ' . 'data-livetext="true"';
+		}
+
+		if ( empty( $attrs ) ) {
+			return '';
+		}
+
+		return $attrs;
 	}
 
 	protected function get_grid_classes(): string {
