@@ -34,6 +34,9 @@ class Extension extends \Twig_Extension {
 			new \Twig_SimpleFunction( 'bloginfo', function ( $show = '', $filter = 'raw' ) {
 				return get_bloginfo( $show, $filter );
 			} ),
+			new \Twig_SimpleFunction( '__', function ( $string ) {
+				return $string; // for multilingual projects, use: return __( $string, 'tribe' );
+			} ),
 		];
 	}
 

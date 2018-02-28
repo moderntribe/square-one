@@ -9,6 +9,7 @@ use Tribe\Project\CLI\CPT_Generator;
 use Tribe\Project\CLI\File_System;
 use Tribe\Project\CLI\Pimple_Dump;
 use Tribe\Project\CLI\Taxonomy_Generator;
+use Tribe\Project\CLI\Cache_Prime;
 
 class CLI_Provider implements ServiceProviderInterface {
 
@@ -33,6 +34,10 @@ class CLI_Provider implements ServiceProviderInterface {
 			return new CLI_Generator( $container['cli.file-system'] );
 		};
 
+		$container['cli.cache-prime'] = function() {
+			return new Cache_Prime();
+		};
+
 		add_action( 'init', function () use ( $container ) {
 			if ( ! defined( 'WP_CLI' ) || ! WP_CLI ) {
 				return;
@@ -42,6 +47,7 @@ class CLI_Provider implements ServiceProviderInterface {
 			$container['cli.cpt-generator']->register();
 			$container['cli.taxonomy-generator']->register();
 			$container['cli.cli-generator']->register();
+			$container['cli.cache-prime']->register();
 		}, 0, 0 );
 	}
 }

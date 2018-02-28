@@ -1,0 +1,24 @@
+{
+  "name": "moderntribe/core-plugin",
+  "type": "project",
+  "description": "Core functionality for this site.",
+  "license": "Private",
+  "config": {
+    "vendor-dir": "vendor",
+    "preferred-install": "dist"
+  },
+  "require": {
+    "pimple/pimple": "~3.0@dev",
+    "johnbillion/extended-cpts": "^4.0",
+    "twig/twig": "^2.4",
+    "jbzoo/pimpledumper": "^1.2",
+    "sunra/php-simple-html-dom-parser": "1.5.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "Tribe\\Project\\": "src/",
+      "Sunra\\PhpSimple\\":"vendor/sunra/php-simp[le-html-dom-parser/Src/Sunra/PhpSimple/",
+      "Tribe\\Libs\\": "vendor/moderntribe/tribe-libs/src/"
+    }
+  }
+}

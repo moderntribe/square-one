@@ -1,11 +1,16 @@
 /*--------------------------------------------------------------------------------------------
 *
-*	vars
+*	Vars
 *
 *--------------------------------------------------------------------------------------------*/
 /* colors */
 /* acf-field */
 /* responsive */
+/*--------------------------------------------------------------------------------------------
+*
+*	Mixins
+*
+*--------------------------------------------------------------------------------------------*/
 /*---------------------------------------------------------------------------------------------
 *
 *  Global
@@ -13,6 +18,17 @@
 *---------------------------------------------------------------------------------------------*/
 #adv-settings .show-field-keys label {
   padding: 0 5px;
+}
+#acf-field-group-fields > .inside,
+#acf-field-group-locations > .inside,
+#acf-field-group-options > .inside {
+  padding: 0;
+  margin: 0;
+}
+.acf-field p.description {
+  font-style: normal;
+  font-size: 12px;
+  color: #777777;
 }
 /*---------------------------------------------------------------------------------------------
 *
@@ -37,67 +53,74 @@
 *  Postbox: Fields
 *
 *---------------------------------------------------------------------------------------------*/
-.acf-field p.description {
-  margin: 0;
-  padding: 0;
-  font-style: normal;
-  font-size: 12px;
-  line-height: 1.4em;
-  color: #777777;
-  display: block;
-}
-#acf-field-group-fields > .inside,
-#acf-field-group-locations > .inside,
-#acf-field-group-options > .inside {
-  padding: 0;
-  margin: 0;
-}
 #acf-field-group-fields {
   border: 0 none;
   box-shadow: none;
+  /* metabox */
+  /* links */
+  /* no fields */
+  /* table header */
+  /* show keys */
+  /* fields */
 }
 #acf-field-group-fields > .handlediv,
 #acf-field-group-fields > .hndle {
   display: none;
 }
-.no-fields-message {
+#acf-field-group-fields a {
+  text-decoration: none;
+}
+#acf-field-group-fields a:active,
+#acf-field-group-fields a:focus {
+  outline: none;
+  box-shadow: none;
+}
+#acf-field-group-fields .no-fields-message {
   padding: 15px 15px;
   background: #fff;
 }
-.acf-field-list-wrap {
+#acf-field-group-fields .li-field-order {
+  width: 20%;
+}
+#acf-field-group-fields .li-field-label {
+  width: 30%;
+}
+#acf-field-group-fields .li-field-name {
+  width: 25%;
+}
+#acf-field-group-fields .li-field-type {
+  width: 25%;
+}
+#acf-field-group-fields .li-field-key {
+  display: none;
+}
+#acf-field-group-fields.show-field-keys .li-field-label,
+#acf-field-group-fields.show-field-keys .li-field-name,
+#acf-field-group-fields.show-field-keys .li-field-type,
+#acf-field-group-fields.show-field-keys .li-field-key {
+  width: 20%;
+}
+#acf-field-group-fields.show-field-keys .li-field-key {
+  display: block;
+}
+#acf-field-group-fields .acf-field-list-wrap {
   border: #DFDFDF solid 1px;
 }
-/* table header */
-.li-field-order {
-  width: 22%;
-  padding-right: 0 !important;
-}
-.li-field-label {
-  width: 28%;
-}
-.li-field-name {
-  width: 25%;
-}
-.li-field-type {
-  width: 25%;
-}
-/* field list */
-.acf-field-list {
+#acf-field-group-fields .acf-field-list {
   background: #F9F9F9;
   margin-top: -1px;
-}
-.acf-field-list a {
-  text-decoration: none;
-}
-.acf-field-list a:active,
-.acf-field-list a:focus {
-  outline: none;
-  box-shadow: none;
 }
 /* field object */
 .acf-field-object {
   border-top: #F0F0F0 solid 1px;
   background: #fff;
+  /* sortable */
+  /* meta */
+  /* handle */
+  /* open */
+  /* hover */
+  /* settings */
+  /* conditional logic */
 }
 .acf-field-object.ui-sortable-helper {
   border-top-color: #fff;
@@ -108,25 +131,27 @@
   visibility: visible !important;
   background: #F9F9F9;
   border-top-color: transparent;
+  min-height: 54px;
 }
-.acf-field-object[data-key="acfcloneindex"] {
-  display: none !important;
+.acf-field-object.ui-sortable-placeholder:after,
+.acf-field-object.ui-sortable-placeholder:before {
+  visibility: hidden;
 }
-/* field object (open) */
-.acf-field-object.open + .acf-field-object {
-  border-top-color: #E1E1E1;
-}
-/* field object meta */
-.acf-field-object .meta {
+.acf-field-object > .meta {
   display: none;
 }
-/* field object handle */
-.acf-field-object .handle li {
+.acf-field-object > .handle a {
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+.acf-field-object > .handle li {
   padding-top: 10px;
   padding-bottom: 10px;
   word-wrap: break-word;
 }
-.acf-field-object .handle .acf-icon {
+.acf-field-object > .handle .acf-icon {
   margin: 1px 0 0;
   cursor: move;
   background: transparent;
@@ -139,29 +164,28 @@
   position: relative;
   z-index: 1;
 }
-.acf-field-object .handle strong {
+.acf-field-object > .handle strong {
   display: block;
   padding-bottom: 6px;
   font-size: 14px;
   line-height: 14px;
   min-height: 14px;
 }
-.acf-field-object.open > .handle .acf-required {
-  color: #fff;
-}
-.acf-field-object .handle .row-options {
+.acf-field-object > .handle .row-options {
   visibility: hidden;
 }
-.acf-field-object:hover > .handle .row-options {
-  visibility: visible;
-}
-.acf-field-object .handle .row-options a {
+.acf-field-object > .handle .row-options a {
   margin-right: 4px;
 }
-.acf-field-object .handle .delete-field:hover {
+.acf-field-object > .handle .row-options a.delete-field {
+  color: #a00;
+}
+.acf-field-object > .handle .row-options a.delete-field:hover {
   color: #f00;
 }
-/* field object handle (open) */
+.acf-field-object.open + .acf-field-object {
+  border-top-color: #E1E1E1;
+}
 .acf-field-object.open > .handle {
   background: #2a9bd9;
   border: #2696d3 solid 1px;
@@ -172,19 +196,20 @@
 }
 .acf-field-object.open > .handle a {
   color: #fff !important;
-  -webkit-transition: none;
-  -moz-transition: none;
-  -o-transition: none;
-  transition: none;
 }
-.acf-field-object.open > .handle .row-options a:hover {
-  text-decoration: underline;
+.acf-field-object.open > .handle a:hover {
+  text-decoration: underline !important;
 }
 .acf-field-object.open > .handle .acf-icon {
   border-color: #fff;
   color: #fff;
 }
-/* field object settings */
+.acf-field-object.open > .handle .acf-required {
+  color: #fff;
+}
+.acf-field-object:hover > .handle .row-options {
+  visibility: visible;
+}
 .acf-field-object > .settings {
   display: none;
   width: 100%;
@@ -192,34 +217,8 @@
 .acf-field-object > .settings > .acf-table {
   border: none;
 }
-/* conditional logic */
 .acf-field-object .rule-groups {
   margin-top: 20px;
-}
-/* field object keys */
-.acf-field-object .handle .pre-field-key {
-  border: #E1E1E1 solid 1px;
-  margin: 4px 0 0 -6px;
-  padding: 5px 5px 5px 11px;
-  font: inherit;
-  float: left;
-  border-radius: 0 3px 3px 0;
-  display: none;
-  border-left: none;
-  font-size: 12px;
-  line-height: 12px;
-}
-.acf-field-object.open > .handle .pre-field-key {
-  border-color: #FAFCFD;
-}
-.show-field-keys .acf-field-object .handle .pre-field-key {
-  display: block;
-}
-.show-field-keys .li-field-order {
-  width: 24%;
-}
-.show-field-keys .li-field-label {
-  width: 26%;
 }
 /*---------------------------------------------------------------------------------------------
 *
@@ -290,41 +289,42 @@ table.conditional-logic-rules tbody td {
 *	Field: Tab
 *	
 *---------------------------------------------------------------------------------------------*/
-.acf-field-object-tab tr[data-name="name"],
-.acf-field-object-tab tr[data-name="instructions"],
-.acf-field-object-tab tr[data-name="required"],
-.acf-field-object-tab tr[data-name="warning"],
-.acf-field-object-tab tr[data-name="wrapper"] {
-  display: none !important;
+.acf-field-object-tab .acf-field-setting-name,
+.acf-field-object-tab .acf-field-setting-instructions,
+.acf-field-object-tab .acf-field-setting-required,
+.acf-field-object-tab .acf-field-setting-warning,
+.acf-field-object-tab .acf-field-setting-wrapper,
+.acf-field-object-accordion .acf-field-setting-name,
+.acf-field-object-accordion .acf-field-setting-instructions,
+.acf-field-object-accordion .acf-field-setting-required,
+.acf-field-object-accordion .acf-field-setting-warning,
+.acf-field-object-accordion .acf-field-setting-wrapper {
+  display: none;
 }
-.acf-field-object-tab .li-field-name {
+.acf-field-object-tab .li-field-name,
+.acf-field-object-accordion .li-field-name {
   visibility: hidden;
 }
-.acf-field-object-tab .acf-error-message {
-  display: none;
-}
-.acf-field-list[data-layout="table"] .acf-field-object-tab .acf-error-message {
-  display: block;
-}
-.acf-field-object + .acf-field-object-tab {
-  margin-top: 6px;
-}
-.acf-field-object + .acf-field-object-tab:before {
+.acf-field-object + .acf-field-object-tab:before,
+.acf-field-object + .acf-field-object-accordion:before {
   display: block;
   content: "";
-  height: 1px;
-  background: #F0F0F0;
-  margin-top: -7px;
+  height: 5px;
   width: 100%;
-  position: absolute;
+  background: #f9f9f9;
+  border-bottom: #f0f0f0 solid 1px;
 }
-.acf-field-object + .acf-field-object-tab.ui-sortable-placeholder {
-  margin-top: 0;
-  padding-top: 6px;
+.acf-field-object-tab p:first-child,
+.acf-field-object-accordion p:first-child {
+  margin: 0.5em 0;
 }
-.acf-field-object-tab.ui-sortable-helper:before,
-.ui-sortable-placeholder + .acf-field-object-tab:before {
-  display: none;
+/*---------------------------------------------------------------------------------------------
+*
+*	Field: Accordion
+*	
+*---------------------------------------------------------------------------------------------*/
+.acf-field-object-accordion .acf-field-setting-instructions {
+  display: table-row;
 }
 /*---------------------------------------------------------------------------------------------
 *
@@ -341,6 +341,16 @@ table.conditional-logic-rules tbody td {
 }
 .acf-field-object-message textarea {
   height: 175px !important;
+}
+/*---------------------------------------------------------------------------------------------
+*
+*	Field: Separator
+*	
+*---------------------------------------------------------------------------------------------*/
+.acf-field-object-separator tr[data-name="name"],
+.acf-field-object-separator tr[data-name="instructions"],
+.acf-field-object-separator tr[data-name="required"] {
+  display: none !important;
 }
 /*---------------------------------------------------------------------------------------------
 *
@@ -368,6 +378,20 @@ table.conditional-logic-rules tbody td {
 }
 .acf-field-object-date-time-picker .acf-radio-list input[type="text"] {
   width: 200px;
+}
+/*--------------------------------------------------------------------------------------------
+*
+*	Slug
+*
+*--------------------------------------------------------------------------------------------*/
+#slugdiv .inside {
+  padding: 12px;
+  margin: 0;
+}
+#slugdiv input[type="text"] {
+  width: 100%;
+  height: 28px;
+  font-size: 14px;
 }
 /*--------------------------------------------------------------------------------------------
 *

@@ -4,6 +4,9 @@
   * [Overview](/docs/build/README.md)
   * [Node](/docs/build/node.md)
   * [Grunt Tasks](/docs/build/grunt.md)
+* Videos
+  * [Frontend Videos](/docs/theme/videos.md)
+  * [Backend Videos](/docs/backend/videos.md)
 * Panel Builder
   * [Overview](/docs/panels/README.md)
   * [The Initializer](/docs/panels/initializer.md)
@@ -34,7 +37,7 @@
     * [Container / Core.php](/docs/backend/container.md)
     * [Custom Post Types](/docs/backend/post-types.md)
     * [Custom Taxonomies](/docs/backend/taxonomies.md)
-    * [Post & Taxonomy Meta](/docs/backend/post-meta.md)
+    * [Object Meta](/docs/backend/object-meta.md)
     * [Service Providers](/docs/backend/service-providers.md)
     * [Template Controllers](/docs/backend/data.md)
     * [CLI](/docs/backend/cli.md)

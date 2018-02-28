@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Templates;
 
-use Tribe\Project\Twig\Noop_Lazy_Strings;
 use Tribe\Project\Twig\Twig_Template;
 
 class Comments extends Twig_Template {
@@ -19,7 +18,6 @@ class Comments extends Twig_Template {
 			'comments'               => $have_comments ? $this->get_comments() : '',
 			'form'                   => $this->get_comment_form(),
 			'pagination'             => $this->get_pagination(),
-			'lang'                   => new Noop_Lazy_Strings( 'tribe' ),
 		];
 
 		return $data;
