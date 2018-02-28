@@ -66,7 +66,8 @@
     "jbzoo/pimpledumper": "^1.2",
     "mailgun/mailgun-php": "^2.3",
     "php-http/curl-client": "^1.7",
-    "guzzlehttp/psr7": "^1.4"
+    "guzzlehttp/psr7": "^1.4",
+    "sunra/php-simple-html-dom-parser": "1.5.2"
   },
   "extra": {
     "wordpress-install-dir": "wp",
@@ -83,7 +84,8 @@
     "psr-4": {
       "Tribe\\Project\\":"wp-content/plugins/core/src",
       "Tribe\\Libs\\": "vendor/moderntribe/tribe-libs/src/",
-      "Mailgun\\Mailgun\\":"vendor/mailgun/"
+      "Mailgun\\Mailgun\\":"vendor/mailgun/",
+      "Sunra\\PhpSimple\\":"vendor/sunra/php-simp[le-html-dom-parser/Src/Sunra/PhpSimple/"
     }
   }
 }
