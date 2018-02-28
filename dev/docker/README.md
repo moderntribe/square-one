@@ -21,10 +21,12 @@ download it from [here](https://store.docker.com/editions/community/docker-ce-de
 # Your first run for each new project
 
 1. Clone the the repo for the new project
-2. Find domain your BE lead chose for the project when they set it up the first time on `dev/docker/docker-compose.yml`. You can find it in the line that reads: `- VIRTUAL_HOST={something}.tribe` in the `website` service. Take note of that domain.
-3. Go to *your main Square One* clone, the one you use to run the global containers from. Go to the `dev/docker/global folder` and run `bash cert.sh something.tribe` obviously using the right domain you found in the previous point.
-4. Connect to MySQL and create a new DB for it, or import an existing one. Remember the connection info for your local-config.php is: `host: mysql.tribe - port: 3306 - username: root - password: password`
-5. **For FE Devs:** To use Browsersnyc, follow the instructions in the `local-config-sample.json`. You will need to add your local path to the global certs directory (where your certs from step 3 are installed) to the `certs_path` parameter.
+2. Run `git submodule update --init` in the root folder
+3. Find domain your BE lead chose for the project when they set it up the first time on `dev/docker/docker-compose.yml`. You can find it in the line that reads: `- VIRTUAL_HOST={something}.tribe` in the `website` service. Take note of that domain.
+4. Go to *your main Square One* clone, the one you use to run the global containers from. Go to the `dev/docker/global folder` and run `bash cert.sh something.tribe` obviously using the right domain you found in the previous point.
+5. Connect to MySQL and create a new DB for it, or import an existing one. Remember the connection info for your local-config.php is: `host: mysql.tribe - port: 3306 - username: root - password: password`
+6. **For FE Devs:** To use Browsersnyc, follow the instructions in the `local-config-sample.json`. You will need to add your local path to the global certs directory (where your certs from step 3 are installed) to the `certs_path` parameter.
+
 
 # Day to Day usage
 
