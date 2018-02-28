@@ -42,8 +42,16 @@ wp-content/logs/
 wp-content/mu-plugins/mu.local.php
 
 wp-content/mu-plugins/mercator/
-wp-content/plugins/
+wp-content/plugins/*
 !wp-content/plugins/core
+!wp-content/plugins/advanced-custom-fields-pro
+!wp-content/plugins/gravityforms
+!wp-content/plugins/term-sorter
+!wp-content/plugins/tribe-30-redirects
+!wp-content/plugins/tribe-admin-dashboard
+!wp-content/plugins/tribe-branding
+!wp-content/plugins/tribe-glomar
+!wp-content/plugins/tribe-json-ld
 
 # Packages #
 ############
