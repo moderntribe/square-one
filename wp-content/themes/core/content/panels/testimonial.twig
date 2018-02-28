@@ -8,23 +8,9 @@
 
 	{% block header %}
 
-		{% if title or description %}
+		{% if title %}
 			<header class="s-header s-header--no-padding">
-
 				{{ title }}
-
-				{% block description %}
-					{% if description %}
-						<div class="s-desc t-content"
-						     data-depth="0"
-						     data-name="description"
-						     data-autop="true"
-						     data-livetext>
-							{{ description }}
-						</div>
-					{% endif %}
-				{% endblock %}
-
 			</header>
 		{% endif %}
 

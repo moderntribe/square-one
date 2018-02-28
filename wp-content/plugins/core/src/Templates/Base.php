@@ -7,7 +7,6 @@ use Tribe\Project\Service_Providers\Nav_Menu_Provider;
 use Tribe\Project\Theme\Logo;
 use Tribe\Project\Templates\Components\Search;
 use Tribe\Project\Templates\Components\Button;
-use Tribe\Project\Twig\Noop_Lazy_Strings;
 use Tribe\Project\Twig\Stringable_Callable;
 use Tribe\Project\Twig\Template_Interface;
 use Tribe\Project\Twig\Twig_Template;
@@ -20,7 +19,6 @@ class Base extends Twig_Template {
 			'body_class'          => $this->get_body_class(),
 			'logo'                => $this->get_logo(),
 			'menu'                => $this->get_nav_menus(),
-			'lang'                => $this->get_strings(),
 			'search_url'          => $this->get_search_url(),
 			'home_url'            => $this->get_home_url(),
 			'copyright'           => $this->get_copyright(),
@@ -97,10 +95,6 @@ class Base extends Twig_Template {
 		];
 
 		return \Tribe\Project\Theme\Nav\Menu::menu( $args );
-	}
-
-	protected function get_strings() {
-		return new Noop_Lazy_Strings( 'tribe' );
 	}
 
 	protected function get_search_url() {

@@ -754,6 +754,11 @@ class Extended_CPT_Admin {
 			}
 
 			foreach ( $vals as $val ) {
+				$val_time = strtotime( $val );
+
+				if ( $val_time ) {
+					$val = $val_time;
+				}
 
 				if ( is_numeric( $val ) ) {
 					$echo[] = date_i18n( $args['date_format'], $val );
