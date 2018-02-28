@@ -13,12 +13,12 @@ namespace Tribe\Project\P2P;
  * no standard methodology.  If simply needing some connections and post ids this will allow you to bypass
  * some of the more complex query building and filtering that p2p core does when using functionality like
  *
- * new WP_Query( [ 'connected_type' => ####, 'connected_items' => get_queried_object() ] );
+ * new WP_Query( [ 'connected_type' => 'posts_to_pages', 'connected_items' => get_queried_object() ] );
  *
  * instead you could use
  *
  * $connections = tribe_project()->container['p2p.connections'];
- * $ids = $connections->get_from( ##, [ 'type' => 'posts_to_pages' ] );
+ * $ids = $connections->get_from( {post_or_user_id}, [ 'type' => 'posts_to_pages' ] );
  *
  * Which will only perform a single DB query and return an array of ids.
  */
@@ -32,7 +32,7 @@ class Connections {
 	 *
 	 * $args['type'] => Specify a p2p connection type or array of types
 	 * $args['order'] => Optionally return results ordered by p2p_id using 'ASC' or 'DESC'
-	 * $args['meta'] => Optional array with key & optional value to filter results [ 'key' => '###', 'value' => '###' ]
+	 * $args['meta'] => Optional array with key & optional value to filter results [ 'key' => '{meta_key}', 'value' => '{meta_value}' ]
 	 *
 	 * @return array
 	 */
@@ -51,48 +51,6 @@ class Connections {
 	public function get_to( $from_id, $args = [] ) {
 		return $this->get_ids( 'p2p_from', 'p2p_to', $from_id, $args );
 	}
-
-	/**
-	 * @param string $meta_key
-	 * @param string|bool $meta_value
-	 * @param array $args
-	 *
-	 * @return array|null|object
-	 */
-	public function get_connections_by_p2p_meta( $meta_key, $meta_value = false, $args = [] ) {
-		global $wpdb;
-		$sql = $wpdb->prepare( "SELECT * FROM {$wpdb->p2p} LEFT JOIN {$wpdb->p2pmeta} AS p2pm ON p2pm.meta_key=%s", $meta_key );
-
-		if ( ! empty( $meta_value ) ) {
-			$sql .= $wpdb->prepare( " AND p2pm.meta_value=%s", $meta_value );
-		}
-
-		$sql .= "WHERE {$wpdb->p2p}.p2p_id = p2pm.p2p_id";
-
-		if ( isset( $args['type'] ) ) {
-			$sql .= $wpdb->prepare( " AND {$wpdb->p2p}.p2p_type=%s", $args['type'] );
-		}
-
-		return $wpdb->get_results( $sql );
-	}
-
-	/**
-	 * Grab the newest connection made for a p2p_type
-	 *
-	 * @param $p2p_type
-	 *
-	 * @return array
-	 */
-	public function get_newest_connection( $p2p_type ) {
-		global $wpdb;
-		$sql = $wpdb->prepare( "SELECT * FROM {$wpdb->p2p} WHERE p2p_type=%s ORDER BY p2p_id DESC LIMIT 1", $p2p_type );
-
-		return $wpdb->get_row( $sql, ARRAY_A );
-	}
-
-	//////////////////////////////////////
-	///////// PRIVATE FUNCTIONS //////////
-	//////////////////////////////////////
 
 	/**
 	 * @param string $direction 'p2p_to' or 'p2p_from'
@@ -166,6 +124,44 @@ class Connections {
 		add_filter( 'tribe_p2p_where_sql', $inject_where );
 
 		return $join;
+	}
+
+	/**
+	 * @param string $meta_key
+	 * @param string|bool $meta_value
+	 * @param array $args
+	 *
+	 * @return array|null|object
+	 */
+	public function get_connections_by_p2p_meta( $meta_key, $meta_value = false, $args = [] ) {
+		global $wpdb;
+		$sql = $wpdb->prepare( "SELECT * FROM {$wpdb->p2p} LEFT JOIN {$wpdb->p2pmeta} AS p2pm ON p2pm.meta_key=%s", $meta_key );
+
+		if ( ! empty( $meta_value ) ) {
+			$sql .= $wpdb->prepare( " AND p2pm.meta_value=%s", $meta_value );
+		}
+
+		$sql .= "WHERE {$wpdb->p2p}.p2p_id = p2pm.p2p_id";
+
+		if ( isset( $args['type'] ) ) {
+			$sql .= $wpdb->prepare( " AND {$wpdb->p2p}.p2p_type=%s", $args['type'] );
+		}
+
+		return $wpdb->get_results( $sql );
+	}
+
+	/**
+	 * Grab the newest connection made for a p2p_type
+	 *
+	 * @param $p2p_type
+	 *
+	 * @return array
+	 */
+	public function get_newest_connection( $p2p_type ) {
+		global $wpdb;
+		$sql = $wpdb->prepare( "SELECT * FROM {$wpdb->p2p} WHERE p2p_type=%s ORDER BY p2p_id DESC LIMIT 1", $p2p_type );
+
+		return $wpdb->get_row( $sql, ARRAY_A );
 	}
 
 }
