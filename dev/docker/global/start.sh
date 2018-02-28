@@ -25,7 +25,7 @@ fi;
 
 # Newer versions of Docker change the Host IP address. Replace in place on start
 if [[ "$OSTYPE" == "darwin"* ]]; then
-    HOSTIP=`docker run -it alpine nslookup docker.for.mac.localhost | grep "Address 1" | awk  '{ print $3 }' | tail -1`
+    HOSTIP=`docker run --rm -it alpine nslookup docker.for.mac.localhost | grep "Address 1" | awk  '{ print $3 }' | tail -1`
     perl -pi -e "s/HOSTIP=.*?$/HOSTIP=${HOSTIP}/" "$SCRIPTDIR/.env"
 fi;
 
