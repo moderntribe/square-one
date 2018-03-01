@@ -8,7 +8,7 @@ else
   automated=true
 fi
 if [ ! -z $key ]; then
-  if openssl enc -aes-256-cbc -d -in .env -out .env.dec -k $key; then
+  if openssl enc -aes-256-cbc -md sha256 -d -in .env -out .env.dec -k $key; then
     mv .env.dec .env
     if ! $automated; then
       printf "\033[32m.env file decrypted\n"
