@@ -66,11 +66,17 @@ class CardGrid extends Panel {
 		return $cards;
 	}
 
+	private function get_layout_container_attrs( $panel, $panel_object ): string {
+		$data_attrs = sprintf( 'data-name="panels" data-depth="%s" data-livetext', esc_attr( $panel_object->get_depth() ) );
+
+		return sprintf( '%s', $data_attrs );
+	}
+
 	protected function get_cardgrid_attributes() {
 		$attrs = '';
 
 		if ( is_panel_preview() ) {
-			$attrs = 'data-depth=' . $this->panel->get_depth() . ' data-name="' . CardGridPanel::FIELD_CARDS . '" data-index="0" ' . 'data-livetext="true"';
+			$attrs = 'data-depth=' . $this->panel->get_depth() . ' data-name="' . CardGridPanel::FIELD_CARDS . '" data-index="0" data-livetext="true"';
 		}
 
 		if ( empty( $attrs ) ) {

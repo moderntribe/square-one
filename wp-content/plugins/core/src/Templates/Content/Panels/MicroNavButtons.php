@@ -29,7 +29,7 @@ class MicroNavButtons extends Panel {
 		$attrs = '';
 
 		if ( is_panel_preview() ) {
-			$attrs = 'data-depth=' . $this->panel->get_depth() . ' data-name="' . Micro::FIELD_ITEMS . '" data-index="0" ' . 'data-livetext="true"';
+			$attrs = 'data-depth=' . $this->panel->get_depth() . ' data-name="' . Micro::FIELD_ITEMS . '" data-index="0" data-livetext="true"';
 		}
 
 		if ( empty( $attrs ) ) {
