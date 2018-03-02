@@ -38,6 +38,18 @@ module.exports = {
 					},
 				},
 				{
+					match: /\\/g,
+					replacement () {
+						return '"\\';
+					},
+				},
+				{
+					match: /;/g,
+					replacement () {
+						return '";';
+					},
+				},
+				{
 					match: /\$icomoon-font-path: "fonts" !default;/g,
 					replacement () {
 						return '';
