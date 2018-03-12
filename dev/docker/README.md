@@ -13,6 +13,13 @@ download it from [here](https://store.docker.com/editions/community/docker-ce-de
 2. On a terminal window that can run `bash`, go to your Square One checkout's `dev/docker/global` folder. 
 3. **Only if you are on Linux:** Figure out what your Docker service IP address is. If you look at the result of `ifconfig` you should see an interface named `Docker0` or `Docker1` or similar. Take note of the `inet addr` field and create a `.env` file on the `global` folder with the contents of `.env.sample` but replacing `0.0.0.0` with your Docker IP. Tell Daniel or Jonathan what that IP is, maybe we can find some commonalities and automate the process for Linux too.
 4. Run `bash start.sh`. It's going to take a bit. Only this time, I promise.
+4.1 While running the command above you might run into an issue that reads like this:
+	```
+	Starting docker-compose project: global
+	Creating network "global_proxy" with driver "bridge"
+	ERROR: Pool overlaps with other one on this address space
+	```
+	This might happen if you are using, or used, a number of Docker-managed local development stacks; running `docker network prune` should solve the issue. 
 5. One thing `bash.sh` did was to create a certificate on your local machine for a Central Authority so you can sign "real" SSL certificates. This is a bit messy, but the alternative would be having all of that as part of the repo, and it's quite insecure. Any potential attacker with access to our repo could basically fake every secure site on your computer. Whatever. This is better. Trust me. Obviously no one trusts you as a CA yet, so you need to tell your computer to trust it. If you're on OSX, congratulations. You're done. Use this time to go give Jonathan a taco for automating it for you. If you're on Windows [follow this](http://www.cs.virginia.edu/~gsw2c/GridToolsDir/Documentation/ImportTrustedCertificates.htm) or [this](https://unix.stackexchange.com/questions/90450/adding-a-self-signed-certificate-to-the-trusted-list) if you're on Linux.
 6. Open your mysql client (SequelPro, HeidiSQL, etc). Try to connect to your new MySQL server with this info: `host: mysql.tribe - port: 3306 - username: root - password: password`. Open a browser and go to http://mailhog.tribe. Hopefully it all works. If it doesn't try clearing your OS DNS cache. If it still doesn't work submit a bug report (ie: talk to Daniel or Jonathan).
 7. You're done. You can go back to the terminal and run `bash stop.sh` or just leave global running if you're planning on doing some work.
