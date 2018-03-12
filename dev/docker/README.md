@@ -16,8 +16,8 @@ download it from [here](https://store.docker.com/editions/community/docker-ce-de
 4.1 While running the command above you might run into an issue that reads like this:
 	```
 	Starting docker-compose project: global
-    Creating network "global_proxy" with driver "bridge"
-    ERROR: Pool overlaps with other one on this address space
+	Creating network "global_proxy" with driver "bridge"
+	ERROR: Pool overlaps with other one on this address space
 	```
 	This might happen if you are using, or used, a number of Docker-managed local development stacks; running `docker network prune` should solve the issue. 
 5. One thing `bash.sh` did was to create a certificate on your local machine for a Central Authority so you can sign "real" SSL certificates. This is a bit messy, but the alternative would be having all of that as part of the repo, and it's quite insecure. Any potential attacker with access to our repo could basically fake every secure site on your computer. Whatever. This is better. Trust me. Obviously no one trusts you as a CA yet, so you need to tell your computer to trust it. If you're on OSX, congratulations. You're done. Use this time to go give Jonathan a taco for automating it for you. If you're on Windows [follow this](http://www.cs.virginia.edu/~gsw2c/GridToolsDir/Documentation/ImportTrustedCertificates.htm) or [this](https://unix.stackexchange.com/questions/90450/adding-a-self-signed-certificate-to-the-trusted-list) if you're on Linux.
