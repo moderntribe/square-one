@@ -56,7 +56,7 @@
   * [Overview](/docs/tests/README.md)
   * [Codeception](/docs/tests/codeception.md)
   * [Jest](/docs/tests/jest.md)
-* **Local Dev Envoriment**
+* **Local Dev Environment**
   * [Docker](/dev/docker/README.md)
 
 
