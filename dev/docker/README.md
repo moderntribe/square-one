@@ -1,7 +1,7 @@
 # Prerequisites
 
 1. You need to install the latest **EDGE** version of the native Docker client for your platform. For Mac you can 
-download it from [here](https://store.docker.com/editions/community/docker-ce-desktop-mac). For Windows you can download it from [here](https://store.docker.com/editions/community/docker-ce-desktop-windows). If you use Linux you can use the package manager of your distribution of choice, in your case using the stable version instead of EDGE is fine.
+download it from [here](https://store.docker.com/editions/community/docker-ce-desktop-mac). For Windows, ensure you use **Docker CE STABLE** as EDGE is [broken](https://github.com/docker/for-win/issues/1829) with the tribe-proxy container. You can download it from [here](https://store.docker.com/editions/community/docker-ce-desktop-windows). If you use Linux you can use the package manager of your distribution of choice, in your case using the stable version instead of EDGE is fine.
 2. Clean your environment from the old tools you were using. Make sure you don't have installed _dnsmasq_ or any other DNS server, and that you don't have any entries for **.tribe** domains in your /etc/hosts
 3. **For Windows users:** [enable Hyper-V](https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v) and [enable Bash](https://msdn.microsoft.com/en-us/commandline/wsl/install_guide?f=255&MSPPError=-2147217396). If you're on an older Windows version or don't want the Linux subsystem for some weird reason, install [Cygwin](https://www.cygwin.com/).
 4. **For Windows users:** If you have issues with Bash, use [babun](https://github.com/babun/babun) and install [babun-docker](https://github.com/tiangolo/babun-docker).
