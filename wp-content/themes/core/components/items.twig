@@ -1,0 +1,36 @@
+{# Component: Items #}
+
+{%  if list_items %}
+    <{{ tag }}
+        {% if list_classes %}
+            class="{{ list_classes }}"
+        {% endif %}
+        {% if attrs %}
+            {{ attrs }}
+        {% endif %}>
+
+    {% for list_item in list_items %}
+        <{{ list_item_tag }}
+            {% if list_item_attrs %}
+                {{ list_item_attrs }}
+            {% endif %}>
+
+            {% if list_items.url %}
+                <a href="{{ list_items.url }}"
+                   {% if list_items.link_classes %}
+                       class="{{ list_items.link_classes }}"
+                   {% endif %}
+                   {% if list_items.link_attrs %}
+                       {{ list_items.link_attrs }}
+                   {% endif %}>
+            {% endif %}
+
+            {{ list_items.label }}
+
+            {% if list_items.url %}
+                </a>
+            {% endif %}
+        </{{ list_item_tag }}
+    {% endfor %}
+    </{{ tag }}>
+{%  endif %}

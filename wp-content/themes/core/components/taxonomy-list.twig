@@ -1,0 +1,28 @@
+{# Component: taxonomy-list #}
+
+{% if terms is not empty %}
+    <ul class="{{ container_classes }}">
+
+        {% for term in terms %}
+            <li class="{{ list_item_classes }}">
+
+                {% if show_link %}
+                <a
+                        class="{{ link_classes }}"
+                        href="{{ term.url }}"
+                >
+                    {% endif %}
+
+                    <span class="{{ term_classes }}">
+						{{ term.name }}
+					</span>
+
+                    {% if show_link %}
+                </a>
+                {% endif %}
+
+            </li>
+        {% endfor %}
+
+    </ul>
+{% endif %}
