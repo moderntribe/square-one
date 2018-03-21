@@ -166,7 +166,7 @@ class Force_Plugin_Activation {
 		}
 
 		$screen = get_current_screen();
-		if ( $screen->in_admin( 'network' ) ) {
+		if ( $screen && $screen->in_admin( 'network' ) ) {
 			return $plugins;
 		}
 
