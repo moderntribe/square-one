@@ -172,7 +172,7 @@ class Image {
 					$attrs[] = sprintf( 'sizes="%s"', $this->options[ 'srcset_sizes_attr' ] );
 					$attrs[] = sprintf( 'srcset="%s"', $srcset_urls );
 				}
-				if ( $this->options[ 'use_h&w_attr' ] && $this->options[ 'src' ] && 'image/svg' !== $this->options['mime_type']['type']  ) {
+				if ( $this->generate_size( $src_width, $src_height ) ) {
 					$attrs[] = sprintf( 'width="%s"', $src_width / 2 );
 					$attrs[] = sprintf( 'height="%s"', $src_height / 2 );
 				}
@@ -181,6 +181,18 @@ class Image {
 		return implode( ' ', $attrs );
 	}
 
+
+	private function generate_size( $width, $height ) {
+		if ( ! $width && ! $height ) {
+			return false;
+		}
+
+		$no_size_mime_types = [
+			'image/svg',
+		];
+
+		return $this->options[ 'use_h&w_attr' ] && $this->options[ 'src' ] &&  ! in_array( $this->options['mime_type']['type'], $no_size_mime_types );
+	}
 
 	/**
 	 * Returns shim src for lazyloading on request. Auto shim uses size name to lookup png file
