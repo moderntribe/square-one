@@ -9,7 +9,7 @@ class Gallery extends Panel_Type_Config {
 	const NAME = 'gallery';
 
 	const FIELD_TITLE                            = 'title';
-	const FIELD_CONTENT                          = 'content';
+	const FIELD_DESCRIPTION                      = 'description';
 	const FIELD_IMAGE_TREATMENT                  = 'image_treatment';
 	const FIELD_IMAGE_TREATMENT_OPTION_CROP      = 'crop';
 	const FIELD_IMAGE_TREATMENT_OPTION_LETTERBOX = 'letterbox';
@@ -28,8 +28,9 @@ class Gallery extends Panel_Type_Config {
 
 		// Panel Description
 		$panel->add_field( new Fields\TextArea( [
-			'name'  => self::FIELD_CONTENT,
-			'label' => __( 'Description', 'tribe' ),
+			'name'     => self::FIELD_DESCRIPTION,
+			'label'    => __( 'Description', 'tribe' ),
+			'richtext' => true,
 		] ) );
 
 		// Image Treatment

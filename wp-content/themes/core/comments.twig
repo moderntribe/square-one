@@ -13,7 +13,7 @@
 			{{ include( 'content/pagination/comments.twig' ) }}
 
 			{% if open == false %}
-				<p class="comments__none">{{ lang[ 'Comments are closed.' ]|esc_html }}</p>
+				<p class="comments__none">{{ __( 'Comments are closed.' )|esc_html }}</p>
 			{% endif %}
 
 		{% endif %}
