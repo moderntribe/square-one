@@ -3,14 +3,12 @@
 
 namespace Tribe\Project\Templates\Content\Pagination;
 
-use Tribe\Project\Twig\Noop_Lazy_Strings;
 use Tribe\Project\Twig\Twig_Template;
 
 class Comments extends Twig_Template {
 	public function get_data(): array {
 		return [
 			'pagination' => $this->get_pagination(),
-			'lang'       => new Noop_Lazy_Strings( 'tribe' ),
 		];
 	}
 

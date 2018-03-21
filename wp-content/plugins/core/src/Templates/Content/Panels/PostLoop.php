@@ -20,9 +20,8 @@ class PostLoop extends Panel {
 
 	public function get_mapped_panel_data(): array {
 		$data = [
-			'title'       => $this->get_title( PostLoopPanel::FIELD_TITLE, [ 'site-section__title', 'h2' ] ),
-			'description' => ! empty( $this->panel_vars[ PostLoopPanel::FIELD_DESCRIPTION ] ) ? $this->panel_vars[ PostLoopPanel::FIELD_DESCRIPTION ] : false,
-			'posts'       => $this->get_posts(),
+			'title' => $this->get_title( $this->panel_vars[ PostLoopPanel::FIELD_TITLE ], [ 'site-section__title', 'h2' ] ),
+			'posts' => $this->get_posts(),
 		];
 
 		return $data;

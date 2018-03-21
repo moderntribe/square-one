@@ -53,3 +53,6 @@ usage: `wp s1 generate settings <settings-page-name>`
 Dumps the files needed for [silex-pimple-plugin](https://plugins.jetbrains.com/plugin/7809-silex-pimple-plugin) to provide jump-to definition in PHP Storm.
 usage: `wp s1 pimple`
 
+#### DevOps ####
+`wp s1 cache-prime`<BR>
+Clears caches for all URLs on a given page (the default is the homepage). If the URL is external, there will be no effect. In this way, you are able to "get a head start" on caching. This is particularly useful on deploys. usage: `wp s1 cache-prime  [--target-url=<target-url>]`

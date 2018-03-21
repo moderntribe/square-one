@@ -5,15 +5,9 @@ if file .env | grep "data$" &> /dev/null; then
   exit 1
 fi
 
-if ! openssl version | grep " 1\." &> /dev/null; then
-  echo "Make sure you have openssl major version 1 installed and in your path, here's the version we detected:"
-  openssl version
-  exit 1
-fi
-
 read -p "Please enter a key to encrypt the .env file: " key
 if [ ! -z $key ]; then
-  openssl enc -aes-256-cbc -in .env -out .env.enc -k $key
+  openssl enc -aes-256-cbc -md sha256 -in .env -out .env.enc -k $key
   mv .env.enc .env
   printf "\033[32m\nEncrypted .env file with your new key: $key\033[0m\n"
   printf "\033[33m\nIMPORTANT: Please save these key somewhere safe\n"

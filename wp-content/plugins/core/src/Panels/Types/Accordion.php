@@ -8,8 +8,7 @@ class Accordion extends Panel_Type_Config {
 
 	const NAME = 'accordion';
 
-	const FIELD_IMAGE                = 'image';
-	const FIELD_CONTENT              = 'content';
+	const FIELD_DESCRIPTION          = 'description';
 	const FIELD_ACCORDIONS           = 'accordions';
 	const FIELD_ACCORDION_TITLE      = 'title';
 	const FIELD_ACCORDION_CONTENT    = 'row_content';
@@ -39,8 +38,8 @@ class Accordion extends Panel_Type_Config {
 		] ) );
 
 		$panel->add_field( new Fields\TextArea( [
-			'name'     => self::FIELD_CONTENT,
-			'label'    => __( 'Content', 'tribe' ),
+			'name'     => self::FIELD_DESCRIPTION,
+			'label'    => __( 'Description', 'tribe' ),
 			'richtext' => true,
 		] ) );
 
