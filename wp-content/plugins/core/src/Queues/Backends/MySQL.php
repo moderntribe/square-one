@@ -12,7 +12,16 @@ class MySQL implements Backend {
 	public function __construct() {
 		global $wpdb;
 
-		$this->table_name = $wpdb->prefix . self::DB_TABLE;
+		$table_name = $wpdb->prefix . self::DB_TABLE;
+
+		/**
+		 * Filter the table name used for queues on this backend.
+		 *
+		 * @param string $table_name Table name with $wpdb->prefix added
+		 */
+		$table_name = apply_filters( 'core_queues_backend_mysql_table_name', $table_name );
+
+		$this->table_name = $table_name;
 	}
 
 	public function enqueue( string $queue_name, Message $message ) {
@@ -25,10 +34,21 @@ class MySQL implements Backend {
 	}
 
 	private function prepare_data( $message ) {
+		$args = $message->get_args();
+
+		$run_after = '0000-00-00 00:00:00';
+
+		if ( isset( $args['run_after'] ) ) {
+			$run_after = $args['run_after'];
+
+			unset( $args['run_after'] );
+		}
+
 		return [
 			'task_handler' => $message->get_task_handler(),
-			'args'         => json_encode( $message->get_args() ),
+			'args'         => json_encode( $args ),
 			'priority'     => $message->get_priority(),
+			'run_after'    => $run_after,
 			'taken'        => 0,
 			'done'         => 0,
 		];
@@ -43,6 +63,7 @@ class MySQL implements Backend {
 				WHERE queue = %s
 				AND taken = 0 
 				AND done = 0
+				AND run_after <= CURRENT_TIME()
 				ORDER BY priority ASC
 				LIMIT 0,1
 				",
@@ -140,6 +161,7 @@ class MySQL implements Backend {
 					task_handler varchar(255) NOT NULL,
 					args text NOT NULL,
 					priority int(3),
+					run_after datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
 					taken int(10) NOT NULL DEFAULT 0,
 					done int(10)
 				)"
