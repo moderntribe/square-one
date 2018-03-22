@@ -117,7 +117,6 @@ class Image {
 			$src_width  = $src[1];
 			$src_height = $src[2];
 			$src        = $src[0];
-			$this->options[ 'mime_type' ] = wp_check_filetype( $src );
 		}
 		$attrs[] = !empty( $this->options[ 'img_attr' ] ) ? trim( $this->options[ 'img_attr' ] ) : '';
 
@@ -187,11 +186,7 @@ class Image {
 			return false;
 		}
 
-		$no_size_mime_types = [
-			'image/svg',
-		];
-
-		return $this->options[ 'use_h&w_attr' ] && $this->options[ 'src' ] &&  ! in_array( $this->options['mime_type']['type'], $no_size_mime_types );
+		return $this->options[ 'use_h&w_attr' ] && $this->options[ 'src' ];
 	}
 
 	/**
