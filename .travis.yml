@@ -6,7 +6,7 @@ notifications:
   email: false
 
 php:
-  - '7.0'
+  - 7.0
 
 services:
   - mysql
@@ -48,8 +48,8 @@ env:
 
 before_install:
   # create the databases needed for the tests
-  - mysql -e "create database IF NOT EXISTS $DB_NAME;" -uroot
-  - mysql -e "create database IF NOT EXISTS $TEST_DB_NAME;" -uroot
+  - mysql -e "create database IF NOT EXISTS ${DB_NAME};" -uroot
+  - mysql -e "create database IF NOT EXISTS ${TEST_DB_NAME};" -uroot
 
   # tweak git to correctly work with submodules
   - sed -i 's/git@github.com:/git:\/\/github.com\//' .gitmodules
@@ -62,7 +62,7 @@ install:
   - composer install
 
 before_script:
-  # change MySQL root password
+  # change MySQL root password to match wp-content/plugins/core-tests/codeception.dist.yml
   - echo "USE mysql;\nUPDATE user SET password=PASSWORD('password') WHERE user='root';\nFLUSH PRIVILEGES;\n" | mysql -u root
 
   # set up folders
@@ -99,6 +99,9 @@ before_script:
 
   # return to the WordPress folder
   - cd $WP_ROOT_FOLDER
+
+  # install WordPress db structure
+  - wp core install --url="${WP_URL}" --title="TEC Tests" --admin_user="${WP_ADMIN_USERNAME}" --admin_password="${WP_ADMIN_PASSWORD}"
 
   # flush rewrite rules
   - wp rewrite structure '/%postname%/' --hard
