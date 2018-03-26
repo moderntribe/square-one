@@ -59,7 +59,7 @@ install:
   # disable XDebug to speed up the tests
   - phpenv config-rm xdebug.ini
 
-  - composer install --no-install
+  - composer update --prefer-dist
 
 before_script:
   # change MySQL root password to match wp-content/plugins/core-tests/codeception.dist.yml
