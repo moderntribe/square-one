@@ -17,8 +17,8 @@ addons:
       # needed for Nginx
       - libjpeg-dev
       - libpng12-dev
-      - php7-fpm
-      - php7-mysql
+      - php7.0-fpm
+      - php7.0-mysql
       - nginx
   hosts:
     # resolve the following domains to localhost
@@ -35,22 +35,16 @@ cache:
 
 env:
   global:
-    - WP_VERSION="latest"
-    - WP_ROOT_FOLDER="/tmp/wordpress"
+    - WP_ROOT_FOLDER="/application/www/wp"
     - WP_URL="http://square1.localhost"
     - WP_DOMAIN="square1.localhost"
-    - WP_TABLE_PREFIX="wp_"
-    - DB_NAME="wp"
+    - WP_TABLE_PREFIX="tribe_"
     - DB_NAME="wp"
     - DB_USER="root"
-    - DB_PASSWORD=""
-    - TEST_DB_NAME="test"
-    - TEST_DB_HOST="localhost"
-    - TEST_DB_USER="root"
-    - TEST_DB_PASSWORD=""
+    - DB_PASSWORD="password"
+    - TEST_DB_NAME="tribe_square1_tests"
     - WP_ADMIN_USERNAME="admin"
     - WP_ADMIN_PASSWORD="password"
-    - CORE_TESTS_FOLDER=
 
 before_install:
   # create the databases needed for the tests
@@ -65,9 +59,12 @@ install:
   # disable XDebug to speed up the tests
   - phpenv config-rm xdebug.ini
 
-  - composer update --prefer-dist
+  - composer install
 
 before_script:
+  # change MySQL root password
+  - echo "USE mysql;\nUPDATE user SET password=PASSWORD('password') WHERE user='root';\nFLUSH PRIVILEGES;\n" | mysql -u root
+
   # set up folders
   - mkdir -p /tmp/tools $WP_ROOT_FOLDER
 
@@ -75,12 +72,6 @@ before_script:
   - wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -P /tmp/tools/
   - chmod +x /tmp/tools/wp-cli.phar && mv /tmp/tools/wp-cli.phar /tmp/tools/wp
   - export PATH=$PATH:/tmp/tools:vendor/bin
-
-  # install WordPress in the `wordpress` folder
-  - cd $WP_ROOT_FOLDER
-  - wp core download --version=$WP_VERSION
-  - wp config create --dbname="$DB_NAME" --dbuser="root" --dbpass="" --dbhost="127.0.0.1" --dbprefix="$WP_TABLE_PREFIX"
-  - wp core install --url="$WP_URL" --title="TEC Tests" --admin_user="$WP_ADMIN_USERNAME" --admin_password="$WP_ADMIN_PASSWORD" --admin_email="admin@$WP_DOMAIN" --skip-email
 
   # get back to the build folder
   - cd $TRAVIS_BUILD_DIR
@@ -93,13 +84,21 @@ before_script:
   # enable the site
   - sudo ln -s /etc/nginx/sites-available/$WP_DOMAIN /etc/nginx/sites-enabled/
 
-  # move the plugin into WordPress folder
-  - mv $TRAVIS_BUILD_DIR $WP_ROOT_FOLDER/wp-content/plugins/the-events-calendar
-  - export PLUGIN_DIR="$WP_ROOT_FOLDER/wp-content/plugins/the-events-calendar"
+  # move our repo into the Nginx root folder
+  - mv $TRAVIS_BUILD_DIR $WP_ROOT_FOLDER
 
-  # activate the plugin in WordPress
+  # and back to the WP folder
   - cd $WP_ROOT_FOLDER
-  - wp plugin activate the-events-calendar
+
+  # build local-config.php
+  - cat >> "define( 'DB_NAME', '${DB_NAME}' );" local-config.php
+  - cat >> "define( 'DB_USER', '${DB_USER}' );" local-config.php
+  - cat >> "define( 'DB_PASSWORD', '${DB_PASSWORD}' );" local-config.php
+  - cat >> "define( 'DB_HOST', '127.0.0.1' );" local-config.php
+  - cat >> "define( 'TRIBE_GLOMAR', false );" local-config.php
+
+  # return to the WordPress folder
+  - cd $WP_ROOT_FOLDER
 
   # flush rewrite rules
   - wp rewrite structure '/%postname%/' --hard
@@ -107,11 +106,14 @@ before_script:
   # export a dump of the just installed database to the _data folder
   - wp db export $PLUGIN_DIR/tests/_data/dump.sql
 
-  # get back to the plugin dir
-  - cd $PLUGIN_DIR
+  # go to the core-tests folder
+  - cd $WP_ROOT_FOLDER/wp-content/plugins/core-tests
+
+  # run on the core-tests folder
+  - composer install
 
   # restart Nnginx and PHP-FPM services
-  - sudo service php5-fpm restart
+  - sudo service php7.0-fpm restart
   - sudo service nginx restart
 
 script:
