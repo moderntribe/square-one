@@ -17,8 +17,8 @@ addons:
       # needed for Nginx
       - libjpeg-dev
       - libpng12-dev
-      - php7.0-fpm
-      - php7.0-mysql
+      - php5-fpm
+      - php5-mysql
       - nginx
   hosts:
     # resolve the following domains to localhost
@@ -116,7 +116,7 @@ before_script:
   - composer install
 
   # restart Nnginx and PHP-FPM services
-  - sudo service php7.0-fpm restart
+  - sudo service php5-fpm restart
   - sudo service nginx restart
 
 script:
