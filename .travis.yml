@@ -67,7 +67,8 @@ before_script:
   - echo "USE mysql;\nUPDATE user SET password=PASSWORD('password') WHERE user='root';\nFLUSH PRIVILEGES;\n" | mysql -u root
 
   # set up folders
-  - mkdir -p /tmp/tools $WP_ROOT_FOLDER
+  - sudo mkdir -p /tmp/tools $WP_ROOT_FOLDER
+  - sudo chown -R travis $WP_ROOT_FOLDER
 
   # install wp-cli
   - wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -P /tmp/tools/
