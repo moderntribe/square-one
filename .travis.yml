@@ -68,7 +68,7 @@ before_script:
 
   # set up folders
   - sudo mkdir -p /tmp/tools $WP_ROOT_FOLDER
-  - sudo chown -R travis $WP_ROOT_FOLDER
+  - sudo chown -R travis /tmp/tools $WP_ROOT_FOLDER
 
   # install wp-cli
   - wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -P /tmp/tools/
