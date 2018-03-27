@@ -101,7 +101,7 @@ before_script:
   - cat >> "define( 'TRIBE_GLOMAR', false );" local-config.php
 
   # install WordPress db structure
-  - wp core install --url="${WP_URL}" --title="Square1 Tests" --admin_user="${WP_ADMIN_USERNAME}" --admin_password="${WP_ADMIN_PASSWORD}"
+  - wp core install --url="${WP_URL}" --title="Square1 Tests" --admin_user="${WP_ADMIN_USERNAME}" --admin_password="${WP_ADMIN_PASSWORD}" --path="${WP_ROOT_FOLDER}"
 
   # flush rewrite rules
   - wp rewrite structure '/%postname%/' --hard
