@@ -91,6 +91,7 @@ before_script:
 
   # and back to the WP folder
   - cd $WP_ROOT_FOLDER
+  - ls
 
   # build local-config.php
   - touch local-config.php
