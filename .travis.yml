@@ -94,21 +94,14 @@ before_script:
 
   # build local-config.php
   - touch local-config.php
-  - cat >> "define( 'DB_NAME', '${DB_NAME}' );" local-config.php
-  - cat >> "define( 'DB_USER', '${DB_USER}' );" local-config.php
-  - cat >> "define( 'DB_PASSWORD', '${DB_PASSWORD}' );" local-config.php
-  - cat >> "define( 'DB_HOST', '127.0.0.1' );" local-config.php
-  - cat >> "define( 'TRIBE_GLOMAR', false );" local-config.php
-
-  # debug
-  - cat local-config.php
-  - wp --info
-  - ls
-  - cd $WP_ROOT_FOLDER/wp
-  - ls
+  - echo "define( 'DB_NAME', '${DB_NAME}' );" >> local-config.php
+  - echo "define( 'DB_USER', '${DB_USER}' );" >> local-config.php
+  - echo "define( 'DB_PASSWORD', '${DB_PASSWORD}' );" >> local-config.php
+  - echo "define( 'DB_HOST', '127.0.0.1' );" >> local-config.php
+  - echo "define( 'TRIBE_GLOMAR', false );" >> local-config.php
 
   # install WordPress db structure
-  - wp core install --url="${WP_URL}" --title="Square1 Tests" --admin_user="${WP_ADMIN_USERNAME}" --admin_password="${WP_ADMIN_PASSWORD}" --path="${WP_ROOT_FOLDER}"
+  - wp core install --url="${WP_URL}" --title="Square1 Tests" --admin_user="${WP_ADMIN_USERNAME}" --admin_password="${WP_ADMIN_PASSWORD}" --admin_email="admin@${WP_DOMAIN}" --skip-email
 
   # flush rewrite rules
   - wp rewrite structure '/%postname%/' --hard
