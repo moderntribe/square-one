@@ -93,6 +93,7 @@ before_script:
   - cd $WP_ROOT_FOLDER
 
   # build local-config.php
+  - touch local-config.php
   - cat >> "define( 'DB_NAME', '${DB_NAME}' );" local-config.php
   - cat >> "define( 'DB_USER', '${DB_USER}' );" local-config.php
   - cat >> "define( 'DB_PASSWORD', '${DB_PASSWORD}' );" local-config.php
