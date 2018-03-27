@@ -5,6 +5,7 @@ namespace Tribe\Project\Service_Providers;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Tribe\Project\CLI\CLI_Generator;
+use Tribe\Project\CLI\Settings_Generator;
 use Tribe\Project\CLI\CPT_Generator;
 use Tribe\Project\CLI\File_System;
 use Tribe\Project\CLI\Pimple_Dump;
@@ -38,6 +39,10 @@ class CLI_Provider implements ServiceProviderInterface {
 			return new Cache_Prime();
 		};
 
+		$container['cli.settings_generator'] = function ( $container ) {
+			return new Settings_Generator( $container['cli.file-system'] );
+		};
+
 		add_action( 'init', function () use ( $container ) {
 			if ( ! defined( 'WP_CLI' ) || ! WP_CLI ) {
 				return;
@@ -48,6 +53,7 @@ class CLI_Provider implements ServiceProviderInterface {
 			$container['cli.taxonomy-generator']->register();
 			$container['cli.cli-generator']->register();
 			$container['cli.cache-prime']->register();
+			$container['cli.settings_generator']->register();
 		}, 0, 0 );
 	}
 }

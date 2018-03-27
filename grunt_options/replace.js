@@ -32,6 +32,10 @@ module.exports = {
 		options: {
 			patterns: [
 				{
+					match: /(\\[a-f0-9]+);/g,
+					replacement: '"$1";',
+				},
+				{
 					match: /\$/g,
 					replacement () {
 						return '--';
