@@ -91,7 +91,6 @@ before_script:
 
   # and back to the WP folder
   - cd $WP_ROOT_FOLDER
-  - ls
 
   # build local-config.php
   - touch local-config.php
@@ -100,6 +99,13 @@ before_script:
   - cat >> "define( 'DB_PASSWORD', '${DB_PASSWORD}' );" local-config.php
   - cat >> "define( 'DB_HOST', '127.0.0.1' );" local-config.php
   - cat >> "define( 'TRIBE_GLOMAR', false );" local-config.php
+
+  # debug
+  - cat local-config.php
+  - wp --info
+  - ls
+  - cd $WP_ROOT_FOLDER/wp
+  - ls
 
   # install WordPress db structure
   - wp core install --url="${WP_URL}" --title="Square1 Tests" --admin_user="${WP_ADMIN_USERNAME}" --admin_password="${WP_ADMIN_PASSWORD}" --path="${WP_ROOT_FOLDER}"
