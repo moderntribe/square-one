@@ -21,9 +21,8 @@ addons:
       - docker-ce
 
 env:
-  - DOCKER_COMPOSER_VERSION=1.19.0
-  - DOCKER_GLOBAL=${TRAVIS_BUILD_DIR}/dev/docker/global
-  - DOCKER_PROJECT=${TRAVIS_BUILD_DIR}/dev/docker
+  global:
+    - DOCKER_COMPOSER_VERSION=1.19.0
 
 before_install:
   # update docker
@@ -40,10 +39,10 @@ before_install:
 
 install:
   # start the global docker
-  - ${DOCKER_GLOBAL}/start.sh
+  - bash dev/docker/global/start.sh
 
   # start the project docker
-  - ${DOCKER_PROJECT}/start.sh
+  - bash dev/docker/start.sh
 
 before_script:
 
