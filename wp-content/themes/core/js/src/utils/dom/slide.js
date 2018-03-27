@@ -14,7 +14,11 @@ const options = {
 const requestIds = [];
 
 /**
- * CSS ease function using cubic-bezier(0.25, 0.1, 0.25, 1)
+ * Interpolated piece-wise function for CSS ease function using cubic-bezier(0.25, 0.1, 0.25, 1)
+ * At t = 0, easeFxn(t) = 0
+ * At t = 1, easeFxn(t) = 1
+ * If t < 0.2074, easeFxn(t) = -3.8716*t^3 + 6.1370*t^2 + 0.4*t
+ * If t >= 0.2074, easeFxn(t) = 1.1317*(t-1)^3 - 0.1975*(t-1)^2 + 1
  * @param {Number} t Progress from 0 to 1
  */
 const easeFxn = t => (t < 0.2074 ? (((-3.8716) * t * t * t) + (6.1370 * t * t) + (0.4 * t)) : ((1.1317 * (t - 1) * (t - 1) * (t - 1)) - (0.1975 * (t - 1) * (t - 1)) + 1));
