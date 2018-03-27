@@ -110,7 +110,9 @@ before_script:
   - wp rewrite structure '/%postname%/' --hard
 
   # export a dump of the just installed database to the _data folder
-  - wp db export $PLUGIN_DIR/tests/_data/dump.sql
+  - mkdir -p wp-content/plugins/core-tests/tests/_data
+  - chown -R travis wp-content/plugins/core-tests/tests/_data
+  - wp db export wp-content/plugins/core-tests/tests/_data/dump.sql
 
   # go to the core-tests folder
   - cd $WP_ROOT_FOLDER/wp-content/plugins/core-tests
