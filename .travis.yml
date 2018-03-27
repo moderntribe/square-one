@@ -104,7 +104,7 @@ before_script:
   - cd $WP_ROOT_FOLDER
 
   # install WordPress db structure
-  - wp core install --url="${WP_URL}" --title="TEC Tests" --admin_user="${WP_ADMIN_USERNAME}" --admin_password="${WP_ADMIN_PASSWORD}"
+  - wp core install --url="${WP_URL}" --title="Square1 Tests" --admin_user="${WP_ADMIN_USERNAME}" --admin_password="${WP_ADMIN_PASSWORD}"
 
   # flush rewrite rules
   - wp rewrite structure '/%postname%/' --hard
