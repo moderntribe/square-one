@@ -25,6 +25,9 @@ env:
     - DOCKER_COMPOSE_VERSION=1.19.0
 
 before_install:
+  # stop services with conflicting ports
+  sudo service mysql stop
+
   # update docker
   - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
   - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
