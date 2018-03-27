@@ -6,122 +6,45 @@ notifications:
   email: false
 
 php:
-  - 7.0
   - 7.1
 
 services:
-  - mysql
-
-addons:
-  apt:
-    packages:
-      # needed for Nginx
-      - libjpeg-dev
-      - libpng12-dev
-      - php5-fpm
-      - php5-mysql
-      - nginx
-  hosts:
-    # resolve the following domains to localhost
-    - square1.localhost
+  - docker
 
 # disable the default submodule logic
 git:
   submodules: false
 
-cache:
-  directories:
-    - vendor
-    - $HOME/.composer/cache
+addons:
+  apt:
+    packages:
+      - docker-ce
 
 env:
-  global:
-    - WP_ROOT_FOLDER="/application/www"
-    - WP_URL="http://square1.localhost"
-    - WP_DOMAIN="square1.localhost"
-    - WP_TABLE_PREFIX="tribe_"
-    - DB_NAME="wp"
-    - DB_USER="root"
-    - DB_PASSWORD="password"
-    - TEST_DB_NAME="tribe_square1_tests"
-    - WP_ADMIN_USERNAME="admin"
-    - WP_ADMIN_PASSWORD="password"
-    - secure: "aQg9k8gfC6ZYrrIficXiEv5Rt2BWJ6dV4syxOYkiBtDR7Hl71atnuR10MZdUrt0JKMeLvnZTT0ncSVHPoEcEWKZmSoIje0HvGPPUigSnPXlyLwaC6iPF8Y/TPIiiQNostFjKzstlxvORobjB7o3yEUn/RbmDxFx9t1sWiUgfTWY="
+  - DOCKER_COMPOSER_VERSION=1.19.0
+  - DOCKER_GLOBAL=${TRAVIS_BUILD_DIR}/dev/docker/global
+  - DOCKER_PROJECT=${TRAVIS_BUILD_DIR}/dev/docker
 
 before_install:
-  # add the encrypted github user token
-  - echo -e "machine github.com\n  login $CI_USER_TOKEN" >> ~/.netrc
+  # update docker
+  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+  - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+  - sudo apt-get update
+  - sudo apt-get -y install docker-ce
 
-  # create the databases needed for the tests
-  - mysql -e "create database IF NOT EXISTS ${DB_NAME};" -uroot
-  - mysql -e "create database IF NOT EXISTS ${TEST_DB_NAME};" -uroot
+  # remove existing version of docker-compose and install an updated version
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
 
 install:
-  # disable XDebug to speed up the tests
-  - phpenv config-rm xdebug.ini
+  # start the global docker
+  - ${DOCKER_GLOBAL}/start.sh
 
-  - composer config -g github-oauth.github.com $CI_USER_TOKEN
-  - composer install
+  # start the project docker
+  - ${DOCKER_PROJECT}/start.sh
 
 before_script:
-  # change MySQL root password to match wp-content/plugins/core-tests/codeception.dist.yml
-  - echo "USE mysql;\nUPDATE user SET password=PASSWORD('password') WHERE user='root';\nFLUSH PRIVILEGES;\n" | mysql -u root
-
-  # set up folders
-  - sudo mkdir -p /tmp/tools $WP_ROOT_FOLDER
-  - sudo chown -R travis /tmp/tools $WP_ROOT_FOLDER
-
-  # install wp-cli
-  - wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -P /tmp/tools/
-  - chmod +x /tmp/tools/wp-cli.phar && mv /tmp/tools/wp-cli.phar /tmp/tools/wp
-  - export PATH=$PATH:/tmp/tools:vendor/bin
-
-  # get back to the build folder
-  - cd $TRAVIS_BUILD_DIR
-
-  # copy the Nginx configuration file to the available sites
-  - sudo cp wp-content/plugins/core-tests/tests/_support/travis/nginx.conf /etc/nginx/sites-available/$WP_DOMAIN
-  - sudo sed -e "s?%WP_ROOT_FOLDER%?$WP_ROOT_FOLDER?g" --in-place /etc/nginx/sites-available/$WP_DOMAIN
-  - sudo sed -e "s?%WP_DOMAIN%?$WP_DOMAIN?g" --in-place /etc/nginx/sites-available/$WP_DOMAIN
-
-  # enable the site
-  - sudo ln -s /etc/nginx/sites-available/$WP_DOMAIN /etc/nginx/sites-enabled/
-
-  # move our repo into the Nginx root folder
-  - mv $TRAVIS_BUILD_DIR/* $WP_ROOT_FOLDER
-
-  # and back to the WP folder
-  - cd $WP_ROOT_FOLDER
-
-  # build local-config.php
-  - touch local-config.php
-  - echo "define( 'DB_NAME', '${DB_NAME}' );" >> local-config.php
-  - echo "define( 'DB_USER', '${DB_USER}' );" >> local-config.php
-  - echo "define( 'DB_PASSWORD', '${DB_PASSWORD}' );" >> local-config.php
-  - echo "define( 'DB_HOST', '127.0.0.1' );" >> local-config.php
-  - echo "define( 'TRIBE_GLOMAR', false );" >> local-config.php
-
-  # install WordPress db structure
-  - wp core install --url="${WP_URL}" --title="Square1 Tests" --admin_user="${WP_ADMIN_USERNAME}" --admin_password="${WP_ADMIN_PASSWORD}" --admin_email="admin@${WP_DOMAIN}" --skip-email
-
-  # flush rewrite rules
-  - wp rewrite structure '/%postname%/' --hard
-
-  # export a dump of the just installed database to the _data folder
-  - mkdir -p wp-content/plugins/core-tests/tests/_data
-  - chown -R travis wp-content/plugins/core-tests/tests/_data
-  - wp db export wp-content/plugins/core-tests/tests/_data/dump.sql
-
-  # go to the core-tests folder
-  - cd $WP_ROOT_FOLDER/wp-content/plugins/core-tests
-
-  # run on the core-tests folder
-  - composer update
-  - composer install
-
-  # restart Nnginx and PHP-FPM services
-  - sudo service php5-fpm restart
-  - sudo service nginx restart
 
 script:
-  - codecept run integration
