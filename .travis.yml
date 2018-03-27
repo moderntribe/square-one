@@ -35,7 +35,7 @@ cache:
 
 env:
   global:
-    - WP_ROOT_FOLDER="/application/www/wp"
+    - WP_ROOT_FOLDER="/application/www"
     - WP_URL="http://square1.localhost"
     - WP_DOMAIN="square1.localhost"
     - WP_TABLE_PREFIX="tribe_"
@@ -99,9 +99,6 @@ before_script:
   - cat >> "define( 'DB_PASSWORD', '${DB_PASSWORD}' );" local-config.php
   - cat >> "define( 'DB_HOST', '127.0.0.1' );" local-config.php
   - cat >> "define( 'TRIBE_GLOMAR', false );" local-config.php
-
-  # return to the WordPress folder
-  - cd $WP_ROOT_FOLDER
 
   # install WordPress db structure
   - wp core install --url="${WP_URL}" --title="Square1 Tests" --admin_user="${WP_ADMIN_USERNAME}" --admin_password="${WP_ADMIN_PASSWORD}"
