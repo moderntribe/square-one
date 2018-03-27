@@ -22,7 +22,7 @@ addons:
 
 env:
   global:
-    - DOCKER_COMPOSER_VERSION=1.19.0
+    - DOCKER_COMPOSE_VERSION=1.19.0
 
 before_install:
   # update docker
