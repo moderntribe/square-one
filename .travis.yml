@@ -87,7 +87,7 @@ before_script:
   - sudo ln -s /etc/nginx/sites-available/$WP_DOMAIN /etc/nginx/sites-enabled/
 
   # move our repo into the Nginx root folder
-  - mv $TRAVIS_BUILD_DIR/square-one/* $WP_ROOT_FOLDER
+  - mv $TRAVIS_BUILD_DIR/* $WP_ROOT_FOLDER
 
   # and back to the WP folder
   - cd $WP_ROOT_FOLDER
