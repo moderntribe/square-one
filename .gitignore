@@ -44,6 +44,7 @@ wp-content/mu-plugins/mu.local.php
 wp-content/mu-plugins/mercator/
 wp-content/plugins/*
 !wp-content/plugins/core
+!wp-content/plugins/core-tests
 !wp-content/plugins/advanced-custom-fields-pro
 !wp-content/plugins/gravityforms
 !wp-content/plugins/term-sorter
