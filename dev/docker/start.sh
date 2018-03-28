@@ -33,13 +33,13 @@ if [ ! -f ${CONFIG_FILE} ] && [ "$CI" != true ]; then
     printf '{ "github-oauth": { "github.com": "%s" } }\n' "$githubtoken" >> ${CONFIG_FILE}
 fi
 
-${DC_COMMAND} --project-name=${PROJECT_ID} up -d --force-recreate
-
 # If this is running on Travis, pass our encrypted github token from .travis.yml (secure variable)
 if [ "$CI" = true ]; then
     sudo touch ${CONFIG_FILE}
     sudo printf '{ "github-oauth": { "github.com": "%s" } }\n' "$CI_USER_TOKEN" >> ${CONFIG_FILE}
     sudo chown travis:travis ${CONFIG_FILE}
 fi
+
+${DC_COMMAND} --project-name=${PROJECT_ID} up -d --force-recreate
 
 bash ${SCRIPTDIR}/composer.sh install
