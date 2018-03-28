@@ -85,6 +85,12 @@ install:
   # copy tests sample config
   - cp tests-config-sample.php tests-config.php
 
+  # generate composer files for codeception
+  - cd wp-content/plugins/core-tests
+  - composer install
+
 before_script:
 
 script:
+  - cd $TRAVIS_BUILD_DIR
+  - bash dev/docker/codecept.sh run integration
