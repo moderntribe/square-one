@@ -23,6 +23,15 @@ addons:
 env:
   global:
     - DOCKER_COMPOSE_VERSION=1.19.0
+    - WP_URL="http://square1.localhost"
+    - WP_DOMAIN="square1.localhost"
+    - WP_TABLE_PREFIX="tribe_"
+    - DB_NAME="wp"
+    - DB_USER="root"
+    - DB_PASSWORD="password"
+    - TEST_DB_NAME="tribe_square1_tests"
+    - WP_ADMIN_USERNAME="admin"
+    - WP_ADMIN_PASSWORD="password"
     - secure: "aQg9k8gfC6ZYrrIficXiEv5Rt2BWJ6dV4syxOYkiBtDR7Hl71atnuR10MZdUrt0JKMeLvnZTT0ncSVHPoEcEWKZmSoIje0HvGPPUigSnPXlyLwaC6iPF8Y/TPIiiQNostFjKzstlxvORobjB7o3yEUn/RbmDxFx9t1sWiUgfTWY="
 
 before_install:
@@ -46,6 +55,20 @@ install:
 
   # start the square1 project docker
   - sudo bash dev/docker/start.sh
+
+  # update resolv.conf to use our local DNS
+  - sudo sed -i '1s/^/nameserver 127.0.0.1\n/' /etc/resolv.conf
+
+  # create local-config.php
+  - touch local-config.php
+  - echo "define( 'DB_NAME', '${DB_NAME}' );" >> local-config.php
+  - echo "define( 'DB_USER', '${DB_USER}' );" >> local-config.php
+  - echo "define( 'DB_PASSWORD', '${DB_PASSWORD}' );" >> local-config.php
+  - echo "define( 'DB_HOST', '127.0.0.1' );" >> local-config.php
+  - echo "define( 'TRIBE_GLOMAR', false );" >> local-config.php
+
+    # install WordPress db structure
+    - wp core install --url="${WP_URL}" --title="Square1 Tests" --admin_user="${WP_ADMIN_USERNAME}" --admin_password="${WP_ADMIN_PASSWORD}" --admin_email="admin@${WP_DOMAIN}" --skip-email
 
 before_script:
 
