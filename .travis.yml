@@ -67,8 +67,8 @@ install:
   - echo "define( 'DB_HOST', '127.0.0.1' );" >> local-config.php
   - echo "define( 'TRIBE_GLOMAR', false );" >> local-config.php
 
-    # install WordPress db structure
-    - wp core install --url="${WP_URL}" --title="Square1 Tests" --admin_user="${WP_ADMIN_USERNAME}" --admin_password="${WP_ADMIN_PASSWORD}" --admin_email="admin@${WP_DOMAIN}" --skip-email
+  # install WordPress db structure
+  - wp core install --url="${WP_URL}" --title="Square1 Tests" --admin_user="${WP_ADMIN_USERNAME}" --admin_password="${WP_ADMIN_PASSWORD}" --admin_email="admin@${WP_DOMAIN}" --skip-email
 
 before_script:
 
