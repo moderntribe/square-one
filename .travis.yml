@@ -63,7 +63,7 @@ install:
   - sudo mkdir -p /tmp/tools
   - sudo wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -P /tmp/tools/
   - sudo chmod +x /tmp/tools/wp-cli.phar && sudo mv /tmp/tools/wp-cli.phar /tmp/tools/wp
-  - sudo export PATH=$PATH:/tmp/tools:vendor/bin
+  - export PATH=$PATH:/tmp/tools:vendor/bin
 
   # create local-config.php
   - touch local-config.php
