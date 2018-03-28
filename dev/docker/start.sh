@@ -37,7 +37,8 @@ ${DC_COMMAND} --project-name=${PROJECT_ID} up -d --force-recreate
 
 # If this is running on Travis, pass our encrypted github token from .travis.yml (secure variable)
 if [ "$CI" = true ]; then
-    ${SCRIPTDIR}/composer.sh config -g github-oauth.github.com $CI_USER_TOKEN
+    touch ${CONFIG_FILE}
+    printf '{ "github-oauth": { "github.com": "%s" } }\n' "$CI_USER_TOKEN" >> ${CONFIG_FILE}
 fi
 
 bash ${SCRIPTDIR}/composer.sh install
