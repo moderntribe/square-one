@@ -39,6 +39,7 @@ ${DC_COMMAND} --project-name=${PROJECT_ID} up -d --force-recreate
 if [ "$CI" = true ]; then
     touch ${CONFIG_FILE}
     printf '{ "github-oauth": { "github.com": "%s" } }\n' "$CI_USER_TOKEN" >> ${CONFIG_FILE}
+    chown travis:travis ${CONFIG_FILE}
 fi
 
 bash ${SCRIPTDIR}/composer.sh install
