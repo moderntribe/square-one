@@ -25,7 +25,7 @@ fi;
 
 # Create a composer-config.json file that mirrors the format of .composer/auth.json, so we can mount it to php-fpm
 # Also check if Travis CI is running using the CI global, which gets set to true by Travis CI.
-CONFIG_FILE=${SCRIPTDIR}/composer-config.json
+CONFIG_FILE="${SCRIPTDIR}/composer-config.json"
 if [ ! -f ${CONFIG_FILE} ] && [ "$CI" != true ]; then
     echo "We have detected that you have not setup a GitHub oAuth token. Please go to https://github.com/settings/tokens/new?scopes=repo&description=Square%20One and create one. Then enter it here and press [ENTER]: "
     read githubtoken
