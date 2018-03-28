@@ -32,7 +32,7 @@ before_install:
   - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
   - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
   - sudo apt-get update
-  - sudo apt-get -y install docker-ce
+  - sudo apt-get -y install docker-ce subversion
 
   # remove existing version of docker-compose and install an updated version
   - sudo rm /usr/local/bin/docker-compose
@@ -42,10 +42,10 @@ before_install:
 
 install:
   # start the global docker
-  - bash dev/docker/global/start.sh
+  - sudo bash dev/docker/global/start.sh
 
-  # start the project docker
-  - bash dev/docker/start.sh
+  # start the square1 project docker
+  - sudo bash dev/docker/start.sh
 
 before_script:
 

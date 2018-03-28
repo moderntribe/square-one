@@ -34,7 +34,7 @@ if [ ! -f ${CONFIG_FILE} ] && [ "$CI" != true ]; then
 fi
 
 # If this is running on Travis, pass our encrypted github token from .travis.yml (secure variable)
-if [ "$CI" = true ]; then
+if [ ! -f ${CONFIG_FILE} ] && [ "$CI" = true ]; then
     sudo touch ${CONFIG_FILE}
     sudo printf '{ "github-oauth": { "github.com": "%s" } }\n' "$CI_USER_TOKEN" >> ${CONFIG_FILE}
     sudo chown travis:travis ${CONFIG_FILE}
