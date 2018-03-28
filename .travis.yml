@@ -28,6 +28,7 @@ env:
     - WP_TABLE_PREFIX="tribe_"
     - DB_NAME="wp"
     - DB_USER="root"
+    - DB_HOST="mysql.tribe"
     - DB_PASSWORD="password"
     - TEST_DB_NAME="tribe_square1_tests"
     - WP_ADMIN_USERNAME="admin"
@@ -70,7 +71,7 @@ install:
   - echo "define( 'DB_NAME', '${DB_NAME}' );" >> local-config.php
   - echo "define( 'DB_USER', '${DB_USER}' );" >> local-config.php
   - echo "define( 'DB_PASSWORD', '${DB_PASSWORD}' );" >> local-config.php
-  - echo "define( 'DB_HOST', '127.0.0.1' );" >> local-config.php
+  - echo "define( 'DB_HOST', '${DB_HOST}' );" >> local-config.php
   - echo "define( 'TRIBE_GLOMAR', false );" >> local-config.php
 
   # install WordPress db structure
