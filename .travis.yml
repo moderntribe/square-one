@@ -61,8 +61,8 @@ install:
   - sudo sed -i '1s/^/nameserver 127.0.0.1\n/' /etc/resolv.conf
 
   # create needed databases for WordPress and tests
-  - mysql --host=${DB_HOST} --user=${DB_USER} --password=${DB_PASS} -e "create database IF NOT EXISTS ${DB_NAME};"
-  - mysql --host=${DB_HOST} --user=${DB_USER} --password=${DB_PASS} -e "create database IF NOT EXISTS ${TEST_DB_NAME};"
+  - mysql --host=${DB_HOST} --user=${DB_USER} --password=${DB_PASSWORD} -e "create database IF NOT EXISTS ${DB_NAME};"
+  - mysql --host=${DB_HOST} --user=${DB_USER} --password=${DB_PASSWORD} -e "create database IF NOT EXISTS ${TEST_DB_NAME};"
 
   # install wp-cli locally
   - sudo mkdir -p /tmp/tools
