@@ -27,17 +27,18 @@ fi;
 # Also check if Travis CI is running using the CI global, which gets set to true by Travis CI.
 CONFIG_FILE="${SCRIPTDIR}/composer-config.json"
 if [ ! -f ${CONFIG_FILE} ] && [ "$CI" != true ]; then
-    echo "We have detected that you have not setup a GitHub oAuth token. Please go to https://github.com/settings/tokens/new?scopes=repo&description=Square%20One and create one. Then enter it here and press [ENTER]: "
-    read githubtoken
-    touch ${CONFIG_FILE}
-    printf '{ "github-oauth": { "github.com": "%s" } }\n' "$githubtoken" >> ${CONFIG_FILE}
-fi
 
-# If this is running on Travis, pass our encrypted github token from .travis.yml (secure variable)
-if [ ! -f ${CONFIG_FILE} ] && [ "$CI" = true ]; then
-    sudo touch ${CONFIG_FILE}
-    sudo printf '{ "github-oauth": { "github.com": "%s" } }\n' "$CI_USER_TOKEN" >> ${CONFIG_FILE}
-    sudo chown travis:travis ${CONFIG_FILE}
+    touch ${CONFIG_FILE}
+
+    if [ "$CI" != true ]; then
+        echo "We have detected that you have not setup a GitHub oAuth token. Please go to https://github.com/settings/tokens/new?scopes=repo&description=Square%20One and create one. Then enter it here and press [ENTER]: "
+        read githubtoken
+        printf '{ "github-oauth": { "github.com": "%s" } }\n' "$githubtoken" >> ${CONFIG_FILE}
+    else
+        # Run only when Travis is detected, `$CI_USER_TOKEN` is an encrypted github Personal Access Token
+        sudo printf '{ "github-oauth": { "github.com": "%s" } }\n' "$CI_USER_TOKEN" >> ${CONFIG_FILE}
+        sudo chown travis:travis ${CONFIG_FILE}
+    fi
 fi
 
 ${DC_COMMAND} --project-name=${PROJECT_ID} up -d --force-recreate
