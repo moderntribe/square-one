@@ -33,7 +33,7 @@ env:
     - TEST_DB_NAME="tribe_square1_tests"
     - WP_ADMIN_USERNAME="admin"
     - WP_ADMIN_PASSWORD="password"
-    - secure: "aQg9k8gfC6ZYrrIficXiEv5Rt2BWJ6dV4syxOYkiBtDR7Hl71atnuR10MZdUrt0JKMeLvnZTT0ncSVHPoEcEWKZmSoIje0HvGPPUigSnPXlyLwaC6iPF8Y/TPIiiQNostFjKzstlxvORobjB7o3yEUn/RbmDxFx9t1sWiUgfTWY="
+    - secure: "HUojXSnMXIeWzeTnlsFiCUzKIbM46Z+HcP9mmyYYfLCesHZyjweyFoW4ZQnb7q6FLDpHQHcck56u2ITgARiX9giJIn45/oMQhxmAhwvi3DGYGilK6qQv9L92NOW1E7zTDDyAmAcnJVxoXmyqupaegu0hRw+dgrd+NtKfQ65+6jU="
 
 before_install:
   - sudo service mysql stop
