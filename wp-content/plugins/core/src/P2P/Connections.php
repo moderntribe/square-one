@@ -164,4 +164,42 @@ class Connections {
 		return $wpdb->get_row( $sql, ARRAY_A );
 	}
 
+	/**
+	 * Get any p2p rows that have a connection to a specific id, pass p2p types in an array to limit
+	 * the kind of connection types returned and pass in a direction to get where the passed id is that direction
+	 *
+	 * @TODO: This is completely untested right now, will do some tests asap
+	 *
+	 * @param $id
+	 * @param array $types
+	 * @param string $direction
+	 *
+	 * @return array|null|object
+	 */
+	public function get_shared_connections( $id, $types = [], $direction = '' ) {
+		global $wpdb;
+		$sql = "SELECT * FROM {$wpdb->p2p}";
+		$where = [
+			'direction' => $wpdb->prepare( "( p2p_to=%d OR p2p_from=%d )", $id, $id ),
+		];
+
+		$directions = [ 'to' => 'p2p_to', 'from' => 'p2p_from' ];
+		if ( ! empty( $direction ) && isset( $directions[ $direction ] ) ) {
+			$where['direction'] = $wpdb->prepare( "{$directions[ $direction ]}=%d", $id );
+		}
+
+		if ( ! empty( $types ) ) {
+			$wrap = function( $type ) {
+				$type = esc_sql( $type );
+				return "p2p_type='$type'";
+			};
+			$types = array_filter( $types, $wrap );
+			$where[ 'types' ] = '(' . implode( ' OR ', $types ) . ')';
+		}
+
+		$sql .= implode( ' AND ', $where );
+
+		return $wpdb->get_results( $sql );
+	}
+
 }
