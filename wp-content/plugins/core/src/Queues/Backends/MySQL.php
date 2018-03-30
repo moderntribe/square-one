@@ -9,6 +9,8 @@ class MySQL implements Backend {
 
 	const DB_TABLE = 's1_queue';
 
+	private $table_name;
+
 	public function __construct() {
 		global $wpdb;
 

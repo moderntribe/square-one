@@ -23,8 +23,16 @@ abstract class Queue {
 		$this->backend->enqueue( $this->get_name(), $message );
 	}
 
+	/**
+	 * @return Message
+	 * @throws \Exception if a Message could not be dequeued.
+	 */
 	public function reserve(): Message {
 		$message = $this->backend->dequeue( $this->get_name() );
+
+		if ( ! is_a( $message, Message::class ) ) {
+			new \Exception( __( 'A valid message could not be found.', 'tribe' ) );
+		}
 
 		return $message;
 	}
