@@ -26,7 +26,7 @@ fi;
 # Create a composer-config.json file that mirrors the format of .composer/auth.json, so we can mount it to php-fpm
 # Also check if Travis CI is running using the CI global, which gets set to true by Travis CI.
 CONFIG_FILE="${SCRIPTDIR}/composer-config.json"
-if [ ! -f ${CONFIG_FILE} ] && [ "$CI" != true ]; then
+if [ ! -f ${CONFIG_FILE} ]; then
 
     touch ${CONFIG_FILE}
 
