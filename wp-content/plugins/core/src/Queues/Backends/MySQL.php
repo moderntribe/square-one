@@ -145,8 +145,7 @@ class MySQL implements Backend {
 		global $wpdb;
 
 		$table_name = $wpdb->prefix . MySQL::DB_TABLE;
-		$wpdb->query(
-			"CREATE TABLE $table_name (
+		$query = "CREATE TABLE $table_name (
 					id bigint(20) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
 					queue varchar(255) NOT NULL,
 					task_handler varchar(255) NOT NULL,
@@ -154,8 +153,11 @@ class MySQL implements Backend {
 					priority int(3),
 					taken int(10) NOT NULL DEFAULT 0,
 					done int(10) DEFAULT 0
-				)"
-		);
+				)";
+
+		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+
+		return dbDelta( $query );
 	}
 
 	private function get_priority( $task_id ) {
