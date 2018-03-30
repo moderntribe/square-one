@@ -23,8 +23,8 @@ addons:
 env:
   global:
     - DOCKER_COMPOSE_VERSION=1.19.0
-    - WP_URL="http://square1.localhost"
-    - WP_DOMAIN="square1.localhost"
+    - WP_URL="http://square1.tribe"
+    - WP_DOMAIN="square1.tribe"
     - WP_TABLE_PREFIX="tribe_"
     - DB_NAME="wp"
     - DB_USER="root"
