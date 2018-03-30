@@ -18,11 +18,14 @@ if ( ! function_exists( 'wp_mail' ) &&
 
 		$queue_name = defined( 'QUEUE_MAIL_QUEUE_NAME' ) ? QUEUE_MAIL_QUEUE_NAME : 'default';
 		$collection = new \Tribe\Project\Queues\Queue_Collection();
-		$queue      = $collection->get( $queue_name );
 
-		if ( $queue ) {
-			$queue->dispatch( \Tribe\Project\Queues\Tasks\Email::class, $args );
+		try {
+			$queue = $collection->get( $queue_name );
+		} catch ( \Exception $e ) {
+			throw new \Exception( __( 'The queue_name specified does not exist. This email message was not queued for send', 'tribe' ) );
 		}
+
+		$queue->dispatch( \Tribe\Project\Queues\Tasks\Email::class, $args );
 
 	}
 }
