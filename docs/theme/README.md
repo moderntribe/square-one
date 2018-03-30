@@ -38,3 +38,13 @@ For your system setup you must define `SCRIPT_DEBUG` as true in your `local-conf
     * [Selectors](/docs/theme/js/selectors.md)
     * [Events](/docs/theme/js/events.md)
     * [Jquery](/docs/theme/js/jquery.md)
+  * Components
+    * [Overview](/docs/theme/components/README.md)
+    * [Accordion](/docs/theme/components/accordion.md)
+    * [Button](/docs/theme/components/button.md)
+    * [Card](/docs/theme/components/card.md)
+    * [Content Block](/docs/theme/components/content_block.md)
+    * [Quote](/docs/theme/components/quote.md)
+    * [Slider](/docs/theme/components/slider.md)
+    * [Template](/docs/theme/components/template.md)
+    * [Text](/docs/theme/components/text.md)
