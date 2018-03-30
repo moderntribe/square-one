@@ -62,7 +62,11 @@ class Process extends Command {
 				continue;
 			}
 
-			$job = $queue->reserve();
+			try {
+				$job = $queue->reserve();
+			} catch ( \Exception $e ) {
+				continue;
+			}
 
 			$task_class = $job->get_task_handler();
 
