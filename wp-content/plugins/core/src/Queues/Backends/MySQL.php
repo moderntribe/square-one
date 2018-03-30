@@ -18,7 +18,7 @@ class MySQL implements Backend {
 	public function enqueue( string $queue_name, Message $message ) {
 		global $wpdb;
 
-		$data = $this->prepare_data( $message );
+		$data          = $this->prepare_data( $message );
 		$data['queue'] = $queue_name;
 
 		return $wpdb->insert( $this->table_name, $data );
@@ -60,8 +60,15 @@ class MySQL implements Backend {
 		$wpdb->update(
 			$this->table_name,
 			[ 'taken' => time() ],
-			[ 'id' => $queue['id'] ]
+			[
+				'id'    => $queue['id'],
+				'taken' => 0,
+			]
 		);
+
+		if ( 0 === $wpdb->rows_affected ) {
+			return;
+		}
 
 		return new Message( $queue['task_handler'], $queue['args'], $queue['priority'], $queue['id'] );
 
@@ -82,7 +89,10 @@ class MySQL implements Backend {
 
 		$wpdb->update(
 			$this->table_name,
-			[ 'taken' => 0 ],
+			[
+				'taken'    => 0,
+				'priority' => $this->get_priority( $job_id ) + 1,
+			],
 			[ 'id' => $job_id ]
 		);
 	}
@@ -111,7 +121,7 @@ class MySQL implements Backend {
 	public function count( string $queue_name ): int {
 		global $wpdb;
 
-		return $wpdb->get_var( $wpdb->prepare (
+		return $wpdb->get_var( $wpdb->prepare(
 			"SELECT COUNT(*) FROM $this->table_name WHERE queue = %s AND done = 0",
 			$queue_name
 		) );
@@ -141,8 +151,17 @@ class MySQL implements Backend {
 					args text NOT NULL,
 					priority int(3),
 					taken int(10) NOT NULL DEFAULT 0,
-					done int(10)
+					done int(10) DEFAULT 0
 				)"
 		);
+	}
+
+	private function get_priority( $task_id ) {
+		global $wpdb;
+
+		return $wpdb->get_var( $wpdb->prepare(
+			"SELECT priority FROM $this->table_name WHERE id = %s",
+			$task_id
+		) );
 	}
 }

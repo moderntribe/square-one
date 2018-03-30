@@ -65,6 +65,7 @@ class Process extends Command {
 			try {
 				$job = $queue->reserve();
 			} catch ( \Exception $e ) {
+				sleep( 1 );
 				continue;
 			}
 
