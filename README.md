@@ -26,6 +26,7 @@
   * [Image Handling](/docs/theme/images.md)
   * [Fonts](/docs/theme/fonts.md)
   * [Icons](/docs/theme/icons.md)
+  * [Twig](/docs/theme/twig.md)
     * **Css**
       * [Overview](/docs/theme/css/README.md)
       * [PostCSS](/docs/theme/css/postcss.md)
