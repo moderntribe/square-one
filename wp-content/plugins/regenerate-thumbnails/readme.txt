@@ -1,43 +1,90 @@
 === Regenerate Thumbnails ===
 Contributors: Viper007Bond
-Donate link: http://www.viper007bond.com/donate/
-Tags: thumbnail, thumbnails
-Requires at least: 2.8
-Tested up to: 4.6
+Tags: thumbnail, thumbnails, post thumbnail, post thumbnails
+Requires at least: 4.7
+Tested up to: 4.9
+Requires PHP: 5.2.4
 Stable tag: trunk
+License: GPLv2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Allows you to regenerate your thumbnails after changing the thumbnail sizes.
+Regenerate the thumbnails for one or more of your image uploads. Useful when changing their sizes or your theme.
 
 == Description ==
 
-Regenerate Thumbnails allows you to regenerate the thumbnails for your image attachments. This is very handy if you've changed any of your thumbnail dimensions (via Settings -> Media) after previously uploading images or have changed to a theme with different featured post image dimensions.
+Regenerate Thumbnails allows you to regenerate all thumbnail sizes for one or more images that have been uploaded to your Media Library.
 
-You can either regenerate the thumbnails for all image uploads, individual image uploads, or specific multiple image uploads.
+This is useful for situations such as:
 
-See the [screenshots tab](http://wordpress.org/extend/plugins/regenerate-thumbnails/screenshots/) for more details.
+* A new thumbnail size has been added and you want past uploads to have a thumbnail in that size.
+* You've changed the dimensions of an existing thumbnail size, for example via Settings → Media.
+* You've switched to a new WordPress theme that uses featured images of a different size.
+
+It also offers the ability to delete old, unused thumbnails as well as update the content of posts to use the new thumbnail sizes.
+
+= Alternatives =
+
+**WP-CLI**
+
+If you have command line access to your server, I highly recommend using [WP-CLI](https://wp-cli.org/) instead of this plugin as it's faster (no HTTP requests overhead) and can be run inside of a `screen` for those with many thumbnails. For details, see the documentation of its [`media regenerate` command](https://developer.wordpress.org/cli/commands/media/regenerate/).
+
+**Jetpack's Photon Module**
+
+[Jetpack](https://jetpack.com/) is a plugin by Automattic, makers of WordPress.com. It gives your self-hosted WordPress site some of the functionality that is available to WordPress.com-hosted sites.
+
+[The Photon module](https://jetpack.com/support/photon/) makes the images on your site be served from WordPress.com's global content delivery network (CDN) which should speed up the loading of images. Importantly though it can create thumbnails on the fly which means you'll never need to use this plugin.
+
+I personally use Photon on my own website.
+
+*Disclaimer: I work for Automattic but I would recommend Photon even if I didn't.*
+
+= Need Help? Found A Bug? Want To Contribute Code? =
+
+Support for this plugin is provided via the [WordPress.org forums](https://wordpress.org/support/plugin/regenerate-thumbnails).
+
+The source code for this plugin is available on [GitHub](https://github.com/Viper007Bond/regenerate-thumbnails).
 
 == Installation ==
 
-1. Go to your admin area and select Plugins -> Add new from the menu.
+1. Go to your admin area and select Plugins → Add New from the menu.
 2. Search for "Regenerate Thumbnails".
 3. Click install.
 4. Click activate.
+5. Navigate to Tools → Regenerate Thumbnails.
 
 == Screenshots ==
 
-1. The plugin at work regenerating thumbnails
-2. You can resize single images by hovering over their row in the Media Library
-2. You can resize specific multiples images using the checkboxes and the "Bulk Actions" dropdown
+1. The main plugin interface.
+2. Regenerating in progress.
+3. Interface for regenerating a single attachment.
+4. Individual images can be regenerated from the media library in list view.
+5. They can also be regenerated from the edit attachment screen.
 
 == ChangeLog ==
 
-= Version 2.2.6 =
+= Version 3.0.2 =
 
-* PHP 7 compatibility.
+* Fix slowdown in certain cases in the media library.
+* Fix not being able to regenerate existing thumbnails for single images. Props @idofri.
+* Fix JavaScript error that could occur if the REST API response was unexpected (empty or PHP error).
+* Fix bug related to multibyte filenames.
+* If an image is used as the featured image on multiple posts, only regenerate it once instead of once per post.
 
-= Version 2.2.5 =
+= Version 3.0.1 =
 
-* Updates relating to plugin language pack support.
+* Temporarily disable the update post functionality. I tested it a lot but it seems there's still some bugs.
+* Temporarily disable the delete old thumbnails functionality. It seems to work fine but without the update post functionality, it's not as useful.
+* Try to more gracefully handle cases where there's missing metadata for attachments.
+* Wait until `init` to initialize the plugin so themes can filter the plugin's capability. `plugins_loaded` is too early.
+* Fix a JavaScript error that would cause the whole regeneration process to stop if an individual image returned non-JSON, such as a 500 error code.
+* Accept GET requests for the regenerate REST API endpoint instead of just POSTs. For some reasons some people's sites are using GET despite the code saying use POST.
+* Make the attachment ID clickable in error messages.
+* Fetch 25 attachments at a time instead of 5. I was using 5 for testing.
+* PHP notice fixes.
+
+= Version 3.0.0 =
+
+* Complete rewrite from scratch using Vue.js and the WordPress REST API.
 
 = Version 2.2.4 =
 
@@ -110,17 +157,3 @@ Lots of new features!
 = Version 1.0.0 =
 
 * Initial release.
-
-== Upgrade Notice ==
-
-= 2.2.4 =
-Better AJAX response error handling in the JavaScript. This should fix a long-standing bug in this plugin. Props Hew Sutton.
-
-= 2.2.3 =
-Make the capability required to use this plugin filterable so themes and other plugins can change it. Props [Jackson Whelan](http://jacksonwhelan.com/).
-
-= 2.2.2 =
-Fixes lots of "Are you sure you want to do this?" error messages.
-
-= 2.2.1 =
-Fix the bottom bulk action dropdown. Thanks Stefan for pointing out the issue!

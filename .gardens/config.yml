@@ -3,7 +3,7 @@ scripts:
   # block of commands to build this repo/branch on the CI server for deploying
   build: |
     source $JENKINS_HOME/scripts/nursery-helper.sh
-    composer update
+    composer install --ignore-platform-reqs
     nvm install
     nvm use
     ensure_node_global_installed yarn
@@ -17,7 +17,7 @@ scripts:
   # block of commands to test this repo/branch on the CI server
   test: |
     source $JENKINS_HOME/scripts/nursery-helper.sh
-    composer update
+    composer install --ignore-platform-reqs
     nvm install
     nvm use
     ensure_node_global_installed yarn

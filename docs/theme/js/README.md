@@ -13,6 +13,8 @@ When running the dist task that generates minified bundles a preflight task is r
 ## Table of Contents
 
 * [Overview](/docs/theme/js/README.md)
+* [Code Splitting](/docs/theme/js/code-splitting.md)
+* [Polyfills](/docs/theme/js/polyfills.md)
 * [Selectors](/docs/theme/js/selectors.md)
 * [Events](/docs/theme/js/events.md)
 * [Jquery](/docs/theme/js/jquery.md)

@@ -19,9 +19,9 @@ class Force_Plugin_Activation {
 	private $force_active = array(
 		'advanced-custom-fields-pro/acf.php',
 		'core/core.php',
-		'limit-login-attempts/limit-login-attempts.php',
 		'panel-builder/tribe-panel-builder.php',
 		'tribe-admin-dashboard/tribe-admin-dashboard.php',
+		'tribe-branding/tribe-branding.php',
 	);
 
 	/**
@@ -69,6 +69,7 @@ class Force_Plugin_Activation {
 		// The next *if* is not the same as an *else* on the previous one.
 		if ( defined( 'ENVIRONMENT' ) && ENVIRONMENT == 'PRODUCTION' ) {
 			$this->force_deactive[] = 'tribe-glomar/tribe-glomar.php';
+			$this->force_active[]   = 'limit-login-attempts/limit-login-attempts.php';
 		}
 
 
@@ -82,12 +83,17 @@ class Force_Plugin_Activation {
 	/**
 	 * Enforce the active/deactive plugin rules
 	 *
-	 * @param array $plugins
+	 * @param array|bool $plugins
 	 *
-	 * @return array
+	 * @return array|bool
 	 */
 	function force_plugins( $plugins ) {
-
+		/*
+		 * Occasionally it seems a boolean can be passed in here.
+		 */
+		if ( ! is_array( $plugins ) ) {
+			return $plugins;
+		}
 		/*
 		 * WordPress works in mysterious ways
 		 * active_plugins has the plugin paths as array key and a number as value
@@ -160,7 +166,7 @@ class Force_Plugin_Activation {
 		}
 
 		$screen = get_current_screen();
-		if ( $screen->in_admin( 'network' ) ) {
+		if ( $screen && $screen->in_admin( 'network' ) ) {
 			return $plugins;
 		}
 

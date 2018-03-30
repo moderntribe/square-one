@@ -35,10 +35,22 @@ class Taxonomy_Generator extends Command {
 				'description' => __( 'The name of the Taxonomy.', 'tribe' ),
 			],
 			[
-				'type'        => 'optional',
-				'name'        => 'post_types',
+				'type'        => 'assoc',
+				'name'        => 'post-types',
 				'optional'    => true,
 				'description' => __( 'Comma separated list of post types to register this taxonomy to.', 'tribe' ),
+			],
+			[
+				'type'        => 'assoc',
+				'name'        => 'single',
+				'optional'    => true,
+				'description' => __( 'Singular taxonomy.', 'tribe' ),
+			],
+			[
+				'type'        => 'assoc',
+				'name'        => 'plural',
+				'optional'    => true,
+				'description' => __( 'Plural taxonomy.', 'tribe' ),
 			],
 			[
 				'type'        => 'flag',
@@ -46,18 +58,6 @@ class Taxonomy_Generator extends Command {
 				'optional'    => true,
 				'description' => __( 'Whether or not to create a config file by default. Defaults to true, pass --no-config if you don\'t need one.', 'tribe' ),
 				'default'     => true,
-			],
-			[
-				'type'        => 'optional',
-				'name'        => 'single',
-				'optional'    => true,
-				'description' => __( 'Singular taxonomy.', 'tribe' ),
-			],
-			[
-				'type'        => 'optional',
-				'name'        => 'plural',
-				'optional'    => true,
-				'description' => __( 'Plural taxonomy.', 'tribe' ),
 			],
 		];
 	}
@@ -74,6 +74,9 @@ class Taxonomy_Generator extends Command {
 		// Write Service Provider.
 		$this->create_service_provider();
 
+		// Update Core.
+		$this->update_core();
+
 		\WP_CLI::success( 'Way to go! ' . \WP_CLI::colorize( "%W{$this->slug}%n" ) . ' taxonomy has been created' );
 	}
 
@@ -88,21 +91,22 @@ class Taxonomy_Generator extends Command {
 
 	private function parse_assoc_args( $assoc_args ) {
 		$defaults = [
-			'single'     => $this->ucwords( $this->slug ),
-			'plural'     => $this->ucwords( $this->slug ) . 's',
-			'config'     => true,
-			'post_types' => $this->get_post_types( $assoc_args ),
+			'single' => $this->ucwords( $this->slug ),
+			'plural' => $this->ucwords( $this->slug ) . 's',
+			'config' => true,
 		];
+
+		$assoc_args['post-types'] = $this->get_post_types( $assoc_args );
 
 		return wp_parse_args( $assoc_args, $defaults );
 	}
 
 	private function get_post_types( $assoc_args ) {
-		if ( ! isset( $assoc_args['post_types'] ) ) {
+		if ( ! isset( $assoc_args['post-types'] ) ) {
 			return self::POST_TYPES;
 		}
 
-		$post_types = explode( ',', $assoc_args['post_types'] );
+		$post_types = explode( ',', $assoc_args['post-types'] );
 		foreach ( $post_types as $post_type ) {
 			if ( ! post_type_exists( $post_type ) ) {
 				\WP_CLI::error( 'Sorry...post type ' . $post_type . ' does not exist.' );
@@ -113,7 +117,7 @@ class Taxonomy_Generator extends Command {
 	}
 
 	private function create_taxonomy_directory() {
-		$directory = trailingslashit( $this->src_path ) . 'Taxonomies/' . $this->ucwords( $this->slug );
+		$directory                = trailingslashit( $this->src_path ) . 'Taxonomies/' . $this->ucwords( $this->slug );
 		$this->taxonomy_directory = $directory;
 		$this->file_system->create_directory( $directory );
 	}
@@ -128,6 +132,19 @@ class Taxonomy_Generator extends Command {
 	private function create_service_provider() {
 		$service_provider_file = $this->src_path . 'Service_Providers/Taxonomies/' . $this->ucwords( $this->slug ) . '_Service_Provider.php';
 		$this->file_system->write_file( $service_provider_file, $this->get_service_provider_contents() );
+	}
+
+	private function update_core() {
+		$core_file = $this->src_path . 'Core.php';
+
+		$new_service_provider_registration   = "\t\t" . '$this->container->register( new ' . $this->class_name . '_Service_Provider() );' . PHP_EOL;
+		$below_service_provider_registration = 'private function load_taxonomy_providers() {';
+
+		$below_use = 'use Tribe\Project\Service_Providers\Taxonomies\Category_Service_Provider';
+		$use       = 'use Tribe\Project\Service_Providers\Taxonomies\\' . $this->class_name . '_Service_Provider;' . PHP_EOL;
+
+		$this->file_system->insert_into_existing_file( $core_file, $new_service_provider_registration, $below_service_provider_registration );
+		$this->file_system->insert_into_existing_file( $core_file, $use, $below_use );
 	}
 
 	private function new_taxonomy_class_file() {
@@ -169,6 +186,7 @@ class Taxonomy_Generator extends Command {
 		$post_types = $this->format_post_types();
 
 		$service_provider = $this->file_system->get_file( $this->templates_path . 'taxonomies/service_provider.php' );
+
 		return sprintf(
 			$service_provider,
 			$this->namespace,
@@ -178,12 +196,12 @@ class Taxonomy_Generator extends Command {
 	}
 
 	private function format_post_types() {
-		if ( empty( $this->assoc_args['post_types'] ) ) {
+		if ( empty( $this->assoc_args['post-types'] ) ) {
 			return '';
 		}
 
 		$post_types = 'protected $post_types = [ ';
-		foreach ( $this->assoc_args['post_types'] as $post_type ) {
+		foreach ( $this->assoc_args['post-types'] as $post_type ) {
 			$post_types .= '\'' . $post_type . '\', ';
 		}
 		$post_types .= '];' . PHP_EOL;
