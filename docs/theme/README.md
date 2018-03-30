@@ -17,7 +17,7 @@ For your system setup you must define `SCRIPT_DEBUG` as true in your `local-conf
 
 ## Table of Contents
 
-* Theme
+* **Theme**
   * [Overview](/docs/theme/README.md)
   * [Videos](/docs/theme/videos.md)
   * [Markup and Style](/docs/theme/markup-and-style.md)
@@ -26,20 +26,20 @@ For your system setup you must define `SCRIPT_DEBUG` as true in your `local-conf
   * [Fonts](/docs/theme/fonts.md)
   * [Icons](/docs/theme/icons.md)
   * [Twig](/docs/theme/twig.md)
-  * CSS
+  * **CSS**
     * [Overview](/docs/theme/css/README.md)
     * [PostCSS](/docs/theme/css/postcss.md)
     * [Grids](/docs/theme/css/grids.md)
     * [Plugins](/docs/theme/css/plugins.md)
     * [Forms](/docs/theme/css/forms.md)
-  * Javascript
+  * **Javascript**
     * [Overview](/docs/theme/js/README.md)
     * [Code Splitting](/docs/theme/js/code-splitting.md)
     * [Polyfills](/docs/theme/js/polyfills.md)
     * [Selectors](/docs/theme/js/selectors.md)
     * [Events](/docs/theme/js/events.md)
     * [Jquery](/docs/theme/js/jquery.md)
-  * Components
+  * **Components**
     * [Overview](/docs/theme/components/README.md)
     * [Accordion](/docs/theme/components/accordion.md)
     * [Button](/docs/theme/components/button.md)
