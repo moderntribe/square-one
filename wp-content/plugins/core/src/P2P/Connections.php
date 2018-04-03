@@ -168,11 +168,9 @@ class Connections {
 	 * Get any p2p rows that have a connection to a specific id, pass p2p types in an array to limit
 	 * the kind of connection types returned and pass in a direction to get where the passed id is that direction
 	 *
-	 * @TODO: This is completely untested right now, will do some tests asap
-	 *
 	 * @param $id
 	 * @param array $types
-	 * @param string $direction
+	 * @param string $direction - 'to', 'from' or blank for any direction, this is where the $id parameter would be located
 	 *
 	 * @return array|null|object
 	 */
@@ -189,17 +187,18 @@ class Connections {
 		}
 
 		if ( ! empty( $types ) ) {
-			$wrap = function( $type ) {
-				$type = esc_sql( $type );
-				return "p2p_type='$type'";
-			};
-			$types = array_filter( $types, $wrap );
+			$types = array_map( [ $this, 'prepare_p2p_type_sql_where' ], $types );
 			$where[ 'types' ] = '(' . implode( ' OR ', $types ) . ')';
 		}
 
-		$sql .= implode( ' AND ', $where );
+		$sql .= ' WHERE ' . implode( ' AND ', $where );
 
 		return $wpdb->get_results( $sql );
+	}
+
+	private function prepare_p2p_type_sql_where( $type ) {
+		$type = esc_sql( $type );
+		return "p2p_type='$type'";
 	}
 
 }
