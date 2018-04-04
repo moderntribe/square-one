@@ -71,11 +71,11 @@ class Gallery extends Panel {
 
 		return array_map( function ( $slide_id ) use ( $size ) {
 			$options = [
-				'img_id'       => $slide_id,
-				'as_bg'        => $this->use_crop() && $size == 'full',
-				'use_lazyload' => false,
-				'echo'         => false,
-				'src_size'     => $size,
+				ImageComponent::IMG_ID       => $slide_id,
+				ImageComponent::AS_BG        => $this->use_crop() && $size == 'full',
+				ImageComponent::USE_LAZYLOAD => false,
+				ImageComponent::ECHO         => false,
+				ImageComponent::SRC_SIZE     => $size,
 			];
 
 			$image = ImageComponent::factory( $options );

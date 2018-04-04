@@ -35,12 +35,12 @@ class Testimonial extends Panel {
 		}
 
 		$options = [
-			'img_id'          => $this->panel_vars[ TestimonialPanel::FIELD_IMAGE ],
-			'component_class' => 'c-image',
-			'as_bg'           => true,
-			'use_lazyload'    => false,
-			'echo'            => false,
-			'wrapper_class'   => 'c-image__bg',
+			Image::IMG_ID          => $this->panel_vars[ TestimonialPanel::FIELD_IMAGE ],
+			Image::COMPONENT_CLASS => 'c-image',
+			Image::AS_BG           => true,
+			Image::USE_LAZYLOAD    => false,
+			Image::ECHO            => false,
+			Image::WRAPPER_CLASS   => 'c-image__bg',
 		];
 
 		$image_obj = Image::factory( $options );
