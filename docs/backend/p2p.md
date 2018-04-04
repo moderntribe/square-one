@@ -100,7 +100,7 @@ methodology for simple needs in the core posts-to-posts plugin.
 To use the connections class, get it's container instance and use the helper methods as needed.
 
 ```php
-$p2p = tribe_project()->container['p2p.connections'];
+$p2p = Connections::instance();
 $connected_ids = $p2p->get_from( $post_id );
 
 foreach( $connected_ids as $post_id ) {
@@ -112,7 +112,7 @@ It will only get the posts that are in the p2p_to column though as we are gettin
 our $post_id
 
 ```php
-$p2p = tribe_project()->container['p2p.connections'];
+$p2p = Connections::instance();
 $page_ids = $p2p->get_from( $post_id, [ 'type' => Sample_To_Page::NAME ] );
 
 foreach( $page_ids as $page_id ) {
@@ -132,7 +132,7 @@ In both the get_from() and get_to methods the 2nd $args parameter has some usefu
 Here's an example using the meta arguments
 
 ```php
-$p2p = tribe_project()->container['p2p.connections'];
+$p2p = Connections::instance();
 $args = [
     'type' => Sample_To_Page::NAME,
     'meta' => [
@@ -145,4 +145,8 @@ $page_ids = $p2p->get_from( $post_id, $args );
 foreach( $page_ids as $page_id ) {
 ...
 ```
+
+Another method available in the Connections class is the get_shared_connections() method.  Simply sending an id to this method will return all connections it has of any type.
+
+The type parameter accepts an array of types to filter results.  The direction parameter accepts "to" or "from" and will align all results where the passed id is in the defined direction field.
 
