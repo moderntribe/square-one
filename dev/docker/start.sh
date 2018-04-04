@@ -16,10 +16,13 @@ echo "Starting docker-compose project: ${PROJECT_ID}"
 
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
+	D_COMMAND="docker"
 	DC_COMMAND="docker-compose"
 elif [[ $(which docker.exe) ]]; then
+	D_COMMAND="docker.exe"
 	DC_COMMAND="docker-compose.exe"
 else
+	D_COMMAND="docker"
 	DC_COMMAND="docker-compose"
 fi;
 
@@ -32,6 +35,10 @@ if [ ! -f ${CONFIG_FILE} ]; then
     printf '{ "github-oauth": { "github.com": "%s" } }\n' "$githubtoken" >> ${CONFIG_FILE}
 fi
 
+# synchronize VM time with system time
+${D_COMMAND} run --privileged --rm phpdockerio/php7-fpm date -s "$(date -u "+%Y-%m-%d %H:%M:%S")"
+
+# start the containers
 ${DC_COMMAND} --project-name=${PROJECT_ID} up -d --force-recreate
 
 sh ${SCRIPTDIR}/composer.sh install
