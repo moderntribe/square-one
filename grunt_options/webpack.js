@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const webpackCommonConfig = require('../webpack.config.js');
 
 const themeVendors = [
@@ -19,6 +20,7 @@ module.exports = {
 	options: webpackCommonConfig,
 
 	themeDev: {
+		mode: 'development',
 		entry: {
 			scripts: './<%= pkg._core_theme_js_src_path %>index.js',
 			vendor: themeVendors
@@ -34,13 +36,20 @@ module.exports = {
 			new webpack.LoaderOptionsPlugin({
 				debug: true
 			}),
-			new webpack.optimize.CommonsChunkPlugin({
-				names: ['vendor', 'manifest']
-			})
 		),
+		optimization: {
+			namedModules: true, // NamedModulesPlugin()
+			splitChunks: { // CommonsChunkPlugin()
+				name: 'vendor',
+				minChunks: 2
+			},
+			noEmitOnErrors: true, // NoEmitOnErrorsPlugin
+			concatenateModules: true //ModuleConcatenationPlugin
+		}
 	},
 
 	themeProd: {
+		mode: 'production',
 		entry: {
 			scripts: './<%= pkg._core_theme_js_src_path %>index.js',
 			vendorWebpack: themeVendors
@@ -55,26 +64,40 @@ module.exports = {
 			new webpack.DefinePlugin({
 				'process.env': { NODE_ENV: JSON.stringify('production') }
 			}),
-			new webpack.optimize.CommonsChunkPlugin({
-				names: ['vendorWebpack', 'manifest']
-			}),
 			new webpack.LoaderOptionsPlugin({
 				debug: false
-			}),
-			new webpack.optimize.UglifyJsPlugin({
-				sourceMap: true,
-				compress: {
-					warnings: false,
-					drop_console: true
-				},
-				output: {
-					comments: false,
-				},
 			})
 		),
+		optimization: {
+			namedModules: true, // NamedModulesPlugin()
+			splitChunks: { // CommonsChunkPlugin()
+				name: 'vendor',
+				minChunks: 2
+			},
+			noEmitOnErrors: true, // NoEmitOnErrorsPlugin
+			concatenateModules: true, //ModuleConcatenationPlugin
+			minimizer: [
+				// we specify a custom UglifyJsPlugin here to get source maps in production
+				new UglifyJSPlugin({
+					cache: true,
+					parallel: true,
+					sourceMap: true,
+					uglifyOptions: {
+						compress: {
+							warnings: false,
+							drop_console: true,
+						},
+						output: {
+							comments: false,
+						},
+					}
+				})
+			]
+		}
 	},
 
 	adminDev: {
+		mode: 'development',
 		entry: {
 			scripts: './<%= pkg._core_admin_js_src_path %>index.js',
 			vendor: adminVendors
@@ -96,14 +119,21 @@ module.exports = {
 		plugins: webpackCommonConfig.plugins.concat(
 			new webpack.LoaderOptionsPlugin({
 				debug: true
-			}),
-			new webpack.optimize.CommonsChunkPlugin({
-				names: ['vendor', 'manifest']
 			})
 		),
+		optimization: {
+			namedModules: true, // NamedModulesPlugin()
+			splitChunks: { // CommonsChunkPlugin()
+				name: 'vendor',
+				minChunks: 2
+			},
+			noEmitOnErrors: true, // NoEmitOnErrorsPlugin
+			concatenateModules: true //ModuleConcatenationPlugin
+		}
 	},
 
 	adminProd: {
+		mode: 'production',
 		entry: {
 			scripts: './<%= pkg._core_admin_js_src_path %>index.js',
 			vendor: adminVendors
@@ -125,22 +155,35 @@ module.exports = {
 			new webpack.DefinePlugin({
 				'process.env': { NODE_ENV: JSON.stringify('production') },
 			}),
-			new webpack.optimize.CommonsChunkPlugin({
-				names: ['vendor', 'manifest']
-			}),
 			new webpack.LoaderOptionsPlugin({
 				debug: false
-			}),
-			new webpack.optimize.UglifyJsPlugin({
-				sourceMap: true,
-				compress: {
-					warnings: false,
-					drop_console: true,
-				},
-				output: {
-					comments: false,
-				},
 			})
 		),
+		optimization: {
+			namedModules: true, // NamedModulesPlugin()
+			splitChunks: { // CommonsChunkPlugin()
+				name: 'vendor',
+				minChunks: 2
+			},
+			noEmitOnErrors: true, // NoEmitOnErrorsPlugin
+			concatenateModules: true, //ModuleConcatenationPlugin
+			minimizer: [
+				// we specify a custom UglifyJsPlugin here to get source maps in production
+				new UglifyJSPlugin({
+					cache: true,
+					parallel: true,
+					sourceMap: true,
+					uglifyOptions: {
+						compress: {
+							warnings: false,
+							drop_console: true,
+						},
+						output: {
+							comments: false,
+						},
+					}
+				})
+			]
+		}
 	},
 };
