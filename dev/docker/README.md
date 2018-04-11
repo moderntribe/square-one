@@ -55,4 +55,38 @@ download it from [here](https://store.docker.com/editions/community/docker-ce-de
 7. If you need to change the Dockerfile for building the php-fpm image, change the image name from `image: tribe-phpfpm:7.0` to whatever makes sense on your docker-compose.yml
 8. That's it. Be happy.
 
+# Multisite setup on a new project
 
+1. After installing WordPress, in your local-config.php add 
+    ```
+    define( 'SETUP_MS', true );
+    ```
+2. In your wp-config.php change 
+    ```
+    'WP_ALLOW_MULTISITE' => tribe_getenv( 'WP_ALLOW_MULTISITE', false ),
+    ```
+    to
+    ```
+    'WP_ALLOW_MULTISITE' => tribe_getenv( 'WP_ALLOW_MULTISITE', true ),
+    ```
+3. In the WordPress admin visit Tools > Network Setup and setup your multisite by following the instructions.
+4. In dev/docker/phpdocker/nginx/nginx.conf uncomment this line by removing the # symbol at the beginning
+    ```
+    #rewrite ^(/[^/]+)?(/wp-.*) $2 last;
+    ```
+5. Remove the SETUP_MS definition in your local-config.php file
+6. You now need to add this to your local-config.php but use your local domain which will be your projectID.tribe most likely
+    ```
+    define( 'DOMAIN_CURRENT_SITE', '{your-project-domain.tribe' );
+    ``` 
+    In your wp-config.php you will need to define the domain for the production site.
+7. In your wp-config.php you also need to set 
+   ```
+   'MULTISITE' => tribe_getenv( 'WP_MULTISITE', true ),
+   ```
+   and if you are using subdomains instead of paths set
+   ```
+   'SUBDOMAIN_INSTALL' => tribe_getenv( 'SUBDOMAIN_INSTALL', false ),
+   ```
+8. Restart your project's docker container by running /dev/docker/stop.sh then /dev/docker/start.sh
+9. You should now have a fully functioning multisite setup.

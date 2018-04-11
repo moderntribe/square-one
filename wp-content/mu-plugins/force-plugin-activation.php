@@ -181,4 +181,6 @@ class Force_Plugin_Activation {
 
 }
 
-new Force_Plugin_Activation();
+if ( ! defined( 'SETUP_MS' ) || ! SETUP_MS ) {
+	new Force_Plugin_Activation();
+}
