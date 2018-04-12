@@ -45,7 +45,7 @@ class Add_Tasks extends Command {
 		$queue_name = $args[0];
 
 		if ( ! array_key_exists( $queue_name, $this->queues->queues() ) ) {
-			\WP_CLI::error( __( 'That queue name doesn\'t appear to be valid.', 'tribe' ) );
+			\WP_CLI::error( __( "That queue name doesn't appear to be valid.", 'tribe' ) );
 		}
 
 		try {

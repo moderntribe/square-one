@@ -8,7 +8,6 @@ class CardGrid extends Panel_Type_Config {
 
 	const NAME = 'cardgrid';
 
-	const FIELD_LAYOUT           = 'layout';
 	const FIELD_TITLE            = 'title';
 	const FIELD_DESCRIPTION      = 'description';
 	const FIELD_CARDS            = 'cards';

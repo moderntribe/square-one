@@ -22,9 +22,8 @@ class CardGrid extends Panel {
 
 	public function get_mapped_panel_data(): array {
 		$data = [
-			'title'             => $this->get_title( CardGridPanel::FIELD_TITLE, [ 'site-section__title', 'h2' ] ),
-			'description'       => ! empty( $this->panel_vars[ CardGridPanel::FIELD_DESCRIPTION ] ) ? $this->panel_vars[ CardGridPanel::FIELD_DESCRIPTION ] : false,
-			'cards'             => $this->get_cards(),
+			'title' => $this->get_title( $this->panel_vars[ CardGridPanel::FIELD_TITLE ], [ 'site-section__title', 'h2' ] ),
+			'cards' => $this->get_cards(),
 		];
 
 		return $data;
@@ -89,7 +88,7 @@ class CardGrid extends Panel {
 
 		if ( is_panel_preview() ) {
 			$attrs = [
-				'data-depth'    => $this->get_depth(),
+				'data-depth'    => $this->panel->get_depth(),
 				'data-name'     => CardGridPanel::FIELD_CARD_TITLE,
 				'data-index'    => $index,
 				'data-livetext' => true,
@@ -113,7 +112,7 @@ class CardGrid extends Panel {
 
 		if ( is_panel_preview() ) {
 			$attrs = [
-				'data-depth'    => $this->get_depth(),
+				'data-depth'    => $this->panel->get_depth(),
 				'data-name'     => CardGridPanel::FIELD_CARD_DESCRIPTION,
 				'data-index'    => $index,
 				'data-livetext' => true,

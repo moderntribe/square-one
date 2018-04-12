@@ -9,6 +9,8 @@ class MySQL implements Backend {
 
 	const DB_TABLE = 's1_queue';
 
+	private $table_name;
+
 	public function __construct() {
 		global $wpdb;
 
@@ -27,7 +29,7 @@ class MySQL implements Backend {
 	public function enqueue( string $queue_name, Message $message ) {
 		global $wpdb;
 
-		$data = $this->prepare_data( $message );
+		$data          = $this->prepare_data( $message );
 		$data['queue'] = $queue_name;
 
 		return $wpdb->insert( $this->table_name, $data );
@@ -81,8 +83,15 @@ class MySQL implements Backend {
 		$wpdb->update(
 			$this->table_name,
 			[ 'taken' => time() ],
-			[ 'id' => $queue['id'] ]
+			[
+				'id'    => $queue['id'],
+				'taken' => 0,
+			]
 		);
+
+		if ( 0 === $wpdb->rows_affected ) {
+			return;
+		}
 
 		return new Message( $queue['task_handler'], $queue['args'], $queue['priority'], $queue['id'] );
 
@@ -103,7 +112,10 @@ class MySQL implements Backend {
 
 		$wpdb->update(
 			$this->table_name,
-			[ 'taken' => 0 ],
+			[
+				'taken'    => 0,
+				'priority' => $this->get_priority( $job_id ) + 1,
+			],
 			[ 'id' => $job_id ]
 		);
 	}
@@ -132,7 +144,7 @@ class MySQL implements Backend {
 	public function count( string $queue_name ): int {
 		global $wpdb;
 
-		return $wpdb->get_var( $wpdb->prepare (
+		return $wpdb->get_var( $wpdb->prepare(
 			"SELECT COUNT(*) FROM $this->table_name WHERE queue = %s AND done = 0",
 			$queue_name
 		) );
@@ -154,8 +166,7 @@ class MySQL implements Backend {
 		global $wpdb;
 
 		$table_name = $wpdb->prefix . MySQL::DB_TABLE;
-		$wpdb->query(
-			"CREATE TABLE $table_name (
+		$query = "CREATE TABLE $table_name (
 					id bigint(20) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
 					queue varchar(255) NOT NULL,
 					task_handler varchar(255) NOT NULL,
@@ -163,8 +174,20 @@ class MySQL implements Backend {
 					priority int(3),
 					run_after datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
 					taken int(10) NOT NULL DEFAULT 0,
-					done int(10)
-				)"
-		);
+					done int(10) DEFAULT 0
+				)";
+
+		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+
+		return dbDelta( $query );
+	}
+
+	private function get_priority( $task_id ) {
+		global $wpdb;
+
+		return $wpdb->get_var( $wpdb->prepare(
+			"SELECT priority FROM $this->table_name WHERE id = %s",
+			$task_id
+		) );
 	}
 }

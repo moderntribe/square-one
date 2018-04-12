@@ -34,6 +34,8 @@
       * [Forms](/docs/theme/css/forms.md)
     * **Javascript**
       * [Overview](/docs/theme/js/README.md)
+      * [Code Splitting](/docs/theme/js/code-splitting.md)
+      * [Polyfills](/docs/theme/js/polyfills.md)
       * [Selectors](/docs/theme/js/selectors.md)
       * [Events](/docs/theme/js/events.md)
       * [Jquery](/docs/theme/js/jquery.md)
@@ -50,10 +52,12 @@
       * [Posts 2 Post](https://github.com/scribu/wp-posts-to-posts/wiki)
       * [Extended Post Types](https://github.com/johnbillion/extended-cpts/blob/master/README.md)
       * [Extended Taxonomies](https://github.com/johnbillion/extended-taxos/blob/master/README.md)
-    * **Tests and Code Quality**
+* **Tests and Code Quality**
   * [Overview](/docs/tests/README.md)
   * [Codeception](/docs/tests/codeception.md)
   * [Jest](/docs/tests/jest.md)
+* **Local Dev Environment**
+  * [Docker](/dev/docker/README.md)
 
 
 

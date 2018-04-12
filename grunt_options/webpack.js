@@ -67,6 +67,9 @@ module.exports = {
 					warnings: false,
 					drop_console: true
 				},
+				output: {
+					comments: false,
+				},
 			})
 		),
 	},
@@ -133,7 +136,10 @@ module.exports = {
 				compress: {
 					warnings: false,
 					drop_console: true,
-				}
+				},
+				output: {
+					comments: false,
+				},
 			})
 		),
 	},

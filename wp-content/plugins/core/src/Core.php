@@ -44,13 +44,8 @@ class Core {
 	}
 
 	public function init() {
-		$this->load_libraries();
 		$this->load_functions();
 		$this->load_service_providers();
-	}
-
-	private function load_libraries() {
-		require_once( dirname( $this->container[ 'plugin_file' ] ) . '/vendor/johnbillion/extended-cpts/extended-cpts.php' );
 	}
 
 	private function load_functions() {
