@@ -30,11 +30,18 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 fi;
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
+	D_COMMAND="docker"
 	DC_COMMAND="docker-compose"
 elif [[ $(which docker.exe) ]]; then
+	D_COMMAND="docker.exe"
 	DC_COMMAND="docker-compose.exe"
 else
+	D_COMMAND="docker"
 	DC_COMMAND="docker-compose"
 fi;
 
+# synchronize VM time with system time
+${D_COMMAND} run --privileged --rm phpdockerio/php7-fpm date -s "$(date -u "+%Y-%m-%d %H:%M:%S")"
+
+# start the containers
 ${DC_COMMAND} --project-name=global up -d

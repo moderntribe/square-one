@@ -5,7 +5,7 @@ services:
   dns-external:
     image: andyshinn/dnsmasq:latest
     container_name: tribe-dns-external
-    command: --log-facility=/proc/self/fd/2  --no-resolv --server=8.8.8.8 --address=/tribe/127.0.0.1
+    command: --log-facility=/proc/self/fd/2  --no-resolv --server=1.1.1.1 --address=/tribe/127.0.0.1
     cap_add:
       - NET_ADMIN
     ports:
@@ -16,7 +16,7 @@ services:
   dns-internal:
     image: andyshinn/dnsmasq:latest
     container_name: tribe-dns-internal
-    command:  --log-facility=/proc/self/fd/2 --no-resolv --server=8.8.8.8 --address=/tribe/172.20.10.100 --address=/mysql.tribe/172.20.10.200 --address=/mailhog.tribe/172.20.10.90 --address=/smtp.tribe/172.20.10.90 --address=/host.tribe/${HOSTIP:-172.20.10.1}
+    command:  --log-facility=/proc/self/fd/2 --no-resolv --server=1.1.1.1 --address=/tribe/172.20.10.100 --address=/mysql.tribe/172.20.10.200 --address=/mailhog.tribe/172.20.10.90 --address=/smtp.tribe/172.20.10.90 --address=/host.tribe/${HOSTIP:-172.20.10.1}
     cap_add:
       - NET_ADMIN
     ports:
