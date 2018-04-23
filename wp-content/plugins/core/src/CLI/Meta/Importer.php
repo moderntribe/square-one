@@ -204,7 +204,7 @@ class Importer extends Command {
 					$function_partial,
 					$this->sanitize_slug( [ $field['label'] ] ),
 					$this->file_system->constant_from_class( $this->sanitize_slug( [ $field['label'] ] ) ),
-					$this->file_system->format_array_for_file( $field, 2 )
+					$this->file_system->format_array_for_file( $field, 20 )
 				);
 			} else {
 				$functions .= $this->get_repeater( $field );
@@ -237,7 +237,7 @@ class Importer extends Command {
 			$group_partial,
 			$this->sanitize_slug( [ $field['label'] ] ),
 			$this->file_system->constant_from_class( $this->sanitize_slug( [ $field['label'] ] ) ),
-			$this->file_system->format_array_for_file( $write_field, 2 ),
+			$this->file_system->format_array_for_file( $write_field, 20 ),
 			$this->add_field_functions( $field['sub_fields'], '$repeater' )
 		);
 
