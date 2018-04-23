@@ -180,10 +180,10 @@ class Importer extends Command {
 		return $keys;
 	}
 
-	protected function add_field_functions( $fields, $group = '$group' ) {
+	protected function add_field_functions( $fields, $group = '$group', $indent = 8 ) {
 		$functions = '';
 		foreach ( $fields as $field ) {
-			$functions .= $group . '->add_field( $this->get_field_' . $this->sanitize_slug( [ $field['label'] ] ) . '() );' . PHP_EOL;
+			$functions .= str_repeat( ' ', $indent ) . $group . '->add_field( $this->get_field_' . $this->sanitize_slug( [ $field['label'] ] ) . '() );' . PHP_EOL;
 		}
 
 		return $functions;
@@ -238,7 +238,7 @@ class Importer extends Command {
 			$this->sanitize_slug( [ $field['label'] ] ),
 			$this->file_system->constant_from_class( $this->sanitize_slug( [ $field['label'] ] ) ),
 			$this->file_system->format_array_for_file( $write_field, 20 ),
-			$this->add_field_functions( $field['sub_fields'], '$repeater' )
+			$this->add_field_functions( $field['sub_fields'], '$repeater', 0 )
 		);
 
 		return $group . $this->field_functions( $field['sub_fields'] );
