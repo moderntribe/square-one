@@ -12,14 +12,14 @@ class %1$s extends ACF\ACF_Meta_Group {
 
 	public function get_keys() {
 		return [
-%3$s    ];
+%3$s        ];
 	}
 
 	public function get_group_config() {
 		$group = new ACF\Group( self::NAME, $this->object_types );
 		$group->set( 'title', __( '%4$s', 'tribe' ) );
 
-		%5$s
+%5$s
 
 		return $group->get_attributes();
 	}
