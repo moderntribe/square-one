@@ -183,7 +183,7 @@ class Importer extends Command {
 	protected function add_field_functions( $fields, $group = '$group' ) {
 		$functions = '';
 		foreach ( $fields as $field ) {
-			$functions .= $group . '->add_field( $this->get_field_' . $this->sanitize_slug( [ $field['label'] ] ) . '() );';
+			$functions .= $group . '->add_field( $this->get_field_' . $this->sanitize_slug( [ $field['label'] ] ) . '() );' . PHP_EOL;
 		}
 
 		return $functions;
