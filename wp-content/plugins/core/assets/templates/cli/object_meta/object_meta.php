@@ -17,7 +17,7 @@ class %1$s extends ACF\ACF_Meta_Group {
 
 	public function get_group_config() {
 		$group = new ACF\Group( self::NAME, $this->object_types );
-		$group->set( 'title', __( '45$s', 'tribe' ) );
+		$group->set( 'title', __( '%4$s', 'tribe' ) );
 
 		%5$s
 
