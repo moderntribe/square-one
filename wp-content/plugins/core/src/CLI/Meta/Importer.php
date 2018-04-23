@@ -221,6 +221,9 @@ class Importer extends Command {
 	}
 
 	private function get_repeater( $field ) {
+
+		print_r( $field );
+
 		$group_partial = file_get_contents( trailingslashit( dirname( __DIR__, 3 ) ) . 'assets/templates/cli/object_meta/repeater_function_partial.php' );
 		$group = sprintf(
 			$group_partial,
