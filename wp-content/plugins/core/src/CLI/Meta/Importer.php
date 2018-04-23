@@ -155,7 +155,7 @@ class Importer extends Command {
 			$this->field_constants(),
 			$this->field_keys(),
 			$this->title,
-			$this->add_field_functions(),
+			$this->add_field_functions($this->group['fields']),
 			$this->field_functions( $this->group['fields'] )
 		);
 	}
@@ -179,10 +179,10 @@ class Importer extends Command {
 		return $keys;
 	}
 
-	protected function add_field_functions() {
+	protected function add_field_functions( $fields, $group = '$group' ) {
 		$functions = '';
-		foreach ( $this->group['fields'] as $field ) {
-			$functions .= '$group->add_field( $this->get_field_' . $this->sanitize_slug( [ $field['label'] ] ) . '() );';
+		foreach ( $fields as $field ) {
+			$functions .= $group . '->add_field( $this->get_field_' . $this->sanitize_slug( [ $field['label'] ] ) . '() );';
 		}
 
 		return $functions;
@@ -229,7 +229,8 @@ class Importer extends Command {
 			$group_partial,
 			$this->sanitize_slug( [ $field['label'] ] ),
 			$this->file_system->constant_from_class( $this->sanitize_slug( [ $field['label'] ] ) ),
-			$this->file_system->format_array_for_file( $field, 2 )
+			$this->file_system->format_array_for_file( $field, 2 ),
+			$this->add_field_functions( $field['sub_fields'], '$repeater' )
 		);
 
 
