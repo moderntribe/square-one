@@ -56,7 +56,7 @@ class Importer extends Command {
 			$this->create_object_class();
 
 			// Delete the field group.
-			//$this->delete_field_group();
+			$this->delete_field_group();
 
 			// Success!
 			\WP_CLI::line( __( 'We did it!', 'tribe' ) );
