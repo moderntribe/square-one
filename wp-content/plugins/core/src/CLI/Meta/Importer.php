@@ -36,7 +36,7 @@ class Importer extends Command {
 	}
 
 	public function run_command( $args, $assoc_args ) {
-		$this->args = $args;
+		$this->args       = $args;
 		$this->assoc_args = $assoc_args;
 
 		if ( empty( $this->get_dynamic_field_groups() ) ) {
@@ -47,20 +47,21 @@ class Importer extends Command {
 			// Setup and import the field groups.
 			$this->setup_field_group();
 
+			print_r( $this );
 			// Sanity check.
 			\WP_CLI::confirm( sprintf( __( 'Are you sure you want to delete the database entry %s field group and convert it to php?', 'tribe' ), $this->title ), $assoc_args );
-			
+
 			// Write the meta files.
 			$this->update_service_provider();
 			$this->create_object_class();
 
 			// Delete the field group.
-			$this->delete_field_group();
+			//$this->delete_field_group();
 
 			// Success!
 			\WP_CLI::line( __( 'We did it!', 'tribe' ) );
 		} else {
-			foreach( $this->get_dynamic_field_groups() as $field_group_id => $field_group_name ) {
+			foreach ( $this->get_dynamic_field_groups() as $field_group_id => $field_group_name ) {
 				\WP_CLI::line( sprintf( __( 'You can import %s with `wp s1 import meta %s`', 'tribe' ), $field_group_name, $field_group_id ) );
 			}
 		}
@@ -109,14 +110,14 @@ class Importer extends Command {
 
 		// public function register( Container $container ) {
 		$container_partial_file = file_get_contents( trailingslashit( dirname( __DIR__, 3 ) ) . 'assets/templates/cli/object_meta/container_partial.php' );
-		$container_partial = sprintf( $container_partial_file, $this->class_name, $this->file_system->format_array_for_file( $this->build_object_array(), 4 ), $this->const_name );
+		$container_partial      = sprintf( $container_partial_file, $this->class_name, $this->file_system->format_array_for_file( $this->build_object_array(), 4 ), $this->const_name );
 		$this->file_system->insert_into_existing_file( $object_meta_service_provider, $container_partial, 'public function register( Container $container ) {' );
 
 	}
 
 	protected function build_object_array() {
 		$locations = [];
-		foreach( $this->group['location'] as $location ) {
+		foreach ( $this->group['location'] as $location ) {
 			if ( count( $location ) > 1 ) {
 				\WP_CLI::error( 'Sorry, this importer does not yet support conditional location logic' );
 			}
@@ -163,8 +164,9 @@ class Importer extends Command {
 		$constants = '';
 
 		foreach ( $this->group['fields'] as $field ) {
-			$constants .= "\tconst " . $this->file_system->constant_from_class( $this->sanitize_slug( [$field['label']] ) ) . ' = ' . '\'' . $this->slug . '_' . $field['name'] . '\';' . PHP_EOL;
+			$constants .= "\tconst " . $this->file_system->constant_from_class( $this->sanitize_slug( [ $field['label'] ] ) ) . ' = ' . '\'' . $this->slug . '_' . $field['name'] . '\';' . PHP_EOL;
 		}
+
 		return $constants;
 	}
 
@@ -173,13 +175,14 @@ class Importer extends Command {
 		foreach ( $this->group['fields'] as $field ) {
 			$keys .= "\t\t\tstatic::" . $this->file_system->constant_from_class( $this->sanitize_slug( [ $field['label'] ] ) ) . ',' . PHP_EOL;
 		}
+
 		return $keys;
 	}
 
 	protected function add_field_functions() {
 		$functions = '';
 		foreach ( $this->group['fields'] as $field ) {
-			$functions .= '$group->add_field( $this->get_field_' . $this->sanitize_slug( [$field['label']] ) . '() );';
+			$functions .= '$group->add_field( $this->get_field_' . $this->sanitize_slug( [ $field['label'] ] ) . '() );';
 		}
 
 		return $functions;
