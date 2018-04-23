@@ -205,7 +205,6 @@ class Importer extends Command {
 				);
 			} else {
 				$functions .= $this->get_repeater( $field );
-				);
 			}
 		}
 
