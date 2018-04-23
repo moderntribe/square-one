@@ -156,7 +156,7 @@ class Importer extends Command {
 			$this->field_keys(),
 			$this->title,
 			$this->add_field_functions(),
-			$this->field_functions()
+			$this->field_functions( $this->group['fields'] )
 		);
 	}
 
@@ -188,18 +188,25 @@ class Importer extends Command {
 		return $functions;
 	}
 
-	protected function field_functions() {
+	protected function field_functions( $fields ) {
 		$function_partial = file_get_contents( trailingslashit( dirname( __DIR__, 3 ) ) . 'assets/templates/cli/object_meta/field_function_partial.php' );
 
 		$functions = '';
-		foreach ( $this->group['fields'] as $field ) {
-			unset( $field['key'] );
-			$functions .= sprintf(
-				$function_partial,
-				$this->sanitize_slug( [ $field['label'] ] ),
-				$this->file_system->constant_from_class( $this->sanitize_slug( [ $field['label'] ] ) ),
-				$this->file_system->format_array_for_file( $field, 2 )
-			);
+		foreach ( $fields as $field ) {
+
+			$field = $this->prepare_field( $field );
+
+			if ( 'repeater' !== $field['type'] ) {
+				$functions .= sprintf(
+					$function_partial,
+					$this->sanitize_slug( [ $field['label'] ] ),
+					$this->file_system->constant_from_class( $this->sanitize_slug( [ $field['label'] ] ) ),
+					$this->file_system->format_array_for_file( $field, 2 )
+				);
+			} else {
+				$functions .= $this->get_repeater( $field );
+				);
+			}
 		}
 
 		return $functions;
@@ -207,5 +214,22 @@ class Importer extends Command {
 
 	protected function delete_field_group() {
 		acf_delete_field_group( acf_get_field_group_id( $this->group ) );
+	}
+
+	private function prepare_field( $field ) {
+		unset ( $field['key'], $field['wrapper'], $field['prepend'], $field['append'] );
+		return $field;
+	}
+
+	private function get_repeater( $field ) {
+		$group_partial = file_get_contents( trailingslashit( dirname( __DIR__, 3 ) ) . 'assets/templates/cli/object_meta/repeater_function_partial.php' );
+		$group = sprintf(
+			$group_partial,
+			$this->sanitize_slug( [ $field['label'] ] ),
+			$this->file_system->constant_from_class( $this->sanitize_slug( [ $field['label'] ] ) ),
+			$this->file_system->format_array_for_file( $field, 2 )
+		);
+
+		return $group . $this->field_functions( $field['subfields'] );
 	}
 }
