@@ -222,7 +222,7 @@ class Importer extends Command {
 		unset ( $field['key'], $field['wrapper'], $field['prepend'], $field['append'] );
 
 		$field = array_filter( $field, function( $element ) {
-			return $element !== '';
+			return '' !== $element;
 		} );
 
 		return $field;
