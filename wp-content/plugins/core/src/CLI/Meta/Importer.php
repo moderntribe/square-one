@@ -221,20 +221,18 @@ class Importer extends Command {
 	}
 
 	private function get_repeater( $field ) {
-
-		print_r( $field );
+		$write_field = $field;
+		unset ( $write_field['sub_fields'] );
 
 		$group_partial = file_get_contents( trailingslashit( dirname( __DIR__, 3 ) ) . 'assets/templates/cli/object_meta/repeater_function_partial.php' );
 		$group = sprintf(
 			$group_partial,
 			$this->sanitize_slug( [ $field['label'] ] ),
 			$this->file_system->constant_from_class( $this->sanitize_slug( [ $field['label'] ] ) ),
-			$this->file_system->format_array_for_file( $field, 2 ),
+			$this->file_system->format_array_for_file( $write_field, 2 ),
 			$this->add_field_functions( $field['sub_fields'], '$repeater' )
 		);
 
-
-		print_r ($group);
 		return $group . $this->field_functions( $field['sub_fields'] );
 	}
 }
