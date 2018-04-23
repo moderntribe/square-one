@@ -229,6 +229,8 @@ class Importer extends Command {
 			$this->file_system->format_array_for_file( $field, 2 )
 		);
 
-		return $group . $this->field_functions( $field['subfields'] );
+
+		print_r ($group);
+		return $group . $this->field_functions( $field['sub_fields'] );
 	}
 }
