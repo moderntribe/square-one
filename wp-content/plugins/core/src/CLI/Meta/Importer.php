@@ -48,7 +48,6 @@ class Importer extends Command {
 			// Setup and import the field groups.
 			$this->setup_field_group();
 
-			print_r( $this );
 			// Sanity check.
 			\WP_CLI::confirm( sprintf( __( 'Are you sure you want to delete the database entry %s field group and convert it to php?', 'tribe' ), $this->title ), $assoc_args );
 
@@ -204,7 +203,7 @@ class Importer extends Command {
 					$function_partial,
 					$this->sanitize_slug( [ $field['label'] ] ),
 					$this->file_system->constant_from_class( $this->sanitize_slug( [ $field['label'] ] ) ),
-					$this->file_system->format_array_for_file( $field, 20 )
+					$this->file_system->format_array_for_file( $field, 16 )
 				);
 			} else {
 				$functions .= $this->get_repeater( $field );
@@ -237,8 +236,8 @@ class Importer extends Command {
 			$group_partial,
 			$this->sanitize_slug( [ $field['label'] ] ),
 			$this->file_system->constant_from_class( $this->sanitize_slug( [ $field['label'] ] ) ),
-			$this->file_system->format_array_for_file( $write_field, 20 ),
-			$this->add_field_functions( $field['sub_fields'], '$repeater', 0 )
+			$this->file_system->format_array_for_file( $write_field, 16 ),
+			$this->add_field_functions( $field['sub_fields'], '$repeater' )
 		);
 
 		return $group . $this->field_functions( $field['sub_fields'] );

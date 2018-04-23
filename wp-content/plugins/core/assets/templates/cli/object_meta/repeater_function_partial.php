@@ -4,7 +4,7 @@
 			%3$s
 		);
 
-		%4$s
+%4$s
 
 		return $repeater;
 	}
