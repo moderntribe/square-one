@@ -16,6 +16,7 @@ class Importer extends Command {
 	protected $namespace  = '';
 	protected $const_name = '';
 	protected $pimple_key = '';
+	protected $constants  = [];
 
 	public function description() {
 		return __( 'Generates object meta.', 'tribe' );
@@ -152,19 +153,19 @@ class Importer extends Command {
 			$class_file,
 			$this->class_name,
 			$this->slug,
-			$this->field_constants(),
 			$this->field_keys(),
 			$this->title,
-			$this->add_field_functions($this->group['fields']),
-			$this->field_functions( $this->group['fields'] )
+			$this->add_field_functions( $this->group['fields'] ),
+			$this->field_functions( $this->group['fields'] ),
+			$this->field_constants()
 		);
 	}
 
 	protected function field_constants() {
 		$constants = '';
 
-		foreach ( $this->group['fields'] as $field ) {
-			$constants .= "\tconst " . $this->file_system->constant_from_class( $this->sanitize_slug( [ $field['label'] ] ) ) . ' = ' . '\'' . $this->slug . '_' . $field['name'] . '\';' . PHP_EOL;
+		foreach ( $this->constants as $label => $name ) {
+			$constants .= "\tconst " . $this->file_system->constant_from_class( $this->sanitize_slug( [ $label ] ) ) . ' = ' . '\'' . $this->slug . '_' . $name . '\';' . PHP_EOL;
 		}
 
 		return $constants;
@@ -193,6 +194,8 @@ class Importer extends Command {
 
 		$functions = '';
 		foreach ( $fields as $field ) {
+
+			$this->constants[$field['label']] = $field['name'];
 
 			$field = $this->prepare_field( $field );
 
