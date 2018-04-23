@@ -220,6 +220,11 @@ class Importer extends Command {
 
 	private function prepare_field( $field ) {
 		unset ( $field['key'], $field['wrapper'], $field['prepend'], $field['append'] );
+
+		$field = array_filter( $field, function( $element ) {
+			return $element !== '';
+		} );
+
 		return $field;
 	}
 
