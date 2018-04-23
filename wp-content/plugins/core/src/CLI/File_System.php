@@ -51,16 +51,33 @@ class File_System {
 		return file_get_contents( $path );
 	}
 
-	public function format_array_for_file( $array, $tab_leader = 1 ) {
-		$text_array = var_export( $array, 1 );
-		$lines = explode( PHP_EOL, $text_array );
+	/**
+	 * Thanks stackoverflow.
+	 * gist: https://gist.github.com/stemar/bb7c5cd2614b21b624bf57608f995ac0
+	 *
+	 * @param     $array
+	 * @param int $tab_leader
+	 *
+	 * @return mixed
+	 */
+	public function format_array_for_file( $array, $tab_leader = 4 ) {
+		$object = json_decode( str_replace( [ '(', ')' ], [
+			'&#40',
+			'&#41',
+		], json_encode( $array ) ), true );
+		$export = str_replace( [ 'array (', ')', '&#40', '&#41' ], [
+			'[',
+			']',
+			'(',
+			')',
+		], var_export( $object, true ) );
+		$export = preg_replace( "/ => \n[^\S\n]*\[/m", ' => [', $export );
+		$export = preg_replace( "/ => \[\n[^\S\n]*\]/m", ' => []', $export );
+		$spaces = str_repeat( ' ', $tab_leader );
+		$export = preg_replace( "/([ ]{2})(?![^ ])/m", $spaces, $export );
+		$export = preg_replace( "/^([ ]{2})/m", $spaces, $export );
 
-		$modified_string = '';
-		foreach ( $lines as $line ) {
-			$modified_string .= str_repeat( "\t", $tab_leader ) . $line . PHP_EOL;
-		}
-
-		return $modified_string;
+		return $export;
 	}
 
 	public function constant_from_class( $class_name ) {
