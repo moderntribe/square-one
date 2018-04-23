@@ -23,7 +23,7 @@ For accessible usage of font icons [see here](http://fontawesome.io/accessibilit
 * Theme
   * [Overview](/docs/theme/README.md)
   * [Markup and Style](/docs/theme/markup-and-style.md)
-  * [Accessibility](/docs/theme/accessbility.md)
+  * [Accessibility](/docs/theme/accessibility.md)
   * [Image Handling](/docs/theme/images.md)
   * [Fonts](/docs/theme/fonts.md)
   * [Icons](/docs/theme/icons.md)
