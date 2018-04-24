@@ -117,10 +117,12 @@ class Importer extends Command {
 
 	protected function build_object_array() {
 		$locations = [];
+
+//		print_r( $this->group['location'] );
 		foreach ( $this->group['location'] as $location ) {
-			if ( count( $location ) > 1 ) {
-				\WP_CLI::error( 'Sorry, this importer does not yet support conditional location logic' );
-			}
+//			if ( count( $location ) > 1 ) {
+//				\WP_CLI::error( 'Sorry, this importer does not yet support conditional location logic' );
+//			}
 			switch ( $location[0]['param'] ) {
 				case 'post_type':
 					$locations['post_types'][] = $location[0]['value'];
@@ -137,6 +139,7 @@ class Importer extends Command {
 			}
 		}
 
+		print_r( $locations );die;
 		return $locations;
 	}
 
