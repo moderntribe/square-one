@@ -118,7 +118,7 @@ class Importer extends Command {
 	protected function build_object_array() {
 		$locations = [];
 
-//		print_r( $this->group['location'] );
+		print_r( $this->group['location'] );
 		foreach ( $this->group['location'] as $location ) {
 //			if ( count( $location ) > 1 ) {
 //				\WP_CLI::error( 'Sorry, this importer does not yet support conditional location logic' );
