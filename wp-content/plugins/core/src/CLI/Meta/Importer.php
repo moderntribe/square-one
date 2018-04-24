@@ -127,8 +127,8 @@ class Importer extends Command {
 				case 'post_type':
 					$locations['post_types'][] = $location[0]['value'];
 					break;
-				case 'post_category':
-					$locations['taxonomies'][] = substr( $location[0]['value'], strpos( $location[0]['value'], ':' ) + 1 );
+				case 'taxonomy':
+					$locations['taxonomies'][] = $location[0]['value'];
 					break;
 				case 'options_page':
 					$locations['settings_pages'][] = $location[0]['value'];
