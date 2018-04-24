@@ -194,7 +194,7 @@ class Importer extends Command {
 		$functions = '';
 		foreach ( $fields as $field ) {
 
-			$this->constants[$field['label']] = $field['name'];
+			$this->constants[ $field['label'] ] = $field['name'];
 
 			$field = $this->prepare_field( $field );
 
@@ -220,9 +220,31 @@ class Importer extends Command {
 	private function prepare_field( $field ) {
 		unset ( $field['key'], $field['wrapper'], $field['prepend'], $field['append'] );
 
-		$field = array_filter( $field, function( $element ) {
+		$field = array_filter( $field, function ( $element ) {
 			return '' !== $element;
 		} );
+
+		$zero_fields = [
+			'required',
+			'conditional_logic',
+		];
+
+		foreach ( $zero_fields as $zero_field ) {
+			if ( 0 === $field[ $zero_field ] ) {
+				unset( $field[ $zero_field ] );
+			}
+		}
+
+		$required_fields = [
+			'name',
+			'label',
+		];
+
+		foreach ( $required_fields as $required_field ) {
+			if ( ! isset( $field[ $required_field ] ) ) {
+				\WP_CLI::error( sprintf( __( '%s field must be set.', 'tribe' ), $required_field ) );
+			}
+		}
 
 		return $field;
 	}
@@ -232,7 +254,7 @@ class Importer extends Command {
 		unset ( $write_field['sub_fields'] );
 
 		$group_partial = file_get_contents( trailingslashit( dirname( __DIR__, 3 ) ) . 'assets/templates/cli/object_meta/repeater_function_partial.php' );
-		$group = sprintf(
+		$group         = sprintf(
 			$group_partial,
 			$this->sanitize_slug( [ $field['label'] ] ),
 			$this->file_system->constant_from_class( $this->sanitize_slug( [ $field['label'] ] ) ),
