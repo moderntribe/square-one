@@ -118,28 +118,19 @@ class Importer extends Command {
 	protected function build_object_array() {
 		$locations = [];
 
-		print_r( $this->group['location'] );
+		$accepted_locations = [
+			'post_type'    => 'post_types',
+			'taxonomy'     => 'taxonomies',
+			'options_page' => 'settings_pages',
+			'user_form'    => 'users',
+		];
+
 		foreach ( $this->group['location'] as $location ) {
-//			if ( count( $location ) > 1 ) {
-//				\WP_CLI::error( 'Sorry, this importer does not yet support conditional location logic' );
-//			}
-			switch ( $location[0]['param'] ) {
-				case 'post_type':
-					$locations['post_types'][] = $location[0]['value'];
-					break;
-				case 'taxonomy':
-					$locations['taxonomies'][] = $location[0]['value'];
-					break;
-				case 'options_page':
-					$locations['settings_pages'][] = $location[0]['value'];
-					break;
-				case 'user_form':
-					$locations['users'] = true;
-					break;
+			if ( array_key_exists( $location[0]['param'], array_keys( $accepted_locations ) ) ) {
+				$locations[ $accepted_locations[ $location[0]['param'] ] ][] = $location[0]['value'];
 			}
 		}
 
-		print_r( $locations );die;
 		return $locations;
 	}
 
