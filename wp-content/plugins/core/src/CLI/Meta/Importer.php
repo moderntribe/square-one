@@ -126,11 +126,28 @@ class Importer extends Command {
 		];
 
 		foreach ( $this->group['location'] as $location ) {
-			if ( array_key_exists( $location[0]['param'], array_keys( $accepted_locations ) ) ) {
-				$locations[ $accepted_locations[ $location[0]['param'] ] ][] = $location[0]['value'];
+			if ( array_key_exists( $location[0]['param'], $accepted_locations) ) {
+				$locations[ $accepted_locations[$location[0]['param'] ] ][] = $location[0]['value'];
+				echo'yes';die;
+			}
+
+			switch ( $location[0]['param'] ) {
+				case 'post_type':
+					$locations['post_types'][] = $location[0]['value'];
+					break;
+				case 'taxonomy':
+					$locations['taxonomies'][] = $location[0]['value'];
+					break;
+				case 'options_page':
+					$locations['settings_pages'][] = $location[0]['value'];
+					break;
+				case 'user_form':
+					$locations['users'] = true;
+					break;
 			}
 		}
 
+		print_r( $locations );die;
 		return $locations;
 	}
 
