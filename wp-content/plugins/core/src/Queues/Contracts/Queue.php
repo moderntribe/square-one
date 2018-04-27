@@ -31,7 +31,7 @@ abstract class Queue {
 		$message = $this->backend->dequeue( $this->get_name() );
 
 		if ( ! is_a( $message, Message::class ) ) {
-			new \Exception( __( 'A valid message could not be found.', 'tribe' ) );
+			throw new \Exception( __( 'A valid message could not be found.', 'tribe' ) );
 		}
 
 		return $message;
