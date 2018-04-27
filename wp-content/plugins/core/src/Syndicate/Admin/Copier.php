@@ -19,7 +19,11 @@ class Copier extends Display {
 
 		global $wpdb;
 		$syndicated_tracking_table = Blog::SYNDICATED_TRACKING_TABLE;
-		if ( $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->base_prefix}{$syndicated_tracking_table} WHERE copied_post_id = {$post->ID} AND blog_id = {$wpdb->blogid}" ) ) {
+		if ( $wpdb->get_var( $wpdb->prepare(
+			"SELECT COUNT(*) FROM {$wpdb->base_prefix}{$syndicated_tracking_table} WHERE copied_post_id = %d AND blog_id = %d",
+			$post->ID,
+			$wpdb->blogid ) )
+		) {
 			$actions['remove'] = $this->remove_copied_post_link( $post );
 		}
 
