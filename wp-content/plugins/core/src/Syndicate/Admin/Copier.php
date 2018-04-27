@@ -83,7 +83,7 @@ class Copier extends Display {
 				get_admin_url( get_current_blog_id(), 'admin-post.php?action=' . self::COPY_ACTION . '&id=' . $post->ID ),
 				Copier::COPY_ACTION . $post->ID
 			),
-			__( 'Copy to local site', 'tribe' )
+			esc_html__( 'Copy to local site', 'tribe' )
 		);
 	}
 
@@ -102,7 +102,7 @@ class Copier extends Display {
 			return;
 		}
 
-		add_metadata( 'post', $id, $key, $value );
+		add_post_meta(  $id, $key, $value );
 	}
 
 	/**
