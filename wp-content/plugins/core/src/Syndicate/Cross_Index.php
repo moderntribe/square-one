@@ -20,7 +20,9 @@ class Cross_Index {
 	 * @action ep_after_index_post
 	 */
 	public function post_indexed( $post_data ) {
-		// TODO: skip if a post that should not be indexed
+		if ( do_action( 'skip_syndication_ep_cross_index', false, $post_data ) ) {
+			return;
+		}
 
 		$encoded_post = wp_json_encode( $post_data );
 		$bulk_data    = [];
