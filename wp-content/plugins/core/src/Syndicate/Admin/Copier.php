@@ -74,6 +74,7 @@ class Copier extends Display {
 		);
 
 		wp_safe_redirect( $_SERVER['HTTP_REFERER'] );
+		exit;
 	}
 
 	protected function copy_to_blog_link( $post ) {
@@ -124,6 +125,7 @@ class Copier extends Display {
 		);
 
 		wp_safe_redirect( $_SERVER['HTTP_REFERER'] );
+		exit;
 	}
 
 }
