@@ -350,6 +350,9 @@ class Blog {
 		$wpdb->$syndicated_table  = $wpdb->base_prefix . '_' . $syndicated_table;
 	}
 
+	/**
+	 * @filter wpmu_drop_tables
+	 */
 	public function drop_views( array $tables, int $blog_id ):array {
 
 		global $wpdb;
