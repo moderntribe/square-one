@@ -77,6 +77,7 @@ class File_System {
 		$export = preg_replace( "/([ ]{2})(?![^ ])/m", $spaces, $export );
 		$export = preg_replace( "/^([ ]{2})/m", $spaces, $export );
 
+		echo $export;
 		$lines = explode( $export, PHP_EOL );
 		print_r( $lines );die;
 		$export = '';
