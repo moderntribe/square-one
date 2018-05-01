@@ -56,11 +56,11 @@ class File_System {
 	 * gist: https://gist.github.com/stemar/bb7c5cd2614b21b624bf57608f995ac0
 	 *
 	 * @param     $array
-	 * @param int $tab_leader
+	 * @param int $internal_indent
 	 *
 	 * @return mixed
 	 */
-	public function format_array_for_file( $array, $tab_leader = 4 ) {
+	public function format_array_for_file( $array, $array_indent = 0, $internal_indent = 4 ) {
 		$object = json_decode( str_replace( [ '(', ')' ], [
 			'&#40',
 			'&#41',
@@ -73,9 +73,17 @@ class File_System {
 		], var_export( $object, true ) );
 		$export = preg_replace( "/ => \n[^\S\n]*\[/m", ' => [', $export );
 		$export = preg_replace( "/ => \[\n[^\S\n]*\]/m", ' => []', $export );
-		$spaces = str_repeat( ' ', $tab_leader );
+		$spaces = str_repeat( ' ', $internal_indent );
 		$export = preg_replace( "/([ ]{2})(?![^ ])/m", $spaces, $export );
 		$export = preg_replace( "/^([ ]{2})/m", $spaces, $export );
+
+		$lines = explode( $export, PHP_EOL );
+		print_r( $lines );die;
+		$export = '';
+
+		foreach ( $lines as $line ) {
+			$export .= str_repeat( ' ', $array_indent ) . $line . PHP_EOL;
+		}
 
 		return $export;
 	}
