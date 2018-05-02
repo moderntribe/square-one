@@ -141,7 +141,7 @@ class Blog {
 				continue;
 			}
 
-			$queries = array_merge( $queries, $this->construct_view_queries( $wpdb->base_prefix, $blog_id, 'ALTER' ) );
+			$queries = array_merge( $queries, $this->construct_view_queries( $wpdb->base_prefix, $blog_id ) );
 		}
 
 		foreach ( $queries as $query ) {
@@ -150,7 +150,7 @@ class Blog {
 
 	}
 
-	private function construct_view_queries( $prefix, $blog_id, $create_or_alter = 'CREATE' ) {
+	private function construct_view_queries( $prefix, $blog_id ) {
 		global $wpdb;
 		$syndicated_tracking_table = self::SYNDICATED_TRACKING_TABLE;
 
@@ -172,7 +172,7 @@ class Blog {
 					}, Settings_Fields::types() ) );
 					restore_current_blog();
 
-					$views[] = "{$create_or_alter} VIEW {$blog_prefix}{$view_name}_{$table} AS 
+					$views[] = "CREATE OR REPLACE VIEW {$blog_prefix}{$view_name}_{$table} AS 
 						SELECT * FROM {$prefix}{$table} WHERE id NOT IN (
 							SELECT source_post_id FROM {$prefix}$syndicated_tracking_table WHERE blog_id = {$blog_id}
 						)
@@ -183,7 +183,7 @@ class Blog {
 					break;
 
 				case 'term_taxonomy'        :
-					$views[] = "{$create_or_alter} VIEW {$blog_prefix}{$view_name}_{$table} AS 
+					$views[] = "CREATE OR REPLACE VIEW {$blog_prefix}{$view_name}_{$table} AS 
 						SELECT * FROM {$prefix}{$table} 
 							WHERE `taxonomy` <> 'nav_menu'
 						UNION ALL
@@ -191,20 +191,20 @@ class Blog {
 					break;
 
 				case 'termmeta'             :
-					$views[] = "{$create_or_alter} VIEW {$blog_prefix}{$view_name}_{$table} AS
+					$views[] = "CREATE OR REPLACE VIEW {$blog_prefix}{$view_name}_{$table} AS
 						SELECT * FROM {$prefix}{$table}
 						UNION ALL
 						SELECT * FROM {$blog_prefix}{$table}";
 					break;
 
 				case 'term_relationships'   :
-					$views[] = "{$create_or_alter} VIEW {$blog_prefix}{$view_name}_{$table} AS
+					$views[] = "CREATE OR REPLACE VIEW {$blog_prefix}{$view_name}_{$table} AS
 						SELECT * FROM {$prefix}{$table}
 						UNION ALL
 						SELECT * FROM {$blog_prefix}{$table}";
 					break;
 				default                     :
-					$views[] = "{$create_or_alter} VIEW {$blog_prefix}{$view_name}_{$table} AS 
+					$views[] = "CREATE OR REPLACE VIEW {$blog_prefix}{$view_name}_{$table} AS 
 						SELECT * FROM {$prefix}{$table} 
 						UNION ALL
 						SELECT * FROM {$blog_prefix}{$table}";
