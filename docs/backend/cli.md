@@ -48,6 +48,11 @@ Creates a new empty settings page.
 Page name value should be treated like a cpt/tax name. 
 usage: `wp s1 generate settings <settings-page-name>`
 
+`wp s1 import meta`<BR>
+Imports field groups created in ACF and optionally removes them from the database. 
+usage: `wp s1 import meta` will provide a list of commands that can be run to import field groups.
+`wp s1 import meta <field_group> [--delete-group]` will import the named field group.
+
 #### Utility ####
 `wp s1 import meta`<BR>
 Lists all the ACF Custom Field groups created in wp-admin and provides commands to convert them to code.

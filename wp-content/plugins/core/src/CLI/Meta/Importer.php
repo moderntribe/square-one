@@ -19,7 +19,7 @@ class Importer extends Command {
 	protected $constants  = [];
 
 	public function description() {
-		return __( 'Generates object meta.', 'tribe' );
+		return __( 'Imports object meta created in ACF.', 'tribe' );
 	}
 
 	public function command() {
@@ -68,7 +68,6 @@ class Importer extends Command {
 			if ( $this->assoc_args['delete-group'] ) {
 				$this->delete_field_group();
 			}
-
 
 			// Success!
 			\WP_CLI::line( __( 'We did it!', 'tribe' ) );
