@@ -33,6 +33,13 @@ class Importer extends Command {
 				'name'     => 'field_group',
 				'optional' => true,
 			],
+			[
+				'type'        => 'flag',
+				'name'        => 'delete-group',
+				'optional'    => true,
+				'description' => __( 'Whether or not to delete the imported field group. Defaults to true, pass --no-delete-group if you wish to preserve the group.', 'tribe' ),
+				'default'     => true,
+			],
 		];
 	}
 
@@ -49,14 +56,19 @@ class Importer extends Command {
 			$this->setup_field_group();
 
 			// Sanity check.
-			\WP_CLI::confirm( sprintf( __( 'Are you sure you want to delete the database entry %s field group and convert it to php?', 'tribe' ), $this->title ), $assoc_args );
+			if ( $this->assoc_args['delete-group'] ) {
+				\WP_CLI::confirm( sprintf( __( 'Are you sure you want to delete the database entry %s field group and convert it to php?', 'tribe' ), $this->title ), $assoc_args );
+			}
 
 			// Write the meta files.
 			$this->update_service_provider();
 			$this->create_object_class();
 
 			// Delete the field group.
-			$this->delete_field_group();
+			if ( $this->assoc_args['delete-group'] ) {
+				$this->delete_field_group();
+			}
+
 
 			// Success!
 			\WP_CLI::line( __( 'We did it!', 'tribe' ) );
