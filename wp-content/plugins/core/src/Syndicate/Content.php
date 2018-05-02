@@ -29,7 +29,7 @@ class Content {
 		if ( ! SUBDOMAIN_INSTALL ) {
 			$site = get_blog_details();
 
-			$content = str_replace( $site->path . substr( $site->path, 1 ), $site->path,  $content );
+			$content = str_replace( $site->path . substr( $site->path, 1 ), $site->path, $content );
 		}
 
 		return $content;
@@ -41,10 +41,7 @@ class Content {
 			return $image;
 		}
 
-		switch_to_blog( SITE_ID_CURRENT_SITE );
-
-		$image = wp_get_attachment_image_src( $attachment_id, $size, $icon );
-		restore_current_blog();
+		$image['src'] = str_replace( get_site_url( get_current_blog_id() ), get_site_url( SITE_ID_CURRENT_SITE ), $image['src'] );
 
 		return $image;
 	}
