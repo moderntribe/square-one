@@ -143,6 +143,10 @@ class Importer extends Command {
 			}
 		}
 
+		if ( array_key_exists( 'users', $locations ) ) {
+			$locations['users'] = true;
+		}
+
 		return $locations;
 	}
 
