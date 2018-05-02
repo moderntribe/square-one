@@ -208,7 +208,13 @@ class Importer extends Command {
 
 			$field = $this->prepare_field( $field );
 
-			if ( 'repeater' !== $field['type'] ) {
+			$fields_containing_subfields = [
+				'repeater',
+				'group',
+				'flexible_content',
+			];
+
+			if ( ! in_array( $field['type'], $fields_containing_subfields ) ) {
 				$functions .= sprintf(
 					$function_partial,
 					$this->sanitize_slug( [ $field['label'] ] ),
