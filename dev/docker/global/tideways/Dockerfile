@@ -5,9 +5,11 @@ RUN echo 'deb http://s3-eu-west-1.amazonaws.com/qafoo-profiler/packages debian m
     apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get -yq install tideways-daemon && \
     apt-get autoremove --assume-yes && \
-    apt-get clean && chmod +x run.sh && \
+    apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ADD run.sh /run.sh
+
+RUN chmod +x /run.sh
 
 CMD ["/run.sh"]
