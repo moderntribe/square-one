@@ -8,8 +8,8 @@ RUN echo 'deb http://s3-eu-west-1.amazonaws.com/qafoo-profiler/packages debian m
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-ADD run.sh /run.sh
+COPY ./run.sh /usr/bin/run.sh
 
-RUN chmod +x /run.sh
+RUN chmod +x /usr/bin/run.sh
 
-CMD ["/run.sh"]
+CMD /usr/bin/run.sh

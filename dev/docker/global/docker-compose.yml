@@ -68,9 +68,6 @@ services:
     ports:
       - "1025:1025"
 
-  tideways:
-      build: ./tideways
-
 networks:
   proxy:
     driver: bridge

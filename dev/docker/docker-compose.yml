@@ -78,6 +78,12 @@ services:
       links:
         - php-fpm
 
+    tideways:
+      build: ./tideways
+      ports:
+        - "8135/udp"
+        - "9135"
+
 networks:
   proxy:
     external:
