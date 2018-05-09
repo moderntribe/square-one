@@ -14,7 +14,7 @@ RUN echo 'deb http://s3-eu-west-1.amazonaws.com/qafoo-profiler/packages debian m
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-COPY tideways.ini /usr/local/etc/php/conf.d/40-tideways.ini
+#COPY /usr/lib/tideways/tideways.ini /usr/local/etc/php/conf.d/40-tideways.ini
 
 # Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
