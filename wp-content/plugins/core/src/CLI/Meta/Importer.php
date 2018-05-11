@@ -51,31 +51,32 @@ class Importer extends Command {
 			\WP_CLI::error( __( 'There are zero field groups available to import', 'tribe' ) );
 		}
 
-		if ( count( $args ) ) {
-			// Setup and import the field groups.
-			$this->setup_field_group();
-
-			// Sanity check.
-			if ( $this->assoc_args['delete-group'] ) {
-				\WP_CLI::confirm( sprintf( __( 'Are you sure you want to delete the database entry %s field group and convert it to php?', 'tribe' ), $this->title ), $assoc_args );
-			}
-
-			// Write the meta files.
-			$this->update_service_provider();
-			$this->create_object_class();
-
-			// Delete the field group.
-			if ( $this->assoc_args['delete-group'] ) {
-				$this->delete_field_group();
-			}
-
-			// Success!
-			\WP_CLI::line( __( 'We did it!', 'tribe' ) );
-		} else {
+		if ( ! count( $args ) ) {
 			foreach ( $this->get_dynamic_field_groups() as $field_group_id => $field_group_name ) {
 				\WP_CLI::line( sprintf( __( 'You can import %s with `wp s1 import meta %s`', 'tribe' ), $field_group_name, $field_group_id ) );
 			}
+			\WP_CLI::halt( 1 );
 		}
+
+		// Setup and import the field groups.
+		$this->setup_field_group();
+
+		// Sanity check.
+		if ( $this->assoc_args['delete-group'] ) {
+			\WP_CLI::confirm( sprintf( __( 'Are you sure you want to delete the database entry %s field group and convert it to php?', 'tribe' ), $this->title ), $assoc_args );
+		}
+
+		// Write the meta files.
+		$this->update_service_provider();
+		$this->create_object_class();
+
+		// Delete the field group.
+		if ( $this->assoc_args['delete-group'] ) {
+			$this->delete_field_group();
+		}
+
+		// Success!
+		\WP_CLI::line( __( 'We did it!', 'tribe' ) );
 
 	}
 
