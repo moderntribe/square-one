@@ -55,7 +55,7 @@ class Importer extends Command {
 			foreach ( $this->get_dynamic_field_groups() as $field_group_id => $field_group_name ) {
 				\WP_CLI::line( sprintf( __( 'You can import %s with `wp s1 import meta %s`', 'tribe' ), $field_group_name, $field_group_id ) );
 			}
-			\WP_CLI::halt( 1 );
+			\WP_CLI::halt( 0 );
 		}
 
 		// Setup and import the field groups.
