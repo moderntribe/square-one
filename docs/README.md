@@ -19,6 +19,7 @@
   * [Fonts](/docs/theme/fonts.md)
   * [Icons](/docs/theme/icons.md)
   * [Twig](/docs/theme/twig.md)
+  * [In-Depth Components Guide](/docs/theme/components-guide.md)
   * **CSS**
     * [Overview](/docs/theme/css/README.md)
     * [PostCSS](/docs/theme/css/postcss.md)
