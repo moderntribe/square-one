@@ -98,7 +98,7 @@ class Panel_Data_Extractor {
 	private function get_repeater_content( $repeater_key = '', $content_field = 'content' ) {
 		$value = '';
 		$items = $this->panel->get( $repeater_key );
-		foreach ( $items as $item ) {
+		foreach ( (array) $items as $item ) {
 			if ( !empty( $item[ $content_field ] ) ) {
 				$content = is_array( $item[ $content_field ] )?  $item[ $content_field ]['content'] :  $item[ $content_field ];
 				$value .= apply_filters( 'the_content', $content ) . "\n";
