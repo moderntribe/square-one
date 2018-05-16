@@ -19,6 +19,11 @@ class Image_Wrap {
 			return $html;
 		}
 
+		// first check if any image tags exist in the content before filtering
+		if( ! $this->content_has_image( $html ) ) {
+			return $html;
+		}
+
 		return preg_replace_callback( '/<p>((?:.(?!p>))*?)(<a[^>]*>)?\s*(<img[^>]+>)(<\/a>)?(.*?)<\/p>/is', function( $matches ) {
 
 			/*
@@ -112,5 +117,20 @@ class Image_Wrap {
 		];
 
 		return preg_replace( $patterns, $replacements, $html );
+	}
+
+	/**
+	 * Check if content has any image tags
+	 *
+	 * @param string $html
+	 *
+	 * @return bool
+	 */
+	private function content_has_image( $html = '' ): bool {
+		if( stristr( $html, '<img' ) !== false ) {
+			return true;
+		}
+
+		return false;
 	}
 }
