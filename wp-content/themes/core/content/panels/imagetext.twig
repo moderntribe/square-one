@@ -2,9 +2,17 @@
 
 {% extends "content/panels/panel.twig" %}
 
-{% block header %}{% endblock %}
+{% block start %}
+<section class="panel s-wrapper s-wrapper--no-padding site-panel site-panel--{{ type|esc_attr }}"
+		 data-index="{{ index }}"
+		 data-js="panel"
+		 data-type="{{ type|esc_attr }}"
+		 data-modular-content>
+    {% endblock %}
 
 {% block wrapper_start %}{% endblock %}
+
+	{% block header %}{% endblock %}
 
 	{% block content %}
 
@@ -15,7 +23,7 @@
 			</div>
 
 			<div class="g-col g-col--vertical-center">
-				<div class="site-panel__imgtxt-content">
+				<div class="t-content site-panel__imgtxt-content">
 					{{ content_block }}
 				</div>
 			</div>
