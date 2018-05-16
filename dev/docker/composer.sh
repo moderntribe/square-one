@@ -10,4 +10,4 @@ fi;
 
 PROJECT_ID=$(cat ./.projectID)
 
-${DC_COMMAND} --project-name=${PROJECT_ID} exec php-fpm composer "$@"  -d=/application/www
+${DC_COMMAND} --project-name=${PROJECT_ID} exec php-fpm composer "$@"  -d /application/www
