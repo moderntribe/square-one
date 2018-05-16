@@ -55,7 +55,7 @@ This adds a field that appears in the content section of the panels ui. If no se
 
 This adds a field that appears in the settings section of the panels ui. 
 
-##Table of Contents
+## Table of Contents
 
 * [Overview](/docs/panels/README.md)
 * [The Initializer](/docs/panels/initializer.md)

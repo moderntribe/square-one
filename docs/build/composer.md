@@ -13,7 +13,7 @@ When you [initially start your docker containers](/dev/docker/README.md) using t
 This will automatically also run `composer install` and setup Square One transparently. However, there may be times where, say, a version of WordPress needs to be bumped or a plugin needs updating. Make the change in `composer.json` and run `sh ./composer.sh update` from inside the `dev/docker` directory. This will download the updated packages and install in place. It will also upddate the `composer.lock` file which should be committed.
 
 
-##Table of Contents
+## Table of Contents
 
 * [Overview](/docs/build/README.md)
 * [Node](/docs/build/node.md)

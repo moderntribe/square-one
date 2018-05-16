@@ -11,7 +11,7 @@ During dev you have 2 choices for grunt tasks to run when editing any pcss or ja
 
 Before you push code back upstream, you must run `grunt dist`. This will create the bundled files and minify assets. It will also lint you js and css. If you code does not lint please correct the issues then run again before pushing upstream.
 
-##Table of Contents
+## Table of Contents
 
 * [Overview](/docs/build/README.md)
 * [Node](/docs/build/node.md)
