@@ -6,8 +6,8 @@ use Tribe\Project\Panels\Types\CardGrid as CardGridPanel;
 use Tribe\Project\Templates\Components\Button;
 use Tribe\Project\Templates\Components\Card;
 use Tribe\Project\Templates\Components\Image;
-use Tribe\Project\Templates\Components\Text;
 use Tribe\Project\Templates\Components\Title;
+use Tribe\Project\Templates\Components\Text;
 use Tribe\Project\Theme\Image_Sizes;
 
 class CardGrid extends Panel {
@@ -22,8 +22,9 @@ class CardGrid extends Panel {
 
 	public function get_mapped_panel_data(): array {
 		$data = [
-			'title' => $this->get_title( $this->panel_vars[ CardGridPanel::FIELD_TITLE ], [ 'site-section__title', 'h2' ] ),
+			'title' => $this->get_title( $this->panel_vars[ CardGridPanel::FIELD_TITLE ], [ 's-title', 'h2' ] ),
 			'cards' => $this->get_cards(),
+			'attrs' => $this->get_cardgrid_attributes(),
 		];
 
 		return $data;
@@ -63,6 +64,26 @@ class CardGrid extends Panel {
 		}
 
 		return $cards;
+	}
+
+	private function get_layout_container_attrs( $panel, $panel_object ): string {
+		$data_attrs = sprintf( 'data-name="panels" data-depth="%s" data-livetext', esc_attr( $panel_object->get_depth() ) );
+
+		return sprintf( '%s', $data_attrs );
+	}
+
+	protected function get_cardgrid_attributes() {
+		$attrs = '';
+
+		if ( is_panel_preview() ) {
+			$attrs = 'data-depth=' . $this->panel->get_depth() . ' data-name="' . CardGridPanel::FIELD_CARDS . '" data-index="0" data-livetext="true"';
+		}
+
+		if ( empty( $attrs ) ) {
+			return '';
+		}
+
+		return $attrs;
 	}
 
 	protected function get_card_image( $image_id ) {
@@ -140,7 +161,7 @@ class CardGrid extends Panel {
 			Button::LABEL       => esc_html( $cta[ Button::LABEL ] ),
 			Button::TARGET      => esc_attr( $cta[ Button::TARGET ] ),
 			Button::BTN_AS_LINK => true,
-			Button::CLASSES     => [ 'c-btn--sm' ],
+			Button::CLASSES     => [ 'c-btn c-btn--sm' ],
 		];
 
 		$button_obj = Button::factory( $options );
