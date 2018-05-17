@@ -1,4 +1,4 @@
-##  === Post Types ===
+# Post Types
 
 The general constructing of a post type takes place in the core/src/Post_Types directory and requires two files within their own directory.
 
@@ -11,7 +11,7 @@ Both files of a post type should be namespaced to that particular CPT.
 
 ```namespace Tribe\Project\Post_Types\Sample;```
 
-**Config.php**
+### Config.php
 
 The Config class sets up the normal configuration arguments needed in a custom post type to be registered.  The class should extend Post_Type_Config, which contains the logic for registering the post type with WordPress.
 
@@ -41,7 +41,7 @@ class Config extends Post_Type_Config {
 }
 ```
 
-**Sample.php**
+### Sample.php
 
 The {{Post_Type_Name}}.php file in our example case, Sample.php, must contain a Post_Object child class and define the constant name of the post type.  At it's simplest it will look like:
 
@@ -55,7 +55,7 @@ class Sample extends Post_Object {
 }
 ```
 
-**Registering A Post Type**
+## Registering A Post Type
 
 To register a post type they must have a service provider.  See [Service Provides](service-providers.md) section for more information.
 
@@ -85,7 +85,7 @@ private function load_post_type_providers() {
 }
 ```
 
-**3rd-Party Post Types**
+## 3rd-Party Post Types
 
 Some post types are registered by 3rd-party plugins, or by WordPress core (e.g., Page and Post).
 

@@ -1,4 +1,4 @@
-## Developer Guide
+# Developer Guide
 
 * **Build**
   * [Overview](/docs/build/README.md)

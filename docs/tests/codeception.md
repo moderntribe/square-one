@@ -22,7 +22,7 @@
 	vendor/bin/codecept run integration
 	```
 
-# Create new tests
+## Create new tests
 
 1. Go to the core-tests plugin
 

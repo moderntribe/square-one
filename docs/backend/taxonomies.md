@@ -1,4 +1,4 @@
-### === Custom Taxonomies ===
+# Custom Taxonomies
 
 Creating a custom taxonomy is very similar to custom post types.
 
@@ -13,7 +13,7 @@ Both files of a post type should be namespaced to that particular Taxonomy.
 
 ```namespace Tribe\Project\Taxonomies\Feed_Tag;```
 
-**Config.php**
+### Config.php
 
 The Config.php class sets up the normal configuration arguments needed in a taxonomy to be registered.  
 
@@ -47,7 +47,7 @@ class Config extends Taxonomy_Config {
 }
 ```
 
-**Feed_Tag.php**
+### Feed_Tag.php
 
 The {{Taxonomy_Name}}.php file in our example case, Feed_Tag.php, must define the constant name of the custom taxonomy.  At it's simplest, it will nearly always look like:
 
@@ -59,7 +59,7 @@ class Feed_Tag {
 }
 ```
 
-**Registering A Taxonomy**
+## Registering A Taxonomy
 
 To register a taxonomy they must have a service provider.  See [Service Provides](service-providers.md) section for more information.
 
