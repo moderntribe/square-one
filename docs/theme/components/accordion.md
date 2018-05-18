@@ -175,7 +175,7 @@ class Accordion extends Panel {
 
 ```
 
-### Table of Contents
+## Table of Contents
 
 * [Overview](/docs/theme/components/README.md)
 * [Accordion](/docs/theme/components/accordion.md)
