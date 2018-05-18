@@ -1,4 +1,4 @@
-# Backend Developmen
+# Backend Development
 
 The core plugin will be where the majority of back end development takes place:
 
