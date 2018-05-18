@@ -1,2 +1,0 @@
-<?php
-define( 'BUILD_THEME_ASSETS_TIMESTAMP', '8.50.05.16.2018' );
