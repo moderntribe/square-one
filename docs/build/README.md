@@ -7,3 +7,4 @@ This system uses NPM, Webpack and Grunt to compile the front ends css and script
 * [Overview](/docs/build/README.md)
 * [Node](/docs/build/node.md)
 * [Grunt Tasks](/docs/build/grunt.md)
+* [Composer](/docs/build/composer.md)

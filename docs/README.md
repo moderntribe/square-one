@@ -4,6 +4,7 @@
   * [Overview](/docs/build/README.md)
   * [Node](/docs/build/node.md)
   * [Grunt Tasks](/docs/build/grunt.md)
+  * [Composer](/docs/build/composer.md)
 * **Videos**
   * [Frontend Videos](/docs/theme/videos.md)
   * [Backend Videos](/docs/backend/videos.md)
