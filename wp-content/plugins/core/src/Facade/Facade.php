@@ -4,8 +4,6 @@ namespace Tribe\Project\Facade;
 
 abstract class Facade {
 
-	protected $base_class;
-
 	protected static $is_mocked = false;
 	protected static $mock;
 

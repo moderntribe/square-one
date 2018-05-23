@@ -4,15 +4,36 @@ namespace Tribe\Project\Request;
 
 class Request {
 
+	/**
+	 * @var array
+	 */
 	protected $headers;
+
+	/**
+	 * @var array
+	 */
 	protected $input;
+
+	/**
+	 * @var string
+	 */
 	protected $method;
+
+	/**
+	 * @var array
+	 */
 	protected $query_params;
-	protected $url;
-	protected $content;
-	protected $path;
+
+	/**
+	 * @var Server
+	 */
 	protected $server;
 
+	/**
+	 * Request constructor.
+	 *
+	 * @param Server $server
+	 */
 	public function __construct( Server $server ) {
 		$this->server = $server;
 		$this->fill_values_from_request();
