@@ -10,6 +10,7 @@ use Tribe\Project\Templates\Components\Button;
 use Tribe\Project\Twig\Stringable_Callable;
 use Tribe\Project\Twig\Template_Interface;
 use Tribe\Project\Twig\Twig_Template;
+use Tribe\Project\Facade\Items\Request;
 
 class Base extends Twig_Template {
 
@@ -25,6 +26,19 @@ class Base extends Twig_Template {
 			'language_attributes' => $this->get_language_attributes(),
 			'search'              => $this->get_search(),
 		];
+
+		$headers  = Request::headers();
+		$input    = Request::input( 'foo' );
+		$all      = Request::all();
+		$url      = Request::url();
+		$fulL_url = Request::full_url();
+		$path     = Request::path();
+		$some     = Request::only( [ 'foo', 'bash' ] );
+		$another  = Request::except( [ 'foo' ] );
+		$is       = Request::is( 'foobar/*' );
+
+		var_dump( $headers, $input, $all, $url, $fulL_url, $path, $some, $another, $is );
+		die();
 
 		foreach ( $this->get_components() as $component ) {
 			$data = array_merge( $data, $component->get_data() );
