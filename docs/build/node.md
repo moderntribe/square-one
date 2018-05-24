@@ -12,6 +12,7 @@ Then simply `yarn install` in the root of this project.
  
  ## Table of Contents
  
- * [Overview](/docs/build/README.md)
- * [Node](/docs/build/node.md)
- * [Grunt Tasks](/docs/build/grunt.md)
+* [Overview](/docs/build/README.md)
+* [Node](/docs/build/node.md)
+* [Grunt Tasks](/docs/build/grunt.md)
+* [Composer](/docs/build/composer.md)
