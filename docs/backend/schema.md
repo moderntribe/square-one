@@ -38,8 +38,10 @@ Then in your service provider you can use the following logic:
 $container[ 'schema.update' ] = function () {
 	return new Update();
 }
-if ( $container[ 'schema.update' ]->update_required() ) {
-	$container[ 'schema.update' ]->do_updates();
-}
+add_action( 'admin_init', function() use ( $container ) {
+	if ( $container[ 'schema.update' ]->update_required() ) {
+		$container[ 'schema.update' ]->do_updates();
+	}
+}, 10, 0 );
 ```
 
