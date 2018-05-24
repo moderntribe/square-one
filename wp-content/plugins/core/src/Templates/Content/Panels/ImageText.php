@@ -96,7 +96,7 @@ class ImageText extends Panel {
 			Button::URL         => $this->panel_vars[ ImageTextPanel::FIELD_CTA ][ Button::URL ],
 			Button::TYPE        => '',
 			Button::TARGET      => $this->panel_vars[ ImageTextPanel::FIELD_CTA ][ Button::TARGET ],
-			Button::CLASSES     => [ 'c-btn--sm' ],
+			Button::CLASSES     => [ 'c-btn c-btn--sm' ],
 			Button::ATTRS       => '',
 			Button::LABEL       => $this->panel_vars[ ImageTextPanel::FIELD_CTA ][ Button::LABEL ],
 			Button::BTN_AS_LINK => true,

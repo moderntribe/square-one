@@ -20,6 +20,7 @@
   * [Fonts](/docs/theme/fonts.md)
   * [Icons](/docs/theme/icons.md)
   * [Twig](/docs/theme/twig.md)
+  * [In-Depth Components Guide](/docs/theme/components-guide.md)
   * **CSS**
     * [Overview](/docs/theme/css/README.md)
     * [PostCSS](/docs/theme/css/postcss.md)
@@ -52,6 +53,7 @@
   * [Service Providers](/docs/backend/service-providers.md)
   * [Template Controllers](/docs/backend/data.md)
   * [CLI](/docs/backend/cli.md)
+  * [Cache](/docs/backend/object-cache.md)
   * **Plugins/Extensions**
     * [Twig](https://twig.symfony.com/)
     * [Posts 2 Post](https://github.com/scribu/wp-posts-to-posts/wiki)

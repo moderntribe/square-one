@@ -101,3 +101,58 @@ class Page_Service_Provider extends Post_Type_Service_Provider {
 	// note that we omit the $config_class property
 }
 ```
+
+**Additional Configuration Options**
+
+Some simple flags built into extended post types. ( see: https://github.com/johnbillion/extended-cpts/wiki/Other-admin-parameters ) 
+```php
+public function get_args() {
+	return [
+		'hierarchical'     => false,
+		'enter_title_here' => __( 'Sample', 'tribe' ),
+		'map_meta_cap'     => true,
+		'supports'         => [ 'title', 'editor' ],
+		'capability_type'  => 'post', // to use default WP caps
+		'dashboard_glance  => true, // Show post count in At a Glance dashboard metabox.
+		'quick_edit'       => true // Allow quick edit.
+		
+	];
+}
+```
+
+Posts view Column handling is another non-obvious feature. ( see: https://github.com/johnbillion/extended-cpts/wiki/Admin-columns )
+```php
+public function get_args() {
+	return [
+		'hierarchical'     => false,
+		'enter_title_here' => __( 'Sample', 'tribe' ),
+		'map_meta_cap'     => true,
+		'supports'         => [ 'title', 'editor' ],
+		'capability_type'  => 'post', // to use default WP caps
+		'admin_cols' => [
+        		// A featured image column:
+        		'featured_image' => [
+        			'title'          => 'Illustration',
+        			'featured_image' => 'thumbnail'
+        		],
+        		// A meta field column:
+        		'published' => [
+        			'title'       => 'Published',
+        			'meta_key'    => 'published_date',
+        			'date_format' => 'd/m/Y'
+        		],
+        		// A taxonomy terms column:
+        		'genre' => [
+        			'taxonomy' => 'genre'
+        		],
+        		// User callable:
+        		'callable' => [
+        		    'title'    => 'Called stuff',
+        		    'function' => [ $this, 'callable' ],
+        		],
+        	],
+	];
+}
+```
+
+You should also see: https://github.com/johnbillion/extended-cpts/wiki/Admin-filters
