@@ -1,4 +1,4 @@
-# === Object Meta ===
+# Object Meta
 
 Object Meta (or custom meta fields assigned to any Post, Taxonomy, User, or Settings object) is powered by the Advanced Custom Fields plugin. Within SquareOne, we've
 developed an abstraction methodology for registering Object Meta that is consistent across all of the available Object Types. This means that the process for registering

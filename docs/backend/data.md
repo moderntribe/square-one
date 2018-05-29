@@ -1,4 +1,4 @@
-### === Data to Front End ===
+# Data to Front End
 
 The front end uses Twig as a template engine.
 

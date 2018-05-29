@@ -25,7 +25,7 @@ Barebones text/html component to be used wherever you print text or html.
 * **Type:** _string_ 
 * **Description:** Text/html.
 
-### Table of Contents
+## Table of Contents
 
 * [Overview](/docs/theme/components/README.md)
 * [Accordion](/docs/theme/components/accordion.md)
