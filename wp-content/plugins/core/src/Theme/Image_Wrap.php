@@ -19,7 +19,7 @@ class Image_Wrap {
 			return $html;
 		}
 
-		return preg_replace_callback( '/<p>((?:.(?!p>))*?)(<a[^>]*>)?\s*(<img[^>]+>)(<\/a>)?(.*?)<\/p>/is', function( $matches ) {
+		return preg_replace_callback( '/<p>((?:.(?!p>))*?)(<a[^>]*>)?\s*(<img[^>]+>)(<\/a>)?(.*?)<\/p>/i', function( $matches ) {
 
 			/*
 			Groups 	Regex 			 Description
