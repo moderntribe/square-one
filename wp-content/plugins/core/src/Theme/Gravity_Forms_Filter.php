@@ -28,6 +28,8 @@ class Gravity_Forms_Filter {
 		add_filter( 'gform_pre_render', [ $this, 'deactivate_gf_animations' ] );
 		add_filter( 'gform_confirmation_anchor', '__return_false' );
 		add_filter( 'gform_tabindex', '__return_false' );
+		add_filter( 'pre_option_rg_gforms_disable_css', '__return_true' );
+		add_filter( 'pre_option_rg_gforms_enable_html5', '__return_true' );
 	}
 
 	/**
