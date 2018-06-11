@@ -38,6 +38,9 @@ already registered and pass the method on from there.
 ## Example
 
 ```php
+// Your main foobar class
+
+namespace Tribe\Project\Theme;
 
 class Foobar {
     
@@ -46,12 +49,20 @@ class Foobar {
     }
 }
 
+
+
+// The facade for your Foobar class
+
+namespace Tribe\Project\Facade\Items
+
 class Foobar extends Facade {
     
     public function get_container_key_accessor() {
         return 'foobar';
     }
 }
+
+
 
 // in Service Provider
 
