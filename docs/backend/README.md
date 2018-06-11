@@ -1,4 +1,4 @@
-# Backend Development
+### === Backend Development ===
 
 The core plugin will be where the majority of back end development takes place:
 
@@ -18,6 +18,7 @@ The core plugin will be where the majority of back end development takes place:
     * [CLI](cli.md)
     * [Request Object](request.md)
     * [Facades](facades.md)
+    * [Schema](schema.md)
   * Plugins/Extensions
     * [Twig](https://twig.symfony.com/)
     * [Posts 2 Post](https://github.com/scribu/wp-posts-to-posts/wiki)
