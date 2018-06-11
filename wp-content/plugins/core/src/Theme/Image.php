@@ -35,6 +35,7 @@ class Image {
 			'link_class'        => '',                // pass link classes
 			'link_target'       => '_self',           // pass a link target
 			'link_title'        => '',                // pass a link title
+			'mime_type'         => '',                // the file mime-type.
 			'parent_fit'        => 'width',           // if lazyloading this combines with object fit css and the object fit polyfill
 			'shim'              => '',                // supply a manually specified shim for lazyloading. Will override auto_shim whether true/false.
 			'src'               => true,              // set to false to disable the src attribute. this is a fallback for non srcset browsers
@@ -177,7 +178,7 @@ class Image {
 					$attrs[] = sprintf( 'sizes="%s"', $this->options[ 'srcset_sizes_attr' ] );
 					$attrs[] = sprintf( 'srcset="%s"', $srcset_urls );
 				}
-				if ( $this->options[ 'use_h&w_attr' ] && $this->options[ 'src' ] ) {
+				if ( $this->generate_size( $src_width, $src_height ) ) {
 					$attrs[] = sprintf( 'width="%s"', $src_width / 2 );
 					$attrs[] = sprintf( 'height="%s"', $src_height / 2 );
 				}
@@ -186,6 +187,14 @@ class Image {
 		return implode( ' ', $attrs );
 	}
 
+
+	private function generate_size( $width, $height ) {
+		if ( ! $width && ! $height ) {
+			return false;
+		}
+
+		return $this->options[ 'use_h&w_attr' ] && $this->options[ 'src' ];
+	}
 
 	/**
 	 * Returns shim src for lazyloading on request. Auto shim uses size name to lookup png file
