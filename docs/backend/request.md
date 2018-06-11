@@ -199,7 +199,7 @@ Get the current Request path. If `$include_params` is set to `true`, also includ
 ```php
 // URL is http://foobar.com/page/here?foo=bar
 
-$path = $this->>request->path();
+$path = $this->request->path();
 echo $path;
 
 // /page/here
@@ -221,7 +221,7 @@ Get the current Request URL. Does not contain path or any Query Parameters.
 ```php
 // URL is http://foobar.com/page/here?foo=bar
 
-$url = $this->>request->url();
+$url = $this->request->url();
 echo $url;
 
 // http://foobar.com
@@ -238,7 +238,7 @@ Get the full current Request URL. Includes both the path and any Query Parameter
 ```php
 // is http://foobar.com/page/here?foo=bar
 
-$full_url = $this->>request->full_url();
+$full_url = $this->request->full_url();
 echo $full_url;
 
 // http://foobar.com/page/here?foo=bar
@@ -257,7 +257,7 @@ Determine if the current Request Path matches the given pattern. Wildcards (*) c
 
 // URL is http://foobar.com/page/here?foo=bar
 
-$is_page = $this->>request->is('page/here');
+$is_page = $this->request->is('page/here');
 
 // true
 
