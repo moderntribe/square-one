@@ -1,14 +1,14 @@
-### === Frontend Videos ===
+# Frontend Videos
 
 All Modern Tribe Videos use the password **tribevideos**
 
-##### Frontend Architecture
+### Frontend Architecture
 
 - General Thoughts: [FE General Architecture](https://vimeo.com/227460923)
 - Square 1 Specific: [FE Specific Architecture](https://vimeo.com/227460280)
 - Responsive Considerations: [FE Responsive](https://vimeo.com/227439302)
 
-##### Frontend Square 1 Framework
+### Frontend Square 1 Framework
 
 - General Introduction to Square 1: [FE General Organization](https://vimeo.com/226163181/09ffa9e746)
 - Core Plugin: [FE Core](https://vimeo.com/227435183/f224157023)

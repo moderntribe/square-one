@@ -35,7 +35,7 @@ And the panel controller using the  component
 
 ```
 
-### Table of Contents
+## Table of Contents
 
 * [Overview](/docs/theme/components/README.md)
 * [Accordion](/docs/theme/components/accordion.md)

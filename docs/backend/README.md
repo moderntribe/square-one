@@ -16,6 +16,8 @@ The core plugin will be where the majority of back end development takes place:
     * [Template Controllers](data.md)
     * [Components](components.md)
     * [CLI](cli.md)
+    * [Request Object](request.md)
+    * [Facades](facades.md)
     * [Schema](schema.md)
   * Plugins/Extensions
     * [Twig](https://twig.symfony.com/)
