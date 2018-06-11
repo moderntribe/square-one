@@ -10,7 +10,6 @@ use Tribe\Project\Templates\Components\Button;
 use Tribe\Project\Twig\Stringable_Callable;
 use Tribe\Project\Twig\Template_Interface;
 use Tribe\Project\Twig\Twig_Template;
-use Tribe\Project\Facade\Items\Request;
 
 class Base extends Twig_Template {
 
