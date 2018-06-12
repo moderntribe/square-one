@@ -8,7 +8,13 @@ interface Backend {
 
 	public function enqueue( string $queue_name, Message $m );
 
-	public function dequeue( string $queue_name );
+	/**
+	 * @param string $queue_name
+	 *
+	 * @return Message
+	 * @throws \Exception if a Message could not be dequeued.
+	 */
+	public function dequeue( string $queue_name ): Message;
 
 	/**
 	 * @param string $job_id
@@ -16,7 +22,8 @@ interface Backend {
 	 *
 	 * @return mixed
 	 *
-	 * Acknowledgement processing of the Message. This results in the task being removed from the queue.
+	 * Acknowledgement processing of the Message. This results in the task being removed from the
+	 * queue.
 	 */
 	public function ack( string $job_id, string $queue_name );
 
@@ -26,7 +33,8 @@ interface Backend {
 	 *
 	 * @return mixed
 	 *
-	 * Negative Acknowledgement processing of the Message. This results in the task being returned to the queue.
+	 * Negative Acknowledgement processing of the Message. This results in the task being returned
+	 * to the queue.
 	 */
 	public function nack( string $job_id, string $queue_name );
 
