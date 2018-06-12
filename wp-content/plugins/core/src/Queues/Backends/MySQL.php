@@ -7,7 +7,7 @@ use Tribe\Project\Queues\Message;
 
 class MySQL implements Backend {
 
-	const DB_TABLE = 's1_queue';
+	const DB_TABLE = 'queue';
 
 	private $table_name;
 
