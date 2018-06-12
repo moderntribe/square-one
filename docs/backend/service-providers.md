@@ -1,4 +1,4 @@
-#  === Service Providers ===
+# Service Providers
 
 Service providers are central to the container environment used in this framework.  You'll notice in the core/src/Core.php file it is strictly used for registering service providers to the container.
 

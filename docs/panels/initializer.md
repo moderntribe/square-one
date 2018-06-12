@@ -39,7 +39,7 @@ The main panel label used in the ui as heading label.
 
 `$url` **{String}** The url of the thumbnail to use. Please use png/jpg graphics that are 640px wide and optimized.
 
-In this project this path resolves to this [directory](/wp-content/plugins/core/assets/panels/thumbnails) and a helper function has been supplied. Just put your file in that directory and use it like so `set_thumbnail( $this->handler->thumbnail_url( 'image-name.png' ) )`
+In this project this path resolves to this [directory](/wp-content/themes/core/img/admin/panels/thumbnails) and a helper function has been supplied. Just put your file in that directory and use it like so `set_thumbnail( $this->handler->thumbnail_url( 'image-name.png' ) )`
 
 ### `add_field( $name, $options )`
 
@@ -55,7 +55,7 @@ This adds a field that appears in the content section of the panels ui. If no se
 
 This adds a field that appears in the settings section of the panels ui. 
 
-##Table of Contents
+## Table of Contents
 
 * [Overview](/docs/panels/README.md)
 * [The Initializer](/docs/panels/initializer.md)

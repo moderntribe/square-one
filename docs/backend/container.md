@@ -1,4 +1,4 @@
-### === Container / Core.php ===
+# Container / Core.php
 
 This plugin uses a container based framework.  In particular we use the Pimple container module. See [Pimple Containers](https://pimple.symfony.com/)
 
@@ -20,7 +20,7 @@ To access the core container, call `tribe_project()->container()`
 
 ---
 
-**Factory Method**
+## Factory Method
 
 Many classes including all post types classes which extend the Post_Object class contain a **factory** method.  This is used to retrieve an specific instance of a class.  Typically an id is passed to retrieve it.
 
@@ -31,7 +31,7 @@ echo $story->get_source_name();
 
 ---
 
-**Using & Hooking Registered Classes**
+## Using & Hooking Registered Classes
 
 Read also: [Service Providers](service-providers.md)
 
