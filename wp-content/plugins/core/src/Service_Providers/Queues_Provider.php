@@ -9,7 +9,6 @@ use Tribe\Project\Queues\Backends\MySQL;
 use Tribe\Project\Queues\Backends\WP_Cache;
 use Tribe\Project\Queues\DefaultQueue;
 use Tribe\Project\Queues\Queue_Collection;
-use Tribe\Project\Queues\TestingQueue;
 
 class Queues_Provider implements ServiceProviderInterface {
 
