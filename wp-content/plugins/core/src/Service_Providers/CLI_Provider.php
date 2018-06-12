@@ -1,5 +1,6 @@
 <?php
 
+
 namespace Tribe\Project\Service_Providers;
 
 use Pimple\Container;
@@ -9,8 +10,13 @@ use Tribe\Project\CLI\Settings_Generator;
 use Tribe\Project\CLI\CPT_Generator;
 use Tribe\Project\CLI\File_System;
 use Tribe\Project\CLI\Pimple_Dump;
+use Tribe\Project\CLI\Queues\Add_Tasks;
+use Tribe\Project\CLI\Queues\Cleanup;
+use Tribe\Project\CLI\Queues\Process;
 use Tribe\Project\CLI\Taxonomy_Generator;
 use Tribe\Project\CLI\Cache_Prime;
+use Tribe\Project\CLI\Queues\List_Queues;
+use Tribe\Project\CLI\Queues\MySQL_Table;
 
 class CLI_Provider implements ServiceProviderInterface {
 
@@ -21,6 +27,26 @@ class CLI_Provider implements ServiceProviderInterface {
 
 		$container['cli.pimple_dump'] = function ( $container ) {
 			return new Pimple_Dump( $container );
+		};
+
+		$container['cli.queues.list'] = function ( $container ) {
+			return new List_Queues( $container['queues.collection'] );
+		};
+
+		$container['cli.queues.add_table'] = function ( $container ) {
+			return new MySQL_Table( $container['queues.backend.mysql'] );
+		};
+
+		$container['cli.queues.cleanup'] = function ( $container ) {
+			return new Cleanup( $container['queues.collection'] );
+		};
+
+		$container['cli.queues.process'] = function ( $container ) {
+			return new Process( $container['queues.collection'] );
+		};
+
+		$container['cli.queues.add_tasks'] = function ( $container ) {
+			return new Add_Tasks( $container['queues.collection'] );
 		};
 
 		$container['cli.cpt-generator'] = function ( $container ) {
@@ -54,6 +80,12 @@ class CLI_Provider implements ServiceProviderInterface {
 			$container['cli.cli-generator']->register();
 			$container['cli.cache-prime']->register();
 			$container['cli.settings_generator']->register();
+			$container['cli.queues.list']->register();
+			$container['cli.queues.add_table']->register();
+			$container['cli.queues.cleanup']->register();
+			$container['cli.queues.process']->register();
+			$container['cli.queues.add_tasks']->register();
+
 		}, 0, 0 );
 	}
 }
