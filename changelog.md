@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [1.3] - 2018-06-12
+
+Queues framework has been added. This allows for running slower processes separately from a browser request.
+
+### Added
+
+* Queue - A queue requires a backend for storing messages that passed to it.
+* Backends - MySQL is the default backend, but it is easy to implement the Backend interface and roll your own.
+* Messages (or Tasks) - Isolated functions that are run by the queue consumer.  
+
 ## [1.2] - 2018-05-08
 
 A whole lot of things have been added. The timing of when they were added and the corresponding versions would be too laborious to uncover. So...we'll start with 1.2. Here are some recent changes/additions.
