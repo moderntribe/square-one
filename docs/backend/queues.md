@@ -31,14 +31,14 @@ You can also optionally define a default queue name with QUEUE_MAIL_QUEUE_NAME. 
 To process the queued mail items `wp queues process <queue-name>` with WP-CLI.
 
 ### Other CLI commands
-`wp queues add-tasks [--count=0]`
+`wp s1 queues add-tasks [--count=0]`
 If you need to test a queue/backend are registered and functioning properly. By default this creates a random (1-50) Noop tasks.  Noop fails on processing about 10% of the time so you can also verify ack/nack is functioning as expected.
 
-`wp queues cleanup <queue-name>`
+`wp s1 queues cleanup <queue-name>`
 Run the cleanup task for the backend for the queue provided. Some backends do not require periodic cleaning.
 
-`wp queues add-table`
+`wp s1 queues add-table`
 Creates the necessary MySQL table for using a MySQL backend.
 
-`wp queues list`
+`wp s1 queues list`
 Lists the registered queues and corresponding backends.
