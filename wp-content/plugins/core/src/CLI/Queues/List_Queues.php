@@ -7,7 +7,7 @@ use Tribe\Project\CLI\Command;
 use Tribe\Project\Queues\Queue_Collection;
 use Tribe\Project\Queues\Contracts\Queue;
 
-class Table extends Command {
+class List_Queues extends Command {
 
 	/**
 	 * @var Queue_Collection

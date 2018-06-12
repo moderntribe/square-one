@@ -15,7 +15,7 @@ use Tribe\Project\CLI\Queues\Cleanup;
 use Tribe\Project\CLI\Queues\Process;
 use Tribe\Project\CLI\Taxonomy_Generator;
 use Tribe\Project\CLI\Cache_Prime;
-use Tribe\Project\CLI\Queues\Table;
+use Tribe\Project\CLI\Queues\List_Queues;
 use Tribe\Project\CLI\Queues\MySQL_Table;
 
 class CLI_Provider implements ServiceProviderInterface {
@@ -30,7 +30,7 @@ class CLI_Provider implements ServiceProviderInterface {
 		};
 
 		$container['cli.queues.list'] = function ( $container ) {
-			return new Table( $container['queues.collection'] );
+			return new List_Queues( $container['queues.collection'] );
 		};
 
 		$container['cli.queues.add_table'] = function ( $container ) {
