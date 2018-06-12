@@ -3,16 +3,17 @@
 namespace Tribe\Project\CLI\Queues;
 
 use Tribe\Project\CLI\Command;
+use Tribe\Project\Queues\Backends\MySQL;
 use Tribe\Project\Queues\Contracts\Backend;
 
 class MySQL_Table extends Command {
 
 	/**
-	 * @var Backend
+	 * @var MySQL
 	 */
 	protected $backend;
 
-	public function __construct( Backend $backend ) {
+	public function __construct( MySQL $backend ) {
 		$this->backend = $backend;
 		parent::__construct();
 	}
