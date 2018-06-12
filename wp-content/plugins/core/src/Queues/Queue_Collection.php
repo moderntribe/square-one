@@ -21,7 +21,7 @@ class Queue_Collection {
 			return $this->instances[ $queue_name ];
 		}
 
-		throw new \Exception( __( 'Queue does not exist', 'tribe' ) );
+		throw new \DomainException( __( 'Queue does not exist', 'tribe' ) );
 	}
 
 	public function remove( $queue_name ) {
