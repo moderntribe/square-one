@@ -12,6 +12,13 @@ class Process extends Command {
 	 */
 	protected $queues;
 
+	/**
+	 * @var int How long the process should run, in seconds. If 0,
+	 *          the process will run until it meets a fatal error
+	 *          (e.g., out of memory).
+	 */
+	private $timelimit = 300;
+
 	public function __construct( Queue_Collection $queue_collection ) {
 		$this->queues = $queue_collection;
 		parent::__construct();
@@ -53,8 +60,10 @@ class Process extends Command {
 			\WP_CLI::error( $e->getMessage() );
 		}
 
+		$endtime = time() + $this->timelimit;
+
 		// Run forever.
-		while ( 1 ) {
+		while ( $endtime === 0 || time() < $endtime ) {
 
 			// If the queue is empty, sleep on it and then clear it again.
 			if ( ! $queue->count() ) {
