@@ -7,7 +7,7 @@ use Tribe\Project\Settings\Base_Settings;
 /**
  * Class ACF_Settings
  *
- * @package Tribe\Libs\ACF
+ * @package Tribe\Project\ACF
  */
 abstract class ACF_Settings extends Base_Settings {
 

@@ -6,7 +6,7 @@ namespace Tribe\Project\Schema;
 /**
  * Class Capabilities
  *
- * @package Tribe\Libs\Schools
+ * @package Tribe\Project\Schools
  *
  * A utililty class for registering capabilities for a post type
  */

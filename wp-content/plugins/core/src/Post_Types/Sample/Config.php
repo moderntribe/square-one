@@ -3,7 +3,7 @@
 
 namespace Tribe\Project\Post_Types\Sample;
 
-use Tribe\Libs\Post_Type\Post_Type_Config;
+use Tribe\Project\Post_Type\Post_Type_Config;
 
 class Config extends Post_Type_Config {
 	public function get_args() {

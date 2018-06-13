@@ -9,7 +9,7 @@ use Tribe\Project\Post_Types\Article\Article;
 use Tribe\Project\Taxonomies\Category\Category;
 use Tribe\Project\Twig\Twig_Template;
 use Tribe\Project\Theme\Image_Sizes;
-use Tribe\Libs\Post_Type\Post_Object;
+use Tribe\Project\Post_Type\Post_Object;
 
 class Item extends Twig_Template {
 	protected $time_formats = [

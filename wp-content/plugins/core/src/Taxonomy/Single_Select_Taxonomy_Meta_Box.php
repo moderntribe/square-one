@@ -4,7 +4,7 @@ namespace Tribe\Project\Taxonomy;
 use Tribe\Project\Walker\Walker_Category_Radio_List;
 
 /**
- * Class Tribe\Libs\Taxonomy\Single_Select_Taxonomy_Meta_Box
+ * Class Tribe\Project\Taxonomy\Single_Select_Taxonomy_Meta_Box
  *
  * Handles the meta box for a single-select taxonomy
  *
@@ -36,7 +36,7 @@ class Single_Select_Taxonomy_Meta_Box {
 	 * }
 	 */
 	public function callback( $post, $box ) {
-		require_once( dirname( __FILE__ ) . '/Tribe\Libs\Walker\Walker_Category_Radio_List.php' );
+		require_once( dirname( __FILE__ ) . '/Tribe\Project\Walker\Walker_Category_Radio_List.php' );
 		?>
 		<div id="taxonomy-<?php echo $this->taxonomy; ?>" class="categorydiv">
 

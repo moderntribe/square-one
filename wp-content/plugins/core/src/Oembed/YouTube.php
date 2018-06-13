@@ -49,7 +49,7 @@ class YouTube implements \JsonSerializable {
 	/**
 	 * cache
 	 *
-	 * @var \Tribe\Libs\Cache\Cache
+	 * @var \Tribe\Project\Cache\Cache
 	 */
 	private $cache;
 

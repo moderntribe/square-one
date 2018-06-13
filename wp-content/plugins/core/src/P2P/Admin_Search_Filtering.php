@@ -3,7 +3,7 @@
 namespace Tribe\Project\P2P;
 
 
-use Tribe\Libs\P2P\Relationship;
+use Tribe\Project\P2P\Relationship;
 
 class Admin_Search_Filtering {
 
@@ -13,7 +13,7 @@ class Admin_Search_Filtering {
 	protected static $post_type_options = [ ];
 
 	/**
-	 * @var \Tribe\Libs\Assets\Asset_Loader
+	 * @var \Tribe\Project\Assets\Asset_Loader
 	 */
 	private static $asset_loader = null;
 

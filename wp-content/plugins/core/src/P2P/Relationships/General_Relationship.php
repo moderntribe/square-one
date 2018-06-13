@@ -4,7 +4,7 @@
 namespace Tribe\Project\P2P\Relationships;
 
 
-use Tribe\Libs\P2P\Relationship;
+use Tribe\Project\P2P\Relationship;
 
 class General_Relationship extends Relationship {
 	const NAME = 'related_posts';

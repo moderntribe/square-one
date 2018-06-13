@@ -3,7 +3,7 @@
 
 namespace Tribe\Project\Theme\Nav;
 
-use Tribe\Libs\Cache\Cache;
+use Tribe\Project\Cache\Cache;
 
 class Menu {
 	private $args = [];

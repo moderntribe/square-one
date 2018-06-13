@@ -2,7 +2,7 @@
 
 namespace Tribe\Project\Settings;
 
-use Tribe\Libs\ACF\ACF_Settings;
+use Tribe\Project\ACF\ACF_Settings;
 
 class General extends ACF_Settings {
 
