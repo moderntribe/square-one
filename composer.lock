@@ -913,39 +913,6 @@
             "time": "2018-01-04 21:53:51"
         },
         {
-            "name": "moderntribe/tribe-libs",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "git@github.com:moderntribe/tribe-libs.git",
-                "reference": "b282f0be370fcd77865cfad449e5b1756efe17d6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/tribe-libs/zipball/b282f0be370fcd77865cfad449e5b1756efe17d6",
-                "reference": "b282f0be370fcd77865cfad449e5b1756efe17d6",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.5.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Tribe\\Libs\\": "src/"
-                }
-            },
-            "license": [
-                "Private"
-            ],
-            "description": "A library for use on Modern Tribe service projects.",
-            "support": {
-                "source": "https://github.com/moderntribe/tribe-libs/tree/master",
-                "issues": "https://github.com/moderntribe/tribe-libs/issues"
-            },
-            "time": "2018-01-17 19:05:36"
-        },
-        {
             "name": "monolog/monolog",
             "version": "1.23.0",
             "source": {
