@@ -6,7 +6,7 @@ namespace Tribe\Project\Service_Providers;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
-use Tribe\Project\Util\SVG_Support;
+use Tribe\Project\Utils\SVG_Support;
 
 class Util_Provider implements ServiceProviderInterface {
 

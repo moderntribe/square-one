@@ -1,6 +1,6 @@
 <?php
 
-namespace Tribe\Project\Util;
+namespace Tribe\Project\Utils;
 
 class SVG_Support {
 
