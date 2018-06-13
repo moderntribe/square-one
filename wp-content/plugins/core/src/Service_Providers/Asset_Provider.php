@@ -6,7 +6,7 @@ namespace Tribe\Project\Service_Providers;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
-use Tribe\Libs\Assets\Asset_Loader;
+use Tribe\Project\Assets\Asset_Loader;
 
 class Asset_Provider implements ServiceProviderInterface {
 

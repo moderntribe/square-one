@@ -7,7 +7,7 @@
 
 namespace Tribe\Project\Object_Meta;
 
-use Tribe\Libs\ACF;
+use Tribe\Project\ACF;
 
 class Example extends ACF\ACF_Meta_Group {
 

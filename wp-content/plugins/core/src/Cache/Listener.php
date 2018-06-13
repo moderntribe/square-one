@@ -3,10 +3,14 @@
 
 namespace Tribe\Project\Cache;
 
-use Tribe\Project\Post_Types\Campus_Update;
-use Tribe\Project\Post_Types\School;
+class Listener  {
 
-class Listener extends \Tribe\Libs\Cache\Listener {
+	/** @var Cache */
+	protected $cache = null;
+
+	public function __construct() {
+		$this->cache = new Cache();
+	}
 
 	/**
 	 * Register each hook that should lead to something expiring

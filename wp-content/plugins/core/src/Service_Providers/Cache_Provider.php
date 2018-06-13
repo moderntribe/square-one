@@ -6,8 +6,8 @@ namespace Tribe\Project\Service_Providers;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
-use Tribe\Libs\Cache\Cache;
-use Tribe\Libs\Cache\Purger;
+use Tribe\Project\Cache\Cache;
+use Tribe\Project\Cache\Purger;
 use Tribe\Project\Cache\Listener;
 
 class Cache_Provider implements ServiceProviderInterface {

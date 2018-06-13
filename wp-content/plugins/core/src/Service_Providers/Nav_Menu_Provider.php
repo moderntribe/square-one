@@ -6,7 +6,7 @@ namespace Tribe\Project\Service_Providers;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
-use Tribe\Libs\Nav\Menu_Location;
+use Tribe\Project\Nav\Menu_Location;
 
 class Nav_Menu_Provider implements ServiceProviderInterface {
 	const PRIMARY   = 'primary';
