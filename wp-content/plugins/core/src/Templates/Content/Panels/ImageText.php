@@ -80,9 +80,9 @@ class ImageText extends Panel {
 
 	protected function get_image_text_text( $description_attrs ) {
 		$options = [
-			Text::ATTRS => $description_attrs,
+			Text::ATTRS   => $description_attrs,
 			Text::CLASSES => '',
-			Text::TEXT => $this->panel_vars[ ImageTextPanel::FIELD_DESCRIPTION ],
+			Text::TEXT    => $this->panel_vars[ ImageTextPanel::FIELD_DESCRIPTION ],
 		];
 
 		$text_object = Text::factory( $options );
@@ -93,12 +93,12 @@ class ImageText extends Panel {
 	protected function get_image_text_button() {
 		$options = [
 			Button::TAG         => '',
-			Button::URL         => $this->panel_vars[ ImageTextPanel::FIELD_CTA ][Button::URL],
+			Button::URL         => $this->panel_vars[ ImageTextPanel::FIELD_CTA ][ Button::URL ],
 			Button::TYPE        => '',
-			Button::TARGET      => $this->panel_vars[ ImageTextPanel::FIELD_CTA ][Button::TARGET],
-			Button::CLASSES     => [ 'c-btn--sm' ],
+			Button::TARGET      => $this->panel_vars[ ImageTextPanel::FIELD_CTA ][ Button::TARGET ],
+			Button::CLASSES     => [ 'c-btn c-btn--sm' ],
 			Button::ATTRS       => '',
-			Button::LABEL       => $this->panel_vars[ ImageTextPanel::FIELD_CTA ][Button::LABEL],
+			Button::LABEL       => $this->panel_vars[ ImageTextPanel::FIELD_CTA ][ Button::LABEL ],
 			Button::BTN_AS_LINK => true,
 		];
 
@@ -114,12 +114,12 @@ class ImageText extends Panel {
 		}
 
 		$options = [
-			'img_id'          => $this->panel_vars[ ImageTextPanel::FIELD_IMAGE ],
-			'component_class' => 'c-image c-image--rect',
-			'as_bg'           => true,
-			'use_lazyload'    => false,
-			'echo'            => false,
-			'wrapper_class'   => 'c-image__bg',
+			Image::IMG_ID          => $this->panel_vars[ ImageTextPanel::FIELD_IMAGE ],
+			Image::COMPONENT_CLASS => 'c-image c-image--rect',
+			Image::AS_BG           => true,
+			Image::USE_LAZYLOAD    => false,
+			Image::ECHO            => false,
+			Image::WRAPPER_CLASS   => 'c-image__bg',
 		];
 
 		$image_obj = Image::factory( $options );

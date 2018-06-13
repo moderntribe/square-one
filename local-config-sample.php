@@ -25,6 +25,12 @@ define( 'WP_CACHE', false );
 
 $GLOBALS[ 'memcached_servers' ] = [ 'memcached:11211' ];
 
+/*
+ * Multisite
+ *
+ * If you enable multisite in wp-config.php, ensure to provide your local.tribe URI here
+ */
+//define( 'DOMAIN_CURRENT_SITE', 'square1.tribe' );
 
 /*
  * Glomar

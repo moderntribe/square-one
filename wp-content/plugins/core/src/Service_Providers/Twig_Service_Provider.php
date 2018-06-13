@@ -8,6 +8,7 @@ use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Tribe\Project\Templates;
 use Tribe\Project\Twig\Extension;
+use Tribe\Project\Twig\Twig_Cache;
 
 class Twig_Service_Provider implements ServiceProviderInterface {
 	public function register( Container $container ) {
@@ -23,14 +24,15 @@ class Twig_Service_Provider implements ServiceProviderInterface {
 		};
 
 		$container[ 'twig.cache' ] = function ( Container $container ) {
-			return WP_CONTENT_DIR . '/cache/twig';
+			return new Twig_Cache( WP_CONTENT_DIR . '/cache/twig/' );
 		};
 
 		$container[ 'twig.options' ] = function ( Container $container ) {
 			return apply_filters( 'tribe/project/twig/options', [
-				'debug'      => WP_DEBUG,
-				'cache'      => $container[ 'twig.cache' ],
-				'autoescape' => false,
+				'debug'         => WP_DEBUG,
+				'cache'         => $container[ 'twig.cache' ],
+				'autoescape'    => false,
+				'auto_reload'   => true,
 			] );
 		};
 

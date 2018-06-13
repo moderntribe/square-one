@@ -65,8 +65,8 @@ class ContentSlider extends Panel {
 				$options = [
 					Content_Block::TITLE           => $this->get_content_block_title( $slide ),
 					Content_Block::TEXT            => $this->get_content_block_text( $slide ),
-					Content_Block::CLASSES         => [],
-					Content_Block::CONTENT_CLASSES => [],
+					Content_Block::CLASSES         => [ 't-content c-content-block--content-slider' ],
+					Content_Block::CONTENT_CLASSES => [ 'c-content-block__desc--content-slider' ],
 					Content_Block::BUTTON          => $this->get_content_block_button( $slide ),
 				];
 
@@ -114,7 +114,7 @@ class ContentSlider extends Panel {
 
 	protected function get_content_block_button( $slide ) {
 		$options = [
-			Button::CLASSES     => [ 'c-btn--sm' ],
+			Button::CLASSES     => [ 'c-btn c-btn--sm' ],
 			Button::ATTRS       => '',
 			Button::TAG         => '',
 			Button::TARGET      => $slide[ ContentSliderPanel::FIELD_SLIDE_CTA ][ Button::TARGET ],

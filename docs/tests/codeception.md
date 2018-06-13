@@ -22,7 +22,7 @@
 	vendor/bin/codecept run integration
 	```
 
-# Create new tests
+## Create new tests
 
 1. Go to the core-tests plugin
 
@@ -37,7 +37,7 @@
 	```
 
 
-##Table of Contents
+## Table of Contents
 
 * [Overview](/docs/tests/README.md)
 * [Codeception](/docs/tests/codeception.md)
