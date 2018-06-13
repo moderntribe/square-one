@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Tribe\Project\Taxonomy;
+namespace Tribe\Project\Taxonomies;
 
 abstract class Taxonomy_Config {
 	/** @var  string The ID of the taxonomy */

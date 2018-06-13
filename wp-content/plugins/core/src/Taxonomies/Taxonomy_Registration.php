@@ -1,6 +1,6 @@
 <?php
 
-namespace Tribe\Project\Taxonomy;
+namespace Tribe\Project\Taxonomies;
 
 class Taxonomy_Registration {
 

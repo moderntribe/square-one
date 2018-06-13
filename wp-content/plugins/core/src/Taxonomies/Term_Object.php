@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Tribe\Project\Taxonomy;
+namespace Tribe\Project\Taxonomies;
 
 
 use Tribe\Project\Object_Meta\Meta_Map;

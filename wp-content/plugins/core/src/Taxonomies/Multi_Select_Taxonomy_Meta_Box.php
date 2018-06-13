@@ -1,6 +1,6 @@
 <?php
 
-namespace Tribe\Project\Taxonomy;
+namespace Tribe\Project\Taxonomies;
 
 use Tribe\Project\Walker\Walker_Flat_Category_Checklist;
 

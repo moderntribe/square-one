@@ -1,10 +1,10 @@
 <?php
 
-namespace Tribe\Project\Taxonomy;
+namespace Tribe\Project\Taxonomies;
 use Tribe\Project\Walker\Walker_Category_Radio_List;
 
 /**
- * Class Tribe\Project\Taxonomy\Single_Select_Taxonomy_Meta_Box
+ * Class Tribe\Project\Taxonomies\Single_Select_Taxonomy_Meta_Box
  *
  * Handles the meta box for a single-select taxonomy
  *

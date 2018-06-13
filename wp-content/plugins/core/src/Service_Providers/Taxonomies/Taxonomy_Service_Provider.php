@@ -6,7 +6,7 @@ namespace Tribe\Project\Service_Providers\Taxonomies;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
-use Tribe\Project\Taxonomy\Taxonomy_Config;
+use Tribe\Project\Taxonomies\Taxonomy_Config;
 
 abstract class Taxonomy_Service_Provider implements ServiceProviderInterface {
 
