@@ -56,7 +56,14 @@ class MySQL implements Backend {
 		];
 	}
 
-	public function dequeue( string $queue_name ) {
+	/**
+	 * @param string $queue_name
+	 *
+	 * @return Message
+	 *
+	 * @throws /RuntimeException
+	 */
+	public function dequeue( string $queue_name ): Message {
 		global $wpdb;
 
 		$queue = $wpdb->get_row(
@@ -75,7 +82,7 @@ class MySQL implements Backend {
 		);
 
 		if ( empty( $queue ) ) {
-			return;
+			throw new \RuntimeException( 'No messages available to reserve.' );
 		}
 
 		$queue['args'] = json_decode( $queue['args'], 1 );
@@ -90,7 +97,7 @@ class MySQL implements Backend {
 		);
 
 		if ( 0 === $wpdb->rows_affected ) {
-			return;
+			throw new \RuntimeException( 'All messages have been reserved.' );
 		}
 
 		return new Message( $queue['task_handler'], $queue['args'], $queue['priority'], $queue['id'] );

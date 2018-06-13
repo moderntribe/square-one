@@ -32,11 +32,18 @@ class WP_Cache implements Backend {
 		$this->save_queue( $queue_name, $queue );
 	}
 
-	public function dequeue( string $queue_name ) {
+	/**
+	 * @param string $queue_name
+	 *
+	 * @return Message
+	 *
+	 * @throws /RuntimeException
+	 */
+	public function dequeue( string $queue_name ): Message {
 		$queue = $this->get_queue( $queue_name );
 
 		if ( empty( $queue ) ) {
-			return false;
+			throw new \RuntimeException( 'No messages available to reserve.' );
 		}
 
 		$last_key = end( array_keys( $queue ) );
@@ -53,7 +60,7 @@ class WP_Cache implements Backend {
 
 		// Every item in the queue is taken. You probably need more consumers.
 		if ( $taken !== false ) {
-			return false;
+			throw new \RuntimeException( 'All messages have been reserved.' );
 		}
 
 		$queue[ $job_id ]['taken'] = time();

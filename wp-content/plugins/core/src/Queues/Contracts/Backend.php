@@ -12,7 +12,7 @@ interface Backend {
 	 * @param string $queue_name
 	 *
 	 * @return Message
-	 * @throws \Exception if a Message could not be dequeued.
+	 * @throws \RuntimeException if a Message could not be dequeued.
 	 */
 	public function dequeue( string $queue_name ): Message;
 
