@@ -75,7 +75,7 @@ class MySQL implements Backend {
 		);
 
 		if ( empty( $queue ) ) {
-			throw new \Exception( 'No messages available to reserve.' );
+			throw new \RuntimeException( 'No messages available to reserve.' );
 		}
 
 		$queue['args'] = json_decode( $queue['args'], 1 );
@@ -90,7 +90,7 @@ class MySQL implements Backend {
 		);
 
 		if ( 0 === $wpdb->rows_affected ) {
-			throw new \Exception( 'ALl messages have been reserved.' );
+			throw new \RuntimeException( 'All messages have been reserved.' );
 		}
 
 		return new Message( $queue['task_handler'], $queue['args'], $queue['priority'], $queue['id'] );

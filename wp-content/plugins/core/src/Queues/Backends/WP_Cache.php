@@ -36,7 +36,7 @@ class WP_Cache implements Backend {
 		$queue = $this->get_queue( $queue_name );
 
 		if ( empty( $queue ) ) {
-			throw new \Exception( 'No messages available to reserve.' );
+			throw new \RuntimeException( 'No messages available to reserve.' );
 		}
 
 		$last_key = end( array_keys( $queue ) );
@@ -53,7 +53,7 @@ class WP_Cache implements Backend {
 
 		// Every item in the queue is taken. You probably need more consumers.
 		if ( $taken !== false ) {
-			throw new \Exception( 'ALl messages have been reserved.' );
+			throw new \RuntimeException( 'All messages have been reserved.' );
 		}
 
 		$queue[ $job_id ]['taken'] = time();
