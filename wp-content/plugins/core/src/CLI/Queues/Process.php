@@ -3,6 +3,7 @@
 namespace Tribe\Project\CLI\Queues;
 
 use Tribe\Project\CLI\Command;
+use Tribe\Project\Queues\Contracts\Task;
 use Tribe\Project\Queues\Queue_Collection;
 
 class Process extends Command {
@@ -44,7 +45,7 @@ class Process extends Command {
 		$queue_name = $args[0];
 
 		if ( ! array_key_exists( $queue_name, $this->queues->queues() ) ) {
-			\WP_CLI::error( __( 'That queue name doesn\'t appear to be valid.', 'tribe' ) );
+			\WP_CLI::error( __( "That queue name doesn't appear to be valid.", 'tribe' ) );
 		}
 
 		try {
@@ -76,6 +77,7 @@ class Process extends Command {
 				return;
 			}
 
+			/** @var Task $task */
 			$task = new $task_class();
 
 			if ( $task->handle( $job->get_args() ) ) {
