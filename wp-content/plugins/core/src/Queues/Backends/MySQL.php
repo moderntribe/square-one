@@ -11,6 +11,11 @@ class MySQL implements Backend {
 
 	private $table_name;
 
+	/**
+	 * @var int Seconds before a dequeued item is nack'ed (if timed out) or deleted (if complete)
+	 */
+	private $ttl = 300;
+
 	public function __construct() {
 		global $wpdb;
 
@@ -123,12 +128,13 @@ class MySQL implements Backend {
 	public function cleanup() {
 		global $wpdb;
 
+		$wpdb->query( $wpdb->prepare( "DELETE FROM {$this->table_name} WHERE done != 0 AND done < %d", time() - $this->ttl ) );
+
 		$stale = $wpdb->get_col(
 			$wpdb->prepare(
 				"SELECT id FROM $this->table_name
-				WHERE taken < %d
-				",
-				time() + 300
+				WHERE taken < %d",
+				time() - $this->ttl
 			)
 		);
 

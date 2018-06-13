@@ -43,4 +43,14 @@ abstract class Queue {
 		$this->backend->nack( $job_id, $this->get_name() );
 	}
 
+	/**
+	 * Pass the cleanup request on to the backend that knows
+	 * how to handle it.
+	 *
+	 * @return void
+	 */
+	public function cleanup() {
+		$this->backend->cleanup();
+	}
+
 }
