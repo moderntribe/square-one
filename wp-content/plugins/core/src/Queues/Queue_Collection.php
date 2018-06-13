@@ -16,6 +16,11 @@ class Queue_Collection {
 		return $this->instances;
 	}
 
+	/**
+	 * @param string $queue_name
+	 *
+	 * @return Queue
+	 */
 	public function get( $queue_name ) {
 		if ( isset( $this->instances[ $queue_name ] ) ) {
 			return $this->instances[ $queue_name ];

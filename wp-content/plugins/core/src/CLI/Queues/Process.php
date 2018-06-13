@@ -3,6 +3,7 @@
 namespace Tribe\Project\CLI\Queues;
 
 use Tribe\Project\CLI\Command;
+use Tribe\Project\Queues\Contracts\Task;
 use Tribe\Project\Queues\Queue_Collection;
 
 class Process extends Command {
@@ -11,6 +12,13 @@ class Process extends Command {
 	 * @var Queue_Collection
 	 */
 	protected $queues;
+
+	/**
+	 * @var int How long the process should run, in seconds. If 0,
+	 *          the process will run until it meets a fatal error
+	 *          (e.g., out of memory).
+	 */
+	private $timelimit = 300;
 
 	public function __construct( Queue_Collection $queue_collection ) {
 		$this->queues = $queue_collection;
@@ -44,7 +52,7 @@ class Process extends Command {
 		$queue_name = $args[0];
 
 		if ( ! array_key_exists( $queue_name, $this->queues->queues() ) ) {
-			\WP_CLI::error( __( 'That queue name doesn\'t appear to be valid.', 'tribe' ) );
+			\WP_CLI::error( __( "That queue name doesn't appear to be valid.", 'tribe' ) );
 		}
 
 		try {
@@ -53,8 +61,10 @@ class Process extends Command {
 			\WP_CLI::error( $e->getMessage() );
 		}
 
+		$endtime = time() + $this->timelimit;
+
 		// Run forever.
-		while ( 1 ) {
+		while ( $endtime === 0 || time() < $endtime ) {
 
 			// If the queue is empty, sleep on it and then clear it again.
 			if ( ! $queue->count() ) {
@@ -76,6 +86,7 @@ class Process extends Command {
 				return;
 			}
 
+			/** @var Task $task */
 			$task = new $task_class();
 
 			if ( $task->handle( $job->get_args() ) ) {

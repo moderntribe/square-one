@@ -25,7 +25,8 @@ abstract class Queue {
 
 	/**
 	 * @return Message
-	 * @throws \Exception if a Message could not be dequeued.
+	 *
+	 * @throws \RuntimeException if a Message could not be dequeued.
 	 */
 	public function reserve(): Message {
 		return $this->backend->dequeue( $this->get_name() );
@@ -41,6 +42,16 @@ abstract class Queue {
 
 	public function nack( $job_id ) {
 		$this->backend->nack( $job_id, $this->get_name() );
+	}
+
+	/**
+	 * Pass the cleanup request on to the backend that knows
+	 * how to handle it.
+	 *
+	 * @return void
+	 */
+	public function cleanup() {
+		$this->backend->cleanup();
 	}
 
 }

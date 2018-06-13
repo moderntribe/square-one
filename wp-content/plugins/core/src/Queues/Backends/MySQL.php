@@ -11,6 +11,11 @@ class MySQL implements Backend {
 
 	private $table_name;
 
+	/**
+	 * @var int Seconds before a dequeued item is nack'ed (if timed out) or deleted (if complete)
+	 */
+	private $ttl = 300;
+
 	public function __construct() {
 		global $wpdb;
 
@@ -56,7 +61,14 @@ class MySQL implements Backend {
 		];
 	}
 
-	public function dequeue( string $queue_name ) {
+	/**
+	 * @param string $queue_name
+	 *
+	 * @return Message
+	 *
+	 * @throws /RuntimeException
+	 */
+	public function dequeue( string $queue_name ): Message {
 		global $wpdb;
 
 		$queue = $wpdb->get_row(
@@ -75,7 +87,7 @@ class MySQL implements Backend {
 		);
 
 		if ( empty( $queue ) ) {
-			return;
+			throw new \RuntimeException( 'No messages available to reserve.' );
 		}
 
 		$queue['args'] = json_decode( $queue['args'], 1 );
@@ -90,7 +102,7 @@ class MySQL implements Backend {
 		);
 
 		if ( 0 === $wpdb->rows_affected ) {
-			return;
+			throw new \RuntimeException( 'All messages have been reserved.' );
 		}
 
 		return new Message( $queue['task_handler'], $queue['args'], $queue['priority'], $queue['id'] );
@@ -123,12 +135,13 @@ class MySQL implements Backend {
 	public function cleanup() {
 		global $wpdb;
 
+		$wpdb->query( $wpdb->prepare( "DELETE FROM {$this->table_name} WHERE done != 0 AND done < %d", time() - $this->ttl ) );
+
 		$stale = $wpdb->get_col(
 			$wpdb->prepare(
 				"SELECT id FROM $this->table_name
-				WHERE taken < %d
-				",
-				time() + 300
+				WHERE taken < %d",
+				time() - $this->ttl
 			)
 		);
 
