@@ -1,9 +1,9 @@
 <?php
 
 
-namespace Tribe\Project\Post_Type;
+namespace Tribe\Project\Post_Types;
 
-use Tribe\Project\Post_Type\Meta_Box_Handlers\Meta_Box_Handler_Interface;
+use Tribe\Project\Post_Types\Meta_Box_Handlers\Meta_Box_Handler_Interface;
 
 abstract class Post_Type_Config {
 	/** @var string */

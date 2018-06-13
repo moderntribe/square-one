@@ -6,8 +6,8 @@ namespace Tribe\Project\Service_Providers\Post_Types;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
-use Tribe\Project\Post_Type\Post_Object;
-use Tribe\Project\Post_Type\Post_Type_Config;
+use Tribe\Project\Post_Types\Post_Object;
+use Tribe\Project\Post_Types\Post_Type_Config;
 
 abstract class Post_Type_Service_Provider implements ServiceProviderInterface {
 

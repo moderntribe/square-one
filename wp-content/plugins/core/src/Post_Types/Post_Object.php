@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Tribe\Project\Post_Type;
+namespace Tribe\Project\Post_Types;
 
 
 use Tribe\Project\Object_Meta\Meta_Map;

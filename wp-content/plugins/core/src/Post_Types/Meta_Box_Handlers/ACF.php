@@ -1,9 +1,9 @@
 <?php
 
-namespace Tribe\Project\Post_Type\Meta_Box_Handlers;
+namespace Tribe\Project\Post_Types\Meta_Box_Handlers;
 
 
-use Tribe\Project\Post_Type\Post_Type_Config;
+use Tribe\Project\Post_Types\Post_Type_Config;
 
 class ACF implements Meta_Box_Handler_Interface {
 
