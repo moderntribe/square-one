@@ -56,6 +56,13 @@ class MySQL implements Backend {
 		];
 	}
 
+	/**
+	 * @param string $queue_name
+	 *
+	 * @return Message
+	 *
+	 * @throws /RuntimeException
+	 */
 	public function dequeue( string $queue_name ): Message {
 		global $wpdb;
 

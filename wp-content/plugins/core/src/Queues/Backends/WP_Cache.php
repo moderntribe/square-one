@@ -32,6 +32,13 @@ class WP_Cache implements Backend {
 		$this->save_queue( $queue_name, $queue );
 	}
 
+	/**
+	 * @param string $queue_name
+	 *
+	 * @return Message
+	 *
+	 * @throws /RuntimeException
+	 */
 	public function dequeue( string $queue_name ): Message {
 		$queue = $this->get_queue( $queue_name );
 
