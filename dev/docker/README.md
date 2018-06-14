@@ -1,11 +1,11 @@
 # Prerequisites
 
 1. You need to install the latest **EDGE** version of the native Docker client for your platform. For Mac you can 
-download it from [here](https://store.docker.com/editions/community/docker-ce-desktop-mac). For Windows you can download it from [here](https://store.docker.com/editions/community/docker-ce-desktop-windows). If you use Linux you can use the package manager of your distribution of choice, in your case using the stable version instead of EDGE is fine.
+download it from [here](https://store.docker.com/editions/community/docker-ce-desktop-mac). For Windows, ensure you use **Docker CE STABLE** as EDGE is [broken](https://github.com/docker/for-win/issues/1829) with the tribe-proxy container. You can download it from [here](https://store.docker.com/editions/community/docker-ce-desktop-windows). If you use Linux you can use the package manager of your distribution of choice, in your case using the stable version instead of EDGE is fine.
 2. Clean your environment from the old tools you were using. Make sure you don't have installed _dnsmasq_ or any other DNS server, and that you don't have any entries for **.tribe** domains in your /etc/hosts
 3. **For Windows users:** [enable Hyper-V](https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v) and [enable Bash](https://msdn.microsoft.com/en-us/commandline/wsl/install_guide?f=255&MSPPError=-2147217396). If you're on an older Windows version or don't want the Linux subsystem for some weird reason, install [Cygwin](https://www.cygwin.com/).
 4. **For Windows users:** If you have issues with Bash, use [babun](https://github.com/babun/babun) and install [babun-docker](https://github.com/tiangolo/babun-docker).
-5. Update your computer's primary DNS server to `127.0.0.1` and the secondary to `8.8.8.8`. Instructions for [Mac](http://osxdaily.com/2015/12/05/change-dns-server-settings-mac-os-x/), [Windows](https://www.windowscentral.com/how-change-your-pcs-dns-settings-windows-10) and [Linux](https://support.rackspace.com/how-to/changing-dns-settings-on-linux/). 
+5. Update your computer's primary DNS server to `127.0.0.1` and the secondary to `1.1.1.1`. Instructions for [Mac](http://osxdaily.com/2015/12/05/change-dns-server-settings-mac-os-x/), [Windows](https://www.windowscentral.com/how-change-your-pcs-dns-settings-windows-10) and [Linux](https://support.rackspace.com/how-to/changing-dns-settings-on-linux/). For Windows users you may need to change the DNS servers on the vEthernet (Default Switch) adapter instead of your main adapter.
 
 # Your first run ever
 
@@ -13,6 +13,13 @@ download it from [here](https://store.docker.com/editions/community/docker-ce-de
 2. On a terminal window that can run `bash`, go to your Square One checkout's `dev/docker/global` folder. 
 3. **Only if you are on Linux:** Figure out what your Docker service IP address is. If you look at the result of `ifconfig` you should see an interface named `Docker0` or `Docker1` or similar. Take note of the `inet addr` field and create a `.env` file on the `global` folder with the contents of `.env.sample` but replacing `0.0.0.0` with your Docker IP. Tell Daniel or Jonathan what that IP is, maybe we can find some commonalities and automate the process for Linux too.
 4. Run `bash start.sh`. It's going to take a bit. Only this time, I promise.
+4.1 While running the command above you might run into an issue that reads like this:
+	```
+	Starting docker-compose project: global
+	Creating network "global_proxy" with driver "bridge"
+	ERROR: Pool overlaps with other one on this address space
+	```
+	This might happen if you are using, or used, a number of Docker-managed local development stacks; running `docker network prune` should solve the issue. 
 5. One thing `bash.sh` did was to create a certificate on your local machine for a Central Authority so you can sign "real" SSL certificates. This is a bit messy, but the alternative would be having all of that as part of the repo, and it's quite insecure. Any potential attacker with access to our repo could basically fake every secure site on your computer. Whatever. This is better. Trust me. Obviously no one trusts you as a CA yet, so you need to tell your computer to trust it. If you're on OSX, congratulations. You're done. Use this time to go give Jonathan a taco for automating it for you. If you're on Windows [follow this](http://www.cs.virginia.edu/~gsw2c/GridToolsDir/Documentation/ImportTrustedCertificates.htm) or [this](https://unix.stackexchange.com/questions/90450/adding-a-self-signed-certificate-to-the-trusted-list) if you're on Linux.
 6. Open your mysql client (SequelPro, HeidiSQL, etc). Try to connect to your new MySQL server with this info: `host: mysql.tribe - port: 3306 - username: root - password: password`. Open a browser and go to http://mailhog.tribe. Hopefully it all works. If it doesn't try clearing your OS DNS cache. If it still doesn't work submit a bug report (ie: talk to Daniel or Jonathan).
 7. You're done. You can go back to the terminal and run `bash stop.sh` or just leave global running if you're planning on doing some work.
@@ -21,10 +28,12 @@ download it from [here](https://store.docker.com/editions/community/docker-ce-de
 # Your first run for each new project
 
 1. Clone the the repo for the new project
-2. Find domain your BE lead chose for the project when they set it up the first time on `dev/docker/docker-compose.yml`. You can find it in the line that reads: `- VIRTUAL_HOST={something}.tribe` in the `website` service. Take note of that domain.
-3. Go to *your main Square One* clone, the one you use to run the global containers from. Go to the `dev/docker/global folder` and run `bash cert.sh something.tribe` obviously using the right domain you found in the previous point.
-4. Connect to MySQL and create a new DB for it, or import an existing one. Remember the connection info for your local-config.php is: `host: mysql.tribe - port: 3306 - username: root - password: password`
-5. **For FE Devs:** To use Browsersnyc, follow the instructions in the `local-config-sample.json`. You will need to add your local path to the global certs directory (where your certs from step 3 are installed) to the `certs_path` parameter.
+2. Run `git submodule update --init` in the root folder
+3. Find domain your BE lead chose for the project when they set it up the first time on `dev/docker/docker-compose.yml`. You can find it in the line that reads: `- VIRTUAL_HOST={something}.tribe` in the `website` service. Take note of that domain.
+4. Go to *your main Square One* clone, the one you use to run the global containers from. Go to the `dev/docker/global folder` and run `bash cert.sh something.tribe` obviously using the right domain you found in the previous point.
+5. Connect to MySQL and create a new DB for it, or import an existing one. Remember the connection info for your local-config.php is: `host: mysql.tribe - port: 3306 - username: root - password: password`
+6. **For FE Devs:** To use Browsersnyc, follow the instructions in the `local-config-sample.json`. You will need to add your local path to the global certs directory (where your certs from step 3 are installed) to the `certs_path` parameter.
+
 
 # Day to Day usage
 

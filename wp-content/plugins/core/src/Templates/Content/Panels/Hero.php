@@ -37,12 +37,12 @@ class Hero extends Panel {
 		}
 
 		$options = [
-			'img_id'          => $this->panel_vars[ HeroPanel::FIELD_IMAGE ],
-			'component_class' => 'c-image',
-			'as_bg'           => true,
-			'use_lazyload'    => false,
-			'echo'            => false,
-			'wrapper_class'   => 'c-image__bg',
+			Image::IMG_ID          => $this->panel_vars[ HeroPanel::FIELD_IMAGE ],
+			Image::COMPONENT_CLASS => 'c-image',
+			Image::AS_BG           => true,
+			Image::USE_LAZYLOAD    => false,
+			Image::ECHO            => false,
+			Image::WRAPPER_CLASS   => 'c-image__bg',
 		];
 
 		$image_obj = Image::factory( $options );
@@ -130,7 +130,7 @@ class Hero extends Panel {
 	protected function get_hero_text( $description_attrs ) {
 		$options = [
 			Text::ATTRS   => $description_attrs,
-			Text::CLASSES => [],
+			Text::CLASSES => [ 'site-panel--hero__desc' ],
 			Text::TEXT    => $this->panel_vars[ HeroPanel::FIELD_DESCRIPTION ],
 		];
 
@@ -141,7 +141,7 @@ class Hero extends Panel {
 
 	protected function get_hero_button() {
 		$options = [
-			Button::CLASSES     => [],
+			Button::CLASSES     => [ 'c-btn' ],
 			Button::ATTRS       => '',
 			Button::TAG         => '',
 			Button::TARGET      => $this->panel_vars[ HeroPanel::FIELD_CTA ][ Button::TARGET ],

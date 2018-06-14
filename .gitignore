@@ -23,6 +23,8 @@ pimple.json
 # WordPress #
 #############
 
+wp/
+
 local-config.php
 cache-config.php
 tests-config.php
@@ -39,8 +41,18 @@ wp-content/tests/
 wp-content/logs/
 wp-content/mu-plugins/mu.local.php
 
-wp-content/plugins/fakerpress/
-wp-content/plugins/better-search-replace/
+wp-content/mu-plugins/mercator/
+wp-content/plugins/*
+!wp-content/plugins/core
+!wp-content/plugins/core-tests
+!wp-content/plugins/advanced-custom-fields-pro
+!wp-content/plugins/gravityforms
+!wp-content/plugins/term-sorter
+!wp-content/plugins/tribe-30-redirects
+!wp-content/plugins/tribe-admin-dashboard
+!wp-content/plugins/tribe-branding
+!wp-content/plugins/tribe-glomar
+!wp-content/plugins/tribe-json-ld
 
 # Packages #
 ############
@@ -78,6 +90,7 @@ dev/docker/mysql/*
 !dev/docker/mysql/.gitkeep
 wp-content/themes/core/css
 wp-content/themes/core/js/dist
+vendor/
 
 # WP Engine #
 #############
@@ -107,4 +120,7 @@ dev/deploy/.deploy
 /.garden-*
 /.env
 /vendor
+dev/docker/composer-config.json
+dev/docker/composer-cache/
 dev/docker/global/.env
+/.gitmodules

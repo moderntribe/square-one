@@ -44,7 +44,7 @@ Attributes:
 	</div>
 
 	{% for tab in tabs %}
-		<article class="{{ tab_content_classes|esc_attr }} {% if loop.index0 == 0 %}{{ tab_content_active_classes|esc_attr }}{% endif %}"
+		<div class="{{ tab_content_classes|esc_attr }} {% if loop.index0 == 0 %}{{ tab_content_active_classes|esc_attr }}{% endif %}"
 				tabindex="0"
 				role="tabpanel"
 				aria-hidden="{% if loop.index0 == 0 %}false{% else %}true{% endif %}"
@@ -53,6 +53,6 @@ Attributes:
 			<div class="{{ tab_content_inner_classes }}">
 				{{ tab.content }}
 			</div>
-		</article>
+		</div>
 	{% endfor %}
 </div>

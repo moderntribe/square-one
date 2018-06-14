@@ -120,7 +120,7 @@ class Social_Links {
 	 */
 	private function build_link( $network, $data ) {
 
-		$class = $this->labeled ? '' : ' class="u-visual-hide"';
+		$class = $this->labeled ? '' : ' class="a11y-visual-hide"';
 
 		switch ( $network ) {
 

@@ -9,6 +9,41 @@ import * as tools from 'utils/tools';
 
 const siteWrap = tools.getNodes('site-wrap')[0];
 
+
+/**
+ * @function resetCurrent
+ * @param {HTMLElement} button Button clicked.
+ * @description Resets the current button and content to inactive state
+ */
+
+const resetCurrent = (button) => {
+	const tabList = button.parentNode;
+	const container = tabList.parentNode;
+	const currentActiveButton = tools.getNodes('.c-tab__button--active', false, tabList, true)[0];
+	const currentActiveContent = tools.getNodes('.c-tab__content--active', false, container, true)[0];
+	tools.removeClass(currentActiveButton, 'c-tab__button--active');
+	tools.removeClass(currentActiveContent, 'c-tab__content--active');
+	currentActiveButton.setAttribute('aria-selected', 'false');
+	currentActiveContent.setAttribute('aria-hidden', 'true');
+};
+
+/**
+ * @function setNewCurrent
+ * @param {HTMLElement} button Button clicked.
+ * @description Set tab button and related content to active state
+ */
+
+const setNewCurrent = (button) => {
+	const tabList = button.parentNode;
+	const container = tabList.parentNode;
+	const nxtContentId = button.getAttribute('aria-controls');
+	const nextActiveContent = tools.getNodes(`.c-tab__content[id="${nxtContentId}"]`, false, container, true)[0];
+	button.setAttribute('aria-selected', 'true');
+	tools.addClass(button, 'c-tab__button--active');
+	nextActiveContent.setAttribute('aria-hidden', 'false');
+	tools.addClass(nextActiveContent, 'c-tab__content--active');
+};
+
 /**
  * @function tabClick
  * @param {Object} e The js event object.
@@ -17,22 +52,8 @@ const siteWrap = tools.getNodes('site-wrap')[0];
 
 const tabClick = (e) => {
 	const button = e.delegateTarget;
-	const tabList = button.parentNode;
-	const container = tabList.parentNode;
-	const currentActiveButton = tools.getNodes('.c-tab__button--active', false, tabList, true)[0];
-	const currentActiveContent = tools.getNodes('.c-tab__content--active', false, container, true)[0];
-	const nxtContentId = button.getAttribute('aria-controls');
-	const nextActiveContent = tools.getNodes(`.c-tab__content[id="${nxtContentId}"]`, false, container, true)[0];
-	// reset current
-	tools.removeClass(currentActiveButton, 'c-tab__button--active');
-	tools.removeClass(currentActiveContent, 'c-tab__content--active');
-	currentActiveButton.setAttribute('aria-selected', 'false');
-	currentActiveContent.setAttribute('aria-hidden', 'true');
-	// and set new content/button
-	button.setAttribute('aria-selected', 'true');
-	tools.addClass(button, 'c-tab__button--active');
-	nextActiveContent.setAttribute('aria-hidden', 'false');
-	tools.addClass(nextActiveContent, 'c-tab__content--active');
+	resetCurrent(button);
+	setNewCurrent(button);
 };
 
 /**

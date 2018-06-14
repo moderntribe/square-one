@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Templates\Content\Panels;
 
-use Tribe\Project\Twig\Noop_Lazy_Strings;
 use Tribe\Project\Twig\Twig_Template;
 
 class Panel extends Twig_Template {
@@ -21,7 +20,6 @@ class Panel extends Twig_Template {
 			'index'       => get_nest_index(),
 			'children'    => $this->get_children( $this->panel ),
 			'object'      => $this->panel,
-			'lang'        => new Noop_Lazy_Strings( 'tribe' ),
 			'title'       => isset( $this->panel_vars['title'] ) ? $this->get_title( $this->panel_vars['title'] ) : false,
 			'description' => isset( $this->panel_vars['description'] ) ? $this->get_description( $this->panel_vars['description'] ) : false,
 		];

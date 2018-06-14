@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const webpackCommonConfig = require('../webpack.config.js');
 
 const themeVendors = [
@@ -19,35 +20,44 @@ module.exports = {
 	options: webpackCommonConfig,
 
 	themeDev: {
+		mode: 'development',
 		entry: {
 			scripts: './<%= pkg._core_theme_js_src_path %>index.js',
 			vendor: themeVendors
 		},
 		output: {
 			filename: '[name].js',
-			chunkFilename: '[name].js',
+			chunkFilename: '[name].[chunkhash].js',
 			path: path.resolve(`${__dirname}/../`, '<%= pkg._core_theme_js_dist_path %>'),
 			publicPath: '/<%= pkg._core_theme_js_dist_path %>'
 		},
 		devtool: 'eval-source-map',
 		plugins: webpackCommonConfig.plugins.concat(
+			new webpack.HashedModuleIdsPlugin(),
 			new webpack.LoaderOptionsPlugin({
 				debug: true
-			}),
-			new webpack.optimize.CommonsChunkPlugin({
-				names: ['vendor', 'manifest']
 			})
 		),
+		optimization: {
+			namedModules: true, // NamedModulesPlugin()
+			splitChunks: { // CommonsChunkPlugin()
+				name: 'vendor',
+				minChunks: 2
+			},
+			noEmitOnErrors: true, // NoEmitOnErrorsPlugin
+			concatenateModules: true //ModuleConcatenationPlugin
+		}
 	},
 
 	themeProd: {
+		mode: 'production',
 		entry: {
 			scripts: './<%= pkg._core_theme_js_src_path %>index.js',
 			vendorWebpack: themeVendors
 		},
 		output: {
 			filename: '[name].min.js',
-			chunkFilename: '[name].min.js',
+			chunkFilename: '[name].[chunkhash].min.js',
 			path: path.resolve(`${__dirname}/../`, '<%= pkg._core_theme_js_dist_path %>'),
 			publicPath: '/<%= pkg._core_theme_js_dist_path %>'
 		},
@@ -55,26 +65,41 @@ module.exports = {
 			new webpack.DefinePlugin({
 				'process.env': { NODE_ENV: JSON.stringify('production') }
 			}),
-			new webpack.optimize.CommonsChunkPlugin({
-				names: ['vendorWebpack', 'manifest']
-			}),
+			new webpack.HashedModuleIdsPlugin(),
 			new webpack.LoaderOptionsPlugin({
 				debug: false
-			}),
-			new webpack.optimize.UglifyJsPlugin({
-				sourceMap: true,
-				compress: {
-					warnings: false,
-					drop_console: true
-				},
-				output: {
-					comments: false,
-				},
 			})
 		),
+		optimization: {
+			namedModules: true, // NamedModulesPlugin()
+			splitChunks: { // CommonsChunkPlugin()
+				name: 'vendor',
+				minChunks: 2
+			},
+			noEmitOnErrors: true, // NoEmitOnErrorsPlugin
+			concatenateModules: true, //ModuleConcatenationPlugin
+			minimizer: [
+				// we specify a custom UglifyJsPlugin here to get source maps in production
+				new UglifyJSPlugin({
+					cache: true,
+					parallel: true,
+					sourceMap: true,
+					uglifyOptions: {
+						compress: {
+							warnings: false,
+							drop_console: true,
+						},
+						output: {
+							comments: false,
+						},
+					}
+				})
+			]
+		}
 	},
 
 	adminDev: {
+		mode: 'development',
 		entry: {
 			scripts: './<%= pkg._core_admin_js_src_path %>index.js',
 			vendor: adminVendors
@@ -88,22 +113,30 @@ module.exports = {
 		},
 		output: {
 			filename: '[name].js',
-			chunkFilename: '[name].js',
+			chunkFilename: '[name].[chunkhash].js',
 			path: path.resolve(`${__dirname}/../`, '<%= pkg._core_admin_js_dist_path %>'),
 			publicPath: '/<%= pkg._core_admin_js_dist_path %>'
 		},
 		devtool: 'eval-source-map',
 		plugins: webpackCommonConfig.plugins.concat(
+			new webpack.HashedModuleIdsPlugin(),
 			new webpack.LoaderOptionsPlugin({
 				debug: true
-			}),
-			new webpack.optimize.CommonsChunkPlugin({
-				names: ['vendor', 'manifest']
 			})
 		),
+		optimization: {
+			namedModules: true, // NamedModulesPlugin()
+			splitChunks: { // CommonsChunkPlugin()
+				name: 'vendor',
+				minChunks: 2
+			},
+			noEmitOnErrors: true, // NoEmitOnErrorsPlugin
+			concatenateModules: true //ModuleConcatenationPlugin
+		}
 	},
 
 	adminProd: {
+		mode: 'production',
 		entry: {
 			scripts: './<%= pkg._core_admin_js_src_path %>index.js',
 			vendor: adminVendors
@@ -117,7 +150,7 @@ module.exports = {
 		},
 		output: {
 			filename: '[name].min.js',
-			chunkFilename: '[name].min.js',
+			chunkFilename: '[name].[chunkhash].min.js',
 			path: path.resolve(`${__dirname}/../`, '<%= pkg._core_admin_js_dist_path %>'),
 			publicPath: '/<%= pkg._core_admin_js_dist_path %>'
 		},
@@ -125,22 +158,36 @@ module.exports = {
 			new webpack.DefinePlugin({
 				'process.env': { NODE_ENV: JSON.stringify('production') },
 			}),
-			new webpack.optimize.CommonsChunkPlugin({
-				names: ['vendor', 'manifest']
-			}),
+			new webpack.HashedModuleIdsPlugin(),
 			new webpack.LoaderOptionsPlugin({
 				debug: false
-			}),
-			new webpack.optimize.UglifyJsPlugin({
-				sourceMap: true,
-				compress: {
-					warnings: false,
-					drop_console: true,
-				},
-				output: {
-					comments: false,
-				},
 			})
 		),
+		optimization: {
+			namedModules: true, // NamedModulesPlugin()
+			splitChunks: { // CommonsChunkPlugin()
+				name: 'vendor',
+				minChunks: 2
+			},
+			noEmitOnErrors: true, // NoEmitOnErrorsPlugin
+			concatenateModules: true, //ModuleConcatenationPlugin
+			minimizer: [
+				// we specify a custom UglifyJsPlugin here to get source maps in production
+				new UglifyJSPlugin({
+					cache: true,
+					parallel: true,
+					sourceMap: true,
+					uglifyOptions: {
+						compress: {
+							warnings: false,
+							drop_console: true,
+						},
+						output: {
+							comments: false,
+						},
+					}
+				})
+			]
+		}
 	},
 };

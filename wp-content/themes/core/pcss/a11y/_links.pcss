@@ -1,0 +1,38 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Accessibility Links
+ *
+ * ----------------------------------------------------------------------------- */
+
+.a11y-skip-link {
+
+	&:focus,
+	&:active {
+		display: flex;
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		width: 100%;
+		height: 50px;
+		align-items: center;
+		justify-content: center;
+		z-index: 20;
+		padding: 0 var(--grid-gutter);
+		border: 0;
+		margin: 0;
+		font-size: var(--font-size-content);
+		clip: inherit;
+		background-color: var(--color-bgd);
+		color: var(--color-text);
+
+		.admin-bar & {
+			top: var(--spacer-wpadmin-mobile);
+
+			@media (--viewport-wpadmin) {
+				top: var(--spacer-wpadmin-desktop);
+			}
+		}
+	}
+}
+

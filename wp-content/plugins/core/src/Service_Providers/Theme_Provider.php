@@ -6,6 +6,8 @@ namespace Tribe\Project\Service_Providers;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
+use Tribe\Project\Request\Request;
+use Tribe\Project\Request\Server;
 use Tribe\Project\Theme\Body_Classes;
 use Tribe\Project\Theme\Image_Sizes;
 use Tribe\Project\Theme\Image_Wrap;
@@ -35,6 +37,7 @@ class Theme_Provider implements ServiceProviderInterface {
 	private $custom_fonts = [];
 
 	public function register( Container $container ) {
+		$this->request( $container );
 		$this->body_classes( $container );
 		$this->image_sizes( $container );
 		$this->image_wrap( $container );
@@ -57,6 +60,16 @@ class Theme_Provider implements ServiceProviderInterface {
 		$this->nav_attributes( $container );
 
 		$this->gravity_forms( $container );
+	}
+
+	private function request( Container $container ) {
+		$container['server'] = function ( Container $container ) {
+			return new Server();
+		};
+
+		$container['request'] = function ( Container $container ) {
+			return new Request( $container['server'] );
+		};
 	}
 
 	private function body_classes( Container $container ) {
