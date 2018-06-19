@@ -71,7 +71,7 @@ const resetEmbed = () => {
 	embed.classList.remove('c-video--is-playing');
 
 	// Fade in image/caption
-	trigger.classList.remove('u-hidden');
+	trigger.classList.remove('a11y-hidden');
 };
 
 /**
@@ -106,7 +106,7 @@ const playEmbed = (e) => {
 
 	// Fade out image/caption, avoid fouc
 	_.delay(() => {
-		target.classList.add('u-hidden');
+		target.classList.add('a11y-hidden');
 	}, 250);
 };
 

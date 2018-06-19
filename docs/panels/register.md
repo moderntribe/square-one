@@ -66,7 +66,7 @@ Also note in this field that a "settings" field was added. The panel ui is separ
 
 Refer to `/wp-content/plugins/panel-builder/readme.md#fields` for a list of all field types and their behavior.
 
-##Table of Contents
+## Table of Contents
 
 * [Overview](/docs/panels/README.md)
 * [The Initializer](/docs/panels/initializer.md)

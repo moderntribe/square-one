@@ -19,7 +19,7 @@ class Testimonial extends Panel {
 
 	public function get_mapped_panel_data(): array {
 		$data = [
-			'title'      => $this->get_title( $this->panel_vars[ TestimonialPanel::FIELD_TITLE ], [ 'site-section__title', 'h5' ] ),
+			'title'      => $this->get_title( $this->panel_vars[ TestimonialPanel::FIELD_TITLE ], [ 's-title', 'h5' ] ),
 			'text_color' => $this->text_color(),
 			'image'      => $this->get_image(),
 			'slider'     => $this->get_slider(),
@@ -35,12 +35,12 @@ class Testimonial extends Panel {
 		}
 
 		$options = [
-			'img_id'          => $this->panel_vars[ TestimonialPanel::FIELD_IMAGE ],
-			'component_class' => 'c-image',
-			'as_bg'           => true,
-			'use_lazyload'    => false,
-			'echo'            => false,
-			'wrapper_class'   => 'c-image__bg',
+			Image::IMG_ID          => $this->panel_vars[ TestimonialPanel::FIELD_IMAGE ],
+			Image::COMPONENT_CLASS => 'c-image',
+			Image::AS_BG           => true,
+			Image::USE_LAZYLOAD    => false,
+			Image::ECHO            => false,
+			Image::WRAPPER_CLASS   => 'c-image__bg',
 		];
 
 		$image_obj = Image::factory( $options );

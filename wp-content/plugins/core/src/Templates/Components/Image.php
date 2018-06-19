@@ -182,7 +182,14 @@ class Image extends Component {
 		$attrs[] = ! empty( $this->options[ static::IMG_ATTR ] ) ? trim( $this->options[ static::IMG_ATTR ] ) : '';
 
 		// the alt text
-		$alt_text = ! empty( $this->options[ static::IMG_ALT_TEXT ] ) ? $this->options[ static::IMG_ALT_TEXT ] : get_the_title( $this->options[ static::IMG_ID ] );
+		$alt_text = $this->options[ static::IMG_ALT_TEXT ];
+
+		// Check for a specific alt meta value on the image post, otherwise fallback to the image post's title.
+		if ( empty( $alt_text ) ) {
+			$alt_meta_value = get_post_meta( $this->options[ static::IMG_ID ], '_wp_attachment_image_alt', true );
+			$alt_text = ! empty( $alt_meta_value ) ? $alt_meta_value : get_the_title( $this->options[ static::IMG_ID ] );
+		}
+
 		$attrs[]  = $this->options[ static::AS_BG ] ? sprintf( 'role="img" aria-label="%s"', $alt_text ) : sprintf( 'alt="%s"', $alt_text );
 
 		if ( $this->options[ static::USE_LAZYLOAD ] ) {
