@@ -16,12 +16,12 @@ class Email implements Task {
 	 */
 	public function handle( array $args ) : bool {
 		try {
-			wp_mail( $args['to'], $args['subject'], $args['message'], $args['headers'], $args['attachments'] );
+			$return = wp_mail( $args['to'], $args['subject'], $args['message'], $args['headers'], $args['attachments'] );
 		} catch ( \Exception $e ) {
 			return false;
 		}
 
-		return true;
+		return is_bool( $return ) ? $return : true;
 	}
 
 }
