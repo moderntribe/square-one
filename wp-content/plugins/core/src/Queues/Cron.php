@@ -65,9 +65,7 @@ class Cron {
 	 * @action admin_init
 	 */
 	public function schedule_cron() {
-		if ( get_current_blog_id() == 1 && ! wp_next_scheduled( self::CRON_ACTION ) ) {
-			wp_schedule_event( time(), self::FREQUENCY, self::CRON_ACTION );
-		}
+		wp_schedule_event( time(), self::FREQUENCY, self::CRON_ACTION );
 	}
 
 	/**
