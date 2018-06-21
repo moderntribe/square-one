@@ -38,7 +38,7 @@ class Queues_Provider implements ServiceProviderInterface {
 			return new Queue_Collection();
 		};
 
-		if( defined( 'DISABLE_WP_CRON' ) && false === DISABLE_WP_CRON ) {
+		if( ! defined( 'DISABLE_WP_CRON' ) || false === DISABLE_WP_CRON ) {
 			$container[ self::CRON ] = function ( $container ) {
 				return new Cron();
 			};
