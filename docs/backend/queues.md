@@ -18,6 +18,10 @@ The method `handle()` is required and must return true on success, false on fail
 ### Processing a queue
 Using WP-CLI `wp queues process <queue-name>`. This will process all items in the queue.
 
+In the event that WP CLI is not available (such as on WP Engine), then the queues can be processed on `WP_Cron`. 
+Cron support is disabled by default, but is enabled by setting `WP_DISABLE_CRON` to false. **This is not the preferred way
+of using Queues, but can be used when system level CLI access is not available.**
+
 ### Built-in tasks
 #### Noop
 A good task to test that you have a functional Queue, Noop mostly processes tasks correctly the first time.
