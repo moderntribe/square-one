@@ -18,6 +18,9 @@ class Email implements Task {
 		try {
 			$return = wp_mail( $args['to'], $args['subject'], $args['message'], $args['headers'], $args['attachments'] );
 		} catch ( \Exception $e ) {
+			// This may need to change on a project basis, depending on what solutions are used for wp_mail(). What kind of Exception
+			// are we catching? What does the exception mean? Does it mean it's a failure and don't try again? Does it mean we got bad data?
+			// In most cases, we can return false, but a project may need to consider if some other action is necessary due to the exception
 			return false;
 		}
 
