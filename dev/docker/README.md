@@ -65,7 +65,7 @@ download it from [here](https://store.docker.com/editions/community/docker-ce-de
     ```
     wp core multisite-convert --subdomains
     ```
-    Then you will need to copy the output from the command into your local-config.php file and visit /wp-admin/network/setup.php to copy teh changes you need in your .htaccess file
+    Then you will need to copy the output from the command into your local-config.php file and visit /wp-admin/network/setup.php to copy the changes you need in your .htaccess file
 2. In your wp-config.php change 
     ```
     'WP_ALLOW_MULTISITE' => tribe_getenv( 'WP_ALLOW_MULTISITE', false ),
@@ -74,13 +74,13 @@ download it from [here](https://store.docker.com/editions/community/docker-ce-de
     ```
     'WP_ALLOW_MULTISITE' => tribe_getenv( 'WP_ALLOW_MULTISITE', true ),
     ```
-3. In dev/docker/phpdocker/nginx/nginx.conf uncomment these lines by removing the # symbol at the beginning
+3. In dev/docker/phpdocker/nginx/nginx.conf uncomment the two lines below by removing the # symbol at the beginning
     ```
     location @rewrites {
-        #rewrite /wp-admin$ $scheme://$host$uri/ permanent;
+        rewrite /wp-admin$ $scheme://$host$uri/ permanent;
         #rewrite ^(/[^/]+)?(/wp-(admin|includes|content).*) $2 last;
         #rewrite ^(/[^/]+)?(/.*\.php) $2 last;
-        #rewrite ^ /index.php last;
+        rewrite ^ /index.php last;
     }
     ```
 4. You may need to update this in your local-config.php and use your local domain which will be your projectID.tribe most likely
