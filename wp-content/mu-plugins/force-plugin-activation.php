@@ -180,3 +180,5 @@ class Force_Plugin_Activation {
 	}
 
 }
+
+new Force_Plugin_Activation();
