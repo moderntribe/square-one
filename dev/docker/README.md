@@ -57,10 +57,15 @@ download it from [here](https://store.docker.com/editions/community/docker-ce-de
 
 # Multisite setup on a new project
 
-1. After installing WordPress, in your local-config.php add 
+1. After installing WordPress, run the wp-cli command
     ```
-    define( 'SETUP_MS', true );
+    wp core multisite-convert
     ```
+    If using subdomains then use
+    ```
+    wp core multisite-convert --subdomains
+    ```
+    Then you will need to copy the output from the command into your local-config.php file and visit /wp-admin/network/setup.php to copy teh changes you need in your .htaccess file
 2. In your wp-config.php change 
     ```
     'WP_ALLOW_MULTISITE' => tribe_getenv( 'WP_ALLOW_MULTISITE', false ),
@@ -69,24 +74,27 @@ download it from [here](https://store.docker.com/editions/community/docker-ce-de
     ```
     'WP_ALLOW_MULTISITE' => tribe_getenv( 'WP_ALLOW_MULTISITE', true ),
     ```
-3. In the WordPress admin visit Tools > Network Setup and setup your multisite by following the instructions.
-4. In dev/docker/phpdocker/nginx/nginx.conf uncomment this line by removing the # symbol at the beginning
+3. In dev/docker/phpdocker/nginx/nginx.conf uncomment these lines by removing the # symbol at the beginning
     ```
-    #rewrite ^(/[^/]+)?(/wp-.*) $2 last;
+    location @rewrites {
+        #rewrite /wp-admin$ $scheme://$host$uri/ permanent;
+        #rewrite ^(/[^/]+)?(/wp-(admin|includes|content).*) $2 last;
+        #rewrite ^(/[^/]+)?(/.*\.php) $2 last;
+        #rewrite ^ /index.php last;
+    }
     ```
-5. Remove the SETUP_MS definition in your local-config.php file
-6. You now need to add this to your local-config.php but use your local domain which will be your projectID.tribe most likely
+4. You may need to update this in your local-config.php and use your local domain which will be your projectID.tribe most likely
     ```
     define( 'DOMAIN_CURRENT_SITE', '{your-project-domain.tribe' );
     ``` 
     In your wp-config.php you will need to define the domain for the production site.
-7. In your wp-config.php you also need to set 
+5. In your wp-config.php you also need to set 
    ```
    'MULTISITE' => tribe_getenv( 'WP_MULTISITE', true ),
    ```
    and if you are using subdomains instead of paths set
    ```
-   'SUBDOMAIN_INSTALL' => tribe_getenv( 'SUBDOMAIN_INSTALL', false ),
+   'SUBDOMAIN_INSTALL' => tribe_getenv( 'SUBDOMAIN_INSTALL', true ),
    ```
-8. Restart your project's docker container by running /dev/docker/stop.sh then /dev/docker/start.sh
-9. You should now have a fully functioning multisite setup.
+6. Restart your project's docker container by running /dev/docker/stop.sh then /dev/docker/start.sh
+7. You should now have a fully functioning multisite setup.
