@@ -54,11 +54,11 @@
     "webpack": "^4.5.0"
   },
   "devDependencies": {
-    "@babel/cli": "7.0.0-beta.34",
-    "@babel/core": "7.0.0-beta.34",
-    "@babel/plugin-proposal-object-rest-spread": "7.0.0-beta.34",
-    "@babel/plugin-syntax-dynamic-import": "7.0.0-beta.34",
-    "@babel/preset-env": "7.0.0-beta.34",
+    "@babel/cli": "7.0.0-beta.41",
+    "@babel/core": "7.0.0-beta.41",
+    "@babel/plugin-proposal-object-rest-spread": "7.0.0-beta.41",
+    "@babel/plugin-syntax-dynamic-import": "7.0.0-beta.41",
+    "@babel/preset-env": "7.0.0-beta.41",
     "babel-eslint": "^8.2.1",
     "babel-loader": "^8.0.0-beta.2",
     "babel-plugin-istanbul": "^4.1.4",
