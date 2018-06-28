@@ -4,6 +4,7 @@ namespace Tribe\Project\Templates\Content\Panels;
 
 use Tribe\Project\Panels\Types\Tabs as TabsPanel;
 use Tribe\Project\Templates\Components\Tabs as TabsComponent;
+use Tribe\Project\Theme\Util;
 
 class Tabs extends Panel {
 
@@ -17,9 +18,8 @@ class Tabs extends Panel {
 
 	public function get_mapped_panel_data(): array {
 		$data = [
-			'title'        => $this->get_title( $this->panel_vars[ TabsPanel::FIELD_TABS_TITLE ], [ 'section__title' ] ),
+			'title'        => $this->get_title( $this->panel_vars[ TabsPanel::FIELD_TITLE ], [ 'section__title' ] ),
 			'tabs'         => $this->get_tabs(),
-			'grid_classes' => 'g-row--vertical-center',
 		];
 
 		return $data;
@@ -28,6 +28,11 @@ class Tabs extends Panel {
 	protected function get_tabs(): string {
 		$options = [
 			TabsComponent::TABS => $this->get_rows(),
+			TabsComponent::TAB_LIST_ATTRS => [
+				'data-depth' => $this->panel->get_depth(),
+				'data-name' => 'tabs',
+				'data-livetext' => 1
+			]
 		];
 
 		$tabs = TabsComponent::factory( $options );
@@ -37,22 +42,32 @@ class Tabs extends Panel {
 
 	protected function get_rows(): array {
 		$rows = $this->panel_vars[ TabsPanel::FIELD_TABS];
-
 		if ( empty( $rows ) ) {
 			return [];
 		}
-
-		return array_map( function ( $row ) {
-			$header_id  = uniqid( 'tabs-header-' );
-			$content_id = uniqid( 'tabs-content-' );
-
-			return [
-				'tab_id'      => $header_id,
-				'content_id'  => $content_id,
-				'tab_text'    => $row[ TabsPanel::FIELD_TABS_TITLE ],
-				'content'     => $row[ TabsPanel::FIELD_TABS_CONTENT ],
+		return array_map( function ( $row, $index ) {
+			$content_attrs = ( !is_preview() ) ? '' : Util::array_to_attributes([
+				'data-depth'    => $this->panel->get_depth(),
+				'data-index'    => $index,
+				'data-name'     => 'row_content',
+				'data-autop'    => 'true',
+				'data-livetext' => 1
+			]);
+			$btn_attrs = ( !is_preview() ) ? [] : [
+				'data-depth'    => $this->panel->get_depth(),
+				'data-index'    => $index,
+				'data-name'     => 'row_header',
+				'data-livetext' => 1
 			];
-		}, $rows );
+			return [
+				'tab_id'        => uniqid( 'tabs-header-' ),
+				'content_id'    => uniqid( 'tabs-content-' ),
+				'tab_text'      => $row[ TabsPanel::FIELD_TABS_TITLE ],
+				'content'       => $row[ TabsPanel::FIELD_TABS_CONTENT ],
+				'content_attrs' => $content_attrs,
+				'btn_attrs'     => $btn_attrs
+			];
+		}, $rows, array_keys($rows) );
 	}
 
 	public static function instance() {

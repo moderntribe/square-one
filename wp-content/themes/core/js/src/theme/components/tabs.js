@@ -8,7 +8,7 @@ import delegate from 'delegate';
 import * as tools from 'utils/tools';
 
 const siteWrap = tools.getNodes('site-wrap')[0];
-
+const tabs = tools.getNodes('c-tabs');
 
 /**
  * @function resetCurrent
@@ -17,12 +17,16 @@ const siteWrap = tools.getNodes('site-wrap')[0];
  */
 
 const resetCurrent = (button) => {
-	const tabList = button.parentNode;
-	const container = tabList.parentNode;
-	const currentActiveButton = tools.getNodes('.c-tab__button--active', false, tabList, true)[0];
-	const currentActiveContent = tools.getNodes('.c-tab__content--active', false, container, true)[0];
-	tools.removeClass(currentActiveButton, 'c-tab__button--active');
-	tools.removeClass(currentActiveContent, 'c-tab__content--active');
+	const container = tools.closest(button, '[data-js="c-tabs"]');
+	const activeBtnClass = container.getAttribute('data-button-active-class');
+	const activeContentClass = container.getAttribute('data-content-active-class');
+	const currentActiveButton = tools.getNodes(`.${activeBtnClass}`, false, container, true)[0];
+	const currentActiveContent = tools.getNodes(`.${activeContentClass}`, false, container, true)[0];
+	if (!currentActiveButton || !currentActiveContent) {
+		return;
+	}
+	tools.removeClass(currentActiveButton, activeBtnClass);
+	tools.removeClass(currentActiveContent, activeContentClass);
 	currentActiveButton.setAttribute('aria-selected', 'false');
 	currentActiveContent.setAttribute('aria-hidden', 'true');
 };
@@ -34,14 +38,18 @@ const resetCurrent = (button) => {
  */
 
 const setNewCurrent = (button) => {
-	const tabList = button.parentNode;
-	const container = tabList.parentNode;
+	const container = tools.closest(button, '[data-js="c-tabs"]');
+	const activeBtnClass = container.getAttribute('data-button-active-class');
+	const activeContentClass = container.getAttribute('data-content-active-class');
 	const nxtContentId = button.getAttribute('aria-controls');
 	const nextActiveContent = tools.getNodes(`.c-tab__content[id="${nxtContentId}"]`, false, container, true)[0];
+	if (!nextActiveContent) {
+		return;
+	}
 	button.setAttribute('aria-selected', 'true');
-	tools.addClass(button, 'c-tab__button--active');
+	tools.addClass(button, activeBtnClass);
 	nextActiveContent.setAttribute('aria-hidden', 'false');
-	tools.addClass(nextActiveContent, 'c-tab__content--active');
+	tools.addClass(nextActiveContent, activeContentClass);
 };
 
 /**
@@ -57,12 +65,27 @@ const tabClick = (e) => {
 };
 
 /**
+ * @function rowActivated
+ * @description Responds to panel live updating.
+ */
+
+const rowActivated = (e) => {
+	const buttonSelector = `[data-js="panel"][data-index="${e.detail.index}"] [data-js="c-tab__button"][data-row-index="${e.detail.rowIndex}"]`;
+	const activeButton = tools.getNodes(buttonSelector, false, siteWrap, true)[0];
+	if (activeButton) {
+		resetCurrent(activeButton);
+		setNewCurrent(activeButton);
+	}
+};
+
+/**
  * @function bindEvents
  * @description Bind the events for this module here.
  */
 
 const bindEvents = () => {
 	delegate(siteWrap, '.c-tab__button', 'click', tabClick);
+	document.addEventListener('modular_content/repeater_row_activated', rowActivated);
 };
 
 /**
@@ -71,6 +94,10 @@ const bindEvents = () => {
  */
 
 const init = () => {
+	if (!tabs) {
+		return;
+	}
+
 	bindEvents();
 
 	console.info('Square One FE: Initialized tabs component scripts.');

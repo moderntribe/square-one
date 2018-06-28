@@ -12,45 +12,46 @@ Description: Use this wherever you need a tab component. Check the docs for exam
 
 Attributes:
 	{
-		container_classes: 'c-tabs', // { string } the wrapper classes
-		tab_id: 'c-tabs', // { string } the id
-		tablist_classes : 'c-tab__list', // { string } the list classes
-		container_attrs: 'data-js="c-tabs"', // { string }. any additional attributes
-		tab_classes: 'c-tab__row', // { string } the row classes
-		tab_content_classes: 'c-tab__content', // { string } the row content wrapper classes
-		tab_content_inner_classes: 'c-tab__content-inner', // { string } the row content inner classes
-		tab_content_name: 'tab_content', // { string } the content name attribute, if used in panel supply row content field name
-		tab_button_classes: 'c-tab__button', // { string } the row header classes
-		tab_button_name: 'title', // { string } the header name attribute, if used in panel supply row header text field name
+		container_classes: [ 'c-tabs' ], // { array } the wrapper classes
+		tab_id: 'tab-XXX', // { string } the id. Defaults to using uniqid()
+		tablist_classes : [ 'c-tab__list' ], // { array } the list classes
+		container_attrs: [], // { array }. any additional attributes as key value pair
+		tab_list_classes: '[ c-tab__list' ], // { array } the tablist classes
+		tab_list_attrs: [] // { array } Tablist attrs as key value pair
+		tab_button_classes: [ 'c-tab__button' ], // { array } the button classes
+		tab_button_active_class: 'c-tab__button--active', // { string } the active button class
+		tab_button_attrs: [] // { array } Tablist attrs as key value pair
+		tab_content_classes: [ 'c-tab__content' ], // { array } the row content wrapper classes
+		tab_content_attrs: [ ] // { array } tab content attrs.
+		tab_content_inner_classes: [ 'c-tab__content-inner' ], // { array } the row content inner classes
+		tab_content_active_class: 'c-tab__content--active', // { string } the active content class
 		tabs: [], // { array }. an array of tab rows.
 		tabs[].content: '', // { string } The row content. HTML or what have you.
 		tabs[].content_id: '', // { string } Unique id for the content.
 		tabs[].tab_id: '', // { string } Unique id for the header.
-		tabs[].tab_text: '', // { string } The header text.
+		tabs[].tab_text: '', // { string } The tab text.
+		tabs[].btn_attrs: [], // { array } Additional button attrs. Passed into the buttons component so they must be an array
+		tabs[].content_attrs: '' , // { string } Additional tab inner content attrs.
 	}
  #}
 
 <div class="{{ container_classes|esc_attr }}" id="{{ tab_id|esc_attr }}" {{ container_attrs }}>
-	<div class="{{ tab_list_classes|esc_attr }}" role="tablist">
-		{% for tab in tabs %}
-			<button class="{{ tab_button_classes|esc_attr }} {% if loop.index0 == 0 %}{{ tab_button_active_classes|esc_attr }}{% endif %}"
-					role="tab"
-					aria-selected="{% if loop.index0 == 0 %}true{% else %}false{% endif %}"
-					aria-controls="{{ tab.content_id|esc_attr }}"
-					id="{{ tab.tab_id|esc_attr }}">
-				{{ tab.tab_text }}
-			</button>
+	<div class="{{ tab_list_classes|esc_attr }}" {{ tab_list_attrs }}>
+		{% for button in tablist_buttons %}
+			{{ button }}
 		{% endfor %}
 	</div>
 
 	{% for tab in tabs %}
-		<div class="{{ tab_content_classes|esc_attr }} {% if loop.index0 == 0 %}{{ tab_content_active_classes|esc_attr }}{% endif %}"
-				tabindex="0"
-				role="tabpanel"
-				aria-hidden="{% if loop.index0 == 0 %}false{% else %}true{% endif %}"
-				id="{{ tab.content_id|esc_attr }}"
-				aria-labelledby="{{ tab.tab_id|esc_attr }}">
-			<div class="{{ tab_content_inner_classes }}">
+		<div class="{{ tab_content_classes|esc_attr }} {% if loop.index0 == 0 %}{{ tab_content_active_class|esc_attr }}{% endif %}"
+			 aria-hidden="{% if loop.index0 == 0 %}false{% else %}true{% endif %}"
+			 id="{{ tab.content_id|esc_attr }}"
+			 aria-labelledby="{{ tab.tab_id|esc_attr }}"
+			 {{ tab_content_attrs }}
+		>
+			<div class="{{ tab_content_inner_classes }}"
+					{{ tab_content_inner_attrs }}
+					{{ tab.content_attrs }}>
 				{{ tab.content }}
 			</div>
 		</div>
