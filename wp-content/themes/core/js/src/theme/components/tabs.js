@@ -65,17 +65,26 @@ const tabClick = (e) => {
 };
 
 /**
- * @function rowActivated
- * @description Responds to panel live updating.
+ * @function focusRow
+ * @description Focus row from index and row index
  */
 
-const rowActivated = (e) => {
-	const buttonSelector = `[data-js="panel"][data-index="${e.detail.index}"] [data-js="c-tab__button"][data-row-index="${e.detail.rowIndex}"]`;
+const focusRow = (index, rowIndex) => {
+	const buttonSelector = `[data-js="panel"][data-index="${index}"] [data-js="c-tab__button"][data-row-index="${rowIndex}"]`;
 	const activeButton = tools.getNodes(buttonSelector, false, siteWrap, true)[0];
 	if (activeButton) {
 		resetCurrent(activeButton);
 		setNewCurrent(activeButton);
 	}
+};
+
+/**
+ * @function repeaterChangeHandler
+ * @description Responds to panel live updating.
+ */
+
+const repeaterChangeHandler = (e) => {
+	focusRow(e.detail.index, e.detail.rowIndex);
 };
 
 /**
@@ -85,7 +94,8 @@ const rowActivated = (e) => {
 
 const bindEvents = () => {
 	delegate(siteWrap, '.c-tab__button', 'click', tabClick);
-	document.addEventListener('modular_content/repeater_row_activated', rowActivated);
+	document.addEventListener('modular_content/repeater_row_activated', repeaterChangeHandler);
+	document.addEventListener('modular_content/repeater_row_added', repeaterChangeHandler);
 };
 
 /**

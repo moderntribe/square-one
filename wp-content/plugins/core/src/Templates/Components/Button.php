@@ -11,9 +11,11 @@ class Button extends Component {
 	const TYPE        = 'type';
 	const TARGET      = 'target';
 	const CLASSES     = 'classes';
-	const ATTRS       = 'attrs';
-	const LABEL       = 'label';
-	const BTN_AS_LINK = 'btn_as_link';
+	const ATTRS         = 'attrs';
+	const LABEL         = 'label';
+	const FORCE_DISPLAY = 'force_display';
+	const BTN_AS_LINK   = 'btn_as_link';
+	const INNER_ATTRIBUTES   = 'inner_attributes';
 
 	protected function parse_options( array $options ): array {
 		$defaults = [
@@ -24,6 +26,8 @@ class Button extends Component {
 			static::ATTRS       => [],
 			static::LABEL       => false,
 			static::BTN_AS_LINK => false,
+			static::FORCE_DISPLAY => false,
+			static::INNER_ATTRIBUTES => [],
 		];
 
 		return wp_parse_args( $options, $defaults );
@@ -38,6 +42,8 @@ class Button extends Component {
 			static::TYPE    => $this->options['btn_as_link'] ? '' : $this->options['type'],
 			static::TARGET  => $this->options['btn_as_link'] ? $this->options['target'] : '',
 			static::LABEL   => $this->options['label'],
+			static::FORCE_DISPLAY   => $this->options[ self::FORCE_DISPLAY ],
+			static::INNER_ATTRIBUTES   => $this->merge_attrs( [], $this->options[ static::INNER_ATTRIBUTES ], true ),
 		];
 
 		return $data;

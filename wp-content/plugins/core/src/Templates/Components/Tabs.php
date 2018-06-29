@@ -16,6 +16,7 @@ class Tabs extends Component {
 	const TAB_BUTTON_CLASSES         = 'tab_button_classes';
 	const TAB_BUTTON_ACTIVE_CLASS    = 'tab_button_active_class';
 	const TAB_BUTTON_ATTRS           = 'tab_button_attrs';
+	const TAB_BUTTON_OPTIONS         = 'tab_button_options';
 	const TAB_CONTENT_CLASSES        = 'tab_content_classes';
 	const TAB_CONTENT_ATTRS          = 'tab_content_attrs';
 	const TAB_CONTENT_ACTIVE_CLASS   = 'tab_content_active_class';
@@ -35,6 +36,7 @@ class Tabs extends Component {
 			self::TAB_BUTTON_CLASSES         => [ 'c-tab__button' ],
 			self::TAB_BUTTON_ACTIVE_CLASS    => 'c-tab__button--active',
 			self::TAB_BUTTON_ATTRS           => [],
+			self::TAB_BUTTON_OPTIONS         => [],
 			self::TAB_CONTENT_CLASSES        => [ 'c-tab__content', 't-content' ],
 			self::TAB_CONTENT_ATTRS          => [],
 			self::TAB_CONTENT_ACTIVE_CLASS   => 'c-tab__content--active',
@@ -57,6 +59,9 @@ class Tabs extends Component {
 				'data-row-index' => $key
 			];
 			$button_attributes = $this->merge_attrs( $button_attributes_default, $this->options[self::TAB_BUTTON_ATTRS] );
+			if ( isset( $tab[ 'btn_attrs' ] ) ) {
+				$button_attributes = $this->merge_attrs( $button_attributes, $tab[ 'btn_attrs' ] );
+			}
 			$btn_classes = $this->options[self::TAB_BUTTON_CLASSES];
 			if ($key === 0) {
 				$btn_classes = wp_parse_args( $btn_classes, [ $this->options[self::TAB_BUTTON_ACTIVE_CLASS] ] );
@@ -66,6 +71,7 @@ class Tabs extends Component {
 				Button::CLASSES => $btn_classes,
 				Button::ATTRS   => $button_attributes,
 			];
+			$options = wp_parse_args( $options, $tab[ 'btn_options' ] );
 			$btn_obj = Button::factory( $options );
 			$buttons[]  = $btn_obj->render();
 		}

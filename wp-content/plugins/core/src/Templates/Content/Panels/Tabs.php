@@ -4,6 +4,7 @@ namespace Tribe\Project\Templates\Content\Panels;
 
 use Tribe\Project\Panels\Types\Tabs as TabsPanel;
 use Tribe\Project\Templates\Components\Tabs as TabsComponent;
+use Tribe\Project\Templates\Components\Button;
 use Tribe\Project\Theme\Util;
 
 class Tabs extends Panel {
@@ -46,18 +47,21 @@ class Tabs extends Panel {
 			return [];
 		}
 		return array_map( function ( $row, $index ) {
-			$content_attrs = ( !is_preview() ) ? '' : Util::array_to_attributes([
+			$content_attrs = ( !is_panel_preview() ) ? '' : Util::array_to_attributes([
 				'data-depth'    => $this->panel->get_depth(),
 				'data-index'    => $index,
 				'data-name'     => 'row_content',
 				'data-autop'    => 'true',
 				'data-livetext' => 1
 			]);
-			$btn_attrs = ( !is_preview() ) ? [] : [
-				'data-depth'    => $this->panel->get_depth(),
-				'data-index'    => $index,
-				'data-name'     => 'row_header',
-				'data-livetext' => 1
+			$btn_options = ( !is_panel_preview() ) ? [] : [
+				Button::FORCE_DISPLAY => true,
+				Button::INNER_ATTRIBUTES => [
+					'data-depth'    => $this->panel->get_depth(),
+					'data-index'    => $index,
+					'data-name'     => 'row_header',
+					'data-livetext' => 1
+				],
 			];
 			return [
 				'tab_id'        => uniqid( 'tabs-header-' ),
@@ -65,7 +69,7 @@ class Tabs extends Panel {
 				'tab_text'      => $row[ TabsPanel::FIELD_TABS_TITLE ],
 				'content'       => $row[ TabsPanel::FIELD_TABS_CONTENT ],
 				'content_attrs' => $content_attrs,
-				'btn_attrs'     => $btn_attrs
+				'btn_options'   => $btn_options,
 			];
 		}, $rows, array_keys($rows) );
 	}
