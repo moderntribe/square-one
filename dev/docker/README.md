@@ -55,4 +55,46 @@ download it from [here](https://store.docker.com/editions/community/docker-ce-de
 7. If you need to change the Dockerfile for building the php-fpm image, change the image name from `image: tribe-phpfpm:7.0` to whatever makes sense on your docker-compose.yml
 8. That's it. Be happy.
 
+# Multisite setup on a new project
 
+1. After installing WordPress, run the wp-cli command
+    ```
+    wp core multisite-convert
+    ```
+    If using subdomains then use
+    ```
+    wp core multisite-convert --subdomains
+    ```
+    Then you will need to copy the output from the command into your local-config.php file and visit /wp-admin/network/setup.php to copy the changes you need in your .htaccess file
+2. In your wp-config.php change 
+    ```
+    'WP_ALLOW_MULTISITE' => tribe_getenv( 'WP_ALLOW_MULTISITE', false ),
+    ```
+    to
+    ```
+    'WP_ALLOW_MULTISITE' => tribe_getenv( 'WP_ALLOW_MULTISITE', true ),
+    ```
+3. In dev/docker/phpdocker/nginx/nginx.conf uncomment the two lines below by removing the # symbol at the beginning
+    ```
+    location @rewrites {
+        rewrite /wp-admin$ $scheme://$host$uri/ permanent;
+        #rewrite ^(/[^/]+)?(/wp-(admin|includes|content).*) $2 last;
+        #rewrite ^(/[^/]+)?(/.*\.php) $2 last;
+        rewrite ^ /index.php last;
+    }
+    ```
+4. You may need to update this in your local-config.php and use your local domain which will be your projectID.tribe most likely
+    ```
+    define( 'DOMAIN_CURRENT_SITE', '{your-project-domain.tribe' );
+    ``` 
+    In your wp-config.php you will need to define the domain for the production site.
+5. In your wp-config.php you also need to set 
+   ```
+   'MULTISITE' => tribe_getenv( 'WP_MULTISITE', true ),
+   ```
+   and if you are using subdomains instead of paths set
+   ```
+   'SUBDOMAIN_INSTALL' => tribe_getenv( 'SUBDOMAIN_INSTALL', true ),
+   ```
+6. Restart your project's docker container by running /dev/docker/stop.sh then /dev/docker/start.sh
+7. You should now have a fully functioning multisite setup.

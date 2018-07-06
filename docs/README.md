@@ -1,9 +1,10 @@
-## Developer Guide
+# Developer Guide
 
 * **Build**
   * [Overview](/docs/build/README.md)
   * [Node](/docs/build/node.md)
   * [Grunt Tasks](/docs/build/grunt.md)
+  * [Composer](/docs/build/composer.md)
 * **Videos**
   * [Frontend Videos](/docs/theme/videos.md)
   * [Backend Videos](/docs/backend/videos.md)
@@ -19,6 +20,7 @@
   * [Fonts](/docs/theme/fonts.md)
   * [Icons](/docs/theme/icons.md)
   * [Twig](/docs/theme/twig.md)
+  * [In-Depth Components Guide](/docs/theme/components-guide.md)
   * **CSS**
     * [Overview](/docs/theme/css/README.md)
     * [PostCSS](/docs/theme/css/postcss.md)
@@ -51,6 +53,9 @@
   * [Service Providers](/docs/backend/service-providers.md)
   * [Template Controllers](/docs/backend/data.md)
   * [CLI](/docs/backend/cli.md)
+  * [Cache](/docs/backend/object-cache.md)
+  * [Request Object](/docs/backend/request.md)
+  * [Facades](/docs/backend/facades.md)
   * **Plugins/Extensions**
     * [Twig](https://twig.symfony.com/)
     * [Posts 2 Post](https://github.com/scribu/wp-posts-to-posts/wiki)

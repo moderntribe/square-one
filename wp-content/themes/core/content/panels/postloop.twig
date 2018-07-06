@@ -5,19 +5,13 @@
 {% block content %}
 
 	<div class="s-content">
-		<div class="g-row g-row--center">
-			<div class="g-row--col-2--min-small g-row--col-4--min-full"
-			     data-depth="0"
-			     data-name="posts"
-			     data-livetext>
+		<div class="g-row g-row--center g-row--col-4--min-full" {{ attrs }}>
 
-				{% for post in posts %}
-					<div class="g-col">
-						{{ post }}
-					</div>
-				{% endfor %}
-
-			</div>
+            {% for post in posts %}
+				<div class="t-content g-col">
+                    {{ post }}
+				</div>
+            {% endfor %}
 		</div>
 	</div>
 

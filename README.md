@@ -23,7 +23,7 @@
 * **Theme**
   * [Overview](/docs/theme/README.md)
   * [Markup and Style](/docs/theme/markup-and-style.md)
-  * [Accessibility](/docs/theme/accessbility.md)
+  * [Accessibility](/docs/theme/accessibility.md)
   * [Image Handling](/docs/theme/images.md)
   * [Fonts](/docs/theme/fonts.md)
   * [Icons](/docs/theme/icons.md)
@@ -92,21 +92,6 @@ GLOMAR is a plugin that blocks the frontend of the site from public access. If y
     define( 'TRIBE_GLOMAR', false );
 
 
-## Upgrade Notice
-
-= 1.1 =
-Moved the project dependencies to Composer  
-Added Codeception tests examples and instructions  
-= 1.0 =
-Initial Release
-
-
 ## Changelog
 
-
-= 1.1 =
-Moved the project dependencies to Composer  
-Added Codeception tests examples and instructions  
-= 1.0 =
-Initial Release
-
+[View changelog](./changelog.md)
