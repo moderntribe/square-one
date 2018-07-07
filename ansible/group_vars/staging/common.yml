@@ -1,0 +1,113 @@
+---
+##############################################################
+#
+# Site domain
+#
+# domain = domain to be used for the site
+#
+# Typically this is defined in the relevant group_vars for the
+# inventory that is being deployed
+##############################################################
+domain: CHANGEME
+
+##############################################################
+#
+# Datadog
+#
+# datadog_install = install datadog on this server
+# datadog_api_key = API key for datadog
+#
+# Typically these values won't be changed in all/common.yml
+# but instead added/changed in the relevant
+# inventory/common.yml
+##############################################################
+datadog_install: false
+#datadog_api_key: "CHANGEME"
+
+##############################################################
+#
+# Elasticsearch
+#
+# elasticsearch_install = install datadog on this server
+# elasticsearch_plugins = Elasticsearch plugins to use
+# elasticsearch_major_version = Version for Elasticsearch
+#
+# Typically these values won't be changed in all/common.yml
+# but instead added/changed in the relevant
+# inventory/common.yml
+##############################################################
+elasticsearch_install: false
+# elasticsearch_major_version: "5.x"
+# elasticsearch_plugins: []
+
+##############################################################
+#
+# Kibana
+#
+# kibana_install = install datadog on this server
+# kibana_version = Kibana version
+# kibana_user = Kibana user
+#
+# Vars in vault:
+# kibana_password = kibana password
+#
+# Typically these values won't be changed in all/common.yml
+# but instead added/changed in the relevant
+# inventory/common.yml
+##############################################################
+kibana_install: false
+# kibana_version: "5.2.2"
+# kibana_user: pue
+
+##############################################################
+#
+# Mailhog
+#
+# mailhog_install  = install mailhog on this server
+# mail_admin       = admin email address
+# mail_user        = mailhog username
+# mail_password    = mailhog password
+# mail_hostname    = mailhog hostname
+# mail_smtp_server = mail server
+#
+# Typically these values won't be changed in all/common.yml
+# but instead added/changed in the relevant
+# inventory/common.yml
+##############################################################
+mailhog_install: false
+# mail_admin: "partners@tri.be"
+# mail_user: "{{ smtp_username }}"
+# mail_password: "{{ smtp_password }}"
+# mail_hostname: "tri.be"
+# mail_smtp_server: "CHANGEME"
+
+##############################################################
+#
+# Newrelic
+#
+# newrelic_install = install newrelic on this server
+# newrelic_appname = name as it should appear in Newrelic
+#
+# Vars in vault:
+# newrelic_license = Newrelic License
+#
+# Typically these values won't be changed in all/common.yml
+# but instead added/changed in the relevant
+# inventory/common.yml
+##############################################################
+newrelic_install: false
+# newrelic_appname: "CHANGEME"
+
+##############################################################
+#
+# Redis
+#
+# redis_install = install redis on this server
+# redis_host = host for redis
+#
+# Typically these values won't be changed in all/common.yml
+# but instead added/changed in the relevant
+# inventory/common.yml
+##############################################################
+redis_install: false
+#redis_host: localhost

@@ -1,0 +1,87 @@
+---
+- name: System setup
+  hosts: www
+  roles:
+    - role: tribe/roles/apt
+      become: yes
+      tags:
+        - apt
+
+    - role: geerlingguy.mailhog
+      become: yes
+      tags:
+        - mailhog
+        - mail
+      when: mailhog_install
+
+    - role: tribe/roles/mail
+      become: yes
+      tags:
+        - mail
+
+    - role: geerlingguy.php
+      become: yes
+      tags:
+        - php
+
+    - role: tribe/roles/php
+      become: yes
+      tags:
+        - php
+        - opcache
+
+    - role: geerlingguy.composer
+      become: yes
+      tags:
+        - php
+        - composer
+
+    - role: tribe/roles/nginx
+      become: yes
+      nginx_project: wordpress
+      tags:
+        - nginx
+
+    - role: geerlingguy.redis
+      become: yes
+      tags:
+        - redis
+      when: redis_install
+
+    - role: tribe/roles/elasticsearch
+      become: yes
+      tags:
+        - elasticsearch
+      when: elasticsearch_install
+
+    - role: tribe/roles/newrelic
+      become: yes
+      tags:
+        - newrelic
+      when: newrelic_install
+
+    - role: tribe/roles/nvm
+      deploy_project: wordpress
+      tags:
+        - nvm
+
+    - role: tribe/roles/logs
+      become: yes
+      tags:
+        - logs
+        - logrotate
+
+    - role: Datadog.datadog
+      become: yes
+      tags:
+        - datadog
+      when: datadog_install
+
+    - role: tribe/roles/composer
+      tags:
+        - composer
+        - composer-auth
+
+    - role: tribe/roles/cron
+      tags:
+        - cron
