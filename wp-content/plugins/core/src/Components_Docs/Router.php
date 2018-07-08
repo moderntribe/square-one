@@ -12,13 +12,15 @@ class Router {
 	}
 
 	public function show_components_docs_page( $template ) {
-		$current = Request::query()->query_vars['current_component'];
-
-		if ( empty( $current ) ) {
+		if ( ! $this->is_docs_page() ) {
 			return $template;
 		}
 
 		return dirname( __FILE__ ) . '/Templates/components_docs.php';
+	}
+
+	public function is_docs_page() {
+		return ! empty( Request::query()->query_vars['current_component'] );
 	}
 
 }

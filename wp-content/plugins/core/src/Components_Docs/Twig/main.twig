@@ -24,17 +24,30 @@
 </head>
 <body class="{{ body_class }}">
 
-<div class="l-wrapper" data-js="site-wrap">
-
-    <ul>
-        {% for nav_item in nav_items %}
-            <a href="{{ nav_item.url }}">{{ nav_item.label }}</a>
-        {% endfor %}
-    </ul>
-
-    <div class="item">
-        {{ item }}
-    </div>
+<div class="l-wrapper components-docs" data-js="site-wrap">
+    <main>
+        <header class="components-docs-header">
+            <ul class="components-docs-nav">
+                {% for group, items in nav_items %}
+                    <li class="components-docs-nav__group">
+                        {{ group }}
+                        <ul class="components-docs-nav__items">
+                            {% for item in items %}
+                                <li class="components-docs-nav__item">
+                                    <a class="component-docs-nav__link" href="{{ item.url }}">{{ item.label }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {% endfor %}
+            </ul>
+        </header>
+        <div class="l-container">
+            <div class="components-docs-item">
+                {{ item }}
+            </div>
+        </div>
+    </main>
 
 </div><!-- .l-wrapper -->
 

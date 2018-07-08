@@ -4,7 +4,7 @@ namespace Tribe\Project\Components_Docs;
 
 use Tribe\Project\Templates\Components\Component;
 
-class Component_Item {
+class Component_Item implements Item {
 
 	/**
 	 * @var string $item_class
@@ -41,7 +41,7 @@ class Component_Item {
 		 * @var Component $item
 		 */
 		$item     = $this->item_class::factory( [] );
-		$defaults = $item->parse_options( [] );
+		$defaults = $item->get_data();
 		$items    = [];
 
 		foreach ( $constants as $constant ) {

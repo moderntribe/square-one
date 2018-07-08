@@ -21,6 +21,10 @@
   "_core_admin_js_dist_path": "wp-content/themes/core/js/dist/admin/",
   "_core_admin_pcss_path": "wp-content/themes/core/pcss/admin/",
   "_core_plugin_path": "wp-content/plugins/core",
+  "_components_docs_css_path": "wp-content/plugins/core/src/Components_Docs/Theme/assets/css/",
+  "_components_docs_pcss_path": "wp-content/plugins/core/src/Components_Docs/Theme/assets/pcss/",
+  "_components_docs_js_path": "wp-content/plugins/core/src/Components_Docs/Theme/assets/js/",
+  "_components_docs_js_dist_path": "wp-content/plugins/core/src/Components_Docs/Theme/assets/js/dist/",
   "_npm_path": "node_modules",
   "_component_path": "dev_components",
   "engines": {

@@ -33,11 +33,13 @@ class Component_Docs extends Twig_Template {
 	}
 
 	protected function get_nav_items( $current ) {
-		$items     = $this->registry->get_items();
+		$items     = $this->registry->get_items( 'all' );
 		$nav_items = [];
 
-		foreach ( $items as $key => $item ) {
-			$nav_items[] = [ 'url' => home_url( sprintf( 'components_docs/%s', $key ) ), 'slug' => $key, 'label' => $item->get_label(), 'current' => $key === $current ];
+		foreach ( $items as $group => $parts ) {
+			foreach ( $parts as $key => $item ) {
+				$nav_items[ $group ][] = [ 'url' => home_url( sprintf( 'components_docs/%s', $key ) ), 'slug' => $key, 'label' => $item->get_label(), 'current' => $key === $current ];
+			}
 		}
 
 		return $nav_items;
@@ -57,19 +59,23 @@ class Component_Docs extends Twig_Template {
 
 		$rows = [];
 
-		$rows[] = [
-			'content'     => $sales_docs,
-			'header_text' => 'Sales Documentation',
-			'content_id'  => 'sales_docs',
-			'header_id'   => 'sales_docs',
-		];
+		if ( ! empty( $sales_docs ) ) {
+			$rows[] = [
+				'content'     => $sales_docs,
+				'header_text' => 'Sales Documentation',
+				'content_id'  => 'sales_docs',
+				'header_id'   => 'sales_docs',
+			];
+		}
 
-		$rows[] = [
-			'content'     => $dev_docs,
-			'header_text' => 'Dev Documentation',
-			'content_id'  => 'dev_docs',
-			'header_id'   => 'dev_docs',
-		];
+		if ( ! empty( $dev_docs ) ) {
+			$rows[] = [
+				'content'     => $dev_docs,
+				'header_text' => 'Dev Documentation',
+				'content_id'  => 'dev_docs',
+				'header_id'   => 'dev_docs',
+			];
+		}
 
 		$constants    = Constants::factory( [ Constants::CONSTANTS => $constants ] );
 		$preview_body = $constants->render() . $rendered;

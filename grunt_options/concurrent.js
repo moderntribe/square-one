@@ -59,4 +59,15 @@ module.exports = {
 		],
 		'setPHPConstant',
 	],
+
+	componentsDocs: [
+		[
+			'postcss:componentsDocs',
+			'postcss:componentsDocsMin',
+		],
+		[
+			'clean:componentsDocsMinJS',
+			'webpack:componentsDocsProd',
+		],
+	],
 };

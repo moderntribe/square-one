@@ -93,4 +93,24 @@ module.exports = {
 		],
 		options: defaultOpts,
 	},
+
+	componentsDocsCSS: {
+		files: [
+			'<%= pkg._components_docs_pcss_path %>**/*.pcss',
+		],
+		tasks: [
+			'postcss:componentsDocs',
+		],
+		options: defaultOpts,
+	},
+
+	componentsDocsScripts: {
+		files: [
+			'<%= pkg._components_docs_js_path %>**/*.js',
+		],
+		tasks: [
+			'webpack:componentsDocsDev',
+		],
+		options: defaultOpts,
+	},
 };
