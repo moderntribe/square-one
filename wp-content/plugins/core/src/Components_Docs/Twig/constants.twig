@@ -1,0 +1,15 @@
+<form action="" class="preview_inputs">
+    {% for name, input in constants %}
+        <div class="preview_input">
+            <label for="{{ name }}">{{ name }}</label>
+
+            {% if input is iterable %}
+                {% for i in 0..1 %}
+                    <input name="{{ name }}[{{ i }}]" type="text"/><br/>
+                {% endfor %}
+            {% else %}
+                <input name="{{ name }}" type="text" value="{{ input }}"/>
+            {% endif %}
+        </div>
+    {% endfor %}
+</form>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html {{ language_attributes }}>
+<head>
+
+    {# // TITLE: Handled by WP #}
+
+    {# // MISC Meta #}
+    <meta charset="utf-8">
+    <meta name="author" content="{{ bloginfo( 'name' ) }}">
+    <link rel="pingback" href="{{ bloginfo( 'pingback_url' ) }}">
+
+    {# // MOBILE META #}
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {# // PLATFORM META: iOS & Android #}
+    <meta name="apple-mobile-web-app-title" content="{{ page_title|esc_attr }}">
+
+    {# // PLATFORM META: IE #}
+    <meta name="application-name" content="{{ bloginfo( 'name' ) }}">
+
+    {{ do_action( 'wp_head' ) }}
+
+</head>
+<body class="{{ body_class }}">
+
+<div class="l-wrapper" data-js="site-wrap">
+
+    <ul>
+        {% for nav_item in nav_items %}
+            <a href="{{ nav_item.url }}">{{ nav_item.label }}</a>
+        {% endfor %}
+    </ul>
+
+    <div class="item">
+        {{ item }}
+    </div>
+
+</div><!-- .l-wrapper -->
+
+{{ do_action( 'wp_footer' ) }}
+
+</body>
+</html>

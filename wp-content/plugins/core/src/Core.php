@@ -8,6 +8,7 @@ use Tribe\Project\Service_Providers\Admin_Provider;
 use Tribe\Project\Service_Providers\Asset_Provider;
 use Tribe\Project\Service_Providers\Cache_Provider;
 use Tribe\Project\Service_Providers\CLI_Provider;
+use Tribe\Project\Service_Providers\Components_Docs_Provider;
 use Tribe\Project\Service_Providers\Object_Meta_Provider;
 use Tribe\Project\Service_Providers\Nav_Menu_Provider;
 use Tribe\Project\Service_Providers\Panels_Provider;
@@ -69,6 +70,7 @@ class Core {
 		$this->container->register( new Object_Meta_Provider() );
 		$this->container->register( new CLI_Provider() );
 		$this->container->register( new Queues_Provider() );
+		$this->container->register( new Components_Docs_Provider() );
 
 		$this->load_post_type_providers();
 		$this->load_taxonomy_providers();
