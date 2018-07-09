@@ -1,15 +1,20 @@
-<form action="" class="preview_inputs">
+<p>Use the inputs below to preview the rendered component with updates.</p>
+<form action="" class="preview-inputs" data-js="components-preview-wrapper">
     {% for name, input in constants %}
-        <div class="preview_input">
+        <div class="preview-input">
             <label for="{{ name }}">{{ name }}</label>
 
             {% if input is iterable %}
-                {% for i in 0..1 %}
-                    <input name="{{ name }}[{{ i }}]" type="text"/><br/>
+                {% for i in 0..2 %}
+                    <input name="{{ name }}[{{ i }}]" type="text"/>
                 {% endfor %}
             {% else %}
                 <input name="{{ name }}" type="text" value="{{ input }}"/>
             {% endif %}
         </div>
     {% endfor %}
+    <input type="hidden" name="component_class" value="{{ item_class }}" />
+    <div class="preview-inputs__submit">
+        <button type="submit" data-js="components-docs-update-preview">Update Preview</button>
+    </div>
 </form>

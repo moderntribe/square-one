@@ -6,6 +6,7 @@ namespace Tribe\Project\Service_Providers;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
+use Tribe\Project\Components_Docs\Ajax;
 use Tribe\Project\Components_Docs\Component_Item;
 use Tribe\Project\Components_Docs\Registry;
 use Tribe\Project\Components_Docs\Router;
@@ -32,16 +33,20 @@ class Components_Docs_Provider implements ServiceProviderInterface {
 
 		$this->add_template_paths( $container );
 
-		$container['components_docs.router'] = function ( $container ) {
+		$container['components_docs.router'] = function () {
 			return new Router();
 		};
 
-		$container['components_docs.registry'] = function ( $container ) {
+		$container['components_docs.registry'] = function () {
 			return new Registry();
 		};
 
-		$container['components_docs.assets'] = function( $container ) {
+		$container['components_docs.assets'] = function ( $container ) {
 			return new Assets( $container['components_docs.router'] );
+		};
+
+		$container['components_docs.ajax'] = function ( $container ) {
+			return new Ajax( $container['components_docs.registry'] );
 		};
 
 		foreach ( $this->components as $component ) {
@@ -56,13 +61,18 @@ class Components_Docs_Provider implements ServiceProviderInterface {
 
 		add_action( 'init', function () use ( $container ) {
 			$container['components_docs.router']->add_rewrite_rule();
+			$container['components_docs.ajax']->add_ajax_actions();
 		}, 10, 0 );
+
+		add_filter( 'core_js_config', function ( $data ) use ( $container ) {
+			return $container['components_docs.ajax']->add_config_items( $data );
+		}, 10, 1 );
 
 		add_filter( 'template_include', function ( $template ) use ( $container ) {
 			return $container['components_docs.router']->show_components_docs_page( $template );
 		}, 10, 1 );
 
-		add_action( 'wp_enqueue_scripts', function() use ( $container ) {
+		add_action( 'wp_enqueue_scripts', function () use ( $container ) {
 			$container['components_docs.assets']->enqueue_scripts();
 			$container['components_docs.assets']->enqueue_styles();
 		}, 10, 0 );

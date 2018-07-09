@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "93906c66b1f32665629991f8ef53c92b",
-    "content-hash": "1f33d21d798ceb6ad670fc94a977cb98",
+    "hash": "3ffcb2114d4d8e904b706d9e37439996",
+    "content-hash": "160e8e758497a305f0acc6eee3b68636",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -1966,6 +1966,45 @@
             "time": "2018-01-30 13:51:48"
         },
         {
+            "name": "vanilla/htmlawed",
+            "version": "v2.2.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vanilla/htmlawed.git",
+                "reference": "58651edbc4c45a2d6b5254b8a9a69dc63ff1457b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vanilla/htmlawed/zipball/58651edbc4c45a2d6b5254b8a9a69dc63ff1457b",
+                "reference": "58651edbc4c45a2d6b5254b8a9a69dc63ff1457b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "tburry/pquery": "~1.0.1"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/Htmlawed.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Todd Burry",
+                    "email": "todd@vanillaforums.com"
+                }
+            ],
+            "description": "A composer wrapper for the htmLawed library to purify & filter HTML. Tested with PHPUnit and PhantomJS!",
+            "time": "2017-09-13 19:20:25"
+        },
+        {
             "name": "vlucas/phpdotenv",
             "version": "dev-master",
             "source": {
@@ -2076,7 +2115,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://downloads.wordpress.org/plugin/configure-smtp.3.1.zip",
-                "reference": null,
+                "reference": "tags/3.1",
                 "shasum": null
             },
             "require": {
@@ -2096,7 +2135,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://downloads.wordpress.org/plugin/gravity-forms-wcag-20-form-fields.zip?timestamp=1506167471",
-                "reference": null,
+                "reference": "trunk",
                 "shasum": null
             },
             "require": {
@@ -2116,7 +2155,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://downloads.wordpress.org/plugin/limit-login-attempts.2.0beta3.zip",
-                "reference": null,
+                "reference": "tags/2.0beta3",
                 "shasum": null
             },
             "require": {
@@ -2136,7 +2175,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://downloads.wordpress.org/plugin/posts-to-posts.1.6.5.zip",
-                "reference": null,
+                "reference": "tags/1.6.5",
                 "shasum": null
             },
             "require": {
@@ -2156,7 +2195,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://downloads.wordpress.org/plugin/regenerate-thumbnails.3.0.2.zip",
-                "reference": null,
+                "reference": "tags/3.0.2",
                 "shasum": null
             },
             "require": {
@@ -2176,7 +2215,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://downloads.wordpress.org/plugin/the-events-calendar.4.6.11.1.zip",
-                "reference": null,
+                "reference": "tags/4.6.11.1",
                 "shasum": null
             },
             "require": {
@@ -2196,7 +2235,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://downloads.wordpress.org/plugin/user-switching.1.3.0.zip",
-                "reference": null,
+                "reference": "tags/1.3.0",
                 "shasum": null
             },
             "require": {

@@ -68,7 +68,8 @@
     "php-http/curl-client": "^1.7",
     "guzzlehttp/psr7": "^1.4",
     "sunra/php-simple-html-dom-parser": "1.5.2",
-    "monolog/monolog":"1.23.0"
+    "monolog/monolog":"1.23.0",
+    "vanilla/htmlawed": "v2.2.4.1"
   },
   "extra": {
     "wordpress-install-dir": "wp",

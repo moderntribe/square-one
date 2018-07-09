@@ -3,6 +3,7 @@
 namespace Tribe\Project\Components_Docs\Templates;
 
 use Tribe\Project\Components_Docs\Registry;
+use Tribe\Project\Components_Docs\Router;
 use Tribe\Project\Facade\Items\Request;
 use Tribe\Project\Templates\Components\Accordion;
 use Tribe\Project\Twig\Twig_Template;
@@ -21,8 +22,10 @@ class Component_Docs extends Twig_Template {
 		$current_component = $this->get_current_component();
 
 		$data = [
-			'nav_items' => $this->get_nav_items( $current_component ),
-			'item'      => $this->get_item( $current_component ),
+			'logo'       => Router::plugin_url( 'Theme/assets/img/wordmark.svg' ),
+			'nav_items'  => $this->get_nav_items( $current_component ),
+			'item'       => $this->get_item( $current_component ),
+			'label'      => $this->get_label( $current_component ),
 		];
 
 		return $data;
@@ -30,6 +33,16 @@ class Component_Docs extends Twig_Template {
 
 	protected function get_current_component(): string {
 		return Request::query()->query_vars['current_component'] ?? 'accordion';
+	}
+
+	protected function get_label( $current ) {
+		$item = $this->registry->get_item( $current );
+
+		if ( empty( $item ) ) {
+			return '';
+		}
+
+		return $item->get_label();
 	}
 
 	protected function get_nav_items( $current ) {
@@ -77,15 +90,17 @@ class Component_Docs extends Twig_Template {
 			];
 		}
 
-		$constants    = Constants::factory( [ Constants::CONSTANTS => $constants ] );
-		$preview_body = $constants->render() . $rendered;
+		if ( is_user_logged_in() ) {
+			$constants    = Constants::factory( [ Constants::CONSTANTS => $constants, Constants::ITEM_CLASS => $item->get_slug() ] );
+			$preview_body = $constants->render() . $rendered;
 
-		$rows[] = [
-			'content'     => $preview_body,
-			'header_text' => 'Preview',
-			'content_id'  => 'preview',
-			'header_id'   => 'preview',
-		];
+			$rows[] = [
+				'content'     => $preview_body,
+				'header_text' => 'Preview',
+				'content_id'  => 'preview',
+				'header_id'   => 'preview',
+			];
+		}
 
 		$options = [
 			Accordion::ROWS => $rows,
@@ -95,5 +110,4 @@ class Component_Docs extends Twig_Template {
 
 		return $accordion->render();
 	}
-
 }

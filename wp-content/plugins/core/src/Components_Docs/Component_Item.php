@@ -2,6 +2,7 @@
 
 namespace Tribe\Project\Components_Docs;
 
+use Tribe\Project\Components_Docs\Templates\Preview_Wrapper;
 use Tribe\Project\Templates\Components\Component;
 
 class Component_Item implements Item {
@@ -36,6 +37,7 @@ class Component_Item implements Item {
 
 	public function get_constants(): array {
 		$constants = $this->reflection->getConstants();
+		unset( $constants['TEMPLATE_NAME'] );
 
 		/**
 		 * @var Component $item
@@ -48,6 +50,7 @@ class Component_Item implements Item {
 			$exists = isset( $defaults[ $constant ] );
 
 			if ( ! $exists ) {
+				$items[ $constant ] = '';
 				continue;
 			}
 
@@ -104,8 +107,24 @@ class Component_Item implements Item {
 		 * @var Component $template
 		 */
 		$template = $this->item_class::factory( $options );
+		$rendered = $template->render();
 
-		return $template->render();
+		$wrapper_options = [
+			Preview_Wrapper::RENDERED => $this->cleanup_html( $rendered ),
+		];
+
+		$wrapper = Preview_Wrapper::factory( $wrapper_options );
+
+		return $wrapper->render();
+	}
+
+	protected function cleanup_html( string $html ) {
+		$config = [ 'tidy' => '1t0n' ];
+		return \Htmlawed::filter( $html, $config );
+	}
+
+	public function get_class_name(): string {
+		return $this->item_class;
 	}
 
 	protected function get_home_path() {

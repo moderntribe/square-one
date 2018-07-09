@@ -4,17 +4,15 @@ namespace Tribe\Project\Components_Docs\Templates;
 
 use Tribe\Project\Templates\Components\Component;
 
-class Constants extends Component {
+class Preview_Wrapper extends Component {
 
-	const TEMPLATE_NAME = 'constants.twig';
+	const TEMPLATE_NAME = 'preview_wrapper.twig';
 
-	const CONSTANTS  = 'constants';
-	const ITEM_CLASS = 'item_class';
+	const RENDERED  = 'rendered';
 
 	public function parse_options( array $options ): array {
 		$defaults = [
-			self::CONSTANTS  => [],
-			self::ITEM_CLASS => '',
+			self::RENDERED  => '',
 		];
 
 		return wp_parse_args( $options, $defaults );
@@ -22,8 +20,7 @@ class Constants extends Component {
 
 	public function get_data(): array {
 		$data = [
-			self::CONSTANTS  => $this->options[ self::CONSTANTS ],
-			self::ITEM_CLASS => $this->options[ self::ITEM_CLASS ],
+			self::RENDERED  => $this->options[ self::RENDERED ],
 		];
 
 		return $data;

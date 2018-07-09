@@ -27,22 +27,28 @@
 <div class="l-wrapper components-docs" data-js="site-wrap">
     <main>
         <header class="components-docs-header">
-            <ul class="components-docs-nav">
-                {% for group, items in nav_items %}
-                    <li class="components-docs-nav__group">
-                        {{ group }}
-                        <ul class="components-docs-nav__items">
-                            {% for item in items %}
-                                <li class="components-docs-nav__item">
-                                    <a class="component-docs-nav__link" href="{{ item.url }}">{{ item.label }}</a>
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    </li>
-                {% endfor %}
-            </ul>
+            <div class="components-docs-header__inner">
+                <div class="components-docs-logo">
+                    <img src="{{ logo }}"/>
+                </div>
+                <ul class="components-docs-nav">
+                    {% for group, items in nav_items %}
+                        <li class="components-docs-nav__group">
+                            {{ group }}
+                            <ul class="components-docs-nav__items">
+                                {% for item in items %}
+                                    <li class="components-docs-nav__item">
+                                        <a class="component-docs-nav__link" href="{{ item.url }}">{{ item.label }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
         </header>
         <div class="l-container">
+            <h1>{{ label }}</h1>
             <div class="components-docs-item">
                 {{ item }}
             </div>

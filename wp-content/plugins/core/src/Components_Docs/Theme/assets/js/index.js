@@ -1,1 +1,4 @@
-window.addEventListener( 'click', '.foobar', function(){} );
+
+import ready from './core/ready';
+
+ready();
