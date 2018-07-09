@@ -79,7 +79,7 @@ datadog_install: false
 #
 # Elasticsearch
 #
-# elasticsearch_install = install datadog on this server
+# elasticsearch_install = install Elasticsearch on this server
 # elasticsearch_plugins = Elasticsearch plugins to use
 # elasticsearch_major_version = Version for Elasticsearch
 #
@@ -95,7 +95,7 @@ elasticsearch_install: false
 #
 # Kibana
 #
-# kibana_install = install datadog on this server
+# kibana_install = install Kibana on this server
 # kibana_version = Kibana version
 # kibana_user = Kibana user
 #
