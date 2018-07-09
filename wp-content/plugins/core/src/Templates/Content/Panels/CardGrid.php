@@ -53,7 +53,7 @@ class CardGrid extends Panel {
 				}
 
 				if ( ! empty( $card[ CardGridPanel::FIELD_CARD_CTA ] ) ) {
-					$options[ Card::BUTTON ] = $this->get_card_button( $card[ CardGridPanel::FIELD_CARD_CTA ] );
+					$options[ Card::BUTTON ] = $this->get_card_button( $card[ CardGridPanel::FIELD_CARD_CTA ], $card[ CardGridPanel::FIELD_CARD_TITLE ] );
 				}
 
 				$card_obj = Card::factory( $options );
@@ -64,12 +64,6 @@ class CardGrid extends Panel {
 		}
 
 		return $cards;
-	}
-
-	private function get_layout_container_attrs( $panel, $panel_object ): string {
-		$data_attrs = sprintf( 'data-name="panels" data-depth="%s" data-livetext', esc_attr( $panel_object->get_depth() ) );
-
-		return sprintf( '%s', $data_attrs );
 	}
 
 	protected function get_cardgrid_attributes() {
@@ -151,17 +145,32 @@ class CardGrid extends Panel {
 		return $text_obj->render();
 	}
 
-	protected function get_card_button( $cta ) {
+	protected function get_screen_reader_text( $screen_reader_text ) {
+		$screen_reader = sprintf( '%s', $screen_reader_text );
+
+		$options = [
+			Text::TEXT    => $screen_reader,
+			Text::CLASSES => [ 'a11y-visual-hide' ],
+			Text::TAG     => 'span',
+		];
+
+		$text_obj = Text::factory( $options );
+
+		return $text_obj->render();
+	}
+
+	protected function get_card_button( $cta, $screen_reader_text ) {
 		if ( empty( $cta[ Button::URL ] ) ) {
 			return '';
 		}
 
 		$options = [
-			Button::URL         => esc_url( $cta[ Button::URL ] ),
-			Button::LABEL       => esc_html( $cta[ Button::LABEL ] ),
-			Button::TARGET      => esc_attr( $cta[ Button::TARGET ] ),
-			Button::BTN_AS_LINK => true,
-			Button::CLASSES     => [ 'c-btn c-btn--sm' ],
+			Button::URL           => esc_url( $cta[ Button::URL ] ),
+			Button::LABEL         => esc_html( $cta[ Button::LABEL ] ),
+			Button::TARGET        => esc_attr( $cta[ Button::TARGET ] ),
+			Button::BTN_AS_LINK   => true,
+			Button::CLASSES       => [ 'c-btn c-btn--sm' ],
+			Button::SCREEN_READER => $this->get_screen_reader_text( $screen_reader_text ),
 		];
 
 		$button_obj = Button::factory( $options );
