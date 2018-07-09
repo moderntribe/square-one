@@ -13,7 +13,7 @@ Fortunately, the free tideways php extension is still capable of generating outp
 ### How do I enable it?
 The necessary Tideways container is configured as part of the global Square 1 docker-compose.
 To enable it in your project:
-* activated the wp-tideways-profiler plugin
+* activate the wp-tideways-profiler plugin
 * in your local-config: define( 'WP_DEBUG', true );
 * in your local-config: define( 'SQUARE1_XHPROF', true );
 
@@ -21,10 +21,10 @@ To enable it in your project:
 At the bottom of every page a link is added (during the `shutdown` hook). If you don't see the link, view source.
 
 ### How do I read this output?
-`Function Name` The name of the function called.
-`Calls` How many times it was called.
-`Calls%` What percent of the total function calls were this function.
-`Incl. Wall Time` The total execution time of this functions calls in ms INCLUDING any functions called within.
-`IWall%` What percent of the total execution path happened within this function inclusive of children.
-`Excl. Wall Time` The total execution time this functions calls in ms EXCLUDING any functions called within.
-`EWall%` What percent of the total execution path happened within this function exclusive of children.
+`Function Name` The name of the function called.\
+`Calls` How many times it was called.\
+`Calls%` What percent of the total function calls were this function.\
+`Incl. Wall Time` The total execution time of this functions calls in ms INCLUDING any functions called within.\
+`IWall%` What percent of the total execution path happened within this function inclusive of children.\
+`Excl. Wall Time` The total execution time this functions calls in ms EXCLUDING any functions called within.\
+`EWall%` What percent of the total execution path happened within this function exclusive of children.\
