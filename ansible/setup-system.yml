@@ -30,6 +30,12 @@
         - php
         - opcache
 
+    - role: geerlingguy.memcached
+      becom: yes
+      tags:
+        - memcached
+      when: memcached_install
+
     - role: geerlingguy.composer
       become: yes
       tags:

@@ -2,6 +2,7 @@
 - src: geerlingguy.php
 - src: geerlingguy.composer
 - src: geerlingguy.mailhog
+- src: geerlingguy.memcached
 - src: geerlingguy.mysql
 - src: geerlingguy.redis
 - src: Datadog.datadog

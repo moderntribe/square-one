@@ -19,7 +19,7 @@
 ##############################################################
 projects:
   wordpress:
-    path: "/srv/www/CHANGEME"
+    path: "/srv/www/public"
     repo: "git@github.com:moderntribe/CHANGEME.git"
 
 ##############################################################
@@ -28,10 +28,9 @@ projects:
 project_repo_version: 'HEAD'
 
 ##############################################################
-# project_checkouts_max_age = purge any checkouts older than
-#                             this length of time
+# releases_to_keep = number of release checkouts to retain
 ##############################################################
-project_checkouts_max_age: "1w"
+releases_to_keep: 3
 
 ##############################################################
 #
@@ -131,6 +130,30 @@ mailhog_install: false
 # mail_password: "{{ smtp_password }}"
 # mail_hostname: "tri.be"
 # mail_smtp_server: "CHANGEME"
+
+##############################################################
+#
+# Memcached
+#
+# memcached_enable       = setup memcached
+#
+# These are the other vars. The commented out values are the defaults
+# memcached_user          = user under which memcached daemon will run
+# memcached_port          = port for memcached
+# memcached_listen_ip     = ip address memcached will listen on
+# memcached_memory_limit  = max amount of RAM (in MB)
+# memcached_connections   = max number of simultaneous connections
+# memcached_log_file      = location of log file
+# memcached_log_verbosity = -v is logging and -vv is debug logging
+##############################################################
+memcached_enable: true
+# memcached_user: memcache
+# memcached_port: 11211
+# memcached_listen_ip: 127.0.0.1
+# memcached_memory_limit: 64
+# memcached_connections: 1024
+# memcached_log_file: /var/log/memcached.log
+# memcached_log_verbosity: ""
 
 ##############################################################
 #

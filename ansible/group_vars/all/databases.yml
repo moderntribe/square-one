@@ -17,7 +17,7 @@ mysql_databases:
 # mysql_users.priv = privileges for the WP db user
 ##############################################################
 mysql_users:
-  - name: "{{ wp_site_db_user }}"
+  - name: "{{ wp_site_db_user }}" # This should NOT be a shared user because it'd lock them out of doing anything else beyond {{wp_site_db_name}}
     password: "{{ wp_site_db_password }}"
     priv: "{{ wp_site_db_name }}.*:ALL"
 
