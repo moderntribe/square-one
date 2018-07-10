@@ -28,9 +28,9 @@ projects:
 project_repo_version: 'HEAD'
 
 ##############################################################
-# releases_to_keep = number of release checkouts to retain
+# keep_releases = number of release checkouts to retain
 ##############################################################
-releases_to_keep: 3
+keep_releases: 3
 
 ##############################################################
 #
