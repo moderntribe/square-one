@@ -135,7 +135,8 @@ mailhog_install: false
 #
 # Memcached
 #
-# memcached_enable       = setup memcached
+# memcached_enable       = setup memcached (can be external or internally installed service)
+# memcached_install      = indicates whether the memcached install should happen on the server being configured
 #
 # These are the other vars. The commented out values are the defaults
 # memcached_user          = user under which memcached daemon will run
@@ -147,6 +148,7 @@ mailhog_install: false
 # memcached_log_verbosity = -v is logging and -vv is debug logging
 ##############################################################
 memcached_enable: true
+memcached_install: true
 # memcached_user: memcache
 # memcached_port: 11211
 # memcached_listen_ip: 127.0.0.1
