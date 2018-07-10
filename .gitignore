@@ -90,7 +90,6 @@ dev/docker/mysql/*
 !dev/docker/mysql/.gitkeep
 wp-content/themes/core/css
 wp-content/themes/core/js/dist
-vendor/
 
 # WP Engine #
 #############
@@ -114,7 +113,6 @@ wp-content/plugins/airplane-mode
 **/__coverage__/
 dev_components/react-app/test/__coverage__/
 dev/deploy/.deploy
-!core/pcss/vendor/
 
 # DevOps #
 #######################
