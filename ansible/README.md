@@ -9,7 +9,7 @@ There are some other requirements if you're actually provisioning/configuring th
 After installing ansible you should run `ansible-galaxy install -r requirements.yml -c` from this directory
 
 ## Security of Keys and Configuration
-Some variables and files used by Ansible contain sensitive data, so we're using a tool called [Ansible Vault](http://docs.ansible.com/ansible/playbooks_vault.html) to encrypt the data in place.  To work with this data, you'll need to have the vault key.  You can find it here: https://central.tri.be/projects/systems/wiki/Hosting_Info.  When you have it, run the following command from this directory: `echo "[the key]" >> .vaultpass`.
+Some variables and files used by Ansible contain sensitive data, so we're using a tool called [Ansible Vault](http://docs.ansible.com/ansible/playbooks_vault.html) to encrypt the data in place.  To work with this data, you'll need to have the vault key.  You can find the vault key in your project's 1Password vault. When you have it, run the following command from this directory: `echo "[the key]" >> .vaultpass`.
 
 Once you do that, you'll need to decrypt the necessary resources manually:
 
