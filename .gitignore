@@ -114,6 +114,7 @@ wp-content/plugins/airplane-mode
 **/__coverage__/
 dev_components/react-app/test/__coverage__/
 dev/deploy/.deploy
+!wp-content/themes/core/pcss/vendor/
 
 # DevOps #
 #######################
