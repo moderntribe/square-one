@@ -83,11 +83,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Tribe\\Project\\":"wp-content/plugins/core/src",
-      "Tribe\\Libs\\": "vendor/moderntribe/tribe-libs/src/",
-      "Mailgun\\Mailgun\\":"vendor/mailgun/",
-      "Sunra\\PhpSimple\\":"vendor/sunra/php-simp[le-html-dom-parser/Src/Sunra/PhpSimple/",
-      "Monolog\\":"vendor/monolog/monloog/src/"
+      "Tribe\\Project\\":"wp-content/plugins/core/src"
     }
   }
 }
