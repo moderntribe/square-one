@@ -25,7 +25,7 @@ class Text extends Component {
 	public function get_data(): array {
 		$data = [
 			static::TEXT    => $this->options[ static::TEXT ],
-			static::TAG     => $this->options[ static::TAG ],
+			static::TAG     => $this->options[ static::TAG ] ? $this->options[ static::TAG ] : 'div',
 			static::CLASSES => $this->merge_classes( [], $this->options[ static::CLASSES ], true ),
 			static::ATTRS   => $this->merge_attrs( [], $this->options[ static::ATTRS ], true ),
 		];

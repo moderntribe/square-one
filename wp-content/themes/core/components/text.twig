@@ -18,7 +18,7 @@ Attributes:
     }
  #}
 
-<{{ (tag) ? tag : 'div' }}
+<{{ tag }}
 	{% if classes %}
 		class="{{ classes }}"
     {% endif %}
@@ -26,4 +26,4 @@ Attributes:
         {{ attrs }}
     {% endif %}>
 {{ content }}
-</{{ (tag) ? tag : 'div' }}>
+</{{ tag }}>

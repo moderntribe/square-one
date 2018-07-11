@@ -18,11 +18,14 @@ Attributes:
 		target: '_blank' // string. if type is link you can pass in target
 		type: 'submit' // string. if tag is button, you can set type
 		url: 'http://google.com' // string. if type is link you can set url
-		screen_reader_text: '' // string. add screen reader text for labels that aren't clear as to where they navigate to.
+		aria_label: '' // string. add screen reader text for labels that aren't clear as to where they navigate to.
     }
  #}
 
 <{{ tag }} class="{{ classes }}"
+	{% if aria_label %}
+	aria-label="{{ aria_label }}"
+    {% endif %}
 	{% if type %}
 	type="{{ type }}"
 	{% endif %}
@@ -35,8 +38,5 @@ Attributes:
 	{{ attrs }}>
 	{% if label is not empty %}
 		<span class="c-btn__text">{{ label }}</span>
-	{% endif %}
-	{% if screen_reader_text is not empty %}
-		{{ screen_reader_text }}
 	{% endif %}
 </{{ tag }}>
