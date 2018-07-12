@@ -10,16 +10,13 @@ class Scripts {
 	public function enqueue_scripts() {
 		$debug = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG;
 
-		$manifest_scripts = $debug ? 'manifest.js' : 'manifest.min.js';
 		$vendor_scripts = $debug ? 'vendor.js' : 'vendor.min.js';
 		$admin_scripts = $debug ? 'scripts.js' : 'scripts.min.js';
 
-		$manifest_src =  trailingslashit( get_stylesheet_directory_uri() ) . 'js/dist/admin/' . $manifest_scripts;
 		$vendor_src = trailingslashit( get_stylesheet_directory_uri() ) . 'js/dist/admin/' . $vendor_scripts;
 		$admin_src = trailingslashit( get_stylesheet_directory_uri() ) . 'js/dist/admin/' . $admin_scripts;
 
-		wp_register_script( 'tribe-admin-manifest', $manifest_src, [ 'wp-util', 'media-upload', 'media-views' ], time(), true );
-		wp_register_script( 'tribe-admin-vendors', $vendor_src, [ 'tribe-admin-manifest' ], time(), true );
+		wp_register_script( 'tribe-admin-vendors', $vendor_src, [ 'wp-util', 'media-upload', 'media-views' ], time(), true );
 		wp_register_script( 'tribe-admin-scripts', $admin_src, [ 'tribe-admin-vendors' ], time(), true );
 
 		$js_config = new JS_Config();
