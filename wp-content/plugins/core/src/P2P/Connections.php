@@ -62,7 +62,7 @@ class Connections {
 	 */
 	private function get_ids( $direction, $where, $id, $args = [] ) {
 		global $wpdb;
-		$direction = esc_sql( $direction );
+		$direction = ( $direction == 'p2p_to' ) ? 'p2p_to' : 'p2p_from';
 		$sql = "SELECT $direction FROM {$wpdb->p2p}";
 
 		if ( isset( $args['meta']['key'] ) ) {
@@ -70,7 +70,7 @@ class Connections {
 			$sql .= ' ' . $this->prepare_meta_join( $direction, $args['meta']['key'], $value );
 		}
 
-		$where = esc_sql( $where );
+		$where = ( $where == 'p2p_to' ) ? 'p2p_to' : 'p2p_from';
 		$sql .= apply_filters( 'tribe_p2p_where_sql', $wpdb->prepare( " WHERE $where=%d", $id ) );
 
 		/** Set the connection type (relationship) */
@@ -86,8 +86,8 @@ class Connections {
 
 		/** Set order */
 		if ( isset( $args['order'] ) ) {
-			$order = esc_sql( $args['order'] );
-			$orderby = isset( $orderby ) ? esc_sql( $orderby ) : 'p2p_id';
+			$order = ( $args['order'] == 'DESC' ) ? 'DESC' : 'ASC';
+			$orderby = isset( $orderby ) ? sanitize_sql_orderby( $orderby ) : 'p2p_id';
 			$sql .= " ORDER BY $orderby $order";
 		}
 
@@ -107,7 +107,7 @@ class Connections {
 	private function prepare_meta_join( $direction, $meta_key, $meta_value = false ) {
 		global $wpdb;
 
-		$direction = esc_sql( $direction );
+		$direction = ( $direction == 'p2p_to' ) ? 'p2p_to' : 'p2p_from';
 		$join = $wpdb->prepare( "
 			LEFT JOIN {$wpdb->postmeta} AS pm
 			ON {$wpdb->p2p}.$direction = pm.post_id AND pm.meta_key=%s
