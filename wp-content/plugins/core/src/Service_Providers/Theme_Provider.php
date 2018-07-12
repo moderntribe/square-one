@@ -9,6 +9,7 @@ use Pimple\ServiceProviderInterface;
 use Tribe\Project\Request\Request;
 use Tribe\Project\Request\Server;
 use Tribe\Project\Theme\Body_Classes;
+use Tribe\Project\Theme\Full_Size_Gif;
 use Tribe\Project\Theme\Image_Sizes;
 use Tribe\Project\Theme\Image_Wrap;
 use Tribe\Project\Theme\Gravity_Forms_Filter;
@@ -39,6 +40,7 @@ class Theme_Provider implements ServiceProviderInterface {
 	public function register( Container $container ) {
 		$this->request( $container );
 		$this->body_classes( $container );
+		// $this->full_size_gif( $container ); Enable to require full size gifs
 		$this->image_sizes( $container );
 		$this->image_wrap( $container );
 		$this->image_links( $container );
@@ -79,6 +81,21 @@ class Theme_Provider implements ServiceProviderInterface {
 		add_filter( 'body_class', function ( $classes ) use ( $container ) {
 			return $container[ 'theme.body_classes' ]->body_classes( $classes );
 		}, 10, 1 );
+	}
+
+	private function full_size_gif( Container $container ) {
+		$container[ 'theme.full_size_gif' ] = function ( Container $container ) {
+			return new Full_Size_Gif();
+		};
+		add_filter( 'media_send_to_editor', function( $html, $send_id, $attachment ) use ( $container ) {
+			return $container[ 'theme.full_size_gif' ]->full_size_only_gif_html( $html, $send_id, $attachment );
+		}, 10, 3 );
+		add_filter( 'rest_prepare_attachment', function( $response, $post, $request ) use ( $container ) {
+			return $container[ 'theme.full_size_gif' ]->full_size_only_gif_rest( $response, $post, $request );
+		}, 10, 3 );
+		add_filter( 'tribe_image_attributes_src', function( $src, $attachment_id ) use ( $container ) {
+			return $container[ 'theme.full_size_gif' ]->full_size_only_gif_src( $src, $attachment_id );
+		}, 10, 2 );
 	}
 
 	private function image_sizes( Container $container ) {
