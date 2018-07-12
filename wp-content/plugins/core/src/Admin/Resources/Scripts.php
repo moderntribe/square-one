@@ -32,7 +32,6 @@ class Scripts {
 		add_action( 'admin_print_footer_scripts', function () {
 
 			wp_enqueue_script( 'tribe-admin-vendors' );
-			wp_enqueue_script( 'tribe-admin-manifest' );
 			wp_enqueue_script( 'tribe-admin-scripts' );
 
 			// since footer scripts have already printed, process the queue again on the next available action
