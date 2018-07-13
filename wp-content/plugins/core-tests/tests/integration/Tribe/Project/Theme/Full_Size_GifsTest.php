@@ -19,7 +19,7 @@ class Full_Size_GifsTest extends WPTestCase {
 		// before
 		parent::setUp();
 
-		$filename = '/application/www/wp-content/plugins/core-tests/tests/_data/test.gif';
+		$filename = codecept_data_dir( 'test.gif' );
 		$parent_post_id = wp_insert_post( [ 'title' => 'test_gifs', 'post_type' => 'post' ] );
 
 		$filetype = wp_check_filetype( basename( $filename ), null );
@@ -57,13 +57,15 @@ class Full_Size_GifsTest extends WPTestCase {
 		$this->assertNotSame( $full_size_src, $thumbnail_src );
 
 		$full_size_gif = new Full_Size_Gif();
-		add_filter( 'tribe_image_attributes_src', function( $src, $attachment_id ) use ( $full_size_gif ) {
+		$filter_image_src = function( $src, $attachment_id ) use ( $full_size_gif ) {
 			return $full_size_gif->full_size_only_gif_src( $src, $attachment_id );
-		}, 10, 2 );
+		};
+		add_filter( 'tribe_image_attributes_src', $filter_image_src, 10, 2 );
 
 		$thumbnail_html = $thumbnail->render();
 		$xml = simplexml_load_string( $thumbnail_html );
 		$thumbnail_src = (string) $xml->img[0]['data-src'];
+		remove_filter( 'tribe_image_attributes_src', $filter_image_src );
 
 		$this->assertSame( $full_size_src, $thumbnail_src );
 	}

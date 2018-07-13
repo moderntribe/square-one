@@ -89,13 +89,10 @@ class Full_Size_Gif {
 	/**
 	 * @param $src
 	 *
-	 * @return mixed
+	 * @return bool
 	 */
 	public function is_gif( $src ) {
-		$parts = explode( '.', $src );
-		$ext   = strtolower( $parts[ \count( $parts ) - 1 ] );
-
-		return $ext === 'gif';
+		return ( pathinfo( $src, PATHINFO_EXTENSION ) === 'gif' );
 	}
 
 }
