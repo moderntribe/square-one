@@ -28,6 +28,8 @@ class Gravity_Forms_Filter {
 		add_filter( 'gform_pre_render', [ $this, 'deactivate_gf_animations' ] );
 		add_filter( 'gform_confirmation_anchor', '__return_false' );
 		add_filter( 'gform_tabindex', '__return_false' );
+		add_filter( 'pre_option_rg_gforms_disable_css', '__return_true' );
+		add_filter( 'pre_option_rg_gforms_enable_html5', '__return_true' );
 	}
 
 	/**
@@ -55,7 +57,7 @@ class Gravity_Forms_Filter {
 			$indices = array_keys( $field['choices'] );
 			$index   = array_pop( $indices );
 
-			$new_markup = sprintf( '<label for="choice_%1$s_%2$s_%3$s" class="gf-radio-checkbox-other-placeholder"><span class="u-visual-hide">%4$s</span></label></li>',
+			$new_markup = sprintf( '<label for="choice_%1$s_%2$s_%3$s" class="gf-radio-checkbox-other-placeholder"><span class="a11y-visual-hide">%4$s</span></label></li>',
 				$field['formId'], $field['id'], $index, __( 'Other', 'tribe' ) );
 
 			$choice_markup = str_replace( '</li>', $new_markup, $choice_markup );

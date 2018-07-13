@@ -43,6 +43,11 @@ usage: `wp s1 generate cpt <cpt> [--single=<single>] [--plural=<plural>] [--conf
 Creates a new Taxonomy and accepts single/plural strings and a comma separated list of post-types to associate with. Further the creation of a config file is optional (defaults to true).
 usage: `wp s1 generate tax <tax> [--single=<single>] [--plural=<plural>] [--post_types=<post_type,post_type>] [--config]`
 
+`wp s1 generate settings`<BR>
+Creates a new empty settings page.
+Page name value should be treated like a cpt/tax name. 
+usage: `wp s1 generate settings <settings-page-name>`
+
 #### Utility ####
 `wp s1 pimple`<BR>
 Dumps the files needed for [silex-pimple-plugin](https://plugins.jetbrains.com/plugin/7809-silex-pimple-plugin) to provide jump-to definition in PHP Storm.

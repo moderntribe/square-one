@@ -1,11 +1,11 @@
 # Prerequisites
 
 1. You need to install the latest **EDGE** version of the native Docker client for your platform. For Mac you can 
-download it from [here](https://store.docker.com/editions/community/docker-ce-desktop-mac). For Windows you can download it from [here](https://store.docker.com/editions/community/docker-ce-desktop-windows). If you use Linux you can use the package manager of your distribution of choice, in your case using the stable version instead of EDGE is fine.
+download it from [here](https://store.docker.com/editions/community/docker-ce-desktop-mac). For Windows, ensure you use **Docker CE STABLE** as EDGE is [broken](https://github.com/docker/for-win/issues/1829) with the tribe-proxy container. You can download it from [here](https://store.docker.com/editions/community/docker-ce-desktop-windows). If you use Linux you can use the package manager of your distribution of choice, in your case using the stable version instead of EDGE is fine.
 2. Clean your environment from the old tools you were using. Make sure you don't have installed _dnsmasq_ or any other DNS server, and that you don't have any entries for **.tribe** domains in your /etc/hosts
 3. **For Windows users:** [enable Hyper-V](https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v) and [enable Bash](https://msdn.microsoft.com/en-us/commandline/wsl/install_guide?f=255&MSPPError=-2147217396). If you're on an older Windows version or don't want the Linux subsystem for some weird reason, install [Cygwin](https://www.cygwin.com/).
 4. **For Windows users:** If you have issues with Bash, use [babun](https://github.com/babun/babun) and install [babun-docker](https://github.com/tiangolo/babun-docker).
-5. Update your computer's primary DNS server to `127.0.0.1` and the secondary to `8.8.8.8`. Instructions for [Mac](http://osxdaily.com/2015/12/05/change-dns-server-settings-mac-os-x/), [Windows](https://www.windowscentral.com/how-change-your-pcs-dns-settings-windows-10) and [Linux](https://support.rackspace.com/how-to/changing-dns-settings-on-linux/). 
+5. Update your computer's primary DNS server to `127.0.0.1` and the secondary to `1.1.1.1`. Instructions for [Mac](http://osxdaily.com/2015/12/05/change-dns-server-settings-mac-os-x/), [Windows](https://www.windowscentral.com/how-change-your-pcs-dns-settings-windows-10) and [Linux](https://support.rackspace.com/how-to/changing-dns-settings-on-linux/). For Windows users you may need to change the DNS servers on the vEthernet (Default Switch) adapter instead of your main adapter.
 
 # Your first run ever
 
@@ -13,6 +13,13 @@ download it from [here](https://store.docker.com/editions/community/docker-ce-de
 2. On a terminal window that can run `bash`, go to your Square One checkout's `dev/docker/global` folder. 
 3. **Only if you are on Linux:** Figure out what your Docker service IP address is. If you look at the result of `ifconfig` you should see an interface named `Docker0` or `Docker1` or similar. Take note of the `inet addr` field and create a `.env` file on the `global` folder with the contents of `.env.sample` but replacing `0.0.0.0` with your Docker IP. Tell Daniel or Jonathan what that IP is, maybe we can find some commonalities and automate the process for Linux too.
 4. Run `bash start.sh`. It's going to take a bit. Only this time, I promise.
+4.1 While running the command above you might run into an issue that reads like this:
+	```
+	Starting docker-compose project: global
+	Creating network "global_proxy" with driver "bridge"
+	ERROR: Pool overlaps with other one on this address space
+	```
+	This might happen if you are using, or used, a number of Docker-managed local development stacks; running `docker network prune` should solve the issue. 
 5. One thing `bash.sh` did was to create a certificate on your local machine for a Central Authority so you can sign "real" SSL certificates. This is a bit messy, but the alternative would be having all of that as part of the repo, and it's quite insecure. Any potential attacker with access to our repo could basically fake every secure site on your computer. Whatever. This is better. Trust me. Obviously no one trusts you as a CA yet, so you need to tell your computer to trust it. If you're on OSX, congratulations. You're done. Use this time to go give Jonathan a taco for automating it for you. If you're on Windows [follow this](http://www.cs.virginia.edu/~gsw2c/GridToolsDir/Documentation/ImportTrustedCertificates.htm) or [this](https://unix.stackexchange.com/questions/90450/adding-a-self-signed-certificate-to-the-trusted-list) if you're on Linux.
 6. Open your mysql client (SequelPro, HeidiSQL, etc). Try to connect to your new MySQL server with this info: `host: mysql.tribe - port: 3306 - username: root - password: password`. Open a browser and go to http://mailhog.tribe. Hopefully it all works. If it doesn't try clearing your OS DNS cache. If it still doesn't work submit a bug report (ie: talk to Daniel or Jonathan).
 7. You're done. You can go back to the terminal and run `bash stop.sh` or just leave global running if you're planning on doing some work.
@@ -48,4 +55,46 @@ download it from [here](https://store.docker.com/editions/community/docker-ce-de
 7. If you need to change the Dockerfile for building the php-fpm image, change the image name from `image: tribe-phpfpm:7.0` to whatever makes sense on your docker-compose.yml
 8. That's it. Be happy.
 
+# Multisite setup on a new project
 
+1. After installing WordPress, run the wp-cli command
+    ```
+    wp core multisite-convert
+    ```
+    If using subdomains then use
+    ```
+    wp core multisite-convert --subdomains
+    ```
+    Then you will need to copy the output from the command into your local-config.php file and visit /wp-admin/network/setup.php to copy the changes you need in your .htaccess file
+2. In your wp-config.php change 
+    ```
+    'WP_ALLOW_MULTISITE' => tribe_getenv( 'WP_ALLOW_MULTISITE', false ),
+    ```
+    to
+    ```
+    'WP_ALLOW_MULTISITE' => tribe_getenv( 'WP_ALLOW_MULTISITE', true ),
+    ```
+3. In dev/docker/phpdocker/nginx/nginx.conf uncomment the two lines below by removing the # symbol at the beginning
+    ```
+    location @rewrites {
+        rewrite /wp-admin$ $scheme://$host$uri/ permanent;
+        #rewrite ^(/[^/]+)?(/wp-(admin|includes|content).*) $2 last;
+        #rewrite ^(/[^/]+)?(/.*\.php) $2 last;
+        rewrite ^ /index.php last;
+    }
+    ```
+4. You may need to update this in your local-config.php and use your local domain which will be your projectID.tribe most likely
+    ```
+    define( 'DOMAIN_CURRENT_SITE', '{your-project-domain.tribe' );
+    ``` 
+    In your wp-config.php you will need to define the domain for the production site.
+5. In your wp-config.php you also need to set 
+   ```
+   'MULTISITE' => tribe_getenv( 'WP_MULTISITE', true ),
+   ```
+   and if you are using subdomains instead of paths set
+   ```
+   'SUBDOMAIN_INSTALL' => tribe_getenv( 'SUBDOMAIN_INSTALL', true ),
+   ```
+6. Restart your project's docker container by running /dev/docker/stop.sh then /dev/docker/start.sh
+7. You should now have a fully functioning multisite setup.

@@ -26,8 +26,8 @@ class Pimple_DumpTest extends \Codeception\TestCase\WPTestCase
     }
 
 	public function test_requires_container() {
-		$this->expectException(\LogicException::class);
-		//new class extends Pimple_Dump {};
+		$this->expectException( \TypeError::class );
+		new class extends Pimple_Dump {};
 	}
 
 }

@@ -1,5 +1,6 @@
 ![./example/example.svg](./logo.svg)
 
+[![Build Status](https://travis-ci.com/moderntribe/square-one.svg?token=1evq9eFenqSy9NpYbMyT&branch=master)](https://travis-ci.com/moderntribe/square-one)
 
 [1] is a development framework created by Modern Tribe for use in our WordPress projects. It contains a base for:
 
@@ -22,10 +23,11 @@
 * **Theme**
   * [Overview](/docs/theme/README.md)
   * [Markup and Style](/docs/theme/markup-and-style.md)
-  * [Accessibility](/docs/theme/accessbility.md)
+  * [Accessibility](/docs/theme/accessibility.md)
   * [Image Handling](/docs/theme/images.md)
   * [Fonts](/docs/theme/fonts.md)
   * [Icons](/docs/theme/icons.md)
+  * [Twig](/docs/theme/twig.md)
     * **Css**
       * [Overview](/docs/theme/css/README.md)
       * [PostCSS](/docs/theme/css/postcss.md)
@@ -39,24 +41,34 @@
       * [Selectors](/docs/theme/js/selectors.md)
       * [Events](/docs/theme/js/events.md)
       * [Jquery](/docs/theme/js/jquery.md)
+    * **Components**
+      * [Overview](/docs/theme/components/README.md)
+      * [Accordion](/docs/theme/components/accordion.md)
+      * [Button](/docs/theme/components/button.md)
+      * [Card](/docs/theme/components/card.md)
+      * [Content Block](/docs/theme/components/content_block.md)
+      * [Quote](/docs/theme/components/quote.md)
+      * [Slider](/docs/theme/components/slider.md)
+      * [Template](/docs/theme/components/template.md)
+      * [Text](/docs/theme/components/text.md)
 * **Backend**
-    * [Overview](/docs/backend/README.md)
-      * [Container / Core.php](/docs/backend/container.md)
-      * [Custom Post Types](/docs/backend/post-types.md)
-      * [Custom Taxonomies](/docs/backend/taxonomies.md)
-      * [Post & Taxonomy Meta](/docs/backend/post-meta.md)
-      * [Service Providers](/docs/backend/service-providers.md)
-      * [Template Controllers](/docs/backend/data.md)
-    * Plugins/Extenstions
-      * [Twig](https://twig.symfony.com/)
-      * [Posts 2 Post](https://github.com/scribu/wp-posts-to-posts/wiki)
-      * [Extended Post Types](https://github.com/johnbillion/extended-cpts/blob/master/README.md)
-      * [Extended Taxonomies](https://github.com/johnbillion/extended-taxos/blob/master/README.md)
+  * [Overview](/docs/backend/README.md)
+  * [Container / Core.php](/docs/backend/container.md)
+  * [Custom Post Types](/docs/backend/post-types.md)
+  * [Custom Taxonomies](/docs/backend/taxonomies.md)
+  * [Post & Taxonomy Meta](/docs/backend/post-meta.md)
+  * [Service Providers](/docs/backend/service-providers.md)
+  * [Template Controllers](/docs/backend/data.md)
+  * **Plugins/Extensions**
+    * [Twig](https://twig.symfony.com/)
+    * [Posts 2 Post](https://github.com/scribu/wp-posts-to-posts/wiki)
+    * [Extended Post Types](https://github.com/johnbillion/extended-cpts/blob/master/README.md)
+    * [Extended Taxonomies](https://github.com/johnbillion/extended-taxos/blob/master/README.md)
 * **Tests and Code Quality**
   * [Overview](/docs/tests/README.md)
   * [Codeception](/docs/tests/codeception.md)
   * [Jest](/docs/tests/jest.md)
-* **Local Dev Envoriment**
+* **Local Dev Environment**
   * [Docker](/dev/docker/README.md)
 
 
@@ -80,21 +92,6 @@ GLOMAR is a plugin that blocks the frontend of the site from public access. If y
     define( 'TRIBE_GLOMAR', false );
 
 
-## Upgrade Notice
-
-= 1.1 =
-Moved the project dependencies to Composer  
-Added Codeception tests examples and instructions  
-= 1.0 =
-Initial Release
-
-
 ## Changelog
 
-
-= 1.1 =
-Moved the project dependencies to Composer  
-Added Codeception tests examples and instructions  
-= 1.0 =
-Initial Release
-
+[View changelog](./changelog.md)
