@@ -53,6 +53,7 @@ wp-content/plugins/*
 !wp-content/plugins/tribe-branding
 !wp-content/plugins/tribe-glomar
 !wp-content/plugins/tribe-json-ld
+!wp-content/plugins/wp-tideways-profiler
 
 # Packages #
 ############
