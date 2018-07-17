@@ -24,7 +24,7 @@ class ImageText extends Panel {
 	protected function get_mapped_panel_data(): array {
 
 		$data = [
-			'wrapper_classes' => $this->get_panel_classes(),
+			'wrapper_classes' => $this->get_wrapper_classes(),
 			'image'           => $this->get_panel_image(),
 			'content_block'   => $this->get_content_block(),
 		];
@@ -140,7 +140,7 @@ class ImageText extends Panel {
 		return $image_obj->render();
 	}
 
-	protected function get_panel_classes() {
+	protected function get_wrapper_classes() {
 
 		$classes = [];
 
@@ -148,7 +148,7 @@ class ImageText extends Panel {
 			$classes[] = 'g-row--reorder-2-col';
 		}
 
-		return implode( ' ', $classes );
+		return Util::class_attribute( $classes, false );
 	}
 
 	public static function instance() {
