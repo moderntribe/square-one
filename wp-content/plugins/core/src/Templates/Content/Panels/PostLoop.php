@@ -47,15 +47,15 @@ class PostLoop extends Panel {
 		$posts = [];
 
 		if ( ! empty( $this->panel_vars[ PostLoopPanel::FIELD_POSTS ] ) ) {
-			for ( $i = 0; $i < count( $this->panel_vars[ PostLoopPanel::FIELD_POSTS ] ); $i ++ ) {
+			for ( $i = 0; $i < count( $this->panel_vars[ PostLoopPanel::FIELD_POSTS ] ); $i++ ) {
 
 				$post = $this->panel_vars[ PostLoopPanel::FIELD_POSTS ][ $i ];
 
 				$options = [
-					Card::POST_TITLE => $this->get_post_title( esc_html( get_the_title( $post['post_id'] ) ), $i ),
-					Card::IMAGE      => $this->get_post_image( get_post_thumbnail_id( $post['post_id'] ) ),
-					Card::PRE_TITLE  => get_the_category_list( '', '', $post['post_id'] ),
-					Card::BUTTON     => $this->get_post_button( $post['post_id'] ),
+					Card::POST_TITLE => $this->get_post_title( esc_html( $post[ 'title' ] ), $i ),
+					Card::IMAGE      => $this->get_post_image( get_post_thumbnail_id( $post[ 'post_id' ] ) ),
+					Card::PRE_TITLE  => get_the_category_list( '', '', $post[ 'post_id' ] ),
+					Card::BUTTON     => $this->get_post_button( $post[ 'link' ] ),
 				];
 
 				$post_obj = Card::factory( $options );
@@ -108,11 +108,11 @@ class PostLoop extends Panel {
 		return $image_obj->render();
 	}
 
-	protected function get_post_button( $post_id ) {
+	protected function get_post_button( $post_link ) {
 		$options = [
-			Button::URL    		=> esc_url( get_the_permalink( $post_id ) ),
-			Button::LABEL  		=> __( 'View Post', 'tribe' ),
-			Button::TARGET 		=> '_self',
+			Button::URL         => esc_url( $post_link ),
+			Button::LABEL       => __( 'View Post', 'tribe' ),
+			Button::TARGET      => '_self',
 			Button::BTN_AS_LINK => true,
 			Button::CLASSES     => [ 'c-cta' ],
 		];
@@ -123,6 +123,6 @@ class PostLoop extends Panel {
 	}
 
 	public static function instance() {
-		return tribe_project()->container()['twig.templates.content/panels/postloop'];
+		return tribe_project()->container()[ 'twig.templates.content/panels/postloop' ];
 	}
 }
