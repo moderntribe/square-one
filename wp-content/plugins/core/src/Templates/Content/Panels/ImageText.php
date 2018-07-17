@@ -32,6 +32,13 @@ class ImageText extends Panel {
 		return $data;
 	}
 
+	/**
+	 * Overrides `get_classes()` from the Panel parent class.
+	 *
+	 * Return value is available in the twig template via the `classes` twig variable in the parent class.
+	 *
+	 * @return string
+	 */
 	protected function get_classes(): string {
 		$classes = [
 			'panel',
