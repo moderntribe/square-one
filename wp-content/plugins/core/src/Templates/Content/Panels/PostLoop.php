@@ -110,7 +110,7 @@ class PostLoop extends Panel {
 
 	protected function get_post_button( $post_link ) {
 		$options = [
-			Button::URL         => esc_url( $post_link ),
+			Button::URL         => esc_url( $post_link[ 'url' ] ),
 			Button::LABEL       => __( 'View Post', 'tribe' ),
 			Button::TARGET      => '_self',
 			Button::BTN_AS_LINK => true,
