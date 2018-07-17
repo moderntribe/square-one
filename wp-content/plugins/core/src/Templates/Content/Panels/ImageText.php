@@ -9,6 +9,7 @@ use Tribe\Project\Templates\Components\Content_Block;
 use Tribe\Project\Templates\Components\Text;
 use Tribe\Project\Templates\Components\Title;
 use Tribe\Project\Templates\Components\Button;
+use Tribe\Project\Theme\Util;
 
 class ImageText extends Panel {
 
@@ -29,6 +30,18 @@ class ImageText extends Panel {
 		];
 
 		return $data;
+	}
+
+	protected function get_classes(): string {
+		$classes = [
+			'panel',
+			's-wrapper',
+			'site-panel',
+			's-wrapper--no-padding',
+			sprintf( 'site-panel--%s', $this->panel->get_type_object()->get_id() ),
+		];
+
+		return Util::class_attribute( $classes );
 	}
 
 	protected function get_content_block() {
