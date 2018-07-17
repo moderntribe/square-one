@@ -53,7 +53,7 @@ class PostLoop extends Panel {
 
 				$options = [
 					Card::POST_TITLE => $this->get_post_title( esc_html( $post[ 'title' ] ), $i ),
-					Card::IMAGE      => $this->get_post_image( get_post_thumbnail_id( $post[ 'post_id' ] ) ),
+					Card::IMAGE      => $this->get_post_image( $post[ 'image' ] ),
 					Card::PRE_TITLE  => get_the_category_list( '', '', $post[ 'post_id' ] ),
 					Card::BUTTON     => $this->get_post_button( $post[ 'link' ] ),
 				];
