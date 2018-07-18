@@ -54,19 +54,6 @@ class Full_Size_GifsTest extends WPTestCase {
 		$xml = simplexml_load_string( $thumbnail_html );
 		$thumbnail_src = (string) $xml->img[0]['data-src'];
 
-		$this->assertNotSame( $full_size_src, $thumbnail_src );
-
-		$full_size_gif = new Full_Size_Gif();
-		$filter_image_src = function( $src, $attachment_id ) use ( $full_size_gif ) {
-			return $full_size_gif->full_size_only_gif_src( $src, $attachment_id );
-		};
-		add_filter( 'tribe_image_attributes_src', $filter_image_src, 10, 2 );
-
-		$thumbnail_html = $thumbnail->render();
-		$xml = simplexml_load_string( $thumbnail_html );
-		$thumbnail_src = (string) $xml->img[0]['data-src'];
-		remove_filter( 'tribe_image_attributes_src', $filter_image_src );
-
 		$this->assertSame( $full_size_src, $thumbnail_src );
 	}
 

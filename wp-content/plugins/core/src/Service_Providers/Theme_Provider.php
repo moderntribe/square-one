@@ -40,7 +40,7 @@ class Theme_Provider implements ServiceProviderInterface {
 	public function register( Container $container ) {
 		$this->request( $container );
 		$this->body_classes( $container );
-		// $this->full_size_gif( $container ); Enable to require full size gifs
+		// $this->full_size_gif( $container ); Uncomment to require full size gifs
 		$this->image_sizes( $container );
 		$this->image_wrap( $container );
 		$this->image_links( $container );
@@ -87,15 +87,9 @@ class Theme_Provider implements ServiceProviderInterface {
 		$container[ 'theme.full_size_gif' ] = function ( Container $container ) {
 			return new Full_Size_Gif();
 		};
-		add_filter( 'media_send_to_editor', function( $html, $send_id, $attachment ) use ( $container ) {
-			return $container[ 'theme.full_size_gif' ]->full_size_only_gif_html( $html, $send_id, $attachment );
+		add_filter( 'image_downsize', function( $data, $id, $size ) use ( $container ) {
+			return $container[ 'theme.full_size_gif' ]->full_size_only_gif( $data, $id, $size );
 		}, 10, 3 );
-		add_filter( 'rest_prepare_attachment', function( $response, $post, $request ) use ( $container ) {
-			return $container[ 'theme.full_size_gif' ]->full_size_only_gif_rest( $response, $post, $request );
-		}, 10, 3 );
-		add_filter( 'tribe_image_attributes_src', function( $src, $attachment_id ) use ( $container ) {
-			return $container[ 'theme.full_size_gif' ]->full_size_only_gif_src( $src, $attachment_id );
-		}, 10, 2 );
 	}
 
 	private function image_sizes( Container $container ) {

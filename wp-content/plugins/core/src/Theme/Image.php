@@ -113,7 +113,6 @@ class Image {
 		$attrs = [ ];
 		if ( $this->options[ 'src' ] ) {
 			$src        = wp_get_attachment_image_src( $this->image_id, $this->options['src_size'] );
-			$src        = apply_filters( 'tribe_image_attributes_src', $src, $this->image_id );
 			$src_width  = $src[1];
 			$src_height = $src[2];
 			$src        = $src[0];
@@ -220,7 +219,6 @@ class Image {
 		$attribute = [];
 		foreach ( $this->options[ 'srcset_sizes' ] as $size ) {
 			$src = wp_get_attachment_image_src( $this->image_id, $size );
-			$src = apply_filters( 'tribe_image_attributes_src', $src, $this->image_id );
 			// Don't add nonexistent intermediate sizes to the src_set. It ends up being the full-size URL.
 			if( 'full' !== $size && true === $src[3] ) {
 				$attribute[] = sprintf( '%s %dw %dh', $src[0], $src[1], $src[2] );
