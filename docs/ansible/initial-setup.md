@@ -146,7 +146,6 @@ In each of the inventory `vault.yml` files, here's an example of what the conten
 rds_master_user: root
 rds_master_password: "CHANGEME"
 mysql_root_username: "{{ rds_master_user }}"
-mysql_root_name: "{{ rds_master_user }}"
 mysql_root_password: "{{ rds_master_password }}"
 wp_site_db_password: "CHANGEME"
 wp_site_admin_password: "CHANGEME"

@@ -31,7 +31,7 @@
         - opcache
 
     - role: geerlingguy.memcached
-      becom: yes
+      become: yes
       tags:
         - memcached
       when: memcached_install
@@ -87,6 +87,7 @@
       tags:
         - composer
         - composer-auth
+      when: vaulted_composer_github_oauth_token is defined
 
     - role: tribe/roles/cron
       tags:

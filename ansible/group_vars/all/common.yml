@@ -36,13 +36,13 @@ keep_releases: 3
 #
 # Cron
 #
-# cron_jobs_enable = setup cron jobs
+# cron_jobs_enabled = setup cron jobs
 # cron_jobs = Array of cron jobs
 #
 # See roles/cron/tasks/main.yml for variables to use in
 # cron_jobs array items
 ##############################################################
-cron_jobs_enable: false
+cron_jobs_enabled: false
 # cron_jobs: []
 
 ##############################################################
@@ -135,23 +135,23 @@ mailhog_install: false
 #
 # Memcached
 #
-# memcached_enable       = setup memcached (can be external or internally installed service)
+# memcached_enabled       = setup memcached (can be external or internally installed service)
 # memcached_install      = indicates whether the memcached install should happen on the server being configured
 #
 # These are the other vars. The commented out values are the defaults
-# memcached_user          = user under which memcached daemon will run
 # memcached_port          = port for memcached
 # memcached_listen_ip     = ip address memcached will listen on
+# memcached_user          = user under which memcached daemon will run
 # memcached_memory_limit  = max amount of RAM (in MB)
 # memcached_connections   = max number of simultaneous connections
 # memcached_log_file      = location of log file
 # memcached_log_verbosity = -v is logging and -vv is debug logging
 ##############################################################
-memcached_enable: true
+memcached_enabled: true
 memcached_install: true
+memcached_port: 11211
+memcached_listen_ip: 127.0.0.1
 # memcached_user: memcache
-# memcached_port: 11211
-# memcached_listen_ip: 127.0.0.1
 # memcached_memory_limit: 64
 # memcached_connections: 1024
 # memcached_log_file: /var/log/memcached.log
