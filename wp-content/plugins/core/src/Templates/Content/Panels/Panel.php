@@ -3,6 +3,7 @@
 
 namespace Tribe\Project\Templates\Content\Panels;
 
+use Tribe\Project\Theme\Util;
 use Tribe\Project\Twig\Twig_Template;
 
 class Panel extends Twig_Template {
@@ -20,6 +21,7 @@ class Panel extends Twig_Template {
 			'index'       => get_nest_index(),
 			'children'    => $this->get_children( $this->panel ),
 			'object'      => $this->panel,
+			'classes'     => $this->get_classes(),
 			'title'       => isset( $this->panel_vars['title'] ) ? $this->get_title( $this->panel_vars['title'] ) : false,
 			'description' => isset( $this->panel_vars['description'] ) ? $this->get_description( $this->panel_vars['description'] ) : false,
 		];
@@ -33,6 +35,17 @@ class Panel extends Twig_Template {
 		}, $panel->get_children() );
 
 		return $children;
+	}
+
+	protected function get_classes(): string {
+		$classes = [
+			'panel',
+			's-wrapper',
+			'site-panel',
+			sprintf( 'site-panel--%s', $this->panel->get_type_object()->get_id() ),
+		];
+
+		return Util::class_attribute( $classes );
 	}
 
 	protected function get_title( $field, $classes = [] ) {

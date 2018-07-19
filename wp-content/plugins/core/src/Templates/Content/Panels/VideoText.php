@@ -9,6 +9,7 @@ use Tribe\Project\Templates\Components\Content_Block;
 use Tribe\Project\Templates\Components\Video;
 use Tribe\Project\Templates\Components\Text;
 use Tribe\Project\Templates\Components\Title;
+use Tribe\Project\Theme\Util;
 
 class VideoText extends Panel {
 
@@ -23,7 +24,7 @@ class VideoText extends Panel {
 	protected function get_mapped_panel_data(): array {
 
 		$data = [
-			'wrapper_classes' => $this->get_panel_classes(),
+			'wrapper_classes' => $this->get_wrapper_classes(),
 			'video'           => $this->get_panel_video(),
 			'content_block'   => $this->get_content_block(),
 		];
@@ -118,7 +119,7 @@ class VideoText extends Panel {
 		return $video->render();
 	}
 
-	protected function get_panel_classes() {
+	protected function get_wrapper_classes() {
 
 		$classes = [];
 
@@ -126,7 +127,7 @@ class VideoText extends Panel {
 			$classes[] = 'g-row--reorder-2-col';
 		}
 
-		return implode( ' ', $classes );
+		return Util::class_attribute( $classes, false );
 	}
 
 	public static function instance() {
