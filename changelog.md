@@ -10,6 +10,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 * Ansible boilerplate directory
 
+## [1.4.1] - 2018-07-12
+
+### Fixed
+* Removed manifest.js enqueue from admin scripts. This was a remnant from the previous version of Webpack which was updated to v4.5.0 in v1.2.
+
 ## [1.4] - 2018-06-19
 
 ### Changed
