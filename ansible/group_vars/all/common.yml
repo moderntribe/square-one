@@ -78,17 +78,21 @@ datadog_install: false
 #
 # Elasticsearch
 #
+# elasticsearch_enabled = setup elasticsearch (can be external or internally installed service)
 # elasticsearch_install = install Elasticsearch on this server
 # elasticsearch_plugins = Elasticsearch plugins to use
 # elasticsearch_major_version = Version for Elasticsearch
+# elasticsearch_endpoint = ES endpoint to use with this installation
 #
 # Typically these values won't be changed in all/common.yml
 # but instead added/changed in the relevant
 # inventory/common.yml
 ##############################################################
+elasticsearch_enabled: false
 elasticsearch_install: false
 # elasticsearch_major_version: "5.x"
 # elasticsearch_plugins: []
+# elasticsearch_endpoint: http://localhost:9200
 
 ##############################################################
 #
