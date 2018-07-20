@@ -34,7 +34,7 @@
       become: yes
       tags:
         - memcached
-      when: memcached_install
+      when: memcached_install is defined and memcached_install == true
 
     - role: geerlingguy.composer
       become: yes
