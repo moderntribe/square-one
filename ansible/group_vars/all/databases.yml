@@ -31,8 +31,3 @@ mysql_users:
 #   - mariadb-client
 #   - mariadb-server
 #   - python-mysqldb
-
-##############################################################
-# database_server_type = server type (base or rds)
-##############################################################
-database_server_type: base
