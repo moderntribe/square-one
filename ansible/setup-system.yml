@@ -67,7 +67,6 @@
       when: newrelic_install
 
     - role: tribe/roles/nvm
-      deploy_project: wordpress
       tags:
         - nvm
 
@@ -76,6 +75,8 @@
       tags:
         - logs
         - logrotate
+      vars:
+        logs_path: "{{ projects.wordpress.path }}/logs"
 
     - role: Datadog.datadog
       become: yes
