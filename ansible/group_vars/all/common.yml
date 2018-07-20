@@ -225,3 +225,16 @@ common_apt_packages:
 ##############################################################
 yarn_debian_repo_url: "https://dl.yarnpkg.com/debian/ stable main"
 yarn_debian_repo_gpg_key_url: "https://dl.yarnpkg.com/debian/pubkey.gpg"
+
+##############################################################
+# This setting is to add any extra code to local-config.php
+# that's not covered in the template. Be mindful of what you
+# add here, as there is no validation. Also keep in mind that
+# it requires the pipe and indentation to be respected.
+# Furthermore, if these should be api keys or other sensitive
+# information, this config SHOULD BE VAULTED.
+# local_config_extras: |
+#   define( 'SOMETHING_API_KEY', 'herp' );
+#   define( 'VERY_SECRET_VALUE', 'derp' );
+##############################################################
+# local_config_extras: |
