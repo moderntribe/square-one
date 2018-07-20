@@ -152,7 +152,7 @@ mailhog_install: false
 # memcached_log_verbosity = -v is logging and -vv is debug logging
 ##############################################################
 memcached_enabled: false
-# memcached_install: true
+memcached_install: false
 # memcached_port: 11211
 # memcached_listen_ip: 127.0.0.1
 # memcached_user: memcache
