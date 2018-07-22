@@ -68,6 +68,7 @@ class Process extends Command {
 
 			// If the queue is empty, sleep on it and then clear it again.
 			if ( ! $queue->count() ) {
+				\WP_CLI::debug( 'Queue is empty. Sleeping...' );
 				sleep( 1 );
 				continue;
 			}
@@ -75,6 +76,7 @@ class Process extends Command {
 			try {
 				$job = $queue->reserve();
 			} catch ( \Exception $e ) {
+				\WP_CLI::debug( 'Unable to reserve task from queue. Sleeping...' );
 				sleep( 1 );
 				continue;
 			}
@@ -82,6 +84,7 @@ class Process extends Command {
 			$task_class = $job->get_task_handler();
 
 			if ( ! class_exists( $task_class ) ) {
+				\WP_CLI::debug( sprintf( 'Class %s does not exist.', $task_class ) );
 				$queue->nack( $job->get_job_id() );
 				return;
 			}
@@ -91,8 +94,10 @@ class Process extends Command {
 
 			if ( $task->handle( $job->get_args() ) ) {
 				// Acknowledge.
+				\WP_CLI::debug( sprintf( 'ACK: %s (%s)', $job->get_job_id(), $task_class ) );
 				$queue->ack( $job->get_job_id() );
 			} else {
+				\WP_CLI::debug( sprintf( 'NACK: %s (%s)', $job->get_job_id(), $task_class ) );
 				$queue->nack( $job->get_job_id() );
 			}
 		}
