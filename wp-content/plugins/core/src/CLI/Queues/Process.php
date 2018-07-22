@@ -64,7 +64,7 @@ class Process extends Command {
 		$endtime = time() + $this->timelimit;
 
 		// Run forever.
-		while ( $endtime === 0 || time() < $endtime ) {
+		while ( $this->timelimit === 0 || time() < $endtime ) {
 
 			// If the queue is empty, sleep on it and then clear it again.
 			if ( ! $queue->count() ) {
