@@ -9,6 +9,6 @@
   },
   "require-dev": {
     "lucatume/wp-browser": "^1.21",
-    "wp-cli/wp-cli": "master"
+    "wp-cli/wp-cli": "dev-master"
   }
 }
