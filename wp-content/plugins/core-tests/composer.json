@@ -8,7 +8,7 @@
     "preferred-install": "dist"
   },
   "require-dev": {
-    "lucatume/wp-browser": "^1.21",
+    "lucatume/wp-browser": "^2.1",
     "wp-cli/wp-cli": "dev-master"
   }
 }

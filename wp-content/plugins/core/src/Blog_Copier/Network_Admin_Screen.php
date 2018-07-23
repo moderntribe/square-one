@@ -172,6 +172,12 @@ class Network_Admin_Screen {
 				}
 			}
 		} else {
+			$args           = $_POST[ self::NAME ];
+			$args[ 'user' ] = get_current_user_id();
+
+			$config = new Copy_Configuration( $args );
+			do_action( 'tribe/project/copy-blog/copy', $config );
+
 			add_settings_error( self::NAME, 'blog_copy_init', __( 'Your copy is in progress.', 'tribe' ), 'updated' );
 		}
 		set_transient( 'settings_errors', get_settings_errors(), 30 );
