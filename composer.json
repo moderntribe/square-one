@@ -46,7 +46,7 @@
     "hirak/prestissimo":"0.3.7",
     "composer/installers":"1.4.0",
     "johnpbloch/wordpress-core-installer":"1.0.0",
-    "johnpbloch/wordpress-core": "4.9.4",
+    "johnpbloch/wordpress-core": "4.9.7",
     "wpackagist-plugin/configure-smtp": "3.1",
     "wpackagist-plugin/gravity-forms-wcag-20-form-fields": "1.6.0",
     "wpackagist-plugin/limit-login-attempts": "2.0beta3",
@@ -83,11 +83,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Tribe\\Project\\":"wp-content/plugins/core/src",
-      "Tribe\\Libs\\": "vendor/moderntribe/tribe-libs/src/",
-      "Mailgun\\Mailgun\\":"vendor/mailgun/",
-      "Sunra\\PhpSimple\\":"vendor/sunra/php-simp[le-html-dom-parser/Src/Sunra/PhpSimple/",
-      "Monolog\\":"vendor/monolog/monloog/src/"
+      "Tribe\\Project\\":"wp-content/plugins/core/src"
     }
   }
 }

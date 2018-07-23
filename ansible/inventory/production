@@ -1,0 +1,12 @@
+[www]
+prod ansible_host=ENTER_IP_ADDRESS ansible_connection=ssh ansible_user=ubuntu ansible_ssh_user=ubuntu ansible_private_key_file=.aws/CHANGEME.pem ansible_python_interpreter=/usr/bin/python3
+
+[mariadb]
+prod ansible_host=ENTER_IP_ADDRESS ansible_connection=ssh ansible_user=ubuntu ansible_ssh_user=ubuntu ansible_private_key_file=.aws/CHANGEME.pem ansible_python_interpreter=/usr/bin/python3
+
+[database:children]
+mariadb
+
+[production:children]
+www
+database
