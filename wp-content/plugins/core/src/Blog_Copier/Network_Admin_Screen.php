@@ -162,14 +162,54 @@ class Network_Admin_Screen {
 	 * @action network_admin_edit_ . self::NAME
 	 */
 	public function handle_submission() {
-		if ( ! isset( $_POST[ '_wpnonce' ] ) || ! wp_verify_nonce( $_POST[ '_wpnonce' ], self::NAME ) ) {
-			return;
-		}
 
-		add_settings_error( self::NAME, 'blog_copy_init', __( 'Your copy is in progress.', 'tribe' ), 'updated' );
+		$errors = $this->validate_submission( $_POST );
+
+		if ( count( $errors->get_error_codes() ) > 0 ) {
+			foreach ( $errors->get_error_codes() as $code ) {
+				foreach ( $errors->get_error_messages( $code ) as $message ) {
+					add_settings_error( self::NAME, $code, $message, 'error' );
+				}
+			}
+		} else {
+			add_settings_error( self::NAME, 'blog_copy_init', __( 'Your copy is in progress.', 'tribe' ), 'updated' );
+		}
 		set_transient( 'settings_errors', get_settings_errors(), 30 );
 
 		wp_safe_redirect( network_admin_url( 'sites.php?page=' . self::NAME ) );
 		exit();
+	}
+
+	/**
+	 * @param $submission
+	 *
+	 * @return \WP_Error
+	 */
+	private function validate_submission( $submission ) {
+		$error = new \WP_Error();
+		if ( ! isset( $submission[ '_wpnonce' ] ) || ! wp_verify_nonce( $submission[ '_wpnonce' ], self::NAME ) ) {
+			$error->add( 'invalid_nonce', __( 'Error while saving. Please try again.', 'tribe' ) );
+
+			return $error;
+		}
+		if ( empty( $submission[ self::NAME ] ) ) {
+			$error->add( 'empty_request', __( 'Unable to parse the request. Please try again.', 'tribe' ) );
+
+			return $error;
+		}
+
+		if ( empty( $submission[ self::NAME ][ 'src' ] ) ) {
+			$error->add( 'empty_src', __( 'Please select a blog to copy.', 'tribe' ) );
+		}
+
+		if ( empty( $submission[ self::NAME ][ 'address' ] ) ) {
+			$error->add( 'empty_address', __( 'Please provide an address for the new blog.', 'tribe' ) );
+		}
+
+		if ( empty( $submission[ self::NAME ][ 'title' ] ) ) {
+			$error->add( 'empty_title', __( 'Please provide a title for the new blog.', 'tribe' ) );
+		}
+
+		return $error;
 	}
 }
