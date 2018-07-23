@@ -56,6 +56,7 @@ services:
         - memcached
         - redis
         - elasticsearch
+        - tideways
       external_links:
         - "tribe-mysql:mysql"
         - "tribe-mail:mail"
@@ -76,6 +77,12 @@ services:
         - proxy
       links:
         - php-fpm
+
+    tideways:
+      build: ./tideways
+      ports:
+        - "8135/udp"
+        - "9135"
 
 networks:
   proxy:
