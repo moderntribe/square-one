@@ -11,8 +11,8 @@ use Tribe\Project\Queues\Contracts\Task;
 /**
  * Class Replace_Tables
  *
- * Ensure that all tables on the destination blog are empty and match the
- * schema of the source blog
+ * Ensure that all tables on the destination blog are emptied and
+ * replaced with content from the source blog
  */
 class Replace_Tables implements Task {
 
@@ -51,13 +51,14 @@ class Replace_Tables implements Task {
 		$src_prefix  = $wpdb->get_blog_prefix( $src );
 		$dest_prefix = $wpdb->get_blog_prefix( $destination );
 
-		// May through errors if one of the source tables doesn't exist.
-		// Not using "SHOW TABLES LIKE $table" because it doesn't work with temporary tables
+		// Avoid an error if the table doesn't exist for the DESCRIBE
 		$suppress = $wpdb->suppress_errors();
 		foreach ( $tables as $table ) {
-			$wpdb->query( "DROP TABLE IF EXISTS `$dest_prefix$table`" );
-			$wpdb->query( "CREATE TABLE IF NOT EXISTS `$dest_prefix$table` LIKE `$src_prefix$table`" );
-			$wpdb->query( "INSERT `$dest_prefix$table` SELECT * FROM `$src_prefix$table`" );
+			if ( $wpdb->get_results( "DESCRIBE `$src_prefix$table`" ) ) {
+				$wpdb->query( "DROP TABLE IF EXISTS `$dest_prefix$table`" );
+				$wpdb->query( "CREATE TABLE IF NOT EXISTS `$dest_prefix$table` LIKE `$src_prefix$table`" );
+				$wpdb->query( "INSERT `$dest_prefix$table` SELECT * FROM `$src_prefix$table`" );
+			}
 		}
 		$wpdb->suppress_errors( $suppress );
 	}
@@ -80,6 +81,12 @@ class Replace_Tables implements Task {
 			'blogname',
 		];
 
+		/**
+		 * Filter the list of options from the destination blog that will not be overwritten
+		 * with values from the source blog
+		 *
+		 * @param string[] $option_keys
+		 */
 		$option_keys = apply_filters( 'tribe/project/copy-blog/saved-options', $option_keys );
 
 		$data = [];
