@@ -79,3 +79,12 @@ extensions:
         - Codeception\Command\GenerateWPXMLRPC
         - Codeception\Command\DbSnapshot
         - tad\Codeception\Command\SearchReplace
+env:
+    singlesite:
+        # nothing changes
+    multisite:
+        modules:
+            config:
+                WPLoader:
+                    multisite: true
+

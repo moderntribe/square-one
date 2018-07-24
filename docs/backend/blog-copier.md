@@ -37,3 +37,8 @@ as the third parameter to the action.
 ```
 do_action( Copy_Manager::TASK_ERROR_ACTION, static::class, $args, $error );
 ```
+
+## Automated Testing
+
+Some tests require multisite to run successfully. To enable these tests, run the integration test suite with the
+flag `--env multisite`.

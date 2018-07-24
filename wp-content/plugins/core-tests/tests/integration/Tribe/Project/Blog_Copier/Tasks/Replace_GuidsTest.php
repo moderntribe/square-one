@@ -7,6 +7,9 @@ use Tribe\Project\Blog_Copier\Copy_Manager;
 
 class Replace_GuidsTest extends \Codeception\TestCase\WPTestCase {
 
+	/**
+	 * @env multisite
+	 */
 	public function test_replaces_guids() {
 		/** @var \wpdb $wpdb */
 		global $wpdb;

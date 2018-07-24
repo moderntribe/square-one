@@ -7,6 +7,9 @@ use Tribe\Project\Blog_Copier\Copy_Manager;
 
 class Create_BlogTest extends \Codeception\TestCase\WPTestCase {
 
+	/**
+	 * @env multisite
+	 */
 	public function test_creates_blog() {
 		/** @var \WP_User $user */
 		$user    = $this->factory()->user->create_and_get();

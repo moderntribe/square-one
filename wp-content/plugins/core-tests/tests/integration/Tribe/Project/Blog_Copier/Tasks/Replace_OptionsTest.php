@@ -7,6 +7,9 @@ use Tribe\Project\Blog_Copier\Copy_Manager;
 
 class Replace_OptionsTest extends \Codeception\TestCase\WPTestCase {
 
+	/**
+	 * @env multisite
+	 */
 	public function test_replaces_options() {
 		/** @var \wpdb $wpdb */
 		global $wpdb;
