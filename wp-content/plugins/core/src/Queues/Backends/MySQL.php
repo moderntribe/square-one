@@ -19,7 +19,7 @@ class MySQL implements Backend {
 	public function __construct() {
 		global $wpdb;
 
-		$table_name = $wpdb->prefix . self::DB_TABLE;
+		$table_name = $wpdb->base_prefix . self::DB_TABLE;
 
 		/**
 		 * Filter the table name used for queues on this backend.
@@ -203,5 +203,16 @@ class MySQL implements Backend {
 			"SELECT priority FROM $this->table_name WHERE id = %s",
 			$task_id
 		) );
+	}
+
+	/**
+	 * @return array|bool
+	 * @action tribe/project/queues/mysql/init_table
+	 */
+	public function initialize_table() {
+		if ( $this->table_exists() ) {
+			return false;
+		}
+		return $this->create_table();
 	}
 }

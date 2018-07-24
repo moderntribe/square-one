@@ -6,7 +6,7 @@ use Tribe\Project\Blog_Copier\Tasks\Create_Blog;
 use Tribe\Project\Queues\Backends\Mock_Backend;
 use Tribe\Project\Queues\Contracts\Queue;
 
-class Copy_InitializerTest extends \Codeception\TestCase\WPTestCase {
+class Copy_ManagerTest extends \Codeception\TestCase\WPTestCase {
 	public function test_creates_state_post() {
 		/** @var \WP_User $user */
 		$user = $this->factory()->user->create_and_get();
@@ -28,11 +28,11 @@ class Copy_InitializerTest extends \Codeception\TestCase\WPTestCase {
 			'user'    => $user->ID,
 		] );
 
-		$init          = new Copy_Initializer( $queue );
+		$init          = new Copy_Manager( $queue, new Task_Chain( [ Create_Blog::class ] ) );
 		$state_post_id = $init->initialize( $config );
 
 		$posts = get_posts( [
-			'post_type'   => 'blog-copy',
+			'post_type'   => Copy_Manager::POST_TYPE,
 			'post_status' => 'pending',
 			'fields'      => 'ids',
 		] );

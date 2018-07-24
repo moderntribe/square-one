@@ -173,7 +173,18 @@ class Network_Admin_Screen {
 			}
 		} else {
 			$args           = $_POST[ self::NAME ];
-			$args[ 'user' ] = get_current_user_id();
+
+
+			$email = get_blog_option( $args[ 'src' ], 'admin_email' );
+			$user_id = email_exists( sanitize_email( $email ) );
+			if( $user_id ) {
+				$args[ 'user' ] = $user_id;
+			} else {
+				// Use current user instead
+				$args[ 'user' ] = get_current_user_id();
+			}
+			$args[ 'user' ] = apply_filters( 'tribe/project/copy-blog/user', $args[ 'user' ], $args );
+
 
 			$config = new Copy_Configuration( $args );
 			do_action( 'tribe/project/copy-blog/copy', $config );
