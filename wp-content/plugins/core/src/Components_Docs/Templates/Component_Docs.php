@@ -2,6 +2,8 @@
 
 namespace Tribe\Project\Components_Docs\Templates;
 
+use Tribe\Project\Components_Docs\Item;
+use Tribe\Project\Components_Docs\Panel_Item;
 use Tribe\Project\Components_Docs\Registry;
 use Tribe\Project\Components_Docs\Router;
 use Tribe\Project\Facade\Items\Request;
@@ -22,10 +24,10 @@ class Component_Docs extends Twig_Template {
 		$current_component = $this->get_current_component();
 
 		$data = [
-			'logo'       => Router::plugin_url( 'Theme/assets/img/wordmark.svg' ),
-			'nav_items'  => $this->get_nav_items( $current_component ),
-			'item'       => $this->get_item( $current_component ),
-			'label'      => $this->get_label( $current_component ),
+			'logo'      => Router::plugin_url( 'Theme/assets/img/wordmark.svg' ),
+			'nav_items' => $this->get_nav_items( $current_component ),
+			'item'      => $this->get_item( $current_component ),
+			'label'     => $this->get_label( $current_component ),
 		];
 
 		return $data;
@@ -91,8 +93,7 @@ class Component_Docs extends Twig_Template {
 		}
 
 		if ( is_user_logged_in() ) {
-			$constants    = Constants::factory( [ Constants::CONSTANTS => $constants, Constants::ITEM_CLASS => $item->get_slug() ] );
-			$preview_body = $constants->render() . $rendered;
+			$preview_body = is_a( $item, Panel_Item::class ) ? $this->get_panel_preview( $rendered ) : $this->get_component_preview( $item, $constants, $rendered );
 
 			$rows[] = [
 				'content'     => $preview_body,
@@ -109,5 +110,15 @@ class Component_Docs extends Twig_Template {
 		$accordion = Accordion::factory( $options );
 
 		return $accordion->render();
+	}
+
+	protected function get_panel_preview( string $rendered ) {
+		$preview = Preview_Wrapper::factory( [ Preview_Wrapper::RENDERED => $rendered ] );
+		return $preview->render();
+	}
+
+	protected function get_component_preview( Item $item, array $constants, string $rendered ) {
+		$constants    = Constants::factory( [ Constants::CONSTANTS => $constants, Constants::ITEM_CLASS => $item->get_slug() ] );
+		return $constants->render() . $rendered;
 	}
 }

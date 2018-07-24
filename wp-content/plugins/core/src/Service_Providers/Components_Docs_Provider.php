@@ -4,10 +4,12 @@
 namespace Tribe\Project\Service_Providers;
 
 
+use ModularContent\PanelCollection;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Tribe\Project\Components_Docs\Ajax;
 use Tribe\Project\Components_Docs\Component_Item;
+use Tribe\Project\Components_Docs\Panel_Item;
 use Tribe\Project\Components_Docs\Registry;
 use Tribe\Project\Components_Docs\Router;
 use Tribe\Project\Components_Docs\Templates\Component_Docs;
@@ -54,6 +56,10 @@ class Components_Docs_Provider implements ServiceProviderInterface {
 			$container['components_docs.registry']->add_item( $component_item->get_slug(), $component_item );
 		}
 
+		add_action( 'wp', function () use ( $container ) {
+			$this->add_panel_items( $container );
+		} );
+
 		$container['component_docs.template'] = function ( $container ) {
 			$twig_path = 'main.twig';
 			return new Component_Docs( $twig_path, null, $container['components_docs.registry'] );
@@ -77,6 +83,16 @@ class Components_Docs_Provider implements ServiceProviderInterface {
 			$container['components_docs.assets']->enqueue_styles();
 		}, 10, 0 );
 
+	}
+
+	protected function add_panel_items( Container $container ) {
+		$collection = PanelCollection::find_by_post_id( 9 );
+		foreach ( $collection->panels() as $panel ) {
+			$panel_type_obj = $panel->get_type_object();
+			$class          = get_class( $panel_type_obj );
+			$component_item = new Panel_Item( $class, $panel );
+			$container['components_docs.registry']->add_item( 'panel_' . $component_item->get_slug(), $component_item, 'Panels' );
+		}
 	}
 
 	protected function add_template_paths( Container $container ) {

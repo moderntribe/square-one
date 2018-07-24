@@ -21,7 +21,13 @@ class Registry {
 		return $this->items[ $group ];
 	}
 
-	public function get_item( $key, $group = 'Components' ) {
-		return $this->items[ $group ][ $key ] ?? null;
+	public function get_item( $key ) {
+		foreach ( $this->items as $group => $items ) {
+			if ( isset( $items[ $key ] ) ) {
+				return $items[ $key ];
+			}
+		}
+
+		return null;
 	}
 }
