@@ -172,21 +172,33 @@ class Network_Admin_Screen {
 				}
 			}
 		} else {
-			$args           = $_POST[ self::NAME ];
+			$args = $_POST[ self::NAME ];
 
 
-			$email = get_blog_option( $args[ 'src' ], 'admin_email' );
+			$email   = get_blog_option( $args[ 'src' ], 'admin_email' );
 			$user_id = email_exists( sanitize_email( $email ) );
-			if( $user_id ) {
+			if ( $user_id ) {
 				$args[ 'user' ] = $user_id;
 			} else {
 				// Use current user instead
 				$args[ 'user' ] = get_current_user_id();
 			}
+			/**
+			 * Filter the ID of the admin user assigned to the destination blog
+			 *
+			 * @param int   $user_id
+			 * @param array $args
+			 */
 			$args[ 'user' ] = apply_filters( 'tribe/project/copy-blog/user', $args[ 'user' ], $args );
 
 
 			$config = new Copy_Configuration( $args );
+
+			/**
+			 * The action to kick off a blog copy
+			 *
+			 * @param Copy_Configuration $config
+			 */
 			do_action( 'tribe/project/copy-blog/copy', $config );
 
 			add_settings_error( self::NAME, 'blog_copy_init', __( 'Your copy is in progress.', 'tribe' ), 'updated' );

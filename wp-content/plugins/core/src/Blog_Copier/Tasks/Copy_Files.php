@@ -6,6 +6,8 @@ namespace Tribe\Project\Blog_Copier\Tasks;
 
 use Tribe\Project\Blog_Copier\Copy_Configuration;
 use Tribe\Project\Blog_Copier\Copy_Manager;
+use Tribe\Project\Blog_Copier\Strategies\Recursive_File_Copy;
+use Tribe\Project\Blog_Copier\Strategies\Shell_File_Copy;
 use Tribe\Project\Queues\Contracts\Task;
 
 class Copy_Files implements Task {
@@ -36,7 +38,18 @@ class Copy_Files implements Task {
 	}
 
 	private function copy_files( $src, $destination ) {
-		// trigger an action so that we can have various strategies depending on the hosting environment
+		/**
+		 * Triggers a copy of files
+		 *
+		 * Depending on the hosting environment, a different strategy for handling
+		 * the action may be necessary
+		 *
+		 * @param string $source      The source directory
+		 * @param string $destination The destination directory
+		 *
+		 * @see Shell_File_Copy
+		 * @see Recursive_File_Copy
+		 */
 		do_action( 'tribe/project/copy-blog/copy-files', $src, $destination );
 	}
 
