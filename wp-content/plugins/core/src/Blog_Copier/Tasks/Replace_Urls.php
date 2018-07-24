@@ -26,28 +26,58 @@ class Replace_Urls implements Task {
 			return true;
 		}
 
-		if ( $config->get_files() ) {
-			$this->replace_urls( $src, $destination );
-		}
+		$this->replace_urls( $src, $destination, $config->get_files() );
 
 		do_action( Copy_Manager::TASK_COMPLETE_ACTION, static::class, $args );
 
 		return true;
 	}
 
-	private function replace_urls( $src, $dest ) {
+	/**
+	 * @param int  $src     ID of the source blog
+	 * @param int  $dest    ID of the destination blog
+	 * @param bool $uploads Whether to alter upload paths
+	 *
+	 * @return void
+	 */
+	private function replace_urls( $src, $dest, $uploads = false ) {
 		/** @var \wpdb $wpdb */
 		global $wpdb;
-		$dest_prefix   = $wpdb->get_blog_prefix( $dest );
-		$src_url       = get_blog_option( $src, 'siteurl' );
-		$dest_url      = get_blog_option( $dest, 'siteurl' );
-		$json_src_url  = \trim( \json_encode( $src_url ), '"' );
-		$json_dest_url = \trim( \json_encode( $dest_url ), '"' );
+		$dest_prefix = $wpdb->get_blog_prefix( $dest );
+		switch_to_blog( $src );
+		$src_url         = get_option( 'siteurl' );
+		$src_uploads_url = wp_upload_dir( null, false, true )[ 'baseurl' ];
+		restore_current_blog();
 
-		$query = $wpdb->prepare( "UPDATE {$dest_prefix}posts SET post_content = REPLACE(post_content, '%s', '%s')", $src_url, $dest_url );
-		$wpdb->query( $query );
-		$query = $wpdb->prepare( "UPDATE {$dest_prefix}posts SET post_content_filtered = REPLACE(post_content_filtered, '%s', '%s')", $json_src_url, $json_dest_url );
-		$wpdb->query( $query );
+		switch_to_blog( $dest );
+		$dest_url         = get_option( 'siteurl' );
+		$dest_uploads_url = wp_upload_dir( null, false, true )[ 'baseurl' ];
+		restore_current_blog();
+
+		$map = [];
+		if ( $uploads ) {
+			$map[ parse_url( $src_uploads_url, PHP_URL_PATH ) ] = parse_url( $dest_uploads_url, PHP_URL_PATH );
+		}
+		$map[ set_url_scheme( $src_url, 'http' ) ] = set_url_scheme( $dest_url, 'http' );
+		$map[ set_url_scheme( $src_url, 'https' ) ] = set_url_scheme( $dest_url, 'https' );
+
+		/**
+		 * Filter the mapping of source URLs to destination URLs
+		 *
+		 * @param array $map     Source URLs mapped to their destination URLs
+		 * @param int   $src     The source blog ID
+		 * @param int   $dest    The destination blog ID
+		 * @param bool  $uploads Whether the uploads path should be mapped
+		 */
+		$map = apply_filters( 'tribe/project/copy-blog/replace-urls/map', $map, $src, $dest, $uploads );
+
+		foreach ( $map as $from => $to ) {
+			// replace URLs in post_content
+			$wpdb->query( $wpdb->prepare( "UPDATE {$dest_prefix}posts SET post_content = REPLACE(post_content, %s, %s)", $from, $to ) );
+
+			// replace json-encoded URLs in post_content_filtered
+			$wpdb->query( $wpdb->prepare( "UPDATE {$dest_prefix}posts SET post_content_filtered = REPLACE(post_content_filtered, %s, %s)", \trim( \json_encode( $from ), '"' ), \trim( \json_encode( $to ), '"' ) ) );
+		}
 	}
 
 }
