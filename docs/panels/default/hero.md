@@ -17,6 +17,12 @@ first panel on the page as introductory content.
 * options: `light`, `dark`
 * default: `dark`
 
+#### `title`
+* location: `Content`
+* label: `Title`
+* type: `Text`
+* richtext: `false`
+
 #### `description`
 * location: `Content`
 * label: `Description`

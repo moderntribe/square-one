@@ -19,10 +19,15 @@ use Tribe\Project\Templates\Components\Button;
 use Tribe\Project\Templates\Components\Card;
 use Tribe\Project\Templates\Components\Content_Block;
 use Tribe\Project\Templates\Components\Quote;
+use Tribe\Project\Panels\Types\Accordion as Accordion_Panel;
+use Tribe\Project\Panels\Types\Hero;
 
 class Components_Docs_Provider implements ServiceProviderInterface {
 
-	protected $panels     = [];
+	protected $panels     = [
+		Accordion_Panel::class,
+		Hero::class,
+	];
 	protected $components = [
 		Accordion::class,
 		Button::class,
@@ -86,7 +91,7 @@ class Components_Docs_Provider implements ServiceProviderInterface {
 	}
 
 	protected function add_panel_items( Container $container ) {
-		$collection = PanelCollection::find_by_post_id( 9 );
+		$collection = PanelCollection::find_by_post_id( 332 );
 		foreach ( $collection->panels() as $panel ) {
 			$panel_type_obj = $panel->get_type_object();
 			$class          = get_class( $panel_type_obj );
