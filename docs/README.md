@@ -12,6 +12,11 @@
   * [Overview](/docs/panels/README.md)
   * [The Initializer](/docs/panels/initializer.md)
   * [Register A Panel](/docs/panels/register.md)
+  * **Default Panels**
+    * [Overview](/docs/panels/default/README.md)
+    * [Hero](/docs/panels/default/hero.md)
+    * [Accordion](/docs/panels/default/accordion.md)
+    * [Card Grid](/docs/panels/default/cardgrid.md)
 * **Theme**
   * [Overview](/docs/theme/README.md)
   * [Markup and Style](/docs/theme/markup-and-style.md)

@@ -56,7 +56,7 @@ class CardGrid extends Panel_Type_Config {
 		$card->add_field( new Fields\Image( [
 			'name'        => self::FIELD_CARD_IMAGE,
 			'label'       => __( 'Image', 'tribe' ),
-			'description' => __( 'Optimal image sizes: 1500 x 1125 for Left/Right Aligned layouts; 1500 x 844 for Boxed/Hero layouts.', 'tribe' ),
+			'description' => __( 'Optimal image sizes: 600px x 400px.', 'tribe' ),
 			'size'        => 'medium', // the size displayed in the admin.
 		] ) );
 

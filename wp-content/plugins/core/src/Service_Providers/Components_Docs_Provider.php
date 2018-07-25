@@ -14,6 +14,7 @@ use Tribe\Project\Components_Docs\Registry;
 use Tribe\Project\Components_Docs\Router;
 use Tribe\Project\Components_Docs\Templates\Component_Docs;
 use Tribe\Project\Components_Docs\Theme\Assets;
+use Tribe\Project\Panels\Types\CardGrid;
 use Tribe\Project\Templates\Components\Accordion;
 use Tribe\Project\Templates\Components\Button;
 use Tribe\Project\Templates\Components\Card;
@@ -27,6 +28,7 @@ class Components_Docs_Provider implements ServiceProviderInterface {
 	protected $panels     = [
 		Accordion_Panel::class,
 		Hero::class,
+		CardGrid::class,
 	];
 	protected $components = [
 		Accordion::class,
