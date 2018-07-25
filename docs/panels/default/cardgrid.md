@@ -1,6 +1,6 @@
 The Card Grid panel is comprised of a panel title, text content, and a repeater field section to add, remove, and reorder cards.
 
-Cards within the repeated are comprised of a Card Title (text field), Cards Description (textarea field), Image (WPML image uploader/selector), and a CTA (url, text label, window location).
+Cards within the repeater are comprised of a title, description, image, and a CTA button.
 
 ### Usage
 

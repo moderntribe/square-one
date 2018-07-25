@@ -1,5 +1,8 @@
-The default Hero Panel is comprised of a background image, title, text content, and CTA button. It's often used as the 
-first panel on the page as introductory content. 
+The default Hero Panel is comprised of a background image, title, text content, and CTA button.
+
+### Usage
+
+It's often used as the first panel on the page as introductory content.
 
 ### Fields
 
