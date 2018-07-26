@@ -21,6 +21,8 @@
     * [Image + Text](/docs/panels/default/imagetext.md)
     * [Video + Text](/docs/panels/default/videotext.md)
     * [Interstitial](/docs/panels/default/videotext.md)
+    * [Micro Nav Buttons](/docs/panels/default/micronavbuttons.md)
+    * [WYSIWYG](/docs/panels/default/wysiwyg.md)
 * **Theme**
   * [Overview](/docs/theme/README.md)
   * [Markup and Style](/docs/theme/markup-and-style.md)
