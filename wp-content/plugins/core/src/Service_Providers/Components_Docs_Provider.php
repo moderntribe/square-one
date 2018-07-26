@@ -19,6 +19,7 @@ use Tribe\Project\Panels\Types\ContentSlider;
 use Tribe\Project\Panels\Types\Gallery;
 use Tribe\Project\Panels\Types\ImageText;
 use Tribe\Project\Panels\Types\Interstitial;
+use Tribe\Project\Panels\Types\LogoFarm;
 use Tribe\Project\Panels\Types\MicroNavButtons;
 use Tribe\Project\Panels\Types\VideoText;
 use Tribe\Project\Panels\Types\Wysiwyg;
@@ -43,6 +44,7 @@ class Components_Docs_Provider implements ServiceProviderInterface {
 		MicroNavButtons::class,
 		Wysiwyg::class,
 		ContentSlider::class,
+		LogoFarm::class,
 	];
 	protected $components = [
 		Accordion::class,
