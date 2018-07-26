@@ -17,6 +17,7 @@ use Tribe\Project\Components_Docs\Theme\Assets;
 use Tribe\Project\Panels\Types\CardGrid;
 use Tribe\Project\Panels\Types\Gallery;
 use Tribe\Project\Panels\Types\ImageText;
+use Tribe\Project\Panels\Types\VideoText;
 use Tribe\Project\Templates\Components\Accordion;
 use Tribe\Project\Templates\Components\Button;
 use Tribe\Project\Templates\Components\Card;
@@ -33,6 +34,7 @@ class Components_Docs_Provider implements ServiceProviderInterface {
 		CardGrid::class,
 		Gallery::class,
 		ImageText::class,
+		VideoText::class,
 	];
 	protected $components = [
 		Accordion::class,
