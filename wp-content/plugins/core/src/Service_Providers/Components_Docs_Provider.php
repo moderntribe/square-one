@@ -15,6 +15,7 @@ use Tribe\Project\Components_Docs\Router;
 use Tribe\Project\Components_Docs\Templates\Component_Docs;
 use Tribe\Project\Components_Docs\Theme\Assets;
 use Tribe\Project\Panels\Types\CardGrid;
+use Tribe\Project\Panels\Types\ContentSlider;
 use Tribe\Project\Panels\Types\Gallery;
 use Tribe\Project\Panels\Types\ImageText;
 use Tribe\Project\Panels\Types\Interstitial;
@@ -41,6 +42,7 @@ class Components_Docs_Provider implements ServiceProviderInterface {
 		Interstitial::class,
 		MicroNavButtons::class,
 		Wysiwyg::class,
+		ContentSlider::class,
 	];
 	protected $components = [
 		Accordion::class,

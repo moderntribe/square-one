@@ -23,6 +23,7 @@
     * [Interstitial](/docs/panels/default/videotext.md)
     * [Micro Nav Buttons](/docs/panels/default/micronavbuttons.md)
     * [WYSIWYG](/docs/panels/default/wysiwyg.md)
+    * [Content Slider](/docs/panels/default/content-slider.md)
 * **Theme**
   * [Overview](/docs/theme/README.md)
   * [Markup and Style](/docs/theme/markup-and-style.md)

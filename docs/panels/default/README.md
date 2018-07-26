@@ -9,3 +9,4 @@
 * [Interstitial](/docs/panels/default/videotext.md)
 * [Micro Nav Buttons](/docs/panels/default/micronavbuttons.md)
 * [WYSIWYG](/docs/panels/default/wysiwyg.md)
+* [Content Slider](/docs/panels/default/content-slider.md)
