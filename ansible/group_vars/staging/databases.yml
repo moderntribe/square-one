@@ -1,0 +1,11 @@
+---
+##############################################################
+# Vars in vault:
+# rds_master_user     = master user for database
+# rds_master_password = password for master user
+##############################################################
+
+##############################################################
+# database_server_type = server type (base or rds)
+##############################################################
+database_server_type: rds

@@ -70,6 +70,11 @@
   * [Jest](/docs/tests/jest.md)
 * **Local Dev Environment**
   * [Docker](/dev/docker/README.md)
+* **Deploys with Ansible**
+  * [Overview](/docs/ansible/README.md)
+  * [Terminology](/docs/ansible/terminology.md)
+  * [Initial Setup](/docs/ansible/initial-setup.md)
+  * [Executing Deploys](/docs/ansible/deploys.md)
 
 
 
