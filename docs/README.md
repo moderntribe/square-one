@@ -20,6 +20,7 @@
     * [Gallery](/docs/panels/default/gallery.md)
     * [Image + Text](/docs/panels/default/imagetext.md)
     * [Video + Text](/docs/panels/default/videotext.md)
+    * [Interstitial](/docs/panels/default/videotext.md)
 * **Theme**
   * [Overview](/docs/theme/README.md)
   * [Markup and Style](/docs/theme/markup-and-style.md)
