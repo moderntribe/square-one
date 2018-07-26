@@ -18,10 +18,14 @@ Attributes:
 		target: '_blank' // string. if type is link you can pass in target
 		type: 'submit' // string. if tag is button, you can set type
 		url: 'http://google.com' // string. if type is link you can set url
+		aria_label: '' // string. add screen reader text for labels that aren't clear as to where they navigate to.
     }
  #}
 
 <{{ tag }} class="{{ classes }}"
+	{% if aria_label %}
+	aria-label="{{ aria_label }}"
+    {% endif %}
 	{% if type %}
 	type="{{ type }}"
 	{% endif %}
