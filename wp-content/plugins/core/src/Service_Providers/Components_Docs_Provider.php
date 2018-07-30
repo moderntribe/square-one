@@ -29,6 +29,7 @@ use Tribe\Project\Templates\Components\Accordion;
 use Tribe\Project\Templates\Components\Button;
 use Tribe\Project\Templates\Components\Card;
 use Tribe\Project\Templates\Components\Content_Block;
+use Tribe\Project\Templates\Components\Image;
 use Tribe\Project\Templates\Components\Quote;
 use Tribe\Project\Panels\Types\Accordion as Accordion_Panel;
 use Tribe\Project\Panels\Types\Hero;
@@ -56,6 +57,7 @@ class Components_Docs_Provider implements ServiceProviderInterface {
 		Card::class,
 		Content_Block::class,
 		Quote::class,
+		Image::class,
 	];
 
 	public function register( Container $container ) {
