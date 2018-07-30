@@ -67,7 +67,14 @@ function berriart_xhprof_profiler_disable_xhprof() {
      
         // url to the XHProf UI libraries 
         $profiler_url = plugins_url(sprintf('facebook-xhprof/xhprof_html/index.php?run=%s&source=%s', $run_id, $profiler_namespace) , __FILE__ );
-        echo '----> <a href="'. $profiler_url .'" target="_blank">Profiler output</a>';
+
+	    if ( defined( 'XHPROF_FOOTER' ) && XHPROF_FOOTER ) {
+		    echo '----> <a href="' . $profiler_url . '" target="_blank">Profiler output</a>';
+	    }
+
+	    if ( defined( 'XHPROF_LOG' ) && XHPROF_LOG ) {
+		    error_log( 'xhprof url: ' . $profiler_url );
+	    }
     }
 } 
 
