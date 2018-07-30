@@ -18,7 +18,7 @@ To enable it in your project:
 * in your local-config: define( 'SQUARE1_XHPROF', true );
 
 (in PHP Storm you'll want to disable 'Force break...' Languges & Frameworks > PHP > Debug)
-![PHP Storm Settings](img/storm-xdebug-hxprof-settings.png)
+![PHP Storm Settings](img/storm-xdebug-xhprof-settings.png)
 
 ### How do I use it?
 At the bottom of every page a link is added (during the `shutdown` hook). If you don't see the link, view source.
