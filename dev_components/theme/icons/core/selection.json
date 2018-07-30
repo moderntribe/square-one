@@ -26,7 +26,7 @@
         {}
       ],
       "properties": {
-        "order": 101,
+        "order": 128,
         "id": 2,
         "name": "audio-mute",
         "prevSize": 32,
@@ -63,7 +63,7 @@
         {}
       ],
       "properties": {
-        "order": 102,
+        "order": 129,
         "id": 1,
         "name": "audio",
         "prevSize": 32,
@@ -93,7 +93,7 @@
         {}
       ],
       "properties": {
-        "order": 103,
+        "order": 130,
         "id": 0,
         "name": "pause",
         "prevSize": 32,
@@ -123,7 +123,7 @@
       "attrs": [],
       "properties": {
         "id": 0,
-        "order": 104,
+        "order": 131,
         "prevSize": 32,
         "ligatures": "play3, player8",
         "name": "play",
@@ -136,27 +136,31 @@
     {
       "icon": {
         "paths": [
-          "M522.2 438.8v175.6h290.4c-11.8 75.4-87.8 220.8-290.4 220.8-174.8 0-317.4-144.8-317.4-323.2s142.6-323.2 317.4-323.2c99.4 0 166 42.4 204 79l139-133.8c-89.2-83.6-204.8-134-343-134-283 0-512 229-512 512s229 512 512 512c295.4 0 491.6-207.8 491.6-500.2 0-33.6-3.6-59.2-8-84.8l-483.6-0.2z"
+          "M325.8 457.4v111.8h184.8c-7.4 48-55.8 140.6-184.8 140.6-111.2 0-202-92.2-202-205.8s90.8-205.8 202-205.8c63.4 0 105.6 27 129.8 50.2l88.4-85.2c-56.8-53-130.4-85.2-218.2-85.2-180.2 0.2-325.8 145.8-325.8 326s145.6 325.8 325.8 325.8c188 0 312.8-132.2 312.8-318.4 0-21.4-2.4-37.8-5.2-54h-307.6z",
+          "M1024 448h-96v-96h-96v96h-96v96h96v96h96v-96h96z"
         ],
         "attrs": [
+          {},
           {}
         ],
         "isMulticolor": false,
         "isMulticolor2": false,
         "tags": [
-          "google",
-          "brand"
+          "google-plus",
+          "brand",
+          "social"
         ],
         "grid": 16
       },
       "attrs": [
+        {},
         {}
       ],
       "properties": {
-        "order": 122,
-        "id": 10,
+        "order": 149,
+        "id": 11,
         "prevSize": 32,
-        "name": "google",
+        "name": "google-plus",
         "code": 59654
       },
       "setIdx": 0,
@@ -190,7 +194,7 @@
         {}
       ],
       "properties": {
-        "order": 125,
+        "order": 152,
         "id": 9,
         "prevSize": 32,
         "name": "instagram",
@@ -217,7 +221,7 @@
       "attrs": [],
       "properties": {
         "id": 0,
-        "order": 105,
+        "order": 132,
         "prevSize": 24,
         "code": 57492,
         "name": "arrow-left"
@@ -243,7 +247,7 @@
       "attrs": [],
       "properties": {
         "id": 1,
-        "order": 106,
+        "order": 133,
         "prevSize": 24,
         "code": 57493,
         "name": "arrow-right"
@@ -269,7 +273,7 @@
       "attrs": [],
       "properties": {
         "id": 2,
-        "order": 107,
+        "order": 134,
         "prevSize": 24,
         "code": 57494,
         "name": "arrow-up"
@@ -295,7 +299,7 @@
       "attrs": [],
       "properties": {
         "id": 3,
-        "order": 108,
+        "order": 135,
         "prevSize": 24,
         "code": 57495,
         "name": "arrow-down"
@@ -321,7 +325,7 @@
       "attrs": [],
       "properties": {
         "id": 4,
-        "order": 109,
+        "order": 136,
         "prevSize": 24,
         "code": 57620,
         "name": "plus"
@@ -347,7 +351,7 @@
       "attrs": [],
       "properties": {
         "id": 5,
-        "order": 110,
+        "order": 137,
         "prevSize": 24,
         "code": 57621,
         "name": "minus"
@@ -373,7 +377,7 @@
       "attrs": [],
       "properties": {
         "id": 6,
-        "order": 111,
+        "order": 138,
         "prevSize": 24,
         "code": 57622,
         "name": "check"
@@ -399,7 +403,7 @@
       "attrs": [],
       "properties": {
         "id": 7,
-        "order": 112,
+        "order": 139,
         "prevSize": 24,
         "code": 57623,
         "name": "cross"
@@ -425,7 +429,7 @@
       "attrs": [],
       "properties": {
         "id": 8,
-        "order": 113,
+        "order": 140,
         "prevSize": 24,
         "code": 57398,
         "name": "search"
@@ -450,7 +454,7 @@
       "attrs": [],
       "properties": {
         "id": 0,
-        "order": 114,
+        "order": 141,
         "prevSize": 20,
         "code": 59648,
         "name": "chevron-down"
@@ -475,7 +479,7 @@
       "attrs": [],
       "properties": {
         "id": 1,
-        "order": 115,
+        "order": 142,
         "prevSize": 20,
         "code": 59674,
         "name": "chevron-left"
@@ -500,7 +504,7 @@
       "attrs": [],
       "properties": {
         "id": 2,
-        "order": 116,
+        "order": 143,
         "prevSize": 20,
         "code": 59673,
         "name": "chevron-right"
@@ -525,7 +529,7 @@
       "attrs": [],
       "properties": {
         "id": 3,
-        "order": 117,
+        "order": 144,
         "prevSize": 20,
         "code": 59652,
         "name": "chevron-up"
@@ -551,7 +555,7 @@
       "attrs": [],
       "properties": {
         "id": 0,
-        "order": 118,
+        "order": 145,
         "prevSize": 28,
         "code": 61443,
         "name": "mail"
@@ -578,7 +582,7 @@
       "attrs": [],
       "properties": {
         "id": 1,
-        "order": 119,
+        "order": 146,
         "prevSize": 28,
         "code": 61487,
         "name": "print"
@@ -605,7 +609,7 @@
       "attrs": [],
       "properties": {
         "id": 2,
-        "order": 120,
+        "order": 147,
         "prevSize": 28,
         "code": 61593,
         "name": "twitter"
@@ -633,7 +637,7 @@
       "attrs": [],
       "properties": {
         "id": 3,
-        "order": 121,
+        "order": 148,
         "prevSize": 28,
         "code": 61594,
         "name": "facebook"
@@ -660,7 +664,7 @@
       "attrs": [],
       "properties": {
         "id": 5,
-        "order": 123,
+        "order": 150,
         "prevSize": 28,
         "code": 61665,
         "name": "linkedin"
@@ -687,7 +691,7 @@
       "attrs": [],
       "properties": {
         "id": 6,
-        "order": 124,
+        "order": 151,
         "prevSize": 28,
         "code": 61799,
         "name": "youtube"
@@ -714,7 +718,7 @@
       "attrs": [],
       "properties": {
         "id": 8,
-        "order": 126,
+        "order": 153,
         "prevSize": 28,
         "code": 62001,
         "name": "pinterest"

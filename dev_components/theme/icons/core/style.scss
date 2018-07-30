@@ -3,10 +3,10 @@
 @font-face {
   font-family: '#{$icomoon-font-family}';
   src:
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff2?z9kilg') format('woff2'),
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?z9kilg') format('truetype'),
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?z9kilg') format('woff'),
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?z9kilg##{$icomoon-font-family}') format('svg');
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff2?da39h5') format('woff2'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?da39h5') format('truetype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?da39h5') format('woff'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?da39h5##{$icomoon-font-family}') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -46,9 +46,9 @@
     content: $icon-play; 
   }
 }
-.icon-google {
+.icon-google-plus {
   &:before {
-    content: $icon-google; 
+    content: $icon-google-plus; 
   }
 }
 .icon-instagram {
