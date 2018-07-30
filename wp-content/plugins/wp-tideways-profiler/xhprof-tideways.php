@@ -62,7 +62,7 @@ function berriart_xhprof_profiler_disable_xhprof() {
     if(berriart_xhprof_profiler_xhprof_and_debug_is_enabled()) {
         $profiler_namespace = get_bloginfo('name');
         $xhprof_data = tideways_disable();
-        $xhprof_runs = new XHProfRuns_Default();
+        $xhprof_runs = new XHProfRuns_Default( apply_filters( 'tribe/project/xhprof/directotry', '/tmp' ) );
         $run_id = $xhprof_runs->save_run($xhprof_data, $profiler_namespace);
      
         // url to the XHProf UI libraries 
