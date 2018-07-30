@@ -11,7 +11,7 @@ This component has these features out of box:
 
 * **Template:** `wp-content\themes\core\components\button.twig`
 * **Controller:** `wp-content\plugins\core\src\Templates\Components\Button.php`
-* **PostCSS:** `wp-content\plugins\core\assets\theme\pcss\components\button.pcss`
+* **PostCSS:** `wp-content\themes\core\pcss\components\button.pcss`
 
 ### Options
 

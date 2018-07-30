@@ -6,7 +6,7 @@ A component comprised of the title, text and button components. These are all op
 
 * **Template:** `wp-content\themes\core\components\content_block.twig`
 * **Controller:** `wp-content\plugins\core\src\Templates\Components\Content_Block.php`
-* **PostCSS:** `wp-content\plugins\core\assets\theme\pcss\components\_content-block.pcss`
+* **PostCSS:** `wp-content\themes\core\pcss\components\_content-block.pcss`
 
 ### Options
 

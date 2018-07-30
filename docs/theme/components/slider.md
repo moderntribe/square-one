@@ -14,8 +14,8 @@ This component has these features out of box:
 
 * **Template:** `wp-content\themes\core\components\slider.twig`
 * **Controller:** `wp-content\plugins\core\src\Templates\Components\Slider.php`
-* **Javascript:** `wp-content\plugins\core\assets\theme\js\src\components\slider.js`
-* **PostCSS:** `wp-content\plugins\core\assets\theme\pcss\components\slider.pcss`
+* **Javascript:** `wp-content\themes\core\js\src\components\slider.js`
+* **PostCSS:** `wp-content\themes\core\pcss\components\slider.pcss`
 
 ### Options
 

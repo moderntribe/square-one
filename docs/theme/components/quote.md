@@ -6,7 +6,7 @@ A simple quote component to be used wherever you need a quote, with an optional 
 
 * **Template:** `wp-content\themes\core\components\quote.twig`
 * **Controller:** `wp-content\plugins\core\src\Templates\Components\Quote.php`
-* **PostCSS:** `wp-content\plugins\core\assets\theme\pcss\components\_quote.pcss`
+* **PostCSS:** `wp-content\themes\core\pcss\components\_quote.pcss`
 
 ### Options
 

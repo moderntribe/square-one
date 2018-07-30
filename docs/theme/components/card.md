@@ -15,7 +15,7 @@ This component has these features out of box:
 
 * **Template:** `wp-content\themes\core\components\Card.twig`
 * **Controller:** `wp-content\plugins\core\src\Templates\Components\Card.php`
-* **PostCSS:** `wp-content\plugins\core\assets\theme\pcss\components\_card.pcss`
+* **PostCSS:** `wp-content\themes\core\pcss\components\_card.pcss`
 
 ### Options
 

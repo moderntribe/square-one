@@ -15,7 +15,7 @@ This component has these features out of box:
 
 * **Template:** `wp-content\themes\core\components\image.twig`
 * **Controller:** `wp-content\plugins\core\src\Templates\Components\image.php`
-* **PostCSS:** `wp-content\plugins\core\assets\theme\pcss\components\_image.pcss`
+* **PostCSS:** `wp-content\themes\core\pcss\components\_image.pcss`
 
 ### Options
 
