@@ -63,6 +63,7 @@
     * [Breadcrumbs](/docs/theme/components/breadcrumbs.md)
     * [Search](/docs/theme/components/search.md)
     * [Title](/docs/theme/components/title.md)
+    * [Video](/docs/theme/components/video.md)
 * **Backend Development**
   * [Overview](/docs/backend/README.md)
   * [Container / Core.php](/docs/backend/container.md)
