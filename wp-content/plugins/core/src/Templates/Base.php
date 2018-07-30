@@ -193,10 +193,8 @@ class Base extends Twig_Template {
 
 			if ( ! empty( $social_link ) ) {
 				$links[ $social_site ] = [
-					'url'   => esc_url( $social_link ),
+					'url'   => $social_link,
 					'title' => __( sprintf( 'Follow us on %s', ucfirst( $social_site ) ), 'tribe' ),
-					'icon'  => sprintf( '<i class="icon icon-%s"></i>', $social_site ),
-					'label' => __( sprintf( '<span class="a11y-visual-hide">Follow us on %s</span>', ucfirst( $social_site ) ), 'tribe' ),
 				];
 			}
 		}
