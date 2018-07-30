@@ -176,6 +176,8 @@ class Base extends Twig_Template {
 	 */
 	protected function get_social_follow(): array {
 		$links       = [];
+
+		// Change the order of this array to change the display order
 		$social_keys = [
 			Social_Settings::FACEBOOK,
 			Social_Settings::TWITTER,
