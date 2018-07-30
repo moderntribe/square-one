@@ -14,8 +14,10 @@ Fortunately, the free tideways php extension is still capable of generating outp
 The necessary Tideways container is configured as part of the global Square 1 docker-compose.
 To enable it in your project:
 * activate the wp-tideways-profiler plugin
-* in your local-config: define( 'WP_DEBUG', true );
-* in your local-config: define( 'SQUARE1_XHPROF', true );
+* in your local-config: `define( 'WP_DEBUG', true );`
+* in your local-config: `define( 'SQUARE1_XHPROF', true );`
+* (optional) in your local-config for displaying the URL in the page footer: `define( 'XHPROF_FOOTER', true );`
+* (optional) in your local-config for logging the xhprof URL to debug.log: `define( 'XHPROF_LOG', true );`
 
 (in PHP Storm you'll want to disable 'Force break...' Languges & Frameworks > PHP > Debug)
 ![PHP Storm Settings](img/storm-xdebug-xhprof-settings.png)
