@@ -3,8 +3,7 @@
 	<ul class="social-follow__list">
 		{% for key, social_item in social_follow %}
 			<li class="social-follow__item social-follow__item--{{ key|esc_attr }}">
-				<a href="{{ social_item.url|esc_url }}" class="social-follow__anchor" rel="me noopener"
-				   title="{{ social_item.title|esc_attr }}" target="_blank">
+				<a href="{{ social_item.url|esc_url }}" class="social-follow__anchor" rel="me noopener" target="_blank">
 					<i class="icon icon-{{ key|esc_attr }}"></i>
 					<span class="a11y-visual-hide">{{ social_item.title|esc_html }}</span>
 				</a>
