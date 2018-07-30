@@ -59,6 +59,8 @@
     * [Slider](/docs/theme/components/slider.md)
     * [Template](/docs/theme/components/template.md)
     * [Text](/docs/theme/components/text.md)
+    * [Image](/docs/theme/components/image.md)
+    * [Breadcrumbs](/docs/theme/components/breadcrumbs.md)
 * **Backend Development**
   * [Overview](/docs/backend/README.md)
   * [Container / Core.php](/docs/backend/container.md)

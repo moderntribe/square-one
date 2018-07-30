@@ -10,8 +10,8 @@ This component has these features out of box:
 
 * **Template:** `wp-content\themes\core\components\.twig`
 * **Controller:** `wp-content\plugins\core\src\Templates\Components\.php`
-* **Javascript:** `wp-content\plugins\core\assets\theme\js\src\theme\components\.js`
-* **PostCSS:** `wp-content\plugins\core\assets\theme\pcss\components\.pcss`
+* **Javascript:** `wp-content\themes\core\js\src\theme\components\.js`
+* **PostCSS:** `wp-content\themes\core\pcss\components\.pcss`
 
 ### Options
 

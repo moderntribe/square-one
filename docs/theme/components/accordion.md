@@ -14,8 +14,8 @@ This component has these features out of box:
 
 * **Template:** `wp-content\themes\core\components\accordion.twig`
 * **Controller:** `wp-content\plugins\core\src\Templates\Components\Accordion.php`
-* **Javascript:** `wp-content\plugins\core\assets\theme\js\src\components\accordion.js`
-* **PostCSS:** `wp-content\plugins\core\assets\theme\pcss\components\_accordion.pcss`
+* **Javascript:** `wp-content\themes\core\js\src\theme\accordion.js`
+* **PostCSS:** `wp-content\themes\core\pcss\components\_accordion.pcss`
 
 ### Options
 
