@@ -61,6 +61,6 @@ fi
 ${D_COMMAND} run --privileged --rm phpdockerio/php7-fpm date -s "$(date -u "+%Y-%m-%d %H:%M:%S")"
 
 # start the containers
-${DC_COMMAND} --project-name=${PROJECT_ID} up -d --force-recreate
+${DC_COMMAND} --project-name=${PROJECT_ID} up -d --force-recreate --build
 
 bash ${SCRIPTDIR}/composer.sh install
