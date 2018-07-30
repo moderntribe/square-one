@@ -32,6 +32,27 @@ class Social_Settings extends ACF\ACF_Meta_Group {
 		];
 	}
 
+	public static function get_social_follow_message( $key ) {
+		switch ( $key ) {
+			case self::FACEBOOK:
+				return __( 'Like us on Facebook', 'tribe' );
+			case self::TWITTER:
+				return __( 'Follow us on Twitter', 'tribe' );
+			case self::YOUTUBE:
+				return __( 'Follow us on YouTube', 'tribe' );
+			case self::LINKEDIN:
+				return __( 'Add us on LinkedIn', 'tribe' );
+			case self::PINTEREST:
+				return __( 'Follow us on Pinterest', 'tribe' );
+			case self::INSTAGRAM:
+				return __( 'Follow us on Instagram', 'tribe' );
+			case self::GOOGLE:
+				return __( 'Follow us on Google+', 'tribe' );
+			default:
+				return '';
+		}
+	}
+
 	public function get_group_config() {
 		$group = new ACF\Group( self::NAME, $this->object_types );
 		$group->set( 'title', __( 'Social Media Settings', 'tribe' ) );

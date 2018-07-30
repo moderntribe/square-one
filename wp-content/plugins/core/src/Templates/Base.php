@@ -175,7 +175,7 @@ class Base extends Twig_Template {
 	 * @return array
 	 */
 	protected function get_social_follow(): array {
-		$links       = [];
+		$links = [];
 
 		// Change the order of this array to change the display order
 		$social_keys = [
@@ -194,7 +194,7 @@ class Base extends Twig_Template {
 			if ( ! empty( $social_link ) ) {
 				$links[ $social_site ] = [
 					'url'   => $social_link,
-					'title' => __( sprintf( 'Follow us on %s', ucfirst( $social_site ) ), 'tribe' ),
+					'title' => Social_Settings::get_social_follow_message( $social_site ),
 				];
 			}
 		}
