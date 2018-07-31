@@ -1,4 +1,4 @@
-#   Component
+# Video Component
 
 The Video component is a lightweight and load-time-conscious component. Videos are initially displayed with customizable play buttons and poster images. When clicked, these buttons will load the video inline and begin playing the video.
 
@@ -135,15 +135,15 @@ class VideoText extends Panel {
 
 * [Overview](/docs/theme/components/README.md)
 * [Accordion](/docs/theme/components/accordion.md)
+* [Breadcrumbs](/docs/theme/components/breadcrumbs.md)
 * [Button](/docs/theme/components/button.md)
 * [Card](/docs/theme/components/card.md)
 * [Content Block](/docs/theme/components/content_block.md)
-* [Quote](/docs/theme/components/quote.md)
-* [Slider](/docs/theme/components/slider.md)
-* [Template](/docs/theme/components/template.md)
-* [Text](/docs/theme/components/text.md)
 * [Image](/docs/theme/components/Image.md)
-* [Breadcrumbs](/docs/theme/components/breadcrumbs.md)
+* [Pagination](/docs/theme/components/pagination.md)
+* [Quote](/docs/theme/components/quote.md)
 * [Search](/docs/theme/components/search.md)
+* [Slider](/docs/theme/components/slider.md)
+* [Text](/docs/theme/components/text.md)
 * [Title](/docs/theme/components/title.md)
 * [Video](/docs/theme/components/video.md)

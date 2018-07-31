@@ -1,4 +1,4 @@
-#  Slider Component
+# Slider Component
 
 The slider component is a [Swiper JS](http://idangero.us/swiper/) powered slider that can be used wherever you need a slider, from content, to quotes, complex recipes to basic image galleries or galleries with carousels. Out of box on square one it's being used to power the Testimonials Panel, the Hero Slider Panel, the Gallery Panel and the content Post Gallery shortcode. If you need to extend the template functionality consider bringing that back to SquareOne.
 
@@ -187,10 +187,15 @@ class Gallery extends Panel {
 
 * [Overview](/docs/theme/components/README.md)
 * [Accordion](/docs/theme/components/accordion.md)
+* [Breadcrumbs](/docs/theme/components/breadcrumbs.md)
 * [Button](/docs/theme/components/button.md)
 * [Card](/docs/theme/components/card.md)
 * [Content Block](/docs/theme/components/content_block.md)
+* [Image](/docs/theme/components/Image.md)
+* [Pagination](/docs/theme/components/pagination.md)
 * [Quote](/docs/theme/components/quote.md)
+* [Search](/docs/theme/components/search.md)
 * [Slider](/docs/theme/components/slider.md)
-* [Template](/docs/theme/components/template.md)
 * [Text](/docs/theme/components/text.md)
+* [Title](/docs/theme/components/title.md)
+* [Video](/docs/theme/components/video.md)

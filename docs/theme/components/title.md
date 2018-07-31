@@ -1,8 +1,8 @@
-#   Component
+# Title Component
 
 The title component is exactly what it sounds like. A Title.
 
-This component is very similar to the [Text](/component_docs/text) component with one key difference. You can specify the wrapper tag on the title component whereas with the text component, you are restricted to using a `<div>`.
+This component is very similar to the [Text](/docs/theme/components/text.md) component with one key difference. You can specify the wrapper tag on the title component whereas with the text component, you are restricted to using a `<div>`.
 
 ### File Locations
 
@@ -141,14 +141,15 @@ protected function get_mapped_panel_data(): array {
 
 * [Overview](/docs/theme/components/README.md)
 * [Accordion](/docs/theme/components/accordion.md)
+* [Breadcrumbs](/docs/theme/components/breadcrumbs.md)
 * [Button](/docs/theme/components/button.md)
 * [Card](/docs/theme/components/card.md)
 * [Content Block](/docs/theme/components/content_block.md)
-* [Quote](/docs/theme/components/quote.md)
-* [Slider](/docs/theme/components/slider.md)
-* [Template](/docs/theme/components/template.md)
-* [Text](/docs/theme/components/text.md)
 * [Image](/docs/theme/components/Image.md)
-* [Breadcrumbs](/docs/theme/components/breadcrumbs.md)
+* [Pagination](/docs/theme/components/pagination.md)
+* [Quote](/docs/theme/components/quote.md)
 * [Search](/docs/theme/components/search.md)
+* [Slider](/docs/theme/components/slider.md)
+* [Text](/docs/theme/components/text.md)
 * [Title](/docs/theme/components/title.md)
+* [Video](/docs/theme/components/video.md)

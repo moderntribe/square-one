@@ -1,11 +1,11 @@
-#   Component
+# Image Component
 
-The Image component is one of the more feature rich components within Square 1. This can and should be used for almost any situation where you need to get and dispaly an image from the WordPress Media Library.
+The Image component is one of the more feature rich components within Square 1. This can and should be used for almost any situation where you need to get and display an image from the WordPress Media Library.
 
 This component has these features out of box:
 * Full accessibility baked in.
 * Support for the `srcset` and `sizes` attributes for displaying responsive images.
-* Support for LazyLoading images including a custom shim image for preloading.
+* Support for LazyLoading images including a custom shim image for pre-loading.
 * Support for all standard image element attributes (src, alt, class, height, width, etc.) and custom attributes.
 * Ability to fully control the image wrapper element, image element tag, image link
 * Ability to echo the image as an image tag or to use it as a background image.
@@ -390,11 +390,15 @@ class CardGrid extends Panel {
 
 * [Overview](/docs/theme/components/README.md)
 * [Accordion](/docs/theme/components/accordion.md)
+* [Breadcrumbs](/docs/theme/components/breadcrumbs.md)
 * [Button](/docs/theme/components/button.md)
 * [Card](/docs/theme/components/card.md)
 * [Content Block](/docs/theme/components/content_block.md)
+* [Image](/docs/theme/components/Image.md)
+* [Pagination](/docs/theme/components/pagination.md)
 * [Quote](/docs/theme/components/quote.md)
+* [Search](/docs/theme/components/search.md)
 * [Slider](/docs/theme/components/slider.md)
-* [Template](/docs/theme/components/template.md)
 * [Text](/docs/theme/components/text.md)
-* [Image](/docs/theme/components/image.md)
+* [Title](/docs/theme/components/title.md)
+* [Video](/docs/theme/components/video.md)

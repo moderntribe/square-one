@@ -1,6 +1,6 @@
 #  Accordion Component
 
-The accordion component is a simple component for title/content row ui's with clickable titles that expand the associated content.  
+The accordion component is a simple component for title/content row ui's with click-able titles that expand the associated content.
 
 This component has these features out of box:  
 
@@ -179,10 +179,15 @@ class Accordion extends Panel {
 
 * [Overview](/docs/theme/components/README.md)
 * [Accordion](/docs/theme/components/accordion.md)
+* [Breadcrumbs](/docs/theme/components/breadcrumbs.md)
 * [Button](/docs/theme/components/button.md)
 * [Card](/docs/theme/components/card.md)
 * [Content Block](/docs/theme/components/content_block.md)
+* [Image](/docs/theme/components/Image.md)
+* [Pagination](/docs/theme/components/pagination.md)
 * [Quote](/docs/theme/components/quote.md)
+* [Search](/docs/theme/components/search.md)
 * [Slider](/docs/theme/components/slider.md)
-* [Template](/docs/theme/components/template.md)
 * [Text](/docs/theme/components/text.md)
+* [Title](/docs/theme/components/title.md)
+* [Video](/docs/theme/components/video.md)

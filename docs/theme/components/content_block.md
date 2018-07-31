@@ -1,6 +1,6 @@
 # Content Block Component
 
-A component comprised of the title, text and button components. These are all optional, consider this a parent component for a common pattern. Note the button component is used in link mode and considered a cta here. Also note the agrs shown here are not the ones that you see in the twig file, but what the controller needs to produce the block. We may revisit this blocks architecture...
+A component comprised of the title, text and button components. These are all optional, consider this a parent component for a common pattern. Note the button component is used in link mode and considered a cta here. Also note the args shown here are not the ones that you see in the twig file, but what the controller needs to produce the block. We may revisit this blocks architecture...
 
 ### File Locations
 
@@ -235,10 +235,15 @@ class Hero extends Panel {
 
 * [Overview](/docs/theme/components/README.md)
 * [Accordion](/docs/theme/components/accordion.md)
+* [Breadcrumbs](/docs/theme/components/breadcrumbs.md)
 * [Button](/docs/theme/components/button.md)
 * [Card](/docs/theme/components/card.md)
 * [Content Block](/docs/theme/components/content_block.md)
+* [Image](/docs/theme/components/Image.md)
+* [Pagination](/docs/theme/components/pagination.md)
 * [Quote](/docs/theme/components/quote.md)
+* [Search](/docs/theme/components/search.md)
 * [Slider](/docs/theme/components/slider.md)
-* [Template](/docs/theme/components/template.md)
 * [Text](/docs/theme/components/text.md)
+* [Title](/docs/theme/components/title.md)
+* [Video](/docs/theme/components/video.md)
