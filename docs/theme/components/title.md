@@ -15,7 +15,7 @@ This component is very similar to the [Text](/docs/theme/components/text.md) com
 #### `tag`
 * **Default:** _''_
 * **Type:** _string_
-* **Description:** The tag element to use as the title wrapper. Example: `h1`;
+* **Description:** The tag element to use as the title wrapper. Example: `h1`.
 
 #### `title`
 * **Default:** _''_
@@ -34,7 +34,7 @@ This component is very similar to the [Text](/docs/theme/components/text.md) com
 
 ### Example Usage
 
-An ImageText panel twig file, being passed the 'content_block' var that was assembled by the panel controller using the [Content Block](/components_docs/content_block) component which incorporates the title component.
+An ImageText panel twig file, being passed the 'content_block' var that was assembled by the panel controller using the [Content Block](/docs/theme/components/content_block.md) component which incorporates the title component.
 
 ```twig
 {% extends "content/panels/panel.twig" %}
@@ -72,10 +72,14 @@ An ImageText panel twig file, being passed the 'content_block' var that was asse
 {% block wrapper_end %}{% endblock %}
 ```
 
-And the panel controller using the title component
+And the ImageText panel controller using the title component within the content block component.
 
 ```php
-protected function get_mapped_panel_data(): array {
+class ImageText extends Panel {
+
+	...
+
+	protected function get_mapped_panel_data(): array {
 
 		$data = [
 			'wrapper_classes' => $this->get_panel_classes(),

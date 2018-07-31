@@ -22,7 +22,7 @@ This component has these features out of box:
 #### `card_classes` 
 * **Default:** _'c-card'_ 
 * **Type:** _string_ 
-* **Description:** wrapper classes
+* **Description:** Wrapper classes.
 
 #### `before_card` 
 * **Default:** _''_ 
@@ -37,42 +37,42 @@ This component has these features out of box:
 #### `image` 
 * **Default:** _''_ 
 * **Type:** _string_ 
-* **Description:** image html, probably composed with the image component
+* **Description:** Image html, probably composed with the image component.
 
 #### `card_header_classes` 
 * **Default:** _'c-card__header'_ 
 * **Type:** _string_ 
-* **Description:** the classes for the card content container
+* **Description:** The classes for the card content container.
 
 #### `card_content_classes` 
 * **Default:** _'c-card__content'_ 
 * **Type:** _string_ 
-* **Description:** the classes for the card content container
+* **Description:** The classes for the card content container.
 
 #### `pre_title` 
 * **Default:** _''_ 
 * **Type:** _string_ 
-* **Description:** An html string to output before the title
+* **Description:** An html string to output before the title.
 
 #### `title` 
 * **Default:** _''_ 
 * **Type:** _string_ 
-* **Description:** the title
+* **Description:** The title.
 
 #### `post_title` 
 * **Default:** _''_ 
 * **Type:** _string_ 
-* **Description:** an html string to output after the title
+* **Description:** An html string to output after the title.
 
 #### `text` 
 * **Default:** _''_ 
 * **Type:** _string_ 
-* **Description:** text/html string that is the body of the card
+* **Description:** Text/html string that is the body of the card.
 
 #### `button` 
 * **Default:** _''_ 
 * **Type:** _string_ 
-* **Description:** button html, probably composed using the button component
+* **Description:** Button html, probably composed using the button component.
 
 ### Example Usage
 

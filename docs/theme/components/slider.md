@@ -8,7 +8,8 @@ This component has these features out of box:
 
 * Arguments for enabling or disabling pagination, arrows, a synchronized carousel.
 * Accessibility turned on by default
-* Post gallery support baked in and enabled. To disable turn off the shortcode override.
+* Post gallery support baked in and enabled. To disable, turn off the shortcode override.
+* Panel Live Preview support allowing you to see image and text changes directly on the slide you're editing. (arrows and buttons do not work in live preview)
 
 ### File Locations
 
@@ -22,47 +23,47 @@ This component has these features out of box:
 #### `carousel_attrs` 
 * **Default:** _data-js="c-slider-carousel_ 
 * **Type:** _string_ 
-* **Description:** the carousel sliders data attributes
+* **Description:** The carousel sliders data attributes.
 #### `container_classes` 
 * **Default:** _c-slider_ 
 * **Type:** _string_ 
-* **Description:** outer wrapper classes for the entire component
+* **Description:** Outer wrapper classes for the entire component.
 #### `main_attrs` 
 * **Default:** _data-js="c-slider"_ 
 * **Type:** _string_ 
-* **Description:** the main sliders data attributes
+* **Description:** The main sliders data attributes.
 #### `main_classes` 
 * **Default:** _c-slider__main swiper-container_ 
 * **Type:** _string_ 
-* **Description:** the main slider classes. modified based on show_carousel, show_arrows and show_pagination args in controller as well
+* **Description:** The main slider classes. modified based on show_carousel, show_arrows and show_pagination args in controller as well.
 #### `show_arrows` 
 * **Default:** _true_ 
 * **Type:** _bool_ 
-* **Description:** show arrows on main slider?
+* **Description:** Show arrows on main slider?
 #### `show_carousel` 
 * **Default:** _true_ 
 * **Type:** _bool_ 
-* **Description:**  show thumbnail carousel linked to main slider?
+* **Description:**  Show thumbnail carousel linked to main slider?
 #### `show_pagination` 
 * **Default:** _false_ 
 * **Type:** _bool_ 
-* **Description:** show the pagination bullets?
+* **Description:** Show the pagination bullets?
 #### `slides` 
 * **Default:** _[]_ 
 * **Type:** _array_ 
-* **Description:** slide html, images, what have you for the main slider
+* **Description:** Slide html, images, what have you for the main slider.
 #### `slide_classes` 
 * **Default:** _c-slider__slide swiper-slide_ 
 * **Type:** _string_ 
-* **Description:** the main sliders individual slide classes
+* **Description:** The main sliders individual slide classes.
 #### `thumbnails` 
 * **Default:** _[]_ 
 * **Type:** _array_ 
-* **Description:** Array of thumbnail html for the carousel
+* **Description:** Array of thumbnail html for the carousel.
 #### `wrapper_classes` 
 * **Default:** _c-slider__wrapper swiper-wrapper_ 
 * **Type:** _string_ 
-* **Description:** the main sliders slide wrapper classes
+* **Description:** The main sliders slide wrapper classes.
 
 ### Example Usage
 

@@ -64,7 +64,7 @@ An hero panel twig file, being passed the 'content_block' var that was assembled
 
 ```
 
-And the panel controller using the  component
+And the Hero panel controller using the Content_Block component.
 
 ```php
 <?php

@@ -1,6 +1,6 @@
 # Quote Component
 
-A simple quote component to be used wherever you need a quote, with an optional cite attribute
+A simple quote component to be used wherever you need a quote, with an optional cite attribute.
 
 ### File Locations
 
@@ -60,7 +60,7 @@ A testimonial panel twig file, being passed the 'slider' var that was assembled 
 
 ```
 
-And the panel controller using the quote component for the contents of the slider component
+And the panel controller using the quote component for the contents of the slider component.
 
 ```php
 <?php

@@ -113,7 +113,7 @@ The main Index archive template twig file, being passed the 'pagination' var tha
 
 ```
 
-And the panel controller using the  component
+And the Index controller using the Pagination component.
 
 ```php
 class Index extends Base {

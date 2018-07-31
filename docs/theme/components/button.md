@@ -5,7 +5,7 @@ The button component can be used wherever you need a button or link styled as a 
 This component has these features out of box:  
 
 * Supports link or button tags, button is default. 
-* Supports arbitrary attributes, classes, target and link href if in link mode 
+* Supports arbitrary attributes, classes, target and link href if in link mode
 
 ### File Locations
 
@@ -18,37 +18,36 @@ This component has these features out of box:
 #### `btn_as_link` 
 * **Default:** _true_ 
 * **Type:** _bool_ 
-* **Description:** Use link tag? Defaults to button
+* **Description:** Use link tag? Defaults to button.
 
 #### `attrs` 
 * **Default:** _''_ 
 * **Type:** _string_ 
-* **Description:** Data atts, aria etc, eg 'data-js="nav-trigger" aria-controls="etc"'
+* **Description:** Data atts, aria etc, eg 'data-js="nav-trigger" aria-controls="etc"'.
 
 #### `classes` 
 * **Default:** _c-btn_ 
 * **Type:** _string_ 
-* **Description:** Additional classes for the button/link, icon classes etc
+* **Description:** Additional classes for the button/link, icon classes etc.
 
 #### `label` 
 * **Default:** _''_ 
 * **Type:** _string_ 
-* **Description:** The button or link text, wrapped in a span with class of `c-btn__text`
-
+* **Description:** The button or link text, wrapped in a span with class of `c-btn__text`.
 #### `target` 
 * **Default:** _''_ 
 * **Type:** _string_ 
-* **Description:** If type is link you can pass in target
+* **Description:** If type is link you can pass in target.
 
 #### `type` 
 * **Default:** _''_ 
 * **Type:** _string_ 
-* **Description:** If tag is button, you can set type, eg `submit`
+* **Description:** If tag is button, you can set type, eg `submit`.
 
 #### `url` 
 * **Default:** _''_ 
 * **Type:** _string_ 
-* **Description:** If type is link you can set url here
+* **Description:** If type is link you can set url here.
 
 ### Example Usage
 
@@ -82,7 +81,7 @@ An Micro Navigation Button panel twig file, being passed the 'items' var that wa
 
 ```
 
-And the panel controller using the Button component
+And the panel controller using the Button component.
 
 ```php
 <?php
@@ -142,6 +141,21 @@ class MicroNavButtons extends Panel {
 
 ```
 
+When applying CSS for this component, especially in the Kitchen Sink for a SQ1 site, it is best practice to not apply all your styles to the main `.c-btn` class. Instead, you should apply your custom styles to BEM modifiers in your pcss files.
+
+Example:
+```pcss
+.c-btn {
+    @mixin default_btn;
+}
+
+.c-btn--primary {
+    background-color: var(--link-color);
+    color: var(--color-white);
+    padding: 12px 24px;
+    ...
+}
+```
 ## Table of Contents
 
 * [Overview](/docs/theme/components/README.md)

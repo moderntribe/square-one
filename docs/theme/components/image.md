@@ -155,7 +155,7 @@ This component has these features out of box:
 * **Description:** Pass classes for the figure wrapper. If `as_bg` is set true, this gets an auto class of "lazyload".
 
 #### `wrapper_tag`
-* **Default:** _''_
+* **Default:** _'figure'_
 * **Type:** _string_
 * **Description:** Specify HTML tag for the wrapper/background image container.
 
@@ -208,7 +208,7 @@ An Card component twig file used in the CardGrid panel, being passed the 'image'
 </div>
 ```
 
-And the panel controller using the image within the card component.
+And CardGrid the panel controller using the image component within the card component.
 
 ```php
 namespace Tribe\Project\Templates\Content\Panels;

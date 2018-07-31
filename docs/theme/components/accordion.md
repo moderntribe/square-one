@@ -22,43 +22,43 @@ This component has these features out of box:
 #### `container_classes` 
 * **Default:** _c-accordion_ 
 * **Type:** _string_ 
-* **Description:** the wrapper classes
+* **Description:** The wrapper classes.
 #### `container_attrs` 
 * **Default:** _data-js="c-accordion"_ 
 * **Type:** _string_ 
-* **Description:** any additional data or other attributes
+* **Description:** Any additional data or other attributes.
 #### `row_classes` 
 * **Default:** _c-accordion__row_
 * **Type:** _string_ 
-* **Description:** the row classes
+* **Description:** The row classes.
 #### `row_content_classes` 
 * **Default:** _c-accordion__content_ 
 * **Type:** _string_ 
-* **Description:** the row content wrapper classes
+* **Description:** The row content wrapper classes.
 #### `row_content_inner_classes` 
 * **Default:** _c-accordion__content-inner_ 
 * **Type:** _string_ 
-* **Description:** the row content inner classes
+* **Description:** The row content inner classes.
 #### `row_content_name` 
 * **Default:** _accordion_content_ 
 * **Type:** _string_ 
-* **Description:** the content name attribute, if used in panel supply row content field name
+* **Description:** The content name attribute, if used in panel supply row content field name.
 #### `row_header_classes` 
 * **Default:** _c-accordion__header_ 
 * **Type:** _string_ 
-* **Description:** the row header classes
+* **Description:** The row header classes.
 #### `row_header_inner_classes` 
 * **Default:** _c-accordion__header-inner_ 
 * **Type:** _string_ 
-* **Description:** The row header inner classes. wraps the row title text
+* **Description:** The row header inner classes. wraps the row title text.
 #### `row_header_name` 
 * **Default:** _title_ 
 * **Type:** _string_ 
-* **Description:** the header name attribute, if used in panel supply row header text field name
+* **Description:** The header name attribute, if used in panel supply row header text field name.
 #### `rows` 
 * **Default:** _[]_ 
 * **Type:** _array_ 
-* **Description:** an array of accordion rows.
+* **Description:** An array of accordion rows.
 #### `rows[].content` 
 * **Default:** _''_ 
 * **Type:** _string_ 
@@ -115,7 +115,7 @@ An accordion panel twig file, being passed the 'accordion' var that was assemble
 {% endblock %}
 ```
 
-And the panel controller using the accordion component
+And the Accordion panel controller using the accordion component.
 
 ```php
 namespace Tribe\Project\Templates\Content\Panels;

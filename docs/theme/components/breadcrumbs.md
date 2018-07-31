@@ -2,12 +2,9 @@
 
 The breadcrumbs component is string of hierarchical links indicating how deep you are with in a particular section of a site.
 
-This component has these features out of box:  
+This component is essentially a husk. It simply wraps the contents of the items array you place in it.
 
-* Outer wrapper and `<ul>` wrapper for all breadcrumbs.
-
-To use this component properly, you'll need to construct your own array of links to pass in as items.
-Item properties are described below.
+Nothing is assumed here including the separator(s). To use this component properly, you'll need to provide all the things you wish to display here within each item in the array. Item properties are described below.
 
 The example below only uses a single breadcrumb. You'll need to create your own list, possibly by getting post/page parent IDs, and adding those to the breadcrumb `$items[]`.
 
@@ -25,7 +22,7 @@ The example below only uses a single breadcrumb. You'll need to create your own 
 * **Description:** Array of items(links with labels, attrs, etc.) used to build the breadcrumbs list.
 
 #### `wrapper_classes`
-* **Default:** _[]_
+* **Default:** _\[ 'l-container', 'c-breadcrumbs__wrapper' ]_
 * **Type:** _array_
 * **Description:** Array of classes applied to the outer wrapper of the breadcrumbs container.
 
@@ -35,17 +32,17 @@ The example below only uses a single breadcrumb. You'll need to create your own 
 * **Description:** Array of attributes applied to the outer wrapper of the breadcrumbs container.
 
 #### `main_classes`
-* **Default:** _[]_
+* **Default:** _\[ 'c-breadcrumbs' ]_
 * **Type:** _array_
 * **Description:** Array of classes applied to the `<ul>` element wrapper of the breadcrumbs list.
 
 #### `item_classes`
-* **Default:** _[]_
+* **Default:** _\[ 'c-breadcrumbs__item' ]_
 * **Type:** _array_
 * **Description:** Array of classes applied to the `<li>` element of each item in the list.
 
 #### `link_classes`
-* **Default:** _[]_
+* **Default:** _\[ 'anchor', 'c-breadcrumbs__anchor' ]_
 * **Type:** _array_
 * **Description:** Array of classes applied to the `<a>` element of each item in the list.
 

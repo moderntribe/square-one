@@ -43,7 +43,7 @@ This component has these features out of box:
 * **Description:** Full URL src to the shim image that will be used as the lazyloading placeholder for this video.
 
 #### `container_classes`
-* **Default:** _[ 'c-video' ]_
+* **Default:** _\[ 'c-video' ]_
 * **Type:** _array_
 * **Description:** Array of classes that will be applied to the outermost wrapper element.
 
@@ -53,12 +53,12 @@ This component has these features out of box:
 * **Description:** Array of attributes that will be applied to the outermost wrapper element.
 
 #### `container_wrap_classes`
-* **Default:** _[ 'c-video__wrapper' ]_
+* **Default:** _\[ 'c-video__wrapper' ]_
 * **Type:** _array_
 * **Description:** Array of classes that will be applied to the element wrapping the figure element.
 
 #### `figure_classes`
-* **Default:** _[ 'c-video__embed' ]_
+* **Default:** _\[ 'c-video__embed' ]_
 * **Type:** _array_
 * **Description:** Array of classes that will be applied to the figure wrapper (the innermost) element.
 
@@ -94,7 +94,7 @@ A VideoText panel twig file, being passed the 'video' var that was assembled by 
 {% block wrapper_end %}{% endblock %}
 ```
 
-The VideoText controller using the Video component
+The VideoText controller using the Video component.
 
 ```php
 class VideoText extends Panel {

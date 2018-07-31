@@ -54,7 +54,7 @@ This component has these features out of box:
 #### `submit_button`
 * **Default:** _N/A_
 * **Type:** _N/A_
-* **Description:** This component requires you to pass a [Button](/component_docs/button) component to this option.
+* **Description:** This component requires you to pass a [Button](/docs/theme/components/button.md) component to this option.
 
 ### Example Usage
 
@@ -77,7 +77,7 @@ The header twig file, being passed the 'search' var that was assembled by the Ba
 
 ```
 
-And the Base controller using the Search component
+And the Base controller using the Search component.
 
 ```php
 class Base extends Twig_Template {
