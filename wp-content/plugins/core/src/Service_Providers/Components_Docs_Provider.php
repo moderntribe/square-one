@@ -26,13 +26,20 @@ use Tribe\Project\Panels\Types\Testimonial;
 use Tribe\Project\Panels\Types\VideoText;
 use Tribe\Project\Panels\Types\Wysiwyg;
 use Tribe\Project\Templates\Components\Accordion;
+use Tribe\Project\Templates\Components\Breadcrumbs;
 use Tribe\Project\Templates\Components\Button;
 use Tribe\Project\Templates\Components\Card;
 use Tribe\Project\Templates\Components\Content_Block;
 use Tribe\Project\Templates\Components\Image;
+use Tribe\Project\Templates\Components\Pagination;
 use Tribe\Project\Templates\Components\Quote;
 use Tribe\Project\Panels\Types\Accordion as Accordion_Panel;
 use Tribe\Project\Panels\Types\Hero;
+use Tribe\Project\Templates\Components\Search as Search_Component;
+use Tribe\Project\Templates\Components\Slider;
+use Tribe\Project\Templates\Components\Text;
+use Tribe\Project\Templates\Components\Title;
+use Tribe\Project\Templates\Components\Video;
 
 class Components_Docs_Provider implements ServiceProviderInterface {
 
@@ -58,6 +65,13 @@ class Components_Docs_Provider implements ServiceProviderInterface {
 		Content_Block::class,
 		Quote::class,
 		Image::class,
+		Text::class,
+		Title::class,
+		Search_Component::class,
+		Breadcrumbs::class,
+		Slider::class,
+		Video::class,
+		Pagination::class,
 	];
 
 	public function register( Container $container ) {
