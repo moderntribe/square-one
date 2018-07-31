@@ -1,3 +1,5 @@
+# WYSIWYG Panel
+
 The default WYSIWYG Panel is comprised of a title, text content, and an array of WYSIWYG editor blocks.
 
 Sometimes you need to lay out content your own way. This panel allows you to use the WordPress WYSIWYG editor to lay out text and images in a single column, two or even three columns.
@@ -5,6 +7,11 @@ Sometimes you need to lay out content your own way. This panel allows you to use
 ## Usage
 
 Displaying text and/or images, embedding YouTube videos, or social media feeds.
+
+### File Locations
+
+* **Controller:** `wp-content\plugins\core\src\Templates\Content\Panels\WYSIWYG.php`
+* **Template:** `wp-content\themes\core\content\panels\wysiwyg.twig`
 
 ## Fields
 

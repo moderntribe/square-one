@@ -1,8 +1,15 @@
+# Logo Farm Panel
+
 The Logo Farm panel is comprised of a title, text content, and an array of small(ish) images.
 
 ## Usage
 
 Want to plant, grow and harvest enough logos to feed a small village? This is your panel. Sometimes you need to display a list of associated brands, companies you've colaborated with, or clients who you've done work for. This panel allows you to achive that goal by placing logo images in a single line horizontal grid.
+
+### File Locations
+
+* **Controller:** `wp-content\plugins\core\src\Templates\Content\Panels\LogoFarm.php`
+* **Template:** `wp-content\themes\core\content\panels\logofarm.twig`
 
 ## Fields
 
@@ -32,7 +39,7 @@ Want to plant, grow and harvest enough logos to feed a small village? This is yo
 
 ## Components
 
-### [Image](/components_docs/image)
+### [Image](/docs/theme/components/image.md)
 * twig var: `{{ logos }}`
 * twig var type: `array`
 * panel fields: `logo_image`, `logo_cta`

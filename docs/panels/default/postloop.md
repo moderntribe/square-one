@@ -1,3 +1,5 @@
+# Post Loop Panel
+
 The Post Loop panel is comprised of a panel title, text content, and a magical `Post_List` field.
 
 The `Post_List` field has 3 main features and allows you to manually or dynamically add posts or content to this panel.
@@ -10,6 +12,11 @@ The `Post_List` field has 3 main features and allows you to manually or dynamica
 
 Items #1 and #2 above can be combined to create a truly unique Post Loop
 Item #3 facilitiates an easy solution for displaying current content from your site without ever having to update the panel settings.
+
+### File Locations
+
+* **Controller:** `wp-content\plugins\core\src\Templates\Content\Panels\PostLoop.php`
+* **Template:** `wp-content\themes\core\content\panels\postloop.twig`
 
 ## Fields
 
@@ -31,22 +38,22 @@ Item #3 facilitiates an easy solution for displaying current content from your s
 
 ## Components
 
-### [Card](/components_docs/card)
+### [Card](/docs/theme/components/card.md)
 * twig var: `{{ posts }}`
 * twig var type: `array`
 * component children: `Title`, `Image`, `Button`
 
-### [Title](/components_docs/title)
+### [Title](/docs/theme/components/title.md)
 * child of: `Card`
 * usage: `Post Title`
 * automatically set based on the selected post
 
-### [Image](/components_docs/image)
+### [Image](/docs/theme/components/image.md)
 * child of: `Card`
 * usage: `Post Featued Image`
 * automatically set based on the selected post
 
-### [Button](/components_docs/button)
+### [Button](/docs/theme/components/button.md)
 * child of: `Card`
 * usage: `Post Permalink`
 * automatically set based on the selected post

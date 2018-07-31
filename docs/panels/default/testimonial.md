@@ -1,3 +1,5 @@
+# Testimonial Panel
+
 The default Testimonials panel is comprised of a title, background image, and a content slider.
 
 ## Usage
@@ -5,6 +7,11 @@ The default Testimonials panel is comprised of a title, background image, and a 
 Let the users of your site know about all the wonderful things people say about your business, product, service, and/or its employees. This panel uses an optional large background image to set a single backdrop for a slider that displays quotes and allows you to cite the author.
 
 Navigate through the slides by swiping(device/browser dependant) or using the navigation bullets.
+
+### File Locations
+
+* **Controller:** `wp-content\plugins\core\src\Templates\Content\Panels\Testimonial.php`
+* **Template:** `wp-content\themes\core\content\panels\testimonial.twig`
 
 ## Fields
 
