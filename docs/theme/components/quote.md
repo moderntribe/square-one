@@ -37,7 +37,7 @@ A simple quote component to be used wherever you need a quote, with an optional 
 
 ### Example Usage
 
-A testimonial panel twig file, being passed the 'slider' var that was assembled by the panel controller using the quote component as the renderer for the slides array in the slider component component.
+A Testimonial panel twig file, being passed the 'slider' var that was assembled by the panel controller using the quote component as the renderer for the slides array in the slider component component.
 
 ```twig
 {# Panel: Testimonial #}
@@ -60,7 +60,7 @@ A testimonial panel twig file, being passed the 'slider' var that was assembled 
 
 ```
 
-And the panel controller using the quote component for the contents of the slider component.
+And the Testimonial panel controller using the Quote component for the contents of the slider component.
 
 ```php
 <?php

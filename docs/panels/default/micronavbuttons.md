@@ -4,7 +4,7 @@ The default Micro Nav Buttons Panel is comprised of a title, text content, and a
 
 ## Usage
 
-Maybe you need a custom, single-use navigation or some CTAs without all the extra flare of images, titles and descriptions? This panel works well for adding a suplimentary navigation section to a page or post without registering a new menu, or as a CTA group of just buttons.
+Maybe you need a custom, single-use navigation or some CTAs without all the extra flare of images, titles and descriptions? This panel works well for adding a supplementary navigation section to a page or post without registering a new menu, or as a CTA group of just buttons.
 
 ### File Locations
 

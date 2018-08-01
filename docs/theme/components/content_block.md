@@ -37,7 +37,7 @@ A component comprised of the title, text and button components. These are all op
 
 ### Example Usage
 
-An hero panel twig file, being passed the 'content_block' var that was assembled by the panel controller using the content_block component.
+A Hero panel twig file, being passed the 'content_block' var that was assembled by the panel controller using the content_block component.
 
 ```twig
 {# Panel: Hero #}

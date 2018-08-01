@@ -78,7 +78,7 @@ This component has these features out of box:
 
 ### Example Usage
 
-An accordion panel twig file, being passed the 'accordion' var that was assembled by the panel controller using the accordion component.
+An Accordion panel twig file, being passed the 'accordion' var that was assembled by the panel controller using the accordion component.
 
 ```twig
 {# Panel: Accordion #}

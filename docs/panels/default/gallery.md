@@ -17,7 +17,7 @@ The default layout is un-cropped images with a carousel.
 ### File Locations
 
 * **Controller:** `wp-content\plugins\core\src\Templates\Content\Panels\Gallery.php`
-* **Template:** `wp-content\themes\core\content\panels\galery.twig`
+* **Template:** `wp-content\themes\core\content\panels\gallery.twig`
 
 ### Fields
 

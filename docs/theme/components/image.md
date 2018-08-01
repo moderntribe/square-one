@@ -162,7 +162,7 @@ This component has these features out of box:
 
 ### Example Usage
 
-An Card component twig file used in the CardGrid panel, being passed the 'image' var that was assembled by the panel controller using the card component.
+A Card component twig file used in the CardGrid panel, being passed the 'image' var that was assembled by the panel controller using the card component.
 
 ```twig
 <div class="{{ card_classes }}">

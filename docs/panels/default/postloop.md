@@ -6,12 +6,12 @@ The `Post_List` field has 3 main features and allows you to manually or dynamica
 
 ## Usage
 
-1. Manually add individual posts and select the order in which they dispaly.
+1. Manually add individual posts and select the order in which they display.
 2. Manually add custom content(similar to the ([Card Grid](/component_docs/cardgrid) panel) with a title, text content, link, and image.
-3. Choose to dynamically select a preordered group of posts from any combination of active Custom Post Types and Taxonomies within your site.
+3. Choose to dynamically select a pre-ordered group of posts from any combination of active Custom Post Types and Taxonomies within your site.
 
 Items #1 and #2 above can be combined to create a truly unique Post Loop
-Item #3 facilitiates an easy solution for displaying current content from your site without ever having to update the panel settings.
+Item #3 facilitates an easy solution for displaying current content from your site without ever having to update the panel settings.
 
 ### File Locations
 

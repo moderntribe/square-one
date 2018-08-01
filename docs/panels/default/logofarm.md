@@ -4,7 +4,7 @@ The Logo Farm panel is comprised of a title, text content, and an array of small
 
 ## Usage
 
-Want to plant, grow and harvest enough logos to feed a small village? This is your panel. Sometimes you need to display a list of associated brands, companies you've colaborated with, or clients who you've done work for. This panel allows you to achive that goal by placing logo images in a single line horizontal grid.
+Want to plant, grow and harvest enough logos to feed a small village? This is your panel. Sometimes you need to display a list of associated brands, companies you've collaborated with, or clients who you've done work for. This panel allows you to achieve that goal by placing logo images in a single line horizontal grid.
 
 ### File Locations
 

@@ -53,7 +53,7 @@ The example below only uses a single breadcrumb. You'll need to create your own 
 
 ### Example Usage
 
-An single post twig file, being passed the 'breadcrumbs' var that was assembled by the Index controller.
+A single post twig file, being passed the 'breadcrumbs' var that was assembled by the Index controller.
 
 ```twig
 {% extends "base.twig" %}
@@ -86,7 +86,7 @@ An single post twig file, being passed the 'breadcrumbs' var that was assembled 
 {% endblock %}
 ```
 
-And the panel controller using the  component
+And the Index controller using the Breadcrumbs component.
 
 ```php
 class Index extends Base {

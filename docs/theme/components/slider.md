@@ -67,7 +67,7 @@ This component has these features out of box:
 
 ### Example Usage
 
-A gallery panel twig file, being passed the 'slider' var that was assembled by the panel controller using the slider component.
+A Gallery panel twig file, being passed the 'slider' var that was assembled by the panel controller using the slider component.
 
 ```twig
 {# Panel: Gallery #}
@@ -87,7 +87,7 @@ A gallery panel twig file, being passed the 'slider' var that was assembled by t
 {% endblock %}
 ```
 
-And the panel controller using the slider component plus the image component to assemble an image gallery with carousel. Whether to letterbox or crop and showing carousel or not are panel options, and we see how to pass those to the component as well.
+And the Gallery panel controller using the slider component plus the image component to assemble an image gallery with carousel. Whether to letterbox or crop and showing carousel or not are panel options, and we see how to pass those to the component as well.
 
 ```php
 

@@ -76,7 +76,7 @@ This component has these features out of box:
 
 ### Example Usage
 
-A Card Grid panel twig file, being passed the 'cards' var that was assembled by the panel controller using the card component.
+A CardGrid panel twig file, being passed the 'cards' var that was assembled by the panel controller using the card component.
 
 ```twig
 {# Panel: Card Grid #}
@@ -104,7 +104,7 @@ A Card Grid panel twig file, being passed the 'cards' var that was assembled by 
 
 ```
 
-And the panel controller using the Card component
+And the CardGrid panel controller using the Card component.
 
 ```php
 <?php

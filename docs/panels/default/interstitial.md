@@ -6,7 +6,7 @@ Definition: **Interstitial** _adjective_ | of, forming, or occupying interstices
 
 ## Usage
 
-Similar to the [Hero Panel](/components_docs/hero), the Interstitial panel looks very much the same out of the box but is intended to have our world class design and development team customize this. The end result is usually a large hero style block that breaks up your page content and can be intersperced between other panels.
+Similar to the [Hero Panel](/components_docs/hero), the Interstitial panel looks very much the same out of the box but is intended to have our world class design and development team customize this. The end result is usually a large hero style block that breaks up your page content and can be interspersed between other panels.
 
 ### File Locations
 

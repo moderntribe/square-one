@@ -81,7 +81,7 @@ An Micro Navigation Button panel twig file, being passed the 'items' var that wa
 
 ```
 
-And the panel controller using the Button component.
+And the MicroNavButtons panel controller using the Button component.
 
 ```php
 <?php
