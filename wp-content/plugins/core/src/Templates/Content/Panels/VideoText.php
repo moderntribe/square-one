@@ -10,7 +10,7 @@ use Tribe\Project\Templates\Components\Video;
 use Tribe\Project\Templates\Components\Text;
 use Tribe\Project\Templates\Components\Title;
 use Tribe\Project\Theme\Util;
-use Tribe\Project\Theme\Oembed_Filter;
+use Tribe\Project\Facade\Items\Theme\Oembed;
 
 class VideoText extends Panel {
 
@@ -121,10 +121,10 @@ class VideoText extends Panel {
 		$container_classes = [ 'c-video--lazy' ];
 
 		if ( $data->provider_name === 'YouTube' ) {
-			$embed_id    = Oembed_Filter::get_youtube_embed_id( $url );
-			$video_thumb = Oembed_Filter::get_youtube_max_resolution_thumbnail( $url );
+			$embed_id    = Oembed::get_youtube_embed_id( $url );
+			$video_thumb = Oembed::get_youtube_max_resolution_thumbnail( $url );
 		} else {
-			$embed_id    = Oembed_Filter::get_vimeo_embed_id( $url );
+			$embed_id    = Oembed::get_vimeo_embed_id( $url );
 			$video_thumb = $data->thumbnail_url;
 		}
 
