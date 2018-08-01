@@ -10,6 +10,7 @@ use Tribe\Project\Templates\Components\Video;
 use Tribe\Project\Templates\Components\Text;
 use Tribe\Project\Templates\Components\Title;
 use Tribe\Project\Theme\Util;
+use Tribe\Project\Theme\Oembed_Filter;
 
 class VideoText extends Panel {
 
@@ -109,14 +110,39 @@ class VideoText extends Panel {
 	}
 
 	protected function get_panel_video() {
+		if ( empty( $this->panel_vars[ VideoTextPanel::FIELD_VIDEO ] ) ) {
+			return '';
+		}
+
+		$url = $this->panel_vars[ VideoTextPanel::FIELD_VIDEO ];
+		$oembed   = _wp_oembed_get_object();
+		$provider = $oembed->get_provider( $url );
+		$data     = $oembed->fetch( $provider, $url );
+		$container_classes = [ 'c-video--lazy' ];
+
+		if ( $data->provider_name === 'YouTube' ) {
+			$embed_id    = Oembed_Filter::get_youtube_embed_id( $url );
+			$video_thumb = Oembed_Filter::get_youtube_max_resolution_thumbnail( $url );
+		} else {
+			$embed_id    = Oembed_Filter::get_vimeo_embed_id( $url );
+			$video_thumb = $data->thumbnail_url;
+		}
 
 		$options = [
-			Video::VIDEO_URL => esc_html( $this->panel_vars[ VideoTextPanel::FIELD_VIDEO ] ),
+			Video::THUMBNAIL_URL     => $video_thumb,
+			Video::CONTAINER_ATTRS   => [
+				'data-js'             => 'c-video',
+				'data-embed-id'       => $embed_id,
+				'data-embed-provider' => $data->provider_name,
+			],
+			Video::CONTAINER_CLASSES => $container_classes,
+			Video::TITLE             => __( 'Play Video', 'tribe' ),
+			Video::VIDEO_URL         => $url,
+			Video::PLAY_TEXT         => $data->title,
 		];
 
-		$video = Video::factory( $options );
-
-		return $video->render();
+		$video_obj     = Video::factory( $options );
+		return $video_obj->render();
 	}
 
 	protected function get_wrapper_classes() {
