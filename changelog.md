@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [1.6.1] - 2018-08-01
+
+* Added an incremental increase to the delay for reprocessing a failed task in the queue, based on the number of times it has failed.
+
 ## [1.6] - 2018-08-01
 
 Functionality was added to allow a project to require all gifs displayed anywhere at full size and not a thumbnail.  It is commented out in the Theme service provider by default.
