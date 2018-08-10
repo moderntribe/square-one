@@ -23,6 +23,12 @@
   "_core_plugin_path": "wp-content/plugins/core",
   "_npm_path": "node_modules",
   "_component_path": "dev_components",
+  "browserslist": [
+    "last 3 versions",
+    "IE 8",
+    "iOS >= 9",
+    "Safari >= 9"
+  ],
   "engines": {
     "node": "8.9.3",
     "npm": "5.5.1"
@@ -100,8 +106,8 @@
     "lost": "^8.0.0",
     "nyc": "^11.4.1",
     "postcss-aspect-ratio": "^1.0.0",
+    "postcss-calc": "^6.0.1",
     "postcss-color-function": "^3.0.0",
-    "postcss-cssnext": "^3.1.0",
     "postcss-custom-media": "^5.0.1",
     "postcss-custom-properties": "^5.0.1",
     "postcss-functions": "^2.1.1",
@@ -109,6 +115,7 @@
     "postcss-mixins": "^5.4.0",
     "postcss-nested": "^1.0.0",
     "postcss-partial-import": "^2.1.0",
+    "postcss-preset-env": "^5.3.0",
     "postcss-quantity-queries": "^0.4.0",
     "postcss-reporter": "^3.0.0",
     "postcss-simple-vars": "^3.0.0",
