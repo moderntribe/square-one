@@ -4,6 +4,59 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [1.6] - 2018-08-01
+
+Functionality was added to allow a project to require all gifs displayed anywhere at full size and not a thumbnail.  It is commented out in the Theme service provider by default.
+
+### Added
+
+* Theme/Full_Size_Gif - filters image_downsize to provide full size gifs only
+
+## [1.5.3] - 2018-07-30
+
+### Added
+
+* Added social media ACF settings
+* Added the social follow data to the base controller
+
+### Changed
+
+* Updated Instagram and Google+ Icons
+* Updated the Social Follow twig template
+
+## [1.5.2] - 2018-07-23
+
+### Added
+
+* Added a new server_dist grunt task that excludes yarn installing
+
+### Changed
+
+* Now updating build-process.php when performing any grunt compilation task to aid with performant deploys
+
+## [1.5.1] - 2018-07-22
+
+### Changed
+
+* Updated WordPress to 4.9.7
+
+## [1.5] - 2018-07-20
+
+### Added
+
+* Ansible boilerplate directory
+
+## [1.4.1] - 2018-07-12
+
+### Fixed
+* Removed manifest.js enqueue from admin scripts. This was a remnant from the previous version of Webpack which was updated to v4.5.0 in v1.2.
+
+## [1.4] - 2018-06-19
+
+### Changed
+
+* JS slide util - Changed delay-based slide to RAF-based
+
 ## [1.3] - 2018-06-12
 
 Queues framework has been added. This allows for running slower processes separately from a browser request.
@@ -12,7 +65,7 @@ Queues framework has been added. This allows for running slower processes separa
 
 * Queue - A queue requires a backend for storing messages that passed to it.
 * Backends - MySQL is the default backend, but it is easy to implement the Backend interface and roll your own.
-* Messages (or Tasks) - Isolated functions that are run by the queue consumer.  
+* Messages (or Tasks) - Isolated functions that are run by the queue consumer.
 
 ## [1.2] - 2018-05-08
 

@@ -25,7 +25,7 @@ const options = {
  */
 
 const closeOthers = (row) => {
-	tools.getNodes('.active .c-accordion__content', true, row.parentNode, true).forEach(accordion => slide.up(accordion, options.speed));
+	tools.getNodes('.active .c-accordion__content', true, row.parentNode, true).forEach(accordion => slide.up(accordion, accordion.id, options.speed));
 	tools.getNodes('.active', true, row.parentNode, true).forEach((childRow) => {
 		tools.removeClass(childRow, 'active');
 		setAccInactiveAttributes(childRow.querySelectorAll('.c-accordion__header')[0], childRow.querySelectorAll('.c-accordion__content')[0]);
@@ -60,7 +60,7 @@ const openAccordion = (header, content) => {
 	setAccActiveAttributes(header, content);
 	setOffset();
 
-	slide.down(content, options.speed);
+	slide.down(content, content.id, options.speed);
 	_.delay(() => {
 		scrollTo({
 			after_scroll: () => {
@@ -85,7 +85,7 @@ const openAccordion = (header, content) => {
 const closeAccordion = (header, content) => {
 	tools.removeClass(header.parentNode, 'active');
 	setAccInactiveAttributes(header, content);
-	slide.up(content, options.speed);
+	slide.up(content, content.id, options.speed);
 	_.delay(() => {
 		events.trigger({
 			event: 'modern_tribe/accordion_animated',

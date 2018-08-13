@@ -20,10 +20,14 @@ Attributes:
 		url: 'http://google.com' // string. if type is link you can set url
 		force_display: false // true/false display button if empty
 		inner_attributes: 'data-js="nav-trigger" aria-controls="etc"', // string. data atts, aria etc
+		aria_label: '' // string. add screen reader text for labels that aren't clear as to where they navigate to.
     }
  #}
 
 <{{ tag }} class="{{ classes }}"
+	{% if aria_label %}
+	aria-label="{{ aria_label }}"
+    {% endif %}
 	{% if type %}
 	type="{{ type }}"
 	{% endif %}
