@@ -25,7 +25,7 @@
   "_component_path": "dev_components",
   "browserslist": [
     "last 3 versions",
-    "IE 8",
+    "IE 11",
     "iOS >= 9",
     "Safari >= 9"
   ],
