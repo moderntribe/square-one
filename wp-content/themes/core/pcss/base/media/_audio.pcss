@@ -4,8 +4,30 @@
 
 .wp-playlist.wp-audio-playlist .mejs-container,
 .wp-audio-shortcode.mejs-container {
+	height: 40px !important;
+}
+
+.wp-audio-shortcode.mejs-container {
+	margin-top: var(--spacer-s);
+	margin-bottom: var(--spacer-s);
+
+	@media (--viewport-medium) {
+		margin-top: var(--spacer);
+		margin-bottom: var(--spacer);
+	}
+
+	.mejs-inner,
+	.mejs-mediaelement,
+	.mejs-controls {
+		max-width: 480px;
+	}
+}
+
+.wp-playlist.wp-video-playlist .mejs-container,
+.wp-video-shortcode.mejs-container,
+.wp-playlist.wp-audio-playlist .mejs-container,
+.wp-audio-shortcode.mejs-container {
 	background: transparent;
-	height: 34px !important;
 
 	* {
 		font-family: var(--font-family-sans-serif);
@@ -27,12 +49,16 @@
 		background: transparent;
 	}
 
+	.mejs-time {
+		padding: 13px 6px 0;
+	}
+
 	.mejs-time-slider {
 		outline: none;
 	}
 
 	.mejs-controls .mejs-time-rail .mejs-time-total {
-		margin: 8px 5px 5px;
+		margin: 6px 5px 5px;
 	}
 
 	.mejs-currenttime-container {
@@ -40,11 +66,11 @@
 	}
 
 	.mejs-duration-container {
-		margin-left: -75px;
+
 	}
 
 	.mejs-horizontal-volume-slider {
-		margin-left: -8px;
+
 	}
 
 	.mejs-controls .mejs-button button:focus {
@@ -146,13 +172,12 @@
 			.mejs-horizontal-volume-total {
 				height: 4px;
 				border-radius: 2px;
-				top: 13px;
+				top: 16px;
 			}
 
 			.mejs-horizontal-volume-current {
 				height: 4px;
 				border-radius: 2px;
-				top: 13px;
 			}
 		}
 	}
@@ -162,23 +187,12 @@
 	}
 
 	.mejs-volume-button {
-		margin-left: -40px;
+
 	}
 
 	.mejs-currenttime,
 	.mejs-duration {
 		font-size: 11px;
 		letter-spacing: 0.075em;
-	}
-}
-
-.wp-audio-shortcode.mejs-container {
-	margin-top: var(--spacer-lg);
-	margin-bottom: var(--spacer-lg);
-
-	.mejs-inner,
-	.mejs-mediaelement,
-	.mejs-controls {
-		max-width: 480px;
 	}
 }

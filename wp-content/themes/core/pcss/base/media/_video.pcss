@@ -1,0 +1,31 @@
+/* -----------------------------------------------------------------------------
+ * Media: Video (!importants needed to override js sizing)
+ * ----------------------------------------------------------------------------- */
+
+.wp-video-shortcode.mejs-container {
+	margin-top: var(--spacer-s);
+	margin-bottom: var(--spacer-s);
+
+	@media (--viewport-medium) {
+		margin-top: var(--spacer);
+		margin-bottom: var(--spacer);
+	}
+}
+
+.wp-playlist.wp-video-playlist .mejs-container,
+.wp-video-shortcode.mejs-container {
+	position: relative;
+
+	.mejs-controls {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		top: auto;
+	}
+
+	.mejs-inner,
+	.mejs-mediaelement,
+	.mejs-controls {
+		background: var(--video-bg);
+	}
+}
