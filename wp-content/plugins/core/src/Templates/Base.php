@@ -10,7 +10,7 @@ use Tribe\Project\Templates\Components\Button;
 use Tribe\Project\Twig\Stringable_Callable;
 use Tribe\Project\Twig\Template_Interface;
 use Tribe\Project\Twig\Twig_Template;
-use Tribe\Project\Object_Meta\Social_Settings;
+use Tribe\Project\Object_Meta\General_Settings;
 
 class Base extends Twig_Template {
 
@@ -179,13 +179,13 @@ class Base extends Twig_Template {
 
 		// Change the order of this array to change the display order
 		$social_keys = [
-			Social_Settings::FACEBOOK,
-			Social_Settings::TWITTER,
-			Social_Settings::YOUTUBE,
-			Social_Settings::LINKEDIN,
-			Social_Settings::PINTEREST,
-			Social_Settings::INSTAGRAM,
-			Social_Settings::GOOGLE,
+			General_Settings::FACEBOOK,
+			General_Settings::TWITTER,
+			General_Settings::YOUTUBE,
+			General_Settings::LINKEDIN,
+			General_Settings::PINTEREST,
+			General_Settings::INSTAGRAM,
+			General_Settings::GOOGLE,
 		];
 
 		foreach ( $social_keys as $social_site ) {
@@ -194,7 +194,7 @@ class Base extends Twig_Template {
 			if ( ! empty( $social_link ) ) {
 				$links[ $social_site ] = [
 					'url'   => $social_link,
-					'title' => Social_Settings::get_social_follow_message( $social_site ),
+					'title' => General_Settings::get_social_follow_message( $social_site ),
 				];
 			}
 		}
