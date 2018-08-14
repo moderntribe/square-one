@@ -12,11 +12,11 @@ class Site_Tags_Settings extends ACF\ACF_Meta_Group {
 
 	const NAME = 'site_tags_settings';
 
-	const SITE_TAG_GTM = 'id_google_tag_manager';
+	const GOOGLE_TAG_MANAGER = 'id_google_tag_manager';
 
 	public function get_keys() {
 		return [
-			static::SITE_TAG_GTM,
+			static::GOOGLE_TAG_MANAGER,
 		];
 	}
 
@@ -34,10 +34,10 @@ class Site_Tags_Settings extends ACF\ACF_Meta_Group {
 	}
 
 	private function get_site_tag_gtm_field() {
-		$field = new ACF\Field( self::NAME . '_' . self::SITE_TAG_GTM );
+		$field = new ACF\Field( self::NAME . '_' . self::GOOGLE_TAG_MANAGER );
 		$field->set_attributes( [
 			'label'       => __( 'Google Tag Manager ID', 'tribe' ),
-			'name'        => self::SITE_TAG_GTM,
+			'name'        => self::GOOGLE_TAG_MANAGER,
 			'type'        => 'text',
 			'placeholder' => __( 'Enter Google Tag Manager ID (GTM-XXXX)', 'tribe' ),
 		] );

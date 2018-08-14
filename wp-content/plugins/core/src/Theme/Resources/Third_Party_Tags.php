@@ -20,7 +20,7 @@ class Third_Party_Tags {
    	 */
    	public function inject_google_tag_manager_head_tag() {
 
-		$id = $this->settings->get_value( Site_Tags_Settings::SITE_TAG_GTM );
+		$id = $this->settings->get_value( Site_Tags_Settings::GOOGLE_TAG_MANAGER );
 
    		if ( empty( $id ) ) {
    			return;
@@ -44,7 +44,7 @@ class Third_Party_Tags {
 	 */
 	public function inject_google_tag_manager_body_tag() {
 
-		$id = $this->settings->get_value( Site_Tags_Settings::SITE_TAG_GTM );
+		$id = $this->settings->get_value( Site_Tags_Settings::GOOGLE_TAG_MANAGER );
 
 		if ( empty( $id ) ) {
 			return;
