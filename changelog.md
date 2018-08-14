@@ -4,7 +4,60 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [1.4] - TBD
+## [1.7] - 2018-08-13
+
+### Added
+
+Added in the Classic Editor and Classic Editor Addon plugins.
+
+## [1.6] - 2018-08-01
+
+Functionality was added to allow a project to require all gifs displayed anywhere at full size and not a thumbnail.  It is commented out in the Theme service provider by default.
+
+### Added
+
+* Theme/Full_Size_Gif - filters image_downsize to provide full size gifs only
+
+## [1.5.3] - 2018-07-30
+
+### Added
+
+* Added social media ACF settings
+* Added the social follow data to the base controller
+
+### Changed
+
+* Updated Instagram and Google+ Icons
+* Updated the Social Follow twig template
+
+## [1.5.2] - 2018-07-23
+
+### Added
+
+* Added a new server_dist grunt task that excludes yarn installing
+
+### Changed
+
+* Now updating build-process.php when performing any grunt compilation task to aid with performant deploys
+
+## [1.5.1] - 2018-07-22
+
+### Changed
+
+* Updated WordPress to 4.9.7
+
+## [1.5] - 2018-07-20
+
+### Added
+
+* Ansible boilerplate directory
+
+## [1.4.1] - 2018-07-12
+
+### Fixed
+* Removed manifest.js enqueue from admin scripts. This was a remnant from the previous version of Webpack which was updated to v4.5.0 in v1.2.
+
+## [1.4] - 2018-06-19
 
 ### Changed
 

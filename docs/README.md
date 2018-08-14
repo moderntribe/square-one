@@ -86,3 +86,8 @@
   * [Overview](/docs/tests/README.md)
   * [Codeception](/docs/tests/codeception.md)
   * [Jest](/docs/tests/jest.md)
+* **Deploys with Ansible**
+  * [Overview](/docs/ansible/README.md)
+  * [Terminology](/docs/ansible/terminology.md)
+  * [Initial Setup](/docs/ansible/initial-setup.md)
+  * [Executing Deploys](/docs/ansible/deploys.md)
