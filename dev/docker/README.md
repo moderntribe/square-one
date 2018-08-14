@@ -98,3 +98,34 @@ download it from [here](https://store.docker.com/editions/community/docker-ce-de
    ```
 6. Restart your project's docker container by running /dev/docker/stop.sh then /dev/docker/start.sh
 7. You should now have a fully functioning multisite setup.
+
+# WP CLI and xdebug
+
+The `start.sh` script will attempt to symlink `/usr/local/bin/wp` to `dev/bin/wp` when starting your local container. If 
+your WP CLI binary is not in this path, you may need to manually create the symlink.
+
+In PhpStorm, you'll need to ensure you map your `wp` symlink to the container's `/usr/local/bin/wp` path.
+
+![alt text](https://i.imgur.com/ZXHxLty.png)
+
+### Usage
+
+```
+cd dev/docker
+./exec.sh /bin/bash
+cd /application/www/dev/docker
+./wpx.sh <command>
+```
+Or, from your host machine, run:
+
+```
+cd dev/docker
+./exec.sh /application/www/dev/docker/wpx.sh <command>
+```
+
+Example
+
+```
+cd dev/docker
+./exec.sh /application/www/dev/docker/wpx.sh s1 cache-prime
+```

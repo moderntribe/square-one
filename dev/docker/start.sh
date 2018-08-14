@@ -57,6 +57,11 @@ if [ ! -f ${CONFIG_FILE} ]; then
     fi
 fi
 
+# symlink wp cli binary to the dev/bin directory so wpx.sh works
+if [ ! -f ././../bin/wp ]; then
+    ln -s /usr/local/bin/wp ././../bin/wp
+fi
+
 # synchronize VM time with system time
 ${D_COMMAND} run --privileged --rm phpdockerio/php7-fpm date -s "$(date -u "+%Y-%m-%d %H:%M:%S")"
 
