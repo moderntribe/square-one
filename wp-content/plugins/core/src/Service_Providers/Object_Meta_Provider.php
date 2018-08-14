@@ -1,32 +1,33 @@
 <?php
 
-
 namespace Tribe\Project\Service_Providers;
-
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Tribe\Libs\Object_Meta\Meta_Repository;
 use Tribe\Project\Object_Meta\Example;
-use Tribe\Project\Object_Meta\General_Settings;
+use Tribe\Project\Object_Meta\Site_Tags_Settings;
+use Tribe\Project\Object_Meta\Social_Settings;
 use Tribe\Project\Post_Types;
 use Tribe\Project\Settings;
 use Tribe\Project\Taxonomies;
 
 class Object_Meta_Provider implements ServiceProviderInterface {
 
-	const REPO             = 'object_meta.collection_repo';
-	const EXAMPLE          = 'object_meta.example';
-	const GENERAL_SETTINGS = 'object_meta.general_settings';
+	const REPO               = 'object_meta.collection_repo';
+	const EXAMPLE            = 'object_meta.example';
+	const SITE_TAGS_SETTINGS = 'object_meta.site_tags_settings';
+	const SOCIAL_SETTINGS    = 'object_meta.social_settings';
 
 	private $keys = [
 		self::EXAMPLE,
-		self::GENERAL_SETTINGS,
+		self::SITE_TAGS_SETTINGS,
+		self::SOCIAL_SETTINGS,
 	];
 
 	public function register( Container $container ) {
 		$this->example( $container );
-		$this->general_settings( $container );
+		$this->site_settings( $container );
 
 		$container[ self::REPO ] = function ( Container $container ) {
 			$meta_repo = array_map( function ( $key ) use ( $container ) {
@@ -58,9 +59,15 @@ class Object_Meta_Provider implements ServiceProviderInterface {
 		};
 	}
 
-	private function general_settings( Container $container ) {
-		$container[ self::GENERAL_SETTINGS ] = function ( Container $container ) {
-			return new General_Settings( [
+	private function site_settings( Container $container ) {
+		$container[ self::SOCIAL_SETTINGS ] = function ( Container $container ) {
+			return new Social_Settings( [
+				'settings_pages' => [ Settings\General::instance()->get_slug() ],
+			] );
+		};
+
+		$container[ self::SITE_TAGS_SETTINGS ] = function ( Container $container ) {
+			return new Site_Tags_Settings( [
 				'settings_pages' => [ Settings\General::instance()->get_slug() ],
 			] );
 		};
