@@ -5,6 +5,7 @@
 
 import accordion from './accordion';
 import slider from './slider';
+import tabs from './tabs';
 
 /**
  * @function init
@@ -14,6 +15,7 @@ import slider from './slider';
 const init = () => {
 	accordion();
 	slider();
+	tabs();
 };
 
 export default init;
