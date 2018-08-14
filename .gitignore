@@ -90,6 +90,7 @@ dev/docker/mysql/*
 !dev/docker/mysql/.gitkeep
 wp-content/themes/core/css
 wp-content/themes/core/js/dist
+vendor/
 
 # WP Engine #
 #############

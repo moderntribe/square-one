@@ -53,7 +53,7 @@ class CardGrid extends Panel {
 				}
 
 				if ( ! empty( $card[ CardGridPanel::FIELD_CARD_CTA ] ) ) {
-					$options[ Card::BUTTON ] = $this->get_card_button( $card[ CardGridPanel::FIELD_CARD_CTA ], $card[ CardGridPanel::FIELD_CARD_TITLE ] );
+					$options[ Card::BUTTON ] = $this->get_card_button( $card[ CardGridPanel::FIELD_CARD_CTA ] );
 				}
 
 				$card_obj = Card::factory( $options );
@@ -64,6 +64,12 @@ class CardGrid extends Panel {
 		}
 
 		return $cards;
+	}
+
+	private function get_layout_container_attrs( $panel, $panel_object ): string {
+		$data_attrs = sprintf( 'data-name="panels" data-depth="%s" data-livetext', esc_attr( $panel_object->get_depth() ) );
+
+		return sprintf( '%s', $data_attrs );
 	}
 
 	protected function get_cardgrid_attributes() {
@@ -145,7 +151,7 @@ class CardGrid extends Panel {
 		return $text_obj->render();
 	}
 
-	protected function get_card_button( $cta, $aria_label ) {
+	protected function get_card_button( $cta ) {
 		if ( empty( $cta[ Button::URL ] ) ) {
 			return '';
 		}
@@ -156,7 +162,6 @@ class CardGrid extends Panel {
 			Button::TARGET      => esc_attr( $cta[ Button::TARGET ] ),
 			Button::BTN_AS_LINK => true,
 			Button::CLASSES     => [ 'c-btn c-btn--sm' ],
-			Button::ARIA_LABEL  => $aria_label,
 		];
 
 		$button_obj = Button::factory( $options );

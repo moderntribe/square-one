@@ -127,7 +127,6 @@ class MySQL implements Backend {
 			[
 				'taken'    => 0,
 				'priority' => $this->get_priority( $job_id ) + 1,
-				'run_after' => ( new \DateTime( '+10 seconds' ) )->format( 'Y-m-d H:i:s' ),
 			],
 			[ 'id' => $job_id ]
 		);

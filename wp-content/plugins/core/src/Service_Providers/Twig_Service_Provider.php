@@ -99,10 +99,6 @@ class Twig_Service_Provider implements ServiceProviderInterface {
 			return new Templates\Content\Panels\PostLoop( 'content/panels/postloop.twig', $container['twig'] );
 		};
 
-		$container['twig.templates.content/panels/tabs'] = function ( Container $container ) {
-			return new Templates\Content\Panels\Tabs( 'content/panels/tabs.twig', $container['twig'] );
-		};
-
 		$container['twig.templates.content/panels/testimonial'] = function ( Container $container ) {
 			return new Templates\Content\Panels\Testimonial( 'content/panels/testimonial.twig', $container['twig'] );
 		};

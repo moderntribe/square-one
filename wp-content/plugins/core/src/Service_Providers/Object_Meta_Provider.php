@@ -11,21 +11,17 @@ use Tribe\Project\Object_Meta\Example;
 use Tribe\Project\Post_Types;
 use Tribe\Project\Settings;
 use Tribe\Project\Taxonomies;
-use Tribe\Project\Object_Meta\Social_Settings;
 
 class Object_Meta_Provider implements ServiceProviderInterface {
-	const REPO            = 'object_meta.collection_repo';
-	const EXAMPLE         = 'object_meta.example';
-	const SOCIAL_SETTINGS = 'object_meta.social_settings';
+	const REPO    = 'object_meta.collection_repo';
+	const EXAMPLE = 'object_meta.example';
 
 	private $keys = [
 		self::EXAMPLE,
-		self::SOCIAL_SETTINGS,
 	];
 
 	public function register( Container $container ) {
 		$this->example( $container );
-		$this->social_settings( $container );
 
 		$container[ self::REPO ] = function ( Container $container ) {
 			$meta_repo = array_map( function ( $key ) use ( $container ) {
@@ -53,14 +49,6 @@ class Object_Meta_Provider implements ServiceProviderInterface {
 				'taxonomies'     => [ Taxonomies\Category\Category::NAME ],
 				'settings_pages' => [ Settings\General::instance()->get_slug() ],
 				'users'          => true,
-			] );
-		};
-	}
-
-	private function social_settings( Container $container ) {
-		$container[ self::SOCIAL_SETTINGS ] = function ( Container $container ) {
-			return new Social_Settings( [
-				'settings_pages' => [ Settings\General::instance()->get_slug() ],
 			] );
 		};
 	}

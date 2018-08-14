@@ -100,6 +100,7 @@ const closeAccordion = (header, content) => {
  */
 
 const handlePanelEvents = (e) => {
+	console.log(e);
 	const panel = document.querySelectorAll('.site-panel--accordion[class*="collection-preview__active"]')[0];
 	if (!panel) {
 		return;

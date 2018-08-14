@@ -22,8 +22,6 @@ class Force_Plugin_Activation {
 		'panel-builder/tribe-panel-builder.php',
 		'tribe-admin-dashboard/tribe-admin-dashboard.php',
 		'tribe-branding/tribe-branding.php',
-		'classic-editor/classic-editor.php',
-		'classic-editor-addon/classic-editor-addon.php',
 	);
 
 	/**

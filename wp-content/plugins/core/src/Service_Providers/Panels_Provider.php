@@ -24,7 +24,6 @@ class Panels_Provider implements ServiceProviderInterface {
 		Panels\Types\LogoFarm::class,
 		Panels\Types\Testimonial::class,
 		Panels\Types\PostLoop::class,
-		Panels\Types\Tabs::class,
 	];
 
 	public function register( Container $container ) {

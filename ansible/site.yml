@@ -1,4 +1,0 @@
----
-- import_playbook: setup-system.yml
-- import_playbook: setup-database.yml
-- import_playbook: setup-project.yml
