@@ -23,7 +23,8 @@ var compileOptions = {
 		require('postcss-nested'),
 		require('lost'),
 		require('postcss-inline-svg'),
-		require('postcss-cssnext'),
+		require('postcss-preset-env')({ stage: 0 }),
+		require('postcss-calc'),
 	],
 };
 
@@ -37,7 +38,7 @@ var legacyOptions = {
 		require('postcss-custom-properties'),
 		require('postcss-simple-vars'),
 		require('postcss-nested'),
-		require('postcss-cssnext')({ browsers: ['last 20 versions', 'ie 6'] }),
+		require('postcss-preset-env')({ browsers: ['last 20 versions', 'ie 6'] }),
 	],
 };
 
