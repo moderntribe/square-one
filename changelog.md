@@ -8,7 +8,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ### Added
 
-Added in the Classic Editor and Classic Editor Addon plugins.
+* Added in the Classic Editor and Classic Editor Addon plugins.
+* Added Analytics ACF settings to the "General Settings" page with a GTM field and FE/theme integration.
+* Added the build process include in wp-config.php for FE asset cache busting.
+
+### Changed
+
+Replaced deprecated postcss-cssnext with postcss-preset-env.
 
 ## [1.6] - 2018-08-01
 
