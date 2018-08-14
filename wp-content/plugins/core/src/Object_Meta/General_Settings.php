@@ -37,6 +37,10 @@ class General_Settings extends ACF\ACF_Meta_Group {
 		];
 	}
 
+	public function get_value( $key, $post_id = 'option' ) {
+		return in_array( $key, $this->get_keys(), true ) ? get_field( $key, $post_id ) : null;
+	}
+
 	public static function get_social_follow_message( $key ) {
 		switch ( $key ) {
 			case self::FACEBOOK:

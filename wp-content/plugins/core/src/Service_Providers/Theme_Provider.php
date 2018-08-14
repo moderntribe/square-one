@@ -254,7 +254,7 @@ class Theme_Provider implements ServiceProviderInterface {
 
 	private function third_party_tags( Container $container ) {
 		$container[ 'theme.resources.third_party_tags' ] = function ( Container $container ) {
-			return new Third_Party_Tags();
+			return new Third_Party_Tags( $container[ Object_Meta_Provider::GENERAL_SETTINGS ] );
 		};
 		add_action( 'wp_head', function () use ( $container ) {
 			$container[ 'theme.resources.third_party_tags' ]->inject_google_tag_manager_head_tag();

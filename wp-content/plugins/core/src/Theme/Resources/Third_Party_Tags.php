@@ -6,12 +6,21 @@ use Tribe\Project\Object_Meta\General_Settings;
 
 class Third_Party_Tags {
 
+	/**
+	 * @var General_Settings
+	 */
+    private $settings;
+
+    public function __construct( General_Settings $settings ) {
+        $this->settings = $settings;
+    }
+
     /**
    	 *  Google Tag Manager (head tag)
    	 */
    	public function inject_google_tag_manager_head_tag() {
 
-   		$id = General_Settings::instance()->get_setting( General_Settings::ID_GTM );
+		$id = $this->settings->get_value( General_Settings::ID_GTM );
 
    		if ( empty( $id ) ) {
    			return;
@@ -35,7 +44,7 @@ class Third_Party_Tags {
 	 */
 	public function inject_google_tag_manager_body_tag() {
 
-		$id = General_Settings::instance()->get_setting( General_Settings::ID_GTM );
+		$id = $this->settings->get_value( General_Settings::ID_GTM );
 
 		if ( empty( $id ) ) {
 			return;
@@ -51,5 +60,3 @@ class Third_Party_Tags {
 		<?php
 	}
 }
-
-new Third_Party_Tags();
