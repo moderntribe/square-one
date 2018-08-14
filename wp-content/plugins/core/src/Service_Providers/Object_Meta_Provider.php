@@ -6,7 +6,7 @@ use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Tribe\Libs\Object_Meta\Meta_Repository;
 use Tribe\Project\Object_Meta\Example;
-use Tribe\Project\Object_Meta\Site_Tags_Settings;
+use Tribe\Project\Object_Meta\Analytics_Settings;
 use Tribe\Project\Object_Meta\Social_Settings;
 use Tribe\Project\Post_Types;
 use Tribe\Project\Settings;
@@ -16,12 +16,12 @@ class Object_Meta_Provider implements ServiceProviderInterface {
 
 	const REPO               = 'object_meta.collection_repo';
 	const EXAMPLE            = 'object_meta.example';
-	const SITE_TAGS_SETTINGS = 'object_meta.site_tags_settings';
+	const ANALYTICS_SETTINGS = 'object_meta.analytics_settings';
 	const SOCIAL_SETTINGS    = 'object_meta.social_settings';
 
 	private $keys = [
 		self::EXAMPLE,
-		self::SITE_TAGS_SETTINGS,
+		self::ANALYTICS_SETTINGS,
 		self::SOCIAL_SETTINGS,
 	];
 
@@ -66,8 +66,8 @@ class Object_Meta_Provider implements ServiceProviderInterface {
 			] );
 		};
 
-		$container[ self::SITE_TAGS_SETTINGS ] = function ( Container $container ) {
-			return new Site_Tags_Settings( [
+		$container[ self::ANALYTICS_SETTINGS ] = function ( Container $container ) {
+			return new Analytics_Settings( [
 				'settings_pages' => [ Settings\General::instance()->get_slug() ],
 			] );
 		};

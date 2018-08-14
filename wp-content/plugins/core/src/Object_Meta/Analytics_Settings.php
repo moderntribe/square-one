@@ -4,13 +4,9 @@ namespace Tribe\Project\Object_Meta;
 
 use Tribe\Libs\ACF;
 
-/**
- * Class Post
- * @package Tribe\Project\Object_Meta
- */
-class Site_Tags_Settings extends ACF\ACF_Meta_Group {
+class Analytics_Settings extends ACF\ACF_Meta_Group {
 
-	const NAME = 'site_tags_settings';
+	const NAME = 'analytics_settings';
 
 	const GOOGLE_TAG_MANAGER = 'id_google_tag_manager';
 
@@ -26,7 +22,7 @@ class Site_Tags_Settings extends ACF\ACF_Meta_Group {
 
 	public function get_group_config() {
 		$group = new ACF\Group( self::NAME, $this->object_types );
-		$group->set( 'title', __( 'Site Tags Settings', 'tribe' ) );
+		$group->set( 'title', __( 'Site Analytics Settings', 'tribe' ) );
 
 		$group->add_field( $this->get_site_tag_gtm_field() );
 

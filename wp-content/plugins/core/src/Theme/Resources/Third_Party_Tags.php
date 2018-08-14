@@ -2,16 +2,16 @@
 
 namespace Tribe\Project\Theme\Resources;
 
-use Tribe\Project\Object_Meta\Site_Tags_Settings;
+use Tribe\Project\Object_Meta\Analytics_Settings;
 
 class Third_Party_Tags {
 
 	/**
-	 * @var Site_Tags_Settings
+	 * @var Analytics_Settings
 	 */
     private $settings;
 
-    public function __construct( Site_Tags_Settings $settings ) {
+    public function __construct( Analytics_Settings $settings ) {
         $this->settings = $settings;
     }
 
@@ -20,7 +20,7 @@ class Third_Party_Tags {
    	 */
    	public function inject_google_tag_manager_head_tag() {
 
-		$id = $this->settings->get_value( Site_Tags_Settings::GOOGLE_TAG_MANAGER );
+		$id = $this->settings->get_value( Analytics_Settings::GOOGLE_TAG_MANAGER );
 
    		if ( empty( $id ) ) {
    			return;
@@ -44,7 +44,7 @@ class Third_Party_Tags {
 	 */
 	public function inject_google_tag_manager_body_tag() {
 
-		$id = $this->settings->get_value( Site_Tags_Settings::GOOGLE_TAG_MANAGER );
+		$id = $this->settings->get_value( Analytics_Settings::GOOGLE_TAG_MANAGER );
 
 		if ( empty( $id ) ) {
 			return;

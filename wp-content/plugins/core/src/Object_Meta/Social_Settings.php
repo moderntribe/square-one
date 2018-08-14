@@ -4,10 +4,6 @@ namespace Tribe\Project\Object_Meta;
 
 use Tribe\Libs\ACF;
 
-/**
- * Class Post
- * @package Tribe\Project\Object_Meta
- */
 class Social_Settings extends ACF\ACF_Meta_Group {
 
 	const NAME = 'social_settings';
@@ -28,6 +24,7 @@ class Social_Settings extends ACF\ACF_Meta_Group {
 			static::LINKEDIN,
 			static::PINTEREST,
 			static::INSTAGRAM,
+			static::GOOGLE,
 		];
 	}
 
