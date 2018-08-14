@@ -1,0 +1,18 @@
+---
+nginx_h5bp_version: "025b203b197599e36ac33c1d7c5ed94dc261180e"
+nginx_worker_rlimit_nofile: 8192
+nginx_worker_connections: 8000
+nginx_fastcgi_read_timeout: 60s
+nginx_fastcgi_buffers: 256 8k
+nginx_fastcgi_buffer_size: 128k
+nginx_fastcgi_busy_buffers_size: 256k
+nginx_fastcgi_temp_file_write_size: 256k
+nginx_cache_path: /var/cache/nginx
+nginx_cache_duration: 30s
+nginx_cache_key_storage_size: 10m
+nginx_cache_size: 250m
+nginx_cache_inactive: 1h
+nginx_skip_cache_uri: /wp-admin/|/xmlrpc.php|wp-.*.php|/feed/|index.php|sitemap(_index)?.xml
+nginx_skip_cache_cookie: comment_author|wordpress_[a-f0-9]+|wp-postpass|wordpress_no_cache|wordpress_logged_in
+nginx_hsts_max_age: 31536000
+nginx_regenerate_dhparams: false

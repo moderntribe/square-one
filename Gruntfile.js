@@ -162,6 +162,13 @@ module.exports = function (grunt) {
 		]);
 
 	grunt.registerTask(
+		'server_dist', [
+			'shell:test',
+			'concurrent:preflight',
+			'concurrent:dist',
+		]);
+
+	grunt.registerTask(
 		'dev', [
 			'browserSync:dev',
 			'watch',

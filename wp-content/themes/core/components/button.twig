@@ -18,10 +18,16 @@ Attributes:
 		target: '_blank' // string. if type is link you can pass in target
 		type: 'submit' // string. if tag is button, you can set type
 		url: 'http://google.com' // string. if type is link you can set url
+		force_display: false // true/false display button if empty
+		inner_attributes: 'data-js="nav-trigger" aria-controls="etc"', // string. data atts, aria etc
+		aria_label: '' // string. add screen reader text for labels that aren't clear as to where they navigate to.
     }
  #}
 
 <{{ tag }} class="{{ classes }}"
+	{% if aria_label %}
+	aria-label="{{ aria_label }}"
+    {% endif %}
 	{% if type %}
 	type="{{ type }}"
 	{% endif %}
@@ -32,7 +38,7 @@ Attributes:
 	target="{{ target }}"
 	{% endif %}
 	{{ attrs }}>
-	{% if label is not empty %}
-		<span class="c-btn__text">{{ label }}</span>
+	{% if force_display or label is not empty %}
+		<span class="c-btn__text" {{ inner_attributes }}>{{ label }}</span>
 	{% endif %}
 </{{ tag }}>
