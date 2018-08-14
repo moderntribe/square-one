@@ -175,17 +175,6 @@ module.exports = function (grunt) {
 		]);
 
 	grunt.registerTask(
-		'componentsDocs', [
-			'shell:install',
-			'concurrent:componentsDocs'
-		]);
-
-	grunt.registerTask(
-		'componentsDocsDev', [
-			'watch',
-		]);
-
-	grunt.registerTask(
 		'devDocker', [
 			'browserSync:devDocker',
 			'watch',

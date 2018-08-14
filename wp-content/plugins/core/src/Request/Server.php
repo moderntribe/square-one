@@ -70,8 +70,8 @@ class Server {
 	public function get_method() {
 		$method = $_SERVER['REQUEST_METHOD'];
 
-		if ( 'POST' === $method && $override = $this->get_header( 'X-HTTP-METHOD-OVERRIDE' ) ) {
-			$method = strtoupper( $override );
+		if ( 'POST' === $method && $method = $this->get_header( 'X-HTTP-METHOD-OVERRIDE' ) ) {
+			$method = strtoupper( $method );
 		}
 
 		return $method;

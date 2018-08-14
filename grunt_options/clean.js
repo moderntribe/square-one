@@ -31,8 +31,4 @@ module.exports = {
 		'<%= pkg._core_theme_js_dist_path %>vendorGlobal.min.js',
 		'<%= pkg._core_theme_js_dist_path %>vendorWebpack.min.js',
 	],
-
-	componentsDocsMinJS: [
-		'<%= pkg._components_docs_js_dist_path %>*.min.js',
-	],
 };

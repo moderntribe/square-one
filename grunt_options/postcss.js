@@ -92,13 +92,6 @@ module.exports = {
 		},
 	},
 
-	componentsDocs: {
-		options: compileOptions,
-		files: {
-			'<%= pkg._components_docs_css_path %>master.css': '<%= pkg._components_docs_pcss_path %>master.pcss',
-		},
-	},
-
 	// Task: Minification
 
 	themeMin: {
@@ -137,13 +130,6 @@ module.exports = {
 		},
 	},
 
-	componentsDocsMin: {
-		options: cssnanoOptions,
-		files: {
-			'<%= pkg._components_docs_css_path %>master.min.css': '<%= pkg._components_docs_css_path %>master.css',
-		},
-	},
-
 	// Task: Linting
 
 	themeLint: {
@@ -151,13 +137,6 @@ module.exports = {
 		src: [
 			'<%= pkg._core_theme_pcss_path %>**/*.pcss',
 			'!<%= pkg._core_theme_pcss_path %>content/page/_legacy.pcss',
-		],
-	},
-
-	componentsDocsLint: {
-		options: lintOptions,
-		src: [
-			'<%= pkg._components_docs_pcss_path %>**/*.pcss',
 		],
 	},
 };
