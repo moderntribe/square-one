@@ -106,7 +106,7 @@ your WP CLI binary is not in this path, you may need to manually create the syml
 
 In PhpStorm, you'll need to ensure you map your `wp` symlink to the container's `/usr/local/bin/wp` path.
 
-![alt text](https://i.imgur.com/ZXHxLty.png)
+![PhpStorm Server Panel Screenshot](https://i.imgur.com/ZXHxLty.png)
 
 ### Usage
 
