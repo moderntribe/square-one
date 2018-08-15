@@ -101,8 +101,8 @@ download it from [here](https://store.docker.com/editions/community/docker-ce-de
 
 # WP CLI and xdebug
 
-The `start.sh` script will attempt to symlink `/usr/local/bin/wp` to `dev/bin/wp` when starting your local container. If 
-your WP CLI binary is not in this path, you may need to manually create the symlink.
+The `start.sh` script will attempt to symlink your WP CLI binary to `dev/bin/wp` when starting your local container. If
+this fails, you should manually symlink it with: `ln -s /path/to/wp dev/bin/wp`.
 
 In PhpStorm, you'll need to ensure you map your `wp` symlink to the container's `/usr/local/bin/wp` path.
 
