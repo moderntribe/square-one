@@ -59,7 +59,8 @@ fi
 
 # symlink wp cli binary to the dev/bin directory so wpx.sh works
 if [ ! -f ././../bin/wp ]; then
-    ln -s /usr/local/bin/wp ././../bin/wp
+    WPBINARY=$(which wp)
+    ln -s ${WPBINARY} ././../bin/wp
 fi
 
 # synchronize VM time with system time
