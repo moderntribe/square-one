@@ -56,12 +56,12 @@ class Testimonial extends Panel {
 			$main_attrs[ 'data-livetext' ] = true;
 		}
 		$options = [
-			Slider::SLIDES             => $this->get_slides(),
-			Slider::SHOW_CAROUSEL      => false,
-			Slider::SHOW_ARROWS        => false,
-			Slider::SHOW_PAGINATION    => true,
-			Slider::MAIN_CLASSES       => $this->get_slider_main_classes(),
-			Slider::MAIN_ATTRS         => $main_attrs,
+			Slider::SLIDES          => $this->get_slides(),
+			Slider::SHOW_CAROUSEL   => false,
+			Slider::SHOW_ARROWS     => false,
+			Slider::SHOW_PAGINATION => true,
+			Slider::MAIN_CLASSES    => $this->get_slider_main_classes(),
+			Slider::MAIN_ATTRS      => $main_attrs,
 		];
 
 		$slider = Slider::factory( $options );

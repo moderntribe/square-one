@@ -32,7 +32,7 @@ class ContentSlider extends Panel {
 		$main_attrs = [];
 		if ( is_panel_preview() ) {
 			$main_attrs[ 'data-depth' ]    = $this->panel->get_depth();
-			$main_attrs[ 'data-name' ]     = 'slides';
+			$main_attrs[ 'data-name' ]     = SliderComponent::SLIDES;
 			$main_attrs[ 'data-livetext' ] = true;
 		}
 		$options = [
