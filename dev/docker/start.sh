@@ -58,9 +58,9 @@ if [ ! -f ${CONFIG_FILE} ]; then
 fi
 
 # symlink wp cli binary to the dev/bin directory so wpx.sh works
-if [ ! -f ././../bin/wp ]; then
+if [ ! -f ../bin/wp ]; then
     WPBINARY=$(which wp)
-    ln -s ${WPBINARY} ././../bin/wp
+    ln -s ${WPBINARY} ../bin/wp
 fi
 
 # synchronize VM time with system time
