@@ -29,13 +29,21 @@ class ContentSlider extends Panel {
 	}
 
 	protected function get_slider(): string {
+		$main_attrs = [];
+		if ( is_panel_preview() ) {
+			$main_attrs[ 'data-depth' ]    = $this->panel->get_depth();
+			$main_attrs[ 'data-name' ]     = 'slides';
+			$main_attrs[ 'data-livetext' ] = true;
+		}
+		$slides = $this->get_slides();
 		$options = [
-			SliderComponent::SLIDES          => $this->get_slides(),
+			SliderComponent::SLIDES          => $slides,
 			SliderComponent::THUMBNAILS      => false,
 			SliderComponent::SHOW_CAROUSEL   => false,
 			SliderComponent::SHOW_ARROWS     => true,
 			SliderComponent::SHOW_PAGINATION => false,
 			SliderComponent::MAIN_CLASSES    => $this->get_slider_main_classes(),
+			SliderComponent::MAIN_ATTRS      => $main_attrs,
 		];
 
 		$slider = SliderComponent::factory( $options );
@@ -47,7 +55,7 @@ class ContentSlider extends Panel {
 		$slides = [];
 
 		if ( ! empty( $this->panel_vars[ ContentSliderPanel::FIELD_SLIDES ] ) ) {
-
+			$index = 0;
 			foreach ( $this->panel_vars[ ContentSliderPanel::FIELD_SLIDES ] as $slide ) {
 
 				$slide_markup = '';
@@ -63,8 +71,8 @@ class ContentSlider extends Panel {
 				$slide_markup .= $image_obj->render();
 
 				$options = [
-					Content_Block::TITLE           => $this->get_content_block_title( $slide ),
-					Content_Block::TEXT            => $this->get_content_block_text( $slide ),
+					Content_Block::TITLE           => $this->get_content_block_title( $slide, $index ),
+					Content_Block::TEXT            => $this->get_content_block_text( $slide, $index ),
 					Content_Block::CLASSES         => [ 't-content c-content-block--content-slider' ],
 					Content_Block::CONTENT_CLASSES => [ 'c-content-block__desc--content-slider' ],
 					Content_Block::BUTTON          => $this->get_content_block_button( $slide ),
@@ -75,6 +83,7 @@ class ContentSlider extends Panel {
 				$slide_markup .= $content_block_obj->render();
 
 				$slides[] = $slide_markup;
+				$index++;
 			}
 		}
 
@@ -87,11 +96,23 @@ class ContentSlider extends Panel {
 		return $classes;
 	}
 
-	protected function get_content_block_title( $slide ) {
+	protected function get_content_block_title( $slide, $index ) {
+		if ( !is_panel_preview() && empty( $slide[ ContentSliderPanel::FIELD_SLIDE_TITLE ] ) ) {
+			return '';
+		}
+		$attrs = [];
+		if ( is_panel_preview() ) {
+			$attrs = [
+				'data-depth'    => $this->panel->get_depth(),
+				'data-name'     => ContentSliderPanel::FIELD_SLIDE_TITLE,
+				'data-index'    => $index,
+				'data-livetext' => true,
+			];
+		}
 		$options = [
 			Title::CLASSES => [ 'h2' ],
 			Title::TITLE   => esc_html( $slide[ ContentSliderPanel::FIELD_SLIDE_TITLE ] ),
-			Title::ATTRS   => '',
+			Title::ATTRS   => $attrs,
 			Title::TAG     => 'h2',
 		];
 
@@ -100,9 +121,24 @@ class ContentSlider extends Panel {
 		return $title_object->render();
 	}
 
-	protected function get_content_block_text( $slide ) {
+	protected function get_content_block_text( $slide, $index ) {
+
+		if ( !is_panel_preview() && empty( $slide[ ContentSliderPanel::FIELD_SLIDE_CONTENT ] ) ) {
+			return '';
+		}
+		$attrs = [];
+		if ( is_panel_preview() ) {
+			$attrs = [
+				'data-depth'    => $this->panel->get_depth(),
+				'data-name'     => ContentSliderPanel::FIELD_SLIDE_CONTENT,
+				'data-index'    => $index,
+				'data-autop'    => 'true',
+				'data-livetext' => true,
+			];
+		}
+
 		$options = [
-			Text::ATTRS   => '',
+			Text::ATTRS   => $attrs,
 			Text::CLASSES => [],
 			Text::TEXT    => $slide[ ContentSliderPanel::FIELD_SLIDE_CONTENT ],
 		];
@@ -113,6 +149,9 @@ class ContentSlider extends Panel {
 	}
 
 	protected function get_content_block_button( $slide ) {
+		if ( empty( $slide[ ContentSliderPanel::FIELD_SLIDE_CTA ][ Button::LABEL ] ) || empty( $slide[ ContentSliderPanel::FIELD_SLIDE_CTA ][ Button::URL ] ) ) {
+			return '';
+		}
 		$options = [
 			Button::CLASSES     => [ 'c-btn c-btn--sm' ],
 			Button::ATTRS       => '',
