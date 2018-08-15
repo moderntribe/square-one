@@ -35,9 +35,8 @@ class ContentSlider extends Panel {
 			$main_attrs[ 'data-name' ]     = 'slides';
 			$main_attrs[ 'data-livetext' ] = true;
 		}
-		$slides = $this->get_slides();
 		$options = [
-			SliderComponent::SLIDES          => $slides,
+			SliderComponent::SLIDES          => $this->get_slides(),
 			SliderComponent::THUMBNAILS      => false,
 			SliderComponent::SHOW_CAROUSEL   => false,
 			SliderComponent::SHOW_ARROWS     => true,
