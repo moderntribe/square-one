@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [1.7] - 2018-08-13
+
+### Added
+
+* Added in the Classic Editor and Classic Editor Addon plugins.
+* Added Analytics ACF settings to the "General Settings" page with a GTM field and FE/theme integration.
+* Added the build process include in wp-config.php for FE asset cache busting.
+
+### Changed
+
+Replaced deprecated postcss-cssnext with postcss-preset-env.
+
 ## [1.6] - 2018-08-01
 
 Functionality was added to allow a project to require all gifs displayed anywhere at full size and not a thumbnail.  It is commented out in the Theme service provider by default.
