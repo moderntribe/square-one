@@ -3,10 +3,10 @@
 @font-face {
   font-family: '#{$icomoon-font-family}';
   src:
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff2?da39h5') format('woff2'),
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?da39h5') format('truetype'),
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?da39h5') format('woff'),
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?da39h5##{$icomoon-font-family}') format('svg');
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff2?pbrh5y') format('woff2'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?pbrh5y') format('truetype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?pbrh5y') format('woff'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?pbrh5y##{$icomoon-font-family}') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -26,21 +26,6 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-audio-mute {
-  &:before {
-    content: $icon-audio-mute; 
-  }
-}
-.icon-audio {
-  &:before {
-    content: $icon-audio; 
-  }
-}
-.icon-pause {
-  &:before {
-    content: $icon-pause; 
-  }
-}
 .icon-play {
   &:before {
     content: $icon-play; 
