@@ -58,9 +58,12 @@ if [ ! -f ${CONFIG_FILE} ]; then
 fi
 
 # symlink wp cli binary to the dev/bin directory so wpx.sh works
-if [ ! -f ../bin/wp ]; then
-    WPBINARY=$(which wp)
-    ln -s ${WPBINARY} ../bin/wp
+# only try this when TravisCI is not running
+if [ -z "$CI" ]; then
+    if [ ! -f ../bin/wp ]; then
+        WPBINARY=$(which wp)
+        ln -s ${WPBINARY} ../bin/wp
+    fi
 fi
 
 # synchronize VM time with system time
