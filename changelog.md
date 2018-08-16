@@ -4,11 +4,16 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [1.7.1] - 2018-08-15
+## [1.7.1] - 2018-08-14
 
-### Fixed
+### Added
 
-* Updated MediaElement styling for the embedded audio/video player 
+* [`dev/docker/wpx.sh`](dev/docker/wpx.sh) WP CLI with xdebug script and updated [documentation](dev/docker/README.md).
+* Added PostCSS partials for the social share & follow components
+
+### Removed
+
+Removed PostCSS Lost Grid plugin and PostCSS settings
 
 ## [1.7] - 2018-08-13
 
@@ -17,14 +22,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 * Added in the Classic Editor and Classic Editor Addon plugins.
 * Added Analytics ACF settings to the "General Settings" page with a GTM field and FE/theme integration.
 * Added the build process include in wp-config.php for FE asset cache busting.
+* Added postcss-preset-env to replace the now deprecated postcss-cssnext.
 
-### Changed
+### Removed
 
-* Replaced deprecated postcss-cssnext with postcss-preset-env.
+Removed deprecated postcss-cssnext
 
 ## [1.6] - 2018-08-01
 
-* Functionality was added to allow a project to require all gifs displayed anywhere at full size and not a thumbnail.  It is commented out in the Theme service provider by default.
+Functionality was added to allow a project to require all gifs displayed anywhere at full size and not a thumbnail.  It is commented out in the Theme service provider by default.
 
 ### Added
 
