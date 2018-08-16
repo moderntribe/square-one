@@ -24,8 +24,10 @@
 </head>
 <body class="{{ body_class }}">
 
-<a href="#a11y-skip-link-content" class="a11y-skip-link a11y-visual-hide">{{ __( 'Skip to main content' )|esc_html }}</a>
+	{{ do_action( 'tribe/body_opening_tag') }}
 
-<div class="l-wrapper" data-js="site-wrap">
+	<a href="#a11y-skip-link-content" class="a11y-skip-link a11y-visual-hide">{{ __( 'Skip to main content' )|esc_html }}</a>
 
-	{{ include("content/header/default.twig") }}
+	<div class="l-wrapper" data-js="site-wrap">
+
+		{{ include("content/header/default.twig") }}
