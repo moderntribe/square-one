@@ -4,22 +4,16 @@
 
 .wp-playlist {
 	border: 1px solid var(--color-border);
-	margin-top: var(--spacer-s);
-	margin-bottom: var(--spacer);
-
-	@media (--viewport-medium) {
-		margin-top: var(--spacer);
-		margin-bottom: var(--spacer);
-	}
+	margin-top: var(--spacer-lg);
+	margin-bottom: var(--spacer-lg);
 
 	.wp-playlist-tracks {
 		margin-top: 2px;
 	}
 
-	.mejs-inner,
-	.mejs-mediaelement,
+	.mejs-container,
 	.mejs-controls {
-		background: var(--audio-bg);
+		background: var(--wp-oembed-bg);
 	}
 }
 
