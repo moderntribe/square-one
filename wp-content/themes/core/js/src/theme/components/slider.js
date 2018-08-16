@@ -155,9 +155,9 @@ const previewChangeHandler = (e) => {
 	_.delay(() => {
 		// for cases when all we have is the parent (example: when updating CTAs)
 		const data = _.get(e, 'detail.parent.data', {});
-		if (data.index && data.childIndex) {
+		if (typeof data.index !== 'undefined' && typeof data.childIndex !== 'undefined') {
 			focusRow(data.index, data.childIndex, true);
-		} else if (e.detail.index && e.detail.rowIndex) {
+		} else if (typeof e.detail.index !== 'undefined' && typeof e.detail.rowIndex !== 'undefined') {
 			if (e.type === 'modular_content/repeater_row_deactivated') {
 				focusRow(e.detail.index, 0);
 			} else {
