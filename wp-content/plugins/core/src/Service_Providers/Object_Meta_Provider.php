@@ -1,31 +1,33 @@
 <?php
 
-
 namespace Tribe\Project\Service_Providers;
-
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Tribe\Libs\Object_Meta\Meta_Repository;
 use Tribe\Project\Object_Meta\Example;
+use Tribe\Project\Object_Meta\Analytics_Settings;
+use Tribe\Project\Object_Meta\Social_Settings;
 use Tribe\Project\Post_Types;
 use Tribe\Project\Settings;
 use Tribe\Project\Taxonomies;
-use Tribe\Project\Object_Meta\Social_Settings;
 
 class Object_Meta_Provider implements ServiceProviderInterface {
-	const REPO            = 'object_meta.collection_repo';
-	const EXAMPLE         = 'object_meta.example';
-	const SOCIAL_SETTINGS = 'object_meta.social_settings';
+
+	const REPO               = 'object_meta.collection_repo';
+	const EXAMPLE            = 'object_meta.example';
+	const ANALYTICS_SETTINGS = 'object_meta.analytics_settings';
+	const SOCIAL_SETTINGS    = 'object_meta.social_settings';
 
 	private $keys = [
 		self::EXAMPLE,
+		self::ANALYTICS_SETTINGS,
 		self::SOCIAL_SETTINGS,
 	];
 
 	public function register( Container $container ) {
 		$this->example( $container );
-		$this->social_settings( $container );
+		$this->site_settings( $container );
 
 		$container[ self::REPO ] = function ( Container $container ) {
 			$meta_repo = array_map( function ( $key ) use ( $container ) {
@@ -57,9 +59,15 @@ class Object_Meta_Provider implements ServiceProviderInterface {
 		};
 	}
 
-	private function social_settings( Container $container ) {
+	private function site_settings( Container $container ) {
 		$container[ self::SOCIAL_SETTINGS ] = function ( Container $container ) {
 			return new Social_Settings( [
+				'settings_pages' => [ Settings\General::instance()->get_slug() ],
+			] );
+		};
+
+		$container[ self::ANALYTICS_SETTINGS ] = function ( Container $container ) {
+			return new Analytics_Settings( [
 				'settings_pages' => [ Settings\General::instance()->get_slug() ],
 			] );
 		};

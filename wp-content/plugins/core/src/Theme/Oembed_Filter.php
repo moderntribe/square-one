@@ -53,7 +53,7 @@ class Oembed_Filter {
 
 		} else {
 			$embed_id    = $this->get_vimeo_embed_id( $url );
-			$video_thumb = $data->thumbnail_url;
+			$video_thumb = isset( $data->thumbnail_url ) ? $data->thumbnail_url : '';
 		}
 
 		$options = [
@@ -166,7 +166,7 @@ class Oembed_Filter {
 			$url = $maxthumburl;
 
 			$response = wp_remote_head( $maxthumburl );
-			if ( wp_remote_retrieve_response_code( $response ) == 404 ) {
+			if ( wp_remote_retrieve_response_code( $response ) === 404 ) {
 				$url = 'https://i.ytimg.com/vi/' . $video_id . '/0.jpg';
 			}
 

@@ -23,6 +23,7 @@ use Tribe\Project\Theme\Resources\Legacy_Check;
 use Tribe\Project\Theme\Resources\Login_Resources;
 use Tribe\Project\Theme\Resources\Scripts;
 use Tribe\Project\Theme\Resources\Styles;
+use Tribe\Project\Theme\Resources\Third_Party_Tags;
 use Tribe\Project\Theme\Supports;
 use Tribe\Project\Theme\WP_Responsive_Image_Disabler;
 
@@ -56,6 +57,7 @@ class Theme_Provider implements ServiceProviderInterface {
 
 		$this->scripts( $container );
 		$this->styles( $container );
+		$this->third_party_tags( $container );
 		$this->editor_styles( $container );
 		//$this->editor_formats( $container );
 
@@ -248,6 +250,18 @@ class Theme_Provider implements ServiceProviderInterface {
 		add_action( 'wp_enqueue_scripts', function () use ( $container ) {
 			$container[ 'theme.resources.styles' ]->enqueue_styles();
 		}, 10, 0 );
+	}
+
+	private function third_party_tags( Container $container ) {
+		$container[ 'theme.resources.third_party_tags' ] = function ( Container $container ) {
+			return new Third_Party_Tags( $container[ Object_Meta_Provider::ANALYTICS_SETTINGS ] );
+		};
+		add_action( 'wp_head', function () use ( $container ) {
+			$container[ 'theme.resources.third_party_tags' ]->inject_google_tag_manager_head_tag();
+		} );
+		add_action( 'tribe/body_opening_tag', function () use ( $container ) {
+			$container[ 'theme.resources.third_party_tags' ]->inject_google_tag_manager_body_tag();
+		} );
 	}
 
 	private function editor_styles( Container &$container ) {

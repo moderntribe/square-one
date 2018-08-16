@@ -14,16 +14,16 @@ var compileOptions = {
 			extension: ".pcss",
 		}),
 		require('postcss-mixins'),
-		require('postcss-custom-properties'),
+		require('postcss-custom-properties')({ preserve: false }),
 		require('postcss-simple-vars'),
 		require('postcss-custom-media'),
 		require('postcss-functions')({ functions: postcssFunctions }),
 		require('postcss-quantity-queries'),
 		require('postcss-aspect-ratio'),
 		require('postcss-nested'),
-		require('lost'),
 		require('postcss-inline-svg'),
-		require('postcss-cssnext'),
+		require('postcss-preset-env')({ stage: 0 }),
+		require('postcss-calc'),
 	],
 };
 
@@ -34,10 +34,10 @@ var legacyOptions = {
 			extension: ".pcss",
 		}),
 		require('postcss-mixins'),
-		require('postcss-custom-properties'),
+		require('postcss-custom-properties')({ preserve: false }),
 		require('postcss-simple-vars'),
 		require('postcss-nested'),
-		require('postcss-cssnext')({ browsers: ['last 20 versions', 'ie 6'] }),
+		require('postcss-preset-env')({ browsers: ['last 20 versions', 'ie 6'] }),
 	],
 };
 
