@@ -103,7 +103,6 @@
     "jest": "^21.3.0-beta.15",
     "jest-cli": "^21.2.1",
     "load-grunt-tasks": "^3.5.2",
-    "lost": "^8.0.0",
     "nyc": "^11.4.1",
     "postcss-aspect-ratio": "^1.0.0",
     "postcss-calc": "^6.0.1",

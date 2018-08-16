@@ -57,6 +57,15 @@ if [ ! -f ${CONFIG_FILE} ]; then
     fi
 fi
 
+# symlink wp cli binary to the dev/bin directory so wpx.sh works
+# only try this when TravisCI is not running
+if [ -z "$CI" ]; then
+    if [ ! -f ../bin/wp ]; then
+        WPBINARY=$(which wp)
+        ln -s ${WPBINARY} ../bin/wp
+    fi
+fi
+
 # synchronize VM time with system time
 ${D_COMMAND} run --privileged --rm phpdockerio/php7-fpm date -s "$(date -u "+%Y-%m-%d %H:%M:%S")"
 
