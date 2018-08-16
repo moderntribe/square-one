@@ -11,9 +11,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 * [`dev/docker/wpx.sh`](dev/docker/wpx.sh) WP CLI with xdebug script and updated [documentation](dev/docker/README.md).
 * Added PostCSS partials for the social share & follow components
 
+### Fixed
+
+* Updated MediaElement styling for the embedded audio/video player
+
 ### Removed
 
-Removed PostCSS Lost Grid plugin and PostCSS settings
+* Removed PostCSS Lost Grid plugin and PostCSS settings
 
 ## [1.7] - 2018-08-13
 
@@ -26,11 +30,11 @@ Removed PostCSS Lost Grid plugin and PostCSS settings
 
 ### Removed
 
-Removed deprecated postcss-cssnext
+* Removed deprecated postcss-cssnext
 
 ## [1.6] - 2018-08-01
 
-Functionality was added to allow a project to require all gifs displayed anywhere at full size and not a thumbnail.  It is commented out in the Theme service provider by default.
+* Functionality was added to allow a project to require all gifs displayed anywhere at full size and not a thumbnail.  It is commented out in the Theme service provider by default.
 
 ### Added
 
@@ -83,7 +87,7 @@ Functionality was added to allow a project to require all gifs displayed anywher
 
 ## [1.3] - 2018-06-12
 
-Queues framework has been added. This allows for running slower processes separately from a browser request.
+* Queues framework has been added. This allows for running slower processes separately from a browser request.
 
 ### Added
 
@@ -93,7 +97,7 @@ Queues framework has been added. This allows for running slower processes separa
 
 ## [1.2] - 2018-05-08
 
-A whole lot of things have been added. The timing of when they were added and the corresponding versions would be too laborious to uncover. So...we'll start with 1.2. Here are some recent changes/additions.
+* A whole lot of things have been added. The timing of when they were added and the corresponding versions would be too laborious to uncover. So...we'll start with 1.2. Here are some recent changes/additions.
 
 ### Added
 
