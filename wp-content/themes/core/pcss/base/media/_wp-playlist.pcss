@@ -1,5 +1,5 @@
 /* -----------------------------------------------------------------------------
- * Media: Playlists
+ * Media: WP Playlists
  * ----------------------------------------------------------------------------- */
 
 .wp-playlist {
@@ -9,6 +9,11 @@
 
 	.wp-playlist-tracks {
 		margin-top: 2px;
+	}
+
+	.mejs-container,
+	.mejs-controls {
+		background: var(--wp-oembed-bgd);
 	}
 }
 
@@ -34,7 +39,7 @@
 	display: inline-block;
 	margin: 0;
 	left: 50%;
-	position: relative;
+	position: absolute;
 	top: 50%;
 	transform: translate(-50%, -50%);
 	transition: var(--transition-wp-playlist-icon);
