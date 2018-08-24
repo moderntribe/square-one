@@ -64,15 +64,17 @@
     <rule ref="Squiz.Scope.MethodScope"/>
     <rule ref="Squiz.WhiteSpace.ScopeKeywordSpacing"/>
 
-    !-- Checks for usage of "$this" in static methods, which will cause runtime errors. -->
+    <!-- Checks for usage of "$this" in static methods, which will cause runtime errors. -->
     <rule ref="Squiz.Scope.StaticThisUsage"/>
 
     <!-- The closing ?> tag MUST be omitted from files containing only PHP. -->
     <rule ref="Zend.Files.ClosingTag"/>
 
-    <!-- Makes sure that any use of Double Quotes ("") are warranted. -->
-    <rule ref="Squiz.Strings.DoubleQuoteUsage"/>
-    <rule ref="Squiz.Strings.DoubleQuoteUsage.ContainsVar">
-        <severity>0</severity>
+    <rule ref="Squiz.Arrays.ArrayDeclaration">
+        <exclude name="Squiz.Arrays.ArrayDeclaration.ValueNotAligned" />
+        <exclude name="Squiz.Arrays.ArrayDeclaration.KeyNotAligned" />
+        <exclude name="Squiz.Arrays.ArrayDeclaration.DoubleArrowNotAligned" />
+        <exclude name="Squiz.Arrays.ArrayDeclaration.ValueNotAligned" />
+        <exclude name="Squiz.Arrays.ArrayDeclaration.SingleLineNotAllowed" />
     </rule>
 </ruleset>
