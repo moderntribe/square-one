@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<ruleset name="WordPress Theme Coding Standards">
+    <description>A custom ruleset to take in account both WordPress and Modern Tribe code standards.</description>
+    <file>./wp-content/plugins/core/src</file>
+
+    <exclude-pattern>*/.git/*</exclude-pattern>
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+
+    <rule ref="WordPress-Extra">
+        <exclude name="PSR2.ControlStructures.ElseIfDeclaration" />
+        <exclude name="WordPress.Arrays.ArrayKeySpacingRestrictions" />
+        <exclude name="WordPress.Files.FileName" />
+        <exclude name="WordPress.PHP.YodaConditions" />
+        <exclude name="WordPress.NamingConventions" />
+    </rule>
+
+    <!-- Ensure no empty statements -->
+    <rule name="Generic.CodeAnalysis.EmptyStatement"/>
+
+    <!-- Do not allow @todo notations to stay -->
+    <rule ref="Generic.Commenting.Todo"/>
+
+    <!-- Warn if methods are not docblock commented. We're trying to do better here -->
+    <rule name="Squiz.Commenting.FunctionComment.Missing">
+        <severity>1</severity>
+    </rule>
+
+    <rule ref="Internal.NoCodeFound">
+        <severity>0</severity>
+    </rule>
+
+    <!-- Checks that the opening brace of a function is on the line of the function declaration. -->
+    <rule ref="Generic.Functions.OpeningFunctionBraceKernighanRitchie"/>
+
+    <!-- Ensures that constant names are all uppercase. -->
+    <rule ref="Generic.NamingConventions.UpperCaseConstantName"/>
+
+    <!-- Discourages the use of deprecated functions that are kept in PHP for compatibility with older versions.  -->
+    <rule ref="Generic.PHP.DeprecatedFunctions"/>
+
+    <!-- Discourages the use of alias functions that are kept in PHP for compatibility with older versions. Can be used to forbid the use of any function. -->
+    <rule ref="Generic.PHP.ForbiddenFunctions"/>
+
+    <!-- PHP keywords MUST be in lower case -->
+    <rule ref="Generic.PHP.LowerCaseKeyword"/>
+
+    <!-- The PHP constants true, false, and null MUST be in lower case. -->
+    <rule ref="Generic.PHP.LowerCaseConstant"/>
+
+    <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace.StartFile">
+        <severity>0</severity>
+    </rule>
+
+    <!-- There MUST NOT be trailing whitespace at the end of non-blank lines. -->
+    <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace.EndFile">
+        <severity>0</severity>
+    </rule>
+
+    <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace.EmptyLines">
+        <severity>0</severity>
+    </rule>
+
+    <!-- Visibility MUST be declared on all methods. -->
+    <rule ref="Squiz.Scope.MethodScope"/>
+    <rule ref="Squiz.WhiteSpace.ScopeKeywordSpacing"/>
+
+    !-- Checks for usage of "$this" in static methods, which will cause runtime errors. -->
+    <rule ref="Squiz.Scope.StaticThisUsage"/>
+
+    <!-- The closing ?> tag MUST be omitted from files containing only PHP. -->
+    <rule ref="Zend.Files.ClosingTag"/>
+
+    <!-- Makes sure that any use of Double Quotes ("") are warranted. -->
+    <rule ref="Squiz.Strings.DoubleQuoteUsage"/>
+    <rule ref="Squiz.Strings.DoubleQuoteUsage.ContainsVar">
+        <severity>0</severity>
+    </rule>
+
+
+    <rule ref="WordPress-Extra" />
+</ruleset>
