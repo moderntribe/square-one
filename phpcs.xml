@@ -75,7 +75,4 @@
     <rule ref="Squiz.Strings.DoubleQuoteUsage.ContainsVar">
         <severity>0</severity>
     </rule>
-
-
-    <rule ref="WordPress-Extra" />
 </ruleset>
