@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Templates;
 
-
 class Page extends Base {
 	public function get_data(): array {
 		$data               = parent::get_data();

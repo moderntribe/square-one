@@ -250,7 +250,7 @@ class Request {
 	 * @return bool
 	 */
 	protected function strings_match( $pattern, $value ): bool {
-		if ( $pattern == $value ) {
+		if ( $pattern === $value ) {
 			return true;
 		}
 

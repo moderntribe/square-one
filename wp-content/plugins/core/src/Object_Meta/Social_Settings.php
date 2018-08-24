@@ -66,11 +66,13 @@ class Social_Settings extends ACF\ACF_Meta_Group {
 
 	private function get_social_field( $field_label, $field_id, $type = 'url' ) {
 		$field = new ACF\Field( self::NAME . '_' . $field_id );
-		$field->set_attributes( [
-			'label' => $field_label,
-			'name'  => $field_id,
-			'type'  => $type,
-		] );
+		$field->set_attributes(
+			[
+				'label' => $field_label,
+				'name'  => $field_id,
+				'type'  => $type,
+			]
+		);
 
 		return $field;
 	}

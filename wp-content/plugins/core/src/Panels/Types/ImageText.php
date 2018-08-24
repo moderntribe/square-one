@@ -25,33 +25,49 @@ class ImageText extends Panel_Type_Config {
 		$panel->set_thumbnail( $this->handler->thumbnail_url( 'image-text.svg' ) );
 
 		// Panel Layout.
-		$panel->add_settings_field( new Fields\ImageSelect( [
-			'name'    => self::FIELD_LAYOUT,
-			'label'   => __( 'Layout', 'tribe' ),
-			'options' => [
-				self::FIELD_LAYOUT_OPTION_IMAGE_LEFT  => $this->handler->layout_icon_url( 'imagetext-left.svg' ),
-				self::FIELD_LAYOUT_OPTION_IMAGE_RIGHT => $this->handler->layout_icon_url( 'imagetext-right.svg' ),
-			],
-			'default' => self::FIELD_LAYOUT_OPTION_IMAGE_LEFT,
-		] ) );
+		$panel->add_settings_field(
+			new Fields\ImageSelect(
+				[
+					'name'    => self::FIELD_LAYOUT,
+					'label'   => __( 'Layout', 'tribe' ),
+					'options' => [
+						self::FIELD_LAYOUT_OPTION_IMAGE_LEFT  => $this->handler->layout_icon_url( 'imagetext-left.svg' ),
+						self::FIELD_LAYOUT_OPTION_IMAGE_RIGHT => $this->handler->layout_icon_url( 'imagetext-right.svg' ),
+					],
+					'default' => self::FIELD_LAYOUT_OPTION_IMAGE_LEFT,
+				]
+			)
+		);
 
-		$panel->add_field( new Fields\TextArea( [
-			'name'     => self::FIELD_DESCRIPTION,
-			'label'    => __( 'Description', 'tribe' ),
-			'richtext' => true,
-		] ) );
+		$panel->add_field(
+			new Fields\TextArea(
+				[
+					'name'     => self::FIELD_DESCRIPTION,
+					'label'    => __( 'Description', 'tribe' ),
+					'richtext' => true,
+				]
+			)
+		);
 
-		$panel->add_field( new Fields\Image( [
-			'name'        => self::FIELD_IMAGE,
-			'label'       => __( 'Image', 'tribe' ),
-			'description' => __( 'Optimal image sizes: 1500 x 1125 for Left/Right Aligned layouts', 'tribe' ),
-			'size'        => 'medium', // the size displayed in the admin.
-		] ) );
+		$panel->add_field(
+			new Fields\Image(
+				[
+					'name'        => self::FIELD_IMAGE,
+					'label'       => __( 'Image', 'tribe' ),
+					'description' => __( 'Optimal image sizes: 1500 x 1125 for Left/Right Aligned layouts', 'tribe' ),
+					'size'        => 'medium', // the size displayed in the admin.
+				]
+			)
+		);
 
-		$panel->add_field( new Fields\Link( [
-			'name'  => self::FIELD_CTA,
-			'label' => __( 'Call To Action Link', 'tribe' ),
-		] ) );
+		$panel->add_field(
+			new Fields\Link(
+				[
+					'name'  => self::FIELD_CTA,
+					'label' => __( 'Call To Action Link', 'tribe' ),
+				]
+			)
+		);
 
 		return $panel;
 

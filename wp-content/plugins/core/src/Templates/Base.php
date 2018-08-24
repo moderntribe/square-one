@@ -108,7 +108,7 @@ class Base extends Twig_Template {
 	}
 
 	protected function get_copyright() {
-		return sprintf( __( '%s %d All Rights Reserved.', 'tribe' ), '&copy;', date( 'Y' ) );
+		return sprintf( __( '%1$s %2$d All Rights Reserved.', 'tribe' ), '&copy;', date( 'Y' ) );
 	}
 
 	protected function get_language_attributes() {

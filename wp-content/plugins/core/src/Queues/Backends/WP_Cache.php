@@ -25,9 +25,11 @@ class WP_Cache implements Backend {
 		];
 
 		// Sort by priority
-		usort( $queue, function ( $first, $second ) {
-			return $first['priority'] <=> $second['priority'];
-		} );
+		usort(
+			$queue, function ( $first, $second ) {
+				return $first['priority'] <=> $second['priority'];
+			}
+		);
 
 		$this->save_queue( $queue_name, $queue );
 	}
@@ -113,7 +115,7 @@ class WP_Cache implements Backend {
 	}
 
 	protected function save_queue( string $queue_name, array $queue ) {
-		wp_cache_set( 'queue.new.' . $queue_name, json_encode( $queue ) );
+		wp_cache_set( 'queue.new.' . $queue_name, wp_json_encode( $queue ) );
 	}
 
 	protected function log( array $data ) {
@@ -127,7 +129,7 @@ class WP_Cache implements Backend {
 
 		$queue[] = $data;
 
-		wp_cache_set( 'queue.log', json_encode( $queue ) );
+		wp_cache_set( 'queue.log', wp_json_encode( $queue ) );
 	}
 
 	public function get_type(): string {

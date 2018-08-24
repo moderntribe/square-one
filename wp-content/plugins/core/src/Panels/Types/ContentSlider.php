@@ -23,46 +23,68 @@ class ContentSlider extends Panel_Type_Config {
 		$panel->set_description( __( 'An image + content slider', 'tribe' ) );
 		$panel->set_thumbnail( $this->handler->thumbnail_url( 'slider.svg' ) );
 
-		$panel->add_field( new Fields\Text( [
-			'name'        => self::FIELD_TITLE,
-			'label'       => __( 'Title', 'tribe' ),
-			'description' => __( 'Title does not display on the front-end of the website.', 'tribe' ),
-		] ) );
+		$panel->add_field(
+			new Fields\Text(
+				[
+					'name'        => self::FIELD_TITLE,
+					'label'       => __( 'Title', 'tribe' ),
+					'description' => __( 'Title does not display on the front-end of the website.', 'tribe' ),
+				]
+			)
+		);
 
-		$slides = new Fields\Repeater( [
-			'label'            => __( 'Slides', 'tribe' ),
-			'name'             => self::FIELD_SLIDES,
-			'min'              => 2,
-			'max'              => 5,
-			'new_button_label' => __( 'Add Slide', 'tribe' ),
-			'strings'          => [
-				'label.row_index' => __( 'Slide %{index} |||| Slide %{index}', 'tribe' ),
-				'button.delete'   => __( 'Delete Slide', 'tribe' ),
-			],
-		] );
+		$slides = new Fields\Repeater(
+			[
+				'label'            => __( 'Slides', 'tribe' ),
+				'name'             => self::FIELD_SLIDES,
+				'min'              => 2,
+				'max'              => 5,
+				'new_button_label' => __( 'Add Slide', 'tribe' ),
+				'strings'          => [
+					'label.row_index' => __( 'Slide %{index} |||| Slide %{index}', 'tribe' ),
+					'button.delete'   => __( 'Delete Slide', 'tribe' ),
+				],
+			]
+		);
 
-		$slides->add_field( new Fields\Image( [
-			'name'        => self::FIELD_SLIDE_IMAGE,
-			'label'       => __( 'Image', 'tribe' ),
-			'description' => __( 'Optimal image sizes: 1700 x 600 pixels', 'tribe' ),
-			'size'        => 'medium', // the size displayed in the admin.
-		] ) );
+		$slides->add_field(
+			new Fields\Image(
+				[
+					'name'        => self::FIELD_SLIDE_IMAGE,
+					'label'       => __( 'Image', 'tribe' ),
+					'description' => __( 'Optimal image sizes: 1700 x 600 pixels', 'tribe' ),
+					'size'        => 'medium', // the size displayed in the admin.
+				]
+			)
+		);
 
-		$slides->add_field( new Fields\Text( [
-			'name'     => self::FIELD_SLIDE_TITLE,
-			'label'    => __( 'Title', 'tribe' ),
-		] ) );
+		$slides->add_field(
+			new Fields\Text(
+				[
+					'name'  => self::FIELD_SLIDE_TITLE,
+					'label' => __( 'Title', 'tribe' ),
+				]
+			)
+		);
 
-		$slides->add_field( new Fields\TextArea( [
-			'name'     => self::FIELD_SLIDE_CONTENT,
-			'label'    => __( 'Content', 'tribe' ),
-			'richtext' => true,
-		] ) );
+		$slides->add_field(
+			new Fields\TextArea(
+				[
+					'name'     => self::FIELD_SLIDE_CONTENT,
+					'label'    => __( 'Content', 'tribe' ),
+					'richtext' => true,
+				]
+			)
+		);
 
-		$slides->add_field( new Fields\Link( [
-			'name'  => self::FIELD_SLIDE_CTA,
-			'label' => __( 'Link', 'tribe' ),
-		] ) );
+		$slides->add_field(
+			new Fields\Link(
+				[
+					'name'  => self::FIELD_SLIDE_CTA,
+					'label' => __( 'Link', 'tribe' ),
+				]
+			)
+		);
 
 		$panel->add_field( $slides );
 

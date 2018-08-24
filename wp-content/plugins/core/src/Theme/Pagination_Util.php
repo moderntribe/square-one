@@ -109,7 +109,7 @@ class Pagination_Util {
 	 *
 	 * @return array
 	 */
-	protected function get_link_array( string $url, string $label, array $classes = [], bool $active = false, bool $next = false, bool $prev = false  ) {
+	protected function get_link_array( string $url, string $label, array $classes = [], bool $active = false, bool $next = false, bool $prev = false ) {
 		return [
 			'url'     => $url,
 			'label'   => $label,

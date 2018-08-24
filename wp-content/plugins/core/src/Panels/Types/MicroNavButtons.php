@@ -21,28 +21,38 @@ class MicroNavButtons extends Panel_Type_Config {
 		$panel->set_description( __( 'A grid of buttons', 'tribe' ) );
 		$panel->set_thumbnail( $this->handler->thumbnail_url( 'micronav.svg' ) );
 
-		$panel->add_field( new Fields\TextArea( [
-			'name'     => self::FIELD_DESCRIPTION,
-			'label'    => __( 'Description', 'tribe' ),
-			'richtext' => true,
-		] ) );
+		$panel->add_field(
+			new Fields\TextArea(
+				[
+					'name'     => self::FIELD_DESCRIPTION,
+					'label'    => __( 'Description', 'tribe' ),
+					'richtext' => true,
+				]
+			)
+		);
 
-		$card = new Fields\Repeater( [
-			'label'            => __( 'Items', 'tribe' ),
-			'name'             => self::FIELD_ITEMS,
-			'min'              => 2,
-			'max'              => 4,
-			'new_button_label' => __( 'Add Item', 'tribe' ),
-			'strings'          => [
-				'label.row_index' => __( 'Item %{index} |||| Item %{index}', 'tribe' ),
-				'button.delete'   => __( 'Delete Item', 'tribe' ),
-			],
-		] );
+		$card = new Fields\Repeater(
+			[
+				'label'            => __( 'Items', 'tribe' ),
+				'name'             => self::FIELD_ITEMS,
+				'min'              => 2,
+				'max'              => 4,
+				'new_button_label' => __( 'Add Item', 'tribe' ),
+				'strings'          => [
+					'label.row_index' => __( 'Item %{index} |||| Item %{index}', 'tribe' ),
+					'button.delete'   => __( 'Delete Item', 'tribe' ),
+				],
+			]
+		);
 
-		$card->add_field( new Fields\Link( [
-			'name'  => self::FIELD_ITEM_CTA,
-			'label' => __( 'Item Call To Action Link', 'tribe' ),
-		] ) );
+		$card->add_field(
+			new Fields\Link(
+				[
+					'name'  => self::FIELD_ITEM_CTA,
+					'label' => __( 'Item Call To Action Link', 'tribe' ),
+				]
+			)
+		);
 
 		$panel->add_field( $card );
 

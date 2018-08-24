@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Twig;
 
-
 abstract class Twig_Template implements Template_Interface {
 
 	protected $template;

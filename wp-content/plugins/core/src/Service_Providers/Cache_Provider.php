@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Service_Providers;
 
-
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Tribe\Libs\Cache\Cache;
@@ -26,9 +25,11 @@ class Cache_Provider implements ServiceProviderInterface {
 			return new Purger();
 		};
 
-		add_action( 'init', function () use ( $container ) {
-			$container[ 'cache.listener' ]->hook();
-			$container[ 'cache.purger' ]->hook();
-		}, 0, 0 );
+		add_action(
+			'init', function () use ( $container ) {
+				$container[ 'cache.listener' ]->hook();
+				$container[ 'cache.purger' ]->hook();
+			}, 0, 0
+		);
 	}
 }

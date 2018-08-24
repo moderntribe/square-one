@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Theme\Resources;
 
-
 class Emoji_Disabler {
 	/**
 	 * Remove WP Emoji Scripts

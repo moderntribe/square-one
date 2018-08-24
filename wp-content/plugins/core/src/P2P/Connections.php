@@ -62,7 +62,7 @@ class Connections {
 	 */
 	private function get_ids( $direction, $where, $id, $args = [] ) {
 		global $wpdb;
-		$direction = ( $direction == 'p2p_to' ) ? 'p2p_to' : 'p2p_from';
+		$direction = ( $direction === 'p2p_to' ) ? 'p2p_to' : 'p2p_from';
 		$sql = "SELECT $direction FROM {$wpdb->p2p}";
 
 		if ( isset( $args['meta']['key'] ) ) {
@@ -70,7 +70,7 @@ class Connections {
 			$sql .= ' ' . $this->prepare_meta_join( $direction, $args['meta']['key'], $value );
 		}
 
-		$where = ( $where == 'p2p_to' ) ? 'p2p_to' : 'p2p_from';
+		$where = ( $where === 'p2p_to' ) ? 'p2p_to' : 'p2p_from';
 		$sql .= apply_filters( 'tribe_p2p_where_sql', $wpdb->prepare( " WHERE $where=%d", $id ) );
 
 		/** Set the connection type (relationship) */
@@ -86,7 +86,7 @@ class Connections {
 
 		/** Set order */
 		if ( isset( $args['order'] ) ) {
-			$order = ( $args['order'] == 'DESC' ) ? 'DESC' : 'ASC';
+			$order = ( $args['order'] === 'DESC' ) ? 'DESC' : 'ASC';
 			$orderby = isset( $orderby ) ? sanitize_sql_orderby( $orderby ) : 'p2p_id';
 			$sql .= " ORDER BY $orderby $order";
 		}
@@ -107,14 +107,16 @@ class Connections {
 	private function prepare_meta_join( $direction, $meta_key, $meta_value = false ) {
 		global $wpdb;
 
-		$direction = ( $direction == 'p2p_to' ) ? 'p2p_to' : 'p2p_from';
-		$join = $wpdb->prepare( "
+		$direction = ( $direction === 'p2p_to' ) ? 'p2p_to' : 'p2p_from';
+		$join = $wpdb->prepare(
+			"
 			LEFT JOIN {$wpdb->postmeta} AS pm
 			ON {$wpdb->p2p}.$direction = pm.post_id AND pm.meta_key=%s
-		", $meta_key );
+		", $meta_key
+		);
 
 		if ( ! empty( $meta_value ) ) {
-			$join .= $wpdb->prepare( " AND pm.meta_value=%s", $meta_value );
+			$join .= $wpdb->prepare( ' AND pm.meta_value=%s', $meta_value );
 		}
 
 		$inject_where = function( $where ) use ( $direction ) {
@@ -138,7 +140,7 @@ class Connections {
 		$sql = $wpdb->prepare( "SELECT * FROM {$wpdb->p2p} LEFT JOIN {$wpdb->p2pmeta} AS p2pm ON p2pm.meta_key=%s", $meta_key );
 
 		if ( ! empty( $meta_value ) ) {
-			$sql .= $wpdb->prepare( " AND p2pm.meta_value=%s", $meta_value );
+			$sql .= $wpdb->prepare( ' AND p2pm.meta_value=%s', $meta_value );
 		}
 
 		$sql .= "WHERE {$wpdb->p2p}.p2p_id = p2pm.p2p_id";
@@ -178,10 +180,13 @@ class Connections {
 		global $wpdb;
 		$sql = "SELECT * FROM {$wpdb->p2p}";
 		$where = [
-			'direction' => $wpdb->prepare( "( p2p_to=%d OR p2p_from=%d )", $id, $id ),
+			'direction' => $wpdb->prepare( '( p2p_to=%d OR p2p_from=%d )', $id, $id ),
 		];
 
-		$directions = [ 'to' => 'p2p_to', 'from' => 'p2p_from' ];
+		$directions = [
+			'to'   => 'p2p_to',
+			'from' => 'p2p_from',
+		];
 		if ( ! empty( $direction ) && isset( $directions[ $direction ] ) ) {
 			$where['direction'] = $wpdb->prepare( "{$directions[ $direction ]}=%d", $id );
 		}

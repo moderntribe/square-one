@@ -64,5 +64,5 @@ class MicroNavButtons extends Panel {
 
 	public static function instance() {
 			return tribe_project()->container()['twig.templates.content/panels/micronavbuttons'];
-		}
+	}
 }

@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\P2P;
 
-
 class P2P_Query extends \P2P_Query {
 
 	/** @var \P2P_Directed_Connection_Type[] */
@@ -42,13 +41,13 @@ class P2P_Query extends \P2P_Query {
 		$local_p2p_q->ctypes = $p2p_q->ctypes;
 		$local_p2p_q->items = $p2p_q->items;
 
-		foreach ( array( 'meta', 'orderby', 'order_num', 'order' ) as $key ) {
+		foreach ( [ 'meta', 'orderby', 'order_num', 'order' ] as $key ) {
 			$local_p2p_q->$key = $p2p_q->$key;
 		}
 
 		$local_p2p_q->query = $p2p_q->query;
 
-		return array( $local_p2p_q, $q );
+		return [ $local_p2p_q, $q ];
 	}
 
 
@@ -56,7 +55,7 @@ class P2P_Query extends \P2P_Query {
 	 * For low-level query modifications
 	 */
 	public function alter_clauses( &$clauses, $main_id_column ) {
-		if ( !$this->should_override_parent() ) {
+		if ( ! $this->should_override_parent() ) {
 			return \P2P_Query::alter_clauses( $clauses, $main_id_column );
 		}
 
@@ -66,15 +65,15 @@ class P2P_Query extends \P2P_Query {
 		$joins = '';
 		$join_count = 0;
 
-		$where_parts = array();
+		$where_parts = [];
 
 		$connected_post_ids = _p2p_normalize( $this->items );
 		$connected_post_ids = array_map( 'intval', $connected_post_ids );
-		$connected_post_ids = implode(',', $connected_post_ids);
+		$connected_post_ids = implode( ',', $connected_post_ids );
 
 		foreach ( $this->ctypes as $directed ) {
 
-			$to_alias = 'p2p'.$join_count++;
+			$to_alias = 'p2p' . $join_count++;
 			$to_side = $directed->get( 'opposite', 'side' ); // opposite == to for the 'any' direction
 			$to_join = $wpdb->prepare(
 				" LEFT JOIN {$wpdb->p2p} $to_alias
@@ -82,18 +81,18 @@ class P2P_Query extends \P2P_Query {
 				  AND $to_alias.p2p_type= %s",
 				$directed->name
 			);
-			if ( !empty( $connected_post_ids ) ) {
+			if ( ! empty( $connected_post_ids ) ) {
 				$to_join .= " AND $to_alias.p2p_from IN ( $connected_post_ids )";
 			}
-			if ( !empty( $to_side->query_vars['post_type'] ) ) {
+			if ( ! empty( $to_side->query_vars['post_type'] ) ) {
 				$post_types = $to_side->query_vars['post_type'];
-				array_walk( $post_types, array( $wpdb, 'escape_by_ref' ) );
+				array_walk( $post_types, [ $wpdb, 'escape_by_ref' ] );
 				$post_type_string = implode( "','", $post_types );
 				$to_join .= " AND {$wpdb->posts}.post_type IN ('$post_type_string')";
 			}
 			$joins .= $to_join;
 
-			$from_alias = 'p2p'.$join_count++;
+			$from_alias = 'p2p' . $join_count++;
 			$from_side = $directed->get( 'current', 'side' ); // current == from for the 'any' direction
 			$from_join = $wpdb->prepare(
 				" LEFT JOIN {$wpdb->p2p} $from_alias
@@ -101,12 +100,12 @@ class P2P_Query extends \P2P_Query {
 				  AND $from_alias.p2p_type= %s",
 				$directed->name
 			);
-			if ( !empty( $connected_post_ids ) ) {
+			if ( ! empty( $connected_post_ids ) ) {
 				$from_join .= " AND $from_alias.p2p_to IN ( $connected_post_ids )";
 			}
-			if ( !empty( $from_side->query_vars['post_type'] ) ) {
+			if ( ! empty( $from_side->query_vars['post_type'] ) ) {
 				$post_types = $from_side->query_vars['post_type'];
-				array_walk( $post_types, array( $wpdb, 'escape_by_ref' ) );
+				array_walk( $post_types, [ $wpdb, 'escape_by_ref' ] );
 				$post_type_string = implode( "','", $post_types );
 				$from_join .= " AND {$wpdb->posts}.post_type IN ('$post_type_string')";
 			}
@@ -120,13 +119,14 @@ class P2P_Query extends \P2P_Query {
 
 		$clauses['groupby'] = "$main_id_column";
 
-		if ( 1 == count( $where_parts ) )
-			$clauses['where'] .= " AND " . $where_parts[0];
-		elseif ( !empty( $where_parts ) )
-			$clauses['where'] .= " AND (" . implode( ' OR ', $where_parts ) . ")";
+		if ( 1 === count( $where_parts ) ) {
+			$clauses['where'] .= ' AND ' . $where_parts[0];
+		} elseif ( ! empty( $where_parts ) ) {
+			$clauses['where'] .= ' AND (' . implode( ' OR ', $where_parts ) . ')';
+		}
 
 		// Handle custom fields
-		if ( !empty( $this->meta ) ) {
+		if ( ! empty( $this->meta ) ) {
 			$meta_clauses = _p2p_meta_sql_helper( $this->meta );
 			foreach ( $meta_clauses as $key => $value ) {
 				$clauses[ $key ] .= $value;
@@ -135,18 +135,21 @@ class P2P_Query extends \P2P_Query {
 
 		// Handle ordering
 		if ( $this->orderby ) {
-			$clauses['join'] .= $wpdb->prepare( "
+			$clauses['join'] .= $wpdb->prepare(
+				"
 				LEFT JOIN $wpdb->p2pmeta AS p2pm_order ON (
 					$wpdb->p2p.p2p_id = p2pm_order.p2p_id AND p2pm_order.meta_key = %s
 				)
-			", $this->orderby );
+			", $this->orderby
+			);
 
-			$order = ( 'DESC' == strtoupper( $this->order ) ) ? 'DESC' : 'ASC';
+			$order = ( 'DESC' === strtoupper( $this->order ) ) ? 'DESC' : 'ASC';
 
 			$field = 'meta_value';
 
-			if ( $this->order_num )
+			if ( $this->order_num ) {
 				$field .= '+0';
+			}
 
 			$clauses['orderby'] = "p2pm_order.$field $order, " . str_replace( 'ORDER BY ', '', $clauses['orderby'] );
 		}
@@ -161,25 +164,26 @@ class P2P_Query extends \P2P_Query {
 	 */
 	private function should_override_parent() {
 		foreach ( $this->ctypes as $directed ) {
-			if ( null === $directed ) // used by migration script
-				FALSE;
+			if ( null === $directed ) { // used by migration script
+				false;
+			}
 			switch ( $directed->get_direction() ) {
 				case 'from':
-					return FALSE;
+					return false;
 				case 'to':
-					return FALSE;
+					return false;
 				default:
 					$to_side = $directed->get( 'current', 'side' );
 					if ( ! $to_side instanceof \P2P_Side_Post ) {
-						return FALSE;
+						return false;
 					}
 					$from_side = $directed->get( 'opposite', 'side' );
 					if ( ! $from_side instanceof \P2P_Side_Post ) {
-						return FALSE;
+						return false;
 					}
 					break;
 			}
 		}
-		return TRUE;
+		return true;
 	}
 }

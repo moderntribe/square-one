@@ -19,42 +19,44 @@ class Image_Wrap {
 			return $html;
 		}
 
-		return preg_replace_callback( '/<p>((?:.(?!p>))*?)(<a[^>]*>)?\s*(<img[^>]+>)(<\/a>)?(.*?)<\/p>/i', function( $matches ) {
+		return preg_replace_callback(
+			'/<p>((?:.(?!p>))*?)(<a[^>]*>)?\s*(<img[^>]+>)(<\/a>)?(.*?)<\/p>/i', function( $matches ) {
 
-			/*
-			Groups 	Regex 			 Description
+				/*
+				Groups  Regex            Description
 					<p>			     starting <p> tag
-			1	    ((?:.(?!p>))*?)	 match 0 or more of anything not followed by p>
+				1       ((?:.(?!p>))*?)  match 0 or more of anything not followed by p>
 					.(?!p>) 		 anything that's not followed by p>
 					?: 			     non-capturing group.
 					*?		         match the ". modified by p> condition" expression non-greedily
-			2	    (<a[^>]*>)?		 starting <a> tag (optional)
+				2       (<a[^>]*>)?      starting <a> tag (optional)
 					\s*			     white space (optional)
-			3	    (<img[^>]+>)	 <img> tag
+				3       (<img[^>]+>)     <img> tag
 					\s*			     white space (optional)
-			4	    (<\/a>)? 		 ending </a> tag (optional)
-			5	    (.*?)<\/p>		 everything up to the final </p>
+				4       (<\/a>)?         ending </a> tag (optional)
+				5       (.*?)<\/p>       everything up to the final </p>
 					i modifier 		 case insensitive
 					s modifier		 allows . to match multiple lines (important for 1st and 5th group)
-			*/
+				*/
 
-			// image and (optional) link: <a ...><img ...></a>
-			$image = $matches[2] . $matches[3] . $matches[4];
-			// content before and after image. wrap in <p> unless it's empty
-			$content = trim( $matches[1] . $matches[5] );
-			if ( $content ) {
-				$content = '<p>' . $content . '</p>';
-			}
+				// image and (optional) link: <a ...><img ...></a>
+				$image = $matches[2] . $matches[3] . $matches[4];
+				// content before and after image. wrap in <p> unless it's empty
+				$content = trim( $matches[1] . $matches[5] );
+				if ( $content ) {
+					$content = '<p>' . $content . '</p>';
+				}
 
-			// move alignment classes to our non-caption image wrapper & remove from image
-			// mimicks markup for captioned images
-			preg_match( '#class\s*=\s*"[^"]*(alignnone|alignleft|aligncenter|alignright)[^"]*"#', $image, $alignment_match );
-			$alignment = empty( $alignment_match[1] ) ? 'alignnone' : $alignment_match[1];
+				// move alignment classes to our non-caption image wrapper & remove from image
+				// mimicks markup for captioned images
+				preg_match( '#class\s*=\s*"[^"]*(alignnone|alignleft|aligncenter|alignright)[^"]*"#', $image, $alignment_match );
+				$alignment = empty( $alignment_match[1] ) ? 'alignnone' : $alignment_match[1];
 
-			$image = empty( $alignment_match[1] ) ? $image : str_replace( $alignment_match[1], '', $image );
+				$image = empty( $alignment_match[1] ) ? $image : str_replace( $alignment_match[1], '', $image );
 
-			return sprintf( '<figure class="wp-image wp-image--no-caption %s">%s</figure>%s', $alignment, $image, $content );
-		}, $html );
+				return sprintf( '<figure class="wp-image wp-image--no-caption %s">%s</figure>%s', $alignment, $image, $content );
+			}, $html
+		);
 
 	}
 

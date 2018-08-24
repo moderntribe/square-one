@@ -39,7 +39,7 @@ class Add_Tasks extends Command {
 
 	public function run_command( $args, $assoc_args ) {
 		if ( ! isset( $assoc_args['count'] ) ) {
-			$assoc_args['count'] = rand( 1, 50 );
+			$assoc_args['count'] = wp_rand( 1, 50 );
 		}
 
 		$queue_name = $args[0];

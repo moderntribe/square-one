@@ -48,7 +48,7 @@ class Card extends Component {
 			static::CONTENT_CLASSES => $this->merge_classes( [ 'c-card__content' ], $this->options[ self::CONTENT_CLASSES ], true ),
 			static::TEXT            => $this->options[ self::TEXT ],
 			static::IMAGE           => $this->options[ self::IMAGE ],
-			static::BUTTON          => $this->options[ self::BUTTON ]
+			static::BUTTON          => $this->options[ self::BUTTON ],
 		];
 
 		return $data;

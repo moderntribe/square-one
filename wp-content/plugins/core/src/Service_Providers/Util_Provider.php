@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Service_Providers;
 
-
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Tribe\Project\Util\SVG_Support;
@@ -16,8 +15,10 @@ class Util_Provider implements ServiceProviderInterface {
 			return new SVG_Support();
 		};
 
-		add_action( 'init', function () use ( $container ) {
-			$container[ 'util.svg_support' ]->hook();
-		}, 10, 0 );
+		add_action(
+			'init', function () use ( $container ) {
+				$container[ 'util.svg_support' ]->hook();
+			}, 10, 0
+		);
 	}
 }

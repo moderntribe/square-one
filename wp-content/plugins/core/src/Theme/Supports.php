@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Theme;
 
-
 class Supports {
 
 	/**
@@ -34,12 +33,14 @@ class Supports {
 	 * Support: switch core WordPress markup to output valid HTML5
 	 */
 	private function support_html5() {
-		add_theme_support( 'html5', [
-			'search-form',
-			'comment-form',
-			'comment-list',
-			'gallery',
-			'caption',
-		] );
+		add_theme_support(
+			'html5', [
+				'search-form',
+				'comment-form',
+				'comment-list',
+				'gallery',
+				'caption',
+			]
+		);
 	}
 }

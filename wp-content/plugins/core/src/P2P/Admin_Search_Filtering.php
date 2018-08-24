@@ -2,7 +2,6 @@
 
 namespace Tribe\Project\P2P;
 
-
 use Tribe\Libs\P2P\Relationship;
 
 class Admin_Search_Filtering {
@@ -10,7 +9,7 @@ class Admin_Search_Filtering {
 	/**
 	 * @var array[] A p2p_type to options list
 	 */
-	protected static $post_type_options = [ ];
+	protected static $post_type_options = [];
 
 	/**
 	 * @var \Tribe\Libs\Assets\Asset_Loader
@@ -66,8 +65,8 @@ class Admin_Search_Filtering {
 	public function track_shown_boxes( $shown, $directed, $post ) {
 		$name = $directed->name;
 		$side = $directed->get_direction();
-		if ( $shown && $name == $this->relationship_id ) {
-			if ( $this->side == 'both' || $side == $this->side ) {
+		if ( $shown && $name === $this->relationship_id ) {
+			if ( $this->side === 'both' || $side === $this->side ) {
 				$this->p2p_box_connection = $directed;
 				$this->side_to_show = $side;
 			}
@@ -90,10 +89,12 @@ class Admin_Search_Filtering {
 		}
 		self::$asset_loader->register_and_enqueue_script( 'p2p-posttype-filter', 'admin/p2p/p2p-posttype-filter.js', [ 'jquery' ], '', true );
 		self::$asset_loader->register_and_enqueue_stylesheet( 'p2p-posttype-filter', 'admin/p2p/p2p-posttype-filter.css' );
-		wp_localize_script( 'p2p-posttype-filter', 'Tribe_P2P_Posttype_Filter', [
-			'relationships' => array_keys(self::$post_type_options),
-			'post_types'    => self::$post_type_options,
-		] );
+		wp_localize_script(
+			'p2p-posttype-filter', 'Tribe_P2P_Posttype_Filter', [
+				'relationships' => array_keys( self::$post_type_options ),
+				'post_types'    => self::$post_type_options,
+			]
+		);
 	}
 
 	protected function get_p2p_type() {
@@ -101,9 +102,9 @@ class Admin_Search_Filtering {
 	}
 
 	protected function get_post_type_options( $opposite_side ) {
-		if ( $opposite_side == 'from' ) {
+		if ( $opposite_side === 'from' ) {
 			$post_types = $this->to_post_types;
-		} elseif ( $opposite_side == 'to' ) {
+		} elseif ( $opposite_side === 'to' ) {
 			$post_types = $this->from_post_types;
 		} else {
 			return [];
@@ -139,13 +140,13 @@ class Admin_Search_Filtering {
 	}
 
 	protected function should_filter_query_args() {
-		if ( empty( $_REQUEST['p2p_type'] ) || !$this->relationship_id == $_REQUEST['p2p_type'] ) {
+		if ( empty( $_REQUEST['p2p_type'] ) || ! $this->relationship_id === $_REQUEST['p2p_type'] ) {
 			return false;
 		}
-		if ( empty( $_REQUEST['action'] ) || $_REQUEST['action'] != 'p2p_box' ) {
+		if ( empty( $_REQUEST['action'] ) || $_REQUEST['action'] !== 'p2p_box' ) {
 			return false;
 		}
-		if ( empty( $_REQUEST['subaction'] ) || $_REQUEST['subaction'] != 'search' ) {
+		if ( empty( $_REQUEST['subaction'] ) || $_REQUEST['subaction'] !== 'search' ) {
 			return false;
 		}
 		if ( empty( $_REQUEST['post_type'] ) ) {

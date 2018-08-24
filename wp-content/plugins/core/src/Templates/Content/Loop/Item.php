@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Templates\Content\Loop;
 
-
 use Tribe\Project\Post_Meta\Primary_Category;
 use Tribe\Project\Post_Types\Article\Article;
 use Tribe\Project\Taxonomies\Category\Category;

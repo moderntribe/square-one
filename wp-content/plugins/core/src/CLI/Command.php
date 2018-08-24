@@ -1,6 +1,7 @@
 <?php
 
 namespace Tribe\Project\CLI;
+
 use WP_CLI;
 
 abstract class Command extends \WP_CLI_Command {
@@ -21,10 +22,12 @@ abstract class Command extends \WP_CLI_Command {
 			return;
 		}
 
-		WP_CLI::add_command( 's1 ' . $this->command(), [ $this, 'run_command' ], [
-			'shortdesc' => $this->description(),
-			'synopsis'  => $this->arguments(),
-		] );
+		WP_CLI::add_command(
+			's1 ' . $this->command(), [ $this, 'run_command' ], [
+				'shortdesc' => $this->description(),
+				'synopsis'  => $this->arguments(),
+			]
+		);
 	}
 
 	abstract protected function command();
@@ -43,9 +46,11 @@ abstract class Command extends \WP_CLI_Command {
 	 * @return string
 	 */
 	public function ucwords( $slug ) {
-		$uc_words = array_map( function( $word ) {
-			return ucfirst( $word );
-		}, explode( '_', $slug ) );
+		$uc_words = array_map(
+			function( $word ) {
+					return ucfirst( $word );
+			}, explode( '_', $slug )
+		);
 		return implode( '_', $uc_words );
 	}
 

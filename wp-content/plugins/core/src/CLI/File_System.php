@@ -15,7 +15,7 @@ class File_System {
 	}
 
 	public function write_file( $file, $contents, $overwrite = false ) {
-		if ( file_exists( $file) && ! $overwrite ) {
+		if ( file_exists( $file ) && ! $overwrite ) {
 			\WP_CLI::error( 'Sorry... ' . $file . ' already exists.' );
 		}
 		if ( ! $handle = fopen( $file, 'w' ) ) {
@@ -32,7 +32,7 @@ class File_System {
 		}
 
 		$contents = '';
-		while (! feof ( $handle ) ) {
+		while ( ! feof( $handle ) ) {
 			$line = fgets( $handle );
 			$contents .= $line;
 			if ( strpos( $line, $below_line ) !== false ) {

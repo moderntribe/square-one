@@ -22,34 +22,48 @@ class Tabs extends Panel_Type_Config {
 		$panel->set_description( __( 'Display a series of tabs.', 'tribe' ) );
 		$panel->set_thumbnail( $this->handler->thumbnail_url( 'tabs.svg' ) );
 
-		$panel->add_field( new Fields\TextArea( [
-			'name'     => self::FIELD_DESCRIPTION,
-			'label'    => __( 'Description', 'tribe' ),
-			'richtext' => true,
-		] ) );
+		$panel->add_field(
+			new Fields\TextArea(
+				[
+					'name'     => self::FIELD_DESCRIPTION,
+					'label'    => __( 'Description', 'tribe' ),
+					'richtext' => true,
+				]
+			)
+		);
 
-		$repeater = new Fields\Repeater( [
-			'name'    => self::FIELD_TABS,
-			'label'   => __( 'Tabs Rows', 'tribe' ),
-			'min'     => 1,
-			'max'     => 10,
-			'strings' => [
-				'button.new'      => __( 'Add Tab Row', 'tribe' ),
-				'button.delete'   => __( 'Delete Tab Row', 'tribe' ),
-				'label.row_index' => __( 'Tab Row %{index} |||| Tab Row %{index}', 'tribe' ),
-			],
-		] );
+		$repeater = new Fields\Repeater(
+			[
+				'name'    => self::FIELD_TABS,
+				'label'   => __( 'Tabs Rows', 'tribe' ),
+				'min'     => 1,
+				'max'     => 10,
+				'strings' => [
+					'button.new'      => __( 'Add Tab Row', 'tribe' ),
+					'button.delete'   => __( 'Delete Tab Row', 'tribe' ),
+					'label.row_index' => __( 'Tab Row %{index} |||| Tab Row %{index}', 'tribe' ),
+				],
+			]
+		);
 
-		$repeater->add_field( new Fields\Text( [
-			'name'  => self::FIELD_TABS_TITLE,
-			'label' => __( 'Tab Title', 'tribe' ),
-		] ) );
+		$repeater->add_field(
+			new Fields\Text(
+				[
+					'name'  => self::FIELD_TABS_TITLE,
+					'label' => __( 'Tab Title', 'tribe' ),
+				]
+			)
+		);
 
-		$repeater->add_field( new Fields\TextArea( [
-			'name'     => self::FIELD_TABS_CONTENT,
-			'label'    => __( 'Tab Content', 'tribe' ),
-			'richtext' => true,
-		] ) );
+		$repeater->add_field(
+			new Fields\TextArea(
+				[
+					'name'     => self::FIELD_TABS_CONTENT,
+					'label'    => __( 'Tab Content', 'tribe' ),
+					'richtext' => true,
+				]
+			)
+		);
 
 		$panel->add_field( $repeater );
 

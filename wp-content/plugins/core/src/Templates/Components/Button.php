@@ -20,15 +20,15 @@ class Button extends Component {
 
 	protected function parse_options( array $options ): array {
 		$defaults = [
-			static::URL         => '',
-			static::TYPE        => 'button',
-			static::TARGET      => '',
-			static::ARIA_LABEL  => '',
-			static::CLASSES     => [],
-			static::ATTRS       => [],
-			static::LABEL       => false,
-			static::BTN_AS_LINK => false,
-			static::FORCE_DISPLAY => false,
+			static::URL              => '',
+			static::TYPE             => 'button',
+			static::TARGET           => '',
+			static::ARIA_LABEL       => '',
+			static::CLASSES          => [],
+			static::ATTRS            => [],
+			static::LABEL            => false,
+			static::BTN_AS_LINK      => false,
+			static::FORCE_DISPLAY    => false,
 			static::INNER_ATTRIBUTES => [],
 		];
 
@@ -55,7 +55,7 @@ class Button extends Component {
 	protected function get_attrs(): string {
 		$attrs = [];
 
-		if( $this->options['btn_as_link'] && $this->options['target'] === '_blank' ) {
+		if ( $this->options['btn_as_link'] && $this->options['target'] === '_blank' ) {
 			$attrs[ 'rel' ] = 'noopener';
 		}
 

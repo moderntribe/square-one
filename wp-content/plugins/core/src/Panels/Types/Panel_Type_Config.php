@@ -9,7 +9,7 @@ use ModularContent\Fields;
 
 
 abstract class Panel_Type_Config {
-	protected $ViewFinder = NULL;
+	protected $ViewFinder = null;
 	/**
 	 * @var array $post_types
 	 *
@@ -33,22 +33,24 @@ abstract class Panel_Type_Config {
 	abstract protected function panel();
 
 	protected function background_color_group( $name, $label = '', $default_color = 'white' ) {
-		return new Fields\ImageSelect( [
-			'label'   => $label,
-			'name'    => $name,
-			'options' => [
-				'black'     => $this->handler->swatch_icon_url( 'black.png' ),
-				'red'       => $this->handler->swatch_icon_url( 'red.png' ),
-				'blue'      => $this->handler->swatch_icon_url( 'blue.png' ),
-				'green'     => $this->handler->swatch_icon_url( 'green.png' ),
-				'orange'    => $this->handler->swatch_icon_url( 'orange.png' ),
-				'yellow'    => $this->handler->swatch_icon_url( 'yellow.png' ),
-				'sand'      => $this->handler->swatch_icon_url( 'sand.png' ),
-				'grey-warm' => $this->handler->swatch_icon_url( 'grey-warm.png' ),
-				'grey'      => $this->handler->swatch_icon_url( 'grey.png' ),
-				'white'     => $this->handler->swatch_icon_url( 'white.png' )
-			],
-			'default' => $default_color
-		] );
+		return new Fields\ImageSelect(
+			[
+				'label'   => $label,
+				'name'    => $name,
+				'options' => [
+					'black'     => $this->handler->swatch_icon_url( 'black.png' ),
+					'red'       => $this->handler->swatch_icon_url( 'red.png' ),
+					'blue'      => $this->handler->swatch_icon_url( 'blue.png' ),
+					'green'     => $this->handler->swatch_icon_url( 'green.png' ),
+					'orange'    => $this->handler->swatch_icon_url( 'orange.png' ),
+					'yellow'    => $this->handler->swatch_icon_url( 'yellow.png' ),
+					'sand'      => $this->handler->swatch_icon_url( 'sand.png' ),
+					'grey-warm' => $this->handler->swatch_icon_url( 'grey-warm.png' ),
+					'grey'      => $this->handler->swatch_icon_url( 'grey.png' ),
+					'white'     => $this->handler->swatch_icon_url( 'white.png' ),
+				],
+				'default' => $default_color,
+			]
+		);
 	}
 }

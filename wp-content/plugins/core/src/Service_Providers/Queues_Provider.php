@@ -21,7 +21,7 @@ class Queues_Provider implements ServiceProviderInterface {
 
 	public function register( Container $container ) {
 
-		$container[ self::WP_CACHE ] = function(){
+		$container[ self::WP_CACHE ] = function() {
 			return new WP_Cache();
 		};
 
@@ -38,19 +38,23 @@ class Queues_Provider implements ServiceProviderInterface {
 			return new Queue_Collection();
 		};
 
-		if( ! defined( 'DISABLE_WP_CRON' ) || false === DISABLE_WP_CRON ) {
+		if ( ! defined( 'DISABLE_WP_CRON' ) || false === DISABLE_WP_CRON ) {
 			$container[ self::CRON ] = function ( $container ) {
 				return new Cron();
 			};
 
-			add_filter( 'cron_schedules', function ( $schedules ) use ( $container ) {
-				return $container[ self::CRON ]->add_interval( $schedules );
-			}, 10, 1 );
+			add_filter(
+				'cron_schedules', function ( $schedules ) use ( $container ) {
+					return $container[ self::CRON ]->add_interval( $schedules );
+				}, 10, 1
+			);
 		}
 
-		add_action( 'init', function() use ( $container ) {
-			$container[ self::COLLECTION ]->add( $container[ self::DEFAULT_QUEUE ] );
-		}, 0, 0 );
+		add_action(
+			'init', function() use ( $container ) {
+				$container[ self::COLLECTION ]->add( $container[ self::DEFAULT_QUEUE ] );
+			}, 0, 0
+		);
 
 	}
 }

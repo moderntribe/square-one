@@ -37,7 +37,7 @@ class Sidebar extends Base {
 	}
 
 	public static function instance( $sidebar = 'main' ) {
-		switch( $sidebar ) {
+		switch ( $sidebar ) {
 			case 'main':
 			default:
 				return tribe_project()->container()[ 'twig.templates.sidebar.main' ];

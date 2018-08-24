@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\P2P;
 
-
 class Panel_Search_Filters {
 
 	/**
@@ -12,8 +11,8 @@ class Panel_Search_Filters {
 	 * @action wp_ajax_posts-field-p2p-options-search 0
 	 */
 	public function set_p2p_search_filters() {
-		add_action( 'pre_get_posts', array( $this, 'convert_global_search_to_title_search' ), 10, 1 );
-		add_filter( 'posts_where', array( $this, 'add_title_search_to_where_clause' ), 15, 2 );
+		add_action( 'pre_get_posts', [ $this, 'convert_global_search_to_title_search' ], 10, 1 );
+		add_filter( 'posts_where', [ $this, 'add_title_search_to_where_clause' ], 15, 2 );
 	}
 
 	/**
@@ -22,7 +21,9 @@ class Panel_Search_Filters {
 	 * @return void
 	 */
 	public function convert_global_search_to_title_search( $query ) {
-		if ( !$query->get( 'suppress_filters' ) && $search = $query->get( 's' ) ) {
+		$search = $query->get( 's' );
+
+		if ( ! $query->get( 'suppress_filters' ) && $search ) {
 			$query->set( 'title_only_search', $search );
 			unset( $query->query_vars['s'] );
 		}

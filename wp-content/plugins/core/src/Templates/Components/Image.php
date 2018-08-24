@@ -261,7 +261,7 @@ class Image extends Component {
 		$shim_dir = trailingslashit( get_stylesheet_directory_uri() ) . 'img/theme/shims/';
 		$src      = $this->options[ static::SHIM ];
 
-		if ( empty ( $this->options[ static::SHIM ] ) ) {
+		if ( empty( $this->options[ static::SHIM ] ) ) {
 			if ( $this->options[ static::AUTO_SHIM ] ) {
 				$src = $shim_dir . $this->options[ static::SRC_SIZE ] . '.png';
 			} else {

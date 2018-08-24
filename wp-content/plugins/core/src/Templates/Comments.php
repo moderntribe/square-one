@@ -31,12 +31,14 @@ class Comments extends Twig_Template {
 	}
 
 	protected function get_comments() {
-		return wp_list_comments( [
-			'callback'   => 'core_comment',
-			'style'      => 'ol',
-			'short_ping' => true,
-			'echo'       => false,
-		] );
+		return wp_list_comments(
+			[
+				'callback'   => 'core_comment',
+				'style'      => 'ol',
+				'short_ping' => true,
+				'echo'       => false,
+			]
+		);
 	}
 
 	protected function get_comment_form() {
@@ -46,12 +48,14 @@ class Comments extends Twig_Template {
 
 		ob_start();
 
-		comment_form( [
-			'title_reply_before' => '<h3 id="reply-title" class="comment-reply-title h4">',
-			'class_form'         => 'comment-form t-content',
-			'logged_in_as'       => sprintf( '<p class="logged-in-as">%s</p>', $logged_in_as ),
-			'class_submit'       => 'submit c-btn',
-		] );
+		comment_form(
+			[
+				'title_reply_before' => '<h3 id="reply-title" class="comment-reply-title h4">',
+				'class_form'         => 'comment-form t-content',
+				'logged_in_as'       => sprintf( '<p class="logged-in-as">%s</p>', $logged_in_as ),
+				'class_submit'       => 'submit c-btn',
+			]
+		);
 
 		return ob_get_clean();
 	}

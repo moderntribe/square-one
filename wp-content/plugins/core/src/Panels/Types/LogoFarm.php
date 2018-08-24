@@ -22,35 +22,49 @@ class LogoFarm extends Panel_Type_Config {
 		$panel->set_description( __( 'A collection of logos.', 'tribe' ) );
 		$panel->set_thumbnail( $this->handler->thumbnail_url( 'logofarm.svg' ) );
 
-		$panel->add_field( new Fields\TextArea( [
-			'name'     => self::FIELD_DESCRIPTION,
-			'label'    => __( 'Description', 'tribe' ),
-			'richtext' => true,
-		] ) );
+		$panel->add_field(
+			new Fields\TextArea(
+				[
+					'name'     => self::FIELD_DESCRIPTION,
+					'label'    => __( 'Description', 'tribe' ),
+					'richtext' => true,
+				]
+			)
+		);
 
-		$logo = new Fields\Repeater( [
-			'label'            => __( 'Logos', 'tribe' ),
-			'name'             => self::FIELD_LOGOS,
-			'min'              => 2,
-			'max'              => 6,
-			'new_button_label' => __( 'Add Logo', 'tribe' ),
-			'strings'          => [
-				'label.row_index' => __( 'Logo %{index} |||| Logo %{index}', 'tribe' ),
-				'button.delete'   => __( 'Delete Logo', 'tribe' ),
-			],
-		] );
+		$logo = new Fields\Repeater(
+			[
+				'label'            => __( 'Logos', 'tribe' ),
+				'name'             => self::FIELD_LOGOS,
+				'min'              => 2,
+				'max'              => 6,
+				'new_button_label' => __( 'Add Logo', 'tribe' ),
+				'strings'          => [
+					'label.row_index' => __( 'Logo %{index} |||| Logo %{index}', 'tribe' ),
+					'button.delete'   => __( 'Delete Logo', 'tribe' ),
+				],
+			]
+		);
 
-		$logo->add_field( new Fields\Image( [
-			'name'        => self::FIELD_LOGO_IMAGE,
-			'label'       => __( 'Image', 'tribe' ),
-			'description' => __( 'Optimal image sizes: 300 x 300.', 'tribe' ),
-			'size'        => 'medium', // the size displayed in the admin.
-		] ) );
+		$logo->add_field(
+			new Fields\Image(
+				[
+					'name'        => self::FIELD_LOGO_IMAGE,
+					'label'       => __( 'Image', 'tribe' ),
+					'description' => __( 'Optimal image sizes: 300 x 300.', 'tribe' ),
+					'size'        => 'medium', // the size displayed in the admin.
+				]
+			)
+		);
 
-		$logo->add_field( new Fields\Link( [
-			'name'  => self::FIELD_LOGO_CTA,
-			'label' => __( 'Logo Link', 'tribe' ),
-		] ) );
+		$logo->add_field(
+			new Fields\Link(
+				[
+					'name'  => self::FIELD_LOGO_CTA,
+					'label' => __( 'Logo Link', 'tribe' ),
+				]
+			)
+		);
 
 		$panel->add_field( $logo );
 

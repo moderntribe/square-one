@@ -38,7 +38,7 @@ class Unsupported_Browser extends Base {
 	}
 
 	protected function get_legacy_page_title() {
-		return sprintf( '%s %s', __(  'Welcome to', 'tribe' ), get_bloginfo( 'name' ) );
+		return sprintf( '%s %s', __( 'Welcome to', 'tribe' ), get_bloginfo( 'name' ) );
 	}
 
 	protected function get_legacy_page_content() {
@@ -48,12 +48,12 @@ class Unsupported_Browser extends Base {
 			__( 'update or use a modern browser', 'tribe' )
 		);
 	}
-	
+
 	protected function get_legacy_image_url( $filename ) {
 		if ( empty( $filename ) ) {
 			return false;
 		}
-		
+
 		return esc_url( trailingslashit( get_stylesheet_directory_uri() ) . 'img/theme/legacy-browser/' . $filename );
 	}
 }

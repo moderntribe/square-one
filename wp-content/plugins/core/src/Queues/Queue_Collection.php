@@ -31,7 +31,7 @@ class Queue_Collection {
 
 	public function remove( $queue_name ) {
 		if ( isset( $this->instances[ $queue_name ] ) ) {
-			unset ( $this->instances[ $queue_name ] );
+			unset( $this->instances[ $queue_name ] );
 		}
 	}
 

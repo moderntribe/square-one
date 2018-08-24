@@ -29,13 +29,15 @@ class Scripts {
 		 * admin_print_footer_scripts:50. This is when the WP visual
 		 * editor prints the tinymce config.
 		 */
-		add_action( 'admin_print_footer_scripts', function () {
+		add_action(
+			'admin_print_footer_scripts', function () {
 
-			wp_enqueue_script( 'tribe-admin-vendors' );
-			wp_enqueue_script( 'tribe-admin-scripts' );
+				wp_enqueue_script( 'tribe-admin-vendors' );
+				wp_enqueue_script( 'tribe-admin-scripts' );
 
-			// since footer scripts have already printed, process the queue again on the next available action
-			add_action( "admin_footer-" . $GLOBALS['hook_suffix'], '_wp_footer_scripts' );
-		}, 60, 0 );
+				// since footer scripts have already printed, process the queue again on the next available action
+				add_action( 'admin_footer-' . $GLOBALS['hook_suffix'], '_wp_footer_scripts' );
+			}, 60, 0
+		);
 	}
 }

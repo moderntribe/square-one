@@ -53,7 +53,7 @@ class MySQL implements Backend {
 
 		return [
 			'task_handler' => $message->get_task_handler(),
-			'args'         => json_encode( $args ),
+			'args'         => wp_json_encode( $args ),
 			'priority'     => $message->get_priority(),
 			'run_after'    => $run_after,
 			'taken'        => 0,
@@ -125,8 +125,8 @@ class MySQL implements Backend {
 		$wpdb->update(
 			$this->table_name,
 			[
-				'taken'    => 0,
-				'priority' => $this->get_priority( $job_id ) + 1,
+				'taken'     => 0,
+				'priority'  => $this->get_priority( $job_id ) + 1,
 				'run_after' => ( new \DateTime( '+10 seconds' ) )->format( 'Y-m-d H:i:s' ),
 			],
 			[ 'id' => $job_id ]
@@ -158,20 +158,24 @@ class MySQL implements Backend {
 	public function count( string $queue_name ): int {
 		global $wpdb;
 
-		return $wpdb->get_var( $wpdb->prepare(
-			"SELECT COUNT(*) FROM $this->table_name WHERE queue = %s AND done = 0",
-			$queue_name
-		) );
+		return $wpdb->get_var(
+			$wpdb->prepare(
+				"SELECT COUNT(*) FROM $this->table_name WHERE queue = %s AND done = 0",
+				$queue_name
+			)
+		);
 
 	}
 
 	public function table_exists() {
 		global $wpdb;
 
-		$table_exists = $wpdb->query( $wpdb->prepare(
-			'SHOW TABLES LIKE %s',
-			$wpdb->prefix . MySQL::DB_TABLE
-		) );
+		$table_exists = $wpdb->query(
+			$wpdb->prepare(
+				'SHOW TABLES LIKE %s',
+				$wpdb->prefix . self::DB_TABLE
+			)
+		);
 
 		return $table_exists ?: false;
 	}
@@ -179,7 +183,7 @@ class MySQL implements Backend {
 	public function create_table() {
 		global $wpdb;
 
-		$table_name = $wpdb->prefix . MySQL::DB_TABLE;
+		$table_name = $wpdb->prefix . self::DB_TABLE;
 		$query = "CREATE TABLE $table_name (
 					id bigint(20) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
 					queue varchar(255) NOT NULL,
@@ -199,9 +203,11 @@ class MySQL implements Backend {
 	private function get_priority( $task_id ) {
 		global $wpdb;
 
-		return $wpdb->get_var( $wpdb->prepare(
-			"SELECT priority FROM $this->table_name WHERE id = %s",
-			$task_id
-		) );
+		return $wpdb->get_var(
+			$wpdb->prepare(
+				"SELECT priority FROM $this->table_name WHERE id = %s",
+				$task_id
+			)
+		);
 	}
 }

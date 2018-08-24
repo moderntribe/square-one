@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Theme\Resources;
 
-
 class Scripts {
 	public function add_early_polyfills() {
 		$js_dir  = trailingslashit( get_stylesheet_directory_uri() ) . 'js/';
@@ -30,7 +29,7 @@ class Scripts {
 			$scripts         = 'dist/scripts.min.js';
 			$localize_target = 'core-theme-scripts';
 			$script_deps     = [ 'core-webpack-vendors' ];
-			wp_enqueue_script( 'core-webpack-vendors', $js_dir . 'dist/vendor.min.js', ['jquery'], $version, true );
+			wp_enqueue_script( 'core-webpack-vendors', $js_dir . 'dist/vendor.min.js', [ 'jquery' ], $version, true );
 		} else { // Dev
 			// Dev
 			$scripts         = 'dist/scripts.js';
@@ -39,12 +38,12 @@ class Scripts {
 			$script_deps     = [ 'jquery', 'core-webpack-vendors' ];
 
 			wp_enqueue_script( 'core-globals', $js_dir . 'vendor/globals.js', [], $version, true );
-			wp_enqueue_script( 'core-lazysizes-object-fit', $js_dir . 'vendor/ls.object-fit.js', ['core-globals'], $version, true );
-			wp_enqueue_script( 'core-lazysizes-parent-fit', $js_dir . 'vendor/ls.parent-fit.js', ['core-lazysizes-object-fit'], $version, true );
-			wp_enqueue_script( 'core-lazysizes-polyfill', $js_dir . 'vendor/ls.respimg.js', ['core-lazysizes-parent-fit'], $version, true );
-			wp_enqueue_script( 'core-lazysizes-bgset', $js_dir . 'vendor/ls.bgset.js', ['core-lazysizes-polyfill'], $version, true );
-			wp_enqueue_script( 'core-lazysizes', $js_dir . 'vendor/lazysizes.js', ['core-lazysizes-bgset'], $version, true );
-			wp_enqueue_script( 'core-webpack-vendors', $js_dir . 'dist/vendor.js', ['core-lazysizes'], $version, true );
+			wp_enqueue_script( 'core-lazysizes-object-fit', $js_dir . 'vendor/ls.object-fit.js', [ 'core-globals' ], $version, true );
+			wp_enqueue_script( 'core-lazysizes-parent-fit', $js_dir . 'vendor/ls.parent-fit.js', [ 'core-lazysizes-object-fit' ], $version, true );
+			wp_enqueue_script( 'core-lazysizes-polyfill', $js_dir . 'vendor/ls.respimg.js', [ 'core-lazysizes-parent-fit' ], $version, true );
+			wp_enqueue_script( 'core-lazysizes-bgset', $js_dir . 'vendor/ls.bgset.js', [ 'core-lazysizes-polyfill' ], $version, true );
+			wp_enqueue_script( 'core-lazysizes', $js_dir . 'vendor/lazysizes.js', [ 'core-lazysizes-bgset' ], $version, true );
+			wp_enqueue_script( 'core-webpack-vendors', $js_dir . 'dist/vendor.js', [ 'core-lazysizes' ], $version, true );
 		}
 
 		wp_register_script( 'jquery', $js_dir . $jquery, [], $version, false );

@@ -30,46 +30,60 @@ class Object_Meta_Provider implements ServiceProviderInterface {
 		$this->site_settings( $container );
 
 		$container[ self::REPO ] = function ( Container $container ) {
-			$meta_repo = array_map( function ( $key ) use ( $container ) {
-				return $container[ $key ];
-			}, $this->keys );
+			$meta_repo = array_map(
+				function ( $key ) use ( $container ) {
+						return $container[ $key ];
+				}, $this->keys
+			);
 
 			return new Meta_Repository( $meta_repo );
 		};
 
-		add_action( 'init', function () use ( $container ) {
-			$container[ self::REPO ]->hook();
-		} );
+		add_action(
+			'init', function () use ( $container ) {
+				$container[ self::REPO ]->hook();
+			}
+		);
 
-		add_action( 'acf/init', function () use ( $container ) {
-			array_walk( $this->keys, function ( $key ) use ( $container ) {
-				$container[ $key ]->register_group();
-			} );
-		}, 10, 0 );
+		add_action(
+			'acf/init', function () use ( $container ) {
+				array_walk(
+					$this->keys, function ( $key ) use ( $container ) {
+						$container[ $key ]->register_group();
+					}
+				);
+			}, 10, 0
+		);
 	}
 
 	private function example( Container $container ) {
 		$container[ self::EXAMPLE ] = function ( Container $container ) {
-			return new Example( [
-				'post_types'     => [ Post_Types\Page\Page::NAME, Post_Types\Post\Post::NAME ],
-				'taxonomies'     => [ Taxonomies\Category\Category::NAME ],
-				'settings_pages' => [ Settings\General::instance()->get_slug() ],
-				'users'          => true,
-			] );
+			return new Example(
+				[
+					'post_types'     => [ Post_Types\Page\Page::NAME, Post_Types\Post\Post::NAME ],
+					'taxonomies'     => [ Taxonomies\Category\Category::NAME ],
+					'settings_pages' => [ Settings\General::instance()->get_slug() ],
+					'users'          => true,
+				]
+			);
 		};
 	}
 
 	private function site_settings( Container $container ) {
 		$container[ self::SOCIAL_SETTINGS ] = function ( Container $container ) {
-			return new Social_Settings( [
-				'settings_pages' => [ Settings\General::instance()->get_slug() ],
-			] );
+			return new Social_Settings(
+				[
+					'settings_pages' => [ Settings\General::instance()->get_slug() ],
+				]
+			);
 		};
 
 		$container[ self::ANALYTICS_SETTINGS ] = function ( Container $container ) {
-			return new Analytics_Settings( [
-				'settings_pages' => [ Settings\General::instance()->get_slug() ],
-			] );
+			return new Analytics_Settings(
+				[
+					'settings_pages' => [ Settings\General::instance()->get_slug() ],
+				]
+			);
 		};
 	}
 }

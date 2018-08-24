@@ -35,22 +35,26 @@ class Example extends ACF\ACF_Meta_Group {
 
 	private function get_field_one() {
 		$field = new ACF\Field( self::NAME . '_' . self::ONE );
-		$field->set_attributes( [
-			'label' => __( 'Example Object Meta #1', 'tribe' ),
-			'name'  => self::ONE,
-			'type'  => 'text',
-		] );
+		$field->set_attributes(
+			[
+				'label' => __( 'Example Object Meta #1', 'tribe' ),
+				'name'  => self::ONE,
+				'type'  => 'text',
+			]
+		);
 
 		return $field;
 	}
 
 	private function get_field_two() {
 		$field = new ACF\Field( self::NAME . '_' . self::TWO );
-		$field->set_attributes( [
-			'label' => __( 'Example Object Meta #2', 'tribe' ),
-			'name'  => self::TWO,
-			'type'  => 'text',
-		] );
+		$field->set_attributes(
+			[
+				'label' => __( 'Example Object Meta #2', 'tribe' ),
+				'name'  => self::TWO,
+				'type'  => 'text',
+			]
+		);
 
 		return $field;
 	}

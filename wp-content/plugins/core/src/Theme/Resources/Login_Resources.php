@@ -16,7 +16,7 @@ class Login_Resources {
 		$css_login = 'login.css';
 
 		// Production
-		if ( !defined( 'SCRIPT_DEBUG' ) || SCRIPT_DEBUG === false ) {
+		if ( ! defined( 'SCRIPT_DEBUG' ) || SCRIPT_DEBUG === false ) {
 			$css_login = 'dist/login.min.css';
 		}
 

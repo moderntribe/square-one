@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Theme;
 
-
 use Tribe\Project\Templates\Components\Video;
 
 class Oembed_Filter {
@@ -50,7 +49,6 @@ class Oembed_Filter {
 			if ( strpos( $video_thumb, 'maxresdefault' ) === false ) {
 				$container_classes[] = 'c-video--lazy-low-res';
 			}
-
 		} else {
 			$embed_id    = $this->get_vimeo_embed_id( $url );
 			$video_thumb = isset( $data->thumbnail_url ) ? $data->thumbnail_url : '';

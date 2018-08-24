@@ -69,19 +69,21 @@ class Gallery extends Panel {
 			return [];
 		}
 
-		return array_map( function ( $slide_id ) use ( $size ) {
-			$options = [
-				ImageComponent::IMG_ID       => $slide_id,
-				ImageComponent::AS_BG        => $this->use_crop() && $size == 'full',
-				ImageComponent::USE_LAZYLOAD => false,
-				ImageComponent::ECHO         => false,
-				ImageComponent::SRC_SIZE     => $size,
-			];
+		return array_map(
+			function ( $slide_id ) use ( $size ) {
+					$options = [
+						ImageComponent::IMG_ID       => $slide_id,
+						ImageComponent::AS_BG        => $this->use_crop() && $size == 'full',
+						ImageComponent::USE_LAZYLOAD => false,
+						ImageComponent::ECHO         => false,
+						ImageComponent::SRC_SIZE     => $size,
+					];
 
-			$image = ImageComponent::factory( $options );
+					$image = ImageComponent::factory( $options );
 
-			return $image->render();
-		}, $slide_ids );
+					return $image->render();
+			}, $slide_ids
+		);
 	}
 
 	protected function get_slider_main_classes() {

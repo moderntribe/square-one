@@ -25,33 +25,49 @@ class VideoText extends Panel_Type_Config {
 		$panel->set_thumbnail( $this->handler->thumbnail_url( 'video-text.svg' ) );
 
 		// Panel Layout.
-		$panel->add_settings_field( new Fields\ImageSelect( [
-			'name'    => self::FIELD_LAYOUT,
-			'label'   => __( 'Layout', 'tribe' ),
-			'options' => [
-				self::FIELD_LAYOUT_OPTION_VIDEO_LEFT  => $this->handler->layout_icon_url( 'imagetext-left.svg' ),
-				self::FIELD_LAYOUT_OPTION_VIDEO_RIGHT => $this->handler->layout_icon_url( 'imagetext-right.svg' ),
-			],
-			'default' => self::FIELD_LAYOUT_OPTION_VIDEO_LEFT,
-		] ) );
+		$panel->add_settings_field(
+			new Fields\ImageSelect(
+				[
+					'name'    => self::FIELD_LAYOUT,
+					'label'   => __( 'Layout', 'tribe' ),
+					'options' => [
+						self::FIELD_LAYOUT_OPTION_VIDEO_LEFT  => $this->handler->layout_icon_url( 'imagetext-left.svg' ),
+						self::FIELD_LAYOUT_OPTION_VIDEO_RIGHT => $this->handler->layout_icon_url( 'imagetext-right.svg' ),
+					],
+					'default' => self::FIELD_LAYOUT_OPTION_VIDEO_LEFT,
+				]
+			)
+		);
 
-		$panel->add_field( new Fields\TextArea( [
-			'name'     => self::FIELD_DESCRIPTION,
-			'label'    => __( 'Description', 'tribe' ),
-			'richtext' => true,
-		] ) );
+		$panel->add_field(
+			new Fields\TextArea(
+				[
+					'name'     => self::FIELD_DESCRIPTION,
+					'label'    => __( 'Description', 'tribe' ),
+					'richtext' => true,
+				]
+			)
+		);
 
-		$panel->add_field( new Fields\Text( [
-			'name'        => self::FIELD_VIDEO,
-			'label'       => __( 'Video', 'tribe' ),
-			'description' => __( 'Add a video url.', 'tribe' ),
-			'size'        => 'medium', // the size displayed in the admin.
-		] ) );
+		$panel->add_field(
+			new Fields\Text(
+				[
+					'name'        => self::FIELD_VIDEO,
+					'label'       => __( 'Video', 'tribe' ),
+					'description' => __( 'Add a video url.', 'tribe' ),
+					'size'        => 'medium', // the size displayed in the admin.
+				]
+			)
+		);
 
-		$panel->add_field( new Fields\Link( [
-			'name'  => self::FIELD_CTA,
-			'label' => __( 'Call To Action Link', 'tribe' ),
-		] ) );
+		$panel->add_field(
+			new Fields\Link(
+				[
+					'name'  => self::FIELD_CTA,
+					'label' => __( 'Call To Action Link', 'tribe' ),
+				]
+			)
+		);
 
 		return $panel;
 

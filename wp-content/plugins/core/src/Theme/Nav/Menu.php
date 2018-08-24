@@ -16,10 +16,10 @@ class Menu {
 	}
 
 	private function build_cache_key() {
-		$cache_key = array(
+		$cache_key = [
 			'args' => $this->args,
 			'url ' => isset( $_SERVER['REQUEST_URI'] ) ? $_SERVER['REQUEST_URI'] : '',
-		);
+		];
 		if ( isset( $cache_key['args']['walker'] ) && is_object( $cache_key['args']['walker'] ) ) {
 			$cache_key['args']['walker'] = get_class( $cache_key['args']['walker'] );
 		}
@@ -30,7 +30,7 @@ class Menu {
 		$cache = new Cache();
 		$nav = $cache->get( $this->cache_key, 'tribe_nav_menu' );
 		if ( empty( $nav ) ) {
-			$nav = wp_nav_menu($this->args);
+			$nav = wp_nav_menu( $this->args );
 			$cache->set( $this->cache_key, $nav, 'tribe_nav_menu' );
 		}
 		return $nav;
@@ -45,8 +45,8 @@ class Menu {
 	public static function menu( $args ) {
 		$menu = new self( $args );
 		$html = $menu->get_html();
-		$echo = isset( $args[ 'echo' ] ) ? $args[ 'echo' ] : TRUE;
-		if ( !$echo ) {
+		$echo = isset( $args[ 'echo' ] ) ? $args[ 'echo' ] : true;
+		if ( ! $echo ) {
 			return $html;
 		}
 		echo $html;

@@ -25,44 +25,62 @@ class Testimonial extends Panel_Type_Config {
 		$panel->set_description( __( 'A series of testimonials or quotes.', 'tribe' ) );
 		$panel->set_thumbnail( $this->handler->thumbnail_url( 'testimonial.svg' ) );
 
-		$panel->add_settings_field( new Fields\Radio( [
-			'name'    => self::FIELD_TEXT_COLOR,
-			'label'   => __( 'Text Color', 'tribe' ),
-			'options' => [
-				self::FIELD_TEXT_LIGHT => __( 'Light', 'tribe' ),
-				self::FIELD_TEXT_DARK  => __( 'Dark', 'tribe' ),
-			],
-			'default' => self::FIELD_TEXT_DARK,
-		] ) );
+		$panel->add_settings_field(
+			new Fields\Radio(
+				[
+					'name'    => self::FIELD_TEXT_COLOR,
+					'label'   => __( 'Text Color', 'tribe' ),
+					'options' => [
+						self::FIELD_TEXT_LIGHT => __( 'Light', 'tribe' ),
+						self::FIELD_TEXT_DARK  => __( 'Dark', 'tribe' ),
+					],
+					'default' => self::FIELD_TEXT_DARK,
+				]
+			)
+		);
 
-		$panel->add_field( new Fields\Image( [
-			'name'        => self::FIELD_IMAGE,
-			'label'       => __( 'Background Image', 'tribe' ),
-			'description' => __( 'Optimal image sizes: 1700 x 600 pixels', 'tribe' ),
-			'size'        => 'medium', // the size displayed in the admin.
-		] ) );
+		$panel->add_field(
+			new Fields\Image(
+				[
+					'name'        => self::FIELD_IMAGE,
+					'label'       => __( 'Background Image', 'tribe' ),
+					'description' => __( 'Optimal image sizes: 1700 x 600 pixels', 'tribe' ),
+					'size'        => 'medium', // the size displayed in the admin.
+				]
+			)
+		);
 
-		$quote = new Fields\Repeater( [
-			'label'            => __( 'Testimonials', 'tribe' ),
-			'name'             => self::FIELD_QUOTES,
-			'min'              => 1,
-			'max'              => 4,
-			'new_button_label' => __( 'Add Quote', 'tribe' ),
-			'strings'          => [
-				'label.row_index' => __( 'Quote %{index} |||| Quote %{index}', 'tribe' ),
-				'button.delete'   => __( 'Delete Quote', 'tribe' ),
-			],
-		] );
+		$quote = new Fields\Repeater(
+			[
+				'label'            => __( 'Testimonials', 'tribe' ),
+				'name'             => self::FIELD_QUOTES,
+				'min'              => 1,
+				'max'              => 4,
+				'new_button_label' => __( 'Add Quote', 'tribe' ),
+				'strings'          => [
+					'label.row_index' => __( 'Quote %{index} |||| Quote %{index}', 'tribe' ),
+					'button.delete'   => __( 'Delete Quote', 'tribe' ),
+				],
+			]
+		);
 
-		$quote->add_field( new Fields\TextArea( [
-			'name'     => self::FIELD_QUOTE,
-			'label'    => __( 'Quote', 'tribe' ),
-		] ) );
+		$quote->add_field(
+			new Fields\TextArea(
+				[
+					'name'  => self::FIELD_QUOTE,
+					'label' => __( 'Quote', 'tribe' ),
+				]
+			)
+		);
 
-		$quote->add_field( new Fields\Text( [
-			'name'  => self::FIELD_CITE,
-			'label' => __( 'Cite', 'tribe' ),
-		] ) );
+		$quote->add_field(
+			new Fields\Text(
+				[
+					'name'  => self::FIELD_CITE,
+					'label' => __( 'Cite', 'tribe' ),
+				]
+			)
+		);
 
 		$panel->add_field( $quote );
 

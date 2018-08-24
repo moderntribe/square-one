@@ -57,13 +57,15 @@ abstract class Util {
 	 * @return string
 	 */
 	public static function array_to_attributes( $array ) {
-		$attrs = array_map( function ( $key ) use ( $array ) {
-			if ( is_bool( $array[ $key ] ) ) {
-				return $array[ $key ] ? $key : '';
-			}
+		$attrs = array_map(
+			function ( $key ) use ( $array ) {
+				if ( is_bool( $array[ $key ] ) ) {
+					  return $array[ $key ] ? $key : '';
+				}
 
-			return $key . '=\'' . esc_attr( $array[ $key ] ) . '\'';
-		}, array_keys( $array ) );
+					return $key . '=\'' . esc_attr( $array[ $key ] ) . '\'';
+			}, array_keys( $array )
+		);
 
 		return implode( ' ', $attrs );
 	}
@@ -108,7 +110,7 @@ abstract class Util {
 		$pages = get_pages( $args );
 
 		if ( empty( $pages ) ) {
-		    return 0;
+			return 0;
 		}
 
 		return $pages[0]->ID;

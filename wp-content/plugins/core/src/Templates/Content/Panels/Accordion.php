@@ -68,17 +68,19 @@ class Accordion extends Panel {
 			return [];
 		}
 
-		return array_map( function ( $row ) {
-			$header_id  = uniqid( 'accordion-header-' );
-			$content_id = uniqid( 'accordion-content-' );
+		return array_map(
+			function ( $row ) {
+					$header_id  = uniqid( 'accordion-header-' );
+					$content_id = uniqid( 'accordion-content-' );
 
-			return [
-				'header_id'   => $header_id,
-				'content_id'  => $content_id,
-				'header_text' => $row[ AccordionPanel::FIELD_ACCORDION_TITLE ],
-				'content'     => $row[ AccordionPanel::FIELD_ACCORDION_CONTENT ],
-			];
-		}, $rows );
+					return [
+						'header_id'   => $header_id,
+						'content_id'  => $content_id,
+						'header_text' => $row[ AccordionPanel::FIELD_ACCORDION_TITLE ],
+						'content'     => $row[ AccordionPanel::FIELD_ACCORDION_CONTENT ],
+					];
+			}, $rows
+		);
 	}
 
 	public static function instance() {

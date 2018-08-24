@@ -27,24 +27,26 @@ class Walker_Nav_Menu_Primary extends \Walker_Nav_Menu {
 	 * @param int    $depth  Depth of menu item. Used for padding.
 	 * @param array  $args   An array of wp_nav_menu() arguments.
 	 */
-	public function start_lvl( &$output, $depth = 0, $args = array() ) {
+	public function start_lvl( &$output, $depth = 0, $args = [] ) {
 
 		/*
 		 *  WP Core docs claim that $args is an array, but it comes
 		 * in as an object thanks to casting in wp_nav_menu()
 		 */
-		$args = (array)$args;
+		$args = (array) $args;
 
 		// Setup sub-menu ID
 		$id = $this->current_item->ID ? ' id="menu-item-child-' . esc_attr( $this->current_item->ID ) . '"' : '';
 
 		// Setup sub-menu classes
-		$classes = Util::class_attribute( [
-			$args[ 'theme_location' ] . '__list-child',
-			$args[ 'theme_location' ] . '__list-child--depth-' . $depth,
-		] );
+		$classes = Util::class_attribute(
+			[
+				$args[ 'theme_location' ] . '__list-child',
+				$args[ 'theme_location' ] . '__list-child--depth-' . $depth,
+			]
+		);
 
-		$indent = str_repeat("\t", $depth);
+		$indent = str_repeat( "\t", $depth );
 		$output .= "\n$indent<ul$id$classes data-js=\"child-menu\">\n";
 
 	}
@@ -63,14 +65,14 @@ class Walker_Nav_Menu_Primary extends \Walker_Nav_Menu {
 	 * @param array  $args   An array of wp_nav_menu() arguments.
 	 * @param int    $id     Current item ID.
 	 */
-	public function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
+	public function start_el( &$output, $item, $depth = 0, $args = [], $id = 0 ) {
 
 		// Setup our parent item
 		$this->current_item = $item;
 
 		$indent = ( $depth ) ? str_repeat( "\t", $depth ) : '';
 
-		$classes = empty( $item->classes ) ? array() : (array)$item->classes;
+		$classes = empty( $item->classes ) ? [] : (array) $item->classes;
 
 		/**
 		 * Filters the arguments for a single nav menu item.
@@ -94,8 +96,10 @@ class Walker_Nav_Menu_Primary extends \Walker_Nav_Menu {
 		 * @param array  $args    An array of wp_nav_menu() arguments.
 		 * @param int    $depth   Depth of menu item. Used for padding.
 		 */
-		$class_names = join( ' ',
-			apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args, $depth ) );
+		$class_names = join(
+			' ',
+			apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args, $depth )
+		);
 		$class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : '';
 
 		/**
@@ -114,7 +118,7 @@ class Walker_Nav_Menu_Primary extends \Walker_Nav_Menu {
 
 		$output .= $indent . '<li' . $id . $class_names . '>';
 
-		$atts           = array();
+		$atts           = [];
 		$atts['title']  = ! empty( $item->attr_title ) ? $item->attr_title : '';
 		$atts['target'] = ! empty( $item->target ) ? $item->target : '';
 		$atts['rel']    = ! empty( $item->xfn ) ? $item->xfn : '';

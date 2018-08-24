@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Templates\Content\Search;
 
-
 use Tribe\Project\Twig\Twig_Template;
 
 class Search extends Twig_Template {

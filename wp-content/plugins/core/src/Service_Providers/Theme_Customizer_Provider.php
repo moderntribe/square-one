@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Service_Providers;
 
-
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Tribe\Project\Theme_Customizer;
@@ -15,8 +14,10 @@ class Theme_Customizer_Provider implements ServiceProviderInterface {
 			return new Theme_Customizer\Customizer_Loader();
 		};
 
-		add_action( 'customize_register', function(  \WP_Customize_Manager $wp_customize  ) use ( $container ) {
-			$container['theme_customizer.loader']->register_customizer_controls( $wp_customize );
-		}, 10, 1 );
+		add_action(
+			'customize_register', function( \WP_Customize_Manager $wp_customize ) use ( $container ) {
+				$container['theme_customizer.loader']->register_customizer_controls( $wp_customize );
+			}, 10, 1
+		);
 	}
 }

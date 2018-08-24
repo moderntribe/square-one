@@ -24,7 +24,7 @@ class Accordion {
 	}
 
 	public function render() {
-		if( empty( $this->rows ) ){
+		if ( empty( $this->rows ) ) {
 			return;
 		}
 
@@ -36,7 +36,7 @@ class Accordion {
 
 		echo '<div class="accordion" role="tablist" aria-multiselectable="true" data-js="accordion">';
 
-		foreach( $this->rows as $row ){
+		foreach ( $this->rows as $row ) {
 
 			$header_id = sprintf( '%s-header-%s', $uid, $i );
 			$content_id = sprintf( '%s-content-%s', $uid, $i );
@@ -87,7 +87,8 @@ class Accordion {
 				</div>
 			</article>
 
-			<?php $i++; }
+			<?php
+			$i++; }
 
 		echo '</div>';
 	}

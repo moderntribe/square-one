@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Service_Providers;
 
-
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Tribe\Project\Settings;
@@ -18,8 +17,10 @@ class Settings_Provider implements ServiceProviderInterface {
 		$container[ 'settings.general' ] = function ( Container $container ) {
 			return new Settings\General();
 		};
-		add_action( 'init', function () use ( $container ) {
-			$container[ 'settings.general' ]->hook();
-		}, 0, 0 );
+		add_action(
+			'init', function () use ( $container ) {
+				$container[ 'settings.general' ]->hook();
+			}, 0, 0
+		);
 	}
 }

@@ -31,12 +31,14 @@ class Analytics_Settings extends ACF\ACF_Meta_Group {
 
 	private function get_site_tag_gtm_field() {
 		$field = new ACF\Field( self::NAME . '_' . self::GOOGLE_TAG_MANAGER );
-		$field->set_attributes( [
-			'label'       => __( 'Google Tag Manager ID', 'tribe' ),
-			'name'        => self::GOOGLE_TAG_MANAGER,
-			'type'        => 'text',
-			'placeholder' => __( 'Enter Google Tag Manager ID (GTM-XXXX)', 'tribe' ),
-		] );
+		$field->set_attributes(
+			[
+				'label'       => __( 'Google Tag Manager ID', 'tribe' ),
+				'name'        => self::GOOGLE_TAG_MANAGER,
+				'type'        => 'text',
+				'placeholder' => __( 'Enter Google Tag Manager ID (GTM-XXXX)', 'tribe' ),
+			]
+		);
 
 		return $field;
 	}

@@ -19,16 +19,18 @@ class Gallery implements Shortcode {
 	 */
 	public function render( array $attr, int $instance ): string {
 		$post = get_post();
-		$atts = shortcode_atts( [
-			'order'           => 'ASC',
-			'orderby'         => 'menu_order ID',
-			'id'              => $post ? $post->ID : 0,
-			'include'         => '',
-			'exclude'         => '',
-			'show_carousel'   => true,
-			'show_arrows'     => true,
-			'show_pagination' => false,
-		], $attr, 'gallery' );
+		$atts = shortcode_atts(
+			[
+				'order'           => 'ASC',
+				'orderby'         => 'menu_order ID',
+				'id'              => $post ? $post->ID : 0,
+				'include'         => '',
+				'exclude'         => '',
+				'show_carousel'   => true,
+				'show_arrows'     => true,
+				'show_pagination' => false,
+			], $attr, 'gallery'
+		);
 
 		$attachments = $this->get_attachments( $atts );
 
@@ -54,36 +56,42 @@ class Gallery implements Shortcode {
 		$id = (int) $atts['id'];
 
 		if ( ! empty( $atts['include'] ) ) {
-			$attachments = get_posts( [
-				'include'        => $atts['include'],
-				'post_status'    => 'inherit',
-				'post_type'      => 'attachment',
-				'post_mime_type' => 'image',
-				'order'          => $atts['order'],
-				'orderby'        => $atts['orderby'],
-				'fields'         => 'ids',
-			] );
+			$attachments = get_posts(
+				[
+					'include'        => $atts['include'],
+					'post_status'    => 'inherit',
+					'post_type'      => 'attachment',
+					'post_mime_type' => 'image',
+					'order'          => $atts['order'],
+					'orderby'        => $atts['orderby'],
+					'fields'         => 'ids',
+				]
+			);
 		} elseif ( ! empty( $atts['exclude'] ) ) {
-			$attachments = get_children( [
-				'post_parent'    => $id,
-				'exclude'        => $atts['exclude'],
-				'post_status'    => 'inherit',
-				'post_type'      => 'attachment',
-				'post_mime_type' => 'image',
-				'order'          => $atts['order'],
-				'orderby'        => $atts['orderby'],
-				'fields'         => 'ids',
-			] );
+			$attachments = get_children(
+				[
+					'post_parent'    => $id,
+					'exclude'        => $atts['exclude'],
+					'post_status'    => 'inherit',
+					'post_type'      => 'attachment',
+					'post_mime_type' => 'image',
+					'order'          => $atts['order'],
+					'orderby'        => $atts['orderby'],
+					'fields'         => 'ids',
+				]
+			);
 		} else {
-			$attachments = get_children( [
-				'post_parent'    => $id,
-				'post_status'    => 'inherit',
-				'post_type'      => 'attachment',
-				'post_mime_type' => 'image',
-				'order'          => $atts['order'],
-				'orderby'        => $atts['orderby'],
-				'fields'         => 'ids',
-			] );
+			$attachments = get_children(
+				[
+					'post_parent'    => $id,
+					'post_status'    => 'inherit',
+					'post_type'      => 'attachment',
+					'post_mime_type' => 'image',
+					'order'          => $atts['order'],
+					'orderby'        => $atts['orderby'],
+					'fields'         => 'ids',
+				]
+			);
 		}
 
 		return $attachments;
@@ -94,18 +102,20 @@ class Gallery implements Shortcode {
 			return [];
 		}
 
-		return array_map( function ( $slide_id ) use ( $size ) {
-			$options = [
-				'img_id'       => $slide_id,
-				'as_bg'        => false,
-				'use_lazyload' => false,
-				'echo'         => false,
-				'src_size'     => $size,
-			];
+		return array_map(
+			function ( $slide_id ) use ( $size ) {
+					$options = [
+						'img_id'       => $slide_id,
+						'as_bg'        => false,
+						'use_lazyload' => false,
+						'echo'         => false,
+						'src_size'     => $size,
+					];
 
-			$image = Image::factory( $options );
+					$image = Image::factory( $options );
 
-			return $image->render();
-		}, $slide_ids );
+					return $image->render();
+			}, $slide_ids
+		);
 	}
 }

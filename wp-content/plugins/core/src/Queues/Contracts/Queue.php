@@ -32,7 +32,7 @@ abstract class Queue {
 		return $this->backend->dequeue( $this->get_name() );
 	}
 
-	public function count():int{
+	public function count():int {
 		return $this->backend->count( $this->get_name() );
 	}
 

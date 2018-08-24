@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Service_Providers\Taxonomies;
 
-
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Tribe\Libs\Taxonomy\Taxonomy_Config;
@@ -42,7 +41,7 @@ abstract class Taxonomy_Service_Provider implements ServiceProviderInterface {
 
 	public function register( Container $container ) {
 		$factory = function ( $container ) {
-			return new $this->taxonomy_class;
+			return new $this->taxonomy_class();
 		};
 		$container[ 'taxonomy.' . $this->taxonomy ] = $factory;
 		$container->factory( $factory );
@@ -70,8 +69,10 @@ abstract class Taxonomy_Service_Provider implements ServiceProviderInterface {
 			};
 		}
 
-		add_action( 'init', function() use ( $container ) {
-			$container[ 'taxonomy.' . $this->taxonomy . '.config' ]->register();
-		}, 0, 0 );
+		add_action(
+			'init', function() use ( $container ) {
+				$container[ 'taxonomy.' . $this->taxonomy . '.config' ]->register();
+			}, 0, 0
+		);
 	}
 }

@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Service_Providers;
 
-
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Tribe\Project\Templates;
@@ -28,12 +27,14 @@ class Twig_Service_Provider implements ServiceProviderInterface {
 		};
 
 		$container[ 'twig.options' ] = function ( Container $container ) {
-			return apply_filters( 'tribe/project/twig/options', [
-				'debug'         => WP_DEBUG,
-				'cache'         => $container[ 'twig.cache' ],
-				'autoescape'    => false,
-				'auto_reload'   => true,
-			] );
+			return apply_filters(
+				'tribe/project/twig/options', [
+					'debug'       => WP_DEBUG,
+					'cache'       => $container[ 'twig.cache' ],
+					'autoescape'  => false,
+					'auto_reload' => true,
+				]
+			);
 		};
 
 		$container[ 'twig.extension' ] = function ( Container $container ) {
@@ -47,9 +48,11 @@ class Twig_Service_Provider implements ServiceProviderInterface {
 			return $twig;
 		};
 
-		add_filter( 'tribe/project/twig', function ( $twig ) use ( $container ) {
-			return $container[ 'twig' ];
-		}, 0, 1 );
+		add_filter(
+			'tribe/project/twig', function ( $twig ) use ( $container ) {
+				return $container[ 'twig' ];
+			}, 0, 1
+		);
 
 		$this->load_templates( $container );
 	}

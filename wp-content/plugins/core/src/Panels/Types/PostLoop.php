@@ -20,20 +20,26 @@ class PostLoop extends Panel_Type_Config {
 		$panel->set_description( __( 'Displays a List of Posts.', 'tribe' ) );
 		$panel->set_thumbnail( $this->handler->thumbnail_url( 'query.svg' ) );
 
-		$panel->add_field( new Fields\TextArea( [
-			'name'     => self::FIELD_DESCRIPTION,
-			'label'    => __( 'Description', 'tribe' ),
-			'richtext' => true,
-		] ) );
+		$panel->add_field(
+			new Fields\TextArea(
+				[
+					'name'     => self::FIELD_DESCRIPTION,
+					'label'    => __( 'Description', 'tribe' ),
+					'richtext' => true,
+				]
+			)
+		);
 
 		// Posts.
-		$posts = new Fields\Post_List([
-			'label'            => __( 'Posts', 'tribe' ),
-			'name'             => self::FIELD_POSTS,
-			'max'              => 8,
-			'min'              => 1,
-			'show_max_control' => true,
-		] );
+		$posts = new Fields\Post_List(
+			[
+				'label'            => __( 'Posts', 'tribe' ),
+				'name'             => self::FIELD_POSTS,
+				'max'              => 8,
+				'min'              => 1,
+				'show_max_control' => true,
+			]
+		);
 
 		$panel->add_field( $posts );
 

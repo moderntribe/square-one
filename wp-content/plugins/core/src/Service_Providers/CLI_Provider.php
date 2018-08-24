@@ -69,23 +69,25 @@ class CLI_Provider implements ServiceProviderInterface {
 			return new Settings_Generator( $container['cli.file-system'] );
 		};
 
-		add_action( 'init', function () use ( $container ) {
-			if ( ! defined( 'WP_CLI' ) || ! WP_CLI ) {
-				return;
-			}
+		add_action(
+			'init', function () use ( $container ) {
+				if ( ! defined( 'WP_CLI' ) || ! WP_CLI ) {
+					return;
+				}
 
-			$container['cli.pimple_dump']->register();
-			$container['cli.cpt-generator']->register();
-			$container['cli.taxonomy-generator']->register();
-			$container['cli.cli-generator']->register();
-			$container['cli.cache-prime']->register();
-			$container['cli.settings_generator']->register();
-			$container['cli.queues.list']->register();
-			$container['cli.queues.add_table']->register();
-			$container['cli.queues.cleanup']->register();
-			$container['cli.queues.process']->register();
-			$container['cli.queues.add_tasks']->register();
+				$container['cli.pimple_dump']->register();
+				$container['cli.cpt-generator']->register();
+				$container['cli.taxonomy-generator']->register();
+				$container['cli.cli-generator']->register();
+				$container['cli.cache-prime']->register();
+				$container['cli.settings_generator']->register();
+				$container['cli.queues.list']->register();
+				$container['cli.queues.add_table']->register();
+				$container['cli.queues.cleanup']->register();
+				$container['cli.queues.process']->register();
+				$container['cli.queues.add_tasks']->register();
 
-		}, 0, 0 );
+			}, 0, 0
+		);
 	}
 }
