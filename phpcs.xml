@@ -6,6 +6,11 @@
     <exclude-pattern>*/.git/*</exclude-pattern>
     <exclude-pattern>*/vendor/*</exclude-pattern>
 
+    <rule ref="PSR2">
+        <exclude-pattern>*.js</exclude-pattern>
+        <exclude-pattern>*.css</exclude-pattern>
+    </rule>
+
     <rule ref="WordPress-Extra">
         <exclude name="PSR2.ControlStructures.ElseIfDeclaration" />
         <exclude name="WordPress.Arrays.ArrayKeySpacingRestrictions" />
