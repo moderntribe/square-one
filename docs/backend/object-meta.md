@@ -221,9 +221,9 @@ Here's an example for registering meta to the `Primary Navigation` which would d
 private function primary_nav( Container $container ) {
 	$container[ self::PRIMARY_NAV ] = function ( Container $container ) {
 		return new Primary_Nav_Meta( [
-            'nav_menu_items' => [
-                'location/' . Nav_Menu_Provider::PRIMARY,
-            ],
+                    'nav_menu_items' => [
+                        'location/' . Nav_Menu_Provider::PRIMARY,
+                    ],
 		] );
 	};
 }
