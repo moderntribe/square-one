@@ -196,6 +196,8 @@ array of items:
 |taxonomies|Taxonomies are identified by their class's `NAME` constant. For instance `[ Taxonomies\Category\Category::NAME ]`|
 |users| Users does not take an array of items, but simply accepts either `true` or `false`|
 |settings_pages|Settings pages are identified by the `slug` for any given Settings Page. This can be accessed like so: `[ Settings\General::instance()->get_slug() ]`|
+|nav_menus|Menus are identified by the `theme_location` for any given menu. Passed in via `['location/menu_location_slug']`
+|nav_menu_items|When adding meta to the nav items added to a menu, you would pass in a `Menu Location` or `Menu term_id`: `['location/menu_location_slug']` or `[4]`
 
 
 Here's an example for `Example` that adds values for each object type:
@@ -212,6 +214,23 @@ private function example( Container $container ) {
 	};
 }
 ```
+
+Here's an example for registering meta to the `Primary Navigation` which would display under each menu item under the menu set as the primary nav:
+
+```
+private function primary_nav( Container $container ) {
+	$container[ self::PRIMARY_NAV ] = function ( Container $container ) {
+		return new Primary_Nav_Meta( [
+            'nav_menu_items' => [
+                'location/' . Nav_Menu_Provider::PRIMARY,
+            ],
+		] );
+	};
+}
+```
+
+![Example Nav Menu Item Meta](https://i.imgur.com/7k2q3Fw.png "Example Nav Menu Item Meta")
+
 
 ### Call the Registration Method
 
