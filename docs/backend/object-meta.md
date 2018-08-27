@@ -197,7 +197,7 @@ array of items:
 |users| Users does not take an array of items, but simply accepts either `true` or `false`|
 |settings_pages|Settings pages are identified by the `slug` for any given Settings Page. This can be accessed like so: `[ Settings\General::instance()->get_slug() ]`|
 |nav_menus|Menus are identified by the `theme_location` for any given menu. Passed in via `['location/menu_location_slug']`
-|nav_menu_items|When adding meta to the nav items added to a menu, you would pass in a `Menu Location` or `Menu term_id`: `['location/menu_location_slug']` or `[4]`
+|nav_menu_items|When adding meta to the nav items added to a menu, you would pass in a `Menu Location` or `Menu term_id`: `['location/menu_location_slug']` or `[4]` or `all`
 
 
 Here's an example for `Example` that adds values for each object type:
