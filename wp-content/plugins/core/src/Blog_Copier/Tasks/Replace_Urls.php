@@ -73,10 +73,17 @@ class Replace_Urls implements Task {
 
 		foreach ( $map as $from => $to ) {
 			// replace URLs in post_content
+			if ( empty( $from ) || empty( $to ) ) {
+				continue;
+			}
 			$wpdb->query( $wpdb->prepare( "UPDATE {$dest_prefix}posts SET post_content = REPLACE(post_content, %s, %s)", $from, $to ) );
 
 			// replace json-encoded URLs in post_content_filtered
-			$wpdb->query( $wpdb->prepare( "UPDATE {$dest_prefix}posts SET post_content_filtered = REPLACE(post_content_filtered, %s, %s)", \trim( \json_encode( $from ), '"' ), \trim( \json_encode( $to ), '"' ) ) );
+			$json_from = \trim( \json_encode( $from ), '"' );
+			$json_to      = \trim( \json_encode( $to ), '"' );
+			if ( ! empty( $json_from ) && ! empty( $json_to ) ) {
+				$wpdb->query( $wpdb->prepare( "UPDATE {$dest_prefix}posts SET post_content_filtered = REPLACE(post_content_filtered, %s, %s)", $json_from, $json_to ) );
+			}
 		}
 	}
 
