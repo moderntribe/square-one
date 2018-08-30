@@ -15,6 +15,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ### Fixed
 
 * SVG_Support no longer throws errors in PHP 7.2
+* Deferred get_content in Twig controller usage so various WordPress FE resources are loaded in the correct order
 
 ## [1.7.2] - 2018-08-27
 
