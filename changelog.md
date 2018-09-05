@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ## [2018.08]
 
+* Updated WordPress to 4.9.8
 * Fixed: SVG_Support no longer throws errors in PHP 7.2
 * Changed: Deferred get_content in Twig controller usage so various WordPress FE resources are loaded in the correct order
 * Added: Object-meta documentation to add `nav_menus` and `nav_menus_items`
