@@ -1,28 +1,74 @@
 # Prerequisites
 
-1. You need to install the latest **EDGE** version of the native Docker client for your platform. For Mac you can 
-download it from [here](https://store.docker.com/editions/community/docker-ce-desktop-mac). For Windows, ensure you use **Docker CE STABLE** as EDGE is [broken](https://github.com/docker/for-win/issues/1829) with the tribe-proxy container. You can download it from [here](https://store.docker.com/editions/community/docker-ce-desktop-windows). If you use Linux you can use the package manager of your distribution of choice, in your case using the stable version instead of EDGE is fine.
-2. Clean your environment from the old tools you were using. Make sure you don't have installed _dnsmasq_ or any other DNS server, and that you don't have any entries for **.tribe** domains in your /etc/hosts
-3. **For Windows users:** [enable Hyper-V](https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v) and [enable Bash](https://msdn.microsoft.com/en-us/commandline/wsl/install_guide?f=255&MSPPError=-2147217396). If you're on an older Windows version or don't want the Linux subsystem for some weird reason, install [Cygwin](https://www.cygwin.com/).
-4. **For Windows users:** If you have issues with Bash, use [babun](https://github.com/babun/babun) and install [babun-docker](https://github.com/tiangolo/babun-docker).
-5. Update your computer's primary DNS server to `127.0.0.1` and the secondary to `1.1.1.1`. Instructions for [Mac](http://osxdaily.com/2015/12/05/change-dns-server-settings-mac-os-x/), [Windows](https://www.windowscentral.com/how-change-your-pcs-dns-settings-windows-10) and [Linux](https://support.rackspace.com/how-to/changing-dns-settings-on-linux/). For Windows users you may need to change the DNS servers on the vEthernet (Default Switch) adapter instead of your main adapter.
+## Docker CE
 
-# Your first run ever
+### MacOS
 
-1. Make sure you have an updated clone of Square One somewhere handy. If you don't… why??? Like, really, c'mon.
-2. On a terminal window that can run `bash`, go to your Square One checkout's `dev/docker/global` folder. 
-3. **Only if you are on Linux:** Figure out what your Docker service IP address is. If you look at the result of `ifconfig` you should see an interface named `Docker0` or `Docker1` or similar. Take note of the `inet addr` field and create a `.env` file on the `global` folder with the contents of `.env.sample` but replacing `0.0.0.0` with your Docker IP. Tell Daniel or Jonathan what that IP is, maybe we can find some commonalities and automate the process for Linux too.
-4. Run `bash start.sh`. It's going to take a bit. Only this time, I promise.
-4.1 While running the command above you might run into an issue that reads like this:
-	```
-	Starting docker-compose project: global
-	Creating network "global_proxy" with driver "bridge"
-	ERROR: Pool overlaps with other one on this address space
-	```
-	This might happen if you are using, or used, a number of Docker-managed local development stacks; running `docker network prune` should solve the issue. 
+[Download]((https://store.docker.com/editions/community/docker-ce-desktop-mac)) and install the latest **EDGE** version of the native Docker client for your platform.
+
+### Linux
+
+Linux users can use their package manager of your distribution of choice. Either **STABLE** or **EDGE** channels are fine.
+
+### Windows
+[Download]((https://store.docker.com/editions/community/docker-ce-desktop-windows)) and install the latest **STABLE** release as EDGE is [broken](https://github.com/docker/for-win/issues/1829) with the tribe-proxy container.
+
+Enable [Hyper-V](https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v) and [Bash](https://msdn.microsoft.com/en-us/commandline/wsl/install_guide?f=255&MSPPError=-2147217396). If you're on an older Windows version or don't want the Linux subsystem for some weird reason, install [Cygwin](https://www.cygwin.com/).
+    If you have issues with Bash, use [babun](https://github.com/babun/babun) and install [babun-docker](https://github.com/tiangolo/babun-docker).
+
+### Configuring your OS
+
+#### DNS Configuration
+Ensure that...
+
+* `dnsmasq` is uninstalled.
+* Your `etc/hosts/` file does not include **.tribe** domains
+
+Then, update your computer's primary DNS server to `127.0.0.1` and the secondary to `1.1.1.1`. Here's a link to instructions for your...
+
+- [Mac](http://osxdaily.com/2015/12/05/change-dns-server-settings-mac-os-x/)
+- [Linux](https://support.rackspace.com/how-to/changing-dns-settings-on-linux/)
+- [Windows](https://www.windowscentral.com/how-change-your-pcs-dns-settings-windows-10)
+  - You may need to change the DNS servers on the vEthernet (Default Switch) adapter instead of your main adapter.
+
+**Note** that a full restart may be necessary to resolve `*.tribe` domains.
+
+# Docker image setup
+
+Start by cloning the Square One repo to your development machine. Open a terminal in the repo's directory and ensure that bash is installed:
+
+```sh
+command -v bash # => /bin/bash
+```
+
+>#### Linux users
+>You'll need to configure your this project's `.env` file. Start by duplicating the sample config:
+>
+>```sh
+>cp dev/docker/global/.env{.sample,}
+>```
+>
+>Use `ifconfig` to determine your Docker service IP address. The output should include an \interface named `Docker0` or `Docker1` or similar. Take note of the `inet addr`; that IP address should replace `0.0.0.0` in your `.env` file. Tell Daniel or Jonathan what that IP is, maybe we can find some commonalities and automate the process for Linux too.
+
+
+## Install the image
+
+```sh
+npm run docker:start
+```
+
+The start command will take awhile the first time. You might run into an issue that reads like this:
+```
+Starting docker-compose project: global
+Creating network "global_proxy" with driver "bridge"
+ERROR: Pool overlaps with other one on this address space
+```
+
+This might happen if you are using, or used, a number of Docker-managed local development stacks; running `docker network prune` should solve the issue.
+
 5. One thing `bash.sh` did was to create a certificate on your local machine for a Central Authority so you can sign "real" SSL certificates. This is a bit messy, but the alternative would be having all of that as part of the repo, and it's quite insecure. Any potential attacker with access to our repo could basically fake every secure site on your computer. Whatever. This is better. Trust me. Obviously no one trusts you as a CA yet, so you need to tell your computer to trust it. If you're on OSX, congratulations. You're done. Use this time to go give Jonathan a taco for automating it for you. If you're on Windows [follow this](http://www.cs.virginia.edu/~gsw2c/GridToolsDir/Documentation/ImportTrustedCertificates.htm) or [this](https://unix.stackexchange.com/questions/90450/adding-a-self-signed-certificate-to-the-trusted-list) if you're on Linux.
-6. Open your mysql client (SequelPro, HeidiSQL, etc). Try to connect to your new MySQL server with this info: `host: mysql.tribe - port: 3306 - username: root - password: password`. Open a browser and go to http://mailhog.tribe. Hopefully it all works. If it doesn't try clearing your OS DNS cache. If it still doesn't work submit a bug report (ie: talk to Daniel or Jonathan).
-7. You're done. You can go back to the terminal and run `bash stop.sh` or just leave global running if you're planning on doing some work.
+6. Open your MySQL client (SequelPro, HeidiSQL, etc). Try to connect to your new MySQL server with this info: `host: mysql.tribe - port: 3306 - username: root - password: password`. Open a browser and go to http://mailhog.tribe. Hopefully it all works. If it doesn't try clearing your OS DNS cache. If it still doesn't work submit a bug report (ie: talk to Daniel or Jonathan).
+7. You're done. You can go back to the terminal and run `npm run docker:stop` or just leave global running if you're planning on doing some work.
 8. _Optional_: You can install **ctop** to monitor all your containers and get real time metrics. To install, run: `docker run -ti --name ctop --rm -v /var/run/docker.sock:/var/run/docker.sock quay.io/vektorlab/ctop:latest -i`. More info is available at [ctop](https://github.com/bcicen/ctop):
 
 # Your first run for each new project
@@ -66,7 +112,7 @@ download it from [here](https://store.docker.com/editions/community/docker-ce-de
     wp core multisite-convert --subdomains
     ```
     Then you will need to copy the output from the command into your local-config.php file and visit /wp-admin/network/setup.php to copy the changes you need in your .htaccess file
-2. In your wp-config.php change 
+2. In your wp-config.php change
     ```
     'WP_ALLOW_MULTISITE' => tribe_getenv( 'WP_ALLOW_MULTISITE', false ),
     ```
@@ -86,9 +132,9 @@ download it from [here](https://store.docker.com/editions/community/docker-ce-de
 4. You may need to update this in your local-config.php and use your local domain which will be your projectID.tribe most likely
     ```
     define( 'DOMAIN_CURRENT_SITE', '{your-project-domain.tribe' );
-    ``` 
+    ```
     In your wp-config.php you will need to define the domain for the production site.
-5. In your wp-config.php you also need to set 
+5. In your wp-config.php you also need to set
    ```
    'MULTISITE' => tribe_getenv( 'WP_MULTISITE', true ),
    ```
