@@ -171,7 +171,7 @@ Front-end developers can follow the instructions in `local-config-sample.json`.
 The `certs_path` property is the full path to your `"square-one/dev/docker/global/certs"` directory.
 
 
-## Daily usage
+# Daily usage
 
 Start by running your global containers from **your main Square One clone**:
 
@@ -195,9 +195,9 @@ npm run docker:start
 
 That's it. You should be able to load the project in the browser.
 
-### Notes
+## Notes
 
-#### Accessing project logs
+### Accessing project logs
 
 ```sh
 npm run docker:logs
@@ -205,7 +205,7 @@ npm run docker:logs
 
 We recommend always logging while developing to see important information — most notably, PHP errors.
 
-#### WP-CLI
+### WP-CLI
 
 To use WP-CLI commands from outside of the project container, use `wp.sh` from `dev/docker`. Usage example: `bash wp.sh media regenerate`. This script can handle all commands and arguments available from WP-CLI. `--allow-root` is a default flag executed from within the script.
 
@@ -214,16 +214,17 @@ To use WP-CLI commands from outside of the project container, use `wp.sh` from `
 
 `docker-compose up` doesn't look for changes on the PHP Dockerfile, so if you change how the PHP image is built (ie: add an extension or update PHP version) you need to instruct your team to go to the docker folder on the project and run `docker-compose build`. This is probably not going to happen often.
 
-# If you're creating a new project (ie: forking Square One)
+# Creating a new project (ie: forking Square One)
 
-1. Recognize how silly is to keep doing this manually and go insist Daniel or Jonathan it's time to automate this.
-2. Create your Square One fork as usual, change git remotes to the new project, etc
-3. Delete `dev/docker/global`
-4. Change .projectID on `dev/docker` to a representative slug for the project.
-5. Replace `square1.tribe` with whatever domain you want for the project in `docker-composer.yml` and `phpdocker/nginx/nginx.conf`
-6. Replace `square1.tribe` also in wp-cli.yml
-7. If you need to change the Dockerfile for building the php-fpm image, change the image name from `image: tribe-phpfpm:7.0` to whatever makes sense on your docker-compose.yml
-8. That's it. Be happy.
+```sh
+git clone git@github.com:moderntribe/square-one.git {{some-project-name}}
+cd {{some-project-name}}
+./dev/bin/convert-project-to-fork.sh
+```
+
+## Changing the Dockerfile (Optional)
+
+Open `docker-compose.yml` and replace the image name from `image: tribe-phpfpm:7.0` to your preferred image.
 
 # Multisite setup on a new project
 
