@@ -1,5 +1,7 @@
 # Prerequisites
 
+* Node (8.9.3), preferrably via [NVM](https://github.com/creationix/nvm)
+
 ## Docker CE
 
 ### MacOS
@@ -11,10 +13,12 @@
 Linux users can use their package manager of your distribution of choice. Either **STABLE** or **EDGE** channels are fine.
 
 ### Windows
+
 [Download]((https://store.docker.com/editions/community/docker-ce-desktop-windows)) and install the latest **STABLE** release as EDGE is [broken](https://github.com/docker/for-win/issues/1829) with the tribe-proxy container.
 
 Enable [Hyper-V](https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v) and [Bash](https://msdn.microsoft.com/en-us/commandline/wsl/install_guide?f=255&MSPPError=-2147217396). If you're on an older Windows version or don't want the Linux subsystem for some weird reason, install [Cygwin](https://www.cygwin.com/).
-    If you have issues with Bash, use [babun](https://github.com/babun/babun) and install [babun-docker](https://github.com/tiangolo/babun-docker).
+
+If you have issues with Bash, use [babun](https://github.com/babun/babun) and install [babun-docker](https://github.com/tiangolo/babun-docker).
 
 ### Configuring your OS
 
@@ -108,7 +112,7 @@ echo '[mysqld]\ndefault-authentication-plugin=mysql_native_password' >> ~/.my.cn
 
 ### Web server (.tribe domains)
 
-Verify that you're able to navigate to http://mailhog.tribe in your web browser. If the domain isn't resolvable consider...
+Verify that you're able to navigate to http://mailhog.tribe in your web browser. If the domain isn't resolvable, consider...
 
 - Clearing your DNS cache
 - Restarting your machine
@@ -116,11 +120,10 @@ Verify that you're able to navigate to http://mailhog.tribe in your web browser.
 - Verfiying `npm run docker:start` executes without error
 - Submitting a bug report (ie: talk to Jonathan (@jbrinley))
 
-
 Connected successfully? You're done! You can go back to the terminal and run `npm run docker:stop` or just leave global running if you're planning on doing some work.
 
 
->### Optional
+>### Setup `ctop` (optional)
 >
 >You can install `ctop` to monitor all your containers and get real time metrics.
 >```sh
@@ -129,24 +132,87 @@ Connected successfully? You're done! You can go back to the terminal and run `np
 >
 >Check out the [`ctop`](https://github.com/bcicen/ctop) for more details.
 
-# Your first run for each new project
+# Clone a new Square One derived project
 
-1. Clone the the repo for the new project
-2. Run `git submodule update --init` in the root folder
-3. Find domain your BE lead chose for the project when they set it up the first time on `dev/docker/docker-compose.yml`. You can find it in the line that reads: `- VIRTUAL_HOST={something}.tribe` in the `website` service. Take note of that domain.
-4. Go to *your main Square One* clone, the one you use to run the global containers from. Go to the `dev/docker/global folder` and run `bash cert.sh something.tribe` obviously using the right domain you found in the previous point.
-5. Connect to MySQL and create a new DB for it, or import an existing one. Remember the connection info for your local-config.php is: `host: mysql.tribe - port: 3306 - username: root - password: password`
-6. **For FE Devs:** To use Browsersnyc, follow the instructions in the `local-config-sample.json`. You will need to add your local path to the global certs directory (where your certs from step 3 are installed) to the `certs_path` parameter.
+Start by cloning the repo for the new project, then initializing the submodules.
+
+```sh
+git clone git@github.com:moderntribe/{{some-project-name}}.git
+cd {{some-project-name}}
+git submodule update --init
+```
+
+Next, find the domain your BE lead chose for the project when they set it up the first time in `dev/docker/docker-compose.yml`.
+
+*nix users can run the following:
+
+```sh
+cat ./dev/docker/docker-compose.yml | grep VIRTUAL_HOST
+```
+
+Windows users, search for a the line `- VIRTUAL_HOST={{something}}.tribe`.
+
+Create a new terminal window in **your main Square One** repo, then create a certificate for the project's domain:
+
+```sh
+npm run docker:cert {{something}}.tribe
+```
+
+Connect to MySQL and create (or import) a database for the project. The connection info for your project is defined in `local-config.php`, though is commonly:
+
+|Host         |Port  |Username|Password  |
+|-------------|------|--------|----------|
+|`mysql.tribe`|`3306`|`root`  |`password`|
 
 
-# Day to Day usage
+## Setup Browsersync (optional)
 
-1. Make sure you are running your Global containers from your main Square One clone. If you're not just run `bash start.sh`. If you're unsure just run `bash stop.sh` and then `bash start.sh`. Wait until they start (about 10 seconds). You don't really need to stop this often, you can just leave it running and start it again after you restart you computer.
-2. Go to the folder of the project you want to work on and in `dev/docker` you'll find another `start.sh`. Run it with `bash start.sh`. That's it. You should be able to load the project in the browser.
-3. Get into the habit of having a terminal window running `bash logs.sh` from the same folder. There's important information there. Most notably, PHP errors.
-4. To use WPCLI commands from outside of the project container, use `wp.sh` from `dev/docker`. Usage example: `bash wp.sh media regenerate`. This script can handle all commands and arguments available from WPCLI. `--allow-root` is a default flag executed from within the script.
-5. You don't *need* to `bash stop.sh` when you stop working, but it's not a bad idea to do so and to start it again next time, so if someone on the team pushed changes to the infrastructure you'll get them automatically.
-6. **Just for BE leads:** `docker-compose up` doesn't look for changes on the PHP Dockerfile, so if you change how the PHP image is built (ie: add an extension or update PHP version) you need to instruct your team to go to the docker folder on the project and run `docker-compose build`. This is probably not going to happen often.
+Front-end developers can follow the instructions in `local-config-sample.json`.
+The `certs_path` property is the full path to your `"square-one/dev/docker/global/certs"` directory.
+
+
+## Daily usage
+
+Start by running your global containers from **your main Square One clone**:
+
+```sh
+cd {{your-projects-directory}}/square-one
+npm run docker:start
+```
+
+It's generally recommended to leave the container running until you're finished working for the day:
+
+```sh
+npm run docker:stop
+```
+
+Next, navigate to the project directory you're developing in. Start its Docker instance:
+
+```sh
+cd {{your-projects-directory}}/{{some-project-name}}
+npm run docker:start
+```
+
+That's it. You should be able to load the project in the browser.
+
+### Notes
+
+#### Accessing project logs
+
+```sh
+npm run docker:logs
+```
+
+We recommend always logging while developing to see important information — most notably, PHP errors.
+
+#### WP-CLI
+
+To use WP-CLI commands from outside of the project container, use `wp.sh` from `dev/docker`. Usage example: `bash wp.sh media regenerate`. This script can handle all commands and arguments available from WP-CLI. `--allow-root` is a default flag executed from within the script.
+
+
+### Backend leads
+
+`docker-compose up` doesn't look for changes on the PHP Dockerfile, so if you change how the PHP image is built (ie: add an extension or update PHP version) you need to instruct your team to go to the docker folder on the project and run `docker-compose build`. This is probably not going to happen often.
 
 # If you're creating a new project (ie: forking Square One)
 
@@ -203,9 +269,9 @@ Connected successfully? You're done! You can go back to the terminal and run `np
 6. Restart your project's docker container by running /dev/docker/stop.sh then /dev/docker/start.sh
 7. You should now have a fully functioning multisite setup.
 
-# WP CLI and xdebug
+# WP-CLI and xdebug
 
-The `start.sh` script will attempt to symlink your WP CLI binary to `dev/bin/wp` when starting your local container. If
+The `start.sh` script will attempt to symlink your WP-CLI binary to `dev/bin/wp` when starting your local container. If
 this fails, you should manually symlink it with: `ln -s /path/to/wp dev/bin/wp`.
 
 In PhpStorm, you'll need to ensure you map your `wp` symlink to the container's `/usr/local/bin/wp` path.
