@@ -57,7 +57,8 @@ command -v bash # => /bin/bash
 npm run docker:start
 ```
 
-The start command will take awhile the first time. You might run into an issue that reads like this:
+The start command will take awhile the first time. You may run into an issue that reads like this:
+
 ```
 Starting docker-compose project: global
 Creating network "global_proxy" with driver "bridge"
@@ -66,10 +67,67 @@ ERROR: Pool overlaps with other one on this address space
 
 This might happen if you are using, or used, a number of Docker-managed local development stacks; running `docker network prune` should solve the issue.
 
-5. One thing `bash.sh` did was to create a certificate on your local machine for a Central Authority so you can sign "real" SSL certificates. This is a bit messy, but the alternative would be having all of that as part of the repo, and it's quite insecure. Any potential attacker with access to our repo could basically fake every secure site on your computer. Whatever. This is better. Trust me. Obviously no one trusts you as a CA yet, so you need to tell your computer to trust it. If you're on OSX, congratulations. You're done. Use this time to go give Jonathan a taco for automating it for you. If you're on Windows [follow this](http://www.cs.virginia.edu/~gsw2c/GridToolsDir/Documentation/ImportTrustedCertificates.htm) or [this](https://unix.stackexchange.com/questions/90450/adding-a-self-signed-certificate-to-the-trusted-list) if you're on Linux.
-6. Open your MySQL client (SequelPro, HeidiSQL, etc). Try to connect to your new MySQL server with this info: `host: mysql.tribe - port: 3306 - username: root - password: password`. Open a browser and go to http://mailhog.tribe. Hopefully it all works. If it doesn't try clearing your OS DNS cache. If it still doesn't work submit a bug report (ie: talk to Daniel or Jonathan).
-7. You're done. You can go back to the terminal and run `npm run docker:stop` or just leave global running if you're planning on doing some work.
-8. _Optional_: You can install **ctop** to monitor all your containers and get real time metrics. To install, run: `docker run -ti --name ctop --rm -v /var/run/docker.sock:/var/run/docker.sock quay.io/vektorlab/ctop:latest -i`. More info is available at [ctop](https://github.com/bcicen/ctop):
+### SSL certificates
+
+The first-run of the start command will install Central Authority on your local machine.  to sign trusted SSL certificates. You'll need to configure your OS to trust self-signed certificates.
+
+#### MacOS
+
+Congratulations. You're done. Use this time to send Jonathan (@jbrinley) a taco for automating it for you.
+
+#### Windows
+
+[Import trusted certificates](http://www.cs.virginia.edu/~gsw2c/GridToolsDir/Documentation/ImportTrustedCertificates.htm)
+
+#### Linux
+
+[Adding a self-signed certificate to the “trusted list”](https://unix.stackexchange.com/questions/90450/adding-a-self-signed-certificate-to-the-trusted-list)
+
+### MySQL Database
+
+|Host         |Port  |Username|Password  |
+|-------------|------|--------|----------|
+|`mysql.tribe`|`3306`|`root`  |`password`|
+
+Verify that your Docker image's MySQL server is accessible with the following command:
+
+```sh
+mysql -u root -h mysql.tribe -p
+$ Enter password:
+```
+
+>If you prefer a GUI client, consider [SequelPro](https://www.sequelpro.com/) or [HeidiSQL](https://www.heidisql.com/).
+
+#### Fixing permission erros on MacOS (MySQL installed via Brew)
+
+Installing MySQL with Brew may prevent password logins for the `root` user. Enable password login with the following:
+
+```sh
+echo '[mysqld]\ndefault-authentication-plugin=mysql_native_password' >> ~/.my.cnf
+```
+
+### Web server (.tribe domains)
+
+Verify that you're able to navigate to http://mailhog.tribe in your web browser. If the domain isn't resolvable consider...
+
+- Clearing your DNS cache
+- Restarting your machine
+- Verifying that your DNS primary and secondary are configured
+- Verfiying `npm run docker:start` executes without error
+- Submitting a bug report (ie: talk to Jonathan (@jbrinley))
+
+
+Connected successfully? You're done! You can go back to the terminal and run `npm run docker:stop` or just leave global running if you're planning on doing some work.
+
+
+>### Optional
+>
+>You can install `ctop` to monitor all your containers and get real time metrics.
+>```sh
+>docker run -ti --name ctop --rm -v /var/run/docker.sock:/var/run/docker.sock quay.io/vektorlab/ctop:latest -i
+>```
+>
+>Check out the [`ctop`](https://github.com/bcicen/ctop) for more details.
 
 # Your first run for each new project
 
