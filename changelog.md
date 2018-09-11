@@ -5,6 +5,9 @@ All notable changes to this project will be documented in this file.
 ## [2018.09]
 
 * Added an incremental increase to the delay for reprocessing a failed task in the queue, based on the number of times it has failed.
+* Changed: Docker setup docs
+* Added: Alias docker scripts with `npm` for use in any project directory.
+* Added: Fork project script: `dev/bin/convert-project-to-fork.sh`
 
 ## [2018.08]
 
