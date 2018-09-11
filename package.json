@@ -35,7 +35,13 @@
   },
   "scripts": {
     "test": "jest -i",
-    "test:watch": "npm test -- --watch"
+    "test:watch": "npm test -- --watch",
+    "docker:start": "./dev/docker/global/start.sh",
+    "docker:stop": "./dev/docker/global/stop.sh",
+    "docker:log": "./dev/docker/global/log.sh",
+    "docker:cert": "./dev/docker/global/cert.sh",
+    "docker:wp": "./dev/docker/global/wp.sh",
+    "docker:wpx": "./dev/docker/global/wpx.sh"
   },
   "resolutions": {
     "babel-core": "^7.0.0-bridge.0"
