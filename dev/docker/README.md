@@ -168,7 +168,7 @@ Connect to MySQL and create (or import) a database for the project. The connecti
 ## Setup Browsersync (optional)
 
 Front-end developers can follow the instructions in `local-config-sample.json`.
-The `certs_path` property is the full path to your `"square-one/dev/docker/global/certs"` directory.
+The `certs_path` property is the full path to your `square-one/dev/docker/global/certs` directory.
 
 
 # Daily usage
@@ -228,75 +228,104 @@ Open `docker-compose.yml` and replace the image name from `image: tribe-phpfpm:7
 
 # Multisite setup on a new project
 
-1. After installing WordPress, run the wp-cli command
-    ```
-    wp core multisite-convert
-    ```
-    If using subdomains then use
-    ```
-    wp core multisite-convert --subdomains
-    ```
-    Then you will need to copy the output from the command into your local-config.php file and visit /wp-admin/network/setup.php to copy the changes you need in your .htaccess file
-2. In your wp-config.php change
-    ```
-    'WP_ALLOW_MULTISITE' => tribe_getenv( 'WP_ALLOW_MULTISITE', false ),
-    ```
-    to
-    ```
-    'WP_ALLOW_MULTISITE' => tribe_getenv( 'WP_ALLOW_MULTISITE', true ),
-    ```
-3. In dev/docker/phpdocker/nginx/nginx.conf uncomment the two lines below by removing the # symbol at the beginning
-    ```
-    location @rewrites {
-        rewrite /wp-admin$ $scheme://$host$uri/ permanent;
-        #rewrite ^(/[^/]+)?(/wp-(admin|includes|content).*) $2 last;
-        #rewrite ^(/[^/]+)?(/.*\.php) $2 last;
-        rewrite ^ /index.php last;
-    }
-    ```
-4. You may need to update this in your local-config.php and use your local domain which will be your projectID.tribe most likely
-    ```
-    define( 'DOMAIN_CURRENT_SITE', '{your-project-domain.tribe' );
-    ```
-    In your wp-config.php you will need to define the domain for the production site.
-5. In your wp-config.php you also need to set
-   ```
-   'MULTISITE' => tribe_getenv( 'WP_MULTISITE', true ),
-   ```
-   and if you are using subdomains instead of paths set
-   ```
-   'SUBDOMAIN_INSTALL' => tribe_getenv( 'SUBDOMAIN_INSTALL', true ),
-   ```
-6. Restart your project's docker container by running /dev/docker/stop.sh then /dev/docker/start.sh
-7. You should now have a fully functioning multisite setup.
+After installing WordPress, run the wp-cli command
+
+### For projects that use paths
+
+```bash
+npm run wp core multisite-convert
+```
+
+### For projects that use subdomains
+
+```bash
+npm run wp core multisite-convert --subdomains
+```
+
+Next, copy the output from the command into your `local-config.php` file and visit `/wp-admin/network/setup.php` to copy the changes you need in your `.htaccess` file.
+
+In your `wp-config.php` change
+
+```php
+'WP_ALLOW_MULTISITE' => tribe_getenv( 'WP_ALLOW_MULTISITE', false ),
+```
+
+to:
+
+```php
+'WP_ALLOW_MULTISITE' => tribe_getenv( 'WP_ALLOW_MULTISITE', true ),
+```
+
+In `dev/docker/phpdocker/nginx/nginx.conf`, uncomment the two lines below by removing the # symbol at the beginning
+
+```conf
+location @rewrites {
+    rewrite /wp-admin$ $scheme://$host$uri/ permanent;
+    #rewrite ^(/[^/]+)?(/wp-(admin|includes|content).*) $2 last;
+    #rewrite ^(/[^/]+)?(/.*\.php) $2 last;
+    rewrite ^ /index.php last;
+}
+```
+
+You may need to update this in your `local-config.php` and use your local domain which will be your projectID.tribe most likely:
+
+```php
+define( 'DOMAIN_CURRENT_SITE', '{your-project-domain.tribe' );
+```
+
+In your `wp-config.php` you will need to define the domain for the production site.
+
+In your wp-config.php you also need to set:
+
+```php
+'MULTISITE' => tribe_getenv( 'WP_MULTISITE', true ),
+```
+
+If you are using subdomains instead of paths set:
+
+```php
+'SUBDOMAIN_INSTALL' => tribe_getenv( 'SUBDOMAIN_INSTALL', true ),
+```
+
+Finally, restart your project's docker container:
+
+```bash
+npm run docker:stop
+npm run docker:start
+```
+
+You should now have a fully functioning multisite setup.
 
 # WP-CLI and xdebug
 
-The `start.sh` script will attempt to symlink your WP-CLI binary to `dev/bin/wp` when starting your local container. If
-this fails, you should manually symlink it with: `ln -s /path/to/wp dev/bin/wp`.
+The first run of `npm run docker:start` will attempt to symlink your WP-CLI binary to `dev/bin/wp` when starting your local container. If this fails, manually symlink it:
+
+```bash
+ln -s /path/to/wp dev/bin/wp
+```
 
 In PhpStorm, you'll need to ensure you map your `wp` symlink to the container's `/usr/local/bin/wp` path.
 
-![PhpStorm Server Panel Screenshot](https://i.imgur.com/ZXHxLty.png)
+![PhpStorm Server Panel Screenshot](media/phpstorm-wp-example.png)
 
-### Usage
+## Usage
 
-```
+```bash
 cd dev/docker
 ./exec.sh /bin/bash
 cd /application/www/dev/docker
-./wpx.sh <command>
+./wpx.sh {{command}}
 ```
 Or, from your host machine, run:
 
-```
+```bash
 cd dev/docker
-./exec.sh /application/www/dev/docker/wpx.sh <command>
+./exec.sh /application/www/dev/docker/wpx.sh {{command}}
 ```
 
 Example
 
-```
+```bash
 cd dev/docker
 ./exec.sh /application/www/dev/docker/wpx.sh s1 cache-prime
 ```
