@@ -6,7 +6,7 @@
 
 ### MacOS
 
-[Download]((https://store.docker.com/editions/community/docker-ce-desktop-mac)) and install the latest **EDGE** version of the native Docker client for your platform.
+[Download]((https://store.docker.com/editions/community/docker-ce-desktop-mac)) and install the latest **STABLE** version of the native Docker client for your platform.
 
 ### Linux
 
