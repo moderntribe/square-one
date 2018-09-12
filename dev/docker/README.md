@@ -58,7 +58,7 @@ command -v bash # => /bin/bash
 ## Install the image
 
 ```sh
-npm run docker:start
+npm run docker:global:start
 ```
 
 The start command will take awhile the first time. You may run into an issue that reads like this:
@@ -117,10 +117,10 @@ Verify that you're able to navigate to http://mailhog.tribe in your web browser.
 - Clearing your DNS cache
 - Restarting your machine
 - Verifying that your DNS primary and secondary are configured
-- Verfiying `npm run docker:start` executes without error
+- Verfiying `npm run docker:global:start` executes without error
 - Submitting a bug report (ie: talk to Jonathan (@jbrinley))
 
-Connected successfully? You're done! You can go back to the terminal and run `npm run docker:stop` or just leave global running if you're planning on doing some work.
+Connected successfully? You're done! You can go back to the terminal and run `npm run docker:global:stop` or just leave global running if you're planning on doing some work.
 
 
 >### Setup `ctop` (optional)
@@ -177,13 +177,13 @@ Start by running your global containers from **your main Square One clone**:
 
 ```sh
 cd {{your-projects-directory}}/square-one
-npm run docker:start
+npm run docker:global:start
 ```
 
 It's generally recommended to leave the container running until you're finished working for the day:
 
 ```sh
-npm run docker:stop
+npm run docker:global:stop
 ```
 
 Next, navigate to the project directory you're developing in. Start its Docker instance:
@@ -224,7 +224,18 @@ cd {{some-project-name}}
 
 ## Changing the Dockerfile (Optional)
 
-Open `docker-compose.yml` and replace the image name from `image: tribe-phpfpm:7.0` to your preferred image.
+Open `docker-compose.yml` and locate your service:
+
+```yaml
+services:
+  php-fpm:
+    build:
+      context: .
+      dockerfile: phpdocker/php-fpm/Dockerfile
+    image: tribe-phpfpm:7.0-rev5
+```
+
+Then, increment the revision number.
 
 # Multisite setup on a new project
 
@@ -270,7 +281,7 @@ location @rewrites {
 You may need to update this in your `local-config.php` and use your local domain which will be your projectID.tribe most likely:
 
 ```php
-define( 'DOMAIN_CURRENT_SITE', '{your-project-domain.tribe' );
+define( 'DOMAIN_CURRENT_SITE', '{{your-project-domain}}.tribe' );
 ```
 
 In your `wp-config.php` you will need to define the domain for the production site.

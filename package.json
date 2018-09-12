@@ -36,12 +36,15 @@
   "scripts": {
     "test": "jest -i",
     "test:watch": "npm test -- --watch",
-    "docker:start": "./dev/docker/global/start.sh",
-    "docker:stop": "./dev/docker/global/stop.sh",
-    "docker:log": "./dev/docker/global/log.sh",
-    "docker:cert": "./dev/docker/global/cert.sh",
-    "docker:wp": "./dev/docker/global/wp.sh",
-    "docker:wpx": "./dev/docker/global/wpx.sh"
+    "docker:start": "./dev/docker/start.sh",
+    "docker:stop": "./dev/docker/stop.sh",
+    "docker:log": "./dev/docker/log.sh",
+    "docker:wp": "./dev/docker/wp.sh",
+    "docker:wpx": "./dev/docker/wpx.sh",
+    "docker:global:start": "./dev/docker/global/start.sh",
+    "docker:global:stop": "./dev/docker/global/stop.sh",
+    "docker:global:log": "./dev/docker/global/log.sh",
+    "docker:global:cert": "./dev/docker/global/cert.sh"
   },
   "resolutions": {
     "babel-core": "^7.0.0-bridge.0"
