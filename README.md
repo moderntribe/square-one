@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.com/moderntribe/square-one.svg?token=1evq9eFenqSy9NpYbMyT&branch=master)](https://travis-ci.com/moderntribe/square-one)
 
-Square One (AKA **\[1\]**) is a development framework created by Modern Tribe primarily used WordPress projects. It contains a base for:
+Square One (AKA **\[1\]**) is a development framework created by Modern Tribe primarily used for WordPress projects. It contains a base for:
 
 * Our build process (node, grunt, webpack)
 * Theme independent core functionality plugin | /content/mu-plugins
