@@ -4,10 +4,6 @@ namespace Tribe\Project\Object_Meta;
 
 use Tribe\Libs\ACF;
 
-/**
- * Class Post
- * @package Tribe\Project\Object_Meta
- */
 class Social_Settings extends ACF\ACF_Meta_Group {
 
 	const NAME = 'social_settings';
@@ -56,7 +52,6 @@ class Social_Settings extends ACF\ACF_Meta_Group {
 	public function get_group_config() {
 		$group = new ACF\Group( self::NAME, $this->object_types );
 		$group->set( 'title', __( 'Social Media Settings', 'tribe' ) );
-		$group->set( 'position', 'normal' );
 
 		$group->add_field( $this->get_social_field( __( 'Facebook', 'tribe' ), self::FACEBOOK ) );
 		$group->add_field( $this->get_social_field( __( 'Twitter', 'tribe' ), self::TWITTER ) );

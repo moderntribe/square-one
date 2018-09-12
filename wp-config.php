@@ -36,6 +36,14 @@ if ( file_exists( __DIR__ . '/.env' ) ) {
 }
 
 // ==============================================================
+// Load build process timestamp
+// ==============================================================
+
+if ( file_exists( dirname( __FILE__ ) . '/build-process.php' ) ) {
+	include( dirname( __FILE__ ) . '/build-process.php' );
+}
+
+// ==============================================================
 // Load database info and local development parameters
 // ==============================================================
 
