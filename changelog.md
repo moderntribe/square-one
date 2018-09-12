@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2018.09]
+
+* Added an incremental increase to the delay for reprocessing a failed task in the queue, based on the number of times it has failed.
+
 ## [2018.08]
 
 * Changed: Updated WordPress to 4.9.8
