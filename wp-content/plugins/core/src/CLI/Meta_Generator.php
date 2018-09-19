@@ -2,7 +2,7 @@
 
 namespace Tribe\Project\CLI;
 
-class Meta_Generator extends Command {
+class Meta_Generator extends Generator_Command {
 
 	public function description() {
 		return __( 'Generates object meta.', 'tribe' );
