@@ -114,35 +114,12 @@ class VideoText extends Panel {
 			return '';
 		}
 
-		$url = $this->panel_vars[ VideoTextPanel::FIELD_VIDEO ];
-		$oembed   = _wp_oembed_get_object();
-		$provider = $oembed->get_provider( $url );
-		$data     = $oembed->fetch( $provider, $url );
-		$container_classes = [ 'c-video--lazy' ];
+		global $wp_embed;
 
-		if ( $data->provider_name === 'YouTube' ) {
-			$embed_id    = Oembed::get_youtube_embed_id( $url );
-			$video_thumb = Oembed::get_youtube_max_resolution_thumbnail( $url );
-		} else {
-			$embed_id    = Oembed::get_vimeo_embed_id( $url );
-			$video_thumb = $data->thumbnail_url;
-		}
+		$url      = $this->panel_vars[ VideoTextPanel::FIELD_VIDEO ];
+		$rendered = $wp_embed->shortcode( [], $url );
 
-		$options = [
-			Video::THUMBNAIL_URL     => $video_thumb,
-			Video::CONTAINER_ATTRS   => [
-				'data-js'             => 'c-video',
-				'data-embed-id'       => $embed_id,
-				'data-embed-provider' => $data->provider_name,
-			],
-			Video::CONTAINER_CLASSES => $container_classes,
-			Video::TITLE             => __( 'Play Video', 'tribe' ),
-			Video::VIDEO_URL         => $url,
-			Video::PLAY_TEXT         => $data->title,
-		];
-
-		$video_obj     = Video::factory( $options );
-		return $video_obj->render();
+		return $rendered;
 	}
 
 	protected function get_wrapper_classes() {
