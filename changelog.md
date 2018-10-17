@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 ## [2018.10]
 
 * Fixed: Autoplay for iframe video embeds in Chrome.
+* Fixed: global start.sh script to properly get the docker IP address on linux
 
 ## [2018.09]
 
