@@ -132,7 +132,7 @@ class Tribe_Glomar {
 	protected function handle_glomar_page_default( $response_code ) {
 		add_filter( 'nocache_headers', '__return_empty_array' ); // you can cache this page
 		wp_die(
-			'<p><a href="http://www.radiolab.org/story/confirm-nor-deny/"><img width="100%" src="//i.imgur.com/Ax05U04.jpg"></a></p>' .
+			'<p><a href="http://www.radiolab.org/story/confirm-nor-deny/"><img width="100%" src="https://i.imgur.com/Ax05U04.jpg"></a></p>' .
 			'<h1>'.__( "You've been Glomar'd", 'tribe' ).'</h1>'.
 			'<p>'.__( 'We can neither confirm nor deny the existence or nonexistence of records responsive to your request. The fact of the existence or nonexistence of requested records is currently and properly classified and is intelligence sources and methods information that is protected from disclosure.', 'tribe' ) . '</p>',
 			__( "You've been Glomar'd", 'tribe' ),
