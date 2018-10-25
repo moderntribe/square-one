@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ## [2018.10]
 
+* Changed: Glomar now sets what looks like a logged in cookie to bypass Wp Engine's Varnish.
 * Fixed: Autoplay for iframe video embeds in Chrome.
 * Fixed: global start.sh script to properly get the docker IP address on linux
 
