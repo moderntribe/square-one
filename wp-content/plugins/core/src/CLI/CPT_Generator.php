@@ -2,7 +2,7 @@
 
 namespace Tribe\Project\CLI;
 
-class CPT_Generator extends Command {
+class CPT_Generator extends Generator_Command {
 	private $cpt_directory;
 	private $slug;
 	private $class_name;
