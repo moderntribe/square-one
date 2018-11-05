@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2018.11]
+
+* Changed: Cleaned up the `CLI_Provider`
+* Changed: Introduced the `Generator_Command` abstract class for generator commands, so that we don't need all commands following the same constructor.
+
 ## [2018.10]
 
 * Changed: Glomar now sets what looks like a logged in cookie to bypass Wp Engine's Varnish.
@@ -14,8 +19,6 @@ All notable changes to this project will be documented in this file.
 * Changed: Docker setup docs
 * Added: Alias docker scripts with `npm` for use in any project directory.
 * Added: Fork project script: `dev/bin/convert-project-to-fork.sh`
-* Changed: Cleaned up the `CLI_Provider`
-* Changed: Introduced the `Generator_Command` abstract class for generator commands, so that we don't need all commands following the same constructor.
 
 ## [2018.08]
 
