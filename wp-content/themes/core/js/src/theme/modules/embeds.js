@@ -98,6 +98,7 @@ const playEmbed = (e) => {
 	iframe.width = 1280;
 	iframe.height = 720;
 	iframe.tabIndex = 0;
+	iframe.allow = 'autoplay; fullscreen';
 
 	// Add & kickoff embed
 	parent.classList.add('c-video--is-playing');

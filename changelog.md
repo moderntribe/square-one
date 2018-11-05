@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2018.10]
+
+* Changed: Glomar now sets what looks like a logged in cookie to bypass Wp Engine's Varnish.
+* Fixed: Autoplay for iframe video embeds in Chrome.
+* Fixed: global start.sh script to properly get the docker IP address on linux
+
 ## [2018.09]
 
 * Added an incremental increase to the delay for reprocessing a failed task in the queue, based on the number of times it has failed.
