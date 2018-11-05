@@ -209,6 +209,9 @@ We recommend always logging while developing to see important information — mo
 
 To use WP-CLI commands from outside of the project container, use `wp.sh` from `dev/docker`. Usage example: `bash wp.sh media regenerate`. This script can handle all commands and arguments available from WP-CLI. `--allow-root` is a default flag executed from within the script.
 
+### Configure your local to use a remote media library
+
+Many clients have 20gb+ uploads folders, edit [nginx.conf](/dev/docker/phpdocker/nginx/nginx.conf) and update the `proxy_pass https://livedomain.tld/$uri;` line to your live domain as well as commenting out `try_files $uri =404;` and replacing it with `try_files $uri $uri/ @images;` under the `/wp-content` location.
 
 ### Backend leads
 
