@@ -130,13 +130,14 @@ class CardGrid extends Panel {
 				'data-depth'    => $this->panel->get_depth(),
 				'data-name'     => CardGridPanel::FIELD_CARD_DESCRIPTION,
 				'data-index'    => $index,
+				'data-autop'    => 'true',
 				'data-livetext' => true,
 			];
 		}
 
 		$options = [
 			Text::TEXT    => $text,
-			Text::CLASSES => [ 'c-card__desc' ],
+			Text::CLASSES => [ 'c-card__desc', 't-content' ],
 			Text::ATTRS   => $attrs,
 		];
 

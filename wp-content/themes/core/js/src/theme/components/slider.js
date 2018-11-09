@@ -75,6 +75,24 @@ const syncMainSlider = (e) => {
 	instances.swipers[carousel.dataset.controls].slideTo(e.delegateTarget.dataset.index);
 };
 
+
+/**
+ * @module
+ * @description Focus row from index and row index
+ */
+
+const focusRow = (index, rowIndex, jumpTo) => {
+	const sliderSelector = `[data-js="panel"][data-index="${index}"] [data-js="c-slider"]`;
+	const slider = tools.getNodes(sliderSelector, false, document, true)[0];
+	if (slider && slider.swiper) {
+		let newSpeed = slider.swiper.params.speed;
+		if (jumpTo) {
+			newSpeed = 0;
+		}
+		slider.swiper.slideTo(rowIndex, newSpeed);
+	}
+};
+
 /**
  * @module bindCarouselEvents
  * @description Bind Carousel Events.
@@ -126,17 +144,45 @@ const initSliders = () => {
 };
 
 /**
+ * module
+ * @description Responds to panel live updating.
+ */
+
+const previewChangeHandler = (e) => {
+	if (e.type === 'modular_content/panel_preview_updated') {
+		initSliders();
+	}
+	_.delay(() => {
+		// for cases when all we have is the parent (example: when updating CTAs)
+		const data = _.get(e, 'detail.parent.data', {});
+		if (typeof data.index !== 'undefined' && typeof data.childIndex !== 'undefined') {
+			focusRow(data.index, data.childIndex, true);
+		} else if (typeof e.detail.index !== 'undefined' && typeof e.detail.rowIndex !== 'undefined') {
+			if (e.type === 'modular_content/repeater_row_deactivated') {
+				focusRow(e.detail.index, 0);
+			} else {
+				focusRow(e.detail.index, e.detail.rowIndex);
+			}
+		}
+	}, 50);
+};
+
+/**
  * @module
  * @description Bind Events.
  */
 
 const bindEvents = () => {
-	document.addEventListener('modular_content/panel_preview_updated', initSliders);
+	document.addEventListener('modular_content/panel_preview_updated', previewChangeHandler);
+	document.addEventListener('modular_content/repeater_row_activated', previewChangeHandler);
+	document.addEventListener('modular_content/repeater_row_deactivated', previewChangeHandler);
+	document.addEventListener('modular_content/repeater_row_added', previewChangeHandler);
 };
 
 const init = () => {
 	initSliders();
 	bindEvents();
+
 
 	console.info('Square One FE: Initialized slider component scripts.');
 };

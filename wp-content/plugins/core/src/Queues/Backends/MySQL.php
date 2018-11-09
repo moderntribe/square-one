@@ -122,12 +122,14 @@ class MySQL implements Backend {
 	public function nack( string $job_id, string $queue_name ) {
 		global $wpdb;
 
+		$priority = $this->get_priority( $job_id );
+
 		$wpdb->update(
 			$this->table_name,
 			[
 				'taken'     => 0,
-				'priority'  => $this->get_priority( $job_id ) + 1,
-				'run_after' => ( new \DateTime( '+10 seconds' ) )->format( 'Y-m-d H:i:s' ),
+				'priority'  => $priority + 1,
+				'run_after' => ( new \DateTime( sprintf('+%d seconds', absint( $priority ) ) ) )->format( 'Y-m-d H:i:s' ),
 			],
 			[ 'id' => $job_id ]
 		);
