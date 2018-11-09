@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 * Fixed: Nginx config to properly pull missing assets (images/js/css/media etc...) from a remote server so you don't need to download large uploads folders.
 * Changed: Cleaned up the `CLI_Provider`
 * Changed: Introduced the `Generator_Command` abstract class for generator commands, so that we don't need all commands following the same constructor.
+* Fixed: Instructions to view the project logs inside docker
 
 ## [2018.10]
 
