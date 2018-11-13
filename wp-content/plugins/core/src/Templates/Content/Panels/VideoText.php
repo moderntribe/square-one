@@ -10,7 +10,6 @@ use Tribe\Project\Templates\Components\Video;
 use Tribe\Project\Templates\Components\Text;
 use Tribe\Project\Templates\Components\Title;
 use Tribe\Project\Theme\Util;
-use Tribe\Project\Facade\Items\Theme\Oembed;
 
 class VideoText extends Panel {
 
