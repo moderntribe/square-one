@@ -1,8 +1,8 @@
 <?php
 
-
 namespace Tribe\Project\Templates;
 
+use Tribe\Project\Twig\Stringable_Callable;
 
 class Page extends Base {
 	public function get_data(): array {
@@ -17,10 +17,14 @@ class Page extends Base {
 	protected function get_post() {
 		the_post();
 		return [
-			'content'        => apply_filters( 'the_content', get_the_content() ),
+			'content'        => new Stringable_Callable( [ $this, 'defer_get_content' ] ),
 			'permalink'      => get_the_permalink(),
 			'featured_image' => $this->get_featured_image(),
 		];
+	}
+
+	public function defer_get_content() {
+		return apply_filters( 'the_content', get_the_content() );
 	}
 
 	protected function get_featured_image() {

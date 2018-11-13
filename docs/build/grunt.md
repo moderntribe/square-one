@@ -13,7 +13,7 @@ Before you push code back upstream, you must run `grunt dist`. This will create 
 
 Also of note: `build-process.php` *must* contain an entry for the versioning to work correctly. Furthermore, your _need to include it_. You can add the following to your `wp-config.php`:
 
-```
+```php
 if ( file_exists( dirname( __FILE__ ) . '/build-process.php' ) ) {
 	include( dirname( __FILE__ ) . '/build-process.php' );
 }

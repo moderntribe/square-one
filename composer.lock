@@ -1,11 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "hash": "2af4e8cebeb1b0f126d861105bca8e76",
-    "content-hash": "8af5859dcc5f708ca699f92a2c78664c",
+    "content-hash": "0fb127c3d24e7157196b0ad6f01f01f3",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -85,7 +84,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2017-12-21 23:06:20"
+            "time": "2017-12-21T23:06:20+00:00"
         },
         {
             "name": "clue/stream-filter",
@@ -137,7 +136,7 @@
                 "stream_filter_append",
                 "stream_filter_register"
             ],
-            "time": "2017-08-18 09:54:01"
+            "time": "2017-08-18T09:54:01+00:00"
         },
         {
             "name": "composer/installers",
@@ -254,7 +253,7 @@
                 "zend",
                 "zikula"
             ],
-            "time": "2017-08-09 07:53:48"
+            "time": "2017-08-09T07:53:48+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -319,7 +318,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2018-08-08 04:37:00"
+            "time": "2018-08-08T04:37:00+00:00"
         },
         {
             "name": "guzzlehttp/promises",
@@ -370,7 +369,7 @@
             "keywords": [
                 "promise"
             ],
-            "time": "2018-03-25 01:26:01"
+            "time": "2018-03-25T01:26:01+00:00"
         },
         {
             "name": "guzzlehttp/psr7",
@@ -436,7 +435,7 @@
                 "uri",
                 "url"
             ],
-            "time": "2018-07-29 08:09:46"
+            "time": "2018-07-29T08:09:46+00:00"
         },
         {
             "name": "hirak/prestissimo",
@@ -487,7 +486,7 @@
                 "parallel",
                 "speedup"
             ],
-            "time": "2017-05-27 04:45:45"
+            "time": "2017-05-27T04:45:45+00:00"
         },
         {
             "name": "humanmade/mercator",
@@ -523,10 +522,10 @@
                 "wordpress"
             ],
             "support": {
-                "source": "https://github.com/humanmade/Mercator/tree/1.0.2",
+                "source": "https://github.com/humanmade/Mercator/tree/1.0.1",
                 "issues": "https://github.com/humanmade/Mercator/issues"
             },
-            "time": "2018-03-14 15:48:42"
+            "time": "2017-06-13T08:40:13+00:00"
         },
         {
             "name": "humanmade/s3-uploads",
@@ -562,7 +561,7 @@
             "keywords": [
                 "wordpress"
             ],
-            "time": "2016-04-29 10:00:39"
+            "time": "2016-04-29T10:00:39+00:00"
         },
         {
             "name": "jbzoo/pimpledumper",
@@ -621,7 +620,7 @@
                 "pimple",
                 "silex"
             ],
-            "time": "2017-11-14 11:14:50"
+            "time": "2017-11-14T11:14:50+00:00"
         },
         {
             "name": "johnbillion/extended-cpts",
@@ -667,27 +666,27 @@
             ],
             "description": "A library which provides extended functionality to WordPress custom post types and taxonomies.",
             "homepage": "https://github.com/johnbillion/extended-cpts/",
-            "time": "2017-11-01 16:56:21"
+            "time": "2017-11-01T16:56:21+00:00"
         },
         {
             "name": "johnpbloch/wordpress-core",
-            "version": "4.9.7",
+            "version": "4.9.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/johnpbloch/wordpress-core.git",
-                "reference": "1116e10f71f8fb811856df212af652c427bc6bd1"
+                "reference": "50323f9b91d7689d615b4af02caf9d80584b1cfc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/johnpbloch/wordpress-core/zipball/1116e10f71f8fb811856df212af652c427bc6bd1",
-                "reference": "1116e10f71f8fb811856df212af652c427bc6bd1",
+                "url": "https://api.github.com/repos/johnpbloch/wordpress-core/zipball/50323f9b91d7689d615b4af02caf9d80584b1cfc",
+                "reference": "50323f9b91d7689d615b4af02caf9d80584b1cfc",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2"
             },
             "provide": {
-                "wordpress/core-implementation": "4.9.7"
+                "wordpress/core-implementation": "4.9.8"
             },
             "type": "wordpress-core",
             "notification-url": "https://packagist.org/downloads/",
@@ -707,7 +706,7 @@
                 "cms",
                 "wordpress"
             ],
-            "time": "2018-07-05 18:12:13"
+            "time": "2018-08-02T21:48:32+00:00"
         },
         {
             "name": "johnpbloch/wordpress-core-installer",
@@ -756,7 +755,7 @@
             "keywords": [
                 "wordpress"
             ],
-            "time": "2017-05-31 18:42:33"
+            "time": "2017-05-31T18:42:33+00:00"
         },
         {
             "name": "mailgun/mailgun-php",
@@ -808,7 +807,7 @@
                 }
             ],
             "description": "The Mailgun SDK provides methods for all API functions.",
-            "time": "2018-08-04 20:22:47"
+            "time": "2018-08-04T20:22:47+00:00"
         },
         {
             "name": "moderntribe/ajax-queue",
@@ -838,7 +837,7 @@
                 "source": "https://github.com/moderntribe/ajax-queue/tree/master",
                 "issues": "https://github.com/moderntribe/ajax-queue/issues"
             },
-            "time": "2015-08-21 06:25:04"
+            "time": "2015-08-21T06:25:04+00:00"
         },
         {
             "name": "moderntribe/attachment-helper",
@@ -873,7 +872,7 @@
             "support": {
                 "source": "https://github.com/moderntribe/attachment-helper/tree/1.0.1"
             },
-            "time": "2016-04-24 20:00:57"
+            "time": "2016-04-24T20:00:57+00:00"
         },
         {
             "name": "moderntribe/panel-builder",
@@ -916,7 +915,7 @@
                 "source": "https://github.com/moderntribe/panel-builder/tree/3.3-branch",
                 "issues": "https://github.com/moderntribe/panel-builder/issues"
             },
-            "time": "2018-08-03 23:16:19"
+            "time": "2018-08-03T23:16:19+00:00"
         },
         {
             "name": "moderntribe/tribe-libs",
@@ -924,12 +923,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:moderntribe/tribe-libs.git",
-                "reference": "b4d46349631b5af0929ca9db049796541db004a1"
+                "reference": "2afaab4b2b74a99e2d60f74c24694f0616f568b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/tribe-libs/zipball/b4d46349631b5af0929ca9db049796541db004a1",
-                "reference": "b4d46349631b5af0929ca9db049796541db004a1",
+                "url": "https://api.github.com/repos/moderntribe/tribe-libs/zipball/2afaab4b2b74a99e2d60f74c24694f0616f568b4",
+                "reference": "2afaab4b2b74a99e2d60f74c24694f0616f568b4",
                 "shasum": ""
             },
             "require": {
@@ -949,7 +948,7 @@
                 "source": "https://github.com/moderntribe/tribe-libs/tree/master",
                 "issues": "https://github.com/moderntribe/tribe-libs/issues"
             },
-            "time": "2018-03-20 10:46:28"
+            "time": "2018-08-28T15:25:30+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -1027,7 +1026,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2017-06-19 01:22:40"
+            "time": "2017-06-19T01:22:40+00:00"
         },
         {
             "name": "mtdowling/jmespath.php",
@@ -1082,7 +1081,7 @@
                 "json",
                 "jsonpath"
             ],
-            "time": "2016-12-03 22:08:25"
+            "time": "2016-12-03T22:08:25+00:00"
         },
         {
             "name": "php-http/client-common",
@@ -1143,7 +1142,7 @@
                 "http",
                 "httplug"
             ],
-            "time": "2018-06-22 12:36:17"
+            "time": "2018-06-22T12:36:17+00:00"
         },
         {
             "name": "php-http/curl-client",
@@ -1199,7 +1198,7 @@
                 "curl",
                 "http"
             ],
-            "time": "2018-03-26 19:21:48"
+            "time": "2018-03-26T19:21:48+00:00"
         },
         {
             "name": "php-http/discovery",
@@ -1261,7 +1260,7 @@
                 "message",
                 "psr7"
             ],
-            "time": "2018-02-06 10:55:24"
+            "time": "2018-02-06T10:55:24+00:00"
         },
         {
             "name": "php-http/httplug",
@@ -1317,20 +1316,20 @@
                 "client",
                 "http"
             ],
-            "time": "2017-12-18 08:01:36"
+            "time": "2017-12-18T08:01:36+00:00"
         },
         {
             "name": "php-http/message",
-            "version": "dev-master",
+            "version": "1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/message.git",
-                "reference": "5e187c0a6072c0b5afb833ecfdf0b0269adfef29"
+                "reference": "741f2266a202d59c4ed75436671e1b8e6f475ea3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/message/zipball/5e187c0a6072c0b5afb833ecfdf0b0269adfef29",
-                "reference": "5e187c0a6072c0b5afb833ecfdf0b0269adfef29",
+                "url": "https://api.github.com/repos/php-http/message/zipball/741f2266a202d59c4ed75436671e1b8e6f475ea3",
+                "reference": "741f2266a202d59c4ed75436671e1b8e6f475ea3",
                 "shasum": ""
             },
             "require": {
@@ -1389,7 +1388,7 @@
                 "message",
                 "psr-7"
             ],
-            "time": "2018-07-09 10:28:18"
+            "time": "2018-08-15T06:37:30+00:00"
         },
         {
             "name": "php-http/message-factory",
@@ -1439,7 +1438,7 @@
                 "stream",
                 "uri"
             ],
-            "time": "2018-01-04 12:23:13"
+            "time": "2018-01-04T12:23:13+00:00"
         },
         {
             "name": "php-http/multipart-stream-builder",
@@ -1496,7 +1495,7 @@
                 "multipart stream",
                 "stream"
             ],
-            "time": "2017-11-22 21:56:04"
+            "time": "2017-11-22T21:56:04+00:00"
         },
         {
             "name": "php-http/promise",
@@ -1546,7 +1545,7 @@
             "keywords": [
                 "promise"
             ],
-            "time": "2017-11-22 21:24:54"
+            "time": "2017-11-22T21:24:54+00:00"
         },
         {
             "name": "pimple/pimple",
@@ -1596,7 +1595,7 @@
                 "container",
                 "dependency injection"
             ],
-            "time": "2018-04-20 06:17:25"
+            "time": "2018-04-20T06:17:25+00:00"
         },
         {
             "name": "psr/container",
@@ -1645,7 +1644,7 @@
                 "container-interop",
                 "psr"
             ],
-            "time": "2017-06-28 15:35:32"
+            "time": "2017-06-28T15:35:32+00:00"
         },
         {
             "name": "psr/http-message",
@@ -1695,7 +1694,7 @@
                 "request",
                 "response"
             ],
-            "time": "2016-08-06 14:39:51"
+            "time": "2016-08-06T14:39:51+00:00"
         },
         {
             "name": "psr/log",
@@ -1742,7 +1741,7 @@
                 "psr",
                 "psr-3"
             ],
-            "time": "2018-04-03 15:59:15"
+            "time": "2018-04-03T15:59:15+00:00"
         },
         {
             "name": "ralouphie/getallheaders",
@@ -1782,7 +1781,7 @@
                 }
             ],
             "description": "A polyfill for getallheaders.",
-            "time": "2016-02-11 07:05:27"
+            "time": "2016-02-11T07:05:27+00:00"
         },
         {
             "name": "sunra/php-simple-html-dom-parser",
@@ -1830,7 +1829,7 @@
                 "html",
                 "parser"
             ],
-            "time": "2016-11-22 22:57:47"
+            "time": "2016-11-22T22:57:47+00:00"
         },
         {
             "name": "symfony/options-resolver",
@@ -1884,7 +1883,7 @@
                 "configuration",
                 "options"
             ],
-            "time": "2018-07-26 08:45:46"
+            "time": "2018-07-26T08:45:46+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -1942,7 +1941,7 @@
                 "polyfill",
                 "portable"
             ],
-            "time": "2018-08-06 14:22:27"
+            "time": "2018-08-06T14:22:27+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -2001,7 +2000,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2018-08-06 14:22:27"
+            "time": "2018-08-06T14:22:27+00:00"
         },
         {
             "name": "twig/twig",
@@ -2068,7 +2067,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2018-07-31 09:41:48"
+            "time": "2018-07-31T09:41:48+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -2076,12 +2075,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/vlucas/phpdotenv.git",
-                "reference": "8abb4f9aa89ddea9d52112c65bbe8d0125e2fa8e"
+                "reference": "54d599d414f8cf3f6129e287acaf44b610486aa1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/8abb4f9aa89ddea9d52112c65bbe8d0125e2fa8e",
-                "reference": "8abb4f9aa89ddea9d52112c65bbe8d0125e2fa8e",
+                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/54d599d414f8cf3f6129e287acaf44b610486aa1",
+                "reference": "54d599d414f8cf3f6129e287acaf44b610486aa1",
                 "shasum": ""
             },
             "require": {
@@ -2118,7 +2117,7 @@
                 "env",
                 "environment"
             ],
-            "time": "2018-07-29 20:33:41"
+            "time": "2018-08-22T19:34:05+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -2168,7 +2167,7 @@
                 "check",
                 "validate"
             ],
-            "time": "2018-05-29 14:25:02"
+            "time": "2018-05-29T14:25:02+00:00"
         },
         {
             "name": "wpackagist-plugin/classic-editor",
@@ -2221,7 +2220,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://downloads.wordpress.org/plugin/configure-smtp.3.1.zip",
-                "reference": "tags/3.1",
+                "reference": null,
                 "shasum": null
             },
             "require": {
@@ -2241,7 +2240,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://downloads.wordpress.org/plugin/gravity-forms-wcag-20-form-fields.zip?timestamp=1506167471",
-                "reference": "trunk",
+                "reference": null,
                 "shasum": null
             },
             "require": {
@@ -2261,7 +2260,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://downloads.wordpress.org/plugin/limit-login-attempts.2.0beta3.zip",
-                "reference": "tags/2.0beta3",
+                "reference": null,
                 "shasum": null
             },
             "require": {
@@ -2281,7 +2280,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://downloads.wordpress.org/plugin/posts-to-posts.1.6.5.zip",
-                "reference": "tags/1.6.5",
+                "reference": null,
                 "shasum": null
             },
             "require": {
@@ -2301,7 +2300,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://downloads.wordpress.org/plugin/regenerate-thumbnails.3.0.2.zip",
-                "reference": "tags/3.0.2",
+                "reference": null,
                 "shasum": null
             },
             "require": {
@@ -2321,7 +2320,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://downloads.wordpress.org/plugin/the-events-calendar.4.6.11.1.zip",
-                "reference": "tags/4.6.11.1",
+                "reference": null,
                 "shasum": null
             },
             "require": {

@@ -18,7 +18,7 @@ if [ ! -f "${SCRIPTDIR}/.env" ]; then
 	elif [[ $(which docker.exe) ]]; then
 		cp "${SCRIPTDIR}/.env.windows.sample" "${SCRIPTDIR}/.env";
 	else
-		HOSTIP=$(ifconfig docker0 | grep "inet addr:" | cut -d: -f2 | awk '{ print $1}');
+		HOSTIP=$(ip addr show docker0 | grep "inet\b" | awk '{print $2}' | cut -d/ -f1);
 		echo "HOSTIP=\"${HOSTIP}\"" > "${SCRIPTDIR}/.env"
 	fi;
 fi;
