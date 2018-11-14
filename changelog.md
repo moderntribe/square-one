@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
 * Changed: Cleaned up the `CLI_Provider`
 * Changed: Introduced the `Generator_Command` abstract class for generator commands, so that we don't need all commands following the same constructor.
 * Fixed: Instructions to view the project logs inside docker
+* Added: install guide for Ubuntu users on `docs/docker` documentation
 
 ## [2018.10]
 
