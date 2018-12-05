@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## [2018.12]
+
 * Fixed: gitignore entry for Tribe 301 plugin  
 
 ## [2018.11]
