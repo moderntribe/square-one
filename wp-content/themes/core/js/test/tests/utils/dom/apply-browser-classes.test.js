@@ -9,24 +9,21 @@ const mockTestResult = {
 	firefox: false,
 	ie: false,
 	opera: false,
-	safari: false
+	safari: false,
 };
 
-jest.mock( 'utils/tests', function () {
+jest.mock('utils/tests', () => {
 	return {
-		browserTests: function () {
-			return mockTestResult;
-		}
+		browserTests: () => mockTestResult,
 	};
-} );
+});
 
-describe( 'applyBrowserClasses', () => {
-	beforeEach( resetTestResult );
+describe('applyBrowserClasses', () => {
+	beforeEach(resetTestResult);
 
-	let tests = [
+	const tests = [
 		{ property: 'android', value: 'device-android' },
 		{ property: 'ios', value: 'device-ios' },
-		
 		{ property: 'edge', value: 'browser-edge' },
 		{ property: 'chrome', value: 'browser-chrome' },
 		{ property: 'firefox', value: 'browser-firefox' },
@@ -35,20 +32,20 @@ describe( 'applyBrowserClasses', () => {
 		{ property: 'safari', value: 'browser-safari' },
 	];
 
-	tests.forEach( ( test ) => {
-		it( `adds browser class ${test.value}`, () => {
+	tests.forEach((test) => {
+		it(`adds browser class ${test.value}`, () => {
 			mockTestResult[test.property] = true;
 			applyBrowserClasses();
 
-			expect( document.body.classList.contains( test.value ) ).toBe( true );
-		} );
-	} )
-} );
+			expect(document.body.classList.contains(test.value)).toBe(true);
+		});
+	});
+});
 
 function resetTestResult() {
-	Object.keys( mockTestResult ).forEach( ( key ) => {
-		mockTestResult[ key ] = false;
-	} );
+	Object.keys(mockTestResult).forEach((key) => {
+		mockTestResult[key] = false;
+	});
 
 	return mockTestResult;
 }

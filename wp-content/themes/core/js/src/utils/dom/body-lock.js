@@ -2,7 +2,7 @@ import * as tests from '../tests';
 
 const browser = tests.browserTests();
 let scroll = 0;
-const scroller = browser.ie || browser.firefox || ( browser.chrome && !browser.edge ) ? document.documentElement : document.body;
+const scroller = browser.ie || browser.firefox || (browser.chrome && !browser.edge) ? document.documentElement : document.body;
 
 /**
  * @function lock
@@ -11,7 +11,7 @@ const scroller = browser.ie || browser.firefox || ( browser.chrome && !browser.e
  */
 
 const lock = () => {
-	let style = document.body.style;
+	const style = document.body.style;
 	scroll = scroller.scrollTop;
 
 	style.position = 'fixed';
@@ -24,7 +24,7 @@ const lock = () => {
  */
 
 const unlock = () => {
-	let style = document.body.style;
+	const style = document.body.style;
 
 	style.position = 'static';
 	style.marginTop = '0px';
@@ -34,5 +34,5 @@ const unlock = () => {
 
 export {
 	lock,
-	unlock
+	unlock,
 };
