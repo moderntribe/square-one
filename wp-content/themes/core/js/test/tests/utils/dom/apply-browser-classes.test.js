@@ -3,7 +3,6 @@ import applyBrowserClasses from 'utils/dom/apply-browser-classes';
 const mockTestResult = {
 	android: false,
 	ios: false,
-
 	edge: false,
 	chrome: false,
 	firefox: false,

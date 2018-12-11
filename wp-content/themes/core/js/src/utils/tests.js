@@ -16,9 +16,12 @@ const isJson = (str) => {
 const canLocalStore = () => {
 	let mod;
 	let result = false;
+	// let localStorage = window.localStorage;
+
 	try {
 		mod = new Date();
 		localStorage.setItem(mod, mod.toString());
+
 		result = localStorage.getItem(mod) === mod.toString();
 		localStorage.removeItem(mod);
 		return result;
