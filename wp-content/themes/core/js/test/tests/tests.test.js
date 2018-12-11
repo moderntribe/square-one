@@ -26,11 +26,20 @@ describe('canLocalStore', () => {
 		};
 		expect(tests.canLocalStore()).toBe(false);
 	});
+
+	// aditional test mainly for coverage
+	it('local storage returns null when item is not found', () => {
+		expect(localStorage.getItem('lorem')).toBe(null);
+	});
+
+	// aditional test mainly for coverage
+	it('local storage clears all items', () => {
+		expect(localStorage.clear()).toBe(undefined);
+	});
 });
 
 describe('browserTests', () => {
 	it('returns browser test object', () => {
-		// const matcher = expect.objectContaining()
 		expect(tests.browserTests()).toMatchObject({
 			android: false,
 			chrome: false,

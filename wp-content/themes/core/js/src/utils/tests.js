@@ -25,7 +25,6 @@ const canLocalStore = () => {
 		localStorage.removeItem(mod);
 		return result;
 	} catch (_error) {
-		// console.error('This browser doesn\'t support local storage or is not allowing writing to it.');
 		return result;
 	}
 };
