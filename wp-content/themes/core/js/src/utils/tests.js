@@ -16,7 +16,6 @@ const isJson = (str) => {
 const canLocalStore = () => {
 	let mod;
 	let result = false;
-	// let localStorage = window.localStorage;
 
 	try {
 		mod = new Date();
@@ -26,7 +25,7 @@ const canLocalStore = () => {
 		localStorage.removeItem(mod);
 		return result;
 	} catch (_error) {
-		console.error('This browser doesn\'t support local storage or is not allowing writing to it.');
+		// console.error('This browser doesn\'t support local storage or is not allowing writing to it.');
 		return result;
 	}
 };
@@ -34,7 +33,7 @@ const canLocalStore = () => {
 const android = /(android)/i.test(navigator.userAgent);
 const chrome = !!window.chrome;
 const firefox = typeof InstallTrigger !== 'undefined';
-const ie = /* @cc_on!@ */false || document.documentMode;
+const ie = /* @cc_on!@ */ false || document.documentMode || false;
 const edge = !ie && !!window.StyleMedia;
 const ios = !!navigator.userAgent.match(/(iPod|iPhone|iPad)/i);
 const iosMobile = !!navigator.userAgent.match(/(iPod|iPhone)/i);
@@ -42,17 +41,27 @@ const opera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
 const safari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0 || !chrome && !opera && window.webkitAudioContext !== 'undefined'; // eslint-disable-line
 const os = navigator.platform;
 
-const browserTests = () => ({
-	android,
-	chrome,
-	edge,
-	firefox,
-	ie,
-	ios,
-	iosMobile,
-	opera,
-	safari,
-	os,
-});
+/**
+ * do not change to arrow function until testing dependencies are updated beyond the following reported issue
+ * https://github.com/facebook/jest/issues/5001
+ */
+function browserTests() {
+	return {
+		android,
+		chrome,
+		edge,
+		firefox,
+		ie,
+		ios,
+		iosMobile,
+		opera,
+		safari,
+		os,
+	};
+}
 
-export { isJson, canLocalStore, browserTests };
+export {
+	isJson,
+	canLocalStore,
+	browserTests,
+};

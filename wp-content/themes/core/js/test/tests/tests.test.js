@@ -27,3 +27,21 @@ describe('canLocalStore', () => {
 		expect(tests.canLocalStore()).toBe(false);
 	});
 });
+
+describe('browserTests', () => {
+	it('returns browser test object', () => {
+		// const matcher = expect.objectContaining()
+		expect(tests.browserTests()).toMatchObject({
+			android: false,
+			chrome: false,
+			edge: false,
+			firefox: false,
+			ie: false,
+			ios: false,
+			iosMobile: false,
+			opera: false,
+			safari: true,
+			os: '',
+		});
+	});
+});
