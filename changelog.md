@@ -4,7 +4,9 @@ All notable changes to this project will be documented in this file.
 
 ## [2018.12]
 
-* Fixed: gitignore entry for Tribe 301 plugin  
+* Fixed: gitignore entry for Tribe 301 plugin
+* Fixed: Set explicit charset and collation for queues MySQL table
+* Fixed: Handled invalid records in the queue table, avoiding a fatal error
 
 ## [2018.11]
 
