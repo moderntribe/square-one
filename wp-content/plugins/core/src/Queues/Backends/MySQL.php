@@ -199,7 +199,9 @@ class MySQL implements Backend {
 	public function create_table() {
 		global $wpdb;
 
-		$table_name = $wpdb->prefix . MySQL::DB_TABLE;
+		$table_name      = $wpdb->prefix . MySQL::DB_TABLE;
+		$charset_collate = $wpdb->get_charset_collate();
+
 		$query = "CREATE TABLE $table_name (
 					id bigint(20) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
 					queue varchar(255) NOT NULL,
@@ -209,7 +211,7 @@ class MySQL implements Backend {
 					run_after datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
 					taken int(10) NOT NULL DEFAULT 0,
 					done int(10) DEFAULT 0
-				)";
+				) $charset_collate";
 
 		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 
