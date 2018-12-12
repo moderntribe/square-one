@@ -1,7 +1,6 @@
 import queryToJson from 'utils/data/query-to-json';
 
 describe('queryToJson', () => {
-
 	it('returns json object from a valid query string', () => {
 		const query = 'param1=true&param2=1024&param3=';
 
