@@ -92,6 +92,24 @@ class MySQL implements Backend {
 
 		$queue['args'] = json_decode( $queue['args'], 1 );
 
+		if ( ! is_array( $queue[ 'args' ] ) ) {
+			// No args, or error decoding args, leaving us
+			// with an unprocessable record. Mark it complete
+			// so we don't come back to it on the next run.
+			$wpdb->update(
+				$this->table_name,
+				[
+					'taken' => time(),
+					'done' => time(),
+				],
+				[
+					'id' => $queue[ 'id' ],
+					'taken' => 0,
+				]
+			);
+			throw new \RuntimeException( 'Unprocessable record' );
+		}
+
 		$wpdb->update(
 			$this->table_name,
 			[ 'taken' => time() ],
