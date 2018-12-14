@@ -5,7 +5,7 @@ If you ever need to add any Gravity Forms specific filters, this is the place to
 
 ## Table of Contents
 
-* [Forms](/docs/forms/README.md)
+* [Forms](/docs/theme/forms/README.md)
 * [Implementing Base Forms Styling](/docs/theme/forms/base.md)
 * [Implementing Gravity Forms Styling](/docs/theme/forms/gravity-forms.md)
 * [Gravity Forms JavaScript](/docs/theme/forms/javascript.md)
