@@ -4,7 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [2018.12]
 
-* Fixed: gitignore entry for Tribe 301 plugin  
+* Fixed: gitignore entry for Tribe 301 plugin
+* Added the Blog Copier
 
 ## [2018.11]
 
