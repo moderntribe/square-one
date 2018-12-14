@@ -21,13 +21,12 @@
   * [Icons](/docs/theme/icons.md)
   * [Twig](/docs/theme/twig.md)
   * [In-Depth Components Guide](/docs/theme/components-guide.md)
-  * [Forms](/docs/forms/README.md)
+  * [Forms](/docs/theme/forms/README.md)
   * **CSS**
     * [Overview](/docs/theme/css/README.md)
     * [PostCSS](/docs/theme/css/postcss.md)
     * [Grids](/docs/theme/css/grids.md)
     * [Plugins](/docs/theme/css/plugins.md)
-    * [Forms](/docs/theme/css/forms.md)
   * **Javascript**
     * [Overview](/docs/theme/js/README.md)
     * [Code Splitting](/docs/theme/js/code-splitting.md)
