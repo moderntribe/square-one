@@ -52,5 +52,15 @@ class Queues_Provider implements ServiceProviderInterface {
 			$container[ self::COLLECTION ]->add( $container[ self::DEFAULT_QUEUE ] );
 		}, 0, 0 );
 
+		add_action( 'tribe/project/queues/mysql/init_table', function () use ( $container ) {
+			$container[ self::MYSQL ]->initialize_table();
+		}, 10, 0 );
+
+		add_action( 'admin_init', function () {
+			if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+				do_action( 'tribe/project/queues/mysql/init_table' );
+			}
+		}, 0, 0 );
+
 	}
 }
