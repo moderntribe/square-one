@@ -40,7 +40,7 @@ class MySQL_Table extends Command {
 			return;
 		}
 
-		$this->backend->create_table();
+		do_action( 'tribe/project/queues/mysql/init_table' );
 		\WP_CLI::success( __( 'Task table successfully created.', 'tribe' ) );
 	}
 }
