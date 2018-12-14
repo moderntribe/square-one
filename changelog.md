@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 * Fixed: gitignore entry for Tribe 301 plugin
 * Added the Blog Copier
+* Changed: added more documentation for our SQ1 forms implementation
 
 ## [2018.11]
 
