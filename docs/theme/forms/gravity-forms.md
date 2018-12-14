@@ -5,3 +5,26 @@ There are many different Form-builder plugins WordPress.  For our purposes, we'v
 All of our Gravity Forms styling builds on top of the Square One base form styling, so you'll definitely want to [implement
 the base form styling](/docs/theme/forms/base.md) prior to beginning any type of Gravity Forms implementation.
 
+As with all of our styling for third-party libraries, the Gravity Forms styles are located in the `vendor` directory here:
+`wp-content/themes/core/pcss/vendor/gravity-forms`.  You'll want to pay close attention to the `_variables.pcss` partial,
+since modifying those variables will typically accomplish everything you need to customize.
+
+## Getting Started
+
+First, you'll want to configure your Gravity Forms settings correctly, so you don't get any conflicting styles from the plugin.
+In your WordPress instance, go to `Forms->Settings` and make sure that the "Output CSS" option is set to NO, and the "Output HTML"
+option is set to YES ([screenshot](http://p.tri.be/utQTTC)).  After that, you'll want to import a form to use for testing purposes.  Download [this zip file](http://p.tri.be/4UacvT), 
+uncompress it, and then import it by going to `Forms->Import/Export->Import Forms`.  You'll want to upload that file to create
+a new form for testing.  Finally, embed that form on a new page, and you'll be ready to start styling.
+
+## Folder Structure
+ 
+ * **pcss/vendor/gravity-forms**
+     * **controls** - styling for GF-specific controls (i.e. buttons, select fields, radio, etc)
+     * **validation** - styling for GF validation classes
+     * _complex-layouts.pcss - styling for GF-specific layout classes
+     * _default.pcss - default styling for GF-specific form classes
+     * _gf-classes.pcss - Styling for GF-specific field layout classes
+     * _label.pcss - styling for GF-specific form labels and other input helpers
+     * _spinner.pcss - styling for GF form loading spinner
+     * _variables.pcss - comprehensive declaration of all GF form variables 
