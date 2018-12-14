@@ -23,13 +23,28 @@
   "_core_plugin_path": "wp-content/plugins/core",
   "_npm_path": "node_modules",
   "_component_path": "dev_components",
+  "browserslist": [
+    "last 3 versions",
+    "IE 11",
+    "iOS >= 9",
+    "Safari >= 9"
+  ],
   "engines": {
     "node": "8.9.3",
     "npm": "5.5.1"
   },
   "scripts": {
     "test": "jest -i",
-    "test:watch": "npm test -- --watch"
+    "test:watch": "npm test -- --watch",
+    "docker:start": "./dev/docker/start.sh",
+    "docker:stop": "./dev/docker/stop.sh",
+    "docker:log": "./dev/docker/log.sh",
+    "docker:wp": "./dev/docker/wp.sh",
+    "docker:wpx": "./dev/docker/wpx.sh",
+    "docker:global:start": "./dev/docker/global/start.sh",
+    "docker:global:stop": "./dev/docker/global/stop.sh",
+    "docker:global:log": "./dev/docker/global/log.sh",
+    "docker:global:cert": "./dev/docker/global/cert.sh"
   },
   "resolutions": {
     "babel-core": "^7.0.0-bridge.0"
@@ -97,11 +112,10 @@
     "jest": "^21.3.0-beta.15",
     "jest-cli": "^21.2.1",
     "load-grunt-tasks": "^3.5.2",
-    "lost": "^8.0.0",
     "nyc": "^11.4.1",
     "postcss-aspect-ratio": "^1.0.0",
+    "postcss-calc": "^6.0.1",
     "postcss-color-function": "^3.0.0",
-    "postcss-cssnext": "^3.1.0",
     "postcss-custom-media": "^5.0.1",
     "postcss-custom-properties": "^5.0.1",
     "postcss-functions": "^2.1.1",
@@ -109,6 +123,7 @@
     "postcss-mixins": "^5.4.0",
     "postcss-nested": "^1.0.0",
     "postcss-partial-import": "^2.1.0",
+    "postcss-preset-env": "^5.3.0",
     "postcss-quantity-queries": "^0.4.0",
     "postcss-reporter": "^3.0.0",
     "postcss-simple-vars": "^3.0.0",

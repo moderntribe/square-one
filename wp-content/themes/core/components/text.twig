@@ -11,12 +11,19 @@ Description: Barebones text/html component to be used wherever you print text.
 
 Attributes:
 	{
+		tag: '', // string. The element tag. fallback is a div element.
 		classes: 'c-text', // string. The wrapper classes
 		attrs: '', // string. Data attributes for the text block. You'll want to pass in livetext attrs if using in panels
 		content: '', // string. Text/html.
     }
  #}
 
-<div class="{{ classes }}" {{ attrs }}>
-	{{ content }}
-</div>
+<{{ tag }}
+	{% if classes %}
+		class="{{ classes }}"
+    {% endif %}
+	{% if attrs %}
+        {{ attrs }}
+    {% endif %}>
+{{ content }}
+</{{ tag }}>

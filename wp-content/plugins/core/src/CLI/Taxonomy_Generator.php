@@ -5,7 +5,7 @@ namespace Tribe\Project\CLI;
 use Tribe\Project\Post_Types\Page\Page;
 use Tribe\Project\Post_Types\Post\Post;
 
-class Taxonomy_Generator extends Command {
+class Taxonomy_Generator extends Generator_Command {
 
 	const POST_TYPES = [
 		Post::NAME,

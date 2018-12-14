@@ -2,7 +2,7 @@
 
 namespace Tribe\Project\CLI;
 
-class Settings_Generator extends Command {
+class Settings_Generator extends Generator_Command {
 
 	private $slug       = '';
 	private $class_name = '';

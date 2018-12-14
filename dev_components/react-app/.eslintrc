@@ -6,16 +6,16 @@
     "plugin:import/warnings"
   ],
   "plugins": [
-    "react",
+    "react"
   ],
   "settings": {
     "import/ignore": [
       "node_modules",
-      "\\.(html|json|properties)$",
+      "\\.(html|json|properties)$"
     ],
     "import/resolver": {
       "webpack": {
-        config: 'webpack.config.js'
+        "config": "webpack.config.js"
       }
     }
   },
