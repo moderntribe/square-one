@@ -23,3 +23,5 @@ forms plugin should the need arise in the future.
 
 * [Implementing Base Forms Styling](/docs/theme/forms/base.md)
 * [Implementing Gravity Forms Styling](/docs/theme/forms/gravity-forms.md)
+* [Gravity Forms JavaScript](/docs/theme/forms/javascript.md)
+* [Gravity Forms PHP](/docs/theme/forms/php.md)  

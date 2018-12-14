@@ -9,7 +9,7 @@ As with all of our styling for third-party libraries, the Gravity Forms styles a
 `wp-content/themes/core/pcss/vendor/gravity-forms`.  You'll want to pay close attention to the `_variables.pcss` partial,
 since modifying those variables will typically accomplish everything you need to customize.
 
-## Getting Started
+## Configuring Gravity Forms
 
 First, you'll want to configure your Gravity Forms settings correctly, so you don't get any conflicting styles from the plugin.
 In your WordPress instance, go to `Forms->Settings` and make sure that the "Output CSS" option is set to NO, and the "Output HTML"
@@ -27,4 +27,8 @@ a new form for testing.  Finally, embed that form on a new page, and you'll be r
      * _gf-classes.pcss - Styling for GF-specific field layout classes
      * _label.pcss - styling for GF-specific form labels and other input helpers
      * _spinner.pcss - styling for GF form loading spinner
-     * _variables.pcss - comprehensive declaration of all GF form variables 
+     * _variables.pcss - comprehensive declaration of all GF form variables
+     
+## Up Next
+
+* [Gravity Forms JavaScript](/docs/theme/forms/javascript.md) 
