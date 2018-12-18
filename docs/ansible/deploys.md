@@ -4,6 +4,17 @@
 
 Ansible deploys are done using the `ansible-playbook` command line utility. When executing `ansible-playbook`, you specify the _inventory_ (e.g. server config) and _playbook_ that you wish to execute. A playbook is a collection of commands that are executed in sequential order. The typical usecase for a run-of-the-mill code deploy would be to execute the `deploy.yml` playbook. Whereas the other default playbooks that are provided in Square One are for initial setup of the server.
 
+## VERY IMPORTANT Prerequisite
+
+When deploying to a server, Ansible uses `ForwardAgent` when ssh-ing into the server. That way your local ssh key can be used to clone repos rather than requiring them on the server itself. To make sure this works like a champ, execute the following on your local compy from your terminal of choice:
+
+```
+ssh-add /path/to/key/you/use/for/github
+
+# Here's an example of what Matt B did:
+ssh-add ~/.ssh/id_rsa
+```
+
 ## Playbooks
 
 There are a few different playbooks that are included here:
