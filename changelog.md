@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2018.12]
+
+* Fixed: gitignore entry for Tribe 301 plugin
+* Added the Blog Copier
+
 ## [2018.11]
 
 * Fixed: Nginx config to properly pull missing assets (images/js/css/media etc...) from a remote server so you don't need to download large uploads folders.

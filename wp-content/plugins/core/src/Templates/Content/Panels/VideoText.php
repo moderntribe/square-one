@@ -109,14 +109,16 @@ class VideoText extends Panel {
 	}
 
 	protected function get_panel_video() {
+		if ( empty( $this->panel_vars[ VideoTextPanel::FIELD_VIDEO ] ) ) {
+			return '';
+		}
 
-		$options = [
-			Video::VIDEO_URL => esc_html( $this->panel_vars[ VideoTextPanel::FIELD_VIDEO ] ),
-		];
+		global $wp_embed;
 
-		$video = Video::factory( $options );
+		$url      = $this->panel_vars[ VideoTextPanel::FIELD_VIDEO ];
+		$rendered = $wp_embed->shortcode( [], $url );
 
-		return $video->render();
+		return $rendered;
 	}
 
 	protected function get_wrapper_classes() {
