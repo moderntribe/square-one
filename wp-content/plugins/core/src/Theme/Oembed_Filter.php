@@ -63,7 +63,7 @@ class Oembed_Filter {
 			Video::TITLE             => __( 'Play Video', 'tribe' ),
 			Video::VIDEO_URL         => $url,
 			Video::PLAY_TEXT         => $data->title,
-			Video::CAPTION_POSITION  => Video::CAPTION_POSITION_BELOW,
+			Video::CAPTION_POSITION  => Video::CAPTION_POSITION_CENTER,
 		];
 
 		$video_obj     = Video::factory( $options );
