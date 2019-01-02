@@ -9,6 +9,7 @@ use Tribe\Project\Templates\Components\Content_Block;
 use Tribe\Project\Templates\Components\Text;
 use Tribe\Project\Templates\Components\Title;
 use Tribe\Project\Templates\Components\Button;
+use Tribe\Project\Theme\Util;
 
 class ImageText extends Panel {
 
@@ -23,12 +24,31 @@ class ImageText extends Panel {
 	protected function get_mapped_panel_data(): array {
 
 		$data = [
-			'wrapper_classes' => $this->get_panel_classes(),
+			'wrapper_classes' => $this->get_wrapper_classes(),
 			'image'           => $this->get_panel_image(),
 			'content_block'   => $this->get_content_block(),
 		];
 
 		return $data;
+	}
+
+	/**
+	 * Overrides `get_classes()` from the Panel parent class.
+	 *
+	 * Return value is available in the twig template via the `classes` twig variable in the parent class.
+	 *
+	 * @return string
+	 */
+	protected function get_classes(): string {
+		$classes = [
+			'panel',
+			's-wrapper',
+			'site-panel',
+			's-wrapper--no-padding',
+			sprintf( 'site-panel--%s', $this->panel->get_type_object()->get_id() ),
+		];
+
+		return Util::class_attribute( $classes );
 	}
 
 	protected function get_content_block() {
@@ -96,7 +116,7 @@ class ImageText extends Panel {
 			Button::URL         => $this->panel_vars[ ImageTextPanel::FIELD_CTA ][ Button::URL ],
 			Button::TYPE        => '',
 			Button::TARGET      => $this->panel_vars[ ImageTextPanel::FIELD_CTA ][ Button::TARGET ],
-			Button::CLASSES     => [ 'c-btn--sm' ],
+			Button::CLASSES     => [ 'c-btn c-btn--sm' ],
 			Button::ATTRS       => '',
 			Button::LABEL       => $this->panel_vars[ ImageTextPanel::FIELD_CTA ][ Button::LABEL ],
 			Button::BTN_AS_LINK => true,
@@ -127,7 +147,7 @@ class ImageText extends Panel {
 		return $image_obj->render();
 	}
 
-	protected function get_panel_classes() {
+	protected function get_wrapper_classes() {
 
 		$classes = [];
 
@@ -135,7 +155,7 @@ class ImageText extends Panel {
 			$classes[] = 'g-row--reorder-2-col';
 		}
 
-		return implode( ' ', $classes );
+		return Util::class_attribute( $classes, false );
 	}
 
 	public static function instance() {

@@ -1,4 +1,4 @@
-#Overview 
+# Overview 
 
 This system will use a plugin by Modern Tribe called Panel Builder for the majority if its content control. Panel Builder has fairly detailed developer orientated documentation `/wp-content/plugins/panel-builder/readme.md` (Updates in progress)
 
@@ -9,7 +9,7 @@ on the front end.
 
 Read below for basic Panels registration, usage, themeing and configuration as it applies to this project.
 
-##Table of Contents
+## Table of Contents
 
 * [Overview](/docs/panels/README.md)
 * [The Initializer](/docs/panels/initializer.md)

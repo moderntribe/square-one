@@ -120,7 +120,14 @@ class Image {
 		$attrs[] = !empty( $this->options[ 'img_attr' ] ) ? trim( $this->options[ 'img_attr' ] ) : '';
 
 		// the alt text
-		$alt_text = ! empty( $this->options[ 'img_alt_text' ] ) ? $this->options[ 'img_alt_text' ] : get_the_title( $this->image_id );
+		$alt_text = $this->options[ 'img_alt_text' ];
+
+		// Check for a specific alt meta value on the image post, otherwise fallback to the image post's title.
+		if ( empty( $alt_text ) ) {
+			$alt_meta_value = get_post_meta( $this->image_id, '_wp_attachment_image_alt', true );
+			$alt_text = ! empty( $alt_meta_value ) ? $alt_meta_value : get_the_title( $this->image_id );
+		}
+
 		$attrs[] = $this->options[ 'as_bg' ] ? sprintf( 'role="img" aria-label="%s"', $alt_text ) : sprintf( 'alt="%s"', $alt_text );
 
 		if ( $this->options[ 'use_lazyload' ] ) {

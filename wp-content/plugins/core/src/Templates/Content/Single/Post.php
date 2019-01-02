@@ -4,6 +4,7 @@
 namespace Tribe\Project\Templates\Content\Single;
 
 use Tribe\Project\Twig\Twig_Template;
+use Tribe\Project\Twig\Stringable_Callable;
 
 class Post extends Twig_Template {
 	protected $time_formats = [
@@ -14,7 +15,7 @@ class Post extends Twig_Template {
 		$data[ 'post' ] = [
 			'post_type'      => get_post_type(),
 			'title'          => get_the_title(),
-			'content'        => apply_filters( 'the_content', get_the_content() ),
+			'content'        => new Stringable_Callable( [ $this, 'defer_get_content' ] ),
 			'excerpt'        => apply_filters( 'the_excerpt', get_the_excerpt() ),
 			'permalink'      => get_the_permalink(),
 			'featured_image' => $this->get_featured_image(),
@@ -24,6 +25,10 @@ class Post extends Twig_Template {
 		];
 
 		return $data;
+	}
+
+	public function defer_get_content() {
+		return apply_filters( 'the_content', get_the_content() );
 	}
 
 	protected function get_featured_image() {

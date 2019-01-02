@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.com/moderntribe/square-one.svg?token=1evq9eFenqSy9NpYbMyT&branch=master)](https://travis-ci.com/moderntribe/square-one)
 
-[1] is a development framework created by Modern Tribe for use in our WordPress projects. It contains a base for:
+Square One (AKA **\[1\]**) is a development framework created by Modern Tribe primarily used for WordPress projects. It contains a base for:
 
 * Our build process (node, grunt, webpack)
 * Theme independent core functionality plugin | /content/mu-plugins
@@ -12,6 +12,8 @@
 
 ## Table of Contents
 
+* **Prerequisites**
+  * [Docker](/dev/docker/README.md)
 * **Build**
   * [Overview](/docs/build/README.md)
   * [Node](/docs/build/node.md)
@@ -23,7 +25,7 @@
 * **Theme**
   * [Overview](/docs/theme/README.md)
   * [Markup and Style](/docs/theme/markup-and-style.md)
-  * [Accessibility](/docs/theme/accessbility.md)
+  * [Accessibility](/docs/theme/accessibility.md)
   * [Image Handling](/docs/theme/images.md)
   * [Fonts](/docs/theme/fonts.md)
   * [Icons](/docs/theme/icons.md)
@@ -70,8 +72,11 @@
   * [Jest](/docs/tests/jest.md)
 * **Local Dev Environment**
   * [Docker](/dev/docker/README.md)
-
-
+* **Deploys with Ansible**
+  * [Overview](/docs/ansible/README.md)
+  * [Terminology](/docs/ansible/terminology.md)
+  * [Initial Setup](/docs/ansible/initial-setup.md)
+  * [Executing Deploys](/docs/ansible/deploys.md)
 
 #### Using the build tools
 
@@ -92,21 +97,6 @@ GLOMAR is a plugin that blocks the frontend of the site from public access. If y
     define( 'TRIBE_GLOMAR', false );
 
 
-## Upgrade Notice
-
-= 1.1 =
-Moved the project dependencies to Composer  
-Added Codeception tests examples and instructions  
-= 1.0 =
-Initial Release
-
-
 ## Changelog
 
-
-= 1.1 =
-Moved the project dependencies to Composer  
-Added Codeception tests examples and instructions  
-= 1.0 =
-Initial Release
-
+[View changelog](./changelog.md)

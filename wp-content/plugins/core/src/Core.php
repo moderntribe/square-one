@@ -6,6 +6,7 @@ use Pimple\Container;
 use Tribe\Libs\Functions\Function_Includer;
 use Tribe\Project\Service_Providers\Admin_Provider;
 use Tribe\Project\Service_Providers\Asset_Provider;
+use Tribe\Project\Service_Providers\Blog_Copier_Provider;
 use Tribe\Project\Service_Providers\Cache_Provider;
 use Tribe\Project\Service_Providers\CLI_Provider;
 use Tribe\Project\Service_Providers\Object_Meta_Provider;
@@ -17,6 +18,7 @@ use Tribe\Project\Service_Providers\Post_Types\Page_Service_Provider;
 use Tribe\Project\Service_Providers\Post_Types\Post_Service_Provider;
 use Tribe\Project\Service_Providers\Post_Types\Sample_Service_Provider;
 use Tribe\Project\Service_Providers\Post_Types\Venue_Service_Provider;
+use Tribe\Project\Service_Providers\Queues_Provider;
 use Tribe\Project\Service_Providers\Shortcode_Provider;
 use Tribe\Project\Service_Providers\Taxonomies\Category_Service_Provider;
 use Tribe\Project\Service_Providers\Taxonomies\Example_Taxonomy_Service_Provider;
@@ -67,6 +69,8 @@ class Core {
 		$this->container->register( new Shortcode_Provider() );
 		$this->container->register( new Object_Meta_Provider() );
 		$this->container->register( new CLI_Provider() );
+		$this->container->register( new Queues_Provider() );
+		$this->container->register( new Blog_Copier_Provider() );
 
 		$this->load_post_type_providers();
 		$this->load_taxonomy_providers();

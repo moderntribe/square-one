@@ -1,0 +1,15 @@
+---
+##############################################################
+#
+# SMTP
+#
+# smtp_username = smtp username
+#
+# Vars in vault:
+# smtp_password = smtp password
+#
+# Typically these values won't be changed in all/common.yml
+# but instead added/changed in the relevant
+# inventory/common.yml
+##############################################################
+# smtp_username: 'CHANGEME'

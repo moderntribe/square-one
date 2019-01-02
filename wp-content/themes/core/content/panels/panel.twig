@@ -3,7 +3,7 @@
 {% block panel %}
 
 	{% block start %}
-		<section class="panel s-wrapper site-panel site-panel--{{ type|esc_attr }}"
+		<section {{ classes }}
 				 data-index="{{ index }}"
 				 data-js="panel"
 				 data-type="{{ type|esc_attr }}"

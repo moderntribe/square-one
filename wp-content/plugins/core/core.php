@@ -8,7 +8,7 @@ Author URI:  http://www.tri.be
 */
 
 require_once ABSPATH . '../vendor/autoload.php';
-
+require_once trailingslashit( __DIR__ ) . 'functions/pluggable.php';
 
 // Start the core plugin
 add_action( 'plugins_loaded', function () {

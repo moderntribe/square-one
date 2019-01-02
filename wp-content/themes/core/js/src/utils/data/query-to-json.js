@@ -1,8 +1,9 @@
-
 const queryToJson = (params = '') => {
-	const pairs = params.length ? params.split('&') : location.search.slice(1).split('&');
+	const query = params.length ? params : location.search.slice(1);
+	const pairs = query.length ? query.split('&') : [];
 	const result = {};
 	let pairArray = [];
+
 	pairs.forEach((pair) => {
 		pairArray = pair.split('=');
 		result[pairArray[0]] = decodeURIComponent(pairArray[1] || '');
