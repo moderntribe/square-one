@@ -27,6 +27,7 @@ class CLI_Provider implements ServiceProviderInterface {
 	const GENERATE_TAX     = 'cli.generator.taxonomy';
 	const GENERATE_CLI     = 'cli.generator.cli';
 	const GENERATE_SETTING = 'cli.generator.setting';
+	const GENERATE_META    = 'cli.generator.meta';
 	const QUEUES_LIST      = 'cli.queues.list';
 	const QUEUES_ADD_TABLE = 'cli.queues.add_table';
 	const QUEUES_CLEANUP   = 'cli.queues.cleanup';
@@ -45,11 +46,11 @@ class CLI_Provider implements ServiceProviderInterface {
 			return new Cache_Prime();
 		};
 
-		$container['cli.settings_generator'] = function ( $container ) {
+		$container[self::GENERATE_SETTING] = function ( $container ) {
 			return new Settings_Generator( $container['cli.file-system'] );
 		};
 
-		$container['cli.meta.importer'] = function ( $container ) {
+		$container[self::GENERATE_META] = function ( $container ) {
 			return new Importer( $container['cli.file-system'] );
 		};
 
@@ -69,7 +70,7 @@ class CLI_Provider implements ServiceProviderInterface {
 			$container[ self::QUEUES_CLEANUP ]->register();
 			$container[ self::QUEUES_PROCESS ]->register();
 			$container[ self::QUEUES_ADD_TASK]->register();
-			$container['cli.meta.importer']->register();
+			$container[self::GENERATE_META]->register();
 		}, 0, 0 );
 	}
 

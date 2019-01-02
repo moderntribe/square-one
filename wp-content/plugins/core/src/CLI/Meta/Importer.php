@@ -3,8 +3,9 @@
 namespace Tribe\Project\CLI\Meta;
 
 use Tribe\Project\CLI\Command;
+use Tribe\Project\CLI\Generator_Command;
 
-class Importer extends Command {
+class Importer extends Generator_Command {
 
 	protected $args       = [];
 	protected $assoc_args = [];
