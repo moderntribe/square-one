@@ -46,14 +46,6 @@ class CLI_Provider implements ServiceProviderInterface {
 			return new Cache_Prime();
 		};
 
-		$container[self::GENERATE_SETTING] = function ( $container ) {
-			return new Settings_Generator( $container['cli.file-system'] );
-		};
-
-		$container[self::GENERATE_META] = function ( $container ) {
-			return new Importer( $container['cli.file-system'] );
-		};
-
 		add_action( 'init', function () use ( $container ) {
 			if ( ! defined( 'WP_CLI' ) || ! WP_CLI ) {
 				return;
@@ -115,6 +107,10 @@ class CLI_Provider implements ServiceProviderInterface {
 		};
 		$container[ self::GENERATE_SETTING ] = function ( $container ) {
 			return new Settings_Generator( $container[ self::FILE_SYSTEM ] );
+		};
+
+		$container[self::GENERATE_META] = function ( $container ) {
+			return new Importer( $container[ self::FILE_SYSTEM ] );
 		};
 	}
 }
