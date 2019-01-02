@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2019.01]
+
+* Added a meta importer CLI command.
+
 ## [2018.12]
 
 * Fixed: gitignore entry for Tribe 301 plugin
