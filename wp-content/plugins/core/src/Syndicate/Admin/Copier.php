@@ -155,4 +155,12 @@ class Copier extends Display {
 		exit;
 	}
 
+	protected function post_exists( $post_id ) {
+		global $wpdb;
+		$table = $wpdb->base_prefix . Blog::SYNDICATED_TRACKING_TABLE;
+		$current_blog_id = get_current_blog_id();
+
+		return (bool) $wpdb->get_var( "SELECT copied_post_id FROM {$table} WHERE blog_id={$current_blog_id} AND source_post_id={$post_id}" );
+	}
+
 }
