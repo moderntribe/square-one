@@ -27,15 +27,16 @@ module.exports = {
 		},
 		output: {
 			filename: '[name].js',
-			chunkFilename: '[name].js',
+			chunkFilename: '[name].[chunkhash].js',
 			path: path.resolve(`${__dirname}/../`, '<%= pkg._core_theme_js_dist_path %>'),
 			publicPath: '/<%= pkg._core_theme_js_dist_path %>'
 		},
 		devtool: 'eval-source-map',
 		plugins: webpackCommonConfig.plugins.concat(
+			new webpack.HashedModuleIdsPlugin(),
 			new webpack.LoaderOptionsPlugin({
 				debug: true
-			}),
+			})
 		),
 		optimization: {
 			namedModules: true, // NamedModulesPlugin()
@@ -56,7 +57,7 @@ module.exports = {
 		},
 		output: {
 			filename: '[name].min.js',
-			chunkFilename: '[name].min.js',
+			chunkFilename: '[name].[chunkhash].min.js',
 			path: path.resolve(`${__dirname}/../`, '<%= pkg._core_theme_js_dist_path %>'),
 			publicPath: '/<%= pkg._core_theme_js_dist_path %>'
 		},
@@ -64,6 +65,7 @@ module.exports = {
 			new webpack.DefinePlugin({
 				'process.env': { NODE_ENV: JSON.stringify('production') }
 			}),
+			new webpack.HashedModuleIdsPlugin(),
 			new webpack.LoaderOptionsPlugin({
 				debug: false
 			})
@@ -111,12 +113,13 @@ module.exports = {
 		},
 		output: {
 			filename: '[name].js',
-			chunkFilename: '[name].js',
+			chunkFilename: '[name].[chunkhash].js',
 			path: path.resolve(`${__dirname}/../`, '<%= pkg._core_admin_js_dist_path %>'),
 			publicPath: '/<%= pkg._core_admin_js_dist_path %>'
 		},
 		devtool: 'eval-source-map',
 		plugins: webpackCommonConfig.plugins.concat(
+			new webpack.HashedModuleIdsPlugin(),
 			new webpack.LoaderOptionsPlugin({
 				debug: true
 			})
@@ -147,7 +150,7 @@ module.exports = {
 		},
 		output: {
 			filename: '[name].min.js',
-			chunkFilename: '[name].min.js',
+			chunkFilename: '[name].[chunkhash].min.js',
 			path: path.resolve(`${__dirname}/../`, '<%= pkg._core_admin_js_dist_path %>'),
 			publicPath: '/<%= pkg._core_admin_js_dist_path %>'
 		},
@@ -155,6 +158,7 @@ module.exports = {
 			new webpack.DefinePlugin({
 				'process.env': { NODE_ENV: JSON.stringify('production') },
 			}),
+			new webpack.HashedModuleIdsPlugin(),
 			new webpack.LoaderOptionsPlugin({
 				debug: false
 			})

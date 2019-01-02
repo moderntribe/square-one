@@ -9,6 +9,7 @@ use Tribe\Project\Templates\Components\Content_Block;
 use Tribe\Project\Templates\Components\Video;
 use Tribe\Project\Templates\Components\Text;
 use Tribe\Project\Templates\Components\Title;
+use Tribe\Project\Theme\Util;
 
 class VideoText extends Panel {
 
@@ -23,7 +24,7 @@ class VideoText extends Panel {
 	protected function get_mapped_panel_data(): array {
 
 		$data = [
-			'wrapper_classes' => $this->get_panel_classes(),
+			'wrapper_classes' => $this->get_wrapper_classes(),
 			'video'           => $this->get_panel_video(),
 			'content_block'   => $this->get_content_block(),
 		];
@@ -96,7 +97,7 @@ class VideoText extends Panel {
 			Button::URL         => $this->panel_vars[ VideoTextPanel::FIELD_CTA ][ Button::URL ],
 			Button::TYPE        => '',
 			Button::TARGET      => $this->panel_vars[ VideoTextPanel::FIELD_CTA ][ Button::TARGET ],
-			Button::CLASSES     => [ 'c-btn--sm' ],
+			Button::CLASSES     => [ 'c-btn c-btn--sm' ],
 			Button::ATTRS       => '',
 			Button::LABEL       => $this->panel_vars[ VideoTextPanel::FIELD_CTA ][ Button::LABEL ],
 			Button::BTN_AS_LINK => true,
@@ -108,17 +109,19 @@ class VideoText extends Panel {
 	}
 
 	protected function get_panel_video() {
+		if ( empty( $this->panel_vars[ VideoTextPanel::FIELD_VIDEO ] ) ) {
+			return '';
+		}
 
-		$options = [
-			Video::VIDEO_URL => esc_html( $this->panel_vars[ VideoTextPanel::FIELD_VIDEO ] ),
-		];
+		global $wp_embed;
 
-		$video = Video::factory( $options );
+		$url      = $this->panel_vars[ VideoTextPanel::FIELD_VIDEO ];
+		$rendered = $wp_embed->shortcode( [], $url );
 
-		return $video->render();
+		return $rendered;
 	}
 
-	protected function get_panel_classes() {
+	protected function get_wrapper_classes() {
 
 		$classes = [];
 
@@ -126,7 +129,7 @@ class VideoText extends Panel {
 			$classes[] = 'g-row--reorder-2-col';
 		}
 
-		return implode( ' ', $classes );
+		return Util::class_attribute( $classes, false );
 	}
 
 	public static function instance() {

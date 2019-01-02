@@ -71,7 +71,7 @@ const resetEmbed = () => {
 	embed.classList.remove('c-video--is-playing');
 
 	// Fade in image/caption
-	trigger.classList.remove('u-hidden');
+	trigger.classList.remove('a11y-hidden');
 };
 
 /**
@@ -98,6 +98,7 @@ const playEmbed = (e) => {
 	iframe.width = 1280;
 	iframe.height = 720;
 	iframe.tabIndex = 0;
+	iframe.allow = 'autoplay; fullscreen';
 
 	// Add & kickoff embed
 	parent.classList.add('c-video--is-playing');
@@ -106,7 +107,7 @@ const playEmbed = (e) => {
 
 	// Fade out image/caption, avoid fouc
 	_.delay(() => {
-		target.classList.add('u-hidden');
+		target.classList.add('a11y-hidden');
 	}, 250);
 };
 

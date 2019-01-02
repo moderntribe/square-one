@@ -19,6 +19,7 @@ module.exports = {
 		tasks: [
 			'postcss:theme',
 			'postcss:themeLegacy',
+			'setPHPConstant',
 		],
 		options: defaultOpts,
 	},
@@ -29,6 +30,7 @@ module.exports = {
 		],
 		tasks: [
 			'postcss:themeWPLogin',
+			'setPHPConstant',
 		],
 		options: defaultOpts,
 	},
@@ -39,6 +41,7 @@ module.exports = {
 		],
 		tasks: [
 			'postcss:themeWPEditor',
+			'setPHPConstant',
 		],
 		options: defaultOpts,
 	},
@@ -51,6 +54,7 @@ module.exports = {
 		],
 		tasks: [
 			'postcss:themeWPAdmin',
+			'setPHPConstant',
 		],
 		options: defaultOpts,
 	},
@@ -61,6 +65,7 @@ module.exports = {
 		],
 		tasks: [
 			'webpack:themeDev',
+			'setPHPConstant',
 		],
 		options: defaultOpts,
 	},
@@ -71,6 +76,7 @@ module.exports = {
 		],
 		tasks: [
 			'webpack:adminDev',
+			'setPHPConstant',
 		],
 		options: defaultOpts,
 	},
@@ -82,6 +88,7 @@ module.exports = {
 		tasks: [
 			'webpack:themeDev',
 			'webpack:adminDev',
+			'setPHPConstant',
 		],
 		options: defaultOpts,
 	},

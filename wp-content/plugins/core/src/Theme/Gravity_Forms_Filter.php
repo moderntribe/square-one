@@ -21,13 +21,14 @@ class Gravity_Forms_Filter {
 	 * @action init
 	 */
 	public function hook() {
-
 		add_action( 'gform_enqueue_scripts', [ $this, 'enqueue_gravity_forms_jquery_ui_styles' ] );
 		add_filter( 'gform_field_choice_markup_pre_render', [ $this, 'customize_gf_choice_other' ], 10, 4 );
 		add_filter( 'gform_field_css_class', [ $this, 'add_gf_select_field_class' ], 10, 3 );
 		add_filter( 'gform_pre_render', [ $this, 'deactivate_gf_animations' ] );
 		add_filter( 'gform_confirmation_anchor', '__return_false' );
 		add_filter( 'gform_tabindex', '__return_false' );
+		add_filter( 'pre_option_rg_gforms_disable_css', '__return_true' );
+		add_filter( 'pre_option_rg_gforms_enable_html5', '__return_true' );
 	}
 
 	/**
@@ -55,7 +56,7 @@ class Gravity_Forms_Filter {
 			$indices = array_keys( $field['choices'] );
 			$index   = array_pop( $indices );
 
-			$new_markup = sprintf( '<label for="choice_%1$s_%2$s_%3$s" class="gf-radio-checkbox-other-placeholder"><span class="u-visual-hide">%4$s</span></label></li>',
+			$new_markup = sprintf( '<label for="choice_%1$s_%2$s_%3$s" class="gf-radio-checkbox-other-placeholder"><span class="a11y-visual-hide">%4$s</span></label></li>',
 				$field['formId'], $field['id'], $index, __( 'Other', 'tribe' ) );
 
 			$choice_markup = str_replace( '</li>', $new_markup, $choice_markup );
@@ -76,36 +77,36 @@ class Gravity_Forms_Filter {
 		$class_icon_simple  = $this->activate_icons ? ' form-control-icon' : '';
 		$class_icon_complex = $this->activate_icons ? ' form-control-icon-complex' : '';
 
-		if ( $field['type'] === 'multiselect' || ( $field['type'] === 'post_custom_field' && $field['inputType'] === 'multiselect' ) ) {
+		if ( $field['type'] === 'multiselect' || $field['inputType'] === 'multiselect' ) {
 			$classes .= ' gf-multi-select';
-		} elseif ( $field['type'] === 'select' || ( $field['type'] === 'post_custom_field' && $field['inputType'] === 'select' ) || ( $field['type'] === 'product' && $field['inputType'] === 'select' ) ) {
+		} elseif ( $field['type'] === 'select' || $field['inputType'] === 'select' ) {
 			$classes .= ' gf-select';
 			// Not Chosen, regular select
 			if ( ! $field['enableEnhancedUI'] ) {
 				$classes .= ' gf-select-no-chosen';
 			}
-		} elseif ( $field['type'] === 'checkbox' ) {
+		} elseif ( $field['type'] === 'checkbox' || $field['inputType'] === 'checkbox' ) {
 			$classes .= ' gf-checkbox';
-		} elseif ( $field['type'] === 'radio' || ( $field['type'] === 'product' && $field['inputType'] === 'radio' ) ) {
+		} elseif ( $field['type'] === 'radio' || $field['inputType'] === 'radio' ) {
 			$classes .= ' gf-radio';
-		} elseif ( $field['type'] === 'textarea' ) {
+		} elseif ( $field['type'] === 'textarea' || $field['type'] === 'post_content' || $field['type'] === 'post_excerpt' || $field['inputType'] === 'textarea' ) {
 			$classes .= ' gf-textarea';
-		} elseif ( $field['type'] === 'date' ) {
+		} elseif ( $field['type'] === 'date' || $field['inputType'] === 'date' ) {
 			$class_date_icon = ( $field['dateType'] === 'datepicker' ) ? $class_icon_simple : '';
 			$classes .= ' gf-date gf-date-layout-' . $field['dateType'] . $class_date_icon;
-		} elseif ( $field['type'] === 'time' ) {
+		} elseif ( $field['type'] === 'time' || $field['inputType'] === 'time' ) {
 			$classes .= ' gf-time';
-		} elseif ( $field['type'] === 'phone' ) {
+		} elseif ( $field['type'] === 'phone' || $field['inputType'] === 'phone' ) {
 			$classes .= ' gf-phone' . $class_icon_simple;
 		} elseif ( $field['type'] === 'name' ) {
 			$classes .= ' gf-name' . $class_icon_complex;
 		} elseif ( $field['type'] === 'address' ) {
 			$classes .= ' gf-address' . $class_icon_complex;
-		} elseif ( $field['type'] === 'email' ) {
+		} elseif ( $field['type'] === 'email' || $field['inputType'] === 'email' ) {
 			$classes .= ' gf-email' . $class_icon_simple;
-		} elseif ( $field['type'] === 'website' ) {
+		} elseif ( $field['type'] === 'website' || $field['inputType'] === 'website' ) {
 			$classes .= ' gf-url' . $class_icon_simple;
-		} elseif ( $field['type'] === 'fileupload' ) {
+		} elseif ( $field['type'] === 'fileupload' || $field['inputType'] === 'fileupload' ) {
 			$classes .= ' gf-file';
 		} elseif ( $field['enablePasswordInput'] === true ) {
 			$classes .= ' gf-password' . $class_icon_simple;
