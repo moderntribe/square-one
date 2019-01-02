@@ -35,8 +35,20 @@ class Copier extends Display {
 	 */
 	public function copy_to_blog() {
 		if ( ! check_admin_referer( self::COPY_ACTION . $_GET['id'] ) ) {
-			return;
+			wp_die( __( 'Invalid referrer.', 'tribe') );
 		}
+
+		if ( ! filter_input( INPUT_GET, 'id', FILTER_VALIDATE_INT ) ) {
+			wp_die( __( 'Invalid id.', 'tribe') );
+		}
+
+		if ( $this->post_exists( $_GET['id'] ) ) {
+			wp_die( __( 'Already copied.', 'tribe') );
+		}
+
+		define( 'DOING_COPY', true );
+
+
 
 		switch_to_blog( BLOG_ID_CURRENT_SITE );
 		$post           = get_post( $_GET['id'], ARRAY_A );
