@@ -131,14 +131,23 @@ class Copier extends Display {
 			return;
 		}
 
-		wp_delete_post( $_GET['id'], true );
 
 		global $wpdb;
 		$syndicated_tracking_table = Blog::SYNDICATED_TRACKING_TABLE;
-		$wpdb->delete( $wpdb->base_prefix . $syndicated_tracking_table,
+		$table                     = $wpdb->base_prefix . $syndicated_tracking_table;
+		$copied_post_id            = (int) $_GET['id'];
+		$blog_id                   = get_current_blog_id();
+
+		$source_post_id = $wpdb->get_var( "SELECT source_post_id FROM {$table} WHERE blog_id = {$blog_id} AND copied_post_id = {$copied_post_id}" );
+
+		do_action( 'syndication/return_post', $_GET['id'], $source_post_id );
+
+		wp_delete_post( $_GET['id'], true );
+
+		$wpdb->delete( $table,
 			[
-				'copied_post_id' => $_GET['id'],
-				'blog_id'        => get_current_blog_id(),
+				'copied_post_id' => $copied_post_id,
+				'blog_id'        => $blog_id,
 			]
 		);
 
