@@ -64,6 +64,7 @@ class Copier extends Display {
 		$meta = get_metadata( 'post', $_GET['id'] );
 		restore_current_blog();
 
+		$post['post_content_filtered'] = wp_slash( $post['post_content_filtered'] );
 		unset ( $post['ID'], $post['guid'], $post['post_category'], $post['post_author'] );
 		$id = wp_insert_post( $post );
 
