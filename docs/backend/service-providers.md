@@ -45,7 +45,7 @@ Square One has adopted a lazy-loading patter for Actions and Filters. This patte
 
 Consider the following situation illustrating the older pattern:
 
-```
+```php
 // Within the Service Provider
 $container['foobar_class'] = function( $container ) {
    return new Foober_Class();
@@ -71,7 +71,7 @@ Secondly, this pattern causes the Class definitions and the Hooking to exist in 
 
 By contrast, consider the updated pattern:
 
-```
+```php
 // Service Provider
 $container['foobar_class'] = function( $container ) {
    return new Foober_Class();
@@ -98,7 +98,8 @@ By moving to this pattern, we've seen substantial performance gains on systems o
 #### Actions
 
 *Adding a custom admin menu screen*
-```
+
+```php
 // Service Provider
 $container['sync.registry'] = function ( $container ) {
 	return new Sync_Registry( $container['plugin_file'] );
@@ -117,7 +118,7 @@ public function add_sync_screen() {
 
 *Registering REST API Routes*
 
-```
+```php
 // Service Provider
 $container['routes.post'] = function ( $container ) {
 	return new Route_Post();
@@ -145,7 +146,7 @@ When adding a filter that has a return, it's important to remember to *return* t
 
 *Registering a custom Twig Handler*
 
-```
+```php
 // Service Provider
 $container[ 'twig' ] = function ( Container $container ) {
 	$twig = new \Twig_Environment( $container[ 'twig.loader' ], $container[ 'twig.options' ] );
@@ -162,7 +163,7 @@ add_filter( 'tribe/project/twig', function ( $twig ) use ( $container ) {
 
 *Adding in custom column names in an Edit Post table*
 
-```
+```php
 // Service Provider
 $container['posts.fork'] = function ( Container $container ) {
 	return new Fork();
@@ -184,7 +185,7 @@ public function replace_title_column( $columns ) {
 
 *Adding Quick Edit Links*
 
-```
+```php
 // Service Provider
 $container['posts.fork'] = function ( Container $container ) {
 	return new Fork();
@@ -207,7 +208,7 @@ There are times when you may wish to pass an indeterminate number of arguments t
 using the `...$args` parameter pattern. Keep in mind that it's important to set the final argument of `add__filter()` to 
 something large (here we use 99) to ensure WordPress passes all of your arguments.
 
-```
+```php
 // Service Provider
 $container['posts.fork'] = function ( Container $container ) {
 	return new Fork();
