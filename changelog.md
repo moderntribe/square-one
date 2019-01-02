@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ## [2019.01]
 
+* Added a meta importer CLI command.
 * Fixed: Add sintax hightlight for docs with code examples
 
 ## [2018.12]
