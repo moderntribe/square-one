@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2019.01]
+
+* Fixed: Add sintax hightlight for docs with code examples
+
 ## [2018.12]
 
 * Fixed: gitignore entry for Tribe 301 plugin
