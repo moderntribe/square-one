@@ -51,7 +51,10 @@ class Copier extends Display {
 
 
 		switch_to_blog( BLOG_ID_CURRENT_SITE );
-		$post           = get_post( $_GET['id'], ARRAY_A );
+		$post = get_post( $_GET['id'], ARRAY_A );
+		if ( ! $post ) {
+			return;
+		}
 		$source_post_id = $post['ID'];
 		$terms          = [];
 		$taxonomies     = get_post_taxonomies( $_GET['id'] );
