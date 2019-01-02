@@ -89,6 +89,8 @@ class Copier extends Display {
 			]
 		);
 
+		do_action( 'syndication/copy_post', $id, $source_post_id );
+
 		wp_safe_redirect( $_SERVER['HTTP_REFERER'] );
 		exit;
 	}
