@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 ## [2019.01]
 
 * Added a meta importer CLI command.
+* Replaced the Pimple Dumper with a container exporter to work with recent versions of PhpStorm
 
 ## [2018.12]
 
