@@ -11,7 +11,6 @@ use Tribe\Project\CLI\Settings_Generator;
 use Tribe\Project\CLI\CPT_Generator;
 use Tribe\Project\CLI\File_System;
 use Tribe\Project\CLI\Meta\Importer;
-use Tribe\Project\CLI\Pimple_Dump;
 use Tribe\Project\CLI\Queues\Add_Tasks;
 use Tribe\Project\CLI\Queues\Cleanup;
 use Tribe\Project\CLI\Queues\Process;
