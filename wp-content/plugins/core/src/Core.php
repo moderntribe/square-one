@@ -2,7 +2,7 @@
 
 namespace Tribe\Project;
 
-use Pimple\Container;
+use Tribe\Project\Container\Container;
 use Tribe\Libs\Functions\Function_Includer;
 use Tribe\Project\Service_Providers\Admin_Provider;
 use Tribe\Project\Service_Providers\Asset_Provider;

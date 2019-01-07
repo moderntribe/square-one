@@ -4,7 +4,7 @@
 namespace Tribe\Project\Service_Providers;
 
 use Pimple\Container;
-use Pimple\ServiceProviderInterface;
+use Tribe\Project\Container\Service_Provider;
 use Tribe\Project\CLI\CLI_Generator;
 use Tribe\Project\CLI\Settings_Generator;
 use Tribe\Project\CLI\CPT_Generator;
@@ -19,7 +19,7 @@ use Tribe\Project\CLI\Cache_Prime;
 use Tribe\Project\CLI\Queues\List_Queues;
 use Tribe\Project\CLI\Queues\MySQL_Table;
 
-class CLI_Provider implements ServiceProviderInterface {
+class CLI_Provider extends Service_Provider {
 	const PIMPLE           = 'cli.pimple_dump';
 	const CACHE_PRIME      = 'cli.cache-prime';
 	const FILE_SYSTEM      = 'cli.file_system';

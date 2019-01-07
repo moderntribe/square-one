@@ -2,7 +2,7 @@
 
 namespace Tribe\Project\CLI;
 
-use Pimple\Container;
+use Tribe\Project\Container\Container;
 use JBZoo\PimpleDumper\PimpleDumper;
 
 class Pimple_Dump extends Command {
