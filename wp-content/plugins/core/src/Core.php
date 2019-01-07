@@ -33,7 +33,7 @@ class Core {
 
 	protected static $_instance;
 
-	/** @var Container\Container */
+	/** @var \Pimple\Container */
 	protected $container = null;
 
 	/**
@@ -42,9 +42,9 @@ class Core {
 	private $providers = [];
 
 	/**
-	 * @param Container\Container $container
+	 * @param \Pimple\Container $container
 	 */
-	public function __construct( Container\Container $container ) {
+	public function __construct( \Pimple\Container $container ) {
 		$this->container = $container;
 	}
 

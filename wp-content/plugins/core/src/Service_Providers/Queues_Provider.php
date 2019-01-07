@@ -38,11 +38,11 @@ class Queues_Provider extends Service_Provider {
 			return new Queue_Collection();
 		};
 
-		if( ! defined( 'DISABLE_WP_CRON' ) || false === DISABLE_WP_CRON ) {
-			$container[ self::CRON ] = function ( $container ) {
-				return new Cron();
-			};
+		$container[ self::CRON ] = function ( $container ) {
+			return new Cron();
+		};
 
+		if( ! defined( 'DISABLE_WP_CRON' ) || false === DISABLE_WP_CRON ) {
 			add_filter( 'cron_schedules', function ( $schedules ) use ( $container ) {
 				return $container[ self::CRON ]->add_interval( $schedules );
 			}, 10, 1 );
