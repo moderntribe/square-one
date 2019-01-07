@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 
 * Fixed: gitignore entry for Tribe 301 plugin
 * Added the Blog Copier
+* Fixed failing test for Full_Size_Gif
 
 ## [2018.11]
 
