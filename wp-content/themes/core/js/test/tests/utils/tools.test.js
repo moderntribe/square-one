@@ -6,13 +6,16 @@ describe('addClass', () => {
 	it('returns false if null or undefined is passed', () => {
 		const nullCheck = tools.addClass(null, divClass);
 		const undefinedCheck = tools.addClass(undefined, divClass);
+
 		expect(nullCheck).toBe(false);
 		expect(undefinedCheck).toBe(false);
 	});
 
 	it('adds a className to an elements classList', () => {
 		const div = document.createElement('div');
+
 		tools.addClass(div, divClass);
+
 		expect(div.classList.contains(divClass)).toBe(true);
 	});
 });
@@ -36,12 +39,15 @@ describe('getChildren', () => {
 describe('hasClass', () => {
 	it('confirms a class exists on a dom node', () => {
 		const div = document.createElement('div');
+
 		div.classList.add('test');
 
 		expect(tools.hasClass(div, 'test')).toBe(true);
 	});
 
-	it('returns false if el does not exist', () => expect(tools.hasClass(null, 'test')).toBe(false));
+	it('returns false if el does not exist', () => {
+		expect(tools.hasClass(null, 'test')).toBe(false)
+	});
 });
 
 describe('removeClass', () => {
@@ -50,14 +56,17 @@ describe('removeClass', () => {
 	it('returns false if null or undefined is passed', () => {
 		const nullCheck = tools.removeClass(null, divClass);
 		const undefinedCheck = tools.removeClass(undefined, divClass);
+
 		expect(nullCheck).toBe(false);
 		expect(undefinedCheck).toBe(false);
 	});
 
 	it('adds a className to an elements classList', () => {
 		const div = document.createElement('div');
+
 		div.classList.add(divClass);
 		tools.removeClass(div, divClass);
+
 		expect(div.classList.contains(divClass)).toBe(false);
 	});
 });
@@ -88,6 +97,7 @@ describe('getNodes', () => {
 
 	child1.setAttribute('data-js', attributeKey);
 	child1.classList.add(classKey);
+
 	child2.setAttribute('data-js', attributeKey);
 	child2.classList.add(classKey);
 
@@ -101,12 +111,14 @@ describe('getNodes', () => {
 
 	it('gets multiple nodes by attribute', () => {
 		const nodes = tools.getNodes(attributeKey, false, parent);
+
 		expect(nodes).toBeDefined();
 		expect(nodes.length).toBe(2);
 	});
 
 	it('gets multiple nodes by attribute and converts them to an array', () => {
 		const nodes = tools.getNodes(attributeKey, true, parent);
+
 		expect(nodes).toBeDefined();
 		expect(nodes.length).toBe(2);
 		expect(nodes instanceof Array).toBe(true);
@@ -114,6 +126,7 @@ describe('getNodes', () => {
 
 	it('gets multiple nodes by css selector string', () => {
 		const nodes = tools.getNodes(`.${classKey}`, false, parent, true);
+
 		expect(nodes).toBeDefined();
 		expect(nodes.length).toBe(2);
 	});
@@ -148,6 +161,7 @@ describe('insertAfter', () => {
 
 		child2.classList.add('test');
 		tools.insertAfter(child2, child1);
+
 		const nodes = parent.querySelectorAll('div');
 
 		expect(nodes[1].classList.contains('test')).toBe(true);
@@ -164,6 +178,7 @@ describe('insertBefore', () => {
 
 		child2.classList.add('test');
 		tools.insertBefore(child2, child1);
+
 		const nodes = parent.querySelectorAll('div');
 
 		expect(nodes[0].classList.contains('test')).toBe(true);

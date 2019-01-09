@@ -51,4 +51,44 @@ class File_System {
 		return file_get_contents( $path );
 	}
 
+	/**
+	 * Thanks stackoverflow.
+	 * gist: https://gist.github.com/stemar/bb7c5cd2614b21b624bf57608f995ac0
+	 *
+	 * @param     $array
+	 * @param int $internal_indent
+	 *
+	 * @return mixed
+	 */
+	public function format_array_for_file( $array, $array_indent = 0, $internal_indent = 4 ) {
+		$object = json_decode( str_replace( [ '(', ')' ], [
+			'&#40',
+			'&#41',
+		], json_encode( $array ) ), true );
+		$export = str_replace( [ 'array (', ')', '&#40', '&#41' ], [
+			'[',
+			']',
+			'(',
+			')',
+		], var_export( $object, true ) );
+		$export = preg_replace( "/ => \n[^\S\n]*\[/m", ' => [', $export );
+		$export = preg_replace( "/ => \[\n[^\S\n]*\]/m", ' => []', $export );
+		$spaces = str_repeat( ' ', $internal_indent );
+		$export = preg_replace( "/([ ]{2})(?![^ ])/m", $spaces, $export );
+		$export = preg_replace( "/^([ ]{2})/m", $spaces, $export );
+
+		$lines = explode( PHP_EOL, $export );
+		$export = '';
+
+		foreach ( $lines as $line ) {
+			$export .= str_repeat( ' ', $array_indent ) . $line . PHP_EOL;
+		}
+
+		return $export;
+	}
+
+	public function constant_from_class( $class_name ) {
+		return strtoupper( str_replace( '_', '', $class_name ) );
+	}
+
 }

@@ -2,17 +2,25 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2019.01]
+
+* Added a meta importer CLI command.
+* Replaced the Pimple Dumper with a container exporter to work with recent versions of PhpStorm
+* Fixed: Set explicit charset and collation for queues MySQL table
+* Fixed: Handled invalid records in the queue table, avoiding a fatal error
+
 ## [2018.12]
 
 * Fixed: gitignore entry for Tribe 301 plugin
-* Fixed: Set explicit charset and collation for queues MySQL table
-* Fixed: Handled invalid records in the queue table, avoiding a fatal error
+* Added the Blog Copier
+* Fixed failing test for Full_Size_Gif
 
 ## [2018.11]
 
 * Fixed: Nginx config to properly pull missing assets (images/js/css/media etc...) from a remote server so you don't need to download large uploads folders.
 * Changed: Cleaned up the `CLI_Provider`
 * Changed: Introduced the `Generator_Command` abstract class for generator commands, so that we don't need all commands following the same constructor.
+* Added: the following JavaScript unit tests: accessibility.test, apply-browser-classes.test, body-lock.test
 
 ## [2018.10]
 

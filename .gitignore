@@ -123,3 +123,4 @@ dev/docker/composer-config.json
 dev/docker/composer-cache/
 dev/docker/global/.env
 /.gitmodules
+/dev/bin/wp
