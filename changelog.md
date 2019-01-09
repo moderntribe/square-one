@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 ## [2019.01]
 
 * Added a meta importer CLI command.
+* Fixed: Add sintax hightlight for docs with code examples
 * Replaced the Pimple Dumper with a container exporter to work with recent versions of PhpStorm
 * Fixed: Set explicit charset and collation for queues MySQL table
 * Fixed: Handled invalid records in the queue table, avoiding a fatal error
