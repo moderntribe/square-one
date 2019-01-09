@@ -2,7 +2,7 @@
 
 ## Setup
 
-1. Create a database called `aaa_tests` (you don't need to populate it with anything)
+1. Create a database called `tribe_square1_tests` (you don't need to populate it with anything)
 1. In the root of this whole repo, copy `tests-config-sample.php` to `tests-config.php`
 1. `cd dev/tests`
 1. Run `sh ./composer.sh install`
