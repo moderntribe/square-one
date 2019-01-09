@@ -53,7 +53,7 @@
     "wpackagist-plugin/posts-to-posts": "1.6.5",
     "wpackagist-plugin/regenerate-thumbnails": "3.0.2",
     "wpackagist-plugin/the-events-calendar": "4.6.11.1",
-    "wpackagist-plugin/wordpress-seo": "6.3.1",
+    "wpackagist-plugin/wordpress-seo": "9.4",
     "wpackagist-plugin/user-switching": "1.3.0",
     "wpackagist-plugin/classic-editor":"0.4",
     "wpackagist-plugin/classic-editor-addon":"2.0.0",
@@ -66,11 +66,17 @@
     "johnbillion/extended-cpts": "^4.0",
     "twig/twig": "^2.4",
     "jbzoo/pimpledumper": "^1.2",
-    "mailgun/mailgun-php": "^2.3",
+    "mailgun/mailgun-php": "^2.8",
     "php-http/curl-client": "^1.7",
+    "php-http/client-common": "^1.9.0",
     "guzzlehttp/psr7": "^1.4",
     "sunra/php-simple-html-dom-parser": "1.5.2",
-    "monolog/monolog":"1.23.0"
+    "monolog/monolog":"1.23.0",
+    "lucatume/wp-browser": "^2.2.0",
+    "wp-cli/wp-cli": "^1.5.1",
+    "lucatume/function-mocker": "~1.0",
+    "phpunit/phpunit": "^6",
+    "php-http/httplug": "^1.1"
   },
   "extra": {
     "wordpress-install-dir": "wp",
@@ -80,12 +86,19 @@
         "type:wordpress-plugin",
         "moderntribe/panel-builder"
       ],
-      "wp-content/plugins/s3-uploads": [ "humanmade/S3-Uploads" ]
+      "wp-content/plugins/s3-uploads": [ "humanmade/S3-Uploads" ],
+      "dev/tests/vendor": [
+        "lucatume/wp-browser",
+        "wp-cli/wp-cli",
+        "lucatume/function-mocker",
+        "phpunit/phpunit"
+      ]
     }
   },
   "autoload": {
     "psr-4": {
-      "Tribe\\Project\\":"wp-content/plugins/core/src"
+      "Tribe\\Project\\":"wp-content/plugins/core/src",
+      "WP_CLI\\": "vendor/wp-cli/wp-cli/php/WP_CLI"
     }
   }
 }

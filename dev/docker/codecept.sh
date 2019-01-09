@@ -30,4 +30,4 @@ cd "../../dev/tests";
 
 echo $PATH;
 
-PHP_IDE_CONFIG="serverName=${PROJECT_ID}.tribe" php -dxdebug.remote_autostart=1 -dxdebug.remote_host=host.tribe -dxdebug.remote_enable=1 vendor/bin/codecept "$@"
+PHP_IDE_CONFIG="serverName=${PROJECT_ID}.tribe" php -dxdebug.remote_autostart=1 -dxdebug.remote_host=host.tribe -dxdebug.remote_enable=1 ../../vendor/bin/codecept "$@"
