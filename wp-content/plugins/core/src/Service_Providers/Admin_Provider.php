@@ -5,11 +5,11 @@ namespace Tribe\Project\Service_Providers;
 
 
 use Pimple\Container;
-use Pimple\ServiceProviderInterface;
+use Tribe\Project\Container\Service_Provider;
 use Tribe\Project\Admin\Resources\Scripts;
 use Tribe\Project\Admin\Resources\Styles;
 
-class Admin_Provider implements ServiceProviderInterface {
+class Admin_Provider extends Service_Provider {
 
 	public function register( Container $container ) {
 		$this->scripts( $container );

@@ -5,7 +5,7 @@ namespace Tribe\Project\Service_Providers;
 
 
 use Pimple\Container;
-use Pimple\ServiceProviderInterface;
+use Tribe\Project\Container\Service_Provider;
 use Tribe\Project\Blog_Copier\Copy_Configuration;
 use Tribe\Project\Blog_Copier\Copy_Manager;
 use Tribe\Project\Blog_Copier\Network_Admin_Screen;
@@ -22,7 +22,7 @@ use Tribe\Project\Blog_Copier\Tasks\Replace_Tables;
 use Tribe\Project\Blog_Copier\Tasks\Replace_Urls;
 use Tribe\Project\Blog_Copier\Tasks\Send_Notifications;
 
-class Blog_Copier_Provider implements ServiceProviderInterface {
+class Blog_Copier_Provider extends Service_Provider {
 	const ADMIN_SCREEN       = 'blog_copier.admin_screen';
 	const MANAGER            = 'blog_copier.manager';
 	const CHAIN              = 'blog_copier.chain';

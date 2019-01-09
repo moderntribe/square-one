@@ -4,13 +4,13 @@
 namespace Tribe\Project\Service_Providers;
 
 use Pimple\Container;
-use Pimple\ServiceProviderInterface;
+use Tribe\Project\CLI\Container_Export;
+use Tribe\Project\Container\Service_Provider;
 use Tribe\Project\CLI\CLI_Generator;
 use Tribe\Project\CLI\Settings_Generator;
 use Tribe\Project\CLI\CPT_Generator;
 use Tribe\Project\CLI\File_System;
 use Tribe\Project\CLI\Meta\Importer;
-use Tribe\Project\CLI\Pimple_Dump;
 use Tribe\Project\CLI\Queues\Add_Tasks;
 use Tribe\Project\CLI\Queues\Cleanup;
 use Tribe\Project\CLI\Queues\Process;
@@ -19,9 +19,9 @@ use Tribe\Project\CLI\Cache_Prime;
 use Tribe\Project\CLI\Queues\List_Queues;
 use Tribe\Project\CLI\Queues\MySQL_Table;
 
-class CLI_Provider implements ServiceProviderInterface {
-	const PIMPLE           = 'cli.pimple_dump';
+class CLI_Provider extends Service_Provider {
 	const CACHE_PRIME      = 'cli.cache-prime';
+	const CONTAINER_EXPORT = 'cli.container_export';
 	const FILE_SYSTEM      = 'cli.file_system';
 	const GENERATE_CPT     = 'cli.generator.cpt';
 	const GENERATE_TAX     = 'cli.generator.taxonomy';
@@ -38,8 +38,8 @@ class CLI_Provider implements ServiceProviderInterface {
 		$this->generators( $container );
 		$this->queues( $container );
 
-		$container[ self::PIMPLE ] = function ( $container ) {
-			return new Pimple_Dump( $container );
+		$container[ self::CONTAINER_EXPORT ] = function ( $container ) {
+			return new Container_Export( tribe_project() );
 		};
 
 		$container[ self::CACHE_PRIME ] = function () {
@@ -51,7 +51,7 @@ class CLI_Provider implements ServiceProviderInterface {
 				return;
 			}
 
-			$container[ self::PIMPLE ]->register();
+			$container[ self::CONTAINER_EXPORT ]->register();
 			$container[ self::CACHE_PRIME ]->register();
 			$container[ self::GENERATE_CPT ]->register();
 			$container[ self::GENERATE_TAX ]->register();
@@ -61,8 +61,8 @@ class CLI_Provider implements ServiceProviderInterface {
 			$container[ self::QUEUES_ADD_TABLE ]->register();
 			$container[ self::QUEUES_CLEANUP ]->register();
 			$container[ self::QUEUES_PROCESS ]->register();
-			$container[ self::QUEUES_ADD_TASK]->register();
-			$container[self::GENERATE_META]->register();
+			$container[ self::QUEUES_ADD_TASK ]->register();
+			$container[ self::GENERATE_META ]->register();
 		}, 0, 0 );
 	}
 
@@ -109,7 +109,7 @@ class CLI_Provider implements ServiceProviderInterface {
 			return new Settings_Generator( $container[ self::FILE_SYSTEM ] );
 		};
 
-		$container[self::GENERATE_META] = function ( $container ) {
+		$container[ self::GENERATE_META ] = function ( $container ) {
 			return new Importer( $container[ self::FILE_SYSTEM ] );
 		};
 	}

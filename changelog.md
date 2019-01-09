@@ -6,11 +6,15 @@ All notable changes to this project will be documented in this file.
 
 * Added a meta importer CLI command.
 * Fixed: Add sintax hightlight for docs with code examples
+* Replaced the Pimple Dumper with a container exporter to work with recent versions of PhpStorm
+* Fixed: Set explicit charset and collation for queues MySQL table
+* Fixed: Handled invalid records in the queue table, avoiding a fatal error
 
 ## [2018.12]
 
 * Fixed: gitignore entry for Tribe 301 plugin
 * Added the Blog Copier
+* Fixed failing test for Full_Size_Gif
 
 ## [2018.11]
 

@@ -5,12 +5,12 @@ namespace Tribe\Project\Service_Providers;
 
 
 use Pimple\Container;
-use Pimple\ServiceProviderInterface;
+use Tribe\Project\Container\Service_Provider;
 use Tribe\Libs\Cache\Cache;
 use Tribe\Libs\Cache\Purger;
 use Tribe\Project\Cache\Listener;
 
-class Cache_Provider implements ServiceProviderInterface {
+class Cache_Provider extends Service_Provider {
 
 	public function register( Container $container ) {
 
