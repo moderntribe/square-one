@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
 * Replaced the Pimple Dumper with a container exporter to work with recent versions of PhpStorm
 * Fixed: Set explicit charset and collation for queues MySQL table
 * Fixed: Handled invalid records in the queue table, avoiding a fatal error
+* Modified: Test Suite configuration by moving it to the dev directory and consolidating composer management.
 
 ## [2018.12]
 
