@@ -11,4 +11,4 @@
 
 ### Pro-tips
 
-Set up an alias in your `.bashrc` or `.zshrc` file as follows: `alias codecept="vendor/codeception/codeception/codecept"`
+Set up an alias in your `.bashrc` or `.zshrc` file as follows: `alias tribetest="dev/docker/exec.sh /application/www/dev/docker/codecept.sh run""`
