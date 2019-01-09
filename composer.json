@@ -72,7 +72,9 @@
     "guzzlehttp/psr7": "^1.4",
     "sunra/php-simple-html-dom-parser": "1.5.2",
     "monolog/monolog":"1.23.0",
-    "lucatume/wp-browser": "^2.2.0",
+    "lucatume/wp-browser": "^2.2.0"
+  },
+  "require-dev": {
     "wp-cli/wp-cli": "^1.5.1",
     "lucatume/function-mocker": "~1.0",
     "phpunit/phpunit": "^6",
@@ -86,19 +88,12 @@
         "type:wordpress-plugin",
         "moderntribe/panel-builder"
       ],
-      "wp-content/plugins/s3-uploads": [ "humanmade/S3-Uploads" ],
-      "dev/tests/vendor": [
-        "lucatume/wp-browser",
-        "wp-cli/wp-cli",
-        "lucatume/function-mocker",
-        "phpunit/phpunit"
-      ]
+      "wp-content/plugins/s3-uploads": [ "humanmade/S3-Uploads" ]
     }
   },
   "autoload": {
     "psr-4": {
-      "Tribe\\Project\\":"wp-content/plugins/core/src",
-      "WP_CLI\\": "vendor/wp-cli/wp-cli/php/WP_CLI"
+      "Tribe\\Project\\":"wp-content/plugins/core/src"
     }
   }
 }
