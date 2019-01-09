@@ -4,14 +4,14 @@
 namespace Tribe\Project\Service_Providers;
 
 use Pimple\Container;
-use Pimple\ServiceProviderInterface;
+use Tribe\Project\Container\Service_Provider;
 use Tribe\Project\Queues\Backends\MySQL;
 use Tribe\Project\Queues\Backends\WP_Cache;
 use Tribe\Project\Queues\Cron;
 use Tribe\Project\Queues\DefaultQueue;
 use Tribe\Project\Queues\Queue_Collection;
 
-class Queues_Provider implements ServiceProviderInterface {
+class Queues_Provider extends Service_Provider {
 
 	const WP_CACHE      = 'queues.backend.wp_cache';
 	const MYSQL         = 'queues.backend.mysql';
@@ -38,11 +38,11 @@ class Queues_Provider implements ServiceProviderInterface {
 			return new Queue_Collection();
 		};
 
-		if( ! defined( 'DISABLE_WP_CRON' ) || false === DISABLE_WP_CRON ) {
-			$container[ self::CRON ] = function ( $container ) {
-				return new Cron();
-			};
+		$container[ self::CRON ] = function ( $container ) {
+			return new Cron();
+		};
 
+		if( ! defined( 'DISABLE_WP_CRON' ) || false === DISABLE_WP_CRON ) {
 			add_filter( 'cron_schedules', function ( $schedules ) use ( $container ) {
 				return $container[ self::CRON ]->add_interval( $schedules );
 			}, 10, 1 );

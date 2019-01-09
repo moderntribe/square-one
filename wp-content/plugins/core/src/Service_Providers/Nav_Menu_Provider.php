@@ -5,10 +5,10 @@ namespace Tribe\Project\Service_Providers;
 
 
 use Pimple\Container;
-use Pimple\ServiceProviderInterface;
+use Tribe\Project\Container\Service_Provider;
 use Tribe\Libs\Nav\Menu_Location;
 
-class Nav_Menu_Provider implements ServiceProviderInterface {
+class Nav_Menu_Provider extends Service_Provider {
 	const PRIMARY   = 'primary';
 	const SECONDARY = 'secondary';
 
