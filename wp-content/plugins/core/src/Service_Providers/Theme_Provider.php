@@ -5,7 +5,7 @@ namespace Tribe\Project\Service_Providers;
 
 
 use Pimple\Container;
-use Pimple\ServiceProviderInterface;
+use Tribe\Project\Container\Service_Provider;
 use Tribe\Project\Request\Request;
 use Tribe\Project\Request\Server;
 use Tribe\Project\Theme\Body_Classes;
@@ -27,7 +27,7 @@ use Tribe\Project\Theme\Resources\Third_Party_Tags;
 use Tribe\Project\Theme\Supports;
 use Tribe\Project\Theme\WP_Responsive_Image_Disabler;
 
-class Theme_Provider implements ServiceProviderInterface {
+class Theme_Provider extends Service_Provider {
 
 	private $typekit_id   = '';
 	private $google_fonts = [];

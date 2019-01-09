@@ -5,10 +5,10 @@ namespace Tribe\Project\Service_Providers;
 
 
 use Pimple\Container;
-use Pimple\ServiceProviderInterface;
+use Tribe\Project\Container\Service_Provider;
 use Tribe\Project\Panels;
 
-class Panels_Provider implements ServiceProviderInterface {
+class Panels_Provider extends Service_Provider {
 
 	protected $panels = [
 		Panels\Types\Hero::class,
