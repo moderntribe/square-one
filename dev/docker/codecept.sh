@@ -26,7 +26,7 @@ SCRIPTDIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 cd "$SCRIPTDIR";
 PROJECT_ID=$(cat ./.projectID)
 
-cd "../../wp-content/plugins/core-tests";
+cd "../../dev/tests";
 
 echo $PATH;
 

@@ -7,7 +7,7 @@ class RequestTest extends \Codeception\Test\Unit {
 	protected $tester;
 
 	public function testQuery() {
-		include_once( __DIR__ . '/../../../../../wp/wp-includes/class-wp-query.php' );
+		include_once( __DIR__ . '/../../../../wp/wp-includes/class-wp-query.php' );
 		$server_mock = $this->makeEmpty( Tribe\Project\Request\Server::class, [ 'get_query' => function () {
 			return new \WP_Query();
 		} ] );
