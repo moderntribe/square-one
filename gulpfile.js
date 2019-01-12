@@ -1,0 +1,135 @@
+const gulp = require( 'gulp' );
+const postcss = require( 'gulp-postcss' );
+const cssnano = require( 'gulp-cssnano' );
+const runSequence = require( 'run-sequence' );
+const gulpIf = require( 'gulp-if' );
+const sourcemaps = require( 'gulp-sourcemaps' );
+const eslint = require( 'gulp-eslint' );
+const rename = require( 'gulp-rename' );
+const shell = require( 'gulp-shell' );
+const stylelint = require( 'gulp-stylelint' );
+const browserSync = require( 'browser-sync' ).create();
+const { reload } = browserSync;
+let config = require('./local-config.json');
+
+if (!config) {
+	config = {
+		proxy: 'square1.tribe',
+		certs_path: '',
+	}
+}
+
+function isFixed( file ) {
+	return file.eslint != null && file.eslint.fixed;
+}
+
+gulp.task( 'scripts-dev', function() {
+	return gulp.src( '' )
+		.pipe( shell( 'yarn dev' ) )
+		.on( 'finish', reload );
+} );
+
+gulp.task( 'scripts-prod', function() {
+	return gulp.src( '' )
+		.pipe( shell( 'yarn prod' ) );
+} );
+
+gulp.task( 'postcss-dev', function() {
+	const plugins = [
+		require( 'postcss-partial-import' )( {
+			extension: '.pcss',
+		} ),
+		require( 'postcss-mixins' ),
+		require( 'postcss-custom-properties' ),
+		require( 'postcss-simple-vars' ),
+		require( 'postcss-custom-media' ),
+		require( 'postcss-quantity-queries' ),
+		require( 'postcss-aspect-ratio' ),
+		require( 'postcss-nested' ),
+		require( 'postcss-inline-svg' ),
+		require( 'postcss-preset-env' )( { stage: 0 } ),
+		require( 'postcss-calc' ),
+	];
+	return gulp.src( [ 'resources/assets/pcss/app.pcss' ] )
+		.pipe( sourcemaps.init() )
+		.pipe( postcss( plugins ) )
+		.pipe( rename( { extname: '.css' } ) )
+		.pipe( sourcemaps.write( '.' ) )
+		.pipe( gulp.dest( 'public/css' ) )
+		.pipe( reload( { stream: true } ) );
+} );
+
+gulp.task( 'postcss-prod', function() {
+	return gulp.src( [ 'public/css/app.css' ] )
+		.pipe( sourcemaps.init() )
+		.pipe( cssnano() )
+		.pipe( rename( 'app.min.css' ) )
+		.pipe( sourcemaps.write( '.' ) )
+		.pipe( gulp.dest( 'public/css' ) );
+} );
+
+gulp.task( 'scripts-lint', function() {
+	return gulp.src( [ 'resources/assets/js/**/*' ] )
+		.pipe( eslint( { fix: true } ) )
+		.pipe( eslint.format() )
+		.pipe( gulpIf( isFixed, gulp.dest( 'resources/assets/js' ) ) )
+		.pipe( eslint.format() )
+		.pipe( eslint.failAfterError() );
+} );
+
+gulp.task( 'postcss-lint', function() {
+	return gulp.src( 'resources/assets/pcss/**/*.pcss' )
+		.pipe( stylelint( {
+			fix: true,
+			reporters: [
+				{ formatter: 'string', console: true },
+			],
+		} ) )
+		.pipe( gulp.dest( 'resources/assets/pcss' ) );
+} );
+
+gulp.task( 'postcss-lint-js', function() {
+	return gulp.src( 'resources/assets/js/**/*.pcss' )
+		.pipe( stylelint( {
+			fix: true,
+			reporters: [
+				{ formatter: 'string', console: true },
+			],
+		} ) )
+		.pipe( gulp.dest( 'resources/assets/js' ) );
+} );
+
+gulp.task( 'watch', function() {
+	gulp.watch( [ 'resources/assets/js/**/*' ], [ 'scripts-dev' ] );
+	gulp.watch( [ 'resources/assets/pcss/**/*' ], [ 'postcss-dev' ] );
+} );
+
+gulp.task( 'dev', [
+	'watch',
+], function() {
+	browserSync.init( {
+		open: true,
+		debugInfo: true,
+		logConnections: true,
+		notify: true,
+		proxy: config.proxy,
+		ghostMode: {
+			scroll: true,
+			links: true,
+			forms: true,
+		},
+	} );
+} );
+
+gulp.task( 'dist', function( callback ) {
+	runSequence(
+		'postcss-lint',
+		'scripts-lint',
+		[ 'postcss-dev', 'postcss-prod' ],
+		'scripts-dev',
+		'scripts-prod',
+		callback,
+	);
+} );
+
+gulp.task( 'default', [ 'dist' ] );
