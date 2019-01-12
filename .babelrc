@@ -1,47 +1,71 @@
 {
   "presets": [
-    ["@babel/preset-env", {
-      "targets": {
-        "browsers": [
-          "Chrome 60",
-          "Firefox 54",
-          "Safari 8",
-          "ie 11",
-          "Edge 14",
-          "Android 4.4",
-          "ios 9"
-        ]
-      },
-      "useBuiltIns": "usage",
-      "modules": false
-    }]
+    "@babel/preset-react",
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "browsers": [
+            "Chrome 60",
+            "Firefox 54",
+            "Safari 8",
+            "ie 11",
+            "Edge 14",
+            "Android 4.4",
+            "ios 9"
+          ]
+        },
+        "useBuiltIns": "usage",
+        "modules": false
+      }
+    ]
   ],
   "plugins": [
+    "react-hot-loader/babel",
     "lodash",
+    ["module-resolver", {
+      "root": ["."],
+      "alias": {
+        "apps": "./wp-content/themes/core/js/src/apps",
+        "config": "./wp-content/themes/core/js/src/theme/config",
+        "common": "./wp-content/themes/core/js/src/apps/common",
+        "constants": "./wp-content/themes/core/js/src/apps/constants",
+        "Example": "./wp-content/themes/core/js/src/apps/Example",
+        "pcss": "./wp-content/themes/core/pcss",
+        "utils": "./wp-content/themes/core/js/src/utils"
+      }
+    }],
     "@babel/plugin-proposal-object-rest-spread",
     "@babel/plugin-syntax-dynamic-import",
-    "transform-object-assign"
+    "@babel/plugin-transform-regenerator",
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-transform-object-assign"
   ],
   "env": {
     "test": {
       "presets": [
-        ["@babel/preset-env", {
-          "targets": {
-            "browsers": [
-              "Chrome 60",
-              "Firefox 54",
-              "Safari 8",
-              "ie 11",
-              "Edge 14",
-              "Android 4.4",
-              "ios 9"
-            ]
-          },
-          "useBuiltIns": "usage",
-          "modules": "commonjs"
-        }]
+        [
+          "@babel/preset-env",
+          {
+            "targets": {
+              "browsers": [
+                "Chrome 60",
+                "Firefox 54",
+                "Safari 8",
+                "ie 11",
+                "Edge 14",
+                "Android 4.4",
+                "ios 9"
+              ]
+            },
+            "useBuiltIns": "usage",
+            "modules": "commonjs"
+          }
+        ]
       ],
-      "plugins": ["istanbul"]
+      "plugins": [
+        "istanbul"
+      ]
     }
   }
 }
