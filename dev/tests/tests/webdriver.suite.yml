@@ -9,6 +9,7 @@ modules:
         - WPDb
         - WPWebDriver
         - WPLoader
+        - Asserts
     config:
         WPDb:
             dsn: 'mysql:host=%DB_HOST%;dbname=%DB_NAME%'
