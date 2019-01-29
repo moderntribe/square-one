@@ -44,10 +44,12 @@ if ( file_exists( dirname( __FILE__ ) . '/build-process.php' ) ) {
 }
 
 // ==============================================================
-// Load database info and local development parameters
+// Conditionally load tests-config if the proper header or user agent is present
 // ==============================================================
 
-if ( file_exists( __DIR__ . '/local-config.php' ) ) {
+if ( ( isset( $_SERVER['HTTP_X_TRIBE_TESTING'] ) && file_exists( __DIR__ . '/tests-config.php' ) ) || ( isset( $_SERVER['HTTP_USER_AGENT'] ) && $_SERVER['HTTP_USER_AGENT'] === 'tribe-tester' &&  file_exists( __DIR__ . '/tests-config.php' ) ) ) {
+	include __DIR__ . '/tests-config.php';
+} elseif ( file_exists( __DIR__ . '/local-config.php' ) ) {
 	include __DIR__ . '/local-config.php';
 }
 
