@@ -41,5 +41,9 @@ modules:
             window_size: false
             wait: 5
             capabilities:
+                # Google changed this format in chromedriver 2.31
                 "goog:chromeOptions":
-                    args: ["--headless", "--disable-gpu", "--user-agent=tribe-tester"]
+                    args: ["--no-sandbox", "--headless", "--disable-gpu", "--user-agent=tribe-tester"]
+                # support the old format because it appears our selenium server doesn't recognize the new format
+                "chromeOptions":
+                    args: ["--no-sandbox", "--headless", "--disable-gpu", "--user-agent=tribe-tester"]
