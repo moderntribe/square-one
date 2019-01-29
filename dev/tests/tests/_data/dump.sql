@@ -1,33 +1,14 @@
--- phpMyAdmin SQL Dump
--- version 4.8.3
--- https://www.phpmyadmin.net/
---
--- Host: db
--- Generation Time: Jan 29, 2019 at 04:47 AM
--- Server version: 5.7.24
--- PHP Version: 7.2.8
-
 SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
-
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
---
--- Database: `tribe_square1_tests`
---
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tribe_commentmeta`
---
 
 DROP TABLE IF EXISTS `tribe_commentmeta`;
 CREATE TABLE `tribe_commentmeta` (
@@ -36,12 +17,6 @@ CREATE TABLE `tribe_commentmeta` (
   `meta_key` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `meta_value` longtext COLLATE utf8mb4_unicode_520_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tribe_comments`
---
 
 DROP TABLE IF EXISTS `tribe_comments`;
 CREATE TABLE `tribe_comments` (
@@ -62,12 +37,6 @@ CREATE TABLE `tribe_comments` (
   `user_id` bigint(20) UNSIGNED NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `tribe_links`
---
-
 DROP TABLE IF EXISTS `tribe_links`;
 CREATE TABLE `tribe_links` (
   `link_id` bigint(20) UNSIGNED NOT NULL,
@@ -85,12 +54,6 @@ CREATE TABLE `tribe_links` (
   `link_rss` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `tribe_options`
---
-
 DROP TABLE IF EXISTS `tribe_options`;
 CREATE TABLE `tribe_options` (
   `option_id` bigint(20) UNSIGNED NOT NULL,
@@ -98,10 +61,6 @@ CREATE TABLE `tribe_options` (
   `option_value` longtext COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `autoload` varchar(20) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT 'yes'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
-
---
--- Dumping data for table `tribe_options`
---
 
 INSERT INTO `tribe_options` (`option_id`, `option_name`, `option_value`, `autoload`) VALUES
 (2, 'siteurl', 'http://square1.tribe', 'yes'),
@@ -218,7 +177,7 @@ INSERT INTO `tribe_options` (`option_id`, `option_name`, `option_value`, `autolo
 (113, 'cron', 'a:3:{i:1548735692;a:4:{s:34:\"wp_privacy_delete_old_export_files\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:6:\"hourly\";s:4:\"args\";a:0:{}s:8:\"interval\";i:3600;}}s:16:\"wp_version_check\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:10:\"twicedaily\";s:4:\"args\";a:0:{}s:8:\"interval\";i:43200;}}s:17:\"wp_update_plugins\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:10:\"twicedaily\";s:4:\"args\";a:0:{}s:8:\"interval\";i:43200;}}s:16:\"wp_update_themes\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:10:\"twicedaily\";s:4:\"args\";a:0:{}s:8:\"interval\";i:43200;}}}i:1548737150;a:2:{s:19:\"wp_scheduled_delete\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:5:\"daily\";s:4:\"args\";a:0:{}s:8:\"interval\";i:86400;}}s:25:\"delete_expired_transients\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:5:\"daily\";s:4:\"args\";a:0:{}s:8:\"interval\";i:86400;}}}s:7:\"version\";i:2;}', 'yes'),
 (114, 'acf_version', '5.6.7', 'yes'),
 (115, '_site_transient_update_core', 'O:8:\"stdClass\":4:{s:7:\"updates\";a:4:{i:0;O:8:\"stdClass\":10:{s:8:\"response\";s:7:\"upgrade\";s:8:\"download\";s:59:\"https://downloads.wordpress.org/release/wordpress-5.0.3.zip\";s:6:\"locale\";s:5:\"en_US\";s:8:\"packages\";O:8:\"stdClass\":5:{s:4:\"full\";s:59:\"https://downloads.wordpress.org/release/wordpress-5.0.3.zip\";s:10:\"no_content\";s:70:\"https://downloads.wordpress.org/release/wordpress-5.0.3-no-content.zip\";s:11:\"new_bundled\";s:71:\"https://downloads.wordpress.org/release/wordpress-5.0.3-new-bundled.zip\";s:7:\"partial\";b:0;s:8:\"rollback\";b:0;}s:7:\"current\";s:5:\"5.0.3\";s:7:\"version\";s:5:\"5.0.3\";s:11:\"php_version\";s:5:\"5.2.4\";s:13:\"mysql_version\";s:3:\"5.0\";s:11:\"new_bundled\";s:3:\"5.0\";s:15:\"partial_version\";s:0:\"\";}i:1;O:8:\"stdClass\":11:{s:8:\"response\";s:10:\"autoupdate\";s:8:\"download\";s:59:\"https://downloads.wordpress.org/release/wordpress-5.0.3.zip\";s:6:\"locale\";s:5:\"en_US\";s:8:\"packages\";O:8:\"stdClass\":5:{s:4:\"full\";s:59:\"https://downloads.wordpress.org/release/wordpress-5.0.3.zip\";s:10:\"no_content\";s:70:\"https://downloads.wordpress.org/release/wordpress-5.0.3-no-content.zip\";s:11:\"new_bundled\";s:71:\"https://downloads.wordpress.org/release/wordpress-5.0.3-new-bundled.zip\";s:7:\"partial\";b:0;s:8:\"rollback\";b:0;}s:7:\"current\";s:5:\"5.0.3\";s:7:\"version\";s:5:\"5.0.3\";s:11:\"php_version\";s:5:\"5.2.4\";s:13:\"mysql_version\";s:3:\"5.0\";s:11:\"new_bundled\";s:3:\"5.0\";s:15:\"partial_version\";s:0:\"\";s:9:\"new_files\";s:1:\"1\";}i:2;O:8:\"stdClass\":11:{s:8:\"response\";s:10:\"autoupdate\";s:8:\"download\";s:59:\"https://downloads.wordpress.org/release/wordpress-5.0.2.zip\";s:6:\"locale\";s:5:\"en_US\";s:8:\"packages\";O:8:\"stdClass\":5:{s:4:\"full\";s:59:\"https://downloads.wordpress.org/release/wordpress-5.0.2.zip\";s:10:\"no_content\";s:70:\"https://downloads.wordpress.org/release/wordpress-5.0.2-no-content.zip\";s:11:\"new_bundled\";s:71:\"https://downloads.wordpress.org/release/wordpress-5.0.2-new-bundled.zip\";s:7:\"partial\";b:0;s:8:\"rollback\";b:0;}s:7:\"current\";s:5:\"5.0.2\";s:7:\"version\";s:5:\"5.0.2\";s:11:\"php_version\";s:5:\"5.2.4\";s:13:\"mysql_version\";s:3:\"5.0\";s:11:\"new_bundled\";s:3:\"5.0\";s:15:\"partial_version\";s:0:\"\";s:9:\"new_files\";s:1:\"1\";}i:3;O:8:\"stdClass\":11:{s:8:\"response\";s:10:\"autoupdate\";s:8:\"download\";s:59:\"https://downloads.wordpress.org/release/wordpress-4.9.9.zip\";s:6:\"locale\";s:5:\"en_US\";s:8:\"packages\";O:8:\"stdClass\":5:{s:4:\"full\";s:59:\"https://downloads.wordpress.org/release/wordpress-4.9.9.zip\";s:10:\"no_content\";s:70:\"https://downloads.wordpress.org/release/wordpress-4.9.9-no-content.zip\";s:11:\"new_bundled\";s:71:\"https://downloads.wordpress.org/release/wordpress-4.9.9-new-bundled.zip\";s:7:\"partial\";s:69:\"https://downloads.wordpress.org/release/wordpress-4.9.9-partial-8.zip\";s:8:\"rollback\";s:70:\"https://downloads.wordpress.org/release/wordpress-4.9.9-rollback-8.zip\";}s:7:\"current\";s:5:\"4.9.9\";s:7:\"version\";s:5:\"4.9.9\";s:11:\"php_version\";s:5:\"5.2.4\";s:13:\"mysql_version\";s:3:\"5.0\";s:11:\"new_bundled\";s:3:\"5.0\";s:15:\"partial_version\";s:5:\"4.9.8\";s:9:\"new_files\";s:0:\"\";}}s:12:\"last_checked\";i:1548737150;s:15:\"version_checked\";s:5:\"4.9.8\";s:12:\"translations\";a:0:{}}', 'no'),
-(116, '_site_transient_update_plugins', 'O:8:\"stdClass\":4:{s:12:\"last_checked\";i:1548737150;s:8:\"response\";a:7:{s:33:\"classic-editor/classic-editor.php\";O:8:\"stdClass\":12:{s:2:\"id\";s:28:\"w.org/plugins/classic-editor\";s:4:\"slug\";s:14:\"classic-editor\";s:6:\"plugin\";s:33:\"classic-editor/classic-editor.php\";s:11:\"new_version\";s:3:\"1.3\";s:3:\"url\";s:45:\"https://wordpress.org/plugins/classic-editor/\";s:7:\"package\";s:61:\"https://downloads.wordpress.org/plugin/classic-editor.1.3.zip\";s:5:\"icons\";a:2:{s:2:\"2x\";s:67:\"https://ps.w.org/classic-editor/assets/icon-256x256.png?rev=1998671\";s:2:\"1x\";s:67:\"https://ps.w.org/classic-editor/assets/icon-128x128.png?rev=1998671\";}s:7:\"banners\";a:2:{s:2:\"2x\";s:70:\"https://ps.w.org/classic-editor/assets/banner-1544x500.png?rev=1998671\";s:2:\"1x\";s:69:\"https://ps.w.org/classic-editor/assets/banner-772x250.png?rev=1998676\";}s:11:\"banners_rtl\";a:0:{}s:6:\"tested\";s:5:\"5.0.3\";s:12:\"requires_php\";s:5:\"5.2.4\";s:13:\"compatibility\";O:8:\"stdClass\":0:{}}s:45:\"classic-editor-addon/classic-editor-addon.php\";O:8:\"stdClass\":12:{s:2:\"id\";s:34:\"w.org/plugins/classic-editor-addon\";s:4:\"slug\";s:20:\"classic-editor-addon\";s:6:\"plugin\";s:45:\"classic-editor-addon/classic-editor-addon.php\";s:11:\"new_version\";s:5:\"2.4.0\";s:3:\"url\";s:51:\"https://wordpress.org/plugins/classic-editor-addon/\";s:7:\"package\";s:69:\"https://downloads.wordpress.org/plugin/classic-editor-addon.2.4.0.zip\";s:5:\"icons\";a:2:{s:2:\"2x\";s:73:\"https://ps.w.org/classic-editor-addon/assets/icon-256x256.png?rev=1910168\";s:2:\"1x\";s:73:\"https://ps.w.org/classic-editor-addon/assets/icon-256x256.png?rev=1910168\";}s:7:\"banners\";a:0:{}s:11:\"banners_rtl\";a:0:{}s:6:\"tested\";s:5:\"5.0.3\";s:12:\"requires_php\";s:3:\"5.4\";s:13:\"compatibility\";O:8:\"stdClass\":0:{}}s:47:\"regenerate-thumbnails/regenerate-thumbnails.php\";O:8:\"stdClass\":12:{s:2:\"id\";s:35:\"w.org/plugins/regenerate-thumbnails\";s:4:\"slug\";s:21:\"regenerate-thumbnails\";s:6:\"plugin\";s:47:\"regenerate-thumbnails/regenerate-thumbnails.php\";s:11:\"new_version\";s:5:\"3.1.0\";s:3:\"url\";s:52:\"https://wordpress.org/plugins/regenerate-thumbnails/\";s:7:\"package\";s:64:\"https://downloads.wordpress.org/plugin/regenerate-thumbnails.zip\";s:5:\"icons\";a:1:{s:2:\"1x\";s:74:\"https://ps.w.org/regenerate-thumbnails/assets/icon-128x128.png?rev=1753390\";}s:7:\"banners\";a:2:{s:2:\"2x\";s:77:\"https://ps.w.org/regenerate-thumbnails/assets/banner-1544x500.jpg?rev=1753390\";s:2:\"1x\";s:76:\"https://ps.w.org/regenerate-thumbnails/assets/banner-772x250.jpg?rev=1753390\";}s:11:\"banners_rtl\";a:0:{}s:6:\"tested\";s:5:\"5.0.2\";s:12:\"requires_php\";s:5:\"5.2.4\";s:13:\"compatibility\";O:8:\"stdClass\":0:{}}s:43:\"the-events-calendar/the-events-calendar.php\";O:8:\"stdClass\":12:{s:2:\"id\";s:33:\"w.org/plugins/the-events-calendar\";s:4:\"slug\";s:19:\"the-events-calendar\";s:6:\"plugin\";s:43:\"the-events-calendar/the-events-calendar.php\";s:11:\"new_version\";s:5:\"4.7.4\";s:3:\"url\";s:50:\"https://wordpress.org/plugins/the-events-calendar/\";s:7:\"package\";s:68:\"https://downloads.wordpress.org/plugin/the-events-calendar.4.7.4.zip\";s:5:\"icons\";a:2:{s:2:\"2x\";s:72:\"https://ps.w.org/the-events-calendar/assets/icon-256x256.png?rev=1679210\";s:2:\"1x\";s:72:\"https://ps.w.org/the-events-calendar/assets/icon-128x128.png?rev=1679210\";}s:7:\"banners\";a:2:{s:2:\"2x\";s:75:\"https://ps.w.org/the-events-calendar/assets/banner-1544x500.png?rev=1907269\";s:2:\"1x\";s:74:\"https://ps.w.org/the-events-calendar/assets/banner-772x250.png?rev=1907269\";}s:11:\"banners_rtl\";a:0:{}s:6:\"tested\";s:5:\"5.0.3\";s:12:\"requires_php\";s:5:\"5.2.4\";s:13:\"compatibility\";O:8:\"stdClass\":0:{}}s:33:\"user-switching/user-switching.php\";O:8:\"stdClass\":12:{s:2:\"id\";s:28:\"w.org/plugins/user-switching\";s:4:\"slug\";s:14:\"user-switching\";s:6:\"plugin\";s:33:\"user-switching/user-switching.php\";s:11:\"new_version\";s:5:\"1.4.0\";s:3:\"url\";s:45:\"https://wordpress.org/plugins/user-switching/\";s:7:\"package\";s:63:\"https://downloads.wordpress.org/plugin/user-switching.1.4.0.zip\";s:5:\"icons\";a:2:{s:2:\"2x\";s:66:\"https://ps.w.org/user-switching/assets/icon-256x256.png?rev=979685\";s:2:\"1x\";s:66:\"https://ps.w.org/user-switching/assets/icon-128x128.png?rev=979685\";}s:7:\"banners\";a:2:{s:2:\"2x\";s:70:\"https://ps.w.org/user-switching/assets/banner-1544x500.png?rev=1364546\";s:2:\"1x\";s:69:\"https://ps.w.org/user-switching/assets/banner-772x250.png?rev=1216665\";}s:11:\"banners_rtl\";a:1:{s:2:\"2x\";s:74:\"https://ps.w.org/user-switching/assets/banner-1544x500-rtl.png?rev=1364546\";}s:6:\"tested\";s:5:\"4.9.8\";s:12:\"requires_php\";s:3:\"5.3\";s:13:\"compatibility\";O:8:\"stdClass\":0:{}}s:24:\"wordpress-seo/wp-seo.php\";O:8:\"stdClass\":12:{s:2:\"id\";s:27:\"w.org/plugins/wordpress-seo\";s:4:\"slug\";s:13:\"wordpress-seo\";s:6:\"plugin\";s:24:\"wordpress-seo/wp-seo.php\";s:11:\"new_version\";s:3:\"9.5\";s:3:\"url\";s:44:\"https://wordpress.org/plugins/wordpress-seo/\";s:7:\"package\";s:60:\"https://downloads.wordpress.org/plugin/wordpress-seo.9.5.zip\";s:5:\"icons\";a:3:{s:2:\"2x\";s:66:\"https://ps.w.org/wordpress-seo/assets/icon-256x256.png?rev=1834347\";s:2:\"1x\";s:58:\"https://ps.w.org/wordpress-seo/assets/icon.svg?rev=1946641\";s:3:\"svg\";s:58:\"https://ps.w.org/wordpress-seo/assets/icon.svg?rev=1946641\";}s:7:\"banners\";a:2:{s:2:\"2x\";s:69:\"https://ps.w.org/wordpress-seo/assets/banner-1544x500.png?rev=1843435\";s:2:\"1x\";s:68:\"https://ps.w.org/wordpress-seo/assets/banner-772x250.png?rev=1843435\";}s:11:\"banners_rtl\";a:2:{s:2:\"2x\";s:73:\"https://ps.w.org/wordpress-seo/assets/banner-1544x500-rtl.png?rev=1843435\";s:2:\"1x\";s:72:\"https://ps.w.org/wordpress-seo/assets/banner-772x250-rtl.png?rev=1843435\";}s:6:\"tested\";s:5:\"5.0.3\";s:12:\"requires_php\";s:5:\"5.2.4\";s:13:\"compatibility\";O:8:\"stdClass\":0:{}}s:34:\"advanced-custom-fields-pro/acf.php\";O:8:\"stdClass\":8:{s:4:\"slug\";s:26:\"advanced-custom-fields-pro\";s:6:\"plugin\";s:34:\"advanced-custom-fields-pro/acf.php\";s:11:\"new_version\";s:6:\"5.7.10\";s:3:\"url\";s:37:\"https://www.advancedcustomfields.com/\";s:6:\"tested\";s:5:\"4.9.9\";s:7:\"package\";s:0:\"\";s:5:\"icons\";a:1:{s:7:\"default\";s:63:\"https://ps.w.org/advanced-custom-fields/assets/icon-256x256.png\";}s:7:\"banners\";a:1:{s:7:\"default\";s:66:\"https://ps.w.org/advanced-custom-fields/assets/banner-1544x500.jpg\";}}}s:12:\"translations\";a:0:{}s:9:\"no_update\";a:4:{s:33:\"configure-smtp/configure-smtp.php\";O:8:\"stdClass\":9:{s:2:\"id\";s:28:\"w.org/plugins/configure-smtp\";s:4:\"slug\";s:14:\"configure-smtp\";s:6:\"plugin\";s:33:\"configure-smtp/configure-smtp.php\";s:11:\"new_version\";s:3:\"3.1\";s:3:\"url\";s:45:\"https://wordpress.org/plugins/configure-smtp/\";s:7:\"package\";s:61:\"https://downloads.wordpress.org/plugin/configure-smtp.3.1.zip\";s:5:\"icons\";a:1:{s:7:\"default\";s:58:\"https://s.w.org/plugins/geopattern-icon/configure-smtp.svg\";}s:7:\"banners\";a:0:{}s:11:\"banners_rtl\";a:0:{}}s:45:\"limit-login-attempts/limit-login-attempts.php\";O:8:\"stdClass\":9:{s:2:\"id\";s:34:\"w.org/plugins/limit-login-attempts\";s:4:\"slug\";s:20:\"limit-login-attempts\";s:6:\"plugin\";s:45:\"limit-login-attempts/limit-login-attempts.php\";s:11:\"new_version\";s:5:\"1.7.1\";s:3:\"url\";s:51:\"https://wordpress.org/plugins/limit-login-attempts/\";s:7:\"package\";s:69:\"https://downloads.wordpress.org/plugin/limit-login-attempts.1.7.1.zip\";s:5:\"icons\";a:1:{s:7:\"default\";s:64:\"https://s.w.org/plugins/geopattern-icon/limit-login-attempts.svg\";}s:7:\"banners\";a:0:{}s:11:\"banners_rtl\";a:0:{}}s:33:\"posts-to-posts/posts-to-posts.php\";O:8:\"stdClass\":9:{s:2:\"id\";s:28:\"w.org/plugins/posts-to-posts\";s:4:\"slug\";s:14:\"posts-to-posts\";s:6:\"plugin\";s:33:\"posts-to-posts/posts-to-posts.php\";s:11:\"new_version\";s:5:\"1.6.5\";s:3:\"url\";s:45:\"https://wordpress.org/plugins/posts-to-posts/\";s:7:\"package\";s:63:\"https://downloads.wordpress.org/plugin/posts-to-posts.1.6.5.zip\";s:5:\"icons\";a:1:{s:7:\"default\";s:65:\"https://s.w.org/plugins/geopattern-icon/posts-to-posts_7a8e9d.svg\";}s:7:\"banners\";a:1:{s:2:\"1x\";s:68:\"https://ps.w.org/posts-to-posts/assets/banner-772x250.jpg?rev=480983\";}s:11:\"banners_rtl\";a:0:{}}s:77:\"gravity-forms-wcag-20-form-fields/gravity_forms_wcag20_form_fields_plugin.php\";O:8:\"stdClass\":9:{s:2:\"id\";s:47:\"w.org/plugins/gravity-forms-wcag-20-form-fields\";s:4:\"slug\";s:33:\"gravity-forms-wcag-20-form-fields\";s:6:\"plugin\";s:77:\"gravity-forms-wcag-20-form-fields/gravity_forms_wcag20_form_fields_plugin.php\";s:11:\"new_version\";s:5:\"1.6.0\";s:3:\"url\";s:64:\"https://wordpress.org/plugins/gravity-forms-wcag-20-form-fields/\";s:7:\"package\";s:76:\"https://downloads.wordpress.org/plugin/gravity-forms-wcag-20-form-fields.zip\";s:5:\"icons\";a:1:{s:2:\"1x\";s:86:\"https://ps.w.org/gravity-forms-wcag-20-form-fields/assets/icon-128x128.png?rev=1734679\";}s:7:\"banners\";a:1:{s:2:\"1x\";s:88:\"https://ps.w.org/gravity-forms-wcag-20-form-fields/assets/banner-772x250.png?rev=1734686\";}s:11:\"banners_rtl\";a:0:{}}}}', 'no'),
+(116, '_site_transient_update_plugins', 'O:8:\"stdClass\":5:{s:12:\"last_checked\";i:1548737387;s:7:\"checked\";a:21:{s:34:\"advanced-custom-fields-pro/acf.php\";s:5:\"5.6.7\";s:33:\"classic-editor/classic-editor.php\";s:3:\"0.4\";s:45:\"classic-editor-addon/classic-editor-addon.php\";s:5:\"2.0.0\";s:33:\"configure-smtp/configure-smtp.php\";s:3:\"3.1\";s:29:\"gravityforms/gravityforms.php\";s:8:\"2.2.3.16\";s:31:\"tribe-json-ld/tribe-json-ld.php\";s:3:\"1.0\";s:45:\"limit-login-attempts/limit-login-attempts.php\";s:8:\"2.0beta3\";s:13:\"core/core.php\";s:3:\"1.0\";s:33:\"posts-to-posts/posts-to-posts.php\";s:5:\"1.6.5\";s:47:\"regenerate-thumbnails/regenerate-thumbnails.php\";s:5:\"3.0.2\";s:25:\"s3-uploads/s3-uploads.php\";s:5:\"1.1.0\";s:27:\"term-sorter/term-sorter.php\";s:3:\"1.0\";s:43:\"the-events-calendar/the-events-calendar.php\";s:8:\"4.6.11.1\";s:43:\"tribe-301-redirects/tribe-301-redirects.php\";s:1:\"2\";s:47:\"tribe-admin-dashboard/tribe-admin-dashboard.php\";s:3:\"1.0\";s:33:\"tribe-branding/tribe-branding.php\";s:3:\"2.0\";s:29:\"tribe-glomar/tribe-glomar.php\";s:5:\"1.0.4\";s:37:\"panel-builder/tribe-panel-builder.php\";s:3:\"3.3\";s:33:\"user-switching/user-switching.php\";s:5:\"1.3.0\";s:77:\"gravity-forms-wcag-20-form-fields/gravity_forms_wcag20_form_fields_plugin.php\";s:5:\"1.6.0\";s:24:\"wordpress-seo/wp-seo.php\";s:3:\"9.4\";}s:8:\"response\";a:7:{s:33:\"classic-editor/classic-editor.php\";O:8:\"stdClass\":12:{s:2:\"id\";s:28:\"w.org/plugins/classic-editor\";s:4:\"slug\";s:14:\"classic-editor\";s:6:\"plugin\";s:33:\"classic-editor/classic-editor.php\";s:11:\"new_version\";s:3:\"1.3\";s:3:\"url\";s:45:\"https://wordpress.org/plugins/classic-editor/\";s:7:\"package\";s:61:\"https://downloads.wordpress.org/plugin/classic-editor.1.3.zip\";s:5:\"icons\";a:2:{s:2:\"2x\";s:67:\"https://ps.w.org/classic-editor/assets/icon-256x256.png?rev=1998671\";s:2:\"1x\";s:67:\"https://ps.w.org/classic-editor/assets/icon-128x128.png?rev=1998671\";}s:7:\"banners\";a:2:{s:2:\"2x\";s:70:\"https://ps.w.org/classic-editor/assets/banner-1544x500.png?rev=1998671\";s:2:\"1x\";s:69:\"https://ps.w.org/classic-editor/assets/banner-772x250.png?rev=1998676\";}s:11:\"banners_rtl\";a:0:{}s:6:\"tested\";s:5:\"5.0.3\";s:12:\"requires_php\";s:5:\"5.2.4\";s:13:\"compatibility\";O:8:\"stdClass\":0:{}}s:45:\"classic-editor-addon/classic-editor-addon.php\";O:8:\"stdClass\":12:{s:2:\"id\";s:34:\"w.org/plugins/classic-editor-addon\";s:4:\"slug\";s:20:\"classic-editor-addon\";s:6:\"plugin\";s:45:\"classic-editor-addon/classic-editor-addon.php\";s:11:\"new_version\";s:5:\"2.4.0\";s:3:\"url\";s:51:\"https://wordpress.org/plugins/classic-editor-addon/\";s:7:\"package\";s:69:\"https://downloads.wordpress.org/plugin/classic-editor-addon.2.4.0.zip\";s:5:\"icons\";a:2:{s:2:\"2x\";s:73:\"https://ps.w.org/classic-editor-addon/assets/icon-256x256.png?rev=1910168\";s:2:\"1x\";s:73:\"https://ps.w.org/classic-editor-addon/assets/icon-256x256.png?rev=1910168\";}s:7:\"banners\";a:0:{}s:11:\"banners_rtl\";a:0:{}s:6:\"tested\";s:5:\"5.0.3\";s:12:\"requires_php\";s:3:\"5.4\";s:13:\"compatibility\";O:8:\"stdClass\":0:{}}s:47:\"regenerate-thumbnails/regenerate-thumbnails.php\";O:8:\"stdClass\":12:{s:2:\"id\";s:35:\"w.org/plugins/regenerate-thumbnails\";s:4:\"slug\";s:21:\"regenerate-thumbnails\";s:6:\"plugin\";s:47:\"regenerate-thumbnails/regenerate-thumbnails.php\";s:11:\"new_version\";s:5:\"3.1.0\";s:3:\"url\";s:52:\"https://wordpress.org/plugins/regenerate-thumbnails/\";s:7:\"package\";s:64:\"https://downloads.wordpress.org/plugin/regenerate-thumbnails.zip\";s:5:\"icons\";a:1:{s:2:\"1x\";s:74:\"https://ps.w.org/regenerate-thumbnails/assets/icon-128x128.png?rev=1753390\";}s:7:\"banners\";a:2:{s:2:\"2x\";s:77:\"https://ps.w.org/regenerate-thumbnails/assets/banner-1544x500.jpg?rev=1753390\";s:2:\"1x\";s:76:\"https://ps.w.org/regenerate-thumbnails/assets/banner-772x250.jpg?rev=1753390\";}s:11:\"banners_rtl\";a:0:{}s:6:\"tested\";s:5:\"5.0.2\";s:12:\"requires_php\";s:5:\"5.2.4\";s:13:\"compatibility\";O:8:\"stdClass\":0:{}}s:43:\"the-events-calendar/the-events-calendar.php\";O:8:\"stdClass\":12:{s:2:\"id\";s:33:\"w.org/plugins/the-events-calendar\";s:4:\"slug\";s:19:\"the-events-calendar\";s:6:\"plugin\";s:43:\"the-events-calendar/the-events-calendar.php\";s:11:\"new_version\";s:5:\"4.7.4\";s:3:\"url\";s:50:\"https://wordpress.org/plugins/the-events-calendar/\";s:7:\"package\";s:68:\"https://downloads.wordpress.org/plugin/the-events-calendar.4.7.4.zip\";s:5:\"icons\";a:2:{s:2:\"2x\";s:72:\"https://ps.w.org/the-events-calendar/assets/icon-256x256.png?rev=1679210\";s:2:\"1x\";s:72:\"https://ps.w.org/the-events-calendar/assets/icon-128x128.png?rev=1679210\";}s:7:\"banners\";a:2:{s:2:\"2x\";s:75:\"https://ps.w.org/the-events-calendar/assets/banner-1544x500.png?rev=1907269\";s:2:\"1x\";s:74:\"https://ps.w.org/the-events-calendar/assets/banner-772x250.png?rev=1907269\";}s:11:\"banners_rtl\";a:0:{}s:6:\"tested\";s:5:\"5.0.3\";s:12:\"requires_php\";s:5:\"5.2.4\";s:13:\"compatibility\";O:8:\"stdClass\":0:{}}s:33:\"user-switching/user-switching.php\";O:8:\"stdClass\":12:{s:2:\"id\";s:28:\"w.org/plugins/user-switching\";s:4:\"slug\";s:14:\"user-switching\";s:6:\"plugin\";s:33:\"user-switching/user-switching.php\";s:11:\"new_version\";s:5:\"1.4.0\";s:3:\"url\";s:45:\"https://wordpress.org/plugins/user-switching/\";s:7:\"package\";s:63:\"https://downloads.wordpress.org/plugin/user-switching.1.4.0.zip\";s:5:\"icons\";a:2:{s:2:\"2x\";s:66:\"https://ps.w.org/user-switching/assets/icon-256x256.png?rev=979685\";s:2:\"1x\";s:66:\"https://ps.w.org/user-switching/assets/icon-128x128.png?rev=979685\";}s:7:\"banners\";a:2:{s:2:\"2x\";s:70:\"https://ps.w.org/user-switching/assets/banner-1544x500.png?rev=1364546\";s:2:\"1x\";s:69:\"https://ps.w.org/user-switching/assets/banner-772x250.png?rev=1216665\";}s:11:\"banners_rtl\";a:1:{s:2:\"2x\";s:74:\"https://ps.w.org/user-switching/assets/banner-1544x500-rtl.png?rev=1364546\";}s:6:\"tested\";s:5:\"4.9.8\";s:12:\"requires_php\";s:3:\"5.3\";s:13:\"compatibility\";O:8:\"stdClass\":0:{}}s:24:\"wordpress-seo/wp-seo.php\";O:8:\"stdClass\":12:{s:2:\"id\";s:27:\"w.org/plugins/wordpress-seo\";s:4:\"slug\";s:13:\"wordpress-seo\";s:6:\"plugin\";s:24:\"wordpress-seo/wp-seo.php\";s:11:\"new_version\";s:3:\"9.5\";s:3:\"url\";s:44:\"https://wordpress.org/plugins/wordpress-seo/\";s:7:\"package\";s:60:\"https://downloads.wordpress.org/plugin/wordpress-seo.9.5.zip\";s:5:\"icons\";a:3:{s:2:\"2x\";s:66:\"https://ps.w.org/wordpress-seo/assets/icon-256x256.png?rev=1834347\";s:2:\"1x\";s:58:\"https://ps.w.org/wordpress-seo/assets/icon.svg?rev=1946641\";s:3:\"svg\";s:58:\"https://ps.w.org/wordpress-seo/assets/icon.svg?rev=1946641\";}s:7:\"banners\";a:2:{s:2:\"2x\";s:69:\"https://ps.w.org/wordpress-seo/assets/banner-1544x500.png?rev=1843435\";s:2:\"1x\";s:68:\"https://ps.w.org/wordpress-seo/assets/banner-772x250.png?rev=1843435\";}s:11:\"banners_rtl\";a:2:{s:2:\"2x\";s:73:\"https://ps.w.org/wordpress-seo/assets/banner-1544x500-rtl.png?rev=1843435\";s:2:\"1x\";s:72:\"https://ps.w.org/wordpress-seo/assets/banner-772x250-rtl.png?rev=1843435\";}s:6:\"tested\";s:5:\"5.0.3\";s:12:\"requires_php\";s:5:\"5.2.4\";s:13:\"compatibility\";O:8:\"stdClass\":0:{}}s:34:\"advanced-custom-fields-pro/acf.php\";O:8:\"stdClass\":8:{s:4:\"slug\";s:26:\"advanced-custom-fields-pro\";s:6:\"plugin\";s:34:\"advanced-custom-fields-pro/acf.php\";s:11:\"new_version\";s:6:\"5.7.10\";s:3:\"url\";s:37:\"https://www.advancedcustomfields.com/\";s:6:\"tested\";s:5:\"4.9.9\";s:7:\"package\";s:0:\"\";s:5:\"icons\";a:1:{s:7:\"default\";s:63:\"https://ps.w.org/advanced-custom-fields/assets/icon-256x256.png\";}s:7:\"banners\";a:1:{s:7:\"default\";s:66:\"https://ps.w.org/advanced-custom-fields/assets/banner-1544x500.jpg\";}}}s:12:\"translations\";a:0:{}s:9:\"no_update\";a:4:{s:33:\"configure-smtp/configure-smtp.php\";O:8:\"stdClass\":9:{s:2:\"id\";s:28:\"w.org/plugins/configure-smtp\";s:4:\"slug\";s:14:\"configure-smtp\";s:6:\"plugin\";s:33:\"configure-smtp/configure-smtp.php\";s:11:\"new_version\";s:3:\"3.1\";s:3:\"url\";s:45:\"https://wordpress.org/plugins/configure-smtp/\";s:7:\"package\";s:61:\"https://downloads.wordpress.org/plugin/configure-smtp.3.1.zip\";s:5:\"icons\";a:1:{s:7:\"default\";s:58:\"https://s.w.org/plugins/geopattern-icon/configure-smtp.svg\";}s:7:\"banners\";a:0:{}s:11:\"banners_rtl\";a:0:{}}s:45:\"limit-login-attempts/limit-login-attempts.php\";O:8:\"stdClass\":9:{s:2:\"id\";s:34:\"w.org/plugins/limit-login-attempts\";s:4:\"slug\";s:20:\"limit-login-attempts\";s:6:\"plugin\";s:45:\"limit-login-attempts/limit-login-attempts.php\";s:11:\"new_version\";s:5:\"1.7.1\";s:3:\"url\";s:51:\"https://wordpress.org/plugins/limit-login-attempts/\";s:7:\"package\";s:69:\"https://downloads.wordpress.org/plugin/limit-login-attempts.1.7.1.zip\";s:5:\"icons\";a:1:{s:7:\"default\";s:64:\"https://s.w.org/plugins/geopattern-icon/limit-login-attempts.svg\";}s:7:\"banners\";a:0:{}s:11:\"banners_rtl\";a:0:{}}s:33:\"posts-to-posts/posts-to-posts.php\";O:8:\"stdClass\":9:{s:2:\"id\";s:28:\"w.org/plugins/posts-to-posts\";s:4:\"slug\";s:14:\"posts-to-posts\";s:6:\"plugin\";s:33:\"posts-to-posts/posts-to-posts.php\";s:11:\"new_version\";s:5:\"1.6.5\";s:3:\"url\";s:45:\"https://wordpress.org/plugins/posts-to-posts/\";s:7:\"package\";s:63:\"https://downloads.wordpress.org/plugin/posts-to-posts.1.6.5.zip\";s:5:\"icons\";a:1:{s:7:\"default\";s:65:\"https://s.w.org/plugins/geopattern-icon/posts-to-posts_7a8e9d.svg\";}s:7:\"banners\";a:1:{s:2:\"1x\";s:68:\"https://ps.w.org/posts-to-posts/assets/banner-772x250.jpg?rev=480983\";}s:11:\"banners_rtl\";a:0:{}}s:77:\"gravity-forms-wcag-20-form-fields/gravity_forms_wcag20_form_fields_plugin.php\";O:8:\"stdClass\":9:{s:2:\"id\";s:47:\"w.org/plugins/gravity-forms-wcag-20-form-fields\";s:4:\"slug\";s:33:\"gravity-forms-wcag-20-form-fields\";s:6:\"plugin\";s:77:\"gravity-forms-wcag-20-form-fields/gravity_forms_wcag20_form_fields_plugin.php\";s:11:\"new_version\";s:5:\"1.6.0\";s:3:\"url\";s:64:\"https://wordpress.org/plugins/gravity-forms-wcag-20-form-fields/\";s:7:\"package\";s:76:\"https://downloads.wordpress.org/plugin/gravity-forms-wcag-20-form-fields.zip\";s:5:\"icons\";a:1:{s:2:\"1x\";s:86:\"https://ps.w.org/gravity-forms-wcag-20-form-fields/assets/icon-128x128.png?rev=1734679\";}s:7:\"banners\";a:1:{s:2:\"1x\";s:88:\"https://ps.w.org/gravity-forms-wcag-20-form-fields/assets/banner-772x250.png?rev=1734686\";}s:11:\"banners_rtl\";a:0:{}}}}', 'no'),
 (117, '_site_transient_timeout_theme_roots', '1548738951', 'no'),
 (118, '_site_transient_theme_roots', 'a:1:{s:4:\"core\";s:7:\"/themes\";}', 'no'),
 (119, '_site_transient_update_themes', 'O:8:\"stdClass\":4:{s:12:\"last_checked\";i:1548737152;s:7:\"checked\";a:1:{s:4:\"core\";s:3:\"1.0\";}s:8:\"response\";a:0:{}s:12:\"translations\";a:0:{}}', 'no'),
@@ -241,15 +200,13 @@ INSERT INTO `tribe_options` (`option_id`, `option_name`, `option_value`, `autolo
 (136, '_transient_dash_v2_88ae138922fe95674369b1cb3d215a2b', '<div class=\"rss-widget\"><ul><li><a class=\'rsswidget\' href=\'https://wordpress.org/news/2019/01/wordpress-5-1-beta-2/\'>WordPress 5.1 Beta 2</a></li></ul></div><div class=\"rss-widget\"><ul><li><a class=\'rsswidget\' href=\'https://ma.tt/2019/01/39-books-in-2018/\'>Matt: 39 Books in 2018</a></li><li><a class=\'rsswidget\' href=\'https://poststatus.com/an-interview-with-ernst-jan-pfauth-of-de-correspondent/\'>Post Status: An Interview with Ernst-Jan Pfauth of De Correspondent</a></li><li><a class=\'rsswidget\' href=\'https://wptavern.com/wpweekly-episode-344-introduction-to-the-wordpress-governance-project\'>WPTavern: WPWeekly Episode 344 – Introduction to the WordPress Governance Project</a></li></ul></div>', 'no'),
 (137, 'theme_mods_twentyseventeen', 'a:1:{s:16:\"sidebars_widgets\";a:2:{s:4:\"time\";i:1548737160;s:4:\"data\";a:4:{s:19:\"wp_inactive_widgets\";a:0:{}s:9:\"sidebar-1\";a:6:{i:0;s:8:\"search-2\";i:1;s:14:\"recent-posts-2\";i:2;s:17:\"recent-comments-2\";i:3;s:10:\"archives-2\";i:4;s:12:\"categories-2\";i:5;s:6:\"meta-2\";}s:9:\"sidebar-2\";a:0:{}s:9:\"sidebar-3\";a:0:{}}}}', 'yes'),
 (138, 'current_theme', 'Your Clients Name', 'yes'),
-(139, 'theme_mods_core', 'a:3:{i:0;b:0;s:18:\"nav_menu_locations\";a:0:{}s:16:\"sidebars_widgets\";a:2:{s:4:\"time\";i:1548737166;s:4:\"data\";a:1:{s:19:\"wp_inactive_widgets\";a:6:{i:0;s:8:\"search-2\";i:1;s:14:\"recent-posts-2\";i:2;s:17:\"recent-comments-2\";i:3;s:10:\"archives-2\";i:4;s:12:\"categories-2\";i:5;s:6:\"meta-2\";}}}}', 'yes'),
+(139, 'theme_mods_core', 'a:4:{i:0;b:0;s:18:\"nav_menu_locations\";a:0:{}s:16:\"sidebars_widgets\";a:2:{s:4:\"time\";i:1548737166;s:4:\"data\";a:1:{s:19:\"wp_inactive_widgets\";a:6:{i:0;s:8:\"search-2\";i:1;s:14:\"recent-posts-2\";i:2;s:17:\"recent-comments-2\";i:3;s:10:\"archives-2\";i:4;s:12:\"categories-2\";i:5;s:6:\"meta-2\";}}}s:18:\"custom_css_post_id\";i:-1;}', 'yes'),
 (140, 'theme_switched', '', 'yes'),
-(143, 'permalink_structure', '/%postname%/', 'yes');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tribe_p2p`
---
+(143, 'permalink_structure', '/%postname%/', 'yes'),
+(146, 'tribe_cache_group_keys', 'a:1:{s:14:\"tribe_nav_menu\";s:24:\"tribe_nav_menu1548737301\";}', 'yes'),
+(147, '_transient_timeout_plugin_slugs', '1548823788', 'no'),
+(148, '_transient_plugin_slugs', 'a:21:{i:0;s:34:\"advanced-custom-fields-pro/acf.php\";i:1;s:33:\"classic-editor/classic-editor.php\";i:2;s:45:\"classic-editor-addon/classic-editor-addon.php\";i:3;s:33:\"configure-smtp/configure-smtp.php\";i:4;s:29:\"gravityforms/gravityforms.php\";i:5;s:31:\"tribe-json-ld/tribe-json-ld.php\";i:6;s:45:\"limit-login-attempts/limit-login-attempts.php\";i:7;s:13:\"core/core.php\";i:8;s:33:\"posts-to-posts/posts-to-posts.php\";i:9;s:47:\"regenerate-thumbnails/regenerate-thumbnails.php\";i:10;s:25:\"s3-uploads/s3-uploads.php\";i:11;s:27:\"term-sorter/term-sorter.php\";i:12;s:43:\"the-events-calendar/the-events-calendar.php\";i:13;s:43:\"tribe-301-redirects/tribe-301-redirects.php\";i:14;s:47:\"tribe-admin-dashboard/tribe-admin-dashboard.php\";i:15;s:33:\"tribe-branding/tribe-branding.php\";i:16;s:29:\"tribe-glomar/tribe-glomar.php\";i:17;s:37:\"panel-builder/tribe-panel-builder.php\";i:18;s:33:\"user-switching/user-switching.php\";i:19;s:77:\"gravity-forms-wcag-20-form-fields/gravity_forms_wcag20_form_fields_plugin.php\";i:20;s:24:\"wordpress-seo/wp-seo.php\";}', 'no'),
+(149, 'recently_activated', 'a:0:{}', 'yes');
 
 DROP TABLE IF EXISTS `tribe_p2p`;
 CREATE TABLE `tribe_p2p` (
@@ -259,12 +216,6 @@ CREATE TABLE `tribe_p2p` (
   `p2p_type` varchar(44) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `tribe_p2pmeta`
---
-
 DROP TABLE IF EXISTS `tribe_p2pmeta`;
 CREATE TABLE `tribe_p2pmeta` (
   `meta_id` bigint(20) UNSIGNED NOT NULL,
@@ -273,12 +224,6 @@ CREATE TABLE `tribe_p2pmeta` (
   `meta_value` longtext COLLATE utf8mb4_unicode_520_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `tribe_postmeta`
---
-
 DROP TABLE IF EXISTS `tribe_postmeta`;
 CREATE TABLE `tribe_postmeta` (
   `meta_id` bigint(20) UNSIGNED NOT NULL,
@@ -286,12 +231,6 @@ CREATE TABLE `tribe_postmeta` (
   `meta_key` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `meta_value` longtext COLLATE utf8mb4_unicode_520_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tribe_posts`
---
 
 DROP TABLE IF EXISTS `tribe_posts`;
 CREATE TABLE `tribe_posts` (
@@ -320,19 +259,6 @@ CREATE TABLE `tribe_posts` (
   `comment_count` bigint(20) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
---
--- Dumping data for table `tribe_posts`
---
-
-INSERT INTO `tribe_posts` (`ID`, `post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_title`, `post_excerpt`, `post_status`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_content_filtered`, `post_parent`, `guid`, `menu_order`, `post_type`, `post_mime_type`, `comment_count`) VALUES
-(1, 1, '2019-01-29 04:45:52', '0000-00-00 00:00:00', '', 'Auto Draft', '', 'auto-draft', 'open', 'open', '', '', '', '', '2019-01-29 04:45:52', '0000-00-00 00:00:00', '', 0, 'http://square1.tribe/?p=1', 0, 'post', '', 0);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tribe_queue`
---
-
 DROP TABLE IF EXISTS `tribe_queue`;
 CREATE TABLE `tribe_queue` (
   `id` bigint(20) UNSIGNED NOT NULL,
@@ -345,12 +271,6 @@ CREATE TABLE `tribe_queue` (
   `done` int(10) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `tribe_termmeta`
---
-
 DROP TABLE IF EXISTS `tribe_termmeta`;
 CREATE TABLE `tribe_termmeta` (
   `meta_id` bigint(20) UNSIGNED NOT NULL,
@@ -358,12 +278,6 @@ CREATE TABLE `tribe_termmeta` (
   `meta_key` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `meta_value` longtext COLLATE utf8mb4_unicode_520_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tribe_terms`
---
 
 DROP TABLE IF EXISTS `tribe_terms`;
 CREATE TABLE `tribe_terms` (
@@ -373,18 +287,8 @@ CREATE TABLE `tribe_terms` (
   `term_group` bigint(10) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
---
--- Dumping data for table `tribe_terms`
---
-
 INSERT INTO `tribe_terms` (`term_id`, `name`, `slug`, `term_group`) VALUES
 (1, 'Uncategorized', 'uncategorized', 0);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tribe_term_relationships`
---
 
 DROP TABLE IF EXISTS `tribe_term_relationships`;
 CREATE TABLE `tribe_term_relationships` (
@@ -392,12 +296,6 @@ CREATE TABLE `tribe_term_relationships` (
   `term_taxonomy_id` bigint(20) UNSIGNED NOT NULL DEFAULT '0',
   `term_order` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tribe_term_taxonomy`
---
 
 DROP TABLE IF EXISTS `tribe_term_taxonomy`;
 CREATE TABLE `tribe_term_taxonomy` (
@@ -409,18 +307,8 @@ CREATE TABLE `tribe_term_taxonomy` (
   `count` bigint(20) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
---
--- Dumping data for table `tribe_term_taxonomy`
---
-
 INSERT INTO `tribe_term_taxonomy` (`term_taxonomy_id`, `term_id`, `taxonomy`, `description`, `parent`, `count`) VALUES
 (1, 1, 'category', '', 0, 0);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tribe_usermeta`
---
 
 DROP TABLE IF EXISTS `tribe_usermeta`;
 CREATE TABLE `tribe_usermeta` (
@@ -429,10 +317,6 @@ CREATE TABLE `tribe_usermeta` (
   `meta_key` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `meta_value` longtext COLLATE utf8mb4_unicode_520_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
-
---
--- Dumping data for table `tribe_usermeta`
---
 
 INSERT INTO `tribe_usermeta` (`umeta_id`, `user_id`, `meta_key`, `meta_value`) VALUES
 (1, 1, 'nickname', 'admin'),
@@ -454,12 +338,6 @@ INSERT INTO `tribe_usermeta` (`umeta_id`, `user_id`, `meta_key`, `meta_value`) V
 (17, 1, 'tribe_dashboard_quick_press_last_post_id', '1'),
 (18, 1, 'community-events-location', 'a:1:{s:2:\"ip\";s:11:\"172.20.10.0\";}');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `tribe_users`
---
-
 DROP TABLE IF EXISTS `tribe_users`;
 CREATE TABLE `tribe_users` (
   `ID` bigint(20) UNSIGNED NOT NULL,
@@ -474,28 +352,15 @@ CREATE TABLE `tribe_users` (
   `display_name` varchar(250) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
---
--- Dumping data for table `tribe_users`
---
-
 INSERT INTO `tribe_users` (`ID`, `user_login`, `user_pass`, `user_nicename`, `user_email`, `user_url`, `user_registered`, `user_activation_key`, `user_status`, `display_name`) VALUES
 (1, 'admin', '$P$BwgIbQC3wQBDSbzgDsxB./nObczKN20', 'admin', 'admin@example.org', '', '2019-01-29 04:21:31', '', 0, 'admin');
 
---
--- Indexes for dumped tables
---
 
---
--- Indexes for table `tribe_commentmeta`
---
 ALTER TABLE `tribe_commentmeta`
   ADD PRIMARY KEY (`meta_id`),
   ADD KEY `comment_id` (`comment_id`),
   ADD KEY `meta_key` (`meta_key`(191));
 
---
--- Indexes for table `tribe_comments`
---
 ALTER TABLE `tribe_comments`
   ADD PRIMARY KEY (`comment_ID`),
   ADD KEY `comment_post_ID` (`comment_post_ID`),
@@ -504,48 +369,30 @@ ALTER TABLE `tribe_comments`
   ADD KEY `comment_parent` (`comment_parent`),
   ADD KEY `comment_author_email` (`comment_author_email`(10));
 
---
--- Indexes for table `tribe_links`
---
 ALTER TABLE `tribe_links`
   ADD PRIMARY KEY (`link_id`),
   ADD KEY `link_visible` (`link_visible`);
 
---
--- Indexes for table `tribe_options`
---
 ALTER TABLE `tribe_options`
   ADD PRIMARY KEY (`option_id`),
   ADD UNIQUE KEY `option_name` (`option_name`);
 
---
--- Indexes for table `tribe_p2p`
---
 ALTER TABLE `tribe_p2p`
   ADD PRIMARY KEY (`p2p_id`),
   ADD KEY `p2p_from` (`p2p_from`),
   ADD KEY `p2p_to` (`p2p_to`),
   ADD KEY `p2p_type` (`p2p_type`);
 
---
--- Indexes for table `tribe_p2pmeta`
---
 ALTER TABLE `tribe_p2pmeta`
   ADD PRIMARY KEY (`meta_id`),
   ADD KEY `p2p_id` (`p2p_id`),
   ADD KEY `meta_key` (`meta_key`);
 
---
--- Indexes for table `tribe_postmeta`
---
 ALTER TABLE `tribe_postmeta`
   ADD PRIMARY KEY (`meta_id`),
   ADD KEY `post_id` (`post_id`),
   ADD KEY `meta_key` (`meta_key`(191));
 
---
--- Indexes for table `tribe_posts`
---
 ALTER TABLE `tribe_posts`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `post_name` (`post_name`(191)),
@@ -553,145 +400,79 @@ ALTER TABLE `tribe_posts`
   ADD KEY `post_parent` (`post_parent`),
   ADD KEY `post_author` (`post_author`);
 
---
--- Indexes for table `tribe_queue`
---
 ALTER TABLE `tribe_queue`
   ADD PRIMARY KEY (`id`);
 
---
--- Indexes for table `tribe_termmeta`
---
 ALTER TABLE `tribe_termmeta`
   ADD PRIMARY KEY (`meta_id`),
   ADD KEY `term_id` (`term_id`),
   ADD KEY `meta_key` (`meta_key`(191));
 
---
--- Indexes for table `tribe_terms`
---
 ALTER TABLE `tribe_terms`
   ADD PRIMARY KEY (`term_id`),
   ADD KEY `slug` (`slug`(191)),
   ADD KEY `name` (`name`(191));
 
---
--- Indexes for table `tribe_term_relationships`
---
 ALTER TABLE `tribe_term_relationships`
   ADD PRIMARY KEY (`object_id`,`term_taxonomy_id`),
   ADD KEY `term_taxonomy_id` (`term_taxonomy_id`);
 
---
--- Indexes for table `tribe_term_taxonomy`
---
 ALTER TABLE `tribe_term_taxonomy`
   ADD PRIMARY KEY (`term_taxonomy_id`),
   ADD UNIQUE KEY `term_id_taxonomy` (`term_id`,`taxonomy`),
   ADD KEY `taxonomy` (`taxonomy`);
 
---
--- Indexes for table `tribe_usermeta`
---
 ALTER TABLE `tribe_usermeta`
   ADD PRIMARY KEY (`umeta_id`),
   ADD KEY `user_id` (`user_id`),
   ADD KEY `meta_key` (`meta_key`(191));
 
---
--- Indexes for table `tribe_users`
---
 ALTER TABLE `tribe_users`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `user_login_key` (`user_login`),
   ADD KEY `user_nicename` (`user_nicename`),
   ADD KEY `user_email` (`user_email`);
 
---
--- AUTO_INCREMENT for dumped tables
---
 
---
--- AUTO_INCREMENT for table `tribe_commentmeta`
---
 ALTER TABLE `tribe_commentmeta`
   MODIFY `meta_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT for table `tribe_comments`
---
 ALTER TABLE `tribe_comments`
   MODIFY `comment_ID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT for table `tribe_links`
---
 ALTER TABLE `tribe_links`
   MODIFY `link_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT for table `tribe_options`
---
 ALTER TABLE `tribe_options`
-  MODIFY `option_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=146;
+  MODIFY `option_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=150;
 
---
--- AUTO_INCREMENT for table `tribe_p2p`
---
 ALTER TABLE `tribe_p2p`
   MODIFY `p2p_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT for table `tribe_p2pmeta`
---
 ALTER TABLE `tribe_p2pmeta`
   MODIFY `meta_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT for table `tribe_postmeta`
---
 ALTER TABLE `tribe_postmeta`
   MODIFY `meta_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT for table `tribe_posts`
---
 ALTER TABLE `tribe_posts`
-  MODIFY `ID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
---
--- AUTO_INCREMENT for table `tribe_queue`
---
 ALTER TABLE `tribe_queue`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT for table `tribe_termmeta`
---
 ALTER TABLE `tribe_termmeta`
   MODIFY `meta_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT for table `tribe_terms`
---
 ALTER TABLE `tribe_terms`
   MODIFY `term_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
---
--- AUTO_INCREMENT for table `tribe_term_taxonomy`
---
 ALTER TABLE `tribe_term_taxonomy`
   MODIFY `term_taxonomy_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
---
--- AUTO_INCREMENT for table `tribe_usermeta`
---
 ALTER TABLE `tribe_usermeta`
   MODIFY `umeta_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
---
--- AUTO_INCREMENT for table `tribe_users`
---
 ALTER TABLE `tribe_users`
   MODIFY `ID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 SET FOREIGN_KEY_CHECKS=1;
