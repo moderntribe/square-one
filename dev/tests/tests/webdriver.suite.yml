@@ -1,0 +1,45 @@
+# This is a sample as to how to use tribe-chrome to drive your acceptance tests
+
+# Any tests that require JavaScript should use the chrome driver, and a separate suite should be created for them
+# Ensure you pass the user-agent "tribe-tester" otherwise tests-config.php won't be loaded properly
+class_name: AcceptanceTester
+modules:
+    enabled:
+        - \Helper\Acceptance
+        - WPDb
+        - WPWebDriver
+        - WPLoader
+    config:
+        WPDb:
+            dsn: 'mysql:host=%DB_HOST%;dbname=%DB_NAME%'
+            user: %DB_USER%
+            password: %DB_PASSWORD%
+            dump: tests/_data/dump.sql
+            populate: true
+            cleanup: false
+            url: '%WP_URL%'
+            tablePrefix: %TABLE_PREFIX%
+            urlReplacement: false
+            populator: 'mysql --max_allowed_packet=512M -u $user -h $host -p$password $dbname < $dump'
+        WPLoader:
+            #multisite: true
+            loadOnly: true
+            wpRootFolder: %WP_ROOT_FOLDER%
+            dbName: %DB_NAME%
+            dbHost: %DB_HOST%
+            dbUser: %DB_USER%
+            dbPassword: '%DB_PASSWORD%'
+            configFile: tests-config.php
+        WPWebDriver:
+            url: '%WP_URL%'
+            adminUsername: '%WP_ADMIN_USERNAME%'
+            adminPassword: '%WP_ADMIN_PASSWORD%'
+            adminPath: '%WP_ADMIN_PATH%'
+            browser: chrome
+            host: chrome.tribe
+            port: 4444
+            window_size: false
+            wait: 5
+            capabilities:
+                "goog:chromeOptions":
+                    args: ["--headless", "--disable-gpu", "--user-agent=tribe-tester"]
