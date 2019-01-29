@@ -20,3 +20,5 @@ params:
     - .env
 settings:
     bootstrap: _bootstrap.php
+    colors: true
+    memory_limit: 1024M
