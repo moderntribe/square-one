@@ -124,3 +124,7 @@ dev/docker/composer-cache/
 dev/docker/global/.env
 /.gitmodules
 /dev/bin/wp
+
+# Testing #
+#######################
+!dev/tests/tests/_data/*.sql
