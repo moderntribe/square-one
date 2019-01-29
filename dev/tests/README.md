@@ -15,3 +15,13 @@ standalone image to power chromedriver for acceptance tests that need to use Jav
 ### Pro-tips
 
 Set up an alias in your `.bashrc` or `.zshrc` file as follows: `alias tribetestintegration="dev/docker/exec.sh /application/www/dev/docker/codecept.sh run integration"`. Then you can do `tribetestintegration run`. This can be anything that makes your life easy, and you can create other commands for other test suites (such as `unit`)
+
+### Testing tips
+
+1. If you need to use Webdriver, you should create your own suite with `dev/docker/exec.sh /application/www/dev/docker/codecept.sh g:suite <your_feature_name>` in order to keep other tests running fast.
+
+# Table of Contents
+
+* [Overview](/docs/tests/README.md)
+* [Codeception](/dev/tests/README.md)
+* [Jest](/docs/tests/jest.md)
