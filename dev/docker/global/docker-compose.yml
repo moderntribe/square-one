@@ -68,7 +68,7 @@ services:
     ports:
       - "1025:1025"
 
-  chromedriver:
+  chrome:
     image: selenium/standalone-chrome:latest
     container_name: tribe-chrome
     dns: 172.20.10.250
