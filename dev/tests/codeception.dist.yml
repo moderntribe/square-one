@@ -23,3 +23,11 @@ settings:
     colors: true
     memory_limit: 1024M
     backup_globals: false
+env:
+    singlesite:
+    # nothing changes
+    multisite:
+        modules:
+            config:
+                WPLoader:
+                    multisite: true

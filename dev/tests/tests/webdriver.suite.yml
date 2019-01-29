@@ -23,7 +23,6 @@ modules:
             urlReplacement: false
             populator: 'mysql --max_allowed_packet=512M -u $user -h $host -p$password $dbname < $dump'
         WPLoader:
-            #multisite: true
             loadOnly: true
             wpRootFolder: %WP_ROOT_FOLDER%
             dbName: %DB_NAME%

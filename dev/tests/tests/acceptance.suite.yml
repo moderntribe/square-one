@@ -29,8 +29,6 @@ modules:
             # this can sometimes be faster for importing if the mysql client is available
             populator: 'mysql --max_allowed_packet=512M -u $user -h $host -p$password $dbname < $dump'
         WPLoader:
-            # uncomment to enable multisite
-            #multisite: true
             # just load WordPress using the same db as WPDb
             loadOnly: true
             wpRootFolder: %WP_ROOT_FOLDER%
