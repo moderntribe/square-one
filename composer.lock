@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2e6b9dd0c6b15ce61d8f089c6ea283a6",
+    "content-hash": "2b3a2ac150bb8e1b36341af929832e01",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -2084,12 +2084,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/vlucas/phpdotenv.git",
-                "reference": "f3aae2877ecf916ee802b7a5b249d36658171df6"
+                "reference": "2a7dcf7e3e02dc5e701004e51a6f304b713107d5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/f3aae2877ecf916ee802b7a5b249d36658171df6",
-                "reference": "f3aae2877ecf916ee802b7a5b249d36658171df6",
+                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/2a7dcf7e3e02dc5e701004e51a6f304b713107d5",
+                "reference": "2a7dcf7e3e02dc5e701004e51a6f304b713107d5",
                 "shasum": ""
             },
             "require": {
@@ -2127,7 +2127,7 @@
                 "env",
                 "environment"
             ],
-            "time": "2019-01-28T20:57:27+00:00"
+            "time": "2019-01-29T11:11:52+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -2765,12 +2765,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/composer.git",
-                "reference": "81de5f82aa1418cd566ca2b6ee79f35642070be5"
+                "reference": "b75db3ca083f890070286265332a48303d6808d8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/composer/zipball/81de5f82aa1418cd566ca2b6ee79f35642070be5",
-                "reference": "81de5f82aa1418cd566ca2b6ee79f35642070be5",
+                "url": "https://api.github.com/repos/composer/composer/zipball/b75db3ca083f890070286265332a48303d6808d8",
+                "reference": "b75db3ca083f890070286265332a48303d6808d8",
                 "shasum": ""
             },
             "require": {
@@ -2837,7 +2837,7 @@
                 "dependency",
                 "package"
             ],
-            "time": "2019-01-28T16:57:31+00:00"
+            "time": "2019-01-29T20:12:30+00:00"
         },
         {
             "name": "composer/semver",
@@ -4509,12 +4509,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "27ecf674504849983d92e561b84db33ebf00c6cf"
+                "reference": "01a3008608f8a6520c13dd7cda135a2ad29ab700"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/27ecf674504849983d92e561b84db33ebf00c6cf",
-                "reference": "27ecf674504849983d92e561b84db33ebf00c6cf",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/01a3008608f8a6520c13dd7cda135a2ad29ab700",
+                "reference": "01a3008608f8a6520c13dd7cda135a2ad29ab700",
                 "shasum": ""
             },
             "require": {
@@ -4585,7 +4585,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2019-01-24T13:04:03+00:00"
+            "time": "2019-01-29T13:42:26+00:00"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
