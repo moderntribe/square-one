@@ -83,10 +83,12 @@ install:
   - wp core install --url="${WP_URL}" --title="Square1 Tests" --admin_user="${WP_ADMIN_USERNAME}" --admin_password="${WP_ADMIN_PASSWORD}" --admin_email="admin@${WP_DOMAIN}" --skip-email
 
   # set up tests
-  - cp tests-config-sample.php tests-config.php
-  - cp dev/tests/.env-dist dev/tests/.env
+  - sudo cp tests-config-sample.php tests-config.php
+  - sudo cp dev/tests/.env-dist dev/tests/.env
+
+before_script:
+  - mkdir -p wp-content/cache/twig
+  - chown -R www-data:1000 wp-content/cache
 
 script:
   - bash $TRAVIS_BUILD_DIR/dev/docker/exec.sh /application/www/dev/docker/codecept.sh run integration
-  - bash $TRAVIS_BUILD_DIR/dev/docker/exec.sh /application/www/dev/docker/codecept.sh run acceptance
-  - bash $TRAVIS_BUILD_DIR/dev/docker/exec.sh /application/www/dev/docker/codecept.sh run webdriver
