@@ -317,7 +317,7 @@ class Blog {
 			$query = 'SELECT 0';
 		}
 
-		if ( false !== strpos( $query, "INSERT INTO `{$wpdb->comments}` (`comment_post_ID`, `comment_author`, " ) ) {
+		if ( $this->is_hello_world_comment_query( $query ) ) {
 			$query = 'SELECT 0';
 		}
 
@@ -381,5 +381,24 @@ class Blog {
 
 		$sql = $wpdb->prepare( "DELETE FROM {$wpdb->base_prefix}syndicated_posts WHERE blog_id=%d", $blog_id );
 		$wpdb->query( $sql );
+	}
+
+	/**
+	 * Determines if a comment is a default comment added on blog creation
+	 *
+	 * @param string $query
+	 *
+	 * @return bool
+	 */
+	private function is_hello_world_comment_query( $query ) {
+		if ( false === strpos( $query, "INSERT INTO `{$wpdb->comments}` (`comment_post_ID`, `comment_author`, " ) ) {
+			return false;
+		}
+
+		if ( false === strpos( $query, 'VALUES ( 1' ) ) {
+			return false;
+		}
+
+		return true;
 	}
 }
