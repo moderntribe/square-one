@@ -61,7 +61,7 @@ class Force_Plugin_Activation {
 	);
 
 
-	function __construct() {
+	public function __construct() {
 
 		// Always block non-production sites from search engines and random visitors.
 		if ( ! defined( 'ENVIRONMENT' ) || ENVIRONMENT != 'PRODUCTION' ) {
@@ -89,7 +89,7 @@ class Force_Plugin_Activation {
 	 *
 	 * @return array|bool
 	 */
-	function force_plugins( $plugins ) {
+	public function force_plugins( $plugins ) {
 		/*
 		 * Occasionally it seems a boolean can be passed in here.
 		 */
@@ -136,7 +136,7 @@ class Force_Plugin_Activation {
 	 *
 	 * @return array
 	 */
-	function plugin_action_links( $actions, $plugin_file, $plugin_data, $context ) {
+	public function plugin_action_links( $actions, $plugin_file, $plugin_data, $context ) {
 
 		if ( in_array( $plugin_file, $this->force_active ) ) {
 			unset( $actions['deactivate'] );
@@ -161,7 +161,7 @@ class Force_Plugin_Activation {
 	 *
 	 * @return array mixed
 	 */
-	function hide_from_blog( $plugins ) {
+	public function hide_from_blog( $plugins ) {
 
 		if ( ! is_multisite() ) {
 			return $plugins;
