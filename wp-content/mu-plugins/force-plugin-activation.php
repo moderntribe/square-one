@@ -27,7 +27,7 @@ class Force_Plugin_Activation {
 	);
 
 	/**
-	 * These plugins will be deactived and can't be activated (if WP_DEBUG is false)
+	 * These plugins will be deactivated and can't be activated (if WP_DEBUG is false)
 	 *
 	 * Add elements as plugin path: directory/file.php
 	 */
@@ -90,7 +90,7 @@ class Force_Plugin_Activation {
 	}
 
 	/**
-	 * Enforce the active/deactive plugin rules
+	 * Enforce the activate/deactivate plugin rules
 	 *
 	 * @param array|bool $plugins
 	 *
@@ -107,7 +107,7 @@ class Force_Plugin_Activation {
 		 * WordPress works in mysterious ways
 		 * active_plugins has the plugin paths as array key and a number as value
 		 * active_sitewide_plugins has the number as key and the plugin path as value
-		 * I'm standarizing so we can run the array operations below, then flipping back if needed.
+		 * I'm standardizing so we can run the array operations below, then flipping back if needed.
 		 */
 		if ( current_filter() == 'site_option_active_sitewide_plugins' ) {
 			$plugins = array_flip( $plugins );
