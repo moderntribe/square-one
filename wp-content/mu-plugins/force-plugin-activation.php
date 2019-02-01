@@ -74,6 +74,13 @@ class Force_Plugin_Activation {
 			$this->force_active[]   = 'limit-login-attempts/limit-login-attempts.php';
 		}
 
+		$this->hook();
+	}
+
+	public function hook() {
+		if ( defined( 'WP_INSTALLING' ) && WP_INSTALLING ) {
+			return;
+		}
 
 		add_filter( 'option_active_plugins',               array( $this, 'force_plugins'       ), 10, 1 );
 		add_filter( 'site_option_active_sitewide_plugins', array( $this, 'force_plugins'       ), 10, 1 );
