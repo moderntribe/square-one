@@ -317,7 +317,10 @@ class Blog {
 			$query = 'SELECT 0';
 		}
 
-		if ( false !== strpos( $query, "INSERT INTO `{$wpdb->comments}` (`comment_post_ID`, `comment_author`, " ) ) {
+		if (
+			false !== strpos( $query, "INSERT INTO `{$wpdb->comments}` (`comment_post_ID`, `comment_author`, " )
+			&& false !== strpos( $query, 'VALUES ( 1' )
+		) {
 			$query = 'SELECT 0';
 		}
 
