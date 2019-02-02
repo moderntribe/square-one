@@ -74,12 +74,9 @@ class Force_Plugin_Activation {
 			$this->force_active[]   = 'limit-login-attempts/limit-login-attempts.php';
 		}
 
-		$this->hook();
-	}
-
-	public function hook() {
-		if ( defined( 'WP_INSTALLING' ) && WP_INSTALLING ) {
-			return;
+		// Force deactivate problem plugins when unit tests are running
+		if ( defined( 'DIR_TESTDATA' ) && DIR_TESTDATA ) {
+			$this->force_deactive[] = 'term-sorter/term-sorter.php';
 		}
 
 		add_filter( 'option_active_plugins',               array( $this, 'force_plugins'       ), 10, 1 );
@@ -116,7 +113,7 @@ class Force_Plugin_Activation {
 		// Add our force-activated plugins
 		$plugins = array_merge( (array) $plugins, $this->force_active );
 
-		if ( ! defined( 'WP_DEBUG' ) || ! WP_DEBUG ) {
+		if ( ( defined( 'DIR_TESTDATA' ) && DIR_TESTDATA ) || ! defined( 'WP_DEBUG' ) || ! WP_DEBUG ) {
 			// Remove our force-deactivated plguins unless WP_DEBUG is on
 			$plugins = array_diff( (array)$plugins, $this->force_deactive );
 		}
