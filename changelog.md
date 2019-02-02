@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2019.02]
+
+* Refactor force-plugin-activation.php to allow forcing plugins off when running unit tests
+
 ## [2019.01]
 
 * Added a meta importer CLI command.
