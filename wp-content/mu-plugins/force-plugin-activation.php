@@ -74,7 +74,7 @@ class Force_Plugin_Activation {
 			$this->force_active[]   = 'limit-login-attempts/limit-login-attempts.php';
 		}
 
-		// Force deactivate problem plugins when unit tests are running
+		// Specific config when unit tests are running
 		if ( defined( 'DIR_TESTDATA' ) && DIR_TESTDATA ) {
 			//$this->force_deactive[] = 'term-sorter/term-sorter.php';
 		}
