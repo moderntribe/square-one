@@ -26,13 +26,11 @@ const parseUrl = (str, component) => {
 	}
 
 	if (component) {
-		return uri[component.replace('PHP_URL_', '')
-			.toLowerCase()];
+		return uri[component.replace('PHP_URL_', '').toLowerCase()];
 	}
 
 	if (mode !== 'php') {
-		name = (ini['phpjs.parse_url.queryKey'] &&
-			ini['phpjs.parse_url.queryKey'].local_value) || 'queryKey';
+		name = (ini['phpjs.parse_url.queryKey'] && ini['phpjs.parse_url.queryKey'].local_value) || 'queryKey';
 		parser = /(?:^|&)([^&=]*)=?([^&]*)/g;
 		uri[name] = {};
 		query = uri[key[12]] || '';

@@ -5,7 +5,7 @@ namespace Tribe\Project\Service_Providers;
 
 
 use Pimple\Container;
-use Pimple\ServiceProviderInterface;
+use Tribe\Project\Container\Service_Provider;
 use Tribe\Project\P2P\Admin_Search_Filtering;
 use Tribe\Project\P2P\Connections;
 use Tribe\Project\P2P\Event_Query_Filters;
@@ -24,7 +24,7 @@ use Tribe\Project\Post_Types\Sample\Sample;
  *
  * Load configuration common to all sites
  */
-class P2P_Provider implements ServiceProviderInterface {
+class P2P_Provider extends Service_Provider {
 	/**
 	 * @var array P2P relationships to register
 	 *            Keys should be the name of a Relationship subclass in

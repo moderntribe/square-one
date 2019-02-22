@@ -16,7 +16,7 @@ To create a Task class implement `Tribe\Project\Queues\Contracts\Task`.
 The method `handle()` is required and must return true on success, false on failure.
 
 ### Processing a queue
-Using WP-CLI `wp queues process <queue-name>`. This will process all items in the queue.
+Using WP-CLI `wp s1 queues process <queue-name>`. This will process all items in the queue.
 
 In the event that WP CLI is not available (such as on WP Engine), then the queues can be processed on `WP_Cron`. 
 Cron support is disabled by default, but is enabled by setting `WP_DISABLE_CRON` to false. **This is not the preferred way
@@ -32,7 +32,7 @@ ex: `$queue->dispatch( Noop::class, [ 'fake' => 'custom message' ] );`
 Built in is a task for wp_mail(). To use it you'll need to add the following to your WP config:
 `define( 'QUEUE_MAIL', true );`
 You can also optionally define a default queue name with QUEUE_MAIL_QUEUE_NAME. If this value is not set, it will default to `default`.
-To process the queued mail items `wp queues process <queue-name>` with WP-CLI.
+To process the queued mail items `wp s1 queues process <queue-name>` with WP-CLI.
 
 ### Other CLI commands
 `wp s1 queues add-tasks [--count=0]`

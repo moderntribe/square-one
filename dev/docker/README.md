@@ -102,7 +102,7 @@ $ Enter password:
 
 >If you prefer a GUI client, consider [SequelPro](https://www.sequelpro.com/) or [HeidiSQL](https://www.heidisql.com/).
 
-#### Fixing permission erros on MacOS (MySQL installed via Brew)
+#### Fixing permission errors on MacOS (MySQL installed via Brew)
 
 Installing MySQL with Brew may prevent password logins for the `root` user. Enable password login with the following:
 
@@ -117,7 +117,7 @@ Verify that you're able to navigate to http://mailhog.tribe in your web browser.
 - Clearing your DNS cache
 - Restarting your machine
 - Verifying that your DNS primary and secondary are configured
-- Verfiying `npm run docker:global:start` executes without error
+- Verifying `npm run docker:global:start` executes without error
 - Submitting a bug report (ie: talk to Jonathan (@jbrinley))
 
 Connected successfully? You're done! You can go back to the terminal and run `npm run docker:global:stop` or just leave global running if you're planning on doing some work.

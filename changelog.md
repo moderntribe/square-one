@@ -2,17 +2,33 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2019.02]
+
+* Change object-cache-sample.php to object-cache.php for default inclusion on forked projects
+* Update incorrect global setting for memcached_server in local-config-sample.php
+
+## [2019.01]
+
+* Added a meta importer CLI command.
+* Fixed: Add sintax hightlight for docs with code examples
+* Replaced the Pimple Dumper with a container exporter to work with recent versions of PhpStorm
+* Fixed: Set explicit charset and collation for queues MySQL table
+* Fixed: Handled invalid records in the queue table, avoiding a fatal error
+* Modified: Test Suite configuration by moving it to the dev directory and consolidating composer management.
+
 ## [2018.12]
 
 * Fixed: gitignore entry for Tribe 301 plugin
 * Added the Blog Copier
 * Changed: added more documentation for our SQ1 forms implementation
+* Fixed failing test for Full_Size_Gif
 
 ## [2018.11]
 
 * Fixed: Nginx config to properly pull missing assets (images/js/css/media etc...) from a remote server so you don't need to download large uploads folders.
 * Changed: Cleaned up the `CLI_Provider`
 * Changed: Introduced the `Generator_Command` abstract class for generator commands, so that we don't need all commands following the same constructor.
+* Added: the following JavaScript unit tests: accessibility.test, apply-browser-classes.test, body-lock.test
 
 ## [2018.10]
 

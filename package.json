@@ -152,6 +152,7 @@
     "roots": [
       "<rootDir>/wp-content/themes/core/js/test"
     ],
-    "testRegex": "test/tests/.*\\.test\\.js$"
+    "testRegex": "test/tests/.*\\.test\\.js$",
+	"testURL": "http://localhost/"
   }
 }

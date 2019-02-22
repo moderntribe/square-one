@@ -23,7 +23,7 @@ or unset variables.
 
 #### Example
 
-```
+```php
 protected function parse_options( array $options ): array {
 	
 	$defaults = [
@@ -43,7 +43,7 @@ values. The return value can either be imploded into a string (if the 3rd parame
 
 #### Examples
 
-```
+```php
 $this->options[ static::CLASSES ] = [ 'container', 'container--grid' ];
 
 $classes = $this->merge_classes( [ 'c-card', 'c-card--small' ], $this->options[ static::CLASSES ], true );
@@ -51,7 +51,7 @@ $classes = $this->merge_classes( [ 'c-card', 'c-card--small' ], $this->options[ 
 // result: "c-card c-card--small container container--grid"
 ```
 
-```
+```php
 $this->options[ static::ATTRS ] = [ 'data-js' => 'card', 'data-live-text' => true ];
 
 $attrs = $this->merge_attrs( [ 'data-content' => 'Card content here' ], $this->options[ static::ATTRS ], true );
@@ -67,7 +67,7 @@ setting up the array to avoid mismatches in key names.
 
 #### Example
 
-```
+```php
 use Tribe\Project\Templates\Components\Card as CardComponent;
 
 ...
@@ -83,7 +83,7 @@ return properly-formatted HTML as a string.
 
 #### Example
 
-```
+```php
 $card_obj = CardComponent::factory( $options );
 
 return $card_obj->render();
@@ -103,7 +103,7 @@ We have components for each of these field types. Rather than making the `twig` 
 the rendered markup for each of these fields. By doing this, we'll know that that markup and formatting for each component will be consistent with other modules in the
 design system which implement the same components. The `hero.twig` template could look something like this:
 
-```
+```twig
 <div class="hero">
 	
 	{{ background_image }}
@@ -124,7 +124,7 @@ design system which implement the same components. The `hero.twig` template coul
 
 The `get_data()` method for this Panel controller would look something like this:
 
-```
+```php
 $data = [
 	'background_image' => $this->get_background_image(),
 	'title'            => $this->get_title(),
@@ -137,7 +137,7 @@ return $data;
 
 Then, for the background image:
 
-```
+```php
 protected function get_background_image() {
 
 	$options = [
@@ -154,7 +154,7 @@ protected function get_background_image() {
 
 For the title:
 
-```
+```php
 protected function get_title() {
 
 	$options = [
@@ -171,7 +171,7 @@ protected function get_title() {
 
 For the Content:
 
-```
+```php
 protected function get_content() {
 
 	$options = [
@@ -187,7 +187,7 @@ protected function get_content() {
 
 And finally for the CTA:
 
-```
+```php
 protected function get_cta() {
 
 	$options = [

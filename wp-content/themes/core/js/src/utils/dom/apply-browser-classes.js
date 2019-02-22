@@ -1,12 +1,12 @@
 /**
  * @function browserClasses
- * @description sets up browser classes on body without using user agent strings were possible.
+ * @description sets up browser classes on body without using user agent strings where possible.
  */
 
-import { browserTests } from '../tests';
+import * as test from '../tests';
 
 const applyBrowserClasses = () => {
-	const browser = browserTests();
+	const browser = test.browserTests();
 	const classes = document.body.classList;
 
 	if (browser.android) {
