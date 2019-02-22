@@ -5,10 +5,10 @@ namespace Tribe\Project\Service_Providers;
 
 
 use Pimple\Container;
-use Pimple\ServiceProviderInterface;
+use Tribe\Project\Container\Service_Provider;
 use Tribe\Project\Theme_Customizer;
 
-class Theme_Customizer_Provider implements ServiceProviderInterface {
+class Theme_Customizer_Provider extends Service_Provider {
 
 	public function register( Container $container ) {
 		$container['theme_customizer.loader'] = function( $container ) {

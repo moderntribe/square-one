@@ -8,6 +8,7 @@ settings:
     bootstrap: _bootstrap.php
     colors: true
     memory_limit: 1024M
+    backup_globals: false
 modules:
     config:
         Db:
@@ -77,8 +78,6 @@ extensions:
         - Codeception\Command\GenerateWPAjax
         - Codeception\Command\GenerateWPCanonical
         - Codeception\Command\GenerateWPXMLRPC
-        - Codeception\Command\DbSnapshot
-        - tad\Codeception\Command\SearchReplace
 env:
     singlesite:
         # nothing changes

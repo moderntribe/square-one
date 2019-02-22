@@ -30,7 +30,7 @@ Square One (AKA **\[1\]**) is a development framework created by Modern Tribe pr
   * [Fonts](/docs/theme/fonts.md)
   * [Icons](/docs/theme/icons.md)
   * [Twig](/docs/theme/twig.md)
-    * **Css**
+    * **CSS**
       * [Overview](/docs/theme/css/README.md)
       * [PostCSS](/docs/theme/css/postcss.md)
       * [Grids](/docs/theme/css/grids.md)
@@ -80,7 +80,7 @@ Square One (AKA **\[1\]**) is a development framework created by Modern Tribe pr
 
 #### Using the build tools
 
-The build tools for themeing can be found in the *root* directory. Refer to the docs for instructions on getting started with Grunt, Webpack, and PostCSS.
+The build tools for theming can be found in the *root* directory. Refer to the docs for instructions on getting started with Grunt, Webpack, and PostCSS.
 
 
 ## Configurations

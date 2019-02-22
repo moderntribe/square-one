@@ -100,7 +100,8 @@ rsync -rp --delete .deploy/src/wp-content .deploy/build \
     --exclude=dev_components \
     --exclude=docs \
     --exclude=grunt_options \
-    --exclude=node_modules
+    --exclude=node_modules \
+    --exclude=wp-content/plugins/core/assets/templates/cli
 
 echo "syncing configuration files"
 # not wp-config.php. WP Engine manages that

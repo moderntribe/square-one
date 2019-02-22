@@ -5,12 +5,12 @@ namespace Tribe\Project\Service_Providers;
 
 
 use Pimple\Container;
-use Pimple\ServiceProviderInterface;
+use Tribe\Project\Container\Service_Provider;
 use Tribe\Project\Templates;
 use Tribe\Project\Twig\Extension;
 use Tribe\Project\Twig\Twig_Cache;
 
-class Twig_Service_Provider implements ServiceProviderInterface {
+class Twig_Service_Provider extends Service_Provider {
 	public function register( Container $container ) {
 		$container[ 'twig.loader' ] = function ( Container $container ) {
 			$stylesheet_path = get_stylesheet_directory();

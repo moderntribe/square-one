@@ -2,11 +2,26 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2019.02]
+
+* Change object-cache-sample.php to object-cache.php for default inclusion on forked projects
+* Update incorrect global setting for memcached_server in local-config-sample.php
+
+## [2019.01]
+
+* Added a meta importer CLI command.
+* Fixed: Add sintax hightlight for docs with code examples
+* Replaced the Pimple Dumper with a container exporter to work with recent versions of PhpStorm
+* Fixed: Set explicit charset and collation for queues MySQL table
+* Fixed: Handled invalid records in the queue table, avoiding a fatal error
+* Modified: Test Suite configuration by moving it to the dev directory and consolidating composer management.
+
 ## [2018.12]
 
 * Added: caption position support to video component
 * Fixed: gitignore entry for Tribe 301 plugin
-* Added: the Blog Copier
+* Added the Blog Copier
+* Fixed failing test for Full_Size_Gif
 
 ## [2018.11]
 

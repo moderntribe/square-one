@@ -5,10 +5,10 @@ namespace Tribe\Project\Service_Providers;
 
 
 use Pimple\Container;
-use Pimple\ServiceProviderInterface;
+use Tribe\Project\Container\Service_Provider;
 use Tribe\Project\Settings;
 
-class Settings_Provider implements ServiceProviderInterface {
+class Settings_Provider extends Service_Provider {
 
 	public function register( Container $container ) {
 		$this->register_pages( $container );

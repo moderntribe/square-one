@@ -9,8 +9,6 @@ class FacadeTest extends \Codeception\Test\Unit {
 	protected function _before() {
 		parent::_before();
 
-		\tad\FunctionMocker\FunctionMocker::init();
-
 		$request_mock = $this->makeEmpty( \Tribe\Project\Request\Request::class, [ 'all' => function () {
 			return [ 'original' => true ];
 		} ] );

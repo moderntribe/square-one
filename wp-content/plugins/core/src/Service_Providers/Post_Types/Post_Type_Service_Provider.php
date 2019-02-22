@@ -5,11 +5,11 @@ namespace Tribe\Project\Service_Providers\Post_Types;
 
 
 use Pimple\Container;
-use Pimple\ServiceProviderInterface;
+use Tribe\Project\Container\Service_Provider;
 use Tribe\Libs\Post_Type\Post_Object;
 use Tribe\Libs\Post_Type\Post_Type_Config;
 
-abstract class Post_Type_Service_Provider implements ServiceProviderInterface {
+abstract class Post_Type_Service_Provider extends Service_Provider {
 
 	/**
 	 * @var Post_Object The class of the post object. Should have a NAME constant.
