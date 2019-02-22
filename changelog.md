@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2019.02]
+
+* Change object-cache-sample.php to object-cache.php for default inclusion on forked projects
+* Update incorrect global setting for memcached_server in local-config-sample.php
+
 ## [2019.01]
 
 * Added a meta importer CLI command.
