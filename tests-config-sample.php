@@ -28,6 +28,9 @@ define( 'SAVEQUERIES', false );
 define( 'SCRIPT_DEBUG', true );
 define( 'WP_CACHE', false );
 
+// Invalidate memcached / redis object caching during testing
+define( 'WP_CACHE_KEY_SALT', uniqid() );
+
 if (empty($_SERVER['HTTP_HOST'])) {
 	$_SERVER['HTTP_HOST']   = 'square1.tribe';
 }
@@ -124,4 +127,13 @@ if ( empty( $table_prefix ) )
 
 if ( ! defined( 'WP_DEBUG_DISPLAY' ) || WP_DEBUG_DISPLAY == false )
 	ini_set( 'display_errors', 0 );
+
+/*
+ * Glomar
+ *
+ * GLOMAR is a plugin that blocks the frontend of the site from public access.
+ * If you would like to disable the plugin locally, add the following to your local-config.php.
+ */
+
+define( 'TRIBE_GLOMAR', false );
 
