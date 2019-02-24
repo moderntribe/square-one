@@ -71,7 +71,8 @@
     "php-http/client-common": "^1.9.0",
     "guzzlehttp/psr7": "^1.4",
     "sunra/php-simple-html-dom-parser": "1.5.2",
-    "monolog/monolog":"1.23.0"
+    "monolog/monolog":"1.23.0",
+    "roots/wp-password-bcrypt": "dev-master"
   },
   "require-dev": {
     "wp-cli/wp-cli": "^1.5.1",
