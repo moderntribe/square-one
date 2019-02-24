@@ -4,13 +4,13 @@ All notable changes to this project will be documented in this file.
 
 ## [2019.02]
 
+* Added tribe-chrome global container for chromedriver acceptance testing
+* Redid codeception config and added sample acceptance and webdriver tests
 * Change object-cache-sample.php to object-cache.php for default inclusion on forked projects
 * Update incorrect global setting for memcached_server in local-config-sample.php
 
 ## [2019.01]
 
-* Added tribe-chrome global container for chromedriver acceptance testing
-* Redid codeception config and added sample acceptance and webdriver tests
 * Added a meta importer CLI command.
 * Fixed: Add sintax hightlight for docs with code examples
 * Replaced the Pimple Dumper with a container exporter to work with recent versions of PhpStorm
