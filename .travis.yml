@@ -78,6 +78,7 @@ install:
   - echo "define( 'DB_PASSWORD', '${DB_PASSWORD}' );" >> local-config.php
   - echo "define( 'DB_HOST', '${DB_HOST}' );" >> local-config.php
   - echo "define( 'TRIBE_GLOMAR', false );" >> local-config.php
+  - echo "$GLOBALS[ 'memcached_servers' ] = [ [ 'memcached', 11211, ] ];" >> local-config.php
 
   # install WordPress db structure
   - wp core install --url="${WP_URL}" --title="Square1 Tests" --admin_user="${WP_ADMIN_USERNAME}" --admin_password="${WP_ADMIN_PASSWORD}" --admin_email="admin@${WP_DOMAIN}" --skip-email
