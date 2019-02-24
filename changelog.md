@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2019.02]
+
+* Change object-cache-sample.php to object-cache.php for default inclusion on forked projects
+* Update incorrect global setting for memcached_server in local-config-sample.php
+
 ## [2019.01]
 
 * Added tribe-chrome global container for chromedriver acceptance testing
@@ -17,6 +22,7 @@ All notable changes to this project will be documented in this file.
 
 * Fixed: gitignore entry for Tribe 301 plugin
 * Added the Blog Copier
+* Changed: added more documentation for our SQ1 forms implementation
 * Fixed failing test for Full_Size_Gif
 
 ## [2018.11]
