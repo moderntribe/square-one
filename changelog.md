@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 ## [2019.02]
 
 * Add bcrypt password hashing: https://github.com/roots/wp-password-bcrypt
+* Refactor force-plugin-activation.php to allow forcing plugins off when running unit tests
 * Added tribe-chrome global container for chromedriver acceptance testing
 * Redid codeception config and added sample acceptance and webdriver tests
 * Change object-cache-sample.php to object-cache.php for default inclusion on forked projects
