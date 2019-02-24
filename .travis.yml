@@ -81,7 +81,7 @@ install:
   - echo "\$GLOBALS[ 'memcached_servers' ] = [ [ 'memcached', 11211, ] ];" >> local-config.php
 
   # install WordPress db structure
-  - wp core install --url="${WP_URL}" --title="Square1 Tests" --admin_user="${WP_ADMIN_USERNAME}" --admin_password="${WP_ADMIN_PASSWORD}" --admin_email="admin@${WP_DOMAIN}" --skip-email
+  - bash $TRAVIS_BUILD_DIR/dev/docker/wp.sh core install --url="${WP_URL}" --title="Square1 Tests" --admin_user="${WP_ADMIN_USERNAME}" --admin_password="${WP_ADMIN_PASSWORD}" --admin_email="admin@${WP_DOMAIN}" --skip-email
 
   # set up tests
   - sudo cp tests-config-sample.php tests-config.php
