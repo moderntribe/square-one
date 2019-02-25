@@ -61,7 +61,7 @@
     "moderntribe/tribe-libs":"master",
     "humanmade/mercator":"dev-master#7f3846a",
     "vlucas/phpdotenv": "^2.4.0",
-    "humanmade/S3-Uploads":"1.1.0",
+    "humanmade/s3-uploads":"1.1.0",
     "pimple/pimple": "~3.0@dev",
     "johnbillion/extended-cpts": "^4.0",
     "twig/twig": "^2.4",
@@ -71,13 +71,12 @@
     "php-http/client-common": "^1.9.0",
     "guzzlehttp/psr7": "^1.4",
     "sunra/php-simple-html-dom-parser": "1.5.2",
-    "monolog/monolog":"1.23.0",
-    "lucatume/wp-browser": "^2.2.0"
+    "monolog/monolog":"1.23.0"
   },
   "require-dev": {
     "wp-cli/wp-cli": "^1.5.1",
+    "lucatume/wp-browser": "^2.2.0",
     "lucatume/function-mocker": "~1.0",
-    "phpunit/phpunit": "^6",
     "php-http/httplug": "^1.1"
   },
   "extra": {

@@ -33,7 +33,6 @@ wp-content/blogs.dir/
 wp-content/upgrade/
 wp-content/backup-db/
 wp-content/backups/
-wp-content/object-cache.php
 wp-content/cache/
 wp-content/advanced-cache.php
 wp-content/wp-cache-config.php
@@ -124,3 +123,7 @@ dev/docker/composer-cache/
 dev/docker/global/.env
 /.gitmodules
 /dev/bin/wp
+
+# Testing #
+#######################
+!dev/tests/tests/_data/*.sql

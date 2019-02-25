@@ -13,5 +13,5 @@ The tests will be executed at the start of every `grunt dist` and on the server 
 ## Table of Contents
 
 * [Overview](/docs/tests/README.md)
-* [Codeception](/docs/tests/codeception.md)
+* [Codeception](/dev/tests/README.md)
 * [Jest](/docs/tests/jest.md)
