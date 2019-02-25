@@ -235,6 +235,9 @@ class Theme_Provider extends Service_Provider {
 		$container[ 'theme.resources.scripts' ] = function ( Container $container ) {
 			return new Scripts();
 		};
+		add_action( 'wp_head', function () use ( $container ) {
+			$container[ 'theme.resources.scripts' ]->set_preloading_tags();
+		}, 10, 0 );
 		add_action( 'wp_footer', function () use ( $container ) {
 			$container[ 'theme.resources.scripts' ]->add_early_polyfills();
 		}, 10, 0 );

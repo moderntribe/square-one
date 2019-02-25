@@ -13,6 +13,28 @@ class Scripts {
 		</script>
 		<?php
 	}
+
+	/**
+	 * Output preload directives in head for scripts in footer
+	 */
+
+	public function set_preloading_tags() {
+		global $wp_scripts;
+
+		foreach ( $wp_scripts->queue as $handle ) {
+			$script = $wp_scripts->registered[ $handle ];
+
+			//-- Weird way to check if script is being enqueued in the footer.
+			if ( $script->extra[ 'group' ] === 1 ) {
+
+				//-- If version is set, append to end of source.
+				$source = $script->src . ( $script->ver ? "?ver={$script->ver}" : "" );
+
+				//-- Spit out the tag.
+				echo "<link rel='preload' href='{$source}' as='script'/>\n";
+			}
+		}
+	}
 	/**
 	 * Enqueue scripts
 	 * @action wp_enqueue_scripts
