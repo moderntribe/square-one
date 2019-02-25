@@ -114,6 +114,7 @@
     "css-hot-loader": "^1.4.2",
     "css-loader": "^1.0.0",
     "cssnano": "^3.9.1",
+    "del": "^3.0.0",
     "enhanced-resolve": "^4.1.0",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.7.1",
