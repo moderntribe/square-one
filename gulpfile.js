@@ -8,7 +8,9 @@ const eslint = require( 'gulp-eslint' );
 const rename = require( 'gulp-rename' );
 const shell = require( 'gulp-shell' );
 const stylelint = require( 'gulp-stylelint' );
-const browserSync = require( 'browser-sync' ).create();
+const requireDir = require('require-dir');
+const tasks = requireDir('./gulp_options');
+const browserSync = require( 'browser-sync' ).create('Tribe Dev');
 const { reload } = browserSync;
 let config = require('./local-config.json');
 
@@ -34,30 +36,7 @@ gulp.task( 'scripts-prod', function() {
 		.pipe( shell( 'yarn prod' ) );
 } );
 
-gulp.task( 'postcss-dev', function() {
-	const plugins = [
-		require( 'postcss-partial-import' )( {
-			extension: '.pcss',
-		} ),
-		require( 'postcss-mixins' ),
-		require( 'postcss-custom-properties' ),
-		require( 'postcss-simple-vars' ),
-		require( 'postcss-custom-media' ),
-		require( 'postcss-quantity-queries' ),
-		require( 'postcss-aspect-ratio' ),
-		require( 'postcss-nested' ),
-		require( 'postcss-inline-svg' ),
-		require( 'postcss-preset-env' )( { stage: 0 } ),
-		require( 'postcss-calc' ),
-	];
-	return gulp.src( [ 'resources/assets/pcss/app.pcss' ] )
-		.pipe( sourcemaps.init() )
-		.pipe( postcss( plugins ) )
-		.pipe( rename( { extname: '.css' } ) )
-		.pipe( sourcemaps.write( '.' ) )
-		.pipe( gulp.dest( 'public/css' ) )
-		.pipe( reload( { stream: true } ) );
-} );
+gulp.task( 'postcss-theme', tasks.postcss.theme );
 
 gulp.task( 'postcss-prod', function() {
 	return gulp.src( [ 'public/css/app.css' ] )

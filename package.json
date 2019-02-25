@@ -34,8 +34,13 @@
     "npm": "6.4.1"
   },
   "scripts": {
+    "dev": "npm run development",
+    "development": "cross-env NODE_ENV=development npx webpack --progress --hide-modules",
+    "prod": "npm run production",
+    "production": "cross-env NODE_ENV=production npx webpack --no-progress --hide-modules",
+    "example-app": "cross-env NODE_ENV=emaileditor webpack-dev-server --hot --https --port 3000",
     "test": "cross-env NODE_ENV=test jest --config jest.config.json",
-    "test:watch": "npm test -- --watch",
+    "test:e2e": "cross-env NODE_ENV=test npx cypress run",
     "docker:start": "./dev/docker/start.sh",
     "docker:stop": "./dev/docker/stop.sh",
     "docker:log": "./dev/docker/log.sh",
@@ -153,6 +158,7 @@
     "postcss-reporter": "^3.0.0",
     "postcss-simple-vars": "^3.0.0",
     "regenerator-runtime": "^0.12.1",
+    "require-dir": "^1.2.0",
     "run-sequence": "^2.2.1",
     "style-loader": "^0.23.0",
     "stylelint": "^9.5.0",
