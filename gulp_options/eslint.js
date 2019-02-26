@@ -27,6 +27,11 @@ module.exports = {
 			`${ pkg._core_apps_js_src_path }**/*`,
 		], pkg._core_apps_js_src_path );
 	},
+	utils() {
+		return lint( [
+			`${ pkg._core_utils_js_src_path }**/*`,
+		], pkg._core_utils_js_src_path );
+	},
 	admin() {
 		return lint( [
 			`${ pkg._core_admin_js_src_path }**/*`,

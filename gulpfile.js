@@ -58,6 +58,7 @@ gulp.task( 'clean:themeMinVendorJS', clean.themeMinVendorJS );
 
 gulp.task( 'eslint:theme', eslint.theme );
 gulp.task( 'eslint:apps', eslint.apps );
+gulp.task( 'eslint:utils', eslint.utils );
 gulp.task( 'eslint:admin', eslint.admin );
 
 /* Postcss tasks */

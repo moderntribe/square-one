@@ -15,6 +15,7 @@
   "_core_theme_fonts_path": "wp-content/themes/core/fonts/",
   "_core_theme_pcss_path": "wp-content/themes/core/pcss/",
   "_core_apps_js_src_path": "wp-content/themes/core/js/src/apps/",
+  "_core_utils_js_src_path": "wp-content/themes/core/js/src/utils/",
   "_core_admin_css_path": "wp-content/themes/core/css/admin/",
   "_core_admin_css_dist_path": "wp-content/themes/core/css/admin/dist/",
   "_core_admin_img_path": "wp-content/themes/core/img/admin/",
