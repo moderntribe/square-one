@@ -1,19 +1,19 @@
-const gulp = require('gulp');
+const gulp = require( 'gulp' );
 const postcss = require( 'gulp-postcss' );
 const sourcemaps = require( 'gulp-sourcemaps' );
 const rename = require( 'gulp-rename' );
-const postcssFunctions = require('../dev_components/theme/pcss/functions');
-const pkg = require('../package.json');
+const postcssFunctions = require( '../dev_components/theme/pcss/functions' );
+const pkg = require( '../package.json' );
 
 const compilePlugins = [
 	require( 'postcss-partial-import' )( {
 		extension: '.pcss',
 	} ),
 	require( 'postcss-mixins' ),
-	require( 'postcss-custom-properties' )({ preserve: false }),
+	require( 'postcss-custom-properties' )( { preserve: false } ),
 	require( 'postcss-simple-vars' ),
 	require( 'postcss-custom-media' ),
-	require( 'postcss-functions' )({ functions: postcssFunctions }),
+	require( 'postcss-functions' )( { functions: postcssFunctions } ),
 	require( 'postcss-quantity-queries' ),
 	require( 'postcss-aspect-ratio' ),
 	require( 'postcss-nested' ),
@@ -23,17 +23,17 @@ const compilePlugins = [
 ];
 
 const legacyPlugins = [
-	require('postcss-partial-import')({
-		extension: ".pcss",
-	}),
-	require('postcss-mixins'),
-	require('postcss-custom-properties')({ preserve: false }),
-	require('postcss-simple-vars'),
-	require('postcss-nested'),
-	require('postcss-preset-env')({ browsers: ['last 20 versions', 'ie 6'] }),
+	require( 'postcss-partial-import' )( {
+		extension: '.pcss',
+	} ),
+	require( 'postcss-mixins' ),
+	require( 'postcss-custom-properties' )( { preserve: false } ),
+	require( 'postcss-simple-vars' ),
+	require( 'postcss-nested' ),
+	require( 'postcss-preset-env' )( { browsers: [ 'last 20 versions', 'ie 6' ] } ),
 ];
 
-function cssProcess(src = [], dest = pkg._core_admin_css_path, plugins = compilePlugins) {
+function cssProcess( src = [], dest = pkg._core_admin_css_path, plugins = compilePlugins ) {
 	return gulp.src( src )
 		.pipe( sourcemaps.init() )
 		.pipe( postcss( plugins ) )
@@ -44,29 +44,29 @@ function cssProcess(src = [], dest = pkg._core_admin_css_path, plugins = compile
 
 module.exports = {
 	theme() {
-		return cssProcess([
-			`${pkg._core_theme_pcss_path}master.pcss`,
-			`${pkg._core_theme_pcss_path}print.pcss`,
-		], pkg._core_theme_css_path);
+		return cssProcess( [
+			`${ pkg._core_theme_pcss_path }master.pcss`,
+			`${ pkg._core_theme_pcss_path }print.pcss`,
+		], pkg._core_theme_css_path );
 	},
 	themeLegacy() {
-		return cssProcess([
-			`${pkg._core_theme_pcss_path}legacy.pcss`,
-		], pkg._core_theme_css_path, legacyPlugins);
+		return cssProcess( [
+			`${ pkg._core_theme_pcss_path }legacy.pcss`,
+		], pkg._core_theme_css_path, legacyPlugins );
 	},
 	themeWPEditor() {
-		return cssProcess([
-			`${pkg._core_admin_pcss_path}editor-style.pcss`,
-		]);
+		return cssProcess( [
+			`${ pkg._core_admin_pcss_path }editor-style.pcss`,
+		] );
 	},
 	themeWPLogin() {
-		return cssProcess([
-			`${pkg._core_admin_pcss_path}login.pcss`,
-		]);
+		return cssProcess( [
+			`${ pkg._core_admin_pcss_path }login.pcss`,
+		] );
 	},
 	themeWPAdmin() {
-		return cssProcess([
-			`${pkg._core_admin_pcss_path}master.pcss`,
-		]);
-	}
+		return cssProcess( [
+			`${ pkg._core_admin_pcss_path }master.pcss`,
+		] );
+	},
 };
