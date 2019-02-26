@@ -1,33 +1,28 @@
 const gulp = require( 'gulp' );
 const runSequence = require( 'run-sequence' );
-const gulpIf = require( 'gulp-if' );
-const eslint = require( 'gulp-eslint' );
 const shell = require( 'gulp-shell' );
 const stylelint = require( 'gulp-stylelint' );
-const requireDir = require('require-dir');
-const tasks = requireDir('./gulp_options');
-const browserSync = require( 'browser-sync' ).create('Tribe Dev');
+const requireDir = require( 'require-dir' );
+const tasks = requireDir( './gulp_options' );
+const browserSync = require( 'browser-sync' ).create( 'Tribe Dev' );
 const { reload } = browserSync;
-let config = require('./local-config.json');
+let config = require( './local-config.json' );
 
-if (!config) {
+if ( ! config ) {
 	config = {
 		proxy: 'square1.tribe',
 		certs_path: '',
-	}
+	};
 }
 
 const {
 	clean,
 	concat,
 	copy,
+	eslint,
 	postcss,
-	cssnano
+	cssnano,
 } = tasks;
-
-function isFixed( file ) {
-	return file.eslint != null && file.eslint.fixed;
-}
 
 gulp.task( 'scripts-dev', function() {
 	return gulp.src( '' )
@@ -59,6 +54,12 @@ gulp.task( 'clean:themeMinCSS', clean.themeMinCSS );
 gulp.task( 'clean:themeMinJS', clean.themeMinJS );
 gulp.task( 'clean:themeMinVendorJS', clean.themeMinVendorJS );
 
+/* Eslint tasks */
+
+gulp.task( 'eslint:theme', eslint.theme );
+gulp.task( 'eslint:apps', eslint.apps );
+gulp.task( 'eslint:admin', eslint.admin );
+
 /* Postcss tasks */
 
 gulp.task( 'postcss:theme', postcss.theme );
@@ -74,15 +75,6 @@ gulp.task( 'cssnano:themeLegacyMin', cssnano.themeLegacyMin );
 gulp.task( 'cssnano:themeWPEditorMin', cssnano.themeWPEditorMin );
 gulp.task( 'cssnano:themeWPAdminMin', cssnano.themeWPAdminMin );
 gulp.task( 'cssnano:themeWPLoginMin', cssnano.themeWPLoginMin );
-
-gulp.task( 'scripts-lint', function() {
-	return gulp.src( [ 'resources/assets/js/**/*' ] )
-		.pipe( eslint( { fix: true } ) )
-		.pipe( eslint.format() )
-		.pipe( gulpIf( isFixed, gulp.dest( 'resources/assets/js' ) ) )
-		.pipe( eslint.format() )
-		.pipe( eslint.failAfterError() );
-} );
 
 gulp.task( 'postcss-lint', function() {
 	return gulp.src( 'resources/assets/pcss/**/*.pcss' )

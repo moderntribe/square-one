@@ -27,7 +27,7 @@ import components from '../components/index';
  */
 
 const bindEvents = () => {
-	on(window, 'resize', _.debounce(resize, 200, false));
+	on( window, 'resize', _.debounce( resize, 200, false ) );
 };
 
 /**
@@ -69,7 +69,7 @@ const init = () => {
 	components();
 	single();
 
-	console.info('Square One FE: Initialized all javascript that targeted document ready.');
+	console.info( 'Square One FE: Initialized all javascript that targeted document ready.' );
 };
 
 /**
@@ -78,11 +78,11 @@ const init = () => {
  */
 
 const setupEnvironment = () => {
-	if (browserSupportsAllFeatures()) {
+	if ( browserSupportsAllFeatures() ) {
 		init();
 		return;
 	}
-	import('./polyfills' /* webpackChunkName:"polyfills" */).then(() => init());
+	import( './polyfills' /* webpackChunkName:"polyfills" */ ).then( () => init() );
 };
 
 /**
@@ -91,7 +91,7 @@ const setupEnvironment = () => {
  */
 
 const domReady = () => {
-	ready(setupEnvironment);
+	ready( setupEnvironment );
 };
 
 export default domReady;

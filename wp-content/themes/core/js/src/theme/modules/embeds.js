@@ -10,7 +10,7 @@ import * as tools from 'utils/tools';
 import { on } from 'utils/events';
 
 const el = {
-	container: tools.getNodes('site-wrap')[0],
+	container: tools.getNodes( 'site-wrap' )[ 0 ],
 	embeds: [],
 };
 
@@ -19,13 +19,13 @@ const el = {
  * @description Remove and clean up errant p tags added by WP auto P.
  */
 
-const removeErrantPTags = (embed) => {
-	const pStray = tools.getNodes('p', true, embed, true);
+const removeErrantPTags = ( embed ) => {
+	const pStray = tools.getNodes( 'p', true, embed, true );
 
-	if (pStray.length) {
-		pStray.forEach((node) => {
-			node.parentNode.removeChild(node);
-		});
+	if ( pStray.length ) {
+		pStray.forEach( ( node ) => {
+			node.parentNode.removeChild( node );
+		} );
 	}
 };
 
@@ -35,17 +35,17 @@ const removeErrantPTags = (embed) => {
  */
 
 const setupOembeds = () => {
-	el.embeds.forEach((embed) => {
+	el.embeds.forEach( ( embed ) => {
 		// Remove errant WP induced P tag
-		removeErrantPTags(embed);
+		removeErrantPTags( embed );
 
 		// Set display mode of embeds for small vs. regular
-		if (embed.offsetWidth >= 500) {
-			embed.classList.remove('c-video--is-small');
+		if ( embed.offsetWidth >= 500 ) {
+			embed.classList.remove( 'c-video--is-small' );
 		} else {
-			embed.classList.add('c-video--is-small');
+			embed.classList.add( 'c-video--is-small' );
 		}
-	});
+	} );
 };
 
 /**
@@ -54,24 +54,24 @@ const setupOembeds = () => {
  */
 
 const resetEmbed = () => {
-	const embed = document.getElementsByClassName('c-video--is-playing')[0];
-	if (!embed) {
+	const embed = document.getElementsByClassName( 'c-video--is-playing' )[ 0 ];
+	if ( ! embed ) {
 		return;
 	}
 
-	const trigger = embed.querySelector('.c-video__trigger');
-	const parent = embed.querySelector('.c-video__embed');
-	const iframe = embed.querySelector('iframe');
-	if (!iframe || !trigger) {
+	const trigger = embed.querySelector( '.c-video__trigger' );
+	const parent = embed.querySelector( '.c-video__embed' );
+	const iframe = embed.querySelector( 'iframe' );
+	if ( ! iframe || ! trigger ) {
 		return;
 	}
 
 	// Remove embed
-	parent.removeChild(iframe);
-	embed.classList.remove('c-video--is-playing');
+	parent.removeChild( iframe );
+	embed.classList.remove( 'c-video--is-playing' );
 
 	// Fade in image/caption
-	trigger.classList.remove('a11y-hidden');
+	trigger.classList.remove( 'a11y-hidden' );
 };
 
 /**
@@ -79,19 +79,19 @@ const resetEmbed = () => {
  * @description Play embed.
  */
 
-const playEmbed = (e) => {
+const playEmbed = ( e ) => {
 	e.preventDefault();
 
 	// Reset embed if another is playing
-	if (document.getElementsByClassName('c-video--is-playing').length) {
+	if ( document.getElementsByClassName( 'c-video--is-playing' ).length ) {
 		resetEmbed();
 	}
 
 	const target = e.delegateTarget;
-	const parent = tools.closest(target, '.c-video');
-	const videoId = parent.getAttribute('data-embed-id');
-	const iframeUrl = (parent.getAttribute('data-embed-provider') === 'YouTube') ? `https://www.youtube.com/embed/${videoId}?autoplay=1&autohide=1&fs=1&modestbranding=1&showinfo=0&controls=2&autoplay=1&rel=0&theme=light&vq=hd720` : `//player.vimeo.com/video/${videoId}?autoplay=1`;
-	const iframe = document.createElement('iframe');
+	const parent = tools.closest( target, '.c-video' );
+	const videoId = parent.getAttribute( 'data-embed-id' );
+	const iframeUrl = ( parent.getAttribute( 'data-embed-provider' ) === 'YouTube' ) ? `https://www.youtube.com/embed/${ videoId }?autoplay=1&autohide=1&fs=1&modestbranding=1&showinfo=0&controls=2&autoplay=1&rel=0&theme=light&vq=hd720` : `//player.vimeo.com/video/${ videoId }?autoplay=1`;
+	const iframe = document.createElement( 'iframe' );
 	iframe.id = videoId;
 	iframe.frameBorder = 0;
 	iframe.src = iframeUrl;
@@ -101,14 +101,14 @@ const playEmbed = (e) => {
 	iframe.allow = 'autoplay; fullscreen';
 
 	// Add & kickoff embed
-	parent.classList.add('c-video--is-playing');
-	tools.insertBefore(iframe, target);
+	parent.classList.add( 'c-video--is-playing' );
+	tools.insertBefore( iframe, target );
 	iframe.focus();
 
 	// Fade out image/caption, avoid fouc
-	_.delay(() => {
-		target.classList.add('a11y-hidden');
-	}, 250);
+	_.delay( () => {
+		target.classList.add( 'a11y-hidden' );
+	}, 250 );
 };
 
 /**
@@ -126,10 +126,10 @@ const executeResize = () => {
  */
 
 const cacheElements = () => {
-	if (!el.embeds) {
+	if ( ! el.embeds ) {
 		return;
 	}
-	el.embeds = tools.getNodes('c-video', true, el.container);
+	el.embeds = tools.getNodes( 'c-video', true, el.container );
 };
 
 /**
@@ -138,9 +138,9 @@ const cacheElements = () => {
  */
 
 const bindEvents = () => {
-	delegate(el.container, '[data-js="c-video-trigger"]', 'click', playEmbed);
+	delegate( el.container, '[data-js="c-video-trigger"]', 'click', playEmbed );
 
-	on(document, 'modern_tribe/resize_executed', executeResize);
+	on( document, 'modern_tribe/resize_executed', executeResize );
 };
 
 /**
@@ -149,20 +149,20 @@ const bindEvents = () => {
  */
 
 const embeds = () => {
-	if (!el.container) {
+	if ( ! el.container ) {
 		return;
 	}
 
 	cacheElements();
 
-	if (!el.embeds.length) {
+	if ( ! el.embeds.length ) {
 		return;
 	}
 
 	bindEvents();
 	setupOembeds();
 
-	console.info('Square One FE: Initialized embeds scripts.');
+	console.info( 'Square One FE: Initialized embeds scripts.' );
 };
 
 export default embeds;

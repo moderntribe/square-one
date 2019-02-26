@@ -15,15 +15,15 @@ const instances = {
 };
 
 const options = {
-	swiperMain: () => ({
+	swiperMain: () => ( {
 		a11y: true,
-	}),
-	swiperThumbs: () => ({
+	} ),
+	swiperThumbs: () => ( {
 		a11y: true,
 		slidesPerView: 'auto',
 		touchRatio: 0.2,
 		slideToClickedSlide: true,
-	}),
+	} ),
 };
 
 /**
@@ -31,12 +31,12 @@ const options = {
  * @description Update Pagination.
  */
 
-const updatePagination = (slider, swiperId) => {
-	const pagination = tools.getNodes('c-slider-pagination', false, slider)[0];
-	if (!pagination) {
+const updatePagination = ( slider, swiperId ) => {
+	const pagination = tools.getNodes( 'c-slider-pagination', false, slider )[ 0 ];
+	if ( ! pagination ) {
 		return;
 	}
-	pagination.setAttribute('data-id', swiperId);
+	pagination.setAttribute( 'data-id', swiperId );
 };
 
 /**
@@ -44,21 +44,21 @@ const updatePagination = (slider, swiperId) => {
  * @description Get the main variable options for the slider
  */
 
-const getMainOptsForSlider = (slider, swiperId) => {
+const getMainOptsForSlider = ( slider, swiperId ) => {
 	const opts = options.swiperMain();
-	if (slider.classList.contains('c-slider__main--has-arrows')) {
+	if ( slider.classList.contains( 'c-slider__main--has-arrows' ) ) {
 		opts.navigation = {};
 		opts.navigation.nextEl = '.c-slider__button--next';
 		opts.navigation.prevEl = '.c-slider__button--prev';
 	}
-	if (slider.classList.contains('c-slider__main--has-pagination')) {
+	if ( slider.classList.contains( 'c-slider__main--has-pagination' ) ) {
 		opts.pagination = {};
-		opts.pagination.el = `.c-slider__pagination[data-id="${swiperId}"]`;
+		opts.pagination.el = `.c-slider__pagination[data-id="${ swiperId }"]`;
 		opts.pagination.clickable = true;
-		updatePagination(slider, swiperId);
+		updatePagination( slider, swiperId );
 	}
-	if (slider.dataset.swiperOptions && tests.isJson(slider.dataset.swiperOptions)) {
-		Object.assign(opts, JSON.parse(slider.dataset.swiperOptions));
+	if ( slider.dataset.swiperOptions && tests.isJson( slider.dataset.swiperOptions ) ) {
+		Object.assign( opts, JSON.parse( slider.dataset.swiperOptions ) );
 	}
 	return opts;
 };
@@ -70,26 +70,25 @@ const getMainOptsForSlider = (slider, swiperId) => {
  * https://github.com/nolimits4web/Swiper/issues/1658
  */
 
-const syncMainSlider = (e) => {
-	const carousel = tools.closest(e.delegateTarget, '.swiper-container');
-	instances.swipers[carousel.dataset.controls].slideTo(e.delegateTarget.dataset.index);
+const syncMainSlider = ( e ) => {
+	const carousel = tools.closest( e.delegateTarget, '.swiper-container' );
+	instances.swipers[ carousel.dataset.controls ].slideTo( e.delegateTarget.dataset.index );
 };
-
 
 /**
  * @module
  * @description Focus row from index and row index
  */
 
-const focusRow = (index, rowIndex, jumpTo) => {
-	const sliderSelector = `[data-js="panel"][data-index="${index}"] [data-js="c-slider"]`;
-	const slider = tools.getNodes(sliderSelector, false, document, true)[0];
-	if (slider && slider.swiper) {
+const focusRow = ( index, rowIndex, jumpTo ) => {
+	const sliderSelector = `[data-js="panel"][data-index="${ index }"] [data-js="c-slider"]`;
+	const slider = tools.getNodes( sliderSelector, false, document, true )[ 0 ];
+	if ( slider && slider.swiper ) {
 		let newSpeed = slider.swiper.params.speed;
-		if (jumpTo) {
+		if ( jumpTo ) {
 			newSpeed = 0;
 		}
-		slider.swiper.slideTo(rowIndex, newSpeed);
+		slider.swiper.slideTo( rowIndex, newSpeed );
 	}
 };
 
@@ -98,11 +97,11 @@ const focusRow = (index, rowIndex, jumpTo) => {
  * @description Bind Carousel Events.
  */
 
-const bindCarouselEvents = (swiperThumbId, swiperMainId) => {
-	instances.swipers[swiperMainId].on('slideChangeStart', (instance) => {
-		instances.swipers[swiperThumbId].slideTo(instance.activeIndex);
-	});
-	delegate(instances.swipers[swiperThumbId].wrapperEl, '[data-js="c-slider-thumb-trigger"]', 'click', syncMainSlider);
+const bindCarouselEvents = ( swiperThumbId, swiperMainId ) => {
+	instances.swipers[ swiperMainId ].on( 'slideChangeStart', ( instance ) => {
+		instances.swipers[ swiperThumbId ].slideTo( instance.activeIndex );
+	} );
+	delegate( instances.swipers[ swiperThumbId ].wrapperEl, '[data-js="c-slider-thumb-trigger"]', 'click', syncMainSlider );
 };
 
 /**
@@ -110,19 +109,19 @@ const bindCarouselEvents = (swiperThumbId, swiperMainId) => {
  * @description Init the carousel
  */
 
-const initCarousel = (slider, swiperMainId) => {
+const initCarousel = ( slider, swiperMainId ) => {
 	const carousel = slider.nextElementSibling;
-	const swiperThumbId = _.uniqueId('swiper-carousel-');
-	carousel.classList.add('initialized');
+	const swiperThumbId = _.uniqueId( 'swiper-carousel-' );
+	carousel.classList.add( 'initialized' );
 	const opts = options.swiperThumbs();
-	if (carousel.dataset.swiperOptions && tests.isJson(carousel.dataset.swiperOptions)) {
-		Object.assign(opts, JSON.parse(carousel.dataset.swiperOptions));
+	if ( carousel.dataset.swiperOptions && tests.isJson( carousel.dataset.swiperOptions ) ) {
+		Object.assign( opts, JSON.parse( carousel.dataset.swiperOptions ) );
 	}
-	instances.swipers[swiperThumbId] = new Swiper(carousel, opts);
-	slider.setAttribute('data-controls', swiperThumbId);
-	carousel.setAttribute('data-id', swiperThumbId);
-	carousel.setAttribute('data-controls', swiperMainId);
-	bindCarouselEvents(swiperThumbId, swiperMainId);
+	instances.swipers[ swiperThumbId ] = new Swiper( carousel, opts );
+	slider.setAttribute( 'data-controls', swiperThumbId );
+	carousel.setAttribute( 'data-id', swiperThumbId );
+	carousel.setAttribute( 'data-controls', swiperMainId );
+	bindCarouselEvents( swiperThumbId, swiperMainId );
 };
 
 /**
@@ -131,16 +130,16 @@ const initCarousel = (slider, swiperMainId) => {
  */
 
 const initSliders = () => {
-	tools.getNodes('[data-js="c-slider"]:not(.initialized)', true, document, true).forEach((slider) => {
-		const swiperMainId = _.uniqueId('swiper-');
-		slider.classList.add('initialized');
-		instances.swipers[swiperMainId] = new Swiper(slider, getMainOptsForSlider(slider, swiperMainId));
-		slider.setAttribute('data-id', swiperMainId);
-		if (!slider.classList.contains('c-slider__main--has-carousel')) {
+	tools.getNodes( '[data-js="c-slider"]:not(.initialized)', true, document, true ).forEach( ( slider ) => {
+		const swiperMainId = _.uniqueId( 'swiper-' );
+		slider.classList.add( 'initialized' );
+		instances.swipers[ swiperMainId ] = new Swiper( slider, getMainOptsForSlider( slider, swiperMainId ) );
+		slider.setAttribute( 'data-id', swiperMainId );
+		if ( ! slider.classList.contains( 'c-slider__main--has-carousel' ) ) {
 			return;
 		}
-		initCarousel(slider, swiperMainId);
-	});
+		initCarousel( slider, swiperMainId );
+	} );
 };
 
 /**
@@ -148,23 +147,23 @@ const initSliders = () => {
  * @description Responds to panel live updating.
  */
 
-const previewChangeHandler = (e) => {
-	if (e.type === 'modular_content/panel_preview_updated') {
+const previewChangeHandler = ( e ) => {
+	if ( e.type === 'modular_content/panel_preview_updated' ) {
 		initSliders();
 	}
-	_.delay(() => {
+	_.delay( () => {
 		// for cases when all we have is the parent (example: when updating CTAs)
-		const data = _.get(e, 'detail.parent.data', {});
-		if (typeof data.index !== 'undefined' && typeof data.childIndex !== 'undefined') {
-			focusRow(data.index, data.childIndex, true);
-		} else if (typeof e.detail.index !== 'undefined' && typeof e.detail.rowIndex !== 'undefined') {
-			if (e.type === 'modular_content/repeater_row_deactivated') {
-				focusRow(e.detail.index, 0);
+		const data = _.get( e, 'detail.parent.data', {} );
+		if ( typeof data.index !== 'undefined' && typeof data.childIndex !== 'undefined' ) {
+			focusRow( data.index, data.childIndex, true );
+		} else if ( typeof e.detail.index !== 'undefined' && typeof e.detail.rowIndex !== 'undefined' ) {
+			if ( e.type === 'modular_content/repeater_row_deactivated' ) {
+				focusRow( e.detail.index, 0 );
 			} else {
-				focusRow(e.detail.index, e.detail.rowIndex);
+				focusRow( e.detail.index, e.detail.rowIndex );
 			}
 		}
-	}, 50);
+	}, 50 );
 };
 
 /**
@@ -173,18 +172,17 @@ const previewChangeHandler = (e) => {
  */
 
 const bindEvents = () => {
-	document.addEventListener('modular_content/panel_preview_updated', previewChangeHandler);
-	document.addEventListener('modular_content/repeater_row_activated', previewChangeHandler);
-	document.addEventListener('modular_content/repeater_row_deactivated', previewChangeHandler);
-	document.addEventListener('modular_content/repeater_row_added', previewChangeHandler);
+	document.addEventListener( 'modular_content/panel_preview_updated', previewChangeHandler );
+	document.addEventListener( 'modular_content/repeater_row_activated', previewChangeHandler );
+	document.addEventListener( 'modular_content/repeater_row_deactivated', previewChangeHandler );
+	document.addEventListener( 'modular_content/repeater_row_added', previewChangeHandler );
 };
 
 const init = () => {
 	initSliders();
 	bindEvents();
 
-
-	console.info('Square One FE: Initialized slider component scripts.');
+	console.info( 'Square One FE: Initialized slider component scripts.' );
 };
 
 export default init;
