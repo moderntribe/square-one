@@ -19,6 +19,7 @@ if (!config) {
 
 const {
 	clean,
+	concat,
 	postcss,
 	cssnano
 } = tasks;
@@ -37,6 +38,10 @@ gulp.task( 'scripts-prod', function() {
 	return gulp.src( '' )
 		.pipe( shell( 'yarn prod' ) );
 } );
+
+/* Concat tasks */
+
+gulp.task( 'concat:themeMinVendors', concat.themeMinVendors );
 
 /* Clean tasks */
 
