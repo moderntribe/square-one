@@ -31,6 +31,10 @@ const gulpTasks = [
 
 	'concat:themeMinVendors',
 
+	/* Constants tasks */
+
+	'constants:buildTimestamp',
+
 	/* Copy tasks */
 
 	'copy:coreIconsFonts',
