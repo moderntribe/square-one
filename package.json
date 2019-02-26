@@ -137,6 +137,7 @@
     "gulp-footer": "^2.0.2",
     "gulp-header": "^2.0.7",
     "gulp-if": "^2.0.2",
+    "gulp-line-ending-corrector": "^1.0.3",
     "gulp-postcss": "^7.0.0",
     "gulp-rename": "^1.4.0",
     "gulp-replace": "^1.0.0",
