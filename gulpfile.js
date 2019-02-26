@@ -1,5 +1,4 @@
 const gulp = require( 'gulp' );
-const postcss = require( 'gulp-postcss' );
 const cssnano = require( 'gulp-cssnano' );
 const runSequence = require( 'run-sequence' );
 const gulpIf = require( 'gulp-if' );
@@ -36,7 +35,25 @@ gulp.task( 'scripts-prod', function() {
 		.pipe( shell( 'yarn prod' ) );
 } );
 
-gulp.task( 'postcss-theme', tasks.postcss.theme );
+/* Clean tasks */
+
+gulp.task( 'clean:coreIconsStart', tasks.clean.coreIconsStart );
+gulp.task( 'clean:coreIconsEnd', tasks.clean.coreIconsEnd );
+gulp.task( 'clean:themeMinCSS', tasks.clean.themeMinCSS );
+gulp.task( 'clean:themeMinJS', tasks.clean.themeMinJS );
+gulp.task( 'clean:themeMinVendorJS', tasks.clean.themeMinVendorJS );
+
+/* Postcss tasks */
+
+gulp.task( 'postcss:theme', tasks.postcss.theme );
+gulp.task( 'postcss:themeLegacy', tasks.postcss.themeLegacy );
+gulp.task( 'postcss:themeWPEditor', tasks.postcss.themeWPEditor );
+gulp.task( 'postcss:themeWPLogin', tasks.postcss.themeWPLogin );
+gulp.task( 'postcss:themeWPAdmin', tasks.postcss.themeWPAdmin );
+
+/* Cssnano tasks */
+
+gulp.task( 'cssnano:themeMin', tasks.cssnano.themeMin );
 
 gulp.task( 'postcss-prod', function() {
 	return gulp.src( [ 'public/css/app.css' ] )
