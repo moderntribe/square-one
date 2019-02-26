@@ -20,6 +20,7 @@ if (!config) {
 const {
 	clean,
 	concat,
+	copy,
 	postcss,
 	cssnano
 } = tasks;
@@ -42,6 +43,13 @@ gulp.task( 'scripts-prod', function() {
 /* Concat tasks */
 
 gulp.task( 'concat:themeMinVendors', concat.themeMinVendors );
+
+/* Copy tasks */
+
+gulp.task( 'copy:coreIconsFonts', copy.coreIconsFonts );
+gulp.task( 'copy:coreIconsStyles', copy.coreIconsStyles );
+gulp.task( 'copy:coreIconsVariables', copy.coreIconsVariables );
+gulp.task( 'copy:themeJS', copy.themeJS );
 
 /* Clean tasks */
 
