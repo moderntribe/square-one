@@ -5,8 +5,8 @@
  * @desc scrollTo allows equalized or duration based scrolling of the body to a supplied $target with options.
  */
 
-const scrollTo = (opts) => {
-	const options = Object.assign({
+const scrollTo = ( opts ) => {
+	const options = Object.assign( {
 		auto: false,
 		auto_coefficent: 2.5,
 		afterScroll() {
@@ -16,24 +16,24 @@ const scrollTo = (opts) => {
 		easing: 'linear',
 		offset: 0,
 		$target: $(),
-	}, opts);
+	}, opts );
 	let position;
 	let htmlPosition;
 
-	if (options.$target.length) {
+	if ( options.$target.length ) {
 		position = options.$target.offset().top + options.offset;
 
-		if (options.auto) {
-			htmlPosition = $('html').scrollTop();
+		if ( options.auto ) {
+			htmlPosition = $( 'html' ).scrollTop();
 
-			if (position > htmlPosition) {
-				options.duration = (position - htmlPosition) / options.auto_coefficent;
+			if ( position > htmlPosition ) {
+				options.duration = ( position - htmlPosition ) / options.auto_coefficent;
 			} else {
-				options.duration = (htmlPosition - position) / options.auto_coefficent;
+				options.duration = ( htmlPosition - position ) / options.auto_coefficent;
 			}
 		}
 
-		$('html, body').animate({ scrollTop: position }, options.duration, options.easing, options.after_scroll);
+		$( 'html, body' ).animate( { scrollTop: position }, options.duration, options.easing, options.after_scroll );
 	}
 };
 
