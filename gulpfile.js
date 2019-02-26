@@ -79,6 +79,11 @@ const gulpTasks = [
 	'postcss:themeWPLogin',
 	'postcss:themeWPAdmin',
 
+	/* Replace tasks */
+
+	'replace:coreIconsStyle',
+	'replace:coreIconsVariables',
+
 	/* Cssnano tasks */
 
 	'cssnano:themeMin',
