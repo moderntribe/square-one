@@ -3,7 +3,7 @@ const runSequence = require( 'run-sequence' );
 const shell = require( 'gulp-shell' );
 const stylelint = require( 'gulp-stylelint' );
 const requireDir = require( 'require-dir' );
-const tasks = requireDir( './gulp_options' );
+const tasks = requireDir( './gulp_tasks' );
 const browserSync = require( 'browser-sync' ).create( 'Tribe Dev' );
 const { reload } = browserSync;
 let config = require( './local-config.json' );
@@ -15,14 +15,88 @@ if ( ! config ) {
 	};
 }
 
-const {
-	clean,
-	concat,
-	copy,
-	eslint,
-	postcss,
-	cssnano,
-} = tasks;
+/**
+ * List out your tasks as defined in the gulp_tasks directory
+ * require-dir module will bring those in here as an array of objects
+ * Each object will be named by its filename
+ * So: 'concat:themeMinVendors' means a file named 'concat' in the grunt_tasks dir,
+ * and the method themeMinVendors inside that export.
+ * You must follow this approach, or modify the registerTasks function below.
+ *
+ * @type {string[]}
+ */
+
+const gulpTasks = [
+	/* Concat tasks */
+
+	'concat:themeMinVendors',
+
+	/* Copy tasks */
+
+	'copy:coreIconsFonts',
+	'copy:coreIconsStyles',
+	'copy:coreIconsVariables',
+	'copy:themeJS',
+
+	/* Clean tasks */
+
+	'clean:coreIconsStart',
+	'clean:coreIconsEnd',
+	'clean:themeMinCSS',
+	'clean:themeMinJS',
+	'clean:themeMinVendorJS',
+
+	/* Eslint tasks */
+
+	'eslint:theme',
+	'eslint:apps',
+	'eslint:utils',
+	'eslint:admin',
+
+	/* Footer tasks */
+
+	'footer:theme',
+
+	/* Header tasks */
+
+	'header:coreIconsStyle',
+	'header:coreIconsVariables',
+	'header:theme',
+	'header:themePrint',
+	'header:themeLegacy',
+	'header:themeWPEditor',
+	'header:themeWPLogin',
+
+	/* Postcss tasks */
+
+	'postcss:theme',
+	'postcss:themeLegacy',
+	'postcss:themeWPEditor',
+	'postcss:themeWPLogin',
+	'postcss:themeWPAdmin',
+
+	/* Cssnano tasks */
+
+	'cssnano:themeMin',
+	'cssnano:themeLegacyMin',
+	'cssnano:themeWPEditorMin',
+	'cssnano:themeWPAdminMin',
+	'cssnano:themeWPLoginMin',
+];
+
+/**
+ * Iterate over the above array. Split on the colon to access the imported tasks array's
+ * corresponding function for the current task in the loop
+ */
+
+function registerTasks() {
+	gulpTasks.forEach( ( task ) => {
+		const parts = task.split( ':' );
+		gulp.task( task, tasks[ parts[ 0 ] ][ parts[ 1 ] ] );
+	} );
+}
+
+registerTasks();
 
 gulp.task( 'scripts-dev', function() {
 	return gulp.src( '' )
@@ -34,48 +108,6 @@ gulp.task( 'scripts-prod', function() {
 	return gulp.src( '' )
 		.pipe( shell( 'yarn prod' ) );
 } );
-
-/* Concat tasks */
-
-gulp.task( 'concat:themeMinVendors', concat.themeMinVendors );
-
-/* Copy tasks */
-
-gulp.task( 'copy:coreIconsFonts', copy.coreIconsFonts );
-gulp.task( 'copy:coreIconsStyles', copy.coreIconsStyles );
-gulp.task( 'copy:coreIconsVariables', copy.coreIconsVariables );
-gulp.task( 'copy:themeJS', copy.themeJS );
-
-/* Clean tasks */
-
-gulp.task( 'clean:coreIconsStart', clean.coreIconsStart );
-gulp.task( 'clean:coreIconsEnd', clean.coreIconsEnd );
-gulp.task( 'clean:themeMinCSS', clean.themeMinCSS );
-gulp.task( 'clean:themeMinJS', clean.themeMinJS );
-gulp.task( 'clean:themeMinVendorJS', clean.themeMinVendorJS );
-
-/* Eslint tasks */
-
-gulp.task( 'eslint:theme', eslint.theme );
-gulp.task( 'eslint:apps', eslint.apps );
-gulp.task( 'eslint:utils', eslint.utils );
-gulp.task( 'eslint:admin', eslint.admin );
-
-/* Postcss tasks */
-
-gulp.task( 'postcss:theme', postcss.theme );
-gulp.task( 'postcss:themeLegacy', postcss.themeLegacy );
-gulp.task( 'postcss:themeWPEditor', postcss.themeWPEditor );
-gulp.task( 'postcss:themeWPLogin', postcss.themeWPLogin );
-gulp.task( 'postcss:themeWPAdmin', postcss.themeWPAdmin );
-
-/* Cssnano tasks */
-
-gulp.task( 'cssnano:themeMin', cssnano.themeMin );
-gulp.task( 'cssnano:themeLegacyMin', cssnano.themeLegacyMin );
-gulp.task( 'cssnano:themeWPEditorMin', cssnano.themeWPEditorMin );
-gulp.task( 'cssnano:themeWPAdminMin', cssnano.themeWPAdminMin );
-gulp.task( 'cssnano:themeWPLoginMin', cssnano.themeWPLoginMin );
 
 gulp.task( 'postcss-lint', function() {
 	return gulp.src( 'resources/assets/pcss/**/*.pcss' )
