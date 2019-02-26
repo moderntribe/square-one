@@ -18,9 +18,29 @@ function minify(src = [], dest = pkg._core_admin_css_path) {
 
 module.exports = {
 	themeMin() {
-		return minify([
+		return minify( [
 			`${pkg._core_theme_css_path}master.css`,
 			`${pkg._core_theme_css_path}print.css`,
-		], pkg._core_theme_css_dist_path);
+		], pkg._core_theme_css_dist_path );
+	},
+	themeLegacyMin() {
+		return minify( [
+			`${pkg._core_theme_css_path}legacy.css`,
+		], pkg._core_theme_css_dist_path );
+	},
+	themeWPEditorMin() {
+		return minify( [
+			`${pkg._core_admin_css_path}editor-style.css`,
+		] );
+	},
+	themeWPAdminMin() {
+		return minify( [
+			`${pkg._core_admin_css_path}master.css`,
+		] );
+	},
+	themeWPLoginMin() {
+		return minify( [
+			`${pkg._core_admin_css_path}login.css`,
+		] );
 	},
 };

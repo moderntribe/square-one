@@ -1,10 +1,7 @@
 const gulp = require( 'gulp' );
-const cssnano = require( 'gulp-cssnano' );
 const runSequence = require( 'run-sequence' );
 const gulpIf = require( 'gulp-if' );
-const sourcemaps = require( 'gulp-sourcemaps' );
 const eslint = require( 'gulp-eslint' );
-const rename = require( 'gulp-rename' );
 const shell = require( 'gulp-shell' );
 const stylelint = require( 'gulp-stylelint' );
 const requireDir = require('require-dir');
@@ -19,6 +16,12 @@ if (!config) {
 		certs_path: '',
 	}
 }
+
+const {
+	clean,
+	postcss,
+	cssnano
+} = tasks;
 
 function isFixed( file ) {
 	return file.eslint != null && file.eslint.fixed;
@@ -37,32 +40,27 @@ gulp.task( 'scripts-prod', function() {
 
 /* Clean tasks */
 
-gulp.task( 'clean:coreIconsStart', tasks.clean.coreIconsStart );
-gulp.task( 'clean:coreIconsEnd', tasks.clean.coreIconsEnd );
-gulp.task( 'clean:themeMinCSS', tasks.clean.themeMinCSS );
-gulp.task( 'clean:themeMinJS', tasks.clean.themeMinJS );
-gulp.task( 'clean:themeMinVendorJS', tasks.clean.themeMinVendorJS );
+gulp.task( 'clean:coreIconsStart', clean.coreIconsStart );
+gulp.task( 'clean:coreIconsEnd', clean.coreIconsEnd );
+gulp.task( 'clean:themeMinCSS', clean.themeMinCSS );
+gulp.task( 'clean:themeMinJS', clean.themeMinJS );
+gulp.task( 'clean:themeMinVendorJS', clean.themeMinVendorJS );
 
 /* Postcss tasks */
 
-gulp.task( 'postcss:theme', tasks.postcss.theme );
-gulp.task( 'postcss:themeLegacy', tasks.postcss.themeLegacy );
-gulp.task( 'postcss:themeWPEditor', tasks.postcss.themeWPEditor );
-gulp.task( 'postcss:themeWPLogin', tasks.postcss.themeWPLogin );
-gulp.task( 'postcss:themeWPAdmin', tasks.postcss.themeWPAdmin );
+gulp.task( 'postcss:theme', postcss.theme );
+gulp.task( 'postcss:themeLegacy', postcss.themeLegacy );
+gulp.task( 'postcss:themeWPEditor', postcss.themeWPEditor );
+gulp.task( 'postcss:themeWPLogin', postcss.themeWPLogin );
+gulp.task( 'postcss:themeWPAdmin', postcss.themeWPAdmin );
 
 /* Cssnano tasks */
 
-gulp.task( 'cssnano:themeMin', tasks.cssnano.themeMin );
-
-gulp.task( 'postcss-prod', function() {
-	return gulp.src( [ 'public/css/app.css' ] )
-		.pipe( sourcemaps.init() )
-		.pipe( cssnano() )
-		.pipe( rename( 'app.min.css' ) )
-		.pipe( sourcemaps.write( '.' ) )
-		.pipe( gulp.dest( 'public/css' ) );
-} );
+gulp.task( 'cssnano:themeMin', cssnano.themeMin );
+gulp.task( 'cssnano:themeLegacyMin', cssnano.themeLegacyMin );
+gulp.task( 'cssnano:themeWPEditorMin', cssnano.themeWPEditorMin );
+gulp.task( 'cssnano:themeWPAdminMin', cssnano.themeWPAdminMin );
+gulp.task( 'cssnano:themeWPLoginMin', cssnano.themeWPLoginMin );
 
 gulp.task( 'scripts-lint', function() {
 	return gulp.src( [ 'resources/assets/js/**/*' ] )
