@@ -1,10 +1,8 @@
 const gulp = require( 'gulp' );
 const runSequence = require( 'run-sequence' );
-const stylelint = require( 'gulp-stylelint' );
 const requireDir = require( 'require-dir' );
 const tasks = requireDir( './gulp_tasks' );
 const browserSync = require( 'browser-sync' ).create( 'Tribe Dev' );
-const { reload } = browserSync;
 let config = require( './local-config.json' );
 
 if ( ! config ) {
@@ -108,6 +106,11 @@ const gulpTasks = [
 	'shell:scriptsAdminDev', // runs webpack for the admin dev build
 	'shell:scriptsAdminProd', // runs webpack for the admin prod build
 
+	/* Stylelint tasks */
+
+	'stylelint:theme', // lints and fixes the theme pcss
+	'stylelint:apps', // lints and fixes the apps pcss modules
+
 	/* Uglify tasks */
 
 	'uglify:themeMin', // minify vendors into a single min bundle (just after this they are concat with the webpack vendor bundle)
@@ -126,28 +129,6 @@ function registerTasks() {
 }
 
 registerTasks();
-
-gulp.task( 'postcss-lint', function() {
-	return gulp.src( 'resources/assets/pcss/**/*.pcss' )
-		.pipe( stylelint( {
-			fix: true,
-			reporters: [
-				{ formatter: 'string', console: true },
-			],
-		} ) )
-		.pipe( gulp.dest( 'resources/assets/pcss' ) );
-} );
-
-gulp.task( 'postcss-lint-js', function() {
-	return gulp.src( 'resources/assets/js/**/*.pcss' )
-		.pipe( stylelint( {
-			fix: true,
-			reporters: [
-				{ formatter: 'string', console: true },
-			],
-		} ) )
-		.pipe( gulp.dest( 'resources/assets/js' ) );
-} );
 
 gulp.task( 'watch', function() {
 	gulp.watch( [ 'resources/assets/js/**/*' ], [ 'scripts-dev' ] );
@@ -183,7 +164,3 @@ gulp.task( 'dist', function( callback ) {
 } );
 
 gulp.task( 'default', [ 'dist' ] );
-
-module.exports = {
-	reload,
-};
