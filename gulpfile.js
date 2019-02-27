@@ -29,72 +29,72 @@ if ( ! config ) {
 const gulpTasks = [
 	/* Concat tasks */
 
-	'concat:themeMinVendors',
+	'concat:themeMinVendors', // concat the webpack and manual vendors together into one file
 
 	/* Constants tasks */
 
-	'constants:buildTimestamp',
+	'constants:buildTimestamp', // set a timestamp for cache busting of css and js by php
 
 	/* Copy tasks */
 
-	'copy:coreIconsFonts',
-	'copy:coreIconsStyles',
-	'copy:coreIconsVariables',
-	'copy:themeJS',
+	'copy:coreIconsFonts', // copy fonts for icons from dev folder to theme
+	'copy:coreIconsStyles', // copy styles for icons to theme pcss base dir
+	'copy:coreIconsVariables', // copy variables for icons to theme pcss variables dir
+	'copy:themeJS', // copy vendors from node_modules to theme js vendors dir
 
 	/* Clean tasks */
 
-	'clean:coreIconsStart',
-	'clean:coreIconsEnd',
-	'clean:themeMinCSS',
-	'clean:themeMinJS',
-	'clean:themeMinVendorJS',
-
-	/* Eslint tasks */
-
-	'eslint:theme',
-	'eslint:apps',
-	'eslint:utils',
-	'eslint:admin',
-
-	/* Footer tasks */
-
-	'footer:theme',
-
-	/* Header tasks */
-
-	'header:coreIconsStyle',
-	'header:coreIconsVariables',
-	'header:theme',
-	'header:themePrint',
-	'header:themeLegacy',
-	'header:themeWPEditor',
-	'header:themeWPLogin',
-
-	/* Line ending tasks */
-
-	'lineending:win',
-
-	/* Postcss tasks */
-
-	'postcss:theme',
-	'postcss:themeLegacy',
-	'postcss:themeWPEditor',
-	'postcss:themeWPLogin',
-	'postcss:themeWPAdmin',
-
-	/* Replace tasks */
-
-	'replace:coreIconsStyle',
-	'replace:coreIconsVariables',
+	'clean:coreIconsStart', // delete all files related to icons in pcss, in prep for reinjection
+	'clean:coreIconsEnd', // delete the zip file you pasted in dev_components
+	'clean:themeMinCSS', // delete all minified css files in theme
+	'clean:themeMinJS', // delete all minified js files in theme
+	'clean:themeMinVendorJS', // delete all minified vendors in theme
 
 	/* Cssnano tasks */
 
-	'cssnano:themeMin',
-	'cssnano:themeLegacyMin',
-	'cssnano:themeWPEditorMin',
-	'cssnano:themeWPAdminMin',
-	'cssnano:themeWPLoginMin',
+	'cssnano:themeMin', // minify the theme css
+	'cssnano:themeLegacyMin', // minify the legacy css for old browsers
+	'cssnano:themeWPEditorMin', // minify the editor css
+	'cssnano:themeWPAdminMin', // minify the main admin css bundle
+	'cssnano:themeWPLoginMin', // minify the login screen css
+
+	/* Eslint tasks */
+
+	'eslint:theme', // lint the theme js according to the products lint rules, uses fix to auto correct common issues
+	'eslint:apps', // lint the apps js according to the products lint rules, uses fix to auto correct common issues
+	'eslint:utils', // lint the utils js according to the products lint rules, uses fix to auto correct common issues
+	'eslint:admin', // lint the admin js according to the products lint rules, uses fix to auto correct common issues
+
+	/* Footer tasks */
+
+	'footer:theme', // just adds a closing } to the icons variables file during the icons import transform tasks
+
+	/* Header tasks */
+
+	'header:coreIconsStyle', // sets the header for the core icons style file in base during the icons import transform tasks
+	'header:coreIconsVariables', // sets the header for the core icons style file in vars during the icons import transform tasks
+	'header:theme', // sets a small header for minified files to make them traceable when checking fe src
+	'header:themePrint', // sets a small header for minified files to make them traceable when checking fe src
+	'header:themeLegacy', // sets a small header for minified files to make them traceable when checking fe src
+	'header:themeWPEditor', // sets a small header for minified files to make them traceable when checking fe src
+	'header:themeWPLogin', // sets a small header for minified files to make them traceable when checking fe src
+
+	/* Line ending tasks */
+
+	'lineending:win', // used by those sad folks on win systems at times to avoid LOE change commits on vendor files
+
+	/* Postcss tasks */
+
+	'postcss:theme', // the big ol postcss task that transforms theme pcss to css
+	'postcss:themeLegacy', // the postcss task that transforms legacy pcss to css
+	'postcss:themeWPEditor', // the postcss task that transforms editor pcss to css
+	'postcss:themeWPLogin', // the postcss task that transforms login pcss to css
+	'postcss:themeWPAdmin', // the postcss task that transforms admin pcss to css
+
+	/* Replace tasks */
+
+	'replace:coreIconsStyle', // runs regex to replace and convert scss to pcss compatible with our systems in the icons task
+	'replace:coreIconsVariables', // runs regex to replace and convert scss to pcss compatible with our systems in the icons task
 ];
 
 /**
