@@ -104,6 +104,10 @@ const gulpTasks = [
 	'shell:scriptsThemeProd', // runs webpack for the theme prod build
 	'shell:scriptsAdminDev', // runs webpack for the admin dev build
 	'shell:scriptsAdminProd', // runs webpack for the admin prod build
+
+	/* Uglify tasks */
+
+	'uglify:themeMin', // minify vendors into a single min bundle (just after this they are concat with the webpack vendor bundle)
 ];
 
 /**
@@ -119,17 +123,6 @@ function registerTasks() {
 }
 
 registerTasks();
-
-gulp.task( 'scripts-dev', function() {
-	return gulp.src( '' )
-		.pipe( shell( 'yarn dev' ) )
-		.on( 'finish', reload );
-} );
-
-gulp.task( 'scripts-prod', function() {
-	return gulp.src( '' )
-		.pipe( shell( 'yarn prod' ) );
-} );
 
 gulp.task( 'postcss-lint', function() {
 	return gulp.src( 'resources/assets/pcss/**/*.pcss' )
