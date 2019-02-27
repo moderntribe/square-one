@@ -1,6 +1,5 @@
 const gulp = require( 'gulp' );
 const runSequence = require( 'run-sequence' );
-const shell = require( 'gulp-shell' );
 const stylelint = require( 'gulp-stylelint' );
 const requireDir = require( 'require-dir' );
 const tasks = requireDir( './gulp_tasks' );
@@ -57,6 +56,10 @@ const gulpTasks = [
 	'cssnano:themeWPEditorMin', // minify the editor css
 	'cssnano:themeWPAdminMin', // minify the main admin css bundle
 	'cssnano:themeWPLoginMin', // minify the login screen css
+
+	/* Decompress tasks */
+
+	'decompress:coreIcons', // extract the core-icons.zip from dev_components dir to dev_components/theme/icons/core
 
 	/* Eslint tasks */
 

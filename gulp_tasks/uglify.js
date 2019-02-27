@@ -15,7 +15,6 @@ module.exports = {
 		] )
 			.pipe( concat( 'vendorGlobal.min.js' ) )
 			.pipe( uglify( {
-				banner: '/* Core: JS Master */\n',
 				compress: {
 					drop_console: true,
 				},
