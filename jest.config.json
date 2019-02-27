@@ -15,9 +15,10 @@
         "\\.(css|pcss)$": "identity-obj-proxy"
     },
     "setupFiles": [
-        "core-js/es7",
-        "raf/polyfill",
-        "<rootDir>/jest.setup.js"
+        "<rootDir>/wp-content/themes/core/js/test/setup.js"
+    ],
+    "roots": [
+        "<rootDir>/wp-content/themes/core/js/test"
     ],
     "snapshotSerializers": [
         "enzyme-to-json/serializer"
