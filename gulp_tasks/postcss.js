@@ -2,6 +2,8 @@ const gulp = require( 'gulp' );
 const postcss = require( 'gulp-postcss' );
 const sourcemaps = require( 'gulp-sourcemaps' );
 const rename = require( 'gulp-rename' );
+const gulpif = require( 'gulp-if' );
+const browserSync = require( 'browser-sync' );
 const postcssFunctions = require( '../dev_components/theme/pcss/functions' );
 const pkg = require( '../package.json' );
 
@@ -34,12 +36,14 @@ const legacyPlugins = [
 ];
 
 function cssProcess( src = [], dest = pkg._core_admin_css_path, plugins = compilePlugins ) {
+	const server = browserSync.get( 'Tribe Dev' );
 	return gulp.src( src )
 		.pipe( sourcemaps.init() )
 		.pipe( postcss( plugins ) )
 		.pipe( rename( { extname: '.css' } ) )
 		.pipe( sourcemaps.write( '.' ) )
-		.pipe( gulp.dest( dest ) );
+		.pipe( gulp.dest( dest ) )
+		.pipe( gulpif( server.active, server.reload( { stream: true } ) ) );
 }
 
 module.exports = {

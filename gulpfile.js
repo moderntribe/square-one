@@ -95,6 +95,15 @@ const gulpTasks = [
 
 	'replace:coreIconsStyle', // runs regex to replace and convert scss to pcss compatible with our systems in the icons task
 	'replace:coreIconsVariables', // runs regex to replace and convert scss to pcss compatible with our systems in the icons task
+
+	/* Shell tasks */
+
+	'shell:yarnInstall', // runs yarn install at start of dist to make sure we are up to date. Exclude from server dist
+	'shell:test', // runs jests tests
+	'shell:scriptsThemeDev', // runs webpack for the theme dev build
+	'shell:scriptsThemeProd', // runs webpack for the theme prod build
+	'shell:scriptsAdminDev', // runs webpack for the admin dev build
+	'shell:scriptsAdminProd', // runs webpack for the admin prod build
 ];
 
 /**
@@ -178,3 +187,7 @@ gulp.task( 'dist', function( callback ) {
 } );
 
 gulp.task( 'default', [ 'dist' ] );
+
+module.exports = {
+	reload,
+};
