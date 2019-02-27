@@ -6,25 +6,28 @@ module.exports = {
 	coreIconsStyle() {
 		return gulp.src( `${ pkg._core_theme_pcss_path }base/_icons.pcss` )
 			.pipe( header( `
-			/* -----------------------------------------------------------------------------
-			 * Font Icons (via IcoMoon)
-			 * ----------------------------------------------------------------------------- */
-			 
-			 /* stylelint-disable */
-			` ) )
+/* -----------------------------------------------------------------------------
+ *
+ * Font Icons (via IcoMoon)
+ * 
+ * ----------------------------------------------------------------------------- */
+ 
+ /* stylelint-disable */` ) )
 			.pipe( gulp.dest( `${ pkg._core_theme_pcss_path }base/` ) );
 	},
 	coreIconsVariables() {
 		return gulp.src( `${ pkg._core_theme_pcss_path }utilities/variables/_icons.pcss` )
 			.pipe( header( `
-			/* -----------------------------------------------------------------------------
-			 * Font Icons (via IcoMoon)
-			 * ----------------------------------------------------------------------------- */
-			 
-			 /* stylelint-disable */
-			 
-			 :root {
-			` ) )
+/* -----------------------------------------------------------------------------
+ * 
+ * Font Icons (via IcoMoon)
+ * 
+ * ----------------------------------------------------------------------------- */
+ 
+ /* stylelint-disable */
+ 
+ :root {
+ ` ) )
 			.pipe( gulp.dest( `${ pkg._core_theme_pcss_path }utilities/variables/` ) );
 	},
 	theme() {

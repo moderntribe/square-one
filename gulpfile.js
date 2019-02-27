@@ -68,7 +68,7 @@ const gulpTasks = [
 
 	/* Footer tasks */
 
-	'footer:theme', // just adds a closing } to the icons variables file during the icons import transform tasks
+	'footer:coreIconsVariables', // just adds a closing } to the icons variables file during the icons import transform tasks
 
 	/* Header tasks */
 
@@ -150,6 +150,22 @@ gulp.task( 'dev', [
 			forms: true,
 		},
 	} );
+} );
+
+gulp.task( 'icons', function() {
+	runSequence(
+		'clean:coreIconsStart',
+		'decompress:coreIcons',
+		'copy:coreIconsFonts',
+		'copy:coreIconsStyles',
+		'copy:coreIconsVariables',
+		'replace:coreIconsStyle',
+		'replace:coreIconsVariables',
+		'header:coreIconsStyle',
+		'header:coreIconsVariables',
+		'footer:coreIconsVariables',
+		'clean:coreIconsEnd',
+	);
 } );
 
 gulp.task( 'dist', function( callback ) {
