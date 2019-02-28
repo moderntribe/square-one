@@ -16,7 +16,7 @@ module.exports = {
 		const server = browserSync.get( 'Tribe Dev' );
 		return gulp.src( '' )
 			.pipe( shell( 'yarn js:theme:dev' ) )
-			.on( 'finish', gulpif( server.active, server.reload() ) );
+			.on( 'finish', gulpif( server.active, server.reload ) );
 	},
 	scriptsThemeProd() {
 		return gulp.src( '' )
@@ -26,7 +26,7 @@ module.exports = {
 		const server = browserSync.get( 'Tribe Dev' );
 		return gulp.src( '' )
 			.pipe( shell( 'yarn js:admin:dev' ) )
-			.on( 'finish', gulpif( server.active, server.reload() ) );
+			.on( 'finish', gulpif( server.active, server.reload ) );
 	},
 	scriptsAdminProd() {
 		return gulp.src( '' )

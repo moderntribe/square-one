@@ -3,6 +3,7 @@ const runSequence = require( 'run-sequence' );
 const requireDir = require( 'require-dir' );
 const tasks = requireDir( './gulp_tasks' );
 const browserSync = require( 'browser-sync' ).create( 'Tribe Dev' );
+const pkg = require( './package.json' );
 
 let config = require( './local-config.json' );
 
@@ -132,19 +133,25 @@ function registerTasks() {
 registerTasks();
 
 gulp.task( 'watch', function() {
-	gulp.watch( [ 'resources/assets/js/**/*' ], [ 'scripts-dev' ] );
-	gulp.watch( [ 'resources/assets/pcss/**/*' ], [ 'postcss-dev' ] );
+	gulp.watch( [ `${ pkg._core_theme_js_src_path }**/*.js` ], [ 'shell:scriptsThemeDev' ] );
+	gulp.watch( [ `${ pkg._core_admin_js_src_path }**/*.js` ], [ 'shell:scriptsAdminDev' ] );
 } );
 
 gulp.task( 'dev', [
 	'watch',
 ], function() {
 	browserSync.init( {
-		open: true,
+		watchTask: true,
 		debugInfo: true,
 		logConnections: true,
 		notify: true,
-		proxy: config.proxy,
+		open: 'external',
+		host: config.proxy,
+		proxy: `https://${ config.proxy }`,
+		https: {
+			key: `${ config.certs_path }/${ config.proxy }.key`,
+			cert: `${ config.certs_path }/${ config.proxy }.crt`,
+		},
 		ghostMode: {
 			scroll: true,
 			links: true,
