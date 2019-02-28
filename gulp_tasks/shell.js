@@ -15,21 +15,21 @@ module.exports = {
 	scriptsThemeDev() {
 		const server = browserSync.get( 'Tribe Dev' );
 		return gulp.src( '' )
-			.pipe( shell( 'yarn themeDev' ) )
+			.pipe( shell( 'yarn js:theme:dev' ) )
 			.on( 'finish', gulpif( server.active, server.reload() ) );
 	},
 	scriptsThemeProd() {
 		return gulp.src( '' )
-			.pipe( shell( 'yarn themeProd' ) );
+			.pipe( shell( 'yarn js:theme:prod' ) );
 	},
 	scriptsAdminDev() {
 		const server = browserSync.get( 'Tribe Dev' );
 		return gulp.src( '' )
-			.pipe( shell( 'yarn adminDev' ) )
+			.pipe( shell( 'yarn js:admin:dev' ) )
 			.on( 'finish', gulpif( server.active, server.reload() ) );
 	},
 	scriptsAdminProd() {
 		return gulp.src( '' )
-			.pipe( shell( 'yarn adminProd' ) );
+			.pipe( shell( 'yarn js:admin:prod' ) );
 	},
 };

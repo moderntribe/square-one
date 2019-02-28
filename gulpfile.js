@@ -3,6 +3,7 @@ const runSequence = require( 'run-sequence' );
 const requireDir = require( 'require-dir' );
 const tasks = requireDir( './gulp_tasks' );
 const browserSync = require( 'browser-sync' ).create( 'Tribe Dev' );
+
 let config = require( './local-config.json' );
 
 if ( ! config ) {
