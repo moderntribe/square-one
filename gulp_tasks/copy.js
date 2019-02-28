@@ -34,6 +34,7 @@ module.exports = {
 				`${ pkg._npm_path }/jquery/dist/jquery.min.map`,
 				`${ pkg._component_path }/theme/js/globals.js`,
 				`${ pkg._npm_path }/es6-promise/dist/es6-promise.auto.js`,
+				`${ pkg._npm_path }/swiper/dist/js/swiper.js`,
 				`${ pkg._npm_path }/lazysizes/plugins/object-fit/ls.object-fit.js`,
 				`${ pkg._npm_path }/lazysizes/plugins/parent-fit/ls.parent-fit.js`,
 				`${ pkg._npm_path }/lazysizes/plugins/respimg/ls.respimg.js`,

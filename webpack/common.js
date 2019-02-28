@@ -1,6 +1,6 @@
-const path = require('path');
-const webpack = require('webpack');
-const resolve = require('./resolve');
+const path = require( 'path' );
+const webpack = require( 'webpack' );
+const resolve = require( './resolve' );
 
 module.exports = {
 	cache: true,
@@ -10,7 +10,7 @@ module.exports = {
 	resolve,
 	resolveLoader: {
 		modules: [
-			path.resolve(`${__dirname}/../`, 'node_modules'),
+			path.resolve( `${ __dirname }/../`, 'node_modules' ),
 		],
 	},
 	module: {
@@ -19,7 +19,7 @@ module.exports = {
 		rules: [
 			{
 				test: /\.js$/,
-				exclude: [/(node_modules)(?![/|\\](dom7|swiper))/],
+				exclude: [ /(node_modules)/ ],
 				use: [
 					{
 						loader: 'babel-loader',
@@ -29,10 +29,10 @@ module.exports = {
 		],
 	},
 	plugins: [
-		new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-		new webpack.ProvidePlugin({
+		new webpack.IgnorePlugin( /^\.\/locale$/, /moment$/ ),
+		new webpack.ProvidePlugin( {
 			jQuery: 'jquery',
 			$: 'jquery',
-		})
+		} ),
 	],
 };

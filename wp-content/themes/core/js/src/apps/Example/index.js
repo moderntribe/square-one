@@ -13,6 +13,6 @@ const store = configureStore( reducers, mainSaga, childSagas );
 render(
 	<Provider store={ store }>
 		<App />
-	</Provider>, tools.getNodes( 'email-editor-app' )[ 0 ] );
+	</Provider>, tools.getNodes( 'example-app' )[ 0 ] );
 
-console.info( 'Promoter FE: Rendered email editor app.' );
+console.info( 'Promoter FE: Rendered example app.' );

@@ -61,7 +61,8 @@ class Scripts {
 			$script_deps     = [ 'jquery', 'core-webpack-vendors' ];
 
 			wp_enqueue_script( 'core-globals', $js_dir . 'vendor/globals.js', [], $version, true );
-			wp_enqueue_script( 'core-lazysizes-object-fit', $js_dir . 'vendor/ls.object-fit.js', ['core-globals'], $version, true );
+			wp_enqueue_script( 'core-swiper', $js_dir . 'vendor/swiper.js', ['core-globals'], $version, true );
+			wp_enqueue_script( 'core-lazysizes-object-fit', $js_dir . 'vendor/ls.object-fit.js', ['core-swiper'], $version, true );
 			wp_enqueue_script( 'core-lazysizes-parent-fit', $js_dir . 'vendor/ls.parent-fit.js', ['core-lazysizes-object-fit'], $version, true );
 			wp_enqueue_script( 'core-lazysizes-polyfill', $js_dir . 'vendor/ls.respimg.js', ['core-lazysizes-parent-fit'], $version, true );
 			wp_enqueue_script( 'core-lazysizes-bgset', $js_dir . 'vendor/ls.bgset.js', ['core-lazysizes-polyfill'], $version, true );

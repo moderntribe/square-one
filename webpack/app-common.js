@@ -1,17 +1,17 @@
-const webpack = require('webpack');
+const webpack = require( 'webpack' );
 
 module.exports = {
 	devtool: 'eval-source-map',
 	devServer: {
 		headers: {
-			'Access-Control-Allow-Origin': '*'
-		}
+			'Access-Control-Allow-Origin': '*',
+		},
 	},
 	plugins: [
 		new webpack.HashedModuleIdsPlugin(),
-		new webpack.LoaderOptionsPlugin({
-			debug: true
-		})
+		new webpack.LoaderOptionsPlugin( {
+			debug: true,
+		} ),
 	],
 	module: {
 		rules: [
@@ -22,13 +22,13 @@ module.exports = {
 			{
 				test: /\.css$/,
 				include: /node_modules/,
-				loaders: ['style-loader', 'css-loader'],
+				loaders: [ 'style-loader', 'css-loader' ],
 			},
 		],
 	},
 	optimization: {
 		namedModules: true, // NamedModulesPlugin()
 		noEmitOnErrors: true, // NoEmitOnErrorsPlugin
-		concatenateModules: true //ModuleConcatenationPlugin
-	}
+		concatenateModules: true, //ModuleConcatenationPlugin
+	},
 };

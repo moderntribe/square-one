@@ -9,8 +9,8 @@ function minify( src = [], dest = pkg._core_admin_css_path ) {
 		.pipe( sourcemaps.init() )
 		.pipe( cssnano( { zindex: false } ) )
 		.pipe( rename( {
-			suffix: ".min",
-			extname: ".css"
+			suffix: '.min',
+			extname: '.css',
 		} ) )
 		.pipe( sourcemaps.write( '.' ) )
 		.pipe( gulp.dest( dest ) );

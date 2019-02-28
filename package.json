@@ -40,7 +40,7 @@
     "js:admin:dev": "cross-env NODE_ENV=admindev npx webpack --progress --hide-modules",
     "js:theme:prod": "cross-env NODE_ENV=themeprod npx webpack --progress --hide-modules",
     "js:admin:prod": "cross-env NODE_ENV=adminprod npx webpack --progress --hide-modules",
-    "example-app": "cross-env NODE_ENV=emaileditor webpack-dev-server --hot --https --port 3000",
+    "app:example": "cross-env NODE_ENV=example webpack-dev-server --hot --https --port 3000",
     "test": "cross-env NODE_ENV=test jest --config jest.config.json",
     "test:e2e": "cross-env NODE_ENV=test npx cypress run",
     "docker:start": "./dev/docker/start.sh",

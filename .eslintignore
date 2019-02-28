@@ -1,5 +1,4 @@
 vendor/**
-webpack/**
 wp-content/themes/core/pcss/**/*.pcss
 node_modules/**
 **/node_modules

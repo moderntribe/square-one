@@ -11,14 +11,14 @@ const pkg = require( '../package.json' );
 module.exports = merge( common, {
 	mode: 'development',
 	entry: {
-		scripts: `./${ pkg._core_theme_js_src_path }index.js`,
-		vendor: vendor.theme,
+		scripts: `./${ pkg._core_admin_js_src_path }index.js`,
+		vendor: vendor.admin,
 	},
 	output: {
 		filename: '[name].js',
 		chunkFilename: '[name].[chunkhash].js',
-		path: resolve( `${ __dirname }/../`, pkg._core_theme_js_dist_path ),
-		publicPath: `/${ pkg._core_theme_js_dist_path }`,
+		path: resolve( `${ __dirname }/../`, pkg._core_admin_js_dist_path ),
+		publicPath: `/${ pkg._core_admin_js_dist_path }`,
 	},
 	devtool: 'eval-source-map',
 	module: {
@@ -29,14 +29,14 @@ module.exports = merge( common, {
 	plugins: [
 		new webpack.HashedModuleIdsPlugin(),
 		new MiniCssExtractPlugin( {
-			filename: '../../css/[name].css',
+			filename: '../../css/admin/[name].css',
 		} ),
 		new webpack.LoaderOptionsPlugin( {
 			debug: true,
 		} ),
 		new BundleAnalyzerPlugin( {
 			analyzerMode: 'static',
-			reportFilename: resolve( `${ __dirname }/../`, 'reports/webpack-theme-bundle.html' ),
+			reportFilename: resolve( `${ __dirname }/../`, 'reports/webpack-admin-bundle.html' ),
 			openAnalyzer: false,
 		} ),
 	],

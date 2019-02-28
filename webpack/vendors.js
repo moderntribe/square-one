@@ -1,18 +1,12 @@
-module.exports = [
-	'classnames',
-	'delegate',
-	'moment',
-	'react',
-	'react-datepicker',
-	'react-dom',
-	'react-multi-email',
-	'react-redux',
-	'react-select',
-	'react-select-simple-value',
-	'react-tinymce',
-	'redux',
-	'redux-actions',
-	'redux-saga',
-	'reselect',
-	'verge',
-];
+module.exports = {
+	theme: [
+		'delegate',
+		'verge',
+		'spin.js',
+	],
+	admin: [
+		'delegate',
+		'verge',
+		'spin.js',
+	],
+};
