@@ -3,7 +3,6 @@ const webpack = require( 'webpack' );
 const resolve = require( './resolve' );
 
 module.exports = {
-	cache: true,
 	externals: {
 		jquery: 'jQuery',
 	},

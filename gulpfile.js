@@ -192,11 +192,18 @@ gulp.task( 'dev', [
 
 gulp.task( 'dist', function( callback ) {
 	runSequence(
-		'postcss-lint',
-		'scripts-lint',
-		[ 'postcss-dev', 'postcss-prod' ],
-		'scripts-dev',
-		'scripts-prod',
+		'shell:yarnInstall',
+		'shell:test',
+		[ 'eslint:theme', 'eslint:apps', 'eslint:utils', 'eslint:admin', 'stylelint:theme', 'stylelint:apps' ],
+		[ 'clean:themeMinCSS', 'clean:themeMinJS', 'copy:themeJS' ],
+		[ 'postcss:theme', 'postcss:themeWPAdmin', 'postcss:themeWPEditor', 'postcss:themeWPLogin', 'postcss:themeLegacy' ],
+		[ 'cssnano:themeMin', 'cssnano:themeLegacyMin', 'cssnano:themeWPEditorMin', 'cssnano:themeWPAdminMin', 'cssnano:themeWPLoginMin' ],
+		[ 'header:theme', 'header:themePrint', 'header:themeLegacy', 'header:themeWPEditor', 'header:themeWPLogin' ],
+		[ 'shell:scriptsThemeDev', 'shell:scriptsAdminDev' ],
+		[ 'shell:scriptsThemeProd', 'shell:scriptsAdminProd' ],
+		'uglify:themeMin',
+		'concat:themeMinVendors',
+		[ 'clean:themeMinVendorJS', 'constants:buildTimestamp' ],
 		callback,
 	);
 } );

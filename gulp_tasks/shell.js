@@ -1,6 +1,5 @@
 const gulp = require( 'gulp' );
 const shell = require( 'gulp-shell' );
-const gulpif = require( 'gulp-if' );
 const browserSync = require( 'browser-sync' );
 
 module.exports = {
@@ -16,7 +15,11 @@ module.exports = {
 		const server = browserSync.get( 'Tribe Dev' );
 		return gulp.src( '' )
 			.pipe( shell( 'yarn js:theme:dev' ) )
-			.on( 'finish', gulpif( server.active, server.reload ) );
+			.on( 'finish', function() {
+				if ( server.active ) {
+					server.reload();
+				}
+			} );
 	},
 	scriptsThemeProd() {
 		return gulp.src( '' )
@@ -26,7 +29,11 @@ module.exports = {
 		const server = browserSync.get( 'Tribe Dev' );
 		return gulp.src( '' )
 			.pipe( shell( 'yarn js:admin:dev' ) )
-			.on( 'finish', gulpif( server.active, server.reload ) );
+			.on( 'finish', function() {
+				if ( server.active ) {
+					server.reload();
+				}
+			} );
 	},
 	scriptsAdminProd() {
 		return gulp.src( '' )

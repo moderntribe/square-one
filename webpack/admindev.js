@@ -9,6 +9,7 @@ const BundleAnalyzerPlugin = require( 'webpack-bundle-analyzer' ).BundleAnalyzer
 const pkg = require( '../package.json' );
 
 module.exports = merge( common, {
+	cache: true,
 	mode: 'development',
 	entry: {
 		scripts: `./${ pkg._core_admin_js_src_path }index.js`,

@@ -10,6 +10,7 @@ const OptimizeCSSAssetsPlugin = require( 'optimize-css-assets-webpack-plugin' );
 const pkg = require( '../package.json' );
 
 module.exports = merge( common, {
+	cache: false,
 	mode: 'production',
 	entry: {
 		scripts: `./${ pkg._core_theme_js_src_path }index.js`,

@@ -19,12 +19,16 @@ module.exports = {
 		return del( [
 			`${ pkg._core_theme_css_dist_path }*.css`,
 			`${ pkg._core_admin_css_dist_path }*.css`,
+			`${ pkg._core_theme_css_dist_path }*.css.map`,
+			`${ pkg._core_admin_css_dist_path }*.css.map`,
 		] );
 	},
 	themeMinJS() {
 		return del( [
 			`${ pkg._core_theme_js_dist_path }*.min.js`,
 			`${ pkg._core_admin_js_dist_path }*.min.js`,
+			`${ pkg._core_theme_js_dist_path }*.*.js`,
+			`${ pkg._core_admin_js_dist_path }*.*.js`,
 			`${ pkg._core_theme_js_dist_path }*.*.min.js`,
 			`${ pkg._core_admin_js_dist_path }*.*.min.js`,
 		] );

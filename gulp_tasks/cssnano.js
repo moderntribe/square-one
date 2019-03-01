@@ -4,7 +4,7 @@ const rename = require( 'gulp-rename' );
 const sourcemaps = require( 'gulp-sourcemaps' );
 const pkg = require( '../package.json' );
 
-function minify( src = [], dest = pkg._core_admin_css_path ) {
+function minify( src = [], dest = pkg._core_admin_css_dist_path ) {
 	return gulp.src( src )
 		.pipe( sourcemaps.init() )
 		.pipe( cssnano( { zindex: false } ) )
