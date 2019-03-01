@@ -4,15 +4,12 @@ import template from 'lodash/template';
 import reduce from 'lodash/reduce';
 import isFunction from 'lodash/isFunction';
 import omit from 'lodash/omit';
-import startsWith from 'lodash/startsWith';
 import isEmpty from 'lodash/isEmpty';
 import toFormData from 'object-to-formdata';
 import { stringify } from 'query-string';
 import stripTags from 'voca/strip_tags';
 import trim from 'voca/trim';
 import unescapeHTML from 'voca/unescape_html';
-
-import * as Config from 'config/settings';
 
 const PATH_MAP = {
 	exampleMultiple: template( '/todos/<%= count %>' ),
@@ -26,12 +23,11 @@ const PATH_MAP = {
 // can also have a params key, which is a dict of queryParams
 // you can also add other valid fetch options, to options (such as method and body)
 
-export function retrieve( pathKey, options ) {
+export function retrieve( host, pathKey, options ) {
 	const defaultOptions = { method: 'GET', ...options };
 	const newOptions = omit( defaultOptions, 'body' );
 
 	// determine full path, using template if needed
-	const host = Config.API_URL;
 	if ( ! pathKey || ! PATH_MAP[ pathKey ] ) {
 		throw new Error( `Unknown pathKey: ${ pathKey }` );
 	}
@@ -68,6 +64,7 @@ export function retrieve( pathKey, options ) {
 
 	// do the fetch
 	return fetch( url, { ...newOptions } ).then( ( response ) => {
+		console.info( response );
 		if ( response.ok ) {
 			return response.text().then( ( text ) => {
 				try {
@@ -93,35 +90,9 @@ export function retrieve( pathKey, options ) {
 			} );
 		}
 
-		// we get 40x's and 500's with valid json
-		// we also seem to get errors with application/json which are actually html/text? (see #92408)
-		// ie expected errors - need to make sure these get handled!!
-		if ( startsWith( response.headers.get( 'Content-Type' ), 'application/json' ) ) {
-			return response.text().then( ( text ) => {
-				try {
-					const data = JSON.parse( text );
-					console.info( `Data for ${ pathKey }:`, data );
-					return {
-						data,
-						status: response.status,
-					};
-				} catch ( error ) {
-					const message = trim( stripTags( unescapeHTML( text ) ) );
-					const err = new Error( `Invalid server response. ${ message }` );
-					err.detail = {
-						url,
-						data: message,
-						status: response.status,
-						error,
-					};
-					throw err;
-				}
-			} );
-		}
-
 		// error
 		return response.text().then( ( data ) => {
-			const message = trim( stripTags( unescapeHTML( data ) ) );
+			const message = trim( stripTags( unescapeHTML( JSON.parse( data ).error ) ) );
 			const err = new Error( `Unknown server response. ${ message }` );
 			err.detail = {
 				url,
@@ -131,9 +102,13 @@ export function retrieve( pathKey, options ) {
 			throw err;
 		} );
 	} ).catch( ( error ) => {
-		console.info( error );
-		console.info( error.detail );
-		const message = [ `${ error.message }.` || 'We\'re sorry, we were unable to reach the network. Please try again later.', url ];
-		console.error( 'Network problem', message.join( ' ' ), [ { text: 'OK' } ] );
+		const message = error.detail;
+		const err = new Error( `Unknown server response. ${ message }` );
+		err.detail = {
+			url,
+			data: message,
+			status: error.status,
+		};
+		throw err;
 	} );
 }

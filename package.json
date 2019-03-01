@@ -71,6 +71,7 @@
     "moment": "^2.22.2",
     "moment-timezone": "^0.5.23",
     "object-hash": "^1.3.0",
+    "object-to-formdata": "^1.6.3",
     "prop-types": "^15.6.2",
     "query-string": "^6.2.0",
     "react": "^16.5.2",

@@ -7,6 +7,8 @@
 import _ from 'lodash';
 import { on, ready } from 'utils/events';
 import applyBrowserClasses from 'utils/dom/apply-browser-classes';
+import * as tools from 'utils/tools';
+import { HMR_DEV } from 'config/wp-settings';
 
 // you MUST do this in every module you use lodash in.
 // A custom bundle of only the lodash you use will be built by babel.
@@ -20,6 +22,10 @@ import modules from '../modules/index';
 import single from '../single/index';
 
 import components from '../components/index';
+
+const el = {
+	exampleAppRoot: tools.getNodes( 'example-app' )[ 0 ],
+};
 
 /**
  * @function bindEvents
@@ -68,6 +74,12 @@ const init = () => {
 
 	components();
 	single();
+
+	// example react app
+
+	if ( el.exampleAppRoot && ! HMR_DEV ) {
+		import( 'Example' /* webpackChunkName:"example" */ );
+	}
 
 	console.info( 'Square One FE: Initialized all javascript that targeted document ready.' );
 };

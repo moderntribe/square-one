@@ -3,6 +3,7 @@ const webpack = require( 'webpack' );
 module.exports = {
 	devtool: 'eval-source-map',
 	devServer: {
+		disableHostCheck: true,
 		headers: {
 			'Access-Control-Allow-Origin': '*',
 		},

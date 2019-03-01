@@ -7,10 +7,10 @@ const pkg = require( '../package.json' );
 module.exports = merge( common, {
 	mode: 'development',
 	entry: {
-		scripts: `./${ pkg._core_apps_js_src_path }index.js`,
+		scripts: `./${ pkg._core_apps_js_src_path }Example/index.js`,
 	},
 	output: {
-		filename: 'email-app.js',
+		filename: 'app.js',
 		path: resolve( `${ __dirname }/../`, 'public/js/' ),
 		publicPath: 'https://localhost:3000/',
 	},

@@ -81,6 +81,10 @@ class Scripts {
 
 		wp_enqueue_script( 'core-theme-scripts' );
 
+		if ( defined( 'HMR_DEV' ) && HMR_DEV === true ) {
+			wp_enqueue_script( 'kw-hmr-bundle', 'https://localhost:3000/app.js', [ 'core-theme-scripts' ], $version, true );
+		}
+
 		// Accessibility Testing
 		if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG === true ) {
 			wp_enqueue_script( 'core-theme-totally', $js_dir . 'vendor/tota11y.min.js', [ 'core-theme-scripts' ], $version, true );
