@@ -3,7 +3,6 @@ const runSequence = require( 'run-sequence' );
 const requireDir = require( 'require-dir' );
 const tasks = requireDir( './gulp_tasks' );
 const browserSync = require( 'browser-sync' ).create( 'Tribe Dev' );
-const pkg = require( './package.json' );
 
 let config = require( './local-config.json' );
 
@@ -116,6 +115,10 @@ const gulpTasks = [
 	/* Uglify tasks */
 
 	'uglify:themeMin', // minify vendors into a single min bundle (just after this they are concat with the webpack vendor bundle)
+
+	/* Watch Tasks (THESE MUST BE LAST) */
+
+	'watch:frontEndDev', // watch all fe assets for admin and theme and run appropriate routines
 ];
 
 /**
@@ -130,15 +133,38 @@ function registerTasks() {
 	} );
 }
 
+/**
+ * Register all tasks in the gulp_tasks directory
+ */
+
 registerTasks();
 
-gulp.task( 'watch', function() {
-	gulp.watch( [ `${ pkg._core_theme_js_src_path }**/*.js` ], [ 'shell:scriptsThemeDev' ] );
-	gulp.watch( [ `${ pkg._core_admin_js_src_path }**/*.js` ], [ 'shell:scriptsAdminDev' ] );
+/**
+ * Takes a zip file from icomoon and injects it into the postcss, modifying the scss to pcss and handling all conversions/cleanup.
+ */
+
+gulp.task( 'icons', function() {
+	runSequence(
+		'clean:coreIconsStart',
+		'decompress:coreIcons',
+		'copy:coreIconsFonts',
+		'copy:coreIconsStyles',
+		'copy:coreIconsVariables',
+		'replace:coreIconsStyle',
+		'replace:coreIconsVariables',
+		'header:coreIconsStyle',
+		'header:coreIconsVariables',
+		'footer:coreIconsVariables',
+		'clean:coreIconsEnd',
+	);
 } );
 
+/**
+ * Watches all javascript, css and twig/php for theme/admin bundle, runs tasks and reloads browser.
+ */
+
 gulp.task( 'dev', [
-	'watch',
+	'watch:frontEndDev',
 ], function() {
 	browserSync.init( {
 		watchTask: true,
@@ -160,21 +186,9 @@ gulp.task( 'dev', [
 	} );
 } );
 
-gulp.task( 'icons', function() {
-	runSequence(
-		'clean:coreIconsStart',
-		'decompress:coreIcons',
-		'copy:coreIconsFonts',
-		'copy:coreIconsStyles',
-		'copy:coreIconsVariables',
-		'replace:coreIconsStyle',
-		'replace:coreIconsVariables',
-		'header:coreIconsStyle',
-		'header:coreIconsVariables',
-		'footer:coreIconsVariables',
-		'clean:coreIconsEnd',
-	);
-} );
+/**
+ * Builds the entire package for production.
+ */
 
 gulp.task( 'dist', function( callback ) {
 	runSequence(
