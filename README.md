@@ -68,7 +68,7 @@ Square One (AKA **\[1\]**) is a development framework created by Modern Tribe pr
     * [Extended Taxonomies](https://github.com/johnbillion/extended-taxos/blob/master/README.md)
 * **Tests and Code Quality**
   * [Overview](/docs/tests/README.md)
-  * [Codeception](/docs/tests/codeception.md)
+  * [Codeception](/dev/tests/README.md)
   * [Jest](/docs/tests/jest.md)
 * **Local Dev Environment**
   * [Docker](/dev/docker/README.md)
