@@ -24,7 +24,7 @@
         "enzyme-to-json/serializer"
     ],
     "testRegex": ".*(test|spec)\\.jsx?$",
-    "testEnvironment": "jest-environment-jsdom",
+    "testEnvironment": "jest-environment-jsdom-global",
     "testPathIgnorePatterns": [
         "/node_modules/"
     ]
