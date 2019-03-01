@@ -187,7 +187,37 @@ gulp.task( 'dev', [
 } );
 
 /**
- * Builds the entire package for production.
+ * Lints js and css, fixed common issues automatically.
+ */
+
+gulp.task( 'lint', function( callback ) {
+	runSequence(
+		[ 'eslint:theme', 'eslint:apps', 'eslint:utils', 'eslint:admin', 'stylelint:theme', 'stylelint:apps' ],
+		callback,
+	);
+} );
+
+/**
+ * Builds the entire package for production on a server.
+ */
+
+gulp.task( 'server_dist', function( callback ) {
+	runSequence(
+		[ 'clean:themeMinCSS', 'clean:themeMinJS', 'copy:themeJS' ],
+		[ 'postcss:theme', 'postcss:themeWPAdmin', 'postcss:themeWPEditor', 'postcss:themeWPLogin', 'postcss:themeLegacy' ],
+		[ 'cssnano:themeMin', 'cssnano:themeLegacyMin', 'cssnano:themeWPEditorMin', 'cssnano:themeWPAdminMin', 'cssnano:themeWPLoginMin' ],
+		[ 'header:theme', 'header:themePrint', 'header:themeLegacy', 'header:themeWPEditor', 'header:themeWPLogin' ],
+		[ 'shell:scriptsThemeDev', 'shell:scriptsAdminDev' ],
+		[ 'shell:scriptsThemeProd', 'shell:scriptsAdminProd' ],
+		'uglify:themeMin',
+		'concat:themeMinVendors',
+		[ 'clean:themeMinVendorJS', 'constants:buildTimestamp' ],
+		callback,
+	);
+} );
+
+/**
+ * Builds the entire package for production locally, including tests, linting.
  */
 
 gulp.task( 'dist', function( callback ) {
