@@ -8,6 +8,8 @@ import configureStore from './store';
 import reducers from './reducers';
 import { mainSaga, childSagas } from './sagas';
 
+// @EXAMPLE_REACT_APP
+
 const store = configureStore( reducers, mainSaga, childSagas );
 
 render(

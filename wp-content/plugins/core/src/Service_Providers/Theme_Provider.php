@@ -236,6 +236,9 @@ class Theme_Provider extends Service_Provider {
 			return new Scripts();
 		};
 		add_action( 'wp_head', function () use ( $container ) {
+			$container[ 'theme.resources.scripts' ]->maybe_inject_bugsnag();
+		}, 0, 0 );
+		add_action( 'wp_head', function () use ( $container ) {
 			$container[ 'theme.resources.scripts' ]->set_preloading_tags();
 		}, 10, 0 );
 		add_action( 'wp_footer', function () use ( $container ) {

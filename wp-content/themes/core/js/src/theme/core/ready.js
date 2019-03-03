@@ -23,9 +23,11 @@ import single from '../single/index';
 
 import components from '../components/index';
 
-const el = {
-	exampleAppRoot: tools.getNodes( 'example-app' )[ 0 ],
-};
+// @EXAMPLE_REACT_APP
+
+// const el = {
+// 	exampleAppRoot: tools.getNodes( 'example-app' )[ 0 ],
+// };
 
 /**
  * @function bindEvents
@@ -75,11 +77,11 @@ const init = () => {
 	components();
 	single();
 
-	// example react app
+	// @EXAMPLE_REACT_APP
 
-	if ( el.exampleAppRoot && ! HMR_DEV ) {
-		import( 'Example' /* webpackChunkName:"example" */ );
-	}
+	// if ( el.exampleAppRoot && ! HMR_DEV ) {
+	// 	import( 'Example' /* webpackChunkName:"example" */ );
+	// }
 
 	console.info( 'Square One FE: Initialized all javascript that targeted document ready.' );
 };

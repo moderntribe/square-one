@@ -156,6 +156,10 @@ gulp.task( 'icons', function() {
 		'header:coreIconsVariables',
 		'footer:coreIconsVariables',
 		'clean:coreIconsEnd',
+		'clean:themeMinCSS',
+		'postcss:theme',
+		'cssnano:themeMin',
+		'header:theme',
 	);
 } );
 

@@ -15,6 +15,20 @@ class Scripts {
 	}
 
 	/**
+	 * Output bugsnag code
+	 */
+
+	public function maybe_inject_bugsnag() {
+		if ( ! defined( 'BUGSNAG_API_KEY' ) ) {
+			return;
+		}
+		?>
+		<script src="//d2wy8f7a9ursnm.cloudfront.net/v5/bugsnag.min.js"></script>
+		<script>window.bugsnagClient = bugsnag( '<?php echo esc_html( BUGSNAG_API_KEY ); ?>' );</script>
+		<?php
+	}
+
+	/**
 	 * Output preload directives in head for scripts in footer
 	 */
 
@@ -82,7 +96,7 @@ class Scripts {
 		wp_enqueue_script( 'core-theme-scripts' );
 
 		if ( defined( 'HMR_DEV' ) && HMR_DEV === true ) {
-			wp_enqueue_script( 'kw-hmr-bundle', 'https://localhost:3000/app.js', [ 'core-theme-scripts' ], $version, true );
+			wp_enqueue_script( 'core-theme-hmr-bundle', 'https://localhost:3000/app.js', [ 'core-theme-scripts' ], $version, true );
 		}
 
 		// Accessibility Testing
