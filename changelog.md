@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2019.03]
+
+* Updated to node 10.15.0
+* Updated to use Gulp
+* Updated to use Products linting standards for js, react and pcss
+* Eslint and Stylelint now first attempt to fix all linting errors before running
+* Added Bugsnag integration
+* Added React app injection into main js bundle
+* Added example react app
+* Added wider alias support for common js directories
+* Breaks up webpack into a modular setup
+* Added webpack bundle analyzer reports
+* Moves swiper to non webpack loading as it has issues with webpack.
+
 ## [2019.02]
 
 * Refactor force-plugin-activation.php to allow forcing plugins off when running unit tests
