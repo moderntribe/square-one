@@ -21,6 +21,7 @@ All notable changes to this project will be documented in this file.
 
 ## [2018.12]
 
+* Added: caption position support to video component
 * Fixed: gitignore entry for Tribe 301 plugin
 * Added the Blog Copier
 * Changed: added more documentation for our SQ1 forms implementation
