@@ -6,7 +6,7 @@
 		data-id="{{ id }}"
 >
 	<figure class="{{ container_wrap_classes }}">
-		<div class="{{ figure_classes }}">
+		<div class="{{ embed_classes }}">
 			<a
 					href="{{ video_url|esc_url }}"
 					class="c-video__trigger"
@@ -14,6 +14,7 @@
 					title="{{ title|esc_html }}"
 					target="_blank"
 					rel="noopener"
+					aria-label="{{ __( 'Click to Play Video' )|esc_html }}"
 			>
 				<img
 						class="c-video__image lazyload"
@@ -22,19 +23,12 @@
 						role="presentation"
 				/>
 				<div class="c-video__trigger-action">
-					<i class="c-video__icon icon icon-play" aria-hidden></i>
-					{% if caption_position != 'below' %}
-					<figcaption class="c-video__caption">
-						<span class="c-video__caption-text">{{ play_text|esc_html }}</span>
-					</figcaption>
-					{% endif %}
+					<i class="c-video__icon icon icon-play" aria-hidden="true"></i>
 				</div>
 			</a>
 		</div>
-		{% if caption_position == 'below' %}
-			<figcaption class="c-video__caption">
-				<span class="c-video__caption-text">{{ play_text|esc_html }}</span>
-			</figcaption>
-		{% endif %}
+		<figcaption class="c-video__caption">
+			<span class="c-video__caption-text">{{ play_text|esc_html }}</span>
+		</figcaption>
 	</figure>
 </div>

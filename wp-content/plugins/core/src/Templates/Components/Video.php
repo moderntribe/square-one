@@ -12,7 +12,7 @@ class Video extends Component {
 	const THUMBNAIL_URL          = 'thumbnail_url';
 	const PLAY_TEXT              = 'play_text';
 	const SHIM                   = 'shim';
-	const FIGURE_CLASSES         = 'figure_classes';
+	const EMBED_CLASSES          = 'embed_classes';
 	const CONTAINER_ATTRS        = 'container_attrs';
 	const CONTAINER_CLASSES      = 'container_classes';
 	const CONTAINER_WRAP_CLASSES = 'container_wrap_classes';
@@ -29,7 +29,7 @@ class Video extends Component {
 			static::THUMBNAIL_URL          => '',
 			static::PLAY_TEXT              => __( 'Play Video', 'tribe' ),
 			static::SHIM                   => trailingslashit( get_stylesheet_directory_uri() ) . 'img/theme/shims/16x9.png',
-			static::FIGURE_CLASSES         => [],
+			static::EMBED_CLASSES          => [],
 			static::CONTAINER_ATTRS        => [],
 			static::CONTAINER_CLASSES      => [],
 			static::CONTAINER_WRAP_CLASSES => [],
@@ -46,7 +46,7 @@ class Video extends Component {
 			static::THUMBNAIL_URL          => $this->options[ static::THUMBNAIL_URL ],
 			static::PLAY_TEXT              => $this->options[ static::PLAY_TEXT ],
 			static::SHIM                   => $this->options[ static::SHIM ],
-			static::FIGURE_CLASSES         => $this->merge_classes( [ 'c-video__embed' ], $this->options[ static::FIGURE_CLASSES ], true ),
+			static::EMBED_CLASSES          => $this->merge_classes( [ 'c-video__embed' ], $this->options[ static::EMBED_CLASSES ], true ),
 			static::CONTAINER_ATTRS        => $this->merge_attrs( [], $this->options[ static::CONTAINER_ATTRS ], true ),
 			static::CONTAINER_CLASSES      => $this->merge_classes( [ 'c-video', sprintf( 'c-video--caption-%s', $this->options[ static::CAPTION_POSITION ] ), ], $this->options[ static::CONTAINER_CLASSES ], true ),
 			static::CONTAINER_WRAP_CLASSES => $this->merge_classes( [ 'c-video__wrapper' ], $this->options[ static::CONTAINER_WRAP_CLASSES ], true ),
