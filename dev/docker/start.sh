@@ -35,7 +35,7 @@ if [ ! -f ${CONFIG_FILE} ]; then
     # Check for the TravisCI environment variable which exists when TravisCI is running.
     if [ "$CI" = true ]; then
         # Run only when Travis is detected, `$CI_USER_TOKEN` is an encrypted github Personal Access Token
-        sudo printf '{ "github-oauth": { "github.com": "%s" } }\n' $CI_USER_TOKEN >> ${CONFIG_FILE}
+        sudo printf '{ "github-oauth": { "github.com": "%s" } }\n' "$CI_USER_TOKEN" >> ${CONFIG_FILE}
         sudo chown travis:travis ${CONFIG_FILE}
     else
         # urlencode strings
