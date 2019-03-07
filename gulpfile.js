@@ -119,6 +119,8 @@ const gulpTasks = [
 	/* Watch Tasks (THESE MUST BE LAST) */
 
 	'watch:frontEndDev', // watch all fe assets for admin and theme and run appropriate routines
+	'watch:watchAdminJS', // watch all fe assets for admin and theme and run appropriate routines
+	'watch:watchThemeJS', // watch all fe assets for admin and theme and run appropriate routines
 ];
 
 /**
@@ -163,13 +165,19 @@ gulp.task( 'icons', function() {
 	);
 } );
 
+const watchTasks = [
+	'watch:frontEndDev',
+	'watch:watchAdminJS',
+	'watch:watchThemeJS',
+];
+
+gulp.task( 'watch', watchTasks );
+
 /**
- * Watches all javascript, css and twig/php for theme/admin bundle, runs tasks and reloads browser.
+ * Watches all javascript, css and twig/php for theme/admin bundle, runs tasks and reloads browser using browsersync.
  */
 
-gulp.task( 'dev', [
-	'watch:frontEndDev',
-], function() {
+gulp.task( 'dev', watchTasks, function() {
 	browserSync.init( {
 		watchTask: true,
 		debugInfo: true,

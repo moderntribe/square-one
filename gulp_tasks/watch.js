@@ -1,6 +1,22 @@
 const gulp = require( 'gulp' );
 const pkg = require( '../package.json' );
 const browserSync = require( 'browser-sync' );
+const webpack = require( 'webpack' );
+const webpackStream = require( 'webpack-stream' );
+const merge = require( 'webpack-merge' );
+const webpackAdminDevConfig = require( '../webpack/admindev' );
+const webpackThemeDevConfig = require( '../webpack/themedev' );
+
+const watchConfig = {
+	watch: true,
+};
+
+function maybeReloadBrowserSync() {
+	const server = browserSync.get( 'Tribe Dev' );
+	if ( server.active ) {
+		server.reload();
+	}
+}
 
 module.exports = {
 	frontEndDev() {
@@ -50,41 +66,29 @@ module.exports = {
 			'postcss:themeWPAdmin',
 		] );
 
-		// watch theme javascript
-
-		gulp.watch( [
-			`${ pkg._core_theme_js_src_path }**/*.js`,
-		], [
-			'shell:scriptsThemeDev',
-		] );
-
-		// watch admin javascript
-
-		gulp.watch( [
-			`${ pkg._core_admin_js_src_path }**/*.js`,
-		], [
-			'shell:scriptsAdminDev',
-		] );
-
-		// watch util javascript
-
-		gulp.watch( [
-			`${ pkg._core_utils_js_src_path }**/*.js`,
-		], [
-			'shell:scriptsThemeDev',
-			'shell:scriptsAdminDev',
-		] );
-
 		// watch php and twig
 
 		gulp.watch( [
 			`${ pkg._core_theme_path }/**/*.php`,
 			`${ pkg._core_theme_path }/**/*.twig`,
 		] ).on( 'change', function() {
-			const server = browserSync.get( 'Tribe Dev' );
-			if ( server.active ) {
-				server.reload();
-			}
+			maybeReloadBrowserSync();
 		} );
+	},
+	watchAdminJS() {
+		gulp.src( `${ pkg._core_admin_js_src_path }**/*.js` )
+			.pipe( webpackStream( merge( webpackAdminDevConfig, watchConfig ), webpack, function( err, stats ) {
+				console.log( stats.toString( { colors: true } ) );
+				maybeReloadBrowserSync();
+			} ) )
+			.pipe( gulp.dest( pkg._core_admin_js_dist_path ) );
+	},
+	watchThemeJS() {
+		gulp.src( `${ pkg._core_theme_js_src_path }**/*.js` )
+			.pipe( webpackStream( merge( webpackThemeDevConfig, watchConfig ), webpack, function( err, stats ) {
+				console.log( stats.toString( { colors: true } ) );
+				maybeReloadBrowserSync();
+			} ) )
+			.pipe( gulp.dest( pkg._core_theme_js_dist_path ) );
 	},
 };
