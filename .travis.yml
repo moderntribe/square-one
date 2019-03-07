@@ -33,7 +33,9 @@ env:
     - TEST_DB_NAME="tribe_square1_tests"
     - WP_ADMIN_USERNAME="admin"
     - WP_ADMIN_PASSWORD="password"
-    - secure: "HUojXSnMXIeWzeTnlsFiCUzKIbM46Z+HcP9mmyYYfLCesHZyjweyFoW4ZQnb7q6FLDpHQHcck56u2ITgARiX9giJIn45/oMQhxmAhwvi3DGYGilK6qQv9L92NOW1E7zTDDyAmAcnJVxoXmyqupaegu0hRw+dgrd+NtKfQ65+6jU="
+    # Secure travis token resolves to `CI_USER_TOKEN = "key"` and is used in dev/docker/start.sh to add credentials for composer private repositories
+    # Token is a personal access token for tr1b0t
+    - secure: "vi3VPO2xhIyHV2nnkwjmGdVcONPovQ5GHZ6HrBTOr+/ZPiqVzTv0CvSPUzvwkoXCfnwNAafuFIUXyYurX8WAyAdWpqI9olk+gmSoxJ8HSeH7TUSlnyMQa4pI1MW6RSzNbQjsXDZ57+Yyu0cX0bi6lNlmgTwaNfErUDviEOY20lpfMtFrkT8paFQb9Y5QkSppE9sL3ABCVcklQgAO6sg5UPi38Nb4I+gNXpnwzUD1YBHYhdnJskmFqTlGQ0W/AOf2XbNS32pmnLx2EwKwjnwVqBGfDfRwpu9uhv4gK0SBuUzHZ73UNEeZ7ECRxM6ymm+m1W7Rfvk7274+6mvmvNqCxlNfUkmTD7sAWsZnBQaRIdn1tgW+mtOQ0AJy5hewoerHFlIXpHaUhYOL+DR5DLficTrTaKzzFpJTbI7tFnN9DpASu7gSsb/ktwFeSvGIT56LpIRACQpeg7ZVPCVu1Vw0cpn5z+ZHyodccE2zCJnBwO3tEHD1Jg+krnCl2Fybe0M4pPjAQEpUMV0fOegVmNiqjHSPgegDttNFaqVIptAgGUCH/3g1X930iR8ztxBuIVXQtKKr15mjrVoZoERwXu4r9RJju9JswDMyj+px6Q+nRvPjBN+SQazYimx4pcxwkwQ/hBLFSBtq7S1gYJJfJhMQKC1144d8+4rAxrPi5y9Si88="
 
 before_install:
   - sudo service mysql stop
