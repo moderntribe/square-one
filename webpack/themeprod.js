@@ -4,7 +4,7 @@ const common = require( './common.js' );
 const rules = require( './rules.js' );
 const vendor = require( './vendors' );
 const merge = require( 'webpack-merge' );
-const UglifyJSPlugin = require( 'uglifyjs-webpack-plugin' );
+const TerserPlugin = require( 'terser-webpack-plugin' );
 const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
 const OptimizeCSSAssetsPlugin = require( 'optimize-css-assets-webpack-plugin' );
 const pkg = require( '../package.json' );
@@ -48,12 +48,11 @@ module.exports = merge( common, {
 		noEmitOnErrors: true, // NoEmitOnErrorsPlugin
 		concatenateModules: true, //ModuleConcatenationPlugin
 		minimizer: [
-			// we specify a custom UglifyJsPlugin here to get source maps in production
-			new UglifyJSPlugin( {
+			new TerserPlugin( {
 				cache: true,
 				parallel: true,
 				sourceMap: true,
-				uglifyOptions: {
+				terserOptions: {
 					compress: {
 						warnings: false,
 						drop_console: true,

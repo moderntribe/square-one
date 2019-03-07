@@ -4,6 +4,8 @@ This system uses gulp to run tasks. Make sure you have installed `node_modules` 
 
 If you don't already have the [gulp-cli](https://www.npmjs.com/package/gulp-cli) installed globally on that node version do so.
 
+If you have gulp installed globally as well, use this projects gulp version when running tasks by using `./node_modules/gulp/bin/gulp.js` instead og `gulp`
+
 During dev you have 2 choices for gulp tasks to run when editing any pcss or javascript files.
 
 * `gulp watch` will watch pcss and js for changes and trigger live-reload
@@ -25,5 +27,5 @@ if ( file_exists( dirname( __FILE__ ) . '/build-process.php' ) ) {
 
 * [Overview](/docs/build/README.md)
 * [Node](/docs/build/node.md)
-* [Grunt Tasks](/docs/build/grunt.md)
+* [Gulp Tasks](/docs/build/gulp.md)
 * [Composer](/docs/build/composer.md)

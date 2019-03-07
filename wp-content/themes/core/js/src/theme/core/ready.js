@@ -7,8 +7,10 @@
 import _ from 'lodash';
 import { on, ready } from 'utils/events';
 import applyBrowserClasses from 'utils/dom/apply-browser-classes';
-import * as tools from 'utils/tools';
-import { HMR_DEV } from 'config/wp-settings';
+// @EXAMPLE_REACT_APP
+
+// import * as tools from 'utils/tools';
+// import { HMR_DEV } from 'config/wp-settings';
 
 // you MUST do this in every module you use lodash in.
 // A custom bundle of only the lodash you use will be built by babel.

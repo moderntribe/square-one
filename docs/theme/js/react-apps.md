@@ -10,7 +10,7 @@ First off, search for @EXAMPLE_REACT_APP to find the entry point of the example 
 
 There is one piece of config in the babelrc you have to add as well. Paste "react-hot-loader/babel" as the first entry in the plugins array.
 
-Once you've checked out the code, make a copy of the Example app in the themes/core/js/apps directory and name it. Then head on over to the package.json file and add a new script like yo: `"app:YOUR_APP_NAME": "cross-env NODE_ENV=YOUR_APP_NAME webpack-dev-server --hot --https --port 3000",`
+Once you've checked out the code, make a copy of the Example app in the themes/core/js/apps directory and name it. Then head on over to the package.json file and add a new script like so: `"app:YOUR_APP_NAME": "cross-env NODE_ENV=YOUR_APP_NAME webpack-dev-server --hot --https --port 3000",`
 
 Next up, copy example.js in the webpack dir at root and make it point to your new apps entry point.
 

@@ -4,7 +4,7 @@
 
 Square One (AKA **\[1\]**) is a development framework created by Modern Tribe primarily used for WordPress projects. It contains a base for:
 
-* Our build process (node, grunt, webpack)
+* Our build process (node, gulp, webpack)
 * Theme independent core functionality plugin | /content/mu-plugins
 * Core plugin | /content/plugins/core
 * Core theme | /content/themes/core
@@ -17,7 +17,7 @@ Square One (AKA **\[1\]**) is a development framework created by Modern Tribe pr
 * **Build**
   * [Overview](/docs/build/README.md)
   * [Node](/docs/build/node.md)
-  * [Grunt Tasks](/docs/build/grunt.md)
+  * [Gulp Tasks](/docs/build/gulp.md)
 * **Panel Builder**
   * [Overview](/docs/panels/README.md)
   * [The Initializer](/docs/panels/initializer.md)
