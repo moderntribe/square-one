@@ -35,7 +35,7 @@ env:
     - WP_ADMIN_PASSWORD="password"
     # Secure travis token resolves to `CI_USER_TOKEN='key'` and is used in dev/docker/start.sh to add credentials to composer-config.json
     # Token is a personal access token for tr1b0t
-    - secure: FwtJLiSRrzVg2CIekbo2X69o60NpSx6UIosD4nF8GYc++B8JGhgbsFZp031tm2+beF1+jgf/e9oBm1jR/XbsZAzTQ228R0uE9kD3nY8Bo3GtpGgWKGWnzDMoDpI0x05VCx7Ic4t0ZuJ+1LtHIen9Sq8U1+PXxm8vH5tkzOWxbSnmEHrt9dKGkEW2sJNFMGKevypJ0cX2zDoczTryPZ2istzIf9fX4K6kUcd+82p/9hidzbNRJdie8fM3lAbXvgoJtfjIzCfnI7JKMg+ssv14cJ6r9wPvKIG/fv+/zbTZNgcRDky02M6yZhb+DqzMF1KHd8558+oL/Hn8kptoxR7boacmXk81hUi3+Ohlx7YXJWBBrxc/BRnWKH3QaKZ+vbPBJF8XejZdyiN62bcIseTj0ltgm5jfOSdVL4vJ8m5VJ4kti87EKKiz0Iry79YV6hYBdAW+8KfVttvSKNl/qpQkV/67TLCSLANyC9rue1NmJ4b0eZecGib/nQYUckQvRdBxNBAVsEx+MTvETgZG5ZaYMrzxpihgYMCnHtZuPCDWbsYMznM7gZMknOOx80MfzPJBWGnzqIENJS1XE9x6v4iIZVRkzgDaDe+3qQfn+yFsC1bbE5ZdjuFOAxrNhwoPBb3ZbTPAo/c4Mf7AeCF4Cxa6szFwX22Vd7Uez1SKjCUtsaY=
+    - secure: Hn0zgFdCufW8MQBuzy1ZvSSRrSwGaxGJal+d9Dd+uHExd81P50OBYcGlVMKga4tn2MkE3wNFUtgWJXb7Qy7h3Reu4+X5FqFAY3kjmSsXdXXn6jVw0r29LQo4boCbZLfT+9flvocaVmgUwwfDjPGwQTg58ZD7MdW7NEiCzppenxM=
 before_install:
   - sudo service mysql stop
 
