@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2019.03]
+
+* Changed: .travis.yml to properly run integration, acceptance and web driver tests and set a github token for dependencies
+* Changed: .travis.yml to create cache directories and add memcached servers to local-config.php 
+* Changed: tests-config-sample.php to disable admin SSL 
+
+
 ## [2019.02]
 
 * Added tribe-chrome global container for chromedriver acceptance testing
