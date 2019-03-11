@@ -37,6 +37,34 @@ Then, update your computer's primary DNS server to `127.0.0.1` and the secondary
 
 **Note** that a full restart may be necessary to resolve `*.tribe` domains.
 
+**Note** for the **Linux**, it might be problems due to the new Linux versions coming with what is called `systemd-resolved` . This comes by default in almost all distributions nowadays. To workaround that, you might need to do the following steps (be aware that disabling `systemd-resolvd` might break name resolution in VPN for some users):
+
+1. run the following commands:
+   ```shell
+   sudo systemctl disable systemd-resolved.service
+   sudo service systemd-resolved stop
+   ```
+
+2. open the file `/etc/NetworkManager/NetworkManager.conf` and add to the `main` section:
+
+   ```
+   dns=default
+   ```
+
+
+3. Delete the symlink `/etc/resolv.conf` :
+   ```shell
+   rm /etc/resolv.conf
+   ```
+
+4. Restart network manager:
+
+   ```shell
+   sudo service network-manager restart
+   ```
+
+   
+
 # Docker image setup
 
 Start by cloning the Square One repo to your development machine. Open a terminal in the repo's directory and ensure that bash is installed:
@@ -61,7 +89,7 @@ command -v bash # => /bin/bash
 npm run docker:global:start
 ```
 
-The start command will take awhile the first time. You may run into an issue that reads like this:
+The start command will take a while the first time. You may run into an issue that reads like this:
 
 ```
 Starting docker-compose project: global
@@ -70,6 +98,12 @@ ERROR: Pool overlaps with other one on this address space
 ```
 
 This might happen if you are using, or used, a number of Docker-managed local development stacks; running `docker network prune` should solve the issue.
+
+**Note** be aware that there are 2 layers for this application to run: the **global** and the **local**. The global is the one that should be running up to this moment. The local will be the one o start running with the command:
+
+```shell
+npm run docker:start
+```
 
 ### SSL certificates
 
