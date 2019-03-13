@@ -99,7 +99,7 @@ ERROR: Pool overlaps with other one on this address space
 
 This might happen if you are using, or used, a number of Docker-managed local development stacks; running `docker network prune` should solve the issue.
 
-**Note** be aware that there are 2 layers for this application to run: the **global** and the **local**. The global is the one that should be running up to this moment. The local will be the one o start running with the command:
+**Note** be aware that there are 2 parts to running a Square One application: **global** and **local**. The global Square One portion is required for _all_ Square One projects and is the part that should be running up to this moment if you've been following the above steps. The local docker setup is specific to your project and should be started via:
 
 ```shell
 npm run docker:start
