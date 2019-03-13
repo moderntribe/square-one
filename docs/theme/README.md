@@ -40,6 +40,7 @@ For your system setup you must define `SCRIPT_DEBUG` as true in your `local-conf
     * [Selectors](/docs/theme/js/selectors.md)
     * [Events](/docs/theme/js/events.md)
     * [Jquery](/docs/theme/js/jquery.md)
+    * [React Apps](/docs/theme/js/react-apps.md)
   * **Components**
     * [Overview](/docs/theme/components/README.md)
     * [Accordion](/docs/theme/components/accordion.md)

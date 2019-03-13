@@ -1,0 +1,10 @@
+vendor/**
+wp-content/themes/core/pcss/**/*.pcss
+node_modules/**
+**/node_modules
+__snapshots__
+__coverage__
+__mocks__
+__mockData__
+webpack.config.js
+!.eslintrc

@@ -7,7 +7,7 @@ import delegate from 'delegate';
 import * as tools from 'utils/tools';
 
 const el = {
-	container: tools.getNodes('comment-form')[0],
+	container: tools.getNodes( 'comment-form' )[ 0 ],
 };
 
 /**
@@ -15,19 +15,19 @@ const el = {
  * @description Simple comment form validation.
  */
 
-const validateCommentSubmit = (e) => {
-	const inputs = tools.convertElements(el.container.querySelectorAll('textarea, input[name="author"], input[name="email"]'));
+const validateCommentSubmit = ( e ) => {
+	const inputs = tools.convertElements( el.container.querySelectorAll( 'textarea, input[name="author"], input[name="email"]' ) );
 
-	if (!inputs.length) {
+	if ( ! inputs.length ) {
 		return;
 	}
 
-	inputs.forEach((input) => {
+	inputs.forEach( ( input ) => {
 		const valueCheck = input.value ? input.value.trim() : '';
-		if (valueCheck.length === 0) {
+		if ( valueCheck.length === 0 ) {
 			e.preventDefault();
 		}
-	});
+	} );
 };
 
 /**
@@ -36,7 +36,7 @@ const validateCommentSubmit = (e) => {
  */
 
 const bindEvents = () => {
-	delegate(el.container, 'input[type="submit"]', 'click', validateCommentSubmit);
+	delegate( el.container, 'input[type="submit"]', 'click', validateCommentSubmit );
 };
 
 /**
@@ -45,13 +45,13 @@ const bindEvents = () => {
  */
 
 const init = () => {
-	if (!el.container) {
+	if ( ! el.container ) {
 		return;
 	}
 
 	bindEvents();
 
-	console.info('Square One FE: Initialized comment form script.');
+	console.info( 'Square One FE: Initialized comment form script.' );
 };
 
 export default init;

@@ -3,7 +3,7 @@
 * **Build**
   * [Overview](/docs/build/README.md)
   * [Node](/docs/build/node.md)
-  * [Grunt Tasks](/docs/build/grunt.md)
+  * [Gulp Tasks](/docs/build/gulp.md)
   * [Composer](/docs/build/composer.md)
 * **Videos**
   * [Frontend Videos](/docs/theme/videos.md)
