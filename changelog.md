@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2019.04]
+
+* Changed: Added npm commands for running codeception tests
+
 ## [2019.03]
 
 * Updated to node 10.15.0
@@ -15,6 +19,9 @@ All notable changes to this project will be documented in this file.
 * Breaks up webpack into a modular setup
 * Added webpack bundle analyzer reports
 * Moves swiper to non webpack loading as it has issues with webpack.
+* Changed: .travis.yml to properly run integration, acceptance and web driver tests and set a github token for dependencies
+* Changed: .travis.yml to create cache directories and add memcached servers to local-config.php 
+* Changed: tests-config-sample.php to disable admin SSL 
 
 ## [2019.02]
 
@@ -35,6 +42,7 @@ All notable changes to this project will be documented in this file.
 
 ## [2018.12]
 
+* Added: caption position support to video component
 * Fixed: gitignore entry for Tribe 301 plugin
 * Added the Blog Copier
 * Changed: added more documentation for our SQ1 forms implementation

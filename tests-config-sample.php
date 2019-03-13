@@ -77,8 +77,8 @@ $config_defaults = array(
 	// Security Directives
 	'DISALLOW_FILE_EDIT'      => true,
 	'DISALLOW_FILE_MODS'      => true,
-	'FORCE_SSL_LOGIN'         => true,
-	'FORCE_SSL_ADMIN'         => true,
+	'FORCE_SSL_LOGIN'         => false,
+	'FORCE_SSL_ADMIN'         => false,
 
 	// Performance
 	'WP_CACHE'                => true,
