@@ -37,7 +37,7 @@ Then, update your computer's primary DNS server to `127.0.0.1` and the secondary
 
 **Note** that a full restart may be necessary to resolve `*.tribe` domains.
 
-**Note** for the **Linux**, it might be problems due to the new Linux versions coming with what is called `systemd-resolved` . This comes by default in almost all distributions nowadays. To workaround that, you might need to do the following steps (be aware that disabling `systemd-resolvd` might break name resolution in VPN for some users):
+**Note** for **Linux**, if you run in to problems with DNS resolution, it might be caused by `systemd-resolved` on newer Linux versions. To workaround the issue, you might need to do the following steps (be aware that disabling `systemd-resolvd` might break name resolution in VPN for some users):
 
 1. run the following commands:
    ```shell
