@@ -37,15 +37,15 @@ Then, update your computer's primary DNS server to `127.0.0.1` and the secondary
 
 **Note** that a full restart may be necessary to resolve `*.tribe` domains.
 
-**Note** for the **Linux**, it might be problems due to the new Linux versions coming with what is called `systemd-resolved` . This comes by default in almost all distributions nowadays. To workaround that, you might need to do the following steps (be aware that disabling `systemd-resolvd` might break name resolution in VPN for some users):
+**Note** for **Linux**, if you run in to problems with DNS resolution, it might be caused by `systemd-resolved` on newer Linux versions. To workaround the issue, you might need to do the following steps (be aware that disabling `systemd-resolvd` might break name resolution in VPN for some users):
 
-1. run the following commands:
+1. Run the following commands:
    ```shell
    sudo systemctl disable systemd-resolved.service
    sudo service systemd-resolved stop
    ```
 
-2. open the file `/etc/NetworkManager/NetworkManager.conf` and add to the `main` section:
+2. Open the file `/etc/NetworkManager/NetworkManager.conf` and add to the `main` section:
 
    ```
    dns=default
@@ -99,7 +99,7 @@ ERROR: Pool overlaps with other one on this address space
 
 This might happen if you are using, or used, a number of Docker-managed local development stacks; running `docker network prune` should solve the issue.
 
-**Note** be aware that there are 2 layers for this application to run: the **global** and the **local**. The global is the one that should be running up to this moment. The local will be the one o start running with the command:
+**Note** be aware that there are 2 parts to running a Square One application: **global** and **local**. The global Square One portion is required for _all_ Square One projects and is the part that should be running up to this moment if you've been following the above steps. The local docker setup is specific to your project and should be started via:
 
 ```shell
 npm run docker:start
