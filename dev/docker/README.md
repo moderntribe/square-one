@@ -39,7 +39,7 @@ Then, update your computer's primary DNS server to `127.0.0.1` and the secondary
 
 **Note** for **Linux**, if you run in to problems with DNS resolution, it might be caused by `systemd-resolved` on newer Linux versions. To workaround the issue, you might need to do the following steps (be aware that disabling `systemd-resolvd` might break name resolution in VPN for some users):
 
-1. run the following commands:
+1. Run the following commands:
    ```shell
    sudo systemctl disable systemd-resolved.service
    sudo service systemd-resolved stop
