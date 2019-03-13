@@ -45,7 +45,7 @@ Then, update your computer's primary DNS server to `127.0.0.1` and the secondary
    sudo service systemd-resolved stop
    ```
 
-2. open the file `/etc/NetworkManager/NetworkManager.conf` and add to the `main` section:
+2. Open the file `/etc/NetworkManager/NetworkManager.conf` and add to the `main` section:
 
    ```
    dns=default
