@@ -36,6 +36,8 @@
   "scripts": {
     "test": "jest -i",
     "test:watch": "npm test -- --watch",
+    "codecept": "dev/docker/exec.sh /application/www/dev/docker/codecept.sh",
+    "codecept:test": "dev/docker/exec.sh /application/www/dev/docker/codecept.sh run",
     "docker:start": "./dev/docker/start.sh",
     "docker:stop": "./dev/docker/stop.sh",
     "docker:log": "./dev/docker/log.sh",

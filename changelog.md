@@ -2,12 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2019.04]
+
+* Changed: Added npm commands for running codeception tests
+
 ## [2019.03]
 
 * Changed: .travis.yml to properly run integration, acceptance and web driver tests and set a github token for dependencies
 * Changed: .travis.yml to create cache directories and add memcached servers to local-config.php 
 * Changed: tests-config-sample.php to disable admin SSL 
 * Added steps to follow on Linux environments to avoid problems with DNS Resolution when setting up the global Docker environment.
+
 
 ## [2019.02]
 
