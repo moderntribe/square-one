@@ -11,7 +11,7 @@ The core plugin will be where the majority of back end development takes place:
     * [Container / Core.php](container.md)
     * [Custom Post Types](post-types.md)
     * [Custom Taxonomies](taxonomies.md)
-    * [Post & Taxonomy Meta](post-meta.md)
+    * [Post & Taxonomy Meta](object-meta.md)
     * [Service Providers](service-providers.md)
     * [Template Controllers](data.md)
     * [Components](components.md)
