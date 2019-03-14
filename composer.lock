@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2b3a2ac150bb8e1b36341af929832e01",
+    "content-hash": "fffc6786fef979de4b5dc1a5ef19f41d",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -1791,6 +1791,63 @@
             ],
             "description": "A polyfill for getallheaders.",
             "time": "2018-12-11T21:53:24+00:00"
+        },
+        {
+            "name": "roots/wp-password-bcrypt",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/roots/wp-password-bcrypt.git",
+                "reference": "5b4c6457360bafe1e85f540223c9448d62d24e42"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/roots/wp-password-bcrypt/zipball/5b4c6457360bafe1e85f540223c9448d62d24e42",
+                "reference": "5b4c6457360bafe1e85f540223c9448d62d24e42",
+                "shasum": ""
+            },
+            "require": {
+                "composer/installers": "~1.0",
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "brain/monkey": "^1.3.1",
+                "mockery/mockery": "^0.9.4",
+                "phpunit/phpunit": "^4.8.23|^5.2.9",
+                "squizlabs/php_codesniffer": "^2.5.1"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "wp-password-bcrypt.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Scott Walkinshaw",
+                    "email": "scott.walkinshaw@gmail.com",
+                    "homepage": "https://github.com/swalkinshaw"
+                },
+                {
+                    "name": "qwp6t",
+                    "homepage": "https://github.com/qwp6t"
+                },
+                {
+                    "name": "Jan Pingel",
+                    "email": "jpingel@bitpiston.com",
+                    "homepage": "http://janpingel.com"
+                }
+            ],
+            "description": "WordPress plugin which replaces wp_hash_password and wp_check_password's phpass hasher with PHP 5.5's password_hash and password_verify using bcrypt.",
+            "homepage": "https://roots.io/plugins/wp-password-bcrypt",
+            "keywords": [
+                "wordpress wp bcrypt password"
+            ],
+            "time": "2017-02-20T00:23:04+00:00"
         },
         {
             "name": "sunra/php-simple-html-dom-parser",
@@ -8098,7 +8155,8 @@
     "stability-flags": {
         "moderntribe/panel-builder": 20,
         "humanmade/mercator": 20,
-        "pimple/pimple": 20
+        "pimple/pimple": 20,
+        "roots/wp-password-bcrypt": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
