@@ -1,0 +1,22 @@
+{
+  "name": "moderntribe/square1-queues",
+  "description": "A queues provider for square one",
+  "license": "Proprietary",
+  "minimum-stability": "dev",
+  "require": {
+    "php": "^7.0"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "2.0-dev"
+    }
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "autoload": {
+    "psr-4": {
+      "Tribe\\Project\\Queues\\": ""
+    }
+  }
+}

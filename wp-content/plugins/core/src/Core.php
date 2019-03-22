@@ -17,7 +17,6 @@ use Tribe\Project\Service_Providers\Post_Types\Page_Service_Provider;
 use Tribe\Project\Service_Providers\Post_Types\Post_Service_Provider;
 use Tribe\Project\Service_Providers\Post_Types\Sample_Service_Provider;
 use Tribe\Project\Service_Providers\Post_Types\Venue_Service_Provider;
-use Tribe\Project\Queues\Queues_Provider;
 use Tribe\Project\Service_Providers\Shortcode_Provider;
 use Tribe\Project\Service_Providers\Taxonomies\Category_Service_Provider;
 use Tribe\Project\Service_Providers\Taxonomies\Example_Taxonomy_Service_Provider;
@@ -69,7 +68,6 @@ class Core {
 		$this->providers[ 'nav_menu' ]         = new Nav_Menu_Provider();
 		$this->providers[ 'panels' ]           = new Panels_Provider();
 		$this->providers[ 'p2p' ]              = new P2P_Provider();
-		$this->providers[ 'queues' ]           = new Queues_Provider();
 		$this->providers[ 'settings' ]         = new Settings_Provider();
 		$this->providers[ 'shortcodes' ]       = new Shortcode_Provider();
 		$this->providers[ 'theme' ]            = new Theme_Provider();
@@ -77,12 +75,22 @@ class Core {
 		$this->providers[ 'twig' ]             = new Twig_Service_Provider();
 		$this->providers[ 'util' ]             = new Util_Provider();
 
+		/**
+		 * Register optional dependencies if they exist. Override
+		 * the service provider for the dependency to change its
+		 * behavior.
+		 */
+
+		if ( class_exists( '\Tribe\Project\Queues\Queues_Provider' ) ) {
+			$this->providers[ 'queues' ] = new \Tribe\Project\Queues\Queues_Provider();
+		}
+
 		$this->load_post_type_providers();
 		$this->load_taxonomy_providers();
 
 
 		/**
-		 * Filter the service providers the power the plugin
+		 * Filter the service providers that power the plugin
 		 *
 		 * @param Container\Service_Provider[] $providers
 		 */
@@ -97,11 +105,11 @@ class Core {
 		$this->providers[ 'post_type.sample' ] = new Sample_Service_Provider();
 
 		// externally registered post types
-		$this->providers[ 'post_type.event' ] = new Event_Service_Provider();
+		$this->providers[ 'post_type.event' ]     = new Event_Service_Provider();
 		$this->providers[ 'post_type.organizer' ] = new Organizer_Service_Provider();
-		$this->providers[ 'post_type.page' ] = new Page_Service_Provider();
-		$this->providers[ 'post_type.post' ] = new Post_Service_Provider();
-		$this->providers[ 'post_type.venue' ] = new Venue_Service_Provider();
+		$this->providers[ 'post_type.page' ]      = new Page_Service_Provider();
+		$this->providers[ 'post_type.post' ]      = new Post_Service_Provider();
+		$this->providers[ 'post_type.venue' ]     = new Venue_Service_Provider();
 	}
 
 	private function load_taxonomy_providers() {
