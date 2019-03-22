@@ -21,6 +21,7 @@ use Tribe\Project\Blog_Copier\Tasks\Replace_Options;
 use Tribe\Project\Blog_Copier\Tasks\Replace_Tables;
 use Tribe\Project\Blog_Copier\Tasks\Replace_Urls;
 use Tribe\Project\Blog_Copier\Tasks\Send_Notifications;
+use Tribe\Project\Queues\Queues_Provider;
 
 class Blog_Copier_Provider extends Service_Provider {
 	const ADMIN_SCREEN       = 'blog_copier.admin_screen';

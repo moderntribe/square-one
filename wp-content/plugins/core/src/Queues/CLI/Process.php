@@ -1,6 +1,6 @@
 <?php
 
-namespace Tribe\Project\CLI\Queues;
+namespace Tribe\Project\Queues\CLI;
 
 use Tribe\Project\CLI\Command;
 use Tribe\Project\Queues\Contracts\Task;

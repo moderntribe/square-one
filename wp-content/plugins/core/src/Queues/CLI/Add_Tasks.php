@@ -1,11 +1,12 @@
 <?php
 
-namespace Tribe\Project\CLI\Queues;
+namespace Tribe\Project\Queues\CLI;
 
 use Tribe\Project\CLI\Command;
 use Tribe\Project\Queues\Queue_Collection;
+use Tribe\Project\Queues\Tasks\Noop;
 
-class Cleanup extends Command {
+class Add_Tasks extends Command {
 
 	/**
 	 * @var Queue_Collection
@@ -18,7 +19,11 @@ class Cleanup extends Command {
 	}
 
 	public function command() {
-		return 'queues cleanup';
+		return 'queues add-tasks';
+	}
+
+	public function description() {
+		return __( 'Add mock tasks to verify queue functionality', 'tribe' );
 	}
 
 	public function arguments() {
@@ -32,13 +37,9 @@ class Cleanup extends Command {
 		];
 	}
 
-	public function description() {
-		return __( 'Runs the cleanup command for a given queue.', 'tribe' );
-	}
-
 	public function run_command( $args, $assoc_args ) {
-		if ( ! isset( $args[0] ) ) {
-			\WP_CLI::error( __( 'You must specify which queue you wish to process.', 'tribe' ) );
+		if ( ! isset( $assoc_args['count'] ) ) {
+			$assoc_args['count'] = rand( 1, 50 );
 		}
 
 		$queue_name = $args[0];
@@ -53,7 +54,9 @@ class Cleanup extends Command {
 			\WP_CLI::error( $e->getMessage() );
 		}
 
-		$queue->cleanup();
+		for ( $i = 1; $i < $assoc_args['count']; $i ++ ) {
+			$queue->dispatch( Noop::class, [ 'noop' => 'task' . microtime() ], $i );
+		}
 	}
 
 }

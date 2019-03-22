@@ -1,6 +1,6 @@
 <?php
 
-namespace Tribe\Project\CLI\Queues;
+namespace Tribe\Project\Queues\CLI;
 
 use cli\Table as CLI_Table;
 use Tribe\Project\CLI\Command;

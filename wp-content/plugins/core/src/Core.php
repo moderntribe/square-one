@@ -17,7 +17,7 @@ use Tribe\Project\Service_Providers\Post_Types\Page_Service_Provider;
 use Tribe\Project\Service_Providers\Post_Types\Post_Service_Provider;
 use Tribe\Project\Service_Providers\Post_Types\Sample_Service_Provider;
 use Tribe\Project\Service_Providers\Post_Types\Venue_Service_Provider;
-use Tribe\Project\Service_Providers\Queues_Provider;
+use Tribe\Project\Queues\Queues_Provider;
 use Tribe\Project\Service_Providers\Shortcode_Provider;
 use Tribe\Project\Service_Providers\Taxonomies\Category_Service_Provider;
 use Tribe\Project\Service_Providers\Taxonomies\Example_Taxonomy_Service_Provider;
