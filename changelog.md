@@ -22,6 +22,8 @@ All notable changes to this project will be documented in this file.
 * Changed: .travis.yml to properly run integration, acceptance and web driver tests and set a github token for dependencies
 * Changed: .travis.yml to create cache directories and add memcached servers to local-config.php 
 * Changed: tests-config-sample.php to disable admin SSL 
+* Changed the documentation to mention "global" when it comes to the script for the certificates generation
+* Added references to queues and schema to the docs general overview
 
 ## [2019.02]
 
