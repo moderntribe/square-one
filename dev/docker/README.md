@@ -155,7 +155,7 @@ Windows users, search for a the line `- VIRTUAL_HOST={{something}}.tribe`.
 Create a new terminal window in **your main Square One** repo, then create a certificate for the project's domain:
 
 ```sh
-npm run docker:cert {{something}}.tribe
+npm run docker:global:cert {{something}}.tribe
 ```
 
 Connect to MySQL and create (or import) a database for the project. The connection info for your project is defined in `local-config.php`, though is commonly:
