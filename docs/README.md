@@ -56,8 +56,8 @@
   * [Cache](/docs/backend/object-cache.md)
   * [Request Object](/docs/backend/request.md)
   * [Facades](/docs/backend/facades.md)
-  * [Schema](schema.md)
-  * [Queues](queues.md)
+  * [Schema](/docs/backend/schema.md)
+  * [Queues](/docs/backend/queues.md)
   * **Plugins/Extensions**
     * [Twig](https://twig.symfony.com/)
     * [Posts 2 Post](https://github.com/scribu/wp-posts-to-posts/wiki)
