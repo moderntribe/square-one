@@ -24,6 +24,7 @@ All notable changes to this project will be documented in this file.
 * Changed: tests-config-sample.php to disable admin SSL 
 * Changed the documentation to mention "global" when it comes to the script for the certificates generation
 * Added references to queues and schema to the docs general overview
+* Added steps to follow on Linux environments to avoid problems with DNS Resolution when setting up the global Docker environment.
 
 ## [2019.02]
 

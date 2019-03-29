@@ -37,6 +37,34 @@ Then, update your computer's primary DNS server to `127.0.0.1` and the secondary
 
 **Note** that a full restart may be necessary to resolve `*.tribe` domains.
 
+**Note** for **Linux**, if you run in to problems with DNS resolution, it might be caused by `systemd-resolved` on newer Linux versions. To workaround the issue, you might need to do the following steps (be aware that disabling `systemd-resolvd` might break name resolution in VPN for some users):
+
+1. Run the following commands:
+   ```shell
+   sudo systemctl disable systemd-resolved.service
+   sudo service systemd-resolved stop
+   ```
+
+2. Open the file `/etc/NetworkManager/NetworkManager.conf` and add to the `main` section:
+
+   ```
+   dns=default
+   ```
+
+
+3. Delete the symlink `/etc/resolv.conf` :
+   ```shell
+   rm /etc/resolv.conf
+   ```
+
+4. Restart network manager:
+
+   ```shell
+   sudo service network-manager restart
+   ```
+
+   
+
 # Docker image setup
 
 Start by cloning the Square One repo to your development machine. Open a terminal in the repo's directory and ensure that bash is installed:
@@ -61,7 +89,7 @@ command -v bash # => /bin/bash
 npm run docker:global:start
 ```
 
-The start command will take awhile the first time. You may run into an issue that reads like this:
+The start command will take a while the first time. You may run into an issue that reads like this:
 
 ```
 Starting docker-compose project: global
@@ -70,6 +98,12 @@ ERROR: Pool overlaps with other one on this address space
 ```
 
 This might happen if you are using, or used, a number of Docker-managed local development stacks; running `docker network prune` should solve the issue.
+
+**Note** be aware that there are 2 parts to running a Square One application: **global** and **local**. The global Square One portion is required for _all_ Square One projects and is the part that should be running up to this moment if you've been following the above steps. The local docker setup is specific to your project and should be started via:
+
+```shell
+npm run docker:start
+```
 
 ### SSL certificates
 
