@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 ## [2019.04]
 
 * Changed: Added npm commands for running codeception tests
+* Changed: Added sanitization when uploading SVG files
 
 ## [2019.03]
 

@@ -6,7 +6,7 @@ namespace Tribe\Project\Service_Providers;
 
 use Pimple\Container;
 use Tribe\Project\Container\Service_Provider;
-use Tribe\Project\Util\SVG_Support;
+use Tribe\Project\Util\SVG_Support\SVG_Support;
 
 class Util_Provider extends Service_Provider {
 
