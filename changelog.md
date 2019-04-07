@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 ## [2019.04]
 
 * Changed: Added npm commands for running codeception tests
+* Changed: Added in more formal documentation and reasoning behind Lazy Loading classes in our Service Providers.
 
 ## [2019.03]
 
