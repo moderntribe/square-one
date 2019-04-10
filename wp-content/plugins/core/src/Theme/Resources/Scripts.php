@@ -39,7 +39,7 @@ class Scripts {
 			$script = $wp_scripts->registered[ $handle ];
 
 			//-- Weird way to check if script is being enqueued in the footer.
-			if ( $script->extra[ 'group' ] === 1 ) {
+			if ( isset( $script->extra[ 'group' ] ) && $script->extra[ 'group' ] === 1 ) {
 
 				//-- If version is set, append to end of source.
 				$source = $script->src . ( $script->ver ? "?ver={$script->ver}" : "" );
