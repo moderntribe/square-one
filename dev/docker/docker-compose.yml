@@ -40,14 +40,14 @@ services:
       build:
         context: .
         dockerfile: phpdocker/php-fpm/Dockerfile
-      image: tribe-phpfpm:7.0-rev5
+      image: tribe-phpfpm:7.2-rev0
       working_dir: /application
       networks:
         - proxy
       dns: 172.20.10.250
       volumes:
         - ../..:/application/www:cached
-        - ./phpdocker/php-fpm/php-ini-overrides.ini:/etc/php/7.0/fpm/conf.d/99-overrides.ini
+        - ./phpdocker/php-fpm/php-ini-overrides.ini:/etc/php/7.2/fpm/conf.d/99-overrides.ini
         - ./phpdocker/php-fpm/ssmtp.conf:/etc/ssmtp/ssmtp.conf:ro
         - ./wp-cli.yml:/application/wp-cli.yml
         - ./composer-config.json:/root/.composer/auth.json

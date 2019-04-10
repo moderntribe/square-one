@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 ## [2019.04]
 
 * Changed: Added npm commands for running codeception tests
+* Changed: Updated default PHP version to 7.2
 
 ## [2019.03]
 
