@@ -63,6 +63,7 @@
     * [Posts 2 Post](https://github.com/scribu/wp-posts-to-posts/wiki)
     * [Extended Post Types](https://github.com/johnbillion/extended-cpts/blob/master/README.md)
     * [Extended Taxonomies](https://github.com/johnbillion/extended-taxos/blob/master/README.md)
+    * [Whoops](/docs/backend/whoops.md)
 * **Tests and Code Quality**
   * [Overview](/docs/tests/README.md)
   * [Codeception](/docs/tests/codeception.md)

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fffc6786fef979de4b5dc1a5ef19f41d",
+    "content-hash": "1b008249799abe8f4e6a89026a9ba707",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -2247,9 +2247,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/classic-editor.0.4.zip",
-                "reference": null,
-                "shasum": null
+                "url": "https://downloads.wordpress.org/plugin/classic-editor.0.4.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -2267,9 +2265,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/classic-editor-addon.2.0.0.zip",
-                "reference": null,
-                "shasum": null
+                "url": "https://downloads.wordpress.org/plugin/classic-editor-addon.2.0.0.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -2287,9 +2283,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/configure-smtp.3.1.zip",
-                "reference": null,
-                "shasum": null
+                "url": "https://downloads.wordpress.org/plugin/configure-smtp.3.1.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -2307,9 +2301,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/gravity-forms-wcag-20-form-fields.zip?timestamp=1521543598",
-                "reference": null,
-                "shasum": null
+                "url": "https://downloads.wordpress.org/plugin/gravity-forms-wcag-20-form-fields.zip?timestamp=1521543598"
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -2327,9 +2319,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/limit-login-attempts.2.0beta3.zip",
-                "reference": null,
-                "shasum": null
+                "url": "https://downloads.wordpress.org/plugin/limit-login-attempts.2.0beta3.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -2347,9 +2337,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/posts-to-posts.1.6.5.zip",
-                "reference": null,
-                "shasum": null
+                "url": "https://downloads.wordpress.org/plugin/posts-to-posts.1.6.5.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -2367,9 +2355,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/regenerate-thumbnails.3.0.2.zip",
-                "reference": null,
-                "shasum": null
+                "url": "https://downloads.wordpress.org/plugin/regenerate-thumbnails.3.0.2.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -2387,9 +2373,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/the-events-calendar.4.6.11.1.zip",
-                "reference": null,
-                "shasum": null
+                "url": "https://downloads.wordpress.org/plugin/the-events-calendar.4.6.11.1.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -2407,9 +2391,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/user-switching.1.3.0.zip",
-                "reference": null,
-                "shasum": null
+                "url": "https://downloads.wordpress.org/plugin/user-switching.1.3.0.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -2427,9 +2409,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wordpress-seo.9.4.zip",
-                "reference": null,
-                "shasum": null
+                "url": "https://downloads.wordpress.org/plugin/wordpress-seo.9.4.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -3283,6 +3263,67 @@
                 "webdriver"
             ],
             "time": "2018-05-16T17:37:13+00:00"
+        },
+        {
+            "name": "filp/whoops",
+            "version": "2.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/filp/whoops.git",
+                "reference": "bc0fd11bc455cc20ee4b5edabc63ebbf859324c7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/filp/whoops/zipball/bc0fd11bc455cc20ee4b5edabc63ebbf859324c7",
+                "reference": "bc0fd11bc455cc20ee4b5edabc63ebbf859324c7",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.5.9 || ^7.0",
+                "psr/log": "^1.0.1"
+            },
+            "require-dev": {
+                "mockery/mockery": "^0.9 || ^1.0",
+                "phpunit/phpunit": "^4.8.35 || ^5.7",
+                "symfony/var-dumper": "^2.6 || ^3.0 || ^4.0"
+            },
+            "suggest": {
+                "symfony/var-dumper": "Pretty print complex values better with var-dumper available",
+                "whoops/soap": "Formats errors as SOAP responses"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Whoops\\": "src/Whoops/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Filipe Dobreira",
+                    "homepage": "https://github.com/filp",
+                    "role": "Developer"
+                }
+            ],
+            "description": "php error handling for cool kids",
+            "homepage": "https://filp.github.io/whoops/",
+            "keywords": [
+                "error",
+                "exception",
+                "handling",
+                "library",
+                "throwable",
+                "whoops"
+            ],
+            "time": "2018-10-23T09:00:00+00:00"
         },
         {
             "name": "gumlet/php-image-resize",
@@ -4701,6 +4742,7 @@
                 "mock",
                 "xunit"
             ],
+            "abandoned": true,
             "time": "2018-09-09T05:48:43+00:00"
         },
         {
@@ -8156,7 +8198,8 @@
         "moderntribe/panel-builder": 20,
         "humanmade/mercator": 20,
         "pimple/pimple": 20,
-        "roots/wp-password-bcrypt": 20
+        "roots/wp-password-bcrypt": 20,
+        "filp/whoops": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

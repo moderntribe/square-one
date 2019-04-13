@@ -28,6 +28,7 @@ use Tribe\Project\Service_Providers\Theme_Provider;
 use Tribe\Project\Service_Providers\Settings_Provider;
 use Tribe\Project\Service_Providers\Twig_Service_Provider;
 use Tribe\Project\Service_Providers\Util_Provider;
+use Tribe\Project\Service_Providers\Whoops_Provider;
 
 class Core {
 
@@ -80,6 +81,10 @@ class Core {
 		$this->load_post_type_providers();
 		$this->load_taxonomy_providers();
 
+		// Enable Whoops error logging if required.
+		if ( defined( 'WHOOPS_ENABLE' ) && WHOOPS_ENABLE && class_exists( '\Whoops\Run' )  ) {
+			$this->providers['whoops'] = new Whoops_Provider();
+		}
 
 		/**
 		 * Filter the service providers the power the plugin
