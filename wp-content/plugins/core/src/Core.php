@@ -82,7 +82,7 @@ class Core {
 		$this->load_taxonomy_providers();
 
 		// Enable Whoops error logging if required.
-		if ( class_exists( '\Whoops\Run' ) && defined( 'WHOOPS_ENABLE' ) && WHOOPS_ENABLE ) {
+		if ( defined( 'WHOOPS_ENABLE' ) && WHOOPS_ENABLE && class_exists( '\Whoops\Run' )  ) {
 			$this->providers['whoops'] = new Whoops_Provider();
 		}
 
