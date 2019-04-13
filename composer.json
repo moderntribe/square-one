@@ -78,7 +78,8 @@
     "wp-cli/wp-cli": "^1.5.1",
     "lucatume/wp-browser": "^2.2.0",
     "lucatume/function-mocker": "~1.0",
-    "php-http/httplug": "^1.1"
+    "php-http/httplug": "^1.1",
+    "filp/whoops": "^2.2@dev"
   },
   "extra": {
     "wordpress-install-dir": "wp",

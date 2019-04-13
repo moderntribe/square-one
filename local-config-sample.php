@@ -31,6 +31,13 @@ define( 'WP_CACHE', false );
 $GLOBALS[ 'memcached_servers' ] = [ [ 'memcached', 11211, ] ];
 
 /*
+ * Whoops
+ *
+ * If you enable Whoops, the Whoops error library will be used to provide better/prettier error logging.
+ */
+define( 'WHOOPS_ENABLE', true );
+
+/*
  * Multisite
  *
  * If you enable multisite in wp-config.php, ensure to provide your local.tribe URI here
