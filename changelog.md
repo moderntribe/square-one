@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 * Changed: Added npm commands for running codeception tests
 * Changed: Added in more formal documentation and reasoning behind Lazy Loading classes in our Service Providers.
 * Changed: Updated default PHP version to 7.2
+* Changed: Added in default Panels Caching
 
 ## [2019.03]
 

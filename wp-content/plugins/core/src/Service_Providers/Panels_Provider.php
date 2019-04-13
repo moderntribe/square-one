@@ -53,5 +53,11 @@ class Panels_Provider extends Service_Provider {
 		add_filter( 'panels_js_config', function( $data ) use ( $container ) {
 			return $container[ 'panels.init' ]->modify_js_config( $data );
 		}, 10, 1 );
+
+		if ( ! defined( 'TRIBE_DISABLE_PANELS_CACHE' ) || ! TRIBE_DISABLE_PANELS_CACHE ) {
+			add_action( 'the_panels', function () use ( $container ) {
+				Panels\Caching_Loop::preempt_panels_loop();
+			}, 0, 0 );
+		}
 	}
 }
