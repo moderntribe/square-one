@@ -9,6 +9,8 @@ All notable changes to this project will be documented in this file.
 * Changed: Updated default PHP version to 7.2
 * Changed: Added in default Panels Caching
 * Changed: Added in Whoops library
+* Changed: Updated WordPress core to 5.1.1
+* Changed: Updated Classic Editor Plugins to latest Versions
 
 ## [2019.03]
 
