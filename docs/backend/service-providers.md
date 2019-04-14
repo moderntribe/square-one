@@ -45,7 +45,7 @@ Square One has adopted a lazy-loading patter for Actions and Filters. This patte
 
 Consider the following situation illustrating the older pattern:
 
-```
+```php
 // Within the Service Provider
 $container['foobar_class'] = function( $container ) {
    return new Foober_Class();
@@ -71,7 +71,7 @@ Secondly, this pattern causes the Class definitions and the Hooking to exist in 
 
 By contrast, consider the updated pattern:
 
-```
+```php
 // Service Provider
 $container['foobar_class'] = function( $container ) {
    return new Foober_Class();
@@ -98,7 +98,8 @@ By moving to this pattern, we've seen substantial performance gains on systems o
 #### Actions
 
 *Adding a custom admin menu screen*
-```
+
+```php
 // Service Provider
 $container['sync.registry'] = function ( $container ) {
 	return new Sync_Registry( $container['plugin_file'] );
@@ -117,7 +118,7 @@ public function add_sync_screen() {
 
 *Registering REST API Routes*
 
-```
+```php
 // Service Provider
 $container['routes.post'] = function ( $container ) {
 	return new Route_Post();
@@ -145,7 +146,7 @@ When adding a filter that has a return, it's important to remember to *return* t
 
 *Registering a custom Twig Handler*
 
-```
+```php
 // Service Provider
 $container[ 'twig' ] = function ( Container $container ) {
 	$twig = new \Twig_Environment( $container[ 'twig.loader' ], $container[ 'twig.options' ] );
@@ -162,7 +163,7 @@ add_filter( 'tribe/project/twig', function ( $twig ) use ( $container ) {
 
 *Adding in custom column names in an Edit Post table*
 
-```
+```php
 // Service Provider
 $container['posts.fork'] = function ( Container $container ) {
 	return new Fork();
@@ -184,7 +185,7 @@ public function replace_title_column( $columns ) {
 
 *Adding Quick Edit Links*
 
-```
+```php
 // Service Provider
 $container['posts.fork'] = function ( Container $container ) {
 	return new Fork();
@@ -207,7 +208,7 @@ There are times when you may wish to pass an indeterminate number of arguments t
 using the `...$args` parameter pattern. Keep in mind that it's important to set the final argument of `add__filter()` to 
 something large (here we use 99) to ensure WordPress passes all of your arguments.
 
-```
+```php
 // Service Provider
 $container['posts.fork'] = function ( Container $container ) {
 	return new Fork();
@@ -223,3 +224,22 @@ public function add_quick_edit_links( $actions, \WP_Post $post ) {
 	// do stuff
 }
 ```
+
+## Why Class LazyLoading?
+
+Previously we covered the pattern of registering classes within the Service Provider, and _also_ registering hooks/actions/filters 
+within that same Provider (vs. registering them, say, in a `hooks()` method on the class itself).
+
+There has been a bit of debate and confusion about why exactly we landed on this pattern. As such, here are but a few reasons why 
+we feel it's the best approach:
+
+* Separating the hooks from the class encourages separation of responsibilities. A class should be responsible for doing a thing. “Filtering a query” and “Hooking that filter into WordPress” are two different responsibilities. It’s very easy to write a unit/integration test for “Filtering a query”. Harder to write a good test for “hooked into wordpress such that when a certain event occurs this thing runs and gives a different result”. The latter falls into the realm of acceptance tests.
+* Separating the hooks from the class encourages us to think about our classes in isolation from WordPress. Sure, we’re operating 99% of the time in the context of WordPress. But that doesn’t mean that every single one of our classes should be tightly coupled to WP core.
+* Lazy instantiation of our classes is _sometimes_ a performance gain. Yes, a simple constructor with no args is quite cheap to instantiate; approximately the same cost as instantiating a closure. A lot of our constructors do not meet that definition, though. Some classes instantiate dozens of other objects. Some classes run queries. Some classes have a lot of dependencies to inject that may be expensive to instantiate. Could these classes be better designed? Yes, probably. But lazy instantiation is a quick and easy method to get significant performance gains. (For example, Steelcase saw something in the neighborhood of 20% performance increases when we switched it over to this pattern, resulting in ~500ms off every uncached response).
+* Lazy instantiation allows us to define a class and all of its dependencies at a point in the page load that some data may not be available. E.g., if we need to inject a dependency into a class that depends on the value of `get_queried_object_id()`, we can’t do that until after the `wp` hook. But we’re defining all of our instances on `plugins_loaded`, so the data is not yet available. The alternatives are to have multiple hooks on which we instantiate our classes, OR remove the dependency injection that makes our code more testable.
+* In light of the above points, _some_ classes could be instantiated cheaply, while others are more expensive. Is it worth the cognitive overhead of deciding on a case by case basis which category a given class falls into? No. Build habits around a reasonable and performant default. Only deviate from it if you have a strongly compelling reason.
+* Lazy instantiation gives us the opportunity to override the definitions of our objects. A common example is a WP multisite instance (we do a lot of those) where most sites will have one default behavior, but a small collection of sites will need to change that behavior in some way (I can give you lots of examples if you need them). Our default service providers will define all the default objects that we assign to the container, but then we can load overrides based on arbitrary criteria (blog ID, active plugins, theme, etc.) that re-assign the container’s keys before they are instantiated. The closure is still hooked into WP, but the class instances that handle the callback are swapped out because of the overrides.
+* By moving all of the hooks to the service provider, we do separate them from the code that will be handling the hooks. But we also colocate them other hooks handled by other classes that may be related. This makes it easier to orchestrate multiple classes that work together to accomplish an end result, while keeping those classes separate for easier testing and more clear separation of responsibilities.
+
+While the move to Class LazyLoading hasn't been without it's drawbacks (chief amongst them being having more concise classes with self-contained calls to actions and filters), we feel the tradeoff in performance, testability,
+separation of concerns, and extensibility is well worth it.

@@ -1,10 +1,16 @@
 {
   "extends": "stylelint-config-standard",
+  "ignoreFiles": [
+    "*.js",
+    "*.jsx"
+  ],
   "rules": {
     "at-rule-name-space-after": "always",
+    "at-rule-no-unknown": null,
     "block-no-empty": null,
     "block-opening-brace-newline-after": "always",
     "property-no-unknown": null,
+    "no-descending-specificity": null,
     "declaration-block-no-duplicate-properties": [ true, {
       "ignore": [ "consecutive-duplicates" ]
     } ],
@@ -22,6 +28,9 @@
       "ignore": [ "after-comment" ]
     } ],
     "selector-pseudo-element-colon-notation": "single",
+    "selector-pseudo-class-no-unknown": [true, {
+      "ignorePseudoClasses": ["global"]
+    }],
     "value-no-vendor-prefix": true
   }
 }

@@ -7,6 +7,10 @@
 import _ from 'lodash';
 import { on, ready } from 'utils/events';
 import applyBrowserClasses from 'utils/dom/apply-browser-classes';
+// @EXAMPLE_REACT_APP
+
+// import * as tools from 'utils/tools';
+// import { HMR_DEV } from 'config/wp-settings';
 
 // you MUST do this in every module you use lodash in.
 // A custom bundle of only the lodash you use will be built by babel.
@@ -21,13 +25,19 @@ import single from '../single/index';
 
 import components from '../components/index';
 
+// @EXAMPLE_REACT_APP
+
+// const el = {
+// 	exampleAppRoot: tools.getNodes( 'example-app' )[ 0 ],
+// };
+
 /**
  * @function bindEvents
  * @description Bind global event listeners here,
  */
 
 const bindEvents = () => {
-	on(window, 'resize', _.debounce(resize, 200, false));
+	on( window, 'resize', _.debounce( resize, 200, false ) );
 };
 
 /**
@@ -69,7 +79,13 @@ const init = () => {
 	components();
 	single();
 
-	console.info('Square One FE: Initialized all javascript that targeted document ready.');
+	// @EXAMPLE_REACT_APP
+
+	// if ( el.exampleAppRoot && ! HMR_DEV ) {
+	// 	import( 'Example' /* webpackChunkName:"example" */ );
+	// }
+
+	console.info( 'Square One FE: Initialized all javascript that targeted document ready.' );
 };
 
 /**
@@ -78,11 +94,11 @@ const init = () => {
  */
 
 const setupEnvironment = () => {
-	if (browserSupportsAllFeatures()) {
+	if ( browserSupportsAllFeatures() ) {
 		init();
 		return;
 	}
-	import('./polyfills' /* webpackChunkName:"polyfills" */).then(() => init());
+	import( './polyfills' /* webpackChunkName:"polyfills" */ ).then( () => init() );
 };
 
 /**
@@ -91,7 +107,7 @@ const setupEnvironment = () => {
  */
 
 const domReady = () => {
-	ready(setupEnvironment);
+	ready( setupEnvironment );
 };
 
 export default domReady;

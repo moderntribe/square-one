@@ -2,11 +2,66 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2019.04]
+
+* Changed: Added npm commands for running codeception tests
+* Changed: Added in more formal documentation and reasoning behind Lazy Loading classes in our Service Providers.
+* Changed: Updated default PHP version to 7.2
+* Changed: Added in default Panels Caching
+* Changed: Added in Whoops library
+
+## [2019.03]
+
+* Updated to node 10.15.0
+* Updated to use Gulp
+* Updated to use Products linting standards for js, react and pcss
+* Eslint and Stylelint now first attempt to fix all linting errors before running
+* Added Bugsnag integration
+* Added React app injection into main js bundle
+* Added example react app
+* Added wider alias support for common js directories
+* Breaks up webpack into a modular setup
+* Added webpack bundle analyzer reports
+* Moves swiper to non webpack loading as it has issues with webpack.
+* Changed: .travis.yml to properly run integration, acceptance and web driver tests and set a github token for dependencies
+* Changed: .travis.yml to create cache directories and add memcached servers to local-config.php 
+* Changed: tests-config-sample.php to disable admin SSL 
+* Changed the documentation to mention "global" when it comes to the script for the certificates generation
+* Added references to queues and schema to the docs general overview
+* Added steps to follow on Linux environments to avoid problems with DNS Resolution when setting up the global Docker environment.
+
+## [2019.02]
+
+* Add bcrypt password hashing: https://github.com/roots/wp-password-bcrypt
+* Refactor force-plugin-activation.php to allow forcing plugins off when running unit tests
+* Added tribe-chrome global container for chromedriver acceptance testing
+* Redid codeception config and added sample acceptance and webdriver tests
+* Change object-cache-sample.php to object-cache.php for default inclusion on forked projects
+* Update incorrect global setting for memcached_server in local-config-sample.php
+
+## [2019.01]
+
+* Added a meta importer CLI command.
+* Fixed: Add sintax hightlight for docs with code examples
+* Replaced the Pimple Dumper with a container exporter to work with recent versions of PhpStorm
+* Fixed: Set explicit charset and collation for queues MySQL table
+* Fixed: Handled invalid records in the queue table, avoiding a fatal error
+* Modified: Test Suite configuration by moving it to the dev directory and consolidating composer management.
+
+## [2018.12]
+
+* Added: caption position support to video component
+* Fixed: gitignore entry for Tribe 301 plugin
+* Added the Blog Copier
+* Changed: added more documentation for our SQ1 forms implementation
+* Fixed failing test for Full_Size_Gif
+
 ## [2018.11]
 
 * Fixed: Nginx config to properly pull missing assets (images/js/css/media etc...) from a remote server so you don't need to download large uploads folders.
 * Changed: Cleaned up the `CLI_Provider`
 * Changed: Introduced the `Generator_Command` abstract class for generator commands, so that we don't need all commands following the same constructor.
+* Added: the following JavaScript unit tests: accessibility.test, apply-browser-classes.test, body-lock.test
 * Fixed: Instructions to view the project logs inside docker
 * Added: install guide for Ubuntu users on `docs/docker` documentation
 

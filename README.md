@@ -4,7 +4,7 @@
 
 Square One (AKA **\[1\]**) is a development framework created by Modern Tribe primarily used for WordPress projects. It contains a base for:
 
-* Our build process (node, grunt, webpack)
+* Our build process (node, gulp, webpack)
 * Theme independent core functionality plugin | /content/mu-plugins
 * Core plugin | /content/plugins/core
 * Core theme | /content/themes/core
@@ -17,7 +17,7 @@ Square One (AKA **\[1\]**) is a development framework created by Modern Tribe pr
 * **Build**
   * [Overview](/docs/build/README.md)
   * [Node](/docs/build/node.md)
-  * [Grunt Tasks](/docs/build/grunt.md)
+  * [Gulp Tasks](/docs/build/gulp.md)
 * **Panel Builder**
   * [Overview](/docs/panels/README.md)
   * [The Initializer](/docs/panels/initializer.md)
@@ -30,7 +30,7 @@ Square One (AKA **\[1\]**) is a development framework created by Modern Tribe pr
   * [Fonts](/docs/theme/fonts.md)
   * [Icons](/docs/theme/icons.md)
   * [Twig](/docs/theme/twig.md)
-    * **Css**
+    * **CSS**
       * [Overview](/docs/theme/css/README.md)
       * [PostCSS](/docs/theme/css/postcss.md)
       * [Grids](/docs/theme/css/grids.md)
@@ -43,6 +43,7 @@ Square One (AKA **\[1\]**) is a development framework created by Modern Tribe pr
       * [Selectors](/docs/theme/js/selectors.md)
       * [Events](/docs/theme/js/events.md)
       * [Jquery](/docs/theme/js/jquery.md)
+      * [React Apps](/docs/theme/js/react-apps.md)
     * **Components**
       * [Overview](/docs/theme/components/README.md)
       * [Accordion](/docs/theme/components/accordion.md)
@@ -58,7 +59,7 @@ Square One (AKA **\[1\]**) is a development framework created by Modern Tribe pr
   * [Container / Core.php](/docs/backend/container.md)
   * [Custom Post Types](/docs/backend/post-types.md)
   * [Custom Taxonomies](/docs/backend/taxonomies.md)
-  * [Post & Taxonomy Meta](/docs/backend/post-meta.md)
+  * [Post & Taxonomy Meta](/docs/backend/object-meta.md)
   * [Service Providers](/docs/backend/service-providers.md)
   * [Template Controllers](/docs/backend/data.md)
   * **Plugins/Extensions**
@@ -68,7 +69,7 @@ Square One (AKA **\[1\]**) is a development framework created by Modern Tribe pr
     * [Extended Taxonomies](https://github.com/johnbillion/extended-taxos/blob/master/README.md)
 * **Tests and Code Quality**
   * [Overview](/docs/tests/README.md)
-  * [Codeception](/docs/tests/codeception.md)
+  * [Codeception](/dev/tests/README.md)
   * [Jest](/docs/tests/jest.md)
 * **Local Dev Environment**
   * [Docker](/dev/docker/README.md)
@@ -80,7 +81,7 @@ Square One (AKA **\[1\]**) is a development framework created by Modern Tribe pr
 
 #### Using the build tools
 
-The build tools for themeing can be found in the *root* directory. Refer to the docs for instructions on getting started with Grunt, Webpack, and PostCSS.
+The build tools for theming can be found in the *root* directory. Refer to the docs for instructions on getting started with Grunt, Webpack, and PostCSS.
 
 
 ## Configurations

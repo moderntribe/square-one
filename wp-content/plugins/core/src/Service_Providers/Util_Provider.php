@@ -5,10 +5,10 @@ namespace Tribe\Project\Service_Providers;
 
 
 use Pimple\Container;
-use Pimple\ServiceProviderInterface;
+use Tribe\Project\Container\Service_Provider;
 use Tribe\Project\Util\SVG_Support;
 
-class Util_Provider implements ServiceProviderInterface {
+class Util_Provider extends Service_Provider {
 
 	public function register( Container $container ) {
 

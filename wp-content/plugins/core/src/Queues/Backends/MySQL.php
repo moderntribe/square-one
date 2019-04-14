@@ -19,7 +19,7 @@ class MySQL implements Backend {
 	public function __construct() {
 		global $wpdb;
 
-		$table_name = $wpdb->prefix . self::DB_TABLE;
+		$table_name = $wpdb->base_prefix . self::DB_TABLE;
 
 		/**
 		 * Filter the table name used for queues on this backend.
@@ -91,6 +91,24 @@ class MySQL implements Backend {
 		}
 
 		$queue['args'] = json_decode( $queue['args'], 1 );
+
+		if ( ! is_array( $queue[ 'args' ] ) ) {
+			// No args, or error decoding args, leaving us
+			// with an unprocessable record. Mark it complete
+			// so we don't come back to it on the next run.
+			$wpdb->update(
+				$this->table_name,
+				[
+					'taken' => time(),
+					'done' => time(),
+				],
+				[
+					'id' => $queue[ 'id' ],
+					'taken' => 0,
+				]
+			);
+			throw new \RuntimeException( 'Unprocessable record' );
+		}
 
 		$wpdb->update(
 			$this->table_name,
@@ -181,7 +199,9 @@ class MySQL implements Backend {
 	public function create_table() {
 		global $wpdb;
 
-		$table_name = $wpdb->prefix . MySQL::DB_TABLE;
+		$table_name      = $wpdb->prefix . MySQL::DB_TABLE;
+		$charset_collate = $wpdb->get_charset_collate();
+
 		$query = "CREATE TABLE $table_name (
 					id bigint(20) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
 					queue varchar(255) NOT NULL,
@@ -191,7 +211,7 @@ class MySQL implements Backend {
 					run_after datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
 					taken int(10) NOT NULL DEFAULT 0,
 					done int(10) DEFAULT 0
-				)";
+				) $charset_collate";
 
 		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 
@@ -205,5 +225,16 @@ class MySQL implements Backend {
 			"SELECT priority FROM $this->table_name WHERE id = %s",
 			$task_id
 		) );
+	}
+
+	/**
+	 * @return array|bool
+	 * @action tribe/project/queues/mysql/init_table
+	 */
+	public function initialize_table() {
+		if ( $this->table_exists() ) {
+			return false;
+		}
+		return $this->create_table();
 	}
 }

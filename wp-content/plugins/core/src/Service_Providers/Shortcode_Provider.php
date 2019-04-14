@@ -5,10 +5,10 @@ namespace Tribe\Project\Service_Providers;
 
 
 use Pimple\Container;
-use Pimple\ServiceProviderInterface;
+use Tribe\Project\Container\Service_Provider;
 use Tribe\Project\Shortcodes\Gallery;
 
-class Shortcode_Provider implements ServiceProviderInterface {
+class Shortcode_Provider extends Service_Provider {
 
 	public function register( Container $container ) {
 		$this->gallery( $container );

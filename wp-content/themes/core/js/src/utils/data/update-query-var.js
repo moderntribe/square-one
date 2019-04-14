@@ -1,31 +1,26 @@
+function updateQueryVar( key, value, url = window.location.href ) {
+	const separator = '?';
 
-const updateQueryVar = (key, value, url = window.location.href) => {
-	const re = new RegExp(`([?&])${key}=.*?(&|#|$)(.*)`, 'gi');
+	const hashSplit = url.split( '#' );
+	const hash = hashSplit[ 1 ] ? `#${ hashSplit[ 1 ] }` : '';
+	const querySplit = hashSplit[ 0 ].split( '?' );
+	const host = querySplit[ 0 ];
+	const query = querySplit[ 1 ];
+	const params = query !== undefined ? query.split( '&' ) : [];
+	let updated = false;
 
-	let hash;
-	let separator;
-	let parsedUrl = url;
-
-	if (re.test(url)) {
-		if (typeof value !== 'undefined' && value !== null) {
-			parsedUrl = url.replace(re, `$1${key}=${value}$2$3`);
-		} else {
-			hash = url.split('#');
-			parsedUrl = hash[0].replace(re, '$1$3').replace(/(&|\?)$/, '');
-			if (typeof hash[1] !== 'undefined' && hash[1] !== null) {
-				parsedUrl += `#${hash[1]}`;
-			}
+	params.forEach( ( item, index ) => {
+		if ( item.startsWith( `${ key }=` ) ) {
+			updated = true;
+			params[ index ] = `${ key }=${ value }`;
 		}
-	} else if (typeof value !== 'undefined' && value !== null) {
-		separator = url.indexOf('?') !== -1 ? '&' : '?';
-		hash = url.split('#');
-		parsedUrl = `${hash[0]}${separator}${key}=${value}`;
-		if (typeof hash[1] !== 'undefined' && hash[1] !== null) {
-			parsedUrl += `#${hash[1]}`;
-		}
+	} );
+
+	if ( ! updated ) {
+		params[ params.length ] = `${ key }=${ value }`;
 	}
 
-	return parsedUrl;
-};
+	return `${ host }${ separator }${ params.join( '&' ) }${ hash }`;
+}
 
 export default updateQueryVar;

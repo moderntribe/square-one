@@ -21,3 +21,12 @@ $GLOBALS[ 'memcached_servers' ] = [ 'memcached:11211' ];
 This lets `object-cache.php` know that you want to use the `memcached` instance in Docker with the port of `11211`.
 
 From here you should be all set! You can now actively use the `Tribe\Libs\Cache` class to store data to the Object Cache.
+
+## Panels Content Caching
+
+By default, all panels content will be stored in the Object Cache in order to provide increased performance out-of-the-box. In several 
+situations, we found that Panels rendering was one of the main bottle necks in large-scale, heavily-trafficked platforms. As such, we moved towards 
+caching the rendered panel content in the Object Cache and invalidating it whenever it updates. 
+
+If you need to disable this caching for debugging purposes, testing, etc, you can set a config constant of `TRIBE_DISABLE_PANELS_CACHE` to `true`. This 
+will bypass the Panels cache and render the content on each page load as per usual.

@@ -12,6 +12,11 @@ define( 'DB_USER', 'root' );
 define( 'DB_PASSWORD', 'password' );
 define( 'DB_HOST', 'mysql' );
 
+/*
+ * React dev
+ */
+
+define( 'HMR_DEV', false );
 
 /*
  * Debugging
@@ -23,7 +28,14 @@ define( 'WP_DEBUG_DISPLAY', true );
 define( 'SCRIPT_DEBUG', true );
 define( 'WP_CACHE', false );
 
-$GLOBALS[ 'memcached_servers' ] = [ 'memcached:11211' ];
+$GLOBALS[ 'memcached_servers' ] = [ [ 'memcached', 11211, ] ];
+
+/*
+ * Whoops
+ *
+ * If you enable Whoops, the Whoops error library will be used to provide better/prettier error logging.
+ */
+define( 'WHOOPS_ENABLE', true );
 
 /*
  * Multisite

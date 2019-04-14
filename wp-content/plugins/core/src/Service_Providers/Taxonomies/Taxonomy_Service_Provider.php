@@ -5,10 +5,10 @@ namespace Tribe\Project\Service_Providers\Taxonomies;
 
 
 use Pimple\Container;
-use Pimple\ServiceProviderInterface;
+use Tribe\Project\Container\Service_Provider;
 use Tribe\Libs\Taxonomy\Taxonomy_Config;
 
-abstract class Taxonomy_Service_Provider implements ServiceProviderInterface {
+abstract class Taxonomy_Service_Provider extends Service_Provider {
 
 	/**
 	 * @var Object The class of the taxonomy term object. Should have a NAME constant.

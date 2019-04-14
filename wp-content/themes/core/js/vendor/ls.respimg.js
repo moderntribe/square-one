@@ -25,17 +25,17 @@
 		var regDescriptors = /\s+(\d+)(w|h)\s+(\d+)(w|h)/;
 		var forEach = Array.prototype.forEach;
 
-		return function(edgeMatch){
+		return function(){
 			var img = document.createElement('img');
 			var removeHDescriptors = function(source){
-				var ratio;
+				var ratio, match;
 				var srcset = source.getAttribute(lazySizesConfig.srcsetAttr);
 				if(srcset){
-					if(srcset.match(regDescriptors)){
-						if(RegExp.$2 == 'w'){
-							ratio = RegExp.$1 / RegExp.$3;
+					if((match = srcset.match(regDescriptors))){
+						if(match[2] == 'w'){
+							ratio = match[1] / match[3];
 						} else {
-							ratio = RegExp.$3 / RegExp.$1;
+							ratio = match[3] / match[1];
 						}
 
 						if(ratio){
@@ -60,19 +60,15 @@
 				}
 			};
 
-			if(edgeMatch[1]){
-				document.addEventListener('lazybeforeunveil', handler);
+			document.addEventListener('lazybeforeunveil', handler);
 
-				if(true || edgeMatch[1] > 14){
-					img.onload = test;
-					img.onerror = test;
+			img.onload = test;
+			img.onerror = test;
 
-					img.srcset = 'data:,a 1w 1h';
+			img.srcset = 'data:,a 1w 1h';
 
-					if(img.complete){
-						test();
-					}
-				}
+			if(img.complete){
+				test();
 			}
 		};
 	})();
