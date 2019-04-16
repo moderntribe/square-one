@@ -11,6 +11,8 @@ When deploying to a server, Ansible uses `ForwardAgent` when ssh-ing into the se
 ```
 ssh-add /path/to/key/you/use/for/github
 
+ssh-agent
+
 # Here's an example of what Matt B did:
 ssh-add ~/.ssh/id_rsa
 ```
