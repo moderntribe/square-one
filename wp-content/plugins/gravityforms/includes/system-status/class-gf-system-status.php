@@ -31,15 +31,15 @@ class GF_System_Status {
 				GF_Update::updates();
 				break;
 			default:
-                /**
-                 * Fires when the settings page view is determined
-                 *
-                 * Used to add additional pages to the form settings
-                 *
-                 * @since Unknown
-                 *
-                 * @param string $subview Used to complete the action name, allowing an additional subview to be detected
-                 */
+				/**
+				 * Fires when the settings page view is determined
+				 *
+				 * Used to add additional pages to the form settings
+				 *
+				 * @since Unknown
+				 *
+				 * @param string $subview Used to complete the action name, allowing an additional subview to be detected
+				 */
 				do_action( "gform_system_status_page_{$subview}" );
 		}
 
@@ -114,7 +114,7 @@ class GF_System_Status {
 	 * @uses GFSystemStatus::get_current_subview()
 	 * @uses GFSystemStatus::get_subviews()
 	 */
-	public static function page_header( $title = '' ){
+	public static function page_header( $title = '' ) {
 
 		// Print admin styles.
 		wp_print_styles( array( 'jquery-ui-styles', 'gform_admin', 'wp-pointer' ) );
@@ -128,7 +128,8 @@ class GF_System_Status {
 		<div class="wrap <?php echo GFCommon::get_browser_class() ?>">
 
 			<h2><?php esc_html_e( 'System Status', 'gravityforms' ) ?></h2>
-			<?php GFCommon::display_dismissible_message(); ?>
+			<?php GFCommon::display_admin_message();
+			GFCommon::display_dismissible_message(); ?>
 
 			<div id="gform_tab_group" class="gform_tab_group vertical_tabs">
 
@@ -139,7 +140,7 @@ class GF_System_Status {
 							$query = array_merge( $query, $view['query'] );
 						?>
 						<li <?php echo self::get_current_subview() == $view['name'] ? 'class="active"' : '' ?>>
-							<a href="<?php echo add_query_arg( $query ); ?>"><?php echo $view['label'] ?></a>
+							<a href="<?php echo esc_url( add_query_arg( $query ) ); ?>"><?php echo $view['label'] ?></a>
 						</li>
 					<?php endforeach; ?>
 				</ul>
@@ -166,12 +167,6 @@ class GF_System_Status {
 			<br class="clear" style="clear: both;" />
 
 		</div> <!-- / wrap -->
-
-		<script type="text/javascript">
-			jQuery(document).ready( function( $ ) {
-				$( '.gform_tab_container' ).css( 'minHeight', jQuery( '#gform_tabs' ).height() + 100 );
-			} );
-		</script>
 
 		<?php
 		}

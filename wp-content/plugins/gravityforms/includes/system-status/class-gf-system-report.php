@@ -14,6 +14,15 @@ if ( ! class_exists( 'GFForms' ) ) {
 class GF_System_Report {
 
 	/**
+	 * Whether background tasks are enabled.
+	 *
+	 * @since 2.3.0.3
+	 *
+	 * @var null|bool
+	 */
+	public static $background_tasks = null;
+
+	/**
 	 * Display system report page.
 	 *
 	 * @since  2.2
@@ -36,6 +45,8 @@ class GF_System_Report {
 		// Get system report sections.
 		$sections           = self::get_system_report();
 		$system_report_text = self::get_system_report_text( $sections );
+
+		wp_print_styles( array( 'thickbox' ) );
 
 		?>
 		<div class="updated gform_system_report_alert inline">
@@ -71,6 +82,7 @@ class GF_System_Report {
 
 			function gfDoAction(actionCode, confirmMessage) {
 
+
 				if (confirmMessage && !confirm(confirmMessage)) {
 					// User canceled action;
 					return;
@@ -79,16 +91,40 @@ class GF_System_Report {
 				jQuery('#gf_action').val(actionCode);
 				jQuery('#gf_system_report_form').submit();
 			}
+
 		</script>
 
 		<form method="post" id="gf_system_report_form">
-			<input type="hidden" name="gf_action" id="gf_action"/>
-		<?php
+			<input type="hidden" name="gf_action" id="gf_action" />
+			<input type="hidden" name="gf_arg" id="gf_arg" />
 
+		<?php
 		wp_nonce_field( 'gf_sytem_report_action', 'gf_sytem_report_action' );
+
+
+		if ( ! gapi()->is_site_registered() ) {
+
+			?>
+			<div id="gform_register_site">
+				<h3>
+				<?php esc_html_e( 'Site Registration', 'gravityforms' ); ?>
+				</h3>
+				<div>
+					<p>
+					<?php esc_html_e( 'To register your site, enter your license key below.', 'gravityforms' ); ?>
+					</p>
+					<input type="text" id="gform_license_key" name="gform_license_key" placeholder="<?php esc_html_e( 'Enter Your License Key', 'gravityforms' ); ?>"/>
+					<p>
+						<a class="button-primary" onclick="jQuery('#gf_arg').val( jQuery('#gform_license_key').val() ); gfDoAction('register_site');">Register</a>
+					</p>
+				</div>
+			</div>
+			<?php
+		}
 
 		// Loop through system report sections.
 		foreach ( $sections as $i => $section ) {
+
 
 			// Display section title.
 			echo '<h3><span>' . $section['title'] . '</span></h3>';
@@ -111,6 +147,10 @@ class GF_System_Report {
 
 				// Loop through section items.
 				foreach ( $table['items'] as $item ) {
+
+					if ( rgar( $item, 'export_only' ) ) {
+						continue;
+					}
 
 					// Open item row.
 					echo '<tr>';
@@ -221,17 +261,87 @@ class GF_System_Report {
 	 * @uses GFUpgrade::upgrade()
 	 */
 	private static function maybe_process_action() {
+		global $wpdb;
 
 		switch ( rgpost( 'gf_action' ) ) {
 
 			case 'upgrade_database':
-
 				check_admin_referer( 'gf_sytem_report_action', 'gf_sytem_report_action' );
 
 				$versions = gf_upgrade()->get_versions();
 
-				gf_upgrade()->upgrade( $versions['previous_db_version'], true );
+				$previous_db_version = $versions['previous_db_version'];
 
+				if ( version_compare( $previous_db_version, '2.3-beta-1', '<' ) && GFCommon::table_exists( $wpdb->prefix . 'rg_form' ) ) {
+
+					$status = get_option( 'gform_upgrade_status' );
+
+					$percent = self::get_upgrade_percent_complete();
+
+					$percent_label = sprintf( esc_html__( 'complete.', 'gravityforms' ), $percent );
+
+					$status = sprintf( '<span id="gf-upgrade-status">%s</span> <span id="gf-upgrade-precent">%s</span>%% %s', $status, $percent, $percent_label );
+
+					$message = sprintf( esc_html__( 'Current status: %s', 'gravityforms' ), $status );
+
+					$message .= ' ' . sprintf( '<img id="gf-spinner" src="%s" />', GFCommon::get_base_url() . '/images/spinner.gif' );
+
+					$ajax_url = admin_url( 'admin-ajax.php' );
+
+					$args = array(
+						'action' => 'gf_force_upgrade',
+						'nonce'  => wp_create_nonce( 'gf_force_upgrade' ),
+					);
+
+					$ajax_url = add_query_arg( $args, $ajax_url	);
+
+					echo '<h2>' . esc_html__( 'Upgrading Gravity Forms', 'gravityforms' ) . '</h2>';
+
+					$warning = esc_html__( 'Do not close or navigate away from this page until the upgrade is 100% complete.', 'gravityfroms' );
+
+					printf( '<p>%s</p>', $warning );
+					printf( '<p>%s</p>', $message );
+					?>
+					<script>
+						jQuery(document).ready(function ($) {
+							var timer = setInterval(function(){ getStatus() }, 30000);
+
+							function getStatus() {
+								$.post( "<?php echo esc_url_raw( $ajax_url ); ?>", function( data ) {
+									var response = jQuery.parseJSON( data );
+									$('#gf-upgrade-status').text( response.status_label );
+									$('#gf-upgrade-precent').text( response.percent );
+									if ( response.status == 'complete' ) {
+										$('#gf-spinner').hide();
+										clearInterval( timer );
+									}
+								});
+							}
+						});
+					</script>
+					<?php
+					ob_end_flush();
+				}
+
+				gf_upgrade()->upgrade( $previous_db_version, true );
+
+				break;
+
+			case 'register_site':
+				GFForms::include_gravity_api();
+
+				$new_key = rgpost( 'gf_arg' );
+				if ( ! empty( $new_key ) && ! gapi()->is_site_registered() ) {
+
+					$new_key_md5 = md5( trim( $new_key ) );
+					$previous_key_md5 = get_option( 'rg_gforms_key' );
+
+					if ( $new_key_md5 != $previous_key_md5 ) {
+						update_option( 'rg_gforms_key', $new_key_md5 );
+					} else {
+						GFSettings::update_site_registration( $previous_key_md5, $new_key_md5 );
+					}
+				}
 				break;
 
 			default:
@@ -263,6 +373,37 @@ class GF_System_Report {
 
 		$wp_cron_disabled  = defined( 'DISABLE_WP_CRON' ) && DISABLE_WP_CRON;
 		$alternate_wp_cron = defined( 'ALTERNATE_WP_CRON' ) && ALTERNATE_WP_CRON;
+
+		$args = array(
+			'timeout'   => 2,
+			'body'      => 'test',
+			'cookies'   => $_COOKIE,
+			'sslverify' => apply_filters( 'https_local_ssl_verify', false ),
+		);
+
+		$query_args = array(
+			'action' => 'gf_check_background_tasks',
+			'nonce'  => wp_create_nonce( 'gf_check_background_tasks' ),
+		);
+
+		$url = add_query_arg( $query_args, admin_url( 'admin-ajax.php' ) );
+
+		$response = wp_remote_post( $url, $args );
+
+		$background_tasks = wp_remote_retrieve_body( $response ) == 'ok';
+
+		$background_validation_message = '';
+		if ( is_wp_error( $response ) ) {
+			$background_validation_message = $response->get_error_message();
+		} elseif ( ! $background_tasks ) {
+			$response_code = wp_remote_retrieve_response_code( $response );
+			if ( $response_code == 200 ) {
+				$background_validation_message = esc_html__( 'Unexpected content in the response.', 'gravityforms' );
+			} else {
+				$background_validation_message = sprintf( esc_html__( 'Response code: %s', 'gravityforms' ), $response_code );
+			}
+		}
+		self::$background_tasks = $background_tasks;
 
 		// Prepare system report.
 		$system_report = array(
@@ -375,7 +516,21 @@ class GF_System_Report {
 								'value'        => $alternate_wp_cron ? __( 'Yes', 'gravityforms' ) : __( 'No', 'gravityforms' ),
 								'value_export' => $alternate_wp_cron ? 'Yes' : 'No',
 							),
+							array(
+								'label'              => esc_html__( 'Background tasks', 'gravityforms' ),
+								'label_export'       => 'Background tasks',
+								'type'               => 'wordpress_background_tasks',
+								'value'              => $background_tasks ? __( 'Yes', 'gravityforms' ) : __( 'No', 'gravityforms' ),
+								'value_export'       => $background_tasks ? 'Yes' : 'No',
+								'is_valid'           => $background_tasks,
+								'validation_message' => $background_validation_message,
+							),
 						),
+					),
+					array(
+						'title'        => esc_html__( 'Active Theme', 'gravityforms' ),
+						'title_export' => 'Active Theme',
+						'items'        => self::get_theme(),
 					),
 					array(
 						'title'        => esc_html__( 'Active Plugins', 'gravityforms' ),
@@ -424,8 +579,8 @@ class GF_System_Report {
 								'value'              => esc_html( phpversion() ),
 								'type'               => 'version_check',
 								'version_compare'    => '>=',
-								'minimum_version'    => '5.6',
-								'validation_message' => esc_html__( 'Gravity Forms requires PHP 5.6 or above.', 'gravityforms' ),
+								'minimum_version'    => '7.1',
+								'validation_message' => esc_html__( 'Recommended: PHP 7.1 or higher.', 'gravityforms' ),
 							),
 							array(
 								'label'        => esc_html__( 'Memory Limit', 'gravityforms' ) . ' (memory_limit)',
@@ -548,7 +703,7 @@ class GF_System_Report {
 		// Get display as type.
 		$type = rgar( $item, 'type' );
 
-		// Preapre value.
+		// Prepare value.
 		switch ( $type ) {
 
 			case 'csv':
@@ -645,8 +800,11 @@ class GF_System_Report {
 	 */
 	public static function get_gravityforms() {
 
-		// Get Gravity Forms version info.
+		// Get Gravity Forms version info, clearing cache
 		$version_info = GFCommon::get_version_info( false );
+
+		// Re-caches remote message.
+		GFCommon::cache_remote_message();
 
 		// Determine if upload folder is writable.
 		$upload_path = GFFormsModel::get_upload_root();
@@ -661,8 +819,33 @@ class GF_System_Report {
 		$no_conflict_mode = get_option( 'gform_enable_noconflict' );
 		$updates          = get_option( 'gform_enable_background_updates' );
 
+		GFForms::include_gravity_api();
+		$site_key      = gapi()->get_site_key();
+		$is_registered = gapi()->is_site_registered();
+
+		if ( $is_registered ) {
+			$validation_message = '';
+		} elseif ( rgpost( 'gf_action' ) == 'register_site' ) {
+			//if there was an error during site registration, display appropriate message
+			$validation_message = sprintf( esc_html__( 'There was an error registering your site. Please check that the licence key entered is valid and not expired. If the problem persists, please contact support. %1$sRegister Site%2$s.', 'gravityforms' ), '<a class="thickbox" href="#TB_inline?width=400&inlineId=gform_register_site">', '</a>' );
+		} else {
+			$validation_message = sprintf( esc_html__( 'This site has not been registered. %1$sPlease register your site%2$s.', 'gravityforms' ), '<a class="thickbox" href="#TB_inline?width=400&inlineId=gform_register_site">', '</a>' );
+		}
+
+		$locale = apply_filters( 'plugin_locale', get_locale(), 'gravityforms' );
+
 		// Prepare versions array.
 		$gravityforms = array(
+			array(
+				'export_only'               => true,
+				'label'                     => esc_html__( 'Registration', 'gravityforms' ),
+				'label_export'              => 'Registration',
+				'value'                     => $is_registered ? esc_html__( 'Site registered ', 'gravityforms' ) . ' ( ' . $site_key . ' ) ' : '',
+				'is_valid'                  => $is_registered,
+				'value_export'              => $is_registered ? 'Site registered ( ' . $site_key . ' ) ' : 'Not registered',
+				'validation_message'        => $validation_message,
+				'validation_message_export' => '',
+			),
 			array(
 				'label'              => esc_html__( 'Version', 'gravityforms' ),
 				'label_export'       => 'Version',
@@ -676,9 +859,9 @@ class GF_System_Report {
 				),
 			),
 			array(
-				'label'              => esc_html__( 'Upload folder', 'gravityforms' ),
-				'label_export'       => 'Upload folder',
-				'value'              => GFFormsModel::get_upload_root(),
+				'label'        => esc_html__( 'Upload folder', 'gravityforms' ),
+				'label_export' => 'Upload folder',
+				'value'        => GFFormsModel::get_upload_root(),
 			),
 			array(
 				'label'              => esc_html__( 'Upload folder permissions', 'gravityforms' ),
@@ -716,6 +899,12 @@ class GF_System_Report {
 				'label_export' => 'Background updates',
 				'value'        => $updates ? __( 'Yes', 'gravityforms' ) : __( 'No', 'gravityforms' ),
 				'value_export' => $updates ? 'Yes' : 'No',
+			),
+			array(
+				'label'        => esc_html__( 'Locale', 'gravityforms' ),
+				'label_export' => 'Locale',
+				'value'        => $locale,
+				'value_export' => $locale,
 			),
 		);
 
@@ -779,6 +968,11 @@ class GF_System_Report {
 		// Loop through Gravity Forms tables.
 		foreach ( $gf_tables as $i => $table_name ) {
 
+			if ( $table_name == GFFormsModel::get_rest_api_keys_table_name() && ! self::is_rest_api_enabled() ) {
+				// The REST API key table is only created when the REST API is enabled.
+				continue;
+			}
+
 			// Set initial validity and validation message states.
 			$value                     = true;
 			$validation_message        = '';
@@ -813,22 +1007,55 @@ class GF_System_Report {
 		// Define database upgrade warning message.
 		$warning_message = __( "WARNING! Re-running the upgrade process is only recommended if you are currently experiencing issues with your database. This process may take several minutes to complete. 'OK' to upgrade. 'Cancel' to abort.", 'gravityforms' );
 
-		// If databse version is out of date, add upgrade database option.
+		// If database version is out of date, add upgrade database option.
 		if ( version_compare( $versions['current_db_version'], GFForms::$version, '<' ) ) {
 
-			$tables[0] = array_merge(
-				$tables[0],
-				array(
-					'action'         => array(
-						'label'   => __( 'Upgrade database', 'gravityforms' ),
-						'code'    => 'upgrade_database',
-						'confirm' => $warning_message,
-					),
-					'is_valid'       => false,
-					'message'        => __( 'Your database version is out of date.', 'gravityforms' ),
-					'message_export' => 'Your database version is out of date.',
-				)
-			);
+			if ( gf_upgrade()->is_upgrading() ) {
+				$status = get_option( 'gform_upgrade_status' );
+				$status = empty( $status ) ? '' : sprintf( __( 'Current Status: %s', 'gravityforms' ), $status );
+				$percent = self::get_upgrade_percent_complete();
+				$percent_label = sprintf( esc_html__( '%s%% complete.', 'gravityforms' ), $percent );
+				$status .= ' ' . $percent_label;
+				if ( defined( 'GFORM_AUTO_DB_MIGRATION_DISABLED' ) && GFORM_AUTO_DB_MIGRATION_DISABLED ) {
+					$message = sprintf( __( 'Automatic background migration is disabled but the database needs to be upgraded to version %s. %s', 'gravityforms' ), GFForms::$version, $status );
+					$action_label = __( 'Force the migration manually', 'gravityforms' );
+				} else {
+					$message = sprintf( __( 'The database is currently being upgraded to version %s. %s', 'gravityforms' ), GFForms::$version, $status );
+					if ( ! self::$background_tasks ) {
+						$message .= ' ' . __( "As this site doesn't support background tasks the upgrade process will take longer than usual and the status will change infrequently.", 'gravityforms' );
+					}
+					$action_label = __( 'Force the upgrade', 'gravityforms' );
+				}
+
+				$tables[0] = array_merge(
+					$tables[0],
+					array(
+						'label'   => __( 'Database Version', 'gravityforms' ),
+						'action'         => array(
+							'label'   => $action_label,
+							'code'    => 'upgrade_database',
+							'confirm' => $warning_message,
+						),
+						'is_valid'       => false,
+						'validation_message' => $message,
+						'validation_message_export' => $message,
+					)
+				);
+			} else {
+				$tables[0] = array_merge(
+					$tables[0],
+					array(
+						'action'         => array(
+							'label'   => __( 'Upgrade database', 'gravityforms' ),
+							'code'    => 'upgrade_database',
+							'confirm' => $warning_message,
+						),
+						'is_valid'       => false,
+						'message'        => __( 'Your database version is out of date.', 'gravityforms' ),
+						'message_export' => 'Your database version is out of date.',
+					)
+				);
+			}
 
 		} elseif ( $has_failed_tables ) {
 
@@ -857,7 +1084,7 @@ class GF_System_Report {
 						'confirm' => $warning_message,
 					),
 					'is_valid'       => true,
-					'message'        => 'upgrade_database' == rgpost( 'gf_action' ) ? __( 'Database upgraded successfully.', 'gravityforms' ) : __( 'Your database is up-to-date.', 'gravityforms' ),
+					'message'        => 'upgrade_database' == rgpost( 'gf_action' ) ? __( 'Database upgraded successfully.', 'gravityforms' ) : __( 'Your database is up-to-date.', 'gravityforms' ) . ' ' . __( 'Warning: downgrading Gravity Forms is not recommended.', 'gravityforms' ),
 					'message_export' => 'upgrade_database' == rgpost( 'gf_action' ) ? 'Database upgraded successfully.' : 'Your database is up-to-date.',
 				)
 			);
@@ -990,7 +1217,7 @@ class GF_System_Report {
 
 					$errors                    = $minimum_requirements['errors'];
 					$is_valid                  = false;
-					$validation_message        = sprintf( __( 'Your system does not meet the minimum requirements for this Add-On (%1$d errors). %2$sView details%3$s', 'gravityforms' ), count( $errors ), '<a href="' . admin_url( 'admin.php' ) . '?page=gf_settings&subview=' . $slug . '">', '</a>' );
+					$validation_message        = sprintf( __( 'Your system does not meet the minimum requirements for this Add-On (%d errors).', 'gravityforms' ), count( $errors ) );
 					$validation_message_export = sprintf( 'Your system does not meet the minimum requirements for this Add-On (%1$d errors). %2$s', count( $errors ), implode( '. ', $errors ) );
 
 				}
@@ -1222,6 +1449,123 @@ class GF_System_Report {
 
 		return false;
 
+	}
+
+	/**
+	 * Get the theme info.
+	 *
+	 * @since  2.2.5.9
+	 * @access public
+	 *
+	 * @return array
+	 */
+	public static function get_theme() {
+
+		wp_update_themes();
+		$update_themes          = get_site_transient( 'update_themes' );
+		$update_themes_versions = ! empty( $update_themes->checked ) ? $update_themes->checked : array();
+
+		$active_theme     = wp_get_theme();
+		$theme_name       = wp_strip_all_tags( $active_theme->get( 'Name' ) );
+		$theme_version    = wp_strip_all_tags( $active_theme->get( 'Version' ) );
+		$theme_author     = wp_strip_all_tags( $active_theme->get( 'Author' ) );
+		$theme_author_uri = esc_url( $active_theme->get( 'AuthorURI' ) );
+
+		$theme_details = array(
+			array(
+				'label'        => $theme_name,
+				'value'        => sprintf( 'by <a href="%s">%s</a> - %s', $theme_author_uri, $theme_author, $theme_version ),
+				'value_export' => sprintf( 'by %s (%s) - %s', $theme_author, $theme_author_uri, $theme_version ),
+				'is_valid'     => version_compare( $theme_version, rgar( $update_themes_versions, $active_theme->get_stylesheet() ), '>=' )
+			),
+		);
+
+		if ( is_child_theme() ) {
+			$parent_theme      = wp_get_theme( $active_theme->get( 'Template' ) );
+			$parent_name       = wp_strip_all_tags( $parent_theme->get( 'Name' ) );
+			$parent_version    = wp_strip_all_tags( $parent_theme->get( 'Version' ) );
+			$parent_author     = wp_strip_all_tags( $parent_theme->get( 'Author' ) );
+			$parent_author_uri = esc_url( $parent_theme->get( 'AuthorURI' ) );
+
+			$theme_details[] = array(
+				'label'        => sprintf( '%s (%s)', $parent_name, esc_html__( 'Parent', 'gravityforms' ) ),
+				'label_export' => $parent_name . ' (Parent)',
+				'value'        => sprintf( 'by <a href="%s">%s</a> - %s', $parent_author_uri, $parent_author, $parent_version ),
+				'value_export' => sprintf( 'by %s (%s) - %s', $parent_author, $parent_author_uri, $parent_version ),
+				'is_valid'     => version_compare( $parent_version, rgar( $update_themes_versions, $parent_theme->get_stylesheet() ), '>=' )
+			);
+		}
+
+		return $theme_details;
+
+	}
+
+	/**
+	* Returns the percent complete of the migration from the legacy rg_ tables to the gf_ tables.
+	*
+	* @since 2.3.0.4
+	*
+	* @return float
+	*/
+	public static function get_upgrade_percent_complete() {
+		global $wpdb;
+
+		$form_table = $wpdb->prefix . 'gf_form';
+		$form_meta_table = $wpdb->prefix . 'gf_form_meta';
+		$form_view = $wpdb->prefix . 'gf_form_view';
+		$entry_table = GFFormsModel::get_entry_table_name();
+		$entry_meta_table = GFFormsModel::get_entry_meta_table_name();
+		$entry_notes_table = GFFormsModel::get_entry_notes_table_name();
+
+		$legacy_form_table = $wpdb->prefix . 'rg_form';
+		$legacy_form_meta_table = $wpdb->prefix . 'rg_form_meta';
+		$legacy_form_view_table = $wpdb->prefix . 'rg_form_view';
+		$lead_table = GFFormsModel::get_lead_table_name();
+		$lead_detail_table = GFFormsModel::get_lead_details_table_name();
+		$lead_meta_table = GFFormsModel::get_lead_meta_table_name();
+		$lead_notes_table = GFFormsModel::get_lead_notes_table_name();
+
+		$query = "
+			select
+			(select count(1) from {$form_table}) as form_count,
+			(select count(1) from {$form_meta_table}) as form_meta_count,
+			(select count(1) from {$form_view}) as form_view_count,
+			(select count(1) from {$entry_table}) as entry_count,
+			(select count(1) from {$entry_meta_table}) as entry_meta_count,
+			(select count(1) from {$entry_notes_table}) as entry_notes_count,
+
+			(select count(1) from {$legacy_form_table}) as legacy_form_count,
+			(select count(1) from {$legacy_form_meta_table}) as legacy_form_meta_count,
+			(select count(1) from {$legacy_form_view_table}) as legacy_form_view_count,
+			(select count(1) from {$lead_table}) as lead_count,
+			(select count(1) from {$lead_detail_table}) as lead_detail_count,
+			(select count(1) from {$lead_meta_table}) as lead_meta_count,
+			(select count(1) from {$lead_notes_table}) as lead_notes_count";
+
+		$results = $wpdb->get_results( $query );
+
+		$c = $results[0];
+
+		$count = $c->form_count + $c->form_meta_count + $c->form_view_count + $c->entry_count + $c->entry_meta_count + $c->entry_notes_count;
+
+		$legacy_count = $c->legacy_form_count + $c->legacy_form_meta_count + $c->legacy_form_view_count + $c->lead_count + $c->lead_detail_count + $c->lead_meta_count + $c->lead_notes_count;
+
+		$percent_complete = round( $count / $legacy_count * 100, 2 );
+
+		return $percent_complete;
+	}
+
+
+	/**
+	 * Checks whether the REST API is enabled.
+ 	 *
+ 	 * @since 2.4.0.1
+	 *
+	 * @return bool
+	 */
+	public static function is_rest_api_enabled() {
+		$rest_api_settings = get_option( 'gravityformsaddon_gravityformswebapi_settings' );
+		return ! empty( $rest_api_settings ) && $rest_api_settings['enabled'];
 	}
 
 }
