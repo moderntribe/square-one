@@ -4,7 +4,6 @@
  */
 
 import _ from 'lodash';
-import delegate from 'delegate';
 
 import * as tools from 'utils/tools';
 import * as tests from 'utils/tests';
@@ -23,7 +22,8 @@ const options = {
 		a11y: true,
 		slidesPerView: 'auto',
 		touchRatio: 0.2,
-		slideToClickedSlide: true,
+		watchSlidesVisibility: true,
+		watchSlidesProgress: true,
 	} ),
 };
 
@@ -38,6 +38,30 @@ const updatePagination = ( slider, swiperId ) => {
 		return;
 	}
 	pagination.setAttribute( 'data-id', swiperId );
+};
+
+/**
+ * @function updateCarousel
+ * @description Update carousel
+ */
+
+const updateCarousel = ( carousel, swiperId, swiperThumbId ) => {
+	carousel.classList.add( 'initialized' );
+	carousel.setAttribute( 'data-id', swiperThumbId );
+	carousel.setAttribute( 'data-controls', swiperId );
+};
+
+/**
+ * @function getMainOptsForCarousel
+ * @description Get the main variable options for the carousel
+ */
+
+const getMainOptsForCarousel = ( carousel ) => {
+	const opts = options.swiperThumbs();
+	if ( carousel.dataset.swiperOptions && tests.isJson( carousel.dataset.swiperOptions ) ) {
+		Object.assign( opts, JSON.parse( carousel.dataset.swiperOptions ) );
+	}
+	return opts;
 };
 
 /**
@@ -58,22 +82,20 @@ const getMainOptsForSlider = ( slider, swiperId ) => {
 		opts.pagination.clickable = true;
 		updatePagination( slider, swiperId );
 	}
+	if ( slider.classList.contains( 'c-slider__main--has-carousel' ) ) {
+		const carousel = slider.nextElementSibling;
+		if ( carousel ) {
+			const swiperThumbId = _.uniqueId( 'swiper-carousel-' );
+			instances.swipers[ swiperThumbId ] = new Swiper( carousel, getMainOptsForCarousel( carousel ) );
+			opts.thumbs = {};
+			opts.thumbs.swiper = instances.swipers[ swiperThumbId ];
+			updateCarousel( carousel, swiperId, swiperThumbId );
+		}
+	}
 	if ( slider.dataset.swiperOptions && tests.isJson( slider.dataset.swiperOptions ) ) {
 		Object.assign( opts, JSON.parse( slider.dataset.swiperOptions ) );
 	}
 	return opts;
-};
-
-/**
- * @function syncMainSlider
- * @description Sync the main slider to the carousel.
- * Too bad swiper has a bug with this and we have to resort this this stuff
- * https://github.com/nolimits4web/Swiper/issues/1658
- */
-
-const syncMainSlider = ( e ) => {
-	const carousel = tools.closest( e.delegateTarget, '.swiper-container' );
-	instances.swipers[ carousel.dataset.controls ].slideTo( e.delegateTarget.dataset.index );
 };
 
 /**
@@ -94,38 +116,6 @@ const focusRow = ( index, rowIndex, jumpTo ) => {
 };
 
 /**
- * @module bindCarouselEvents
- * @description Bind Carousel Events.
- */
-
-const bindCarouselEvents = ( swiperThumbId, swiperMainId ) => {
-	instances.swipers[ swiperMainId ].on( 'slideChangeStart', ( instance ) => {
-		instances.swipers[ swiperThumbId ].slideTo( instance.activeIndex );
-	} );
-	delegate( instances.swipers[ swiperThumbId ].wrapperEl, '[data-js="c-slider-thumb-trigger"]', 'click', syncMainSlider );
-};
-
-/**
- * @function initCarousel
- * @description Init the carousel
- */
-
-const initCarousel = ( slider, swiperMainId ) => {
-	const carousel = slider.nextElementSibling;
-	const swiperThumbId = _.uniqueId( 'swiper-carousel-' );
-	carousel.classList.add( 'initialized' );
-	const opts = options.swiperThumbs();
-	if ( carousel.dataset.swiperOptions && tests.isJson( carousel.dataset.swiperOptions ) ) {
-		Object.assign( opts, JSON.parse( carousel.dataset.swiperOptions ) );
-	}
-	instances.swipers[ swiperThumbId ] = new Swiper( carousel, opts );
-	slider.setAttribute( 'data-controls', swiperThumbId );
-	carousel.setAttribute( 'data-id', swiperThumbId );
-	carousel.setAttribute( 'data-controls', swiperMainId );
-	bindCarouselEvents( swiperThumbId, swiperMainId );
-};
-
-/**
  * @module
  * @description Swiper init.
  */
@@ -136,10 +126,6 @@ const initSliders = () => {
 		slider.classList.add( 'initialized' );
 		instances.swipers[ swiperMainId ] = new Swiper( slider, getMainOptsForSlider( slider, swiperMainId ) );
 		slider.setAttribute( 'data-id', swiperMainId );
-		if ( ! slider.classList.contains( 'c-slider__main--has-carousel' ) ) {
-			return;
-		}
-		initCarousel( slider, swiperMainId );
 	} );
 };
 
