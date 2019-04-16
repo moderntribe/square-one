@@ -86,6 +86,7 @@ datadog_install: false
 # but instead added/changed in the relevant
 # inventory/common.yml
 ##############################################################
+elasticsearch_enabled: false
 elasticsearch_install: false
 # elasticsearch_major_version: "5.x"
 # elasticsearch_plugins: []
