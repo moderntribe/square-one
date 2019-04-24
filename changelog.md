@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file.
 * Changed: Updated default PHP version to 7.2
 * Changed: Added in default Panels Caching
 * Changed: Added in Whoops library
+* Add `WP_DISABLE_FATAL_ERROR_HANDLER` constant to wp-config to disable the fatal error handler
 
 ## [2019.03]
 
