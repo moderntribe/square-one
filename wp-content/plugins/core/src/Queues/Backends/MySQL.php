@@ -5,6 +5,13 @@ namespace Tribe\Project\Queues\Backends;
 use Tribe\Project\Queues\Contracts\Backend;
 use Tribe\Project\Queues\Message;
 
+/**
+ * Class MySQL
+ *
+ * Backend manager to persist Tasks for Queue classes.
+ *
+ * @package Tribe\Project\Queues\Backends
+ */
 class MySQL implements Backend {
 
 	const DB_TABLE = 'queue';
@@ -40,7 +47,7 @@ class MySQL implements Backend {
 		return $wpdb->insert( $this->table_name, $data );
 	}
 
-	private function prepare_data( $message ) {
+	private function prepare_data( Message $message ) {
 		$args = $message->get_args();
 
 		$run_after = '0000-00-00 00:00:00';
