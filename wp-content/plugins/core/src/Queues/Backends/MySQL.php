@@ -197,7 +197,7 @@ class MySQL implements Backend {
 
 		$table_exists = $wpdb->query( $wpdb->prepare(
 			'SHOW TABLES LIKE %s',
-			$wpdb->prefix . MySQL::DB_TABLE
+			$this->table_name
 		) );
 
 		return $table_exists ?: false;
@@ -206,7 +206,7 @@ class MySQL implements Backend {
 	public function create_table() {
 		global $wpdb;
 
-		$table_name      = $wpdb->prefix . MySQL::DB_TABLE;
+		$table_name      = $this->table_name;
 		$charset_collate = $wpdb->get_charset_collate();
 
 		$query = "CREATE TABLE $table_name (
