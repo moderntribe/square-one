@@ -51,7 +51,15 @@ class Cron {
 			/** @var Task $task */
 			$task = new $task_class();
 
-			if ( $task->handle( $job->get_args() ) ) {
+			try {
+				// Execute the task. If it returns false, we will consider it failed.
+				$task_succeeded = $task->handle( $job->get_args() );
+			} catch ( \Exception $e ) {
+				// If it throws, we will consider it failed.
+				$task_succeeded = false;
+			}
+
+			if ( $task_succeeded === true ) {
 				// Acknowledge.
 				$queue->ack( $job->get_job_id() );
 			} else {
