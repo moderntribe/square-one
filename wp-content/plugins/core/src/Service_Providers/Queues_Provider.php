@@ -29,11 +29,6 @@ class Queues_Provider extends Service_Provider {
 			return new MySQL();
 		};
 
-		$container[ self::DEFAULT_QUEUE ] = function ( $container ) {
-			$backend = $container['queues.backend.mysql'];
-			return new DefaultQueue( $backend );
-		};
-
 		$container[ self::COLLECTION ] = function( $container ) {
 			return new Queue_Collection();
 		};
@@ -48,10 +43,6 @@ class Queues_Provider extends Service_Provider {
 			}, 10, 1 );
 		}
 
-		add_action( 'init', function() use ( $container ) {
-			$container[ self::COLLECTION ]->add( $container[ self::DEFAULT_QUEUE ] );
-		}, 0, 0 );
-
 		add_action( 'tribe/project/queues/mysql/init_table', function () use ( $container ) {
 			$container[ self::MYSQL ]->initialize_table();
 		}, 10, 0 );
@@ -61,6 +52,24 @@ class Queues_Provider extends Service_Provider {
 				do_action( 'tribe/project/queues/mysql/init_table' );
 			}
 		}, 0, 0 );
+
+		$this->register_queues( $container );
+	}
+
+	/**
+	 * @param Container $container
+	 */
+	protected function register_queues( Container $container ) {
+		$container[ self::DEFAULT_QUEUE ] = function ( $container ) {
+			$backend = $container[ self::MYSQL ];
+
+			return new DefaultQueue( $backend );
+		};
+
+		add_action( 'init', function () use ( $container ) {
+			$container[ self::COLLECTION ]->add( $container[ self::DEFAULT_QUEUE ] );
+		}, 0, 0 );
+	}
 
 	}
 }
