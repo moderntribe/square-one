@@ -43,4 +43,14 @@ interface Backend {
 	public function count( string $queue_name ): int;
 
 	public function cleanup();
+
+	/**
+	 * Asserts whether a Task is enqueued or not.
+	 *
+	 * @param string  $queue_name
+	 * @param Message $message
+	 *
+	 * @return bool
+	 */
+	public function is_task_enqueued( string $queue_name, Message $message ) : bool;
 }

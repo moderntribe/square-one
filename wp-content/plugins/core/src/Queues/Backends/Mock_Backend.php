@@ -60,4 +60,17 @@ class Mock_Backend implements Backend {
 	public function cleanup() {
 		$this->queues = [];
 	}
+
+	/**
+	 * Asserts whether a Task is enqueued or not.
+	 *
+	 * @param string  $queue_name
+	 * @param Message $message
+	 *
+	 * @return bool
+	 */
+	public function is_task_enqueued( string $queue_name, Message $message ): bool {
+		// TODO: Implement is_task_enqueued() method.
+		return false;
+	}
 }

@@ -54,4 +54,18 @@ abstract class Queue {
 		$this->backend->cleanup();
 	}
 
+	/**
+	 * Asserts whether given task is enqueued to be processed by the queue.
+	 *
+	 * @param string $task_handler
+	 * @param array  $args
+	 * @param int    $priority
+	 *
+	 * @return bool
+	 */
+	public function is_task_enqueued( string $task_handler, array $args = [], $priority = 10 ) {
+		$message = new Message( $task_handler, $args, $priority );
+
+		return $this->backend->is_task_enqueued( $this->get_name(), $message );
+	}
 }

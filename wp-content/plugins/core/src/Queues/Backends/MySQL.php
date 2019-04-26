@@ -244,4 +244,34 @@ class MySQL implements Backend {
 		}
 		return $this->create_table();
 	}
+
+	/**
+	 * Asserts if given task is enqueued to be processed or is being processed by the queue.
+	 *
+	 * @param string  $queue_name
+	 * @param Message $message
+	 *
+	 * @return bool
+	 */
+	public function is_task_enqueued( string $queue_name, Message $message ): bool {
+		global $wpdb;
+		$args = json_encode( $message->get_args() );
+		$queue = $wpdb->get_row(
+			$wpdb->prepare(
+				"SELECT * FROM $this->table_name
+				WHERE queue = %s
+				AND task_handler = %s
+				AND args = %s
+				AND done = 0
+				LIMIT 0,1
+				",
+				$queue_name,
+				$message->get_task_handler(),
+				$args
+			),
+			'ARRAY_A'
+		);
+		
+		return ! empty( $queue );
+	}
 }
