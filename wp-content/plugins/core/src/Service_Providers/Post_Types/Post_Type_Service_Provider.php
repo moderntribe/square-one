@@ -12,12 +12,12 @@ use Tribe\Libs\Post_Type\Post_Type_Config;
 abstract class Post_Type_Service_Provider extends Service_Provider {
 
 	/**
-	 * @var Post_Object The class of the post object. Should have a NAME constant.
+	 * @var string The name of the class of the post object. Should have a NAME constant.
 	 */
 	protected $post_type_class;
 
 	/**
-	 * @var Post_Type_Config The post type configuration class
+	 * @var string The name of the post type configuration class
 	 */
 	protected $config_class;
 
@@ -27,33 +27,39 @@ abstract class Post_Type_Service_Provider extends Service_Provider {
 	protected $post_type = '';
 
 	public function __construct() {
-		if ( ! isset( $this->post_type_class ) ) {
+		if ( ! is_subclass_of( $this->post_type_class, Post_Object::class ) ) {
 			throw new \LogicException( 'Must have a valid post type class reference' );
 		}
-		if ( ! defined( $this->post_type_class . '::NAME' ) ) {
+
+		if ( empty( $this->post_type_class::NAME ) ) {
 			throw new \LogicException( 'Post type class requires a NAME constant' );
 		}
 		$this->post_type = $this->post_type_class::NAME;
 	}
 
 	public function register( Container $container ) {
-		$factory = function ( $container )  {
+		$container[ 'post_type.' . $this->post_type ] = $container->factory( function ( $container ) {
 			return new $this->post_type_class;
-		};
-		$container[ 'post_type.' . $this->post_type ] = $factory;
-		$container->factory( $factory );
+		} );
+
 		$this->register_config( $container );
 	}
 
 	protected function register_config( Container $container ) {
-		if ( isset( $this->config_class ) ) {
-			$container[ 'post_type.' . $this->post_type . '.config' ] = function ( $container ) {
-				return new $this->config_class( $this->post_type );
-			};
-
-			add_action( 'init', function() use ( $container ) {
-				$container[ 'post_type.' . $this->post_type . '.config' ]->register();
-			}, 0, 0 );
+		if ( empty( $this->config_class ) ) {
+			return;
 		}
+
+		if ( ! is_subclass_of( $this->config_class, Post_Type_Config::class ) ) {
+			throw new \LogicException( 'If you provide a config class, it must be an instance of Post_Type_Config' );
+		}
+
+		$container[ 'post_type.' . $this->post_type . '.config' ] = function ( $container ) {
+			return new $this->config_class( $this->post_type );
+		};
+
+		add_action( 'init', function () use ( $container ) {
+			$container[ 'post_type.' . $this->post_type . '.config' ]->register();
+		}, 0, 0 );
 	}
 }
