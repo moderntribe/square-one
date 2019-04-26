@@ -41,12 +41,11 @@ class SquareOneTestCase extends WPTestCase {
 	/**
 	 * Resets the Pimple container after each test.
 	 */
-	private function reset_pimple_container() {
+	protected function reset_pimple_container() {
 		$providers_after_test = tribe_project()->container()->keys();
-		foreach ( $providers_after_test as $key => $provider ) {
-			if ( ! array_key_exists( $key, $this->original_providers ) ) {
-				tribe_project()->container()->offsetUnset( $provider );
-			}
+		$new_providers        = array_diff( $providers_after_test, $this->original_providers );
+		foreach ( $new_providers as $p ) {
+			tribe_project()->container()->offsetUnset( $p );
 		}
 	}
 }
