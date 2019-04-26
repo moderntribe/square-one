@@ -4,8 +4,9 @@ namespace Tribe\Project\Blog_Copier\Tasks;
 
 use Tribe\Project\Blog_Copier\Copy_Configuration;
 use Tribe\Project\Blog_Copier\Copy_Manager;
+use Tribe\Tests\SquareOneTestCase;
 
-class Replace_GuidsTest extends \Codeception\TestCase\WPTestCase {
+class Replace_GuidsTest extends SquareOneTestCase {
 
 	/**
 	 * @env multisite

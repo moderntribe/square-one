@@ -7,13 +7,13 @@ use Tribe\Project\Post_Types\Sample\Sample;
 use Tribe\Project\Post_Types\Page\Page;
 use Tribe\Project\Post_Types\Post\Post;
 
-use Codeception\TestCase\WPTestCase;
+use Tribe\Tests\SquareOneTestCase;
 
 /**
  * Class ConnectionsTest
  * @package Tribe\Project\P2P
  */
-class ConnectionsTest extends WPTestCase {
+class ConnectionsTest extends SquareOneTestCase {
 
 	const META_KEY = 'test_meta_key';
 	const META_VALUE = 'test meta value';
