@@ -71,5 +71,4 @@ class Queues_Provider extends Service_Provider {
 		}, 0, 0 );
 	}
 
-	}
 }
