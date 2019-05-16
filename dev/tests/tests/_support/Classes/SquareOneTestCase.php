@@ -43,9 +43,10 @@ class SquareOneTestCase extends WPTestCase {
 	 */
 	protected function reset_pimple_container() {
 		$providers_after_test = tribe_project()->container()->keys();
-		$new_providers        = array_diff( $providers_after_test, $this->original_providers );
-		foreach ( $new_providers as $p ) {
-			tribe_project()->container()->offsetUnset( $p );
-		}
+		$new_keys             = array_diff( $providers_after_test, $this->original_providers );
+		$container            = tribe_project()->container();
+		array_map( function ( $key ) use ( $container ) {
+			unset( $container[ $key ] );
+		}, $new_keys );
 	}
 }
