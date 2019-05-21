@@ -34,6 +34,7 @@ class Content_Provider implements ServiceProviderInterface {
 				add_action( 'trashed_post', [ $page, 'clear_option_on_delete' ], 10, 1 );
 				add_action( 'deleted_post', [ $page, 'clear_option_on_delete' ], 10, 1 );
 				add_action( 'acf/init', [ $page, 'register_setting' ], 10, 0 );
+				add_filter( 'display_post_states', [ $page, 'indicate_post_state' ], 10, 2 );
 			}
 		}, 0, 0 );
 	}

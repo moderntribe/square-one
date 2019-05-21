@@ -190,4 +190,24 @@ abstract class Required_Page {
 		return sprintf( __( '%s Page', 'tribe' ), $this->get_title() );
 	}
 
+	/**
+	 * Add a post state to the list table indicating
+	 * that this is a required page.
+	 *
+	 * @param array $post_states
+	 * @param \WP_Post $post
+	 *
+	 * @return array
+	 * @filter display_post_states
+	 */
+	public function indicate_post_state( $post_states, $post ) {
+		if ( $this->get_post_id() === $post->ID ) {
+			$label = $this->get_field_label();
+			if ( $label ) {
+				$post_states[ static::NAME ] = $label;
+			}
+		}
+		return $post_states;
+	}
+
 }
