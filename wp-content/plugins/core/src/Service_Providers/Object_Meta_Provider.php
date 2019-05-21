@@ -48,6 +48,10 @@ class Object_Meta_Provider extends Service_Provider {
 		}, 10, 0 );
 	}
 
+	public function get_keys() {
+		return $this->keys;
+	}
+
 	private function example( Container $container ) {
 		$container[ self::EXAMPLE ] = function ( Container $container ) {
 			return new Example( [
