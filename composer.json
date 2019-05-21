@@ -58,7 +58,7 @@
     "wpackagist-plugin/classic-editor":"0.4",
     "wpackagist-plugin/classic-editor-addon":"2.0.0",
     "moderntribe/panel-builder": "dev-3.3-branch",
-    "moderntribe/tribe-libs":"master",
+    "moderntribe/tribe-libs":"dev-feature/monorepo",
     "humanmade/mercator":"dev-master#7f3846a",
     "vlucas/phpdotenv": "^2.4.0",
     "humanmade/S3-Uploads":"1.1.0",
