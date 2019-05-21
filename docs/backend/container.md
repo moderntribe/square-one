@@ -1,4 +1,4 @@
-### === Container / Core.php ===
+# Container / Core.php
 
 This plugin uses a container based framework.  In particular we use the Pimple container module. See [Pimple Containers](https://pimple.symfony.com/)
 
@@ -20,7 +20,7 @@ To access the core container, call `tribe_project()->container()`
 
 ---
 
-**Factory Method**
+## Factory Method
 
 Many classes including all post types classes which extend the Post_Object class contain a **factory** method.  This is used to retrieve an specific instance of a class.  Typically an id is passed to retrieve it.
 
@@ -31,7 +31,7 @@ echo $story->get_source_name();
 
 ---
 
-**Using & Hooking Registered Classes**
+## Using & Hooking Registered Classes
 
 Read also: [Service Providers](service-providers.md)
 
@@ -95,3 +95,22 @@ add_action( 'load-index.php', function () use ( $container ) {
 Using this method we can be sure that our singleton Container object is being used when the hook fires during the WordPress page loading process.
 
 If the hook never fires (e.g., it's specific to admin, or certain pages, or cron jobs), then the object will never be instantiated.
+
+## PhpStorm Code Navigation
+
+PhpStorm cannot natively detect what types of objects we retrieve at each
+of the keys on the container. We can give it some hints, though, by creating
+a `.phpstorm.meta.php` in the project root.
+
+To export the meta, run the CLI command `s1 container export`.
+
+```
+./dev/docker/wp.sh s1 container export
+```
+
+To configure the export to run automatically whever a service provider is
+changed, set up a file watcher on the `Service_Providers` directory.
+
+Example configuration: http://p.tri.be/3VEYJO
+
+With a scope set to the Service Providers dir: http://p.tri.be/Cw4LRL

@@ -23,6 +23,8 @@ pimple.json
 # WordPress #
 #############
 
+wp/
+
 local-config.php
 cache-config.php
 tests-config.php
@@ -31,7 +33,6 @@ wp-content/blogs.dir/
 wp-content/upgrade/
 wp-content/backup-db/
 wp-content/backups/
-wp-content/object-cache.php
 wp-content/cache/
 wp-content/advanced-cache.php
 wp-content/wp-cache-config.php
@@ -39,8 +40,18 @@ wp-content/tests/
 wp-content/logs/
 wp-content/mu-plugins/mu.local.php
 
-wp-content/plugins/fakerpress/
-wp-content/plugins/better-search-replace/
+wp-content/mu-plugins/mercator/
+wp-content/plugins/*
+!wp-content/plugins/core
+!wp-content/plugins/core-tests
+!wp-content/plugins/advanced-custom-fields-pro
+!wp-content/plugins/gravityforms
+!wp-content/plugins/term-sorter
+!wp-content/plugins/tribe-301-redirects
+!wp-content/plugins/tribe-admin-dashboard
+!wp-content/plugins/tribe-branding
+!wp-content/plugins/tribe-glomar
+!wp-content/plugins/tribe-json-ld
 
 # Packages #
 ############
@@ -101,10 +112,19 @@ wp-content/plugins/airplane-mode
 **/__coverage__/
 dev_components/react-app/test/__coverage__/
 dev/deploy/.deploy
+/reports
 
 # DevOps #
 #######################
 /.garden-*
 /.env
 /vendor
+dev/docker/composer-config.json
+dev/docker/composer-cache/
 dev/docker/global/.env
+/.gitmodules
+/dev/bin/wp
+
+# Testing #
+#######################
+!dev/tests/tests/_data/*.sql

@@ -52,7 +52,7 @@ scenarios along with other helpers that should be documented (more to come on th
 * Theme
   * [Overview](/docs/theme/README.md)
   * [Markup and Style](/docs/theme/markup-and-style.md)
-  * [Accessibility](/docs/theme/accessbility.md)
+  * [Accessibility](/docs/theme/accessibility.md)
   * [Image Handling](/docs/theme/images.md)
   * [Fonts](/docs/theme/fonts.md)
   * [Icons](/docs/theme/icons.md)
@@ -64,6 +64,9 @@ scenarios along with other helpers that should be documented (more to come on th
     * [Forms](/docs/theme/css/forms.md)
   * Javascript
     * [Overview](/docs/theme/js/README.md)
+    * [Code Splitting](/docs/theme/js/code-splitting.md)
+    * [Polyfills](/docs/theme/js/polyfills.md)
     * [Selectors](/docs/theme/js/selectors.md)
     * [Events](/docs/theme/js/events.md)
     * [Jquery](/docs/theme/js/jquery.md)
+    * [React Apps](/docs/theme/js/react-apps.md)

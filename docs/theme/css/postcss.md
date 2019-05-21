@@ -5,6 +5,7 @@ This system uses [PostCSS](http://postcss.org/). Don't worry if you are coming f
 * [Atom](https://atom.io/packages/language-postcss)
 * [Sublime Text](https://packagecontrol.io/packages/Syntax%20Highlighting%20for%20PostCSS)
 * [Php/Webstorm](https://plugins.jetbrains.com/idea/plugin/8578-postcss-support)
+* [VSCode](https://marketplace.visualstudio.com/items?itemName=ricard.PostCSS)
 
 ## Whats the same as sass?
 

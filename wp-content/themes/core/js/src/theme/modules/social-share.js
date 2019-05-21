@@ -8,7 +8,7 @@ import * as tools from 'utils/tools';
 import popup from 'utils/dom/popup';
 
 const el = {
-	container: tools.getNodes('social-share-networks')[0],
+	container: tools.getNodes( 'social-share-networks' )[ 0 ],
 };
 
 /**
@@ -16,15 +16,15 @@ const el = {
  * @description Init social share popups.
  */
 
-const launchSocialPopup = (e) => {
-	popup({
+const launchSocialPopup = ( e ) => {
+	popup( {
 		event: e,
 		url: e.delegateTarget.href,
 		specs: {
-			width: parseInt(e.delegateTarget.getAttribute('data-width'), 10),
-			height: parseInt(e.delegateTarget.getAttribute('data-height'), 10),
+			width: parseInt( e.delegateTarget.getAttribute( 'data-width' ), 10 ),
+			height: parseInt( e.delegateTarget.getAttribute( 'data-height' ), 10 ),
 		},
-	});
+	} );
 };
 
 /**
@@ -33,7 +33,7 @@ const launchSocialPopup = (e) => {
  */
 
 const bindEvents = () => {
-	delegate(el.container, '[data-js="social-share-popup"]', 'click', launchSocialPopup);
+	delegate( el.container, '[data-js="social-share-popup"]', 'click', launchSocialPopup );
 };
 
 /**
@@ -42,13 +42,13 @@ const bindEvents = () => {
  */
 
 const socialShare = () => {
-	if (!el.container) {
+	if ( ! el.container ) {
 		return;
 	}
 
 	bindEvents();
 
-	console.info('Square One FE: Initialized global social content sharing scripts.');
+	console.info( 'Square One FE: Initialized global social content sharing scripts.' );
 };
 
 export default socialShare;

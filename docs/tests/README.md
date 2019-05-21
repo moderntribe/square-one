@@ -1,6 +1,6 @@
-#Table of Contents
+# Table of Contents
 
 * [Overview](/docs/tests/README.md)
-* [Codeception](/docs/tests/codeception.md)
+* [Codeception](/dev/tests/README.md)
 * [Jest](/docs/tests/jest.md)
 

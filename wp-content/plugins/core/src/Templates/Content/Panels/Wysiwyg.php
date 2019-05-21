@@ -16,9 +16,8 @@ class Wysiwyg extends Panel {
 
 	public function get_mapped_panel_data(): array {
 		$data = [
-			'title'       => $this->get_title( Wysi::FIELD_TITLE, [ 'site-section__title', 'h2' ] ),
-			'description' => ! empty( $this->panel_vars[ Wysi::FIELD_DESCRIPTION ] ) ? $this->panel_vars[ Wysi::FIELD_DESCRIPTION ] : false,
-			'columns'     => $this->get_the_columns(),
+			'title'   => $this->get_title( $this->panel_vars[ Wysi::FIELD_TITLE ], [ 's-title', 'h2' ] ),
+			'columns' => $this->get_the_columns(),
 		];
 
 		return $data;

@@ -7,8 +7,8 @@ Version:     1.0
 Author URI:  http://www.tri.be
 */
 
-require_once trailingslashit( __DIR__ ) . 'vendor/autoload.php';
-
+require_once ABSPATH . '../vendor/autoload.php';
+require_once trailingslashit( __DIR__ ) . 'functions/pluggable.php';
 
 // Start the core plugin
 add_action( 'plugins_loaded', function () {
@@ -21,5 +21,5 @@ add_action( 'plugins_loaded', function () {
  * @return \Tribe\Project\Core
  */
 function tribe_project() {
-	return \Tribe\Project\Core::instance( new Pimple\Container( [ 'plugin_file' => __FILE__ ]) );
+	return \Tribe\Project\Core::instance( new \Pimple\Container( [ 'plugin_file' => __FILE__ ]) );
 }

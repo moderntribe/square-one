@@ -5,23 +5,26 @@ namespace Tribe\Project\Service_Providers;
 
 
 use Pimple\Container;
-use Pimple\ServiceProviderInterface;
+use Tribe\Project\Container\Service_Provider;
 use Tribe\Project\P2P\Admin_Search_Filtering;
+use Tribe\Project\P2P\Connections;
 use Tribe\Project\P2P\Event_Query_Filters;
 use Tribe\Project\P2P\Panel_Search_Filters;
 use Tribe\Project\P2P\Query_Optimization;
 use Tribe\Project\P2P\Relationships\General_Relationship;
+use Tribe\Project\P2P\Relationships\Sample_To_Page;
 use Tribe\Project\P2P\Titles_Filter;
 use Tribe\Project\Post_Types\Event\Event;
 use Tribe\Project\Post_Types\Page\Page;
 use Tribe\Project\Post_Types\Post\Post;
+use Tribe\Project\Post_Types\Sample\Sample;
 
 /**
  * Class P2P_Provider
  *
  * Load configuration common to all sites
  */
-class P2P_Provider implements ServiceProviderInterface {
+class P2P_Provider extends Service_Provider {
 	/**
 	 * @var array P2P relationships to register
 	 *            Keys should be the name of a Relationship subclass in
@@ -42,11 +45,23 @@ class P2P_Provider implements ServiceProviderInterface {
 				Event::NAME,
 			],
 		],
+		Sample_To_Page::class => [
+			'from' => [
+				Sample::NAME,
+			],
+			'to' => [
+				Page::NAME,
+			],
+		]
 	];
 
 	public function register( Container $container ) {
 		$this->relationships( $container );
 		$this->filters( $container );
+
+		$container['p2p.connections'] = function ( $container ) {
+			return new Connections();
+		};
 	}
 
 	protected function relationships( Container $container ) {

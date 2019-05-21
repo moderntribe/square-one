@@ -1,0 +1,19 @@
+##############################################################
+#
+# S3 variables
+#
+# s3_enabled = enable s3
+# s3_uploads_bucket = S3 uploads bucket
+# s3_uploads_region = AWS region for the S3 bucket
+#
+# There are two variables in the vault that accompany these:
+# - s3_uploads_key
+# - s3_uploads_secret
+#
+# NOTE: these should probably not be declared in group_vars/all
+#       but instead, within the group_vars for the inventory
+#       i.e. group_vars/development/base.yml
+##############################################################
+# s3_enabled: fale
+# s3_uploads_bucket: 'CHANGEME'
+# s3_uploads_region: 'CHANGEME'

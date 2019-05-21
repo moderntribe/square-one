@@ -1,9 +1,10 @@
-#Overview
+# Overview
 
 This system uses NPM, Webpack and Grunt to compile the front ends css and script files. Browse specifics below.
 
-##Table of Contents
+## Table of Contents
 
 * [Overview](/docs/build/README.md)
 * [Node](/docs/build/node.md)
-* [Grunt Tasks](/docs/build/grunt.md)
+* [Gulp Tasks](/docs/build/gulp.md)
+* [Composer](/docs/build/composer.md)

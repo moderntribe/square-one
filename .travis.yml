@@ -1,0 +1,98 @@
+sudo: required
+
+language: php
+
+notifications:
+  email: false
+
+php:
+  - 7.0
+
+services:
+  - docker
+
+# disable the default submodule logic
+git:
+  submodules: false
+
+addons:
+  apt:
+    packages:
+      - docker-ce
+
+env:
+  global:
+    - DOCKER_COMPOSE_VERSION=1.19.0
+    - WP_URL="http://square1.tribe"
+    - WP_DOMAIN="square1.tribe"
+    - WP_TABLE_PREFIX="tribe_"
+    - DB_NAME="wp"
+    - DB_USER="root"
+    - DB_HOST="mysql.tribe"
+    - DB_PASSWORD="password"
+    - TEST_DB_NAME="tribe_square1_tests"
+    - WP_ADMIN_USERNAME="admin"
+    - WP_ADMIN_PASSWORD="password"
+    # Secure travis token resolves to `CI_USER_TOKEN='key'` and is used in dev/docker/start.sh to add credentials to composer-config.json
+    # Token is a personal access token for tr1b0t
+    - secure: Hn0zgFdCufW8MQBuzy1ZvSSRrSwGaxGJal+d9Dd+uHExd81P50OBYcGlVMKga4tn2MkE3wNFUtgWJXb7Qy7h3Reu4+X5FqFAY3kjmSsXdXXn6jVw0r29LQo4boCbZLfT+9flvocaVmgUwwfDjPGwQTg58ZD7MdW7NEiCzppenxM=
+before_install:
+  - sudo service mysql stop
+
+  # update docker
+  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+  - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+  - sudo apt-get update
+  - sudo apt-get -y install docker-ce subversion
+
+  # remove existing version of docker-compose and install an updated version
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
+
+install:
+  # start the global docker
+  - sudo bash dev/docker/global/start.sh
+
+  # start the square1 project docker
+  - sudo bash dev/docker/start.sh
+
+  # update resolv.conf to use our local DNS
+  - sudo sed -i '1s/^/nameserver 127.0.0.1\n/' /etc/resolv.conf
+
+  # create needed databases for WordPress and tests
+  - mysql --host=${DB_HOST} --user=${DB_USER} --password=${DB_PASSWORD} -e "create database IF NOT EXISTS ${DB_NAME};"
+  - mysql --host=${DB_HOST} --user=${DB_USER} --password=${DB_PASSWORD} -e "create database IF NOT EXISTS ${TEST_DB_NAME};"
+
+  # install wp-cli locally
+  - sudo mkdir -p /tmp/tools
+  - sudo wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -P /tmp/tools/
+  - sudo chmod +x /tmp/tools/wp-cli.phar && sudo mv /tmp/tools/wp-cli.phar /tmp/tools/wp
+  - export PATH=$PATH:/tmp/tools:vendor/bin
+
+  # create local-config.php
+  - touch local-config.php
+  - echo "<?php" >> local-config.php
+  - echo "define( 'DB_NAME', '${DB_NAME}' );" >> local-config.php
+  - echo "define( 'DB_USER', '${DB_USER}' );" >> local-config.php
+  - echo "define( 'DB_PASSWORD', '${DB_PASSWORD}' );" >> local-config.php
+  - echo "define( 'DB_HOST', '${DB_HOST}' );" >> local-config.php
+  - echo "define( 'TRIBE_GLOMAR', false );" >> local-config.php
+  - echo "\$GLOBALS[ 'memcached_servers' ] = [ [ 'memcached', 11211, ] ];" >> local-config.php
+
+  # install WordPress db structure
+  - bash $TRAVIS_BUILD_DIR/dev/docker/wp.sh core install --url="${WP_URL}" --title="Square1 Tests" --admin_user="${WP_ADMIN_USERNAME}" --admin_password="${WP_ADMIN_PASSWORD}" --admin_email="admin@${WP_DOMAIN}" --skip-email
+
+  # set up tests
+  - sudo cp tests-config-sample.php tests-config.php
+  - sudo cp dev/tests/.env-dist dev/tests/.env
+
+before_script:
+  - bash $TRAVIS_BUILD_DIR/dev/docker/exec.sh mkdir -p /application/www/wp-content/cache/twig
+  - bash $TRAVIS_BUILD_DIR/dev/docker/exec.sh chown -R www-data:www-data /application/www/wp-content/cache
+
+script:
+  - bash $TRAVIS_BUILD_DIR/dev/docker/exec.sh /application/www/dev/docker/codecept.sh run integration
+  - bash $TRAVIS_BUILD_DIR/dev/docker/exec.sh /application/www/dev/docker/codecept.sh run acceptance
+  - bash $TRAVIS_BUILD_DIR/dev/docker/exec.sh /application/www/dev/docker/codecept.sh run webdriver

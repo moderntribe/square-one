@@ -5,8 +5,11 @@ namespace Tribe\Project\Service_Providers;
 
 
 use Pimple\Container;
-use Pimple\ServiceProviderInterface;
+use Tribe\Project\Container\Service_Provider;
+use Tribe\Project\Request\Request;
+use Tribe\Project\Request\Server;
 use Tribe\Project\Theme\Body_Classes;
+use Tribe\Project\Theme\Full_Size_Gif;
 use Tribe\Project\Theme\Image_Sizes;
 use Tribe\Project\Theme\Image_Wrap;
 use Tribe\Project\Theme\Gravity_Forms_Filter;
@@ -20,10 +23,11 @@ use Tribe\Project\Theme\Resources\Legacy_Check;
 use Tribe\Project\Theme\Resources\Login_Resources;
 use Tribe\Project\Theme\Resources\Scripts;
 use Tribe\Project\Theme\Resources\Styles;
+use Tribe\Project\Theme\Resources\Third_Party_Tags;
 use Tribe\Project\Theme\Supports;
 use Tribe\Project\Theme\WP_Responsive_Image_Disabler;
 
-class Theme_Provider implements ServiceProviderInterface {
+class Theme_Provider extends Service_Provider {
 
 	private $typekit_id   = '';
 	private $google_fonts = [];
@@ -35,7 +39,9 @@ class Theme_Provider implements ServiceProviderInterface {
 	private $custom_fonts = [];
 
 	public function register( Container $container ) {
+		$this->request( $container );
 		$this->body_classes( $container );
+		// $this->full_size_gif( $container ); Uncomment to require full size gifs
 		$this->image_sizes( $container );
 		$this->image_wrap( $container );
 		$this->image_links( $container );
@@ -51,12 +57,23 @@ class Theme_Provider implements ServiceProviderInterface {
 
 		$this->scripts( $container );
 		$this->styles( $container );
+		$this->third_party_tags( $container );
 		$this->editor_styles( $container );
 		//$this->editor_formats( $container );
 
 		$this->nav_attributes( $container );
 
 		$this->gravity_forms( $container );
+	}
+
+	private function request( Container $container ) {
+		$container['server'] = function ( Container $container ) {
+			return new Server();
+		};
+
+		$container['request'] = function ( Container $container ) {
+			return new Request( $container['server'] );
+		};
 	}
 
 	private function body_classes( Container $container ) {
@@ -66,6 +83,15 @@ class Theme_Provider implements ServiceProviderInterface {
 		add_filter( 'body_class', function ( $classes ) use ( $container ) {
 			return $container[ 'theme.body_classes' ]->body_classes( $classes );
 		}, 10, 1 );
+	}
+
+	private function full_size_gif( Container $container ) {
+		$container[ 'theme.full_size_gif' ] = function ( Container $container ) {
+			return new Full_Size_Gif();
+		};
+		add_filter( 'image_downsize', function( $data, $id, $size ) use ( $container ) {
+			return $container[ 'theme.full_size_gif' ]->full_size_only_gif( $data, $id, $size );
+		}, 10, 3 );
 	}
 
 	private function image_sizes( Container $container ) {
@@ -209,6 +235,12 @@ class Theme_Provider implements ServiceProviderInterface {
 		$container[ 'theme.resources.scripts' ] = function ( Container $container ) {
 			return new Scripts();
 		};
+		add_action( 'wp_head', function () use ( $container ) {
+			$container[ 'theme.resources.scripts' ]->maybe_inject_bugsnag();
+		}, 0, 0 );
+		add_action( 'wp_head', function () use ( $container ) {
+			$container[ 'theme.resources.scripts' ]->set_preloading_tags();
+		}, 10, 0 );
 		add_action( 'wp_footer', function () use ( $container ) {
 			$container[ 'theme.resources.scripts' ]->add_early_polyfills();
 		}, 10, 0 );
@@ -224,6 +256,18 @@ class Theme_Provider implements ServiceProviderInterface {
 		add_action( 'wp_enqueue_scripts', function () use ( $container ) {
 			$container[ 'theme.resources.styles' ]->enqueue_styles();
 		}, 10, 0 );
+	}
+
+	private function third_party_tags( Container $container ) {
+		$container[ 'theme.resources.third_party_tags' ] = function ( Container $container ) {
+			return new Third_Party_Tags( $container[ Object_Meta_Provider::ANALYTICS_SETTINGS ] );
+		};
+		add_action( 'wp_head', function () use ( $container ) {
+			$container[ 'theme.resources.third_party_tags' ]->inject_google_tag_manager_head_tag();
+		} );
+		add_action( 'tribe/body_opening_tag', function () use ( $container ) {
+			$container[ 'theme.resources.third_party_tags' ]->inject_google_tag_manager_body_tag();
+		} );
 	}
 
 	private function editor_styles( Container &$container ) {

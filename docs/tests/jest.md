@@ -10,8 +10,8 @@ Refer to the api docs [here](https://facebook.github.io/jest/docs/api.html) as n
 
 The tests will be executed at the start of every `grunt dist` and on the server when doing pr's
 
-##Table of Contents
+## Table of Contents
 
 * [Overview](/docs/tests/README.md)
-* [Codeception](/docs/tests/codeception.md)
+* [Codeception](/dev/tests/README.md)
 * [Jest](/docs/tests/jest.md)

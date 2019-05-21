@@ -36,12 +36,23 @@ if ( file_exists( __DIR__ . '/.env' ) ) {
 }
 
 // ==============================================================
-// Load database info and local development parameters
+// Load build process timestamp
 // ==============================================================
 
-if ( file_exists( __DIR__ . '/local-config.php' ) ) {
+if ( file_exists( dirname( __FILE__ ) . '/build-process.php' ) ) {
+	include( dirname( __FILE__ ) . '/build-process.php' );
+}
+
+// ==============================================================
+// Conditionally load tests-config if the proper header or user agent is present
+// ==============================================================
+
+if ( ( isset( $_SERVER['HTTP_X_TRIBE_TESTING'] ) || ( isset( $_SERVER['HTTP_USER_AGENT'] ) && $_SERVER['HTTP_USER_AGENT'] === 'tribe-tester' ) || tribe_getenv( 'WPBROWSER_HOST_REQUEST' ) ) && file_exists( __DIR__ . '/tests-config.php' ) ) {
+	include __DIR__ . '/tests-config.php';
+} elseif ( file_exists( __DIR__ . '/local-config.php' ) ) {
 	include __DIR__ . '/local-config.php';
 }
+
 
 // ==============================================================
 // Assign default constant values
@@ -119,7 +130,7 @@ $config_defaults = [
 	'WP_DEBUG_LOG'            => tribe_getenv( 'WP_DEBUG_LOG', true ),
 	'WP_DEBUG_DISPLAY'        => tribe_getenv( 'WP_DEBUG_DISPLAY', true ),
 	'SAVEQUERIES'             => tribe_getenv( 'SAVEQUERIES', true ),
-	'SCRIPT_DEBUG'            => tribe_getenv( 'SCRIPT_DEBUG', true ),
+	'SCRIPT_DEBUG'            => tribe_getenv( 'SCRIPT_DEBUG', false ),
 	'CONCATENATE_SCRIPTS'     => tribe_getenv( 'CONCATENATE_SCRIPTS', false ),
 	'COMPRESS_SCRIPTS'        => tribe_getenv( 'COMPRESS_SCRIPTS', false ),
 	'COMPRESS_CSS'            => tribe_getenv( 'COMPRESS_CSS', false ),

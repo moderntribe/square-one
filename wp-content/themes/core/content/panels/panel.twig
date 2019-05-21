@@ -3,7 +3,7 @@
 {% block panel %}
 
 	{% block start %}
-		<section class="panel s-wrapper site-panel site-panel--{{ type|esc_attr }}"
+		<section {{ classes }}
 				 data-index="{{ index }}"
 				 data-js="panel"
 				 data-type="{{ type|esc_attr }}"
@@ -22,15 +22,7 @@
 				{{ title }}
 
 				{% block description %}
-					{% if description %}
-						<div class="s-desc t-content"
-						     data-depth="0"
-						     data-name="description"
-						     data-autop="true"
-						     data-livetext>
-							{{ description }}
-						</div>
-					{% endif %}
+					{{ description }}
 				{% endblock %}
 
 			</header>

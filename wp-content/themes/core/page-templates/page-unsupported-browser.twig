@@ -2,7 +2,7 @@
 <html {{ language_attributes }}>
 <head>
 
-    <title>{{ lang['Unsupported Browser'] }} | {{ bloginfo( 'name' ) }}</title>
+    <title>{{ __('Unsupported Browser') }} | {{ bloginfo( 'name' ) }}</title>
 
     {# // MISC Meta #}
     <meta charset="utf-8">
@@ -23,7 +23,7 @@
             <h1 class="site-brand">
                 <img src="{{ legacy_logo_header|esc_url }}"
                      class="site-logo site-logo--header"
-                     alt="{{ bloginfo( 'name' )|esc_attr }} {{ lang['logo'] }}"/>
+                     alt="{{ bloginfo( 'name' )|esc_attr }} {{ __('logo') }}"/>
             </h1>
         </div>
     </div>
@@ -44,9 +44,9 @@
                        target="_blank">
                            <span class="browser-list__item-image">
                                <img src="{{ legacy_browser_icon_chrome|esc_url }}"
-                                    alt="{{ lang['Chrome browser logo'] }}"/>
+                                    alt="{{ __('Chrome browser logo') }}"/>
                            </span>
-                        {{ lang['Chrome'] }}
+                        {{ __('Chrome') }}
                     </a>
                 </li>
                 <li class="browser-list__item">
@@ -56,9 +56,9 @@
                        target="_blank">
                            <span class="browser-list__item-image">
                                <img src="{{ legacy_browser_icon_firefox|esc_url }}"
-                                    alt="{{ lang['Firefox browser logo'] }}"/>
+                                    alt="{{ __('Firefox browser logo') }}"/>
                            </span>
-                        {{ lang['Firefox'] }}
+                        {{ __('Firefox') }}
                     </a>
                 </li>
                 <li class="browser-list__item">
@@ -68,9 +68,9 @@
                        target="_blank">
                            <span class="browser-list__item-image">
                                <img src="{{ legacy_browser_icon_safari|esc_url }}"
-                                    alt="{{ lang['Safari browser logo'] }}"/>
+                                    alt="{{ __('Safari browser logo') }}"/>
                            </span>
-                        {{ lang['Safari'] }}
+                        {{ __('Safari') }}
                     </a>
                 </li>
                 <li class="browser-list__item">
@@ -80,9 +80,9 @@
                        target="_blank">
                            <span class="browser-list__item-image">
                                <img src="{{ legacy_browser_icon_ie|esc_url }}"
-                                    alt="{{ lang['Internet Explorer browser logo'] }}"/>
+                                    alt="{{ __('Internet Explorer browser logo') }}"/>
                            </span>
-                        {{ lang['Internet Explorer'] }}
+                        {{ __('Internet Explorer') }}
                     </a>
                 </li>
             </ul>
@@ -95,7 +95,7 @@
 
             <img src="{{ legacy_logo_footer|esc_url }}"
                  class="site-logo site-logo--footer"
-                 alt="{{ bloginfo( 'name' )|esc_attr }} {{ lang['logo'] }}"/>
+                 alt="{{ bloginfo( 'name' )|esc_attr }} {{ __('logo') }}"/>
 
             <p class="site-footer__copy">{{ copyright }} {{ bloginfo( 'name' ) }}.</p>
 

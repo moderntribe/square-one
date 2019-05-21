@@ -5,10 +5,10 @@ namespace Tribe\Project\Service_Providers;
 
 
 use Pimple\Container;
-use Pimple\ServiceProviderInterface;
+use Tribe\Project\Container\Service_Provider;
 use Tribe\Project\Panels;
 
-class Panels_Provider implements ServiceProviderInterface {
+class Panels_Provider extends Service_Provider {
 
 	protected $panels = [
 		Panels\Types\Hero::class,
@@ -24,6 +24,7 @@ class Panels_Provider implements ServiceProviderInterface {
 		Panels\Types\LogoFarm::class,
 		Panels\Types\Testimonial::class,
 		Panels\Types\PostLoop::class,
+		Panels\Types\Tabs::class,
 	];
 
 	public function register( Container $container ) {
@@ -52,5 +53,11 @@ class Panels_Provider implements ServiceProviderInterface {
 		add_filter( 'panels_js_config', function( $data ) use ( $container ) {
 			return $container[ 'panels.init' ]->modify_js_config( $data );
 		}, 10, 1 );
+
+		if ( ! defined( 'TRIBE_DISABLE_PANELS_CACHE' ) || ! TRIBE_DISABLE_PANELS_CACHE ) {
+			add_action( 'the_panels', function () use ( $container ) {
+				Panels\Caching_Loop::preempt_panels_loop();
+			}, 0, 0 );
+		}
 	}
 }

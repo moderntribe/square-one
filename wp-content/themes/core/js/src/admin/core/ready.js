@@ -22,7 +22,7 @@ import { on, ready } from '../../utils/events';
  */
 
 const bindEvents = () => {
-	on(window, 'resize', _.debounce(resize, 200, false));
+	on( window, 'resize', _.debounce( resize, 200, false ) );
 };
 
 /**
@@ -49,7 +49,7 @@ const init = () => {
 
 	// initialize the main scripts
 
-	console.info('Square One BE: Initialized all javascript that targeted document ready.');
+	console.info( 'Square One BE: Initialized all javascript that targeted document ready.' );
 };
 
 /**
@@ -58,7 +58,7 @@ const init = () => {
  */
 
 const domReady = () => {
-	ready(init);
+	ready( init );
 };
 
 export default domReady;

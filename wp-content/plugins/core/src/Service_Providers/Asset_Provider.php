@@ -5,10 +5,10 @@ namespace Tribe\Project\Service_Providers;
 
 
 use Pimple\Container;
-use Pimple\ServiceProviderInterface;
+use Tribe\Project\Container\Service_Provider;
 use Tribe\Libs\Assets\Asset_Loader;
 
-class Asset_Provider implements ServiceProviderInterface {
+class Asset_Provider extends Service_Provider {
 
 	public function register( Container $container ) {
 

@@ -5,11 +5,12 @@ namespace Tribe\Project\Service_Providers;
 
 
 use Pimple\Container;
-use Pimple\ServiceProviderInterface;
+use Tribe\Project\Container\Service_Provider;
 use Tribe\Project\Templates;
 use Tribe\Project\Twig\Extension;
+use Tribe\Project\Twig\Twig_Cache;
 
-class Twig_Service_Provider implements ServiceProviderInterface {
+class Twig_Service_Provider extends Service_Provider {
 	public function register( Container $container ) {
 		$container[ 'twig.loader' ] = function ( Container $container ) {
 			$stylesheet_path = get_stylesheet_directory();
@@ -23,14 +24,15 @@ class Twig_Service_Provider implements ServiceProviderInterface {
 		};
 
 		$container[ 'twig.cache' ] = function ( Container $container ) {
-			return WP_CONTENT_DIR . '/cache/twig';
+			return new Twig_Cache( WP_CONTENT_DIR . '/cache/twig/' );
 		};
 
 		$container[ 'twig.options' ] = function ( Container $container ) {
 			return apply_filters( 'tribe/project/twig/options', [
-				'debug'      => WP_DEBUG,
-				'cache'      => $container[ 'twig.cache' ],
-				'autoescape' => false,
+				'debug'         => WP_DEBUG,
+				'cache'         => $container[ 'twig.cache' ],
+				'autoescape'    => false,
+				'auto_reload'   => true,
 			] );
 		};
 
@@ -95,6 +97,10 @@ class Twig_Service_Provider implements ServiceProviderInterface {
 
 		$container['twig.templates.content/panels/postloop'] = function ( Container $container ) {
 			return new Templates\Content\Panels\PostLoop( 'content/panels/postloop.twig', $container['twig'] );
+		};
+
+		$container['twig.templates.content/panels/tabs'] = function ( Container $container ) {
+			return new Templates\Content\Panels\Tabs( 'content/panels/tabs.twig', $container['twig'] );
 		};
 
 		$container['twig.templates.content/panels/testimonial'] = function ( Container $container ) {

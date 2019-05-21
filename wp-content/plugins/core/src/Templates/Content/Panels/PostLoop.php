@@ -6,6 +6,7 @@ use Tribe\Project\Panels\Types\PostLoop as PostLoopPanel;
 use Tribe\Project\Templates\Components\Button;
 use Tribe\Project\Templates\Components\Card;
 use Tribe\Project\Templates\Components\Image;
+use Tribe\Project\Templates\Components\Title;
 use Tribe\Project\Theme\Image_Sizes;
 
 class PostLoop extends Panel {
@@ -20,27 +21,41 @@ class PostLoop extends Panel {
 
 	public function get_mapped_panel_data(): array {
 		$data = [
-			'title'       => $this->get_title( PostLoopPanel::FIELD_TITLE, [ 'site-section__title', 'h2' ] ),
-			'description' => ! empty( $this->panel_vars[ PostLoopPanel::FIELD_DESCRIPTION ] ) ? $this->panel_vars[ PostLoopPanel::FIELD_DESCRIPTION ] : false,
-			'posts'       => $this->get_posts(),
+			'title' => $this->get_title( $this->panel_vars[ PostLoopPanel::FIELD_TITLE ], [ 's-title', 'h2' ] ),
+			'posts' => $this->get_posts(),
+			'attrs' => $this->get_postloop_attributes(),
 		];
 
 		return $data;
+	}
+
+	protected function get_postloop_attributes() {
+		$attrs = '';
+
+		if ( is_panel_preview() ) {
+			$attrs = 'data-depth=' . $this->panel->get_depth() . ' data-name="' . PostLoopPanel::FIELD_POSTS . '" data-index="0" data-livetext="true"';
+		}
+
+		if ( empty( $attrs ) ) {
+			return '';
+		}
+
+		return $attrs;
 	}
 
 	protected function get_posts(): array {
 		$posts = [];
 
 		if ( ! empty( $this->panel_vars[ PostLoopPanel::FIELD_POSTS ] ) ) {
-			for ( $i = 0; $i < count( $this->panel_vars[ PostLoopPanel::FIELD_POSTS ] ); $i ++ ) {
+			for ( $i = 0; $i < count( $this->panel_vars[ PostLoopPanel::FIELD_POSTS ] ); $i++ ) {
 
 				$post = $this->panel_vars[ PostLoopPanel::FIELD_POSTS ][ $i ];
 
 				$options = [
-					Card::TITLE     => esc_html( get_the_title( $post[ 'post_id' ] ) ),
-					Card::IMAGE     => $this->get_post_image( get_post_thumbnail_id( $post[ 'post_id' ] ) ),
-					Card::PRE_TITLE => get_the_category_list( '', '', $post[ 'post_id' ] ),
-					Card::BUTTON    => $this->get_post_button( $post[ 'post_id' ] ),
+					Card::POST_TITLE => $this->get_post_title( esc_html( $post[ 'title' ] ), $i ),
+					Card::IMAGE      => $this->get_post_image( $post[ 'image' ] ),
+					Card::PRE_TITLE  => get_the_category_list( '', '', $post[ 'post_id' ] ),
+					Card::BUTTON     => $this->get_post_button( $post[ 'link' ] ),
 				];
 
 				$post_obj = Card::factory( $options );
@@ -49,6 +64,30 @@ class PostLoop extends Panel {
 		}
 
 		return $posts;
+	}
+
+	protected function get_post_title( $title, $index ) {
+		$attrs = [];
+
+		if ( is_panel_preview() ) {
+			$attrs = [
+				'data-depth'    => $this->panel->get_depth(),
+				'data-name'     => $title,
+				'data-index'    => $index,
+				'data-livetext' => true,
+			];
+		}
+
+		$options = [
+			Title::TITLE   => $title,
+			Title::CLASSES => [],
+			Title::ATTRS   => $attrs,
+			Title::TAG     => 'h5',
+		];
+
+		$title_obj = Title::factory( $options );
+
+		return $title_obj->render();
 	}
 
 	protected function get_post_image( $image_id ) {
@@ -69,11 +108,13 @@ class PostLoop extends Panel {
 		return $image_obj->render();
 	}
 
-	protected function get_post_button( $post_id ) {
+	protected function get_post_button( $post_link ) {
 		$options = [
-			Button::URL    => esc_url( get_the_permalink( $post_id ) ),
-			Button::LABEL  => __( 'View Post', 'tribe' ),
-			Button::TARGET => '_self',
+			Button::URL         => esc_url( $post_link[ 'url' ] ),
+			Button::LABEL       => __( 'View Post', 'tribe' ),
+			Button::TARGET      => '_self',
+			Button::BTN_AS_LINK => true,
+			Button::CLASSES     => [ 'c-cta' ],
 		];
 
 		$button_obj = Button::factory( $options );
@@ -82,6 +123,6 @@ class PostLoop extends Panel {
 	}
 
 	public static function instance() {
-		return tribe_project()->container()['twig.templates.content/panels/postloop'];
+		return tribe_project()->container()[ 'twig.templates.content/panels/postloop' ];
 	}
 }

@@ -19,14 +19,15 @@ class Force_Plugin_Activation {
 	private $force_active = array(
 		'advanced-custom-fields-pro/acf.php',
 		'core/core.php',
-		'limit-login-attempts/limit-login-attempts.php',
 		'panel-builder/tribe-panel-builder.php',
 		'tribe-admin-dashboard/tribe-admin-dashboard.php',
 		'tribe-branding/tribe-branding.php',
+		'classic-editor/classic-editor.php',
+		'classic-editor-addon/classic-editor-addon.php',
 	);
 
 	/**
-	 * These plugins will be deactived and can't be activated (if WP_DEBUG is false)
+	 * These plugins will be deactivated and can't be activated (if WP_DEBUG is false)
 	 *
 	 * Add elements as plugin path: directory/file.php
 	 */
@@ -60,7 +61,7 @@ class Force_Plugin_Activation {
 	);
 
 
-	function __construct() {
+	public function __construct() {
 
 		// Always block non-production sites from search engines and random visitors.
 		if ( ! defined( 'ENVIRONMENT' ) || ENVIRONMENT != 'PRODUCTION' ) {
@@ -70,8 +71,13 @@ class Force_Plugin_Activation {
 		// The next *if* is not the same as an *else* on the previous one.
 		if ( defined( 'ENVIRONMENT' ) && ENVIRONMENT == 'PRODUCTION' ) {
 			$this->force_deactive[] = 'tribe-glomar/tribe-glomar.php';
+			$this->force_active[]   = 'limit-login-attempts/limit-login-attempts.php';
 		}
 
+		// Specific config when unit tests are running
+		if ( defined( 'DIR_TESTDATA' ) && DIR_TESTDATA ) {
+			//$this->force_deactive[] = 'term-sorter/term-sorter.php';
+		}
 
 		add_filter( 'option_active_plugins',               array( $this, 'force_plugins'       ), 10, 1 );
 		add_filter( 'site_option_active_sitewide_plugins', array( $this, 'force_plugins'       ), 10, 1 );
@@ -81,13 +87,13 @@ class Force_Plugin_Activation {
 	}
 
 	/**
-	 * Enforce the active/deactive plugin rules
+	 * Enforce the activate/deactivate plugin rules
 	 *
 	 * @param array|bool $plugins
 	 *
 	 * @return array|bool
 	 */
-	function force_plugins( $plugins ) {
+	public function force_plugins( $plugins ) {
 		/*
 		 * Occasionally it seems a boolean can be passed in here.
 		 */
@@ -98,7 +104,7 @@ class Force_Plugin_Activation {
 		 * WordPress works in mysterious ways
 		 * active_plugins has the plugin paths as array key and a number as value
 		 * active_sitewide_plugins has the number as key and the plugin path as value
-		 * I'm standarizing so we can run the array operations below, then flipping back if needed.
+		 * I'm standardizing so we can run the array operations below, then flipping back if needed.
 		 */
 		if ( current_filter() == 'site_option_active_sitewide_plugins' ) {
 			$plugins = array_flip( $plugins );
@@ -107,9 +113,9 @@ class Force_Plugin_Activation {
 		// Add our force-activated plugins
 		$plugins = array_merge( (array) $plugins, $this->force_active );
 
-		if ( ! defined( 'WP_DEBUG' ) || ! WP_DEBUG ) {
-			// Remove our force-deactivated plguins unless WP_DEBUG is on
-			$plugins = array_diff( (array)$plugins, $this->force_deactive );
+		// Remove our force-deactivated plugins unless WP_DEBUG is on. Forced removal when unit tests are running
+		if ( ( defined( 'DIR_TESTDATA' ) && DIR_TESTDATA ) || ! defined( 'WP_DEBUG' ) || ! WP_DEBUG ) {
+			$plugins = array_diff( (array) $plugins, $this->force_deactive );
 		}
 
 		// Deduplicate
@@ -134,7 +140,7 @@ class Force_Plugin_Activation {
 	 *
 	 * @return array
 	 */
-	function plugin_action_links( $actions, $plugin_file, $plugin_data, $context ) {
+	public function plugin_action_links( $actions, $plugin_file, $plugin_data, $context ) {
 
 		if ( in_array( $plugin_file, $this->force_active ) ) {
 			unset( $actions['deactivate'] );
@@ -159,14 +165,14 @@ class Force_Plugin_Activation {
 	 *
 	 * @return array mixed
 	 */
-	function hide_from_blog( $plugins ) {
+	public function hide_from_blog( $plugins ) {
 
 		if ( ! is_multisite() ) {
 			return $plugins;
 		}
 
 		$screen = get_current_screen();
-		if ( $screen->in_admin( 'network' ) ) {
+		if ( $screen && $screen->in_admin( 'network' ) ) {
 			return $plugins;
 		}
 

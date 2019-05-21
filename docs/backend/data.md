@@ -1,10 +1,10 @@
-### === Data to Front End ===
+# Data to Front End
 
 The front end uses Twig as a template engine.
 
 Read more about Twig here: [https://twig.symfony.com/](https://twig.symfony.com/)
 
-The back end passes data to the Twig templates using controllers in the core/src/Templates directory.  You will see familiar template and template related classes in there:
+The back end passes data to the Twig templates using controllers in the `core/src/Templates` directory.  You will see familiar template and template related classes in there:
 
 - Page.php
 - Single.php
@@ -13,7 +13,7 @@ The back end passes data to the Twig templates using controllers in the core/src
 
 ... and so on.
 
-These classes all extend the Twig_Template class.  They all contain a get_data() method which is used by the Twig templates to access data needed in the front end.
+These classes all extend the `Twig_Template` class.  They all contain a `get_data()` method which is used by the Twig templates to access data needed in the front end.
 
 The example below shows how you might get data needed for a post within the Loop and pass it to the front end.
 
@@ -54,9 +54,9 @@ protected function get_featured_image() {
 }
 ```
 
-As you see in this example with the Image_Sizes class, the Template classes interact with the core plugin classes as needed to generate the data requested by the front end.
+As you see in this example with the `Image_Sizes` class, the Template classes interact with the core plugin classes as needed to generate the data requested by the front end.
 
-In the front end files you will see the data being used like the below example.  In themes/core/content/loop/item.twig we use the data prepared by the above php example:
+In the front end files you will see the data being used like the below example.  In `themes/core/content/loop/item.twig` we use the data prepared by the above php example:
 
 ```
 {% block category %}
@@ -78,4 +78,4 @@ In the front end files you will see the data being used like the below example. 
 {%  endblock %}
 ```
 
-In the data array being passed from get_data() we have $data['post']['permalink'] which is accessed in Twig as post.permalink.
+In the data array being passed from `get_data()` we have `$data['post']['permalink']` which is accessed in Twig as post.permalink.

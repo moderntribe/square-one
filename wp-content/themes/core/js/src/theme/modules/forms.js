@@ -9,7 +9,7 @@ import * as tools from 'utils/tools';
 import scrollTo from 'utils/dom/scroll-to';
 
 const el = {
-	container: tools.getNodes('site-wrap')[0],
+	container: tools.getNodes( 'site-wrap' )[ 0 ],
 };
 
 let spinner;
@@ -20,12 +20,12 @@ let submitting = false;
  * @description Adjusts gravity form submit top placement.
  */
 
-const scrollSubmit = (form) => {
-	scrollTo({
+const scrollSubmit = ( form ) => {
+	scrollTo( {
 		duration: 500,
 		offset: -60,
-		$target: window.$(form),
-	});
+		$target: window.$( form ),
+	} );
 };
 
 /**
@@ -45,14 +45,14 @@ const gravityFormSubmit = () => {
  * confirmation message displayed, etc.
  */
 
-const gravityFormPostRender = (e, formId) => {
-	if (!submitting) {
+const gravityFormPostRender = ( e, formId ) => {
+	if ( ! submitting ) {
 		return;
 	}
 
 	spinner.stop();
 	submitting = false;
-	scrollSubmit(document.getElementById(`gform_wrapper_${formId}`));
+	scrollSubmit( document.getElementById( `gform_wrapper_${ formId }` ) );
 };
 
 /**
@@ -60,8 +60,8 @@ const gravityFormPostRender = (e, formId) => {
  * @description executes on AJAX-enabled forms when the confirmation page is loaded.
  */
 
-const gravityFormConfirmationLoaded = (e, formId) => {
-	scrollSubmit(document.getElementById(`gforms_confirmation_message_${formId}`));
+const gravityFormConfirmationLoaded = ( e, formId ) => {
+	scrollSubmit( document.getElementById( `gforms_confirmation_message_${ formId }` ) );
 };
 
 /**
@@ -69,8 +69,8 @@ const gravityFormConfirmationLoaded = (e, formId) => {
  * @description Kicks off spinner for form submit.
  */
 
-const spinOn = (e) => {
-	spinner.spin(e.delegateTarget.parentNode);
+const spinOn = ( e ) => {
+	spinner.spin( e.delegateTarget.parentNode );
 };
 
 /**
@@ -79,12 +79,12 @@ const spinOn = (e) => {
  */
 
 const bindEvents = () => {
-	window.$(document)
-		.on('submit', '.gform_wrapper form', gravityFormSubmit)
-		.on('gform_post_render', gravityFormPostRender)
-		.on('gform_confirmation_loaded', gravityFormConfirmationLoaded);
+	window.$( document )
+		.on( 'submit', '.gform_wrapper form', gravityFormSubmit )
+		.on( 'gform_post_render', gravityFormPostRender )
+		.on( 'gform_confirmation_loaded', gravityFormConfirmationLoaded );
 
-	delegate(el.container, '.gform_button', 'click', spinOn);
+	delegate( el.container, '.gform_button', 'click', spinOn );
 };
 
 /**
@@ -93,22 +93,22 @@ const bindEvents = () => {
  */
 
 const forms = () => {
-	if (!el.container) {
+	if ( ! el.container ) {
 		return;
 	}
 
-	spinner = new Spinner({
+	spinner = new Spinner( {
 		lines: 11,
 		length: 6,
 		width: 2,
 		radius: 5,
 		color: '#333333',
 		speed: 1.2,
-	});
+	} );
 
 	bindEvents();
 
-	console.info('Square One FE: Initialized global form scripts.');
+	console.info( 'Square One FE: Initialized global form scripts.' );
 };
 
 export default forms;

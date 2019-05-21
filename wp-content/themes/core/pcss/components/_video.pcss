@@ -20,7 +20,6 @@
 
 .c-video__wrapper {
 	position: relative;
-	aspect-ratio: '16:9';
 	overflow: hidden;
 
 	iframe,
@@ -32,7 +31,8 @@
 }
 
 .c-video__embed {
-	background: var(--embed-bgd-color);
+	background: var(--color-black);
+	aspect-ratio: '16:9';
 
 	a {
 		text-decoration: none;
@@ -95,19 +95,19 @@
 	}
 }
 
-.c-video__caption {
+.c-video__trigger-action {
 	opacity: 0;
 	transition: opacity 0.15s ease-in;
 	position: absolute;
-	color: var(--embed-caption-color);
+	color: var(--color-white);
 	padding: 20px 25px;
+	z-index: 1;
 	text-align: center;
 	left: 0;
 	right: 0;
 	top: 50%;
 	width: 100%;
 	transform: translateY(-50%);
-	z-index: 1;
 
 	.lazyloaded ~ & {
 		opacity: 1;
@@ -116,6 +116,72 @@
 
 	.c-video--is-small & {
 		padding: 0;
+	}
+
+	/* CASE: Bottom Caption Position - Displays centered on mobile */
+	.c-video--caption-bottom & {
+		@media (--viewport-medium) {
+			text-align: left;
+			top: auto;
+			right: auto;
+			left: 0;
+			bottom: 0;
+			display: flex;
+			flex-flow: row nowrap;
+			align-items: center;
+			width: 75%;
+			transform: none;
+		}
+
+		@media (--viewport-full) {
+			width: 50%;
+		}
+	}
+}
+
+.c-video__caption {
+	/* CASE: Below Caption Position */
+	.c-video--caption-below & {
+		position: relative;
+		margin: var(--spacer) auto 0;
+		font-weight: var(--font-weight-bold);
+	}
+
+	/* CASE: Bottom Caption Position */
+	.c-video--caption-bottom & {
+		position: absolute;
+		width: calc(100% - 120px);
+		left: 120px;
+		bottom: 55px;
+		color: var(--color-white);
+		z-index: 1;
+		pointer-events: none;
+	}
+
+	/* CASE: Center Caption Position */
+	.c-video--caption-center & {
+		text-align: center;
+		position: absolute;
+		top: 50%;
+		left: 0;
+		width: 100%;
+		transform: translateY(-50%);
+		z-index: 1;
+		pointer-events: none;
+		color: var(--color-white);
+		font-weight: var(--font-weight-bold);
+		transition: var(--transition-embed-icon);
+
+		@media (--viewport-full) {
+			margin-top: 100px;
+		}
+	}
+
+	/* CASE: Center & Bottom Caption while video is playing */
+	.c-video--is-playing.c-video--caption-center &,
+	.c-video--is-playing.c-video--caption-bottom & {
+		opacity: 0;
+		transition: var(--transition-ease-out-opacity);
 	}
 }
 
@@ -150,7 +216,7 @@
 	}
 }
 
-.c-video__trigger-label {
+.c-video__caption-text {
 	font-size: 18px;
 	font-weight: var(--font-weight-bold);
 	display: block;
@@ -161,5 +227,15 @@
 
 	.c-video--is-small & {
 		display: none;
+	}
+
+	/* CASE: Bottom Caption Position */
+	.c-video--caption-bottom & {
+		margin: 0 0 0 25px;
+	}
+
+	/* CASE: Below Caption Position */
+	.c-video--caption-below & {
+		max-width: none;
 	}
 }
