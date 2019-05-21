@@ -67,6 +67,15 @@ abstract class Required_Page {
 		if ( ! empty( $post_id ) ) {
 			$this->set_post_id( $post_id );
 		}
+
+
+		/**
+		 * Triggered when a required page is created
+		 *
+		 * @param string $name    The identifier for the required page
+		 * @param int    $post_id The ID of the created post
+		 */
+		do_action( 'tribe/project/required_page/created', static::NAME, $post_id );
 	}
 
 	/**
@@ -99,6 +108,13 @@ abstract class Required_Page {
 		if ( $existing === (int) $post_id ) {
 			delete_field( static::NAME, 'option' );
 		}
+
+		/**
+		 * Triggered when a page identified as required is deleted
+		 *
+		 * @param string $name The identifier for the required page
+		 */
+		do_action( 'tribe/project/required_page/deleted', static::NAME );
 	}
 
 	/**
@@ -117,7 +133,7 @@ abstract class Required_Page {
 	 * @return array The args for creating the post
 	 */
 	protected function get_post_args() {
-		return [
+		$args = [
 			'post_type'      => $this->get_post_type(),
 			'post_status'    => 'publish',
 			'post_title'     => $this->get_title(),
@@ -126,6 +142,14 @@ abstract class Required_Page {
 			'comment_status' => 'closed',
 			'ping_status'    => 'closed',
 		];
+
+		/**
+		 * Filter the arguments for inserting a required page
+		 *
+		 * @param array  $args The arguments to pass to wp_insert_post
+		 * @param string $name The identifier for the required page
+		 */
+		return apply_filters( 'tribe/project/required_page/post_args', $args, static::NAME );
 	}
 
 	/**
