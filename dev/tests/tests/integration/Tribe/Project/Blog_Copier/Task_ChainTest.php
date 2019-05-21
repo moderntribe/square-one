@@ -6,8 +6,9 @@ use Tribe\Project\Blog_Copier\Tasks\Send_Notifications;
 use Tribe\Project\Blog_Copier\Tasks\Create_Blog;
 use Tribe\Project\Blog_Copier\Tasks\Replace_Options;
 use Tribe\Project\Blog_Copier\Tasks\Replace_Tables;
+use Tribe\Tests\SquareOneTestCase;
 
-class Task_ChainTest extends \Codeception\TestCase\WPTestCase {
+class Task_ChainTest extends SquareOneTestCase {
 
 	public function test_get_next() {
 		$chain = new Task_Chain( [

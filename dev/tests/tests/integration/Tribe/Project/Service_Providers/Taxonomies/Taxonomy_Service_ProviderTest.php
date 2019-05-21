@@ -2,7 +2,9 @@
 
 namespace Tribe\Project\Service_Providers\Taxonomies;
 
-class Taxonomy_Service_ProviderTest extends \Codeception\TestCase\WPTestCase {
+use Tribe\Tests\SquareOneTestCase;
+
+class Taxonomy_Service_ProviderTest extends SquareOneTestCase {
 
 	public function setUp() {
 		// before

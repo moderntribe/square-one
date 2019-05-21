@@ -3,8 +3,9 @@
 namespace Tribe\Project\Blog_Copier\Tasks;
 
 use Tribe\Project\Blog_Copier\Copy_Manager;
+use Tribe\Tests\SquareOneTestCase;
 
-class CleanupTest extends \Codeception\TestCase\WPTestCase {
+class CleanupTest extends SquareOneTestCase {
 
 	public function test_deletes_post() {
 		$post_id = $this->factory()->post->create( [

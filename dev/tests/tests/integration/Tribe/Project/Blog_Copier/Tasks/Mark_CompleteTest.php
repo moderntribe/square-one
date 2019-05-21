@@ -3,8 +3,9 @@
 namespace Tribe\Project\Blog_Copier\Tasks;
 
 use Tribe\Project\Blog_Copier\Copy_Manager;
+use Tribe\Tests\SquareOneTestCase;
 
-class Mark_CompleteTest extends \Codeception\TestCase\WPTestCase {
+class Mark_CompleteTest extends SquareOneTestCase {
 
 	public function test_publishes_post() {
 		$post_id = $this->factory()->post->create( [
