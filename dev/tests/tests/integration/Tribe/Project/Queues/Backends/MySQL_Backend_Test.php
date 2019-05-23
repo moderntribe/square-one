@@ -87,7 +87,7 @@ class MySQL_Backend_Test extends WPTestCase {
 				",
 				$queue::NAME
 			),
-			'ARRAY_A'
+			ARRAY_A
 		);
 
 		$delete_count         = $this->truncate_queue_table( $queue::NAME );
@@ -113,19 +113,18 @@ class MySQL_Backend_Test extends WPTestCase {
 		}
 
 		global $wpdb;
-		$query_result = $wpdb->get_results(
+		$query_result = $wpdb->get_var(
 			$wpdb->prepare(
-				"SELECT * FROM $this->table_name
+				"SELECT COUNT(*) FROM $this->table_name
 				WHERE queue = %s
 				",
 				$queue::NAME
-			),
-			'ARRAY_A'
+			)
 		);
 
 		$this->truncate_queue_table( $queue::NAME );
 
-		$this->assertCount( $amount_of_tasks, $query_result );
+		$this->assertEquals( $amount_of_tasks, $query_result );
 	}
 
 	/** @test */
@@ -151,7 +150,7 @@ class MySQL_Backend_Test extends WPTestCase {
 				",
 				$queue_name
 			),
-			'ARRAY_A'
+			ARRAY_A
 		);
 
 		// Then delete it.
