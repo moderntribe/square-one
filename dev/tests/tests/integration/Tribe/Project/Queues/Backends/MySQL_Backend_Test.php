@@ -41,15 +41,8 @@ class MySQL_Backend_Test extends WPTestCase {
 	 */
 	protected function truncate_queue_table( $queue_name ) {
 		global $wpdb;
-		$results = $wpdb->query(
-			$wpdb->prepare(
-				"DELETE FROM $this->table_name
-				WHERE queue = %s",
-				$queue_name
-			)
-		);
 
-		return $results;
+		return $wpdb->delete( $this->table_name, [ 'queue' => $queue_name ] );
 	}
 
 	/** @test */
