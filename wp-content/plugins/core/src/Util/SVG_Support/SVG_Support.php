@@ -18,8 +18,6 @@ class SVG_Support {
 		add_action( 'load-post-new.php', [ $this, 'add_editor_styles' ] );
 		add_action( 'after_setup_theme', [ $this, 'theme_prefix_setup' ], 99 );
 		add_filter( 'wp_handle_upload_prefilter', [ $this, 'check_for_svg' ] );
-		// Testing purposes only
-		add_filter( 'test_svg_upload_prefilter', [ $this, 'check_for_svg' ] );
 	}
 
 	/**

@@ -1,9 +1,6 @@
 <?php
 
-namespace Tribe\Project\Service_Providers\Post_Types;
-
-use RuntimeException;
-use Tribe\Project\Core;
+use Tribe\Project\Util\SVG_Support\SVG_Support;
 
 class SVG_SupportTest extends \Codeception\TestCase\WPTestCase {
 
@@ -13,11 +10,9 @@ class SVG_SupportTest extends \Codeception\TestCase\WPTestCase {
 	public function setUp() {
 		parent::setUp();
 
-		// your set up methods here
-		$svg_support = Core::instance()->container()['util.svg_support'];
-		$svg_support->add_svg_upload();
-
 		$this->svg_path = codecept_data_dir( 'xss.svg' );
+
+		add_filter( 'test_svg_upload_prefilter', [ $this->make_instance(), 'check_for_svg' ] );
 	}
 
 	public function tearDown() {
@@ -25,10 +20,25 @@ class SVG_SupportTest extends \Codeception\TestCase\WPTestCase {
 		/**
 		 * @todo remove ob_start() from SVG_Support::add_svg_upload() so we can remove this
 		 */
-		ob_end_clean();
+		if ( ob_get_level() > 1 ) {
+			ob_end_clean();
+		}
 
 		// then
 		parent::tearDown();
+	}
+
+	/**
+	 * @test
+	 */
+	public function should_be_instantiable() {
+		$instance = $this->make_instance();
+
+		$this->assertInstanceOf( SVG_Support::class, $instance );
+	}
+
+	protected function make_instance() {
+		return new SVG_Support();
 	}
 
 	/**
@@ -45,7 +55,7 @@ class SVG_SupportTest extends \Codeception\TestCase\WPTestCase {
 		copy( $path, $tmp_path );
 
 		if ( file_exists( $tmp_path ) ) {
-			$_files_mimic = [
+			$_files_mime = [
 				'name'     => $random_filename,
 				'type'     => 'image/svg+xml',
 				'tmp_name' => $tmp_path,
@@ -53,7 +63,7 @@ class SVG_SupportTest extends \Codeception\TestCase\WPTestCase {
 				'size'     => filesize( $tmp_path ),
 			];
 
-			return wp_handle_upload( $_files_mimic, [
+			return wp_handle_upload( $_files_mime, [
 				'action'    => 'test_svg_upload',
 				'test_form' => false,
 			] );
@@ -62,34 +72,41 @@ class SVG_SupportTest extends \Codeception\TestCase\WPTestCase {
 		}
 	}
 
-	/** @test */
-	public function it_should_recognize_svg_mime_type() {
-		$filetype = wp_check_filetype( 'test.svg' );
-		$this->assertEquals( 'image/svg+xml', $filetype['type'] );
+	/**
+	 * @see \Tribe\Project\Util\SVG_Support\SVG_Support::filter_mimes
+	 * @test
+	 */
+	public function should_add_svg_mime_type() {
+		$before = wp_check_filetype( 'foo.svg' );
+
+		add_filter( 'upload_mimes', [ $this->make_instance(), 'filter_mimes' ] );
+		$after = wp_check_filetype( 'foo.svg' );
+
+		$this->assertFalse( $before['type'] );
+		$this->assertEquals( 'image/svg+xml', $after['type'] );
 	}
 
 	/** @test */
-	public function it_should_strip_disallowed_svg_tags() {
+	public function should_strip_disallowed_svg_tags() {
+		$this->make_instance()->add_svg_upload();
+
 		add_filter( 'tribe_svg_allowed_tags', function ( $allowed_tags ) {
 			return array_diff( $allowed_tags, [ 'script' ] );
 		} );
 
 		$upload_response = $this->handle_upload( $this->svg_path );
-
-		$uploaded_svg = file_get_contents( $upload_response['file'] );
+		$uploaded_svg    = file_get_contents( $upload_response['file'] );
+		unlink( $upload_response['file'] );
 
 		$this->assertArrayHasKey( 'file', $upload_response );
 		$this->assertArrayNotHasKey( 'error', $upload_response );
 		$this->assertNotContains( '<script ', $uploaded_svg );
-
-		unlink( $upload_response['file'] );
 	}
 
-	/**
-	 * @test
-	 * @todo replace assertContains with regex version
-	 */
-	public function it_should_keep_allowed_svg_tags() {
+	/** @test */
+	public function should_keep_allowed_svg_tags() {
+		$this->make_instance()->add_svg_upload();
+
 		add_filter( 'tribe_svg_allowed_tags', function ( $allowed_tags ) {
 			$allowed_tags[] = 'script';
 
@@ -97,35 +114,35 @@ class SVG_SupportTest extends \Codeception\TestCase\WPTestCase {
 		} );
 
 		$upload_response = $this->handle_upload( $this->svg_path );
-
-		$uploaded_svg = file_get_contents( $upload_response['file'] );
+		$uploaded_svg    = file_get_contents( $upload_response['file'] );
+		unlink( $upload_response['file'] );
 
 		$this->assertArrayHasKey( 'file', $upload_response );
 		$this->assertArrayNotHasKey( 'error', $upload_response );
 		$this->assertContains( '<script ', $uploaded_svg );
-
-		unlink( $upload_response['file'] );
 	}
 
 	/** @test */
-	public function it_should_strip_disallowed_svg_attributes() {
+	public function should_strip_disallowed_svg_attributes() {
+		$this->make_instance()->add_svg_upload();
+
 		add_filter( 'tribe_svg_allowed_attributes', function ( $allowed_attributes ) {
 			return array_diff( $allowed_attributes, [ 'style' ] );
 		} );
 
 		$upload_response = $this->handle_upload( $this->svg_path );
-
-		$uploaded_svg = file_get_contents( $upload_response['file'] );
+		$uploaded_svg    = file_get_contents( $upload_response['file'] );
+		unlink( $upload_response['file'] );
 
 		$this->assertArrayHasKey( 'file', $upload_response );
 		$this->assertArrayNotHasKey( 'error', $upload_response );
 		$this->assertNotContains( 'style=', $uploaded_svg );
-
-		unlink( $upload_response['file'] );
 	}
 
 	/** @test */
-	public function it_should_keep_allowed_svg_attributes() {
+	public function should_keep_allowed_svg_attributes() {
+		$this->make_instance()->add_svg_upload();
+
 		add_filter( 'tribe_svg_allowed_attributes', function ( $allowed_attributes ) {
 			$allowed_attributes[] = 'style';
 
@@ -133,13 +150,11 @@ class SVG_SupportTest extends \Codeception\TestCase\WPTestCase {
 		} );
 
 		$upload_response = $this->handle_upload( $this->svg_path );
-
-		$uploaded_svg = file_get_contents( $upload_response['file'] );
+		$uploaded_svg    = file_get_contents( $upload_response['file'] );
+		unlink( $upload_response['file'] );
 
 		$this->assertArrayHasKey( 'file', $upload_response );
 		$this->assertArrayNotHasKey( 'error', $upload_response );
 		$this->assertContains( 'style=', $uploaded_svg );
-
-		unlink( $upload_response['file'] );
 	}
 }
