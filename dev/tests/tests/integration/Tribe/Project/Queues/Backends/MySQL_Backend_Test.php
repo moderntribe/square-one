@@ -163,7 +163,7 @@ class MySQL_Backend_Test extends WPTestCase {
 	}
 
 	/** @test */
-	public function should_assert_task_enqueued_returns_true_if_task_exists() {
+	public function task_enqueued_returns_true_if_task_exists() {
 		$queue        = new Test_Queue( new MySQL() );
 		$task_handler = Noop::class;
 		$args         = [
@@ -178,7 +178,7 @@ class MySQL_Backend_Test extends WPTestCase {
 	}
 
 	/** @test */
-	public function should_assert_task_enqueued_returns_false_if_queue_empty() {
+	public function task_enqueued_returns_false_if_queue_empty() {
 		$queue        = new Test_Queue( new MySQL() );
 		$task_handler = Noop::class;
 		$args         = [
@@ -197,7 +197,7 @@ class MySQL_Backend_Test extends WPTestCase {
 	 * @dataProvider provider_different_tasks
 	 * @test
 	 */
-	public function should_assert_task_enqueued_returns_false_if_different_tasks_exists( array $different_tasks ) {
+	public function task_enqueued_returns_false_if_different_tasks_exists( array $different_tasks ) {
 		$queue        = new Test_Queue( new MySQL() );
 		$task_handler = Noop::class;
 		$args         = [
@@ -266,7 +266,7 @@ class MySQL_Backend_Test extends WPTestCase {
 	}
 
 	/** @test */
-	public function should_assert_task_enqueued_returns_true_if_task_is_running() {
+	public function task_enqueued_returns_true_if_task_is_running() {
 		global $wpdb;
 		$queue        = new Test_Queue( new MySQL() );
 		$task_handler = __METHOD__;
@@ -296,7 +296,7 @@ class MySQL_Backend_Test extends WPTestCase {
 	}
 
 	/** @test */
-	public function should_assert_task_enqueued_returns_false_if_task_is_done() {
+	public function task_enqueued_returns_false_if_task_is_done() {
 		global $wpdb;
 		$queue        = new Test_Queue( new MySQL() );
 		$task_handler = __METHOD__;
