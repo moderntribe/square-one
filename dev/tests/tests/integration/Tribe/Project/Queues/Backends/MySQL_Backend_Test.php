@@ -98,7 +98,7 @@ class MySQL_Backend_Test extends WPTestCase {
 		);
 
 		$delete_count         = $this->truncate_queue_table( $queue::NAME );
-		$query_result['args'] = json_decode( $query_result['args'], 1 );
+		$query_result['args'] = json_decode( $query_result['args'], true );
 
 		$this->assertEquals( 1, $delete_count );
 		$this->assertInternalType( "array", $query_result['args'] );
@@ -164,7 +164,7 @@ class MySQL_Backend_Test extends WPTestCase {
 		// Then delete it.
 		$delete_count = $this->truncate_queue_table( $queue_name );
 
-		$queue['args'] = json_decode( $queue['args'], 1 );
+		$queue['args'] = json_decode( $queue['args'], true );
 
 		$this->assertEquals( 1, $delete_count );
 		$this->assertInternalType( "array", $queue['args'] );
