@@ -75,7 +75,6 @@ class MySQL_Backend_Test extends WPTestCase {
 			'test' => __METHOD__,
 		];
 
-		$this->truncate_queue_table( $queue::NAME );
 		$queue->dispatch( $task_handler, $args );
 
 		// Get the row.
