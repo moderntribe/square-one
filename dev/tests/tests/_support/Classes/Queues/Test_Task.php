@@ -21,13 +21,10 @@ class Test_Task implements Task {
 			switch ($args['return']) {
 				case 'true':
 					return true;
-					break;
 				case 'false':
 					return false;
-					break;
 				case 'exception':
 					throw new \Exception('Task handler threw!');
-					break;
 			}
 		}
 
