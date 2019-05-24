@@ -110,54 +110,6 @@ var GFGenericMap = function( options ) {
 		
 	}
 	
-	self.setupMergeTags = function( $elem ) {
-		
-		$elem.bind( 'keydown', function( e ) {
-			var menuActive = jQuery( this ).data( "autocomplete" ) && jQuery( this ).data( "autocomplete" ).menu ? jQuery( this ).data( "autocomplete" ).menu.active : false;
-			if ( e.keyCode === jQuery.ui.keyCode.TAB && menuActive ) {
-				e.preventDefault();
-			}
-		} );
-				
-		$elem.autocomplete( {
-			minLength: 1,
-			source: function( request, response ) {
-			
-				// delegate back to autocomplete, but extract the last term
-				var term = gfMergeTags.extractLast( request.term );
-				
-				if( term.length < $elem.autocomplete( 'option', 'minLength' ) ) {
-					response( [] );
-					return;
-				}
-				
-				var tags = jQuery.map( gfMergeTags.getAutoCompleteMergeTags( $elem ), function( item ) {
-					return gfMergeTags.startsWith( item, term ) ? item : null;
-				} );
-				
-				response( tags );
-			},
-			focus: function() {
-				// prevent value inserted on focus
-				return false;
-			},
-			select: function( event, ui ) {
-				var terms = gfMergeTags.split( this.value );
-				
-				// remove the current input
-				terms.pop();
-				
-				// add the selected item
-				terms.push( ui.item.value );
-				
-				this.value = terms.join( " " );
-				$elem.trigger( 'input' ).trigger( 'propertychange') ;
-				return false;
-			}
-		} );
-
-	}
-	
 	self.setupRepeater = function() {
 
 		var limit = self.options.limit > 0 ? self.options.limit : 0;
@@ -173,7 +125,7 @@ var GFGenericMap = function( options ) {
 					
 					var key_select = $elem.find( 'select[name="_gaddon_setting_'+ self.options.keyFieldName +'"]' );
 					
-					if ( ! item.custom_key && key_select.length > 0 ) {
+					if ( ! item.custom_key && ( key_select.length > 0 && key_select.val() !== 'gf_custom' ) ) {
 						$elem.find( '.custom-key-container' ).hide();
 					} else {
 						$elem.find( '.key' ).hide();
@@ -181,14 +133,15 @@ var GFGenericMap = function( options ) {
 
 					var value_select = $elem.find( 'select[name="_gaddon_setting_'+ self.options.valueFieldName +'"]' );
 
-					if ( ! item.custom_value && value_select.length > 0 ) {
+					if ( ! item.custom_value && ( value_select.length > 0 && value_select.val() !== 'gf_custom' ) ) {
 						$elem.find( '.custom-value-container' ).hide();
 					} else {
 						$elem.find( '.value' ).hide();
 					}
 
 					if ( self.options.mergeTags ) {
-						self.setupMergeTags( $elem.find( '.custom-value-container input' ) );
+						new gfMergeTagsObj( form, $elem.find( '.custom-value-container input' ) );
+						$elem.find( '.custom-value-container' ).addClass( 'supports-merge-tags' );
 					}
 
 					if ( window.hasOwnProperty( 'gform' ) ) {

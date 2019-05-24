@@ -126,14 +126,15 @@ $config_defaults = [
 	'FILE_CACHE_MAX_FILE_AGE' => 315000000, // about 10 years
 
 	// Debug
-	'WP_DEBUG'                => tribe_getenv( 'WP_DEBUG', true ),
-	'WP_DEBUG_LOG'            => tribe_getenv( 'WP_DEBUG_LOG', true ),
-	'WP_DEBUG_DISPLAY'        => tribe_getenv( 'WP_DEBUG_DISPLAY', true ),
-	'SAVEQUERIES'             => tribe_getenv( 'SAVEQUERIES', true ),
-	'SCRIPT_DEBUG'            => tribe_getenv( 'SCRIPT_DEBUG', false ),
-	'CONCATENATE_SCRIPTS'     => tribe_getenv( 'CONCATENATE_SCRIPTS', false ),
-	'COMPRESS_SCRIPTS'        => tribe_getenv( 'COMPRESS_SCRIPTS', false ),
-	'COMPRESS_CSS'            => tribe_getenv( 'COMPRESS_CSS', false ),
+	'WP_DEBUG'                       => tribe_getenv( 'WP_DEBUG', true ),
+	'WP_DEBUG_LOG'                   => tribe_getenv( 'WP_DEBUG_LOG', true ),
+	'WP_DEBUG_DISPLAY'               => tribe_getenv( 'WP_DEBUG_DISPLAY', true ),
+	'SAVEQUERIES'                    => tribe_getenv( 'SAVEQUERIES', true ),
+	'SCRIPT_DEBUG'                   => tribe_getenv( 'SCRIPT_DEBUG', false ),
+	'CONCATENATE_SCRIPTS'            => tribe_getenv( 'CONCATENATE_SCRIPTS', false ),
+	'COMPRESS_SCRIPTS'               => tribe_getenv( 'COMPRESS_SCRIPTS', false ),
+	'COMPRESS_CSS'                   => tribe_getenv( 'COMPRESS_CSS', false ),
+	'WP_DISABLE_FATAL_ERROR_HANDLER' => tribe_getenv( 'WP_DISABLE_FATAL_ERROR_HANDLER', true ),
 
 	// Domain Mapping
 	//'SUNRISE'                 => true,

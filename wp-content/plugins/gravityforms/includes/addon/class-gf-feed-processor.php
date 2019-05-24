@@ -44,7 +44,7 @@ class GF_Feed_Processor extends GF_Background_Process {
 	 * @access public
 	 * @static
 	 *
-	 * @return GFLogging
+	 * @return GF_Feed_Processor
 	 */
 	public static function get_instance() {
 
@@ -54,72 +54,6 @@ class GF_Feed_Processor extends GF_Background_Process {
 
 		return self::$_instance;
 
-	}
-
-	/**
-	 * Dispatch Feed Processor.
-	 *
-	 * Processor will still run via cron job if this fails for any reason.
-	 *
-	 * @since  2.2
-	 * @access public
-	 *
-	 * @return void
-	 */
-	public function dispatch() {
-		$dispatched = parent::dispatch();
-
-		if ( is_wp_error( $dispatched ) ) {
-			GFCommon::log_debug( sprintf( 'Unable to dispatch background feed processor: %s', $dispatched->get_error_message() ) );
-		}
-	}
-
-	/**
-	 * Handle cron healthcheck
-	 *
-	 * Restart the background process if not already running and data exists in the queue.
-	 *
-	 * @since  2.2
-	 * @access public
-	 *
-	 * @uses \GF_Feed_Processor::handle_cron_healthcheck()
-	 * @uses \GF_Feed_Processor::is_queue_empty()
-	 * @uses \GF_Feed_Processor::clear_scheduled_event()
-	 * @uses \GF_Feed_Processor::handle()
-	 *
-	 * @return void
-	 */
-	public function handle_cron_healthcheck() {
-		if ( $this->is_process_running() ) {
-			// Background process already running.
-			return;
-		}
-
-		if ( $this->is_queue_empty() ) {
-			// No data to process.
-			$this->clear_scheduled_event();
-
-			return;
-		}
-
-		$this->handle();
-	}
-
-	/**
-	 * Schedule fallback event.
-	 *
-	 * @since  2.2
-	 * @access protected
-	 *
-	 * @uses \GF_Feed_Processor::$cron_hook_identifier
-	 * @uses \GF_Feed_Processor::$cron_interval_identifier
-	 *
-	 * @return void
-	 */
-	protected function schedule_event() {
-		if ( ! wp_next_scheduled( $this->cron_hook_identifier ) ) {
-			wp_schedule_event( time() + 10, $this->cron_interval_identifier, $this->cron_hook_identifier );
-		}
 	}
 
 	/**
@@ -133,9 +67,9 @@ class GF_Feed_Processor extends GF_Background_Process {
 	 * in the next pass through. Or, return false to remove the
 	 * item from the queue.
 	 *
-	 * @param string $item Update callback function
+	 * @param array $item The task arguments: addon, feed, entry_id, and form_id.
 	 *
-	 * @return mixed
+	 * @return bool
 	 */
 	protected function task( $item ) {
 
@@ -146,7 +80,20 @@ class GF_Feed_Processor extends GF_Background_Process {
 		$form  = GFAPI::get_form( $item['form_id'] );
 
 		// Get feed name.
-		$feed_name = rgars( $feed, 'meta/feed_name' ) ? $feed['meta']['feed_name'] : rgars( $feed, 'meta/feedName' );
+		$feed_name  = rgars( $feed, 'meta/feed_name' ) ? $feed['meta']['feed_name'] : rgars( $feed, 'meta/feedName' );
+		$addon_slug = $addon->get_slug();
+
+		// Remove task if entry cannot be found.
+		if ( is_wp_error( $entry ) ) {
+
+			call_user_func( array(
+				$addon,
+				'log_debug',
+			), __METHOD__ . "(): attempted feed (#{$feed['id']} - {$feed_name}) for entry #{$item['entry_id']} for {$addon_slug} but entry could not be found. Bailing." );
+
+			return false;
+
+		}
 
 		$processed_feeds = $addon->get_feeds_by_entry( $entry['id'] );
 
@@ -154,15 +101,33 @@ class GF_Feed_Processor extends GF_Background_Process {
 			call_user_func( array(
 				$addon,
 				'log_debug',
-			), __METHOD__ . "(): already processed feed (#{$feed['id']} - {$feed_name}) for entry #{$entry['id']} for {$addon->get_slug()}. Bailing." );
+			), __METHOD__ . "(): already processed feed (#{$feed['id']} - {$feed_name}) for entry #{$entry['id']} for {$addon_slug}. Bailing." );
 
 			return false;
 		}
 
 		$item = $this->increment_attempts( $item );
 
-		// Remove task if it was attempted before but failed to complete.
-		if ( $item['attempts'] > 1 ) {
+		$max_attempts = 1;
+
+		/**
+		 * Allow the number of retries to be modified before the feed is abandoned.
+		 *
+		 * if $max_attempts > 1 and if GFFeedAddOn::process_feed() throws an error or returns a WP_Error then the feed
+		 * will be attempted again. Once the maximum number of attempts has been reached then the feed will be abandoned.
+		 *
+		 * @since 2.4
+		 *
+		 * @param int    $max_attempts The maximum number of retries allowed. Default: 1.
+		 * @param array  $form         The form array
+		 * @param array  $entry        The entry array
+		 * @param string $addon_slug   The add-on slug
+		 * @param array  $feed         The feed array
+		 */
+		$max_attempts = apply_filters( 'gform_max_async_feed_attempts', $max_attempts, $form, $entry, $addon_slug, $feed );
+
+		// Remove task if it was attempted too many times but failed to complete.
+		if ( $item['attempts'] > $max_attempts ) {
 
 			call_user_func( array(
 				$addon,
@@ -203,8 +168,22 @@ class GF_Feed_Processor extends GF_Background_Process {
 				'log_error',
 			), __METHOD__ . "(): Unable to process feed due to error: {$e->getMessage()}" );
 
-			return false;
+			// Return the item for another attempt
+			return $item;
 		}
+
+		if ( is_wp_error( $returned_entry ) ) {
+			/** @var WP_Error $returned_entry */
+			// Log the error.
+			call_user_func( array(
+				$addon,
+				'log_error',
+			), __METHOD__ . "(): Unable to process feed due to error: {$returned_entry->get_error_message()}" );
+
+			// Return the item for another attempt
+			return $item;
+		}
+
 
 		// If returned value from the process feed call is an array containing an ID, update entry and set the entry to its value.
 		if ( is_array( $returned_entry ) && rgar( $returned_entry, 'id' ) ) {

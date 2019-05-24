@@ -234,7 +234,13 @@ That's it. You should be able to load the project in the browser.
 ### Accessing project logs
 
 ```sh
-npm run docker:logs
+npm run docker:log
+```
+
+Or to access the global container logs
+
+```sh
+npm run docker:global:log
 ```
 
 We recommend always logging while developing to see important information — most notably, PHP errors.

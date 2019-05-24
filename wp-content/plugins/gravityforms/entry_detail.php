@@ -109,9 +109,20 @@ class GFEntryDetail {
 		$form    = apply_filters( 'gform_admin_pre_render', $form );
 		$form    = apply_filters( 'gform_admin_pre_render_' . $form_id, $form );
 
-		self::$_form = $form;
+		self::set_current_form( $form );
 
 		return $form;
+	}
+
+	/**
+	 * Caches the current form.
+	 *
+	 * @since 2.4.4.1
+	 *
+	 * @param array $form The form to be cached.
+	 */
+	public static function set_current_form( $form ) {
+		self::$_form = $form;
 	}
 
 	public static function get_current_entry() {
@@ -234,6 +245,16 @@ class GFEntryDetail {
 		$form     = self::get_current_form();
 		$form_id  = absint( $form['id'] );
 
+		/**
+		 * Fires before the entry detail page is shown or any processing is handled.
+		 *
+		 * @param array $form The form object for the entry.
+		 * @param array $lead The entry object.
+		 *
+		 * @since 2.3.3.9
+		 */
+		gf_do_action( array( 'gform_pre_entry_detail', $form['id'] ), $form, $lead );
+
 		$total_count = self::get_total_count();
 		$position    = rgget( 'pos' ) ? rgget( 'pos' ) : 0;
 		$prev_pos    = ! rgblank( $position ) && $position > 0 ? $position - 1 : false;
@@ -250,20 +271,17 @@ class GFEntryDetail {
 			}
 		}
 
-		RGFormsModel::update_lead_property( $lead['id'], 'is_read', 1 );
+		GFFormsModel::update_entry_property( $lead['id'], 'is_read', 1 );
 
 		switch ( RGForms::post( 'action' ) ) {
 			case 'update' :
 				check_admin_referer( 'gforms_save_entry', 'gforms_save_entry' );
-				//Loading files that have been uploaded to temp folder
-				$files = GFCommon::json_decode( stripslashes( RGForms::post( 'gform_uploaded_files' ) ) );
-				if ( ! is_array( $files ) ) {
-					$files = array();
-				}
 
 				$original_entry = $lead;
 
-				GFFormsModel::$uploaded_files[ $form_id ] = $files;
+				// Set files that have been uploaded to temp folder
+				GFFormsModel::set_uploaded_files( $form_id );
+
 				GFFormsModel::save_lead( $form, $lead );
 
 				/**
@@ -275,16 +293,42 @@ class GFEntryDetail {
 				 */
 				gf_do_action( array( 'gform_after_update_entry', $form['id'] ), $form, $lead['id'], $original_entry );
 
-				$lead = RGFormsModel::get_lead( $lead['id'] );
+				$lead = GFFormsModel::get_entry( $lead['id'] );
 				$lead = GFFormsModel::set_entry_meta( $lead, $form );
 				self::set_current_entry( $lead );
+
+				// Check if there's consent field, and values updated.
+				if ( GFCommon::has_consent_field( $form ) ) {
+					$user_data           = get_userdata( $current_user->ID );
+					$consent_update_note = '';
+
+					foreach ( $form['fields'] as $field ) {
+						if ( $field['type'] === 'consent' ) {
+							$field_obj             = GFFormsModel::get_field( $form, $field['id'] );
+							$revision_id           = GFFormsModel::get_latest_form_revisions_id( $form['id'] );
+							$current_description   = $field_obj->get_field_description_from_revision( $revision_id );
+							$submitted_description = $field_obj->get_field_description_from_revision( $original_entry[ $field['id'] . '.3' ] );
+
+							if ( $lead[ $field['id'] . '.1' ] !== $original_entry[ $field['id'] . '.1' ] || $field['checkboxLabel'] !== $original_entry[ $field['id'] . '.2' ] || $current_description !== $submitted_description ) {
+								if ( ! empty( $consent_update_note ) ) {
+									$consent_update_note .= "\n";
+								}
+								$consent_update_note .= empty( $lead[ $field['id'] . '.1' ] ) ? sprintf( esc_html__( '%s: Unchecked "%s"', 'gravityforms' ), GFCommon::get_label( $field ), wp_strip_all_tags( $original_entry[ $field['id'] . '.2' ] ) ) : sprintf( esc_html__( '%s: Checked "%s"', 'gravityforms' ), GFCommon::get_label( $field ), wp_strip_all_tags( $lead[ $field['id'] . '.2' ] ) );
+							}
+						}
+					}
+
+					if ( ! empty( $consent_update_note ) ) {
+						GFFormsModel::add_note( $lead['id'], $current_user->ID, $user_data->display_name, $consent_update_note );
+					}
+				}
 
 				break;
 
 			case 'add_note' :
 				check_admin_referer( 'gforms_update_note', 'gforms_update_note' );
 				$user_data = get_userdata( $current_user->ID );
-				RGFormsModel::add_note( $lead['id'], $current_user->ID, $user_data->display_name, stripslashes( $_POST['new_note'] ) );
+				GFFormsModel::add_note( $lead['id'], $current_user->ID, $user_data->display_name, stripslashes( $_POST['new_note'] ) );
 
 				//emailing notes if configured
 				if ( rgpost( 'gentry_email_notes_to' ) ) {
@@ -327,55 +371,71 @@ class GFEntryDetail {
 			case 'add_quick_note' :
 				check_admin_referer( 'gforms_save_entry', 'gforms_save_entry' );
 				$user_data = get_userdata( $current_user->ID );
-				RGFormsModel::add_note( $lead['id'], $current_user->ID, $user_data->display_name, stripslashes( $_POST['quick_note'] ) );
+				GFFormsModel::add_note( $lead['id'], $current_user->ID, $user_data->display_name, stripslashes( $_POST['quick_note'] ) );
 				break;
 
 			case 'bulk' :
 				check_admin_referer( 'gforms_update_note', 'gforms_update_note' );
 				if ( $_POST['bulk_action'] == 'delete' ) {
 					if ( ! GFCommon::current_user_can_any( 'gravityforms_edit_entry_notes' ) ) {
-						die( esc_html__( "You don't have adequate permission to delete notes.", 'gravityforms' ) );
+						wp_die( esc_html__( "You don't have adequate permission to delete notes.", 'gravityforms' ) );
 					}
-					RGFormsModel::delete_notes( $_POST['note'] );
+					GFFormsModel::delete_notes( $_POST['note'] );
 				}
 				break;
 
 			case 'trash' :
 				check_admin_referer( 'gforms_save_entry', 'gforms_save_entry' );
-				RGFormsModel::update_lead_property( $lead['id'], 'status', 'trash' );
+				if ( ! GFCommon::current_user_can_any( 'gravityforms_delete_entries' ) ) {
+					wp_die( esc_html__( "You don't have adequate permission to trash entries.", 'gravityforms' ) );
+				}
+				GFFormsModel::update_entry_property( $lead['id'], 'status', 'trash' );
+				$admin_url = admin_url( 'admin.php?page=gf_entries&view=entries&id=' . absint( $form['id'] ) . '&trashed_entry=' . absint( $lead['id'] ) );
+				?>
+				<script type="text/javascript">
+					document.location.href = <?php echo json_encode( $admin_url ); ?>;
+				</script>
+				<?php
+				break;
+
+			case 'restore' :
+				check_admin_referer( 'gforms_save_entry', 'gforms_save_entry' );
+				if ( ! GFCommon::current_user_can_any( 'gravityforms_delete_entries' ) ) {
+					wp_die( esc_html__( "You don't have adequate permission to restore entries.", 'gravityforms' ) );
+				}
+				GFFormsModel::update_entry_property( $lead['id'], 'status', 'active' );
 				$lead = RGFormsModel::get_lead( $lead['id'] );
 				self::set_current_entry( $lead );
 				break;
 
-			case 'restore' :
 			case 'unspam' :
 				check_admin_referer( 'gforms_save_entry', 'gforms_save_entry' );
-				RGFormsModel::update_lead_property( $lead['id'], 'status', 'active' );
-				$lead = RGFormsModel::get_lead( $lead['id'] );
+				GFFormsModel::update_entry_property( $lead['id'], 'status', 'active' );
+				$lead = GFFormsModel::get_entry( $lead['id'] );
 				self::set_current_entry( $lead );
 				break;
 
 			case 'spam' :
 				check_admin_referer( 'gforms_save_entry', 'gforms_save_entry' );
-				RGFormsModel::update_lead_property( $lead['id'], 'status', 'spam' );
-				$lead = RGFormsModel::get_lead( $lead['id'] );
+				GFFormsModel::update_entry_property( $lead['id'], 'status', 'spam' );
+				$lead = GFFormsModel::get_entry( $lead['id'] );
 				self::set_current_entry( $lead );
 				break;
 
 			case 'delete' :
 				check_admin_referer( 'gforms_save_entry', 'gforms_save_entry' );
 				if ( ! GFCommon::current_user_can_any( 'gravityforms_delete_entries' ) ) {
-					die( esc_html__( "You don't have adequate permission to delete entries.", 'gravityforms' ) );
+					wp_die( esc_html__( "You don't have adequate permission to delete entries.", 'gravityforms' ) );
 				}
-				RGFormsModel::delete_lead( $lead['id'] );
+				GFFormsModel::delete_entry( $lead['id'] );
+				$admin_url = admin_url( 'admin.php?page=gf_entries&view=entries&id=' . absint( $form['id'] ) . '&deleted=' . absint( $lead['id'] ) );
 				?>
 				<script type="text/javascript">
-					document.location.href = '<?php echo 'admin.php?page=gf_entries&view=entries&id=' . absint( $form['id'] )?>';
+					document.location.href = <?php echo json_encode( $admin_url ); ?>;
 				</script>
 				<?php
-
 				break;
-		}
+		} // End switch().
 
 		$mode = empty( $_POST['screen_mode'] ) ? 'view' : $_POST['screen_mode'];
 
@@ -426,6 +486,13 @@ class GFEntryDetail {
 					jQuery('#preview_' + fieldId).hide();
 					jQuery('#upload_' + fieldId).show('slow');
 				}
+
+				var $input = jQuery( 'input[name="input_' + fieldId + '"]' ),
+					files  = jQuery.parseJSON( $input.val() );
+
+				delete files[ fileIndex ];
+				$input.val( jQuery.toJSON( files ) );
+
 			}
 
 			function ToggleShowEmptyFields() {
@@ -576,10 +643,10 @@ class GFEntryDetail {
 							 */
 							do_action( 'gform_entry_detail_content_before', $form, $lead );
 
-							if ( $mode == 'view' ) {
-								self::lead_detail_grid( $form, $lead, true );
-							} else {
+							if ( 'edit' === $mode && GFCommon::current_user_can_any( 'gravityforms_edit_entries' ) ) {
 								self::lead_detail_edit( $form, $lead );
+							} else {
+								self::lead_detail_grid( $form, $lead, true );
 							}
 
 							/**
@@ -707,11 +774,22 @@ class GFEntryDetail {
 								break;
 
 							default :
-								$value   = RGFormsModel::get_lead_field_value( $lead, $field );
-								$td_id   = 'field_' . $form_id . '_' . $field_id;
+								$value = RGFormsModel::get_lead_field_value( $lead, $field );
+								$td_id = 'field_' . $form_id . '_' . $field_id;
 								$td_id = esc_attr( $td_id );
-								$content = "<tr valign='top'><td class='detail-view' id='{$td_id}'><label class='detail-label'>" . esc_html( GFCommon::get_label( $field ) ) . '</label>' .
-								           GFCommon::get_field_input( $field, $value, $lead['id'], $form_id, $form ) . '</td></tr>';
+
+								if ( is_array( $field->fields ) ) {
+									// Ensure the top level repeater has the right nesting level so the label is not duplicated.
+									$field->nestingLevel = 0;
+									$field_label = '';
+								} else {
+									$field_label = "<label class='detail-label'>" . esc_html( GFCommon::get_label( $field ) ) . '</label>';
+								}
+
+								$content = "<tr valign='top'><td class='detail-view' id='{$td_id}'>" .
+								           $field_label .
+								           GFCommon::get_field_input( $field, $value, $lead['id'], $form_id, $form ) .
+								           '</td></tr>';
 
 								break;
 						}
@@ -773,7 +851,7 @@ class GFEntryDetail {
 				?>
 				<thead>
 				<tr>
-					<th id="notes">Notes</th>
+					<th id="notes"><?php esc_html_e( 'Notes', 'gravityforms' ) ?></th>
 				</tr>
 				</thead>
 				<?php
@@ -947,10 +1025,16 @@ class GFEntryDetail {
 						// Ignore product fields as they will be grouped together at the end of the grid.
 						if ( GFCommon::is_product_field( $field->type ) ) {
 							$has_product_fields = true;
-							continue;
+							break;
 						}
 
-						$value         = RGFormsModel::get_lead_field_value( $lead, $field );
+						$value = RGFormsModel::get_lead_field_value( $lead, $field );
+
+						if ( is_array( $field->fields ) ) {
+							// Ensure the top level repeater has the right nesting level so the label is not duplicated.
+							$field->nestingLevel = 0;
+						}
+
 						$display_value = GFCommon::get_lead_field_display( $field, $value, $lead['currency'] );
 
 						/**
@@ -1001,7 +1085,7 @@ class GFEntryDetail {
 
 			$products = array();
 			if ( $has_product_fields ) {
-				$products = GFCommon::get_product_fields( $form, $lead );
+				$products = GFCommon::get_product_fields( $form, $lead, false, true );
 				if ( ! empty( $products['products'] ) ) {
 				    ob_start();
 					?>
@@ -1047,7 +1131,9 @@ class GFEntryDetail {
 														<?php
 													}
 												}
-												$subtotal = floatval( $product['quantity'] ) * $price;
+												$quantity = GFCommon::to_number( $product['quantity'], $lead['currency'] );
+
+												$subtotal = $quantity * $price;
 												$total += $subtotal;
 												?>
 											</ul>
@@ -1093,7 +1179,7 @@ class GFEntryDetail {
 					 * Filter the markup of the order summary which appears on the Entry Detail, the {all_fields} merge tag and the {pricing_fields} merge tag.
                      *
                      * @since 2.1.2.5
-                     * @see   https://www.gravityhelp.com/documentation/article/gform_order_summary/
+                     * @see   https://docs.gravityforms.com/gform_order_summary/
 					 *
 					 * @var string $markup          The order summary markup.
 					 * @var array  $form            Current form object.
@@ -1101,7 +1187,7 @@ class GFEntryDetail {
 					 * @var array  $products        Current order summary object.
 					 * @var string $format          Format that should be used to display the summary ('html' or 'text').
 					 */
-                    $order_summary = gf_apply_filters( array( 'gform_order_summary', $form['id'] ), ob_get_clean(), $form, $lead, $products, 'html' );
+                    $order_summary = gf_apply_filters( array( 'gform_order_summary', $form['id'] ), trim( ob_get_clean() ), $form, $lead, $products, 'html' );
                     echo $order_summary;
 				}
 			}
@@ -1118,7 +1204,7 @@ class GFEntryDetail {
 		$class .= ' gf_entry_pagination_link';
 		$class .= $pos !== false ? ' gf_entry_pagination_link_active' : ' gf_entry_pagination_link_inactive';
 
-		return '<a ' . $href . ' class="' . $class . '" title="' . esc_attr( $label ) . '"><i class="fa-lg ' . esc_attr( $icon ) . '"></i></a></li>';
+		return '<a ' . $href . ' class="' . $class . '" aria-label="' . esc_attr( $label ) . '"><i aria-hidden="true" class="fa-lg ' . esc_attr( $icon ) . '" title="' . esc_attr( $label ) . '"></i></a>';
 	}
 
 	public static function payment_details_box( $entry, $form ) {
@@ -1150,7 +1236,7 @@ class GFEntryDetail {
 			<div id="minor-publishing">
 				<?php
 
-				$payment_status = apply_filters( 'gform_payment_status', $entry['payment_status'], $form, $entry );
+				$payment_status = apply_filters( 'gform_payment_status', GFCommon::get_entry_payment_status_text( $entry['payment_status'] ), $form, $entry );
 				if ( ! empty( $payment_status ) ) {
 					?>
 					<div id="gf_payment_status" class="gf_payment_detail">
@@ -1265,27 +1351,34 @@ class GFEntryDetail {
 				<?php esc_html_e( 'Entry Id', 'gravityforms' ); ?>: <?php echo absint( $entry['id'] ) ?><br /><br />
 				<?php esc_html_e( 'Submitted on', 'gravityforms' ); ?>: <?php echo esc_html( GFCommon::format_date( $entry['date_created'], false, 'Y/m/d' ) ) ?>
 				<br /><br />
-				<?php esc_html_e( 'User IP', 'gravityforms' ); ?>: <?php echo esc_html( $entry['ip'] ); ?>
-				<br /><br />
 				<?php
+				if ( ! empty( $entry['date_updated'] ) && $entry['date_updated'] != $entry['date_created'] ) {
+					esc_html_e( 'Updated', 'gravityforms' ); ?>: <?php echo esc_html( GFCommon::format_date( $entry['date_updated'], false, 'Y/m/d' ) );
+					echo '<br /><br />';
+				}
+
+				if ( ! empty( $entry['ip'] ) ) {
+					esc_html_e( 'User IP', 'gravityforms' ); ?>: <?php echo esc_html( $entry['ip'] );
+					echo '<br /><br />';
+				}
+
 				if ( ! empty( $entry['created_by'] ) && $usermeta = get_userdata( $entry['created_by'] ) ) {
 					?>
 					<?php esc_html_e( 'User', 'gravityforms' ); ?>:
-					<a href="user-edit.php?user_id=<?php echo absint( $entry['created_by'] ) ?>" alt="<?php esc_attr_e( 'View user profile', 'gravityforms' ); ?>" title="<?php esc_attr_e( 'View user profile', 'gravityforms' ); ?>"><?php echo esc_html( $usermeta->user_login ) ?></a>
+					<a href="user-edit.php?user_id=<?php echo absint( $entry['created_by'] ) ?>"><?php echo esc_html( $usermeta->user_login ) ?></a>
 					<br /><br />
 					<?php
 				}
-				?>
 
-				<?php esc_html_e( 'Embed Url', 'gravityforms' ); ?>:
-				<a href="<?php echo esc_url( $entry['source_url'] ) ?>" target="_blank" alt="<?php echo esc_attr( $entry['source_url'] ) ?>" title="<?php echo esc_attr( $entry['source_url'] ) ?>">.../<?php echo esc_html( GFCommon::truncate_url( $entry['source_url'] ) ) ?></a>
+				esc_html_e( 'Embed Url', 'gravityforms' ); ?>:
+				<a href="<?php echo esc_url( $entry['source_url'] ) ?>" target="_blank">.../<?php echo esc_html( GFCommon::truncate_url( $entry['source_url'] ) ) ?></a>
 				<br /><br />
 				<?php
 				if ( ! empty( $entry['post_id'] ) ) {
 					$post = get_post( $entry['post_id'] );
 					?>
 					<?php esc_html_e( 'Edit Post', 'gravityforms' ); ?>:
-					<a href="post.php?action=edit&post=<?php echo absint( $post->ID ) ?>" alt="<?php esc_attr_e( 'Click to edit post', 'gravityforms' ); ?>" title="<?php esc_attr_e( 'Click to edit post', 'gravityforms' ); ?>"><?php echo esc_html( $post->post_title ) ?></a>
+					<a href="post.php?action=edit&post=<?php echo absint( $post->ID ) ?>"><?php echo esc_html( $post->post_title ) ?></a>
 					<br /><br />
 					<?php
 				}
@@ -1320,11 +1413,9 @@ class GFEntryDetail {
 							break;
 
 						case 'trash' :
-							?>
-							<a onclick="jQuery('#action').val('restore'); jQuery('#entry_form').submit()" href="#"><?php esc_html_e( 'Restore', 'gravityforms' ) ?></a>
-							<?php
 							if ( GFCommon::current_user_can_any( 'gravityforms_delete_entries' ) ) {
-								?>
+							?>
+								<a onclick="jQuery('#action').val('restore'); jQuery('#entry_form').submit()" href="#"><?php esc_html_e( 'Restore', 'gravityforms' ) ?></a>
 								|
 								<a class="submitdelete deletion" onclick="if ( confirm('<?php echo esc_js( __( "You are about to delete this entry. 'Cancel' to stop, 'OK' to delete.", 'gravityforms' ) ); ?>') ) {jQuery('#action').val('delete'); jQuery('#entry_form').submit(); return true;} return false;" href="#"><?php esc_html_e( 'Delete Permanently', 'gravityforms' ) ?></a>
 								<?php
@@ -1441,7 +1532,7 @@ class GFEntryDetail {
 	public static function maybe_display_empty_fields( $allow_display_empty_fields, $form, $lead = false ) {
 		$display_empty_fields = false;
 		if ( $allow_display_empty_fields ) {
-			$display_empty_fields = rgget( 'gf_display_empty_fields', $_COOKIE );
+			$display_empty_fields = (bool) rgget( 'gf_display_empty_fields', $_COOKIE );
 		}
 
 		if ( ! $lead ) {

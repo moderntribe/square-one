@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2019.05]
+* Changed: Updated WordPress core to 5.1.1
+* Changed: Updated Classic Editor Plugins to latest Versions
+* Changed: Updated ACF to 5.7.13
+
 ## [2019.04]
 
 * Changed: Added npm commands for running codeception tests
@@ -9,9 +14,7 @@ All notable changes to this project will be documented in this file.
 * Changed: Updated default PHP version to 7.2
 * Changed: Added in default Panels Caching
 * Changed: Added in Whoops library
-* Changed: Updated WordPress core to 5.1.1
-* Changed: Updated Classic Editor Plugins to latest Versions
-* Changed: Updated ACF to 5.7.13
+* Add `WP_DISABLE_FATAL_ERROR_HANDLER` constant to wp-config to disable the fatal error handler
 
 ## [2019.03]
 
@@ -65,6 +68,8 @@ All notable changes to this project will be documented in this file.
 * Changed: Cleaned up the `CLI_Provider`
 * Changed: Introduced the `Generator_Command` abstract class for generator commands, so that we don't need all commands following the same constructor.
 * Added: the following JavaScript unit tests: accessibility.test, apply-browser-classes.test, body-lock.test
+* Fixed: Instructions to view the project logs inside docker
+* Added: install guide for Ubuntu users on `docs/docker` documentation
 
 ## [2018.10]
 

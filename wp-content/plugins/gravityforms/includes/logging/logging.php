@@ -184,13 +184,41 @@ class GFLogging extends GFAddOn {
 	 */
 	public function plugin_settings_page() {
 
-		// If the delete_log parameter is set, delete the log file and display a message.
-		if ( rgget( 'delete_log' ) ) {
-			if ( wp_verify_nonce( rgget( $this->_nonce_action ), $this->_nonce_action ) && $this->delete_log_file( rgget( 'delete_log' ) ) ) {
-				GFCommon::add_message( esc_html__( 'Log file was successfully deleted.', 'gravityforms' ) );
+
+		// If the delete_log parameter is set, delete the log file and redirect.
+		$plugin_slug = rgget( 'delete_log' );
+		if ( $plugin_slug ) {
+
+			$supported_plugins = $this->get_supported_plugins();
+
+			if ( isset( $supported_plugins[ $plugin_slug ] ) ) {
+				if ( wp_verify_nonce( rgget( $this->_nonce_action ), $this->_nonce_action ) && $this->delete_log_file( $plugin_slug ) ) {
+
+					// Prepare redirect URL.
+					$redirect_url = remove_query_arg( array( 'delete_log', 'gform_delete_log' ) );
+					$redirect_url = add_query_arg( array( 'deleted' => '1' ), $redirect_url );
+					$redirect_url = esc_url_raw( $redirect_url );
+
+					?>
+					<script type="text/javascript">
+						document.location.href = <?php echo json_encode( $redirect_url ); ?>;
+					</script>
+					<?php
+					die();
+
+				} else {
+
+					// Display error message.
+					GFCommon::add_error_message( esc_html__( 'Log file could not be deleted.', 'gravityforms' ) );
+				}
 			} else {
-				GFCommon::add_error_message( esc_html__( 'Log file could not be deleted.', 'gravityforms' ) );
+				GFCommon::add_error_message( esc_html__( 'Invalid log file.', 'gravityforms' ) );
 			}
+		}
+
+		// If a log file was deleted, display message.
+		if ( '1' === rgget( 'deleted' ) ) {
+			GFCommon::add_message( esc_html__( 'Log file was successfully deleted.', 'gravityforms' ) );
 		}
 
 		parent::plugin_settings_page();
@@ -405,10 +433,11 @@ class GFLogging extends GFAddOn {
 				),
 			);
 
+			$random = function_exists( 'random_bytes' ) ? random_bytes( 12 ) : wp_generate_password( 24, true, true );
 			$plugin_fields[] = array(
 				'name'          => $plugin_slug . '[file_name]',
 				'type'          => 'hidden',
-				'default_value' => sha1( $plugin_slug . time() ),
+				'default_value' => sha1( $plugin_slug . $random ),
 			);
 
 		}
@@ -491,7 +520,7 @@ class GFLogging extends GFAddOn {
 					unlink( $file ); // Delete file.
 				}
 			}
-			rmdir( $dir );
+			@rmdir( $dir );
 		}
 
 	}
@@ -542,7 +571,7 @@ class GFLogging extends GFAddOn {
 
 		if ( ! file_exists( $log_dir ) ) {
 			wp_mkdir_p( $log_dir );
-			touch( $log_dir . 'index.html' );
+			@touch( $log_dir . 'index.html' );
 		}
 
 		$plugin_setting = $this->get_plugin_setting( $plugin_name );
@@ -717,7 +746,7 @@ class GFLogging extends GFAddOn {
 		if ( false !== $similar_files && $file_count > $this->max_file_count ) {
 
 			// Sort by date so oldest are first.
-			usort( $similar_files, create_function( '$a,$b', 'return filemtime($a) - filemtime($b);' ) );
+			usort( $similar_files, array( $this, 'filemtime_diff' ) );
 
 			$delete_count = $file_count - $this->max_file_count;
 
@@ -729,6 +758,18 @@ class GFLogging extends GFAddOn {
 
 		}
 
+	}
+
+	/**
+	 * Calculate the difference between file modified times.
+	 *
+	 * @param string $a The path to the first file.
+	 * @param string $b The path to the second file.
+	 * 
+	 * @return int The difference between the two files.
+	 */
+	private function filemtime_diff( $a, $b ) {
+		return filemtime( $a ) - filemtime( $b );
 	}
 
 	/**
@@ -762,10 +803,11 @@ class GFLogging extends GFAddOn {
 
 		$settings = array();
 		foreach ( $supported_plugins as $plugin_slug => $plugin_name ) {
+			$random = function_exists( 'random_bytes' ) ? random_bytes( 12 ) : wp_generate_password( 24, true, true );
 			$settings[ $plugin_slug ] = array(
 				'log_level' => '1',
 				'enable'    => '1',
-				'file_name' => sha1( $plugin_slug . time() ),
+				'file_name' => sha1( $plugin_slug . $random ),
 			);
 		}
 		$this->update_plugin_settings( $settings );
@@ -812,13 +854,15 @@ class GFLogging extends GFAddOn {
 
 		if ( is_multisite() ) {
 
-			// Get network sites.
-			$sites = wp_get_sites();
+			// Get network sites. get_sites() is available with WP 4.6+.
+			$sites = function_exists( 'get_sites' ) ? get_sites() : wp_get_sites();
 
 			foreach ( $sites as $site ) {
 
+				$blog_id = $site instanceof WP_Site ? $site->blog_id : $site['blog_id'];
+
 				// Get old settings.
-				$old_settings = get_blog_option( $site['blog_id'], 'gf_logging_settings', array() );
+				$old_settings = get_blog_option( $blog_id, 'gf_logging_settings', array() );
 
 				// If old settings don't exist, exit.
 				if ( ! $old_settings ) {
@@ -829,17 +873,18 @@ class GFLogging extends GFAddOn {
 				$new_settings = array();
 
 				foreach ( $old_settings as $plugin_slug => $log_level ) {
+					$random = function_exists( 'random_bytes' ) ? random_bytes( 12 ) : wp_generate_password( 24, true, true );
 					$new_settings[ $plugin_slug ] = array(
 						'log_level' => $log_level,
-						'file_name' => sha1( $plugin_slug . time() ),
+						'file_name' => sha1( $plugin_slug . $random ),
 					);
 				}
 
 				// Save new settings.
-				update_blog_option( $site['blog_id'], 'gravityformsaddon_' . $this->_slug . '_settings', $new_settings );
+				update_blog_option( $blog_id, 'gravityformsaddon_' . $this->_slug . '_settings', $new_settings );
 
 				// Delete old settings.
-				delete_blog_option( $site['blog_id'], 'gf_logging_settings' );
+				delete_blog_option( $blog_id, 'gf_logging_settings' );
 
 			}
 
@@ -857,9 +902,10 @@ class GFLogging extends GFAddOn {
 			$new_settings = array();
 
 			foreach ( $old_settings as $plugin_slug => $log_level ) {
+				$random = function_exists( 'random_bytes' ) ? random_bytes( 12 ) : wp_generate_password( 24, true, true );
 				$new_settings[ $plugin_slug ] = array(
 					'log_level' => $log_level,
-					'file_name' => sha1( $plugin_slug . time() ),
+					'file_name' => sha1( $plugin_slug . $random ),
 				);
 			}
 
@@ -920,6 +966,31 @@ class GFLogging extends GFAddOn {
 	public function load_text_domain() {
 		GFCommon::load_gf_text_domain();
 	}
+
+	/**
+	 * Register Gravity Forms capabilities with Gravity Forms group in User Role Editor plugin.
+	 *
+	 * @since  2.4
+	 *
+	 * @param array  $groups Current capability groups.
+	 * @param string $cap_id Capability identifier.
+	 *
+	 * @return array
+	 */
+	public function filter_ure_custom_capability_groups( $groups = array(), $cap_id = '' ) {
+
+		// Get Add-On capabilities.
+		$caps = $this->_capabilities;
+
+		// If capability belongs to Add-On, register it to group.
+		if ( in_array( $cap_id, $caps, true ) ) {
+			$groups[] = 'gravityforms';
+		}
+
+		return $groups;
+
+	}
+
 }
 
 /**
