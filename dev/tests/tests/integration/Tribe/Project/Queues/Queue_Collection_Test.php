@@ -58,6 +58,6 @@ class Queue_Collection_Test extends WPTestCase {
 	public function should_throw_if_queue_does_not_exist() {
 		$this->expectException(\DomainException::class);
 
-		$this->collection->get('I am a queue that definetly does not exist!');
+		$this->collection->get('I am a queue that definitely does not exist!');
 	}
 }
