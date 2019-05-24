@@ -94,7 +94,7 @@ class ACF_Admin_Tool_Export extends ACF_Admin_Tool {
 		
 		// validate
 		if( $json === false ) {
-			return acf_add_admin_notice( __("No field groups selected", 'acf') , 'error');
+			return acf_add_admin_notice( __("No field groups selected", 'acf'), 'warning' );
 		}
 		
 		
@@ -132,7 +132,7 @@ class ACF_Admin_Tool_Export extends ACF_Admin_Tool {
 		
 		// validate
 		if( !$keys ) {
-			return acf_add_admin_notice( __("No field groups selected", 'acf') , 'error');
+			return acf_add_admin_notice( __("No field groups selected", 'acf'), 'warning' );
 		}
 		
 		
@@ -171,8 +171,8 @@ class ACF_Admin_Tool_Export extends ACF_Admin_Tool {
 	    	// add notice
 	    	if( $selected ) {
 		    	$count = count($selected);
-		    	$message = sprintf( _n( 'Exported 1 field group.', 'Exported %s field groups.', $count, 'acf' ), $count );
-		    	acf_add_admin_notice( $message );
+		    	$text = sprintf( _n( 'Exported 1 field group.', 'Exported %s field groups.', $count, 'acf' ), $count );
+		    	acf_add_admin_notice( $text, 'success' );
 	    	}
 		}
 
@@ -304,8 +304,8 @@ class ACF_Admin_Tool_Export extends ACF_Admin_Tool {
 					'prefix'	=> false,
 					'value'		=> '',
 					'choices'	=> array(
-						'all'		=> 'Include all settings',
-						'minimal'	=> 'Ignore empty settings'
+						'all'		=> __('Include all settings', 'acf'),
+						'minimal'	=> __('Ignore empty settings', 'acf'),
 					)
 				));
 */
@@ -479,7 +479,11 @@ class ACF_Admin_Tool_Export extends ACF_Admin_Tool {
 					
 					
 					// tooltip
-					acf.tooltip.temp('Copied', $a);
+					acf.newTooltip({
+						text: 		"<?php _e('Copied', 'acf' ); ?>",
+						timeout:	250,
+						target: 	$(this),
+					});
 					
 				} catch (err) {
 					

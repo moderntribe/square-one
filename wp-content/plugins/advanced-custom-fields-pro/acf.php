@@ -2,8 +2,8 @@
 /*
 Plugin Name: Advanced Custom Fields PRO
 Plugin URI: https://www.advancedcustomfields.com/
-Description: Customise WordPress with powerful, professional and intuitive fields.
-Version: 5.6.7
+Description: Customize WordPress with powerful, professional and intuitive fields.
+Version: 5.7.13
 Author: Elliot Condon
 Author URI: http://www.elliotcondon.com/
 Copyright: Elliot Condon
@@ -18,11 +18,16 @@ if( ! class_exists('ACF') ) :
 class ACF {
 	
 	/** @var string The plugin version number */
-	var $version = '5.6.7';
-	
+	var $version = '5.7.13';
 	
 	/** @var array The plugin settings array */
 	var $settings = array();
+	
+	/** @var array The plugin data array */
+	var $data = array();
+	
+	/** @var array Storage for class instances */
+	var $instances = array();
 	
 	
 	/*
@@ -61,17 +66,26 @@ class ACF {
 	function initialize() {
 		
 		// vars
+		$version = $this->version;
+		$basename = plugin_basename( __FILE__ );
+		$path = plugin_dir_path( __FILE__ );
+		$url = plugin_dir_url( __FILE__ );
+		$slug = dirname($basename);
+		
+		
+		// settings
 		$this->settings = array(
 			
 			// basic
 			'name'				=> __('Advanced Custom Fields', 'acf'),
-			'version'			=> $this->version,
+			'version'			=> $version,
 						
 			// urls
 			'file'				=> __FILE__,
-			'basename'			=> plugin_basename( __FILE__ ),
-			'path'				=> plugin_dir_path( __FILE__ ),
-			'url'				=> plugin_dir_url( __FILE__ ),
+			'basename'			=> $basename,
+			'path'				=> $path,
+			'url'				=> $url,
+			'slug'				=> $slug,
 			
 			// options
 			'show_admin'				=> true,
@@ -102,18 +116,33 @@ class ACF {
 		
 		// constants
 		$this->define( 'ACF', 			true );
-		$this->define( 'ACF_VERSION', 	$this->settings['version'] );
-		$this->define( 'ACF_PATH', 		$this->settings['path'] );
+		$this->define( 'ACF_VERSION', 	$version );
+		$this->define( 'ACF_PATH', 		$path );
 		
 		
 		// api
 		include_once( ACF_PATH . 'includes/api/api-helpers.php');
 		acf_include('includes/api/api-input.php');
-		acf_include('includes/api/api-value.php');
-		acf_include('includes/api/api-field.php');
-		acf_include('includes/api/api-field-group.php');
 		acf_include('includes/api/api-template.php');
+		acf_include('includes/api/api-term.php');
 		
+		// Include models.
+		acf_include('includes/class-acf-data.php');
+		
+		// Include core functions.
+		acf_include('includes/acf-data-functions.php');
+		acf_include('includes/acf-helper-functions.php');
+		acf_include('includes/acf-hook-functions.php');
+		
+		// Include functions.
+		acf_include('includes/acf-deprecated-functions.php');
+		acf_include('includes/acf-field-functions.php');
+		acf_include('includes/acf-field-group-functions.php');
+		acf_include('includes/acf-form-functions.php');
+		acf_include('includes/acf-meta-functions.php');
+		acf_include('includes/acf-post-functions.php');
+		acf_include('includes/acf-user-functions.php');
+		acf_include('includes/acf-value-functions.php');
 		
 		// fields
 		acf_include('includes/fields.php');
@@ -126,20 +155,26 @@ class ACF {
 		
 		
 		// core
-		acf_include('includes/ajax.php');
-		acf_include('includes/cache.php');
+		acf_include('includes/assets.php');
 		acf_include('includes/compatibility.php');
 		acf_include('includes/deprecated.php');
-		acf_include('includes/input.php');
 		acf_include('includes/json.php');
-		acf_include('includes/local.php');
+		acf_include('includes/l10n.php');
+		acf_include('includes/local-fields.php');
 		acf_include('includes/loop.php');
 		acf_include('includes/media.php');
 		acf_include('includes/revisions.php');
-		acf_include('includes/third_party.php');
 		acf_include('includes/updates.php');
+		acf_include('includes/upgrades.php');
 		acf_include('includes/validation.php');
 		
+		// ajax
+		acf_include('includes/ajax/class-acf-ajax.php');
+		acf_include('includes/ajax/class-acf-ajax-check-screen.php');
+		acf_include('includes/ajax/class-acf-ajax-user-setting.php');
+		acf_include('includes/ajax/class-acf-ajax-upgrade.php');
+		acf_include('includes/ajax/class-acf-ajax-query.php');
+		acf_include('includes/ajax/class-acf-ajax-query-terms.php');
 		
 		// forms
 		acf_include('includes/forms/form-attachment.php');
@@ -148,6 +183,7 @@ class ACF {
 		acf_include('includes/forms/form-front.php');
 		acf_include('includes/forms/form-nav-menu.php');
 		acf_include('includes/forms/form-post.php');
+		acf_include('includes/forms/form-gutenberg.php');
 		acf_include('includes/forms/form-taxonomy.php');
 		acf_include('includes/forms/form-user.php');
 		acf_include('includes/forms/form-widget.php');
@@ -155,39 +191,31 @@ class ACF {
 		
 		// admin
 		if( is_admin() ) {
-			
 			acf_include('includes/admin/admin.php');
 			acf_include('includes/admin/admin-field-group.php');
 			acf_include('includes/admin/admin-field-groups.php');
-			acf_include('includes/admin/install.php');
+			acf_include('includes/admin/admin-notices.php');
 			acf_include('includes/admin/admin-tools.php');
+			acf_include('includes/admin/admin-upgrade.php');
 			acf_include('includes/admin/settings-info.php');
-			
-			
-			// network
-			if( is_network_admin() ) {
-				
-				acf_include('includes/admin/install-network.php');
-				
-			}
 		}
 		
 		
 		// pro
 		acf_include('pro/acf-pro.php');
 		
+		// Include tests.
+		//acf_include('tests/tests.php');
 		
 		// actions
 		add_action('init',	array($this, 'init'), 5);
 		add_action('init',	array($this, 'register_post_types'), 5);
 		add_action('init',	array($this, 'register_post_status'), 5);
-		add_action('init',	array($this, 'register_assets'), 5);
 		
 		
 		// filters
 		add_filter('posts_where',		array($this, 'posts_where'), 10, 2 );
 		//add_filter('posts_request',	array($this, 'posts_request'), 10, 1 );
-		
 	}
 	
 	
@@ -225,14 +253,15 @@ class ACF {
 		
 		
 		// textdomain
-		$this->load_plugin_textdomain();
+		acf_load_textdomain();
 		
+		// include 3rd party support
+		acf_include('includes/third-party.php');
 		
 		// include wpml support
 		if( defined('ICL_SITEPRESS_VERSION') ) {
 			acf_include('includes/wpml.php');
 		}
-		
 		
 		// fields
 		acf_include('includes/fields/class-acf-field-text.php');
@@ -305,42 +334,6 @@ class ACF {
 		
 		// action for 3rd party
 		do_action('acf/init');
-			
-	}
-	
-	
-	/*
-	*  load_plugin_textdomain
-	*
-	*  This function will load the textdomain file
-	*
-	*  @type	function
-	*  @date	3/5/17
-	*  @since	5.5.13
-	*
-	*  @param	n/a
-	*  @return	n/a
-	*/
-	
-	function load_plugin_textdomain() {
-		
-		// vars
-		$domain = 'acf';
-		$locale = apply_filters( 'plugin_locale', acf_get_locale(), $domain );
-		$mofile = $domain . '-' . $locale . '.mo';
-		
-		
-		// load from the languages directory first
-		load_textdomain( $domain, WP_LANG_DIR . '/plugins/' . $mofile );
-		
-		
-		// redirect missing translations
-		$mofile = str_replace('fr_CA', 'fr_FR', $mofile);
-		
-		
-		// load from plugin lang folder
-		load_textdomain( $domain, acf_get_path( 'lang/' . $mofile ) );
-		
 	}
 	
 	
@@ -458,39 +451,6 @@ class ACF {
 	
 	
 	/*
-	*  register_assets
-	*
-	*  This function will register scripts and styles
-	*
-	*  @type	function
-	*  @date	22/10/2015
-	*  @since	5.3.2
-	*
-	*  @param	n/a
-	*  @return	n/a
-	*/
-	
-	function register_assets() {
-		
-		// vars
-		$version = acf_get_setting('version');
-		$min = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
-		
-		
-		// scripts
-		wp_register_script('acf-input', acf_get_url("assets/js/acf-input{$min}.js"), array('jquery', 'jquery-ui-core', 'jquery-ui-sortable', 'jquery-ui-resizable'), $version );
-		wp_register_script('acf-field-group', acf_get_url("assets/js/acf-field-group{$min}.js"), array('acf-input'), $version );
-		
-		
-		// styles
-		wp_register_style('acf-global', acf_get_url('assets/css/acf-global.css'), array(), $version );
-		wp_register_style('acf-input', acf_get_url('assets/css/acf-input.css'), array('acf-global'), $version );
-		wp_register_style('acf-field-group', acf_get_url('assets/css/acf-field-group.css'), array('acf-input'), $version );
-		
-	}
-	
-	
-	/*
 	*  posts_where
 	*
 	*  This function will add in some new parameters to the WP_Query args allowing fields to be found via key / name
@@ -554,60 +514,125 @@ class ACF {
 		
 	}
 	
-	
-	/*
-	*  get_setting
+	/**
+	*  has_setting
 	*
-	*  This function will return a value from the settings array found in the acf object
+	*  Returns true if has setting.
 	*
-	*  @type	function
-	*  @date	28/09/13
-	*  @since	5.0.0
+	*  @date	2/2/18
+	*  @since	5.6.5
 	*
-	*  @param	$name (string) the setting name to return
-	*  @param	$value (mixed) default value
-	*  @return	$value
+	*  @param	string $name
+	*  @return	boolean
 	*/
 	
-	function get_setting( $name, $value = null ) {
-		
-		// check settings
-		if( isset($this->settings[ $name ]) ) {
-			$value = $this->settings[ $name ];
-		}
-		
-		
-		// filter
-		if( substr($name, 0, 1) !== '_' ) {
-			$value = apply_filters( "acf/settings/{$name}", $value );
-		}
-		
-		
-		// return
-		return $value;
-		
+	function has_setting( $name ) {
+		return isset($this->settings[ $name ]);
 	}
 	
-	
-	/*
-	*  update_setting
+	/**
+	*  get_setting
 	*
-	*  This function will update a value into the settings array found in the acf object
+	*  Returns a setting.
 	*
-	*  @type	function
 	*  @date	28/09/13
 	*  @since	5.0.0
 	*
-	*  @param	$name (string)
-	*  @param	$value (mixed)
+	*  @param	string $name
+	*  @return	mixed
+	*/
+	
+	function get_setting( $name ) {
+		return isset($this->settings[ $name ]) ? $this->settings[ $name ] : null;
+	}
+	
+	/**
+	*  update_setting
+	*
+	*  Updates a setting.
+	*
+	*  @date	28/09/13
+	*  @since	5.0.0
+	*
+	*  @param	string $name
+	*  @param	mixed $value
 	*  @return	n/a
 	*/
 	
 	function update_setting( $name, $value ) {
-		
 		$this->settings[ $name ] = $value;
 		return true;
-		
+	}
+	
+	/**
+	*  get_data
+	*
+	*  Returns data.
+	*
+	*  @date	28/09/13
+	*  @since	5.0.0
+	*
+	*  @param	string $name
+	*  @return	mixed
+	*/
+	
+	function get_data( $name ) {
+		return isset($this->data[ $name ]) ? $this->data[ $name ] : null;
+	}
+	
+	
+	/**
+	*  set_data
+	*
+	*  Sets data.
+	*
+	*  @date	28/09/13
+	*  @since	5.0.0
+	*
+	*  @param	string $name
+	*  @param	mixed $value
+	*  @return	n/a
+	*/
+	
+	function set_data( $name, $value ) {
+		$this->data[ $name ] = $value;
+	}
+	
+	
+	/**
+	*  get_instance
+	*
+	*  Returns an instance.
+	*
+	*  @date	13/2/18
+	*  @since	5.6.9
+	*
+	*  @param	string $class The instance class name.
+	*  @return	object
+	*/
+	
+	function get_instance( $class ) {
+		$name = strtolower($class);
+		return isset($this->instances[ $name ]) ? $this->instances[ $name ] : null;
+	}
+	
+	/**
+	*  new_instance
+	*
+	*  Creates and stores an instance.
+	*
+	*  @date	13/2/18
+	*  @since	5.6.9
+	*
+	*  @param	string $class The instance class name.
+	*  @return	object
+	*/
+	
+	function new_instance( $class ) {
+		$instance = new $class();
+		$name = strtolower($class);
+		$this->instances[ $name ] = $instance;
+		return $instance;
 	}
 	
 }
