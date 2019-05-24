@@ -27,6 +27,14 @@ abstract class Post_Type_Service_Provider extends Service_Provider {
 	protected $post_type = '';
 
 	public function __construct() {
+		$this->validate();
+		$this->post_type = $this->post_type_class::NAME;
+	}
+
+	/**
+	 * Validates the object we are trying to build or throws
+	 */
+	protected function validate() {
 		if ( ! is_subclass_of( $this->post_type_class, Post_Object::class ) ) {
 			throw new \LogicException( 'Must have a valid post type class reference' );
 		}
@@ -34,7 +42,13 @@ abstract class Post_Type_Service_Provider extends Service_Provider {
 		if ( empty( $this->post_type_class::NAME ) ) {
 			throw new \LogicException( 'Post type class requires a NAME constant' );
 		}
-		$this->post_type = $this->post_type_class::NAME;
+
+		// Only validate config_class if one is provided
+		if ( ! empty( $this->config_class ) ) {
+			if ( ! is_subclass_of( $this->config_class, Post_Type_Config::class ) ) {
+				throw new \LogicException( 'If you provide a config class, it must be an instance of Post_Type_Config' );
+			}
+		}
 	}
 
 	public function register( Container $container ) {
@@ -42,18 +56,12 @@ abstract class Post_Type_Service_Provider extends Service_Provider {
 			return new $this->post_type_class;
 		} );
 
-		$this->register_config( $container );
+		if ( ! empty( $this->config_class ) ) {
+			$this->register_config( $container );
+		}
 	}
 
 	protected function register_config( Container $container ) {
-		if ( empty( $this->config_class ) ) {
-			return;
-		}
-
-		if ( ! is_subclass_of( $this->config_class, Post_Type_Config::class ) ) {
-			throw new \LogicException( 'If you provide a config class, it must be an instance of Post_Type_Config' );
-		}
-
 		$container[ 'post_type.' . $this->post_type . '.config' ] = function ( $container ) {
 			return new $this->config_class( $this->post_type );
 		};
