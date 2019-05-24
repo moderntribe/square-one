@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2019.05]
+* Updated WordPress to 5.2.1
+* Fixed: Tribe Branding plugin: updated deprecated `login_headertitle` filter to use `login_headertext` instead
+
 ## [2019.04]
 
 * Changed: Added npm commands for running codeception tests
