@@ -1,10 +1,10 @@
 <?php
 
-use Codeception\TestCase\WPTestCase;
+use Tribe\Tests\Test_Case;
 use Tribe\Tests\Post_Types\Test_CPT\Test_CPT;
 use Tribe\Tests\Post_Types\Test_CPT\Config;
 
-class Config_Test extends WPTestCase {
+class Config_Test extends Test_Case {
 	public function setUp() {
 		// before
 		parent::setUp();

@@ -5,9 +5,9 @@ namespace Tribe\Tests\Service_Providers\Post_Types;
 use Pimple\Container;
 use Prophecy\Argument;
 use Tribe\Tests\Post_Types\Test_CPT\Test_CPT;
-use Tribe\Tests\SquareOneTestCase;
+use Tribe\Tests\Test_Case;
 
-class Test_CPT_Service_Provider_Test extends SquareOneTestCase {
+class Test_CPT_Service_Provider_Test extends Test_Case {
 
 	protected $original_providers;
 
