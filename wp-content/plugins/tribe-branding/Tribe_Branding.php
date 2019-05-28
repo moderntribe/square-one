@@ -26,7 +26,7 @@ class Tribe_Branding {
 
 		add_action( 'login_enqueue_scripts', array( $this, 'set_login_logo' ) );
 		add_filter( 'login_headerurl', array( $this, 'set_login_header_url' ) );
-		add_filter( 'login_headertitle', array( $this, 'set_login_header_title' ) );
+		add_filter( 'login_headertext', array( $this, 'set_login_header_title' ) );
 		add_action( 'wp_head', array( $this, 'set_favicon' ) );
 		add_action( 'login_head', array( $this, 'set_favicon' ) );
 		add_action( 'admin_head', array( $this, 'set_favicon' ) );

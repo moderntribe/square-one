@@ -4,8 +4,9 @@ namespace Tribe\Project\Blog_Copier\Tasks;
 
 use Tribe\Project\Blog_Copier\Copy_Configuration;
 use Tribe\Project\Blog_Copier\Copy_Manager;
+use Tribe\Tests\Test_Case;
 
-class Replace_OptionsTest extends \Codeception\TestCase\WPTestCase {
+class Replace_OptionsTest extends Test_Case {
 
 	/**
 	 * @env multisite

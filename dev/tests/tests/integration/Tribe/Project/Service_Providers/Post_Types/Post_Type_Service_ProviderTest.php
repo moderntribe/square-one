@@ -2,12 +2,9 @@
 
 namespace Tribe\Project\Service_Providers\Post_Types;
 
-use Tribe\Tests\SquareOneTestCase;
-use Tribe\Libs\Post_Type\Post_Object;
+use Tribe\Tests\Test_Case;
 
-
-class Post_Type_Service_ProviderTest extends SquareOneTestCase {
-
+class Post_Type_Service_ProviderTest extends Test_Case {
 	public function setUp() {
 		// before
 		parent::setUp();
