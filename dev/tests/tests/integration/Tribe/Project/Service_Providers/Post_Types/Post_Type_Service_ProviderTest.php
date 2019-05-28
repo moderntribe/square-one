@@ -2,8 +2,9 @@
 
 namespace Tribe\Project\Service_Providers\Post_Types;
 
-class Post_Type_Service_ProviderTest extends \Codeception\TestCase\WPTestCase {
+use Tribe\Tests\Test_Case;
 
+class Post_Type_Service_ProviderTest extends Test_Case {
 	public function setUp() {
 		// before
 		parent::setUp();

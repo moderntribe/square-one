@@ -96,5 +96,10 @@
     "psr-4": {
       "Tribe\\Project\\":"wp-content/plugins/core/src"
     }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tribe\\Tests\\": "dev/tests/tests/_support/Classes/"
+    }
   }
 }
