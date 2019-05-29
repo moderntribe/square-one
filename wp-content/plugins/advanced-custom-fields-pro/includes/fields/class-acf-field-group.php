@@ -644,7 +644,57 @@ class acf_field__group extends acf_field {
 		return $sub_fields;
 		
 	}
+	
+	
+	/*
+	*  delete_value
+	*
+	*  Called when deleting this field's value.
+	*
+	*  @date	1/07/2015
+	*  @since	5.2.3
+	*
+	*  @param	mixed $post_id The post ID being saved
+	*  @param	string $meta_key The field name as seen by the DB
+	*  @param	array $field The field settings
+	*  @return	void
+	*/
+	
+	function delete_value( $post_id, $meta_key, $field ) {
 		
+		// bail ealry if no sub fields
+		if( empty($field['sub_fields']) ) return null;
+		
+		// modify names
+		$field = $this->prepare_field_for_db( $field );
+		
+		// loop
+		foreach( $field['sub_fields'] as $sub_field ) {
+			acf_delete_value( $post_id, $sub_field );
+		}
+	}
+	
+	/**
+	*  delete_field
+	*
+	*  Called when deleting a field of this type.
+	*
+	*  @date	8/11/18
+	*  @since	5.8.0
+	*
+	*  @param	arra $field The field settings.
+	*  @return	void
+	*/
+	function delete_field( $field ) {
+		
+		// loop over sub fields and delete them
+		if( $field['sub_fields'] ) {
+			foreach( $field['sub_fields'] as $sub_field ) {
+				acf_delete_field( $sub_field['ID'] );
+			}
+		}
+	}
+	
 }
 
 

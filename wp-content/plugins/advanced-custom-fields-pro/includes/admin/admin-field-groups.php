@@ -39,9 +39,26 @@ class acf_admin_field_groups {
 		add_action('trashed_post',			array($this, 'trashed_post'));
 		add_action('untrashed_post',		array($this, 'untrashed_post'));
 		add_action('deleted_post',			array($this, 'deleted_post'));
-		
+		add_action('load-edit.php',			array($this, 'maybe_redirect_edit'));
 	}
 	
+	/**
+	*  maybe_redirect_edit
+	*
+	*  Redirects the user from the old ACF4 edit page to the new ACF5 edit page
+	*
+	*  @date	17/9/18
+	*  @since	5.7.6
+	*
+	*  @param	void
+	*  @return	void
+	*/
+	function maybe_redirect_edit() {
+		if( acf_maybe_get_GET('post_type') == 'acf' ) {
+			wp_redirect( admin_url($this->url) );
+			exit;
+		}
+	}
 	
 	/*
 	*  current_screen
@@ -60,9 +77,7 @@ class acf_admin_field_groups {
 		
 		// validate screen
 		if( !acf_is_screen('edit-acf-field-group') ) {
-		
 			return;
-			
 		}
 		
 
@@ -130,23 +145,25 @@ class acf_admin_field_groups {
 	
 	function check_duplicate() {
 		
-		// message
+		// Display notice
 		if( $ids = acf_maybe_get_GET('acfduplicatecomplete') ) {
 			
 			// explode
 			$ids = explode(',', $ids);
 			$total = count($ids);
 			
-			if( $total == 1 ) {
-				
-				acf_add_admin_notice( sprintf(__('Field group duplicated. %s', 'acf'), '<a href="' . get_edit_post_link($ids[0]) . '">' . get_the_title($ids[0]) . '</a>') );
-				
-			} else {
-				
-				acf_add_admin_notice( sprintf(_n( '%s field group duplicated.', '%s field groups duplicated.', $total, 'acf' ), $total) );
-				
-			}
+			// Generate text.
+			$text = sprintf( _n( 'Field group duplicated.', '%s field groups duplicated.', $total, 'acf' ), $total );
 			
+			// Add links to text.
+			$links = array();
+			foreach( $ids as $id ) {
+				$links[] = '<a href="' . get_edit_post_link( $id ) . '">' . get_the_title( $id ) . '</a>';
+			}
+			$text .= ' ' . implode( ', ', $links );
+			
+			// Add notice
+			acf_add_admin_notice( $text, 'success' );
 		}
 		
 		
@@ -215,23 +232,25 @@ class acf_admin_field_groups {
 	
 	function check_sync() {
 		
-		// message
+		// Display notice
 		if( $ids = acf_maybe_get_GET('acfsynccomplete') ) {
 			
 			// explode
 			$ids = explode(',', $ids);
 			$total = count($ids);
 			
-			if( $total == 1 ) {
-				
-				acf_add_admin_notice( sprintf(__('Field group synchronised. %s', 'acf'), '<a href="' . get_edit_post_link($ids[0]) . '">' . get_the_title($ids[0]) . '</a>') );
-				
-			} else {
-				
-				acf_add_admin_notice( sprintf(_n( '%s field group synchronised.', '%s field groups synchronised.', $total, 'acf' ), $total) );
-				
-			}
+			// Generate text.
+			$text = sprintf( _n( 'Field group synchronised.', '%s field groups synchronised.', $total, 'acf' ), $total );
 			
+			// Add links to text.
+			$links = array();
+			foreach( $ids as $id ) {
+				$links[] = '<a href="' . get_edit_post_link( $id ) . '">' . get_the_title( $id ) . '</a>';
+			}
+			$text .= ' ' . implode( ', ', $links );
+			
+			// Add notice
+			acf_add_admin_notice( $text, 'success' );
 		}
 		
 		
@@ -251,22 +270,22 @@ class acf_admin_field_groups {
 			$modified = acf_maybe_get($group, 'modified', 0);
 			$private = acf_maybe_get($group, 'private', false);
 			
+			// Ignore if is private.
+			if( $private ) {
+				continue;
 			
-			// ignore DB / PHP / private field groups
-			if( $local !== 'json' || $private ) {
-				
-				// do nothing
-				
+			// Ignore not local "json".
+			} elseif( $local !== 'json' ) {
+				continue;
+			
+			// Append to sync if not yet in database.	
 			} elseif( !$group['ID'] ) {
-				
 				$this->sync[ $group['key'] ] = $group;
-				
+			
+			// Append to sync if "json" modified time is newer than database.
 			} elseif( $modified && $modified > get_post_modified_time('U', true, $group['ID'], true) ) {
-				
 				$this->sync[ $group['key'] ]  = $group;
-				
 			}
-						
 		}
 		
 		
@@ -315,21 +334,22 @@ class acf_admin_field_groups {
 			// loop
 			foreach( $sync_keys as $key ) {
 				
-				// append fields
-				if( acf_have_local_fields($key) ) {
-					
-					$this->sync[ $key ]['fields'] = acf_get_local_fields( $key );
-					
+				// Bail early if not found.
+				if( !isset($this->sync[ $key ]) ) {
+					continue;
 				}
 				
+				// Get field group.
+				$field_group = $this->sync[ $key ];
 				
-				// import
-				$field_group = acf_import_field_group( $this->sync[ $key ] );
+				// Append fields.
+				$field_group['fields'] = acf_get_fields( $field_group );
+				
+				// Import field group.
+				$field_group = acf_import_field_group( $field_group );
 									
-				
-				// append
+				// Append imported ID.
 				$new_ids[] = $field_group['ID'];
-				
 			}
 			
 			
@@ -595,7 +615,6 @@ class acf_admin_field_groups {
 		
 		// vars
 		$url_home = 'https://www.advancedcustomfields.com';
-		$url_support = 'https://support.advancedcustomfields.com';
 		$icon = '<i aria-hidden="true" class="dashicons dashicons-external"></i>';
 		
 ?>
@@ -604,7 +623,7 @@ class acf_admin_field_groups {
 	<div class="acf-box">
 		<div class="inner">
 			<h2><?php echo acf_get_setting('name'); ?></h2>
-			<p><?php _e('Customise WordPress with powerful, professional and intuitive fields.','acf'); ?></p>
+			<p><?php _e('Customize WordPress with powerful, professional and intuitive fields.','acf'); ?></p>
 			
 			<h3><?php _e("Changelog",'acf'); ?></h3>
 			<p><?php 
@@ -618,7 +637,7 @@ class acf_admin_field_groups {
 			<ul>
 				<li><a href="<?php echo esc_url( $url_home ); ?>" target="_blank"><?php echo $icon; ?> <?php _e("Website",'acf'); ?></a></li>
 				<li><a href="<?php echo esc_url( $url_home . '/resources/' ); ?>" target="_blank"><?php echo $icon; ?> <?php _e("Documentation",'acf'); ?></a></li>
-				<li><a href="<?php echo esc_url( $url_support ); ?>" target="_blank"><?php echo $icon; ?> <?php _e("Support",'acf'); ?></a></li>
+				<li><a href="<?php echo esc_url( $url_home . '/support/' ); ?>" target="_blank"><?php echo $icon; ?> <?php _e("Support",'acf'); ?></a></li>
 				<?php if( !acf_get_setting('pro') ): ?>
 				<li><a href="<?php echo esc_url( $url_home . '/pro/' ); ?>" target="_blank"><?php echo $icon; ?> <?php _e("Pro",'acf'); ?></a></li>
 				<?php endif; ?>
