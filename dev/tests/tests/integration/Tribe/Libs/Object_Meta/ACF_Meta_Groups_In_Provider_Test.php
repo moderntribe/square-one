@@ -1,6 +1,6 @@
 <?php
 
-use Tribe\Tests\SquareOneTestCase;
+use Tribe\Tests\Test_Case;
 use Tribe\Project\Service_Providers\Object_Meta_Provider;
 use Tribe\Libs\ACF\ACF_Meta_Group;
 
@@ -12,7 +12,7 @@ use Tribe\Libs\ACF\ACF_Meta_Group;
  *
  * @see \Tribe\Project\Service_Providers\Object_Meta_Provider_Test
  */
-class ACF_Meta_Groups_In_Provider_Test extends SquareOneTestCase {
+class ACF_Meta_Groups_In_Provider_Test extends Test_Case {
 
 	protected $acf_meta_groups;
 

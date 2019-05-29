@@ -1,6 +1,6 @@
 <?php
 
-use Tribe\Tests\SquareOneTestCase;
+use Tribe\Tests\Test_Case;
 use Tribe\Project\Service_Providers\Object_Meta_Provider;
 
 /**
@@ -8,7 +8,7 @@ use Tribe\Project\Service_Providers\Object_Meta_Provider;
  *
  * Tests for the ACF_Meta_Group factory, given its complexity.
  */
-class ACF_Meta_Group_Factory_Test extends SquareOneTestCase {
+class ACF_Meta_Group_Factory_Test extends Test_Case {
 
 	public function setUp() {
 		parent::setUp();

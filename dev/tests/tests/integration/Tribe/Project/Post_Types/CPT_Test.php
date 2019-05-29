@@ -1,11 +1,11 @@
 <?php
 
-use Tribe\Tests\SquareOneTestCase;
+use Tribe\Tests\Test_Case;
 use Tribe\Libs\Object_Meta\Meta_Map;
 use Tribe\Libs\Post_Type\Post_Object;
 use Tribe\Project\Service_Providers\Object_Meta_Provider;
 
-class CPT_Test extends SquareOneTestCase {
+class CPT_Test extends Test_Case {
 
 	public function setUp() {
 		parent::setUp();

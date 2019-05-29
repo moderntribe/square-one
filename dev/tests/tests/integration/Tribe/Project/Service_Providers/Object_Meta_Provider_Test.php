@@ -2,7 +2,7 @@
 
 namespace Tribe\Project\Service_Providers;
 
-use Tribe\Tests\SquareOneTestCase;
+use Tribe\Tests\Test_Case;
 use Tribe\Libs\Object_Meta\Meta_Group;
 
 /**
@@ -15,7 +15,7 @@ use Tribe\Libs\Object_Meta\Meta_Group;
  *
  * @package Tribe\Project\Service_Providers
  */
-class Object_Meta_Provider_Test extends SquareOneTestCase {
+class Object_Meta_Provider_Test extends Test_Case {
 	/** @test */
 	public function should_be_instantiable() {
 		$this->assertInstanceOf( Object_Meta_Provider::class, $this->make_instance() );
