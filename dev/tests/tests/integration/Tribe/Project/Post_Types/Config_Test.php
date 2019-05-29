@@ -26,8 +26,7 @@ class Config_Test extends Test_Case {
 	public function should_register_the_post_type() {
 		$exists_before = post_type_exists( Test_CPT::NAME );
 
-		$config = $this->make_instance();
-		$config->register();
+		$this->make_instance()->register();
 
 		$exists_after = post_type_exists( Test_CPT::NAME );
 
@@ -47,8 +46,7 @@ class Config_Test extends Test_Case {
 			return $args;
 		} );
 
-		$config = $this->make_instance();
-		$config->register();
+		$this->make_instance()->register();
 
 		$object = get_post_type_object( Test_CPT::NAME );
 
@@ -69,8 +67,7 @@ class Config_Test extends Test_Case {
 			return $labels;
 		} );
 
-		$config = $this->make_instance();
-		$config->register();
+		$this->make_instance()->register();
 
 		$object = get_post_type_object( Test_CPT::NAME );
 
