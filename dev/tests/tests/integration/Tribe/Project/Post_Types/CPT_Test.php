@@ -10,12 +10,12 @@ class CPT_Test extends Test_Case {
 	public function setUp() {
 		parent::setUp();
 
-		$this->factory()->acf_field      = new \Tribe\Tests\Factories\ACF_Field;
+		$this->factory()->acf_field = new \Tribe\Tests\Factories\ACF_Field;
 
 		try {
 			$this->factory()->acf_meta_group = new \Tribe\Tests\Factories\ACF_Meta_Group();
-		} catch(Exception $e) {
-			$this->markTestSkipped($e->getMessage());
+		} catch ( Exception $e ) {
+			$this->markTestSkipped( $e->getMessage() );
 		}
 	}
 
@@ -29,8 +29,8 @@ class CPT_Test extends Test_Case {
 	 *
 	 * @return Post_Object
 	 */
-	protected function make_post(int $post_id, Meta_Map $meta_map) {
-		return new class($post_id, $meta_map) extends Post_Object {
+	protected function make_post( int $post_id, Meta_Map $meta_map ) {
+		return new class( $post_id, $meta_map ) extends Post_Object {
 			const NAME = 'cpt_test';
 
 			public function __construct( $post_id = 0, Meta_Map $meta = null ) {
@@ -41,34 +41,34 @@ class CPT_Test extends Test_Case {
 
 	/** @test */
 	public function should_set_and_get_a_meta_field() {
-		$post_id = $this->factory()->post->create([
+		$post_id = $this->factory()->post->create( [
 			'post_type' => 'cpt_test',
-		]);
+		] );
 
 		$meta_group = $this->factory()->acf_meta_group
-			->with_name('cpt_test_meta')
-			->with_location([
-				'post_types' => [ 'cpt_test' ]
-			])
-			->with_fields([
-				$this->factory()->acf_field->with_name('cpt_field')->create(),
-			])
+			->with_name( 'cpt_test_meta' )
+			->with_location( [
+				'post_types' => [ 'cpt_test' ],
+			] )
+			->with_fields( [
+				$this->factory()->acf_field->with_name( 'cpt_field' )->create(),
+			] )
 			->create();
 
-		$repository = new Meta_Repository([
+		$repository = new Meta_Repository( [
 			$meta_group,
-		]);
-		$meta_map = $repository->get('cpt_test');
+		] );
+		$meta_map   = $repository->get( 'cpt_test' );
 
-		$post_object = $this->make_post($post_id, $meta_map);
+		$post_object = $this->make_post( $post_id, $meta_map );
 
 		/**
 		 * In essence, the assertion happens here: We update the field directly in ACF,
 		 * then we request our Meta system to retrieve the value for that key.
 		 */
-		update_field('cpt_field', 'foo_value', $post_id);
-		$get_meta_value = $post_object->get_meta('cpt_field');
+		update_field( 'cpt_field', 'foo_value', $post_id );
+		$get_meta_value = $post_object->get_meta( 'cpt_field' );
 
-		$this->assertEquals('foo_value', $get_meta_value);
+		$this->assertEquals( 'foo_value', $get_meta_value );
 	}
 }
