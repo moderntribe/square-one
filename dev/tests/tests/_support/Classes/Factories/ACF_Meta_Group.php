@@ -134,7 +134,7 @@ class ACF_Meta_Group extends \Tribe\Libs\ACF\ACF_Meta_Group {
 	protected function get_group_config() {
 		if ( empty( $this->name ) ) {
 			throw new \RuntimeException( sprintf(
-				'%s requires a name. Assign one with "with_fields(\'string\')"',
+				'%s requires a name. Assign one with "with_name(\'string\')"',
 				__CLASS__
 			) );
 		}
