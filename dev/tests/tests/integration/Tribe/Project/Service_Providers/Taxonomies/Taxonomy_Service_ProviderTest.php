@@ -2,9 +2,9 @@
 
 namespace Tribe\Project\Service_Providers\Taxonomies;
 
-use Tribe\Tests\SquareOneTestCase;
+use Tribe\Tests\Test_Case;
 
-class Taxonomy_Service_ProviderTest extends SquareOneTestCase {
+class Taxonomy_Service_ProviderTest extends Test_Case {
 
 	public function setUp() {
 		// before

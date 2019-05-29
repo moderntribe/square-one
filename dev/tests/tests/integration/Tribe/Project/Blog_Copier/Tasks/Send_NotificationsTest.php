@@ -4,9 +4,9 @@ namespace Tribe\Project\Blog_Copier\Tasks;
 
 use Tribe\Project\Blog_Copier\Copy_Configuration;
 use Tribe\Project\Blog_Copier\Copy_Manager;
-use Tribe\Tests\SquareOneTestCase;
+use Tribe\Tests\Test_Case;
 
-class Send_NotificationsTest extends SquareOneTestCase {
+class Send_NotificationsTest extends Test_Case {
 
 	public function test_sends_emails() {
 		/** @var \WP_User $user */

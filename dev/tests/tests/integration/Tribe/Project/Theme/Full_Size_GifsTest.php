@@ -5,13 +5,13 @@ namespace Tribe\Project\Theme;
 use Tribe\Project\Theme\Full_Size_Gif;
 use Tribe\Project\Theme\Image;
 
-use Tribe\Tests\SquareOneTestCase;
+use Tribe\Tests\Test_Case;
 
 /**
  * Class Full_Size_GifsTest
  * @package Tribe\Project\Theme
  */
-class Full_Size_GifsTest extends SquareOneTestCase {
+class Full_Size_GifsTest extends Test_Case {
 
 	public function test_full_size_only_gif_src() {
 		$full_size_gif = new Full_Size_Gif();

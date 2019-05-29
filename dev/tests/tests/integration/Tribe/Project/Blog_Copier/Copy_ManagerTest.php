@@ -5,9 +5,9 @@ namespace Tribe\Project\Blog_Copier;
 use Tribe\Project\Blog_Copier\Tasks\Create_Blog;
 use Tribe\Project\Queues\Backends\Mock_Backend;
 use Tribe\Project\Queues\Contracts\Queue;
-use Tribe\Tests\SquareOneTestCase;
+use Tribe\Tests\Test_Case;
 
-class Copy_ManagerTest extends SquareOneTestCase {
+class Copy_ManagerTest extends Test_Case {
 	public function test_creates_state_post() {
 		/** @var \WP_User $user */
 		$user = $this->factory()->user->create_and_get();

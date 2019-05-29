@@ -3,9 +3,9 @@
 namespace Tribe\Project\Blog_Copier\Tasks;
 
 use Tribe\Project\Blog_Copier\Copy_Manager;
-use Tribe\Tests\SquareOneTestCase;
+use Tribe\Tests\Test_Case;
 
-class Mark_CompleteTest extends SquareOneTestCase {
+class Mark_CompleteTest extends Test_Case {
 
 	public function test_publishes_post() {
 		$post_id = $this->factory()->post->create( [
