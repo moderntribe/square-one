@@ -26,20 +26,6 @@ class ACF_Meta_Group_Factory_Test extends Test_Case {
 		parent::tearDown();
 	}
 
-	/**
-	 * Helper function to return an instance of Object_Meta_Provider that
-	 * does not register anything automatically.
-	 *
-	 * @return Object_Meta_Provider
-	 */
-	protected function get_provider() {
-		return new class extends Object_Meta_Provider {
-			public function register( \Pimple\Container $container ) {
-				$this->repo( $container );
-			}
-		};
-	}
-
 	/** @test */
 	public function should_register_group() {
 		$group_before_insertion = acf_get_field_group( 'group_foo' );
