@@ -50,9 +50,9 @@ class CPT_Test extends Test_Case {
 			->with_location( [
 				'post_types' => [ 'cpt_test' ],
 			] )
-			->with_fields( [
-				$this->factory()->acf_field->with_name( 'cpt_field' )->create(),
-			] )
+			->with_fields(
+				$this->factory()->acf_field->with_name( 'cpt_field' )->create()
+			)
 			->create();
 
 		$repository = new Meta_Repository( [

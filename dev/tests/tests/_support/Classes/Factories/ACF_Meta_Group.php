@@ -118,11 +118,11 @@ class ACF_Meta_Group extends \Tribe\Libs\ACF\ACF_Meta_Group {
 	}
 
 	/**
-	 * @param array $fields
+	 * @param Field ...$fields
 	 *
 	 * @return $this
 	 */
-	public function with_fields( array $fields ) {
+	public function with_fields( Field ...$fields ) {
 		$this->fields = $fields;
 
 		return $this;
@@ -143,14 +143,6 @@ class ACF_Meta_Group extends \Tribe\Libs\ACF\ACF_Meta_Group {
 
 		/** @var Field $field */
 		foreach ( $this->fields as $field ) {
-			if ( ! $field instanceof Field ) {
-				throw new \RuntimeException( sprintf(
-					'When assigning fields to %s with "with_fields()", make sure you pass an array of instances of %s. There\'s a factory for it: %s"',
-					__CLASS__,
-					Field::class,
-					ACF_Field::class
-				) );
-			}
 			$group->add_field( $field );
 		}
 

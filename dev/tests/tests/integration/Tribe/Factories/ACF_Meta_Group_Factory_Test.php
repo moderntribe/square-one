@@ -58,16 +58,13 @@ class ACF_Meta_Group_Factory_Test extends Test_Case {
 	public function should_register_group_with_fields() {
 		$group_before_insertion = acf_get_field_group( 'group_foo' );
 
-		// Create a random number of fields
-		$number_of_fields = rand( 0, 25 );
-		$fields           = array_map( function () {
-			return $this->factory()->acf_field->create();
-		}, array_fill( 0, $number_of_fields, null ) );
-
-		// Assign them to a group
 		$this->factory()->acf_meta_group
 			->with_name( 'foo' )
-			->with_fields( $fields )
+			->with_fields(
+				$this->factory()->acf_field->create(),
+				$this->factory()->acf_field->create(),
+				$this->factory()->acf_field->create()
+			)
 			->create();
 
 		$group  = acf_get_field_group( 'group_foo' );
@@ -75,7 +72,7 @@ class ACF_Meta_Group_Factory_Test extends Test_Case {
 
 		$this->assertFalse( $group_before_insertion );
 		$this->assertIsArray( $group );
-		$this->assertCount( $number_of_fields, $fields );
+		$this->assertCount( 3, $fields );
 	}
 
 	/** @test */
@@ -83,12 +80,10 @@ class ACF_Meta_Group_Factory_Test extends Test_Case {
 		$group_before_insertion = acf_get_field_group( 'group_foo' );
 
 		// Create a random number of fields
-		$textarea_field = [
-			$this->factory()->acf_field
-				->with_name( 'foo_textarea' )
-				->with_type( 'textarea' )
-				->create(),
-		];
+		$textarea_field = $this->factory()->acf_field
+			->with_name( 'foo_textarea' )
+			->with_type( 'textarea' )
+			->create();
 
 		$this->factory()->acf_meta_group
 			->with_name( 'foo' )
@@ -114,13 +109,13 @@ class ACF_Meta_Group_Factory_Test extends Test_Case {
 
 	/** @test */
 	public function should_throw_if_invalid_field() {
-		$this->expectException( Exception::class );
+		$this->expectException( TypeError::class );
 
 		$this->factory()->acf_meta_group
 			->with_name( 'foo' )
-			->with_fields( [
-				'foo',
-			] )
+			->with_fields(
+				'foo'
+			)
 			->create();
 	}
 
