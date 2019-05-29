@@ -3,7 +3,7 @@
 use Tribe\Tests\Test_Case;
 use Tribe\Libs\Object_Meta\Meta_Map;
 use Tribe\Libs\Post_Type\Post_Object;
-use Tribe\Project\Service_Providers\Object_Meta_Provider;
+use \Tribe\Libs\Post_Meta\Meta_Repository;
 
 class CPT_Test extends Test_Case {
 
@@ -41,8 +41,6 @@ class CPT_Test extends Test_Case {
 
 	/** @test */
 	public function should_set_and_get_a_meta_field() {
-		$container = tribe_project()->container();
-
 		$post_id = $this->factory()->post->create([
 			'post_type' => 'cpt_test',
 		]);
@@ -57,8 +55,10 @@ class CPT_Test extends Test_Case {
 			])
 			->create();
 
-		$container[Object_Meta_Provider::REPO]->add_group($meta_group);
-		$meta_map = $container[Object_Meta_Provider::REPO]->get('cpt_test');
+		$repository = new Meta_Repository([
+			$meta_group,
+		]);
+		$meta_map = $repository->get('cpt_test');
 
 		$post_object = $this->make_post($post_id, $meta_map);
 
