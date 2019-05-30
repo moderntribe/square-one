@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## [2019.05]
+* Changed: Added autoprefixer support for CSS Grid 
 * Changed: Updated WordPress core to 5.1.1
 * Changed: Updated Classic Editor Plugins to latest Versions
 * Changed: Updated ACF to 5.7.13
