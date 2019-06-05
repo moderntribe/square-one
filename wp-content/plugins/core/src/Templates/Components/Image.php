@@ -8,7 +8,7 @@ class Image extends Component {
 	const TEMPLATE_NAME = 'components/image.twig';
 
 	const IMG_ID             = 'img_id';
-	const IMG_PATH           = 'img_path';
+	const IMG_URL            = 'img_url';
 	const AS_BG              = 'as_bg';
 	const AUTO_SHIM          = 'auto_shim';
 	const AUTO_SIZES_ATTR    = 'auto_sizes_attr';
@@ -48,9 +48,9 @@ class Image extends Component {
 	protected function parse_options( array $options ): array {
 		$defaults = [
 			static::IMG_ID             => 0,
-			// the Image ID - takes precedence over IMG_PATH
-			static::IMG_PATH           => '',
-			// the Image Path - use as an alternative to IMG_ID
+			// the Image ID - takes precedence over IMG_URL
+			static::IMG_URL            => '',
+			// the Image URL - use as an image URL as a fallback if no IMG_ID exists
 			static::AS_BG              => false,
 			// us this as background on wrapper?
 			static::AUTO_SHIM          => true,
@@ -135,7 +135,7 @@ class Image extends Component {
 
 		return [
 			'attributes' => $this->get_attributes(),
-			'class'      => $this->options[ static::USE_LAZYLOAD ] && ! $this->options[ static::AS_BG ] && ( ! empty( $this->options[ static::IMG_ID ] ) || ! empty( $this->options[ static::IMG_PATH ] ) ) ? $this->options[ static::IMG_CLASS ] . ' lazyload' : $this->options[ static::IMG_CLASS ],
+			'class'      => $this->options[ static::USE_LAZYLOAD ] && ! $this->options[ static::AS_BG ] && ( ! empty( $this->options[ static::IMG_ID ] ) || ! empty( $this->options[ static::IMG_URL ] ) ) ? $this->options[ static::IMG_CLASS ] . ' lazyload' : $this->options[ static::IMG_CLASS ],
 		];
 	}
 
@@ -173,8 +173,8 @@ class Image extends Component {
 	 */
 	private function get_attributes(): string {
 
-		$src = '';
-		$src_width = '';
+		$src        = '';
+		$src_width  = '';
 		$src_height = '';
 		// we'll almost always set src, except if for some reason they wanted to only use srcset
 		$attrs = [];
@@ -184,8 +184,8 @@ class Image extends Component {
 				$src_width  = $src[ 1 ];
 				$src_height = $src[ 2 ];
 				$src        = $src[ 0 ];
-			} else { // using img_path
-				$src = $this->options[ static::IMG_PATH ];
+			} else { // using IMG_URL
+				$src = $this->options[ static::IMG_URL ];
 			}
 		}
 		$attrs[] = ! empty( $this->options[ static::IMG_ATTR ] ) ? trim( $this->options[ static::IMG_ATTR ] ) : '';

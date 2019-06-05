@@ -13,7 +13,7 @@
 function the_tribe_image( $image_id = 0, $options = [] ) {
 
 	// There is no image ID or image path
-	if ( empty( $image_id ) && empty( $options[ 'img_path' ] ) ) {
+	if ( empty( $image_id ) && empty( $options[ 'img_url' ] ) ) {
 		return '';
 	}
 

@@ -22,7 +22,7 @@ class Image {
 
 	private function parse_args( $options ) {
 		$defaults = [
-			'img_path'          => '', // pass in an image path to be used as a fallback
+			'img_url'           => '', // pass in an image URL to be used as a fallback
 			'as_bg'             => false,             // us this as background on wrapper?
 			'auto_shim'         => true,              // if true, shim dir as set will be used, src_size will be used as filename, with png as filetype
 			'auto_sizes_attr'   => false,             // if lazyloading the lib can auto create sizes attribute.
@@ -69,13 +69,13 @@ class Image {
 			$tag = $this->options[ 'wrapper_tag' ];
 		}
 		$img_attributes = $this->get_attributes();
-		$img_class      = $this->options[ 'use_lazyload' ] && ! $this->options[ 'as_bg' ] && ( ! empty( $this->image_id ) || ! empty( $this->options[ 'img_path' ] ) ) ? $this->options[ 'img_class' ] . ' lazyload' : $this->options[ 'img_class' ];
+		$img_class      = $this->options[ 'use_lazyload' ] && ! $this->options[ 'as_bg' ] && ( ! empty( $this->image_id ) || ! empty( $this->options[ 'img_url' ] ) ) ? $this->options[ 'img_class' ] . ' lazyload' : $this->options[ 'img_class' ];
 
 		// start the html
 
 		// open wrapper
 		if ( $this->options[ 'use_wrapper' ] || $this->options[ 'as_bg' ] ) {
-			$wrapper_class = $this->options[ 'use_lazyload' ] && $this->options[ 'as_bg' ] && ( ! empty( $this->image_id ) || ! empty( $this->options[ 'img_path' ] ) ) ? $this->options[ 'wrapper_class' ] . ' lazyload' : $this->options[ 'wrapper_class' ];
+			$wrapper_class = $this->options[ 'use_lazyload' ] && $this->options[ 'as_bg' ] && ( ! empty( $this->image_id ) || ! empty( $this->options[ 'img_url' ] ) ) ? $this->options[ 'wrapper_class' ] . ' lazyload' : $this->options[ 'wrapper_class' ];
 			$html          .= '<' . $tag;
 			$html          .= $this->options[ 'as_bg' ] ? $img_attributes . ' ' . $this->options[ 'wrapper_attr' ] : ' ' . $this->options[ 'wrapper_attr' ];
 			$html          .= sprintf( ' class="%s">', $wrapper_class );
@@ -121,7 +121,7 @@ class Image {
 				$src_height = $src[ 2 ];
 				$src        = $src[ 0 ];
 			} else { // using image_path
-				$src = $this->options[ 'img_path' ];
+				$src = $this->options[ 'img_url' ];
 			}
 		}
 		$attrs[] = ! empty( $this->options[ 'img_attr' ] ) ? trim( $this->options[ 'img_attr' ] ) : '';
