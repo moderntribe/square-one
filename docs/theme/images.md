@@ -11,7 +11,7 @@ This is the main template tag we want to use for outputting an image. It offers 
 Lazyloading, srcset, background images, appending arbitrary html and more are available. This is the full set of arguments you can modify, and exhibits the defaults:
 ```php
 'img_path'          => '',                // pass in an image path to be used as a fallback
-'as_bg'             => false,             // us this as background on wrapper?
+'as_bg'             => false,             // use this as background on wrapper?
 'auto_shim'         => true,              // if true, shim dir as set will be used, src_size will be used as filename, with png as filetype
 'auto_sizes_attr'   => false,             // if lazyloading the lib can auto create sizes attribute.
 'echo'              => true,              // whether to echo or return the html
