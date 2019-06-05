@@ -3428,12 +3428,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
-                "reference": "adae9dbf369ce3d091f380e171e662de0bdb3bd9"
+                "reference": "687ecfd9f683af1d502fd73632fa54eadafe5790"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/contracts/zipball/adae9dbf369ce3d091f380e171e662de0bdb3bd9",
-                "reference": "adae9dbf369ce3d091f380e171e662de0bdb3bd9",
+                "url": "https://api.github.com/repos/illuminate/contracts/zipball/687ecfd9f683af1d502fd73632fa54eadafe5790",
+                "reference": "687ecfd9f683af1d502fd73632fa54eadafe5790",
                 "shasum": ""
             },
             "require": {
@@ -3464,7 +3464,7 @@
             ],
             "description": "The Illuminate Contracts package.",
             "homepage": "https://laravel.com",
-            "time": "2019-06-04T22:03:37+00:00"
+            "time": "2019-06-05T13:05:04+00:00"
         },
         {
             "name": "illuminate/support",
@@ -3472,12 +3472,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "fb11d18cd05b1f89f9468bf8a59c5c3004f14b27"
+                "reference": "3c44f471e66c62dd3fdd5d6f17c0316d6a0ad658"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/fb11d18cd05b1f89f9468bf8a59c5c3004f14b27",
-                "reference": "fb11d18cd05b1f89f9468bf8a59c5c3004f14b27",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/3c44f471e66c62dd3fdd5d6f17c0316d6a0ad658",
+                "reference": "3c44f471e66c62dd3fdd5d6f17c0316d6a0ad658",
                 "shasum": ""
             },
             "require": {
@@ -3525,7 +3525,7 @@
             ],
             "description": "The Illuminate Support package.",
             "homepage": "https://laravel.com",
-            "time": "2019-06-04T22:03:37+00:00"
+            "time": "2019-06-05T13:05:04+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
@@ -5499,27 +5499,27 @@
         },
         {
             "name": "symfony/browser-kit",
-            "version": "dev-master",
+            "version": "4.4.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/browser-kit.git",
-                "reference": "20bc4bba418caa070a131710d3268fa839c9b24e"
+                "reference": "8aa343a825b3fe84af58bbbfd52cc09bdba2fe2a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/browser-kit/zipball/20bc4bba418caa070a131710d3268fa839c9b24e",
-                "reference": "20bc4bba418caa070a131710d3268fa839c9b24e",
+                "url": "https://api.github.com/repos/symfony/browser-kit/zipball/8aa343a825b3fe84af58bbbfd52cc09bdba2fe2a",
+                "reference": "8aa343a825b3fe84af58bbbfd52cc09bdba2fe2a",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2.9",
-                "symfony/dom-crawler": "^4.4|^5.0"
+                "php": "^7.1.3",
+                "symfony/dom-crawler": "^3.4|^4.0|^5.0"
             },
             "require-dev": {
-                "symfony/css-selector": "^4.4|^5.0",
-                "symfony/http-client": "^4.4|^5.0",
-                "symfony/mime": "^4.4|^5.0",
-                "symfony/process": "^4.4|^5.0"
+                "symfony/css-selector": "^3.4|^4.0|^5.0",
+                "symfony/http-client": "^4.3|^5.0",
+                "symfony/mime": "^4.3|^5.0",
+                "symfony/process": "^3.4|^4.0|^5.0"
             },
             "suggest": {
                 "symfony/process": ""
@@ -5527,7 +5527,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "5.0-dev"
+                    "dev-master": "4.4-dev"
                 }
             },
             "autoload": {
@@ -5554,7 +5554,7 @@
             ],
             "description": "Symfony BrowserKit Component",
             "homepage": "https://symfony.com",
-            "time": "2019-05-30T16:12:02+00:00"
+            "time": "2019-05-30T16:10:19+00:00"
         },
         {
             "name": "symfony/config",
@@ -5626,12 +5626,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "6eec58df09322477a010d93cbfe66f936aeed00c"
+                "reference": "c4d2f3529755ffc0be9fb823583b28d8744eeb3d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/6eec58df09322477a010d93cbfe66f936aeed00c",
-                "reference": "6eec58df09322477a010d93cbfe66f936aeed00c",
+                "url": "https://api.github.com/repos/symfony/console/zipball/c4d2f3529755ffc0be9fb823583b28d8744eeb3d",
+                "reference": "c4d2f3529755ffc0be9fb823583b28d8744eeb3d",
                 "shasum": ""
             },
             "require": {
@@ -5690,29 +5690,29 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2019-06-04T18:52:06+00:00"
+            "time": "2019-06-05T11:33:52+00:00"
         },
         {
             "name": "symfony/css-selector",
-            "version": "dev-master",
+            "version": "4.4.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/css-selector.git",
-                "reference": "7afcfccdbe996ea5109471c6f7be68525360d616"
+                "reference": "9ed158c52af88c6befa7dd00c8e6dfc273a52ab4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/css-selector/zipball/7afcfccdbe996ea5109471c6f7be68525360d616",
-                "reference": "7afcfccdbe996ea5109471c6f7be68525360d616",
+                "url": "https://api.github.com/repos/symfony/css-selector/zipball/9ed158c52af88c6befa7dd00c8e6dfc273a52ab4",
+                "reference": "9ed158c52af88c6befa7dd00c8e6dfc273a52ab4",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2.9"
+                "php": "^7.1.3"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "5.0-dev"
+                    "dev-master": "4.4-dev"
                 }
             },
             "autoload": {
@@ -5743,7 +5743,7 @@
             ],
             "description": "Symfony CssSelector Component",
             "homepage": "https://symfony.com",
-            "time": "2019-05-28T16:49:20+00:00"
+            "time": "2019-05-09T07:23:25+00:00"
         },
         {
             "name": "symfony/debug",
@@ -5874,20 +5874,20 @@
         },
         {
             "name": "symfony/dom-crawler",
-            "version": "dev-master",
+            "version": "4.4.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dom-crawler.git",
-                "reference": "75f4cd291607dc35a5425e157c632274237121e7"
+                "reference": "2a98f2653e13221c15678d1ffaa516d7ce034c42"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/75f4cd291607dc35a5425e157c632274237121e7",
-                "reference": "75f4cd291607dc35a5425e157c632274237121e7",
+                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/2a98f2653e13221c15678d1ffaa516d7ce034c42",
+                "reference": "2a98f2653e13221c15678d1ffaa516d7ce034c42",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2.9",
+                "php": "^7.1.3",
                 "symfony/polyfill-ctype": "~1.8",
                 "symfony/polyfill-mbstring": "~1.0"
             },
@@ -5896,7 +5896,7 @@
             },
             "require-dev": {
                 "masterminds/html5": "^2.6",
-                "symfony/css-selector": "^4.4|^5.0"
+                "symfony/css-selector": "^3.4|^4.0|^5.0"
             },
             "suggest": {
                 "symfony/css-selector": ""
@@ -5904,7 +5904,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "5.0-dev"
+                    "dev-master": "4.4-dev"
                 }
             },
             "autoload": {
@@ -5931,7 +5931,7 @@
             ],
             "description": "Symfony DomCrawler Component",
             "homepage": "https://symfony.com",
-            "time": "2019-05-31T18:58:54+00:00"
+            "time": "2019-05-31T18:55:48+00:00"
         },
         {
             "name": "symfony/event-dispatcher",
@@ -6150,12 +6150,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
-                "reference": "74053bebda5a91067a0812cc5b78f9e570df31e8"
+                "reference": "65af9c4082cac742db72c18d1c0c3368df183fc8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation/zipball/74053bebda5a91067a0812cc5b78f9e570df31e8",
-                "reference": "74053bebda5a91067a0812cc5b78f9e570df31e8",
+                "url": "https://api.github.com/repos/symfony/translation/zipball/65af9c4082cac742db72c18d1c0c3368df183fc8",
+                "reference": "65af9c4082cac742db72c18d1c0c3368df183fc8",
                 "shasum": ""
             },
             "require": {
@@ -6212,7 +6212,7 @@
             ],
             "description": "Symfony Translation Component",
             "homepage": "https://symfony.com",
-            "time": "2019-06-04T18:52:06+00:00"
+            "time": "2019-06-05T11:33:52+00:00"
         },
         {
             "name": "symfony/yaml",

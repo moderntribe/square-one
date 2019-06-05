@@ -289,6 +289,11 @@ class Image extends Component {
 	private function get_srcset_attribute(): string {
 
 		$attribute = [];
+
+		if ( $this->options[ static::IMG_ID ] === 0 ) {
+			return '';
+		}
+
 		foreach ( $this->options[ static::SRCSET_SIZES ] as $size ) {
 			$src = wp_get_attachment_image_src( $this->options[ static::IMG_ID ], $size );
 			// Don't add nonexistent intermediate sizes to the src_set. It ends up being the full-size URL.

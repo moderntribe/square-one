@@ -10,14 +10,14 @@
  *
  * @return string
  */
-function the_tribe_image( $image_id = 0, $image_path = '', $options = [] ) {
+function the_tribe_image( $image_id = 0, $options = [] ) {
 
 	// There is no image ID or image path
-	if ( empty( $image_id ) && empty( $image_path ) ) {
+	if ( empty( $image_id ) && empty( $options[ 'img_path' ] ) ) {
 		return '';
 	}
 
-	$image = new \Tribe\Project\Theme\Image( $image_id, $image_path, $options );
+	$image = new \Tribe\Project\Theme\Image( $image_id, $options );
 	$html  = $image->render();
 	if ( $image->option( 'echo' ) ) {
 		echo $html;
