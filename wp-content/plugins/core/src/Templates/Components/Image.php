@@ -127,6 +127,12 @@ class Image extends Component {
 		return $data;
 	}
 
+	protected function should_lazy_load(): bool {
+		$has_image_id_or_path = ( ! empty( $this->options[ static::IMG_ID ] ) || ! empty( $this->options[ static::IMG_URL ] ) );
+
+		return $this->options[ static::USE_LAZYLOAD ] && ! $this->options[ static::AS_BG ] && $has_image_id_or_path;
+	}
+
 	protected function get_image(): array {
 
 		if ( $this->options[ static::AS_BG ] ) {
@@ -135,7 +141,7 @@ class Image extends Component {
 
 		return [
 			'attributes' => $this->get_attributes(),
-			'class'      => $this->options[ static::USE_LAZYLOAD ] && ! $this->options[ static::AS_BG ] && ( ! empty( $this->options[ static::IMG_ID ] ) || ! empty( $this->options[ static::IMG_URL ] ) ) ? $this->options[ static::IMG_CLASS ] . ' lazyload' : $this->options[ static::IMG_CLASS ],
+			'class'      => $this->should_lazy_load() ? $this->options[ static::IMG_CLASS ] . ' lazyload' : $this->options[ static::IMG_CLASS ],
 		];
 	}
 
@@ -148,7 +154,7 @@ class Image extends Component {
 		return [
 			'tag'        => empty( $this->options[ static::WRAPPER_TAG ] ) ? ( $this->options[ static::AS_BG ] ? 'div' : 'figure' ) : $this->options[ static::WRAPPER_TAG ],
 			'attributes' => $this->options[ static::AS_BG ] ? $this->get_attributes() . ' ' . $this->options[ static::WRAPPER_ATTR ] : ' ' . $this->options[ static::WRAPPER_ATTR ],
-			'class'      => $this->options[ static::USE_LAZYLOAD ] && $this->options[ static::AS_BG ] && ! empty( $this->options[ static::IMG_ID ] ) ? $this->options[ static::WRAPPER_CLASS ] . ' lazyload' : $this->options[ static::WRAPPER_CLASS ],
+			'class'      => $this->should_lazy_load() ? $this->options[ static::WRAPPER_CLASS ] . ' lazyload' : $this->options[ static::WRAPPER_CLASS ],
 		];
 	}
 
@@ -172,14 +178,14 @@ class Image extends Component {
 	 * @return string
 	 */
 	private function get_attributes(): string {
-
-		$src        = '';
-		$src_width  = '';
-		$src_height = '';
+		$has_image_id = $this->options[ static::IMG_ID ] !== 0;
+		$src          = '';
+		$src_width    = '';
+		$src_height   = '';
 		// we'll almost always set src, except if for some reason they wanted to only use srcset
 		$attrs = [];
 		if ( $this->options[ static::SRC ] ) {
-			if ( $this->options[ static::IMG_ID ] !== 0 ) { // image_id takes precedence
+			if ( $has_image_id ) { // image_id takes precedence
 				$src        = wp_get_attachment_image_src( $this->options[ static::IMG_ID ], $this->options[ static::SRC_SIZE ] );
 				$src_width  = $src[ 1 ];
 				$src_height = $src[ 2 ];
@@ -194,7 +200,7 @@ class Image extends Component {
 		$alt_text = $this->options[ static::IMG_ALT_TEXT ];
 
 		// Check for a specific alt meta value on the image post, otherwise fallback to the image post's title.
-		if ( empty( $alt_text ) && $this->options[ static::IMG_ID ] !== 0 ) {
+		if ( empty( $alt_text ) && $has_image_id ) {
 			$alt_meta_value = get_post_meta( $this->options[ static::IMG_ID ], '_wp_attachment_image_alt', true );
 			$alt_text       = ! empty( $alt_meta_value ) ? $alt_meta_value : get_the_title( $this->options[ static::IMG_ID ] );
 		}

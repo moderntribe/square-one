@@ -1,5 +1,7 @@
 <?php
 
+use Tribe\Project\Templates\Components\Image;
+
 /**
  * Reusable lazyload image get/print with srcset support. Supports src, srcset,
  * background image or inline, linkify or not, html append. Tied into the js lib
@@ -13,17 +15,22 @@
 function the_tribe_image( $image_id = 0, $options = [] ) {
 
 	// There is no image ID or image path
-	if ( empty( $image_id ) && empty( $options[ 'img_url' ] ) ) {
+	if ( empty( $image_id ) && empty( $options[ Image::IMG_URL ] ) ) {
 		return '';
 	}
 
-	$image = new \Tribe\Project\Theme\Image( $image_id, $options );
-	$html  = $image->render();
-	if ( $image->option( 'echo' ) ) {
-		echo $html;
-		return '';
+	$options[ Image::IMG_ID ] = $image_id;
+
+	if ( ! isset( $options[ Image::ECHO ] ) ) {
+		$options[ Image::ECHO ] = true; // Mimic the image component default
+	}
+
+	$image_obj    = Image::factory( $options );
+	$image_markup = $image_obj->render();
+
+	if ( $options[ Image::ECHO ] ) {
+		echo $image_markup;
 	} else {
-		return $html;
+		return $image_markup;
 	}
-
 }
