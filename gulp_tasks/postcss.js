@@ -20,7 +20,7 @@ const compilePlugins = [
 	require( 'postcss-aspect-ratio' ),
 	require( 'postcss-nested' ),
 	require( 'postcss-inline-svg' ),
-	require( 'postcss-preset-env' )( { stage: 0 } ),
+	require( 'postcss-preset-env' )( { stage: 0, autoprefixer: { grid: true } } ),
 	require( 'postcss-calc' ),
 ];
 

@@ -3,8 +3,10 @@
 All notable changes to this project will be documented in this file.
 
 ## [2019.05]
-* Changed: Updated WordPress core to 5.1.1
 * Changed: Updated Classic Editor Plugins to latest Versions
+* Updated: Swiper to version 4.5.0
+* Changed: Added autoprefixer support for CSS Grid 
+* Changed: Updated WordPress core to 5.1.1
 * Changed: Updated ACF to 5.7.13
 * Updated WordPress to 5.2.1
 * Fixed: Tribe Branding plugin: updated deprecated `login_headertitle` filter to use `login_headertext` instead
