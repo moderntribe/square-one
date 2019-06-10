@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b9c0e5181101b5cee1c7165e9ebe4b20",
+    "content-hash": "36327634b073cd72ec36944241a12263",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -2075,12 +2075,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "988b34b7446f1823adc28a58a96e22a8c92adc9f"
+                "reference": "24a8e38c659cdb6348726a2afbd664b8b3e5c63f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/988b34b7446f1823adc28a58a96e22a8c92adc9f",
-                "reference": "988b34b7446f1823adc28a58a96e22a8c92adc9f",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/24a8e38c659cdb6348726a2afbd664b8b3e5c63f",
+                "reference": "24a8e38c659cdb6348726a2afbd664b8b3e5c63f",
                 "shasum": ""
             },
             "require": {
@@ -2091,7 +2091,7 @@
             "require-dev": {
                 "psr/container": "^1.0",
                 "symfony/debug": "^2.7",
-                "symfony/phpunit-bridge": "^3.4.19|^4.1.8"
+                "symfony/phpunit-bridge": "^3.4.19|^4.1.8|^5.0"
             },
             "type": "library",
             "extra": {
@@ -2134,7 +2134,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2019-05-28T13:00:43+00:00"
+            "time": "2019-05-22T13:59:33+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -2240,15 +2240,15 @@
         },
         {
             "name": "wpackagist-plugin/classic-editor",
-            "version": "1.5",
+            "version": "0.4",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/classic-editor/",
-                "reference": "tags/1.5"
+                "reference": "tags/0.4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/classic-editor.1.5.zip"
+                "url": "https://downloads.wordpress.org/plugin/classic-editor.0.4.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -3428,12 +3428,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
-                "reference": "6d5020d09ee2d91840e3459a32759a0f8dc28268"
+                "reference": "687ecfd9f683af1d502fd73632fa54eadafe5790"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/contracts/zipball/6d5020d09ee2d91840e3459a32759a0f8dc28268",
-                "reference": "6d5020d09ee2d91840e3459a32759a0f8dc28268",
+                "url": "https://api.github.com/repos/illuminate/contracts/zipball/687ecfd9f683af1d502fd73632fa54eadafe5790",
+                "reference": "687ecfd9f683af1d502fd73632fa54eadafe5790",
                 "shasum": ""
             },
             "require": {
@@ -3464,7 +3464,7 @@
             ],
             "description": "The Illuminate Contracts package.",
             "homepage": "https://laravel.com",
-            "time": "2019-05-21T11:47:47+00:00"
+            "time": "2019-06-05T13:05:04+00:00"
         },
         {
             "name": "illuminate/support",
@@ -3472,12 +3472,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "4b45ba8b7c35105489845d32a661da6f4b60f9d7"
+                "reference": "0dff9e5025ecdf3cd808e5de3054105a2b9ea71e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/4b45ba8b7c35105489845d32a661da6f4b60f9d7",
-                "reference": "4b45ba8b7c35105489845d32a661da6f4b60f9d7",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/0dff9e5025ecdf3cd808e5de3054105a2b9ea71e",
+                "reference": "0dff9e5025ecdf3cd808e5de3054105a2b9ea71e",
                 "shasum": ""
             },
             "require": {
@@ -3485,7 +3485,7 @@
                 "ext-json": "*",
                 "ext-mbstring": "*",
                 "illuminate/contracts": "5.9.*",
-                "nesbot/carbon": "^1.26.3 || ^2.0",
+                "nesbot/carbon": "^2.0",
                 "php": "^7.2"
             },
             "conflict": {
@@ -3495,8 +3495,8 @@
                 "illuminate/filesystem": "Required to use the composer class (5.9.*).",
                 "moontoast/math": "Required to use ordered UUIDs (^1.1).",
                 "ramsey/uuid": "Required to use Str::uuid() (^3.7).",
-                "symfony/process": "Required to use the composer class (^4.2).",
-                "symfony/var-dumper": "Required to use the dd function (^4.2).",
+                "symfony/process": "Required to use the composer class (^4.3).",
+                "symfony/var-dumper": "Required to use the dd function (^4.3).",
                 "vlucas/phpdotenv": "Required to use the env helper (^3.3)."
             },
             "type": "library",
@@ -3525,7 +3525,7 @@
             ],
             "description": "The Illuminate Support package.",
             "homepage": "https://laravel.com",
-            "time": "2019-05-28T20:13:54+00:00"
+            "time": "2019-05-21T11:47:47+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
@@ -3984,16 +3984,16 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "2.18.0",
+            "version": "2.19.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "8322b7bd1805be31867c13bf3cdaab948a0dd406"
+                "reference": "5cf102d1476fdf92f1f991bd1a1a0d93c65755ca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/8322b7bd1805be31867c13bf3cdaab948a0dd406",
-                "reference": "8322b7bd1805be31867c13bf3cdaab948a0dd406",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/5cf102d1476fdf92f1f991bd1a1a0d93c65755ca",
+                "reference": "5cf102d1476fdf92f1f991bd1a1a0d93c65755ca",
                 "shasum": ""
             },
             "require": {
@@ -4040,7 +4040,7 @@
                 "datetime",
                 "time"
             ],
-            "time": "2019-05-16T18:44:35+00:00"
+            "time": "2019-06-04T20:07:46+00:00"
         },
         {
             "name": "phar-io/manifest",
@@ -5499,27 +5499,27 @@
         },
         {
             "name": "symfony/browser-kit",
-            "version": "dev-master",
+            "version": "4.4.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/browser-kit.git",
-                "reference": "20bc4bba418caa070a131710d3268fa839c9b24e"
+                "reference": "3af9b876b2394138822e59b1f92b5cb27a015849"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/browser-kit/zipball/20bc4bba418caa070a131710d3268fa839c9b24e",
-                "reference": "20bc4bba418caa070a131710d3268fa839c9b24e",
+                "url": "https://api.github.com/repos/symfony/browser-kit/zipball/3af9b876b2394138822e59b1f92b5cb27a015849",
+                "reference": "3af9b876b2394138822e59b1f92b5cb27a015849",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2.9",
-                "symfony/dom-crawler": "^4.4|^5.0"
+                "php": "^7.1.3",
+                "symfony/dom-crawler": "~3.4|~4.0"
             },
             "require-dev": {
-                "symfony/css-selector": "^4.4|^5.0",
-                "symfony/http-client": "^4.4|^5.0",
-                "symfony/mime": "^4.4|^5.0",
-                "symfony/process": "^4.4|^5.0"
+                "symfony/css-selector": "~3.4|~4.0",
+                "symfony/http-client": "^4.3",
+                "symfony/mime": "^4.3",
+                "symfony/process": "~3.4|~4.0"
             },
             "suggest": {
                 "symfony/process": ""
@@ -5554,7 +5554,7 @@
             ],
             "description": "Symfony BrowserKit Component",
             "homepage": "https://symfony.com",
-            "time": "2019-05-30T16:12:02+00:00"
+            "time": "2019-05-09T07:23:25+00:00"
         },
         {
             "name": "symfony/config",
@@ -5626,12 +5626,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "5de015a09f5285a274d991a85c132d3babe108be"
+                "reference": "8e1d1e406dd31727fa70cd5a99cda202e9d6a5c6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/5de015a09f5285a274d991a85c132d3babe108be",
-                "reference": "5de015a09f5285a274d991a85c132d3babe108be",
+                "url": "https://api.github.com/repos/symfony/console/zipball/8e1d1e406dd31727fa70cd5a99cda202e9d6a5c6",
+                "reference": "8e1d1e406dd31727fa70cd5a99cda202e9d6a5c6",
                 "shasum": ""
             },
             "require": {
@@ -5690,11 +5690,11 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2019-05-30T15:47:52+00:00"
+            "time": "2019-05-09T08:42:51+00:00"
         },
         {
             "name": "symfony/css-selector",
-            "version": "dev-master",
+            "version": "4.4.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/css-selector.git",
@@ -5874,16 +5874,16 @@
         },
         {
             "name": "symfony/dom-crawler",
-            "version": "dev-master",
+            "version": "4.4.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dom-crawler.git",
-                "reference": "ffb5b34feefdd828606bb6cbcb697d2d0fa90f91"
+                "reference": "63e620ee093a4d52effbcee4c0f1506026c53076"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/ffb5b34feefdd828606bb6cbcb697d2d0fa90f91",
-                "reference": "ffb5b34feefdd828606bb6cbcb697d2d0fa90f91",
+                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/63e620ee093a4d52effbcee4c0f1506026c53076",
+                "reference": "63e620ee093a4d52effbcee4c0f1506026c53076",
                 "shasum": ""
             },
             "require": {
@@ -5896,7 +5896,7 @@
             },
             "require-dev": {
                 "masterminds/html5": "^2.6",
-                "symfony/css-selector": "^4.4|^5.0"
+                "symfony/css-selector": "~3.4|~4.0"
             },
             "suggest": {
                 "symfony/css-selector": ""
@@ -5931,7 +5931,7 @@
             ],
             "description": "Symfony DomCrawler Component",
             "homepage": "https://symfony.com",
-            "time": "2019-05-30T16:12:02+00:00"
+            "time": "2019-05-09T14:07:05+00:00"
         },
         {
             "name": "symfony/event-dispatcher",
@@ -6150,12 +6150,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
-                "reference": "8861fb80d124e2283d309953e2921097c01cca51"
+                "reference": "301a5d627220a1c4ee522813b0028653af6c4f54"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation/zipball/8861fb80d124e2283d309953e2921097c01cca51",
-                "reference": "8861fb80d124e2283d309953e2921097c01cca51",
+                "url": "https://api.github.com/repos/symfony/translation/zipball/301a5d627220a1c4ee522813b0028653af6c4f54",
+                "reference": "301a5d627220a1c4ee522813b0028653af6c4f54",
                 "shasum": ""
             },
             "require": {
@@ -6212,7 +6212,7 @@
             ],
             "description": "Symfony Translation Component",
             "homepage": "https://symfony.com",
-            "time": "2019-05-30T15:47:52+00:00"
+            "time": "2019-05-01T11:10:09+00:00"
         },
         {
             "name": "symfony/yaml",

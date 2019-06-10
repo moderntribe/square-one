@@ -2,10 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
-## 2019.06
+## [2019.06]
 * Add a utility for generating required pages
+* Changed: Updated the Image Component and `the_tribe_image()` method to accept an image URL fallback
 
-## 2019.05
+## [2019.05]
 * Changed: Updated Classic Editor Plugins to latest Versions
 * Updated: Swiper to version 4.5.0
 * Changed: Added autoprefixer support for CSS Grid 

@@ -8,6 +8,7 @@ class Image extends Component {
 	const TEMPLATE_NAME = 'components/image.twig';
 
 	const IMG_ID             = 'img_id';
+	const IMG_URL            = 'img_url';
 	const AS_BG              = 'as_bg';
 	const AUTO_SHIM          = 'auto_shim';
 	const AUTO_SIZES_ATTR    = 'auto_sizes_attr';
@@ -47,7 +48,9 @@ class Image extends Component {
 	protected function parse_options( array $options ): array {
 		$defaults = [
 			static::IMG_ID             => 0,
-			// the Image ID
+			// the Image ID - takes precedence over IMG_URL
+			static::IMG_URL            => '',
+			// the Image URL - use as an image URL as a fallback if no IMG_ID exists
 			static::AS_BG              => false,
 			// us this as background on wrapper?
 			static::AUTO_SHIM          => true,
@@ -115,13 +118,19 @@ class Image extends Component {
 	public function get_data(): array {
 		$data = [];
 
-		$data['component_classes'] = $this->options[ static::COMPONENT_CLASS ];
-		$data['img']               = $this->get_image();
-		$data['wrapper']           = $this->get_wrapper();
-		$data[ static::LINK ]      = $this->get_link();
-		$data[ static::HTML ]      = ! empty( $this->options[ static::HTML ] ) ? $this->options[ static::HTML ] : '';
+		$data[ 'component_classes' ] = $this->options[ static::COMPONENT_CLASS ];
+		$data[ 'img' ]               = $this->get_image();
+		$data[ 'wrapper' ]           = $this->get_wrapper();
+		$data[ static::LINK ]        = $this->get_link();
+		$data[ static::HTML ]        = ! empty( $this->options[ static::HTML ] ) ? $this->options[ static::HTML ] : '';
 
 		return $data;
+	}
+
+	protected function should_lazy_load(): bool {
+		$has_image_id_or_path = ( ! empty( $this->options[ static::IMG_ID ] ) || ! empty( $this->options[ static::IMG_URL ] ) );
+
+		return $this->options[ static::USE_LAZYLOAD ] && ! $this->options[ static::AS_BG ] && $has_image_id_or_path;
 	}
 
 	protected function get_image(): array {
@@ -132,7 +141,7 @@ class Image extends Component {
 
 		return [
 			'attributes' => $this->get_attributes(),
-			'class'      => $this->options[ static::USE_LAZYLOAD ] && ! $this->options[ static::AS_BG ] && ! empty( $this->options[ static::IMG_ID ] ) ? $this->options[ static::IMG_CLASS ] . ' lazyload' : $this->options[ static::IMG_CLASS ],
+			'class'      => $this->should_lazy_load() ? $this->options[ static::IMG_CLASS ] . ' lazyload' : $this->options[ static::IMG_CLASS ],
 		];
 	}
 
@@ -145,7 +154,7 @@ class Image extends Component {
 		return [
 			'tag'        => empty( $this->options[ static::WRAPPER_TAG ] ) ? ( $this->options[ static::AS_BG ] ? 'div' : 'figure' ) : $this->options[ static::WRAPPER_TAG ],
 			'attributes' => $this->options[ static::AS_BG ] ? $this->get_attributes() . ' ' . $this->options[ static::WRAPPER_ATTR ] : ' ' . $this->options[ static::WRAPPER_ATTR ],
-			'class'      => $this->options[ static::USE_LAZYLOAD ] && $this->options[ static::AS_BG ] && ! empty( $this->options[ static::IMG_ID ] ) ? $this->options[ static::WRAPPER_CLASS ] . ' lazyload' : $this->options[ static::WRAPPER_CLASS ],
+			'class'      => $this->should_lazy_load() ? $this->options[ static::WRAPPER_CLASS ] . ' lazyload' : $this->options[ static::WRAPPER_CLASS ],
 		];
 	}
 
@@ -169,15 +178,21 @@ class Image extends Component {
 	 * @return string
 	 */
 	private function get_attributes(): string {
-
-		$src = '';
+		$has_image_id = $this->options[ static::IMG_ID ] !== 0;
+		$src          = '';
+		$src_width    = '';
+		$src_height   = '';
 		// we'll almost always set src, except if for some reason they wanted to only use srcset
 		$attrs = [];
 		if ( $this->options[ static::SRC ] ) {
-			$src        = wp_get_attachment_image_src( $this->options[ static::IMG_ID ], $this->options[ static::SRC_SIZE ] );
-			$src_width  = $src[1];
-			$src_height = $src[2];
-			$src        = $src[0];
+			if ( $has_image_id ) { // image_id takes precedence
+				$src        = wp_get_attachment_image_src( $this->options[ static::IMG_ID ], $this->options[ static::SRC_SIZE ] );
+				$src_width  = $src[ 1 ];
+				$src_height = $src[ 2 ];
+				$src        = $src[ 0 ];
+			} else { // using IMG_URL
+				$src = $this->options[ static::IMG_URL ];
+			}
 		}
 		$attrs[] = ! empty( $this->options[ static::IMG_ATTR ] ) ? trim( $this->options[ static::IMG_ATTR ] ) : '';
 
@@ -185,12 +200,12 @@ class Image extends Component {
 		$alt_text = $this->options[ static::IMG_ALT_TEXT ];
 
 		// Check for a specific alt meta value on the image post, otherwise fallback to the image post's title.
-		if ( empty( $alt_text ) ) {
+		if ( empty( $alt_text ) && $has_image_id ) {
 			$alt_meta_value = get_post_meta( $this->options[ static::IMG_ID ], '_wp_attachment_image_alt', true );
-			$alt_text = ! empty( $alt_meta_value ) ? $alt_meta_value : get_the_title( $this->options[ static::IMG_ID ] );
+			$alt_text       = ! empty( $alt_meta_value ) ? $alt_meta_value : get_the_title( $this->options[ static::IMG_ID ] );
 		}
 
-		$attrs[]  = $this->options[ static::AS_BG ] ? sprintf( 'role="img" aria-label="%s"', $alt_text ) : sprintf( 'alt="%s"', $alt_text );
+		$attrs[] = $this->options[ static::AS_BG ] ? sprintf( 'role="img" aria-label="%s"', $alt_text ) : sprintf( 'alt="%s"', $alt_text );
 
 		if ( $this->options[ static::USE_LAZYLOAD ] ) {
 
@@ -280,17 +295,22 @@ class Image extends Component {
 	private function get_srcset_attribute(): string {
 
 		$attribute = [];
+
+		if ( $this->options[ static::IMG_ID ] === 0 ) {
+			return '';
+		}
+
 		foreach ( $this->options[ static::SRCSET_SIZES ] as $size ) {
 			$src = wp_get_attachment_image_src( $this->options[ static::IMG_ID ], $size );
 			// Don't add nonexistent intermediate sizes to the src_set. It ends up being the full-size URL.
-			if ( 'full' !== $size && true === $src[3] ) {
-				$attribute[] = sprintf( '%s %dw %dh', $src[0], $src[1], $src[2] );
+			if ( 'full' !== $size && true === $src[ 3 ] ) {
+				$attribute[] = sprintf( '%s %dw %dh', $src[ 0 ], $src[ 1 ], $src[ 2 ] );
 			}
 		}
 
 		if ( empty( $attribute ) ) {
-			$src = wp_get_attachment_image_src( $this->options[ static::IMG_ID ], 'full' );
-			$attribute[] = sprintf( '%s %dw %dh', $src[0], $src[1], $src[2] );
+			$src         = wp_get_attachment_image_src( $this->options[ static::IMG_ID ], 'full' );
+			$attribute[] = sprintf( '%s %dw %dh', $src[ 0 ], $src[ 1 ], $src[ 2 ] );
 		}
 
 		return implode( ", \n", $attribute );
