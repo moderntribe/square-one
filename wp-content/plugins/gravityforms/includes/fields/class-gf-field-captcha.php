@@ -16,6 +16,7 @@ class GF_Field_CAPTCHA extends GF_Field {
 	function get_form_editor_field_settings() {
 		return array(
 			'captcha_type_setting',
+			'captcha_badge_setting',
 			'captcha_size_setting',
 			'captcha_fg_setting',
 			'captcha_bg_setting',
@@ -85,16 +86,23 @@ class GF_Field_CAPTCHA extends GF_Field {
 				break;
 
 			default:
-				$this->validate_recaptcha();
+				$this->validate_recaptcha( $form );
 		}
 
 	}
 
-	public function validate_recaptcha() {
+	public function validate_recaptcha( $form ) {
 
 		// when user clicks on the "I'm not a robot" box, the response token is populated into a hidden field by Google, get token from POST
-		$response_token = rgpost( 'g-recaptcha-response' );
-		$is_valid       = $this->verify_recaptcha_response( $response_token );
+		$response_token = sanitize_text_field( rgpost( 'g-recaptcha-response' ) );
+		$hash           = sanitize_text_field( rgpost( 'gf-recaptcha-response-hash' ) );
+
+		if( GFFormDisplay::is_last_page( $form ) && $hash && wp_hash( $response_token ) === $hash ) {
+			$is_valid = true;
+		} else {
+			$is_valid = $this->verify_recaptcha_response( $response_token );
+		}
+
 
 		if ( ! $is_valid ) {
 
@@ -172,7 +180,7 @@ class GF_Field_CAPTCHA extends GF_Field {
 				$site_key   = get_option( 'rg_gforms_captcha_public_key' );
 				$secret_key = get_option( 'rg_gforms_captcha_private_key' );
 				$theme      = in_array( $this->captchaTheme, array( 'blackglass', 'dark' ) ) ? 'dark' : 'light';
-
+				$type 		= get_option( 'rg_gforms_captcha_type' );
 				if ( $is_entry_detail || $is_form_editor ){
 
 					//for admin, show a thumbnail depending on chosen theme
@@ -181,25 +189,60 @@ class GF_Field_CAPTCHA extends GF_Field {
 						return "<div class='captcha_message'>" . __( 'To use the reCAPTCHA field you must do the following:', 'gravityforms' ) . "</div><div class='captcha_message'>1 - <a href='https://www.google.com/recaptcha/admin' target='_blank'>" . sprintf( __( 'Sign up%s for an API key pair for your site.', 'gravityforms' ), '</a>' ) . "</div><div class='captcha_message'>2 - " . sprintf( __( 'Enter your reCAPTCHA site and secret keys in the reCAPTCHA Settings section of the %sSettings page%s', 'gravityforms' ), "<a href='?page=gf_settings' target='_blank'>", '</a>' ) . '</div>';
 
 					} else {
+						$type_suffix = $type == 'invisible' ? 'invisible_' : '';
+						$alt         = esc_attr__( 'An example of reCAPTCHA', 'gravityforms' );
 
-						return "<div class='ginput_container'><img class='gfield_captcha' src='" . GFCommon::get_base_url() . "/images/captcha_$theme.jpg' alt='reCAPTCHA' title='reCAPTCHA'/></div>";
+						return "<div class='ginput_container'><img class='gfield_captcha' src='" . GFCommon::get_base_url() . "/images/captcha_{$type_suffix}{$theme}.jpg' alt='{$alt}' /></div>";
 					}
 				}
 				else {
 
-					$secure_token = self::create_recaptcha_secure_token( $secret_key );
 					$language     = empty( $this->captchaLanguage ) ? 'en' : $this->captchaLanguage;
 
 					// script is queued for the footer with the language property specified
 					wp_enqueue_script( 'gform_recaptcha', 'https://www.google.com/recaptcha/api.js?hl=' . $language . '&render=explicit', array(), false, true );
 
-					add_action( 'wp_footer', array( $this, 'ensure_recaptcha_js' ) );
+					add_action( 'wp_footer', array( $this, 'ensure_recaptcha_js' ), 21 );
 					add_action( 'gform_preview_footer', array( $this, 'ensure_recaptcha_js' ) );
 
 					$tabindex = GFCommon::$tab_index++;
 
-					$stoken = $this->use_stoken() ? sprintf( 'data-stoken=\'%s\'', esc_attr( $secure_token ) ) : '';
-					$output = "<div id='" . esc_attr( $field_id ) ."' class='ginput_container ginput_recaptcha' data-sitekey='" . esc_attr( $site_key ) . "' {$stoken} data-theme='" . esc_attr( $theme ) . "' data-tabindex='{$tabindex}'></div>";
+					$stoken = '';
+
+					if ( $this->use_stoken() ) {
+						// The secure token is a deprecated feature of the reCAPTCHA API.
+						// https://developers.google.com/recaptcha/docs/secure_token
+						$secure_token = self::create_recaptcha_secure_token( $secret_key );
+						$stoken = sprintf( 'data-stoken=\'%s\'', esc_attr( $secure_token ) );
+					}
+
+					$size  = '';
+					$badge = '';
+
+					if ( $type == 'invisible' ) {
+						$size = "data-size='invisible'";
+						$badge = $this->captchaBadge ? $this->captchaBadge : 'bottomright';
+					}
+
+					$output = "<div id='" . esc_attr( $field_id ) ."' class='ginput_container ginput_recaptcha' data-sitekey='" . esc_attr( $site_key ) . "' {$stoken} data-theme='" . esc_attr( $theme ) . "' data-tabindex='{$tabindex}' {$size} data-badge='{$badge}'></div>";
+
+					$recaptcha_response = sanitize_text_field( rgpost( 'g-recaptcha-response' ) );
+					$current_page = GFFormDisplay::get_current_page( $form['id'] );
+
+					if( $recaptcha_response && ! $this->failed_validation && $current_page != $this->pageNumber ) {
+
+						$hash = sanitize_text_field( rgpost( 'gf-recaptcha-response-hash' ) );
+						if( ! $hash ) {
+							$hash = wp_hash( $recaptcha_response );
+						}
+
+						$hash               = esc_attr( $hash );
+						$recaptcha_response = esc_attr( $recaptcha_response );
+
+						$output .= "<input type='hidden' name='g-recaptcha-response' value='{$recaptcha_response}'>";
+						$output .= "<input type='hidden' name='gf-recaptcha-response-hash' value='{$hash}'>";
+
+					}
 
 					return $output;
 				}
@@ -209,13 +252,17 @@ class GF_Field_CAPTCHA extends GF_Field {
 	public function ensure_recaptcha_js(){
 		?>
 		<script type="text/javascript">
-			var gfRecaptchaPoller = setInterval( function() {
-				if( ! window.grecaptcha ) {
-					return;
-				}
-				renderRecaptcha();
-				clearInterval( gfRecaptchaPoller );
-			}, 100 );
+			( function( $ ) {
+				$( document ).bind( 'gform_post_render', function() {
+					var gfRecaptchaPoller = setInterval( function() {
+						if( ! window.grecaptcha || ! window.grecaptcha.render ) {
+							return;
+						}
+						renderRecaptcha();
+						clearInterval( gfRecaptchaPoller );
+					}, 100 );
+				} );
+			} )( jQuery );
 		</script>
 
 		<?php

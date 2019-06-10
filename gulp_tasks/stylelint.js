@@ -7,6 +7,7 @@ module.exports = {
 		return gulp.src( [
 			`${ pkg._core_theme_pcss_path }**/*.pcss`,
 			`!${ pkg._core_theme_pcss_path }content/page/_legacy.pcss`,
+			`!${ pkg._core_theme_pcss_path }vendor/swiper/_default.pcss`,
 		] )
 			.pipe( stylelint( {
 				fix: true,

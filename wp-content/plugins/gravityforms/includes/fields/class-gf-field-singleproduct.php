@@ -16,6 +16,7 @@ class GF_Field_SingleProduct extends GF_Field {
 			'conditional_logic_field_setting',
 			'error_message_setting',
 			'label_setting',
+			'admin_label_setting',
 			'rules_setting',
 			'duplicate_setting',
 		);
@@ -38,6 +39,19 @@ class GF_Field_SingleProduct extends GF_Field {
 		}
 	}
 
+	public function get_value_default() {
+		$value = array();
+		if ( is_array( $this->inputs ) ) {
+			foreach ( $this->inputs as $index => $input ) {
+				$input_value = $this->is_form_editor() ? rgar( $input, 'defaultValue' ) : GFCommon::replace_variables_prepopulate( rgar( $input, 'defaultValue' ) );
+				if ( rgblank( $input_value ) && $input['id'] == "{$this->id}.2" ) {
+					$input_value = $this->basePrice;
+				}
+				$value[ strval( $input['id'] ) ] = $input_value;
+			}
+		}
+		return $value;
+	}
 
 	public function get_field_input( $form, $value = '', $entry = null ) {
 		$form_id         = $form['id'];
@@ -115,6 +129,18 @@ class GF_Field_SingleProduct extends GF_Field {
 		} else {
 			return '';
 		}
+	}
+
+	/**
+	 * Actions to be performed after the field has been converted to an object.
+	 *
+	 * @since 2.4.8.2
+	 */
+	public function post_convert_field() {
+		parent::post_convert_field();
+
+		// Ensure the choices property is not an array to prevent issues with some features such as the conditional logic reset to default.
+		$this->choices = null;
 	}
 
 }

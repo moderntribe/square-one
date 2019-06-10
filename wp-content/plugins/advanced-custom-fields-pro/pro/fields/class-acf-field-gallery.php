@@ -37,13 +37,6 @@ class acf_field_gallery extends acf_field {
 			'mime_types'	=> '',
 			'insert'		=> 'append'
 		);
-		$this->l10n = array(
-			'select'		=> __("Add Image to Gallery",'acf'),
-			'edit'			=> __("Edit Image",'acf'),
-			'update'		=> __("Update Image",'acf'),
-			'uploadedTo'	=> __("Uploaded to this post",'acf'),
-			'max'			=> __("Maximum selection reached",'acf')
-		);
 		
 		
 		// actions
@@ -56,6 +49,28 @@ class acf_field_gallery extends acf_field {
 		add_action('wp_ajax_acf/fields/gallery/get_sort_order',				array($this, 'ajax_get_sort_order'));
 		add_action('wp_ajax_nopriv_acf/fields/gallery/get_sort_order',		array($this, 'ajax_get_sort_order'));
 		
+	}
+	
+	/*
+	*  input_admin_enqueue_scripts
+	*
+	*  description
+	*
+	*  @type	function
+	*  @date	16/12/2015
+	*  @since	5.3.2
+	*
+	*  @param	$post_id (int)
+	*  @return	$post_id (int)
+	*/
+	
+	function input_admin_enqueue_scripts() {
+		
+		// localize
+		acf_localize_text(array(
+		   	'Add Image to Gallery'		=> __('Add Image to Gallery', 'acf'),
+			'Maximum selection reached'	=> __('Maximum selection reached', 'acf'),
+	   	));
 	}
 	
 	
@@ -85,7 +100,9 @@ class acf_field_gallery extends acf_field {
    		
 		
 		// validate
-		if( !wp_verify_nonce($options['nonce'], 'acf_nonce') ) die();
+		if( !acf_verify_ajax() ) {
+			die();
+		}
 		
 		
 		// bail early if no id
@@ -419,7 +436,8 @@ class acf_field_gallery extends acf_field {
 		// get posts
 		$posts = acf_get_posts(array(
 			'post_type'	=> 'attachment',
-			'post__in'	=> $post__in
+			'post__in'	=> $post__in,
+			'update_post_meta_cache' => true
 		));
 		
 		

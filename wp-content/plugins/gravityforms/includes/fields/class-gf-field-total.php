@@ -38,7 +38,7 @@ class GF_Field_Total extends GF_Field {
 					</div>";
 		} else {
 			return "<div class='ginput_container ginput_container_total'>
-						<span class='ginput_total ginput_total_{$form_id}'>" . GFCommon::to_money( '0' ) . "</span>
+						<span class='ginput_total ginput_total_{$form_id}' aria-live='polite'>" . GFCommon::to_money( '0' ) . "</span>
 						<input type='hidden' name='input_{$id}' id='{$field_id}' class='gform_hidden'/>
 					</div>";
 		}
@@ -84,7 +84,7 @@ class GF_Field_Total extends GF_Field {
 	 * @return string The processed merge tag.
 	 */
 	public function get_value_merge_tag( $value, $input_id, $entry, $form, $modifier, $raw_value, $url_encode, $esc_html, $format, $nl2br ) {
-		$format_numeric = $modifier == 'price';
+		$format_numeric = in_array( 'price', $this->get_modifiers() );
 
 		$value = $format_numeric ? GFCommon::to_number( $value ) : GFCommon::to_money( $value );
 
