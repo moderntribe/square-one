@@ -17,7 +17,6 @@ class Force_Plugin_Activation {
 	 * Add elements as plugin path: directory/file.php
 	 */
 	private $force_active = array(
-		'advanced-custom-fields-pro/acf.php',
 		'core/core.php',
 		'panel-builder/tribe-panel-builder.php',
 		'tribe-admin-dashboard/tribe-admin-dashboard.php',
