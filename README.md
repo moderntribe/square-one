@@ -97,6 +97,9 @@ When using this on a production environment, be sure to add the following to you
 GLOMAR is a plugin that blocks the frontend of the site from public access. If you would like to disable the plugin locally, add the following to your local-config.php:
     define( 'TRIBE_GLOMAR', false );
 
+## Support
+
+Usage of Square One is not actively supported by Modern Tribe outside of client contracts. Pull requests and suggestions are welcome and will be addressed based on business need.
 
 ## Changelog
 
