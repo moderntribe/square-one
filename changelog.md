@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 ## [2019.06]
 * Add a utility for generating required pages
 * Changed: Updated the Image Component and `the_tribe_image()` method to accept an image URL fallback
-* Fixed: Restored returning an image size that is an exact match to the full size image, which it is specifically requested.
+* Fixed: Restored returning an image size that is an exact match to the full size image, when that size is specifically requested.
 
 ## [2019.05]
 * Changed: Updated Classic Editor Plugins to latest Versions
