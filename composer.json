@@ -75,7 +75,7 @@
     "moderntribe/panel-builder": "dev-3.3-branch",
     "moderntribe/tribe-libs":"master",
     "humanmade/mercator":"dev-master#7f3846a",
-    "vlucas/phpdotenv": "^2.4.0",
+    "vlucas/phpdotenv": "^3.0",
     "humanmade/s3-uploads":"1.1.0",
     "pimple/pimple": "~3.0@dev",
     "johnbillion/extended-cpts": "^4.0",
@@ -90,8 +90,8 @@
     "roots/wp-password-bcrypt": "dev-master"
   },
   "require-dev": {
-    "wp-cli/wp-cli": "^1.5.1",
-    "lucatume/wp-browser": "^2.2.0",
+    "wp-cli/wp-cli": "^2.2.0",
+    "lucatume/wp-browser": "^2.2.14",
     "lucatume/function-mocker": "~1.0",
     "php-http/httplug": "^1.1",
     "filp/whoops": "^2.2@dev"
