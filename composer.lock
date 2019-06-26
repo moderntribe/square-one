@@ -5813,12 +5813,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "3b4ff210c7ed0c535977505dd05f0d873995c37b"
+                "reference": "5dc01627e4429b0bc415bb1251301809e4d9cb0b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/3b4ff210c7ed0c535977505dd05f0d873995c37b",
-                "reference": "3b4ff210c7ed0c535977505dd05f0d873995c37b",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/5dc01627e4429b0bc415bb1251301809e4d9cb0b",
+                "reference": "5dc01627e4429b0bc415bb1251301809e4d9cb0b",
                 "shasum": ""
             },
             "require": {
@@ -5888,7 +5888,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2019-06-21T13:04:24+00:00"
+            "time": "2019-06-26T15:56:10+00:00"
         },
         {
             "name": "rmccue/requests",
