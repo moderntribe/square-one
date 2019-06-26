@@ -42,15 +42,15 @@
     {
       "type": "package",
       "package": {
-        "name": "gravityforms/gravityforms",
-        "version": "2.4.10.7",
+        "name": "advanced-custom-fields/advanced-custom-fields-pro",
+        "version": "5.7.12",
         "type": "wordpress-plugin",
         "dist": {
           "type": "zip",
-          "url": "http://www.gravityhelp.com/wp-content/plugins/gravitymanager/api.php?op=get_plugin&slug=gravityforms&key={%WP_PLUGIN_GF_KEY}"
+          "url": "https://connect.advancedcustomfields.com/index.php?a=download&p=pro&k={%WP_PLUGIN_ACF_KEY}&t={%version}"
         },
         "require": {
-          "gotoandplay/gravityforms-composer-installer": "^1.0"
+          "ffraenz/private-composer-installer": "^2.0"
         }
       }
     }
@@ -87,7 +87,8 @@
     "guzzlehttp/psr7": "^1.4",
     "sunra/php-simple-html-dom-parser": "1.5.2",
     "monolog/monolog":"1.23.0",
-    "roots/wp-password-bcrypt": "dev-master"
+    "roots/wp-password-bcrypt": "dev-master",
+    "advanced-custom-fields/advanced-custom-fields-pro": "*"
   },
   "require-dev": {
     "wp-cli/wp-cli": "^2.2.0",
