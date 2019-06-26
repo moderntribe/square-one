@@ -38,6 +38,21 @@
     {
       "type":"vcs",
       "url":"https://github.com/moderntribe/tribe-libs.git"
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "gravityforms/gravityforms",
+        "version": "2.4.10.7",
+        "type": "wordpress-plugin",
+        "dist": {
+          "type": "zip",
+          "url": "http://www.gravityhelp.com/wp-content/plugins/gravitymanager/api.php?op=get_plugin&slug=gravityforms&key={%WP_PLUGIN_GF_KEY}"
+        },
+        "require": {
+          "gotoandplay/gravityforms-composer-installer": "^1.0"
+        }
+      }
     }
   ],
   "require": {
