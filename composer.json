@@ -53,6 +53,21 @@
           "ffraenz/private-composer-installer": "^2.0"
         }
       }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "gravityforms/gravityforms",
+        "version": "2.4.10.7",
+        "type": "wordpress-plugin",
+        "dist": {
+          "type": "zip",
+          "url": "http://www.gravityhelp.com/wp-content/plugins/gravitymanager/api.php?op=get_plugin&slug=gravityforms&key={%WP_PLUGIN_GF_KEY}"
+        },
+        "require": {
+          "gotoandplay/gravityforms-composer-installer": "^1.0"
+        }
+      }
     }
   ],
   "require": {
@@ -88,7 +103,8 @@
     "sunra/php-simple-html-dom-parser": "1.5.2",
     "monolog/monolog":"1.23.0",
     "roots/wp-password-bcrypt": "dev-master",
-    "advanced-custom-fields/advanced-custom-fields-pro": "*"
+    "advanced-custom-fields/advanced-custom-fields-pro": "*",
+    "gravityforms/gravityforms": "*"
   },
   "require-dev": {
     "wp-cli/wp-cli": "^2.2.0",
