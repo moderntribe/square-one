@@ -19,10 +19,10 @@ Square One (AKA **\[1\]**) is a development framework lovingly maintained by Mod
 
 The build tools for theming can be found in the *root* directory. Refer to the docs for instructions on getting started with Grunt, Webpack, and PostCSS.
 
-[Build Documentation](/docs/build/README.md)
-
 ## Changelog
 
 [View changelog](./changelog.md)
 
-## 
+## Support
+
+Usage of Square One is not actively supported by Modern Tribe outside of client contracts. Pull requests and suggestions are welcome and will be addressed based on business need.
