@@ -15,10 +15,6 @@ Square One (AKA **\[1\]**) is a development framework lovingly maintained by Mod
     * [Tests and Code Quality](/docs/tests/README.md)
     * [Deploys with ansible](/docs/ansible/README.md)
 
-#### Using the build tools
-
-The build tools for theming can be found in the *root* directory. Refer to the docs for instructions on getting started with Grunt, Webpack, and PostCSS.
-
 ## Changelog
 
 [View changelog](./changelog.md)
