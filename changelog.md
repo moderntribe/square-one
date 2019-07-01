@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2019.07
+* Removed 3rd-party premium plugins, added composer installer for them
+
 ## [2019.06]
 * Fixed: Typo dash in modern-tribe removed from set remote in convert-project-to-fork.sh
 * Changed: Updated convert-project-to-fork.sh to use ssh instead of https for setting remote url

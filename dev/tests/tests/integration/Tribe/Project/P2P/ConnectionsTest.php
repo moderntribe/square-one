@@ -27,7 +27,7 @@ class ConnectionsTest extends Test_Case {
 	private $page_2_id;
 	private $post_id;
 
-	public function setUp() {
+	public function setUp(): void {
 		// before
 		parent::setUp();
 
@@ -69,7 +69,7 @@ class ConnectionsTest extends Test_Case {
 		p2p_add_meta( $this->connection_2_id, self::META_KEY, self::META_VALUE );
 	}
 
-	public function tearDown() {
+	public function tearDown(): void {
 		// your tear down methods here
 
 		parent::tearDown();
