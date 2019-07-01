@@ -29,7 +29,7 @@ clear_project () {
 	fi
 
 	printf "Updating Git origin URL\n"
-	git remote set-url origin https://github.com/modern-tribe/$project_id.git
+	git remote set-url origin git@github.com:moderntribe/$project_id.git
 	git remote -v
 }
 
