@@ -3,6 +3,8 @@
 All notable changes to this project will be documented in this file.
 
 ## [2019.06]
+* Fixed: Typo dash in modern-tribe removed from set remote in convert-project-to-fork.sh
+* Changed: Updated convert-project-to-fork.sh to use ssh instead of https for setting remote url
 * Add a utility for generating required pages
 * Changed: Updated the Image Component and `the_tribe_image()` method to accept an image URL fallback
 
