@@ -5,10 +5,14 @@ All notable changes to this project will be documented in this file.
 ## [2019.06]
 * Fixed: Typo dash in modern-tribe removed from set remote in convert-project-to-fork.sh
 * Changed: Updated convert-project-to-fork.sh to use ssh instead of https for setting remote url
+* Add a utility for generating required pages
+* Changed: Updated the Image Component and `the_tribe_image()` method to accept an image URL fallback
 
 ## [2019.05]
-* Changed: Updated WordPress core to 5.1.1
 * Changed: Updated Classic Editor Plugins to latest Versions
+* Updated: Swiper to version 4.5.0
+* Changed: Added autoprefixer support for CSS Grid 
+* Changed: Updated WordPress core to 5.1.1
 * Changed: Updated ACF to 5.7.13
 * Updated WordPress to 5.2.1
 * Fixed: Tribe Branding plugin: updated deprecated `login_headertitle` filter to use `login_headertext` instead

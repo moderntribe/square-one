@@ -119,17 +119,12 @@ npm install -g grunt-cli
 	sudo apt-get install docker-ce
 	```
 
-    7. Install Docker Snap
-	```
-	sudo snap install docker.
-	```
-
-    8. Verify that Docker CE is installed correctly by running the hello-world image.
+    7. Verify that Docker CE is installed correctly by running the hello-world image.
 	```
 	sudo docker run hello-world
 	```
 
-    9. There seems to be an issue with docker and permissions, so executing the following command will save you from that headache. [View source](https://github.com/docker/compose/issues/4181)
+    8. There seems to be an issue with docker and permissions, so executing the following command will save you from that headache. [View source](https://github.com/docker/compose/issues/4181)
 	```
 	sudo usermod -aG docker $USER
 	```

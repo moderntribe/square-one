@@ -8,6 +8,7 @@ use Tribe\Project\Service_Providers\Asset_Provider;
 use Tribe\Project\Service_Providers\Blog_Copier_Provider;
 use Tribe\Project\Service_Providers\Cache_Provider;
 use Tribe\Project\Service_Providers\CLI_Provider;
+use Tribe\Project\Service_Providers\Content_Provider;
 use Tribe\Project\Service_Providers\Object_Meta_Provider;
 use Tribe\Project\Service_Providers\Nav_Menu_Provider;
 use Tribe\Project\Service_Providers\Panels_Provider;
@@ -66,6 +67,7 @@ class Core {
 		$this->providers[ 'blog_copier' ]      = new Blog_Copier_Provider();
 		$this->providers[ 'cache' ]            = new Cache_Provider();
 		$this->providers[ 'cli' ]              = new CLI_Provider();
+		$this->providers[ 'content' ]          = new Content_Provider();
 		$this->providers[ 'meta' ]             = new Object_Meta_Provider();
 		$this->providers[ 'nav_menu' ]         = new Nav_Menu_Provider();
 		$this->providers[ 'panels' ]           = new Panels_Provider();
