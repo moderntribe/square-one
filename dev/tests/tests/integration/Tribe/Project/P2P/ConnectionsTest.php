@@ -7,13 +7,13 @@ use Tribe\Project\Post_Types\Sample\Sample;
 use Tribe\Project\Post_Types\Page\Page;
 use Tribe\Project\Post_Types\Post\Post;
 
-use Codeception\TestCase\WPTestCase;
+use Tribe\Tests\Test_Case;
 
 /**
  * Class ConnectionsTest
  * @package Tribe\Project\P2P
  */
-class ConnectionsTest extends WPTestCase {
+class ConnectionsTest extends Test_Case {
 
 	const META_KEY = 'test_meta_key';
 	const META_VALUE = 'test meta value';
@@ -27,7 +27,7 @@ class ConnectionsTest extends WPTestCase {
 	private $page_2_id;
 	private $post_id;
 
-	public function setUp() {
+	public function setUp(): void {
 		// before
 		parent::setUp();
 
@@ -69,7 +69,7 @@ class ConnectionsTest extends WPTestCase {
 		p2p_add_meta( $this->connection_2_id, self::META_KEY, self::META_VALUE );
 	}
 
-	public function tearDown() {
+	public function tearDown(): void {
 		// your tear down methods here
 
 		parent::tearDown();

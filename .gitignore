@@ -33,7 +33,6 @@ wp-content/blogs.dir/
 wp-content/upgrade/
 wp-content/backup-db/
 wp-content/backups/
-wp-content/object-cache.php
 wp-content/cache/
 wp-content/advanced-cache.php
 wp-content/wp-cache-config.php
@@ -44,9 +43,6 @@ wp-content/mu-plugins/mu.local.php
 wp-content/mu-plugins/mercator/
 wp-content/plugins/*
 !wp-content/plugins/core
-!wp-content/plugins/core-tests
-!wp-content/plugins/advanced-custom-fields-pro
-!wp-content/plugins/gravityforms
 !wp-content/plugins/term-sorter
 !wp-content/plugins/tribe-301-redirects
 !wp-content/plugins/tribe-admin-dashboard
@@ -113,6 +109,7 @@ wp-content/plugins/airplane-mode
 **/__coverage__/
 dev_components/react-app/test/__coverage__/
 dev/deploy/.deploy
+/reports
 
 # DevOps #
 #######################
@@ -124,3 +121,7 @@ dev/docker/composer-cache/
 dev/docker/global/.env
 /.gitmodules
 /dev/bin/wp
+
+# Testing #
+#######################
+!dev/tests/tests/_data/*.sql

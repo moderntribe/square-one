@@ -3,7 +3,7 @@
 * **Build**
   * [Overview](/docs/build/README.md)
   * [Node](/docs/build/node.md)
-  * [Grunt Tasks](/docs/build/grunt.md)
+  * [Gulp Tasks](/docs/build/gulp.md)
   * [Composer](/docs/build/composer.md)
 * **Videos**
   * [Frontend Videos](/docs/theme/videos.md)
@@ -21,12 +21,12 @@
   * [Icons](/docs/theme/icons.md)
   * [Twig](/docs/theme/twig.md)
   * [In-Depth Components Guide](/docs/theme/components-guide.md)
+  * [Forms](/docs/theme/forms/README.md)
   * **CSS**
     * [Overview](/docs/theme/css/README.md)
     * [PostCSS](/docs/theme/css/postcss.md)
     * [Grids](/docs/theme/css/grids.md)
     * [Plugins](/docs/theme/css/plugins.md)
-    * [Forms](/docs/theme/css/forms.md)
   * **Javascript**
     * [Overview](/docs/theme/js/README.md)
     * [Code Splitting](/docs/theme/js/code-splitting.md)
@@ -56,11 +56,14 @@
   * [Cache](/docs/backend/object-cache.md)
   * [Request Object](/docs/backend/request.md)
   * [Facades](/docs/backend/facades.md)
+  * [Schema](/docs/backend/schema.md)
+  * [Queues](/docs/backend/queues.md)
   * **Plugins/Extensions**
     * [Twig](https://twig.symfony.com/)
     * [Posts 2 Post](https://github.com/scribu/wp-posts-to-posts/wiki)
     * [Extended Post Types](https://github.com/johnbillion/extended-cpts/blob/master/README.md)
     * [Extended Taxonomies](https://github.com/johnbillion/extended-taxos/blob/master/README.md)
+    * [Whoops](/docs/backend/whoops.md)
 * **Tests and Code Quality**
   * [Overview](/docs/tests/README.md)
   * [Codeception](/docs/tests/codeception.md)

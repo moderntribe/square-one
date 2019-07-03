@@ -78,3 +78,4 @@ In this case we searched from `el.container` to find all children with `data-js=
 * [Selectors](/docs/theme/js/selectors.md)
 * [Events](/docs/theme/js/events.md)
 * [Jquery](/docs/theme/js/jquery.md)
+* [React Apps](/docs/theme/js/react-apps.md)

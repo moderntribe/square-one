@@ -34,16 +34,16 @@ const browser = browserTests();
  * @returns {*}
  */
 
-export const getVideoConfig = (url = '') => {
+export const getVideoConfig = ( url = '' ) => {
 	let videoId = null;
-	if (url.indexOf('vimeo') !== -1) {
+	if ( url.indexOf( 'vimeo' ) !== -1 ) {
 		const regex = /https?:\/\/(?:www\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|)(\d+)(?:$|\/|\?)/;
-		const match = url.match(regex);
-		videoId = match ? { type: 'vimeo', id: match[3] } : null;
+		const match = url.match( regex );
+		videoId = match ? { type: 'vimeo', id: match[ 3 ] } : null;
 	} else {
 		const regex = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/; // eslint-disable-line
-		const match = url.match(regex);
-		videoId = (match && match[2].length === 11) ? { type: 'youtube', id: match[2] } : null;
+		const match = url.match( regex );
+		videoId = ( match && match[ 2 ].length === 11 ) ? { type: 'youtube', id: match[ 2 ] } : null;
 	}
 	return videoId;
 };
@@ -54,14 +54,14 @@ export const getVideoConfig = (url = '') => {
  * @param url
  */
 
-export const isVideoUrl = (url = '') => url.indexOf('vimeo') !== -1 || url.indexOf('youtube') !== -1 || url.indexOf('youtu.be') !== -1;
+export const isVideoUrl = ( url = '' ) => url.indexOf( 'vimeo' ) !== -1 || url.indexOf( 'youtube' ) !== -1 || url.indexOf( 'youtu.be' ) !== -1;
 
 /**
  * Injects the minimum required css for the walls to function correctly. Additional styles can be done in theme.
  */
 
 const injectCSS = () => {
-	const css = document.createElement('style');
+	const css = document.createElement( 'style' );
 	css.id = 'tribe-video-wall-css';
 	css.type = 'text/css';
 	css.innerHTML = `
@@ -102,7 +102,7 @@ const injectCSS = () => {
 		min-width: 100%;
 	}
 	`;
-	document.getElementsByTagName('head')[0].appendChild(css);
+	document.getElementsByTagName( 'head' )[ 0 ].appendChild( css );
 };
 
 /**
@@ -111,7 +111,7 @@ const injectCSS = () => {
  * @param opts
  */
 
-export const init = (opts = {}) => {
+export const init = ( opts = {} ) => {
 	const options = {
 		container: null,
 		id: '',
@@ -121,20 +121,20 @@ export const init = (opts = {}) => {
 	};
 
 	// merge options
-	Object.assign(options, opts);
+	Object.assign( options, opts );
 
 	// dont run on mobile, they wont autoplay and this hurts them
-	if (browser.android || browser.ios) {
+	if ( browser.android || browser.ios ) {
 		return;
 	}
 
 	// check if we should parse url or already have video id
-	if (!options.id.length && options.url.length) {
-		if (!isVideoUrl(options.url)) {
+	if ( ! options.id.length && options.url.length ) {
+		if ( ! isVideoUrl( options.url ) ) {
 			return;
 		}
-		const videoConfig = getVideoConfig(options.url);
-		if (!videoConfig) {
+		const videoConfig = getVideoConfig( options.url );
+		if ( ! videoConfig ) {
 			return;
 		}
 		options.id = videoConfig.id;
@@ -142,12 +142,12 @@ export const init = (opts = {}) => {
 	}
 
 	// check for container and id
-	if (!options.container || !options.id.length) {
+	if ( ! options.container || ! options.id.length ) {
 		// need these, leaving town
 		return;
 	}
 
-	if (!document.getElementById('tribe-video-wall-css')) {
+	if ( ! document.getElementById( 'tribe-video-wall-css' ) ) {
 		injectCSS();
 	}
 
@@ -156,21 +156,21 @@ export const init = (opts = {}) => {
 	let w;
 	let iframeVideo;
 	let player;
-	const iframe = document.createElement('iframe');
-	const ytId = _.uniqueId('yt-container-');
-	const iframeId = _.uniqueId('video-bg-');
+	const iframe = document.createElement( 'iframe' );
+	const ytId = _.uniqueId( 'yt-container-' );
+	const iframeId = _.uniqueId( 'video-bg-' );
 
 	// setup shared defaults on the iframe and container
 	iframe.id = iframeId;
-	iframe.classList.add('tribe-video-wall__iframe');
-	iframe.setAttribute('webkitallowfullscreen', '');
-	iframe.setAttribute('mozallowfullscreen', '');
-	iframe.setAttribute('allowfullscreen', '');
+	iframe.classList.add( 'tribe-video-wall__iframe' );
+	iframe.setAttribute( 'webkitallowfullscreen', '' );
+	iframe.setAttribute( 'mozallowfullscreen', '' );
+	iframe.setAttribute( 'allowfullscreen', '' );
 
 	// on init and resize detect the container height and width and work out how to fill the area with video and no
 	// crop lines. Basically simulating background size cover for video.
 	const fitVideoToContainer = () => {
-		if (w === 0 || h === 0 || !iframeVideo) {
+		if ( w === 0 || h === 0 || ! iframeVideo ) {
 			return;
 		}
 
@@ -179,36 +179,36 @@ export const init = (opts = {}) => {
 		let sH = 0;
 		let sW = 0;
 
-		sW = (dH / h) * w;
-		sW = (sW >= dW) ? sW : dW;
+		sW = ( dH / h ) * w;
+		sW = ( sW >= dW ) ? sW : dW;
 
 		sH = dH;
-		if (sW === dW) {
-			sH = (dW / w) * h;
+		if ( sW === dW ) {
+			sH = ( dW / w ) * h;
 		}
 
-		const left = sW === dW ? 0 : -(Math.abs(sW - dW) / 2);
+		const left = sW === dW ? 0 : -( Math.abs( sW - dW ) / 2 );
 
 		iframeVideo.style.position = 'absolute';
-		iframeVideo.style.width = `${sW}px`;
-		iframeVideo.style.height = `${sH}px`;
+		iframeVideo.style.width = `${ sW }px`;
+		iframeVideo.style.height = `${ sH }px`;
 		iframeVideo.style.top = 0;
-		iframeVideo.style.left = `${left}px`;
+		iframeVideo.style.left = `${ left }px`;
 	};
 
 	const embedYoutube = () => {
-		const ytContainer = document.createElement('div');
+		const ytContainer = document.createElement( 'div' );
 		ytContainer.id = ytId;
-		options.container.appendChild(ytContainer);
-		if (!window.YT) {
-			const tag = document.createElement('script');
+		options.container.appendChild( ytContainer );
+		if ( ! window.YT ) {
+			const tag = document.createElement( 'script' );
 			tag.src = 'https://www.youtube.com/iframe_api';
-			const firstScriptTag = document.getElementsByTagName('script')[0];
-			firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+			const firstScriptTag = document.getElementsByTagName( 'script' )[ 0 ];
+			firstScriptTag.parentNode.insertBefore( tag, firstScriptTag );
 		}
 
 		window.onYouTubeIframeAPIReady = () => {
-			player = new window.YT.Player(ytId, {
+			player = new window.YT.Player( ytId, {
 				videoId: options.id,
 				controls: 0,
 				showinfo: 0,
@@ -217,69 +217,69 @@ export const init = (opts = {}) => {
 				loop: 1,
 				playlist: options.id,
 				events: {
-					onReady: (event) => {
-						iframeVideo = document.getElementById(ytId);
-						iframeVideo.classList.add('tribe-video-wall__iframe');
-						h = iframeVideo.getAttribute('height');
-						w = iframeVideo.getAttribute('width');
+					onReady: ( event ) => {
+						iframeVideo = document.getElementById( ytId );
+						iframeVideo.classList.add( 'tribe-video-wall__iframe' );
+						h = iframeVideo.getAttribute( 'height' );
+						w = iframeVideo.getAttribute( 'width' );
 						iframeVideo.style.transform = 'scale(1.1)';
 						fitVideoToContainer();
-						event.target.loadPlaylist([options.id]);
-						event.target.setLoop(true);
+						event.target.loadPlaylist( [ options.id ] );
+						event.target.setLoop( true );
 						event.target.mute();
 						event.target.playVideo();
 					},
-					onStateChange: (event) => {
-						if (event.data === window.YT.PlayerState.PLAYING) {
-							options.container.classList.add('loaded');
+					onStateChange: ( event ) => {
+						if ( event.data === window.YT.PlayerState.PLAYING ) {
+							options.container.classList.add( 'loaded' );
 						}
 					},
 				},
-			});
+			} );
 		};
 	};
 
 	const embedVimeo = () => {
-		iframe.src = `//player.vimeo.com/video/${options.id}?background=1&autoplay=0&mute=0&loop=0`;
-		options.container.appendChild(iframe);
-		iframeVideo = document.getElementById(iframeId);
-		iframeVideo.setAttribute('data-vimeo-loop', 'true');
-		iframeVideo.setAttribute('data-vimeo-byline', 'false');
-		iframeVideo.setAttribute('data-vimeo-portrait', 'false');
-		iframeVideo.setAttribute('data-vimeo-title', 'false');
+		iframe.src = `//player.vimeo.com/video/${ options.id }?background=1&autoplay=0&mute=0&loop=0`;
+		options.container.appendChild( iframe );
+		iframeVideo = document.getElementById( iframeId );
+		iframeVideo.setAttribute( 'data-vimeo-loop', 'true' );
+		iframeVideo.setAttribute( 'data-vimeo-byline', 'false' );
+		iframeVideo.setAttribute( 'data-vimeo-portrait', 'false' );
+		iframeVideo.setAttribute( 'data-vimeo-title', 'false' );
 
-		player = new VimeoPlayer(iframeVideo);
-		player.getVideoHeight().then((value) => {
+		player = new VimeoPlayer( iframeVideo );
+		player.getVideoHeight().then( ( value ) => {
 			h = value;
-		});
-		player.getVideoWidth().then((value) => {
+		} );
+		player.getVideoWidth().then( ( value ) => {
 			w = value;
 			fitVideoToContainer();
-		});
-		player.getEnded().then(() => player.play());
-		player.ready().then(() => {
+		} );
+		player.getEnded().then( () => player.play() );
+		player.ready().then( () => {
 			player.play();
-			player.setVolume(0);
-			player.setLoop(true);
-			_.delay(() => options.container.classList.add('loaded'), 400);
-		});
+			player.setVolume( 0 );
+			player.setLoop( true );
+			_.delay( () => options.container.classList.add( 'loaded' ), 400 );
+		} );
 	};
 
 	const bindEvents = () => {
-		document.addEventListener(options.resize_event, fitVideoToContainer);
+		document.addEventListener( options.resize_event, fitVideoToContainer );
 	};
 
 	bindEvents();
 
-	switch (options.type) {
-	case 'vimeo':
-		embedVimeo();
-		break;
-	case 'youtube':
-		embedYoutube();
-		break;
-	default:
-		break;
+	switch ( options.type ) {
+		case 'vimeo':
+			embedVimeo();
+			break;
+		case 'youtube':
+			embedYoutube();
+			break;
+		default:
+			break;
 	}
 };
 
@@ -289,24 +289,24 @@ export const init = (opts = {}) => {
  * @param data
  */
 
-const setupInit = (data = {}) => {
+const setupInit = ( data = {} ) => {
 	const options = {
 		container: data.container,
 		resize_event: data.options.resize_event,
 	};
 
 	// if we have a url, use that and exit
-	if (data.container.dataset.url) {
+	if ( data.container.dataset.url ) {
 		options.url = data.container.dataset.url;
-		init(options);
+		init( options );
 		return;
 	}
 
 	// we didnt have a url but got both and id and a type, lets use that
-	if (data.container.dataset.id && data.container.dataset.type) {
+	if ( data.container.dataset.id && data.container.dataset.type ) {
 		options.id = data.container.dataset.id;
 		options.type = data.container.dataset.type;
-		init(options);
+		init( options );
 	}
 };
 
@@ -316,9 +316,9 @@ const setupInit = (data = {}) => {
  * @param opts
  */
 
-const initAll = (opts = {}) => {
+const initAll = ( opts = {} ) => {
 	// dont run on mobile, they wont autoplay and this hurts them
-	if (browser.android || browser.ios) {
+	if ( browser.android || browser.ios ) {
 		return;
 	}
 
@@ -328,12 +328,12 @@ const initAll = (opts = {}) => {
 	};
 
 	// merge options
-	Object.assign(options, opts);
+	Object.assign( options, opts );
 
-	const videoWalls = tools.getNodes(options.selector, true);
-	videoWalls.forEach(container => setupInit({ container, options }));
+	const videoWalls = tools.getNodes( options.selector, true );
+	videoWalls.forEach( container => setupInit( { container, options } ) );
 
-	console.info(`Initialized Tribe Video Wall on ${videoWalls.length} element${videoWalls.length > 1 ? 's' : ''}.`);
+	console.info( `Initialized Tribe Video Wall on ${ videoWalls.length } element${ videoWalls.length > 1 ? 's' : '' }.` );
 };
 
 export default initAll;

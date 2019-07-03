@@ -8,7 +8,7 @@ import _ from 'lodash';
 import { trigger } from '../events';
 import { convertElements } from '../tools';
 
-const scrollspy = (options) => {
+const scrollspy = ( options ) => {
 	const defaults = {
 		min: 0,
 		max: 0,
@@ -22,13 +22,13 @@ const scrollspy = (options) => {
 		onTick: options.onTick ? options.onTick : [],
 	};
 
-	const opts = Object.assign(defaults, options);
+	const opts = Object.assign( defaults, options );
 
-	if (!opts.elements) {
+	if ( ! opts.elements ) {
 		return;
 	}
 
-	const elements = convertElements(opts.elements);
+	const elements = convertElements( opts.elements );
 
 	const o = opts;
 	const mode = o.mode;
@@ -37,54 +37,54 @@ const scrollspy = (options) => {
 	let leaves = enters;
 	let inside = false;
 
-	elements.forEach((element) => {
-		o.container.addEventListener('scroll', _.debounce(() => {
+	elements.forEach( ( element ) => {
+		o.container.addEventListener( 'scroll', _.debounce( () => {
 			const position = {
 				top: element.scrollTop,
 				left: element.scrollLeft,
 			};
 
-			const xy = (mode === 'vertical') ? position.top + buffer : position.left + buffer;
+			const xy = ( mode === 'vertical' ) ? position.top + buffer : position.left + buffer;
 			let max = o.max;
 			let min = o.min;
 
 			/* fix max */
-			if (_.isFunction(o.max)) {
+			if ( _.isFunction( o.max ) ) {
 				max = o.max();
 			}
 
 			/* fix max */
-			if (_.isFunction(o.min)) {
+			if ( _.isFunction( o.min ) ) {
 				min = o.min();
 			}
 
-			if (parseInt(max, 10) === 0) {
-				max = (mode === 'vertical') ? o.container.offsetHeight : o.container.offsetWidth + element.offsetWidth;
+			if ( parseInt( max, 10 ) === 0 ) {
+				max = ( mode === 'vertical' ) ? o.container.offsetHeight : o.container.offsetWidth + element.offsetWidth;
 			}
 
 			/* if we have reached the minimum bound but are below the max ... */
-			if (xy >= min && xy <= max) {
+			if ( xy >= min && xy <= max ) {
 				/* trigger enter event */
-				if (!inside) {
+				if ( ! inside ) {
 					inside = true;
 					enters += 1;
 
 					/* fire enter event */
-					trigger({
+					trigger( {
 						el: element,
 						event: 'scrollEnter',
 						native: false,
 						data: {
 							position,
 						},
-					});
-					if (_.isFunction(o.onEnter)) {
-						o.onEnter(element, position);
+					} );
+					if ( _.isFunction( o.onEnter ) ) {
+						o.onEnter( element, position );
 					}
 				}
 
 				/* trigger tick event */
-				trigger({
+				trigger( {
 					el: element,
 					event: 'scrollTick',
 					native: false,
@@ -94,15 +94,15 @@ const scrollspy = (options) => {
 						enters,
 						leaves,
 					},
-				});
-				if (_.isFunction(o.onTick)) {
-					o.onTick(element, position, inside, enters, leaves);
+				} );
+				if ( _.isFunction( o.onTick ) ) {
+					o.onTick( element, position, inside, enters, leaves );
 				}
-			} else if (inside) {
+			} else if ( inside ) {
 				inside = false;
 				leaves += 1;
 
-				trigger({
+				trigger( {
 					el: element,
 					event: 'scrollLeave',
 					native: false,
@@ -110,14 +110,14 @@ const scrollspy = (options) => {
 						position,
 						leaves,
 					},
-				});
+				} );
 
-				if (_.isFunction(o.onLeave)) {
-					o.onLeave(element, position);
+				if ( _.isFunction( o.onLeave ) ) {
+					o.onLeave( element, position );
 				}
 			}
-		}, o.debounce, false));
-	});
+		}, o.debounce, false ) );
+	} );
 };
 
 export default scrollspy;

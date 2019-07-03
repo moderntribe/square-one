@@ -7,6 +7,7 @@ use Tribe\Project\Service_Providers\Admin_Provider;
 use Tribe\Project\Service_Providers\Asset_Provider;
 use Tribe\Project\Cache\Cache_Provider;
 use Tribe\Project\Service_Providers\CLI_Provider;
+use Tribe\Project\Service_Providers\Content_Provider;
 use Tribe\Project\Service_Providers\Object_Meta_Provider;
 use Tribe\Project\Service_Providers\Nav_Menu_Provider;
 use Tribe\Project\Service_Providers\Panels_Provider;
@@ -26,6 +27,7 @@ use Tribe\Project\Service_Providers\Theme_Provider;
 use Tribe\Project\Service_Providers\Settings_Provider;
 use Tribe\Project\Service_Providers\Twig_Service_Provider;
 use Tribe\Project\Service_Providers\Util_Provider;
+use Tribe\Project\Service_Providers\Whoops_Provider;
 
 class Core {
 
@@ -58,6 +60,7 @@ class Core {
 		$this->providers['assets']           = new Asset_Provider();
 		$this->providers['cache']            = new Cache_Provider(); // override tribe-libs default
 		$this->providers['cli']              = new CLI_Provider();
+		$this->providers['content']          = new Content_Provider();
 		$this->providers['meta']             = new Object_Meta_Provider();
 		$this->providers['nav_menu']         = new Nav_Menu_Provider();
 		$this->providers['panels']           = new Panels_Provider();
@@ -73,6 +76,10 @@ class Core {
 		$this->load_post_type_providers();
 		$this->load_taxonomy_providers();
 
+		// Enable Whoops error logging if required.
+		if ( defined( 'WHOOPS_ENABLE' ) && WHOOPS_ENABLE && class_exists( '\Whoops\Run' ) ) {
+			$this->providers['whoops'] = new Whoops_Provider();
+		}
 
 		/**
 		 * Filter the service providers that power the plugin

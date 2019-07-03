@@ -1,6 +1,16 @@
+/**
+ * Swiper 4.5.0
+ * Most modern mobile touch slider and framework with hardware accelerated transitions
+ * http://www.idangero.us/swiper/
+ *
+ * Copyright 2014-2019 Vladimir Kharlampidi
+ *
+ * Released under the MIT License
+ *
+ * Released on: February 22, 2019
+ */
 .swiper-container {
-	margin-left: auto;
-	margin-right: auto;
+	margin: 0 auto;
 	position: relative;
 	overflow: hidden;
 	list-style: none;
@@ -15,10 +25,6 @@
 }
 
 .swiper-container-vertical > .swiper-wrapper {
-	-webkit-box-orient: vertical;
-	-webkit-box-direction: normal;
-	-webkit-flex-direction: column;
-	-ms-flex-direction: column;
 	flex-direction: column;
 }
 
@@ -29,7 +35,6 @@
 	z-index: 1;
 	display: flex;
 	transition-property: transform;
-	-webkit-box-sizing: content-box;
 	box-sizing: content-box;
 }
 
@@ -55,7 +60,7 @@
 	transition-property: transform;
 }
 
-.swiper-invisible-blank-slide {
+.swiper-slide-invisible-blank {
 	visibility: hidden;
 }
 
@@ -117,13 +122,11 @@
 /* IE10 Windows Phone 8 Fixes */
 .swiper-container-wp8-horizontal,
 .swiper-container-wp8-horizontal > .swiper-wrapper {
-	-ms-touch-action: pan-y;
 	touch-action: pan-y;
 }
 
 .swiper-container-wp8-vertical,
 .swiper-container-wp8-vertical > .swiper-wrapper {
-	-ms-touch-action: pan-x;
 	touch-action: pan-x;
 }
 
@@ -182,6 +185,10 @@
 	background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M27%2C22L27%2C22L5%2C44l-2.1-2.1L22.8%2C22L2.9%2C2.1L5%2C0L27%2C22L27%2C22z'%20fill%3D'%23000000'%2F%3E%3C%2Fsvg%3E");
 }
 
+.swiper-button-lock {
+	display: none;
+}
+
 .swiper-pagination {
 	position: absolute;
 	text-align: center;
@@ -215,6 +222,10 @@
 }
 
 .swiper-pagination-bullets-dynamic .swiper-pagination-bullet-active {
+	transform: scale(1);
+}
+
+.swiper-pagination-bullets-dynamic .swiper-pagination-bullet-active-main {
 	transform: scale(1);
 }
 
@@ -321,14 +332,16 @@ button.swiper-pagination-bullet {
 	transform-origin: right top;
 }
 
-.swiper-container-horizontal > .swiper-pagination-progressbar {
+.swiper-container-horizontal > .swiper-pagination-progressbar,
+.swiper-container-vertical > .swiper-pagination-progressbar.swiper-pagination-progressbar-opposite {
 	width: 100%;
 	height: 4px;
 	left: 0;
 	top: 0;
 }
 
-.swiper-container-vertical > .swiper-pagination-progressbar {
+.swiper-container-vertical > .swiper-pagination-progressbar,
+.swiper-container-horizontal > .swiper-pagination-progressbar.swiper-pagination-progressbar-opposite {
 	width: 4px;
 	height: 100%;
 	left: 0;
@@ -357,6 +370,10 @@ button.swiper-pagination-bullet {
 
 .swiper-pagination-progressbar.swiper-pagination-black .swiper-pagination-progressbar-fill {
 	background: #000;
+}
+
+.swiper-pagination-lock {
+	display: none;
 }
 
 /* Scrollbar */
@@ -399,6 +416,10 @@ button.swiper-pagination-bullet {
 	cursor: move;
 }
 
+.swiper-scrollbar-lock {
+	display: none;
+}
+
 .swiper-zoom-container {
 	width: 100%;
 	height: 100%;
@@ -413,7 +434,6 @@ button.swiper-pagination-bullet {
 .swiper-zoom-container > canvas {
 	max-width: 100%;
 	max-height: 100%;
-	-o-object-fit: contain;
 	object-fit: contain;
 }
 
@@ -543,7 +563,6 @@ button.swiper-pagination-bullet {
 	height: 100%;
 	background: #000;
 	opacity: 0.6;
-	-webkit-filter: blur(50px);
 	filter: blur(50px);
 	z-index: 0;
 }

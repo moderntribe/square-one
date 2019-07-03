@@ -15,8 +15,8 @@ For accessible usage of font icons [see here](http://fontawesome.io/accessibilit
 * Add your new icons to the kit
 * Generate fonts using the settings from last round
 * paste the zip file (it must be named core-icons.zip) in the root of the dev_components directory.
-* Run `grunt icons`
-* Your _icons pcss and variables files will be auto generated for you and the fonts/kit directories updated, then dist will be ran to update your css
+* Run `gulp icons`
+* Your _icons pcss and variables files will be auto generated for you and the fonts/kit directories updated, then theme css will be rebuilt
 
 ## Table of Contents
 

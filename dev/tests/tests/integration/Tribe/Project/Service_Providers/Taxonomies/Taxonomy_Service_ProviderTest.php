@@ -2,22 +2,9 @@
 
 namespace Tribe\Project\Service_Providers\Taxonomies;
 
-class Taxonomy_Service_ProviderTest extends \Codeception\TestCase\WPTestCase {
+use Tribe\Tests\Test_Case;
 
-	public function setUp() {
-		// before
-		parent::setUp();
-
-		// your set up methods here
-	}
-
-	public function tearDown() {
-		// your tear down methods here
-
-		// then
-		parent::tearDown();
-	}
-
+class Taxonomy_Service_ProviderTest extends Test_Case {
 
 	public function test_requires_taxonomy_class() {
 		$this->expectException(\LogicException::class);

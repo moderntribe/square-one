@@ -12,8 +12,8 @@ import * as slide from 'utils/dom/slide';
 import * as tools from 'utils/tools';
 import * as events from 'utils/events';
 
-const siteWrap = tools.getNodes('site-wrap')[0];
-const pn = document.getElementById('panel-navigation');
+const siteWrap = tools.getNodes( 'site-wrap' )[ 0 ];
+const pn = document.getElementById( 'panel-navigation' );
 const options = {
 	speed: 300,
 };
@@ -24,12 +24,12 @@ const options = {
  * @description Close the other accordion toggles.
  */
 
-const closeOthers = (row) => {
-	tools.getNodes('.active .c-accordion__content', true, row.parentNode, true).forEach(accordion => slide.up(accordion, accordion.id, options.speed));
-	tools.getNodes('.active', true, row.parentNode, true).forEach((childRow) => {
-		tools.removeClass(childRow, 'active');
-		setAccInactiveAttributes(childRow.querySelectorAll('.c-accordion__header')[0], childRow.querySelectorAll('.c-accordion__content')[0]);
-	});
+const closeOthers = ( row ) => {
+	tools.getNodes( '.active .c-accordion__content', true, row.parentNode, true ).forEach( accordion => slide.up( accordion, accordion.id, options.speed ) );
+	tools.getNodes( '.active', true, row.parentNode, true ).forEach( ( childRow ) => {
+		tools.removeClass( childRow, 'active' );
+		setAccInactiveAttributes( childRow.querySelectorAll( '.c-accordion__header' )[ 0 ], childRow.querySelectorAll( '.c-accordion__content' )[ 0 ] );
+	} );
 };
 
 /**
@@ -40,11 +40,11 @@ const closeOthers = (row) => {
 const setOffset = () => {
 	options.offset = -20;
 
-	if (tools.hasClass(document.body, 'admin-bar')) {
+	if ( tools.hasClass( document.body, 'admin-bar' ) ) {
 		options.offset = -20 - 40;
 	}
 
-	if (pn) {
+	if ( pn ) {
 		options.offset = -10 - pn.offsetHeight;
 	}
 };
@@ -54,27 +54,27 @@ const setOffset = () => {
  * @description Toggle the accordion open
  */
 
-const openAccordion = (header, content) => {
-	closeOthers(header.parentNode);
-	tools.addClass(header.parentNode, 'active');
-	setAccActiveAttributes(header, content);
+const openAccordion = ( header, content ) => {
+	closeOthers( header.parentNode );
+	tools.addClass( header.parentNode, 'active' );
+	setAccActiveAttributes( header, content );
 	setOffset();
 
-	slide.down(content, content.id, options.speed);
-	_.delay(() => {
-		scrollTo({
+	slide.down( content, content.id, options.speed );
+	_.delay( () => {
+		scrollTo( {
 			after_scroll: () => {
-				events.trigger({
+				events.trigger( {
 					event: 'modern_tribe/accordion_animated',
 					native: false,
-				});
+				} );
 			},
 
 			offset: options.offset,
 			duration: 300,
-			$target: $(header.parentNode),
-		});
-	}, options.speed);
+			$target: $( header.parentNode ),
+		} );
+	}, options.speed );
 };
 
 /**
@@ -82,16 +82,16 @@ const openAccordion = (header, content) => {
  * @description Toggle the accordion closed
  */
 
-const closeAccordion = (header, content) => {
-	tools.removeClass(header.parentNode, 'active');
-	setAccInactiveAttributes(header, content);
-	slide.up(content, content.id, options.speed);
-	_.delay(() => {
-		events.trigger({
+const closeAccordion = ( header, content ) => {
+	tools.removeClass( header.parentNode, 'active' );
+	setAccInactiveAttributes( header, content );
+	slide.up( content, content.id, options.speed );
+	_.delay( () => {
+		events.trigger( {
 			event: 'modern_tribe/accordion_animated',
 			native: false,
-		});
-	}, options.speed);
+		} );
+	}, options.speed );
 };
 
 /**
@@ -99,14 +99,14 @@ const closeAccordion = (header, content) => {
  * @description
  */
 
-const handlePanelEvents = (e) => {
-	const panel = document.querySelectorAll('.site-panel--accordion[class*="collection-preview__active"]')[0];
-	if (!panel) {
+const handlePanelEvents = ( e ) => {
+	const panel = document.querySelectorAll( '.site-panel--accordion[class*="collection-preview__active"]' )[ 0 ];
+	if ( ! panel ) {
 		return;
 	}
-	const header = tools.getNodes(`.c-accordion__header[data-index="${e.detail.rowIndex}"]`, false, panel, true)[0];
-	closeOthers(header.parentNode);
-	openAccordion(header, header.nextElementSibling);
+	const header = tools.getNodes( `.c-accordion__header[data-index="${ e.detail.rowIndex }"]`, false, panel, true )[ 0 ];
+	closeOthers( header.parentNode );
+	openAccordion( header, header.nextElementSibling );
 };
 
 /**
@@ -115,14 +115,14 @@ const handlePanelEvents = (e) => {
  * @description Toggle the active accordion item using class methods.
  */
 
-const toggleItem = (e) => {
+const toggleItem = ( e ) => {
 	const header = e.delegateTarget;
 	const content = header.nextElementSibling;
 
-	if (tools.hasClass(header.parentNode, 'active')) {
-		closeAccordion(header, content);
+	if ( tools.hasClass( header.parentNode, 'active' ) ) {
+		closeAccordion( header, content );
 	} else {
-		openAccordion(header, content);
+		openAccordion( header, content );
 	}
 };
 
@@ -132,9 +132,9 @@ const toggleItem = (e) => {
  */
 
 const bindEvents = () => {
-	delegate(siteWrap, '.c-accordion__header', 'click', toggleItem);
-	document.addEventListener('modular_content/repeater_row_activated', handlePanelEvents);
-	document.addEventListener('modular_content/repeater_row_added', handlePanelEvents);
+	delegate( siteWrap, '.c-accordion__header', 'click', toggleItem );
+	document.addEventListener( 'modular_content/repeater_row_activated', handlePanelEvents );
+	document.addEventListener( 'modular_content/repeater_row_added', handlePanelEvents );
 };
 
 /**
@@ -146,7 +146,7 @@ const init = () => {
 	setOffset();
 	bindEvents();
 
-	console.info('Square One FE: Initialized accordion component scripts.');
+	console.info( 'Square One FE: Initialized accordion component scripts.' );
 };
 
 export default init;

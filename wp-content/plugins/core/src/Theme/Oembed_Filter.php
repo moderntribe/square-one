@@ -63,6 +63,7 @@ class Oembed_Filter {
 			Video::TITLE             => __( 'Play Video', 'tribe' ),
 			Video::VIDEO_URL         => $url,
 			Video::PLAY_TEXT         => $data->title,
+			Video::CAPTION_POSITION  => Video::CAPTION_POSITION_CENTER, // possible options: center, bottom, below
 		];
 
 		$video_obj     = Video::factory( $options );
@@ -116,7 +117,7 @@ class Oembed_Filter {
 	protected function get_fresh_frontend_html( $html, $url, $attr ) {
 
 		/**
-		 * @var \WP_oEmbed $oembed.
+		 * @var \WP_oEmbed $oembed .
 		 */
 		$oembed   = _wp_oembed_get_object();
 		$provider = $oembed->get_provider( $url, $attr );
@@ -186,7 +187,7 @@ class Oembed_Filter {
 	private function get_youtube_embed_id( $url ) {
 		preg_match( '#(?<=v=)[a-zA-Z0-9-]+(?=&)|(?<=v\/)[^&\n]+(?=\?)|(?<=v=)[^&\n]+|(?<=youtu.be/)[^&\n]+#', $url, $video_id );
 
-		return ! empty( $video_id[0] ) ? $video_id[0] : '';
+		return ! empty( $video_id[ 0 ] ) ? $video_id[ 0 ] : '';
 	}
 
 	/**
@@ -199,7 +200,7 @@ class Oembed_Filter {
 	private function get_vimeo_embed_id( $url ) {
 		preg_match( '/(https?:\/\/)?(www\.)?(player\.)?vimeo\.com\/([a-z]*\/)*([0-9]{6,11})[?]?.*/', $url, $video_id );
 
-		return ! empty( $video_id[5] ) ? $video_id[5] : '';
+		return ! empty( $video_id[ 5 ] ) ? $video_id[ 5 ] : '';
 	}
 
 	/**

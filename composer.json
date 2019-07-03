@@ -38,6 +38,36 @@
     {
       "type":"vcs",
       "url":"https://github.com/moderntribe/tribe-libs.git"
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "advanced-custom-fields/advanced-custom-fields-pro",
+        "version": "5.7.12",
+        "type": "wordpress-plugin",
+        "dist": {
+          "type": "zip",
+          "url": "https://connect.advancedcustomfields.com/index.php?a=download&p=pro&k={%WP_PLUGIN_ACF_KEY}&t={%version}"
+        },
+        "require": {
+          "ffraenz/private-composer-installer": "^2.0"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "gravityforms/gravityforms",
+        "version": "2.4.10.7",
+        "type": "wordpress-plugin",
+        "dist": {
+          "type": "zip",
+          "url": "http://www.gravityhelp.com/wp-content/plugins/gravitymanager/api.php?op=get_plugin&slug=gravityforms&key={%WP_PLUGIN_GF_KEY}"
+        },
+        "require": {
+          "gotoandplay/gravityforms-composer-installer": "^1.0"
+        }
+      }
     }
   ],
   "require": {
@@ -46,22 +76,22 @@
     "hirak/prestissimo":"0.3.7",
     "composer/installers":"1.4.0",
     "johnpbloch/wordpress-core-installer":"1.0.0",
-    "johnpbloch/wordpress-core": "4.9.8",
+    "johnpbloch/wordpress-core": "5.2.1",
     "wpackagist-plugin/configure-smtp": "3.1",
-    "wpackagist-plugin/gravity-forms-wcag-20-form-fields": "1.6.0",
+    "wpackagist-plugin/gravity-forms-wcag-20-form-fields": "1.7.1",
     "wpackagist-plugin/limit-login-attempts": "2.0beta3",
     "wpackagist-plugin/posts-to-posts": "1.6.5",
     "wpackagist-plugin/regenerate-thumbnails": "3.0.2",
     "wpackagist-plugin/the-events-calendar": "4.6.11.1",
     "wpackagist-plugin/wordpress-seo": "9.4",
     "wpackagist-plugin/user-switching": "1.3.0",
-    "wpackagist-plugin/classic-editor":"0.4",
-    "wpackagist-plugin/classic-editor-addon":"2.0.0",
+    "wpackagist-plugin/classic-editor":"1.5",
+    "wpackagist-plugin/classic-editor-addon":"2.4.0",
     "moderntribe/panel-builder": "dev-3.3-branch",
     "moderntribe/tribe-libs":"dev-feature/monorepo",
     "humanmade/mercator":"dev-master#7f3846a",
-    "vlucas/phpdotenv": "^2.4.0",
-    "humanmade/S3-Uploads":"1.1.0",
+    "vlucas/phpdotenv": "^3.0",
+    "humanmade/s3-uploads":"1.1.0",
     "pimple/pimple": "~3.0@dev",
     "johnbillion/extended-cpts": "^4.0",
     "twig/twig": "^2.4",
@@ -72,13 +102,16 @@
     "guzzlehttp/psr7": "^1.4",
     "sunra/php-simple-html-dom-parser": "1.5.2",
     "monolog/monolog":"1.23.0",
-    "lucatume/wp-browser": "^2.2.0"
+    "roots/wp-password-bcrypt": "dev-master",
+    "advanced-custom-fields/advanced-custom-fields-pro": "*",
+    "gravityforms/gravityforms": "*"
   },
   "require-dev": {
-    "wp-cli/wp-cli": "^1.5.1",
+    "wp-cli/wp-cli": "^2.2.0",
+    "lucatume/wp-browser": "^2.2.14",
     "lucatume/function-mocker": "~1.0",
-    "phpunit/phpunit": "^6",
-    "php-http/httplug": "^1.1"
+    "php-http/httplug": "^1.1",
+    "filp/whoops": "^2.2@dev"
   },
   "extra": {
     "wordpress-install-dir": "wp",
@@ -94,6 +127,11 @@
   "autoload": {
     "psr-4": {
       "Tribe\\Project\\":"wp-content/plugins/core/src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tribe\\Tests\\": "dev/tests/tests/_support/Classes/"
     }
   }
 }
