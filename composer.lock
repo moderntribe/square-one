@@ -4,14 +4,14 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d487fe61d63687e555f432bbfaadf3e0",
+    "content-hash": "87a8b5abb332f7eedb6940b9af1b7251",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
             "version": "5.7.12",
             "dist": {
                 "type": "zip",
-                "url": "https://connect.advancedcustomfields.com/index.php?a=download&p=pro&k={%WP_PLUGIN_ACF_KEY}&t=5.7.12"
+                "url": "https://connect.advancedcustomfields.com/index.php?a=download&p=pro&k={%WP_PLUGIN_ACF_KEY}&t=5.7.12#v5.7.12"
             },
             "require": {
                 "ffraenz/private-composer-installer": "^2.0"
@@ -1228,25 +1228,63 @@
         },
         {
             "name": "moderntribe/tribe-libs",
-            "version": "dev-master",
+            "version": "dev-feature/monorepo",
             "source": {
                 "type": "git",
                 "url": "git@github.com:moderntribe/tribe-libs.git",
-                "reference": "ee07aae9a38b3e8662ac3558914da48bafa1361b"
+                "reference": "00ba7a261862786c7fd43201c337710362ae0cab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/tribe-libs/zipball/ee07aae9a38b3e8662ac3558914da48bafa1361b",
-                "reference": "ee07aae9a38b3e8662ac3558914da48bafa1361b",
+                "url": "https://api.github.com/repos/moderntribe/tribe-libs/zipball/00ba7a261862786c7fd43201c337710362ae0cab",
+                "reference": "00ba7a261862786c7fd43201c337710362ae0cab",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.5.0"
+                "php": "^7.0"
+            },
+            "replace": {
+                "moderntribe/square1-acf": "self.version",
+                "moderntribe/square1-assets": "self.version",
+                "moderntribe/square1-blog-copier": "self.version",
+                "moderntribe/square1-cache": "self.version",
+                "moderntribe/square1-cli": "self.version",
+                "moderntribe/square1-container": "self.version",
+                "moderntribe/square1-generators": "self.version",
+                "moderntribe/square1-nav": "self.version",
+                "moderntribe/square1-object-meta": "self.version",
+                "moderntribe/square1-oembed": "self.version",
+                "moderntribe/square1-p2p": "self.version",
+                "moderntribe/square1-post-type": "self.version",
+                "moderntribe/square1-queues": "self.version",
+                "moderntribe/square1-queues-mysql": "self.version",
+                "moderntribe/square1-schema": "self.version",
+                "moderntribe/square1-settings": "self.version",
+                "moderntribe/square1-taxonomy": "self.version",
+                "moderntribe/square1-user": "self.version",
+                "moderntribe/square1-utils": "self.version"
+            },
+            "require-dev": {
+                "lucatume/wp-browser": "^2.2"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "Tribe\\Libs\\": "src/"
+                },
+                "files": [
+                    "src/Assets/version.php",
+                    "src/Cache/functions.php"
+                ]
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Tribe\\Libs\\": "tests/integration/Tribe/Libs"
                 }
             },
             "license": [
@@ -1254,10 +1292,10 @@
             ],
             "description": "A library for use on Modern Tribe service projects.",
             "support": {
-                "source": "https://github.com/moderntribe/tribe-libs/tree/master",
+                "source": "https://github.com/moderntribe/tribe-libs/tree/feature/monorepo",
                 "issues": "https://github.com/moderntribe/tribe-libs/issues"
             },
-            "time": "2019-06-10T21:24:51+00:00"
+            "time": "2019-07-03T14:39:55+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -9553,6 +9591,7 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "moderntribe/panel-builder": 20,
+        "moderntribe/tribe-libs": 20,
         "humanmade/mercator": 20,
         "pimple/pimple": 20,
         "roots/wp-password-bcrypt": 20,
