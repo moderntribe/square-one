@@ -101,10 +101,11 @@ class Core {
 	 */
 	private function optional_dependencies() {
 		$optional_dependencies = [
-			'blog_copier' => '\Tribe\Libs\Blog_Copier\Blog_Copier_Provider',
-			'container'   => '\Tribe\Libs\Container\Container_Provider',
-			'generators'  => '\Tribe\Libs\Generators\Generator_Provider',
-			'queues'      => '\Tribe\Libs\Queues\Queues_Provider',
+			'blog_copier'  => '\Tribe\Libs\Blog_Copier\Blog_Copier_Provider',
+			'container'    => '\Tribe\Libs\Container\Container_Provider',
+			'generators'   => '\Tribe\Libs\Generators\Generator_Provider',
+			'queues'       => '\Tribe\Libs\Queues\Queues_Provider',
+			'queues-mysql' => '\Tribe\Libs\Queues_Mysql\Mysql_Backend_Provider',
 		];
 
 		foreach ( $optional_dependencies as $key => $provider ) {
