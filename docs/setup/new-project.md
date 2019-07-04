@@ -41,18 +41,16 @@ SquareOne is hosted on github and should be COPIED, not cloned, into your projec
 
 [Download a copy of SquareOne](https://github.com/moderntribe/square-one/archive/master.zip) and place it in your project root.
 
-#### Startup SquareOneLocal
-
-SquareOne Local will do much of the initial installation of dependencies the first time it's run. It is also broken into two parts, the Global Containers (DNS, SSL, SQL management for all SquareOne Projects) and the Local containers for this specific project (HTTP, Cache, Search, etc.). 
-
-Note, local containers will NOT work if the Global containers are not running.
-
 #### Configure Dev Domain & SSL
 
 1. Setup dev domain: Choose a `.tribe` dev domain like `mysite.tribe` Update `VIRTUAL_HOST` this domain in the `/dev/docker/docker-compose.yml`.
 2. Configure SSL: Run `npm run docker:global:cert mysite.tribe`
 
-#### Spin up containers.
+#### Spin up containers
+
+SquareOne Local is broken into two parts, the Global Containers (DNS, SSL, SQL management for all SquareOne Projects) and the Local containers for this specific project (HTTP, Cache, Search, etc.). 
+
+Note, local containers will NOT work if the Global containers are not running.
 
 1. Run `npm run docker:start:global` (Turns on the global containers. If you are running multiple projects, this only needs to be run once)
 2. Run `npm run docker:start`
