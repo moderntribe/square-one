@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## 2019.07
+* Add direct 1password link in .env.sample
 * Removed 3rd-party premium plugins, added composer installer for them
 
 ## [2019.06]
