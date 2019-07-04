@@ -2,8 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
-## 2019.07
+## [2019.07]
 * Removed 3rd-party premium plugins, added composer installer for them
+* Re-organized docs. Added getting started docs for new folks
 
 ## [2019.06]
 * Fixed: Typo dash in modern-tribe removed from set remote in convert-project-to-fork.sh
