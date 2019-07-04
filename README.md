@@ -2,9 +2,9 @@
 
 [![Build Status](https://travis-ci.com/moderntribe/square-one.svg?token=1evq9eFenqSy9NpYbMyT&branch=master)](https://travis-ci.com/moderntribe/square-one)
 
-Square One (AKA **\[1\]**) is a development framework lovingly maintained by Modern Tribe used for WordPress projects. It augments WordPress into a modern php application framework. We think it's pretty neat.   
+SquareOne is a development framework lovingly maintained by Modern Tribe used for WordPress projects. It augments WordPress into a modern application framework. We think it's pretty neat.   
 
-## Docs
+## Documentation
 
 * [Full documentation](/docs/README.md)
     * [Setup](/docs/setup/README.md)
