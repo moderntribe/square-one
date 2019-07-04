@@ -6,21 +6,6 @@ use Tribe\Tests\Test_Case;
 
 class Taxonomy_Service_ProviderTest extends Test_Case {
 
-	public function setUp() {
-		// before
-		parent::setUp();
-
-		// your set up methods here
-	}
-
-	public function tearDown() {
-		// your tear down methods here
-
-		// then
-		parent::tearDown();
-	}
-
-
 	public function test_requires_taxonomy_class() {
 		$this->expectException(\LogicException::class);
 		new class extends Taxonomy_Service_Provider {};
