@@ -32,11 +32,14 @@ li {
 .list-bullet,
 .t-content ul {
 	list-style: disc outside;
-	padding-left: 1.5em;
+	padding-left: 1.2em;
 	padding-right: 0;
 
+	> li {
+		padding-left: 0.8em;
+	}
+
 	@media (--viewport-medium) {
-		padding-left: 3em;
 		padding-right: 3em;
 	}
 }
@@ -63,21 +66,17 @@ li {
 
 .dl,
 .t-content dl {
-	padding-left: 1.5em;
-	padding-right: 0;
-
-	@media (--viewport-medium) {
-		padding-left: 3em;
-		padding-right: 3em;
-	}
+	padding: 0;
 }
 
 .dt,
 .t-content dt {
+	font-size: var(--font-size-sub-header);
+	line-height: var(--line-height-sub-header);
 	font-weight: var(--font-weight-bold);
 }
 
 .dd,
 .t-content dd {
-	margin-bottom: var(--spacer);
+	margin-bottom: var(--spacer-xs);
 }

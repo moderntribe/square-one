@@ -39,17 +39,9 @@
  * ----------------------------------------------------------------------------- */
 
 .tr,
-.t-content tr {
+.t-content tbody tr {
 
-	thead & {
-		border-bottom: 1px solid var(--color-grey);
-	}
-
-	& ~ tr {
-		border-top: 1px solid var(--color-grey);
-	}
-
-	&:nth-of-type(even) {
+	&:nth-of-type(odd) {
 		background-color: var(--color-grey-light);
 	}
 }

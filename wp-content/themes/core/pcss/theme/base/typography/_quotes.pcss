@@ -60,48 +60,6 @@ q {
 }
 
 /* -----------------------------------------------------------------------------
- * Blockquotes: Modifier - Secondary
- * ----------------------------------------------------------------------------- */
-
-.blockquote--secondary,
-.t-content .blockquote--secondary {
-	padding-left: 0;
-	padding-right: 0;
-	position: relative;
-
-	/* Left Double Quotation Mark: “ */
-	&:before {
-		color: var(--color-grey-light);
-		content: var(--icon-quote);
-		font-family: var(--font-family-base);
-		font-size: 170px;
-		font-weight: var(--font-weight-bold);
-		line-height: 0.8;
-		margin-right: var(--spacer);
-		position: absolute;
-		top: 30px;
-		left: 0;
-
-		@media (--viewport-full) {
-			font-size: 300px;
-		}
-	}
-
-	p {
-		padding-left: 90px;
-		text-align: left;
-
-		@media (--viewport-full) {
-			padding-left: 160px;
-		}
-	}
-
-	cite {
-		text-align: left;
-	}
-}
-
-/* -----------------------------------------------------------------------------
  * Cite
  * ----------------------------------------------------------------------------- */
 
@@ -109,16 +67,12 @@ q {
 .cite,
 .t-content cite {
 	display: block;
-	font-size: 14px;
 	font-style: normal;
 	font-family: var(--font-family-base);
 	font-weight: var(--font-weight-light);
-	margin-top: var(--spacer-s);
+	font-size: var(--font-size-overline);
+	line-height: var(--line-height-overline);
+	margin-top: var(--spacer);
 	text-align: center;
 	text-transform: uppercase;
-
-	@media (--viewport-medium) {
-		font-size: var(--font-size-content-s);
-		line-height: var(--line-height-m);
-	}
 }

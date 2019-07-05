@@ -33,7 +33,7 @@ li {
 .list-bullet,
 .t-content ul {
 	list-style: disc outside;
-	padding-left: 1em;
+	padding-left: 1.15em;
 	padding-right: 0;
 
 	&.list-checked {
@@ -82,7 +82,6 @@ li {
 		counter-increment: item;
 		font-size: var(--font-size-content-s);
 		list-style-type: none;
-		padding-left: 40px;
 		position: relative;
 
 		@media (--viewport-medium) {
@@ -90,38 +89,35 @@ li {
 		}
 
 		&:before {
-			content: counter(item) ".";
+			content: counter(item);
 			font-family: var(--font-family-base);
 			font-weight: var(--font-weight-bold);
-			left: 0;
-			position: absolute;
-			top: 0;
+			float: left;
+			width: 1.5em;
 
 			@media (--viewport-medium) {
-				font-size: 21px;
+				font-size: var(--font-size-body-large);
 			}
 		}
+	}
+
+	&:first-child {
+		counter-reset: customlistcounter;
 	}
 }
 
 /* -------------------------------------------------------------------------
  * DL
  * ------------------------------------------------------------------------- */
-
 .dl,
 .t-content dl {
-	margin-top: 24px;
-	padding-left: 0;
-	padding-right: 0;
-
-	@media (--viewport-medium) {
-		margin-top: 43px;
-		padding-right: 0;
-	}
+	padding: 0;
 }
 
 .dt,
 .t-content dt {
+	font-size: var(--font-size-sub-header);
+	line-height: var(--line-height-sub-header);
 	font-weight: var(--font-weight-bold);
 }
 

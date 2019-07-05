@@ -48,7 +48,7 @@
 	&:focus {
 
 		.c-video__icon {
-			background-color: var(--color-secondary);
+			background-color: var(--color-white);
 			transform: scale(1.1);
 		}
 	}
@@ -150,9 +150,9 @@
 	/* CASE: Bottom Caption Position */
 	.c-video--caption-bottom & {
 		position: absolute;
-		width: calc(100% - 120px);
-		left: 120px;
-		bottom: 55px;
+		width: calc(100% - var(--spacer-w-half));
+		left: var(--spacer-w-half);
+		bottom: 25px;
 		color: var(--color-white);
 		z-index: 1;
 		pointer-events: none;
@@ -171,10 +171,6 @@
 		color: var(--color-white);
 		font-weight: var(--font-weight-bold);
 		transition: var(--transition-embed-icon);
-
-		@media (--viewport-full) {
-			margin-top: 100px;
-		}
 	}
 
 	/* CASE: Center & Bottom Caption while video is playing */
@@ -186,19 +182,32 @@
 }
 
 .c-video__icon {
-	font-size: 36px;
+	font-size: var(--font-size-overline);
 	transition: var(--transition-embed-icon);
 	border-radius: var(--border-radius-round);
-	background-color: var(--color-primary);
+	background-color: var(--color-white);
+	color: var(--color-black);
 	width: 70px;
 	height: 70px;
 	text-align: center;
 	display: inline-block;
 
+	.c-video--caption-bottom & {
+		font-size: var(--font-size-body);
+		width: 50px;
+		height: 50px;
+	}
+
 	@media (--viewport-full) {
-		font-size: 60px;
-		width: 100px;
-		height: 100px;
+		font-size: var(--font-size-headline);
+		width: 96px;
+		height: 96px;
+
+		.c-video--caption-bottom & {
+			font-size: var(--font-size-body-large);
+			width: 64px;
+			height: 64px;
+		}
 	}
 
 	&:before {
@@ -209,20 +218,27 @@
 		line-height: 70px;
 		backface-visibility: hidden;
 
+		.c-video--caption-bottom & {
+			line-height: 50px;
+		}
+
 		@media (--viewport-full) {
-			line-height: 100px;
-			left: 5px;
+			line-height: 96px;
+			left: 3px;
+
+			.c-video--caption-bottom & {
+				line-height: 64px;
+			}
 		}
 	}
 }
 
 .c-video__caption-text {
-	font-size: 18px;
+	font-size: var(--font-size-sub-header-large);
+	line-height: var(--line-height-sub-header-large);
 	font-weight: var(--font-weight-bold);
 	display: block;
-	margin: 18px auto 0;
-	text-transform: uppercase;
-	line-height: 1.25;
+	margin: 24px auto 0;
 	max-width: 600px;
 
 	.c-video--is-small & {
@@ -231,7 +247,9 @@
 
 	/* CASE: Bottom Caption Position */
 	.c-video--caption-bottom & {
-		margin: 0 0 0 25px;
+		margin: 0 0 0 var(--spacer-w-half);
+		display: inline-block;
+		vertical-align: top;
 	}
 
 	/* CASE: Below Caption Position */
