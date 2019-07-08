@@ -42,6 +42,8 @@ q {
 	p {
 		@mixin quote-text;
 
+		font-family: var(--font-calibre-medium);
+		color: var(--sq1-color-mine-shaft);
 		margin: 0 auto;
 		text-align: center;
 
@@ -51,7 +53,7 @@ q {
 	}
 
 	cite {
-		color: var(--color-black);
+		color: var(--sq1-color-mine-shaft);
 
 		@media (--viewport-full) {
 			text-align: center;
@@ -68,11 +70,24 @@ q {
 .t-content cite {
 	display: block;
 	font-style: normal;
-	font-family: var(--font-family-base);
+	font-family: var(--font-calibre);
 	font-weight: var(--font-weight-light);
 	font-size: var(--font-size-overline);
 	line-height: var(--line-height-overline);
-	margin-top: var(--spacer);
 	text-align: center;
 	text-transform: uppercase;
+	position: relative;
+	padding-top: 22px;
+	margin-top: var(--spacer);
+
+	&:before {
+		content: '';
+		width: 40px;
+		height: 1px;
+		background-color: var(--sq1-color-submarine);
+		position: absolute;
+		left: 50%;
+		margin-left: -20px;
+		top: 0;
+	}
 }
