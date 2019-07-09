@@ -2,7 +2,7 @@
 
 Note: This guide is meant to help get SquareOne running. It does not cover the full breadth of setting up a project at Modern Tribe; please see your lead for more information.
 
-#Installation
+## Installation
 * [Server Requirements](#server-requirments)
 * [Development Requirements](#development-requirments)
 * [SquareOne Local](#squareone-local)
@@ -40,6 +40,23 @@ SquareOne is hosted on github and should be COPIED, not cloned, into your projec
 #### Copy SquareOne 
 
 [Download a copy of SquareOne](https://github.com/moderntribe/square-one/archive/master.zip) and place it in your project root.
+
+#### Version Control Setup
+
+1. Create a new target repository.
+2. Run `git init && git add -A && git commit -m "initial commit"` in your root folder
+3. Push the repo to remote repository. If you're using Github like so `git remote add origin git@github.com:moderntribe/project-name`. 
+4. Run `git push -u origin master`
+
+#### Setup project branches
+
+We use a GitOps flow for our deployments. Create the required branches below and push them.
+
+```
+git branch server/dev
+git branch server/staging
+git branch server/production
+```
 
 #### Configure Dev Domain & SSL
 
