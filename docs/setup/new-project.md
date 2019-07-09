@@ -5,8 +5,8 @@ Note: This guide is meant to help get SquareOne running. It does not cover the f
 ## Installation
 * [Server Requirements](#server-requirments)
 * [Development Requirements](#development-requirments)
-* [SquareOne Local](#squareone-local)
 * [Installing SquareOne](#installing-squareone)
+* [SquareOne Local](#squareone-local)
 * [Configuration](#configuration)
 
 ## Server Requirements <a name="server-requirments"></a>
@@ -33,7 +33,7 @@ Redis Server
 * Gulp
 * Docker
 
-## Installing SquareOne <a name="squareone-local"></a>
+## Installing SquareOne <a name="installing-squareone"></a>
 
 SquareOne is hosted on github and should be COPIED, not cloned, into your project folder. Then create a new repository for your project.
 
@@ -58,6 +58,14 @@ git branch server/staging
 git branch server/production
 ```
 
+## SquareOne Local <a name="squareone-local"></a>
+
+SquareOne Local is broken into two parts, the Global Containers (DNS, SSL, SQL management for all SquareOne Projects) and the Local containers for this specific project (HTTP, Cache, Search, etc.). We've build in everything you need for a distributable development environment. 
+
+Notes: 
+* Local containers will NOT work if the Global containers are not running.
+* You can start the global containers from ANY squareOne install, but it's recommended to have a separate squareOne installation for starting/stopping the global containers. This way your SSL certs are all installed in the same installation.
+
 #### Configure Dev Domain & SSL
 
 1. Setup dev domain: Choose a `.tribe` dev domain like `mysite.tribe` Update `VIRTUAL_HOST` this domain in the `/dev/docker/docker-compose.yml`.
@@ -65,12 +73,8 @@ git branch server/production
 
 #### Spin up containers
 
-SquareOne Local is broken into two parts, the Global Containers (DNS, SSL, SQL management for all SquareOne Projects) and the Local containers for this specific project (HTTP, Cache, Search, etc.). 
-
-Note, local containers will NOT work if the Global containers are not running.
-
-1. Run `npm run docker:start:global` (Turns on the global containers. If you are running multiple projects, this only needs to be run once)
-2. Run `npm run docker:start`
+1. Run `npm run docker:global:start` (Turns on the global containers. If you are running multiple projects, this only needs to be run once)
+2. Run `npm run docker:start` (Turns on the local project containers. Recommended you start and stop as needed)
 3. Navigate to the selected dev domain. `https://mysite.tribe`. 
 
 ## Build SquareOne
