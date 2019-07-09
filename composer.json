@@ -111,8 +111,14 @@
     "lucatume/wp-browser": "^2.2.14",
     "lucatume/function-mocker": "~1.0",
     "php-http/httplug": "^1.1",
-    "filp/whoops": "^2.2@dev"
+    "filp/whoops": "^2.2@dev",
+    "squizlabs/php_codesniffer": "^3.4.2",
+    "dealerdirect/phpcodesniffer-composer-installer": "^0.5.0",
+    "phpcompatibility/phpcompatibility-wp": "^2.0",
+    "wp-coding-standards/wpcs": "^0.14.0",
+    "automattic/phpcs-neutron-standard": "^1.5"
   },
+  "prefer-stable" : true,
   "extra": {
     "wordpress-install-dir": "wp",
     "installer-paths": {
@@ -133,5 +139,10 @@
     "psr-4": {
       "Tribe\\Tests\\": "dev/tests/tests/_support/Classes/"
     }
+  },
+  "scripts": {
+    "test": [
+      "phpcs"
+    ]
   }
 }

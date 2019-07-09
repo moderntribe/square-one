@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<ruleset name="ModernTribe">
+    <description>Modern Tribe Coding Standards, based on WordPress VIP</description>
+    <file>./wp-content</file>
+    <arg name="extensions" value="php"/>
+
+    <!-- Ignore WordPress and Composer dependencies -->
+    <!-- Exclude files -->
+    <exclude-pattern>vendor/</exclude-pattern>
+    <exclude-pattern>plugins/^((?!core).)*</exclude-pattern>
+    <exclude-pattern>mu-plugins/mercator/</exclude-pattern>
+
+    <!-- Rules -->
+    <rule ref="WordPress">
+        <exclude name="PEAR.Functions.FunctionCallSignature.CloseBracketLine"/>
+        <exclude name="PEAR.Functions.FunctionCallSignature.ContentAfterOpenBracket"/>
+        <exclude name="PEAR.Functions.FunctionCallSignature.MultipleArguments"/>
+    </rule>
+
+    <rule ref="PHPCompatibilityWP"/>
+    <rule ref="Generic.Arrays.DisallowLongArraySyntax.Found"/>
+    <rule ref="NeutronStandard.StrictTypes.RequireStrictTypes.StrictTypes"/>
+    <rule ref="NeutronStandard.Functions.TypeHint.NoReturnType"/>
+    <rule ref="NeutronStandard.Functions.TypeHint.NoArgumentType"/>
+</ruleset>
