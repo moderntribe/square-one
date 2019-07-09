@@ -2,8 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+<<<<<<< HEAD
 ## [2019.07]
 * Removed 3rd-party premium plugins, added composer installer for them
+* Add direct 1password link in .env.sample
+* Removed 3rd-party premium plugins, added composer installer for them
+* Added "prefer-stable" to composer.json to resolve failing installs
 * Re-organized docs. Added getting started docs for new folks
 
 ## [2019.06]
@@ -11,6 +15,7 @@ All notable changes to this project will be documented in this file.
 * Changed: Updated convert-project-to-fork.sh to use ssh instead of https for setting remote url
 * Add a utility for generating required pages
 * Changed: Updated the Image Component and `the_tribe_image()` method to accept an image URL fallback
+* Fixed: Restored returning an image size that is an exact match to the full size image, when that size is specifically requested.
 
 ## [2019.05]
 * Changed: Updated Classic Editor Plugins to latest Versions
