@@ -43,7 +43,7 @@ SquareOne also has years of security best practices bundled and our coding stand
 ### Deployments
 SquareOne bundles infrastructure as code and supports various deployment methods. It can be integrated with a CI/CD tool or be deployed manually. SquareOne can be configured to deploy for common managed hosts (WP Engine, Pantheon) or for a custom setup.
 
-## Front-End / UI <a name="freontend-ui"></a>
+## Front-End / UI <a name="frontend-ui"></a>
 
 ### Modern Build Tools
 Front-end development moves fast and we regularly review and adopt industry leading tools into our workflows for enhancements in efficiency and quality. Some of the build tools SquareOne currently uses are:
