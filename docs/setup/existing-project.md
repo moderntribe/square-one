@@ -9,7 +9,7 @@ Note: This guide is meant to help get SquareOne running. It does not cover the f
 * [SquareOne Local](#squareone-local)
 * [Configuration](#configuration)
 
-## Server Requirements <a name="server-requirments"></a>
+## Server Requirements
 SquareOne has the same baseline requirements as WordPress, with some exceptions. Note, all these requirements are met be the SquareOne Local setup, so it's highly recommended you use SquareOne Local as you development environment.
 
 However, if prefer to not use SquareOne Local, you will need to make sure your dev setup meets the following requirements:
@@ -25,7 +25,7 @@ SQL Server
 Redis Server
 * Latest recommended
 
-## Development Requirements <a name="development-requirments"></a>
+## Development Requirements
 * Git
 * Composer
 * Node (8.9.3)
@@ -33,7 +33,7 @@ Redis Server
 * Gulp
 * Docker
 
-## Installing an existing SquareOne Project <a name="squareone-local"></a>
+## Installing an existing SquareOne Project
 
 There should be an existing repository for the project that is based off SquareOne. Get access to that repository from your project lead.
 
@@ -53,7 +53,7 @@ Notes
 * Some licensed plugins are required for SquareOne projects (ACF, GravityForms). Removing them is possible, but is not covered here.
 
 
-## SquareOne Local <a name="squareone-local"></a>
+## SquareOne Local
 
 SquareOne Local is a Docker based development environment and is broken into two parts,  Global Containers (DNS, SSL, SQL management for all SquareOne Projects) and the Local containers for this specific project (HTTP, Cache, Search, etc.). We've built in everything you need for a distributable development environment. 
 
@@ -87,7 +87,7 @@ When you spin up the containers for the first time, much of some of build proces
 2. NPM: Run `yarn install`. This will install any node dependencies.
 3. Gulp: Run `gulp`. This will build the CSS/JS bundles.
 
-## Configuration <a name="configuration"></a>
+## Configuration
 
 #### Create a Database
 

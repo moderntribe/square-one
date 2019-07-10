@@ -6,11 +6,11 @@ This section is for folks who aren't familiar with SquareOne and are looking for
 * [SquareOne Overview](#square-one-overview)
 	* [General](#general)
 	* [DevOps](#devops)
-	* [Frontend / UI](#frontend-ui)
+	* [Frontend UI](#frontend-ui)
 	* [Backend](#backend)
 * [Getting started Guides](#getting-started-guides)
 
-## SquareOne Overview <a name="square-one-overview"></a>
+## SquareOne Overview
 
 There are a number of starter frameworks for WordPress, yet few—if any—of the public systems are suitable for enterprise-level projects. SquareOne is the product of years of constant evolution from the Modern Tribe team. 
 
@@ -18,7 +18,7 @@ SquareOne is comprised of best practices combined across all of our development 
 
 We stand by WordPress as the first in class CMS, and paired with SquareOne it can handle enterprise bespoke application needs gracefully. SquareOne is a semi-private project we make available to a number of customers who have come to adopt it on their own projects. We love working with the tool itself, and we’re just as proud to hand it off to your team.
 
-## General <a name="general"></a>
+## General
 
 ### Battle Tested
 SquareOne is battle tested at various scales from a simple brochure site to a site handling millions of hits a day. It supports fully cached sites, dynamic sites, complex applications, API headless,  and commerce sites with proven success.
@@ -32,7 +32,7 @@ SquareOne has been architected to follow the [SOLID](https://en.wikipedia.org/wi
 ### Documented
 SquareOne has embedded docs that cover every part of the system. In addition, inline documentation is a standard, including DocBlocks with @action & @filter references.
 
-## DevOps <a name="devops"></a>
+## DevOps
 
 ### SquareOne Local
 We’ve built our own Docker-based local development environment. It allows for the local dev environment to be managed by code so everyone can keep infrastructure in sync. It’s comprised of a Global container stack that manages DNS and SQL, and the Project Container stack that runs the HTTP container, caching layer, and other required services for the project. This stack is optional, but makes it easy to get up and running with identical environment quickly.
@@ -43,7 +43,7 @@ SquareOne also has years of security best practices bundled and our coding stand
 ### Deployments
 SquareOne bundles infrastructure as code and supports various deployment methods. It can be integrated with a CI/CD tool or be deployed manually. SquareOne can be configured to deploy for common managed hosts (WP Engine, Pantheon) or for a custom setup.
 
-## Frontend / UI <a name="frontend-ui"></a>
+## Frontend / UI
 
 ### Modern Build Tools
 Front-end development moves fast and we regularly review and adopt industry leading tools into our workflows for enhancements in efficiency and quality. Some of the build tools SquareOne currently uses are:
