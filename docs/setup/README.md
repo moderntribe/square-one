@@ -80,8 +80,8 @@ We’ve added Twig to our Front-end tech so we can cleanly separate logic and pr
 ### Separation of Concerns
 WordPress inherently couples its templates and logic tightly. To take a modern approach, SquareOne breaks up the business logic and data model into a Core Plugin and keeps the presentational layer separated in the Core Theme. This allows us to easily componentize and modularize templates and code for reuse and portability. It also makes our code far more testable.
 
-### Composer / Submodules
-We use composer, and in some cases submodules, to manage all our external PHP dependencies so we can version lock upgrades through code. This prevents upgrade regressions and a lighter repository for long term maintainability. This allows for some nice benefits like auto-loaders and access to the wealth of composer packages from the PHP community.
+### Composer
+We use composer to manage all our external PHP dependencies so we can version lock upgrades through code. This prevents upgrade regressions and a lighter repository for long term maintainability. This allows for some nice benefits like auto-loaders and access to the wealth of composer packages from the PHP community.
 
 ### Modern PHP Architecture
 We’ve built an OOP based architecture within the Core Plugin. This allows for single purpose principle, as well as other SOLID principles. Combined with PSR-4 we create a very approachable, extendable, and maintainable standards-focused code base.
