@@ -41,7 +41,7 @@ SquareOne is hosted on github and should be COPIED, not cloned, into your projec
 
 [Download a copy of SquareOne](https://github.com/moderntribe/square-one/archive/master.zip) and place it in your project root.
 
-### Environment Install Variables
+#### Environment Install Variables
 
 SquareOne uses .env files for managing secrets. You can see an `.env.sample` file in the root. Before installation some keys are required.
 
@@ -95,6 +95,9 @@ Notes:
 1. Run `npm run docker:global:start` (Turns on the global containers. If you are running multiple projects, this only needs to be run once)
 2. Run `npm run docker:start` (Turns on the local project containers. Recommended you start and stop as needed)
 
+Notes: 
+* Local containers will NOT work if the Global containers are not running. 
+
 ## Build SquareOne
 
 When you spin up the local containers for the first time, the build process is automatically run for you. If for any reason you need to run them again, here are the commands:
@@ -109,6 +112,7 @@ When you spin up the local containers for the first time, the build process is a
 
 1. Using a MySQL client, connect to `mysql.tribe` with user `root` and password `password`
 2. Create a db of your naming
+3. Go add these credentials to the `.env` file
 
 #### Configure WordPress
 
@@ -124,7 +128,7 @@ NOTE:
 
 #### Success
 
-If you can navigate to `https://mysite.tribe` and see your site, huzzah! Next steps, work with your team to make sure all the proper configuration is in place. 
+If you can navigate to `https://DOMAIN.tribe` and see your site, huzzah! Next steps, work with your team to make sure all the proper configuration is in place. 
 
 If you can't load the site or have any issues along the way, reference the [full docker setup documentation](/docs/docker/README.md) – there are some quirks depending on your local setup it covers in detail. If you are still stuck, ping a Lead for help.
 
