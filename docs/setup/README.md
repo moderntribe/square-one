@@ -107,7 +107,7 @@ SquareOne has been built for efficiency and reliability. There are many common f
 ### Panels
 An optional Page Builder content management extension for WordPress. It’s lightyears ahead of the Core editing experience and provides Drag-and-Drop, dynamic querying, and more. In technology it’s agnostic of the CMS, but built to integrate seamlessly.
 
-### But WordPress...
+### The WordPress way
 
 A common concern is "why not the WordPress way?", and our answer is why not both? With SquareOne, you can build the simplest theme based site OR build a modern application.
 
