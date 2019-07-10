@@ -41,13 +41,12 @@ SquareOne is hosted on github and should be COPIED, not cloned, into your projec
 
 [Download a copy of SquareOne](https://github.com/moderntribe/square-one/archive/master.zip) and place it in your project root.
 
-### Environment Variables
+### Environment Install Variables
 
-SquareOne uses .env files for managing secrets. You can see an `.env.sample` file in the root. 
+SquareOne uses .env files for managing secrets. You can see an `.env.sample` file in the root. Before installation some keys are required.
 
 1. Copy the `.env.sample` file and name it `.env`
-2. Notice we have various environmental vars that are required. Fill them in.
-
+2. Fill in the two required plugins keys
 
 Notes
 * Never commit a .env file to the repository. They are only for storing env secrets and should not be saved to the codebase.
@@ -57,7 +56,7 @@ Notes
 
 1. Create a new target repository.
 2. Run `git init && git add -A && git commit -m "initial commit"` in your root folder
-3. Push the repo to remote repository. If you're using Github like so `git remote add origin git@github.com:moderntribe/project-name`. 
+3. Push the repo to remote repository. If you're using Github run this with your proper user/project-name `git remote add origin git@github.com:moderntribe/project-name`. 
 4. Run `git push -u origin master`
 
 #### Setup project branches
@@ -70,19 +69,26 @@ git branch server/staging
 git branch server/production
 ```
 
+Note(s):
+* Code flows from Dev>Staging>Production only. 
+
 ## SquareOne Local <a name="squareone-local"></a>
 
-SquareOne Local is broken into two parts, the Global Containers (DNS, SSL, SQL management for all SquareOne Projects) and the Local containers for this specific project (HTTP, Cache, Search, etc.). We've build in everything you need for a distributable development environment. 
+SquareOne Local is a Docker based development environment and is broken into two parts,  Global Containers (DNS, SSL, SQL management for all SquareOne Projects) and the Local containers for this specific project (HTTP, Cache, Search, etc.). We've built in everything you need for a distributable development environment. 
 
 Notes: 
 * Local containers will NOT work if the Global containers are not running.
+* It's recommended you clone a second copy of SquareOne and run and manage your Global containers from there.
 * You can start the global containers from ANY squareOne install, but it's recommended to have a separate squareOne installation for starting/stopping the global containers. This way your SSL certs are all installed in the same installation.
 
 #### Configure Dev Domain & SSL
 
 1. Setup dev domain: Choose a `.tribe` dev domain like `mysite.tribe` Update `VIRTUAL_HOST` this domain in the `/dev/docker/docker-compose.yml`.
 2. Configure SSL: Run `npm run docker:global:cert mysite.tribe`
+3. Copy `local-config-sample.json` to `local-config.json` and set the `proxy` value to your domain 
 
+Notes:
+* As noted before, its recommended to have a "global" install of SquareOne and installing every projects certs there. Otherwise, you'll need to start and stop the global containers from each individual project.
 
 #### Spin up containers
 
