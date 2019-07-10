@@ -5,6 +5,9 @@ This is the deep dive development documentation for SquareOne. If you are new he
 * **Setup**
 	* [Getting Started](/docs/setup/README.md)
 
+* **Local Dev**
+	* [Docker](/docs/docker/README.md)
+
 * **Build**
 	* [Overview](/docs/build/README.md)
 	* [Node](/docs/build/node.md)

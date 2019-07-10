@@ -1,6 +1,6 @@
 # Overview
 
-General information and setup instructions for square one on docker.
+General information and setup instructions for SquareOne on docker.
 
 ## Table of Contents
 
