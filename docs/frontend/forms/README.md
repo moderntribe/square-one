@@ -1,6 +1,6 @@
 # Forms
 
-Square One comes with a set of form helper classes as well as a CSS "plugin" to also handle forms powered 
+SquareOne comes with a set of form helper classes as well as a CSS "plugin" to also handle forms powered 
 by Gravity Forms, a WordPress plugin. You can find the general set of form classes along with inline documentation 
 here: [`wp-content/plugins/core/assets/theme/pcss/base/forms/`](/wp-content/plugins/core/assets/theme/pcss/base/forms/).
 

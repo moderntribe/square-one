@@ -1,6 +1,6 @@
 #  Accessibility
 
-Square One does it's best to lay a foundation for building themes that are accessible to all. Here are 
+SquareOne does it's best to lay a foundation for building themes that are accessible to all. Here are 
 the guidelines we follow, which are are focused on building sites that are reachable and maintain 
 the same level of functionality whether interacted with by screen reader or through the use of a keyboard:
 

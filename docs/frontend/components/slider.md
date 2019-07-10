@@ -1,6 +1,6 @@
 #  Slider Component
 
-The slider component is a [Swiper JS](http://idangero.us/swiper/) powered slider that can be used wherever you need a slider, from content, to quotes, complex recipes to basic image galleries or galleries with carousels. Out of box on square one it's being used to power the Testimonials Panel, the Hero Slider Panel, the Gallery Panel and the content Post Gallery shortcode. If you need to extend the template functionality consider bringing that back to SquareOne.
+The slider component is a [Swiper JS](http://idangero.us/swiper/) powered slider that can be used wherever you need a slider, from content, to quotes, complex recipes to basic image galleries or galleries with carousels. Out of box on SquareOne it's being used to power the Testimonials Panel, the Hero Slider Panel, the Gallery Panel and the content Post Gallery shortcode. If you need to extend the template functionality consider bringing that back to SquareOne.
 
 You should not need to touch the javascript file, unless you need really custom behavior, in which case you should create a new js file for that and use a different data-js attribute to harvest the element. That said, you can pass an attribute of `data-swiper-options='{"speed":600}'` which can take any of the arguments in the swiper [api](http://idangero.us/swiper/api/) to modify its behavior without touching the js.
 

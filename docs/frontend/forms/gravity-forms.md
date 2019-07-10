@@ -2,7 +2,7 @@
 
 There are many different form builder plugins WordPress.  For our purposes, we've chosen [Gravity Forms](https://www.gravityforms.com/). 
 
-All of our Gravity Forms styling builds on top of the Square One base form styling, so you'll definitely want to [implement
+All of our Gravity Forms styling builds on top of the SquareOne base form styling, so you'll definitely want to [implement
 the base form styling](/docs/frontend/forms/base.md) prior to beginning any type of Gravity Forms implementation.
 
 As with all of our styling for third-party libraries, the Gravity Forms styles are located in the `vendor` directory here:

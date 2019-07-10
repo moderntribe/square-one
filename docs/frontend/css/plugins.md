@@ -1,6 +1,6 @@
 # CSS "Plugins"
 
-Square One is ready to go with several CSS "plugins", which are essentially directories that contain an 
+SquareOne is ready to go with several CSS "plugins", which are essentially directories that contain an 
 independent set of variables, styles, and essentially skins for certain plugins and functionality that we 
 tend to reuse and see from project to project. You will find them at `wp-content/plugins/core/assets/theme/pcss/vendor/`.
 

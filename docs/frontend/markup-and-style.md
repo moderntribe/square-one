@@ -1,6 +1,6 @@
 #  Markup and Style
 
-Square One is built to assist developers in creating a codebase that maintains consistency, 
+SquareOne is built to assist developers in creating a codebase that maintains consistency, 
 flexibility, and reusabilty while adhering to CSS & HTML best practices and conventions.
 
 To help us in accomplishing this goal, we utilize a combination of the [Block Element Modifier (BEM)](https://en.bem.info/methodology/) 

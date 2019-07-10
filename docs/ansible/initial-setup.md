@@ -176,7 +176,7 @@ Give the rest of the variables a read-through and update any you feel necessary.
 
 ## Install dependencies
 
-Our Square One Ansible setup relies on a number of external roles (e.g. collections of commands to be executed on the server). Some are 3rd party. Others are our own (found at [moderntribe/tribe-ansible-roles](https://github.com/moderntribe/tribe-ansible-roles)). Luckily, there's a single command that installs them all. From the `ansible/` directory, run:
+Our SquareOne Ansible setup relies on a number of external roles (e.g. collections of commands to be executed on the server). Some are 3rd party. Others are our own (found at [moderntribe/tribe-ansible-roles](https://github.com/moderntribe/tribe-ansible-roles)). Luckily, there's a single command that installs them all. From the `ansible/` directory, run:
 
 ```
 ansible-galaxy install -r requirements.yml -c
