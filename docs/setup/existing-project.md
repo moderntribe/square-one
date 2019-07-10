@@ -10,7 +10,7 @@ Note: This guide is meant to help get SquareOne running. It does not cover the f
 * [Configuration](#configuration)
 
 ## Server Requirements
-SquareOne has the same baseline requirements as WordPress, with some exceptions. Note, all these requirements are met be the SquareOne Local setup, so it's highly recommended you use SquareOne Local as you development environment.
+SquareOne has the same baseline requirements as WordPress, with some exceptions. Note, all these requirements are met by the SquareOne Local setup, so it's highly recommended you use SquareOne Local as you development environment.
 
 However, if prefer to not use SquareOne Local, you will need to make sure your dev setup meets the following requirements:
 
