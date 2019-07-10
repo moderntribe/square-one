@@ -41,6 +41,18 @@ SquareOne is hosted on github and should be COPIED, not cloned, into your projec
 
 [Download a copy of SquareOne](https://github.com/moderntribe/square-one/archive/master.zip) and place it in your project root.
 
+### Environment Variables
+
+SquareOne uses .env files for managing secrets. You can see an `.env.sample` file in the root. 
+
+1. Copy the `.env.sample` file and name it `.env`
+2. Notice we have various environmental vars that are required. Fill them in.
+
+
+Notes
+* Never commit a .env file to the repository. They are only for storing env secrets and should not be saved to the codebase.
+* Some licensed plugins are required for SquareOne projects (ACF, GravityForms). Removing them is possible, but is not covered here.
+
 #### Version Control Setup
 
 1. Create a new target repository.
@@ -71,6 +83,7 @@ Notes:
 1. Setup dev domain: Choose a `.tribe` dev domain like `mysite.tribe` Update `VIRTUAL_HOST` this domain in the `/dev/docker/docker-compose.yml`.
 2. Configure SSL: Run `npm run docker:global:cert mysite.tribe`
 
+
 #### Spin up containers
 
 1. Run `npm run docker:global:start` (Turns on the global containers. If you are running multiple projects, this only needs to be run once)
@@ -79,7 +92,7 @@ Notes:
 
 ## Build SquareOne
 
-When you spin up the containers for the first time, much of some of build process is completed for you. If for any reason you need to run them again, here are the commands:
+When you spin up the local containers for the first time, the build process is automatically run for you. If for any reason you need to run them again, here are the commands:
 
 1. Composer: Run `bash ./dev/docker/composer.sh`. This will run inside the php container. You can run composer on the host machine, but you need to make sure you have the proper dependencies.
 2. NPM: Run `yarn install`. This will install any node dependencies.
