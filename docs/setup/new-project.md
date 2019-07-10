@@ -94,7 +94,6 @@ Notes:
 
 1. Run `npm run docker:global:start` (Turns on the global containers. If you are running multiple projects, this only needs to be run once)
 2. Run `npm run docker:start` (Turns on the local project containers. Recommended you start and stop as needed)
-3. Navigate to the selected dev domain. `https://mysite.tribe`. 
 
 ## Build SquareOne
 
@@ -113,14 +112,21 @@ When you spin up the local containers for the first time, the build process is a
 
 #### Configure WordPress
 
-1. Create an `.env file`, then reference the `wp-config.php` to override any settings that reference `tribe_getenv()`
-2. Copy the `local-config-sample.php` to `local-config.php` and add any configurations. 
+By default, everything will work at this point, but you might want to tweak the wordpress config like turning on multisite. Look at the `wp-config.php` and you'll see it's not standard. It's a bit overwhelming actually, but it's where all the configuration is initiated. You'll see that it parses the .env file, loads a local-config file, and checks for any defined constants. So you have your choice of how to override the defaults in two places:
 
-NOTE: This doc does not cover multi-site or other WordPress configurations. Make sure you read all the configuration to ensure it's what you need for the project.  
+1. Add a config constant to the `.env` file
+2. Copy the `local-config-sample.php` to `local-config.php`, and add your configuration there.
+
+NOTE:
+* IF you are configuring secrets, the `.env` file is the best place.
+* IF you need to add custom configuration, the `local-config.php` is the best place.
+* IF you need to share configuration, you can modify the `wp-config.php` directly.
 
 #### Success
 
-If you can navigate to `https://mysite.tribe` and see your site, huzzah! If you can't load the site or have any issues along the way, reference the [full docker setup documentation](/docs/docker/README.md) – there are some quirks depending on your local setup it covers in detail. If you are still stuck, ping a Lead for help.
+If you can navigate to `https://mysite.tribe` and see your site, huzzah! Next steps, work with your team to make sure all the proper configuration is in place. 
+
+If you can't load the site or have any issues along the way, reference the [full docker setup documentation](/docs/docker/README.md) – there are some quirks depending on your local setup it covers in detail. If you are still stuck, ping a Lead for help.
 
 
 
