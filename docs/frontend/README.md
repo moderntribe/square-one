@@ -1,6 +1,6 @@
 # Theme Overview
 
-Check `local-config-sample.php` for how to setup your basic wp constants when initializing the project.
+Check `local-config-sample.php` for how to setup your basic WordPress constants when initializing the project.
 
 The main theme for this system lives in `/wp-content/themes/core`.
 The assets (js/css/img/fonts) for this and its child themes live in `/wp-content/themes/core`. 
@@ -13,7 +13,7 @@ Check the [PostCSS](/docs/frontend/css/postcss.md) readme for information on the
 
 For information on all things Javascript, check [here](/docs/frontend/js/README.md)
 
-For your system setup you must define `SCRIPT_DEBUG` as true in your `local-config.php` at root. Otherwise the front end will load minified files which wont work for dev.
+For your system setup you must define `SCRIPT_DEBUG` as true in your `local-config.php` at root. Otherwise the frontend will load minified files which wont work for dev.
 
 ## Table of Contents
 
@@ -33,13 +33,13 @@ For your system setup you must define `SCRIPT_DEBUG` as true in your `local-conf
     * [PostCSS](/docs/frontend/css/postcss.md)
     * [Grids](/docs/frontend/css/grids.md)
     * [Plugins](/docs/frontend/css/plugins.md)
-  * **Javascript**
+  * **JavaScript**
     * [Overview](/docs/frontend/js/README.md)
     * [Code Splitting](/docs/frontend/js/code-splitting.md)
     * [Polyfills](/docs/frontend/js/polyfills.md)
     * [Selectors](/docs/frontend/js/selectors.md)
     * [Events](/docs/frontend/js/events.md)
-    * [Jquery](/docs/frontend/js/jquery.md)
+    * [JQuery](/docs/frontend/js/jquery.md)
     * [React Apps](/docs/frontend/js/react-apps.md)
   * **Components**
     * [Overview](/docs/frontend/components/README.md)

@@ -6,7 +6,7 @@ This section is for folks who aren't familiar with SquareOne and are looking for
 * [SquareOne Overview](#square-one-overview)
 	* [General](#general)
 	* [DevOps](#devops)
-	* [Front-End / UI](#frontend-ui)
+	* [Frontend / UI](#frontend-ui)
 	* [Backend](#backend)
 * [Getting started Guides](#getting-started-guides)
 
@@ -24,13 +24,13 @@ We stand by WordPress as the first in class CMS, and paired with SquareOne it ca
 SquareOne is battle tested at various scales from a simple brochure site to a site handling millions of hits a day. It supports fully cached sites, dynamic sites, complex applications, API headless,  and commerce sites with proven success.
 
 ### Coding Standards
-SquareOne follows the WordPress Coding Standards with some enhancements for using some of the latest technology like PHP7+, ES6, and more.
+SquareOne follows the WordPress Coding Standards with some enhancements for using some of the latest technology like PHP7+, next generation JavaScript, and more.
 
 ### SOLID Principle
 SquareOne has been architected to follow the [SOLID](https://en.wikipedia.org/wiki/SOLID) principles. This allows for the use of modern architecture, OOP based practices, testability, and more. 
 
 ### Documented
-SquareOne has embedded docs that cover every part of the system. In addition, inline documentation is a standard, including DocBlocks with @action &  @filter references.
+SquareOne has embedded docs that cover every part of the system. In addition, inline documentation is a standard, including DocBlocks with @action & @filter references.
 
 ## DevOps <a name="devops"></a>
 
@@ -38,21 +38,21 @@ SquareOne has embedded docs that cover every part of the system. In addition, in
 We’ve built our own Docker-based local development environment. It allows for the local dev environment to be managed by code so everyone can keep infrastructure in sync. It’s comprised of a Global container stack that manages DNS and SQL, and the Project Container stack that runs the HTTP container, caching layer, and other required services for the project. This stack is optional, but makes it easy to get up and running with identical environment quickly.
 	
 ### Security
-SquareOne also has years of security best practices bundled and our coding standards require heavy use of validation, sanitation, and nonce to verify any actions. It also bundles an Apache and Nginx configurations that enforces many best practice security policies around WordPress. If project secrets are required, we leverage environment variables to keep them safe.
+SquareOne also has years of security best practices bundled and our coding standards require heavy use of validation, sanitation, and nonce to verify any actions. It also bundles Apache and Nginx configurations that enforce many best practice security policies around WordPress. If project secrets are required, we leverage environment variables to keep them safe.
 
 ### Deployments
 SquareOne bundles infrastructure as code and supports various deployment methods. It can be integrated with a CI/CD tool or be deployed manually. SquareOne can be configured to deploy for common managed hosts (WP Engine, Pantheon) or for a custom setup.
 
-## Front-End / UI <a name="frontend-ui"></a>
+## Frontend / UI <a name="frontend-ui"></a>
 
 ### Modern Build Tools
 Front-end development moves fast and we regularly review and adopt industry leading tools into our workflows for enhancements in efficiency and quality. Some of the build tools SquareOne currently uses are:
 
 * NPM / Yarn - Node Package Managers
-* Grunt / Gulp - Build and Task running
+* Gulp - Build and Task running
 * Webpack - Assets Bundler 
 * PostCSS - Pre-processing tool, provides various CSS enhancements for things like Mixins, functions, variables, and linting to CSS.
-* Babel - Backwards compatible ES6 Support
+* Babel - Backwards compatible next generation JavaScript Support
 * Linting - Code quality and Syntax enforcement 
 
 These build tools provide several ways to package and bundle the front-end assets of the site. This includes Dev and Prod release bundles that optimize for each scenario. 
