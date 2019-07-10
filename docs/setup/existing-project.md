@@ -81,7 +81,7 @@ Notes:
 
 ## Build SquareOne
 
-When you spin up the containers for the first time, much of some of build process is completed for you. If for any reason you need to run them again, here are the commands:
+When you spin up the containers for the first time, some of the build process is completed for you. If for any reason you need to run them again, here are the commands:
 
 1. Composer: Run `bash ./dev/docker/composer.sh`. This will run inside the php container. You can run composer on the host machine, but you need to make sure you have the proper dependencies.
 2. NPM: Run `yarn install`. This will install any node dependencies.
