@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## 2019.07
-* Added a module for REST API modifications.
+* Added example post meta to REST API responses.
 * Removed 3rd-party premium plugins, added composer installer for them
 
 ## [2019.06]
