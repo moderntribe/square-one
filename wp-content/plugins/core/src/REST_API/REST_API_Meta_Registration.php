@@ -1,6 +1,6 @@
 <?php
 /**
- * A home for REST API modifications.
+ * REST API meta registration.
  *
  * @package Tribe\Project\REST_API
  * @version 0.1.0
@@ -11,18 +11,12 @@ declare( strict_types=1 );
 namespace Tribe\Project\REST_API;
 
 use Tribe\Project\Object_Meta\Example;
+use Tribe\Project\Post_Types\Sample\Sample;
 
 /**
  * Class REST_API.
  */
-class REST_API_Main {
-
-	/**
-	 * Adds hooks during the `rest_api_init` action.
-	 */
-	public function hook() {
-		add_action( 'rest_api_init', [ $this, 'add_meta_to_rest' ] );
-	}
+class REST_API_Meta_Registration {
 
 	/**
 	 * Adds object meta to the REST API.
@@ -31,7 +25,7 @@ class REST_API_Main {
 	 */
 	public function add_meta_to_rest() {
 		register_rest_field(
-			'sample',
+			Sample::NAME,
 			Example::ONE,
 			[
 				'get_callback' => [ $this, 'get_post_meta' ],
