@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## 2019.07
+* Updated: Lodash to 4.7.14
 * Add direct 1password link in .env.sample
 * Removed 3rd-party premium plugins, added composer installer for them
 * Added "prefer-stable" to composer.json to resolve failing installs
