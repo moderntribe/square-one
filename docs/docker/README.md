@@ -1,8 +1,9 @@
 # Overview
 
-General information and setup instructions for square one on docker.
+General information and setup instructions for SquareOne on docker.
 
 ## Table of Contents
 
 * [Overview](/docs/docker/README.md)
-* [Install guide for Ubuntu users](/docs/docker/install-guide-for-ubuntu.md)
+	* [Docker](/dev/docker/README.md)
+	* [Install guide for Ubuntu users](/docs/docker/install-guide-for-ubuntu.md)

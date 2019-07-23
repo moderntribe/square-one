@@ -41,7 +41,7 @@ Learn more about Post 2 Post here and usage in this project here: [Posts 2 Posts
 
 ## Action/Filter Hooking Pattern
 
-Square One has adopted a lazy-loading patter for Actions and Filters. This pattern works hand-in-hand with our Service Provider pattern in order to allow all the classes in the Container to only load when they are actually requested instead of every time `plugins_loaded` is fired.
+SquareOne has adopted a lazy-loading patter for Actions and Filters. This pattern works hand-in-hand with our Service Provider pattern in order to allow all the classes in the Container to only load when they are actually requested instead of every time `plugins_loaded` is fired.
 
 Consider the following situation illustrating the older pattern:
 
