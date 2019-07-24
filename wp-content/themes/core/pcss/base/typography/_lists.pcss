@@ -10,8 +10,8 @@ dl {
 	.t-content & {
 		@mixin body-content;
 
-		margin-top: var(--spacer);
-		margin-bottom: var(--spacer);
+		margin-top: var(--spacer-m);
+		margin-bottom: var(--spacer-m);
 	}
 }
 
@@ -32,7 +32,7 @@ li {
 .list-bullet,
 .t-content ul {
 	list-style: disc outside;
-	padding-left: 1.2em;
+	padding-left: 1.15em;
 	padding-right: 0;
 
 	> li {
@@ -41,6 +41,29 @@ li {
 
 	@media (--viewport-medium) {
 		padding-right: 3em;
+	}
+
+	&.list-checked {
+		list-style: none;
+
+		li {
+			list-style: none;
+			position: relative;
+
+			&:before {
+				border: solid var(--color-primary);
+				border-width: 0 2px 2px 0;
+				content: '';
+				display: block;
+				height: 9px;
+				left: auto;
+				margin-left: -33px;
+				position: absolute;
+				top: 5px;
+				transform: rotate(45deg);
+				width: 5px;
+			}
+		}
 	}
 }
 
@@ -51,23 +74,44 @@ li {
 .list-number,
 .t-content ol {
 	list-style: decimal outside;
-	padding-left: 1.5em;
+	padding-left: 0;
 	padding-right: 0;
 
 	@media (--viewport-medium) {
-		padding-left: 3em;
 		padding-right: 3em;
+	}
+
+	li {
+		counter-increment: item;
+		font-size: var(--font-size-content-s);
+		list-style-type: none;
+		position: relative;
+
+		@media (--viewport-medium) {
+			font-size: var(--font-size-content);
+		}
+
+		&:before {
+			content: counter(item);
+			font-family: var(--font-family-base);
+			font-weight: var(--font-weight-bold);
+			float: left;
+			width: 1.5em;
+
+			@media (--viewport-medium) {
+				font-size: var(--font-size-body-large);
+			}
+		}
+	}
+
+	&:first-child {
+		counter-reset: customlistcounter;
 	}
 }
 
 /* -------------------------------------------------------------------------
  * DL
  * ------------------------------------------------------------------------- */
-
-.dl,
-.t-content dl {
-	padding: 0;
-}
 
 .dt,
 .t-content dt {
