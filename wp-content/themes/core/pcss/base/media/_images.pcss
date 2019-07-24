@@ -42,9 +42,23 @@ img {
 
 .wp-caption-text {
 	max-width: 100%;
-	margin: var(--spacer-xs) 0 0;
-	font-size: 14px;
-	line-height: var(--line-height-s);
+	color: var(--color-mine-shaft);
+	font-family: var(--font-tiempo);
+	font-size: var(--font-size-caption);
+	line-height: var(--line-height-caption);
+	margin: var(--spacer-xxs) auto 0;
+	padding-bottom: var(--spacer-xs);
+	border-bottom: 1px solid var(--color-submarine);
+}
+
+.wp-image--caption {
+
+	&.aligncenter .wp-caption-text {
+		@media (--viewport-medium) {
+			max-width: calc(100% - (var(--spacer-w) * 4));
+		}
+	}
+
 }
 
 /* -----------------------------------------------------------------------------

@@ -9,7 +9,11 @@ blockquote,
 q {
 
 	.t-content & {
-		margin: var(--spacer) auto;
+		margin: var(--spacer-xs) auto;
+
+		@media (--viewport-medium) {
+			margin-top: var(--spacer);
+		}
 	}
 }
 
@@ -38,10 +42,21 @@ q {
 	p {
 		@mixin quote-text;
 
+		font-family: var(--font-calibre-medium);
+		color: var(--color-mine-shaft);
 		margin: 0 auto;
+		text-align: center;
 
 		& ~ p {
 			margin-top: var(--spacer);
+		}
+	}
+
+	cite {
+		color: var(--color-mine-shaft);
+
+		@media (--viewport-full) {
+			text-align: center;
 		}
 	}
 }
@@ -53,6 +68,26 @@ q {
 /* cite */
 .cite,
 .t-content cite {
-	font-style: normal;
 	display: block;
+	font-style: normal;
+	font-family: var(--font-calibre);
+	font-weight: var(--font-weight-light);
+	font-size: var(--font-size-overline);
+	line-height: var(--line-height-overline);
+	text-align: center;
+	text-transform: uppercase;
+	position: relative;
+	padding-top: 22px;
+	margin-top: var(--spacer);
+
+	&:before {
+		content: '';
+		width: 40px;
+		height: 1px;
+		background-color: var(--color-submarine);
+		position: absolute;
+		left: 50%;
+		margin-left: -20px;
+		top: 0;
+	}
 }

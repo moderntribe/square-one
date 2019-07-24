@@ -5,11 +5,13 @@
 
 .table,
 .t-content table {
-	font-size: var(--font-size-content-s);
+	font-size: var(--font-size-body);
+	line-height: var(--line-height-body);
+	color: var(--color-mine-shaft);
 	margin: var(--spacer) auto;
-	border: 1px solid var(--color-grey);
 	text-align: left;
 	border-collapse: collapse;
+	border: 0;
 	width: 100%;
 	table-layout: fixed;
 
@@ -25,12 +27,15 @@
 
 .th,
 .t-content th {
+	color: var(--color-mine-shaft);
 	padding: 14px 1em 12px;
+	font-family: var(--font-calibre);
 	font-weight: var(--font-weight-semibold);
-	line-height: var(--line-height-even);
+	line-height: var(--line-height-sub-header);
+	font-size: var(--font-size-sub-header);
 
-	& ~ th {
-		border-left: 1px solid var(--color-grey);
+	~ th {
+		border: 0;
 	}
 }
 
@@ -39,10 +44,18 @@
  * ----------------------------------------------------------------------------- */
 
 .tr,
+.t-content tr {
+
+	& ~ tr {
+		border: 0;
+	}
+}
+
+tbody tr,
 .t-content tbody tr {
 
 	&:nth-of-type(odd) {
-		background-color: var(--color-grey-light);
+		background-color: var(--color-desert-storm);
 	}
 }
 
@@ -52,9 +65,9 @@
 
 .td,
 .t-content td {
-	padding: 12px 1em 10px;
+	padding: 16px 24px;
 
 	& ~ td {
-		border-left: 1px solid var(--color-grey);
+		border: 0;
 	}
 }

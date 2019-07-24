@@ -2,6 +2,26 @@ p {
 	@mixin body-content;
 
 	.t-content & {
-		margin-bottom: var(--spacer-lg);
+		font-family: var(--font-tiempo);
+		font-size: var(--font-size-content-s);
+		line-height: var(--line-height-base);
+		margin-bottom: var(--spacer-xs);
+
+		@media (--viewport-medium) {
+			font-size: var(--font-size-base);
+			margin-bottom: var(--spacer);
+		}
+	}
+
+	&.p-secondary {
+
+		.t-content & {
+			font-size: var(--font-size-content-s);
+
+			@media (--viewport-medium) {
+				font-size: var(--font-size-content-s);
+				margin-bottom: var(--spacer);
+			}
+		}
 	}
 }
