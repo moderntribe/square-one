@@ -40,10 +40,21 @@
  * ----------------------------------------------------------------------------- */
 
 @define-mixin quote-base {
+	max-width: 800px;
 	padding: var(--spacer);
 }
 
 @define-mixin quote-text {
+	color: var(--color-black);
+	font-family: var(--font-family-base);
 	font-size: var(--font-size-headline);
 	line-height: var(--line-height-headline);
+	font-style: normal;
+	font-weight: var(--font-weight-bold);
+	text-align: center;
+
+	@media (--viewport-medium) {
+		font-size: 36px;
+		line-height: 44px;
+	}
 }
