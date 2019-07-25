@@ -49,11 +49,8 @@ img {
 	margin: var(--spacer-xxs) auto 0;
 	padding-bottom: var(--spacer-xs);
 	border-bottom: 1px solid var(--color-submarine);
-}
 
-.wp-image--caption {
-
-	&.aligncenter .wp-caption-text {
+	.wp-image--caption.aligncenter & {
 		@media (--viewport-medium) {
 			max-width: calc(100% - (var(--spacer-w) * 4));
 		}
