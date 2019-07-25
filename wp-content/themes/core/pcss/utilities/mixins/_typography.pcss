@@ -58,3 +58,79 @@
 		line-height: 44px;
 	}
 }
+
+/* -----------------------------------------------------------------------------
+ *
+ * Typescale:
+ * 	- Display Large
+ * 	- Display
+ * 	- Headline Large
+ * 	- Headline
+ * 	- Title Large
+ * 	- Title
+ * 	- Subheader Large
+ * 	- Subheader
+ *
+ * ----------------------------------------------------------------------------- */
+
+@define-mixin display-large {
+	font-family: var(--font-family-calibre);
+	font-size: var(--font-size-display-large);
+	font-weight: var(--font-weight-semibold);
+	line-height: var(--line-height-display-large);
+	letter-spacing: -0.9px;
+}
+
+@define-mixin display {
+	font-family: var(--font-family-calibre);
+	font-size: var(--font-size-display);
+	font-weight: var(--font-weight-semibold);
+	line-height: var(--line-height-display);
+	letter-spacing: -0.3px;
+}
+
+@define-mixin headline-large {
+	font-family: var(--font-family-calibre);
+	font-size: var(--font-size-headline-large);
+	font-weight: var(--font-weight-semibold);
+	line-height: var(--line-height-headline-large);
+	letter-spacing: -0.2px;
+}
+
+@define-mixin headline {
+	font-family: var(--font-family-calibre);
+	font-size: var(--font-size-headline);
+	font-weight: var(--font-weight-semibold);
+	line-height: var(--line-height-headline);
+	letter-spacing: -0.1px;
+}
+
+@define-mixin title-large {
+	font-family: var(--font-family-calibre);
+	font-size: var(--font-size-title-large);
+	font-weight: var(--font-weight-semibold);
+	line-height: var(--line-height-title-large);
+}
+
+@define-mixin title {
+	font-family: var(--font-family-calibre);
+	font-size: var(--font-size-title);
+	font-weight: var(--font-weight-semibold);
+	line-height: var(--line-height-title);
+}
+
+@define-mixin subheader-large {
+	font-family: var(--font-family-calibre);
+	font-size: var(--font-size-sub-header-large);
+	font-weight: var(--font-weight-semibold);
+	line-height: var(--line-height-sub-header-large);
+	letter-spacing: 0.11px;
+}
+
+@define-mixin subheader {
+	font-family: var(--font-family-calibre);
+	font-size: var(--font-size-sub-header);
+	font-weight: var(--font-weight-semibold);
+	line-height: var(--line-height-sub-header);
+	letter-spacing: 0.11px;
+}

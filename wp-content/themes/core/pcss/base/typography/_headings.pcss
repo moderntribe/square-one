@@ -5,21 +5,16 @@
 
 .h1,
 .t-content h1 {
-	font-size: var(--font-size-display);
-	line-height: var(--line-height-display);
-	font-weight: var(--font-weight-bold);
-	letter-spacing: -0.02em;
+	@mixin display;
 
 	@media (--viewport-medium) {
-		font-size: var(--font-size-display-large);
-		line-height: var(--line-height-display-large);
+		@mixin display-large;
 	}
 }
 
 h1 {
 
 	.t-content & {
-		font-family: var(--font-calibre-medium);
 		margin-top: var(--spacer-m);
 		margin-bottom: var(--spacer-xs);
 
@@ -35,20 +30,16 @@ h1 {
 
 .h2,
 .t-content h2 {
-	font-size: var(--font-size-headline-large);
-	line-height: var(--line-height-headline-large);
-	font-weight: var(--font-weight-bold);
+	@mixin headline-large;
 
 	@media (--viewport-medium) {
-		font-size: var(--font-size-display);
-		line-height: var(--line-height-display);
+		@mixin display;
 	}
 }
 
 h2 {
 
 	.t-content & {
-		font-family: var(--font-calibre-medium);
 		margin-top: var(--spacer-m);
 		margin-bottom: var(--spacer-xs);
 
@@ -64,20 +55,16 @@ h2 {
 
 .h3,
 .t-content h3 {
-	font-size: var(--font-size-headline);
-	line-height: var(--line-height-headline);
-	font-weight: var(--font-weight-bold);
+	@mixin headline;
 
 	@media (--viewport-medium) {
-		font-size: var(--font-size-headline-large);
-		line-height: var(--line-height-headline-large);
+		@mixin headline-large;
 	}
 }
 
 h3 {
 
 	.t-content & {
-		font-family: var(--font-calibre-medium);
 		margin-top: var(--spacer-m);
 		margin-bottom: var(--spacer-xs);
 
@@ -93,20 +80,16 @@ h3 {
 
 .h4,
 .t-content h4 {
-	font-size: var(--font-size-title-large);
-	line-height: var(--line-height-title-large);
-	font-weight: var(--font-weight-bold);
+	@mixin title-large;
 
 	@media (--viewport-medium) {
-		font-size: var(--font-size-headline);
-		line-height: var(--line-height-headline);
+		@mixin headline;
 	}
 }
 
 h4 {
 
 	.t-content & {
-		font-family: var(--font-calibre-medium);
 		margin-top: var(--spacer-m);
 		margin-bottom: var(--spacer-xs);
 
@@ -122,20 +105,16 @@ h4 {
 
 .h5,
 .t-content h5 {
-	font-size: var(--font-size-title);
-	line-height: var(--line-height-title);
-	font-weight: var(--font-weight-bold);
+	@mixin title;
 
 	@media (--viewport-medium) {
-		font-size: var(--font-size-title-large);
-		line-height: var(--line-height-title-large);
+		@mixin title-large;
 	}
 }
 
 h5 {
 
 	.t-content & {
-		font-family: var(--font-calibre-medium);
 		margin-top: var(--spacer-m);
 		margin-bottom: var(--spacer-xs);
 
@@ -151,20 +130,16 @@ h5 {
 
 .h6,
 .t-content h6 {
-	font-size: var(--font-size-sub-header);
-	line-height: var(--line-height-sub-header);
-	font-weight: var(--font-weight-bold);
+	@mixin subheader;
 
 	@media (--viewport-medium) {
-		font-size: var(--font-size-sub-header-large);
-		line-height: var(--line-height-sub-header-large);
+		@mixin subheader-large;
 	}
 }
 
 h6 {
 
 	.t-content & {
-		font-family: var(--font-calibre-medium);
 		margin-top: var(--spacer-m);
 		margin-bottom: var(--spacer-xs);
 
