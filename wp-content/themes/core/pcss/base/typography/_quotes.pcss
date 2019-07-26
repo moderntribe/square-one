@@ -42,9 +42,6 @@ q {
 	p {
 		@mixin quote-text;
 
-		font-family: var(--font-family-calibre);
-		font-weight: var(--font-weight-medium);
-		color: var(--color-mine-shaft);
 		margin: 0 auto;
 		text-align: center;
 
@@ -71,20 +68,21 @@ q {
 .t-content cite {
 	display: block;
 	font: normal var(--font-weight-light) var(--font-size-body-s)/var(--line-height-base) var(--font-family-calibre);
+	letter-spacing: 1.75px;
 	text-align: center;
 	text-transform: uppercase;
 	position: relative;
-	padding-top: 22px;
+	padding-top: var(--spacer-1);
 	margin-top: var(--spacer-2);
 
 	&:before {
 		content: '';
-		width: 40px;
+		width: 24px;
 		height: 1px;
 		background-color: var(--color-submarine);
 		position: absolute;
 		left: 50%;
 		margin-left: -20px;
-		top: 0;
+		top: -1px;
 	}
 }

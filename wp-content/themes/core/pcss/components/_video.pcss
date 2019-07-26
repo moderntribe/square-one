@@ -35,6 +35,8 @@
 	aspect-ratio: '16:9';
 
 	a {
+		border-bottom: 0;
+		padding-bottom: 0;
 		text-decoration: none;
 	}
 }
@@ -234,15 +236,23 @@
 }
 
 .c-video__caption-text {
+	font-weight: var(--font-weight-regular);
 	font-size: var(--font-size-body-l);
-	line-height: 1.45;
-	font-weight: var(--font-weight-bold);
+	line-height: var(--line-height-xl);
 	display: block;
 	margin: 24px auto 0;
 	max-width: 600px;
 
 	.c-video--is-small & {
 		display: none;
+	}
+
+	/* CASE: Bottom Caption Position */
+	.c-video--caption-center & {
+		font-family: var(--font-family-calibre);
+		font-weight: var(--font-weight-semibold);
+		font-size: 24px;
+		line-height: 1.45;
 	}
 
 	/* CASE: Bottom Caption Position */
