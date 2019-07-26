@@ -6,7 +6,7 @@
 .table,
 .t-content table {
 	font-size: var(--font-size-body);
-	line-height: var(--line-height-body);
+	line-height: var(--line-height-base);
 	color: var(--color-mine-shaft);
 	margin: var(--spacer-2) auto;
 	text-align: left;
@@ -16,7 +16,7 @@
 	table-layout: fixed;
 
 	@media (--viewport-medium) {
-		font-size: var(--font-size-content);
+		font-size: var(--font-size-body);
 		table-layout: auto;
 	}
 }
@@ -31,8 +31,8 @@
 	padding: 14px 1em 12px;
 	font-family: var(--font-family-calibre);
 	font-weight: var(--font-weight-semibold);
-	line-height: var(--line-height-sub-header);
-	font-size: var(--font-size-sub-header);
+	line-height: var(--line-height-l);
+	font-size: var(--font-size-body-l);
 
 	~ th {
 		border: 0;

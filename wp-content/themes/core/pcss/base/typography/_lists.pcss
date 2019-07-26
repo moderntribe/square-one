@@ -60,12 +60,12 @@ li {
 
 	li {
 		counter-increment: item;
-		font-size: var(--font-size-content-s);
+		font-size: var(--font-size-body-s);
 		list-style-type: none;
 		position: relative;
 
 		@media (--viewport-medium) {
-			font-size: var(--font-size-content);
+			font-size: var(--font-size-body);
 		}
 
 		&:before {
@@ -76,7 +76,7 @@ li {
 			width: 1.5em;
 
 			@media (--viewport-medium) {
-				font-size: var(--font-size-body-large);
+				font-size: var(--font-size-body-l);
 			}
 		}
 	}
@@ -92,8 +92,8 @@ li {
 
 .dt,
 .t-content dt {
-	font-size: var(--font-size-sub-header);
-	line-height: var(--line-height-sub-header);
+	font-size: var(--font-size-body-l);
+	line-height: var(--line-height-l);
 	font-weight: var(--font-weight-bold);
 }
 
