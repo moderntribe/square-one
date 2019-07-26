@@ -10,8 +10,8 @@ dl {
 	.t-content & {
 		@mixin body-content;
 
-		margin-top: var(--spacer-3);
-		margin-bottom: var(--spacer-3);
+		margin-top: var(--spacer-4);
+		margin-bottom: var(--spacer-4);
 	}
 }
 
@@ -20,7 +20,7 @@ li {
 	& ~ li {
 
 		.t-content & {
-			margin-top: var(--spacer-1);
+			margin-top: var(--spacer-0);
 		}
 	}
 }
@@ -70,13 +70,15 @@ li {
 
 		&:before {
 			content: counter(item);
-			font-family: var(--font-family-base);
-			font-weight: var(--font-weight-bold);
+			font-family: var(--font-family-calibre);
+			font-weight: var(--font-weight-semibold);
+			line-height: var(--line-height-base);
 			float: left;
-			width: 1.5em;
+			width: 1.6em;
 
 			@media (--viewport-medium) {
 				font-size: var(--font-size-body-l);
+				line-height: 1.6;
 			}
 		}
 	}
@@ -92,9 +94,10 @@ li {
 
 .dt,
 .t-content dt {
+	font-family: var(--font-family-calibre);
+	font-weight: var(--font-weight-semibold);
 	font-size: var(--font-size-body-l);
 	line-height: var(--line-height-l);
-	font-weight: var(--font-weight-bold);
 }
 
 .dd,
