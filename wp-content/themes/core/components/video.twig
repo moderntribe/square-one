@@ -5,8 +5,8 @@
 		{{ container_attrs }}
 		data-id="{{ id }}"
 >
-	<figure class="{{ container_wrap_classes }}">
-		<div class="{{ embed_classes }}">
+	<div class="{{ container_wrap_classes }}">
+		<figure class="{{ embed_classes }}">
 			<a
 					href="{{ video_url|esc_url }}"
 					class="c-video__trigger"
@@ -22,13 +22,22 @@
 						data-src="{{ thumbnail_url|esc_url }}"
 						role="presentation"
 				/>
-				<div class="c-video__trigger-action">
-					<i class="c-video__icon icon icon-play" aria-hidden="true"></i>
-				</div>
+				{% if caption_position is 'below' %}
+					<div class="c-video__trigger-action">
+						<i class="c-video__icon icon icon-play" aria-hidden="true"></i>
+					</div>
+				{% else %}
+					<figcaption class="c-video__caption">
+						<i class="c-video__icon icon icon-play" aria-hidden="true"></i>
+						<span class="c-video__caption-text">{{ play_text|esc_html }}</span>
+					</figcaption>
+				{% endif %}
 			</a>
-		</div>
-		<figcaption class="c-video__caption">
-			<span class="c-video__caption-text">{{ play_text|esc_html }}</span>
-		</figcaption>
-	</figure>
+		</figure>
+		{% if caption_position is 'below' %}
+			<div class="c-video__caption">
+				<div class="c-video__caption-title">{{ play_text|esc_html }}</div>
+			</div>
+		{% else %}
+	</div>
 </div>
