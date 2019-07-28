@@ -15,33 +15,33 @@
 .c-btn,
 a.c-btn {
 	@mixin button-global;
+	@mixin button-base;
+	@mixin button-solid;
+}
 
-	background-color: var(--color-primary);
-	border-bottom: none;
-	color: var(--color-white);
-	font-family: var(--font-family-calibre);
-	font-size: var(--font-size-body-s);
-	letter-spacing: 0.05em;
-	line-height: var(--line-height-base);
-	text-align: center;
-	text-transform: uppercase;
-	padding: 17px 24px;
+/* -------------------------------------------------------------------------
+ * Button: Modifier - Icon
+ * ------------------------------------------------------------------------- */
 
-	&:visited {
-		color: var(--color-white);
+.c-btn--icon,
+a.c-btn--icon {
+
+	&:after {
+		display: inline-block;
+		content: var(--icon-arrow-large-right);
+		font-family: var(--font-family-core-icons);
+		font-weight: var(--font-weight-light);
+		margin-left: 7px;
+		transform: translateY(2px);
+		transition: var(--transition);
 	}
 
-	&:hover,
 	&:focus,
-	&:active {
-		background-color: var(--color-link-hover);
-		color: var(--color-white);
-	}
+	&:hover {
 
-	@media (--viewport-medium) {
-		font-size: var(--font-size-base);
-		line-height: var(--line-height-base);
-		padding: 19px 24px;
+		&:after {
+			margin-left: 16px;
+		}
 	}
 }
 
@@ -52,54 +52,4 @@ a.c-btn {
 .c-btn--full,
 a.c-btn--full {
 	width: 100%;
-}
-
-/* -------------------------------------------------------------------------
- * Button: Modifier - Small
- * ------------------------------------------------------------------------- */
-
-.c-btn--sm,
-a.c-btn--sm {
-	font-size: var(--font-size-body-s);
-	padding: 16px 18px;
-
-	@media (--viewport-medium) {
-		font-size: var(--font-size-body-s);
-	}
-}
-
-/* -------------------------------------------------------------------------
- * Button: Modifier - Large
- * ------------------------------------------------------------------------- */
-
-.c-btn--lg,
-a.c-btn--lg {
-	font-size: var(--font-size-body-s);
-	padding: 19px 24px;
-
-	@media (--viewport-medium) {
-		font-size: var(--font-size-base);
-		padding: 24px 28px;
-	}
-}
-
-/* -------------------------------------------------------------------------
- * Button: Modifier - Inverted
- * ------------------------------------------------------------------------- */
-
-.c-btn--inverted,
-a.c-btn--inverted {
-	background-color: var(--color-white);
-	color: var(--color-primary);
-
-	&:visited {
-		color: var(--color-primary);
-	}
-
-	&:hover,
-	&:focus,
-	&:active {
-		background-color: var(--color-white);
-		color: var(--color-link-hover);
-	}
 }
