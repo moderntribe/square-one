@@ -5,6 +5,10 @@
  * ----------------------------------------------------------------------------- */
 
 .c-card {
+	background: var(--color-off-white);
+	display: flex;
+	flex-direction: column;
+	height: 100%;
 	position: relative;
 }
 
@@ -13,13 +17,21 @@
 }
 
 .c-card__content {
-
+	height: 100%;
+	padding: 30px 25px;
 }
 
 .c-card__title {
+	@mixin headline;
 
+	color: var(--color-mine-shaft);
+	margin-bottom: var(--spacer-0);
 }
 
 .c-card__desc {
+	margin-bottom: var(--spacer-1);
 
+	p {
+		font-size: var(--font-size-body-s);
+	}
 }
