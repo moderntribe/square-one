@@ -28,31 +28,19 @@
 .th,
 .t-content th {
 	color: var(--color-mine-shaft);
-	padding: 18px 0 18px 24px;
+	padding: 18px 24px;
 	font-family: var(--font-family-calibre);
 	font-weight: var(--font-weight-semibold);
 	line-height: var(--line-height-l);
 	font-size: var(--font-size-body-l);
 	letter-spacing: 0.11px;
-
-	~ th {
-		border: 0;
-	}
 }
 
 /* -----------------------------------------------------------------------------
  * TR
  * ----------------------------------------------------------------------------- */
 
-.tr,
-.t-content tr {
-
-	& ~ tr {
-		border: 0;
-	}
-}
-
-tbody tr,
+tbody .tr,
 .t-content tbody tr {
 
 	&:nth-of-type(odd) {
@@ -66,9 +54,5 @@ tbody tr,
 
 .td,
 .t-content td {
-	padding: 16px 0 16px 24px;
-
-	& ~ td {
-		border: 0;
-	}
+	padding: 16px 24px;
 }

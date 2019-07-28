@@ -2,26 +2,14 @@ p {
 	@mixin body-content;
 
 	.t-content & {
-		font-family: var(--font-family-tiempos);
-		font-size: var(--font-size-body-s);
-		line-height: var(--line-height-base);
 		margin-bottom: var(--spacer-1);
 
 		@media (--viewport-medium) {
-			font-size: var(--font-size-base);
 			margin-bottom: var(--spacer-2);
 		}
 	}
 
 	&.p-secondary {
-
-		.t-content & {
-			font-size: var(--font-size-body-s);
-
-			@media (--viewport-medium) {
-				font-size: var(--font-size-body-s);
-				margin-bottom: var(--spacer-2);
-			}
-		}
+		@mixin body-content-large;
 	}
 }

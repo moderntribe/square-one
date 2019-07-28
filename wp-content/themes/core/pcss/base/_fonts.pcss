@@ -1,21 +1,15 @@
 
 /* -----------------------------------------------------------------------------
  *
- * Font: Name
+ * Font: Calibre
  *
  * WEIGHTS & STYLES:
- *
- * Light    (300)
  * Regular  (400)
+ * Medium   (500)
  * Semibold (600)
  * Bold     (700)
  *
  * ----------------------------------------------------------------------------- */
-
-/* Workaround for accessibility tests font issue */
-.visual-tests * {
-	font-family: arial, sans-serif !important;
-}
 
 /* calibre regular */
 @font-face {
@@ -24,7 +18,7 @@
 		url('var(--path-fonts)/calibre/CalibreWeb-Regular.woff2') format('woff2'),
 		url('var(--path-fonts)/calibre/CalibreWeb-Regular.woff') format('woff'),
 		url('var(--path-fonts)/calibre/CalibreWeb-Regular.eot') format('eot');
-	font-weight: 300;
+	font-weight: 400;
 	font-style: normal;
 }
 
@@ -50,7 +44,15 @@
 	font-style: normal;
 }
 
-/* tiempos regular */
+/* -----------------------------------------------------------------------------
+ *
+ * Font: Tiempos
+ *
+ * WEIGHTS & STYLES:
+ * Regular  (400)
+ *
+ * ----------------------------------------------------------------------------- */
+
 @font-face {
 	font-family: 'tiempos';
 	src:
@@ -61,7 +63,14 @@
 	font-style: normal;
 }
 
-/* apercu regular */
+/* -----------------------------------------------------------------------------
+ *
+ * Font: Apercu
+ *
+ * WEIGHTS & STYLES:
+ * Regular  (400)
+ *
+ * ----------------------------------------------------------------------------- */
 @font-face {
 	font-family: 'apercu';
 	src:
@@ -71,4 +80,9 @@
 		url('var(--path-fonts)/apercu/apercu-mono-regular-pro.eot') format('eot');
 	font-weight: normal;
 	font-style: normal;
+}
+
+/* Workaround for accessibility tests font issue */
+.visual-tests * {
+	font-family: arial, sans-serif !important;
 }
