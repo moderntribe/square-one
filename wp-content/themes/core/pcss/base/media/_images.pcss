@@ -43,16 +43,9 @@ img {
 .wp-caption-text {
 	@mixin caption;
 
-	max-width: 100%;
 	margin: var(--spacer-1) auto 0;
 	padding-bottom: var(--spacer-1);
 	border-bottom: 1px solid var(--color-submarine);
-
-	.t-content .wp-image--caption.aligncenter & {
-		@media (--viewport-medium) {
-			max-width: calc(100% - (var(--grid-gutter) * 4));
-		}
-	}
 }
 
 /* -----------------------------------------------------------------------------
@@ -101,5 +94,29 @@ img {
 	@media (--viewport-medium) {
 		float: right;
 		margin-left: var(--spacer-4);
+	}
+}
+
+.aligncenter {
+
+	.t-content & {
+		width: 100%;
+		margin-left: var(--grid-gutter-small-negative);
+		margin-right: var(--grid-gutter-small-negative);
+
+		@media (--viewport-medium) {
+			margin-left: auto;
+			margin-right: auto;
+		}
+	}
+
+	.t-content &.wp-image--caption .wp-caption-text {
+		margin-left: var(--grid-gutter-small);
+		margin-right: var(--grid-gutter-small);
+
+		@media (--viewport-medium) {
+			margin-left: auto;
+			margin-right: auto;
+		}
 	}
 }

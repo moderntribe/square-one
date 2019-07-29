@@ -27,11 +27,7 @@
 @define-mixin body-content {
 	font-family: var(--font-family-tiempos);
 	line-height: var(--line-height-base);
-	font-size: var(--font-size-1);
-
-	@media (--viewport-medium) {
-		font-size: var(--font-size-2);
-	}
+	font-size: var(--font-size-2);
 }
 
 @define-mixin body-content-large {
@@ -56,7 +52,7 @@
 
 @define-mixin quote-text {
 	font-family: var(--font-family-calibre);
-	font-size: 32px;
+	font-size: var(--font-size-7);
 	line-height: 1.222;
 	font-style: normal;
 	font-weight: var(--font-weight-semibold);
@@ -124,7 +120,7 @@
 @define-mixin title {
 	font-family: var(--font-family-calibre);
 	font-size: var(--font-size-6);
-	line-height: var(var(--line-height-3));
+	line-height: var(--line-height-3);
 	font-weight: var(--font-weight-semibold);
 }
 

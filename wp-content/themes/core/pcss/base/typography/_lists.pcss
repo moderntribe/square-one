@@ -60,28 +60,19 @@ li {
 
 	li {
 		counter-increment: item;
-		font-size: var(--font-size-1);
+		font-size: var(--font-size-2);
 		list-style-type: none;
-		padding-left: 26px;
+		padding-left: 30px;
 		position: relative;
-
-		@media (--viewport-medium) {
-			font-size: var(--font-size-2);
-			padding-left: 32px;
-		}
 
 		&:before {
 			content: counter(item);
 			font-family: var(--font-family-calibre);
+			font-size: var(--font-size-4);
 			font-weight: var(--font-weight-semibold);
-			line-height: var(--line-height-base);
+			line-height: var(--line-height-5);
 			position: absolute;
 			left: 0;
-
-			@media (--viewport-medium) {
-				font-size: var(--font-size-4);
-				line-height: 1.6;
-			}
 		}
 	}
 
