@@ -21,16 +21,20 @@
 
 @define-mixin button-base {
 	font-family: var(--font-family-calibre);
-	font-size: var(--font-size-body);
+	font-size: var(--font-size-2);
 	font-weight: var(--font-weight-medium);
 	line-height: var(--line-height-even);
 	letter-spacing: 0.3px;
 	text-align: center;
 	transition: var(--transition);
 
+	&[disabled] {
+		cursor: not-allowed;
+	}
+
 	@media (--viewport-medium) {
-		font-size: var(--font-size-body-m);
-		line-height: 1.333;
+		font-size: var(--font-size-3);
+		line-height: var(--line-height-3);
 	}
 }
 
