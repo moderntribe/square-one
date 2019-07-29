@@ -67,17 +67,22 @@ q {
 .cite,
 .t-content cite {
 	display: block;
-	font: normal var(--font-weight-light) var(--font-size-body-s)/var(--line-height-base) var(--font-family-calibre);
+	font: normal var(--font-weight-light) var(--font-size-1)/var(--line-height-base) var(--font-family-calibre);
 	letter-spacing: 1.75px;
 	text-align: center;
 	text-transform: uppercase;
 	position: relative;
-	padding-top: var(--spacer-1);
-	margin-top: var(--spacer-2);
+	padding-top: var(--spacer-0);
+	margin-top: var(--spacer-1);
+
+	@media (--viewport-medium) {
+		padding-top: var(--spacer-1);
+		margin-top: var(--spacer-2);
+	}
 
 	&:before {
 		content: '';
-		width: 24px;
+		width: 40px;
 		height: 1px;
 		background-color: var(--color-submarine);
 		position: absolute;
