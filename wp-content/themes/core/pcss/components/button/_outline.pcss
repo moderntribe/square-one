@@ -19,10 +19,53 @@ a.c-btn-outline {
 	}
 
 	&:hover,
-	&:focus,
-	&:active {
+	&:focus {
 		background-color: transparent;
 		border-color: var(--color-link-hover);
 		color: var(--color-link-hover);
+	}
+
+	&:active {
+		background-color: var(--color-desert-storm);
+		border: 1px solid var(--color-mine-shaft);
+		color: var(--color-mine-shaft);
+		outline: 0;
+	}
+
+	&[disabled] {
+		background-color: var(--color-desert-storm);
+		border: 1px solid var(--color-submarine);
+		color: var(--color-submarine);
+	}
+}
+
+/* -------------------------------------------------------------------------
+ * Button: Modifier - Inverse
+ * ------------------------------------------------------------------------- */
+
+.c-btn--inverse,
+a.c-btn--inverse {
+
+	&.c-btn-outline {
+		border-color: var(--color-white);
+		color: var(--color-white);
+
+		&:hover,
+		&:focus {
+			border-color: var(--color-link-hover);
+			color: var(--color-link-hover);
+		}
+
+		&:active {
+			background-color: var(--color-outer-space);
+			border: 1px solid var(--color-off-white);
+			color: var(--color-white);
+		}
+
+		&[disabled] {
+			background-color: var(--color-outer-space);
+			border: 1px solid var(--color-nevada);
+			color: var(--color-nevada);
+		}
 	}
 }
