@@ -27,19 +27,19 @@
 @define-mixin body-content {
 	font-family: var(--font-family-tiempos);
 	line-height: var(--line-height-base);
-	font-size: var(--font-size-body-s);
+	font-size: var(--font-size-1);
 
 	@media (--viewport-medium) {
-		font-size: var(--font-size-body);
+		font-size: var(--font-size-2);
 	}
 }
 
 @define-mixin body-content-large {
-	line-height: var(--line-height-xl);
-	font-size: var(--font-size-body);
+	line-height: var(--line-height-6);
+	font-size: var(--font-size-2);
 
 	@media (--viewport-medium) {
-		font-size: var(--font-size-body-l);
+		font-size: var(--font-size-4);
 	}
 }
 
@@ -84,15 +84,15 @@
 
 @define-mixin display-large {
 	font-family: var(--font-family-calibre);
-	font-size: 64px;
-	line-height: 1.156;
+	font-size: var(--font-size-11);
+	line-height: var(--line-height-1);
 	font-weight: var(--font-weight-semibold);
 	letter-spacing: -0.9px;
 }
 
 @define-mixin display {
 	font-family: var(--font-family-calibre);
-	font-size: 48px;
+	font-size: var(--font-size-10);
 	line-height: 1.667;
 	font-weight: var(--font-weight-semibold);
 	letter-spacing: -0.3px;
@@ -100,7 +100,7 @@
 
 @define-mixin headline-large {
 	font-family: var(--font-family-calibre);
-	font-size: 40px;
+	font-size: var(--font-size-9);
 	line-height: 1.2;
 	font-weight: var(--font-weight-semibold);
 	letter-spacing: -0.2px;
@@ -108,7 +108,7 @@
 
 @define-mixin headline {
 	font-family: var(--font-family-calibre);
-	font-size: 32px;
+	font-size: var(--font-size-8);
 	line-height: 1.3125;
 	font-weight: var(--font-weight-semibold);
 	letter-spacing: -0.1px;
@@ -116,21 +116,21 @@
 
 @define-mixin title-large {
 	font-family: var(--font-family-calibre);
-	font-size: 28px;
+	font-size: var(--font-size-7);
 	line-height: 1.357;
 	font-weight: var(--font-weight-semibold);
 }
 
 @define-mixin title {
 	font-family: var(--font-family-calibre);
-	font-size: 24px;
-	line-height: 1.333;
+	font-size: var(--font-size-6);
+	line-height: var(var(--line-height-3));
 	font-weight: var(--font-weight-semibold);
 }
 
 @define-mixin subheader-large {
 	font-family: var(--font-family-calibre);
-	font-size: 22px;
+	font-size: var(--font-size-5);
 	line-height: 1.45;
 	font-weight: var(--font-weight-semibold);
 	letter-spacing: 0.11px;
@@ -138,17 +138,23 @@
 
 @define-mixin subheader {
 	font-family: var(--font-family-calibre);
-	font-size: 20px;
-	line-height: 1.4;
+	font-size: var(--font-size-4);
+	line-height: var(--line-height-4);
 	font-weight: var(--font-weight-semibold);
 	letter-spacing: 0.11px;
 }
 
 @define-mixin overline {
 	font-family: var(--font-family-calibre);
-	font-size: 14px;
+	font-size: var(--font-size-1);
 	font-weight: var(--font-weight-regular);
-	line-height: var(--line-height-base);
+	line-height: var(--line-height-7);
 	letter-spacing: 1.75px;
 	text-transform: uppercase;
+}
+
+@define-mixin caption {
+	font-family: var(--font-family-tiempos);
+	font-size: var(--font-size-0);
+	line-height: var(--line-height-base);
 }
