@@ -28,13 +28,14 @@ a {
 
 .anchor,
 .t-content a {
-	color: var(--color-link);
-	font-weight: var(--font-weight-semibold);
-	padding-bottom: 1px;
+	border-bottom: 2px solid var(--color-submarine);
+	color: inherit;
+	padding-bottom: 3px;
 	text-decoration: none;
 
 	&:hover,
 	&:focus {
+		border-color: var(--color-link-hover);
 		color: var(--color-link-hover);
 	}
 }

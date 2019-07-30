@@ -1,0 +1,92 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Button: Text
+ *
+ * ----------------------------------------------------------------------------- */
+
+.c-btn-text,
+a.c-btn-text {
+	@mixin button-global;
+
+	border-bottom: 2px solid var(--color-submarine);
+	color: var(--color-mine-shaft);
+	display: inline-block;
+	font-family: var(--font-family-calibre);
+	font-size: var(--font-size-2);
+	font-weight: var(--font-weight-semibold);
+	line-height: 1.75;
+	padding-bottom: 0;
+
+	&:visited {
+		color: var(--color-mine-shaft);
+	}
+
+	&:focus,
+	&:hover {
+		border-color: var(--color-mine-shaft);
+		color: var(--color-black-pearl);
+	}
+
+	&:active {
+		border-color: var(--color-nevada);
+		color: var(--color-nevada);
+	}
+}
+
+/* -------------------------------------------------------------------------
+ * Button: Modifier - Icon
+ * ------------------------------------------------------------------------- */
+
+.c-btn--icon,
+a.c-btn--icon {
+
+	&.c-btn-text {
+		border-bottom: 0;
+
+		&:after {
+			display: inline-block;
+			content: var(--icon-arrow-large-right);
+			font-family: var(--font-family-core-icons);
+			font-weight: var(--font-weight-light);
+			margin-left: 7px;
+			transform: translateY(2px);
+			transition: var(--transition);
+		}
+
+		&:focus,
+		&:hover {
+
+			&:after {
+				margin-left: 16px;
+			}
+		}
+	}
+}
+
+/* -------------------------------------------------------------------------
+ * Button: Modifier - Inverse
+ * ------------------------------------------------------------------------- */
+
+.c-btn--inverse,
+a.c-btn--inverse {
+
+	&.c-btn-text {
+		border-color: var(--color-submarine);
+		color: var(--color-white);
+
+		&:visited {
+			color: var(--color-white);
+		}
+
+		&:focus,
+		&:hover {
+			border-color: var(--color-white);
+			color: var(--color-off-white);
+		}
+
+		&:active {
+			border-color: var(--color-submarine);
+			color: var(--color-submarine);
+		}
+	}
+}
