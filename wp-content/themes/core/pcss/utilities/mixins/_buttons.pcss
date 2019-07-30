@@ -13,28 +13,9 @@
 	padding: 0;
 	text-decoration: none;
 	width: auto;
-}
-
-/* -----------------------------------------------------------------------------
- * Button - Base
- * ----------------------------------------------------------------------------- */
-
-@define-mixin button-base {
-	font-family: var(--font-family-calibre);
-	font-size: var(--font-size-2);
-	font-weight: var(--font-weight-medium);
-	line-height: var(--line-height-even);
-	letter-spacing: 0.3px;
-	text-align: center;
-	transition: var(--transition);
 
 	&[disabled] {
 		cursor: not-allowed;
-	}
-
-	@media (--viewport-medium) {
-		font-size: var(--font-size-3);
-		line-height: var(--line-height-3);
 	}
 }
 
@@ -45,8 +26,16 @@
 @define-mixin button-solid {
 	background-color: var(--color-mine-shaft);
 	color: var(--color-white);
+	font: var(--font-weight-medium) var(--font-size-2)/var(--line-height-even) var(--font-family-calibre);
+	letter-spacing: 0.3px;
+	text-align: center;
 	padding: var(--spacer-1) 24px;
 	display: inline-block;
+
+	@media (--viewport-medium) {
+		font-size: var(--font-size-3);
+		line-height: var(--line-height-3);
+	}
 
 	&:visited {
 		color: var(--color-white);
@@ -70,6 +59,48 @@
 }
 
 /* -----------------------------------------------------------------------------
+ * Button - Outline
+ * ----------------------------------------------------------------------------- */
+
+@define-mixin button-outline {
+	background-color: transparent;
+	border: 1px solid var(--color-mine-shaft);
+	color: var(--color-mine-shaft);
+	font: var(--font-weight-medium) var(--font-size-2)/var(--line-height-even) var(--font-family-calibre);
+	letter-spacing: 0.3px;
+	text-align: center;
+	padding: var(--spacer-1) 24px;
+
+	@media (--viewport-medium) {
+		font-size: var(--font-size-3);
+		line-height: var(--line-height-3);
+	}
+
+	&:visited {
+		color: var(--color-primary);
+	}
+
+	&:hover,
+	&:focus {
+		background-color: transparent;
+		border-color: var(--color-link-hover);
+		color: var(--color-link-hover);
+	}
+
+	&:active {
+		background-color: var(--color-desert-storm);
+		border: 1px solid var(--color-mine-shaft);
+		color: var(--color-mine-shaft);
+	}
+
+	&[disabled] {
+		background-color: var(--color-desert-storm);
+		border: 1px solid var(--color-submarine);
+		color: var(--color-submarine);
+	}
+}
+
+/* -----------------------------------------------------------------------------
  *
  * Button Submit
  *
@@ -77,6 +108,5 @@
 
 @define-mixin button-submit {
 	@mixin button-global;
-	@mixin button-base;
 	@mixin button-solid;
 }
