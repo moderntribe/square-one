@@ -56,7 +56,7 @@ before_install:
   - sudo mv docker-compose /usr/local/bin
 
   # create .env file for private repositories
-  - sudo touch .env
+  - touch .env
   - echo "WP_PLUGIN_ACF_KEY='${WP_PLUGIN_ACF_KEY}" >> .env
   - echo "WP_PLUGIN_GF_KEY='${WP_PLUGIN_GF_KEY}" >> .env
 
