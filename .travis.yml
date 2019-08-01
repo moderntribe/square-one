@@ -57,8 +57,8 @@ before_install:
 
   # create .env file for private repositories
   - touch .env
-  - echo "WP_PLUGIN_ACF_KEY='${WP_PLUGIN_ACF_KEY}" >> .env
-  - echo "WP_PLUGIN_GF_KEY='${WP_PLUGIN_GF_KEY}" >> .env
+  - echo "WP_PLUGIN_ACF_KEY='${WP_PLUGIN_ACF_KEY}'" >> .env
+  - echo "WP_PLUGIN_GF_KEY='${WP_PLUGIN_GF_KEY}'" >> .env
 
 install:
   # start the global docker
