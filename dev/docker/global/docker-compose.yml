@@ -27,7 +27,7 @@ services:
         ipv4_address: 172.20.10.250
 
   mysql:
-    image: mysql:5.7
+    image: mariadb:10
     container_name: tribe-mysql
     volumes:
       - ${TRIBE_MYSQL_DATA_DIR:-~/mysql_data}:/var/lib/mysql
