@@ -8,7 +8,10 @@
   ],
   "config": {
     "vendor-dir": "vendor",
-    "preferred-install": "dist"
+    "preferred-install": {
+      "moderntribe/*": "source",
+      "*": "dist"
+    }
   },
   "description": "Modern Tribe's Square One WordPress setup",
   "type": "project",
@@ -88,7 +91,27 @@
     "wpackagist-plugin/classic-editor":"1.5",
     "wpackagist-plugin/classic-editor-addon":"2.4.0",
     "moderntribe/panel-builder": "dev-3.3-branch",
-    "moderntribe/tribe-libs":"dev-feature/monorepo",
+
+    "moderntribe/square1-acf": "dev-feature/monorepo",
+    "moderntribe/square1-assets": "dev-feature/monorepo",
+    "moderntribe/square1-blog-copier": "dev-feature/monorepo",
+    "moderntribe/square1-cache": "dev-feature/monorepo",
+    "moderntribe/square1-cli": "dev-feature/monorepo",
+    "moderntribe/square1-container": "dev-feature/monorepo",
+    "moderntribe/square1-generators": "dev-feature/monorepo",
+    "moderntribe/square1-nav": "dev-feature/monorepo",
+    "moderntribe/square1-object-meta": "dev-feature/monorepo",
+    "moderntribe/square1-oembed": "dev-feature/monorepo",
+    "moderntribe/square1-p2p": "dev-feature/monorepo",
+    "moderntribe/square1-post-type": "dev-feature/monorepo",
+    "moderntribe/square1-queues": "dev-feature/monorepo",
+    "moderntribe/square1-queues-mysql": "dev-feature/monorepo",
+    "moderntribe/square1-schema": "dev-feature/monorepo",
+    "moderntribe/square1-settings": "dev-feature/monorepo",
+    "moderntribe/square1-taxonomy": "dev-feature/monorepo",
+    "moderntribe/square1-user": "dev-feature/monorepo",
+    "moderntribe/square1-utils": "dev-feature/monorepo",
+
     "humanmade/mercator":"dev-master#7f3846a",
     "vlucas/phpdotenv": "^3.0",
     "humanmade/s3-uploads":"1.1.0",
