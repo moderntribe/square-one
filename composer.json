@@ -17,6 +17,7 @@
   "type": "project",
   "license": "Proprietary",
   "minimum-stability": "dev",
+  "prefer-stable": true,
   "repositories": [
     {
       "type": "composer",

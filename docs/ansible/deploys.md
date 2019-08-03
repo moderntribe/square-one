@@ -2,7 +2,7 @@
 
 ## Overview
 
-Ansible deploys are done using the `ansible-playbook` command line utility. When executing `ansible-playbook`, you specify the _inventory_ (e.g. server config) and _playbook_ that you wish to execute. A playbook is a collection of commands that are executed in sequential order. The typical usecase for a run-of-the-mill code deploy would be to execute the `deploy.yml` playbook. Whereas the other default playbooks that are provided in Square One are for initial setup of the server.
+Ansible deploys are done using the `ansible-playbook` command line utility. When executing `ansible-playbook`, you specify the _inventory_ (e.g. server config) and _playbook_ that you wish to execute. A playbook is a collection of commands that are executed in sequential order. The typical usecase for a run-of-the-mill code deploy would be to execute the `deploy.yml` playbook. Whereas the other default playbooks that are provided in SquareOne are for initial setup of the server.
 
 ## VERY IMPORTANT Prerequisite
 

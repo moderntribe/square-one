@@ -3,15 +3,21 @@
 All notable changes to this project will be documented in this file.
 
 ## 2019.07
+* Updated: Lodash to 4.17.14
 * Removed 3rd-party premium plugins, added composer installer for them
+* Add direct 1password link in .env.sample
+* Removed 3rd-party premium plugins, added composer installer for them
+* Added "prefer-stable" to composer.json to resolve failing installs
+* Re-organized docs. Added getting started docs for new folks
 
-## [2019.06]
+## 2019.06
 * Fixed: Typo dash in modern-tribe removed from set remote in convert-project-to-fork.sh
 * Changed: Updated convert-project-to-fork.sh to use ssh instead of https for setting remote url
 * Add a utility for generating required pages
 * Changed: Updated the Image Component and `the_tribe_image()` method to accept an image URL fallback
+* Fixed: Restored returning an image size that is an exact match to the full size image, when that size is specifically requested.
 
-## [2019.05]
+## 2019.05
 * Changed: Updated Classic Editor Plugins to latest Versions
 * Updated: Swiper to version 4.5.0
 * Changed: Added autoprefixer support for CSS Grid 
@@ -20,7 +26,7 @@ All notable changes to this project will be documented in this file.
 * Updated WordPress to 5.2.1
 * Fixed: Tribe Branding plugin: updated deprecated `login_headertitle` filter to use `login_headertext` instead
 
-## [2019.04]
+## 2019.04
 
 * Changed: Added npm commands for running codeception tests
 * Changed: Added in more formal documentation and reasoning behind Lazy Loading classes in our Service Providers.
@@ -29,7 +35,7 @@ All notable changes to this project will be documented in this file.
 * Changed: Added in Whoops library
 * Add `WP_DISABLE_FATAL_ERROR_HANDLER` constant to wp-config to disable the fatal error handler
 
-## [2019.03]
+## 2019.03
 
 * Updated to node 10.15.0
 * Updated to use Gulp
@@ -49,7 +55,7 @@ All notable changes to this project will be documented in this file.
 * Added references to queues and schema to the docs general overview
 * Added steps to follow on Linux environments to avoid problems with DNS Resolution when setting up the global Docker environment.
 
-## [2019.02]
+## 2019.02
 
 * Add bcrypt password hashing: https://github.com/roots/wp-password-bcrypt
 * Refactor force-plugin-activation.php to allow forcing plugins off when running unit tests
@@ -58,7 +64,7 @@ All notable changes to this project will be documented in this file.
 * Change object-cache-sample.php to object-cache.php for default inclusion on forked projects
 * Update incorrect global setting for memcached_server in local-config-sample.php
 
-## [2019.01]
+## 2019.01
 
 * Added a meta importer CLI command.
 * Fixed: Add sintax hightlight for docs with code examples
@@ -67,7 +73,7 @@ All notable changes to this project will be documented in this file.
 * Fixed: Handled invalid records in the queue table, avoiding a fatal error
 * Modified: Test Suite configuration by moving it to the dev directory and consolidating composer management.
 
-## [2018.12]
+## 2018.12
 
 * Added: caption position support to video component
 * Fixed: gitignore entry for Tribe 301 plugin
@@ -75,7 +81,7 @@ All notable changes to this project will be documented in this file.
 * Changed: added more documentation for our SQ1 forms implementation
 * Fixed failing test for Full_Size_Gif
 
-## [2018.11]
+## 2018.11
 
 * Fixed: Nginx config to properly pull missing assets (images/js/css/media etc...) from a remote server so you don't need to download large uploads folders.
 * Changed: Cleaned up the `CLI_Provider`
@@ -84,20 +90,20 @@ All notable changes to this project will be documented in this file.
 * Fixed: Instructions to view the project logs inside docker
 * Added: install guide for Ubuntu users on `docs/docker` documentation
 
-## [2018.10]
+## 2018.10
 
 * Changed: Glomar now sets what looks like a logged in cookie to bypass Wp Engine's Varnish.
 * Fixed: Autoplay for iframe video embeds in Chrome.
 * Fixed: global start.sh script to properly get the docker IP address on linux
 
-## [2018.09]
+## 2018.09
 
 * Added an incremental increase to the delay for reprocessing a failed task in the queue, based on the number of times it has failed.
 * Changed: Docker setup docs
 * Added: Alias docker scripts with `npm` for use in any project directory.
 * Added: Fork project script: `dev/bin/convert-project-to-fork.sh`
 
-## [2018.08]
+## 2018.08
 
 * Changed: Updated WordPress to 4.9.8
 * Fixed: SVG_Support no longer throws errors in PHP 7.2
@@ -114,7 +120,7 @@ All notable changes to this project will be documented in this file.
 * Removed: deprecated postcss-cssnext
 * Added: Theme/Full_Size_Gif - filters image_downsize to provide full size gifs only. It is commented out in the Theme service provider by default.
 
-## [2018.07]
+## 2018.07
 
 * Added: social media ACF settings
 * Added: social follow data to the base controller
@@ -126,14 +132,14 @@ All notable changes to this project will be documented in this file.
 * Added: Ansible boilerplate directory
 * Removed: manifest.js enqueue from admin scripts. This was a remnant from the previous version of Webpack which was updated to v4.5.0 in v1.2.
 
-## [2018.06]
+## 2018.06
 * Changed: JS slide util - Changed delay-based slide to RAF-based
 * Added: Queues framework. This allows for running slower processes separately from a browser request.
   * Queue - A queue requires a backend for storing messages that passed to it.
   * Backends - MySQL is the default backend, but it is easy to implement the Backend interface and roll your own.
   * Messages (or Tasks) - Isolated functions that are run by the queue consumer.
 
-## [2018.05]
+## 2018.05
 
 A whole lot of things have been added. The timing of when they were added and the corresponding versions would be too laborious to uncover. So...we'll start with some recent changes/additions.
 
@@ -152,7 +158,7 @@ A whole lot of things have been added. The timing of when they were added and th
 
 * Long journey in the unversioned wilderness
 
-## [2015.03]
+## 2015.03
 
 * Changed: Migrated to github, all history collapsed into the initial commit
 * Added: Codeception test examples and instructions
