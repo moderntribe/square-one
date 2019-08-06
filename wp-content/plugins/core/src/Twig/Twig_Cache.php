@@ -2,9 +2,7 @@
 
 namespace Tribe\Project\Twig;
 
-use Twig\Cache\FilesystemCache;
-
-class Twig_Cache extends FilesystemCache {
+class Twig_Cache extends \Twig_Cache_Filesystem {
 	protected $path;
 
 	public function __construct( $path, $options = 0 ) {
@@ -15,6 +13,6 @@ class Twig_Cache extends FilesystemCache {
 	public function generateKey( $name, $className ) {
 		$hash = hash( 'sha256', $className );
 
-		return $this->path . $hash[0] . $hash[1] . '/' . $hash . '.html';
+		return $this->path . $hash[ 0 ] . $hash[ 1 ] . '/' . $hash . '.html';
 	}
 }
