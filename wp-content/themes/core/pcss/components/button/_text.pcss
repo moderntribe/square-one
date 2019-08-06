@@ -5,7 +5,8 @@
  * ----------------------------------------------------------------------------- */
 
 .c-btn-text,
-a.c-btn-text {
+a.c-btn-text,
+a[data-mce-selected].c-btn-text {
 	@mixin button-global;
 
 	border-bottom: 2px solid var(--color-submarine);
@@ -37,28 +38,26 @@ a.c-btn-text {
  * Button: Modifier - Icon
  * ------------------------------------------------------------------------- */
 
-.c-btn--icon,
-a.c-btn--icon {
+.c-btn-text--icon,
+a.c-btn-text--icon,
+a[data-mce-selected].c-btn-text--icon {
+	border-bottom: 0;
 
-	&.c-btn-text {
-		border-bottom: 0;
+	&:after {
+		display: inline-block;
+		content: var(--icon-arrow-large-right);
+		font-family: var(--font-family-core-icons);
+		font-weight: var(--font-weight-light);
+		margin-left: 7px;
+		transform: translateY(2px);
+		transition: var(--transition);
+	}
+
+	&:focus,
+	&:hover {
 
 		&:after {
-			display: inline-block;
-			content: var(--icon-arrow-large-right);
-			font-family: var(--font-family-core-icons);
-			font-weight: var(--font-weight-light);
-			margin-left: 7px;
-			transform: translateY(2px);
-			transition: var(--transition);
-		}
-
-		&:focus,
-		&:hover {
-
-			&:after {
-				margin-left: 16px;
-			}
+			margin-left: 16px;
 		}
 	}
 }
@@ -67,26 +66,24 @@ a.c-btn--icon {
  * Button: Modifier - Inverse
  * ------------------------------------------------------------------------- */
 
-.c-btn--inverse,
-a.c-btn--inverse {
+.c-btn-text--inverse,
+a.c-btn-text--inverse,
+a[data-mce-selected].c-btn-text--inverse {
+	border-color: var(--color-submarine);
+	color: var(--color-white);
 
-	&.c-btn-text {
-		border-color: var(--color-submarine);
+	&:visited {
 		color: var(--color-white);
+	}
 
-		&:visited {
-			color: var(--color-white);
-		}
+	&:focus,
+	&:hover {
+		border-color: var(--color-white);
+		color: var(--color-off-white);
+	}
 
-		&:focus,
-		&:hover {
-			border-color: var(--color-white);
-			color: var(--color-off-white);
-		}
-
-		&:active {
-			border-color: var(--color-submarine);
-			color: var(--color-submarine);
-		}
+	&:active {
+		border-color: var(--color-submarine);
+		color: var(--color-submarine);
 	}
 }

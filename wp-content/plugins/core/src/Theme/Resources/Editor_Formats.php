@@ -34,12 +34,14 @@ class Editor_Formats {
 	public function visual_editor_styles_dropdown( $settings ) {
 		$style_formats = [
 			/* Example single-level format */
+			/*
 			[
 				'title'    => __( 'Button', 'tribe' ),
 				'selector' => 'a',
 				'classes'  => 'c-btn',
 				'wrapper'  => false,
 			],
+			*/
 			/* Example multi-level format */
 			[
 				'title' => __( 'Link Styles', 'tribe' ),
@@ -53,7 +55,24 @@ class Editor_Formats {
 					[
 						'title'    => __( 'CTA Arrow Link', 'tribe' ),
 						'selector' => 'a',
-						'classes'  => 'cta--arrow-right',
+						'classes'  => 'c-btn-text c-btn-text--icon',
+						'wrapper'  => false,
+					],
+				],
+			],
+			[
+				'title' => __( 'Button Styles', 'tribe' ),
+				'items' => [
+					[
+						'title'    => __( 'Button', 'tribe' ),
+						'selector' => 'a',
+						'classes'  => 'c-btn',
+						'wrapper'  => false,
+					],
+					[
+						'title'    => __( 'Button Outline', 'tribe' ),
+						'selector' => 'a',
+						'classes'  => 'c-btn-outline',
 						'wrapper'  => false,
 					],
 				],

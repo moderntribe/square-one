@@ -59,7 +59,7 @@ class Theme_Provider extends Service_Provider {
 		$this->styles( $container );
 		$this->third_party_tags( $container );
 		$this->editor_styles( $container );
-		//$this->editor_formats( $container );
+		$this->editor_formats( $container );
 
 		$this->nav_attributes( $container );
 
