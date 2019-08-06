@@ -2,9 +2,6 @@
 
 All notable changes to this project will be documented in this file.
 
-## 2019.08
-* Changed: sq1 Twig classes to use non-deprecated Twig classes and bump twig minimum to v2.11
-
 ## 2019.07
 * Updated: Lodash to 4.17.14
 * Removed 3rd-party premium plugins, added composer installer for them
