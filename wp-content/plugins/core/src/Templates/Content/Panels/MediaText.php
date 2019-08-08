@@ -39,7 +39,6 @@ class MediaText extends Panel {
 			'media'          => $this->get_media_text_media(),
 			'media_position' => $this->get_media_text_image_position(),
 			'layout'         => $this->get_media_text_layout(),
-			'media_spacing'  => $this->get_media_text_content_spacing(),
 		];
 
 		return $data;
@@ -54,6 +53,7 @@ class MediaText extends Panel {
 	 */
 	protected function get_classes(): string {
 		$no_padding = '';
+		$wrapper_class = $this->get_media_text_wrapper_class();
 
 		if ( MediaTextPanel::OPTION_LAYOUT_FULL_BLEED === $this->panel_vars[ MediaTextPanel::FIELD_LAYOUT ] ) {
 			$no_padding = 's-wrapper--no-padding';
@@ -65,6 +65,7 @@ class MediaText extends Panel {
 			'site-panel',
 			$no_padding,
 			sprintf( 'site-panel--%s', $this->panel->get_type_object()->get_id() ),
+			$wrapper_class,
 		];
 
 		return Util::class_attribute( $classes );
@@ -278,14 +279,14 @@ class MediaText extends Panel {
 	 *
 	 * @return string
 	 */
-	protected function get_media_text_content_spacing(): string {
-		$classes = '';
+	protected function get_media_text_wrapper_class(): string {
+		$classes = 'site-panel--mediatext__image-position-left';
 
 		if ( MediaTextPanel::OPTION_LAYOUT_IMAGE_RIGHT === $this->panel_vars[ MediaTextPanel::FIELD_MEDIA_POSITION ] ) {
-			$classes = '';
+			$classes = 'site-panel--mediatext__image-position-right';
 		}
 
-		return Util::class_attribute( $classes, false );
+		return $classes;
 	}
 
 	/**

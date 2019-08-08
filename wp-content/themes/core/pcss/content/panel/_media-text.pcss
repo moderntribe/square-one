@@ -4,18 +4,24 @@
  *
  * ----------------------------------------------------------------------------- */
 
-.site-panel--mediatext__content-spacer {
-    padding-bottom: var(--spacer-3);
+.site-panel--mediatext__image-position-left {
 
-    @media (--viewport-medium) {
-        padding-bottom: 0;
-        padding-left: var(--spacer-7);
+    .g-col:nth-child(2) {
+        padding-bottom: var(--spacer-3);
+
+        @media (--viewport-medium) {
+            padding-bottom: 0;
+            padding-left: var(--spacer-7);
+        }
     }
 }
 
-.site-panel--mediatext__content-spacer--right {
-    @media (--viewport-medium) {
-        padding-left: 0;
-        padding-right: var(--spacer-7);
+.site-panel--mediatext__image-position-right {
+
+    .g-col:nth-child(2) {
+        @media (--viewport-medium) {
+            padding-left: 0;
+            padding-right: var(--spacer-7);
+        }
     }
 }
