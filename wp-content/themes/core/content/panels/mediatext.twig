@@ -6,14 +6,14 @@
 
 {% block content %}
 
-    <div class="g-row g-row--no-gutters g-row--col-2--min-full {{ wrapper_classes }}">
+    <div class="g-row g-row--no-gutters g-row--col-2--min-full {{ media_position }}">
 
         <div class="g-col">
             {{ media }}
         </div>
 
         <div class="g-col g-col--vertical-center">
-            <div class="t-content">
+            <div class="t-content {{ media_spacing }}">
                 {{ content_block }}
             </div>
         </div>

@@ -37,8 +37,9 @@ class MediaText extends Panel {
 		$data = [
 			'content_block'  => $this->get_media_text_content_block(),
 			'media'          => $this->get_media_text_media(),
-			'image_position' => $this->get_media_text_image_position(),
+			'media_position' => $this->get_media_text_image_position(),
 			'layout'         => $this->get_media_text_layout(),
+			'media_spacing'  => $this->get_media_text_content_spacing(),
 		];
 
 		return $data;
@@ -267,6 +268,21 @@ class MediaText extends Panel {
 
 		if ( MediaTextPanel::OPTION_LAYOUT_FULL_BLEED === $this->panel_vars[ MediaTextPanel::FIELD_LAYOUT ] ) {
 			$classes[] = 'l-container--full';
+		}
+
+		return Util::class_attribute( $classes, false );
+	}
+
+	/**
+	 * Get Media + Text Media Spacing.
+	 *
+	 * @return string
+	 */
+	protected function get_media_text_content_spacing(): string {
+		$classes = '';
+
+		if ( MediaTextPanel::OPTION_LAYOUT_IMAGE_RIGHT === $this->panel_vars[ MediaTextPanel::FIELD_MEDIA_POSITION ] ) {
+			$classes = '';
 		}
 
 		return Util::class_attribute( $classes, false );

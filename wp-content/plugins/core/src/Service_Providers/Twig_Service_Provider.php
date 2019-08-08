@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Service_Providers;
 
-
 use Pimple\Container;
 use Tribe\Project\Container\Service_Provider;
 use Tribe\Project\Templates;
@@ -79,10 +78,6 @@ class Twig_Service_Provider extends Service_Provider {
 			return new Templates\Content\Panels\Hero( 'content/panels/hero.twig', $container['twig'] );
 		};
 
-		$container['twig.templates.content/panels/imagetext'] = function ( Container $container ) {
-			return new Templates\Content\Panels\ImageText( 'content/panels/imagetext.twig', $container['twig'] );
-		};
-
 		$container['twig.templates.content/panels/interstitial'] = function ( Container $container ) {
 			return new Templates\Content\Panels\Interstitial( 'content/panels/interstitial.twig', $container['twig'] );
 		};
@@ -107,8 +102,8 @@ class Twig_Service_Provider extends Service_Provider {
 			return new Templates\Content\Panels\Testimonial( 'content/panels/testimonial.twig', $container['twig'] );
 		};
 
-		$container['twig.templates.content/panels/videotext'] = function ( Container $container ) {
-			return new Templates\Content\Panels\VideoText( 'content/panels/videotext.twig', $container['twig'] );
+		$container['twig.templates.content/panels/mediatext'] = function ( Container $container ) {
+			return new Templates\Content\Panels\MediaText( 'content/panels/mediatext.twig', $container['twig'] );
 		};
 
 		$container['twig.templates.content/panels/wysiwyg'] = function ( Container $container ) {
