@@ -2,7 +2,7 @@
 
 ## Overview
 
-P2P is a plugin that has been included in the Tribe library for square one.  
+P2P is a plugin that has been included in the Tribe library for SquareOne.  
 It is a stand alone plugin available in the WordPress repo and developer 
 documentation can be found here: [Posts 2 Post](https://github.com/scribu/wp-posts-to-posts/wiki).
 

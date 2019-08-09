@@ -5,19 +5,6 @@ namespace Tribe\Project\Service_Providers\Post_Types;
 use Tribe\Tests\Test_Case;
 
 class Post_Type_Service_ProviderTest extends Test_Case {
-	public function setUp() {
-		// before
-		parent::setUp();
-
-		// your set up methods here
-	}
-
-	public function tearDown() {
-		// your tear down methods here
-
-		// then
-		parent::tearDown();
-	}
 
 	public function test_requires_post_type_class() {
 		$this->expectException(\LogicException::class);
