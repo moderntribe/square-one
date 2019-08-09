@@ -148,6 +148,9 @@
   "scripts": {
     "phpcs": [
       "vendor/bin/phpcs --standard=./phpcs.xml"
+    ],
+    "phpcbf": [
+      "./vendor/squizlabs/php_codesniffer/bin/phpcbf --standard=./phpcs.xml"
     ]
   }
 }
