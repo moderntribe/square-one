@@ -1,52 +1,50 @@
 #!/bin/bash
 
-PROJECT=`php -r "echo dirname(dirname(realpath('$0')));"`
-STAGED_FILES_CMD=`git diff --cached --name-only --diff-filter=ACMR HEAD | grep \\\\.php`
+# Color variables
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m'
+
+PROJECT=$(php -r "echo dirname(dirname(realpath('$0')));")
+STAGED_FILES_CMD=$(git diff --cached --name-only --diff-filter=ACMR HEAD | grep \\.php)
 
 echo "$PROJECT"
 
 # Determine if a file list is passed
-if [ "$#" -eq 1 ]
-then
-    oIFS=$IFS
-    IFS='
+if [ "$#" -eq 1 ]; then
+  oIFS=$IFS
+  IFS='
     '
-    SFILES="$1"
-    IFS=$oIFS
+  SFILES="$1"
+  IFS=$oIFS
 fi
 SFILES=${SFILES:-$STAGED_FILES_CMD}
 
-echo "Checking PHPCS..."
-for FILE in $SFILES
-do
-    php -l -d display_errors=0 "$PROJECT/$FILE"
-    if [ $? != 0 ]
-    then
-        echo "Fix the error before commit."
-        exit 1
-    fi
-    FILES="$FILES \"$PROJECT/$FILE\""
+printf "${GREEN}Checking PHPCS...${NC}\n"
+for FILE in $SFILES; do
+  php -l -d display_errors=0 "$PROJECT/$FILE"
+  if [ $? != 0 ]; then
+    printf "${RED}Fix the error before commit.${NC}\n"
+    exit 1
+  fi
+  FILES="$FILES \"$PROJECT/$FILE\""
 done
 
-if [ -f "$PROJECT/phpcs.xml" ]
-then
-    RULESET="$PROJECT/phpcs.xml"
+if [ -f "$PROJECT/phpcs.xml" ]; then
+  RULESET="$PROJECT/phpcs.xml"
 else
-    RULESET="WordPress"
+  RULESET="WordPress"
 fi
 
-echo "Checking Code Standard Compliance, using $RULESET as ruleset standard..."
-for FILE in $SFILES
-do
-    composer phpcs --colors --encoding=utf-8 -n -p "$PROJECT/$FILE"
-    if [ $? != 0 ]
-    then
-        echo "Fix the error before commit."
-        echo "Run"
-        echo "composer phpcs $FILES"
-        echo "for automatic fix or fix it manually."
-        exit 1
-    fi
+printf "Checking Code Standard Compliance, using ${GREEN}$RULESET${NC} as ruleset standard..."
+for FILE in $SFILES; do
+  composer phpcs --colors --encoding=utf-8 -n -p "$PROJECT/$FILE"
+  if [ $? != 0 ]; then
+    printf "${RED}Fix the error before commit.${NC}"
+    echo "Run composer phpcbf $FILES to try to fix them automatically, or fix them manually."
+    exit 1
+  fi
 done
 
 exit $?
