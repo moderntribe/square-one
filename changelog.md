@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## 2019.08
+* Test change
 * Bump composer php version to ^7.2
 * Include `WP_PLUGIN_ACF_KEY` and `WP_PLUGIN_GF_KEY` encrypted environment variables in travis.yml and bump PHP to 7.2
 
