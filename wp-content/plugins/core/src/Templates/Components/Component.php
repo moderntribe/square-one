@@ -4,6 +4,7 @@ namespace Tribe\Project\Templates\Components;
 
 use Tribe\Project\Theme\Util;
 use Tribe\Project\Twig\Twig_Template;
+use Twig\Environment;
 
 abstract class Component extends Twig_Template {
 
@@ -15,10 +16,10 @@ abstract class Component extends Twig_Template {
 	 * Component constructor.
 	 *
 	 * @param string      $template
-	 * @param \Twig_Environment|null $twig
+	 * @param Environment|null $twig
 	 * @param array                  $options
 	 */
-	public function __construct( $template, \Twig_Environment $twig = null, $options = [] ) {
+	public function __construct( $template, Environment $twig = null, $options = [] ) {
 		parent::__construct( $template, $twig );
 
 		$this->options = $this->parse_options( $options );

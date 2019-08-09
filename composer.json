@@ -118,7 +118,7 @@
     "humanmade/s3-uploads":"1.1.0",
     "pimple/pimple": "~3.0@dev",
     "johnbillion/extended-cpts": "^4.0",
-    "twig/twig": "^2.4",
+    "twig/twig": "^2.11",
     "jbzoo/pimpledumper": "^1.2",
     "mailgun/mailgun-php": "^2.8",
     "php-http/curl-client": "^1.7",
