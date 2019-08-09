@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <ruleset name="ModernTribe">
-    <description>Modern Tribe Coding Standards, based on WordPress VIP</description>
-    <file>./wp-content</file>
+    <description>Modern Tribe Coding Standards, based on WordPress Neutron Standards</description>
+    <file>./wp-content/plugins/core</file>
+    <file>./wp-content/themes/core</file>
     <arg name="extensions" value="php"/>
 
     <!-- Ignore WordPress and Composer dependencies -->
     <!-- Exclude files -->
-    <exclude-pattern>vendor/</exclude-pattern>
-    <exclude-pattern>plugins/^((?!core).)*</exclude-pattern>
-    <exclude-pattern>mu-plugins/mercator/</exclude-pattern>
+    <exclude-pattern>*vendor/</exclude-pattern>
+    <exclude-pattern>*tests/*</exclude-pattern>
 
     <!-- Rules -->
     <rule ref="WordPress">
