@@ -6,7 +6,7 @@ notifications:
   email: false
 
 php:
-  - 7.0
+  - 7.2
 
 services:
   - docker
@@ -36,6 +36,10 @@ env:
     # Secure travis token resolves to `CI_USER_TOKEN='key'` and is used in dev/docker/start.sh to add credentials to composer-config.json
     # Token is a personal access token for tr1b0t
     - secure: Hn0zgFdCufW8MQBuzy1ZvSSRrSwGaxGJal+d9Dd+uHExd81P50OBYcGlVMKga4tn2MkE3wNFUtgWJXb7Qy7h3Reu4+X5FqFAY3kjmSsXdXXn6jVw0r29LQo4boCbZLfT+9flvocaVmgUwwfDjPGwQTg58ZD7MdW7NEiCzppenxM=
+    # WP_PLUGIN_ACF_KEY
+    - secure: T2o/7OUpGzYncirITyE8ORgpEX860HCvO0acyP8myYtW/N4klYkHAaULq0nvDiemYwV9euvQUB/4CIIhRTR3sjQkK55KqDsV51ceiC2KsaPcYs/XLpEQjMvkamlsxeaPMLEssJMOzAPSyh6xswHHvbLroLYND3avi1bwJ9e7SQA=
+    # WP_PLUGIN_GF_KEY
+    - secure: BtnFZT2mCvR0pCbj7vLiD3v2W8Gy89HS73C6Bb0GmCEeI1SnpXM8i3uchofr9vc7CskoSvVxVfN32WWbsm8DNtv8JmBLDGtGw+ClRJ6RMfUZBU3Y1SEromUwA9wY7R4K1HTs1ZO7J1pdwm6MIgLwFlWHDVDOaWubme2ES1EvSbs=
 before_install:
   - sudo service mysql stop
 
@@ -50,6 +54,11 @@ before_install:
   - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
+
+  # create .env file for private repositories
+  - touch .env
+  - echo "WP_PLUGIN_ACF_KEY='${WP_PLUGIN_ACF_KEY}'" >> .env
+  - echo "WP_PLUGIN_GF_KEY='${WP_PLUGIN_GF_KEY}'" >> .env
 
 install:
   # start the global docker

@@ -72,7 +72,7 @@
     }
   ],
   "require": {
-    "php":"^7.0",
+    "php":"^7.2",
     "aws/aws-sdk-php": "3.48.4",
     "hirak/prestissimo":"0.3.7",
     "composer/installers":"1.4.0",
@@ -109,7 +109,7 @@
   },
   "require-dev": {
     "wp-cli/wp-cli": "^2.2.0",
-    "lucatume/wp-browser": "^2.2.14",
+    "lucatume/wp-browser": "^2.2.17",
     "lucatume/function-mocker": "~1.0",
     "php-http/httplug": "^1.1",
     "filp/whoops": "^2.2@dev"
