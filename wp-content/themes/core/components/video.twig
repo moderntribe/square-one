@@ -22,7 +22,7 @@
 						data-src="{{ thumbnail_url|esc_url }}"
 						role="presentation"
 				/>
-				{% if caption_position is 'below' %}
+				{% if caption_position == 'below' %}
 					<div class="c-video__trigger-action">
 						<i class="c-video__icon icon icon-play" aria-hidden="true"></i>
 					</div>
@@ -34,10 +34,10 @@
 				{% endif %}
 			</a>
 		</figure>
-		{% if caption_position is 'below' %}
+		{% if caption_position == 'below' %}
 			<div class="c-video__caption">
 				<div class="c-video__caption-title">{{ play_text|esc_html }}</div>
 			</div>
-		{% else %}
+		{% endif %}
 	</div>
 </div>
