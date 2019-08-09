@@ -34,7 +34,7 @@ class MediaText extends Panel_Type_Config {
 
 		$panel->add_settings_field( new Fields\ImageSelect( [
 			'name'    => self::FIELD_MEDIA_POSITION,
-			'label'   => __( 'Layout', 'tribe' ),
+			'label'   => __( 'Media Position', 'tribe' ),
 			'options' => [
 				self::OPTION_LAYOUT_IMAGE_RIGHT => $this->handler->layout_icon_url( 'media-text-left.svg' ),
 				self::OPTION_LAYOUT_IMAGE_LEFT  => $this->handler->layout_icon_url( 'media-text-right.svg' ),

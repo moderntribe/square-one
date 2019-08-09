@@ -192,7 +192,7 @@ class MediaText extends Panel {
 	 * @var Oembed_Filter $oembed_obj
 	 * @return string
 	 */
-	protected function get_media_text_video() {
+	protected function get_media_text_video(): string {
 		$oembed_obj = tribe_project()->container()['theme.oembed'];
 		$url      	= $this->panel_vars[ MediaTextPanel::FIELD_VIDEO ];
 		$oembed   	= _wp_oembed_get_object();
