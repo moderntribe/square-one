@@ -294,6 +294,7 @@ class Image extends Component {
 	 */
 	private function get_srcset_attribute(): string {
 
+		$all_sizes = wp_get_additional_image_sizes();
 		$attribute = [];
 
 		if ( $this->options[ static::IMG_ID ] === 0 ) {
@@ -303,16 +304,37 @@ class Image extends Component {
 		foreach ( $this->options[ static::SRCSET_SIZES ] as $size ) {
 			$src = wp_get_attachment_image_src( $this->options[ static::IMG_ID ], $size );
 			// Don't add nonexistent intermediate sizes to the src_set. It ends up being the full-size URL.
-			if ( 'full' !== $size && true === $src[ 3 ] ) {
+			$use_size = ( 'full' !== $size && true === $src[ 3 ] );
+			if ( ! $use_size && isset( $all_sizes[ $size ] ) ) {
+				$use_size = $this->image_matches_size( $src, $all_sizes[ $size ] );
+			}
+			if ( $use_size ) {
 				$attribute[] = sprintf( '%s %dw %dh', $src[ 0 ], $src[ 1 ], $src[ 2 ] );
 			}
 		}
 
+		// If there are no sizes available after all that work, fallback to the original full size image.
 		if ( empty( $attribute ) ) {
 			$src         = wp_get_attachment_image_src( $this->options[ static::IMG_ID ], 'full' );
 			$attribute[] = sprintf( '%s %dw %dh', $src[ 0 ], $src[ 1 ], $src[ 2 ] );
 		}
 
 		return implode( ", \n", $attribute );
+	}
+
+	/**
+	 * Determine if the image meets the dimensions specified by the image size
+	 *
+	 * @param array $image An image array from wp_get_attachment_image_src()
+	 * @param array $size An image size array from wp_get_additional_image_sizes()
+	 *
+	 * @return bool
+	 */
+	private function image_matches_size( $image, $size ): bool {
+		if ( $size[ 'crop' ] ) {
+			return ( $image[ 1 ] == $size[ 'width' ] && $image[ 2 ] == $size[ 'height' ] );
+		} else {
+			return ( $image[ 1 ] == $size[ 'width' ] || $image[ 2 ] == $size[ 'height' ] );
+		}
 	}
 }

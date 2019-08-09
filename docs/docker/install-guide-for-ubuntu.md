@@ -1,4 +1,4 @@
-# Square One setup guide for Ubuntu
+# SquareOne setup guide for Ubuntu
 
 This is a step by step installation guide intended to get the project up and running in the shortest time possible and hopefully with none or few issues in between.
 
@@ -119,17 +119,12 @@ npm install -g grunt-cli
 	sudo apt-get install docker-ce
 	```
 
-    7. Install Docker Snap
-	```
-	sudo snap install docker.
-	```
-
-    8. Verify that Docker CE is installed correctly by running the hello-world image.
+    7. Verify that Docker CE is installed correctly by running the hello-world image.
 	```
 	sudo docker run hello-world
 	```
 
-    9. There seems to be an issue with docker and permissions, so executing the following command will save you from that headache. [View source](https://github.com/docker/compose/issues/4181)
+    8. There seems to be an issue with docker and permissions, so executing the following command will save you from that headache. [View source](https://github.com/docker/compose/issues/4181)
 	```
 	sudo usermod -aG docker $USER
 	```
@@ -194,7 +189,7 @@ Make sure you have setup your ssh keys previously
 command -v bash # => /bin/bash
 ```
 
-2. Clone the Square One repo to your development machine. Go to your worskpace directory, 
+2. Clone the SquareOne repo to your development machine. Go to your worskpace directory, 
 ```
 git clone {repository url}
 ```
