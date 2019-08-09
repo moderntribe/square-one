@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Content;
 
-
 /**
  * Class Contact_Page
  *

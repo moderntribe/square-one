@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Twig;
 
-
 class Extension extends \Twig_Extension {
 	public function getFilters() {
 		return [

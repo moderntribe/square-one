@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Admin\Resources;
 
-
 class JS_Localization {
 
 	/**
@@ -14,9 +13,7 @@ class JS_Localization {
 	 * @return array
 	 */
 	public function get_data() {
-		$js_i18n_array = [
-
-		];
+		$js_i18n_array = [];
 
 		return $js_i18n_array;
 	}

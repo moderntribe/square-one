@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Queues;
 
-
 use Tribe\Project\Queues\Contracts\Queue;
 use Tribe\Project\Queues\Contracts\Task;
 

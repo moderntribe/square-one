@@ -28,7 +28,7 @@ class Container_Export extends Command {
 
 	public function run_command( $args, $assoc_args ) {
 		$reflection = new \ReflectionObject( $this->project );
-		$providers = $reflection->getProperty( 'providers' );
+		$providers  = $reflection->getProperty( 'providers' );
 		$providers->setAccessible( true );
 		$exporter = new Exporter( $providers->getValue( $this->project ) );
 		$exporter->dumpPhpstorm( $this->project->container() );

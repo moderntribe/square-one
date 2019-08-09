@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Queues\Backends;
 
-
 use Tribe\Project\Queues\Contracts\Backend;
 use Tribe\Project\Queues\Message;
 
@@ -25,7 +24,7 @@ class Mock_Backend implements Backend {
 	 *
 	 * @return Message The first message in the queue. Nothing will be reserved.
 	 */
-	public function dequeue( string $queue_name ): Message {
+	public function dequeue( string $queue_name ): Message  {
 		if ( array_key_exists( $queue_name, $this->queues ) && ! empty( $this->queues[ $queue_name ] ) ) {
 			return reset( $this->queues[ $queue_name ] );
 		}
@@ -44,7 +43,7 @@ class Mock_Backend implements Backend {
 		return self::class;
 	}
 
-	public function count( string $queue_name ): int {
+	public function count( string $queue_name ): int  {
 		if ( array_key_exists( $queue_name, $this->queues ) && ! empty( $this->queues[ $queue_name ] ) ) {
 			return count( $this->queues[ $queue_name ] );
 		}

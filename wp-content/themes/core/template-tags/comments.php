@@ -15,7 +15,8 @@ if ( ! function_exists( 'core_comment' ) ) :
 		$GLOBALS['comment'] = $comment;
 		switch ( $comment->comment_type ) :
 
-			case 'pingback': ?>
+			case 'pingback':
+				?>
 
 				<li id="comment-<?php comment_ID(); ?>" <?php comment_class( 'post-interaction' ); ?>>
 					<p>
@@ -24,9 +25,11 @@ if ( ! function_exists( 'core_comment' ) ) :
 						<?php edit_comment_link( __( '(Edit)', 'tribe' ), '<span class="comment__action-edit">', '</span>' ); ?>
 					</p>
 
-				<?php break;
+				<?php
+				break;
 
-			case 'trackback': ?>
+			case 'trackback':
+				?>
 
 				<li id="comment-<?php comment_ID(); ?>" <?php comment_class( 'post-interaction' ); ?>>
 				<p>
@@ -35,16 +38,20 @@ if ( ! function_exists( 'core_comment' ) ) :
 					<?php edit_comment_link( __( '(Edit)', 'tribe' ), '<span class="comment__action-edit">', '</span>' ); ?>
 				</p>
 
-				<?php break;
+				<?php
+				break;
 
-			default: ?>
+			default:
+				?>
 
 				<li id="comment-<?php comment_ID(); ?>" <?php comment_class( 'post-interaction' ); ?>>
 
 					<header class="comment__header">
 
-						<?php // Gravatar
-						echo get_avatar( $comment, 150 ); ?>
+						<?php
+						// Gravatar
+						echo get_avatar( $comment, 150 );
+						?>
 
 						<h5 class="comment__title" rel="author">
 							<cite><?php echo get_comment_author(); ?></cite>
@@ -64,22 +71,27 @@ if ( ! function_exists( 'core_comment' ) ) :
 
 					</div><!-- .comment-text -->
 
-					<?php // Moderation text
-					if ( $comment->comment_approved == '0' ) { ?>
+					<?php
+					// Moderation text
+					if ( $comment->comment_approved == '0' ) {
+						?>
 						<p class="comment__message-moderation"><?php esc_html_e( 'Your comment is awaiting moderation.', 'tribe' ); ?></p>
 					<?php } ?>
 
-					<?php // Reply
+					<?php
+					// Reply
 					comment_reply_link(
-						array_merge( $args, array(
+						array_merge( $args, [
 							'reply_text' => __( 'Reply', 'tribe' ),
-							'before'	 => '<p class="comment__action-reply">',
-							'after' 	 => '</p>',
-							'depth' 	 => $depth,
-							'max_depth'  => $args['max_depth']
-						) ) ); ?>
+							'before'     => '<p class="comment__action-reply">',
+							'after'      => '</p>',
+							'depth'      => $depth,
+							'max_depth'  => $args['max_depth'],
+						] ) );
+					?>
 
-			<?php break;
+				<?php
+				break;
 
 		endswitch;
 

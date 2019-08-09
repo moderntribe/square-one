@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\CLI;
 
-
 abstract class Generator_Command extends Command {
 
 	protected $file_system    = null;

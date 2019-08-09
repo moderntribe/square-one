@@ -6,10 +6,10 @@ use Tribe\Project\Twig\Stringable_Callable;
 
 class Page extends Base {
 	public function get_data(): array {
-		$data               = parent::get_data();
-		$data[ 'post' ]     = $this->get_post();
-		$data[ 'comments' ] = $this->get_comments();
-		$data[ 'sidebar' ]  = $this->get_sidebar();
+		$data             = parent::get_data();
+		$data['post']     = $this->get_post();
+		$data['comments'] = $this->get_comments();
+		$data['sidebar']  = $this->get_sidebar();
 
 		return $data;
 	}
@@ -49,8 +49,8 @@ class Page extends Base {
 
 	protected function get_sidebar() {
 		$sidebar = new Sidebar( $this->template, $this->twig, 'sidebar-main' );
-		$data = $sidebar->get_data();
-		return $data[ 'sidebar' ];
+		$data    = $sidebar->get_data();
+		return $data['sidebar'];
 	}
 
 }

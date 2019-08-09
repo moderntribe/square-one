@@ -3,10 +3,10 @@
 
 namespace Tribe\Project\Theme\Resources;
 
-
 class Editor_Styles {
 	/**
 	 * Visual Editor Styles
+	 *
 	 * @action after_setup_theme
 	 */
 	public function visual_editor_styles() {
@@ -24,6 +24,7 @@ class Editor_Styles {
 	}
 	/**
 	 * Visual Editor Body Class
+	 *
 	 * @filter tiny_mce_before_init
 	 */
 	public function visual_editor_body_class( $settings ) {

@@ -2,7 +2,6 @@
 
 namespace Tribe\Project\P2P;
 
-
 use Tribe\Libs\P2P\Relationship;
 
 class Admin_Search_Filtering {
@@ -10,7 +9,7 @@ class Admin_Search_Filtering {
 	/**
 	 * @var array[] A p2p_type to options list
 	 */
-	protected static $post_type_options = [ ];
+	protected static $post_type_options = [];
 
 	/**
 	 * @var \Tribe\Libs\Assets\Asset_Loader
@@ -39,7 +38,7 @@ class Admin_Search_Filtering {
 		$this->relationship_id = $relationship::NAME;
 		$this->from_post_types = $relationship->from();
 		$this->to_post_types   = $relationship->to();
-		$this->side = $side;
+		$this->side            = $side;
 		if ( $asset_loader ) {
 			self::$asset_loader = $asset_loader;
 		}
@@ -58,9 +57,9 @@ class Admin_Search_Filtering {
 	}
 
 	/**
-	 * @param bool $shown
+	 * @param bool                          $shown
 	 * @param \P2P_Directed_Connection_Type $directed
-	 * @param \WP_Post $post
+	 * @param \WP_Post                      $post
 	 * @return bool
 	 */
 	public function track_shown_boxes( $shown, $directed, $post ) {
@@ -69,7 +68,7 @@ class Admin_Search_Filtering {
 		if ( $shown && $name == $this->relationship_id ) {
 			if ( $this->side == 'both' || $side == $this->side ) {
 				$this->p2p_box_connection = $directed;
-				$this->side_to_show = $side;
+				$this->side_to_show       = $side;
 			}
 		}
 		return $shown; // passthrough
@@ -91,7 +90,7 @@ class Admin_Search_Filtering {
 		self::$asset_loader->register_and_enqueue_script( 'p2p-posttype-filter', 'admin/p2p/p2p-posttype-filter.js', [ 'jquery' ], '', true );
 		self::$asset_loader->register_and_enqueue_stylesheet( 'p2p-posttype-filter', 'admin/p2p/p2p-posttype-filter.css' );
 		wp_localize_script( 'p2p-posttype-filter', 'Tribe_P2P_Posttype_Filter', [
-			'relationships' => array_keys(self::$post_type_options),
+			'relationships' => array_keys( self::$post_type_options ),
 			'post_types'    => self::$post_type_options,
 		] );
 	}
@@ -139,7 +138,7 @@ class Admin_Search_Filtering {
 	}
 
 	protected function should_filter_query_args() {
-		if ( empty( $_REQUEST['p2p_type'] ) || !$this->relationship_id == $_REQUEST['p2p_type'] ) {
+		if ( empty( $_REQUEST['p2p_type'] ) || ! $this->relationship_id == $_REQUEST['p2p_type'] ) {
 			return false;
 		}
 		if ( empty( $_REQUEST['action'] ) || $_REQUEST['action'] != 'p2p_box' ) {

@@ -8,11 +8,11 @@ class Tabs extends Panel_Type_Config {
 
 	const NAME = 'tabs';
 
-	const FIELD_DESCRIPTION   = 'description';
-	const FIELD_TITLE         = 'title';
-	const FIELD_TABS          = 'tabs';
-	const FIELD_TABS_TITLE    = 'row_header';
-	const FIELD_TABS_CONTENT  = 'row_content';
+	const FIELD_DESCRIPTION  = 'description';
+	const FIELD_TITLE        = 'title';
+	const FIELD_TABS         = 'tabs';
+	const FIELD_TABS_TITLE   = 'row_header';
+	const FIELD_TABS_CONTENT = 'row_content';
 
 	protected function panel() {
 

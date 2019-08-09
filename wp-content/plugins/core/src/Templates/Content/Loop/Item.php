@@ -17,7 +17,7 @@ class Item extends Twig_Template {
 	];
 
 	public function get_data(): array {
-		$data[ 'post' ] = [
+		$data['post'] = [
 			'post_type'      => get_post_type(),
 			'title'          => get_the_title(),
 			'content'        => new Stringable_Callable( [ $this, 'defer_get_content' ] ),

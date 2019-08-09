@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Templates\Content\Pagination;
 
-
 use Tribe\Project\Twig\Twig_Template;
 
 class Single extends Twig_Template {
@@ -26,13 +25,13 @@ class Single extends Twig_Template {
 		];
 
 		if ( ! empty( $previous ) ) {
-			$pagination[ 'previous' ] = [
+			$pagination['previous'] = [
 				'title'     => get_the_title( $previous ),
 				'permalink' => get_permalink( $previous ),
 			];
 		}
 		if ( ! empty( $next ) ) {
-			$pagination[ 'next' ] = [
+			$pagination['next'] = [
 				'title'     => get_the_title( $next ),
 				'permalink' => get_permalink( $next ),
 			];

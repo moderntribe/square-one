@@ -8,8 +8,8 @@ use Tribe\Project\Taxonomies\Example;
 
 class Example_Taxonomy_Service_Provider extends Taxonomy_Service_Provider {
 	protected $taxonomy_class = Example\Example::class;
-	protected $config_class = Example\Config::class;
-	protected $post_types = [
+	protected $config_class   = Example\Config::class;
+	protected $post_types     = [
 		Sample\Sample::NAME,
 	];
 }

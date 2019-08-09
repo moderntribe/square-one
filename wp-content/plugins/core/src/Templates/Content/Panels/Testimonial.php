@@ -51,9 +51,9 @@ class Testimonial extends Panel {
 	protected function get_slider(): string {
 		$main_attrs = [];
 		if ( is_panel_preview() ) {
-			$main_attrs[ 'data-depth' ]    = $this->panel->get_depth();
-			$main_attrs[ 'data-name' ]     = 'quotes';
-			$main_attrs[ 'data-livetext' ] = true;
+			$main_attrs['data-depth']    = $this->panel->get_depth();
+			$main_attrs['data-name']     = 'quotes';
+			$main_attrs['data-livetext'] = true;
 		}
 		$options = [
 			Slider::SLIDES          => $this->get_slides(),

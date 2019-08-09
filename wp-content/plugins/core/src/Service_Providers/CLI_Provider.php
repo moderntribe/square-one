@@ -68,23 +68,23 @@ class CLI_Provider extends Service_Provider {
 
 	private function queues( Container $container ) {
 		$container[ self::QUEUES_LIST ] = function ( $container ) {
-			return new List_Queues( $container[ 'queues.collection' ] );
+			return new List_Queues( $container['queues.collection'] );
 		};
 
 		$container[ self::QUEUES_ADD_TABLE ] = function ( $container ) {
-			return new MySQL_Table( $container[ 'queues.backend.mysql' ] );
+			return new MySQL_Table( $container['queues.backend.mysql'] );
 		};
 
 		$container[ self::QUEUES_CLEANUP ] = function ( $container ) {
-			return new Cleanup( $container[ 'queues.collection' ] );
+			return new Cleanup( $container['queues.collection'] );
 		};
 
 		$container[ self::QUEUES_PROCESS ] = function ( $container ) {
-			return new Process( $container[ 'queues.collection' ] );
+			return new Process( $container['queues.collection'] );
 		};
 
 		$container[ self::QUEUES_ADD_TASK ] = function ( $container ) {
-			return new Add_Tasks( $container[ 'queues.collection' ] );
+			return new Add_Tasks( $container['queues.collection'] );
 		};
 	}
 

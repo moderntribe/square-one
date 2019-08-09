@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Twig;
 
-
 abstract class Twig_Template implements Template_Interface {
 
 	protected $template;
@@ -24,7 +23,7 @@ abstract class Twig_Template implements Template_Interface {
 		$this->twig = $twig;
 	}
 
-	public function render( $template = '' ): string {
+	public function render( $template = '' ): string  {
 		$template = $template ?: $this->template;
 		return $this->twig->render( $template, $this->get_data() );
 	}

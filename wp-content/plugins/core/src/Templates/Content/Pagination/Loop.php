@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Templates\Content\Pagination;
 
-
 use Tribe\Project\Twig\Twig_Template;
 
 class Loop extends Twig_Template {
@@ -15,15 +14,15 @@ class Loop extends Twig_Template {
 
 	protected function get_pagination() {
 		$data = [
-			'max_num_pages'       => $GLOBALS[ 'wp_query' ]->max_num_pages,
+			'max_num_pages'       => $GLOBALS['wp_query']->max_num_pages,
 			'next_posts_link'     => '',
 			'previous_posts_link' => '',
 			'wp_pagenavi'         => '',
 		];
 
-		if ( $data[ 'max_num_pages' ] > 1 ) {
-			$data[ 'next_posts_link' ]     = get_next_posts_link( __( '&larr; More Posts', 'tribe' ) );
-			$data[ 'previous_posts_link' ] = get_previous_posts_link( __( 'Previous Posts &rarr;', 'tribe' ) );
+		if ( $data['max_num_pages'] > 1 ) {
+			$data['next_posts_link']     = get_next_posts_link( __( '&larr; More Posts', 'tribe' ) );
+			$data['previous_posts_link'] = get_previous_posts_link( __( 'Previous Posts &rarr;', 'tribe' ) );
 		}
 
 		// Use the plugin, if it's enabled.

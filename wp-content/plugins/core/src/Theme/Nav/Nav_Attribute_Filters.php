@@ -41,24 +41,24 @@ class Nav_Attribute_Filters {
 		 */
 		$args = (array) $args;
 
-		$classes[] = $args[ 'theme_location' ] . '__list-item';
+		$classes[] = $args['theme_location'] . '__list-item';
 
 		// Depth
-		$classes[] .= $args[ 'theme_location' ] . '__list-item--depth-' . $depth;
+		$classes[] .= $args['theme_location'] . '__list-item--depth-' . $depth;
 
 		// Has children items
 		if ( in_array( 'menu-item-has-children', $item->classes ) ) {
-			$classes[] = $args[ 'theme_location' ] . '__list-item--has-children';
+			$classes[] = $args['theme_location'] . '__list-item--has-children';
 		}
 
 		// Is Parent Item
 		if ( in_array( 'current-menu-parent', $item->classes ) ) {
-			$classes[] = $args[ 'theme_location' ] . '__list-item--is-current-parent';
+			$classes[] = $args['theme_location'] . '__list-item--is-current-parent';
 		}
 
 		// Is Current Item
 		if ( in_array( 'current-menu-item', $item->classes ) ) {
-			$classes[] = $args[ 'theme_location' ] . '__list-item--is-current';
+			$classes[] = $args['theme_location'] . '__list-item--is-current';
 		}
 
 		/**
@@ -87,8 +87,8 @@ class Nav_Attribute_Filters {
 	/**
 	 * Customize WP menu item anchor attributes
 	 *
-	 * @param array $atts {
-	 *     The HTML attributes applied to the menu item's `<a>` element, empty strings are ignored.
+	 * @param array  $atts {
+	 *      The HTML attributes applied to the menu item's `<a>` element, empty strings are ignored.
 	 *
 	 *     @type string $title  Title attribute.
 	 *     @type string $target Target attribute.
@@ -110,13 +110,13 @@ class Nav_Attribute_Filters {
 		$args = (array) $args;
 
 		$classes = [
-			$args[ 'theme_location' ] . '__action',
-			$args[ 'theme_location' ] . '__action--depth-' . $depth,
+			$args['theme_location'] . '__action',
+			$args['theme_location'] . '__action--depth-' . $depth,
 		];
 
 		// Has children items
 		if ( in_array( 'menu-item-has-children', $item->classes ) ) {
-			$classes[] = $args[ 'theme_location' ] . '__action--has-children';
+			$classes[] = $args['theme_location'] . '__action--has-children';
 		}
 
 		$atts['class'] = implode( ' ', array_unique( $classes ) );

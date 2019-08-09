@@ -36,9 +36,9 @@ class Index extends Base {
 
 	protected function get_single_post() {
 		$template = new Content\Loop\Item( $this->template, $this->twig );
-		$data    = $template->get_data();
+		$data     = $template->get_data();
 
-		return $data[ 'post' ];
+		return $data['post'];
 	}
 
 	protected function get_current_page() {
@@ -87,7 +87,7 @@ class Index extends Base {
 		$links = [];
 
 		$pagination = new Pagination_Util();
-		$numbers = $pagination->numbers( 2, true, false, false );
+		$numbers    = $pagination->numbers( 2, true, false, false );
 
 		if ( empty( $numbers ) ) {
 			return $links;

@@ -13,6 +13,6 @@ class Twig_Cache extends \Twig_Cache_Filesystem {
 	public function generateKey( $name, $className ) {
 		$hash = hash( 'sha256', $className );
 
-		return $this->path . $hash[ 0 ] . $hash[ 1 ] . '/' . $hash . '.html';
+		return $this->path . $hash[0] . $hash[1] . '/' . $hash . '.html';
 	}
 }

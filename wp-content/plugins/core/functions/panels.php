@@ -4,7 +4,7 @@
  * Output panel title, built for SEO
  *
  * @param string $title  Panel title
- * @param array $options An array of optional attributes & values to apply to the title element markup.
+ * @param array  $options An array of optional attributes & values to apply to the title element markup.
  *
  * @since tribe-square-one 1.0
  */
@@ -42,11 +42,11 @@ function the_panel_title( $title = null, $options = [] ) {
 		$h_level = 'h1';
 	}
 
-	$class      = ' class="site-panel__title ' . esc_attr( $options[ 'classes' ] ) . '"';
-	$data_attrs = ( ! empty( $options[ 'data_name' ] ) ) ? ' data-name="' . esc_attr( $options[ 'data_name' ] ) . '"' : '';
-	$data_attrs .= ( true === $options[ 'data_livetext' ] ) ? ' data-livetext' : '';
-	$data_attrs .= ( true === $options[ 'data_livetext' ] ) ? sprintf( ' data-depth="%d"', $options[ 'depth' ] ) : '';
-	$data_attrs .= ( true === $options[ 'data_livetext' ] ) ? sprintf( ' data-index="%d"', $options[ 'index' ] ) : '';
+	$class       = ' class="site-panel__title ' . esc_attr( $options['classes'] ) . '"';
+	$data_attrs  = ( ! empty( $options['data_name'] ) ) ? ' data-name="' . esc_attr( $options['data_name'] ) . '"' : '';
+	$data_attrs .= ( true === $options['data_livetext'] ) ? ' data-livetext' : '';
+	$data_attrs .= ( true === $options['data_livetext'] ) ? sprintf( ' data-depth="%d"', $options['depth'] ) : '';
+	$data_attrs .= ( true === $options['data_livetext'] ) ? sprintf( ' data-index="%d"', $options['index'] ) : '';
 
 	$panel_title = sprintf(
 		'<%1$s%2$s%3$s>%4$s</%1$s>',
@@ -63,7 +63,7 @@ function the_panel_title( $title = null, $options = [] ) {
  * Output panel description
  *
  * @param string $content  Panel content
- * @param array $options An array of optional attributes & values to apply to the description element markup.
+ * @param array  $options An array of optional attributes & values to apply to the description element markup.
  *
  * @since tribe-square-one 1.0
  */
@@ -85,12 +85,12 @@ function the_panel_description( $content = null, $options = [] ) {
 
 	$options = wp_parse_args( $options, $defaults );
 
-	$class      = ' class="site-panel__description ' . esc_attr( $options[ 'classes' ] ) . '"';
-	$data_attrs = ( ! empty( $options[ 'data_name' ] ) ) ? ' data-name="' . esc_attr( $options[ 'data_name' ] ) . '"' : '';
-	$data_attrs .= ( true === $options[ 'data_livetext' ] ) ? ' data-livetext' : '';
-	$data_attrs .= ( true === $options[ 'data_livetext' ] ) ? sprintf( ' data-depth="%d"', $options[ 'depth' ] ) : '';
-	$data_attrs .= ( true === $options[ 'data_livetext' ] ) ? sprintf( ' data-index="%d"', $options[ 'index' ] ) : '';
-	$data_attrs .= ( true === $options[ 'data_livetext' ] ) ? sprintf( ' data-autop="%d"', $options[ 'data_autop' ] ) : '';
+	$class       = ' class="site-panel__description ' . esc_attr( $options['classes'] ) . '"';
+	$data_attrs  = ( ! empty( $options['data_name'] ) ) ? ' data-name="' . esc_attr( $options['data_name'] ) . '"' : '';
+	$data_attrs .= ( true === $options['data_livetext'] ) ? ' data-livetext' : '';
+	$data_attrs .= ( true === $options['data_livetext'] ) ? sprintf( ' data-depth="%d"', $options['depth'] ) : '';
+	$data_attrs .= ( true === $options['data_livetext'] ) ? sprintf( ' data-index="%d"', $options['index'] ) : '';
+	$data_attrs .= ( true === $options['data_livetext'] ) ? sprintf( ' data-autop="%d"', $options['data_autop'] ) : '';
 
 	$panel_description = sprintf(
 		'<div%1$s%2$s>%3$s</div>',
@@ -127,10 +127,10 @@ function get_panel_link( $link, $options = [] ) {
 
 	return sprintf(
 		'<a href="%1$s"%2$s%3$s>%4$s</a>',
-		esc_url( $link[ 'url' ] ),
-		empty( $options[ 'css_class' ] ) ? '' : ' class="' . esc_attr( $options[ 'css_class' ] ) . '"',
+		esc_url( $link['url'] ),
+		empty( $options['css_class'] ) ? '' : ' class="' . esc_attr( $options['css_class'] ) . '"',
 		empty( $link['target'] ) ? '' : ' target="' . esc_attr( $link['target'] ) . '"',
-		empty( $link['label'] ) || $options[ 'force_alt_label' ] ? $options[ 'alt_label' ] : $link['label']
+		empty( $link['label'] ) || $options['force_alt_label'] ? $options['alt_label'] : $link['label']
 	);
 }
 

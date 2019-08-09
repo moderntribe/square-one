@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Blog_Copier\Tasks;
 
-
 use Tribe\Project\Blog_Copier\Copy_Configuration;
 use Tribe\Project\Blog_Copier\Copy_Manager;
 use Tribe\Project\Queues\Contracts\Task;
@@ -15,8 +14,8 @@ use Tribe\Project\Queues\Contracts\Task;
  */
 class Replace_Options implements Task {
 
-	public function handle( array $args ): bool {
-		$post_id = empty( $args[ 'post_id' ] ) ? 0 : absint( $args[ 'post_id' ] );
+	public function handle( array $args ): bool  {
+		$post_id = empty( $args['post_id'] ) ? 0 : absint( $args['post_id'] );
 
 		$data        = \json_decode( get_post_field( 'post_content', $post_id, 'raw' ), true );
 		$config      = new Copy_Configuration( $data );

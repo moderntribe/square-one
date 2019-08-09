@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Blog_Copier;
 
-
 class Network_Admin_Screen {
 	const NAME = 'copy-blog';
 
@@ -23,7 +22,7 @@ class Network_Admin_Screen {
 			__( 'Blog Copier', 'tribe' ),
 			'manage_sites',
 			self::NAME,
-			[ $this, 'render_screen', ]
+			[ $this, 'render_screen' ]
 		);
 
 		add_settings_section(
@@ -93,7 +92,7 @@ class Network_Admin_Screen {
 
 		do_settings_sections( self::NAME );
 		submit_button( __( 'Begin Copy', 'tribe' ) );
-		echo "</form>";
+		echo '</form>';
 
 		do_action( 'tribe/project/copy-blog/after-form' );
 
@@ -125,7 +124,7 @@ class Network_Admin_Screen {
 
 		$blogs = $wpdb->get_results( $wpdb->prepare( $query, get_current_network_id() ) );
 
-		$selected = absint( isset( $_GET[ 'src' ] ) ? $_GET[ 'src' ] : get_site_option( self::OPTION_LAST_SRC, 0 ) );
+		$selected = absint( isset( $_GET['src'] ) ? $_GET['src'] : get_site_option( self::OPTION_LAST_SRC, 0 ) );
 
 		$options = array_map( function ( $blog ) use ( $selected ) {
 			return sprintf( '<option value="%d" %s>%s</option>', $blog->blog_id, selected( $blog->blog_id, $selected, false ), esc_html( untrailingslashit( $blog->domain_path ) ) );
@@ -174,14 +173,13 @@ class Network_Admin_Screen {
 		} else {
 			$args = $_POST[ self::NAME ];
 
-
-			$email   = get_blog_option( $args[ 'src' ], 'admin_email' );
+			$email   = get_blog_option( $args['src'], 'admin_email' );
 			$user_id = email_exists( sanitize_email( $email ) );
 			if ( $user_id ) {
-				$args[ 'user' ] = $user_id;
+				$args['user'] = $user_id;
 			} else {
 				// Use current user instead
-				$args[ 'user' ] = get_current_user_id();
+				$args['user'] = get_current_user_id();
 			}
 			/**
 			 * Filter the ID of the admin user assigned to the destination blog
@@ -189,8 +187,7 @@ class Network_Admin_Screen {
 			 * @param int   $user_id
 			 * @param array $args
 			 */
-			$args[ 'user' ] = apply_filters( 'tribe/project/copy-blog/user', $args[ 'user' ], $args );
-
+			$args['user'] = apply_filters( 'tribe/project/copy-blog/user', $args['user'], $args );
 
 			$config = new Copy_Configuration( $args );
 
@@ -216,7 +213,7 @@ class Network_Admin_Screen {
 	 */
 	private function validate_submission( $submission ) {
 		$error = new \WP_Error();
-		if ( ! isset( $submission[ '_wpnonce' ] ) || ! wp_verify_nonce( $submission[ '_wpnonce' ], self::NAME ) ) {
+		if ( ! isset( $submission['_wpnonce'] ) || ! wp_verify_nonce( $submission['_wpnonce'], self::NAME ) ) {
 			$error->add( 'invalid_nonce', __( 'Error while saving. Please try again.', 'tribe' ) );
 
 			return $error;
@@ -227,15 +224,15 @@ class Network_Admin_Screen {
 			return $error;
 		}
 
-		if ( empty( $submission[ self::NAME ][ 'src' ] ) ) {
+		if ( empty( $submission[ self::NAME ]['src'] ) ) {
 			$error->add( 'empty_src', __( 'Please select a blog to copy.', 'tribe' ) );
 		}
 
-		if ( empty( $submission[ self::NAME ][ 'address' ] ) ) {
+		if ( empty( $submission[ self::NAME ]['address'] ) ) {
 			$error->add( 'empty_address', __( 'Please provide an address for the new blog.', 'tribe' ) );
 		}
 
-		if ( empty( $submission[ self::NAME ][ 'title' ] ) ) {
+		if ( empty( $submission[ self::NAME ]['title'] ) ) {
 			$error->add( 'empty_title', __( 'Please provide a title for the new blog.', 'tribe' ) );
 		}
 

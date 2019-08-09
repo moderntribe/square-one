@@ -34,21 +34,21 @@ class Titles_Filter {
 	}
 
 	/**
-	 * @param string $title
-	 * @param \WP_Post|\WP_User $object
+	 * @param string                        $title
+	 * @param \WP_Post|\WP_User             $object
 	 * @param \P2P_Directed_Connection_Type $connection_type
 	 *
 	 * @return string
 	 */
 	public function filter_connection_name( $title, $object, $connection_type ) {
 		$p2p_id = $connection_type->name;
-		if ( !in_array( $p2p_id, $this->connection_types_to_label() ) ) {
+		if ( ! in_array( $p2p_id, $this->connection_types_to_label() ) ) {
 			return $title;
 		}
 		if ( $object instanceof \WP_Post ) {
 			$post_type_label = $this->get_post_type_label( $object->post_type );
 		}
-		if ( !empty( $post_type_label ) ) {
+		if ( ! empty( $post_type_label ) ) {
 			$title = sprintf( '[%s] %s', $post_type_label, $title );
 		}
 		return $title;
@@ -60,11 +60,11 @@ class Titles_Filter {
 	 *
 	 * @return string
 	 */
-	public function filter_candidate_name( $title,  $object ) {
+	public function filter_candidate_name( $title, $object ) {
 		if ( ! $object instanceof \WP_Post ) {
 			return $title;
 		}
-		$post = $object;
+		$post             = $object;
 		$connection_type  = $this->get_connection_type();
 		$connection_types = $this->connection_types_to_label();
 		if ( empty( $connection_type ) || ! in_array( $connection_type, $connection_types ) ) {

@@ -12,7 +12,7 @@ class Config extends Post_Type_Config {
 			'enter_title_here' => __( 'Sample', 'tribe' ),
 			'map_meta_cap'     => true,
 			'supports'         => [ 'title', 'editor' ],
-			//'capability_type'  => $this->post_type(), // for custom caps
+			// 'capability_type'  => $this->post_type(), // for custom caps
 			'capability_type'  => 'post', // to use default WP caps
 		];
 	}

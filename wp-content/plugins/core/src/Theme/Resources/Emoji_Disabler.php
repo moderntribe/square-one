@@ -3,10 +3,10 @@
 
 namespace Tribe\Project\Theme\Resources;
 
-
 class Emoji_Disabler {
 	/**
 	 * Remove WP Emoji Scripts
+	 *
 	 * @action after_setup_theme
 	 */
 	public function remove_hooks() {

@@ -12,10 +12,10 @@ use Tribe\Project\Theme\Panel_Util;
  */
 
 $panel_util = new Panel_Util();
-$classes    = ['panel'];
+$classes    = [ 'panel' ];
 
 // Child Panel
-if( $panel->get_depth() >= 1 ) {
+if ( $panel->get_depth() >= 1 ) {
 
 	$classes[] = 'panel-child';
 
@@ -27,10 +27,12 @@ if( $panel->get_depth() >= 1 ) {
 
 	</article>
 
-<?php }
+	<?php
+}
 
 // Parent Panel.
-else { ?>
+else {
+	?>
 
 		<?php echo $html; ?>
 

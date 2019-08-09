@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Service_Providers;
 
-
 use Pimple\Container;
 use Tribe\Project\Container\Service_Provider;
 use Tribe\Project\P2P\Admin_Search_Filtering;
@@ -45,14 +44,14 @@ class P2P_Provider extends Service_Provider {
 				Event::NAME,
 			],
 		],
-		Sample_To_Page::class => [
+		Sample_To_Page::class       => [
 			'from' => [
 				Sample::NAME,
 			],
-			'to' => [
+			'to'   => [
 				Page::NAME,
 			],
-		]
+		],
 	];
 
 	public function register( Container $container ) {
@@ -69,11 +68,11 @@ class P2P_Provider extends Service_Provider {
 		foreach ( $this->p2p_relationships as $relationship => $sides ) {
 			$container[ 'p2p.' . $relationship::NAME ] = function ( $container ) use ( $relationship, $sides ) {
 
-				$from = $this->post_type_is_user( $sides[ 'from' ] ) ? 'user' : array_filter( $sides[ 'from' ], [
+				$from = $this->post_type_is_user( $sides['from'] ) ? 'user' : array_filter( $sides['from'], [
 					$this,
 					'is_registered_post_type',
 				] );
-				$to   = $this->post_type_is_user( $sides[ 'to' ] ) ? 'user' : array_filter( $sides[ 'to' ], [
+				$to   = $this->post_type_is_user( $sides['to'] ) ? 'user' : array_filter( $sides['to'], [
 					$this,
 					'is_registered_post_type',
 				] );
@@ -89,45 +88,45 @@ class P2P_Provider extends Service_Provider {
 
 	protected function filters( Container $container ) {
 
-		$container[ 'p2p.admin_titles_filter' ] = function ( $container ) {
+		$container['p2p.admin_titles_filter'] = function ( $container ) {
 			return new Titles_Filter( [ General_Relationship::NAME ] );
 		};
 
 		add_action( 'init', function () use ( $container ) {
-			$container[ 'p2p.admin_titles_filter' ]->hook();
+			$container['p2p.admin_titles_filter']->hook();
 		}, 10, 0 );
 
-		$container[ 'p2p.event_query_filters' ] = function ( $container ) {
+		$container['p2p.event_query_filters'] = function ( $container ) {
 			return new Event_Query_Filters();
 		};
 
 		add_action( 'tribe_events_pre_get_posts', function ( $query ) use ( $container ) {
-			$container[ 'p2p.event_query_filters' ]->remove_event_filters_from_p2p_query( $query );
+			$container['p2p.event_query_filters']->remove_event_filters_from_p2p_query( $query );
 		}, 10, 1 );
 
 		add_action( 'wp_ajax_posts-field-p2p-options-search', function () use ( $container ) {
-			$container[ 'p2p.event_query_filters' ]->remove_event_filters_from_panel_p2p_requests();
+			$container['p2p.event_query_filters']->remove_event_filters_from_panel_p2p_requests();
 		}, 10, 0 );
 
-		$container[ 'p2p.panel_search_filters' ] = function ( $container ) {
+		$container['p2p.panel_search_filters'] = function ( $container ) {
 			return new Panel_Search_Filters();
 		};
 
 		add_action( 'wp_ajax_posts-field-p2p-options-search', function () use ( $container ) {
-			$container[ 'p2p.panel_search_filters' ]->set_p2p_search_filters();
+			$container['p2p.panel_search_filters']->set_p2p_search_filters();
 		}, 0, 0 );
 
-		$container[ 'p2p.query_optimization' ] = function ( $container ) {
+		$container['p2p.query_optimization'] = function ( $container ) {
 			return new Query_Optimization();
 		};
 
 		add_action( 'p2p_init', function () use ( $container ) {
-			$container[ 'p2p.query_optimization' ]->p2p_init();
+			$container['p2p.query_optimization']->p2p_init();
 		}, 10, 0 );
 
 		foreach ( [ General_Relationship::NAME ] as $relationship ) {
 			$container[ 'p2p.admin_search_filtering.' . $relationship ] = function ( $container ) use ( $relationship ) {
-				return new Admin_Search_Filtering( $container[ 'p2p.' . $relationship ], 'both', $container[ 'assets' ] );
+				return new Admin_Search_Filtering( $container[ 'p2p.' . $relationship ], 'both', $container['assets'] );
 			};
 
 			add_action( 'load-post.php', function () use ( $container, $relationship ) {
@@ -142,7 +141,6 @@ class P2P_Provider extends Service_Provider {
 				return $container[ 'p2p.admin_search_filtering.' . $relationship ]->filter_connectable_query_args( $query_vars, $connection, $post );
 			}, 10, 3 );
 		}
-
 
 	}
 

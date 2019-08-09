@@ -8,37 +8,36 @@ namespace Tribe\Project\Theme;
  * @param array $rows the rows content as array
  * @param string $mode the mode of layout for the accordion
  * @param string $state Whether first item is closed or open by default
- *
  */
 
 
 class Accordion {
-	private $rows = [];
-	private $mode = 'default';
+	private $rows  = [];
+	private $mode  = 'default';
 	private $state = 'closed';
 
 	public function __construct( $rows = [], $mode = 'default', $state = 'open' ) {
-		$this->rows = $rows;
-		$this->mode = $mode;
+		$this->rows  = $rows;
+		$this->mode  = $mode;
 		$this->state = $state;
 	}
 
 	public function render() {
-		if( empty( $this->rows ) ){
+		if ( empty( $this->rows ) ) {
 			return;
 		}
 
-		$uid = uniqid( 'accordion-' );
-		$i = 0;
+		$uid        = uniqid( 'accordion-' );
+		$i          = 0;
 		$faq_q_html = $this->mode == 'faq' ? sprintf( '<span class="ac-q">%s:</span>', __( 'Q', 'tribe' ) ) : '';
 		$faq_a_html = $this->mode == 'faq' ? sprintf( '<span class="ac-a">%s:</span>', __( 'A', 'tribe' ) ) : '';
 		$base_class = $this->mode == 'faq' ? 'accordion__row accordion--faq-mode' : 'accordion__row';
 
 		echo '<div class="accordion" role="tablist" aria-multiselectable="true" data-js="accordion">';
 
-		foreach( $this->rows as $row ){
+		foreach ( $this->rows as $row ) {
 
-			$header_id = sprintf( '%s-header-%s', $uid, $i );
+			$header_id  = sprintf( '%s-header-%s', $uid, $i );
 			$content_id = sprintf( '%s-content-%s', $uid, $i );
 
 			$row_classes = [
@@ -52,7 +51,7 @@ class Accordion {
 				$this->state == 'open' && $i == 0 ? 'first' : '',
 			];
 
-			$title = empty( $row['title'] ) ? '' : $row['title'];
+			$title   = empty( $row['title'] ) ? '' : $row['title'];
 			$content = empty( $row['content'] ) ? '' : $row['content'];
 
 			?>
@@ -87,7 +86,8 @@ class Accordion {
 				</div>
 			</article>
 
-			<?php $i++; }
+			<?php
+			$i++; }
 
 		echo '</div>';
 	}

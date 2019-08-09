@@ -40,7 +40,7 @@ class Gravity_Forms_Filter {
 		$jquery_ui = $wp_scripts->query( 'jquery-ui-core' );
 		wp_enqueue_style( 'jquery-ui-smoothness',
 			'https://ajax.googleapis.com/ajax/libs/jqueryui/' . $jquery_ui->ver . '/themes/smoothness/jquery-ui.css',
-			false, 'screen' );
+		false, 'screen' );
 
 	}
 
@@ -57,7 +57,7 @@ class Gravity_Forms_Filter {
 			$index   = array_pop( $indices );
 
 			$new_markup = sprintf( '<label for="choice_%1$s_%2$s_%3$s" class="gf-radio-checkbox-other-placeholder"><span class="a11y-visual-hide">%4$s</span></label></li>',
-				$field['formId'], $field['id'], $index, __( 'Other', 'tribe' ) );
+			$field['formId'], $field['id'], $index, __( 'Other', 'tribe' ) );
 
 			$choice_markup = str_replace( '</li>', $new_markup, $choice_markup );
 
@@ -93,7 +93,7 @@ class Gravity_Forms_Filter {
 			$classes .= ' gf-textarea';
 		} elseif ( $field['type'] === 'date' || $field['inputType'] === 'date' ) {
 			$class_date_icon = ( $field['dateType'] === 'datepicker' ) ? $class_icon_simple : '';
-			$classes .= ' gf-date gf-date-layout-' . $field['dateType'] . $class_date_icon;
+			$classes        .= ' gf-date gf-date-layout-' . $field['dateType'] . $class_date_icon;
 		} elseif ( $field['type'] === 'time' || $field['inputType'] === 'time' ) {
 			$classes .= ' gf-time';
 		} elseif ( $field['type'] === 'phone' || $field['inputType'] === 'phone' ) {

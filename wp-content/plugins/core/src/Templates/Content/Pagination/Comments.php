@@ -24,8 +24,8 @@ class Comments extends Twig_Template {
 		];
 
 		if ( $paged ) {
-			$data[ 'previous' ] = get_previous_comments_link( __( '&larr; Older Comments', 'tribe' ) );
-			$data[ 'next' ]     = get_next_comments_link( __( 'Newer Comments &rarr;', 'tribe' ) );
+			$data['previous'] = get_previous_comments_link( __( '&larr; Older Comments', 'tribe' ) );
+			$data['next']     = get_next_comments_link( __( 'Newer Comments &rarr;', 'tribe' ) );
 		}
 
 		return $data;

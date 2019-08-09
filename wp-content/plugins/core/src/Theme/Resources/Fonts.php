@@ -3,21 +3,21 @@
 
 namespace Tribe\Project\Theme\Resources;
 
-
 class Fonts {
 
-	private $fonts = [ ];
+	private $fonts = [];
 
-	public function __construct( array $fonts = [ ] ) {
+	public function __construct( array $fonts = [] ) {
 		$this->fonts = $fonts;
 	}
 
 	/**
 	 * Add Typekit to Editor
+	 *
 	 * @filter mce_external_plugins
 	 */
 	public function add_typekit_to_editor( $plugins ) {
-		if( ! empty( $this->fonts[ 'typekit' ] ) ) {
+		if ( ! empty( $this->fonts['typekit'] ) ) {
 			$plugins['typekit'] = tribe_assets_url( 'admin/editor/typekit.tinymce.js' );
 		}
 
@@ -25,27 +25,29 @@ class Fonts {
 	}
 	/**
 	 * Localize Typekit TinyMCE
+	 *
 	 * @filter admin_head
 	 */
 	public function localize_typekit_tinymce() {
-		if( empty( $this->fonts[ 'typekit' ] ) ) {
+		if ( empty( $this->fonts['typekit'] ) ) {
 			return;
 		}
 
-		printf( '<script type="text/javascript">var tinymce_typekit_id = \'%s\';</script>', $this->fonts[ 'typekit' ] );
+		printf( '<script type="text/javascript">var tinymce_typekit_id = \'%s\';</script>', $this->fonts['typekit'] );
 	}
 
 	/**
 	 * Add any required fonts
+	 *
 	 * @action wp_head
 	 * @action login_head
 	 */
 	public function load_fonts() {
 
-		if( empty( $this->fonts[ 'typekit' ] ) && empty( $this->fonts[ 'google' ] ) && empty( $this->fonts[ 'custom' ] ) ) {
+		if ( empty( $this->fonts['typekit'] ) && empty( $this->fonts['google'] ) && empty( $this->fonts['custom'] ) ) {
 			return;
 		}
-		
+
 		?>
 
 		<script>
@@ -69,19 +71,19 @@ class Fonts {
 				}
 			};
 			var WebFontConfig = {
-				<?php if ( ! empty( $this->fonts[ 'typekit' ] ) ) { ?>
+				<?php if ( ! empty( $this->fonts['typekit'] ) ) { ?>
 				typekit: {
-					id: '<?php echo $this->fonts[ 'typekit' ]; ?>'
+					id: '<?php echo $this->fonts['typekit']; ?>'
 				},
 				<?php } ?>
-				<?php if ( ! empty( $this->fonts[ 'google' ] ) ) { ?>
+				<?php if ( ! empty( $this->fonts['google'] ) ) { ?>
 				google: {
-					families: <?php echo json_encode( $this->fonts[ 'google' ] ); ?>
+					families: <?php echo json_encode( $this->fonts['google'] ); ?>
 				},
 				<?php } ?>
-				<?php if ( ! empty( $this->fonts[ 'custom' ] ) ) { ?>
+				<?php if ( ! empty( $this->fonts['custom'] ) ) { ?>
 				custom: {
-					families: <?php echo json_encode( $this->fonts[ 'custom' ] ); ?>
+					families: <?php echo json_encode( $this->fonts['custom'] ); ?>
 				},
 				<?php } ?>
 				loading: function () {

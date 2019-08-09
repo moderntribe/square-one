@@ -14,12 +14,12 @@ class Listener extends \Tribe\Libs\Cache\Listener {
 	 * @return void
 	 */
 	public function hook() {
-		add_action( 'save_post', array( $this, 'save_post' ), 10, 2 );
-		add_action( 'wp_update_nav_menu_item', array( $this, 'update_menu' ), 10, 0 );
-		add_action( 'wp_create_nav_menu', array( $this, 'update_menu' ), 10, 0 );
-		add_action( 'wp_delete_nav_menu', array( $this, 'update_menu' ), 10, 0 );
-		add_action( 'p2p_created_connection', array( $this, 'p2p_created_connection' ), 10, 1 );
-		add_action( 'p2p_delete_connections', array( $this, 'p2p_delete_connections' ), 10, 1 );
+		add_action( 'save_post', [ $this, 'save_post' ], 10, 2 );
+		add_action( 'wp_update_nav_menu_item', [ $this, 'update_menu' ], 10, 0 );
+		add_action( 'wp_create_nav_menu', [ $this, 'update_menu' ], 10, 0 );
+		add_action( 'wp_delete_nav_menu', [ $this, 'update_menu' ], 10, 0 );
+		add_action( 'p2p_created_connection', [ $this, 'p2p_created_connection' ], 10, 1 );
+		add_action( 'p2p_delete_connections', [ $this, 'p2p_delete_connections' ], 10, 1 );
 	}
 
 	/**
@@ -42,7 +42,7 @@ class Listener extends \Tribe\Libs\Cache\Listener {
 	 *
 	 * @param $p2p_id
 	 */
-	public function p2p_created_connection($p2p_id) {
+	public function p2p_created_connection( $p2p_id ) {
 		$this->cache->flush_group( 'p2p_relationships' );
 	}
 

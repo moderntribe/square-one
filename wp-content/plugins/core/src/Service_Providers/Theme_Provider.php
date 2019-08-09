@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Service_Providers;
 
-
 use Pimple\Container;
 use Tribe\Project\Container\Service_Provider;
 use Tribe\Project\Request\Request;
@@ -59,8 +58,7 @@ class Theme_Provider extends Service_Provider {
 		$this->styles( $container );
 		$this->third_party_tags( $container );
 		$this->editor_styles( $container );
-		//$this->editor_formats( $container );
-
+		// $this->editor_formats( $container );
 		$this->nav_attributes( $container );
 
 		$this->gravity_forms( $container );
@@ -77,44 +75,44 @@ class Theme_Provider extends Service_Provider {
 	}
 
 	private function body_classes( Container $container ) {
-		$container[ 'theme.body_classes' ] = function ( Container $container ) {
+		$container['theme.body_classes'] = function ( Container $container ) {
 			return new Body_Classes();
 		};
 		add_filter( 'body_class', function ( $classes ) use ( $container ) {
-			return $container[ 'theme.body_classes' ]->body_classes( $classes );
+			return $container['theme.body_classes']->body_classes( $classes );
 		}, 10, 1 );
 	}
 
 	private function full_size_gif( Container $container ) {
-		$container[ 'theme.full_size_gif' ] = function ( Container $container ) {
+		$container['theme.full_size_gif'] = function ( Container $container ) {
 			return new Full_Size_Gif();
 		};
 		add_filter( 'image_downsize', function( $data, $id, $size ) use ( $container ) {
-			return $container[ 'theme.full_size_gif' ]->full_size_only_gif( $data, $id, $size );
+			return $container['theme.full_size_gif']->full_size_only_gif( $data, $id, $size );
 		}, 10, 3 );
 	}
 
 	private function image_sizes( Container $container ) {
-		$container[ 'theme.images.sizes' ] = function ( Container $container ) {
+		$container['theme.images.sizes'] = function ( Container $container ) {
 			return new Image_Sizes();
 		};
 		add_action( 'after_setup_theme', function () use ( $container ) {
-			$container[ 'theme.images.sizes' ]->register_sizes();
+			$container['theme.images.sizes']->register_sizes();
 		}, 10, 0 );
 		add_filter( 'wpseo_opengraph_image_size', function ( $size ) use ( $container ) {
-			return $container[ 'theme.images.sizes' ]->customize_wpseo_image_size( $size );
+			return $container['theme.images.sizes']->customize_wpseo_image_size( $size );
 		}, 10, 1 );
 	}
 
 	private function image_wrap( Container $container ) {
-		$container[ 'theme.images.wrap' ] = function ( Container $container ) {
+		$container['theme.images.wrap'] = function ( Container $container ) {
 			return new Image_Wrap();
 		};
 		add_filter( 'the_content', function ( $html ) use ( $container ) {
-			return $container[ 'theme.images.wrap' ]->customize_wp_image_non_captioned_output( $html );
+			return $container['theme.images.wrap']->customize_wp_image_non_captioned_output( $html );
 		}, 12, 1 );
 		add_filter( 'the_content', function ( $html ) use ( $container ) {
-			return $container[ 'theme.images.wrap' ]->customize_wp_image_captioned_output( $html );
+			return $container['theme.images.wrap']->customize_wp_image_captioned_output( $html );
 		}, 12, 1 );
 	}
 
@@ -125,16 +123,16 @@ class Theme_Provider extends Service_Provider {
 	}
 
 	private function disable_responsive_images( Container $container ) {
-		$container[ 'theme.images.responsive_disabler' ] = function ( Container $container ) {
+		$container['theme.images.responsive_disabler'] = function ( Container $container ) {
 			return new WP_Responsive_Image_Disabler();
 		};
 		add_action( 'init', function () use ( $container ) {
-			$container[ 'theme.images.responsive_disabler' ]->hook();
+			$container['theme.images.responsive_disabler']->hook();
 		} );
 	}
 
 	private function oembed( Container $container ) {
-		$container[ 'theme.oembed' ] = function ( Container $container ) {
+		$container['theme.oembed'] = function ( Container $container ) {
 			return new Oembed_Filter( [
 				Oembed_Filter::PROVIDER_VIMEO,
 				Oembed_Filter::PROVIDER_YOUTUBE,
@@ -146,44 +144,44 @@ class Theme_Provider extends Service_Provider {
 		}, 999, 3 );
 
 		add_filter( 'embed_oembed_html', function ( $html, $url, $attr, $post_id ) use ( $container ) {
-			return $container[ 'theme.oembed' ]->filter_frontend_html_from_cache( $html, $url, $attr, $post_id );
+			return $container['theme.oembed']->filter_frontend_html_from_cache( $html, $url, $attr, $post_id );
 		}, 1, 4 );
 
 		add_filter( 'embed_oembed_html', function ( $html, $url, $attr, $post_id ) use ( $container ) {
-			return $container[ 'theme.oembed' ]->wrap_admin_oembed( $html, $url, $attr, $post_id );
+			return $container['theme.oembed']->wrap_admin_oembed( $html, $url, $attr, $post_id );
 		}, 99, 4 );
 	}
 
 	private function supports( Container $container ) {
-		$container[ 'theme.supports' ] = function ( Container $container ) {
+		$container['theme.supports'] = function ( Container $container ) {
 			return new Supports();
 		};
 
 		add_action( 'after_setup_theme', function () use ( $container ) {
-			$container[ 'theme.supports' ]->add_theme_supports();
+			$container['theme.supports']->add_theme_supports();
 		}, 10, 0 );
 	}
 
 	private function login_resources( Container $container ) {
-		$container[ 'theme.resources.login' ] = function ( Container $container ) {
+		$container['theme.resources.login'] = function ( Container $container ) {
 			return new Login_Resources();
 		};
 		add_action( 'login_enqueue_scripts', function () use ( $container ) {
-			$container[ 'theme.resources.login' ]->login_styles();
+			$container['theme.resources.login']->login_styles();
 		}, 10, 0 );
 	}
 
 	private function legacy_resources( Container $container ) {
-		$container[ 'theme.resources.legacy' ] = function ( Container $container ) {
+		$container['theme.resources.legacy'] = function ( Container $container ) {
 			return new Legacy_Check();
 		};
 
 		add_action( 'wp_head', function () use ( $container ) {
-			$container[ 'theme.resources.legacy' ]->old_browsers();
+			$container['theme.resources.legacy']->old_browsers();
 		}, 0, 0 );
 
 		add_action( 'init', function() use ( $container ) {
-			$container[ 'theme.resources.legacy' ]->add_unsupported_rewrite();
+			$container['theme.resources.legacy']->add_unsupported_rewrite();
 		} );
 
 		add_filter( 'template_include', function( $template ) use ( $container ) {
@@ -192,132 +190,133 @@ class Theme_Provider extends Service_Provider {
 	}
 
 	private function disable_emoji( Container $container ) {
-		$container[ 'theme.resources.emoji_disabler' ] = function ( Container $container ) {
+		$container['theme.resources.emoji_disabler'] = function ( Container $container ) {
 			return new Emoji_Disabler();
 		};
 		add_action( 'after_setup_theme', function () use ( $container ) {
-			$container[ 'theme.resources.emoji_disabler' ]->remove_hooks();
+			$container['theme.resources.emoji_disabler']->remove_hooks();
 		} );
 	}
 
 	private function fonts( Container $container ) {
-		$container[ 'theme.resources.typekit_id' ] = $this->typekit_id;
-		$container[ 'theme.resources.google_fonts' ] = $this->google_fonts;
-		$container[ 'theme.resources.custom_fonts' ] = $this->custom_fonts;
-		$container[ 'theme.resources.fonts' ] = function ( Container $container ) {
+		$container['theme.resources.typekit_id']   = $this->typekit_id;
+		$container['theme.resources.google_fonts'] = $this->google_fonts;
+		$container['theme.resources.custom_fonts'] = $this->custom_fonts;
+		$container['theme.resources.fonts']        = function ( Container $container ) {
 			return new Fonts(
 				[
-					'typekit' => $container[ 'theme.resources.typekit_id' ],
-					'google'  => $container[ 'theme.resources.google_fonts' ],
-					'custom'  => $container[ 'theme.resources.custom_fonts' ],
+					'typekit' => $container['theme.resources.typekit_id'],
+					'google'  => $container['theme.resources.google_fonts'],
+					'custom'  => $container['theme.resources.custom_fonts'],
 				]
 			);
 		};
 
 		add_action( 'wp_head', function () use ( $container ) {
-			$container[ 'theme.resources.fonts' ]->load_fonts();
+			$container['theme.resources.fonts']->load_fonts();
 		}, 0, 0 );
 		add_action( 'tribe/unsupported_browser/head', function () use ( $container ) {
-			$container[ 'theme.resources.fonts' ]->load_fonts();
+			$container['theme.resources.fonts']->load_fonts();
 		}, 0, 0 );
 		add_action( 'admin_head', function () use ( $container ) {
-			$container[ 'theme.resources.fonts' ]->localize_typekit_tinymce();
+			$container['theme.resources.fonts']->localize_typekit_tinymce();
 		}, 0, 0 );
 		add_filter( 'mce_external_plugins', function ( $plugins ) use ( $container ) {
-			return $container[ 'theme.resources.fonts' ]->add_typekit_to_editor( $plugins );
-		} , 10, 1 );
-		/* add_action( 'login_head', function() use ( $container ) {
+			return $container['theme.resources.fonts']->add_typekit_to_editor( $plugins );
+		}, 10, 1 );
+		/*
+		 add_action( 'login_head', function() use ( $container ) {
 			$container[ 'theme.resources.fonts' ]->load_fonts();
 		}, 0, 0); */
 	}
 
 	private function scripts( Container $container ) {
-		$container[ 'theme.resources.scripts' ] = function ( Container $container ) {
+		$container['theme.resources.scripts'] = function ( Container $container ) {
 			return new Scripts();
 		};
 		add_action( 'wp_head', function () use ( $container ) {
-			$container[ 'theme.resources.scripts' ]->maybe_inject_bugsnag();
+			$container['theme.resources.scripts']->maybe_inject_bugsnag();
 		}, 0, 0 );
 		add_action( 'wp_head', function () use ( $container ) {
-			$container[ 'theme.resources.scripts' ]->set_preloading_tags();
+			$container['theme.resources.scripts']->set_preloading_tags();
 		}, 10, 0 );
 		add_action( 'wp_footer', function () use ( $container ) {
-			$container[ 'theme.resources.scripts' ]->add_early_polyfills();
+			$container['theme.resources.scripts']->add_early_polyfills();
 		}, 10, 0 );
 		add_action( 'wp_enqueue_scripts', function () use ( $container ) {
-			$container[ 'theme.resources.scripts' ]->enqueue_scripts();
+			$container['theme.resources.scripts']->enqueue_scripts();
 		}, 10, 0 );
 	}
 
 	private function styles( Container $container ) {
-		$container[ 'theme.resources.styles' ] = function ( Container $container ) {
+		$container['theme.resources.styles'] = function ( Container $container ) {
 			return new Styles();
 		};
 		add_action( 'wp_enqueue_scripts', function () use ( $container ) {
-			$container[ 'theme.resources.styles' ]->enqueue_styles();
+			$container['theme.resources.styles']->enqueue_styles();
 		}, 10, 0 );
 	}
 
 	private function third_party_tags( Container $container ) {
-		$container[ 'theme.resources.third_party_tags' ] = function ( Container $container ) {
+		$container['theme.resources.third_party_tags'] = function ( Container $container ) {
 			return new Third_Party_Tags( $container[ Object_Meta_Provider::ANALYTICS_SETTINGS ] );
 		};
 		add_action( 'wp_head', function () use ( $container ) {
-			$container[ 'theme.resources.third_party_tags' ]->inject_google_tag_manager_head_tag();
+			$container['theme.resources.third_party_tags']->inject_google_tag_manager_head_tag();
 		} );
 		add_action( 'tribe/body_opening_tag', function () use ( $container ) {
-			$container[ 'theme.resources.third_party_tags' ]->inject_google_tag_manager_body_tag();
+			$container['theme.resources.third_party_tags']->inject_google_tag_manager_body_tag();
 		} );
 	}
 
 	private function editor_styles( Container &$container ) {
-		$container[ 'theme.resources.editor_styles' ] = function ( Container $container ) {
+		$container['theme.resources.editor_styles'] = function ( Container $container ) {
 			return new Editor_Styles();
 		};
 		add_action( 'after_setup_theme', function () use ( $container ) {
-			$container[ 'theme.resources.editor_styles' ]->visual_editor_styles();
+			$container['theme.resources.editor_styles']->visual_editor_styles();
 		}, 10, 0 );
 		add_filter( 'tiny_mce_before_init', function ( $settings ) use ( $container ) {
-			return $container[ 'theme.resources.editor_styles' ]->visual_editor_body_class( $settings );
+			return $container['theme.resources.editor_styles']->visual_editor_body_class( $settings );
 		}, 10, 1 );
 	}
 
 	private function editor_formats( Container &$container ) {
-		$container[ 'theme.resources.editor_formats' ] = function ( Container $container ) {
+		$container['theme.resources.editor_formats'] = function ( Container $container ) {
 			return new Editor_Formats();
 		};
 		add_filter( 'mce_buttons', function ( $settings ) use ( $container ) {
-			return $container[ 'theme.resources.editor_formats' ]->mce_buttons( $settings );
+			return $container['theme.resources.editor_formats']->mce_buttons( $settings );
 		}, 10, 1 );
 		add_filter( 'tiny_mce_before_init', function ( $settings ) use ( $container ) {
-			return $container[ 'theme.resources.editor_formats' ]->visual_editor_styles_dropdown( $settings );
+			return $container['theme.resources.editor_formats']->visual_editor_styles_dropdown( $settings );
 		}, 10, 1 );
 	}
 
 	private function nav_attributes( Container &$container ) {
-		$container[ 'theme.nav.attribute_filters' ] = function ( Container $container ) {
+		$container['theme.nav.attribute_filters'] = function ( Container $container ) {
 			return new Nav_Attribute_Filters();
 		};
 
 		add_filter( 'nav_menu_item_id', function ( $menu_id, $item, $args, $depth ) use ( $container ) {
-			return $container[ 'theme.nav.attribute_filters' ]->customize_nav_item_id( $menu_id, $item, $args, $depth );
+			return $container['theme.nav.attribute_filters']->customize_nav_item_id( $menu_id, $item, $args, $depth );
 		}, 10, 4 );
 
 		add_filter( 'nav_menu_css_class', function ( $classes, $item, $args, $depth ) use ( $container ) {
-			return $container[ 'theme.nav.attribute_filters' ]->customize_nav_item_classes( $classes, $item, $args, $depth );
+			return $container['theme.nav.attribute_filters']->customize_nav_item_classes( $classes, $item, $args, $depth );
 		}, 10, 4 );
 
 		add_filter( 'nav_menu_link_attributes', function ( $atts, $item, $args, $depth ) use ( $container ) {
-			return $container[ 'theme.nav.attribute_filters' ]->customize_nav_item_anchor_atts( $atts, $item, $args, $depth );
+			return $container['theme.nav.attribute_filters']->customize_nav_item_anchor_atts( $atts, $item, $args, $depth );
 		}, 10, 4 );
 	}
 
 	private function gravity_forms( Container $container ) {
-		$container[ 'theme.gravity_forms_filter' ] = function ( Container $container ) {
+		$container['theme.gravity_forms_filter'] = function ( Container $container ) {
 			return new Gravity_Forms_Filter();
 		};
 		add_action( 'init', function () use ( $container ) {
-			$container[ 'theme.gravity_forms_filter' ]->hook();
+			$container['theme.gravity_forms_filter']->hook();
 		}, 10, 0 );
 	}
 

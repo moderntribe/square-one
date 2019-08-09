@@ -59,7 +59,7 @@ class Settings_Generator extends Generator_Command {
 
 		// Add class to pimple container.
 		$container_partial_file = $this->file_system->get_file( $this->templates_path . 'settings/container_partial.php' );
-		$container_partial = sprintf( $container_partial_file, $this->slug, $this->class_name );
+		$container_partial      = sprintf( $container_partial_file, $this->slug, $this->class_name );
 		$this->file_system->insert_into_existing_file( $service_provider, $container_partial, '}, 0, 0 );' );
 
 		$method = "\t\t\$this->{$this->slug}( \$container );" . PHP_EOL;

@@ -15,7 +15,7 @@ class List_Queues extends Command {
 	protected $queues;
 
 	public function __construct( Queue_Collection $queues ) {
-		$this->queues  = $queues;
+		$this->queues = $queues;
 		parent::__construct();
 	}
 
@@ -43,7 +43,6 @@ class List_Queues extends Command {
 				'Pending Jobs' => $queue->count(),
 			];
 		}
-
 
 		$table = new CLI_Table( $queues );
 		$table->display();

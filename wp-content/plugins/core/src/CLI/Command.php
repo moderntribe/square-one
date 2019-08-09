@@ -1,6 +1,7 @@
 <?php
 
 namespace Tribe\Project\CLI;
+
 use WP_CLI;
 
 abstract class Command extends \WP_CLI_Command {

@@ -14,7 +14,7 @@ abstract class Component extends Twig_Template {
 	/**
 	 * Component constructor.
 	 *
-	 * @param string      $template
+	 * @param string                 $template
 	 * @param \Twig_Environment|null $twig
 	 * @param array                  $options
 	 */

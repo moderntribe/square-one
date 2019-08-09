@@ -14,7 +14,7 @@ class Panel extends Twig_Template {
 	public function get_data(): array {
 		$this->panel      = get_the_panel();
 		$this->panel_vars = get_panel_vars();
-		$data  = [
+		$data             = [
 			'panel'       => $this->panel_vars,
 			'depth'       => $this->panel->get_depth(),
 			'type'        => $this->panel->get_type_object()->get_id(),
@@ -80,7 +80,7 @@ class Panel extends Twig_Template {
 	}
 
 	public static function instance() {
-		return tribe_project()->container()[ 'twig.templates.content/panels/panel' ];
+		return tribe_project()->container()['twig.templates.content/panels/panel'];
 	}
 
 }

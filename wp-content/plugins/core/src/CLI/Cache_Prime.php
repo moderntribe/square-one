@@ -1,9 +1,11 @@
 <?php
 namespace Tribe\Project\CLI;
+
 use Sunra\PhpSimple\HtmlDomParser;
 
 /**
  * A WP-CLI command to manage cache operations. In it's most basic form, it will retrieve URLs on a given page an request them priming page or object caches that may exist.
+ *
  * @package Tribe\Project\CLI
  */
 class Cache_Prime extends Command {
@@ -29,26 +31,26 @@ class Cache_Prime extends Command {
 
 	public function run_command( $args, $assoc_args ) {
 
-		if( empty( $assoc_args['target-url'] ) ) {
+		if ( empty( $assoc_args['target-url'] ) ) {
 			$url = home_url();
 		} else {
 			$url = $assoc_args['target-url'];
 		}
 
-		if( ! filter_var( $url, FILTER_VALIDATE_URL ) ) {
+		if ( ! filter_var( $url, FILTER_VALIDATE_URL ) ) {
 			\WP_CLI::error( __( 'If you pass the --target-url argument, it must be a valid URL. Note, if you omit this argument, the home page URL will be used.', 'tribe' ) );
 		}
 
 		$request = wp_remote_get( $url );
-		if( 200 !== wp_remote_retrieve_response_code( $request ) ) {
-		    \WP_CLI::error( __( 'URL does not appear to be valid', 'tribe' ) );
-        }
-        $html = HtmlDomParser::str_get_html( wp_remote_retrieve_body( $request ) );
+		if ( 200 !== wp_remote_retrieve_response_code( $request ) ) {
+			\WP_CLI::error( __( 'URL does not appear to be valid', 'tribe' ) );
+		}
+		$html = HtmlDomParser::str_get_html( wp_remote_retrieve_body( $request ) );
 
-		foreach( $html->find( 'a' ) as $anchor ) {
-			$response = wp_remote_get( $anchor->href );
+		foreach ( $html->find( 'a' ) as $anchor ) {
+			$response  = wp_remote_get( $anchor->href );
 			$http_code = (int) wp_remote_retrieve_response_code( $response );
-			if( 200 === $http_code ) {
+			if ( 200 === $http_code ) {
 				\WP_CLI::success( esc_attr__( sprintf( '%s has been primed', esc_url( $anchor->href ) ), 'tribe' ) );
 			}
 		}

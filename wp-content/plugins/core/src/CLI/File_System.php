@@ -15,7 +15,7 @@ class File_System {
 	}
 
 	public function write_file( $file, $contents, $overwrite = false ) {
-		if ( file_exists( $file) && ! $overwrite ) {
+		if ( file_exists( $file ) && ! $overwrite ) {
 			\WP_CLI::error( 'Sorry... ' . $file . ' already exists.' );
 		}
 		if ( ! $handle = fopen( $file, 'w' ) ) {
@@ -32,8 +32,8 @@ class File_System {
 		}
 
 		$contents = '';
-		while (! feof ( $handle ) ) {
-			$line = fgets( $handle );
+		while ( ! feof( $handle ) ) {
+			$line      = fgets( $handle );
 			$contents .= $line;
 			if ( strpos( $line, $below_line ) !== false ) {
 				$contents .= $new_line;
@@ -56,7 +56,7 @@ class File_System {
 	 * gist: https://gist.github.com/stemar/bb7c5cd2614b21b624bf57608f995ac0
 	 *
 	 * @param     $array
-	 * @param int $internal_indent
+	 * @param int   $internal_indent
 	 *
 	 * @return mixed
 	 */
@@ -74,10 +74,10 @@ class File_System {
 		$export = preg_replace( "/ => \n[^\S\n]*\[/m", ' => [', $export );
 		$export = preg_replace( "/ => \[\n[^\S\n]*\]/m", ' => []', $export );
 		$spaces = str_repeat( ' ', $internal_indent );
-		$export = preg_replace( "/([ ]{2})(?![^ ])/m", $spaces, $export );
-		$export = preg_replace( "/^([ ]{2})/m", $spaces, $export );
+		$export = preg_replace( '/([ ]{2})(?![^ ])/m', $spaces, $export );
+		$export = preg_replace( '/^([ ]{2})/m', $spaces, $export );
 
-		$lines = explode( PHP_EOL, $export );
+		$lines  = explode( PHP_EOL, $export );
 		$export = '';
 
 		foreach ( $lines as $line ) {

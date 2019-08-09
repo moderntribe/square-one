@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Panels;
 
-
 use ModularContent\Fields;
 use ModularContent\PanelType;
 use Tribe\Project\Panels\Types\Panel_Type_Config;
@@ -12,7 +11,7 @@ use Tribe\Project\Post_Types\Page\Page;
 use Tribe\Project\Taxonomies\Category\Category;
 
 class Initializer {
-	private $panel_types_to_initialize = [ ];
+	private $panel_types_to_initialize = [];
 
 	/** @var \ModularContent\PanelViewFinder */
 	public $ViewFinder = null;
@@ -53,11 +52,11 @@ class Initializer {
 
 		$this->set_supported_post_types();
 		$this->set_view_directories();
-		require_once( dirname( $this->plugin_file ) . '/functions/panels.php' );
+		require_once dirname( $this->plugin_file ) . '/functions/panels.php';
 
 		add_filter( 'modular_content_default_fields', [ $this, 'set_default_fields' ], 10, 2 );
 		add_filter( 'modular_content_default_settings_fields', [ $this, 'set_default_settings' ], 10, 2 );
-		add_filter( 'modular_content_posts_field_taxonomy_options', [ $this, 'set_available_query_taxonomies', ], 10, 1 );
+		add_filter( 'modular_content_posts_field_taxonomy_options', [ $this, 'set_available_query_taxonomies' ], 10, 1 );
 		add_filter( 'modular_content_posts_field_p2p_options', [ $this, 'filter_p2p_options' ], 10, 1 );
 		add_filter( 'panels_query_post_type_options', [ $this, 'add_post_type_options_for_queries' ], 10, 1 );
 		add_filter( 'panels_input_query_filter', [ $this, 'set_order_for_queries' ], 10, 3 );
@@ -127,7 +126,7 @@ class Initializer {
 	 * @return PanelType
 	 */
 	public function factory( $panel_type_id, $helper_text = '' ) {
-		if ( !$helper_text ) {
+		if ( ! $helper_text ) {
 			return new PanelType( $panel_type_id );
 		}
 
@@ -149,14 +148,14 @@ class Initializer {
 
 	public function add_post_type_options_for_queries( $post_types ) {
 		$post_types[ Event::NAME ] = get_post_type_object( Event::NAME );
-		$post_types[ Page::NAME ] = get_post_type_object( Page::NAME );
+		$post_types[ Page::NAME ]  = get_post_type_object( Page::NAME );
 
 		return $post_types;
 	}
 
 	public function set_available_query_taxonomies( $taxonomies ) {
 		$taxonomies[] = Category::NAME;
-		$taxonomies = array_unique( $taxonomies );
+		$taxonomies   = array_unique( $taxonomies );
 		sort( $taxonomies );
 
 		return $taxonomies;
@@ -191,22 +190,22 @@ class Initializer {
 	 * @return array
 	 */
 	public function rewrite_date_query_for_events( $query_args, $filters, $context ) {
-		if ( !empty( $query_args[ 'date_query' ] ) ) {
+		if ( ! empty( $query_args['date_query'] ) ) {
 			$is_event_query = false;
-			if ( $query_args[ 'post_type' ] == 'tribe_events' ) {
+			if ( $query_args['post_type'] == 'tribe_events' ) {
 				$is_event_query = true;
-			} elseif ( is_array( $query_args[ 'post_type' ] ) && $query_args[ 'post_type' ] == [ 'tribe_events' ] ) {
+			} elseif ( is_array( $query_args['post_type'] ) && $query_args['post_type'] == [ 'tribe_events' ] ) {
 				$is_event_query = true;
 			}
 			if ( $is_event_query ) {
-				$dq = $query_args[ 'date_query' ];
-				unset( $query_args[ 'date_query' ] );
-				$query_args[ 'eventDisplay' ] = 'custom';
-				if ( !empty( $dq[ 'after' ] ) ) {
-					$query_args[ 'start_date' ] = $this->normalize_date_query_to_string( $dq[ 'after' ] );
+				$dq = $query_args['date_query'];
+				unset( $query_args['date_query'] );
+				$query_args['eventDisplay'] = 'custom';
+				if ( ! empty( $dq['after'] ) ) {
+					$query_args['start_date'] = $this->normalize_date_query_to_string( $dq['after'] );
 				}
-				if ( !empty( $dq[ 'before' ] ) ) {
-					$query_args[ 'end_date' ] = $this->normalize_date_query_to_string( $dq[ 'before' ] );
+				if ( ! empty( $dq['before'] ) ) {
+					$query_args['end_date'] = $this->normalize_date_query_to_string( $dq['before'] );
 				}
 			}
 		}
@@ -214,16 +213,16 @@ class Initializer {
 	}
 
 	private function normalize_date_query_to_string( $input ) {
-		if ( !is_array( $input ) ) {
+		if ( ! is_array( $input ) ) {
 			return (string) $input;
 		}
 
-		$date = isset( $input[ 'year' ] ) ? sprintf( '%04d', $input[ 'year' ] ) : date( 'Y' );
+		$date  = isset( $input['year'] ) ? sprintf( '%04d', $input['year'] ) : date( 'Y' );
 		$date .= '-';
-		$date .= isset( $input[ 'month' ] ) ? sprintf( '%02d', $input[ 'month' ] ) : date( 'm' );
+		$date .= isset( $input['month'] ) ? sprintf( '%02d', $input['month'] ) : date( 'm' );
 		$date .= '-';
-		$date .= isset( $input[ 'day' ] ) ? sprintf( '%02d', $input[ 'day' ] ) : date( 'd' );
-		$date .= " 23:59:59";
+		$date .= isset( $input['day'] ) ? sprintf( '%02d', $input['day'] ) : date( 'd' );
+		$date .= ' 23:59:59';
 		return $date;
 
 	}
@@ -238,7 +237,7 @@ class Initializer {
 	 * @return array
 	 */
 	public function set_order_for_queries( $query_args, $filters, $context ) {
-		$post_type = !empty( $query_args[ 'post_type' ] ) ? $query_args[ 'post_type' ] : 'any';
+		$post_type = ! empty( $query_args['post_type'] ) ? $query_args['post_type'] : 'any';
 		if ( is_array( $post_type ) && count( $post_type ) == 1 ) {
 			$post_type = reset( $post_type );
 		}
@@ -247,16 +246,15 @@ class Initializer {
 		}
 
 		if ( 'tribe_events' == $post_type ) {
-			$query_args[ 'orderby' ] = 'event_date';
-			$query_args[ 'order' ] = 'ASC';
-			$query_args[ 'eventDisplay' ] = 'list';
+			$query_args['orderby']      = 'event_date';
+			$query_args['order']        = 'ASC';
+			$query_args['eventDisplay'] = 'list';
 		} elseif ( in_array( $post_type, $this->post_types_to_sort_alphabetically() ) ) {
-			$query_args[ 'orderby' ] = 'title';
-			$query_args[ 'order' ] = 'ASC';
+			$query_args['orderby'] = 'title';
+			$query_args['order']   = 'ASC';
 		}
 
 		// else: defaults to descending order by date
-
 		return $query_args;
 	}
 

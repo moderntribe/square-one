@@ -9,7 +9,7 @@ use ModularContent\Fields;
 
 
 abstract class Panel_Type_Config {
-	protected $ViewFinder = NULL;
+	protected $ViewFinder = null;
 	/**
 	 * @var array $post_types
 	 *
@@ -46,9 +46,9 @@ abstract class Panel_Type_Config {
 				'sand'      => $this->handler->swatch_icon_url( 'sand.png' ),
 				'grey-warm' => $this->handler->swatch_icon_url( 'grey-warm.png' ),
 				'grey'      => $this->handler->swatch_icon_url( 'grey.png' ),
-				'white'     => $this->handler->swatch_icon_url( 'white.png' )
+				'white'     => $this->handler->swatch_icon_url( 'white.png' ),
 			],
-			'default' => $default_color
+			'default' => $default_color,
 		] );
 	}
 }

@@ -21,5 +21,5 @@ add_action( 'plugins_loaded', function () {
  * @return \Tribe\Project\Core
  */
 function tribe_project() {
-	return \Tribe\Project\Core::instance( new \Pimple\Container( [ 'plugin_file' => __FILE__ ]) );
+	return \Tribe\Project\Core::instance( new \Pimple\Container( [ 'plugin_file' => __FILE__ ] ) );
 }

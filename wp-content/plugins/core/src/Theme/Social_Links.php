@@ -3,20 +3,19 @@
 
 namespace Tribe\Project\Theme;
 
-
 class Social_Links {
-	private $networks = [ ];
+	private $networks = [];
 	private $labeled  = true;
 
 	public function __construct( array $networks, $labeled = true ) {
 		$this->networks = $networks;
-		$this->labeled = (bool) $labeled;
+		$this->labeled  = (bool) $labeled;
 	}
 
 	/**
 	 * Loops over enabled networks and builds an array of formatted
 	 * share links
-	 **
+	 * *
 	 *
 	 * @return array
 	 */
@@ -25,10 +24,10 @@ class Social_Links {
 		$data = $this->get_data();
 
 		if ( empty( $data ) ) {
-			return [ ];
+			return [];
 		}
 
-		$links = [ ];
+		$links = [];
 
 		foreach ( $this->networks as $network ) {
 			$links[] = $this->build_link( $network, $data );
@@ -63,47 +62,46 @@ class Social_Links {
 
 		global $wp_query;
 
-		$data = [ ];
+		$data = [];
 
 		if ( is_singular() || $wp_query->in_the_loop ) {
 
 			global $post;
 
-			$data[ 'link' ] = $this->normalize_url( get_permalink( $post->ID ) );
-			$data[ 'title' ] = wp_strip_all_tags( esc_attr( get_the_title( $post ) ) );
-			$data[ 'body' ] = esc_attr( $post->post_excerpt );
+			$data['link']  = $this->normalize_url( get_permalink( $post->ID ) );
+			$data['title'] = wp_strip_all_tags( esc_attr( get_the_title( $post ) ) );
+			$data['body']  = esc_attr( $post->post_excerpt );
 
 			// only hunt for a featured image if pinterest active, and if we are on single.
 			// No pinterest for loops, because thats silly.
 			if ( in_array( 'pinterest', $this->networks ) && has_post_thumbnail( $post->ID ) ) {
 
-				$image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'tribe-full' );
-				$data[ 'image_src' ] = $image[ 0 ];
+				$image             = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'tribe-full' );
+				$data['image_src'] = $image[0];
 
 			}
-
 		} elseif ( is_tax() || is_category() || is_tag() ) {
 
 			$obj = get_queried_object();
 
-			$data[ 'link' ] = $this->normalize_url( get_term_link( $obj, $obj->taxonomy ) );
-			$data[ 'title' ] = wp_strip_all_tags( esc_attr( $obj->name ) );
-			$data[ 'body' ] = esc_attr( $obj->description );
+			$data['link']  = $this->normalize_url( get_term_link( $obj, $obj->taxonomy ) );
+			$data['title'] = wp_strip_all_tags( esc_attr( $obj->name ) );
+			$data['body']  = esc_attr( $obj->description );
 
 		} elseif ( is_post_type_archive() ) {
 
 			$obj = get_queried_object();
 
-			$data[ 'link' ] = $this->normalize_url( get_post_type_archive_link( $obj->name ) );
-			$data[ 'title' ] = wp_strip_all_tags( esc_attr( $obj->label ) );
-			$data[ 'body' ] = esc_attr( $obj->description );
+			$data['link']  = $this->normalize_url( get_post_type_archive_link( $obj->name ) );
+			$data['title'] = wp_strip_all_tags( esc_attr( $obj->label ) );
+			$data['body']  = esc_attr( $obj->description );
 
 		} elseif ( is_search() ) {
 
 			$query = get_search_query();
 
-			$data[ 'link' ] = $this->normalize_url( get_search_link( $query ) );
-			$data[ 'title' ] = sprintf( __( 'Search Results: %s', 'tribe' ), esc_attr( $query ) );
+			$data['link']  = $this->normalize_url( get_search_link( $query ) );
+			$data['title'] = sprintf( __( 'Search Results: %s', 'tribe' ), esc_attr( $query ) );
 
 		}
 
@@ -124,72 +122,72 @@ class Social_Links {
 
 		switch ( $network ) {
 
-			case "email":
+			case 'email':
 				return sprintf(
 					'<a class="social-share-networks__anchor icon icon-mail" href="mailto:?subject=%1$s&body=%2$s" title="%3$s"><span%4$s>%3$s</span></a>',
-					urlencode( $data[ 'title' ] ),
-					urlencode( esc_url_raw( $data[ 'link' ] ) ),
+					urlencode( $data['title'] ),
+					urlencode( esc_url_raw( $data['link'] ) ),
 					__( 'Share through Email', 'tribe' ),
 					$class
 				);
 
-			case "print":
+			case 'print':
 				return sprintf(
 					'<a class="social-share-networks__anchor icon icon-print" href="#" title="%1$s" onclick="window.print();return false;"><span%2$s>%1$s</span></a>',
 					__( 'Print this page', 'tribe' ),
 					$class
 				);
 
-			case "google":
+			case 'google':
 				return sprintf(
 					'<a class="social-share-networks__anchor icon icon-google-plus" href="https://plus.google.com/share?url=%1$s" data-js="social-share-popup" data-width="624" data-height="486" title="%2$s"><span%3$s>%2$s</span></a>',
-					urlencode( esc_url_raw( $data[ 'link' ] ) ),
+					urlencode( esc_url_raw( $data['link'] ) ),
 					__( 'Share on Google+', 'tribe' ),
 					$class
 				);
 
-			case "pinterest";
-				if ( empty( $data[ 'image_src' ] ) ) {
+			case 'pinterest';
+				if ( empty( $data['image_src'] ) ) {
 					return '';
 				}
 
 				return sprintf(
 					'<a class="social-share-networks__anchor icon icon-pinterest" href="http://pinterest.com/pin/create/button/?url=%1$s&amp;media=%2$s&amp;description=%3$s" data-js="social-share-popup" data-width="624" data-height="300" title="%4$s"><span%5$s>%4$s</span></a>',
-					urlencode( esc_url_raw( $data[ 'link' ] ) ),
-					urlencode( esc_url_raw( $data[ 'image_src' ] ) ),
-					urlencode( $data[ 'title' ] ),
+					urlencode( esc_url_raw( $data['link'] ) ),
+					urlencode( esc_url_raw( $data['image_src'] ) ),
+					urlencode( $data['title'] ),
 					__( 'Share on Pinterest', 'tribe' ),
 					$class
 				);
 
-			case "twitter":
-				$text = substr( $data[ 'title' ], 0, 140 - strlen( $data[ 'link' ] ) - 4 );
-				if ( $text !== $data[ 'title' ] ) {
-					$text .= "...";
+			case 'twitter':
+				$text = substr( $data['title'], 0, 140 - strlen( $data['link'] ) - 4 );
+				if ( $text !== $data['title'] ) {
+					$text .= '...';
 				}
 
 				return sprintf(
 					'<a class="social-share-networks__anchor icon icon-twitter" href="https://twitter.com/share?url=%1$s&text=%2$s" data-js="social-share-popup" data-width="550" data-height="450" title="%3$s"><span%4$s>%3$s</span></a>',
-					urlencode( esc_url( $data[ 'link' ] ) ),
+					urlencode( esc_url( $data['link'] ) ),
 					urlencode( $text ),
 					__( 'Share on Twitter', 'tribe' ),
 					$class
 				);
 
-			case "facebook":
+			case 'facebook':
 				return sprintf(
 					'<a class="social-share-networks__anchor icon icon-facebook" href="http://www.facebook.com/sharer.php?u=%1$s&t=%2$s" data-js="social-share-popup" data-width="640" data-height="352" title="%3$s"><span%4$s>%3$s</span></a>',
-					urlencode( esc_url( $data[ 'link' ] ) ),
-					urlencode( $data[ 'title' ] ),
+					urlencode( esc_url( $data['link'] ) ),
+					urlencode( $data['title'] ),
 					__( 'Share on Facebook', 'tribe' ),
 					$class
 				);
 
-			case "linkedin":
+			case 'linkedin':
 				return sprintf(
 					'<a class="social-share-networks__anchor icon icon-linkedin" href="http://www.linkedin.com/shareArticle?mini=true&url=%1$s&title=%2$s" data-js="social-share-popup" data-width="640" data-height="352" title="%3$s"><span%4$s>%3$s</span></a>',
-					urlencode( esc_url( $data[ 'link' ] ) ),
-					urlencode( $data[ 'title' ] ),
+					urlencode( esc_url( $data['link'] ) ),
+					urlencode( $data['title'] ),
 					__( 'Share on LinkedIn', 'tribe' ),
 					$class
 				);

@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Theme;
 
-
 class WP_Responsive_Image_Disabler {
 	/**
 	 * @return void
@@ -21,12 +20,12 @@ class WP_Responsive_Image_Disabler {
 	}
 
 	public function filter_image_attributes( $attr ) {
-		if ( isset( $attr[ 'sizes' ] ) ) {
-			unset( $attr[ 'sizes' ] );
+		if ( isset( $attr['sizes'] ) ) {
+			unset( $attr['sizes'] );
 		}
 
-		if ( isset( $attr[ 'srcset' ] ) ) {
-			unset( $attr[ 'srcset' ] );
+		if ( isset( $attr['srcset'] ) ) {
+			unset( $attr['srcset'] );
 		}
 
 		return $attr;

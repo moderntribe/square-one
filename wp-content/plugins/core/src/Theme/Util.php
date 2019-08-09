@@ -18,7 +18,7 @@ abstract class Util {
 			'autop'   => true,
 		];
 
-		$args = wp_parse_args( $options, $defaults );
+		$args   = wp_parse_args( $options, $defaults );
 		$result = wp_trim_words( wp_strip_all_tags( strip_shortcodes( $args['content'] ) ), $args['length'], $args['more'] );
 
 		if ( $args['autop'] ) {
@@ -101,14 +101,14 @@ abstract class Util {
 	 * @return int
 	 */
 	public static function get_page_template_ID( $template ) {
-		$args = [
+		$args  = [
 			'meta_key'   => '_wp_page_template',
 			'meta_value' => $template,
 		];
 		$pages = get_pages( $args );
 
 		if ( empty( $pages ) ) {
-		    return 0;
+			return 0;
 		}
 
 		return $pages[0]->ID;

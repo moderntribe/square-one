@@ -55,8 +55,8 @@ class Testimonial extends Panel_Type_Config {
 		] );
 
 		$quote->add_field( new Fields\TextArea( [
-			'name'     => self::FIELD_QUOTE,
-			'label'    => __( 'Quote', 'tribe' ),
+			'name'  => self::FIELD_QUOTE,
+			'label' => __( 'Quote', 'tribe' ),
 		] ) );
 
 		$quote->add_field( new Fields\Text( [

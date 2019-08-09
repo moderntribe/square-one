@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Service_Providers;
 
-
 use Pimple\Container;
 use Tribe\Project\Container\Service_Provider;
 use Whoops\Handler\PrettyPageHandler;

@@ -6,6 +6,7 @@ class SVG_Support {
 
 	/**
 	 * Adds hooks for adding post type support
+	 *
 	 * @action init
 	 */
 	public function hook() {
@@ -44,7 +45,7 @@ class SVG_Support {
 	}
 
 	public function remove_dimensions_svg( $html = '' ) {
-		return str_ireplace( [ " width=\"1\"", " height=\"1\"" ], "", $html );
+		return str_ireplace( [ ' width="1"', ' height="1"' ], '', $html );
 	}
 
 	public function tinyMCE_svg_css() {

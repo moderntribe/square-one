@@ -54,7 +54,7 @@ class Importer extends Generator_Command {
 
 		if ( ! count( $args ) ) {
 			foreach ( $this->get_dynamic_field_groups() as $field_group_id => $field_group_name ) {
-				\WP_CLI::line( sprintf( __( 'You can import %s with `wp s1 import meta %s`', 'tribe' ), $field_group_name, $field_group_id ) );
+				\WP_CLI::line( sprintf( __( 'You can import %1$s with `wp s1 import meta %2$s`', 'tribe' ), $field_group_name, $field_group_id ) );
 			}
 			\WP_CLI::halt( 0 );
 		}
@@ -235,7 +235,7 @@ class Importer extends Generator_Command {
 	}
 
 	private function prepare_field( $field ) {
-		unset ( $field['key'], $field['wrapper'], $field['prepend'], $field['append'] );
+		unset( $field['key'], $field['wrapper'], $field['prepend'], $field['append'] );
 
 		$field = array_filter( $field, function ( $element ) {
 			return '' !== $element;
@@ -268,7 +268,7 @@ class Importer extends Generator_Command {
 
 	private function get_repeater( $field ) {
 		$write_field = $field;
-		unset ( $write_field['sub_fields'] );
+		unset( $write_field['sub_fields'] );
 
 		$group_partial = file_get_contents( trailingslashit( dirname( __DIR__, 3 ) ) . 'assets/templates/cli/object_meta/repeater_function_partial.php' );
 		$group         = sprintf(

@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Blog_Copier\Strategies;
 
-
 abstract class File_Copy_Strategy {
 	public function handle_copy( $src_blog_id, $dest_blog_id ) {
 		@ini_set( 'memory_limit', '2048M' );
@@ -15,7 +14,7 @@ abstract class File_Copy_Strategy {
 	protected function get_source_directory( $src_blog_id ) {
 		switch_to_blog( $src_blog_id );
 		$dir_info = wp_upload_dir();
-		$from     = str_replace( ' ', "\\ ", trailingslashit( $dir_info[ 'basedir' ] ) . '*' ); // * necessary with GNU cp, doesn't hurt anything with BSD cp
+		$from     = str_replace( ' ', '\\ ', trailingslashit( $dir_info['basedir'] ) . '*' ); // * necessary with GNU cp, doesn't hurt anything with BSD cp
 		restore_current_blog();
 
 		/**
@@ -30,7 +29,7 @@ abstract class File_Copy_Strategy {
 	protected function get_destination_directory( $dest_blog_id ) {
 		switch_to_blog( $dest_blog_id );
 		$dir_info = wp_upload_dir();
-		$to       = str_replace( ' ', "\\ ", trailingslashit( $dir_info[ 'basedir' ] ) );
+		$to       = str_replace( ' ', '\\ ', trailingslashit( $dir_info['basedir'] ) );
 		restore_current_blog();
 
 		/**

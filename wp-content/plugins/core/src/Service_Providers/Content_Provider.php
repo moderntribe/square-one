@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Service_Providers;
 
-
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Tribe\Project\Content\Contact_Page;
@@ -23,7 +22,7 @@ class Content_Provider implements ServiceProviderInterface {
 		$container[ self::CONTACT_PAGE ] = function ( Container $container ) {
 			$example_meta = $container[ Object_Meta_Provider::EXAMPLE ];
 			$group        = $example_meta->get_group_config();
-			$key          = $group[ 'key' ];
+			$key          = $group['key'];
 
 			return new Contact_Page( $key );
 		};

@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Content;
 
-
 use Tribe\Libs\ACF;
 use Tribe\Project\Post_Types\Page\Page;
 
@@ -67,7 +66,6 @@ abstract class Required_Page {
 		if ( ! empty( $post_id ) ) {
 			$this->set_post_id( $post_id );
 		}
-
 
 		/**
 		 * Triggered when a required page is created
@@ -194,7 +192,7 @@ abstract class Required_Page {
 	 * Add a post state to the list table indicating
 	 * that this is a required page.
 	 *
-	 * @param array $post_states
+	 * @param array    $post_states
 	 * @param \WP_Post $post
 	 *
 	 * @return array

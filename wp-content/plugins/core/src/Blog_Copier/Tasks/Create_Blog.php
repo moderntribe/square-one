@@ -3,18 +3,17 @@
 
 namespace Tribe\Project\Blog_Copier\Tasks;
 
-
 use Tribe\Project\Blog_Copier\Copy_Configuration;
 use Tribe\Project\Blog_Copier\Copy_Manager;
 use Tribe\Project\Queues\Contracts\Task;
 
 class Create_Blog implements Task {
 
-	public function handle( array $args ): bool {
+	public function handle( array $args ): bool  {
 		/** @var \wpdb $wpdb */
 		global $wpdb;
 
-		$post_id = empty( $args[ 'post_id' ] ) ? 0 : absint( $args[ 'post_id' ] );
+		$post_id = empty( $args['post_id'] ) ? 0 : absint( $args['post_id'] );
 
 		$data   = \json_decode( get_post_field( 'post_content', $post_id, 'raw' ), true );
 		$config = new Copy_Configuration( $data );
@@ -31,7 +30,7 @@ class Create_Blog implements Task {
 
 		// wpmu_create_blog throws mysql errors when running during a transaction
 		$suppress = $wpdb->suppress_errors();
-		$dest_id  = wpmu_create_blog( $dest_domain, $dest_path, $config->get_title(), $config->get_user(), [ "public" => 1 ], $current_site->id );
+		$dest_id  = wpmu_create_blog( $dest_domain, $dest_path, $config->get_title(), $config->get_user(), [ 'public' => 1 ], $current_site->id );
 		$wpdb->suppress_errors( $suppress );
 
 		if ( is_wp_error( $dest_id ) ) {

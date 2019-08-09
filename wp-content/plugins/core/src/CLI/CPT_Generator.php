@@ -122,8 +122,7 @@ class CPT_Generator extends Generator_Command {
 		$this->file_system->write_file( $config, $this->get_config_contents() );
 	}
 
-	///------------templates---------------///
-
+	// ------------templates---------------///
 	private function get_class_contents() {
 
 		$post_type_file = $this->file_system->get_file( $this->templates_path . 'post_type/post_type.php' );

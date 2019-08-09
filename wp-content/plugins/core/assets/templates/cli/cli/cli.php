@@ -2,7 +2,7 @@
 
 namespace Tribe\Project\CLI;
 
-class %1$s extends Command {
+class % 1$s extends Command {
 
 	public function description() {
 		return __( '%2$s', 'tribe' );

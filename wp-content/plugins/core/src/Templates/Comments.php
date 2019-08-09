@@ -60,6 +60,6 @@ class Comments extends Twig_Template {
 		$template = new Content\Pagination\Comments( $this->template, $this->twig );
 		$data     = $template->get_data();
 
-		return $data[ 'pagination' ];
+		return $data['pagination'];
 	}
 }

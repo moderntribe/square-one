@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Blog_Copier;
 
-
 use Tribe\Project\Blog_Copier\Tasks\Cleanup;
 use Tribe\Project\Queues\Contracts\Queue;
 
@@ -71,17 +70,17 @@ class Copy_Manager {
 	 * @action self::TASK_COMPLETE_ACTION
 	 */
 	public function schedule_next_step( $completed_task, $args ) {
-		if ( empty( $args[ 'post_id' ] ) ) {
+		if ( empty( $args['post_id'] ) ) {
 			return;
 		}
-		add_post_meta( $args[ 'post_id' ], self::TASK_LOG, \json_encode( [
+		add_post_meta( $args['post_id'], self::TASK_LOG, \json_encode( [
 			'timestamp' => time(),
 			'task'      => $completed_task,
 		] ) );
 		$next = $this->chain->get_next( $completed_task );
 		if ( ! empty( $next ) ) {
 			if ( $next === Cleanup::class ) {
-				$args[ 'run_after' ] = ( new \DateTime( '+1 week' ) )->format( 'Y-m-d H:i:s' );
+				$args['run_after'] = ( new \DateTime( '+1 week' ) )->format( 'Y-m-d H:i:s' );
 			}
 			$this->queue->dispatch( $next, $args );
 		}
@@ -98,11 +97,11 @@ class Copy_Manager {
 	 * @return void
 	 */
 	public function mark_error( $failed_task, $args, $error ) {
-		if ( empty( $args[ 'post_id' ] ) ) {
+		if ( empty( $args['post_id'] ) ) {
 			return;
 		}
-		update_post_meta( $args[ 'post_id' ], self::COPY_ERROR, $error->get_error_message() );
-		wp_trash_post( $args[ 'post_id' ] );
+		update_post_meta( $args['post_id'], self::COPY_ERROR, $error->get_error_message() );
+		wp_trash_post( $args['post_id'] );
 		if ( class_exists( 'WP_CLI' ) ) {
 			\WP_CLI::debug( sprintf( 'Error in blog copy task: %s.', $failed_task ) );
 			\WP_CLI::debug( sprintf( 'Error message: %s.', $error->get_error_message() ) );

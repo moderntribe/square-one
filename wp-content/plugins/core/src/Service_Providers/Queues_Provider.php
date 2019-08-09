@@ -21,7 +21,7 @@ class Queues_Provider extends Service_Provider {
 
 	public function register( Container $container ) {
 
-		$container[ self::WP_CACHE ] = function(){
+		$container[ self::WP_CACHE ] = function() {
 			return new WP_Cache();
 		};
 
@@ -42,7 +42,7 @@ class Queues_Provider extends Service_Provider {
 			return new Cron();
 		};
 
-		if( ! defined( 'DISABLE_WP_CRON' ) || false === DISABLE_WP_CRON ) {
+		if ( ! defined( 'DISABLE_WP_CRON' ) || false === DISABLE_WP_CRON ) {
 			add_filter( 'cron_schedules', function ( $schedules ) use ( $container ) {
 				return $container[ self::CRON ]->add_interval( $schedules );
 			}, 10, 1 );

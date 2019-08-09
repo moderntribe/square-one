@@ -49,8 +49,8 @@ class ContentSlider extends Panel_Type_Config {
 		] ) );
 
 		$slides->add_field( new Fields\Text( [
-			'name'     => self::FIELD_SLIDE_TITLE,
-			'label'    => __( 'Title', 'tribe' ),
+			'name'  => self::FIELD_SLIDE_TITLE,
+			'label' => __( 'Title', 'tribe' ),
 		] ) );
 
 		$slides->add_field( new Fields\TextArea( [

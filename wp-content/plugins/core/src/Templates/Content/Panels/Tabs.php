@@ -19,8 +19,8 @@ class Tabs extends Panel {
 
 	public function get_mapped_panel_data(): array {
 		$data = [
-			'title'        => $this->get_title( $this->panel_vars[ TabsPanel::FIELD_TITLE ], [ 'section__title' ] ),
-			'tabs'         => $this->get_tabs(),
+			'title' => $this->get_title( $this->panel_vars[ TabsPanel::FIELD_TITLE ], [ 'section__title' ] ),
+			'tabs'  => $this->get_tabs(),
 		];
 
 		return $data;
@@ -28,12 +28,12 @@ class Tabs extends Panel {
 
 	protected function get_tabs(): string {
 		$options = [
-			TabsComponent::TABS => $this->get_rows(),
+			TabsComponent::TABS           => $this->get_rows(),
 			TabsComponent::TAB_LIST_ATTRS => [
-				'data-depth' => $this->panel->get_depth(),
-				'data-name' => 'tabs',
-				'data-livetext' => 1
-			]
+				'data-depth'    => $this->panel->get_depth(),
+				'data-name'     => 'tabs',
+				'data-livetext' => 1,
+			],
 		];
 
 		$tabs = TabsComponent::factory( $options );
@@ -42,25 +42,25 @@ class Tabs extends Panel {
 	}
 
 	protected function get_rows(): array {
-		$rows = $this->panel_vars[ TabsPanel::FIELD_TABS];
+		$rows = $this->panel_vars[ TabsPanel::FIELD_TABS ];
 		if ( empty( $rows ) ) {
 			return [];
 		}
 		return array_map( function ( $row, $index ) {
-			$content_attrs = ( !is_panel_preview() ) ? '' : Util::array_to_attributes([
+			$content_attrs = ( ! is_panel_preview() ) ? '' : Util::array_to_attributes([
 				'data-depth'    => $this->panel->get_depth(),
 				'data-index'    => $index,
 				'data-name'     => 'row_content',
 				'data-autop'    => 'true',
-				'data-livetext' => 1
+				'data-livetext' => 1,
 			]);
-			$btn_options = ( !is_panel_preview() ) ? [] : [
-				Button::FORCE_DISPLAY => true,
+			$btn_options   = ( ! is_panel_preview() ) ? [] : [
+				Button::FORCE_DISPLAY    => true,
 				Button::INNER_ATTRIBUTES => [
 					'data-depth'    => $this->panel->get_depth(),
 					'data-index'    => $index,
 					'data-name'     => 'row_header',
-					'data-livetext' => 1
+					'data-livetext' => 1,
 				],
 			];
 			return [
@@ -71,7 +71,7 @@ class Tabs extends Panel {
 				'content_attrs' => $content_attrs,
 				'btn_options'   => $btn_options,
 			];
-		}, $rows, array_keys($rows) );
+		}, $rows, array_keys( $rows ) );
 	}
 
 	public static function instance() {

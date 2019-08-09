@@ -59,10 +59,10 @@ class Exporter extends PimpleDumper {
 
 		$list = [];
 		foreach ( $map as $data ) {
-			if ( $data[ 'type' ] === 'class' && strpos( $data[ 'value' ], 'class@anonymous' ) !== 0 ) {
-				$list[] = "            '{$data['name']}' => " . "\\" . "{$data['value']}::class,";
-				if ( array_key_exists( $data[ 'name' ], $constant_map ) ) {
-					$list[] = "            \\" . "{$constant_map[$data['name']]} => " . "\\" . "{$data['value']}::class,";
+			if ( $data['type'] === 'class' && strpos( $data['value'], 'class@anonymous' ) !== 0 ) {
+				$list[] = "            '{$data['name']}' => " . '\\' . "{$data['value']}::class,";
+				if ( array_key_exists( $data['name'], $constant_map ) ) {
+					$list[] = '            \\' . "{$constant_map[$data['name']]} => " . '\\' . "{$data['value']}::class,";
 				}
 			}
 		}

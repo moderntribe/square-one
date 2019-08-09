@@ -52,10 +52,10 @@ class PostLoop extends Panel {
 				$post = $this->panel_vars[ PostLoopPanel::FIELD_POSTS ][ $i ];
 
 				$options = [
-					Card::POST_TITLE => $this->get_post_title( esc_html( $post[ 'title' ] ), $i ),
-					Card::IMAGE      => $this->get_post_image( $post[ 'image' ] ),
-					Card::PRE_TITLE  => get_the_category_list( '', '', $post[ 'post_id' ] ),
-					Card::BUTTON     => $this->get_post_button( $post[ 'link' ] ),
+					Card::POST_TITLE => $this->get_post_title( esc_html( $post['title'] ), $i ),
+					Card::IMAGE      => $this->get_post_image( $post['image'] ),
+					Card::PRE_TITLE  => get_the_category_list( '', '', $post['post_id'] ),
+					Card::BUTTON     => $this->get_post_button( $post['link'] ),
 				];
 
 				$post_obj = Card::factory( $options );
@@ -110,7 +110,7 @@ class PostLoop extends Panel {
 
 	protected function get_post_button( $post_link ) {
 		$options = [
-			Button::URL         => esc_url( $post_link[ 'url' ] ),
+			Button::URL         => esc_url( $post_link['url'] ),
 			Button::LABEL       => __( 'View Post', 'tribe' ),
 			Button::TARGET      => '_self',
 			Button::BTN_AS_LINK => true,
@@ -123,6 +123,6 @@ class PostLoop extends Panel {
 	}
 
 	public static function instance() {
-		return tribe_project()->container()[ 'twig.templates.content/panels/postloop' ];
+		return tribe_project()->container()['twig.templates.content/panels/postloop'];
 	}
 }

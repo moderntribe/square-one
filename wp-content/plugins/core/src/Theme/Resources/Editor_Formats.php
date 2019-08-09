@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Theme\Resources;
 
-
 class Editor_Formats {
 
 	/**
@@ -59,7 +58,7 @@ class Editor_Formats {
 				],
 			],
 		];
-		$settings[ 'style_formats' ] = json_encode( $style_formats );
+		$settings['style_formats'] = json_encode( $style_formats );
 		return $settings;
 	}
 }
