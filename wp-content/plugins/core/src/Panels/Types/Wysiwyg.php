@@ -8,13 +8,14 @@ class Wysiwyg extends Panel_Type_Config {
 
 	const NAME = 'wysiwyg';
 
-	const FIELD_TITLE                     = 'title';
-	const FIELD_DESCRIPTION               = 'description';
-	const FIELD_COLUMNS                   = 'columns';
-	const FIELD_COLUMN_CONTENT            = 'column_content';
-	const FIELD_LAYOUT                    = 'layout';
-	const FIELD_LAYOUT_OPTION_TEXT_LEFT   = 'left';
-	const FIELD_LAYOUT_OPTION_TEXT_CENTER = 'center';
+	const FIELD_TITLE          = 'title';
+	const FIELD_DESCRIPTION    = 'description';
+	const FIELD_COLUMNS        = 'columns';
+	const FIELD_COLUMN_CONTENT = 'column_content';
+	const FIELD_LAYOUT         = 'layout';
+
+	const OPTION_LAYOUT_LEFT   = 'option_wysiwyg_layout_left';
+	const OPTION_LAYOUT_CENTER = 'option_wysiwyg_layout_center';
 
 	protected function panel() {
 
@@ -32,10 +33,10 @@ class Wysiwyg extends Panel_Type_Config {
 			'name'    => self::FIELD_LAYOUT,
 			'label'   => __( 'Layout', 'tribe' ),
 			'options' => [
-				self::FIELD_LAYOUT_OPTION_TEXT_CENTER => $this->handler->layout_icon_url( 'content-align-center.svg' ),
-				self::FIELD_LAYOUT_OPTION_TEXT_LEFT   => $this->handler->layout_icon_url( 'content-align-left.svg' ),
+				self::OPTION_LAYOUT_CENTER => $this->handler->layout_icon_url( 'content-align-center.svg' ),
+				self::OPTION_LAYOUT_LEFT   => $this->handler->layout_icon_url( 'content-align-left.svg' ),
 			],
-			'default' => self::FIELD_LAYOUT_OPTION_TEXT_CENTER,
+			'default' => self::OPTION_LAYOUT_CENTER,
 		] ) );
 
 		$panel->add_field( new Fields\TextArea( [
