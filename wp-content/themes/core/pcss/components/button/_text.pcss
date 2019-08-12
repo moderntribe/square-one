@@ -34,11 +34,15 @@ a[data-mce-selected].c-btn-text {
  * Button: Inverse
  * ------------------------------------------------------------------------- */
 
-.c-btn-text--inverse,
-a.c-btn-text--inverse,
-a[data-mce-selected].c-btn-text--inverse {
-	border-color: var(--color-submarine);
+.c-btn-text-inverse,
+a.c-btn-text-inverse,
+a[data-mce-selected].c-btn-text-inverse {
+	@mixin button-global;
+
+	border-bottom: 2px solid var(--color-submarine);
 	color: var(--color-white);
+	font: var(--font-weight-semibold) var(--font-size-2)/1.75 var(--font-family-calibre);
+	padding-bottom: 0;
 
 	&:visited {
 		color: var(--color-white);
