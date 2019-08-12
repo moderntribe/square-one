@@ -43,13 +43,12 @@ class Wysiwyg extends Panel {
 	 * @return string
 	 */
 	protected function get_classes(): string {
-		$wrapper_class = Wysi::OPTION_LAYOUT_LEFT === $this->panel_vars[ Wysi::FIELD_LAYOUT ] ? 'site-panel--wysiwyg__layout-left' : 'site-panel--wysiwyg__layout-center';
-		$classes       = [
+		$classes = [
 			'panel',
 			's-wrapper',
 			'site-panel',
 			sprintf( 'site-panel--%s', $this->panel->get_type_object()->get_id() ),
-			$wrapper_class,
+			sprintf( 'site-panel--wysiwyg__layout-%s', $this->panel_vars[ Wysi::FIELD_LAYOUT ] ),
 		];
 		return Util::class_attribute( $classes );
 	}

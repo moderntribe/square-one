@@ -14,8 +14,8 @@ class Wysiwyg extends Panel_Type_Config {
 	const FIELD_COLUMN_CONTENT = 'column_content';
 	const FIELD_LAYOUT         = 'layout';
 
-	const OPTION_LAYOUT_LEFT   = 'option_wysiwyg_layout_left';
-	const OPTION_LAYOUT_CENTER = 'option_wysiwyg_layout_center';
+	const OPTION_LAYOUT_LEFT   = 'left';
+	const OPTION_LAYOUT_CENTER = 'center';
 
 	protected function panel() {
 
