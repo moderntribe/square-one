@@ -55,7 +55,7 @@ class Editor_Formats {
 					[
 						'title'    => __( 'CTA Arrow Link', 'tribe' ),
 						'selector' => 'a',
-						'classes'  => 'c-btn-text c-btn-text--icon',
+						'classes'  => 'c-btn-text--icon',
 						'wrapper'  => false,
 					],
 				],
