@@ -4,20 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f737e4f531da1adff0f3fd6881dfd43d",
+    "content-hash": "8ccd3d7fb4b951d9ca107f68ab12319b",
     "packages": [
-        {
-            "name": "advanced-custom-fields/advanced-custom-fields-pro",
-            "version": "5.7.12",
-            "dist": {
-                "type": "zip",
-                "url": "https://connect.advancedcustomfields.com/index.php?a=download&p=pro&k={%WP_PLUGIN_ACF_KEY}&t=5.7.12#v5.7.12"
-            },
-            "require": {
-                "ffraenz/private-composer-installer": "^2.0"
-            },
-            "type": "wordpress-plugin"
-        },
         {
             "name": "aws/aws-sdk-php",
             "version": "3.48.4",
@@ -151,108 +139,6 @@
             "time": "2019-04-09T12:31:48+00:00"
         },
         {
-            "name": "comodojo/exceptions",
-            "version": "1.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/comodojo/exceptions.git",
-                "reference": "fdd690054dafd3d5a8fb7feb93dd124e1ae2f5c1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/comodojo/exceptions/zipball/fdd690054dafd3d5a8fb7feb93dd124e1ae2f5c1",
-                "reference": "fdd690054dafd3d5a8fb7feb93dd124e1ae2f5c1",
-                "shasum": ""
-            },
-            "require": {
-                "psr/cache": "^1.0",
-                "psr/simple-cache": "^1.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^4.0|^5.0",
-                "scrutinizer/ocular": "^1.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Comodojo\\Exception\\": "src/Comodojo/Exception"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Marco Giovinazzi",
-                    "email": "marco.giovinazzi@comodojo.org",
-                    "homepage": "http://jme.altervista.org"
-                }
-            ],
-            "description": "Common exceptions for comodojo libs and frameworks",
-            "homepage": "https://comodojo.org",
-            "keywords": [
-                "comodojo",
-                "exception"
-            ],
-            "time": "2018-02-08T13:11:13+00:00"
-        },
-        {
-            "name": "comodojo/httprequest",
-            "version": "1.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/comodojo/httprequest.git",
-                "reference": "a318129aafe4cf7dc33754109bc9ab79e331902c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/comodojo/httprequest/zipball/a318129aafe4cf7dc33754109bc9ab79e331902c",
-                "reference": "a318129aafe4cf7dc33754109bc9ab79e331902c",
-                "shasum": ""
-            },
-            "require": {
-                "comodojo/exceptions": "^1.0",
-                "league/url": "^3.0",
-                "php": ">=5.3.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^4.0|^5.0",
-                "scrutinizer/ocular": "^1.0"
-            },
-            "suggest": {
-                "ext-curl": "Make requests using curl instead of stream"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Comodojo\\Httprequest\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Marco Giovinazzi",
-                    "email": "marco.giovinazzi@comodojo.org",
-                    "homepage": "http://jme.altervista.org"
-                }
-            ],
-            "description": "HTTP request library",
-            "homepage": "https://comodojo.org",
-            "keywords": [
-                "NTLM",
-                "basic",
-                "comodojo",
-                "http",
-                "proxy",
-                "request"
-            ],
-            "time": "2018-12-05T21:27:46+00:00"
-        },
-        {
             "name": "composer/installers",
             "version": "v1.4.0",
             "source": {
@@ -368,130 +254,6 @@
                 "zikula"
             ],
             "time": "2017-08-09T07:53:48+00:00"
-        },
-        {
-            "name": "ffraenz/private-composer-installer",
-            "version": "v2.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ffraenz/private-composer-installer.git",
-                "reference": "dc54b0200952f8c03a08b5593a933c308343a2a9"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ffraenz/private-composer-installer/zipball/dc54b0200952f8c03a08b5593a933c308343a2a9",
-                "reference": "dc54b0200952f8c03a08b5593a933c308343a2a9",
-                "shasum": ""
-            },
-            "require": {
-                "composer-plugin-api": "^1.0.0",
-                "php": "^5.6 || ^7.0",
-                "vlucas/phpdotenv": "^3.0"
-            },
-            "require-dev": {
-                "composer/composer": "1.0.*",
-                "phpunit/phpunit": "5.7.* || ^6.3",
-                "zendframework/zend-coding-standard": "^1.0"
-            },
-            "type": "composer-plugin",
-            "extra": {
-                "class": "FFraenz\\PrivateComposerInstaller\\Plugin"
-            },
-            "autoload": {
-                "psr-4": {
-                    "FFraenz\\PrivateComposerInstaller\\": "src/PrivateComposerInstaller"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fränz Friederes",
-                    "email": "fraenz@frieder.es",
-                    "homepage": "https://fraenz.frieder.es"
-                }
-            ],
-            "description": "A composer install helper for private packages",
-            "keywords": [
-                "composer",
-                "env",
-                "plugin",
-                "private",
-                "wordpress",
-                "wp"
-            ],
-            "time": "2019-01-30T21:44:48+00:00"
-        },
-        {
-            "name": "gotoandplay/gravityforms-composer-installer",
-            "version": "v1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/gtap-dev/gravityforms-composer-installer.git",
-                "reference": "e3c9ab3a7d9a9edd646ea6140302ee17dfaa075d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/gtap-dev/gravityforms-composer-installer/zipball/e3c9ab3a7d9a9edd646ea6140302ee17dfaa075d",
-                "reference": "e3c9ab3a7d9a9edd646ea6140302ee17dfaa075d",
-                "shasum": ""
-            },
-            "require": {
-                "comodojo/httprequest": "^1.3",
-                "composer-plugin-api": "^1.0.0",
-                "php": "^5.6 || ^7.0",
-                "vlucas/phpdotenv": "^3.0"
-            },
-            "require-dev": {
-                "composer/composer": "1.0.*",
-                "phpunit/phpunit": "5.7.* || ^6.3",
-                "zendframework/zend-coding-standard": "^1.0"
-            },
-            "type": "composer-plugin",
-            "extra": {
-                "class": "gotoAndDev\\GravityFormsComposerInstaller\\Plugin"
-            },
-            "autoload": {
-                "psr-4": {
-                    "gotoAndDev\\GravityFormsComposerInstaller\\": "src/GravityFormsComposerInstaller"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Mihkel Eidast",
-                    "email": "mihkel@play.ee",
-                    "homepage": "https://play.ee"
-                }
-            ],
-            "description": "A composer install helper for Gravity Forms",
-            "keywords": [
-                "composer",
-                "env",
-                "gravityforms",
-                "plugin",
-                "private",
-                "wordpress",
-                "wp"
-            ],
-            "time": "2019-03-26T17:00:39+00:00"
-        },
-        {
-            "name": "gravityforms/gravityforms",
-            "version": "2.4.10.7",
-            "dist": {
-                "type": "zip",
-                "url": "http://www.gravityhelp.com/wp-content/plugins/gravitymanager/api.php?op=get_plugin&slug=gravityforms&key={%WP_PLUGIN_GF_KEY}#v2.4.10.7"
-            },
-            "require": {
-                "gotoandplay/gravityforms-composer-installer": "^1.0"
-            },
-            "type": "wordpress-plugin"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -732,45 +494,6 @@
             "time": "2017-05-27T04:45:45+00:00"
         },
         {
-            "name": "humanmade/mercator",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/humanmade/Mercator.git",
-                "reference": "7f3846a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/humanmade/Mercator/zipball/7f3846a",
-                "reference": "7f3846a",
-                "shasum": ""
-            },
-            "require": {
-                "composer/installers": "~1.0"
-            },
-            "type": "wordpress-muplugin",
-            "license": [
-                "GPL-2.0+"
-            ],
-            "authors": [
-                {
-                    "name": "Human Made Limited",
-                    "email": "support@humanmade.co.uk",
-                    "homepage": "http://hmn.md/"
-                }
-            ],
-            "description": "WordPress multisite domain mapping for the modern era.",
-            "homepage": "https://github.com/humanmade/Mercator",
-            "keywords": [
-                "wordpress"
-            ],
-            "support": {
-                "source": "https://github.com/humanmade/Mercator/tree/master",
-                "issues": "https://github.com/humanmade/Mercator/issues"
-            },
-            "time": "2019-01-08T13:04:40+00:00"
-        },
-        {
             "name": "humanmade/s3-uploads",
             "version": "v1.1.0",
             "source": {
@@ -867,16 +590,16 @@
         },
         {
             "name": "johnbillion/extended-cpts",
-            "version": "4.2.6",
+            "version": "4.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/johnbillion/extended-cpts.git",
-                "reference": "ffbda9b2ebc7738040567e805d17b2cc9f2fbb69"
+                "reference": "f3fffe80ff9fdbecd0f5dd90bb09ed179b978f5b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/johnbillion/extended-cpts/zipball/ffbda9b2ebc7738040567e805d17b2cc9f2fbb69",
-                "reference": "ffbda9b2ebc7738040567e805d17b2cc9f2fbb69",
+                "url": "https://api.github.com/repos/johnbillion/extended-cpts/zipball/f3fffe80ff9fdbecd0f5dd90bb09ed179b978f5b",
+                "reference": "f3fffe80ff9fdbecd0f5dd90bb09ed179b978f5b",
                 "shasum": ""
             },
             "require": {
@@ -896,6 +619,7 @@
                 "wp-phpunit/wp-phpunit": "*"
             },
             "suggest": {
+                "seravo/wp-custom-bulk-actions": "Custom Bulk Actions",
                 "wpackagist-plugin/rewrite-testing": "Rewrite Rule Testing"
             },
             "type": "library",
@@ -922,7 +646,7 @@
             ],
             "description": "A library which provides extended functionality to WordPress custom post types and taxonomies.",
             "homepage": "https://github.com/johnbillion/extended-cpts/",
-            "time": "2019-08-08T13:24:04+00:00"
+            "time": "2019-08-12T08:52:58+00:00"
         },
         {
             "name": "johnpbloch/wordpress-core",
@@ -1014,61 +738,6 @@
             "time": "2017-05-31T18:42:33+00:00"
         },
         {
-            "name": "league/url",
-            "version": "3.3.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/thephpleague/url.git",
-                "reference": "1ae2c3ce29a7c5438339ff6388225844e6479da8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/url/zipball/1ae2c3ce29a7c5438339ff6388225844e6479da8",
-                "reference": "1ae2c3ce29a7c5438339ff6388225844e6479da8",
-                "shasum": ""
-            },
-            "require": {
-                "ext-mbstring": "*",
-                "php": ">=5.3.0",
-                "true/punycode": "^2.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^4.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.3-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "League\\Url\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Ignace Nyamagana Butera",
-                    "email": "nyamsprod@gmail.com",
-                    "homepage": "https://github.com/nyamsprod/",
-                    "role": "Developer"
-                }
-            ],
-            "description": "League/url is a lightweight PHP Url manipulating library",
-            "homepage": "http://url.thephpleague.com",
-            "keywords": [
-                "parse_url",
-                "php",
-                "url"
-            ],
-            "abandoned": "league/uri",
-            "time": "2015-07-15T08:24:12+00:00"
-        },
-        {
             "name": "mailgun/mailgun-php",
             "version": "2.8.1",
             "source": {
@@ -1121,87 +790,21 @@
             "time": "2019-02-02T07:14:32+00:00"
         },
         {
-            "name": "moderntribe/ajax-queue",
+            "name": "moderntribe/gutenpanels",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/moderntribe/ajax-queue.git",
-                "reference": "6579564c44d78b558d275c22eea40c0433fd5a17"
+                "url": "git@github.com:moderntribe/gutenpanels.git",
+                "reference": "4c8f3d07fc6b3b5320f64eee536e5a8d081e92aa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/ajax-queue/zipball/6579564c44d78b558d275c22eea40c0433fd5a17",
-                "reference": "6579564c44d78b558d275c22eea40c0433fd5a17",
-                "shasum": ""
-            },
-            "type": "project",
-            "autoload": {
-                "psr-0": {
-                    "AJAXQueue": "src/"
-                }
-            },
-            "license": [
-                "Private"
-            ],
-            "description": "Group ajax calls",
-            "support": {
-                "source": "https://github.com/moderntribe/ajax-queue/tree/master",
-                "issues": "https://github.com/moderntribe/ajax-queue/issues"
-            },
-            "time": "2015-08-21T06:25:04+00:00"
-        },
-        {
-            "name": "moderntribe/attachment-helper",
-            "version": "1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/moderntribe/attachment-helper.git",
-                "reference": "96e35fcb4c0883702d3f91e95b00985273a8eae7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/attachment-helper/zipball/96e35fcb4c0883702d3f91e95b00985273a8eae7",
-                "reference": "96e35fcb4c0883702d3f91e95b00985273a8eae7",
-                "shasum": ""
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "AttachmentHelper\\": "AttachmentHelper"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jonathan Brinley",
-                    "email": "jonathan@tri.be"
-                }
-            ],
-            "description": "A library for adding a file upload field to an admin meta box",
-            "support": {
-                "source": "https://github.com/moderntribe/attachment-helper/tree/1.0.1"
-            },
-            "time": "2016-04-24T20:00:57+00:00"
-        },
-        {
-            "name": "moderntribe/panel-builder",
-            "version": "dev-3.3-branch",
-            "source": {
-                "type": "git",
-                "url": "git@github.com:moderntribe/panel-builder.git",
-                "reference": "e1896daea357761ca291f39ea3ff785076d2f9a7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/panel-builder/zipball/e1896daea357761ca291f39ea3ff785076d2f9a7",
-                "reference": "e1896daea357761ca291f39ea3ff785076d2f9a7",
+                "url": "https://api.github.com/repos/moderntribe/gutenpanels/zipball/4c8f3d07fc6b3b5320f64eee536e5a8d081e92aa",
+                "reference": "4c8f3d07fc6b3b5320f64eee536e5a8d081e92aa",
                 "shasum": ""
             },
             "require": {
-                "moderntribe/ajax-queue": "dev-master",
-                "moderntribe/attachment-helper": "^1.0.0"
+                "pimple/pimple": "~3.0@dev"
             },
             "require-dev": {
                 "lucatume/wp-browser": "^1.10"
@@ -1209,7 +812,7 @@
             "type": "wordpress-plugin",
             "autoload": {
                 "psr-4": {
-                    "ModularContent\\": "ModularContent/"
+                    "Tribe\\Gutenpanels\\": "src/Gutenpanels"
                 }
             },
             "license": [
@@ -1221,48 +824,12 @@
                     "email": "peter@tri.be"
                 }
             ],
-            "description": "The Modern Tribe Panel Builder plugin",
+            "description": "The Modern Tribe Panel Builder plugin, now with more Gutenberg!",
             "support": {
-                "source": "https://github.com/moderntribe/panel-builder/tree/3.3-branch",
-                "issues": "https://github.com/moderntribe/panel-builder/issues"
+                "source": "https://github.com/moderntribe/gutenpanels/tree/master",
+                "issues": "https://github.com/moderntribe/gutenpanels/issues"
             },
-            "time": "2019-07-11T20:03:39+00:00"
-        },
-        {
-            "name": "moderntribe/square1-acf",
-            "version": "dev-feature/monorepo",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/moderntribe/square1-acf.git",
-                "reference": "91f3fc8b290fcc8c8dbb8e959a9cb0a4541facc0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/square1-acf/zipball/91f3fc8b290fcc8c8dbb8e959a9cb0a4541facc0",
-                "reference": "91f3fc8b290fcc8c8dbb8e959a9cb0a4541facc0",
-                "shasum": ""
-            },
-            "require": {
-                "moderntribe/square1-object-meta": "dev-feature/monorepo",
-                "php": "^7.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.1-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Tribe\\Libs\\ACF\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0-only"
-            ],
-            "description": "Provides ACF object meta wrappers for square one",
-            "time": "2019-08-03T18:34:37+00:00"
+            "time": "2019-08-12T22:43:14+00:00"
         },
         {
             "name": "moderntribe/square1-assets",
@@ -1300,44 +867,6 @@
                 "GPL-2.0-only"
             ],
             "description": "Asset loading for square one",
-            "time": "2019-08-03T18:34:37+00:00"
-        },
-        {
-            "name": "moderntribe/square1-blog-copier",
-            "version": "dev-feature/monorepo",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/moderntribe/square1-blog-copier.git",
-                "reference": "8a4ba355ea0116187d690c6ef0ecd018de308f70"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/square1-blog-copier/zipball/8a4ba355ea0116187d690c6ef0ecd018de308f70",
-                "reference": "8a4ba355ea0116187d690c6ef0ecd018de308f70",
-                "shasum": ""
-            },
-            "require": {
-                "moderntribe/square1-container": "dev-feature/monorepo",
-                "moderntribe/square1-queues": "dev-feature/monorepo",
-                "php": "^7.0",
-                "pimple/pimple": "~3.0@dev"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.1-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Tribe\\Libs\\Blog_Copier\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0-only"
-            ],
-            "description": "Blog copier for square one",
             "time": "2019-08-03T18:34:37+00:00"
         },
         {
@@ -1455,44 +984,6 @@
             "time": "2019-08-03T18:34:37+00:00"
         },
         {
-            "name": "moderntribe/square1-generators",
-            "version": "dev-feature/monorepo",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/moderntribe/square1-generators.git",
-                "reference": "5ec160616d552745367bc36d4e9683086e85cae6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/square1-generators/zipball/5ec160616d552745367bc36d4e9683086e85cae6",
-                "reference": "5ec160616d552745367bc36d4e9683086e85cae6",
-                "shasum": ""
-            },
-            "require": {
-                "moderntribe/square1-cli": "dev-feature/monorepo",
-                "moderntribe/square1-container": "dev-feature/monorepo",
-                "php": "^7.0",
-                "pimple/pimple": "~3.0@dev"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.1-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Tribe\\Libs\\Generators\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0-only"
-            ],
-            "description": "Code generators for Square One",
-            "time": "2019-08-03T18:34:37+00:00"
-        },
-        {
             "name": "moderntribe/square1-nav",
             "version": "dev-feature/monorepo",
             "source": {
@@ -1563,77 +1054,6 @@
             "time": "2019-08-03T18:34:37+00:00"
         },
         {
-            "name": "moderntribe/square1-oembed",
-            "version": "dev-feature/monorepo",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/moderntribe/square1-oembed.git",
-                "reference": "fad51e5f559512bdf721bafe75d603f0725f350d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/square1-oembed/zipball/fad51e5f559512bdf721bafe75d603f0725f350d",
-                "reference": "fad51e5f559512bdf721bafe75d603f0725f350d",
-                "shasum": ""
-            },
-            "require": {
-                "moderntribe/square1-cache": "dev-feature/monorepo",
-                "php": "^7.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.1-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Tribe\\Libs\\Oembed\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0-only"
-            ],
-            "description": "Oembed utilities for square one",
-            "time": "2019-08-03T18:34:37+00:00"
-        },
-        {
-            "name": "moderntribe/square1-p2p",
-            "version": "dev-feature/monorepo",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/moderntribe/square1-p2p.git",
-                "reference": "9884aa08c3ebccbc129c4a1bfe25bd09c6733c20"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/square1-p2p/zipball/9884aa08c3ebccbc129c4a1bfe25bd09c6733c20",
-                "reference": "9884aa08c3ebccbc129c4a1bfe25bd09c6733c20",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.1-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Tribe\\Libs\\P2P\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0-only"
-            ],
-            "description": "P2P utilities for square one",
-            "time": "2019-08-03T18:34:37+00:00"
-        },
-        {
             "name": "moderntribe/square1-post-type",
             "version": "dev-feature/monorepo",
             "source": {
@@ -1670,153 +1090,6 @@
             "time": "2019-08-03T18:34:37+00:00"
         },
         {
-            "name": "moderntribe/square1-queues",
-            "version": "dev-feature/monorepo",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/moderntribe/square1-queues.git",
-                "reference": "1a739c88e00b6924dbc8ec6291df5bac1c5df7ea"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/square1-queues/zipball/1a739c88e00b6924dbc8ec6291df5bac1c5df7ea",
-                "reference": "1a739c88e00b6924dbc8ec6291df5bac1c5df7ea",
-                "shasum": ""
-            },
-            "require": {
-                "moderntribe/square1-cli": "dev-feature/monorepo",
-                "moderntribe/square1-container": "dev-feature/monorepo",
-                "php": "^7.0",
-                "pimple/pimple": "~3.0@dev"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.1-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Tribe\\Libs\\Queues\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0-only"
-            ],
-            "description": "A queues provider for square one",
-            "time": "2019-08-03T18:34:37+00:00"
-        },
-        {
-            "name": "moderntribe/square1-queues-mysql",
-            "version": "dev-feature/monorepo",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/moderntribe/square1-queues-mysql.git",
-                "reference": "abe494d42fb7f06c51f0933e780c1b809b02a212"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/square1-queues-mysql/zipball/abe494d42fb7f06c51f0933e780c1b809b02a212",
-                "reference": "abe494d42fb7f06c51f0933e780c1b809b02a212",
-                "shasum": ""
-            },
-            "require": {
-                "moderntribe/square1-cli": "dev-feature/monorepo",
-                "moderntribe/square1-container": "dev-feature/monorepo",
-                "moderntribe/square1-queues": "dev-feature/monorepo",
-                "php": "^7.0",
-                "pimple/pimple": "~3.0@dev"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.1-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Tribe\\Libs\\Queues_Mysql\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0-only"
-            ],
-            "description": "A MySQL backend for square one queues",
-            "time": "2019-08-03T18:34:37+00:00"
-        },
-        {
-            "name": "moderntribe/square1-schema",
-            "version": "dev-feature/monorepo",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/moderntribe/square1-schema.git",
-                "reference": "85a1083e27ff31ac7541a666f2c726bcaf78656f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/square1-schema/zipball/85a1083e27ff31ac7541a666f2c726bcaf78656f",
-                "reference": "85a1083e27ff31ac7541a666f2c726bcaf78656f",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.1-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Tribe\\Libs\\Schema\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0-only"
-            ],
-            "description": "Schema utilities for square one",
-            "time": "2019-08-03T18:34:37+00:00"
-        },
-        {
-            "name": "moderntribe/square1-settings",
-            "version": "dev-feature/monorepo",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/moderntribe/square1-settings.git",
-                "reference": "b0c72c8e13421d91163e02f0720e2d20a5ac5c35"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/square1-settings/zipball/b0c72c8e13421d91163e02f0720e2d20a5ac5c35",
-                "reference": "b0c72c8e13421d91163e02f0720e2d20a5ac5c35",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.1-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Tribe\\Libs\\Settings\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0-only"
-            ],
-            "description": "Settings page utilities for square one",
-            "time": "2019-08-03T18:34:37+00:00"
-        },
-        {
             "name": "moderntribe/square1-taxonomy",
             "version": "dev-feature/monorepo",
             "source": {
@@ -1850,77 +1123,6 @@
                 "GPL-2.0-only"
             ],
             "description": "Taxonomy utilities for square one",
-            "time": "2019-08-03T18:34:37+00:00"
-        },
-        {
-            "name": "moderntribe/square1-user",
-            "version": "dev-feature/monorepo",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/moderntribe/square1-user.git",
-                "reference": "9ce54461d2a0cd23e55ca58795940743876b8155"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/square1-user/zipball/9ce54461d2a0cd23e55ca58795940743876b8155",
-                "reference": "9ce54461d2a0cd23e55ca58795940743876b8155",
-                "shasum": ""
-            },
-            "require": {
-                "moderntribe/square1-object-meta": "dev-feature/monorepo",
-                "php": "^7.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.1-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Tribe\\Libs\\User\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0-only"
-            ],
-            "description": "User utilities for square one",
-            "time": "2019-08-03T18:34:37+00:00"
-        },
-        {
-            "name": "moderntribe/square1-utils",
-            "version": "dev-feature/monorepo",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/moderntribe/square1-utils.git",
-                "reference": "7b825d05daee299d3d3beebd037b99b5d1f3f475"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/square1-utils/zipball/7b825d05daee299d3d3beebd037b99b5d1f3f475",
-                "reference": "7b825d05daee299d3d3beebd037b99b5d1f3f475",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.1-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Tribe\\Libs\\Utils\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0-only"
-            ],
-            "description": "Utilities for square one",
             "time": "2019-08-03T18:34:37+00:00"
         },
         {
@@ -2624,52 +1826,6 @@
             "time": "2018-01-21T07:42:36+00:00"
         },
         {
-            "name": "psr/cache",
-            "version": "1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-fig/cache.git",
-                "reference": "d11b50ad223250cf17b86e38383413f5a6764bf8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/cache/zipball/d11b50ad223250cf17b86e38383413f5a6764bf8",
-                "reference": "d11b50ad223250cf17b86e38383413f5a6764bf8",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Psr\\Cache\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "PHP-FIG",
-                    "homepage": "http://www.php-fig.org/"
-                }
-            ],
-            "description": "Common interface for caching libraries",
-            "keywords": [
-                "cache",
-                "psr",
-                "psr-6"
-            ],
-            "time": "2016-08-06T20:24:11+00:00"
-        },
-        {
             "name": "psr/container",
             "version": "1.0.0",
             "source": {
@@ -2814,54 +1970,6 @@
                 "psr-3"
             ],
             "time": "2018-11-20T15:27:04+00:00"
-        },
-        {
-            "name": "psr/simple-cache",
-            "version": "1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-fig/simple-cache.git",
-                "reference": "408d5eafb83c57f6365a3ca330ff23aa4a5fa39b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/simple-cache/zipball/408d5eafb83c57f6365a3ca330ff23aa4a5fa39b",
-                "reference": "408d5eafb83c57f6365a3ca330ff23aa4a5fa39b",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Psr\\SimpleCache\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "PHP-FIG",
-                    "homepage": "http://www.php-fig.org/"
-                }
-            ],
-            "description": "Common interfaces for simple caching",
-            "keywords": [
-                "cache",
-                "caching",
-                "psr",
-                "psr-16",
-                "simple-cache"
-            ],
-            "time": "2017-10-23T01:57:42+00:00"
         },
         {
             "name": "ralouphie/getallheaders",
@@ -3180,52 +2288,6 @@
             "time": "2019-08-06T08:03:45+00:00"
         },
         {
-            "name": "true/punycode",
-            "version": "v2.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/true/php-punycode.git",
-                "reference": "a4d0c11a36dd7f4e7cd7096076cab6d3378a071e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/true/php-punycode/zipball/a4d0c11a36dd7f4e7cd7096076cab6d3378a071e",
-                "reference": "a4d0c11a36dd7f4e7cd7096076cab6d3378a071e",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0",
-                "symfony/polyfill-mbstring": "^1.3"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.7",
-                "squizlabs/php_codesniffer": "~2.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "TrueBV\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Renan Gonçalves",
-                    "email": "renan.saddam@gmail.com"
-                }
-            ],
-            "description": "A Bootstring encoding of Unicode for Internationalized Domain Names in Applications (IDNA)",
-            "homepage": "https://github.com/true/php-punycode",
-            "keywords": [
-                "idna",
-                "punycode"
-            ],
-            "time": "2016-11-16T10:37:54+00:00"
-        },
-        {
             "name": "twig/twig",
             "version": "v2.11.3",
             "source": {
@@ -3396,42 +2458,6 @@
             "time": "2018-12-25T11:19:39+00:00"
         },
         {
-            "name": "wpackagist-plugin/classic-editor",
-            "version": "1.5",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/classic-editor/",
-                "reference": "tags/1.5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/classic-editor.1.5.zip"
-            },
-            "require": {
-                "composer/installers": "~1.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/classic-editor/"
-        },
-        {
-            "name": "wpackagist-plugin/classic-editor-addon",
-            "version": "2.4.0",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/classic-editor-addon/",
-                "reference": "tags/2.4.0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/classic-editor-addon.2.4.0.zip"
-            },
-            "require": {
-                "composer/installers": "~1.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/classic-editor-addon/"
-        },
-        {
             "name": "wpackagist-plugin/configure-smtp",
             "version": "3.1",
             "source": {
@@ -3450,60 +2476,6 @@
             "homepage": "https://wordpress.org/plugins/configure-smtp/"
         },
         {
-            "name": "wpackagist-plugin/gravity-forms-wcag-20-form-fields",
-            "version": "1.7.1",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/gravity-forms-wcag-20-form-fields/",
-                "reference": "tags/1.7.1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/gravity-forms-wcag-20-form-fields.1.7.1.zip"
-            },
-            "require": {
-                "composer/installers": "~1.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/gravity-forms-wcag-20-form-fields/"
-        },
-        {
-            "name": "wpackagist-plugin/limit-login-attempts",
-            "version": "2.0beta3",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/limit-login-attempts/",
-                "reference": "tags/2.0beta3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/limit-login-attempts.2.0beta3.zip"
-            },
-            "require": {
-                "composer/installers": "~1.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/limit-login-attempts/"
-        },
-        {
-            "name": "wpackagist-plugin/posts-to-posts",
-            "version": "1.6.5",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/posts-to-posts/",
-                "reference": "tags/1.6.5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/posts-to-posts.1.6.5.zip"
-            },
-            "require": {
-                "composer/installers": "~1.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/posts-to-posts/"
-        },
-        {
             "name": "wpackagist-plugin/regenerate-thumbnails",
             "version": "3.0.2",
             "source": {
@@ -3520,60 +2492,6 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/regenerate-thumbnails/"
-        },
-        {
-            "name": "wpackagist-plugin/the-events-calendar",
-            "version": "4.6.11.1",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/the-events-calendar/",
-                "reference": "tags/4.6.11.1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/the-events-calendar.4.6.11.1.zip"
-            },
-            "require": {
-                "composer/installers": "~1.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/the-events-calendar/"
-        },
-        {
-            "name": "wpackagist-plugin/user-switching",
-            "version": "1.3.0",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/user-switching/",
-                "reference": "tags/1.3.0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/user-switching.1.3.0.zip"
-            },
-            "require": {
-                "composer/installers": "~1.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/user-switching/"
-        },
-        {
-            "name": "wpackagist-plugin/wordpress-seo",
-            "version": "9.4",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/wordpress-seo/",
-                "reference": "tags/9.4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wordpress-seo.9.4.zip"
-            },
-            "require": {
-                "composer/installers": "~1.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/wordpress-seo/"
         }
     ],
     "packages-dev": [
@@ -5737,16 +4655,16 @@
         },
         {
             "name": "myclabs/deep-copy",
-            "version": "1.9.1",
+            "version": "1.9.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/myclabs/DeepCopy.git",
-                "reference": "e6828efaba2c9b79f4499dae1d66ef8bfa7b2b72"
+                "reference": "007c053ae6f31bba39dfa19a7726f56e9763bbea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/e6828efaba2c9b79f4499dae1d66ef8bfa7b2b72",
-                "reference": "e6828efaba2c9b79f4499dae1d66ef8bfa7b2b72",
+                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/007c053ae6f31bba39dfa19a7726f56e9763bbea",
+                "reference": "007c053ae6f31bba39dfa19a7726f56e9763bbea",
                 "shasum": ""
             },
             "require": {
@@ -5781,7 +4699,7 @@
                 "object",
                 "object graph"
             ],
-            "time": "2019-04-07T13:18:21+00:00"
+            "time": "2019-08-09T12:45:53+00:00"
         },
         {
             "name": "nb/oxymel",
@@ -6462,16 +5380,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "8.3.3",
+            "version": "8.3.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "c319d08ebd31e137034c84ad7339054709491485"
+                "reference": "e31cce0cf4499c0ccdbbb211a3280d36ab341e36"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/c319d08ebd31e137034c84ad7339054709491485",
-                "reference": "c319d08ebd31e137034c84ad7339054709491485",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/e31cce0cf4499c0ccdbbb211a3280d36ab341e36",
+                "reference": "e31cce0cf4499c0ccdbbb211a3280d36ab341e36",
                 "shasum": ""
             },
             "require": {
@@ -6541,7 +5459,55 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2019-08-03T15:41:47+00:00"
+            "time": "2019-08-11T06:56:55+00:00"
+        },
+        {
+            "name": "psr/simple-cache",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/simple-cache.git",
+                "reference": "408d5eafb83c57f6365a3ca330ff23aa4a5fa39b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/simple-cache/zipball/408d5eafb83c57f6365a3ca330ff23aa4a5fa39b",
+                "reference": "408d5eafb83c57f6365a3ca330ff23aa4a5fa39b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\SimpleCache\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interfaces for simple caching",
+            "keywords": [
+                "cache",
+                "caching",
+                "psr",
+                "psr-16",
+                "simple-cache"
+            ],
+            "time": "2017-10-23T01:57:42+00:00"
         },
         {
             "name": "rmccue/requests",
@@ -6812,16 +5778,16 @@
         },
         {
             "name": "sebastian/exporter",
-            "version": "3.1.0",
+            "version": "3.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/exporter.git",
-                "reference": "234199f4528de6d12aaa58b612e98f7d36adb937"
+                "reference": "06a9a5947f47b3029d76118eb5c22802e5869687"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/exporter/zipball/234199f4528de6d12aaa58b612e98f7d36adb937",
-                "reference": "234199f4528de6d12aaa58b612e98f7d36adb937",
+                "url": "https://api.github.com/repos/sebastianbergmann/exporter/zipball/06a9a5947f47b3029d76118eb5c22802e5869687",
+                "reference": "06a9a5947f47b3029d76118eb5c22802e5869687",
                 "shasum": ""
             },
             "require": {
@@ -6849,6 +5815,10 @@
             ],
             "authors": [
                 {
+                    "name": "Sebastian Bergmann",
+                    "email": "sebastian@phpunit.de"
+                },
+                {
                     "name": "Jeff Welch",
                     "email": "whatthejeff@gmail.com"
                 },
@@ -6857,16 +5827,12 @@
                     "email": "github@wallbash.com"
                 },
                 {
-                    "name": "Bernhard Schussek",
-                    "email": "bschussek@2bepublished.at"
-                },
-                {
-                    "name": "Sebastian Bergmann",
-                    "email": "sebastian@phpunit.de"
-                },
-                {
                     "name": "Adam Harvey",
                     "email": "aharvey@php.net"
+                },
+                {
+                    "name": "Bernhard Schussek",
+                    "email": "bschussek@gmail.com"
                 }
             ],
             "description": "Provides the functionality to export PHP variables for visualization",
@@ -6875,7 +5841,7 @@
                 "export",
                 "exporter"
             ],
-            "time": "2017-04-03T13:19:02+00:00"
+            "time": "2019-08-11T12:43:14+00:00"
         },
         {
             "name": "sebastian/global-state",
@@ -10205,27 +9171,15 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "moderntribe/panel-builder": 20,
-        "moderntribe/square1-acf": 20,
+        "moderntribe/gutenpanels": 20,
         "moderntribe/square1-assets": 20,
-        "moderntribe/square1-blog-copier": 20,
         "moderntribe/square1-cache": 20,
         "moderntribe/square1-cli": 20,
         "moderntribe/square1-container": 20,
-        "moderntribe/square1-generators": 20,
         "moderntribe/square1-nav": 20,
         "moderntribe/square1-object-meta": 20,
-        "moderntribe/square1-oembed": 20,
-        "moderntribe/square1-p2p": 20,
         "moderntribe/square1-post-type": 20,
-        "moderntribe/square1-queues": 20,
-        "moderntribe/square1-queues-mysql": 20,
-        "moderntribe/square1-schema": 20,
-        "moderntribe/square1-settings": 20,
         "moderntribe/square1-taxonomy": 20,
-        "moderntribe/square1-user": 20,
-        "moderntribe/square1-utils": 20,
-        "humanmade/mercator": 20,
         "pimple/pimple": 20,
         "roots/wp-password-bcrypt": 20,
         "filp/whoops": 20
@@ -10233,7 +9187,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.0"
+        "php": "^7.2"
     },
     "platform-dev": []
 }

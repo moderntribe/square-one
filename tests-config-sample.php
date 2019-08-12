@@ -20,7 +20,7 @@ define( 'DB_PASSWORD', 'password' );
 define( 'DB_HOST', 'mysql' );
 //define( 'DOMAIN_CURRENT_SITE', 'square1.tribe' );
 //define( 'WP_TESTS_MULTISITE', true );
-define( 'WP_TESTS_DOMAIN', 'square1.tribe' );
+define( 'WP_TESTS_DOMAIN', 'gutenpanels.tribe' );
 //define( 'WPCEPT_ISOLATED_INSTALL', true );
 define( 'WP_DEBUG', true );
 define( 'WP_DEBUG_DISPLAY', true );
@@ -32,7 +32,7 @@ define( 'WP_CACHE', false );
 define( 'WP_CACHE_KEY_SALT', uniqid() );
 
 if (empty($_SERVER['HTTP_HOST'])) {
-	$_SERVER['HTTP_HOST']   = 'square1.tribe';
+	$_SERVER['HTTP_HOST']   = 'gutenpanels.tribe';
 }
 if ( empty($_SERVER['REQUEST_URI']) ) {
 	$_SERVER['REQUEST_URI'] = '/';

@@ -25,95 +25,29 @@
     },
     {
       "type":"vcs",
-      "url":"git@github.com:moderntribe/attachment-helper.git"
-    },
-    {
-      "type":"vcs",
-      "url":"git@github.com:moderntribe/ajax-queue.git"
-    },
-    {
-      "type":"vcs",
-      "url":"https://github.com/moderntribe/panel-builder.git"
-    },
-    {
-      "type":"vcs",
-      "url":"git@github.com:humanmade/Mercator.git"
-    },
-    {
-      "type":"vcs",
-      "url":"https://github.com/moderntribe/tribe-libs.git"
-    },
-    {
-      "type": "package",
-      "package": {
-        "name": "advanced-custom-fields/advanced-custom-fields-pro",
-        "version": "5.7.12",
-        "type": "wordpress-plugin",
-        "dist": {
-          "type": "zip",
-          "url": "https://connect.advancedcustomfields.com/index.php?a=download&p=pro&k={%WP_PLUGIN_ACF_KEY}&t={%version}"
-        },
-        "require": {
-          "ffraenz/private-composer-installer": "^2.0"
-        }
-      }
-    },
-    {
-      "type": "package",
-      "package": {
-        "name": "gravityforms/gravityforms",
-        "version": "2.4.10.7",
-        "type": "wordpress-plugin",
-        "dist": {
-          "type": "zip",
-          "url": "http://www.gravityhelp.com/wp-content/plugins/gravitymanager/api.php?op=get_plugin&slug=gravityforms&key={%WP_PLUGIN_GF_KEY}"
-        },
-        "require": {
-          "gotoandplay/gravityforms-composer-installer": "^1.0"
-        }
-      }
+      "url":"https://github.com/moderntribe/gutenpanels.git"
     }
   ],
   "require": {
-    "php":"^7.0",
+    "php":"^7.2",
     "aws/aws-sdk-php": "3.48.4",
     "hirak/prestissimo":"0.3.7",
     "composer/installers":"1.4.0",
     "johnpbloch/wordpress-core-installer":"1.0.0",
     "johnpbloch/wordpress-core": "5.2.1",
     "wpackagist-plugin/configure-smtp": "3.1",
-    "wpackagist-plugin/gravity-forms-wcag-20-form-fields": "1.7.1",
-    "wpackagist-plugin/limit-login-attempts": "2.0beta3",
-    "wpackagist-plugin/posts-to-posts": "1.6.5",
     "wpackagist-plugin/regenerate-thumbnails": "3.0.2",
-    "wpackagist-plugin/the-events-calendar": "4.6.11.1",
-    "wpackagist-plugin/wordpress-seo": "9.4",
-    "wpackagist-plugin/user-switching": "1.3.0",
-    "wpackagist-plugin/classic-editor":"1.5",
-    "wpackagist-plugin/classic-editor-addon":"2.4.0",
-    "moderntribe/panel-builder": "dev-3.3-branch",
+    "moderntribe/gutenpanels": "dev-master",
 
-    "moderntribe/square1-acf": "dev-feature/monorepo",
     "moderntribe/square1-assets": "dev-feature/monorepo",
-    "moderntribe/square1-blog-copier": "dev-feature/monorepo",
     "moderntribe/square1-cache": "dev-feature/monorepo",
     "moderntribe/square1-cli": "dev-feature/monorepo",
     "moderntribe/square1-container": "dev-feature/monorepo",
-    "moderntribe/square1-generators": "dev-feature/monorepo",
     "moderntribe/square1-nav": "dev-feature/monorepo",
     "moderntribe/square1-object-meta": "dev-feature/monorepo",
-    "moderntribe/square1-oembed": "dev-feature/monorepo",
-    "moderntribe/square1-p2p": "dev-feature/monorepo",
     "moderntribe/square1-post-type": "dev-feature/monorepo",
-    "moderntribe/square1-queues": "dev-feature/monorepo",
-    "moderntribe/square1-queues-mysql": "dev-feature/monorepo",
-    "moderntribe/square1-schema": "dev-feature/monorepo",
-    "moderntribe/square1-settings": "dev-feature/monorepo",
     "moderntribe/square1-taxonomy": "dev-feature/monorepo",
-    "moderntribe/square1-user": "dev-feature/monorepo",
-    "moderntribe/square1-utils": "dev-feature/monorepo",
 
-    "humanmade/mercator":"dev-master#7f3846a",
     "vlucas/phpdotenv": "^3.0",
     "humanmade/s3-uploads":"1.1.0",
     "pimple/pimple": "~3.0@dev",
@@ -126,9 +60,7 @@
     "guzzlehttp/psr7": "^1.4",
     "sunra/php-simple-html-dom-parser": "1.5.2",
     "monolog/monolog":"1.23.0",
-    "roots/wp-password-bcrypt": "dev-master",
-    "advanced-custom-fields/advanced-custom-fields-pro": "*",
-    "gravityforms/gravityforms": "*"
+    "roots/wp-password-bcrypt": "dev-master"
   },
   "require-dev": {
     "wp-cli/wp-cli": "^2.2.0",
@@ -143,7 +75,7 @@
       "wp-content/mu-plugins/{$name}": [ "type:wordpress-muplugin"],
       "wp-content/plugins/{$name}":[
         "type:wordpress-plugin",
-        "moderntribe/panel-builder"
+        "moderntribe/gutenpanels"
       ],
       "wp-content/plugins/s3-uploads": [ "humanmade/S3-Uploads" ]
     }

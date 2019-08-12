@@ -7,7 +7,7 @@
  * enabled on your local development checkouts
 */
 
-define( 'DB_NAME', 'tribe_square1' );
+define( 'DB_NAME', 'tribe_gutenpanels' );
 define( 'DB_USER', 'root' );
 define( 'DB_PASSWORD', 'password' );
 define( 'DB_HOST', 'mysql' );

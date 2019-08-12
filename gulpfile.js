@@ -8,7 +8,7 @@ let config = require( './local-config.json' );
 
 if ( ! config ) {
 	config = {
-		proxy: 'square1.tribe',
+		proxy: 'gutenpanels.tribe',
 		certs_path: '',
 	};
 }
