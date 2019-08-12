@@ -8,7 +8,7 @@
 a.c-btn-outline,
 a[data-mce-selected].c-btn-outline {
 	@mixin button-global;
-	@mixin button;
+	@mixin button-shared;
 
 	background-color: transparent;
 	border: 1px solid var(--color-mine-shaft);
@@ -40,14 +40,14 @@ a[data-mce-selected].c-btn-outline {
 }
 
 /* -------------------------------------------------------------------------
- * Button: Modifier - Inverse
+ * Button: Outline Inverse
  * ------------------------------------------------------------------------- */
 
 .c-btn-outline-inverse,
 a.c-btn-outline-inverse,
 a[data-mce-selected].c-btn-outline-inverse {
 	@mixin button-global;
-	@mixin button;
+	@mixin button-shared;
 
 	background-color: transparent;
 	border: 1px solid var(--color-white);

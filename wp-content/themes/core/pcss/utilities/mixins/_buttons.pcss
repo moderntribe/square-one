@@ -21,11 +21,11 @@
 
 /* -----------------------------------------------------------------------------
  *
- * Button - Repeated styles across all button components
+ * Button - Shared styles across all buttons
  *
  * ----------------------------------------------------------------------------- */
 
-@define-mixin button {
+@define-mixin button-shared {
 	font: var(--font-weight-medium) var(--font-size-2)/var(--line-height-even) var(--font-family-calibre);
 	letter-spacing: 0.3px;
 	text-align: center;
@@ -45,7 +45,7 @@
 
 @define-mixin button-submit {
 	@mixin button-global;
-	@mixin button;
+	@mixin button-shared;
 }
 
 /* -----------------------------------------------------------------------------
