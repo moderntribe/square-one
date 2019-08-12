@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## 2019.08
+* Fixed: Don't ignore sub folders called wp
 * Changed: sq1 Twig classes to use non-deprecated Twig classes and bump twig minimum to v2.11
 
 ## 2019.07
