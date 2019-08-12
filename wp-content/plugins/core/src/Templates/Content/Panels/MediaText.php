@@ -189,45 +189,19 @@ class MediaText extends Panel {
 	/**
 	 * Get the Media + Text video using the Video component.
 	 *
-	 * @var Oembed_Filter $oembed_obj
 	 * @return string
 	 */
 	protected function get_media_text_video(): string {
-		$oembed_obj = tribe_project()->container()['theme.oembed'];
-		$url      	= $this->panel_vars[ MediaTextPanel::FIELD_VIDEO ];
-		$oembed   	= _wp_oembed_get_object();
-		$provider 	= $oembed->get_provider( $url );
-		$data     	= $oembed->fetch( $provider, $url );
-
-		if ( empty( $data ) ) {
+		if ( empty( $this->panel_vars[ MediaTextPanel::FIELD_VIDEO ] ) ) {
 			return '';
 		}
 
-		$container_classes = [ 'c-video--lazy' ];
+		global $wp_embed;
 
-		if ( $data->provider_name === 'YouTube' ) {
-			$embed_id    = $oembed_obj->get_youtube_embed_id( $url );
-			$video_thumb = $oembed_obj->get_youtube_max_resolution_thumbnail( $url );
+		$url      = $this->panel_vars[ MediaTextPanel::FIELD_VIDEO ];
+		$rendered = $wp_embed->shortcode( [], $url );
 
-			if ( strpos( $video_thumb, 'maxresdefault' ) === false ) {
-				$container_classes[] = 'c-video--lazy-low-res';
-			}
-		} else {
-			$embed_id    = $oembed_obj->get_vimeo_embed_id( $url );
-			$video_thumb = $data->thumbnail_url;
-		}
-
-		$options = [
-			Video::THUMBNAIL_URL     => $video_thumb,
-			Video::CONTAINER_ATTRS   => $oembed_obj->get_layout_container_attrs( $data->provider_name, $embed_id ),
-			Video::CONTAINER_CLASSES => $container_classes,
-			Video::TITLE             => __( 'Play Video', 'tribe' ),
-			Video::VIDEO_URL         => $url,
-		];
-
-		$video = Video::factory( $options );
-
-		return $video->render();
+		return $rendered;
 	}
 
 	/**
