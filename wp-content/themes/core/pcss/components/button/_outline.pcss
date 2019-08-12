@@ -8,18 +8,51 @@
 a.c-btn-outline,
 a[data-mce-selected].c-btn-outline {
 	@mixin button-global;
-	@mixin button-outline;
+	@mixin button;
+
+	background-color: transparent;
+	border: 1px solid var(--color-mine-shaft);
+	color: var(--color-mine-shaft);
+	padding: 15px 32px;
+
+	&:visited {
+		color: var(--color-mine-shaft);
+	}
+
+	&:hover,
+	&:focus {
+		background-color: transparent;
+		border: 1px solid var(--color-link-hover);
+		color: var(--color-link-hover);
+	}
+
+	&:active {
+		background-color: var(--color-desert-storm);
+		border: 1px solid var(--color-mine-shaft);
+		color: var(--color-mine-shaft);
+	}
+
+	&[disabled] {
+		background-color: var(--color-desert-storm);
+		border: 1px solid var(--color-submarine);
+		color: var(--color-submarine);
+	}
 }
 
 /* -------------------------------------------------------------------------
  * Button: Modifier - Inverse
  * ------------------------------------------------------------------------- */
 
-.c-btn-outline--inverse,
-a.c-btn-outline--inverse,
-a[data-mce-selected].c-btn-outline--inverse {
-	border-color: var(--color-white);
+.c-btn-outline-inverse,
+a.c-btn-outline-inverse,
+a[data-mce-selected].c-btn-outline-inverse {
+	@mixin button-global;
+	@mixin button;
+
+	background-color: transparent;
+	border: 1px solid var(--color-white);
 	color: var(--color-white);
+	padding: 15px 32px;
 
 	&:visited {
 		color: var(--color-white);
@@ -27,7 +60,8 @@ a[data-mce-selected].c-btn-outline--inverse {
 
 	&:hover,
 	&:focus {
-		border-color: var(--color-link-hover);
+		background-color: transparent;
+		border: 1px solid var(--color-link-hover);
 		color: var(--color-link-hover);
 	}
 
@@ -41,20 +75,5 @@ a[data-mce-selected].c-btn-outline--inverse {
 		background-color: var(--color-outer-space);
 		border: 1px solid var(--color-nevada);
 		color: var(--color-nevada);
-	}
-
-	/* CASE: Button Modifier - Icon */
-	&.c-btn--icon:not([disabled]) {
-
-		&:hover,
-		&:focus {
-			border: 1px solid var(--color-white);
-			color: var(--color-white);
-		}
-
-		&:active {
-			border: 1px solid var(--color-off-white);
-			color: var(--color-white);
-		}
 	}
 }

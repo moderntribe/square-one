@@ -20,83 +20,20 @@
 }
 
 /* -----------------------------------------------------------------------------
- * Button - Solid
+ *
+ * Button - Repeated styles across all button components
+ *
  * ----------------------------------------------------------------------------- */
 
-@define-mixin button-solid {
-	background-color: var(--color-mine-shaft);
-	color: var(--color-white);
+@define-mixin button {
 	font: var(--font-weight-medium) var(--font-size-2)/var(--line-height-even) var(--font-family-calibre);
 	letter-spacing: 0.3px;
 	text-align: center;
-	padding: var(--spacer-1) 32px;
-	display: inline-block;
+	padding: 16px 32px;
 
 	@media (--viewport-medium) {
 		font-size: var(--font-size-3);
 		line-height: var(--line-height-3);
-	}
-
-	&:visited {
-		color: var(--color-white);
-	}
-
-	&:hover,
-	&:focus {
-		background-color: var(--color-link-hover);
-		color: var(--color-white);
-	}
-
-	&:active {
-		background-color: var(--color-link-hover);
-	}
-
-	&[disabled] {
-		background-color: var(--color-desert-storm);
-		border: 1px solid var(--color-submarine);
-		color: var(--color-nevada);
-	}
-}
-
-/* -----------------------------------------------------------------------------
- * Button - Outline
- * ----------------------------------------------------------------------------- */
-
-@define-mixin button-outline {
-	background-color: transparent;
-	border: 1px solid var(--color-mine-shaft);
-	color: var(--color-mine-shaft);
-	font: var(--font-weight-medium) var(--font-size-2)/var(--line-height-even) var(--font-family-calibre);
-	letter-spacing: 0.3px;
-	text-align: center;
-	padding: var(--spacer-1) 32px;
-
-	@media (--viewport-medium) {
-		font-size: var(--font-size-3);
-		line-height: var(--line-height-3);
-	}
-
-	&:visited {
-		color: var(--color-mine-shaft);
-	}
-
-	&:hover,
-	&:focus {
-		background-color: transparent;
-		border-color: var(--color-link-hover);
-		color: var(--color-link-hover);
-	}
-
-	&:active {
-		background-color: var(--color-desert-storm);
-		border: 1px solid var(--color-mine-shaft);
-		color: var(--color-mine-shaft);
-	}
-
-	&[disabled] {
-		background-color: var(--color-desert-storm);
-		border: 1px solid var(--color-submarine);
-		color: var(--color-submarine);
 	}
 }
 
@@ -108,5 +45,42 @@
 
 @define-mixin button-submit {
 	@mixin button-global;
-	@mixin button-solid;
+	@mixin button;
+}
+
+/* -----------------------------------------------------------------------------
+ *
+ * Button: Modifier - Icon
+ *
+ * ----------------------------------------------------------------------------- */
+
+@define-mixin button-icon {
+	padding-left: 60px;
+	padding-right: 60px;
+	position: relative;
+
+	&:after {
+		@mixin icon;
+
+		content: var(--icon-arrow-large-right);
+		font-size: 20px;
+		position: absolute;
+		right: 20px;
+		top: 50%;
+		visibility: hidden;
+		opacity: 0;
+		transform: translate(10px, -50%);
+		transition: transform 0.15s ease-in-out;
+	}
+
+	&:hover,
+	&:focus,
+	&:active {
+
+		&:not([disabled]):after {
+			opacity: 1;
+			visibility: visible;
+			transform: translate(0, -50%);
+		}
+	}
 }
