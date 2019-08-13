@@ -2,22 +2,6 @@
 
 {% extends "content/panels/panel.twig" %}
 
-{% block header %}
-
-	{% if title or description %}
-		<header class="s-header">
-
-			{{ title }}
-
-			{% block description %}
-				{{ description }}
-			{% endblock %}
-
-		</header>
-	{% endif %}
-
-{% endblock %}
-
 {% block content %}
 
 	<div class="s-content">
@@ -39,6 +23,5 @@
 
 		</div>
 	</div>
-
 
 {% endblock %}
