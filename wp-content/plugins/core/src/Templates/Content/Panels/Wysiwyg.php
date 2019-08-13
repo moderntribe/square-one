@@ -62,11 +62,15 @@ class Wysiwyg extends Panel {
 		$classes = [];
 		$columns = $this->panel_vars[ Wysi::FIELD_COLUMNS ];
 
-		if ( ! empty( $columns ) && count( $columns ) >= 3 ) {
+		if ( empty( $columns ) ) {
+			return Util::class_attribute( $classes, false );
+		}
+
+		if ( count( $columns ) >= 3 ) {
 			$classes[] = 'g-row--col-3--min-full';
 		}
 
-		if ( ! empty( $columns ) && count( $columns ) === 2 ) {
+		if ( count( $columns ) === 2 ) {
 			$classes[] = 'g-row--col-2--min-full';
 		}
 
