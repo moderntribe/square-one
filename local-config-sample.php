@@ -7,7 +7,15 @@
  * enabled on your local development checkouts
 */
 
-define( 'DB_NAME', 'tribe_gutenpanels' );
+if ( isset( $_SERVER['HTTP_X_TESTING'] ) ||
+     ( isset( $_SERVER['HTTP_USER_AGENT'] ) && $_SERVER['HTTP_USER_AGENT'] === 'wp-browser' ) ||
+     getenv( 'WPBROWSER_HOST_REQUEST' ) ) {
+	define( 'DB_NAME', 'tribe_gutenpanels_acceptance' );
+	define( 'ENVIRONMENT', 'test' );
+} else {
+	define( 'DB_NAME', 'tribe_gutenpanels' );
+	define( 'ENVIRONMENT', 'dev' );
+}
 define( 'DB_USER', 'root' );
 define( 'DB_PASSWORD', 'password' );
 define( 'DB_HOST', 'mysql' );
@@ -51,4 +59,4 @@ define( 'WHOOPS_ENABLE', true );
  * If you would like to disable the plugin locally, add the following to your local-config.php.
  */
 
-//define( 'TRIBE_GLOMAR', false );
+define( 'TRIBE_GLOMAR', false );
