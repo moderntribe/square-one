@@ -5,38 +5,75 @@
  * ----------------------------------------------------------------------------- */
 
 .c-btn-outline,
-a.c-btn-outline {
+a.c-btn-outline,
+a[data-mce-selected].c-btn-outline {
 	@mixin button-global;
-	@mixin button-outline;
+	@mixin button-shared;
+
+	background-color: transparent;
+	border: 1px solid var(--color-mine-shaft);
+	color: var(--color-mine-shaft);
+	padding: 15px 32px;
+
+	&:visited {
+		color: var(--color-mine-shaft);
+	}
+
+	&:hover,
+	&:focus {
+		background-color: transparent;
+		border: 1px solid var(--color-link-hover);
+		color: var(--color-link-hover);
+	}
+
+	&:active {
+		background-color: var(--color-desert-storm);
+		border: 1px solid var(--color-mine-shaft);
+		color: var(--color-mine-shaft);
+	}
+
+	&[disabled] {
+		background-color: var(--color-desert-storm);
+		border: 1px solid var(--color-submarine);
+		color: var(--color-submarine);
+	}
 }
 
 /* -------------------------------------------------------------------------
- * Button: Modifier - Inverse
+ * Button: Outline Inverse
  * ------------------------------------------------------------------------- */
 
-.c-btn--inverse,
-a.c-btn--inverse {
+.c-btn-outline-inverse,
+a.c-btn-outline-inverse,
+a[data-mce-selected].c-btn-outline-inverse {
+	@mixin button-global;
+	@mixin button-shared;
 
-	&.c-btn-outline {
-		border-color: var(--color-white);
+	background-color: transparent;
+	border: 1px solid var(--color-white);
+	color: var(--color-white);
+	padding: 15px 32px;
+
+	&:visited {
 		color: var(--color-white);
+	}
 
-		&:hover,
-		&:focus {
-			border-color: var(--color-link-hover);
-			color: var(--color-link-hover);
-		}
+	&:hover,
+	&:focus {
+		background-color: transparent;
+		border: 1px solid var(--color-link-hover);
+		color: var(--color-link-hover);
+	}
 
-		&:active {
-			background-color: var(--color-outer-space);
-			border: 1px solid var(--color-off-white);
-			color: var(--color-white);
-		}
+	&:active {
+		background-color: var(--color-outer-space);
+		border: 1px solid var(--color-off-white);
+		color: var(--color-white);
+	}
 
-		&[disabled] {
-			background-color: var(--color-outer-space);
-			border: 1px solid var(--color-nevada);
-			color: var(--color-nevada);
-		}
+	&[disabled] {
+		background-color: var(--color-outer-space);
+		border: 1px solid var(--color-nevada);
+		color: var(--color-nevada);
 	}
 }

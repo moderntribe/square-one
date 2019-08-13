@@ -13,9 +13,64 @@
  * ----------------------------------------------------------------------------- */
 
 .c-btn,
-a.c-btn {
+a.c-btn,
+a[data-mce-selected].c-btn {
 	@mixin button-global;
-	@mixin button-solid;
+	@mixin button-shared;
+
+	background-color: var(--color-mine-shaft);
+	color: var(--color-white);
+
+	&:visited {
+		color: var(--color-white);
+	}
+
+	&:hover,
+	&:focus {
+		background-color: var(--color-link-hover);
+		color: var(--color-white);
+	}
+
+	&:active {
+		background-color: var(--color-link-hover);
+	}
+
+	&[disabled] {
+		background-color: var(--color-desert-storm);
+		border: 1px solid var(--color-submarine);
+		color: var(--color-nevada);
+	}
+}
+
+/* -------------------------------------------------------------------------
+ * Button: Solid Inverse
+ * ------------------------------------------------------------------------- */
+
+.c-btn-inverse,
+a.c-btn-inverse,
+a[data-mce-selected].c-btn-inverse {
+	@mixin button-global;
+	@mixin button-shared;
+
+	background-color: var(--color-white);
+	color: var(--color-mine-shaft);
+
+	&:visited {
+		color: var(--color-mine-shaft);
+	}
+
+	&:hover,
+	&:focus,
+	&:active {
+		background-color: var(--color-link-hover);
+		color: var(--color-white);
+	}
+
+	&[disabled] {
+		background-color: var(--color-outer-space);
+		border: 1px solid var(--color-nevada);
+		color: var(--color-nevada);
+	}
 }
 
 /* -------------------------------------------------------------------------
@@ -23,49 +78,7 @@ a.c-btn {
  * ------------------------------------------------------------------------- */
 
 .c-btn--icon,
-a.c-btn--icon {
-
-	&:after {
-		display: inline-block;
-		content: var(--icon-arrow-large-right);
-		font-family: var(--font-family-core-icons);
-		font-weight: var(--font-weight-light);
-		margin-left: 16px;
-		transform: translateY(2px);
-	}
-}
-
-/* -------------------------------------------------------------------------
- * Button: Modifier - Inverse
- * ------------------------------------------------------------------------- */
-
-.c-btn--inverse,
-a.c-btn--inverse {
-
-	&.c-btn {
-		background-color: var(--color-white);
-		color: var(--color-mine-shaft);
-
-		&:hover,
-		&:focus,
-		&:active {
-			background-color: var(--color-link-hover);
-			color: var(--color-white);
-		}
-
-		&[disabled] {
-			background-color: var(--color-outer-space);
-			border: 1px solid var(--color-nevada);
-			color: var(--color-nevada);
-		}
-	}
-}
-
-/* -------------------------------------------------------------------------
- * Button: Modifier - Full Width
- * ------------------------------------------------------------------------- */
-
-.c-btn--full,
-a.c-btn--full {
-	width: 100%;
+a.c-btn--icon,
+a[data-mce-selected].c-btn--icon {
+	@mixin button-icon;
 }

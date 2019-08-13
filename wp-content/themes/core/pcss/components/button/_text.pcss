@@ -5,16 +5,13 @@
  * ----------------------------------------------------------------------------- */
 
 .c-btn-text,
-a.c-btn-text {
+a.c-btn-text,
+a[data-mce-selected].c-btn-text {
 	@mixin button-global;
 
 	border-bottom: 2px solid var(--color-submarine);
 	color: var(--color-mine-shaft);
-	display: inline-block;
-	font-family: var(--font-family-calibre);
-	font-size: var(--font-size-2);
-	font-weight: var(--font-weight-semibold);
-	line-height: 1.75;
+	font: var(--font-weight-semibold) var(--font-size-2)/1.75 var(--font-family-calibre);
 	padding-bottom: 0;
 
 	&:visited {
@@ -34,59 +31,59 @@ a.c-btn-text {
 }
 
 /* -------------------------------------------------------------------------
- * Button: Modifier - Icon
+ * Button: Inverse
  * ------------------------------------------------------------------------- */
 
-.c-btn--icon,
-a.c-btn--icon {
+.c-btn-text-inverse,
+a.c-btn-text-inverse,
+a[data-mce-selected].c-btn-text-inverse {
+	@mixin button-global;
 
-	&.c-btn-text {
-		border-bottom: 0;
+	border-bottom: 2px solid var(--color-submarine);
+	color: var(--color-white);
+	font: var(--font-weight-semibold) var(--font-size-2)/1.75 var(--font-family-calibre);
+	padding-bottom: 0;
 
-		&:after {
-			display: inline-block;
-			content: var(--icon-arrow-large-right);
-			font-family: var(--font-family-core-icons);
-			font-weight: var(--font-weight-light);
-			margin-left: 7px;
-			transform: translateY(2px);
-			transition: var(--transition);
-		}
+	&:visited {
+		color: var(--color-white);
+	}
 
-		&:focus,
-		&:hover {
+	&:focus,
+	&:hover {
+		border-color: var(--color-white);
+		color: var(--color-off-white);
+	}
 
-			&:after {
-				margin-left: 16px;
-			}
-		}
+	&:active {
+		border-color: var(--color-submarine);
+		color: var(--color-submarine);
 	}
 }
 
 /* -------------------------------------------------------------------------
- * Button: Modifier - Inverse
+ * Button: Modifier - Icon
  * ------------------------------------------------------------------------- */
 
-.c-btn--inverse,
-a.c-btn--inverse {
+.c-btn-text--icon,
+a.c-btn-text--icon,
+a[data-mce-selected].c-btn-text--icon {
+	border-bottom: 0;
 
-	&.c-btn-text {
-		border-color: var(--color-submarine);
-		color: var(--color-white);
+	&:after {
+		@mixin icon;
 
-		&:visited {
-			color: var(--color-white);
-		}
+		display: inline-block;
+		content: var(--icon-arrow-large-right);
+		margin-left: 7px;
+		transform: translateY(2px);
+		transition: var(--transition);
+	}
 
-		&:focus,
-		&:hover {
-			border-color: var(--color-white);
-			color: var(--color-off-white);
-		}
+	&:focus,
+	&:hover {
 
-		&:active {
-			border-color: var(--color-submarine);
-			color: var(--color-submarine);
+		&:after {
+			margin-left: 16px;
 		}
 	}
 }
