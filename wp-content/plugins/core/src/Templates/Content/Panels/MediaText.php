@@ -9,8 +9,6 @@ use Tribe\Project\Templates\Components\Content_Block;
 use Tribe\Project\Templates\Components\Text;
 use Tribe\Project\Templates\Components\Title;
 use Tribe\Project\Templates\Components\Button;
-use Tribe\Project\Templates\Components\Video;
-use Tribe\Project\Theme\Oembed_Filter;
 use Tribe\Project\Theme\Util;
 
 class MediaText extends Panel {
@@ -52,18 +50,14 @@ class MediaText extends Panel {
 	 * @return string
 	 */
 	protected function get_classes(): string {
-		$no_padding = '';
+		$padding       = $this->get_media_text_padding();
 		$wrapper_class = $this->get_media_text_wrapper_class();
-
-		if ( MediaTextPanel::OPTION_LAYOUT_FULL_BLEED === $this->panel_vars[ MediaTextPanel::FIELD_LAYOUT ] ) {
-			$no_padding = 's-wrapper--no-padding';
-		}
 
 		$classes = [
 			'panel',
 			's-wrapper',
 			'site-panel',
-			$no_padding,
+			$padding,
 			sprintf( 'site-panel--%s', $this->panel->get_type_object()->get_id() ),
 			$wrapper_class,
 		];
@@ -261,6 +255,21 @@ class MediaText extends Panel {
 		}
 
 		return $classes;
+	}
+
+	/**
+	 * Get Media + Text Media Padding Setting.
+	 *
+	 * @return string
+	 */
+	protected function get_media_text_padding(): string {
+		$no_padding = '';
+
+		if ( MediaTextPanel::OPTION_LAYOUT_FULL_BLEED === $this->panel_vars[ MediaTextPanel::FIELD_LAYOUT ] ) {
+			$no_padding = 's-wrapper--no-padding';
+		}
+
+		return $no_padding;
 	}
 
 	/**

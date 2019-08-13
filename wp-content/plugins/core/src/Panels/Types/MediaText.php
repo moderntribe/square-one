@@ -17,12 +17,12 @@ class MediaText extends Panel_Type_Config {
 	const FIELD_MEDIA_POSITION = 'media_position';
 	const FIELD_LAYOUT         = 'layout';
 
-	const OPTION_MEDIA_TYPE_IMAGE   = 'option_media_type_image';
-	const OPTION_MEDIA_TYPE_VIDEO	= 'option_media_type_video';
-	const OPTION_LAYOUT_IMAGE_RIGHT = 'option_media_position_right';
-	const OPTION_LAYOUT_IMAGE_LEFT  = 'option_media_position_left';
-	const OPTION_LAYOUT_BOXED       = 'option_layout_boxed';
-	const OPTION_LAYOUT_FULL_BLEED  = 'option_layout_full_bleed';
+	const OPTION_MEDIA_TYPE_IMAGE   = 'media_type_image';
+	const OPTION_MEDIA_TYPE_VIDEO	= 'media_type_video';
+	const OPTION_LAYOUT_IMAGE_RIGHT = 'media_position_right';
+	const OPTION_LAYOUT_IMAGE_LEFT  = 'media_position_left';
+	const OPTION_LAYOUT_BOXED       = 'layout_boxed';
+	const OPTION_LAYOUT_FULL_BLEED  = 'layout_full_bleed';
 
 	protected function panel() {
 
