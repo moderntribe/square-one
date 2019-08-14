@@ -130,7 +130,7 @@ class Image extends Component {
 	protected function should_lazy_load(): bool {
 		$has_image_id_or_path = ( ! empty( $this->options[ static::IMG_ID ] ) || ! empty( $this->options[ static::IMG_URL ] ) );
 
-		return $this->options[ static::USE_LAZYLOAD ] && ! $this->options[ static::AS_BG ] && $has_image_id_or_path;
+		return $this->options[ static::USE_LAZYLOAD ] && $has_image_id_or_path;
 	}
 
 	protected function get_image(): array {
