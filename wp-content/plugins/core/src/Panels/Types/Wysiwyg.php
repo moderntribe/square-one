@@ -12,6 +12,10 @@ class Wysiwyg extends Panel_Type_Config {
 	const FIELD_DESCRIPTION    = 'description';
 	const FIELD_COLUMNS        = 'columns';
 	const FIELD_COLUMN_CONTENT = 'column_content';
+	const FIELD_LAYOUT         = 'layout';
+
+	const OPTION_LAYOUT_LEFT   = 'left';
+	const OPTION_LAYOUT_CENTER = 'center';
 
 	protected function panel() {
 
@@ -23,6 +27,17 @@ class Wysiwyg extends Panel_Type_Config {
 		$panel->set_label( __( 'WYSIWYG Editor', 'tribe' ) );
 		$panel->set_description( __( 'Displays custom content in columns', 'tribe' ) );
 		$panel->set_thumbnail( $this->handler->thumbnail_url( 'wysiwyg.svg' ) );
+
+		// Panel Layout.
+		$panel->add_settings_field( new Fields\ImageSelect( [
+			'name'    => self::FIELD_LAYOUT,
+			'label'   => __( 'Layout', 'tribe' ),
+			'options' => [
+				self::OPTION_LAYOUT_CENTER => $this->handler->layout_icon_url( 'content-align-center.svg' ),
+				self::OPTION_LAYOUT_LEFT   => $this->handler->layout_icon_url( 'content-align-left.svg' ),
+			],
+			'default' => self::OPTION_LAYOUT_CENTER,
+		] ) );
 
 		$panel->add_field( new Fields\TextArea( [
 			'label'    => __( 'Description', 'tribe' ),

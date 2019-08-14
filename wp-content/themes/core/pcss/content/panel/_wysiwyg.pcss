@@ -1,0 +1,39 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Panels: WYSIWYG
+ *
+ * ----------------------------------------------------------------------------- */
+
+.site-panel--wysiwyg {
+
+	.s-header {
+		@media (--viewport-medium) {
+			width: 66.66%;
+			margin: 0 auto;
+		}
+	}
+
+	/* CASE: Layout Left */
+	&.site-panel--wysiwyg__layout-left .s-header {
+		text-align: left;
+
+		@media (--viewport-medium) {
+			margin: 0;
+		}
+	}
+
+	.s-title {
+		margin-bottom: 0;
+	}
+
+	.s-desc {
+
+		.s-title ~ & {
+			margin-top: var(--spacer-0);
+		}
+	}
+
+	.g-col:not(:last-child) {
+		margin-bottom: var(--spacer-4);
+	}
+}

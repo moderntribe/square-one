@@ -3,9 +3,15 @@
 namespace Tribe\Project\Templates\Content\Panels;
 
 use Tribe\Project\Panels\Types\Wysiwyg as Wysi;
+use Tribe\Project\Theme\Util;
 
 class Wysiwyg extends Panel {
 
+	/**
+	 * Get the data.
+	 *
+	 * @return array
+	 */
 	public function get_data(): array {
 		$data       = parent::get_data();
 		$panel_data = $this->get_mapped_panel_data();
@@ -14,15 +20,68 @@ class Wysiwyg extends Panel {
 		return $data;
 	}
 
+	/**
+	 * Get the mapped panel data.
+	 *
+	 * @return array
+	 */
 	public function get_mapped_panel_data(): array {
 		$data = [
-			'title'   => $this->get_title( $this->panel_vars[ Wysi::FIELD_TITLE ], [ 's-title', 'h2' ] ),
-			'columns' => $this->get_the_columns(),
+			'title'           => $this->get_title( $this->panel_vars[ Wysi::FIELD_TITLE ], [ 's-title', 'h2' ] ),
+			'wrapper_classes' => $this->get_wrapper_classes(),
+			'columns'         => $this->get_the_columns(),
 		];
 
 		return $data;
 	}
 
+	/**
+	 * Overrides `get_classes()` from the Panel parent class.
+	 *
+	 * Return value is available in the twig template via the `classes` twig variable in the parent class.
+	 *
+	 * @return string
+	 */
+	protected function get_classes(): string {
+		$classes = [
+			'panel',
+			's-wrapper',
+			'site-panel',
+			sprintf( 'site-panel--%s', $this->panel->get_type_object()->get_id() ),
+			sprintf( 'site-panel--wysiwyg__layout-%s', $this->panel_vars[ Wysi::FIELD_LAYOUT ] ),
+		];
+		return Util::class_attribute( $classes );
+	}
+
+	/**
+	 * Get WYSIWYG row wrapper classes.
+	 *
+	 * @return string
+	 */
+	protected function get_wrapper_classes() {
+		$classes = [];
+		$columns = $this->panel_vars[ Wysi::FIELD_COLUMNS ];
+
+		if ( empty( $columns ) ) {
+			return Util::class_attribute( $classes, false );
+		}
+
+		if ( count( $columns ) >= 3 ) {
+			$classes[] = 'g-row--col-3--min-full';
+		}
+
+		if ( count( $columns ) === 2 ) {
+			$classes[] = 'g-row--col-2--min-full';
+		}
+
+		return Util::class_attribute( $classes, false );
+	}
+
+	/**
+	 * Get the columns data.
+	 *
+	 * @return array
+	 */
 	protected function get_the_columns(): array {
 		$columns = [];
 
@@ -38,6 +97,10 @@ class Wysiwyg extends Panel {
 		return $columns;
 	}
 
+	/**
+	 * Return instance.
+	 * @return mixed
+	 */
 	public static function instance() {
 		return tribe_project()->container()['twig.templates.content/panels/wysiwyg'];
 	}
