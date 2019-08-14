@@ -27,3 +27,18 @@
 	top: 0;
 	width: 100%;
 }
+
+.c-image--overlay {
+
+	&:before {
+		content: '';
+		background: var(--color-black-a-30);
+		bottom: 0;
+		left: 0;
+		position: absolute;
+		right: 0;
+		top: 0;
+		width: 100%;
+		z-index: 1;
+	}
+}

@@ -107,7 +107,7 @@ class Hero extends Panel {
 			Image::IMG_ID          => $this->panel_vars[ HeroPanel::FIELD_IMAGE ],
 			Image::IMG_ALT_TEXT    => esc_attr( $this->panel_vars[ HeroPanel::FIELD_TITLE ] ),
 			Image::SHIM            => $image_placeholder,
-			Image::COMPONENT_CLASS => 'c-image hero__image',
+			Image::COMPONENT_CLASS => 'c-image c-image--overlay hero__image',
 			Image::WRAPPER_CLASS   => 'c-image__bg',
 			Image::AS_BG           => true,
 			Image::USE_LAZYLOAD    => true,
