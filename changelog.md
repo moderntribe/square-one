@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ## [2019.08]
 * Added: Layout settings to WYSIWYG panel
+* Updated: Hero panel fields and styling to match the Theme Roadmap designs
 
 ## [2019.06]
 * Add a utility for generating required pages
