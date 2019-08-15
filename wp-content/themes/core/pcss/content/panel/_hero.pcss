@@ -17,8 +17,8 @@
 }
 
 /* CASE: Split Right/Left Layout */
-.hero--layout-content-split-left,
-.hero--layout-content-split-right {
+.site-panel--hero__layout-content-split-left,
+.site-panel--hero__layout-content-split-right {
 	width: 100%;
 	display: flex;
 	flex-flow: column nowrap;
@@ -44,8 +44,8 @@
 	height: 100%;
 
 	/* CASE: Split Right/Left Layout */
-	.hero--layout-content-split-left &,
-	.hero--layout-content-split-right & {
+	.site-panel--hero__layout-content-split-left &,
+	.site-panel--hero__layout-content-split-right & {
 		position: relative;
 
 		&:before {
@@ -67,7 +67,7 @@
 	}
 
 	/* CASE: Split Right Layout */
-	.hero--layout-content-split-right & {
+	.site-panel--hero__layout-content-split-right & {
 		@media (--viewport-medium) {
 			left: auto;
 			right: 0;
@@ -80,8 +80,8 @@
 	padding-bottom: var(--spacer-6);
 
 	/* CASE: Split Right/Left Layout */
-	.hero--layout-content-split-left &,
-	.hero--layout-content-split-right & {
+	.site-panel--hero__layout-content-split-left &,
+	.site-panel--hero__layout-content-split-right & {
 		padding-top: var(--spacer-2);
 		padding-bottom: var(--spacer-2);
 
@@ -93,7 +93,7 @@
 	}
 
 	/* CASE: Split Right Layout */
-	.hero--layout-content-split-right & {
+	.site-panel--hero__layout-content-split-right & {
 		@media (--viewport-medium) {
 			margin-left: 0;
 			margin-right: 40%;

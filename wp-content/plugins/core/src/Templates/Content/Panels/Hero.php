@@ -43,9 +43,12 @@ class Hero extends Panel {
 	protected function get_classes(): string {
 		$classes = [
 			'panel',
+			's-wrapper',
+			's-wrapper--no-padding',
 			'site-panel',
 			sprintf( 'site-panel--%s', $this->panel->get_type_object()->get_id() ),
-			sprintf( 'hero--layout-%s', $this->panel_vars[ HeroPanel::FIELD_LAYOUT ] ),
+			sprintf( 'site-panel--hero__layout-%s', $this->panel_vars[ HeroPanel::FIELD_LAYOUT ] ),
+			sprintf( 'site-panel--hero__text-color-%s', $this->panel_vars[ HeroPanel::FIELD_TEXT_COLOR ] ),
 			$this->panel_vars[ HeroPanel::FIELD_BG_COLOR ],
 		];
 
