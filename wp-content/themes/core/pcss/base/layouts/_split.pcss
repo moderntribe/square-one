@@ -1,0 +1,113 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Layout: Split
+ *
+ * Usage: Panel with Content Block and Image Block (50/50, 60/40, etc.)
+ *
+ * Example:
+ * <div class="l-split-image-right">
+ *   <div class="split__image">
+ *     ...
+ *   </div>
+  *  <div class="split__content">
+ *     ...
+ *   </div>
+ * </div>
+ *
+ * ----------------------------------------------------------------------------- */
+
+/* Layout: Split Image Right - 50/50 */
+
+.l-split-image-right {
+	position: relative;
+	display: flex;
+	flex-flow: column nowrap;
+	width: 100%;
+
+	@media (--viewport-full) {
+		flex-flow: row nowrap;
+	}
+
+	.l-split-image__content {
+		@media (--viewport-full) {
+			width: 50%;
+			margin-right: 50%;
+		}
+	}
+
+	.l-split-image__image { /* Image is absolutely positioned for full height */
+		@media (--viewport-full) {
+			position: absolute;
+			width: 50%;
+			height: 100%;
+			top: 0;
+			right: 0;
+		}
+	}
+}
+
+/* Layout: Split Image Left - 50/50 */
+
+.l-split-image-left {
+	position: relative;
+	display: flex;
+	flex-flow: column nowrap;
+	width: 100%;
+
+	@media (--viewport-full) {
+		flex-flow: row nowrap;
+	}
+
+	.l-split-image__image { /* Image is absolutely positioned for full height */
+		@media (--viewport-full) {
+			position: absolute;
+			width: 50%;
+			height: 100%;
+			top: 0;
+			left: 0;
+		}
+	}
+
+	.l-split-image__content {
+		@media (--viewport-full) {
+			width: 50%;
+			margin-left: 50%;
+		}
+	}
+}
+
+/* Layout: Split Image Right - 60/40 */
+
+.l-split-image-right--60-40 {
+
+	.l-split-image__content {
+		@media (--viewport-full) {
+			width: 60%;
+			margin-right: 40%;
+		}
+	}
+
+	.l-split-image__image { /* Image is absolutely positioned for full height */
+		@media (--viewport-full) {
+			width: 40%;
+		}
+	}
+}
+
+/* Layout: Split Image Left - 40/60 */
+
+.l-split-image-left--40-60 {
+
+	.l-split-image__image { /* Image is absolutely positioned for full height */
+		@media (--viewport-full) {
+			width: 40%;
+		}
+	}
+
+	.l-split-image__content {
+		@media (--viewport-full) {
+			width: 60%;
+			margin-left: 40%;
+		}
+	}
+}

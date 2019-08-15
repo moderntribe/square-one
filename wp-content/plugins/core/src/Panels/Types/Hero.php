@@ -37,8 +37,8 @@ class Hero extends Panel_Type_Config {
 			'options' => [
 				self::FIELD_LAYOUT_OPTION_CONTENT_LEFT        => $this->handler->layout_icon_url( 'card-left.svg' ),
 				self::FIELD_LAYOUT_OPTION_CONTENT_CENTER      => $this->handler->layout_icon_url( 'card-center.svg' ),
-				self::FIELD_LAYOUT_OPTION_CONTENT_SPLIT_LEFT  => $this->handler->layout_icon_url( 'imagetext-right.svg' ),
-				self::FIELD_LAYOUT_OPTION_CONTENT_SPLIT_RIGHT => $this->handler->layout_icon_url( 'imagetext-left.svg' ),
+				self::FIELD_LAYOUT_OPTION_CONTENT_SPLIT_LEFT  => $this->handler->layout_icon_url( 'imagetext-left.svg' ),
+				self::FIELD_LAYOUT_OPTION_CONTENT_SPLIT_RIGHT => $this->handler->layout_icon_url( 'imagetext-right.svg' ),
 			],
 			'default' => self::FIELD_LAYOUT_OPTION_CONTENT_LEFT,
 		] ) );

@@ -41,18 +41,31 @@ class Hero extends Panel {
 	}
 
 	protected function get_classes(): string {
+		$layout_class = $this->get_layout_class();
+
 		$classes = [
 			'panel',
 			's-wrapper',
 			's-wrapper--no-padding',
 			'site-panel',
 			sprintf( 'site-panel--%s', $this->panel->get_type_object()->get_id() ),
-			sprintf( 'site-panel--hero__layout-%s', $this->panel_vars[ HeroPanel::FIELD_LAYOUT ] ),
+			$layout_class,
 			sprintf( 'site-panel--hero__text-color-%s', $this->panel_vars[ HeroPanel::FIELD_TEXT_COLOR ] ),
 			$this->panel_vars[ HeroPanel::FIELD_BG_COLOR ],
 		];
 
 		return Util::class_attribute( $classes );
+	}
+
+	protected function get_layout_class(): string {
+		$layout_class = sprintf( 'site-panel--hero__layout-%s', $this->panel_vars[ HeroPanel::FIELD_LAYOUT ] );
+
+		if ( $this->is_split_layout() ) {
+			$direction    = $this->panel_vars[ HeroPanel::FIELD_LAYOUT ] === HeroPanel::FIELD_LAYOUT_OPTION_CONTENT_SPLIT_LEFT ? 'left' : 'right';
+			$layout_class .= sprintf( ' l-split-image-%s l-split-image-%s--60-40', $direction, $direction );
+		}
+
+		return $layout_class;
 	}
 
 	protected function get_row_classes(): string {
@@ -110,7 +123,7 @@ class Hero extends Panel {
 			Image::IMG_ID          => $this->panel_vars[ HeroPanel::FIELD_IMAGE ],
 			Image::IMG_ALT_TEXT    => esc_attr( $this->panel_vars[ HeroPanel::FIELD_TITLE ] ),
 			Image::SHIM            => $image_placeholder,
-			Image::COMPONENT_CLASS => 'c-image c-image--overlay hero__image',
+			Image::COMPONENT_CLASS => 'c-image c-image--overlay hero__image l-split-image__image',
 			Image::WRAPPER_CLASS   => 'c-image__bg',
 			Image::AS_BG           => true,
 			Image::USE_LAZYLOAD    => true,
