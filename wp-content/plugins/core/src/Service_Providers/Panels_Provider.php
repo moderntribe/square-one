@@ -14,6 +14,7 @@ class Panels_Provider extends Service_Provider {
 		Panels\Types\Hero::class,
 		Panels\Types\Accordion::class,
 		Panels\Types\CardGrid::class,
+		Panels\Types\MediaText::class,
 		Panels\Types\Gallery::class,
 		Panels\Types\Interstitial::class,
 		Panels\Types\MicroNavButtons::class,

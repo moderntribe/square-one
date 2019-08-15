@@ -63,6 +63,10 @@ class Twig_Service_Provider extends Service_Provider {
 			return new Templates\Content\Panels\Accordion( 'content/panels/accordion.twig', $container['twig'] );
 		};
 
+		$container['twig.templates.content/panels/mediatext'] = function ( Container $container ) {
+			return new Templates\Content\Panels\MediaText( 'content/panels/mediatext.twig', $container['twig'] );
+		};
+
 		$container['twig.templates.content/panels/cardgrid'] = function ( Container $container ) {
 			return new Templates\Content\Panels\CardGrid( 'content/panels/cardgrid.twig', $container['twig'] );
 		};
