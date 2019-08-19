@@ -15,6 +15,7 @@ class Gallery extends Panel_Type_Config {
 	const FIELD_LIGHTBOX       = 'lightbox';
 	const FIELD_CONTENT_LAYOUT = 'content_layout';
 	const FIELD_COLUMNS        = 'columns';
+	const FIELD_BUTTON_LABEL   = 'button_label';
 
 	const OPTION_LIGHTBOX_ON     = 'lightbox_on';
 	const OPTION_LIGHTBOX_OFF    = 'lightbox_off';
@@ -72,6 +73,11 @@ class Gallery extends Panel_Type_Config {
 		$panel->add_field( new Fields\ImageGallery( [
 			'label' => __( 'Image Gallery', 'tribe' ),
 			'name'  => self::FIELD_GALLERY,
+		] ) );
+
+		$panel->add_field( new Fields\Text( [
+			'name'     => self::FIELD_BUTTON_LABEL,
+			'label'    => __( 'Button Label', 'tribe' ),
 		] ) );
 
 		return $panel;

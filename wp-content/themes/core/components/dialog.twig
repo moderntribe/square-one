@@ -1,24 +1,33 @@
 {#
 
-Component: Lightbox / Dialog
+Component: Dialog / Popup
 
 Documentation: docs\theme\components\dialog.md
 
 NPM link: https://www.npmjs.com/package/mt-a11y-dialog
 
-Controller: wp-content\plugins\core\src\Templates\Components\Lightbox.php
-PostCSS: wp-content\plugins\core\assets\theme\pcss\components\_lightbox.pcss
+Controller: wp-content\plugins\core\src\Templates\Components\Dialog.php
+PostCSS: wp-content\plugins\core\assets\theme\pcss\components\_dialog.pcss
 
 Description: ...
 
 Attributes:
 	{
 		content: 'c-lightbox', // { string }
+		content_overlay_classes: overlay classes // { string }
+		content_overlay_wrapper_classes: overlay wrapper classes // { string }
+		content_overlay_wrapper_inner: overlay wrapper inner classes // { string }
     }
  #}
 
 {% if content %}
-    <script data-js="c-dialog" type="text/template">
-        {{ content }}
+    <script data-js="c-dialog-data" type="text/template">
+        <div class="{{ content_overlay_classes }}">
+            <div class="{{ content_overlay_wrapper_classes }}">
+                <div class="{{ content_overlay_wrapper_inner }}">
+                     {{ content }}
+                </div>
+            </div>
+        </div>
     </script>
 {% endif %}

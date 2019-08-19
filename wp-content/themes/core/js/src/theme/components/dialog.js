@@ -4,10 +4,10 @@
  */
 
 import Dialog from 'mt-a11y-dialog';
+import Swiper from 'swiper';
 import * as tools from 'utils/tools';
 
 const el = {
-	wrap: tools.getNodes( 'site-wrap', true ),
 	container: tools.getNodes( 'c-dialog-trigger', true ),
 };
 
@@ -15,11 +15,33 @@ const instances = {};
 
 const options = {
 	dialog: {
-		appendTarget: el.wrap,
-		effect: 'fade',
-		effectSpeed: 600,
-		trigger: el.container,
+		appendTarget: '[data-js="site-wrap"]',
+		trigger: '[data-js="c-dialog-trigger"]',
 	},
+	swiper: {
+		a11y: true,
+		grabCursor: true,
+		keyboard: true,
+		pagination: {
+			el: '.swiper-pagination',
+			type: 'fraction',
+		},
+		navigation: {
+			nextEl: '.swiper-button-next',
+			prevEl: '.swiper-button-prev',
+		},
+		spaceBetween: 60,
+	},
+};
+
+/**
+ * @function initSwiper
+ * @description
+ */
+
+const initSwiper = ( dialogEl ) => {
+	const gallery = tools.getNodes( 'c-slider', false, dialogEl )[0];
+	instances.swiper = new Swiper( gallery, options.swiper );
 };
 
 /**
@@ -32,12 +54,21 @@ const initDialog = () => {
 };
 
 /**
+ * @function bindEvents
+ * @description Bind the events for this module here.
+ */
+
+const bindEvents = () => {
+	instances.dialog.on('show', initSwiper);
+};
+
+/**
  * @function init
  * @description Kick off this modules functions
  */
 
 const init = () => {
-	if ( ! el.container.length ) {
+	if ( ! el.container ) {
 		return;
 	}
 

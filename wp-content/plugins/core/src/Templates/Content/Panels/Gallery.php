@@ -3,6 +3,8 @@
 namespace Tribe\Project\Templates\Content\Panels;
 
 use Tribe\Project\Panels\Types\Gallery as GalleryPanel;
+use Tribe\Project\Templates\Components\Button;
+use Tribe\Project\Templates\Components\Dialog;
 use Tribe\Project\Templates\Components\Image as ImageComponent;
 use Tribe\Project\Templates\Components\Image;
 use Tribe\Project\Templates\Components\Slider as SliderComponent;
@@ -33,8 +35,10 @@ class Gallery extends Panel {
 		$data = [
 			'title'          => $this->get_title( $this->panel_vars[ GalleryPanel::FIELD_TITLE ], [ 's-title', 'h2' ] ),
 			'gallery_images' => $this->get_gallery_images(),
+			'dialog'         => $this->get_dialog_popup(),
 			'columns'        => $this->get_column_layout(),
 			'content_layout' => $this->get_content_layout(),
+			'button'		 => $this->get_button(),
 		];
 
 		return $data;
@@ -98,8 +102,54 @@ class Gallery extends Panel {
 	 */
 	protected function get_gallery_images(): array {
 		$gallery_images = $this->get_slides( Image_Sizes::CORE_SQUARE );
-
 		return $gallery_images;
+	}
+
+	/**
+	 * Get the Slider
+	 *
+	 * @return string
+	 */
+	protected function get_slider(): string {
+		$main_attrs = [];
+
+		if ( is_panel_preview() ) {
+			$main_attrs[ 'data-depth' ]    = $this->panel->get_depth();
+			$main_attrs[ 'data-name' ]     = SliderComponent::SLIDES;
+			$main_attrs[ 'data-livetext' ] = true;
+		}
+
+		$options = [
+			SliderComponent::SLIDES          => $this->get_slides(),
+			SliderComponent::THUMBNAILS      => false,
+			SliderComponent::SHOW_CAROUSEL   => false,
+			SliderComponent::SHOW_ARROWS     => true,
+			SliderComponent::SHOW_PAGINATION => false,
+			SliderComponent::MAIN_CLASSES    => [ 'c-slider__main' ],
+			SliderComponent::MAIN_ATTRS      => $main_attrs,
+		];
+
+		$slider = SliderComponent::factory( $options );
+
+		return $slider->render();
+	}
+
+	/**
+	 * Get the Dialog Popup
+	 *
+	 * @return string
+	 */
+	protected function get_dialog_popup(): string {
+		$options = [
+			Dialog::CONTENT                         => $this->get_slider(),
+			Dialog::CONTENT_OVERLAY_CLASSES         => [ 'c-dialog__image-gallery-overlay' ],
+			Dialog::CONTENT_OVERLAY_WRAPPER_CLASSES => [ 'c-dialog__image-gallery-overlay-wrapper' ],
+			Dialog::CONTENT_OVERLAY_WRAPPER_INNER   => [ 'c-dialog__image-gallery-overlay-wrapper-inner' ],
+		];
+
+		$dialog = Dialog::factory( $options );
+
+		return $dialog->render();
 	}
 
 	/**
@@ -171,6 +221,30 @@ class Gallery extends Panel {
 		}
 
 		return $classes;
+	}
+
+	/**
+	 * Get the button using the Button Component.
+	 *
+	 * @return string
+	 */
+	protected function get_button(): string {
+		$btn_label = $this->panel_vars[ GalleryPanel::FIELD_BUTTON_LABEL ];
+
+		if ( empty( $btn_label ) ) {
+			return '';
+		}
+
+		$options = [
+			Button::LABEL       => esc_html( $btn_label ),
+			Button::BTN_AS_LINK => false,
+			Button::CLASSES     => [ 'c-btn site-panel--gallery__btn' ],
+			Button::ATTRS		=> [ 'data-js="c-dialog-trigger" data-content="c-dialog-data"' ],
+		];
+
+		$button_obj = Button::factory( $options );
+
+		return $button_obj->render();
 	}
 
 	/**

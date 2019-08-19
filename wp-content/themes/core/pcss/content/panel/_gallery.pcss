@@ -6,38 +6,11 @@
 
 .site-panel--gallery {
 
-	.c-slider__slide {
-		aspect-ratio: '16:10';
-	}
+	.g-col {
+		padding-bottom: var(--spacer-2);
 
-	.c-slider__main--crop {
-
-		.tribe-image {
-			position: absolute;
-			width: 100%;
-			height: 100%;
-			top: 0;
-			left: 0;
-			background-position: 50% 50%;
-			background-size: cover;
-		}
-	}
-
-	.c-slider__main--letterbox {
-
-		.tribe-image {
-			position: absolute;
-			width: 100%;
-			height: 100%;
-			top: 0;
-			left: 0;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-		}
-
-		img {
-			max-height: 100%;
+		@media (--viewport-medium) {
+			padding-bottom: var(--spacer-4);
 		}
 	}
 }
@@ -52,13 +25,9 @@
 	}
 }
 
-.site-panel--gallery {
+.c-btn.site-panel--gallery__btn {
 
-	.g-col {
-		padding-bottom: var(--spacer-2);
-
-		@media (--viewport-medium) {
-			padding-bottom: var(--spacer-4);
-		}
+	.t-content & {
+		margin-top: 20px;
 	}
 }

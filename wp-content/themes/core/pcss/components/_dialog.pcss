@@ -4,6 +4,72 @@
  *
  * ----------------------------------------------------------------------------- */
 
-.dialog[aria-hidden='true'] {
+.c-dialog[aria-hidden='true'] {
 	display: none;
+}
+
+.c-dialog__image--gallery {
+	position: relative;
+
+	&:after {
+		content: '';
+		background: var(--color-black-a-60);
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		width: 100%;
+		z-index: 1;
+	}
+}
+
+.c-dialog__image-gallery-overlay {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	width: 100%;
+	padding: 20px 62px 20px 0;
+	z-index: 2;
+	color: var(--color-white);
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+
+	@media (--viewport-medium) {
+		padding: 36px calc(var(--grid-gutter) + 80px) 0 0;
+	}
+}
+
+.c-dialog__image-gallery-overlay-wrapper {
+	margin-left: 0;
+
+	@media (--viewport-medium) {
+		margin-left: auto;
+		margin-right: 0;
+		width: 100%;
+	}
+}
+
+.c-dialog__image-gallery-overlay-wrapper-inner {
+	@media (--viewport-medium) {
+		padding-top: 2px;
+		padding-left: 36px;
+		padding-bottom: 36px;
+	}
+}
+
+.c-dialog__image-gallery-label {
+
+}
+
+.c-dialog__image-gallery-title {
+	margin-top: 12px;
+
+	@media (--viewport-medium) {
+		margin-top: 8px;
+		font-size: 36px;
+	}
 }
