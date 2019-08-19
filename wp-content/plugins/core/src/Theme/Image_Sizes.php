@@ -8,6 +8,7 @@ class Image_Sizes {
 	const CORE_FULL      = 'core-full';
 	const CORE_MOBILE    = 'core-mobile';
 	const CORE_SQUARE    = 'core-square';
+	const CORE_RECTANGLE = 'core-rectangle';
 	const SOCIAL_SHARE   = 'social-share';
 	const COMPONENT_CARD = 'component-card';
 
@@ -25,6 +26,11 @@ class Image_Sizes {
 		self::CORE_SQUARE => [
 			'width'  => 800,
 			'height' => 800,
+			'crop'   => true,
+		],
+		self::CORE_RECTANGLE => [
+			'width'  => 1072,
+			'height' => 611,
 			'crop'   => true,
 		],
 		self::SOCIAL_SHARE => [

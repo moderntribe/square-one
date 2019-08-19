@@ -35,15 +35,6 @@ Attributes:
 				</div>
 			{% endfor %}
 		</div>
-		{% if show_arrows %}
-			<div class="c-slider__arrows">
-				<div class="c-slider__button c-slider__button--prev swiper-button-prev"></div>
-				<div class="c-slider__button c-slider__button--next swiper-button-next"></div>
-			</div>
-		{% endif %}
-		{% if show_pagination %}
-			<div class="c-slider__pagination swiper-pagination" data-js="c-slider-pagination"></div>
-		{% endif %}
 	</div>
 	{% if show_carousel %}
 		<div class="c-slider__carousel swiper-container" {{ carousel_attrs }}>
@@ -55,5 +46,15 @@ Attributes:
 				{% endfor %}
 			</div>
 		</div>
+	{% endif %}
+
+	{% if show_arrows %}
+		<div class="c-slider__arrows">
+			<div class="c-slider__button c-slider__button--prev swiper-button-prev"></div>
+			<div class="c-slider__button c-slider__button--next swiper-button-next"></div>
+		</div>
+	{% endif %}
+	{% if show_pagination %}
+		<div class="c-slider__pagination swiper-pagination" data-js="c-slider-pagination"></div>
 	{% endif %}
 </div>

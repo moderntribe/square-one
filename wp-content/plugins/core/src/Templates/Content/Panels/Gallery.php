@@ -2,12 +2,13 @@
 
 namespace Tribe\Project\Templates\Content\Panels;
 
+use Tribe\Project\Panels\Types\ContentSlider as ContentSliderPanel;
 use Tribe\Project\Panels\Types\Gallery as GalleryPanel;
 use Tribe\Project\Templates\Components\Button;
 use Tribe\Project\Templates\Components\Dialog;
 use Tribe\Project\Templates\Components\Image as ImageComponent;
-use Tribe\Project\Templates\Components\Image;
 use Tribe\Project\Templates\Components\Slider as SliderComponent;
+use Tribe\Project\Templates\Components\Text;
 use Tribe\Project\Theme\Image_Sizes;
 use Tribe\Project\Theme\Util;
 
@@ -72,6 +73,57 @@ class Gallery extends Panel {
 	 * @return array
 	 */
 	protected function get_slides( $size = 'full' ): array {
+		$slide_ids    = $this->panel_vars[ GalleryPanel::FIELD_GALLERY ];
+
+		if ( empty( $slide_ids ) ) {
+			return [];
+		}
+
+		return array_map( function ( $slide_id ) use ( $size ) {
+			$slide_markup = '';
+
+			$options = [
+				ImageComponent::IMG_ID        => $slide_id,
+				ImageComponent::AS_BG         => false,
+				ImageComponent::USE_LAZYLOAD  => false,
+				ImageComponent::ECHO          => false,
+				ImageComponent::USE_WRAPPER   => false,
+				ImageComponent::SRC_SIZE      => Image_Sizes::CORE_RECTANGLE,
+			];
+
+			$image = ImageComponent::factory( $options );
+
+			$slide_markup .= $image->render();
+
+			$thumbnail_image = get_posts( array( 'p' => $slide_id, 'post_type' => 'attachment' ) );
+
+			if ( empty( $thumbnail_image ) && empty( $thumbnail_image[0] ) ) {
+				return '';
+			}
+
+			$options = [
+				Text::CLASSES => [ 'site-panel--gallery__slide-caption' ],
+				Text::TEXT    => esc_html( $thumbnail_image[0]->post_excerpt ),
+			];
+
+			$text_object = Text::factory( $options );
+
+			$slide_markup .= $text_object->render();
+
+			$slides[] = $slide_markup;
+
+			return $slide_markup;
+
+		}, $slide_ids );
+	}
+
+	/**
+	 * Get the gallery images.
+	 *
+	 * @param string $size
+	 * @return array
+	 */
+	protected function get_gallery_images( $size = 'full' ): array {
 		$slide_ids = $this->panel_vars[ GalleryPanel::FIELD_GALLERY ];
 
 		if ( empty( $slide_ids ) ) {
@@ -81,11 +133,12 @@ class Gallery extends Panel {
 		return array_map( function ( $slide_id ) use ( $size ) {
 
 			$options = [
-				ImageComponent::IMG_ID       => $slide_id,
-				ImageComponent::AS_BG        => false,
-				ImageComponent::USE_LAZYLOAD => false,
-				ImageComponent::ECHO         => false,
-				ImageComponent::SRC_SIZE     => $size,
+				ImageComponent::IMG_ID        => $slide_id,
+				ImageComponent::AS_BG         => false,
+				ImageComponent::USE_LAZYLOAD  => false,
+				ImageComponent::ECHO          => false,
+				ImageComponent::USE_WRAPPER   => false,
+				ImageComponent::SRC_SIZE      => Image_Sizes::CORE_SQUARE,
 			];
 
 			$image = ImageComponent::factory( $options );
@@ -96,22 +149,14 @@ class Gallery extends Panel {
 	}
 
 	/**
-	 * Get the gallery images.
-	 *
-	 * @return array
-	 */
-	protected function get_gallery_images(): array {
-		$gallery_images = $this->get_slides( Image_Sizes::CORE_SQUARE );
-		return $gallery_images;
-	}
-
-	/**
 	 * Get the Slider
 	 *
 	 * @return string
 	 */
 	protected function get_slider(): string {
-		$main_attrs = [];
+		$main_attrs = [
+			'data-swiper-options' => '',
+		];
 
 		if ( is_panel_preview() ) {
 			$main_attrs[ 'data-depth' ]    = $this->panel->get_depth();
@@ -119,12 +164,22 @@ class Gallery extends Panel {
 			$main_attrs[ 'data-livetext' ] = true;
 		}
 
+//		$swiper_options = '{
+//		"a11y":true,
+//		"grabCursor":true,
+//		"keyboard":true,
+//		"spaceBetween":60,
+//		"pagination":{"el":".swiper-pagination","type":"fraction",},
+//		"navigation":{"nextEl":".swiper-button-next","prevEl":".swiper-button-prev",}}';
+//
+//		$main_attrs['data-swiper-options'] = $swiper_options;
+
 		$options = [
 			SliderComponent::SLIDES          => $this->get_slides(),
 			SliderComponent::THUMBNAILS      => false,
 			SliderComponent::SHOW_CAROUSEL   => false,
 			SliderComponent::SHOW_ARROWS     => true,
-			SliderComponent::SHOW_PAGINATION => false,
+			SliderComponent::SHOW_PAGINATION => true,
 			SliderComponent::MAIN_CLASSES    => [ 'c-slider__main' ],
 			SliderComponent::MAIN_ATTRS      => $main_attrs,
 		];
@@ -141,10 +196,10 @@ class Gallery extends Panel {
 	 */
 	protected function get_dialog_popup(): string {
 		$options = [
-			Dialog::CONTENT                         => $this->get_slider(),
-			Dialog::CONTENT_OVERLAY_CLASSES         => [ 'c-dialog__image-gallery-overlay' ],
-			Dialog::CONTENT_OVERLAY_WRAPPER_CLASSES => [ 'c-dialog__image-gallery-overlay-wrapper' ],
-			Dialog::CONTENT_OVERLAY_WRAPPER_INNER   => [ 'c-dialog__image-gallery-overlay-wrapper-inner' ],
+			Dialog::CONTENT                 => $this->get_slider(),
+			Dialog::CONTENT_OVERLAY_CLASSES => [ 'c-dialog__image-gallery-overlay' ],
+			Dialog::CONTENT_WRAPPER_CLASSES => [ 'c-dialog__image-gallery-overlay-wrapper' ],
+			Dialog::CONTENT_INNER_CLASSES   => [ 'c-dialog__image-gallery-overlay-wrapper-inner'],
 		];
 
 		$dialog = Dialog::factory( $options );
@@ -239,7 +294,10 @@ class Gallery extends Panel {
 			Button::LABEL       => esc_html( $btn_label ),
 			Button::BTN_AS_LINK => false,
 			Button::CLASSES     => [ 'c-btn site-panel--gallery__btn' ],
-			Button::ATTRS		=> [ 'data-js="c-dialog-trigger" data-content="c-dialog-data"' ],
+			Button::ATTRS		=> [
+				'data-js'      => 'c-dialog-trigger',
+				'data-content' => 'c-dialog-data'
+			],
 		];
 
 		$button_obj = Button::factory( $options );
