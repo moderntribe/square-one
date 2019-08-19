@@ -6,6 +6,7 @@
 import accordion from './accordion';
 import slider from './slider';
 import tabs from './tabs';
+import dialog from './dialog';
 
 /**
  * @function init
@@ -16,6 +17,7 @@ const init = () => {
 	accordion();
 	slider();
 	tabs();
+	dialog();
 };
 
 export default init;

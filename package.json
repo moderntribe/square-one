@@ -72,6 +72,7 @@
     "lodash": "^4.17.10",
     "moment": "^2.22.2",
     "moment-timezone": "^0.5.23",
+    "mt-a11y-dialog": "^5.0.4",
     "object-hash": "^1.3.0",
     "object-to-formdata": "^1.6.3",
     "prop-types": "^15.6.2",

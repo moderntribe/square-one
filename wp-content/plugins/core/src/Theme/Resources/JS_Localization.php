@@ -16,7 +16,8 @@ class JS_Localization {
 	public function get_data() {
 		$js_i18n_array = array(
 			'help_text' => array(
-				'msg_limit'   => __( 'There is a limit to the messages you can post.', 'tribe' )
+				'msg_limit'    => __( 'There is a limit to the messages you can post.', 'tribe' ),
+				'dialog_close' => __( 'Close Popup', 'tribe' ),
 			),
 			'tooltips' => array(
 				'add_to_save'   => __( 'Add Photo to Saved Items', 'tribe' ),

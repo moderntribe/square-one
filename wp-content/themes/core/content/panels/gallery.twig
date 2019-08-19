@@ -2,13 +2,33 @@
 
 {% extends "content/panels/panel.twig" %}
 
+{% block header %}{% endblock %}
+
 {% block content %}
 
 	<div class="s-content">
-		<div class="g-row">
+		<div class="g-row {{ content_layout }}">
+			<div class="g-col">
+				{% if title or description %}
+					<header class="s-header">
 
-			{{ slider }}
+						{{ title }}
 
+						{% block description %}
+							{{ description }}
+						{% endblock %}
+
+					</header>
+				{% endif %}
+			</div>
+			<div class="g-col">
+				<div class="g-row {{ columns }}">
+					<div class="g-col">Thumb</div>
+					<div class="g-col">Thumb</div>
+					<div class="g-col">Thumb</div>
+					<div class="g-col">Thumb</div>
+				</div>
+			</div>
 		</div>
 	</div>
 

@@ -74,11 +74,6 @@ class Gallery extends Panel_Type_Config {
 			'name'  => self::FIELD_GALLERY,
 		] ) );
 
-		$panel->add_field( new Fields\Link( [
-			'name'  => self::FIELD_CTA,
-			'label' => __( 'Call To Action Link', 'tribe' ),
-		] ) );
-
 		return $panel;
 
 	}

@@ -6,6 +6,7 @@ use Tribe\Project\Panels\Types\Gallery as GalleryPanel;
 use Tribe\Project\Templates\Components\Image as ImageComponent;
 use Tribe\Project\Templates\Components\Image;
 use Tribe\Project\Templates\Components\Slider as SliderComponent;
+use Tribe\Project\Theme\Util;
 
 class Gallery extends Panel {
 
@@ -29,9 +30,10 @@ class Gallery extends Panel {
 	 */
 	public function get_mapped_panel_data(): array {
 		$data = [
-			'title'       => $this->get_title( $this->panel_vars[ GalleryPanel::FIELD_TITLE ], [ 's-title', 'h2' ] ),
-			'slider'      => $this->get_slider(),
-			'lightbox_on' => $this->lightbox_on(),
+			'title'          => $this->get_title( $this->panel_vars[ GalleryPanel::FIELD_TITLE ], [ 's-title', 'h2' ] ),
+			'gallery'        => $this->get_slider(),
+			'columns'        => $this->get_column_layout(),
+			'content_layout' => $this->get_content_layout(),
 		];
 
 		return $data;
@@ -110,7 +112,7 @@ class Gallery extends Panel {
 		$classes = '';
 
 		if ( GalleryPanel::OPTION_CONTENT_INLINE === $this->panel_vars[ GalleryPanel::FIELD_CONTENT_LAYOUT ] ) {
-			$classes[] = 'site-panel--gallery--content-inline';
+			$classes = 'g-row--col-2--min-full';
 		}
 
 		return $classes;
@@ -126,15 +128,15 @@ class Gallery extends Panel {
 		$classes = '';
 
 		if ( GalleryPanel::OPTION_TWO_COLUMNS === $this->panel_vars[ GalleryPanel::FIELD_COLUMNS ] ) {
-			$classes[] = 'g-row--col-2--min-full';
+			$classes = 'g-row--col-2--min-full';
 		}
 
 		if ( GalleryPanel::OPTION_THREE_COLUMNS === $this->panel_vars[ GalleryPanel::FIELD_COLUMNS ] ) {
-			$classes[] = 'g-row--col-3--min-full';
+			$classes = 'g-row--col-3--min-full';
 		}
 
 		if ( GalleryPanel::OPTION_FOUR_COLUMNS === $this->panel_vars[ GalleryPanel::FIELD_COLUMNS ] ) {
-			$classes[] = 'g-row--col-4--min-full';
+			$classes = 'g-row--col-4--min-full';
 		}
 
 		return $classes;

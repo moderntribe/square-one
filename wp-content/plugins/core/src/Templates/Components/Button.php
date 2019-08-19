@@ -6,29 +6,29 @@ class Button extends Component {
 
 	const TEMPLATE_NAME = 'components/button.twig';
 
-	const TAG         = 'tag';
-	const URL         = 'url';
-	const TYPE        = 'type';
-	const TARGET      = 'target';
-	const ARIA_LABEL  = 'aria_label';
-	const CLASSES     = 'classes';
-	const ATTRS         = 'attrs';
-	const LABEL         = 'label';
-	const FORCE_DISPLAY = 'force_display';
-	const BTN_AS_LINK   = 'btn_as_link';
-	const INNER_ATTRIBUTES   = 'inner_attributes';
+	const TAG              = 'tag';
+	const URL              = 'url';
+	const TYPE             = 'type';
+	const TARGET           = 'target';
+	const ARIA_LABEL       = 'aria_label';
+	const CLASSES          = 'classes';
+	const ATTRS            = 'attrs';
+	const LABEL            = 'label';
+	const FORCE_DISPLAY    = 'force_display';
+	const BTN_AS_LINK      = 'btn_as_link';
+	const INNER_ATTRIBUTES = 'inner_attributes';
 
 	protected function parse_options( array $options ): array {
 		$defaults = [
-			static::URL         => '',
-			static::TYPE        => 'button',
-			static::TARGET      => '',
-			static::ARIA_LABEL  => '',
-			static::CLASSES     => [],
-			static::ATTRS       => [],
-			static::LABEL       => false,
-			static::BTN_AS_LINK => false,
-			static::FORCE_DISPLAY => false,
+			static::URL              => '',
+			static::TYPE             => 'button',
+			static::TARGET           => '',
+			static::ARIA_LABEL       => '',
+			static::CLASSES          => [],
+			static::ATTRS            => [],
+			static::LABEL            => false,
+			static::BTN_AS_LINK      => false,
+			static::FORCE_DISPLAY    => false,
 			static::INNER_ATTRIBUTES => [],
 		];
 

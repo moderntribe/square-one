@@ -1,0 +1,24 @@
+{#
+
+Component: Lightbox / Dialog
+
+Documentation: docs\theme\components\dialog.md
+
+NPM link: https://www.npmjs.com/package/mt-a11y-dialog
+
+Controller: wp-content\plugins\core\src\Templates\Components\Lightbox.php
+PostCSS: wp-content\plugins\core\assets\theme\pcss\components\_lightbox.pcss
+
+Description: ...
+
+Attributes:
+	{
+		content: 'c-lightbox', // { string }
+    }
+ #}
+
+{% if content %}
+    <script data-js="c-dialog" type="text/template">
+        {{ content }}
+    </script>
+{% endif %}

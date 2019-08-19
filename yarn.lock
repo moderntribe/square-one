@@ -8269,6 +8269,11 @@ ms@^2.1.1:
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.1.tgz#30a5864eb3ebb0a66f2ebe6d727af06a09d86e0a"
   integrity sha512-tgp+dl5cGk28utYktBsrFqA7HKgrhgPsg6Z/EfhWI4gl1Hwq8B/GmY/0oXZ6nF8hDVesS/FpnYaD/kOWhYQvyg==
 
+mt-a11y-dialog@^5.0.4:
+  version "5.0.4"
+  resolved "https://registry.yarnpkg.com/mt-a11y-dialog/-/mt-a11y-dialog-5.0.4.tgz#b3a0d070e92ad166499fcb61324aa6755c976a12"
+  integrity sha512-FBpCsyzSvppP+B36iMCTx3qGOotnOrQUmCjjfmMEv/r3psEXiViK4zeu1jqfvcCP5PI/jXz+VV8/h8EApoEEBw==
+
 multicast-dns-service-types@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/multicast-dns-service-types/-/multicast-dns-service-types-1.1.0.tgz#899f11d9686e5e05cb91b35d5f0e63b773cfc901"
