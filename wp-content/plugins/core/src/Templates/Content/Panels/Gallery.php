@@ -6,6 +6,7 @@ use Tribe\Project\Panels\Types\Gallery as GalleryPanel;
 use Tribe\Project\Templates\Components\Image as ImageComponent;
 use Tribe\Project\Templates\Components\Image;
 use Tribe\Project\Templates\Components\Slider as SliderComponent;
+use Tribe\Project\Theme\Image_Sizes;
 use Tribe\Project\Theme\Util;
 
 class Gallery extends Panel {
@@ -31,7 +32,7 @@ class Gallery extends Panel {
 	public function get_mapped_panel_data(): array {
 		$data = [
 			'title'          => $this->get_title( $this->panel_vars[ GalleryPanel::FIELD_TITLE ], [ 's-title', 'h2' ] ),
-			'gallery'        => $this->get_slider(),
+			'gallery_images' => $this->get_gallery_images(),
 			'columns'        => $this->get_column_layout(),
 			'content_layout' => $this->get_content_layout(),
 		];
@@ -40,21 +41,24 @@ class Gallery extends Panel {
 	}
 
 	/**
-	 * Get the slider using the Slider Component.
+	 * Overrides `get_classes()` from the Panel parent class.
+	 *
+	 * Return value is available in the twig template via the `classes` twig variable in the parent class.
 	 *
 	 * @return string
 	 */
-	protected function get_slider(): string {
-		$options = [
-			SliderComponent::SLIDES          => $this->get_slides(),
-			SliderComponent::THUMBNAILS      => $this->get_slides( 'thumbnail' ),
-			SliderComponent::MAIN_ATTRS      => [ 'data-swiper-options' => '{"speed":600}' ],
-			SliderComponent::CAROUSEL_ATTRS  => [ 'data-swiper-options' => '{"speed":600}' ],
+	protected function get_classes(): string {
+		$content_layout = $this->get_content_layout_section_class();
+
+		$classes = [
+			'panel',
+			's-wrapper',
+			'site-panel',
+			sprintf( 'site-panel--%s', $this->panel->get_type_object()->get_id() ),
+			$content_layout,
 		];
 
-		$slider = SliderComponent::factory( $options );
-
-		return $slider->render();
+		return Util::class_attribute( $classes );
 	}
 
 	/**
@@ -85,6 +89,17 @@ class Gallery extends Panel {
 			return $image->render();
 
 		}, $slide_ids );
+	}
+
+	/**
+	 * Get the gallery images.
+	 *
+	 * @return array
+	 */
+	protected function get_gallery_images(): array {
+		$gallery_images = $this->get_slides( Image_Sizes::CORE_SQUARE );
+
+		return $gallery_images;
 	}
 
 	/**
@@ -119,6 +134,22 @@ class Gallery extends Panel {
 	}
 
 	/**
+	 * Get Content Layout
+	 *
+	 * @return string
+	 */
+	protected function get_content_layout_section_class(): string {
+
+		$classes = '';
+
+		if ( GalleryPanel::OPTION_CONTENT_INLINE === $this->panel_vars[ GalleryPanel::FIELD_CONTENT_LAYOUT ] ) {
+			$classes = 'site-panel--gallery--content-inline';
+		}
+
+		return $classes;
+	}
+
+	/**
 	 * Get Column Layout
 	 *
 	 * @return string
@@ -128,7 +159,7 @@ class Gallery extends Panel {
 		$classes = '';
 
 		if ( GalleryPanel::OPTION_TWO_COLUMNS === $this->panel_vars[ GalleryPanel::FIELD_COLUMNS ] ) {
-			$classes = 'g-row--col-2--min-full';
+			$classes = 'g-row--col-2--min-xxsmall';
 		}
 
 		if ( GalleryPanel::OPTION_THREE_COLUMNS === $this->panel_vars[ GalleryPanel::FIELD_COLUMNS ] ) {
@@ -136,7 +167,7 @@ class Gallery extends Panel {
 		}
 
 		if ( GalleryPanel::OPTION_FOUR_COLUMNS === $this->panel_vars[ GalleryPanel::FIELD_COLUMNS ] ) {
-			$classes = 'g-row--col-4--min-full';
+			$classes = 'g-row--col-2--min-xxsmall g-row--col-4--min-full';
 		}
 
 		return $classes;

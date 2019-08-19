@@ -41,3 +41,24 @@
 		}
 	}
 }
+
+.site-panel--gallery__content {
+	max-width: 848px;
+	width: 100%;
+
+	.site-panel--gallery--content-inline & {
+		max-width: 512px;
+		padding: 0;
+	}
+}
+
+.site-panel--gallery {
+
+	.g-col {
+		padding-bottom: var(--spacer-2);
+
+		@media (--viewport-medium) {
+			padding-bottom: var(--spacer-4);
+		}
+	}
+}

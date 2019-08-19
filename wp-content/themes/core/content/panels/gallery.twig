@@ -10,7 +10,7 @@
 		<div class="g-row {{ content_layout }}">
 			<div class="g-col">
 				{% if title or description %}
-					<header class="s-header">
+					<div class="t-content site-panel--gallery__content">
 
 						{{ title }}
 
@@ -18,15 +18,18 @@
 							{{ description }}
 						{% endblock %}
 
-					</header>
+					</div>
 				{% endif %}
 			</div>
 			<div class="g-col">
 				<div class="g-row {{ columns }}">
-					<div class="g-col">Thumb</div>
-					<div class="g-col">Thumb</div>
-					<div class="g-col">Thumb</div>
-					<div class="g-col">Thumb</div>
+					{% if gallery_images %}
+						{% for img in gallery_images %}
+							<div class="g-col">
+								{{ img }}
+							</div>
+						{% endfor %}
+					{% endif %}
 				</div>
 			</div>
 		</div>
