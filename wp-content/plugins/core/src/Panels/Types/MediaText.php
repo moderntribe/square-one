@@ -58,12 +58,12 @@ class MediaText extends Panel_Type_Config {
 			'richtext' => true,
 		] ) );
 
-		$panel->add_field( new Fields\ImageSelect( [
+		$panel->add_field( new Fields\Radio( [
 			'name'    => self::FIELD_MEDIA_TYPE,
 			'label'   => __( 'Media Type', 'tribe' ),
 			'options' => [
-				self::OPTION_MEDIA_TYPE_IMAGE => $this->handler->layout_icon_url( 'media-type-image.svg' ),
-				self::OPTION_MEDIA_TYPE_VIDEO => $this->handler->layout_icon_url( 'media-type-video.svg' ),
+				self::OPTION_MEDIA_TYPE_IMAGE => __( 'Image', 'tribe' ),
+				self::OPTION_MEDIA_TYPE_VIDEO => __( 'Video', 'tribe' ),
 			],
 			'default' => self::OPTION_MEDIA_TYPE_IMAGE,
 		] ) );

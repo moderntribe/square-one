@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="300px" height="154px" viewBox="0 0 300 154" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 57.1 (83088) - https://sketch.com -->
+    <title>Media + Text - Panel Thumb</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Media-+-Text---Panel-Thumb" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect fill="#FFFFFF" x="0" y="0" width="300" height="154"></rect>
+        <rect id="Rectangle-5" fill="#FFFFFF" x="0" y="0" width="300" height="154"></rect>
+        <rect id="media/image/16:9-copy" fill="#F5F5F5" x="10" y="28" width="130" height="98"></rect>
+        <g id="Group-3" transform="translate(43.000000, 60.000000)">
+            <g id="np_image_1526143_000000" fill="#000000" fill-rule="nonzero">
+                <path d="M39.8847882,23.8574904 L23.065176,0 L0,33 L65,33 L48.7485795,13.0448003 L39.8847882,23.8574904 Z M34.7710624,30.7692277 L4.31484816,30.7692277 L23.065176,4.01066288 L41.9314149,30.7692277 L34.7710624,30.7692277 Z M44.6566898,30.7692277 L41.1365146,25.8652747 L48.749375,16.6103791 L60.3393503,30.7690047 L44.6566898,30.7692277 Z" id="Shape"></path>
+            </g>
+            <circle id="Oval" stroke="#000000" stroke-width="2" cx="53.5" cy="5.5" r="4.5"></circle>
+        </g>
+        <rect id="Rectangle-path" fill="#000000" fill-rule="nonzero" x="160" y="52" width="110" height="2"></rect>
+        <g id="Group" transform="translate(160.000000, 28.000000)" fill="#000000" fill-rule="nonzero">
+            <path d="M6.4,0.4 L8.7,0.4 L14.7,16.4 L12.6,16.4 L11.1,12.2 L4.1,12.2 L2.6,16.4 L0.5,16.4 L6.4,0.4 Z M4.7,10.4 L10.5,10.4 L7.6,2.1 L4.7,10.4 Z" id="Shape"></path>
+            <path d="M24.2,16.4 L24.2,14.5 C23.4,15.9 22,16.7 20.2,16.7 C17.9,16.7 16.6,15.4 16.6,13.3 C16.6,10.9 18.3,9.7 20.6,9.7 L24.1,9.7 L24.1,8.6 C24.1,7.1 23.2,6.4 21.4,6.4 C20.1,6.4 18.9,6.7 17.8,7.2 L17.4,5.6 C18.7,5 20.1,4.7 21.6,4.7 C24.6,4.7 26.1,5.9 26.1,8.5 L26.1,16.4 L24.2,16.4 L24.2,16.4 Z M24.1,11.2 L20.9,11.2 C19.3,11.2 18.6,11.9 18.6,13.2 C18.6,14.5 19.4,15.1 20.8,15.1 C22.7,15.1 24.1,13.6 24.1,11.8 L24.1,11.2 Z" id="Shape"></path>
+        </g>
+        <rect id="Rectangle-path" fill="#000000" fill-rule="nonzero" x="160" y="60" width="110" height="2"></rect>
+        <rect id="Rectangle-path" fill="#000000" fill-rule="nonzero" x="160" y="68" width="110" height="2"></rect>
+        <rect id="Rectangle-path" fill="#000000" fill-rule="nonzero" x="160" y="84" width="110" height="2"></rect>
+        <rect id="Rectangle-path" fill="#000000" fill-rule="nonzero" x="160" y="76" width="110" height="2"></rect>
+        <rect id="Rectangle-path" fill="#000000" fill-rule="nonzero" x="160" y="92" width="90" height="2"></rect>
+        <g id="Group-2" transform="translate(160.000000, 106.000000)">
+            <g id="Group" transform="translate(22.095238, 9.000000)" fill="#000000" fill-rule="nonzero">
+                <rect id="Rectangle-path" x="0.380952381" y="0.3" width="19.047619" height="2"></rect>
+            </g>
+            <rect id="Rectangle" stroke="#000000" stroke-width="2" x="1" y="1" width="62" height="18"></rect>
+        </g>
+    </g>
+</svg>
