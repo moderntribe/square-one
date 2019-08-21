@@ -2,7 +2,6 @@
 
 namespace Tribe\Project\Templates\Content\Panels;
 
-use Tribe\Project\Panels\Types\ContentSlider as ContentSliderPanel;
 use Tribe\Project\Panels\Types\Gallery as GalleryPanel;
 use Tribe\Project\Templates\Components\Button;
 use Tribe\Project\Templates\Components\Dialog;
@@ -164,24 +163,15 @@ class Gallery extends Panel {
 			$main_attrs[ 'data-livetext' ] = true;
 		}
 
-//		$swiper_options = '{
-//		"a11y":true,
-//		"grabCursor":true,
-//		"keyboard":true,
-//		"spaceBetween":60,
-//		"pagination":{"el":".swiper-pagination","type":"fraction",},
-//		"navigation":{"nextEl":".swiper-button-next","prevEl":".swiper-button-prev",}}';
-//
-//		$main_attrs['data-swiper-options'] = $swiper_options;
-
 		$options = [
 			SliderComponent::SLIDES          => $this->get_slides(),
 			SliderComponent::THUMBNAILS      => false,
 			SliderComponent::SHOW_CAROUSEL   => false,
 			SliderComponent::SHOW_ARROWS     => true,
 			SliderComponent::SHOW_PAGINATION => true,
-			SliderComponent::MAIN_CLASSES    => [ 'c-slider__main' ],
+			SliderComponent::MAIN_CLASSES    => [ 'c-slider__main ' ],
 			SliderComponent::MAIN_ATTRS      => $main_attrs,
+			SliderComponent::CLASSES		 => [ 'site-panel--gallery__slider' ]
 		];
 
 		$slider = SliderComponent::factory( $options );
@@ -196,10 +186,11 @@ class Gallery extends Panel {
 	 */
 	protected function get_dialog_popup(): string {
 		$options = [
-			Dialog::CONTENT                 => $this->get_slider(),
-			Dialog::CONTENT_OVERLAY_CLASSES => [ 'c-dialog__image-gallery-overlay' ],
-			Dialog::CONTENT_WRAPPER_CLASSES => [ 'c-dialog__image-gallery-overlay-wrapper' ],
-			Dialog::CONTENT_INNER_CLASSES   => [ 'c-dialog__image-gallery-overlay-wrapper-inner'],
+			Dialog::CONTENT        => $this->get_slider(),
+			Dialog::HEADER_CONTENT => $this->get_title( $this->panel_vars[ GalleryPanel::FIELD_TITLE ], [ 's-title c-dialog__title', 'h5' ] ),
+			Dialog::DIALOG_ATTRS => [
+				'data-js' => 'dialog-' . get_nest_index(),
+			],
 		];
 
 		$dialog = Dialog::factory( $options );
@@ -295,8 +286,8 @@ class Gallery extends Panel {
 			Button::BTN_AS_LINK => false,
 			Button::CLASSES     => [ 'c-btn site-panel--gallery__btn' ],
 			Button::ATTRS		=> [
-				'data-js'      => 'c-dialog-trigger',
-				'data-content' => 'c-dialog-data'
+				'data-js'        => 'c-dialog-trigger',
+				'data-content'   => 'dialog-' . get_nest_index(),
 			],
 		];
 

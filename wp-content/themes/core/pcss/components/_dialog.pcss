@@ -8,49 +8,88 @@
 	display: none;
 }
 
-.c-dialog__image-gallery-overlay {
-	align-items: center;
+.c-dialog__overlay {
 	background-color: var(--color-goethite);
 	bottom: 0;
 	color: var(--color-white);
-	display: flex;
-	height: 100vh;
 	left: 0;
-	position: absolute;
+	overflow: scroll;
+	position: fixed;
 	right: 0;
 	top: 0;
 	width: 100%;
 	z-index: 2;
 
-	.swiper-button-prev,
-	.swiper-container-rtl .swiper-button-next {
-		left: -64px;
-	}
+	.admin-bar & {
+		top: var(--spacer-wpadmin-mobile);
 
-	.swiper-button-next,
-	.swiper-container-rtl .swiper-button-prev {
-		right: -64px;
-	}
-
-	.c-slider__pagination {
-		font-family: var(--font-family-calibre);
-		font-size: var(--font-size-1);
-		letter-spacing: 0.025em;
-		line-height: var(--line-height-7);
-		text-align: left;
-		top: -30px;
-		width: 100%;
+		@media (--viewport-wpadmin) {
+			top: var(--spacer-wpadmin-desktop);
+		}
 	}
 }
 
-.c-dialog__image-gallery-overlay-wrapper {
+.c-dialog__header {
+	background-color: var(--color-goethite);
+	border-bottom: 1px solid var(--color-white);
+	margin-bottom: 47px;
+	padding: 20px;
+	position: fixed;
+	width: 100%;
+	z-index: 10;
+}
+
+.c-dialog__title {
+	margin-bottom: 0;
+	padding: 0 20px;
+	text-align: center;
+}
+
+.c-dialog__content-wrapper {
+	padding-top: 120px;
 
 	@media (--viewport-medium) {
+		padding-top: 140px;
 		width: 100%;
 	}
 }
 
-.c-dialog__image-gallery-overlay-wrapper-inner {
+.c-dialog__content-inner {
 	margin: 0 auto;
+	padding: 0 20px;
 	max-width: 1000px;
+}
+
+.c-dialog__close-button {
+	background: none;
+	border: 0;
+	right: 20px;
+	position: fixed;
+	top: 20px;
+	z-index: 4;
+	height: 30px;
+	width: 30px;
+
+	@media (--viewport-medium) {
+		right: 30px;
+		top: 25px;
+	}
+
+	.admin-bar & {
+		top: calc(20px + var(--spacer-wpadmin-mobile));
+
+		@media (--viewport-wpadmin) {
+			top: calc(25px + var(--spacer-wpadmin-desktop));
+		}
+	}
+}
+
+.c-dialog__close-button-icon {
+	display: block;
+
+	&:after {
+		color: var(--color-white);
+		content: var(--icon-close);
+		font-family: var(--font-family-core-icons);
+	}
 }

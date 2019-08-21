@@ -3,19 +3,24 @@
  * @description JavaScript that drives Dialog
  */
 
-import Dialog from 'mt-a11y-dialog';
+import A11yDialog from 'mt-a11y-dialog';
 import Swiper from 'swiper';
 import * as tools from 'utils/tools';
 
 const el = {
-	container: tools.getNodes( 'c-dialog-trigger', true ),
+	siteWrap: tools.getNodes('site-wrap')[0],
+	container: tools.getNodes('c-dialog-trigger', true),
 };
 
-const instances = {};
+const instances = {
+	dialogs: {},
+};
 
 const options = {
 	dialog: {
-		appendTarget: '[data-js="site-wrap"]',
+		appendTarget: '',
+		wrapperClasses: 'c-dialog',
+		closeButtonClasses: 'c-dialog__close-button',
 		trigger: '[data-js="c-dialog-trigger"]',
 	},
 	swiper: {
@@ -39,18 +44,25 @@ const options = {
  * @description
  */
 
-const initSwiper = ( dialogEl ) => {
-	const gallery = tools.getNodes( 'c-slider', false, dialogEl )[0];
-	instances.swiper = new Swiper( gallery, options.swiper );
+const initSwiper = (dialogEl) => {
+	const gallery = tools.getNodes('c-slider', false, dialogEl)[0];
+	if (gallery) {
+		instances.swiper = new Swiper(gallery, options.swiper);
+	}
 };
 
 /**
- * @function initDialog
- * @description Initialize Dialog
+ * @function addDialogCloseSpan
+ * @description Add span to close button.
  */
 
-const initDialog = () => {
-	instances.dialog = new Dialog( options.dialog );
+const addDialogCloseSpan = () => {
+	const closeBtn = tools.getNodes('.c-dialog__close-button', true, document, true)[0];
+	const span = document.createElement('span');
+	span.className = 'c-dialog__close-button-icon';
+	if (!closeBtn.hasChildNodes()) {
+		closeBtn.appendChild(span);
+	}
 };
 
 /**
@@ -58,22 +70,36 @@ const initDialog = () => {
  * @description Bind the events for this module here.
  */
 
-const bindEvents = () => {
-	instances.dialog.on('show', initSwiper);
+const bindEvents = (instance) => {
+	instance.on('show', initSwiper);
+	instance.on('show', addDialogCloseSpan);
+};
+
+/**
+ * @function initDialog
+ * @description Initialize Dialog
+ */
+
+const initDialogs = () => {
+	tools.getNodes('[data-js="c-dialog-trigger"]', true, document, true).forEach( (trigger) => {
+		const dialogId = trigger.getAttribute('data-content');
+		options.dialog.trigger = `[data-js="c-dialog-trigger"][data-content="${dialogId}"]`;
+		instances.dialogs[dialogId] = new A11yDialog(options.dialog);
+		bindEvents(instances.dialogs[dialogId]);
+	} );
 };
 
 /**
  * @function init
- * @description Kick off this modules functions
+ * @description Kick off this modules functions.
  */
 
 const init = () => {
-	if ( ! el.container ) {
+	if (!el.container) {
 		return;
 	}
 
-	initDialog();
-	bindEvents();
+	initDialogs();
 
 	console.info( 'Modern Tribe FE: Initialized dialog scripts.' );
 };

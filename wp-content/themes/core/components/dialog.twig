@@ -14,15 +14,21 @@ Description: ...
 Attributes:
 	{
 		content: 'c-lightbox', // { string }
+		header_content: header content // { string }
+		content_header_classes: header classes // { string }
 		content_overlay_classes: overlay classes // { string }
 		content_overlay_wrapper_classes: overlay wrapper classes // { string }
 		content_overlay_wrapper_inner: overlay wrapper inner classes // { string }
+		dialog_attr: a list of attributes in key value pairs. { array }
     }
  #}
 
 {% if content %}
-    <script data-js="c-dialog-data" type="text/template">
+    <script {{ dialog_attr }} type="text/template" >
         <div class="{{ content_overlay_classes }}">
+            <header class="{{ content_header_classes }}">
+                {{ header_content }}
+            </header>
             <div class="{{ content_wrapper_classes }}">
                 <div class="{{ content_inner_classes }}">
                      {{ content }}
