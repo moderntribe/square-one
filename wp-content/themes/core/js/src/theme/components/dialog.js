@@ -4,7 +4,6 @@
  */
 
 import A11yDialog from 'mt-a11y-dialog';
-import Swiper from 'swiper';
 import * as tools from 'utils/tools';
 
 const el = {
@@ -23,20 +22,6 @@ const options = {
 		closeButtonClasses: 'c-dialog__close-button',
 		trigger: '[data-js="c-dialog-trigger"]',
 	},
-	swiper: {
-		a11y: true,
-		grabCursor: true,
-		keyboard: true,
-		pagination: {
-			el: '.swiper-pagination',
-			type: 'fraction',
-		},
-		navigation: {
-			nextEl: '.swiper-button-next',
-			prevEl: '.swiper-button-prev',
-		},
-		spaceBetween: 60,
-	},
 };
 
 /**
@@ -46,9 +31,6 @@ const options = {
 
 const initSwiper = (dialogEl) => {
 	const gallery = tools.getNodes('c-slider', false, dialogEl)[0];
-	if (gallery) {
-		instances.swiper = new Swiper(gallery, options.swiper);
-	}
 };
 
 /**
@@ -61,6 +43,19 @@ const bindEvents = (instance) => {
 };
 
 /**
+ * @function getMainOptsForDialog
+ * @description Get the main variable options for the dialog
+ */
+
+const getOptionsDialog = ( trigger ) => {
+	const opts = options.dialog;
+	if ( trigger.dataset.dialogOptions && tests.isJson( trigger.dataset.dialogOptions ) ) {
+		Object.assign( opts, JSON.parse( trigger.dataset.dialogOptions ) );
+	}
+	return opts;
+};
+
+/**
  * @function initDialog
  * @description Initialize Dialog
  */
@@ -69,7 +64,7 @@ const initDialogs = () => {
 	tools.getNodes('[data-js="c-dialog-trigger"]', true, document, true).forEach( (trigger) => {
 		const dialogId = trigger.getAttribute('data-content');
 		options.dialog.trigger = `[data-js="c-dialog-trigger"][data-content="${dialogId}"]`;
-		instances.dialogs[dialogId] = new A11yDialog(options.dialog);
+		instances.dialogs[dialogId] = new A11yDialog(getOptionsDialog(trigger));
 		bindEvents(instances.dialogs[dialogId]);
 	} );
 };

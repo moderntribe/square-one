@@ -93,27 +93,36 @@ class Gallery extends Panel {
 			$image = ImageComponent::factory( $options );
 
 			$slide_markup .= $image->render();
-
-			$thumbnail_image = get_posts( array( 'p' => $slide_id, 'post_type' => 'attachment' ) );
-
-			if ( empty( $thumbnail_image ) && empty( $thumbnail_image[0] ) ) {
-				return '';
-			}
-
-			$options = [
-				Text::CLASSES => [ 'site-panel--gallery__slide-caption' ],
-				Text::TEXT    => esc_html( $thumbnail_image[0]->post_excerpt ),
-			];
-
-			$text_object = Text::factory( $options );
-
-			$slide_markup .= $text_object->render();
+			$slide_markup .= $this->get_image_caption( $slide_id );
 
 			$slides[] = $slide_markup;
 
 			return $slide_markup;
 
 		}, $slide_ids );
+	}
+
+	/**
+	 * Get the Image Caption using the Text Component.
+	 *
+	 * @param int $slide_id The slide ID
+	 * @return string
+	 */
+	protected function get_image_caption( int $slide_id ): string {
+		$thumbnail_image = get_posts( array( 'p' => $slide_id, 'post_type' => 'attachment' ) );
+
+		if ( empty( $thumbnail_image ) && empty( $thumbnail_image[0] ) ) {
+			return '';
+		}
+
+		$options = [
+			Text::CLASSES => [ 'site-panel--gallery__slide-caption' ],
+			Text::TEXT    => esc_html( $thumbnail_image[0]->post_excerpt ),
+		];
+
+		$text_object = Text::factory( $options );
+
+		return $text_object->render();
 	}
 
 	/**
@@ -153,15 +162,18 @@ class Gallery extends Panel {
 	 * @return string
 	 */
 	protected function get_slider(): string {
-		$main_attrs = [
-			'data-swiper-options' => '',
-		];
+		$main_attrs = [];
 
 		if ( is_panel_preview() ) {
 			$main_attrs[ 'data-depth' ]    = $this->panel->get_depth();
 			$main_attrs[ 'data-name' ]     = SliderComponent::SLIDES;
 			$main_attrs[ 'data-livetext' ] = true;
 		}
+
+		$json_options = '{"spaceBetween":60,"ally":"true","keyboard":"true","grabCursor":"true","pagination":{"el":".swiper-pagination","type":"fraction"},"navigation":{"nextEl":".swiper-button-next","prevEl":".swiper-button-prev"}}';
+
+		$main_attrs['data-swiper-options'] = $json_options;
+		$main_attrs['data-id'] = 'dialog-' . get_nest_index();
 
 		$options = [
 			SliderComponent::SLIDES          => $this->get_slides(),
@@ -185,6 +197,12 @@ class Gallery extends Panel {
 	 * @return string
 	 */
 	protected function get_dialog_popup(): string {
+		$lightbox_toggle = $this->lightbox_on();
+
+		if ( false === $lightbox_toggle ) {
+			return '';
+		}
+
 		$options = [
 			Dialog::CONTENT        => $this->get_slider(),
 			Dialog::HEADER_CONTENT => $this->get_title( $this->panel_vars[ GalleryPanel::FIELD_TITLE ], [ 's-title c-dialog__title', 'h5' ] ),
