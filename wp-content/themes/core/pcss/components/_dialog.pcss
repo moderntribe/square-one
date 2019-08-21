@@ -61,35 +61,28 @@
 }
 
 .c-dialog__close-button {
-	background: none;
+	background: center center url('var(--path-images)/theme/icons/cross.svg') no-repeat;
+	background-size: contain;
 	border: 0;
 	right: 20px;
 	position: fixed;
 	top: 20px;
 	z-index: 4;
-	height: 30px;
-	width: 30px;
+	height: 15px;
+	width: 15px;
 
 	@media (--viewport-medium) {
+		height: 20px;
 		right: 30px;
-		top: 25px;
+		top: 40px;
+		width: 20px;
 	}
 
 	.admin-bar & {
 		top: calc(20px + var(--spacer-wpadmin-mobile));
 
 		@media (--viewport-wpadmin) {
-			top: calc(25px + var(--spacer-wpadmin-desktop));
+			top: calc(40px + var(--spacer-wpadmin-desktop));
 		}
-	}
-}
-
-.c-dialog__close-button-icon {
-	display: block;
-
-	&:after {
-		color: var(--color-white);
-		content: var(--icon-close);
-		font-family: var(--font-family-core-icons);
 	}
 }

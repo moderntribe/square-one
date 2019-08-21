@@ -52,27 +52,12 @@ const initSwiper = (dialogEl) => {
 };
 
 /**
- * @function addDialogCloseSpan
- * @description Add span to close button.
- */
-
-const addDialogCloseSpan = () => {
-	const closeBtn = tools.getNodes('.c-dialog__close-button', true, document, true)[0];
-	const span = document.createElement('span');
-	span.className = 'c-dialog__close-button-icon';
-	if (!closeBtn.hasChildNodes()) {
-		closeBtn.appendChild(span);
-	}
-};
-
-/**
  * @function bindEvents
  * @description Bind the events for this module here.
  */
 
 const bindEvents = (instance) => {
 	instance.on('show', initSwiper);
-	instance.on('show', addDialogCloseSpan);
 };
 
 /**
