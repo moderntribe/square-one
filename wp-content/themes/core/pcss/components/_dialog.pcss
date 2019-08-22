@@ -61,12 +61,11 @@
 }
 
 .c-dialog__close-button {
-	background: center center url('var(--path-images)/theme/icons/cross.svg') no-repeat;
-	background-size: contain;
+	background-color: transparent;
 	border: 0;
 	right: 20px;
 	position: fixed;
-	top: 20px;
+	top: 35px;
 	z-index: 4;
 	height: 15px;
 	width: 15px;
@@ -79,7 +78,7 @@
 	}
 
 	.admin-bar & {
-		top: calc(20px + var(--spacer-wpadmin-mobile));
+		top: calc(35px + var(--spacer-wpadmin-mobile));
 
 		@media (--viewport-wpadmin) {
 			top: calc(40px + var(--spacer-wpadmin-desktop));

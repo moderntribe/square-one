@@ -5,6 +5,8 @@
 
 import A11yDialog from 'mt-a11y-dialog';
 import * as tools from 'utils/tools';
+import * as tests from 'utils/tests';
+import { trigger } from 'utils/events';
 
 const el = {
 	siteWrap: tools.getNodes('site-wrap')[0],
@@ -19,7 +21,7 @@ const options = {
 	dialog: {
 		appendTarget: '',
 		wrapperClasses: 'c-dialog',
-		closeButtonClasses: 'c-dialog__close-button',
+		closeButtonClasses: 'svgicon svgicon-close c-dialog__close-button',
 		trigger: '[data-js="c-dialog-trigger"]',
 	},
 };
@@ -31,6 +33,10 @@ const options = {
 
 const initSwiper = (dialogEl) => {
 	const gallery = tools.getNodes('c-slider', false, dialogEl)[0];
+	if (!gallery) {
+		return;
+	}
+	trigger( { event: 'modern_tribe/component_dialog_showing', native: false } );
 };
 
 /**
@@ -39,7 +45,7 @@ const initSwiper = (dialogEl) => {
  */
 
 const bindEvents = (instance) => {
-	instance.on('show', initSwiper);
+	instance.on('render', initSwiper);
 };
 
 /**

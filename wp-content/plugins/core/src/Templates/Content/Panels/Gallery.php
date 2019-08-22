@@ -173,7 +173,6 @@ class Gallery extends Panel {
 		$json_options = '{"spaceBetween":60,"ally":"true","keyboard":"true","grabCursor":"true","pagination":{"el":".swiper-pagination","type":"fraction"},"navigation":{"nextEl":".swiper-button-next","prevEl":".swiper-button-prev"}}';
 
 		$main_attrs['data-swiper-options'] = $json_options;
-		$main_attrs['data-id'] = 'dialog-' . get_nest_index();
 
 		$options = [
 			SliderComponent::SLIDES          => $this->get_slides(),
@@ -181,7 +180,6 @@ class Gallery extends Panel {
 			SliderComponent::SHOW_CAROUSEL   => false,
 			SliderComponent::SHOW_ARROWS     => true,
 			SliderComponent::SHOW_PAGINATION => true,
-			SliderComponent::MAIN_CLASSES    => [ 'c-slider__main ' ],
 			SliderComponent::MAIN_ATTRS      => $main_attrs,
 			SliderComponent::CLASSES		 => [ 'site-panel--gallery__slider' ]
 		];
@@ -303,9 +301,9 @@ class Gallery extends Panel {
 			Button::LABEL       => esc_html( $btn_label ),
 			Button::BTN_AS_LINK => false,
 			Button::CLASSES     => [ 'c-btn site-panel--gallery__btn' ],
-			Button::ATTRS		=> [
-				'data-js'        => 'c-dialog-trigger',
-				'data-content'   => 'dialog-' . get_nest_index(),
+			Button::ATTRS => [
+				'data-js'      => 'c-dialog-trigger',
+				'data-content' => 'dialog-' . get_nest_index(),
 			],
 		];
 

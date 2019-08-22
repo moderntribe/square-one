@@ -163,12 +163,14 @@ const bindEvents = () => {
 	document.addEventListener( 'modular_content/repeater_row_activated', previewChangeHandler );
 	document.addEventListener( 'modular_content/repeater_row_deactivated', previewChangeHandler );
 	document.addEventListener( 'modular_content/repeater_row_added', previewChangeHandler );
+	document.addEventListener( 'modern_tribe/component_dialog_showing', initSliders );
 };
 
 const init = () => {
 	if ( ! Swiper ) {
 		return;
 	}
+
 	initSliders();
 	bindEvents();
 
