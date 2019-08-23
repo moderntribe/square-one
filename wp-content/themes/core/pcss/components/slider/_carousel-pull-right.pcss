@@ -1,0 +1,121 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Slider: Carousel Pull Right
+ *
+ * ----------------------------------------------------------------------------- */
+
+.c-slider__carousel-pull-right {
+
+	.c-slider {
+		margin-top: 0;
+	}
+
+	.c-slider__wrapper {
+		padding-bottom: 71px;
+
+		@media (--viewport-medium) {
+			padding-bottom: 0;
+		}
+	}
+
+	.c-slider__arrows {
+		align-items: center;
+		border-bottom: 0;
+		bottom: 0;
+		display: none;
+		height: 46px;
+		justify-content: center;
+		margin-left: calc((var(--grid-width) * -1) / 2);
+		padding-left: var(--grid-gutter);
+		left: 50%;
+		max-width: var(--grid-width);
+		position: absolute;
+		top: 0;
+		width: 100%;
+		z-index: 2;
+
+		@media (--viewport-medium) {
+			display: block;
+		}
+	}
+
+	.swiper-button-next,
+	.swiper-button-prev {
+		background: none;
+		display: block;
+		height: 46px;
+		margin-top: 0;
+		position: absolute;
+		top: 0;
+		width: 46px;
+
+		&:before,
+		&:after {
+			align-items: center;
+			border: 1px solid var(--color-grey-dark);
+			color: var(--color-grey-dark);
+			display: flex;
+			font-family: var(--font-family-core-icons);
+			height: 100%;
+			justify-content: center;
+			position: absolute;
+			width: 100%;
+		}
+	}
+
+	.swiper-button-next {
+		right: 0;
+
+		&:after {
+			content: var(--icon-arrow-large-right);
+		}
+	}
+
+	.swiper-button-prev {
+		left: auto;
+		right: calc(16px + 46px);
+
+		&:before {
+			content: var(--icon-arrow-large-left);
+		}
+	}
+
+	.swiper-slide {
+		height: auto;
+		position: relative;
+
+		&:first-child {
+
+			.site-panel--program-loop__card {
+				border-left: 0;
+			}
+		}
+
+		&:last-child {
+
+			.site-panel--program-loop__card {
+				border-right: 0;
+			}
+		}
+	}
+
+	.c-slider__carousel-pull-right__wrap {
+		max-width: calc(var(--grid-width) + (100% - var(--grid-width)) / 2);
+		margin: 0 0 0 auto;
+		overflow: visible;
+		padding-left: var(--grid-gutter-small);
+
+		@media (--viewport-medium) {
+			padding-left: var(--grid-gutter);
+		}
+	}
+
+	.c-slider__carousel-pull-right__slide {
+		margin-right: 30px;
+		width: auto;
+	}
+
+	.c-slider__carousel-pull-right__card {
+		max-width: 400px;
+	}
+}

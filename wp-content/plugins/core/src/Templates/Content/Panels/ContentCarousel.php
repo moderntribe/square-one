@@ -6,6 +6,7 @@ use Tribe\Project\Panels\Types\ContentCarousel as ContentCarouselPanel;
 use Tribe\Project\Templates\Components\Card;
 use Tribe\Project\Templates\Components\Image;
 use Tribe\Project\Templates\Components\Slider;
+use Tribe\Project\Templates\Components\Text;
 use Tribe\Project\Templates\Components\Title;
 use Tribe\Project\Theme\Image_Sizes;
 use Tribe\Project\Theme\Util;
@@ -53,6 +54,7 @@ class ContentCarousel extends Panel {
 			's-wrapper',
 			'site-panel',
 			's-wrapper--no-padding',
+			'c-slider__carousel-pull-right',
 			sprintf( 'site-panel--%s', $this->panel->get_type_object()->get_id() ),
 		];
 
@@ -108,9 +110,9 @@ class ContentCarousel extends Panel {
 			Slider::SHOW_CAROUSEL   => false,
 			Slider::SHOW_ARROWS     => true,
 			Slider::SHOW_PAGINATION => false,
-			Slider::MAIN_CLASSES    => [ 'site-panel--contentcarousel__carousel-wrap' ],
+			Slider::MAIN_CLASSES    => [ 'c-slider__carousel-pull-right__wrap' ],
 			Slider::MAIN_ATTRS      => $main_attrs,
-			Slider::SLIDE_CLASSES	=> [ 'site-panel--contentcarousel__slide' ],
+			Slider::SLIDE_CLASSES	=> [ 'c-slider__carousel-pull-right__slide' ],
 		];
 
 		$slider = Slider::factory( $options );
@@ -134,9 +136,9 @@ class ContentCarousel extends Panel {
 
 				$options = [
 					Card::PRE_TITLE  => $this->get_categories( $post['post_id'] ),
-					Card::IMAGE      => $this->get_post_image( $post[ 'image' ] ),
+					Card::IMAGE      => $this->get_post_image( $post[ 'image' ], $post['link'] ),
 					Card::POST_TITLE => $this->get_post_title( esc_html( $post['title'] ), $post['link'], $i ),
-					Card::CLASSES	 => [ 'c-card--simple site-panel--contentcarousel__card' ],
+					Card::CLASSES	 => [ 'c-card--simple c-slider__carousel-pull-right__card' ],
 				];
 
 				$post_obj = Card::factory( $options );
@@ -151,10 +153,11 @@ class ContentCarousel extends Panel {
 	 * Get post image using the Image component.
 	 *
 	 * @param $image_id
+	 * @param $link
 	 *
 	 * @return string
 	 */
-	protected function get_post_image( $image_id ): string {
+	protected function get_post_image( $image_id, $link ): string {
 		if ( empty( $image_id ) ) {
 			return '';
 		}
@@ -165,6 +168,7 @@ class ContentCarousel extends Panel {
 			Image::USE_LAZYLOAD => false,
 			Image::ECHO         => false,
 			Image::SRC_SIZE     => Image_Sizes::COMPONENT_CARD,
+			Image::LINK			=> esc_url( $link['url'] ),
 		];
 
 		$image_obj = Image::factory( $options );
@@ -181,7 +185,20 @@ class ContentCarousel extends Panel {
 	 */
 	protected function get_categories( int $id ): string {
 		$categories = get_the_category_list( '', '', $id );
-		return $categories;
+
+		if ( empty( $categories ) ) {
+			return '';
+		}
+
+		$options = [
+			Text::TEXT     => $categories,
+			Title::CLASSES => [ 'c-card__link-list' ],
+			Title::TAG     => 'div',
+		];
+
+		$text_obj = Text::factory( $options );
+
+		return $text_obj->render();
 	}
 
 	/**
