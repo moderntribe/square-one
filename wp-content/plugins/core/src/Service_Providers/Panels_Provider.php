@@ -22,7 +22,7 @@ class Panels_Provider extends Service_Provider {
 		Panels\Types\ContentSlider::class,
 		Panels\Types\LogoFarm::class,
 		Panels\Types\Testimonial::class,
-		Panels\Types\PostLoop::class,
+		Panels\Types\ContentCarousel::class,
 		Panels\Types\Tabs::class,
 	];
 

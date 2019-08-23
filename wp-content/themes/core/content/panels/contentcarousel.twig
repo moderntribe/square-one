@@ -1,0 +1,29 @@
+{# Panel: Content Carousel #}
+
+{% extends "content/panels/panel.twig" %}
+
+{% block wrapper_start %}{% endblock %}
+
+{% block header %}
+
+	{% if title or description %}
+		<header class="s-header l-container">
+
+			<div class="site-panel--contentcarousel__content">
+				{{ title }}
+
+				{% block description %}
+					{{ description }}
+				{% endblock %}
+			</div>
+
+		</header>
+	{% endif %}
+
+{% endblock %}
+
+{% block content %}
+
+	{{ carousel }}
+
+{% endblock %}

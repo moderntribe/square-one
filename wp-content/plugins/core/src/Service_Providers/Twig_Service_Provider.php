@@ -95,8 +95,8 @@ class Twig_Service_Provider extends Service_Provider {
 			return new Templates\Content\Panels\MicroNavButtons( 'content/panels/micronavbuttons.twig', $container['twig'] );
 		};
 
-		$container['twig.templates.content/panels/postloop'] = function ( Container $container ) {
-			return new Templates\Content\Panels\PostLoop( 'content/panels/postloop.twig', $container['twig'] );
+		$container['twig.templates.content/panels/contentcarousel'] = function ( Container $container ) {
+			return new Templates\Content\Panels\ContentCarousel( 'content/panels/contentcarousel.twig', $container['twig'] );
 		};
 
 		$container['twig.templates.content/panels/tabs'] = function ( Container $container ) {

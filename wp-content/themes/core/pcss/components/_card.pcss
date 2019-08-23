@@ -5,20 +5,54 @@
  * ----------------------------------------------------------------------------- */
 
 .c-card {
-	background: var(--color-off-white);
-	display: flex;
-	flex-direction: column;
 	height: 100%;
 	position: relative;
 }
 
+.c-card--vertical {
+	display: flex;
+	flex-direction: column;
+}
+
+.c-card--horizontal {
+	display: flex;
+	flex-direction: row;
+}
+
+.c-card--horizontal--img-left {
+
+}
+
+.c-card--horizontal--img-right {
+
+}
+
+.c-card--simple {
+
+}
+
+.c-card--overlay {
+
+}
+
+.c-card--boxed {
+
+}
+
 .c-card__header {
 
+	.c-card--simple & {
+		padding-bottom: var(--spacer-2);
+	}
 }
 
 .c-card__content {
 	height: 100%;
 	padding: 30px 25px;
+
+	.c-card--simple & {
+		padding: 0;
+	}
 }
 
 .c-card__title {
