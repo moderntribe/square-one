@@ -35,11 +35,6 @@ class ContentCarousel extends Panel_Type_Config {
 			'show_max_control' => true,
 		] );
 
-		$panel->add_field( new Fields\Link( [
-			'name'  => self::FIELD_CTA,
-			'label' => __( 'Call To Action Link', 'tribe' ),
-		] ) );
-
 		$panel->add_field( $posts );
 
 		return $panel;

@@ -19,20 +19,18 @@
 	}
 
 	.c-slider__arrows {
-		align-items: center;
 		border-bottom: 0;
 		bottom: 0;
 		display: none;
-		height: 46px;
-		justify-content: center;
-		margin-left: calc((var(--grid-width) * -1) / 2);
+		height: 48px;
 		padding-left: var(--grid-gutter);
 		left: 50%;
 		max-width: var(--grid-width);
 		position: absolute;
 		top: 0;
+		transform: translateX(-50%);
 		width: 100%;
-		z-index: 2;
+		z-index: 1;
 
 		@media (--viewport-medium) {
 			display: block;
@@ -64,7 +62,7 @@
 	}
 
 	.swiper-button-next {
-		right: 0;
+		right: var(--grid-gutter);
 
 		&:after {
 			content: var(--icon-arrow-large-right);
@@ -73,7 +71,7 @@
 
 	.swiper-button-prev {
 		left: auto;
-		right: calc(16px + 46px);
+		right: calc(16px + 46px + var(--grid-gutter));
 
 		&:before {
 			content: var(--icon-arrow-large-left);
