@@ -94,7 +94,7 @@ class ContentCarousel extends Panel {
 			$main_attrs[ 'data-livetext' ] = true;
 		}
 
-		$breakpoints = '{
+		$swiper_options = '{
 		"ally":"true",
 		"keyboard":"true",
 		"grabCursor":"true",
@@ -102,7 +102,7 @@ class ContentCarousel extends Panel {
 		"freeMode":"true",
 		"spaceBetween":0}';
 
-		$main_attrs['data-swiper-options'] = $breakpoints;
+		$main_attrs['data-swiper-options'] = $swiper_options;
 
 		$options = [
 			Slider::SLIDES          => $this->get_posts(),
