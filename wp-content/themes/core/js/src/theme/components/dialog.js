@@ -9,8 +9,7 @@ import * as tests from 'utils/tests';
 import { trigger } from 'utils/events';
 
 const el = {
-	siteWrap: tools.getNodes('site-wrap')[0],
-	container: tools.getNodes('c-dialog-trigger', true),
+	containers: tools.getNodes('[data-js="c-dialog-trigger"]', true, document, true),
 };
 
 const instances = {
@@ -22,7 +21,6 @@ const options = {
 		appendTarget: '',
 		wrapperClasses: 'c-dialog',
 		closeButtonClasses: 'svgicon svgicon-close c-dialog__close-button',
-		trigger: '[data-js="c-dialog-trigger"]',
 	},
 };
 
@@ -36,7 +34,7 @@ const initSwiper = (dialogEl) => {
 	if (!gallery) {
 		return;
 	}
-	trigger( { event: 'modern_tribe/component_dialog_showing', native: false } );
+	trigger( { event: 'modern_tribe/component_dialog_rendered', native: false } );
 };
 
 /**
@@ -67,7 +65,7 @@ const getOptionsDialog = ( trigger ) => {
  */
 
 const initDialogs = () => {
-	tools.getNodes('[data-js="c-dialog-trigger"]', true, document, true).forEach( (trigger) => {
+	el.containers.forEach( (trigger) => {
 		const dialogId = trigger.getAttribute('data-content');
 		options.dialog.trigger = `[data-js="c-dialog-trigger"][data-content="${dialogId}"]`;
 		instances.dialogs[dialogId] = new A11yDialog(getOptionsDialog(trigger));
@@ -81,7 +79,7 @@ const initDialogs = () => {
  */
 
 const init = () => {
-	if (!el.container) {
+	if (!el.containers.length) {
 		return;
 	}
 

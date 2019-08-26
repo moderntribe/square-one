@@ -38,7 +38,7 @@ class Gallery extends Panel {
 			'dialog'         => $this->get_dialog_popup(),
 			'columns'        => $this->get_column_layout(),
 			'content_layout' => $this->get_content_layout(),
-			'button'		 => $this->get_button(),
+			'button'         => $this->get_button(),
 		];
 
 		return $data;
@@ -58,7 +58,9 @@ class Gallery extends Panel {
 			'panel',
 			's-wrapper',
 			'site-panel',
+			'c-slider--gallery-dark',
 			sprintf( 'site-panel--%s', $this->panel->get_type_object()->get_id() ),
+			sprintf( 'site-panel--%s--layout', '' ),
 			$content_layout,
 		];
 
@@ -72,7 +74,7 @@ class Gallery extends Panel {
 	 * @return array
 	 */
 	protected function get_slides( $size = 'full' ): array {
-		$slide_ids    = $this->panel_vars[ GalleryPanel::FIELD_GALLERY ];
+		$slide_ids = $this->panel_vars[ GalleryPanel::FIELD_GALLERY ];
 
 		if ( empty( $slide_ids ) ) {
 			return [];
@@ -170,9 +172,9 @@ class Gallery extends Panel {
 			$main_attrs[ 'data-livetext' ] = true;
 		}
 
-		$json_options = '{"spaceBetween":60,"ally":"true","keyboard":"true","grabCursor":"true","pagination":{"el":".swiper-pagination","type":"fraction"},"navigation":{"nextEl":".swiper-button-next","prevEl":".swiper-button-prev"}}';
+		$swiper_options = '{"spaceBetween":60,"ally":"true","keyboard":"true","grabCursor":"true","pagination":{"el":".swiper-pagination","type":"fraction"},"navigation":{"nextEl":".swiper-button-next","prevEl":".swiper-button-prev"}}';
 
-		$main_attrs['data-swiper-options'] = $json_options;
+		$main_attrs['data-swiper-options'] = $swiper_options;
 
 		$options = [
 			SliderComponent::SLIDES          => $this->get_slides(),
@@ -181,7 +183,7 @@ class Gallery extends Panel {
 			SliderComponent::SHOW_ARROWS     => true,
 			SliderComponent::SHOW_PAGINATION => true,
 			SliderComponent::MAIN_ATTRS      => $main_attrs,
-			SliderComponent::CLASSES		 => [ 'site-panel--gallery__slider' ]
+			SliderComponent::CLASSES         => [ 'site-panel--gallery__slider' ],
 		];
 
 		$slider = SliderComponent::factory( $options );
@@ -195,9 +197,9 @@ class Gallery extends Panel {
 	 * @return string
 	 */
 	protected function get_dialog_popup(): string {
-		$lightbox_toggle = $this->lightbox_on();
+		$dialog_toggle = $this->dialog_on();
 
-		if ( false === $lightbox_toggle ) {
+		if ( ! $dialog_toggle ) {
 			return '';
 		}
 
@@ -215,18 +217,18 @@ class Gallery extends Panel {
 	}
 
 	/**
-	 * Lightbox toggle
+	 * Dialog toggle
 	 *
 	 * @return bool
 	 */
-	protected function lightbox_on(): bool {
-		$lightbox_on = true;
+	protected function dialog_on(): bool {
+		$dialog_on = true;
 
-		if ( ! empty( $this->panel_vars[ GalleryPanel::FIELD_LIGHTBOX ] ) && $this->panel_vars[ GalleryPanel::FIELD_LIGHTBOX ] == GalleryPanel::OPTION_LIGHTBOX_OFF ) {
-			$lightbox_on = false;
+		if ( ! empty( $this->panel_vars[ GalleryPanel::FIELD_DIALOG ] ) && $this->panel_vars[ GalleryPanel::FIELD_DIALOG ] == GalleryPanel::OPTION_DIALOG_OFF ) {
+			$dialog_on = false;
 		}
 
-		return $lightbox_on;
+		return $dialog_on;
 	}
 
 	/**
@@ -251,11 +253,10 @@ class Gallery extends Panel {
 	 * @return string
 	 */
 	protected function get_content_layout_section_class(): string {
-
 		$classes = '';
 
 		if ( GalleryPanel::OPTION_CONTENT_INLINE === $this->panel_vars[ GalleryPanel::FIELD_CONTENT_LAYOUT ] ) {
-			$classes = 'site-panel--gallery--content-inline';
+			$classes = 'site-panel--gallery--layout--content-horizontal';
 		}
 
 		return $classes;
@@ -291,20 +292,26 @@ class Gallery extends Panel {
 	 * @return string
 	 */
 	protected function get_button(): string {
-		$btn_label = $this->panel_vars[ GalleryPanel::FIELD_BUTTON_LABEL ];
+		$btn_label        = $this->panel_vars[ GalleryPanel::FIELD_BUTTON_LABEL ];
+		$dialog_toggle    = $this->dialog_on();
+		$dialog_btn_attrs = [];
 
 		if ( empty( $btn_label ) ) {
 			return '';
+		}
+
+		if ( $dialog_toggle ) {
+			$dialog_btn_attrs = [
+				'data-js'      => 'c-dialog-trigger',
+				'data-content' => 'dialog-' . get_nest_index(),
+			];
 		}
 
 		$options = [
 			Button::LABEL       => esc_html( $btn_label ),
 			Button::BTN_AS_LINK => false,
 			Button::CLASSES     => [ 'c-btn site-panel--gallery__btn' ],
-			Button::ATTRS => [
-				'data-js'      => 'c-dialog-trigger',
-				'data-content' => 'dialog-' . get_nest_index(),
-			],
+			Button::ATTRS       => $dialog_btn_attrs,
 		];
 
 		$button_obj = Button::factory( $options );

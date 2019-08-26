@@ -11,14 +11,13 @@ class Gallery extends Panel_Type_Config {
 	const FIELD_TITLE          = 'title';
 	const FIELD_DESCRIPTION    = 'description';
 	const FIELD_GALLERY        = 'gallery';
-	const FIELD_CTA            = 'cta';
-	const FIELD_LIGHTBOX       = 'lightbox';
+	const FIELD_DIALOG         = 'dialog';
 	const FIELD_CONTENT_LAYOUT = 'content_layout';
 	const FIELD_COLUMNS        = 'columns';
 	const FIELD_BUTTON_LABEL   = 'button_label';
 
-	const OPTION_LIGHTBOX_ON     = 'lightbox_on';
-	const OPTION_LIGHTBOX_OFF    = 'lightbox_off';
+	const OPTION_DIALOG_ON       = 'dialog_on';
+	const OPTION_DIALOG_OFF      = 'dialog_off';
 	const OPTION_CONTENT_INLINE  = 'content_inline';
 	const OPTION_CONTENT_STACKED = 'content_stacked';
 	const OPTION_TWO_COLUMNS     = 'two_columns';
@@ -55,13 +54,13 @@ class Gallery extends Panel_Type_Config {
 		] ) );
 
 		$panel->add_settings_field( new Fields\ImageSelect( [
-			'name'    => self::FIELD_LIGHTBOX,
-			'label'   => __( 'Lightbox', 'tribe' ),
+			'name'    => self::FIELD_DIALOG,
+			'label'   => __( 'Dialog', 'tribe' ),
 			'options' => [
-				self::OPTION_LIGHTBOX_ON  => $this->handler->layout_icon_url( 'lightbox-on.svg' ),
-				self::OPTION_LIGHTBOX_OFF => $this->handler->layout_icon_url( 'lightbox-off.svg' ),
+				self::OPTION_DIALOG_ON  => $this->handler->layout_icon_url( 'dialog-on.svg' ),
+				self::OPTION_DIALOG_OFF => $this->handler->layout_icon_url( 'dialog-off.svg' ),
 			],
-			'default' => self::OPTION_LIGHTBOX_ON,
+			'default' => self::OPTION_DIALOG_ON,
 		] ) );
 
 		$panel->add_field( new Fields\TextArea( [
