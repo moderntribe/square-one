@@ -26,12 +26,14 @@ Attributes:
 {% if content %}
     <script {{ dialog_attr }} type="text/template" >
         <div class="{{ content_overlay_classes }}">
-            <header class="{{ content_header_classes }}">
-                {{ header_content }}
-            </header>
-            <div class="{{ content_wrapper_classes }}">
-                <div class="{{ content_inner_classes }}">
-                     {{ content }}
+            <div class="{{ content_overlay_inner_classes }}">
+                <header class="{{ content_header_classes }}">
+                    {{ header_content }}
+                </header>
+                <div class="{{ content_wrapper_classes }}">
+                    <div class="{{ content_inner_classes }}">
+                         {{ content }}
+                    </div>
                 </div>
             </div>
         </div>
