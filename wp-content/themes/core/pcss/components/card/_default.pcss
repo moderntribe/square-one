@@ -9,11 +9,6 @@
 	position: relative;
 }
 
-.c-card--vertical {
-	display: flex;
-	flex-direction: column;
-}
-
 .c-card--horizontal {
 	display: flex;
 	flex-direction: row;
@@ -70,7 +65,7 @@
 	}
 }
 
-.c-card__link-list {
+.c-card__meta {
 
 	ul {
 		margin: 0;
@@ -83,6 +78,15 @@
 
 		a {
 			@mixin overline;
+
+			&:visited {
+				color: var(--color-link);
+			}
+
+			&:focus,
+			&:hover {
+				color: var(--color-link-hover)
+			}
 		}
 	}
 }

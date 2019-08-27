@@ -54,7 +54,7 @@ class ContentCarousel extends Panel {
 			's-wrapper',
 			'site-panel',
 			's-wrapper--no-padding',
-			'c-slider__carousel-pull-right',
+			'c-slider--carousel-pull-right',
 			sprintf( 'site-panel--%s', $this->panel->get_type_object()->get_id() ),
 		];
 
@@ -110,9 +110,9 @@ class ContentCarousel extends Panel {
 			Slider::SHOW_CAROUSEL   => false,
 			Slider::SHOW_ARROWS     => true,
 			Slider::SHOW_PAGINATION => false,
-			Slider::MAIN_CLASSES    => [ 'c-slider__carousel-pull-right__wrap' ],
+			Slider::MAIN_CLASSES    => [ 'c-slider--carousel-pull-right__wrap', 'c-slider--arrows-hide-mobile' ],
 			Slider::MAIN_ATTRS      => $main_attrs,
-			Slider::SLIDE_CLASSES	=> [ 'c-slider__carousel-pull-right__slide' ],
+			Slider::SLIDE_CLASSES	=> [ 'c-slider--carousel-pull-right__slide' ],
 		];
 
 		$slider = Slider::factory( $options );
@@ -128,22 +128,23 @@ class ContentCarousel extends Panel {
 	protected function get_posts(): array {
 		$posts = [];
 
-		if ( ! empty( $this->panel_vars[ ContentCarouselPanel::FIELD_POSTS ] ) ) {
+		if ( empty( $this->panel_vars[ ContentCarouselPanel::FIELD_POSTS ] ) ) {
+			return [];
+		}
 
-			for ( $i = 0; $i < count( $this->panel_vars[ ContentCarouselPanel::FIELD_POSTS ] ); $i ++ ) {
+		for ( $i = 0; $i < count( $this->panel_vars[ ContentCarouselPanel::FIELD_POSTS ] ); $i ++ ) {
 
-				$post = $this->panel_vars[ ContentCarouselPanel::FIELD_POSTS ][ $i ];
+			$post = $this->panel_vars[ ContentCarouselPanel::FIELD_POSTS ][ $i ];
 
-				$options = [
-					Card::PRE_TITLE  => $this->get_categories( $post['post_id'] ),
-					Card::IMAGE      => $this->get_post_image( $post[ 'image' ], $post['link'] ),
-					Card::POST_TITLE => $this->get_post_title( esc_html( $post['title'] ), $post['link'], $i ),
-					Card::CLASSES	 => [ 'c-card--simple c-slider__carousel-pull-right__card' ],
-				];
+			$options = [
+				Card::PRE_TITLE  => $this->get_categories( $post['post_id'] ),
+				Card::IMAGE      => $this->get_post_image( $post[ 'image' ], $post['link'] ),
+				Card::POST_TITLE => $this->get_post_title( esc_html( $post['title'] ), $post['link'], $i ),
+				Card::CLASSES	 => [ 'c-card--simple c-slider--carousel-pull-right__card' ],
+			];
 
-				$post_obj = Card::factory( $options );
-				$posts[]  = $post_obj->render();
-			}
+			$post_obj = Card::factory( $options );
+			$posts[]  = $post_obj->render();
 		}
 
 		return $posts;
@@ -168,7 +169,7 @@ class ContentCarousel extends Panel {
 			Image::USE_LAZYLOAD => false,
 			Image::ECHO         => false,
 			Image::SRC_SIZE     => Image_Sizes::COMPONENT_CARD,
-			Image::LINK			=> esc_url( $link['url'] ),
+			Image::LINK         => esc_url( $link[ 'url' ] ),
 		];
 
 		$image_obj = Image::factory( $options );
@@ -192,7 +193,7 @@ class ContentCarousel extends Panel {
 
 		$options = [
 			Text::TEXT     => $categories,
-			Title::CLASSES => [ 'c-card__link-list' ],
+			Title::CLASSES => [ 'c-card__meta' ],
 			Title::TAG     => 'div',
 		];
 
