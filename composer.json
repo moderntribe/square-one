@@ -99,7 +99,6 @@
     "moderntribe/square1-cache": "dev-feature/monorepo",
     "moderntribe/square1-cli": "dev-feature/monorepo",
     "moderntribe/square1-container": "dev-feature/monorepo",
-    "moderntribe/square1-generators": "dev-feature/monorepo",
     "moderntribe/square1-nav": "dev-feature/monorepo",
     "moderntribe/square1-object-meta": "dev-feature/monorepo",
     "moderntribe/square1-oembed": "dev-feature/monorepo",
@@ -134,6 +133,7 @@
     "wp-cli/wp-cli": "^2.2.0",
     "lucatume/wp-browser": "^2.2.14",
     "lucatume/function-mocker": "~1.0",
+    "moderntribe/square1-generators": "dev-feature/monorepo",
     "php-http/httplug": "^1.1",
     "filp/whoops": "^2.2@dev"
   },

@@ -109,7 +109,9 @@ class Core {
 		];
 
 		foreach ( $optional_dependencies as $key => $provider ) {
-			$this->providers[ $key ] = new $provider();
+			if ( class_exists( $provider ) ) {
+				$this->providers[ $key ] = new $provider();
+			}
 		}
 	}
 
