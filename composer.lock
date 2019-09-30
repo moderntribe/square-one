@@ -795,24 +795,33 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:moderntribe/gutenpanels.git",
-                "reference": "4c8f3d07fc6b3b5320f64eee536e5a8d081e92aa"
+                "reference": "fa3a847843a464b081328a0b0efca3a0aa4355c0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/gutenpanels/zipball/4c8f3d07fc6b3b5320f64eee536e5a8d081e92aa",
-                "reference": "4c8f3d07fc6b3b5320f64eee536e5a8d081e92aa",
+                "url": "https://api.github.com/repos/moderntribe/gutenpanels/zipball/fa3a847843a464b081328a0b0efca3a0aa4355c0",
+                "reference": "fa3a847843a464b081328a0b0efca3a0aa4355c0",
                 "shasum": ""
             },
             "require": {
                 "pimple/pimple": "~3.0@dev"
             },
             "require-dev": {
-                "lucatume/wp-browser": "^1.10"
+                "lucatume/function-mocker": "~1.0",
+                "lucatume/wp-browser": "^1.10",
+                "mockery/mockery": "^1.2",
+                "phpstan/phpstan": "^0.12.0@dev"
             },
             "type": "wordpress-plugin",
             "autoload": {
                 "psr-4": {
-                    "Tribe\\Gutenpanels\\": "src/Gutenpanels"
+                    "Tribe\\Gutenpanels\\": "src/php"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Tribe\\Gutenpanels\\Tests\\": "tests/codeception/_support",
+                    "Tribe\\Gutenpanels\\": "tests/codeception/unit/Tribe/Gutenpanels"
                 }
             },
             "license": [
@@ -829,7 +838,7 @@
                 "source": "https://github.com/moderntribe/gutenpanels/tree/master",
                 "issues": "https://github.com/moderntribe/gutenpanels/issues"
             },
-            "time": "2019-08-12T22:43:14+00:00"
+            "time": "2019-09-24T20:14:15+00:00"
         },
         {
             "name": "moderntribe/square1-assets",
