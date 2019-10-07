@@ -8,7 +8,10 @@
   ],
   "config": {
     "vendor-dir": "vendor",
-    "preferred-install": "dist"
+    "preferred-install": {
+      "moderntribe/*": "source",
+      "*": "dist"
+    }
   },
   "description": "Modern Tribe's Square One WordPress setup",
   "type": "project",
@@ -22,23 +25,7 @@
     },
     {
       "type":"vcs",
-      "url":"git@github.com:moderntribe/attachment-helper.git"
-    },
-    {
-      "type":"vcs",
-      "url":"git@github.com:moderntribe/ajax-queue.git"
-    },
-    {
-      "type":"vcs",
       "url":"https://github.com/moderntribe/panel-builder.git"
-    },
-    {
-      "type":"vcs",
-      "url":"git@github.com:humanmade/Mercator.git"
-    },
-    {
-      "type":"vcs",
-      "url":"https://github.com/moderntribe/tribe-libs.git"
     },
     {
       "type": "package",
@@ -89,7 +76,26 @@
     "wpackagist-plugin/classic-editor":"1.5",
     "wpackagist-plugin/classic-editor-addon":"2.4.0",
     "moderntribe/panel-builder": "dev-3.3-branch",
-    "moderntribe/tribe-libs":"master",
+
+    "moderntribe/square1-acf": "2.0.0",
+    "moderntribe/square1-assets": "2.0.0",
+    "moderntribe/square1-blog-copier": "2.0.0",
+    "moderntribe/square1-cache": "2.0.0",
+    "moderntribe/square1-cli": "2.0.0",
+    "moderntribe/square1-container": "2.0.0",
+    "moderntribe/square1-nav": "2.0.0",
+    "moderntribe/square1-object-meta": "2.0.0",
+    "moderntribe/square1-oembed": "2.0.0",
+    "moderntribe/square1-p2p": "2.0.0",
+    "moderntribe/square1-post-type": "2.0.0",
+    "moderntribe/square1-queues": "2.0.0",
+    "moderntribe/square1-queues-mysql": "2.0.0",
+    "moderntribe/square1-schema": "2.0.0",
+    "moderntribe/square1-settings": "2.0.0",
+    "moderntribe/square1-taxonomy": "2.0.0",
+    "moderntribe/square1-user": "2.0.0",
+    "moderntribe/square1-utils": "2.0.0",
+
     "humanmade/mercator":"dev-master#7f3846a",
     "vlucas/phpdotenv": "^3.0",
     "humanmade/s3-uploads":"1.1.0",
@@ -111,6 +117,7 @@
     "wp-cli/wp-cli": "^2.2.0",
     "lucatume/wp-browser": "^2.2.14",
     "lucatume/function-mocker": "~1.0",
+    "moderntribe/square1-generators": "2.0.0",
     "php-http/httplug": "^1.1",
     "filp/whoops": "^2.2@dev"
   },

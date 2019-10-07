@@ -6,7 +6,7 @@ use Sunra\PhpSimple\HtmlDomParser;
  * A WP-CLI command to manage cache operations. In it's most basic form, it will retrieve URLs on a given page an request them priming page or object caches that may exist.
  * @package Tribe\Project\CLI
  */
-class Cache_Prime extends Command {
+class Cache_Prime extends \Tribe\Libs\CLI\Command {
 
 	protected function command() {
 		return 'cache-prime';
