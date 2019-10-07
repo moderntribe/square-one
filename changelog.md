@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2019.09
+* Changed: Cleaned up the `Page_Title` Class for readability and code standards
+
 ## 2019.08
 * Changed: sq1 Twig classes to use non-deprecated Twig classes and bump twig minimum to v2.11
 

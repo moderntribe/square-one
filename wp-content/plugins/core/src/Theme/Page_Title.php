@@ -19,17 +19,17 @@ class Page_Title {
 		}
 
 		// Search
-		elseif ( is_search() ) {
+		if ( is_search() ) {
 			return __( 'Search Results', 'tribe' );
 		}
 
 		// 404
-		elseif ( is_404() ) {
+		if ( is_404() ) {
 			return __( 'Page Not Found (404)', 'tribe' );
 		}
 
 		// Singular
-		elseif ( is_singular() ) {
+		if ( is_singular() ) {
 			return get_the_title();
 		}
 
