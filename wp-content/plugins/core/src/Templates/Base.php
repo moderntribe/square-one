@@ -155,7 +155,6 @@ class Base extends Twig_Template {
 	protected function submit_button(): string {
 
 		$btn_attr = [
-			'type'  => 'submit',
 			'name'  => 'submit',
 			'value' => __( 'Search', 'tribe' ),
 		];
@@ -164,6 +163,7 @@ class Base extends Twig_Template {
 			Button::LABEL   => __( 'Search', 'tribe' ),
 			Button::CLASSES => [ 'c-button' ],
 			Button::ATTRS   => $btn_attr,
+			Button::TYPE    => 'submit',
 		];
 
 		$button = Button::factory( $options );
