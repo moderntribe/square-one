@@ -21,7 +21,7 @@ This GitHub Workflow grants tr1b0t the ability to sniff and inline comment on PR
 
 ### Usage
 
-Copy `eslint.yml.sample` to `eslint.yml` to enable PHP code sniffing using the [reviewdog `action-eslint`](https://github.com/reviewdog/action-eslint) GitHub Action.
+Great news! Since we have an `.eslintrc` file, this action is already enabled.
 
 In order to leverage this code-sniffing workflow, this project will need:
 
