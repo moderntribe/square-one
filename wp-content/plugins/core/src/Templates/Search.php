@@ -7,7 +7,7 @@ class Search extends Index {
 
 	public function get_data(): array {
 		$data                   = parent::get_data();
-		$data['search_details'] = $this->get_search_details( count( $data['posts'] ) );
+		$data['search_details'] = $this->get_search_details();
 
 		return $data;
 	}
@@ -19,8 +19,15 @@ class Search extends Index {
 		return $data['post'];
 	}
 
-	protected function get_search_details( int $posts_found ): array {
-		$query = get_search_query();
+	protected function get_search_details(): array {
+		global $wp_query;
+
+		if ( ! $wp_query instanceof \WP_Query ) {
+			return [];
+		}
+
+		$posts_found = $wp_query->found_posts;
+		$query       = get_search_query();
 
 		$result_text = _n(
 			'result',
