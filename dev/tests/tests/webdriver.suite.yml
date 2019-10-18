@@ -47,3 +47,4 @@ modules:
                 # support the old format because it appears our selenium server doesn't recognize the new format
                 "chromeOptions":
                     args: ["--no-sandbox", "--headless", "--disable-gpu", "--user-agent=tribe-tester"]
+bootstrap: _bootstrap.php

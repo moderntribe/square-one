@@ -31,3 +31,4 @@ modules:
                 - [P2P_Storage, install]
                 - [P2P_Storage, init]
                 - tribe/project/queues/mysql/init_table
+bootstrap: _bootstrap.php
