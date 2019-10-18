@@ -46,7 +46,7 @@ before_install:
   # update docker
   - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
   - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-  - sudo apt -o Acquire::https::No-Cache=True -o Acquire::http::No-Cache=True update
+  - sudo apt-get update
   - sudo apt-get -y install docker-ce subversion
 
   # remove existing version of docker-compose and install an updated version
