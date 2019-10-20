@@ -5,7 +5,7 @@ class FacadeTest extends \Codeception\Test\Unit {
 	 * @var \UnitTester
 	 */
 	protected $tester;
-/*
+
 	protected function _before() {
 		parent::_before();
 
@@ -49,5 +49,5 @@ class FacadeTest extends \Codeception\Test\Unit {
 		\Tribe\Project\Facade\Items\Request::destroy_mock();
 
 		$this->assertEquals( $original, $test_class->return_all() );
-	}*/
+	}
 }
