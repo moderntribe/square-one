@@ -6,7 +6,7 @@ class FacadeTest extends \Codeception\Test\Unit {
 	 */
 	protected $tester;
 
-	protected function _before() {
+	/*protected function _before() {
 		parent::_before();
 
 		$request_mock = $this->makeEmpty( \Tribe\Project\Request\Request::class, [ 'all' => function () {
@@ -49,5 +49,5 @@ class FacadeTest extends \Codeception\Test\Unit {
 		\Tribe\Project\Facade\Items\Request::destroy_mock();
 
 		$this->assertEquals( $original, $test_class->return_all() );
-	}
+	}*/
 }
