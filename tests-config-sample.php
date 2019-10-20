@@ -14,10 +14,25 @@ if ( file_exists( dirname( __FILE__ ) . '/build-process.php' ) ) {
 	include( dirname( __FILE__ ) . '/build-process.php' );
 }
 
-define( 'DB_NAME', 'tribe_square1_tests' );
-define( 'DB_USER', 'root' );
-define( 'DB_PASSWORD', 'password' );
-define( 'DB_HOST', 'mysql' );
+if ( isset( $this ) && $this instanceof \Codeception\Module\WPLoader ) {
+	$config = $this->_getConfig();
+	define( 'DB_NAME', $config['dbName'] );
+	define( 'DB_HOST', $config['dbHost'] );
+	define( 'DB_USER', $config['dbUser'] );
+	define( 'DB_PASSWORD', $config['dbPassword'] );
+} else {
+	/**
+	 * If we are not in the context of WPLoader module, this is a WPBrowser request
+	 */
+	require_once( __DIR__ . '/vendor/autoload.php' );
+	$tests_env = \Dotenv\Dotenv::create( __DIR__ . '/dev/tests' );
+	$tests_env->load();
+	define( 'DB_NAME', getenv( 'ACCEPTANCE_DB_NAME' ) );
+	define( 'DB_HOST', getenv( 'ACCEPTANCE_DB_HOST' ) );
+	define( 'DB_USER', getenv( 'ACCEPTANCE_DB_USER' ) );
+	define( 'DB_PASSWORD', getenv( 'ACCEPTANCE_DB_PASS' ) );
+}
+
 //define( 'DOMAIN_CURRENT_SITE', 'square1.tribe' );
 //define( 'WP_TESTS_MULTISITE', true );
 define( 'WP_TESTS_DOMAIN', 'square1.tribe' );

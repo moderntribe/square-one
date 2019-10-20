@@ -49,7 +49,10 @@ if ( file_exists( dirname( __FILE__ ) . '/build-process.php' ) ) {
 
 if ( ( isset( $_SERVER['HTTP_X_TRIBE_TESTING'] ) || ( isset( $_SERVER['HTTP_USER_AGENT'] ) && $_SERVER['HTTP_USER_AGENT'] === 'tribe-tester' ) || tribe_getenv( 'WPBROWSER_HOST_REQUEST' ) ) && file_exists( __DIR__ . '/tests-config.php' ) ) {
 	include __DIR__ . '/tests-config.php';
-} elseif ( file_exists( __DIR__ . '/local-config.php' ) ) {
+	require_once ABSPATH . 'wp-settings.php';
+	return;
+}
+if ( file_exists( __DIR__ . '/local-config.php' ) ) {
 	include __DIR__ . '/local-config.php';
 }
 

@@ -12,9 +12,9 @@ modules:
         - Asserts
     config:
         WPDb:
-            dsn: 'mysql:host=%DB_HOST%;dbname=%DB_NAME%'
-            user: %DB_USER%
-            password: %DB_PASSWORD%
+            dsn: 'mysql:host=%ACCEPTANCE_DB_HOST%;dbname=%ACCEPTANCE_DB_NAME%'
+            user: %ACCEPTANCE_DB_USER%
+            password: %ACCEPTANCE_DB_PASS%
             dump: tests/_data/dump.sql
             populate: true
             cleanup: false
@@ -23,13 +23,14 @@ modules:
             urlReplacement: false
             populator: 'mysql --max_allowed_packet=512M -u $user -h $host -p$password $dbname < $dump'
         WPLoader:
-            loadOnly: true
+            loadOnly: false
             wpRootFolder: %WP_ROOT_FOLDER%
-            dbName: %DB_NAME%
-            dbHost: %DB_HOST%
-            dbUser: %DB_USER%
-            dbPassword: '%DB_PASSWORD%'
+            dbName: %ACCEPTANCE_DB_NAME%
+            dbHost: %ACCEPTANCE_DB_HOST%
+            dbUser: %ACCEPTANCE_DB_USER%
+            dbPassword: '%ACCEPTANCE_DB_PASS%'
             configFile: tests-config.php
+            tablePrefix: %TABLE_PREFIX%
         WPWebDriver:
             url: '%WP_URL%'
             adminUsername: '%WP_ADMIN_USERNAME%'
