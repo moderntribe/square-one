@@ -18,7 +18,7 @@ class RequestTest extends \Codeception\Test\Unit {
 	}
 
 
-	/*public function testQuery() {
+	public function testQuery() {
 		include_once( __DIR__ . '/../../../../wp/wp-includes/class-wp-query.php' );
 		$server_mock = $this->makeEmpty( Tribe\Project\Request\Server::class, [ 'get_query' => function () {
 			return new \WP_Query();
@@ -181,5 +181,5 @@ class RequestTest extends \Codeception\Test\Unit {
 		$server_mock            = $this->makeEmptyExcept( Tribe\Project\Request\Server::class, 'get_path' );
 		$request                = new \Tribe\Project\Request\Request( $server_mock );
 		$this->assertTrue( $request->is( $path ) );
-	}*/
+	}
 }
