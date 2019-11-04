@@ -79,11 +79,13 @@ const init = () => {
 	components();
 	single();
 
-	// @EXAMPLE_REACT_APP
+	// @EXAMPLE_REACT_APP (Make sure to include the wrapping if block for ALL react apps
 
+	// #if INCLUDEREACT
 	// if ( el.exampleAppRoot && ! HMR_DEV ) {
 	// 	import( 'Example' /* webpackChunkName:"example" */ );
 	// }
+	// #endif
 
 	console.info( 'Square One FE: Initialized all javascript that targeted document ready.' );
 };

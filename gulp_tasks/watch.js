@@ -11,6 +11,32 @@ const watchConfig = {
 	watch: true,
 };
 
+const ifdefOpts = {
+	'INCLUDEREACT': false,
+	'version': 3,
+	'ifdef-verbose': true,
+	'ifdef-triple-slash': false,
+};
+
+const ifDefRuleOverride = [
+	{
+		test: /\.js$/,
+		exclude: [ /(node_modules)/ ],
+		use: [
+			{
+				loader: 'babel-loader',
+			},
+			{
+				loader: 'ifdef-loader',
+				options: ifdefOpts,
+			},
+		],
+	},
+];
+
+webpackAdminDevConfig.module.rules = ifDefRuleOverride;
+webpackThemeDevConfig.module.rules = ifDefRuleOverride;
+
 function maybeReloadBrowserSync() {
 	const server = browserSync.get( 'Tribe Dev' );
 	if ( server.active ) {
