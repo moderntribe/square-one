@@ -3,24 +3,7 @@
 
 namespace Tribe\Project\Cache;
 
-use Tribe\Project\Post_Types\Campus_Update;
-use Tribe\Project\Post_Types\School;
-
 class Listener extends \Tribe\Libs\Cache\Listener {
-
-	/**
-	 * Register each hook that should lead to something expiring
-	 *
-	 * @return void
-	 */
-	public function hook() {
-		add_action( 'save_post', array( $this, 'save_post' ), 10, 2 );
-		add_action( 'wp_update_nav_menu_item', array( $this, 'update_menu' ), 10, 0 );
-		add_action( 'wp_create_nav_menu', array( $this, 'update_menu' ), 10, 0 );
-		add_action( 'wp_delete_nav_menu', array( $this, 'update_menu' ), 10, 0 );
-		add_action( 'p2p_created_connection', array( $this, 'p2p_created_connection' ), 10, 1 );
-		add_action( 'p2p_delete_connections', array( $this, 'p2p_delete_connections' ), 10, 1 );
-	}
 
 	/**
 	 * A post has been created, updated, or trashed

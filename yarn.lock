@@ -6008,6 +6008,13 @@ ieee754@^1.1.4:
   resolved "https://registry.yarnpkg.com/ieee754/-/ieee754-1.1.12.tgz#50bf24e5b9c8bb98af4964c941cdb0918da7b60b"
   integrity sha512-GguP+DRY+pJ3soyIiGPTvdiVXjZ+DbXOxGpXn3eMvNW4x4irjqXm4wHKscC+TfxSJ0yw/S1F24tqdMNsMZTiLA==
 
+ifdef-loader@^2.1.1:
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/ifdef-loader/-/ifdef-loader-2.1.4.tgz#1f0c22f7e92cf216132511b148ca1c3a31d77635"
+  integrity sha512-jwlI3q7PbOU5NlN6pB8atrpx4Yg8gdVNKQIOymlbuHblbShivEZUjsC3Oxwmf9bRApL5NckIiCdB0TGikuHbGQ==
+  dependencies:
+    loader-utils "^1.1.0"
+
 iferr@^0.1.5:
   version "0.1.5"
   resolved "https://registry.yarnpkg.com/iferr/-/iferr-0.1.5.tgz#c60eed69e6d8fdb6b3104a1fcbca1c192dc5b501"
