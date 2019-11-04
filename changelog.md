@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2019.11
+* Removed: Google+ (deprecated) support for social sharing and following functionality
+
 ## 2019.10
 * Changed: Updated core plugin to work with the Tribe Libs monorepo
 * Changed: Loosened version constrain on Tribe Libs packages to "^2.0"
