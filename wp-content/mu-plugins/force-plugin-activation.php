@@ -24,6 +24,7 @@ class Force_Plugin_Activation {
 		'tribe-branding/tribe-branding.php',
 		'classic-editor/classic-editor.php',
 		'classic-editor-addon/classic-editor-addon.php',
+		'safe-svg/safe-svg.php',
 	);
 
 	/**
