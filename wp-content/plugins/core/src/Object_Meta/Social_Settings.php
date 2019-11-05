@@ -14,7 +14,6 @@ class Social_Settings extends ACF\ACF_Meta_Group {
 	const LINKEDIN  = 'linkedin';
 	const PINTEREST = 'pinterest';
 	const INSTAGRAM = 'instagram';
-	const GOOGLE    = 'google-plus';
 
 	public function get_keys() {
 		return [
@@ -24,7 +23,6 @@ class Social_Settings extends ACF\ACF_Meta_Group {
 			static::LINKEDIN,
 			static::PINTEREST,
 			static::INSTAGRAM,
-			static::GOOGLE,
 		];
 	}
 
@@ -42,8 +40,6 @@ class Social_Settings extends ACF\ACF_Meta_Group {
 				return __( 'Follow us on Pinterest', 'tribe' );
 			case self::INSTAGRAM:
 				return __( 'Follow us on Instagram', 'tribe' );
-			case self::GOOGLE:
-				return __( 'Follow us on Google+', 'tribe' );
 			default:
 				return '';
 		}
@@ -59,7 +55,6 @@ class Social_Settings extends ACF\ACF_Meta_Group {
 		$group->add_field( $this->get_social_field( __( 'Pinterest', 'tribe' ), self::PINTEREST ) );
 		$group->add_field( $this->get_social_field( __( 'YouTube', 'tribe' ), self::YOUTUBE ) );
 		$group->add_field( $this->get_social_field( __( 'Instagram', 'tribe' ), self::INSTAGRAM ) );
-		$group->add_field( $this->get_social_field( __( 'Google+', 'tribe' ), self::GOOGLE ) );
 
 		return $group->get_attributes();
 	}
