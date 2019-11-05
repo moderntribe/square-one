@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2019.11
+* Changed: update docker `start.sh` script to check for a root `.env` file
+
 ## 2019.10
 * Changed: Updated core plugin to work with the Tribe Libs monorepo
 
