@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## 2019.11
+* Added `TRIBE_DISABLE_PANELS_CACHE` to `local-config.php`
 * Removed: Google+ (deprecated) support for social sharing and following functionality
 * Added container component to allow for more composition flexibility
 * Added ifdef loader for Webpack to allow exclusion of React app chunk generation during main js bundle dev work
