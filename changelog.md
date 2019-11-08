@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 * Added container component to allow for more composition flexibility
 * Added ifdef loader for Webpack to allow exclusion of React app chunk generation during main js bundle dev work
 * Changed: update docker `start.sh` script to check for a root `.env` file
+* Changed: added check to panels caching to avoid caching on panel preview
 
 ## 2019.10
 * Changed: Updated core plugin to work with the Tribe Libs monorepo
