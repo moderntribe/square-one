@@ -111,7 +111,7 @@ const handlePanelEvents = ( e ) => {
 
 /**
  * @function toggleItem
- * @param {Object} e The js event object.
+ * @param {object} e The js event object.
  * @description Toggle the active accordion item using class methods.
  */
 

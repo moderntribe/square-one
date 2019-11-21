@@ -13,9 +13,9 @@ let url;
 /**
  * @function getFilterString
  * @description Private function used to set or remove the term id from the comma separated FILTER_KEY.
- * @param {String} value the term id.
- * @param {Boolean} remove or add the value?
- * @param {String} urlKey to update
+ * @param {string} value the term id.
+ * @param {boolean} remove or add the value?
+ * @param {string} urlKey to update
  * @private
  */
 
@@ -46,7 +46,7 @@ const updateUrl = () => {
 /**
  * @function addFilter
  * @description Adds a filter to the url.
- * @param {String} value the term id.
+ * @param {string} value the term id.
  */
 
 const addFilter = ( value, key ) => {
@@ -57,7 +57,7 @@ const addFilter = ( value, key ) => {
 /**
  * @function removeFilter
  * @description Removes a filter from the url.
- * @param {String} value the term id.
+ * @param {string} value the term id.
  */
 
 const removeFilter = ( value, key ) => {

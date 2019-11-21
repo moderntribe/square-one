@@ -93,6 +93,7 @@ export const removeClassThatContains = ( el, string = '' ) => {
 
 /**
  * Compares an els classList against an array of strings to see if any match
+ *
  * @param el the element to check against
  * @param arr The array of classes as strings to test against
  * @param prefix optional prefix string applied to all test strings
