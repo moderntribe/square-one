@@ -5,7 +5,7 @@ const pkg = require( '../package.json' );
 module.exports = {
 	coreIconsVariables() {
 		return gulp.src( `${ pkg._core_theme_pcss_path }utilities/variables/_icons.pcss` )
-			.pipe( footer( '}' ) )
+			.pipe( footer( '}\n' ) )
 			.pipe( gulp.dest( `${ pkg._core_theme_pcss_path }utilities/variables/` ) );
 	},
 };
