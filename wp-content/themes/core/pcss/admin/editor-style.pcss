@@ -18,26 +18,6 @@
 
 /* -----------------------------------------------------------------------------
  *
- * Body & Globals
- *
- * ----------------------------------------------------------------------------- */
-
-html .mceContentBody {
-	padding: 15px !important;
-}
-
-body {
-	color: var(--color-text);
-	background-color: var(--color-white);
-	font: var(--font-weight-regular) normal 100%/var(--line-height-base) var(--font-family-base);
-	-webkit-font-smoothing: antialiased;
-	hyphens: auto;
-	text-rendering: optimizeLegibility;
-	vertical-align: baseline;
-}
-
-/* -----------------------------------------------------------------------------
- *
  * Style Guide
  *
  * ----------------------------------------------------------------------------- */
@@ -55,7 +35,7 @@ body {
 @import "../base/typography/tables";
 
 /* Media */
-@import "../base/media/audio";
+@import "../base/media/wp-audio-video";
 @import "../base/media/images";
 @import "../base/media/wp-playlist";
 
@@ -77,6 +57,26 @@ body {
 @import "../base/forms/controls/select";
 @import "../base/forms/controls/textarea";
 @import "../base/forms/validation/required";
+
+/* -----------------------------------------------------------------------------
+ *
+ * Body & Globals
+ *
+ * ----------------------------------------------------------------------------- */
+
+html .mceContentBody {
+	padding: 15px !important;
+}
+
+body {
+	color: var(--color-text);
+	background-color: var(--color-white);
+	font: var(--font-weight-regular) normal 100%/var(--line-height-base) var(--font-family-base);
+	-webkit-font-smoothing: antialiased;
+	hyphens: auto;
+	text-rendering: optimizeLegibility;
+	vertical-align: baseline;
+}
 
 /* -----------------------------------------------------------------------------
  *

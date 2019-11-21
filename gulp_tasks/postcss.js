@@ -10,6 +10,7 @@ const pkg = require( '../package.json' );
 const compilePlugins = [
 	require( 'postcss-partial-import' )( {
 		extension: '.pcss',
+		prefix: '_',
 	} ),
 	require( 'postcss-mixins' ),
 	require( 'postcss-custom-properties' )( { preserve: false } ),
@@ -27,6 +28,7 @@ const compilePlugins = [
 const legacyPlugins = [
 	require( 'postcss-partial-import' )( {
 		extension: '.pcss',
+		prefix: '_',
 	} ),
 	require( 'postcss-mixins' ),
 	require( 'postcss-custom-properties' )( { preserve: false } ),

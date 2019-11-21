@@ -11,7 +11,7 @@
 /* Variables */
 @import "variables/colors";
 @import "variables/easing";
-@import "variables/forms";
+@import "variables/_forms.pcss"; /* Necessary b/c `forms` is both the name of a file and folder and postcss-partial-imports was unable to distinguish. */
 @import "variables/forms/label";
 @import "variables/forms/legend";
 @import "variables/forms/fieldset";
