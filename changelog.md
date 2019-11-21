@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file.
 * Added ifdef loader for Webpack to allow exclusion of React app chunk generation during main js bundle dev work
 * Changed: update docker `start.sh` script to check for a root `.env` file
 * Changed: added check to panels caching to avoid caching on panel preview
+* Updated: Node & NPM to latest LTS versions and all FE build tooling to latest (compatible) package versions. Related misc FE build tooling tweaks to accommodate new package versions.
 
 ## 2019.10
 * Changed: Updated core plugin to work with the Tribe Libs monorepo
