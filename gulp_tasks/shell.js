@@ -4,16 +4,16 @@ const browserSync = require( 'browser-sync' );
 
 module.exports = {
 	yarnInstall() {
-		return gulp.src( '' )
+		return gulp.src( './' )
 			.pipe( shell( 'yarn install' ) );
 	},
 	test() {
-		return gulp.src( '' )
+		return gulp.src( './' )
 			.pipe( shell( 'yarn test' ) );
 	},
 	scriptsThemeDev() {
 		const server = browserSync.get( 'Tribe Dev' );
-		return gulp.src( '' )
+		return gulp.src( './' )
 			.pipe( shell( 'yarn js:theme:dev' ) )
 			.on( 'finish', function() {
 				if ( server.active ) {
@@ -22,12 +22,12 @@ module.exports = {
 			} );
 	},
 	scriptsThemeProd() {
-		return gulp.src( '' )
+		return gulp.src( './' )
 			.pipe( shell( 'yarn js:theme:prod' ) );
 	},
 	scriptsAdminDev() {
 		const server = browserSync.get( 'Tribe Dev' );
-		return gulp.src( '' )
+		return gulp.src( './' )
 			.pipe( shell( 'yarn js:admin:dev' ) )
 			.on( 'finish', function() {
 				if ( server.active ) {
@@ -36,7 +36,7 @@ module.exports = {
 			} );
 	},
 	scriptsAdminProd() {
-		return gulp.src( '' )
+		return gulp.src( './' )
 			.pipe( shell( 'yarn js:admin:prod' ) );
 	},
 };
