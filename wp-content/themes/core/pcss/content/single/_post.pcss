@@ -18,6 +18,7 @@
 
 	.item-single__content {
 		position: relative;
+		margin-bottom: var(--spacer-6);
 	}
 
 	.item-single__meta {
@@ -106,6 +107,149 @@
 				margin-bottom: 15px;
 				margin-right: 0;
 				float: none;
+			}
+		}
+	}
+
+	.item-single__related-posts {
+		position: relative;
+		margin-bottom: var(--spacer-5);
+
+		> hr {
+			margin: var(--spacer-4) var(--grid-gutter-negative);
+
+			@media (--viewport-full) {
+				margin: 0 auto var(--spacer-3);
+			}
+		}
+
+		h2 {
+			@mixin title-large;
+
+			margin-bottom: var(--spacer-2);
+
+			@media (--viewport-full) {
+				@mixin headline-large;
+
+				margin-bottom: var(--spacer-4);
+			}
+		}
+	}
+
+	.item-single__related-post {
+		margin: var(--spacer-1) auto;
+		position: relative;
+
+		.anchor {
+			padding: 0;
+			border: none;
+		}
+
+		.t-content {
+			display: none;
+
+			@media (--viewport-full) {
+				display: block;
+			}
+		}
+
+		+ hr {
+			@media (--viewport-full) {
+				margin: var(--spacer-4) auto;
+			}
+		}
+
+		&__meta {
+			display: flex;
+			position: absolute;
+			top: 0;
+
+			@media (--viewport-medium) {
+				position: static;
+			}
+
+			* {
+				@mixin overline;
+
+				line-height: var(--font-size-1);
+			}
+
+			&-date {
+				margin-bottom: 8px;
+
+				span:first-child {
+					display: block;
+				}
+
+				span:last-child {
+					display: none;
+				}
+
+				@media (--viewport-medium) {
+
+					span:first-child {
+						display: none;
+					}
+
+					span:last-child {
+						display: block;
+					}
+				}
+			}
+
+			&-categories {
+
+				a {
+					margin-right: 20px;
+				}
+
+				@media (--viewport-medium) {
+					position: absolute;
+					left: 0;
+					top: 0;
+				}
+			}
+		}
+
+		&__category-holder {
+			display: none;
+
+			@media (--viewport-medium) {
+				display: block;
+			}
+		}
+
+		&__featured-image {
+			padding-left: 0;
+
+			@media (--viewport-medium) {
+				padding-left: var(--grid-gutter-half);
+			}
+		}
+
+		&__content {
+			padding-left: 15px;
+			width: 66.6%;
+
+			@media (--viewport-medium) {
+				width: 41.66%;
+			}
+
+			h3 {
+				/* There isn't a mixin for this specific set of values */
+				margin-top: 20px;
+				font-family: var(--font-family-calibre);
+				font-size: var(--font-size-3);
+				line-height: var(--line-height-2);
+				font-weight: var(--font-weight-semibold);
+				letter-spacing: 0.11px;
+
+				@media (--viewport-full) {
+					@mixin headline;
+
+					margin-top: -10px;
+					margin-bottom: 8px;
+				}
 			}
 		}
 	}

@@ -10,12 +10,14 @@ use Tribe\Project\Theme\Social_Links;
 
 class Single extends Base {
 	public function get_data(): array {
-		$data                 = parent::get_data();
-		$data['post']         = $this->get_post();
-		$data['comments']     = $this->get_comments();
-		$data['breadcrumbs']  = $this->get_breadcrumbs();
-		$data['pagination']   = $this->get_pagination();
-		$data['social_share'] = $this->get_social_share();
+		$data                  = parent::get_data();
+		$post                  = $this->get_post();
+		$data['post']          = $post[ 'post' ];
+		$data['related_posts'] = $post[ 'related_posts' ];
+		$data['comments']      = $this->get_comments();
+		$data['breadcrumbs']   = $this->get_breadcrumbs();
+		$data['pagination']    = $this->get_pagination();
+		$data['social_share']  = $this->get_social_share();
 
 		return $data;
 	}
@@ -25,7 +27,7 @@ class Single extends Base {
 		$template = new Content\Single\Post( $this->template, $this->twig );
 		the_post();
 		$data = $template->get_data();
-		return $data['post'];
+		return $data;
 	}
 
 	protected function get_comments() {

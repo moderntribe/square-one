@@ -33,4 +33,35 @@
 		</footer>
 	</div>
 
+	<div class="item-single__related-posts">
+		<hr>
+		<h2>More Posts</h2>
+		<div class="item-single__related-posts-wrapper">
+			{% for related_post in related_posts %}
+				<div class="item-single__related-post g-row">
+					<div class="item-single__related-post__category-holder g-col g-col--one-sixth"></div>
+					<div class="item-single__related-post__featured-image g-col g-col--one-third g-col-important">
+						{{ related_post.featured_image }}
+					</div>
+					<div class="item-single__related-post__content g-col g-col--five-twelfth">
+						<h3><a href="{{ related_post.permalink }}">{{ related_post.title }}</a></h3>
+						<div class="item-single__related-post__meta">
+							<div class="item-single__related-post__meta-categories">
+								<a class="anchor" href="#">{{ related_post.categories[0].name|esc_html }}</a>
+							</div>
+							<div class="item-single__related-post__meta-date u-fc-nevada">
+								<time datetime="{{ related_post.time['c']|esc_attr }}">
+									<span>{{ related_post.date_reduced|esc_html }}</span>
+									<span>{{ related_post.date|esc_html }}</span>
+								</time>
+							</div>
+						</div>
+						<div class="t-content">{{ related_post.excerpt }}</div>
+					</div>
+				</div>
+				<hr>
+			{% endfor %}
+		</div>
+	</div>
+
 </article>

@@ -7,6 +7,8 @@ namespace Tribe\Project\Theme;
 class Image_Sizes {
 	const CORE_FULL      = 'core-full';
 	const CORE_MOBILE    = 'core-mobile';
+	const CORE_SQUARE    = 'core-square';
+	const CORE_LANDSCAPE = 'core-landscape';
 	const SOCIAL_SHARE   = 'social-share';
 	const COMPONENT_CARD = 'component-card';
 
@@ -20,6 +22,16 @@ class Image_Sizes {
 			'width'  => 1152,
 			'height' => 0,
 			'crop'   => true,
+		],
+		self::CORE_SQUARE => [
+			'width' => 600,
+			'height' => 600,
+			'crop' => true,
+		],
+		self::CORE_LANDSCAPE => [
+			'width' => 800,
+			'height' => 530,
+			'crop' => true,
 		],
 		self::SOCIAL_SHARE => [
 			'width'  => 1200,
