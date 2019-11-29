@@ -1,32 +1,36 @@
 <article class="item-single">
 
-	{{ post.featured_image }}
+	<div class="item-single__featured-image">{{ post.featured_image }}</div>
 
-	<div class="item-single__content t-content">
-		{{ post.content }}
-	</div>
+	<div class="l-container__stagger item-single__content">
+		<h1>{{ post.title }}</h1>
+		<div class="item-single__meta">
 
-	<footer class="item-single__footer">
+			{% if post.categories %}
+				<div class="item-single__meta-categories">
+					<ul>
+						{% for category in post.categories %}
+							<li><a class="anchor" href="#">{{ category.name|esc_html }}</a></li>
+						{% endfor %}
+					</ul>
+				</div>
+			{% endif %}
 
-		<ul class="item-single__meta">
-
-			<li class="item-single__meta-date">
+			<div class="item-single__meta-date u-fc-nevada">
 				<time datetime="{{ post.time['c']|esc_attr }}">
 					{{ post.date|esc_html }}
 				</time>
-			</li>
+			</div>
 
-			<li class="item-single__meta-author">
-				{{ __('by')|esc_html }}
-				<a href="{{ post.author.url|esc_url }}" rel="author">
-					{{ post.author.name|esc_html }}
-				</a>
-			</li>
+		</div>
+		<div class="t-content">
+			{{ post.content }}
+		</div>
+		<footer class="item-single__footer">
 
-		</ul>
+			{{ include( 'components/share.twig' ) }}
 
-		{{ include( 'components/share.twig' ) }}
-
-	</footer>
+		</footer>
+	</div>
 
 </article>

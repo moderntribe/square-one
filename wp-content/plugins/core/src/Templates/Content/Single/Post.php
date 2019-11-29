@@ -22,6 +22,7 @@ class Post extends Twig_Template {
 			'time'           => $this->get_time(),
 			'date'           => the_date( '', '', '', false ),
 			'author'         => $this->get_author(),
+			'categories'     => get_categories()
 		];
 
 		return $data;
@@ -35,6 +36,7 @@ class Post extends Twig_Template {
 		$options = [
 			'wrapper_class' => 'item-single__image',
 			'echo'          => false,
+			'src_size'          => 'full'
 		];
 
 		return the_tribe_image( get_post_thumbnail_id(), $options );
