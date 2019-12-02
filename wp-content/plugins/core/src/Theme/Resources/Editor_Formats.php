@@ -77,6 +77,12 @@ class Editor_Formats {
 					],
 				],
 			],
+			[
+				'title'    => __( 'Paragraph Large', 'tribe' ),
+				'selector' => 'p',
+				'classes'  => 'p-secondary',
+				'wrapper'  => false,
+			],
 		];
 		$settings[ 'style_formats' ] = json_encode( $style_formats );
 		return $settings;
