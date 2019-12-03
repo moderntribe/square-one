@@ -3,20 +3,24 @@
 	<div class="item-single__featured-image">{{ post.featured_image }}</div>
 
 	<div class="l-container__stagger item-single__content">
-		<h1>{{ post.title }}</h1>
+		<h1 class="item-single__headline">{{ post.title }}</h1>
 		<div class="item-single__meta">
 
 			{% if post.categories %}
-				<div class="item-single__meta-categories">
-					<ul>
+				<div class="item-single__meta__categories">
+					<ul class="item-single__meta__categories__list">
 						{% for category in post.categories %}
-							<li><a class="anchor" href="#">{{ category.name|esc_html }}</a></li>
+							<li class="item-single__meta__categories__list-item">
+								<a class="item-single__meta__categories__category-link" href="{{ category.permalink }}">
+									{{ category.name|esc_html }}
+								</a>
+							</li>
 						{% endfor %}
 					</ul>
 				</div>
 			{% endif %}
 
-			<div class="item-single__meta-date u-fc-nevada">
+			<div class="item-single__meta__date u-fc-nevada">
 				<time datetime="{{ post.time['c']|esc_attr }}">
 					{{ post.date|esc_html }}
 				</time>
@@ -34,8 +38,8 @@
 	</div>
 
 	<div class="item-single__related-posts">
-		<hr>
-		<h2>More Posts</h2>
+		<hr class="item-single__related-posts__divider">
+		<h2 class="item-single__related-posts__section-title">More Posts</h2>
 		<div class="item-single__related-posts-wrapper">
 			{% for related_post in related_posts %}
 				<div class="item-single__related-post g-row">
@@ -44,22 +48,25 @@
 						{{ related_post.featured_image }}
 					</div>
 					<div class="item-single__related-post__content g-col g-col--five-twelfth">
-						<h3><a href="{{ related_post.permalink }}">{{ related_post.title }}</a></h3>
+						<h3 class="item-single__related-post__title">
+							<a href="{{ related_post.permalink }}">{{ related_post.title }}</a>
+						</h3>
 						<div class="item-single__related-post__meta">
 							<div class="item-single__related-post__meta-categories">
-								<a class="anchor" href="#">{{ related_post.categories[0].name|esc_html }}</a>
+								<a class="item-single__related-post__meta-categories__link" href="{{ related_post.categories[0].permalink|esc_attr }}">
+									{{ related_post.categories[0].name|esc_html }}
+								</a>
 							</div>
 							<div class="item-single__related-post__meta-date u-fc-nevada">
 								<time datetime="{{ related_post.time['c']|esc_attr }}">
-									<span>{{ related_post.date_reduced|esc_html }}</span>
-									<span>{{ related_post.date|esc_html }}</span>
+									{{ related_post.date|esc_html }}
 								</time>
 							</div>
 						</div>
-						<div class="t-content">{{ related_post.excerpt }}</div>
+						<div class="t-content item-single__related-post__body">{{ related_post.excerpt }}</div>
 					</div>
 				</div>
-				<hr>
+				<hr class="item-single__related-post__divider">
 			{% endfor %}
 		</div>
 	</div>

@@ -5,21 +5,46 @@
  * ----------------------------------------------------------------------------- */
 
 .social-share {
+	@mixin clearfix;
 
+	position: static;
+	margin: var(--spacer-4) 0;
+
+	@media (--viewport-full) {
+		position: absolute;
+		top: 18px; /* 18px to match starting point of right H1 TODO: Remove this comment */
+		left: 0;
+		margin: 0;
+	}
 }
 
 .social-share__title {
-
-}
-
-.social-share-networks {
-
+	display: none;
 }
 
 .social-share-networks__item {
+	margin-right: 15px;
+	float: left;
 
+	@media (--viewport-full) {
+		margin-bottom: 15px;
+		margin-right: 0;
+		float: none;
+	}
 }
 
 .social-share-networks__anchor {
+	color: var(--color-submarine);
+	display: inline-block;
+	width: 44px;
+	height: 44px;
+	line-height: 42px;
+	text-align: center;
+	border: 2px solid var(--color-submarine);
+	font-size: 22px;
 
+	&:hover {
+		color: var(--color-mine-shaft);
+		border-color: var(--color-mine-shaft);
+	}
 }
