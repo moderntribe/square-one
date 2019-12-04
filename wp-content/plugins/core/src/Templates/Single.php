@@ -5,6 +5,7 @@ namespace Tribe\Project\Templates;
 
 use Tribe\Project\Templates\Components\Breadcrumbs;
 use Tribe\Project\Templates\Components\Button;
+use Tribe\Project\Templates\Components\Card;
 use Tribe\Project\Templates\Components\Pagination;
 use Tribe\Project\Theme\Image_Sizes;
 use Tribe\Project\Theme\Social_Links;
@@ -14,7 +15,7 @@ class Single extends Base {
 		$data                  = parent::get_data();
 		$post                  = $this->get_post();
 		$data['post']          = $post[ 'post' ];
-		$data['related_posts'] = $this->get_related_posts();
+		$data['related_posts'] = $this->get_related_posts_cards();
 		$data['comments']      = $this->get_comments();
 		$data['breadcrumbs']   = $this->get_breadcrumbs();
 		$data['pagination']    = $this->get_pagination();
@@ -105,14 +106,14 @@ class Single extends Base {
 		return $link->render();
 	}
 
-	protected function get_related_posts() {
+	protected function get_related_posts_cards() {
 		global $post;
 		$args = [
 			'exclude' => get_the_ID(),
 			'numberposts' => 3
 		];
 		$posts = get_posts( $args );
-		$related_posts = [];
+		$cards = [];
 
 		foreach($posts as $post) {
 			$template = new Content\Single\Post( $this->template, $this->twig );
@@ -124,11 +125,23 @@ class Single extends Base {
 					'srcset_sizes_attr' => '(max-width: 767px) 300px, (min-width: 768px) 800px',
 					'link'              => get_the_permalink(),
 			] ] );
-			$related_posts[] = $data[ 'post' ];
+
+			$options = [
+				Card::TITLE     => $data[ 'post' ][ 'title' ],
+				Card::TEXT      => $data[ 'post' ][ 'excerpt' ],
+				Card::IMAGE     => $data[ 'post' ][ 'featured_image' ],
+				Card::PRE_TITLE => $data[ 'post' ][ 'categories' ]->implode( 'name', ', ' ),
+				Card::POST_TITLE=> $data[ 'post' ][ 'date' ],
+			];
+
+			$card_obj = Card::factory( $options );
+
+			$cards[]  = $card_obj->render();
+
 			wp_reset_postdata();
 		}
 
-		return $related_posts;
+		return $cards;
 	}
 
 }
