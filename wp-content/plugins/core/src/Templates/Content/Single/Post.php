@@ -5,28 +5,33 @@ namespace Tribe\Project\Templates\Content\Single;
 
 use Tribe\Project\Twig\Twig_Template;
 use Tribe\Project\Twig\Stringable_Callable;
-use Tribe\Project\Theme\Image_Sizes;
 
 class Post extends Twig_Template {
 	protected $time_formats = [
 		'c',
 	];
 
-	public function get_data(): array {
+	public function get_data( $attrs = [] ): array {
+		$default_values = [
+			'featured_image' => [
+				'use_lazyload' => false,
+				'link' => '',
+			]
+		];
+		$attrs = collect($default_values)->merge($attrs);
+
 		$data[ 'post' ] = [
 			'post_type'      => get_post_type(),
 			'title'          => get_the_title(),
 			'content'        => new Stringable_Callable( [ $this, 'defer_get_content' ] ),
 			'excerpt'        => apply_filters( 'the_excerpt', get_the_excerpt() ),
 			'permalink'      => get_the_permalink(),
-			'featured_image' => $this->get_featured_image( [ 'use_lazyload' => false, 'link' => '' ] ),
+			'featured_image' => $this->get_featured_image( $attrs[ 'featured_image' ] ),
 			'time'           => $this->get_time(),
 			'date'           => the_date( '', '', '', false ),
 			'author'         => $this->get_author(),
 			'categories'     => $this->get_categories(),
 		];
-
-		$data[ 'related_posts' ] = $this->get_related_posts( get_the_ID() );
 
 		return $data;
 	}
@@ -71,39 +76,6 @@ class Post extends Twig_Template {
 			$term['permalink'] = get_category_link( $term['term_id'] );
 			return $term;
 		} );
-	}
-
-	protected function get_related_posts( $post_id ) {
-		global $post;
-		$args = [
-			'exclude' => $post_id,
-			'numberposts' => 3
-		];
-
-		$posts = get_posts( $args );
-		$related_posts = [];
-
-		foreach($posts as $post) {
-			setup_postdata($post);
-			$related_posts[] = [
-				'title'          => get_the_title(),
-				'excerpt'        => apply_filters( 'the_excerpt', get_the_excerpt() ),
-				'permalink'      => get_the_permalink(),
-				'featured_image' => $this->get_featured_image( [
-					'src_size'          => Image_Sizes::CORE_FULL,
-					'srcset_sizes'      => [ Image_Sizes::CORE_SQUARE, Image_Sizes::CORE_LANDSCAPE ],
-					'srcset_sizes_attr' => '(max-width: 767px) 300px, (min-width: 768px) 800px',
-					'link'              => get_the_permalink(),
-				] ),
-				'time'           => $this->get_time(),
-				'date'           => get_the_date( '', $post ),
-				'date_reduced'   => get_the_date( 'M j', $post ),
-				'categories'     => $this->get_categories()
-			];
-			wp_reset_postdata();
-		}
-
-		return $related_posts;
 	}
 
 }
