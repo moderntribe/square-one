@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2019.12
+* Changed: fixed main documentation links and updated WP CLI xdebug docs
+
 ## 2019.11
 * Added `TRIBE_DISABLE_PANELS_CACHE` to `local-config.php`
 * Removed: Google+ (deprecated) support for social sharing and following functionality
