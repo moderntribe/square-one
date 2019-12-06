@@ -71,14 +71,14 @@ module.exports = {
 		// watch the editor styles postcss
 
 		gulp.watch( [
-			`${ pkg._core_admin_pcss_path }editor-styles.pcss`,
+			`${ pkg._core_admin_pcss_path }editor-style.pcss`,
 		], gulp.parallel( 'postcss:themeWPEditor' ) );
 
 		// watch the admin styles postcss
 
 		gulp.watch( [
 			`${ pkg._core_admin_pcss_path }**/*.pcss`,
-			`!${ pkg._core_admin_pcss_path }editor-styles.pcss`,
+			`!${ pkg._core_admin_pcss_path }editor-style.pcss`,
 			`!${ pkg._core_admin_pcss_path }login.pcss`,
 		], gulp.parallel( 'postcss:themeWPAdmin' ) );
 
