@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ## 2019.12
 * Changed: fixed main documentation links and updated WP CLI xdebug docs
+* Changed: set wpx.sh to executable
 
 ## 2019.11
 * Added `TRIBE_DISABLE_PANELS_CACHE` to `local-config.php`
