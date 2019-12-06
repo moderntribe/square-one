@@ -45,8 +45,7 @@ class Post extends Twig_Template {
 
 		$options = [
 			'wrapper_class'     => 'item-single__image',
-			'echo'              => false,
-			'srcset_sizes_attr' => '(max-width: 767px) 300px, (min-width: 768px) 800px'
+			'echo'              => false
 		];
 
 		$attrs = array_merge( $default_attrs, $attrs, $options );

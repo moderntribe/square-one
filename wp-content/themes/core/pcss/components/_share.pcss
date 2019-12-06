@@ -7,26 +7,26 @@
 .social-share {
 	@mixin clearfix;
 
-	position: static;
 	margin: var(--spacer-4) 0;
 
 	@media (--viewport-full) {
 		position: absolute;
-		top: 18px; /* 18px to match starting point of right H1 TODO: Remove this comment */
+		top: 18px;
 		left: 0;
 		margin: 0;
 	}
 }
 
 .social-share__title {
-	display: none;
+	@mixin visually-hide;
 }
 
 .social-share-networks__item {
 	margin-right: 15px;
-	float: left;
+	display: inline-block;
 
 	@media (--viewport-full) {
+		display: block;
 		margin-bottom: 15px;
 		margin-right: 0;
 		float: none;
@@ -43,7 +43,8 @@
 	border: 2px solid var(--color-submarine);
 	font-size: 22px;
 
-	&:hover {
+	&:hover,
+ &:focus {
 		color: var(--color-mine-shaft);
 		border-color: var(--color-mine-shaft);
 	}

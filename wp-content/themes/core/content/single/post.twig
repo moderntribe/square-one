@@ -3,30 +3,32 @@
 	<div class="item-single__featured-image">{{ post.featured_image }}</div>
 
 	<div class="l-container__stagger item-single__content">
-		<h1 class="item-single__headline">{{ post.title }}</h1>
-		<div class="item-single__meta">
+		<header>
+			<h1 class="item-single__headline h1">{{ post.title }}</h1>
+			<ul class="item-single__meta">
 
-			{% if post.categories %}
-				<div class="item-single__meta__categories">
-					<ul class="item-single__meta__categories__list">
-						{% for category in post.categories %}
-							<li class="item-single__meta__categories__list-item">
-								<a class="item-single__meta__categories__category-link" href="{{ category.permalink }}">
-									{{ category.name|esc_html }}
-								</a>
-							</li>
-						{% endfor %}
-					</ul>
-				</div>
-			{% endif %}
+				{% if post.categories %}
+					<li class="item-single__meta__categories">
+						<ul class="item-single__meta__categories-list u-sep-slash">
+							{% for category in post.categories %}
+								<li class="item-single__meta__categories-list-item">
+									<a rel="archives" class="item-single__meta__categories__category-link" href="{{ category.permalink }}">
+										{{ category.name|esc_html }}
+									</a>
+								</li>
+							{% endfor %}
+						</ul>
+					</li>
+				{% endif %}
 
-			<div class="item-single__meta__date u-fc-nevada">
-				<time datetime="{{ post.time['c']|esc_attr }}">
-					{{ post.date|esc_html }}
-				</time>
-			</div>
+				<li class="item-single__meta__date u-fc-nevada">
+					<time datetime="{{ post.time['c']|esc_attr }}">
+						{{ post.date|esc_html }}
+					</time>
+				</li>
 
-		</div>
+			</ul>
+		</header>
 		<div class="t-content">
 			{{ post.content }}
 		</div>
@@ -37,14 +39,16 @@
 		</footer>
 	</div>
 
-	<div class="item-single__related-posts">
-		<hr class="item-single__related-posts__divider">
-		<h2 class="item-single__related-posts__section-title">More Posts</h2>
-		<div class="item-single__related-posts-wrapper">
-			{% for card in related_posts %}
-				{{ card }}
-			{% endfor %}
-		</div>
-	</div>
+	{% if related_posts %}
+		<section class="item-single__related-posts">
+			<hr class="item-single__related-posts__divider">
+			<h2 class="item-single__related-posts__section-title h3">{{ __( 'More Posts' )|esc_html }}</h2>
+			<div class="item-single__related-posts-wrapper">
+				{% for card in related_posts %}
+					{{ card }}
+				{% endfor %}
+			</div>
+		</section>
+	{% endif %}
 
 </article>

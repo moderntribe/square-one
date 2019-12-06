@@ -121,8 +121,7 @@ class Single extends Base {
 			$data = $template->get_data( [
 				'featured_image' => [
 					'src_size'          => Image_Sizes::CORE_FULL,
-					'srcset_sizes'      => [ Image_Sizes::CORE_SQUARE, Image_Sizes::CORE_LANDSCAPE ],
-					'srcset_sizes_attr' => '(max-width: 767px) 300px, (min-width: 768px) 800px',
+					'srcset_sizes'      => [ Image_Sizes::IMAGE_1X1, Image_Sizes::IMAGE_16X11 ],
 					'link'              => get_the_permalink(),
 			] ] );
 
