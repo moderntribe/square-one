@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2019.12
+* Updated: Node & NPM to latest LTS versions and all FE build tooling to latest (compatible) package versions. Related misc FE build tooling tweaks to accommodate new package versions.
+* Changed: Removed postcss custom property path vars in favor of postcss-assets plugin because [custom properties are not supported in `url()`'s](https://stackoverflow.com/a/42331003/1135190) per the CSS spec.
+
 ## 2019.11
 * Added `TRIBE_DISABLE_PANELS_CACHE` to `local-config.php`
 * Removed: Google+ (deprecated) support for social sharing and following functionality
@@ -10,6 +14,7 @@ All notable changes to this project will be documented in this file.
 * Changed: update docker `start.sh` script to check for a root `.env` file
 * Changed: added check to panels caching to avoid caching on panel preview
 * Updated: Node & NPM to latest LTS versions and all FE build tooling to latest (compatible) package versions. Related misc FE build tooling tweaks to accommodate new package versions.
+* Changed: Removed postcss custom property path vars in favor of postcss-assets plugin because [custom properties are not supported in `url()`'s per the CSS spec]().
 
 ## 2019.10
 * Changed: Updated core plugin to work with the Tribe Libs monorepo
