@@ -23,6 +23,7 @@ const compilePlugins = [
 	require( 'postcss-inline-svg' ),
 	require( 'postcss-preset-env' )( { stage: 0, autoprefixer: { grid: true } } ),
 	require( 'postcss-calc' ),
+	require( 'postcss-assets' )( { loadPaths: [ `${ pkg._core_theme_path }/` ] } ),
 ];
 
 const legacyPlugins = [
@@ -35,6 +36,7 @@ const legacyPlugins = [
 	require( 'postcss-simple-vars' ),
 	require( 'postcss-nested' ),
 	require( 'postcss-preset-env' )( { browsers: [ 'last 20 versions', 'ie 6' ] } ),
+	require( 'postcss-assets' )( { loadPaths: [ `${ pkg._core_theme_path }/` ] } ),
 ];
 
 function cssProcess( src = [], dest = pkg._core_admin_css_path, plugins = compilePlugins ) {
