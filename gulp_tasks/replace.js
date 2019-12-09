@@ -7,7 +7,9 @@ module.exports = {
 		return gulp.src( [
 			`${ pkg._core_theme_pcss_path }base/_icons.pcss`,
 		] )
-			.pipe( replace( /url\('fonts\/(.+)'\) /g, 'url(var(--path-fonts)/icons-core/$1) ' ) )
+			.pipe( replace( /url\('fonts\/(.+)'\) /g, 'resolve(\'fonts/icons-core/$1\') ' ) )
+			.pipe( replace( / {2}/g, '\t' ) )
+			.pipe( replace( /}$\n^\./gm, '}\n\n\.' ) )
 			.pipe( gulp.dest( `${ pkg._core_theme_pcss_path }base/` ) );
 	},
 	coreIconsVariables() {
