@@ -149,6 +149,7 @@
     "gulp-stylelint": "^10.0.0",
     "gulp-uglify": "^3.0.1",
     "identity-obj-proxy": "^3.0.0",
+    "ifdef-loader": "^2.1.4",
     "jest": "^24.9.0",
     "jest-cli": "^24.9.0",
     "jest-environment-jsdom": "^24.9.0",
