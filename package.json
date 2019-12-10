@@ -158,7 +158,6 @@
     "postcss-aspect-ratio": "^1.0.0",
     "postcss-assets": "^5.0.0",
     "postcss-calc": "^7.0.1",
-    "postcss-color-function": "^4.1.0",
     "postcss-custom-media": "^7.0.8",
     "postcss-custom-properties": "^9.0.2",
     "postcss-functions": "^3.0.0",
