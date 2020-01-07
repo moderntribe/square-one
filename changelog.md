@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2020.01
+* Add: Added example eslint and phpcs github workflows
+
 ## 2019.10
 * Changed: Updated core plugin to work with the Tribe Libs monorepo
 
