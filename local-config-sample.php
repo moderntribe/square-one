@@ -28,6 +28,8 @@ define( 'WP_DEBUG_DISPLAY', true );
 define( 'SCRIPT_DEBUG', true );
 define( 'WP_CACHE', false );
 
+define( 'TRIBE_DISABLE_PANELS_CACHE', true );
+
 $GLOBALS[ 'memcached_servers' ] = [ [ 'memcached', 11211, ] ];
 
 /*

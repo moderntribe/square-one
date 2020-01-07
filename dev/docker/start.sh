@@ -4,6 +4,13 @@ SCRIPTDIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
 cd "$SCRIPTDIR"
 
+ENV_FILE=../../.env
+
+if [ ! -f ${ENV_FILE} ]; then
+  echo "Can't find file: $(git rev-parse --show-toplevel)/.env. Copy .env.sample to .env and follow the instructions inside."
+  exit 1
+fi
+
 PROJECT_ID=$(cat ./.projectID)
 
 # Create an empty composer cache folder if it doesn't exist, so we can mount it to php-fpm

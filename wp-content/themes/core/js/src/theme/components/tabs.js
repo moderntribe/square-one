@@ -54,7 +54,7 @@ const setNewCurrent = ( button ) => {
 
 /**
  * @function tabClick
- * @param {Object} e The js event object.
+ * @param {object} e The js event object.
  * @description Toggle the active tab item using class methods.
  */
 

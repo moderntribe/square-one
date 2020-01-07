@@ -124,9 +124,10 @@ npm install -g grunt-cli
 	sudo docker run hello-world
 	```
 
-    8. There seems to be an issue with docker and permissions, so executing the following command will save you from that headache. [View source](https://github.com/docker/compose/issues/4181)
+    8. There seems to be an issue with docker and permissions, so executing the following commands will save you from that headache. [View source](https://github.com/docker/compose/issues/4181)
 	```
 	sudo usermod -aG docker $USER
+	newgrp docker
 	```
 
     10. Restart

@@ -11,6 +11,32 @@ const watchConfig = {
 	watch: true,
 };
 
+const ifdefOpts = {
+	'INCLUDEREACT': false,
+	'version': 3,
+	'ifdef-verbose': true,
+	'ifdef-triple-slash': false,
+};
+
+const ifDefRuleOverride = [
+	{
+		test: /\.js$/,
+		exclude: [ /(node_modules)/ ],
+		use: [
+			{
+				loader: 'babel-loader',
+			},
+			{
+				loader: 'ifdef-loader',
+				options: ifdefOpts,
+			},
+		],
+	},
+];
+
+webpackAdminDevConfig.module.rules = ifDefRuleOverride;
+webpackThemeDevConfig.module.rules = ifDefRuleOverride;
+
 function maybeReloadBrowserSync() {
 	const server = browserSync.get( 'Tribe Dev' );
 	if ( server.active ) {
@@ -27,44 +53,34 @@ module.exports = {
 			`!${ pkg._core_theme_pcss_path }legacy.pcss`,
 			`!${ pkg._core_theme_pcss_path }content/page/_legacy.pcss`,
 			`!${ pkg._core_admin_pcss_path }**/*.pcss`,
-		], [
-			'postcss:theme',
-		] );
+		], gulp.parallel( 'postcss:theme' ) );
 
 		// watch the legacy postcss
 
 		gulp.watch( [
 			`${ pkg._core_theme_pcss_path }legacy.pcss`,
 			`${ pkg._core_theme_pcss_path }content/page/_legacy.pcss`,
-		], [
-			'postcss:themeLegacy',
-		] );
+		], gulp.parallel( 'postcss:themeLegacy' ) );
 
 		// watch the login postcss
 
 		gulp.watch( [
 			`${ pkg._core_admin_pcss_path }login.pcss`,
-		], [
-			'postcss:themeWPLogin',
-		] );
+		], gulp.parallel( 'postcss:themeWPLogin' ) );
 
 		// watch the editor styles postcss
 
 		gulp.watch( [
-			`${ pkg._core_admin_pcss_path }editor-styles.pcss`,
-		], [
-			'postcss:themeWPEditor',
-		] );
+			`${ pkg._core_admin_pcss_path }editor-style.pcss`,
+		], gulp.parallel( 'postcss:themeWPEditor' ) );
 
 		// watch the admin styles postcss
 
 		gulp.watch( [
 			`${ pkg._core_admin_pcss_path }**/*.pcss`,
-			`!${ pkg._core_admin_pcss_path }editor-styles.pcss`,
+			`!${ pkg._core_admin_pcss_path }editor-style.pcss`,
 			`!${ pkg._core_admin_pcss_path }login.pcss`,
-		], [
-			'postcss:themeWPAdmin',
-		] );
+		], gulp.parallel( 'postcss:themeWPAdmin' ) );
 
 		// watch php and twig
 
