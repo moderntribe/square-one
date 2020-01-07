@@ -98,7 +98,7 @@
 
     "humanmade/mercator":"dev-master#7f3846a",
     "vlucas/phpdotenv": "^3.0",
-    "humanmade/s3-uploads":"1.1.0",
+    "humanmade/s3-uploads":"2.2.1",
     "pimple/pimple": "~3.0@dev",
     "johnbillion/extended-cpts": "^4.0",
     "twig/twig": "^2.11",
