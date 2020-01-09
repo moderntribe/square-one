@@ -61,7 +61,6 @@
   "require": {
     "php":"^7.0",
     "aws/aws-sdk-php": "3.48.4",
-    "hirak/prestissimo":"0.3.7",
     "composer/installers":"1.4.0",
     "johnpbloch/wordpress-core-installer":"1.0.0",
     "johnpbloch/wordpress-core": "5.2.1",
