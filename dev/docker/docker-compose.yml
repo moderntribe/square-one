@@ -50,8 +50,7 @@ services:
         - ./phpdocker/php-fpm/php-ini-overrides.ini:/etc/php/7.2/fpm/conf.d/99-overrides.ini
         - ./phpdocker/php-fpm/ssmtp.conf:/etc/ssmtp/ssmtp.conf:ro
         - ./wp-cli.yml:/application/wp-cli.yml
-        - ./composer-config.json:/root/.composer/auth.json
-        - ./composer:/root/.composer
+        - ./composer:/root/.composer:consistent
         - ./composer-cache:/application/composer-cache
       links:
         - memcached
