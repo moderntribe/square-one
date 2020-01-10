@@ -40,7 +40,7 @@ services:
       build:
         context: .
         dockerfile: phpdocker/php-fpm/Dockerfile
-      image: tribe-phpfpm:7.2-rev0
+      image: tribe-phpfpm:7.2-rev20
       working_dir: /application
       networks:
         - proxy
@@ -51,6 +51,7 @@ services:
         - ./phpdocker/php-fpm/ssmtp.conf:/etc/ssmtp/ssmtp.conf:ro
         - ./wp-cli.yml:/application/wp-cli.yml
         - ./composer-config.json:/root/.composer/auth.json
+        - ./composer:/root/.composer
         - ./composer-cache:/application/composer-cache
       links:
         - memcached
