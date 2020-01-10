@@ -116,6 +116,7 @@ dev/deploy/.deploy
 /.garden-*
 /.env
 /vendor
+dev/docker/composer/
 dev/docker/composer-config.json
 dev/docker/composer-cache/
 dev/docker/global/.env
