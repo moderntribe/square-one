@@ -25,6 +25,18 @@
     },
     {
       "type":"vcs",
+      "url":"git@github.com:moderntribe/attachment-helper.git"
+    },
+    {
+      "type":"vcs",
+      "url":"git@github.com:moderntribe/ajax-queue.git"
+    },
+    {
+      "type":"vcs",
+      "url":"https://github.com/defunctl/gravityforms-composer-installer"
+    },
+    {
+      "type":"vcs",
       "url":"https://github.com/moderntribe/panel-builder.git"
     },
     {
@@ -46,7 +58,7 @@
       "type": "package",
       "package": {
         "name": "gravityforms/gravityforms",
-        "version": "2.4.10.7",
+        "version": "2.4.16.5",
         "type": "wordpress-plugin",
         "dist": {
           "type": "zip",
