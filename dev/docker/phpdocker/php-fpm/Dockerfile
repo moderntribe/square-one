@@ -7,8 +7,6 @@ RUN apt-get update \
 
 # Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-RUN composer config --global repo.packagist composer https://packagist.org
-RUN composer global require hirak/prestissimo
 
 # WP CLI
 RUN echo "installing WP-CLI" \
