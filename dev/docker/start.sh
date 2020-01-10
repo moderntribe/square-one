@@ -32,8 +32,15 @@ else
 	DC_COMMAND="docker-compose"
 fi;
 
-# Create a composer-config.json file that mirrors the format of .composer/auth.json, so we can mount it to php-fpm
-CONFIG_FILE="${SCRIPTDIR}/composer-config.json"
+# Create an empty composer folder so we can mount it with the proper permissions
+COMPOSER_DIR=${SCRIPTDIR}/composer
+
+if [ ! -f "${COMPOSER_DIR}/" ]; then
+  mkdir ${COMPOSER_DIR}
+fi
+
+# Check for a volume mounted auth.json so we can populate it with github credentials so composer can fetch private repos
+CONFIG_FILE="${COMPOSER_DIR}/auth.json"
 
 if [ ! -f ${CONFIG_FILE} ]; then
 
@@ -79,11 +86,11 @@ ${D_COMMAND} run --privileged --rm phpdockerio/php7-fpm date -s "$(date -u "+%Y-
 # start the containers
 ${DC_COMMAND} --project-name=${PROJECT_ID} up -d --force-recreate
 
-if [ ! -f "${SCRIPTDIR}/composer/config.json" ]; then
+if [ ! -f "${COMPOSER_DIR}/config.json" ]; then
   bash ${SCRIPTDIR}/exec.sh composer config --global repo.packagist composer https://packagist.org
 fi
 
-if [ ! -f "${SCRIPTDIR}/composer/composer.json" ]; then
+if [ ! -f "${COMPOSER_DIR}/composer.json" ]; then
   bash ${SCRIPTDIR}/exec.sh composer global require hirak/prestissimo --classmap-authoritative --update-no-dev
 fi
 
