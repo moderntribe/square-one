@@ -40,7 +40,7 @@ services:
       build:
         context: .
         dockerfile: phpdocker/php-fpm/Dockerfile
-      image: tribe-phpfpm:7.2-rev20
+      image: tribe-phpfpm:7.2-rev0
       working_dir: /application
       networks:
         - proxy
