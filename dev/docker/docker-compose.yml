@@ -50,7 +50,7 @@ services:
         - ./phpdocker/php-fpm/php-ini-overrides.ini:/etc/php/7.2/fpm/conf.d/99-overrides.ini
         - ./phpdocker/php-fpm/ssmtp.conf:/etc/ssmtp/ssmtp.conf:ro
         - ./wp-cli.yml:/application/wp-cli.yml
-        - ./composer:/root/.composer:consistent
+        - ./composer:/application/.composer
         - ./composer-cache:/application/composer-cache
       links:
         - memcached
@@ -62,6 +62,7 @@ services:
       environment:
         - COMPOSER_ALLOW_SUPERUSER=1
         - COMPOSER_CACHE_DIR=/application/composer-cache
+        - COMPOSER_HOME=/application/.composer
         - PAGER=more
 
     webserver:
