@@ -79,4 +79,12 @@ ${D_COMMAND} run --privileged --rm phpdockerio/php7-fpm date -s "$(date -u "+%Y-
 # start the containers
 ${DC_COMMAND} --project-name=${PROJECT_ID} up -d --force-recreate
 
+if [ ! -f "${SCRIPTDIR}/composer/config.json" ]; then
+  bash ${SCRIPTDIR}/exec.sh composer config --global repo.packagist composer https://packagist.org
+fi
+
+if [ ! -f "${SCRIPTDIR}/composer/composer.json" ]; then
+  bash ${SCRIPTDIR}/exec.sh composer global require hirak/prestissimo --classmap-authoritative --update-no-dev
+fi
+
 bash ${SCRIPTDIR}/composer.sh install
