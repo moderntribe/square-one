@@ -383,7 +383,7 @@
             "version": "2.4.16.5",
             "dist": {
                 "type": "zip",
-                "url": "https://s3.amazonaws.com/gravityforms/releases/gravityforms_2.4.16.7.zip?AWSAccessKeyId=AKIAJC3LQNDWHBOFBQIA&Expires=1578943371&Signature=1FHtePiuZQhteJK7kNAS6kUHoQY%3D"
+                "url": "https://s3.amazonaws.com/gravityforms/releases/gravityforms_2.4.16.7.zip?AWSAccessKeyId=AKIAJC3LQNDWHBOFBQIA&Expires=1578948625&Signature=KYjtGmWDARoZvbAxQb8SqnZSE1w%3D"
             },
             "require": {
                 "gotoandplay/gravityforms-composer-installer": "^1.0"
@@ -935,10 +935,6 @@
                 "Private"
             ],
             "description": "Group ajax calls",
-            "support": {
-                "source": "https://github.com/moderntribe/ajax-queue/tree/master",
-                "issues": "https://github.com/moderntribe/ajax-queue/issues"
-            },
             "time": "2015-08-21T06:25:04+00:00"
         },
         {
@@ -971,9 +967,6 @@
                 }
             ],
             "description": "A library for adding a file upload field to an admin meta box",
-            "support": {
-                "source": "https://github.com/moderntribe/attachment-helper/tree/1.0.1"
-            },
             "time": "2016-04-24T20:00:57+00:00"
         },
         {
@@ -1013,10 +1006,6 @@
                 }
             ],
             "description": "The Modern Tribe Panel Builder plugin",
-            "support": {
-                "source": "https://github.com/moderntribe/panel-builder/tree/3.3-branch",
-                "issues": "https://github.com/moderntribe/panel-builder/issues"
-            },
             "time": "2019-11-08T15:26:54+00:00"
         },
         {

@@ -9,7 +9,6 @@
   "config": {
     "vendor-dir": "vendor",
     "preferred-install": {
-      "moderntribe/*": "source",
       "*": "dist"
     }
   },
