@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c1aecf1ccf3c3c8d71c9176055d8a209",
+    "content-hash": "8c2bb9ddeca4420fe552187024bff9da",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -916,7 +916,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/moderntribe/ajax-queue.git",
+                "url": "git@github.com:moderntribe/ajax-queue.git",
                 "reference": "6579564c44d78b558d275c22eea40c0433fd5a17"
             },
             "dist": {
@@ -946,7 +946,7 @@
             "version": "1.0.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/moderntribe/attachment-helper.git",
+                "url": "git@github.com:moderntribe/attachment-helper.git",
                 "reference": "96e35fcb4c0883702d3f91e95b00985273a8eae7"
             },
             "dist": {

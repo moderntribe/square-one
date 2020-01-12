@@ -25,15 +25,18 @@
     },
     {
       "type":"vcs",
+      "no-api": true,
       "url":"git@github.com:moderntribe/attachment-helper.git"
     },
     {
       "type":"vcs",
+      "no-api": true,
       "url":"git@github.com:moderntribe/ajax-queue.git"
     },
     {
       "type":"vcs",
-      "url":"https://github.com/moderntribe/panel-builder.git"
+      "no-api": true,
+      "url":"git@github.com:moderntribe/panel-builder.git"
     },
     {
       "type": "package",
