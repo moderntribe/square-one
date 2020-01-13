@@ -9,6 +9,7 @@
   "config": {
     "vendor-dir": "vendor",
     "preferred-install": {
+      "moderntribe/square1-*": "source",
       "*": "dist"
     }
   },
