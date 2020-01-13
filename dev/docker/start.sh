@@ -52,6 +52,11 @@ fi
 # Check for a volume mounted auth.json so we can populate it with github credentials so composer can fetch private repos
 CONFIG_FILE="${COMPOSER_DIR}/auth.json"
 
+# If the auth file is empty, composer will completely error out.
+if [ ! -s ${CONFIG_FILE} ]; then
+  rm -rf ${CONFIG_FILE}
+fi
+
 if [ ! -f ${CONFIG_FILE} ]; then
 
     touch ${CONFIG_FILE}
@@ -101,4 +106,4 @@ if [ ! -f "${COMPOSER_DIR}/composer.json" ]; then
   bash ${SCRIPTDIR}/exec.sh composer global require hirak/prestissimo --classmap-authoritative --update-no-dev
 fi
 
-bash ${SCRIPTDIR}/composer.sh install
+bash ${SCRIPTDIR}/composer.sh install --profile
