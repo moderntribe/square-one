@@ -47,7 +47,23 @@ if ( file_exists( dirname( __FILE__ ) . '/build-process.php' ) ) {
 // Conditionally load tests-config if the proper header or user agent is present
 // ==============================================================
 
-if ( ( isset( $_SERVER['HTTP_X_TRIBE_TESTING'] ) || ( isset( $_SERVER['HTTP_USER_AGENT'] ) && $_SERVER['HTTP_USER_AGENT'] === 'tribe-tester' ) || tribe_getenv( 'WPBROWSER_HOST_REQUEST' ) ) && file_exists( __DIR__ . '/tests-config.php' ) ) {
+/**
+ * Check if current request is being made by Codeception.
+ *
+ * @return bool
+ */
+function tribe_is_codeception(): bool {
+	$has_test_header     = isset( $_SERVER['HTTP_X_TRIBE_TESTING'] );
+	$has_test_user_agent = isset( $_SERVER['HTTP_USER_AGENT'] ) && $_SERVER['HTTP_USER_AGENT'] === 'tribe-tester';
+	$has_test_cookie     = isset( $_COOKIE['TRIBE_LOAD_TESTS_CONFIG'] ) && $_COOKIE['TRIBE_LOAD_TESTS_CONFIG'] == true;
+	$has_test_env_var    = tribe_getenv( 'WPBROWSER_HOST_REQUEST' );
+	$test_file_exists    = file_exists( __DIR__ . '/tests-config.php' );
+
+	// Any of these being true will be considered a Codeception request
+	return $test_file_exists && ( $has_test_header || $has_test_user_agent || $has_test_env_var || $has_test_cookie );
+}
+
+if ( tribe_is_codeception() ) {
 	include __DIR__ . '/tests-config.php';
 } elseif ( file_exists( __DIR__ . '/local-config.php' ) ) {
 	include __DIR__ . '/local-config.php';
