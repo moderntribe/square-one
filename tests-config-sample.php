@@ -53,4 +53,4 @@ define( 'WHOOPS_ENABLE', true );
  * If you would like to disable the plugin locally, add the following to your local-config.php.
  */
 
-//define( 'TRIBE_GLOMAR', false );
+define( 'TRIBE_GLOMAR', false );
