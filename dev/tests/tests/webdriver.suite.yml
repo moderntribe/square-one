@@ -41,7 +41,7 @@ modules:
             browser: chrome
             host: chrome.tribe
             port: 4444
-            window_size: false
+            window_size: 1366x768
             wait: 5
             capabilities:
                 # Google changed this format in chromedriver 2.31
