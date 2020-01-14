@@ -4,17 +4,17 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4a0963957d4732dbfe72eea2731d9ba0",
+    "content-hash": "36ef072a28e2e87a7cb070e9f91763e8",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
-            "version": "5.8.7",
+            "version": "5.7.12",
             "dist": {
                 "type": "zip",
-                "url": "https://connect.advancedcustomfields.com/index.php?a=download&p=pro&k={%WP_PLUGIN_ACF_KEY}&t=5.8.7"
+                "url": "https://connect.advancedcustomfields.com/index.php?a=download&p=pro&k={%WP_PLUGIN_ACF_KEY}&t=5.7.12"
             },
             "require": {
-                "ffraenz/private-composer-installer": "^3.0"
+                "ffraenz/private-composer-installer": "^2.0"
             },
             "type": "wordpress-plugin"
         },
@@ -269,26 +269,26 @@
         },
         {
             "name": "ffraenz/private-composer-installer",
-            "version": "v3.0.1",
+            "version": "v2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ffraenz/private-composer-installer.git",
-                "reference": "166ae0110191aa6f57ac96a2f7ab4b5152678301"
+                "reference": "dc54b0200952f8c03a08b5593a933c308343a2a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ffraenz/private-composer-installer/zipball/166ae0110191aa6f57ac96a2f7ab4b5152678301",
-                "reference": "166ae0110191aa6f57ac96a2f7ab4b5152678301",
+                "url": "https://api.github.com/repos/ffraenz/private-composer-installer/zipball/dc54b0200952f8c03a08b5593a933c308343a2a9",
+                "reference": "dc54b0200952f8c03a08b5593a933c308343a2a9",
                 "shasum": ""
             },
             "require": {
                 "composer-plugin-api": "^1.0.0",
-                "php": "^7.1",
+                "php": "^5.6 || ^7.0",
                 "vlucas/phpdotenv": "^3.0"
             },
             "require-dev": {
                 "composer/composer": "1.0.*",
-                "phpunit/phpunit": "^8.0",
+                "phpunit/phpunit": "5.7.* || ^6.3",
                 "zendframework/zend-coding-standard": "^1.0"
             },
             "type": "composer-plugin",
@@ -320,7 +320,7 @@
                 "wordpress",
                 "wp"
             ],
-            "time": "2019-11-07T11:55:26+00:00"
+            "time": "2019-01-30T21:44:48+00:00"
         },
         {
             "name": "gotoandplay/gravityforms-composer-installer",
