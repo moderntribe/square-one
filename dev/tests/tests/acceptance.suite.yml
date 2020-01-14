@@ -28,7 +28,8 @@ modules:
             urlReplacement: false
             waitlock: 5
             # this can sometimes be faster for importing if the mysql client is available
-            populator: 'mysql --max_allowed_packet=512M -u $user -h $host -p$password $dbname < $dump'
+            # the mysql client is not available in the context of Containers
+            # populator: 'mysql --max_allowed_packet=512M -u $user -h $host -p$password $dbname < $dump'
         WPLoader:
             # just load WordPress using the same db as WPDb
             loadOnly: true
