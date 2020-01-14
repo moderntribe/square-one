@@ -2,7 +2,8 @@
 
 # suite for WordPress acceptance tests.
 # perform tests in browser using WPBrowser or WPWebDriver modules.
-class_name: AcceptanceTester
+actor: AcceptanceTester
+bootstrap: _bootstrap.php
 modules:
     enabled:
         - \Helper\Acceptance

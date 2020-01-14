@@ -2,7 +2,8 @@
 
 # Any tests that require JavaScript should use the chrome driver, and a separate suite should be created for them
 # Ensure you pass the user-agent "tribe-tester" otherwise tests-config.php won't be loaded properly
-class_name: AcceptanceTester
+actor: AcceptanceTester
+bootstrap: _bootstrap.php
 modules:
     enabled:
         - \Helper\Acceptance

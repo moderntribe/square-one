@@ -2,7 +2,8 @@
 
 # suite for WordPress integration tests.
 # Load WordPress and integration test classes that rely on it.
-class_name: IntegrationTester
+actor: IntegrationTester
+bootstrap: _bootstrap.php
 modules:
     enabled:
         - WPLoader
