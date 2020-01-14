@@ -4,17 +4,17 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "36ef072a28e2e87a7cb070e9f91763e8",
+    "content-hash": "98b18587cfeac62d303acb10d5b83b69",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
-            "version": "5.7.12",
+            "version": "5.8.7",
             "dist": {
                 "type": "zip",
-                "url": "https://connect.advancedcustomfields.com/index.php?a=download&p=pro&k={%WP_PLUGIN_ACF_KEY}&t=5.7.12"
+                "url": "https://connect.advancedcustomfields.com/index.php?a=download&p=pro&k={%WP_PLUGIN_ACF_KEY}&t=5.8.7"
             },
             "require": {
-                "ffraenz/private-composer-installer": "^2.0"
+                "ffraenz/private-composer-installer": "^3.0"
             },
             "type": "wordpress-plugin"
         },
@@ -269,26 +269,26 @@
         },
         {
             "name": "ffraenz/private-composer-installer",
-            "version": "v2.0.0",
+            "version": "v3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ffraenz/private-composer-installer.git",
-                "reference": "dc54b0200952f8c03a08b5593a933c308343a2a9"
+                "reference": "166ae0110191aa6f57ac96a2f7ab4b5152678301"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ffraenz/private-composer-installer/zipball/dc54b0200952f8c03a08b5593a933c308343a2a9",
-                "reference": "dc54b0200952f8c03a08b5593a933c308343a2a9",
+                "url": "https://api.github.com/repos/ffraenz/private-composer-installer/zipball/166ae0110191aa6f57ac96a2f7ab4b5152678301",
+                "reference": "166ae0110191aa6f57ac96a2f7ab4b5152678301",
                 "shasum": ""
             },
             "require": {
                 "composer-plugin-api": "^1.0.0",
-                "php": "^5.6 || ^7.0",
+                "php": "^7.1",
                 "vlucas/phpdotenv": "^3.0"
             },
             "require-dev": {
                 "composer/composer": "1.0.*",
-                "phpunit/phpunit": "5.7.* || ^6.3",
+                "phpunit/phpunit": "^8.0",
                 "zendframework/zend-coding-standard": "^1.0"
             },
             "type": "composer-plugin",
@@ -320,30 +320,30 @@
                 "wordpress",
                 "wp"
             ],
-            "time": "2019-01-30T21:44:48+00:00"
+            "time": "2019-11-07T11:55:26+00:00"
         },
         {
             "name": "gotoandplay/gravityforms-composer-installer",
-            "version": "v1.1.1",
+            "version": "v2.0.0",
             "source": {
                 "type": "git",
                 "url": "git@github.com:defunctl/gravityforms-composer-installer.git",
-                "reference": "707c8b2eca46ca56d115e74934e2a2d5625e4d71"
+                "reference": "3dc1194f08489e04cae6a36b267bec9ff4fdf4e8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/defunctl/gravityforms-composer-installer/zipball/707c8b2eca46ca56d115e74934e2a2d5625e4d71",
-                "reference": "707c8b2eca46ca56d115e74934e2a2d5625e4d71",
+                "url": "https://api.github.com/repos/defunctl/gravityforms-composer-installer/zipball/3dc1194f08489e04cae6a36b267bec9ff4fdf4e8",
+                "reference": "3dc1194f08489e04cae6a36b267bec9ff4fdf4e8",
                 "shasum": ""
             },
             "require": {
                 "composer-plugin-api": "^1.0.0",
-                "php": "^5.6 || ^7.0",
-                "vlucas/phpdotenv": "^3.0"
+                "ffraenz/private-composer-installer": "^3.0.0",
+                "php": "^7.1"
             },
             "require-dev": {
                 "composer/composer": "1.0.*",
-                "phpunit/phpunit": "5.7.* || ^6.3",
+                "phpunit/phpunit": "^8.0",
                 "zendframework/zend-coding-standard": "^1.0"
             },
             "type": "composer-plugin",
@@ -393,17 +393,17 @@
                 "wordpress",
                 "wp"
             ],
-            "time": "2020-01-14T06:19:50+00:00"
+            "time": "2020-01-14T23:26:21+00:00"
         },
         {
             "name": "gravityforms/gravityforms",
-            "version": "2.4.16.5",
+            "version": "2.4.16.7",
             "dist": {
                 "type": "zip",
-                "url": "https://www.gravityhelp.com/wp-content/plugins/gravitymanager/api.php?op=get_plugin&slug=gravityforms&key={%WP_PLUGIN_GF_KEY}#v2.4.16.5"
+                "url": "https://www.gravityhelp.com/wp-content/plugins/gravitymanager/api.php?op=get_plugin&slug=gravityforms&key={%WP_PLUGIN_GF_KEY}#v2.4.16.7"
             },
             "require": {
-                "gotoandplay/gravityforms-composer-installer": "^1.0"
+                "gotoandplay/gravityforms-composer-installer": "^2.0"
             },
             "type": "wordpress-plugin"
         },
@@ -3587,16 +3587,16 @@
         },
         {
             "name": "composer/composer",
-            "version": "1.9.1",
+            "version": "1.9.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/composer.git",
-                "reference": "bb01f2180df87ce7992b8331a68904f80439dd2f"
+                "reference": "7a04aa0201ddaa0b3cf64d41022bd8cdcd7fafeb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/composer/zipball/bb01f2180df87ce7992b8331a68904f80439dd2f",
-                "reference": "bb01f2180df87ce7992b8331a68904f80439dd2f",
+                "url": "https://api.github.com/repos/composer/composer/zipball/7a04aa0201ddaa0b3cf64d41022bd8cdcd7fafeb",
+                "reference": "7a04aa0201ddaa0b3cf64d41022bd8cdcd7fafeb",
                 "shasum": ""
             },
             "require": {
@@ -3663,7 +3663,7 @@
                 "dependency",
                 "package"
             ],
-            "time": "2019-11-01T16:20:17+00:00"
+            "time": "2020-01-14T15:30:32+00:00"
         },
         {
             "name": "composer/semver",
@@ -4931,7 +4931,7 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v6.10.0",
+            "version": "v6.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
@@ -4975,16 +4975,16 @@
         },
         {
             "name": "illuminate/support",
-            "version": "v6.10.0",
+            "version": "v6.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "564b8b6ae8ca7660143c6b807effb289d5fd2616"
+                "reference": "e1fbc940c2f26591e17cae2156cb7c9a8e062121"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/564b8b6ae8ca7660143c6b807effb289d5fd2616",
-                "reference": "564b8b6ae8ca7660143c6b807effb289d5fd2616",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/e1fbc940c2f26591e17cae2156cb7c9a8e062121",
+                "reference": "e1fbc940c2f26591e17cae2156cb7c9a8e062121",
                 "shasum": ""
             },
             "require": {
@@ -5032,7 +5032,7 @@
             ],
             "description": "The Illuminate Support package.",
             "homepage": "https://laravel.com",
-            "time": "2020-01-07T13:47:03+00:00"
+            "time": "2020-01-13T16:18:12+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
