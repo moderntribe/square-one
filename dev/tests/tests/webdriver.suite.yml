@@ -26,6 +26,7 @@ modules:
         WPLoader:
             loadOnly: true
             wpRootFolder: %WP_ROOT_FOLDER%
+            pluginsFolder: '../wp-content/plugins'
             dbName: %DB_NAME%
             dbHost: %DB_HOST%
             dbUser: %DB_USER%
