@@ -4,14 +4,14 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8c2bb9ddeca4420fe552187024bff9da",
+    "content-hash": "36ef072a28e2e87a7cb070e9f91763e8",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
             "version": "5.7.12",
             "dist": {
                 "type": "zip",
-                "url": "https://connect.advancedcustomfields.com/index.php?a=download&p=pro&k=b3JkZXJfaWQ9Mzk0NTZ8dHlwZT1kZXZlbG9wZXJ8ZGF0ZT0yMDE0LTA5LTExIDA1OjA1OjQ3&t=5.7.12"
+                "url": "https://connect.advancedcustomfields.com/index.php?a=download&p=pro&k={%WP_PLUGIN_ACF_KEY}&t=5.7.12"
             },
             "require": {
                 "ffraenz/private-composer-installer": "^2.0"
@@ -324,16 +324,16 @@
         },
         {
             "name": "gotoandplay/gravityforms-composer-installer",
-            "version": "v1.1.0",
+            "version": "v1.1.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/gtap-dev/gravityforms-composer-installer.git",
-                "reference": "65b4052a1401faaaba2a737d83bd1c679b0b0140"
+                "url": "git@github.com:defunctl/gravityforms-composer-installer.git",
+                "reference": "707c8b2eca46ca56d115e74934e2a2d5625e4d71"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/gtap-dev/gravityforms-composer-installer/zipball/65b4052a1401faaaba2a737d83bd1c679b0b0140",
-                "reference": "65b4052a1401faaaba2a737d83bd1c679b0b0140",
+                "url": "https://api.github.com/repos/defunctl/gravityforms-composer-installer/zipball/707c8b2eca46ca56d115e74934e2a2d5625e4d71",
+                "reference": "707c8b2eca46ca56d115e74934e2a2d5625e4d71",
                 "shasum": ""
             },
             "require": {
@@ -355,7 +355,24 @@
                     "gotoAndDev\\GravityFormsComposerInstaller\\": "src/GravityFormsComposerInstaller"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "scripts": {
+                "check": [
+                    "@cs-check",
+                    "@test"
+                ],
+                "cs-check": [
+                    "phpcs"
+                ],
+                "cs-fix": [
+                    "phpcbf"
+                ],
+                "test": [
+                    "phpunit --colors=always"
+                ],
+                "test-coverage": [
+                    "phpunit --colors=always --coverage-clover clover.xml"
+                ]
+            },
             "license": [
                 "MIT"
             ],
@@ -376,14 +393,14 @@
                 "wordpress",
                 "wp"
             ],
-            "time": "2020-01-11T14:43:04+00:00"
+            "time": "2020-01-14T06:19:50+00:00"
         },
         {
             "name": "gravityforms/gravityforms",
             "version": "2.4.16.5",
             "dist": {
                 "type": "zip",
-                "url": "https://s3.amazonaws.com/gravityforms/releases/gravityforms_2.4.16.7.zip?AWSAccessKeyId=AKIAJC3LQNDWHBOFBQIA&Expires=1578948625&Signature=KYjtGmWDARoZvbAxQb8SqnZSE1w%3D"
+                "url": "https://www.gravityhelp.com/wp-content/plugins/gravitymanager/api.php?op=get_plugin&slug=gravityforms&key={%WP_PLUGIN_GF_KEY}#v2.4.16.5"
             },
             "require": {
                 "gotoandplay/gravityforms-composer-installer": "^1.0"

@@ -39,6 +39,11 @@
       "url":"git@github.com:moderntribe/panel-builder.git"
     },
     {
+      "type":"vcs",
+      "no-api": true,
+      "url":"git@github.com:defunctl/gravityforms-composer-installer.git"
+    },
+    {
       "type": "package",
       "package": {
         "name": "advanced-custom-fields/advanced-custom-fields-pro",
