@@ -328,12 +328,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:defunctl/gravityforms-composer-installer.git",
-                "reference": "3dc1194f08489e04cae6a36b267bec9ff4fdf4e8"
+                "reference": "fdf0499e2a3f8c6e6b81474914fb920cc56967f1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/defunctl/gravityforms-composer-installer/zipball/3dc1194f08489e04cae6a36b267bec9ff4fdf4e8",
-                "reference": "3dc1194f08489e04cae6a36b267bec9ff4fdf4e8",
+                "url": "https://api.github.com/repos/defunctl/gravityforms-composer-installer/zipball/fdf0499e2a3f8c6e6b81474914fb920cc56967f1",
+                "reference": "fdf0499e2a3f8c6e6b81474914fb920cc56967f1",
                 "shasum": ""
             },
             "require": {
@@ -393,7 +393,7 @@
                 "wordpress",
                 "wp"
             ],
-            "time": "2020-01-14T23:26:21+00:00"
+            "time": "2020-01-15T04:06:19+00:00"
         },
         {
             "name": "gravityforms/gravityforms",
