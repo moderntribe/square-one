@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5cf3495f25fa9612c38d76cca8ca4fee",
+    "content-hash": "08bf067065b77656118510d029c0ed69",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -327,7 +327,7 @@
             "version": "2.4.16.7",
             "dist": {
                 "type": "zip",
-                "url": "https://composer.utility.mtribe.site/gravityforms/?key={%WP_PLUGIN_GF_KEY}&t=2.4.16.7"
+                "url": "https://composer.utility.mtribe.site/gravityforms/?key={%WP_PLUGIN_GF_KEY}&token={%WP_PLUGIN_GF_TOKEN}&t=2.4.16.7"
             },
             "require": {
                 "ffraenz/private-composer-installer": "^3.0"
