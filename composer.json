@@ -9,7 +9,8 @@
   "config": {
     "vendor-dir": "vendor",
     "preferred-install": {
-      "moderntribe/*": "source",
+      "moderntribe/panel-builder": "source",
+      "moderntribe/tribe-libs": "source",
       "*": "dist"
     }
   },
