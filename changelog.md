@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ## 2020.01
 * Add: Added example eslint and phpcs github workflows
+* Fixed: Typo in docker logs naming for NPM scripts. 
 
 ## 2019.12
 * Updated: Node & NPM to latest LTS versions and all FE build tooling to latest (compatible) package versions. Related misc FE build tooling tweaks to accommodate new package versions.
