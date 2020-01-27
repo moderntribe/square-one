@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## 2020.01
+* Fixed: Sidebar.php template from calling Base::get_data() needlessly in the same request
 * Add: Added example eslint and phpcs github workflows
 * Fixed: Typo in docker logs naming for NPM scripts. 
 
