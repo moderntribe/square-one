@@ -1,5 +1,4 @@
 const gulp = require( 'gulp' );
-const runSequence = require( 'run-sequence' );
 const requireDir = require( 'require-dir' );
 const tasks = requireDir( './gulp_tasks' );
 const browserSync = require( 'browser-sync' ).create( 'Tribe Dev' );
@@ -145,25 +144,23 @@ registerTasks();
  * Takes a zip file from icomoon and injects it into the postcss, modifying the scss to pcss and handling all conversions/cleanup.
  */
 
-gulp.task( 'icons', function() {
-	runSequence(
-		'clean:coreIconsStart',
-		'decompress:coreIcons',
-		'copy:coreIconsFonts',
-		'copy:coreIconsStyles',
-		'copy:coreIconsVariables',
-		'replace:coreIconsStyle',
-		'replace:coreIconsVariables',
-		'header:coreIconsStyle',
-		'header:coreIconsVariables',
-		'footer:coreIconsVariables',
-		'clean:coreIconsEnd',
-		'clean:themeMinCSS',
-		'postcss:theme',
-		'cssnano:themeMin',
-		'header:theme',
-	);
-} );
+gulp.task( 'icons', gulp.series(
+	'clean:coreIconsStart',
+	'decompress:coreIcons',
+	'copy:coreIconsFonts',
+	'copy:coreIconsStyles',
+	'copy:coreIconsVariables',
+	'replace:coreIconsStyle',
+	'replace:coreIconsVariables',
+	'header:coreIconsStyle',
+	'header:coreIconsVariables',
+	'footer:coreIconsVariables',
+	'clean:coreIconsEnd',
+	'clean:themeMinCSS',
+	'postcss:theme',
+	'cssnano:themeMin',
+	'header:theme',
+) );
 
 const watchTasks = [
 	'watch:frontEndDev',
@@ -171,13 +168,13 @@ const watchTasks = [
 	'watch:watchThemeJS',
 ];
 
-gulp.task( 'watch', watchTasks );
+gulp.task( 'watch', gulp.parallel( watchTasks ) );
 
 /**
  * Watches all javascript, css and twig/php for theme/admin bundle, runs tasks and reloads browser using browsersync.
  */
 
-gulp.task( 'dev', watchTasks, function() {
+gulp.task( 'dev', gulp.parallel( watchTasks, async function() {
 	browserSync.init( {
 		watchTask: true,
 		debugInfo: true,
@@ -196,58 +193,49 @@ gulp.task( 'dev', watchTasks, function() {
 			forms: true,
 		},
 	} );
-} );
+} ) );
 
 /**
  * Lints js and css, fixed common issues automatically.
  */
 
-gulp.task( 'lint', function( callback ) {
-	runSequence(
-		[ 'eslint:theme', 'eslint:apps', 'eslint:utils', 'eslint:admin', 'stylelint:theme', 'stylelint:apps' ],
-		callback,
-	);
-} );
+gulp.task( 'lint', gulp.series(
+	gulp.parallel( 'eslint:theme', 'eslint:apps', 'eslint:utils', 'eslint:admin', 'stylelint:theme', 'stylelint:apps' ),
+) );
 
 /**
  * Builds the entire package for production on a server.
  */
 
-gulp.task( 'server_dist', function( callback ) {
-	runSequence(
-		[ 'clean:themeMinCSS', 'clean:themeMinJS', 'copy:themeJS' ],
-		[ 'postcss:theme', 'postcss:themeWPAdmin', 'postcss:themeWPEditor', 'postcss:themeWPLogin', 'postcss:themeLegacy' ],
-		[ 'cssnano:themeMin', 'cssnano:themeLegacyMin', 'cssnano:themeWPEditorMin', 'cssnano:themeWPAdminMin', 'cssnano:themeWPLoginMin' ],
-		[ 'header:theme', 'header:themePrint', 'header:themeLegacy', 'header:themeWPEditor', 'header:themeWPLogin' ],
-		[ 'shell:scriptsThemeDev', 'shell:scriptsAdminDev' ],
-		[ 'shell:scriptsThemeProd', 'shell:scriptsAdminProd' ],
-		'uglify:themeMin',
-		'concat:themeMinVendors',
-		[ 'clean:themeMinVendorJS', 'constants:buildTimestamp' ],
-		callback,
-	);
-} );
+gulp.task( 'server_dist', gulp.series(
+	gulp.parallel( 'clean:themeMinCSS', 'clean:themeMinJS', 'copy:themeJS' ),
+	gulp.parallel( 'postcss:theme', 'postcss:themeWPAdmin', 'postcss:themeWPEditor', 'postcss:themeWPLogin', 'postcss:themeLegacy' ),
+	gulp.parallel( 'cssnano:themeMin', 'cssnano:themeLegacyMin', 'cssnano:themeWPEditorMin', 'cssnano:themeWPAdminMin', 'cssnano:themeWPLoginMin' ),
+	gulp.parallel( 'header:theme', 'header:themePrint', 'header:themeLegacy', 'header:themeWPEditor', 'header:themeWPLogin' ),
+	gulp.parallel( 'shell:scriptsThemeDev', 'shell:scriptsAdminDev' ),
+	gulp.parallel( 'shell:scriptsThemeProd', 'shell:scriptsAdminProd' ),
+	'uglify:themeMin',
+	'concat:themeMinVendors',
+	gulp.parallel( 'clean:themeMinVendorJS', 'constants:buildTimestamp' ),
+) );
 
 /**
  * Builds the entire package for production locally, including tests, linting.
  */
 
-gulp.task( 'dist', function( callback ) {
-	runSequence(
-		'shell:yarnInstall',
-		'shell:test',
-		[ 'eslint:theme', 'eslint:apps', 'eslint:utils', 'eslint:admin', 'stylelint:theme', 'stylelint:apps' ],
-		[ 'clean:themeMinCSS', 'clean:themeMinJS', 'copy:themeJS' ],
-		[ 'postcss:theme', 'postcss:themeWPAdmin', 'postcss:themeWPEditor', 'postcss:themeWPLogin', 'postcss:themeLegacy' ],
-		[ 'cssnano:themeMin', 'cssnano:themeLegacyMin', 'cssnano:themeWPEditorMin', 'cssnano:themeWPAdminMin', 'cssnano:themeWPLoginMin' ],
-		[ 'header:theme', 'header:themePrint', 'header:themeLegacy', 'header:themeWPEditor', 'header:themeWPLogin' ],
-		[ 'shell:scriptsThemeDev', 'shell:scriptsAdminDev' ],
-		[ 'shell:scriptsThemeProd', 'shell:scriptsAdminProd' ],
-		'uglify:themeMin',
-		'concat:themeMinVendors',
-		[ 'clean:themeMinVendorJS', 'constants:buildTimestamp' ],
-		callback,
-	);
-} );
+gulp.task( 'dist', gulp.series(
+	'shell:yarnInstall',
+	'shell:test',
+	gulp.parallel( 'eslint:theme', 'eslint:apps', 'eslint:utils', 'eslint:admin', 'stylelint:theme', 'stylelint:apps' ),
+	gulp.parallel( 'clean:themeMinCSS', 'clean:themeMinJS', 'copy:themeJS' ),
+	gulp.parallel( 'postcss:theme', 'postcss:themeWPAdmin', 'postcss:themeWPEditor', 'postcss:themeWPLogin', 'postcss:themeLegacy' ),
+	gulp.parallel( 'cssnano:themeMin', 'cssnano:themeLegacyMin', 'cssnano:themeWPEditorMin', 'cssnano:themeWPAdminMin', 'cssnano:themeWPLoginMin' ),
+	gulp.parallel( 'header:theme', 'header:themePrint', 'header:themeLegacy', 'header:themeWPEditor', 'header:themeWPLogin' ),
+	gulp.parallel( 'shell:scriptsThemeDev', 'shell:scriptsAdminDev' ),
+	gulp.parallel( 'shell:scriptsThemeProd', 'shell:scriptsAdminProd' ),
+	'uglify:themeMin',
+	'concat:themeMinVendors',
+	gulp.parallel( 'clean:themeMinVendorJS', 'constants:buildTimestamp' ),
+) );
 
-gulp.task( 'default', [ 'dist' ] );
+gulp.task( 'default', gulp.series( 'dist' ) );

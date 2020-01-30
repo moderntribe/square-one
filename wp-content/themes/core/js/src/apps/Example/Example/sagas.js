@@ -1,5 +1,4 @@
-import { delay } from 'redux-saga';
-import { call, put } from 'redux-saga/effects';
+import { call, delay, put } from 'redux-saga/effects';
 import controller from 'utils/redux-saga/controller';
 import { reqExample, recExample, errExample } from './ducks';
 import { fetchExample } from './api';

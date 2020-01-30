@@ -18,12 +18,24 @@ module.exports = {
 		rules: [
 			{
 				test: /\.pcss$/,
-				loader: 'style-loader!css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss-loader',
+				use: [
+					'style-loader',
+					{
+						loader: 'css-loader',
+						options: {
+							modules: {
+								localIdentName: '[name]__[local]___[hash:base64:5]',
+							},
+							importLoaders: 1,
+						},
+					},
+					'postcss-loader',
+				],
 			},
 			{
 				test: /\.css$/,
 				include: /node_modules/,
-				loaders: [ 'style-loader', 'css-loader' ],
+				use: [ 'style-loader', 'css-loader' ],
 			},
 		],
 	},
