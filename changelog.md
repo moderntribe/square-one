@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## 2020.01
+* Changed: Improve composer performance: Load hirak/prestissimo globally, volume mount entire composer dir, use "no-api": true, for VCS repositories, fix gravity forms installer.
 * Fixed: Sidebar.php template from calling Base::get_data() needlessly in the same request
 * Add: Added example eslint and phpcs github workflows
 * Fixed: Typo in docker logs naming for NPM scripts. 
@@ -17,6 +18,15 @@ All notable changes to this project will be documented in this file.
 * Added container component to allow for more composition flexibility
 * Added ifdef loader for Webpack to allow exclusion of React app chunk generation during main js bundle dev work
 * Changed: update docker `start.sh` script to check for a root `.env` file
+* Removed: SVG_Support Class and Util Provider
+* Added: Plugin: Safe SVG
+* Updated: WordPress to 5.2.4
+* Updated: Plugin: gravity-forms-wcag-20-form-fields to 1.7.2
+* Updated: Plugin: regenerate-thumbnails to 3.1.1
+* Updated: Plugin: the-events-calendar to 4.9.10
+* Updated: Plugin: wordpress-seo to 12.4
+* Updated: Plugin: user-switching to 1.5.2
+* Updated: Plugin: classic-editor-addon to 2.5.0
 * Changed: added check to panels caching to avoid caching on panel preview
 
 ## 2019.10
