@@ -9,6 +9,7 @@ php_fpm_pm_max_children: 50
 php_fpm_pm_start_servers: 8
 php_fpm_pm_min_spare_servers: 8
 php_fpm_pm_max_spare_servers: 8
+php_expose_php: "Off"
 
 php_packages:
   - php7.0-common

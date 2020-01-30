@@ -3,7 +3,7 @@
  * @description JavaScript specific to forms, specifically Gravity Forms.
  */
 
-import Spinner from 'spin.js';
+import { Spinner } from 'spin.js';
 import delegate from 'delegate';
 import * as tools from 'utils/tools';
 import scrollTo from 'utils/dom/scroll-to';
