@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## 2020.01
+* Changed: Improve composer performance: Load hirak/prestissimo globally, volume mount entire composer dir, use "no-api": true, for VCS repositories, fix gravity forms installer.
 * Add: Added example eslint and phpcs github workflows
 * Fixed: Typo in docker logs naming for NPM scripts. 
 
