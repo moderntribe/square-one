@@ -358,7 +358,8 @@ The first run of `npm run docker:start` will attempt to symlink your WP-CLI bina
 ln -s /path/to/wp dev/bin/wp
 ```
 
-In PhpStorm, you'll need to ensure you map your `wp` symlink to the container's `/usr/local/bin/wp` path.
+In PhpStorm, you'll need to ensure you map your `wp` symlink to the docker container's `/usr/local/bin/wp` path and that both 
+your **Name** and **Host** on your Servers tab match your [Project ID](dev/docker/.projectID)'s hostname, e.g. `hlt.tribe` in this screenshot.
 
 ![PhpStorm Server Panel Screenshot](media/phpstorm-wp-example.png)
 

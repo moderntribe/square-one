@@ -1,5 +1,3 @@
-/*global fetch*/
-
 import template from 'lodash/template';
 import reduce from 'lodash/reduce';
 import isFunction from 'lodash/isFunction';

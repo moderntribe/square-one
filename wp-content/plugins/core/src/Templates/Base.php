@@ -185,7 +185,6 @@ class Base extends Twig_Template {
 			Social_Settings::LINKEDIN,
 			Social_Settings::PINTEREST,
 			Social_Settings::INSTAGRAM,
-			Social_Settings::GOOGLE,
 		];
 
 		foreach ( $social_keys as $social_site ) {

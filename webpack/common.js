@@ -13,8 +13,6 @@ module.exports = {
 		],
 	},
 	module: {
-		noParse: /node_modules\/vex-js\/dist\/js\/vex.js/,
-		exprContextCritical: false,
 		rules: [
 			{
 				test: /\.js$/,

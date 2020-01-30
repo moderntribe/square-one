@@ -8,7 +8,11 @@
   ],
   "config": {
     "vendor-dir": "vendor",
-    "preferred-install": "dist"
+    "preferred-install": {
+      "moderntribe/panel-builder": "source",
+      "moderntribe/tribe-libs": "source",
+      "*": "dist"
+    }
   },
   "description": "Modern Tribe's Square One WordPress setup",
   "type": "project",
@@ -22,74 +26,88 @@
     },
     {
       "type":"vcs",
+      "no-api": true,
       "url":"git@github.com:moderntribe/attachment-helper.git"
     },
     {
       "type":"vcs",
+      "no-api": true,
       "url":"git@github.com:moderntribe/ajax-queue.git"
     },
     {
       "type":"vcs",
-      "url":"https://github.com/moderntribe/panel-builder.git"
-    },
-    {
-      "type":"vcs",
-      "url":"git@github.com:humanmade/Mercator.git"
-    },
-    {
-      "type":"vcs",
-      "url":"https://github.com/moderntribe/tribe-libs.git"
-    },
-    {
-      "type": "package",
-      "package": {
-        "name": "advanced-custom-fields/advanced-custom-fields-pro",
-        "version": "5.7.12",
-        "type": "wordpress-plugin",
-        "dist": {
-          "type": "zip",
-          "url": "https://connect.advancedcustomfields.com/index.php?a=download&p=pro&k={%WP_PLUGIN_ACF_KEY}&t={%version}"
-        },
-        "require": {
-          "ffraenz/private-composer-installer": "^2.0"
-        }
-      }
+      "no-api": true,
+      "url":"git@github.com:moderntribe/panel-builder.git"
     },
     {
       "type": "package",
       "package": {
         "name": "gravityforms/gravityforms",
-        "version": "2.4.10.7",
+        "version": "2.4.16.7",
         "type": "wordpress-plugin",
         "dist": {
           "type": "zip",
-          "url": "http://www.gravityhelp.com/wp-content/plugins/gravitymanager/api.php?op=get_plugin&slug=gravityforms&key={%WP_PLUGIN_GF_KEY}"
+          "url": "https://composer.utility.mtribe.site/gravityforms/?key={%WP_PLUGIN_GF_KEY}&token={%WP_PLUGIN_GF_TOKEN}&t={%VERSION}"
         },
         "require": {
-          "gotoandplay/gravityforms-composer-installer": "^1.0"
+          "ffraenz/private-composer-installer": "^3.0"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "advanced-custom-fields/advanced-custom-fields-pro",
+        "version": "5.8.7",
+        "type": "wordpress-plugin",
+        "dist": {
+          "type": "zip",
+          "url": "https://connect.advancedcustomfields.com/index.php?a=download&p=pro&k={%WP_PLUGIN_ACF_KEY}&t={%VERSION}"
+        },
+        "require": {
+          "ffraenz/private-composer-installer": "^3.0"
         }
       }
     }
   ],
   "require": {
-    "php":"^7.0",
+    "php":"^7.2",
     "aws/aws-sdk-php": "3.48.4",
-    "hirak/prestissimo":"0.3.7",
     "composer/installers":"1.4.0",
     "johnpbloch/wordpress-core-installer":"1.0.0",
-    "johnpbloch/wordpress-core": "5.2.1",
+    "johnpbloch/wordpress-core": "5.2.4",
     "wpackagist-plugin/configure-smtp": "3.1",
-    "wpackagist-plugin/gravity-forms-wcag-20-form-fields": "1.7.1",
+    "wpackagist-plugin/gravity-forms-wcag-20-form-fields": "1.7.2",
     "wpackagist-plugin/limit-login-attempts": "2.0beta3",
     "wpackagist-plugin/posts-to-posts": "1.6.5",
-    "wpackagist-plugin/regenerate-thumbnails": "3.0.2",
-    "wpackagist-plugin/the-events-calendar": "4.6.11.1",
-    "wpackagist-plugin/wordpress-seo": "9.4",
-    "wpackagist-plugin/user-switching": "1.3.0",
+    "wpackagist-plugin/regenerate-thumbnails": "3.1.1",
+    "wpackagist-plugin/the-events-calendar": "4.9.10",
+    "wpackagist-plugin/wordpress-seo": "12.4",
+    "wpackagist-plugin/user-switching": "1.5.2",
     "wpackagist-plugin/classic-editor":"1.5",
-    "wpackagist-plugin/classic-editor-addon":"2.4.0",
+    "wpackagist-plugin/classic-editor-addon":"2.5.0",
+    "wpackagist-plugin/safe-svg":"1.9.8",
     "moderntribe/panel-builder": "dev-3.3-branch",
-    "moderntribe/tribe-libs":"master",
+
+    "moderntribe/square1-acf": "^2.0",
+    "moderntribe/square1-assets": "^2.0",
+    "moderntribe/square1-blog-copier": "^2.0",
+    "moderntribe/square1-cache": "^2.0",
+    "moderntribe/square1-cli": "^2.0",
+    "moderntribe/square1-container": "^2.0",
+    "moderntribe/square1-nav": "^2.0",
+    "moderntribe/square1-object-meta": "^2.0",
+    "moderntribe/square1-oembed": "^2.0",
+    "moderntribe/square1-p2p": "^2.0",
+    "moderntribe/square1-post-type": "^2.0",
+    "moderntribe/square1-queues": "^2.0",
+    "moderntribe/square1-queues-mysql": "^2.0",
+    "moderntribe/square1-schema": "^2.0",
+    "moderntribe/square1-settings": "^2.0",
+    "moderntribe/square1-taxonomy": "^2.0",
+    "moderntribe/square1-user": "^2.0",
+    "moderntribe/square1-utils": "^2.0",
+
     "humanmade/mercator":"dev-master#7f3846a",
     "vlucas/phpdotenv": "^3.0",
     "humanmade/s3-uploads":"1.1.0",
@@ -104,13 +122,14 @@
     "sunra/php-simple-html-dom-parser": "1.5.2",
     "monolog/monolog":"1.23.0",
     "roots/wp-password-bcrypt": "dev-master",
-    "advanced-custom-fields/advanced-custom-fields-pro": "*",
-    "gravityforms/gravityforms": "*"
+    "gravityforms/gravityforms": "*",
+    "advanced-custom-fields/advanced-custom-fields-pro": "*"
   },
   "require-dev": {
     "wp-cli/wp-cli": "^2.2.0",
     "lucatume/wp-browser": "^2.2.14",
     "lucatume/function-mocker": "~1.0",
+    "moderntribe/square1-generators": "^2.0",
     "php-http/httplug": "^1.1",
     "filp/whoops": "^2.2@dev"
   },

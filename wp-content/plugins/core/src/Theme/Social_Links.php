@@ -140,14 +140,6 @@ class Social_Links {
 					$class
 				);
 
-			case "google":
-				return sprintf(
-					'<a class="social-share-networks__anchor icon icon-google-plus" href="https://plus.google.com/share?url=%1$s" data-js="social-share-popup" data-width="624" data-height="486" title="%2$s"><span%3$s>%2$s</span></a>',
-					urlencode( esc_url_raw( $data[ 'link' ] ) ),
-					__( 'Share on Google+', 'tribe' ),
-					$class
-				);
-
 			case "pinterest";
 				if ( empty( $data[ 'image_src' ] ) ) {
 					return '';
