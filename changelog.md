@@ -2,10 +2,6 @@
 
 All notable changes to this project will be documented in this file.
 
-## 2019.12
-* Changed: fixed main documentation links and updated WP CLI xdebug docs
-* Changed: set wpx.sh to executable
-
 ## 2020.01
 * Changed: Improve composer performance: Load hirak/prestissimo globally, volume mount entire composer dir, use "no-api": true, for VCS repositories, fix gravity forms installer.
 * Fixed: Sidebar.php template from calling Base::get_data() needlessly in the same request
@@ -13,6 +9,8 @@ All notable changes to this project will be documented in this file.
 * Fixed: Typo in docker logs naming for NPM scripts. 
 
 ## 2019.12
+* Changed: fixed main documentation links and updated WP CLI xdebug docs
+* Changed: set wpx.sh to executable
 * Updated: Node & NPM to latest LTS versions and all FE build tooling to latest (compatible) package versions. Related misc FE build tooling tweaks to accommodate new package versions.
 * Changed: Removed postcss custom property path vars in favor of postcss-assets plugin because [custom properties are not supported in `url()`'s](https://stackoverflow.com/a/42331003/1135190) per the CSS spec.
 
