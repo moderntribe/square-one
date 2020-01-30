@@ -13,12 +13,6 @@ fi
 
 PROJECT_ID=$(cat ./.projectID)
 
-# Create an empty composer cache folder if it doesn't exist, so we can mount it to php-fpm
-COMPOSER_CACHE=${SCRIPTDIR}/composer-cache
-if [ ! -d ${COMPOSER_CACHE} ]; then
-    mkdir ${COMPOSER_CACHE}
-fi;
-
 echo "Starting docker-compose project: ${PROJECT_ID}"
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
