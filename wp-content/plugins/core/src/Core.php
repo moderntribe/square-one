@@ -26,7 +26,6 @@ use Tribe\Project\Service_Providers\P2P_Provider;
 use Tribe\Project\Service_Providers\Theme_Provider;
 use Tribe\Project\Service_Providers\Settings_Provider;
 use Tribe\Project\Service_Providers\Twig_Service_Provider;
-use Tribe\Project\Service_Providers\Util_Provider;
 use Tribe\Project\Service_Providers\Whoops_Provider;
 
 class Core {
@@ -70,7 +69,6 @@ class Core {
 		$this->providers['theme']            = new Theme_Provider();
 		$this->providers['theme_customizer'] = new Theme_Customizer_Provider();
 		$this->providers['twig']             = new Twig_Service_Provider();
-		$this->providers['util']             = new Util_Provider();
 
 		$this->optional_dependencies();
 		$this->load_post_type_providers();
