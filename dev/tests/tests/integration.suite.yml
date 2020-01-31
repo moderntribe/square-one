@@ -6,6 +6,7 @@ actor: IntegrationTester
 bootstrap: _bootstrap.php
 modules:
     enabled:
+        - \Helper\Integration
         - WPLoader
     config:
         WPLoader:
