@@ -2,7 +2,7 @@
 
 use Codeception\Util\HttpCode;
 
-class SquareOneExampleCest extends BaseAcceptanceCest {
+class SquareOneExampleCest {
 
 	const POST_TITLE = 'Hey there, this is a sample post.';
 
