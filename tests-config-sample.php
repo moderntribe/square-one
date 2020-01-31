@@ -30,7 +30,24 @@ define( 'WP_CACHE', false );
 
 define( 'TRIBE_DISABLE_PANELS_CACHE', true );
 
-$GLOBALS[ 'memcached_servers' ] = [ [ 'memcached', 11211, ] ];
+/*
+ * Define a dedicated cache salt for tests to better isolate them
+ * from object caches from other types of request.
+ *
+ * If you're using WPDb for direct database manipulation, the
+ * cache invalidation mechanism might be compromised and you might
+ * face unexpected results in tests that are hard to debug.
+ *
+ * If you'd like to disable object caching completely during tests:
+ * 1 - Replace the line below with "define( 'WP_CACHE_KEY_SALT', md5( microtime( true ) ) );"
+ * 2 - Call "wp_suspend_cache_addition( true );" on a mu-plugin
+ *
+ * Generally speaking, it's a good idea to run tests with cache enabled
+ * because they run faster and you get to test your cache invalidation logic
+ */
+define( 'WP_CACHE_KEY_SALT', 'tests' );
+
+$GLOBALS['memcached_servers'] = [ [ 'memcached', 11211, ] ];
 
 /*
  * Whoops
