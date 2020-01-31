@@ -5,9 +5,11 @@ paths:
     support: tests/_support
     envs: tests/_envs
 actor_suffix: Tester
+bootstrap: _bootstrap.php
 extensions:
     enabled:
         - Codeception\Extension\RunFailed
+        - ValidateSuitesExtension
     commands:
         - Codeception\Command\GenerateWPUnit
         - Codeception\Command\GenerateWPRestApi
