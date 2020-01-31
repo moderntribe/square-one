@@ -28,8 +28,6 @@ define( 'WP_DEBUG_DISPLAY', true );
 define( 'SCRIPT_DEBUG', true );
 define( 'WP_CACHE', true );
 
-define( 'TRIBE_DISABLE_PANELS_CACHE', true );
-
 /*
  * Define a dedicated cache salt for tests to better isolate them
  * from object caches from other types of request.
