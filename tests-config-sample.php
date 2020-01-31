@@ -5,6 +5,9 @@
  *
  * You may include other settings here that you only want
  * enabled on your test development checkouts
+ *
+ * Generally speaking, this file could be very similar to your local-config.php,
+ * with the exception of the database credentials and caching.
 */
 
 define( 'DB_NAME', 'tribe_square1_tests' );
