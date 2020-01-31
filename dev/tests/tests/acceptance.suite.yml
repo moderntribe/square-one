@@ -7,8 +7,8 @@ bootstrap: _bootstrap.php
 modules:
     enabled:
         - \Helper\Acceptance
-        - WPBrowser
         - WPDb
+        - WPBrowser
         - WPLoader
     config:
         WPBrowser:
