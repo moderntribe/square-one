@@ -33,10 +33,3 @@ modules:
         WPLoader:
             # just load WordPress using the same db as WPDb
             loadOnly: true
-            wpRootFolder: %WP_ROOT_FOLDER%
-            pluginsFolder: '../wp-content/plugins'
-            dbName: %DB_NAME%
-            dbHost: %DB_HOST%
-            dbUser: %DB_USER%
-            dbPassword: '%DB_PASSWORD%'
-            configFile: tests-config.php

@@ -9,27 +9,4 @@ modules:
         - WPLoader
     config:
         WPLoader:
-            wpRootFolder: "%WP_ROOT_FOLDER%"
-            pluginsFolder: '../wp-content/plugins'
-            dbName: %DB_NAME%
-            dbHost: %DB_HOST%
-            dbUser: %DB_USER%
-            dbPassword: %DB_PASSWORD%
-            wpDebug: true
-            tablePrefix: %TABLE_PREFIX%
-            domain: %WP_DOMAIN%
-            title: 'WP Tests'
-            language: ''
-            configFile: tests-config.php
-            plugins:
-                - core/core.php
-                - advanced-custom-fields-pro/acf.php
-                - posts-to-posts/posts-to-posts.php
-            activatePlugins:
-                - core/core.php
-                - advanced-custom-fields-pro/acf.php
-                - posts-to-posts/posts-to-posts.php
-            bootstrapActions:
-                - [P2P_Storage, install]
-                - [P2P_Storage, init]
-                - tribe/project/queues/mysql/init_table
+            loadOnly: false

@@ -125,4 +125,4 @@ dev/docker/global/.env
 # Testing #
 #######################
 !dev/tests/tests/_data/*.sql
-dev/tests/tests/_support/_generated
+dev/tests/tests/_support/_generated/
