@@ -33,7 +33,7 @@ modules:
         # WPDb is responsible for performing read/write database operations.
         ##
         WPDb:
-            dsn: 'mysql:host=%DB_HOST%;dbname=%DB_NAME%'
+            dsn: '%DB_DSN%'
             user: '%DB_USER%'
             password: '%DB_PASSWORD%'
             dump: tests/_data/dump.sql
