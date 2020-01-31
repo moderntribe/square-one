@@ -13,17 +13,8 @@ modules:
         - Asserts
     config:
         WPDb:
-            dsn: 'mysql:host=%DB_HOST%;dbname=%DB_NAME%'
-            user: %DB_USER%
-            password: %DB_PASSWORD%
-            dump: tests/_data/dump.sql
             populate: true
             cleanup: false
-            url: '%WP_URL%'
-            tablePrefix: %TABLE_PREFIX%
-            urlReplacement: false
-            # Populator won't work in the context of the Container
-            # populator: 'mysql --max_allowed_packet=512M -u $user -h $host -p$password $dbname < $dump'
         WPLoader:
             loadOnly: true
         WPWebDriver:

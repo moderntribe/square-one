@@ -17,19 +17,8 @@ modules:
             adminPassword: %WP_ADMIN_PASSWORD%
             adminUrl: %WP_ADMIN_PATH%
         WPDb:
-            dsn: 'mysql:host=%DB_HOST%;dbname=%DB_NAME%'
-            user: %DB_USER%
-            password: %DB_PASSWORD%
-            dump: tests/_data/dump.sql
             populate: true
             cleanup: false
-            url: '%WP_URL%'
-            tablePrefix: %TABLE_PREFIX%
-            urlReplacement: false
-            waitlock: 5
-            # this can sometimes be faster for importing if the mysql client is available
-            # the mysql client is not available in the context of Containers
-            # populator: 'mysql --max_allowed_packet=512M -u $user -h $host -p$password $dbname < $dump'
         WPLoader:
             # just load WordPress using the same db as WPDb
             loadOnly: true

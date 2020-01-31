@@ -29,6 +29,31 @@ settings:
 ##
 modules:
     config:
+        ##
+        # WPDb is responsible for performing read/write database operations.
+        ##
+        WPDb:
+            dsn: 'mysql:host=%DB_HOST%;dbname=%DB_NAME%'
+            user: '%DB_USER%'
+            password: '%DB_PASSWORD%'
+            dump: tests/_data/dump.sql
+            url: '%WP_URL%'
+            tablePrefix: '%TABLE_PREFIX%'
+            urlReplacement: false
+            ## "populate" will import the test database before any test runs.
+            ## We recommend each suite define this parameter explicitly.
+            # populate: true
+
+            ## "cleanup" will import the test database between each test.
+            ## It can significantly increase the time the tests take to run, but provides better isolation.
+            ## We recommend each suite define this parameter explicitly.
+            # cleanup: true
+
+            ## Populator won't work in the context of Docker Containers.
+            # populator: 'mysql --max_allowed_packet=512M -u $user -h $host -p$password $dbname < $dump'
+        ##
+        # WPLoader is responsible for loading WordPress in the CLI context that the tests run.
+        ##
         WPLoader:
             wpRootFolder: '%WP_ROOT_FOLDER%'
             pluginsFolder: ../wp-content/plugins
