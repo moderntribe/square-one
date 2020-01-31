@@ -2,11 +2,11 @@
 
 # Any tests that require JavaScript should use the chrome driver, and a separate suite should be created for them
 # Ensure you pass the user-agent "tribe-tester" otherwise tests-config.php won't be loaded properly
-actor: AcceptanceTester
+actor: WebDriverTester
 bootstrap: _bootstrap.php
 modules:
     enabled:
-        - \Helper\Acceptance
+        - \Helper\Webdriver
         - WPDb
         - WPWebDriver
         - WPLoader
@@ -26,13 +26,6 @@ modules:
             # populator: 'mysql --max_allowed_packet=512M -u $user -h $host -p$password $dbname < $dump'
         WPLoader:
             loadOnly: true
-            wpRootFolder: %WP_ROOT_FOLDER%
-            pluginsFolder: '../wp-content/plugins'
-            dbName: %DB_NAME%
-            dbHost: %DB_HOST%
-            dbUser: %DB_USER%
-            dbPassword: '%DB_PASSWORD%'
-            configFile: tests-config.php
         WPWebDriver:
             url: '%WP_URL%'
             adminUsername: '%WP_ADMIN_USERNAME%'

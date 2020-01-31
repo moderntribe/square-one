@@ -1,21 +1,21 @@
 <?php 
 
-class SquareOneChromeExampleCest {
+class SquareOneChromeExampleCest extends Base_Webdriver_Cest {
 
-	const SITE_TITLE        = 'This is Sparta';
-	const FIELD_SITE_TITLE  = '#_customize-input-blogname';
+	public function i_can_set_the_site_title_in_the_customizer( WebDriverTester $I ) {
+		$site_title = wp_generate_password();
 
-	public function _before( AcceptanceTester $I ) {
-	}
-
-	public function i_can_set_the_site_title_in_the_customizer( AcceptanceTester $I ) {
+		$I->makeScreenshot( __LINE__ . ' - Start' );
 		$I->loginAsAdmin();
-		$I->amOnPage('/');
+		$I->amOnPage( '/' );
 		$I->click( '#wp-admin-bar-customize a' );
+		$I->makeScreenshot( __LINE__ . ' - On Customizer' );
 		$I->click( '#accordion-section-title_tagline' );
-		$I->fillField(self::FIELD_SITE_TITLE, self::SITE_TITLE );
+		$I->waitForElementVisible( '#_customize-input-blogname', 3 );
+		$I->fillField( '#_customize-input-blogname', $site_title );
 		$I->click( '#save' );
-		$I->wait( 3 );
-		$I->assertEquals( self::SITE_TITLE, $I->grabOptionFromDatabase('blogname') );
+		$I->waitForJqueryAjax();
+		$I->makeScreenshot( __LINE__ . ' - After Saving' );
+		$I->assertEquals( $site_title, $I->grabOptionFromDatabase( 'blogname' ) );
 	}
 }
