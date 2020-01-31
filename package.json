@@ -47,12 +47,12 @@
     "codecept:test": "dev/docker/exec.sh /application/www/dev/docker/codecept.sh run",
     "docker:start": "./dev/docker/start.sh",
     "docker:stop": "./dev/docker/stop.sh",
-    "docker:log": "./dev/docker/log.sh",
+    "docker:log": "./dev/docker/logs.sh",
     "docker:wp": "./dev/docker/wp.sh",
     "docker:wpx": "./dev/docker/exec.sh /application/www/dev/docker/wpx.sh",
     "docker:global:start": "./dev/docker/global/start.sh",
     "docker:global:stop": "./dev/docker/global/stop.sh",
-    "docker:global:log": "./dev/docker/global/log.sh",
+    "docker:global:log": "./dev/docker/global/logs.sh",
     "docker:global:cert": "./dev/docker/global/cert.sh"
   },
   "dependencies": {
