@@ -26,7 +26,7 @@ define( 'WP_DEBUG', true );
 define( 'SAVEQUERIES', true );
 define( 'WP_DEBUG_DISPLAY', true );
 define( 'SCRIPT_DEBUG', true );
-define( 'WP_CACHE', false );
+define( 'WP_CACHE', true );
 
 define( 'TRIBE_DISABLE_PANELS_CACHE', true );
 
@@ -40,7 +40,7 @@ define( 'TRIBE_DISABLE_PANELS_CACHE', true );
  *
  * If you'd like to disable object caching completely during tests:
  * 1 - Replace the line below with "define( 'WP_CACHE_KEY_SALT', md5( microtime( true ) ) );"
- * 2 - Call "wp_suspend_cache_addition( true );" on a mu-plugin
+ * 2 - Call "if ( tribe_is_codeception() ) wp_suspend_cache_addition( true );" on a mu-plugin
  *
  * Generally speaking, it's a good idea to run tests with cache enabled
  * because they run faster and you get to test your cache invalidation logic
