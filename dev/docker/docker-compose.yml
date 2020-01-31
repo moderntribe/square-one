@@ -63,6 +63,7 @@ services:
         - COMPOSER_ALLOW_SUPERUSER=1
         - COMPOSER_CACHE_DIR=/application/composer-cache
         - PAGER=more
+        - PHP_IDE_CONFIG=serverName=square1.tribe
 
     webserver:
       image: nginx:stable-alpine
