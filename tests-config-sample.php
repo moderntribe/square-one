@@ -29,7 +29,7 @@ define( 'WP_DEBUG', true );
 define( 'SAVEQUERIES', true );
 define( 'WP_DEBUG_DISPLAY', true );
 define( 'SCRIPT_DEBUG', true );
-define( 'WP_CACHE', true );
+define( 'WP_CACHE', false );
 
 /*
  * Define a unique cache salt for tests, to effectively disable it.
