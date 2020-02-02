@@ -72,6 +72,11 @@ install:
   # start the global docker
   - sudo bash dev/docker/global/start.sh
 
+  # SSL certificates
+  - sudo bash dev/docker/global/cert.sh square1.tribe
+  - sudo cp dev/docker/global/tribeCA.pem /usr/local/share/ca-certificates/tribeCA.crt
+  - sudo update-ca-certificates
+
   # start the square1 project docker
   - sudo bash dev/docker/start.sh
 
