@@ -32,21 +32,13 @@ define( 'SCRIPT_DEBUG', true );
 define( 'WP_CACHE', true );
 
 /*
- * Define a dedicated cache salt for tests to better isolate them
- * from object caches from other types of request.
+ * Define a unique cache salt for tests, to effectively disable it.
  *
- * If you're using WPDb for direct database manipulation, the
- * cache invalidation mechanism might be compromised and you might
- * face unexpected results in tests that are hard to debug.
- *
- * If you'd like to disable object caching completely during tests:
- * 1 - Replace the line below with "define( 'WP_CACHE_KEY_SALT', md5( microtime( true ) ) );"
- * 2 - Call "if ( tribe_is_codeception() ) wp_suspend_cache_addition( true );" on a mu-plugin
- *
- * Generally speaking, it's a good idea to run tests with cache enabled
- * because they run faster and you get to test your cache invalidation logic
+ * If you're running only end-to-end tests, such as webdriver, and
+ * would like ot test your cache invalidation logic, feel free to
+ * set a dedicated cache salt for it instead, like "tests".
  */
-define( 'WP_CACHE_KEY_SALT', 'tests' );
+define( 'WP_CACHE_KEY_SALT', microtime( true ) );
 
 $GLOBALS['memcached_servers'] = [ [ 'memcached', 11211, ] ];
 
