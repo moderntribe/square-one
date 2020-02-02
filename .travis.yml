@@ -60,6 +60,7 @@ before_install:
   - touch .env
   - echo "WP_PLUGIN_ACF_KEY='${WP_PLUGIN_ACF_KEY}'" >> .env
   - echo "WP_PLUGIN_GF_KEY='${WP_PLUGIN_GF_KEY}'" >> .env
+  - echo "WP_PLUGIN_GF_TOKEN='${WP_PLUGIN_GF_TOKEN}'" >> .env
 
 install:
   # start the global docker
@@ -89,6 +90,7 @@ install:
   - echo "define( 'DB_PASSWORD', '${DB_PASSWORD}' );" >> local-config.php
   - echo "define( 'DB_HOST', '${DB_HOST}' );" >> local-config.php
   - echo "define( 'TRIBE_GLOMAR', false );" >> local-config.php
+  - echo "define( 'WHOOPS_ENABLE', false );" >> local-config.php
   - echo "\$GLOBALS[ 'memcached_servers' ] = [ [ 'memcached', 11211, ] ];" >> local-config.php
 
   # install WordPress db structure
