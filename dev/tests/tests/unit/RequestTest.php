@@ -5,6 +5,18 @@ class RequestTest extends \Codeception\Test\Unit {
 	 * @var \UnitTester
 	 */
 	protected $tester;
+	private $backup_SERVER;
+
+	protected function _before() {
+		parent::_before();
+		$this->backup_SERVER = $_SERVER;
+	}
+
+	protected function _after() {
+		$_SERVER = $this->backup_SERVER;
+		parent::_after();
+	}
+
 
 	public function testQuery() {
 		include_once( __DIR__ . '/../../../../wp/wp-includes/class-wp-query.php' );
