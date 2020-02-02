@@ -55,7 +55,7 @@ $GLOBALS['memcached_servers'] = [ [ 'memcached', 11211, ] ];
  *
  * If you enable Whoops, the Whoops error library will be used to provide better/prettier error logging.
  */
-define( 'WHOOPS_ENABLE', true );
+define( 'WHOOPS_ENABLE', false );
 
 /*
  * Multisite
