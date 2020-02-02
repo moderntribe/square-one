@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Runs Codeception commands with xdebug enabled
+# Runs Codeception commands
 
 SCRIPTDIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 cd "$SCRIPTDIR";
