@@ -24,6 +24,8 @@ class SquareOneChromeExampleCest extends Base_Webdriver_Cest {
 
 	public function can_search_on_homepage( WebDriverTester $I, Home_Page_Example $home_page, Search_Page_Example $search_page ) {
 		$search_query = 'FooBarBaz';
+
+		$I->amOnPage( Home_Page_Example::$URL );
 		$home_page->search( $search_query );
 		$search_page->see_search_query( $search_query );
 	}
