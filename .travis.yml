@@ -104,7 +104,7 @@ before_script:
   - bash $TRAVIS_BUILD_DIR/dev/docker/exec.sh chown -R www-data:www-data /application/www/wp-content/cache
 
 script:
-  - bash $TRAVIS_BUILD_DIR/test.sh run unit
-  - bash $TRAVIS_BUILD_DIR/test.sh run integration
-  - bash $TRAVIS_BUILD_DIR/test.sh run acceptance
-  - bash $TRAVIS_BUILD_DIR/test.sh run webdriver
+  - bash $TRAVIS_BUILD_DIR/dev/docker/test.sh run unit
+  - bash $TRAVIS_BUILD_DIR/dev/docker/test.sh run integration
+  - bash $TRAVIS_BUILD_DIR/dev/docker/test.sh run acceptance
+  - bash $TRAVIS_BUILD_DIR/dev/docker/test.sh run webdriver
