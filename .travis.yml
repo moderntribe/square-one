@@ -74,7 +74,7 @@ install:
 
   # SSL certificates
   - sudo bash dev/docker/global/cert.sh square1.tribe
-  - sudo cp dev/docker/global/tribeCA.pem /usr/local/share/ca-certificates/tribeCA.crt
+  - sudo cp $TRAVIS_BUILD_DIR/dev/docker/global/tribeCA.pem /usr/local/share/ca-certificates/tribeCA.crt
   - sudo update-ca-certificates
 
   # start the square1 project docker
