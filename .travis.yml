@@ -62,15 +62,18 @@ before_install:
   - echo "WP_PLUGIN_GF_KEY='${WP_PLUGIN_GF_KEY}'" >> .env
   - echo "WP_PLUGIN_GF_TOKEN='${WP_PLUGIN_GF_TOKEN}'" >> .env
 
+  # disable source to speed up composer
+  - sudo sed -i '/source/d' $TRAVIS_BUILD_DIR/composer.json
+
 install:
+  # update resolv.conf to use our local DNS
+  - sudo sed -i '1s/^/nameserver 127.0.0.1\n/' /etc/resolv.conf
+
   # start the global docker
   - sudo bash dev/docker/global/start.sh
 
   # start the square1 project docker
   - sudo bash dev/docker/start.sh
-
-  # update resolv.conf to use our local DNS
-  - sudo sed -i '1s/^/nameserver 127.0.0.1\n/' /etc/resolv.conf
 
   # create needed databases for WordPress and tests
   - mysql --host=${DB_HOST} --user=${DB_USER} --password=${DB_PASSWORD} -e "create database IF NOT EXISTS ${DB_NAME};"
