@@ -53,14 +53,22 @@ if ( file_exists( dirname( __FILE__ ) . '/build-process.php' ) ) {
  * @return bool
  */
 function tribe_is_codeception(): bool {
-	$has_test_header     = isset( $_SERVER['HTTP_X_TRIBE_TESTING'] );
+	// Eg: Requests made by WPBrowser
+	$has_test_header = isset( $_SERVER['HTTP_X_TRIBE_TESTING'] );
+	// Eg: Requests made by Webdriver
 	$has_test_user_agent = isset( $_SERVER['HTTP_USER_AGENT'] ) && $_SERVER['HTTP_USER_AGENT'] === 'tribe-tester';
-	$has_test_cookie     = isset( $_COOKIE['TRIBE_LOAD_TESTS_CONFIG'] ) && $_COOKIE['TRIBE_LOAD_TESTS_CONFIG'] == true;
-	$has_test_env_var    = tribe_getenv( 'WPBROWSER_HOST_REQUEST' );
-	$test_file_exists    = file_exists( __DIR__ . '/tests-config.php' );
+	// Eg: WPLoader with loadOnly true
+	$has_test_env_var = tribe_getenv( 'WPLOADER_HOST_REQUEST' );
 
-	// Any of these being true will be considered a Codeception request
-	return $test_file_exists && ( $has_test_header || $has_test_user_agent || $has_test_env_var || $has_test_cookie );
+	// Early bail: Not a test request.
+	if ( ! $has_test_header && ! $has_test_user_agent && ! $has_test_env_var ) {
+		return false;
+	};
+
+	// This is a test request. Are we in a testable environment?
+	$test_file_exists = file_exists( __DIR__ . '/tests-config.php' );
+
+	return $test_file_exists;
 }
 
 if ( tribe_is_codeception() ) {
