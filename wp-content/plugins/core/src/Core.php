@@ -3,13 +3,14 @@
 namespace Tribe\Project;
 
 use Tribe\Libs\Container\Container_Provider;
+use Tribe\Project\Cache\Cache_Provider;
 use Tribe\Project\Service_Providers\Admin_Provider;
 use Tribe\Project\Service_Providers\Asset_Provider;
-use Tribe\Project\Cache\Cache_Provider;
 use Tribe\Project\Service_Providers\CLI_Provider;
 use Tribe\Project\Service_Providers\Content_Provider;
-use Tribe\Project\Service_Providers\Object_Meta_Provider;
 use Tribe\Project\Service_Providers\Nav_Menu_Provider;
+use Tribe\Project\Service_Providers\Object_Meta_Provider;
+use Tribe\Project\Service_Providers\P2P_Provider;
 use Tribe\Project\Service_Providers\Panels_Provider;
 use Tribe\Project\Service_Providers\Post_Types\Event_Service_Provider;
 use Tribe\Project\Service_Providers\Post_Types\Organizer_Service_Provider;
@@ -17,16 +18,16 @@ use Tribe\Project\Service_Providers\Post_Types\Page_Service_Provider;
 use Tribe\Project\Service_Providers\Post_Types\Post_Service_Provider;
 use Tribe\Project\Service_Providers\Post_Types\Sample_Service_Provider;
 use Tribe\Project\Service_Providers\Post_Types\Venue_Service_Provider;
+use Tribe\Project\Service_Providers\Settings_Provider;
 use Tribe\Project\Service_Providers\Shortcode_Provider;
 use Tribe\Project\Service_Providers\Taxonomies\Category_Service_Provider;
 use Tribe\Project\Service_Providers\Taxonomies\Example_Taxonomy_Service_Provider;
 use Tribe\Project\Service_Providers\Taxonomies\Post_Tag_Service_Provider;
 use Tribe\Project\Service_Providers\Theme_Customizer_Provider;
-use Tribe\Project\Service_Providers\P2P_Provider;
 use Tribe\Project\Service_Providers\Theme_Provider;
-use Tribe\Project\Service_Providers\Settings_Provider;
 use Tribe\Project\Service_Providers\Twig_Service_Provider;
 use Tribe\Project\Service_Providers\Whoops_Provider;
+use Tribe\Project\Templates\Templates_Provider;
 
 class Core {
 
@@ -66,6 +67,7 @@ class Core {
 		$this->providers['p2p']              = new P2P_Provider();
 		$this->providers['settings']         = new Settings_Provider();
 		$this->providers['shortcodes']       = new Shortcode_Provider();
+		$this->providers['templates']        = new Templates_Provider();
 		$this->providers['theme']            = new Theme_Provider();
 		$this->providers['theme_customizer'] = new Theme_Customizer_Provider();
 		$this->providers['twig']             = new Twig_Service_Provider();

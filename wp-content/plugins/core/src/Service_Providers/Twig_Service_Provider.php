@@ -11,6 +11,8 @@ use Twig\Loader\FilesystemLoader;
 use Twig\Environment;
 
 class Twig_Service_Provider extends Service_Provider {
+	const ENVIRONMENT = 'twig';
+
 	public function register( Container $container ) {
 		$container['twig.loader'] = function () {
 			$stylesheet_path = get_stylesheet_directory();
