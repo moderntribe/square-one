@@ -13,6 +13,6 @@ function tribe_template( string $controller ) {
 	try {
 		return $container->get( $controller )->render();
 	} catch ( \Exception $e ) {
-		return '';
+		return '<pre>' . print_r( $e, true ) . '</pre>';
 	}
 }

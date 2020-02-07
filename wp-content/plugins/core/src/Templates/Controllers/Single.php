@@ -8,9 +8,8 @@ use Tribe\Project\Templates\Component_Factory;
 use Tribe\Project\Templates\Components\Breadcrumbs;
 use Tribe\Project\Templates\Components\Button;
 use Tribe\Project\Templates\Components\Pagination;
-use Tribe\Project\Templates\Content;
 use Tribe\Project\Templates\Controllers\Content\Header\Subheader;
-use Tribe\Project\Theme\Social_Links;
+use Tribe\Project\Templates\Controllers\Content\Single\Post;
 use Twig\Environment;
 
 class Single extends Abstract_Template {
@@ -22,35 +21,45 @@ class Single extends Abstract_Template {
 	 * @var Subheader
 	 */
 	private $subheader;
+	/**
+	 * @var Content\Single\Post
+	 */
+	private $content;
+	/**
+	 * @var Footer
+	 */
+	private $footer;
 
-	public function __construct( string $path, Environment $twig, Component_Factory $factory, Header $header, Subheader $subheader ) {
+	public function __construct(
+		string $path,
+		Environment $twig,
+		Component_Factory $factory,
+		Header $header,
+		Subheader $subheader,
+		Post $content,
+		Footer $footer
+	) {
 		parent::__construct( $path, $twig, $factory );
 		$this->header    = $header;
 		$this->subheader = $subheader;
+		$this->content   = $content;
+		$this->footer    = $footer;
 	}
 
 
 	public function get_data(): array {
+		the_post();
 		$data = [
-			'header'       => $this->header->render(),
-			'subheader'    => $this->subheader->render(),
-			//'post'         => $this->get_post(),
-			'comments'     => $this->get_comments(),
-			'breadcrumbs'  => $this->get_breadcrumbs(),
-			//'pagination'   => $this->get_pagination(),
-			//'social_share' => $this->get_social_share(),
+			'header'      => $this->header->render(),
+			'subheader'   => $this->subheader->render(),
+			'content'     => $this->content->render(),
+			'footer'      => $this->footer->render(),
+			'comments'    => $this->get_comments(),
+			'breadcrumbs' => $this->get_breadcrumbs(),
+			'pagination'  => $this->get_pagination(),
 		];
 
 		return $data;
-	}
-
-	protected function get_post() {
-		// can't use get_components because we need to setup global postdata first.
-		$template = new Content\Single\Post( $this->path, $this->twig );
-		the_post();
-		$data = $template->get_data();
-
-		return $data['post'];
 	}
 
 	protected function get_comments() {
@@ -62,12 +71,6 @@ class Single extends Abstract_Template {
 		}
 
 		return '';
-	}
-
-	protected function get_social_share() {
-		$social = new Social_Links( [ 'facebook', 'twitter', 'linkedin', 'email' ], false );
-
-		return $social->format_links( $social->get_links() );
 	}
 
 	protected function get_breadcrumbs() {

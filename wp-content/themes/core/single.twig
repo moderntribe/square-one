@@ -21,9 +21,9 @@
 
 	{% block content %}
 		<div class="l-container">
-			{#{ include( 'content/single/post.twig') }}
+			{{ content }}
 
-			{{ include( 'content/pagination/single.twig') }#}
+			{{ pagination }}
 		</div>
 
 		{{ do_action( 'the_panels') }}
@@ -39,5 +39,5 @@
 {% block sidebar %}{% endblock %}
 
 {% block footer %}
-	{#{ include( 'footer.twig' ) }#}
+	{{ footer }}
 {% endblock %}
