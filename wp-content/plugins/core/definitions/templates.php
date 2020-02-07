@@ -4,9 +4,12 @@ declare( strict_types=1 );
 use Tribe\Project\Templates\Controllers;
 
 return [
+	Controllers\Page::class   => DI\autowire()->constructor( 'page.twig' ),
 	Controllers\Single::class => DI\autowire()->constructor( 'single.twig' ),
-	Controllers\Header::class => DI\autowire()->constructor( 'header.twig' ),
-	Controllers\Footer::class => DI\autowire()->constructor( 'footer.twig' ),
+
+	Controllers\Header::class  => DI\autowire()->constructor( 'header.twig' ),
+	Controllers\Footer::class  => DI\autowire()->constructor( 'footer.twig' ),
+	Controllers\Sidebar::class => DI\autowire()->constructor( 'sidebar.twig' ),
 
 	Controllers\Content\Header\Default_Header::class => DI\autowire()->constructor( 'content/header/default.twig' ),
 	Controllers\Content\Header\Subheader::class      => DI\autowire()->constructor( 'content/header/sub.twig' ),

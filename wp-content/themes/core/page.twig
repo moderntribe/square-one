@@ -1,15 +1,26 @@
-{% extends "base.twig" %}
+{#% extends "base.twig" %#}
+{% block header %}
+	{{ header }}
+{% endblock %}
 
+
+<a id="a11y-skip-link-content" tabindex="-1"></a>
+
+<main>
 {% block main %}
 
 	{% block subhead %}
-		{{ include( 'content/header/sub.twig' ) }}
+		{{ subheader }}
 	{% endblock %}
 
 	{% block content %}
 		{% if post.content %}
 			<div class="l-container">
-				{{ include( 'content/page/default.twig' ) }}
+				{{ post.featured_image }}
+
+				<div class="t-content">
+					{{ post.content }}
+				</div>
 			</div>
 		{% endif %}
 
@@ -21,5 +32,11 @@
 {% endblock %}
 
 {% block sidebar %}
-	{{ include( 'sidebar.twig' ) }}
+	{{ sidebar }}
+{% endblock %}
+
+</main>
+
+{% block footer %}
+	{{ footer }}
 {% endblock %}

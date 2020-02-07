@@ -1,4 +1,5 @@
 <?php
 
-$template = new \Tribe\Project\Templates\Page( 'page.twig' );
-echo $template->render();
+use Tribe\Project\Templates\Controllers\Page;
+
+echo tribe_template( Page::class );
