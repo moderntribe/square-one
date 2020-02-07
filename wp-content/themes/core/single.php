@@ -1,3 +1,5 @@
 <?php
 
-tribe_template( 'single' );
+use Tribe\Project\Templates\Controllers\Single;
+
+echo tribe_template( Single::class );

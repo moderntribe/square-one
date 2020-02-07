@@ -123,7 +123,8 @@
     "monolog/monolog":"1.23.0",
     "roots/wp-password-bcrypt": "dev-master",
     "gravityforms/gravityforms": "*",
-    "advanced-custom-fields/advanced-custom-fields-pro": "*"
+    "advanced-custom-fields/advanced-custom-fields-pro": "*",
+    "php-di/php-di": "^6.0"
   },
   "require-dev": {
     "wp-cli/wp-cli": "^2.2.0",

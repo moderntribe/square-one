@@ -2,6 +2,7 @@
 
 namespace Tribe\Project;
 
+use Psr\Container\ContainerInterface;
 use Tribe\Libs\Container\Container_Provider;
 use Tribe\Project\Cache\Cache_Provider;
 use Tribe\Project\Service_Providers\Admin_Provider;
@@ -36,6 +37,9 @@ class Core {
 	/** @var \Pimple\Container */
 	protected $container = null;
 
+	/** @var ContainerInterface */
+	protected $template_container;
+
 	/**
 	 * @var Container\Service_Provider[]
 	 */
@@ -50,6 +54,7 @@ class Core {
 
 	public function init() {
 		$this->load_service_providers();
+		$this->init_template_container();
 	}
 
 	private function load_service_providers() {
@@ -67,7 +72,6 @@ class Core {
 		$this->providers['p2p']              = new P2P_Provider();
 		$this->providers['settings']         = new Settings_Provider();
 		$this->providers['shortcodes']       = new Shortcode_Provider();
-		$this->providers['templates']        = new Templates_Provider();
 		$this->providers['theme']            = new Theme_Provider();
 		$this->providers['theme_customizer'] = new Theme_Customizer_Provider();
 		$this->providers['twig']             = new Twig_Service_Provider();
@@ -91,6 +95,14 @@ class Core {
 		foreach ( $this->providers as $provider ) {
 			$this->container->register( $provider );
 		}
+	}
+
+	private function init_template_container(): void {
+		$builder = new \DI\ContainerBuilder();
+		$builder->addDefinitions( dirname( __DIR__ ) . '/definitions/twig.php' );
+		$builder->addDefinitions( dirname( __DIR__ ) . '/definitions/templates.php' );
+		$this->template_container = $builder->build();
+		$this->template_container->get( Templates_Provider::class )->register( $this->template_container );
 	}
 
 
@@ -136,6 +148,10 @@ class Core {
 
 	public function container() {
 		return $this->container;
+	}
+
+	public function template_container(): ContainerInterface {
+		return $this->template_container;
 	}
 
 	/**

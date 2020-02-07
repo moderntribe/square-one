@@ -10,4 +10,11 @@ interface Template_Interface {
 	 * @return array
 	 */
 	public function get_data(): array;
+
+	/**
+	 * Render the template and return it as a string
+	 *
+	 * @return string The rendered template
+	 */
+	public function render(): string;
 }

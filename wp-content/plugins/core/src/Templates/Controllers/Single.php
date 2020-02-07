@@ -1,30 +1,55 @@
 <?php
 
 
-namespace Tribe\Project\Templates;
+namespace Tribe\Project\Templates\Controllers;
 
+use Tribe\Project\Templates\Abstract_Template;
+use Tribe\Project\Templates\Component_Factory;
 use Tribe\Project\Templates\Components\Breadcrumbs;
 use Tribe\Project\Templates\Components\Button;
 use Tribe\Project\Templates\Components\Pagination;
+use Tribe\Project\Templates\Content;
+use Tribe\Project\Templates\Controllers\Content\Header\Subheader;
 use Tribe\Project\Theme\Social_Links;
+use Twig\Environment;
 
-class Single extends Base {
+class Single extends Abstract_Template {
+	/**
+	 * @var Header
+	 */
+	private $header;
+	/**
+	 * @var Subheader
+	 */
+	private $subheader;
+
+	public function __construct( string $path, Environment $twig, Component_Factory $factory, Header $header, Subheader $subheader ) {
+		parent::__construct( $path, $twig, $factory );
+		$this->header    = $header;
+		$this->subheader = $subheader;
+	}
+
+
 	public function get_data(): array {
-		$data                 = parent::get_data();
-		$data['post']         = $this->get_post();
-		$data['comments']     = $this->get_comments();
-		$data['breadcrumbs']  = $this->get_breadcrumbs();
-		$data['pagination']   = $this->get_pagination();
-		$data['social_share'] = $this->get_social_share();
+		$data = [
+			'header'       => $this->header->render(),
+			'subheader'    => $this->subheader->render(),
+			//'post'         => $this->get_post(),
+			'comments'     => $this->get_comments(),
+			'breadcrumbs'  => $this->get_breadcrumbs(),
+			//'pagination'   => $this->get_pagination(),
+			//'social_share' => $this->get_social_share(),
+		];
 
 		return $data;
 	}
 
 	protected function get_post() {
 		// can't use get_components because we need to setup global postdata first.
-		$template = new Content\Single\Post( $this->template, $this->twig );
+		$template = new Content\Single\Post( $this->path, $this->twig );
 		the_post();
 		$data = $template->get_data();
+
 		return $data['post'];
 	}
 
@@ -41,6 +66,7 @@ class Single extends Base {
 
 	protected function get_social_share() {
 		$social = new Social_Links( [ 'facebook', 'twitter', 'linkedin', 'email' ], false );
+
 		return $social->format_links( $social->get_links() );
 	}
 

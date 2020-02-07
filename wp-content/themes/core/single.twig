@@ -1,5 +1,12 @@
-{% extends "base.twig" %}
+{#% extends "base.twig" %#}
+{% block header %}
+	{{ header }}
+{% endblock %}
 
+
+<a id="a11y-skip-link-content" tabindex="-1"></a>
+
+<main>
 {% block main %}
 
 	{% block breadcrumbs %}
@@ -9,14 +16,14 @@
 	{% endblock %}
 
 	{% block subhead %}
-		{{ include( 'content/header/sub.twig' ) }}
+		{{ subheader }}
 	{% endblock %}
 
 	{% block content %}
 		<div class="l-container">
-			{{ include( 'content/single/post.twig') }}
+			{#{ include( 'content/single/post.twig') }}
 
-			{{ include( 'content/pagination/single.twig') }}
+			{{ include( 'content/pagination/single.twig') }#}
 		</div>
 
 		{{ do_action( 'the_panels') }}
@@ -25,4 +32,12 @@
 	{{ comments }}
 
 
+{% endblock %}
+
+</main>
+
+{% block sidebar %}{% endblock %}
+
+{% block footer %}
+	{#{ include( 'footer.twig' ) }#}
 {% endblock %}
