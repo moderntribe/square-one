@@ -47,7 +47,6 @@ class Index extends Abstract_Template {
 
 
 	public function get_data(): array {
-		the_post();
 		$data = [
 			'header'      => $this->header->render(),
 			'subheader'   => $this->subheader->render(),
