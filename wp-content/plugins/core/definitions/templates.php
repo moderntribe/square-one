@@ -4,6 +4,7 @@ declare( strict_types=1 );
 use Tribe\Project\Templates\Controllers;
 
 return [
+	Controllers\Index::class  => DI\autowire()->constructor( 'index.twig' ),
 	Controllers\Page::class   => DI\autowire()->constructor( 'page.twig' ),
 	Controllers\Single::class => DI\autowire()->constructor( 'single.twig' ),
 
@@ -17,5 +18,6 @@ return [
 	Controllers\Content\Single\Post::class           => DI\autowire()->constructor( 'content/single/post.twig' ),
 	Controllers\Content\Footer\Default_Footer::class => DI\autowire()->constructor( 'content/footer/default.twig' ),
 	Controllers\Content\Navigation\Footer::class     => DI\autowire()->constructor( 'content/navigation/footer.twig' ),
+	Controllers\Content\Loop\Item::class             => DI\autowire()->constructor( 'content/loop/item.twig' ),
 ];
 

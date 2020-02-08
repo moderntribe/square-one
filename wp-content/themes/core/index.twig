@@ -1,9 +1,15 @@
-{% extends "base.twig" %}
+{#% extends "base.twig" %#}
+{% block header %}
+	{{ header }}
+{% endblock %}
 
+<a id="a11y-skip-link-content" tabindex="-1"></a>
+
+<main>
 {% block main %}
 
 	{% block subhead %}
-		{{ include( 'content/header/sub.twig' ) }}
+		{{ subheader }}
 	{% endblock %}
 
 	<div class="l-container">
@@ -11,7 +17,7 @@
 		{% if posts|length > 0 %}
 
 			{% for post in posts %}
-				{{ include( 'content/loop/results.twig' ) }}
+				{{ post }}
 			{% endfor %}
 
 			{% if pagination %}
@@ -20,10 +26,19 @@
 
 		{% else %}
 
-			{{ include( 'content/no-results.twig' ) }}
+			{{ include( 'components/no-results.twig' ) }}
 
 		{% endif %}
 
 	</div>
 
+{% endblock %}
+
+
+</main>
+
+{% block sidebar %}{% endblock %}
+
+{% block footer %}
+	{{ footer }}
 {% endblock %}
