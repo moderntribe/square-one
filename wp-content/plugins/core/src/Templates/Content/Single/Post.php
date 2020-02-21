@@ -3,6 +3,8 @@
 
 namespace Tribe\Project\Templates\Content\Single;
 
+use Tribe\Project\Templates\Components\Image;
+use Tribe\Project\Theme\Image_Sizes;
 use Tribe\Project\Twig\Twig_Template;
 use Tribe\Project\Twig\Stringable_Callable;
 
@@ -31,13 +33,19 @@ class Post extends Twig_Template {
 		return apply_filters( 'the_content', get_the_content() );
 	}
 
-	protected function get_featured_image() {
+	protected function get_featured_image(): string {
+		$image_id = get_post_thumbnail_id();
+
+		if ( empty( $image_id ) ) {
+			return '';
+		}
+
 		$options = [
-			'wrapper_class' => 'item-single__image',
-			'echo'          => false,
+			Image::IMG_ID          => $image_id,
+			Image::WRAPPER_CLASSES => [ 'item-single__image' ],
 		];
 
-		return the_tribe_image( get_post_thumbnail_id(), $options );
+		return Image::factory( $options )->render();
 	}
 
 	protected function get_time() {
