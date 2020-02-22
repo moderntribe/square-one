@@ -49,7 +49,7 @@ Doing animations/transitions to loaded images should be done with css if desired
 ## Examples
 
 ### Basic img without Lazyload
-*Using:*
+#### Using:
 ```php
 $options = [
     Image::IMG_ID       => get_post_thumbnail_id(),
