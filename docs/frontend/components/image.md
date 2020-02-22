@@ -197,9 +197,12 @@ echo Image::factory( $options )->render();
 #### Using:
 ```php
 $options = [
-    Image::IMG_ID       => get_post_thumbnail_id(),
-    Image::AS_BG        => true,
-    Image::LINK_URL     => 'http://www.google.com',
+    Image::IMG_ID          => get_post_thumbnail_id(),
+    Image::AS_BG           => true,
+    Image::WRAPPER_TAG     => 'div',
+    Image::WRAPPER_CLASSES => [ 'c-image', 'c-image--rect' ],
+    Image::IMG_CLASSES     => [ 'c-image__bg' ],
+    Image::LINK_URL        => 'http://www.google.com',
     Image::SRC_SIZE     => 'slider-small',
     Image::SRCSET_SIZES => [
         'slider-small',
