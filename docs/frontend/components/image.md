@@ -239,5 +239,6 @@ Yields:
 * [Image](/docs/frontend/components/image.md)
 * [Quote](/docs/frontend/components/quote.md)
 * [Slider](/docs/frontend/components/slider.md)
+* [Tabs](/docs/frontend/components/tabs.md)
 * [Template](/docs/frontend/components/template.md)
 * [Text](/docs/frontend/components/text.md)
