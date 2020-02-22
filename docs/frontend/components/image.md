@@ -8,6 +8,8 @@ The Image Component is the primary means by which we inject image markup into th
 * **Controller:** `wp-content\plugins\core\src\Templates\Components\Image.php`
 * **PostCSS:** `wp-content\plugins\core\assets\theme\pcss\components\_image.pcss`
 
+## Options
+
 This is the full set of arguments you can modify, and exhibits the defaults:
 ```php
 Image::IMG_ID             => 0,                    // The Image ID - takes precedence over IMG_URL.
@@ -47,7 +49,7 @@ Doing animations/transitions to loaded images should be done with css if desired
 ## Examples
 
 ### Basic img without Lazyload
-Using:
+*Using:*
 ```php
 $options = [
     Image::IMG_ID       => get_post_thumbnail_id(),
@@ -56,16 +58,16 @@ $options = [
 
 echo Image::factory( $options )->render();
 ```
-Yields:
+#### Yields:
 ```html
 <figure class="c-image">
-	<img class="c-image__image" alt="ALT TEXT" src="SRC TO LARGE IMAGE">
+    <img class="c-image__image" alt="ALT TEXT" src="SRC TO LARGE IMAGE">
 </figure>
 ```
 
 ### Basic background image without lazyload
 
-Using: 
+#### Using:
 ```php
 $options = [
     Image::IMG_ID       => get_post_thumbnail_id(),
@@ -76,16 +78,16 @@ $options = [
 echo Image::factory( $options )->render();
 ```
 
-Yields:
+#### Yields:
 ```html
 <figure class="c-image">
-	<div class="c-image__image" role="img" aria-label="ALT TEXT" style="background-image:url('SRC TO LARGE IMAGE');"></div>
+    <div class="c-image__image" role="img" aria-label="ALT TEXT" style="background-image:url('SRC TO LARGE IMAGE');"></div>
 </figure>
 ```
 
 ### Image with src_size & srcset_sizes of sizes for responsive use. No lazy loading.
 
-Using: 
+#### Using:
 ```php
 $options = [
     Image::IMG_ID       => get_post_thumbnail_id(),
@@ -100,11 +102,11 @@ $options = [
 echo Image::factory( $options )->render();
 ```
 
-Yields:
+#### Yields:
 ```html
 <figure class="c-image">
-	<img class="c-image__image" src="SRC TO SMALL" srcset="
-		SRC TO SMALL 800w 450h ,
+    <img class="c-image__image" src="SRC TO SMALL" srcset="
+        SRC TO SMALL 800w 450h ,
         SRC TO MID SIZE 1400w 788h ,
         SRC TO FULL SIZE 2000w 1126h" 
     sizes="(min-width: 1260px) 1260px, 100vw"  alt="IMG ALT"  />
@@ -113,7 +115,7 @@ Yields:
 
 ### Image with src_size & srcset_sizes of sizes for responsive use. Lazy loading enabled. 
 
-Using: 
+#### Using:
 ```php
 $options = [
     Image::IMG_ID       => get_post_thumbnail_id(),
@@ -127,17 +129,17 @@ $options = [
 echo Image::factory( $options )->render();
 ```
 
-Yields:
+#### Yields:
 ```html
 <!--  used src_size as filename for shim loaded from theme/img/shims, shim applied to src and srcset, lazy load uses data attrs -->
 <figure class="c-image">
-	<img 
-	class="lazyload c-image__image" 
-	src="http://square1.tribe/wp-content/themes/core/img/shims/slider-small.png"  
-	srcset="http://square1.tribe/wp-content/themes/core/img/shims/slider-small.png"  
-	data-src="SRC TO SMALL"  
-	data-srcset="
-		SRC TO SMALL 800w 450h ,
+    <img 
+    class="lazyload c-image__image" 
+    src="http://square1.tribe/wp-content/themes/core/img/shims/slider-small.png"  
+    srcset="http://square1.tribe/wp-content/themes/core/img/shims/slider-small.png"  
+    data-src="SRC TO SMALL"  
+    data-srcset="
+        SRC TO SMALL 800w 450h ,
         SRC TO MID SIZE 1400w 788h ,
         SRC TO FULL SIZE 2000w 1126h"  
     data-sizes="(min-width: 1260px) 1260px, 100vw"  
@@ -149,14 +151,14 @@ Yields:
 
 ### Image with custom wrapper tag, attributes, link around image, and lazy loading.
 
-Using: 
+#### Using:
 ```php
 $options = [
     Image::IMG_ID         => get_post_thumbnail_id(),
-	Image::WRAPPER_TAG    => 'article',
-	Image::WRAPPER_ATTRS  => [ 'data-funky' => 'Stanley Clarke' ],
-	Image::IMG_ATTRS      => [ 'data-image' => 'Yes' ],
-	Image::LINK_URL       => 'http://www.google.com',
+    Image::WRAPPER_TAG    => 'article',
+    Image::WRAPPER_ATTRS  => [ 'data-funky' => 'Stanley Clarke' ],
+    Image::IMG_ATTRS      => [ 'data-image' => 'Yes' ],
+    Image::LINK_URL       => 'http://www.google.com',
     Image::SRC_SIZE       => 'slider-small',
     Image::SRCSET_SIZES   => [
         'slider-small',
@@ -167,37 +169,37 @@ $options = [
 echo Image::factory( $options )->render();
 ```
 
-Yields:
+#### Yields:
 ```html
 <!--  used src_size as filename for shim loaded from theme/img/shims, shim applied to src and srcset, lazy load uses data attrs -->
 <article data-funky="Stanley Clarke" class="c-image">
-	<a href="http://www.google.com">
-		<img 
-		class="c-image__image lazyload" 
-		src="http://square1.tribe/wp-content/themes/core/img/shims/slider-small.png"  
-		srcset="http://square1.tribe/wp-content/themes/core/img/shims/slider-small.png"  
-		data-src="SRC TO SMALL"  
-		data-srcset="
-			SRC TO SMALL 800w 450h ,
-	        SRC TO MID SIZE 1400w 788h ,
-	        SRC TO FULL SIZE 2000w 1126h"  
-	    data-sizes="(min-width: 1260px) 1260px, 100vw"  
-	    data-expand="200"  
-	    data-parent-fit="width" 
-	    data-image="Yes"
-	    alt="IMG ALT"  />
+    <a href="http://www.google.com">
+        <img 
+        class="c-image__image lazyload" 
+        src="http://square1.tribe/wp-content/themes/core/img/shims/slider-small.png"  
+        srcset="http://square1.tribe/wp-content/themes/core/img/shims/slider-small.png"  
+        data-src="SRC TO SMALL"  
+        data-srcset="
+            SRC TO SMALL 800w 450h ,
+            SRC TO MID SIZE 1400w 788h ,
+            SRC TO FULL SIZE 2000w 1126h"  
+        data-sizes="(min-width: 1260px) 1260px, 100vw"  
+        data-expand="200"  
+        data-parent-fit="width" 
+        data-image="Yes"
+        alt="IMG ALT"  />
     </a>
 </article>
 ```
 
 ### Background image with custom wrapper tag, link around image, and lazy loading.
 
-Using: 
+#### Using:
 ```php
 $options = [
     Image::IMG_ID       => get_post_thumbnail_id(),
     Image::AS_BG        => true,
-	Image::LINK_URL     => 'http://www.google.com',
+    Image::LINK_URL     => 'http://www.google.com',
     Image::SRC_SIZE     => 'slider-small',
     Image::SRCSET_SIZES => [
         'slider-small',
@@ -209,11 +211,11 @@ $options = [
 echo Image::factory( $options )->render();
 ```
 
-Yields:
+#### Yields:
 ```html
 <!--  used src_size as filename for shim loaded from theme/img/shims, shim applied to style:background-image and bgset, lazy load uses data attrs -->
 <div class="c-image c-image--rect">
-	<a href="http://www.google.com" class="c-image__link">
+    <a href="http://www.google.com" class="c-image__link">
         <div
             class="c-image__bg lazyload"
             role="img"
@@ -225,7 +227,7 @@ Yields:
                 SRC TO FULL SIZE 2000w 1126h"
             style="background-image: url(http://square1.tribe/wp-content/themes/core/img/shims/slider-small.png);">
         </div>
-	</a>
+    </a>
 </div>
 ```
 
