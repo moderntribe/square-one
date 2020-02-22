@@ -4,7 +4,6 @@
 namespace Tribe\Project\Templates\Content\Single;
 
 use Tribe\Project\Templates\Components\Image;
-use Tribe\Project\Theme\Image_Sizes;
 use Tribe\Project\Twig\Twig_Template;
 use Tribe\Project\Twig\Stringable_Callable;
 

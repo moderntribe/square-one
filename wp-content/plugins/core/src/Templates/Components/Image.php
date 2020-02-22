@@ -8,7 +8,6 @@ class Image extends Component {
 
 	const TEMPLATE_NAME = 'components/image.twig';
 
-	/* Options to be passed in */
 	const IMG_ID            = 'img_id';
 	const IMG_URL           = 'img_url';
 	const AS_BG             = 'as_bg';
@@ -49,61 +48,61 @@ class Image extends Component {
 	protected function parse_options( array $options ): array {
 		$defaults = [
 			static::IMG_ID             => 0,
-			// the Image ID - takes precedence over IMG_URL
+			// the Image ID - takes precedence over IMG_URL.
 			static::IMG_URL            => '',
-			// the Image URL - genrate markup for an image via its URL. Only applicable if IMAGE_ID is empty.
+			// the Image URL - generate markup for an image via its URL. Only applicable if IMAGE_ID is empty.
 			static::AS_BG              => false,
-			// us this as background on wrapper?
+			// Generates a background image on a `<div>` instead of a traditional `<img>`.
 			static::AUTO_SHIM          => true,
-			// if true, shim dir as set will be used, src_size will be used as filename, with png as filetype
+			// if true, shim dir as set will be used, src_size will be used as filename, with png as file type.
 			static::AUTO_SIZES_ATTR    => false,
 			// if lazyloading the lib can auto create sizes attribute.
 			static::ECHO               => true,
-			// whether to echo or return the html
+			// whether to echo or return the html.
 			static::EXPAND             => '200',
 			// the expand attribute is the threshold used by lazysizes. use negative to reveal once in viewport.
 			static::HTML               => '',
-			// append an html string inside the wrapper. Useful to add a <figcaption> or other markup after the image.
+			// append an html string inside the wrapper. Useful for adding a `<figcaption>` or other markup after the image.
 			static::IMG_CLASSES        => [ 'c-image__image' ],
-			// pass classes for image tag. if lazyload is true class "lazyload" is auto added
+			// pass classes for image tag. if lazyload is true class "lazyload" is auto added.
 			static::IMG_ATTRS          => [],
-			// additional image attributes
+			// additional image attributes.
 			static::IMG_ALT_TEXT       => '',
-			// pass specific image alternate text. if not included, will default to image title
+			// pass specific image alternate text. if not included, will default to image title.
 			static::LINK_URL           => '',
-			// pass a link to wrap the image
+			// pass a link to wrap the image.
 			static::LINK_CLASSES       => [ 'c-image__link' ],
-			// pass link classes
+			// pass link classes.
 			static::LINK_TARGET        => '',
-			// pass a link target
+			// pass a link target.
 			static::LINK_TITLE         => '',
-			// pass a link title
+			// pass a link title.
 			static::LINK_ATTRS         => [],
-			// pass additional link attributes
+			// pass additional link attributes.
 			static::PARENT_FIT         => 'width',
-			// if lazyloading this combines with object fit css and the object fit polyfill
+			// if lazyloading this combines with object fit css and the object fit polyfill.
 			static::SHIM               => '',
 			// supply a manually specified shim for lazyloading. Will override auto_shim whether true/false.
 			static::SRC                => true,
-			// set to false to disable the src attribute. this is a fallback for non srcset browsers
+			// set to false to disable the src attribute. this is a fallback for non srcset browsers.
 			static::SRC_SIZE           => 'large',
-			// this is the main src registered image size
+			// this is the main src registered image size.
 			static::SRCSET_SIZES       => [],
 			// this is registered sizes array for srcset.
 			static::SRCSET_SIZES_ATTR  => '(min-width: 1260px) 1260px, 100vw',
 			// this is the srcset sizes attribute string used if auto is false.
 			static::USE_HW_ATTR        => false,
-			// this will set the width and height attributes on the img to be half the origal for retina/hdpi. Only for not lazyloading and when src exists.
+			// this will set the width and height attributes on the img to be half the original for retina/hdpi. Only for not lazyloading and when src exists.
 			static::USE_LAZYLOAD       => true,
-			// lazyload this game?
+			// lazyload this game? If `AS_BG` is true, `SRCSET_SIZES` must also be defined.
 			static::USE_SRCSET         => true,
 			// srcset this game?
 			static::WRAPPER_ATTRS      => [],
-			// additional wrapper attributes
+			// additional wrapper attributes.
 			static::WRAPPER_CLASSES    => [ 'c-image' ],
-			// pass classes for figure wrapper. If as_bg is set true gets auto class of "lazyload"
+			// pass classes for figure wrapper. If as_bg is set true gets auto class of "lazyload".
 			static::WRAPPER_TAG        => 'figure',
-			// html tag for the wrapper/background image container
+			// html tag for the wrapper/background image container.
 		];
 
 		return wp_parse_args( $options, $defaults );
@@ -204,9 +203,7 @@ class Image extends Component {
 	}
 
 	/**
-	 * Util to set item attributes for lazyload or not, bg or not
-	 *
-	 * @TODO: Fix for AS_BG with only an ID. (right now the script doesn't flip the data-src to the bg image.)
+	 * Util to set item attributes for lazyload or not, bg or not.
 	 *
 	 * @return string
 	 */
@@ -250,20 +247,20 @@ class Image extends Component {
 			// the expand attribute that controls threshold
 			$attrs[ 'data-expand' ] = esc_attr( $this->options[ static::EXPAND ] );
 
-			// the parent fit attribute if as_bg is used.
-			if ( ! empty ( $this->options[ static::PARENT_FIT ] ) ) {
+			// the parent fit attribute if as_bg is not used.
+			if ( ! $this->options[ static::AS_BG ] ) {
 				$attrs[ 'data-parent-fit' ] = esc_attr( $this->options[ static::PARENT_FIT ] );
 			}
 
 			// set an src if true in options, since lazyloading this is "data-src"
-			if ( $this->options[ static::SRC ] ) {
+			if ( ! $this->options[ static::AS_BG ] && $this->options[ static::SRC ] ) {
 				$attrs[ 'data-src' ] = esc_attr( $src );
 			}
 
 			// the shim attribute for srcset.
 			$shim_src = $this->get_shim();
 
-			if ( $this->options[ static::USE_SRCSET ] && ! empty( $this->options[ static::SRCSET_SIZES ] ) ) {
+			if ( ! $this->options[ static::AS_BG ] && $this->options[ static::USE_SRCSET ] && ! empty( $this->options[ static::SRCSET_SIZES ] ) ) {
 				$attrs[ 'srcset' ] = esc_attr( $shim_src );
 			}
 
@@ -317,7 +314,6 @@ class Image extends Component {
 	 * @return string
 	 */
 	private function get_shim(): string {
-
 		$shim_dir = trailingslashit( get_stylesheet_directory_uri() ) . 'img/theme/shims/';
 		$src      = $this->options[ static::SHIM ];
 
@@ -338,7 +334,6 @@ class Image extends Component {
 	 * @return string
 	 */
 	private function get_srcset_attribute(): string {
-
 		$all_sizes = wp_get_additional_image_sizes();
 		$attribute = [];
 
@@ -348,7 +343,7 @@ class Image extends Component {
 
 		foreach ( $this->options[ static::SRCSET_SIZES ] as $size ) {
 			$src = wp_get_attachment_image_src( $this->options[ static::IMG_ID ], $size );
-			// Don't add nonexistent intermediate sizes to the src_set. It ends up being the full-size URL.
+			// Don't add nonexistent intermediate sizes to the src_set. It ends up being the full-size image URL.
 			$use_size = ( 'full' !== $size && true === $src[ 3 ] );
 			if ( ! $use_size && isset( $all_sizes[ $size ] ) ) {
 				$use_size = $this->image_matches_size( $src, $all_sizes[ $size ] );
