@@ -10,7 +10,7 @@ This template function has been reduced to a wrapper for the Twig Image Componen
 
 #### Example Usage:
 
-Using: 
+##### Using:
 ```php
 $args = [
     'use_lazyload' => false,
@@ -18,7 +18,7 @@ $args = [
 the_tribe_image( get_post_thumbnail_id(), $args );
 ```
 
-Yields:
+##### Yields:
 ```html
 <figure class="c-image">
     <img class="c-image__image" src="SRC TO LARGE IMAGE" alt="IMG ALT"  />
