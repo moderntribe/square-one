@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2020.02
+* Changed: Refactored the image component to reduce complexity and allow more robust usage options and made a general pass at code clean up & documentation.
+* Changed: all uses of `the_tribe_image()` ion the core plugin have been refactored to use the image component directly.
+
 ## 2020.01
 * Changed: Improve composer performance: Load hirak/prestissimo globally, volume mount entire composer dir, use "no-api": true, for VCS repositories, fix gravity forms installer.
 * Fixed: Sidebar.php template from calling Base::get_data() needlessly in the same request
