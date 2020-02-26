@@ -34,13 +34,15 @@ class Colors {
 	}
 
 	/**
-	 * Create an array of color options for use with the ACF Swatch field.
+	 * Create an array of color options with the format `[ 'value' => 'label' ]`.
+	 *
+	 * Useful for setting up a collection of colors for the the ACF Swatch field.
 	 *
 	 * @param array $colors
 	 *
 	 * @return array
 	 */
-	public static function get_color_options_for_acf( array $colors = [] ) {
+	public static function get_color_options_by_value( array $colors = [] ) {
 		$colors     = array_intersect_key( self::get_color_options(), array_flip( $colors ) );
 		$acf_colors = [];
 		foreach ( $colors as $color ) {
@@ -51,21 +53,20 @@ class Colors {
 	}
 
 	/**
-	 * Return a color's key (I.e. - `black`) from the color's hex value (I.e. - `#000000`).
+	 * Return a color's key (I.e. - `black`) from the color's value (I.e. - `#000000`).
 	 *
 	 * Useful for getting a color's key name for use with CSS classes from the color's value
-	 * like when grabbing the value from an ACF swatch field.
+	 * such as when grabbing the value from an ACF swatch field.
 	 *
 	 * @param string $color
 	 *
 	 * @return string
 	 */
-	public static function get_color_key_from_acf_value( $color = '' ) {
+	public static function get_color_key_from_hex_value( $color = '' ) {
 		$name = '';
 		foreach ( self::get_color_options() as $key => $value ) {
 			if ( in_array( $color, $value ) ) {
-				$name = $key;
-				break;
+				return $key;
 			}
 		}
 
