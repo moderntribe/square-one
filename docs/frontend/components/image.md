@@ -44,7 +44,7 @@ Image::WRAPPER_TAG        => 'figure',             // Html tag for the wrapper/b
 
 ## Notes
 
-Doing animations/transitions to loaded images should be done with css if desired. When lazyloading, the js plugin applies the "lazyloading" class to the image during loading, and "lazyloaded" when complete. So you could set the image to `opacity: 0` and drop a css transition on, then apply `opacity: 1` on the lazyloaded class. To adjust when the image is revealed adjust the "expand" attribute. Negative integers bring you into viewport, positive trigger it below viewport bottom. Default is 200 so images lazyload a bit before they come into view. To know more about the lazyload javascript go here [Lazysizes](https://github.com/aFarkas/lazysizes). Check the vendor directory of the theme to see which Lazysizes plugins are active, and check the copy grunt task to understand how to add more Lazysizes plugins. 
+Doing animations/transitions to loaded images should be done with css if desired. When lazyloading, the js plugin applies the "lazyloading" class to the image during loading, and "lazyloaded" when complete. So you could set the image to `opacity: 0` and drop a css transition on, then apply `opacity: 1` on the lazyloaded class. To adjust when the image is revealed adjust the "expand" attribute. Negative integers bring you into viewport, positive trigger it below viewport bottom. Default is 200 so images lazyload a bit before they come into view. To know more about the lazyload javascript go here [Lazysizes](https://github.com/aFarkas/lazysizes). Check the vendor directory of the theme to see which Lazysizes plugins are active, and check the copy gulp task to understand how to add more Lazysizes plugins. 
 
 ## Examples
 
