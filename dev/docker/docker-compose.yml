@@ -40,7 +40,7 @@ services:
       build:
         context: .
         dockerfile: phpdocker/php-fpm/Dockerfile
-      image: tribe-phpfpm:7.2-rev0
+      image: tribe-phpfpm:7.2-rev1
       working_dir: /application
       networks:
         - proxy
@@ -50,8 +50,7 @@ services:
         - ./phpdocker/php-fpm/php-ini-overrides.ini:/etc/php/7.2/fpm/conf.d/99-overrides.ini
         - ./phpdocker/php-fpm/ssmtp.conf:/etc/ssmtp/ssmtp.conf:ro
         - ./wp-cli.yml:/application/wp-cli.yml
-        - ./composer-config.json:/root/.composer/auth.json
-        - ./composer-cache:/application/composer-cache
+        - ./composer:/application/.composer
       links:
         - memcached
         - redis
@@ -61,7 +60,7 @@ services:
         - "tribe-mail:mail"
       environment:
         - COMPOSER_ALLOW_SUPERUSER=1
-        - COMPOSER_CACHE_DIR=/application/composer-cache
+        - COMPOSER_HOME=/application/.composer
         - PAGER=more
 
     webserver:
