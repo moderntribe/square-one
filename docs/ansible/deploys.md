@@ -57,7 +57,7 @@ ansible-playbook -i inventory/WHATEVER setup-database.yml
 
 ### `setup-project.yml` for project-level setup deploys
 
-This playbook sets up the project-specific tools (like grunt and wpcli) and also fetchs/builds the project.
+This playbook sets up the project-specific tools (like gulp and wpcli) and also fetchs/builds the project.
 
 ```
 ansible-playbook -i inventory/WHATEVER setup-project.yml
