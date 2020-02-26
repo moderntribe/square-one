@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 
 ## 2020.02
+* Changed: Refactored the image component to reduce complexity and allow more robust usage options and made a general pass at code clean up & documentation.
+* Changed: all uses of `the_tribe_image()` ion the core plugin have been refactored to use the image component directly.
+* Updated: Docs for Image Component, theme Images to reflect current architecture.
+* Fixed: Removed almost all references to Grunt in the docs because it is switched to Gulp. The only references left are for the outdated videos.
 * Added: Several helper methods to the Theme Colors class for working with color arrays.
 
 ## 2020.01

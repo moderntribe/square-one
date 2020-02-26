@@ -5,6 +5,7 @@ namespace Tribe\Project\Templates\Content\Loop;
 use Tribe\Project\Post_Meta\Primary_Category;
 use Tribe\Project\Post_Types\Article\Article;
 use Tribe\Project\Taxonomies\Category\Category;
+use Tribe\Project\Templates\Components\Image;
 use Tribe\Project\Twig\Twig_Template;
 use Tribe\Project\Theme\Image_Sizes;
 use Tribe\Libs\Post_Type\Post_Object;
@@ -36,20 +37,26 @@ class Item extends Twig_Template {
 	}
 
 	protected function get_featured_image() {
+		$image_id = get_post_thumbnail_id();
+
+		if ( empty( $image_id ) ) {
+			return '';
+		}
+
 		$options = [
-			'as_bg'         => true,
-			'echo'          => false,
-			'wrapper_class' => 'item__image',
-			'shim'          => trailingslashit( get_stylesheet_directory_uri() ) . 'img/theme/shims/16x9.png',
-			'src_size'      => Image_Sizes::CORE_FULL,
-			'srcset_sizes'  => [
+			Image::IMG_ID          => $image_id,
+			Image::AS_BG           => true,
+			Image::WRAPPER_CLASSES => [ 'item__image' ],
+			Image::SHIM            => trailingslashit( get_stylesheet_directory_uri() ) . 'img/theme/shims/16x9.png',
+			Image::SRC_SIZE        => Image_Sizes::CORE_FULL,
+			Image::SRCSET_SIZES    => [
 				Image_Sizes::CORE_FULL,
 				Image_Sizes::CORE_MOBILE,
 				Image_Sizes::SOCIAL_SHARE,
 			],
 		];
 
-		return the_tribe_image( get_post_thumbnail_id(), $options );
+		return Image::factory( $options )->render();
 	}
 
 	protected function get_time() {
