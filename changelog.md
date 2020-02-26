@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2020.02
+* Updated: s3-uploads plugin to 2.2.1
+
 ## 2020.01
 * Add: Added example eslint and phpcs github workflows
 
