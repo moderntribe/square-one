@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2020.02
+* Fixed: Removed almost all references to Grunt in the docs because it is switched to Gulp. The only references left are for the outdated videos.
+
 ## 2020.01
 * Changed: Improve composer performance: Load hirak/prestissimo globally, volume mount entire composer dir, use "no-api": true, for VCS repositories, fix gravity forms installer.
 * Fixed: Sidebar.php template from calling Base::get_data() needlessly in the same request

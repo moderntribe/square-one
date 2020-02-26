@@ -1,6 +1,6 @@
 # Overview
 
-This system uses NPM, Webpack and Grunt to compile the front ends css and script files. Browse specifics below.
+This system uses NPM, Webpack and Gulp to compile the front ends css and script files. Browse specifics below.
 
 ## Table of Contents
 

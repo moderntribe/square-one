@@ -58,9 +58,9 @@ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | 
 nvm install {version number}
 ```
 
-11. Install grunt-cli. [View source](https://github.com/gruntjs/grunt-cli)
+11. Install gulp-cli globally. [View source](https://github.com/gulpjs/gulp-cli)
 ```
-npm install -g grunt-cli
+npm install gulp-cli -g
 ```
 
 12. Install Yarn. [View source](https://linuxize.com/post/how-to-install-yarn-on-ubuntu-18-04/)
