@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "20203c06fd64abdb28054c2968aa3b53",
+    "content-hash": "05245737aae63b498740914d88ee825f",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -323,87 +323,14 @@
             "time": "2019-11-07T11:55:26+00:00"
         },
         {
-            "name": "gotoandplay/gravityforms-composer-installer",
-            "version": "v2.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/gtap-dev/gravityforms-composer-installer.git",
-                "reference": "bb24264e4ea24ec6a094538adc47ed89503786d0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/gtap-dev/gravityforms-composer-installer/zipball/bb24264e4ea24ec6a094538adc47ed89503786d0",
-                "reference": "bb24264e4ea24ec6a094538adc47ed89503786d0",
-                "shasum": ""
-            },
-            "require": {
-                "composer-plugin-api": "^1.0.0",
-                "ffraenz/private-composer-installer": "^3.0.0",
-                "php": "^7.1"
-            },
-            "require-dev": {
-                "composer/composer": "1.0.*",
-                "phpunit/phpunit": "^8.0",
-                "zendframework/zend-coding-standard": "^1.0"
-            },
-            "type": "composer-plugin",
-            "extra": {
-                "class": "gotoAndDev\\GravityFormsComposerInstaller\\Plugin"
-            },
-            "autoload": {
-                "psr-4": {
-                    "gotoAndDev\\GravityFormsComposerInstaller\\": "src/GravityFormsComposerInstaller"
-                }
-            },
-            "scripts": {
-                "check": [
-                    "@cs-check",
-                    "@test"
-                ],
-                "cs-check": [
-                    "phpcs"
-                ],
-                "cs-fix": [
-                    "phpcbf"
-                ],
-                "test": [
-                    "phpunit --colors=always"
-                ],
-                "test-coverage": [
-                    "phpunit --colors=always --coverage-clover clover.xml"
-                ]
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Mihkel Eidast",
-                    "email": "mihkel@play.ee",
-                    "homepage": "https://play.ee"
-                }
-            ],
-            "description": "A composer install helper for Gravity Forms",
-            "keywords": [
-                "composer",
-                "env",
-                "gravityforms",
-                "plugin",
-                "private",
-                "wordpress",
-                "wp"
-            ],
-            "time": "2020-01-14T23:26:21+00:00"
-        },
-        {
             "name": "gravityforms/gravityforms",
             "version": "2.4.16.7",
             "dist": {
                 "type": "zip",
-                "url": "https://www.gravityhelp.com/wp-content/plugins/gravitymanager/api.php?op=get_plugin&slug=gravityforms&key={%WP_PLUGIN_GF_KEY}#v2.4.16.7"
+                "url": "https://composer.utility.mtribe.site/gravityforms/?key={%WP_PLUGIN_GF_KEY}&token={%WP_PLUGIN_GF_TOKEN}&t=2.4.16.7"
             },
             "require": {
-                "gotoandplay/gravityforms-composer-installer": "^2.0"
+                "ffraenz/private-composer-installer": "^3.0"
             },
             "type": "wordpress-plugin"
         },
@@ -614,6 +541,7 @@
                 "composer/installers": "~1.0"
             },
             "type": "wordpress-muplugin",
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "GPL-2.0+"
             ],
@@ -629,10 +557,6 @@
             "keywords": [
                 "wordpress"
             ],
-            "support": {
-                "source": "https://github.com/humanmade/Mercator/tree/master",
-                "issues": "https://github.com/humanmade/Mercator/issues"
-            },
             "time": "2019-01-08T13:04:40+00:00"
         },
         {
@@ -956,10 +880,6 @@
                 "Private"
             ],
             "description": "Group ajax calls",
-            "support": {
-                "source": "https://github.com/moderntribe/ajax-queue/tree/master",
-                "issues": "https://github.com/moderntribe/ajax-queue/issues"
-            },
             "time": "2015-08-21T06:25:04+00:00"
         },
         {
@@ -992,9 +912,6 @@
                 }
             ],
             "description": "A library for adding a file upload field to an admin meta box",
-            "support": {
-                "source": "https://github.com/moderntribe/attachment-helper/tree/1.0.1"
-            },
             "time": "2016-04-24T20:00:57+00:00"
         },
         {
@@ -4317,6 +4234,79 @@
             "time": "2019-11-13T10:30:21+00:00"
         },
         {
+            "name": "gotoandplay/gravityforms-composer-installer",
+            "version": "v2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/gtap-dev/gravityforms-composer-installer.git",
+                "reference": "bb24264e4ea24ec6a094538adc47ed89503786d0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/gtap-dev/gravityforms-composer-installer/zipball/bb24264e4ea24ec6a094538adc47ed89503786d0",
+                "reference": "bb24264e4ea24ec6a094538adc47ed89503786d0",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.0.0",
+                "ffraenz/private-composer-installer": "^3.0.0",
+                "php": "^7.1"
+            },
+            "require-dev": {
+                "composer/composer": "1.0.*",
+                "phpunit/phpunit": "^8.0",
+                "zendframework/zend-coding-standard": "^1.0"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "gotoAndDev\\GravityFormsComposerInstaller\\Plugin"
+            },
+            "autoload": {
+                "psr-4": {
+                    "gotoAndDev\\GravityFormsComposerInstaller\\": "src/GravityFormsComposerInstaller"
+                }
+            },
+            "scripts": {
+                "check": [
+                    "@cs-check",
+                    "@test"
+                ],
+                "cs-check": [
+                    "phpcs"
+                ],
+                "cs-fix": [
+                    "phpcbf"
+                ],
+                "test": [
+                    "phpunit --colors=always"
+                ],
+                "test-coverage": [
+                    "phpunit --colors=always --coverage-clover clover.xml"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mihkel Eidast",
+                    "email": "mihkel@play.ee",
+                    "homepage": "https://play.ee"
+                }
+            ],
+            "description": "A composer install helper for Gravity Forms",
+            "keywords": [
+                "composer",
+                "env",
+                "gravityforms",
+                "plugin",
+                "private",
+                "wordpress",
+                "wp"
+            ],
+            "time": "2020-01-14T23:26:21+00:00"
+        },
+        {
             "name": "gumlet/php-image-resize",
             "version": "1.9.2",
             "source": {
@@ -6065,8 +6055,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "lead",
-                    "email": "sebastian@phpunit.de"
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
                 }
             ],
             "description": "FilterIterator implementation that filters files based on a list of suffixes.",
@@ -6156,8 +6146,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "lead",
-                    "email": "sebastian@phpunit.de"
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
                 }
             ],
             "description": "Utility class for timing",
@@ -6960,8 +6950,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "lead",
-                    "email": "sebastian@phpunit.de"
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
                 }
             ],
             "description": "Collection of value objects that represent the types of the PHP type system",
