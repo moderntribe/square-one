@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2106371f8f2908d9b63f1268f0925e5e",
+    "content-hash": "20203c06fd64abdb28054c2968aa3b53",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -879,6 +879,10 @@
                 "Private"
             ],
             "description": "Group ajax calls",
+            "support": {
+                "source": "https://github.com/moderntribe/ajax-queue/tree/master",
+                "issues": "https://github.com/moderntribe/ajax-queue/issues"
+            },
             "time": "2015-08-21T06:25:04+00:00"
         },
         {
@@ -911,6 +915,9 @@
                 }
             ],
             "description": "A library for adding a file upload field to an admin meta box",
+            "support": {
+                "source": "https://github.com/moderntribe/attachment-helper/tree/1.0.1"
+            },
             "time": "2016-04-24T20:00:57+00:00"
         },
         {
@@ -954,26 +961,26 @@
         },
         {
             "name": "moderntribe/square1-acf",
-            "version": "v2.0.0",
+            "version": "v2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moderntribe/square1-acf.git",
-                "reference": "bc7b3d15232effa1d20d0adbccf6871663a9d661"
+                "reference": "2de5a51235029fb5953380f11023291f97b9ba00"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/square1-acf/zipball/bc7b3d15232effa1d20d0adbccf6871663a9d661",
-                "reference": "bc7b3d15232effa1d20d0adbccf6871663a9d661",
+                "url": "https://api.github.com/repos/moderntribe/square1-acf/zipball/2de5a51235029fb5953380f11023291f97b9ba00",
+                "reference": "2de5a51235029fb5953380f11023291f97b9ba00",
                 "shasum": ""
             },
             "require": {
-                "moderntribe/square1-object-meta": "^2.0",
+                "moderntribe/square1-object-meta": "^2.1.1",
                 "php": "^7.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.1-dev"
+                    "dev-master": "2.2-dev"
                 }
             },
             "autoload": {
@@ -986,20 +993,20 @@
                 "GPL-2.0-only"
             ],
             "description": "Provides ACF object meta wrappers for square one",
-            "time": "2019-10-07T15:02:31+00:00"
+            "time": "2020-02-22T22:15:00+00:00"
         },
         {
             "name": "moderntribe/square1-assets",
-            "version": "v2.0.0",
+            "version": "v2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moderntribe/square1-assets.git",
-                "reference": "39d3ae2181cdef73e32087b210b69a1fc86e75fe"
+                "reference": "e2a8669f4306b1be8fdb38f7dddd1166dcc286d1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/square1-assets/zipball/39d3ae2181cdef73e32087b210b69a1fc86e75fe",
-                "reference": "39d3ae2181cdef73e32087b210b69a1fc86e75fe",
+                "url": "https://api.github.com/repos/moderntribe/square1-assets/zipball/e2a8669f4306b1be8fdb38f7dddd1166dcc286d1",
+                "reference": "e2a8669f4306b1be8fdb38f7dddd1166dcc286d1",
                 "shasum": ""
             },
             "require": {
@@ -1008,7 +1015,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.1-dev"
+                    "dev-master": "2.2-dev"
                 }
             },
             "autoload": {
@@ -1024,32 +1031,32 @@
                 "GPL-2.0-only"
             ],
             "description": "Asset loading for square one",
-            "time": "2019-08-03T18:34:37+00:00"
+            "time": "2020-02-22T22:11:36+00:00"
         },
         {
             "name": "moderntribe/square1-blog-copier",
-            "version": "v2.0.0",
+            "version": "v2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moderntribe/square1-blog-copier.git",
-                "reference": "a97a78a30dc189fb27275fa9d370dae8d377f710"
+                "reference": "f004047ded22c5ff6fcb8b04303773401377fbef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/square1-blog-copier/zipball/a97a78a30dc189fb27275fa9d370dae8d377f710",
-                "reference": "a97a78a30dc189fb27275fa9d370dae8d377f710",
+                "url": "https://api.github.com/repos/moderntribe/square1-blog-copier/zipball/f004047ded22c5ff6fcb8b04303773401377fbef",
+                "reference": "f004047ded22c5ff6fcb8b04303773401377fbef",
                 "shasum": ""
             },
             "require": {
-                "moderntribe/square1-container": "^2.0",
-                "moderntribe/square1-queues": "^2.0",
+                "moderntribe/square1-container": "^2.1.1",
+                "moderntribe/square1-queues": "^2.1.1",
                 "php": "^7.0",
                 "pimple/pimple": "~3.0@dev"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.1-dev"
+                    "dev-master": "2.2-dev"
                 }
             },
             "autoload": {
@@ -1062,31 +1069,31 @@
                 "GPL-2.0-only"
             ],
             "description": "Blog copier for square one",
-            "time": "2019-10-07T15:02:31+00:00"
+            "time": "2020-02-22T22:15:00+00:00"
         },
         {
             "name": "moderntribe/square1-cache",
-            "version": "v2.0.0",
+            "version": "v2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moderntribe/square1-cache.git",
-                "reference": "43e462e39144f6f4289907c294a528f926467814"
+                "reference": "1ac2c322b3c42e3ecd12149f0a2ee054b4e35ef0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/square1-cache/zipball/43e462e39144f6f4289907c294a528f926467814",
-                "reference": "43e462e39144f6f4289907c294a528f926467814",
+                "url": "https://api.github.com/repos/moderntribe/square1-cache/zipball/1ac2c322b3c42e3ecd12149f0a2ee054b4e35ef0",
+                "reference": "1ac2c322b3c42e3ecd12149f0a2ee054b4e35ef0",
                 "shasum": ""
             },
             "require": {
-                "moderntribe/square1-container": "^2.0",
+                "moderntribe/square1-container": "^2.1.1",
                 "php": "^7.0",
                 "pimple/pimple": "~3.0@dev"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.1-dev"
+                    "dev-master": "2.2-dev"
                 }
             },
             "autoload": {
@@ -1102,20 +1109,20 @@
                 "GPL-2.0-only"
             ],
             "description": "Object cache wrapper for square one",
-            "time": "2019-10-07T15:02:31+00:00"
+            "time": "2020-02-22T22:15:00+00:00"
         },
         {
             "name": "moderntribe/square1-cli",
-            "version": "v2.0.0",
+            "version": "v2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moderntribe/square1-cli.git",
-                "reference": "b8973c23f6834f80b5a56f4e3ddd1db20606c5f7"
+                "reference": "d71a5250742a0ae7091e6ed5dc02bddb6f586b6c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/square1-cli/zipball/b8973c23f6834f80b5a56f4e3ddd1db20606c5f7",
-                "reference": "b8973c23f6834f80b5a56f4e3ddd1db20606c5f7",
+                "url": "https://api.github.com/repos/moderntribe/square1-cli/zipball/d71a5250742a0ae7091e6ed5dc02bddb6f586b6c",
+                "reference": "d71a5250742a0ae7091e6ed5dc02bddb6f586b6c",
                 "shasum": ""
             },
             "require": {
@@ -1125,7 +1132,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.1-dev"
+                    "dev-master": "2.2-dev"
                 }
             },
             "autoload": {
@@ -1138,32 +1145,32 @@
                 "GPL-2.0-only"
             ],
             "description": "A framework for registering wp-cli commands in square one",
-            "time": "2019-08-03T18:34:37+00:00"
+            "time": "2020-02-22T22:11:36+00:00"
         },
         {
             "name": "moderntribe/square1-container",
-            "version": "v2.0.0",
+            "version": "v2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moderntribe/square1-container.git",
-                "reference": "9608eb2e3583733b9b0b52b4be1dc35428629619"
+                "reference": "189bc025f1f7dc23bbcc9b8bc76e308d6b637a3d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/square1-container/zipball/9608eb2e3583733b9b0b52b4be1dc35428629619",
-                "reference": "9608eb2e3583733b9b0b52b4be1dc35428629619",
+                "url": "https://api.github.com/repos/moderntribe/square1-container/zipball/189bc025f1f7dc23bbcc9b8bc76e308d6b637a3d",
+                "reference": "189bc025f1f7dc23bbcc9b8bc76e308d6b637a3d",
                 "shasum": ""
             },
             "require": {
                 "jbzoo/pimpledumper": "^1.2",
-                "moderntribe/square1-cli": "^2.0",
+                "moderntribe/square1-cli": "^2.1.1",
                 "php": "^7.0",
                 "pimple/pimple": "~3.0@dev"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.1-dev"
+                    "dev-master": "2.2-dev"
                 }
             },
             "autoload": {
@@ -1176,20 +1183,20 @@
                 "GPL-2.0-only"
             ],
             "description": "A dependency injection container wrapper for square one",
-            "time": "2019-10-07T15:02:31+00:00"
+            "time": "2020-02-22T22:15:00+00:00"
         },
         {
             "name": "moderntribe/square1-nav",
-            "version": "v2.0.0",
+            "version": "v2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moderntribe/square1-nav.git",
-                "reference": "5bc0d332de4dfb95b64a90a0677c8b8fa9c3ce33"
+                "reference": "e6a64f2086cd8345c2d3656049f2c511debfcabd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/square1-nav/zipball/5bc0d332de4dfb95b64a90a0677c8b8fa9c3ce33",
-                "reference": "5bc0d332de4dfb95b64a90a0677c8b8fa9c3ce33",
+                "url": "https://api.github.com/repos/moderntribe/square1-nav/zipball/e6a64f2086cd8345c2d3656049f2c511debfcabd",
+                "reference": "e6a64f2086cd8345c2d3656049f2c511debfcabd",
                 "shasum": ""
             },
             "require": {
@@ -1198,7 +1205,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.1-dev"
+                    "dev-master": "2.2-dev"
                 }
             },
             "autoload": {
@@ -1211,20 +1218,20 @@
                 "GPL-2.0-only"
             ],
             "description": "Nav menu tools for square one",
-            "time": "2019-08-03T18:34:37+00:00"
+            "time": "2020-02-22T22:11:36+00:00"
         },
         {
             "name": "moderntribe/square1-object-meta",
-            "version": "v2.0.0",
+            "version": "v2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moderntribe/square1-object-meta.git",
-                "reference": "cf53ccbadaae93ba34ff8c18d20177a9e86934eb"
+                "reference": "827ccfaf74762a5a793e33c114ef8c0d56d8953a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/square1-object-meta/zipball/cf53ccbadaae93ba34ff8c18d20177a9e86934eb",
-                "reference": "cf53ccbadaae93ba34ff8c18d20177a9e86934eb",
+                "url": "https://api.github.com/repos/moderntribe/square1-object-meta/zipball/827ccfaf74762a5a793e33c114ef8c0d56d8953a",
+                "reference": "827ccfaf74762a5a793e33c114ef8c0d56d8953a",
                 "shasum": ""
             },
             "require": {
@@ -1233,7 +1240,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.1-dev"
+                    "dev-master": "2.2-dev"
                 }
             },
             "autoload": {
@@ -1246,30 +1253,30 @@
                 "GPL-2.0-only"
             ],
             "description": "Provides object meta wrappers for square one",
-            "time": "2019-08-03T18:34:37+00:00"
+            "time": "2020-02-22T22:11:36+00:00"
         },
         {
             "name": "moderntribe/square1-oembed",
-            "version": "v2.0.0",
+            "version": "v2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moderntribe/square1-oembed.git",
-                "reference": "49bf624b39c896059c17f2f73c7833119af30224"
+                "reference": "21c9bc9f3648da8dbc46a24d54d69a14552bd79b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/square1-oembed/zipball/49bf624b39c896059c17f2f73c7833119af30224",
-                "reference": "49bf624b39c896059c17f2f73c7833119af30224",
+                "url": "https://api.github.com/repos/moderntribe/square1-oembed/zipball/21c9bc9f3648da8dbc46a24d54d69a14552bd79b",
+                "reference": "21c9bc9f3648da8dbc46a24d54d69a14552bd79b",
                 "shasum": ""
             },
             "require": {
-                "moderntribe/square1-cache": "^2.0",
+                "moderntribe/square1-cache": "^2.1.1",
                 "php": "^7.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.1-dev"
+                    "dev-master": "2.2-dev"
                 }
             },
             "autoload": {
@@ -1282,20 +1289,20 @@
                 "GPL-2.0-only"
             ],
             "description": "Oembed utilities for square one",
-            "time": "2019-10-07T15:02:31+00:00"
+            "time": "2020-02-22T22:15:00+00:00"
         },
         {
             "name": "moderntribe/square1-p2p",
-            "version": "v2.0.0",
+            "version": "v2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moderntribe/square1-p2p.git",
-                "reference": "9884aa08c3ebccbc129c4a1bfe25bd09c6733c20"
+                "reference": "58358aa8ccde92750b98164a6dd1e8f2d9e4de5b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/square1-p2p/zipball/9884aa08c3ebccbc129c4a1bfe25bd09c6733c20",
-                "reference": "9884aa08c3ebccbc129c4a1bfe25bd09c6733c20",
+                "url": "https://api.github.com/repos/moderntribe/square1-p2p/zipball/58358aa8ccde92750b98164a6dd1e8f2d9e4de5b",
+                "reference": "58358aa8ccde92750b98164a6dd1e8f2d9e4de5b",
                 "shasum": ""
             },
             "require": {
@@ -1304,7 +1311,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.1-dev"
+                    "dev-master": "2.2-dev"
                 }
             },
             "autoload": {
@@ -1317,30 +1324,30 @@
                 "GPL-2.0-only"
             ],
             "description": "P2P utilities for square one",
-            "time": "2019-08-03T18:34:37+00:00"
+            "time": "2020-02-22T22:11:36+00:00"
         },
         {
             "name": "moderntribe/square1-post-type",
-            "version": "v2.0.0",
+            "version": "v2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moderntribe/square1-post-type.git",
-                "reference": "292ef92bd426ce3f398b96ee37462703fc198af1"
+                "reference": "be63c8dde4fe325bdc95119e012860917b41984a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/square1-post-type/zipball/292ef92bd426ce3f398b96ee37462703fc198af1",
-                "reference": "292ef92bd426ce3f398b96ee37462703fc198af1",
+                "url": "https://api.github.com/repos/moderntribe/square1-post-type/zipball/be63c8dde4fe325bdc95119e012860917b41984a",
+                "reference": "be63c8dde4fe325bdc95119e012860917b41984a",
                 "shasum": ""
             },
             "require": {
-                "moderntribe/square1-object-meta": "^2.0",
+                "moderntribe/square1-object-meta": "^2.1.1",
                 "php": "^7.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.1-dev"
+                    "dev-master": "2.2-dev"
                 }
             },
             "autoload": {
@@ -1353,32 +1360,32 @@
                 "GPL-2.0-only"
             ],
             "description": "Post type utilities for square one",
-            "time": "2019-10-07T15:02:31+00:00"
+            "time": "2020-02-22T22:15:00+00:00"
         },
         {
             "name": "moderntribe/square1-queues",
-            "version": "v2.0.0",
+            "version": "v2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moderntribe/square1-queues.git",
-                "reference": "6405161487c7c0adebc11e7d7d89922efb9f6ef4"
+                "reference": "ec1354d9522f6f31cc56cc2aca03c045e4790a9a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/square1-queues/zipball/6405161487c7c0adebc11e7d7d89922efb9f6ef4",
-                "reference": "6405161487c7c0adebc11e7d7d89922efb9f6ef4",
+                "url": "https://api.github.com/repos/moderntribe/square1-queues/zipball/ec1354d9522f6f31cc56cc2aca03c045e4790a9a",
+                "reference": "ec1354d9522f6f31cc56cc2aca03c045e4790a9a",
                 "shasum": ""
             },
             "require": {
-                "moderntribe/square1-cli": "^2.0",
-                "moderntribe/square1-container": "^2.0",
+                "moderntribe/square1-cli": "^2.1.1",
+                "moderntribe/square1-container": "^2.1.1",
                 "php": "^7.0",
                 "pimple/pimple": "~3.0@dev"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.1-dev"
+                    "dev-master": "2.2-dev"
                 }
             },
             "autoload": {
@@ -1391,33 +1398,33 @@
                 "GPL-2.0-only"
             ],
             "description": "A queues provider for square one",
-            "time": "2019-10-07T15:02:31+00:00"
+            "time": "2020-02-22T22:15:00+00:00"
         },
         {
             "name": "moderntribe/square1-queues-mysql",
-            "version": "v2.0.0",
+            "version": "v2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moderntribe/square1-queues-mysql.git",
-                "reference": "12cd50ef931771fefd35ebe293670d5365abeef5"
+                "reference": "b0fdbe9491bf0062abf463944196da2a708489eb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/square1-queues-mysql/zipball/12cd50ef931771fefd35ebe293670d5365abeef5",
-                "reference": "12cd50ef931771fefd35ebe293670d5365abeef5",
+                "url": "https://api.github.com/repos/moderntribe/square1-queues-mysql/zipball/b0fdbe9491bf0062abf463944196da2a708489eb",
+                "reference": "b0fdbe9491bf0062abf463944196da2a708489eb",
                 "shasum": ""
             },
             "require": {
-                "moderntribe/square1-cli": "^2.0",
-                "moderntribe/square1-container": "^2.0",
-                "moderntribe/square1-queues": "^2.0",
+                "moderntribe/square1-cli": "^2.1.1",
+                "moderntribe/square1-container": "^2.1.1",
+                "moderntribe/square1-queues": "^2.1.1",
                 "php": "^7.0",
                 "pimple/pimple": "~3.0@dev"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.1-dev"
+                    "dev-master": "2.2-dev"
                 }
             },
             "autoload": {
@@ -1430,20 +1437,20 @@
                 "GPL-2.0-only"
             ],
             "description": "A MySQL backend for square one queues",
-            "time": "2019-10-07T15:02:31+00:00"
+            "time": "2020-02-22T22:15:00+00:00"
         },
         {
             "name": "moderntribe/square1-schema",
-            "version": "v2.0.0",
+            "version": "v2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moderntribe/square1-schema.git",
-                "reference": "85a1083e27ff31ac7541a666f2c726bcaf78656f"
+                "reference": "f61ba8a20ad6fad3fc29e779c6a529430aa0dc16"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/square1-schema/zipball/85a1083e27ff31ac7541a666f2c726bcaf78656f",
-                "reference": "85a1083e27ff31ac7541a666f2c726bcaf78656f",
+                "url": "https://api.github.com/repos/moderntribe/square1-schema/zipball/f61ba8a20ad6fad3fc29e779c6a529430aa0dc16",
+                "reference": "f61ba8a20ad6fad3fc29e779c6a529430aa0dc16",
                 "shasum": ""
             },
             "require": {
@@ -1452,7 +1459,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.1-dev"
+                    "dev-master": "2.2-dev"
                 }
             },
             "autoload": {
@@ -1465,20 +1472,20 @@
                 "GPL-2.0-only"
             ],
             "description": "Schema utilities for square one",
-            "time": "2019-08-03T18:34:37+00:00"
+            "time": "2020-02-22T22:11:36+00:00"
         },
         {
             "name": "moderntribe/square1-settings",
-            "version": "v2.0.0",
+            "version": "v2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moderntribe/square1-settings.git",
-                "reference": "b0c72c8e13421d91163e02f0720e2d20a5ac5c35"
+                "reference": "1cd0b1a8679066743211663d00600948f8ef8312"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/square1-settings/zipball/b0c72c8e13421d91163e02f0720e2d20a5ac5c35",
-                "reference": "b0c72c8e13421d91163e02f0720e2d20a5ac5c35",
+                "url": "https://api.github.com/repos/moderntribe/square1-settings/zipball/1cd0b1a8679066743211663d00600948f8ef8312",
+                "reference": "1cd0b1a8679066743211663d00600948f8ef8312",
                 "shasum": ""
             },
             "require": {
@@ -1487,7 +1494,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.1-dev"
+                    "dev-master": "2.2-dev"
                 }
             },
             "autoload": {
@@ -1500,30 +1507,30 @@
                 "GPL-2.0-only"
             ],
             "description": "Settings page utilities for square one",
-            "time": "2019-08-03T18:34:37+00:00"
+            "time": "2020-02-22T22:11:36+00:00"
         },
         {
             "name": "moderntribe/square1-taxonomy",
-            "version": "v2.0.0",
+            "version": "v2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moderntribe/square1-taxonomy.git",
-                "reference": "cd8108f119dbf650865694a575a82f59c26a8471"
+                "reference": "0b6f1d97af0d85be778dbc7ef48b14691048f1a1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/square1-taxonomy/zipball/cd8108f119dbf650865694a575a82f59c26a8471",
-                "reference": "cd8108f119dbf650865694a575a82f59c26a8471",
+                "url": "https://api.github.com/repos/moderntribe/square1-taxonomy/zipball/0b6f1d97af0d85be778dbc7ef48b14691048f1a1",
+                "reference": "0b6f1d97af0d85be778dbc7ef48b14691048f1a1",
                 "shasum": ""
             },
             "require": {
-                "moderntribe/square1-object-meta": "^2.0",
+                "moderntribe/square1-object-meta": "^2.1.1",
                 "php": "^7.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.1-dev"
+                    "dev-master": "2.2-dev"
                 }
             },
             "autoload": {
@@ -1536,30 +1543,30 @@
                 "GPL-2.0-only"
             ],
             "description": "Taxonomy utilities for square one",
-            "time": "2019-10-07T15:02:31+00:00"
+            "time": "2020-02-22T22:15:00+00:00"
         },
         {
             "name": "moderntribe/square1-user",
-            "version": "v2.0.0",
+            "version": "v2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moderntribe/square1-user.git",
-                "reference": "5c0233dd526af6d342d729aa61696faeb46c725d"
+                "reference": "9ac55168f45875c756c460389b65ca1ae12e5447"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/square1-user/zipball/5c0233dd526af6d342d729aa61696faeb46c725d",
-                "reference": "5c0233dd526af6d342d729aa61696faeb46c725d",
+                "url": "https://api.github.com/repos/moderntribe/square1-user/zipball/9ac55168f45875c756c460389b65ca1ae12e5447",
+                "reference": "9ac55168f45875c756c460389b65ca1ae12e5447",
                 "shasum": ""
             },
             "require": {
-                "moderntribe/square1-object-meta": "^2.0",
+                "moderntribe/square1-object-meta": "^2.1.1",
                 "php": "^7.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.1-dev"
+                    "dev-master": "2.2-dev"
                 }
             },
             "autoload": {
@@ -1572,20 +1579,20 @@
                 "GPL-2.0-only"
             ],
             "description": "User utilities for square one",
-            "time": "2019-10-07T15:02:31+00:00"
+            "time": "2020-02-22T22:15:00+00:00"
         },
         {
             "name": "moderntribe/square1-utils",
-            "version": "v2.0.0",
+            "version": "v2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moderntribe/square1-utils.git",
-                "reference": "7b825d05daee299d3d3beebd037b99b5d1f3f475"
+                "reference": "19924d65f29b470a7b64ecf1dedfb8673576737a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/square1-utils/zipball/7b825d05daee299d3d3beebd037b99b5d1f3f475",
-                "reference": "7b825d05daee299d3d3beebd037b99b5d1f3f475",
+                "url": "https://api.github.com/repos/moderntribe/square1-utils/zipball/19924d65f29b470a7b64ecf1dedfb8673576737a",
+                "reference": "19924d65f29b470a7b64ecf1dedfb8673576737a",
                 "shasum": ""
             },
             "require": {
@@ -1594,7 +1601,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.1-dev"
+                    "dev-master": "2.2-dev"
                 }
             },
             "autoload": {
@@ -1607,7 +1614,7 @@
                 "GPL-2.0-only"
             ],
             "description": "Utilities for square one",
-            "time": "2019-08-03T18:34:37+00:00"
+            "time": "2020-02-22T22:11:36+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -2662,7 +2669,7 @@
         },
         {
             "name": "symfony/options-resolver",
-            "version": "v5.0.3",
+            "version": "v5.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/options-resolver.git",
@@ -2716,16 +2723,16 @@
         },
         {
             "name": "symfony/polyfill-ctype",
-            "version": "v1.13.1",
+            "version": "v1.14.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-ctype.git",
-                "reference": "f8f0b461be3385e56d6de3dbb5a0df24c0c275e3"
+                "reference": "fbdeaec0df06cf3d51c93de80c7eb76e271f5a38"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/f8f0b461be3385e56d6de3dbb5a0df24c0c275e3",
-                "reference": "f8f0b461be3385e56d6de3dbb5a0df24c0c275e3",
+                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/fbdeaec0df06cf3d51c93de80c7eb76e271f5a38",
+                "reference": "fbdeaec0df06cf3d51c93de80c7eb76e271f5a38",
                 "shasum": ""
             },
             "require": {
@@ -2737,7 +2744,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.13-dev"
+                    "dev-master": "1.14-dev"
                 }
             },
             "autoload": {
@@ -2770,20 +2777,20 @@
                 "polyfill",
                 "portable"
             ],
-            "time": "2019-11-27T13:56:44+00:00"
+            "time": "2020-01-13T11:15:53+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.13.1",
+            "version": "v1.14.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "7b4aab9743c30be783b73de055d24a39cf4b954f"
+                "reference": "34094cfa9abe1f0f14f48f490772db7a775559f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/7b4aab9743c30be783b73de055d24a39cf4b954f",
-                "reference": "7b4aab9743c30be783b73de055d24a39cf4b954f",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/34094cfa9abe1f0f14f48f490772db7a775559f2",
+                "reference": "34094cfa9abe1f0f14f48f490772db7a775559f2",
                 "shasum": ""
             },
             "require": {
@@ -2795,7 +2802,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.13-dev"
+                    "dev-master": "1.14-dev"
                 }
             },
             "autoload": {
@@ -2829,20 +2836,20 @@
                 "portable",
                 "shim"
             ],
-            "time": "2019-11-27T14:18:11+00:00"
+            "time": "2020-01-13T11:15:53+00:00"
         },
         {
             "name": "twig/twig",
-            "version": "v2.12.3",
+            "version": "v2.12.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "97b6311585cae66a26833b14b33785f5797f7d39"
+                "reference": "18772e0190734944277ee97a02a9a6c6555fcd94"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/97b6311585cae66a26833b14b33785f5797f7d39",
-                "reference": "97b6311585cae66a26833b14b33785f5797f7d39",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/18772e0190734944277ee97a02a9a6c6555fcd94",
+                "reference": "18772e0190734944277ee97a02a9a6c6555fcd94",
                 "shasum": ""
             },
             "require": {
@@ -2894,7 +2901,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2019-12-28T07:12:03+00:00"
+            "time": "2020-02-11T15:31:23+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -2955,16 +2962,16 @@
         },
         {
             "name": "webmozart/assert",
-            "version": "1.6.0",
+            "version": "1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/webmozart/assert.git",
-                "reference": "573381c0a64f155a0d9a23f4b0c797194805b925"
+                "reference": "aed98a490f9a8f78468232db345ab9cf606cf598"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webmozart/assert/zipball/573381c0a64f155a0d9a23f4b0c797194805b925",
-                "reference": "573381c0a64f155a0d9a23f4b0c797194805b925",
+                "url": "https://api.github.com/repos/webmozart/assert/zipball/aed98a490f9a8f78468232db345ab9cf606cf598",
+                "reference": "aed98a490f9a8f78468232db345ab9cf606cf598",
                 "shasum": ""
             },
             "require": {
@@ -2999,7 +3006,7 @@
                 "check",
                 "validate"
             ],
-            "time": "2019-11-24T13:36:37+00:00"
+            "time": "2020-02-14T12:15:55+00:00"
         },
         {
             "name": "wpackagist-plugin/classic-editor",
@@ -3247,16 +3254,16 @@
         },
         {
             "name": "behat/gherkin",
-            "version": "v4.6.0",
+            "version": "v4.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Behat/Gherkin.git",
-                "reference": "ab0a02ea14893860bca00f225f5621d351a3ad07"
+                "reference": "25bdcaf37898b4a939fa3031d5d753ced97e4759"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Behat/Gherkin/zipball/ab0a02ea14893860bca00f225f5621d351a3ad07",
-                "reference": "ab0a02ea14893860bca00f225f5621d351a3ad07",
+                "url": "https://api.github.com/repos/Behat/Gherkin/zipball/25bdcaf37898b4a939fa3031d5d753ced97e4759",
+                "reference": "25bdcaf37898b4a939fa3031d5d753ced97e4759",
                 "shasum": ""
             },
             "require": {
@@ -3302,7 +3309,7 @@
                 "gherkin",
                 "parser"
             ],
-            "time": "2019-01-16T14:22:17+00:00"
+            "time": "2020-02-27T11:29:57+00:00"
         },
         {
             "name": "codeception/codeception",
@@ -3446,20 +3453,20 @@
         },
         {
             "name": "codeception/stub",
-            "version": "3.6.0",
+            "version": "3.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Codeception/Stub.git",
-                "reference": "94874f511ab1025b1f4cb927884cdda5004ece64"
+                "reference": "a3ba01414cbee76a1bced9f9b6b169cc8d203880"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Codeception/Stub/zipball/94874f511ab1025b1f4cb927884cdda5004ece64",
-                "reference": "94874f511ab1025b1f4cb927884cdda5004ece64",
+                "url": "https://api.github.com/repos/Codeception/Stub/zipball/a3ba01414cbee76a1bced9f9b6b169cc8d203880",
+                "reference": "a3ba01414cbee76a1bced9f9b6b169cc8d203880",
                 "shasum": ""
             },
             "require": {
-                "phpunit/phpunit": "^8.4"
+                "phpunit/phpunit": "^8.4 | ^9.0"
             },
             "type": "library",
             "autoload": {
@@ -3472,7 +3479,7 @@
                 "MIT"
             ],
             "description": "Flexible Stub wrapper for PHPUnit's Mock Builder",
-            "time": "2019-11-23T20:11:30+00:00"
+            "time": "2020-02-07T18:42:28+00:00"
         },
         {
             "name": "composer/ca-bundle",
@@ -3532,16 +3539,16 @@
         },
         {
             "name": "composer/composer",
-            "version": "1.9.2",
+            "version": "1.9.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/composer.git",
-                "reference": "7a04aa0201ddaa0b3cf64d41022bd8cdcd7fafeb"
+                "reference": "1291a16ce3f48bfdeca39d64fca4875098af4d7b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/composer/zipball/7a04aa0201ddaa0b3cf64d41022bd8cdcd7fafeb",
-                "reference": "7a04aa0201ddaa0b3cf64d41022bd8cdcd7fafeb",
+                "url": "https://api.github.com/repos/composer/composer/zipball/1291a16ce3f48bfdeca39d64fca4875098af4d7b",
+                "reference": "1291a16ce3f48bfdeca39d64fca4875098af4d7b",
                 "shasum": ""
             },
             "require": {
@@ -3608,7 +3615,7 @@
                 "dependency",
                 "package"
             ],
-            "time": "2020-01-14T15:30:32+00:00"
+            "time": "2020-02-04T11:58:49+00:00"
         },
         {
             "name": "composer/semver",
@@ -3673,16 +3680,16 @@
         },
         {
             "name": "composer/spdx-licenses",
-            "version": "1.5.2",
+            "version": "1.5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/spdx-licenses.git",
-                "reference": "7ac1e6aec371357df067f8a688c3d6974df68fa5"
+                "reference": "0c3e51e1880ca149682332770e25977c70cf9dae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/spdx-licenses/zipball/7ac1e6aec371357df067f8a688c3d6974df68fa5",
-                "reference": "7ac1e6aec371357df067f8a688c3d6974df68fa5",
+                "url": "https://api.github.com/repos/composer/spdx-licenses/zipball/0c3e51e1880ca149682332770e25977c70cf9dae",
+                "reference": "0c3e51e1880ca149682332770e25977c70cf9dae",
                 "shasum": ""
             },
             "require": {
@@ -3729,7 +3736,7 @@
                 "spdx",
                 "validator"
             ],
-            "time": "2019-07-29T10:31:59+00:00"
+            "time": "2020-02-14T07:44:31+00:00"
         },
         {
             "name": "composer/xdebug-handler",
@@ -3984,35 +3991,36 @@
         },
         {
             "name": "facebook/webdriver",
-            "version": "1.7.1",
+            "version": "1.8.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/facebook/php-webdriver.git",
-                "reference": "e43de70f3c7166169d0f14a374505392734160e5"
+                "url": "https://github.com/php-webdriver/php-webdriver.git",
+                "reference": "262ea0d209c292e0330be1041424887bbbffef04"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/facebook/php-webdriver/zipball/e43de70f3c7166169d0f14a374505392734160e5",
-                "reference": "e43de70f3c7166169d0f14a374505392734160e5",
+                "url": "https://api.github.com/repos/php-webdriver/php-webdriver/zipball/262ea0d209c292e0330be1041424887bbbffef04",
+                "reference": "262ea0d209c292e0330be1041424887bbbffef04",
                 "shasum": ""
             },
             "require": {
                 "ext-curl": "*",
                 "ext-json": "*",
-                "ext-mbstring": "*",
                 "ext-zip": "*",
                 "php": "^5.6 || ~7.0",
-                "symfony/process": "^2.8 || ^3.1 || ^4.0"
+                "symfony/polyfill-mbstring": "^1.12",
+                "symfony/process": "^2.8 || ^3.1 || ^4.0 || ^5.0"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^2.0",
-                "jakub-onderka/php-parallel-lint": "^0.9.2",
+                "jakub-onderka/php-parallel-lint": "^1.0",
                 "php-coveralls/php-coveralls": "^2.0",
                 "php-mock/php-mock-phpunit": "^1.1",
                 "phpunit/phpunit": "^5.7",
                 "sebastian/environment": "^1.3.4 || ^2.0 || ^3.0",
-                "squizlabs/php_codesniffer": "^2.6",
-                "symfony/var-dumper": "^3.3 || ^4.0"
+                "sminnee/phpunit-mock-objects": "^3.4",
+                "squizlabs/php_codesniffer": "^3.5",
+                "symfony/var-dumper": "^3.3 || ^4.0 || ^5.0"
             },
             "suggest": {
                 "ext-SimpleXML": "For Firefox profile creation"
@@ -4020,27 +4028,32 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-community": "1.5-dev"
+                    "dev-master": "1.8.x-dev"
                 }
             },
             "autoload": {
                 "psr-4": {
                     "Facebook\\WebDriver\\": "lib/"
-                }
+                },
+                "files": [
+                    "lib/Exception/TimeoutException.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "Apache-2.0"
+                "MIT"
             ],
-            "description": "A PHP client for Selenium WebDriver",
-            "homepage": "https://github.com/facebook/php-webdriver",
+            "description": "A PHP client for Selenium WebDriver. Previously facebook/webdriver.",
+            "homepage": "https://github.com/php-webdriver/php-webdriver",
             "keywords": [
-                "facebook",
+                "Chromedriver",
+                "geckodriver",
                 "php",
                 "selenium",
                 "webdriver"
             ],
-            "time": "2019-06-13T08:02:18+00:00"
+            "abandoned": "php-webdriver/webdriver",
+            "time": "2020-02-17T08:14:38+00:00"
         },
         {
             "name": "filp/whoops",
@@ -4876,16 +4889,16 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v6.13.1",
+            "version": "v6.17.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
-                "reference": "f1326dfae72c646a8598138b446347954f5e991e"
+                "reference": "a6c7ef89684ce0e724b42c6bfe4b1107aee28a1d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/contracts/zipball/f1326dfae72c646a8598138b446347954f5e991e",
-                "reference": "f1326dfae72c646a8598138b446347954f5e991e",
+                "url": "https://api.github.com/repos/illuminate/contracts/zipball/a6c7ef89684ce0e724b42c6bfe4b1107aee28a1d",
+                "reference": "a6c7ef89684ce0e724b42c6bfe4b1107aee28a1d",
                 "shasum": ""
             },
             "require": {
@@ -4916,20 +4929,20 @@
             ],
             "description": "The Illuminate Contracts package.",
             "homepage": "https://laravel.com",
-            "time": "2020-01-07T13:47:03+00:00"
+            "time": "2020-02-08T09:26:21+00:00"
         },
         {
             "name": "illuminate/support",
-            "version": "v6.13.1",
+            "version": "v6.17.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "c6bcd329fd8c7c46908f1af7f99dae164a4065a1"
+                "reference": "468b76701a1caf8859b2af7c770a3f293c4f065b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/c6bcd329fd8c7c46908f1af7f99dae164a4065a1",
-                "reference": "c6bcd329fd8c7c46908f1af7f99dae164a4065a1",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/468b76701a1caf8859b2af7c770a3f293c4f065b",
+                "reference": "468b76701a1caf8859b2af7c770a3f293c4f065b",
                 "shasum": ""
             },
             "require": {
@@ -4977,7 +4990,7 @@
             ],
             "description": "The Illuminate Support package.",
             "homepage": "https://laravel.com",
-            "time": "2020-01-28T14:36:33+00:00"
+            "time": "2020-02-24T17:34:22+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
@@ -5133,16 +5146,16 @@
         },
         {
             "name": "lucatume/wp-browser",
-            "version": "2.2.34",
+            "version": "2.2.37",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lucatume/wp-browser.git",
-                "reference": "ab02739d04edc342a41b317f6dcb72a3d1eef590"
+                "reference": "8c4b6428f220dd159df0855f06c75957a6c5859b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lucatume/wp-browser/zipball/ab02739d04edc342a41b317f6dcb72a3d1eef590",
-                "reference": "ab02739d04edc342a41b317f6dcb72a3d1eef590",
+                "url": "https://api.github.com/repos/lucatume/wp-browser/zipball/8c4b6428f220dd159df0855f06c75957a6c5859b",
+                "reference": "8c4b6428f220dd159df0855f06c75957a6c5859b",
                 "shasum": ""
             },
             "require": {
@@ -5165,7 +5178,7 @@
             },
             "require-dev": {
                 "erusev/parsedown": "^1.7",
-                "lucatume/codeception-snapshot-assertions": "^0.2.2",
+                "lucatume/codeception-snapshot-assertions": "^0.2",
                 "mikey179/vfsstream": "^1.6",
                 "phpstan/phpstan": "^0.11.15",
                 "phpstan/phpstan-shim": "^0.11.15",
@@ -5203,7 +5216,7 @@
                 "codeception",
                 "wordpress"
             ],
-            "time": "2020-01-29T08:30:29+00:00"
+            "time": "2020-02-21T13:28:14+00:00"
         },
         {
             "name": "mck89/peast",
@@ -5316,28 +5329,28 @@
         },
         {
             "name": "moderntribe/square1-generators",
-            "version": "v2.0.0",
+            "version": "v2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moderntribe/square1-generators.git",
-                "reference": "aa7e7aa4d2f42cd45e0d50d34601f28108970855"
+                "reference": "895fef9b96365d48a28b7a092468da6846dd6661"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/square1-generators/zipball/aa7e7aa4d2f42cd45e0d50d34601f28108970855",
-                "reference": "aa7e7aa4d2f42cd45e0d50d34601f28108970855",
+                "url": "https://api.github.com/repos/moderntribe/square1-generators/zipball/895fef9b96365d48a28b7a092468da6846dd6661",
+                "reference": "895fef9b96365d48a28b7a092468da6846dd6661",
                 "shasum": ""
             },
             "require": {
-                "moderntribe/square1-cli": "^2.0",
-                "moderntribe/square1-container": "^2.0",
+                "moderntribe/square1-cli": "^2.1.1",
+                "moderntribe/square1-container": "^2.1.1",
                 "php": "^7.0",
                 "pimple/pimple": "~3.0@dev"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.1-dev"
+                    "dev-master": "2.2-dev"
                 }
             },
             "autoload": {
@@ -5350,7 +5363,7 @@
                 "GPL-2.0-only"
             ],
             "description": "Code generators for Square One",
-            "time": "2019-10-07T15:02:31+00:00"
+            "time": "2020-02-22T22:15:00+00:00"
         },
         {
             "name": "mustache/mustache",
@@ -5489,16 +5502,16 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "2.29.1",
+            "version": "2.30.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "e509be5bf2d703390e69e14496d9a1168452b0a2"
+                "reference": "912dff66d2690ca66abddb9b291a1df5f371d3b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/e509be5bf2d703390e69e14496d9a1168452b0a2",
-                "reference": "e509be5bf2d703390e69e14496d9a1168452b0a2",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/912dff66d2690ca66abddb9b291a1df5f371d3b4",
+                "reference": "912dff66d2690ca66abddb9b291a1df5f371d3b4",
                 "shasum": ""
             },
             "require": {
@@ -5555,7 +5568,7 @@
                 "datetime",
                 "time"
             ],
-            "time": "2020-01-21T09:36:43+00:00"
+            "time": "2020-02-07T15:25:46+00:00"
         },
         {
             "name": "phar-io/manifest",
@@ -5713,41 +5726,38 @@
         },
         {
             "name": "phpdocumentor/reflection-docblock",
-            "version": "4.3.4",
+            "version": "5.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
-                "reference": "da3fd972d6bafd628114f7e7e036f45944b62e9c"
+                "reference": "cd72d394ca794d3466a3b2fc09d5a6c1dc86b47e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/da3fd972d6bafd628114f7e7e036f45944b62e9c",
-                "reference": "da3fd972d6bafd628114f7e7e036f45944b62e9c",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/cd72d394ca794d3466a3b2fc09d5a6c1dc86b47e",
+                "reference": "cd72d394ca794d3466a3b2fc09d5a6c1dc86b47e",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.0",
-                "phpdocumentor/reflection-common": "^1.0.0 || ^2.0.0",
-                "phpdocumentor/type-resolver": "~0.4 || ^1.0.0",
-                "webmozart/assert": "^1.0"
+                "ext-filter": "^7.1",
+                "php": "^7.2",
+                "phpdocumentor/reflection-common": "^2.0",
+                "phpdocumentor/type-resolver": "^1.0",
+                "webmozart/assert": "^1"
             },
             "require-dev": {
-                "doctrine/instantiator": "^1.0.5",
-                "mockery/mockery": "^1.0",
-                "phpdocumentor/type-resolver": "0.4.*",
-                "phpunit/phpunit": "^6.4"
+                "doctrine/instantiator": "^1",
+                "mockery/mockery": "^1"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.x-dev"
+                    "dev-master": "5.x-dev"
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "phpDocumentor\\Reflection\\": [
-                        "src/"
-                    ]
+                    "phpDocumentor\\Reflection\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -5758,10 +5768,14 @@
                 {
                     "name": "Mike van Riel",
                     "email": "me@mikevanriel.com"
+                },
+                {
+                    "name": "Jaap van Otterdijk",
+                    "email": "account@ijaap.nl"
                 }
             ],
             "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
-            "time": "2019-12-28T18:55:12+00:00"
+            "time": "2020-02-22T12:28:44+00:00"
         },
         {
             "name": "phpdocumentor/type-resolver",
@@ -6971,16 +6985,16 @@
         },
         {
             "name": "seld/phar-utils",
-            "version": "1.0.2",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/phar-utils.git",
-                "reference": "84715761c35808076b00908a20317a3a8a67d17e"
+                "reference": "8800503d56b9867d43d9c303b9cbcc26016e82f0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/phar-utils/zipball/84715761c35808076b00908a20317a3a8a67d17e",
-                "reference": "84715761c35808076b00908a20317a3a8a67d17e",
+                "url": "https://api.github.com/repos/Seldaek/phar-utils/zipball/8800503d56b9867d43d9c303b9cbcc26016e82f0",
+                "reference": "8800503d56b9867d43d9c303b9cbcc26016e82f0",
                 "shasum": ""
             },
             "require": {
@@ -7009,13 +7023,13 @@
             ],
             "description": "PHAR file format utilities, for when PHP phars you up",
             "keywords": [
-                "phra"
+                "phar"
             ],
-            "time": "2020-01-13T10:41:09+00:00"
+            "time": "2020-02-14T15:25:33+00:00"
         },
         {
             "name": "symfony/browser-kit",
-            "version": "v4.4.3",
+            "version": "v4.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/browser-kit.git",
@@ -7074,16 +7088,16 @@
         },
         {
             "name": "symfony/console",
-            "version": "v4.4.3",
+            "version": "v4.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "e9ee09d087e2c88eaf6e5fc0f5c574f64d100e4f"
+                "reference": "f512001679f37e6a042b51897ed24a2f05eba656"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/e9ee09d087e2c88eaf6e5fc0f5c574f64d100e4f",
-                "reference": "e9ee09d087e2c88eaf6e5fc0f5c574f64d100e4f",
+                "url": "https://api.github.com/repos/symfony/console/zipball/f512001679f37e6a042b51897ed24a2f05eba656",
+                "reference": "f512001679f37e6a042b51897ed24a2f05eba656",
                 "shasum": ""
             },
             "require": {
@@ -7146,11 +7160,11 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2020-01-10T21:54:01+00:00"
+            "time": "2020-01-25T12:44:29+00:00"
         },
         {
             "name": "symfony/css-selector",
-            "version": "v4.4.3",
+            "version": "v4.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/css-selector.git",
@@ -7203,7 +7217,7 @@
         },
         {
             "name": "symfony/dom-crawler",
-            "version": "v4.4.3",
+            "version": "v4.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dom-crawler.git",
@@ -7264,7 +7278,7 @@
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v4.4.3",
+            "version": "v4.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
@@ -7442,7 +7456,7 @@
         },
         {
             "name": "symfony/finder",
-            "version": "v4.4.3",
+            "version": "v4.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
@@ -7491,16 +7505,16 @@
         },
         {
             "name": "symfony/polyfill-php73",
-            "version": "v1.13.1",
+            "version": "v1.14.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php73.git",
-                "reference": "4b0e2222c55a25b4541305a053013d5647d3a25f"
+                "reference": "5e66a0fa1070bf46bec4bea7962d285108edd675"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php73/zipball/4b0e2222c55a25b4541305a053013d5647d3a25f",
-                "reference": "4b0e2222c55a25b4541305a053013d5647d3a25f",
+                "url": "https://api.github.com/repos/symfony/polyfill-php73/zipball/5e66a0fa1070bf46bec4bea7962d285108edd675",
+                "reference": "5e66a0fa1070bf46bec4bea7962d285108edd675",
                 "shasum": ""
             },
             "require": {
@@ -7509,7 +7523,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.13-dev"
+                    "dev-master": "1.14-dev"
                 }
             },
             "autoload": {
@@ -7545,11 +7559,11 @@
                 "portable",
                 "shim"
             ],
-            "time": "2019-11-27T16:25:15+00:00"
+            "time": "2020-01-13T11:15:53+00:00"
         },
         {
             "name": "symfony/process",
-            "version": "v4.4.3",
+            "version": "v4.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
@@ -7656,7 +7670,7 @@
         },
         {
             "name": "symfony/translation",
-            "version": "v5.0.3",
+            "version": "v5.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
@@ -7790,7 +7804,7 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v4.4.3",
+            "version": "v4.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
@@ -8197,16 +8211,16 @@
         },
         {
             "name": "wp-cli/cron-command",
-            "version": "v2.0.3",
+            "version": "v2.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wp-cli/cron-command.git",
-                "reference": "b6d0c8ff69cc56d5316a35a7a2fcc314c4069585"
+                "reference": "184ce82dfd6e7284a73f039ae39cf51a5f73174e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wp-cli/cron-command/zipball/b6d0c8ff69cc56d5316a35a7a2fcc314c4069585",
-                "reference": "b6d0c8ff69cc56d5316a35a7a2fcc314c4069585",
+                "url": "https://api.github.com/repos/wp-cli/cron-command/zipball/184ce82dfd6e7284a73f039ae39cf51a5f73174e",
+                "reference": "184ce82dfd6e7284a73f039ae39cf51a5f73174e",
                 "shasum": ""
             },
             "require": {
@@ -8231,7 +8245,8 @@
                     "cron event run",
                     "cron event schedule",
                     "cron schedule",
-                    "cron schedule list"
+                    "cron schedule list",
+                    "cron event unschedule"
                 ]
             },
             "autoload": {
@@ -8255,20 +8270,20 @@
             ],
             "description": "Tests, runs, and deletes WP-Cron events; manages WP-Cron schedules.",
             "homepage": "https://github.com/wp-cli/cron-command",
-            "time": "2019-04-24T07:31:46+00:00"
+            "time": "2019-12-17T17:53:36+00:00"
         },
         {
             "name": "wp-cli/db-command",
-            "version": "v2.0.5",
+            "version": "v2.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wp-cli/db-command.git",
-                "reference": "119cf31491577d0a79ad42021dfeb8ac1138342b"
+                "reference": "8e3cd46987241ed97ddb7f682b3505dff8d6dce4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wp-cli/db-command/zipball/119cf31491577d0a79ad42021dfeb8ac1138342b",
-                "reference": "119cf31491577d0a79ad42021dfeb8ac1138342b",
+                "url": "https://api.github.com/repos/wp-cli/db-command/zipball/8e3cd46987241ed97ddb7f682b3505dff8d6dce4",
+                "reference": "8e3cd46987241ed97ddb7f682b3505dff8d6dce4",
                 "shasum": ""
             },
             "require": {
@@ -8325,7 +8340,7 @@
             ],
             "description": "Performs basic database operations using credentials stored in wp-config.php.",
             "homepage": "https://github.com/wp-cli/db-command",
-            "time": "2019-11-12T05:05:58+00:00"
+            "time": "2020-01-28T16:39:32+00:00"
         },
         {
             "name": "wp-cli/embed-command",
@@ -8598,16 +8613,16 @@
         },
         {
             "name": "wp-cli/eval-command",
-            "version": "v2.0.5",
+            "version": "v2.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wp-cli/eval-command.git",
-                "reference": "945aaebc761a694cf302985088ef6b19a4567643"
+                "reference": "d379732f9899387a6a631ccea5116b3da6f16300"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wp-cli/eval-command/zipball/945aaebc761a694cf302985088ef6b19a4567643",
-                "reference": "945aaebc761a694cf302985088ef6b19a4567643",
+                "url": "https://api.github.com/repos/wp-cli/eval-command/zipball/d379732f9899387a6a631ccea5116b3da6f16300",
+                "reference": "d379732f9899387a6a631ccea5116b3da6f16300",
                 "shasum": ""
             },
             "require": {
@@ -8648,7 +8663,7 @@
             ],
             "description": "Executes arbitrary PHP code or files.",
             "homepage": "https://github.com/wp-cli/eval-command",
-            "time": "2019-11-12T01:36:20+00:00"
+            "time": "2020-02-06T11:24:47+00:00"
         },
         {
             "name": "wp-cli/export-command",
@@ -8797,16 +8812,16 @@
         },
         {
             "name": "wp-cli/i18n-command",
-            "version": "v2.2.1",
+            "version": "v2.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wp-cli/i18n-command.git",
-                "reference": "6a0582103ecf4a28b3086eac55a9fe590bd3dc96"
+                "reference": "2804c5246d9338da59951737b03c54d257be8e47"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wp-cli/i18n-command/zipball/6a0582103ecf4a28b3086eac55a9fe590bd3dc96",
-                "reference": "6a0582103ecf4a28b3086eac55a9fe590bd3dc96",
+                "url": "https://api.github.com/repos/wp-cli/i18n-command/zipball/2804c5246d9338da59951737b03c54d257be8e47",
+                "reference": "2804c5246d9338da59951737b03c54d257be8e47",
                 "shasum": ""
             },
             "require": {
@@ -8850,7 +8865,7 @@
             ],
             "description": "Provides internationalization tools for WordPress projects.",
             "homepage": "https://github.com/wp-cli/i18n-command",
-            "time": "2019-11-12T06:57:35+00:00"
+            "time": "2019-12-13T09:00:43+00:00"
         },
         {
             "name": "wp-cli/import-command",
@@ -9378,16 +9393,16 @@
         },
         {
             "name": "wp-cli/scaffold-command",
-            "version": "v2.0.7",
+            "version": "v2.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wp-cli/scaffold-command.git",
-                "reference": "fe73e6f71c2a03908bb5ceac17a0e408544a868a"
+                "reference": "4814acbdf3d7af499530cc1ae1e82f3ed9f12674"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wp-cli/scaffold-command/zipball/fe73e6f71c2a03908bb5ceac17a0e408544a868a",
-                "reference": "fe73e6f71c2a03908bb5ceac17a0e408544a868a",
+                "url": "https://api.github.com/repos/wp-cli/scaffold-command/zipball/4814acbdf3d7af499530cc1ae1e82f3ed9f12674",
+                "reference": "4814acbdf3d7af499530cc1ae1e82f3ed9f12674",
                 "shasum": ""
             },
             "require": {
@@ -9437,20 +9452,20 @@
             ],
             "description": "Generates code for post types, taxonomies, blocks, plugins, child themes, etc.",
             "homepage": "https://github.com/wp-cli/scaffold-command",
-            "time": "2019-11-12T11:32:15+00:00"
+            "time": "2019-11-25T13:26:31+00:00"
         },
         {
             "name": "wp-cli/search-replace-command",
-            "version": "v2.0.5",
+            "version": "v2.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wp-cli/search-replace-command.git",
-                "reference": "d53ae0715d3701ef22826d5c7b46973a1b24e472"
+                "reference": "f446ca1f90144b496dbacb373868118ba40df028"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wp-cli/search-replace-command/zipball/d53ae0715d3701ef22826d5c7b46973a1b24e472",
-                "reference": "d53ae0715d3701ef22826d5c7b46973a1b24e472",
+                "url": "https://api.github.com/repos/wp-cli/search-replace-command/zipball/f446ca1f90144b496dbacb373868118ba40df028",
+                "reference": "f446ca1f90144b496dbacb373868118ba40df028",
                 "shasum": ""
             },
             "require": {
@@ -9493,7 +9508,7 @@
             ],
             "description": "Searches/replaces strings in the database.",
             "homepage": "https://github.com/wp-cli/search-replace-command",
-            "time": "2019-11-12T01:29:55+00:00"
+            "time": "2019-12-13T09:13:20+00:00"
         },
         {
             "name": "wp-cli/server-command",
@@ -9661,20 +9676,20 @@
         },
         {
             "name": "wp-cli/widget-command",
-            "version": "v2.0.2",
+            "version": "v2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wp-cli/widget-command.git",
-                "reference": "58a1b2d2221cee852eb8a589535aaadb1217bb74"
+                "reference": "ddbc2c3e9966fae8de05a3200b04e0faf42fe06f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wp-cli/widget-command/zipball/58a1b2d2221cee852eb8a589535aaadb1217bb74",
-                "reference": "58a1b2d2221cee852eb8a589535aaadb1217bb74",
+                "url": "https://api.github.com/repos/wp-cli/widget-command/zipball/ddbc2c3e9966fae8de05a3200b04e0faf42fe06f",
+                "reference": "ddbc2c3e9966fae8de05a3200b04e0faf42fe06f",
                 "shasum": ""
             },
             "require": {
-                "wp-cli/wp-cli": "^2"
+                "wp-cli/wp-cli": "^2.4"
             },
             "require-dev": {
                 "wp-cli/extension-command": "^1.2 || ^2",
@@ -9720,26 +9735,25 @@
             ],
             "description": "Adds, moves, and removes widgets; lists sidebars.",
             "homepage": "https://github.com/wp-cli/widget-command",
-            "time": "2019-04-25T00:25:21+00:00"
+            "time": "2020-01-18T02:17:30+00:00"
         },
         {
             "name": "wp-cli/wp-cli",
-            "version": "v2.4.0",
+            "version": "v2.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wp-cli/wp-cli.git",
-                "reference": "74c949c74708e3a88ad0add70f3236c8675dfd85"
+                "reference": "ceb18598e79befa9b2a37a51efbb34910628988b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wp-cli/wp-cli/zipball/74c949c74708e3a88ad0add70f3236c8675dfd85",
-                "reference": "74c949c74708e3a88ad0add70f3236c8675dfd85",
+                "url": "https://api.github.com/repos/wp-cli/wp-cli/zipball/ceb18598e79befa9b2a37a51efbb34910628988b",
+                "reference": "ceb18598e79befa9b2a37a51efbb34910628988b",
                 "shasum": ""
             },
             "require": {
-                "cweagans/composer-patches": "^1.6",
                 "ext-curl": "*",
-                "mustache/mustache": "~2.4",
+                "mustache/mustache": "~2.13",
                 "php": "^5.4 || ^7.0",
                 "rmccue/requests": "~1.6",
                 "symfony/finder": ">2.7",
@@ -9766,11 +9780,6 @@
             "extra": {
                 "branch-alias": {
                     "dev-master": "2.4.x-dev"
-                },
-                "patches": {
-                    "mustache/mustache": {
-                        "Avoid notices on PHP 7.4+": "https://patch-diff.githubusercontent.com/raw/bobthecow/mustache.php/pull/349.patch"
-                    }
                 }
             },
             "autoload": {
@@ -9788,7 +9797,7 @@
                 "cli",
                 "wordpress"
             ],
-            "time": "2019-11-12T15:26:05+00:00"
+            "time": "2020-02-18T08:15:37+00:00"
         },
         {
             "name": "wp-cli/wp-cli-bundle",

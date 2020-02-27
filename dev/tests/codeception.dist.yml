@@ -9,7 +9,6 @@ bootstrap: _bootstrap.php
 extensions:
     enabled:
         - Codeception\Extension\RunFailed
-        - ValidateSuitesExtension
     commands:
         - Codeception\Command\GenerateWPUnit
         - Codeception\Command\GenerateWPRestApi
