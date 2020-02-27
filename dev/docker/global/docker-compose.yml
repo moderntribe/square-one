@@ -64,7 +64,7 @@ services:
     ports:
       - '1025:1025'
   chrome:
-    image: 'selenium/standalone-chrome:latest'
+    image: 'selenium/standalone-chrome:3.141.59'
     container_name: tribe-chrome
     dns: 172.20.10.250
     volumes:
