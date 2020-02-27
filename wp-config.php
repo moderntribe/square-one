@@ -94,6 +94,16 @@ if ( $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https' ) {
 	$_SERVER['SERVER_PORT'] = 443;
 }
 
+// ==============================================================
+// If a Load Balancer or Proxy is used, X-Forwarded-For HTTP Header to get the users real IP address
+// ==============================================================
+
+if ( isset( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) {
+	$http_x_headers = explode( ',', $_SERVER['HTTP_X_FORWARDED_FOR'] );
+
+	$_SERVER['REMOTE_ADDR'] = $http_x_headers[0];
+}
+
 $config_defaults = [
 
 	// Paths

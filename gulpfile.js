@@ -16,7 +16,7 @@ if ( ! config ) {
  * List out your tasks as defined in the gulp_tasks directory
  * require-dir module will bring those in here as an object
  * Each task type object will be named by its filename
- * So: 'concat:themeMinVendors' means a file named 'concat' in the grunt_tasks dir,
+ * So: 'concat:themeMinVendors' means a file named 'concat' in the gulp_tasks dir,
  * and the method themeMinVendors inside that modules export.
  * You must follow this approach, or modify the registerTasks function below.
  *

@@ -323,14 +323,87 @@
             "time": "2019-11-07T11:55:26+00:00"
         },
         {
+            "name": "gotoandplay/gravityforms-composer-installer",
+            "version": "v2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/gtap-dev/gravityforms-composer-installer.git",
+                "reference": "bb24264e4ea24ec6a094538adc47ed89503786d0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/gtap-dev/gravityforms-composer-installer/zipball/bb24264e4ea24ec6a094538adc47ed89503786d0",
+                "reference": "bb24264e4ea24ec6a094538adc47ed89503786d0",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.0.0",
+                "ffraenz/private-composer-installer": "^3.0.0",
+                "php": "^7.1"
+            },
+            "require-dev": {
+                "composer/composer": "1.0.*",
+                "phpunit/phpunit": "^8.0",
+                "zendframework/zend-coding-standard": "^1.0"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "gotoAndDev\\GravityFormsComposerInstaller\\Plugin"
+            },
+            "autoload": {
+                "psr-4": {
+                    "gotoAndDev\\GravityFormsComposerInstaller\\": "src/GravityFormsComposerInstaller"
+                }
+            },
+            "scripts": {
+                "check": [
+                    "@cs-check",
+                    "@test"
+                ],
+                "cs-check": [
+                    "phpcs"
+                ],
+                "cs-fix": [
+                    "phpcbf"
+                ],
+                "test": [
+                    "phpunit --colors=always"
+                ],
+                "test-coverage": [
+                    "phpunit --colors=always --coverage-clover clover.xml"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mihkel Eidast",
+                    "email": "mihkel@play.ee",
+                    "homepage": "https://play.ee"
+                }
+            ],
+            "description": "A composer install helper for Gravity Forms",
+            "keywords": [
+                "composer",
+                "env",
+                "gravityforms",
+                "plugin",
+                "private",
+                "wordpress",
+                "wp"
+            ],
+            "time": "2020-01-14T23:26:21+00:00"
+        },
+        {
             "name": "gravityforms/gravityforms",
             "version": "2.4.16.7",
             "dist": {
                 "type": "zip",
-                "url": "https://composer.utility.mtribe.site/gravityforms/?key={%WP_PLUGIN_GF_KEY}&token={%WP_PLUGIN_GF_TOKEN}&t=2.4.16.7"
+                "url": "https://www.gravityhelp.com/wp-content/plugins/gravitymanager/api.php?op=get_plugin&slug=gravityforms&key={%WP_PLUGIN_GF_KEY}#v2.4.16.7"
             },
             "require": {
-                "ffraenz/private-composer-installer": "^3.0"
+                "gotoandplay/gravityforms-composer-installer": "^2.0"
             },
             "type": "wordpress-plugin"
         },
@@ -541,7 +614,6 @@
                 "composer/installers": "~1.0"
             },
             "type": "wordpress-muplugin",
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "GPL-2.0+"
             ],
@@ -557,23 +629,28 @@
             "keywords": [
                 "wordpress"
             ],
+            "support": {
+                "source": "https://github.com/humanmade/Mercator/tree/master",
+                "issues": "https://github.com/humanmade/Mercator/issues"
+            },
             "time": "2019-01-08T13:04:40+00:00"
         },
         {
             "name": "humanmade/s3-uploads",
-            "version": "v1.1.0",
+            "version": "2.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/humanmade/S3-Uploads.git",
-                "reference": "9cb765284e7407d7ad2309a64dd8e5e13db258b2"
+                "reference": "bc1df42517c1ccbfbfc61fe4802008d22948a9b8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/humanmade/S3-Uploads/zipball/9cb765284e7407d7ad2309a64dd8e5e13db258b2",
-                "reference": "9cb765284e7407d7ad2309a64dd8e5e13db258b2",
+                "url": "https://api.github.com/repos/humanmade/S3-Uploads/zipball/bc1df42517c1ccbfbfc61fe4802008d22948a9b8",
+                "reference": "bc1df42517c1ccbfbfc61fe4802008d22948a9b8",
                 "shasum": ""
             },
             "require": {
+                "aws/aws-sdk-php": "~3.18",
                 "composer/installers": "~1.0"
             },
             "type": "wordpress-plugin",
@@ -593,7 +670,7 @@
             "keywords": [
                 "wordpress"
             ],
-            "time": "2016-04-29T10:00:39+00:00"
+            "time": "2019-11-18T16:44:45+00:00"
         },
         {
             "name": "jbzoo/pimpledumper",
@@ -5988,8 +6065,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "sebastian@phpunit.de",
-                    "role": "lead"
+                    "role": "lead",
+                    "email": "sebastian@phpunit.de"
                 }
             ],
             "description": "FilterIterator implementation that filters files based on a list of suffixes.",
@@ -6079,8 +6156,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "sebastian@phpunit.de",
-                    "role": "lead"
+                    "role": "lead",
+                    "email": "sebastian@phpunit.de"
                 }
             ],
             "description": "Utility class for timing",
@@ -6883,8 +6960,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "sebastian@phpunit.de",
-                    "role": "lead"
+                    "role": "lead",
+                    "email": "sebastian@phpunit.de"
                 }
             ],
             "description": "Collection of value objects that represent the types of the PHP type system",

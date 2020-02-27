@@ -14,8 +14,12 @@ All notable changes to this project will be documented in this file.
 * Fixed: Tests are passing on Travis
 * Updated: Raised minimum wp-browser version to 2.2.36
 * Changed: Specified the Selenium Chrome version on Global to 3.141.59
-
- 
+* Updated: s3-uploads plugin to 2.2.1
+* Changed: Refactored the image component to reduce complexity and allow more robust usage options and made a general pass at code clean up & documentation.
+* Changed: all uses of `the_tribe_image()` ion the core plugin have been refactored to use the image component directly.
+* Updated: Docs for Image Component, theme Images to reflect current architecture.
+* Fixed: Removed almost all references to Grunt in the docs because it is switched to Gulp. The only references left are for the outdated videos.
+* Added: Several helper methods to the Theme Colors class for working with color arrays.
 
 ## 2020.01
 * Changed: Improve composer performance: Load hirak/prestissimo globally, volume mount entire composer dir, use "no-api": true, for VCS repositories, fix gravity forms installer.
