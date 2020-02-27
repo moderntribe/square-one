@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2020.02
+* Added: Bash script to run tests in the Container
+* Changed: Invalidate object cache salt on tests-config-sample.php
+* Changed: Abstracted repetitive test parameters into codeception.suite.yml
+* Changed: Updated tests "dump.sql" file
+* Changed: Ignored tests "_generated" folder
+* Added: Added new Page Object test examples
+* Added: Server name on PHP env, so Xdebug works on CLI
+* Fixed: All tests are passing
+* Fixed: Tests are passing on Travis
+* Updated: Raised minimum wp-browser version to 2.2.36
+* Changed: Specified the Selenium Chrome version on Global to 3.141.59
+
+ 
+
 ## 2020.01
 * Changed: Improve composer performance: Load hirak/prestissimo globally, volume mount entire composer dir, use "no-api": true, for VCS repositories, fix gravity forms installer.
 * Fixed: Sidebar.php template from calling Base::get_data() needlessly in the same request
