@@ -100,4 +100,4 @@ if [ ! -f "${COMPOSER_DIR}/composer.json" ]; then
   bash ${SCRIPTDIR}/exec.sh composer global require hirak/prestissimo --classmap-authoritative --update-no-dev
 fi
 
-bash ${SCRIPTDIR}/composer.sh install
+bash ${SCRIPTDIR}/composer.sh update
