@@ -12,6 +12,8 @@ use Tribe\Project\Theme\Pagination_Util;
 use Twig\Environment;
 
 class Index extends Abstract_Template {
+	protected $path = 'index.twig';
+
 	/**
 	 * @var Header
 	 */
@@ -30,7 +32,6 @@ class Index extends Abstract_Template {
 	private $footer;
 
 	public function __construct(
-		string $path,
 		Environment $twig,
 		Component_Factory $factory,
 		Header $header,
@@ -38,7 +39,7 @@ class Index extends Abstract_Template {
 		Content\Loop\Item $item,
 		Footer $footer
 	) {
-		parent::__construct( $path, $twig, $factory );
+		parent::__construct( $twig, $factory );
 		$this->header    = $header;
 		$this->subheader = $subheader;
 		$this->item      = $item;

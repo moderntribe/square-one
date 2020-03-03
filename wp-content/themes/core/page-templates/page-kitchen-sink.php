@@ -3,5 +3,6 @@
  * Template Name: Kitchen Sink
  */
 
-$template = new \Tribe\Project\Templates\Unsupported_Browser( 'page-templates/page-kitchen-sink.twig' );
-echo $template->render();
+use Tribe\Project\Templates\Controllers\Page;
+
+echo tribe_template( Page::class, 'page-templates/page-kitchen-sink.twig' );

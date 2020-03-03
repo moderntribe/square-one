@@ -1,15 +1,14 @@
 {% block header %}
-	{{ include( 'header.twig' ) }}
+	{{ header }}
 {% endblock %}
 
 <a id="a11y-skip-link-content" tabindex="-1"></a>
 
 <main>
-
 	{% block main %}
 
 		{% block subhead %}
-			{{ include( 'content/header/sub.twig' ) }}
+			{{ subheader }}
 		{% endblock %}
 
 		{% block content %}
@@ -25,5 +24,5 @@
 {% block sidebar %}{% endblock %}
 
 {% block footer %}
-	{{ include( 'footer.twig' ) }}
+	{{ footer }}
 {% endblock %}

@@ -1,18 +1,25 @@
 <?php
 declare( strict_types=1 );
 
-namespace Tribe\Project\Templates\Controllers;
+namespace Tribe\Project\Templates\Controllers\Sidebar;
 
 use Tribe\Project\Templates\Abstract_Template;
 use Tribe\Project\Templates\Component_Factory;
 use Twig\Environment;
 
-class Sidebar extends Abstract_Template {
+abstract class Abstract_Sidebar extends Abstract_Template {
+	protected $path = 'sidebar.twig';
+
+	/**
+	 * @var string The ID of this sidebar
+	 */
 	protected $sidebar_id;
 
-	public function __construct( string $path, Environment $twig, Component_Factory $factory, string $sidebar_id = 'main' ) {
-		parent::__construct( $path, $twig, $factory );
-		$this->sidebar_id = $sidebar_id;
+	public function __construct( Environment $twig, Component_Factory $factory ) {
+		if ( ! isset( $this->sidebar_id ) ) {
+			throw new \UnexpectedValueException( 'Sidebar ID must be defined in extending class' );
+		}
+		parent::__construct( $twig, $factory );
 	}
 
 

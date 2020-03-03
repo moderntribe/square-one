@@ -8,6 +8,8 @@ use Tribe\Project\Templates\Abstract_Template;
 use Tribe\Project\Theme\Nav\Menu;
 
 class Footer extends Abstract_Template {
+	protected $path = 'content/navigation/footer.twig';
+
 	public function get_data(): array {
 		return [
 			'menu' => [

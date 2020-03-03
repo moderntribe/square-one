@@ -13,6 +13,8 @@ use Tribe\Project\Templates\Controllers\Content\Single\Post;
 use Twig\Environment;
 
 class Single extends Abstract_Template {
+	protected $path = 'single.twig';
+
 	/**
 	 * @var Header
 	 */
@@ -31,7 +33,6 @@ class Single extends Abstract_Template {
 	private $footer;
 
 	public function __construct(
-		string $path,
 		Environment $twig,
 		Component_Factory $factory,
 		Header $header,
@@ -39,7 +40,7 @@ class Single extends Abstract_Template {
 		Post $content,
 		Footer $footer
 	) {
-		parent::__construct( $path, $twig, $factory );
+		parent::__construct( $twig, $factory );
 		$this->header    = $header;
 		$this->subheader = $subheader;
 		$this->content   = $content;

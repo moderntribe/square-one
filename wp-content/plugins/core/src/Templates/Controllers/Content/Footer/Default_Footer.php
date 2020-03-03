@@ -7,16 +7,21 @@ use Tribe\Project\Object_Meta\Social_Settings;
 use Tribe\Project\Templates\Abstract_Template;
 use Tribe\Project\Templates\Component_Factory;
 use Tribe\Project\Templates\Controllers\Content\Navigation\Footer as Navigation;
+use Tribe\Project\Templates\Controllers\Traits\Copyright;
 use Twig\Environment;
 
 class Default_Footer extends Abstract_Template {
+	use Copyright;
+
+	protected $path = 'content/footer/default.twig';
+
 	/**
 	 * @var Navigation
 	 */
 	private $navigation;
 
-	public function __construct( string $path, Environment $twig, Component_Factory $factory, Navigation $navigation ) {
-		parent::__construct( $path, $twig, $factory );
+	public function __construct( Environment $twig, Component_Factory $factory, Navigation $navigation ) {
+		parent::__construct( $twig, $factory );
 		$this->navigation = $navigation;
 	}
 
@@ -25,7 +30,7 @@ class Default_Footer extends Abstract_Template {
 			'navigation'    => $this->navigation->render(),
 			'social_follow' => $this->get_social_follow(),
 			'copyright'     => $this->get_copyright(),
-			'home_url'      => $this->get_home_url(),
+			'home_url'      => home_url( '/' ),
 			'name'          => get_bloginfo( 'name' ),
 		];
 	}
@@ -59,14 +64,5 @@ class Default_Footer extends Abstract_Template {
 
 		return $links;
 	}
-
-	protected function get_copyright() {
-		return sprintf( __( '%s %d All Rights Reserved.', 'tribe' ), '&copy;', date( 'Y' ) );
-	}
-
-	protected function get_home_url() {
-		return home_url( '/' );
-	}
-
 
 }

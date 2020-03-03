@@ -1,12 +1,5 @@
-{#% extends "base.twig" %#}
-{% block header %}
-	{{ header }}
-{% endblock %}
+{% extends "base.twig" %}
 
-
-<a id="a11y-skip-link-content" tabindex="-1"></a>
-
-<main>
 {% block main %}
 
 	{% block breadcrumbs %}
@@ -32,12 +25,4 @@
 	{{ comments }}
 
 
-{% endblock %}
-
-</main>
-
-{% block sidebar %}{% endblock %}
-
-{% block footer %}
-	{{ footer }}
 {% endblock %}

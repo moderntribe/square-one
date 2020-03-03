@@ -9,9 +9,12 @@ use Tribe\Project\Templates\Components\Breadcrumbs;
 use Tribe\Project\Templates\Components\Button;
 use Tribe\Project\Templates\Components\Pagination;
 use Tribe\Project\Templates\Controllers\Content\Header\Subheader;
+use Tribe\Project\Templates\Controllers\Sidebar\Main_Sidebar;
 use Twig\Environment;
 
 class Page extends Abstract_Template {
+	protected $path = 'page.twig';
+
 	/**
 	 * @var Header
 	 */
@@ -21,7 +24,7 @@ class Page extends Abstract_Template {
 	 */
 	private $subheader;
 	/**
-	 * @var Sidebar
+	 * @var Main_Sidebar
 	 */
 	private $sidebar;
 	/**
@@ -30,15 +33,14 @@ class Page extends Abstract_Template {
 	private $footer;
 
 	public function __construct(
-		string $path,
 		Environment $twig,
 		Component_Factory $factory,
 		Header $header,
 		Subheader $subheader,
-		Sidebar $sidebar,
+		Main_Sidebar $sidebar,
 		Footer $footer
 	) {
-		parent::__construct( $path, $twig, $factory );
+		parent::__construct( $twig, $factory );
 		$this->header    = $header;
 		$this->subheader = $subheader;
 		$this->sidebar   = $sidebar;

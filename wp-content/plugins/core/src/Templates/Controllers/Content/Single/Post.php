@@ -7,6 +7,8 @@ use Tribe\Project\Templates\Abstract_Template;
 use Tribe\Project\Theme\Social_Links;
 
 class Post extends Abstract_Template {
+	protected $path = 'content/single/post.twig';
+
 	protected $time_formats = [
 		'c',
 	];

@@ -7,7 +7,7 @@ use Twig\Environment;
 
 abstract class Abstract_Template implements Template_Interface {
 	/**
-	 * @var string
+	 * @var string Default path to be used to render this template
 	 */
 	protected $path = '';
 	/**
@@ -20,22 +20,21 @@ abstract class Abstract_Template implements Template_Interface {
 	protected $factory;
 
 	/**
-	 * @param string            $path
 	 * @param Environment       $twig
 	 * @param Component_Factory $factory
 	 */
-	public function __construct( string $path, Environment $twig, Component_Factory $factory ) {
-		$this->path    = $path;
-		$this->twig    = $twig;
-		$this->factory = $factory;
+	public function __construct( Environment $twig, Component_Factory $factory ) {
+		$this->twig         = $twig;
+		$this->factory      = $factory;
 	}
 
-	public function render(): string {
-		if ( empty( $this->path ) ) {
+	public function render( string $path = '' ): string {
+		$path = $path ?: $this->path;
+		if ( empty( $path ) ) {
 			throw new \RuntimeException( 'Path not specified' );
 		}
 		try {
-			return $this->twig->render( $this->path, $this->get_data() );
+			return $this->twig->render( $path, $this->get_data() );
 		} catch ( \Exception $e ) {
 			if ( WP_DEBUG ) {
 				throw $e;

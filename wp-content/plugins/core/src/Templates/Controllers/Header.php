@@ -9,13 +9,15 @@ use Tribe\Project\Templates\Controllers\Content\Header\Default_Header as Header_
 use Twig\Environment;
 
 class Header extends Abstract_Template {
+	protected $path = 'header.twig';
+
 	/**
 	 * @var Header_Content
 	 */
 	private $content;
 
-	public function __construct( string $path, Environment $twig, Component_Factory $factory, Header_Content $content ) {
-		parent::__construct( $path, $twig, $factory );
+	public function __construct( Environment $twig, Component_Factory $factory, Header_Content $content ) {
+		parent::__construct( $twig, $factory );
 		$this->content = $content;
 	}
 

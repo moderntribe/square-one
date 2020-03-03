@@ -12,13 +12,15 @@ use Tribe\Project\Theme\Logo;
 use Twig\Environment;
 
 class Default_Header extends Abstract_Template {
+	protected $path = 'content/header/default.twig';
+
 	/**
 	 * @var Navigation
 	 */
 	private $navigation;
 
-	public function __construct( string $path, Environment $twig, Component_Factory $factory, Navigation $navigation ) {
-		parent::__construct( $path, $twig, $factory );
+	public function __construct( Environment $twig, Component_Factory $factory, Navigation $navigation ) {
+		parent::__construct( $twig, $factory );
 		$this->navigation = $navigation;
 	}
 

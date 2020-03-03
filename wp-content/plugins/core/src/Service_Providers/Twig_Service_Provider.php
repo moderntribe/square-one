@@ -116,10 +116,6 @@ class Twig_Service_Provider extends Service_Provider {
 		$container['twig.templates.content/panels/wysiwyg'] = function ( Container $container ) {
 			return new Templates\Content\Panels\Wysiwyg( 'content/panels/wysiwyg.twig', $container['twig'] );
 		};
-
-		$container['twig.templates.sidebar.main'] = function ( Container $container ) {
-			return new Templates\Sidebar( 'sidebar.twig', $container['twig'], 'sidebar-main' );
-		};
 	}
 
 }

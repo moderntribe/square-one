@@ -9,13 +9,15 @@ use Tribe\Project\Templates\Controllers\Content\Footer\Default_Footer as Footer_
 use Twig\Environment;
 
 class Footer extends Abstract_Template {
+	protected $path = 'footer.twig';
+
 	/**
 	 * @var Footer_Content
 	 */
 	private $content;
 
-	public function __construct( string $path, Environment $twig, Component_Factory $factory, Footer_Content $content ) {
-		parent::__construct( $path, $twig, $factory );
+	public function __construct( Environment $twig, Component_Factory $factory, Footer_Content $content ) {
+		parent::__construct( $twig, $factory );
 		$this->content = $content;
 	}
 

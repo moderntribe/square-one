@@ -6,6 +6,7 @@ namespace Tribe\Project\Templates\Controllers\Content\Header;
 use Tribe\Project\Templates\Abstract_Template;
 
 class Subheader extends Abstract_Template {
+	protected $path = 'content/header/sub.twig';
 
 	public function get_data(): array {
 		return [

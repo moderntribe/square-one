@@ -1,17 +1,6 @@
-{#% extends "base.twig" %#}
-{% block header %}
-	{{ header }}
-{% endblock %}
+{% extends "base.twig" %}
 
-<a id="a11y-skip-link-content" tabindex="-1"></a>
-
-<main>
-{% block main %}
-
-	{% block subhead %}
-		{{ subheader }}
-	{% endblock %}
-
+{% block content %}
 	<div class="l-container">
 
 		{% if posts|length > 0 %}
@@ -32,13 +21,4 @@
 
 	</div>
 
-{% endblock %}
-
-
-</main>
-
-{% block sidebar %}{% endblock %}
-
-{% block footer %}
-	{{ footer }}
 {% endblock %}

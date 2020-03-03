@@ -7,11 +7,13 @@ use Tribe\Project\Service_Providers\Nav_Menu_Provider;
 use Tribe\Project\Templates\Abstract_Template;
 
 class Header extends Abstract_Template {
+	protected $path = 'content/navigation/header.twig';
+
 	public function get_data(): array {
 		return [
 			'menu' => [
 				Nav_Menu_Provider::PRIMARY => $this->get_primary_nav_menu(),
-			]
+			],
 		];
 	}
 

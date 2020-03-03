@@ -6,7 +6,7 @@
 
     {# // MISC Meta #}
     <meta charset="utf-8">
-    <meta name="author" content="{{ bloginfo( 'name' )|esc_attr }}">
+    <meta name="author" content="{{ name|esc_attr }}">
     <meta http-equiv="cleartype" content="on">
     <meta name="robots" content="noindex, nofollow">
 
@@ -23,7 +23,7 @@
             <h1 class="site-brand">
                 <img src="{{ legacy_logo_header|esc_url }}"
                      class="site-logo site-logo--header"
-                     alt="{{ bloginfo( 'name' )|esc_attr }} {{ __('logo') }}"/>
+                     alt="{{ name|esc_attr }} {{ __('logo') }}"/>
             </h1>
         </div>
     </div>
@@ -95,9 +95,9 @@
 
             <img src="{{ legacy_logo_footer|esc_url }}"
                  class="site-logo site-logo--footer"
-                 alt="{{ bloginfo( 'name' )|esc_attr }} {{ __('logo') }}"/>
+                 alt="{{ name|esc_attr }} {{ __('logo') }}"/>
 
-            <p class="site-footer__copy">{{ copyright }} {{ bloginfo( 'name' ) }}.</p>
+            <p class="site-footer__copy">{{ copyright }} {{ name }}.</p>
 
         </div>
     </div>

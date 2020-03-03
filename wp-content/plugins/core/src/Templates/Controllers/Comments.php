@@ -1,11 +1,19 @@
 <?php
+declare( strict_types=1 );
 
+namespace Tribe\Project\Templates\Controllers;
 
-namespace Tribe\Project\Templates;
+use Tribe\Project\Templates\Abstract_Template;
+use Tribe\Project\Templates\Component_Factory;
+use Twig\Environment;
 
-use Tribe\Project\Twig\Twig_Template;
+class Comments extends Abstract_Template {
+	protected $path = 'comments.twig';
 
-class Comments extends Twig_Template {
+	public function __construct( Environment $twig, Component_Factory $factory ) {
+		parent::__construct( $twig, $factory );
+	}
+
 	public function get_data(): array {
 		$password_required = post_password_required();
 		$have_comments     = ( ! $password_required ) && have_comments();
@@ -22,6 +30,7 @@ class Comments extends Twig_Template {
 
 		return $data;
 	}
+
 
 	protected function get_title() {
 		return sprintf(
@@ -57,9 +66,21 @@ class Comments extends Twig_Template {
 	}
 
 	protected function get_pagination() {
-		$template = new Content\Pagination\Comments( $this->template, $this->twig );
-		$data     = $template->get_data();
+		$count = get_comment_pages_count();
+		$paged = (bool) ( $count > 1 ? get_option( 'page_comments' ) : false );
 
-		return $data[ 'pagination' ];
+		$data = [
+			'paged'         => $paged,
+			'max_num_pages' => $count,
+			'previous'      => '',
+			'next'          => '',
+		];
+
+		if ( $paged ) {
+			$data['previous'] = get_previous_comments_link( __( '&larr; Older Comments', 'tribe' ) );
+			$data['next']     = get_next_comments_link( __( 'Newer Comments &rarr;', 'tribe' ) );
+		}
+
+		return $data;
 	}
 }

@@ -6,6 +6,7 @@ namespace Tribe\Project\Templates\Controllers\Content\Search;
 use Tribe\Project\Templates\Controllers\Content\Loop\Item as Loop_Item;
 
 class Item extends Loop_Item {
+	protected $path = 'content/search/item.twig';
 
 	public function get_data(): array {
 		$data['post'] = [

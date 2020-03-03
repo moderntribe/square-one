@@ -7,6 +7,7 @@ use Tribe\Project\Templates\Abstract_Template;
 use Tribe\Project\Theme\Image_Sizes;
 
 class Item extends Abstract_Template {
+	protected $path = 'content/loop/item.twig';
 
 	protected $time_formats = [
 		'c',
@@ -14,7 +15,7 @@ class Item extends Abstract_Template {
 	];
 
 	public function get_data(): array {
-		$data[ 'post' ] = [
+		$data['post'] = [
 			'post_type'      => get_post_type(),
 			'title'          => get_the_title(),
 			'content'        => apply_filters( 'the_content', get_the_content() ),

@@ -3,5 +3,6 @@
  * Template Name: Example React App
  */
 
-$template = new \Tribe\Project\Templates\Page( 'page-templates/page-example-app.twig' );
-echo $template->render();
+use Tribe\Project\Templates\Controllers\Page;
+
+echo tribe_template( Page::class, 'page-templates/page-example-app.twig' );
