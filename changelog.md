@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2020.03
+* Fixed: Broken composer.lock file preventing Gravity Forms installation
+
 ## 2020.02
 * Updated: s3-uploads plugin to 2.2.1
 * Changed: Refactored the image component to reduce complexity and allow more robust usage options and made a general pass at code clean up & documentation.
