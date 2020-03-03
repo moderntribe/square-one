@@ -1,10 +1,11 @@
 <?php
 
-namespace Tribe\Project\Templates\Content\Panels;
+namespace Tribe\Project\Templates\Controllers\Content\Panels;
 
 use Tribe\Project\Panels\Types\Wysiwyg as Wysi;
 
 class Wysiwyg extends Panel {
+	protected $path = 'content/panels/wysiwyg.twig';
 
 	public function get_data(): array {
 		$data       = parent::get_data();
@@ -36,9 +37,5 @@ class Wysiwyg extends Panel {
 		}
 
 		return $columns;
-	}
-
-	public static function instance() {
-		return tribe_project()->container()['twig.templates.content/panels/wysiwyg'];
 	}
 }

@@ -1,16 +1,17 @@
 <?php
 
 
-namespace Tribe\Project\Templates\Content\Panels;
+namespace Tribe\Project\Templates\Controllers\Content\Panels;
 
 use Tribe\Project\Panels\Types\Interstitial as Interstice;
 use Tribe\Project\Templates\Components\Button;
-use Tribe\Project\Templates\Components\Image;
 use Tribe\Project\Templates\Components\Content_Block;
+use Tribe\Project\Templates\Components\Image;
 use Tribe\Project\Templates\Components\Text;
 use Tribe\Project\Templates\Components\Title;
 
 class Interstitial extends Panel {
+	protected $path = 'content/panels/interstitial.twig';
 
 	public function get_data(): array {
 		$data       = parent::get_data();
@@ -159,9 +160,5 @@ class Interstitial extends Panel {
 		}
 
 		return implode( ' ', $classes );
-	}
-
-	public static function instance() {
-		return tribe_project()->container()['twig.templates.content/panels/interstitial'];
 	}
 }

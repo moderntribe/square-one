@@ -1,12 +1,13 @@
 <?php
 
-namespace Tribe\Project\Templates\Content\Panels;
+namespace Tribe\Project\Templates\Controllers\Content\Panels;
 
 use Tribe\Project\Panels\Types\Gallery as GalleryPanel;
 use Tribe\Project\Templates\Components\Image as ImageComponent;
 use Tribe\Project\Templates\Components\Slider as SliderComponent;
 
 class Gallery extends Panel {
+	protected $path = 'content/panels/gallery.twig';
 
 	public function get_data(): array {
 		$data       = parent::get_data();
@@ -88,9 +89,5 @@ class Gallery extends Panel {
 		$classes = [ sprintf( 'c-slider__main--%s', $this->panel_vars[ GalleryPanel::FIELD_IMAGE_TREATMENT ] ) ];
 
 		return $classes;
-	}
-
-	public static function instance() {
-		return tribe_project()->container()['twig.templates.content/panels/gallery'];
 	}
 }

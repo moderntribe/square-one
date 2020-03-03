@@ -1,12 +1,13 @@
 <?php
 
 
-namespace Tribe\Project\Templates\Content\Panels;
+namespace Tribe\Project\Templates\Controllers\Content\Panels;
 
+use Tribe\Project\Templates\Abstract_Template;
 use Tribe\Project\Theme\Util;
-use Tribe\Project\Twig\Twig_Template;
 
-class Panel extends Twig_Template {
+class Panel extends Abstract_Template {
+	protected $path = 'content/panels/panel.twig';
 
 	protected $panel;
 	protected $panel_vars;
@@ -77,10 +78,6 @@ class Panel extends Twig_Template {
 		);
 
 		return ob_get_clean();
-	}
-
-	public static function instance() {
-		return tribe_project()->container()[ 'twig.templates.content/panels/panel' ];
 	}
 
 }

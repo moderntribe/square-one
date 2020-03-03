@@ -1,16 +1,17 @@
 <?php
 
-namespace Tribe\Project\Templates\Content\Panels;
+namespace Tribe\Project\Templates\Controllers\Content\Panels;
 
 use Tribe\Project\Panels\Types\ContentSlider as ContentSliderPanel;
 use Tribe\Project\Templates\Components\Button;
 use Tribe\Project\Templates\Components\Content_Block;
-use Tribe\Project\Templates\Components\Slider as SliderComponent;
 use Tribe\Project\Templates\Components\Image;
+use Tribe\Project\Templates\Components\Slider as SliderComponent;
 use Tribe\Project\Templates\Components\Text;
 use Tribe\Project\Templates\Components\Title;
 
 class ContentSlider extends Panel {
+	protected $path = 'content/panels/content-slider.twig';
 
 	public function get_data(): array {
 		$data       = parent::get_data();
@@ -164,9 +165,5 @@ class ContentSlider extends Panel {
 		$button_object = Button::factory( $options );
 
 		return $button_object->render();
-	}
-
-	public static function instance() {
-		return tribe_project()->container()['twig.templates.content/panels/content-slider'];
 	}
 }

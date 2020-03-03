@@ -1,11 +1,12 @@
 <?php
 
-namespace Tribe\Project\Templates\Content\Panels;
+namespace Tribe\Project\Templates\Controllers\Content\Panels;
 
 use Tribe\Project\Panels\Types\LogoFarm as Logo;
 use Tribe\Project\Templates\Components\Image;
 
 class LogoFarm extends Panel {
+	protected $path = 'content/panels/logofarm.twig';
 
 	public function get_data(): array {
 		$data       = parent::get_data();
@@ -60,9 +61,5 @@ class LogoFarm extends Panel {
 		}
 
 		return $logos;
-	}
-
-	public static function instance() {
-		return tribe_project()->container()['twig.templates.content/panels/logofarm'];
 	}
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tribe\Project\Templates\Content\Panels;
+namespace Tribe\Project\Templates\Controllers\Content\Panels;
 
 use Tribe\Project\Panels\Types\Testimonial as TestimonialPanel;
 use Tribe\Project\Templates\Components\Image;
@@ -8,6 +8,7 @@ use Tribe\Project\Templates\Components\Quote;
 use Tribe\Project\Templates\Components\Slider;
 
 class Testimonial extends Panel {
+	protected $path = 'content/panels/testimonial.twig';
 
 	public function get_data(): array {
 		$data       = parent::get_data();
@@ -130,9 +131,5 @@ class Testimonial extends Panel {
 		$classes = [ 'c-slider__main' ];
 
 		return $classes;
-	}
-
-	public static function instance() {
-		return tribe_project()->container()['twig.templates.content/panels/testimonial'];
 	}
 }

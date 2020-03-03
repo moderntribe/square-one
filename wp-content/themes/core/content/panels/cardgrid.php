@@ -1,5 +1,3 @@
 <?php
 
-$template = \Tribe\Project\Templates\Content\Panels\CardGrid::instance();
-
-echo $template->render();
+echo tribe_template( \Tribe\Project\Templates\Controllers\Content\Panels\CardGrid::class );

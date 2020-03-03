@@ -1,16 +1,17 @@
 <?php
 
-namespace Tribe\Project\Templates\Content\Panels;
+namespace Tribe\Project\Templates\Controllers\Content\Panels;
 
 use Tribe\Project\Panels\Types\CardGrid as CardGridPanel;
 use Tribe\Project\Templates\Components\Button;
 use Tribe\Project\Templates\Components\Card;
 use Tribe\Project\Templates\Components\Image;
-use Tribe\Project\Templates\Components\Title;
 use Tribe\Project\Templates\Components\Text;
+use Tribe\Project\Templates\Components\Title;
 use Tribe\Project\Theme\Image_Sizes;
 
 class CardGrid extends Panel {
+	protected $path = 'content/panels/cardgrid.twig';
 
 	public function get_data(): array {
 		$data       = parent::get_data();
@@ -163,9 +164,5 @@ class CardGrid extends Panel {
 		$button_obj = Button::factory( $options );
 
 		return $button_obj->render();
-	}
-
-	public static function instance() {
-		return tribe_project()->container()['twig.templates.content/panels/cardgrid'];
 	}
 }

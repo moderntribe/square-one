@@ -1,13 +1,14 @@
 <?php
 
-namespace Tribe\Project\Templates\Content\Panels;
+namespace Tribe\Project\Templates\Controllers\Content\Panels;
 
 use Tribe\Project\Panels\Types\Tabs as TabsPanel;
-use Tribe\Project\Templates\Components\Tabs as TabsComponent;
 use Tribe\Project\Templates\Components\Button;
+use Tribe\Project\Templates\Components\Tabs as TabsComponent;
 use Tribe\Project\Theme\Util;
 
 class Tabs extends Panel {
+	protected $path = 'content/panels/tabs.twig';
 
 	public function get_data(): array {
 		$data       = parent::get_data();
@@ -72,9 +73,5 @@ class Tabs extends Panel {
 				'btn_options'   => $btn_options,
 			];
 		}, $rows, array_keys($rows) );
-	}
-
-	public static function instance() {
-		return tribe_project()->container()['twig.templates.content/panels/tabs'];
 	}
 }
