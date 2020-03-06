@@ -1,5 +1,6 @@
 <?php
 
+use Tribe\Project\Service_Providers\Twig_Service_Provider;
 use Tribe\Project\Templates\Components\Image;
 
 /**
@@ -10,7 +11,7 @@ use Tribe\Project\Templates\Components\Image;
  * @param $image_id int
  * @param $options array
  *
- * @return string
+ * @return string|void
  */
 function the_tribe_image( $image_id = 0, $options = [] ) {
 
@@ -25,8 +26,7 @@ function the_tribe_image( $image_id = 0, $options = [] ) {
 		$options[ Image::ECHO ] = true; // Mimic the image component default
 	}
 
-	$image_obj    = Image::factory( $options );
-	$image_markup = $image_obj->render();
+	$image_markup = tribe_project()->container()[ Twig_Service_Provider::COMPONENT_FACTORY ]->get( Image::class, $options )->render();
 
 	if ( $options[ Image::ECHO ] ) {
 		echo $image_markup;

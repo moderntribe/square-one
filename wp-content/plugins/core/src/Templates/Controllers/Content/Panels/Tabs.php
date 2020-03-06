@@ -37,9 +37,7 @@ class Tabs extends Panel {
 			]
 		];
 
-		$tabs = TabsComponent::factory( $options );
-
-		return $tabs->render();
+		return $this->factory->get( TabsComponent::class, $options )->render();
 	}
 
 	protected function get_rows(): array {

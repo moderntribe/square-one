@@ -4,6 +4,7 @@
 namespace Tribe\Project\Theme;
 
 
+use Tribe\Project\Templates\Component_Factory;
 use Tribe\Project\Templates\Components\Video;
 
 class Oembed_Filter {
@@ -13,8 +14,13 @@ class Oembed_Filter {
 	const PROVIDER_YOUTUBE = 'YouTube';
 
 	private $supported_providers = [];
+	/**
+	 * @var Component_Factory
+	 */
+	private $component;
 
-	public function __construct( array $supported_providers = [ self::PROVIDER_VIMEO, self::PROVIDER_YOUTUBE ] ) {
+	public function __construct( Component_Factory $component, array $supported_providers = [ self::PROVIDER_VIMEO, self::PROVIDER_YOUTUBE ] ) {
+		$this->component = $component;
 		$this->supported_providers = $supported_providers;
 	}
 
@@ -66,8 +72,7 @@ class Oembed_Filter {
 			Video::CAPTION_POSITION  => Video::CAPTION_POSITION_CENTER, // possible options: center, bottom, below
 		];
 
-		$video_obj     = Video::factory( $options );
-		$frontend_html = $video_obj->render();
+		$frontend_html = $this->component->get( Video::class, $options )->render();
 
 		$this->cache_frontend_html( $frontend_html, $url );
 

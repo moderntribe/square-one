@@ -4,7 +4,7 @@ namespace Tribe\Project\Templates\Components;
 
 class Button extends Component {
 
-	const TEMPLATE_NAME = 'components/button.twig';
+	protected $path = 'components/button.twig';
 
 	const TAG         = 'tag';
 	const URL         = 'url';
@@ -20,16 +20,16 @@ class Button extends Component {
 
 	protected function parse_options( array $options ): array {
 		$defaults = [
-			static::URL         => '',
-			static::TYPE        => 'button',
-			static::TARGET      => '',
-			static::ARIA_LABEL  => '',
-			static::CLASSES     => [],
-			static::ATTRS       => [],
-			static::LABEL       => false,
-			static::BTN_AS_LINK => false,
-			static::FORCE_DISPLAY => false,
-			static::INNER_ATTRIBUTES => [],
+			self::URL         => '',
+			self::TYPE        => 'button',
+			self::TARGET      => '',
+			self::ARIA_LABEL  => '',
+			self::CLASSES     => [],
+			self::ATTRS       => [],
+			self::LABEL       => false,
+			self::BTN_AS_LINK => false,
+			self::FORCE_DISPLAY => false,
+			self::INNER_ATTRIBUTES => [],
 		];
 
 		return wp_parse_args( $options, $defaults );
@@ -37,16 +37,16 @@ class Button extends Component {
 
 	public function get_data(): array {
 		$data = [
-			static::TAG              => $this->options['btn_as_link'] ? 'a' : 'button',
-			static::URL              => $this->options['btn_as_link'] ? $this->options['url'] : '',
-			static::CLASSES          => $this->merge_classes( [ '' ], $this->options[ static::CLASSES ], true ),
-			static::ATTRS            => $this->get_attrs(),
-			static::TYPE             => $this->options['btn_as_link'] ? '' : $this->options['type'],
-			static::TARGET           => $this->options['btn_as_link'] ? $this->options['target'] : '',
-			static::LABEL            => $this->options['label'],
-			static::ARIA_LABEL       => $this->options[ self::ARIA_LABEL ],
-			static::FORCE_DISPLAY    => $this->options[ self::FORCE_DISPLAY ],
-			static::INNER_ATTRIBUTES => $this->merge_attrs( [], $this->options[ static::INNER_ATTRIBUTES ], true ),
+			self::TAG              => $this->options['btn_as_link'] ? 'a' : 'button',
+			self::URL              => $this->options['btn_as_link'] ? $this->options['url'] : '',
+			self::CLASSES          => $this->merge_classes( [ '' ], $this->options[ self::CLASSES ], true ),
+			self::ATTRS            => $this->get_attrs(),
+			self::TYPE             => $this->options['btn_as_link'] ? '' : $this->options['type'],
+			self::TARGET           => $this->options['btn_as_link'] ? $this->options['target'] : '',
+			self::LABEL            => $this->options['label'],
+			self::ARIA_LABEL       => $this->options[ self::ARIA_LABEL ],
+			self::FORCE_DISPLAY    => $this->options[ self::FORCE_DISPLAY ],
+			self::INNER_ATTRIBUTES => $this->merge_attrs( [], $this->options[ self::INNER_ATTRIBUTES ], true ),
 		];
 
 		return $data;
@@ -59,6 +59,6 @@ class Button extends Component {
 			$attrs[ 'rel' ] = 'noopener';
 		}
 
-		return $this->merge_attrs( $attrs, $this->options[ static::ATTRS ], true );
+		return $this->merge_attrs( $attrs, $this->options[ self::ATTRS ], true );
 	}
 }

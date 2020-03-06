@@ -12,6 +12,7 @@ use Twig\Loader\FilesystemLoader;
 
 class Twig_Service_Provider extends Service_Provider {
 	const ENVIRONMENT = 'twig';
+	const COMPONENT_FACTORY = 'twig.component.factory';
 
 	public function register( Container $container ) {
 		$container['twig.loader'] = function () {
@@ -52,6 +53,10 @@ class Twig_Service_Provider extends Service_Provider {
 		add_filter( 'tribe/project/twig', function ( $twig ) use ( $container ) {
 			return $container['twig'];
 		}, 0, 1 );
+
+		$container[ self::COMPONENT_FACTORY ] = function( Container $container ) {
+			return new Templates\Component_Factory( $container[ self::ENVIRONMENT ] );
+		};
 
 	}
 

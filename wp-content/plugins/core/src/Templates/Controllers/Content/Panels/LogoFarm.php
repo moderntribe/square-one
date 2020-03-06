@@ -55,8 +55,7 @@ class LogoFarm extends Panel {
 					Image::LINK_TITLE  => esc_attr( $logo[ Logo::FIELD_LOGO_CTA ]['label'] ),
 				];
 
-				$logo_obj = Image::factory( $options );
-				$logos[]  = $logo_obj->render();
+				$logos[]  = $this->factory->get( Image::class, $options )->render();
 			}
 		}
 

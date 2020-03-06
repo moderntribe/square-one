@@ -4,7 +4,8 @@ namespace Tribe\Project\Templates\Components;
 
 class Title extends Component {
 
-	const TEMPLATE_NAME = 'components/title.twig';
+	protected $path = 'components/title.twig';
+
 	const TITLE         = 'title';
 	const TAG           = 'tag';
 	const CLASSES       = 'classes';
@@ -12,10 +13,10 @@ class Title extends Component {
 
 	protected function parse_options( array $options ): array {
 		$defaults = [
-			static::TITLE   => '',
-			static::TAG     => '',
-			static::CLASSES => [],
-			static::ATTRS   => [],
+			self::TITLE   => '',
+			self::TAG     => '',
+			self::CLASSES => [],
+			self::ATTRS   => [],
 		];
 
 		return wp_parse_args( $options, $defaults );
@@ -23,10 +24,10 @@ class Title extends Component {
 
 	public function get_data(): array {
 		$data = [
-			static::TITLE   => $this->options[ static::TITLE ],
-			static::TAG     => $this->options[ static::TAG ],
-			static::CLASSES => $this->merge_classes( [], $this->options[ static::CLASSES ], true ),
-			static::ATTRS   => $this->merge_attrs( [], $this->options[ static::ATTRS ], true ),
+			self::TITLE   => $this->options[ self::TITLE ],
+			self::TAG     => $this->options[ self::TAG ],
+			self::CLASSES => $this->merge_classes( [], $this->options[ self::CLASSES ], true ),
+			self::ATTRS   => $this->merge_attrs( [], $this->options[ self::ATTRS ], true ),
 		];
 
 		return $data;

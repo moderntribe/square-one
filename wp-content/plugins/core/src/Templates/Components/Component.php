@@ -2,30 +2,27 @@
 
 namespace Tribe\Project\Templates\Components;
 
+use Tribe\Project\Templates\Abstract_Template;
+use Tribe\Project\Templates\Component_Factory;
 use Tribe\Project\Theme\Util;
-use Tribe\Project\Twig\Twig_Template;
 use Twig\Environment;
 
-abstract class Component extends Twig_Template {
+abstract class Component extends Abstract_Template {
 
 	const TEMPLATE_NAME = '';
 
 	protected $options = [];
 
 	/**
-	 * Component constructor.
-	 *
-	 * @param string      $template
-	 * @param Environment|null $twig
-	 * @param array                  $options
+	 * @param Environment       $twig
+	 * @param Component_Factory $factory
+	 * @param array             $options
 	 */
-	public function __construct( $template, Environment $twig = null, $options = [] ) {
-		parent::__construct( $template, $twig );
+	public function __construct( Environment $twig, Component_Factory $factory, $options = [] ) {
+		parent::__construct( $twig, $factory );
 
 		$this->options = $this->parse_options( $options );
 	}
-
-	abstract public function get_data(): array;
 
 	abstract protected function parse_options( array $options ): array;
 
@@ -47,22 +44,6 @@ abstract class Component extends Twig_Template {
 		}
 
 		return $attrs;
-	}
-
-	/**
-	 * Get an instance of this controller bound to the correct data.
-	 *
-	 * @param array  $options
-	 * @param string $template
-	 *
-	 * @return static
-	 */
-	public static function factory( $options, $template = '' ) {
-
-		$template = empty( $template ) ? static::TEMPLATE_NAME : $template;
-		$twig     = apply_filters( 'tribe/project/twig', null );
-
-		return new static( $template, $twig, $options );
 	}
 
 }

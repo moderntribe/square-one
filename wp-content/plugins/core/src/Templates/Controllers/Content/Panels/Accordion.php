@@ -57,7 +57,7 @@ class Accordion extends Panel {
 			AccordionComponent::ROWS => $this->get_rows(),
 		];
 
-		$accordion = AccordionComponent::factory( $options );
+		$accordion = $this->factory->get( AccordionComponent::class, $options );
 
 		return $accordion->render();
 	}

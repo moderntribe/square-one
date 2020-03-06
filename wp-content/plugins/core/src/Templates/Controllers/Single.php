@@ -89,7 +89,7 @@ class Single extends Abstract_Template {
 			Breadcrumbs::WRAPPER_CLASSES => [],
 		];
 
-		$crumbs = Breadcrumbs::factory( $options );
+		$crumbs = $this->factory->get( Breadcrumbs::class, $options );
 
 		return $crumbs->render();
 	}
@@ -109,7 +109,7 @@ class Single extends Abstract_Template {
 			Pagination::WRAPPER_ATTRS     => [ 'aria-labelledby' => 'pagination__label-single' ],
 		];
 
-		$pagination = Pagination::factory( $options );
+		$pagination = $this->factory->get( Pagination::class, $options );
 
 		return $pagination->render();
 	}
@@ -127,7 +127,7 @@ class Single extends Abstract_Template {
 			Button::CLASSES     => [ 'c-pagination__link', 'anchor', 'pagination__item-anchor' ],
 		];
 
-		$link = Button::factory( $options );
+		$link = $this->factory->get( Button::class, $options );
 
 		return $link->render();
 	}

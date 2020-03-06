@@ -4,7 +4,7 @@ namespace Tribe\Project\Templates\Components;
 
 class Tabs extends Component {
 
-	const TEMPLATE_NAME = 'components/tabs.twig';
+	protected $path = 'components/tabs.twig';
 
 	const TABS                       = 'tabs';
 	const TABLIST_BUTTONS            = 'tablist_buttons';
@@ -72,7 +72,7 @@ class Tabs extends Component {
 				Button::ATTRS   => $button_attributes,
 			];
 			$options = wp_parse_args( $options, $tab[ 'btn_options' ] );
-			$btn_obj = Button::factory( $options );
+			$btn_obj = $this->factory->get( Button::class, $options );
 			$buttons[]  = $btn_obj->render();
 		}
 		return $buttons;

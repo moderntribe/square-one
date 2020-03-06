@@ -70,7 +70,7 @@ class Default_Header extends Abstract_Template {
 			Search::SUBMIT_BUTTON => $get_submit_button,
 		];
 
-		$search = Search::factory( $options );
+		$search = $this->factory->get( Search::class, $options );
 
 		return $search->render();
 	}
@@ -89,7 +89,7 @@ class Default_Header extends Abstract_Template {
 			Button::ATTRS   => $btn_attr,
 		];
 
-		$button = Button::factory( $options );
+		$button = $this->factory->get( Button::class, $options );
 
 		return $button->render();
 	}

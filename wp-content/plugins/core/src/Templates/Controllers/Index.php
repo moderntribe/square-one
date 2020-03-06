@@ -98,7 +98,7 @@ class Index extends Abstract_Template {
 			Breadcrumbs::WRAPPER_CLASSES => [],
 		];
 
-		$crumbs = Breadcrumbs::factory( $options );
+		$crumbs = $this->factory->get( Breadcrumbs::class, $options );
 
 		return $crumbs->render();
 	}
@@ -114,7 +114,7 @@ class Index extends Abstract_Template {
 			Pagination::PAGINATION_NUMBERS => $links,
 		];
 
-		return Pagination::factory( $options )->render();
+		return $this->factory->get( Pagination::class, $options )->render();
 	}
 
 	public function get_pagination_numbers(): array {
@@ -148,7 +148,7 @@ class Index extends Abstract_Template {
 				Button::BTN_AS_LINK => true,
 			];
 
-			$links[] = Button::factory( $options )->render();
+			$links[] = $this->factory->get( Button::class, $options )->render();
 		}
 
 		return $links;

@@ -4,7 +4,7 @@ namespace Tribe\Project\Templates\Components;
 
 class Slider extends Component {
 
-	const TEMPLATE_NAME = 'components/slider.twig';
+	protected $path = 'components/slider.twig';
 
 	const SHOW_CAROUSEL   = 'show_carousel';
 	const SHOW_ARROWS     = 'show_arrows';
@@ -20,17 +20,17 @@ class Slider extends Component {
 
 	protected function parse_options( array $options ): array {
 		$defaults = [
-			static::SHOW_CAROUSEL   => true,
-			static::SHOW_ARROWS     => true,
-			static::SHOW_PAGINATION => false,
-			static::SLIDES          => [],
-			static::THUMBNAILS      => [],
-			static::CLASSES         => [],
-			static::MAIN_CLASSES    => [],
-			static::WRAPPER_CLASSES => [],
-			static::SLIDE_CLASSES   => [],
-			static::MAIN_ATTRS      => [],
-			static::CAROUSEL_ATTRS  => [],
+			self::SHOW_CAROUSEL   => true,
+			self::SHOW_ARROWS     => true,
+			self::SHOW_PAGINATION => false,
+			self::SLIDES          => [],
+			self::THUMBNAILS      => [],
+			self::CLASSES         => [],
+			self::MAIN_CLASSES    => [],
+			self::WRAPPER_CLASSES => [],
+			self::SLIDE_CLASSES   => [],
+			self::MAIN_ATTRS      => [],
+			self::CAROUSEL_ATTRS  => [],
 		];
 
 		return wp_parse_args( $options, $defaults );
@@ -53,17 +53,17 @@ class Slider extends Component {
 
 	public function get_data(): array {
 		$data = [
-			static::SLIDES          => $this->options[ self::SLIDES ],
-			static::THUMBNAILS      => $this->options[ self::THUMBNAILS ],
-			static::SHOW_CAROUSEL   => $this->options[ self::SHOW_CAROUSEL ],
-			static::SHOW_ARROWS     => $this->options[ self::SHOW_ARROWS ],
-			static::SHOW_PAGINATION => $this->options[ self::SHOW_PAGINATION ],
-			static::CLASSES         => $this->merge_classes( [ 'c-slider' ], $this->options[ static::CLASSES ], true ),
-			static::MAIN_CLASSES    => $this->merge_classes( $this->main_classes(), $this->options[ static::MAIN_CLASSES ], true ),
-			static::SLIDE_CLASSES   => $this->merge_classes( [ 'c-slider__slide', 'swiper-slide' ], $this->options[ static::SLIDE_CLASSES ], true ),
-			static::WRAPPER_CLASSES => $this->merge_classes( [ 'c-slider__wrapper', 'swiper-wrapper' ], $this->options[ static::WRAPPER_CLASSES ], true ),
-			static::MAIN_ATTRS      => $this->merge_attrs( [ 'data-js' => 'c-slider' ], $this->options[ static::MAIN_ATTRS ], true ),
-			static::CAROUSEL_ATTRS  => $this->merge_attrs( [ 'data-js' => 'c-slider-carousel' ], $this->options[ static::CAROUSEL_ATTRS ], true ),
+			self::SLIDES          => $this->options[ self::SLIDES ],
+			self::THUMBNAILS      => $this->options[ self::THUMBNAILS ],
+			self::SHOW_CAROUSEL   => $this->options[ self::SHOW_CAROUSEL ],
+			self::SHOW_ARROWS     => $this->options[ self::SHOW_ARROWS ],
+			self::SHOW_PAGINATION => $this->options[ self::SHOW_PAGINATION ],
+			self::CLASSES         => $this->merge_classes( [ 'c-slider' ], $this->options[ self::CLASSES ], true ),
+			self::MAIN_CLASSES    => $this->merge_classes( $this->main_classes(), $this->options[ self::MAIN_CLASSES ], true ),
+			self::SLIDE_CLASSES   => $this->merge_classes( [ 'c-slider__slide', 'swiper-slide' ], $this->options[ self::SLIDE_CLASSES ], true ),
+			self::WRAPPER_CLASSES => $this->merge_classes( [ 'c-slider__wrapper', 'swiper-wrapper' ], $this->options[ self::WRAPPER_CLASSES ], true ),
+			self::MAIN_ATTRS      => $this->merge_attrs( [ 'data-js' => 'c-slider' ], $this->options[ self::MAIN_ATTRS ], true ),
+			self::CAROUSEL_ATTRS  => $this->merge_attrs( [ 'data-js' => 'c-slider-carousel' ], $this->options[ self::CAROUSEL_ATTRS ], true ),
 		];
 
 

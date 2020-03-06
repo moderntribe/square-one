@@ -57,8 +57,7 @@ class CardGrid extends Panel {
 					$options[ Card::BUTTON ] = $this->get_card_button( $card[ CardGridPanel::FIELD_CARD_CTA ], $card[ CardGridPanel::FIELD_CARD_TITLE ] );
 				}
 
-				$card_obj = Card::factory( $options );
-				$cards[]  = $card_obj->render();
+				$cards[]  = $this->factory->get( Card::class, $options )->render();
 
 				$i ++;
 			}
@@ -94,7 +93,7 @@ class CardGrid extends Panel {
 			Image::SRC_SIZE     => Image_Sizes::COMPONENT_CARD,
 		];
 
-		$image_obj = Image::factory( $options );
+		$image_obj = $this->factory->get( Image::class, $options );
 
 		return $image_obj->render();
 	}
@@ -118,7 +117,7 @@ class CardGrid extends Panel {
 			Title::TAG     => 'h3',
 		];
 
-		$title_obj = Title::factory( $options );
+		$title_obj = $this->factory->get( Title::class, $options );
 
 		return $title_obj->render();
 	}
@@ -142,7 +141,7 @@ class CardGrid extends Panel {
 			Text::ATTRS   => $attrs,
 		];
 
-		$text_obj = Text::factory( $options );
+		$text_obj = $this->factory->get( Text::class, $options );
 
 		return $text_obj->render();
 	}
@@ -161,7 +160,7 @@ class CardGrid extends Panel {
 			Button::ARIA_LABEL  => $aria_label,
 		];
 
-		$button_obj = Button::factory( $options );
+		$button_obj = $this->factory->get( Button::class, $options );
 
 		return $button_obj->render();
 	}

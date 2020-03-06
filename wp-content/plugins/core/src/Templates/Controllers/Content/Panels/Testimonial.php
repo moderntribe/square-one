@@ -44,9 +44,7 @@ class Testimonial extends Panel {
 			Image::WRAPPER_CLASS   => 'c-image__bg',
 		];
 
-		$image_obj = Image::factory( $options );
-
-		return $image_obj->render();
+		return $this->factory->get( Image::class, $options )->render();
 	}
 
 	protected function get_slider(): string {
@@ -65,9 +63,7 @@ class Testimonial extends Panel {
 			Slider::MAIN_ATTRS      => $main_attrs,
 		];
 
-		$slider = Slider::factory( $options );
-
-		return $slider->render();
+		return $this->factory->get( Slider::class, $options )->render();
 	}
 
 	protected function get_slides(): array {
@@ -104,8 +100,7 @@ class Testimonial extends Panel {
 					Quote::CITE_ATTRS  => $cite_attrs,
 				];
 
-				$quote_obj = Quote::factory( $options );
-				$quotes[]  = $quote_obj->render();
+				$quotes[]  = $this->factory->get( Quote::class, $options )->render();
 			}
 		}
 

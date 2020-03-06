@@ -38,9 +38,7 @@ class Gallery extends Panel {
 			SliderComponent::CAROUSEL_ATTRS  => [ 'data-swiper-options' => '{"speed":600}' ],
 		];
 
-		$slider = SliderComponent::factory( $options );
-
-		return $slider->render();
+		return $this->factory->get( SliderComponent::class, $options )->render();
 	}
 
 	protected function show_carousel(): bool {
@@ -79,9 +77,7 @@ class Gallery extends Panel {
 				ImageComponent::SRC_SIZE     => $size,
 			];
 
-			$image = ImageComponent::factory( $options );
-
-			return $image->render();
+			return $this->factory->get( ImageComponent::class, $options )->render();
 		}, $slide_ids );
 	}
 

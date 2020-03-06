@@ -46,9 +46,7 @@ class ContentSlider extends Panel {
 			SliderComponent::MAIN_ATTRS      => $main_attrs,
 		];
 
-		$slider = SliderComponent::factory( $options );
-
-		return $slider->render();
+		return $this->factory->get( SliderComponent::class, $options )->render();
 	}
 
 	protected function get_slides(): array {
@@ -67,8 +65,7 @@ class ContentSlider extends Panel {
 					Image::WRAPPER_CLASS => 'c-image__bg',
 				];
 
-				$image_obj    = Image::factory( $options );
-				$slide_markup .= $image_obj->render();
+				$slide_markup .= $this->factory->get( Image::class, $options )->render();
 
 				$options = [
 					Content_Block::TITLE           => $this->get_content_block_title( $slide, $index ),
@@ -78,9 +75,7 @@ class ContentSlider extends Panel {
 					Content_Block::BUTTON          => $this->get_content_block_button( $slide ),
 				];
 
-				$content_block_obj = Content_Block::factory( $options );
-
-				$slide_markup .= $content_block_obj->render();
+				$slide_markup .= $this->factory->get( Content_Block::class, $options )->render();
 
 				$slides[] = $slide_markup;
 				$index++;
@@ -116,9 +111,7 @@ class ContentSlider extends Panel {
 			Title::TAG     => 'h2',
 		];
 
-		$title_object = Title::factory( $options );
-
-		return $title_object->render();
+		return $this->factory->get( Title::class, $options )->render();
 	}
 
 	protected function get_content_block_text( $slide, $index ) {
@@ -143,9 +136,7 @@ class ContentSlider extends Panel {
 			Text::TEXT    => $slide[ ContentSliderPanel::FIELD_SLIDE_CONTENT ],
 		];
 
-		$text_object = Text::factory( $options );
-
-		return $text_object->render();
+		return $this->factory->get( Text::class, $options )->render();
 	}
 
 	protected function get_content_block_button( $slide ) {
@@ -162,8 +153,6 @@ class ContentSlider extends Panel {
 			Button::BTN_AS_LINK => true,
 		];
 
-		$button_object = Button::factory( $options );
-
-		return $button_object->render();
+		return $this->factory->get( Button::class, $options )->render();
 	}
 }

@@ -47,9 +47,7 @@ class Interstitial extends Panel {
 			Image::WRAPPER_CLASS   => 'c-image__bg',
 		];
 
-		$image_obj = Image::factory( $options );
-
-		return $image_obj->render();
+		return $this->factory->get( Image::class, $options )->render();
 	}
 
 	protected function get_content_block() {
@@ -81,9 +79,7 @@ class Interstitial extends Panel {
 			Content_Block::TEXT            => $this->get_interstitial_text( $description_attrs ),
 		];
 
-		$content_block_obj = Content_Block::factory( $options );
-
-		return $content_block_obj->render();
+		return $this->factory->get( Content_Block::class, $options )->render();
 	}
 
 	protected function get_interstitial_title( $title_attrs ) {
@@ -94,9 +90,7 @@ class Interstitial extends Panel {
 			Title::TITLE   => $this->panel_vars[ Interstice::FIELD_TITLE ],
 		];
 
-		$title_object = Title::factory( $options );
-
-		return $title_object->render();
+		return $this->factory->get( Title::class, $options )->render();
 	}
 
 	protected function get_interstitial_text( $description_attrs ) {
@@ -106,9 +100,7 @@ class Interstitial extends Panel {
 			Text::TEXT    => $this->panel_vars[ Interstice::FIELD_DESCRIPTION ],
 		];
 
-		$text_object = Text::factory( $options );
-
-		return $text_object->render();
+		return $this->factory->get( Text::class, $options )->render();
 	}
 
 	protected function get_interstitial_button() {
@@ -127,9 +119,7 @@ class Interstitial extends Panel {
 			return false;
 		}
 
-		$button_object = Button::factory( $options );
-
-		return $button_object->render();
+		return $this->factory->get( Button::class, $options )->render();
 	}
 
 	protected function get_layout() {

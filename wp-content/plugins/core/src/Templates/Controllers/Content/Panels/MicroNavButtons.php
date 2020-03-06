@@ -55,8 +55,7 @@ class MicroNavButtons extends Panel {
 					Button::CLASSES => [ 'c-btn c-btn--full c-btn--lg' ],
 				];
 
-				$btn_obj = Button::factory( $options );
-				$btns[]  = $btn_obj->render();
+				$btns[]  = $this->factory->get( Button::class, $options )->render();
 			}
 		}
 

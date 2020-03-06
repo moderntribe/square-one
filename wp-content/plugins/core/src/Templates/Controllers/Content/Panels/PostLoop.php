@@ -59,8 +59,7 @@ class PostLoop extends Panel {
 					Card::BUTTON     => $this->get_post_button( $post[ 'link' ] ),
 				];
 
-				$post_obj = Card::factory( $options );
-				$posts[]  = $post_obj->render();
+				$posts[]  = $this->factory->get( Card::class, $options )->render();
 			}
 		}
 
@@ -86,9 +85,7 @@ class PostLoop extends Panel {
 			Title::TAG     => 'h5',
 		];
 
-		$title_obj = Title::factory( $options );
-
-		return $title_obj->render();
+		return $this->factory->get( Title::class, $options )->render();
 	}
 
 	protected function get_post_image( $image_id ) {
@@ -104,9 +101,7 @@ class PostLoop extends Panel {
 			Image::SRC_SIZE     => Image_Sizes::COMPONENT_CARD,
 		];
 
-		$image_obj = Image::factory( $options );
-
-		return $image_obj->render();
+		return $this->factory->get( Image::class, $options )->render();
 	}
 
 	protected function get_post_button( $post_link ) {
@@ -118,8 +113,6 @@ class PostLoop extends Panel {
 			Button::CLASSES     => [ 'c-cta' ],
 		];
 
-		$button_obj = Button::factory( $options );
-
-		return $button_obj->render();
+		return $this->factory->get( Button::class, $options )->render();
 	}
 }

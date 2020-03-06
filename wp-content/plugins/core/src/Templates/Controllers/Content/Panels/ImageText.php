@@ -81,9 +81,7 @@ class ImageText extends Panel {
 			Content_Block::TEXT            => $this->get_image_text_text( $description_attrs ),
 		];
 
-		$content_block_obj = Content_Block::factory( $options );
-
-		return $content_block_obj->render();
+		return $this->factory->get( Content_Block::class, $options )->render();
 	}
 
 	protected function get_image_text_title( $title_attrs ) {
@@ -94,9 +92,7 @@ class ImageText extends Panel {
 			Title::TITLE   => esc_html( $this->panel_vars[ ImageTextPanel::FIELD_TITLE ] ),
 		];
 
-		$title_object = Title::factory( $options );
-
-		return $title_object->render();
+		return $this->factory->get( Title::class, $options )->render();
 	}
 
 	protected function get_image_text_text( $description_attrs ) {
@@ -106,9 +102,7 @@ class ImageText extends Panel {
 			Text::TEXT    => $this->panel_vars[ ImageTextPanel::FIELD_DESCRIPTION ],
 		];
 
-		$text_object = Text::factory( $options );
-
-		return $text_object->render();
+		return $this->factory->get( Text::class, $options )->render();
 	}
 
 	protected function get_image_text_button() {
@@ -123,9 +117,7 @@ class ImageText extends Panel {
 			Button::BTN_AS_LINK => true,
 		];
 
-		$button_object = Button::factory( $options );
-
-		return $button_object->render();
+		return $this->factory->get( Button::class, $options )->render();
 	}
 
 	protected function get_panel_image(): string {
@@ -143,9 +135,7 @@ class ImageText extends Panel {
 			Image::WRAPPER_CLASS   => 'c-image__bg',
 		];
 
-		$image_obj = Image::factory( $options );
-
-		return $image_obj->render();
+		return $this->factory->get( Image::class, $options )->render();
 	}
 
 	protected function get_wrapper_classes() {

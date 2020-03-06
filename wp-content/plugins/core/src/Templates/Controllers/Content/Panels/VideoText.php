@@ -61,9 +61,7 @@ class VideoText extends Panel {
 			Content_Block::CLASSES         => '',
 		];
 
-		$content_block_obj = Content_Block::factory( $options );
-
-		return $content_block_obj->render();
+		return $this->factory->get( Content_Block::class, $options )->render();
 	}
 
 	protected function get_video_text_title( $title_attributes ) {
@@ -74,9 +72,7 @@ class VideoText extends Panel {
 			Title::ATTRS   => $title_attributes,
 		];
 
-		$title_obj = Title::factory( $options );
-
-		return $title_obj->render();
+		return $this->factory->get( Title::class, $options )->render();
 	}
 
 	protected function get_video_text_text( $description_attrs ) {
@@ -86,9 +82,7 @@ class VideoText extends Panel {
 			Text::TEXT    => $this->panel_vars[ VideoTextPanel::FIELD_DESCRIPTION ],
 		];
 
-		$text_object = Text::factory( $options );
-
-		return $text_object->render();
+		return $this->factory->get( Text::class, $options )->render();
 	}
 
 	protected function get_video_text_button() {
@@ -103,9 +97,7 @@ class VideoText extends Panel {
 			Button::BTN_AS_LINK => true,
 		];
 
-		$button_object = Button::factory( $options );
-
-		return $button_object->render();
+		return $this->factory->get( Button::class, $options )->render();
 	}
 
 	protected function get_panel_video() {
