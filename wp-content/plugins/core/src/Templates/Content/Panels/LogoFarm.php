@@ -49,7 +49,7 @@ class LogoFarm extends Panel {
 
 				$options = [
 					Image::IMG_ID      => $logo[ Logo::FIELD_LOGO_IMAGE ],
-					Image::LINK        => esc_url( $logo[ Logo::FIELD_LOGO_CTA ]['url'] ),
+					Image::LINK_URL    => esc_url( $logo[ Logo::FIELD_LOGO_CTA ]['url'] ),
 					Image::LINK_TARGET => esc_attr( $logo[ Logo::FIELD_LOGO_CTA ]['target'] ),
 					Image::LINK_TITLE  => esc_attr( $logo[ Logo::FIELD_LOGO_CTA ]['label'] ),
 				];

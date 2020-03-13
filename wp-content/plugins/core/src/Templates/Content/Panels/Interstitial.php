@@ -39,11 +39,11 @@ class Interstitial extends Panel {
 
 		$options = [
 			Image::IMG_ID          => $this->panel_vars[ Interstice::FIELD_IMAGE ],
-			Image::COMPONENT_CLASS => 'c-image',
+			Image::IMG_CLASSES     => [ 'c-image' ],
 			Image::AS_BG           => true,
 			Image::USE_LAZYLOAD    => false,
 			Image::ECHO            => false,
-			Image::WRAPPER_CLASS   => 'c-image__bg',
+			Image::WRAPPER_CLASSES => [ 'c-image__bg' ],
 		];
 
 		$image_obj = Image::factory( $options );
