@@ -63,7 +63,8 @@ class ContentSlider extends Panel {
 					Image::IMG_ID          => $slide[ ContentSliderPanel::FIELD_SLIDE_IMAGE ],
 					Image::AS_BG           => true,
 					Image::USE_LAZYLOAD    => false,
-					Image::WRAPPER_CLASSES => [ 'c-image__bg' ],
+					Image::WRAPPER_CLASSES => [ 'c-image', 'c-image--bg' ],
+					Image::IMG_CLASSES     => [ 'c-image__bg' ],
 				];
 
 				$image_obj    = Image::factory( $options );
