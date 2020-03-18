@@ -68,6 +68,5 @@ class CardGrid extends Panel_Type_Config {
 		$panel->add_field( $card );
 
 		return $panel;
-
 	}
 }

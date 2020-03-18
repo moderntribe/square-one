@@ -67,6 +67,5 @@ class ContentSlider extends Panel_Type_Config {
 		$panel->add_field( $slides );
 
 		return $panel;
-
 	}
 }

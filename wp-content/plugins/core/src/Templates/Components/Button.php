@@ -55,7 +55,7 @@ class Button extends Component {
 	protected function get_attrs(): string {
 		$attrs = [];
 
-		if( $this->options['btn_as_link'] && $this->options['target'] === '_blank' ) {
+		if ( $this->options['btn_as_link'] && $this->options['target'] === '_blank' ) {
 			$attrs[ 'rel' ] = 'noopener';
 		}
 

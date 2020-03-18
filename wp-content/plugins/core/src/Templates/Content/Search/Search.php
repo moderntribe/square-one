@@ -40,5 +40,4 @@ class Search extends Twig_Template {
 
 		return Image::factory( $options )->render();
 	}
-
 }

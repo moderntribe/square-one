@@ -28,7 +28,6 @@ class Wysiwyg extends Panel {
 
 		if ( ! empty( $this->panel_vars[ Wysi::FIELD_COLUMNS ] ) ) {
 			foreach ( $this->panel_vars[ Wysi::FIELD_COLUMNS ] as $col ) {
-
 				$columns[] = [
 					'content' => $col[ Wysi::FIELD_COLUMN_CONTENT ],
 				];

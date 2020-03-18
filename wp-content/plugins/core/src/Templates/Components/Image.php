@@ -243,7 +243,6 @@ class Image extends Component {
 		}
 
 		if ( $this->options[ static::USE_LAZYLOAD ] ) {
-
 			// the expand attribute that controls threshold
 			$attrs[ 'data-expand' ] = esc_attr( $this->options[ static::EXPAND ] );
 
@@ -283,9 +282,7 @@ class Image extends Component {
 			} else {
 				$attrs[ 'src' ] = esc_url( $shim_src );
 			}
-
 		} else {
-
 			// no lazyloading, standard stuffs
 			if ( $this->options[ static::AS_BG ] && ! empty( $src ) ) {
 				$attrs[ 'style' ] = sprintf( 'background-image:url(\'%s\');', esc_url( $src ) );
@@ -317,7 +314,7 @@ class Image extends Component {
 		$shim_dir = trailingslashit( get_stylesheet_directory_uri() ) . 'img/theme/shims/';
 		$src      = $this->options[ static::SHIM ];
 
-		if ( empty ( $this->options[ static::SHIM ] ) ) {
+		if ( empty( $this->options[ static::SHIM ] ) ) {
 			if ( $this->options[ static::AUTO_SHIM ] ) {
 				$src = $shim_dir . $this->options[ static::SRC_SIZE ] . '.png';
 			} else {

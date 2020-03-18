@@ -34,5 +34,4 @@ function the_page_title( $wrapper = true ) {
 	if ( ! empty( $title ) ) {
 		echo $title;
 	}
-
 }

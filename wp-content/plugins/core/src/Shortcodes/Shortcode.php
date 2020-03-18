@@ -15,5 +15,4 @@ interface Shortcode {
 	 * @return string
 	 */
 	public function render( array $attr, int $instance ): string;
-
 }

@@ -69,5 +69,4 @@ class Social_Settings extends ACF\ACF_Meta_Group {
 
 		return $field;
 	}
-
 }

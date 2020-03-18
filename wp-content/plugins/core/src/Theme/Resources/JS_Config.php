@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Theme\Resources;
 
-
 class JS_Config {
 	
 	private $data;

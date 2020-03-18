@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Service_Providers;
 
-
 use Pimple\Container;
 use Tribe\Project\Container\Service_Provider;
 use Tribe\Project\P2P\Admin_Search_Filtering;
@@ -142,8 +141,6 @@ class P2P_Provider extends Service_Provider {
 				return $container[ 'p2p.admin_search_filtering.' . $relationship ]->filter_connectable_query_args( $query_vars, $connection, $post );
 			}, 10, 3 );
 		}
-
-
 	}
 
 	private function post_type_is_user( $side ) {

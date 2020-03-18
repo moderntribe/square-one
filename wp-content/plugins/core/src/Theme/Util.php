@@ -108,10 +108,9 @@ abstract class Util {
 		$pages = get_pages( $args );
 
 		if ( empty( $pages ) ) {
-		    return 0;
+			return 0;
 		}
 
 		return $pages[0]->ID;
 	}
-
 }

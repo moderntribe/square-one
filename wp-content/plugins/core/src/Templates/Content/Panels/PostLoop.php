@@ -48,7 +48,6 @@ class PostLoop extends Panel {
 
 		if ( ! empty( $this->panel_vars[ PostLoopPanel::FIELD_POSTS ] ) ) {
 			for ( $i = 0; $i < count( $this->panel_vars[ PostLoopPanel::FIELD_POSTS ] ); $i++ ) {
-
 				$post = $this->panel_vars[ PostLoopPanel::FIELD_POSTS ][ $i ];
 
 				$options = [

@@ -74,7 +74,6 @@ class Testimonial extends Panel {
 
 		if ( ! empty( $this->panel_vars[ TestimonialPanel::FIELD_QUOTES ] ) ) {
 			for ( $i = 0; $i < count( $this->panel_vars[ TestimonialPanel::FIELD_QUOTES ] ); $i ++ ) {
-
 				$quote       = $this->panel_vars[ TestimonialPanel::FIELD_QUOTES ][ $i ];
 				$quote_attrs = [];
 				$cite_attrs  = [];

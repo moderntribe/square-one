@@ -55,6 +55,5 @@ class LogoFarm extends Panel_Type_Config {
 		$panel->add_field( $logo );
 
 		return $panel;
-
 	}
 }

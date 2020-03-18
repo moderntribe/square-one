@@ -19,5 +19,4 @@ class Panel_Util {
 
 		return sprintf( ' class="%s"', implode( ' ', array_unique( $classes ) ) );
 	}
-
 }

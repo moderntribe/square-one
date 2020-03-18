@@ -38,7 +38,6 @@ class VideoText extends Panel {
 		$description_attrs = [];
 
 		if ( is_panel_preview() ) {
-
 			$title_attrs = [
 				'data-depth'    => 0,
 				'data-name'     => VideoTextPanel::FIELD_TITLE,

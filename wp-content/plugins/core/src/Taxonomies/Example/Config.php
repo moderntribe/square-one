@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Taxonomies\Example;
 
-
 use Tribe\Libs\Taxonomy\Taxonomy_Config;
 
 class Config extends Taxonomy_Config {

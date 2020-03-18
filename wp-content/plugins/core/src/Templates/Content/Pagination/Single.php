@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Templates\Content\Pagination;
 
-
 use Tribe\Project\Twig\Twig_Template;
 
 class Single extends Twig_Template {

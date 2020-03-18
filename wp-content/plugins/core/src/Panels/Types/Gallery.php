@@ -62,6 +62,5 @@ class Gallery extends Panel_Type_Config {
 		] ) );
 
 		return $panel;
-
 	}
 }

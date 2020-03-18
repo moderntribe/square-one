@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Theme;
 
-
 class WP_Responsive_Image_Disabler {
 	/**
 	 * @return void

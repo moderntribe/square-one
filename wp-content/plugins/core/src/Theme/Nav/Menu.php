@@ -16,10 +16,10 @@ class Menu {
 	}
 
 	private function build_cache_key() {
-		$cache_key = array(
+		$cache_key = [
 			'args' => $this->args,
 			'url ' => isset( $_SERVER['REQUEST_URI'] ) ? $_SERVER['REQUEST_URI'] : '',
-		);
+		];
 		if ( isset( $cache_key['args']['walker'] ) && is_object( $cache_key['args']['walker'] ) ) {
 			$cache_key['args']['walker'] = get_class( $cache_key['args']['walker'] );
 		}
@@ -45,7 +45,7 @@ class Menu {
 	public static function menu( $args ) {
 		$menu = new self( $args );
 		$html = $menu->get_html();
-		$echo = isset( $args[ 'echo' ] ) ? $args[ 'echo' ] : TRUE;
+		$echo = isset( $args[ 'echo' ] ) ? $args[ 'echo' ] : true;
 		if ( !$echo ) {
 			return $html;
 		}

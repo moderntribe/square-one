@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Theme\Resources;
 
-
 class Styles {
 	/**
 	 * Enqueue styles
@@ -23,10 +22,9 @@ class Styles {
 		}
 
 		// CSS: base
-		wp_enqueue_style( 'core-theme-base', $css_dir . $css_global, array(), $version, 'all' );
+		wp_enqueue_style( 'core-theme-base', $css_dir . $css_global, [], $version, 'all' );
 
 		// CSS: print
-		wp_enqueue_style( 'core-theme-print', $css_dir . $css_print, array(), $version, 'print' );
-
+		wp_enqueue_style( 'core-theme-print', $css_dir . $css_print, [], $version, 'print' );
 	}
 }

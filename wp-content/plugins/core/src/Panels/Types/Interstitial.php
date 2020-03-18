@@ -69,6 +69,5 @@ class Interstitial extends Panel_Type_Config {
 		] ) );
 
 		return $panel;
-
 	}
 }

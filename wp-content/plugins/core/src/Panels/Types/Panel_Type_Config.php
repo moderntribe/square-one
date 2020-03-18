@@ -7,9 +7,8 @@ use ModularContent\PanelViewFinder;
 use ModularContent\TypeRegistry;
 use ModularContent\Fields;
 
-
 abstract class Panel_Type_Config {
-	protected $ViewFinder = NULL;
+	protected $ViewFinder = null;
 	/**
 	 * @var array $post_types
 	 *

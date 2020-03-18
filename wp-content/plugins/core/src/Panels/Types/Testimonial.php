@@ -67,6 +67,5 @@ class Testimonial extends Panel_Type_Config {
 		$panel->add_field( $quote );
 
 		return $panel;
-
 	}
 }

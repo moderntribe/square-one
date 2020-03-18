@@ -2,7 +2,6 @@
 
 namespace Tribe\Project\Admin\Resources;
 
-
 class Styles {
 	/**
 	 * Enqueue admin styles related to the react app

@@ -15,9 +15,13 @@ class Wysiwyg extends Panel_Type_Config {
 
 	protected function panel() {
 
-		$helper_text = '<p>' . __( 'Sometimes you need to lay out content your own way. This panel allows you to use the WordPress WYSIWYG editor to lay out text and images in a single column, two or even three columns.',
-				'tribe' ) . '</p><p><strong>' . __( 'GOOD FOR:',
-				'tribe' ) . '</strong> ' . __( 'Displaying text and images, embedding YouTube videos, or social media feeds.', 'tribe' ) . '</p>';
+		$helper_text = '<p>' . __(
+			'Sometimes you need to lay out content your own way. This panel allows you to use the WordPress WYSIWYG editor to lay out text and images in a single column, two or even three columns.',
+			'tribe' 
+		) . '</p><p><strong>' . __(
+			'GOOD FOR:',
+			'tribe' 
+		) . '</strong> ' . __( 'Displaying text and images, embedding YouTube videos, or social media feeds.', 'tribe' ) . '</p>';
 		$panel       = $this->handler->factory( self::NAME, $helper_text );
 		$panel->set_template_dir( $this->ViewFinder );
 		$panel->set_label( __( 'WYSIWYG Editor', 'tribe' ) );

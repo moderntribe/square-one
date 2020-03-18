@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Panels;
 
-
 use ModularContent\Fields;
 use ModularContent\PanelType;
 use Tribe\Project\Panels\Types\Panel_Type_Config;
@@ -225,7 +224,6 @@ class Initializer {
 		$date .= isset( $input[ 'day' ] ) ? sprintf( '%02d', $input[ 'day' ] ) : date( 'd' );
 		$date .= " 23:59:59";
 		return $date;
-
 	}
 
 	/**

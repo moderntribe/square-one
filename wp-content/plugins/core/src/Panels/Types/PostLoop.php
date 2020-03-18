@@ -38,6 +38,5 @@ class PostLoop extends Panel_Type_Config {
 		$panel->add_field( $posts );
 
 		return $panel;
-
 	}
 }

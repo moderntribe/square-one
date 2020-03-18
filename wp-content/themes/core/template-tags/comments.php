@@ -14,8 +14,8 @@ if ( ! function_exists( 'core_comment' ) ) :
 
 		$GLOBALS['comment'] = $comment;
 		switch ( $comment->comment_type ) :
-
-			case 'pingback': ?>
+			case 'pingback': 
+				?>
 
 				<li id="comment-<?php comment_ID(); ?>" <?php comment_class( 'post-interaction' ); ?>>
 					<p>
@@ -24,9 +24,11 @@ if ( ! function_exists( 'core_comment' ) ) :
 						<?php edit_comment_link( __( '(Edit)', 'tribe' ), '<span class="comment__action-edit">', '</span>' ); ?>
 					</p>
 
-				<?php break;
+				<?php 
+				break;
 
-			case 'trackback': ?>
+			case 'trackback': 
+				?>
 
 				<li id="comment-<?php comment_ID(); ?>" <?php comment_class( 'post-interaction' ); ?>>
 				<p>
@@ -35,9 +37,11 @@ if ( ! function_exists( 'core_comment' ) ) :
 					<?php edit_comment_link( __( '(Edit)', 'tribe' ), '<span class="comment__action-edit">', '</span>' ); ?>
 				</p>
 
-				<?php break;
+				<?php 
+				break;
 
-			default: ?>
+			default: 
+				?>
 
 				<li id="comment-<?php comment_ID(); ?>" <?php comment_class( 'post-interaction' ); ?>>
 
@@ -71,18 +75,18 @@ if ( ! function_exists( 'core_comment' ) ) :
 
 					<?php // Reply
 					comment_reply_link(
-						array_merge( $args, array(
+						array_merge( $args, [
 							'reply_text' => __( 'Reply', 'tribe' ),
 							'before'	 => '<p class="comment__action-reply">',
 							'after' 	 => '</p>',
 							'depth' 	 => $depth,
 							'max_depth'  => $args['max_depth']
-						) ) ); ?>
+						] ) 
+					); ?>
 
-			<?php break;
-
+				<?php 
+				break;
 		endswitch;
-
 	}
 
 endif;

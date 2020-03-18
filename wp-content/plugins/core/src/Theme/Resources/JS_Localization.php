@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Theme\Resources;
 
-
 class JS_Localization {
 
 	/**
@@ -14,15 +13,15 @@ class JS_Localization {
 	 * @return array
 	 */
 	public function get_data() {
-		$js_i18n_array = array(
-			'help_text' => array(
+		$js_i18n_array = [
+			'help_text' => [
 				'msg_limit'   => __( 'There is a limit to the messages you can post.', 'tribe' )
-			),
-			'tooltips' => array(
+			],
+			'tooltips' => [
 				'add_to_save'   => __( 'Add Photo to Saved Items', 'tribe' ),
 				'in_this_photo' => __( 'Products in this photo', 'tribe' )
-			)
-		);
+			]
+		];
 
 		return $js_i18n_array;
 	}

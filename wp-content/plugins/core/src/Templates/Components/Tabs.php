@@ -49,7 +49,7 @@ class Tabs extends Component {
 	protected function get_tablist_buttons(): array {
 		$tabs = $this->options[self::TABS];
 		$buttons = [];
-		foreach ( $tabs as $key=>$tab ) {
+		foreach ( $tabs as $key => $tab ) {
 			$button_attributes_default = [
 				'role'           => 'tab',
 				'data-js'        => 'c-tab__button',

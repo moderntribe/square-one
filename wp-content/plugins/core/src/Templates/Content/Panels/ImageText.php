@@ -57,7 +57,6 @@ class ImageText extends Panel {
 		$description_attrs = [];
 
 		if ( is_panel_preview() ) {
-
 			$title_attrs = [
 				'data-depth'    => 0,
 				'data-name'     => ImageTextPanel::FIELD_TITLE,

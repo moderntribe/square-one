@@ -57,7 +57,6 @@ class Interstitial extends Panel {
 		$description_attrs = [];
 
 		if ( is_panel_preview() ) {
-
 			$title_attrs = [
 				'data-depth'    => $this->panel->get_depth(),
 				'data-name'     => esc_attr( Interstice::FIELD_TITLE ),

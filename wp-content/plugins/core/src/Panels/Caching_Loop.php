@@ -37,7 +37,6 @@ class Caching_Loop extends Loop {
 		$current_post = get_queried_object();
 
 		if ( $current_post && isset( $current_post->post_type ) && post_type_supports( $current_post->post_type, 'modular-content' ) ) {
-
 			if ( ! empty( $_GET['preview_id'] ) ) {
 				$autosave = wp_get_post_autosave( get_the_ID() );
 				if ( $autosave ) {
@@ -52,5 +51,4 @@ class Caching_Loop extends Loop {
 		$loop = new self( $panels );
 		\ModularContent\Plugin::instance()->set_loop( $loop );
 	}
-
 }

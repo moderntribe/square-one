@@ -62,5 +62,4 @@ class Post extends Twig_Template {
 			'url'  => get_author_posts_url( get_the_author_meta( 'ID' ) ),
 		];
 	}
-
 }

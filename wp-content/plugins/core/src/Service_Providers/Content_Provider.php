@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Service_Providers;
 
-
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Tribe\Project\Content\Contact_Page;

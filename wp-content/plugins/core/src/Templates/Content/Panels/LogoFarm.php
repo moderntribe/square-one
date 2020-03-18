@@ -44,7 +44,6 @@ class LogoFarm extends Panel {
 
 		if ( ! empty( $this->panel_vars[ Logo::FIELD_LOGOS ] ) ) {
 			for ( $i = 0; $i < count( $this->panel_vars[ Logo::FIELD_LOGOS ] ); $i ++ ) {
-
 				$logo = $this->panel_vars[ Logo::FIELD_LOGOS ][ $i ];
 
 				$options = [

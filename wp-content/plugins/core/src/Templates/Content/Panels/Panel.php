@@ -30,7 +30,7 @@ class Panel extends Twig_Template {
 	}
 
 	protected function get_children( \ModularContent\Panel $panel ) {
-		$children = array_map( function( \ModularContent\Panel $child ) {
+		$children = array_map( function ( \ModularContent\Panel $child ) {
 			return $child->render();
 		}, $panel->get_children() );
 
@@ -82,5 +82,4 @@ class Panel extends Twig_Template {
 	public static function instance() {
 		return tribe_project()->container()[ 'twig.templates.content/panels/panel' ];
 	}
-
 }

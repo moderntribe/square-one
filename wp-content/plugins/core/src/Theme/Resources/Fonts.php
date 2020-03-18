@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Theme\Resources;
 
-
 class Fonts {
 
 	private $fonts = [ ];
@@ -17,7 +16,7 @@ class Fonts {
 	 * @filter mce_external_plugins
 	 */
 	public function add_typekit_to_editor( $plugins ) {
-		if( ! empty( $this->fonts[ 'typekit' ] ) ) {
+		if ( ! empty( $this->fonts[ 'typekit' ] ) ) {
 			$plugins['typekit'] = tribe_assets_url( 'admin/editor/typekit.tinymce.js' );
 		}
 
@@ -28,7 +27,7 @@ class Fonts {
 	 * @filter admin_head
 	 */
 	public function localize_typekit_tinymce() {
-		if( empty( $this->fonts[ 'typekit' ] ) ) {
+		if ( empty( $this->fonts[ 'typekit' ] ) ) {
 			return;
 		}
 
@@ -42,7 +41,7 @@ class Fonts {
 	 */
 	public function load_fonts() {
 
-		if( empty( $this->fonts[ 'typekit' ] ) && empty( $this->fonts[ 'google' ] ) && empty( $this->fonts[ 'custom' ] ) ) {
+		if ( empty( $this->fonts[ 'typekit' ] ) && empty( $this->fonts[ 'google' ] ) && empty( $this->fonts[ 'custom' ] ) ) {
 			return;
 		}
 		
@@ -108,7 +107,6 @@ class Fonts {
 		</script>
 
 		<?php
-
 	}
 
 	private function get_webfont_src() {

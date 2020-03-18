@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Service_Providers;
 
-
 use Pimple\Container;
 use Tribe\Project\Container\Service_Provider;
 use Tribe\Libs\Assets\Asset_Loader;
@@ -17,6 +16,5 @@ class Asset_Provider extends Service_Provider {
 		};
 
 		require_once( dirname( $container[ 'plugin_file' ] ) . '/functions/assets.php' );
-
 	}
 }

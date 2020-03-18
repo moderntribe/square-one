@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Theme\Resources;
 
-
 class Editor_Styles {
 	/**
 	 * Visual Editor Styles
@@ -20,7 +19,6 @@ class Editor_Styles {
 		}
 
 		add_editor_style( $css_dir . $editor_css );
-
 	}
 	/**
 	 * Visual Editor Body Class
@@ -31,6 +29,5 @@ class Editor_Styles {
 		$settings['body_class'] = ( $settings['body_class'] ?? '' ) . ' t-content';
 
 		return $settings;
-
 	}
 }

@@ -2,7 +2,6 @@
 
 namespace Tribe\Project\P2P;
 
-
 use Tribe\Libs\P2P\Relationship;
 
 class Admin_Search_Filtering {
@@ -154,5 +153,4 @@ class Admin_Search_Filtering {
 
 		return true;
 	}
-
 }

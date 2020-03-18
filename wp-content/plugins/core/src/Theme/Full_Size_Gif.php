@@ -28,5 +28,4 @@ class Full_Size_Gif {
 	public function is_gif( $src ) {
 		return ( pathinfo( $src, PATHINFO_EXTENSION ) === 'gif' );
 	}
-
 }

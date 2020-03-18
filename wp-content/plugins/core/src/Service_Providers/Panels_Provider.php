@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Service_Providers;
 
-
 use Pimple\Container;
 use Tribe\Project\Container\Service_Provider;
 use Tribe\Project\Panels;
@@ -28,7 +27,7 @@ class Panels_Provider extends Service_Provider {
 	];
 
 	public function register( Container $container ) {
-		$container[ 'panels.plugin' ] = function( Container $container ) {
+		$container[ 'panels.plugin' ] = function ( Container $container ) {
 			return \ModularContent\Plugin::instance();
 		};
 
@@ -46,11 +45,11 @@ class Panels_Provider extends Service_Provider {
 			}
 		}, 9, 0 );
 
-		add_action( 'panels_init', function() use ( $container ) {
+		add_action( 'panels_init', function () use ( $container ) {
 			$container[ 'panels.init' ]->initialize_panels( $container[ 'panels.plugin' ] );
 		}, 10, 0 );
 
-		add_filter( 'panels_js_config', function( $data ) use ( $container ) {
+		add_filter( 'panels_js_config', function ( $data ) use ( $container ) {
 			return $container[ 'panels.init' ]->modify_js_config( $data );
 		}, 10, 1 );
 

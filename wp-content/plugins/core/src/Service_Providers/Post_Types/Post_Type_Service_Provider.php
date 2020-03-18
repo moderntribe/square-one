@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Service_Providers\Post_Types;
 
-
 use Pimple\Container;
 use Tribe\Project\Container\Service_Provider;
 use Tribe\Libs\Post_Type\Post_Object;
@@ -37,7 +36,7 @@ abstract class Post_Type_Service_Provider extends Service_Provider {
 	}
 
 	public function register( Container $container ) {
-		$factory = function ( $container )  {
+		$factory = function ( $container ) {
 			return new $this->post_type_class;
 		};
 		$container[ 'post_type.' . $this->post_type ] = $factory;
@@ -51,7 +50,7 @@ abstract class Post_Type_Service_Provider extends Service_Provider {
 				return new $this->config_class( $this->post_type );
 			};
 
-			add_action( 'init', function() use ( $container ) {
+			add_action( 'init', function () use ( $container ) {
 				$container[ 'post_type.' . $this->post_type . '.config' ]->register();
 			}, 0, 0 );
 		}

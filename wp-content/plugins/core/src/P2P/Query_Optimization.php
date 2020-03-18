@@ -14,15 +14,15 @@ class Query_Optimization {
 	 * @action p2p_init 10
 	 */
 	public function p2p_init() {
-		remove_action( 'parse_query', array( 'P2P_Query_Post', 'parse_query' ), 20 );
-		add_action( 'parse_query', array( $this, 'parse_query' ), 20 );
+		remove_action( 'parse_query', [ 'P2P_Query_Post', 'parse_query' ], 20 );
+		add_action( 'parse_query', [ $this, 'parse_query' ], 20 );
 
 		if ( class_exists( 'Tribe__Events__Query' ) ) {
-			remove_action( 'parse_query', array( 'Tribe__Events__Query', 'parse_query' ), 50 );
-			add_action( 'parse_query', array( 'Tribe__Events__Query', 'parse_query' ), 21 );
+			remove_action( 'parse_query', [ 'Tribe__Events__Query', 'parse_query' ], 50 );
+			add_action( 'parse_query', [ 'Tribe__Events__Query', 'parse_query' ], 21 );
 		}
-		remove_filter( 'posts_clauses', array( 'P2P_Query_Post', 'posts_clauses' ), 20 );
-		add_filter( 'posts_clauses', array( $this, 'posts_clauses' ), 20, 2 );
+		remove_filter( 'posts_clauses', [ 'P2P_Query_Post', 'posts_clauses' ], 20 );
+		add_filter( 'posts_clauses', [ $this, 'posts_clauses' ], 20, 2 );
 	}
 
 	public function parse_query( $wp_query ) {
@@ -35,8 +35,9 @@ class Query_Optimization {
 			return;
 		}
 
-		if ( null === $r )
+		if ( null === $r ) {
 			return;
+		}
 
 		list( $wp_query->_p2p_query, $wp_query->query_vars ) = $r;
 

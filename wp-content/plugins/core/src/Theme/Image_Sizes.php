@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Theme;
 
-
 class Image_Sizes {
 	const CORE_FULL      = 'core-full';
 	const CORE_MOBILE    = 'core-mobile';

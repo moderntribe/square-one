@@ -24,5 +24,4 @@ class Config extends Post_Type_Config {
 			'slug'     => __( 'samples', 'tribe' ),
 		];
 	}
-
 }

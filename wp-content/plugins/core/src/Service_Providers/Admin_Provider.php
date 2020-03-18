@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Service_Providers;
 
-
 use Pimple\Container;
 use Tribe\Project\Container\Service_Provider;
 use Tribe\Project\Admin\Resources\Scripts;
@@ -33,5 +32,4 @@ class Admin_Provider extends Service_Provider {
 			$container[ 'admin.resources.styles' ]->enqueue_styles();
 		}, 10, 0 );
 	}
-
 }

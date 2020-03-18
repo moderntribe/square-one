@@ -117,7 +117,7 @@ class Connections {
 			$join .= $wpdb->prepare( " AND pm.meta_value=%s", $meta_value );
 		}
 
-		$inject_where = function( $where ) use ( $direction ) {
+		$inject_where = function ( $where ) use ( $direction ) {
 			global $wpdb;
 			return $where . " AND pm.post_id = {$wpdb->p2p}.$direction";
 		};
@@ -212,5 +212,4 @@ class Connections {
 	public static function instance() {
 		return tribe_project()->container()['p2p.connections'];
 	}
-
 }

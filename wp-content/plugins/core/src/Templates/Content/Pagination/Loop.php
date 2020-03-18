@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Templates\Content\Pagination;
 
-
 use Tribe\Project\Twig\Twig_Template;
 
 class Loop extends Twig_Template {

@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Theme;
 
-
 class Social_Links {
 	private $networks = [ ];
 	private $labeled  = true;
@@ -35,7 +34,6 @@ class Social_Links {
 		}
 
 		return $links;
-
 	}
 
 	/**
@@ -66,7 +64,6 @@ class Social_Links {
 		$data = [ ];
 
 		if ( is_singular() || $wp_query->in_the_loop ) {
-
 			global $post;
 
 			$data[ 'link' ] = $this->normalize_url( get_permalink( $post->ID ) );
@@ -76,35 +73,26 @@ class Social_Links {
 			// only hunt for a featured image if pinterest active, and if we are on single.
 			// No pinterest for loops, because thats silly.
 			if ( in_array( 'pinterest', $this->networks ) && has_post_thumbnail( $post->ID ) ) {
-
 				$image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'tribe-full' );
 				$data[ 'image_src' ] = $image[ 0 ];
-
 			}
-
 		} elseif ( is_tax() || is_category() || is_tag() ) {
-
 			$obj = get_queried_object();
 
 			$data[ 'link' ] = $this->normalize_url( get_term_link( $obj, $obj->taxonomy ) );
 			$data[ 'title' ] = wp_strip_all_tags( esc_attr( $obj->name ) );
 			$data[ 'body' ] = esc_attr( $obj->description );
-
 		} elseif ( is_post_type_archive() ) {
-
 			$obj = get_queried_object();
 
 			$data[ 'link' ] = $this->normalize_url( get_post_type_archive_link( $obj->name ) );
 			$data[ 'title' ] = wp_strip_all_tags( esc_attr( $obj->label ) );
 			$data[ 'body' ] = esc_attr( $obj->description );
-
 		} elseif ( is_search() ) {
-
 			$query = get_search_query();
 
 			$data[ 'link' ] = $this->normalize_url( get_search_link( $query ) );
 			$data[ 'title' ] = sprintf( __( 'Search Results: %s', 'tribe' ), esc_attr( $query ) );
-
 		}
 
 		return $data;
@@ -123,7 +111,6 @@ class Social_Links {
 		$class = $this->labeled ? '' : ' class="a11y-visual-hide"';
 
 		switch ( $network ) {
-
 			case "email":
 				return sprintf(
 					'<a class="social-share-networks__anchor icon icon-mail" href="mailto:?subject=%1$s&body=%2$s" title="%3$s"><span%4$s>%3$s</span></a>',
@@ -189,7 +176,6 @@ class Social_Links {
 			default:
 				return '';
 		}
-
 	}
 
 	/**
@@ -215,6 +201,5 @@ class Social_Links {
 		}
 
 		return $url;
-
 	}
 }

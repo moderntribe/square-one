@@ -21,6 +21,5 @@ class Login_Resources {
 		}
 
 		wp_enqueue_style( 'core-theme-login', $css_dir . $css_login, $version );
-
 	}
 }

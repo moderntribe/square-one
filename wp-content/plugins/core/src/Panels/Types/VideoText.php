@@ -54,6 +54,5 @@ class VideoText extends Panel_Type_Config {
 		] ) );
 
 		return $panel;
-
 	}
 }

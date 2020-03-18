@@ -154,5 +154,4 @@ class Core {
 
 		return self::$_instance;
 	}
-
 }

@@ -64,5 +64,4 @@ abstract class Component extends Twig_Template {
 
 		return new static( $template, $twig, $options );
 	}
-
 }

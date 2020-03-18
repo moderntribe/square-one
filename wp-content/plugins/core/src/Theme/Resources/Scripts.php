@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Theme\Resources;
 
-
 class Scripts {
 	public function add_early_polyfills() {
 		$js_dir  = trailingslashit( get_stylesheet_directory_uri() ) . 'js/';
@@ -40,7 +39,6 @@ class Scripts {
 
 			//-- Weird way to check if script is being enqueued in the footer.
 			if ( isset( $script->extra[ 'group' ] ) && $script->extra[ 'group' ] === 1 ) {
-
 				//-- If version is set, append to end of source.
 				$source = $script->src . ( $script->ver ? "?ver={$script->ver}" : "" );
 
@@ -108,6 +106,5 @@ class Scripts {
 		if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 			wp_enqueue_script( 'comment-reply' );
 		}
-
 	}
 }

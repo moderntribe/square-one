@@ -60,7 +60,7 @@ class Titles_Filter {
 	 *
 	 * @return string
 	 */
-	public function filter_candidate_name( $title,  $object ) {
+	public function filter_candidate_name( $title, $object ) {
 		if ( ! $object instanceof \WP_Post ) {
 			return $title;
 		}

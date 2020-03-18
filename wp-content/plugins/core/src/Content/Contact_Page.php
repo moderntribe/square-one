@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Content;
 
-
 /**
  * Class Contact_Page
  *
@@ -20,5 +19,4 @@ class Contact_Page extends Required_Page {
 	protected function get_slug() {
 		return _x( 'contact', 'contact page slug', 'tribe' );
 	}
-
 }

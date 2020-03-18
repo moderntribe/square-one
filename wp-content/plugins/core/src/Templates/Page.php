@@ -59,5 +59,4 @@ class Page extends Base {
 		$data = $sidebar->get_data();
 		return $data[ 'sidebar' ];
 	}
-
 }

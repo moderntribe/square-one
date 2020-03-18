@@ -56,7 +56,6 @@ class ContentSlider extends Panel {
 		if ( ! empty( $this->panel_vars[ ContentSliderPanel::FIELD_SLIDES ] ) ) {
 			$index = 0;
 			foreach ( $this->panel_vars[ ContentSliderPanel::FIELD_SLIDES ] as $slide ) {
-
 				$slide_markup = '';
 
 				$options = [

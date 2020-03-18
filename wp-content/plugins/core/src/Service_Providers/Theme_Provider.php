@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Service_Providers;
 
-
 use Pimple\Container;
 use Tribe\Project\Container\Service_Provider;
 use Tribe\Project\Request\Request;
@@ -89,7 +88,7 @@ class Theme_Provider extends Service_Provider {
 		$container[ 'theme.full_size_gif' ] = function ( Container $container ) {
 			return new Full_Size_Gif();
 		};
-		add_filter( 'image_downsize', function( $data, $id, $size ) use ( $container ) {
+		add_filter( 'image_downsize', function ( $data, $id, $size ) use ( $container ) {
 			return $container[ 'theme.full_size_gif' ]->full_size_only_gif( $data, $id, $size );
 		}, 10, 3 );
 	}
@@ -141,7 +140,7 @@ class Theme_Provider extends Service_Provider {
 			] );
 		};
 
-		add_filter( 'oembed_dataparse', function( $html, $data, $url ) use ( $container ) {
+		add_filter( 'oembed_dataparse', function ( $html, $data, $url ) use ( $container ) {
 			return $container['theme.oembed']->get_video_component( $html, $data, $url );
 		}, 999, 3 );
 
@@ -182,11 +181,11 @@ class Theme_Provider extends Service_Provider {
 			$container[ 'theme.resources.legacy' ]->old_browsers();
 		}, 0, 0 );
 
-		add_action( 'init', function() use ( $container ) {
+		add_action( 'init', function () use ( $container ) {
 			$container[ 'theme.resources.legacy' ]->add_unsupported_rewrite();
 		} );
 
-		add_filter( 'template_include', function( $template ) use ( $container ) {
+		add_filter( 'template_include', function ( $template ) use ( $container ) {
 			return $container['theme.resources.legacy']->load_unsupported_template( $template );
 		} );
 	}
@@ -225,7 +224,7 @@ class Theme_Provider extends Service_Provider {
 		}, 0, 0 );
 		add_filter( 'mce_external_plugins', function ( $plugins ) use ( $container ) {
 			return $container[ 'theme.resources.fonts' ]->add_typekit_to_editor( $plugins );
-		} , 10, 1 );
+		}, 10, 1 );
 		/* add_action( 'login_head', function() use ( $container ) {
 			$container[ 'theme.resources.fonts' ]->load_fonts();
 		}, 0, 0); */
@@ -320,5 +319,4 @@ class Theme_Provider extends Service_Provider {
 			$container[ 'theme.gravity_forms_filter' ]->hook();
 		}, 10, 0 );
 	}
-
 }

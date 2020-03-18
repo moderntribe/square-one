@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Admin\Resources;
 
-
 class JS_Localization {
 
 	/**

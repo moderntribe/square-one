@@ -44,7 +44,6 @@ class MicroNavButtons extends Panel {
 
 		if ( ! empty( $this->panel_vars[ Micro::FIELD_ITEMS ] ) ) {
 			for ( $i = 0; $i < count( $this->panel_vars[ Micro::FIELD_ITEMS ] ); $i ++ ) {
-
 				$btn = $this->panel_vars[ Micro::FIELD_ITEMS ][ $i ];
 
 				$options = [
@@ -64,5 +63,5 @@ class MicroNavButtons extends Panel {
 
 	public static function instance() {
 			return tribe_project()->container()['twig.templates.content/panels/micronavbuttons'];
-		}
+	}
 }

@@ -94,7 +94,6 @@ class Index extends Base {
 		}
 
 		foreach ( $numbers as $number ) {
-
 			if ( $number['active'] ) {
 				$number['classes'][] = 'active';
 			}

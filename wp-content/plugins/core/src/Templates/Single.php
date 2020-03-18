@@ -101,5 +101,4 @@ class Single extends Base {
 
 		return $link->render();
 	}
-
 }

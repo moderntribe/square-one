@@ -34,7 +34,6 @@ class CardGrid extends Panel {
 		$cards = [];
 
 		if ( ! empty( $this->panel_vars[ CardGridPanel::FIELD_CARDS ] ) ) {
-
 			$i = 0;
 
 			foreach ( $this->panel_vars[ CardGridPanel::FIELD_CARDS ] as $card ) {

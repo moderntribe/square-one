@@ -4,8 +4,8 @@ namespace Tribe\Project\Theme\Resources;
 
 class Colors {
 
-	CONST BLACK = 'black';
-	CONST WHITE = 'white';
+	const BLACK = 'black';
+	const WHITE = 'white';
 
 	/**
 	 * Get a list of color options. These should mirror the colors
@@ -72,6 +72,4 @@ class Colors {
 
 		return $name;
 	}
-
-
 }

@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Theme;
 
-
 class Supports {
 
 	/**

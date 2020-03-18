@@ -18,36 +18,36 @@ class Legacy_Check {
 	public function old_browsers() {
 		?>
 
-        <script type="text/javascript">
-            function is_browser() {
-                return (
-                    navigator.userAgent.indexOf("Chrome") !== - 1 ||
-                    navigator.userAgent.indexOf("Opera") !== - 1 ||
-                    navigator.userAgent.indexOf("Firefox") !== - 1 ||
-                    navigator.userAgent.indexOf("MSIE") !== - 1 ||
-                    navigator.userAgent.indexOf("Safari") !== - 1 ||
-                    navigator.userAgent.indexOf("Edge") !== - 1
-                );
-            }
+		<script type="text/javascript">
+			function is_browser() {
+				return (
+					navigator.userAgent.indexOf("Chrome") !== - 1 ||
+					navigator.userAgent.indexOf("Opera") !== - 1 ||
+					navigator.userAgent.indexOf("Firefox") !== - 1 ||
+					navigator.userAgent.indexOf("MSIE") !== - 1 ||
+					navigator.userAgent.indexOf("Safari") !== - 1 ||
+					navigator.userAgent.indexOf("Edge") !== - 1
+				);
+			}
 
-            function less_than_ie11() {
-                return (
-                    !window.atob || // IE9 and below
-                    Function('/*@cc_on return document.documentMode===10@*/')() // IE10
-                );
-            }
+			function less_than_ie11() {
+				return (
+					!window.atob || // IE9 and below
+					Function('/*@cc_on return document.documentMode===10@*/')() // IE10
+				);
+			}
 
-            function not_excluded_page() {
-                return (
-                    window.location.href.indexOf("<?php echo $this->unsupported_browser_path; ?>") === - 1 &&
-                    document.title.toLowerCase().indexOf('page not found') === - 1
-                );
-            }
+			function not_excluded_page() {
+				return (
+					window.location.href.indexOf("<?php echo $this->unsupported_browser_path; ?>") === - 1 &&
+					document.title.toLowerCase().indexOf('page not found') === - 1
+				);
+			}
 
-            if (is_browser() && less_than_ie11() && not_excluded_page()) {
-                window.location = location.protocol + '//' + location.host + '<?php echo $this->unsupported_browser_path; ?>';
-            }
-        </script>
+			if (is_browser() && less_than_ie11() && not_excluded_page()) {
+				window.location = location.protocol + '//' + location.host + '<?php echo $this->unsupported_browser_path; ?>';
+			}
+		</script>
 
 		<?php
 	}
@@ -56,8 +56,8 @@ class Legacy_Check {
 	 * Adds the rewrite rule for the unsupported-browser permalink.
 	 */
 	public function add_unsupported_rewrite() {
-        add_rewrite_tag('%unsupported%', '([^&]+)');
-	    $regex = sprintf( '^%s/?', str_replace( '/', '', $this->unsupported_browser_path ) );
+		add_rewrite_tag('%unsupported%', '([^&]+)');
+		$regex = sprintf( '^%s/?', str_replace( '/', '', $this->unsupported_browser_path ) );
 		add_rewrite_rule( $regex, 'index.php?unsupported=1', 'top' );
 	}
 

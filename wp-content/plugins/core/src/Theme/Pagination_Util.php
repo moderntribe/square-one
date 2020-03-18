@@ -41,7 +41,6 @@ class Pagination_Util {
 
 		// Only add links on either side of current if we're not loading all the pages at once. Generate links for each applicable number we need to show.
 		if ( $links_offset ) {
-
 			$links[] = $paged;
 
 			for ( $i = max( 1, $paged - $links_offset ); $i < $paged; $i ++ ) {
@@ -119,5 +118,4 @@ class Pagination_Util {
 			'classes' => $classes,
 		];
 	}
-
 }

@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Content;
 
-
 use Tribe\Libs\ACF;
 use Tribe\Project\Post_Types\Page\Page;
 
@@ -209,5 +208,4 @@ abstract class Required_Page {
 		}
 		return $post_states;
 	}
-
 }

@@ -28,11 +28,10 @@ class Logo {
 	public static function logo( $args ) {
 		$logo = new self( $args );
 		$html = $logo->get_logo();
-		$echo = isset( $args[ 'echo' ] ) ? $args[ 'echo' ] : TRUE;
+		$echo = isset( $args[ 'echo' ] ) ? $args[ 'echo' ] : true;
 		if ( !$echo ) {
 			return $html;
 		}
 		echo $html;
 	}
-
 }

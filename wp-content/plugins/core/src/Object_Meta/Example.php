@@ -54,5 +54,4 @@ class Example extends ACF\ACF_Meta_Group {
 
 		return $field;
 	}
-
 }
