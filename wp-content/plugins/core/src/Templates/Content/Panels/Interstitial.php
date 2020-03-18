@@ -42,7 +42,6 @@ class Interstitial extends Panel {
 			Image::AS_BG           => true,
 			Image::USE_LAZYLOAD    => false,
 			Image::ECHO            => false,
-			Image::WRAPPER_CLASSES => [ 'c-image', 'c-image--bg' ],
 			Image::IMG_CLASSES     => [ 'c-image__bg' ],
 		];
 
