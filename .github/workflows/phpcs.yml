@@ -1,0 +1,36 @@
+name: PHP Composer and Codesniffer
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Add GitHub oAuth
+        env:
+          TOKEN: ${{ secrets.GH_TOKEN }}
+        run: composer config --global github-oauth.github.com $TOKEN
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate
+
+      - name: Check for Cached Dependencies
+        id: cache-dependencies
+        uses: actions/cache@v1
+        with:
+          path: vendor
+          key: ${{ runner.OS }}-build-${{ hashFiles('**/composer.lock') }}
+
+      - name: Install Dependencies
+        if: steps.cache-dependencies.outputs.cache-hit != 'true'
+        env:
+          WP_PLUGIN_ACF_KEY: ${{ secrets.WP_PLUGIN_ACF_KEY }}
+          WP_PLUGIN_GF_KEY: ${{ secrets.WP_PLUGIN_GF_KEY }}
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+      - name: PHPCS
+        run: ./vendor/bin/phpcs --standard=./phpcs.xml $( git diff-tree --no-commit-id --name-only -r ${GITHUB_SHA} | tr '\n' ' ' )
