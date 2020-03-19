@@ -58,14 +58,18 @@ class ContentSlider extends Panel {
 
 				$slide_markup = '';
 
-				$options = [
-					Image::IMG_ID        => $slide[ ContentSliderPanel::FIELD_SLIDE_IMAGE ],
-					Image::AS_BG         => true,
-					Image::USE_LAZYLOAD  => false,
-					Image::WRAPPER_CLASS => 'c-image__bg',
-				];
+				try {
+					$options = [
+						Image::ATTACHMENT        => \Tribe\Project\Templates\Models\Image::factory( $slide[ ContentSliderPanel::FIELD_SLIDE_IMAGE ] ),
+						Image::AS_BG         => true,
+						Image::USE_LAZYLOAD  => false,
+						Image::WRAPPER_CLASS => 'c-image__bg',
+					];
 
-				$slide_markup .= $this->factory->get( Image::class, $options )->render();
+					$slide_markup .= $this->factory->get( Image::class, $options )->render();
+				} catch ( \Exception $e ) {
+					// no valid image for this slide
+				}
 
 				$options = [
 					Content_Block::TITLE           => $this->get_content_block_title( $slide, $index ),

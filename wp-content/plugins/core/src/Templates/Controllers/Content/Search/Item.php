@@ -25,7 +25,6 @@ class Item extends Loop_Item {
 		$options = [
 			'wrapper_class' => 'item-loop__image',
 			'link'          => get_permalink(),
-			'echo'          => false,
 		];
 
 		return the_tribe_image( get_post_thumbnail_id(), $options );

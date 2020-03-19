@@ -32,7 +32,6 @@ class Item extends Abstract_Template {
 	protected function get_featured_image() {
 		$options = [
 			'as_bg'         => true,
-			'echo'          => false,
 			'wrapper_class' => 'item__image',
 			'shim'          => trailingslashit( get_stylesheet_directory_uri() ) . 'img/theme/shims/16x9.png',
 			'src_size'      => Image_Sizes::CORE_FULL,

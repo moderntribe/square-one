@@ -75,7 +75,6 @@ class Page extends Abstract_Template {
 	protected function get_featured_image() {
 		$options = [
 			'wrapper_class' => 'page__image',
-			'echo'          => false,
 		];
 
 		return the_tribe_image( get_post_thumbnail_id(), $options );

@@ -34,15 +34,20 @@ class Hero extends Panel {
 	protected function get_image() {
 
 		if ( empty( $this->panel_vars[ HeroPanel::FIELD_IMAGE ] ) ) {
-			return false;
+			return '';
+		}
+
+		try {
+			$image = \Tribe\Project\Templates\Models\Image::factory( $this->panel_vars[ HeroPanel::FIELD_IMAGE ] );
+		} catch ( \Exception $e ) {
+			return '';
 		}
 
 		$options = [
-			Image::IMG_ID          => $this->panel_vars[ HeroPanel::FIELD_IMAGE ],
+			Image::ATTACHMENT      => $image,
 			Image::COMPONENT_CLASS => 'c-image',
 			Image::AS_BG           => true,
 			Image::USE_LAZYLOAD    => false,
-			Image::ECHO            => false,
 			Image::WRAPPER_CLASS   => 'c-image__bg',
 		];
 

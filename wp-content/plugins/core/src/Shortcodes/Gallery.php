@@ -102,16 +102,20 @@ class Gallery implements Shortcode {
 			return [];
 		}
 
-		return array_map( function ( $slide_id ) use ( $size ) {
+		return array_filter( array_map( function ( $slide_id ) use ( $size ) {
+			try {
+				$image = \Tribe\Project\Templates\Models\Image::factory( $slide_id );
+			} catch ( \Exception $e ) {
+				return '';
+			}
 			$options = [
-				'img_id'       => $slide_id,
-				'as_bg'        => false,
-				'use_lazyload' => false,
-				'echo'         => false,
-				'src_size'     => $size,
+				Image::ATTACHMENT   => $image,
+				Image::AS_BG        => false,
+				Image::USE_LAZYLOAD => false,
+				Image::SRC_SIZE     => $size,
 			];
 
 			return $this->component->get( Image::class, $options )->render();
-		}, $slide_ids );
+		}, $slide_ids ) );
 	}
 }

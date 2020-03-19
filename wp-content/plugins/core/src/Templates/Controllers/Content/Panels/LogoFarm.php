@@ -48,14 +48,21 @@ class LogoFarm extends Panel {
 
 				$logo = $this->panel_vars[ Logo::FIELD_LOGOS ][ $i ];
 
+
+				try {
+					$image = \Tribe\Project\Templates\Models\Image::factory( $logo[ Logo::FIELD_LOGO_IMAGE ] );
+				} catch ( \Exception $e ) {
+					continue;
+				}
+
 				$options = [
-					Image::IMG_ID      => $logo[ Logo::FIELD_LOGO_IMAGE ],
+					Image::ATTACHMENT  => $image,
 					Image::LINK        => esc_url( $logo[ Logo::FIELD_LOGO_CTA ]['url'] ),
 					Image::LINK_TARGET => esc_attr( $logo[ Logo::FIELD_LOGO_CTA ]['target'] ),
 					Image::LINK_TITLE  => esc_attr( $logo[ Logo::FIELD_LOGO_CTA ]['label'] ),
 				];
 
-				$logos[]  = $this->factory->get( Image::class, $options )->render();
+				$logos[] = $this->factory->get( Image::class, $options )->render();
 			}
 		}
 

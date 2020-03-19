@@ -57,7 +57,7 @@ class CardGrid extends Panel {
 					$options[ Card::BUTTON ] = $this->get_card_button( $card[ CardGridPanel::FIELD_CARD_CTA ], $card[ CardGridPanel::FIELD_CARD_TITLE ] );
 				}
 
-				$cards[]  = $this->factory->get( Card::class, $options )->render();
+				$cards[] = $this->factory->get( Card::class, $options )->render();
 
 				$i ++;
 			}
@@ -82,14 +82,19 @@ class CardGrid extends Panel {
 
 	protected function get_card_image( $image_id ) {
 		if ( empty( $image_id ) ) {
-			return false;
+			return '';
+		}
+
+		try {
+			$image = \Tribe\Project\Templates\Models\Image::factory( $image_id );
+		} catch ( \Exception $e ) {
+			return '';
 		}
 
 		$options = [
-			Image::IMG_ID       => $image_id,
+			Image::ATTACHMENT   => $image,
 			Image::AS_BG        => false,
 			Image::USE_LAZYLOAD => false,
-			Image::ECHO         => false,
 			Image::SRC_SIZE     => Image_Sizes::COMPONENT_CARD,
 		];
 

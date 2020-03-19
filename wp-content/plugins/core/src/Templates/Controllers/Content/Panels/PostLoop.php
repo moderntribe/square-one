@@ -48,18 +48,18 @@ class PostLoop extends Panel {
 		$posts = [];
 
 		if ( ! empty( $this->panel_vars[ PostLoopPanel::FIELD_POSTS ] ) ) {
-			for ( $i = 0; $i < count( $this->panel_vars[ PostLoopPanel::FIELD_POSTS ] ); $i++ ) {
+			for ( $i = 0; $i < count( $this->panel_vars[ PostLoopPanel::FIELD_POSTS ] ); $i ++ ) {
 
 				$post = $this->panel_vars[ PostLoopPanel::FIELD_POSTS ][ $i ];
 
 				$options = [
-					Card::POST_TITLE => $this->get_post_title( esc_html( $post[ 'title' ] ), $i ),
-					Card::IMAGE      => $this->get_post_image( $post[ 'image' ] ),
-					Card::PRE_TITLE  => get_the_category_list( '', '', $post[ 'post_id' ] ),
-					Card::BUTTON     => $this->get_post_button( $post[ 'link' ] ),
+					Card::POST_TITLE => $this->get_post_title( esc_html( $post['title'] ), $i ),
+					Card::IMAGE      => $this->get_post_image( $post['image'] ),
+					Card::PRE_TITLE  => get_the_category_list( '', '', $post['post_id'] ),
+					Card::BUTTON     => $this->get_post_button( $post['link'] ),
 				];
 
-				$posts[]  = $this->factory->get( Card::class, $options )->render();
+				$posts[] = $this->factory->get( Card::class, $options )->render();
 			}
 		}
 
@@ -90,14 +90,19 @@ class PostLoop extends Panel {
 
 	protected function get_post_image( $image_id ) {
 		if ( empty( $image_id ) ) {
-			return false;
+			return '';
+		}
+
+		try {
+			$image = \Tribe\Project\Templates\Models\Image::factory( $image_id );
+		} catch ( \Exception $e ) {
+			return '';
 		}
 
 		$options = [
-			Image::IMG_ID       => $image_id,
+			Image::ATTACHMENT   => $image,
 			Image::AS_BG        => false,
 			Image::USE_LAZYLOAD => false,
-			Image::ECHO         => false,
 			Image::SRC_SIZE     => Image_Sizes::COMPONENT_CARD,
 		];
 
@@ -106,7 +111,7 @@ class PostLoop extends Panel {
 
 	protected function get_post_button( $post_link ) {
 		$options = [
-			Button::URL         => esc_url( $post_link[ 'url' ] ),
+			Button::URL         => esc_url( $post_link['url'] ),
 			Button::LABEL       => __( 'View Post', 'tribe' ),
 			Button::TARGET      => '_self',
 			Button::BTN_AS_LINK => true,

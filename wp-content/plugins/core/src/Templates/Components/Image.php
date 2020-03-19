@@ -7,7 +7,7 @@ class Image extends Component {
 
 	protected $path = 'components/image.twig';
 
-	const IMG_ID             = 'img_id';
+	const ATTACHMENT         = 'attachment';
 	const IMG_URL            = 'img_url';
 	const AS_BG              = 'as_bg';
 	const AUTO_SHIM          = 'auto_shim';
@@ -47,10 +47,10 @@ class Image extends Component {
 
 	protected function parse_options( array $options ): array {
 		$defaults = [
-			self::IMG_ID             => 0,
-			// the Image ID - takes precedence over IMG_URL
+			self::ATTACHMENT         => null,
+			// the WordPress attachment to use - takes precedence over IMG_URL
 			self::IMG_URL            => '',
-			// the Image URL - use as an image URL as a fallback if no IMG_ID exists
+			// the Image URL - use as an image URL as a fallback if no ATTACHMENT exists
 			self::AS_BG              => false,
 			// us this as background on wrapper?
 			self::AUTO_SHIM          => true,
@@ -59,8 +59,6 @@ class Image extends Component {
 			// pass a specific class to use for the component wrapper
 			self::COMPONENT_CLASS    => '',
 			// if lazyloading the lib can auto create sizes attribute.
-			self::ECHO               => true,
-			// whether to echo or return the html
 			self::EXPAND             => '200',
 			// the expand attribute is the threshold used by lazysizes. use negative to reveal once in viewport.
 			self::HTML               => '',
@@ -118,9 +116,9 @@ class Image extends Component {
 	public function get_data(): array {
 		$data = [];
 
-		$data[ 'component_classes' ] = $this->options[ self::COMPONENT_CLASS ];
-		$data[ 'img' ]               = $this->get_image();
-		$data[ 'wrapper' ]           = $this->get_wrapper();
+		$data['component_classes'] = $this->options[ self::COMPONENT_CLASS ];
+		$data['img']               = $this->get_image();
+		$data['wrapper']           = $this->get_wrapper();
 		$data[ self::LINK ]        = $this->get_link();
 		$data[ self::HTML ]        = ! empty( $this->options[ self::HTML ] ) ? $this->options[ self::HTML ] : '';
 
@@ -128,9 +126,9 @@ class Image extends Component {
 	}
 
 	protected function should_lazy_load(): bool {
-		$has_image_id_or_path = ( ! empty( $this->options[ self::IMG_ID ] ) || ! empty( $this->options[ self::IMG_URL ] ) );
+		$has_attachment_or_path = ( ! empty( $this->options[ self::ATTACHMENT ] ) || ! empty( $this->options[ self::IMG_URL ] ) );
 
-		return $this->options[ self::USE_LAZYLOAD ] && ! $this->options[ self::AS_BG ] && $has_image_id_or_path;
+		return $this->options[ self::USE_LAZYLOAD ] && ! $this->options[ self::AS_BG ] && $has_attachment_or_path;
 	}
 
 	protected function get_image(): array {
@@ -178,31 +176,29 @@ class Image extends Component {
 	 * @return string
 	 */
 	private function get_attributes(): string {
-		$has_image_id = $this->options[ self::IMG_ID ] !== 0;
-		$src          = '';
-		$src_width    = '';
-		$src_height   = '';
+		/** @var \Tribe\Project\Templates\Models\Image $attachment */
+		$attachment = $this->options[ self::ATTACHMENT ];
+		$src_width  = '';
+		$src_height = '';
 		// we'll almost always set src, except if for some reason they wanted to only use srcset
 		$attrs = [];
-		if ( $this->options[ self::SRC ] ) {
-			if ( $has_image_id ) { // image_id takes precedence
-				$src        = wp_get_attachment_image_src( $this->options[ self::IMG_ID ], $this->options[ self::SRC_SIZE ] );
-				$src_width  = $src[ 1 ];
-				$src_height = $src[ 2 ];
-				$src        = $src[ 0 ];
-			} else { // using IMG_URL
-				$src = $this->options[ self::IMG_URL ];
-			}
+		if ( $attachment && $attachment->has_size( $this->options[ self::SRC_SIZE ] ) ) {
+			$resized    = $attachment->get_size( $this->options[ self::SRC_SIZE ] );
+			$src        = $resized->src;
+			$src_width  = $resized->width;
+			$src_height = $resized->height;
+		} else {
+			$src = $this->options[ self::IMG_URL ];
 		}
+
 		$attrs[] = ! empty( $this->options[ self::IMG_ATTR ] ) ? trim( $this->options[ self::IMG_ATTR ] ) : '';
 
 		// the alt text
 		$alt_text = $this->options[ self::IMG_ALT_TEXT ];
 
 		// Check for a specific alt meta value on the image post, otherwise fallback to the image post's title.
-		if ( empty( $alt_text ) && $has_image_id ) {
-			$alt_meta_value = get_post_meta( $this->options[ self::IMG_ID ], '_wp_attachment_image_alt', true );
-			$alt_text       = ! empty( $alt_meta_value ) ? $alt_meta_value : get_the_title( $this->options[ self::IMG_ID ] );
+		if ( empty( $alt_text ) && $attachment ) {
+			$alt_text = $attachment->alt() ?: $attachment->title();
 		}
 
 		$attrs[] = $this->options[ self::AS_BG ] ? sprintf( 'role="img" aria-label="%s"', $alt_text ) : sprintf( 'alt="%s"', $alt_text );
@@ -293,48 +289,31 @@ class Image extends Component {
 	 * @return string
 	 */
 	private function get_srcset_attribute(): string {
-
-		$all_sizes = wp_get_additional_image_sizes();
-		$attribute = [];
-
-		if ( $this->options[ self::IMG_ID ] === 0 ) {
+		if ( ! isset( $this->options[ self::ATTACHMENT ] ) ) {
 			return '';
 		}
 
+		$attribute = [];
+
+		/** @var \Tribe\Project\Templates\Models\Image $attachment */
+		$attachment = $this->options[ self::ATTACHMENT ];
 		foreach ( $this->options[ self::SRCSET_SIZES ] as $size ) {
-			$src = wp_get_attachment_image_src( $this->options[ self::IMG_ID ], $size );
-			// Don't add nonexistent intermediate sizes to the src_set. It ends up being the full-size URL.
-			$use_size = ( 'full' !== $size && true === $src[ 3 ] );
-			if ( ! $use_size && isset( $all_sizes[ $size ] ) ) {
-				$use_size = $this->image_matches_size( $src, $all_sizes[ $size ] );
+			if ( $size === 'full' || ! $attachment->has_size( $size ) ) {
+				continue;
 			}
-			if ( $use_size ) {
-				$attribute[] = sprintf( '%s %dw %dh', $src[ 0 ], $src[ 1 ], $src[ 2 ] );
+			$resized = $attachment->get_size( $size );
+			if ( ! $resized->is_intermediate || ! $resized->is_match ) {
+				continue;
 			}
+			$attribute[] = sprintf( '%s %dw %dh', $resized->src, $resized->width, $resized->height );
 		}
 
 		// If there are no sizes available after all that work, fallback to the original full size image.
-		if ( empty( $attribute ) ) {
-			$src         = wp_get_attachment_image_src( $this->options[ self::IMG_ID ], 'full' );
-			$attribute[] = sprintf( '%s %dw %dh', $src[ 0 ], $src[ 1 ], $src[ 2 ] );
+		if ( empty( $attribute ) && $attachment->has_size( 'full' ) ) {
+			$full        = $attachment->get_size( 'full' );
+			$attribute[] = sprintf( '%s %dw %dh', $full->src, $full->width, $full->height );
 		}
 
 		return implode( ", \n", $attribute );
-	}
-
-	/**
-	 * Determine if the image meets the dimensions specified by the image size
-	 *
-	 * @param array $image An image array from wp_get_attachment_image_src()
-	 * @param array $size An image size array from wp_get_additional_image_sizes()
-	 *
-	 * @return bool
-	 */
-	private function image_matches_size( $image, $size ): bool {
-		if ( $size[ 'crop' ] ) {
-			return ( $image[ 1 ] == $size[ 'width' ] && $image[ 2 ] == $size[ 'height' ] );
-		} else {
-			return ( $image[ 1 ] == $size[ 'width' ] || $image[ 2 ] == $size[ 'height' ] );
-		}
 	}
 }

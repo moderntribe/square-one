@@ -32,15 +32,20 @@ class Testimonial extends Panel {
 	protected function get_image() {
 
 		if ( empty( $this->panel_vars[ TestimonialPanel::FIELD_IMAGE ] ) ) {
-			return false;
+			return '';
+		}
+
+		try {
+			$image = \Tribe\Project\Templates\Models\Image::factory( $this->panel_vars[ TestimonialPanel::FIELD_IMAGE ] );
+		} catch ( \Exception $e ) {
+			return '';
 		}
 
 		$options = [
-			Image::IMG_ID          => $this->panel_vars[ TestimonialPanel::FIELD_IMAGE ],
+			Image::ATTACHMENT      => $image,
 			Image::COMPONENT_CLASS => 'c-image',
 			Image::AS_BG           => true,
 			Image::USE_LAZYLOAD    => false,
-			Image::ECHO            => false,
 			Image::WRAPPER_CLASS   => 'c-image__bg',
 		];
 
@@ -50,9 +55,9 @@ class Testimonial extends Panel {
 	protected function get_slider(): string {
 		$main_attrs = [];
 		if ( is_panel_preview() ) {
-			$main_attrs[ 'data-depth' ]    = $this->panel->get_depth();
-			$main_attrs[ 'data-name' ]     = 'quotes';
-			$main_attrs[ 'data-livetext' ] = true;
+			$main_attrs['data-depth']    = $this->panel->get_depth();
+			$main_attrs['data-name']     = 'quotes';
+			$main_attrs['data-livetext'] = true;
 		}
 		$options = [
 			Slider::SLIDES          => $this->get_slides(),
@@ -100,7 +105,7 @@ class Testimonial extends Panel {
 					Quote::CITE_ATTRS  => $cite_attrs,
 				];
 
-				$quotes[]  = $this->factory->get( Quote::class, $options )->render();
+				$quotes[] = $this->factory->get( Quote::class, $options )->render();
 			}
 		}
 

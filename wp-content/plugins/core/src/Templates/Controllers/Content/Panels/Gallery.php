@@ -68,17 +68,22 @@ class Gallery extends Panel {
 			return [];
 		}
 
-		return array_map( function ( $slide_id ) use ( $size ) {
+		return array_filter( array_map( function ( $slide_id ) use ( $size ) {
+			try {
+				$image = \Tribe\Project\Templates\Models\Image::factory( $slide_id );
+			} catch ( \Exception $e ) {
+				return '';
+			}
+
 			$options = [
-				ImageComponent::IMG_ID       => $slide_id,
-				ImageComponent::AS_BG        => $this->use_crop() && $size == 'full',
+				ImageComponent::ATTACHMENT   => $image,
+				ImageComponent::AS_BG        => $this->use_crop() && $size === 'full',
 				ImageComponent::USE_LAZYLOAD => false,
-				ImageComponent::ECHO         => false,
 				ImageComponent::SRC_SIZE     => $size,
 			];
 
 			return $this->factory->get( ImageComponent::class, $options )->render();
-		}, $slide_ids );
+		}, $slide_ids ) );
 	}
 
 	protected function get_slider_main_classes() {
