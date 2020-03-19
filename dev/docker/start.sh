@@ -4,13 +4,14 @@ SCRIPTDIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
 cd "$SCRIPTDIR"
 
-PROJECT_ID=$(cat ./.projectID)
+ENV_FILE=../../.env
 
-# Create an empty composer cache folder if it doesn't exist, so we can mount it to php-fpm
-COMPOSER_CACHE=${SCRIPTDIR}/composer-cache
-if [ ! -d ${COMPOSER_CACHE} ]; then
-    mkdir ${COMPOSER_CACHE}
-fi;
+if [ ! -f ${ENV_FILE} ]; then
+  echo "Can't find file: $(git rev-parse --show-toplevel)/.env. Copy .env.sample to .env and follow the instructions inside."
+  exit 1
+fi
+
+PROJECT_ID=$(cat ./.projectID)
 
 echo "Starting docker-compose project: ${PROJECT_ID}"
 
@@ -25,8 +26,30 @@ else
 	DC_COMMAND="docker-compose"
 fi;
 
-# Create a composer-config.json file that mirrors the format of .composer/auth.json, so we can mount it to php-fpm
-CONFIG_FILE="${SCRIPTDIR}/composer-config.json"
+# Create an empty composer folder so we can mount it with the proper permissions
+COMPOSER_DIR=${SCRIPTDIR}/composer
+
+if [ ! -d "${COMPOSER_DIR}/" ]; then
+  mkdir ${COMPOSER_DIR}
+  # create global composer config otherwise it becomes unreadable on the host in linux
+  printf '{
+      "config": {},
+      "repositories": {
+          "packagist": {
+              "type": "composer",
+              "url": "https://packagist.org"
+          }
+      }
+  }' >> ${COMPOSER_DIR}/config.json
+fi
+
+# Check for a volume mounted auth.json so we can populate it with github credentials so composer can fetch private repos
+CONFIG_FILE="${COMPOSER_DIR}/auth.json"
+
+# If the auth file is empty, composer will completely error out.
+if [ ! -s ${CONFIG_FILE} ]; then
+  rm -rf ${CONFIG_FILE}
+fi
 
 if [ ! -f ${CONFIG_FILE} ]; then
 
@@ -71,5 +94,10 @@ ${D_COMMAND} run --privileged --rm phpdockerio/php7-fpm date -s "$(date -u "+%Y-
 
 # start the containers
 ${DC_COMMAND} --project-name=${PROJECT_ID} up -d --force-recreate
+
+# Install composer parallel installer globally
+if [ ! -f "${COMPOSER_DIR}/composer.json" ]; then
+  bash ${SCRIPTDIR}/exec.sh composer global require hirak/prestissimo --classmap-authoritative --update-no-dev
+fi
 
 bash ${SCRIPTDIR}/composer.sh install

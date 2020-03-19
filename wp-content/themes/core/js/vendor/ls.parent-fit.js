@@ -1,4 +1,5 @@
 (function(window, factory) {
+	if(!window) {return;}
 	var globalInstall = function(){
 		factory(window.lazySizes);
 		window.removeEventListener('lazyunveilread', globalInstall, true);
@@ -13,7 +14,8 @@
 	} else {
 		window.addEventListener('lazyunveilread', globalInstall, true);
 	}
-}(window, function(window, document, lazySizes) {
+}(typeof window != 'undefined' ?
+	window : 0, function(window, document, lazySizes) {
 	'use strict';
 
 	if(!window.addEventListener){return;}
@@ -22,6 +24,7 @@
 	var regCssFit = /parent-fit["']*\s*:\s*["']*(contain|cover|width)/;
 	var regCssObject = /parent-container["']*\s*:\s*["']*(.+?)(?=(\s|$|,|'|"|;))/;
 	var regPicture = /^picture$/i;
+	var cfg = lazySizes.cfg;
 
 	var getCSS = function (elem){
 		return (getComputedStyle(elem, null) || {});
@@ -84,7 +87,7 @@
 		},
 
 		getImageRatio: function(element){
-			var i, srcset, media, ratio, match;
+			var i, srcset, media, ratio, match, width, height;
 			var parent = element.parentNode;
 			var elements = parent && regPicture.test(parent.nodeName || '') ?
 					parent.querySelectorAll('source, img') :
@@ -93,20 +96,32 @@
 
 			for(i = 0; i < elements.length; i++){
 				element = elements[i];
-				srcset = element.getAttribute(lazySizesConfig.srcsetAttr) || element.getAttribute('srcset') || element.getAttribute('data-pfsrcset') || element.getAttribute('data-risrcset') || '';
+				srcset = element.getAttribute(cfg.srcsetAttr) || element.getAttribute('srcset') || element.getAttribute('data-pfsrcset') || element.getAttribute('data-risrcset') || '';
 				media = element._lsMedia || element.getAttribute('media');
-				media = lazySizesConfig.customMedia[element.getAttribute('data-media') || media] || media;
+				media = cfg.customMedia[element.getAttribute('data-media') || media] || media;
 
 				if(srcset && (!media || (window.matchMedia && matchMedia(media) || {}).matches )){
 					ratio = parseFloat(element.getAttribute('data-aspectratio'));
 
-					if(!ratio && (match = srcset.match(regDescriptors))){
-						if(match[2] == 'w'){
-							ratio = match[1] / match[3];
+					if (!ratio) {
+						match = srcset.match(regDescriptors);
+
+						if (match) {
+							if(match[2] == 'w'){
+								width = match[1];
+								height = match[3];
+							} else {
+								width = match[3];
+								height = match[1];
+							}
 						} else {
-							ratio = match[3] / match[1];
+							width = element.getAttribute('width');
+							height = element.getAttribute('height');
 						}
+
+						ratio = width / height;
 					}
+
 					break;
 				}
 			}
@@ -137,7 +152,7 @@
 			} else {
 				height = fitElem.clientHeight;
 
-				if(height > 40 && (displayRatio =  width / height) && ((fit == 'cover' && displayRatio < imageRatio) || (fit == 'contain' && displayRatio > imageRatio))){
+				if((displayRatio =  width / height) && ((fit == 'cover' && displayRatio < imageRatio) || (fit == 'contain' && displayRatio > imageRatio))){
 					retWidth = width * (imageRatio / displayRatio);
 				}
 			}

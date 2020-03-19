@@ -24,10 +24,11 @@ This system uses [PostCSS](http://postcss.org/). Don't worry if you are coming f
 * You can use lots of css4 features. We use cssnext. Reference [here](http://cssnext.io/)
 * Easy aspect ratio divs. Reference [here](https://github.com/arccoza/postcss-aspect-ratio)
 * Quantity queries. Reference [here](https://github.com/pascalduez/postcss-quantity-queries)
+* URLs (background images, font-faces, etc) can be automatically resolved by using `resolve()` in place of `url()` and using a relative URL from the theme root. Reference [PostCSS Assets](https://github.com/borodean/postcss-assets). Example: `background: url('img/shims/16x9.png')` becomes: `background: resolve('img/shims/16x9.png')` and outputs in the compiled css as `background: url('/wp-content/themes/core/img/shims/16x9.png')`.
 
 ## Linting
 
-This systems `grunt dist` task will lint your postcss. Check the .stylelintrc.json at root to see what rules have been added beyond the [standard config](https://github.com/stylelint/stylelint-config-standard).
+This systems `gulp dist` task will lint your postcss. Check the .stylelintrc.json at root to see what rules have been added beyond the [standard config](https://github.com/stylelint/stylelint-config-standard).
 
 ## Table of Contents
 

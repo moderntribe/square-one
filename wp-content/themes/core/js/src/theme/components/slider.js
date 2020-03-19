@@ -130,7 +130,7 @@ const initSliders = () => {
 };
 
 /**
- * module
+ * @module
  * @description Responds to panel live updating.
  */
 

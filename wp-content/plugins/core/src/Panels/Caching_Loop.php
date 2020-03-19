@@ -29,6 +29,9 @@ class Caching_Loop extends Loop {
 	}
 
 	public static function preempt_panels_loop() {
+		if ( is_panel_preview() ) {
+			return;
+		}
 		// mostly copied from \ModularContent\Plugin::loop()
 		$panels       = null;
 		$current_post = get_queried_object();

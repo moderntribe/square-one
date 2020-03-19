@@ -40,7 +40,7 @@ class Single extends Base {
 	}
 
 	protected function get_social_share() {
-		$social = new Social_Links( [ 'facebook', 'twitter', 'google', 'linkedin', 'email' ], false );
+		$social = new Social_Links( [ 'facebook', 'twitter', 'linkedin', 'email' ], false );
 		return $social->format_links( $social->get_links() );
 	}
 

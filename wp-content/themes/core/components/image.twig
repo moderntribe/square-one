@@ -1,25 +1,32 @@
-{# Component: Image #}
+{# Component: Image
 
-<div {% if component_classes %}class="{{ component_classes }}"{% endif %}>
-	{% if wrapper is not empty %}
-	<{{ wrapper.tag }} {{ wrapper.attributes }} class="{{ wrapper.class }}">
+Documentation: docs\theme\components\image.md
+
+Controller: wp-content\plugins\core\src\Templates\Components\Image.php
+PostCSS: wp-content\plugins\core\assets\theme\pcss\components\_image.pcss
+
+Description:
+The Image Component is the primary means by which we inject image markup into the site. The Image
+component functions somewhat differently than other components as it combines a lot of internal source code
+generation along with the general output of the image block. Lazy loading, srcset, background images,
+appending arbitrary html and more are available.
+
+For complete documentation & usage examples, checkout the component's documentation listed above.
+#}
+
+
+<{{ wrapper.tag }} {{ wrapper.classes }} {{ wrapper.attrs }}>
+
+	{% if link is not empty %}
+	<a href="{{ link.url }}" {{ link.classes }} {{ link.attrs }}>
 	{% endif %}
 
-		{% if link is not empty %}
-		<a href="{{ link.url }}" target="{{ link.target }}" title="{{ link.title }}" class="{{ link.class }}" {{ rel }}>
-		{% endif %}
+	{{ image }}
 
-		{% if img is not empty %}
-		<img class="{{ img.class }}" {{ img.attributes }} />
-		{% endif %}
-
-		{% if link is not empty %}
-		</a>
-		{% endif %}
-
-		{{ html }}
-
-	{% if wrapper is not empty %}
-	</{{ wrapper.tag }}>
+	{% if link is not empty %}
+	</a>
 	{% endif %}
-</div>
+
+	{{ html }}
+
+</{{ wrapper.tag }}>

@@ -12,6 +12,7 @@ module.exports = {
 			`${ pkg._core_theme_js_vendor_path }ls.respimg.js`,
 			`${ pkg._core_theme_js_vendor_path }ls.bgset.js`,
 			`${ pkg._core_theme_js_vendor_path }lazysizes.js`,
+			`${ pkg._core_theme_js_vendor_path }swiper.js`,
 		] )
 			.pipe( concat( 'vendorGlobal.min.js' ) )
 			.pipe( uglify( {
