@@ -80,8 +80,12 @@ class Sample_Post_Type_Service_Provider extends Post_Type_Service_Provider {
 The final step in making your post type available is registering it's container in core/src/Core.php
 
 ```php
+use Tribe\Project\Service_Providers\Post_Types\Sample_Post_Type_Service_Provider;
+
+...
+
 private function load_post_type_providers() {
-	$this->container->register( new Sample_Post_Type_Service_Provider() );
+	$this->providers['post_type.sample'] = new Sample_Post_Type_Service_Provider();
 }
 ```
 
