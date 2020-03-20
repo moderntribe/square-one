@@ -30,6 +30,7 @@ jobs:
         env:
           WP_PLUGIN_ACF_KEY: ${{ secrets.WP_PLUGIN_ACF_KEY }}
           WP_PLUGIN_GF_KEY: ${{ secrets.WP_PLUGIN_GF_KEY }}
+          WP_PLUGIN_GF_TOKEN: ${{ secrets.WP_PLUGIN_GF_TOKEN }}
         run: composer install --prefer-dist --no-progress --no-suggest
 
       - name: PHPCS

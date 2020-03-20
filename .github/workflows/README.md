@@ -9,6 +9,7 @@ Runs the PHPCS sniffs from the root of your projects. Define your standards in t
 In order to leverage this code-sniffing workflow, this project will need:
 
 1. A `GH_TOKEN` secret added to the repo under the project's Settings > Secrets page. This should be an active GitHub oAuth token.
+1. The following secrets are also needed: `WP_PLUGIN_ACF_KEY`, `WP_PLUGIN_GF_KEY`, `WP_PLUGIN_GF_TOKEN`. These should be in the Square1 .env file in 1password.
 
 ## `eslint.yml`
 
