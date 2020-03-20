@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ## 2020.03
 * Fixed: Broken composer.lock file preventing Gravity Forms installation
+* Updated: Docs for Post Type Providers to be consistant with the the existing providers.
 
 ## 2020.02
 * Updated: s3-uploads plugin to 2.2.1
