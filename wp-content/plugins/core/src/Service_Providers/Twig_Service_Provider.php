@@ -50,10 +50,6 @@ class Twig_Service_Provider extends Service_Provider {
 			return $twig;
 		};
 
-		add_filter( 'tribe/project/twig', function ( $twig ) use ( $container ) {
-			return $container['twig'];
-		}, 0, 1 );
-
 		$container[ self::COMPONENT_FACTORY ] = function( Container $container ) {
 			return new Templates\Component_Factory( $container[ self::ENVIRONMENT ] );
 		};

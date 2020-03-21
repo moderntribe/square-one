@@ -5,6 +5,7 @@ namespace Tribe\Project;
 use Psr\Container\ContainerInterface;
 use Tribe\Libs\Container\Container_Provider;
 use Tribe\Project\Cache\Cache_Provider;
+use Tribe\Project\Development\Whoops_Subscriber;
 use Tribe\Project\Service_Providers\Admin_Provider;
 use Tribe\Project\Service_Providers\Asset_Provider;
 use Tribe\Project\Service_Providers\CLI_Provider;
@@ -27,8 +28,7 @@ use Tribe\Project\Service_Providers\Taxonomies\Post_Tag_Service_Provider;
 use Tribe\Project\Service_Providers\Theme_Customizer_Provider;
 use Tribe\Project\Service_Providers\Theme_Provider;
 use Tribe\Project\Service_Providers\Twig_Service_Provider;
-use Tribe\Project\Service_Providers\Whoops_Provider;
-use Tribe\Project\Templates\Templates_Provider;
+use Tribe\Project\Templates\Templates_Subscriber;
 
 class Core {
 
@@ -80,11 +80,6 @@ class Core {
 		$this->load_post_type_providers();
 		$this->load_taxonomy_providers();
 
-		// Enable Whoops error logging if required.
-		if ( defined( 'WHOOPS_ENABLE' ) && WHOOPS_ENABLE && class_exists( '\Whoops\Run' ) ) {
-			$this->providers['whoops'] = new Whoops_Provider();
-		}
-
 		/**
 		 * Filter the service providers that power the plugin
 		 *
@@ -98,11 +93,28 @@ class Core {
 	}
 
 	private function init_template_container(): void {
+		/*
+		 * List of definition files (keys) and their corresponding subscribers (values)
+		 */
+		$definitions = [
+			dirname( __DIR__ ) . '/definitions/twig.php'      => [],
+			dirname( __DIR__ ) . '/definitions/templates.php' => [ Templates_Subscriber::class ],
+		];
+
+		if ( defined( 'WHOOPS_ENABLE' ) && WHOOPS_ENABLE && class_exists( '\Whoops\Run' ) ) {
+			$definitions[ dirname( __DIR__ ) . '/definitions/whoops.php' ] = [ Whoops_Subscriber::class ];
+		}
+
 		$builder = new \DI\ContainerBuilder();
-		$builder->addDefinitions( dirname( __DIR__ ) . '/definitions/twig.php' );
-		$builder->addDefinitions( dirname( __DIR__ ) . '/definitions/templates.php' );
+		$builder->addDefinitions( ... array_keys( $definitions ) );
+
 		$this->template_container = $builder->build();
-		$this->template_container->get( Templates_Provider::class )->register( $this->template_container );
+
+		foreach ( $definitions as $definition_file => $subscribers ) {
+			foreach ( $subscribers as $subscriber ) {
+				$this->template_container->get( $subscriber )->register( $this->template_container );
+			}
+		}
 	}
 
 
