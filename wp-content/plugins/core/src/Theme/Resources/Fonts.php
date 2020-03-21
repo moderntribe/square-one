@@ -5,10 +5,15 @@ namespace Tribe\Project\Theme\Resources;
 
 
 class Fonts {
+	/**
+	 * @var string
+	 */
+	private $plugin_file;
 
 	private $fonts = [ ];
 
-	public function __construct( array $fonts = [ ] ) {
+	public function __construct( string $plugin_file, array $fonts = [ ] ) {
+		$this->plugin_file = $plugin_file;
 		$this->fonts = $fonts;
 	}
 
@@ -18,7 +23,7 @@ class Fonts {
 	 */
 	public function add_typekit_to_editor( $plugins ) {
 		if( ! empty( $this->fonts[ 'typekit' ] ) ) {
-			$plugins['typekit'] = tribe_assets_url( 'admin/editor/typekit.tinymce.js' );
+			$plugins['typekit'] = plugins_url( 'assets/admin/editor/typekit.tinymce.js', $this->plugin_file );
 		}
 
 		return $plugins;

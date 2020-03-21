@@ -206,6 +206,7 @@ class Theme_Provider extends Service_Provider {
 		$container[ 'theme.resources.custom_fonts' ] = $this->custom_fonts;
 		$container[ 'theme.resources.fonts' ] = function ( Container $container ) {
 			return new Fonts(
+				$container['plugin_file'],
 				[
 					'typekit' => $container[ 'theme.resources.typekit_id' ],
 					'google'  => $container[ 'theme.resources.google_fonts' ],

@@ -4,10 +4,9 @@ namespace Tribe\Project;
 
 use Psr\Container\ContainerInterface;
 use Tribe\Libs\Container\Container_Provider;
+use Tribe\Project\Admin\Admin_Subscriber;
 use Tribe\Project\Cache\Cache_Provider;
 use Tribe\Project\Development\Whoops_Subscriber;
-use Tribe\Project\Service_Providers\Admin_Provider;
-use Tribe\Project\Service_Providers\Asset_Provider;
 use Tribe\Project\Service_Providers\CLI_Provider;
 use Tribe\Project\Service_Providers\Content_Provider;
 use Tribe\Project\Service_Providers\Nav_Menu_Provider;
@@ -61,8 +60,6 @@ class Core {
 		$this->providers['container'] = new Container_Provider();
 
 		// keep these in alphabetical order, it makes the list easier to skim
-		$this->providers['admin']            = new Admin_Provider();
-		$this->providers['assets']           = new Asset_Provider();
 		$this->providers['cache']            = new Cache_Provider(); // override tribe-libs default
 		$this->providers['cli']              = new CLI_Provider();
 		$this->providers['content']          = new Content_Provider();
@@ -97,6 +94,8 @@ class Core {
 		 * List of definition files (keys) and their corresponding subscribers (values)
 		 */
 		$definitions = [
+			dirname( __DIR__ ) . '/definitions/admin.php'     => [ Admin_Subscriber::class ],
+			dirname( __DIR__ ) . '/definitions/assets.php'    => [],
 			dirname( __DIR__ ) . '/definitions/twig.php'      => [],
 			dirname( __DIR__ ) . '/definitions/templates.php' => [ Templates_Subscriber::class ],
 		];
@@ -106,6 +105,7 @@ class Core {
 		}
 
 		$builder = new \DI\ContainerBuilder();
+		$builder->addDefinitions( [ 'plugin.file' => dirname( __DIR__ ) . '/core.php' ] );
 		$builder->addDefinitions( ... array_keys( $definitions ) );
 
 		$this->template_container = $builder->build();
