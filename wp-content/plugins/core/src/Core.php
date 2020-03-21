@@ -22,10 +22,10 @@ use Tribe\Project\Service_Providers\Settings_Provider;
 use Tribe\Project\Service_Providers\Taxonomies\Category_Service_Provider;
 use Tribe\Project\Service_Providers\Taxonomies\Example_Taxonomy_Service_Provider;
 use Tribe\Project\Service_Providers\Taxonomies\Post_Tag_Service_Provider;
-use Tribe\Project\Service_Providers\Theme_Provider;
 use Tribe\Project\Service_Providers\Twig_Service_Provider;
 use Tribe\Project\Shortcodes\Shortcodes_Subscriber;
 use Tribe\Project\Templates\Templates_Subscriber;
+use Tribe\Project\Theme\Theme_Subscriber;
 use Tribe\Project\Theme_Customizer\Theme_Customizer_Subscriber;
 
 class Core {
@@ -65,9 +65,8 @@ class Core {
 		$this->providers['meta']     = new Object_Meta_Provider();
 		$this->providers['nav_menu'] = new Nav_Menu_Provider();
 		//$this->providers['p2p']              = new P2P_Provider();
-		$this->providers['settings']         = new Settings_Provider();
-		$this->providers['theme']            = new Theme_Provider();
-		$this->providers['twig']             = new Twig_Service_Provider();
+		$this->providers['settings'] = new Settings_Provider();
+		$this->providers['twig']     = new Twig_Service_Provider();
 
 		$this->optional_dependencies();
 		$this->load_post_type_providers();
@@ -94,6 +93,7 @@ class Core {
 			dirname( __DIR__ ) . '/definitions/assets.php'           => [],
 			dirname( __DIR__ ) . '/definitions/panels.php'           => [ Panels_Subscriber::class ],
 			dirname( __DIR__ ) . '/definitions/shortcodes.php'       => [ Shortcodes_Subscriber::class ],
+			dirname( __DIR__ ) . '/definitions/theme.php'            => [ Theme_Subscriber::class ],
 			dirname( __DIR__ ) . '/definitions/theme-customizer.php' => [ Theme_Customizer_Subscriber::class ],
 			dirname( __DIR__ ) . '/definitions/twig.php'             => [],
 			dirname( __DIR__ ) . '/definitions/templates.php'        => [ Templates_Subscriber::class ],
