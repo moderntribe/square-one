@@ -7,12 +7,12 @@ use Tribe\Libs\Container\Container_Provider;
 use Tribe\Project\Admin\Admin_Subscriber;
 use Tribe\Project\Cache\Cache_Provider;
 use Tribe\Project\Development\Whoops_Subscriber;
+use Tribe\Project\Panels\Panels_Subscriber;
 use Tribe\Project\Service_Providers\CLI_Provider;
 use Tribe\Project\Service_Providers\Content_Provider;
 use Tribe\Project\Service_Providers\Nav_Menu_Provider;
 use Tribe\Project\Service_Providers\Object_Meta_Provider;
 use Tribe\Project\Service_Providers\P2P_Provider;
-use Tribe\Project\Service_Providers\Panels_Provider;
 use Tribe\Project\Service_Providers\Post_Types\Event_Service_Provider;
 use Tribe\Project\Service_Providers\Post_Types\Organizer_Service_Provider;
 use Tribe\Project\Service_Providers\Post_Types\Page_Service_Provider;
@@ -65,8 +65,7 @@ class Core {
 		$this->providers['content']          = new Content_Provider();
 		$this->providers['meta']             = new Object_Meta_Provider();
 		$this->providers['nav_menu']         = new Nav_Menu_Provider();
-		$this->providers['panels']           = new Panels_Provider();
-		$this->providers['p2p']              = new P2P_Provider();
+		//$this->providers['p2p']              = new P2P_Provider();
 		$this->providers['settings']         = new Settings_Provider();
 		$this->providers['shortcodes']       = new Shortcode_Provider();
 		$this->providers['theme']            = new Theme_Provider();
@@ -96,6 +95,7 @@ class Core {
 		$definitions = [
 			dirname( __DIR__ ) . '/definitions/admin.php'     => [ Admin_Subscriber::class ],
 			dirname( __DIR__ ) . '/definitions/assets.php'    => [],
+			dirname( __DIR__ ) . '/definitions/panels.php'    => [ Panels_Subscriber::class ],
 			dirname( __DIR__ ) . '/definitions/twig.php'      => [],
 			dirname( __DIR__ ) . '/definitions/templates.php' => [ Templates_Subscriber::class ],
 		];
