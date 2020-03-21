@@ -22,8 +22,10 @@ class Image {
 	/** @var Image_Derivative[] */
 	private $sizes = [];
 
-	public function __construct( \WP_Post $attachment, string $title, string $alt, int $width, int $height, Image_Derivative ...$sizes ) {
+	public function __construct( \WP_Post $attachment, string $title, string $alt, int $width, int $height, $sizes ) {
 		$this->attachment = $attachment;
+		$this->title      = $title;
+		$this->alt        = $alt;
 		$this->width      = $width;
 		$this->height     = $height;
 		$this->sizes      = $sizes;
@@ -94,6 +96,6 @@ class Image {
 			);
 		}
 
-		return new self( $attachment, $title, $alt, $metadata['width'], $metadata['height'], ... $sizes );
+		return new self( $attachment, $title, $alt, $metadata['width'], $metadata['height'], $sizes );
 	}
 }
