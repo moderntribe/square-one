@@ -22,7 +22,6 @@ use Tribe\Project\Service_Providers\Post_Types\Venue_Service_Provider;
 use Tribe\Project\Service_Providers\Taxonomies\Category_Service_Provider;
 use Tribe\Project\Service_Providers\Taxonomies\Example_Taxonomy_Service_Provider;
 use Tribe\Project\Service_Providers\Taxonomies\Post_Tag_Service_Provider;
-use Tribe\Project\Service_Providers\Twig_Service_Provider;
 use Tribe\Project\Settings\Settings_Subscriber;
 use Tribe\Project\Shortcodes\Shortcodes_Subscriber;
 use Tribe\Project\Templates\Templates_Subscriber;
@@ -63,7 +62,6 @@ class Core {
 		$this->providers['cache']   = new Cache_Provider(); // override tribe-libs default
 		$this->providers['cli']     = new CLI_Provider();
 		//$this->providers['p2p']              = new P2P_Provider();
-		$this->providers['twig'] = new Twig_Service_Provider();
 
 		$this->optional_dependencies();
 		$this->load_post_type_providers();
