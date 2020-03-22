@@ -13,14 +13,14 @@ class Footer extends Abstract_Template {
 	public function get_data(): array {
 		return [
 			'menu' => [
-				Nav_Menu_Provider::SECONDARY => $this->get_primary_nav_menu(),
+				'secondary' => $this->get_primary_nav_menu(),
 			],
 		];
 	}
 
 	public function get_primary_nav_menu() {
 		$args = [
-			'theme_location'  => Nav_Menu_Provider::SECONDARY,
+			'theme_location'  => 'secondary',
 			'container'       => false,
 			'container_class' => '',
 			'menu_class'      => '',

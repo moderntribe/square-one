@@ -12,14 +12,14 @@ class Header extends Abstract_Template {
 	public function get_data(): array {
 		return [
 			'menu' => [
-				Nav_Menu_Provider::PRIMARY => $this->get_primary_nav_menu(),
+				'primary' => $this->get_primary_nav_menu(),
 			],
 		];
 	}
 
 	public function get_primary_nav_menu() {
 		$args = [
-			'theme_location'  => Nav_Menu_Provider::PRIMARY,
+			'theme_location'  => 'primary',
 			'container'       => false,
 			'container_class' => '',
 			'menu_class'      => '',
