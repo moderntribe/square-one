@@ -7,12 +7,12 @@ use Tribe\Libs\Container\Container_Provider;
 use Tribe\Project\Admin\Admin_Subscriber;
 use Tribe\Project\Cache\Cache_Provider;
 use Tribe\Project\Container\Subscriber_Interface;
+use Tribe\Project\Content\Content_Subscriber;
 use Tribe\Project\Development\Whoops_Subscriber;
 use Tribe\Project\Nav_Menus\Nav_Menus_Subscriber;
 use Tribe\Project\Object_Meta\Object_Meta_Subscriber;
 use Tribe\Project\Panels\Panels_Subscriber;
 use Tribe\Project\Service_Providers\CLI_Provider;
-use Tribe\Project\Service_Providers\Content_Provider;
 use Tribe\Project\Service_Providers\Post_Types\Event_Service_Provider;
 use Tribe\Project\Service_Providers\Post_Types\Organizer_Service_Provider;
 use Tribe\Project\Service_Providers\Post_Types\Page_Service_Provider;
@@ -62,7 +62,6 @@ class Core {
 		// keep these in alphabetical order, it makes the list easier to skim
 		$this->providers['cache']   = new Cache_Provider(); // override tribe-libs default
 		$this->providers['cli']     = new CLI_Provider();
-		$this->providers['content'] = new Content_Provider();
 		//$this->providers['p2p']              = new P2P_Provider();
 		$this->providers['twig'] = new Twig_Service_Provider();
 
@@ -89,6 +88,7 @@ class Core {
 		$definitions = [
 			dirname( __DIR__ ) . '/definitions/admin.php'            => [ Admin_Subscriber::class ],
 			dirname( __DIR__ ) . '/definitions/assets.php'           => [],
+			dirname( __DIR__ ) . '/definitions/content.php'          => [ Content_Subscriber::class ],
 			dirname( __DIR__ ) . '/definitions/nav-menus.php'        => [ Nav_Menus_Subscriber::class ],
 			dirname( __DIR__ ) . '/definitions/object-meta.php'      => [ Object_Meta_Subscriber::class ],
 			dirname( __DIR__ ) . '/definitions/panels.php'           => [ Panels_Subscriber::class ],
