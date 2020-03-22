@@ -4,6 +4,8 @@ declare( strict_types=1 );
 namespace Tribe\Project\Templates\Models;
 
 class Image {
+	private const CACHE_GROUP = 'tribe_image_model';
+
 	/** @var \WP_Post $attachment */
 	private $attachment;
 
@@ -67,10 +69,19 @@ class Image {
 		$title = get_the_title( $attachment_id );
 		$alt   = get_post_meta( $attachment_id, '_wp_attachment_image_alt', true );
 
-		$registered_sizes = wp_get_additional_image_sizes();
-		$metadata         = wp_get_attachment_metadata( $attachment_id );
-		$sizes            = [];
+		$metadata = wp_get_attachment_metadata( $attachment_id );
+		$sizes    = self::build_image_derivatives( $attachment_id );
 
+		return new self( $attachment, $title, $alt, $metadata['width'], $metadata['height'], $sizes );
+	}
+
+	private static function build_image_derivatives( $attachment_id ): array {
+		$registered_sizes = wp_get_additional_image_sizes();
+		$cached           = wp_cache_get( $attachment_id, self::CACHE_GROUP );
+		$sizes            = $cached ? unserialize( $cached, [ 'allowed_classes' => [ Image_Derivative::class ] ] ) : [];
+		if ( is_array( $sizes ) && ! empty( $sizes ) ) {
+			return $sizes;
+		}
 		foreach ( array_merge( get_intermediate_image_sizes(), [ 'full' ] ) as $size ) {
 			$src = wp_get_attachment_image_src( $attachment_id, $size );
 			if ( ! $src ) {
@@ -96,6 +107,8 @@ class Image {
 			);
 		}
 
-		return new self( $attachment, $title, $alt, $metadata['width'], $metadata['height'], $sizes );
+		wp_cache_set( $attachment_id, serialize( $sizes ), self::CACHE_GROUP, HOUR_IN_SECONDS );
+
+		return $sizes;
 	}
 }
