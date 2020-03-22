@@ -3,7 +3,6 @@
 namespace Tribe\Project;
 
 use Psr\Container\ContainerInterface;
-use Tribe\Libs\Container\Container_Provider;
 use Tribe\Project\Admin\Admin_Subscriber;
 use Tribe\Project\Cache\Cache_Provider;
 use Tribe\Project\CLI\CLI_Subscriber;
@@ -56,8 +55,6 @@ class Core {
 	}
 
 	private function load_service_providers() {
-		$this->providers['container'] = new Container_Provider();
-
 		// keep these in alphabetical order, it makes the list easier to skim
 		$this->providers['cache'] = new Cache_Provider(); // override tribe-libs default
 		//$this->providers['p2p']              = new P2P_Provider();
