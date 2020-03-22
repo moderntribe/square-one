@@ -12,12 +12,7 @@ use Tribe\Project\Development\Whoops_Subscriber;
 use Tribe\Project\Nav_Menus\Nav_Menus_Subscriber;
 use Tribe\Project\Object_Meta\Object_Meta_Subscriber;
 use Tribe\Project\Panels\Panels_Subscriber;
-use Tribe\Project\Service_Providers\Post_Types\Event_Service_Provider;
-use Tribe\Project\Service_Providers\Post_Types\Organizer_Service_Provider;
-use Tribe\Project\Service_Providers\Post_Types\Page_Service_Provider;
-use Tribe\Project\Service_Providers\Post_Types\Post_Service_Provider;
-use Tribe\Project\Service_Providers\Post_Types\Sample_Service_Provider;
-use Tribe\Project\Service_Providers\Post_Types\Venue_Service_Provider;
+use Tribe\Project\Post_Types;
 use Tribe\Project\Service_Providers\Taxonomies\Category_Service_Provider;
 use Tribe\Project\Service_Providers\Taxonomies\Example_Taxonomy_Service_Provider;
 use Tribe\Project\Service_Providers\Taxonomies\Post_Tag_Service_Provider;
@@ -60,7 +55,6 @@ class Core {
 		//$this->providers['p2p']              = new P2P_Provider();
 
 		$this->optional_dependencies();
-		$this->load_post_type_providers();
 		$this->load_taxonomy_providers();
 
 		/**
@@ -93,6 +87,11 @@ class Core {
 			dirname( __DIR__ ) . '/definitions/theme-customizer.php' => [ Theme_Customizer_Subscriber::class ],
 			dirname( __DIR__ ) . '/definitions/twig.php'             => [],
 			dirname( __DIR__ ) . '/definitions/templates.php'        => [ Templates_Subscriber::class ],
+			dirname( __DIR__ ) . '/definitions/post-types.php'       => [
+				// our post types
+				Post_Types\Sample\Subscriber::class,
+				// no need for subscribers for 3rd-party post types
+			],
 		];
 
 		if ( defined( 'WHOOPS_ENABLE' ) && WHOOPS_ENABLE && class_exists( '\Whoops\Run' ) ) {
@@ -132,17 +131,6 @@ class Core {
 				$this->providers[ $key ] = new $provider();
 			}
 		}
-	}
-
-	private function load_post_type_providers() {
-		$this->providers['post_type.sample'] = new Sample_Service_Provider();
-
-		// externally registered post types
-		$this->providers['post_type.event']     = new Event_Service_Provider();
-		$this->providers['post_type.organizer'] = new Organizer_Service_Provider();
-		$this->providers['post_type.page']      = new Page_Service_Provider();
-		$this->providers['post_type.post']      = new Post_Service_Provider();
-		$this->providers['post_type.venue']     = new Venue_Service_Provider();
 	}
 
 	private function load_taxonomy_providers() {
