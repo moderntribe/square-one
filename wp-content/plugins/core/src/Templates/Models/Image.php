@@ -71,7 +71,7 @@ class Image {
 		$metadata         = wp_get_attachment_metadata( $attachment_id );
 		$sizes            = [];
 
-		foreach ( array_merge( array_keys( $metadata['sizes'] ), [ 'full' ] ) as $size ) {
+		foreach ( array_merge( get_intermediate_image_sizes(), [ 'full' ] ) as $size ) {
 			$src = wp_get_attachment_image_src( $attachment_id, $size );
 			if ( ! $src ) {
 				continue;
@@ -90,7 +90,7 @@ class Image {
 				$size,
 				$src[0], // src
 				$src[1], // width
-				$src[2], //height
+				$src[2], // height
 				(bool) $src[3], // is_intermediate
 				$match
 			);
