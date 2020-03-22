@@ -35,7 +35,7 @@ class Theme_Subscriber implements Subscriber_Interface {
 
 		$this->scripts( $container );
 		$this->styles( $container );
-		// $this->third_party_tags( $container ); // TODO
+		$this->third_party_tags( $container );
 		$this->editor_styles( $container );
 		//$this->editor_formats( $container );
 

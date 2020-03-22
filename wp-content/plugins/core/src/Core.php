@@ -6,23 +6,24 @@ use Psr\Container\ContainerInterface;
 use Tribe\Libs\Container\Container_Provider;
 use Tribe\Project\Admin\Admin_Subscriber;
 use Tribe\Project\Cache\Cache_Provider;
+use Tribe\Project\Container\Subscriber_Interface;
 use Tribe\Project\Development\Whoops_Subscriber;
+use Tribe\Project\Object_Meta\Object_Meta_Subscriber;
 use Tribe\Project\Panels\Panels_Subscriber;
 use Tribe\Project\Service_Providers\CLI_Provider;
 use Tribe\Project\Service_Providers\Content_Provider;
 use Tribe\Project\Service_Providers\Nav_Menu_Provider;
-use Tribe\Project\Service_Providers\Object_Meta_Provider;
 use Tribe\Project\Service_Providers\Post_Types\Event_Service_Provider;
 use Tribe\Project\Service_Providers\Post_Types\Organizer_Service_Provider;
 use Tribe\Project\Service_Providers\Post_Types\Page_Service_Provider;
 use Tribe\Project\Service_Providers\Post_Types\Post_Service_Provider;
 use Tribe\Project\Service_Providers\Post_Types\Sample_Service_Provider;
 use Tribe\Project\Service_Providers\Post_Types\Venue_Service_Provider;
-use Tribe\Project\Service_Providers\Settings_Provider;
 use Tribe\Project\Service_Providers\Taxonomies\Category_Service_Provider;
 use Tribe\Project\Service_Providers\Taxonomies\Example_Taxonomy_Service_Provider;
 use Tribe\Project\Service_Providers\Taxonomies\Post_Tag_Service_Provider;
 use Tribe\Project\Service_Providers\Twig_Service_Provider;
+use Tribe\Project\Settings\Settings_Subscriber;
 use Tribe\Project\Shortcodes\Shortcodes_Subscriber;
 use Tribe\Project\Templates\Templates_Subscriber;
 use Tribe\Project\Theme\Theme_Subscriber;
@@ -62,10 +63,8 @@ class Core {
 		$this->providers['cache']    = new Cache_Provider(); // override tribe-libs default
 		$this->providers['cli']      = new CLI_Provider();
 		$this->providers['content']  = new Content_Provider();
-		$this->providers['meta']     = new Object_Meta_Provider();
 		$this->providers['nav_menu'] = new Nav_Menu_Provider();
 		//$this->providers['p2p']              = new P2P_Provider();
-		$this->providers['settings'] = new Settings_Provider();
 		$this->providers['twig']     = new Twig_Service_Provider();
 
 		$this->optional_dependencies();
@@ -85,13 +84,15 @@ class Core {
 	}
 
 	private function init_template_container(): void {
-		/*
-		 * List of definition files (keys) and their corresponding subscribers (values)
+		/**
+		 * @var Subscriber_Interface[][] List of definition files (keys) and their corresponding subscribers (values)
 		 */
 		$definitions = [
 			dirname( __DIR__ ) . '/definitions/admin.php'            => [ Admin_Subscriber::class ],
 			dirname( __DIR__ ) . '/definitions/assets.php'           => [],
+			dirname( __DIR__ ) . '/definitions/object-meta.php'      => [ Object_Meta_Subscriber::class ],
 			dirname( __DIR__ ) . '/definitions/panels.php'           => [ Panels_Subscriber::class ],
+			dirname( __DIR__ ) . '/definitions/settings.php'         => [ Settings_Subscriber::class ],
 			dirname( __DIR__ ) . '/definitions/shortcodes.php'       => [ Shortcodes_Subscriber::class ],
 			dirname( __DIR__ ) . '/definitions/theme.php'            => [ Theme_Subscriber::class ],
 			dirname( __DIR__ ) . '/definitions/theme-customizer.php' => [ Theme_Customizer_Subscriber::class ],
