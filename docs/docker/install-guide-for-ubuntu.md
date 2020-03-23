@@ -244,7 +244,7 @@ npm run docker:global:start
 sudo apt update && sudo apt install resolvconf
 ```
 
-2. Create a head to the file
+2. Create a resolv.conf head file. This will place any content above any auto generated `/etc/resolv.conf` content.
 ```
 sudo nano /etc/resolvconf/resolv.conf.d/head
 ```
