@@ -254,7 +254,7 @@ nameserver 127.0.0.1
 nameserver 1.1.1.1
 nameserver 1.0.0.1
 ```
-
+Note: You can use your preferred nameservers here, as long as `127.0.0.1` is at the top. It's also possible NetworkManager will provide them automatically via DHCP.
 3. Start the service and see if it worked
 ```
 sudo systemctl start resolvconf.service
