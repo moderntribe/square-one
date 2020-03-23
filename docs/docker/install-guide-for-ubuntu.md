@@ -258,7 +258,6 @@ Note: You can use your preferred nameservers here, as long as `127.0.0.1` is at 
 3. Start the service and see if it worked
 ```
 sudo systemctl start resolvconf.service
-cat /etc/resolv.conf
 ```
 
 4. Now restart your computer.
