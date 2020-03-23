@@ -18,6 +18,7 @@ use Tribe\Project\Service_Providers\Taxonomies\Example_Taxonomy_Service_Provider
 use Tribe\Project\Service_Providers\Taxonomies\Post_Tag_Service_Provider;
 use Tribe\Project\Settings\Settings_Subscriber;
 use Tribe\Project\Shortcodes\Shortcodes_Subscriber;
+use Tribe\Project\Taxonomies;
 use Tribe\Project\Templates\Templates_Subscriber;
 use Tribe\Project\Theme\Theme_Subscriber;
 use Tribe\Project\Theme_Customizer\Theme_Customizer_Subscriber;
@@ -55,7 +56,6 @@ class Core {
 		//$this->providers['p2p']              = new P2P_Provider();
 
 		$this->optional_dependencies();
-		$this->load_taxonomy_providers();
 
 		/**
 		 * Filter the service providers that power the plugin
@@ -90,8 +90,13 @@ class Core {
 			dirname( __DIR__ ) . '/definitions/post-types.php'       => [
 				// our post types
 				Post_Types\Sample\Subscriber::class,
-				// no need for subscribers for 3rd-party post types
+				// no need for subscribers for 3rd-party post types unless extending
 			],
+			dirname( __DIR__ ) . '/definitions/taxonomies.php' => [
+				// our taxonomies
+				Taxonomies\Example\Subscriber::class,
+				// no need for subscribers for 3rd-party taxonomies unless extending
+			]
 		];
 
 		if ( defined( 'WHOOPS_ENABLE' ) && WHOOPS_ENABLE && class_exists( '\Whoops\Run' ) ) {
@@ -131,14 +136,6 @@ class Core {
 				$this->providers[ $key ] = new $provider();
 			}
 		}
-	}
-
-	private function load_taxonomy_providers() {
-		$this->providers['taxonomy.example'] = new Example_Taxonomy_Service_Provider();
-
-		// externally registered taxonomies
-		$this->providers['taxonomy.category'] = new Category_Service_Provider();
-		$this->providers['taxonomy.post_tag'] = new Post_Tag_Service_Provider();
 	}
 
 	public function container() {

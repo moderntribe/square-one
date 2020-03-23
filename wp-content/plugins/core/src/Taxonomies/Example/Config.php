@@ -5,10 +5,18 @@ namespace Tribe\Project\Taxonomies\Example;
 
 
 use Tribe\Libs\Taxonomy\Taxonomy_Config;
+use Tribe\Project\Post_Types\Sample\Sample;
 
 class Config extends Taxonomy_Config {
+	protected $taxonomy = Example::NAME;
+	protected $post_types = [
+		Sample::NAME,
+	];
 
 	protected $version = 1;
+
+	public function __construct() {
+	}
 
 	/**
 	 * Arguments to pass when registering the taxonomy.

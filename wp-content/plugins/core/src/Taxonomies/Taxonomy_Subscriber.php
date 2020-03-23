@@ -1,14 +1,14 @@
 <?php
 declare( strict_types=1 );
 
-namespace Tribe\Project\Post_Types;
+namespace Tribe\Project\Taxonomies;
 
 use Psr\Container\ContainerInterface;
 use Tribe\Project\Container\Subscriber_Interface;
 
-abstract class Post_Type_Subscriber implements Subscriber_Interface {
+abstract class Taxonomy_Subscriber implements Subscriber_Interface {
 	/**
-	 * @var string The post type configuration class. Should extend Post_Type_Config
+	 * @var string The taxonomy configuration class. Should extend Taxonomy_Config
 	 */
 	protected $config_class;
 
