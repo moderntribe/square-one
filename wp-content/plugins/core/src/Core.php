@@ -11,11 +11,9 @@ use Tribe\Project\Content\Content_Subscriber;
 use Tribe\Project\Development\Whoops_Subscriber;
 use Tribe\Project\Nav_Menus\Nav_Menus_Subscriber;
 use Tribe\Project\Object_Meta\Object_Meta_Subscriber;
+use Tribe\Project\P2P\P2P_Subscriber;
 use Tribe\Project\Panels\Panels_Subscriber;
 use Tribe\Project\Post_Types;
-use Tribe\Project\Service_Providers\Taxonomies\Category_Service_Provider;
-use Tribe\Project\Service_Providers\Taxonomies\Example_Taxonomy_Service_Provider;
-use Tribe\Project\Service_Providers\Taxonomies\Post_Tag_Service_Provider;
 use Tribe\Project\Settings\Settings_Subscriber;
 use Tribe\Project\Shortcodes\Shortcodes_Subscriber;
 use Tribe\Project\Taxonomies;
@@ -53,7 +51,6 @@ class Core {
 	private function load_service_providers() {
 		// keep these in alphabetical order, it makes the list easier to skim
 		$this->providers['cache'] = new Cache_Provider(); // override tribe-libs default
-		//$this->providers['p2p']              = new P2P_Provider();
 
 		$this->optional_dependencies();
 
@@ -81,6 +78,7 @@ class Core {
 			dirname( __DIR__ ) . '/definitions/nav-menus.php'        => [ Nav_Menus_Subscriber::class ],
 			dirname( __DIR__ ) . '/definitions/object-meta.php'      => [ Object_Meta_Subscriber::class ],
 			dirname( __DIR__ ) . '/definitions/panels.php'           => [ Panels_Subscriber::class ],
+			dirname( __DIR__ ) . '/definitions/p2p.php'              => [ P2P_Subscriber::class ],
 			dirname( __DIR__ ) . '/definitions/settings.php'         => [ Settings_Subscriber::class ],
 			dirname( __DIR__ ) . '/definitions/shortcodes.php'       => [ Shortcodes_Subscriber::class ],
 			dirname( __DIR__ ) . '/definitions/theme.php'            => [ Theme_Subscriber::class ],
@@ -92,11 +90,11 @@ class Core {
 				Post_Types\Sample\Subscriber::class,
 				// no need for subscribers for 3rd-party post types unless extending
 			],
-			dirname( __DIR__ ) . '/definitions/taxonomies.php' => [
+			dirname( __DIR__ ) . '/definitions/taxonomies.php'       => [
 				// our taxonomies
 				Taxonomies\Example\Subscriber::class,
 				// no need for subscribers for 3rd-party taxonomies unless extending
-			]
+			],
 		];
 
 		if ( defined( 'WHOOPS_ENABLE' ) && WHOOPS_ENABLE && class_exists( '\Whoops\Run' ) ) {
