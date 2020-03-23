@@ -253,7 +253,6 @@ with following contents:
 nameserver 127.0.0.1
 nameserver 1.1.1.1
 nameserver 1.0.0.1
-#you can put other nameservers that you like here
 ```
 
 3. Start the service and see if it worked
