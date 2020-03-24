@@ -1,0 +1,34 @@
+{# Component: Video #}
+
+<div
+		class="{{ container_classes }}"
+		{{ container_attrs }}
+		data-id="{{ id }}"
+>
+	<figure class="{{ container_wrap_classes }}">
+		<div class="{{ embed_classes }}">
+			<a
+					href="{{ video_url|esc_url }}"
+					class="c-video__trigger"
+					data-js="c-video-trigger"
+					title="{{ title|esc_html }}"
+					target="_blank"
+					rel="noopener"
+					aria-label="{{ __( 'Click to Play Video' )|esc_html }}"
+			>
+				<img
+						class="c-video__image lazyload"
+						src="{{ shim|esc_url }}"
+						data-src="{{ thumbnail_url|esc_url }}"
+						role="presentation"
+				/>
+				<div class="c-video__trigger-action">
+					<i class="c-video__icon icon icon-play" aria-hidden="true"></i>
+				</div>
+			</a>
+		</div>
+		<figcaption class="c-video__caption">
+			<span class="c-video__caption-text">{{ play_text|esc_html }}</span>
+		</figcaption>
+	</figure>
+</div>
