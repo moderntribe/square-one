@@ -7,6 +7,7 @@ use Tribe\Project\Templates\Abstract_Template;
 use Tribe\Project\Templates\Component_Factory;
 use Tribe\Project\Templates\Components\Breadcrumbs;
 use Tribe\Project\Templates\Components\Button;
+use Tribe\Project\Templates\Components\Image;
 use Tribe\Project\Templates\Components\Pagination;
 use Tribe\Project\Templates\Controllers\Content\Header\Subheader;
 use Tribe\Project\Templates\Controllers\Sidebar\Main_Sidebar;
@@ -73,11 +74,24 @@ class Page extends Abstract_Template {
 	}
 
 	protected function get_featured_image() {
+		$image_id = get_post_thumbnail_id();
+
+		if ( empty( $image_id ) ) {
+			return '';
+		}
+
+		try {
+			$image = \Tribe\Project\Templates\Models\Image::factory( $image_id );
+		} catch ( \Exception $e ) {
+			return '';
+		}
+
 		$options = [
-			'wrapper_class' => 'page__image',
+			Image::ATTACHMENT      => $image,
+			Image::WRAPPER_CLASSES => [ 'page__image' ],
 		];
 
-		return the_tribe_image( get_post_thumbnail_id(), $options );
+		return $this->factory->get( Image::class, $options )->render();
 	}
 
 	protected function get_comments() {

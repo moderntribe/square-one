@@ -4,6 +4,7 @@
 namespace Tribe\Project\Templates\Controllers\Content\Single;
 
 use Tribe\Project\Templates\Abstract_Template;
+use Tribe\Project\Templates\Components\Image;
 use Tribe\Project\Theme\Social_Links;
 
 class Post extends Abstract_Template {
@@ -34,12 +35,25 @@ class Post extends Abstract_Template {
 		return apply_filters( 'the_content', get_the_content() );
 	}
 
-	protected function get_featured_image() {
+	protected function get_featured_image(): string {
+		$image_id = get_post_thumbnail_id();
+
+		if ( empty( $image_id ) ) {
+			return '';
+		}
+
+		try {
+			$image = \Tribe\Project\Templates\Models\Image::factory( $image_id );
+		} catch ( \Exception $e ) {
+			return '';
+		}
+
 		$options = [
-			'wrapper_class' => 'item-single__image',
+			Image::ATTACHMENT      => $image,
+			Image::WRAPPER_CLASSES => [ 'item-single__image' ],
 		];
 
-		return the_tribe_image( get_post_thumbnail_id(), $options );
+		return $this->factory->get( Image::class, $options )->render();
 	}
 
 	protected function get_time() {
