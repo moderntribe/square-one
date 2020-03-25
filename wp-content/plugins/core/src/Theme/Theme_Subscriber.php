@@ -4,7 +4,7 @@ declare( strict_types=1 );
 namespace Tribe\Project\Theme;
 
 use Psr\Container\ContainerInterface;
-use Tribe\Project\Container\Subscriber_Interface;
+use Tribe\Libs\Container\Subscriber_Interface;
 use Tribe\Project\Theme\Nav\Nav_Attribute_Filters;
 use Tribe\Project\Theme\Resources\Editor_Formats;
 use Tribe\Project\Theme\Resources\Editor_Styles;

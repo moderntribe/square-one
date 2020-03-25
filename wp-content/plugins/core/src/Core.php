@@ -3,10 +3,11 @@
 namespace Tribe\Project;
 
 use Psr\Container\ContainerInterface;
+use Tribe\Libs\Container\Service_Provider;
+use Tribe\Libs\Container\Subscriber_Interface;
 use Tribe\Project\Admin\Admin_Subscriber;
-use Tribe\Project\Cache\Cache_Provider;
+use Tribe\Project\Cache\Cache_Subscriber;
 use Tribe\Project\CLI\CLI_Subscriber;
-use Tribe\Project\Container\Subscriber_Interface;
 use Tribe\Project\Content\Content_Subscriber;
 use Tribe\Project\Development\Whoops_Subscriber;
 use Tribe\Project\Nav_Menus\Nav_Menus_Subscriber;
@@ -32,7 +33,7 @@ class Core {
 	protected $template_container;
 
 	/**
-	 * @var Container\Service_Provider[]
+	 * @var Service_Provider[]
 	 */
 	private $providers = [];
 
@@ -49,15 +50,12 @@ class Core {
 	}
 
 	private function load_service_providers() {
-		// keep these in alphabetical order, it makes the list easier to skim
-		$this->providers['cache'] = new Cache_Provider(); // override tribe-libs default
-
 		$this->optional_dependencies();
 
 		/**
 		 * Filter the service providers that power the plugin
 		 *
-		 * @param Container\Service_Provider[] $providers
+		 * @param Service_Provider[] $providers
 		 */
 		$this->providers = apply_filters( 'tribe/project/providers', $this->providers );
 
@@ -73,6 +71,10 @@ class Core {
 		$definitions = [
 			dirname( __DIR__ ) . '/definitions/admin.php'            => [ Admin_Subscriber::class ],
 			dirname( __DIR__ ) . '/definitions/assets.php'           => [],
+			dirname( __DIR__ ) . '/definitions/cache.php'            => [
+				Cache_Subscriber::class,
+				\Tribe\Libs\Cache\Cache_Subscriber::class,
+			],
 			dirname( __DIR__ ) . '/definitions/cli.php'              => [ CLI_Subscriber::class ],
 			dirname( __DIR__ ) . '/definitions/content.php'          => [ Content_Subscriber::class ],
 			dirname( __DIR__ ) . '/definitions/nav-menus.php'        => [ Nav_Menus_Subscriber::class ],

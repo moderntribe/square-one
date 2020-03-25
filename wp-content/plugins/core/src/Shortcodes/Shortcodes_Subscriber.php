@@ -4,7 +4,7 @@ declare( strict_types=1 );
 namespace Tribe\Project\Shortcodes;
 
 use Psr\Container\ContainerInterface;
-use Tribe\Project\Container\Subscriber_Interface;
+use Tribe\Libs\Container\Subscriber_Interface;
 
 class Shortcodes_Subscriber implements Subscriber_Interface {
 	public function register( ContainerInterface $container ): void {

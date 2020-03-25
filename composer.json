@@ -132,7 +132,8 @@
     "lucatume/function-mocker": "~1.0",
     "moderntribe/square1-generators": "^2.0",
     "php-http/httplug": "^1.1",
-    "filp/whoops": "^2.2@dev"
+    "filp/whoops": "^2.2@dev",
+    "moderntribe/tribe-libs": "dev-master"
   },
   "extra": {
     "wordpress-install-dir": "wp",
