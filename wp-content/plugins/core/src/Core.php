@@ -122,6 +122,11 @@ class Core {
 			$subscribers[] = '\Tribe\Libs\Queues_Mysql\Mysql_Backend_Subscriber';
 		}
 
+		if ( class_exists( '\Tribe\Libs\Blog_Copier\Blog_Copier_Definer' ) ) {
+			$definers[]    = '\Tribe\Libs\Blog_Copier\Blog_Copier_Definer';
+			$subscribers[] = '\Tribe\Libs\Blog_Copier\Blog_Copier_Subscriber';
+		}
+
 		/**
 		 * Filter the list of definers that power the plugin
 		 *
@@ -157,7 +162,6 @@ class Core {
 	 */
 	private function optional_dependencies() {
 		$optional_dependencies = [
-			'blog_copier' => '\Tribe\Libs\Blog_Copier\Blog_Copier_Provider',
 			'generators'  => '\Tribe\Libs\Generators\Generator_Provider',
 		];
 
