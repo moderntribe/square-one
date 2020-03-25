@@ -3,6 +3,7 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Templates\Controllers\Content\Search;
 
+use Tribe\Project\Templates\Components\Image;
 use Tribe\Project\Templates\Controllers\Content\Loop\Item as Loop_Item;
 
 class Item extends Loop_Item {
@@ -22,11 +23,24 @@ class Item extends Loop_Item {
 	}
 
 	protected function get_featured_image() {
+		$image_id = get_post_thumbnail_id();
+
+		if ( empty( $image_id ) ) {
+			return '';
+		}
+
+		try {
+			$image = \Tribe\Project\Templates\Models\Image::factory( $image_id );
+		} catch ( \Exception $e ) {
+			return '';
+		}
+
 		$options = [
-			'wrapper_class' => 'item-loop__image',
-			'link'          => get_permalink(),
+			Image::ATTACHMENT      => $image,
+			Image::LINK_URL        => get_permalink(),
+			Image::WRAPPER_CLASSES => [ 'item__image' ],
 		];
 
-		return the_tribe_image( get_post_thumbnail_id(), $options );
+		return $this->factory->get( Image::class, $options )->render();
 	}
 }

@@ -4,6 +4,7 @@ declare( strict_types=1 );
 namespace Tribe\Project\Templates\Controllers\Content\Loop;
 
 use Tribe\Project\Templates\Abstract_Template;
+use Tribe\Project\Templates\Components\Image;
 use Tribe\Project\Theme\Image_Sizes;
 
 class Item extends Abstract_Template {
@@ -30,19 +31,32 @@ class Item extends Abstract_Template {
 	}
 
 	protected function get_featured_image() {
+		$image_id = get_post_thumbnail_id();
+
+		if ( empty( $image_id ) ) {
+			return '';
+		}
+
+		try {
+			$image = \Tribe\Project\Templates\Models\Image::factory( $image_id );
+		} catch ( \Exception $e ) {
+			return '';
+		}
+
 		$options = [
-			'as_bg'         => true,
-			'wrapper_class' => 'item__image',
-			'shim'          => trailingslashit( get_stylesheet_directory_uri() ) . 'img/theme/shims/16x9.png',
-			'src_size'      => Image_Sizes::CORE_FULL,
-			'srcset_sizes'  => [
+			Image::ATTACHMENT      => $image,
+			Image::AS_BG           => true,
+			Image::WRAPPER_CLASSES => [ 'item__image' ],
+			Image::SHIM            => trailingslashit( get_stylesheet_directory_uri() ) . 'img/theme/shims/16x9.png',
+			Image::SRC_SIZE        => Image_Sizes::CORE_FULL,
+			Image::SRCSET_SIZES    => [
 				Image_Sizes::CORE_FULL,
 				Image_Sizes::CORE_MOBILE,
 				Image_Sizes::SOCIAL_SHARE,
 			],
 		];
 
-		return the_tribe_image( get_post_thumbnail_id(), $options );
+		return $this->factory->get( Image::class, $options )->render();
 	}
 
 	protected function get_time() {

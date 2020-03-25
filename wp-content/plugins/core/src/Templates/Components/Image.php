@@ -1,41 +1,41 @@
 <?php
 
-
 namespace Tribe\Project\Templates\Components;
+
+use Tribe\Project\Theme\Util;
 
 class Image extends Component {
 
 	protected $path = 'components/image.twig';
 
-	const ATTACHMENT         = 'attachment';
-	const IMG_URL            = 'img_url';
-	const AS_BG              = 'as_bg';
-	const AUTO_SHIM          = 'auto_shim';
-	const AUTO_SIZES_ATTR    = 'auto_sizes_attr';
-	const COMPONENT_CLASS    = 'component_class';
-	const ECHO               = 'echo';
-	const EXPAND             = 'expand';
-	const HTML               = 'html';
-	const IMG_CLASS          = 'img_class';
-	const IMG_ATTR           = 'img_attr';
-	const IMG_ALT_TEXT       = 'img_alt_text';
-	const LINK               = 'link';
-	const LINK_CLASS         = 'link_class';
-	const LINK_TARGET        = 'link_target';
-	const LINK_TITLE         = 'link_title';
-	const PARENT_FIT         = 'parent_fit';
-	const SHIM               = 'shim';
-	const SRC                = 'src';
-	const SRC_SIZE           = 'src_size';
-	const SRCSET_SIZES       = 'srcset_sizes';
-	const SRCSET_SIZES__ATTR = 'srcset_sizes_attr';
-	const USE_HW_ATTR        = 'use_h&w_attr';
-	const USE_LAZYLOAD       = 'use_lazyload';
-	const USE_SRCSET         = 'use_srcset';
-	const USE_WRAPPER        = 'use_wrapper';
-	const WRAPPER_ATTR       = 'wrapper_attr';
-	const WRAPPER_CLASS      = 'wrapper_class';
-	const WRAPPER_TAG        = 'wrapper_tag';
+	const ATTACHMENT        = 'attachment';
+	const IMG_URL           = 'img_url';
+	const AS_BG             = 'as_bg';
+	const AUTO_SHIM         = 'auto_shim';
+	const AUTO_SIZES_ATTR   = 'auto_sizes_attr';
+	const ECHO              = 'echo';
+	const EXPAND            = 'expand';
+	const HTML              = 'html';
+	const IMG_CLASSES       = 'img_classes';
+	const IMG_ATTRS         = 'img_attrs';
+	const IMG_ALT_TEXT      = 'img_alt_text';
+	const LINK_URL          = 'link_url';
+	const LINK_CLASSES      = 'link_classes';
+	const LINK_TARGET       = 'link_target';
+	const LINK_TITLE        = 'link_title';
+	const LINK_ATTRS        = 'link_attrs';
+	const PARENT_FIT        = 'parent_fit';
+	const SHIM              = 'shim';
+	const SRC               = 'src';
+	const SRC_SIZE          = 'src_size';
+	const SRCSET_SIZES      = 'srcset_sizes';
+	const SRCSET_SIZES_ATTR = 'srcset_sizes_attr';
+	const USE_HW_ATTR       = 'use_hw_attr';
+	const USE_LAZYLOAD      = 'use_lazyload';
+	const USE_SRCSET        = 'use_srcset';
+	const WRAPPER_ATTRS     = 'wrapper_attrs';
+	const WRAPPER_CLASSES   = 'wrapper_classes';
+	const WRAPPER_TAG       = 'wrapper_tag';
 
 	public function option( $option ) {
 		if ( isset( $this->options[ $option ] ) ) {
@@ -47,141 +47,172 @@ class Image extends Component {
 
 	protected function parse_options( array $options ): array {
 		$defaults = [
-			self::ATTACHMENT         => null,
+			self::ATTACHMENT        => null,
 			// the WordPress attachment to use - takes precedence over IMG_URL
-			self::IMG_URL            => '',
-			// the Image URL - use as an image URL as a fallback if no ATTACHMENT exists
-			self::AS_BG              => false,
-			// us this as background on wrapper?
-			self::AUTO_SHIM          => true,
-			// if true, shim dir as set will be used, src_size will be used as filename, with png as filetype
-			self::AUTO_SIZES_ATTR    => false,
-			// pass a specific class to use for the component wrapper
-			self::COMPONENT_CLASS    => '',
+			self::IMG_URL           => '',
+			// the Image URL - generate markup for an image via its URL. Only applicable if IMAGE_ID is empty.
+			self::AS_BG             => false,
+			// Generates a background image on a `<div>` instead of a traditional `<img>`.
+			self::AUTO_SHIM         => true,
+			// if true, shim dir as set will be used, src_size will be used as filename, with png as file type.
+			self::AUTO_SIZES_ATTR   => false,
 			// if lazyloading the lib can auto create sizes attribute.
-			self::EXPAND             => '200',
+			self::EXPAND            => '200',
 			// the expand attribute is the threshold used by lazysizes. use negative to reveal once in viewport.
-			self::HTML               => '',
-			// append an html string in the wrapper
-			self::IMG_CLASS          => '',
-			// pass classes for image tag. if lazyload is true class "lazyload" is auto added
-			self::IMG_ATTR           => '',
-			// additional image attributes
-			self::IMG_ALT_TEXT       => '',
-			// pass specific image alternate text. if not included, will default to image title
-			self::LINK               => '',
-			// pass a link to wrap the image
-			self::LINK_CLASS         => '',
-			// pass link classes
-			self::LINK_TARGET        => '_self',
-			// pass a link target
-			self::LINK_TITLE         => '',
-			// pass a link title
-			self::PARENT_FIT         => 'width',
-			// if lazyloading this combines with object fit css and the object fit polyfill
-			self::SHIM               => '',
+			self::HTML              => '',
+			// append an html string inside the wrapper. Useful for adding a `<figcaption>` or other markup after the image.
+			self::IMG_CLASSES       => [ 'c-image__image' ],
+			// pass classes for image tag. if lazyload is true class "lazyload" is auto added.
+			self::IMG_ATTRS         => [],
+			// additional image attributes.
+			self::IMG_ALT_TEXT      => '',
+			// pass specific image alternate text. if not included, will default to image title.
+			self::LINK_URL          => '',
+			// pass a link to wrap the image.
+			self::LINK_CLASSES      => [ 'c-image__link' ],
+			// pass link classes.
+			self::LINK_TARGET       => '',
+			// pass a link target.
+			self::LINK_TITLE        => '',
+			// pass a link title.
+			self::LINK_ATTRS        => [],
+			// pass additional link attributes.
+			self::PARENT_FIT        => 'width',
+			// if lazyloading this combines with object fit css and the object fit polyfill.
+			self::SHIM              => '',
 			// supply a manually specified shim for lazyloading. Will override auto_shim whether true/false.
-			self::SRC                => true,
-			// set to false to disable the src attribute. this is a fallback for non srcset browsers
-			self::SRC_SIZE           => 'large',
-			// this is the main src registered image size
-			self::SRCSET_SIZES       => [],
+			self::SRC               => true,
+			// set to false to disable the src attribute. this is a fallback for non srcset browsers.
+			self::SRC_SIZE          => 'large',
+			// this is the main src registered image size.
+			self::SRCSET_SIZES      => [],
 			// this is registered sizes array for srcset.
-			self::SRCSET_SIZES__ATTR => '(min-width: 1260px) 1260px, 100vw',
+			self::SRCSET_SIZES_ATTR => '(min-width: 1260px) 1260px, 100vw',
 			// this is the srcset sizes attribute string used if auto is false.
-			self::USE_HW_ATTR        => false,
-			// this will set the width and height attributes on the img to be half the origal for retina/hdpi. Only for not lazyloading and when src exists.
-			self::USE_LAZYLOAD       => true,
-			// lazyload this game?
-			self::USE_SRCSET         => true,
+			self::USE_HW_ATTR       => false,
+			// this will set the width and height attributes on the img to be half the original for retina/hdpi. Only for not lazyloading and when src exists.
+			self::USE_LAZYLOAD      => true,
+			// lazyload this game? If `AS_BG` is true, `SRCSET_SIZES` must also be defined.
+			self::USE_SRCSET        => true,
 			// srcset this game?
-			self::USE_WRAPPER        => true,
-			// use the wrapper if image
-			self::WRAPPER_ATTR       => '',
-			// additional wrapper attributes
-			self::WRAPPER_CLASS      => 'tribe-image',
-			// pass classes for figure wrapper. If as_bg is set true gets auto class of "lazyload"
-			self::WRAPPER_TAG        => '',
-			// html tag for the wrapper/background image container
+			self::WRAPPER_ATTRS     => [],
+			// additional wrapper attributes.
+			self::WRAPPER_CLASSES   => [ 'c-image' ],
+			// pass classes for figure wrapper. If as_bg is set true gets auto class of "lazyload".
+			self::WRAPPER_TAG       => 'figure',
+			// html tag for the wrapper/background image container.
 		];
 
 		return wp_parse_args( $options, $defaults );
 	}
 
 	/**
-	 * Forms the html for the image
+	 * Forms the html for the image component
 	 *
 	 * @return array
 	 */
 	public function get_data(): array {
-		$data = [];
-
-		$data['component_classes'] = $this->options[ self::COMPONENT_CLASS ];
-		$data['img']               = $this->get_image();
-		$data['wrapper']           = $this->get_wrapper();
-		$data[ self::LINK ]        = $this->get_link();
-		$data[ self::HTML ]        = ! empty( $this->options[ self::HTML ] ) ? $this->options[ self::HTML ] : '';
+		$data = [
+			'wrapper' => $this->get_wrapper(),
+			'image'   => $this->get_image(),
+			'link'    => $this->get_link(),
+			'html'    => $this->options[ self::HTML ],
+		];
 
 		return $data;
 	}
 
 	protected function should_lazy_load(): bool {
-		$has_attachment_or_path = ( ! empty( $this->options[ self::ATTACHMENT ] ) || ! empty( $this->options[ self::IMG_URL ] ) );
+		$missing_src = empty( $this->options[ self::ATTACHMENT ] ) && empty( $this->options[ self::IMG_URL ] );
 
-		return $this->options[ self::USE_LAZYLOAD ] && ! $this->options[ self::AS_BG ] && $has_attachment_or_path;
+		return $this->options[ self::USE_LAZYLOAD ] && ! $missing_src;
 	}
 
-	protected function get_image(): array {
+	/**
+	 * Get the component's image markup.
+	 *
+	 * Set to `<img />` if `AS_BG` is false and `<div>` if `AS_BG` is true.
+	 *
+	 * @return string
+	 */
+	protected function get_image(): string {
+		$classes = $this->options[ self::IMG_CLASSES ];
+
+		if ( $this->should_lazy_load() ) {
+			$classes[] = 'lazyload';
+		}
 
 		if ( $this->options[ self::AS_BG ] ) {
-			return [];
+			// <div classes attrs></div>
+			$image = sprintf( '<div %s %s></div>', Util::class_attribute( $classes ), $this->get_attributes() );
+		} else {
+			// <img classes attrs />
+			$image = sprintf( '<img %s %s />', Util::class_attribute( $classes ), $this->get_attributes() );
 		}
 
-		return [
-			'attributes' => $this->get_attributes(),
-			'class'      => $this->should_lazy_load() ? $this->options[ self::IMG_CLASS ] . ' lazyload' : $this->options[ self::IMG_CLASS ],
-		];
+		return $image;
 	}
 
+	/**
+	 * Get the component's wrapper element markup.
+	 *
+	 * Defaults to `<figure>` if `AS_BG` is false and `<div>` if `AS_BG` is true.
+	 *
+	 * @return array
+	 */
 	protected function get_wrapper(): array {
+		$tag = $this->options[ self::WRAPPER_TAG ];
 
-		if ( ! $this->options[ self::USE_WRAPPER ] && ! $this->options[ self::AS_BG ] ) {
-			return [];
+		if ( empty( $tag ) ) {
+			$tag = $this->options[ self::AS_BG ] ? 'div' : 'figure';
 		}
 
 		return [
-			'tag'        => empty( $this->options[ self::WRAPPER_TAG ] ) ? ( $this->options[ self::AS_BG ] ? 'div' : 'figure' ) : $this->options[ self::WRAPPER_TAG ],
-			'attributes' => $this->options[ self::AS_BG ] ? $this->get_attributes() . ' ' . $this->options[ self::WRAPPER_ATTR ] : ' ' . $this->options[ self::WRAPPER_ATTR ],
-			'class'      => $this->should_lazy_load() ? $this->options[ self::WRAPPER_CLASS ] . ' lazyload' : $this->options[ self::WRAPPER_CLASS ],
-		];
-	}
-
-	protected function get_link(): array {
-		if ( empty( $this->options[ self::LINK ] ) ) {
-			return [];
-		}
-
-		return [
-			'url'    => $this->options[ self::LINK ],
-			'target' => $this->options[ self::LINK_TARGET ],
-			'title'  => ! empty( $this->options[ self::LINK_TITLE ] ) ? $this->options[ self::LINK_TITLE ] : '',
-			'class'  => ! empty( $this->options[ self::LINK_CLASS ] ) ? $this->options[ self::LINK_CLASS ] : '',
-			'rel'    => $this->options[ self::LINK_TARGET ] === '_blank' ? 'rel="noopener"' : '',
+			'tag'     => esc_attr( $tag ),
+			'attrs'   => Util::array_to_attributes( $this->options[ self::WRAPPER_ATTRS ] ),
+			'classes' => Util::class_attribute( $this->options[ self::WRAPPER_CLASSES ] ),
 		];
 	}
 
 	/**
-	 * Util to set item attributes for lazyload or not, bg or not
+	 * Get the component's link container markup.
+	 *
+	 * @return array
+	 */
+	protected function get_link(): array {
+		if ( empty( $this->options[ self::LINK_URL ] ) ) {
+			return [];
+		}
+
+		$attrs = $this->options[ self::LINK_ATTRS ];
+
+		if ( ! empty( $this->options[ self::LINK_TARGET ] ) ) {
+			$attrs['target'] = esc_attr( $this->options[ self::LINK_TARGET ] );
+		}
+
+		if ( $this->options[ self::LINK_TARGET ] === '_blank' ) {
+			$attrs['rel'] = 'noopener';
+		}
+
+		return [
+			'url'     => esc_url( $this->options[ self::LINK_URL ] ),
+			'classes' => Util::class_attribute( $this->options[ self::LINK_CLASSES ] ),
+			'attrs'   => Util::array_to_attributes( $attrs ),
+		];
+	}
+
+	/**
+	 * Util to set item attributes for lazyload or not, bg or not.
 	 *
 	 * @return string
 	 */
 	private function get_attributes(): string {
+		$attrs = $this->options[ self::IMG_ATTRS ];
 		/** @var \Tribe\Project\Templates\Models\Image $attachment */
 		$attachment = $this->options[ self::ATTACHMENT ];
 		$src_width  = '';
 		$src_height = '';
 		// we'll almost always set src, except if for some reason they wanted to only use srcset
-		$attrs = [];
 		if ( $attachment && $attachment->has_size( $this->options[ self::SRC_SIZE ] ) ) {
 			$resized    = $attachment->get_size( $this->options[ self::SRC_SIZE ] );
 			$src        = $resized->src;
@@ -191,8 +222,6 @@ class Image extends Component {
 			$src = $this->options[ self::IMG_URL ];
 		}
 
-		$attrs[] = ! empty( $this->options[ self::IMG_ATTR ] ) ? trim( $this->options[ self::IMG_ATTR ] ) : '';
-
 		// the alt text
 		$alt_text = $this->options[ self::IMG_ALT_TEXT ];
 
@@ -201,63 +230,75 @@ class Image extends Component {
 			$alt_text = $attachment->alt() ?: $attachment->title();
 		}
 
-		$attrs[] = $this->options[ self::AS_BG ] ? sprintf( 'role="img" aria-label="%s"', $alt_text ) : sprintf( 'alt="%s"', $alt_text );
+		if ( $this->options[ self::AS_BG ] ) {
+			$attrs['role']       = 'img';
+			$attrs['aria-label'] = esc_attr( $alt_text );
+		} else {
+			$attrs['alt'] = esc_attr( $alt_text );
+		}
 
 		if ( $this->options[ self::USE_LAZYLOAD ] ) {
 
 			// the expand attribute that controls threshold
-			$attrs[] = sprintf( 'data-expand="%s"', $this->options[ self::EXPAND ] );
+			$attrs['data-expand'] = esc_attr( $this->options[ self::EXPAND ] );
 
-			// the parent fit attribute if as_bg is used.
-			$attrs[] = ! $this->options[ self::AS_BG ] ? sprintf( 'data-parent-fit="%s"', $this->options[ self::PARENT_FIT ] ) : '';
+			// the parent fit attribute if as_bg is not used.
+			if ( ! $this->options[ self::AS_BG ] ) {
+				$attrs['data-parent-fit'] = esc_attr( $this->options[ self::PARENT_FIT ] );
+			}
 
 			// set an src if true in options, since lazyloading this is "data-src"
-			$attrs[] = ! $this->options[ self::AS_BG ] && $this->options[ self::SRC ] ? sprintf( 'data-src="%s"', $src ) : '';
+			if ( ! $this->options[ self::AS_BG ] && $this->options[ self::SRC ] ) {
+				$attrs['data-src'] = esc_attr( $src );
+			}
 
 			// the shim attribute for srcset.
 			$shim_src = $this->get_shim();
+
 			if ( ! $this->options[ self::AS_BG ] && $this->options[ self::USE_SRCSET ] && ! empty( $this->options[ self::SRCSET_SIZES ] ) ) {
-				$attrs[] = sprintf( 'srcset="%s"', $shim_src );
+				$attrs['srcset'] = esc_attr( $shim_src );
 			}
 
 			// the sizes attribute for srcset
 			if ( $this->options[ self::USE_SRCSET ] && ! empty( $this->options[ self::SRCSET_SIZES ] ) ) {
-				$sizes_value = $this->options[ self::AUTO_SIZES_ATTR ] ? 'auto' : $this->options[ self::SRCSET_SIZES__ATTR ];
-				$attrs[]     = sprintf( 'data-sizes="%s"', $sizes_value );
+				$sizes_value         = $this->options[ self::AUTO_SIZES_ATTR ] ? 'auto' : $this->options[ self::SRCSET_SIZES_ATTR ];
+				$attrs['data-sizes'] = esc_attr( $sizes_value );
 			}
 
 			// generate the srcset attribute if wanted
 			if ( $this->options[ self::USE_SRCSET ] && ! empty( $this->options[ self::SRCSET_SIZES ] ) ) {
-				$attribute_name = $this->options[ self::AS_BG ] ? 'data-bgset' : 'data-srcset';
-				$srcset_urls    = $this->get_srcset_attribute();
-				$attrs[]        = sprintf( '%s="%s"', $attribute_name, $srcset_urls );
+				$attribute_name           = $this->options[ self::AS_BG ] ? 'data-bgset' : 'data-srcset';
+				$srcset_urls              = $this->get_srcset_attribute();
+				$attrs[ $attribute_name ] = esc_attr( $srcset_urls );
 			}
+
 			// setup the shim
-			if ( $this->options[ self::AS_BG ] ) {
-				$attrs[] = sprintf( 'style="background-image:url(\'%s\');"', $shim_src );
+			if ( $this->options[ self::AS_BG ] && ! empty( $shim_src ) ) {
+				$attrs['style'] = sprintf( 'background-image:url(\'%s\');', esc_url( $shim_src ) );
 			} else {
-				$attrs[] = sprintf( 'src="%s"', $shim_src );
+				$attrs['src'] = esc_url( $shim_src );
 			}
+
 		} else {
 
 			// no lazyloading, standard stuffs
-			if ( $this->options[ self::AS_BG ] ) {
-				$attrs[] = sprintf( 'style="background-image:url(\'%s\');"', $src );
+			if ( $this->options[ self::AS_BG ] && ! empty( $src ) ) {
+				$attrs['style'] = sprintf( 'background-image:url(\'%s\');', esc_url( $src ) );
 			} else {
-				$attrs[] = $this->options[ self::SRC ] ? sprintf( 'src="%s"', $src ) : '';
+				$attrs['src'] = $this->options[ self::SRC ] ? esc_url( $src ) : '';
 				if ( $this->options[ self::USE_SRCSET ] && ! empty( $this->options[ self::SRCSET_SIZES ] ) ) {
-					$srcset_urls = $this->get_srcset_attribute();
-					$attrs[]     = sprintf( 'sizes="%s"', $this->options[ self::SRCSET_SIZES__ATTR ] );
-					$attrs[]     = sprintf( 'srcset="%s"', $srcset_urls );
+					$srcset_urls     = $this->get_srcset_attribute();
+					$attrs['sizes']  = esc_attr( $this->options[ self::SRCSET_SIZES_ATTR ] );
+					$attrs['srcset'] = esc_attr( $srcset_urls );
 				}
 				if ( $this->options[ self::USE_HW_ATTR ] && $this->options[ self::SRC ] ) {
-					$attrs[] = sprintf( 'width="%s"', $src_width / 2 );
-					$attrs[] = sprintf( 'height="%s"', $src_height / 2 );
+					$attrs['width']  = esc_attr( $src_width / 2 );
+					$attrs['height'] = esc_attr( $src_height / 2 );
 				}
 			}
 		}
 
-		return implode( ' ', $attrs );
+		return Util::array_to_attributes( $attrs );
 	}
 
 
@@ -268,7 +309,6 @@ class Image extends Component {
 	 * @return string
 	 */
 	private function get_shim(): string {
-
 		$shim_dir = trailingslashit( get_stylesheet_directory_uri() ) . 'img/theme/shims/';
 		$src      = $this->options[ self::SHIM ];
 
