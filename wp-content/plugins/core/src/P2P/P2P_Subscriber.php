@@ -14,7 +14,7 @@ class P2P_Subscriber implements Subscriber_Interface {
 
 	private function relationships( ContainerInterface $container ): void {
 		add_action( 'p2p_init', function () use ( $container ) {
-			foreach ( $container->get( 'p2p.relationships' ) as $relationship ) {
+			foreach ( $container->get( P2P_Definer::RELATIONSHIPS ) as $relationship ) {
 				$relationship->register();
 			}
 		}, 11, 0 );
@@ -45,20 +45,21 @@ class P2P_Subscriber implements Subscriber_Interface {
 
 
 		add_action( 'load-post.php', function () use ( $container ) {
-			foreach ( $container->get( 'p2p.admin_search_filters' ) as $filter ) {
+			foreach ( $container->get( P2P_Definer::ADMIN_FILTERS ) as $filter ) {
 				$filter->add_post_page_hooks();
 			}
 		}, 10, 0 );
 		add_action( 'load-post-new.php', function () use ( $container ) {
-			foreach ( $container->get( 'p2p.admin_search_filters' ) as $filter ) {
+			foreach ( $container->get( P2P_Definer::ADMIN_FILTERS ) as $filter ) {
 				$filter->add_post_page_hooks();
 			}
 		}, 10, 0 );
 
 		add_filter( 'p2p_connectable_args', function ( $query_vars, $connection, $post ) use ( $container ) {
-			foreach ( $container->get( 'p2p.admin_search_filters' ) as $filter ) {
+			foreach ( $container->get( P2P_Definer::ADMIN_FILTERS ) as $filter ) {
 				$query_vars = $filter->filter_connectable_query_args( $query_vars, $connection, $post );
 			}
+
 			return $query_vars;
 		}, 10, 3 );
 	}

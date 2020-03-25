@@ -12,7 +12,7 @@ class Panels_Subscriber implements Subscriber_Interface {
 		add_action( 'plugins_loaded', function () use ( $container ) {
 			$initializer = $container->get( Initializer::class );
 			$initializer->set_labels();
-			foreach ( $container->get( 'panels.types' ) as $type ) {
+			foreach ( $container->get( Panels_Definer::TYPES ) as $type ) {
 				$initializer->add_panel_config( $type );
 			}
 		}, 9, 0 );

@@ -3,24 +3,31 @@
 namespace Tribe\Project;
 
 use Psr\Container\ContainerInterface;
+use Tribe\Libs\Assets\Assets_Definer;
 use Tribe\Libs\Container\Service_Provider;
-use Tribe\Libs\Container\Subscriber_Interface;
 use Tribe\Project\Admin\Admin_Subscriber;
 use Tribe\Project\Cache\Cache_Subscriber;
 use Tribe\Project\CLI\CLI_Subscriber;
+use Tribe\Project\Content\Content_Definer;
 use Tribe\Project\Content\Content_Subscriber;
+use Tribe\Project\Development\Whoops_Definer;
 use Tribe\Project\Development\Whoops_Subscriber;
+use Tribe\Project\Nav_Menus\Nav_Menus_Definer;
 use Tribe\Project\Nav_Menus\Nav_Menus_Subscriber;
+use Tribe\Project\Object_Meta\Object_Meta_Definer;
 use Tribe\Project\Object_Meta\Object_Meta_Subscriber;
+use Tribe\Project\P2P\P2P_Definer;
 use Tribe\Project\P2P\P2P_Subscriber;
+use Tribe\Project\Panels\Panels_Definer;
 use Tribe\Project\Panels\Panels_Subscriber;
 use Tribe\Project\Post_Types;
 use Tribe\Project\Settings\Settings_Subscriber;
 use Tribe\Project\Shortcodes\Shortcodes_Subscriber;
 use Tribe\Project\Taxonomies;
 use Tribe\Project\Templates\Templates_Subscriber;
+use Tribe\Project\Theme\Theme_Definer;
 use Tribe\Project\Theme\Theme_Subscriber;
-use Tribe\Project\Theme_Customizer\Theme_Customizer_Subscriber;
+use Tribe\Project\Twig\Twig_Definer;
 
 class Core {
 
@@ -65,54 +72,80 @@ class Core {
 	}
 
 	private function init_template_container(): void {
-		/**
-		 * @var Subscriber_Interface[][] List of definition files (keys) and their corresponding subscribers (values)
-		 */
-		$definitions = [
-			dirname( __DIR__ ) . '/definitions/admin.php'            => [ Admin_Subscriber::class ],
-			dirname( __DIR__ ) . '/definitions/assets.php'           => [],
-			dirname( __DIR__ ) . '/definitions/cache.php'            => [
-				Cache_Subscriber::class,
-				\Tribe\Libs\Cache\Cache_Subscriber::class,
-			],
-			dirname( __DIR__ ) . '/definitions/cli.php'              => [ CLI_Subscriber::class ],
-			dirname( __DIR__ ) . '/definitions/content.php'          => [ Content_Subscriber::class ],
-			dirname( __DIR__ ) . '/definitions/nav-menus.php'        => [ Nav_Menus_Subscriber::class ],
-			dirname( __DIR__ ) . '/definitions/object-meta.php'      => [ Object_Meta_Subscriber::class ],
-			dirname( __DIR__ ) . '/definitions/panels.php'           => [ Panels_Subscriber::class ],
-			dirname( __DIR__ ) . '/definitions/p2p.php'              => [ P2P_Subscriber::class ],
-			dirname( __DIR__ ) . '/definitions/settings.php'         => [ Settings_Subscriber::class ],
-			dirname( __DIR__ ) . '/definitions/shortcodes.php'       => [ Shortcodes_Subscriber::class ],
-			dirname( __DIR__ ) . '/definitions/theme.php'            => [ Theme_Subscriber::class ],
-			dirname( __DIR__ ) . '/definitions/theme-customizer.php' => [ Theme_Customizer_Subscriber::class ],
-			dirname( __DIR__ ) . '/definitions/twig.php'             => [],
-			dirname( __DIR__ ) . '/definitions/templates.php'        => [ Templates_Subscriber::class ],
-			dirname( __DIR__ ) . '/definitions/post-types.php'       => [
-				// our post types
-				Post_Types\Sample\Subscriber::class,
-				// no need for subscribers for 3rd-party post types unless extending
-			],
-			dirname( __DIR__ ) . '/definitions/taxonomies.php'       => [
-				// our taxonomies
-				Taxonomies\Example\Subscriber::class,
-				// no need for subscribers for 3rd-party taxonomies unless extending
-			],
+		/** @var string[] $definers Names of classes implementing Definer_Interface */
+		$definers = [
+			Assets_Definer::class,
+			Content_Definer::class,
+			Nav_Menus_Definer::class,
+			Object_Meta_Definer::class,
+			P2P_Definer::class,
+			Panels_Definer::class,
+			Theme_Definer::class,
+			Twig_Definer::class,
+		];
+
+		/** @var string[] $subscribers Names of classes implementing Subscriber_Interface */
+		$subscribers = [
+			Admin_Subscriber::class,
+			\Tribe\Libs\Cache\Cache_Subscriber::class,
+			Cache_Subscriber::class,
+			CLI_Subscriber::class,
+			Content_Subscriber::class,
+			Nav_Menus_Subscriber::class,
+			Object_Meta_Subscriber::class,
+			Panels_Subscriber::class,
+			P2P_Subscriber::class,
+			Settings_Subscriber::class,
+			Shortcodes_Subscriber::class,
+			Theme_Subscriber::class,
+			Templates_Subscriber::class,
+
+			// our post types
+			Post_Types\Sample\Subscriber::class,
+
+			// our taxonomies
+			Taxonomies\Example\Subscriber::class,
 		];
 
 		if ( defined( 'WHOOPS_ENABLE' ) && WHOOPS_ENABLE && class_exists( '\Whoops\Run' ) ) {
-			$definitions[ dirname( __DIR__ ) . '/definitions/whoops.php' ] = [ Whoops_Subscriber::class ];
+			$definers[]    = Whoops_Definer::class;
+			$subscribers[] = Whoops_Subscriber::class;
 		}
+
+		if ( class_exists( '\Tribe\Libs\Queues\Queues_Definer' ) ) {
+			$definers[]    = '\Tribe\Libs\Queues\Queues_Definer';
+			$subscribers[] = '\Tribe\Libs\Queues\Queues_Subscriber';
+		}
+
+		if ( class_exists( '\Tribe\Libs\Queues_Mysql\Mysql_Backend_Definer' ) ) {
+			$definers[]    = '\Tribe\Libs\Queues_Mysql\Mysql_Backend_Definer';
+			$subscribers[] = '\Tribe\Libs\Queues_Mysql\Mysql_Backend_Subscriber';
+		}
+
+		/**
+		 * Filter the list of definers that power the plugin
+		 *
+		 * @param string[] $definers The class names of definers that will be instantiated
+		 */
+		$definers = apply_filters( 'tribe/project/definers', $definers );
+
+		/**
+		 * Filter the list subscribers that power the plugin
+		 *
+		 * @param string[] $subscribers The class names of subscribers that will be instantiated
+		 */
+		$subscribers = apply_filters( 'tribe/project/subscribers', $subscribers );
 
 		$builder = new \DI\ContainerBuilder();
 		$builder->addDefinitions( [ 'plugin.file' => dirname( __DIR__ ) . '/core.php' ] );
-		$builder->addDefinitions( ... array_keys( $definitions ) );
+		$builder->addDefinitions( ... array_map( function ( $classname ) {
+			return ( new $classname() )->define();
+		}, $definers ) );
 
 		$this->template_container = $builder->build();
 
-		foreach ( $definitions as $definition_file => $subscribers ) {
-			foreach ( $subscribers as $subscriber ) {
-				$this->template_container->get( $subscriber )->register( $this->template_container );
-			}
+		foreach ( $subscribers as $subscriber_class ) {
+			$this->template_container->get( $subscriber_class )->register( $this->template_container );
 		}
 	}
 
@@ -124,11 +157,8 @@ class Core {
 	 */
 	private function optional_dependencies() {
 		$optional_dependencies = [
-			'blog_copier'  => '\Tribe\Libs\Blog_Copier\Blog_Copier_Provider',
-			'container'    => '\Tribe\Libs\Container\Container_Provider',
-			'generators'   => '\Tribe\Libs\Generators\Generator_Provider',
-			'queues'       => '\Tribe\Libs\Queues\Queues_Provider',
-			'queues-mysql' => '\Tribe\Libs\Queues_Mysql\Mysql_Backend_Provider',
+			'blog_copier' => '\Tribe\Libs\Blog_Copier\Blog_Copier_Provider',
+			'generators'  => '\Tribe\Libs\Generators\Generator_Provider',
 		];
 
 		foreach ( $optional_dependencies as $key => $provider ) {

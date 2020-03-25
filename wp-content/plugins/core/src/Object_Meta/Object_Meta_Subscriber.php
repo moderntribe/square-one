@@ -14,7 +14,7 @@ class Object_Meta_Subscriber implements Subscriber_Interface {
 		} );
 
 		add_action( 'acf/init', function () use ( $container ) {
-			foreach ( $container->get( 'meta.groups' ) as $group ) {
+			foreach ( $container->get( Object_Meta_Definer::GROUPS ) as $group ) {
 				$group->register_group();
 			}
 		}, 10, 0 );
