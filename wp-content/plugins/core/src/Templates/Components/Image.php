@@ -50,7 +50,7 @@ class Image extends Component {
 			self::ATTACHMENT        => null,
 			// the WordPress attachment to use - takes precedence over IMG_URL
 			self::IMG_URL           => '',
-			// the Image URL - generate markup for an image via its URL. Only applicable if IMAGE_ID is empty.
+			// the Image URL - generate markup for an image via its URL. Only applicable if ATTACHMENT is empty.
 			self::AS_BG             => false,
 			// Generates a background image on a `<div>` instead of a traditional `<img>`.
 			self::AUTO_SHIM         => true,

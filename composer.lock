@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "76692a564eb9f4ded7cf018df9c6e046",
+    "content-hash": "5996d7b9526e2d0a20e7e688e215b6aa",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -778,23 +778,23 @@
         },
         {
             "name": "johnpbloch/wordpress-core",
-            "version": "5.2.4",
+            "version": "5.4.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/johnpbloch/wordpress-core.git",
-                "reference": "01530fea56649a4040971fc614baa546273d964c"
+                "reference": "e01fc48ca8bb701352b30764e6c579544439f2bc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/johnpbloch/wordpress-core/zipball/01530fea56649a4040971fc614baa546273d964c",
-                "reference": "01530fea56649a4040971fc614baa546273d964c",
+                "url": "https://api.github.com/repos/johnpbloch/wordpress-core/zipball/e01fc48ca8bb701352b30764e6c579544439f2bc",
+                "reference": "e01fc48ca8bb701352b30764e6c579544439f2bc",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.6.20"
             },
             "provide": {
-                "wordpress/core-implementation": "5.2.4"
+                "wordpress/core-implementation": "5.4.x-dev"
             },
             "type": "wordpress-core",
             "notification-url": "https://packagist.org/downloads/",
@@ -804,17 +804,17 @@
             "authors": [
                 {
                     "name": "WordPress Community",
-                    "homepage": "http://wordpress.org/about/"
+                    "homepage": "https://wordpress.org/about/"
                 }
             ],
             "description": "WordPress is open source software you can use to create a beautiful website, blog, or app.",
-            "homepage": "http://wordpress.org/",
+            "homepage": "https://wordpress.org/",
             "keywords": [
                 "blog",
                 "cms",
                 "wordpress"
             ],
-            "time": "2019-10-14T20:47:26+00:00"
+            "time": "2020-03-24T22:02:53+00:00"
         },
         {
             "name": "johnpbloch/wordpress-core-installer",
@@ -983,6 +983,53 @@
             "time": "2016-04-24T20:00:57+00:00"
         },
         {
+            "name": "moderntribe/gutenpanels",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:moderntribe/gutenpanels.git",
+                "reference": "613b610f3043d84342f94326182dfe533bd89efe"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/moderntribe/gutenpanels/zipball/613b610f3043d84342f94326182dfe533bd89efe",
+                "reference": "613b610f3043d84342f94326182dfe533bd89efe",
+                "shasum": ""
+            },
+            "require": {
+                "pimple/pimple": "~3.0@dev"
+            },
+            "require-dev": {
+                "lucatume/function-mocker": "~1.0",
+                "lucatume/wp-browser": "^1.10",
+                "mockery/mockery": "^1.2",
+                "phpstan/phpstan": "^0.12.0@dev"
+            },
+            "type": "wordpress-plugin",
+            "autoload": {
+                "psr-4": {
+                    "Tribe\\Gutenpanels\\": "src/php"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Tribe\\Gutenpanels\\Tests\\": "tests/codeception/_support",
+                    "Tribe\\Gutenpanels\\": "tests/codeception/unit/Tribe/Gutenpanels"
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "Modern Tribe",
+                    "email": "peter@tri.be"
+                }
+            ],
+            "description": "The Modern Tribe Panel Builder plugin, now with more Gutenberg!",
+            "time": "2020-03-05T23:19:50+00:00"
+        },
+        {
             "name": "moderntribe/panel-builder",
             "version": "dev-3.3-branch",
             "source": {
@@ -1020,6 +1067,89 @@
             ],
             "description": "The Modern Tribe Panel Builder plugin",
             "time": "2020-03-24T16:06:36+00:00"
+        },
+        {
+            "name": "moderntribe/tribe-libs",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "/studio/tribe-libs",
+                "reference": "431b7f248e3ee48b9342280086f57092e3332d2d"
+            },
+            "require": {
+                "jbzoo/pimpledumper": "^1.2",
+                "php": "^7.0",
+                "pimple/pimple": "~3.0@dev"
+            },
+            "replace": {
+                "moderntribe/square1-acf": "self.version",
+                "moderntribe/square1-assets": "self.version",
+                "moderntribe/square1-blog-copier": "self.version",
+                "moderntribe/square1-cache": "self.version",
+                "moderntribe/square1-cli": "self.version",
+                "moderntribe/square1-container": "self.version",
+                "moderntribe/square1-generators": "self.version",
+                "moderntribe/square1-nav": "self.version",
+                "moderntribe/square1-object-meta": "self.version",
+                "moderntribe/square1-oembed": "self.version",
+                "moderntribe/square1-p2p": "self.version",
+                "moderntribe/square1-post-meta": "self.version",
+                "moderntribe/square1-post-type": "self.version",
+                "moderntribe/square1-queues": "self.version",
+                "moderntribe/square1-queues-mysql": "self.version",
+                "moderntribe/square1-schema": "self.version",
+                "moderntribe/square1-settings": "self.version",
+                "moderntribe/square1-taxonomy": "self.version",
+                "moderntribe/square1-user": "self.version",
+                "moderntribe/square1-utils": "self.version"
+            },
+            "require-dev": {
+                "lucatume/wp-browser": "^2.2",
+                "symplify/monorepo-builder": "^6.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/Assets/version.php",
+                    "src/Cache/functions.php"
+                ],
+                "psr-4": {
+                    "Tribe\\Libs\\ACF\\": "src/ACF/",
+                    "Tribe\\Libs\\Assets\\": "src/Assets/",
+                    "Tribe\\Libs\\Blog_Copier\\": "src/Blog_Copier/",
+                    "Tribe\\Libs\\CLI\\": "src/CLI/",
+                    "Tribe\\Libs\\Cache\\": "src/Cache/",
+                    "Tribe\\Libs\\Container\\": "src/Container/",
+                    "Tribe\\Libs\\Generators\\": "src/Generators/",
+                    "Tribe\\Libs\\Nav\\": "src/Nav/",
+                    "Tribe\\Libs\\Object_Meta\\": "src/Object_Meta/",
+                    "Tribe\\Libs\\Oembed\\": "src/Oembed/",
+                    "Tribe\\Libs\\P2P\\": "src/P2P/",
+                    "Tribe\\Libs\\Post_Meta\\": "src/Post_Meta/",
+                    "Tribe\\Libs\\Post_Type\\": "src/Post_Type/",
+                    "Tribe\\Libs\\Queues\\": "src/Queues/",
+                    "Tribe\\Libs\\Queues_Mysql\\": "src/Queues_Mysql/",
+                    "Tribe\\Libs\\Schema\\": "src/Schema/",
+                    "Tribe\\Libs\\Settings\\": "src/Settings/",
+                    "Tribe\\Libs\\Taxonomy\\": "src/Taxonomy/",
+                    "Tribe\\Libs\\User\\": "src/User/",
+                    "Tribe\\Libs\\Utils\\": "src/Utils/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Tribe\\Libs\\": "tests/integration/Tribe/Libs"
+                }
+            },
+            "license": [
+                "GPL-2.0-only"
+            ],
+            "description": "A library for use on Modern Tribe service projects."
         },
         {
             "name": "monolog/monolog",
@@ -5034,89 +5164,6 @@
                 "wordpress"
             ],
             "time": "2018-01-11T14:12:02+00:00"
-        },
-        {
-            "name": "moderntribe/tribe-libs",
-            "version": "dev-master",
-            "dist": {
-                "type": "path",
-                "url": "/studio/tribe-libs",
-                "reference": "04fc27e5d7299eec721f433066f80798079c5b43"
-            },
-            "require": {
-                "jbzoo/pimpledumper": "^1.2",
-                "php": "^7.0",
-                "pimple/pimple": "~3.0@dev"
-            },
-            "replace": {
-                "moderntribe/square1-acf": "self.version",
-                "moderntribe/square1-assets": "self.version",
-                "moderntribe/square1-blog-copier": "self.version",
-                "moderntribe/square1-cache": "self.version",
-                "moderntribe/square1-cli": "self.version",
-                "moderntribe/square1-container": "self.version",
-                "moderntribe/square1-generators": "self.version",
-                "moderntribe/square1-nav": "self.version",
-                "moderntribe/square1-object-meta": "self.version",
-                "moderntribe/square1-oembed": "self.version",
-                "moderntribe/square1-p2p": "self.version",
-                "moderntribe/square1-post-meta": "self.version",
-                "moderntribe/square1-post-type": "self.version",
-                "moderntribe/square1-queues": "self.version",
-                "moderntribe/square1-queues-mysql": "self.version",
-                "moderntribe/square1-schema": "self.version",
-                "moderntribe/square1-settings": "self.version",
-                "moderntribe/square1-taxonomy": "self.version",
-                "moderntribe/square1-user": "self.version",
-                "moderntribe/square1-utils": "self.version"
-            },
-            "require-dev": {
-                "lucatume/wp-browser": "^2.2",
-                "symplify/monorepo-builder": "^6.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.0-dev"
-                }
-            },
-            "autoload": {
-                "files": [
-                    "src/Assets/version.php",
-                    "src/Cache/functions.php"
-                ],
-                "psr-4": {
-                    "Tribe\\Libs\\ACF\\": "src/ACF/",
-                    "Tribe\\Libs\\Assets\\": "src/Assets/",
-                    "Tribe\\Libs\\Blog_Copier\\": "src/Blog_Copier/",
-                    "Tribe\\Libs\\CLI\\": "src/CLI/",
-                    "Tribe\\Libs\\Cache\\": "src/Cache/",
-                    "Tribe\\Libs\\Container\\": "src/Container/",
-                    "Tribe\\Libs\\Generators\\": "src/Generators/",
-                    "Tribe\\Libs\\Nav\\": "src/Nav/",
-                    "Tribe\\Libs\\Object_Meta\\": "src/Object_Meta/",
-                    "Tribe\\Libs\\Oembed\\": "src/Oembed/",
-                    "Tribe\\Libs\\P2P\\": "src/P2P/",
-                    "Tribe\\Libs\\Post_Meta\\": "src/Post_Meta/",
-                    "Tribe\\Libs\\Post_Type\\": "src/Post_Type/",
-                    "Tribe\\Libs\\Queues\\": "src/Queues/",
-                    "Tribe\\Libs\\Queues_Mysql\\": "src/Queues_Mysql/",
-                    "Tribe\\Libs\\Schema\\": "src/Schema/",
-                    "Tribe\\Libs\\Settings\\": "src/Settings/",
-                    "Tribe\\Libs\\Taxonomy\\": "src/Taxonomy/",
-                    "Tribe\\Libs\\User\\": "src/User/",
-                    "Tribe\\Libs\\Utils\\": "src/Utils/"
-                }
-            },
-            "autoload-dev": {
-                "psr-4": {
-                    "Tribe\\Libs\\": "tests/integration/Tribe/Libs"
-                }
-            },
-            "license": [
-                "GPL-2.0-only"
-            ],
-            "description": "A library for use on Modern Tribe service projects."
         },
         {
             "name": "mustache/mustache",
@@ -9800,6 +9847,7 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "moderntribe/panel-builder": 20,
+        "moderntribe/gutenpanels": 20,
         "humanmade/mercator": 20,
         "pimple/pimple": 20,
         "roots/wp-password-bcrypt": 20,
