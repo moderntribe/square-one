@@ -23,7 +23,7 @@ class Object_Meta_Definer implements Definer_Interface {
 			],
 
 			Meta_Repository::class => DI\create()
-				->constructor( DI\get( 'meta.groups' ) ),
+				->constructor( DI\get( self::GROUPS ) ),
 
 			Example::class => function ( ContainerInterface $container ) {
 				return new Example( [
