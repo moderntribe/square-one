@@ -4,7 +4,6 @@ namespace Tribe\Project;
 
 use Psr\Container\ContainerInterface;
 use Tribe\Libs\Assets\Assets_Definer;
-use Tribe\Libs\Container\Service_Provider;
 use Tribe\Project\Admin\Admin_Subscriber;
 use Tribe\Project\Cache\Cache_Subscriber;
 use Tribe\Project\CLI\CLI_Subscriber;
@@ -40,11 +39,6 @@ class Core {
 	protected $template_container;
 
 	/**
-	 * @var Service_Provider[]
-	 */
-	private $providers = [];
-
-	/**
 	 * @param \Pimple\Container $container
 	 */
 	public function __construct( \Pimple\Container $container ) {
@@ -52,23 +46,7 @@ class Core {
 	}
 
 	public function init() {
-		$this->load_service_providers();
 		$this->init_template_container();
-	}
-
-	private function load_service_providers() {
-		$this->optional_dependencies();
-
-		/**
-		 * Filter the service providers that power the plugin
-		 *
-		 * @param Service_Provider[] $providers
-		 */
-		$this->providers = apply_filters( 'tribe/project/providers', $this->providers );
-
-		foreach ( $this->providers as $provider ) {
-			$this->container->register( $provider );
-		}
 	}
 
 	private function init_template_container(): void {
@@ -127,6 +105,11 @@ class Core {
 			$subscribers[] = '\Tribe\Libs\Blog_Copier\Blog_Copier_Subscriber';
 		}
 
+		if ( class_exists( '\Tribe\Libs\Generators\Generator_Definer' ) ) {
+			$definers[]    = '\Tribe\Libs\Generators\Generator_Definer';
+			$subscribers[] = '\Tribe\Libs\Generators\Generator_Subscriber';
+		}
+
 		/**
 		 * Filter the list of definers that power the plugin
 		 *
@@ -151,24 +134,6 @@ class Core {
 
 		foreach ( $subscribers as $subscriber_class ) {
 			$this->template_container->get( $subscriber_class )->register( $this->template_container );
-		}
-	}
-
-
-	/**
-	 * Register optional dependencies if they exist. Override
-	 * the service provider for the dependency to change its
-	 * behavior.
-	 */
-	private function optional_dependencies() {
-		$optional_dependencies = [
-			'generators'  => '\Tribe\Libs\Generators\Generator_Provider',
-		];
-
-		foreach ( $optional_dependencies as $key => $provider ) {
-			if ( class_exists( $provider ) ) {
-				$this->providers[ $key ] = new $provider();
-			}
 		}
 	}
 
