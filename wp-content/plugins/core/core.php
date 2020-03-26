@@ -12,7 +12,7 @@ require_once trailingslashit( __DIR__ ) . 'functions/pluggable.php';
 
 // Start the core plugin
 add_action( 'plugins_loaded', function () {
-	tribe_project()->init();
+	tribe_project()->init( __FILE__ );
 }, 1, 0 );
 
 /**
@@ -21,5 +21,5 @@ add_action( 'plugins_loaded', function () {
  * @return \Tribe\Project\Core
  */
 function tribe_project() {
-	return \Tribe\Project\Core::instance( new \Pimple\Container( [ 'plugin_file' => __FILE__ ]) );
+	return \Tribe\Project\Core::instance();
 }

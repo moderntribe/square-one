@@ -30,7 +30,7 @@ abstract class Facade {
 	 * @return mixed
 	 */
 	protected static function resolve_base_class() {
-		return tribe_project()->container()[ static::get_container_key_accessor() ];
+		return tribe_project()->container()->get( static::get_container_key_accessor() );
 	}
 
 	/**

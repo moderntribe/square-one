@@ -23,7 +23,7 @@ function the_tribe_image( $image_id = 0, $options = [] ) {
 	try {
 		$options[ Image::ATTACHMENT ] = \Tribe\Project\Templates\Models\Image::factory( $image_id );
 
-		return tribe_project()->template_container()->get( Component_Factory::class )->get( Image::class, $options )->render();
+		return tribe_project()->container()->get( Component_Factory::class )->get( Image::class, $options )->render();
 	} catch ( \Exception $e ) {
 		return '';
 	}

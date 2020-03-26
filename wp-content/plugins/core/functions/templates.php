@@ -10,7 +10,7 @@
  * @return string
  */
 function tribe_template( string $controller, string $path = '' ) {
-	$container = tribe_project()->template_container();
+	$container = tribe_project()->container();
 	try {
 		return $container->get( $controller )->render( $path );
 	} catch ( \Exception $e ) {

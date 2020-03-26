@@ -29,136 +29,133 @@ use Tribe\Project\Theme\Theme_Subscriber;
 use Tribe\Project\Twig\Twig_Definer;
 
 class Core {
-
-	protected static $_instance;
-
-	/** @var \Pimple\Container */
-	protected $container = null;
-
-	/** @var ContainerInterface */
-	protected $template_container;
+	public const PLUGIN_FILE = 'plugin.file';
 
 	/**
-	 * @param \Pimple\Container $container
+	 * @var self
 	 */
-	public function __construct( \Pimple\Container $container ) {
-		$this->container = $container;
+	private static $_instance;
+
+	/**
+	 * @var ContainerInterface
+	 */
+	private $container;
+
+	/**
+	 * @var string[] Names of classes implementing Definer_Interface
+	 */
+	private $definers = [
+		Assets_Definer::class,
+		Content_Definer::class,
+		Nav_Menus_Definer::class,
+		Object_Meta_Definer::class,
+		P2P_Definer::class,
+		Panels_Definer::class,
+		Theme_Definer::class,
+		Twig_Definer::class,
+	];
+
+	/**
+	 * @var string[] Names of classes implementing Subscriber_Interface
+	 */
+	private $subscribers = [
+		Admin_Subscriber::class,
+		\Tribe\Libs\Cache\Cache_Subscriber::class,
+		Cache_Subscriber::class,
+		CLI_Subscriber::class,
+		Content_Subscriber::class,
+		Nav_Menus_Subscriber::class,
+		Object_Meta_Subscriber::class,
+		Panels_Subscriber::class,
+		P2P_Subscriber::class,
+		Settings_Subscriber::class,
+		Shortcodes_Subscriber::class,
+		Theme_Subscriber::class,
+		Templates_Subscriber::class,
+
+		// our post types
+		Post_Types\Sample\Subscriber::class,
+
+		// our taxonomies
+		Taxonomies\Example\Subscriber::class,
+	];
+
+
+	public function init( string $plugin_path ) {
+		$this->init_container( $plugin_path );
 	}
 
-	public function init() {
-		$this->init_template_container();
-	}
-
-	private function init_template_container(): void {
-		/** @var string[] $definers Names of classes implementing Definer_Interface */
-		$definers = [
-			Assets_Definer::class,
-			Content_Definer::class,
-			Nav_Menus_Definer::class,
-			Object_Meta_Definer::class,
-			P2P_Definer::class,
-			Panels_Definer::class,
-			Theme_Definer::class,
-			Twig_Definer::class,
-		];
-
-		/** @var string[] $subscribers Names of classes implementing Subscriber_Interface */
-		$subscribers = [
-			Admin_Subscriber::class,
-			\Tribe\Libs\Cache\Cache_Subscriber::class,
-			Cache_Subscriber::class,
-			CLI_Subscriber::class,
-			Content_Subscriber::class,
-			Nav_Menus_Subscriber::class,
-			Object_Meta_Subscriber::class,
-			Panels_Subscriber::class,
-			P2P_Subscriber::class,
-			Settings_Subscriber::class,
-			Shortcodes_Subscriber::class,
-			Theme_Subscriber::class,
-			Templates_Subscriber::class,
-
-			// our post types
-			Post_Types\Sample\Subscriber::class,
-
-			// our taxonomies
-			Taxonomies\Example\Subscriber::class,
-		];
-
-		if ( defined( 'WHOOPS_ENABLE' ) && WHOOPS_ENABLE && class_exists( '\Whoops\Run' ) ) {
-			$definers[]    = Whoops_Definer::class;
-			$subscribers[] = Whoops_Subscriber::class;
-		}
-
-		if ( class_exists( '\Tribe\Libs\Queues\Queues_Definer' ) ) {
-			$definers[]    = '\Tribe\Libs\Queues\Queues_Definer';
-			$subscribers[] = '\Tribe\Libs\Queues\Queues_Subscriber';
-		}
-
-		if ( class_exists( '\Tribe\Libs\Queues_Mysql\Mysql_Backend_Definer' ) ) {
-			$definers[]    = '\Tribe\Libs\Queues_Mysql\Mysql_Backend_Definer';
-			$subscribers[] = '\Tribe\Libs\Queues_Mysql\Mysql_Backend_Subscriber';
-		}
-
-		if ( class_exists( '\Tribe\Libs\Blog_Copier\Blog_Copier_Definer' ) ) {
-			$definers[]    = '\Tribe\Libs\Blog_Copier\Blog_Copier_Definer';
-			$subscribers[] = '\Tribe\Libs\Blog_Copier\Blog_Copier_Subscriber';
-		}
-
-		if ( class_exists( '\Tribe\Libs\Generators\Generator_Definer' ) ) {
-			$definers[]    = '\Tribe\Libs\Generators\Generator_Definer';
-			$subscribers[] = '\Tribe\Libs\Generators\Generator_Subscriber';
-		}
+	private function init_container( string $plugin_path ): void {
+		$this->extend_definers();
+		$this->extend_subscribers();
 
 		/**
 		 * Filter the list of definers that power the plugin
 		 *
 		 * @param string[] $definers The class names of definers that will be instantiated
 		 */
-		$definers = apply_filters( 'tribe/project/definers', $definers );
+		$this->definers = apply_filters( 'tribe/project/definers', $this->definers );
 
 		/**
 		 * Filter the list subscribers that power the plugin
 		 *
 		 * @param string[] $subscribers The class names of subscribers that will be instantiated
 		 */
-		$subscribers = apply_filters( 'tribe/project/subscribers', $subscribers );
+		$this->subscribers = apply_filters( 'tribe/project/subscribers', $this->subscribers );
 
 		$builder = new \DI\ContainerBuilder();
-		$builder->addDefinitions( [ 'plugin.file' => dirname( __DIR__ ) . '/core.php' ] );
+		$builder->addDefinitions( [ self::PLUGIN_FILE => $plugin_path ] );
 		$builder->addDefinitions( ... array_map( function ( $classname ) {
 			return ( new $classname() )->define();
-		}, $definers ) );
+		}, $this->definers ) );
 
-		$this->template_container = $builder->build();
+		$this->container = $builder->build();
 
-		foreach ( $subscribers as $subscriber_class ) {
-			$this->template_container->get( $subscriber_class )->register( $this->template_container );
+		foreach ( $this->subscribers as $subscriber_class ) {
+			$this->container->get( $subscriber_class )->register( $this->container );
 		}
 	}
 
-	public function container() {
+	private function extend_definers(): void {
+		$optional_definers = array_filter( [
+			'\Tribe\Libs\Queues\Queues_Definer',
+			'\Tribe\Libs\Queues_Mysql\Mysql_Backend_Definer',
+			'\Tribe\Libs\Blog_Copier\Blog_Copier_Definer',
+			'\Tribe\Libs\Generators\Generator_Definer',
+		], 'class_exists' );
+
+		$this->definers = array_merge( $this->definers, $optional_definers );
+
+		if ( defined( 'WHOOPS_ENABLE' ) && WHOOPS_ENABLE && class_exists( '\Whoops\Run' ) ) {
+			$this->definers[] = Whoops_Definer::class;
+		}
+	}
+
+	private function extend_subscribers(): void {
+		$optional_subscribers = array_filter( [
+			'\Tribe\Libs\Queues\Queues_Subscriber',
+			'\Tribe\Libs\Queues_Mysql\Mysql_Backend_Subscriber',
+			'\Tribe\Libs\Blog_Copier\Blog_Copier_Subscriber',
+			'\Tribe\Libs\Generators\Generator_Subscriber',
+		], 'class_exists' );
+
+		$this->subscribers = array_merge( $this->subscribers, $optional_subscribers );
+
+		if ( defined( 'WHOOPS_ENABLE' ) && WHOOPS_ENABLE && class_exists( '\Whoops\Run' ) ) {
+			$this->subscribers[] = Whoops_Subscriber::class;
+		}
+	}
+
+	public function container(): ContainerInterface {
 		return $this->container;
 	}
 
-	public function template_container(): ContainerInterface {
-		return $this->template_container;
-	}
-
 	/**
-	 * @param null|\ArrayAccess $container
-	 *
-	 * @return Core
-	 * @throws \Exception
+	 * @return self
 	 */
-	public static function instance( $container = null ) {
+	public static function instance() {
 		if ( ! isset( self::$_instance ) ) {
-			if ( empty( $container ) ) {
-				throw new \Exception( 'You need to provide a Pimple container' );
-			}
-
-			$className       = __CLASS__;
-			self::$_instance = new $className( $container );
+			self::$_instance = new self();
 		}
 
 		return self::$_instance;

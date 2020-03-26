@@ -5,6 +5,7 @@ namespace Tribe\Project\Panels;
 
 use DI;
 use Tribe\Libs\Container\Definer_Interface;
+use Tribe\Project\Core;
 use Tribe\Project\Panels;
 
 class Panels_Definer implements Definer_Interface {
@@ -30,7 +31,7 @@ class Panels_Definer implements Definer_Interface {
 			],
 
 			Panels\Initializer::class => DI\create()
-				->constructor( DI\get( 'plugin.file' ) ),
+				->constructor( DI\get( Core::PLUGIN_FILE ) ),
 		];
 	}
 

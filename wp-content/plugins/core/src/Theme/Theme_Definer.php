@@ -5,6 +5,7 @@ namespace Tribe\Project\Theme;
 
 use DI;
 use Tribe\Libs\Container\Definer_Interface;
+use Tribe\Project\Core;
 use Tribe\Project\Theme\Resources\Fonts;
 
 class Theme_Definer implements Definer_Interface {
@@ -16,7 +17,7 @@ class Theme_Definer implements Definer_Interface {
 					Oembed_Filter::PROVIDER_YOUTUBE,
 				] ),
 			Fonts::class         => DI\create()
-				->constructor( DI\get( 'plugin.file' ), [
+				->constructor( DI\get( Core::PLUGIN_FILE ), [
 					'typekit' => '', // typekit ID
 					'google'  => [],
 					'custom'  => [],
