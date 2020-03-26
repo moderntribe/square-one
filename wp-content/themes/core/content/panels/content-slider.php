@@ -1,5 +1,3 @@
 <?php
 
-$template = \Tribe\Project\Templates\Content\Panels\ContentSlider::instance();
-
-echo $template->render();
+echo tribe_template( \Tribe\Project\Templates\Controllers\Content\Panels\ContentSlider::class );

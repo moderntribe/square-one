@@ -2,14 +2,16 @@
 
 namespace Tribe\Project;
 
+use Psr\Container\ContainerInterface;
 use Tribe\Libs\Container\Container_Provider;
+use Tribe\Project\Cache\Cache_Provider;
 use Tribe\Project\Service_Providers\Admin_Provider;
 use Tribe\Project\Service_Providers\Asset_Provider;
-use Tribe\Project\Cache\Cache_Provider;
 use Tribe\Project\Service_Providers\CLI_Provider;
 use Tribe\Project\Service_Providers\Content_Provider;
-use Tribe\Project\Service_Providers\Object_Meta_Provider;
 use Tribe\Project\Service_Providers\Nav_Menu_Provider;
+use Tribe\Project\Service_Providers\Object_Meta_Provider;
+use Tribe\Project\Service_Providers\P2P_Provider;
 use Tribe\Project\Service_Providers\Panels_Provider;
 use Tribe\Project\Service_Providers\Post_Types\Event_Service_Provider;
 use Tribe\Project\Service_Providers\Post_Types\Organizer_Service_Provider;
@@ -17,16 +19,16 @@ use Tribe\Project\Service_Providers\Post_Types\Page_Service_Provider;
 use Tribe\Project\Service_Providers\Post_Types\Post_Service_Provider;
 use Tribe\Project\Service_Providers\Post_Types\Sample_Service_Provider;
 use Tribe\Project\Service_Providers\Post_Types\Venue_Service_Provider;
+use Tribe\Project\Service_Providers\Settings_Provider;
 use Tribe\Project\Service_Providers\Shortcode_Provider;
 use Tribe\Project\Service_Providers\Taxonomies\Category_Service_Provider;
 use Tribe\Project\Service_Providers\Taxonomies\Example_Taxonomy_Service_Provider;
 use Tribe\Project\Service_Providers\Taxonomies\Post_Tag_Service_Provider;
 use Tribe\Project\Service_Providers\Theme_Customizer_Provider;
-use Tribe\Project\Service_Providers\P2P_Provider;
 use Tribe\Project\Service_Providers\Theme_Provider;
-use Tribe\Project\Service_Providers\Settings_Provider;
 use Tribe\Project\Service_Providers\Twig_Service_Provider;
 use Tribe\Project\Service_Providers\Whoops_Provider;
+use Tribe\Project\Templates\Templates_Provider;
 
 class Core {
 
@@ -34,6 +36,9 @@ class Core {
 
 	/** @var \Pimple\Container */
 	protected $container = null;
+
+	/** @var ContainerInterface */
+	protected $template_container;
 
 	/**
 	 * @var Container\Service_Provider[]
@@ -49,6 +54,7 @@ class Core {
 
 	public function init() {
 		$this->load_service_providers();
+		$this->init_template_container();
 	}
 
 	private function load_service_providers() {
@@ -89,6 +95,14 @@ class Core {
 		foreach ( $this->providers as $provider ) {
 			$this->container->register( $provider );
 		}
+	}
+
+	private function init_template_container(): void {
+		$builder = new \DI\ContainerBuilder();
+		$builder->addDefinitions( dirname( __DIR__ ) . '/definitions/twig.php' );
+		$builder->addDefinitions( dirname( __DIR__ ) . '/definitions/templates.php' );
+		$this->template_container = $builder->build();
+		$this->template_container->get( Templates_Provider::class )->register( $this->template_container );
 	}
 
 
@@ -134,6 +148,10 @@ class Core {
 
 	public function container() {
 		return $this->container;
+	}
+
+	public function template_container(): ContainerInterface {
+		return $this->template_container;
 	}
 
 	/**

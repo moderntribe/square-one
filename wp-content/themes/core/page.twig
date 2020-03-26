@@ -1,15 +1,17 @@
-{% extends "base.twig" %}
-
 {% block main %}
 
 	{% block subhead %}
-		{{ include( 'content/header/sub.twig' ) }}
+		{{ subheader }}
 	{% endblock %}
 
 	{% block content %}
 		{% if post.content %}
 			<div class="l-container">
-				{{ include( 'content/page/default.twig' ) }}
+				{{ post.featured_image }}
+
+				<div class="t-content">
+					{{ post.content }}
+				</div>
 			</div>
 		{% endif %}
 
@@ -21,5 +23,5 @@
 {% endblock %}
 
 {% block sidebar %}
-	{{ include( 'sidebar.twig' ) }}
+	{{ sidebar }}
 {% endblock %}

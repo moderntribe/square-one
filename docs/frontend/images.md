@@ -15,7 +15,7 @@ This template function has been reduced to a wrapper for the Twig Image Componen
 $args = [
     'use_lazyload' => false,
 ];
-the_tribe_image( get_post_thumbnail_id(), $args );
+echo the_tribe_image( get_post_thumbnail_id(), $args );
 ```
 
 ##### Yields:

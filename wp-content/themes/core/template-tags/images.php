@@ -1,5 +1,6 @@
 <?php
 
+use Tribe\Project\Service_Providers\Twig_Service_Provider;
 use Tribe\Project\Templates\Components\Image;
 
 /**
@@ -19,18 +20,10 @@ function the_tribe_image( $image_id = 0, $options = [] ) {
 		return '';
 	}
 
-	$options[ Image::IMG_ID ] = $image_id;
-
-	if ( ! isset( $options[ Image::ECHO ] ) ) {
-		$options[ Image::ECHO ] = true; // Mimic the image component default
-	}
-
-	$image_obj    = Image::factory( $options );
-	$image_markup = $image_obj->render();
-
-	if ( $options[ Image::ECHO ] ) {
-		echo $image_markup;
-	} else {
-		return $image_markup;
+	try {
+		$options[ Image::ATTACHMENT ] = \Tribe\Project\Templates\Models\Image::factory( $image_id );
+		return tribe_project()->container()[ Twig_Service_Provider::COMPONENT_FACTORY ]->get( Image::class, $options )->render();
+	} catch ( \Exception $e ) {
+		return '';
 	}
 }

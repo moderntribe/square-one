@@ -2,14 +2,14 @@
 
 	<div class="l-container">
 
-		{{ include( 'content/navigation/footer.twig' ) }}
+		{{ navigation }}
 
 		{{ include( 'components/follow.twig' ) }}
 
 		<p>
 			{{ copyright }}
 			<a href="{{ home_url|esc_url }}" rel="external">
-				{{ bloginfo( 'name' ) }}
+				{{ name }}
 			</a>
 		</p>
 

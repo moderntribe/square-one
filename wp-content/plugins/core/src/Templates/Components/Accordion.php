@@ -4,7 +4,7 @@ namespace Tribe\Project\Templates\Components;
 
 class Accordion extends Component {
 
-	const TEMPLATE_NAME = 'components/accordion.twig';
+	protected $path = 'components/accordion.twig';
 
 	const ROWS                      = 'rows';
 	const CONTAINER_CLASSES         = 'container_classes';

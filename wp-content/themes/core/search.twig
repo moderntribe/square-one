@@ -1,14 +1,1 @@
-{% extends "base.twig" %}
-
-{% block content %}
-	<div class="l-container">
-		{% if posts|length > 0 %}
-			{% for post in posts %}
-				{{ include( 'content/search/search.twig') }}
-			{% endfor %}
-			{{ include( 'content/pagination/loop.twig') }}
-		{% else %}
-			{{ include( 'content/no-results.twig' ) }}
-		{% endif %}
-	</div>
-{% endblock %}
+{% extends "index.twig" %}

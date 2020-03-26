@@ -4,7 +4,7 @@ namespace Tribe\Project\Templates\Components;
 
 class Content_Block extends Component {
 
-	const TEMPLATE_NAME = 'components/contentblock.twig';
+	protected $path = 'components/contentblock.twig';
 
 	const TITLE           = 'title';
 	const TEXT            = 'text';
@@ -26,11 +26,11 @@ class Content_Block extends Component {
 
 	public function get_data(): array {
 		$data = [
-			static::TITLE           => $this->options[ self::TITLE ],
-			static::CLASSES         => $this->merge_classes( [ 'c-content-block' ], $this->options[ self::CLASSES ], true ),
-			static::CONTENT_CLASSES => $this->merge_classes( [ 'c-content-block__content' ], $this->options[ self::CONTENT_CLASSES ], true ),
-			static::TEXT            => $this->options[ self::TEXT ],
-			static::BUTTON          => $this->options[ self::BUTTON ],
+			self::TITLE           => $this->options[ self::TITLE ],
+			self::CLASSES         => $this->merge_classes( [ 'c-content-block' ], $this->options[ self::CLASSES ], true ),
+			self::CONTENT_CLASSES => $this->merge_classes( [ 'c-content-block__content' ], $this->options[ self::CONTENT_CLASSES ], true ),
+			self::TEXT            => $this->options[ self::TEXT ],
+			self::BUTTON          => $this->options[ self::BUTTON ],
 		];
 
 		return $data;

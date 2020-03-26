@@ -135,7 +135,7 @@ class Theme_Provider extends Service_Provider {
 
 	private function oembed( Container $container ) {
 		$container[ 'theme.oembed' ] = function ( Container $container ) {
-			return new Oembed_Filter( [
+			return new Oembed_Filter( $container[ Twig_Service_Provider::COMPONENT_FACTORY ], [
 				Oembed_Filter::PROVIDER_VIMEO,
 				Oembed_Filter::PROVIDER_YOUTUBE,
 			] );

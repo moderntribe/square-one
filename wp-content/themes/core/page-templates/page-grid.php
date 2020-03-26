@@ -3,5 +3,6 @@
  * Template Name: Grid
  */
 
-$template = new \Tribe\Project\Templates\Page( 'page-templates/page-grid.twig' );
-echo $template->render();
+use Tribe\Project\Templates\Controllers\Page;
+
+echo tribe_template( Page::class, 'page-templates/page-grid.twig' );

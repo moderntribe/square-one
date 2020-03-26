@@ -4,7 +4,7 @@ namespace Tribe\Project\Templates\Components;
 
 class Text extends Component {
 
-	const TEMPLATE_NAME = 'components/text.twig';
+	protected $path = 'components/text.twig';
 
 	const TEXT    = 'content';
 	const TAG     = 'tag';
@@ -13,10 +13,10 @@ class Text extends Component {
 
 	protected function parse_options( array $options ): array {
 		$defaults = [
-			static::TEXT    => '',
-			static::TAG     => '',
-			static::CLASSES => [],
-			static::ATTRS   => [],
+			self::TEXT    => '',
+			self::TAG     => '',
+			self::CLASSES => [],
+			self::ATTRS   => [],
 		];
 
 		return wp_parse_args( $options, $defaults );
@@ -24,10 +24,10 @@ class Text extends Component {
 
 	public function get_data(): array {
 		$data = [
-			static::TEXT    => $this->options[ static::TEXT ],
-			static::TAG     => $this->options[ static::TAG ] ? $this->options[ static::TAG ] : 'div',
-			static::CLASSES => $this->merge_classes( [], $this->options[ static::CLASSES ], true ),
-			static::ATTRS   => $this->merge_attrs( [], $this->options[ static::ATTRS ], true ),
+			self::TEXT    => $this->options[ self::TEXT ],
+			self::TAG     => $this->options[ self::TAG ] ? $this->options[ self::TAG ] : 'div',
+			self::CLASSES => $this->merge_classes( [], $this->options[ self::CLASSES ], true ),
+			self::ATTRS   => $this->merge_attrs( [], $this->options[ self::ATTRS ], true ),
 		];
 
 		return $data;

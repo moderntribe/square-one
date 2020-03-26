@@ -16,7 +16,7 @@ class Shortcode_Provider extends Service_Provider {
 
 	protected function gallery( Container $container ) {
 		$container['shortcode.gallery'] = function ( Container $container ) {
-			return new Gallery();
+			return new Gallery( $container[ Twig_Service_Provider::COMPONENT_FACTORY ] );
 		};
 
 		add_filter( 'post_gallery', function ( $output, $attr, $instance ) use ( $container ) {

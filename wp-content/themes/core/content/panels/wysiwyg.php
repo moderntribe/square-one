@@ -1,4 +1,3 @@
 <?php
-$template = \Tribe\Project\Templates\Content\Panels\Wysiwyg::instance();
 
-echo $template->render();
+echo tribe_template( \Tribe\Project\Templates\Controllers\Content\Panels\Wysiwyg::class );
