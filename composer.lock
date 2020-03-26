@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d7de61748901e660a0bd659118e5e747",
+    "content-hash": "aa5c7f10dd655bb6719920800f9b5bd4",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -778,23 +778,23 @@
         },
         {
             "name": "johnpbloch/wordpress-core",
-            "version": "5.2.4",
+            "version": "5.4.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/johnpbloch/wordpress-core.git",
-                "reference": "01530fea56649a4040971fc614baa546273d964c"
+                "reference": "e01fc48ca8bb701352b30764e6c579544439f2bc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/johnpbloch/wordpress-core/zipball/01530fea56649a4040971fc614baa546273d964c",
-                "reference": "01530fea56649a4040971fc614baa546273d964c",
+                "url": "https://api.github.com/repos/johnpbloch/wordpress-core/zipball/e01fc48ca8bb701352b30764e6c579544439f2bc",
+                "reference": "e01fc48ca8bb701352b30764e6c579544439f2bc",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.6.20"
             },
             "provide": {
-                "wordpress/core-implementation": "5.2.4"
+                "wordpress/core-implementation": "5.4.x-dev"
             },
             "type": "wordpress-core",
             "notification-url": "https://packagist.org/downloads/",
@@ -804,17 +804,17 @@
             "authors": [
                 {
                     "name": "WordPress Community",
-                    "homepage": "http://wordpress.org/about/"
+                    "homepage": "https://wordpress.org/about/"
                 }
             ],
             "description": "WordPress is open source software you can use to create a beautiful website, blog, or app.",
-            "homepage": "http://wordpress.org/",
+            "homepage": "https://wordpress.org/",
             "keywords": [
                 "blog",
                 "cms",
                 "wordpress"
             ],
-            "time": "2019-10-14T20:47:26+00:00"
+            "time": "2020-03-24T22:02:53+00:00"
         },
         {
             "name": "johnpbloch/wordpress-core-installer",
@@ -983,6 +983,53 @@
             "time": "2016-04-24T20:00:57+00:00"
         },
         {
+            "name": "moderntribe/gutenpanels",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:moderntribe/gutenpanels.git",
+                "reference": "613b610f3043d84342f94326182dfe533bd89efe"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/moderntribe/gutenpanels/zipball/613b610f3043d84342f94326182dfe533bd89efe",
+                "reference": "613b610f3043d84342f94326182dfe533bd89efe",
+                "shasum": ""
+            },
+            "require": {
+                "pimple/pimple": "~3.0@dev"
+            },
+            "require-dev": {
+                "lucatume/function-mocker": "~1.0",
+                "lucatume/wp-browser": "^1.10",
+                "mockery/mockery": "^1.2",
+                "phpstan/phpstan": "^0.12.0@dev"
+            },
+            "type": "wordpress-plugin",
+            "autoload": {
+                "psr-4": {
+                    "Tribe\\Gutenpanels\\": "src/php"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Tribe\\Gutenpanels\\Tests\\": "tests/codeception/_support",
+                    "Tribe\\Gutenpanels\\": "tests/codeception/unit/Tribe/Gutenpanels"
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "Modern Tribe",
+                    "email": "peter@tri.be"
+                }
+            ],
+            "description": "The Modern Tribe Panel Builder plugin, now with more Gutenberg!",
+            "time": "2020-03-05T23:19:50+00:00"
+        },
+        {
             "name": "moderntribe/panel-builder",
             "version": "dev-3.3-branch",
             "source": {
@@ -1022,661 +1069,87 @@
             "time": "2020-03-24T16:06:36+00:00"
         },
         {
-            "name": "moderntribe/square1-acf",
-            "version": "v2.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/moderntribe/square1-acf.git",
-                "reference": "2de5a51235029fb5953380f11023291f97b9ba00"
-            },
+            "name": "moderntribe/tribe-libs",
+            "version": "dev-master",
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/square1-acf/zipball/2de5a51235029fb5953380f11023291f97b9ba00",
-                "reference": "2de5a51235029fb5953380f11023291f97b9ba00",
-                "shasum": ""
-            },
-            "require": {
-                "moderntribe/square1-object-meta": "^2.1.1",
-                "php": "^7.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.2-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Tribe\\Libs\\ACF\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0-only"
-            ],
-            "description": "Provides ACF object meta wrappers for square one",
-            "time": "2020-02-22T22:15:00+00:00"
-        },
-        {
-            "name": "moderntribe/square1-assets",
-            "version": "v2.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/moderntribe/square1-assets.git",
-                "reference": "e2a8669f4306b1be8fdb38f7dddd1166dcc286d1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/square1-assets/zipball/e2a8669f4306b1be8fdb38f7dddd1166dcc286d1",
-                "reference": "e2a8669f4306b1be8fdb38f7dddd1166dcc286d1",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.2-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Tribe\\Libs\\Assets\\": ""
-                },
-                "files": [
-                    "version.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0-only"
-            ],
-            "description": "Asset loading for square one",
-            "time": "2020-02-22T22:11:36+00:00"
-        },
-        {
-            "name": "moderntribe/square1-blog-copier",
-            "version": "v2.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/moderntribe/square1-blog-copier.git",
-                "reference": "f004047ded22c5ff6fcb8b04303773401377fbef"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/square1-blog-copier/zipball/f004047ded22c5ff6fcb8b04303773401377fbef",
-                "reference": "f004047ded22c5ff6fcb8b04303773401377fbef",
-                "shasum": ""
-            },
-            "require": {
-                "moderntribe/square1-container": "^2.1.1",
-                "moderntribe/square1-queues": "^2.1.1",
-                "php": "^7.0",
-                "pimple/pimple": "~3.0@dev"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.2-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Tribe\\Libs\\Blog_Copier\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0-only"
-            ],
-            "description": "Blog copier for square one",
-            "time": "2020-02-22T22:15:00+00:00"
-        },
-        {
-            "name": "moderntribe/square1-cache",
-            "version": "v2.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/moderntribe/square1-cache.git",
-                "reference": "1ac2c322b3c42e3ecd12149f0a2ee054b4e35ef0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/square1-cache/zipball/1ac2c322b3c42e3ecd12149f0a2ee054b4e35ef0",
-                "reference": "1ac2c322b3c42e3ecd12149f0a2ee054b4e35ef0",
-                "shasum": ""
-            },
-            "require": {
-                "moderntribe/square1-container": "^2.1.1",
-                "php": "^7.0",
-                "pimple/pimple": "~3.0@dev"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.2-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Tribe\\Libs\\Cache\\": ""
-                },
-                "files": [
-                    "functions.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0-only"
-            ],
-            "description": "Object cache wrapper for square one",
-            "time": "2020-02-22T22:15:00+00:00"
-        },
-        {
-            "name": "moderntribe/square1-cli",
-            "version": "v2.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/moderntribe/square1-cli.git",
-                "reference": "d71a5250742a0ae7091e6ed5dc02bddb6f586b6c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/square1-cli/zipball/d71a5250742a0ae7091e6ed5dc02bddb6f586b6c",
-                "reference": "d71a5250742a0ae7091e6ed5dc02bddb6f586b6c",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.0",
-                "pimple/pimple": "~3.0@dev"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.2-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Tribe\\Libs\\CLI\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0-only"
-            ],
-            "description": "A framework for registering wp-cli commands in square one",
-            "time": "2020-02-22T22:11:36+00:00"
-        },
-        {
-            "name": "moderntribe/square1-container",
-            "version": "v2.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/moderntribe/square1-container.git",
-                "reference": "189bc025f1f7dc23bbcc9b8bc76e308d6b637a3d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/square1-container/zipball/189bc025f1f7dc23bbcc9b8bc76e308d6b637a3d",
-                "reference": "189bc025f1f7dc23bbcc9b8bc76e308d6b637a3d",
-                "shasum": ""
+                "type": "path",
+                "url": "/studio/tribe-libs",
+                "reference": "04fc27e5d7299eec721f433066f80798079c5b43"
             },
             "require": {
                 "jbzoo/pimpledumper": "^1.2",
-                "moderntribe/square1-cli": "^2.1.1",
                 "php": "^7.0",
                 "pimple/pimple": "~3.0@dev"
             },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.2-dev"
-                }
+            "replace": {
+                "moderntribe/square1-acf": "self.version",
+                "moderntribe/square1-assets": "self.version",
+                "moderntribe/square1-blog-copier": "self.version",
+                "moderntribe/square1-cache": "self.version",
+                "moderntribe/square1-cli": "self.version",
+                "moderntribe/square1-container": "self.version",
+                "moderntribe/square1-generators": "self.version",
+                "moderntribe/square1-nav": "self.version",
+                "moderntribe/square1-object-meta": "self.version",
+                "moderntribe/square1-oembed": "self.version",
+                "moderntribe/square1-p2p": "self.version",
+                "moderntribe/square1-post-meta": "self.version",
+                "moderntribe/square1-post-type": "self.version",
+                "moderntribe/square1-queues": "self.version",
+                "moderntribe/square1-queues-mysql": "self.version",
+                "moderntribe/square1-schema": "self.version",
+                "moderntribe/square1-settings": "self.version",
+                "moderntribe/square1-taxonomy": "self.version",
+                "moderntribe/square1-user": "self.version",
+                "moderntribe/square1-utils": "self.version"
             },
-            "autoload": {
-                "psr-4": {
-                    "Tribe\\Libs\\Container\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0-only"
-            ],
-            "description": "A dependency injection container wrapper for square one",
-            "time": "2020-02-22T22:15:00+00:00"
-        },
-        {
-            "name": "moderntribe/square1-nav",
-            "version": "v2.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/moderntribe/square1-nav.git",
-                "reference": "e6a64f2086cd8345c2d3656049f2c511debfcabd"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/square1-nav/zipball/e6a64f2086cd8345c2d3656049f2c511debfcabd",
-                "reference": "e6a64f2086cd8345c2d3656049f2c511debfcabd",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.0"
+            "require-dev": {
+                "lucatume/wp-browser": "^2.2",
+                "symplify/monorepo-builder": "^6.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.2-dev"
+                    "dev-master": "2.0-dev"
                 }
             },
             "autoload": {
+                "files": [
+                    "src/Assets/version.php",
+                    "src/Cache/functions.php"
+                ],
                 "psr-4": {
-                    "Tribe\\Libs\\Nav\\": ""
+                    "Tribe\\Libs\\ACF\\": "src/ACF/",
+                    "Tribe\\Libs\\Assets\\": "src/Assets/",
+                    "Tribe\\Libs\\Blog_Copier\\": "src/Blog_Copier/",
+                    "Tribe\\Libs\\CLI\\": "src/CLI/",
+                    "Tribe\\Libs\\Cache\\": "src/Cache/",
+                    "Tribe\\Libs\\Container\\": "src/Container/",
+                    "Tribe\\Libs\\Generators\\": "src/Generators/",
+                    "Tribe\\Libs\\Nav\\": "src/Nav/",
+                    "Tribe\\Libs\\Object_Meta\\": "src/Object_Meta/",
+                    "Tribe\\Libs\\Oembed\\": "src/Oembed/",
+                    "Tribe\\Libs\\P2P\\": "src/P2P/",
+                    "Tribe\\Libs\\Post_Meta\\": "src/Post_Meta/",
+                    "Tribe\\Libs\\Post_Type\\": "src/Post_Type/",
+                    "Tribe\\Libs\\Queues\\": "src/Queues/",
+                    "Tribe\\Libs\\Queues_Mysql\\": "src/Queues_Mysql/",
+                    "Tribe\\Libs\\Schema\\": "src/Schema/",
+                    "Tribe\\Libs\\Settings\\": "src/Settings/",
+                    "Tribe\\Libs\\Taxonomy\\": "src/Taxonomy/",
+                    "Tribe\\Libs\\User\\": "src/User/",
+                    "Tribe\\Libs\\Utils\\": "src/Utils/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "Tribe\\Libs\\": "tests/integration/Tribe/Libs"
+                }
+            },
             "license": [
                 "GPL-2.0-only"
             ],
-            "description": "Nav menu tools for square one",
-            "time": "2020-02-22T22:11:36+00:00"
-        },
-        {
-            "name": "moderntribe/square1-object-meta",
-            "version": "v2.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/moderntribe/square1-object-meta.git",
-                "reference": "827ccfaf74762a5a793e33c114ef8c0d56d8953a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/square1-object-meta/zipball/827ccfaf74762a5a793e33c114ef8c0d56d8953a",
-                "reference": "827ccfaf74762a5a793e33c114ef8c0d56d8953a",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.2-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Tribe\\Libs\\Object_Meta\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0-only"
-            ],
-            "description": "Provides object meta wrappers for square one",
-            "time": "2020-02-22T22:11:36+00:00"
-        },
-        {
-            "name": "moderntribe/square1-oembed",
-            "version": "v2.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/moderntribe/square1-oembed.git",
-                "reference": "21c9bc9f3648da8dbc46a24d54d69a14552bd79b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/square1-oembed/zipball/21c9bc9f3648da8dbc46a24d54d69a14552bd79b",
-                "reference": "21c9bc9f3648da8dbc46a24d54d69a14552bd79b",
-                "shasum": ""
-            },
-            "require": {
-                "moderntribe/square1-cache": "^2.1.1",
-                "php": "^7.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.2-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Tribe\\Libs\\Oembed\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0-only"
-            ],
-            "description": "Oembed utilities for square one",
-            "time": "2020-02-22T22:15:00+00:00"
-        },
-        {
-            "name": "moderntribe/square1-p2p",
-            "version": "v2.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/moderntribe/square1-p2p.git",
-                "reference": "58358aa8ccde92750b98164a6dd1e8f2d9e4de5b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/square1-p2p/zipball/58358aa8ccde92750b98164a6dd1e8f2d9e4de5b",
-                "reference": "58358aa8ccde92750b98164a6dd1e8f2d9e4de5b",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.2-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Tribe\\Libs\\P2P\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0-only"
-            ],
-            "description": "P2P utilities for square one",
-            "time": "2020-02-22T22:11:36+00:00"
-        },
-        {
-            "name": "moderntribe/square1-post-type",
-            "version": "v2.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/moderntribe/square1-post-type.git",
-                "reference": "be63c8dde4fe325bdc95119e012860917b41984a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/square1-post-type/zipball/be63c8dde4fe325bdc95119e012860917b41984a",
-                "reference": "be63c8dde4fe325bdc95119e012860917b41984a",
-                "shasum": ""
-            },
-            "require": {
-                "moderntribe/square1-object-meta": "^2.1.1",
-                "php": "^7.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.2-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Tribe\\Libs\\Post_Type\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0-only"
-            ],
-            "description": "Post type utilities for square one",
-            "time": "2020-02-22T22:15:00+00:00"
-        },
-        {
-            "name": "moderntribe/square1-queues",
-            "version": "v2.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/moderntribe/square1-queues.git",
-                "reference": "ec1354d9522f6f31cc56cc2aca03c045e4790a9a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/square1-queues/zipball/ec1354d9522f6f31cc56cc2aca03c045e4790a9a",
-                "reference": "ec1354d9522f6f31cc56cc2aca03c045e4790a9a",
-                "shasum": ""
-            },
-            "require": {
-                "moderntribe/square1-cli": "^2.1.1",
-                "moderntribe/square1-container": "^2.1.1",
-                "php": "^7.0",
-                "pimple/pimple": "~3.0@dev"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.2-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Tribe\\Libs\\Queues\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0-only"
-            ],
-            "description": "A queues provider for square one",
-            "time": "2020-02-22T22:15:00+00:00"
-        },
-        {
-            "name": "moderntribe/square1-queues-mysql",
-            "version": "v2.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/moderntribe/square1-queues-mysql.git",
-                "reference": "b0fdbe9491bf0062abf463944196da2a708489eb"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/square1-queues-mysql/zipball/b0fdbe9491bf0062abf463944196da2a708489eb",
-                "reference": "b0fdbe9491bf0062abf463944196da2a708489eb",
-                "shasum": ""
-            },
-            "require": {
-                "moderntribe/square1-cli": "^2.1.1",
-                "moderntribe/square1-container": "^2.1.1",
-                "moderntribe/square1-queues": "^2.1.1",
-                "php": "^7.0",
-                "pimple/pimple": "~3.0@dev"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.2-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Tribe\\Libs\\Queues_Mysql\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0-only"
-            ],
-            "description": "A MySQL backend for square one queues",
-            "time": "2020-02-22T22:15:00+00:00"
-        },
-        {
-            "name": "moderntribe/square1-schema",
-            "version": "v2.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/moderntribe/square1-schema.git",
-                "reference": "f61ba8a20ad6fad3fc29e779c6a529430aa0dc16"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/square1-schema/zipball/f61ba8a20ad6fad3fc29e779c6a529430aa0dc16",
-                "reference": "f61ba8a20ad6fad3fc29e779c6a529430aa0dc16",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.2-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Tribe\\Libs\\Schema\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0-only"
-            ],
-            "description": "Schema utilities for square one",
-            "time": "2020-02-22T22:11:36+00:00"
-        },
-        {
-            "name": "moderntribe/square1-settings",
-            "version": "v2.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/moderntribe/square1-settings.git",
-                "reference": "1cd0b1a8679066743211663d00600948f8ef8312"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/square1-settings/zipball/1cd0b1a8679066743211663d00600948f8ef8312",
-                "reference": "1cd0b1a8679066743211663d00600948f8ef8312",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.2-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Tribe\\Libs\\Settings\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0-only"
-            ],
-            "description": "Settings page utilities for square one",
-            "time": "2020-02-22T22:11:36+00:00"
-        },
-        {
-            "name": "moderntribe/square1-taxonomy",
-            "version": "v2.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/moderntribe/square1-taxonomy.git",
-                "reference": "0b6f1d97af0d85be778dbc7ef48b14691048f1a1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/square1-taxonomy/zipball/0b6f1d97af0d85be778dbc7ef48b14691048f1a1",
-                "reference": "0b6f1d97af0d85be778dbc7ef48b14691048f1a1",
-                "shasum": ""
-            },
-            "require": {
-                "moderntribe/square1-object-meta": "^2.1.1",
-                "php": "^7.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.2-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Tribe\\Libs\\Taxonomy\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0-only"
-            ],
-            "description": "Taxonomy utilities for square one",
-            "time": "2020-02-22T22:15:00+00:00"
-        },
-        {
-            "name": "moderntribe/square1-user",
-            "version": "v2.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/moderntribe/square1-user.git",
-                "reference": "9ac55168f45875c756c460389b65ca1ae12e5447"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/square1-user/zipball/9ac55168f45875c756c460389b65ca1ae12e5447",
-                "reference": "9ac55168f45875c756c460389b65ca1ae12e5447",
-                "shasum": ""
-            },
-            "require": {
-                "moderntribe/square1-object-meta": "^2.1.1",
-                "php": "^7.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.2-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Tribe\\Libs\\User\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0-only"
-            ],
-            "description": "User utilities for square one",
-            "time": "2020-02-22T22:15:00+00:00"
-        },
-        {
-            "name": "moderntribe/square1-utils",
-            "version": "v2.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/moderntribe/square1-utils.git",
-                "reference": "19924d65f29b470a7b64ecf1dedfb8673576737a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/square1-utils/zipball/19924d65f29b470a7b64ecf1dedfb8673576737a",
-                "reference": "19924d65f29b470a7b64ecf1dedfb8673576737a",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.2-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Tribe\\Libs\\Utils\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0-only"
-            ],
-            "description": "Utilities for square one",
-            "time": "2020-02-22T22:11:36+00:00"
+            "description": "A library for use on Modern Tribe service projects."
         },
         {
             "name": "monolog/monolog",
@@ -4363,12 +3836,12 @@
             "version": "1.7.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/facebook/php-webdriver.git",
+                "url": "https://github.com/php-webdriver/php-webdriver-archive.git",
                 "reference": "e43de70f3c7166169d0f14a374505392734160e5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/facebook/php-webdriver/zipball/e43de70f3c7166169d0f14a374505392734160e5",
+                "url": "https://api.github.com/repos/php-webdriver/php-webdriver-archive/zipball/e43de70f3c7166169d0f14a374505392734160e5",
                 "reference": "e43de70f3c7166169d0f14a374505392734160e5",
                 "shasum": ""
             },
@@ -5691,44 +5164,6 @@
                 "wordpress"
             ],
             "time": "2018-01-11T14:12:02+00:00"
-        },
-        {
-            "name": "moderntribe/square1-generators",
-            "version": "v2.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/moderntribe/square1-generators.git",
-                "reference": "895fef9b96365d48a28b7a092468da6846dd6661"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/square1-generators/zipball/895fef9b96365d48a28b7a092468da6846dd6661",
-                "reference": "895fef9b96365d48a28b7a092468da6846dd6661",
-                "shasum": ""
-            },
-            "require": {
-                "moderntribe/square1-cli": "^2.1.1",
-                "moderntribe/square1-container": "^2.1.1",
-                "php": "^7.0",
-                "pimple/pimple": "~3.0@dev"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.2-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Tribe\\Libs\\Generators\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0-only"
-            ],
-            "description": "Code generators for Square One",
-            "time": "2020-02-22T22:15:00+00:00"
         },
         {
             "name": "mustache/mustache",
@@ -10412,6 +9847,7 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "moderntribe/panel-builder": 20,
+        "moderntribe/gutenpanels": 20,
         "humanmade/mercator": 20,
         "pimple/pimple": 20,
         "roots/wp-password-bcrypt": 20,

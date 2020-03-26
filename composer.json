@@ -11,6 +11,7 @@
     "preferred-install": {
       "moderntribe/panel-builder": "source",
       "moderntribe/tribe-libs": "source",
+      "moderntribe/gutenpanels": "source",
       "*": "dist"
     }
   },
@@ -38,6 +39,11 @@
       "type":"vcs",
       "no-api": true,
       "url":"git@github.com:moderntribe/panel-builder.git"
+    },
+    {
+      "type":"vcs",
+      "no-api": true,
+      "url":"git@github.com:moderntribe/gutenpanels.git"
     },
     {
       "type": "package",
@@ -75,7 +81,7 @@
     "aws/aws-sdk-php": "3.48.4",
     "composer/installers":"1.4.0",
     "johnpbloch/wordpress-core-installer":"1.0.0",
-    "johnpbloch/wordpress-core": "5.2.4",
+    "johnpbloch/wordpress-core": "5.4.*",
     "wpackagist-plugin/configure-smtp": "3.1",
     "wpackagist-plugin/gravity-forms-wcag-20-form-fields": "1.7.2",
     "wpackagist-plugin/limit-login-attempts": "2.0beta3",
@@ -88,6 +94,7 @@
     "wpackagist-plugin/classic-editor-addon":"2.5.0",
     "wpackagist-plugin/safe-svg":"1.9.8",
     "moderntribe/panel-builder": "dev-3.3-branch",
+    "moderntribe/gutenpanels": "dev-master",
 
     "moderntribe/square1-acf": "^2.0",
     "moderntribe/square1-assets": "^2.0",
