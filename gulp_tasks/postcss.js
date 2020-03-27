@@ -55,6 +55,7 @@ module.exports = {
 		return cssProcess( [
 			`${ pkg._core_theme_pcss_path }master.pcss`,
 			`${ pkg._core_theme_pcss_path }print.pcss`,
+			`${ pkg._core_theme_components_path }/**/index.pcss`,
 		], pkg._core_theme_css_path );
 	},
 	themeLegacy() {
