@@ -9,9 +9,10 @@ const postcssFunctions = require( '../dev_components/theme/pcss/functions' );
 const pkg = require( '../package.json' );
 
 const compilePlugins = [
-	require( 'postcss-partial-import' )( {
-		extension: '.pcss',
-		prefix: '_',
+	require( 'postcss-import' )( {
+		path: [
+			`./${ pkg._core_theme_path }`,
+		],
 	} ),
 	require( 'postcss-mixins' ),
 	require( 'postcss-custom-properties' )( { preserve: false } ),

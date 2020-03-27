@@ -87,6 +87,7 @@ const gulpTasks = [
 	/* Postcss tasks */
 
 	'postcss:theme', // the big ol postcss task that transforms theme pcss to css
+	'postcss:themeComponents', // the postcss task that transforms theme components pcss to css
 	'postcss:themeLegacy', // the postcss task that transforms legacy pcss to css
 	'postcss:themeWPEditor', // the postcss task that transforms editor pcss to css
 	'postcss:themeWPLogin', // the postcss task that transforms login pcss to css
