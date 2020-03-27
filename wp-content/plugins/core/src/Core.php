@@ -104,6 +104,8 @@ class Core {
 		$this->subscribers = apply_filters( 'tribe/project/subscribers', $this->subscribers );
 
 		$builder = new \DI\ContainerBuilder();
+		$builder->useAutowiring( true );
+		$builder->useAnnotations( false );
 		$builder->addDefinitions( [ self::PLUGIN_FILE => $plugin_path ] );
 		$builder->addDefinitions( ... array_map( function ( $classname ) {
 			return ( new $classname() )->define();

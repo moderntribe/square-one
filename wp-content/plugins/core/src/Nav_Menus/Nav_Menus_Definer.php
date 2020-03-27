@@ -19,10 +19,10 @@ class Nav_Menus_Definer implements Definer_Interface {
 				DI\get( 'menu.secondary' ),
 			],
 			'menu.primary'   => function () {
-				return new Menu_Location( self::PRIMARY, __( 'Menu: Site', 'tribe' ) );
+				return new Menu_Location( Nav_Menus_Definer::PRIMARY, __( 'Menu: Site', 'tribe' ) );
 			},
 			'menu.secondary' => function () {
-				return new Menu_Location( self::SECONDARY, __( 'Menu: Footer', 'tribe' ) );
+				return new Menu_Location( Nav_Menus_Definer::SECONDARY, __( 'Menu: Footer', 'tribe' ) );
 			},
 		];
 	}
