@@ -6,13 +6,17 @@ const rules = require( './rules.js' );
 const vendor = require( './vendors' );
 const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
 const BundleAnalyzerPlugin = require( 'webpack-bundle-analyzer' ).BundleAnalyzerPlugin;
+const glob = require( 'glob' );
 const pkg = require( '../package.json' );
 
 module.exports = merge( common, {
 	cache: true,
 	mode: 'development',
 	entry: {
-		scripts: `./${ pkg._core_theme_js_src_path }index.js`,
+		scripts: [
+			`./${ pkg._core_theme_js_src_path }index.js`,
+			...glob.sync( `./${ pkg._core_theme_components_path }**/index.js` ),
+		],
 		vendor: vendor.theme,
 	},
 	output: {
