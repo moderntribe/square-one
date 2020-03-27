@@ -5,6 +5,7 @@
   "license": "GPL-2.0",
   "repository": "https://github.com/moderntribe/square-one.git",
   "_core_theme_path": "wp-content/themes/core",
+  "_core_theme_components_path": "wp-content/themes/core/components/",
   "_core_theme_js_util_path": "wp-content/themes/core/js/src/utils/",
   "_core_theme_css_path": "wp-content/themes/core/css/",
   "_core_theme_css_dist_path": "wp-content/themes/core/css/dist/",
