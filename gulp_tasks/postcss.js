@@ -48,7 +48,7 @@ const legacyPlugins = [
  * 	src = [],
  * 	dest = pkg._core_admin_css_path,
  * 	plugins = compilePlugins,
- * 	bundleName = null,
+ * 	bundleName = 'empty.css',
  * }
  * @param {Array<string>} options.src
  * @param {string} options.dest
@@ -60,7 +60,7 @@ function cssProcess( {
 	src = [],
 	dest = pkg._core_admin_css_path,
 	plugins = compilePlugins,
-	bundleName = 'empty.css',
+	bundleName = 'empty.css', // Needs to be a valid filename else concat errors
 } ) {
 	const server = browserSync.get( 'Tribe Dev' );
 	return gulp.src( src )
