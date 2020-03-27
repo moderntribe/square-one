@@ -15,9 +15,6 @@ class Config extends Taxonomy_Config {
 
 	protected $version = 1;
 
-	public function __construct() {
-	}
-
 	/**
 	 * Arguments to pass when registering the taxonomy.
 	 *

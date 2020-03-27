@@ -8,9 +8,6 @@ use Tribe\Libs\Post_Type\Post_Type_Config;
 class Config extends Post_Type_Config {
 	protected $post_type = Sample::NAME;
 
-	public function __construct() {
-	}
-
 	public function get_args() {
 		return [
 			'hierarchical'     => false,

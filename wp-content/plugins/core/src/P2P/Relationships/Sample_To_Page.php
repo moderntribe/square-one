@@ -18,13 +18,6 @@ class Sample_To_Page extends Relationship {
 		Page::NAME,
 	];
 
-	public function __construct() {
-		parent::__construct(
-			array_filter( $this->from, [ $this, 'is_registered_post_type' ] ),
-			array_filter( $this->to, [ $this, 'is_registered_post_type' ] )
-		);
-	}
-
 	public function get_args() {
 		return [
 			'reciprocal'      => true,
@@ -51,17 +44,5 @@ class Sample_To_Page extends Relationship {
 			],
 			'can_create_post' => false,
 		];
-	}
-
-	/**
-	 * Registering a p2p connection type with an unregistered post type
-	 * will throw an error.
-	 *
-	 * @param string $post_type
-	 *
-	 * @return bool Whether the post type is registered
-	 */
-	protected function is_registered_post_type( $post_type ) {
-		return get_post_type_object( $post_type ) !== null;
 	}
 }

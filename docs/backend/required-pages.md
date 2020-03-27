@@ -21,22 +21,12 @@ class Contact_Page extends Required_Page {
 }
 ```
 
-2. Instantiate that class in the `Content_Provider` service provider.
+2. Register that class in `Content_Definer`.
 
 ```php
-$container[ self::CONTACT_PAGE ] = function ( Container $container ) {
-	return new Contact_Page();
-};
-```
-
-3. Add it to the array of required pages.
-
-```php
-$container[ self::REQUIRED_PAGES ] = function ( $container ) {
-	return [
-		$container[ self::CONTACT_PAGE ],
-	];
-};
+self::REQUIRED_PAGES => [
+    DI\get( Contact_Page::class ),
+]
 ```
 
 The page will now be automatically created. The ID of the page can be found with:
@@ -49,8 +39,7 @@ If you want the user to expose a UI for the option, you can do so manually in an
 or you can pass a group key into the constructor for the class to have the field automatically exposed.
 
 ```php
-$example_meta = $container[ Object_Meta_Provider::EXAMPLE ];
-$group        = $example_meta->get_group_config();
-$key          = $group[ 'key' ];
-return new Contact_Page( $key );
+Contact_Page::class => function ( ContainerInterface $container ) {
+    return new Contact_Page( $container->get( \Tribe\Project\Object_Meta\Example::class )->get_group_config()['key'] );
+}
 ```
