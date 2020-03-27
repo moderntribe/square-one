@@ -34,13 +34,13 @@ module.exports = {
 				`${ pkg._npm_path }/jquery/dist/jquery.min.map`,
 				`${ pkg._component_path }/theme/js/globals.js`,
 				`${ pkg._npm_path }/es6-promise/dist/es6-promise.auto.js`,
-				`${ pkg._npm_path }/swiper/dist/js/swiper.js`,
+				`${ pkg._npm_path }/swiper/js/swiper.js`,
 				`${ pkg._npm_path }/lazysizes/plugins/object-fit/ls.object-fit.js`,
 				`${ pkg._npm_path }/lazysizes/plugins/parent-fit/ls.parent-fit.js`,
 				`${ pkg._npm_path }/lazysizes/plugins/respimg/ls.respimg.js`,
 				`${ pkg._npm_path }/lazysizes/plugins/bgset/ls.bgset.js`,
 				`${ pkg._npm_path }/lazysizes/lazysizes.js`,
-				`${ pkg._npm_path }/tota11y/build/tota11y.min.js`,
+				`${ pkg._npm_path }/@khanacademy/tota11y/dist/tota11y.min.js`,
 				`${ pkg._npm_path }/webfontloader/webfontloader.js`,
 			] )
 			.pipe( gulp.dest( pkg._core_theme_js_vendor_path ) );
