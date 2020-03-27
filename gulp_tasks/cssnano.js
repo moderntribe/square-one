@@ -23,6 +23,11 @@ module.exports = {
 			`${ pkg._core_theme_css_path }print.css`,
 		], pkg._core_theme_css_dist_path );
 	},
+	themeComponentsMin() {
+		return minify( [
+			`${ pkg._core_theme_css_path }components.css`,
+		], pkg._core_theme_css_dist_path );
+	},
 	themeLegacyMin() {
 		return minify( [
 			`${ pkg._core_theme_css_path }legacy.css`,
