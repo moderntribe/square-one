@@ -2,32 +2,12 @@
 
 # suite for WordPress integration tests.
 # Load WordPress and integration test classes that rely on it.
-class_name: IntegrationTester
+actor: IntegrationTester
+bootstrap: _bootstrap.php
 modules:
     enabled:
+        - \Helper\Integration
         - WPLoader
     config:
         WPLoader:
-            wpRootFolder: "%WP_ROOT_FOLDER%"
-            dbName: %DB_NAME%
-            dbHost: %DB_HOST%
-            dbUser: %DB_USER%
-            dbPassword: %DB_PASSWORD%
-            wpDebug: true
-            tablePrefix: %TABLE_PREFIX%
-            domain: %WP_DOMAIN%
-            title: 'WP Tests'
-            language: ''
-            configFile: tests-config.php
-            plugins:
-                - core/core.php
-                - advanced-custom-fields-pro/acf.php
-                - posts-to-posts/posts-to-posts.php
-            activatePlugins:
-                - core/core.php
-                - advanced-custom-fields-pro/acf.php
-                - posts-to-posts/posts-to-posts.php
-            bootstrapActions:
-                - [P2P_Storage, install]
-                - [P2P_Storage, init]
-                - tribe/project/queues/mysql/init_table
+            loadOnly: false

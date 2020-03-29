@@ -38,6 +38,7 @@ x-php: &php
     - COMPOSER_ALLOW_SUPERUSER=1
     - COMPOSER_HOME=/application/.composer
     - PAGER=more
+    - PHP_IDE_CONFIG=serverName=square1.tribe
 
 services:
 
