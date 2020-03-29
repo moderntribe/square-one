@@ -40,7 +40,7 @@ services:
       build:
         context: .
         dockerfile: phpdocker/php-fpm/Dockerfile
-      image: lyra-phpfpm:7.2-rev1
+      image: tribe-phpfpm:7.2-rev1
       working_dir: /application
       networks:
         - proxy

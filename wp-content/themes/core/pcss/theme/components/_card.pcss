@@ -1,0 +1,37 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Component: Card (Default Panels)
+ *
+ * ----------------------------------------------------------------------------- */
+
+.c-card {
+	background: var(--color-off-white);
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	position: relative;
+}
+
+.c-card__title {
+	color: var(--color-grey-dark);
+	font-size: 24px;
+	font-weight: var(--font-weight-bold);
+	margin-bottom: 10px;
+
+	@media (--viewport-medium) {
+		font-size: 28px;
+	}
+}
+
+.c-card__desc {
+	margin-bottom: 20px;
+
+	p {
+		font-size: var(--font-size-content-s);
+	}
+}
+
+.c-card__content {
+	height: 100%;
+	padding: 30px 25px;
+}
