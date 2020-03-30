@@ -45,8 +45,8 @@ jobs:
       mysql:
         image: mariadb:10
         env:
-          - MYSQL_ROOT_PASSWORD=password
-          - MYSQL_DATABASE=wordpress
+          - MYSQL_ROOT_PASSWORD: password
+          - MYSQL_DATABASE: wordpress
         ports:
           - 3306:3306
 
