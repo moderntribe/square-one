@@ -75,8 +75,8 @@ jobs:
 
       - name: Create local config
         run: |
-          php -r "file_exists( 'local-config.php' ) || copy( 'local-config-sample.php', 'local-config.php' )
-          php -r "file_exists( 'local-config.json' ) || copy( 'local-config-sample.json', 'local-config.json' )
+          php -r "file_exists( 'local-config.php' ) || copy( 'local-config-sample.php', 'local-config.php' )"
+          php -r "file_exists( 'local-config.json' ) || copy( 'local-config-sample.json', 'local-config.json' )"
 
       - name: Replace dev domain names with localhost
         run: |
