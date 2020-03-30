@@ -1,10 +1,6 @@
 name: Codeception Tests
 
-on:
-  pull_request:
-    paths:
-      - 'wp-content/plugins/core/*'
-      - 'wp-content/themes/core/*'
+on: [push, pull_request]
 
 jobs:
 
