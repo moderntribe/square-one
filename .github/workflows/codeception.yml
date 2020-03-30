@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      WP_ROOT_FOLDER: ${{ github.workspace }}
+      WP_ROOT_FOLDER: ${{ github.workspace }}/wp
       WP_DOMAIN: "localhost"
       WP_ADMIN_PATH: "/wp-admin"
       WP_ADMIN_USERNAME: "admin"
