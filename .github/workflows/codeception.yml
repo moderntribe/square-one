@@ -77,6 +77,7 @@ jobs:
         run: |
           php -r "file_exists( 'local-config.php' ) || copy( 'local-config-sample.php', 'local-config.php' );"
           php -r "file_exists( 'local-config.json' ) || copy( 'local-config-sample.json', 'local-config.json' );"
+          touch dev/tests/.env
 
       - name: Replace dev domain names with localhost
         run: |
