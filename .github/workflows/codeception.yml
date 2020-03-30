@@ -65,7 +65,7 @@ jobs:
         with:
           php-version: '7.2'
           coverage: none
-          extensions: memcached, mysql, bz2, gd, igbinary, imagick, imap, mbstring, bcmath, zip, pclzip, intl
+          extensions: memcached, mysql, bz2, gd, igbinary, imagick, imap, mbstring, bcmath, zip, intl
           tools: codeception, composer
 
       - name: Add GitHub oAuth
