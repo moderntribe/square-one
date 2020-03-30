@@ -73,6 +73,16 @@ jobs:
           TOKEN: ${{ secrets.GH_TOKEN }}
         run: composer config --global github-oauth.github.com $TOKEN
 
+      - name: Create local config
+        run: |
+          php -r "file_exists( 'local-config.php' ) || copy( 'local-config-sample.php', 'local-config.php' )
+          php -r "file_exists( 'local-config.json' ) || copy( 'local-config-sample.json', 'local-config.json' )
+
+      - name: Replace dev domain names with localhost
+        run: |
+          sed --in-place='' 's/square1test.tribe/localhost/g' dev/tests/_data/dump.sql
+          sed --in-place='' 's/square1.tribe/localhost/g' local-config-sample.json
+
       - name: Check for Cached Composer Dependencies
         id: cache-composer-dependencies
         uses: actions/cache@v1
@@ -106,16 +116,6 @@ jobs:
 
       - name: Build assets
         run: gulp dist
-
-      - name: Create local config
-        run: |
-          php -r "file_exists( 'local-config.php' ) || copy( 'local-config-sample.php', 'local-config.php' )
-          php -r "file_exists( 'local-config.json' ) || copy( 'local-config-sample.json', 'local-config.json' )
-
-      - name: Replace dev domain names with localhost
-        run: |
-          sed --in-place='' 's/square1test.tribe/localhost/g' dev/tests/_data/dump.sql
-          sed --in-place='' 's/square1.tribe/localhost/g' local-config-sample.json
 
       - name: Run unit tests
         run: vendor/bin/codecept --config ${{ github.workspace }}/dev/tests run unit
