@@ -80,7 +80,7 @@ jobs:
 
       - name: Replace dev domain names with localhost
         run: |
-          sed --in-place='' 's/square1test.tribe/localhost/g' dev/tests/_data/dump.sql
+          sed --in-place='' 's/square1test.tribe/localhost/g' dev/tests/tests/_data/dump.sql
           sed --in-place='' 's/square1.tribe/localhost/g' local-config-sample.json
 
       - name: Check for Cached Composer Dependencies
