@@ -16,8 +16,8 @@ class P2P_Definer implements Definer_Interface {
 	public function define(): array {
 		return [
 			self::RELATIONSHIPS  => [
-				General_Relationship::class,
-				Sample_To_Page::class,
+				DI\get( General_Relationship::class ),
+				DI\get( Sample_To_Page::class ),
 			],
 			self::ADMIN_FILTERS  => [
 				DI\create( Admin_Search_Filtering::class )

@@ -9,21 +9,18 @@ modules:
         - \Helper\Webdriver
         - WPDb
         - WPWebDriver
-        - WPLoader
         - Asserts
     config:
         WPDb:
             populate: true
             cleanup: false
-        WPLoader:
-            loadOnly: true
         WPWebDriver:
-            url: '%WP_URL%'
-            adminUsername: '%WP_ADMIN_USERNAME%'
-            adminPassword: '%WP_ADMIN_PASSWORD%'
-            adminPath: '%WP_ADMIN_PATH%'
+            url: '%ACCEPTANCE_WP_URL%'
+            adminUsername: %WP_ADMIN_USERNAME%
+            adminPassword: %WP_ADMIN_PASSWORD%
+            adminPath: %WP_ADMIN_PATH%
             browser: chrome
-            host: chrome.tribe
+            host: chrome
             port: 4444
             window_size: 1366x768
             wait: 5

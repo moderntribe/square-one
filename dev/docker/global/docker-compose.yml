@@ -14,7 +14,7 @@ services:
     image: 'andyshinn/dnsmasq:latest'
     container_name: tribe-dns-internal
     command: >-
-      --log-facility=/proc/self/fd/2 --no-resolv --server=1.1.1.1 --address=/tribe/172.20.10.100 --address=/mysql.tribe/172.20.10.200 --address=/mailhog.tribe/172.20.10.90 --address=/chrome.tribe/172.20.10.80
+      --log-facility=/proc/self/fd/2 --no-resolv --server=1.1.1.1 --address=/tribe/172.20.10.100 --address=/mysql.tribe/172.20.10.200 --address=/mailhog.tribe/172.20.10.90
       --address=/smtp.tribe/172.20.10.90 --address=/host.tribe/${HOSTIP:-172.20.10.1}
     cap_add:
       - NET_ADMIN
@@ -63,17 +63,6 @@ services:
         ipv4_address: 172.20.10.90
     ports:
       - '1025:1025'
-  chrome:
-    image: 'selenium/standalone-chrome:3.141.59'
-    container_name: tribe-chrome
-    dns: 172.20.10.250
-    volumes:
-      - '/dev/shm:/dev/shm'
-    ports:
-      - '4444:4444'
-    networks:
-      proxy:
-        ipv4_address: 172.20.10.80
 networks:
   proxy:
     driver: bridge

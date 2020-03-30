@@ -9,16 +9,12 @@ modules:
         - \Helper\Acceptance
         - WPDb
         - WPBrowser
-        - WPLoader
     config:
         WPBrowser:
-            url: '%WP_URL%'
+            url: '%ACCEPTANCE_WP_URL%'
             adminUsername: %WP_ADMIN_USERNAME%
             adminPassword: %WP_ADMIN_PASSWORD%
-            adminUrl: %WP_ADMIN_PATH%
+            adminPath: %WP_ADMIN_PATH%
         WPDb:
             populate: true
             cleanup: false
-        WPLoader:
-            # just load WordPress using the same db as WPDb
-            loadOnly: true

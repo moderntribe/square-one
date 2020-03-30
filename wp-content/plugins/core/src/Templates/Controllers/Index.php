@@ -73,7 +73,7 @@ class Index extends Abstract_Template {
 	}
 
 	protected function get_comments() {
-		if ( comments_open() || get_comments_number() > 0 ) {
+		if ( have_posts() && ( comments_open() || get_comments_number() > 0 ) ) {
 			ob_start();
 			comments_template();
 

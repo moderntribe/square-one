@@ -31,11 +31,11 @@ settings:
 modules:
     config:
         WPDb:
-            dsn: '%DB_DSN%'
-            user: '%DB_USER%'
-            password: '%DB_PASSWORD%'
+            dsn: 'mysql:host=%ACCEPTANCE_DB_HOST%;dbname=%ACCEPTANCE_DB_NAME%'
+            user: '%ACCEPTANCE_DB_USER%'
+            password: '%ACCEPTANCE_DB_PASS%'
             dump: tests/_data/dump.sql
-            url: '%WP_URL%'
+            url: '%ACCEPTANCE_WP_URL%'
             tablePrefix: '%TABLE_PREFIX%'
             urlReplacement: false
             # populate: true (We recommend each suite define this parameter explicitly)
@@ -46,18 +46,23 @@ modules:
                     # This enables Xdebug on requests made by WPBrowser
                     Name: XDEBUG_SESSION
                     Value: # Empty. Automatically managed by testx.sh
+                    Domain: '%WP_DOMAIN%'
             headers:
                 # This tells WordPress that this is a WPBrowser request
                 X_TRIBE_TESTING: 1
+                X_TEST_REQUEST: 1
+                X_WPBROWSER_REQUEST: 1
         WPLoader:
             # loadOnly: false (We recommend each suite define this parameter explicitly)
             wpRootFolder: '%WP_ROOT_FOLDER%'
             pluginsFolder: ../wp-content/plugins
-            dbName: '%DB_NAME%'
-            dbHost: '%DB_HOST%'
-            dbUser: '%DB_USER%'
-            dbPassword: '%DB_PASSWORD%'
-            configFile: tests-config.php
+            dbName: '%TEST_DB_NAME%'
+            dbHost: '%TEST_DB_HOST%'
+            dbUser: '%TEST_DB_USER%'
+            dbPassword: '%TEST_DB_PASSWORD%'
+            tablePrefix: "%TABLE_PREFIX%"
+            domain: "%WP_DOMAIN%"
+            configFile: wp-config-environment.php
             multisite: false
             theme: core
             plugins:

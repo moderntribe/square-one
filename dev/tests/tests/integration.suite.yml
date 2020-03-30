@@ -8,6 +8,3 @@ modules:
     enabled:
         - \Helper\Integration
         - WPLoader
-    config:
-        WPLoader:
-            loadOnly: false
