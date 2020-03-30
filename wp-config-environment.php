@@ -108,8 +108,8 @@ $config_defaults = [
 	// Security Directives
 	'DISALLOW_FILE_EDIT'             => true,
 	'DISALLOW_FILE_MODS'             => true,
-	'FORCE_SSL_LOGIN'                => true,
-	'FORCE_SSL_ADMIN'                => true,
+	'FORCE_SSL_LOGIN'                => tribe_getenv( 'FORCE_SSL_LOGIN', true ),
+	'FORCE_SSL_ADMIN'                => tribe_getenv( 'FORCE_SSL_ADMIN', true ),
 
 	// Performance
 	'WP_CACHE'                       => tribe_getenv( 'WP_CACHE', false ),

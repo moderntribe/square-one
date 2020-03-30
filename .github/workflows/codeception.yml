@@ -1,0 +1,130 @@
+name: Codeception Tests
+
+on:
+  pull_request:
+    paths:
+      - 'wp-content/plugins/core/*'
+      - 'wp-content/themes/core/*'
+
+jobs:
+
+  ci:
+    runs-on: ubuntu-latest
+
+    env:
+      WP_ROOT_FOLDER: ${{ github.workspace }}
+      WP_DOMAIN: "localhost"
+      WP_ADMIN_PATH: "/wp-admin"
+      WP_ADMIN_USERNAME: "admin"
+      WP_ADMIN_PASSWORD: "password"
+      WP_URL: "http://localhost"
+      DB_HOST: localhost
+      DB_NAME: wordpress
+      DB_USER: root
+      DB_PASSWORD: password
+      TEST_DB_HOST: localhost
+      TEST_DB_NAME: wordpress
+      TEST_DB_USER: root
+      TEST_DB_PASSWORD: password
+      ACCEPTANCE_WP_URL: "http://localhost"
+      ACCEPTANCE_DB_NAME: wordpress
+      ACCEPTANCE_DB_HOST: localhost
+      ACCEPTANCE_DB_USER: root
+      ACCEPTANCE_DB_PASS: password
+      TABLE_PREFIX: "tribe_"
+      MEMCACHED_HOST: localhost
+      MEMCACHED_PORT: 11211
+      CHROMEDRIVER_HOST: localhost
+      CHROMEDRIVER_PORT: 4444
+      FORCE_SSL_LOGIN: false
+      FORCE_SSL_ADMIN: false
+
+    services:
+
+      memcached:
+        image: memcached:alpine
+        ports:
+          - 11211:11211
+
+      mysql:
+        image: mariadb:10
+        env:
+          - MYSQL_ROOT_PASSWORD=password
+          - MYSQL_DATABASE=wordpress
+        ports:
+          - 3306:3306
+
+      chrome:
+        image: selenium/standalone-chrome:3.141.59-oxygen
+        ports:
+          - 4444:4444
+
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.2'
+          coverage: none
+          extensions: memcached, mysql, bz2, gd, igbinary, imagick, imap, mbstring, bcmath, zip, pclzip, intl
+          tools: codeception, composer
+
+      - name: Add GitHub oAuth
+        env:
+          TOKEN: ${{ secrets.GH_TOKEN }}
+        run: composer config --global github-oauth.github.com $TOKEN
+
+      - name: Check for Cached Composer Dependencies
+        id: cache-composer-dependencies
+        uses: actions/cache@v1
+        with:
+          path: vendor
+          key: ${{ runner.OS }}-composer-${{ hashFiles('**/composer.lock') }}
+
+      - name: Install composer dependencies
+        if: steps.cache-composer-dependencies.outputs.cache-hit != 'true'
+        env:
+          WP_PLUGIN_ACF_KEY: ${{ secrets.WP_PLUGIN_ACF_KEY }}
+          WP_PLUGIN_GF_KEY: ${{ secrets.WP_PLUGIN_GF_KEY }}
+          WP_PLUGIN_GF_TOKEN: ${{ secrets.WP_PLUGIN_GF_TOKEN }}
+        run: composer install --prefer-dist --no-progress --no-suggest --optimize-autoloader
+
+      - name: Check for Cached Node Modules
+        id: cache-node-modules
+        uses: actions/cache@v1
+        with:
+          path: node_modules
+          key: ${{ runner.OS }}-node-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.13.1'
+
+      - name: Install node modules
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+        run: yarn --frozen-lockfile
+
+      - name: Build assets
+        run: gulp dist
+
+      - name: Create local config
+        run: php -r "file_exists( 'local-config.php' ) || copy( 'local-config-sample.php', 'local-config.php' )
+
+      - name: Replace domains in database dump
+        run: sed --in-place='' 's/square1test.tribe/localhost/g' dev/tests/_data/dump.sql
+
+      - name: Run unit tests
+        run: vendor/bin/codecept --config ${{ github.workspace }}/dev/tests run unit
+
+      - name: Run integration tests
+        run: vendor/bin/codecept --config ${{ github.workspace }}/dev/tests run integration
+
+      - name: Run acceptance tests
+        run: vendor/bin/codecept --config ${{ github.workspace }}/dev/tests run acceptance
+
+      - name: Run webdriver tests
+        run: vendor/bin/codecept --config ${{ github.workspace }}/dev/tests run webdriver

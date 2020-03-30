@@ -14,7 +14,7 @@ else
 	DC_COMMAND="docker-compose"
 fi;
 
-# Cleanup debug files
+# Cleanup debug files\
 COMPOSE_INTERACTIVE_NO_CLI=1 ${DC_COMMAND} --project-name=${PROJECT_ID} exec php-tests \
 php \
 -dxdebug.remote_autostart=0 \
