@@ -27,7 +27,7 @@ jobs:
         run: |
           chmod 777 dev/tests/tests/_output
           mkdir -p wp-content/cache
-          chmod 777 wp-content/cache
+          chmod -R 777 wp-content/cache
 
       - name: Create placeholder .env
         run: |
@@ -102,9 +102,6 @@ jobs:
 
       - name: Run integration tests
         run: docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests php /application/www/vendor/bin/codecept --config "/application/www/dev/tests" run integration
-
-      - name: Setup Debug Session
-        uses: csexton/debugger-action@master
 
       - name: Run acceptance tests
         run: docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests php /application/www/vendor/bin/codecept --config "/application/www/dev/tests" run acceptance
