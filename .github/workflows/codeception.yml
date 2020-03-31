@@ -14,116 +14,47 @@ jobs:
 
     env:
       cache_version: 1 # increment to flush all caches
-      php_extensions: memcached, mysql, bz2, gd, igbinary, imagick, imap, mbstring, bcmath, zip, intl
-      WP_ROOT_FOLDER: ${{ github.workspace }}/wp
-      WP_DOMAIN: "localhost"
-      WP_ADMIN_PATH: "/wp-admin"
-      WP_ADMIN_USERNAME: "admin"
-      WP_ADMIN_PASSWORD: "password"
-      WP_URL: "http://localhost"
-      DB_HOST: 127.0.0.1
-      DB_NAME: wordpress
-      DB_USER: root
-      DB_PASSWORD: password
-      TEST_DB_HOST: 127.0.0.1
-      TEST_DB_NAME: wordpress
-      TEST_DB_USER: root
-      TEST_DB_PASSWORD: password
-      ACCEPTANCE_WP_URL: "http://localhost"
-      ACCEPTANCE_DB_NAME: wordpress
-      ACCEPTANCE_DB_HOST: 127.0.0.1
-      ACCEPTANCE_DB_USER: root
-      ACCEPTANCE_DB_PASS: password
-      TABLE_PREFIX: "tribe_"
-      MEMCACHED_HOST: 127.0.0.1
-      MEMCACHED_PORT: 11211
-      CHROMEDRIVER_HOST: 127.0.0.1
-      CHROMEDRIVER_PORT: 4444
       FORCE_SSL_LOGIN: false
       FORCE_SSL_ADMIN: false
-
-    services:
-
-      memcached:
-        image: memcached:alpine
-        ports:
-          - 11211:11211
-
-      mysql:
-        image: mariadb:10
-        env:
-          MYSQL_ROOT_PASSWORD: password
-          MYSQL_DATABASE: wordpress
-        ports:
-          - 3306:3306
-
-      chrome:
-        image: selenium/standalone-chrome:3.141.59-oxygen
-        ports:
-          - 4444:4444
 
     steps:
 
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Setup PHP extension cache
-        id: cache-php-extensions
-        uses: shivammathur/cache-extensions@v1
-        with:
-          php-version: ${{ matrix.php-versions }}
-          extensions: ${{ env.php_extensions }}
-          key: ${{ matrix.operating-system }}-${{ env.cache_version }}-phpextensions-${{ matrix.php-versions }}
+      - name: Start global containers
+        run: dev/docker/global/start.sh
 
-      - name: Cache PHP extensions
-        uses: actions/cache@v1
-        with:
-          path: ${{ steps.cache-php-extensions.outputs.dir }}
-          key: ${{ steps.cache-php-extensions.outputs.key }}
-          restore-keys: ${{ steps.cache-php-extensions.outputs.key }}
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: ${{ matrix.php-versions }}
-          extensions: ${{ env.php_extensions }}
-          coverage: none
-          tools: codeception, composer
-
-      - name: Add GitHub oAuth
-        env:
-          TOKEN: ${{ secrets.GH_TOKEN }}
-        run: composer config --global github-oauth.github.com $TOKEN
+      - name: Create placeholder .env
+        run: |
+          printf '
+          WP_PLUGIN_ACF_KEY='${{ secrets.WP_PLUGIN_ACF_KEY }}'
+          WP_PLUGIN_GF_KEY='${{ secrets.WP_PLUGIN_GF_KEY }}'
+          WP_PLUGIN_GF_TOKEN='${{ secrets.WP_PLUGIN_GF_TOKEN }}'
+          ' > .env
 
       - name: Create local config
         run: |
           php -r "file_exists( 'local-config.php' ) || copy( 'local-config-sample.php', 'local-config.php' );"
           php -r "file_exists( 'local-config.json' ) || copy( 'local-config-sample.json', 'local-config.json' );"
-          touch dev/tests/.env
+          php -r "file_exists( 'dev/tests/.env' ) || copy( 'dev/tests/.env-dist', 'dev/tests/.env' );"
 
-      - name: Replace dev domain names with localhost
+      - name: Create composer config files
         run: |
-          sed --in-place='' 's/square1test.tribe/localhost/g' dev/tests/tests/_data/dump.sql
-          sed --in-place='' 's/square1.tribe/localhost/g' local-config-sample.json
-
-      - name: Get composer cache directory
-        id: composer-cache
-        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+          mkdir -p dev/docker/composer
+          printf '{ "config": {}, "repositories": { "packagist": { "type": "composer", "url": "https://packagist.org" } } }' > dev/docker/composer/config.json
+          printf '{ "github-oauth": { "github.com": "%s" } }\n' ${{ secrets.GH_TOKEN }} > dev/docker/composer/auth.json
 
       - name: Check for Cached Composer Dependencies
         id: cache-composer-dependencies
         uses: actions/cache@v1
         with:
-          path: ${{ steps.composer-cache.outputs.dir }}
+          path: dev/docker/composer/cache
           key: ${{ runner.os }}-${{ env.cache_version }}-composer-${{ hashFiles('**/composer.lock') }}
           restore-keys: ${{ runner.os }}-${{ env.cache_version }}-composer-
 
-      - name: Install composer dependencies
-        env:
-          WP_PLUGIN_ACF_KEY: ${{ secrets.WP_PLUGIN_ACF_KEY }}
-          WP_PLUGIN_GF_KEY: ${{ secrets.WP_PLUGIN_GF_KEY }}
-          WP_PLUGIN_GF_TOKEN: ${{ secrets.WP_PLUGIN_GF_TOKEN }}
-        run: composer install --prefer-dist --no-progress --no-suggest --optimize-autoloader
+      - name: Start project containers
+        run: dev/docker/start.sh
 
       - name: Setup node
         uses: actions/setup-node@v1
@@ -149,13 +80,13 @@ jobs:
         run: gulp dist
 
       - name: Run unit tests
-        run: vendor/bin/codecept --config ${{ github.workspace }}/dev/tests run unit
+        run: dev/docker/test.sh run unit
 
       - name: Run integration tests
-        run: vendor/bin/codecept --config ${{ github.workspace }}/dev/tests run integration
+        run: dev/docker/test.sh run integration
 
       - name: Run acceptance tests
-        run: vendor/bin/codecept --config ${{ github.workspace }}/dev/tests run acceptance
+        run: dev/docker/test.sh run acceptance
 
 #      - name: Run webdriver tests
-#        run: vendor/bin/codecept --config ${{ github.workspace }}/dev/tests run webdriver
+#        run: dev/docker/test.sh run webdriver
