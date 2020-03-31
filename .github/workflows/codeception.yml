@@ -14,6 +14,7 @@ jobs:
 
     env:
       cache_version: 1 # increment to flush all caches
+      PROJECT_ID: square1
       FORCE_SSL_LOGIN: false
       FORCE_SSL_ADMIN: false
       COMPOSE_INTERACTIVE_NO_CLI: 1
@@ -57,7 +58,10 @@ jobs:
           restore-keys: ${{ runner.os }}-${{ env.cache_version }}-composer-
 
       - name: Start project containers
-        run: dev/docker/start.sh
+        run: |
+          docker-compose --project-name=${{ env.PROJECT_ID }} up -d --force-recreate
+          docker-compose --project-name=${{ env.PROJECT_ID }} exec php composer global require hirak/prestissimo --classmap-authoritative --update-no-dev
+          docker-compose --project-name=${{ env.PROJECT_ID }} exec php composer install --optimize-autoloader -d /application/www
 
       - name: Setup node
         uses: actions/setup-node@v1
@@ -83,13 +87,13 @@ jobs:
         run: gulp dist
 
       - name: Run unit tests
-        run: dev/docker/test.sh run unit
+        run: docker-compose --project-name=${{ env.PROJECT_ID }} exec php-tests php /application/www/vendor/bin/codecept --config "/application/www/dev/tests" run unit
 
-      - name: Run integration tests
-        run: dev/docker/test.sh run integration
+#      - name: Run integration tests
+#        run: dev/docker/test.sh run integration
 
-      - name: Run acceptance tests
-        run: dev/docker/test.sh run acceptance
+#      - name: Run acceptance tests
+#        run: dev/docker/test.sh run acceptance
 
 #      - name: Run webdriver tests
 #        run: dev/docker/test.sh run webdriver
