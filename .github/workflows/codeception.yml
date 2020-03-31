@@ -96,10 +96,10 @@ jobs:
         run: docker-compose --file=dev/docker/docker-compose.yml --project-name=${{ env.PROJECT_ID }} exec -T php-tests php /application/www/vendor/bin/codecept --config "/application/www/dev/tests" run unit
 
       - name: Run integration tests
-        run: dev/docker/test.sh run integration
+        run: docker-compose --file=dev/docker/docker-compose.yml --project-name=${{ env.PROJECT_ID }} exec -T php-tests php /application/www/vendor/bin/codecept --config "/application/www/dev/tests" run integration
 
 #      - name: Run acceptance tests
-#        run: dev/docker/test.sh run acceptance
+#        run: docker-compose --file=dev/docker/docker-compose.yml --project-name=${{ env.PROJECT_ID }} exec -T php-tests php /application/www/vendor/bin/codecept --config "/application/www/dev/tests" run acceptance
 
 #      - name: Run webdriver tests
-#        run: dev/docker/test.sh run webdriver
+#        run: docker-compose --file=dev/docker/docker-compose.yml --project-name=${{ env.PROJECT_ID }} exec -T php-tests php /application/www/vendor/bin/codecept --config "/application/www/dev/tests" run webdriver
