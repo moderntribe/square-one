@@ -21,17 +21,17 @@ jobs:
       WP_ADMIN_USERNAME: "admin"
       WP_ADMIN_PASSWORD: "password"
       WP_URL: "http://localhost"
-      DB_HOST: localhost
+      DB_HOST: 127.0.0.1
       DB_NAME: wordpress
       DB_USER: root
       DB_PASSWORD: password
-      TEST_DB_HOST: localhost
+      TEST_DB_HOST: 127.0.0.1
       TEST_DB_NAME: wordpress
       TEST_DB_USER: root
       TEST_DB_PASSWORD: password
       ACCEPTANCE_WP_URL: "http://localhost"
       ACCEPTANCE_DB_NAME: wordpress
-      ACCEPTANCE_DB_HOST: localhost
+      ACCEPTANCE_DB_HOST: 127.0.0.1
       ACCEPTANCE_DB_USER: root
       ACCEPTANCE_DB_PASS: password
       TABLE_PREFIX: "tribe_"
