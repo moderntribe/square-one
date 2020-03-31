@@ -5,9 +5,15 @@ on: [push, pull_request]
 jobs:
 
   ci:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.operating-system }}
+
+    strategy:
+      matrix:
+        operating-system: [ ubuntu-latest ]
+        php-versions: [ '7.2' ]
 
     env:
+      php_extensions: memcached, mysql, bz2, gd, igbinary, imagick, imap, mbstring, bcmath, zip, intl
       WP_ROOT_FOLDER: ${{ github.workspace }}/wp
       WP_DOMAIN: "localhost"
       WP_ADMIN_PATH: "/wp-admin"
@@ -60,12 +66,27 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Setup PHP extension cache
+        id: cache-php-extensions
+        uses: shivammathur/cache-extensions@v1
+        with:
+          php-version: ${{ matrix.php-versions }}
+          extensions: ${{ env.extensions }}
+          key: ${{ matrix.operating-system }}-phpextensions-${{ matrix.php-versions }}-${{ env.extensions }}
+
+      - name: Cache PHP extensions
+        uses: actions/cache@v1
+        with:
+          path: ${{ steps.cache-php-extensions.outputs.dir }}
+          key: ${{ steps.cache-php-extensions.outputs.key }}
+          restore-keys: ${{ steps.cache-php-extensions.outputs.key }}
+
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '7.2'
+          php-version: ${{ matrix.php-versions }}
+          extensions: ${{ env.extensions }}
           coverage: none
-          extensions: memcached, mysql, bz2, gd, igbinary, imagick, imap, mbstring, bcmath, zip, intl
           tools: codeception, composer
 
       - name: Add GitHub oAuth
@@ -84,35 +105,43 @@ jobs:
           sed --in-place='' 's/square1test.tribe/localhost/g' dev/tests/tests/_data/dump.sql
           sed --in-place='' 's/square1.tribe/localhost/g' local-config-sample.json
 
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
       - name: Check for Cached Composer Dependencies
         id: cache-composer-dependencies
         uses: actions/cache@v1
         with:
-          path: vendor
-          key: ${{ runner.OS }}-composer-${{ hashFiles('**/composer.lock') }}
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
 
       - name: Install composer dependencies
-        if: steps.cache-composer-dependencies.outputs.cache-hit != 'true'
         env:
           WP_PLUGIN_ACF_KEY: ${{ secrets.WP_PLUGIN_ACF_KEY }}
           WP_PLUGIN_GF_KEY: ${{ secrets.WP_PLUGIN_GF_KEY }}
           WP_PLUGIN_GF_TOKEN: ${{ secrets.WP_PLUGIN_GF_TOKEN }}
         run: composer install --prefer-dist --no-progress --no-suggest --optimize-autoloader
 
-      - name: Check for Cached Node Modules
-        id: cache-node-modules
-        uses: actions/cache@v1
-        with:
-          path: node_modules
-          key: ${{ runner.OS }}-node-${{ hashFiles('**/yarn.lock') }}
-
       - name: Setup node
         uses: actions/setup-node@v1
         with:
           node-version: '12.13.1'
 
+      - name: Get yarn cache directory
+        id: yarn-cache-dir
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Cache node modules
+        id: cache-node-modules
+        uses: actions/cache@v1
+        with:
+          path: ${{ steps.yarn-cache-dir.outputs.dir }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: ${{ runner.os }}-node-
+
       - name: Install node modules
-        if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: yarn --frozen-lockfile
 
       - name: Build assets
