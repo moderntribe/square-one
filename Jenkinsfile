@@ -11,12 +11,6 @@ pipeline {
     }
 
     stages {
-        stage('Start Pipeline'){
-            echo "${env.BRANCH_NAME} - ${params.SLACK_CHANNEL}"
-            slackSend(channel: "${SLACK_CHANNEL}",
-                message: "Pipeline Deploy of `${APP_NAME}` of `${env.BRANCH_NAME}`: (build: <${RUN_DISPLAY_URL}|#${BUILD_NUMBER}>)")
-        }
-
         stage('Build Processes') {
             parallel {
                 stage('Composer') {
@@ -27,8 +21,9 @@ pipeline {
                             reuseNode true
                         }
                     }
-
                     steps {
+                        echo "${env.BRANCH_NAME} - ${params.SLACK_CHANNEL}"
+                        slackSend(channel: "${SLACK_CHANNEL}", message: "Pipeline Deploy of `${APP_NAME}` of `${env.BRANCH_NAME}`: (build: <${RUN_DISPLAY_URL}|#${BUILD_NUMBER}>)")
                         withCredentials([file(credentialsId: "square-one-compose-plugins-keys", variable: "ENV_FILE")]) {
                             sh script: "cp $ENV_FILE .env", label: "Copy Composer .env to the root folder"
                             sh "composer config -g github-oauth.github.com ${GITHUB_TOKEN}"
@@ -77,9 +72,5 @@ pipeline {
         success {
             slackSend(channel: "${SLACK_CHANNEL}", color: 'good', message: "Pipeline: Deployment of `branch: ${env.BRANCH}` was SUCCESSFUL. (build: <${RUN_DISPLAY_URL}|#${BUILD_NUMBER}>)")
         }
-    }
-
-    options {
-
     }
 }
