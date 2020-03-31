@@ -14,4 +14,4 @@ else
 	DC_COMMAND="docker-compose"
 fi;
 
-COMPOSE_INTERACTIVE_NO_CLI=1 ${DC_COMMAND} --project-name=${PROJECT_ID} exec -T php-fpm "$@"
+COMPOSE_INTERACTIVE_NO_CLI=1 ${DC_COMMAND} --project-name=${PROJECT_ID} exec php-fpm "$@"

@@ -13,7 +13,7 @@ jobs:
         php-versions: [ '7.2' ]
 
     env:
-      cache_version: 1 # increment to flush all caches
+      cache_version: 2 # increment to flush all caches
       PROJECT_ID: square1
       FORCE_SSL_LOGIN: false
       FORCE_SSL_ADMIN: false
@@ -58,10 +58,13 @@ jobs:
           restore-keys: ${{ runner.os }}-${{ env.cache_version }}-composer-
 
       - name: Start project containers
-        run: |
-          docker-compose --file=dev/docker/docker-compose.yml --project-name=${{ env.PROJECT_ID }} up -d --force-recreate
-          docker-compose --file=dev/docker/docker-compose.yml --project-name=${{ env.PROJECT_ID }} exec -T php-fpm composer global require hirak/prestissimo --classmap-authoritative --update-no-dev
-          docker-compose --file=dev/docker/docker-compose.yml --project-name=${{ env.PROJECT_ID }} exec -T php-fpm composer install --optimize-autoloader -d /application/www
+        run: docker-compose --file=dev/docker/docker-compose.yml --project-name=${{ env.PROJECT_ID }} up -d --force-recreate
+
+      #- name: Install global composer dependencies
+      #  run: docker-compose --file=dev/docker/docker-compose.yml --project-name=${{ env.PROJECT_ID }} exec -T php-fpm composer global require hirak/prestissimo --classmap-authoritative --update-no-dev
+
+      - name: Install project composer dependencies
+        run: docker-compose --file=dev/docker/docker-compose.yml --project-name=${{ env.PROJECT_ID }} exec -T php-fpm composer install --optimize-autoloader -d /application/www
 
       - name: Setup node
         uses: actions/setup-node@v1
