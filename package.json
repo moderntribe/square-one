@@ -5,6 +5,7 @@
   "license": "GPL-2.0",
   "repository": "https://github.com/moderntribe/square-one.git",
   "_core_theme_path": "wp-content/themes/core",
+  "_core_theme_components_path": "wp-content/themes/core/components/",
   "_core_theme_js_util_path": "wp-content/themes/core/js/src/utils/",
   "_core_theme_css_path": "wp-content/themes/core/css/",
   "_core_theme_css_dist_path": "wp-content/themes/core/css/dist/",
@@ -36,10 +37,11 @@
     "npm": "6.12.1"
   },
   "scripts": {
-    "js:theme:dev": "cross-env NODE_ENV=themedev npx webpack --progress --hide-modules",
-    "js:admin:dev": "cross-env NODE_ENV=admindev npx webpack --progress --hide-modules",
-    "js:theme:prod": "cross-env NODE_ENV=themeprod npx webpack --progress --hide-modules",
-    "js:admin:prod": "cross-env NODE_ENV=adminprod npx webpack --progress --hide-modules",
+    "js:build": "npx webpack --progress --hide-modules",
+    "js:theme:dev": "cross-env NODE_ENV=themedev npm run js:build",
+    "js:admin:dev": "cross-env NODE_ENV=admindev npm run js:build",
+    "js:theme:prod": "cross-env NODE_ENV=themeprod npm run js:build",
+    "js:admin:prod": "cross-env NODE_ENV=adminprod npm run js:build",
     "app:example": "cross-env NODE_ENV=example webpack-dev-server --hot --https --port 3000",
     "test": "cross-env NODE_ENV=test jest --config jest.config.json",
     "test:e2e": "cross-env NODE_ENV=test npx cypress run",

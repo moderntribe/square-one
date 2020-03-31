@@ -113,4 +113,4 @@ const init = () => {
 	console.info( 'Square One FE: Initialized tabs component scripts.' );
 };
 
-export default init;
+init();
