@@ -93,9 +93,6 @@ jobs:
           mysql -h 127.0.0.1 -uroot -ppassword -e "CREATE DATABASE tribe_square1_tests;"
           mysql -h 127.0.0.1 -uroot -ppassword -e "CREATE DATABASE tribe_square1_acceptance;"
 
-      - name: Reload nginx
-        run: docker exec tribe-proxy nginx -s reload
-
       - name: Run unit tests
         run: docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests php /application/www/vendor/bin/codecept --config "/application/www/dev/tests" run unit
 
