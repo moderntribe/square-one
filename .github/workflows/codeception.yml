@@ -15,8 +15,6 @@ jobs:
     env:
       cache_version: 2 # increment to flush all caches
       PROJECT_ID: square1
-      FORCE_SSL_LOGIN: false
-      FORCE_SSL_ADMIN: false
       COMPOSE_INTERACTIVE_NO_CLI: 1
       COMPOSE_FILE: dev/docker/docker-compose.yml:dev/docker/docker-compose.gh.yml
 
@@ -25,8 +23,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Open permissions on codeception output directory
-        run: chmod 777 dev/tests/tests/_output
+      - name: Open permissions on output and cache directories
+        run: |
+          chmod 777 dev/tests/tests/_output
+          mkdir -p wp-content/cache
+          chmod 777 wp-content/cache
 
       - name: Create placeholder .env
         run: |
@@ -41,6 +42,9 @@ jobs:
           php -r "file_exists( 'local-config.php' ) || copy( 'local-config-sample.php', 'local-config.php' );"
           php -r "file_exists( 'local-config.json' ) || copy( 'local-config-sample.json', 'local-config.json' );"
           php -r "file_exists( 'dev/tests/.env' ) || copy( 'dev/tests/.env-dist', 'dev/tests/.env' );"
+          echo "define( 'TRIBE_GLOMAR', false );" >> local-config.php
+          echo "define( 'FORCE_SSL_LOGIN', false );" >> local-config.php
+          echo "define( 'FORCE_SSL_ADMIN', false );" >> local-config.php
 
       - name: Create composer config files
         run: |
