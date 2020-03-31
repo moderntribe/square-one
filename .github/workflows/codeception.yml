@@ -24,6 +24,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Open permissions on codeception output directory
+        run: chmod 777 dev/tests/tests/_output
+
       - name: Start global containers
         run: |
           sed --in-place='' 's/53:53/53/g' dev/docker/global/docker-compose.yml
