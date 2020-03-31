@@ -18,6 +18,7 @@ jobs:
       FORCE_SSL_LOGIN: false
       FORCE_SSL_ADMIN: false
       COMPOSE_INTERACTIVE_NO_CLI: 1
+      COMPOSE_FILE: dev/docker/docker-compose.yml:dev/docker/docker-compose.gh.yml
 
     steps:
 
@@ -26,11 +27,6 @@ jobs:
 
       - name: Open permissions on codeception output directory
         run: chmod 777 dev/tests/tests/_output
-
-      - name: Start global containers
-        run: |
-          sed --in-place='' 's/53:53/53/g' dev/docker/global/docker-compose.yml
-          dev/docker/global/start.sh
 
       - name: Create placeholder .env
         run: |
@@ -60,14 +56,14 @@ jobs:
           key: ${{ runner.os }}-${{ env.cache_version }}-composer-${{ hashFiles('**/composer.lock') }}
           restore-keys: ${{ runner.os }}-${{ env.cache_version }}-composer-
 
+      - name: Create docker network
+        run: docker network create --driver=bridge --subnet=172.20.10.0/24 global_proxy
+
       - name: Start project containers
-        run: docker-compose --file=dev/docker/docker-compose.yml --project-name=${{ env.PROJECT_ID }} up -d --force-recreate
+        run: docker-compose --project-name=${{ env.PROJECT_ID }} up -d --force-recreate
 
-      #- name: Install global composer dependencies
-      #  run: docker-compose --file=dev/docker/docker-compose.yml --project-name=${{ env.PROJECT_ID }} exec -T php-fpm composer global require hirak/prestissimo --classmap-authoritative --update-no-dev
-
-      - name: Install project composer dependencies
-        run: docker-compose --file=dev/docker/docker-compose.yml --project-name=${{ env.PROJECT_ID }} exec -T php-fpm composer install --optimize-autoloader -d /application/www
+      - name: Install composer dependencies
+        run: docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-fpm composer install --optimize-autoloader -d /application/www
 
       - name: Setup node
         uses: actions/setup-node@v1
@@ -101,13 +97,13 @@ jobs:
         run: docker exec tribe-proxy nginx -s reload
 
       - name: Run unit tests
-        run: docker-compose --file=dev/docker/docker-compose.yml --project-name=${{ env.PROJECT_ID }} exec -T php-tests php /application/www/vendor/bin/codecept --config "/application/www/dev/tests" run unit
+        run: docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests php /application/www/vendor/bin/codecept --config "/application/www/dev/tests" run unit
 
       - name: Run integration tests
-        run: docker-compose --file=dev/docker/docker-compose.yml --project-name=${{ env.PROJECT_ID }} exec -T php-tests php /application/www/vendor/bin/codecept --config "/application/www/dev/tests" run integration
+        run: docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests php /application/www/vendor/bin/codecept --config "/application/www/dev/tests" run integration
 
       - name: Run acceptance tests
-        run: docker-compose --file=dev/docker/docker-compose.yml --project-name=${{ env.PROJECT_ID }} exec -T php-tests php /application/www/vendor/bin/codecept --config "/application/www/dev/tests" run acceptance
+        run: docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests php /application/www/vendor/bin/codecept --config "/application/www/dev/tests" run acceptance
 
 #      - name: Run webdriver tests
-#        run: docker-compose --file=dev/docker/docker-compose.yml --project-name=${{ env.PROJECT_ID }} exec -T php-tests php /application/www/vendor/bin/codecept --config "/application/www/dev/tests" run webdriver
+#        run: docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests php /application/www/vendor/bin/codecept --config "/application/www/dev/tests" run webdriver
