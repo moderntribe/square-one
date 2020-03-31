@@ -16,6 +16,7 @@ jobs:
       cache_version: 1 # increment to flush all caches
       FORCE_SSL_LOGIN: false
       FORCE_SSL_ADMIN: false
+      COMPOSE_INTERACTIVE_NO_CLI: 1
 
     steps:
 
