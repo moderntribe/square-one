@@ -59,7 +59,7 @@ jobs:
 
       - name: Start project containers
         run: |
-          docker-compose --project-name=${{ env.PROJECT_ID }} up -d --force-recreate
+          docker-compose --file=dev/docker/docker-compose.yml --project-name=${{ env.PROJECT_ID }} up -d --force-recreate
           docker-compose --project-name=${{ env.PROJECT_ID }} exec php composer global require hirak/prestissimo --classmap-authoritative --update-no-dev
           docker-compose --project-name=${{ env.PROJECT_ID }} exec php composer install --optimize-autoloader -d /application/www
 
