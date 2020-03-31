@@ -67,10 +67,10 @@ pipeline {
             cleanWs()
         }
         failure {
-            slackSend(channel: "${SLACK_CHANNEL}", color: 'danger', message: "Pipeline: Deployment of `branch: ${env.BRANCH_NAME}` FAILED: (build: <${RUN_DISPLAY_URL}|#${BUILD_NUMBER}>)")
+            slackSend(channel: "${SLACK_CHANNEL}", color: 'danger', message: "Pipeline: Deployment of `${APP_NAME}` to `${env.BRANCH_NAME}` FAILED: (build: <${RUN_DISPLAY_URL}|#${BUILD_NUMBER}>)")
         }
         success {
-            slackSend(channel: "${SLACK_CHANNEL}", color: 'good', message: "Pipeline: Deployment of `branch: ${env.BRANCH_NAME}` was SUCCESSFUL. (build: <${RUN_DISPLAY_URL}|#${BUILD_NUMBER}>)")
+            slackSend(channel: "${SLACK_CHANNEL}", color: 'good', message: "Pipeline: Deployment of `${APP_NAME}` to `${env.BRANCH_NAME}` was SUCCESSFUL. (build: <${RUN_DISPLAY_URL}|#${BUILD_NUMBER}>)")
         }
     }
 }
