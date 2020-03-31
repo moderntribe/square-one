@@ -121,9 +121,9 @@ jobs:
       - name: Run unit tests
         run: vendor/bin/codecept --config ${{ github.workspace }}/dev/tests run unit
 
-#      - name: Run integration tests
-#        run: vendor/bin/codecept --config ${{ github.workspace }}/dev/tests run integration
-#
+      - name: Run integration tests
+        run: vendor/bin/codecept --config ${{ github.workspace }}/dev/tests run integration
+
 #      - name: Run acceptance tests
 #        run: vendor/bin/codecept --config ${{ github.workspace }}/dev/tests run acceptance
 #
