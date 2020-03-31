@@ -13,6 +13,7 @@ jobs:
         php-versions: [ '7.2' ]
 
     env:
+      cache_version: 1 # increment to flush all caches
       php_extensions: memcached, mysql, bz2, gd, igbinary, imagick, imap, mbstring, bcmath, zip, intl
       WP_ROOT_FOLDER: ${{ github.workspace }}/wp
       WP_DOMAIN: "localhost"
@@ -72,7 +73,7 @@ jobs:
         with:
           php-version: ${{ matrix.php-versions }}
           extensions: ${{ env.php_extensions }}
-          key: ${{ matrix.operating-system }}-phpextensions-${{ matrix.php-versions }}
+          key: ${{ matrix.operating-system }}-${{ env.cache_version }}-phpextensions-${{ matrix.php-versions }}
 
       - name: Cache PHP extensions
         uses: actions/cache@v1
@@ -114,8 +115,8 @@ jobs:
         uses: actions/cache@v1
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: ${{ runner.os }}-composer-
+          key: ${{ runner.os }}-${{ env.cache_version }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-${{ env.cache_version }}-composer-
 
       - name: Install composer dependencies
         env:
@@ -138,8 +139,8 @@ jobs:
         uses: actions/cache@v1
         with:
           path: ${{ steps.yarn-cache-dir.outputs.dir }}
-          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: ${{ runner.os }}-node-
+          key: ${{ runner.os }}-${{ env.cache_version }}-node-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: ${{ runner.os }}-${{ env.cache_version }}-node-
 
       - name: Install node modules
         run: yarn --frozen-lockfile
