@@ -8,6 +8,7 @@ pipeline {
         HOSTED_SSH_KEYS = "${env.APP_NAME}-ssh-key"
         HOSTED_FOLDER = "./.HOSTED-SCM"
         SLACK_CHANNEL= "nicks-playground"
+        DEPLOY_TO = deploy_to()
     }
 
     stages {
@@ -60,6 +61,13 @@ pipeline {
                 }
             }
         }
+
+        stage('Deploy') {
+            when{
+                branch: "epic/ff/s1/server"
+                environment name: 'DEPLOY_TO', value: 'develop'
+            }
+        }
     }
 
     post {
@@ -67,10 +75,28 @@ pipeline {
             cleanWs()
         }
         failure {
-            slackSend(channel: "${SLACK_CHANNEL}", color: 'danger', message: "Pipeline: Deployment of `${APP_NAME}` to `${env.BRANCH_NAME}` FAILED: (build: <${RUN_DISPLAY_URL}|#${BUILD_NUMBER}>)")
+            slackSend(channel: "${SLACK_CHANNEL}", color: 'danger', message: "Pipeline: Deploying `${APP_NAME}` branch `${env.BRANCH_NAME}` to `${env.DEPLOY_TO}` FAILED: (build: <${RUN_DISPLAY_URL}|#${BUILD_NUMBER}>)")
         }
         success {
-            slackSend(channel: "${SLACK_CHANNEL}", color: 'good', message: "Pipeline: Deployment of `${APP_NAME}` to `${env.BRANCH_NAME}` was SUCCESSFUL. (build: <${RUN_DISPLAY_URL}|#${BUILD_NUMBER}>)")
+            slackSend(channel: "${SLACK_CHANNEL}", color: 'good', message: "Pipeline: Deployment of `${APP_NAME}` branch `${env.BRANCH_NAME}` to `${env.DEPLOY_TO}` was SUCCESSFUL. (build: <${RUN_DISPLAY_URL}|#${BUILD_NUMBER}>)")
         }
     }
+}
+
+def deply_to(){
+
+    string deploy_to_environment = 'develop'
+
+    switch( BRANCH_NAME ) {
+        case 'server/staging':
+            deploy_to_environment = 'staging'
+            break;
+        case 'server/production'
+            deploy_to_environment = 'production'
+            break;
+        default
+            deploy_to_environment = 'develop'
+            break;
+    }
+    return deploy_to_environment
 }
