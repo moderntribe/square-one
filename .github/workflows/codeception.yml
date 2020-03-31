@@ -23,7 +23,9 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Start global containers
-        run: dev/docker/global/start.sh
+        run: |
+          sed --in-place='' 's/53:53/53/g' dev/docker/global/docker-compose.yml
+          dev/docker/global/start.sh
 
       - name: Create placeholder .env
         run: |
