@@ -88,13 +88,13 @@ def deply_to(){
     string deploy_to_environment = 'develop'
 
     switch( BRANCH_NAME ) {
-        case 'server/staging':
+        case: 'server/staging':
             deploy_to_environment = 'staging'
             break;
-        case 'server/production'
+        case: 'server/production'
             deploy_to_environment = 'production'
             break;
-        default
+        default:
             deploy_to_environment = 'develop'
             break;
     }
