@@ -13,4 +13,4 @@ fi;
 
 PROJECT_ID=$(cat ./.projectID)
 
-COMPOSE_INTERACTIVE_NO_CLI=1 ${DC_COMMAND} --project-name=${PROJECT_ID} exec php-fpm composer "$@"  -d /application/www
+COMPOSE_INTERACTIVE_NO_CLI=1 ${DC_COMMAND} --project-name=${PROJECT_ID} exec -T php-fpm composer "$@"  -d /application/www
