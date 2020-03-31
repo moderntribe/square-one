@@ -72,7 +72,7 @@ jobs:
         with:
           php-version: ${{ matrix.php-versions }}
           extensions: ${{ env.php_extensions }}
-          key: ${{ matrix.operating-system }}-phpextensions-${{ matrix.php-versions }}-${{ env.php_extensions }}
+          key: ${{ matrix.operating-system }}-phpextensions-${{ matrix.php-versions }}
 
       - name: Cache PHP extensions
         uses: actions/cache@v1
