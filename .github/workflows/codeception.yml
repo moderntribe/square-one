@@ -35,9 +35,9 @@ jobs:
       ACCEPTANCE_DB_USER: root
       ACCEPTANCE_DB_PASS: password
       TABLE_PREFIX: "tribe_"
-      MEMCACHED_HOST: localhost
+      MEMCACHED_HOST: 127.0.0.1
       MEMCACHED_PORT: 11211
-      CHROMEDRIVER_HOST: localhost
+      CHROMEDRIVER_HOST: 127.0.0.1
       CHROMEDRIVER_PORT: 4444
       FORCE_SSL_LOGIN: false
       FORCE_SSL_ADMIN: false
