@@ -154,8 +154,8 @@ jobs:
       - name: Run integration tests
         run: vendor/bin/codecept --config ${{ github.workspace }}/dev/tests run integration
 
-#      - name: Run acceptance tests
-#        run: vendor/bin/codecept --config ${{ github.workspace }}/dev/tests run acceptance
-#
+      - name: Run acceptance tests
+        run: vendor/bin/codecept --config ${{ github.workspace }}/dev/tests run acceptance
+
 #      - name: Run webdriver tests
 #        run: vendor/bin/codecept --config ${{ github.workspace }}/dev/tests run webdriver
