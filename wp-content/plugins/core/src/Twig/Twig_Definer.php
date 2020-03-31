@@ -15,7 +15,7 @@ class Twig_Definer implements Definer_Interface {
 
 	public function define(): array {
 		return [
-			Twig_Cache::class => DI\autowire()->constructor( WP_CONTENT_DIR . '/cache/twig/' ),
+			Twig_Cache::class => DI\autowire()->constructor( TWIG_CACHE_DIR ?: WP_CONTENT_DIR . '/cache/twig/' ),
 
 			self::OPTIONS => function ( ContainerInterface $container ) {
 				return apply_filters( 'tribe/project/twig/options', [

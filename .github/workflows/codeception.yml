@@ -23,18 +23,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Open permissions on output and cache directories
-        run: |
-          chmod 777 dev/tests/tests/_output
-          mkdir -p wp-content/cache
-          chmod -R 777 wp-content/cache
+      - name: Open permissions on output and directories
+        run:  chmod 777 dev/tests/tests/_output
 
-      - name: Create placeholder .env
+      - name: Create .env
         run: |
           printf '
           WP_PLUGIN_ACF_KEY='${{ secrets.WP_PLUGIN_ACF_KEY }}'
           WP_PLUGIN_GF_KEY='${{ secrets.WP_PLUGIN_GF_KEY }}'
           WP_PLUGIN_GF_TOKEN='${{ secrets.WP_PLUGIN_GF_TOKEN }}'
+          TWIG_CACHE_DIR='/tmp/cache'
           ' > .env
 
       - name: Create local config

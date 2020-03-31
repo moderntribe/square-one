@@ -78,6 +78,7 @@ $config_defaults = [
 	'WP_CONTENT_DIR'                 => tribe_getenv( 'WP_CONTENT_DIR', __DIR__ . '/wp-content' ),
 	'WP_CONTENT_URL'                 => tribe_getenv( 'WP_CONTENT_URL', ( tribe_isSSL() ? 'https' : 'http' ) . '://' . $_SERVER['HTTP_HOST'] . '/wp-content' ),
 	'ABSPATH'                        => tribe_getenv( 'ABSPATH', __DIR__ . '/wp/' ),
+	'TWIG_CACHE_DIR'                 => tribe_getenv( 'TWIG_CACHE', '' ),
 
 	// Multisite
 	'WP_ALLOW_MULTISITE'             => tribe_getenv( 'WP_ALLOW_MULTISITE', false ),
