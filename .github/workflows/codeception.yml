@@ -60,8 +60,8 @@ jobs:
       - name: Start project containers
         run: |
           docker-compose --file=dev/docker/docker-compose.yml --project-name=${{ env.PROJECT_ID }} up -d --force-recreate
-          docker-compose --file=dev/docker/docker-compose.yml --project-name=${{ env.PROJECT_ID }} exec php-fpm composer global require hirak/prestissimo --classmap-authoritative --update-no-dev
-          docker-compose --file=dev/docker/docker-compose.yml --project-name=${{ env.PROJECT_ID }} exec php-fpm composer install --optimize-autoloader -d /application/www
+          docker-compose --file=dev/docker/docker-compose.yml --project-name=${{ env.PROJECT_ID }} exec -T php-fpm composer global require hirak/prestissimo --classmap-authoritative --update-no-dev
+          docker-compose --file=dev/docker/docker-compose.yml --project-name=${{ env.PROJECT_ID }} exec -T php-fpm composer install --optimize-autoloader -d /application/www
 
       - name: Setup node
         uses: actions/setup-node@v1
@@ -87,7 +87,7 @@ jobs:
         run: gulp dist
 
       - name: Run unit tests
-        run: docker-compose --file=dev/docker/docker-compose.yml --project-name=${{ env.PROJECT_ID }} exec php-tests php /application/www/vendor/bin/codecept --config "/application/www/dev/tests" run unit
+        run: docker-compose --file=dev/docker/docker-compose.yml --project-name=${{ env.PROJECT_ID }} exec -T php-tests php /application/www/vendor/bin/codecept --config "/application/www/dev/tests" run unit
 
 #      - name: Run integration tests
 #        run: dev/docker/test.sh run integration
