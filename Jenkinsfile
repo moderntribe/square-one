@@ -77,7 +77,6 @@ pipeline {
                     git clone ${env.deploy_repo} ${HOSTED_FOLDER}
                   """, label: "Git checkout Host SCM"
                 }
-              }
             }
         }
         stage('Deploy Dev') {
