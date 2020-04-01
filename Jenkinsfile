@@ -85,7 +85,7 @@ pipeline {
                 branch: 'server/dev'
              }
              steps {
-                sh script: "./dev/deploy/deploy.sh develop", label: "Deploy to Dev"
+                sh script: "./dev/deploy/deploy.sh dev", label: "Deploy to Dev"
             }
         }
         stage('Deploy Staging') {
