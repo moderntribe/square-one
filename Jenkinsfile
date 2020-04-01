@@ -85,7 +85,7 @@ pipeline {
                 branch: 'server/dev'
              }
              steps {
-                sh script: "./dev/deploy/deploy.sh dev", label: "Deploy to Dev"
+                //sh script: "./dev/deploy/deploy.sh dev", label: "Deploy to Dev"
             }
         }
         stage('Deploy Staging') {
@@ -93,7 +93,7 @@ pipeline {
                 branch: 'server/staging'
              }
              steps {
-                sh script: "./dev/deploy/deploy.sh staging", label: "Deploy to Staging"
+                //sh script: "./dev/deploy/deploy.sh staging", label: "Deploy to Staging"
             }
         }
         stage('Deploy Prod') {
@@ -101,7 +101,7 @@ pipeline {
                 branch: 'server/production'
              }
              steps {
-                sh script: "./dev/deploy/deploy.sh production", label: "Deploy to Production"
+                //sh script: "./dev/deploy/deploy.sh production", label: "Deploy to Production"
             }
         }
     }
@@ -117,9 +117,6 @@ pipeline {
             slackSend(channel: "${SLACK_CHANNEL}", color: 'good', message: "Pipeline: Deployment of `${APP_NAME}` branch `${env.BRANCH_NAME}` to `${env.DEPLOY_TO}` was SUCCESSFUL. (build: <${RUN_DISPLAY_URL}|#${BUILD_NUMBER}>)")
         }
     }
-     options {
-        skipDefaultCheckout()
-     }
 }
 
 void loadEnvironmentVariables(path){
