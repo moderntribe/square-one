@@ -18,13 +18,13 @@ while getopts "b:y" opt; do
     esac
 done
 
-if [ ! -f ".wpengine/config/$environment.cfg" ]; then
+if [ ! -f ".host/config/$environment.cfg" ]; then
     echo "Unknown environment: $environment"
     exit 1
 fi
 
-source ".wpengine/config/common.cfg"
-source ".wpengine/config/$environment.cfg"
+source ".host/config/common.cfg"
+source ".host/config/$environment.cfg"
 deploy_timestamp=`date +%Y%m%d%H%M%S`
 
 echo "Preparing to deploy $branch to $environment"
@@ -58,7 +58,7 @@ else
     git clone $deploy_repo .deploy/build
 fi
 
-GIT_SSH_COMMAND="ssh -i .wpengine/ansible_rsa -F /dev/null"
+GIT_SSH_COMMAND="ssh -i .host/ansible_rsa -F /dev/null"
 
 cd .deploy/build
 
@@ -128,12 +128,5 @@ fi
 git commit --allow-empty -m "Deployment $deploy_timestamp"
 echo "pushing to $environment"
 git push $environment master
-
-if [ -z "$slackchannel" ] || [ -z "$slacktoken" ]; then
-    echo "Skipping slack notification"
-else
-    curl -F channel="$slackchannel" -F token="$slacktoken" -F text="Finished deploying \`$branch\` to $environment" -F username="Deployment Bot" -F link_names=1 https://slack.com/api/chat.postMessage
-    echo
-fi
 
 echo "done"

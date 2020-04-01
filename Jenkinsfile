@@ -4,14 +4,13 @@ pipeline {
     environment {
         APP_NAME = "square-one"
         GIT_REPO = "moderntribe/${APP_NAME}.git"
-        GITHUB_TOKEN = credentials('tr1b0t-github-api-token')
-        HOSTED_SSH_KEYS = "${env.APP_NAME}-ssh-key"
         HOSTED_FOLDER = "./.HOSTED-SCM"
-        SLACK_CHANNEL= "nicks-playground"
-        DEPLOY_TO = deploy_to()
+        GITHUB_TOKEN = credentials('tr1b0t-github-api-token')
+        JENKINS_VAULTPASS = "${env.APP_NAME}-vaultpass"
     }
 
     stages {
+         // BUILD
         stage('Build Processes') {
             parallel {
                 stage('Composer') {
@@ -33,7 +32,6 @@ pipeline {
                         }
                     }
                 }
-
                 stage('Node') {
                     agent {
                         docker {
@@ -42,7 +40,6 @@ pipeline {
                             reuseNode true
                         }
                     }
-
                     steps {
                         // Install dependencies
                         sh 'apk add --no-cache git openssh'
@@ -61,15 +58,54 @@ pipeline {
                 }
             }
         }
+        // DEPLOYMENT
+        stage('Checkout Host SCM') {
+            steps {
+                // Decrypt values
+                withCredentials([string(credentialsId: "${JENKINS_VAULTPASS}", variable: 'vaultPass')]) {
+                    sh script: "echo '${vaultPass}' > ./.vaultpass", label: "Write vaultpass to local folder"
+                    sh script: "ansible-vault decrypt ${env.ENVIRONMENT_CONFIG}.vaulted --output=${env.ENVIRONMENT_CONFIG} --vault-password-file ./.vaultpass", label: "Decrypt config config file"
+                    sh 'rm ./.vaultpass'
+                }
 
-        stage('Deploy') {
-            when{
-                branch: "epic/ff/s1/server"
-                environment name: 'DEPLOY_TO', value: 'develop'
+                // Load WP Engine environment variables
+                loadEnvironmentVariables("${env.ENVIRONMENT_CONFIG}")
+
+                // checkout scm WPEngine
+                sshagent (credentials: ["${GIT_SSH_KEYS}"]) {
+                  sh script: """
+                    git clone ${env.deploy_repo} ${HOSTED_FOLDER}
+                  """, label: "Git checkout Host SCM"
+                }
+              }
+            }
+        }
+        stage('Deploy Dev') {
+             when{
+                branch: 'server/dev'
+             }
+             steps {
+                sh script: "./dev/deploy/deploy.sh develop", label: "Deploy to Dev"
+            }
+        }
+        stage('Deploy Staging') {
+             when{
+                branch: 'server/staging'
+             }
+             steps {
+                sh script: "./dev/deploy/deploy.sh staging", label: "Deploy to Staging"
+            }
+        }
+        stage('Deploy Prod') {
+             when{
+                branch: 'server/production'
+             }
+             steps {
+                sh script: "./dev/deploy/deploy.sh production", label: "Deploy to Production"
             }
         }
     }
-
+    // POST TASKS
     post {
         always {
             cleanWs()
@@ -81,22 +117,16 @@ pipeline {
             slackSend(channel: "${SLACK_CHANNEL}", color: 'good', message: "Pipeline: Deployment of `${APP_NAME}` branch `${env.BRANCH_NAME}` to `${env.DEPLOY_TO}` was SUCCESSFUL. (build: <${RUN_DISPLAY_URL}|#${BUILD_NUMBER}>)")
         }
     }
+     options {
+        skipDefaultCheckout()
+     }
 }
 
-def deply_to(){
-
-    string deploy_to_environment = 'develop'
-
-    switch( BRANCH_NAME ) {
-        case: 'server/staging':
-            deploy_to_environment = 'staging'
-            break;
-        case: 'server/production'
-            deploy_to_environment = 'production'
-            break;
-        default:
-            deploy_to_environment = 'develop'
-            break;
+void loadEnvironmentVariables(path){
+    def props = readProperties  file: path
+    keys = props.keySet()
+    for(key in keys) {
+        value = props["${key}"]
+        env."${key}" = "${value}"
     }
-    return deploy_to_environment
 }
