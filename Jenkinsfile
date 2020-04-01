@@ -7,6 +7,8 @@ pipeline {
         HOSTED_FOLDER = "./.HOSTED-SCM"
         GITHUB_TOKEN = credentials('tr1b0t-github-api-token')
         JENKINS_VAULTPASS = "${env.APP_NAME}-vaultpass"
+        DEPLOY_ENVIRONMENT = BRANCH_NAME.substring(example.lastIndexOf("/") + 1)
+        ENVIRONMENT_CONFIG = "./dev/deploy/.host/config/${params.DEPLOY_ENVIRONMENT}.cfg"
         SLACK_CHANNEL = 'nicks-playground'
     }
 
@@ -80,31 +82,10 @@ pipeline {
                 }
             }
         }
-        stage('Deploy Dev') {
-             when {
-                 branch 'server/dev'
-             }
+        stage('Deploy') {
              steps {
                 //sh script: "./dev/deploy/deploy.sh dev", label: "Deploy to Dev"
-                sh 'echo "dev"'
-            }
-        }
-        stage('Deploy Staging') {
-             when {
-                 branch 'server/staging'
-             }
-             steps {
-                //sh script: "./dev/deploy/deploy.sh staging", label: "Deploy to Staging"
-                sh 'echo "staging"'
-            }
-        }
-        stage('Deploy Prod') {
-             when {
-                 branch 'server/production'
-             }
-             steps {
-                //sh script: "./dev/deploy/deploy.sh production", label: "Deploy to Production"
-                sh 'echo "production"'
+                sh "echo \'${DEPLOY_ENVIRONMENT}\'"
             }
         }
     }
