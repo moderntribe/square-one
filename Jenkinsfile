@@ -111,7 +111,3 @@ void loadEnvironmentVariables(path){
         env."${key}" = "${value}"
     }
 }
-
-def detectEnv( branch ){
-    return branch.substring(example.lastIndexOf("/") + 1)
-}
