@@ -113,7 +113,5 @@ void loadEnvironmentVariables(path){
 }
 
 def detectEnv( branch ){
-    string environment = branch;
-
-    return environment.substring(example.lastIndexOf("/") + 1)
+    return branch.substring(example.lastIndexOf("/") + 1)
 }
