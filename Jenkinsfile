@@ -7,7 +7,7 @@ pipeline {
         HOSTED_FOLDER = "./.HOSTED-SCM"
         GITHUB_TOKEN = credentials('tr1b0t-github-api-token')
         JENKINS_VAULTPASS = "${env.APP_NAME}-vaultpass"
-        DEPLOY_ENVIRONMENT = BRANCH_NAME.substring(example.lastIndexOf("/") + 1)
+        DEPLOY_ENVIRONMENT = detectEnv( "${env.BRANCH_NAME}" )
         ENVIRONMENT_CONFIG = "./dev/deploy/.host/config/${params.DEPLOY_ENVIRONMENT}.cfg"
         SLACK_CHANNEL = 'nicks-playground'
     }
@@ -110,4 +110,10 @@ void loadEnvironmentVariables(path){
         value = props["${key}"]
         env."${key}" = "${value}"
     }
+}
+
+def detectEnv( branch ){
+    string environment = branch;
+
+    return environment.substring(example.lastIndexOf("/") + 1)
 }
