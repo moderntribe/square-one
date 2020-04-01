@@ -7,6 +7,7 @@ pipeline {
         HOSTED_FOLDER = "./.HOSTED-SCM"
         GITHUB_TOKEN = credentials('tr1b0t-github-api-token')
         JENKINS_VAULTPASS = "${env.APP_NAME}-vaultpass"
+        SLACK_CHANNEL = 'nicks-playground'
     }
 
     stages {
