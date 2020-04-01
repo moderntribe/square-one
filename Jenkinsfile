@@ -24,7 +24,8 @@ pipeline {
                         }
                     }
                     steps {
-                        sh script: "${env.BRANCH_NAME} | awk -F'/' '{print $1}'", label: "parse dev env"
+
+                        sh "echo ${env.BRANCH_NAME}"
                         echo "${env.BRANCH_NAME} - ${params.SLACK_CHANNEL}"
                         slackSend(channel: "${SLACK_CHANNEL}", message: "Pipeline: Deployment of `${APP_NAME}` to `${env.BRANCH_NAME}` STARTED: (build: <${RUN_DISPLAY_URL}|#${BUILD_NUMBER}>)")
                         withCredentials([file(credentialsId: "square-one-compose-plugins-keys", variable: "ENV_FILE")]) {
