@@ -7,8 +7,7 @@ pipeline {
         HOSTED_FOLDER = "./.HOSTED-SCM"
         GITHUB_TOKEN = credentials('tr1b0t-github-api-token')
         JENKINS_VAULTPASS = "${env.APP_NAME}-vaultpass"
-        DEPLOY_ENVIRONMENT = detectEnv( "${env.BRANCH_NAME}" )
-        ENVIRONMENT_CONFIG = "./dev/deploy/.host/config/${params.DEPLOY_ENVIRONMENT}.cfg"
+        ENVIRONMENT_CONFIG = "./dev/deploy/.host/config/"
         SLACK_CHANNEL = 'nicks-playground'
     }
 
@@ -25,6 +24,7 @@ pipeline {
                         }
                     }
                     steps {
+                        sh "${env.BRANCH_NAME} | awk -F'/' '{print $1}'"
                         echo "${env.BRANCH_NAME} - ${params.SLACK_CHANNEL}"
                         slackSend(channel: "${SLACK_CHANNEL}", message: "Pipeline: Deployment of `${APP_NAME}` to `${env.BRANCH_NAME}` STARTED: (build: <${RUN_DISPLAY_URL}|#${BUILD_NUMBER}>)")
                         withCredentials([file(credentialsId: "square-one-compose-plugins-keys", variable: "ENV_FILE")]) {
