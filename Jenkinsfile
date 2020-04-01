@@ -85,6 +85,7 @@ pipeline {
              }
              steps {
                 //sh script: "./dev/deploy/deploy.sh dev", label: "Deploy to Dev"
+                sh 'echo "dev"'
             }
         }
         stage('Deploy Staging') {
@@ -93,6 +94,7 @@ pipeline {
              }
              steps {
                 //sh script: "./dev/deploy/deploy.sh staging", label: "Deploy to Staging"
+                sh 'echo "staging"'
             }
         }
         stage('Deploy Prod') {
@@ -101,6 +103,7 @@ pipeline {
              }
              steps {
                 //sh script: "./dev/deploy/deploy.sh production", label: "Deploy to Production"
+                sh 'echo "production"'
             }
         }
     }
