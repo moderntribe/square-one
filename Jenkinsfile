@@ -81,7 +81,7 @@ pipeline {
         }
         stage('Deploy Dev') {
              when{
-                branch: 'server/dev'
+                 branch: 'server/dev'
              }
              steps {
                 //sh script: "./dev/deploy/deploy.sh dev", label: "Deploy to Dev"
@@ -89,7 +89,7 @@ pipeline {
         }
         stage('Deploy Staging') {
              when{
-                branch: 'server/staging'
+                 branch: 'server/staging'
              }
              steps {
                 //sh script: "./dev/deploy/deploy.sh staging", label: "Deploy to Staging"
@@ -97,7 +97,7 @@ pipeline {
         }
         stage('Deploy Prod') {
              when{
-                branch: 'server/production'
+                 branch: 'server/production'
              }
              steps {
                 //sh script: "./dev/deploy/deploy.sh production", label: "Deploy to Production"
