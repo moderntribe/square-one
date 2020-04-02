@@ -71,7 +71,7 @@ This is the deep dive development documentation for SquareOne. If you are new he
 
 * **Tests and Code Quality**
 	* [Overview](/docs/tests/README.md)
-	* [Codeception](/docs/tests/codeception.md)
+	* [Codeception](/dev/tests/README.md)
 	* [Jest](/docs/tests/jest.md)
 
 * **Deploys with Ansible**
