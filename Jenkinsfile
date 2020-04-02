@@ -64,7 +64,7 @@ pipeline {
         stage('Checkout Host SCM') {
             steps {
 
-                sh "abc=$(echo '${env.BRANCH_NAME}' | awk -F'/' '{print \$2}')"
+                sh "abc=\$(echo '${env.BRANCH_NAME}' | awk -F'/' '{print \$2}')"
                 echo $abc
                 // Decrypt values
                 withCredentials([string(credentialsId: "${JENKINS_VAULTPASS}", variable: 'vaultPass')]) {
