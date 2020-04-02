@@ -4,7 +4,7 @@ namespace Tribe\Project\Templates\Components;
 
 class Quote extends Component {
 
-	const TEMPLATE_NAME = 'components/quote.twig';
+	protected $path = __DIR__ . '/quote.twig';
 
 	const QUOTE       = 'quote';
 	const CITE        = 'cite';
@@ -14,11 +14,11 @@ class Quote extends Component {
 
 	protected function parse_options( array $options ): array {
 		$defaults = [
-			static::QUOTE       => '',
-			static::CITE        => '',
-			static::CLASSES     => [],
-			static::QUOTE_ATTRS => [],
-			static::CITE_ATTRS  => [],
+			self::QUOTE       => '',
+			self::CITE        => '',
+			self::CLASSES     => [],
+			self::QUOTE_ATTRS => [],
+			self::CITE_ATTRS  => [],
 		];
 
 		return wp_parse_args( $options, $defaults );
@@ -26,11 +26,11 @@ class Quote extends Component {
 
 	public function get_data(): array {
 		$data = [
-			static::QUOTE       => $this->options[ static::QUOTE ],
-			static::CITE        => $this->options[ static::CITE ],
-			static::CLASSES     => $this->merge_classes( [ 'c-quote' ], $this->options[ static::CLASSES ], true ),
-			static::QUOTE_ATTRS => $this->merge_attrs( [], $this->options[ static::QUOTE_ATTRS ], true ),
-			static::CITE_ATTRS  => $this->merge_attrs( [], $this->options[ static::CITE_ATTRS ], true ),
+			self::QUOTE       => $this->options[ self::QUOTE ],
+			self::CITE        => $this->options[ self::CITE ],
+			self::CLASSES     => $this->merge_classes( [ 'c-quote' ], $this->options[ self::CLASSES ], true ),
+			self::QUOTE_ATTRS => $this->merge_attrs( [], $this->options[ self::QUOTE_ATTRS ], true ),
+			self::CITE_ATTRS  => $this->merge_attrs( [], $this->options[ self::CITE_ATTRS ], true ),
 		];
 
 		return $data;

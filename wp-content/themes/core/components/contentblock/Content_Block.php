@@ -4,7 +4,7 @@ namespace Tribe\Project\Templates\Components;
 
 class Content_Block extends Component {
 
-	protected $path = 'components/contentblock.twig';
+	protected $path = __DIR__ . '/contentblock.twig';
 
 	const TITLE           = 'title';
 	const TEXT            = 'text';

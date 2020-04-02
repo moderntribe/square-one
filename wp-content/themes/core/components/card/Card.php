@@ -4,7 +4,7 @@ namespace Tribe\Project\Templates\Components;
 
 class Card extends Component {
 
-	const TEMPLATE_NAME = 'components/card.twig';
+	protected $path = __DIR__ . '/card.twig';
 
 	const BEFORE_CARD     = 'before_card';
 	const AFTER_CARD      = 'after_card';
@@ -38,17 +38,17 @@ class Card extends Component {
 
 	public function get_data(): array {
 		$data = [
-			static::BEFORE_CARD     => $this->options[ self::BEFORE_CARD ],
-			static::AFTER_CARD      => $this->options[ self::AFTER_CARD ],
-			static::TITLE           => $this->options[ self::TITLE ],
-			static::PRE_TITLE       => $this->options[ self::PRE_TITLE ],
-			static::POST_TITLE      => $this->options[ self::POST_TITLE ],
-			static::CLASSES         => $this->merge_classes( [ 'c-card' ], $this->options[ self::CLASSES ], true ),
-			static::HEADER_CLASSES  => $this->merge_classes( [ 'c-card__header' ], $this->options[ self::HEADER_CLASSES ], true ),
-			static::CONTENT_CLASSES => $this->merge_classes( [ 'c-card__content' ], $this->options[ self::CONTENT_CLASSES ], true ),
-			static::TEXT            => $this->options[ self::TEXT ],
-			static::IMAGE           => $this->options[ self::IMAGE ],
-			static::BUTTON          => $this->options[ self::BUTTON ]
+			self::BEFORE_CARD     => $this->options[ self::BEFORE_CARD ],
+			self::AFTER_CARD      => $this->options[ self::AFTER_CARD ],
+			self::TITLE           => $this->options[ self::TITLE ],
+			self::PRE_TITLE       => $this->options[ self::PRE_TITLE ],
+			self::POST_TITLE      => $this->options[ self::POST_TITLE ],
+			self::CLASSES         => $this->merge_classes( [ 'c-card' ], $this->options[ self::CLASSES ], true ),
+			self::HEADER_CLASSES  => $this->merge_classes( [ 'c-card__header' ], $this->options[ self::HEADER_CLASSES ], true ),
+			self::CONTENT_CLASSES => $this->merge_classes( [ 'c-card__content' ], $this->options[ self::CONTENT_CLASSES ], true ),
+			self::TEXT            => $this->options[ self::TEXT ],
+			self::IMAGE           => $this->options[ self::IMAGE ],
+			self::BUTTON          => $this->options[ self::BUTTON ]
 		];
 
 		return $data;

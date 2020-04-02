@@ -134,7 +134,10 @@
   "autoload": {
     "psr-4": {
       "Tribe\\Project\\":"wp-content/plugins/core/src"
-    }
+    },
+    "classmap": [
+      "wp-content/themes/core/components/"
+    ]
   },
   "autoload-dev": {
     "psr-4": {

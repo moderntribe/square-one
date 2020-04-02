@@ -4,7 +4,8 @@ namespace Tribe\Project\Templates\Components;
 
 class Container extends Component {
 
-	const TEMPLATE_NAME = 'components/container.twig';
+	protected $path = __DIR__ . '/container.twig';
+
 	const CONTENT       = 'content';
 	const TAG           = 'tag';
 	const CLASSES       = 'classes';
@@ -12,10 +13,10 @@ class Container extends Component {
 
 	protected function parse_options( array $options ): array {
 		$defaults = [
-			static::CONTENT => '',
-			static::TAG     => 'div',
-			static::CLASSES => [ 'c-container' ],
-			static::ATTRS   => [],
+			self::CONTENT => '',
+			self::TAG     => 'div',
+			self::CLASSES => [ 'c-container' ],
+			self::ATTRS   => [],
 		];
 
 		return wp_parse_args( $options, $defaults );
@@ -23,10 +24,10 @@ class Container extends Component {
 
 	public function get_data(): array {
 		$data = [
-			static::CONTENT => $this->options[ static::CONTENT ],
-			static::TAG     => $this->options[ static::TAG ],
-			static::CLASSES => $this->merge_classes( [], $this->options[ static::CLASSES ], true ),
-			static::ATTRS   => $this->merge_attrs( [], $this->options[ static::ATTRS ], true ),
+			self::CONTENT => $this->options[ self::CONTENT ],
+			self::TAG     => $this->options[ self::TAG ],
+			self::CLASSES => $this->merge_classes( [], $this->options[ self::CLASSES ], true ),
+			self::ATTRS   => $this->merge_attrs( [], $this->options[ self::ATTRS ], true ),
 		];
 
 		return $data;

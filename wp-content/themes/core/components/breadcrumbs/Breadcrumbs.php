@@ -4,7 +4,7 @@ namespace Tribe\Project\Templates\Components;
 
 class Breadcrumbs extends Component {
 
-	const TEMPLATE_NAME = 'components/breadcrumbs.twig';
+	protected $path = __DIR__ . '/breadcrumbs.twig';
 
 	const ITEMS           = 'items';
 	const WRAPPER_CLASSES = 'wrapper_classes';
@@ -16,13 +16,13 @@ class Breadcrumbs extends Component {
 
 	protected function parse_options( array $options ): array {
 		$defaults = [
-			static::ITEMS           => [],
-			static::WRAPPER_CLASSES => [],
-			static::WRAPPER_ATTRS   => [],
-			static::MAIN_CLASSES    => [],
-			static::ITEM_CLASSES    => [],
-			static::LINK_CLASSES    => [],
-			static::LINK_ATTRS      => [],
+			self::ITEMS           => [],
+			self::WRAPPER_CLASSES => [],
+			self::WRAPPER_ATTRS   => [],
+			self::MAIN_CLASSES    => [],
+			self::ITEM_CLASSES    => [],
+			self::LINK_CLASSES    => [],
+			self::LINK_ATTRS      => [],
 		];
 
 		return wp_parse_args( $options, $defaults );
@@ -30,13 +30,13 @@ class Breadcrumbs extends Component {
 
 	public function get_data(): array {
 		$data = [
-			static::ITEMS           => $this->options[ static::ITEMS ],
-			static::WRAPPER_CLASSES => $this->merge_classes( [ 'l-container', 'c-breadcrumbs__wrapper' ], $this->options[ static::WRAPPER_CLASSES ], true ),
-			static::WRAPPER_ATTRS   => $this->merge_attrs( [], $this->options[ self::WRAPPER_ATTRS ], true ),
-			static::MAIN_CLASSES    => $this->merge_classes( [ 'c-breadcrumbs' ], $this->options[ static::MAIN_CLASSES ], true ),
-			static::ITEM_CLASSES    => $this->merge_classes( [ 'c-breadcrumbs__item' ], $this->options[ static::ITEM_CLASSES ], true ),
-			static::LINK_CLASSES    => $this->merge_classes( [ 'anchor', 'c-breadcrumbs__anchor' ], $this->options[ static::LINK_CLASSES ], true ),
-			static::LINK_ATTRS      => $this->merge_attrs( [], $this->options[ self::LINK_ATTRS ], true ),
+			self::ITEMS           => $this->options[ self::ITEMS ],
+			self::WRAPPER_CLASSES => $this->merge_classes( [ 'l-container', 'c-breadcrumbs__wrapper' ], $this->options[ self::WRAPPER_CLASSES ], true ),
+			self::WRAPPER_ATTRS   => $this->merge_attrs( [], $this->options[ self::WRAPPER_ATTRS ], true ),
+			self::MAIN_CLASSES    => $this->merge_classes( [ 'c-breadcrumbs' ], $this->options[ self::MAIN_CLASSES ], true ),
+			self::ITEM_CLASSES    => $this->merge_classes( [ 'c-breadcrumbs__item' ], $this->options[ self::ITEM_CLASSES ], true ),
+			self::LINK_CLASSES    => $this->merge_classes( [ 'anchor', 'c-breadcrumbs__anchor' ], $this->options[ self::LINK_CLASSES ], true ),
+			self::LINK_ATTRS      => $this->merge_attrs( [], $this->options[ self::LINK_ATTRS ], true ),
 		];
 
 		return $data;
