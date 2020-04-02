@@ -12,13 +12,13 @@
  * @method void am($role)
  * @method void lookForwardTo($achieveValue)
  * @method void comment($description)
- * @method \Codeception\Lib\Friend haveFriend($name, $actorClass = NULL)
+ * @method void pause()
  *
  * @SuppressWarnings(PHPMD)
 */
-class WebdriverTester extends \Codeception\Actor
+class WebDriverTester extends \Codeception\Actor
 {
-    use _generated\WebdriverTesterActions;
+    use _generated\WebDriverTesterActions;
 
    /**
     * Define custom actions here

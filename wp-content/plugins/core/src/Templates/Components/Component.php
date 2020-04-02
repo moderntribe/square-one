@@ -46,4 +46,14 @@ abstract class Component extends Abstract_Template {
 		return $attrs;
 	}
 
+	protected function get_path(): string {
+		$path = parent::get_path();
+		if ( strpos( $path, '/' ) === 0 ) {
+			$search = array_unique( [ get_stylesheet_directory(), get_template_directory() ] );
+			$path   = str_replace( $search, '', $path );
+		}
+
+		return $path;
+	}
+
 }

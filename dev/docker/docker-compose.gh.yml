@@ -1,15 +1,6 @@
-version: '2.1'
+# Containers to run during GitHub Actions
+version: '3.4'
 services:
-  dns-external:
-    image: 'andyshinn/dnsmasq:latest'
-    container_name: tribe-dns-external
-    command: '--log-facility=/proc/self/fd/2  --no-resolv --server=1.1.1.1 --address=/tribe/127.0.0.1'
-    cap_add:
-      - NET_ADMIN
-    ports:
-      - '53:53/udp'
-      - '53:53/tcp'
-    network_mode: bridge
   dns-internal:
     image: 'andyshinn/dnsmasq:latest'
     container_name: tribe-dns-internal
@@ -24,6 +15,7 @@ services:
     networks:
       proxy:
         ipv4_address: 172.20.10.250
+
   mysql:
     image: mariadb
     container_name: tribe-mysql
@@ -37,21 +29,7 @@ services:
     networks:
       proxy:
         ipv4_address: 172.20.10.200
-  reverse-proxy:
-    image: 'jwilder/nginx-proxy:alpine'
-    container_name: tribe-proxy
-    ports:
-      - '80:80'
-      - '443:443'
-    volumes:
-      - './nginx/nginx.conf:/etc/nginx/nginx.conf:ro'
-      - './nginx/proxy_settings.conf:/etc/nginx/conf.d/proxy_settings.conf:ro'
-      - './nginx/nginx.tmpl:/app/nginx.tmpl:ro'
-      - './certs:/etc/nginx/certs'
-      - '/var/run/docker.sock:/tmp/docker.sock'
-    networks:
-      proxy:
-        ipv4_address: 172.20.10.100
+
   mailhog:
     image: 'mailhog/mailhog:latest'
     container_name: tribe-mail
@@ -63,9 +41,16 @@ services:
         ipv4_address: 172.20.10.90
     ports:
       - '1025:1025'
+
+  webserver-tests:
+    ports:
+      - '80:80'
+      - '443:443'
+    networks:
+      proxy:
+        ipv4_address: 172.20.10.100
+
 networks:
   proxy:
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 172.20.10.0/24
+    external:
+      name: global_proxy

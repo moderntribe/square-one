@@ -1,3 +1,0 @@
-<?php
-define( 'BUILD_THEME_ASSETS_TIMESTAMP', '18.24.52.02.03.2020' );
-			

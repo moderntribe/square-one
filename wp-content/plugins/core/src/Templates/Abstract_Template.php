@@ -24,12 +24,12 @@ abstract class Abstract_Template implements Template_Interface {
 	 * @param Component_Factory $factory
 	 */
 	public function __construct( Environment $twig, Component_Factory $factory ) {
-		$this->twig         = $twig;
-		$this->factory      = $factory;
+		$this->twig    = $twig;
+		$this->factory = $factory;
 	}
 
 	public function render( string $path = '' ): string {
-		$path = $path ?: $this->path;
+		$path = $path ?: $this->get_path();
 		if ( empty( $path ) ) {
 			throw new \RuntimeException( 'Path not specified' );
 		}
@@ -42,5 +42,9 @@ abstract class Abstract_Template implements Template_Interface {
 
 			return '';
 		}
+	}
+
+	protected function get_path(): string {
+		return $this->path;
 	}
 }
