@@ -1,5 +1,27 @@
 #!/bin/bash
 
+function console_log(){
+  echo ""
+  echo "#########################################################################"
+  echo "### $1"
+  echo ""
+}
+
+if[ ! -f "./deploy.sh"]; then
+    echo "Script must be run in the /dev/deploy/ directory. Aborting..."
+    exit 1
+fi
+exit 1
+if [ $forceyes == false ]; then
+    console_log ""
+    read -p "This will Deploy $branch to $environment. Have you made a backup? [Y/n] " yn
+    case $yn in
+        [Yy]* ) ;;
+        [Nn]* ) exit;;
+        * ) exit;;
+    esac
+fi
+
 SCRIPTDIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 cd "$SCRIPTDIR";
 
@@ -27,15 +49,10 @@ source ".host/config/common.cfg"
 source ".host/config/$environment.cfg"
 deploy_timestamp=`date +%Y%m%d%H%M%S`
 
-echo "Preparing to deploy $branch to $environment"
+console_log "Preparing to deploy $branch to $environment"
+console_log "Clone $dev_repo to .deploy/src"
 
-if [ -d .deploy/src ]; then
-    cd .deploy/src
-    git submodule foreach git reset --hard
-    git submodule foreach git fetch --tags
-    git submodule update
-    cd ../..
-else
+if [ ! -d .deploy/src ]; then
     git clone $dev_repo .deploy/src
 fi
 
@@ -43,22 +60,24 @@ cd .deploy/src
 git reset --hard HEAD
 git checkout $branch
 git pull origin $branch
-git submodule update --init --recursive
 commit_hash=$(git rev-parse HEAD)
 cd ../..
 
+console_log "Clone $deploy_repo to .deploy/build"
 
-if [ -d .deploy/build ]; then
-    cd .deploy/build
-    git submodule foreach git reset --hard
-    git submodule foreach git fetch --tags
-    git submodule update
-    cd ../..
-else
+if [ ! -d .deploy/build ]; then
     git clone $deploy_repo .deploy/build
 fi
 
-GIT_SSH_COMMAND="ssh -i .host/ansible_rsa -F /dev/null"
+console_log "Build $deploy_repo in .deploy/build"
+
+
+
+
+
+# GIT_SSH_COMMAND="ssh -i .host/ansible_rsa -F /dev/null"
+
+console_log "Set $deploy_repo as remote for push"
 
 cd .deploy/build
 
@@ -72,14 +91,14 @@ if git config "remote.$environment.url" > /dev/null; then
 else
     git remote add $environment $deploy_repo
 fi
+
 git config core.autocrlf false
 git fetch $environment
 git checkout master
 git reset --hard $environment/master
-
 cd ../..
 
-echo "syncing WordPress core files"
+console_log "Set syncing WordPress core files from src to build"
 rsync -rp --delete .deploy/src/wp/ .deploy/build \
     --exclude=.git \
     --exclude=.gitmodules \
@@ -87,7 +106,7 @@ rsync -rp --delete .deploy/src/wp/ .deploy/build \
     --exclude=.htaccess \
     --exclude=wp-content
 
-echo "syncing wp-content dir"
+console_log "Syncing wp-content dir from src to build"
 rsync -rp --delete .deploy/src/wp-content .deploy/build \
     --exclude=.git \
     --exclude=.gitmodules \
@@ -103,8 +122,8 @@ rsync -rp --delete .deploy/src/wp-content .deploy/build \
     --exclude=node_modules \
     --exclude=wp-content/plugins/core/assets/templates/cli
 
-echo "syncing configuration files"
-# not wp-config.php. WP Engine manages that
+console_log "Syncing configuration files from src to build"
+# not wp-config.php. Host manages that
 rsync -rp .deploy/src/ .deploy/build \
     --include=local-config-sample.php \
     --include=general-config.php \
@@ -114,9 +133,12 @@ rsync -rp .deploy/src/ .deploy/build \
 
 cd .deploy/build
 mv .wpengine.htaccess .htaccess
+
+console_log "Git add build to $deploy_repo"
 git add -Av
 
 if [ $forceyes == false ]; then
+    console_log ""
     read -p "Ready to deploy $branch to $environment. Have you made a backup? [Y/n] " yn
     case $yn in
         [Yy]* ) ;;
@@ -125,8 +147,13 @@ if [ $forceyes == false ]; then
     esac
 fi
 
+console_log "Deploying $environment via Git Push to $deploy_repo"
 git commit --allow-empty -m "Deployment $deploy_timestamp"
-echo "pushing to $environment"
+echo "Pushing to $environment"
 git push $environment master
 
-echo "done"
+console_log "Cleanup"
+cd ../..
+rm -rf .deploy
+
+echo "Deployment Done"

@@ -63,9 +63,6 @@ pipeline {
         // DEPLOYMENT
         stage('Checkout Host SCM') {
             steps {
-
-                sh "abc=\$(echo '${env.BRANCH_NAME}' | awk -F'/' '{print \$2}')"
-                sh "echo \$abc"
                 // Decrypt values
                 withCredentials([string(credentialsId: "${JENKINS_VAULTPASS}", variable: 'vaultPass')]) {
                     sh script: "echo '${vaultPass}' > ./.vaultpass", label: "Write vaultpass to local folder"
@@ -86,8 +83,11 @@ pipeline {
         }
         stage('Deploy') {
              steps {
-                sh script: "./dev/deploy/deploy.sh dev", label: "Deploy to Dev"
-                sh "echo \'${DEPLOY_ENVIRONMENT}\'"
+                when {
+                	branch 'server/dev'
+                }
+
+                echo "dev!"
             }
         }
     }
