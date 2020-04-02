@@ -94,6 +94,7 @@
     "wpackagist-plugin/safe-svg":"1.9.8",
     "moderntribe/panel-builder": "dev-3.3-branch",
     "moderntribe/gutenpanels": "dev-master",
+    "moderntribe/tribe-libs": "dev-feature/php-di-container",
 
     "humanmade/mercator":"dev-master#7f3846a",
     "vlucas/phpdotenv": "^3.0",
@@ -117,8 +118,7 @@
     "lucatume/wp-browser": "^2.2.37",
     "lucatume/function-mocker": "~1.0",
     "php-http/httplug": "^1.1",
-    "filp/whoops": "^2.2@dev",
-    "moderntribe/tribe-libs": "dev-feature/php-di-container"
+    "filp/whoops": "^2.2@dev"
   },
   "extra": {
     "wordpress-install-dir": "wp",
