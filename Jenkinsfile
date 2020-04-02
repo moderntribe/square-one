@@ -24,9 +24,6 @@ pipeline {
                         }
                     }
                     steps {
-
-                        sh "DEPLOY_TO = \$(echo ${env.BRANCH_NAME} | awk -F'/' '{print \$2}')"
-                        echo "\$DEPLOY_TO"
                         echo "${env.BRANCH_NAME} - ${params.SLACK_CHANNEL}"
                         slackSend(channel: "${SLACK_CHANNEL}", message: "Pipeline: Deployment of `${APP_NAME}` to `${env.BRANCH_NAME}` STARTED: (build: <${RUN_DISPLAY_URL}|#${BUILD_NUMBER}>)")
                         withCredentials([file(credentialsId: "square-one-compose-plugins-keys", variable: "ENV_FILE")]) {
@@ -66,6 +63,9 @@ pipeline {
         // DEPLOYMENT
         stage('Checkout Host SCM') {
             steps {
+
+                sh "abc=$(echo '${env.BRANCH_NAME}' | awk -F'/' '{print \$2}')"
+                echo $abc
                 // Decrypt values
                 withCredentials([string(credentialsId: "${JENKINS_VAULTPASS}", variable: 'vaultPass')]) {
                     sh script: "echo '${vaultPass}' > ./.vaultpass", label: "Write vaultpass to local folder"
@@ -86,7 +86,7 @@ pipeline {
         }
         stage('Deploy') {
              steps {
-                //sh script: "./dev/deploy/deploy.sh dev", label: "Deploy to Dev"
+                sh script: "./dev/deploy/deploy.sh dev", label: "Deploy to Dev"
                 sh "echo \'${DEPLOY_ENVIRONMENT}\'"
             }
         }
