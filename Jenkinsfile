@@ -65,7 +65,7 @@ pipeline {
             steps {
 
                 sh "abc=\$(echo '${env.BRANCH_NAME}' | awk -F'/' '{print \$2}')"
-                echo $abc
+                sh "echo \$abc"
                 // Decrypt values
                 withCredentials([string(credentialsId: "${JENKINS_VAULTPASS}", variable: 'vaultPass')]) {
                     sh script: "echo '${vaultPass}' > ./.vaultpass", label: "Write vaultpass to local folder"
