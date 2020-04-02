@@ -175,4 +175,4 @@ const init = () => {
 	console.info( 'Square One FE: Initialized slider component scripts.' );
 };
 
-export default init;
+init();

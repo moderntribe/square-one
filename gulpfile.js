@@ -50,6 +50,7 @@ const gulpTasks = [
 	/* Cssnano tasks */
 
 	'cssnano:themeMin', // minify the theme css
+	'cssnano:themeComponentsMin', // minify the theme components css
 	'cssnano:themeLegacyMin', // minify the legacy css for old browsers
 	'cssnano:themeWPEditorMin', // minify the editor css
 	'cssnano:themeWPAdminMin', // minify the main admin css bundle
@@ -87,6 +88,7 @@ const gulpTasks = [
 	/* Postcss tasks */
 
 	'postcss:theme', // the big ol postcss task that transforms theme pcss to css
+	'postcss:themeComponents', // the postcss task that transforms theme components pcss to css
 	'postcss:themeLegacy', // the postcss task that transforms legacy pcss to css
 	'postcss:themeWPEditor', // the postcss task that transforms editor pcss to css
 	'postcss:themeWPLogin', // the postcss task that transforms login pcss to css
@@ -209,8 +211,8 @@ gulp.task( 'lint', gulp.series(
 
 gulp.task( 'server_dist', gulp.series(
 	gulp.parallel( 'clean:themeMinCSS', 'clean:themeMinJS', 'copy:themeJS' ),
-	gulp.parallel( 'postcss:theme', 'postcss:themeWPAdmin', 'postcss:themeWPEditor', 'postcss:themeWPLogin', 'postcss:themeLegacy' ),
-	gulp.parallel( 'cssnano:themeMin', 'cssnano:themeLegacyMin', 'cssnano:themeWPEditorMin', 'cssnano:themeWPAdminMin', 'cssnano:themeWPLoginMin' ),
+	gulp.parallel( 'postcss:theme', 'postcss:themeComponents', 'postcss:themeWPAdmin', 'postcss:themeWPEditor', 'postcss:themeWPLogin', 'postcss:themeLegacy' ),
+	gulp.parallel( 'cssnano:themeMin', 'cssnano:themeComponentsMin', 'cssnano:themeLegacyMin', 'cssnano:themeWPEditorMin', 'cssnano:themeWPAdminMin', 'cssnano:themeWPLoginMin' ),
 	gulp.parallel( 'header:theme', 'header:themePrint', 'header:themeLegacy', 'header:themeWPEditor', 'header:themeWPLogin' ),
 	gulp.parallel( 'shell:scriptsThemeDev', 'shell:scriptsAdminDev' ),
 	gulp.parallel( 'shell:scriptsThemeProd', 'shell:scriptsAdminProd' ),
@@ -228,8 +230,8 @@ gulp.task( 'dist', gulp.series(
 	'shell:test',
 	gulp.parallel( 'eslint:theme', 'eslint:apps', 'eslint:utils', 'eslint:admin', 'stylelint:theme', 'stylelint:apps' ),
 	gulp.parallel( 'clean:themeMinCSS', 'clean:themeMinJS', 'copy:themeJS' ),
-	gulp.parallel( 'postcss:theme', 'postcss:themeWPAdmin', 'postcss:themeWPEditor', 'postcss:themeWPLogin', 'postcss:themeLegacy' ),
-	gulp.parallel( 'cssnano:themeMin', 'cssnano:themeLegacyMin', 'cssnano:themeWPEditorMin', 'cssnano:themeWPAdminMin', 'cssnano:themeWPLoginMin' ),
+	gulp.parallel( 'postcss:theme', 'postcss:themeComponents', 'postcss:themeWPAdmin', 'postcss:themeWPEditor', 'postcss:themeWPLogin', 'postcss:themeLegacy' ),
+	gulp.parallel( 'cssnano:themeMin', 'cssnano:themeComponentsMin', 'cssnano:themeLegacyMin', 'cssnano:themeWPEditorMin', 'cssnano:themeWPAdminMin', 'cssnano:themeWPLoginMin' ),
 	gulp.parallel( 'header:theme', 'header:themePrint', 'header:themeLegacy', 'header:themeWPEditor', 'header:themeWPLogin' ),
 	gulp.parallel( 'shell:scriptsThemeDev', 'shell:scriptsAdminDev' ),
 	gulp.parallel( 'shell:scriptsThemeProd', 'shell:scriptsAdminProd' ),
