@@ -78,7 +78,6 @@
   ],
   "require": {
     "php":"^7.2",
-    "aws/aws-sdk-php": "3.48.4",
     "composer/installers":"1.4.0",
     "johnpbloch/wordpress-core-installer":"1.0.0",
     "johnpbloch/wordpress-core": "5.4.*",
@@ -91,7 +90,7 @@
     "wpackagist-plugin/wordpress-seo": "12.4",
     "wpackagist-plugin/user-switching": "1.5.2",
     "wpackagist-plugin/classic-editor":"1.5",
-    "wpackagist-plugin/classic-editor-addon":"2.5.0",
+    "wpackagist-plugin/classic-editor-addon":"2.6.1",
     "wpackagist-plugin/safe-svg":"1.9.8",
     "moderntribe/panel-builder": "dev-3.3-branch",
     "moderntribe/gutenpanels": "dev-master",
@@ -118,7 +117,6 @@
     "humanmade/mercator":"dev-master#7f3846a",
     "vlucas/phpdotenv": "^3.0",
     "humanmade/s3-uploads":"2.2.1",
-    "pimple/pimple": "~3.0@dev",
     "johnbillion/extended-cpts": "^4.0",
     "twig/twig": "^2.11",
     "jbzoo/pimpledumper": "^1.2",
@@ -139,7 +137,8 @@
     "lucatume/function-mocker": "~1.0",
     "moderntribe/square1-generators": "^2.0",
     "php-http/httplug": "^1.1",
-    "filp/whoops": "^2.2@dev"
+    "filp/whoops": "^2.2@dev",
+    "moderntribe/tribe-libs": "dev-feature/php-di-container"
   },
   "extra": {
     "wordpress-install-dir": "wp",

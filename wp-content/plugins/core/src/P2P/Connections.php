@@ -17,7 +17,7 @@ namespace Tribe\Project\P2P;
  *
  * instead you could use
  *
- * $connections = Connections::instance();
+ * $connections = new Connections();
  * $ids = $connections->get_from( {post_or_user_id}, [ 'type' => 'posts_to_pages' ] );
  *
  * Which will only perform a single DB query and return an array of ids.
@@ -204,13 +204,6 @@ class Connections {
 	private function prepare_p2p_type_sql_where( $type ) {
 		$type = esc_sql( $type );
 		return "p2p_type='$type'";
-	}
-
-	/**
-	 * @return mixed
-	 */
-	public static function instance() {
-		return tribe_project()->container()['p2p.connections'];
 	}
 
 }

@@ -3,6 +3,7 @@
 namespace Tribe\Project\P2P;
 
 
+use Tribe\Libs\Assets\Asset_Loader;
 use Tribe\Libs\P2P\Relationship;
 
 class Admin_Search_Filtering {
@@ -35,7 +36,7 @@ class Admin_Search_Filtering {
 
 	private $side_to_show = '';
 
-	public function __construct( Relationship $relationship, $side = 'both', $asset_loader = null ) {
+	public function __construct( Relationship $relationship, $side = 'both', Asset_Loader $asset_loader = null ) {
 		$this->relationship_id = $relationship::NAME;
 		$this->from_post_types = $relationship->from();
 		$this->to_post_types   = $relationship->to();

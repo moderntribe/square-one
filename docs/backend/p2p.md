@@ -23,10 +23,20 @@ this example:
 namespace Tribe\Project\P2P\Relationships;
 
 use Tribe\Libs\P2P\Relationship;
+use Tribe\Project\Post_Types\Page\Page;
+use Tribe\Project\Post_Types\Sample\Sample;
 
 class Sample_To_Page extends Relationship {
 
-	const NAME = 'Sample_To_Page';
+	public const NAME = 'Sample_To_Page';
+
+	protected $from = [
+		Sample::NAME,
+	];
+
+	protected $to = [
+		Page::NAME,
+	];
 
 	public function get_args() {
 		return [
@@ -62,35 +72,14 @@ This class is used to relate the Sample post type to the Page post type.  The ge
 is required of the Relationship subclass.
 
 In order to see the relationship meta boxes in the post types you need to register this in the
-P2P service provider.
+P2P definer.
 
 ```php
-protected $p2p_relationships = [
-    General_Relationship::class => [
-        'from' => [
-            Page::NAME,
-            Post::NAME,
-            Event::NAME,
-        ],
-        'to'   => [
-            Page::NAME,
-            Post::NAME,
-            Event::NAME,
-        ],
-    ],
-    Sample_To_Page::class => [
-        'from' => [
-            Sample::NAME,
-        ],
-        'to' => [
-            Page::NAME,
-        ],
-    ]
-];
+self::RELATIONSHIPS  => [
+    General_Relationship::class,
+    Sample_To_Page::class,
+]
 ```
-
-The naming convention is vital.  The filename, class name and NAME constant 
-should all be the same including capitalization.
 
 ## Connections Helper Class
 
@@ -100,11 +89,11 @@ methodology for simple needs in the core posts-to-posts plugin.
 To use the connections class, get it's container instance and use the helper methods as needed.
 
 ```php
-$p2p = Connections::instance();
+$p2p = new Connections();
 $connected_ids = $p2p->get_from( $post_id );
 
 foreach( $connected_ids as $post_id ) {
-...
+  ...
 ```
 
 The above will get any and all post ids connected to our $post_id no matter what the post type.
@@ -112,11 +101,10 @@ It will only get the posts that are in the p2p_to column though as we are gettin
 our $post_id
 
 ```php
-$p2p = Connections::instance();
 $page_ids = $p2p->get_from( $post_id, [ 'type' => Sample_To_Page::NAME ] );
 
 foreach( $page_ids as $page_id ) {
-...
+  ...
 ```
 
 The above example will do the same as the previous except restrict results to only those belonging to
@@ -132,7 +120,6 @@ In both the get_from() and get_to methods the 2nd $args parameter has some usefu
 Here's an example using the meta arguments
 
 ```php
-$p2p = Connections::instance();
 $args = [
     'type' => Sample_To_Page::NAME,
     'meta' => [
@@ -143,10 +130,12 @@ $args = [
 $page_ids = $p2p->get_from( $post_id, $args );
 
 foreach( $page_ids as $page_id ) {
-...
+  ...
 ```
 
-Another method available in the Connections class is the get_shared_connections() method.  Simply sending an id to this method will return all connections it has of any type.
+Another method available in the Connections class is the get_shared_connections() method.
+Simply sending an id to this method will return all connections it has of any type.
 
-The type parameter accepts an array of types to filter results.  The direction parameter accepts "to" or "from" and will align all results where the passed id is in the defined direction field.
+The type parameter accepts an array of types to filter results.  The direction parameter accepts
+"to" or "from" and will align all results where the passed id is in the defined direction field.
 

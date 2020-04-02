@@ -3,171 +3,161 @@
 namespace Tribe\Project;
 
 use Psr\Container\ContainerInterface;
-use Tribe\Libs\Container\Container_Provider;
-use Tribe\Project\Cache\Cache_Provider;
-use Tribe\Project\Service_Providers\Admin_Provider;
-use Tribe\Project\Service_Providers\Asset_Provider;
-use Tribe\Project\Service_Providers\CLI_Provider;
-use Tribe\Project\Service_Providers\Content_Provider;
-use Tribe\Project\Service_Providers\Nav_Menu_Provider;
-use Tribe\Project\Service_Providers\Object_Meta_Provider;
-use Tribe\Project\Service_Providers\P2P_Provider;
-use Tribe\Project\Service_Providers\Panels_Provider;
-use Tribe\Project\Service_Providers\Post_Types\Event_Service_Provider;
-use Tribe\Project\Service_Providers\Post_Types\Organizer_Service_Provider;
-use Tribe\Project\Service_Providers\Post_Types\Page_Service_Provider;
-use Tribe\Project\Service_Providers\Post_Types\Post_Service_Provider;
-use Tribe\Project\Service_Providers\Post_Types\Sample_Service_Provider;
-use Tribe\Project\Service_Providers\Post_Types\Venue_Service_Provider;
-use Tribe\Project\Service_Providers\Settings_Provider;
-use Tribe\Project\Service_Providers\Shortcode_Provider;
-use Tribe\Project\Service_Providers\Taxonomies\Category_Service_Provider;
-use Tribe\Project\Service_Providers\Taxonomies\Example_Taxonomy_Service_Provider;
-use Tribe\Project\Service_Providers\Taxonomies\Post_Tag_Service_Provider;
-use Tribe\Project\Service_Providers\Theme_Customizer_Provider;
-use Tribe\Project\Service_Providers\Theme_Provider;
-use Tribe\Project\Service_Providers\Twig_Service_Provider;
-use Tribe\Project\Service_Providers\Whoops_Provider;
-use Tribe\Project\Templates\Templates_Provider;
+use Tribe\Libs\Assets\Assets_Definer;
+use Tribe\Project\Admin\Admin_Subscriber;
+use Tribe\Project\Cache\Cache_Subscriber;
+use Tribe\Project\CLI\CLI_Subscriber;
+use Tribe\Project\Content\Content_Definer;
+use Tribe\Project\Content\Content_Subscriber;
+use Tribe\Project\Development\Whoops_Definer;
+use Tribe\Project\Development\Whoops_Subscriber;
+use Tribe\Project\Nav_Menus\Nav_Menus_Definer;
+use Tribe\Project\Nav_Menus\Nav_Menus_Subscriber;
+use Tribe\Project\Object_Meta\Object_Meta_Definer;
+use Tribe\Project\Object_Meta\Object_Meta_Subscriber;
+use Tribe\Project\P2P\P2P_Definer;
+use Tribe\Project\P2P\P2P_Subscriber;
+use Tribe\Project\Panels\Panels_Definer;
+use Tribe\Project\Panels\Panels_Subscriber;
+use Tribe\Project\Post_Types;
+use Tribe\Project\Settings\Settings_Subscriber;
+use Tribe\Project\Shortcodes\Shortcodes_Subscriber;
+use Tribe\Project\Taxonomies;
+use Tribe\Project\Templates\Templates_Subscriber;
+use Tribe\Project\Theme\Theme_Definer;
+use Tribe\Project\Theme\Theme_Subscriber;
+use Tribe\Project\Twig\Twig_Definer;
 
 class Core {
-
-	protected static $_instance;
-
-	/** @var \Pimple\Container */
-	protected $container = null;
-
-	/** @var ContainerInterface */
-	protected $template_container;
+	public const PLUGIN_FILE = 'plugin.file';
 
 	/**
-	 * @var Container\Service_Provider[]
+	 * @var self
 	 */
-	private $providers = [];
+	private static $_instance;
 
 	/**
-	 * @param \Pimple\Container $container
+	 * @var ContainerInterface
 	 */
-	public function __construct( \Pimple\Container $container ) {
-		$this->container = $container;
+	private $container;
+
+	/**
+	 * @var string[] Names of classes implementing Definer_Interface
+	 */
+	private $definers = [
+		Assets_Definer::class,
+		Content_Definer::class,
+		Nav_Menus_Definer::class,
+		Object_Meta_Definer::class,
+		P2P_Definer::class,
+		Panels_Definer::class,
+		Theme_Definer::class,
+		Twig_Definer::class,
+	];
+
+	/**
+	 * @var string[] Names of classes implementing Subscriber_Interface
+	 */
+	private $subscribers = [
+		Admin_Subscriber::class,
+		\Tribe\Libs\Cache\Cache_Subscriber::class,
+		Cache_Subscriber::class,
+		CLI_Subscriber::class,
+		Content_Subscriber::class,
+		Nav_Menus_Subscriber::class,
+		Object_Meta_Subscriber::class,
+		Panels_Subscriber::class,
+		P2P_Subscriber::class,
+		Settings_Subscriber::class,
+		Shortcodes_Subscriber::class,
+		Theme_Subscriber::class,
+		Templates_Subscriber::class,
+
+		// our post types
+		Post_Types\Sample\Subscriber::class,
+
+		// our taxonomies
+		Taxonomies\Example\Subscriber::class,
+	];
+
+
+	public function init( string $plugin_path ) {
+		$this->init_container( $plugin_path );
 	}
 
-	public function init() {
-		$this->load_service_providers();
-		$this->init_template_container();
-	}
-
-	private function load_service_providers() {
-		$this->providers['container'] = new Container_Provider();
-
-		// keep these in alphabetical order, it makes the list easier to skim
-		$this->providers['admin']            = new Admin_Provider();
-		$this->providers['assets']           = new Asset_Provider();
-		$this->providers['cache']            = new Cache_Provider(); // override tribe-libs default
-		$this->providers['cli']              = new CLI_Provider();
-		$this->providers['content']          = new Content_Provider();
-		$this->providers['meta']             = new Object_Meta_Provider();
-		$this->providers['nav_menu']         = new Nav_Menu_Provider();
-		$this->providers['panels']           = new Panels_Provider();
-		$this->providers['p2p']              = new P2P_Provider();
-		$this->providers['settings']         = new Settings_Provider();
-		$this->providers['shortcodes']       = new Shortcode_Provider();
-		$this->providers['theme']            = new Theme_Provider();
-		$this->providers['theme_customizer'] = new Theme_Customizer_Provider();
-		$this->providers['twig']             = new Twig_Service_Provider();
-
-		$this->optional_dependencies();
-		$this->load_post_type_providers();
-		$this->load_taxonomy_providers();
-
-		// Enable Whoops error logging if required.
-		if ( defined( 'WHOOPS_ENABLE' ) && WHOOPS_ENABLE && class_exists( '\Whoops\Run' ) ) {
-			$this->providers['whoops'] = new Whoops_Provider();
-		}
+	private function init_container( string $plugin_path ): void {
+		$this->extend_definers();
+		$this->extend_subscribers();
 
 		/**
-		 * Filter the service providers that power the plugin
+		 * Filter the list of definers that power the plugin
 		 *
-		 * @param Container\Service_Provider[] $providers
+		 * @param string[] $definers The class names of definers that will be instantiated
 		 */
-		$this->providers = apply_filters( 'tribe/project/providers', $this->providers );
+		$this->definers = apply_filters( 'tribe/project/definers', $this->definers );
 
-		foreach ( $this->providers as $provider ) {
-			$this->container->register( $provider );
-		}
-	}
+		/**
+		 * Filter the list subscribers that power the plugin
+		 *
+		 * @param string[] $subscribers The class names of subscribers that will be instantiated
+		 */
+		$this->subscribers = apply_filters( 'tribe/project/subscribers', $this->subscribers );
 
-	private function init_template_container(): void {
 		$builder = new \DI\ContainerBuilder();
-		$builder->addDefinitions( dirname( __DIR__ ) . '/definitions/twig.php' );
-		$builder->addDefinitions( dirname( __DIR__ ) . '/definitions/templates.php' );
-		$this->template_container = $builder->build();
-		$this->template_container->get( Templates_Provider::class )->register( $this->template_container );
-	}
+		$builder->useAutowiring( true );
+		$builder->useAnnotations( false );
+		$builder->addDefinitions( [ self::PLUGIN_FILE => $plugin_path ] );
+		$builder->addDefinitions( ... array_map( function ( $classname ) {
+			return ( new $classname() )->define();
+		}, $this->definers ) );
 
+		$this->container = $builder->build();
 
-	/**
-	 * Register optional dependencies if they exist. Override
-	 * the service provider for the dependency to change its
-	 * behavior.
-	 */
-	private function optional_dependencies() {
-		$optional_dependencies = [
-			'blog_copier'  => '\Tribe\Libs\Blog_Copier\Blog_Copier_Provider',
-			'container'    => '\Tribe\Libs\Container\Container_Provider',
-			'generators'   => '\Tribe\Libs\Generators\Generator_Provider',
-			'queues'       => '\Tribe\Libs\Queues\Queues_Provider',
-			'queues-mysql' => '\Tribe\Libs\Queues_Mysql\Mysql_Backend_Provider',
-		];
-
-		foreach ( $optional_dependencies as $key => $provider ) {
-			if ( class_exists( $provider ) ) {
-				$this->providers[ $key ] = new $provider();
-			}
+		foreach ( $this->subscribers as $subscriber_class ) {
+			$this->container->get( $subscriber_class )->register( $this->container );
 		}
 	}
 
-	private function load_post_type_providers() {
-		$this->providers['post_type.sample'] = new Sample_Service_Provider();
+	private function extend_definers(): void {
+		$optional_definers = array_filter( [
+			'\Tribe\Libs\Queues\Queues_Definer',
+			'\Tribe\Libs\Queues_Mysql\Mysql_Backend_Definer',
+			'\Tribe\Libs\Blog_Copier\Blog_Copier_Definer',
+			'\Tribe\Libs\Generators\Generator_Definer',
+		], 'class_exists' );
 
-		// externally registered post types
-		$this->providers['post_type.event']     = new Event_Service_Provider();
-		$this->providers['post_type.organizer'] = new Organizer_Service_Provider();
-		$this->providers['post_type.page']      = new Page_Service_Provider();
-		$this->providers['post_type.post']      = new Post_Service_Provider();
-		$this->providers['post_type.venue']     = new Venue_Service_Provider();
+		$this->definers = array_merge( $this->definers, $optional_definers );
+
+		if ( defined( 'WHOOPS_ENABLE' ) && WHOOPS_ENABLE && class_exists( '\Whoops\Run' ) ) {
+			$this->definers[] = Whoops_Definer::class;
+		}
 	}
 
-	private function load_taxonomy_providers() {
-		$this->providers['taxonomy.example'] = new Example_Taxonomy_Service_Provider();
+	private function extend_subscribers(): void {
+		$optional_subscribers = array_filter( [
+			'\Tribe\Libs\Queues\Queues_Subscriber',
+			'\Tribe\Libs\Queues_Mysql\Mysql_Backend_Subscriber',
+			'\Tribe\Libs\Blog_Copier\Blog_Copier_Subscriber',
+			'\Tribe\Libs\Generators\Generator_Subscriber',
+		], 'class_exists' );
 
-		// externally registered taxonomies
-		$this->providers['taxonomy.category'] = new Category_Service_Provider();
-		$this->providers['taxonomy.post_tag'] = new Post_Tag_Service_Provider();
+		$this->subscribers = array_merge( $this->subscribers, $optional_subscribers );
+
+		if ( defined( 'WHOOPS_ENABLE' ) && WHOOPS_ENABLE && class_exists( '\Whoops\Run' ) ) {
+			$this->subscribers[] = Whoops_Subscriber::class;
+		}
 	}
 
-	public function container() {
+	public function container(): ContainerInterface {
 		return $this->container;
 	}
 
-	public function template_container(): ContainerInterface {
-		return $this->template_container;
-	}
-
 	/**
-	 * @param null|\ArrayAccess $container
-	 *
-	 * @return Core
-	 * @throws \Exception
+	 * @return self
 	 */
-	public static function instance( $container = null ) {
+	public static function instance() {
 		if ( ! isset( self::$_instance ) ) {
-			if ( empty( $container ) ) {
-				throw new \Exception( 'You need to provide a Pimple container' );
-			}
-
-			$className       = __CLASS__;
-			self::$_instance = new $className( $container );
+			self::$_instance = new self();
 		}
 
 		return self::$_instance;

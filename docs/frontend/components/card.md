@@ -251,10 +251,6 @@ class CardGrid extends Panel {
 
 		return $button_obj->render();
 	}
-
-	public static function instance() {
-		return tribe_project()->container()['twig.templates.content/panels/cardgrid'];
-	}
 }
 ```
 

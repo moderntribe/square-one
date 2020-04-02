@@ -79,7 +79,7 @@ class ConnectionsTest extends Test_Case {
 	 * Test retrieving connections of specific type and from post id
 	 */
 	public function test_get_connection() {
-		$connections = tribe_project()->container()['p2p.connections'];
+		$connections = new Connections();
 		$ids = $connections->get_from(
 			$this->sample_id,
 			[
@@ -98,7 +98,7 @@ class ConnectionsTest extends Test_Case {
 	 * Test getting id's from p2p with requirements on post meta
 	 */
 	public function test_get_meta_connection() {
-		$connections = tribe_project()->container()['p2p.connections'];
+		$connections = new Connections();
 		$ids = $connections->get_from(
 			$this->sample_id,
 			[
@@ -118,7 +118,7 @@ class ConnectionsTest extends Test_Case {
 	 * Test getting connections based on p2p meta
 	 */
 	public function test_get_connections_by_p2p_meta() {
-		$connections = tribe_project()->container()['p2p.connections'];
+		$connections = new Connections();
 		$results = $connections->get_connections_by_p2p_meta( self::META_KEY );
 
 		$this->assertTrue( $this->connection_2_id === (int) $results[0]->p2p_id );
@@ -135,7 +135,7 @@ class ConnectionsTest extends Test_Case {
 	 * Test getting shared connected items of different connection types
 	 */
 	public function test_get_shared_connections() {
-		$connections = tribe_project()->container()['p2p.connections'];
+		$connections = new Connections();
 
 		$results = $connections->get_shared_connections( $this->sample_id );
 		$to_ids = wp_list_pluck( $results, 'p2p_to' );

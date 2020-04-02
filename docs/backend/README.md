@@ -12,7 +12,7 @@ The core plugin will be where the majority of back end development takes place:
     * [Custom Post Types](post-types.md)
     * [Custom Taxonomies](taxonomies.md)
     * [Post & Taxonomy Meta](object-meta.md)
-    * [Service Providers](service-providers.md)
+    * [Subscribers](subscribers.md)
     * [Template Controllers](data.md)
     * [Components](components.md)
     * [CLI](cli.md)

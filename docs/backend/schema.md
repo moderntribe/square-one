@@ -9,7 +9,7 @@ To use, extend and implement the Schema class.
 The `get_updates()` method is required and should return an array `[ 1 => [ $this, 'callable' ] ]`. The key is used by Schema to determine if an update has already been run.
 
 A short example class:
-```
+```php
 <?php
 
 use Tribe\Libs\Schema\Schema;
@@ -33,14 +33,12 @@ class Update extends Schema {
 ?>
 ```
 
-Then in your service provider you can use the following logic:
-```
-$container[ 'schema.update' ] = function () {
-	return new Update();
-}
+Then in your subscriber you can use the following logic:
+```php
 add_action( 'admin_init', function() use ( $container ) {
-	if ( $container[ 'schema.update' ]->update_required() ) {
-		$container[ 'schema.update' ]->do_updates();
+    $schema = $container->get( Update::class );
+	if ( $schema->update_required() ) {
+		$schema->do_updates();
 	}
 }, 10, 0 );
 ```

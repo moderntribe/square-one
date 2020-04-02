@@ -5,12 +5,6 @@ namespace Tribe\Project\Theme_Customizer;
 
 
 class Customizer_Loader {
-	private $args = [];
-
-	public function __construct( $args = [] ) {
-		$this->args = wp_parse_args( $args, $this->args );
-	}
-
 	/**
 	 * Load all theme customizer controls that are relevant to the current theme
 	 *
