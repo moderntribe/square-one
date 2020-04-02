@@ -31,7 +31,6 @@ module.exports = merge( common, {
 		new webpack.DefinePlugin( {
 			'process.env': { NODE_ENV: JSON.stringify( 'production' ) },
 		} ),
-		new webpack.HashedModuleIdsPlugin(),
 		new webpack.LoaderOptionsPlugin( {
 			debug: false,
 		} ),
@@ -40,7 +39,6 @@ module.exports = merge( common, {
 		} ),
 	],
 	optimization: {
-		namedModules: true, // NamedModulesPlugin()
 		splitChunks: { // CommonsChunkPlugin()
 			name: 'vendor',
 			minChunks: 2,

@@ -32,7 +32,6 @@ module.exports = merge( common, {
 		],
 	},
 	plugins: [
-		new webpack.HashedModuleIdsPlugin(),
 		new MiniCssExtractPlugin( {
 			filename: '../../css/[name].css',
 		} ),
@@ -46,7 +45,6 @@ module.exports = merge( common, {
 		} ),
 	],
 	optimization: {
-		namedModules: true, // NamedModulesPlugin()
 		splitChunks: { // CommonsChunkPlugin()
 			name: 'vendor',
 			minChunks: 2,
