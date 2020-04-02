@@ -23,8 +23,6 @@ import modules from '../modules/index';
 
 import single from '../single/index';
 
-import components from '../components/index';
-
 // @EXAMPLE_REACT_APP
 
 // const el = {
@@ -76,7 +74,6 @@ const init = () => {
 
 	// initialize the main scripts
 
-	components();
 	single();
 
 	// @EXAMPLE_REACT_APP (Make sure to include the wrapping if block for ALL react apps

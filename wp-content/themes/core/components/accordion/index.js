@@ -149,4 +149,4 @@ const init = () => {
 	console.info( 'Square One FE: Initialized accordion component scripts.' );
 };
 
-export default init;
+init();
