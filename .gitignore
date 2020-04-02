@@ -28,6 +28,7 @@ pimple.json
 local-config.php
 cache-config.php
 tests-config.php
+build-process.php
 wp-content/uploads/
 wp-content/blogs.dir/
 wp-content/upgrade/
