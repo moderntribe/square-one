@@ -37,7 +37,7 @@
     "npm": "6.12.1"
   },
   "scripts": {
-    "js:build": "npx webpack --progress --hide-modules",
+    "js:build": "npx webpack --progress",
     "js:theme:dev": "cross-env NODE_ENV=themedev npm run js:build",
     "js:admin:dev": "cross-env NODE_ENV=admindev npm run js:build",
     "js:theme:prod": "cross-env NODE_ENV=themeprod npm run js:build",
@@ -182,9 +182,9 @@
     "stylelint-order": "^3.1.1",
     "terser-webpack-plugin": "^2.2.1",
     "uglifyjs-webpack-plugin": "^2.2.0",
-    "webpack": "^4.41.2",
+    "webpack": "^5.0.0-beta.13",
     "webpack-bundle-analyzer": "^3.6.0",
-    "webpack-cli": "^3.3.10",
+    "webpack-cli": "^4.0.0-beta.8",
     "webpack-dev-server": "^3.9.0",
     "webpack-merge": "^4.2.2",
     "webpack-merge-and-include-globally": "^2.1.20",
