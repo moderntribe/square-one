@@ -16,6 +16,9 @@ module.exports = merge( common, {
 			`./${ pkg.square1.paths.core_theme_js_src }index.js`,
 			...glob.sync( `./${ pkg.square1.paths.core_theme_components }**/index.js` ),
 		],
+		integrations: [
+			...glob.sync( `./${ pkg.square1.paths.core_theme_integrations }**/index.js` ),
+		],
 	},
 	output: {
 		filename: '[name].js',

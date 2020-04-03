@@ -95,6 +95,15 @@ module.exports = {
 			bundleName: 'components.css',
 		} );
 	},
+	themeIntegrations() {
+		return cssProcess( {
+			src: [
+				`${ pkg.square1.paths.core_theme_integrations }**/index.pcss`,
+			],
+			dest: `${ pkg.square1.paths.core_theme_css }`,
+			bundleName: 'integrations.css',
+		} );
+	},
 	themeLegacy() {
 		return cssProcess( {
 			src: [

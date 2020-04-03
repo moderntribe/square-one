@@ -23,6 +23,7 @@ module.exports = merge.strategy( {
 		mode: 'production',
 		entry: {
 			scripts: dev.entry.scripts,
+			integrations: dev.entry.integrations,
 		},
 		output: {
 			filename: '[name].min.js',
