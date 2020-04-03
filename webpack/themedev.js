@@ -3,7 +3,6 @@ const webpack = require( 'webpack' );
 const merge = require( 'webpack-merge' );
 const common = require( './common.js' );
 const rules = require( './rules.js' );
-const vendor = require( './vendors' );
 const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
 const BundleAnalyzerPlugin = require( 'webpack-bundle-analyzer' ).BundleAnalyzerPlugin;
 const glob = require( 'glob' );
@@ -17,11 +16,10 @@ module.exports = merge( common, {
 			`./${ pkg.square1.paths.core_theme_js_src }index.js`,
 			...glob.sync( `./${ pkg.square1.paths.core_theme_components }**/index.js` ),
 		],
-		vendor: vendor.theme,
 	},
 	output: {
 		filename: '[name].js',
-		chunkFilename: '[name].[chunkhash].js',
+		chunkFilename: '[name].js',
 		path: resolve( `${ __dirname }/../`, pkg.square1.paths.core_theme_js_dist ),
 		publicPath: `/${ pkg.square1.paths.core_theme_js_dist }`,
 	},
@@ -46,8 +44,13 @@ module.exports = merge( common, {
 	],
 	optimization: {
 		splitChunks: { // CommonsChunkPlugin()
-			name: 'vendor',
-			minChunks: 2,
+			cacheGroups: {
+				vendor: {
+					test: /[\\/]node_modules[\\/]/,
+					name: 'vendor',
+					chunks: 'all',
+				},
+			},
 		},
 		noEmitOnErrors: true, // NoEmitOnErrorsPlugin
 		concatenateModules: true, //ModuleConcatenationPlugin

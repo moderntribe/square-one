@@ -2,7 +2,6 @@ const { resolve } = require( 'path' );
 const webpack = require( 'webpack' );
 const common = require( './common.js' );
 const rules = require( './rules.js' );
-const vendor = require( './vendors' );
 const merge = require( 'webpack-merge' );
 const TerserPlugin = require( 'terser-webpack-plugin' );
 const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
@@ -14,11 +13,10 @@ module.exports = merge( common, {
 	mode: 'production',
 	entry: {
 		scripts: `./${ pkg.square1.paths.core_admin_js_src }index.js`,
-		vendor: vendor.admin,
 	},
 	output: {
 		filename: '[name].min.js',
-		chunkFilename: '[name].[chunkhash].min.js',
+		chunkFilename: '[name].min.js',
 		path: resolve( `${ __dirname }/../`, pkg.square1.paths.core_admin_js_dist ),
 		publicPath: `/${ pkg.square1.paths.core_admin_js_dist }`,
 	},
@@ -40,8 +38,13 @@ module.exports = merge( common, {
 	],
 	optimization: {
 		splitChunks: { // CommonsChunkPlugin()
-			name: 'vendor',
-			minChunks: 2,
+			cacheGroups: {
+				vendor: {
+					test: /[\\/]node_modules[\\/]/,
+					name: 'vendor',
+					chunks: 'all',
+				},
+			},
 		},
 		noEmitOnErrors: true, // NoEmitOnErrorsPlugin
 		concatenateModules: true, //ModuleConcatenationPlugin
