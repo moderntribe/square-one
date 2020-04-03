@@ -14,16 +14,16 @@ module.exports = merge( common, {
 	mode: 'development',
 	entry: {
 		scripts: [
-			`./${ pkg._core_theme_js_src_path }index.js`,
-			...glob.sync( `./${ pkg._core_theme_components_path }**/index.js` ),
+			`./${ pkg.square1.paths.core_theme_js_src }index.js`,
+			...glob.sync( `./${ pkg.square1.paths.core_theme_components }**/index.js` ),
 		],
 		vendor: vendor.theme,
 	},
 	output: {
 		filename: '[name].js',
 		chunkFilename: '[name].[chunkhash].js',
-		path: resolve( `${ __dirname }/../`, pkg._core_theme_js_dist_path ),
-		publicPath: `/${ pkg._core_theme_js_dist_path }`,
+		path: resolve( `${ __dirname }/../`, pkg.square1.paths.core_theme_js_dist ),
+		publicPath: `/${ pkg.square1.paths.core_theme_js_dist }`,
 	},
 	devtool: 'eval-source-map',
 	module: {

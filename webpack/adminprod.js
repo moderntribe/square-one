@@ -13,14 +13,14 @@ module.exports = merge( common, {
 	cache: false,
 	mode: 'production',
 	entry: {
-		scripts: `./${ pkg._core_admin_js_src_path }index.js`,
+		scripts: `./${ pkg.square1.paths.core_admin_js_src }index.js`,
 		vendor: vendor.admin,
 	},
 	output: {
 		filename: '[name].min.js',
 		chunkFilename: '[name].[chunkhash].min.js',
-		path: resolve( `${ __dirname }/../`, pkg._core_admin_js_dist_path ),
-		publicPath: `/${ pkg._core_admin_js_dist_path }`,
+		path: resolve( `${ __dirname }/../`, pkg.square1.paths.core_admin_js_dist ),
+		publicPath: `/${ pkg.square1.paths.core_admin_js_dist }`,
 	},
 	module: {
 		rules: [

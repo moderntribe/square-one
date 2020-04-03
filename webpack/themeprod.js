@@ -29,8 +29,8 @@ module.exports = merge.strategy( {
 		output: {
 			filename: '[name].min.js',
 			chunkFilename: '[name].[chunkhash].min.js',
-			path: resolve( `${ __dirname }/../`, pkg._core_theme_js_dist_path ),
-			publicPath: `/${ pkg._core_theme_js_dist_path }`,
+			path: resolve( `${ __dirname }/../`, pkg.square1.paths.core_theme_js_dist ),
+			publicPath: `/${ pkg.square1.paths.core_theme_js_dist }`,
 		},
 		plugins: [
 			new webpack.DefinePlugin( {
