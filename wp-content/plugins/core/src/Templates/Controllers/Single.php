@@ -57,7 +57,7 @@ class Single extends Abstract_Template {
 			Single_Context::COMMENTS    => $this->get_comments(),
 			Single_Context::BREADCRUMBS => $this->get_breadcrumbs(),
 			Single_Context::PAGINATION  => $this->get_pagination(),
-		] )->render();
+		] )->render( $path );
 	}
 
 	protected function get_comments() {

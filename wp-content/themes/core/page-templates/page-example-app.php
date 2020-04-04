@@ -5,4 +5,4 @@
 
 use Tribe\Project\Templates\Controllers\Page;
 
-echo tribe_template( Page::class, 'page-templates/page-example-app.twig' );
+echo tribe_template( Page::class, 'components/pages/page-example-app/page-example-app.twig' );

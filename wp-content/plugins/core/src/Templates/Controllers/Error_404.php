@@ -43,7 +43,7 @@ class Error_404 extends Abstract_Template {
 			Error_404_Context::FOOTER    => $this->footer->render(),
 			Error_404_Context::TITLE     => $this->get_404_page_title(),
 			Error_404_Context::CONTENT   => $this->get_404_page_content(),
-		] )->render();
+		] )->render( $path );
 	}
 
 	protected function get_404_page_title() {

@@ -59,7 +59,7 @@ class Page extends Abstract_Template {
 			Page_Context::BREADCRUMBS => $this->get_breadcrumbs(),
 			Page_Context::PAGINATION  => $this->get_pagination(),
 			Page_Context::POST        => $this->get_post(),
-		] )->render();
+		] )->render( $path );
 	}
 
 	protected function get_post() {

@@ -54,7 +54,7 @@ class Index extends Abstract_Template {
 			Index_Context::COMMENTS    => $this->get_comments(),
 			Index_Context::BREADCRUMBS => $this->get_breadcrumbs(),
 			Index_Context::PAGINATION  => $this->get_pagination(),
-		] )->render();
+		] )->render( $path );
 	}
 
 	protected function render_posts(): array {

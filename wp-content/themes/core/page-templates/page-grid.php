@@ -5,4 +5,4 @@
 
 use Tribe\Project\Templates\Controllers\Page;
 
-echo tribe_template( Page::class, 'page-templates/page-grid.twig' );
+echo tribe_template( Page::class, 'components/pages/page-grid/page-grid.twig' );

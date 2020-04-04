@@ -5,6 +5,7 @@ namespace Tribe\Project\Templates\Controllers\Page_Templates;
 
 use Tribe\Project\Templates\Abstract_Template;
 use Tribe\Project\Templates\Component_Factory;
+use Tribe\Project\Templates\Components\Pages\Page_Unsupported_Browser;
 use Tribe\Project\Templates\Controllers\Content\Header\Subheader;
 use Tribe\Project\Templates\Controllers\Footer;
 use Tribe\Project\Templates\Controllers\Header;
@@ -15,25 +16,6 @@ use Twig\Environment;
 class Unsupported_Browser extends Abstract_Template {
 	use Copyright;
 
-	protected $path = 'page-templates/page-unsupported-browser.twig';
-
-	/**
-	 * @var Header
-	 */
-	private $header;
-	/**
-	 * @var Subheader
-	 */
-	private $subheader;
-	/**
-	 * @var Main_Sidebar
-	 */
-	private $sidebar;
-	/**
-	 * @var Footer
-	 */
-	private $footer;
-
 	public function __construct(
 		Environment $twig,
 		Component_Factory $factory
@@ -41,27 +23,22 @@ class Unsupported_Browser extends Abstract_Template {
 		parent::__construct( $twig, $factory );
 	}
 
-
-	public function get_data(): array {
-		the_post();
-		$data = [
-			'copyright'                   => $this->get_copyright(),
-			'home_url'                    => home_url( '/' ),
-			'name'                        => get_bloginfo( 'name' ),
-			'css'                         => $this->get_css(),
-			'favicon'                     => $this->get_favicon(),
-			'legacy_browser_title'        => $this->get_legacy_page_title(),
-			'legacy_browser_content'      => $this->get_legacy_page_content(),
-			'legacy_logo_header'          => $this->get_legacy_image_url( 'logo-header.png' ),
-			'legacy_logo_footer'          => $this->get_legacy_image_url( 'logo-footer.png' ),
-			'legacy_browser_icon_chrome'  => $this->get_legacy_image_url( 'chrome.png' ),
-			'legacy_browser_icon_firefox' => $this->get_legacy_image_url( 'firefox.png' ),
-			'legacy_browser_icon_safari'  => $this->get_legacy_image_url( 'safari.png' ),
-			'legacy_browser_icon_ie'      => $this->get_legacy_image_url( 'ie.png' ),
-		];
-
-
-		return $data;
+	public function render( string $path = '' ): string {
+		return $this->factory->get( Page_Unsupported_Browser::class, [
+			Page_Unsupported_Browser::COPYRIGHT    => $this->get_copyright(),
+			Page_Unsupported_Browser::HOME_URL     => home_url( '/' ),
+			Page_Unsupported_Browser::BLOG_NAME    => get_bloginfo( 'name' ),
+			Page_Unsupported_Browser::CSS          => $this->get_css(),
+			Page_Unsupported_Browser::FAVICON      => $this->get_favicon(),
+			Page_Unsupported_Browser::TITLE        => $this->get_legacy_page_title(),
+			Page_Unsupported_Browser::CONTENT      => $this->get_legacy_page_content(),
+			Page_Unsupported_Browser::LOGO_HEADER  => $this->get_legacy_image_url( 'logo-header.png' ),
+			Page_Unsupported_Browser::LOGO_FOOTER  => $this->get_legacy_image_url( 'logo-footer.png' ),
+			Page_Unsupported_Browser::ICON_CHROME  => $this->get_legacy_image_url( 'chrome.png' ),
+			Page_Unsupported_Browser::ICON_FIREFOX => $this->get_legacy_image_url( 'firefox.png' ),
+			Page_Unsupported_Browser::ICON_SAFARI  => $this->get_legacy_image_url( 'safari.png' ),
+			Page_Unsupported_Browser::ICON_IE      => $this->get_legacy_image_url( 'ie.png' ),
+		] )->render( $path );
 	}
 
 	protected function get_favicon() {
