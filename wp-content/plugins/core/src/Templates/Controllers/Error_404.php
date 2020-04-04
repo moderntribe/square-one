@@ -5,12 +5,11 @@ namespace Tribe\Project\Templates\Controllers;
 
 use Tribe\Project\Templates\Abstract_Template;
 use Tribe\Project\Templates\Component_Factory;
+use Tribe\Project\Templates\Components\Pages\Error_404 as Error_404_Context;
 use Tribe\Project\Templates\Controllers\Content\Header\Subheader;
 use Twig\Environment;
 
 class Error_404 extends Abstract_Template {
-	protected $path = '404.twig';
-
 	/**
 	 * @var Header
 	 */
@@ -37,17 +36,14 @@ class Error_404 extends Abstract_Template {
 		$this->footer    = $footer;
 	}
 
-
-	public function get_data(): array {
-		$data = [
-			'header'                    => $this->header->render(),
-			'subheader'                 => $this->subheader->render(),
-			'footer'                    => $this->footer->render(),
-			'error_404_browser_title'   => $this->get_404_page_title(),
-			'error_404_browser_content' => $this->get_404_page_content(),
-		];
-
-		return $data;
+	public function render( string $path = '' ): string {
+		return $this->factory->get( Error_404_Context::class, [
+			Error_404_Context::HEADER    => $this->header->render(),
+			Error_404_Context::SUBHEADER => $this->subheader->render(),
+			Error_404_Context::FOOTER    => $this->footer->render(),
+			Error_404_Context::TITLE     => $this->get_404_page_title(),
+			Error_404_Context::CONTENT   => $this->get_404_page_content(),
+		] )->render();
 	}
 
 	protected function get_404_page_title() {

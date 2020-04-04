@@ -6,14 +6,13 @@ use Tribe\Project\Templates\Abstract_Template;
 use Tribe\Project\Templates\Component_Factory;
 use Tribe\Project\Templates\Components\Breadcrumbs;
 use Tribe\Project\Templates\Components\Button;
+use Tribe\Project\Templates\Components\Pages\Index as Index_Context;
 use Tribe\Project\Templates\Components\Pagination;
 use Tribe\Project\Templates\Controllers\Content\Header\Subheader;
 use Tribe\Project\Theme\Pagination_Util;
 use Twig\Environment;
 
 class Index extends Abstract_Template {
-	protected $path = 'index.twig';
-
 	/**
 	 * @var Header
 	 */
@@ -46,19 +45,16 @@ class Index extends Abstract_Template {
 		$this->footer    = $footer;
 	}
 
-
-	public function get_data(): array {
-		$data = [
-			'header'      => $this->header->render(),
-			'subheader'   => $this->subheader->render(),
-			'posts'       => $this->render_posts(),
-			'footer'      => $this->footer->render(),
-			'comments'    => $this->get_comments(),
-			'breadcrumbs' => $this->get_breadcrumbs(),
-			'pagination'  => $this->get_pagination(),
-		];
-
-		return $data;
+	public function render( string $path = '' ): string {
+		return $this->factory->get( Index_Context::class, [
+			Index_Context::HEADER      => $this->header->render(),
+			Index_Context::SUBHEADER   => $this->subheader->render(),
+			Index_Context::POSTS       => $this->render_posts(),
+			Index_Context::FOOTER      => $this->footer->render(),
+			Index_Context::COMMENTS    => $this->get_comments(),
+			Index_Context::BREADCRUMBS => $this->get_breadcrumbs(),
+			Index_Context::PAGINATION  => $this->get_pagination(),
+		] )->render();
 	}
 
 	protected function render_posts(): array {

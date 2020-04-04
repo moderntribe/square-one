@@ -64,7 +64,7 @@ class Default_Header extends Abstract_Template {
 			Search::FORM_ATTRS    => $form_attrs,
 			Search::LABEL_CLASSES => [ 'c-search__label' ],
 			Search::LABEL_ATTRS   => $label_attrs,
-			Search::LABEL_TEXT    => [ 'Search' ],
+			Search::LABEL_TEXT    => 'Search',
 			Search::INPUT_CLASSES => [ 'c-search__input' ],
 			Search::INPUT_ATTRS   => $input_attrs,
 			Search::SUBMIT_BUTTON => $get_submit_button,

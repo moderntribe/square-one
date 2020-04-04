@@ -3,7 +3,7 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Templates;
 
-use Tribe\Project\Templates\Components\Component;
+use Tribe\Project\Templates\Components\Context;
 use Twig\Environment;
 
 class Component_Factory {
@@ -21,10 +21,10 @@ class Component_Factory {
 	 * @param array  $options
 	 * @param mixed  ...$args
 	 *
-	 * @return Component
+	 * @return Context
 	 */
-	public function get( string $class, $options, ...$args ): Component {
-		if ( ! is_subclass_of( $class, Component::class ) ) {
+	public function get( string $class, array $options = [], ...$args ): Context {
+		if ( ! is_subclass_of( $class, Context::class ) ) {
 			throw new \InvalidArgumentException( 'Only Component subclasses may be requested from the Component factory' );
 		}
 

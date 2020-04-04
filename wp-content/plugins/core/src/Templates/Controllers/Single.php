@@ -7,14 +7,13 @@ use Tribe\Project\Templates\Abstract_Template;
 use Tribe\Project\Templates\Component_Factory;
 use Tribe\Project\Templates\Components\Breadcrumbs;
 use Tribe\Project\Templates\Components\Button;
+use Tribe\Project\Templates\Components\Pages\Single as Single_Context;
 use Tribe\Project\Templates\Components\Pagination;
 use Tribe\Project\Templates\Controllers\Content\Header\Subheader;
 use Tribe\Project\Templates\Controllers\Content\Single\Post;
 use Twig\Environment;
 
 class Single extends Abstract_Template {
-	protected $path = 'single.twig';
-
 	/**
 	 * @var Header
 	 */
@@ -47,20 +46,18 @@ class Single extends Abstract_Template {
 		$this->footer    = $footer;
 	}
 
-
-	public function get_data(): array {
+	public function render( string $path = '' ): string {
 		the_post();
-		$data = [
-			'header'      => $this->header->render(),
-			'subheader'   => $this->subheader->render(),
-			'content'     => $this->content->render(),
-			'footer'      => $this->footer->render(),
-			'comments'    => $this->get_comments(),
-			'breadcrumbs' => $this->get_breadcrumbs(),
-			'pagination'  => $this->get_pagination(),
-		];
 
-		return $data;
+		return $this->factory->get( Single_Context::class, [
+			Single_Context::HEADER      => $this->header->render(),
+			Single_Context::SUBHEADER   => $this->subheader->render(),
+			Single_Context::CONTENT     => $this->content->render(),
+			Single_Context::FOOTER      => $this->footer->render(),
+			Single_Context::COMMENTS    => $this->get_comments(),
+			Single_Context::BREADCRUMBS => $this->get_breadcrumbs(),
+			Single_Context::PAGINATION  => $this->get_pagination(),
+		] )->render();
 	}
 
 	protected function get_comments() {

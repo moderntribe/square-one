@@ -2,37 +2,42 @@
 
 namespace Tribe\Project\Templates\Components;
 
-class Quote extends Component {
+/**
+ * Class Quote
+ *
+ * @property string   $quote
+ * @property string   $cite
+ * @property string[] $classes
+ * @property string[] $quote_attrs
+ * @property string[] $cite_attrs
+ */
+class Quote extends Context {
+	public const QUOTE       = 'quote';
+	public const CITE        = 'cite';
+	public const CLASSES     = 'classes';
+	public const QUOTE_ATTRS = 'quote_attrs';
+	public const CITE_ATTRS  = 'cite_attrs';
 
 	protected $path = __DIR__ . '/quote.twig';
 
-	const QUOTE       = 'quote';
-	const CITE        = 'cite';
-	const CLASSES     = 'classes';
-	const QUOTE_ATTRS = 'quote_attrs';
-	const CITE_ATTRS  = 'cite_attrs';
-
-	protected function parse_options( array $options ): array {
-		$defaults = [
-			self::QUOTE       => '',
-			self::CITE        => '',
-			self::CLASSES     => [],
-			self::QUOTE_ATTRS => [],
-			self::CITE_ATTRS  => [],
-		];
-
-		return wp_parse_args( $options, $defaults );
-	}
-
-	public function get_data(): array {
-		$data = [
-			self::QUOTE       => $this->options[ self::QUOTE ],
-			self::CITE        => $this->options[ self::CITE ],
-			self::CLASSES     => $this->merge_classes( [ 'c-quote' ], $this->options[ self::CLASSES ], true ),
-			self::QUOTE_ATTRS => $this->merge_attrs( [], $this->options[ self::QUOTE_ATTRS ], true ),
-			self::CITE_ATTRS  => $this->merge_attrs( [], $this->options[ self::CITE_ATTRS ], true ),
-		];
-
-		return $data;
-	}
+	protected $properties = [
+		self::QUOTE       => [
+			self::DEFAULT => '',
+		],
+		self::CITE        => [
+			self::DEFAULT => '',
+		],
+		self::CLASSES     => [
+			self::DEFAULT       => [],
+			self::MERGE_CLASSES => [ 'c-quote' ],
+		],
+		self::QUOTE_ATTRS => [
+			self::DEFAULT          => [],
+			self::MERGE_ATTRIBUTES => [],
+		],
+		self::CITE_ATTRS  => [
+			self::DEFAULT          => [],
+			self::MERGE_ATTRIBUTES => [],
+		],
+	];
 }

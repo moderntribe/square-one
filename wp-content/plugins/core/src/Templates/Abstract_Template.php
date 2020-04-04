@@ -47,4 +47,10 @@ abstract class Abstract_Template implements Template_Interface {
 	protected function get_path(): string {
 		return $this->path;
 	}
+
+	public function get_data(): array {
+		return [];
+	}
+
+
 }

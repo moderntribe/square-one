@@ -2,55 +2,72 @@
 
 namespace Tribe\Project\Templates\Components;
 
-class Card extends Component {
+/**
+ * Class Card
+ *
+ * @property string   $before_card
+ * @property string   $after_card
+ * @property string   $title
+ * @property string   $text
+ * @property string   $image
+ * @property string   $pre_title
+ * @property string   $post_title
+ * @property string[] $card_classes
+ * @property string[] $card_header_classes
+ * @property string[] $card_content_classes
+ * @property string   $button
+ */
+class Card extends Context {
+	public const BEFORE_CARD     = 'before_card';
+	public const AFTER_CARD      = 'after_card';
+	public const TITLE           = 'title';
+	public const TEXT            = 'text';
+	public const IMAGE           = 'image';
+	public const PRE_TITLE       = 'pre_title';
+	public const POST_TITLE      = 'post_title';
+	public const CARD_CLASSES    = 'card_classes';
+	public const HEADER_CLASSES  = 'card_header_classes';
+	public const CONTENT_CLASSES = 'card_content_classes';
+	public const BUTTON          = 'button';
 
 	protected $path = __DIR__ . '/card.twig';
 
-	const BEFORE_CARD     = 'before_card';
-	const AFTER_CARD      = 'after_card';
-	const TITLE           = 'title';
-	const TEXT            = 'text';
-	const IMAGE           = 'image';
-	const PRE_TITLE       = 'pre_title';
-	const POST_TITLE      = 'post_title';
-	const CLASSES         = 'card_classes';
-	const HEADER_CLASSES  = 'card_header_classes';
-	const CONTENT_CLASSES = 'card_content_classes';
-	const BUTTON          = 'button';
-
-	protected function parse_options( array $options ): array {
-		$defaults = [
-			self::BEFORE_CARD     => '',
-			self::AFTER_CARD      => '',
-			self::TITLE           => '',
-			self::TEXT            => '',
-			self::IMAGE           => '',
-			self::PRE_TITLE       => '',
-			self::POST_TITLE      => '',
-			self::CLASSES         => [],
-			self::HEADER_CLASSES  => [],
-			self::CONTENT_CLASSES => [],
-			self::BUTTON          => '',
-		];
-
-		return wp_parse_args( $options, $defaults );
-	}
-
-	public function get_data(): array {
-		$data = [
-			self::BEFORE_CARD     => $this->options[ self::BEFORE_CARD ],
-			self::AFTER_CARD      => $this->options[ self::AFTER_CARD ],
-			self::TITLE           => $this->options[ self::TITLE ],
-			self::PRE_TITLE       => $this->options[ self::PRE_TITLE ],
-			self::POST_TITLE      => $this->options[ self::POST_TITLE ],
-			self::CLASSES         => $this->merge_classes( [ 'c-card' ], $this->options[ self::CLASSES ], true ),
-			self::HEADER_CLASSES  => $this->merge_classes( [ 'c-card__header' ], $this->options[ self::HEADER_CLASSES ], true ),
-			self::CONTENT_CLASSES => $this->merge_classes( [ 'c-card__content' ], $this->options[ self::CONTENT_CLASSES ], true ),
-			self::TEXT            => $this->options[ self::TEXT ],
-			self::IMAGE           => $this->options[ self::IMAGE ],
-			self::BUTTON          => $this->options[ self::BUTTON ]
-		];
-
-		return $data;
-	}
+	protected $properties = [
+		self::BEFORE_CARD     => [
+			self::DEFAULT => '',
+		],
+		self::AFTER_CARD      => [
+			self::DEFAULT => '',
+		],
+		self::TITLE           => [
+			self::DEFAULT => '',
+		],
+		self::TEXT            => [
+			self::DEFAULT => '',
+		],
+		self::IMAGE           => [
+			self::DEFAULT => '',
+		],
+		self::PRE_TITLE       => [
+			self::DEFAULT => '',
+		],
+		self::POST_TITLE      => [
+			self::DEFAULT => '',
+		],
+		self::CARD_CLASSES    => [
+			self::DEFAULT       => [],
+			self::MERGE_CLASSES => [ 'c-card' ],
+		],
+		self::HEADER_CLASSES  => [
+			self::DEFAULT       => [],
+			self::MERGE_CLASSES => [ 'c-card__header' ],
+		],
+		self::CONTENT_CLASSES => [
+			self::DEFAULT       => [],
+			self::MERGE_CLASSES => [ 'c-card__content' ],
+		],
+		self::BUTTON          => [
+			self::DEFAULT => '',
+		],
+	];
 }

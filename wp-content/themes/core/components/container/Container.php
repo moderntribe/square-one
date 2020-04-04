@@ -2,34 +2,39 @@
 
 namespace Tribe\Project\Templates\Components;
 
-class Container extends Component {
+/**
+ * Class Container
+ *
+ * A component to contain arbitrary html and take classes/attributes. Useful when
+ * composing more complex ui's in other controllers
+ *
+ * @property string   $content
+ * @property string   $tag
+ * @property string[] $classes
+ * @property string[] $attrs
+ */
+class Container extends Context {
+	public const CONTENT = 'content';
+	public const TAG     = 'tag';
+	public const CLASSES = 'classes';
+	public const ATTRS   = 'attrs';
 
 	protected $path = __DIR__ . '/container.twig';
 
-	const CONTENT       = 'content';
-	const TAG           = 'tag';
-	const CLASSES       = 'classes';
-	const ATTRS         = 'attrs';
-
-	protected function parse_options( array $options ): array {
-		$defaults = [
-			self::CONTENT => '',
-			self::TAG     => 'div',
-			self::CLASSES => [ 'c-container' ],
-			self::ATTRS   => [],
-		];
-
-		return wp_parse_args( $options, $defaults );
-	}
-
-	public function get_data(): array {
-		$data = [
-			self::CONTENT => $this->options[ self::CONTENT ],
-			self::TAG     => $this->options[ self::TAG ],
-			self::CLASSES => $this->merge_classes( [], $this->options[ self::CLASSES ], true ),
-			self::ATTRS   => $this->merge_attrs( [], $this->options[ self::ATTRS ], true ),
-		];
-
-		return $data;
-	}
+	protected $properties = [
+		self::CONTENT => [
+			self::DEFAULT => '',
+		],
+		self::TAG     => [
+			self::DEFAULT => 'div',
+		],
+		self::CLASSES => [
+			self::DEFAULT       => [ 'c-container' ],
+			self::MERGE_CLASSES => [],
+		],
+		self::ATTRS   => [
+			self::DEFAULT          => [],
+			self::MERGE_ATTRIBUTES => [],
+		],
+	];
 }

@@ -8,14 +8,13 @@ use Tribe\Project\Templates\Component_Factory;
 use Tribe\Project\Templates\Components\Breadcrumbs;
 use Tribe\Project\Templates\Components\Button;
 use Tribe\Project\Templates\Components\Image;
+use Tribe\Project\Templates\Components\Pages\Page as Page_Context;
 use Tribe\Project\Templates\Components\Pagination;
 use Tribe\Project\Templates\Controllers\Content\Header\Subheader;
 use Tribe\Project\Templates\Controllers\Sidebar\Main_Sidebar;
 use Twig\Environment;
 
 class Page extends Abstract_Template {
-	protected $path = 'page.twig';
-
 	/**
 	 * @var Header
 	 */
@@ -48,21 +47,19 @@ class Page extends Abstract_Template {
 		$this->footer    = $footer;
 	}
 
-
-	public function get_data(): array {
+	public function render( string $path = '' ): string {
 		the_post();
-		$data = [
-			'header'      => $this->header->render(),
-			'subheader'   => $this->subheader->render(),
-			'sidebar'     => $this->sidebar->render(),
-			'footer'      => $this->footer->render(),
-			'comments'    => $this->get_comments(),
-			'breadcrumbs' => $this->get_breadcrumbs(),
-			'pagination'  => $this->get_pagination(),
-			'post'        => $this->get_post(),
-		];
 
-		return $data;
+		return $this->factory->get( Page_Context::class, [
+			Page_Context::HEADER      => $this->header->render(),
+			Page_Context::SUBHEADER   => $this->subheader->render(),
+			Page_Context::SIDEBAR     => $this->sidebar->render(),
+			Page_Context::FOOTER      => $this->footer->render(),
+			Page_Context::COMMENTS    => $this->get_comments(),
+			Page_Context::BREADCRUMBS => $this->get_breadcrumbs(),
+			Page_Context::PAGINATION  => $this->get_pagination(),
+			Page_Context::POST        => $this->get_post(),
+		] )->render();
 	}
 
 	protected function get_post() {
