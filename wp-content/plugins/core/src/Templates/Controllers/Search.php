@@ -12,7 +12,7 @@ class Search extends Index {
 		Component_Factory $factory,
 		Header $header,
 		Subheader $subheader,
-		Content\Search\Item $item,
+		Content\Search\Item $item, // Different item template, but otherwise the same as Index
 		Footer $footer
 	) {
 		parent::__construct( $twig, $factory, $header, $subheader, $item, $footer );

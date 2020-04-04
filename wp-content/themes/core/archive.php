@@ -1,4 +1,4 @@
 <?php
 
-// Uses same controller and temlate as index.php
+// Uses same controller and template as index.php
 echo tribe_template( \Tribe\Project\Templates\Controllers\Index::class );
