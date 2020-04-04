@@ -6,14 +6,12 @@ namespace Tribe\Project\Templates\Controllers\Content\Header;
 use Tribe\Project\Templates\Abstract_Template;
 use Tribe\Project\Templates\Component_Factory;
 use Tribe\Project\Templates\Components\Button;
+use Tribe\Project\Templates\Components\Header\Header_Default as Header_Context;
 use Tribe\Project\Templates\Components\Search;
 use Tribe\Project\Templates\Controllers\Content\Navigation\Header as Navigation;
-use Tribe\Project\Theme\Logo;
 use Twig\Environment;
 
 class Default_Header extends Abstract_Template {
-	protected $path = 'content/header/default.twig';
-
 	/**
 	 * @var Navigation
 	 */
@@ -24,20 +22,21 @@ class Default_Header extends Abstract_Template {
 		$this->navigation = $navigation;
 	}
 
-	public function get_data(): array {
-		return [
-			'navigation' => $this->navigation->render(),
-			'logo'       => $this->get_logo(),
-			'search'     => $this->get_search(),
-		];
+	public function render( string $path = '' ): string {
+		return $this->factory->get( Header_Context::class, [
+			Header_Context::NAVIGATION => $this->navigation->render(),
+			Header_Context::LOGO       => $this->get_logo(),
+			Header_Context::SEARCH     => $this->get_search(),
+		] )->render( $path );
 	}
 
 	protected function get_logo() {
-		$args = [
-			'echo' => false,
-		];
-
-		return Logo::logo( $args );
+		return sprintf(
+			'<%1$s class="logo" data-js="logo"><a href="%2$s" rel="home">%3$s</a></%1$s>',
+			( is_front_page() ) ? 'h1' : 'div',
+			esc_url( home_url() ),
+			get_bloginfo( 'blogname' )
+		);
 	}
 
 	protected function get_search(): string {

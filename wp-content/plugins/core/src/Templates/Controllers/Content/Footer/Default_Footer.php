@@ -6,6 +6,7 @@ namespace Tribe\Project\Templates\Controllers\Content\Footer;
 use Tribe\Project\Object_Meta\Social_Settings;
 use Tribe\Project\Templates\Abstract_Template;
 use Tribe\Project\Templates\Component_Factory;
+use Tribe\Project\Templates\Components\Footer\Footer_Default as Footer_Context;
 use Tribe\Project\Templates\Controllers\Content\Navigation\Footer as Navigation;
 use Tribe\Project\Templates\Controllers\Traits\Copyright;
 use Twig\Environment;
@@ -25,14 +26,14 @@ class Default_Footer extends Abstract_Template {
 		$this->navigation = $navigation;
 	}
 
-	public function get_data(): array {
-		return [
-			'navigation'    => $this->navigation->render(),
-			'social_follow' => $this->get_social_follow(),
-			'copyright'     => $this->get_copyright(),
-			'home_url'      => home_url( '/' ),
-			'name'          => get_bloginfo( 'name' ),
-		];
+	public function render( string $path = '' ): string {
+		return $this->factory->get( Footer_Context::class, [
+			Footer_Context::NAVIGATION => $this->navigation->render(),
+			Footer_Context::SOCIAL     => $this->get_social_follow(),
+			Footer_Context::COPYRIGHT  => $this->get_copyright(),
+			Footer_Context::HOME_URL   => home_url( '/' ),
+			Footer_Context::BLOG_NAME  => get_bloginfo( 'name' ),
+		] )->render( $path );
 	}
 
 	/**
