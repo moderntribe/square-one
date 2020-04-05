@@ -1,3 +1,3 @@
 <?php
 
-echo tribe_template( \Tribe\Project\Templates\Controllers\Content\Panels\Testimonial::class );
+echo tribe_template( \Tribe\Project\Templates\Controllers\Panels\Testimonial::class );

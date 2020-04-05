@@ -1,3 +1,3 @@
 <?php
 
-echo tribe_template( \Tribe\Project\Templates\Controllers\Content\Panels\MicroNavButtons::class );
+echo tribe_template( \Tribe\Project\Templates\Controllers\Panels\Micronavbuttons::class );

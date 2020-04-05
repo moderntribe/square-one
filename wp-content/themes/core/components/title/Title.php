@@ -27,11 +27,11 @@ class Title extends Context {
 		],
 		self::CLASSES => [
 			self::DEFAULT => [],
-			self::MERGE_CLASSES,
+			self::MERGE_CLASSES => [],
 		],
 		self::ATTRS   => [
 			self::DEFAULT => [],
-			self::MERGE_ATTRIBUTES,
+			self::MERGE_ATTRIBUTES => [],
 		],
 	];
 

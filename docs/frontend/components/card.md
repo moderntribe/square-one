@@ -109,9 +109,9 @@ And the panel controller using the Card component
 ```php
 <?php
 
-namespace Tribe\Project\Templates\Controllers\Content\Panels;
+namespace Tribe\Project\Templates\Controllers\Panels;
 
-use Tribe\Project\Panels\Types\CardGrid as CardGridPanel;
+use Tribe\Project\Panels\Types\Cardgrid as CardGridPanel;
 use Tribe\Project\Templates\Components\Button;
 use Tribe\Project\Templates\Components\Card;
 use Tribe\Project\Templates\Components\Image;
@@ -119,7 +119,7 @@ use Tribe\Project\Templates\Components\Text;
 use Tribe\Project\Templates\Components\Title;
 use Tribe\Project\Theme\Image_Sizes;
 
-class CardGrid extends Panel {
+class Cardgrid extends Panel {
 
 	public function get_data(): array {
 		$data       = parent::get_data();
