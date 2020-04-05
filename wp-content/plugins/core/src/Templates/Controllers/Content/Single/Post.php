@@ -4,31 +4,32 @@
 namespace Tribe\Project\Templates\Controllers\Content\Single;
 
 use Tribe\Project\Templates\Abstract_Template;
+use Tribe\Project\Templates\Components\Content\Single;
 use Tribe\Project\Templates\Components\Image;
 use Tribe\Project\Theme\Social_Links;
 
 class Post extends Abstract_Template {
-	protected $path = 'content/single/post.twig';
-
 	protected $time_formats = [
 		'c',
 	];
 
-	public function get_data(): array {
-		$data['post'] = [
-			'post_type'      => get_post_type(),
-			'title'          => get_the_title(),
-			'content'        => $this->get_content(),
-			'excerpt'        => apply_filters( 'the_excerpt', get_the_excerpt() ),
-			'permalink'      => get_the_permalink(),
-			'featured_image' => $this->get_featured_image(),
-			'time'           => $this->get_time(),
-			'date'           => the_date( '', '', '', false ),
-			'author'         => $this->get_author(),
-			'social_share'   => $this->get_social_share(),
-		];
+	public function render( string $path = '' ): string {
+		return $this->factory->get( Single::class, $this->get_data() )->render( $path );
+	}
 
-		return $data;
+	public function get_data(): array {
+		return [
+			Single::POST_TYPE => get_post_type(),
+			Single::TITLE     => get_the_title(),
+			Single::CONTENT   => $this->get_content(),
+			Single::EXCERPT   => apply_filters( 'the_excerpt', get_the_excerpt() ),
+			Single::PERMALINK => get_the_permalink(),
+			Single::IMAGE     => $this->get_featured_image(),
+			Single::TIMES     => $this->get_time(),
+			Single::DATE      => the_date( '', '', '', false ),
+			Single::AUTHOR    => $this->get_author(),
+			Single::SHARE     => $this->get_social_share(),
+		];
 	}
 
 	public function get_content() {

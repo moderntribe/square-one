@@ -3,23 +3,23 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Templates\Controllers\Content\Search;
 
+use Tribe\Project\Templates\Components\Content\Search_Item;
 use Tribe\Project\Templates\Components\Image;
 use Tribe\Project\Templates\Controllers\Content\Loop\Item as Loop_Item;
 
 class Item extends Loop_Item {
-	protected $path = 'content/search/item.twig';
+	public function render( string $path = '' ): string {
+		return $this->factory->get( Search_Item::class, $this->get_data() )->render( $path );
+	}
 
 	public function get_data(): array {
-		$data['post'] = [
-			'post_type'      => get_post_type(),
-			'title'          => get_the_title(),
-			'content'        => apply_filters( 'the_content', get_the_content() ),
-			'excerpt'        => apply_filters( 'the_excerpt', get_the_excerpt() ),
-			'permalink'      => get_the_permalink(),
-			'featured_image' => $this->get_featured_image(),
+		return [
+			Search_Item::POST_TYPE => get_post_type(),
+			Search_Item::TITLE     => get_the_title(),
+			Search_Item::EXCERPT   => apply_filters( 'the_excerpt', get_the_excerpt() ),
+			Search_Item::PERMALINK => get_the_permalink(),
+			Search_Item::IMAGE     => $this->get_featured_image(),
 		];
-
-		return $data;
 	}
 
 	protected function get_featured_image() {

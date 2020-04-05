@@ -5,11 +5,10 @@ namespace Tribe\Project\Templates\Controllers\Sidebar;
 
 use Tribe\Project\Templates\Abstract_Template;
 use Tribe\Project\Templates\Component_Factory;
+use Tribe\Project\Templates\Components\Sidebar;
 use Twig\Environment;
 
 abstract class Abstract_Sidebar extends Abstract_Template {
-	protected $path = 'sidebar.twig';
-
 	/**
 	 * @var string The ID of this sidebar
 	 */
@@ -22,17 +21,16 @@ abstract class Abstract_Sidebar extends Abstract_Template {
 		parent::__construct( $twig, $factory );
 	}
 
+	public function render( string $path = '' ): string {
+		$active = is_active_sidebar( $this->sidebar_id );
 
-	public function get_data(): array {
-		$sidebar = [];
-
-		$sidebar['active']  = is_active_sidebar( $this->sidebar_id );
-		$sidebar['content'] = $sidebar['active'] ? $this->get_dynamic_sidebar() : '';
-
-		return $sidebar;
+		return $this->factory->get( Sidebar::class, [
+			Sidebar::ACTIVE  => $active,
+			Sidebar::CONTENT => $active ? $this->get_content() : '',
+		] )->render( $path );
 	}
 
-	public function get_dynamic_sidebar() {
+	public function get_content() {
 		ob_start();
 		dynamic_sidebar( $this->sidebar_id );
 

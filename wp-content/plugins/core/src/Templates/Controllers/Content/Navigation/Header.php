@@ -3,18 +3,16 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Templates\Controllers\Content\Navigation;
 
-use Tribe\Project\Service_Providers\Nav_Menu_Provider;
 use Tribe\Project\Templates\Abstract_Template;
+use Tribe\Project\Templates\Components\Header\Navigation;
+use Tribe\Project\Theme\Nav\Menu;
+use Tribe\Project\Theme\Nav\Walker_Nav_Menu_Primary;
 
 class Header extends Abstract_Template {
-	protected $path = 'content/navigation/header.twig';
-
-	public function get_data(): array {
-		return [
-			'menu' => [
-				'primary' => $this->get_primary_nav_menu(),
-			],
-		];
+	public function render( string $path = '' ): string {
+		return $this->factory->get( Navigation::class, [
+			Navigation::MENU => $this->get_primary_nav_menu(),
+		] )->render( $path );
 	}
 
 	public function get_primary_nav_menu() {
@@ -28,10 +26,10 @@ class Header extends Abstract_Template {
 			'items_wrap'      => '%3$s',
 			'fallback_cb'     => false,
 			'echo'            => false,
-			'walker'          => new \Tribe\Project\Theme\Nav\Walker_Nav_Menu_Primary(),
+			'walker'          => new Walker_Nav_Menu_Primary(),
 		];
 
-		return \Tribe\Project\Theme\Nav\Menu::menu( $args );
+		return Menu::menu( $args );
 	}
 
 }

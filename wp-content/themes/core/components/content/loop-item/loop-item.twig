@@ -1,33 +1,33 @@
-<article class="item-loop item-loop--{{ post.post_type }}">
+<article class="item-loop item-loop--{{ post_type }}">
 
 	<header class="item-loop__header">
 
 		<h3 class="item-loop__title">
-			<a href="{{ post.permalink }}" rel="bookmark">
-				{{ post.title }}
+			<a href="{{ permalink }}" rel="bookmark">
+				{{ title }}
 			</a>
 		</h3>
 
 	</header>
 
-	{{ post.featured_image }}
+	{{ featured_image }}
 
-	{{ post.excerpt }}
+	{{ excerpt }}
 
 	<footer class="item-loop__footer">
 
 		<ul class="item-loop__meta">
 
 			<li class="item-loop__meta-date">
-				<time datetime="{{ post.time['c'] }}">
-					{{ post.time['F j, Y'] }}
+				<time datetime="{{ time['c'] }}">
+					{{ time['F j, Y'] }}
 				</time>
 			</li>
 
 			<li class="item-loop__meta-author">
 				{{ __( 'by' )|esc_html }}
-				<a href="{{ post.author.url }}" rel="author">
-					{{ post.author.name }}
+				<a href="{{ author.url }}" rel="author">
+					{{ author.name }}
 				</a>
 			</li>
 
