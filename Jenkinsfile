@@ -100,28 +100,10 @@ pipeline {
                 }
             }
         }
-        stage('Deploy Dev') {
+        stage('Deploy') {
              steps {
-                when {
-                    branch 'server/dev'
-                }
-                echo "Dev!"
-            }
-        }
-        stage('Deploy Staging') {
-             steps {
-                when {
-                    branch 'server/staging'
-                }
-                echo "Staging!"
-            }
-        }
-        stage('Deploy Prod') {
-             steps {
-                when {
-                    branch 'server/production'
-                }
-                echo "Production!"
+             	dir('dev/deploy')
+                sh script: "sh deploy_hosted_git.sh ${env.ENVIRONMENT} -y", label: "Deploy  ${env.ENVIRONMENT}"
             }
         }
     }
@@ -136,9 +118,6 @@ pipeline {
         success {
             slackSend(channel: "${SLACK_CHANNEL}", color: 'good', message: "Pipeline: Deployment of `${APP_NAME}` branch `${env.BRANCH_NAME}` to `${env.DEPLOY_TO}` was SUCCESSFUL. (build: <${RUN_DISPLAY_URL}|#${BUILD_NUMBER}>)")
         }
-    }
-    options {
-        skipDefaultCheckout()
     }
 }
 
