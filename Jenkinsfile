@@ -105,7 +105,7 @@ pipeline {
         // DEPLOYMENT
         stage('Deploy') {
              steps {
-                dir('dev/deploy'){
+                dir('./dev/deploy/'){
                     sh script: "deploy_hosted_git.sh ${env.ENVIRONMENT} -y", label: "Deploy to ${env.ENVIRONMENT}"
                 }
             }
