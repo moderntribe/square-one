@@ -104,16 +104,52 @@ pipeline {
         }
         // DEPLOYMENT
         stage('Deploy') {
-              agent {
-                 docker {
-                     image 'bash:latest'
-                     reuseNode true
-                 }
-             }
              steps {
-                dir('./dev/deploy/'){
-                    sh script: "deploy_hosted_git.sh ${env.ENVIRONMENT} -y", label: "Deploy to ${env.ENVIRONMENT}"
-                }
+                sh script: """
+                  rsync -rp --delete ${env.BUILD_FOLDER}/wp/ ${env.DEPLOY_FOLDER} \
+                    --exclude=.git \
+                    --exclude=.gitmodules \
+                    --exclude=.gitignore \
+                    --exclude=.htaccess \
+                    --exclude=wp-config.php \
+                    --exclude=wp-content
+                  rsync -rp --delete ${env.BUILD_FOLDER}/wp-content ${env.DEPLOY_FOLDER} \
+                    --exclude=.git \
+                    --exclude=.gitmodules \
+                    --exclude=.gitignore \
+                    --exclude=.htaccess \
+                    --exclude=.babelrc \
+                    --exclude=.editorconfig \
+                    --exclude=.eslintrc \
+                    --exclude=dev \
+                    --exclude=dev_components \
+                    --exclude=docs \
+                    --exclude=gulp_tasks \
+                    --exclude=node_modules \
+                    --exclude=wp-content/object-cache.php \
+                    --exclude=wp-content/plugins/core/assets/templates/cli
+                  # not wp-config.php. WP Engine manages that
+                  rsync -rp ${env.BUILD_FOLDER} ${env.DEPLOY_FOLDER} \
+                    --include=build-process.php \
+                    --include=.wpengine.htaccess \
+                    --include=vendor/*** \
+                    --exclude=*
+                """, label: "Sync files to WPEngine git directory"
+
+                dir("${WPENGINE_FOLDER}") {
+                  sshagent (credentials: ["${GIT_SSH_KEYS}"]) {
+                    // WPEngine Git deploy
+                    dir(DEPLOY_FOLDER){
+                        sh script: """
+                          git add -Av
+                          git commit --allow-empty -m 'Deploying ${env.BRANCH_NAME} to ${env.ENVIRONMENT}'
+                          git push master
+                        """, label: "WPEngine Git Deploy"
+                    }
+                  }
+
+
+
             }
         }
     }
