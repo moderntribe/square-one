@@ -5,11 +5,11 @@ namespace Tribe\Project\Templates\Controllers\Pages;
 
 use Tribe\Project\Templates\Abstract_Controller;
 use Tribe\Project\Templates\Component_Factory;
-use Tribe\Project\Templates\Components\Context;
 use Tribe\Project\Templates\Components\Pages\Error_404 as Error_404_Context;
 use Tribe\Project\Templates\Components\Pages\Page_Wrap;
 use Tribe\Project\Templates\Controllers\Footer\Footer_Wrap;
 use Tribe\Project\Templates\Controllers\Header\Header_Wrap;
+use Tribe\Project\Templates\Template_Interface;
 
 class Error_404 extends Abstract_Controller {
 	/**
@@ -39,7 +39,7 @@ class Error_404 extends Abstract_Controller {
 		] )->render();
 	}
 
-	protected function build_content(): Context {
+	protected function build_content(): Template_Interface {
 		return $this->factory->get( Error_404_Context::class, [
 			Error_404_Context::TITLE   => $this->get_404_page_title(),
 			Error_404_Context::CONTENT => $this->get_404_page_content(),

@@ -7,7 +7,6 @@ use Tribe\Project\Templates\Abstract_Controller;
 use Tribe\Project\Templates\Component_Factory;
 use Tribe\Project\Templates\Components\Breadcrumbs;
 use Tribe\Project\Templates\Components\Button;
-use Tribe\Project\Templates\Components\Context;
 use Tribe\Project\Templates\Components\Pages\Page_Wrap;
 use Tribe\Project\Templates\Components\Pages\Single as Single_Context;
 use Tribe\Project\Templates\Components\Pagination;
@@ -15,6 +14,7 @@ use Tribe\Project\Templates\Controllers\Content;
 use Tribe\Project\Templates\Controllers\Footer\Footer_Wrap;
 use Tribe\Project\Templates\Controllers\Header\Header_Wrap;
 use Tribe\Project\Templates\Controllers\Header\Subheader;
+use Tribe\Project\Templates\Template_Interface;
 
 class Single extends Abstract_Controller {
 	/**
@@ -58,7 +58,7 @@ class Single extends Abstract_Controller {
 		] )->render();
 	}
 
-	protected function build_content(): Context {
+	protected function build_content(): Template_Interface {
 		return $this->factory->get( Single_Context::class, [
 			Single_Context::SUBHEADER   => $this->subheader->render(),
 			Single_Context::CONTENT     => $this->content->render(),

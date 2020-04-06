@@ -8,7 +8,6 @@ use Tribe\Project\Templates\Abstract_Controller;
 use Tribe\Project\Templates\Component_Factory;
 use Tribe\Project\Templates\Components\Breadcrumbs;
 use Tribe\Project\Templates\Components\Button;
-use Tribe\Project\Templates\Components\Context;
 use Tribe\Project\Templates\Components\Image;
 use Tribe\Project\Templates\Components\Pages\Page as Page_Context;
 use Tribe\Project\Templates\Components\Pages\Page_Wrap;
@@ -17,6 +16,7 @@ use Tribe\Project\Templates\Controllers\Footer\Footer_Wrap;
 use Tribe\Project\Templates\Controllers\Header\Header_Wrap;
 use Tribe\Project\Templates\Controllers\Header\Subheader;
 use Tribe\Project\Templates\Controllers\Sidebar\Main_Sidebar;
+use Tribe\Project\Templates\Template_Interface;
 
 class Page extends Abstract_Controller {
 	/**
@@ -61,7 +61,7 @@ class Page extends Abstract_Controller {
 		] )->render();
 	}
 
-	protected function build_content(): Context {
+	protected function build_content(): Template_Interface {
 		return $this->factory->get( Page_Context::class, [
 			Page_Context::SUBHEADER   => $this->subheader->render(),
 			Page_Context::COMMENTS    => $this->get_comments(),

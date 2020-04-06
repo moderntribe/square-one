@@ -25,7 +25,7 @@ class Component_Factory {
 	 */
 	public function get( string $class, array $options = [], ...$args ): Context {
 		if ( ! is_subclass_of( $class, Context::class ) ) {
-			throw new \InvalidArgumentException( 'Only Component subclasses may be requested from the Component factory' );
+			throw new \InvalidArgumentException( 'Only Context subclasses may be requested from the Component factory' );
 		}
 
 		return new $class( $this->twig, $this, $options, ...$args );
