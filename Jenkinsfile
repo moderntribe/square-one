@@ -14,12 +14,14 @@ pipeline {
 
     stages {
         stage('Checkout SCM'){
-            // checkout scm
-            checkout([$class: 'GitSCM',
-                branches: [[name: "${env.BRANCH_NAME}" ]],
-                extensions: [[$class: 'WipeWorkspace'], [$class: 'RelativeTargetDirectory',  relativeTargetDir: BUILD_FOLDER]],
-                userRemoteConfigs: [[url: "git@github.com:${env.GIT_REPO}", credentialsId: "${JENKINS_SSH_KEYS}"]]
-            ])
+           steps {
+               // checkout scm
+                checkout([$class: 'GitSCM',
+                    branches: [[name: "${env.BRANCH_NAME}" ]],
+                    extensions: [[$class: 'WipeWorkspace'], [$class: 'RelativeTargetDirectory',  relativeTargetDir: BUILD_FOLDER]],
+                    userRemoteConfigs: [[url: "git@github.com:${env.GIT_REPO}", credentialsId: "${JENKINS_SSH_KEYS}"]]
+                ])
+            }
         }
 
          // BUILD
