@@ -1,33 +1,33 @@
 <?php
 declare( strict_types=1 );
 
-namespace Tribe\Project\Templates\Controllers\Content\Loop;
+namespace Tribe\Project\Templates\Controllers\Content;
 
 use Tribe\Project\Templates\Abstract_Template;
-use Tribe\Project\Templates\Components\Content\Loop_Item;
+use Tribe\Project\Templates\Components\Content\Loop_Item as Item_Context;
 use Tribe\Project\Templates\Components\Image;
 use Tribe\Project\Theme\Image_Sizes;
 
-class Item extends Abstract_Template {
+class Loop_Item extends Abstract_Template {
 	protected $time_formats = [
 		'c',
 		'F j, Y',
 	];
 
 	public function render( string $path = '' ): string {
-		return $this->factory->get( Loop_Item::class, $this->get_data() )->render( $path );
+		return $this->factory->get( Item_Context::class, $this->get_data() )->render( $path );
 	}
 
 	public function get_data(): array {
 		return [
-			Loop_Item::POST_TYPE => get_post_type(),
-			Loop_Item::TITLE     => get_the_title(),
-			Loop_Item::CONTENT   => apply_filters( 'the_content', get_the_content() ),
-			Loop_Item::EXCERPT   => apply_filters( 'the_excerpt', get_the_excerpt() ),
-			Loop_Item::PERMALINK => get_the_permalink(),
-			Loop_Item::IMAGE     => $this->get_featured_image(),
-			Loop_Item::TIMES     => $this->get_time(),
-			Loop_Item::AUTHOR    => $this->get_author(),
+			Item_Context::POST_TYPE => get_post_type(),
+			Item_Context::TITLE     => get_the_title(),
+			Item_Context::CONTENT   => apply_filters( 'the_content', get_the_content() ),
+			Item_Context::EXCERPT   => apply_filters( 'the_excerpt', get_the_excerpt() ),
+			Item_Context::PERMALINK => get_the_permalink(),
+			Item_Context::IMAGE     => $this->get_featured_image(),
+			Item_Context::TIMES     => $this->get_time(),
+			Item_Context::AUTHOR    => $this->get_author(),
 		];
 	}
 

@@ -1,15 +1,15 @@
 <?php
 declare( strict_types=1 );
 
-namespace Tribe\Project\Templates\Controllers;
+namespace Tribe\Project\Templates\Controllers\Footer;
 
 use Tribe\Project\Templates\Abstract_Template;
 use Tribe\Project\Templates\Component_Factory;
-use Tribe\Project\Templates\Components\Footer\Footer_Wrap;
-use Tribe\Project\Templates\Controllers\Content\Footer\Default_Footer as Footer_Content;
+use Tribe\Project\Templates\Components\Footer\Footer_Wrap as Footer_Context;
+use Tribe\Project\Templates\Controllers\Footer\Footer_Default as Footer_Content;
 use Twig\Environment;
 
-class Footer extends Abstract_Template {
+class Footer_Wrap extends Abstract_Template {
 	/**
 	 * @var Footer_Content
 	 */
@@ -21,8 +21,8 @@ class Footer extends Abstract_Template {
 	}
 
 	public function render( string $path = '' ): string {
-		return $this->factory->get( Footer_Wrap::class, [
-			Footer_Wrap::CONTENT => $this->content->render(),
+		return $this->factory->get( Footer_Context::class, [
+			Footer_Context::CONTENT => $this->content->render(),
 		] )->render( $path );
 	}
 

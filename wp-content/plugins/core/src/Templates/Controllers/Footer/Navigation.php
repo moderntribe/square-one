@@ -1,32 +1,32 @@
 <?php
 declare( strict_types=1 );
 
-namespace Tribe\Project\Templates\Controllers\Content\Navigation;
+namespace Tribe\Project\Templates\Controllers\Footer;
 
 use Tribe\Project\Templates\Abstract_Template;
-use Tribe\Project\Templates\Components\Header\Navigation;
+use Tribe\Project\Templates\Components\Footer\Navigation as Navigation_Context;
 use Tribe\Project\Theme\Nav\Menu;
-use Tribe\Project\Theme\Nav\Walker_Nav_Menu_Primary;
 
-class Header extends Abstract_Template {
+class Navigation extends Abstract_Template {
+
 	public function render( string $path = '' ): string {
-		return $this->factory->get( Navigation::class, [
-			Navigation::MENU => $this->get_primary_nav_menu(),
+		return $this->factory->get( Navigation_Context::class, [
+			Navigation_Context::MENU => $this->get_primary_nav_menu(),
 		] )->render( $path );
 	}
 
 	public function get_primary_nav_menu() {
 		$args = [
-			'theme_location'  => 'primary',
+			'theme_location'  => 'secondary',
 			'container'       => false,
 			'container_class' => '',
 			'menu_class'      => '',
 			'menu_id'         => '',
-			'depth'           => 3,
+			'depth'           => 1,
 			'items_wrap'      => '%3$s',
 			'fallback_cb'     => false,
 			'echo'            => false,
-			'walker'          => new Walker_Nav_Menu_Primary(),
+			'item_spacing'    => 'discard',
 		];
 
 		return Menu::menu( $args );

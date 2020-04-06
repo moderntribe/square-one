@@ -1,24 +1,23 @@
 <?php
 declare( strict_types=1 );
 
-namespace Tribe\Project\Templates\Controllers\Content\Search;
+namespace Tribe\Project\Templates\Controllers\Content;
 
-use Tribe\Project\Templates\Components\Content\Search_Item;
+use Tribe\Project\Templates\Components\Content\Search_Item as Item_Context;
 use Tribe\Project\Templates\Components\Image;
-use Tribe\Project\Templates\Controllers\Content\Loop\Item as Loop_Item;
 
-class Item extends Loop_Item {
+class Search_Item extends Loop_Item {
 	public function render( string $path = '' ): string {
-		return $this->factory->get( Search_Item::class, $this->get_data() )->render( $path );
+		return $this->factory->get( Item_Context::class, $this->get_data() )->render( $path );
 	}
 
 	public function get_data(): array {
 		return [
-			Search_Item::POST_TYPE => get_post_type(),
-			Search_Item::TITLE     => get_the_title(),
-			Search_Item::EXCERPT   => apply_filters( 'the_excerpt', get_the_excerpt() ),
-			Search_Item::PERMALINK => get_the_permalink(),
-			Search_Item::IMAGE     => $this->get_featured_image(),
+			Item_Context::POST_TYPE => get_post_type(),
+			Item_Context::TITLE     => get_the_title(),
+			Item_Context::EXCERPT   => apply_filters( 'the_excerpt', get_the_excerpt() ),
+			Item_Context::PERMALINK => get_the_permalink(),
+			Item_Context::IMAGE     => $this->get_featured_image(),
 		];
 	}
 

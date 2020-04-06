@@ -1,21 +1,24 @@
 <?php
 
 
-namespace Tribe\Project\Templates\Controllers;
+namespace Tribe\Project\Templates\Controllers\Pages;
 
 use Tribe\Project\Templates\Abstract_Template;
 use Tribe\Project\Templates\Component_Factory;
 use Tribe\Project\Templates\Components\Breadcrumbs;
 use Tribe\Project\Templates\Components\Button;
-use Tribe\Project\Templates\Components\Pages\Single as Single_Context;
+use Tribe\Project\Templates\Components\Image;
+use Tribe\Project\Templates\Components\Pages\Page as Page_Context;
 use Tribe\Project\Templates\Components\Pagination;
-use Tribe\Project\Templates\Controllers\Content\Header\Subheader;
-use Tribe\Project\Templates\Controllers\Content\Single\Post;
+use Tribe\Project\Templates\Controllers\Footer\Footer_Wrap;
+use Tribe\Project\Templates\Controllers\Header\Header_Wrap;
+use Tribe\Project\Templates\Controllers\Header\Subheader;
+use Tribe\Project\Templates\Controllers\Sidebar\Main_Sidebar;
 use Twig\Environment;
 
-class Single extends Abstract_Template {
+class Page extends Abstract_Template {
 	/**
-	 * @var Header
+	 * @var Header_Wrap
 	 */
 	private $header;
 	/**
@@ -23,41 +26,71 @@ class Single extends Abstract_Template {
 	 */
 	private $subheader;
 	/**
-	 * @var Content\Single\Post
+	 * @var Main_Sidebar
 	 */
-	private $content;
+	private $sidebar;
 	/**
-	 * @var Footer
+	 * @var Footer_Wrap
 	 */
 	private $footer;
 
 	public function __construct(
 		Environment $twig,
 		Component_Factory $factory,
-		Header $header,
+		Header_Wrap $header,
 		Subheader $subheader,
-		Post $content,
-		Footer $footer
+		Main_Sidebar $sidebar,
+		Footer_Wrap $footer
 	) {
 		parent::__construct( $twig, $factory );
 		$this->header    = $header;
 		$this->subheader = $subheader;
-		$this->content   = $content;
+		$this->sidebar   = $sidebar;
 		$this->footer    = $footer;
 	}
 
 	public function render( string $path = '' ): string {
 		the_post();
 
-		return $this->factory->get( Single_Context::class, [
-			Single_Context::HEADER      => $this->header->render(),
-			Single_Context::SUBHEADER   => $this->subheader->render(),
-			Single_Context::CONTENT     => $this->content->render(),
-			Single_Context::FOOTER      => $this->footer->render(),
-			Single_Context::COMMENTS    => $this->get_comments(),
-			Single_Context::BREADCRUMBS => $this->get_breadcrumbs(),
-			Single_Context::PAGINATION  => $this->get_pagination(),
+		return $this->factory->get( Page_Context::class, [
+			Page_Context::HEADER      => $this->header->render(),
+			Page_Context::SUBHEADER   => $this->subheader->render(),
+			Page_Context::SIDEBAR     => $this->sidebar->render(),
+			Page_Context::FOOTER      => $this->footer->render(),
+			Page_Context::COMMENTS    => $this->get_comments(),
+			Page_Context::BREADCRUMBS => $this->get_breadcrumbs(),
+			Page_Context::PAGINATION  => $this->get_pagination(),
+			Page_Context::POST        => $this->get_post(),
 		] )->render( $path );
+	}
+
+	protected function get_post() {
+		return [
+			'content'        => apply_filters( 'the_content', get_the_content() ),
+			'permalink'      => get_the_permalink(),
+			'featured_image' => $this->get_featured_image(),
+		];
+	}
+
+	protected function get_featured_image() {
+		$image_id = get_post_thumbnail_id();
+
+		if ( empty( $image_id ) ) {
+			return '';
+		}
+
+		try {
+			$image = \Tribe\Project\Templates\Models\Image::factory( $image_id );
+		} catch ( \Exception $e ) {
+			return '';
+		}
+
+		$options = [
+			Image::ATTACHMENT      => $image,
+			Image::WRAPPER_CLASSES => [ 'page__image' ],
+		];
+
+		return $this->factory->get( Image::class, $options )->render();
 	}
 
 	protected function get_comments() {

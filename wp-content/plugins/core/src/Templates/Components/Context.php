@@ -11,7 +11,6 @@ abstract class Context implements Template_Interface {
 
 	protected const DEFAULT          = 'default_value';
 	protected const VALUE            = 'value';
-	protected const MERGE            = 'merge_behavior';
 	protected const MERGE_ATTRIBUTES = 'merge_attributes';
 	protected const MERGE_CLASSES    = 'merge_classes';
 	protected const DISABLE_MERGE    = 'disable_merge';

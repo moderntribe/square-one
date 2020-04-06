@@ -1,3 +1,3 @@
 <?php
 
-echo tribe_template( \Tribe\Project\Templates\Controllers\Page_Templates\Unsupported_Browser::class );
+echo tribe_template( \Tribe\Project\Templates\Controllers\Pages\Page_Unsupported_Browser::class );

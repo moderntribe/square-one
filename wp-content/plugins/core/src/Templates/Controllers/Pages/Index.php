@@ -1,6 +1,6 @@
 <?php
 
-namespace Tribe\Project\Templates\Controllers;
+namespace Tribe\Project\Templates\Controllers\Pages;
 
 use Tribe\Project\Templates\Abstract_Template;
 use Tribe\Project\Templates\Component_Factory;
@@ -8,13 +8,16 @@ use Tribe\Project\Templates\Components\Breadcrumbs;
 use Tribe\Project\Templates\Components\Button;
 use Tribe\Project\Templates\Components\Pages\Index as Index_Context;
 use Tribe\Project\Templates\Components\Pagination;
-use Tribe\Project\Templates\Controllers\Content\Header\Subheader;
+use Tribe\Project\Templates\Controllers\Content;
+use Tribe\Project\Templates\Controllers\Footer\Footer_Wrap;
+use Tribe\Project\Templates\Controllers\Header\Header_Wrap;
+use Tribe\Project\Templates\Controllers\Header\Subheader;
 use Tribe\Project\Theme\Pagination_Util;
 use Twig\Environment;
 
 class Index extends Abstract_Template {
 	/**
-	 * @var Header
+	 * @var Header_Wrap
 	 */
 	private $header;
 	/**
@@ -22,21 +25,21 @@ class Index extends Abstract_Template {
 	 */
 	private $subheader;
 	/**
-	 * @var Content\Loop\Item
+	 * @var Content\Loop_Item
 	 */
 	private $item;
 	/**
-	 * @var Footer
+	 * @var Footer_Wrap
 	 */
 	private $footer;
 
 	public function __construct(
 		Environment $twig,
 		Component_Factory $factory,
-		Header $header,
+		Header_Wrap $header,
 		Subheader $subheader,
-		Content\Loop\Item $item,
-		Footer $footer
+		Content\Loop_Item $item,
+		Footer_Wrap $footer
 	) {
 		parent::__construct( $twig, $factory );
 		$this->header    = $header;

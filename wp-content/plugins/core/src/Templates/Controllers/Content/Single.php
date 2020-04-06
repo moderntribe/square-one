@@ -1,34 +1,34 @@
 <?php
 
 
-namespace Tribe\Project\Templates\Controllers\Content\Single;
+namespace Tribe\Project\Templates\Controllers\Content;
 
 use Tribe\Project\Templates\Abstract_Template;
-use Tribe\Project\Templates\Components\Content\Single;
+use Tribe\Project\Templates\Components\Content\Single as Single_Context;
 use Tribe\Project\Templates\Components\Image;
 use Tribe\Project\Theme\Social_Links;
 
-class Post extends Abstract_Template {
+class Single extends Abstract_Template {
 	protected $time_formats = [
 		'c',
 	];
 
 	public function render( string $path = '' ): string {
-		return $this->factory->get( Single::class, $this->get_data() )->render( $path );
+		return $this->factory->get( Single_Context::class, $this->get_data() )->render( $path );
 	}
 
 	public function get_data(): array {
 		return [
-			Single::POST_TYPE => get_post_type(),
-			Single::TITLE     => get_the_title(),
-			Single::CONTENT   => $this->get_content(),
-			Single::EXCERPT   => apply_filters( 'the_excerpt', get_the_excerpt() ),
-			Single::PERMALINK => get_the_permalink(),
-			Single::IMAGE     => $this->get_featured_image(),
-			Single::TIMES     => $this->get_time(),
-			Single::DATE      => the_date( '', '', '', false ),
-			Single::AUTHOR    => $this->get_author(),
-			Single::SHARE     => $this->get_social_share(),
+			Single_Context::POST_TYPE => get_post_type(),
+			Single_Context::TITLE     => get_the_title(),
+			Single_Context::CONTENT   => $this->get_content(),
+			Single_Context::EXCERPT   => apply_filters( 'the_excerpt', get_the_excerpt() ),
+			Single_Context::PERMALINK => get_the_permalink(),
+			Single_Context::IMAGE     => $this->get_featured_image(),
+			Single_Context::TIMES     => $this->get_time(),
+			Single_Context::DATE      => the_date( '', '', '', false ),
+			Single_Context::AUTHOR    => $this->get_author(),
+			Single_Context::SHARE     => $this->get_social_share(),
 		];
 	}
 

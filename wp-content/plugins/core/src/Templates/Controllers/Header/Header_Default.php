@@ -1,17 +1,17 @@
 <?php
 declare( strict_types=1 );
 
-namespace Tribe\Project\Templates\Controllers\Content\Header;
+namespace Tribe\Project\Templates\Controllers\Header;
 
 use Tribe\Project\Templates\Abstract_Template;
 use Tribe\Project\Templates\Component_Factory;
 use Tribe\Project\Templates\Components\Button;
 use Tribe\Project\Templates\Components\Header\Header_Default as Header_Context;
 use Tribe\Project\Templates\Components\Search;
-use Tribe\Project\Templates\Controllers\Content\Navigation\Header as Navigation;
+use Tribe\Project\Templates\Controllers\Header\Navigation as Navigation;
 use Twig\Environment;
 
-class Default_Header extends Abstract_Template {
+class Header_Default extends Abstract_Template {
 	/**
 	 * @var Navigation
 	 */
