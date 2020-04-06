@@ -147,9 +147,7 @@ pipeline {
                         """, label: "WPEngine Git Deploy"
                     }
                   }
-
-
-
+                }
             }
         }
     }
