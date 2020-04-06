@@ -108,7 +108,8 @@ pipeline {
                     --exclude=.gitignore \
                     --exclude=.htaccess \
                     --exclude=wp-config.php \
-                    --exclude=wp-content \
+                    --exclude=wp-content
+
                   rsync -rpv --delete ${env.BUILD_FOLDER}/wp-content ${env.DEPLOY_FOLDER} \
                     --exclude=.git \
                     --exclude=.gitmodules \
@@ -124,9 +125,10 @@ pipeline {
                     --exclude=node_modules \
                     --exclude=wp-content/object-cache.php \
                     --exclude=wp-content/plugins/core/assets/templates/cli
+
                   rsync -rpv ${env.BUILD_FOLDER}/ ${env.DEPLOY_FOLDER} \
                     --include=build-process.php \
-                    --include=vendor/* \
+                    --include=vendor/*** \
                     --exclude=*
                 """, label: "Sync files to Deploy git directory"
 
