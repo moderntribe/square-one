@@ -135,7 +135,7 @@ pipeline {
                     --exclude=*
                 """, label: "Sync files to Deploy git directory"
 
-                  sshagent (credentials: ["${GIT_SSH_KEYS}"]) {
+                  sshagent (credentials: ["${HOST_SSH_KEYS}"]) {
                     // Host Git deploy
                     dir(DEPLOY_FOLDER){
                         sh script: """
