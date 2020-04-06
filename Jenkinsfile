@@ -106,14 +106,14 @@ pipeline {
         stage('Deploy') {
              steps {
                 sh script: """
-                  rsync -rp --delete ${env.BUILD_FOLDER}/wp/ ${env.DEPLOY_FOLDER} \
+                  rsync -rpv --delete ${env.BUILD_FOLDER}/wp/ ${env.DEPLOY_FOLDER} \
                     --exclude=.git \
                     --exclude=.gitmodules \
                     --exclude=.gitignore \
                     --exclude=.htaccess \
                     --exclude=wp-config.php \
                     --exclude=wp-content
-                  rsync -rp --delete ${env.BUILD_FOLDER}/wp-content ${env.DEPLOY_FOLDER} \
+                  rsync -rpv --delete ${env.BUILD_FOLDER}/wp-content ${env.DEPLOY_FOLDER} \
                     --exclude=.git \
                     --exclude=.gitmodules \
                     --exclude=.gitignore \
@@ -129,7 +129,7 @@ pipeline {
                     --exclude=wp-content/object-cache.php \
                     --exclude=wp-content/plugins/core/assets/templates/cli
                   # not wp-config.php. WP Engine manages that
-                  rsync -rp ${env.BUILD_FOLDER} ${env.DEPLOY_FOLDER} \
+                  rsync -rpv ${env.BUILD_FOLDER} ${env.DEPLOY_FOLDER} \
                     --include=build-process.php \
                     --include=vendor/*** \
                     --exclude=*
@@ -141,7 +141,7 @@ pipeline {
                         sh script: """
                           git add -Av
                           git commit --allow-empty -m 'Deploying ${env.BRANCH_NAME} to ${env.ENVIRONMENT}'
-                          git push master
+                          git push origin master
                         """, label: "Host Git Deploy"
                     }
                   }
@@ -154,10 +154,10 @@ pipeline {
             cleanWs()
         }
         failure {
-            slackSend(channel: "${SLACK_CHANNEL}", color: 'danger', message: "Pipeline: Deploying `${APP_NAME}` branch `${env.BRANCH_NAME}` to `${env.DEPLOY_TO}` FAILED: (build: <${RUN_DISPLAY_URL}|#${BUILD_NUMBER}>)")
+            slackSend(channel: "${SLACK_CHANNEL}", color: 'danger', message: "Pipeline: Deploying `${APP_NAME}` branch `${env.BRANCH_NAME}` to `${env.ENVIRONMENT}` FAILED: (build: <${RUN_DISPLAY_URL}|#${BUILD_NUMBER}>)")
         }
         success {
-            slackSend(channel: "${SLACK_CHANNEL}", color: 'good', message: "Pipeline: Deployment of `${APP_NAME}` branch `${env.BRANCH_NAME}` to `${env.DEPLOY_TO}` was SUCCESSFUL. (build: <${RUN_DISPLAY_URL}|#${BUILD_NUMBER}>)")
+            slackSend(channel: "${SLACK_CHANNEL}", color: 'good', message: "Pipeline: Deployment of `${APP_NAME}` branch `${env.BRANCH_NAME}` to `${env.ENVIRONMENT}` was SUCCESSFUL. (build: <${RUN_DISPLAY_URL}|#${BUILD_NUMBER}>)")
         }
     }
 }
