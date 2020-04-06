@@ -108,7 +108,8 @@ pipeline {
                     --exclude=.gitignore \
                     --exclude=.htaccess \
                     --exclude=wp-config.php \
-                    --exclude=wp-content
+                    --exclude=wp-content \
+                    --exclude=vendor \
                   rsync -rpv --delete ${env.BUILD_FOLDER}/wp-content ${env.DEPLOY_FOLDER} \
                     --exclude=.git \
                     --exclude=.gitmodules \
