@@ -4,26 +4,26 @@ pipeline {
     environment {
         APP_NAME = "square-one"
         GIT_REPO = "moderntribe/${APP_NAME}.git"
-        BUILD_FOLDER = "dev/deploy/.deploy/build"
-        DEPLOY_FOLDER = "dev/deploy/.deploy/deploy"
+        BUILD_FOLDER = "./dev/deploy/.deploy/build"
+        DEPLOY_FOLDER = "./dev/deploy/.deploy/deploy"
         GITHUB_TOKEN = credentials('tr1b0t-github-api-token')
         JENKINS_VAULTPASS = "${env.APP_NAME}-vaultpass"
-        ENVIRONMENT_CONFIG = "./dev/deploy/.host/config/"
+        ENVIRONMENT_CONFIG = "./dev/deploy/.deploy/build/.host/config/"
         SLACK_CHANNEL = 'nicks-playground'
     }
 
     stages {
+        stage('Checkout SCM'){
+            // checkout scm
+            checkout([$class: 'GitSCM',
+                branches: [[name: "${env.BRANCH_NAME}" ]],
+                extensions: [[$class: 'WipeWorkspace'], [$class: 'RelativeTargetDirectory',  relativeTargetDir: BUILD_FOLDER]],
+                userRemoteConfigs: [[url: "git@github.com:${env.GIT_REPO}", credentialsId: "${JENKINS_SSH_KEYS}"]]
+            ])
+        }
+
          // BUILD
         stage('Build Processes') {
-            stage('Checkout SCM'){
-                // checkout scm
-                checkout([$class: 'GitSCM',
-                    branches: [[name: "${params.BRANCH}" ]],
-                    extensions: [[$class: 'WipeWorkspace'], [$class: 'RelativeTargetDirectory',  relativeTargetDir: '.deploy/build']],
-                    userRemoteConfigs: [[url: "git@github.com:${env.GIT_REPO}", credentialsId: "${JENKINS_SSH_KEYS}"]]
-                ])
-            }
-
             parallel {
                 stage('Composer') {
                     agent {
@@ -37,10 +37,12 @@ pipeline {
                         echo "${env.BRANCH_NAME} - ${params.SLACK_CHANNEL}"
                         slackSend(channel: "${SLACK_CHANNEL}", message: "Pipeline: Deployment of `${APP_NAME}` to `${env.BRANCH_NAME}` STARTED: (build: <${RUN_DISPLAY_URL}|#${BUILD_NUMBER}>)")
                         withCredentials([file(credentialsId: "square-one-compose-plugins-keys", variable: "ENV_FILE")]) {
-                            sh script: "cp $ENV_FILE .env", label: "Copy Composer .env to the root folder"
-                            sh "composer config -g github-oauth.github.com ${GITHUB_TOKEN}"
-                            sh script:  "composer install --ignore-platform-reqs --no-dev", label: "Composer install"
-                            sh "rm .env"
+                            dir(BUILD_FOLDER){
+                                sh script: "cp $ENV_FILE .env", label: "Copy Composer .env to the root folder"
+                                sh "composer config -g github-oauth.github.com ${GITHUB_TOKEN}"
+                                sh script:  "composer install --ignore-platform-reqs --no-dev", label: "Composer install"
+                                sh "rm .env"
+                            }
                         }
                     }
                 }
@@ -53,19 +55,21 @@ pipeline {
                         }
                     }
                     steps {
-                        // Install dependencies
-                        sh 'apk add --no-cache git openssh'
-                        sh 'npm install -g gulp-cli'
+                        dir(BUILD_FOLDER){
+                            // Install dependencies
+                            sh 'apk add --no-cache git openssh'
+                            sh 'npm install -g gulp-cli'
 
-                        sh 'yarn install'
-                        sh 'cp local-config-sample.json local-config.json'
-                        sh 'gulp server_dist'
+                            sh 'yarn install'
+                            sh 'cp local-config-sample.json local-config.json'
+                            sh 'gulp server_dist'
 
-                        // Clean Up before packaging
-                        sh 'rm -rf node_modules'
+                            // Clean Up before packaging
+                            sh 'rm -rf node_modules'
 
-                        // Jenkins as owner
-                        sh 'chown -R 110:117 .'
+                            // Jenkins as owner
+                            sh 'chown -R 110:117 .'
+                        }
                     }
                 }
             }
@@ -75,9 +79,11 @@ pipeline {
             steps {
                 // Decrypt values
                 withCredentials([string(credentialsId: "${JENKINS_VAULTPASS}", variable: 'vaultPass')]) {
-                    sh script: "echo '${vaultPass}' > ./.vaultpass", label: "Write vaultpass to local folder"
-                    sh script: "ansible-vault decrypt ${env.ENVIRONMENT_CONFIG}.vaulted --output=${env.ENVIRONMENT_CONFIG} --vault-password-file ./.vaultpass", label: "Decrypt config config file"
-                    sh 'rm ./.vaultpass'
+                    dir(BUILD_FOLDER){
+                        sh script: "echo '${vaultPass}' > ./.vaultpass", label: "Write vaultpass to local folder"
+                        sh script: "ansible-vault decrypt ${env.ENVIRONMENT_CONFIG}.vaulted --output=${env.ENVIRONMENT_CONFIG} --vault-password-file ./.vaultpass", label: "Decrypt config config file"
+                        sh 'rm ./.vaultpass'
+                    }
                 }
 
                 // Load WP Engine environment variables
