@@ -8,6 +8,7 @@ pipeline {
         DEPLOY_FOLDER = "./dev/deploy/.deploy/deploy"
         GITHUB_TOKEN = credentials('tr1b0t-github-api-token')
         JENKINS_VAULTPASS = "${env.APP_NAME}-vaultpass"
+        HOST_SSH_KEYS = "${env.APP_NAME}-ssh-key"
         HOST_CONFIG = "./dev/deploy/.host/config/"
         SLACK_CHANNEL = 'nicks-playground'
         ENVIRONMENT = environment()
@@ -93,7 +94,7 @@ pipeline {
                 loadEnvironmentVariables("${env.HOST_CONFIG}${env.ENVIRONMENT}.cfg")
 
                 // checkout scm WPEngine
-                sshagent (credentials: ["${GIT_SSH_KEYS}"]) {
+                sshagent (credentials: ["${HOST_SSH_KEYS}"]) {
                   sh script: """
                     git clone ${env.deploy_repo} ${DEPLOY_FOLDER}
                   """, label: "Git checkout Host SCM"
