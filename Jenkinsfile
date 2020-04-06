@@ -104,6 +104,12 @@ pipeline {
         }
         // DEPLOYMENT
         stage('Deploy') {
+              agent {
+                 docker {
+                     image 'bash:latest'
+                     reuseNode true
+                 }
+             }
              steps {
                 dir('./dev/deploy/'){
                     sh script: "deploy_hosted_git.sh ${env.ENVIRONMENT} -y", label: "Deploy to ${env.ENVIRONMENT}"
