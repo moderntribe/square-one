@@ -7,27 +7,26 @@ function console_log(){
   echo ""
 }
 
-if[ ! -f "./deploy.sh"]; then
+if [ ! -f "./deploy_hosted_git.sh" ]; then
     echo "Script must be run in the /dev/deploy/ directory. Aborting..."
     exit 1
-fi
-exit 1
-if [ $forceyes == false ]; then
-    console_log ""
-    read -p "This will Deploy $branch to $environment. Have you made a backup? [Y/n] " yn
-    case $yn in
-        [Yy]* ) ;;
-        [Nn]* ) exit;;
-        * ) exit;;
-    esac
 fi
 
 SCRIPTDIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 cd "$SCRIPTDIR";
 
+BUILD_DIR='.deploy/build'
+DEPLOY_DIR='.deploy/deploy'
+CONFIG_DIR='.host/config'
+
 environment=$1; shift
 forceyes=false
 branch=server/$environment
+
+if [ ! -f "$CONFIG_DIR/$environment.cfg" ]; then
+    echo "Unknown enviroment defined. Environment: $environment. Aborting..."
+    exit 1
+fi
 
 while getopts "b:y" opt; do
     case "$opt" in
@@ -40,46 +39,67 @@ while getopts "b:y" opt; do
     esac
 done
 
-if [ ! -f ".host/config/$environment.cfg" ]; then
-    echo "Unknown environment: $environment"
-    exit 1
+if [ $forceyes == false ]; then
+    console_log ""
+    read -p "This will Deploy branch $branch to the $environment environment. Please confirm you want to deploy [Y/n] " yn
+    case $yn in
+        [Yy]* ) ;;
+        [Nn]* ) exit;;
+        * ) exit;;
+    esac
 fi
 
-source ".host/config/common.cfg"
-source ".host/config/$environment.cfg"
+### Load Environment Info ################################################
+source "$CONFIG_DIR/common.cfg"
+source "$CONFIG_DIR/$environment.cfg"
 deploy_timestamp=`date +%Y%m%d%H%M%S`
 
 console_log "Preparing to deploy $branch to $environment"
-console_log "Clone $dev_repo to .deploy/src"
 
-if [ ! -d .deploy/src ]; then
-    git clone $dev_repo .deploy/src
+
+### Checkout Project SCM ################################################
+console_log "Clone $dev_repo to $BUILD_DIR"
+
+if [ ! -d $BUILD_DIR ]; then
+  git clone $dev_repo $BUILD_DIR
 fi
 
-cd .deploy/src
+cd $BUILD_DIR
 git reset --hard HEAD
 git checkout $branch
 git pull origin $branch
 commit_hash=$(git rev-parse HEAD)
-cd ../..
 
-console_log "Clone $deploy_repo to .deploy/build"
+### Build Project ################################################
+console_log "Build $deploy_repo in $BUILD_DIR"
+# Note, this should only run on local env deploys. Jenkins should pre-build the project.
 
-if [ ! -d .deploy/build ]; then
-    git clone $deploy_repo .deploy/build
+if [ ! -d $BUILD_DIR/vendor ]; then
+  cp ../../../../.env ./.env
+  composer install --ignore-platform-reqs --no-dev
 fi
 
-console_log "Build $deploy_repo in .deploy/build"
+if [ ! -d $BUILD_DIR/node_modules ]; then
+  cp local-config-sample.json local-config.json
+  nvm use
+  yarn install
+  gulp server_dist
+fi
 
+cd "$SCRIPTDIR"
 
+### Checkout Deploy Repo ################################################
+console_log "Clone $deploy_repo to $DEPLOY_DIR"
 
+GIT_SSH_COMMAND="ssh -i .host/ansible_rsa -F /dev/null"
 
+if [ ! -d $DEPLOY_DIR ]; then
+    git clone $deploy_repo $DEPLOY_DIR
+fi
 
-# GIT_SSH_COMMAND="ssh -i .host/ansible_rsa -F /dev/null"
+echo "Set $deploy_repo as remote for push"
 
-console_log "Set $deploy_repo as remote for push"
-
-cd .deploy/build
+cd $DEPLOY_DIR
 
 if [ ! -d .git ]; then
     echo "Build directory is not a git repository. Aborting..."
@@ -96,10 +116,10 @@ git config core.autocrlf false
 git fetch $environment
 git checkout master
 git reset --hard $environment/master
-cd ../..
+cd "$SCRIPTDIR"
 
 console_log "Set syncing WordPress core files from src to build"
-rsync -rp --delete .deploy/src/wp/ .deploy/build \
+rsync -rpv --delete $BUILD_DIR/wp/ $DEPLOY_DIR \
     --exclude=.git \
     --exclude=.gitmodules \
     --exclude=.gitignore \
@@ -107,7 +127,7 @@ rsync -rp --delete .deploy/src/wp/ .deploy/build \
     --exclude=wp-content
 
 console_log "Syncing wp-content dir from src to build"
-rsync -rp --delete .deploy/src/wp-content .deploy/build \
+rsync -rpv --delete .deploy/build/wp-content .deploy/deploy \
     --exclude=.git \
     --exclude=.gitmodules \
     --exclude=.gitignore \
@@ -120,23 +140,23 @@ rsync -rp --delete .deploy/src/wp-content .deploy/build \
     --exclude=docs \
     --exclude=grunt_options \
     --exclude=node_modules \
+    --exclude=wp-content/object-cache.php \
     --exclude=wp-content/plugins/core/assets/templates/cli
 
 console_log "Syncing configuration files from src to build"
 # not wp-config.php. Host manages that
-rsync -rp .deploy/src/ .deploy/build \
-    --include=local-config-sample.php \
-    --include=general-config.php \
+rsync -rpv .deploy/build/ .deploy/deploy \
     --include=build-process.php \
-    --include=.wpengine.htaccess \
+    --include=vendor/*** \
     --exclude=*
 
-cd .deploy/build
-mv .wpengine.htaccess .htaccess
+cd $DEPLOY_DIR
 
 console_log "Git add build to $deploy_repo"
+
 git add -Av
 
+### Deploy via Git Push Deploy SCM ################################################
 if [ $forceyes == false ]; then
     console_log ""
     read -p "Ready to deploy $branch to $environment. Have you made a backup? [Y/n] " yn
@@ -153,7 +173,11 @@ echo "Pushing to $environment"
 git push $environment master
 
 console_log "Cleanup"
-cd ../..
-rm -rf .deploy
+cd "$SCRIPTDIR"
+# rm -rf .deploy
 
-echo "Deployment Done"
+console_log "
+DONE.\n
+Deploy $environment via Git Push to $deploy_repo\n
+Branch: $branch\n
+Commit: $commit_hash\n"

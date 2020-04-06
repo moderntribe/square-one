@@ -4,7 +4,8 @@ pipeline {
     environment {
         APP_NAME = "square-one"
         GIT_REPO = "moderntribe/${APP_NAME}.git"
-        HOSTED_FOLDER = "./.HOSTED-SCM"
+        BUILD_FOLDER = "dev/deploy/.deploy/build"
+        DEPLOY_FOLDER = "dev/deploy/.deploy/deploy"
         GITHUB_TOKEN = credentials('tr1b0t-github-api-token')
         JENKINS_VAULTPASS = "${env.APP_NAME}-vaultpass"
         ENVIRONMENT_CONFIG = "./dev/deploy/.host/config/"
@@ -14,6 +15,15 @@ pipeline {
     stages {
          // BUILD
         stage('Build Processes') {
+            stage('Checkout SCM'){
+                // checkout scm
+                checkout([$class: 'GitSCM',
+                    branches: [[name: "${params.BRANCH}" ]],
+                    extensions: [[$class: 'WipeWorkspace'], [$class: 'RelativeTargetDirectory',  relativeTargetDir: '.deploy/build']],
+                    userRemoteConfigs: [[url: "git@github.com:${env.GIT_REPO}", credentialsId: "${JENKINS_SSH_KEYS}"]]
+                ])
+            }
+
             parallel {
                 stage('Composer') {
                     agent {
@@ -76,18 +86,33 @@ pipeline {
                 // checkout scm WPEngine
                 sshagent (credentials: ["${GIT_SSH_KEYS}"]) {
                   sh script: """
-                    git clone ${env.deploy_repo} ${HOSTED_FOLDER}
+                    git clone ${env.deploy_repo} ${DEPLOY_FOLDER}
                   """, label: "Git checkout Host SCM"
                 }
             }
         }
-        stage('Deploy') {
+        stage('Deploy Dev') {
              steps {
                 when {
-                	branch 'server/dev'
+                    branch 'server/dev'
                 }
-
-                echo "dev!"
+                echo "Dev!"
+            }
+        }
+        stage('Deploy Staging') {
+             steps {
+                when {
+                    branch 'server/staging'
+                }
+                echo "Staging!"
+            }
+        }
+        stage('Deploy Prod') {
+             steps {
+                when {
+                    branch 'server/production'
+                }
+                echo "Production!"
             }
         }
     }
@@ -102,6 +127,9 @@ pipeline {
         success {
             slackSend(channel: "${SLACK_CHANNEL}", color: 'good', message: "Pipeline: Deployment of `${APP_NAME}` branch `${env.BRANCH_NAME}` to `${env.DEPLOY_TO}` was SUCCESSFUL. (build: <${RUN_DISPLAY_URL}|#${BUILD_NUMBER}>)")
         }
+    }
+    options {
+        skipDefaultCheckout()
     }
 }
 
