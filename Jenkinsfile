@@ -9,7 +9,7 @@ pipeline {
         GITHUB_TOKEN = credentials('tr1b0t-github-api-token')
         JENKINS_VAULTPASS = "${env.APP_NAME}-vaultpass"
         HOST_SSH_KEYS = "${env.APP_NAME}-ssh-key"
-        SLACK_CHANNEL = 'nicks-playground'
+        SLACK_CHANNEL = 'squareone'
         ENVIRONMENT = environment()
     }
 
@@ -151,7 +151,7 @@ pipeline {
             cleanWs()
         }
         failure {
-            slackSend(channel: "${SLACK_CHANNEL}", color: 'danger', message: "Pipeline: (<${RUN_DISPLAY_URL}|#${BUILD_NUMBER}>)\nDeploying `${APP_NAME}` branch `${env.BRANCH_NAME}` to `${env.ENVIRONMENT}` FAILED.")
+            slackSend(channel: "${SLACK_CHANNEL}", color: 'danger', message: "Pipeline: (<${RUN_DISPLAY_URL}|#${BUILD_NUMBER}> | <${env.domain}|Link>)\nDeploying `${APP_NAME}` branch `${env.BRANCH_NAME}` to `${env.ENVIRONMENT}` FAILED.")
         }
         success {
             slackSend(channel: "${SLACK_CHANNEL}", color: 'good', message: "Pipeline: (<${RUN_DISPLAY_URL}|#${BUILD_NUMBER}>)\nDeployment of `${APP_NAME}` branch `${env.BRANCH_NAME}` to `${env.ENVIRONMENT}` was SUCCESSFUL.")
