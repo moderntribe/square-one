@@ -7,6 +7,8 @@ use Tribe\Project\Templates\Abstract_Template;
 use Tribe\Project\Templates\Component_Factory;
 use Tribe\Project\Templates\Components\Breadcrumbs;
 use Tribe\Project\Templates\Components\Button;
+use Tribe\Project\Templates\Components\Context;
+use Tribe\Project\Templates\Components\Pages\Page_Wrap;
 use Tribe\Project\Templates\Components\Pages\Single as Single_Context;
 use Tribe\Project\Templates\Components\Pagination;
 use Tribe\Project\Templates\Controllers\Content;
@@ -51,15 +53,21 @@ class Single extends Abstract_Template {
 	public function render( string $path = '' ): string {
 		the_post();
 
+		return $this->factory->get( Page_Wrap::class, [
+			Page_Wrap::HEADER => $this->header->render(),
+			Page_Wrap::FOOTER => $this->footer->render(),
+			Page_Wrap::CONTENT => $this->build_content()->render( $path ),
+		])->render();
+	}
+
+	protected function build_content(  ): Context {
 		return $this->factory->get( Single_Context::class, [
-			Single_Context::HEADER      => $this->header->render(),
 			Single_Context::SUBHEADER   => $this->subheader->render(),
 			Single_Context::CONTENT     => $this->content->render(),
-			Single_Context::FOOTER      => $this->footer->render(),
 			Single_Context::COMMENTS    => $this->get_comments(),
 			Single_Context::BREADCRUMBS => $this->get_breadcrumbs(),
 			Single_Context::PAGINATION  => $this->get_pagination(),
-		] )->render( $path );
+		] );
 	}
 
 	protected function get_comments() {

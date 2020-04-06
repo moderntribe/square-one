@@ -1,28 +1,13 @@
-{% extends "/components/pages/base.twig" %}
+{{ breadcrumbs }}
 
-{% block main %}
+{{ subheader }}
 
-	{% block breadcrumbs %}
-		{% if breadcrumbs %}
-			{{ breadcrumbs }}
-		{% endif %}
-	{% endblock %}
+<div class="l-container">
+	{{ content }}
 
-	{% block subhead %}
-		{{ subheader }}
-	{% endblock %}
+	{{ pagination }}
+</div>
 
-	{% block content %}
-		<div class="l-container">
-			{{ content }}
+{{ do_action( 'the_panels') }}
 
-			{{ pagination }}
-		</div>
-
-		{{ do_action( 'the_panels') }}
-	{% endblock %}
-
-	{{ comments }}
-
-
-{% endblock %}
+{{ comments }}

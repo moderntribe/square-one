@@ -1,24 +1,19 @@
-{% extends "/components/pages/base.twig" %}
+{{ subheader }}
 
-{% block content %}
-	<div class="l-container">
+<div class="l-container">
 
-		{% if posts|length > 0 %}
+	{% if posts|length > 0 %}
 
-			{% for post in posts %}
-				{{ post }}
-			{% endfor %}
+		{% for post in posts %}
+			{{ post }}
+		{% endfor %}
 
-			{% if pagination %}
-				{{ pagination }}
-			{% endif %}
+		{{ pagination }}
 
-		{% else %}
+	{% else %}
 
-			{{ include( 'components/no-results.twig' ) }}
+		{{ include( 'components/no-results.twig' ) }}
 
-		{% endif %}
+	{% endif %}
 
-	</div>
-
-{% endblock %}
+</div>

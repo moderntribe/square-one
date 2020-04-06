@@ -1,29 +1,15 @@
-{% extends "/components/pages/base.twig" %}
+{{ subheader }}
 
-{% block main %}
+{% if post.content %}
+	<div class="l-container">
+		{{ post.featured_image }}
 
-	{% block subhead %}
-		{{ subheader }}
-	{% endblock %}
+		<div class="t-content">
+			{{ post.content }}
+		</div>
+	</div>
+{% endif %}
 
-	{% block content %}
-		{% if post.content %}
-			<div class="l-container">
-				{{ post.featured_image }}
+{{ do_action( 'the_panels' ) }}
 
-				<div class="t-content">
-					{{ post.content }}
-				</div>
-			</div>
-		{% endif %}
-
-		{{ do_action( 'the_panels' ) }}
-	{% endblock %}
-
-	{{ comments }}
-
-{% endblock %}
-
-{% block sidebar %}
-	{{ sidebar }}
-{% endblock %}
+{{ comments }}

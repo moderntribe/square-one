@@ -6,7 +6,9 @@ use Tribe\Project\Templates\Abstract_Template;
 use Tribe\Project\Templates\Component_Factory;
 use Tribe\Project\Templates\Components\Breadcrumbs;
 use Tribe\Project\Templates\Components\Button;
+use Tribe\Project\Templates\Components\Context;
 use Tribe\Project\Templates\Components\Pages\Index as Index_Context;
+use Tribe\Project\Templates\Components\Pages\Page_Wrap;
 use Tribe\Project\Templates\Components\Pagination;
 use Tribe\Project\Templates\Controllers\Content;
 use Tribe\Project\Templates\Controllers\Footer\Footer_Wrap;
@@ -49,15 +51,21 @@ class Index extends Abstract_Template {
 	}
 
 	public function render( string $path = '' ): string {
+		return $this->factory->get( Page_Wrap::class, [
+			Page_Wrap::HEADER => $this->header->render(),
+			Page_Wrap::FOOTER => $this->footer->render(),
+			Page_Wrap::CONTENT => $this->build_content()->render( $path ),
+		])->render();
+	}
+
+	protected function build_content(): Context {
 		return $this->factory->get( Index_Context::class, [
-			Index_Context::HEADER      => $this->header->render(),
 			Index_Context::SUBHEADER   => $this->subheader->render(),
 			Index_Context::POSTS       => $this->render_posts(),
-			Index_Context::FOOTER      => $this->footer->render(),
 			Index_Context::COMMENTS    => $this->get_comments(),
 			Index_Context::BREADCRUMBS => $this->get_breadcrumbs(),
 			Index_Context::PAGINATION  => $this->get_pagination(),
-		] )->render( $path );
+		] );
 	}
 
 	protected function render_posts(): array {
