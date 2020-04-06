@@ -131,23 +131,20 @@ pipeline {
                   # not wp-config.php. WP Engine manages that
                   rsync -rp ${env.BUILD_FOLDER} ${env.DEPLOY_FOLDER} \
                     --include=build-process.php \
-                    --include=.wpengine.htaccess \
                     --include=vendor/*** \
                     --exclude=*
-                """, label: "Sync files to WPEngine git directory"
+                """, label: "Sync files to Deploy git directory"
 
-                dir("${WPENGINE_FOLDER}") {
                   sshagent (credentials: ["${GIT_SSH_KEYS}"]) {
-                    // WPEngine Git deploy
+                    // Host Git deploy
                     dir(DEPLOY_FOLDER){
                         sh script: """
                           git add -Av
                           git commit --allow-empty -m 'Deploying ${env.BRANCH_NAME} to ${env.ENVIRONMENT}'
                           git push master
-                        """, label: "WPEngine Git Deploy"
+                        """, label: "Host Git Deploy"
                     }
                   }
-                }
             }
         }
     }
