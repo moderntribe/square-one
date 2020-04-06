@@ -5,9 +5,9 @@ const pkg = require( '../package.json' );
 module.exports = {
 	theme() {
 		return gulp.src( [
-			`${ pkg._core_theme_pcss_path }**/*.pcss`,
-			`!${ pkg._core_theme_pcss_path }content/page/_legacy.pcss`,
-			`!${ pkg._core_theme_pcss_path }vendor/swiper/_default.pcss`,
+			`${ pkg.square1.paths.core_theme_pcss }**/*.pcss`,
+			`!${ pkg.square1.paths.core_theme_pcss }content/page/_legacy.pcss`,
+			`!${ pkg.square1.paths.core_theme_pcss }vendor/swiper/_default.pcss`,
 		] )
 			.pipe( stylelint( {
 				fix: true,
@@ -15,11 +15,11 @@ module.exports = {
 					{ formatter: 'string', console: true },
 				],
 			} ) )
-			.pipe( gulp.dest( pkg._core_theme_pcss_path ) );
+			.pipe( gulp.dest( pkg.square1.paths.core_theme_pcss ) );
 	},
 	apps() {
 		return gulp.src( [
-			`${ pkg._core_apps_js_src_path }**/*.pcss`,
+			`${ pkg.square1.paths.core_apps_js_src }**/*.pcss`,
 		] )
 			.pipe( stylelint( {
 				fix: true,
@@ -27,6 +27,6 @@ module.exports = {
 					{ formatter: 'string', console: true },
 				],
 			} ) )
-			.pipe( gulp.dest( pkg._core_apps_js_src_path ) );
+			.pipe( gulp.dest( pkg.square1.paths.core_apps_js_src ) );
 	},
 };

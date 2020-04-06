@@ -11,7 +11,7 @@ const pkg = require( '../package.json' );
 const compilePlugins = [
 	require( 'postcss-import' )( {
 		path: [
-			`./${ pkg._core_theme_path }`,
+			`./${ pkg.square1.paths.core_theme }`,
 		],
 	} ),
 	require( 'postcss-mixins' ),
@@ -25,7 +25,7 @@ const compilePlugins = [
 	require( 'postcss-inline-svg' ),
 	require( 'postcss-preset-env' )( { stage: 0, autoprefixer: { grid: true } } ),
 	require( 'postcss-calc' ),
-	require( 'postcss-assets' )( { loadPaths: [ `${ pkg._core_theme_path }/` ] } ),
+	require( 'postcss-assets' )( { loadPaths: [ `${ pkg.square1.paths.core_theme }/` ] } ),
 ];
 
 const legacyPlugins = [
@@ -38,7 +38,7 @@ const legacyPlugins = [
 	require( 'postcss-simple-vars' ),
 	require( 'postcss-nested' ),
 	require( 'postcss-preset-env' )( { browsers: [ 'last 20 versions', 'ie 6' ] } ),
-	require( 'postcss-assets' )( { loadPaths: [ `${ pkg._core_theme_path }/` ] } ),
+	require( 'postcss-assets' )( { loadPaths: [ `${ pkg.square1.paths.core_theme }/` ] } ),
 ];
 
 /**
@@ -46,7 +46,7 @@ const legacyPlugins = [
  *
  * @param {Object} options {
  * 	src = [],
- * 	dest = pkg._core_admin_css_path,
+ * 	dest = pkg.square1.paths.core_admin_css,
  * 	plugins = compilePlugins,
  * 	bundleName = 'empty.css',
  * }
@@ -58,7 +58,7 @@ const legacyPlugins = [
  */
 function cssProcess( {
 	src = [],
-	dest = pkg._core_admin_css_path,
+	dest = pkg.square1.paths.core_admin_css,
 	plugins = compilePlugins,
 	bundleName = 'empty.css', // Needs to be a valid filename else concat errors
 } ) {
@@ -80,48 +80,57 @@ module.exports = {
 	theme() {
 		return cssProcess( {
 			src: [
-				`${ pkg._core_theme_pcss_path }master.pcss`,
-				`${ pkg._core_theme_pcss_path }print.pcss`,
+				`${ pkg.square1.paths.core_theme_pcss }master.pcss`,
+				`${ pkg.square1.paths.core_theme_pcss }print.pcss`,
 			],
-			dest: pkg._core_theme_css_path,
+			dest: pkg.square1.paths.core_theme_css,
 		} );
 	},
 	themeComponents() {
 		return cssProcess( {
 			src: [
-				`${ pkg._core_theme_components_path }**/index.pcss`,
+				`${ pkg.square1.paths.core_theme_components }**/index.pcss`,
 			],
-			dest: `${ pkg._core_theme_css_path }`,
+			dest: `${ pkg.square1.paths.core_theme_css }`,
 			bundleName: 'components.css',
+		} );
+	},
+	themeIntegrations() {
+		return cssProcess( {
+			src: [
+				`${ pkg.square1.paths.core_theme_integrations }**/index.pcss`,
+			],
+			dest: `${ pkg.square1.paths.core_theme_css }`,
+			bundleName: 'integrations.css',
 		} );
 	},
 	themeLegacy() {
 		return cssProcess( {
 			src: [
-				`${ pkg._core_theme_pcss_path }legacy.pcss`,
+				`${ pkg.square1.paths.core_theme_pcss }legacy.pcss`,
 			],
-			dest: pkg._core_theme_css_path,
+			dest: pkg.square1.paths.core_theme_css,
 			plugins: legacyPlugins,
 		} );
 	},
 	themeWPEditor() {
 		return cssProcess( {
 			src: [
-				`${ pkg._core_admin_pcss_path }editor-style.pcss`,
+				`${ pkg.square1.paths.core_admin_pcss }editor-style.pcss`,
 			],
 		} );
 	},
 	themeWPLogin() {
 		return cssProcess( {
 			src: [
-				`${ pkg._core_admin_pcss_path }login.pcss`,
+				`${ pkg.square1.paths.core_admin_pcss }login.pcss`,
 			],
 		} );
 	},
 	themeWPAdmin() {
 		return cssProcess( {
 			src: [
-				`${ pkg._core_admin_pcss_path }master.pcss`,
+				`${ pkg.square1.paths.core_admin_pcss }master.pcss`,
 			],
 		} );
 	},
