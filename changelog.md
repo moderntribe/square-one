@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2020.04
+* Added: JenkinsFile for pipeline build and deployment to hosted environments with Git Deploys
+* Updated: bash deployment script for locally run deployments to environments with Git deploys 
+
 ## 2020.03
 * Added: PHP rules for .editorconfig, including config for many PhpStorm rules
 * Fixed: Broken composer.lock file preventing Gravity Forms installation
