@@ -16,7 +16,7 @@ pipeline {
     stages {
         stage('Checkout SCM'){
            steps {
-                echo "${env.BRANCH_NAME} - ${params.SLACK_CHANNEL} - ${env.ENVIRONMENT}"
+                echo "${env.BRANCH_NAME} - ${env.SLACK_CHANNEL} - ${env.ENVIRONMENT}"
                 slackSend(channel: "${SLACK_CHANNEL}", message: "Pipeline: Deployment of `${APP_NAME}` to `${env.BRANCH_NAME}` STARTED: (build: <${RUN_DISPLAY_URL}|#${BUILD_NUMBER}>)")
                // checkout scm
                 checkout([$class: 'GitSCM',
@@ -153,4 +153,5 @@ void loadEnvironmentVariables(path){
 
 def environment(){
     final afterLastSlash = env.BRANCH_NAME.substring(env.BRANCH_NAME.lastIndexOf('/') + 1, env.BRANCH_NAME.length())
+    return afterLastSlash
 }
