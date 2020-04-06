@@ -3,6 +3,7 @@
 
 namespace Tribe\Project\Templates\Controllers\Panels;
 
+use Exception;
 use Tribe\Project\Panels\Types\Interstitial as Interstice;
 use Tribe\Project\Templates\Components\Button;
 use Tribe\Project\Templates\Components\Content_Block;
@@ -32,7 +33,7 @@ class Interstitial extends Panel {
 
 		try {
 			$image = \Tribe\Project\Templates\Models\Image::factory( $panel_vars[ Interstice::FIELD_IMAGE ] );
-		} catch ( \Exception $e ) {
+		} catch ( Exception $e ) {
 			return '';
 		}
 

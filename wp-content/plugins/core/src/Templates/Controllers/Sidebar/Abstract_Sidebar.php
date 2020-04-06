@@ -6,7 +6,7 @@ namespace Tribe\Project\Templates\Controllers\Sidebar;
 use Tribe\Project\Templates\Abstract_Controller;
 use Tribe\Project\Templates\Component_Factory;
 use Tribe\Project\Templates\Components\Sidebar;
-use Twig\Environment;
+use UnexpectedValueException;
 
 abstract class Abstract_Sidebar extends Abstract_Controller {
 	/**
@@ -14,11 +14,11 @@ abstract class Abstract_Sidebar extends Abstract_Controller {
 	 */
 	protected $sidebar_id;
 
-	public function __construct( Environment $twig, Component_Factory $factory ) {
+	public function __construct( Component_Factory $factory ) {
 		if ( ! isset( $this->sidebar_id ) ) {
-			throw new \UnexpectedValueException( 'Sidebar ID must be defined in extending class' );
+			throw new UnexpectedValueException( 'Sidebar ID must be defined in extending class' );
 		}
-		parent::__construct( $twig, $factory );
+		parent::__construct( $factory );
 	}
 
 	public function render( string $path = '' ): string {

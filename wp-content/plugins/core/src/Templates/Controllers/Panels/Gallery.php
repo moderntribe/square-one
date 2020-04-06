@@ -2,10 +2,12 @@
 
 namespace Tribe\Project\Templates\Controllers\Panels;
 
+use Exception;
 use Tribe\Project\Panels\Types\Gallery as GalleryPanel;
 use Tribe\Project\Templates\Components\Image as ImageComponent;
 use Tribe\Project\Templates\Components\Panels\Gallery as Gallery_Context;
 use Tribe\Project\Templates\Components\Slider as SliderComponent;
+use Tribe\Project\Templates\Models\Image;
 
 class Gallery extends Panel {
 	protected function render_content( \ModularContent\Panel $panel, array $panel_vars ): string {
@@ -60,8 +62,8 @@ class Gallery extends Panel {
 
 		return array_filter( array_map( function ( $slide_id ) use ( $size, $crop ) {
 			try {
-				$image = \Tribe\Project\Templates\Models\Image::factory( $slide_id );
-			} catch ( \Exception $e ) {
+				$image = Image::factory( $slide_id );
+			} catch ( Exception $e ) {
 				return '';
 			}
 

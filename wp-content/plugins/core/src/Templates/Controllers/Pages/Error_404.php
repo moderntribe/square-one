@@ -10,7 +10,6 @@ use Tribe\Project\Templates\Components\Pages\Error_404 as Error_404_Context;
 use Tribe\Project\Templates\Components\Pages\Page_Wrap;
 use Tribe\Project\Templates\Controllers\Footer\Footer_Wrap;
 use Tribe\Project\Templates\Controllers\Header\Header_Wrap;
-use Twig\Environment;
 
 class Error_404 extends Abstract_Controller {
 	/**
@@ -23,14 +22,13 @@ class Error_404 extends Abstract_Controller {
 	private $footer;
 
 	public function __construct(
-		Environment $twig,
 		Component_Factory $factory,
 		Header_Wrap $header,
 		Footer_Wrap $footer
 	) {
-		parent::__construct( $twig, $factory );
-		$this->header    = $header;
-		$this->footer    = $footer;
+		parent::__construct( $factory );
+		$this->header = $header;
+		$this->footer = $footer;
 	}
 
 	public function render( string $path = '' ): string {
@@ -43,8 +41,8 @@ class Error_404 extends Abstract_Controller {
 
 	protected function build_content(): Context {
 		return $this->factory->get( Error_404_Context::class, [
-			Error_404_Context::TITLE     => $this->get_404_page_title(),
-			Error_404_Context::CONTENT   => $this->get_404_page_content(),
+			Error_404_Context::TITLE   => $this->get_404_page_title(),
+			Error_404_Context::CONTENT => $this->get_404_page_content(),
 		] );
 	}
 

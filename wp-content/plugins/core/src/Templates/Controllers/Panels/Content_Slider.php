@@ -2,6 +2,7 @@
 
 namespace Tribe\Project\Templates\Controllers\Panels;
 
+use Exception;
 use Tribe\Project\Panels\Types\ContentSlider as ContentSliderPanel;
 use Tribe\Project\Templates\Components\Button;
 use Tribe\Project\Templates\Components\Content_Block;
@@ -60,7 +61,7 @@ class Content_Slider extends Panel {
 					];
 
 					$slide_markup .= $this->factory->get( Image::class, $options )->render();
-				} catch ( \Exception $e ) {
+				} catch ( Exception $e ) {
 					// no valid image for this slide
 				}
 

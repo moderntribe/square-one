@@ -2,6 +2,7 @@
 
 namespace Tribe\Project\Templates\Controllers\Panels;
 
+use Exception;
 use Tribe\Project\Panels\Types\PostLoop as PostLoopPanel;
 use Tribe\Project\Templates\Components\Button;
 use Tribe\Project\Templates\Components\Card;
@@ -78,7 +79,7 @@ class Postloop extends Panel {
 
 		try {
 			$image = \Tribe\Project\Templates\Models\Image::factory( $image_id );
-		} catch ( \Exception $e ) {
+		} catch ( Exception $e ) {
 			return '';
 		}
 

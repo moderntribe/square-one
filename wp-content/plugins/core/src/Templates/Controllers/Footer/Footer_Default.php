@@ -9,20 +9,17 @@ use Tribe\Project\Templates\Component_Factory;
 use Tribe\Project\Templates\Components\Footer\Footer_Default as Footer_Context;
 use Tribe\Project\Templates\Controllers\Footer\Navigation as Navigation;
 use Tribe\Project\Templates\Controllers\Traits\Copyright;
-use Twig\Environment;
 
 class Footer_Default extends Abstract_Controller {
 	use Copyright;
-
-	protected $path = 'content/footer/default.twig';
 
 	/**
 	 * @var Navigation
 	 */
 	private $navigation;
 
-	public function __construct( Environment $twig, Component_Factory $factory, Navigation $navigation ) {
-		parent::__construct( $twig, $factory );
+	public function __construct( Component_Factory $factory, Navigation $navigation ) {
+		parent::__construct( $factory );
 		$this->navigation = $navigation;
 	}
 

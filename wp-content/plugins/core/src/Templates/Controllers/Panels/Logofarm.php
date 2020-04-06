@@ -2,11 +2,12 @@
 
 namespace Tribe\Project\Templates\Controllers\Panels;
 
+use Exception;
 use Tribe\Project\Panels\Types\LogoFarm as Logo;
 use Tribe\Project\Templates\Components\Image;
 use Tribe\Project\Templates\Components\Panels\Logofarm as Logofarm_Context;
 
-class Logofarm extends \Tribe\Project\Templates\Controllers\Panels\Panel {
+class Logofarm extends Panel {
 	protected function render_content( \ModularContent\Panel $panel, array $panel_vars ): string {
 		return $this->factory->get( Logofarm_Context::class, [
 			Logofarm_Context::LOGOS      => $this->get_the_logos( $panel_vars ),
@@ -34,7 +35,7 @@ class Logofarm extends \Tribe\Project\Templates\Controllers\Panels\Panel {
 
 			try {
 				$image = \Tribe\Project\Templates\Models\Image::factory( $logo[ Logo::FIELD_LOGO_IMAGE ] );
-			} catch ( \Exception $e ) {
+			} catch ( Exception $e ) {
 				continue;
 			}
 

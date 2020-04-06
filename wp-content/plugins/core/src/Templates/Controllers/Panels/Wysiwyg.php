@@ -9,7 +9,7 @@ class Wysiwyg extends Panel {
 	protected function render_content( \ModularContent\Panel $panel, array $panel_vars ): string {
 		return $this->factory->get( Wysiwyg_Context::class, [
 			Wysiwyg_Context::COLUMNS => $this->get_columns( $panel_vars ),
-		])->render();
+		] )->render();
 	}
 
 	protected function get_columns( array $panel_vars ): array {

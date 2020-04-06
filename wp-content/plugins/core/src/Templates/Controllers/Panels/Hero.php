@@ -2,6 +2,7 @@
 
 namespace Tribe\Project\Templates\Controllers\Panels;
 
+use Exception;
 use Tribe\Project\Panels\Types\Hero as HeroPanel;
 use Tribe\Project\Templates\Components\Button;
 use Tribe\Project\Templates\Components\Content_Block;
@@ -31,7 +32,7 @@ class Hero extends Panel {
 
 		try {
 			$image = \Tribe\Project\Templates\Models\Image::factory( $panel_vars[ HeroPanel::FIELD_IMAGE ] );
-		} catch ( \Exception $e ) {
+		} catch ( Exception $e ) {
 			return '';
 		}
 

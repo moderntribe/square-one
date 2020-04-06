@@ -3,6 +3,7 @@
 
 namespace Tribe\Project\Templates\Controllers\Panels;
 
+use Exception;
 use Tribe\Project\Panels\Types\ImageText as ImageTextPanel;
 use Tribe\Project\Templates\Components\Button;
 use Tribe\Project\Templates\Components\Content_Block;
@@ -106,7 +107,7 @@ class Imagetext extends Panel {
 
 		try {
 			$image = \Tribe\Project\Templates\Models\Image::factory( $panel_vars[ ImageTextPanel::FIELD_IMAGE ] );
-		} catch ( \Exception $e ) {
+		} catch ( Exception $e ) {
 			return '';
 		}
 

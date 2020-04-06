@@ -7,7 +7,6 @@ use Tribe\Project\Templates\Abstract_Controller;
 use Tribe\Project\Templates\Component_Factory;
 use Tribe\Project\Templates\Components\Footer\Footer_Wrap as Footer_Context;
 use Tribe\Project\Templates\Controllers\Footer\Footer_Default as Footer_Content;
-use Twig\Environment;
 
 class Footer_Wrap extends Abstract_Controller {
 	/**
@@ -15,8 +14,8 @@ class Footer_Wrap extends Abstract_Controller {
 	 */
 	private $content;
 
-	public function __construct( Environment $twig, Component_Factory $factory, Footer_Content $content ) {
-		parent::__construct( $twig, $factory );
+	public function __construct( Component_Factory $factory, Footer_Content $content ) {
+		parent::__construct( $factory );
 		$this->content = $content;
 	}
 

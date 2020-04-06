@@ -3,6 +3,7 @@
 
 namespace Tribe\Project\Templates\Controllers\Pages;
 
+use Exception;
 use Tribe\Project\Templates\Abstract_Controller;
 use Tribe\Project\Templates\Component_Factory;
 use Tribe\Project\Templates\Components\Breadcrumbs;
@@ -16,7 +17,6 @@ use Tribe\Project\Templates\Controllers\Footer\Footer_Wrap;
 use Tribe\Project\Templates\Controllers\Header\Header_Wrap;
 use Tribe\Project\Templates\Controllers\Header\Subheader;
 use Tribe\Project\Templates\Controllers\Sidebar\Main_Sidebar;
-use Twig\Environment;
 
 class Page extends Abstract_Controller {
 	/**
@@ -37,14 +37,13 @@ class Page extends Abstract_Controller {
 	private $footer;
 
 	public function __construct(
-		Environment $twig,
 		Component_Factory $factory,
 		Header_Wrap $header,
 		Subheader $subheader,
 		Main_Sidebar $sidebar,
 		Footer_Wrap $footer
 	) {
-		parent::__construct( $twig, $factory );
+		parent::__construct( $factory );
 		$this->header    = $header;
 		$this->subheader = $subheader;
 		$this->sidebar   = $sidebar;
@@ -55,11 +54,11 @@ class Page extends Abstract_Controller {
 		the_post();
 
 		return $this->factory->get( Page_Wrap::class, [
-			Page_Wrap::HEADER => $this->header->render(),
+			Page_Wrap::HEADER  => $this->header->render(),
 			Page_Wrap::SIDEBAR => $this->sidebar->render(),
-			Page_Wrap::FOOTER => $this->footer->render(),
+			Page_Wrap::FOOTER  => $this->footer->render(),
 			Page_Wrap::CONTENT => $this->build_content()->render( $path ),
-		])->render();
+		] )->render();
 	}
 
 	protected function build_content(): Context {
@@ -89,7 +88,7 @@ class Page extends Abstract_Controller {
 
 		try {
 			$image = \Tribe\Project\Templates\Models\Image::factory( $image_id );
-		} catch ( \Exception $e ) {
+		} catch ( Exception $e ) {
 			return '';
 		}
 

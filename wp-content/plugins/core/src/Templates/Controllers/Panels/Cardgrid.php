@@ -2,6 +2,7 @@
 
 namespace Tribe\Project\Templates\Controllers\Panels;
 
+use Exception;
 use Tribe\Project\Panels\Types\CardGrid as CardGridPanel;
 use Tribe\Project\Templates\Components\Button;
 use Tribe\Project\Templates\Components\Card;
@@ -76,7 +77,7 @@ class Cardgrid extends Panel {
 
 		try {
 			$image = \Tribe\Project\Templates\Models\Image::factory( $image_id );
-		} catch ( \Exception $e ) {
+		} catch ( Exception $e ) {
 			return '';
 		}
 

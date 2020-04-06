@@ -7,7 +7,6 @@ use Tribe\Project\Templates\Abstract_Controller;
 use Tribe\Project\Templates\Component_Factory;
 use Tribe\Project\Templates\Components\Header\Header_Wrap as Header_Context;
 use Tribe\Project\Templates\Controllers\Header\Header_Default as Header_Content;
-use Twig\Environment;
 
 class Header_Wrap extends Abstract_Controller {
 	/**
@@ -15,8 +14,8 @@ class Header_Wrap extends Abstract_Controller {
 	 */
 	private $content;
 
-	public function __construct( Environment $twig, Component_Factory $factory, Header_Content $content ) {
-		parent::__construct( $twig, $factory );
+	public function __construct( Component_Factory $factory, Header_Content $content ) {
+		parent::__construct( $factory );
 		$this->content = $content;
 	}
 

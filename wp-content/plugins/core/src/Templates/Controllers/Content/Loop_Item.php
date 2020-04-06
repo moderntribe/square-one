@@ -3,6 +3,7 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Templates\Controllers\Content;
 
+use Exception;
 use Tribe\Project\Templates\Abstract_Controller;
 use Tribe\Project\Templates\Components\Content\Loop_Item as Item_Context;
 use Tribe\Project\Templates\Components\Image;
@@ -40,7 +41,7 @@ class Loop_Item extends Abstract_Controller {
 
 		try {
 			$image = \Tribe\Project\Templates\Models\Image::factory( $image_id );
-		} catch ( \Exception $e ) {
+		} catch ( Exception $e ) {
 			return '';
 		}
 

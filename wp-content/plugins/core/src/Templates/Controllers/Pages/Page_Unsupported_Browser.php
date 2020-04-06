@@ -4,20 +4,11 @@ declare( strict_types=1 );
 namespace Tribe\Project\Templates\Controllers\Pages;
 
 use Tribe\Project\Templates\Abstract_Controller;
-use Tribe\Project\Templates\Component_Factory;
 use Tribe\Project\Templates\Components\Pages\Page_Unsupported_Browser as Page_Context;
 use Tribe\Project\Templates\Controllers\Traits\Copyright;
-use Twig\Environment;
 
 class Page_Unsupported_Browser extends Abstract_Controller {
 	use Copyright;
-
-	public function __construct(
-		Environment $twig,
-		Component_Factory $factory
-	) {
-		parent::__construct( $twig, $factory );
-	}
 
 	public function render( string $path = '' ): string {
 		return $this->factory->get( Page_Context::class, [

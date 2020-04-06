@@ -15,7 +15,6 @@ use Tribe\Project\Templates\Controllers\Footer\Footer_Wrap;
 use Tribe\Project\Templates\Controllers\Header\Header_Wrap;
 use Tribe\Project\Templates\Controllers\Header\Subheader;
 use Tribe\Project\Theme\Pagination_Util;
-use Twig\Environment;
 
 class Index extends Abstract_Controller {
 	/**
@@ -36,14 +35,13 @@ class Index extends Abstract_Controller {
 	private $footer;
 
 	public function __construct(
-		Environment $twig,
 		Component_Factory $factory,
 		Header_Wrap $header,
 		Subheader $subheader,
 		Content\Loop_Item $item,
 		Footer_Wrap $footer
 	) {
-		parent::__construct( $twig, $factory );
+		parent::__construct( $factory );
 		$this->header    = $header;
 		$this->subheader = $subheader;
 		$this->item      = $item;
@@ -52,10 +50,10 @@ class Index extends Abstract_Controller {
 
 	public function render( string $path = '' ): string {
 		return $this->factory->get( Page_Wrap::class, [
-			Page_Wrap::HEADER => $this->header->render(),
-			Page_Wrap::FOOTER => $this->footer->render(),
+			Page_Wrap::HEADER  => $this->header->render(),
+			Page_Wrap::FOOTER  => $this->footer->render(),
 			Page_Wrap::CONTENT => $this->build_content()->render( $path ),
-		])->render();
+		] )->render();
 	}
 
 	protected function build_content(): Context {

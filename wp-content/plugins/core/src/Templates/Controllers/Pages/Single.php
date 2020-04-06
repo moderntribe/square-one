@@ -15,7 +15,6 @@ use Tribe\Project\Templates\Controllers\Content;
 use Tribe\Project\Templates\Controllers\Footer\Footer_Wrap;
 use Tribe\Project\Templates\Controllers\Header\Header_Wrap;
 use Tribe\Project\Templates\Controllers\Header\Subheader;
-use Twig\Environment;
 
 class Single extends Abstract_Controller {
 	/**
@@ -36,14 +35,13 @@ class Single extends Abstract_Controller {
 	private $footer;
 
 	public function __construct(
-		Environment $twig,
 		Component_Factory $factory,
 		Header_Wrap $header,
 		Subheader $subheader,
 		Content\Single $content,
 		Footer_Wrap $footer
 	) {
-		parent::__construct( $twig, $factory );
+		parent::__construct( $factory );
 		$this->header    = $header;
 		$this->subheader = $subheader;
 		$this->content   = $content;
@@ -54,13 +52,13 @@ class Single extends Abstract_Controller {
 		the_post();
 
 		return $this->factory->get( Page_Wrap::class, [
-			Page_Wrap::HEADER => $this->header->render(),
-			Page_Wrap::FOOTER => $this->footer->render(),
+			Page_Wrap::HEADER  => $this->header->render(),
+			Page_Wrap::FOOTER  => $this->footer->render(),
 			Page_Wrap::CONTENT => $this->build_content()->render( $path ),
-		])->render();
+		] )->render();
 	}
 
-	protected function build_content(  ): Context {
+	protected function build_content(): Context {
 		return $this->factory->get( Single_Context::class, [
 			Single_Context::SUBHEADER   => $this->subheader->render(),
 			Single_Context::CONTENT     => $this->content->render(),

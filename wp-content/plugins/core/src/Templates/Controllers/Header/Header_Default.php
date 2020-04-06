@@ -9,7 +9,6 @@ use Tribe\Project\Templates\Components\Button;
 use Tribe\Project\Templates\Components\Header\Header_Default as Header_Context;
 use Tribe\Project\Templates\Components\Search;
 use Tribe\Project\Templates\Controllers\Header\Navigation as Navigation;
-use Twig\Environment;
 
 class Header_Default extends Abstract_Controller {
 	/**
@@ -17,8 +16,8 @@ class Header_Default extends Abstract_Controller {
 	 */
 	private $navigation;
 
-	public function __construct( Environment $twig, Component_Factory $factory, Navigation $navigation ) {
-		parent::__construct( $twig, $factory );
+	public function __construct( Component_Factory $factory, Navigation $navigation ) {
+		parent::__construct( $factory );
 		$this->navigation = $navigation;
 	}
 

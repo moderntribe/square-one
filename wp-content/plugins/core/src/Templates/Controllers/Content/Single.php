@@ -3,6 +3,7 @@
 
 namespace Tribe\Project\Templates\Controllers\Content;
 
+use Exception;
 use Tribe\Project\Templates\Abstract_Controller;
 use Tribe\Project\Templates\Components\Content\Single as Single_Context;
 use Tribe\Project\Templates\Components\Image;
@@ -45,7 +46,7 @@ class Single extends Abstract_Controller {
 
 		try {
 			$image = \Tribe\Project\Templates\Models\Image::factory( $image_id );
-		} catch ( \Exception $e ) {
+		} catch ( Exception $e ) {
 			return '';
 		}
 
