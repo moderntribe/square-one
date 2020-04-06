@@ -84,12 +84,12 @@ pipeline {
                 withCredentials([string(credentialsId: "${JENKINS_VAULTPASS}", variable: 'vaultPass')]) {
                     dir(BUILD_FOLDER){
                         sh script: "echo '${vaultPass}' > ./.vaultpass", label: "Write vaultpass to local folder"
-                        sh script: "ansible-vault decrypt ${env.HOST_CONFIG}${env.ENVIRONMENT}.vaulted --output=${env.HOST_CONFIG}${env.ENVIRONMENT}.cfg --vault-password-file ./.vaultpass", label: "Decrypt config config file"
+                        sh script: "ansible-vault decrypt ${env.HOST_CONFIG}${env.ENVIRONMENT}.cfg.vaulted --output=${env.HOST_CONFIG}${env.ENVIRONMENT}.cfg --vault-password-file ./.vaultpass", label: "Decrypt config config file"
                         sh 'rm ./.vaultpass'
                     }
                 }
 
-                // Load WP Engine environment variables
+                // Load Host environment variables
                 loadEnvironmentVariables("${env.HOST_CONFIG}${env.ENVIRONMENT}.cfg")
 
                 // checkout scm WPEngine
