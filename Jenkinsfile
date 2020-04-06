@@ -18,7 +18,7 @@ pipeline {
         stage('Build SCM'){
            steps {
                 echo "${env.BRANCH_NAME} - ${env.SLACK_CHANNEL} - ${env.ENVIRONMENT}"
-                slackSend(channel: "${SLACK_CHANNEL}", message: "Pipeline: (build: <${RUN_DISPLAY_URL}|#${BUILD_NUMBER}>) Deployment of `${APP_NAME}` to `${env.BRANCH_NAME}` STARTED.")
+                slackSend(channel: "${SLACK_CHANNEL}", message: "Pipeline: (<${RUN_DISPLAY_URL}|#${BUILD_NUMBER}>)\nDeployment of `${APP_NAME}` to `${env.BRANCH_NAME}` STARTED.")
                // checkout scm
                 checkout([$class: 'GitSCM',
                     branches: [[name: "${env.BRANCH_NAME}" ]],
@@ -151,10 +151,10 @@ pipeline {
             cleanWs()
         }
         failure {
-            slackSend(channel: "${SLACK_CHANNEL}", color: 'danger', message: "Pipeline: (build: <${RUN_DISPLAY_URL}|#${BUILD_NUMBER}>) Deploying `${APP_NAME}` branch `${env.BRANCH_NAME}` to `${env.ENVIRONMENT}` FAILED.")
+            slackSend(channel: "${SLACK_CHANNEL}", color: 'danger', message: "Pipeline: (<${RUN_DISPLAY_URL}|#${BUILD_NUMBER}>)\nDeploying `${APP_NAME}` branch `${env.BRANCH_NAME}` to `${env.ENVIRONMENT}` FAILED.")
         }
         success {
-            slackSend(channel: "${SLACK_CHANNEL}", color: 'good', message: "Pipeline: (build: <${RUN_DISPLAY_URL}|#${BUILD_NUMBER}>) Deployment of `${APP_NAME}` branch `${env.BRANCH_NAME}` to `${env.ENVIRONMENT}` was SUCCESSFUL.")
+            slackSend(channel: "${SLACK_CHANNEL}", color: 'good', message: "Pipeline: (<${RUN_DISPLAY_URL}|#${BUILD_NUMBER}>)\nDeployment of `${APP_NAME}` branch `${env.BRANCH_NAME}` to `${env.ENVIRONMENT}` was SUCCESSFUL.")
         }
     }
     options {
