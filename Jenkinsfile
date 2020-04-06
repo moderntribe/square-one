@@ -159,6 +159,7 @@ pipeline {
     }
     options {
         skipDefaultCheckout()
+        disableConcurrentBuilds()
     }
 }
 
