@@ -125,7 +125,7 @@ pipeline {
                     --exclude=node_modules \
                     --exclude=wp-content/object-cache.php \
                     --exclude=wp-content/plugins/core/assets/templates/cli
-                  rsync -rpv ${env.BUILD_FOLDER} ${env.DEPLOY_FOLDER} \
+                  rsync -rpv ${env.BUILD_FOLDER}/ ${env.DEPLOY_FOLDER} \
                     --include=build-process.php \
                     --include=vendor/* \
                     --exclude=*
