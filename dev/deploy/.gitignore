@@ -4,5 +4,5 @@
 !.host/ansible_rsa.pub
 !.wpengine/*.vaulted
 .host/config/*
-!.wpengine/config/*.vaulted
-!.wpengine/config/*.sample
+!.host/config/*.vaulted
+!.host/config/*.sample
