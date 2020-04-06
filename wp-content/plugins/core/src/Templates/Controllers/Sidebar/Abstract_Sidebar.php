@@ -3,12 +3,12 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Templates\Controllers\Sidebar;
 
-use Tribe\Project\Templates\Abstract_Template;
+use Tribe\Project\Templates\Abstract_Controller;
 use Tribe\Project\Templates\Component_Factory;
 use Tribe\Project\Templates\Components\Sidebar;
 use Twig\Environment;
 
-abstract class Abstract_Sidebar extends Abstract_Template {
+abstract class Abstract_Sidebar extends Abstract_Controller {
 	/**
 	 * @var string The ID of this sidebar
 	 */

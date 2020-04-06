@@ -5,7 +5,7 @@ namespace Tribe\Project\Templates;
 
 use Twig\Environment;
 
-abstract class Abstract_Template implements Template_Interface {
+abstract class Abstract_Controller {
 	/**
 	 * @var string Default path to be used to render this template
 	 */

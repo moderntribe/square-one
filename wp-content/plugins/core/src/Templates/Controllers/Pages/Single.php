@@ -3,7 +3,7 @@
 
 namespace Tribe\Project\Templates\Controllers\Pages;
 
-use Tribe\Project\Templates\Abstract_Template;
+use Tribe\Project\Templates\Abstract_Controller;
 use Tribe\Project\Templates\Component_Factory;
 use Tribe\Project\Templates\Components\Breadcrumbs;
 use Tribe\Project\Templates\Components\Button;
@@ -17,7 +17,7 @@ use Tribe\Project\Templates\Controllers\Header\Header_Wrap;
 use Tribe\Project\Templates\Controllers\Header\Subheader;
 use Twig\Environment;
 
-class Single extends Abstract_Template {
+class Single extends Abstract_Controller {
 	/**
 	 * @var Header_Wrap
 	 */

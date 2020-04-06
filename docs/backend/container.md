@@ -41,7 +41,7 @@ of our template controllers as an example.
 
 ```php
 
-class Page extends Abstract_Template {
+class Page extends Abstract_Controller {
 	// property declarations at the top
 
 	public function __construct(

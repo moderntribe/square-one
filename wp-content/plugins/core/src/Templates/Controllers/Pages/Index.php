@@ -2,7 +2,7 @@
 
 namespace Tribe\Project\Templates\Controllers\Pages;
 
-use Tribe\Project\Templates\Abstract_Template;
+use Tribe\Project\Templates\Abstract_Controller;
 use Tribe\Project\Templates\Component_Factory;
 use Tribe\Project\Templates\Components\Breadcrumbs;
 use Tribe\Project\Templates\Components\Button;
@@ -17,7 +17,7 @@ use Tribe\Project\Templates\Controllers\Header\Subheader;
 use Tribe\Project\Theme\Pagination_Util;
 use Twig\Environment;
 
-class Index extends Abstract_Template {
+class Index extends Abstract_Controller {
 	/**
 	 * @var Header_Wrap
 	 */

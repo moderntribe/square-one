@@ -3,12 +3,12 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Templates\Controllers\Content;
 
-use Tribe\Project\Templates\Abstract_Template;
+use Tribe\Project\Templates\Abstract_Controller;
 use Tribe\Project\Templates\Components\Content\Loop_Item as Item_Context;
 use Tribe\Project\Templates\Components\Image;
 use Tribe\Project\Theme\Image_Sizes;
 
-class Loop_Item extends Abstract_Template {
+class Loop_Item extends Abstract_Controller {
 	protected $time_formats = [
 		'c',
 		'F j, Y',

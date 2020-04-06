@@ -3,13 +3,13 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Templates\Controllers\Header;
 
-use Tribe\Project\Templates\Abstract_Template;
+use Tribe\Project\Templates\Abstract_Controller;
 use Tribe\Project\Templates\Component_Factory;
 use Tribe\Project\Templates\Components\Header\Header_Wrap as Header_Context;
 use Tribe\Project\Templates\Controllers\Header\Header_Default as Header_Content;
 use Twig\Environment;
 
-class Header_Wrap extends Abstract_Template {
+class Header_Wrap extends Abstract_Controller {
 	/**
 	 * @var Header_Content
 	 */

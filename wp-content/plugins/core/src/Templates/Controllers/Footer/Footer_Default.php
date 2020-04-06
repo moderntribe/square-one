@@ -4,14 +4,14 @@ declare( strict_types=1 );
 namespace Tribe\Project\Templates\Controllers\Footer;
 
 use Tribe\Project\Object_Meta\Social_Settings;
-use Tribe\Project\Templates\Abstract_Template;
+use Tribe\Project\Templates\Abstract_Controller;
 use Tribe\Project\Templates\Component_Factory;
 use Tribe\Project\Templates\Components\Footer\Footer_Default as Footer_Context;
 use Tribe\Project\Templates\Controllers\Footer\Navigation as Navigation;
 use Tribe\Project\Templates\Controllers\Traits\Copyright;
 use Twig\Environment;
 
-class Footer_Default extends Abstract_Template {
+class Footer_Default extends Abstract_Controller {
 	use Copyright;
 
 	protected $path = 'content/footer/default.twig';

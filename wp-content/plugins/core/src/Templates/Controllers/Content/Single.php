@@ -3,12 +3,12 @@
 
 namespace Tribe\Project\Templates\Controllers\Content;
 
-use Tribe\Project\Templates\Abstract_Template;
+use Tribe\Project\Templates\Abstract_Controller;
 use Tribe\Project\Templates\Components\Content\Single as Single_Context;
 use Tribe\Project\Templates\Components\Image;
 use Tribe\Project\Theme\Social_Links;
 
-class Single extends Abstract_Template {
+class Single extends Abstract_Controller {
 	protected $time_formats = [
 		'c',
 	];
