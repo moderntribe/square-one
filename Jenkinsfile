@@ -152,5 +152,5 @@ void loadEnvironmentVariables(path){
 }
 
 def environment(){
-    final afterLastSlash = env.BRANCH_NAME.substring(url.lastIndexOf('/') + 1, url.length())
+    final afterLastSlash = env.BRANCH_NAME.substring(env.BRANCH_NAME.lastIndexOf('/') + 1, env.BRANCH_NAME.length())
 }
