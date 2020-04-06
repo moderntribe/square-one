@@ -159,9 +159,9 @@ pipeline {
         success {
             slackSend(channel: "${SLACK_CHANNEL}", color: 'good', message: "Pipeline: Deployment of `${APP_NAME}` branch `${env.BRANCH_NAME}` to `${env.ENVIRONMENT}` was SUCCESSFUL. (build: <${RUN_DISPLAY_URL}|#${BUILD_NUMBER}>)")
         }
-        options {
-            skipDefaultCheckout()
-        }
+    }
+    options {
+        skipDefaultCheckout()
     }
 }
 
