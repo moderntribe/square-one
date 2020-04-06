@@ -15,6 +15,27 @@ pipeline {
     }
 
     stages {
+
+        stage('Checkout Deploy SCM') {
+            steps {
+                // Decrypt values
+                withCredentials([string(credentialsId: "${JENKINS_VAULTPASS}", variable: 'vaultPass')]) {
+                    sh script: "echo '${vaultPass}' > ./.vaultpass", label: "Write vaultpass to local folder"
+                    sh script: "ansible-vault decrypt ${env.HOST_CONFIG}${env.ENVIRONMENT}.cfg.vaulted --output=${env.HOST_CONFIG}${env.ENVIRONMENT}.cfg --vault-password-file ./.vaultpass", label: "Decrypt config config file"
+                    sh 'rm ./.vaultpass'
+                }
+
+                // Load Host environment variables
+                loadEnvironmentVariables("${env.HOST_CONFIG}${env.ENVIRONMENT}.cfg")
+
+                // checkout scm WPEngine
+                sshagent (credentials: ["${HOST_SSH_KEYS}"]) {
+                  sh script: """
+                    git clone ${env.deploy_repo} ${DEPLOY_FOLDER}
+                  """, label: "Git checkout Host SCM"
+                }
+            }
+        }
         stage('Checkout SCM'){
            steps {
                 echo "${env.BRANCH_NAME} - ${env.SLACK_CHANNEL} - ${env.ENVIRONMENT}"
@@ -79,32 +100,12 @@ pipeline {
             }
         }
         // DEPLOYMENT
-        stage('Checkout Deploy SCM') {
-            steps {
-                // Decrypt values
-                withCredentials([string(credentialsId: "${JENKINS_VAULTPASS}", variable: 'vaultPass')]) {
-                    dir(BUILD_FOLDER){
-                        sh script: "echo '${vaultPass}' > ./.vaultpass", label: "Write vaultpass to local folder"
-                        sh script: "ansible-vault decrypt ${env.HOST_CONFIG}${env.ENVIRONMENT}.cfg.vaulted --output=${env.HOST_CONFIG}${env.ENVIRONMENT}.cfg --vault-password-file ./.vaultpass", label: "Decrypt config config file"
-                        sh 'rm ./.vaultpass'
-                    }
-                }
-
-                // Load Host environment variables
-                loadEnvironmentVariables("${env.HOST_CONFIG}${env.ENVIRONMENT}.cfg")
-
-                // checkout scm WPEngine
-                sshagent (credentials: ["${HOST_SSH_KEYS}"]) {
-                  sh script: """
-                    git clone ${env.deploy_repo} ${DEPLOY_FOLDER}
-                  """, label: "Git checkout Host SCM"
-                }
-            }
-        }
         stage('Deploy') {
              steps {
-             	dir('dev/deploy')
-                sh script: "sh deploy_hosted_git.sh ${env.ENVIRONMENT} -y", label: "Deploy  ${env.ENVIRONMENT}"
+                dir('dev/deploy'){
+                    echo "Deploy to ${env.ENVIRONMENT}"
+                    //sh script: "sh deploy_hosted_git.sh ${env.ENVIRONMENT} -y", label: "Deploy  ${env.ENVIRONMENT}"
+                }
             }
         }
     }
