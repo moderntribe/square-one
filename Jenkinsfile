@@ -15,7 +15,7 @@ pipeline {
     }
 
     stages {
-        stage('Checkout SCM')
+        stage('Checkout SCM') {
             parallel {
                 stage('Build SCM'){
                    steps {
