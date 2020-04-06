@@ -10,6 +10,7 @@ pipeline {
         JENKINS_VAULTPASS = "${env.APP_NAME}-vaultpass"
         ENVIRONMENT_CONFIG = "./dev/deploy/.deploy/build/.host/config/"
         SLACK_CHANNEL = 'nicks-playground'
+        ENVIRONMENT = environment()
     }
 
     stages {
@@ -77,7 +78,7 @@ pipeline {
             }
         }
         // DEPLOYMENT
-        stage('Checkout Host SCM') {
+        stage('Checkout Deploy SCM') {
             steps {
                 // Decrypt values
                 withCredentials([string(credentialsId: "${JENKINS_VAULTPASS}", variable: 'vaultPass')]) {
@@ -148,4 +149,8 @@ void loadEnvironmentVariables(path){
         value = props["${key}"]
         env."${key}" = "${value}"
     }
+}
+
+def environment(){
+    final afterLastSlash = env.BRANCH_NAME.substring(url.lastIndexOf('/') + 1, url.length())
 }
