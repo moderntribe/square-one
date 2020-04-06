@@ -15,11 +15,13 @@ pipeline {
     stages {
         stage('Checkout SCM'){
            steps {
+                echo "${env.BRANCH_NAME} - ${params.SLACK_CHANNEL}"
+                slackSend(channel: "${SLACK_CHANNEL}", message: "Pipeline: Deployment of `${APP_NAME}` to `${env.BRANCH_NAME}` STARTED: (build: <${RUN_DISPLAY_URL}|#${BUILD_NUMBER}>)")
                // checkout scm
                 checkout([$class: 'GitSCM',
                     branches: [[name: "${env.BRANCH_NAME}" ]],
                     extensions: [[$class: 'WipeWorkspace'], [$class: 'RelativeTargetDirectory',  relativeTargetDir: BUILD_FOLDER]],
-                    userRemoteConfigs: [[url: "git@github.com:${env.GIT_REPO}", credentialsId: "${JENKINS_SSH_KEYS}"]]
+                    userRemoteConfigs: [[url: "git@github.com:${env.GIT_REPO}", credentialsId: "jenkins-ssh-key"]]
                 ])
             }
         }
@@ -36,8 +38,6 @@ pipeline {
                         }
                     }
                     steps {
-                        echo "${env.BRANCH_NAME} - ${params.SLACK_CHANNEL}"
-                        slackSend(channel: "${SLACK_CHANNEL}", message: "Pipeline: Deployment of `${APP_NAME}` to `${env.BRANCH_NAME}` STARTED: (build: <${RUN_DISPLAY_URL}|#${BUILD_NUMBER}>)")
                         withCredentials([file(credentialsId: "square-one-compose-plugins-keys", variable: "ENV_FILE")]) {
                             dir(BUILD_FOLDER){
                                 sh script: "cp $ENV_FILE .env", label: "Copy Composer .env to the root folder"
