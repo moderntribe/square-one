@@ -15,37 +15,40 @@ pipeline {
     }
 
     stages {
-
-        stage('Checkout Deploy SCM') {
-            steps {
-                // Decrypt values
-                withCredentials([string(credentialsId: "${JENKINS_VAULTPASS}", variable: 'vaultPass')]) {
-                    sh script: "echo '${vaultPass}' > ./.vaultpass", label: "Write vaultpass to local folder"
-                    sh script: "ansible-vault decrypt ${env.HOST_CONFIG}${env.ENVIRONMENT}.cfg.vaulted --output=${env.HOST_CONFIG}${env.ENVIRONMENT}.cfg --vault-password-file ./.vaultpass", label: "Decrypt config config file"
-                    sh 'rm ./.vaultpass'
+        stage('Checkout SCM')
+            parallel {
+                stage('Build SCM'){
+                   steps {
+                        echo "${env.BRANCH_NAME} - ${env.SLACK_CHANNEL} - ${env.ENVIRONMENT}"
+                        slackSend(channel: "${SLACK_CHANNEL}", message: "Pipeline: Deployment of `${APP_NAME}` to `${env.BRANCH_NAME}` STARTED: (build: <${RUN_DISPLAY_URL}|#${BUILD_NUMBER}>)")
+                       // checkout scm
+                        checkout([$class: 'GitSCM',
+                            branches: [[name: "${env.BRANCH_NAME}" ]],
+                            extensions: [[$class: 'WipeWorkspace'], [$class: 'RelativeTargetDirectory',  relativeTargetDir: BUILD_FOLDER]],
+                            userRemoteConfigs: [[url: "git@github.com:${env.GIT_REPO}", credentialsId: "jenkins-ssh-key"]]
+                        ])
+                    }
                 }
+                stage('Deploy SCM') {
+                    steps {
+                        // Decrypt values
+                        withCredentials([string(credentialsId: "${JENKINS_VAULTPASS}", variable: 'vaultPass')]) {
+                            sh script: "echo '${vaultPass}' > ./.vaultpass", label: "Write vaultpass to local folder"
+                            sh script: "ansible-vault decrypt ${env.HOST_CONFIG}${env.ENVIRONMENT}.cfg.vaulted --output=${env.HOST_CONFIG}${env.ENVIRONMENT}.cfg --vault-password-file ./.vaultpass", label: "Decrypt config config file"
+                            sh 'rm ./.vaultpass'
+                        }
 
-                // Load Host environment variables
-                loadEnvironmentVariables("${env.HOST_CONFIG}${env.ENVIRONMENT}.cfg")
+                        // Load Host environment variables
+                        loadEnvironmentVariables("${env.HOST_CONFIG}${env.ENVIRONMENT}.cfg")
 
-                // checkout scm WPEngine
-                sshagent (credentials: ["${HOST_SSH_KEYS}"]) {
-                  sh script: """
-                    git clone ${env.deploy_repo} ${DEPLOY_FOLDER}
-                  """, label: "Git checkout Host SCM"
+                        // checkout scm WPEngine
+                        sshagent (credentials: ["${HOST_SSH_KEYS}"]) {
+                          sh script: """
+                            git clone ${env.deploy_repo} ${DEPLOY_FOLDER}
+                          """, label: "Git checkout Host SCM"
+                        }
+                    }
                 }
-            }
-        }
-        stage('Checkout SCM'){
-           steps {
-                echo "${env.BRANCH_NAME} - ${env.SLACK_CHANNEL} - ${env.ENVIRONMENT}"
-                slackSend(channel: "${SLACK_CHANNEL}", message: "Pipeline: Deployment of `${APP_NAME}` to `${env.BRANCH_NAME}` STARTED: (build: <${RUN_DISPLAY_URL}|#${BUILD_NUMBER}>)")
-               // checkout scm
-                checkout([$class: 'GitSCM',
-                    branches: [[name: "${env.BRANCH_NAME}" ]],
-                    extensions: [[$class: 'WipeWorkspace'], [$class: 'RelativeTargetDirectory',  relativeTargetDir: BUILD_FOLDER]],
-                    userRemoteConfigs: [[url: "git@github.com:${env.GIT_REPO}", credentialsId: "jenkins-ssh-key"]]
-                ])
             }
         }
 
@@ -103,8 +106,7 @@ pipeline {
         stage('Deploy') {
              steps {
                 dir('dev/deploy'){
-                    echo "Deploy to ${env.ENVIRONMENT}"
-                    //sh script: "sh deploy_hosted_git.sh ${env.ENVIRONMENT} -y", label: "Deploy  ${env.ENVIRONMENT}"
+                    sh script: "sh deploy_hosted_git.sh ${env.ENVIRONMENT} -y", label: "Deploy to ${env.ENVIRONMENT}"
                 }
             }
         }
