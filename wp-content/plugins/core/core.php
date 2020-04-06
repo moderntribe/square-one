@@ -11,12 +11,12 @@ Author URI:  http://www.tri.be
 if ( file_exists( ABSPATH . '../vendor/autoload.php' ) ) {
 	// WP subfolder
 	require_once ABSPATH . '../vendor/autoload.php';
-} elseif ( @file_exists( ABSPATH . '/vendor/autoload.php'  ) ) {
+} elseif ( @file_exists( ABSPATH . 'vendor/autoload.php'  ) ) {
 	// WP standard
-	require_once ABSPATH . '/vendor/autoload.php';
-} elseif ( @file_exists( __DIR__ . 'vendor/autoload.php'  ) ) {
+	require_once ABSPATH . 'vendor/autoload.php';
+} elseif ( @file_exists( trailingslashit(__DIR__ ) . 'vendor/autoload.php'  ) ) {
 	// In core plugin
-	require_once trailingslashit( __DIR__ ) . '/vendor/autoload.php';
+	require_once trailingslashit(__DIR__ ) . 'vendor/autoload.php';
 }
 require_once trailingslashit( __DIR__ ) . 'functions/pluggable.php';
 
