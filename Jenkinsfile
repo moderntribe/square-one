@@ -8,7 +8,7 @@ pipeline {
         DEPLOY_FOLDER = "./dev/deploy/.deploy/deploy"
         GITHUB_TOKEN = credentials('tr1b0t-github-api-token')
         JENKINS_VAULTPASS = "${env.APP_NAME}-vaultpass"
-        ENVIRONMENT_CONFIG = "./dev/deploy/.deploy/build/.host/config/"
+        HOST_CONFIG = "./dev/deploy/.deploy/build/.host/config/"
         SLACK_CHANNEL = 'nicks-playground'
         ENVIRONMENT = environment()
     }
@@ -84,13 +84,13 @@ pipeline {
                 withCredentials([string(credentialsId: "${JENKINS_VAULTPASS}", variable: 'vaultPass')]) {
                     dir(BUILD_FOLDER){
                         sh script: "echo '${vaultPass}' > ./.vaultpass", label: "Write vaultpass to local folder"
-                        sh script: "ansible-vault decrypt ${env.ENVIRONMENT_CONFIG}.vaulted --output=${env.ENVIRONMENT_CONFIG} --vault-password-file ./.vaultpass", label: "Decrypt config config file"
+                        sh script: "ansible-vault decrypt ${env.HOST_CONFIG}${env.ENVIRONMENT}.vaulted --output=${env.HOST_CONFIG}${env.ENVIRONMENT}.cfg --vault-password-file ./.vaultpass", label: "Decrypt config config file"
                         sh 'rm ./.vaultpass'
                     }
                 }
 
                 // Load WP Engine environment variables
-                loadEnvironmentVariables("${env.ENVIRONMENT_CONFIG}")
+                loadEnvironmentVariables("${env.HOST_CONFIG}${env.ENVIRONMENT}.cfg")
 
                 // checkout scm WPEngine
                 sshagent (credentials: ["${GIT_SSH_KEYS}"]) {
