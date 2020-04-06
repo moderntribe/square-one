@@ -124,10 +124,9 @@ pipeline {
                     --exclude=node_modules \
                     --exclude=wp-content/object-cache.php \
                     --exclude=wp-content/plugins/core/assets/templates/cli
-                  # not wp-config.php. WP Engine manages that
                   rsync -rpv ${env.BUILD_FOLDER} ${env.DEPLOY_FOLDER} \
                     --include=build-process.php \
-                    --include=vendor/*** \
+                    --include=vendor/* \
                     --exclude=*
                 """, label: "Sync files to Deploy git directory"
 
