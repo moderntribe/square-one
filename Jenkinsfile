@@ -8,7 +8,7 @@ pipeline {
         DEPLOY_FOLDER = "./dev/deploy/.deploy/deploy"
         GITHUB_TOKEN = credentials('tr1b0t-github-api-token')
         JENKINS_VAULTPASS = "${env.APP_NAME}-vaultpass"
-        HOST_CONFIG = "./dev/deploy/.deploy/build/.host/config/"
+        HOST_CONFIG = "./dev/deploy/.host/config/"
         SLACK_CHANNEL = 'nicks-playground'
         ENVIRONMENT = environment()
     }
