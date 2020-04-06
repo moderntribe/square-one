@@ -15,37 +15,35 @@ pipeline {
 
     stages {
         stage('Checkout SCM') {
-            parallel {
-                stage('Build SCM'){
-                   steps {
-                        echo "${env.BRANCH_NAME} - ${env.SLACK_CHANNEL} - ${env.ENVIRONMENT}"
-                        slackSend(channel: "${SLACK_CHANNEL}", message: "Pipeline: Deployment of `${APP_NAME}` to `${env.BRANCH_NAME}` STARTED: (build: <${RUN_DISPLAY_URL}|#${BUILD_NUMBER}>)")
-                       // checkout scm
-                        checkout([$class: 'GitSCM',
-                            branches: [[name: "${env.BRANCH_NAME}" ]],
-                            extensions: [[$class: 'WipeWorkspace'], [$class: 'RelativeTargetDirectory',  relativeTargetDir: BUILD_FOLDER]],
-                            userRemoteConfigs: [[url: "git@github.com:${env.GIT_REPO}", credentialsId: "jenkins-ssh-key"]]
-                        ])
-                    }
+            stage('Build SCM'){
+               steps {
+                    echo "${env.BRANCH_NAME} - ${env.SLACK_CHANNEL} - ${env.ENVIRONMENT}"
+                    slackSend(channel: "${SLACK_CHANNEL}", message: "Pipeline: Deployment of `${APP_NAME}` to `${env.BRANCH_NAME}` STARTED: (build: <${RUN_DISPLAY_URL}|#${BUILD_NUMBER}>)")
+                   // checkout scm
+                    checkout([$class: 'GitSCM',
+                        branches: [[name: "${env.BRANCH_NAME}" ]],
+                        extensions: [[$class: 'WipeWorkspace'], [$class: 'RelativeTargetDirectory',  relativeTargetDir: BUILD_FOLDER]],
+                        userRemoteConfigs: [[url: "git@github.com:${env.GIT_REPO}", credentialsId: "jenkins-ssh-key"]]
+                    ])
                 }
-                stage('Deploy SCM') {
-                    steps {
-                        // Decrypt values
-                        withCredentials([string(credentialsId: "${JENKINS_VAULTPASS}", variable: 'vaultPass')]) {
-                            sh script: "echo '${vaultPass}' > ./.vaultpass", label: "Write vaultpass to local folder"
-                            sh script: "ansible-vault decrypt ${env.BUILD_FOLDER}/.host/config/${env.ENVIRONMENT}.cfg.vaulted --output=${env.BUILD_FOLDER}/.host/config/${env.ENVIRONMENT}.cfg --vault-password-file ./.vaultpass", label: "Decrypt config config file"
-                            sh 'rm ./.vaultpass'
-                        }
+            }
+            stage('Deploy SCM') {
+                steps {
+                    // Decrypt values
+                    withCredentials([string(credentialsId: "${JENKINS_VAULTPASS}", variable: 'vaultPass')]) {
+                        sh script: "echo '${vaultPass}' > ./.vaultpass", label: "Write vaultpass to local folder"
+                        sh script: "ansible-vault decrypt ${env.BUILD_FOLDER}/.host/config/${env.ENVIRONMENT}.cfg.vaulted --output=${env.BUILD_FOLDER}/.host/config/${env.ENVIRONMENT}.cfg --vault-password-file ./.vaultpass", label: "Decrypt config config file"
+                        sh 'rm ./.vaultpass'
+                    }
 
-                        // Load Host environment variables
-                        loadEnvironmentVariables("${env.BUILD_FOLDER}/.host/config/${env.ENVIRONMENT}.cfg")
+                    // Load Host environment variables
+                    loadEnvironmentVariables("${env.BUILD_FOLDER}/.host/config/${env.ENVIRONMENT}.cfg")
 
-                        // checkout scm WPEngine
-                        sshagent (credentials: ["${HOST_SSH_KEYS}"]) {
-                          sh script: """
-                            git clone ${env.deploy_repo} ${DEPLOY_FOLDER}
-                          """, label: "Git checkout Host SCM"
-                        }
+                    // checkout scm WPEngine
+                    sshagent (credentials: ["${HOST_SSH_KEYS}"]) {
+                      sh script: """
+                        git clone ${env.deploy_repo} ${DEPLOY_FOLDER}
+                      """, label: "Git checkout Host SCM"
                     }
                 }
             }
