@@ -72,17 +72,17 @@ jobs:
         with:
           node-version: '12.13.1'
 
-      - name: Get yarn cache directory
-        id: yarn-cache-dir
-        run: echo "::set-output name=dir::$(yarn cache dir)"
+      # - name: Get yarn cache directory
+      #   id: yarn-cache-dir
+      #   run: echo "::set-output name=dir::$(yarn cache dir)"
 
-      - name: Cache node modules
-        id: cache-node-modules
-        uses: actions/cache@v1
-        with:
-          path: ${{ steps.yarn-cache-dir.outputs.dir }}
-          key: ${{ runner.os }}-${{ env.cache_version }}-node-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: ${{ runner.os }}-${{ env.cache_version }}-node-
+      # - name: Cache node modules
+      #   id: cache-node-modules
+      #   uses: actions/cache@v1
+      #   with:
+      #     path: ${{ steps.yarn-cache-dir.outputs.dir }}
+      #     key: ${{ runner.os }}-${{ env.cache_version }}-node-${{ hashFiles('**/yarn.lock') }}
+      #     restore-keys: ${{ runner.os }}-${{ env.cache_version }}-node-
 
       - name: Install node modules
         run: yarn --frozen-lockfile
