@@ -89,7 +89,7 @@ class Initializer {
 	 */
 	protected function set_supported_post_types() {
 		remove_post_type_support( 'post', 'modular-content' );
-		add_post_type_support( 'page', 'modular-content' );
+		remove_post_type_support( 'page', 'modular-content' );
 	}
 
 	/**
