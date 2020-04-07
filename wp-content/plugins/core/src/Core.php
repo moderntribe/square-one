@@ -5,6 +5,8 @@ namespace Tribe\Project;
 use Psr\Container\ContainerInterface;
 use Tribe\Libs\Assets\Assets_Definer;
 use Tribe\Project\Admin\Admin_Subscriber;
+use Tribe\Project\Blocks\Blocks_Definer;
+use Tribe\Project\Blocks\Blocks_Subscriber;
 use Tribe\Project\Cache\Cache_Subscriber;
 use Tribe\Project\CLI\CLI_Subscriber;
 use Tribe\Project\Content\Content_Definer;
@@ -46,6 +48,7 @@ class Core {
 	 */
 	private $definers = [
 		Assets_Definer::class,
+		Blocks_Definer::class,
 		Content_Definer::class,
 		Nav_Menus_Definer::class,
 		Object_Meta_Definer::class,
@@ -60,6 +63,7 @@ class Core {
 	 */
 	private $subscribers = [
 		Admin_Subscriber::class,
+		Blocks_Subscriber::class,
 		\Tribe\Libs\Cache\Cache_Subscriber::class,
 		Cache_Subscriber::class,
 		CLI_Subscriber::class,
