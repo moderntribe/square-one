@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2020.04
+* Fixed: Uses a set version for Alpine in order to have a constant call to nslookup for docker.for.mac.localhost. 
+
 ## 2020.03
 * Added: PHP rules for .editorconfig, including config for many PhpStorm rules
 * Fixed: Broken composer.lock file preventing Gravity Forms installation
