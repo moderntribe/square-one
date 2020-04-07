@@ -10,7 +10,7 @@ const BundleAnalyzerPlugin = require( 'webpack-bundle-analyzer' ).BundleAnalyzer
  * Internal Dependencies
  */
 const prodBase = require( './configs/prod-base.js' );
-const dev = require( './themedev' );
+const entry = require( './entry/theme' );
 const pkg = require( '../package.json' );
 
 module.exports = merge.strategy( {
@@ -18,7 +18,7 @@ module.exports = merge.strategy( {
 } )(
 	prodBase,
 	{
-		entry: dev.entry,
+		entry,
 		output: {
 			path: resolve( `${ __dirname }/../`, pkg.square1.paths.core_theme_js_dist ),
 			publicPath: `/${ pkg.square1.paths.core_theme_js_dist }`,
