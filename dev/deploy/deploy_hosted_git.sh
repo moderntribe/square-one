@@ -8,7 +8,7 @@ function console_log(){
 }
 
 if [ ! -f "./deploy_hosted_git.sh" ]; then
-    echo "Script must be run in the /dev/deploy/ directory. Aborting..."
+    echo "deploy_hosted_git.sh is not being run from the /dev/deploy/ directory. Aborting..."
     exit 1
 fi
 

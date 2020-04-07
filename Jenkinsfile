@@ -27,7 +27,7 @@ pipeline {
                 ])
             }
         }
-        stage('Deploy SCM') {
+        stage('Host SCM') {
             steps {
                 // Decrypt values
                 withCredentials([string(credentialsId: "${JENKINS_VAULTPASS}", variable: 'vaultPass')]) {
@@ -39,7 +39,7 @@ pipeline {
                 // Load Host environment variables
                 loadEnvironmentVariables("${env.BUILD_FOLDER}/dev/deploy/.host/config/${env.ENVIRONMENT}.cfg")
 
-                // checkout scm WPEngine
+                // checkout Host SCM
                 sshagent (credentials: ["${HOST_SSH_KEYS}"]) {
                   sh script: """
                     git clone ${env.deploy_repo} ${DEPLOY_FOLDER}
