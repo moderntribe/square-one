@@ -1,0 +1,38 @@
+<article class="item-loop item-loop--{{ post_type }}">
+
+	<header class="item-loop__header">
+
+		<h3 class="item-loop__title">
+			<a href="{{ permalink }}" rel="bookmark">
+				{{ title }}
+			</a>
+		</h3>
+
+	</header>
+
+	{{ featured_image }}
+
+	{{ excerpt }}
+
+	<footer class="item-loop__footer">
+
+		<ul class="item-loop__meta">
+
+			<li class="item-loop__meta-date">
+				<time datetime="{{ time['c'] }}">
+					{{ time['F j, Y'] }}
+				</time>
+			</li>
+
+			<li class="item-loop__meta-author">
+				{{ __( 'by' )|esc_html }}
+				<a href="{{ author.url }}" rel="author">
+					{{ author.name }}
+				</a>
+			</li>
+
+		</ul>
+
+	</footer>
+
+</article>

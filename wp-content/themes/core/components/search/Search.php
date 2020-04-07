@@ -2,45 +2,60 @@
 
 namespace Tribe\Project\Templates\Components;
 
-class Search extends Component {
+/**
+ * Class Search
+ *
+ * @property string[] $form_classes
+ * @property string[] $form_attrs
+ * @property string[] $label_classes
+ * @property string[] $label_attrs
+ * @property string   $label_text
+ * @property string[] $input_classes
+ * @property string[] $input_attrs
+ * @property string   $submit_button
+ */
+class Search extends Context {
+	public const FORM_CLASSES  = 'form_classes';
+	public const FORM_ATTRS    = 'form_attrs';
+	public const LABEL_CLASSES = 'label_classes';
+	public const LABEL_ATTRS   = 'label_attrs';
+	public const LABEL_TEXT    = 'label_text';
+	public const INPUT_CLASSES = 'input_classes';
+	public const INPUT_ATTRS   = 'input_attrs';
+	public const SUBMIT_BUTTON = 'submit_button';
 
 	protected $path = __DIR__ . '/search.twig';
 
-	const FORM_CLASSES  = 'form_classes';
-	const FORM_ATTRS    = 'form_attrs';
-	const LABEL_CLASSES = 'label_classes';
-	const LABEL_ATTRS   = 'label_attrs';
-	const LABEL_TEXT    = 'label_text';
-	const INPUT_CLASSES = 'input_classes';
-	const INPUT_ATTRS   = 'input_attrs';
-	const SUBMIT_BUTTON = 'submit_button';
-
-	protected function parse_options( array $options ): array {
-		$defaults = [
-			self::FORM_CLASSES  => [],
-			self::FORM_ATTRS    => [],
-			self::LABEL_CLASSES => [],
-			self::LABEL_ATTRS   => [],
-			self::LABEL_TEXT    => [],
-			self::INPUT_CLASSES => [],
-			self::INPUT_ATTRS   => [],
-		];
-
-		return wp_parse_args( $options, $defaults );
-	}
-
-	public function get_data(): array {
-		$data = [
-			self::FORM_CLASSES  => $this->merge_classes( [], $this->options[ self::FORM_CLASSES ], true ),
-			self::FORM_ATTRS    => $this->merge_attrs( [], $this->options[ self::FORM_ATTRS ], true ),
-			self::LABEL_CLASSES => $this->merge_classes( [], $this->options[ self::LABEL_CLASSES ], true ),
-			self::LABEL_ATTRS   => $this->merge_attrs( [], $this->options[ self::LABEL_ATTRS ], true ),
-			self::LABEL_TEXT    => $this->merge_classes( [], $this->options[ self::LABEL_TEXT ], true ),
-			self::INPUT_CLASSES => $this->merge_classes( [], $this->options[ self::INPUT_CLASSES ], true ),
-			self::INPUT_ATTRS   => $this->merge_attrs( [], $this->options[ self::INPUT_ATTRS ], true ),
-			self::SUBMIT_BUTTON => $this->options[ self::SUBMIT_BUTTON ],
-		];
-
-		return $data;
-	}
+	protected $properties = [
+		self::FORM_CLASSES  => [
+			self::DEFAULT       => [],
+			self::MERGE_CLASSES => [],
+		],
+		self::FORM_ATTRS    => [
+			self::DEFAULT          => [],
+			self::MERGE_ATTRIBUTES => [],
+		],
+		self::LABEL_CLASSES => [
+			self::DEFAULT       => [],
+			self::MERGE_CLASSES => [],
+		],
+		self::LABEL_ATTRS   => [
+			self::DEFAULT          => [],
+			self::MERGE_ATTRIBUTES => [],
+		],
+		self::LABEL_TEXT    => [
+			self::DEFAULT => '',
+		],
+		self::INPUT_CLASSES => [
+			self::DEFAULT       => [],
+			self::MERGE_CLASSES => [],
+		],
+		self::INPUT_ATTRS   => [
+			self::DEFAULT          => [],
+			self::MERGE_ATTRIBUTES => [],
+		],
+		self::SUBMIT_BUTTON => [
+			self::DEFAULT => '',
+		],
+	];
 }

@@ -1,3 +1,3 @@
 <?php
 
-echo tribe_template( \Tribe\Project\Templates\Controllers\Content\Panels\ContentSlider::class );
+echo tribe_template( \Tribe\Project\Templates\Controllers\Panels\Content_Slider::class );

@@ -4,6 +4,6 @@
  */
 
 
-use Tribe\Project\Templates\Controllers\Page;
+use Tribe\Project\Templates\Controllers\Pages\Page;
 
-echo tribe_template( Page::class, 'page-templates/page-section.twig' );
+echo tribe_template( Page::class, 'components/pages/page-section/page-section.twig' );

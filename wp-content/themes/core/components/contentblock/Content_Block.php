@@ -2,37 +2,41 @@
 
 namespace Tribe\Project\Templates\Components;
 
-class Content_Block extends Component {
+/**
+ * Class Content_Block
+ *
+ * @property string   $title
+ * @property string   $text
+ * @property string   $button
+ * @property string[] $classes
+ * @property string[] $content_classes
+ */
+class Content_Block extends Context {
+	public const TITLE           = 'title';
+	public const TEXT            = 'text';
+	public const BUTTON          = 'button';
+	public const CLASSES         = 'classes';
+	public const CONTENT_CLASSES = 'content_classes';
 
 	protected $path = __DIR__ . '/contentblock.twig';
 
-	const TITLE           = 'title';
-	const TEXT            = 'text';
-	const BUTTON          = 'button';
-	const CLASSES         = 'classes';
-	const CONTENT_CLASSES = 'content_classes';
-
-	protected function parse_options( array $options ): array {
-		$defaults = [
-			self::TITLE           => '',
-			self::TEXT            => '',
-			self::CLASSES         => [],
-			self::CONTENT_CLASSES => [],
-			self::BUTTON          => '',
-		];
-
-		return wp_parse_args( $options, $defaults );
-	}
-
-	public function get_data(): array {
-		$data = [
-			self::TITLE           => $this->options[ self::TITLE ],
-			self::CLASSES         => $this->merge_classes( [ 'c-content-block' ], $this->options[ self::CLASSES ], true ),
-			self::CONTENT_CLASSES => $this->merge_classes( [ 'c-content-block__content' ], $this->options[ self::CONTENT_CLASSES ], true ),
-			self::TEXT            => $this->options[ self::TEXT ],
-			self::BUTTON          => $this->options[ self::BUTTON ],
-		];
-
-		return $data;
-	}
+	protected $properties = [
+		self::TITLE           => [
+			self::DEFAULT => '',
+		],
+		self::TEXT            => [
+			self::DEFAULT => '',
+		],
+		self::BUTTON          => [
+			self::DEFAULT => '',
+		],
+		self::CLASSES         => [
+			self::DEFAULT       => [],
+			self::MERGE_CLASSES => [ 'c-content-block' ],
+		],
+		self::CONTENT_CLASSES => [
+			self::DEFAULT       => [],
+			self::MERGE_CLASSES => [ 'c-content-block__content' ],
+		],
+	];
 }

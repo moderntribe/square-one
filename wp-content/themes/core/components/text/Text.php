@@ -2,34 +2,36 @@
 
 namespace Tribe\Project\Templates\Components;
 
-class Text extends Component {
+/**
+ * Class Text
+ *
+ * @property string   $content
+ * @property string   $tag
+ * @property string[] $classes
+ * @property string[] $attrs
+ */
+class Text extends Context {
+	public const TEXT    = 'content';
+	public const TAG     = 'tag';
+	public const CLASSES = 'classes';
+	public const ATTRS   = 'attrs';
 
 	protected $path = __DIR__ . '/text.twig';
 
-	const TEXT    = 'content';
-	const TAG     = 'tag';
-	const CLASSES = 'classes';
-	const ATTRS   = 'attrs';
-
-	protected function parse_options( array $options ): array {
-		$defaults = [
-			self::TEXT    => '',
-			self::TAG     => '',
-			self::CLASSES => [],
-			self::ATTRS   => [],
-		];
-
-		return wp_parse_args( $options, $defaults );
-	}
-
-	public function get_data(): array {
-		$data = [
-			self::TEXT    => $this->options[ self::TEXT ],
-			self::TAG     => $this->options[ self::TAG ] ? $this->options[ self::TAG ] : 'div',
-			self::CLASSES => $this->merge_classes( [], $this->options[ self::CLASSES ], true ),
-			self::ATTRS   => $this->merge_attrs( [], $this->options[ self::ATTRS ], true ),
-		];
-
-		return $data;
-	}
+	protected $properties = [
+		self::TEXT    => [
+			self::DEFAULT => '',
+		],
+		self::TAG     => [
+			self::DEFAULT => 'div',
+		],
+		self::CLASSES => [
+			self::DEFAULT       => [],
+			self::MERGE_CLASSES => [],
+		],
+		self::ATTRS   => [
+			self::DEFAULT          => [],
+			self::MERGE_ATTRIBUTES => [],
+		],
+	];
 }

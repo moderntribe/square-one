@@ -32,7 +32,7 @@ For example purposes, let’s look at the Card component. Here’s what it’s C
 
 namespace Tribe\Project\Templates\Components;
 
-class Card extends Component {
+class Card extends Context {
 
 	const TEMPLATE_NAME = 'components/card.twig';
 

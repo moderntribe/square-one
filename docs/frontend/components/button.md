@@ -89,10 +89,10 @@ And the panel controller using the Button component
 
 namespace Tribe\Project\Templates\Content\Panels;
 
-use Tribe\Project\Panels\Types\MicroNavButtons as Micro;
+use Tribe\Project\Panels\Types\Micronavbuttons as Micro;
 use Tribe\Project\Templates\Components\Button;
 
-class MicroNavButtons extends Panel {
+class Micronavbuttons extends Panel {
 
 	public function get_data(): array {
 		$data       = parent::get_data();
