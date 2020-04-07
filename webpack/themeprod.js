@@ -11,6 +11,7 @@ const BundleAnalyzerPlugin = require( 'webpack-bundle-analyzer' ).BundleAnalyzer
  */
 const prodBase = require( './configs/prod-base.js' );
 const entry = require( './entry/theme' );
+const DependencyExtraction = require('./plugins/dependency-extraction');
 const pkg = require( '../package.json' );
 
 module.exports = merge.strategy( {
@@ -32,6 +33,11 @@ module.exports = merge.strategy( {
 				reportFilename: resolve( `${ __dirname }/../`, 'reports/webpack-theme-bundle-prod.html' ),
 				openAnalyzer: false,
 			} ),
+			new DependencyExtraction({
+				outputFormat: 'php',
+				combineAssets: true,
+				combinedOutputFile: 'assets.php'
+			}),
 		],
 	}
 );
