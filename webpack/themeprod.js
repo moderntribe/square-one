@@ -2,10 +2,11 @@ const { resolve } = require( 'path' );
 const webpack = require( 'webpack' );
 const common = require( './common.js' );
 const dev = require( './themedev' );
+const splitChunks = require( './split-chunks.js' );
 const merge = require( 'webpack-merge' );
-const TerserPlugin = require( 'terser-webpack-plugin' );
+const minimizer = require( './minimizer' );
 const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
-const OptimizeCSSAssetsPlugin = require( 'optimize-css-assets-webpack-plugin' );
+const BundleAnalyzerPlugin = require( 'webpack-bundle-analyzer' ).BundleAnalyzerPlugin;
 const pkg = require( '../package.json' );
 
 module.exports = merge.strategy( {
@@ -20,6 +21,7 @@ module.exports = merge.strategy( {
 	dev,
 	{
 		cache: false,
+		devtool: false,
 		mode: 'production',
 		entry: {
 			scripts: dev.entry.scripts,
@@ -41,36 +43,17 @@ module.exports = merge.strategy( {
 			new MiniCssExtractPlugin( {
 				filename: '../../css/dist/[name].min.css',
 			} ),
+			new BundleAnalyzerPlugin( {
+				analyzerMode: 'static',
+				reportFilename: resolve( `${ __dirname }/../`, 'reports/webpack-theme-bundle-prod.html' ),
+				openAnalyzer: false,
+			} ),
 		],
 		optimization: {
-			splitChunks: { // CommonsChunkPlugin()
-				cacheGroups: {
-					vendor: {
-						test: /[\\/]node_modules[\\/]/,
-						name: 'vendor',
-						chunks: 'all',
-					},
-				},
-			},
+			splitChunks,
 			noEmitOnErrors: true, // NoEmitOnErrorsPlugin
 			concatenateModules: true, //ModuleConcatenationPlugin
-			minimizer: [
-				new TerserPlugin( {
-					cache: true,
-					parallel: true,
-					sourceMap: true,
-					terserOptions: {
-						compress: {
-							warnings: false,
-							drop_console: true,
-						},
-						output: {
-							comments: false,
-						},
-					},
-				} ),
-				new OptimizeCSSAssetsPlugin( {} ),
-			],
+			minimizer,
 		},
 	}
 );

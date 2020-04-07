@@ -24,10 +24,6 @@ if ( ! config ) {
  */
 
 const gulpTasks = [
-	/* Concat tasks */
-
-	'concat:themeMinVendors', // concat the webpack and manual vendors together into one file
-
 	/* Constants tasks */
 
 	'constants:buildTimestamp', // set a timestamp for cache busting of css and js by php
@@ -45,7 +41,6 @@ const gulpTasks = [
 	'clean:coreIconsEnd', // delete the zip file you pasted in dev_components
 	'clean:themeMinCSS', // delete all minified css files in theme
 	'clean:themeMinJS', // delete all minified js files in theme
-	'clean:themeMinVendorJS', // delete all minified vendors in theme
 
 	/* Cssnano tasks */
 
@@ -219,8 +214,7 @@ gulp.task( 'server_dist', gulp.series(
 	gulp.parallel( 'shell:scriptsThemeDev', 'shell:scriptsAdminDev' ),
 	gulp.parallel( 'shell:scriptsThemeProd', 'shell:scriptsAdminProd' ),
 	'uglify:themeMin',
-	'concat:themeMinVendors',
-	gulp.parallel( 'clean:themeMinVendorJS', 'constants:buildTimestamp' ),
+	gulp.parallel( 'constants:buildTimestamp' ),
 ) );
 
 /**
@@ -254,8 +248,7 @@ gulp.task( 'dist', gulp.series(
 	gulp.parallel( 'shell:scriptsThemeDev', 'shell:scriptsAdminDev' ),
 	gulp.parallel( 'shell:scriptsThemeProd', 'shell:scriptsAdminProd' ),
 	'uglify:themeMin',
-	'concat:themeMinVendors',
-	gulp.parallel( 'clean:themeMinVendorJS', 'constants:buildTimestamp' ),
+	gulp.parallel( 'constants:buildTimestamp' ),
 ) );
 
 gulp.task( 'default', gulp.series( 'dist' ) );

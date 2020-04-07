@@ -3,6 +3,7 @@ const webpack = require( 'webpack' );
 const merge = require( 'webpack-merge' );
 const common = require( './common.js' );
 const rules = require( './rules.js' );
+const splitChunks = require( './split-chunks.js' );
 const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
 const BundleAnalyzerPlugin = require( 'webpack-bundle-analyzer' ).BundleAnalyzerPlugin;
 const pkg = require( '../package.json' );
@@ -39,15 +40,7 @@ module.exports = merge( common, {
 		} ),
 	],
 	optimization: {
-		splitChunks: { // CommonsChunkPlugin()
-			cacheGroups: {
-				vendor: {
-					test: /[\\/]node_modules[\\/]/,
-					name: 'vendor',
-					chunks: 'all',
-				},
-			},
-		},
+		splitChunks,
 		noEmitOnErrors: true, // NoEmitOnErrorsPlugin
 		concatenateModules: true, //ModuleConcatenationPlugin
 	},
