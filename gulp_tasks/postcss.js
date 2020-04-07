@@ -78,13 +78,14 @@ function cssProcess( {
 
 module.exports = {
 	theme() {
-		return cssProcess( {
-			src: [
-				`${ pkg.square1.paths.core_theme_pcss }master.pcss`,
-				`${ pkg.square1.paths.core_theme_pcss }print.pcss`,
-			],
-			dest: pkg.square1.paths.core_theme_css,
-		} );
+		return Promise.resolve( 'Deprecated' );
+		// return cssProcess( {
+		// 	src: [
+		// 		`${ pkg.square1.paths.core_theme_pcss }master.pcss`,
+		// 		`${ pkg.square1.paths.core_theme_pcss }print.pcss`,
+		// 	],
+		// 	dest: pkg.square1.paths.core_theme_css,
+		// } );
 	},
 	themeComponents() {
 		return cssProcess( {
