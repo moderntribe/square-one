@@ -14,7 +14,9 @@ interface Template_Interface {
 	/**
 	 * Render the template and return it as a string
 	 *
+	 * @param string $path Path to the template to render, overriding any default that is set
+	 *
 	 * @return string The rendered template
 	 */
-	public function render(): string;
+	public function render( string $path = '' ): string;
 }

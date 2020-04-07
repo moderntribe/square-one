@@ -2,71 +2,89 @@
 
 namespace Tribe\Project\Templates\Components;
 
-class Slider extends Component {
+/**
+ * Class Slider
+ *
+ * @property bool     $show_carousel
+ * @property bool     $show_arrows
+ * @property bool     $show_pagination
+ * @property string[] $slides
+ * @property string[] $thumbnails
+ * @property string[] $container_classes
+ * @property string[] $main_classes
+ * @property string[] $wrapper_classes
+ * @property string[] $slide_classes
+ * @property string[] $main_attrs
+ * @property string[] $carousel_attrs
+ */
+class Slider extends Context {
+	public const SHOW_CAROUSEL     = 'show_carousel';
+	public const SHOW_ARROWS       = 'show_arrows';
+	public const SHOW_PAGINATION   = 'show_pagination';
+	public const SLIDES            = 'slides';
+	public const THUMBNAILS        = 'thumbnails';
+	public const CONTAINER_CLASSES = 'container_classes';
+	public const MAIN_CLASSES      = 'main_classes';
+	public const WRAPPER_CLASSES   = 'wrapper_classes';
+	public const SLIDE_CLASSES     = 'slide_classes';
+	public const MAIN_ATTRS        = 'main_attrs';
+	public const CAROUSEL_ATTRS    = 'carousel_attrs';
 
 	protected $path = __DIR__ . '/slider.twig';
 
-	const SHOW_CAROUSEL   = 'show_carousel';
-	const SHOW_ARROWS     = 'show_arrows';
-	const SHOW_PAGINATION = 'show_pagination';
-	const SLIDES          = 'slides';
-	const THUMBNAILS      = 'thumbnails';
-	const CLASSES         = 'container_classes';
-	const MAIN_CLASSES    = 'main_classes';
-	const WRAPPER_CLASSES = 'wrapper_classes';
-	const SLIDE_CLASSES   = 'slide_classes';
-	const MAIN_ATTRS      = 'main_attrs';
-	const CAROUSEL_ATTRS  = 'carousel_attrs';
-
-	protected function parse_options( array $options ): array {
-		$defaults = [
-			self::SHOW_CAROUSEL   => true,
-			self::SHOW_ARROWS     => true,
-			self::SHOW_PAGINATION => false,
-			self::SLIDES          => [],
-			self::THUMBNAILS      => [],
-			self::CLASSES         => [],
-			self::MAIN_CLASSES    => [],
-			self::WRAPPER_CLASSES => [],
-			self::SLIDE_CLASSES   => [],
-			self::MAIN_ATTRS      => [],
-			self::CAROUSEL_ATTRS  => [],
-		];
-
-		return wp_parse_args( $options, $defaults );
-	}
-
-	protected function main_classes(): array {
-		$classes = [ 'c-slider__main', 'swiper-container' ];
-		if ( $this->options[ self::SHOW_CAROUSEL ] ) {
-			$classes[] = 'c-slider__main--has-carousel';
-		}
-		if ( $this->options[ self::SHOW_ARROWS ] ) {
-			$classes[] = 'c-slider__main--has-arrows';
-		}
-		if ( $this->options[ self::SHOW_PAGINATION ] ) {
-			$classes[] = 'c-slider__main--has-pagination';
-		}
-
-		return $classes;
-	}
+	protected $properties = [
+		self::SHOW_CAROUSEL     => [
+			self::DEFAULT => true,
+		],
+		self::SHOW_ARROWS       => [
+			self::DEFAULT => true,
+		],
+		self::SHOW_PAGINATION   => [
+			self::DEFAULT => false,
+		],
+		self::SLIDES            => [
+			self::DEFAULT => [],
+		],
+		self::THUMBNAILS        => [
+			self::DEFAULT => [],
+		],
+		self::CONTAINER_CLASSES => [
+			self::DEFAULT       => [],
+			self::MERGE_CLASSES => [ 'c-slider' ],
+		],
+		self::MAIN_CLASSES      => [
+			self::DEFAULT          => [],
+			self::MERGE_ATTRIBUTES => [ 'c-slider__main', 'swiper-container' ],
+		],
+		self::WRAPPER_CLASSES   => [
+			self::DEFAULT       => [],
+			self::MERGE_CLASSES => [ 'c-slider__wrapper', 'swiper-wrapper' ],
+		],
+		self::SLIDE_CLASSES     => [
+			self::DEFAULT       => [],
+			self::MERGE_CLASSES => [ 'c-slider__slide', 'swiper-slide' ],
+		],
+		self::MAIN_ATTRS        => [
+			self::DEFAULT          => [],
+			self::MERGE_ATTRIBUTES => [ 'data-js' => 'c-slider' ],
+		],
+		self::CAROUSEL_ATTRS    => [
+			self::DEFAULT          => [],
+			self::MERGE_ATTRIBUTES => [ 'data-js' => 'c-slider-carousel' ],
+		],
+	];
 
 	public function get_data(): array {
-		$data = [
-			self::SLIDES          => $this->options[ self::SLIDES ],
-			self::THUMBNAILS      => $this->options[ self::THUMBNAILS ],
-			self::SHOW_CAROUSEL   => $this->options[ self::SHOW_CAROUSEL ],
-			self::SHOW_ARROWS     => $this->options[ self::SHOW_ARROWS ],
-			self::SHOW_PAGINATION => $this->options[ self::SHOW_PAGINATION ],
-			self::CLASSES         => $this->merge_classes( [ 'c-slider' ], $this->options[ self::CLASSES ], true ),
-			self::MAIN_CLASSES    => $this->merge_classes( $this->main_classes(), $this->options[ self::MAIN_CLASSES ], true ),
-			self::SLIDE_CLASSES   => $this->merge_classes( [ 'c-slider__slide', 'swiper-slide' ], $this->options[ self::SLIDE_CLASSES ], true ),
-			self::WRAPPER_CLASSES => $this->merge_classes( [ 'c-slider__wrapper', 'swiper-wrapper' ], $this->options[ self::WRAPPER_CLASSES ], true ),
-			self::MAIN_ATTRS      => $this->merge_attrs( [ 'data-js' => 'c-slider' ], $this->options[ self::MAIN_ATTRS ], true ),
-			self::CAROUSEL_ATTRS  => $this->merge_attrs( [ 'data-js' => 'c-slider-carousel' ], $this->options[ self::CAROUSEL_ATTRS ], true ),
-		];
+		if ( $this->show_carousel ) {
+			$this->properties[ self::MAIN_CLASSES ][ self::MERGE_CLASSES ][] = 'c-slider__main--has-carousel';
+		}
+		if ( $this->show_arrows ) {
+			$this->properties[ self::MAIN_CLASSES ][ self::MERGE_CLASSES ][] = 'c-slider__main--has-arrows';
+		}
+		if ( $this->show_pagination ) {
+			$this->properties[ self::MAIN_CLASSES ][ self::MERGE_CLASSES ][] = 'c-slider__main--has-pagination';
+		}
 
-
-		return $data;
+		return parent::get_data();
 	}
 }

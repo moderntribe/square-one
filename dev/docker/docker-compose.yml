@@ -94,11 +94,17 @@ services:
       environment:
         - VIRTUAL_HOST=square1.tribe,*.square1.tribe
 
+
+
+    memcached-tests:
+      <<: *proxynetwork
+      image: memcached:alpine
+
     php-tests:
       <<: *proxynetwork
       <<: *php
       links:
-        - memcached
+        - memcached-tests:memcached
         - redis
         - elasticsearch
         - chrome

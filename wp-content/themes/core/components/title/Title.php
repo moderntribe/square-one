@@ -2,34 +2,37 @@
 
 namespace Tribe\Project\Templates\Components;
 
-class Title extends Component {
+/**
+ * Class Title
+ *
+ * @property string   $title
+ * @property string   $tag
+ * @property string[] $classes
+ * @property string[] $attrs
+ */
+class Title extends Context {
+	public const TITLE   = 'title';
+	public const TAG     = 'tag';
+	public const CLASSES = 'classes';
+	public const ATTRS   = 'attrs';
 
 	protected $path = __DIR__ . '/title.twig';
 
-	const TITLE         = 'title';
-	const TAG           = 'tag';
-	const CLASSES       = 'classes';
-	const ATTRS         = 'attrs';
+	protected $properties = [
+		self::TITLE   => [
+			self::DEFAULT => 'h2',
+		],
+		self::TAG     => [
+			self::DEFAULT => '',
+		],
+		self::CLASSES => [
+			self::DEFAULT => [],
+			self::MERGE_CLASSES => [],
+		],
+		self::ATTRS   => [
+			self::DEFAULT => [],
+			self::MERGE_ATTRIBUTES => [],
+		],
+	];
 
-	protected function parse_options( array $options ): array {
-		$defaults = [
-			self::TITLE   => '',
-			self::TAG     => '',
-			self::CLASSES => [],
-			self::ATTRS   => [],
-		];
-
-		return wp_parse_args( $options, $defaults );
-	}
-
-	public function get_data(): array {
-		$data = [
-			self::TITLE   => $this->options[ self::TITLE ],
-			self::TAG     => $this->options[ self::TAG ],
-			self::CLASSES => $this->merge_classes( [], $this->options[ self::CLASSES ], true ),
-			self::ATTRS   => $this->merge_attrs( [], $this->options[ self::ATTRS ], true ),
-		];
-
-		return $data;
-	}
 }

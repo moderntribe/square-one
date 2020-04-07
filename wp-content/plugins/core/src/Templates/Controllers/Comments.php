@@ -3,34 +3,24 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Templates\Controllers;
 
-use Tribe\Project\Templates\Abstract_Template;
-use Tribe\Project\Templates\Component_Factory;
-use Twig\Environment;
+use Tribe\Project\Templates\Abstract_Controller;
+use Tribe\Project\Templates\Components\Comments as Comments_Context;
 
-class Comments extends Abstract_Template {
-	protected $path = 'comments.twig';
-
-	public function __construct( Environment $twig, Component_Factory $factory ) {
-		parent::__construct( $twig, $factory );
-	}
-
-	public function get_data(): array {
+class Comments extends Abstract_Controller {
+	public function render( string $path = '' ): string {
 		$password_required = post_password_required();
 		$have_comments     = ( ! $password_required ) && have_comments();
-		$open              = comments_open();
-		$data              = [
-			'post_password_required' => $password_required,
-			'have_comments'          => $have_comments,
-			'open'                   => $open,
-			'title'                  => $this->get_title(),
-			'comments'               => $have_comments ? $this->get_comments() : '',
-			'form'                   => $this->get_comment_form(),
-			'pagination'             => $this->get_pagination(),
-		];
 
-		return $data;
+		return $this->factory->get( Comments_Context::class, [
+			Comments_Context::PASSWORD_REQUIRED => $password_required,
+			Comments_Context::HAVE_COMMENTS     => $have_comments,
+			Comments_Context::OPEN              => comments_open(),
+			Comments_Context::TITLE             => $this->get_title(),
+			Comments_Context::COMMENTS          => $have_comments ? $this->get_comments() : '',
+			Comments_Context::FORM              => $this->get_comment_form(),
+			Comments_Context::PAGINATION        => $this->get_pagination(),
+		] )->render( $path );
 	}
-
 
 	protected function get_title() {
 		return sprintf(

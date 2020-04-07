@@ -1,3 +1,3 @@
 <?php
 
-echo tribe_template( \Tribe\Project\Templates\Controllers\Content\Panels\Wysiwyg::class );
+echo tribe_template( \Tribe\Project\Templates\Controllers\Panels\Wysiwyg::class );
