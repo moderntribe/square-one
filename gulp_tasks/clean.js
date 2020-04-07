@@ -33,10 +33,4 @@ module.exports = {
 			`${ pkg.square1.paths.core_admin_js_dist }*.*.min.js`,
 		] );
 	},
-	themeMinVendorJS() {
-		return del( [
-			`${ pkg.square1.paths.core_theme_js_dist }vendorGlobal.min.js`,
-			`${ pkg.square1.paths.core_theme_js_dist }vendor.min.js`,
-		] );
-	},
 };

@@ -49,7 +49,7 @@ class Loop_Item extends Abstract_Controller {
 			Image::ATTACHMENT      => $image,
 			Image::AS_BG           => true,
 			Image::WRAPPER_CLASSES => [ 'item__image' ],
-			Image::SHIM            => trailingslashit( get_stylesheet_directory_uri() ) . 'img/theme/shims/16x9.png',
+			Image::SHIM            => trailingslashit( get_stylesheet_directory_uri() ) . 'assets/img/theme/shims/16x9.png',
 			Image::SRC_SIZE        => Image_Sizes::CORE_FULL,
 			Image::SRCSET_SIZES    => [
 				Image_Sizes::CORE_FULL,

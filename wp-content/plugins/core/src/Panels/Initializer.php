@@ -267,14 +267,14 @@ class Initializer {
 	}
 
 	public function thumbnail_url( $filename ) {
-		return trailingslashit( get_stylesheet_directory_uri() ) . 'img/admin/panels/thumbnails/' . $filename;
+		return trailingslashit( get_stylesheet_directory_uri() ) . 'assets/img/admin/panels/thumbnails/' . $filename;
 	}
 
 	public function layout_icon_url( $filename ) {
-		return trailingslashit( get_stylesheet_directory_uri() ) . 'img/admin/panels/icons/standard/' . $filename;
+		return trailingslashit( get_stylesheet_directory_uri() ) . 'assets/img/admin/panels/icons/standard/' . $filename;
 	}
 
 	public function swatch_icon_url( $filename ) {
-		return trailingslashit( get_stylesheet_directory_uri() ) . 'img/admin/panels/icons/swatches/' . $filename;
+		return trailingslashit( get_stylesheet_directory_uri() ) . 'assets/img/admin/panels/icons/swatches/' . $filename;
 	}
 }

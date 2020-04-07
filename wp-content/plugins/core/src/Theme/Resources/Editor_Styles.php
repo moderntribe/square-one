@@ -11,12 +11,12 @@ class Editor_Styles {
 	 */
 	public function visual_editor_styles() {
 
-		$css_dir    = trailingslashit( get_stylesheet_directory_uri() ) . 'css/admin/';
+		$css_dir    = trailingslashit( get_stylesheet_directory_uri() ) . 'assets/css/dist/admin/';
 		$editor_css = 'editor-style.css';
 
 		// Production
 		if ( ! defined( 'SCRIPT_DEBUG' ) || SCRIPT_DEBUG === false ) {
-			$editor_css = 'dist/editor-style.min.css';
+			$editor_css = 'editor-style.min.css';
 		}
 
 		add_editor_style( $css_dir . $editor_css );

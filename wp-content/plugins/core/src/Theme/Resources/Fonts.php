@@ -50,7 +50,7 @@ class Fonts {
 		if( empty( $this->fonts[ 'typekit' ] ) && empty( $this->fonts[ 'google' ] ) && empty( $this->fonts[ 'custom' ] ) ) {
 			return;
 		}
-		
+
 		?>
 
 		<script>
@@ -117,6 +117,6 @@ class Fonts {
 	}
 
 	private function get_webfont_src() {
-		return trailingslashit( get_stylesheet_directory_uri() ) . 'js/vendor/webfontloader.js';
+		return trailingslashit( get_stylesheet_directory_uri() ) . 'assets/js/vendor/webfontloader.js';
 	}
 }
