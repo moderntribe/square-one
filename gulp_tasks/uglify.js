@@ -14,7 +14,7 @@ module.exports = {
 			`${ pkg.square1.paths.core_theme_js_vendor }lazysizes.js`,
 			`${ pkg.square1.paths.core_theme_js_vendor }swiper.js`,
 		] )
-			.pipe( concat( 'vendorGlobal.min.js' ) )
+			.pipe( concat( 'vendor.min.js' ) )
 			.pipe( uglify( {
 				compress: {
 					drop_console: true,
