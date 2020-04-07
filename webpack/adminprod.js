@@ -2,7 +2,6 @@
  * External Dependencies
  */
 const { resolve } = require( 'path' );
-const webpack = require( 'webpack' );
 const merge = require( 'webpack-merge' );
 const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
 const BundleAnalyzerPlugin = require( 'webpack-bundle-analyzer' ).BundleAnalyzerPlugin;
@@ -10,31 +9,19 @@ const BundleAnalyzerPlugin = require( 'webpack-bundle-analyzer' ).BundleAnalyzer
 /**
  * Internal Dependencies
  */
-const base = require( './configs/base.js' );
-const splitChunks = require( './optimization/split-chunks.js' );
-const minimizer = require( './optimization/minimizer' );
+const prodBase = require( './configs/prod-base.js' );
+const dev = require( './admindev' );
 const pkg = require( '../package.json' );
 
-module.exports = merge( base, {
-	cache: false,
-	mode: 'production',
-	devtool: false,
-	entry: {
-		scripts: `./${ pkg.square1.paths.core_admin_js_src }index.js`,
-	},
+module.exports = merge.strategy( {
+	plugins: 'append',
+} )( prodBase, {
+	entry: dev.entry,
 	output: {
-		filename: '[name].min.js',
-		chunkFilename: '[name].min.js',
 		path: resolve( `${ __dirname }/../`, pkg.square1.paths.core_admin_js_dist ),
 		publicPath: `/${ pkg.square1.paths.core_admin_js_dist }`,
 	},
 	plugins: [
-		new webpack.DefinePlugin( {
-			'process.env': { NODE_ENV: JSON.stringify( 'production' ) },
-		} ),
-		new webpack.LoaderOptionsPlugin( {
-			debug: false,
-		} ),
 		new MiniCssExtractPlugin( {
 			filename: '../../css/admin/dist/[name].min.css',
 		} ),
@@ -44,10 +31,4 @@ module.exports = merge( base, {
 			openAnalyzer: false,
 		} ),
 	],
-	optimization: {
-		splitChunks,
-		noEmitOnErrors: true, // NoEmitOnErrorsPlugin
-		concatenateModules: true, //ModuleConcatenationPlugin
-		minimizer,
-	},
 } );
