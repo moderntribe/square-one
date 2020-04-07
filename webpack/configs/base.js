@@ -1,29 +1,28 @@
+/**
+ * External Dependencies
+ */
 const path = require( 'path' );
 const webpack = require( 'webpack' );
-const resolve = require( './resolve' );
+
+/**
+ * Internal Dependencies
+ */
+const rules = require( '../rules' );
 
 module.exports = {
 	externals: {
 		jquery: 'jQuery',
 	},
-	resolve,
+	resolve: {
+		extensions: [ '.js', '.jsx', '.json', '.pcss' ],
+	},
 	resolveLoader: {
 		modules: [
-			path.resolve( `${ __dirname }/../`, 'node_modules' ),
+			path.resolve( `${ __dirname }/../../`, 'node_modules' ),
 		],
 	},
 	module: {
-		rules: [
-			{
-				test: /\.js$/,
-				exclude: [ /(node_modules)/ ],
-				use: [
-					{
-						loader: 'babel-loader',
-					},
-				],
-			},
-		],
+		rules,
 	},
 	plugins: [
 		new webpack.IgnorePlugin( {

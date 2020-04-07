@@ -1,12 +1,19 @@
+/**
+ * External Dependencies
+ */
 const { resolve } = require( 'path' );
 const webpack = require( 'webpack' );
-const common = require( './common.js' );
-const dev = require( './themedev' );
-const splitChunks = require( './split-chunks.js' );
 const merge = require( 'webpack-merge' );
-const minimizer = require( './minimizer' );
 const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
 const BundleAnalyzerPlugin = require( 'webpack-bundle-analyzer' ).BundleAnalyzerPlugin;
+
+/**
+ * Internal Dependencies
+ */
+const common = require( './configs/base.js' );
+const dev = require( './themedev' );
+const splitChunks = require( './optimization/split-chunks' );
+const minimizer = require( './optimization/minimizer' );
 const pkg = require( '../package.json' );
 
 module.exports = merge.strategy( {

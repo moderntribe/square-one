@@ -1,3 +1,6 @@
+/**
+ * External Dependencies
+ */
 const webpack = require( 'webpack' );
 
 module.exports = {

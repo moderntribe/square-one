@@ -1,12 +1,18 @@
+/**
+ * External Dependencies
+ */
 const { resolve } = require( 'path' );
 const webpack = require( 'webpack' );
 const merge = require( 'webpack-merge' );
-const common = require( './common.js' );
-const rules = require( './rules.js' );
-const splitChunks = require( './split-chunks.js' );
+const glob = require( 'glob' );
 const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
 const BundleAnalyzerPlugin = require( 'webpack-bundle-analyzer' ).BundleAnalyzerPlugin;
-const glob = require( 'glob' );
+
+/**
+ * Internal Dependencies
+ */
+const common = require( './configs/base.js' );
+const splitChunks = require( './optimization/split-chunks.js' );
 const pkg = require( '../package.json' );
 
 module.exports = merge( common, {
@@ -28,11 +34,6 @@ module.exports = merge( common, {
 		publicPath: `/${ pkg.square1.paths.core_theme_js_dist }`,
 	},
 	devtool: 'eval-source-map',
-	module: {
-		rules: [
-			rules.miniExtractPlugin,
-		],
-	},
 	plugins: [
 		new MiniCssExtractPlugin( {
 			filename: '../../css/[name].css',

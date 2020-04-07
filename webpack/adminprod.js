@@ -1,15 +1,21 @@
+/**
+ * External Dependencies
+ */
 const { resolve } = require( 'path' );
 const webpack = require( 'webpack' );
-const common = require( './common.js' );
-const rules = require( './rules.js' );
-const splitChunks = require( './split-chunks.js' );
-const minimizer = require( './minimizer' );
 const merge = require( 'webpack-merge' );
 const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
 const BundleAnalyzerPlugin = require( 'webpack-bundle-analyzer' ).BundleAnalyzerPlugin;
+
+/**
+ * Internal Dependencies
+ */
+const base = require( './configs/base.js' );
+const splitChunks = require( './optimization/split-chunks.js' );
+const minimizer = require( './optimization/minimizer' );
 const pkg = require( '../package.json' );
 
-module.exports = merge( common, {
+module.exports = merge( base, {
 	cache: false,
 	mode: 'production',
 	devtool: false,
@@ -21,11 +27,6 @@ module.exports = merge( common, {
 		chunkFilename: '[name].min.js',
 		path: resolve( `${ __dirname }/../`, pkg.square1.paths.core_admin_js_dist ),
 		publicPath: `/${ pkg.square1.paths.core_admin_js_dist }`,
-	},
-	module: {
-		rules: [
-			rules.miniExtractPlugin,
-		],
 	},
 	plugins: [
 		new webpack.DefinePlugin( {

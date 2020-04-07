@@ -1,14 +1,20 @@
+/**
+ * External Dependencies
+ */
 const { resolve } = require( 'path' );
 const webpack = require( 'webpack' );
 const merge = require( 'webpack-merge' );
-const common = require( './common.js' );
-const rules = require( './rules.js' );
-const splitChunks = require( './split-chunks.js' );
 const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
 const BundleAnalyzerPlugin = require( 'webpack-bundle-analyzer' ).BundleAnalyzerPlugin;
+
+/**
+ * Internal Dependencies
+ */
+const base = require( './configs/base.js' );
+const splitChunks = require( './optimization/split-chunks.js' );
 const pkg = require( '../package.json' );
 
-module.exports = merge( common, {
+module.exports = merge( base, {
 	cache: true,
 	mode: 'development',
 	entry: {
@@ -21,11 +27,6 @@ module.exports = merge( common, {
 		publicPath: `/${ pkg.square1.paths.core_admin_js_dist }`,
 	},
 	devtool: 'eval-source-map',
-	module: {
-		rules: [
-			rules.miniExtractPlugin,
-		],
-	},
 	plugins: [
 		new MiniCssExtractPlugin( {
 			filename: '../../css/admin/[name].css',

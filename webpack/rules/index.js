@@ -1,8 +1,17 @@
 const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
 
-module.exports = {
-	miniExtractPlugin: {
-		test: /\.(pcss|css)$/,
+module.exports = [
+	{
+		test: /\.js$/,
+		exclude: [ /(node_modules)/ ],
+		use: [
+			{
+				loader: 'babel-loader',
+			},
+		],
+	},
+	{
+		test: /\.p?css$/,
 		use: [
 			MiniCssExtractPlugin.loader,
 			{
@@ -15,4 +24,4 @@ module.exports = {
 			{ loader: 'postcss-loader' },
 		],
 	},
-};
+];
