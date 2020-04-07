@@ -1,5 +1,7 @@
 <?php
 
+use Psr\Container\ContainerInterface;
+
 class FacadeTest extends \Codeception\Test\Unit {
 	/**
 	 * @var \UnitTester
@@ -14,9 +16,9 @@ class FacadeTest extends \Codeception\Test\Unit {
 		} ] );
 
 		$container_mock = $this->makeEmpty( \Tribe\Project\Core::class, [ 'container' => function () use ( $request_mock ) {
-			return [
-				'request' => $request_mock,
-			];
+			return $this->makeEmpty( ContainerInterface::class, [ 'get' => function() use ( $request_mock ) {
+				return $request_mock;
+			} ]);
 		} ] );
 
 		\tad\FunctionMocker\FunctionMocker::replace( 'tribe_project', function () use ( $container_mock ) {

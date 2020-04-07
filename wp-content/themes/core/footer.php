@@ -1,4 +1,3 @@
 <?php
 
-$template = new \Tribe\Project\Templates\Base( 'footer.twig' );
-echo $template->render();
+echo tribe_template( \Tribe\Project\Templates\Controllers\Footer\Footer_Wrap::class );

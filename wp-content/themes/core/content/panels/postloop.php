@@ -1,5 +1,3 @@
 <?php
 
-$template = \Tribe\Project\Templates\Content\Panels\PostLoop::instance();
-
-echo $template->render();
+echo tribe_template( \Tribe\Project\Templates\Controllers\Panels\Postloop::class );

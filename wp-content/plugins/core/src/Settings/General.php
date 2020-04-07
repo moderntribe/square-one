@@ -18,7 +18,4 @@ class General extends ACF_Settings {
 		return 'options-general.php';
 	}
 
-	public static function instance() {
-		return tribe_project()->container()['settings.general'];
-	}
 }

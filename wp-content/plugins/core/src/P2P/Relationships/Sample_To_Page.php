@@ -3,10 +3,20 @@
 namespace Tribe\Project\P2P\Relationships;
 
 use Tribe\Libs\P2P\Relationship;
+use Tribe\Project\Post_Types\Page\Page;
+use Tribe\Project\Post_Types\Sample\Sample;
 
 class Sample_To_Page extends Relationship {
 
 	const NAME = 'Sample_To_Page';
+
+	protected $from = [
+		Sample::NAME,
+	];
+
+	protected $to = [
+		Page::NAME,
+	];
 
 	public function get_args() {
 		return [

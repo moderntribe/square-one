@@ -1,16 +1,10 @@
 <?php
 /*
  * This is a sample local-config.php file
- * In it, you *must* include the four main database defines
  *
- * You may include other settings here that you only want
+ * You may include settings here that you only want
  * enabled on your local development checkouts
 */
-
-define( 'DB_NAME', 'tribe_square1' );
-define( 'DB_USER', 'root' );
-define( 'DB_PASSWORD', 'password' );
-define( 'DB_HOST', 'mysql' );
 
 /*
  * React dev
@@ -30,7 +24,7 @@ define( 'WP_CACHE', false );
 
 define( 'TRIBE_DISABLE_PANELS_CACHE', true );
 
-$GLOBALS[ 'memcached_servers' ] = [ [ 'memcached', 11211, ] ];
+$GLOBALS[ 'memcached_servers' ] = [ [ tribe_getenv( 'MEMCACHED_HOST', 'memcached' ), tribe_getenv( 'MEMCACHED_PORT', 11211 ), ] ];
 
 /*
  * Whoops

@@ -32,6 +32,6 @@ if( $panel->get_depth() >= 1 ) {
 // Parent Panel.
 else { ?>
 
-		<?php echo $html; ?>
+	<?php echo $html; ?>
 
 <?php } ?>

@@ -6,6 +6,8 @@ namespace Tribe\Project\Post_Types\Sample;
 use Tribe\Libs\Post_Type\Post_Type_Config;
 
 class Config extends Post_Type_Config {
+	protected $post_type = Sample::NAME;
+
 	public function get_args() {
 		return [
 			'hierarchical'     => false,

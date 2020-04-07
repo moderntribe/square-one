@@ -7,7 +7,7 @@ function isFixed( file ) {
 	return file.eslint != null && file.eslint.fixed;
 }
 
-function lint( src = [], dest = pkg._core_theme_js_src_path ) {
+function lint( src = [], dest = pkg.square1.paths.core_theme_js_src ) {
 	return gulp.src( src )
 		.pipe( eslint( { fix: true } ) )
 		.pipe( eslint.format() )
@@ -19,22 +19,22 @@ function lint( src = [], dest = pkg._core_theme_js_src_path ) {
 module.exports = {
 	theme() {
 		return lint( [
-			`${ pkg._core_theme_js_src_path }**/*`,
+			`${ pkg.square1.paths.core_theme_js_src }**/*`,
 		] );
 	},
 	apps() {
 		return lint( [
-			`${ pkg._core_apps_js_src_path }**/*.js`,
-		], pkg._core_apps_js_src_path );
+			`${ pkg.square1.paths.core_apps_js_src }**/*.js`,
+		], pkg.square1.paths.core_apps_js_src );
 	},
 	utils() {
 		return lint( [
-			`${ pkg._core_utils_js_src_path }**/*`,
-		], pkg._core_utils_js_src_path );
+			`${ pkg.square1.paths.core_utils_js_src }**/*`,
+		], pkg.square1.paths.core_utils_js_src );
 	},
 	admin() {
 		return lint( [
-			`${ pkg._core_admin_js_src_path }**/*`,
-		], pkg._core_admin_js_src_path );
+			`${ pkg.square1.paths.core_admin_js_src }**/*`,
+		], pkg.square1.paths.core_admin_js_src );
 	},
 };

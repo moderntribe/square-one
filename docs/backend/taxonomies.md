@@ -25,6 +25,10 @@ namespace Tribe\Project\Taxonomies\Feed_Tag;
 use Tribe\Libs\Taxonomy\Taxonomy_Config;
 
 class Config extends Taxonomy_Config {
+	protected $taxonomy = Feed_Tag::NAME;
+	protected $post_types = [
+		Feed_Story::NAME,
+	];
 
 	public function get_args() {
 		return [
@@ -54,43 +58,34 @@ The {{Taxonomy_Name}}.php file in our example case, Feed_Tag.php, must define th
 ```php
 namespace Tribe\Project\Taxonomies\Feed_Tag;
 
-class Feed_Tag {
+use Tribe\Libs\Taxonomy\Term_Object;
+
+class Feed_Tag extends Term_Object {
 	const NAME = 'feed_tag';
 }
 ```
 
 ## Registering A Taxonomy
 
-To register a taxonomy they must have a service provider.  See [Service Provides](service-providers.md) section for more information.
+To register a taxonomy they must have a subscriber.  See the [Subscribers](subscribers.md) section for more information.
 
-The new taxonomy's service provider should be located in the Service_Providers/Taxonomies directory.  For our example:
+The new taxonomy's subscriber should be located in the taxonomy's directory.  For our example:
 
- - /wp-content/plugins/core/src/Service_Providers/Taxonomies/Feed_Tag_Service_Provider.php
+ - /wp-content/plugins/core/src/Taxonomies/Feed_Tag/Subscriber.php
 
-The Taxonomy_Service_Provider class handles registering the taxonomy so here you simply need to extend it and define the protected properties which are constants from your Taxonomy class and the post types the taxonomy relates to:
+The `Taxonomy_Subscriber` class handles registering the taxonomy so here you simply need to extend it and define the protected properties which points to the configuration file:
 
-- protected $taxonomy_class
 - protected $config_class
-- protected $post_types which is an array of post types
 
 ```php
-namespace Tribe\Project\Service_Providers\Taxonomies;
+namespace Tribe\Project\Taxonomies\Feed_Tag;
 
 use Tribe\Project\Post_Types\Feed_Story\Feed_Story;
-use Tribe\Project\Taxonomies\Feed_Tag;
 
-class Feed_Tag_Service_Provider extends Taxonomy_Service_Provider {
-	protected $taxonomy_class = Feed_Tag\Feed_Tag::class;
-	protected $config_class   = Feed_Tag\Config::class;
-	protected $post_types     = [
-		Feed_Story::NAME,
-	];
+class Subscriber extends Taxonomy_Subscriber {
+	protected $config_class   = Config::class;
 }
 ```
 
-The final step in making your taxonomy available is registering it's container in core/src/Core.php
-
-```php
-private function load_taxonomy_providers() {
-	$this->container->register( new Feed_Tag_Service_Provider() );
-```
+The final step in making your taxonomy available is registering it's subscriber in core/src/Core.php.
+Add `Taxonomies\Feed_Tag\Subscriber::class` to the `$subscribers` array.

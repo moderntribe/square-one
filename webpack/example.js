@@ -7,7 +7,7 @@ const pkg = require( '../package.json' );
 module.exports = merge( common, {
 	mode: 'development',
 	entry: {
-		scripts: `./${ pkg._core_apps_js_src_path }Example/index.js`,
+		scripts: `./${ pkg.square1.paths.core_apps_js_src }Example/index.js`,
 	},
 	output: {
 		filename: 'app.js',

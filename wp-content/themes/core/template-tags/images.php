@@ -1,5 +1,6 @@
 <?php
 
+use Tribe\Project\Templates\Component_Factory;
 use Tribe\Project\Templates\Components\Image;
 
 /**
@@ -7,8 +8,8 @@ use Tribe\Project\Templates\Components\Image;
  * background image or inline, linkify or not, html append. Tied into the js lib
  * lazysizes for lazyloading.
  *
- * @param $image_id int
- * @param $options array
+ * @param int   $image_id
+ * @param array $options
  *
  * @return string
  */
@@ -19,18 +20,11 @@ function the_tribe_image( $image_id = 0, $options = [] ) {
 		return '';
 	}
 
-	$options[ Image::IMG_ID ] = $image_id;
+	try {
+		$options[ Image::ATTACHMENT ] = \Tribe\Project\Templates\Models\Image::factory( $image_id );
 
-	if ( ! isset( $options[ Image::ECHO ] ) ) {
-		$options[ Image::ECHO ] = true; // Mimic the image component default
-	}
-
-	$image_obj    = Image::factory( $options );
-	$image_markup = $image_obj->render();
-
-	if ( $options[ Image::ECHO ] ) {
-		echo $image_markup;
-	} else {
-		return $image_markup;
+		return tribe_project()->container()->get( Component_Factory::class )->get( Image::class, $options )->render();
+	} catch ( \Exception $e ) {
+		return '';
 	}
 }

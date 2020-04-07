@@ -10,14 +10,11 @@ class Scripts {
 	public function enqueue_scripts() {
 		$debug = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG;
 
-		$vendor_scripts = $debug ? 'vendor.js' : 'vendor.min.js';
 		$admin_scripts = $debug ? 'scripts.js' : 'scripts.min.js';
 
-		$vendor_src = trailingslashit( get_stylesheet_directory_uri() ) . 'js/dist/admin/' . $vendor_scripts;
-		$admin_src = trailingslashit( get_stylesheet_directory_uri() ) . 'js/dist/admin/' . $admin_scripts;
+		$admin_src = trailingslashit( get_stylesheet_directory_uri() ) . 'assets/js/dist/admin/' . $admin_scripts;
 
-		wp_register_script( 'tribe-admin-vendors', $vendor_src, [ 'wp-util', 'media-upload', 'media-views' ], time(), true );
-		wp_register_script( 'tribe-admin-scripts', $admin_src, [ 'tribe-admin-vendors' ], time(), true );
+		wp_register_script( 'tribe-admin-scripts', $admin_src, [ 'wp-util', 'media-upload', 'media-views' ], time(), true );
 
 		$js_config = new JS_Config();
 		$js_l10n = new JS_Localization();
@@ -31,7 +28,6 @@ class Scripts {
 		 */
 		add_action( 'admin_print_footer_scripts', function () {
 
-			wp_enqueue_script( 'tribe-admin-vendors' );
 			wp_enqueue_script( 'tribe-admin-scripts' );
 
 			// since footer scripts have already printed, process the queue again on the next available action

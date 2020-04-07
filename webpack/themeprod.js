@@ -1,68 +1,59 @@
 const { resolve } = require( 'path' );
 const webpack = require( 'webpack' );
 const common = require( './common.js' );
-const rules = require( './rules.js' );
-const vendor = require( './vendors' );
+const dev = require( './themedev' );
+const splitChunks = require( './split-chunks.js' );
 const merge = require( 'webpack-merge' );
-const TerserPlugin = require( 'terser-webpack-plugin' );
+const minimizer = require( './minimizer' );
 const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
-const OptimizeCSSAssetsPlugin = require( 'optimize-css-assets-webpack-plugin' );
+const BundleAnalyzerPlugin = require( 'webpack-bundle-analyzer' ).BundleAnalyzerPlugin;
 const pkg = require( '../package.json' );
 
-module.exports = merge( common, {
-	cache: false,
-	mode: 'production',
-	entry: {
-		scripts: `./${ pkg._core_theme_js_src_path }index.js`,
-		vendorWebpack: vendor.theme,
-	},
-	output: {
-		filename: '[name].min.js',
-		chunkFilename: '[name].[chunkhash].min.js',
-		path: resolve( `${ __dirname }/../`, pkg._core_theme_js_dist_path ),
-		publicPath: `/${ pkg._core_theme_js_dist_path }`,
-	},
-	module: {
-		rules: [
-			rules.miniExtractPlugin,
-		],
-	},
-	plugins: [
-		new webpack.DefinePlugin( {
-			'process.env': { NODE_ENV: JSON.stringify( 'production' ) },
-		} ),
-		new webpack.HashedModuleIdsPlugin(),
-		new webpack.LoaderOptionsPlugin( {
-			debug: false,
-		} ),
-		new MiniCssExtractPlugin( {
-			filename: '../../css/dist/[name].min.css',
-		} ),
-	],
-	optimization: {
-		namedModules: true, // NamedModulesPlugin()
-		splitChunks: { // CommonsChunkPlugin()
-			name: 'vendorWebpack',
-			minChunks: 2,
+module.exports = merge.strategy( {
+	cache: 'replace',
+	mode: 'replace',
+	entry: 'replace',
+	output: 'replace',
+	plugins: 'replace',
+	optimization: 'replace',
+} )(
+	common,
+	dev,
+	{
+		cache: false,
+		devtool: false,
+		mode: 'production',
+		entry: {
+			scripts: dev.entry.scripts,
+			integrations: dev.entry.integrations,
 		},
-		noEmitOnErrors: true, // NoEmitOnErrorsPlugin
-		concatenateModules: true, //ModuleConcatenationPlugin
-		minimizer: [
-			new TerserPlugin( {
-				cache: true,
-				parallel: true,
-				sourceMap: true,
-				terserOptions: {
-					compress: {
-						warnings: false,
-						drop_console: true,
-					},
-					output: {
-						comments: false,
-					},
-				},
+		output: {
+			filename: '[name].min.js',
+			chunkFilename: '[name].min.js',
+			path: resolve( `${ __dirname }/../`, pkg.square1.paths.core_theme_js_dist ),
+			publicPath: `/${ pkg.square1.paths.core_theme_js_dist }`,
+		},
+		plugins: [
+			new webpack.DefinePlugin( {
+				'process.env': { NODE_ENV: JSON.stringify( 'production' ) },
 			} ),
-			new OptimizeCSSAssetsPlugin( {} ),
+			new webpack.LoaderOptionsPlugin( {
+				debug: false,
+			} ),
+			new MiniCssExtractPlugin( {
+				filename: '../../css/dist/[name].min.css',
+			} ),
+			new BundleAnalyzerPlugin( {
+				analyzerMode: 'static',
+				reportFilename: resolve( `${ __dirname }/../`, 'reports/webpack-theme-bundle-prod.html' ),
+				openAnalyzer: false,
+			} ),
 		],
-	},
-} );
+		optimization: {
+			splitChunks,
+			noEmitOnErrors: true, // NoEmitOnErrorsPlugin
+			concatenateModules: true, //ModuleConcatenationPlugin
+			minimizer,
+		},
+	}
+);

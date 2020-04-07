@@ -12,7 +12,7 @@ The Image Component is the primary means by which we inject image markup into th
 
 This is the full set of arguments you can modify, and exhibits the defaults:
 ```php
-Image::IMG_ID             => 0,                    // The Image ID - takes precedence over IMG_URL.
+Image::ATTACHMENT         => null,                 // The WordPress attachment to use (as in instance of Models\Image) - takes precedence over IMG_URL.
 Image::IMG_URL            => '',                   // The Image URL - generate markup for an image via its URL. Only applicable if `IMG_ID` is empty.
 Image::AS_BG              => false,                // Generates a background image on a `<div>` instead of a traditional `<img>`.
 Image::AUTO_SHIM          => true,                 // If true, shim dir as set will be used, src_size will be used as filename, with png as file type.
@@ -51,12 +51,24 @@ Doing animations/transitions to loaded images should be done with css if desired
 ### Basic img without Lazyload
 #### Using:
 ```php
+$image_id = get_post_thumbnail_id();
+
+if ( empty( $image_id ) ) {
+    return '';
+}
+
+try {
+    $image = \Tribe\Project\Templates\Models\Image::factory( $image_id );
+} catch ( \Exception $e ) {
+    return '';
+}
+
 $options = [
-    Image::IMG_ID       => get_post_thumbnail_id(),
+    Image::ATTACHMENT   => $image,
     Image::USE_LAZYLOAD => false,
 ];
 
-echo Image::factory( $options )->render();
+return $this->factory->get( Image::class, $options )->render();
 ```
 #### Yields:
 ```html
@@ -70,12 +82,12 @@ echo Image::factory( $options )->render();
 #### Using:
 ```php
 $options = [
-    Image::IMG_ID       => get_post_thumbnail_id(),
+    Image::ATTACHMENT   => $image,
     Image::USE_LAZYLOAD => false,
     Image::AS_BG        => true,
 ];
 
-echo Image::factory( $options )->render();
+return $this->factory->get( Image::class, $options )->render();
 ```
 
 #### Yields:
@@ -90,7 +102,7 @@ echo Image::factory( $options )->render();
 #### Using:
 ```php
 $options = [
-    Image::IMG_ID       => get_post_thumbnail_id(),
+    Image::ATTACHMENT   => $image,
     Image::USE_LAZYLOAD => false,
     Image::SRC_SIZE     => 'slider-small',
     Image::SRCSET_SIZES => [
@@ -99,7 +111,7 @@ $options = [
         'slider-full',
     ],
 ];
-echo Image::factory( $options )->render();
+return $this->factory->get( Image::class, $options )->render();
 ```
 
 #### Yields:
@@ -118,7 +130,7 @@ echo Image::factory( $options )->render();
 #### Using:
 ```php
 $options = [
-    Image::IMG_ID       => get_post_thumbnail_id(),
+    Image::ATTACHMENT   => $image,
     Image::SRC_SIZE     => 'slider-small',
     Image::SRCSET_SIZES => [
         'slider-small',
@@ -126,7 +138,7 @@ $options = [
         'slider-full',
     ],
 ];
-echo Image::factory( $options )->render();
+return $this->factory->get( Image::class, $options )->render();
 ```
 
 #### Yields:
@@ -154,7 +166,7 @@ echo Image::factory( $options )->render();
 #### Using:
 ```php
 $options = [
-    Image::IMG_ID         => get_post_thumbnail_id(),
+    Image::ATTACHMENT     => $image,
     Image::WRAPPER_TAG    => 'article',
     Image::WRAPPER_ATTRS  => [ 'data-funky' => 'Stanley Clarke' ],
     Image::IMG_ATTRS      => [ 'data-image' => 'Yes' ],
@@ -166,7 +178,7 @@ $options = [
         'slider-full',
     ],
 ];
-echo Image::factory( $options )->render();
+return $this->factory->get( Image::class, $options )->render();
 ```
 
 #### Yields:
@@ -197,7 +209,7 @@ echo Image::factory( $options )->render();
 #### Using:
 ```php
 $options = [
-    Image::IMG_ID          => get_post_thumbnail_id(),
+    Image::ATTACHMENT      => $image,
     Image::AS_BG           => true,
     Image::WRAPPER_TAG     => 'div',
     Image::WRAPPER_CLASSES => [ 'c-image', 'c-image--rect' ],
@@ -211,7 +223,7 @@ $options = [
     ],
 ];
 
-echo Image::factory( $options )->render();
+return $this->factory->get( Image::class, $options )->render();
 ```
 
 #### Yields:

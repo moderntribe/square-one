@@ -6,20 +6,20 @@ const pkg = require( '../package.json' );
 module.exports = {
 	themeMin() {
 		return gulp.src( [
-			`${ pkg._core_theme_js_vendor_path }globals.js`,
-			`${ pkg._core_theme_js_vendor_path }ls.object-fit.js`,
-			`${ pkg._core_theme_js_vendor_path }ls.parent-fit.js`,
-			`${ pkg._core_theme_js_vendor_path }ls.respimg.js`,
-			`${ pkg._core_theme_js_vendor_path }ls.bgset.js`,
-			`${ pkg._core_theme_js_vendor_path }lazysizes.js`,
-			`${ pkg._core_theme_js_vendor_path }swiper.js`,
+			`${ pkg.square1.paths.core_theme_js_vendor }globals.js`,
+			`${ pkg.square1.paths.core_theme_js_vendor }ls.object-fit.js`,
+			`${ pkg.square1.paths.core_theme_js_vendor }ls.parent-fit.js`,
+			`${ pkg.square1.paths.core_theme_js_vendor }ls.respimg.js`,
+			`${ pkg.square1.paths.core_theme_js_vendor }ls.bgset.js`,
+			`${ pkg.square1.paths.core_theme_js_vendor }lazysizes.js`,
+			`${ pkg.square1.paths.core_theme_js_vendor }swiper.js`,
 		] )
-			.pipe( concat( 'vendorGlobal.min.js' ) )
+			.pipe( concat( 'vendor.min.js' ) )
 			.pipe( uglify( {
 				compress: {
 					drop_console: true,
 				},
 			} ) )
-			.pipe( gulp.dest( pkg._core_theme_js_dist_path ) );
+			.pipe( gulp.dest( pkg.square1.paths.core_theme_js_dist ) );
 	},
 };

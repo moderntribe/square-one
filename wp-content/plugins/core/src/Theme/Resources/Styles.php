@@ -11,12 +11,12 @@ class Styles {
 	 */
 	public function enqueue_styles() {
 
-		$css_dir = trailingslashit( get_stylesheet_directory_uri() ) . 'css/';
+		$css_dir = trailingslashit( get_stylesheet_directory_uri() ) . 'assets/css/dist/theme/';
 		$version = tribe_get_version();
 
 		if ( ! defined( 'SCRIPT_DEBUG' ) || SCRIPT_DEBUG === false ) { // Production
-			$css_global = 'dist/master.min.css';
-			$css_print  = 'dist/print.min.css';
+			$css_global = 'master.min.css';
+			$css_print  = 'print.min.css';
 		} else { // Dev
 			$css_global = 'master.css';
 			$css_print  = 'print.css';

@@ -2,10 +2,20 @@
 
 namespace Tribe\Project\Shortcodes;
 
+use Tribe\Project\Templates\Component_Factory;
 use Tribe\Project\Templates\Components\Image;
 use Tribe\Project\Templates\Components\Slider;
 
 class Gallery implements Shortcode {
+
+	/**
+	 * @var Component_Factory
+	 */
+	private $component;
+
+	public function __construct( Component_Factory $component_factory ) {
+		$this->component = $component_factory;
+	}
 
 	/**
 	 * Render the [gallery] shortcode when placed in content areas.
@@ -45,9 +55,7 @@ class Gallery implements Shortcode {
 			Slider::MAIN_CLASSES    => [],
 		];
 
-		$slider = Slider::factory( $options );
-
-		return $slider->render();
+		return $this->component->get( Slider::class, $options )->render();
 	}
 
 	protected function get_attachments( $atts ) {
@@ -94,18 +102,20 @@ class Gallery implements Shortcode {
 			return [];
 		}
 
-		return array_map( function ( $slide_id ) use ( $size ) {
+		return array_filter( array_map( function ( $slide_id ) use ( $size ) {
+			try {
+				$image = \Tribe\Project\Templates\Models\Image::factory( $slide_id );
+			} catch ( \Exception $e ) {
+				return '';
+			}
 			$options = [
-				'img_id'       => $slide_id,
-				'as_bg'        => false,
-				'use_lazyload' => false,
-				'echo'         => false,
-				'src_size'     => $size,
+				Image::ATTACHMENT   => $image,
+				Image::AS_BG        => false,
+				Image::USE_LAZYLOAD => false,
+				Image::SRC_SIZE     => $size,
 			];
 
-			$image = Image::factory( $options );
-
-			return $image->render();
-		}, $slide_ids );
+			return $this->component->get( Image::class, $options )->render();
+		}, $slide_ids ) );
 	}
 }

@@ -55,7 +55,7 @@ This is the deep dive development documentation for SquareOne. If you are new he
 	* [Custom Post Types](/docs/backend/post-types.md)
 	* [Custom Taxonomies](/docs/backend/taxonomies.md)
 	* [Object Meta](/docs/backend/object-meta.md)
-	* [Service Providers](/docs/backend/service-providers.md)
+	* [Subscribers](/docs/backend/subscribers.md)
 	* [Template Controllers](/docs/backend/data.md)
 	* [CLI](/docs/backend/cli.md)
 	* [Cache](/docs/backend/object-cache.md)
@@ -71,7 +71,7 @@ This is the deep dive development documentation for SquareOne. If you are new he
 
 * **Tests and Code Quality**
 	* [Overview](/docs/tests/README.md)
-	* [Codeception](/docs/tests/codeception.md)
+	* [Codeception](/dev/tests/README.md)
 	* [Jest](/docs/tests/jest.md)
 
 * **Deploys with Ansible**
