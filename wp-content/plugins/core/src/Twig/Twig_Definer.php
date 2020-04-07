@@ -6,6 +6,7 @@ namespace Tribe\Project\Twig;
 use DI;
 use Psr\Container\ContainerInterface;
 use Tribe\Libs\Container\Definer_Interface;
+use Twig\Cache\FilesystemCache;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 use Twig\Loader\LoaderInterface;
@@ -15,7 +16,7 @@ class Twig_Definer implements Definer_Interface {
 
 	public function define(): array {
 		return [
-			Twig_Cache::class => DI\autowire()->constructor( defined( 'TWIG_CACHE_DIR' ) && TWIG_CACHE_DIR ? TWIG_CACHE_DIR : WP_CONTENT_DIR . '/cache/twig/' ),
+			Twig_Cache::class => DI\autowire()->constructor( defined( 'TWIG_CACHE_DIR' ) && TWIG_CACHE_DIR ? TWIG_CACHE_DIR : WP_CONTENT_DIR . '/cache/twig/', FilesystemCache::FORCE_BYTECODE_INVALIDATION ),
 
 			self::OPTIONS => function ( ContainerInterface $container ) {
 				return apply_filters( 'tribe/project/twig/options', [

@@ -49,62 +49,62 @@ module.exports = {
 		// watch main theme postcss minus admin styles
 
 		gulp.watch( [
-			`${ pkg._core_theme_pcss_path }**/*.pcss`,
-			`!${ pkg._core_theme_pcss_path }legacy.pcss`,
-			`!${ pkg._core_theme_pcss_path }content/page/_legacy.pcss`,
-			`!${ pkg._core_admin_pcss_path }**/*.pcss`,
+			`${ pkg.square1.paths.core_theme_pcss }**/*.pcss`,
+			`!${ pkg.square1.paths.core_theme_pcss }legacy.pcss`,
+			`!${ pkg.square1.paths.core_theme_pcss }content/page/_legacy.pcss`,
+			`!${ pkg.square1.paths.core_admin_pcss }**/*.pcss`,
 		], gulp.parallel( 'postcss:theme' ) );
 
 		// watch the legacy postcss
 
 		gulp.watch( [
-			`${ pkg._core_theme_pcss_path }legacy.pcss`,
-			`${ pkg._core_theme_pcss_path }content/page/_legacy.pcss`,
+			`${ pkg.square1.paths.core_theme_pcss }legacy.pcss`,
+			`${ pkg.square1.paths.core_theme_pcss }content/page/_legacy.pcss`,
 		], gulp.parallel( 'postcss:themeLegacy' ) );
 
 		// watch the login postcss
 
 		gulp.watch( [
-			`${ pkg._core_admin_pcss_path }login.pcss`,
+			`${ pkg.square1.paths.core_admin_pcss }login.pcss`,
 		], gulp.parallel( 'postcss:themeWPLogin' ) );
 
 		// watch the editor styles postcss
 
 		gulp.watch( [
-			`${ pkg._core_admin_pcss_path }editor-style.pcss`,
+			`${ pkg.square1.paths.core_admin_pcss }editor-style.pcss`,
 		], gulp.parallel( 'postcss:themeWPEditor' ) );
 
 		// watch the admin styles postcss
 
 		gulp.watch( [
-			`${ pkg._core_admin_pcss_path }**/*.pcss`,
-			`!${ pkg._core_admin_pcss_path }editor-style.pcss`,
-			`!${ pkg._core_admin_pcss_path }login.pcss`,
+			`${ pkg.square1.paths.core_admin_pcss }**/*.pcss`,
+			`!${ pkg.square1.paths.core_admin_pcss }editor-style.pcss`,
+			`!${ pkg.square1.paths.core_admin_pcss }login.pcss`,
 		], gulp.parallel( 'postcss:themeWPAdmin' ) );
 
 		// watch php and twig
 
 		gulp.watch( [
-			`${ pkg._core_theme_path }/**/*.php`,
-			`${ pkg._core_theme_path }/**/*.twig`,
+			`${ pkg.square1.paths.core_theme }/**/*.php`,
+			`${ pkg.square1.paths.core_theme }/**/*.twig`,
 		] ).on( 'change', function() {
 			maybeReloadBrowserSync();
 		} );
 	},
 	watchAdminJS() {
-		gulp.src( `${ pkg._core_admin_js_src_path }**/*.js` )
+		gulp.src( `${ pkg.square1.paths.core_admin_js_src }**/*.js` )
 			.pipe( webpackStream( merge( webpackAdminDevConfig, watchConfig ), webpack, function( err, stats ) {
 				console.log( stats.toString( { colors: true } ) );
 				maybeReloadBrowserSync();
 			} ) )
-			.pipe( gulp.dest( pkg._core_admin_js_dist_path ) );
+			.pipe( gulp.dest( pkg.square1.paths.core_admin_js_dist ) );
 	},
 	watchThemeJS() {
-		gulp.src( `${ pkg._core_theme_js_src_path }**/*.js` )
+		gulp.src( `${ pkg.square1.paths.core_theme_js_src }**/*.js` )
 			.pipe( webpackStream( merge( webpackThemeDevConfig, watchConfig ), webpack, function( err, stats ) {
 				console.log( stats.toString( { colors: true } ) );
 				maybeReloadBrowserSync();
 			} ) )
-			.pipe( gulp.dest( pkg._core_theme_js_dist_path ) );
+			.pipe( gulp.dest( pkg.square1.paths.core_theme_js_dist ) );
 	},
 };

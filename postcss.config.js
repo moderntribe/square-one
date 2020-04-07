@@ -4,7 +4,7 @@ module.exports = ( { file, options, env } = {} ) => ( { // eslint-disable-line n
 	plugins: {
 		'postcss-import': {
 			path: [
-				`./${ pkg._core_theme_path }/`,
+				`./${ pkg.square1.paths.core_theme }/`,
 			],
 		},
 		'postcss-mixins': {},
