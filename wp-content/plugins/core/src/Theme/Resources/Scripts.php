@@ -65,8 +65,8 @@ class Scripts {
 			$jquery          = 'vendor/jquery.min.js';
 			$scripts         = 'dist/theme/scripts.min.js';
 			$localize_target = 'core-theme-scripts';
-			$script_deps     = [ 'core-webpack-vendors' ];
-			wp_enqueue_script( 'core-webpack-vendors', $js_dir . 'dist/theme/vendor.min.js', ['jquery'], $version, true );
+			$script_deps     = [ 'core-vendors' ];
+			wp_enqueue_script( 'core-vendors', $js_dir . 'dist/theme/vendor.min.js', ['jquery'], $version, true );
 		} else { // Dev
 			// Dev
 			$scripts         = 'dist/theme/scripts.js';
