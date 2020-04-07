@@ -42,7 +42,7 @@
     "npm": "6.12.1"
   },
   "scripts": {
-    "js:build": "npx webpack --progress",
+    "js:build": "npx webpack",
     "js:theme:dev": "cross-env NODE_ENV=themedev npm run js:build",
     "js:admin:dev": "cross-env NODE_ENV=admindev npm run js:build",
     "js:theme:prod": "cross-env NODE_ENV=themeprod npm run js:build",
