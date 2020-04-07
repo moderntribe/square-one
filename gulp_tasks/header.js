@@ -44,6 +44,7 @@ module.exports = {
 			.pipe( gulp.dest( pkg.square1.paths.core_theme_css_dist ) );
 	},
 	themeLegacy() {
+		return Promise.resolve( 'Deprecated' );
 		return gulp.src( `${ pkg.square1.paths.core_theme_css_dist }legacy.min.css` )
 			.pipe( header( '/* Core: Legacy Page CSS */' ) )
 			.pipe( gulp.dest( pkg.square1.paths.core_theme_css_dist ) );

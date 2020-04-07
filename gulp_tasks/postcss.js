@@ -88,6 +88,7 @@ module.exports = {
 		// } );
 	},
 	themeComponents() {
+		return Promise.resolve( 'Deprecated' );
 		return cssProcess( {
 			src: [
 				`${ pkg.square1.paths.core_theme_components }**/index.pcss`,
@@ -97,6 +98,7 @@ module.exports = {
 		} );
 	},
 	themeIntegrations() {
+		return Promise.resolve( 'Deprecated' );
 		return cssProcess( {
 			src: [
 				`${ pkg.square1.paths.core_theme_integrations }**/index.pcss`,
@@ -106,6 +108,7 @@ module.exports = {
 		} );
 	},
 	themeLegacy() {
+		return Promise.resolve( 'Deprecated' );
 		return cssProcess( {
 			src: [
 				`${ pkg.square1.paths.core_theme_pcss }legacy.pcss`,

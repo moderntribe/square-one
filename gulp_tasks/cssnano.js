@@ -21,16 +21,19 @@ module.exports = {
 		return Promise.resolve( 'Deprecated' );
 	},
 	themeComponentsMin() {
+		return Promise.resolve( 'Deprecated' );
 		return minify( [
 			`${ pkg.square1.paths.core_theme_css }components.css`,
 		], pkg.square1.paths.core_theme_css_dist );
 	},
 	themeIntegrationsMin() {
+		return Promise.resolve( 'Deprecated' );
 		return minify( [
 			`${ pkg.square1.paths.core_theme_css }integrations.css`,
 		], pkg.square1.paths.core_theme_css_dist );
 	},
 	themeLegacyMin() {
+		return Promise.resolve( 'Deprecated' );
 		return minify( [
 			`${ pkg.square1.paths.core_theme_css }legacy.css`,
 		], pkg.square1.paths.core_theme_css_dist );

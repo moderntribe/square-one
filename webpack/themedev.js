@@ -23,9 +23,19 @@ module.exports = merge.strategy( {
 		],
 		integrations: [
 			...glob.sync( `./${ pkg.square1.paths.core_theme_integrations }**/index.js` ),
+			...glob.sync( `./${ pkg.square1.paths.core_theme_integrations }**/index.pcss` ),
 		],
 		master: [
-			`./${ pkg.square1.paths.core_theme_pcss }index.js`,
+			`./${ pkg.square1.paths.core_theme_pcss }master.pcss`,
+		],
+		print: [
+			`./${ pkg.square1.paths.core_theme_pcss }print.pcss`,
+		],
+		components: [
+			...glob.sync( `./${ pkg.square1.paths.core_theme_components }**/index.pcss` ),
+		],
+		legacy: [
+			`./${ pkg.square1.paths.core_theme_pcss }legacy.pcss`,
 		],
 	},
 	output: {
