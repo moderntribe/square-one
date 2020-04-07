@@ -25,7 +25,7 @@ module.exports = merge.strategy( {
 		},
 		plugins: [
 			new MiniCssExtractPlugin( {
-				filename: '../../../css/dist/[name].[hash].min.css',
+				filename: '../../../css/dist/[name].[contenthash].min.css',
 			} ),
 			new BundleAnalyzerPlugin( {
 				analyzerMode: 'static',

@@ -18,7 +18,7 @@ module.exports = merge.strategy( {
 	mode: 'production',
 	devtool: false,
 	output: {
-		filename: '[name].[hash].min.js',
+		filename: '[name].[contenthash].min.js',
 		chunkFilename: '[name].[chunkhash].min.js',
 	},
 	plugins: [
