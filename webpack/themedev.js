@@ -24,6 +24,9 @@ module.exports = merge.strategy( {
 		integrations: [
 			...glob.sync( `./${ pkg.square1.paths.core_theme_integrations }**/index.js` ),
 		],
+		master: [
+			`./${ pkg.square1.paths.core_theme_pcss }index.js`,
+		],
 	},
 	output: {
 		path: resolve( `${ __dirname }/../`, pkg.square1.paths.core_theme_js_dist ),
@@ -31,7 +34,7 @@ module.exports = merge.strategy( {
 	},
 	plugins: [
 		new MiniCssExtractPlugin( {
-			filename: '../../css/[name].css',
+			filename: '../../../css/dist/[name].css',
 		} ),
 		new BundleAnalyzerPlugin( {
 			analyzerMode: 'static',
