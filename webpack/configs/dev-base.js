@@ -10,7 +10,9 @@ const merge = require( 'webpack-merge' );
 const base = require( './base.js' );
 const splitChunks = require( '../optimization/split-chunks' );
 
-module.exports = merge( base, {
+module.exports = merge.strategy( {
+	plugins: 'append',
+} )( base, {
 	cache: true,
 	mode: 'development',
 	output: {

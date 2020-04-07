@@ -11,7 +11,9 @@ const base = require( './base.js' );
 const splitChunks = require( '../optimization/split-chunks' );
 const minimizer = require( '../optimization/minimizer' );
 
-module.exports = merge( base, {
+module.exports = merge.strategy( {
+	plugins: 'append',
+} )( base, {
 	cache: false,
 	mode: 'production',
 	devtool: false,
