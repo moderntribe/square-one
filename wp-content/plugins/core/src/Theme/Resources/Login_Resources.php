@@ -9,7 +9,7 @@ class Login_Resources {
 	 */
 	public function login_styles() {
 
-		$css_dir = trailingslashit( get_stylesheet_directory_uri() ) . 'css/admin/';
+		$css_dir = trailingslashit( get_stylesheet_directory_uri() ) . 'assets/css/dist/admin/';
 		$version = tribe_get_version();
 
 		// CSS
@@ -17,7 +17,7 @@ class Login_Resources {
 
 		// Production
 		if ( !defined( 'SCRIPT_DEBUG' ) || SCRIPT_DEBUG === false ) {
-			$css_login = 'dist/login.min.css';
+			$css_login = 'login.min.css';
 		}
 
 		wp_enqueue_style( 'core-theme-login', $css_dir . $css_login, $version );

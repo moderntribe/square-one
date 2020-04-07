@@ -6,7 +6,7 @@ namespace Tribe\Project\Theme\Resources;
 
 class Scripts {
 	public function add_early_polyfills() {
-		$js_dir  = trailingslashit( get_stylesheet_directory_uri() ) . 'js/';
+		$js_dir  = trailingslashit( get_stylesheet_directory_uri() ) . 'assets/js/';
 		?>
 		<script>window.Promise ||
 			document.write('<script src="<?php echo esc_url( $js_dir ); ?>vendor/es6-promise.auto.js"><\/script>');
@@ -55,7 +55,7 @@ class Scripts {
 	 */
 	public function enqueue_scripts() {
 
-		$js_dir  = trailingslashit( get_stylesheet_directory_uri() ) . 'js/';
+		$js_dir  = trailingslashit( get_stylesheet_directory_uri() ) . 'assets/js/';
 		$version = tribe_get_version();
 
 		// Custom jQuery (version 2.2.4, IE9+)
@@ -63,13 +63,13 @@ class Scripts {
 
 		if ( ! defined( 'SCRIPT_DEBUG' ) || SCRIPT_DEBUG === false ) { // Production
 			$jquery          = 'vendor/jquery.min.js';
-			$scripts         = 'dist/scripts.min.js';
+			$scripts         = 'dist/theme/scripts.min.js';
 			$localize_target = 'core-theme-scripts';
 			$script_deps     = [ 'core-webpack-vendors' ];
-			wp_enqueue_script( 'core-webpack-vendors', $js_dir . 'dist/vendor.min.js', ['jquery'], $version, true );
+			wp_enqueue_script( 'core-webpack-vendors', $js_dir . 'dist/theme/vendor.min.js', ['jquery'], $version, true );
 		} else { // Dev
 			// Dev
-			$scripts         = 'dist/scripts.js';
+			$scripts         = 'dist/theme/scripts.js';
 			$jquery          = 'vendor/jquery.js';
 			$localize_target = 'core-globals';
 			$script_deps     = [ 'jquery', 'core-lazysizes' ];

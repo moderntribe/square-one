@@ -65,12 +65,12 @@ class Unsupported_Browser extends Abstract_Template {
 	}
 
 	protected function get_favicon() {
-		return trailingslashit( get_stylesheet_directory_uri() ) . 'img/branding/favicon.ico';
+		return trailingslashit( get_stylesheet_directory_uri() ) . 'assets/img/theme/branding-assets/favicon.ico';
 	}
 
 	protected function get_css() {
-		$css_dir    = trailingslashit( get_stylesheet_directory_uri() ) . 'css/';
-		$css_legacy = ( ! defined( 'SCRIPT_DEBUG' ) || SCRIPT_DEBUG === false ) ? 'dist/legacy.min.css' : 'legacy.css';
+		$css_dir    = trailingslashit( get_stylesheet_directory_uri() ) . 'assets/css/dist/theme/';
+		$css_legacy = ( ! defined( 'SCRIPT_DEBUG' ) || SCRIPT_DEBUG === false ) ? 'legacy.min.css' : 'legacy.css';
 
 		return $css_dir . $css_legacy;
 	}
@@ -92,6 +92,6 @@ class Unsupported_Browser extends Abstract_Template {
 			return false;
 		}
 
-		return esc_url( trailingslashit( get_stylesheet_directory_uri() ) . 'img/theme/legacy-browser/' . $filename );
+		return esc_url( trailingslashit( get_stylesheet_directory_uri() ) . 'assets/img/theme/legacy-browser/' . $filename );
 	}
 }
