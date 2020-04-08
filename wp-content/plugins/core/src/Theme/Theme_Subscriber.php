@@ -181,11 +181,14 @@ class Theme_Subscriber implements Subscriber_Interface {
 	}
 
 	private function editor_styles( ContainerInterface $container ) {
-		add_action( 'after_setup_theme', function () use ( $container ) {
-			$container->get( Editor_Styles::class )->visual_editor_styles();
+		add_action( 'admin_init', function () use ( $container ) {
+			$container->get( Editor_Styles::class )->block_editor_styles();
 		}, 10, 0 );
 		add_filter( 'tiny_mce_before_init', function ( $settings ) use ( $container ) {
 			return $container->get( Editor_Styles::class )->visual_editor_body_class( $settings );
+		}, 10, 1 );
+		add_filter( 'editor_stylesheets', function( $styles ) use ( $container ) {
+			return $container->get( Editor_Styles::class )->visual_editor_styles( $styles );
 		}, 10, 1 );
 	}
 
