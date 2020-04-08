@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "63cded55977bbc4a45a0fc8af57e8bda",
+    "content-hash": "8b03a438fc929f1ff2c6f0e33ba6a979",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -1075,16 +1075,16 @@
         },
         {
             "name": "moderntribe/tribe-libs",
-            "version": "dev-epic/fidgety-feet",
+            "version": "dev-feeture/subscriber-interface",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moderntribe/tribe-libs.git",
-                "reference": "178c210b2a9b8233f5437884659d26c45c1b981e"
+                "reference": "e34b7f142a97d7b3ddbf9d5b59383b6c44d1af40"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/tribe-libs/zipball/178c210b2a9b8233f5437884659d26c45c1b981e",
-                "reference": "178c210b2a9b8233f5437884659d26c45c1b981e",
+                "url": "https://api.github.com/repos/moderntribe/tribe-libs/zipball/e34b7f142a97d7b3ddbf9d5b59383b6c44d1af40",
+                "reference": "e34b7f142a97d7b3ddbf9d5b59383b6c44d1af40",
                 "shasum": ""
             },
             "require": {
@@ -1114,7 +1114,8 @@
                 "moderntribe/square1-utils": "self.version"
             },
             "require-dev": {
-                "symplify/monorepo-builder": "^7.2"
+                "lucatume/wp-browser": "^2.3.4",
+                "symplify/monorepo-builder": "^6.0 || ^7.0"
             },
             "type": "library",
             "extra": {
@@ -1155,7 +1156,7 @@
                 "GPL-2.0-only"
             ],
             "description": "A library for use on Modern Tribe service projects.",
-            "time": "2020-04-08T19:50:05+00:00"
+            "time": "2020-04-08T21:24:51+00:00"
         },
         {
             "name": "monolog/monolog",
