@@ -55,6 +55,12 @@ module.exports = {
 			`!${ pkg.square1.paths.core_admin_pcss }**/*.pcss`,
 		], gulp.parallel( 'postcss:theme' ) );
 
+		// watch the components postcss
+
+		gulp.watch( [
+			`${ pkg.square1.paths.core_theme_components }**/*.pcss`,
+		], gulp.parallel( 'postcss:themeComponents' ) );
+
 		// watch the legacy postcss
 
 		gulp.watch( [
