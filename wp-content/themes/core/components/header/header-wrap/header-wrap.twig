@@ -26,7 +26,7 @@
 
 	{{ do_action( 'tribe/body_opening_tag') }}
 
-	<a href="#a11y-skip-link-content" class="a11y-skip-link a11y-visual-hide">{{ __( 'Skip to main content' )|esc_html }}</a>
+	{% include '/components/skip-link/skip-link.twig' %}
 
 	<div class="l-wrapper" data-js="site-wrap">
 
