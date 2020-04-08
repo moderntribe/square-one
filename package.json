@@ -163,7 +163,7 @@
     "jest-environment-jsdom": "^24.9.0",
     "jest-environment-jsdom-global": "^1.2.0",
     "json2php": "0.0.4",
-    "mini-css-extract-plugin": "^0.8.0",
+    "mini-css-extract-plugin": "^0.9.0",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
     "postcss-aspect-ratio": "^1.0.0",
     "postcss-assets": "^5.0.0",
@@ -192,7 +192,7 @@
     "webpack": "^5.0.0-beta.13",
     "webpack-bundle-analyzer": "^3.6.0",
     "webpack-cli": "^4.0.0-beta.8",
-    "webpack-dev-server": "^3.9.0",
+    "webpack-dev-server": "^3.10.3",
     "webpack-merge": "^4.2.2",
     "webpack-merge-and-include-globally": "^2.1.20",
     "webpack-stream": "^5.2.1"
