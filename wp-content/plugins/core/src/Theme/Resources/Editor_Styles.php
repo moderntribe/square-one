@@ -25,7 +25,7 @@ class Editor_Styles {
 	 *
 	 * @filter tiny_mce_before_init
 	 */
-	public function visual_editor_body_class( $settings ) {
+	public function mce_editor_body_class( $settings ) {
 
 		$settings['body_class'] = ( $settings['body_class'] ?? '' ) . ' t-content';
 
@@ -45,7 +45,7 @@ class Editor_Styles {
 	 * @return array
 	 * @filter editor_stylesheets
 	 */
-	public function visual_editor_styles( $styles ) {
+	public function mce_editor_styles( $styles ) {
 		$theme_uri = get_theme_file_uri( $this->theme_stylesheet_path() );
 		$styles    = array_diff( $styles, [ $theme_uri ] );
 		$styles[]  = get_theme_file_uri( $this->mce_stylesheet_path() );
