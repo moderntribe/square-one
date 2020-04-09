@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8b03a438fc929f1ff2c6f0e33ba6a979",
+    "content-hash": "63cded55977bbc4a45a0fc8af57e8bda",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -1075,16 +1075,16 @@
         },
         {
             "name": "moderntribe/tribe-libs",
-            "version": "dev-feeture/subscriber-interface",
+            "version": "dev-epic/fidgety-feet",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moderntribe/tribe-libs.git",
-                "reference": "e34b7f142a97d7b3ddbf9d5b59383b6c44d1af40"
+                "reference": "a3efb216ea36a989464c16618fbb7e06a4203960"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/tribe-libs/zipball/e34b7f142a97d7b3ddbf9d5b59383b6c44d1af40",
-                "reference": "e34b7f142a97d7b3ddbf9d5b59383b6c44d1af40",
+                "url": "https://api.github.com/repos/moderntribe/tribe-libs/zipball/a3efb216ea36a989464c16618fbb7e06a4203960",
+                "reference": "a3efb216ea36a989464c16618fbb7e06a4203960",
                 "shasum": ""
             },
             "require": {
@@ -1156,7 +1156,7 @@
                 "GPL-2.0-only"
             ],
             "description": "A library for use on Modern Tribe service projects.",
-            "time": "2020-04-08T21:24:51+00:00"
+            "time": "2020-04-09T11:56:52+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -3390,16 +3390,16 @@
         },
         {
             "name": "composer/composer",
-            "version": "1.10.1",
+            "version": "1.10.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/composer.git",
-                "reference": "b912a45da3e2b22f5cb5a23e441b697a295ba011"
+                "reference": "1efa6850b4a1740980346ac3582edf7dfb7899ee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/composer/zipball/b912a45da3e2b22f5cb5a23e441b697a295ba011",
-                "reference": "b912a45da3e2b22f5cb5a23e441b697a295ba011",
+                "url": "https://api.github.com/repos/composer/composer/zipball/1efa6850b4a1740980346ac3582edf7dfb7899ee",
+                "reference": "1efa6850b4a1740980346ac3582edf7dfb7899ee",
                 "shasum": ""
             },
             "require": {
@@ -3466,7 +3466,7 @@
                 "dependency",
                 "package"
             ],
-            "time": "2020-03-13T19:34:27+00:00"
+            "time": "2020-04-09T15:05:50+00:00"
         },
         {
             "name": "composer/semver",
