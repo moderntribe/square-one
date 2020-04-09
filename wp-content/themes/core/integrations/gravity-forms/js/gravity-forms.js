@@ -92,7 +92,7 @@ const bindEvents = () => {
  * @description Kick off this modules functions
  */
 
-const forms = () => {
+const gravityForms = () => {
 	if ( ! el.container ) {
 		return;
 	}
@@ -111,4 +111,4 @@ const forms = () => {
 	console.info( 'Square One FE: Initialized global form scripts.' );
 };
 
-export default forms;
+export default gravityForms;
