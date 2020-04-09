@@ -20,6 +20,8 @@ import resize from './resize';
 import plugins from './plugins';
 import viewportDims from './viewport-dims';
 
+import components from './components';
+import integrations from './integrations';
 import modules from '../modules/index';
 
 import single from '../single/index';
@@ -76,6 +78,8 @@ const init = () => {
 	// initialize the main scripts
 
 	single();
+	components();
+	integrations();
 
 	// @EXAMPLE_REACT_APP (Make sure to include the wrapping if block for ALL react apps
 
