@@ -19,8 +19,6 @@ import resize from './resize';
 import plugins from './plugins';
 import viewportDims from './viewport-dims';
 
-import modules from '../modules/index';
-
 import single from '../single/index';
 
 // @EXAMPLE_REACT_APP
@@ -67,10 +65,6 @@ const init = () => {
 	// initialize global events
 
 	bindEvents();
-
-	// initialize the module scripts
-
-	modules();
 
 	// initialize the main scripts
 
