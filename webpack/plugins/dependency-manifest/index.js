@@ -102,7 +102,9 @@ class DependencyExtractionWebpackPlugin {
 	apply( compiler ) {
 		this.externalsPlugin.apply( compiler );
 
-		const combinedAssetsData = {};
+		const combinedAssetsData = {
+			chunks: [],
+		};
 
 		//
 		// ────────────────────────────────────────────────────────── I ──────────
@@ -191,22 +193,25 @@ class DependencyExtractionWebpackPlugin {
 			 * - Include empty assets as they were already removed
 			 *
 			 * Do:
-			 * - Only include files specific to an entry point
 			 * - Only included css and js files
+			 * - Keep track of all chunks for browser cache invalidation
 			 *
 			 */
 			for ( const [ entryName, assets ] of Object.entries( stats.assetsByChunkName ) ) {
-				if ( combinedAssetsData[ entryName ] ) {
-					const { js, css } = combinedAssetsData[ entryName ];
+				for ( const asset of assets ) {
+					// Don't include empty assets
+					if ( emptyAssets.includes( asset ) ) {
+						continue;
+					}
 
-					for ( const asset of assets ) {
-						// Don't include empty assets
-						if ( emptyAssets.includes( asset ) ) {
-							continue;
-						}
+					// TODO: Clean up filename
+					// Push chunk in
+					combinedAssetsData.chunks.push( asset );
+
+					if ( combinedAssetsData[ entryName ] ) {
 						// Lookup file path
 						const assetFilepath = path.resolve( compiler.options.output.path, asset );
-
+						const { js, css } = combinedAssetsData[ entryName ];
 						if ( asset.endsWith( '.css' ) ) {
 							css.push( assetFilepath );
 						} else if ( asset.endsWith( '.js' ) ) {
