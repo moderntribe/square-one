@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## 2020.04
+* Updated: Certificate creation default date to meet new requirements from [Ballot 193](https://cabforum.org/2017/03/17/ballot-193-825-day-certificate-lifetimes/).
 * Fixed: Uses a set version for Alpine in order to have a constant call to nslookup for docker.for.mac.localhost. 
 
 ## 2020.03
