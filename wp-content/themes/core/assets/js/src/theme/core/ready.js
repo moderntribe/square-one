@@ -6,6 +6,7 @@
 
 import _ from 'lodash';
 import { on, ready } from 'utils/events';
+import * as tests from 'utils/tests';
 import applyBrowserClasses from 'utils/dom/apply-browser-classes';
 // @EXAMPLE_REACT_APP
 
@@ -83,6 +84,12 @@ const init = () => {
 	// 	import( 'Example' /* webpackChunkName:"example" */ );
 	// }
 	// #endif
+
+	if ( tests.supportsWorkers() ) {
+		import( '../service-worker-init/index' /* webpackChunkName:"service-worker-init" */ ).then( ( module ) => {
+			module.default();
+		} );
+	}
 
 	console.info( 'Square One FE: Initialized all javascript that targeted document ready.' );
 };
