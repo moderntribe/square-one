@@ -148,7 +148,7 @@ const bindEvents = () => {
  * @description Kick off this modules functions
  */
 
-const embeds = () => {
+const videoEmbeds = () => {
 	if ( ! el.container ) {
 		return;
 	}
@@ -162,7 +162,7 @@ const embeds = () => {
 	bindEvents();
 	setupOembeds();
 
-	console.info( 'Square One FE: Initialized embeds scripts.' );
+	console.info( 'Square One FE: Initialized video embeds scripts.' );
 };
 
-export default embeds;
+export default videoEmbeds;
