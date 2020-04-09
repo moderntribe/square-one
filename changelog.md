@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2020.04
+* Updated: Certificate creation default date to meet new requirements from [Ballot 193](https://cabforum.org/2017/03/17/ballot-193-825-day-certificate-lifetimes/).
+
 ## 2020.03
 * Added: PHP rules for .editorconfig, including config for many PhpStorm rules
 * Fixed: Broken composer.lock file preventing Gravity Forms installation
