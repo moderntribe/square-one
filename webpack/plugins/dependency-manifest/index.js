@@ -204,9 +204,9 @@ class DependencyExtractionWebpackPlugin {
 						continue;
 					}
 
-					// TODO: Clean up filename
-					// Push chunk in
-					combinedAssetsData.chunks.push( asset );
+					// Push chunk in with cleaned up filename
+					const [ filename ] = asset.match( /([a-zA-Z0-9\s_\\.\-\(\):])+(.css|.js)$/ );
+					combinedAssetsData.chunks.push( filename );
 
 					if ( combinedAssetsData[ entryName ] ) {
 						// Lookup file path
