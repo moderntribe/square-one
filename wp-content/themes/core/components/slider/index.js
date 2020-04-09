@@ -4,15 +4,14 @@
  */
 
 import _ from 'lodash';
+import Swiper from 'swiper';
 
 import * as tools from 'utils/tools';
 import * as tests from 'utils/tests';
 
 const instances = {
 	swipers: {},
-};
-
-const { Swiper } = window;
+}
 
 const options = {
 	swiperMain: () => ( {
@@ -166,9 +165,6 @@ const bindEvents = () => {
 };
 
 const init = () => {
-	if ( ! Swiper ) {
-		return;
-	}
 	initSliders();
 	bindEvents();
 

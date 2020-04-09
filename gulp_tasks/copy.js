@@ -32,16 +32,7 @@ module.exports = {
 				`${ pkg.square1.paths.npm }/jquery/dist/jquery.js`,
 				`${ pkg.square1.paths.npm }/jquery/dist/jquery.min.js`,
 				`${ pkg.square1.paths.npm }/jquery/dist/jquery.min.map`,
-				`${ pkg.square1.paths.component }/theme/js/globals.js`,
 				`${ pkg.square1.paths.npm }/es6-promise/dist/es6-promise.auto.js`,
-				`${ pkg.square1.paths.npm }/swiper/js/swiper.js`,
-				`${ pkg.square1.paths.npm }/lazysizes/plugins/object-fit/ls.object-fit.js`,
-				`${ pkg.square1.paths.npm }/lazysizes/plugins/parent-fit/ls.parent-fit.js`,
-				`${ pkg.square1.paths.npm }/lazysizes/plugins/respimg/ls.respimg.js`,
-				`${ pkg.square1.paths.npm }/lazysizes/plugins/bgset/ls.bgset.js`,
-				`${ pkg.square1.paths.npm }/lazysizes/lazysizes.js`,
-				`${ pkg.square1.paths.npm }/@khanacademy/tota11y/dist/tota11y.min.js`,
-				`${ pkg.square1.paths.npm }/webfontloader/webfontloader.js`,
 			] )
 			.pipe( gulp.dest( pkg.square1.paths.core_theme_js_vendor ) );
 	},

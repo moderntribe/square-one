@@ -64,7 +64,6 @@
     "docker:global:cert": "./dev/docker/global/cert.sh"
   },
   "dependencies": {
-    "@khanacademy/tota11y": "^0.2.0",
     "@types/react": "^16.9.11",
     "@vimeo/player": "^2.10.0",
     "caniuse-lite": "1.0.30001011",
@@ -75,7 +74,7 @@
     "idx": "^2.4.0",
     "intersection-observer": "^0.7.0",
     "jquery": "3.4.1",
-    "lazysizes": "^5.2.0-beta1",
+    "lazysizes": "^5.2.0",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.27",
@@ -94,7 +93,7 @@
     "redux-saga": "^1.1.3",
     "reselect": "^4.0.0",
     "spin.js": "^4.1.0",
-    "swiper": "^5.2.1",
+    "swiper": "^5.3.6",
     "verge": "^1.10.2",
     "voca": "^1.4.0",
     "webfontloader": "^1.6.28",

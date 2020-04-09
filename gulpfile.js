@@ -110,10 +110,6 @@ const gulpTasks = [
 	'stylelint:theme', // lints and fixes the theme pcss
 	'stylelint:apps', // lints and fixes the apps pcss modules
 
-	/* Uglify tasks */
-
-	'uglify:themeMin', // minify vendors into a single min bundle (just after this they are concat with the webpack vendor bundle)
-
 	/* Watch Tasks (THESE MUST BE LAST) */
 
 	'watch:frontEndDev', // watch all fe assets for admin and theme and run appropriate routines
@@ -213,7 +209,6 @@ gulp.task( 'server_dist', gulp.series(
 	gulp.parallel( 'header:theme', 'header:themePrint', 'header:themeLegacy', 'header:themeWPEditor', 'header:themeWPLogin' ),
 	gulp.parallel( 'shell:scriptsThemeDev', 'shell:scriptsAdminDev' ),
 	gulp.parallel( 'shell:scriptsThemeProd', 'shell:scriptsAdminProd' ),
-	'uglify:themeMin',
 	gulp.parallel( 'constants:buildTimestamp' ),
 ) );
 
@@ -247,7 +242,6 @@ gulp.task( 'dist', gulp.series(
 	gulp.parallel( 'header:theme', 'header:themePrint', 'header:themeLegacy', 'header:themeWPEditor', 'header:themeWPLogin' ),
 	gulp.parallel( 'shell:scriptsThemeDev', 'shell:scriptsAdminDev' ),
 	gulp.parallel( 'shell:scriptsThemeProd', 'shell:scriptsAdminProd' ),
-	'uglify:themeMin',
 	gulp.parallel( 'constants:buildTimestamp' ),
 ) );
 
