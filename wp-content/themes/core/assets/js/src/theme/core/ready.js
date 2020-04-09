@@ -19,8 +19,6 @@ import resize from './resize';
 import plugins from './plugins';
 import viewportDims from './viewport-dims';
 
-import single from '../single/index';
-
 // @EXAMPLE_REACT_APP
 
 // const el = {
@@ -65,10 +63,6 @@ const init = () => {
 	// initialize global events
 
 	bindEvents();
-
-	// initialize the main scripts
-
-	single();
 
 	// @EXAMPLE_REACT_APP (Make sure to include the wrapping if block for ALL react apps
 
