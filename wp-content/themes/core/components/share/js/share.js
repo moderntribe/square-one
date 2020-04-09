@@ -1,3 +1,9 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Component: Social Share
+ *
+ * ----------------------------------------------------------------------------- */
+
 /**
  * @module
  * @description JavaScript specific to the social sharing of content.

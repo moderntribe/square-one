@@ -4,7 +4,6 @@
  */
 
 import embeds from './embeds';
-import socialShare from './social-share';
 
 /**
  * @function init
@@ -13,8 +12,6 @@ import socialShare from './social-share';
 
 const init = () => {
 	embeds();
-
-	socialShare();
 };
 
 export default init;
