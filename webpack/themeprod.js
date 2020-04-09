@@ -11,7 +11,7 @@ const BundleAnalyzerPlugin = require( 'webpack-bundle-analyzer' ).BundleAnalyzer
  */
 const prodBase = require( './configs/prod-base.js' );
 const entry = require( './entry/theme' );
-const DependencyExtraction = require('./plugins/dependency-extraction');
+const DependencyManifest = require( './plugins/dependency-manifest' );
 const pkg = require( '../package.json' );
 
 module.exports = merge.strategy( {
@@ -26,16 +26,15 @@ module.exports = merge.strategy( {
 		},
 		plugins: [
 			new MiniCssExtractPlugin( {
-				filename: '../../../css/dist/theme/[name].min.css',
+				filename: '../../../css/dist/theme/[name].[contenthash].min.css',
 			} ),
 			new BundleAnalyzerPlugin( {
 				analyzerMode: 'static',
 				reportFilename: resolve( `${ __dirname }/../`, 'reports/webpack-theme-bundle-prod.html' ),
 				openAnalyzer: false,
 			} ),
-			new DependencyExtraction( {
+			new DependencyManifest( {
 				outputFormat: 'php',
-				combineAssets: true,
 				combinedOutputFile: 'assets.php',
 			} ),
 		],
