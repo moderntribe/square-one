@@ -34,8 +34,8 @@ module.exports = merge.strategy( {
 				openAnalyzer: false,
 			} ),
 			new DependencyManifest( {
-				outputFormat: 'json',
-				combinedOutputFile: 'assets.json',
+				outputFormat: 'php',
+				combinedOutputFile: 'assets.php',
 			} ),
 		],
 	}
