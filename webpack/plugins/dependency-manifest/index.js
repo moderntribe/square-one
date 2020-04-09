@@ -77,6 +77,12 @@ class DependencyExtractionWebpackPlugin {
 		return request;
 	}
 
+	/**
+	 * Stringify asset data
+	 *
+	 * @param {Object} asset Asset data
+	 * @returns {String} JSON string
+	 */
 	stringify( asset ) {
 		if ( this.options.outputFormat === 'php' ) {
 			return `<?php return ${ json2php(
@@ -87,12 +93,67 @@ class DependencyExtractionWebpackPlugin {
 		return JSON.stringify( asset );
 	}
 
+	/**
+	 * Hooks into webpack compiler
+	 *
+	 * @param {*} compiler
+	 * @memberof DependencyExtractionWebpackPlugin
+	 */
 	apply( compiler ) {
 		this.externalsPlugin.apply( compiler );
 
 		const combinedAssetsData = {};
 
-		compiler.hooks.afterEmit.tap( this.constructor.name, ( compilation, done ) => {
+		//
+		// ────────────────────────────────────────────────────────── I ──────────
+		//   :::::: E M I T   H O O K : :  :   :    :     :        :          :
+		// ────────────────────────────────────────────────────────────────────
+		//
+		compiler.hooks.emit.tap( this.constructor.name, ( compilation ) => {
+			// Process each entry point independently.
+			for ( const [
+				entrypointName,
+				entrypoint,
+			] of compilation.entrypoints.entries() ) {
+				const entrypointExternalizedWpDeps = new Set();
+
+				// Search for externalized modules in all chunks.
+				for ( const chunk of entrypoint.chunks ) {
+					for ( const { userRequest } of chunk.modulesIterable ) {
+						if ( this.externalizedDeps.has( userRequest ) ) {
+							const scriptDependency = this.mapRequestToDependency(
+								userRequest
+							);
+							entrypointExternalizedWpDeps.add(
+								scriptDependency
+							);
+						}
+					}
+				}
+
+				const runtimeChunk = entrypoint.getRuntimeChunk();
+
+				const assetData = {
+					// Get a sorted array so we can produce a stable, stringified representation.
+					dependencies: Array.from(
+						entrypointExternalizedWpDeps
+					).sort(),
+					version: runtimeChunk.hash.substring( 0, 10 ),
+					js: [],
+					css: [],
+				};
+
+				// Set asset data for use in `afterEmit` hook
+				combinedAssetsData[ entrypointName ] = assetData;
+			}
+		} );
+
+		//
+		// ──────────────────────────────────────────────────────────────────── II ──────────
+		//   :::::: A F T E R E M I T   H O O K : :  :   :    :     :        :          :
+		// ──────────────────────────────────────────────────────────────────────────────
+		//
+		compiler.hooks.afterEmit.tap( this.constructor.name, ( compilation ) => {
 			const {
 				combinedOutputFile,
 				outputFormat,
@@ -161,45 +222,6 @@ class DependencyExtractionWebpackPlugin {
 					throw err;
 				}
 			} );
-		} );
-
-		compiler.hooks.emit.tap( this.constructor.name, ( compilation ) => {
-			// Process each entry point independently.
-			for ( const [
-				entrypointName,
-				entrypoint,
-			] of compilation.entrypoints.entries() ) {
-				const entrypointExternalizedWpDeps = new Set();
-
-				// Search for externalized modules in all chunks.
-				for ( const chunk of entrypoint.chunks ) {
-					for ( const { userRequest } of chunk.modulesIterable ) {
-						if ( this.externalizedDeps.has( userRequest ) ) {
-							const scriptDependency = this.mapRequestToDependency(
-								userRequest
-							);
-							entrypointExternalizedWpDeps.add(
-								scriptDependency
-							);
-						}
-					}
-				}
-
-				const runtimeChunk = entrypoint.getRuntimeChunk();
-
-				const assetData = {
-					// Get a sorted array so we can produce a stable, stringified representation.
-					dependencies: Array.from(
-						entrypointExternalizedWpDeps
-					).sort(),
-					version: runtimeChunk.hash.substring( 0, 10 ),
-					js: [],
-					css: [],
-				};
-
-				// Set asset data for use in `afterEmit` hook
-				combinedAssetsData[ entrypointName ] = assetData;
-			}
 		} );
 	}
 }
