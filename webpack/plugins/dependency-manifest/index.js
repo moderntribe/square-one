@@ -187,7 +187,8 @@ class DependencyExtractionWebpackPlugin {
 			} );
 
 			/**
-			 * Perform file path looksup of assets and put assets into their determined file type
+			 * Perform file path lookup of assets and put assets into their determined file type
+			 * if the chunk is part of an entry
 			 *
 			 * Don't:
 			 * - Include empty assets as they were already removed
