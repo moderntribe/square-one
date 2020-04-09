@@ -16,8 +16,8 @@ module.exports = merge.strategy( {
 	cache: true,
 	mode: 'development',
 	output: {
-		filename: '[name].js',
-		chunkFilename: '[name].js',
+		filename: '[name].[chunkhash:10].js',
+		chunkFilename: '[name].[chunkhash:10].js',
 	},
 	devtool: 'eval-source-map',
 	plugins: [

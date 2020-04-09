@@ -3,7 +3,6 @@
  */
 const { resolve } = require( 'path' );
 const merge = require( 'webpack-merge' );
-const glob = require( 'glob' );
 const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
 const BundleAnalyzerPlugin = require( 'webpack-bundle-analyzer' ).BundleAnalyzerPlugin;
 
@@ -24,7 +23,7 @@ module.exports = merge.strategy( {
 	},
 	plugins: [
 		new MiniCssExtractPlugin( {
-			filename: '../../../css/dist/[name].css',
+			filename: '../../../css/dist/theme/[name].css',
 		} ),
 		new BundleAnalyzerPlugin( {
 			analyzerMode: 'static',

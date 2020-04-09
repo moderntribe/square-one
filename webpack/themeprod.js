@@ -26,18 +26,18 @@ module.exports = merge.strategy( {
 		},
 		plugins: [
 			new MiniCssExtractPlugin( {
-				filename: '../../../css/dist/[name].[contenthash].min.css',
+				filename: '../../../css/dist/theme/[name].min.css',
 			} ),
 			new BundleAnalyzerPlugin( {
 				analyzerMode: 'static',
 				reportFilename: resolve( `${ __dirname }/../`, 'reports/webpack-theme-bundle-prod.html' ),
 				openAnalyzer: false,
 			} ),
-			new DependencyExtraction({
+			new DependencyExtraction( {
 				outputFormat: 'php',
 				combineAssets: true,
-				combinedOutputFile: 'assets.php'
-			}),
+				combinedOutputFile: 'assets.php',
+			} ),
 		],
 	}
 );

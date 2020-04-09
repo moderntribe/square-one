@@ -144,7 +144,7 @@ class DependencyExtractionWebpackPlugin {
 					dependencies: Array.from(
 						entrypointExternalizedWpDeps
 					).sort(),
-					version: runtimeChunk.hash,
+					version: runtimeChunk.hash.substring( 0, 10 ),
 				};
 
 				const assetString = this.stringify( assetData );

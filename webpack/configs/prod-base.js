@@ -18,8 +18,8 @@ module.exports = merge.strategy( {
 	mode: 'production',
 	devtool: false,
 	output: {
-		filename: '[name].min.js',
-		chunkFilename: '[name].[chunkhash].min.js',
+		filename: '[name].[chunkhash:10].min.js',
+		chunkFilename: '[name].[chunkhash:10].min.js',
 	},
 	plugins: [
 		new webpack.DefinePlugin( {
