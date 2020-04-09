@@ -15,7 +15,6 @@ const REGEX = /integrations\/(.*)\/index\.(js|pcss)/;
  */
 const assets = [
 	...sync( `./${ paths.core_theme_integrations }**/index.pcss` ),
-	...sync( `./${ paths.core_theme_integrations }**/index.js` ),
 ];
 
 /**

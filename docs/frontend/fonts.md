@@ -1,5 +1,5 @@
 # Fonts
 
-We use [webfontloader](https://github.com/typekit/webfontloader) for theme fonts.
+The build system has built-in support for Google & Adobe (Typekit) webfont CSS files. An additional custom CSS file URL may also be used.
 
-Check `/wp-content/plugins/core/src/Theme/Resources/Fonts.php` on how to add your self-hosted, google or typekit fonts. 
+Check /wp-content/plugins/core/src/Service_Providers/Theme_Provider.php on how to add your self-hosted, google or Adobe (Typekit) fonts.

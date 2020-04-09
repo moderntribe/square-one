@@ -12,7 +12,6 @@ const integrations = require( './integrations' );
 module.exports = {
 	scripts: [
 		`./${ paths.core_theme_js_src }index.js`,
-		...sync( `./${ paths.core_theme_components }**/index.js` ),
 	],
 	master: [
 		`./${ paths.core_theme_pcss }master.pcss`,
