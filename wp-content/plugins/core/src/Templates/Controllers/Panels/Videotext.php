@@ -8,7 +8,6 @@ use Tribe\Project\Templates\Components\Button;
 use Tribe\Project\Templates\Components\Content_Block;
 use Tribe\Project\Templates\Components\Panels\Videotext as Videotext_Context;
 use Tribe\Project\Templates\Components\Text;
-use Tribe\Project\Templates\Components\Title;
 
 class Videotext extends Panel {
 	use Traits\Headerless;
@@ -56,13 +55,13 @@ class Videotext extends Panel {
 
 	protected function get_video_text_title( array $panel_vars, $title_attributes ): string {
 		$options = [
-			Title::TITLE   => esc_html( $panel_vars[ VideoTextPanel::FIELD_TITLE ] ),
-			Title::TAG     => 'h2',
-			Title::CLASSES => [ 'h2' ],
-			Title::ATTRS   => $title_attributes,
+			Text::TEXT    => esc_html( $panel_vars[ VideoTextPanel::FIELD_TITLE ] ),
+			Text::TAG     => 'h2',
+			Text::CLASSES => [ 'h2' ],
+			Text::ATTRS   => $title_attributes,
 		];
 
-		return $this->factory->get( Title::class, $options )->render();
+		return $this->factory->get( Text::class, $options )->render();
 	}
 
 	protected function get_video_text_text( array $panel_vars, $description_attrs ): string {

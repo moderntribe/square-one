@@ -10,7 +10,6 @@ use Tribe\Project\Templates\Components\Image;
 use Tribe\Project\Templates\Components\Panels\Content_Slider as Content_Slider_Context;
 use Tribe\Project\Templates\Components\Slider as SliderComponent;
 use Tribe\Project\Templates\Components\Text;
-use Tribe\Project\Templates\Components\Title;
 
 class Content_Slider extends Panel {
 	use Traits\Unwrapped;
@@ -101,13 +100,13 @@ class Content_Slider extends Panel {
 			];
 		}
 		$options = [
-			Title::CLASSES => [ 'h2' ],
-			Title::TITLE   => esc_html( $slide[ ContentSliderPanel::FIELD_SLIDE_TITLE ] ),
-			Title::ATTRS   => $attrs,
-			Title::TAG     => 'h2',
+			Text::CLASSES => [ 'h2' ],
+			Text::TEXT    => esc_html( $slide[ ContentSliderPanel::FIELD_SLIDE_TITLE ] ),
+			Text::ATTRS   => $attrs,
+			Text::TAG     => 'h2',
 		];
 
-		return $this->factory->get( Title::class, $options )->render();
+		return $this->factory->get( Text::class, $options )->render();
 	}
 
 	protected function get_content_block_text( $slide, $index, $depth ): string {

@@ -8,7 +8,6 @@ use Tribe\Project\Templates\Components\Button;
 use Tribe\Project\Templates\Components\Card;
 use Tribe\Project\Templates\Components\Image;
 use Tribe\Project\Templates\Components\Panels\Postloop as Postloop_Context;
-use Tribe\Project\Templates\Components\Title;
 use Tribe\Project\Theme\Image_Sizes;
 
 class Postloop extends Panel {
@@ -63,13 +62,13 @@ class Postloop extends Panel {
 		}
 
 		$options = [
-			Title::TITLE   => $title,
-			Title::CLASSES => [],
-			Title::ATTRS   => $attrs,
-			Title::TAG     => 'h5',
+			Text::TEXT    => $title,
+			Text::CLASSES => [],
+			Text::ATTRS   => $attrs,
+			Text::TAG     => 'h5',
 		];
 
-		return $this->factory->get( Title::class, $options )->render();
+		return $this->factory->get( Text::class, $options )->render();
 	}
 
 	protected function get_post_image( $image_id ): string {
