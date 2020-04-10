@@ -14,6 +14,7 @@ class DependencyExtractionWebpackPlugin {
 				combinedOutputFile: null,
 				outputFormat: 'php',
 				useDefaults: true,
+				entryPrefix: '',
 			},
 			options
 		);
@@ -107,6 +108,10 @@ class DependencyExtractionWebpackPlugin {
 			chunks: [],
 		};
 
+		const {
+			entryPrefix,
+		} = this.options;
+
 		//
 		// ────────────────────────────────────────────────────────── I ──────────
 		//   :::::: E M I T   H O O K : :  :   :    :     :        :          :
@@ -147,7 +152,7 @@ class DependencyExtractionWebpackPlugin {
 				};
 
 				// Set asset data for use in `afterEmit` hook
-				combinedAssetsData[ entrypointName ] = assetData;
+				combinedAssetsData[ `${ entryPrefix }${ entrypointName }` ] = assetData;
 			}
 		} );
 
@@ -210,10 +215,10 @@ class DependencyExtractionWebpackPlugin {
 					const [ filename ] = asset.match( /([a-zA-Z0-9\s_\\.\-\(\):])+(.css|.js)$/ );
 					combinedAssetsData.chunks.push( filename );
 
-					if ( combinedAssetsData[ entryName ] ) {
+					if ( combinedAssetsData[ `${ entryPrefix }${ entryName }` ] ) {
 						// Lookup file path
 						const assetFilepath = path.resolve( compiler.options.output.path, asset );
-						const { js, css } = combinedAssetsData[ entryName ];
+						const { js, css } = combinedAssetsData[ `${ entryPrefix }${ entryName }` ];
 						if ( asset.endsWith( '.css' ) ) {
 							css.push( assetFilepath );
 						} else if ( asset.endsWith( '.js' ) ) {
