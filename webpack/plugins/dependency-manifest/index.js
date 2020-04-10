@@ -5,6 +5,7 @@ const json2php = require( 'json2php' );
 const path = require( 'path' );
 const { ExternalsPlugin } = require( 'webpack' );
 const { writeFile, unlink } = require( 'fs' );
+const { defaultRequestToExternal, defaultRequestToHandle } = require( './util' );
 
 class DependencyExtractionWebpackPlugin {
 	constructor( options ) {
@@ -39,13 +40,13 @@ class DependencyExtractionWebpackPlugin {
 			externalRequest = this.options.requestToExternal( request );
 		}
 
-		// // Cascade to default if unhandled and enabled
-		// if (
-		// 	typeof externalRequest === 'undefined' &&
-		// 	this.options.useDefaults
-		// ) {
-		// 	externalRequest = defaultRequestToExternal( request );
-		// }
+		// Cascade to default if unhandled and enabled
+		if (
+			typeof externalRequest === 'undefined' &&
+			this.options.useDefaults
+		) {
+			externalRequest = defaultRequestToExternal( request );
+		}
 
 		if ( externalRequest ) {
 			this.externalizedDeps.add( request );
@@ -66,12 +67,12 @@ class DependencyExtractionWebpackPlugin {
 		}
 
 		// Cascade to default if enabled
-		// if ( this.options.useDefaults ) {
-		// 	const scriptDependency = defaultRequestToHandle( request );
-		// 	if ( scriptDependency ) {
-		// 		return scriptDependency;
-		// 	}
-		// }
+		if ( this.options.useDefaults ) {
+			const scriptDependency = defaultRequestToHandle( request );
+			if ( scriptDependency ) {
+				return scriptDependency;
+			}
+		}
 
 		// Fall back to the request name
 		return request;
