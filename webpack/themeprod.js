@@ -35,7 +35,10 @@ module.exports = merge.strategy( {
 			} ),
 			new DependencyManifest( {
 				outputFormat: 'php',
-				combinedOutputFile: 'assets.php',
+				combinedOutputFile: 'assets.prod.php',
+				entryPrefix: 'tribe-',
+				jsDir: pkg.square1.paths.core_theme_js_dist,
+				cssDir: pkg.square1.paths.core_theme_css_dist,
 			} ),
 		],
 	}

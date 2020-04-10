@@ -11,6 +11,7 @@ const BundleAnalyzerPlugin = require( 'webpack-bundle-analyzer' ).BundleAnalyzer
  */
 const devBase = require( './configs/dev-base.js' );
 const entry = require( './entry/theme' );
+const DependencyManifest = require( './plugins/dependency-manifest' );
 const pkg = require( '../package.json' );
 
 module.exports = merge.strategy( {
@@ -29,6 +30,13 @@ module.exports = merge.strategy( {
 			analyzerMode: 'static',
 			reportFilename: resolve( `${ __dirname }/../`, 'reports/webpack-theme-bundle.html' ),
 			openAnalyzer: false,
+		} ),
+		new DependencyManifest( {
+			outputFormat: 'php',
+			combinedOutputFile: 'assets.dev.php',
+			entryPrefix: 'tribe-',
+			jsDir: pkg.square1.paths.core_theme_js_dist,
+			cssDir: pkg.square1.paths.core_theme_css_dist,
 		} ),
 	],
 } );
