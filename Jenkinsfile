@@ -136,6 +136,8 @@ pipeline {
                     // Host Git deploy
                     dir(DEPLOY_FOLDER){
                         sh script: """
+                          git rm --cached vendor/moderntribe/tribe-libs
+                          rm -rf vendor/moderntribe/tribe-libs/.git
                           git add -Av
                           git commit --allow-empty -m 'Deploying ${env.BRANCH_NAME} to ${env.ENVIRONMENT}'
                           git push origin master

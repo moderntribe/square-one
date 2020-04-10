@@ -93,6 +93,7 @@ console_log "Clone $deploy_repo to $DEPLOY_DIR"
 
 GIT_SSH_COMMAND="ssh -i .host/ansible_rsa -F /dev/null"
 
+
 if [ ! -d $DEPLOY_DIR ]; then
     git clone $deploy_repo $DEPLOY_DIR
 fi
@@ -119,7 +120,7 @@ git reset --hard $environment/master
 cd "$SCRIPTDIR"
 
 console_log "Set syncing WordPress core files from src to build"
-rsync -rpv --delete $BUILD_DIR/wp/ $DEPLOY_DIR \
+rsync -rpv --delete ${BUILD_DIR}/wp/ ${DEPLOY_DIR} \
     --exclude=.git \
     --exclude=.gitmodules \
     --exclude=.gitignore \
@@ -127,7 +128,7 @@ rsync -rpv --delete $BUILD_DIR/wp/ $DEPLOY_DIR \
     --exclude=wp-content
 
 console_log "Syncing wp-content dir from src to build"
-rsync -rpv --delete .deploy/build/wp-content .deploy/deploy \
+rsync -rpv --delete ${BUILD_DIR}/wp-content ${DEPLOY_DIR} \
     --exclude=.git \
     --exclude=.gitmodules \
     --exclude=.gitignore \
@@ -145,15 +146,18 @@ rsync -rpv --delete .deploy/build/wp-content .deploy/deploy \
 
 console_log "Syncing configuration files from src to build"
 # not wp-config.php. Host manages that
-rsync -rpv .deploy/build/ .deploy/deploy \
+rsync -rpv ${BUILD_DIR}/ ${DEPLOY_DIR} \
     --include=build-process.php \
     --include=vendor/*** \
     --exclude=*
 
 cd $DEPLOY_DIR
 
-console_log "Git add build to $deploy_repo"
+console_log "clean up git tree for vendor/moderntribe/tribe-libs"
+git rm --cached vendor/moderntribe/tribe-libs
+rm -rf vendor/moderntribe/tribe-libs/.git
 
+console_log "Git add build to $deploy_repo"
 git add -Av
 
 ### Deploy via Git Push Deploy SCM ################################################
