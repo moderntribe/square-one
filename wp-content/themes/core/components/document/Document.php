@@ -7,9 +7,7 @@ use Tribe\Project\Templates\Components\Context;
 
 class Document extends Context {
 	public const LANG       = 'language_attributes';
-	public const BLOG_NAME  = 'name';
-	public const PINGBACK   = 'pingback_url';
-	public const TITLE      = 'page_title';
+	public const HEAD       = 'head';
 	public const BODY_CLASS = 'body_class';
 	public const MASTHEAD   = 'masthead';
 	public const MAIN       = 'main';
@@ -19,31 +17,25 @@ class Document extends Context {
 	protected $path = __DIR__ . '/document.twig';
 
 	protected $properties = [
-		self::LANG        => [
+		self::HEAD       => [
 			self::DEFAULT => '',
 		],
-		self::BLOG_NAME   => [
+		self::LANG       => [
 			self::DEFAULT => '',
 		],
-		self::PINGBACK    => [
+		self::BODY_CLASS => [
 			self::DEFAULT => '',
 		],
-		self::TITLE       => [
+		self::MASTHEAD   => [
 			self::DEFAULT => '',
 		],
-		self::BODY_CLASS  => [
+		self::MAIN       => [
 			self::DEFAULT => '',
 		],
-		self::MASTHEAD    => [
+		self::SIDEBAR    => [
 			self::DEFAULT => '',
 		],
-		self::MAIN        => [
-			self::DEFAULT => '',
-		],
-		self::SIDEBAR     => [
-			self::DEFAULT => '',
-		],
-		self::FOOTER => [
+		self::FOOTER     => [
 			self::DEFAULT => '',
 		],
 	];

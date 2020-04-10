@@ -12,7 +12,7 @@ class Site_Footer extends Context {
 	public const HOME_URL   = 'home_url';
 	public const BLOG_NAME  = 'name';
 
-	protected $path = __DIR__ . '/footer-default.twig';
+	protected $path = __DIR__ . '/site-footer.twig';
 
 	protected $properties = [
 		self::NAVIGATION => [

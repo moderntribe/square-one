@@ -1,9 +1,7 @@
 <?php
 declare( strict_types=1 );
 
-namespace Tribe\Project\Templates\Components\Header;
-
-use Tribe\Project\Templates\Components\Context;
+namespace Tribe\Project\Templates\Components;
 
 class Masthead extends Context {
 	public const NAVIGATION = 'navigation';
