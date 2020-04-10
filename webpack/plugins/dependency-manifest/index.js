@@ -110,6 +110,11 @@ class DependencyExtractionWebpackPlugin {
 
 		const {
 			entryPrefix,
+			combinedOutputFile,
+			outputFormat,
+			// Default to compiler output if not set
+			jsDir = compiler.options.output.path,
+			cssDir = compiler.options.output.path,
 		} = this.options;
 
 		//
@@ -162,10 +167,6 @@ class DependencyExtractionWebpackPlugin {
 		// ──────────────────────────────────────────────────────────────────────────────
 		//
 		compiler.hooks.afterEmit.tap( this.constructor.name, ( compilation ) => {
-			const {
-				combinedOutputFile,
-				outputFormat,
-			} = this.options;
 
 			const stats = compilation.getStats().toJson();
 			const emptyAssets = stats.assets.reduce( ( acc, asset ) => {
@@ -212,17 +213,20 @@ class DependencyExtractionWebpackPlugin {
 					}
 
 					// Push chunk in with cleaned up filename
-					const [ filename ] = asset.match( /([a-zA-Z0-9\s_\\.\-\(\):])+(.css|.js)$/ );
+					const filename = path.basename( asset );
 					combinedAssetsData.chunks.push( filename );
 
-					if ( combinedAssetsData[ `${ entryPrefix }${ entryName }` ] ) {
-						// Lookup file path
-						const assetFilepath = path.resolve( compiler.options.output.path, asset );
-						const { js, css } = combinedAssetsData[ `${ entryPrefix }${ entryName }` ];
+					const combinedEntry = combinedAssetsData[ `${ entryPrefix }${ entryName }` ];
+					if ( combinedEntry ) {
+						const { js, css } = combinedEntry;
 						if ( asset.endsWith( '.css' ) ) {
-							css.push( assetFilepath );
+							css.push(
+								path.join( cssDir, asset )
+							);
 						} else if ( asset.endsWith( '.js' ) ) {
-							js.push( assetFilepath );
+							js.push(
+								path.join( jsDir, asset )
+							);
 						}
 					}
 				}
