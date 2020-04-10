@@ -13,11 +13,11 @@ use Tribe\Project\Templates\Components\Image;
 use Tribe\Project\Templates\Components\Main\Main;
 use Tribe\Project\Templates\Components\Pages\Page as Page_Context;
 use Tribe\Project\Templates\Components\Pagination;
+use Tribe\Project\Templates\Controllers\Document\Head;
+use Tribe\Project\Templates\Controllers\Document\Masthead;
 use Tribe\Project\Templates\Controllers\Footer\Footer_Wrap;
 use Tribe\Project\Templates\Controllers\Footer\Site_Footer;
-use Tribe\Project\Templates\Controllers\Head;
 use Tribe\Project\Templates\Controllers\Header\Subheader;
-use Tribe\Project\Templates\Controllers\Masthead;
 use Tribe\Project\Templates\Controllers\Sidebar\Main_Sidebar;
 
 class Page extends Abstract_Controller {
