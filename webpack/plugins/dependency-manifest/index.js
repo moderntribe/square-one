@@ -104,7 +104,11 @@ class DependencyExtractionWebpackPlugin {
 	apply( compiler ) {
 		this.externalsPlugin.apply( compiler );
 
-		const combinedAssetsData = {
+		const combinedAssetsJSData = {
+			chunks: [],
+		};
+
+		const combinedAssetsCSSData = {
 			chunks: [],
 		};
 
@@ -146,18 +150,23 @@ class DependencyExtractionWebpackPlugin {
 
 				const runtimeChunk = entrypoint.getRuntimeChunk();
 
-				const assetData = {
+				const assetJSData = {
 					// Get a sorted array so we can produce a stable, stringified representation.
 					dependencies: Array.from(
 						entrypointExternalizedWpDeps
 					).sort(),
 					version: runtimeChunk.hash.substring( 0, 10 ),
-					js: [],
-					css: [],
+					file: [],
+				};
+				const assetCSSData = {
+					dependencies: [], // Not used
+					version: runtimeChunk.hash.substring( 0, 10 ),
+					file: [],
 				};
 
 				// Set asset data for use in `afterEmit` hook
-				combinedAssetsData[ `${ entryPrefix }${ entrypointName }` ] = assetData;
+				combinedAssetsJSData[ `${ entryPrefix }${ entrypointName }` ] = assetJSData;
+				combinedAssetsCSSData[ `${ entryPrefix }${ entrypointName }` ] = assetCSSData;
 			}
 		} );
 
@@ -167,7 +176,6 @@ class DependencyExtractionWebpackPlugin {
 		// ──────────────────────────────────────────────────────────────────────────────
 		//
 		compiler.hooks.afterEmit.tap( this.constructor.name, ( compilation ) => {
-
 			const stats = compilation.getStats().toJson();
 			const emptyAssets = stats.assets.reduce( ( acc, asset ) => {
 				if ( asset.size === 0 ) {
@@ -176,8 +184,14 @@ class DependencyExtractionWebpackPlugin {
 				return acc;
 			}, [] );
 
-			const manifestFile = path.resolve(
-				compiler.options.output.path,
+			const manifestJSFile = path.resolve(
+				jsDir,
+				combinedOutputFile ||
+						'assets.' + ( outputFormat === 'php' ? 'php' : 'json' )
+			);
+
+			const manifestCSSFile = path.resolve(
+				cssDir,
 				combinedOutputFile ||
 						'assets.' + ( outputFormat === 'php' ? 'php' : 'json' )
 			);
@@ -212,28 +226,43 @@ class DependencyExtractionWebpackPlugin {
 						continue;
 					}
 
-					// Push chunk in with cleaned up filename
 					const filename = path.basename( asset );
-					combinedAssetsData.chunks.push( filename );
 
-					const combinedEntry = combinedAssetsData[ `${ entryPrefix }${ entryName }` ];
-					if ( combinedEntry ) {
-						const { js, css } = combinedEntry;
-						if ( asset.endsWith( '.css' ) ) {
-							css.push(
-								path.join( cssDir, asset )
-							);
-						} else if ( asset.endsWith( '.js' ) ) {
-							js.push(
+					if ( filename.endsWith( '.js' ) ) {
+						// Push chunk in with cleaned up filename
+						combinedAssetsJSData.chunks.push( filename );
+
+						const combinedEntry = combinedAssetsJSData[ `${ entryPrefix }${ entryName }` ];
+						if ( combinedEntry ) {
+							const { file } = combinedEntry;
+							file.push(
 								path.join( jsDir, asset )
+							);
+						}
+					} else if ( filename.endsWith( '.css' ) ) {
+						// Push chunk in with cleaned up filename
+						combinedAssetsCSSData.chunks.push( filename );
+
+						const combinedEntry = combinedAssetsCSSData[ `${ entryPrefix }${ entryName }` ];
+						if ( combinedEntry ) {
+							const { file } = combinedEntry;
+							file.push(
+								path.join( cssDir, asset )
 							);
 						}
 					}
 				}
 			}
 
-			// Write out finalized manifest file to output dir
-			writeFile( manifestFile, this.stringify( combinedAssetsData ), err => {
+			// Write out finalizedJS manifest file to output dir
+			writeFile( manifestJSFile, this.stringify( combinedAssetsJSData ), err => {
+				if ( err ) {
+					throw err;
+				}
+			} );
+
+			// Write out finalized CSS manifest file to output dir
+			writeFile( manifestCSSFile, this.stringify( combinedAssetsCSSData ), err => {
 				if ( err ) {
 					throw err;
 				}
