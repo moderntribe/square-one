@@ -19,7 +19,6 @@ use Tribe\Project\Templates\Controllers\Head;
 use Tribe\Project\Templates\Controllers\Header\Subheader;
 use Tribe\Project\Templates\Controllers\Masthead;
 use Tribe\Project\Templates\Controllers\Sidebar\Main_Sidebar;
-use Tribe\Project\Templates\Template_Interface;
 
 class Page extends Abstract_Controller {
 	/**
@@ -62,6 +61,26 @@ class Page extends Abstract_Controller {
 	public function render( string $path = '' ): string {
 		the_post();
 
+		return $this->wrap( $this->factory->get( Page_Context::class, [
+			Page_Context::COMMENTS    => $this->get_comments(),
+			Page_Context::BREADCRUMBS => $this->get_breadcrumbs(),
+			Page_Context::PAGINATION  => $this->get_pagination(),
+			Page_Context::POST        => $this->get_post(),
+		] )->render( $path) );
+	}
+
+	protected function wrap( $content ): string {
+		return $this->document_wrap( $this->main_wrap( $content ) );
+	}
+
+	protected function main_wrap( $content ): string {
+		return $this->factory->get( Main::class, [
+			Main::HEADER  => $this->subheader->render(),
+			Main::CONTENT => $content,
+		] )->render();
+	}
+
+	protected function document_wrap( $content ): string {
 		return $this->factory->get( Document::class, [
 			Document::LANG       => $this->get_language_attributes(),
 			Document::BODY_CLASS => $this->get_body_class(),
@@ -69,24 +88,8 @@ class Page extends Abstract_Controller {
 			Document::MASTHEAD   => $this->masthead->render(),
 			Document::SIDEBAR    => $this->sidebar->render(),
 			Document::FOOTER     => $this->footer->render(),
-			Document::MAIN       => $this->get_main()->render(),
+			Document::MAIN       => $content,
 		] )->render();
-	}
-
-	protected function get_main( string $path = '' ): Template_Interface {
-		return $this->factory->get( Main::class, [
-			Main::HEADER  => $this->subheader->render(),
-			Main::CONTENT => $this->build_content()->render( $path ),
-		] );
-	}
-
-	protected function build_content(): Template_Interface {
-		return $this->factory->get( Page_Context::class, [
-			Page_Context::COMMENTS    => $this->get_comments(),
-			Page_Context::BREADCRUMBS => $this->get_breadcrumbs(),
-			Page_Context::PAGINATION  => $this->get_pagination(),
-			Page_Context::POST        => $this->get_post(),
-		] );
 	}
 
 	protected function get_post() {
