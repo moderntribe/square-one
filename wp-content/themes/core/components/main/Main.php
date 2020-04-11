@@ -1,9 +1,7 @@
 <?php
 declare( strict_types=1 );
 
-namespace Tribe\Project\Templates\Components\Main;
-
-use Tribe\Project\Templates\Components\Context;
+namespace Tribe\Project\Templates\Components;
 
 class Main extends Context {
 	public const HEADER  = 'header';

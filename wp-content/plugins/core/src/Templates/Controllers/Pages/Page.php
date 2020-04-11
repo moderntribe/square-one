@@ -8,87 +8,48 @@ use Tribe\Project\Templates\Abstract_Controller;
 use Tribe\Project\Templates\Component_Factory;
 use Tribe\Project\Templates\Components\Breadcrumbs;
 use Tribe\Project\Templates\Components\Button;
-use Tribe\Project\Templates\Components\Document\Document;
 use Tribe\Project\Templates\Components\Image;
-use Tribe\Project\Templates\Components\Main\Main;
+use Tribe\Project\Templates\Components\Main;
 use Tribe\Project\Templates\Components\Pages\Page as Page_Context;
 use Tribe\Project\Templates\Components\Pagination;
-use Tribe\Project\Templates\Controllers\Document\Head;
-use Tribe\Project\Templates\Controllers\Document\Masthead;
-use Tribe\Project\Templates\Controllers\Footer\Footer_Wrap;
-use Tribe\Project\Templates\Controllers\Footer\Site_Footer;
+use Tribe\Project\Templates\Controllers\Document\Document;
 use Tribe\Project\Templates\Controllers\Header\Subheader;
-use Tribe\Project\Templates\Controllers\Sidebar\Main_Sidebar;
 
 class Page extends Abstract_Controller {
 	/**
-	 * @var Head
-	 */
-	private $head;
-	/**
 	 * @var Subheader
 	 */
-	private $subheader;
+	private $header;
 	/**
-	 * @var Main_Sidebar
+	 * @var Document
 	 */
-	private $sidebar;
-	/**
-	 * @var Footer_Wrap
-	 */
-	private $footer;
-	/**
-	 * @var Masthead
-	 */
-	private $masthead;
+	private $document;
 
 	public function __construct(
 		Component_Factory $factory,
-		Head $head,
-		Masthead $masthead,
-		Subheader $subheader,
-		Main_Sidebar $sidebar,
-		Site_Footer $footer
+		Document $document,
+		Subheader $header
 	) {
 		parent::__construct( $factory );
-		$this->head      = $head;
-		$this->masthead  = $masthead;
-		$this->subheader = $subheader;
-		$this->sidebar   = $sidebar;
-		$this->footer    = $footer;
+		$this->document = $document;
+		$this->header   = $header;
 	}
 
 	public function render( string $path = '' ): string {
 		the_post();
 
-		return $this->wrap( $this->factory->get( Page_Context::class, [
+		return $this->document->render( $this->main( $this->factory->get( Page_Context::class, [
 			Page_Context::COMMENTS    => $this->get_comments(),
 			Page_Context::BREADCRUMBS => $this->get_breadcrumbs(),
 			Page_Context::PAGINATION  => $this->get_pagination(),
 			Page_Context::POST        => $this->get_post(),
-		] )->render( $path) );
+		] )->render( $path ) ) );
 	}
 
-	protected function wrap( $content ): string {
-		return $this->document_wrap( $this->main_wrap( $content ) );
-	}
-
-	protected function main_wrap( $content ): string {
+	private function main( string $content ): string {
 		return $this->factory->get( Main::class, [
-			Main::HEADER  => $this->subheader->render(),
+			Main::HEADER  => $this->header->render(),
 			Main::CONTENT => $content,
-		] )->render();
-	}
-
-	protected function document_wrap( $content ): string {
-		return $this->factory->get( Document::class, [
-			Document::LANG       => $this->get_language_attributes(),
-			Document::BODY_CLASS => $this->get_body_class(),
-			Document::HEAD       => $this->head->render(),
-			Document::MASTHEAD   => $this->masthead->render(),
-			Document::SIDEBAR    => $this->sidebar->render(),
-			Document::FOOTER     => $this->footer->render(),
-			Document::MAIN       => $content,
 		] )->render();
 	}
 
@@ -188,17 +149,6 @@ class Page extends Abstract_Controller {
 		$link = $this->factory->get( Button::class, $options );
 
 		return $link->render();
-	}
-
-	protected function get_language_attributes() {
-		ob_start();
-		language_attributes();
-
-		return ob_get_clean();
-	}
-
-	protected function get_body_class() {
-		return implode( ' ', get_body_class() );
 	}
 
 }
