@@ -13,7 +13,6 @@ use Tribe\Project\Theme\Resources\Legacy_Check;
 use Tribe\Project\Theme\Resources\Login_Resources;
 use Tribe\Project\Theme\Resources\Scripts;
 use Tribe\Project\Theme\Resources\Styles;
-use Tribe\Project\Theme\Resources\Third_Party_Tags;
 
 class Theme_Subscriber extends Abstract_Subscriber {
 	public function register(): void {
@@ -34,7 +33,6 @@ class Theme_Subscriber extends Abstract_Subscriber {
 
 		$this->scripts();
 		$this->styles();
-		$this->third_party_tags();
 		$this->editor();
 
 		$this->nav_attributes();
@@ -165,15 +163,6 @@ class Theme_Subscriber extends Abstract_Subscriber {
 		add_action( 'wp_enqueue_scripts', function () {
 			$this->container->get( Styles::class )->enqueue_styles();
 		}, 10, 0 );
-	}
-
-	private function third_party_tags() {
-		add_action( 'wp_head', function () {
-			$this->container->get( Third_Party_Tags::class )->inject_google_tag_manager_head_tag();
-		} );
-		add_action( 'tribe/body_opening_tag', function () {
-			$this->container->get( Third_Party_Tags::class )->inject_google_tag_manager_body_tag();
-		} );
 	}
 
 	private function editor(): void {

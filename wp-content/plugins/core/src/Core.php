@@ -13,6 +13,7 @@ use Tribe\Project\Content\Content_Definer;
 use Tribe\Project\Content\Content_Subscriber;
 use Tribe\Project\Development\Whoops_Definer;
 use Tribe\Project\Development\Whoops_Subscriber;
+use Tribe\Project\Integrations\Google_Tag_Manager\Google_Tag_Manager_Subscriber;
 use Tribe\Project\Integrations\Gravity_Forms\Gravity_Forms_Subscriber;
 use Tribe\Project\Nav_Menus\Nav_Menus_Definer;
 use Tribe\Project\Nav_Menus\Nav_Menus_Subscriber;
@@ -69,6 +70,7 @@ class Core {
 		Cache_Subscriber::class,
 		CLI_Subscriber::class,
 		Content_Subscriber::class,
+		Google_Tag_Manager_Subscriber::class,
 		Gravity_Forms_Subscriber::class,
 		Nav_Menus_Subscriber::class,
 		Object_Meta_Subscriber::class,
