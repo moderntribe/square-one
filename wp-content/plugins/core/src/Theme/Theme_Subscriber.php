@@ -4,9 +4,9 @@ declare( strict_types=1 );
 namespace Tribe\Project\Theme;
 
 use Tribe\Libs\Container\Abstract_Subscriber;
+use Tribe\Project\Theme\Editor\Classic_Editor_Formats;
+use Tribe\Project\Theme\Editor\Editor_Styles;
 use Tribe\Project\Theme\Nav\Nav_Attribute_Filters;
-use Tribe\Project\Theme\Resources\Editor_Formats;
-use Tribe\Project\Theme\Resources\Editor_Styles;
 use Tribe\Project\Theme\Resources\Emoji_Disabler;
 use Tribe\Project\Theme\Resources\Fonts;
 use Tribe\Project\Theme\Resources\Legacy_Check;
@@ -35,8 +35,7 @@ class Theme_Subscriber extends Abstract_Subscriber {
 		$this->scripts();
 		$this->styles();
 		$this->third_party_tags();
-		$this->editor_styles();
-		//$this->editor_formats();
+		$this->editor();
 
 		$this->nav_attributes();
 
@@ -179,6 +178,11 @@ class Theme_Subscriber extends Abstract_Subscriber {
 		} );
 	}
 
+	private function editor(): void {
+		$this->editor_styles();
+		//$this->editor_formats();
+	}
+
 	private function editor_styles() {
 		add_action( 'admin_init', function () {
 			$this->container->get( Editor_Styles::class )->block_editor_styles();
@@ -186,17 +190,17 @@ class Theme_Subscriber extends Abstract_Subscriber {
 		add_filter( 'tiny_mce_before_init', function ( $settings ) {
 			return $this->container->get( Editor_Styles::class )->mce_editor_body_class( $settings );
 		}, 10, 1 );
-		add_filter( 'editor_stylesheets', function( $styles ) {
+		add_filter( 'editor_stylesheets', function ( $styles ) {
 			return $this->container->get( Editor_Styles::class )->mce_editor_styles( $styles );
 		}, 10, 1 );
 	}
 
 	private function editor_formats() {
 		add_filter( 'mce_buttons', function ( $settings ) {
-			return $this->container->get( Editor_Formats::class )->mce_buttons( $settings );
+			return $this->container->get( Classic_Editor_Formats::class )->mce_buttons( $settings );
 		}, 10, 1 );
 		add_filter( 'tiny_mce_before_init', function ( $settings ) {
-			return $this->container->get( Editor_Formats::class )->visual_editor_styles_dropdown( $settings );
+			return $this->container->get( Classic_Editor_Formats::class )->visual_editor_styles_dropdown( $settings );
 		}, 10, 1 );
 	}
 
