@@ -61,7 +61,7 @@ abstract class Context implements Template_Interface {
 	 * @return string
 	 */
 	protected function merge_classes( array ...$classes ): string {
-		return Util::class_attribute( $classes, false );
+		return Util::class_attribute( array_merge( ... $classes ), false );
 	}
 
 	/**
