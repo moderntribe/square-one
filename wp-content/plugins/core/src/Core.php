@@ -13,6 +13,7 @@ use Tribe\Project\Content\Content_Definer;
 use Tribe\Project\Content\Content_Subscriber;
 use Tribe\Project\Development\Whoops_Definer;
 use Tribe\Project\Development\Whoops_Subscriber;
+use Tribe\Project\Integrations\Gravity_Forms\Gravity_Forms_Subscriber;
 use Tribe\Project\Nav_Menus\Nav_Menus_Definer;
 use Tribe\Project\Nav_Menus\Nav_Menus_Subscriber;
 use Tribe\Project\Object_Meta\Object_Meta_Definer;
@@ -68,6 +69,7 @@ class Core {
 		Cache_Subscriber::class,
 		CLI_Subscriber::class,
 		Content_Subscriber::class,
+		Gravity_Forms_Subscriber::class,
 		Nav_Menus_Subscriber::class,
 		Object_Meta_Subscriber::class,
 		Panels_Subscriber::class,

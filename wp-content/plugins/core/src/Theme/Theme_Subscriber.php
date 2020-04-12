@@ -38,8 +38,6 @@ class Theme_Subscriber extends Abstract_Subscriber {
 		$this->editor();
 
 		$this->nav_attributes();
-
-		$this->gravity_forms();
 	}
 
 	private function body_classes() {
@@ -216,12 +214,6 @@ class Theme_Subscriber extends Abstract_Subscriber {
 		add_filter( 'nav_menu_link_attributes', function ( $atts, $item, $args, $depth ) {
 			return $this->container->get( Nav_Attribute_Filters::class )->customize_nav_item_anchor_atts( $atts, $item, $args, $depth );
 		}, 10, 4 );
-	}
-
-	private function gravity_forms() {
-		add_action( 'init', function () {
-			$this->container->get( Gravity_Forms_Filter::class )->hook();
-		}, 10, 0 );
 	}
 
 }
