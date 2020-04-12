@@ -3,11 +3,22 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Integrations\Gravity_Forms;
 
+use Tribe\Project\Templates\Component_Factory;
+use Tribe\Project\Templates\Components\Integrations\Gravity_Forms\Choice_Other;
+
 class Form_Markup {
 	/**
 	 * @var bool Used to enable/disable CSS classes that control icon placement inside some field types.
 	 */
 	private $activate_icons = false;
+	/**
+	 * @var Component_Factory
+	 */
+	private $component;
+
+	public function __construct( Component_Factory $component_factory ) {
+		$this->component = $component_factory;
+	}
 
 	/**
 	 * Add some custom markup to other option for radio & checkbox controls
@@ -22,17 +33,21 @@ class Form_Markup {
 	 *
 	 * @return string
 	 */
-	public function customize_gf_choice_other( $choice_markup, $choice, $field, $value ) {
+	public function customize_gf_choice_other( $choice_markup, $choice, $field, $value ): string {
 
 		if ( ! empty( $choice['isOtherChoice'] ) ) {
 
 			$indices = array_keys( $field['choices'] );
 			$index   = array_pop( $indices );
 
-			$new_markup = sprintf( '<label for="choice_%1$s_%2$s_%3$s" class="gf-radio-checkbox-other-placeholder"><span class="a11y-visual-hide">%4$s</span></label></li>',
-				$field['formId'], $field['id'], $index, __( 'Other', 'tribe' ) );
+			$label = $this->component->get( Choice_Other::class, [
+				Choice_Other::FORM_ID     => $field['formId'],
+				Choice_Other::FIELD_ID    => $field['id'],
+				Choice_Other::FIELD_INDEX => $index,
+				Choice_Other::LABEL       => __( 'Other', 'tribe' ),
+			] );
 
-			$choice_markup = str_replace( '</li>', $new_markup, $choice_markup );
+			$choice_markup = str_replace( '</li>', $label . '</li>', $choice_markup );
 
 		}
 
@@ -52,7 +67,7 @@ class Form_Markup {
 	 *
 	 * @return string
 	 */
-	public function add_gf_select_field_class( $classes, $field, $form ) {
+	public function add_gf_select_field_class( $classes, $field, $form ): string {
 
 		$class_icon_simple  = $this->activate_icons ? ' form-control-icon' : '';
 		$class_icon_complex = $this->activate_icons ? ' form-control-icon-complex' : '';
