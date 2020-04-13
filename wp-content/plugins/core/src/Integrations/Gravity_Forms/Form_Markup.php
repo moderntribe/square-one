@@ -1,65 +1,53 @@
 <?php
+declare( strict_types=1 );
 
-namespace Tribe\Project\Theme;
+namespace Tribe\Project\Integrations\Gravity_Forms;
 
-/**
- * Class Forms
- *
- * Functions for handling forms, namely Gravity Forms
- *
- * @package Tribe\Project\Theme
- */
-class Gravity_Forms_Filter {
+use Tribe\Project\Templates\Component_Factory;
+use Tribe\Project\Templates\Components\Integrations\Gravity_Forms\Choice_Other;
 
+class Form_Markup {
 	/**
 	 * @var bool Used to enable/disable CSS classes that control icon placement inside some field types.
 	 */
 	private $activate_icons = false;
-
 	/**
-	 * @return void
-	 * @action init
+	 * @var Component_Factory
 	 */
-	public function hook() {
-		add_action( 'gform_enqueue_scripts', [ $this, 'enqueue_gravity_forms_jquery_ui_styles' ] );
-		add_filter( 'gform_field_choice_markup_pre_render', [ $this, 'customize_gf_choice_other' ], 10, 4 );
-		add_filter( 'gform_field_css_class', [ $this, 'add_gf_select_field_class' ], 10, 3 );
-		add_filter( 'gform_pre_render', [ $this, 'deactivate_gf_animations' ] );
-		add_filter( 'gform_confirmation_anchor', '__return_false' );
-		add_filter( 'gform_tabindex', '__return_false' );
-		add_filter( 'pre_option_rg_gforms_disable_css', '__return_true' );
-		add_filter( 'pre_option_rg_gforms_enable_html5', '__return_true' );
-	}
+	private $component;
 
-	/**
-	 * Enqueue styles for datepicker on Gravity Forms
-	 */
-	public function enqueue_gravity_forms_jquery_ui_styles() {
-
-		global $wp_scripts;
-		$jquery_ui = $wp_scripts->query( 'jquery-ui-core' );
-		wp_enqueue_style( 'jquery-ui-smoothness',
-			'https://ajax.googleapis.com/ajax/libs/jqueryui/' . $jquery_ui->ver . '/themes/smoothness/jquery-ui.css',
-			false, 'screen' );
-
+	public function __construct( Component_Factory $component_factory ) {
+		$this->component = $component_factory;
 	}
 
 	/**
 	 * Add some custom markup to other option for radio & checkbox controls
 	 *
-	 * @link https://www.gravityhelp.com/documentation/article/gform_field_choice_markup_pre_render/
+	 * @link   https://docs.gravityforms.com/gform_field_choice_markup_pre_render/
+	 * @filter gform_field_choice_markup_pre_render
+	 *
+	 * @param string $choice_markup
+	 * @param array  $choice
+	 * @param array  $field
+	 * @param string $value
+	 *
+	 * @return string
 	 */
-	public function customize_gf_choice_other( $choice_markup, $choice, $field, $value ) {
+	public function customize_gf_choice_other( $choice_markup, $choice, $field, $value ): string {
 
 		if ( ! empty( $choice['isOtherChoice'] ) ) {
 
 			$indices = array_keys( $field['choices'] );
 			$index   = array_pop( $indices );
 
-			$new_markup = sprintf( '<label for="choice_%1$s_%2$s_%3$s" class="gf-radio-checkbox-other-placeholder"><span class="a11y-visual-hide">%4$s</span></label></li>',
-				$field['formId'], $field['id'], $index, __( 'Other', 'tribe' ) );
+			$label = $this->component->get( Choice_Other::class, [
+				Choice_Other::FORM_ID     => $field['formId'],
+				Choice_Other::FIELD_ID    => $field['id'],
+				Choice_Other::FIELD_INDEX => $index,
+				Choice_Other::LABEL       => __( 'Other', 'tribe' ),
+			] );
 
-			$choice_markup = str_replace( '</li>', $new_markup, $choice_markup );
+			$choice_markup = str_replace( '</li>', $label . '</li>', $choice_markup );
 
 		}
 
@@ -70,9 +58,16 @@ class Gravity_Forms_Filter {
 	/**
 	 * Add a custom class to the Gravity Forms select field
 	 *
-	 * @link http://www.gravityhelp.com/documentation/page/Gform_field_css_class
+	 * @link   https://docs.gravityforms.com/gform_field_css_class/
+	 * @filter gform_field_css_class
+	 *
+	 * @param string $classes
+	 * @param array  $field
+	 * @param array  $form
+	 *
+	 * @return string
 	 */
-	public function add_gf_select_field_class( $classes, $field, $form ) {
+	public function add_gf_select_field_class( $classes, $field, $form ): string {
 
 		$class_icon_simple  = $this->activate_icons ? ' form-control-icon' : '';
 		$class_icon_complex = $this->activate_icons ? ' form-control-icon-complex' : '';
@@ -93,7 +88,7 @@ class Gravity_Forms_Filter {
 			$classes .= ' gf-textarea';
 		} elseif ( $field['type'] === 'date' || $field['inputType'] === 'date' ) {
 			$class_date_icon = ( $field['dateType'] === 'datepicker' ) ? $class_icon_simple : '';
-			$classes .= ' gf-date gf-date-layout-' . $field['dateType'] . $class_date_icon;
+			$classes         .= ' gf-date gf-date-layout-' . $field['dateType'] . $class_date_icon;
 		} elseif ( $field['type'] === 'time' || $field['inputType'] === 'time' ) {
 			$classes .= ' gf-time';
 		} elseif ( $field['type'] === 'phone' || $field['inputType'] === 'phone' ) {
@@ -115,24 +110,4 @@ class Gravity_Forms_Filter {
 		return $classes;
 
 	}
-
-	/**
-	 * Set enableAnimation for all forms to be false always. Removes a weird
-	 * collision between Gravity and GSAP jQuery plugin, our JS animation library, which is
-	 * worth the performance gain in animations used site wide over the Gravity
-	 * Forms conditional animations, which look terrible anyway.
-	 *
-	 * @param array $form
-	 *
-	 * @return array
-	 */
-	public function deactivate_gf_animations( $form = [] ) {
-
-		if ( isset( $form['enableAnimation'] ) && $form['enableAnimation'] == true ) {
-			$form['enableAnimation'] = false;
-		}
-
-		return $form;
-	}
-
 }

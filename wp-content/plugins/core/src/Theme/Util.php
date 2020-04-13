@@ -41,10 +41,12 @@ abstract class Util {
 			return '';
 		}
 
+		$classes = array_unique( array_map( 'sanitize_html_class', $classes ) );
+
 		return sprintf(
 			'%s%s%s',
 			$attribute ? ' class="' : '',
-			implode( ' ', array_unique( $classes ) ),
+			implode( ' ', $classes ),
 			$attribute ? '"' : ''
 		);
 	}

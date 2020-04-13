@@ -18,6 +18,10 @@ class Blocks_Subscriber extends Abstract_Subscriber {
 		add_action( 'tribe/gutenpanels/block/render', function ( $prefiltered, $attributes, $content, $block_type ) {
 			return $this->container->get( Render_Filter::class )->render( $prefiltered, $attributes, $content, $block_type );
 		}, 10, 4 );
+
+		add_action( 'after_setup_theme', function () {
+			$this->container->get( Theme_Support::class )->register_theme_supports();
+		}, 10, 0 );
 	}
 
 }

@@ -82,6 +82,7 @@
     "johnpbloch/wordpress-core-installer":"1.0.0",
     "johnpbloch/wordpress-core": "5.4.*",
     "wpackagist-plugin/configure-smtp": "3.1",
+    "wpackagist-plugin/disable-emojis": "1.7.2",
     "wpackagist-plugin/gravity-forms-wcag-20-form-fields": "1.7.2",
     "wpackagist-plugin/limit-login-attempts": "2.0beta3",
     "wpackagist-plugin/posts-to-posts": "1.6.5",

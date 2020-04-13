@@ -8,31 +8,38 @@
 /**
  * Sets up the proper title
  *
+ * @todo  Remove this function
+ *
  * @since core 1.0
  * @return string
  */
 
 function get_page_title() {
-	$title = new \Tribe\Project\Theme\Page_Title();
-	return $title->get_title();
-}
 
-/**
- * Output proper title
- *
- * @since core 1.0
- * @return string
- */
-function the_page_title( $wrapper = true ) {
-
-	$title = get_page_title();
-
-	if ( $wrapper ) {
-		$title = '<h1 class="page-title">' . esc_html( $title ) . '</h1>';
+	if ( is_front_page() ) {
+		return '';
 	}
 
-	if ( ! empty( $title ) ) {
-		echo $title;
+	// Blog
+	if ( is_home() ) {
+		return __( 'Blog', 'tribe' );
 	}
 
+	// Search
+	if ( is_search() ) {
+		return __( 'Search Results', 'tribe' );
+	}
+
+	// 404
+	if ( is_404() ) {
+		return __( 'Page Not Found (404)', 'tribe' );
+	}
+
+	// Singular
+	if ( is_singular() ) {
+		return get_the_title();
+	}
+
+	// Archives
+	return get_the_archive_title();
 }

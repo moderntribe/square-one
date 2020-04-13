@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Tribe\Project\Theme;
+namespace Tribe\Project\Theme\Config;
 
 
 class Supports {

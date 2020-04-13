@@ -60,10 +60,8 @@ abstract class Context implements Template_Interface {
 	 *
 	 * @return string
 	 */
-	protected function merge_classes( array ...$classes ) {
-		$classes = empty( $classes ) ? [] : array_merge( ... $classes );
-
-		return implode( ' ', array_map( 'sanitize_html_class', $classes ) );
+	protected function merge_classes( array ...$classes ): string {
+		return Util::class_attribute( array_merge( ... $classes ), false );
 	}
 
 	/**
@@ -73,7 +71,7 @@ abstract class Context implements Template_Interface {
 	 *
 	 * @return string
 	 */
-	protected function merge_attrs( array ...$attributes ) {
+	protected function merge_attrs( array ...$attributes ): string {
 		$attributes = empty( $attributes ) ? [] : array_merge( ... $attributes );
 
 		return Util::array_to_attributes( $attributes );

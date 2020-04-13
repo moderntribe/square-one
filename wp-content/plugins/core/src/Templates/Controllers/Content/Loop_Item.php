@@ -7,7 +7,7 @@ use Exception;
 use Tribe\Project\Templates\Abstract_Controller;
 use Tribe\Project\Templates\Components\Content\Loop_Item as Item_Context;
 use Tribe\Project\Templates\Components\Image;
-use Tribe\Project\Theme\Image_Sizes;
+use Tribe\Project\Theme\Config\Image_Sizes;
 
 class Loop_Item extends Abstract_Controller {
 	protected $time_formats = [

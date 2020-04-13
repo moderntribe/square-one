@@ -4,43 +4,49 @@ declare( strict_types=1 );
 namespace Tribe\Project\Theme;
 
 use Tribe\Libs\Container\Abstract_Subscriber;
+use Tribe\Project\Theme\Config\Image_Sizes;
+use Tribe\Project\Theme\Config\Supports;
+use Tribe\Project\Theme\Config\Web_Fonts;
+use Tribe\Project\Theme\Editor\Classic_Editor_Formats;
+use Tribe\Project\Theme\Editor\Editor_Styles;
+use Tribe\Project\Theme\Media\Full_Size_Gif;
+use Tribe\Project\Theme\Media\Image_Wrap;
+use Tribe\Project\Theme\Media\Oembed_Filter;
+use Tribe\Project\Theme\Media\WP_Responsive_Image_Disabler;
 use Tribe\Project\Theme\Nav\Nav_Attribute_Filters;
-use Tribe\Project\Theme\Resources\Editor_Formats;
-use Tribe\Project\Theme\Resources\Editor_Styles;
-use Tribe\Project\Theme\Resources\Emoji_Disabler;
-use Tribe\Project\Theme\Resources\Fonts;
 use Tribe\Project\Theme\Resources\Legacy_Check;
 use Tribe\Project\Theme\Resources\Login_Resources;
 use Tribe\Project\Theme\Resources\Scripts;
 use Tribe\Project\Theme\Resources\Styles;
-use Tribe\Project\Theme\Resources\Third_Party_Tags;
 
 class Theme_Subscriber extends Abstract_Subscriber {
 	public function register(): void {
 		$this->body_classes();
-		// $this->full_size_gif(); Uncomment to require full size gifs
+		$this->media();
+		$this->config();
+
+		$this->login_resources();
+		$this->legacy_resources();
+
+		$this->scripts();
+		$this->styles();
+		$this->editor();
+
+		$this->nav_attributes();
+	}
+
+	private function config(): void {
+		$this->supports();
 		$this->image_sizes();
+		$this->web_fonts();
+	}
+
+	private function media(): void {
 		$this->image_wrap();
 		$this->image_links();
 		$this->disable_responsive_images();
 		$this->oembed();
-		$this->supports();
-
-		$this->login_resources();
-		$this->legacy_resources();
-		$this->disable_emoji();
-
-		$this->fonts();
-
-		$this->scripts();
-		$this->styles();
-		$this->third_party_tags();
-		$this->editor_styles();
-		//$this->editor_formats();
-
-		$this->nav_attributes();
-
-		$this->gravity_forms();
+		// $this->full_size_gif(); Uncomment to require full size gifs
 	}
 
 	private function body_classes() {
@@ -59,9 +65,6 @@ class Theme_Subscriber extends Abstract_Subscriber {
 		add_action( 'after_setup_theme', function () {
 			$this->container->get( Image_Sizes::class )->register_sizes();
 		}, 10, 0 );
-		add_filter( 'wpseo_opengraph_image_size', function ( $size ) {
-			return $this->container->get( Image_Sizes::class )->customize_wpseo_image_size( $size );
-		}, 10, 1 );
 	}
 
 	private function image_wrap() {
@@ -80,9 +83,12 @@ class Theme_Subscriber extends Abstract_Subscriber {
 	}
 
 	private function disable_responsive_images() {
-		add_action( 'init', function () {
-			$this->container->get( WP_Responsive_Image_Disabler::class )->hook();
-		} );
+		add_filter( 'wp_get_attachment_image_attributes', function ( $attr ) {
+			return $this->container->get( WP_Responsive_Image_Disabler::class )->filter_image_attributes( $attr );
+		}, 999, 1 );
+		add_action( 'after_setup_theme', function () {
+			$this->container->get( WP_Responsive_Image_Disabler::class )->disable_wordpress_filters();
+		}, 10, 0 );
 	}
 
 	private function oembed() {
@@ -125,24 +131,18 @@ class Theme_Subscriber extends Abstract_Subscriber {
 		} );
 	}
 
-	private function disable_emoji() {
-		add_action( 'after_setup_theme', function () {
-			$this->container->get( Emoji_Disabler::class )->remove_hooks();
-		} );
-	}
-
-	private function fonts() {
+	private function web_fonts() {
 		add_action( 'wp_head', function () {
-			$this->container->get( Fonts::class )->load_fonts();
+			$this->container->get( Web_Fonts::class )->load_fonts();
 		}, 0, 0 );
 		add_action( 'tribe/unsupported_browser/head', function () {
-			$this->container->get( Fonts::class )->load_fonts();
+			$this->container->get( Web_Fonts::class )->load_fonts();
 		}, 0, 0 );
 		add_action( 'admin_head', function () {
-			$this->container->get( Fonts::class )->localize_typekit_tinymce();
+			$this->container->get( Web_Fonts::class )->localize_typekit_tinymce();
 		}, 0, 0 );
 		add_filter( 'mce_external_plugins', function ( $plugins ) {
-			return $this->container->get( Fonts::class )->add_typekit_to_editor( $plugins );
+			return $this->container->get( Web_Fonts::class )->add_typekit_to_editor( $plugins );
 		}, 10, 1 );
 		/* add_action( 'login_head', function() {
 			$this->container->get( Fonts::class )->load_fonts();
@@ -170,13 +170,9 @@ class Theme_Subscriber extends Abstract_Subscriber {
 		}, 10, 0 );
 	}
 
-	private function third_party_tags() {
-		add_action( 'wp_head', function () {
-			$this->container->get( Third_Party_Tags::class )->inject_google_tag_manager_head_tag();
-		} );
-		add_action( 'tribe/body_opening_tag', function () {
-			$this->container->get( Third_Party_Tags::class )->inject_google_tag_manager_body_tag();
-		} );
+	private function editor(): void {
+		$this->editor_styles();
+		//$this->editor_formats();
 	}
 
 	private function editor_styles() {
@@ -186,17 +182,17 @@ class Theme_Subscriber extends Abstract_Subscriber {
 		add_filter( 'tiny_mce_before_init', function ( $settings ) {
 			return $this->container->get( Editor_Styles::class )->mce_editor_body_class( $settings );
 		}, 10, 1 );
-		add_filter( 'editor_stylesheets', function( $styles ) {
+		add_filter( 'editor_stylesheets', function ( $styles ) {
 			return $this->container->get( Editor_Styles::class )->mce_editor_styles( $styles );
 		}, 10, 1 );
 	}
 
 	private function editor_formats() {
 		add_filter( 'mce_buttons', function ( $settings ) {
-			return $this->container->get( Editor_Formats::class )->mce_buttons( $settings );
+			return $this->container->get( Classic_Editor_Formats::class )->mce_buttons( $settings );
 		}, 10, 1 );
 		add_filter( 'tiny_mce_before_init', function ( $settings ) {
-			return $this->container->get( Editor_Formats::class )->visual_editor_styles_dropdown( $settings );
+			return $this->container->get( Classic_Editor_Formats::class )->visual_editor_styles_dropdown( $settings );
 		}, 10, 1 );
 	}
 
@@ -212,12 +208,6 @@ class Theme_Subscriber extends Abstract_Subscriber {
 		add_filter( 'nav_menu_link_attributes', function ( $atts, $item, $args, $depth ) {
 			return $this->container->get( Nav_Attribute_Filters::class )->customize_nav_item_anchor_atts( $atts, $item, $args, $depth );
 		}, 10, 4 );
-	}
-
-	private function gravity_forms() {
-		add_action( 'init', function () {
-			$this->container->get( Gravity_Forms_Filter::class )->hook();
-		}, 10, 0 );
 	}
 
 }
