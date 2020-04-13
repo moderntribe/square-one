@@ -29,9 +29,5 @@ module.exports = {
 			resourceRegExp: /^\.\/locale$/,
 			contextRegExp: /moment$/,
 		} ),
-		new webpack.ProvidePlugin( {
-			jQuery: 'jquery',
-			$: 'jquery',
-		} ),
 	],
 };

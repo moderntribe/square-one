@@ -19,7 +19,7 @@ module.exports = merge.strategy( {
 		filename: '[name].[chunkhash:10].js',
 		chunkFilename: '[name].[chunkhash:10].js',
 	},
-	devtool: 'eval-source-map',
+	devtool: 'source-map',
 	plugins: [
 		new webpack.LoaderOptionsPlugin( {
 			debug: true,

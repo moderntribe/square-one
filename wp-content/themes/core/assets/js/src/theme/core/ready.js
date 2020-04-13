@@ -89,11 +89,11 @@ const init = () => {
 	// }
 	// #endif
 
-	if ( tests.supportsWorkers() ) {
-		import( '../service-worker-init/index' /* webpackChunkName:"service-worker-init" */ ).then( ( module ) => {
-			module.default();
-		} );
-	}
+	// if ( tests.supportsWorkers() ) {
+	// 	import( '../service-worker-init/index' /* webpackChunkName:"service-worker-init" */ ).then( ( module ) => {
+	// 		module.default();
+	// 	} );
+	// }
 
 	console.info( 'Square One FE: Initialized all javascript that targeted document ready.' );
 };
@@ -121,4 +121,3 @@ const domReady = () => {
 };
 
 export default domReady;
-

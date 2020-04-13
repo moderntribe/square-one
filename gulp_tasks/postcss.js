@@ -78,17 +78,15 @@ function cssProcess( {
 
 module.exports = {
 	theme() {
-		return Promise.resolve( 'Deprecated' );
-		// return cssProcess( {
-		// 	src: [
-		// 		`${ pkg.square1.paths.core_theme_pcss }master.pcss`,
-		// 		`${ pkg.square1.paths.core_theme_pcss }print.pcss`,
-		// 	],
-		// 	dest: pkg.square1.paths.core_theme_css,
-		// } );
+		return cssProcess( {
+			src: [
+				`${ pkg.square1.paths.core_theme_pcss }master.pcss`,
+				`${ pkg.square1.paths.core_theme_pcss }print.pcss`,
+			],
+			dest: pkg.square1.paths.core_theme_css,
+		} );
 	},
 	themeComponents() {
-		return Promise.resolve( 'Deprecated' );
 		return cssProcess( {
 			src: [
 				`${ pkg.square1.paths.core_theme_components }**/index.pcss`,
@@ -98,7 +96,6 @@ module.exports = {
 		} );
 	},
 	themeIntegrations() {
-		return Promise.resolve( 'Deprecated' );
 		return cssProcess( {
 			src: [
 				`${ pkg.square1.paths.core_theme_integrations }**/index.pcss`,
@@ -108,7 +105,6 @@ module.exports = {
 		} );
 	},
 	themeLegacy() {
-		return Promise.resolve( 'Deprecated' );
 		return cssProcess( {
 			src: [
 				`${ pkg.square1.paths.core_theme_pcss }legacy.pcss`,

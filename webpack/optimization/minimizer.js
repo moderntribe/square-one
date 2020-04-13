@@ -17,5 +17,9 @@ module.exports = [
 			},
 		},
 	} ),
-	new OptimizeCSSAssetsPlugin( {} ),
+	new OptimizeCSSAssetsPlugin( {
+		cssProcessorOptions: {
+			zindex: false,
+		},
+	} ),
 ];

@@ -55,39 +55,41 @@ class Scripts {
 	 */
 	public function enqueue_scripts() {
 
-		$js_dir  = trailingslashit( get_stylesheet_directory_uri() ) . 'assets/js/';
-		$version = tribe_get_version();
+		// todo: jonathan, please patch this area, just rough sketch
+		$js_uri         = trailingslashit( get_stylesheet_directory_uri() ) . 'assets/js/';
+		$site_url       = trailingslashit( get_site_url() );
+		$script_debug   = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG === true;
+		// todo: what do we do about versions for non webpack ish, should just always be jquery which is very static
+		$version        = tribe_get_version();
+		$js_path        = trailingslashit( get_template_directory() ) . 'assets/js/dist/theme/';
+		$js_assets_file = $script_debug ? $js_path . 'assets.dev.php' : $js_path . 'assets.prod.php';
+		$script_assets  = file_exists( $js_assets_file ) ? require( $js_assets_file ) : [];
+		$jquery         = $script_debug ? 'vendor/jquery.js' : 'vendor/jquery.min.js';
 
-		// Custom jQuery (version 2.2.4, IE9+)
+		// todo: maybe different array structure
+		unset( $script_assets['chunks'] );
+
+		// Custom jQuery (todo: strange game to get deps to localize to it, please patch as needed)
 		wp_deregister_script( 'jquery' );
+		wp_deregister_script( 'jquery-core' );
 
-		if ( ! defined( 'SCRIPT_DEBUG' ) || SCRIPT_DEBUG === false ) { // Production
-			$jquery          = 'vendor/jquery.min.js';
-			$scripts         = 'dist/theme/scripts.min.js';
-		} else {
-			// Dev
-			$jquery          = 'vendor/jquery.js';
-			$scripts         = 'dist/theme/scripts.js';
-		}
-
-		wp_register_script( 'jquery', $js_dir . $jquery, [], $version, false );
-
-		wp_enqueue_script( 'core-theme-scripts', $js_dir . $scripts, [ 'jquery' ], $version, true );
+		wp_enqueue_script( 'jquery-core', $js_uri . $jquery, [], $version, true );
 
 		$js_config = new JS_Config();
 		$js_l10n = new JS_Localization();
-		wp_localize_script( 'core-theme-scripts', 'modern_tribe_i18n', $js_l10n->get_data() );
-		wp_localize_script( 'core-theme-scripts', 'modern_tribe_config', $js_config->get_data() );
+		// weird issue with wp and needing the jquery-core handle
+		wp_localize_script( 'jquery-core', 'modern_tribe_i18n', $js_l10n->get_data() );
+		wp_localize_script( 'jquery-core', 'modern_tribe_config', $js_config->get_data() );
 
-		wp_enqueue_script( 'core-theme-scripts' );
+		wp_register_script( 'jquery', false, [ 'jquery-core' ], $version, true );
+
+		foreach ( $script_assets as $handle => $asset ) {
+			// todo: don't make file an array in webpack plugin
+			wp_enqueue_script( $handle, $site_url . $asset['file'][0], $asset['dependencies'], $asset['version'], true );
+		}
 
 		if ( defined( 'HMR_DEV' ) && HMR_DEV === true ) {
 			wp_enqueue_script( 'core-theme-hmr-bundle', 'https://localhost:3000/app.js', [ 'core-theme-scripts' ], $version, true );
-		}
-
-		// Accessibility Testing
-		if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG === true ) {
-			wp_enqueue_script( 'core-theme-totally', $js_dir . 'vendor/tota11y.min.js', [ 'core-theme-scripts' ], $version, true );
 		}
 
 		// JS: Comments

@@ -50,11 +50,13 @@ module.exports = {
 			.pipe( gulp.dest( pkg.square1.paths.core_theme_css_dist ) );
 	},
 	themeWPEditor() {
+		return Promise.resolve( 'Deprecated' );
 		return gulp.src( `${ pkg.square1.paths.core_admin_css_dist }editor-style.min.css` )
 			.pipe( header( '/* Core: Visual Editor CSS */' ) )
 			.pipe( gulp.dest( pkg.square1.paths.core_admin_css_dist ) );
 	},
 	themeWPLogin() {
+		return Promise.resolve( 'Deprecated' );
 		return gulp.src( `${ pkg.square1.paths.core_admin_css_dist }login.min.css` )
 			.pipe( header( '/* Core: WordPress Login CSS */' ) )
 			.pipe( gulp.dest( pkg.square1.paths.core_admin_css_dist ) );

@@ -39,16 +39,19 @@ module.exports = {
 		], pkg.square1.paths.core_theme_css_dist );
 	},
 	themeWPEditorMin() {
+		return Promise.resolve( 'Deprecated' );
 		return minify( [
 			`${ pkg.square1.paths.core_admin_css }editor-style.css`,
 		] );
 	},
 	themeWPAdminMin() {
+		return Promise.resolve( 'Deprecated' );
 		return minify( [
 			`${ pkg.square1.paths.core_admin_css }master.css`,
 		] );
 	},
 	themeWPLoginMin() {
+		return Promise.resolve( 'Deprecated' );
 		return minify( [
 			`${ pkg.square1.paths.core_admin_css }login.css`,
 		] );

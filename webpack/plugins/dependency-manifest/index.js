@@ -7,6 +7,18 @@ const { ExternalsPlugin } = require( 'webpack' );
 const { writeFile, unlink } = require( 'fs' );
 const { defaultRequestToExternal, defaultRequestToHandle } = require( './util' );
 
+// todo: temp workaround, these names are unsafe, maybe someone makes a master or print chunk
+
+const excludeFromJS = [
+	'components',
+	'legacy',
+	'master',
+	'print',
+	'gravity-forms',
+	'editor-style',
+	'login',
+];
+
 class DependencyExtractionWebpackPlugin {
 	constructor( options ) {
 		this.options = Object.assign(
@@ -229,7 +241,12 @@ class DependencyExtractionWebpackPlugin {
 		compiler.hooks.afterEmit.tap( this.constructor.name, ( compilation ) => {
 			const stats = compilation.getStats().toJson();
 			const emptyAssets = stats.assets.reduce( ( acc, asset ) => {
-				if ( asset.size === 0 ) {
+				if ( asset.name.indexOf( '.css' ) !== -1 ) {
+					return acc;
+				}
+				if ( // todo: find a better way to handle these empty js files emitted when css is being created
+					excludeFromJS.some( v => asset.name.includes( v ) )
+				) {
 					acc.push( asset.name );
 				}
 				return acc;
