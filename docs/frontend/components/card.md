@@ -111,13 +111,7 @@ And the panel controller using the Card component
 
 namespace Tribe\Project\Templates\Controllers\Panels;
 
-use Tribe\Project\Panels\Types\Cardgrid as CardGridPanel;
-use Tribe\Project\Templates\Components\Button;
-use Tribe\Project\Templates\Components\Card;
-use Tribe\Project\Templates\Components\Image;
-use Tribe\Project\Templates\Components\Text;
-use Tribe\Project\Templates\Components\Title;
-use Tribe\Project\Theme\Image_Sizes;
+use Tribe\Project\Panels\Types\Cardgrid as CardGridPanel;use Tribe\Project\Templates\Components\Button;use Tribe\Project\Templates\Components\Card;use Tribe\Project\Templates\Components\Image;use Tribe\Project\Templates\Components\Text;use Tribe\Project\Templates\Components\Title;use Tribe\Project\Theme\Config\Image_Sizes;
 
 class Cardgrid extends Panel {
 

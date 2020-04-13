@@ -10,7 +10,7 @@ use Tribe\Project\Templates\Components\Image;
 use Tribe\Project\Templates\Components\Panels\Cardgrid as Cardgrid_Context;
 use Tribe\Project\Templates\Components\Text;
 use Tribe\Project\Templates\Components\Title;
-use Tribe\Project\Theme\Image_Sizes;
+use Tribe\Project\Theme\Config\Image_Sizes;
 
 class Cardgrid extends Panel {
 	protected function render_content( \ModularContent\Panel $panel, array $panel_vars ): string {

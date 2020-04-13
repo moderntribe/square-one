@@ -4,6 +4,7 @@ declare( strict_types=1 );
 namespace Tribe\Project\Theme;
 
 use Tribe\Libs\Container\Abstract_Subscriber;
+use Tribe\Project\Theme\Config\Image_Sizes;
 use Tribe\Project\Theme\Editor\Classic_Editor_Formats;
 use Tribe\Project\Theme\Editor\Editor_Styles;
 use Tribe\Project\Theme\Nav\Nav_Attribute_Filters;
@@ -54,9 +55,6 @@ class Theme_Subscriber extends Abstract_Subscriber {
 		add_action( 'after_setup_theme', function () {
 			$this->container->get( Image_Sizes::class )->register_sizes();
 		}, 10, 0 );
-		add_filter( 'wpseo_opengraph_image_size', function ( $size ) {
-			return $this->container->get( Image_Sizes::class )->customize_wpseo_image_size( $size );
-		}, 10, 1 );
 	}
 
 	private function image_wrap() {
