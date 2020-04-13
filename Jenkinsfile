@@ -67,7 +67,7 @@ pipeline {
                                 sh script:  "composer install --ignore-platform-reqs --no-dev", label: "Composer install"
                             }
                             dir("${BUILD_FOLDER}/wp-content/gutenpanels"){
-                                sh script: "composer install --ignore-platform-reqs --no-dev)", label: "Composer Install gutenpanels too"
+                                sh script: "composer install --ignore-platform-reqs --no-dev", label: "Composer Install gutenpanels too"
                             }
                             dir(BUILD_FOLDER){
                                 sh "rm .env"
