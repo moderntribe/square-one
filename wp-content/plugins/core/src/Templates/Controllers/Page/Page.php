@@ -7,8 +7,8 @@ use Exception;
 use Tribe\Project\Templates\Abstract_Controller;
 use Tribe\Project\Templates\Component_Factory;
 use Tribe\Project\Templates\Components\Breadcrumbs;
-use Tribe\Project\Templates\Components\Button;
 use Tribe\Project\Templates\Components\Image;
+use Tribe\Project\Templates\Components\Link;
 use Tribe\Project\Templates\Components\Main;
 use Tribe\Project\Templates\Components\Page\Page as Page_Context;
 use Tribe\Project\Templates\Components\Pagination;
@@ -140,13 +140,12 @@ class Page extends Abstract_Controller {
 		}
 
 		$options = [
-			Button::URL         => get_the_permalink( $post_id ),
-			Button::LABEL       => get_the_title( $post_id ),
-			Button::BTN_AS_LINK => true,
-			Button::CLASSES     => [ 'c-pagination__link', 'anchor', 'pagination__item-anchor' ],
+			Link::CLASSES => [ 'c-pagination__link', 'anchor', 'pagination__item-anchor' ],
+			Link::URL     => get_the_permalink( $post_id ),
+			Link::BODY    => get_the_title( $post_id ),
 		];
 
-		$link = $this->factory->get( Button::class, $options );
+		$link = $this->factory->get( Link::class, $options );
 
 		return $link->render();
 	}

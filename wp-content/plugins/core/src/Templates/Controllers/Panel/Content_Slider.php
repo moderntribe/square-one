@@ -4,9 +4,9 @@ namespace Tribe\Project\Templates\Controllers\Panel;
 
 use Exception;
 use Tribe\Project\Panels\Types\ContentSlider as ContentSliderPanel;
-use Tribe\Project\Templates\Components\Button;
 use Tribe\Project\Templates\Components\Content_Block;
 use Tribe\Project\Templates\Components\Image;
+use Tribe\Project\Templates\Components\Link;
 use Tribe\Project\Templates\Components\Panels\Content_Slider as Content_Slider_Context;
 use Tribe\Project\Templates\Components\Slider as SliderComponent;
 use Tribe\Project\Templates\Components\Text;
@@ -135,19 +135,16 @@ class Content_Slider extends Panel {
 	}
 
 	protected function get_content_block_button( $slide ): string {
-		if ( empty( $slide[ ContentSliderPanel::FIELD_SLIDE_CTA ][ Button::LABEL ] ) || empty( $slide[ ContentSliderPanel::FIELD_SLIDE_CTA ][ Button::URL ] ) ) {
+		if ( empty( $slide[ ContentSliderPanel::FIELD_SLIDE_CTA ][ Link::BODY ] ) || empty( $slide[ ContentSliderPanel::FIELD_SLIDE_CTA ][ Link::URL ] ) ) {
 			return '';
 		}
 		$options = [
-			Button::CLASSES     => [ 'c-btn c-btn--sm' ],
-			Button::ATTRS       => '',
-			Button::TAG         => '',
-			Button::TARGET      => $slide[ ContentSliderPanel::FIELD_SLIDE_CTA ][ Button::TARGET ],
-			Button::LABEL       => $slide[ ContentSliderPanel::FIELD_SLIDE_CTA ][ Button::LABEL ],
-			Button::URL         => $slide[ ContentSliderPanel::FIELD_SLIDE_CTA ][ Button::URL ],
-			Button::BTN_AS_LINK => true,
+			Link::CLASSES => [ 'c-btn', 'c-btn--sm' ],
+			Link::TARGET  => $slide[ ContentSliderPanel::FIELD_SLIDE_CTA ][ Link::TARGET ],
+			Link::BODY    => $slide[ ContentSliderPanel::FIELD_SLIDE_CTA ][ Link::BODY ],
+			Link::URL     => $slide[ ContentSliderPanel::FIELD_SLIDE_CTA ][ Link::URL ],
 		];
 
-		return $this->factory->get( Button::class, $options )->render();
+		return $this->factory->get( Link::class, $options )->render();
 	}
 }
