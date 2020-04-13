@@ -9,12 +9,16 @@ use Tribe\Project\Core;
 use Tribe\Project\Theme\Config\Colors;
 use Tribe\Project\Theme\Config\Font_Sizes;
 use Tribe\Project\Theme\Config\Gradients;
-use Tribe\Project\Theme\Resources\Fonts;
+use Tribe\Project\Theme\Config\Web_Fonts;
+use Tribe\Project\Theme\Media\Oembed_Filter;
 
 class Theme_Definer implements Definer_Interface {
-	public const CONFIG_COLORS     = 'theme.config.colors';
-	public const CONFIG_GRADIENTS  = 'theme.config.gradients';
-	public const CONFIG_FONT_SIZES = 'theme.config.font-sizes';
+	public const CONFIG_COLORS       = 'theme.config.colors';
+	public const CONFIG_GRADIENTS    = 'theme.config.gradients';
+	public const CONFIG_FONT_SIZES   = 'theme.config.font-sizes';
+	public const CONFIG_TYPEKIT_ID   = 'theme.config.typekit_id';
+	public const CONFIG_GOOGLE_FONTS = 'theme.config.google_fonts';
+	public const CONFIG_CUSTOM_FONTS = 'theme.config.custom_fonts';
 
 	public const BLACK   = 'black';
 	public const WHITE   = 'white';
@@ -50,7 +54,7 @@ class Theme_Definer implements Definer_Interface {
 				self::MAGENTA => [ 'color' => '#ff00ff', 'label' => __( 'Magenta', 'tribe' ) ],
 			],
 
-			Colors::class => DI\create()
+			Colors::class          => DI\create()
 				->constructor( DI\get( self::CONFIG_COLORS ) ),
 
 			/**
@@ -67,7 +71,7 @@ class Theme_Definer implements Definer_Interface {
 				],
 			],
 
-			Gradients::class => DI\create()
+			Gradients::class        => DI\create()
 				->constructor( DI\get( self::CONFIG_GRADIENTS ) ),
 
 			/**
@@ -101,11 +105,26 @@ class Theme_Definer implements Definer_Interface {
 					Oembed_Filter::PROVIDER_YOUTUBE,
 				] ),
 
-			Fonts::class => DI\create()
+			/**
+			 * The TypeKit kit ID
+			 */
+			self::CONFIG_TYPEKIT_ID => '',
+
+			/**
+			 * Define the Google font families to load
+			 */
+			self::CONFIG_GOOGLE_FONTS => [],
+
+			/**
+			 * Define the custom font families to load
+			 */
+			self::CONFIG_CUSTOM_FONTS => [],
+
+			Web_Fonts::class => DI\create()
 				->constructor( DI\get( Core::PLUGIN_FILE ), [
-					'typekit' => '', // typekit ID
-					'google'  => [],
-					'custom'  => [],
+					Web_Fonts::TYPEKIT_ID => DI\get( self::CONFIG_TYPEKIT_ID ),
+					Web_Fonts::GOOGLE     => DI\get( self::CONFIG_GOOGLE_FONTS ),
+					Web_Fonts::CUSTOM     => DI\get( self::CONFIG_CUSTOM_FONTS ),
 				] ),
 		];
 	}

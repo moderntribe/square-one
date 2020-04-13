@@ -1,21 +1,23 @@
 <?php
 
 
-namespace Tribe\Project\Theme\Resources;
+namespace Tribe\Project\Theme\Editor;
 
 
-class Editor_Formats {
+class Classic_Editor_Formats {
 
 	/**
 	 * Filter TinyMCE Buttons
 	 *
-	 * @param $buttons array
-	 * @return $buttons array
+	 * @param array $buttons
+	 *
+	 * @return array $buttons
 	 * @filter mce_buttons
 	 */
-	public function mce_buttons( $buttons ) {
+	public function mce_buttons( $buttons ): array {
 		$tag_select = array_shift( $buttons );
 		array_unshift( $buttons, $tag_select, 'styleselect' );
+
 		return $buttons;
 	}
 
@@ -24,15 +26,16 @@ class Editor_Formats {
 	 *
 	 * Adds a Formats dropdown to the right of the element selector for TinyMCE instances.
 	 *
-	 * @link Screenshot: http://p.tri.be/l2nG2
-	 * @link TinyMCE Documentation: http://archive.tinymce.com/wiki.php/Configuration3x:style_formats
+	 * @see    http://p.tri.be/l2nG2 Screenshot
+	 * @see    http://archive.tinymce.com/wiki.php/Configuration3x:style_formats TinyMCE Documentation
 	 *
-	 * @param $settings
-	 * @return $ettings string
+	 * @param array $settings
+	 *
+	 * @return array $settings
 	 * @filter tiny_mce_before_init
 	 */
-	public function visual_editor_styles_dropdown( $settings ) {
-		$style_formats = [
+	public function visual_editor_styles_dropdown( $settings ): array {
+		$style_formats             = [
 			/* Example single-level format */
 			[
 				'title'    => __( 'Button', 'tribe' ),
@@ -59,7 +62,8 @@ class Editor_Formats {
 				],
 			],
 		];
-		$settings[ 'style_formats' ] = json_encode( $style_formats );
+		$settings['style_formats'] = json_encode( $style_formats );
+
 		return $settings;
 	}
 }

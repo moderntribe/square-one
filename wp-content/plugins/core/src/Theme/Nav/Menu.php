@@ -37,18 +37,14 @@ class Menu {
 	}
 
 	/**
-	 * A caching wrapper around wp_nav_menu
+	 * A caching wrapper around wp_nav_menu. Always returns
+	 * the value, does not echo.
 	 *
 	 * @param array $args
-	 * @return string|void
+	 * @return string
 	 */
-	public static function menu( $args ) {
+	public static function menu( $args ): string {
 		$menu = new self( $args );
-		$html = $menu->get_html();
-		$echo = isset( $args[ 'echo' ] ) ? $args[ 'echo' ] : TRUE;
-		if ( !$echo ) {
-			return $html;
-		}
-		echo $html;
+		return $menu->get_html();
 	}
 }

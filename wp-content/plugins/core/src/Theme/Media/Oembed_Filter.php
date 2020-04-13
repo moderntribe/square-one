@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Tribe\Project\Theme;
+namespace Tribe\Project\Theme\Media;
 
 
 use Tribe\Project\Templates\Component_Factory;
@@ -9,9 +9,9 @@ use Tribe\Project\Templates\Components\Video;
 
 class Oembed_Filter {
 
-	const CACHE_PREFIX     = '_oembed_filtered_';
-	const PROVIDER_VIMEO   = 'Vimeo';
-	const PROVIDER_YOUTUBE = 'YouTube';
+	public const CACHE_PREFIX     = '_oembed_filtered_';
+	public const PROVIDER_VIMEO   = 'Vimeo';
+	public const PROVIDER_YOUTUBE = 'YouTube';
 
 	private $supported_providers = [];
 	/**
