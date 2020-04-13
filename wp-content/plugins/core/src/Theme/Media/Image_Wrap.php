@@ -1,6 +1,6 @@
 <?php
 
-namespace Tribe\Project\Theme;
+namespace Tribe\Project\Theme\Media;
 
 class Image_Wrap {
 
