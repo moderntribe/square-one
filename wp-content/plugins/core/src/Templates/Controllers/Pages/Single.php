@@ -7,65 +7,55 @@ use Tribe\Project\Templates\Abstract_Controller;
 use Tribe\Project\Templates\Component_Factory;
 use Tribe\Project\Templates\Components\Breadcrumbs;
 use Tribe\Project\Templates\Components\Button;
-use Tribe\Project\Templates\Components\Pages\Page_Wrap;
+use Tribe\Project\Templates\Components\Main;
 use Tribe\Project\Templates\Components\Pages\Single as Single_Context;
 use Tribe\Project\Templates\Components\Pagination;
 use Tribe\Project\Templates\Controllers\Content;
-use Tribe\Project\Templates\Controllers\Footer\Footer_Wrap;
-use Tribe\Project\Templates\Controllers\Header\Header_Wrap;
+use Tribe\Project\Templates\Controllers\Document\Document;
 use Tribe\Project\Templates\Controllers\Header\Subheader;
-use Tribe\Project\Templates\Template_Interface;
 
 class Single extends Abstract_Controller {
 	/**
-	 * @var Header_Wrap
+	 * @var Subheader
 	 */
 	private $header;
 	/**
-	 * @var Subheader
+	 * @var Document
 	 */
-	private $subheader;
+	private $document;
 	/**
 	 * @var Content\Single
 	 */
 	private $content;
-	/**
-	 * @var Footer_Wrap
-	 */
-	private $footer;
 
 	public function __construct(
 		Component_Factory $factory,
-		Header_Wrap $header,
-		Subheader $subheader,
-		Content\Single $content,
-		Footer_Wrap $footer
+		Document $document,
+		Subheader $header,
+		Content\Single $content
 	) {
 		parent::__construct( $factory );
-		$this->header    = $header;
-		$this->subheader = $subheader;
-		$this->content   = $content;
-		$this->footer    = $footer;
+		$this->document = $document;
+		$this->header   = $header;
+		$this->content  = $content;
 	}
 
 	public function render( string $path = '' ): string {
 		the_post();
 
-		return $this->factory->get( Page_Wrap::class, [
-			Page_Wrap::HEADER  => $this->header->render(),
-			Page_Wrap::FOOTER  => $this->footer->render(),
-			Page_Wrap::CONTENT => $this->build_content()->render( $path ),
-		] )->render();
-	}
-
-	protected function build_content(): Template_Interface {
-		return $this->factory->get( Single_Context::class, [
-			Single_Context::SUBHEADER   => $this->subheader->render(),
+		return $this->document->render( $this->main( $this->factory->get( Single_Context::class, [
 			Single_Context::CONTENT     => $this->content->render(),
 			Single_Context::COMMENTS    => $this->get_comments(),
 			Single_Context::BREADCRUMBS => $this->get_breadcrumbs(),
 			Single_Context::PAGINATION  => $this->get_pagination(),
-		] );
+		] )->render( $path ) ) );
+	}
+
+	private function main( string $content ): string {
+		return $this->factory->get( Main::class, [
+			Main::HEADER  => $this->header->render(),
+			Main::CONTENT => $content,
+		] )->render();
 	}
 
 	protected function get_comments() {
