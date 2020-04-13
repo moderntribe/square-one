@@ -6,64 +6,55 @@ use Tribe\Project\Templates\Abstract_Controller;
 use Tribe\Project\Templates\Component_Factory;
 use Tribe\Project\Templates\Components\Breadcrumbs;
 use Tribe\Project\Templates\Components\Button;
+use Tribe\Project\Templates\Components\Main;
 use Tribe\Project\Templates\Components\Pages\Index as Index_Context;
-use Tribe\Project\Templates\Components\Pages\Page_Wrap;
 use Tribe\Project\Templates\Components\Pagination;
 use Tribe\Project\Templates\Controllers\Content;
-use Tribe\Project\Templates\Controllers\Footer\Footer_Wrap;
-use Tribe\Project\Templates\Controllers\Header\Header_Wrap;
+use Tribe\Project\Templates\Controllers\Document\Document;
 use Tribe\Project\Templates\Controllers\Header\Subheader;
-use Tribe\Project\Templates\Template_Interface;
 use Tribe\Project\Theme\Pagination_Util;
 
 class Index extends Abstract_Controller {
 	/**
-	 * @var Header_Wrap
+	 * @var Document
 	 */
-	private $header;
+	private $document;
+
 	/**
 	 * @var Subheader
 	 */
-	private $subheader;
+	private $header;
 	/**
 	 * @var Content\Loop_Item
 	 */
 	private $item;
-	/**
-	 * @var Footer_Wrap
-	 */
-	private $footer;
 
 	public function __construct(
 		Component_Factory $factory,
-		Header_Wrap $header,
-		Subheader $subheader,
-		Content\Loop_Item $item,
-		Footer_Wrap $footer
+		Document $document,
+		Subheader $header,
+		Content\Loop_Item $item
 	) {
 		parent::__construct( $factory );
-		$this->header    = $header;
-		$this->subheader = $subheader;
-		$this->item      = $item;
-		$this->footer    = $footer;
+		$this->document = $document;
+		$this->header   = $header;
+		$this->item     = $item;
 	}
 
 	public function render( string $path = '' ): string {
-		return $this->factory->get( Page_Wrap::class, [
-			Page_Wrap::HEADER  => $this->header->render(),
-			Page_Wrap::FOOTER  => $this->footer->render(),
-			Page_Wrap::CONTENT => $this->build_content()->render( $path ),
-		] )->render();
-	}
-
-	protected function build_content(): Template_Interface {
-		return $this->factory->get( Index_Context::class, [
-			Index_Context::SUBHEADER   => $this->subheader->render(),
-			Index_Context::POSTS       => $this->render_posts(),
+		return $this->document->render( $this->main( $this->factory->get( Index_Context::class, [
 			Index_Context::COMMENTS    => $this->get_comments(),
 			Index_Context::BREADCRUMBS => $this->get_breadcrumbs(),
 			Index_Context::PAGINATION  => $this->get_pagination(),
-		] );
+			Index_Context::POSTS       => $this->render_posts(),
+		] )->render( $path ) ) );
+	}
+
+	private function main( string $content ): string {
+		return $this->factory->get( Main::class, [
+			Main::HEADER  => $this->header->render(),
+			Main::CONTENT => $content,
+		] )->render();
 	}
 
 	protected function render_posts(): array {
