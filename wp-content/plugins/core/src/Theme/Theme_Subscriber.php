@@ -4,13 +4,13 @@ declare( strict_types=1 );
 namespace Tribe\Project\Theme;
 
 use Tribe\Libs\Container\Abstract_Subscriber;
+use Tribe\Project\Theme\Config\Web_Fonts;
 use Tribe\Project\Theme\Config\Image_Sizes;
 use Tribe\Project\Theme\Config\Supports;
 use Tribe\Project\Theme\Editor\Classic_Editor_Formats;
 use Tribe\Project\Theme\Editor\Editor_Styles;
 use Tribe\Project\Theme\Nav\Nav_Attribute_Filters;
 use Tribe\Project\Theme\Resources\Emoji_Disabler;
-use Tribe\Project\Theme\Resources\Fonts;
 use Tribe\Project\Theme\Resources\Legacy_Check;
 use Tribe\Project\Theme\Resources\Login_Resources;
 use Tribe\Project\Theme\Resources\Scripts;
@@ -127,16 +127,16 @@ class Theme_Subscriber extends Abstract_Subscriber {
 
 	private function fonts() {
 		add_action( 'wp_head', function () {
-			$this->container->get( Fonts::class )->load_fonts();
+			$this->container->get( Web_Fonts::class )->load_fonts();
 		}, 0, 0 );
 		add_action( 'tribe/unsupported_browser/head', function () {
-			$this->container->get( Fonts::class )->load_fonts();
+			$this->container->get( Web_Fonts::class )->load_fonts();
 		}, 0, 0 );
 		add_action( 'admin_head', function () {
-			$this->container->get( Fonts::class )->localize_typekit_tinymce();
+			$this->container->get( Web_Fonts::class )->localize_typekit_tinymce();
 		}, 0, 0 );
 		add_filter( 'mce_external_plugins', function ( $plugins ) {
-			return $this->container->get( Fonts::class )->add_typekit_to_editor( $plugins );
+			return $this->container->get( Web_Fonts::class )->add_typekit_to_editor( $plugins );
 		}, 10, 1 );
 		/* add_action( 'login_head', function() {
 			$this->container->get( Fonts::class )->load_fonts();
