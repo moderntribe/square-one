@@ -65,6 +65,7 @@ pipeline {
                                 sh script: "cp $ENV_FILE .env", label: "Copy Composer .env to the root folder"
                                 sh "composer config -g github-oauth.github.com ${GITHUB_TOKEN}"
                                 sh script:  "composer install --ignore-platform-reqs --no-dev", label: "Composer install"
+                            }
                             dir("${BUILD_FOLDER}/wp-content/gutenpanels"){
                                 sh script: "composer install --ignore-platform-reqs --no-dev)", label: "Composer Install gutenpanels too"
                             }
