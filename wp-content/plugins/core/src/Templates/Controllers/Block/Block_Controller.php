@@ -1,7 +1,7 @@
 <?php
 declare( strict_types=1 );
 
-namespace Tribe\Project\Templates\Controllers\Blocks;
+namespace Tribe\Project\Templates\Controllers\Block;
 
 use Tribe\Gutenpanels\Blocks\Block_Type;
 use Tribe\Project\Templates\Abstract_Controller;

@@ -1,7 +1,7 @@
 <?php
 declare( strict_types=1 );
 
-namespace Tribe\Project\Templates\Controllers\Blocks;
+namespace Tribe\Project\Templates\Controllers\Block;
 
 use Tribe\Project\Blocks\Types\Accordion as Accordion_Block;
 use Tribe\Project\Blocks\Types\Accordion_Section as Accordion_Section_Block;
