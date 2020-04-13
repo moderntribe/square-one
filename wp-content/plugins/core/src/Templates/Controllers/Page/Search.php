@@ -1,6 +1,6 @@
 <?php
 
-namespace Tribe\Project\Templates\Controllers\Pages;
+namespace Tribe\Project\Templates\Controllers\Page;
 
 use Tribe\Project\Templates\Component_Factory;
 use Tribe\Project\Templates\Controllers\Content;

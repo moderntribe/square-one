@@ -1,10 +1,10 @@
 <?php
 declare( strict_types=1 );
 
-namespace Tribe\Project\Templates\Controllers\Pages;
+namespace Tribe\Project\Templates\Controllers\Page;
 
 use Tribe\Project\Templates\Abstract_Controller;
-use Tribe\Project\Templates\Components\Pages\Page_Unsupported_Browser as Page_Context;
+use Tribe\Project\Templates\Components\Page\Page_Unsupported_Browser as Page_Context;
 use Tribe\Project\Templates\Controllers\Traits\Copyright;
 
 class Page_Unsupported_Browser extends Abstract_Controller {

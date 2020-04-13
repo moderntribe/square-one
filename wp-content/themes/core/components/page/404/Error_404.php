@@ -1,7 +1,7 @@
 <?php
 declare( strict_types=1 );
 
-namespace Tribe\Project\Templates\Components\Pages;
+namespace Tribe\Project\Templates\Components\Page;
 
 use Tribe\Project\Templates\Components\Context;
 

@@ -1,13 +1,13 @@
 <?php
 
-namespace Tribe\Project\Templates\Controllers\Pages;
+namespace Tribe\Project\Templates\Controllers\Page;
 
 use Tribe\Project\Templates\Abstract_Controller;
 use Tribe\Project\Templates\Component_Factory;
 use Tribe\Project\Templates\Components\Breadcrumbs;
 use Tribe\Project\Templates\Components\Button;
 use Tribe\Project\Templates\Components\Main;
-use Tribe\Project\Templates\Components\Pages\Index as Index_Context;
+use Tribe\Project\Templates\Components\Page\Index as Index_Context;
 use Tribe\Project\Templates\Components\Pagination;
 use Tribe\Project\Templates\Controllers\Content;
 use Tribe\Project\Templates\Controllers\Document\Document;

@@ -1,12 +1,12 @@
 <?php
 
 
-namespace Tribe\Project\Templates\Controllers\Pages;
+namespace Tribe\Project\Templates\Controllers\Page;
 
 use Tribe\Project\Templates\Abstract_Controller;
 use Tribe\Project\Templates\Component_Factory;
 use Tribe\Project\Templates\Components\Main;
-use Tribe\Project\Templates\Components\Pages\Error_404 as Error_404_Context;
+use Tribe\Project\Templates\Components\Page\Error_404 as Error_404_Context;
 use Tribe\Project\Templates\Controllers\Document\Document;
 
 class Error_404 extends Abstract_Controller {
