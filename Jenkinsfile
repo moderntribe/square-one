@@ -65,7 +65,14 @@ pipeline {
                                 sh script: "cp $ENV_FILE .env", label: "Copy Composer .env to the root folder"
                                 sh "composer config -g github-oauth.github.com ${GITHUB_TOKEN}"
                                 sh script:  "composer install --ignore-platform-reqs --no-dev", label: "Composer install"
+                            dir("${BUILD_FOLDER}/wp-content/gutenpanels"){
+                                sh script: "composer install --ignore-platform-reqs --no-dev)", label: "Composer Install gutenpanels too"
+                            }
+                            dir(BUILD_FOLDER){
                                 sh "rm .env"
+                                sh 'rm -rf vendor/moderntribe/tribe-libs/.git'
+                                sh 'rm -rf wp-content/plugins/panel-builder/.git'
+                                sh 'rm -rf wp-content/plugins/gutenpanels/.git'
                             }
                         }
                     }
@@ -102,11 +109,6 @@ pipeline {
         stage('Deploy') {
              steps {
                 sh script: """
-                  ls ${env.BUILD_FOLDER}/vendor/moderntribe
-                  rm -rf ${env.BUILD_FOLDER}/vendor/moderntribe/tribe-libs/.git
-                  rm -rf ${env.BUILD_FOLDER}/vendor/moderntribe/panel-builder/.git
-                  rm -rf ${env.BUILD_FOLDER}/vendor/moderntribe/gutenpanels/.git
-
                   rsync -rpv --delete ${env.BUILD_FOLDER}/wp/ ${env.DEPLOY_FOLDER} \
                     --exclude=.git \
                     --exclude=.gitmodules \
