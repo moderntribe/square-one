@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "63cded55977bbc4a45a0fc8af57e8bda",
+    "content-hash": "68eaf8ed281388755844a50474b0c413",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -2912,6 +2912,24 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/configure-smtp/"
+        },
+        {
+            "name": "wpackagist-plugin/disable-emojis",
+            "version": "1.7.2",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/disable-emojis/",
+                "reference": "tags/1.7.2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/disable-emojis.1.7.2.zip"
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/disable-emojis/"
         },
         {
             "name": "wpackagist-plugin/gravity-forms-wcag-20-form-fields",
