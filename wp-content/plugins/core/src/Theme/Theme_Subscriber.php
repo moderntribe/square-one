@@ -5,6 +5,7 @@ namespace Tribe\Project\Theme;
 
 use Tribe\Libs\Container\Abstract_Subscriber;
 use Tribe\Project\Theme\Config\Image_Sizes;
+use Tribe\Project\Theme\Config\Supports;
 use Tribe\Project\Theme\Editor\Classic_Editor_Formats;
 use Tribe\Project\Theme\Editor\Editor_Styles;
 use Tribe\Project\Theme\Nav\Nav_Attribute_Filters;
