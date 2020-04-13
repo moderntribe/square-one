@@ -96,7 +96,7 @@ class Postloop extends Panel {
 	protected function get_post_button( $post_link ): string {
 		$options = [
 			Link::URL     => $post_link['url'],
-			Link::BODY    => __( 'View Post', 'tribe' ),
+			Link::TEXT    => __( 'View Post', 'tribe' ),
 			Link::CLASSES => [ 'c-cta' ],
 		];
 

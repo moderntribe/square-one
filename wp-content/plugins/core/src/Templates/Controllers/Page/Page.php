@@ -142,7 +142,7 @@ class Page extends Abstract_Controller {
 		$options = [
 			Link::CLASSES => [ 'c-pagination__link', 'anchor', 'pagination__item-anchor' ],
 			Link::URL     => get_the_permalink( $post_id ),
-			Link::BODY    => get_the_title( $post_id ),
+			Link::TEXT    => get_the_title( $post_id ),
 		];
 
 		$link = $this->factory->get( Link::class, $options );

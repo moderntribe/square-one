@@ -135,13 +135,13 @@ class Content_Slider extends Panel {
 	}
 
 	protected function get_content_block_button( $slide ): string {
-		if ( empty( $slide[ ContentSliderPanel::FIELD_SLIDE_CTA ][ Link::BODY ] ) || empty( $slide[ ContentSliderPanel::FIELD_SLIDE_CTA ][ Link::URL ] ) ) {
+		if ( empty( $slide[ ContentSliderPanel::FIELD_SLIDE_CTA ][ Link::TEXT ] ) || empty( $slide[ ContentSliderPanel::FIELD_SLIDE_CTA ][ Link::URL ] ) ) {
 			return '';
 		}
 		$options = [
 			Link::CLASSES => [ 'c-btn', 'c-btn--sm' ],
 			Link::TARGET  => $slide[ ContentSliderPanel::FIELD_SLIDE_CTA ][ Link::TARGET ],
-			Link::BODY    => $slide[ ContentSliderPanel::FIELD_SLIDE_CTA ][ Link::BODY ],
+			Link::TEXT    => $slide[ ContentSliderPanel::FIELD_SLIDE_CTA ][ Link::TEXT ],
 			Link::URL     => $slide[ ContentSliderPanel::FIELD_SLIDE_CTA ][ Link::URL ],
 		];
 

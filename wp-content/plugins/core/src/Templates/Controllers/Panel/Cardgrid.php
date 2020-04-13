@@ -146,11 +146,11 @@ class Cardgrid extends Panel {
 		}
 
 		$options = [
-			Link::CLASSES     => [ 'c-btn', 'c-btn--sm' ],
-			Link::URL         => esc_url( $cta[ Link::URL ] ),
-			Link::BODY        => esc_html( $cta[ Link::BODY ] ),
-			Link::TARGET      => esc_attr( $cta[ Link::TARGET ] ),
-			Link::ARIA_LABEL  => $aria_label,
+			Link::CLASSES    => [ 'c-btn', 'c-btn--sm' ],
+			Link::URL        => esc_url( $cta[ Link::URL ] ),
+			Link::TEXT       => esc_html( $cta[ Link::TEXT ] ),
+			Link::TARGET     => esc_attr( $cta[ Link::TARGET ] ),
+			Link::ARIA_LABEL => $aria_label,
 		];
 
 		$button_obj = $this->factory->get( Link::class, $options );

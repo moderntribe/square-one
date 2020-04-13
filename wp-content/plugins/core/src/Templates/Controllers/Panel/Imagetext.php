@@ -85,10 +85,10 @@ class Imagetext extends Panel {
 
 	protected function get_image_text_button( array $panel_vars ): string {
 		$options = [
-			Link::CLASSES     => [ 'c-btn', 'c-btn--sm' ],
-			Link::URL         => $panel_vars[ ImageTextPanel::FIELD_CTA ][ Link::URL ],
-			Link::TARGET      => $panel_vars[ ImageTextPanel::FIELD_CTA ][ Link::TARGET ],
-			Link::BODY        => $panel_vars[ ImageTextPanel::FIELD_CTA ][ Link::BODY ],
+			Link::CLASSES => [ 'c-btn', 'c-btn--sm' ],
+			Link::URL     => $panel_vars[ ImageTextPanel::FIELD_CTA ][ Link::URL ],
+			Link::TARGET  => $panel_vars[ ImageTextPanel::FIELD_CTA ][ Link::TARGET ],
+			Link::TEXT    => $panel_vars[ ImageTextPanel::FIELD_CTA ][ Link::TEXT ],
 		];
 
 		return $this->factory->get( Link::class, $options )->render();

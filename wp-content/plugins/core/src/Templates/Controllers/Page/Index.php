@@ -140,7 +140,7 @@ class Index extends Abstract_Controller {
 			$options = [
 				LINK::CLASSES => $number['classes'],
 				LINK::URL     => $number['url'],
-				LINK::BODY    => $number['label'],
+				LINK::TEXT    => $number['label'],
 			];
 
 			$links[] = $this->factory->get( Link::class, $options )->render();
