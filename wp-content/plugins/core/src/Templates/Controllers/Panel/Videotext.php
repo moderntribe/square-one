@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Tribe\Project\Templates\Controllers\Panels;
+namespace Tribe\Project\Templates\Controllers\Panel;
 
 use Tribe\Project\Panels\Types\VideoText as VideoTextPanel;
 use Tribe\Project\Templates\Components\Button;

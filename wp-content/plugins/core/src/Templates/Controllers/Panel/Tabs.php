@@ -1,6 +1,6 @@
 <?php
 
-namespace Tribe\Project\Templates\Controllers\Panels;
+namespace Tribe\Project\Templates\Controllers\Panel;
 
 use Tribe\Project\Panels\Types\Tabs as TabsPanel;
 use Tribe\Project\Templates\Components\Button;

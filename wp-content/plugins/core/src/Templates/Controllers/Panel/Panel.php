@@ -1,7 +1,7 @@
 <?php
 declare( strict_types=1 );
 
-namespace Tribe\Project\Templates\Controllers\Panels;
+namespace Tribe\Project\Templates\Controllers\Panel;
 
 use Tribe\Project\Templates\Abstract_Controller;
 use Tribe\Project\Templates\Components\Panels\Default_Panel;

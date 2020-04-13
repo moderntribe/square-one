@@ -1,7 +1,7 @@
 <?php
 declare( strict_types=1 );
 
-namespace Tribe\Project\Templates\Controllers\Panels\Traits;
+namespace Tribe\Project\Templates\Controllers\Panel\Traits;
 
 use ModularContent\Panel;
 

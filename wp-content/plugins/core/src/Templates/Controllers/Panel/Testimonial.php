@@ -1,6 +1,6 @@
 <?php
 
-namespace Tribe\Project\Templates\Controllers\Panels;
+namespace Tribe\Project\Templates\Controllers\Panel;
 
 use Exception;
 use Tribe\Project\Panels\Types\Testimonial as TestimonialPanel;

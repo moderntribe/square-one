@@ -1,6 +1,6 @@
 <?php
 
-namespace Tribe\Project\Templates\Controllers\Panels;
+namespace Tribe\Project\Templates\Controllers\Panel;
 
 use Tribe\Project\Panels\Types\Wysiwyg as Wysi;
 use Tribe\Project\Templates\Components\Panels\Wysiwyg as Wysiwyg_Context;
