@@ -30,24 +30,24 @@ Attributes:
  #}
 
 <div
-	class="{{ container_classes }}"
+	{{ container_classes }}
 	role="tablist"
 	aria-multiselectable="true"
 	{{ container_attrs }}
 >
 	{% for row in rows %}
-		<article class="{{ row_classes }}">
+		<article {{ row_classes }}>
 			<button
 				aria-controls="{{ row.content_id|esc_attr }}"
 				aria-expanded="false"
 				aria-selected="false"
-				class="{{ row_header_classes }}"
+				{{ row_header_classes }}
 				id="{{ row.header_id|esc_attr }}"
 				data-index="{{ loop.index0 }}"
 				role="tab"
 			>
 				<span
-					class="{{ row_header_inner_classes }}"
+					{{ row_header_inner_classes }}
 					data-depth="0"
 					data-name="{{ row_header_name }}"
 					data-index="{{ loop.index0 }}"
@@ -59,12 +59,12 @@ Attributes:
 			<div
 				aria-hidden="true"
 				aria-labelledby="{{ row.header_id|esc_attr }}"
-				class="{{ row_content_classes }}"
+				{{ row_content_classes }}
 				id="{{ row.content_id|esc_attr }}"
 				role="tabpanel"
 			>
 				<div
-					class="{{ row_content_inner_classes }}"
+					{{ row_content_inner_classes }}
 					data-depth="0"
 					data-name="{{ row_content_name }}"
 					data-index="{{ loop.index0 }}"

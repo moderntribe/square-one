@@ -130,11 +130,13 @@ class Index extends Abstract_Controller {
 			}
 
 			if ( $number['prev'] ) {
-				$number['classes'][] = 'icon icon-cal-arrow-left';
+				$number['classes'][] = 'icon';
+				$number['classes'][] = 'icon-cal-arrow-left';
 			}
 
 			if ( $number['next'] ) {
-				$number['classes'][] = 'icon icon-cal-arrow-right';
+				$number['classes'][] = 'icon';
+				$number['classes'][] = 'icon-cal-arrow-right';
 			}
 
 			$options = [
