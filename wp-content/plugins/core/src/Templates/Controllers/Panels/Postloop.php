@@ -7,6 +7,7 @@ use Tribe\Project\Panels\Types\PostLoop as PostLoopPanel;
 use Tribe\Project\Templates\Components\Button;
 use Tribe\Project\Templates\Components\Card;
 use Tribe\Project\Templates\Components\Image;
+use Tribe\Project\Templates\Components\Text;
 use Tribe\Project\Templates\Components\Panels\Postloop as Postloop_Context;
 use Tribe\Project\Theme\Config\Image_Sizes;
 
