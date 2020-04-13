@@ -10,7 +10,6 @@ use Tribe\Project\Templates\Components\Content_Block;
 use Tribe\Project\Templates\Components\Image;
 use Tribe\Project\Templates\Components\Panels\Interstitial as Interstitial_Context;
 use Tribe\Project\Templates\Components\Text;
-use Tribe\Project\Templates\Components\Title;
 
 class Interstitial extends Panel {
 	use Traits\Headerless;
@@ -83,13 +82,13 @@ class Interstitial extends Panel {
 
 	protected function get_interstitial_title( $title_attrs, array $panel_vars ) {
 		$options = [
-			Title::CLASSES => '',
-			Title::ATTRS   => $title_attrs,
-			Title::TAG     => 'h2',
-			Title::TITLE   => $panel_vars[ Interstice::FIELD_TITLE ],
+			Text::CLASSES => '',
+			Text::ATTRS   => $title_attrs,
+			Text::TAG     => 'h2',
+			Text::TEXT    => $panel_vars[ Interstice::FIELD_TITLE ],
 		];
 
-		return $this->factory->get( Title::class, $options )->render();
+		return $this->factory->get( Text::class, $options )->render();
 	}
 
 	protected function get_interstitial_text( $description_attrs, array $panel_vars ) {

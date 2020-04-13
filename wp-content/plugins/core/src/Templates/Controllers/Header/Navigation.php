@@ -25,7 +25,6 @@ class Navigation extends Abstract_Controller {
 			'depth'           => 3,
 			'items_wrap'      => '%3$s',
 			'fallback_cb'     => false,
-			'echo'            => false,
 			'walker'          => new Walker_Nav_Menu_Primary(),
 		];
 

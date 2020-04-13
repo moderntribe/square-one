@@ -9,8 +9,7 @@ use Tribe\Project\Templates\Components\Card;
 use Tribe\Project\Templates\Components\Image;
 use Tribe\Project\Templates\Components\Panels\Cardgrid as Cardgrid_Context;
 use Tribe\Project\Templates\Components\Text;
-use Tribe\Project\Templates\Components\Title;
-use Tribe\Project\Theme\Image_Sizes;
+use Tribe\Project\Theme\Config\Image_Sizes;
 
 class Cardgrid extends Panel {
 	protected function render_content( \ModularContent\Panel $panel, array $panel_vars ): string {
@@ -106,13 +105,13 @@ class Cardgrid extends Panel {
 		}
 
 		$options = [
-			Title::TITLE   => $title,
-			Title::CLASSES => [ 'c-card__title' ],
-			Title::ATTRS   => $attrs,
-			Title::TAG     => 'h3',
+			Text::TEXT    => $title,
+			Text::CLASSES => [ 'c-card__title' ],
+			Text::ATTRS   => $attrs,
+			Text::TAG     => 'h3',
 		];
 
-		$title_obj = $this->factory->get( Title::class, $options );
+		$title_obj = $this->factory->get( Text::class, $options );
 
 		return $title_obj->render();
 	}

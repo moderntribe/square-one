@@ -10,7 +10,6 @@ use Tribe\Project\Templates\Components\Content_Block;
 use Tribe\Project\Templates\Components\Image;
 use Tribe\Project\Templates\Components\Panels\Imagetext as Imagetext_Context;
 use Tribe\Project\Templates\Components\Text;
-use Tribe\Project\Templates\Components\Title;
 
 class Imagetext extends Panel {
 	use Traits\Headerless;
@@ -65,13 +64,13 @@ class Imagetext extends Panel {
 
 	protected function get_image_text_title( array $panel_vars, $title_attrs ): string {
 		$options = [
-			Title::CLASSES => [ 'h2' ],
-			Title::TAG     => 'h2',
-			Title::ATTRS   => $title_attrs,
-			Title::TITLE   => esc_html( $panel_vars[ ImageTextPanel::FIELD_TITLE ] ),
+			Text::CLASSES => [ 'h2' ],
+			Text::TAG     => 'h2',
+			Text::ATTRS   => $title_attrs,
+			Text::TEXT    => esc_html( $panel_vars[ ImageTextPanel::FIELD_TITLE ] ),
 		];
 
-		return $this->factory->get( Title::class, $options )->render();
+		return $this->factory->get( Text::class, $options )->render();
 	}
 
 	protected function get_image_text_text( array $panel_vars, $description_attrs ): string {

@@ -5,6 +5,8 @@ All notable changes to this project will be documented in this file.
 ## 2020.04
 * Added: JenkinsFile for pipeline build and deployment to hosted environments with Git Deploys
 * Updated: bash deployment script for locally run deployments to environments with Git deploys 
+* Updated: Certificate creation default date to meet new requirements from [Ballot 193](https://cabforum.org/2017/03/17/ballot-193-825-day-certificate-lifetimes/).
+* Fixed: Uses a set version for Alpine in order to have a constant call to nslookup for docker.for.mac.localhost. 
 
 ## 2020.03
 * Added: PHP rules for .editorconfig, including config for many PhpStorm rules

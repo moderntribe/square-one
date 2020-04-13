@@ -25,7 +25,6 @@ class Navigation extends Abstract_Controller {
 			'depth'           => 1,
 			'items_wrap'      => '%3$s',
 			'fallback_cb'     => false,
-			'echo'            => false,
 			'item_spacing'    => 'discard',
 		];
 

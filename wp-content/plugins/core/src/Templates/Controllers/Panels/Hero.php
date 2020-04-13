@@ -9,7 +9,6 @@ use Tribe\Project\Templates\Components\Content_Block;
 use Tribe\Project\Templates\Components\Image;
 use Tribe\Project\Templates\Components\Panels\Hero as Hero_Context;
 use Tribe\Project\Templates\Components\Text;
-use Tribe\Project\Templates\Components\Title;
 
 class Hero extends Panel {
 	use Traits\Unwrapped;
@@ -113,13 +112,13 @@ class Hero extends Panel {
 
 	protected function get_hero_title( $title_attrs, array $panel_vars ): string {
 		$options = [
-			Title::CLASSES => [],
-			Title::TAG     => 'h1',
-			Title::ATTRS   => $title_attrs,
-			Title::TITLE   => $panel_vars[ HeroPanel::FIELD_TITLE ],
+			Text::CLASSES => [],
+			Text::TAG     => 'h1',
+			Text::ATTRS   => $title_attrs,
+			Text::TEXT    => $panel_vars[ HeroPanel::FIELD_TITLE ],
 		];
 
-		return $this->factory->get( Title::class, $options )->render();
+		return $this->factory->get( Text::class, $options )->render();
 	}
 
 	protected function get_hero_text( $description_attrs, array $panel_vars ): string {
