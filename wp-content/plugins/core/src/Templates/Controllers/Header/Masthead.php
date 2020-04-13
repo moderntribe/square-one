@@ -74,9 +74,7 @@ class Masthead extends Abstract_Controller {
 	}
 
 	protected function submit_button(): string {
-
-		$btn_attr = [
-			'type'  => 'submit',
+		$btn_attrs = [
 			'name'  => 'submit',
 			'value' => __( 'Search', 'tribe' ),
 		];
@@ -84,7 +82,8 @@ class Masthead extends Abstract_Controller {
 		$options = [
 			Button::TEXT    => __( 'Search', 'tribe' ),
 			Button::CLASSES => [ 'c-button' ],
-			Button::ATTRS   => $btn_attr,
+			Button::TYPE    => 'submit',
+			Button::ATTRS   => $btn_attrs,
 		];
 
 		$button = $this->factory->get( Button::class, $options );

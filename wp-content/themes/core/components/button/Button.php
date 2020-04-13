@@ -9,7 +9,9 @@ namespace Tribe\Project\Templates\Components;
  * @property string   $aria_label
  * @property string[] $classes
  * @property string[] $attrs
+ * @property string   $prepend
  * @property string   $text
+ * @property string   $append
  */
 class Button extends Context {
 	public const TYPE       = 'type';
@@ -35,6 +37,7 @@ class Button extends Context {
 		],
 		self::ATTRS      => [
 			self::DEFAULT => [],
+			self::MERGE_ATTRIBUTES => [],
 		],
 		self::PREPEND    => [
 			self::DEFAULT => '',
@@ -48,6 +51,10 @@ class Button extends Context {
 	];
 
 	public function get_data(): array {
+		if ( $this->type ) {
+			$this->properties[ self::ATTRS ][ self::VALUE ]['type'] = $this->type;
+		}
+
 		if ( $this->aria_label ) {
 			$this->properties[ self::ATTRS ][ self::VALUE ]['aria-label'] = $this->aria_label;
 		}
