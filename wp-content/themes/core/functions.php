@@ -20,11 +20,10 @@ function core_theme_setup() {
 	// Template Tags
 	include_once 'template-tags/titles.php';
 	include_once 'template-tags/images.php';
-	include_once 'template-tags/comments.php';
 
 	// Remove WP SEO json-ld output in favor of the included functions
 	add_filter( 'wpseo_json_ld_output', '__return_false' );
-	
+
 }
 
 endif; // core_theme_setup

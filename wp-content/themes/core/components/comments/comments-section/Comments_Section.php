@@ -1,10 +1,12 @@
 <?php
 declare( strict_types=1 );
 
-namespace Tribe\Project\Templates\Components;
+namespace Tribe\Project\Templates\Components\Comments;
 
 
-class Comments extends Context {
+use Tribe\Project\Templates\Components\Context;
+
+class Comments_Section extends Context {
 	public const PASSWORD_REQUIRED = 'post_password_required';
 	public const HAVE_COMMENTS     = 'have_comments';
 	public const OPEN              = 'open';
@@ -13,7 +15,7 @@ class Comments extends Context {
 	public const FORM              = 'form';
 	public const PAGINATION        = 'pagination';
 
-	protected $path = __DIR__ . '/comments.twig';
+	protected $path = __DIR__ . '/comments-section.twig';
 
 	protected $properties = [
 		self::PASSWORD_REQUIRED => [
