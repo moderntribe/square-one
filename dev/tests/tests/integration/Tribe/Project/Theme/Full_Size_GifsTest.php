@@ -4,6 +4,7 @@ namespace Tribe\Project\Theme;
 
 use Tribe\Project\Templates\Component_Factory;
 use Tribe\Project\Templates\Components\Image;
+use Tribe\Project\Theme\Media\Full_Size_Gif;
 use Tribe\Tests\Test_Case;
 use Twig\Environment;
 
