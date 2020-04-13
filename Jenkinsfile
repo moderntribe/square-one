@@ -102,6 +102,7 @@ pipeline {
         stage('Deploy') {
              steps {
                 sh script: """
+                  ls ${env.BUILD_FOLDER}/vendor/moderntribe
                   rm -rf ${env.BUILD_FOLDER}/vendor/moderntribe/tribe-libs/.git
                   rm -rf ${env.BUILD_FOLDER}/vendor/moderntribe/panel-builder/.git
                   rm -rf ${env.BUILD_FOLDER}/vendor/moderntribe/gutenpanels/.git
