@@ -82,7 +82,7 @@ class Masthead extends Abstract_Controller {
 		];
 
 		$options = [
-			Button::LABEL   => __( 'Search', 'tribe' ),
+			Button::TEXT    => __( 'Search', 'tribe' ),
 			Button::CLASSES => [ 'c-button' ],
 			Button::ATTRS   => $btn_attr,
 		];

@@ -9,7 +9,7 @@ namespace Tribe\Project\Templates\Components;
  * @property string   $aria_label
  * @property string[] $classes
  * @property string[] $attrs
- * @property string   $body
+ * @property string   $text
  */
 class Button extends Context {
 	public const TYPE       = 'type';
@@ -17,7 +17,7 @@ class Button extends Context {
 	public const CLASSES    = 'classes';
 	public const ATTRS      = 'attrs';
 	public const PREPEND    = 'prepend';
-	public const BODY       = 'body';
+	public const TEXT       = 'text';
 	public const APPEND     = 'append';
 
 	protected $path = __DIR__ . '/button.twig';
@@ -39,7 +39,7 @@ class Button extends Context {
 		self::PREPEND    => [
 			self::DEFAULT => '',
 		],
-		self::BODY       => [
+		self::TEXT       => [
 			self::DEFAULT => '',
 		],
 		self::APPEND     => [
