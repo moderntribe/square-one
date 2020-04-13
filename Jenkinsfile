@@ -102,6 +102,10 @@ pipeline {
         stage('Deploy') {
              steps {
                 sh script: """
+                  rm -rf ${env.BUILD_FOLDER}/vendor/moderntribe/tribe-libs/.git
+                  rm -rf ${env.BUILD_FOLDER}/vendor/moderntribe/panel-builder/.git
+                  rm -rf ${env.BUILD_FOLDER}/vendor/moderntribe/gutenpanels/.git
+
                   rsync -rpv --delete ${env.BUILD_FOLDER}/wp/ ${env.DEPLOY_FOLDER} \
                     --exclude=.git \
                     --exclude=.gitmodules \
