@@ -10,6 +10,7 @@ use Tribe\Project\Theme\Config\Colors;
 use Tribe\Project\Theme\Config\Font_Sizes;
 use Tribe\Project\Theme\Config\Gradients;
 use Tribe\Project\Theme\Config\Web_Fonts;
+use Tribe\Project\Theme\Media\Oembed_Filter;
 
 class Theme_Definer implements Definer_Interface {
 	public const CONFIG_COLORS       = 'theme.config.colors';

@@ -4,11 +4,15 @@ declare( strict_types=1 );
 namespace Tribe\Project\Theme;
 
 use Tribe\Libs\Container\Abstract_Subscriber;
-use Tribe\Project\Theme\Config\Web_Fonts;
 use Tribe\Project\Theme\Config\Image_Sizes;
 use Tribe\Project\Theme\Config\Supports;
+use Tribe\Project\Theme\Config\Web_Fonts;
 use Tribe\Project\Theme\Editor\Classic_Editor_Formats;
 use Tribe\Project\Theme\Editor\Editor_Styles;
+use Tribe\Project\Theme\Media\Full_Size_Gif;
+use Tribe\Project\Theme\Media\Image_Wrap;
+use Tribe\Project\Theme\Media\Oembed_Filter;
+use Tribe\Project\Theme\Media\WP_Responsive_Image_Disabler;
 use Tribe\Project\Theme\Nav\Nav_Attribute_Filters;
 use Tribe\Project\Theme\Resources\Emoji_Disabler;
 use Tribe\Project\Theme\Resources\Legacy_Check;
@@ -74,9 +78,12 @@ class Theme_Subscriber extends Abstract_Subscriber {
 	}
 
 	private function disable_responsive_images() {
-		add_action( 'init', function () {
-			$this->container->get( WP_Responsive_Image_Disabler::class )->hook();
-		} );
+		add_filter( 'wp_get_attachment_image_attributes', function($attr) {
+			return $this->container->get( WP_Responsive_Image_Disabler::class )->filter_image_attributes( $attr );
+		}, 999, 1 );
+		add_action( 'after_setup_theme', function () {
+			$this->container->get( WP_Responsive_Image_Disabler::class )->disable_wordpress_filters();
+		}, 10, 0 );
 	}
 
 	private function oembed() {
