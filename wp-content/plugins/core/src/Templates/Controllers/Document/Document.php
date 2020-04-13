@@ -6,6 +6,7 @@ namespace Tribe\Project\Templates\Controllers\Document;
 use Tribe\Project\Templates\Component_Factory;
 use Tribe\Project\Templates\Components\Document\Document as Document_Context;
 use Tribe\Project\Templates\Controllers\Footer\Site_Footer;
+use Tribe\Project\Templates\Controllers\Header\Masthead;
 use Tribe\Project\Templates\Controllers\Sidebar\Main_Sidebar;
 
 /**
