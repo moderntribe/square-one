@@ -10,7 +10,9 @@ namespace Tribe\Project\Templates\Components;
  * @property string   $aria_label
  * @property string[] $classes
  * @property string[] $attrs
+ * @property string   $prepend
  * @property string   $text
+ * @property string   $append
  */
 class Link extends Context {
 	public const URL        = 'url';
@@ -19,7 +21,7 @@ class Link extends Context {
 	public const CLASSES    = 'classes';
 	public const ATTRS      = 'attrs';
 	public const PREPEND    = 'prepend';
-	public const TEXT       = 'body';
+	public const TEXT       = 'text';
 	public const APPEND     = 'append';
 
 	protected $path = __DIR__ . '/link.twig';
