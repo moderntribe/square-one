@@ -22,24 +22,31 @@ use Tribe\Project\Theme\Resources\Styles;
 class Theme_Subscriber extends Abstract_Subscriber {
 	public function register(): void {
 		$this->body_classes();
-		// $this->full_size_gif(); Uncomment to require full size gifs
-		$this->image_sizes();
-		$this->image_wrap();
-		$this->image_links();
-		$this->disable_responsive_images();
-		$this->oembed();
-		$this->supports();
+		$this->media();
+		$this->config();
 
 		$this->login_resources();
 		$this->legacy_resources();
-
-		$this->fonts();
 
 		$this->scripts();
 		$this->styles();
 		$this->editor();
 
 		$this->nav_attributes();
+	}
+
+	private function config(): void {
+		$this->supports();
+		$this->image_sizes();
+		$this->web_fonts();
+	}
+
+	private function media(): void {
+		$this->image_wrap();
+		$this->image_links();
+		$this->disable_responsive_images();
+		$this->oembed();
+		// $this->full_size_gif(); Uncomment to require full size gifs
 	}
 
 	private function body_classes() {
@@ -76,7 +83,7 @@ class Theme_Subscriber extends Abstract_Subscriber {
 	}
 
 	private function disable_responsive_images() {
-		add_filter( 'wp_get_attachment_image_attributes', function($attr) {
+		add_filter( 'wp_get_attachment_image_attributes', function ( $attr ) {
 			return $this->container->get( WP_Responsive_Image_Disabler::class )->filter_image_attributes( $attr );
 		}, 999, 1 );
 		add_action( 'after_setup_theme', function () {
@@ -124,7 +131,7 @@ class Theme_Subscriber extends Abstract_Subscriber {
 		} );
 	}
 
-	private function fonts() {
+	private function web_fonts() {
 		add_action( 'wp_head', function () {
 			$this->container->get( Web_Fonts::class )->load_fonts();
 		}, 0, 0 );
