@@ -4,6 +4,7 @@ declare( strict_types=1 );
 namespace Tribe\Project\Theme;
 
 use Tribe\Libs\Container\Abstract_Subscriber;
+use Tribe\Project\Nav_Menus\Nav_Attribute_Filters;
 use Tribe\Project\Theme\Config\Image_Sizes;
 use Tribe\Project\Theme\Config\Supports;
 use Tribe\Project\Theme\Config\Web_Fonts;
@@ -13,7 +14,6 @@ use Tribe\Project\Theme\Media\Full_Size_Gif;
 use Tribe\Project\Theme\Media\Image_Wrap;
 use Tribe\Project\Theme\Media\Oembed_Filter;
 use Tribe\Project\Theme\Media\WP_Responsive_Image_Disabler;
-use Tribe\Project\Theme\Nav\Nav_Attribute_Filters;
 use Tribe\Project\Theme\Resources\Legacy_Check;
 use Tribe\Project\Theme\Resources\Login_Resources;
 use Tribe\Project\Theme\Resources\Scripts;
@@ -31,8 +31,6 @@ class Theme_Subscriber extends Abstract_Subscriber {
 		$this->scripts();
 		$this->styles();
 		$this->editor();
-
-		$this->nav_attributes();
 	}
 
 	private function config(): void {
@@ -194,20 +192,6 @@ class Theme_Subscriber extends Abstract_Subscriber {
 		add_filter( 'tiny_mce_before_init', function ( $settings ) {
 			return $this->container->get( Classic_Editor_Formats::class )->visual_editor_styles_dropdown( $settings );
 		}, 10, 1 );
-	}
-
-	private function nav_attributes() {
-		add_filter( 'nav_menu_item_id', function ( $menu_id, $item, $args, $depth ) {
-			return $this->container->get( Nav_Attribute_Filters::class )->customize_nav_item_id( $menu_id, $item, $args, $depth );
-		}, 10, 4 );
-
-		add_filter( 'nav_menu_css_class', function ( $classes, $item, $args, $depth ) {
-			return $this->container->get( Nav_Attribute_Filters::class )->customize_nav_item_classes( $classes, $item, $args, $depth );
-		}, 10, 4 );
-
-		add_filter( 'nav_menu_link_attributes', function ( $atts, $item, $args, $depth ) {
-			return $this->container->get( Nav_Attribute_Filters::class )->customize_nav_item_anchor_atts( $atts, $item, $args, $depth );
-		}, 10, 4 );
 	}
 
 }

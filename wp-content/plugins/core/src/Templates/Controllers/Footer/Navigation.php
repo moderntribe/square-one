@@ -3,9 +3,9 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Templates\Controllers\Footer;
 
+use Tribe\Project\Nav_Menus\Menu;
 use Tribe\Project\Templates\Abstract_Controller;
 use Tribe\Project\Templates\Components\Footer\Navigation as Navigation_Context;
-use Tribe\Project\Theme\Nav\Menu;
 
 class Navigation extends Abstract_Controller {
 
