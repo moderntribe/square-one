@@ -7,10 +7,10 @@
  *
  * ----------------------------------------------------------------------------- */
 
-import gravityForms from 'js/gravity-forms';
+import gravityForms from './js/gravity-forms';
 
 const init = () => {
 	gravityForms();
 };
 
-init();
+export default init;

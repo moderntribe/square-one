@@ -7,7 +7,7 @@
  *
  * ----------------------------------------------------------------------------- */
 
-import accordion from 'js/accordion';
+import accordion from './js/accordion';
 
 const init = () => {
 	accordion();

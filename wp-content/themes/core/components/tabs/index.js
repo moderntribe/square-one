@@ -7,7 +7,7 @@
  *
  * ----------------------------------------------------------------------------- */
 
-import tabs from 'js/tabs';
+import tabs from './js/tabs';
 
 const init = () => {
 	tabs();

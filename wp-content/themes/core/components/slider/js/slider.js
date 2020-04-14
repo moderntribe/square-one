@@ -4,15 +4,16 @@
  */
 
 import _ from 'lodash';
+import { Swiper, Navigation, Pagination, A11y, Autoplay } from 'swiper/js/swiper.esm.js';
 
 import * as tools from 'utils/tools';
 import * as tests from 'utils/tests';
 
+Swiper.use( [ Navigation, Pagination, A11y, Autoplay ] );
+
 const instances = {
 	swipers: {},
 };
-
-const { Swiper } = window;
 
 const options = {
 	swiperMain: () => ( {

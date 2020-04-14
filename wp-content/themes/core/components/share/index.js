@@ -7,10 +7,10 @@
  *
  * ----------------------------------------------------------------------------- */
 
-import socialShare from 'js/share';
+import socialShare from './js/share';
 
 const init = () => {
 	socialShare();
 };
 
-init();
+export default init;

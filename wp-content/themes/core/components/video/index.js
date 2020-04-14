@@ -7,10 +7,10 @@
  *
  * ----------------------------------------------------------------------------- */
 
-import videoEmbeds from 'js/video';
+import videoEmbeds from './js/video';
 
 const init = () => {
 	videoEmbeds();
 };
 
-init();
+export default init;

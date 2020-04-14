@@ -7,10 +7,10 @@
  *
  * ----------------------------------------------------------------------------- */
 
-import comments from 'js/comments';
+import comments from './js/comments';
 
 const init = () => {
 	comments();
 };
 
-init();
+export default init;

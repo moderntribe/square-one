@@ -7,10 +7,10 @@
  *
  * ----------------------------------------------------------------------------- */
 
-import slider from 'js/slider';
+import slider from './js/slider';
 
 const init = () => {
 	slider();
 };
 
-init();
+export default init;
