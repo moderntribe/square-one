@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "11fa2c17068a97d0809e81da8117c53a",
+    "content-hash": "68eaf8ed281388755844a50474b0c413",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -20,16 +20,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.134.2",
+            "version": "3.134.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "4fe0b03a2eefb677ce4ca47b7e3c3705f04516c8"
+                "reference": "3ebf1d8b24dc38339d93d943971d7d3e1102327b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/4fe0b03a2eefb677ce4ca47b7e3c3705f04516c8",
-                "reference": "4fe0b03a2eefb677ce4ca47b7e3c3705f04516c8",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/3ebf1d8b24dc38339d93d943971d7d3e1102327b",
+                "reference": "3ebf1d8b24dc38339d93d943971d7d3e1102327b",
                 "shasum": ""
             },
             "require": {
@@ -100,7 +100,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2020-04-02T18:13:41+00:00"
+            "time": "2020-04-08T18:27:07+00:00"
         },
         {
             "name": "clue/stream-filter",
@@ -1075,16 +1075,16 @@
         },
         {
             "name": "moderntribe/tribe-libs",
-            "version": "dev-feature/php-di-container",
+            "version": "dev-epic/fidgety-feet",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moderntribe/tribe-libs.git",
-                "reference": "781ac738bd063e4af3e2b3d9d7a492515f7343de"
+                "reference": "2fe397220edf593e6190cc010b03263a1f881235"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/tribe-libs/zipball/781ac738bd063e4af3e2b3d9d7a492515f7343de",
-                "reference": "781ac738bd063e4af3e2b3d9d7a492515f7343de",
+                "url": "https://api.github.com/repos/moderntribe/tribe-libs/zipball/2fe397220edf593e6190cc010b03263a1f881235",
+                "reference": "2fe397220edf593e6190cc010b03263a1f881235",
                 "shasum": ""
             },
             "require": {
@@ -1114,7 +1114,8 @@
                 "moderntribe/square1-utils": "self.version"
             },
             "require-dev": {
-                "symplify/monorepo-builder": "^7.2"
+                "lucatume/wp-browser": "^2.3.4",
+                "symplify/monorepo-builder": "^6.0 || ^7.0"
             },
             "type": "library",
             "extra": {
@@ -1155,7 +1156,7 @@
                 "GPL-2.0-only"
             ],
             "description": "A library for use on Modern Tribe service projects.",
-            "time": "2020-03-27T12:40:53+00:00"
+            "time": "2020-04-09T20:12:39+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -1389,22 +1390,22 @@
         },
         {
             "name": "php-di/php-di",
-            "version": "6.0.11",
+            "version": "6.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-DI/PHP-DI.git",
-                "reference": "9bdcc2f41f5fb700ddd01bc4fa8d5bd7b3f94620"
+                "reference": "69238bd49acc0eb6a967029311eeadc3f7c5d538"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-DI/PHP-DI/zipball/9bdcc2f41f5fb700ddd01bc4fa8d5bd7b3f94620",
-                "reference": "9bdcc2f41f5fb700ddd01bc4fa8d5bd7b3f94620",
+                "url": "https://api.github.com/repos/PHP-DI/PHP-DI/zipball/69238bd49acc0eb6a967029311eeadc3f7c5d538",
+                "reference": "69238bd49acc0eb6a967029311eeadc3f7c5d538",
                 "shasum": ""
             },
             "require": {
                 "jeremeamia/superclosure": "^2.0",
                 "nikic/php-parser": "^2.0|^3.0|^4.0",
-                "php": ">=7.0.0",
+                "php": ">=7.2.0",
                 "php-di/invoker": "^2.0",
                 "php-di/phpdoc-reader": "^2.0.1",
                 "psr/container": "^1.0"
@@ -1415,10 +1416,10 @@
             "require-dev": {
                 "doctrine/annotations": "~1.2",
                 "friendsofphp/php-cs-fixer": "^2.4",
-                "mnapoli/phpunit-easymock": "~1.0",
+                "mnapoli/phpunit-easymock": "^1.2",
                 "ocramius/proxy-manager": "~2.0.2",
-                "phpstan/phpstan": "^0.9.2",
-                "phpunit/phpunit": "~6.4"
+                "phpstan/phpstan": "^0.12",
+                "phpunit/phpunit": "^8.5"
             },
             "suggest": {
                 "doctrine/annotations": "Install it if you want to use annotations (version ~1.2)",
@@ -1448,7 +1449,7 @@
                 "ioc",
                 "psr11"
             ],
-            "time": "2019-12-12T07:58:02+00:00"
+            "time": "2020-04-06T09:54:49+00:00"
         },
         {
             "name": "php-di/phpdoc-reader",
@@ -2913,6 +2914,24 @@
             "homepage": "https://wordpress.org/plugins/configure-smtp/"
         },
         {
+            "name": "wpackagist-plugin/disable-emojis",
+            "version": "1.7.2",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/disable-emojis/",
+                "reference": "tags/1.7.2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/disable-emojis.1.7.2.zip"
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/disable-emojis/"
+        },
+        {
             "name": "wpackagist-plugin/gravity-forms-wcag-20-form-fields",
             "version": "1.7.2",
             "source": {
@@ -3333,16 +3352,16 @@
         },
         {
             "name": "composer/ca-bundle",
-            "version": "1.2.6",
+            "version": "1.2.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/ca-bundle.git",
-                "reference": "47fe531de31fca4a1b997f87308e7d7804348f7e"
+                "reference": "95c63ab2117a72f48f5a55da9740a3273d45b7fd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/ca-bundle/zipball/47fe531de31fca4a1b997f87308e7d7804348f7e",
-                "reference": "47fe531de31fca4a1b997f87308e7d7804348f7e",
+                "url": "https://api.github.com/repos/composer/ca-bundle/zipball/95c63ab2117a72f48f5a55da9740a3273d45b7fd",
+                "reference": "95c63ab2117a72f48f5a55da9740a3273d45b7fd",
                 "shasum": ""
             },
             "require": {
@@ -3385,20 +3404,20 @@
                 "ssl",
                 "tls"
             ],
-            "time": "2020-01-13T10:02:55+00:00"
+            "time": "2020-04-08T08:27:21+00:00"
         },
         {
             "name": "composer/composer",
-            "version": "1.10.1",
+            "version": "1.10.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/composer.git",
-                "reference": "b912a45da3e2b22f5cb5a23e441b697a295ba011"
+                "reference": "1efa6850b4a1740980346ac3582edf7dfb7899ee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/composer/zipball/b912a45da3e2b22f5cb5a23e441b697a295ba011",
-                "reference": "b912a45da3e2b22f5cb5a23e441b697a295ba011",
+                "url": "https://api.github.com/repos/composer/composer/zipball/1efa6850b4a1740980346ac3582edf7dfb7899ee",
+                "reference": "1efa6850b4a1740980346ac3582edf7dfb7899ee",
                 "shasum": ""
             },
             "require": {
@@ -3465,7 +3484,7 @@
                 "dependency",
                 "package"
             ],
-            "time": "2020-03-13T19:34:27+00:00"
+            "time": "2020-04-09T15:05:50+00:00"
         },
         {
             "name": "composer/semver",
@@ -4782,16 +4801,16 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v7.4.0",
+            "version": "v7.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
-                "reference": "f13c89509345ceee05f3527a83f38c77c0f74579"
+                "reference": "2db7e8a936cc09e396d14902178ea177f4dc42ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/contracts/zipball/f13c89509345ceee05f3527a83f38c77c0f74579",
-                "reference": "f13c89509345ceee05f3527a83f38c77c0f74579",
+                "url": "https://api.github.com/repos/illuminate/contracts/zipball/2db7e8a936cc09e396d14902178ea177f4dc42ac",
+                "reference": "2db7e8a936cc09e396d14902178ea177f4dc42ac",
                 "shasum": ""
             },
             "require": {
@@ -4822,20 +4841,20 @@
             ],
             "description": "The Illuminate Contracts package.",
             "homepage": "https://laravel.com",
-            "time": "2020-03-31T14:24:32+00:00"
+            "time": "2020-04-04T15:13:36+00:00"
         },
         {
             "name": "illuminate/support",
-            "version": "v7.4.0",
+            "version": "v7.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "6b5a135637bf901e5dd9c0e3d906a97d550d4cee"
+                "reference": "b8d805437c075a44bf53737763c3b979932445c7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/6b5a135637bf901e5dd9c0e3d906a97d550d4cee",
-                "reference": "6b5a135637bf901e5dd9c0e3d906a97d550d4cee",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/b8d805437c075a44bf53737763c3b979932445c7",
+                "reference": "b8d805437c075a44bf53737763c3b979932445c7",
                 "shasum": ""
             },
             "require": {
@@ -4884,7 +4903,7 @@
             ],
             "description": "The Illuminate Support package.",
             "homepage": "https://laravel.com",
-            "time": "2020-03-30T13:52:20+00:00"
+            "time": "2020-04-08T13:18:06+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
@@ -5040,16 +5059,16 @@
         },
         {
             "name": "lucatume/wp-browser",
-            "version": "2.3.3",
+            "version": "2.3.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lucatume/wp-browser.git",
-                "reference": "7cf18f20082be15afff3c705cf774a2bd6c4a1d5"
+                "reference": "6a0e83e77128c31160bf4c6d843f421ee7a9c14c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lucatume/wp-browser/zipball/7cf18f20082be15afff3c705cf774a2bd6c4a1d5",
-                "reference": "7cf18f20082be15afff3c705cf774a2bd6c4a1d5",
+                "url": "https://api.github.com/repos/lucatume/wp-browser/zipball/6a0e83e77128c31160bf4c6d843f421ee7a9c14c",
+                "reference": "6a0e83e77128c31160bf4c6d843f421ee7a9c14c",
                 "shasum": ""
             },
             "require": {
@@ -5108,20 +5127,20 @@
                 "codeception",
                 "wordpress"
             ],
-            "time": "2020-04-01T15:26:08+00:00"
+            "time": "2020-04-03T11:07:29+00:00"
         },
         {
             "name": "mck89/peast",
-            "version": "v1.10.2",
+            "version": "v1.10.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mck89/peast.git",
-                "reference": "1c3984ba9fc3cb93848748f141f5ddac0a65c5e1"
+                "reference": "6d1100f39f684c9e004f808b27f6c824b083d8d8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mck89/peast/zipball/1c3984ba9fc3cb93848748f141f5ddac0a65c5e1",
-                "reference": "1c3984ba9fc3cb93848748f141f5ddac0a65c5e1",
+                "url": "https://api.github.com/repos/mck89/peast/zipball/6d1100f39f684c9e004f808b27f6c824b083d8d8",
+                "reference": "6d1100f39f684c9e004f808b27f6c824b083d8d8",
                 "shasum": ""
             },
             "require": {
@@ -5133,7 +5152,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.10.2-dev"
+                    "dev-master": "1.10.3-dev"
                 }
             },
             "autoload": {
@@ -5153,7 +5172,7 @@
                 }
             ],
             "description": "Peast is PHP library that generates AST for JavaScript code",
-            "time": "2020-03-15T16:03:55+00:00"
+            "time": "2020-04-03T09:06:20+00:00"
         },
         {
             "name": "mikemclin/laravel-wp-password",

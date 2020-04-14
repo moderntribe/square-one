@@ -1,15 +1,15 @@
-<section class="{{ classes }}"
+<section {{ classes }}
 				 data-index="{{ index }}"
 				 data-js="panel"
 				 data-type="{{ type|esc_attr }}"
 				 data-modular-content>
 
 	{% if wrapper %}
-	<div class="{{ wrapper_classes }}">
+	<div {{ wrapper_classes }}>
 	{% endif %}
 
 		{% if title or description %}
-			<header class="{{ header_classes }}">
+			<header {{ header_classes }}>
 
 				{{ title }}
 

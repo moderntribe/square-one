@@ -76,7 +76,7 @@ class ContextTest extends \Codeception\Test\Unit {
 		$context->test_classes = [ 'another-value' ];
 
 		$data = $context->get_data();
-		$this->assertEquals( "test-value another-value", $data['test_classes'] );
+		$this->assertEquals( ' class="test-value another-value"', $data['test_classes'] );
 	}
 
 	public function test_override_merge_classes() {
@@ -95,7 +95,7 @@ class ContextTest extends \Codeception\Test\Unit {
 		$context->disable_merge( 'test_classes' );
 
 		$data = $context->get_data();
-		$this->assertEquals( "another-value", $data['test_classes'] );
+		$this->assertEquals( ' class="another-value"', $data['test_classes'] );
 	}
 
 	public function test_not_forced_merge_classes() {
@@ -113,7 +113,7 @@ class ContextTest extends \Codeception\Test\Unit {
 		$context->test_classes = [ 'another-value' ];
 
 		$data = $context->get_data();
-		$this->assertEquals( "another-value", $data['test_classes'] );
+		$this->assertEquals( ' class="another-value"', $data['test_classes'] );
 	}
 
 	public function test_assign_props_on_construct() {

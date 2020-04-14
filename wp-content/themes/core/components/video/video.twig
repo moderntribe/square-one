@@ -1,12 +1,12 @@
 {# Component: Video #}
 
 <div
-		class="{{ container_classes }}"
+		{{ container_classes }}
 		{{ container_attrs }}
 		data-id="{{ id }}"
 >
-	<figure class="{{ container_wrap_classes }}">
-		<div class="{{ embed_classes }}">
+	<figure {{ container_wrap_classes }}>
+		<div {{ embed_classes }}>
 			<a
 					href="{{ video_url|esc_url }}"
 					class="c-video__trigger"

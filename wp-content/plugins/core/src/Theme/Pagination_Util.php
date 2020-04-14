@@ -59,17 +59,17 @@ class Pagination_Util {
 
 		// If we're showing first/last links, add the link to the first page if we're not already on it.
 		if ( $show_first_last && ! $is_first ) {
-			$values[] = $this->get_link_array( get_pagenum_link( 1 ), '<<', [ 'c-pagination__link c-pagination__link--first' ] );
+			$values[] = $this->get_link_array( get_pagenum_link( 1 ), '<<', [ 'c-pagination__link', 'c-pagination__link--first' ] );
 		}
 
 		// If we're showing previous/next links, add the link to the previous page if we're not already on it.
 		if ( $show_next_prev && ! $is_first ) {
-			$values[] = $this->get_link_array( get_pagenum_link( $paged - 1 ), '<', [ 'c-pagination__link c-pagination__link--prev' ], false, false, true );
+			$values[] = $this->get_link_array( get_pagenum_link( $paged - 1 ), '<', [ 'c-pagination__link', 'c-pagination__link--prev' ], false, false, true );
 		}
 
 		// If we're showing ellipses, add them here as long as they're necessary.
 		if ( $show_ellipses && ! $is_first && ! in_array( 1, $links ) ) {
-			$values[] = $this->get_link_array( '#', '...', [ 'c-pagination__link c-pagination__link--ellipses' ] );
+			$values[] = $this->get_link_array( '#', '...', [ 'c-pagination__link', 'c-pagination__link--ellipses' ] );
 		}
 
 		// Sort the $links in case they're out of numeric order, then add any that we've generated so far to the return values.
@@ -81,17 +81,17 @@ class Pagination_Util {
 
 		// If we're showing ellipses, add them here as long as they're necessary.
 		if ( $show_ellipses && ! in_array( $max, $links ) ) {
-			$values[] = $this->get_link_array( '#', '...', [ 'c-pagination__link c-pagination__link--ellipses' ] );
+			$values[] = $this->get_link_array( '#', '...', [ 'c-pagination__link', 'c-pagination__link--ellipses' ] );
 		}
 
 		// If we're showing previous/next links, add the link to the next page if we're not already the last page.
 		if ( $show_next_prev && ! $is_last ) {
-			$values[] = $this->get_link_array( get_pagenum_link( $paged + 1 ), '>', [ 'c-pagination__link c-pagination__link--next' ], false, true );
+			$values[] = $this->get_link_array( get_pagenum_link( $paged + 1 ), '>', [ 'c-pagination__link', 'c-pagination__link--next' ], false, true );
 		}
 
 		// If we're showing first/last links, add the link to the last page if we're not already on it.
 		if ( $show_first_last && ! $is_last ) {
-			$values[] = $this->get_link_array( get_pagenum_link( $max ), '>>', [ 'c-pagination__link c-pagination__link--last' ] );
+			$values[] = $this->get_link_array( get_pagenum_link( $max ), '>>', [ 'c-pagination__link', 'c-pagination__link--last' ] );
 		}
 
 		return $values;
