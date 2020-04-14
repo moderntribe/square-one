@@ -32,7 +32,7 @@ function getAssetHandle( filename = '', prefix = 'tribe-' ) {
 	return `${ prefix }${ filename.substr( 0, filename.lastIndexOf( '.' ) ).replace( /\./g, '-' ) }`;
 }
 
-function getJSDependency( file, target, handlePrefix, handleSuffix ) {
+function getJSDependency( file, target, handlePrefix ) {
 	// admin vendor deps
 	if ( file.indexOf( 'vendor' ) !== -1 && target === 'admin' ) {
 		return [ 'wp-element', 'wp-blocks', 'wp-components', 'wp-i18n', 'wp-editor' ];
@@ -42,7 +42,7 @@ function getJSDependency( file, target, handlePrefix, handleSuffix ) {
 		return [ 'jquery' ];
 	}
 	if ( file.indexOf( 'scripts' ) !== -1 ) {
-		return [ `${ handlePrefix }vendor${ handleSuffix }` ];
+		return [ `${ handlePrefix }vendor` ];
 	}
 }
 
@@ -93,11 +93,19 @@ module.exports = {
 			}
 			const handlePrefix = 'tribe-styles-';
 			const version = await filehash( `${ dir }/${ file }` );
+			const fileNameArray = file.split( '.' );
+			// remove min
+			const minIndex = fileNameArray.indexOf( 'min' );
+			if ( minIndex > -1 ) {
+				fileNameArray.splice( minIndex, 1 );
+			}
+			// filename without chunkhash or min
+			const fileName = fileNameArray.join( '.' );
 			const media = file.indexOf( 'print' ) !== -1 ? 'print' : 'all';
 			const dependencies = [];
 			const enqueueTarget = file.indexOf( '.min.css' ) !== -1 ? data.enqueue.production : data.enqueue.development;
 			const relativePath = target === 'theme' ? paths.core_theme_relative_css_dist : paths.core_admin_relative_css_dist;
-			enqueueTarget[ getAssetHandle( file, handlePrefix ) ] = {
+			enqueueTarget[ getAssetHandle( fileName, handlePrefix ) ] = {
 				version,
 				media,
 				file: `${ relativePath }${ file }`,
@@ -132,10 +140,15 @@ module.exports = {
 			const version = fileNameArray[ 1 ];
 			// remove chunkhash
 			fileNameArray.splice( 1, 1 );
-			// filename without chunkhash
+			// remove min
+			const minIndex = fileNameArray.indexOf( 'min' );
+			if ( minIndex > -1 ) {
+				fileNameArray.splice( minIndex, 1 );
+			}
+			// filename without chunkhash or min
 			const fileName = fileNameArray.join( '.' );
 			const enqueueType = file.indexOf( '.min.js' ) !== -1 ? '-min' : '';
-			const dependencies = getJSDependency( file, target, handlePrefix, enqueueType );
+			const dependencies = getJSDependency( file, target, handlePrefix );
 			const enqueueTarget = enqueueType === '-min' ? data.enqueue.production : data.enqueue.development;
 			const relativePath = target === 'theme' ? paths.core_theme_relative_js_dist : paths.core_admin_relative_js_dist;
 			// only enqueue certain files
