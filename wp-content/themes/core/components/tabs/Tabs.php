@@ -158,7 +158,7 @@ class Tabs extends Context {
 				$btn_classes[] = $this->tab_button_active_class;
 			}
 			$options   = [
-				Button::TEXT    => $tab['tab_text'],
+				Button::CONTENT => $tab['tab_text'],
 				Button::CLASSES => $btn_classes,
 				Button::ATTRS   => $button_attributes,
 			];
