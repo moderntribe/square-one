@@ -4,7 +4,10 @@ declare( strict_types=1 );
 namespace Tribe\Project\Templates\Controllers;
 
 use Tribe\Project\Templates\Abstract_Controller;
-use Tribe\Project\Templates\Components\Comments as Comments_Context;
+use Tribe\Project\Templates\Components\Comments\Comment;
+use Tribe\Project\Templates\Components\Comments\Comments_Section as Comments_Context;
+use Tribe\Project\Templates\Components\Comments\Trackback;
+use Tribe\Project\Templates\Components\Link;
 
 class Comments extends Abstract_Controller {
 	public function render( string $path = '' ): string {
@@ -31,7 +34,7 @@ class Comments extends Abstract_Controller {
 
 	protected function get_comments() {
 		return wp_list_comments( [
-			'callback'   => 'core_comment',
+			'callback'   => [ $this, 'render_comment' ],
 			'style'      => 'ol',
 			'short_ping' => true,
 			'echo'       => false,
@@ -72,5 +75,64 @@ class Comments extends Abstract_Controller {
 		}
 
 		return $data;
+	}
+
+	/**
+	 * Renders a comment and echos it. This is the callback
+	 * for wp_list_comment(), and is expected to be called
+	 * in the context of an output buffer.
+	 *
+	 * @param \WP_Comment $comment
+	 * @param array       $args
+	 * @param int         $depth
+	 *
+	 * @return void
+	 */
+	public function render_comment( $comment, $args, $depth ): void {
+		$classes = get_comment_class( [], $comment, $comment->comment_post_ID );
+
+		if ( in_array( $comment->comment_type, [ 'pingback', 'trackback' ], true ) ) {
+			$label  = $comment->comment_type === 'pingback' ? __( 'Pingback:', 'tribe' ) : __( 'Trackback:', 'tribe' );
+			$author = get_comment_author_link( $comment->comment_ID );
+			$edit   = $this->comment_edit_link( $comment->comment_ID, __( '(Edit)', 'tribe' ) );
+			echo $this->factory->get( Trackback::class, [
+				Trackback::COMMENT_ID  => $comment->comment_ID,
+				Trackback::LABEL       => $label,
+				Trackback::AUTHOR_LINK => $author,
+				Trackback::EDIT_LINK   => $edit,
+				Trackback::CLASSES     => $classes,
+			] )->render();
+
+			return;
+		}
+
+		echo $this->factory->get( Comment::class, [
+			Comment::COMMENT_ID         => $comment->comment_ID,
+			Comment::AUTHOR             => get_comment_author( $comment ),
+			Comment::EDIT_LINK          => $this->comment_edit_link( $comment->comment_ID, __( 'Edit Comment', 'tribe' ) ),
+			Comment::GRAVATAR           => get_avatar( $comment, 150 ),
+			Comment::CLASSES            => $classes,
+			Comment::COMMENT_TEXT       => get_comment_text( $comment ),
+			Comment::MODERATION_MESSAGE => $comment->comment_approved == '0' ? __( 'Your comment is awaiting moderation.', 'tribe' ) : '',
+			Comment::REPLY_LINK         => get_comment_reply_link( array_merge( $args, [
+				'reply_text' => __( 'Reply', 'tribe' ),
+				'depth'      => $depth,
+				'max_depth'  => $args['max_depth'],
+			] ) ),
+			Comment::TIMESTAMP          => get_comment_time( 'U' ),
+		] )->render();
+	}
+
+	private function comment_edit_link( $comment_id, $text ): string {
+		$url = get_edit_comment_link( $comment_id );
+		if ( empty( $url ) ) {
+			return '';
+		}
+
+		return $this->factory->get( Link::class, [
+			Link::CLASSES => [ 'comment-edit-link' ],
+			Link::CONTENT => $text,
+			Link::URL     => $url,
+		] )->render();
 	}
 }
