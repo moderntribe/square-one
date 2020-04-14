@@ -30,7 +30,32 @@ class Head extends Abstract_Controller {
 	}
 
 	protected function get_page_title() {
-		return get_page_title();
+		if ( is_front_page() ) {
+			return '';
+		}
+
+		// Blog
+		if ( is_home() ) {
+			return __( 'Blog', 'tribe' );
+		}
+
+		// Search
+		if ( is_search() ) {
+			return __( 'Search Results', 'tribe' );
+		}
+
+		// 404
+		if ( is_404() ) {
+			return __( 'Page Not Found (404)', 'tribe' );
+		}
+
+		// Singular
+		if ( is_singular() ) {
+			return get_the_title();
+		}
+
+		// Archives
+		return get_the_archive_title();
 	}
 
 }
