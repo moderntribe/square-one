@@ -94,6 +94,8 @@ pipeline {
 
                             sh 'yarn install'
                             sh 'cp local-config-sample.json local-config.json'
+                            sh 'gulp lint'
+                            sh 'gulp test'
                             sh 'gulp server_dist'
 
                             // Clean Up before packaging
