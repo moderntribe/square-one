@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html {{ language_attributes }}>
+
+  {{ head }}
+
+	<body class="{{ body_class }}">
+
+		{{ do_action( 'tribe/body_opening_tag') }}
+
+		{# TODO: Move related a11y-skip-link css partial to this component #}
+		<a href="#a11y-skip-link-content" class="a11y-skip-link a11y-visual-hide">{{ __( 'Skip to main content' )|esc_html }}</a>
+
+		<div class="l-wrapper" data-js="site-wrap">
+
+			{{ masthead }}
+
+			{{ main }}
+
+			{{ sidebar }}
+
+			{{ footer }}
+
+		</div><!-- .l-wrapper -->
+
+		{{ do_action( 'wp_footer' ) }}
+
+	</body>
+
+</html>

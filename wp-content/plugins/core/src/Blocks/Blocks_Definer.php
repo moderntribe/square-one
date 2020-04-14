@@ -22,7 +22,7 @@ class Blocks_Definer implements Definer_Interface {
 			],
 
 			self::CONTROLLER_MAP => [
-				Types\Accordion::NAME => Controllers\Blocks\Accordion::class,
+				Types\Accordion::NAME => Controllers\Block\Accordion::class,
 			],
 
 			Render_Filter::class => DI\create()
