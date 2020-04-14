@@ -104,7 +104,6 @@ pipeline {
                         }
                         dir("${BUILD_FOLDER}/wp-content/plugins/gutenpanels"){
                             // Gutenpanels Node Build
-                            sh 'nvm use'
                             sh 'npm install'
                             sh 'npm run build'
                         }
