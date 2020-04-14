@@ -4,8 +4,8 @@
 namespace Tribe\Project\Templates\Controllers\Panel;
 
 use Tribe\Project\Panels\Types\VideoText as VideoTextPanel;
-use Tribe\Project\Templates\Components\Button;
 use Tribe\Project\Templates\Components\Content_Block;
+use Tribe\Project\Templates\Components\Link;
 use Tribe\Project\Templates\Components\Panels\Videotext as Videotext_Context;
 use Tribe\Project\Templates\Components\Text;
 
@@ -76,17 +76,13 @@ class Videotext extends Panel {
 
 	protected function get_video_text_button( array $panel_vars ): string {
 		$options = [
-			Button::TAG         => '',
-			Button::URL         => $panel_vars[ VideoTextPanel::FIELD_CTA ][ Button::URL ],
-			Button::TYPE        => '',
-			Button::TARGET      => $panel_vars[ VideoTextPanel::FIELD_CTA ][ Button::TARGET ],
-			Button::CLASSES     => [ 'c-btn c-btn--sm' ],
-			Button::ATTRS       => [],
-			Button::LABEL       => $panel_vars[ VideoTextPanel::FIELD_CTA ][ Button::LABEL ],
-			Button::BTN_AS_LINK => true,
+			Link::CLASSES => [ 'c-btn', 'c-btn--sm' ],
+			Link::URL     => $panel_vars[ VideoTextPanel::FIELD_CTA ][ Link::URL ],
+			Link::TARGET  => $panel_vars[ VideoTextPanel::FIELD_CTA ][ Link::TARGET ],
+			Link::CONTENT => $panel_vars[ VideoTextPanel::FIELD_CTA ][ Link::CONTENT ],
 		];
 
-		return $this->factory->get( Button::class, $options )->render();
+		return $this->factory->get( Link::class, $options )->render();
 	}
 
 	protected function get_panel_video( array $panel_vars ): string {

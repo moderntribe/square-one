@@ -1,0 +1,73 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Typography: Tables
+ *
+ * ----------------------------------------------------------------------------- */
+
+/* -----------------------------------------------------------------------------
+ * Table
+ * ----------------------------------------------------------------------------- */
+
+.table,
+.t-content table {
+	font-size: var(--font-size-content-s);
+	margin: var(--spacer) auto;
+	border: 1px solid var(--color-grey);
+	text-align: left;
+	border-collapse: collapse;
+	width: 100%;
+	table-layout: fixed;
+
+	@media (--viewport-medium) {
+		font-size: var(--font-size-content);
+		table-layout: auto;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * TH
+ * ----------------------------------------------------------------------------- */
+
+.th,
+.t-content th {
+	padding: 14px 1em 12px;
+	font-weight: var(--font-weight-semibold);
+	line-height: var(--line-height-even);
+
+	& ~ th {
+		border-left: 1px solid var(--color-grey);
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * TR
+ * ----------------------------------------------------------------------------- */
+
+.tr,
+.t-content tr {
+
+	thead & {
+		border-bottom: 1px solid var(--color-grey);
+	}
+
+	& ~ tr {
+		border-top: 1px solid var(--color-grey);
+	}
+
+	&:nth-of-type(even) {
+		background-color: var(--color-grey-light);
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * TD
+ * ----------------------------------------------------------------------------- */
+
+.td,
+.t-content td {
+	padding: 12px 1em 10px;
+
+	& ~ td {
+		border-left: 1px solid var(--color-grey);
+	}
+}

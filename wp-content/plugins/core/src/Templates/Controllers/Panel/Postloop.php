@@ -4,9 +4,9 @@ namespace Tribe\Project\Templates\Controllers\Panel;
 
 use Exception;
 use Tribe\Project\Panels\Types\PostLoop as PostLoopPanel;
-use Tribe\Project\Templates\Components\Button;
 use Tribe\Project\Templates\Components\Card;
 use Tribe\Project\Templates\Components\Image;
+use Tribe\Project\Templates\Components\Link;
 use Tribe\Project\Templates\Components\Text;
 use Tribe\Project\Templates\Components\Panels\Postloop as Postloop_Context;
 use Tribe\Project\Theme\Config\Image_Sizes;
@@ -95,13 +95,11 @@ class Postloop extends Panel {
 
 	protected function get_post_button( $post_link ): string {
 		$options = [
-			Button::URL         => $post_link['url'],
-			Button::LABEL       => __( 'View Post', 'tribe' ),
-			Button::TARGET      => '_self',
-			Button::BTN_AS_LINK => true,
-			Button::CLASSES     => [ 'c-cta' ],
+			Link::URL     => $post_link['url'],
+			Link::CONTENT => __( 'View Post', 'tribe' ),
+			Link::CLASSES => [ 'c-cta' ],
 		];
 
-		return $this->factory->get( Button::class, $options )->render();
+		return $this->factory->get( Link::class, $options )->render();
 	}
 }

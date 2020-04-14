@@ -1,0 +1,144 @@
+/* -----------------------------------------------------------------------------
+ * Control: Time & Date Globals
+ * ----------------------------------------------------------------------------- */
+
+.gf-date-layout-datefield,
+.gf-time {
+
+	&.field_sublabel_above {
+
+		.clear-multi {
+			@media (--viewport-medium) {
+				margin-top: var(--gf-control-time-date-margin-bottom);
+			}
+		}
+	}
+
+	&.field_sublabel_below {
+
+		.clear-multi {
+			@media (--viewport-medium) {
+				margin-bottom: var(--gf-control-time-date-margin-bottom);
+			}
+		}
+	}
+}
+
+.gf-date,
+.gf-time {
+
+	.clear-multi {
+		@mixin clearfix;
+
+		.ginput_container {
+			display: block;
+
+			label {
+				@mixin form-control-helper;
+			}
+
+			@media (--viewport-medium) {
+				width: 33.33%;
+				float: left;
+			}
+		}
+	}
+}
+
+.gfield_date_dropdown_month,
+.gfield_date_dropdown_day,
+.gfield_date_dropdown_year,
+.gfield_time_ampm {
+	@mixin form-control-select;
+
+	max-width: var(--gf-control-time-date-max-width);
+
+	@media (--viewport-medium) {
+		max-width: none;
+	}
+
+	&:after {
+		top: auto;
+		bottom: 1px;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Control: Date
+ * ----------------------------------------------------------------------------- */
+
+.gf-date {
+	/* Layout: Datepicker */
+	&.gf-date-layout-datepicker {
+		max-width: var(--gf-control-date-max-width);
+
+		.ginput_container {
+			position: relative;
+
+			/* To remove GF datepicker icon
+			padding-right: 0; */
+
+			/* To use GF datepicker icon */
+			padding-right: 42px;
+		}
+	}
+
+	/* Layout: Inputs */
+	&.gf-date-layout-datefield {
+
+	}
+
+	/* Layout: Selects */
+	&.gf-date-layout-datedropdown {
+
+	}
+
+	/* Datepicker Image */
+	.ui-datepicker-trigger {
+		/* To remove GF datepicker icon
+		display: none; */
+
+		/* To use GF datepicker icon */
+		margin: -8px 0 0;
+		position: absolute;
+		top: 50%;
+		right: 13px;
+	}
+}
+
+.gfield_date_dropdown_month,
+.gfield_date_dropdown_day,
+.gfield_date_dropdown_year {
+
+	& ~ * {
+		margin-top: var(--gf-control-date-margin-top);
+
+		@media (--viewport-medium) {
+			margin-top: 0;
+		}
+	}
+}
+
+.gfield_date_dropdown_month,
+.gfield_date_dropdown_day {
+
+	&:after {
+		@media (--viewport-medium) {
+			right: var(--gf-control-date-position-right);
+		}
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Control: Time
+ * ----------------------------------------------------------------------------- */
+
+.gf-time {
+
+	.gfield_time_hour {
+
+		i {
+			display: none;
+		}
+	}
+}

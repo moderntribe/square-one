@@ -1,0 +1,36 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Mixins: Typography
+ *
+ * ----------------------------------------------------------------------------- */
+
+/* -------------------------------------------------------------------------
+ *
+ * Body Content
+ *
+ * ------------------------------------------------------------------------- */
+
+@define-mixin body-content {
+	font-size: var(--font-size-content-s);
+
+	@media (--viewport-medium) {
+		font-size: var(--font-size-content);
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ *
+ * Quotes & Blockquotes
+ *
+ * ----------------------------------------------------------------------------- */
+
+@define-mixin quote-base {
+	border-top: 1px solid var(--color-border);
+	border-bottom: 1px solid var(--color-border);
+	padding: var(--spacer);
+}
+
+@define-mixin quote-text {
+	font-size: 32px;
+	font-style: italic;
+}

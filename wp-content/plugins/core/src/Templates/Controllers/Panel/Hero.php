@@ -4,9 +4,9 @@ namespace Tribe\Project\Templates\Controllers\Panel;
 
 use Exception;
 use Tribe\Project\Panels\Types\Hero as HeroPanel;
-use Tribe\Project\Templates\Components\Button;
 use Tribe\Project\Templates\Components\Content_Block;
 use Tribe\Project\Templates\Components\Image;
+use Tribe\Project\Templates\Components\Link;
 use Tribe\Project\Templates\Components\Panels\Hero as Hero_Context;
 use Tribe\Project\Templates\Components\Text;
 
@@ -133,15 +133,12 @@ class Hero extends Panel {
 
 	protected function get_hero_button( array $panel_vars ): string {
 		$options = [
-			Button::CLASSES     => [ 'c-btn' ],
-			Button::ATTRS       => [],
-			Button::TAG         => '',
-			Button::TARGET      => $panel_vars[ HeroPanel::FIELD_CTA ][ Button::TARGET ],
-			Button::BTN_AS_LINK => true,
-			Button::URL         => $panel_vars[ HeroPanel::FIELD_CTA ][ Button::URL ],
-			Button::LABEL       => $panel_vars[ HeroPanel::FIELD_CTA ][ Button::LABEL ],
+			Link::CLASSES => [ 'c-btn' ],
+			Link::TARGET  => $panel_vars[ HeroPanel::FIELD_CTA ][ Link::TARGET ],
+			Link::URL     => $panel_vars[ HeroPanel::FIELD_CTA ][ Link::URL ],
+			Link::CONTENT => $panel_vars[ HeroPanel::FIELD_CTA ][ Link::CONTENT ],
 		];
 
-		return $this->factory->get( Button::class, $options )->render();
+		return $this->factory->get( Link::class, $options )->render();
 	}
 }

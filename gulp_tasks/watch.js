@@ -6,36 +6,17 @@ const webpackStream = require( 'webpack-stream' );
 const merge = require( 'webpack-merge' );
 const webpackAdminDevConfig = require( '../webpack/admindev' );
 const webpackThemeDevConfig = require( '../webpack/themedev' );
+const watchRules = require( '../webpack/rules/watch' );
+const watchPlugins = require( '../webpack/plugins/watch' );
 
 const watchConfig = {
 	watch: true,
 };
 
-const ifdefOpts = {
-	'INCLUDEREACT': false,
-	'version': 3,
-	'ifdef-verbose': true,
-	'ifdef-triple-slash': false,
-};
-
-const ifDefRuleOverride = [
-	{
-		test: /\.js$/,
-		exclude: [ /(node_modules)/ ],
-		use: [
-			{
-				loader: 'babel-loader',
-			},
-			{
-				loader: 'ifdef-loader',
-				options: ifdefOpts,
-			},
-		],
-	},
-];
-
-webpackAdminDevConfig.module.rules = ifDefRuleOverride;
-webpackThemeDevConfig.module.rules = ifDefRuleOverride;
+webpackAdminDevConfig.module.rules = watchRules;
+webpackThemeDevConfig.module.rules = watchRules;
+webpackAdminDevConfig.plugins = watchPlugins.admin;
+webpackThemeDevConfig.plugins = watchPlugins.theme;
 
 function maybeReloadBrowserSync() {
 	const server = browserSync.get( 'Tribe Dev' );
@@ -50,6 +31,8 @@ module.exports = {
 
 		gulp.watch( [
 			`${ pkg.square1.paths.core_theme_pcss }**/*.pcss`,
+			`${ pkg.square1.paths.core_theme_components }**/*.pcss`,
+			`${ pkg.square1.paths.core_theme_integrations }**/*.pcss`,
 			`!${ pkg.square1.paths.core_theme_pcss }legacy.pcss`,
 			`!${ pkg.square1.paths.core_theme_pcss }content/page/_legacy.pcss`,
 			`!${ pkg.square1.paths.core_admin_pcss }**/*.pcss`,
