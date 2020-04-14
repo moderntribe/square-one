@@ -4,9 +4,9 @@ namespace Tribe\Project\Templates\Controllers\Panel;
 
 use Exception;
 use Tribe\Project\Panels\Types\CardGrid as CardGridPanel;
-use Tribe\Project\Templates\Components\Button;
 use Tribe\Project\Templates\Components\Card;
 use Tribe\Project\Templates\Components\Image;
+use Tribe\Project\Templates\Components\Link;
 use Tribe\Project\Templates\Components\Panels\Cardgrid as Cardgrid_Context;
 use Tribe\Project\Templates\Components\Text;
 use Tribe\Project\Theme\Config\Image_Sizes;
@@ -141,20 +141,19 @@ class Cardgrid extends Panel {
 	}
 
 	protected function get_card_button( $cta, $aria_label ) {
-		if ( empty( $cta[ Button::URL ] ) ) {
+		if ( empty( $cta[ Link::URL ] ) ) {
 			return '';
 		}
 
 		$options = [
-			Button::URL         => esc_url( $cta[ Button::URL ] ),
-			Button::LABEL       => esc_html( $cta[ Button::LABEL ] ),
-			Button::TARGET      => esc_attr( $cta[ Button::TARGET ] ),
-			Button::BTN_AS_LINK => true,
-			Button::CLASSES     => [ 'c-btn c-btn--sm' ],
-			Button::ARIA_LABEL  => $aria_label,
+			Link::CLASSES    => [ 'c-btn', 'c-btn--sm' ],
+			Link::URL        => esc_url( $cta[ Link::URL ] ),
+			Link::CONTENT    => esc_html( $cta[ Link::CONTENT ] ),
+			Link::TARGET     => esc_attr( $cta[ Link::TARGET ] ),
+			Link::ARIA_LABEL => $aria_label,
 		];
 
-		$button_obj = $this->factory->get( Button::class, $options );
+		$button_obj = $this->factory->get( Link::class, $options );
 
 		return $button_obj->render();
 	}

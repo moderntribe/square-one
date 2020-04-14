@@ -3,7 +3,7 @@
 namespace Tribe\Project\Templates\Controllers\Panel;
 
 use Tribe\Project\Panels\Types\MicroNavButtons as Micro;
-use Tribe\Project\Templates\Components\Button;
+use Tribe\Project\Templates\Components\Link;
 use Tribe\Project\Templates\Components\Panels\Micronavbuttons as Micronavbuttons_Context;
 
 class Micronavbuttons extends Panel {
@@ -32,13 +32,13 @@ class Micronavbuttons extends Panel {
 
 		foreach ( $panel_vars[ Micro::FIELD_ITEMS ] as $btn ) {
 			$options = [
-				Button::URL     => esc_url( $btn[ Micro::FIELD_ITEM_CTA ]['url'] ),
-				Button::TARGET  => esc_attr( $btn[ Micro::FIELD_ITEM_CTA ]['target'] ),
-				Button::LABEL   => esc_attr( $btn[ Micro::FIELD_ITEM_CTA ]['label'] ),
-				Button::CLASSES => [ 'c-btn c-btn--full c-btn--lg' ],
+				Link::URL     => esc_url( $btn[ Micro::FIELD_ITEM_CTA ]['url'] ),
+				Link::TARGET  => esc_attr( $btn[ Micro::FIELD_ITEM_CTA ]['target'] ),
+				Link::CONTENT => esc_attr( $btn[ Micro::FIELD_ITEM_CTA ]['label'] ),
+				Link::CLASSES => [ 'c-btn', 'c-btn--full', 'c-btn--lg' ],
 			];
 
-			$btns[] = $this->factory->get( Button::class, $options )->render();
+			$btns[] = $this->factory->get( Link::class, $options )->render();
 		}
 
 		return $btns;

@@ -26,11 +26,11 @@ Attributes:
     }
  #}
 
-<div class="{{ container_classes }}">
-	<div class="{{ main_classes }}" {{ main_attrs }}>
-		<div class="{{ wrapper_classes }}">
+<div {{ container_classes }}>
+	<div {{ main_classes }} {{ main_attrs }}>
+		<div {{ wrapper_classes }}>
 			{% for slide in slides %}
-				<div class="{{ slide_classes }}">
+				<div {{ slide_classes }}>
 					{{ slide }}
 				</div>
 			{% endfor %}

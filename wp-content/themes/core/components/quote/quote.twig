@@ -19,7 +19,7 @@ Attributes:
     }
  #}
 
-<blockquote class="{{ classes }}">
+<blockquote {{ classes }}>
 	<p class="c-quote__text" {{ quote_attrs }}>{{ quote }}</p>
 	{% if cite %}
 		<cite class="c-quote__cite" {{ cite_attrs }}>{{ cite }}</cite>
