@@ -88,7 +88,7 @@ pipeline {
                     }
                     steps {
                         dir(BUILD_FOLDER){
-                            // Install dependencies
+                            // Node Build
                             sh 'apk add --no-cache git openssh'
                             sh 'npm install -g gulp-cli'
 
@@ -101,6 +101,12 @@ pipeline {
 
                             // Jenkins as owner
                             sh 'chown -R 110:117 .'
+                        }
+                        dir("${BUILD_FOLDER}/wp-content/plugins/gutenpanels"){
+                            // Gutenpanels Node Build
+                            sh 'nvm use'
+                            sh 'npm install'
+                            sh 'npm run build'
                         }
                     }
                 }
