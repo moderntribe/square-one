@@ -11,22 +11,19 @@ class Styles {
 	 */
 	public function enqueue_styles() {
 
-		$css_dir = trailingslashit( get_stylesheet_directory_uri() ) . 'assets/css/dist/theme/';
-		$version = tribe_get_version();
+		$theme_uri       = trailingslashit( get_stylesheet_directory_uri() );
+		$script_debug    = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG === true;
+		$css_assets_file = trailingslashit( get_template_directory() ) . 'assets/css/dist/theme/assets.php';
+		$css_assets      = file_exists( $css_assets_file ) ? require( $css_assets_file ) : [];
+		$css_assets      = $script_debug ? $css_assets['enqueue']['development'] : $css_assets['enqueue']['production'];
 
-		if ( ! defined( 'SCRIPT_DEBUG' ) || SCRIPT_DEBUG === false ) { // Production
-			$css_global = 'master.min.css';
-			$css_print  = 'print.min.css';
-		} else { // Dev
-			$css_global = 'master.css';
-			$css_print  = 'print.css';
+		foreach ( $css_assets as $handle => $asset ) {
+			// todo: handle the legacy page
+			if ( strpos( $handle, 'legacy' ) !== false ) {
+				continue;
+			}
+			wp_enqueue_style( $handle, $theme_uri . $asset['file'], $asset['dependencies'], $asset['version'], $asset['media'] );
 		}
-
-		// CSS: base
-		wp_enqueue_style( 'core-theme-base', $css_dir . $css_global, array(), $version, 'all' );
-
-		// CSS: print
-		wp_enqueue_style( 'core-theme-print', $css_dir . $css_print, array(), $version, 'print' );
 
 	}
 }

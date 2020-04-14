@@ -13,4 +13,4 @@ const init = () => {
 	tabs();
 };
 
-init();
+export default init;

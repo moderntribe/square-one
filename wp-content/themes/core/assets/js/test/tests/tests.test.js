@@ -1,4 +1,5 @@
 import 'utils/__mocks__/localStorage';
+import 'utils/__mocks__/wp';
 import * as tests from 'utils/tests';
 
 describe( 'isJson', () => {

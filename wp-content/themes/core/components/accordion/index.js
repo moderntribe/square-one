@@ -13,4 +13,4 @@ const init = () => {
 	accordion();
 };
 
-init();
+export default init;
