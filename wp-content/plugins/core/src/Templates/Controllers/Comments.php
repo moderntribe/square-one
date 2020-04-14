@@ -7,6 +7,7 @@ use Tribe\Project\Templates\Abstract_Controller;
 use Tribe\Project\Templates\Components\Comments\Comment;
 use Tribe\Project\Templates\Components\Comments\Comments_Section as Comments_Context;
 use Tribe\Project\Templates\Components\Comments\Trackback;
+use Tribe\Project\Templates\Components\Link;
 
 class Comments extends Abstract_Controller {
 	public function render( string $path = '' ): string {
@@ -128,7 +129,10 @@ class Comments extends Abstract_Controller {
 			return '';
 		}
 
-		// TODO: replace with Link component
-		return sprintf( '<a class="comment-edit-link" href="%s">%s</a>', esc_url( $url ), $text );
+		return $this->factory->get( Link::class, [
+			Link::CLASSES => [ 'comment-edit-link' ],
+			Link::TEXT    => $text,
+			Link::URL     => $url,
+		] )->render();
 	}
 }
