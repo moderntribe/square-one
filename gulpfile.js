@@ -214,6 +214,20 @@ gulp.task( 'test', gulp.series(
 
 gulp.task( 'server_dist', gulp.series(
 	gulp.parallel( 'clean:themeMinCSS', 'clean:themeMinJS', 'copy:themeJS' ),
+	gulp.parallel(
+		'postcss:theme',
+		'postcss:themeWPAdmin',
+		'postcss:themeWPEditor',
+		'postcss:themeWPLogin',
+		'postcss:themeLegacy'
+	),
+	gulp.parallel(
+		'cssnano:themeMin',
+		'cssnano:themeLegacyMin',
+		'cssnano:themeWPEditorMin',
+		'cssnano:themeWPAdminMin',
+		'cssnano:themeWPLoginMin'
+	),
 	gulp.parallel( 'shell:scriptsThemeDev', 'shell:scriptsAdminDev' ),
 	gulp.parallel( 'shell:scriptsThemeProd', 'shell:scriptsAdminProd' ),
 ) );
