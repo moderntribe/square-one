@@ -11,22 +11,18 @@ class Styles {
 	 */
 	public function enqueue_styles() {
 
-		$site_url       = trailingslashit( get_site_url() );
-		$script_debug   = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG === true;
-		$css_path        = trailingslashit( get_template_directory() ) . 'assets/css/dist/theme/';
-		$css_assets_file = $script_debug ? $css_path . 'assets.dev.php' : $css_path . 'assets.prod.php';
-		$css_assets  = file_exists( $css_assets_file ) ? require( $css_assets_file ) : [];
-
-		unset( $css_assets['chunks'] );
+		$theme_uri       = trailingslashit( get_stylesheet_directory_uri() );
+		$script_debug    = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG === true;
+		$css_assets_file = trailingslashit( get_template_directory() ) . 'assets/css/dist/theme/assets.php';
+		$css_assets      = file_exists( $css_assets_file ) ? require( $css_assets_file ) : [];
+		$css_assets      = $script_debug ? $css_assets['enqueue']['development'] : $css_assets['enqueue']['production'];
 
 		foreach ( $css_assets as $handle => $asset ) {
-			// todo: oh boy how to handle the legacy page better
-			if ( strpos( $asset['file'][0], 'legacy' ) !== false ) {
+			// todo: handle the legacy page
+			if ( strpos( $handle, 'legacy' ) !== false ) {
 				continue;
 			}
-			// todo: oh boy this one is weird to solve, very hard to define at webpack side
-			$media = strpos( $asset['file'][0], 'print' ) !== false ? 'print' : 'all';
-			wp_enqueue_style( $handle, $site_url . $asset['file'][0], $asset['dependencies'], $asset['version'], $media );
+			wp_enqueue_style( $handle, $theme_uri . $asset['file'], $asset['dependencies'], $asset['version'], $asset['media'] );
 		}
 
 	}

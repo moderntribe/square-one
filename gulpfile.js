@@ -161,8 +161,6 @@ gulp.task( 'icons', gulp.series(
 
 const watchTasks = [
 	'watch:frontEndDev',
-	'watch:watchAdminCSS',
-	'watch:watchThemeCSS',
 	'watch:watchAdminJS',
 	'watch:watchThemeJS',
 ];
@@ -227,8 +225,22 @@ gulp.task( 'server_dist', gulp.series(
 gulp.task( 'dist', gulp.series(
 	'shell:yarnInstall',
 	gulp.parallel( 'clean:themeMinCSS', 'clean:themeMinJS', 'copy:themeJS' ),
+	gulp.parallel(
+		'postcss:theme',
+		'postcss:themeWPAdmin',
+		'postcss:themeWPEditor',
+		'postcss:themeWPLogin',
+		'postcss:themeLegacy'
+	),
+	gulp.parallel(
+		'cssnano:themeMin',
+		'cssnano:themeLegacyMin',
+		'cssnano:themeWPEditorMin',
+		'cssnano:themeWPAdminMin',
+		'cssnano:themeWPLoginMin'
+	),
 	gulp.parallel( 'shell:scriptsThemeDev', 'shell:scriptsAdminDev' ),
-	gulp.parallel( 'shell:scriptsThemeProd', 'shell:scriptsAdminProd' ),
+	gulp.parallel( 'shell:scriptsAdminProd', 'shell:scriptsThemeProd' ),
 ) );
 
 gulp.task( 'default', gulp.series( 'dist' ) );

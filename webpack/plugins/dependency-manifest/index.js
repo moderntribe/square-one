@@ -19,6 +19,7 @@ const excludeFromJS = [
 	'login',
 ];
 
+
 class DependencyExtractionWebpackPlugin {
 	constructor( options ) {
 		this.options = Object.assign(

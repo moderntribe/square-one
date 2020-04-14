@@ -5416,7 +5416,7 @@ fast-deep-equal@^3.1.1:
   resolved "https://registry.yarnpkg.com/fast-deep-equal/-/fast-deep-equal-3.1.1.tgz#545145077c501491e33b15ec408c294376e94ae4"
   integrity sha512-8UEa58QDLauDNfpbrX55Q9jrGHThw2ZMdOky5Gl1CDtVeJDPVrG4Jxx1N8jw2gkWaff5UUuX1KJd+9zGe2B+ZA==
 
-fast-glob@^2.0.2, fast-glob@^2.2.6:
+fast-glob@^2.0.2, fast-glob@^2.2.2, fast-glob@^2.2.6:
   version "2.2.7"
   resolved "https://registry.yarnpkg.com/fast-glob/-/fast-glob-2.2.7.tgz#6953857c3afa475fff92ee6015d52da70a4cd39d"
   integrity sha512-g1KuQwHOZAmOZMuBtHdxDtju+T2RT8jgCC9aANsbpdiDDTSnjgfuVsIBNKbUeJI3oKMRExcfNDtJl4OhbffMsw==
@@ -5449,6 +5449,11 @@ fast-levenshtein@^2.0.6, fast-levenshtein@~2.0.6:
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/fast-levenshtein/-/fast-levenshtein-2.0.6.tgz#3d8a5c66883a16a30ca8643e851f19baa7797917"
   integrity sha1-PYpcZog6FqMMqGQ+hR8Zuqd5eRc=
+
+fast-sort@^1.5.3:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/fast-sort/-/fast-sort-1.6.0.tgz#68c6d94ce309ead19d562014159902c80c68d0a0"
+  integrity sha512-sjV6dxWdHs14cef7GzJgCWSOagw57cUBYMey+seWeOsU0HgMf2g4Wkdflv65X/8E4UWptUcq9EZ3YqSXUnUy9Q==
 
 fastq@^1.6.0:
   version "1.7.0"
@@ -10185,6 +10190,16 @@ postcss-image-set-function@^3.0.1:
   dependencies:
     postcss "^7.0.2"
     postcss-values-parser "^2.0.0"
+
+postcss-import-ext-glob@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/postcss-import-ext-glob/-/postcss-import-ext-glob-1.1.0.tgz#5cdd5e755aedefab3f3a54bdf0237129846efeaf"
+  integrity sha512-ioigi9DTOAcJoh/XgTcq1zKm0TYJpzI7p0eTXvrL0G/6OZUXuJlGTGf/JTYOOlS8jNOGUL5X++Qu8BXScUYuNQ==
+  dependencies:
+    fast-glob "^2.2.2"
+    fast-sort "^1.5.3"
+    postcss "^7.0.2"
+    postcss-value-parser "^3.3.0"
 
 postcss-import@12.0.1:
   version "12.0.1"

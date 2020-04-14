@@ -12,7 +12,7 @@ const BundleAnalyzerPlugin = require( 'webpack-bundle-analyzer' ).BundleAnalyzer
 const prodBase = require( './configs/prod-base.js' );
 const pkg = require( '../package.json' );
 const entry = require( './entry/admin' );
-const DependencyManifest = require( './plugins/dependency-manifest' );
+const afterCompile = require( './after-emit' );
 
 module.exports = merge.strategy( {
 	plugins: 'append',
@@ -24,19 +24,13 @@ module.exports = merge.strategy( {
 	},
 	plugins: [
 		new MiniCssExtractPlugin( {
-			filename: '../../../css/dist/admin/[name].[chunkhash].min.css',
+			filename: '../../../css/dist/admin/[name].min.css',
 		} ),
 		new BundleAnalyzerPlugin( {
 			analyzerMode: 'static',
 			reportFilename: resolve( `${ __dirname }/../`, 'reports/webpack-admin-bundle-prod.html' ),
 			openAnalyzer: false,
 		} ),
-		new DependencyManifest( {
-			outputFormat: 'php',
-			combinedOutputFile: 'assets.prod.php',
-			entryPrefix: 'tribe-admin-',
-			jsDir: pkg.square1.paths.core_admin_js_dist,
-			cssDir: pkg.square1.paths.core_admin_css_dist,
-		} ),
+		afterCompile.scripts.admin,
 	],
 } );

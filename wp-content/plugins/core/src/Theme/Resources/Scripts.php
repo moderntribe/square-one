@@ -56,20 +56,18 @@ class Scripts {
 	public function enqueue_scripts() {
 
 		// todo: jonathan, please patch this area, just rough sketch
-		$js_uri         = trailingslashit( get_stylesheet_directory_uri() ) . 'assets/js/';
-		$site_url       = trailingslashit( get_site_url() );
-		$script_debug   = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG === true;
-		// todo: what do we do about versions for non webpack ish, should just always be jquery which is very static
+		$theme_uri    = trailingslashit( get_stylesheet_directory_uri() );
+		$js_uri       = $theme_uri . 'assets/js/';
+		$script_debug = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG === true;
+		// todo: what do we do about versions for non webpack files, should usually just be jquery which is very static
 		$version        = tribe_get_version();
-		$js_path        = trailingslashit( get_template_directory() ) . 'assets/js/dist/theme/';
-		$js_assets_file = $script_debug ? $js_path . 'assets.dev.php' : $js_path . 'assets.prod.php';
+		$js_assets_file = trailingslashit( get_template_directory() ) . 'assets/js/dist/theme/assets.php';
 		$script_assets  = file_exists( $js_assets_file ) ? require( $js_assets_file ) : [];
+		// todo: just temp unsafe for testing
+		$script_assets  = $script_debug ? $script_assets[ 'enqueue' ][ 'development' ] : $script_assets[ 'enqueue' ][ 'production' ];
 		$jquery         = $script_debug ? 'vendor/jquery.js' : 'vendor/jquery.min.js';
 
-		// todo: maybe different array structure
-		unset( $script_assets['chunks'] );
-
-		// Custom jQuery (todo: strange game to get deps to localize to it, please patch as needed)
+		// Custom jQuery (todo: strange game to get localize script attached to it, please patch/change as needed)
 		wp_deregister_script( 'jquery' );
 		wp_deregister_script( 'jquery-core' );
 
@@ -84,8 +82,7 @@ class Scripts {
 		wp_register_script( 'jquery', false, [ 'jquery-core' ], $version, true );
 
 		foreach ( $script_assets as $handle => $asset ) {
-			// todo: don't make file an array in webpack plugin
-			wp_enqueue_script( $handle, $site_url . $asset['file'][0], $asset['dependencies'], $asset['version'], true );
+			wp_enqueue_script( $handle, $theme_uri . $asset['file'], $asset['dependencies'], $asset['version'], true );
 		}
 
 		if ( defined( 'HMR_DEV' ) && HMR_DEV === true ) {

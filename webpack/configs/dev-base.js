@@ -16,10 +16,10 @@ module.exports = merge.strategy( {
 	cache: true,
 	mode: 'development',
 	output: {
-		filename: '[name].[chunkhash:10].js',
-		chunkFilename: '[name].[chunkhash:10].js',
+		filename: '[name].[chunkhash].js',
+		chunkFilename: '[name].[chunkhash].js',
 	},
-	devtool: 'source-map',
+	devtool: 'eval-source-map',
 	plugins: [
 		new webpack.LoaderOptionsPlugin( {
 			debug: true,

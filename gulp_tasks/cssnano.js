@@ -18,40 +18,27 @@ function minify( src = [], dest = pkg.square1.paths.core_admin_css_dist ) {
 
 module.exports = {
 	themeMin() {
-		return Promise.resolve( 'Deprecated' );
-	},
-	themeComponentsMin() {
-		return Promise.resolve( 'Deprecated' );
 		return minify( [
-			`${ pkg.square1.paths.core_theme_css }components.css`,
-		], pkg.square1.paths.core_theme_css_dist );
-	},
-	themeIntegrationsMin() {
-		return Promise.resolve( 'Deprecated' );
-		return minify( [
-			`${ pkg.square1.paths.core_theme_css }integrations.css`,
+			`${ pkg.square1.paths.core_theme_css }master.css`,
+			`${ pkg.square1.paths.core_theme_css }print.css`,
 		], pkg.square1.paths.core_theme_css_dist );
 	},
 	themeLegacyMin() {
-		return Promise.resolve( 'Deprecated' );
 		return minify( [
 			`${ pkg.square1.paths.core_theme_css }legacy.css`,
 		], pkg.square1.paths.core_theme_css_dist );
 	},
 	themeWPEditorMin() {
-		return Promise.resolve( 'Deprecated' );
 		return minify( [
 			`${ pkg.square1.paths.core_admin_css }editor-style.css`,
 		] );
 	},
 	themeWPAdminMin() {
-		return Promise.resolve( 'Deprecated' );
 		return minify( [
 			`${ pkg.square1.paths.core_admin_css }master.css`,
 		] );
 	},
 	themeWPLoginMin() {
-		return Promise.resolve( 'Deprecated' );
 		return minify( [
 			`${ pkg.square1.paths.core_admin_css }login.css`,
 		] );

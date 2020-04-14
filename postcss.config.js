@@ -3,6 +3,7 @@ const pkg = require( './package.json' );
 
 module.exports = ( { file, options, env } = {} ) => ( { // eslint-disable-line no-unused-vars
 	plugins: {
+		'postcss-import-ext-glob': { sort: 'asc' },
 		'postcss-import': {
 			path: [
 				`./${ pkg.square1.paths.core_theme }`,

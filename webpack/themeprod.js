@@ -11,8 +11,8 @@ const BundleAnalyzerPlugin = require( 'webpack-bundle-analyzer' ).BundleAnalyzer
  */
 const prodBase = require( './configs/prod-base.js' );
 const entry = require( './entry/theme' );
-const DependencyManifest = require( './plugins/dependency-manifest' );
 const pkg = require( '../package.json' );
+const afterCompile = require( './after-emit' );
 
 module.exports = merge.strategy( {
 	plugins: 'append',
@@ -26,20 +26,15 @@ module.exports = merge.strategy( {
 		},
 		plugins: [
 			new MiniCssExtractPlugin( {
-				filename: '../../../css/dist/theme/[name].[chunkhash].min.css',
+				filename: '../../../css/dist/theme/[name].min.css',
 			} ),
 			new BundleAnalyzerPlugin( {
 				analyzerMode: 'static',
 				reportFilename: resolve( `${ __dirname }/../`, 'reports/webpack-theme-bundle-prod.html' ),
 				openAnalyzer: false,
 			} ),
-			new DependencyManifest( {
-				outputFormat: 'php',
-				combinedOutputFile: 'assets.prod.php',
-				entryPrefix: 'tribe-',
-				jsDir: pkg.square1.paths.core_theme_js_dist,
-				cssDir: pkg.square1.paths.core_theme_css_dist,
-			} ),
+			afterCompile.styles,
+			afterCompile.scripts.theme,
 		],
 	}
 );
