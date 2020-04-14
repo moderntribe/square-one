@@ -1,15 +1,20 @@
 <?php
 
-namespace Tribe\Project\Theme\Nav;
+namespace Tribe\Project\Nav_Menus\Walker;
+
+use Tribe\Project\Theme\Util;
 
 /**
- * Class Extensible_Walker_Nav_Menu
+ * Class Walker_Nav_Menu_Primary
  *
- * Just like \Walker_Nav_Menu, but with more hooks
+ * Just like \Walker_Nav_Menu, but for primary site navigation
  *
  * @package Tribe\Project\Nav
  */
-class Extensible_Walker_Nav_Menu extends \Walker_Nav_Menu {
+class Walker_Nav_Menu_Primary extends \Walker_Nav_Menu {
+
+	// Capture our parent item for a sub-menu
+	private $current_item;
 
 	/**
 	 * Starts the list before the elements are added.
@@ -24,25 +29,24 @@ class Extensible_Walker_Nav_Menu extends \Walker_Nav_Menu {
 	 */
 	public function start_lvl( &$output, $depth = 0, $args = array() ) {
 
-		$indent = str_repeat( "\t", $depth );
-		$output .= "\n$indent<ul class=\"sub-menu\">\n";
-	}
+		/*
+		 *  WP Core docs claim that $args is an array, but it comes
+		 * in as an object thanks to casting in wp_nav_menu()
+		 */
+		$args = (array)$args;
 
-	/**
-	 * Ends the list of after the elements are added.
-	 *
-	 * @since 3.0.0
-	 *
-	 * @see   Walker::end_lvl()
-	 *
-	 * @param string $output Passed by reference. Used to append additional content.
-	 * @param int    $depth  Depth of menu item. Used for padding.
-	 * @param array  $args   An array of wp_nav_menu() arguments.
-	 */
-	public function end_lvl( &$output, $depth = 0, $args = array() ) {
+		// Setup sub-menu ID
+		$id = $this->current_item->ID ? ' id="menu-item-child-' . esc_attr( $this->current_item->ID ) . '"' : '';
 
-		$indent = str_repeat( "\t", $depth );
-		$output .= "$indent</ul>\n";
+		// Setup sub-menu classes
+		$classes = Util::class_attribute( [
+			$args[ 'theme_location' ] . '__list-child',
+			$args[ 'theme_location' ] . '__list-child--depth-' . $depth,
+		] );
+
+		$indent = str_repeat("\t", $depth);
+		$output .= "\n$indent<ul$id$classes data-js=\"child-menu\">\n";
+
 	}
 
 	/**
@@ -61,10 +65,12 @@ class Extensible_Walker_Nav_Menu extends \Walker_Nav_Menu {
 	 */
 	public function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
 
+		// Setup our parent item
+		$this->current_item = $item;
+
 		$indent = ( $depth ) ? str_repeat( "\t", $depth ) : '';
 
-		$classes   = empty( $item->classes ) ? array() : (array)$item->classes;
-		$classes[] = 'menu-item-' . $item->ID;
+		$classes = empty( $item->classes ) ? array() : (array)$item->classes;
 
 		/**
 		 * Filters the arguments for a single nav menu item.
@@ -113,6 +119,7 @@ class Extensible_Walker_Nav_Menu extends \Walker_Nav_Menu {
 		$atts['target'] = ! empty( $item->target ) ? $item->target : '';
 		$atts['rel']    = ! empty( $item->xfn ) ? $item->xfn : '';
 		$atts['href']   = ! empty( $item->url ) ? $item->url : '';
+		$atts['id']     = 'menu-item-' . $item->ID;
 
 		/**
 		 * Filters the HTML attributes applied to a menu item's anchor element.
@@ -134,6 +141,15 @@ class Extensible_Walker_Nav_Menu extends \Walker_Nav_Menu {
 		 * @param int    $depth  Depth of menu item. Used for padding.
 		 */
 		$atts = apply_filters( 'nav_menu_link_attributes', $atts, $item, $args, $depth );
+
+		$has_children = in_array( 'menu-item-has-children', $item->classes );
+
+		// don't link top-level items with children in the primary nav
+		if ( $has_children && $depth === 0 ) {
+			unset( $atts[ 'href' ] );
+			$atts[ 'data-js' ] = 'trigger-child-menu';
+			$atts[ 'title' ] = __( 'Toggle Sub-Menu', 'tribe' );
+		}
 
 		$attributes = '';
 		foreach ( $atts as $attr => $value ) {
@@ -158,10 +174,15 @@ class Extensible_Walker_Nav_Menu extends \Walker_Nav_Menu {
 		 */
 		$title = apply_filters( 'nav_menu_item_title', $title, $item, $args, $depth );
 
+		$tag_name = 'a';
+		if ( $has_children && 0 === $depth ) {
+			$tag_name = 'button';
+		}
+
 		$item_output = $args->before;
-		$item_output .= '<a' . $attributes . '>';
+		$item_output .= '<' . $tag_name . $attributes . '>';
 		$item_output .= $args->link_before . $title . $args->link_after;
-		$item_output .= '</a>';
+		$item_output .= '</' . $tag_name . '>';
 		$item_output .= $args->after;
 
 		/**
@@ -179,22 +200,5 @@ class Extensible_Walker_Nav_Menu extends \Walker_Nav_Menu {
 		 * @param array  $args        An array of wp_nav_menu() arguments.
 		 */
 		$output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
-	}
-
-	/**
-	 * Ends the element output, if needed.
-	 *
-	 * @since 3.0.0
-	 *
-	 * @see   Walker::end_el()
-	 *
-	 * @param string $output Passed by reference. Used to append additional content.
-	 * @param object $item   Page data object. Not used.
-	 * @param int    $depth  Depth of page. Not Used.
-	 * @param array  $args   An array of wp_nav_menu() arguments.
-	 */
-	public function end_el( &$output, $item, $depth = 0, $args = array() ) {
-
-		$output .= "</li>\n";
 	}
 }
