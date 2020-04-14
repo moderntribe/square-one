@@ -31,7 +31,7 @@ class Render_Filter {
 			return $prefiltered;
 		}
 
-		/** @var Controllers\Blocks\Block_Controller $controller */
+		/** @var Controllers\Block\Block_Controller $controller */
 		$controller = new $this->map[$name]( $this->factory, $attributes, $content, $block_type );
 
 		return $controller->render();

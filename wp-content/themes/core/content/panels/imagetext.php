@@ -1,3 +1,3 @@
 <?php
 
-echo tribe_template( \Tribe\Project\Templates\Controllers\Panels\Imagetext::class );
+echo tribe_template( \Tribe\Project\Templates\Controllers\Panel\Imagetext::class );

@@ -35,8 +35,9 @@ public function get_data(): array {
     return $data;
 }
 
-protected function get_featured_image() {
+protected function get_featured_image(): string {
     $options = [
+        Image::ATTACHMENT => \Tribe\Project\Templates\Models\Image::factory( get_post_thumbnail_id() ),
         'as_bg'         => true,
         'echo'          => false,
         'wrapper_class' => 'item__image',
@@ -50,7 +51,7 @@ protected function get_featured_image() {
         ]
     ];
 
-    return the_tribe_image( get_post_thumbnail_id(), $options );
+    return $this->factory->get( Image::class, $options )->render();
 }
 ```
 
