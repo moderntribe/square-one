@@ -10,6 +10,9 @@ class Yoast_SEO_Subscriber extends Abstract_Subscriber {
 		add_filter( 'wpseo_opengraph_image_size', function ( $size ) {
 			return $this->container->get( Open_Graph::class )->customize_wpseo_image_size( $size );
 		}, 10, 1 );
+
+		// Remove WP SEO json-ld output in favor of the included functions
+		add_filter( 'wpseo_json_ld_output', '__return_false' );
 	}
 
 }
