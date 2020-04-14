@@ -136,7 +136,7 @@ class Hero extends Panel {
 			Link::CLASSES => [ 'c-btn' ],
 			Link::TARGET  => $panel_vars[ HeroPanel::FIELD_CTA ][ Link::TARGET ],
 			Link::URL     => $panel_vars[ HeroPanel::FIELD_CTA ][ Link::URL ],
-			Link::TEXT    => $panel_vars[ HeroPanel::FIELD_CTA ][ Link::TEXT ],
+			Link::CONTENT => $panel_vars[ HeroPanel::FIELD_CTA ][ Link::CONTENT ],
 		];
 
 		return $this->factory->get( Link::class, $options )->render();

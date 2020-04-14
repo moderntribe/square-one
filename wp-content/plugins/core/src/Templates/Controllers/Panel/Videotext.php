@@ -79,7 +79,7 @@ class Videotext extends Panel {
 			Link::CLASSES => [ 'c-btn', 'c-btn--sm' ],
 			Link::URL     => $panel_vars[ VideoTextPanel::FIELD_CTA ][ Link::URL ],
 			Link::TARGET  => $panel_vars[ VideoTextPanel::FIELD_CTA ][ Link::TARGET ],
-			Link::TEXT    => $panel_vars[ VideoTextPanel::FIELD_CTA ][ Link::TEXT ],
+			Link::CONTENT => $panel_vars[ VideoTextPanel::FIELD_CTA ][ Link::CONTENT ],
 		];
 
 		return $this->factory->get( Link::class, $options )->render();

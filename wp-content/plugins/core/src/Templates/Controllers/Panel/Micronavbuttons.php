@@ -34,7 +34,7 @@ class Micronavbuttons extends Panel {
 			$options = [
 				Link::URL     => esc_url( $btn[ Micro::FIELD_ITEM_CTA ]['url'] ),
 				Link::TARGET  => esc_attr( $btn[ Micro::FIELD_ITEM_CTA ]['target'] ),
-				Link::TEXT    => esc_attr( $btn[ Micro::FIELD_ITEM_CTA ]['label'] ),
+				Link::CONTENT => esc_attr( $btn[ Micro::FIELD_ITEM_CTA ]['label'] ),
 				Link::CLASSES => [ 'c-btn', 'c-btn--full', 'c-btn--lg' ],
 			];
 

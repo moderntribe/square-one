@@ -110,7 +110,7 @@ class Interstitial extends Panel {
 			Link::CLASSES => [ 'c-btn' ],
 			Link::URL     => $panel_vars[ Interstice::FIELD_CTA ][ Link::URL ],
 			Link::TARGET  => $panel_vars[ Interstice::FIELD_CTA ][ Link::TARGET ],
-			Link::TEXT    => $panel_vars[ Interstice::FIELD_CTA ][ Link::TEXT ],
+			Link::CONTENT => $panel_vars[ Interstice::FIELD_CTA ][ Link::CONTENT ],
 		];
 
 		return $this->factory->get( Link::class, $options )->render();

@@ -131,7 +131,7 @@ class Comments extends Abstract_Controller {
 
 		return $this->factory->get( Link::class, [
 			Link::CLASSES => [ 'comment-edit-link' ],
-			Link::TEXT    => $text,
+			Link::CONTENT => $text,
 			Link::URL     => $url,
 		] )->render();
 	}
