@@ -1,6 +1,6 @@
 <?php
 
-namespace Tribe\Project\Theme\Nav;
+namespace Tribe\Project\Nav_Menus;
 
 /**
  * Class Nav_Attribute_Filters
@@ -16,10 +16,11 @@ class Nav_Attribute_Filters {
 	 * @param object $item    The current menu item.
 	 * @param array  $args    An array of wp_nav_menu() arguments.
 	 * @param int    $depth   Depth of menu item. Used for padding.
+	 *
 	 * @return string
 	 * @filter nav_menu_item_id
 	 */
-	public function customize_nav_item_id( $menu_id, $item, $args, $depth ) {
+	public function customize_nav_item_id( $menu_id, $item, $args, $depth ): string {
 		return '';
 	}
 
@@ -30,10 +31,11 @@ class Nav_Attribute_Filters {
 	 * @param object $item    The current menu item.
 	 * @param array  $args    An array of {@see wp_nav_menu()} arguments.
 	 * @param int    $depth   Depth of menu item. Used for padding.
+	 *
 	 * @return array
 	 * @filter nav_menu_css_class
 	 */
-	public function customize_nav_item_classes( $classes, $item, $args, $depth ) {
+	public function customize_nav_item_classes( $classes, $item, $args, $depth ): array {
 
 		/*
 		 *  WP Core docs claim that $args is an array, but it comes
@@ -41,24 +43,24 @@ class Nav_Attribute_Filters {
 		 */
 		$args = (array) $args;
 
-		$classes[] = $args[ 'theme_location' ] . '__list-item';
+		$classes[] = $args['theme_location'] . '__list-item';
 
 		// Depth
-		$classes[] .= $args[ 'theme_location' ] . '__list-item--depth-' . $depth;
+		$classes[] .= $args['theme_location'] . '__list-item--depth-' . $depth;
 
 		// Has children items
 		if ( in_array( 'menu-item-has-children', $item->classes ) ) {
-			$classes[] = $args[ 'theme_location' ] . '__list-item--has-children';
+			$classes[] = $args['theme_location'] . '__list-item--has-children';
 		}
 
 		// Is Parent Item
 		if ( in_array( 'current-menu-parent', $item->classes ) ) {
-			$classes[] = $args[ 'theme_location' ] . '__list-item--is-current-parent';
+			$classes[] = $args['theme_location'] . '__list-item--is-current-parent';
 		}
 
 		// Is Current Item
 		if ( in_array( 'current-menu-item', $item->classes ) ) {
-			$classes[] = $args[ 'theme_location' ] . '__list-item--is-current';
+			$classes[] = $args['theme_location'] . '__list-item--is-current';
 		}
 
 		/**
@@ -78,7 +80,7 @@ class Nav_Attribute_Filters {
 			$pattern = '/^menu-item[\w|-]*$|^current[-|_][\w|-]*$|^page[-|_]item[\w|-]*$/iU';
 
 			return ! preg_match( $pattern, $class );
-		});
+		} );
 
 		return $classes;
 
@@ -98,10 +100,11 @@ class Nav_Attribute_Filters {
 	 * @param object $item  The current menu item.
 	 * @param array  $args  An array of {@see wp_nav_menu()} arguments.
 	 * @param int    $depth Depth of menu item. Used for padding.
+	 *
 	 * @return array
 	 * @filter nav_menu_link_attributes
 	 */
-	public function customize_nav_item_anchor_atts( $atts, $item, $args, $depth ) {
+	public function customize_nav_item_anchor_atts( $atts, $item, $args, $depth ): array {
 
 		/*
 		 *  WP Core docs claim that $args is an array, but it comes
@@ -110,13 +113,13 @@ class Nav_Attribute_Filters {
 		$args = (array) $args;
 
 		$classes = [
-			$args[ 'theme_location' ] . '__action',
-			$args[ 'theme_location' ] . '__action--depth-' . $depth,
+			$args['theme_location'] . '__action',
+			$args['theme_location'] . '__action--depth-' . $depth,
 		];
 
 		// Has children items
 		if ( in_array( 'menu-item-has-children', $item->classes ) ) {
-			$classes[] = $args[ 'theme_location' ] . '__action--has-children';
+			$classes[] = $args['theme_location'] . '__action--has-children';
 		}
 
 		$atts['class'] = implode( ' ', array_unique( $classes ) );

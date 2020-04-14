@@ -3,10 +3,10 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Templates\Controllers\Header;
 
+use Tribe\Project\Nav_Menus\Menu;
+use Tribe\Project\Nav_Menus\Walker\Walker_Nav_Menu_Primary;
 use Tribe\Project\Templates\Abstract_Controller;
 use Tribe\Project\Templates\Components\Header\Navigation as Navigation_Context;
-use Tribe\Project\Theme\Nav\Menu;
-use Tribe\Project\Theme\Nav\Walker_Nav_Menu_Primary;
 
 class Navigation extends Abstract_Controller {
 	public function render( string $path = '' ): string {

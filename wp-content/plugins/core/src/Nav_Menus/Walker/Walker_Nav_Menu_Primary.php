@@ -1,6 +1,6 @@
 <?php
 
-namespace Tribe\Project\Theme\Nav;
+namespace Tribe\Project\Nav_Menus\Walker;
 
 use Tribe\Project\Theme\Util;
 
