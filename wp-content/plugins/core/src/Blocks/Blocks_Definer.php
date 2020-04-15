@@ -17,12 +17,14 @@ class Blocks_Definer implements Definer_Interface {
 	public function define(): array {
 		return [
 			self::TYPES => [
+				DI\get( Types\Hero::class ),
 				DI\get( Types\Accordion::class ),
 				DI\get( Types\Accordion_Section::class ),
 			],
 
 			self::CONTROLLER_MAP => [
 				Types\Accordion::NAME => Controllers\Block\Accordion::class,
+				Types\Hero::NAME => Controllers\Block\Hero::class,
 			],
 
 			Render_Filter::class => DI\create()
