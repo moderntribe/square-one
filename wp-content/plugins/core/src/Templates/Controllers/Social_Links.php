@@ -244,7 +244,7 @@ class Social_Links extends Abstract_Controller {
 	}
 
 	private function link_text_component( $label ): string {
-		$classes = $this->labeled ? [] : [ 'a11y-visual-hide' ];
+		$classes = $this->labeled ? [] : [ 'u-visual-hide' ];
 
 		return $this->factory->get( Text::class, [
 			Text::TAG     => 'span',

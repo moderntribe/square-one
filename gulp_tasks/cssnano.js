@@ -23,16 +23,6 @@ module.exports = {
 			`${ pkg.square1.paths.core_theme_css }print.css`,
 		], pkg.square1.paths.core_theme_css_dist );
 	},
-	themeComponentsMin() {
-		return minify( [
-			`${ pkg.square1.paths.core_theme_css }components.css`,
-		], pkg.square1.paths.core_theme_css_dist );
-	},
-	themeIntegrationsMin() {
-		return minify( [
-			`${ pkg.square1.paths.core_theme_css }integrations.css`,
-		], pkg.square1.paths.core_theme_css_dist );
-	},
 	themeLegacyMin() {
 		return minify( [
 			`${ pkg.square1.paths.core_theme_css }legacy.css`,

@@ -1,3 +1,5 @@
+import { BLOCK_THEME_SERVICE_WORKER } from 'config/wp-settings';
+
 /**
  * @module
  * @description Some handy test for common issues.
@@ -28,6 +30,13 @@ const canLocalStore = () => {
 		return result;
 	}
 };
+
+/**
+ * @function supportsWorkers
+ * @description Checks for both service worker support and indexedDb support, plus also checks if we want them loaded with a passed php constant messaged to js through our js config
+ */
+
+const supportsWorkers = () => ( 'serviceWorker' in navigator && 'indexedDB' in window && ! BLOCK_THEME_SERVICE_WORKER );
 
 const android = /(android)/i.test( navigator.userAgent );
 const chrome = !! window.chrome;
@@ -63,4 +72,5 @@ export {
 	isJson,
 	canLocalStore,
 	browserTests,
+	supportsWorkers,
 };

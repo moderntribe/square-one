@@ -9,6 +9,9 @@ const postcssFunctions = require( '../dev_components/theme/pcss/functions' );
 const pkg = require( '../package.json' );
 
 const compilePlugins = [
+	require( 'postcss-import-ext-glob' )( {
+		sort: 'asc',
+	} ),
 	require( 'postcss-import' )( {
 		path: [
 			`./${ pkg.square1.paths.core_theme }`,
@@ -84,24 +87,6 @@ module.exports = {
 				`${ pkg.square1.paths.core_theme_pcss }print.pcss`,
 			],
 			dest: pkg.square1.paths.core_theme_css,
-		} );
-	},
-	themeComponents() {
-		return cssProcess( {
-			src: [
-				`${ pkg.square1.paths.core_theme_components }**/index.pcss`,
-			],
-			dest: `${ pkg.square1.paths.core_theme_css }`,
-			bundleName: 'components.css',
-		} );
-	},
-	themeIntegrations() {
-		return cssProcess( {
-			src: [
-				`${ pkg.square1.paths.core_theme_integrations }**/index.pcss`,
-			],
-			dest: `${ pkg.square1.paths.core_theme_css }`,
-			bundleName: 'integrations.css',
 		} );
 	},
 	themeLegacy() {

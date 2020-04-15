@@ -1,37 +1,29 @@
+/**
+ * External Dependencies
+ */
 const { resolve } = require( 'path' );
-const webpack = require( 'webpack' );
 const merge = require( 'webpack-merge' );
-const common = require( './common.js' );
-const rules = require( './rules.js' );
-const splitChunks = require( './split-chunks.js' );
 const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
 const BundleAnalyzerPlugin = require( 'webpack-bundle-analyzer' ).BundleAnalyzerPlugin;
-const pkg = require( '../package.json' );
 
-module.exports = merge( common, {
-	cache: true,
-	mode: 'development',
-	entry: {
-		scripts: `./${ pkg.square1.paths.core_admin_js_src }index.js`,
-	},
+/**
+ * Internal Dependencies
+ */
+const devBase = require( './configs/dev-base.js' );
+const pkg = require( '../package.json' );
+const entry = require( './entry/admin' );
+
+module.exports = merge.strategy( {
+	plugins: 'append',
+} )( devBase, {
+	entry,
 	output: {
-		filename: '[name].js',
-		chunkFilename: '[name].js',
 		path: resolve( `${ __dirname }/../`, pkg.square1.paths.core_admin_js_dist ),
 		publicPath: `/${ pkg.square1.paths.core_admin_js_dist }`,
 	},
-	devtool: 'eval-source-map',
-	module: {
-		rules: [
-			rules.miniExtractPlugin,
-		],
-	},
 	plugins: [
 		new MiniCssExtractPlugin( {
-			filename: '../../css/admin/[name].css',
-		} ),
-		new webpack.LoaderOptionsPlugin( {
-			debug: true,
+			filename: '../../../css/dist/admin/[name].css',
 		} ),
 		new BundleAnalyzerPlugin( {
 			analyzerMode: 'static',
@@ -39,9 +31,4 @@ module.exports = merge( common, {
 			openAnalyzer: false,
 		} ),
 	],
-	optimization: {
-		splitChunks,
-		noEmitOnErrors: true, // NoEmitOnErrorsPlugin
-		concatenateModules: true, //ModuleConcatenationPlugin
-	},
 } );
