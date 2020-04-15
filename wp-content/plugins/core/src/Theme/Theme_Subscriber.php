@@ -4,7 +4,6 @@ declare( strict_types=1 );
 namespace Tribe\Project\Theme;
 
 use Tribe\Libs\Container\Abstract_Subscriber;
-use Tribe\Project\Nav_Menus\Nav_Attribute_Filters;
 use Tribe\Project\Theme\Config\Image_Sizes;
 use Tribe\Project\Theme\Config\Supports;
 use Tribe\Project\Theme\Config\Web_Fonts;
@@ -16,8 +15,6 @@ use Tribe\Project\Theme\Media\Oembed_Filter;
 use Tribe\Project\Theme\Media\WP_Responsive_Image_Disabler;
 use Tribe\Project\Theme\Resources\Legacy_Check;
 use Tribe\Project\Theme\Resources\Login_Resources;
-use Tribe\Project\Theme\Resources\Scripts;
-use Tribe\Project\Theme\Resources\Styles;
 
 class Theme_Subscriber extends Abstract_Subscriber {
 	public function register(): void {
@@ -28,8 +25,6 @@ class Theme_Subscriber extends Abstract_Subscriber {
 		$this->login_resources();
 		$this->legacy_resources();
 
-		$this->scripts();
-		$this->styles();
 		$this->editor();
 	}
 
@@ -145,27 +140,6 @@ class Theme_Subscriber extends Abstract_Subscriber {
 		/* add_action( 'login_head', function() {
 			$this->container->get( Fonts::class )->load_fonts();
 		}, 0, 0); */
-	}
-
-	private function scripts() {
-		add_action( 'wp_head', function () {
-			$this->container->get( Scripts::class )->maybe_inject_bugsnag();
-		}, 0, 0 );
-		add_action( 'wp_head', function () {
-			$this->container->get( Scripts::class )->set_preloading_tags();
-		}, 10, 0 );
-		add_action( 'wp_footer', function () {
-			$this->container->get( Scripts::class )->add_early_polyfills();
-		}, 10, 0 );
-		add_action( 'wp_enqueue_scripts', function () {
-			$this->container->get( Scripts::class )->enqueue_scripts();
-		}, 10, 0 );
-	}
-
-	private function styles() {
-		add_action( 'wp_enqueue_scripts', function () {
-			$this->container->get( Styles::class )->enqueue_styles();
-		}, 10, 0 );
 	}
 
 	private function editor(): void {

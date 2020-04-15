@@ -5,6 +5,7 @@ namespace Tribe\Project;
 use Psr\Container\ContainerInterface;
 use Tribe\Libs\Assets\Assets_Definer;
 use Tribe\Project\Admin\Admin_Subscriber;
+use Tribe\Project\Assets\Assets_Subscriber;
 use Tribe\Project\Blocks\Blocks_Definer;
 use Tribe\Project\Blocks\Blocks_Subscriber;
 use Tribe\Project\Cache\Cache_Subscriber;
@@ -68,6 +69,7 @@ class Core {
 	 */
 	private $subscribers = [
 		Admin_Subscriber::class,
+		Assets_Subscriber::class,
 		Blocks_Subscriber::class,
 		\Tribe\Libs\Cache\Cache_Subscriber::class,
 		Cache_Subscriber::class,
