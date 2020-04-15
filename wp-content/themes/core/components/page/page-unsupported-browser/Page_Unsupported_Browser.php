@@ -9,7 +9,7 @@ class Page_Unsupported_Browser extends Context {
 	public const COPYRIGHT    = 'copyright';
 	public const HOME_URL     = 'home_url';
 	public const BLOG_NAME    = 'name';
-	public const CSS          = 'css';
+	public const STYLES       = 'styles';
 	public const FAVICON      = 'favicon';
 	public const TITLE        = 'legacy_browser_title';
 	public const CONTENT      = 'legacy_browser_content';
@@ -32,7 +32,7 @@ class Page_Unsupported_Browser extends Context {
 		self::BLOG_NAME    => [
 			self::DEFAULT => '',
 		],
-		self::CSS          => [
+		self::STYLES       => [
 			self::DEFAULT => '',
 		],
 		self::FAVICON      => [
