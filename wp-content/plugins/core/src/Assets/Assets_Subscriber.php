@@ -10,6 +10,7 @@ class Assets_Subscriber extends Abstract_Subscriber {
 		$this->theme_resources();
 		$this->legacy_resources();
 		$this->admin_resources();
+		$this->login_resources();
 	}
 
 
@@ -50,15 +51,25 @@ class Assets_Subscriber extends Abstract_Subscriber {
 	}
 
 	private function admin_resources(): void {
-		add_action( 'current_screen', function( $current_screen ) {
+		add_action( 'current_screen', function () {
 			$this->container->get( Admin\Scripts::class )->register_scripts();
 			$this->container->get( Admin\Styles::class )->register_styles();
-		}, 10, 1 );
+		}, 10, 0 );
 
 
 		add_action( 'admin_enqueue_scripts', function () {
 			$this->container->get( Admin\Scripts::class )->enqueue_scripts();
 			$this->container->get( Admin\Styles::class )->enqueue_styles();
+		}, 10, 0 );
+	}
+
+	private function login_resources(): void {
+		add_action( 'login_init', function () {
+			$this->container->get( Admin\Styles::class )->register_styles();
+		}, 10, 0 );
+
+		add_action( 'login_enqueue_scripts', function () {
+			$this->container->get( Admin\Styles::class )->enqueue_login_styles();
 		}, 10, 0 );
 	}
 }

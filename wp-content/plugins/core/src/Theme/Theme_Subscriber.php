@@ -4,7 +4,6 @@ declare( strict_types=1 );
 namespace Tribe\Project\Theme;
 
 use Tribe\Libs\Container\Abstract_Subscriber;
-use Tribe\Project\Assets\Theme\Legacy_Check;
 use Tribe\Project\Theme\Config\Image_Sizes;
 use Tribe\Project\Theme\Config\Supports;
 use Tribe\Project\Theme\Config\Web_Fonts;
@@ -14,16 +13,12 @@ use Tribe\Project\Theme\Media\Full_Size_Gif;
 use Tribe\Project\Theme\Media\Image_Wrap;
 use Tribe\Project\Theme\Media\Oembed_Filter;
 use Tribe\Project\Theme\Media\WP_Responsive_Image_Disabler;
-use Tribe\Project\Theme\Resources\Login_Resources;
 
 class Theme_Subscriber extends Abstract_Subscriber {
 	public function register(): void {
 		$this->body_classes();
 		$this->media();
 		$this->config();
-
-		$this->login_resources();
-
 		$this->editor();
 	}
 
@@ -100,12 +95,6 @@ class Theme_Subscriber extends Abstract_Subscriber {
 	private function supports() {
 		add_action( 'after_setup_theme', function () {
 			$this->container->get( Supports::class )->add_theme_supports();
-		}, 10, 0 );
-	}
-
-	private function login_resources() {
-		add_action( 'login_enqueue_scripts', function () {
-			$this->container->get( Login_Resources::class )->login_styles();
 		}, 10, 0 );
 	}
 
