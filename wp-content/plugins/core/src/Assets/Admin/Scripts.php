@@ -25,7 +25,7 @@ class Scripts {
 
 	/**
 	 * @return void
-	 * @action current_screen
+	 * @action admin_init
 	 */
 	public function register_scripts(): void {
 		foreach ( $this->build_parser->get_scripts() as $handle => $asset ) {

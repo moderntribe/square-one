@@ -51,7 +51,7 @@ class Assets_Subscriber extends Abstract_Subscriber {
 	}
 
 	private function admin_resources(): void {
-		add_action( 'current_screen', function () {
+		add_action( 'admin_init', function () {
 			$this->container->get( Admin\Scripts::class )->register_scripts();
 			$this->container->get( Admin\Styles::class )->register_styles();
 		}, 10, 0 );

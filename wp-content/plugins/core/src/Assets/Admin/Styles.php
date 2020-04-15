@@ -17,7 +17,7 @@ class Styles {
 	 * Register all styles for later enqueue
 	 *
 	 * @return void
-	 * @action current_screen
+	 * @action admin_init
 	 */
 	public function register_styles(): void {
 		foreach ( $this->build_parser->get_styles() as $handle => $asset ) {
