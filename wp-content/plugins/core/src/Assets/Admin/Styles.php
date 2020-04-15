@@ -1,16 +1,15 @@
 <?php
 
-
-namespace Tribe\Project\Assets\Theme;
+namespace Tribe\Project\Assets\Admin;
 
 
 class Styles {
 	/**
-	 * @var Theme_Build_Parser
+	 * @var Admin_Build_Parser
 	 */
 	private $build_parser;
 
-	public function __construct( Theme_Build_Parser $build_parser ) {
+	public function __construct( Admin_Build_Parser $build_parser ) {
 		$this->build_parser = $build_parser;
 	}
 
@@ -18,7 +17,7 @@ class Styles {
 	 * Register all styles for later enqueue
 	 *
 	 * @return void
-	 * @action template_redirect
+	 * @action current_screen
 	 */
 	public function register_styles(): void {
 		foreach ( $this->build_parser->get_styles() as $handle => $asset ) {
@@ -27,14 +26,11 @@ class Styles {
 	}
 
 	/**
-	 * Enqueue the styles we need for the current page
+	 * Enqueue the styles we need on all admin screens
 	 *
-	 * @action wp_enqueue_scripts
+	 * @action admin_enqueue_scripts
 	 */
 	public function enqueue_styles(): void {
-		// enqueue all non-legacy handles
-		foreach ( $this->build_parser->get_non_legacy_style_handles() as $handle ) {
-			wp_enqueue_style( $handle );
-		}
+		wp_enqueue_style( 'tribe-styles-master' );
 	}
 }

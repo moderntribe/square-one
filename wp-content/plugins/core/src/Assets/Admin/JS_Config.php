@@ -1,7 +1,6 @@
 <?php
 
-
-namespace Tribe\Project\Admin\Resources;
+namespace Tribe\Project\Assets\Admin;
 
 class JS_Config {
 

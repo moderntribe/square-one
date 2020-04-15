@@ -4,7 +4,13 @@ declare( strict_types=1 );
 namespace Tribe\Project\Assets;
 
 abstract class Build_Parser {
+	/**
+	 * @var string Path to the CSS build data file, relative to the theme directory
+	 */
 	protected $css = '';
+	/**
+	 * @var string Path to the JS build data file, relative to the theme directory
+	 */
 	protected $js  = '';
 
 	/**
@@ -26,10 +32,22 @@ abstract class Build_Parser {
 		return defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG === true;
 	}
 
-	private function init(): void {
+	protected function init(): void {
 		if ( ! isset( $this->localize ) ) {
 			$this->parse_build_files();
 		}
+	}
+
+	protected function css_build_file(): string {
+		$theme_directory = trailingslashit( get_template_directory() );
+
+		return $theme_directory . $this->css;
+	}
+
+	protected function js_build_file(): string {
+		$theme_directory = trailingslashit( get_template_directory() );
+
+		return $theme_directory . $this->js;
 	}
 
 
@@ -38,12 +56,11 @@ abstract class Build_Parser {
 		$this->scripts  = [];
 		$this->styles   = [];
 
-		$theme_directory = trailingslashit( get_template_directory() );
-		$theme_uri       = trailingslashit( get_template_directory_uri() );
+		$theme_uri = trailingslashit( get_template_directory_uri() );
 
 		$environment = $this->debug ? 'development' : 'production';
-		$css         = file_exists( $theme_directory . $this->css ) ? include( $theme_directory . $this->css ) : [];
-		$js          = file_exists( $theme_directory . $this->js ) ? include( $theme_directory . $this->js ) : [];
+		$css         = file_exists( $this->css_build_file() ) ? include( $this->css_build_file() ) : [];
+		$js          = file_exists( $this->js_build_file() ) ? include( $this->js_build_file() ) : [];
 
 		if ( isset( $css['localize'] ) ) {
 			$this->localize['css'] = $css['localize'];
@@ -97,21 +114,5 @@ abstract class Build_Parser {
 		$this->init();
 
 		return array_keys( $this->scripts );
-	}
-
-	public function get_legacy_style_handles(): array {
-		$this->init();
-
-		return array_filter( $this->get_style_handles(), function ( $handle ) {
-			return strpos( $handle, 'legacy' ) !== false;
-		} );
-	}
-
-	public function get_non_legacy_style_handles(): array {
-		$this->init();
-
-		return array_filter( $this->get_style_handles(), function ( $handle ) {
-			return strpos( $handle, 'legacy' ) === false;
-		} );
 	}
 }
