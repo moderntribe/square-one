@@ -2,7 +2,7 @@
 
 namespace Tribe\Project\Nav_Menus\Walker;
 
-use Tribe\Project\Theme\Util;
+use Tribe\Libs\Utils\Markup_Utils;
 
 /**
  * Class Walker_Nav_Menu_Primary
@@ -39,7 +39,7 @@ class Walker_Nav_Menu_Primary extends \Walker_Nav_Menu {
 		$id = $this->current_item->ID ? ' id="menu-item-child-' . esc_attr( $this->current_item->ID ) . '"' : '';
 
 		// Setup sub-menu classes
-		$classes = Util::class_attribute( [
+		$classes = Markup_Utils::class_attribute( [
 			$args[ 'theme_location' ] . '__list-child',
 			$args[ 'theme_location' ] . '__list-child--depth-' . $depth,
 		] );

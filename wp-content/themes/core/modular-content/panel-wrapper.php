@@ -1,6 +1,6 @@
 <?php
 
-use Tribe\Project\Theme\Util;
+use Tribe\Libs\Utils\Markup_Utils;
 
 /**
  * A wrapper around each modular panel.
@@ -21,7 +21,7 @@ if( $panel->get_depth() >= 1 ) {
 
 	?>
 
-	<article <?php echo Util::class_attribute( $classes, true ); ?>>
+	<article <?php echo Markup_Utils::class_attribute( $classes, true ); ?>>
 
 		<?php echo $html; ?>
 

@@ -29,6 +29,7 @@ use Tribe\Project\Post_Types;
 use Tribe\Project\Settings\Settings_Subscriber;
 use Tribe\Project\Shortcodes\Shortcodes_Subscriber;
 use Tribe\Project\Taxonomies;
+use Tribe\Project\Templates\Templates_Definer;
 use Tribe\Project\Templates\Templates_Subscriber;
 use Tribe\Project\Theme\Theme_Definer;
 use Tribe\Project\Theme\Theme_Subscriber;
@@ -58,6 +59,7 @@ class Core {
 		Object_Meta_Definer::class,
 		P2P_Definer::class,
 		Panels_Definer::class,
+		Templates_Definer::class,
 		Theme_Definer::class,
 		Twig_Definer::class,
 		Yoast_SEO_Definer::class,

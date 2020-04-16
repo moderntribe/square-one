@@ -6,7 +6,7 @@
 
 import _ from 'lodash';
 import { on, ready } from 'utils/events';
-import * as tests from 'utils/tests';
+// import * as tests from 'utils/tests';
 import applyBrowserClasses from 'utils/dom/apply-browser-classes';
 // @EXAMPLE_REACT_APP
 

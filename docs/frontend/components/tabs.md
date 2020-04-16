@@ -123,7 +123,7 @@ namespace Tribe\Project\Templates\Content\Panels;
 
 use Tribe\Project\Panels\Types\Tabs as TabsPanel;
 use Tribe\Project\Templates\Components\Tabs as TabsComponent;
-use Tribe\Project\Theme\Util;
+use Tribe\Libs\Utils\Markup_Utils;
 
 class Tabs extends Panel {
 
@@ -165,7 +165,7 @@ class Tabs extends Panel {
 			return [];
 		}
 		return array_map( function ( $row, $index ) {
-			$content_attrs = ( !is_preview() ) ? '' : Util::array_to_attributes([
+			$content_attrs = ( !is_preview() ) ? '' : Markup_Utils::concat_attrs([
 				'data-depth'    => $this->panel->get_depth(),
 				'data-index'    => $index,
 				'data-name'     => 'row_content',
