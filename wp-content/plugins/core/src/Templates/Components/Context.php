@@ -2,9 +2,9 @@
 
 namespace Tribe\Project\Templates\Components;
 
+use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Component_Factory;
 use Tribe\Project\Templates\Template_Interface;
-use Tribe\Project\Theme\Util;
 use Twig\Environment;
 
 abstract class Context implements Template_Interface {
@@ -60,10 +60,8 @@ abstract class Context implements Template_Interface {
 	 *
 	 * @return string
 	 */
-	protected function merge_classes( array ...$classes ) {
-		$classes = empty( $classes ) ? [] : array_merge( ... $classes );
-
-		return implode( ' ', array_map( 'sanitize_html_class', $classes ) );
+	protected function merge_classes( array ...$classes ): string {
+		return Markup_Utils::class_attribute( array_merge( ... $classes ), true );
 	}
 
 	/**
@@ -73,10 +71,10 @@ abstract class Context implements Template_Interface {
 	 *
 	 * @return string
 	 */
-	protected function merge_attrs( array ...$attributes ) {
+	protected function merge_attrs( array ...$attributes ): string {
 		$attributes = empty( $attributes ) ? [] : array_merge( ... $attributes );
 
-		return Util::array_to_attributes( $attributes );
+		return Markup_Utils::concat_attrs( $attributes );
 	}
 
 	public function render( string $path = '' ): string {

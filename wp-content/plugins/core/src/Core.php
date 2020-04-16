@@ -5,6 +5,7 @@ namespace Tribe\Project;
 use Psr\Container\ContainerInterface;
 use Tribe\Libs\Assets\Assets_Definer;
 use Tribe\Project\Admin\Admin_Subscriber;
+use Tribe\Project\Assets\Assets_Subscriber;
 use Tribe\Project\Blocks\Blocks_Definer;
 use Tribe\Project\Blocks\Blocks_Subscriber;
 use Tribe\Project\Cache\Cache_Subscriber;
@@ -13,6 +14,10 @@ use Tribe\Project\Content\Content_Definer;
 use Tribe\Project\Content\Content_Subscriber;
 use Tribe\Project\Development\Whoops_Definer;
 use Tribe\Project\Development\Whoops_Subscriber;
+use Tribe\Project\Integrations\Google_Tag_Manager\Google_Tag_Manager_Subscriber;
+use Tribe\Project\Integrations\Gravity_Forms\Gravity_Forms_Subscriber;
+use Tribe\Project\Integrations\Yoast_SEO\Yoast_SEO_Definer;
+use Tribe\Project\Integrations\Yoast_SEO\Yoast_SEO_Subscriber;
 use Tribe\Project\Nav_Menus\Nav_Menus_Definer;
 use Tribe\Project\Nav_Menus\Nav_Menus_Subscriber;
 use Tribe\Project\Object_Meta\Object_Meta_Definer;
@@ -25,6 +30,7 @@ use Tribe\Project\Post_Types;
 use Tribe\Project\Settings\Settings_Subscriber;
 use Tribe\Project\Shortcodes\Shortcodes_Subscriber;
 use Tribe\Project\Taxonomies;
+use Tribe\Project\Templates\Templates_Definer;
 use Tribe\Project\Templates\Templates_Subscriber;
 use Tribe\Project\Theme\Theme_Definer;
 use Tribe\Project\Theme\Theme_Subscriber;
@@ -54,8 +60,10 @@ class Core {
 		Object_Meta_Definer::class,
 		P2P_Definer::class,
 		Panels_Definer::class,
+		Templates_Definer::class,
 		Theme_Definer::class,
 		Twig_Definer::class,
+		Yoast_SEO_Definer::class,
 	];
 
 	/**
@@ -63,11 +71,14 @@ class Core {
 	 */
 	private $subscribers = [
 		Admin_Subscriber::class,
+		Assets_Subscriber::class,
 		Blocks_Subscriber::class,
 		\Tribe\Libs\Cache\Cache_Subscriber::class,
 		Cache_Subscriber::class,
 		CLI_Subscriber::class,
 		Content_Subscriber::class,
+		Google_Tag_Manager_Subscriber::class,
+		Gravity_Forms_Subscriber::class,
 		Nav_Menus_Subscriber::class,
 		Object_Meta_Subscriber::class,
 		Panels_Subscriber::class,
@@ -76,6 +87,7 @@ class Core {
 		Shortcodes_Subscriber::class,
 		Theme_Subscriber::class,
 		Templates_Subscriber::class,
+		Yoast_SEO_Subscriber::class,
 
 		// our post types
 		Post_Types\Sample\Subscriber::class,
@@ -118,7 +130,7 @@ class Core {
 		$this->container = $builder->build();
 
 		foreach ( $this->subscribers as $subscriber_class ) {
-			$this->container->get( $subscriber_class )->register( $this->container );
+			( new $subscriber_class( $this->container ) )->register();
 		}
 	}
 

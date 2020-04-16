@@ -22,6 +22,7 @@ class Force_Plugin_Activation {
 		'panel-builder/tribe-panel-builder.php',
 		'tribe-admin-dashboard/tribe-admin-dashboard.php',
 		'tribe-branding/tribe-branding.php',
+		'disable-emojis/disable-emojis.php',
 		'safe-svg/safe-svg.php',
 	);
 

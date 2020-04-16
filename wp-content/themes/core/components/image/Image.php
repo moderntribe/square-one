@@ -2,8 +2,8 @@
 
 namespace Tribe\Project\Templates\Components;
 
+use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Models\Image as Image_Model;
-use Tribe\Project\Theme\Util;
 
 /**
  * Class Image
@@ -217,10 +217,10 @@ class Image extends Context {
 
 		if ( $this->as_bg ) {
 			// <div classes attrs></div>
-			$image = sprintf( '<div %s %s></div>', Util::class_attribute( $classes ), $this->get_attributes() );
+			$image = sprintf( '<div %s %s></div>', Markup_Utils::class_attribute( $classes ), $this->get_attributes() );
 		} else {
 			// <img classes attrs />
-			$image = sprintf( '<img %s %s />', Util::class_attribute( $classes ), $this->get_attributes() );
+			$image = sprintf( '<img %s %s />', Markup_Utils::class_attribute( $classes ), $this->get_attributes() );
 		}
 
 		return $image;
@@ -242,8 +242,8 @@ class Image extends Context {
 
 		return [
 			'tag'     => esc_attr( $tag ),
-			'attrs'   => Util::array_to_attributes( $this->wrapper_attrs ),
-			'classes' => Util::class_attribute( $this->wrapper_classes ),
+			'attrs'   => Markup_Utils::concat_attrs( $this->wrapper_attrs ),
+			'classes' => Markup_Utils::class_attribute( $this->wrapper_classes ),
 		];
 	}
 
@@ -269,8 +269,8 @@ class Image extends Context {
 
 		return [
 			'url'     => esc_url( $this->link_url ),
-			'classes' => Util::class_attribute( $this->link_classes ),
-			'attrs'   => Util::array_to_attributes( $attrs ),
+			'classes' => Markup_Utils::class_attribute( $this->link_classes ),
+			'attrs'   => Markup_Utils::concat_attrs( $attrs ),
 		];
 	}
 
@@ -371,7 +371,7 @@ class Image extends Context {
 			}
 		}
 
-		return Util::array_to_attributes( $attrs );
+		return Markup_Utils::concat_attrs( $attrs );
 	}
 
 

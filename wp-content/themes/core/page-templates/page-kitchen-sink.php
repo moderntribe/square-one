@@ -3,6 +3,6 @@
  * Template Name: Kitchen Sink
  */
 
-use Tribe\Project\Templates\Controllers\Pages\Page;
+use Tribe\Project\Templates\Controllers\Page\Page;
 
 echo tribe_template( Page::class, 'components/pages/page-kitchen-sink/page-kitchen-sink.twig' );

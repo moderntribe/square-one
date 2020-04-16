@@ -10,6 +10,7 @@ interface Controller_Interface {
 	 * @param string $path A template path to pass to the component's context
 	 *
 	 * @return string The rendered template
+	 * @throws \Exception
 	 */
 	public function render( string $path = '' ): string;
 }
