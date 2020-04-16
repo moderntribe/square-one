@@ -4,6 +4,10 @@
  *
  * ----------------------------------------------------------------------------- */
 
+:root {
+	--color-video-trigger-overlay: linear-gradient(360deg, #222 0%, rgba(34, 34, 34, 0.1) 54.52%, rgba(34, 34, 34, 0) 100%);
+}
+
 .c-video {
 	break-inside: avoid-column;
 
@@ -67,7 +71,8 @@
 		right: 0;
 		top: 0;
 		bottom: 0;
-		background-color: var(--color-black-a-40);
+		background: var(--color-video-trigger-overlay);
+		opacity: 0.85;
 		z-index: 1;
 	}
 }
