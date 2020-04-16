@@ -1,0 +1,58 @@
+/* -------------------------------------------------------------------------
+ *
+ * Content: "Kitchen Sink"
+ *
+ * Notes:
+ * + "t-content" is what used to be "context-content"
+ *
+ * ------------------------------------------------------------------------- */
+
+.t-content {
+
+	& > {
+		/* CASE: remove top margin from first element */
+		*:first-child {
+			margin-top: 0;
+		}
+
+		/* CASE: remove bottom margin from bottom element */
+		*:last-child {
+			margin-bottom: 0;
+		}
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ *
+ * Section: Base
+ *
+ * Example Markup:
+ *
+ * <div class="s-wrapper">
+ *		<div class="l-container">
+ *			<header class="s-header">
+ *				<h2 class="site-section__title">Site Section</h2>
+ *				<p class="s-desc">Site Section Description</p>
+ *			</header>
+ *			<div class="s-content">
+ *				<p>Grid layout or single component goes here.</p>
+ *			</div>
+ *			<footer class="s-footer">
+ *				<a href="#" class="btn">CTA Button</a>
+ *			</footer>
+ *		</div>
+ * </div>
+ *
+ * ----------------------------------------------------------------------------- */
+
+.s-wrapper {
+	position: relative;
+	width: 100%;
+	padding-top: var(--spacer-lg);
+	padding-bottom: var(--spacer-lg);
+}
+
+.s-wrapper--no-padding {
+	padding-top: 0;
+	padding-bottom: 0;
+}

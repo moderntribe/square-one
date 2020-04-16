@@ -1,44 +1,29 @@
+/**
+ * External Dependencies
+ */
 const { resolve } = require( 'path' );
-const webpack = require( 'webpack' );
 const merge = require( 'webpack-merge' );
-const common = require( './common.js' );
-const rules = require( './rules.js' );
-const splitChunks = require( './split-chunks.js' );
 const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
 const BundleAnalyzerPlugin = require( 'webpack-bundle-analyzer' ).BundleAnalyzerPlugin;
-const glob = require( 'glob' );
+
+/**
+ * Internal Dependencies
+ */
+const devBase = require( './configs/dev-base.js' );
+const entry = require( './entry/theme' );
 const pkg = require( '../package.json' );
 
-module.exports = merge( common, {
-	cache: true,
-	mode: 'development',
-	entry: {
-		scripts: [
-			`./${ pkg.square1.paths.core_theme_js_src }index.js`,
-			...glob.sync( `./${ pkg.square1.paths.core_theme_components }**/index.js` ),
-		],
-		integrations: [
-			...glob.sync( `./${ pkg.square1.paths.core_theme_integrations }**/index.js` ),
-		],
-	},
+module.exports = merge.strategy( {
+	plugins: 'append',
+} )( devBase, {
+	entry,
 	output: {
-		filename: '[name].js',
-		chunkFilename: '[name].js',
 		path: resolve( `${ __dirname }/../`, pkg.square1.paths.core_theme_js_dist ),
 		publicPath: `/${ pkg.square1.paths.core_theme_js_dist }`,
 	},
-	devtool: 'eval-source-map',
-	module: {
-		rules: [
-			rules.miniExtractPlugin,
-		],
-	},
 	plugins: [
 		new MiniCssExtractPlugin( {
-			filename: '../../css/[name].css',
-		} ),
-		new webpack.LoaderOptionsPlugin( {
-			debug: true,
+			filename: '../../../css/dist/theme/[name].css',
 		} ),
 		new BundleAnalyzerPlugin( {
 			analyzerMode: 'static',
@@ -46,9 +31,4 @@ module.exports = merge( common, {
 			openAnalyzer: false,
 		} ),
 	],
-	optimization: {
-		splitChunks,
-		noEmitOnErrors: true, // NoEmitOnErrorsPlugin
-		concatenateModules: true, //ModuleConcatenationPlugin
-	},
 } );

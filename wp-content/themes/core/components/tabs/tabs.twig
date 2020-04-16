@@ -35,8 +35,8 @@ Attributes:
 	}
  #}
 
-<div class="{{ container_classes|esc_attr }}" id="{{ tab_id|esc_attr }}" {{ container_attrs }}>
-	<div class="{{ tab_list_classes|esc_attr }}" {{ tab_list_attrs }}>
+<div {{ container_classes|esc_attr }}" id="{{ tab_id|esc_attr }} {{ container_attrs }}>
+	<div {{ tab_list_classes|esc_attr }} {{ tab_list_attrs }}>
 		{% for button in tablist_buttons %}
 			{{ button }}
 		{% endfor %}
@@ -49,7 +49,7 @@ Attributes:
 			 aria-labelledby="{{ tab.tab_id|esc_attr }}"
 			 {{ tab_content_attrs }}
 		>
-			<div class="{{ tab_content_inner_classes }}"
+			<div {{ tab_content_inner_classes }}
 					{{ tab_content_inner_attrs }}
 					{{ tab.content_attrs }}>
 				{{ tab.content }}

@@ -1,3 +1,5 @@
+import 'utils/__mocks__/wp';
+
 import * as bodyLock from 'utils/dom/body-lock';
 
 describe('bodyLock', () => {

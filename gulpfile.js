@@ -110,13 +110,11 @@ const gulpTasks = [
 	'stylelint:theme', // lints and fixes the theme pcss
 	'stylelint:apps', // lints and fixes the apps pcss modules
 
-	/* Uglify tasks */
-
-	'uglify:themeMin', // minify vendors into a single min bundle (just after this they are concat with the webpack vendor bundle)
-
 	/* Watch Tasks (THESE MUST BE LAST) */
 
 	'watch:frontEndDev', // watch all fe assets for admin and theme and run appropriate routines
+	'watch:watchAdminCSS', // watch all fe assets for admin and theme and run appropriate routines
+	'watch:watchThemeCSS', // watch all fe assets for admin and theme and run appropriate routines
 	'watch:watchAdminJS', // watch all fe assets for admin and theme and run appropriate routines
 	'watch:watchThemeJS', // watch all fe assets for admin and theme and run appropriate routines
 ];
@@ -203,18 +201,35 @@ gulp.task( 'lint', gulp.series(
 ) );
 
 /**
+ * Tests js.
+ */
+
+gulp.task( 'test', gulp.series(
+	gulp.parallel( 'shell:test' ),
+) );
+
+/**
  * Builds the entire package for production on a server.
  */
 
 gulp.task( 'server_dist', gulp.series(
 	gulp.parallel( 'clean:themeMinCSS', 'clean:themeMinJS', 'copy:themeJS' ),
-	gulp.parallel( 'postcss:theme', 'postcss:themeComponents', 'postcss:themeWPAdmin', 'postcss:themeWPEditor', 'postcss:themeWPLogin', 'postcss:themeLegacy' ),
-	gulp.parallel( 'cssnano:themeMin', 'cssnano:themeComponentsMin', 'cssnano:themeLegacyMin', 'cssnano:themeWPEditorMin', 'cssnano:themeWPAdminMin', 'cssnano:themeWPLoginMin' ),
-	gulp.parallel( 'header:theme', 'header:themePrint', 'header:themeLegacy', 'header:themeWPEditor', 'header:themeWPLogin' ),
+	gulp.parallel(
+		'postcss:theme',
+		'postcss:themeWPAdmin',
+		'postcss:themeWPEditor',
+		'postcss:themeWPLogin',
+		'postcss:themeLegacy'
+	),
+	gulp.parallel(
+		'cssnano:themeMin',
+		'cssnano:themeLegacyMin',
+		'cssnano:themeWPEditorMin',
+		'cssnano:themeWPAdminMin',
+		'cssnano:themeWPLoginMin'
+	),
 	gulp.parallel( 'shell:scriptsThemeDev', 'shell:scriptsAdminDev' ),
 	gulp.parallel( 'shell:scriptsThemeProd', 'shell:scriptsAdminProd' ),
-	'uglify:themeMin',
-	gulp.parallel( 'constants:buildTimestamp' ),
 ) );
 
 /**
@@ -223,13 +238,9 @@ gulp.task( 'server_dist', gulp.series(
 
 gulp.task( 'dist', gulp.series(
 	'shell:yarnInstall',
-	'shell:test',
-	gulp.parallel( 'eslint:theme', 'eslint:apps', 'eslint:utils', 'eslint:admin', 'stylelint:theme', 'stylelint:apps' ),
 	gulp.parallel( 'clean:themeMinCSS', 'clean:themeMinJS', 'copy:themeJS' ),
 	gulp.parallel(
 		'postcss:theme',
-		'postcss:themeComponents',
-		'postcss:themeIntegrations',
 		'postcss:themeWPAdmin',
 		'postcss:themeWPEditor',
 		'postcss:themeWPLogin',
@@ -237,18 +248,13 @@ gulp.task( 'dist', gulp.series(
 	),
 	gulp.parallel(
 		'cssnano:themeMin',
-		'cssnano:themeComponentsMin',
-		'cssnano:themeIntegrationsMin',
 		'cssnano:themeLegacyMin',
 		'cssnano:themeWPEditorMin',
 		'cssnano:themeWPAdminMin',
 		'cssnano:themeWPLoginMin'
 	),
-	gulp.parallel( 'header:theme', 'header:themePrint', 'header:themeLegacy', 'header:themeWPEditor', 'header:themeWPLogin' ),
 	gulp.parallel( 'shell:scriptsThemeDev', 'shell:scriptsAdminDev' ),
-	gulp.parallel( 'shell:scriptsThemeProd', 'shell:scriptsAdminProd' ),
-	'uglify:themeMin',
-	gulp.parallel( 'constants:buildTimestamp' ),
+	gulp.parallel( 'shell:scriptsAdminProd', 'shell:scriptsThemeProd' ),
 ) );
 
 gulp.task( 'default', gulp.series( 'dist' ) );

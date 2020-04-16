@@ -1,9 +1,9 @@
 <article class="item-single">
 
-	{{ post.featured_image }}
+	{{ featured_image }}
 
 	<div class="item-single__content t-content">
-		{{ post.content }}
+		{{ content }}
 	</div>
 
 	<footer class="item-single__footer">
@@ -11,21 +11,21 @@
 		<ul class="item-single__meta">
 
 			<li class="item-single__meta-date">
-				<time datetime="{{ post.time['c']|esc_attr }}">
-					{{ post.date|esc_html }}
+				<time datetime="{{ time['c']|esc_attr }}">
+					{{ date|esc_html }}
 				</time>
 			</li>
 
 			<li class="item-single__meta-author">
 				{{ __('by')|esc_html }}
-				<a href="{{ post.author.url|esc_url }}" rel="author">
-					{{ post.author.name|esc_html }}
+				<a href="{{ author.url|esc_url }}" rel="author">
+					{{ author.name|esc_html }}
 				</a>
 			</li>
 
 		</ul>
 
-		{{ include( 'components/share/share.twig' ) }}
+		{{ social_share }}
 
 	</footer>
 

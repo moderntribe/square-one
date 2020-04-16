@@ -1,0 +1,43 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Typography: Anchors
+ *
+ * ----------------------------------------------------------------------------- */
+
+/* -------------------------------------------------------------------------
+ * Anchor: Defaults
+ * ------------------------------------------------------------------------- */
+
+a {
+	transition: var(--transition);
+	color: inherit;
+	text-decoration: none;
+	outline: 0;
+	cursor: pointer;
+
+	&:visited,
+	&:hover {
+		color: inherit;
+	}
+
+	&:active,
+	&:focus {
+		outline: 1px dotted;
+		color: inherit;
+	}
+}
+
+/* -------------------------------------------------------------------------
+ * Anchor: Full
+ * ------------------------------------------------------------------------- */
+
+.anchor,
+.t-content a {
+	color: var(--color-link);
+	text-decoration: underline;
+
+	&:hover,
+	&:focus {
+		color: var(--color-link-hover);
+	}
+}

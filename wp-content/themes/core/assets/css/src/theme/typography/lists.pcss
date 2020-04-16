@@ -1,0 +1,88 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Typography: Lists
+ *
+ * ----------------------------------------------------------------------------- */
+
+/* -------------------------------------------------------------------------
+ * Global Lists
+ * ------------------------------------------------------------------------- */
+
+ul,
+ol,
+dl {
+
+	.t-content & {
+		@mixin body-content;
+
+		margin-top: var(--spacer);
+		margin-bottom: var(--spacer);
+	}
+}
+
+li {
+
+	& ~ li {
+
+		.t-content & {
+			margin-top: var(--spacer-xs);
+		}
+	}
+}
+
+/* -------------------------------------------------------------------------
+ * UL
+ * ------------------------------------------------------------------------- */
+
+.list-bullet,
+.t-content ul {
+	list-style: disc outside;
+	padding-left: 1.5em;
+	padding-right: 0;
+
+	@media (--viewport-medium) {
+		padding-left: 3em;
+		padding-right: 3em;
+	}
+}
+
+/* -------------------------------------------------------------------------
+ * OL
+ * ------------------------------------------------------------------------- */
+
+.list-number,
+.t-content ol {
+	list-style: decimal outside;
+	padding-left: 1.5em;
+	padding-right: 0;
+
+	@media (--viewport-medium) {
+		padding-left: 3em;
+		padding-right: 3em;
+	}
+}
+
+/* -------------------------------------------------------------------------
+ * DL
+ * ------------------------------------------------------------------------- */
+
+.dl,
+.t-content dl {
+	padding-left: 1.5em;
+	padding-right: 0;
+
+	@media (--viewport-medium) {
+		padding-left: 3em;
+		padding-right: 3em;
+	}
+}
+
+.dt,
+.t-content dt {
+	font-weight: var(--font-weight-bold);
+}
+
+.dd,
+.t-content dd {
+	margin-bottom: var(--spacer);
+}

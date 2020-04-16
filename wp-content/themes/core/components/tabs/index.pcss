@@ -1,68 +1,11 @@
-@import 'assets/css/src/theme/utilities/_all.pcss';
-
 /* -----------------------------------------------------------------------------
  *
  * Component: Tabs
  *
+ * This file is just a clearing-house, see the css directory
+ * and edit the source files found there.
+ *
  * ----------------------------------------------------------------------------- */
 
-.c-tab__list {
-	@mixin clearfix;
-}
-
-.c-tab__button {
-	font-weight: var(--font-weight-bold);
-	padding: 5px;
-	background: none;
-	text-align: left;
-	border: 1px solid var(--color-tabs-border);
-	margin: 0 5px 5px 0;
-	width: auto;
-	float: left;
-	display: inline-block;
-	vertical-align: baseline;
-
-	&:before {
-		content: ' ';
-		min-height: 1em;
-		display: inline-block;
-		width: 1px;
-		left: -1px;
-	}
-
-	&:focus,
-	&:hover {
-		color: var(--color-primary);
-		transition: var(--transition);
-	}
-
-	@media (--viewport-full) {
-		padding: var(--spacer-xs);
-		border-bottom: 0;
-		margin: 0 5px 0 0;
-	}
-}
-
-.c-tab__button--active {
-	color: var(--color-primary);
-	background-color: var(--color-tabs-btn-bg);
-}
-
-.c-tab__content {
-	border: 1px solid var(--color-tabs-border);
-	margin-bottom: var(--spacer-xs);
-	padding: var(--spacer-xs);
-	display: none;
-
-	&:focus {
-		outline: none;
-	}
-
-	@media (--viewport-full) {
-		margin-bottom: var(--spacer-m);
-	}
-}
-
-.c-tab__content--active {
-	display: block;
-}
+@import "css/_variables.pcss";
+@import "css/tabs.pcss";

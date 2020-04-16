@@ -6,6 +6,7 @@
 
 import _ from 'lodash';
 import { on, ready } from 'utils/events';
+// import * as tests from 'utils/tests';
 import applyBrowserClasses from 'utils/dom/apply-browser-classes';
 // @EXAMPLE_REACT_APP
 
@@ -19,9 +20,8 @@ import resize from './resize';
 import plugins from './plugins';
 import viewportDims from './viewport-dims';
 
-import modules from '../modules/index';
-
-import single from '../single/index';
+import components from './components';
+import integrations from './integrations';
 
 // @EXAMPLE_REACT_APP
 
@@ -68,13 +68,8 @@ const init = () => {
 
 	bindEvents();
 
-	// initialize the module scripts
-
-	modules();
-
-	// initialize the main scripts
-
-	single();
+	components();
+	integrations();
 
 	// @EXAMPLE_REACT_APP (Make sure to include the wrapping if block for ALL react apps
 
@@ -83,6 +78,12 @@ const init = () => {
 	// 	import( 'Example' /* webpackChunkName:"example" */ );
 	// }
 	// #endif
+
+	// if ( tests.supportsWorkers() ) {
+	// 	import( '../service-worker-init/index' /* webpackChunkName:"service-worker-init" */ ).then( ( module ) => {
+	// 		module.default();
+	// 	} );
+	// }
 
 	console.info( 'Square One FE: Initialized all javascript that targeted document ready.' );
 };
@@ -110,4 +111,3 @@ const domReady = () => {
 };
 
 export default domReady;
-
