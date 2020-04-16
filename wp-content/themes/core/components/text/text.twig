@@ -18,12 +18,4 @@ Attributes:
     }
  #}
 
-<{{ tag }}
-	{% if classes %}
-		{{ classes }}
-    {% endif %}
-	{% if attrs %}
-        {{ attrs }}
-    {% endif %}>
-{{ content }}
-</{{ tag }}>
+<{{ tag }} {{ classes }} {{ attrs }}>{{ content }}</{{ tag }}>
