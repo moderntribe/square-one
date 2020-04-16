@@ -37,8 +37,8 @@ class Accordion extends Block_Type_Config {
 			->add_field(
 				$this->factory->sidebar()->field()->image_select( self::LAYOUT )
 					->set_label( __( 'Layout', 'tribe' ) )
-					->add_option( self::LAYOUT_STACKED, __( 'Stacked', 'tribe' ), 'https://via.placeholder.com/100x60.png?text=Stacked' )
-					->add_option( self::LAYOUT_INLINE, __( 'Inline', 'tribe' ), 'https://via.placeholder.com/100x60.png?text=Inline' )
+					->add_option( __( 'Stacked', 'tribe' ), self::LAYOUT_STACKED, 'https://via.placeholder.com/100x60.png?text=Stacked' )
+					->add_option( __( 'Inline', 'tribe' ), self::LAYOUT_INLINE, 'https://via.placeholder.com/100x60.png?text=Inline' )
 					->set_default( self::LAYOUT_STACKED )
 					->build()
 			)
