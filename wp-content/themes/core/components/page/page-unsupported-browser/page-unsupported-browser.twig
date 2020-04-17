@@ -10,7 +10,8 @@
     <meta http-equiv="cleartype" content="on">
     <meta name="robots" content="noindex, nofollow">
 
-    <link rel="stylesheet" href="{{ css|esc_url }}" type="text/css" media="all">
+    {{ styles }}
+
     <link rel="shortcut icon" href="{{ favicon|esc_url }}">
 
     {{ do_action( 'tribe/unsupported_browser/head') }}

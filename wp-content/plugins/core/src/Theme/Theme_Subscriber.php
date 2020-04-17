@@ -4,33 +4,19 @@ declare( strict_types=1 );
 namespace Tribe\Project\Theme;
 
 use Tribe\Libs\Container\Abstract_Subscriber;
-use Tribe\Project\Nav_Menus\Nav_Attribute_Filters;
 use Tribe\Project\Theme\Config\Image_Sizes;
 use Tribe\Project\Theme\Config\Supports;
 use Tribe\Project\Theme\Config\Web_Fonts;
-use Tribe\Project\Theme\Editor\Classic_Editor_Formats;
-use Tribe\Project\Theme\Editor\Editor_Styles;
 use Tribe\Project\Theme\Media\Full_Size_Gif;
 use Tribe\Project\Theme\Media\Image_Wrap;
 use Tribe\Project\Theme\Media\Oembed_Filter;
 use Tribe\Project\Theme\Media\WP_Responsive_Image_Disabler;
-use Tribe\Project\Theme\Resources\Legacy_Check;
-use Tribe\Project\Theme\Resources\Login_Resources;
-use Tribe\Project\Theme\Resources\Scripts;
-use Tribe\Project\Theme\Resources\Styles;
 
 class Theme_Subscriber extends Abstract_Subscriber {
 	public function register(): void {
 		$this->body_classes();
 		$this->media();
 		$this->config();
-
-		$this->login_resources();
-		$this->legacy_resources();
-
-		$this->scripts();
-		$this->styles();
-		$this->editor();
 	}
 
 	private function config(): void {
@@ -44,7 +30,7 @@ class Theme_Subscriber extends Abstract_Subscriber {
 		$this->image_links();
 		$this->disable_responsive_images();
 		$this->oembed();
-		// $this->full_size_gif(); Uncomment to require full size gifs
+		// $this->full_size_gif(); // Uncomment to require full size gifs
 	}
 
 	private function body_classes() {
@@ -109,26 +95,6 @@ class Theme_Subscriber extends Abstract_Subscriber {
 		}, 10, 0 );
 	}
 
-	private function login_resources() {
-		add_action( 'login_enqueue_scripts', function () {
-			$this->container->get( Login_Resources::class )->login_styles();
-		}, 10, 0 );
-	}
-
-	private function legacy_resources() {
-		add_action( 'wp_head', function () {
-			$this->container->get( Legacy_Check::class )->old_browsers();
-		}, 0, 0 );
-
-		add_action( 'init', function () {
-			$this->container->get( Legacy_Check::class )->add_unsupported_rewrite();
-		} );
-
-		add_filter( 'template_include', function ( $template ) {
-			return $this->container->get( Legacy_Check::class )->load_unsupported_template( $template );
-		} );
-	}
-
 	private function web_fonts() {
 		add_action( 'wp_head', function () {
 			$this->container->get( Web_Fonts::class )->load_fonts();
@@ -145,53 +111,6 @@ class Theme_Subscriber extends Abstract_Subscriber {
 		/* add_action( 'login_head', function() {
 			$this->container->get( Fonts::class )->load_fonts();
 		}, 0, 0); */
-	}
-
-	private function scripts() {
-		add_action( 'wp_head', function () {
-			$this->container->get( Scripts::class )->maybe_inject_bugsnag();
-		}, 0, 0 );
-		add_action( 'wp_head', function () {
-			$this->container->get( Scripts::class )->set_preloading_tags();
-		}, 10, 0 );
-		add_action( 'wp_footer', function () {
-			$this->container->get( Scripts::class )->add_early_polyfills();
-		}, 10, 0 );
-		add_action( 'wp_enqueue_scripts', function () {
-			$this->container->get( Scripts::class )->enqueue_scripts();
-		}, 10, 0 );
-	}
-
-	private function styles() {
-		add_action( 'wp_enqueue_scripts', function () {
-			$this->container->get( Styles::class )->enqueue_styles();
-		}, 10, 0 );
-	}
-
-	private function editor(): void {
-		$this->editor_styles();
-		//$this->editor_formats();
-	}
-
-	private function editor_styles() {
-		add_action( 'admin_init', function () {
-			$this->container->get( Editor_Styles::class )->block_editor_styles();
-		}, 10, 0 );
-		add_filter( 'tiny_mce_before_init', function ( $settings ) {
-			return $this->container->get( Editor_Styles::class )->mce_editor_body_class( $settings );
-		}, 10, 1 );
-		add_filter( 'editor_stylesheets', function ( $styles ) {
-			return $this->container->get( Editor_Styles::class )->mce_editor_styles( $styles );
-		}, 10, 1 );
-	}
-
-	private function editor_formats() {
-		add_filter( 'mce_buttons', function ( $settings ) {
-			return $this->container->get( Classic_Editor_Formats::class )->mce_buttons( $settings );
-		}, 10, 1 );
-		add_filter( 'tiny_mce_before_init', function ( $settings ) {
-			return $this->container->get( Classic_Editor_Formats::class )->visual_editor_styles_dropdown( $settings );
-		}, 10, 1 );
 	}
 
 }

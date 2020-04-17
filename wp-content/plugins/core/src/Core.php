@@ -5,6 +5,7 @@ namespace Tribe\Project;
 use Psr\Container\ContainerInterface;
 use Tribe\Libs\Assets\Assets_Definer;
 use Tribe\Project\Admin\Admin_Subscriber;
+use Tribe\Project\Assets\Assets_Subscriber;
 use Tribe\Project\Blocks\Blocks_Definer;
 use Tribe\Project\Blocks\Blocks_Subscriber;
 use Tribe\Project\Cache\Cache_Subscriber;
@@ -29,6 +30,7 @@ use Tribe\Project\Post_Types;
 use Tribe\Project\Settings\Settings_Subscriber;
 use Tribe\Project\Shortcodes\Shortcodes_Subscriber;
 use Tribe\Project\Taxonomies;
+use Tribe\Project\Templates\Templates_Definer;
 use Tribe\Project\Templates\Templates_Subscriber;
 use Tribe\Project\Theme\Theme_Definer;
 use Tribe\Project\Theme\Theme_Subscriber;
@@ -58,6 +60,7 @@ class Core {
 		Object_Meta_Definer::class,
 		P2P_Definer::class,
 		Panels_Definer::class,
+		Templates_Definer::class,
 		Theme_Definer::class,
 		Twig_Definer::class,
 		Yoast_SEO_Definer::class,
@@ -68,6 +71,7 @@ class Core {
 	 */
 	private $subscribers = [
 		Admin_Subscriber::class,
+		Assets_Subscriber::class,
 		Blocks_Subscriber::class,
 		\Tribe\Libs\Cache\Cache_Subscriber::class,
 		Cache_Subscriber::class,
