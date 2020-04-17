@@ -9,9 +9,17 @@ pipeline {
         GITHUB_TOKEN = credentials('tr1b0t-github-api-token')
         JENKINS_VAULTPASS = "${env.APP_NAME}-vaultpass"
         HOST_SSH_KEYS = "${env.APP_NAME}-ssh-key"
-        SLACK_CHANNEL = 'squareone'
+        SLACK_CHANNEL = 'nicks-playground'
         ENVIRONMENT = environment()
     }
+
+    parameters {
+        gitParameter(branchFilter: 'origin/(.*)',
+          default: "${env.BRANCH_NAME}"
+          name: 'BRANCH_NAME',
+          type: 'PT_BRANCH',
+          description: 'Which branch should be deployed ?')
+      }
 
     stages {
         // SCM
@@ -181,6 +189,9 @@ void loadEnvironmentVariables(path){
 }
 
 def environment(){
-    final afterLastSlash = env.BRANCH_NAME.substring(env.BRANCH_NAME.lastIndexOf('/') + 1, env.BRANCH_NAME.length())
-    return afterLastSlash
+    if(env.BRANCH_NAME){
+        final afterLastSlash = env.BRANCH_NAME.substring(env.BRANCH_NAME.lastIndexOf('/') + 1, env.BRANCH_NAME.length())
+        return afterLastSlash
+    }
+    return "dev"
 }
