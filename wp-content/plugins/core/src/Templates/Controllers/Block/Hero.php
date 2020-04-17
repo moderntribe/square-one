@@ -9,7 +9,7 @@ class Hero extends Block_Controller {
 		$description = ! empty( $this->attributes[ 'description' ] ) ? '<div class="test-hero__description">' . $this->attributes[ 'description' ] . '</div>' : '';
 		$cta = ! empty( $this->attributes[ 'cta' ] ) && ! empty( $this->attributes[ 'cta' ][ 'text' ] ) ? '<a class="test-hero__cta" href="' . $this->attributes[ 'cta' ][ 'text' ] . '">Click Here for More Clicks</a>' : '';
 		$icon = ! empty( $this->attributes[ 'icon' ] ) && ! empty( $this->attributes[ 'icon' ][ 'url' ] )
-			? '<img src="'. $this->attributes[ 'icon' ][ 'url' ] .'" />'
+			? '<i class="test-hero__icon" style="background-image: url('. $this->attributes[ 'icon' ][ 'url' ] .');"></i>'
 			: '';
 
 		$hero_bg = ! empty( $this->attributes[ 'bg-image' ] ) && ! empty( $this->attributes[ 'bg-image' ][ 'url' ] )

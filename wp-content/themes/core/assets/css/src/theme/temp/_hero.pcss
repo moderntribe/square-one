@@ -3,6 +3,7 @@
 	aspect-ratio: '16:9';
 
 	&:before {
+		content: '';
 		position: absolute;
 		top: 0;
 		height: 100%;
@@ -33,6 +34,14 @@
 		line-height: 30px;
 		font-weight: var(--font-weight-bold);
 	}
+}
+
+.test-hero__icon {
+	width: 200px;
+	height: 100px;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center center;
 }
 
 .t-content .test-hero__cta {
