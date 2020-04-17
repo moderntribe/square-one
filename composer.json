@@ -94,7 +94,7 @@
     "wpackagist-plugin/classic-editor-addon":"2.6.1",
     "wpackagist-plugin/safe-svg":"1.9.8",
     "moderntribe/panel-builder": "dev-3.3-branch",
-    "moderntribe/gutenpanels": "dev-master",
+    "moderntribe/gutenpanels": "dev-epic/fidgety-feet",
     "moderntribe/tribe-libs": "dev-epic/fidgety-feet",
 
     "humanmade/mercator":"dev-master#7f3846a",
