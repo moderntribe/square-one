@@ -2,11 +2,13 @@ pipeline {
     agent any
 
     parameters {
-        gitParameter(branchFilter: 'origin/(.*)',
-          defaultValue: "${env.BRANCH_NAME}"
-          name: 'BRANCH_NAME',
-          type: 'PT_BRANCH',
-          description: 'Which branch should be deployed ?')
+        gitParameter(
+            branchFilter: 'origin/(.*)',
+            defaultValue: "${env.BRANCH_NAME}"
+            name: 'BRANCH_NAME',
+            type: 'PT_BRANCH',
+            description: 'Which branch should be deployed ?'
+        )
     }
 
     environment {
