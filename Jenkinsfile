@@ -1,6 +1,14 @@
 pipeline {
     agent any
 
+    parameters {
+        gitParameter(branchFilter: 'origin/(.*)',
+          defaultValue: "${env.BRANCH_NAME}"
+          name: 'BRANCH_NAME',
+          type: 'PT_BRANCH',
+          description: 'Which branch should be deployed ?')
+    }
+
     environment {
         APP_NAME = "square-one"
         GIT_REPO = "moderntribe/${APP_NAME}.git"
@@ -12,14 +20,6 @@ pipeline {
         SLACK_CHANNEL = 'nicks-playground'
         ENVIRONMENT = environment()
     }
-
-    parameters {
-        gitParameter(branchFilter: 'origin/(.*)',
-          defaultValue: "${env.BRANCH_NAME}"
-          name: 'BRANCH_NAME',
-          type: 'PT_BRANCH',
-          description: 'Which branch should be deployed ?')
-      }
 
     stages {
         // SCM
