@@ -12,11 +12,13 @@ const BundleAnalyzerPlugin = require( 'webpack-bundle-analyzer' ).BundleAnalyzer
 const devBase = require( './configs/dev-base.js' );
 const pkg = require( '../package.json' );
 const entry = require( './entry/admin' );
+const externals = require( './externals/admin' );
 
 module.exports = merge.strategy( {
 	plugins: 'append',
 } )( devBase, {
 	entry,
+	externals,
 	output: {
 		path: resolve( `${ __dirname }/../`, pkg.square1.paths.core_admin_js_dist ),
 		publicPath: `/${ pkg.square1.paths.core_admin_js_dist }`,
