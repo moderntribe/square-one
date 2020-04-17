@@ -15,7 +15,7 @@ pipeline {
 
     parameters {
         gitParameter(branchFilter: 'origin/(.*)',
-          default: "${env.BRANCH_NAME}"
+          defaultValue: "${env.BRANCH_NAME}"
           name: 'BRANCH_NAME',
           type: 'PT_BRANCH',
           description: 'Which branch should be deployed ?')
