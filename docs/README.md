@@ -80,6 +80,12 @@ This is the deep dive development documentation for SquareOne. If you are new he
 	* [Initial Setup](/docs/ansible/initial-setup.md)
 	* [Executing Deploys](/docs/ansible/deploys.md)
 
+* **Deploys with Jenkins**
+	* [Overview](/docs/deploy/jenkins/README.md)
+
+* **Deploys with Bash**
+	* [Overview](/docs/deploy/bash/README.md)
+
 * **Plugins/Extensions**
 	* [Twig](https://twig.symfony.com/)
 	* [Posts 2 Post](https://github.com/scribu/wp-posts-to-posts/wiki)
