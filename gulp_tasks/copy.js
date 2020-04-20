@@ -15,16 +15,16 @@ module.exports = {
 			.src( [
 				`${ pkg.square1.paths.component }/theme/icons/core/style.css`,
 			] )
-			.pipe( rename( '_icons.pcss' ) )
-			.pipe( gulp.dest( `${ pkg.square1.paths.core_theme_pcss }base/` ) );
+			.pipe( rename( 'icons.pcss' ) )
+			.pipe( gulp.dest( `${ pkg.square1.paths.core_theme_pcss }icons/` ) );
 	},
 	coreIconsVariables() {
 		return gulp
 			.src( [
 				`${ pkg.square1.paths.component }/theme/icons/core/variables.scss`,
 			] )
-			.pipe( rename( '_icons.pcss' ) )
-			.pipe( gulp.dest( `${ pkg.square1.paths.core_theme_pcss }utilities/variables/` ) );
+			.pipe( rename( '_variables.pcss' ) )
+			.pipe( gulp.dest( `${ pkg.square1.paths.core_theme_pcss }icons/` ) );
 	},
 	themeJS() {
 		return gulp
