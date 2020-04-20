@@ -1,5 +1,5 @@
 module.exports = {
-	minSize: 5000,
+	minSize: 2000,
 	cacheGroups: {
 		vendor: {
 			test: /[\\/]node_modules[\\/]/,

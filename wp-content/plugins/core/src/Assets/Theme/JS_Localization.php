@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Tribe\Project\Theme\Resources;
+namespace Tribe\Project\Assets\Theme;
 
 
 class JS_Localization {

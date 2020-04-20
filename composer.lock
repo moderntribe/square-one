@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b8feed5e7d54cca2ee06026c154ecf73",
+    "content-hash": "4e93b8efbccdc80e95b9a566f14b5ef5",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -989,16 +989,16 @@
         },
         {
             "name": "moderntribe/gutenpanels",
-            "version": "dev-master",
+            "version": "dev-epic/fidgety-feet",
             "source": {
                 "type": "git",
                 "url": "git@github.com:moderntribe/gutenpanels.git",
-                "reference": "613b610f3043d84342f94326182dfe533bd89efe"
+                "reference": "383dfbb83bafe1b61d81d2c3df59f4732d46e44b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/gutenpanels/zipball/613b610f3043d84342f94326182dfe533bd89efe",
-                "reference": "613b610f3043d84342f94326182dfe533bd89efe",
+                "url": "https://api.github.com/repos/moderntribe/gutenpanels/zipball/383dfbb83bafe1b61d81d2c3df59f4732d46e44b",
+                "reference": "383dfbb83bafe1b61d81d2c3df59f4732d46e44b",
                 "shasum": ""
             },
             "require": {
@@ -1006,7 +1006,7 @@
             },
             "require-dev": {
                 "lucatume/function-mocker": "~1.0",
-                "lucatume/wp-browser": "^1.10",
+                "lucatume/wp-browser": "^2.3.4",
                 "mockery/mockery": "^1.2",
                 "phpstan/phpstan": "^0.12.0@dev"
             },
@@ -1032,7 +1032,7 @@
                 }
             ],
             "description": "The Modern Tribe Panel Builder plugin, now with more Gutenberg!",
-            "time": "2020-03-05T23:19:50+00:00"
+            "time": "2020-04-17T14:39:28+00:00"
         },
         {
             "name": "moderntribe/panel-builder",
