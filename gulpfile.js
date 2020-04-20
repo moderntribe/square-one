@@ -209,6 +209,14 @@ gulp.task( 'test', gulp.series(
 ) );
 
 /**
+ * Run linting and tests
+ */
+
+gulp.task( 'validate', gulp.series(
+	gulp.parallel( 'lint', 'test' ),
+) );
+
+/**
  * Builds the entire package for production on a server.
  */
 

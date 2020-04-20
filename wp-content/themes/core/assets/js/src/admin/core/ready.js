@@ -12,6 +12,7 @@ import _ from 'lodash';
 import resize from './resize';
 import plugins from './plugins';
 import viewportDims from './viewport-dims';
+import editor from '../editor';
 
 import { on, ready } from 'utils/events';
 
@@ -43,6 +44,8 @@ const init = () => {
 	bindEvents();
 
 	// initialize the main scripts
+
+	editor();
 
 	console.info( 'Square One BE: Initialized all javascript that targeted document ready.' );
 };

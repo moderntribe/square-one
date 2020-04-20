@@ -13,11 +13,13 @@ const prodBase = require( './configs/prod-base.js' );
 const pkg = require( '../package.json' );
 const entry = require( './entry/admin' );
 const afterCompile = require( './after-emit' );
+const externals = require( './externals/admin' );
 
 module.exports = merge.strategy( {
 	plugins: 'append',
 } )( prodBase, {
 	entry,
+	externals,
 	output: {
 		path: resolve( `${ __dirname }/../`, pkg.square1.paths.core_admin_js_dist ),
 		publicPath: `/${ pkg.square1.paths.core_admin_js_dist }`,

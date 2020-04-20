@@ -12,11 +12,13 @@ const BundleAnalyzerPlugin = require( 'webpack-bundle-analyzer' ).BundleAnalyzer
 const devBase = require( './configs/dev-base.js' );
 const entry = require( './entry/theme' );
 const pkg = require( '../package.json' );
+const externals = require( './externals/theme' );
 
 module.exports = merge.strategy( {
 	plugins: 'append',
 } )( devBase, {
 	entry,
+	externals,
 	output: {
 		path: resolve( `${ __dirname }/../`, pkg.square1.paths.core_theme_js_dist ),
 		publicPath: `/${ pkg.square1.paths.core_theme_js_dist }`,

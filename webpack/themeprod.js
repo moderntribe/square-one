@@ -13,6 +13,7 @@ const prodBase = require( './configs/prod-base.js' );
 const entry = require( './entry/theme' );
 const pkg = require( '../package.json' );
 const afterCompile = require( './after-emit' );
+const externals = require( './externals/theme' );
 
 module.exports = merge.strategy( {
 	plugins: 'append',
@@ -20,6 +21,7 @@ module.exports = merge.strategy( {
 	prodBase,
 	{
 		entry,
+		externals,
 		output: {
 			path: resolve( `${ __dirname }/../`, pkg.square1.paths.core_theme_js_dist ),
 			publicPath: `/${ pkg.square1.paths.core_theme_js_dist }`,
