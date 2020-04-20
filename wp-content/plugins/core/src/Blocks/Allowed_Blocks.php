@@ -8,6 +8,10 @@ class Allowed_Blocks {
 		'core/buttons',
 	];
 
+	public function __construct( array $blacklist ) {
+		$this->blacklist = $blacklist;
+	}
+
 	/**
 	 * Add block types to the blacklist to disable in the block editor
 	 *
