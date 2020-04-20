@@ -3,10 +3,16 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Blocks;
 
+/**
+ * Class Allowed_Blocks
+ *
+ * Filters the block types that may be inserted in the block editor
+ */
 class Allowed_Blocks {
-	private $blacklist = [
-		'core/buttons',
-	];
+	/**
+	 * @var array A list of blocks types to disable
+	 */
+	private $blacklist;
 
 	public function __construct( array $blacklist ) {
 		$this->blacklist = $blacklist;
