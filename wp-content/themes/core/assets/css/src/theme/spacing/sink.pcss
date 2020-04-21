@@ -44,12 +44,6 @@
 	.h6 {
 		margin-top: var(--spacer-60);
 		margin-bottom: var(--spacer-20);
-
-		/* CASE: A heading follows an overline-styled element */
-		.h6 &,
-		.t-overline & {
-			margin-top: var(--spacer-20);
-		}
 	}
 
 	/* -----------------------------------------------------------------------------
@@ -143,5 +137,19 @@
 	table,
 	.table {
 		margin: var(--spacer-60) auto;
+	}
+
+	/* -----------------------------------------------------------------------------
+	 * Overline
+	 *
+	 * Overrides default selector spacing.
+	 * ----------------------------------------------------------------------------- */
+
+	.t-overline {
+		margin-bottom: var(--spacer-20);
+
+		& + * {
+			margin-top: var(--spacer-20);
+		}
 	}
 }
