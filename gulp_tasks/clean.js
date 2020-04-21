@@ -6,8 +6,8 @@ module.exports = {
 		return del( [
 			`${ pkg.square1.paths.component }/theme/icons/core`,
 			`${ pkg.square1.paths.core_theme_fonts }icons-core`,
-			`${ pkg.square1.paths.core_theme_pcss }base/_icons.pcss`,
-			`${ pkg.square1.paths.core_theme_pcss }utilities/variables/_icons.pcss`,
+			`${ pkg.square1.paths.core_theme_pcss }icons/icons.pcss`,
+			`${ pkg.square1.paths.core_theme_pcss }icons/_variables.pcss`,
 		] );
 	},
 	coreIconsEnd() {
