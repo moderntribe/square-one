@@ -91,3 +91,64 @@
 .t-caption {
 	@mixin t-caption;
 }
+
+/* -------------------------------------------------------------------------
+ *
+ * Theme: Light
+ *
+ * Notes:
+ * + This can be used anywhere or can be paired up with .t-content
+ * + Also see the other base partials for use of this class as a parent
+ *   selector (media, typography, etc.)
+ *
+ * Example:
+ * <div class="t-theme--light">
+ *   ...
+ *   <div class="t-sink">
+ *     ...
+ *   </div>
+ * </div>
+ *
+ * Example:
+ * <div class="t-content t-theme--light">
+ *   ...
+ * </div>
+ *
+ * ------------------------------------------------------------------------- */
+
+.t-theme--light {
+	color: var(--color-white);
+
+	* {
+		color: var(--color-white);
+	}
+}
+
+/* -------------------------------------------------------------------------
+ *
+ * Theme: Dark
+ *
+ * Notes:
+ * + Used by default in general, so not much probably needed here
+ * + This can be used anywhere or can be paired up with .t-content
+ * + Also see the other base partials for use of this class as a parent
+ *   selector (media, typography, etc.)
+ *
+ * Example:
+ * <div class="t-theme--dark">
+ *   ...
+ *   <div class="t-content">
+ *     ...
+ *   </div>
+ * </div>
+ *
+ * Example:
+ * <div class="t-content t-theme--dark">
+ *   ...
+ * </div>
+ *
+ * ------------------------------------------------------------------------- */
+
+.t-theme--dark {
+
+}

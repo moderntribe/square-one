@@ -100,11 +100,11 @@ class Hero extends Panel {
 		$classes = [];
 
 		if ( HeroPanel::FIELD_TEXT_LIGHT === $panel_vars[ HeroPanel::FIELD_TEXT_COLOR ] ) {
-			$classes[] = 't-content--light';
+			$classes[] = 't-theme--light';
 		}
 
 		if ( HeroPanel::FIELD_TEXT_DARK === $panel_vars[ HeroPanel::FIELD_TEXT_COLOR ] ) {
-			$classes[] = 't-content--dark';
+			$classes[] = 't-theme--dark';
 		}
 
 		return $classes;

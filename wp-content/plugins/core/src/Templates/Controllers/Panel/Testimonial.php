@@ -120,11 +120,11 @@ class Testimonial extends Panel {
 		$classes = [];
 
 		if ( TestimonialPanel::FIELD_TEXT_LIGHT === $panel_vars[ TestimonialPanel::FIELD_TEXT_COLOR ] ) {
-			$classes[] = 't-content--light';
+			$classes[] = 't-theme--light';
 		}
 
 		if ( TestimonialPanel::FIELD_TEXT_DARK === $panel_vars[ TestimonialPanel::FIELD_TEXT_COLOR ] ) {
-			$classes[] = 't-content--dark';
+			$classes[] = 't-theme--dark';
 		}
 
 		return $classes;

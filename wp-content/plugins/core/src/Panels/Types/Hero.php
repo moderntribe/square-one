@@ -17,8 +17,8 @@ class Hero extends Panel_Type_Config {
 	const FIELD_IMAGE                        = 'image';
 	const FIELD_CTA                          = 'cta';
 	const FIELD_TEXT_COLOR                   = 'text_color';
-	const FIELD_TEXT_LIGHT                   = 't-content--light';
-	const FIELD_TEXT_DARK                    = 't-content--dark';
+	const FIELD_TEXT_LIGHT                   = 't-theme--light';
+	const FIELD_TEXT_DARK                    = 't-theme--dark';
 
 	protected function panel() {
 
