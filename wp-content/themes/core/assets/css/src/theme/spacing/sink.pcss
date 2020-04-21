@@ -68,4 +68,45 @@
 	p {
 		margin-bottom: var(--spacer-40);
 	}
+
+	/* -----------------------------------------------------------------------------
+	 * Quotes & Blockquotes
+	 * ----------------------------------------------------------------------------- */
+
+	/* Shared */
+	blockquote,
+	.blockquote,
+	q,
+	.quote {
+		margin: var(--spacer-60) auto;
+		padding: var(--spacer-40) 0;
+		border-top: 1px solid var(--color-border);
+		border-bottom: 1px solid var(--color-border);
+	}
+
+	/* q */
+	q,
+	.quote {
+		display: block;
+	}
+
+	/* blockquote */
+	blockquote,
+	.blockquote {
+
+		p {
+			margin: 0 auto;
+
+			& ~ p {
+				margin-top: var(--spacer-40);
+			}
+		}
+	}
+
+	/* cite */
+	cite,
+	.cite {
+		display: block;
+		margin-top: var(--spacer-10);
+	}
 }
