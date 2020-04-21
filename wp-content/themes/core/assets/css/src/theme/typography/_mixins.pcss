@@ -132,16 +132,12 @@
 
 /* -------------------------------------------------------------------------
  * Quotes & Blockquotes
- * TODO: Quotes
  * ------------------------------------------------------------------------- */
 
-@define-mixin quote-base {
-	border-top: 1px solid var(--color-border);
-	border-bottom: 1px solid var(--color-border);
-	padding: var(--spacer-40);
-}
+@define-mixin t-quote {
+	@mixin t-display-small;
 
-@define-mixin quote-text {
-	font-size: 32px;
-	font-style: italic;
+	@media (--viewport-medium) {
+		@mixin t-display-large;
+	}
 }
