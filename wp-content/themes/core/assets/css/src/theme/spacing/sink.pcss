@@ -61,6 +61,35 @@
 		margin-bottom: var(--spacer-60);
 	}
 
+	/* -------------------------------------------------------------------------
+	 * Lists
+	 * ------------------------------------------------------------------------- */
+
+	/* Shared */
+	ul,
+	.list-bullet,
+	ol,
+	.list-number,
+	dl,
+	.dl {
+		margin-top: var(--spacer-40);
+		margin-bottom: var(--spacer-40);
+	}
+
+	/* List Item */
+	li {
+
+		& ~ li {
+			margin-top: var(--spacer-20);
+		}
+	}
+
+	/* Definition */
+	dd,
+	.dd {
+		margin-bottom: var(--spacer-40);
+	}
+
 	/* -----------------------------------------------------------------------------
 	 * Paragraph
 	 * ----------------------------------------------------------------------------- */
@@ -79,7 +108,8 @@
 	q,
 	.quote {
 		margin: var(--spacer-60) auto;
-		padding: var(--spacer-40) 0;
+		padding-top: var(--spacer-40);
+		padding-bottom: var(--spacer-40);
 		border-top: 1px solid var(--color-border);
 		border-bottom: 1px solid var(--color-border);
 	}
