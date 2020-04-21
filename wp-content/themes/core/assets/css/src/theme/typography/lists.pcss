@@ -27,13 +27,13 @@ li {}
  * Unordered List
  * ------------------------------------------------------------------------- */
 
-.list-bullet,
+.t-list--bullets,
 .t-sink ul {
 	list-style: disc outside;
 	padding-left: 1.5em;
 
 	/* CASE: Stylized List Item Bullets */
-	&.list-bullet--stylized {
+	&.t-list--stylized {
 		list-style: none;
 		padding-left: 0;
 
@@ -58,26 +58,26 @@ li {}
  * Ordered List
  * ------------------------------------------------------------------------- */
 
-.list-number,
+.t-list-numbered,
 .t-sink ol {
 	list-style: decimal outside;
 	padding-left: 1.5em;
 
 	/* CASE: Stylized List Item Numbering */
-	&.list-number--stylized {
+	&.t-list--stylized {
 		list-style: none;
 		padding-left: 0;
-		counter-reset: list-number--stylized;
+		counter-reset: list-number;
 
 		li {
 			position: relative;
 			padding-left: var(--spacer-40);
-			counter-increment: list-number--stylized;
+			counter-increment: list-number;
 
 			&:before {
 				@mixin t-label;
 
-				content: counter(list-number--stylized);
+				content: counter(list-number);
 				position: absolute;
 				left: 0;
 				font-weight: 700;
