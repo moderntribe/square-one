@@ -131,7 +131,7 @@ class Cardgrid extends Panel {
 
 		$options = [
 			Text::TEXT    => $text,
-			Text::CLASSES => [ 'c-card__desc', 't-content' ],
+			Text::CLASSES => [ 'c-card__desc', 's-sink t-sink' ],
 			Text::ATTRS   => $attrs,
 		];
 

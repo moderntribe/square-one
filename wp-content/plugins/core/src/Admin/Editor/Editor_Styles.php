@@ -49,7 +49,7 @@ class Editor_Styles {
 	 */
 	public function mce_editor_body_class( $settings ): array {
 
-		$settings['body_class'] = ( $settings['body_class'] ?? '' ) . ' t-content';
+		$settings['body_class'] = ( $settings['body_class'] ?? '' ) . ' s-sink t-sink';
 
 		return $settings;
 

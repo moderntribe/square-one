@@ -88,7 +88,7 @@ class Tabs extends Context {
 			self::DEFAULT => [],
 		],
 		self::TAB_CONTENT_CLASSES       => [
-			self::DEFAULT       => [ 'c-tab__content', 't-content' ],
+			self::DEFAULT       => [ 'c-tab__content', 's-sink t-sink' ],
 			self::MERGE_CLASSES => [],
 		],
 		self::TAB_CONTENT_ATTRS         => [
