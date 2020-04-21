@@ -25,4 +25,30 @@
 			margin-bottom: 0;
 		}
 	}
+
+	/* -----------------------------------------------------------------------------
+	 * Headings
+	 * ----------------------------------------------------------------------------- */
+
+	h1,
+	.h1,
+	h2,
+	.h2,
+	h3,
+	.h3,
+	h4,
+	.h4,
+	h5,
+	.h5,
+	h6,
+	.h6 {
+		margin-top: var(--spacer-60);
+		margin-bottom: var(--spacer-20);
+
+		/* CASE: A heading follows an overline-styled element */
+		.h6 &,
+		.t-overline & {
+			margin-top: var(--spacer-20);
+		}
+	}
 }
