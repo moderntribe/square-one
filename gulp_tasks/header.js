@@ -4,32 +4,30 @@ const pkg = require( '../package.json' );
 
 module.exports = {
 	coreIconsStyle() {
-		return gulp.src( `${ pkg.square1.paths.core_theme_pcss }base/_icons.pcss` )
-			.pipe( header( `
-/* -----------------------------------------------------------------------------
+		return gulp.src( `${ pkg.square1.paths.core_theme_pcss }icons/icons.pcss` )
+			.pipe( header( `/* -----------------------------------------------------------------------------
  *
  * Font Icons (via IcoMoon)
  *
+ * This file is generated using the \`gulp icons\` task. Do not edit it directly.
+ *
  * ----------------------------------------------------------------------------- */
-
-/* stylelint-disable */
 
 ` ) )
-			.pipe( gulp.dest( `${ pkg.square1.paths.core_theme_pcss }base/` ) );
+			.pipe( gulp.dest( `${ pkg.square1.paths.core_theme_pcss }icons/` ) );
 	},
 	coreIconsVariables() {
-		return gulp.src( `${ pkg.square1.paths.core_theme_pcss }utilities/variables/_icons.pcss` )
-			.pipe( header( `
-/* -----------------------------------------------------------------------------
+		return gulp.src( `${ pkg.square1.paths.core_theme_pcss }icons/_variables.pcss` )
+			.pipe( header( `/* -----------------------------------------------------------------------------
  *
- * Font Icons (via IcoMoon)
+ * Variables: Icons (via IcoMoon)
+ *
+ * This file is generated using the \`gulp icons\` task. Do not edit it directly.
  *
  * ----------------------------------------------------------------------------- */
 
-/* stylelint-disable */
-
 :root {` ) )
-			.pipe( gulp.dest( `${ pkg.square1.paths.core_theme_pcss }utilities/variables/` ) );
+			.pipe( gulp.dest( `${ pkg.square1.paths.core_theme_pcss }icons/` ) );
 	},
 	theme() {
 		return Promise.resolve( 'Deprecated' );

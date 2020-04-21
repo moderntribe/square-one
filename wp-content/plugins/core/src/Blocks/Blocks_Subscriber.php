@@ -19,6 +19,10 @@ class Blocks_Subscriber extends Abstract_Subscriber {
 			return $this->container->get( Render_Filter::class )->render( $prefiltered, $attributes, $content, $block_type );
 		}, 10, 4 );
 
+		add_filter( 'tribe/project/blocks/blacklist', function( $types ) {
+			return $this->container->get( Allowed_Blocks::class )->filter_block_blacklist( $types );
+		}, 10, 2 );
+
 		add_action( 'after_setup_theme', function () {
 			$this->container->get( Theme_Support::class )->register_theme_supports();
 		}, 10, 0 );

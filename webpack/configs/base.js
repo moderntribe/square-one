@@ -10,9 +10,6 @@ const webpack = require( 'webpack' );
 const rules = require( '../rules' );
 
 module.exports = {
-	externals: {
-		jquery: 'jQuery',
-	},
 	resolve: {
 		extensions: [ '.js', '.jsx', '.json', '.pcss' ],
 	},
