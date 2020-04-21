@@ -93,62 +93,33 @@
 }
 
 /* -------------------------------------------------------------------------
- *
- * Theme: Light
- *
- * Notes:
- * + This can be used anywhere or can be paired up with .t-sink
- * + Also see the other base partials for use of this class as a parent
- *   selector (media, typography, etc.)
- *
- * Example:
- * <div class="t-theme--light">
- *   ...
- *   <div class="t-sink">
- *     ...
- *   </div>
- * </div>
- *
- * Example:
- * <div class="t-sink t-theme--light">
- *   ...
- * </div>
- *
+ * Button
  * ------------------------------------------------------------------------- */
 
-.t-theme--light {
-	color: var(--color-white);
-
-	* {
-		color: var(--color-white);
-	}
+.t-button {
+	@mixin t-button;
 }
 
 /* -------------------------------------------------------------------------
- *
- * Theme: Dark
- *
- * Notes:
- * + Used by default in general, so not much probably needed here
- * + This can be used anywhere or can be paired up with .t-sink
- * + Also see the other base partials for use of this class as a parent
- *   selector (media, typography, etc.)
- *
- * Example:
- * <div class="t-theme--dark">
- *   ...
- *   <div class="t-sink">
- *     ...
- *   </div>
- * </div>
- *
- * Example:
- * <div class="t-sink t-theme--dark">
- *   ...
- * </div>
- *
+ * Text Button/Call To Action
  * ------------------------------------------------------------------------- */
 
-.t-theme--dark {
+.t-text-button {
+	@mixin t-text-caption;
+}
 
+/* -------------------------------------------------------------------------
+ * Input
+ * ------------------------------------------------------------------------- */
+
+.t-input {
+	@mixin t-input;
+}
+
+/* -------------------------------------------------------------------------
+ * Label
+ * ------------------------------------------------------------------------- */
+
+.t-label {
+	@mixin t-label;
 }
