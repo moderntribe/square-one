@@ -30,6 +30,28 @@ li {}
 .list-bullet,
 .t-sink ul {
 	list-style: disc outside;
+	padding-left: 1.5em;
+
+	/* CASE: Stylized List Item Bullets */
+	&.list-bullet--stylized {
+		list-style: none;
+		padding-left: 0;
+
+		li {
+			position: relative;
+			padding-left: var(--spacer-40);
+
+			&:before {
+				@mixin icon;
+
+				content: var(--icon-bullet-round);
+				position: absolute;
+				left: 0;
+				font-size: var(--font-size-body-large);
+				line-height: 2rem; /* list item line-height */
+			}
+		}
+	}
 }
 
 /* -------------------------------------------------------------------------
@@ -39,6 +61,31 @@ li {}
 .list-number,
 .t-sink ol {
 	list-style: decimal outside;
+	padding-left: 1.5em;
+
+	/* CASE: Stylized List Item Numbering */
+	&.list-number--stylized {
+		list-style: none;
+		padding-left: 0;
+		counter-reset: list-number--stylized;
+
+		li {
+			position: relative;
+			padding-left: var(--spacer-40);
+			counter-increment: list-number--stylized;
+
+			&:before {
+				@mixin t-label;
+
+				content: counter(list-number--stylized);
+				position: absolute;
+				left: 0;
+				font-weight: 700;
+				line-height: 2rem; /* list item line-height */
+				color: var(--color-primary);
+			}
+		}
+	}
 }
 
 /* -------------------------------------------------------------------------
