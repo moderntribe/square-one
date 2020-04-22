@@ -68,12 +68,8 @@ modules:
             plugins:
                 - core/core.php
                 - advanced-custom-fields-pro/acf.php
-                - posts-to-posts/posts-to-posts.php
             activatePlugins:
                 - core/core.php
                 - advanced-custom-fields-pro/acf.php
-                - posts-to-posts/posts-to-posts.php
             bootstrapActions:
-                - [P2P_Storage, install]
-                - [P2P_Storage, init]
                 - tribe/project/queues/mysql/init_table
