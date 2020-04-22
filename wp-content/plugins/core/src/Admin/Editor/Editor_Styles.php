@@ -6,7 +6,6 @@ namespace Tribe\Project\Admin\Editor;
 
 use Tribe\Project\Assets\Admin\Admin_Build_Parser;
 use Tribe\Project\Assets\Build_Parser;
-use Tribe\Project\Assets\Theme\Theme_Build_Parser;
 
 class Editor_Styles {
 
@@ -14,33 +13,44 @@ class Editor_Styles {
 	 * @var Admin_Build_Parser
 	 */
 	private $admin_build_parser;
-	/**
-	 * @var Theme_Build_Parser
-	 */
-	private $theme_build_parser;
 
-	public function __construct( Admin_Build_Parser $admin_build_parser, Theme_Build_Parser $theme_build_parser ) {
+	public function __construct( Admin_Build_Parser $admin_build_parser ) {
 		$this->admin_build_parser = $admin_build_parser;
-		$this->theme_build_parser = $theme_build_parser;
 	}
 
 	/**
-	 * Register styles with the block editor.
+	 * Remove the block editor styles from editor-styles.css injected by WP core.
 	 *
-	 * Uses the relative path, because the block editor will actually grab
-	 * the file from the theme directory and apply some changes to it.
+	 * @param array $editor_settings
+	 *
+	 * @return array
+	 * @filter block_editor_settings
+	 * @see    edit-form-blocks.php
+	 *
+	 */
+	public function remove_core_block_editor_styles( array $editor_settings ): array {
+		$editor_settings['styles'] = array_slice( $editor_settings['styles'], 1 );
+
+		return $editor_settings;
+	}
+
+	/**
+	 * Enqueue our block editor styles.
+	 *
+	 * Using wp_enqueue_style instead of add_editor_style, because
+	 * we don't trust WordPress to effectively pre-process the styles
+	 * to apply to the block editor. We handle that with postcss.
 	 *
 	 * @see    https://developer.wordpress.org/block-editor/developers/themes/theme-support/#editor-styles
 	 *
-	 * @action admin_init
+	 * @action enqueue_block_editor_assets
 	 */
-	public function block_editor_styles(): void {
-		add_editor_style( $this->theme_stylesheet_path() );
-		add_theme_support( 'editor-styles' );
+	public function enqueue_block_editor_styles(): void {
+		wp_enqueue_style( 'tribe-styles-block-editor' );
 	}
 
 	/**
-	 * Add a body class to the visual editor
+	 * Add a body class to the MCE visual editor
 	 *
 	 * @param array $settings
 	 *
@@ -56,37 +66,23 @@ class Editor_Styles {
 	}
 
 	/**
-	 * Filter the styles sent to the MCE editor.
+	 * Add our editor styles to the MCE editor.
 	 *
-	 * We don't want to apply the full block editor styles, so
-	 * this will remove those and replace them with the CSS
-	 * specific to the MCE editor
+	 * Since we are not declaring theme support for editor-styles,
+	 * this will only be enqueued in the MCE editor iframe.
 	 *
-	 * @param array $styles
-	 *
-	 * @return array
-	 * @filter editor_stylesheets
+	 * @return void
+	 * @filter admin_init
 	 */
-	public function mce_editor_styles( $styles ): array {
-		$theme_uri = get_theme_file_uri( $this->theme_stylesheet_path() );
-		$styles    = array_diff( $styles, [ $theme_uri ] );
-		$styles[]  = get_theme_file_uri( $this->mce_stylesheet_path() );
-
-		return $styles;
-	}
-
-	/**
-	 * @return string The relative path to the theme stylesheet
-	 */
-	private function theme_stylesheet_path(): string {
-		return $this->get_asset_path( 'tribe-styles-master', $this->theme_build_parser );
+	public function enqueue_mce_editor_styles(): void {
+		add_editor_style( $this->mce_stylesheet_path() );
 	}
 
 	/**
 	 * @return string The relative path to the MCE stylesheet
 	 */
 	private function mce_stylesheet_path(): string {
-		return $this->get_asset_path( 'tribe-styles-editor-style', $this->admin_build_parser );
+		return $this->get_asset_path( 'tribe-styles-mce-editor', $this->admin_build_parser );
 	}
 
 	/**
