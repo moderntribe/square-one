@@ -41,11 +41,11 @@ const gulpTasks = [
 	/* Cssnano tasks */
 
 	'cssnano:themeMin', // minify the theme css
-	'cssnano:themeGutenberg', // minify the theme css for Gutenberg
 	'cssnano:themeLegacyMin', // minify the legacy css for old browsers
-	'cssnano:themeWPEditorMin', // minify the editor css
-	'cssnano:themeWPAdminMin', // minify the main admin css bundle
-	'cssnano:themeWPLoginMin', // minify the login screen css
+	'cssnano:adminMin', // minify the main admin css bundle
+	'cssnano:adminBlockEditorMin', // minify the theme css for Gutenberg
+	'cssnano:adminMCEEditorMin', // minify the mce editor css
+	'cssnano:adminLoginMin', // minify the login screen css
 
 	/* Decompress tasks */
 
@@ -79,11 +79,11 @@ const gulpTasks = [
 	/* Postcss tasks */
 
 	'postcss:theme', // the big ol postcss task that transforms theme pcss to css
-	'postcss:themeGutenberg', // the postcss task that transforms theme css for Gutenberg and the admin
 	'postcss:themeLegacy', // the postcss task that transforms legacy pcss to css
-	'postcss:themeWPEditor', // the postcss task that transforms editor pcss to css
-	'postcss:themeWPLogin', // the postcss task that transforms login pcss to css
-	'postcss:themeWPAdmin', // the postcss task that transforms admin pcss to css
+	'postcss:admin', // the postcss task that transforms admin pcss to css
+	'postcss:adminBlockEditor', // the postcss task that transforms theme css for Gutenberg and the admin
+	'postcss:adminMCEEditor', // the postcss task that transforms editor pcss to css
+	'postcss:adminLogin', // the postcss task that transforms login pcss to css
 
 	/* Replace tasks */
 
@@ -150,7 +150,6 @@ gulp.task( 'icons', gulp.series(
 	'clean:themeMinCSS',
 	'postcss:theme',
 	'cssnano:themeMin',
-	'header:theme',
 ) );
 
 const watchTasks = [
@@ -218,17 +217,19 @@ gulp.task( 'server_dist', gulp.series(
 	gulp.parallel( 'clean:themeMinCSS', 'clean:themeMinJS', 'copy:themeJS' ),
 	gulp.parallel(
 		'postcss:theme',
-		'postcss:themeWPAdmin',
-		'postcss:themeWPEditor',
-		'postcss:themeWPLogin',
-		'postcss:themeLegacy'
+		'postcss:themeLegacy',
+		'postcss:admin',
+		'postcss:adminBlockEditor',
+		'postcss:adminMCEEditor',
+		'postcss:adminLogin',
 	),
 	gulp.parallel(
 		'cssnano:themeMin',
 		'cssnano:themeLegacyMin',
-		'cssnano:themeWPEditorMin',
-		'cssnano:themeWPAdminMin',
-		'cssnano:themeWPLoginMin'
+		'cssnano:adminMin',
+		'cssnano:adminBlockEditorMin',
+		'cssnano:adminMCEEditorMin',
+		'cssnano:adminLoginMin',
 	),
 	gulp.parallel( 'shell:scriptsThemeDev', 'shell:scriptsAdminDev' ),
 	gulp.parallel( 'shell:scriptsThemeProd', 'shell:scriptsAdminProd' ),
@@ -243,19 +244,19 @@ gulp.task( 'dist', gulp.series(
 	gulp.parallel( 'clean:themeMinCSS', 'clean:themeMinJS', 'copy:themeJS' ),
 	gulp.parallel(
 		'postcss:theme',
-		'postcss:themeGutenberg',
-		'postcss:themeWPAdmin',
-		'postcss:themeWPEditor',
-		'postcss:themeWPLogin',
-		'postcss:themeLegacy'
+		'postcss:themeLegacy',
+		'postcss:admin',
+		'postcss:adminBlockEditor',
+		'postcss:adminMCEEditor',
+		'postcss:adminLogin',
 	),
 	gulp.parallel(
 		'cssnano:themeMin',
-		'cssnano:themeGutenberg',
 		'cssnano:themeLegacyMin',
-		'cssnano:themeWPEditorMin',
-		'cssnano:themeWPAdminMin',
-		'cssnano:themeWPLoginMin'
+		'cssnano:adminMin',
+		'cssnano:adminBlockEditorMin',
+		'cssnano:adminMCEEditorMin',
+		'cssnano:adminLoginMin',
 	),
 	gulp.parallel( 'shell:scriptsThemeDev', 'shell:scriptsAdminDev' ),
 	gulp.parallel( 'shell:scriptsAdminProd', 'shell:scriptsThemeProd' ),

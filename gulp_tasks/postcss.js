@@ -100,15 +100,6 @@ module.exports = {
 			dest: pkg.square1.paths.core_theme_css,
 		} );
 	},
-	themeGutenberg() {
-		return cssProcess( {
-			src: [
-				`${ pkg.square1.paths.core_admin_pcss }gutenberg-editor-style.pcss`,
-			],
-			dest: pkg.square1.paths.core_admin_css,
-			plugins: compileGutenbergPlugins,
-		} );
-	},
 	themeLegacy() {
 		return cssProcess( {
 			src: [
@@ -118,24 +109,33 @@ module.exports = {
 			plugins: legacyPlugins,
 		} );
 	},
-	themeWPEditor() {
-		return cssProcess( {
-			src: [
-				`${ pkg.square1.paths.core_admin_pcss }editor-style.pcss`,
-			],
-		} );
-	},
-	themeWPLogin() {
-		return cssProcess( {
-			src: [
-				`${ pkg.square1.paths.core_admin_pcss }login.pcss`,
-			],
-		} );
-	},
-	themeWPAdmin() {
+	admin() {
 		return cssProcess( {
 			src: [
 				`${ pkg.square1.paths.core_admin_pcss }master.pcss`,
+			],
+		} );
+	},
+	adminBlockEditor() {
+		return cssProcess( {
+			src: [
+				`${ pkg.square1.paths.core_admin_pcss }block-editor.pcss`,
+			],
+			dest: pkg.square1.paths.core_admin_css,
+			plugins: compileGutenbergPlugins,
+		} );
+	},
+	adminMCEEditor() {
+		return cssProcess( {
+			src: [
+				`${ pkg.square1.paths.core_admin_pcss }mce-editor.pcss`,
+			],
+		} );
+	},
+	adminLogin() {
+		return cssProcess( {
+			src: [
+				`${ pkg.square1.paths.core_admin_pcss }login.pcss`,
 			],
 		} );
 	},
