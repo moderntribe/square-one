@@ -42,15 +42,18 @@ class Hero extends Block_Type_Config {
 			->add_field(
 				$this->factory->content()->field()->image( self::ICON )
 					->set_label( __( 'Icon', 'tribe' ) )
+					->add_class( 'test-hero__icon' )
 					->build()
 			)
 			->add_field(
 				$this->factory->content()->field()->text( self::TITLE )
-					->add_class( 'h1' )
+					->add_class( 'test-hero__title' )
+
 					->build()
 			)
 			->add_field(
 				$this->factory->content()->field()->richtext( self::DESCRIPTION )
+					->add_class( 'test-hero__description' )
 					->build()
 			)
 			->add_field(
