@@ -40,6 +40,7 @@ jobs:
           php -r "file_exists( 'local-config.json' ) || copy( 'local-config-sample.json', 'local-config.json' );"
           php -r "file_exists( 'dev/tests/.env' ) || copy( 'dev/tests/.env-dist', 'dev/tests/.env' );"
           mkdir -p ${{ github.workspace }}/cache/
+          docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests chmod 777 /application/www/cache/
           echo "define( 'TWIG_CACHE_DIR', '/application/www/cache/' );" >> local-config.php
           echo "define( 'TRIBE_GLOMAR', false );" >> local-config.php
           echo "define( 'FORCE_SSL_LOGIN', false );" >> local-config.php
