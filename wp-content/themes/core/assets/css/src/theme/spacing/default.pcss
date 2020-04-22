@@ -1,27 +1,3 @@
-/* -------------------------------------------------------------------------
- *
- * Content: "Kitchen Sink"
- *
- * Notes:
- * + "t-content" is what used to be "context-content"
- *
- * ------------------------------------------------------------------------- */
-
-.t-content {
-
-	& > {
-		/* CASE: remove top margin from first element */
-		*:first-child {
-			margin-top: 0;
-		}
-
-		/* CASE: remove bottom margin from bottom element */
-		*:last-child {
-			margin-bottom: 0;
-		}
-	}
-}
-
 /* -----------------------------------------------------------------------------
  *
  * Section: Base
@@ -48,8 +24,8 @@
 .s-wrapper {
 	position: relative;
 	width: 100%;
-	padding-top: var(--spacer-lg);
-	padding-bottom: var(--spacer-lg);
+	padding-top: var(--spacer-70);
+	padding-bottom: var(--spacer-70);
 }
 
 .s-wrapper--no-padding {

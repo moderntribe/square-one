@@ -9,15 +9,11 @@
  * ------------------------------------------------------------------------- */
 
 .h1,
-.t-content h1 {
-	font-size: 36px;
-}
+.t-sink h1 {
+	@mixin t-display-large;
 
-h1 {
-
-	.t-content & {
-		margin-top: var(--spacer);
-		margin-bottom: var(--spacer);
+	@media (--viewport-medium) {
+		@mixin t-display-x-large;
 	}
 }
 
@@ -26,15 +22,11 @@ h1 {
  * ------------------------------------------------------------------------- */
 
 .h2,
-.t-content h2 {
-	font-size: 32px;
-}
+.t-sink h2 {
+	@mixin t-display;
 
-h2 {
-
-	.t-content & {
-		margin-top: var(--spacer);
-		margin-bottom: var(--spacer);
+	@media (--viewport-medium) {
+		@mixin t-display-large;
 	}
 }
 
@@ -43,15 +35,11 @@ h2 {
  * ------------------------------------------------------------------------- */
 
 .h3,
-.t-content h3 {
-	font-size: 28px;
-}
+.t-sink h3 {
+	@mixin t-display-small;
 
-h3 {
-
-	.t-content & {
-		margin-top: var(--spacer);
-		margin-bottom: var(--spacer);
+	@media (--viewport-medium) {
+		@mixin t-display;
 	}
 }
 
@@ -60,15 +48,11 @@ h3 {
  * ------------------------------------------------------------------------- */
 
 .h4,
-.t-content h4 {
-	font-size: 22px;
-}
+.t-sink h4 {
+	@mixin t-display-x-small;
 
-h4 {
-
-	.t-content & {
-		margin-top: var(--spacer);
-		margin-bottom: var(--spacer);
+	@media (--viewport-medium) {
+		@mixin t-display-small;
 	}
 }
 
@@ -77,15 +61,11 @@ h4 {
  * ------------------------------------------------------------------------- */
 
 .h5,
-.t-content h5 {
-	font-size: 20px;
-}
+.t-sink h5 {
+	@mixin t-display-xx-small;
 
-h5 {
-
-	.t-content & {
-		margin-top: var(--spacer);
-		margin-bottom: var(--spacer);
+	@media (--viewport-medium) {
+		@mixin t-display-x-small;
 	}
 }
 
@@ -94,14 +74,6 @@ h5 {
  * ------------------------------------------------------------------------- */
 
 .h6,
-.t-content h6 {
-	font-size: 18px;
-}
-
-h6 {
-
-	.t-content & {
-		margin-top: var(--spacer);
-		margin-bottom: var(--spacer);
-	}
+.t-sink h6 {
+	@mixin t-overline;
 }

@@ -43,9 +43,10 @@ img {
 
 .wp-caption-text {
 	max-width: 100%;
-	margin: var(--spacer-xs) 0 0;
+	margin: var(--spacer-20) 0 0;
 	font-size: 14px;
-	line-height: var(--line-height-s);
+
+	/* TODO: Update to use caption mixin */
 }
 
 /* -----------------------------------------------------------------------------
@@ -54,18 +55,18 @@ img {
 
 .aligncenter,
 .alignnone {
-	margin-top: var(--spacer-lg);
-	margin-bottom: var(--spacer-lg);
+	margin-top: var(--spacer-70);
+	margin-bottom: var(--spacer-70);
 }
 
 .alignleft,
 .alignright {
-	margin-top: var(--spacer-lg);
-	margin-bottom: var(--spacer-lg);
+	margin-top: var(--spacer-70);
+	margin-bottom: var(--spacer-70);
 
 	@media (--viewport-medium) {
 		margin-top: 5px;
-		margin-bottom: var(--spacer-lg);
+		margin-bottom: var(--spacer-70);
 		max-width: 30%;
 	}
 
@@ -86,13 +87,13 @@ img {
 .alignleft {
 	@media (--viewport-medium) {
 		float: left;
-		margin-right: var(--spacer-lg);
+		margin-right: var(--spacer-70);
 	}
 }
 
 .alignright {
 	@media (--viewport-medium) {
 		float: right;
-		margin-left: var(--spacer-lg);
+		margin-left: var(--spacer-70);
 	}
 }

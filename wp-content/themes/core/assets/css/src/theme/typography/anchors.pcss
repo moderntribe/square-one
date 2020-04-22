@@ -32,12 +32,20 @@ a {
  * ------------------------------------------------------------------------- */
 
 .anchor,
-.t-content a {
-	color: var(--color-link);
+.t-sink a {
+	color: var(--color-text);
 	text-decoration: underline;
+	font-weight: 700;
+	text-decoration-color: var(--color-link-focus);
 
-	&:hover,
-	&:focus {
+	&:hover {
 		color: var(--color-link-hover);
+		text-decoration-color: inherit;
+	}
+
+	&:focus {
+		color: var(--color-link-focus);
+		outline: none;
+		text-decoration-color: inherit;
 	}
 }
