@@ -90,7 +90,7 @@ class Panel extends Abstract_Controller {
 	}
 
 	protected function get_description_classes( array $panel_vars ): array {
-		return [ 's-desc', 's-sink t-sink' ];
+		return [ 's-desc', 's-sink', 't-sink' ];
 	}
 
 	protected function use_wrapper( \ModularContent\Panel $panel ): bool {
