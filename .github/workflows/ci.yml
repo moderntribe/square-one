@@ -39,7 +39,8 @@ jobs:
           php -r "file_exists( 'local-config.php' ) || copy( 'local-config-sample.php', 'local-config.php' );"
           php -r "file_exists( 'local-config.json' ) || copy( 'local-config-sample.json', 'local-config.json' );"
           php -r "file_exists( 'dev/tests/.env' ) || copy( 'dev/tests/.env-dist', 'dev/tests/.env' );"
-          echo "define( 'TWIG_CACHE_DIR', '/tmp/cache' );" >> local-config.php
+          mkdir -p /tmp/cache/
+          echo "define( 'TWIG_CACHE_DIR', '/tmp/cache/' );" >> local-config.php
           echo "define( 'TRIBE_GLOMAR', false );" >> local-config.php
           echo "define( 'FORCE_SSL_LOGIN', false );" >> local-config.php
           echo "define( 'FORCE_SSL_ADMIN', false );" >> local-config.php
