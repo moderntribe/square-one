@@ -1,6 +1,9 @@
 .test-hero {
 	background-size: cover;
-	aspect-ratio: '16:9';
+	min-height: 700px;
+	display: flex;
+	width: 100%;
+	align-items: center;
 
 	&:before {
 		content: '';
@@ -19,8 +22,10 @@
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
+	z-index: 2;
 }
 
+.test-hero__title,
 .t-content h1.test-hero__title {
 	font-size: 60px;
 	font-family: Impact, Charcoal, sans-serif;
@@ -42,6 +47,14 @@
 	background-size: contain;
 	background-repeat: no-repeat;
 	background-position: center center;
+
+	> div {
+		height: 100px;
+	}
+
+	img {
+		max-height: 100%;
+	}
 }
 
 .t-content .test-hero__cta {
