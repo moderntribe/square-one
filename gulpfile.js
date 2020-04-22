@@ -24,10 +24,6 @@ if ( ! config ) {
  */
 
 const gulpTasks = [
-	/* Constants tasks */
-
-	'constants:buildTimestamp', // set a timestamp for cache busting of css and js by php
-
 	/* Copy tasks */
 
 	'copy:coreIconsFonts', // copy fonts for icons from dev folder to theme
@@ -45,8 +41,7 @@ const gulpTasks = [
 	/* Cssnano tasks */
 
 	'cssnano:themeMin', // minify the theme css
-	'cssnano:themeComponentsMin', // minify the theme components css
-	'cssnano:themeIntegrationsMin', // minify the theme integrations css
+	'cssnano:themeGutenberg', // minify the theme css for Gutenberg
 	'cssnano:themeLegacyMin', // minify the legacy css for old browsers
 	'cssnano:themeWPEditorMin', // minify the editor css
 	'cssnano:themeWPAdminMin', // minify the main admin css bundle
@@ -84,8 +79,7 @@ const gulpTasks = [
 	/* Postcss tasks */
 
 	'postcss:theme', // the big ol postcss task that transforms theme pcss to css
-	'postcss:themeComponents', // the postcss task that transforms theme components pcss to css
-	'postcss:themeIntegrations', // the postcss task that transforms theme integrations pcss to css
+	'postcss:themeGutenberg', // the postcss task that transforms theme css for Gutenberg and the admin
 	'postcss:themeLegacy', // the postcss task that transforms legacy pcss to css
 	'postcss:themeWPEditor', // the postcss task that transforms editor pcss to css
 	'postcss:themeWPLogin', // the postcss task that transforms login pcss to css
@@ -249,6 +243,7 @@ gulp.task( 'dist', gulp.series(
 	gulp.parallel( 'clean:themeMinCSS', 'clean:themeMinJS', 'copy:themeJS' ),
 	gulp.parallel(
 		'postcss:theme',
+		'postcss:themeGutenberg',
 		'postcss:themeWPAdmin',
 		'postcss:themeWPEditor',
 		'postcss:themeWPLogin',
@@ -256,6 +251,7 @@ gulp.task( 'dist', gulp.series(
 	),
 	gulp.parallel(
 		'cssnano:themeMin',
+		'cssnano:themeGutenberg',
 		'cssnano:themeLegacyMin',
 		'cssnano:themeWPEditorMin',
 		'cssnano:themeWPAdminMin',

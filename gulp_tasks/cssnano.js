@@ -23,6 +23,11 @@ module.exports = {
 			`${ pkg.square1.paths.core_theme_css }print.css`,
 		], pkg.square1.paths.core_theme_css_dist );
 	},
+	themeGutenberg() {
+		return minify( [
+			`${ pkg.square1.paths.core_admin_css }gutenberg-editor-style.css`,
+		], pkg.square1.paths.core_admin_css_dist );
+	},
 	themeLegacyMin() {
 		return minify( [
 			`${ pkg.square1.paths.core_theme_css }legacy.css`,
