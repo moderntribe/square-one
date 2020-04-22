@@ -8,7 +8,6 @@ use Tribe\Libs\Container\Abstract_Subscriber;
 class Cache_Subscriber extends Abstract_Subscriber {
 	public function register(): void {
 		$this->listen();
-		// TODO: Implement register() method.
 	}
 
 	protected function listen() {
