@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "60ca4756bc542b76cc4b77e488c9e092",
+    "content-hash": "309418b7a6c73cf12c9673270db50aed",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -1081,12 +1081,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/moderntribe/tribe-libs.git",
-                "reference": "d7f5613fc60ef5cd56aaceafc2c6453e0902577f"
+                "reference": "3745e43666c8511edf4ba2f7fceccc1664a2a7ae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/tribe-libs/zipball/d7f5613fc60ef5cd56aaceafc2c6453e0902577f",
-                "reference": "d7f5613fc60ef5cd56aaceafc2c6453e0902577f",
+                "url": "https://api.github.com/repos/moderntribe/tribe-libs/zipball/3745e43666c8511edf4ba2f7fceccc1664a2a7ae",
+                "reference": "3745e43666c8511edf4ba2f7fceccc1664a2a7ae",
                 "shasum": ""
             },
             "require": {
@@ -1167,7 +1167,7 @@
                 "GPL-2.0-only"
             ],
             "description": "A library for use on Modern Tribe service projects.",
-            "time": "2020-04-22T01:33:42+00:00"
+            "time": "2020-04-22T12:48:46+00:00"
         },
         {
             "name": "monolog/monolog",
