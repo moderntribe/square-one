@@ -78,7 +78,8 @@ $config_defaults = [
 	'WP_CONTENT_DIR'                 => tribe_getenv( 'WP_CONTENT_DIR', __DIR__ . '/wp-content' ),
 	'WP_CONTENT_URL'                 => tribe_getenv( 'WP_CONTENT_URL', ( tribe_isSSL() ? 'https' : 'http' ) . '://' . $_SERVER['HTTP_HOST'] . '/wp-content' ),
 	'ABSPATH'                        => tribe_getenv( 'ABSPATH', __DIR__ . '/wp/' ),
-	'TWIG_CACHE_DIR'                 => tribe_getenv( 'TWIG_CACHE', '' ),
+	'TWIG_CACHE_DIR'                 => tribe_getenv( 'TWIG_CACHE_DIR', '' ),
+	'TWIG_CACHE'                     => tribe_getenv( 'TWIG_CACHE', true ),
 
 	// Multisite
 	'WP_ALLOW_MULTISITE'             => tribe_getenv( 'WP_ALLOW_MULTISITE', false ),
@@ -169,7 +170,7 @@ if ( defined( 'ENVIRONMENT' ) && ENVIRONMENT === 'PRODUCTION' ) {
 // Use defaults array to define constants where applicable
 // ==============================================================
 
-foreach ( $config_defaults AS $config_default_key => $config_default_value ) {
+foreach ( $config_defaults as $config_default_key => $config_default_value ) {
 	if ( ! defined( $config_default_key ) ) {
 		define( $config_default_key, $config_default_value );
 	}
