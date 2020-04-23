@@ -4,29 +4,24 @@ declare( strict_types=1 );
 namespace Tribe\Project\P2P;
 
 use DI;
-use Tribe\Libs\Assets\Asset_Loader;
 use Tribe\Libs\Container\Definer_Interface;
+use Tribe\Libs\P2P\Admin_Search_Filtering;
 use Tribe\Project\P2P\Relationships\General_Relationship;
-use Tribe\Project\P2P\Relationships\Sample_To_Page;
 
 class P2P_Definer implements Definer_Interface {
-	public const RELATIONSHIPS = 'p2p.relationships';
-	public const ADMIN_FILTERS = 'p2p.admin_search_filters';
-
 	public function define(): array {
 		return [
-			self::RELATIONSHIPS  => [
+			\Tribe\Libs\P2P\P2P_Definer::RELATIONSHIPS => DI\add( [
 				DI\get( General_Relationship::class ),
-				DI\get( Sample_To_Page::class ),
-			],
-			self::ADMIN_FILTERS  => [
-				DI\create( Admin_Search_Filtering::class )
-					->constructor( DI\get( General_Relationship::class ), 'both', DI\get( Asset_Loader::class ) ),
-			],
-			Titles_Filter::class => DI\create()
-				->constructor( [
-					General_Relationship::NAME,
-				] ),
+			] ),
+
+			\Tribe\Libs\P2P\P2P_Definer::ADMIN_SEARCH_FILTERS => DI\add( [
+				DI\create( Admin_Search_Filtering::class )->constructor( DI\get( General_Relationship::class ), 'both' ),
+			] ),
+
+			\Tribe\Libs\P2P\P2P_Definer::TITLE_FILTER_RELATIONSHIPS => DI\add( [
+				DI\get( General_Relationship::class ),
+			] ),
 		];
 	}
 }

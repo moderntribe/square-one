@@ -32,25 +32,29 @@ li {}
 .t-sink ul {
 	list-style: disc outside;
 	padding-left: 1.5em;
+}
 
-	/* CASE: Stylized List Item Bullets */
-	&.t-list--stylized {
-		list-style: none;
-		padding-left: 0;
+/* -------------------------------------------------------------------------
+ * Unordered List: Stylized
+ * ------------------------------------------------------------------------- */
 
-		li {
-			position: relative;
-			padding-left: var(--spacer-40);
+.t-list--bullets-stylized,
+.t-sink ul.t-list--bullets-stylized {
+	list-style: none;
+	padding-left: 0;
 
-			&:before {
-				@mixin icon;
+	li {
+		position: relative;
+		padding-left: var(--spacer-40);
 
-				content: var(--icon-bullet-round);
-				position: absolute;
-				left: 0;
-				font-size: var(--font-size-body-large);
-				line-height: 2rem; /* list item line-height */
-			}
+		&:before {
+			@mixin icon;
+
+			content: var(--icon-bullet-round);
+			position: absolute;
+			left: 0;
+			font-size: var(--font-size-body-large);
+			line-height: 2rem; /* list item line-height */
 		}
 	}
 }
@@ -63,28 +67,32 @@ li {}
 .t-sink ol {
 	list-style: decimal outside;
 	padding-left: 1.5em;
+}
 
-	/* CASE: Stylized List Item Numbering */
-	&.t-list--stylized {
-		list-style: none;
-		padding-left: 0;
-		counter-reset: list-number;
+/* -------------------------------------------------------------------------
+ * Ordered List: Stylized
+ * ------------------------------------------------------------------------- */
 
-		li {
-			position: relative;
-			padding-left: var(--spacer-40);
-			counter-increment: list-number;
+.t-list--numbered-stylized,
+.t-sink ol.t-list--numbered-stylized {
+	list-style: none;
+	padding-left: 0;
+	counter-reset: list-number;
 
-			&:before {
-				@mixin t-label;
+	li {
+		position: relative;
+		padding-left: var(--spacer-40);
+		counter-increment: list-number;
 
-				content: counter(list-number);
-				position: absolute;
-				left: 0;
-				font-weight: 700;
-				line-height: 2rem; /* list item line-height */
-				color: var(--color-primary);
-			}
+		&:before {
+			@mixin t-label;
+
+			content: counter(list-number);
+			position: absolute;
+			left: 0;
+			font-weight: 700;
+			line-height: 2rem; /* list item line-height */
+			color: var(--color-primary);
 		}
 	}
 }

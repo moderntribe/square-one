@@ -59,8 +59,6 @@ This is the deep dive development documentation for SquareOne. If you are new he
 	* [Template Controllers](/docs/backend/data.md)
 	* [CLI](/docs/backend/cli.md)
 	* [Cache](/docs/backend/object-cache.md)
-	* [Request Object](/docs/backend/request.md)
-	* [Facades](/docs/backend/facades.md)
 	* [Schema](/docs/backend/schema.md)
 	* [Queues](/docs/backend/queues.md)
 
@@ -91,4 +89,3 @@ This is the deep dive development documentation for SquareOne. If you are new he
 	* [Posts 2 Post](https://github.com/scribu/wp-posts-to-posts/wiki)
 	* [Extended Post Types](https://github.com/johnbillion/extended-cpts/blob/master/README.md)
 	* [Extended Taxonomies](https://github.com/johnbillion/extended-taxos/blob/master/README.md)
-	* [Whoops](/docs/backend/whoops.md)
