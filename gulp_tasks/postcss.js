@@ -36,7 +36,7 @@ const compilePlugins = sharedPlugins.concat( [
 ] );
 
 const compileGutenbergPlugins = sharedPlugins.concat( [
-	PrefixWrap( '.editor-styles-wrapper', {
+	PrefixWrap( '.block-editor-block-list__layout', {
 		prefixRootTags: false,
 	} ),
 	require( 'postcss-assets' )( { loadPaths: [ `${ pkg.square1.paths.core_theme }/` ] } ),
