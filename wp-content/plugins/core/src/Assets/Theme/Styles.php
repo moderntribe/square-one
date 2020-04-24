@@ -21,8 +21,10 @@ class Styles {
 	 * @action template_redirect
 	 */
 	public function register_styles(): void {
+		// todo: @jbrinley please abstract as you see fit
+		$version = defined( 'CSS_VERSION_TIMESTAMP' ) && CSS_VERSION_TIMESTAMP === true ? time() : null;
 		foreach ( $this->build_parser->get_styles() as $handle => $asset ) {
-			wp_register_style( $handle, $asset['uri'], $asset['dependencies'], $asset['version'], $asset['media'] );
+			wp_register_style( $handle, $asset['uri'], $asset['dependencies'], $version ?? $asset['version'], $asset['media'] );
 		}
 	}
 
