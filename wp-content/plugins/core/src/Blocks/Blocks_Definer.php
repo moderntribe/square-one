@@ -20,10 +20,12 @@ class Blocks_Definer implements Definer_Interface {
 			self::TYPES => [
 				DI\get( Types\Accordion::class ),
 				DI\get( Types\Accordion_Section::class ),
+				DI\get( Types\Button::class ),
 			],
 
 			self::CONTROLLER_MAP => [
 				Types\Accordion::NAME => Controllers\Block\Accordion::class,
+				Types\Button::NAME => Controllers\Block\Button::class,
 			],
 
 			/**
