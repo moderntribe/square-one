@@ -30,6 +30,8 @@ class Blocks_Definer implements Definer_Interface {
 			 * An array of core/3rd-party block types that should be unregistered
 			 */
 			self::BLACKLIST      => [
+				'core/buttons',
+				'core/button',
 				'core/rss',
 				'core/social-links',
 				'core/spacer',
