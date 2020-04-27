@@ -1,15 +1,23 @@
-import { unregisterBlockType } from '@wordpress/blocks';
+import { getBlockTypes, unregisterBlockType } from '@wordpress/blocks';
 import { BLOCK_BLACKLIST } from '../config/wp-settings';
 
 /**
  * @function removeBlackListedBlocks
- * @description Takes an array supplied on our config object and unregisters those blocks from Gutenberg
+ * @description Takes an array supplied on our config object and unregisters those blocks from Gutenberg after first
+ * checking that they are registered in the current admin context
  */
 
 const removeBlackListedBlocks = () => {
-	BLOCK_BLACKLIST.map( type => unregisterBlockType( type ) );
+	const registeredBlockTypes = getBlockTypes().map( block => block.name );
+	const blocksToUnregister = BLOCK_BLACKLIST.filter( blockName => registeredBlockTypes.includes( blockName ) );
 
-	console.info( 'SquareOne BE: Unregistered these blocks from Gutenberg: ', BLOCK_BLACKLIST );
+	if ( ! blocksToUnregister.length ) {
+		return;
+	}
+
+	blocksToUnregister.forEach( type => unregisterBlockType( type ) );
+
+	console.info( 'SquareOne BE: Unregistered these blocks from Gutenberg: ', blocksToUnregister );
 };
 
 /**
