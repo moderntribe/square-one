@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name:	Force Plugin Activation/Deactivation (except if WP_DEBUG is on)
+Plugin Name:	Force Plugin Activation/Deactivation
 Plugin URI: 	http://danieldvork.in
 Description:	Make sure the required plugins are always active.
 Version:    	1.0
@@ -11,8 +11,7 @@ Author URI: 	http://danieldvork.in
 class Force_Plugin_Activation {
 
 	/**
-	 * These plugins will always be active (if WP_DEBUG is false)
-	 * and admins (or super) won't be able to deactivate them.
+	 * These plugins will always be active.
 	 *
 	 * Add elements as plugin path: directory/file.php
 	 */
@@ -27,7 +26,8 @@ class Force_Plugin_Activation {
 	);
 
 	/**
-	 * These plugins will be deactivated and can't be activated (if WP_DEBUG is false)
+	 * These plugins will be deactivated and can't
+	 * be activated unless WP_DEBUG is true
 	 *
 	 * Add elements as plugin path: directory/file.php
 	 */
