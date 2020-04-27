@@ -13,6 +13,7 @@ class Accordion extends Block_Type_Config {
 	public const NAME = 'tribe/accordion';
 
 	public const LAYOUT      = 'layout';
+	public const TAGLINE     = 'tagline';
 	public const TITLE       = 'title';
 	public const DESCRIPTION = 'description';
 	public const ACCORDION   = 'accordion';
@@ -25,8 +26,8 @@ class Accordion extends Block_Type_Config {
 			->set_label( 'Accordion' )
 			->set_dashicon( 'menu-alt3' )
 			->add_layout_property( 'grid-template-areas', "'content' 'accordion'" )
-			->add_conditional_layout_property( 'grid-template-areas', "'content accordion accordion'", self::LAYOUT, '==', self::LAYOUT_INLINE )
-			->add_sidebar_section( $this->layout_sidebar() )
+			//->add_conditional_layout_property( 'grid-template-areas', "'content accordion accordion'", self::LAYOUT, '==', self::LAYOUT_INLINE )
+			//->add_sidebar_section( $this->layout_sidebar() )
 			->add_content_section( $this->content_area() )
 			->add_content_section( $this->accordions_area() )
 			->build();
@@ -49,12 +50,20 @@ class Accordion extends Block_Type_Config {
 		return $this->factory->content()->section()
 			->set_layout_property( 'grid-area', 'content' )
 			->add_field(
+				$this->factory->content()->field()->text( self::TAGLINE )
+					->set_label( __( 'Tagline', 'tribe' ) )
+					->set_placeholder( __( 'Enter a short tagline', 'tribe' ) )
+					->build()
+			)
+			->add_field(
 				$this->factory->content()->field()->text( self::TITLE )
+					->set_label( __( 'Title', 'tribe' ) )
 					->add_class( 'h2' )
 					->build()
 			)
 			->add_field(
 				$this->factory->content()->field()->richtext( self::DESCRIPTION )
+					->set_label( __( 'Description', 'tribe' ) )
 					->build()
 			)
 			->build();

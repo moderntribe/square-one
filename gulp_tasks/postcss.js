@@ -5,10 +5,11 @@ const rename = require( 'gulp-rename' );
 const gulpif = require( 'gulp-if' );
 const concat = require( 'gulp-concat' );
 const browserSync = require( 'browser-sync' );
+const PrefixWrap = require( 'postcss-prefixwrap' );
 const postcssFunctions = require( '../dev_components/theme/pcss/functions' );
 const pkg = require( '../package.json' );
 
-const compilePlugins = [
+const sharedPlugins = [
 	require( 'postcss-import-ext-glob' )( {
 		sort: 'asc',
 	} ),
@@ -28,8 +29,18 @@ const compilePlugins = [
 	require( 'postcss-inline-svg' ),
 	require( 'postcss-preset-env' )( { stage: 0, autoprefixer: { grid: true } } ),
 	require( 'postcss-calc' ),
-	require( 'postcss-assets' )( { loadPaths: [ `${ pkg.square1.paths.core_theme }/` ] } ),
 ];
+
+const compilePlugins = sharedPlugins.concat( [
+	require( 'postcss-assets' )( { loadPaths: [ `${ pkg.square1.paths.core_theme }/` ] } ),
+] );
+
+const compileGutenbergPlugins = sharedPlugins.concat( [
+	PrefixWrap( '.block-editor-block-list__layout', {
+		prefixRootTags: false,
+	} ),
+	require( 'postcss-assets' )( { loadPaths: [ `${ pkg.square1.paths.core_theme }/` ] } ),
+] );
 
 const legacyPlugins = [
 	require( 'postcss-partial-import' )( {
@@ -98,24 +109,33 @@ module.exports = {
 			plugins: legacyPlugins,
 		} );
 	},
-	themeWPEditor() {
-		return cssProcess( {
-			src: [
-				`${ pkg.square1.paths.core_admin_pcss }editor-style.pcss`,
-			],
-		} );
-	},
-	themeWPLogin() {
-		return cssProcess( {
-			src: [
-				`${ pkg.square1.paths.core_admin_pcss }login.pcss`,
-			],
-		} );
-	},
-	themeWPAdmin() {
+	admin() {
 		return cssProcess( {
 			src: [
 				`${ pkg.square1.paths.core_admin_pcss }master.pcss`,
+			],
+		} );
+	},
+	adminBlockEditor() {
+		return cssProcess( {
+			src: [
+				`${ pkg.square1.paths.core_admin_pcss }block-editor.pcss`,
+			],
+			dest: pkg.square1.paths.core_admin_css,
+			plugins: compileGutenbergPlugins,
+		} );
+	},
+	adminMCEEditor() {
+		return cssProcess( {
+			src: [
+				`${ pkg.square1.paths.core_admin_pcss }mce-editor.pcss`,
+			],
+		} );
+	},
+	adminLogin() {
+		return cssProcess( {
+			src: [
+				`${ pkg.square1.paths.core_admin_pcss }login.pcss`,
 			],
 		} );
 	},

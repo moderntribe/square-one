@@ -28,17 +28,22 @@ module.exports = {
 			`${ pkg.square1.paths.core_theme_css }legacy.css`,
 		], pkg.square1.paths.core_theme_css_dist );
 	},
-	themeWPEditorMin() {
-		return minify( [
-			`${ pkg.square1.paths.core_admin_css }editor-style.css`,
-		] );
-	},
-	themeWPAdminMin() {
+	adminMin() {
 		return minify( [
 			`${ pkg.square1.paths.core_admin_css }master.css`,
 		] );
 	},
-	themeWPLoginMin() {
+	adminBlockEditorMin() {
+		return minify( [
+			`${ pkg.square1.paths.core_admin_css }block-editor.css`,
+		], pkg.square1.paths.core_admin_css_dist );
+	},
+	adminMCEEditorMin() {
+		return minify( [
+			`${ pkg.square1.paths.core_admin_css }mce-editor.css`,
+		] );
+	},
+	adminLoginMin() {
 		return minify( [
 			`${ pkg.square1.paths.core_admin_css }login.css`,
 		] );

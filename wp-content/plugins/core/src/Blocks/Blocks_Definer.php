@@ -13,6 +13,7 @@ use Tribe\Project\Templates\Controllers;
 class Blocks_Definer implements Definer_Interface {
 	public const TYPES          = 'blocks.types';
 	public const CONTROLLER_MAP = 'blocks.controller_map';
+	public const BLACKLIST      = 'blocks.blacklist';
 
 	public function define(): array {
 		return [
@@ -27,8 +28,20 @@ class Blocks_Definer implements Definer_Interface {
 				Types\Hero::NAME => Controllers\Block\Hero::class,
 			],
 
+			/**
+			 * An array of core/3rd-party block types that should be unregistered
+			 */
+			self::BLACKLIST      => [
+				'core/rss',
+				'core/social-links',
+				'core/spacer',
+			],
+
 			Render_Filter::class => DI\create()
 				->constructor( DI\get( Component_Factory::class ), DI\get( self::CONTROLLER_MAP ) ),
+
+			Allowed_Blocks::class => DI\create()
+				->constructor( DI\get( self::BLACKLIST ) ),
 
 			\Tribe\Gutenpanels\Builder\Block_Builder::class             => DI\get( Block_Builder::class ),
 			\Tribe\Gutenpanels\Builder\Factories\Builder_Factory::class => DI\get( Builder_Factory::class ),

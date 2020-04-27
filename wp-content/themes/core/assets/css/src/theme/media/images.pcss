@@ -8,14 +8,10 @@ img {
 	margin-left: auto;
 	margin-right: auto;
 
-	.t-content & {
+	.t-sink & {
 		line-height: 0;
 		height: auto;
 		display: block;
-
-		/* Messes with WP editor image resizing
-		and don't think it's needed
-		width: auto; */
 	}
 }
 
@@ -23,6 +19,7 @@ img {
  * Media: Wrapper
  * ----------------------------------------------------------------------------- */
 
+.wp-block-image,
 .wp-image {
 	width: auto !important;
 	max-width: none;
@@ -41,39 +38,39 @@ img {
  * Media: Image Captions
  * ----------------------------------------------------------------------------- */
 
+figcaption,
 .wp-caption-text {
+	@mixin t-caption;
+
 	max-width: 100%;
-	margin: var(--spacer-xs) 0 0;
-	font-size: 14px;
-	line-height: var(--line-height-s);
+	padding-top: var(--spacer-20);
+	padding-bottom: var(--spacer-40);
+	border-bottom: 1px solid var(--color-border);
+
+	.alignfull &,
+	.alignwide &,
+	.aligncenter &,
+	.alignnone & {
+		text-align: center;
+	}
 }
 
 /* -----------------------------------------------------------------------------
  * Media: Alignments
  * ----------------------------------------------------------------------------- */
 
-.aligncenter,
-.alignnone {
-	margin-top: var(--spacer-lg);
-	margin-bottom: var(--spacer-lg);
+.aligncenter {
+	max-width: var(--grid-width-staggered-double);
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .alignleft,
 .alignright {
-	margin-top: var(--spacer-lg);
-	margin-bottom: var(--spacer-lg);
-
 	@media (--viewport-medium) {
-		margin-top: 5px;
-		margin-bottom: var(--spacer-lg);
-		max-width: 30%;
+		max-width: var(--grid-5-col);
 	}
 
-	/**
-	 * CASE: Left or right aligned captioned images shouldn't be centered inside the container.
-	 * This can cause a misalignment between the image and the caption text if the image container is smaller
-	 * than the content width. Example: http://p.tri.be/WkGgci/517uZybJ
-	 */
 	&.wp-image--caption {
 
 		img {
@@ -86,13 +83,13 @@ img {
 .alignleft {
 	@media (--viewport-medium) {
 		float: left;
-		margin-right: var(--spacer-lg);
+		margin-right: var(--grid-gutter);
 	}
 }
 
 .alignright {
 	@media (--viewport-medium) {
 		float: right;
-		margin-left: var(--spacer-lg);
+		margin-left: var(--grid-gutter);
 	}
 }

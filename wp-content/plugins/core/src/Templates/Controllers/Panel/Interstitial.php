@@ -136,11 +136,11 @@ class Interstitial extends Panel {
 		$classes = [];
 
 		if ( Interstice::FIELD_TEXT_LIGHT === $panel_vars[ Interstice::FIELD_TEXT_COLOR ] ) {
-			$classes[] = 't-content--light';
+			$classes[] = 't-theme--light';
 		}
 
 		if ( Interstice::FIELD_TEXT_DARK === $panel_vars[ Interstice::FIELD_TEXT_COLOR ] ) {
-			$classes[] = 't-content--dark';
+			$classes[] = 't-theme--dark';
 		}
 
 		return $classes;

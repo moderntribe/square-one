@@ -1,0 +1,175 @@
+/* -------------------------------------------------------------------------
+ *
+ * Vertical Spacing: "Kitchen Sink"
+ *
+ * Generally Applicable to WYSIWYG containers, the kitchen sink applies
+ * vertical spacing to all typography & media elements at once.
+ *
+ * This class should be used as sparingly as possible.
+ *
+ * ------------------------------------------------------------------------- */
+
+.s-sink {
+	/* -----------------------------------------------------------------------------
+	 * First & last element overrides
+	 * ----------------------------------------------------------------------------- */
+
+	& > {
+		/* CASE: remove top margin from first element */
+		*:first-child {
+			margin-top: 0;
+		}
+
+		/* CASE: remove bottom margin from bottom element */
+		*:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	/* -----------------------------------------------------------------------------
+	 * Headings
+	 * ----------------------------------------------------------------------------- */
+
+	h1,
+	.h1,
+	h2,
+	.h2,
+	h3,
+	.h3,
+	h4,
+	.h4,
+	h5,
+	.h5,
+	h6,
+	.h6 {
+		margin-top: var(--spacer-60);
+		margin-bottom: var(--spacer-20);
+	}
+
+	/* -----------------------------------------------------------------------------
+	 * Horizontal Rule
+	 * ----------------------------------------------------------------------------- */
+
+	hr {
+		margin-top: var(--spacer-60);
+		margin-bottom: var(--spacer-60);
+	}
+
+	/* -------------------------------------------------------------------------
+	 * Lists
+	 * ------------------------------------------------------------------------- */
+
+	/* Shared */
+	ul,
+	.list-bullet,
+	ol,
+	.list-number,
+	dl,
+	.dl {
+		margin-top: var(--spacer-40);
+		margin-bottom: var(--spacer-40);
+	}
+
+	/* List Item */
+	li {
+
+		& ~ li {
+			margin-top: var(--spacer-20);
+		}
+	}
+
+	/* Definition */
+	dd,
+	.dd {
+		margin-bottom: var(--spacer-40);
+	}
+
+	/* -----------------------------------------------------------------------------
+	 * Paragraph
+	 * ----------------------------------------------------------------------------- */
+
+	p {
+		margin-bottom: var(--spacer-40);
+	}
+
+	/* -----------------------------------------------------------------------------
+	 * Quote & Blockquote
+	 * ----------------------------------------------------------------------------- */
+
+	/* Shared */
+	blockquote,
+	.blockquote,
+	q,
+	.quote {
+		margin: var(--spacer-60) auto;
+	}
+
+	/* q */
+	q,
+	.quote {}
+
+	/* blockquote */
+	blockquote,
+	.blockquote {
+
+		p {
+			margin: 0 auto;
+
+			& ~ p {
+				margin-top: var(--spacer-40);
+			}
+		}
+	}
+
+	/* cite */
+	cite,
+	.cite {
+		display: block;
+		margin-top: var(--spacer-10);
+	}
+
+	/* -----------------------------------------------------------------------------
+	 * Table
+	 * ----------------------------------------------------------------------------- */
+
+	table,
+	.table {
+		margin: var(--spacer-60) auto;
+	}
+
+	/* -----------------------------------------------------------------------------
+	 * Overline
+	 *
+	 * Overrides default selector spacing.
+	 * ----------------------------------------------------------------------------- */
+
+	.t-overline {
+		margin-bottom: var(--spacer-20);
+
+		& + * {
+			margin-top: var(--spacer-20);
+		}
+	}
+
+	/* -----------------------------------------------------------------------------
+	 * Media: Alignments
+	 * ----------------------------------------------------------------------------- */
+
+	.alignfull,
+	.alignwide,
+	.aligncenter,
+	.alignnone {
+		margin-top: var(--spacer-60);
+		margin-bottom: var(--spacer-60);
+	}
+
+	.alignleft,
+	.alignright {
+		margin-top: var(--spacer-40);
+		margin-bottom: var(--spacer-40);
+
+		@media (--viewport-medium) {
+			margin-top: 5px;
+		}
+	}
+}

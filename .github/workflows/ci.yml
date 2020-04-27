@@ -39,7 +39,7 @@ jobs:
           php -r "file_exists( 'local-config.php' ) || copy( 'local-config-sample.php', 'local-config.php' );"
           php -r "file_exists( 'local-config.json' ) || copy( 'local-config-sample.json', 'local-config.json' );"
           php -r "file_exists( 'dev/tests/.env' ) || copy( 'dev/tests/.env-dist', 'dev/tests/.env' );"
-          echo "define( 'TWIG_CACHE_DIR', '/tmp/cache' );" >> local-config.php
+          echo "define( 'TWIG_CACHE', false );" >> local-config.php
           echo "define( 'TRIBE_GLOMAR', false );" >> local-config.php
           echo "define( 'FORCE_SSL_LOGIN', false );" >> local-config.php
           echo "define( 'FORCE_SSL_ADMIN', false );" >> local-config.php
@@ -94,6 +94,11 @@ jobs:
         run: |
           mysql -h 127.0.0.1 -uroot -ppassword -e "CREATE DATABASE tribe_square1_tests;"
           mysql -h 127.0.0.1 -uroot -ppassword -e "CREATE DATABASE tribe_square1_acceptance;"
+
+      - name: Create cache dir
+        run: |
+          mkdir -p ${{ github.workspace }}/cache/
+          chmod -R 777 ${{ github.workspace }}/cache/
 
       - name: Run unit tests
         run: docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests php /application/www/vendor/bin/codecept --config "/application/www/dev/tests" run unit

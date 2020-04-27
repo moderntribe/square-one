@@ -2,6 +2,10 @@
  *
  * Typography: Tables
  *
+ * @TODO: Update per new designs (TBD).
+ * @TODO: responsive tables.
+ * @TODO: Add theme overrides for BG colors.
+ *
  * ----------------------------------------------------------------------------- */
 
 /* -----------------------------------------------------------------------------
@@ -9,9 +13,8 @@
  * ----------------------------------------------------------------------------- */
 
 .table,
-.t-content table {
-	font-size: var(--font-size-content-s);
-	margin: var(--spacer) auto;
+.t-sink table {
+	font-size: var(--font-size-body-small);
 	border: 1px solid var(--color-grey);
 	text-align: left;
 	border-collapse: collapse;
@@ -19,7 +22,7 @@
 	table-layout: fixed;
 
 	@media (--viewport-medium) {
-		font-size: var(--font-size-content);
+		font-size: var(--font-size-body);
 		table-layout: auto;
 	}
 }
@@ -31,8 +34,8 @@
 .th,
 .t-content th {
 	padding: 14px 1em 12px;
-	font-weight: var(--font-weight-semibold);
-	line-height: var(--line-height-even);
+	font-weight: 700;
+	line-height: 1;
 
 	& ~ th {
 		border-left: 1px solid var(--color-grey);

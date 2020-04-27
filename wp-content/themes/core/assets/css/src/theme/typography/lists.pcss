@@ -5,84 +5,117 @@
  * ----------------------------------------------------------------------------- */
 
 /* -------------------------------------------------------------------------
- * Global Lists
+ * Lists Shared
  * ------------------------------------------------------------------------- */
 
+.t-list,
 ul,
 ol,
 dl {
 
-	.t-content & {
-		@mixin body-content;
-
-		margin-top: var(--spacer);
-		margin-bottom: var(--spacer);
+	.t-sink & {
+		@mixin t-body;
 	}
 }
 
-li {
+/* -------------------------------------------------------------------------
+ * List Item
+ * ------------------------------------------------------------------------- */
 
-	& ~ li {
+li {}
 
-		.t-content & {
-			margin-top: var(--spacer-xs);
+/* -------------------------------------------------------------------------
+ * Unordered List
+ * ------------------------------------------------------------------------- */
+
+.t-list--bullets,
+.t-sink ul {
+	list-style: disc outside;
+	padding-left: 1.5em;
+}
+
+/* -------------------------------------------------------------------------
+ * Unordered List: Stylized
+ * ------------------------------------------------------------------------- */
+
+.t-list--bullets-stylized,
+.t-sink ul.t-list--bullets-stylized {
+	list-style: none;
+	padding-left: 0;
+
+	li {
+		position: relative;
+		padding-left: var(--spacer-40);
+
+		&:before {
+			@mixin icon;
+
+			content: var(--icon-bullet-round);
+			position: absolute;
+			left: 0;
+			font-size: var(--font-size-body-large);
+			line-height: 2rem; /* list item line-height */
 		}
 	}
 }
 
 /* -------------------------------------------------------------------------
- * UL
+ * Ordered List
  * ------------------------------------------------------------------------- */
 
-.list-bullet,
-.t-content ul {
-	list-style: disc outside;
-	padding-left: 1.5em;
-	padding-right: 0;
-
-	@media (--viewport-medium) {
-		padding-left: 3em;
-		padding-right: 3em;
-	}
-}
-
-/* -------------------------------------------------------------------------
- * OL
- * ------------------------------------------------------------------------- */
-
-.list-number,
-.t-content ol {
+.t-list--numbered,
+.t-sink ol {
 	list-style: decimal outside;
 	padding-left: 1.5em;
-	padding-right: 0;
+}
 
-	@media (--viewport-medium) {
-		padding-left: 3em;
-		padding-right: 3em;
+/* -------------------------------------------------------------------------
+ * Ordered List: Stylized
+ * ------------------------------------------------------------------------- */
+
+.t-list--numbered-stylized,
+.t-sink ol.t-list--numbered-stylized {
+	list-style: none;
+	padding-left: 0;
+	counter-reset: list-number;
+
+	li {
+		position: relative;
+		padding-left: var(--spacer-40);
+		counter-increment: list-number;
+
+		&:before {
+			@mixin t-label;
+
+			content: counter(list-number);
+			position: absolute;
+			left: 0;
+			font-weight: 700;
+			line-height: 2rem; /* list item line-height */
+			color: var(--color-primary);
+		}
 	}
 }
 
 /* -------------------------------------------------------------------------
- * DL
+ * Definition List
  * ------------------------------------------------------------------------- */
 
 .dl,
-.t-content dl {
-	padding-left: 1.5em;
-	padding-right: 0;
+.t-sink dl {}
 
-	@media (--viewport-medium) {
-		padding-left: 3em;
-		padding-right: 3em;
-	}
-}
+/* -------------------------------------------------------------------------
+ * Definition List: Term
+ * ------------------------------------------------------------------------- */
 
 .dt,
-.t-content dt {
-	font-weight: var(--font-weight-bold);
+.t-sink dt {
+	font-weight: 700;
 }
 
+/* -------------------------------------------------------------------------
+ * Definition List: Definition
+ * ------------------------------------------------------------------------- */
+
 .dd,
-.t-content dd {
-	margin-bottom: var(--spacer);
-}
+.t-sink dd {}

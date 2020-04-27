@@ -5,28 +5,12 @@
  * ----------------------------------------------------------------------------- */
 
 /* -----------------------------------------------------------------------------
- * Global Quotes & Blockquotes
- * ----------------------------------------------------------------------------- */
-
-.blockquote,
-blockquote,
-.quote,
-q {
-
-	.t-content & {
-		margin: var(--spacer) auto;
-	}
-}
-
-/* -----------------------------------------------------------------------------
  * Quotes
  * ----------------------------------------------------------------------------- */
 
-/* q */
 .quote,
-.t-content q {
-	@mixin quote-base;
-	@mixin quote-text;
+.t-sink q {
+	@mixin t-quote;
 
 	display: block;
 }
@@ -35,19 +19,11 @@ q {
  * Blockquotes
  * ----------------------------------------------------------------------------- */
 
-/* blockquote */
 .blockquote,
-.t-content blockquote {
-	@mixin quote-base;
+.t-sink blockquote {
 
 	p {
-		@mixin quote-text;
-
-		margin: 0 auto;
-
-		& ~ p {
-			margin-top: var(--spacer);
-		}
+		@mixin t-quote;
 	}
 }
 
@@ -55,9 +31,10 @@ q {
  * Cite
  * ----------------------------------------------------------------------------- */
 
-/* cite */
 .cite,
-.t-content cite {
+.t-sink cite {
+	@mixin t-overline;
+
 	font-style: normal;
-	display: block;
+	color: var(--color-grey);
 }
