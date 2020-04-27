@@ -183,7 +183,7 @@
 			<div class="form-field-group">
 				<label class="form-control-label" for="select">Default Select</label>
 				<select id="select" name="select">
-					<option value="" class="form-control-select-placeholder" hidden="" disabled="disabled" selected="selected">Select an option</option>
+					<option value="" hidden="" disabled="disabled" selected="selected">Select an option</option>
 					<option value="1">Option One</option>
 					<option value="2">Option Two</option>
 					<option value="3">Option Three</option>
@@ -195,7 +195,7 @@
 				<label class="form-control-label" for="select2">Custom Select</label>
 				<div class="form-control-select">
 					<select id="select2" name="select2">
-						<option value="" hidden="" disabled="disabled" selected="selected">Select an option</option>
+						<option value="" class="form-control-select-placeholder" hidden="" disabled="disabled" selected="selected">Select an option</option>
 						<option value="1">Option One</option>
 						<option value="2">Option Twp</option>
 						<option value="3">Option Three</option>
@@ -206,4 +206,17 @@
 		</form>
 
 	</div>
+
+	{% if post.content %}
+		<div class="l-container">
+			{{ post.featured_image }}
+
+			<div class="t-sink s-sink l-container__stagger-double">
+				{{ post.content }}
+			</div>
+		</div>
+	{% endif %}
+
+	{{ do_action( 'the_panels' ) }}
+
 </div>
