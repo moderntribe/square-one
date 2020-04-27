@@ -54,6 +54,14 @@ class Blocks_Definer implements Definer_Interface {
 						],
 					] );
 				} ),
+				DI\factory( static function () {
+					return new Block_Style_Override( [ 'core/paragraph' ], [
+						[
+							'name'  => 't-body-large',
+							'label' => __( 'Lead-In', 'tribe' ),
+						],
+					] );
+				} ),
 			] ),
 
 			Render_Filter::class => DI\create()
