@@ -100,7 +100,7 @@ class Web_Fonts {
 	}
 
 	/**
-	 * Returns a fully-qualified Typekit font kit URL from the Project ID value.
+	 * Returns a fully-qualified Google Fonts URL from an array of font keys.
 	 *
 	 * @return string
 	 */
