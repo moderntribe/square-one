@@ -14,19 +14,20 @@ class Blocks_Definer implements Definer_Interface {
 	public const TYPES          = 'blocks.types';
 	public const CONTROLLER_MAP = 'blocks.controller_map';
 	public const BLACKLIST      = 'blocks.blacklist';
+	public const STYLES         = 'blocks.style_overrides';
 
 	public function define(): array {
 		return [
-			self::TYPES => [
+			self::TYPES => DI\add( [
 				DI\get( Types\Accordion::class ),
 				DI\get( Types\Accordion_Section::class ),
 				DI\get( Types\Button::class ),
-			],
+			] ),
 
-			self::CONTROLLER_MAP => [
+			self::CONTROLLER_MAP => DI\add( [
 				Types\Accordion::NAME => Controllers\Block\Accordion::class,
-				Types\Button::NAME => Controllers\Block\Button::class,
-			],
+				Types\Button::NAME    => Controllers\Block\Button::class,
+			] ),
 
 			/**
 			 * An array of core/3rd-party block types that should be unregistered
@@ -38,6 +39,22 @@ class Blocks_Definer implements Definer_Interface {
 				'core/social-links',
 				'core/spacer',
 			],
+
+			/**
+			 * An array of block type style overrides
+			 *
+			 * Each item in the array should be a factory that returns a Block_Style_Override
+			 */
+			self::STYLES         => DI\add( [
+				DI\factory( static function () {
+					return new Block_Style_Override( [ 'core/heading', 'core/paragraph' ], [
+						[
+							'name'  => 't-overline',
+							'label' => __( 'Overline', 'tribe' ),
+						],
+					] );
+				} ),
+			] ),
 
 			Render_Filter::class => DI\create()
 				->constructor( DI\get( Component_Factory::class ), DI\get( self::CONTROLLER_MAP ) ),
