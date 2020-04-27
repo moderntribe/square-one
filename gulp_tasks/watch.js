@@ -49,21 +49,28 @@ module.exports = {
 
 		gulp.watch( [
 			`${ pkg.square1.paths.core_admin_pcss }login.pcss`,
-		], gulp.parallel( 'postcss:themeWPLogin' ) );
+		], gulp.parallel( 'postcss:adminLogin' ) );
 
-		// watch the editor styles postcss
+		// watch the mce editor styles postcss
 
 		gulp.watch( [
-			`${ pkg.square1.paths.core_admin_pcss }editor-style.pcss`,
-		], gulp.parallel( 'postcss:themeWPEditor' ) );
+			`${ pkg.square1.paths.core_admin_pcss }mce-editor.pcss`,
+		], gulp.parallel( 'postcss:adminMCEEditor' ) );
+
+		// watch the block editor styles postcss
+
+		gulp.watch( [
+			`${ pkg.square1.paths.core_admin_pcss }block-editor.pcss`,
+		], gulp.parallel( 'postcss:adminBlockEditor' ) );
 
 		// watch the admin styles postcss
 
 		gulp.watch( [
 			`${ pkg.square1.paths.core_admin_pcss }**/*.pcss`,
-			`!${ pkg.square1.paths.core_admin_pcss }editor-style.pcss`,
+			`!${ pkg.square1.paths.core_admin_pcss }mce-editor.pcss`,
+			`!${ pkg.square1.paths.core_admin_pcss }block-editor.pcss`,
 			`!${ pkg.square1.paths.core_admin_pcss }login.pcss`,
-		], gulp.parallel( 'postcss:themeWPAdmin' ) );
+		], gulp.parallel( 'postcss:admin' ) );
 
 		// watch php and twig
 
@@ -83,7 +90,11 @@ module.exports = {
 			.pipe( gulp.dest( pkg.square1.paths.core_admin_js_dist ) );
 	},
 	watchThemeJS() {
-		gulp.src( `${ pkg.square1.paths.core_theme_js_src }**/*.js` )
+		gulp.src( [
+			`${ pkg.square1.paths.core_theme_js_src }**/*.js`,
+			`${ pkg.square1.paths.core_theme_components }**/*.js`,
+			`${ pkg.square1.paths.core_theme_integrations }**/*.js`,
+		] )
 			.pipe( webpackStream( merge( webpackThemeDevConfig, watchConfig ), webpack, function( err, stats ) {
 				console.log( stats.toString( { colors: true } ) );
 				maybeReloadBrowserSync();
