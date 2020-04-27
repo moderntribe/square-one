@@ -29,7 +29,7 @@ class Theme_Subscriber extends Abstract_Subscriber {
 		$this->image_wrap();
 		$this->image_links();
 		$this->disable_responsive_images();
-		$this->oembed();
+		//$this->oembed();
 		// $this->full_size_gif(); // Uncomment to require full size gifs
 	}
 

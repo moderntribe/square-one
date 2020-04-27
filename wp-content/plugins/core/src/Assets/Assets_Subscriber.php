@@ -23,6 +23,7 @@ class Assets_Subscriber extends Abstract_Subscriber {
 		add_action( 'wp_enqueue_scripts', function () {
 			$this->container->get( Theme\Scripts::class )->enqueue_scripts();
 			$this->container->get( Theme\Styles::class )->enqueue_styles();
+			$this->container->get( Theme\Styles::class )->dequeue_block_styles();
 		}, 10, 0 );
 
 		add_action( 'wp_head', function () {
