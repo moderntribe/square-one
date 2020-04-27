@@ -106,25 +106,39 @@ class Theme_Definer implements Definer_Interface {
 				] ),
 
 			/**
-			 * The TypeKit kit ID
+			 * @var string A valid TypeKit (Adobe Fonts) Project ID.
+			 *
+			 * Example: `zbo7iia`
 			 */
 			self::CONFIG_TYPEKIT_ID => '',
 
 			/**
-			 * Define the Google font families to load
+			 * @var array A collection of Google Font families to load.
+			 *
+			 * Any combination of valid Google font family declarations is acceptable.
+			 *
+			 * Example: `[ 'Tangerine', 'Cantarell:italic', 'Droid+Serif:b' ]`
+			 *
+			 * @link https://developers.google.com/fonts/docs/getting_started
 			 */
 			self::CONFIG_GOOGLE_FONTS => [],
 
 			/**
-			 * Define the custom font families to load
+			 * @var string CSS file URL.
+			 *
+			 * A complete URL to a css file containing custom @font-face definitions.
+			 * Useful for other 3rd-party web font providers such as fonts.com.
+			 *
+			 * Example: `'https://fast.fonts.net/cssapi/e6dc9b99-64fe-4292-ad98-6974f93cd2a2.css'`
+			 *
 			 */
-			self::CONFIG_CUSTOM_FONTS => [],
+			self::CONFIG_CUSTOM_FONTS => '',
 
 			Web_Fonts::class => DI\create()
 				->constructor( DI\get( Core::PLUGIN_FILE ), [
-					Web_Fonts::TYPEKIT_ID => DI\get( self::CONFIG_TYPEKIT_ID ),
-					Web_Fonts::GOOGLE     => DI\get( self::CONFIG_GOOGLE_FONTS ),
-					Web_Fonts::CUSTOM     => DI\get( self::CONFIG_CUSTOM_FONTS ),
+					Web_Fonts::PROVIDER_TYPEKIT => DI\get( self::CONFIG_TYPEKIT_ID ),
+					Web_Fonts::PROVIDER_GOOGLE  => DI\get( self::CONFIG_GOOGLE_FONTS ),
+					Web_Fonts::PROVIDER_CUSTOM  => DI\get( self::CONFIG_CUSTOM_FONTS ),
 				] ),
 		];
 	}
