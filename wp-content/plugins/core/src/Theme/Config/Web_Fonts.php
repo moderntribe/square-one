@@ -5,10 +5,11 @@ namespace Tribe\Project\Theme\Config;
 
 
 class Web_Fonts {
-	public const TYPEKIT_ID = 'typekit';
-	public const GOOGLE     = 'google';
-	public const CUSTOM     = 'custom';
-
+	public const  PROVIDER_TYPEKIT = 'typekit';
+	public const  PROVIDER_GOOGLE  = 'google';
+	public const  PROVIDER_CUSTOM  = 'custom';
+	private const TYPEKIT_API      = 'https://use.typekit.net';
+	private const GOOGLE_API       = 'https://fonts.googleapis.com';
 
 	/**
 	 * @var string
@@ -20,115 +21,94 @@ class Web_Fonts {
 	 */
 	private $fonts;
 
+	/**
+	 * @var array
+	 */
+	private $font_urls = [];
+
 	public function __construct( string $plugin_file, array $fonts = [] ) {
 		$this->plugin_file = $plugin_file;
 		$this->fonts       = $fonts;
+		$this->set_font_urls();
 	}
 
 	/**
-	 * Add Typekit to Editor
+	 * Enqueue any required web fonts
 	 *
-	 * @filter mce_external_plugins
+	 * @action wp_enqueue_scripts
+	 * @action login_enqueue_scripts
 	 */
-	public function add_typekit_to_editor( $plugins ) {
-		if ( ! empty( $this->fonts[ self::TYPEKIT_ID ] ) ) {
-			$plugins[ self::TYPEKIT_ID ] = plugins_url( 'assets/admin/editor/typekit.tinymce.js', $this->plugin_file );
+	public function enqueue_fonts() {
+		foreach ( $this->font_urls as $provider => $url ) {
+			wp_enqueue_style( $provider, $url, [], null, 'all' );
 		}
-
-		return $plugins;
 	}
 
 	/**
-	 * Localize Typekit TinyMCE
+	 * Unsupported Browser Page Fonts.
 	 *
-	 * @filter admin_head
+	 * @action tribe/unsupported_browser/head
 	 */
-	public function localize_typekit_tinymce() {
-		if ( empty( $this->fonts[ self::TYPEKIT_ID ] ) ) {
-			return;
+	public function inject_unsupported_browser_fonts() {
+		foreach ( $this->font_urls as $url ) {
+			printf( "<link rel='stylesheet' href='%s' type='text/css' media='all'>\n\t", esc_url( $url ) );
 		}
-
-		printf( '<script type="text/javascript">var tinymce_typekit_id = \'%s\';</script>', $this->fonts[ self::TYPEKIT_ID ] );
 	}
 
 	/**
-	 * Add any required fonts
+	 * Visual Editor Fonts
 	 *
-	 * @action wp_head
-	 * @action login_head
+	 * @action after_setup_theme
 	 */
-	public function load_fonts() {
-
-		if ( empty( $this->fonts[ self::TYPEKIT_ID ] ) && empty( $this->fonts[ self::GOOGLE ] ) && empty( $this->fonts[ self::CUSTOM ] ) ) {
-			return;
+	public function add_visual_editor_fonts() {
+		foreach( $this->font_urls as $url ) {
+			add_editor_style( $url );
 		}
-
-		?>
-
-		<script>
-			var modern_tribe = window.modern_tribe || {};
-			modern_tribe.fonts = {
-				state:  {
-					loading: true,
-					active:  false
-				},
-				events: {
-					trigger: function (event_type, event_data, el) {
-						var event;
-						try {
-							event = new CustomEvent(event_type, { detail: event_data });
-						} catch (e) {
-							event = document.createEvent('CustomEvent');
-							event.initCustomEvent(event_type, true, true, event_data);
-						}
-						el.dispatchEvent(event);
-					}
-				}
-			};
-			var WebFontConfig = {
-				<?php if ( ! empty( $this->fonts[ self::TYPEKIT_ID ] ) ) { ?>
-				typekit:  {
-					id: '<?php echo $this->fonts[ self::TYPEKIT_ID ]; ?>'
-				},
-				<?php } ?>
-				<?php if ( ! empty( $this->fonts[ self::GOOGLE ] ) ) { ?>
-				google:   {
-					families: <?php echo json_encode( $this->fonts[ self::GOOGLE ] ); ?>
-				},
-				<?php } ?>
-				<?php if ( ! empty( $this->fonts[ self::CUSTOM ] ) ) { ?>
-				custom:   {
-					families: <?php echo json_encode( $this->fonts[ self::CUSTOM ] ); ?>
-				},
-				<?php } ?>
-				loading:  function () {
-					modern_tribe.fonts.state.loading = true;
-					modern_tribe.fonts.state.active = false;
-					modern_tribe.fonts.events.trigger('modern_tribe/fonts_loading', {}, document);
-				},
-				active:   function () {
-					modern_tribe.fonts.state.loading = false;
-					modern_tribe.fonts.state.active = true;
-					modern_tribe.fonts.events.trigger('modern_tribe/fonts_loaded', {}, document);
-				},
-				inactive: function () {
-					modern_tribe.fonts.state.loading = false;
-					modern_tribe.fonts.state.active = false;
-					modern_tribe.fonts.events.trigger('modern_tribe/fonts_failed', {}, document);
-				}
-			};
-			(function (d) {
-				var wf = d.createElement('script'), s = d.scripts[0];
-				wf.src = '<?php echo $this->get_webfont_src(); ?>';
-				s.parentNode.insertBefore(wf, s);
-			})(document);
-		</script>
-
-		<?php
-
 	}
 
-	private function get_webfont_src() {
-		return trailingslashit( get_stylesheet_directory_uri() ) . 'assets/js/vendor/webfontloader.js';
+	/**
+	 * Setup the font URLs array for use throughout.
+	 */
+	private function set_font_urls() {
+		// Typekit
+		if ( ! empty( $this->fonts[ self::PROVIDER_TYPEKIT ] ) ) {
+			$this->font_urls[ self::PROVIDER_TYPEKIT ] = $this->get_typekit_url();
+		}
+
+		// Google
+		if ( ! empty( $this->fonts[ self::PROVIDER_GOOGLE ] ) ) {
+			$this->font_urls[ self::PROVIDER_GOOGLE ] = $this->get_google_url();
+		}
+
+		// Custom
+		if ( ! empty( $this->fonts[ self::PROVIDER_CUSTOM ] ) ) {
+			$this->font_urls[ self::PROVIDER_CUSTOM ] = $this->fonts[ self::PROVIDER_CUSTOM ];
+		}
+	}
+
+	/**
+	 * Returns a fully-qualified Typekit font kit URL from the Project ID value.
+	 *
+	 * @return string
+	 */
+	private function get_typekit_url(): string {
+		if ( empty( $this->fonts[ self::PROVIDER_TYPEKIT ] ) ) {
+			return '';
+		}
+
+		return sprintf( '%s%s.css', trailingslashit( self::TYPEKIT_API ), $this->fonts[ self::PROVIDER_TYPEKIT ] );
+	}
+
+	/**
+	 * Returns a fully-qualified Typekit font kit URL from the Project ID value.
+	 *
+	 * @return string
+	 */
+	private function get_google_url() {
+		if ( empty( $this->fonts[ self::PROVIDER_GOOGLE ] ) ) {
+			return '';
+		}
+
+		return sprintf( '%scss?family=%s&display=swap', trailingslashit( self::GOOGLE_API ), implode( '|', $this->fonts[ self::PROVIDER_GOOGLE ] ) );
 	}
 }
