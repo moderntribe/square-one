@@ -47,29 +47,27 @@ class Oembed_Filter {
 			return $html;
 		}
 
-		$container_classes = [ 'c-video--lazy' ];
+		$classes = [ 'c-video--lazy' ];
 
 		if ( $data->provider_name === 'YouTube' ) {
 			$embed_id    = $this->get_youtube_embed_id( $url );
 			$video_thumb = $this->get_youtube_max_resolution_thumbnail( $url );
 
 			if ( strpos( $video_thumb, 'maxresdefault' ) === false ) {
-				$container_classes[] = 'c-video--lazy-low-res';
+				$classes[] = 'c-video--lazy-low-res';
 			}
-
 		} else {
 			$embed_id    = $this->get_vimeo_embed_id( $url );
 			$video_thumb = isset( $data->thumbnail_url ) ? $data->thumbnail_url : '';
 		}
 
 		$options = [
-			Video::THUMBNAIL_URL     => $video_thumb,
-			Video::CONTAINER_ATTRS   => $this->get_layout_container_attrs( $data->provider_name, $embed_id ),
-			Video::CONTAINER_CLASSES => $container_classes,
-			Video::TITLE             => __( 'Play Video', 'tribe' ),
-			Video::VIDEO_URL         => $url,
-			Video::PLAY_TEXT         => $data->title,
-			Video::CAPTION_POSITION  => Video::CAPTION_POSITION_CENTER, // possible options: center, bottom, below
+			Video::THUMBNAIL_URL    => $video_thumb,
+			Video::ATTRS            => $this->get_layout_container_attrs( $data->provider_name, $embed_id, $data->title ),
+			Video::CLASSES          => $classes,
+			Video::VIDEO_URL        => $url,
+			Video::TRIGGER_LABEL    => $data->title,
+			Video::TRIGGER_POSITION => Video::TRIGGER_POSITION_BOTTOM, // Options: bottom, center
 		];
 
 		$frontend_html = $this->component->get( Video::class, $options )->render();
@@ -79,11 +77,12 @@ class Oembed_Filter {
 		return $html;
 	}
 
-	private function get_layout_container_attrs( $provider_name, $embed_id ): array {
+	private function get_layout_container_attrs( $provider_name, $embed_id, $title ): array {
 		return [
 			'data-js'             => 'c-video',
 			'data-embed-id'       => $embed_id,
 			'data-embed-provider' => $provider_name,
+			'data-embed-title'    => $title,
 		];
 	}
 
@@ -98,7 +97,7 @@ class Oembed_Filter {
 			return $html;
 		}
 
-		$cached = get_option( $this->get_cache_key( $url ), '' );
+		$cached = ''; //get_option( $this->get_cache_key( $url ), '' );
 
 		// If cache is empty, try generating new HTML.
 		if ( empty( $cached ) ) {
