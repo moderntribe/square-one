@@ -12,24 +12,12 @@ class Web_Fonts {
 	private const GOOGLE_API       = 'https://fonts.googleapis.com';
 
 	/**
-	 * @var string
-	 */
-	private $plugin_file;
-
-	/**
 	 * @var array
 	 */
 	private $fonts;
 
-	/**
-	 * @var array
-	 */
-	private $font_urls = [];
-
-	public function __construct( string $plugin_file, array $fonts = [] ) {
-		$this->plugin_file = $plugin_file;
+	public function __construct( array $fonts = [] ) {
 		$this->fonts       = $fonts;
-		$this->set_font_urls();
 	}
 
 	/**
@@ -38,8 +26,8 @@ class Web_Fonts {
 	 * @action wp_enqueue_scripts
 	 * @action login_enqueue_scripts
 	 */
-	public function enqueue_fonts() {
-		foreach ( $this->font_urls as $provider => $url ) {
+	public function enqueue_fonts(): void {
+		foreach ( $this->get_font_urls() as $provider => $url ) {
 			wp_enqueue_style( $provider, $url, [], null, 'all' );
 		}
 	}
@@ -49,8 +37,8 @@ class Web_Fonts {
 	 *
 	 * @action tribe/unsupported_browser/head
 	 */
-	public function inject_unsupported_browser_fonts() {
-		foreach ( $this->font_urls as $url ) {
+	public function inject_unsupported_browser_fonts(): void {
+		foreach ( $this->get_font_urls() as $url ) {
 			printf( "<link rel='stylesheet' href='%s' type='text/css' media='all'>\n\t", esc_url( $url ) );
 		}
 	}
@@ -60,8 +48,8 @@ class Web_Fonts {
 	 *
 	 * @action after_setup_theme
 	 */
-	public function add_visual_editor_fonts() {
-		foreach( $this->font_urls as $url ) {
+	public function add_visual_editor_fonts(): void {
+		foreach( $this->get_font_urls() as $url ) {
 			add_editor_style( $url );
 		}
 	}
@@ -69,21 +57,24 @@ class Web_Fonts {
 	/**
 	 * Setup the font URLs array for use throughout.
 	 */
-	private function set_font_urls() {
+	private function get_font_urls(): array {
+		$urls = [];
 		// Typekit
 		if ( ! empty( $this->fonts[ self::PROVIDER_TYPEKIT ] ) ) {
-			$this->font_urls[ self::PROVIDER_TYPEKIT ] = $this->get_typekit_url();
+			$urls[ self::PROVIDER_TYPEKIT ] = $this->get_typekit_url();
 		}
 
 		// Google
 		if ( ! empty( $this->fonts[ self::PROVIDER_GOOGLE ] ) ) {
-			$this->font_urls[ self::PROVIDER_GOOGLE ] = $this->get_google_url();
+			$urls[ self::PROVIDER_GOOGLE ] = $this->get_google_url();
 		}
 
 		// Custom
 		if ( ! empty( $this->fonts[ self::PROVIDER_CUSTOM ] ) ) {
-			$this->font_urls[ self::PROVIDER_CUSTOM ] = $this->fonts[ self::PROVIDER_CUSTOM ];
+			$urls[ self::PROVIDER_CUSTOM ] = $this->fonts[ self::PROVIDER_CUSTOM ];
 		}
+
+		return $urls;
 	}
 
 	/**
@@ -104,7 +95,7 @@ class Web_Fonts {
 	 *
 	 * @return string
 	 */
-	private function get_google_url() {
+	private function get_google_url(): string {
 		if ( empty( $this->fonts[ self::PROVIDER_GOOGLE ] ) ) {
 			return '';
 		}

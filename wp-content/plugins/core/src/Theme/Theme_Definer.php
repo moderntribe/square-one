@@ -135,7 +135,7 @@ class Theme_Definer implements Definer_Interface {
 			self::CONFIG_CUSTOM_FONTS => '',
 
 			Web_Fonts::class => DI\create()
-				->constructor( DI\get( Core::PLUGIN_FILE ), [
+				->constructor( [
 					Web_Fonts::PROVIDER_TYPEKIT => DI\get( self::CONFIG_TYPEKIT_ID ),
 					Web_Fonts::PROVIDER_GOOGLE  => DI\get( self::CONFIG_GOOGLE_FONTS ),
 					Web_Fonts::PROVIDER_CUSTOM  => DI\get( self::CONFIG_CUSTOM_FONTS ),
