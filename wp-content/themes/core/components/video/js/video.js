@@ -99,6 +99,7 @@ const playEmbed = ( e ) => {
 	iframe.height = 720;
 	iframe.tabIndex = 0;
 	iframe.allow = 'autoplay; fullscreen';
+	iframe.title = parent.getAttribute( 'data-embed-title' );
 
 	// Add & kickoff embed
 	parent.classList.add( 'c-video--is-playing' );
