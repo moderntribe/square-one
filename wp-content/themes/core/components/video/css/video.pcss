@@ -3,11 +3,6 @@
  * Component: Video
  *
  * ----------------------------------------------------------------------------- */
-
-:root {
-	--color-video-trigger-overlay: linear-gradient(360deg, #222 0%, rgba(34, 34, 34, 0.1) 54.52%, rgba(34, 34, 34, 0) 100%);
-}
-
 .c-video {
 	break-inside: avoid-column;
 
@@ -22,6 +17,10 @@
 	}
 }
 
+/* -----------------------------------------------------------------------------
+ * Wrapper
+ * ----------------------------------------------------------------------------- */
+
 .c-video__wrapper {
 	position: relative;
 	overflow: hidden;
@@ -34,6 +33,10 @@
 	}
 }
 
+/* -----------------------------------------------------------------------------
+ * Embed
+ * ----------------------------------------------------------------------------- */
+
 .c-video__embed {
 	background: var(--color-black);
 	aspect-ratio: '16:9';
@@ -43,24 +46,14 @@
 	}
 }
 
+/* -----------------------------------------------------------------------------
+ * Play Button (Link)
+ * ----------------------------------------------------------------------------- */
+
 .c-video__trigger {
 	display: block;
 	height: 100%;
 	transition: var(--transition);
-
-	&:hover,
-	&:focus {
-
-		.c-video__icon {
-			background-color: var(--color-secondary);
-			transform: scale(1.1);
-		}
-	}
-
-	.c-video--is-playing & {
-		opacity: 0;
-		transition: var(--transition-ease-out-opacity);
-	}
 
 	&:before {
 		content: '';
@@ -71,11 +64,21 @@
 		right: 0;
 		top: 0;
 		bottom: 0;
-		background: var(--color-video-trigger-overlay);
+		background: var(--gradient-video-trigger-overlay);
 		opacity: 0.85;
 		z-index: 1;
 	}
+
+	/* CASE: Video is playing */
+	.c-video--is-playing & {
+		opacity: 0;
+		transition: var(--transition-ease-out-opacity);
+	}
 }
+
+/* -----------------------------------------------------------------------------
+ * Cover Image
+ * ----------------------------------------------------------------------------- */
 
 .c-video__image {
 	margin: 0;
@@ -95,10 +98,15 @@
 		transition: var(--transition-opacity);
 	}
 
+	/* CASE: Low-resolution cover image applied */
 	.c-video--lazy-low-res & {
 		margin-top: -9.4%;
 	}
 }
+
+/* -----------------------------------------------------------------------------
+ * Play Button (Link) Trigger Icon Wrapper
+ * ----------------------------------------------------------------------------- */
 
 .c-video__trigger-action {
 	opacity: 0;
@@ -114,11 +122,16 @@
 	width: 100%;
 	transform: translateY(-50%);
 
+	@media (--viewport-full) {
+		width: 50%;
+	}
+
 	.lazyloaded ~ & {
 		opacity: 1;
 		transition: var(--transition-ease-in-opacity);
 	}
 
+	/* CASE: Small viewport video player active */
 	.c-video--is-small & {
 		padding: 0;
 	}
@@ -137,12 +150,12 @@
 			width: 75%;
 			transform: none;
 		}
-
-		@media (--viewport-full) {
-			width: 50%;
-		}
 	}
 }
+
+/* -----------------------------------------------------------------------------
+ * Video Title
+ * ----------------------------------------------------------------------------- */
 
 .c-video__caption {
 	/* CASE: Below Caption Position */
@@ -218,6 +231,12 @@
 			line-height: 100px;
 			left: 5px;
 		}
+	}
+
+	a:hover &,
+	a:focus & {
+		background-color: var(--color-secondary);
+		transform: scale(1.1);
 	}
 }
 
