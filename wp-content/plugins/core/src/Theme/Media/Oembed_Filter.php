@@ -49,7 +49,7 @@ class Oembed_Filter {
 
 		$classes = [ 'c-video--lazy' ];
 
-		if ( $data->provider_name === 'YouTube' ) {
+		if ( $data->provider_name === self::PROVIDER_YOUTUBE ) {
 			$embed_id    = $this->get_youtube_embed_id( $url );
 			$video_thumb = $this->get_youtube_max_resolution_thumbnail( $url );
 
@@ -97,7 +97,7 @@ class Oembed_Filter {
 			return $html;
 		}
 
-		$cached = ''; //get_option( $this->get_cache_key( $url ), '' );
+		$cached = get_option( $this->get_cache_key( $url ), '' );
 
 		// If cache is empty, try generating new HTML.
 		if ( empty( $cached ) ) {

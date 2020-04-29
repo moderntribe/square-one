@@ -1,6 +1,6 @@
 {# Component: Video #}
 
-<{{ tag }} {{ classes }} {{ attrs }}>
+<div {{ classes }} {{ attrs }}>
 	<a
 		href="{{ video_url|esc_url }}"
 		class="c-video__trigger"
@@ -16,9 +16,9 @@
 			role="presentation"
 			alt=""
 		/>
-		<span class="c-video__trigger-label">{{ trigger_label|esc_html }}</span>
+		<div class="c-video__trigger-action">
+			<span class="c-video__trigger-icon icon-play" aria-hidden="true"></span>
+			<span class="c-video__trigger-label">{{ trigger_label|esc_html }}</span>
+		</div>
 	</a>
-
-	{{ caption }}
-
-</{{ tag }}>
+</div>
