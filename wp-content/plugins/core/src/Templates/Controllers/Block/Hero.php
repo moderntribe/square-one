@@ -23,7 +23,7 @@ class Hero extends Block_Controller {
 
 		return '
 			<div class="test-hero" style="' . $hero_bg . $align . '">
-				<div class="test-hero__content content-wrap t-content t-content--light">
+				<div class="test-hero__content content-wrap t-sink s-spa t-theme--light">
 					' . $icon . '
 					' . $title . '
 					' . $description . '
