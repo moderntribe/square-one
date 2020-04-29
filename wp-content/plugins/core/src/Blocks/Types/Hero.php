@@ -24,6 +24,7 @@ class Hero extends Block_Type_Config {
 			->set_dashicon( 'menu-alt' )
 			->add_sidebar_section( $this->background_sidebar() )
 			->add_content_section( $this->content_area() )
+			->add_data_source( 'background-image', self::BACKGROUND_IMAGE )
 			->build();
 	}
 

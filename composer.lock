@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "309418b7a6c73cf12c9673270db50aed",
+    "content-hash": "0fd9248d99a53a72017c44f69bcb8c82",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -991,16 +991,16 @@
         },
         {
             "name": "moderntribe/gutenpanels",
-            "version": "dev-epic/fidgety-feet",
+            "version": "dev-feeture/multi-level-attributes",
             "source": {
                 "type": "git",
                 "url": "git@github.com:moderntribe/gutenpanels.git",
-                "reference": "3bf5c816194d9bc984b8632e5d92ed850a46dd0b"
+                "reference": "1a155993ec5294b7967a39ec59970f8ac56c778d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/gutenpanels/zipball/3bf5c816194d9bc984b8632e5d92ed850a46dd0b",
-                "reference": "3bf5c816194d9bc984b8632e5d92ed850a46dd0b",
+                "url": "https://api.github.com/repos/moderntribe/gutenpanels/zipball/1a155993ec5294b7967a39ec59970f8ac56c778d",
+                "reference": "1a155993ec5294b7967a39ec59970f8ac56c778d",
                 "shasum": ""
             },
             "require": {
@@ -1034,7 +1034,7 @@
                 }
             ],
             "description": "The Modern Tribe Panel Builder plugin, now with more Gutenberg!",
-            "time": "2020-04-20T19:21:55+00:00"
+            "time": "2020-04-28T20:49:52+00:00"
         },
         {
             "name": "moderntribe/panel-builder",
