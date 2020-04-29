@@ -60,14 +60,13 @@ const resetEmbed = () => {
 	}
 
 	const trigger = embed.querySelector( '.c-video__trigger' );
-	const parent = embed.querySelector( '.c-video__embed' );
 	const iframe = embed.querySelector( 'iframe' );
 	if ( ! iframe || ! trigger ) {
 		return;
 	}
 
 	// Remove embed
-	parent.removeChild( iframe );
+	embed.removeChild( iframe );
 	embed.classList.remove( 'c-video--is-playing' );
 
 	// Fade in image/caption
