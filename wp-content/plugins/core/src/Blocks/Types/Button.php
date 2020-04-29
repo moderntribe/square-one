@@ -36,7 +36,7 @@ class Button extends Block_Type_Config {
 			->add_field(
 				$this->factory->content()->field()->text( self::ARIA )
 					->set_label( __( 'Accessibility Label', 'tribe' ) )
-					->set_placeholder( __( 'enter a label for screen readers', 'tribe' ) )
+					->set_placeholder( __( 'Provide an optional label for screen readers', 'tribe' ) )
 					->build()
 			)
 			->build();
