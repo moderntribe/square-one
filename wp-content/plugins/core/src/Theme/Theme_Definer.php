@@ -32,11 +32,6 @@ class Theme_Definer implements Definer_Interface {
 	public const GRADIENT_CYAN_PURPLE = 'cyan-to-purple';
 	public const GRADIENT_ORANGE_RED  = 'orange-to-red';
 
-	public const SIZE_SMALL  = 'small';
-	public const SIZE_MEDIUM = 'medium';
-	public const SIZE_LARGE  = 'large';
-	public const SIZE_HUGE   = 'huge';
-
 	public function define(): array {
 		return [
 
@@ -78,22 +73,10 @@ class Theme_Definer implements Definer_Interface {
 			 * Define the font sizes that will be available for block settings
 			 */
 			self::CONFIG_FONT_SIZES => [
-				self::SIZE_SMALL  => [
-					'size'  => 13,
-					'label' => __( 'Small', 'tribe' ),
-				],
-				self::SIZE_MEDIUM => [
-					'size'  => 16,
-					'label' => __( 'Medium', 'tribe' ),
-				],
-				self::SIZE_LARGE  => [
-					'size'  => 36,
-					'label' => __( 'Large', 'tribe' ),
-				],
-				self::SIZE_HUGE   => [
-					'size'  => 48,
-					'label' => __( 'Huge', 'tribe' ),
-				],
+				//'large'  => [
+				//	'size'  => 36,
+				//	'label' => __( 'Large', 'tribe' ),
+				//],
 			],
 
 			Font_Sizes::class => DI\create()

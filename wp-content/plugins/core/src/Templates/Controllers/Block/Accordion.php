@@ -12,7 +12,7 @@ class Accordion extends Block_Controller {
 
 	public function render( string $path = '' ): string {
 		return $this->factory->get( Accordion_Context::class, [
-			Accordion_Context::LAYOUT      => $attributes[ Accordion_Block::LAYOUT ] ?? Accordion_Block::LAYOUT_STACKED,
+			Accordion_Context::LAYOUT      => $this->attributes[ Accordion_Block::LAYOUT ] ?? Accordion_Block::LAYOUT_STACKED,
 			Accordion_Context::ACCORDION   => $this->get_accordion( $this->attributes ),
 			Accordion_Context::GRID_CASSES => $this->get_grid_classes( $this->attributes ),
 		] )->render();
