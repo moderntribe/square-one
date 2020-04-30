@@ -12,9 +12,8 @@
 
 	--form-color: var(--color-text);
 	--form-color-secondary: var(--color-neutral-50);
-	--form-color-error: red;
-	--form-color-required: var(--form-color-error);
-	--form-color-success: green;
+	--form-color-error: var(--color-alert-negative);
+	--form-color-success: var(--color-alert-positive);
 
 	/* -----------------------------------------------------------------------------
 	 * Fonts
@@ -53,7 +52,7 @@
 	 * ----------------------------------------------------------------------------- */
 
 	--form-placeholder-color: var(--color-neutral-50);
-	--form-placeholder-color-focus: lighten(var(--form-placeholder-color), 0.25);
+	--form-placeholder-color-focus: var(--color-neutral-20);
 
 	/* -----------------------------------------------------------------------------
 	 * Controls
@@ -98,13 +97,17 @@
 	 * Control: Radio & Checkbox
 	 * ----------------------------------------------------------------------------- */
 
-	--form-control-radio-checkbox-margin-top: var(--spacer-30);
+	--form-control-radio-checkbox-margin-top: var(--spacer-40);
 	--form-control-radio-checkbox-ui-border-color: var(--form-border-color);
-	--form-control-radio-checkbox-ui-border-color-focus: var(--form-border-color-focus);
+	--form-control-radio-checkbox-ui-border-color-focus: var(--color-neutral-70);
 	--form-control-radio-checkbox-ui-border-size: var(--form-border-size);
 	--form-control-radio-checkbox-ui-border-size-focus: var(--form-border-size-focus);
-	--form-control-radio-checkbox-ui-color: var(--color-grey-dark);
-	--form-control-checkbox-ui-border-size: 2px;
+	--form-control-radio-checkbox-ui-bgd-color: var(--form-control-bgd-color);
+	--form-control-radio-checkbox-ui-bgd-color-checked: var(--color-neutral-90);
+	--form-control-radio-checkbox-ui-color: var(--color-white);
+	--form-control-checkbox-size: calc((var(--form-control-height) / 2) - 2px);
+	--form-control-checkbox-position-top: -4px;
+	--form-control-checkbox-position-left: 0;
 
 	/* -----------------------------------------------------------------------------
 	 * Control: File
@@ -118,9 +121,9 @@
 
 	--form-control-helper-font-weight: var(--form-font-weight-tertiary);
 	--form-control-helper-font-size: var(--form-font-size-tertiary);
-	--form-control-helper-font-line-height: 1.15;
+	--form-control-helper-font-line-height: 1.18;
 	--form-control-helper-font-family: var(--form-font-family);
-	--form-control-helper-letter-spacing: var(--form-letter-spacing);
+	--form-control-helper-letter-spacing: 0.5px;
 	--form-control-helper-text-transform: var(--form-text-transform);
 
 }

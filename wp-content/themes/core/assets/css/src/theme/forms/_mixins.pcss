@@ -17,13 +17,29 @@
 
 /* -----------------------------------------------------------------------------
  *
+ * Form Label
+ *
+ * ----------------------------------------------------------------------------- */
+
+@define-mixin form-label {
+	display: block;
+	margin-bottom: var(--form-margin-small);
+	padding: 0;
+	color: var(--form-color);
+	letter-spacing: normal;
+	text-transform: none;
+	font: normal 600 var(--form-font-size-secondary) / 1.4 var(--form-font-family);
+}
+
+/* -----------------------------------------------------------------------------
+ *
  * Form Helper
  *
  * ----------------------------------------------------------------------------- */
 
 @define-mixin form-control-helper {
 	margin-top: var(--form-margin-small);
-	padding: 0 8px;
+	padding: 0;
 	color: var(--form-color-secondary);
 	letter-spacing: var(--form-control-helper-letter-spacing);
 	text-transform: var(--form-control-helper-text-transform);
@@ -38,8 +54,8 @@
  * ----------------------------------------------------------------------------- */
 
 @define-mixin required {
-	padding-left: 4px;
-	color: var(--form-color-required);
+	padding-left: 2px;
+	color: currentColor;
 }
 
 /* -----------------------------------------------------------------------------
@@ -158,20 +174,21 @@
 	}
 
 	label {
+		border-bottom: 1px solid transparent;
 		color: var(--form-control-color);
 		cursor: pointer;
 		margin-bottom: 0;
 		display: inline-block;
 		letter-spacing: var(--form-control-letter-spacing);
 		text-transform: var(--form-control-text-transform);
-		font: var(--form-control-font-style) var(--form-control-font-weight) var(--form-font-size-secondary) / 1 var(--form-control-font-family);
+		font: var(--form-control-font-style) var(--form-control-font-weight) var(--form-font-size) / 1 var(--form-control-font-family);
 	}
 }
 
 @define-mixin form-control-radio-checkbox {
 	transition: var(--transition);
 	position: relative;
-	padding-left: 34px;
+	padding-left: 32px;
 
 	input[type="radio"],
 	input[type="checkbox"] {
@@ -193,10 +210,10 @@
 
 		&:before {
 			background-color: var(--form-control-bgd-color);
-			width: calc(var(--form-control-height) / 2);
-			height: calc(var(--form-control-height) / 2);
-			top: -2px;
-			left: 0;
+			width: var(--form-control-checkbox-size);
+			height: var(--form-control-checkbox-size);
+			top: var(--form-control-checkbox-position-top);
+			left: var(--form-control-checkbox-position-left);
 			border: var(--form-control-radio-checkbox-ui-border-size) solid var(--form-control-radio-checkbox-ui-border-color);
 		}
 
@@ -205,13 +222,20 @@
 		}
 	}
 
+	input:focus + label {
+		border-bottom: 1px solid currentColor;
+	}
+
 	input:focus + label:before {
 		border-color: var(--form-control-radio-checkbox-ui-border-color-focus);
-		box-shadow: 0 0 0 var(--form-control-radio-checkbox-ui-border-size-focus) var(--form-control-radio-checkbox-ui-border-color-focus);
 	}
 
 	input:checked + label {
 		color: var(--form-control-color);
+
+		&:before {
+			background-color: var(--form-control-radio-checkbox-ui-bgd-color-checked);
+		}
 
 		&:after {
 			opacity: 1;
@@ -234,14 +258,18 @@
 		}
 
 		&:after {
-			left: 7px;
-			top: 5px;
-			width: 9px;
-			height: 5px;
-			border: var(--form-control-checkbox-ui-border-size) solid var(--form-control-radio-checkbox-ui-color);
-			border-top: none;
-			border-right: none;
-			transform: rotate(-50deg);
+			@mixin icon;
+
+			display: block;
+			transition: var(--transition);
+			content: var(--icon-check);
+			text-align: center;
+			height: var(--form-control-checkbox-size);
+			width: var(--form-control-checkbox-size);
+			color: var(--form-control-radio-checkbox-ui-color);
+			font-size: 25px;
+			left: var(--form-control-checkbox-position-left);
+			top: var(--form-control-checkbox-position-top);
 		}
 	}
 }
@@ -262,10 +290,10 @@
 		}
 
 		&:after {
-			left: 8px;
-			top: 6px;
-			width: 8px;
-			height: 8px;
+			left: 7px;
+			top: 3px;
+			width: 10px;
+			height: 10px;
 			background-color: var(--form-control-radio-checkbox-ui-color);
 		}
 	}
