@@ -96,20 +96,20 @@ class Theme_Subscriber extends Abstract_Subscriber {
 	}
 
 	private function web_fonts() {
-		add_action( 'wp_head', function () {
-			$this->container->get( Web_Fonts::class )->load_fonts();
+		add_action( 'wp_enqueue_scripts', function () {
+			$this->container->get( Web_Fonts::class )->enqueue_fonts();
+		}, 0, 0 );
+		add_action( 'enqueue_block_editor_assets', function () {
+			$this->container->get( Web_Fonts::class )->enqueue_fonts();
 		}, 0, 0 );
 		add_action( 'tribe/unsupported_browser/head', function () {
-			$this->container->get( Web_Fonts::class )->load_fonts();
+			$this->container->get( Web_Fonts::class )->inject_unsupported_browser_fonts();
 		}, 0, 0 );
-		add_action( 'admin_head', function () {
-			$this->container->get( Web_Fonts::class )->localize_typekit_tinymce();
-		}, 0, 0 );
-		add_filter( 'mce_external_plugins', function ( $plugins ) {
-			return $this->container->get( Web_Fonts::class )->add_typekit_to_editor( $plugins );
-		}, 10, 1 );
-		/* add_action( 'login_head', function() {
-			$this->container->get( Fonts::class )->load_fonts();
+		add_action( 'after_setup_theme', function () {
+			$this->container->get( Web_Fonts::class )->add_tinymce_editor_fonts();
+		}, 9, 0 );
+		/* add_action( 'login_enqueue_scripts', function() use ( $container ) {
+			$container[ 'theme.resources.fonts' ]->enqueue_fonts();
 		}, 0, 0); */
 	}
 

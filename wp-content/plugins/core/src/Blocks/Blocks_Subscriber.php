@@ -25,6 +25,11 @@ class Blocks_Subscriber extends Abstract_Subscriber {
 
 		add_action( 'after_setup_theme', function () {
 			$this->container->get( Theme_Support::class )->register_theme_supports();
+
+			foreach ( $this->container->get( Blocks_Definer::STYLES ) as $style_override ) {
+				/** @var Block_Style_Override $style_override */
+				$style_override->register();
+			}
 		}, 10, 0 );
 	}
 
