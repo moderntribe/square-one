@@ -100,7 +100,6 @@
     "swiper": "^5.3.6",
     "verge": "^1.10.2",
     "voca": "^1.4.0",
-    "webfontloader": "^1.6.28",
     "whatwg-fetch": "^3.0.0",
     "workbox-cacheable-response": "^5.0.0",
     "workbox-core": "^5.0.0",

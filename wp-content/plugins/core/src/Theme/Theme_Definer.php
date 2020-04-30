@@ -32,11 +32,6 @@ class Theme_Definer implements Definer_Interface {
 	public const GRADIENT_CYAN_PURPLE = 'cyan-to-purple';
 	public const GRADIENT_ORANGE_RED  = 'orange-to-red';
 
-	public const SIZE_SMALL  = 'small';
-	public const SIZE_MEDIUM = 'medium';
-	public const SIZE_LARGE  = 'large';
-	public const SIZE_HUGE   = 'huge';
-
 	public function define(): array {
 		return [
 
@@ -78,22 +73,10 @@ class Theme_Definer implements Definer_Interface {
 			 * Define the font sizes that will be available for block settings
 			 */
 			self::CONFIG_FONT_SIZES => [
-				self::SIZE_SMALL  => [
-					'size'  => 13,
-					'label' => __( 'Small', 'tribe' ),
-				],
-				self::SIZE_MEDIUM => [
-					'size'  => 16,
-					'label' => __( 'Medium', 'tribe' ),
-				],
-				self::SIZE_LARGE  => [
-					'size'  => 36,
-					'label' => __( 'Large', 'tribe' ),
-				],
-				self::SIZE_HUGE   => [
-					'size'  => 48,
-					'label' => __( 'Huge', 'tribe' ),
-				],
+				//'large'  => [
+				//	'size'  => 36,
+				//	'label' => __( 'Large', 'tribe' ),
+				//],
 			],
 
 			Font_Sizes::class => DI\create()
@@ -106,25 +89,40 @@ class Theme_Definer implements Definer_Interface {
 				] ),
 
 			/**
-			 * The TypeKit kit ID
+			 * @var string A valid TypeKit (Adobe Fonts) Project ID.
+			 *
+			 * Example: `zbo7iia`
 			 */
 			self::CONFIG_TYPEKIT_ID => '',
 
 			/**
-			 * Define the Google font families to load
+			 * @var array A collection of Google Font families to load.
+			 *
+			 * Any combination of valid Google font family declarations is acceptable.
+			 *
+			 * Example: `[ 'Tangerine', 'Cantarell:italic', 'Droid+Serif:b' ]`
+			 *
+			 * @link https://developers.google.com/fonts/docs/getting_started
 			 */
 			self::CONFIG_GOOGLE_FONTS => [],
 
 			/**
-			 * Define the custom font families to load
+			 * @var array Collection of custom webfont sources.
+			 *
+			 * An associative array of css files containing custom @font-face definitions.
+			 * Useful for other 3rd-party web font providers such as fonts.com.
+			 *
+			 * Example: `[ 'fonts_com' => 'https://fast.fonts.net/cssapi/e6dc9b99-64fe-4292-ad98-6974f93cd2a2.css' ]`
+			 *
+			 * Key name is a unique name (slug) for the enqueued stylesheet.
 			 */
 			self::CONFIG_CUSTOM_FONTS => [],
 
 			Web_Fonts::class => DI\create()
-				->constructor( DI\get( Core::PLUGIN_FILE ), [
-					Web_Fonts::TYPEKIT_ID => DI\get( self::CONFIG_TYPEKIT_ID ),
-					Web_Fonts::GOOGLE     => DI\get( self::CONFIG_GOOGLE_FONTS ),
-					Web_Fonts::CUSTOM     => DI\get( self::CONFIG_CUSTOM_FONTS ),
+				->constructor( [
+					Web_Fonts::PROVIDER_TYPEKIT => DI\get( self::CONFIG_TYPEKIT_ID ),
+					Web_Fonts::PROVIDER_GOOGLE  => DI\get( self::CONFIG_GOOGLE_FONTS ),
+					Web_Fonts::PROVIDER_CUSTOM  => DI\get( self::CONFIG_CUSTOM_FONTS ),
 				] ),
 		];
 	}

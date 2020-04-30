@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## 2020.04
+* Updated: Force plugin activation comments
 * Added: JenkinsFile for pipeline build and deployment to hosted environments with Git Deploys
 * Updated: bash deployment script for locally run deployments to environments with Git deploys 
 * Updated: Certificate creation default date to meet new requirements from [Ballot 193](https://cabforum.org/2017/03/17/ballot-193-825-day-certificate-lifetimes/).

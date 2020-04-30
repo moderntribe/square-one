@@ -61,15 +61,15 @@ class Video extends Context {
 			self::MERGE_CLASSES => [ 'c-video__embed' ],
 		],
 		self::CONTAINER_ATTRS        => [
-			self::DEFAULT          => '',
+			self::DEFAULT          => [],
 			self::MERGE_ATTRIBUTES => [],
 		],
 		self::CONTAINER_CLASSES      => [
-			self::DEFAULT       => '',
+			self::DEFAULT       => [],
 			self::MERGE_CLASSES => [ 'c-video' ],
 		],
 		self::CONTAINER_WRAP_CLASSES => [
-			self::DEFAULT       => '',
+			self::DEFAULT       => [],
 			self::MERGE_CLASSES => [ 'c-video__wrapper' ],
 		],
 	];
