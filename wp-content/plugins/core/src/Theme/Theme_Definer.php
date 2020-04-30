@@ -107,15 +107,16 @@ class Theme_Definer implements Definer_Interface {
 			self::CONFIG_GOOGLE_FONTS => [],
 
 			/**
-			 * @var string CSS file URL.
+			 * @var array Collection of custom webfont sources.
 			 *
-			 * A complete URL to a css file containing custom @font-face definitions.
+			 * An associative array of css files containing custom @font-face definitions.
 			 * Useful for other 3rd-party web font providers such as fonts.com.
 			 *
-			 * Example: `'https://fast.fonts.net/cssapi/e6dc9b99-64fe-4292-ad98-6974f93cd2a2.css'`
+			 * Example: `[ 'fonts_com' => 'https://fast.fonts.net/cssapi/e6dc9b99-64fe-4292-ad98-6974f93cd2a2.css' ]`
 			 *
+			 * Key name is a unique name (slug) for the enqueued stylesheet.
 			 */
-			self::CONFIG_CUSTOM_FONTS => '',
+			self::CONFIG_CUSTOM_FONTS => [],
 
 			Web_Fonts::class => DI\create()
 				->constructor( [

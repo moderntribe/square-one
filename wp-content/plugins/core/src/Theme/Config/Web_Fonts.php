@@ -25,6 +25,7 @@ class Web_Fonts {
 	 *
 	 * @action wp_enqueue_scripts
 	 * @action login_enqueue_scripts
+	 * @action enqueue_block_editor_assets
 	 */
 	public function enqueue_fonts(): void {
 		foreach ( $this->get_font_urls() as $provider => $url ) {
@@ -44,11 +45,11 @@ class Web_Fonts {
 	}
 
 	/**
-	 * Visual Editor Fonts
+	 * TinyMCE Editor Fonts
 	 *
 	 * @action after_setup_theme
 	 */
-	public function add_visual_editor_fonts(): void {
+	public function add_tinymce_editor_fonts(): void {
 		foreach( $this->get_font_urls() as $url ) {
 			add_editor_style( $url );
 		}
@@ -71,7 +72,7 @@ class Web_Fonts {
 
 		// Custom
 		if ( ! empty( $this->fonts[ self::PROVIDER_CUSTOM ] ) ) {
-			$urls[ self::PROVIDER_CUSTOM ] = $this->fonts[ self::PROVIDER_CUSTOM ];
+			$urls = array_merge( $urls, $this->fonts[ self::PROVIDER_CUSTOM ] );
 		}
 
 		return $urls;

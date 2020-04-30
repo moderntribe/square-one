@@ -99,11 +99,14 @@ class Theme_Subscriber extends Abstract_Subscriber {
 		add_action( 'wp_enqueue_scripts', function () {
 			$this->container->get( Web_Fonts::class )->enqueue_fonts();
 		}, 0, 0 );
+		add_action( 'enqueue_block_editor_assets', function () {
+			$this->container->get( Web_Fonts::class )->enqueue_fonts();
+		}, 0, 0 );
 		add_action( 'tribe/unsupported_browser/head', function () {
 			$this->container->get( Web_Fonts::class )->inject_unsupported_browser_fonts();
 		}, 0, 0 );
 		add_action( 'after_setup_theme', function () {
-			$this->container->get( Web_Fonts::class )->add_visual_editor_fonts();
+			$this->container->get( Web_Fonts::class )->add_tinymce_editor_fonts();
 		}, 9, 0 );
 		/* add_action( 'login_enqueue_scripts', function() use ( $container ) {
 			$container[ 'theme.resources.fonts' ]->enqueue_fonts();
