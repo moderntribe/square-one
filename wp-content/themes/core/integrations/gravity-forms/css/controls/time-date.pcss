@@ -51,7 +51,7 @@
 .gfield_time_ampm {
 	@mixin form-control-select;
 
-	max-width: var(--gf-control-time-date-max-width);
+	max-width: 250px;
 
 	@media (--viewport-medium) {
 		max-width: none;
@@ -70,7 +70,7 @@
 .gf-date {
 	/* Layout: Datepicker */
 	&.gf-date-layout-datepicker {
-		max-width: var(--gf-control-date-max-width);
+		max-width: 500px;
 
 		.ginput_container {
 			position: relative;
@@ -111,7 +111,7 @@
 .gfield_date_dropdown_year {
 
 	& ~ * {
-		margin-top: var(--gf-control-date-margin-top);
+		margin-top: 20px;
 
 		@media (--viewport-medium) {
 			margin-top: 0;
@@ -124,7 +124,7 @@
 
 	&:after {
 		@media (--viewport-medium) {
-			right: var(--gf-control-date-position-right);
+			right: 9px;
 		}
 	}
 }
