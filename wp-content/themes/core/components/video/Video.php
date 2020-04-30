@@ -63,7 +63,7 @@ class Video extends Context {
 
 	public function __construct( Environment $twig, Component_Factory $factory, array $properties = [] ) {
 		if ( ! array_key_exists( self::SHIM_URL, $properties ) ) {
-			$properties[ self::SHIM_URL ] = trailingslashit( get_template_directory_uri() ) . 'img/theme/shims/16x9.png';
+			$properties[ self::SHIM_URL ] = trailingslashit( get_template_directory_uri() ) . 'assets/img/theme/shims/16x9.png';
 		}
 
 		if ( ! array_key_exists( self::TRIGGER_LABEL, $properties ) ) {
