@@ -991,16 +991,16 @@
         },
         {
             "name": "moderntribe/gutenpanels",
-            "version": "dev-feeture/multi-level-attributes",
+            "version": "dev-epic/fidgety-feet",
             "source": {
                 "type": "git",
                 "url": "git@github.com:moderntribe/gutenpanels.git",
-                "reference": "1a155993ec5294b7967a39ec59970f8ac56c778d"
+                "reference": "5f99104545a4dc757787cdaaa411c872bc810dee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/gutenpanels/zipball/1a155993ec5294b7967a39ec59970f8ac56c778d",
-                "reference": "1a155993ec5294b7967a39ec59970f8ac56c778d",
+                "url": "https://api.github.com/repos/moderntribe/gutenpanels/zipball/5f99104545a4dc757787cdaaa411c872bc810dee",
+                "reference": "5f99104545a4dc757787cdaaa411c872bc810dee",
                 "shasum": ""
             },
             "require": {

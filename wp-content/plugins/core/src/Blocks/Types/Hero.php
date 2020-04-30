@@ -21,6 +21,7 @@ class Hero extends Block_Type_Config {
 	public function build(): Block_Type_Interface {
 		return $this->factory->block( self::NAME )
 			->set_label( __( 'Hero', 'tribe' ) )
+			->add_class( 'test-hero' )
 			->set_dashicon( 'menu-alt' )
 			->add_sidebar_section( $this->background_sidebar() )
 			->add_content_section( $this->content_area() )
@@ -39,7 +40,9 @@ class Hero extends Block_Type_Config {
 	}
 
 	private function content_area(): Content_Section {
-		return $this->factory->content()->section()
+		return $this->factory->content()
+			->section()
+			->add_class( 'test-hero__content content-wrap t-sink s-spa t-theme--light' )
 			->add_field(
 				$this->factory->content()->field()->image( self::ICON )
 					->set_label( __( 'Icon', 'tribe' ) )
