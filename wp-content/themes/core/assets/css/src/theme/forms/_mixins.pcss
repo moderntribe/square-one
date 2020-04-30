@@ -11,7 +11,7 @@
  * ----------------------------------------------------------------------------- */
 
 @define-mixin form-control-group-radio-checkbox {
-	padding-top: 8px;
+	padding-top: var(--form-margin-small);
 	padding-bottom: 4px;
 }
 
@@ -22,12 +22,13 @@
  * ----------------------------------------------------------------------------- */
 
 @define-mixin form-control-helper {
-	margin-top: 8px;
+	margin-top: var(--form-margin-small);
 	padding: 0 8px;
 	color: var(--form-color-secondary);
 	letter-spacing: var(--form-control-helper-letter-spacing);
 	text-transform: var(--form-control-helper-text-transform);
-	font: normal var(--form-control-helper-font-weight) var(--form-control-helper-font-size) / var(--form-control-helper-font-line-height) var(--form-control-helper-font-family);
+	font: normal var(--form-control-helper-font-weight) var(--form-control-helper-font-size) var(--form-control-helper-font-family);
+	line-height: var(--form-control-helper-font-line-height);
 }
 
 /* -----------------------------------------------------------------------------
@@ -84,7 +85,8 @@
 	color: var(--form-control-color);
 	letter-spacing: var(--form-control-letter-spacing);
 	text-transform: var(--form-control-text-transform);
-	font: var(--form-control-font-style) var(--form-control-font-weight) var(--form-control-font-size) / var(--form-control-font-line-height) var(--form-control-font-family);
+	font: var(--form-control-font-style) var(--form-control-font-weight) var(--form-control-font-size) var(--form-control-font-family);
+	line-height: var(--form-control-font-line-height);
 }
 
 /* -----------------------------------------------------------------------------

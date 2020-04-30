@@ -76,7 +76,8 @@
 		white-space: nowrap;
 		letter-spacing: var(--chosen-letter-spacing);
 		text-transform: var(--chosen-text-transform);
-		font: var(--chosen-font-style) var(--chosen-font-weight) var(--chosen-font-size) / var(--chosen-font-line-height) var(--chosen-font-family);
+		font: var(--chosen-font-style) var(--chosen-font-weight) var(--chosen-font-size) var(--chosen-font-family);
+		line-height: var(--chosen-font-line-height);
 
 		span {
 			display: block;
@@ -90,7 +91,8 @@
 
 	.chosen-default {
 		color: var(--chosen-placeholder-color);
-		font: var(--chosen-default-font-style) var(--chosen-default-font-weight) var(--chosen-default-font-size) / var(--chosen-default-font-line-height) var(--chosen-default-font-family);
+		font: var(--chosen-default-font-style) var(--chosen-default-font-weight) var(--chosen-default-font-size) var(--chosen-default-font-family);
+		line-height: var(--chosen-default-font-line-height);
 
 		span {
 			font-weight: var(--chosen-default-option-font-weight);
@@ -167,7 +169,8 @@
 	padding: 0;
 	max-height: 240px;
 	-webkit-overflow-scrolling: touch;
-	font: var(--chosen-results-font-style) var(--chosen-results-font-weight) var(--chosen-results-font-size) / var(--chosen-results-line-height) var(--chosen-results-font-family);
+	font: var(--chosen-results-font-style) var(--chosen-results-font-weight) var(--chosen-results-font-size) var(--chosen-results-font-family);
+	line-height: var(--chosen-results-line-height);
 
 	li {
 		display: none;
