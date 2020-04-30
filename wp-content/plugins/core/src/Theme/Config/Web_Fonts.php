@@ -29,7 +29,7 @@ class Web_Fonts {
 	 */
 	public function enqueue_fonts(): void {
 		foreach ( $this->get_font_urls() as $provider => $url ) {
-			wp_enqueue_style( $provider, $url, [], null, 'all' );
+			wp_enqueue_style( 'tribe-' . $provider, $url, [], null, 'all' );
 		}
 	}
 
@@ -71,8 +71,8 @@ class Web_Fonts {
 		}
 
 		// Custom
-		if ( ! empty( $this->fonts[ self::PROVIDER_CUSTOM ] ) ) {
-			$urls = array_merge( $urls, $this->fonts[ self::PROVIDER_CUSTOM ] );
+		foreach ( $this->fonts[ self::PROVIDER_CUSTOM ] ?? [] as $index => $custom_url ) {
+			$urls[ self::PROVIDER_CUSTOM . '-' . $index ] = $custom_url;
 		}
 
 		return $urls;
