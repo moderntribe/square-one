@@ -104,7 +104,7 @@
 	position: relative;
 	z-index: 1;
 	color: var(--color-white);
-	transition: opacity 0.15s ease-in;
+	transition: var(--transition-opacity);
 
 	@media (--viewport-full) {
 		width: 60%;
@@ -138,7 +138,7 @@
 
 .c-video__trigger-icon {
 	display: block;
-	margin: 48px auto var(--spacer-30);
+	margin: 48px auto var(--spacer-30); /* margin-top is 1/2 the height of the icon to improve vertical centering. */
 	width: 96px;
 	height: 96px;
 	text-align: center;
@@ -159,7 +159,7 @@
 	.c-video--is-small & {
 		width: 56px;
 		height: 56px;
-		margin-top: 28px;
+		margin-top: 28px; /* margin-top is 1/2 the height of the icon to improve vertical centering. */
 		margin-bottom: var(--spacer-10);
 
 		&:before {
