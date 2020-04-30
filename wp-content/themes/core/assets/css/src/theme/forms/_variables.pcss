@@ -39,6 +39,16 @@
 	--form-padding-vertical: 12px;
 
 	/* -----------------------------------------------------------------------------
+	 * Borders
+	 * ----------------------------------------------------------------------------- */
+
+	--form-border-color: var(--color-neutral-20);
+	--form-border-color-focus: var(--color-neutral-90);
+	--form-border-size: 1px;
+	--form-border-size-focus: var(--form-border-size);
+	--form-border-radius: 0;
+
+	/* -----------------------------------------------------------------------------
 	 * Placeholder
 	 * ----------------------------------------------------------------------------- */
 
@@ -57,11 +67,6 @@
 	 * ----------------------------------------------------------------------------- */
 
 	--form-control-bgd-color: var(--color-white);
-	--form-control-border-color: var(--color-neutral-20);
-	--form-control-border-color-focus: var(--color-neutral-90);
-	--form-control-border-radius: 0;
-	--form-control-border-size: 1px;
-	--form-control-border-size-focus: var(--form-control-border-size);
 	--form-control-color: var(--form-color);
 	--form-control-font-style: normal;
 	--form-control-font-weight: 400;
@@ -78,11 +83,6 @@
 	 * Control Icon
 	 * ----------------------------------------------------------------------------- */
 
-	--form-control-icon-color: lightgrey;
-	--form-control-icon-font-size: 20px;
-	--form-control-icon-line-height: var(--form-control-height);
-	--form-control-icon-width: var(--form-control-height);
-	--form-control-icon-padding-right: var(--form-control-icon-width);
 	--form-control-icon-position-right: 0;
 	--form-control-icon-position-top: 0;
 
@@ -106,10 +106,10 @@
 	 * ----------------------------------------------------------------------------- */
 
 	--form-control-radio-checkbox-margin-top: var(--spacer-30);
-	--form-control-radio-checkbox-ui-border-color: var(--form-control-border-color);
-	--form-control-radio-checkbox-ui-border-color-focus: var(--form-control-border-color-focus);
-	--form-control-radio-checkbox-ui-border-size: var(--form-control-border-size);
-	--form-control-radio-checkbox-ui-border-size-focus: var(--form-control-border-size-focus);
+	--form-control-radio-checkbox-ui-border-color: var(--form-border-color);
+	--form-control-radio-checkbox-ui-border-color-focus: var(--form-border-color-focus);
+	--form-control-radio-checkbox-ui-border-size: var(--form-border-size);
+	--form-control-radio-checkbox-ui-border-size-focus: var(--form-border-size-focus);
 	--form-control-radio-checkbox-ui-color: var(--color-grey-dark);
 	--form-control-checkbox-ui-border-size: 2px;
 

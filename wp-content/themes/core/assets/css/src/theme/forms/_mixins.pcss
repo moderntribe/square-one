@@ -76,8 +76,8 @@
 @define-mixin form-control {
 	transition: var(--transition);
 	padding: var(--form-control-padding);
-	border: var(--form-control-border-size) solid var(--form-control-border-color);
-	border-radius: var(--form-control-border-radius);
+	border: var(--form-border-size) solid var(--form-border-color);
+	border-radius: var(--form-border-radius);
 	background-color: var(--form-control-bgd-color);
 	display: block;
 	width: 100%;
@@ -104,7 +104,7 @@
 	&:active {
 
 		&:after {
-			background-color: var(--form-control-border-color-focus);
+			background-color: var(--form-border-color-focus);
 		}
 	}
 
@@ -113,20 +113,20 @@
 
 		display: block;
 		transition: var(--transition);
-		content: '\e900';
+		content: var(--icon-chevron-down);
 		text-align: center;
 		height: calc(var(--form-control-height) - 2px);
 		width: var(--form-control-select-ui-width);
 		line-height: var(--form-control-height);
-		background-color: var(--form-control-border-color);
+		background-color: var(--form-border-color);
 		color: var(--form-control-select-ui-color);
 		position: absolute;
 		font-size: 25px;
 		right: 1px;
 		top: 1px;
 		pointer-events: none;
-		border-top-right-radius: var(--form-control-border-radius);
-		border-bottom-right-radius: var(--form-control-border-radius);
+		border-top-right-radius: var(--form-border-radius);
+		border-bottom-right-radius: var(--form-border-radius);
 	}
 
 	select {
@@ -230,7 +230,7 @@
 	label {
 
 		&:before {
-			border-radius: var(--form-control-border-radius);
+			border-radius: var(--form-border-radius);
 		}
 
 		&:after {
@@ -281,19 +281,19 @@
 	position: relative;
 
 	input {
-		padding-right: var(--form-control-icon-padding-right);
+		padding-right: var(--form-control-height);
 	}
 
 	&:before {
 		position: absolute;
 		right: var(--form-control-icon-position-right);
 		top: var(--form-control-icon-position-top);
-		color: var(--form-control-icon-color);
+		color: lightgrey;
 		height: 100%;
-		width: var(--form-control-icon-width);
-		line-height: var(--form-control-icon-line-height);
+		width: var(--form-control-height);
+		line-height: var(--form-control-height);
 		text-align: center;
 		z-index: 1;
-		font-size: var(--form-control-icon-font-size);
+		font-size: 20px;
 	}
 }
