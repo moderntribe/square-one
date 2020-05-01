@@ -105,6 +105,7 @@ class Core {
 		'\Tribe\Libs\Blog_Copier\Blog_Copier_Subscriber',
 		'\Tribe\Libs\Cache\Cache_Subscriber',
 		'\Tribe\Libs\CLI\CLI_Subscriber',
+		'\Tribe\Libs\Media\Media_Subscriber',
 		'\Tribe\Libs\Object_Meta\Object_Meta_Subscriber',
 		'\Tribe\Libs\P2P\P2P_Subscriber',
 		'\Tribe\Libs\Queues\Queues_Subscriber',
