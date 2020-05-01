@@ -7,10 +7,8 @@ use Tribe\Libs\Container\Abstract_Subscriber;
 use Tribe\Project\Theme\Config\Image_Sizes;
 use Tribe\Project\Theme\Config\Supports;
 use Tribe\Project\Theme\Config\Web_Fonts;
-use Tribe\Project\Theme\Media\Full_Size_Gif;
 use Tribe\Project\Theme\Media\Image_Wrap;
 use Tribe\Project\Theme\Media\Oembed_Filter;
-use Tribe\Project\Theme\Media\WP_Responsive_Image_Disabler;
 
 class Theme_Subscriber extends Abstract_Subscriber {
 	public function register(): void {
@@ -28,21 +26,13 @@ class Theme_Subscriber extends Abstract_Subscriber {
 	private function media(): void {
 		$this->image_wrap();
 		$this->image_links();
-		$this->disable_responsive_images();
 		$this->oembed();
-		// $this->full_size_gif(); // Uncomment to require full size gifs
 	}
 
 	private function body_classes() {
 		add_filter( 'body_class', function ( $classes ) {
 			return $this->container->get( Body_Classes::class )->body_classes( $classes );
 		}, 10, 1 );
-	}
-
-	private function full_size_gif() {
-		add_filter( 'image_downsize', function ( $data, $id, $size ) {
-			return $this->container->get( Full_Size_Gif::class )->full_size_only_gif( $data, $id, $size );
-		}, 10, 3 );
 	}
 
 	private function image_sizes() {
@@ -64,15 +54,6 @@ class Theme_Subscriber extends Abstract_Subscriber {
 		add_filter( 'pre_option_image_default_link_type', function () {
 			return 'none';
 		}, 10, 1 );
-	}
-
-	private function disable_responsive_images() {
-		add_filter( 'wp_get_attachment_image_attributes', function ( $attr ) {
-			return $this->container->get( WP_Responsive_Image_Disabler::class )->filter_image_attributes( $attr );
-		}, 999, 1 );
-		add_action( 'after_setup_theme', function () {
-			$this->container->get( WP_Responsive_Image_Disabler::class )->disable_wordpress_filters();
-		}, 10, 0 );
 	}
 
 	private function oembed() {
@@ -108,9 +89,6 @@ class Theme_Subscriber extends Abstract_Subscriber {
 		add_action( 'after_setup_theme', function () {
 			$this->container->get( Web_Fonts::class )->add_tinymce_editor_fonts();
 		}, 9, 0 );
-		/* add_action( 'login_enqueue_scripts', function() use ( $container ) {
-			$container[ 'theme.resources.fonts' ]->enqueue_fonts();
-		}, 0, 0); */
 	}
 
 }

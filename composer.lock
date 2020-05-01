@@ -1081,12 +1081,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/moderntribe/tribe-libs.git",
-                "reference": "b538775f7a6f95c8b0cbddb6583ee97efaecf755"
+                "reference": "5340069aaf872b355e1b3d53c1f99463c227ddce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/tribe-libs/zipball/b538775f7a6f95c8b0cbddb6583ee97efaecf755",
-                "reference": "b538775f7a6f95c8b0cbddb6583ee97efaecf755",
+                "url": "https://api.github.com/repos/moderntribe/tribe-libs/zipball/5340069aaf872b355e1b3d53c1f99463c227ddce",
+                "reference": "5340069aaf872b355e1b3d53c1f99463c227ddce",
                 "shasum": ""
             },
             "require": {
@@ -1103,6 +1103,7 @@
                 "moderntribe/square1-cli": "self.version",
                 "moderntribe/square1-container": "self.version",
                 "moderntribe/square1-generators": "self.version",
+                "moderntribe/square1-media": "self.version",
                 "moderntribe/square1-nav": "self.version",
                 "moderntribe/square1-object-meta": "self.version",
                 "moderntribe/square1-oembed": "self.version",
@@ -1144,6 +1145,7 @@
                     "Tribe\\Libs\\Cache\\": "src/Cache/",
                     "Tribe\\Libs\\Container\\": "src/Container/",
                     "Tribe\\Libs\\Generators\\": "src/Generators/",
+                    "Tribe\\Libs\\Media\\": "src/Media/",
                     "Tribe\\Libs\\Nav\\": "src/Nav/",
                     "Tribe\\Libs\\Object_Meta\\": "src/Object_Meta/",
                     "Tribe\\Libs\\Oembed\\": "src/Oembed/",
@@ -1167,7 +1169,7 @@
                 "GPL-2.0-only"
             ],
             "description": "A library for use on Modern Tribe service projects.",
-            "time": "2020-04-30T21:14:22+00:00"
+            "time": "2020-05-01T02:26:22+00:00"
         },
         {
             "name": "monolog/monolog",
