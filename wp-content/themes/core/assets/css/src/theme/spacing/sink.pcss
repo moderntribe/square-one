@@ -9,6 +9,7 @@
  *
  * ------------------------------------------------------------------------- */
 
+div[data-type^="core/"],
 .s-sink {
 	/* -----------------------------------------------------------------------------
 	 * First & last element overrides
@@ -123,7 +124,8 @@
 
 	/* cite */
 	cite,
-	.cite {
+	.cite,
+	.wp-block-quote__citation {
 		display: block;
 		margin-top: var(--spacer-10);
 	}
@@ -158,13 +160,19 @@
 	.alignfull,
 	.alignwide,
 	.aligncenter,
-	.alignnone {
+	.alignnone,
+	&[data-align="full"],
+	&[data-align="wide"],
+	&[data-align="center"],
+	&[data-align="none"] {
 		margin-top: var(--spacer-60);
 		margin-bottom: var(--spacer-60);
 	}
 
 	.alignleft,
-	.alignright {
+	.alignright,
+	&[data-align="right"],
+	&[data-align="left"] {
 		margin-top: var(--spacer-40);
 		margin-bottom: var(--spacer-40);
 
