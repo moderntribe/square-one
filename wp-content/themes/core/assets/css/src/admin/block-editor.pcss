@@ -32,3 +32,43 @@
 /* All Integrations */
 /* Disabled since we don't need integration styles, except _maybe_ Swiper, in the block editor. */
 /* @import-glob "../../../../integrations/ ** /index.pcss"; */
+
+/* -----------------------------------------------------------------------------
+ * Block Editor Resets
+ * ----------------------------------------------------------------------------- */
+
+.editor-styles-wrapper {
+
+	.block-editor-block-list__block {
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Block Editor Kitchen Sink Grid
+ * ----------------------------------------------------------------------------- */
+
+.wp-block[data-type^="core/"] {
+	max-width: var(--grid-width-staggered-double);
+
+	&[data-align="wide"],
+	&[data-align="full"] {
+		max-width: var(--grid-width-staggered);
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Editor Styles/Formats
+ * ----------------------------------------------------------------------------- */
+
+[data-type^="core/"] {
+
+	[class*="t-body-large"] {
+		@mixin t-body-large;
+	}
+
+	[class*="t-overline"] {
+		@mixin t-overline;
+	}
+}
