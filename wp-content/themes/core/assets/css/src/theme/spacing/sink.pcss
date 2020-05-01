@@ -172,4 +172,25 @@
 			margin-top: 5px;
 		}
 	}
+
+	/* -----------------------------------------------------------------------------
+	 * Audio, Videos, & Embeds: Alignments
+	 * ----------------------------------------------------------------------------- */
+
+	.wp-block-audio,
+	.wp-block-video,
+	.wp-block-embed {
+		margin-top: var(--spacer-60);
+		margin-bottom: var(--spacer-60);
+
+		&.alignleft,
+		&.alignright {
+			margin-top: var(--spacer-40);
+			margin-bottom: var(--spacer-40);
+
+			@media (--viewport-medium) {
+				margin-top: 5px;
+			}
+		}
+	}
 }

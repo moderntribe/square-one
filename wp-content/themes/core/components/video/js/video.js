@@ -60,14 +60,13 @@ const resetEmbed = () => {
 	}
 
 	const trigger = embed.querySelector( '.c-video__trigger' );
-	const parent = embed.querySelector( '.c-video__embed' );
 	const iframe = embed.querySelector( 'iframe' );
 	if ( ! iframe || ! trigger ) {
 		return;
 	}
 
 	// Remove embed
-	parent.removeChild( iframe );
+	embed.removeChild( iframe );
 	embed.classList.remove( 'c-video--is-playing' );
 
 	// Fade in image/caption
@@ -99,6 +98,7 @@ const playEmbed = ( e ) => {
 	iframe.height = 720;
 	iframe.tabIndex = 0;
 	iframe.allow = 'autoplay; fullscreen';
+	iframe.title = parent.getAttribute( 'data-embed-title' );
 
 	// Add & kickoff embed
 	parent.classList.add( 'c-video--is-playing' );

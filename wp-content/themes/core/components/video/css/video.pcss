@@ -3,64 +3,30 @@
  * Component: Video
  *
  * ----------------------------------------------------------------------------- */
-
-:root {
-	--color-video-trigger-overlay: linear-gradient(360deg, #222 0%, rgba(34, 34, 34, 0.1) 54.52%, rgba(34, 34, 34, 0) 100%);
-}
-
 .c-video {
 	break-inside: avoid-column;
-
-	.t-content & {
-		margin: var(--spacer-70) auto;
-		max-width: none;
-	}
+	background-color: var(--color-grey-light);
 
 	br,
 	p {
 		display: none;
 	}
-}
-
-.c-video__wrapper {
-	position: relative;
-	overflow: hidden;
-
-	iframe,
-	object,
-	embed {
-		width: 100%;
-		height: 100%;
-	}
-}
-
-.c-video__embed {
-	background: var(--color-black);
-	aspect-ratio: '16:9';
 
 	a {
 		text-decoration: none;
 	}
 }
 
+/* -----------------------------------------------------------------------------
+ * Play Button (Link)
+ * ----------------------------------------------------------------------------- */
+
 .c-video__trigger {
-	display: block;
+	position: relative;
+	display: flex;
 	height: 100%;
 	transition: var(--transition);
-
-	&:hover,
-	&:focus {
-
-		.c-video__icon {
-			background-color: var(--color-secondary);
-			transform: scale(1.1);
-		}
-	}
-
-	.c-video--is-playing & {
-		opacity: 0;
-		transition: var(--transition-ease-out-opacity);
-	}
+	padding: var(--spacer-30);
 
 	&:before {
 		content: '';
@@ -71,13 +37,39 @@
 		right: 0;
 		top: 0;
 		bottom: 0;
-		background: var(--color-video-trigger-overlay);
+		background: var(--gradient-video-trigger-overlay);
 		opacity: 0.85;
 		z-index: 1;
 	}
+
+	/* CASE: Small viewport video player active */
+	.c-video--is-small & {
+		padding: var(--spacer-20);
+	}
+
+	/* CASE: Trigger Action: Position Center */
+	.c-video--trigger-center & {
+		align-items: center;
+		justify-content: center;
+	}
+
+	/* CASE: Trigger Action: Position Bottom */
+	.c-video--trigger-bottom & {
+		align-items: flex-end;
+	}
+
+	/* CASE: Video is playing */
+	.c-video--is-playing & {
+		opacity: 0;
+		transition: var(--transition-ease-out-opacity);
+	}
 }
 
-.c-video__image {
+/* -----------------------------------------------------------------------------
+ * Cover Image
+ * ----------------------------------------------------------------------------- */
+
+.c-video__thumbnail {
 	margin: 0;
 	width: 100%;
 	height: 100%;
@@ -85,162 +77,143 @@
 	top: 0;
 	left: 0;
 
+	/* CASE: Video data not loaded or loading */
 	&.lazyload,
 	&.lazyloading {
 		opacity: 0;
 	}
 
+	/* CASE: Video data loaded */
 	&.lazyloaded {
 		opacity: 1;
 		transition: var(--transition-opacity);
 	}
 
+	/* CASE: Low-resolution cover image applied */
 	.c-video--lazy-low-res & {
 		margin-top: -9.4%;
 	}
 }
 
+/* -----------------------------------------------------------------------------
+ * Play Button (Link) Trigger Wrapper
+ * ----------------------------------------------------------------------------- */
+
 .c-video__trigger-action {
 	opacity: 0;
-	transition: opacity 0.15s ease-in;
-	position: absolute;
-	color: var(--color-white);
-	padding: 20px 25px;
+	position: relative;
 	z-index: 1;
-	text-align: center;
-	left: 0;
-	right: 0;
-	top: 50%;
-	width: 100%;
-	transform: translateY(-50%);
+	color: var(--color-white);
+	transition: var(--transition-opacity);
 
+	@media (--viewport-full) {
+		width: 60%;
+	}
+
+	/* CASE: Small viewport video player active */
+	.c-video--is-small & {}
+
+	/* CASE: Trigger Action: Position Bottom */
+	.c-video--trigger-bottom & {
+		display: flex;
+		align-items: center;
+	}
+
+	/* CASE: Video data loaded */
 	.lazyloaded ~ & {
 		opacity: 1;
 		transition: var(--transition-ease-in-opacity);
 	}
 
-	.c-video--is-small & {
-		padding: 0;
-	}
-
-	/* CASE: Bottom Caption Position - Displays centered on mobile */
-	.c-video--caption-bottom & {
-		@media (--viewport-medium) {
-			text-align: left;
-			top: auto;
-			right: auto;
-			left: 0;
-			bottom: 0;
-			display: flex;
-			flex-flow: row nowrap;
-			align-items: center;
-			width: 75%;
-			transform: none;
-		}
-
-		@media (--viewport-full) {
-			width: 50%;
-		}
-	}
-}
-
-.c-video__caption {
-	/* CASE: Below Caption Position */
-	.c-video--caption-below & {
-		position: relative;
-		margin: var(--spacer-40) auto 0;
-		font-weight: 700;
-	}
-
-	/* CASE: Bottom Caption Position */
-	.c-video--caption-bottom & {
-		position: absolute;
-		width: calc(100% - 120px);
-		left: 120px;
-		bottom: 55px;
-		color: var(--color-white);
-		z-index: 1;
-		pointer-events: none;
-	}
-
-	/* CASE: Center Caption Position */
-	.c-video--caption-center & {
-		text-align: center;
-		position: absolute;
-		top: 50%;
-		left: 0;
-		width: 100%;
-		transform: translateY(-50%);
-		z-index: 1;
-		pointer-events: none;
-		color: var(--color-white);
-		font-weight: 700;
-		transition: var(--transition-embed-icon);
-
-		@media (--viewport-full) {
-			margin-top: 100px;
-		}
-	}
-
-	/* CASE: Center & Bottom Caption while video is playing */
-	.c-video--is-playing.c-video--caption-center &,
-	.c-video--is-playing.c-video--caption-bottom & {
+	/* CASE: Video is playing */
+	.c-video--is-playing & {
 		opacity: 0;
 		transition: var(--transition-ease-out-opacity);
 	}
 }
 
-.c-video__icon {
-	font-size: 36px;
-	transition: var(--transition-embed-icon);
-	border-radius: var(--border-radius-round);
-	background-color: var(--color-primary);
-	width: 70px;
-	height: 70px;
-	text-align: center;
-	display: inline-block;
+/* -----------------------------------------------------------------------------
+ * Trigger Icon
+ * ----------------------------------------------------------------------------- */
 
-	@media (--viewport-full) {
-		font-size: 60px;
-		width: 100px;
-		height: 100px;
-	}
+.c-video__trigger-icon {
+	display: block;
+	margin: 48px auto var(--spacer-30); /* margin-top is 1/2 the height of the icon to improve vertical centering. */
+	width: 96px;
+	height: 96px;
+	text-align: center;
+	border-radius: 50%;
+	color: var(--color-text);
+	background-color: var(--color-white);
+	transition: var(--transition-embed-icon);
 
 	&:before {
-		display: inline-block;
-		position: relative;
-		left: 3px;
-		top: 1px;
-		line-height: 70px;
-		backface-visibility: hidden;
+		@mixin icon;
 
-		@media (--viewport-full) {
-			line-height: 100px;
-			left: 5px;
+		font-size: 56px;
+		line-height: 99px;
+		margin-left: 4px;
+	}
+
+	/* CASE: Small viewport video player active */
+	.c-video--is-small & {
+		width: 56px;
+		height: 56px;
+		margin-top: 28px; /* margin-top is 1/2 the height of the icon to improve vertical centering. */
+		margin-bottom: var(--spacer-10);
+
+		&:before {
+			font-size: 28px;
+			line-height: 58px;
+			margin-left: 2px;
 		}
+	}
+
+	/* CASE: Trigger Action: Position Bottom */
+	.c-video--trigger-bottom & {
+		flex: 0 0 auto;
+		width: 64px;
+		height: 64px;
+		margin: 0 var(--spacer-20) 0 0;
+
+		&:before {
+			font-size: 36px;
+			line-height: 66px;
+		}
+	}
+
+	a:hover &,
+	a:focus & {
+		color: var(--color-white);
+		background-color: var(--color-primary);
+		transform: scale(1.1);
 	}
 }
 
-.c-video__caption-text {
-	font-size: 18px;
-	font-weight: 700;
+/* -----------------------------------------------------------------------------
+ * Trigger Label
+ * ----------------------------------------------------------------------------- */
+
+.c-video__trigger-label {
+	@mixin t-display-x-small;
+
 	display: block;
-	margin: 18px auto 0;
-	text-transform: uppercase;
-	line-height: 1.25;
-	max-width: 600px;
+	text-align: center;
 
+	/* CASE: Small viewport video player active */
 	.c-video--is-small & {
-		display: none;
+		@mixin t-display-xx-small;
 	}
 
-	/* CASE: Bottom Caption Position */
-	.c-video--caption-bottom & {
-		margin: 0 0 0 25px;
+	/* CASE: Trigger Action: Position Bottom */
+	.c-video--trigger-bottom & {
+		@mixin t-body-large;
+
+		text-align: left;
 	}
 
-	/* CASE: Below Caption Position */
-	.c-video--caption-below & {
-		max-width: none;
+	/* CASE: Trigger Action: Position Bottom and small viewport player active */
+	.c-video--trigger-bottom.c-video--is-small & {
+		@mixin t-body;
 	}
 }
