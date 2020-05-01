@@ -4,7 +4,7 @@
 	ul {
 
 		li {
-			padding-left: 42px;
+			padding-left: var(--form-control-radio-checkbox-padding-left);
 			margin: 0;
 		}
 	}
@@ -67,6 +67,10 @@
 
 .gfield_checkbox {
 	@mixin form-control-checkbox;
+
+	li input:checked + label:after {
+		content: var(--icon-check);
+	}
 }
 
 .gfield_radio {
