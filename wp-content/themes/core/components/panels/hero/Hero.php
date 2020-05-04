@@ -7,18 +7,18 @@ use Tribe\Project\Templates\Components\Context;
 
 class Hero extends Context {
 
-	public const CLASSES         = 'classes';
-	public const WRAPPER         = 'wrapper';
-	public const WRAPPER_CLASSES = 'wrapper_classes';
-	public const HEADER_CLASSES  = 'header_classes';
+	public const CLASSES    = 'classes';
+	public const ATTRIBUTES = 'attrs';
 
+	public const TITLE    = 'title';
+	public const SUBTITLE = 'subtitle';
+	public const CONTENT  = 'content';
+	public const CTA      = 'cta';
+	public const MEDIA    = 'media';
 
-	public const TITLE            = 'title';
-	public const CONTENT          = 'content';
-	public const IMAGE            = 'image';
-	public const LAYOUT           = 'layout';
-	public const BACKGROUND_COLOR = 'background_color'; // bake this in for control
-	public const COLOR            = 'foreground_color'; // bake this in for control
+	public const SETTING_HORIZONTAL_ALIGN = 'setting_horizontal_alignment';
+	public const SETTING_BGD_COLOR        = 'setting_background_color';
+	public const SETTING_TEXT_COLOR       = 'setting_text_color';
 
 
 	protected $path = __DIR__ . '/hero.twig';
@@ -26,26 +26,30 @@ class Hero extends Context {
 	protected $properties = [
 		self::CLASSES     => [
 			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [ 'panel', 's-wrapper', 'site-panel' ],
+			self::MERGE_CLASSES => [ 'b-hero' ],
 		],
-		self::WRAPPER_CLASSES     => [
-			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [ 'l-container', 'u-vertical-padding' ],
+		self::ATTRIBUTES  => [
+			self::DEFAULT          => [],
+			self::MERGE_ATTRIBUTES => [],
 		],
+
 		self::TITLE       => [
+			self::DEFAULT => '',
+		],
+		self::SUBTITLE       => [
 			self::DEFAULT => '',
 		],
 		self::CONTENT     => [
 			self::DEFAULT => '',
 		],
-		self::IMAGE         => [
+		self::MEDIA         => [
 			self::DEFAULT => '',
 		],
-		self::LAYOUT_CLASSES        => [
-			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [ 'g-row', 'g-row--vertical-center' ],
+		self::CTA         => [
+			self::DEFAULT => '',
 		],
-		self::BACKGROUND_COLOR => [
+
+		self::SETTING_BGD_COLOR => [
 			self::DEFAULT       => [],
 			self::MERGE_CLASSES => [],
 		],
