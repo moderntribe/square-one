@@ -24,7 +24,7 @@
 }
 
 /* -----------------------------------------------------------------------------
- * Block Editor Embeds
+ * Block Editor: Embeds
  * ----------------------------------------------------------------------------- */
 
 .wp-block-embed {
@@ -68,7 +68,26 @@
 	}
 
 	iframe {
+		position: absolute;
 		width: 100%;
 		height: 100%;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Block Editor: Audio
+ * ----------------------------------------------------------------------------- */
+
+.wp-block-audio {
+	/* CASE: align wide & full break to the full-kitchen sink width. */
+	&.alignfull,
+	&.alignwide {
+		margin-left: 0;
+		margin-right: 0;
+		max-width: 100%;
+	}
+
+	audio {
+		width: 100%;
 	}
 }
