@@ -1,11 +1,26 @@
 {# Panel: Hero #}
 
-{{ image }}
+<section {{ classes }}>
 
-<div class="l-container u-vertical-padding">
-	<div class="g-row g-row--vertical-center {{ layout }}">
-		<div class="s-sink t-sink {{ text_color }}">
-			{{ content_block }}
+	{{ image }}
+
+	<div {{ wrapper_classes }}>
+
+		<div {{ layout_classes }}>
+
+			<div class="s-sink t-sink {{ text_color }}">
+
+				{% if title or content %}
+					<header {{ header_classes }}>
+						{{ title }}
+						{{ content }}
+					</header>
+				{% endif %}
+
+			</div>
+
 		</div>
+
 	</div>
-</div>
+
+</section>

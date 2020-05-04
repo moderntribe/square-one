@@ -12,15 +12,19 @@ namespace Tribe\Project\Templates\Components;
  * @property string[] $content_classes
  */
 class Content_Block extends Context {
+	public const TAG     = 'tag';
 	public const TITLE           = 'title';
 	public const TEXT            = 'text';
 	public const BUTTON          = 'button';
 	public const CLASSES         = 'classes';
-	public const CONTENT_CLASSES = 'content_classes';
+	public const WRAPPER_CLASSES = 'content_classes';
 
 	protected $path = __DIR__ . '/contentblock.twig';
 
 	protected $properties = [
+		self::TAG     => [
+			self::DEFAULT => 'div',
+		],
 		self::TITLE           => [
 			self::DEFAULT => '',
 		],
@@ -34,7 +38,7 @@ class Content_Block extends Context {
 			self::DEFAULT       => [],
 			self::MERGE_CLASSES => [ 'c-content-block' ],
 		],
-		self::CONTENT_CLASSES => [
+		self::WRAPPER_CLASSES => [
 			self::DEFAULT       => [],
 			self::MERGE_CLASSES => [ 'c-content-block__content' ],
 		],

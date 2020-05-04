@@ -13,7 +13,7 @@ Attributes:
 	{
 		classes: '', // string. The wrapper classes
 		cta_classes: '', // string. The buttons in cta mode classes
-		content_classes: '', // string. The content classes for the title, text and button wrapper
+		wrapper_classes: '', // string. The content classes for the title, text and button wrapper
 		cta: '', // array. The array that contains the cta url, label and target
 		url: '', // string. Lives in the cta array. The url.
 		label: '', // string. Lives in the cta array. The link text
@@ -28,9 +28,9 @@ Attributes:
     }
  #}
 
-<div {{ classes }}>
+<{{ tag }} {{ classes }}>
 
-	<div {{ content_classes }}>
+	<div {{ wrapper_classes }}>
 
 		{% if title %}
 			{{ title }}
@@ -45,4 +45,4 @@ Attributes:
 		{% endif %}
 
 	</div>
-</div>
+</>
