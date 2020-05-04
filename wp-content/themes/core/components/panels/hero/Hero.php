@@ -32,10 +32,6 @@ class Hero extends Context {
 			self::DEFAULT       => [],
 			self::MERGE_CLASSES => [ 'l-container', 'u-vertical-padding' ],
 		],
-		self::HEADER_CLASSES     => [
-			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [ 's-header' ],
-		],
 		self::TITLE       => [
 			self::DEFAULT => '',
 		],
