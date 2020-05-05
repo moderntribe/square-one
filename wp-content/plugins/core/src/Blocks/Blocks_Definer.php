@@ -28,7 +28,7 @@ class Blocks_Definer implements Definer_Interface {
 			self::CONTROLLER_MAP => DI\add( [
 				Types\Accordion::NAME => Controllers\Block\Accordion::class,
 				Types\Button::NAME    => Controllers\Block\Button::class,
-				Types\Hero::NAME => Controllers\Block\Hero::class,
+				Types\Hero::NAME      => Controllers\Block\Hero::class,
 			] ),
 
 			/**
