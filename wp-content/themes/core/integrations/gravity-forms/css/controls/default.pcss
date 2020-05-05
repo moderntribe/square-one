@@ -8,7 +8,6 @@
 	input[type="email"],
 	input[type="month"],
 	input[type="number"],
-	input[type="password"],
 	input[type="range"],
 	input[type="search"],
 	input[type="tel"],
@@ -37,13 +36,11 @@
 
 /* Simple Fields */
 .ginput_container {
-	position: relative;
-
 	/* Phone */
 	.gf-phone.form-control-icon & {
 
 		&:before {
-			content: '';
+			content: var(--gf-control-icon-phone);
 		}
 	}
 
@@ -51,7 +48,7 @@
 	.gf-name.form-control-icon & {
 
 		&:before {
-			content: '';
+			content: var(--gf-control-icon-name);
 		}
 	}
 
@@ -59,7 +56,7 @@
 	.gf-email.form-control-icon & {
 
 		&:before {
-			content: var(--icon-email);
+			content: var(--gf-control-icon-email);
 		}
 	}
 
@@ -67,7 +64,7 @@
 	.gf-date.form-control-icon & {
 
 		&:before {
-			content: var(--icon-calendar);
+			content: var(--gf-control-icon-date);
 		}
 	}
 
@@ -75,7 +72,7 @@
 	.gf-address.form-control-icon & {
 
 		&:before {
-			content: var(--icon-pin);
+			content: var(--gf-control-icon-address);
 		}
 	}
 
@@ -83,7 +80,7 @@
 	.gf-url.form-control-icon & {
 
 		&:before {
-			content: var(--icon-link);
+			content: var(--gf-control-icon-url);
 		}
 	}
 
@@ -91,7 +88,7 @@
 	.gf-password.form-control-icon & {
 
 		&:before {
-			content: var(--icon-lock);
+			content: var(--gf-control-icon-password);
 		}
 	}
 }
@@ -102,7 +99,7 @@
 	.form-control-icon-complex & {
 
 		&:before {
-			right: 15px;
+			right: var(--gf-control-icon-complex-position-right);
 		}
 
 		&:nth-of-type(even) {

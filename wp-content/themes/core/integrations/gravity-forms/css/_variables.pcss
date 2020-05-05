@@ -3,23 +3,138 @@
 	 * General
 	 * ----------------------------------------------------------------------------- */
 
+	--gf-heading-margin-bottom: var(--spacer-40);
+
+	/* -----------------------------------------------------------------------------
+	 * Descriptions & Helpers
+	 * ----------------------------------------------------------------------------- */
+
+	--gf-description-margin-bottom: 20px;
+	--gf-description-max-width: 600px;
+
 	/* -----------------------------------------------------------------------------
 	 * Complex Layouts
 	 * ----------------------------------------------------------------------------- */
 
-	--gf-control-complex-gutter: var(--spacer-10);
+	--gf-control-complex-margin-bottom: -11px;
+	--gf-control-complex-gutter: 8px;
+
+	/* -----------------------------------------------------------------------------
+	 * Controls
+	 * ----------------------------------------------------------------------------- */
+
+	--gf-control-margin-bottom: var(--form-control-margin-bottom);
+
+	/* -----------------------------------------------------------------------------
+	 * Control Icon
+	 * ----------------------------------------------------------------------------- */
+
+	--gf-control-icon-complex-position-right: 15px;
+	--gf-control-icon-phone: '';
+	--gf-control-icon-name: '';
+	--gf-control-icon-email: '';
+	--gf-control-icon-date: '';
+	--gf-control-icon-address: '';
+	--gf-control-icon-url: '';
+	--gf-control-icon-password: '';
 
 	/* -----------------------------------------------------------------------------
 	 * Control: File
 	 * ----------------------------------------------------------------------------- */
 
-	--gf-control-file-border-color: var(--form-border-color);
-	--gf-control-file-border-size: var(--form-border-size);
+	--gf-control-file-bgd-color: var(--form-control-bgd-color);
+	--gf-control-file-border-color: var(--form-control-border-color);
+	--gf-control-file-border-size: var(--form-control-border-size);
+	--gf-control-file-font-style: var(--form-control-font-style);
+	--gf-control-file-font-weight: var(--form-control-font-weight);
+	--gf-control-file-font-size: var(--form-font-size);
+	--gf-control-file-line-height: 1;
+	--gf-control-file-font-family: var(--form-font-family);
+	--gf-control-file-padding: var(--form-control-file-padding);
+	--gf-control-filemulti-margin-top: var(--spacer-20);
+	--gf-control-filemulti-padding: var(--form-control-file-padding);
+	--gf-control-file-preview-bgd-color: darken(var(--form-control-bgd-color), 0.1);
+
+	/* -----------------------------------------------------------------------------
+	 * Control: Lists
+	 * ----------------------------------------------------------------------------- */
+
+	--gf-control-lists-bgd-color: var(--form-control-bgd-color);
+
+	/* -----------------------------------------------------------------------------
+	 * Control: Radio & Checkbox
+	 * ----------------------------------------------------------------------------- */
+
+	--gf-control-radio-checkbox-ui-push-label-right: 42px;
+	--gf-control-radio-checkbox-hide-browser-ui-position-top: 16px;
+	--gf-control-radio-checkbox-other-ui-input-position-top: 11px;
+	--gf-control-radio-checkbox-other-ui-mark-position-top: 19px;
+
+	/* -----------------------------------------------------------------------------
+	 * Control: Textarea
+	 * ----------------------------------------------------------------------------- */
+
+	--gf-control-textarea-padding-bottom: calc(var(--gf-control-textarea-counter-height) + 10px);
+	--gf-control-textarea-counter-bgd-color: var(--form-ui-bgd-color);
+	--gf-control-textarea-counter-border-bottom-radius: 0;
+	--gf-control-textarea-counter-color: var(--form-ui-color);
+	--gf-control-textarea-counter-font-size: var(--form-font-size-secondary);
+	--gf-control-textarea-counter-font-family: var(--form-font-family);
+	--gf-control-textarea-counter-font-style: normal;
+	--gf-control-textarea-counter-font-weight: 400;
+	--gf-control-textarea-counter-height: 30px;
+	--gf-control-textarea-counter-line-height: 32px;
+	--gf-control-textarea-counter-padding-horizontal: 15px;
+	--gf-control-textarea-counter-position-left: 1px;
+	--gf-control-textarea-counter-position-bottom: 1px;
 
 	/* -----------------------------------------------------------------------------
 	 * Control: Time & Date
 	 * ----------------------------------------------------------------------------- */
 
 	--gf-control-time-date-margin-bottom: -11px;
+	--gf-control-time-date-max-width: 250px;
+	--gf-control-date-max-width: 500px;
+	--gf-control-date-margin-top: 20px;
+	--gf-control-date-position-right: 9px;
 
+	/* -----------------------------------------------------------------------------
+	 * Validation
+	 * ----------------------------------------------------------------------------- */
+
+	--gf-validation-border-radius: var(--form-control-border-color);
+	--gf-validation-border-size: var(--form-control-border-size);
+	--gf-validation-font-family: var(--form-font-family);
+	--gf-validation-font-line-height: var(--form-control-helper-font-line-height);
+	--gf-validation-font-style: normal;
+	--gf-validation-font-size: var(--form-control-helper-font-size);
+	--gf-validation-font-weight: var(--form-control-helper-font-weight);
+	--gf-validation-letter-spacing: var(--form-control-helper-letter-spacing);
+	--gf-validation-margin-top: -12px;
+	--gf-validation-max-width: 600px;
+	--gf-validation-padding: 0 3px 0 10px;
+	--gf-validation-text-transform: var(--form-control-helper-text-transform);
+	--gf-validation-message-margin-top: 8px;
+
+	/* State: Error */
+	--gf-state-error-border-color: var(--form-state-color-error);
+	--gf-state-error-color: var(--form-state-color-error);
+
+	/* State: Success */
+	--gf-state-success-border-color: var(--form-state-color-success);
+	--gf-state-success-bgd-color: var(--form-control-bgd-color);
+	--gf-state-success-color: var(--color-text);
+	--gf-state-success-margin: var(--spacer-70) 0;
+	--gf-state-success-padding: 68px 25px 80px;
+	--gf-state-success-icon: var(--icon-check);
+	--gf-state-success-icon-color: var(--form-state-color-success);
+	--gf-state-success-icon-font-size: 65px;
+	--gf-state-success-icon-to-text-spacing: 20px;
+	--gf-state-success-font-family: var(--form-font-family);
+	--gf-state-success-font-size: 20px;
+	--gf-state-success-font-style: normal;
+	--gf-state-success-font-weight: 400;
+	--gf-state-success-line-height: 1.25;
+	--gf-state-success-letter-spacing: normal;
+	--gf-state-success-text-transform: none;
 }

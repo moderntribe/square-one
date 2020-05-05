@@ -1,9 +1,5 @@
 .validation_error {
 	display: none;
-
-	.gform_wrapper #error & {
-		display: block;
-	}
 }
 
 .gfield_error {
@@ -11,59 +7,23 @@
 	input[type],
 	textarea,
 	select {
-		border-color: var(--form-color-error);
+		border-color: var(--gf-state-error-border-color);
+		box-shadow: 0 0 0 var(--gf-validation-border-size) var(--gf-state-error-border-color);
 	}
 
 	.gfield_description {
 
 		& ~ .validation_message {
-			margin-top: -12px;
+			margin-top: var(--gf-validation-margin-top);
 		}
 	}
 
 	.validation_message {
-		color: var(--form-color-error);
-		margin-top: var(--form-margin-small);
-		padding: 0;
-		letter-spacing: var(--form-control-helper-letter-spacing);
-		text-transform: var(--form-control-helper-text-transform);
-		font: normal var(--form-control-helper-font-weight) var(--form-control-helper-font-size) var(--form-font-family);
-		line-height: var(--form-control-helper-font-line-height);
-	}
-}
-
-.gform_wrapper {
-
-	#error {
-		background-color: rgba(255, 61, 91, 0.1);
-		border-left: 4px solid var(--form-color-error);
-		font: normal 400 var(--form-font-size-secondary) / 1.4 var(--form-font-family);
-		margin-bottom: var(--spacer-40);
-		padding: var(--spacer-30) 28px;
-	}
-
-	.validation_list {
-		font: normal 600 var(--form-font-size) / 1.18 var(--form-font-family);
-		margin: var(--form-margin-small) 0 0;
-		padding-left: 1.25em;
-
-		li {
-			padding-left: var(--form-margin-small);
-
-			~ li {
-				margin-top: var(--form-margin-small);
-			}
-		}
-
-		a {
-			text-decoration: none;
-
-			&:hover,
-			&:focus {
-				color: currentColor;
-				text-decoration-color: currentColor;
-				text-decoration: underline;
-			}
-		}
+		color: var(--gf-state-error-color);
+		margin-top: var(--gf-validation-message-margin-top);
+		padding: var(--gf-validation-padding);
+		letter-spacing: var(--gf-validation-letter-spacing);
+		text-transform: var(--gf-validation-text-transform);
+		font: var(--gf-validation-font-style) var(--gf-validation-font-weight) var(--gf-validation-font-size) / var(--gf-validation-font-line-height) var(--gf-validation-font-family);
 	}
 }
