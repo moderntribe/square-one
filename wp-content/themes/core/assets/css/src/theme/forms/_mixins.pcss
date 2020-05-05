@@ -11,8 +11,24 @@
  * ----------------------------------------------------------------------------- */
 
 @define-mixin form-control-group-radio-checkbox {
-	padding-top: var(--form-control-group-radio-checkbox-padding-top);
-	padding-bottom: var(--form-control-group-radio-checkbox-padding-bottom);
+	padding-top: var(--form-margin-small);
+	padding-bottom: 4px;
+}
+
+/* -----------------------------------------------------------------------------
+ *
+ * Form Label
+ *
+ * ----------------------------------------------------------------------------- */
+
+@define-mixin form-label {
+	display: block;
+	margin-bottom: var(--form-margin-small);
+	padding: 0;
+	color: var(--form-color);
+	letter-spacing: normal;
+	text-transform: none;
+	font: normal 600 var(--form-font-size-secondary) / 1.4 var(--form-font-family);
 }
 
 /* -----------------------------------------------------------------------------
@@ -22,12 +38,13 @@
  * ----------------------------------------------------------------------------- */
 
 @define-mixin form-control-helper {
-	margin-top: var(--form-control-helper-margin-top);
-	padding: var(--form-control-helper-padding);
-	color: var(--form-control-helper-color);
+	margin-top: var(--form-margin-small);
+	padding: 0;
+	color: var(--form-color-secondary);
 	letter-spacing: var(--form-control-helper-letter-spacing);
 	text-transform: var(--form-control-helper-text-transform);
-	font: var(--form-control-helper-font-style) var(--form-control-helper-font-weight) var(--form-control-helper-font-size) / var(--form-control-helper-font-line-height) var(--form-control-helper-font-family);
+	font: normal var(--form-control-helper-font-weight) var(--form-control-helper-font-size) var(--form-control-helper-font-family);
+	line-height: var(--form-control-helper-font-line-height);
 }
 
 /* -----------------------------------------------------------------------------
@@ -37,8 +54,8 @@
  * ----------------------------------------------------------------------------- */
 
 @define-mixin required {
-	padding-left: 4px;
-	color: var(--form-state-color-required);
+	padding-left: 2px;
+	color: currentColor;
 }
 
 /* -----------------------------------------------------------------------------
@@ -75,8 +92,8 @@
 @define-mixin form-control {
 	transition: var(--transition);
 	padding: var(--form-control-padding);
-	border: var(--form-control-border-size) solid var(--form-control-border-color);
-	border-radius: var(--form-control-border-radius);
+	border: var(--form-border-size) solid var(--form-border-color);
+	border-radius: var(--form-border-radius);
 	background-color: var(--form-control-bgd-color);
 	display: block;
 	width: 100%;
@@ -84,7 +101,8 @@
 	color: var(--form-control-color);
 	letter-spacing: var(--form-control-letter-spacing);
 	text-transform: var(--form-control-text-transform);
-	font: var(--form-control-font-style) var(--form-control-font-weight) var(--form-control-font-size) / var(--form-control-font-line-height) var(--form-control-font-family);
+	font: var(--form-control-font-style) var(--form-control-font-weight) var(--form-control-font-size) var(--form-control-font-family);
+	line-height: var(--form-control-font-line-height);
 }
 
 /* -----------------------------------------------------------------------------
@@ -111,20 +129,20 @@
 
 		display: block;
 		transition: var(--transition);
-		content: var(--form-control-select-ui-icon);
+		content: var(--icon-chevron-down);
 		text-align: center;
-		height: var(--form-control-select-ui-height);
+		height: calc(var(--form-control-height) - 2px);
 		width: var(--form-control-select-ui-width);
-		line-height: var(--form-control-select-ui-line-height);
+		line-height: var(--form-control-height);
 		background-color: var(--form-control-select-ui-bgd-color);
 		color: var(--form-control-select-ui-color);
 		position: absolute;
-		font-size: var(--form-control-select-ui-font-size);
-		right: var(--form-control-select-ui-position-right);
-		top: var(--form-control-select-ui-position-top);
+		font-size: 25px;
+		right: 1px;
+		top: 1px;
 		pointer-events: none;
-		border-top-right-radius: var(--form-control-select-ui-border-radius-top-right);
-		border-bottom-right-radius: var(--form-control-select-ui-border-radius-bottom-right);
+		border-top-right-radius: var(--form-border-radius);
+		border-bottom-right-radius: var(--form-border-radius);
 	}
 
 	select {
@@ -156,31 +174,32 @@
 	}
 
 	label {
-		color: var(--form-control-radio-checkbox-label-color);
+		border-bottom: 1px solid transparent;
+		color: var(--form-control-color);
 		cursor: pointer;
 		margin-bottom: 0;
 		display: inline-block;
-		letter-spacing: var(--form-control-radio-checkbox-label-letter-spacing);
-		text-transform: var(--form-control-radio-checkbox-label-text-transform);
-		font: var(--form-control-radio-checkbox-label-font-style) var(--form-control-radio-checkbox-label-font-weight) var(--form-control-radio-checkbox-label-font-size) / var(--form-control-radio-checkbox-label-font-line-height) var(--form-control-radio-checkbox-label-font-family);
+		letter-spacing: var(--form-control-letter-spacing);
+		text-transform: var(--form-control-text-transform);
+		font: var(--form-control-font-style) var(--form-control-font-weight) var(--form-font-size) / 1 var(--form-control-font-family);
 	}
 }
 
 @define-mixin form-control-radio-checkbox {
 	transition: var(--transition);
 	position: relative;
-	padding-left: var(--form-control-radio-checkbox-ui-push-label-right);
+	padding-left: var(--form-control-radio-checkbox-padding-left);
 
 	input[type="radio"],
 	input[type="checkbox"] {
 		position: absolute;
-		left: var(--form-control-radio-checkbox-hide-browser-ui-position-left);
-		top: var(--form-control-radio-checkbox-hide-browser-ui-position-top);
-		font-size: var(--form-control-radio-checkbox-hide-browser-ui-font-size);
+		left: 6px;
+		top: 2px;
+		font-size: 12px;
 	}
 
 	label {
-		max-width: var(--form-control-radio-checkbox-label-max-width);
+		max-width: 600px;
 
 		&:before,
 		&:after {
@@ -190,11 +209,11 @@
 		}
 
 		&:before {
-			background-color: var(--form-control-radio-checkbox-ui-bgd-color);
-			width: var(--form-control-radio-checkbox-ui-width);
-			height: var(--form-control-radio-checkbox-ui-height);
-			top: var(--form-control-radio-checkbox-ui-position-top);
-			left: var(--form-control-radio-checkbox-ui-position-left);
+			background-color: var(--form-control-bgd-color);
+			width: var(--form-control-checkbox-size);
+			height: var(--form-control-checkbox-size);
+			top: var(--form-control-checkbox-position-top);
+			left: var(--form-control-checkbox-position-left);
 			border: var(--form-control-radio-checkbox-ui-border-size) solid var(--form-control-radio-checkbox-ui-border-color);
 		}
 
@@ -203,13 +222,20 @@
 		}
 	}
 
+	input:focus + label {
+		border-bottom: 1px solid currentColor;
+	}
+
 	input:focus + label:before {
 		border-color: var(--form-control-radio-checkbox-ui-border-color-focus);
-		box-shadow: 0 0 0 var(--form-control-radio-checkbox-ui-border-size-focus) var(--form-control-radio-checkbox-ui-border-color-focus);
 	}
 
 	input:checked + label {
-		color: var(--form-control-radio-checkbox-label-color-checked);
+		color: var(--form-control-color);
+
+		&:before {
+			background-color: var(--form-control-radio-checkbox-ui-bgd-color-checked);
+		}
 
 		&:after {
 			opacity: 1;
@@ -228,18 +254,22 @@
 	label {
 
 		&:before {
-			border-radius: var(--form-control-checkbox-ui-border-radius);
+			border-radius: var(--form-border-radius);
 		}
 
 		&:after {
-			left: var(--form-control-checkbox-ui-position-left);
-			top: var(--form-control-checkbox-ui-position-top);
-			width: var(--form-control-checkbox-ui-width);
-			height: var(--form-control-checkbox-ui-height);
-			border: var(--form-control-checkbox-ui-border-size) solid var(--form-control-radio-checkbox-ui-color);
-			border-top: none;
-			border-right: none;
-			transform: rotate(-50deg);
+			@mixin icon;
+
+			display: block;
+			transition: var(--transition);
+			content: var(--icon-check);
+			text-align: center;
+			height: var(--form-control-checkbox-size);
+			width: var(--form-control-checkbox-size);
+			color: var(--form-control-radio-checkbox-ui-color);
+			font-size: 25px;
+			left: var(--form-control-checkbox-position-left);
+			top: var(--form-control-checkbox-position-top);
 		}
 	}
 }
@@ -260,10 +290,10 @@
 		}
 
 		&:after {
-			left: var(--form-control-radio-ui-position-left);
-			top: var(--form-control-radio-ui-position-top);
-			width: var(--form-control-radio-ui-width);
-			height: var(--form-control-radio-ui-height);
+			left: 7px;
+			top: 3px;
+			width: 10px;
+			height: 10px;
 			background-color: var(--form-control-radio-checkbox-ui-color);
 		}
 	}
@@ -279,19 +309,19 @@
 	position: relative;
 
 	input {
-		padding-right: var(--form-control-icon-padding-right);
+		padding-right: var(--form-control-height);
 	}
 
 	&:before {
 		position: absolute;
 		right: var(--form-control-icon-position-right);
 		top: var(--form-control-icon-position-top);
-		color: var(--form-control-icon-color);
+		color: lightgrey;
 		height: 100%;
-		width: var(--form-control-icon-width);
-		line-height: var(--form-control-icon-line-height);
+		width: var(--form-control-height);
+		line-height: var(--form-control-height);
 		text-align: center;
 		z-index: 1;
-		font-size: var(--form-control-icon-font-size);
+		font-size: 20px;
 	}
 }
