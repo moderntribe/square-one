@@ -2,13 +2,17 @@
  *
  * Utility Classes: Typography
  *
+ * Wildcard selectors are used to allow matching both the simple
+ * `t-overline` selector in addition to block editor-applied "is-style"
+ * selectors like `.is-style-t-overline`.
+ *
  * ----------------------------------------------------------------------------- */
 
 /* -------------------------------------------------------------------------
  * Display X-Large
  * ------------------------------------------------------------------------- */
 
-.t-display-x-large {
+[class*="t-display-x-large"] {
 	@mixin t-display-x-large;
 }
 
@@ -16,7 +20,7 @@
  * Display Large
  * ------------------------------------------------------------------------- */
 
-.t-display-large {
+[class*="t-display-large"] {
 	@mixin t-display-large;
 }
 
@@ -24,7 +28,7 @@
  * Display
  * ------------------------------------------------------------------------- */
 
-.t-display {
+[class*="t-display"] {
 	@mixin t-display;
 }
 
@@ -32,7 +36,7 @@
  * Display Small
  * ------------------------------------------------------------------------- */
 
-.t-display-small {
+[class*="t-display-small"] {
 	@mixin t-display-small;
 }
 
@@ -40,7 +44,7 @@
  * Display X-Small
  * ------------------------------------------------------------------------- */
 
-.t-display-x-small {
+[class*="t-display-x-small"] {
 	@mixin t-display-x-small;
 }
 
@@ -48,7 +52,7 @@
  * Display XX-Small
  * ------------------------------------------------------------------------- */
 
-.t-display-xx-small {
+[class*="t-display-xx-small"] {
 	@mixin t-display-xx-small;
 }
 
@@ -64,7 +68,7 @@
  * Body
  * ------------------------------------------------------------------------- */
 
-.t-body {
+[class*="t-body"] {
 	@mixin t-body;
 }
 
@@ -72,7 +76,7 @@
  * Body Small
  * ------------------------------------------------------------------------- */
 
-.t-body-small {
+[class*="t-body-small"] {
 	@mixin t-body-small;
 }
 
@@ -85,10 +89,10 @@
 }
 
 /* -------------------------------------------------------------------------
- * Caption
+ * Caption`
  * ------------------------------------------------------------------------- */
 
-.t-caption {
+[class*="t-caption"] {
 	@mixin t-caption;
 }
 
@@ -96,7 +100,7 @@
  * Button
  * ------------------------------------------------------------------------- */
 
-.t-button {
+[class*="t-button"] {
 	@mixin t-button;
 }
 
@@ -104,7 +108,7 @@
  * Text Button/Call To Action
  * ------------------------------------------------------------------------- */
 
-.t-text-button {
+[class*="t-text-button"] {
 	@mixin t-text-button;
 }
 
@@ -112,7 +116,7 @@
  * Input
  * ------------------------------------------------------------------------- */
 
-.t-input {
+[class*="t-input"] {
 	@mixin t-input;
 }
 
@@ -120,6 +124,6 @@
  * Label
  * ------------------------------------------------------------------------- */
 
-.t-label {
+[class*="t-label"] {
 	@mixin t-label;
 }
