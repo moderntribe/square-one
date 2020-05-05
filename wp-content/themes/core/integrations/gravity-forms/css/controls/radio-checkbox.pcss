@@ -4,7 +4,7 @@
 	ul {
 
 		li {
-			padding-left: var(--form-control-radio-checkbox-padding-left);
+			padding-left: var(--gf-control-radio-checkbox-ui-push-label-right);
 			margin: 0;
 		}
 	}
@@ -24,11 +24,11 @@
 		.gf-radio-checkbox-other-placeholder {
 
 			&:before {
-				top: 11px;
+				top: var(--gf-control-radio-checkbox-other-ui-input-position-top);
 			}
 
 			&:after {
-				top: 19px;
+				top: var(--gf-control-radio-checkbox-other-ui-mark-position-top);
 			}
 		}
 
@@ -38,7 +38,7 @@
 		}
 
 		input:checked ~ .gf-radio-checkbox-other-placeholder {
-			color: var(--form-control-color);
+			color: var(--form-control-radio-checkbox-label-color-checked);
 
 			&:after {
 				opacity: 1;
@@ -54,7 +54,7 @@
 
 		&[type="radio"],
 		&[type="checkbox"] {
-			top: 16px;
+			top: var(--gf-control-radio-checkbox-hide-browser-ui-position-top);
 		}
 
 		& + input {
@@ -67,10 +67,6 @@
 
 .gfield_checkbox {
 	@mixin form-control-checkbox;
-
-	li input:checked + label:after {
-		content: var(--icon-check);
-	}
 }
 
 .gfield_radio {
