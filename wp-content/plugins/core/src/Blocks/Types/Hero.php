@@ -8,6 +8,10 @@ use Tribe\Gutenpanels\Blocks\Sections\Content_Section;
 use Tribe\Gutenpanels\Blocks\Sections\Sidebar_Section;
 use Tribe\Project\Blocks\Block_Type_Config;
 
+/*
+ * @TODO: THIS IS NOT COMPLETE AND WILL BE PICKED BACK UP BY RYAN
+ */
+
 class Hero extends Block_Type_Config {
 
 	public const NAME = 'tribe/hero';
@@ -66,6 +70,5 @@ class Hero extends Block_Type_Config {
 			)
 			->build();
 	}
-
 
 }

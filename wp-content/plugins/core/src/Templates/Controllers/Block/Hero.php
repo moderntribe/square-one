@@ -3,6 +3,10 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Templates\Controllers\Block;
 
+/*
+ * @TODO: THIS IS NOT COMPLETE AND WILL BE PICKED BACK UP BY RYAN
+ */
+
 class Hero extends Block_Controller {
 	public function render( string $path = '' ): string {
 		$title = ! empty( $this->attributes[ 'title' ] ) ? '<h1 class="test-hero__title">' . $this->attributes[ 'title' ] . '</h1>' : '';

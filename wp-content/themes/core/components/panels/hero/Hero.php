@@ -5,6 +5,10 @@ namespace Tribe\Project\Templates\Components\Panels;
 
 use Tribe\Project\Templates\Components\Context;
 
+/*
+ * @TODO: THIS IS NOT COMPLETE AND WILL BE PICKED BACK UP BY RYAN
+ */
+
 class Hero extends Context {
 
 	public const CLASSES    = 'classes';
