@@ -14,7 +14,6 @@ The core plugin will be where the majority of back end development takes place:
     * [Post & Taxonomy Meta](object-meta.md)
     * [Subscribers](subscribers.md)
     * [Template Controllers](data.md)
-    * [Components](components.md)
     * [CLI](cli.md)
     * [Schema](schema.md)
     * [Queues](queues.md)
