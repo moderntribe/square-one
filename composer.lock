@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "309418b7a6c73cf12c9673270db50aed",
+    "content-hash": "0fd9248d99a53a72017c44f69bcb8c82",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -785,23 +785,23 @@
         },
         {
             "name": "johnpbloch/wordpress-core",
-            "version": "5.4.0",
+            "version": "5.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/johnpbloch/wordpress-core.git",
-                "reference": "9a9941fcad81015507e6d03801aebc51296baf37"
+                "reference": "4639993365dbb3c935d420df22f84c136d9ef4d1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/johnpbloch/wordpress-core/zipball/9a9941fcad81015507e6d03801aebc51296baf37",
-                "reference": "9a9941fcad81015507e6d03801aebc51296baf37",
+                "url": "https://api.github.com/repos/johnpbloch/wordpress-core/zipball/4639993365dbb3c935d420df22f84c136d9ef4d1",
+                "reference": "4639993365dbb3c935d420df22f84c136d9ef4d1",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.6.20"
             },
             "provide": {
-                "wordpress/core-implementation": "5.4.0"
+                "wordpress/core-implementation": "5.4.1"
             },
             "type": "wordpress-core",
             "notification-url": "https://packagist.org/downloads/",
@@ -821,7 +821,7 @@
                 "cms",
                 "wordpress"
             ],
-            "time": "2020-03-31T20:17:13+00:00"
+            "time": "2020-04-29T19:02:53+00:00"
         },
         {
             "name": "johnpbloch/wordpress-core-installer",
@@ -995,12 +995,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:moderntribe/gutenpanels.git",
-                "reference": "3bf5c816194d9bc984b8632e5d92ed850a46dd0b"
+                "reference": "5f99104545a4dc757787cdaaa411c872bc810dee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/gutenpanels/zipball/3bf5c816194d9bc984b8632e5d92ed850a46dd0b",
-                "reference": "3bf5c816194d9bc984b8632e5d92ed850a46dd0b",
+                "url": "https://api.github.com/repos/moderntribe/gutenpanels/zipball/5f99104545a4dc757787cdaaa411c872bc810dee",
+                "reference": "5f99104545a4dc757787cdaaa411c872bc810dee",
                 "shasum": ""
             },
             "require": {
@@ -1034,7 +1034,7 @@
                 }
             ],
             "description": "The Modern Tribe Panel Builder plugin, now with more Gutenberg!",
-            "time": "2020-04-20T19:21:55+00:00"
+            "time": "2020-04-28T20:49:52+00:00"
         },
         {
             "name": "moderntribe/panel-builder",

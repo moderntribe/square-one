@@ -101,8 +101,8 @@ class Initializer {
 	 * @return void
 	 */
 	protected function set_view_directories() {
-		$this->ViewFinder = new \ModularContent\PanelViewFinder( trailingslashit( get_stylesheet_directory() ) . 'content/panels' );
-		$this->ViewFinder->add_directory( trailingslashit( get_template_directory() ) . 'content/panels' );
+		$this->ViewFinder = new \ModularContent\PanelViewFinder( trailingslashit( get_stylesheet_directory() ) . 'modular-content' );
+		$this->ViewFinder->add_directory( trailingslashit( get_template_directory() ) . 'modular-content' );
 	}
 
 	/**
