@@ -1,14 +1,17 @@
 #ui-datepicker-div {
 	background: var(--jquery-datepicker-bgd-color);
-	border: none;
+	border: 1px solid var(--color-neutral-20);
+	border-bottom: 0;
 	border-radius: 0;
 	width: auto;
-	font: var(--jquery-datepicker-font-style) var(--jquery-datepicker-font-weight) var(--jquery-datepicker-font-size) / var(--jquery-datepicker-line-height) var(--jquery-datepicker-font-family);
+	font: normal 400 var(--jquery-datepicker-font-size) var(--jquery-datepicker-font-family);
+	line-height: 1.4;
 
 	select {
 		padding: 0;
+		font-family: var(--jquery-datepicker-font-family);
 		font-size: 15px;
-		font-weight: 700;
+		font-weight: 600;
 		border: 0;
 		background-color: transparent;
 		display: inline-block;
@@ -18,7 +21,7 @@
 	}
 
 	option {
-		color: var(--jquery-datepicker-color-option);
+		color: var(--jquery-datepicker-color);
 	}
 
 	&.ui-datepicker {
@@ -83,24 +86,25 @@
 	}
 
 	tbody {
-		background: var(--jquery-datepicker-bgd-color-secondary);
+		background: transparent;
 	}
 
 	&.ui-datepicker th {
-		padding: 10px 0;
-		color: var(--jquery-datepicker-color);
-		font-size: 15px;
+		padding: 4px 0;
+		color: var(--color-neutral-90);
+		font-size: var(--jquery-datepicker-font-size);
+		font-weight: normal;
 		border: 0;
 		background-color: transparent;
+		opacity: 0.5;
 	}
 
 	&.ui-datepicker tr {
 		border: none;
-		background-color: var(--jquery-datepicker-bgd-color-tertiary);
 	}
 
 	&.ui-datepicker td {
-		background: var(--jquery-datepicker-bgd-color-quaternary);
+		background: transparent;
 		border: none;
 		padding: 0;
 	}
@@ -108,12 +112,11 @@
 	td .ui-state-default {
 		background: transparent;
 		border: none;
-		text-align: center;
-		padding: 7px 10px;
-		margin: 0;
-		font-weight: normal;
 		color: var(--jquery-datepicker-color);
-		font-size: 18px;
+		font-size: var(--jquery-datepicker-font-size);
+		text-align: center;
+		padding: 10px 11px;
+		margin: 0;
 	}
 
 	.ui-state-disabled {
@@ -124,8 +127,25 @@
 		color: var(--jquery-datepicker-color-disabled);
 	}
 
-	td .ui-state-active,
 	td .ui-state-hover {
-		background: var(--jquery-datepicker-bgd-color-active);
+		font-weight: 600;
+	}
+
+	td .ui-state-active {
+		color: var(--color-white);
+		position: relative;
+
+		&:after {
+			background-color: var(--color-neutral-70);
+			border-radius: 50%;
+			content: '';
+			position: absolute;
+			width: 30px;
+			height: 30px;
+			left: 3px;
+			top: 50%;
+			transform: translateY(-50%);
+			z-index: -1;
+		}
 	}
 }
