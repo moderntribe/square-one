@@ -59,7 +59,7 @@ class Blocks_Definer implements Definer_Interface {
 				DI\factory( static function () {
 					return new Block_Style_Override( [ 'core/paragraph' ], [
 						[
-							'name'  => 't-body-large',
+							'name'  => 't-leadin',
 							'label' => __( 'Lead-In', 'tribe' ),
 						],
 					] );
