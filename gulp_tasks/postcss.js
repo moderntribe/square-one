@@ -35,6 +35,7 @@ const compilePlugins = sharedPlugins.concat( [
 ] );
 
 const compileGutenbergPlugins = sharedPlugins.concat( [
+	require( 'postcss-selector-replace' )( { before: [ '.t-sink', '.s-sink' ], after: [ '[data-type^="core/"]', '[data-type^="core/"]' ] } ),
 	require( 'postcss-assets' )( { loadPaths: [ `${ pkg.square1.paths.core_theme }/` ] } ),
 ] );
 
