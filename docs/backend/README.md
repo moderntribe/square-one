@@ -13,11 +13,8 @@ The core plugin will be where the majority of back end development takes place:
     * [Custom Taxonomies](taxonomies.md)
     * [Post & Taxonomy Meta](object-meta.md)
     * [Subscribers](subscribers.md)
-    * [Template Controllers](data.md)
-    * [Components](components.md)
     * [CLI](cli.md)
     * [Schema](schema.md)
-    * [Queues](queues.md)
   * Plugins/Extenstions
     * [Twig](https://twig.symfony.com/)
     * [Posts 2 Post](https://github.com/scribu/wp-posts-to-posts/wiki)
