@@ -2,8 +2,8 @@
 
 ## Registration
 
-The registration of a post type takes place in the core/src/Post_Types directory. The
-steps to registering a new post type are:
+The registration of a post type takes place in the core/src/Post_Types directory. Create a subdirectory
+for each post type. The steps to registering a new post type are:
 
 ### The Post Type Object
 Create a class extending `\Tribe\Libs\Post_Type\Post_Object`. It should have a value set for the
@@ -17,7 +17,8 @@ This may be a convenient location to declare other methods appropriate to that p
 
 ### The Post Type Configuration
 A class extending `\Tribe\Libs\Post_Type\Post_Type_Config` is responsible for configuring
-the post type. The two methods to define are `get_args()` and `get_labels()`. See
+the post type. The two methods to define are `get_args()` and `get_labels()`. The `$post_type`
+property should be set to point to the post type's name. See
 `\Tribe\Project\Post_Types\Sample\Config` included in this package for an example.
    
 #### Additional Configuration Options
