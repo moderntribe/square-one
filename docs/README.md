@@ -56,11 +56,9 @@ This is the deep dive development documentation for SquareOne. If you are new he
 	* [Custom Taxonomies](/docs/backend/taxonomies.md)
 	* [Object Meta](/docs/backend/object-meta.md)
 	* [Subscribers](/docs/backend/subscribers.md)
-	* [Template Controllers](/docs/backend/data.md)
 	* [CLI](/docs/backend/cli.md)
 	* [Cache](/docs/backend/object-cache.md)
 	* [Schema](/docs/backend/schema.md)
-	* [Queues](/docs/backend/queues.md)
 
 * **Panel Builder**
 	* [Overview](/docs/panels/README.md)
