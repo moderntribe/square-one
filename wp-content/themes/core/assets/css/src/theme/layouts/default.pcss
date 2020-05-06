@@ -26,7 +26,7 @@ main {
 
 /* -----------------------------------------------------------------------------
  *
- * Layout: Global Content Container
+ * Layout: Global Container
  *
  * ----------------------------------------------------------------------------- */
 
@@ -43,5 +43,52 @@ main {
 	@media (--viewport-medium) {
 		padding-left: var(--grid-gutter);
 		padding-right: var(--grid-gutter);
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ *
+ * Layout: Kitchen Sink
+ *
+ * Usage: Block Editor Content
+ *
+ * Example:
+ *   ...
+ * <div class="l-sink">
+ * </div>
+ *
+ * ----------------------------------------------------------------------------- */
+
+.l-sink {
+
+	& > *:not(.alignwide):not(.alignfull):not(.alignleft):not(.alignright):not(.is-style-wide) {
+		max-width: var(--grid-width-staggered);
+		width: calc(100% - 2 * var(--grid-gutter-small));
+		margin-left: auto;
+		margin-right: auto;
+
+		@media (--viewport-medium) {
+			width: calc(100% - 2 * var(--grid-gutter));
+		}
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ *
+ * Layout: Kitchen Sink, Double
+ *
+ * Usage: Block Editor Content
+ *
+ * Example:
+ * <div class="l-sink l-sink--double">
+ *   ...
+ * </div>
+ *
+ * ----------------------------------------------------------------------------- */
+
+.l-sink--double {
+
+	& > *:not(.alignwide):not(.alignfull):not(.alignleft):not(.alignright):not(.is-style-wide) {
+		max-width: var(--grid-width-staggered-double);
 	}
 }
