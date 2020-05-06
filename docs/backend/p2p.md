@@ -14,7 +14,7 @@ This is very useful in overall architecture of a project and is used often.
 
 ## Defining a Relationship
 
-Defining a relationship is done in two places.  The first is creating your Relationship subclass like
+Defining a relationship is done in two places.  The first is creating your `Relationship` subclass like
 this example:
 
 ```php
@@ -75,25 +75,27 @@ In order to see the relationship meta boxes in the post types you need to regist
 P2P definer.
 
 ```php
-self::RELATIONSHIPS  => [
-    General_Relationship::class,
-    Sample_To_Page::class,
-]
+\Tribe\Libs\P2P\P2P_Definer::RELATIONSHIPS  => DI\add( [
+    DI\get( General_Relationship::class ),
+    DI\get( Sample_To_Page::class ),
+])
 ```
 
 ## Connections Helper Class
 
-The Connections class is in the Tribe\Project\P2P namespace.  This class helps avoid convoluted 
+The `Connections` class helps avoid convoluted 
 methodology for simple needs in the core posts-to-posts plugin.
 
-To use the connections class, get it's container instance and use the helper methods as needed.
+To use the connections class, get an instance (or use the DI container to inject
+it into your class) and use the helper methods as needed.
 
 ```php
-$p2p = new Connections();
+$p2p = new \Tribe\Libs\P2P\Connections();
 $connected_ids = $p2p->get_from( $post_id );
 
 foreach( $connected_ids as $post_id ) {
-  ...
+  // do things
+}
 ```
 
 The above will get any and all post ids connected to our $post_id no matter what the post type.
@@ -104,7 +106,8 @@ our $post_id
 $page_ids = $p2p->get_from( $post_id, [ 'type' => Sample_To_Page::NAME ] );
 
 foreach( $page_ids as $page_id ) {
-  ...
+  // do things
+}
 ```
 
 The above example will do the same as the previous except restrict results to only those belonging to
@@ -130,10 +133,11 @@ $args = [
 $page_ids = $p2p->get_from( $post_id, $args );
 
 foreach( $page_ids as $page_id ) {
-  ...
+  // do things
+}
 ```
 
-Another method available in the Connections class is the get_shared_connections() method.
+Another method available in the `Connections` class is the `get_shared_connections()` method.
 Simply sending an id to this method will return all connections it has of any type.
 
 The type parameter accepts an array of types to filter results.  The direction parameter accepts
