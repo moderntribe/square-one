@@ -1067,6 +1067,13 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^13.0.0"
 
+"@moderntribe/postcss-multi-selector-replace@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@moderntribe/postcss-multi-selector-replace/-/postcss-multi-selector-replace-1.0.0.tgz#6c248a43c2a4163ead56c1996d13f1662718fc98"
+  integrity sha512-6Lhc8po2JD/mhn1JOclMdBYGhDQ3Qn6joq+EnvKYUvk9z4xiJy5tNfXPjDNoskMemYeFWJKGvCv4dIRPb53j5A==
+  dependencies:
+    postcss "^6.0.8"
+
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@mrmlnc/readdir-enhanced/-/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"
@@ -10850,13 +10857,6 @@ postcss-selector-parser@^6.0.0, postcss-selector-parser@^6.0.2:
     cssesc "^3.0.0"
     indexes-of "^1.0.1"
     uniq "^1.0.1"
-
-postcss-selector-replace@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/postcss-selector-replace/-/postcss-selector-replace-1.0.2.tgz#da32043e07ca971bbf811081319d36d55eeef43d"
-  integrity sha1-2jIEPgfKlxu/gRCBMZ021V7u9D0=
-  dependencies:
-    postcss "^6.0.8"
 
 postcss-simple-vars@^5.0.2:
   version "5.0.2"
