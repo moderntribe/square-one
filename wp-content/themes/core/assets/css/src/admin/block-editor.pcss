@@ -31,6 +31,16 @@
  @import-glob "../../../../integrations/ ** /index.pcss"; */
 
 /* -----------------------------------------------------------------------------
+ * Global Defaults
+ * ----------------------------------------------------------------------------- */
+
+.editor-styles-wrapper {
+	font: 400 normal 100% / 1.5 var(--font-family-base);
+	color: var(--color-text);
+	background: var(--color-bgd);
+}
+
+/* -----------------------------------------------------------------------------
  *
  * WP Core Block Styles
  *
@@ -42,6 +52,7 @@
 	/* -----------------------------------------------------------------------------
 	 * Block Editor Kitchen Sink Grid Widths
 	 * ----------------------------------------------------------------------------- */
+
 	max-width: var(--grid-width-staggered-double);
 	width: calc(100% - 2 * var(--grid-gutter-small));
 
@@ -55,5 +66,18 @@
 
 	&[data-align="full"] {
 		max-width: var(--grid-width);
+	}
+
+	/* -----------------------------------------------------------------------------
+	 * Overline
+	 *
+	 * Overrides default selector spacing.
+	 * ----------------------------------------------------------------------------- */
+
+	&.is-style-t-overline {
+
+		& + .wp-block * {
+			margin-top: var(--spacer-20);
+		}
 	}
 }
