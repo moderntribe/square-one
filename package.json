@@ -47,7 +47,7 @@
   },
   "scripts": {
     "gulp": "gulp",
-    "start": "npm run docker:start && npm run gulp -- dist && npm run gulp -- dev",
+    "start": "npm run docker:start && yarn install && npm run gulp -- dist && npm run gulp -- dev",
     "js:build": "npx webpack",
     "js:theme:dev": "cross-env NODE_ENV=themedev npm run js:build",
     "js:admin:dev": "cross-env NODE_ENV=admindev npm run js:build",

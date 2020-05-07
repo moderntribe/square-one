@@ -35,7 +35,7 @@ function getAssetHandle( filename = '', prefix = 'tribe-' ) {
 function getJSDependency( file, target, handlePrefix ) {
 	// admin vendor deps
 	if ( file.indexOf( 'vendor' ) !== -1 && target === 'admin' ) {
-		return [ 'wp-element', 'wp-blocks', 'wp-components', 'wp-i18n', 'wp-editor' ];
+		return [ 'wp-element', 'wp-blocks', 'wp-hooks', 'wp-components', 'wp-i18n', 'wp-editor' ];
 	}
 	// theme vendor deps
 	if ( file.indexOf( 'vendor' ) !== -1 && target === 'theme' ) {
