@@ -5,64 +5,108 @@
 WP-CLI is an indispensable tool for managing sites but is equally as useful for automating repetitive tasks.
 
 ## Writing a command
-To add a command to S1, extend `Command`. Note that the return values from 4 abstract methods are used to generate the command.<BR>
-__command__ returns a text slug for the command. ex: `cli`<BR>
-__run_command__ is the called method and takes the params $args and $assoc_args.<BR>
-__description__ returns a text description for the command. ex: `Generates a new CLI command`<BR>
-__arguments__ returns an array of arguments accepted by the callback. ex: 
-```
-[
-    [
+To add a command to S1, extend `\Tribe\Libs\CLI\Command`. Note that the return values from 4 abstract methods are used to generate the command.
+
+* `command` returns a text slug for the command. Example:
+  ```php
+  public function command() {
+    return 'my-command';
+  }
+  ```
+  You would call this command with `wp s1 my-command`
+* `description` returns a text description for the command. Example:
+  ```php
+  public function description() {
+    return __( 'Does a thing', 'tribe' );
+  }
+  ```
+* `arguments` returns an array of arguments accepted by the command. Example:
+  ```php
+  public function arguments() {
+    return [
+      [
         'type'        => 'positional',
-        'name'        => 'command',
+        'name'        => 'arbitrary',
         'optional'    => false,
-        'description' => __( 'The command slug.', 'tribe' ),
-    ],
-    [
-        'type'        => 'optional',
-        'name'        => 'description',
+        'description' => __( 'An arbitrary argument', 'tribe' ),
+      ],
+      [
+        'type'        => 'assoc',
+        'name'        => 'label',
         'optional'    => true,
-        'description' => __( 'Command description.', 'tribe' ),
-    ],
-]
+        'description' => __( 'The label for the thing', 'tribe' ),
+      ],
+      [
+        'type'        => 'flag',
+        'name'        => 'dry-run',
+        'optional'    => true,
+        'default'     => false,
+        'description' => __( 'During a dry-run, actions will be logged but not executed', 'tribe' ),
+      ]
+    ];
+  }
+  ```
+* `run_command` is the command's callback method and takes the params `$args` and `$assoc_args`. Example:
+  ```php
+  public function run_command( $args, $assoc_args ) {
+    $arbitrary = $args[0];
+    $label     = $assoc_args['label'] ?? __( 'A default label', 'tribe' );
+    $dry_run   = \WP_CLI\Utils\get_flag_value( $assoc_args, 'dry-run', false );
+    // do stuff ...
+  }
+  ```
+
+## Registering a command
+
+Once the command has been created, it must be registered. This is accomplished in your application's `Definer` class by
+adding it to the `\Tribe\Libs\CLI\CLI_Definer::COMMANDS` array. Example:
+
+```php
+<?php
+declare( strict_types=1 );
+
+namespace Tribe\Project\Something;
+
+use DI;
+use Tribe\Libs\CLI\CLI_Definer;
+use Tribe\Libs\Container\Definer_Interface;
+
+class Generator_Definer implements Definer_Interface {
+	public function define(): array {
+		return [
+			/**
+			 * Add commands for the CLI subscriber to register
+			 */
+			CLI_Definer::COMMANDS      => DI\add( [
+				DI\get( My_Command::class ),
+			] ),
+		];
+	}
+}
 ```
+
+While it is generally preferred that your custom commands extend `\Tribe\Libs\CLI\Command`, `CLI_Definer::COMMANDS`
+can accept any class that implements `\Tribe\Libs\CLI\Command_Interface`.
 
 ## Built-in commands
-### CLI
-#### Generators ####
-`wp s1 generate cli`<BR>
-Is used to create a new CLI command. This is a good jumping off point for something simple.
-In addition to creating the command, it updates the CLI Service Provider to include the new command.
-usage: `wp s1 generate cli <command>`
 
-`wp s1 generate cpt`<BR>
-Creates a new CPT and accepts single/plural strings. Further, the creation of a config file is optional (defaults to true).
-usage: `wp s1 generate cpt <cpt> [--single=<single>] [--plural=<plural>] [--config]`
+For a list of available `s1` commands, run `wp s1`. Example output:
 
-`wp s1 generate tax`<BR>
-Creates a new Taxonomy and accepts single/plural strings and a comma separated list of post-types to associate with. Further the creation of a config file is optional (defaults to true).
-usage: `wp s1 generate tax <tax> [--single=<single>] [--plural=<plural>] [--post_types=<post_type,post_type>] [--config]`
+```
+$ wp s1
+usage: wp s1 cache-prime [--target-url=<target-url>]
+   or: wp s1 generate <command>
+   or: wp s1 import <command>
+   or: wp s1 queues <command>
 
-`wp s1 generate settings`<BR>
-Creates a new empty settings page.
-Page name value should be treated like a cpt/tax name. 
-usage: `wp s1 generate settings <settings-page-name>`
+See 'wp help s1 <command>' for more information on a specific command.
 
-`wp s1 import meta`<BR>
-Imports field groups created in ACF and optionally removes them from the database. 
-usage: `wp s1 import meta` will provide a list of commands that can be run to import field groups.
-`wp s1 import meta <field_group> [--delete-group]` will import the named field group.
+$ wp s1 generate
+usage: wp s1 generate cli <command> [--description=<description>]
+   or: wp s1 generate component <component> [--properties=<properties>] [--template] [--context] [--controller] [--css] [--js] [--dry-run]
+   or: wp s1 generate cpt <cpt> [--single=<single>] [--plural=<plural>]
+   or: wp s1 generate settings <settings>
+   or: wp s1 generate tax <taxonomy> [--post-types=<post-types>] [--single=<single>] [--plural=<plural>]
 
-#### Utility ####
-`wp s1 import meta`<BR>
-Lists all the ACF Custom Field groups created in wp-admin and provides commands to convert them to code.
-usage: `wp s1 import meta`<BR>
-`wp s1 import meta [group_identifier]` 
-
-`wp s1 pimple`<BR>
-Dumps the files needed for [silex-pimple-plugin](https://plugins.jetbrains.com/plugin/7809-silex-pimple-plugin) to provide jump-to definition in PHP Storm.
-usage: `wp s1 pimple`
-
-#### DevOps ####
-`wp s1 cache-prime`<BR>
-Clears caches for all URLs on a given page (the default is the homepage). If the URL is external, there will be no effect. In this way, you are able to "get a head start" on caching. This is particularly useful on deploys. usage: `wp s1 cache-prime  [--target-url=<target-url>]`
+See 'wp help s1 generate <command>' for more information on a specific command.
+```

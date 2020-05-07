@@ -10,7 +10,7 @@ class Cache_Subscriber extends Abstract_Subscriber {
 		$this->listen();
 	}
 
-	protected function listen() {
+	protected function listen(): void {
 		add_action( 'save_post', function( ...$args ) {
 			$this->container->get( Listener::class )->save_post( ...$args );
 		}, 10, 2 );

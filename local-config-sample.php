@@ -29,8 +29,6 @@ define( 'WP_CACHE', false );
 
 define( 'TRIBE_DISABLE_PANELS_CACHE', true );
 
-$GLOBALS[ 'memcached_servers' ] = [ [ tribe_getenv( 'MEMCACHED_HOST', 'memcached' ), tribe_getenv( 'MEMCACHED_PORT', 11211 ), ] ];
-
 /*
  * Whoops
  *
