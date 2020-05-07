@@ -11,7 +11,7 @@ const withStyleClassName = createHigherOrderComponent( ( BlockListBlock ) => {
 		const { attributes: { className } } = props;
 		return <BlockListBlock { ...props } className={ className } />;
 	};
-}, 'withClientIdClassName' );
+}, 'withStyleClassName' );
 
 /**
  * @function init
