@@ -11,6 +11,7 @@ const wp = [
 	'date',
 	'editor',
 	'element',
+	'hooks',
 	'i18n',
 	'keycodes',
 	'server-side-render',
