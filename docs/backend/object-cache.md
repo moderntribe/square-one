@@ -7,26 +7,61 @@ to see real-world examples of the `Cache` library in-action, and can help identi
 
 ## Enabling Object Cache
 
-The first step to enable Object Cache is to copy `object-cache-sample.php` to `object-cache.php`. This file defines a WP_Object_Cache 
-class with sensible defaults for working with the Object Cache within SquareOne. 
+The file `wp-content/object-cached.php` defines a WP_Object_Cache class with sensible defaults
+for working with the Object Cache within SquareOne. The presence of this class automatically
+enables the WordPress object cache. 
 
-The final step is to ensure that your `local-config.php` file is properly defining the `memcached_server` global. The
-`local-config-sample.php` file has the correct line already, so if you copied your `local-config` file from that, you should be all set! 
-If not, make sure you have a line reading:
+To use a different host than the default, set the constants or environment variables `MEMCACHED_HOST` and
+`MEMCACHED_PORT`.
 
+From here you should be all set! You can now actively use the `\Tribe\Libs\Cache\Cache` class to store data to the Object Cache.
+
+## Using the Cache
+
+And instance of the `Cache` object should be injected into classes that require it (to make testing easier).
+
+```php
+class Example_Class {
+  private $cache;
+  public function __construct( \Tribe\Libs\Cache\Cache $cache ) {
+    $this->cache = $cache;
+  }
+}
 ```
-$GLOBALS[ 'memcached_servers' ] = [ 'memcached:11211' ];
-```
 
-This lets `object-cache.php` know that you want to use the `memcached` instance in Docker with the port of `11211`.
+The `Cache` object provides a wrapper around WordPress's object caching to support more complex cache
+keys and the invalidation of entire cache groups.
 
-From here you should be all set! You can now actively use the `Tribe\Libs\Cache` class to store data to the Object Cache.
+* `$cache->set( $key, $value, $group, $expiration )` - sets a value in the cache
+* `$cache->get( $key, $value )` - retrieves the value
+* `$cache->delete( $key, $group )` - deletes the value
 
-## Panels Content Caching
+The `$key` argument may be any serializable value, including arrays and objects.
 
-By default, all panels content will be stored in the Object Cache in order to provide increased performance out-of-the-box. In several 
-situations, we found that Panels rendering was one of the main bottle necks in large-scale, heavily-trafficked platforms. As such, we moved towards 
-caching the rendered panel content in the Object Cache and invalidating it whenever it updates. 
+* `$cache->flush_group( $group )` - expires all of the cache keys in the group
 
-If you need to disable this caching for debugging purposes, testing, etc, you can set a config constant of `TRIBE_DISABLE_PANELS_CACHE` to `true`. This 
-will bypass the Panels cache and render the content on each page load as per usual.
+Group invalidation works by maintaining a generation key for the group in the cache. When the group
+is flushed, the generation key will change, ensuring that stale values are never retrieved.
+
+If you are using a caching backend that does not automatically drop old/expired references, be aware
+that this strategy could result in a full cache.
+
+## Global Functions
+
+Three global functions are supplied for accessing the cache. Dependency injection is preferred, but these
+may be used in cases where we do not have control over the constructor or method call for the client code.
+
+* `tribe_cache_set()`
+* `tribe_cache_get()`
+* `tribe_cache_delete()`
+
+These are simple wrappers around the aforementioned methods from the `Cache` class.
+
+## Cache Invalidation
+
+Caches should sometimes be invalidated when events occur or data changes. The class
+`\Tribe\Project\Cache\Listener` is responsible for flushing keys or groups in the cache
+when those events occur.
+
+`\Tribe\Project\Cache\Cache_Subscriber::listen()` should be updated with additional actions
+to call the `Listener` at the appropriate time.
