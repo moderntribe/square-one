@@ -21,7 +21,7 @@ img {
 
 .wp-block-image,
 .wp-image {
-	width: auto !important;
+	width: auto;
 	max-width: none;
 	margin: 0 auto;
 }
@@ -43,16 +43,10 @@ img {
 	@mixin t-caption;
 
 	max-width: 100%;
+	text-align: left;
 	padding-top: var(--spacer-20);
 	padding-bottom: var(--spacer-40);
 	border-bottom: 1px solid var(--color-border);
-
-	.alignfull &,
-	.alignwide &,
-	.aligncenter &,
-	.alignnone & {
-		text-align: center;
-	}
 }
 
 /* -----------------------------------------------------------------------------
@@ -66,7 +60,9 @@ img {
 }
 
 .alignleft,
-.alignright {
+.alignright,
+[data-align="right"] .wp-block-image,
+[data-align="left"] .wp-block-image {
 	@media (--viewport-medium) {
 		max-width: var(--grid-5-col);
 	}
@@ -80,6 +76,7 @@ img {
 	}
 }
 
+[data-align="left"] .wp-block-image,
 .alignleft {
 	@media (--viewport-medium) {
 		float: left;
@@ -87,6 +84,7 @@ img {
 	}
 }
 
+[data-align="right"] .wp-block-image,
 .alignright {
 	@media (--viewport-medium) {
 		float: right;

@@ -1067,6 +1067,13 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^13.0.0"
 
+"@moderntribe/postcss-multi-selector-replace@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@moderntribe/postcss-multi-selector-replace/-/postcss-multi-selector-replace-1.0.0.tgz#6c248a43c2a4163ead56c1996d13f1662718fc98"
+  integrity sha512-6Lhc8po2JD/mhn1JOclMdBYGhDQ3Qn6joq+EnvKYUvk9z4xiJy5tNfXPjDNoskMemYeFWJKGvCv4dIRPb53j5A==
+  dependencies:
+    postcss "^6.0.8"
+
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@mrmlnc/readdir-enhanced/-/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"
@@ -10652,11 +10659,6 @@ postcss-place@^4.0.1:
     postcss "^7.0.2"
     postcss-values-parser "^2.0.0"
 
-postcss-prefixwrap@1.14.0:
-  version "1.14.0"
-  resolved "https://registry.yarnpkg.com/postcss-prefixwrap/-/postcss-prefixwrap-1.14.0.tgz#01252dc23e91a4248c35144f81bc63405979d96a"
-  integrity sha512-OWxzCQuarly9mGjmfpCNw+VaGMHCEy6g6KrPUULke3CIgXNoOM0V7K3jbJSKDG6rBXp2OFZBQKDEkw6d8wwBXg==
-
 postcss-preset-env@^6.0.10:
   version "6.7.0"
   resolved "https://registry.yarnpkg.com/postcss-preset-env/-/postcss-preset-env-6.7.0.tgz#c34ddacf8f902383b35ad1e030f178f4cdf118a5"
@@ -10953,7 +10955,7 @@ postcss-zindex@^2.0.1:
     postcss "^5.0.4"
     uniqs "^2.0.0"
 
-"postcss@>=5.0.14 <=6.x", postcss@^6.0.0, postcss@^6.0.1, postcss@^6.0.10, postcss@^6.0.9:
+"postcss@>=5.0.14 <=6.x", postcss@^6.0.0, postcss@^6.0.1, postcss@^6.0.10, postcss@^6.0.8, postcss@^6.0.9:
   version "6.0.23"
   resolved "https://registry.yarnpkg.com/postcss/-/postcss-6.0.23.tgz#61c82cc328ac60e677645f979054eb98bc0e3324"
   integrity sha512-soOk1h6J3VMTZtVeVpv15/Hpdl2cBLX3CAw4TAbkpTJiNPk9YP/zWcD1ND+xEtvyuuvKzbxliTOIyvkSeSJ6ag==

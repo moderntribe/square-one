@@ -14,17 +14,19 @@
 	 * First & last element overrides
 	 * ----------------------------------------------------------------------------- */
 
-	& > {
-		/* CASE: remove top margin from first element */
+	/* TODO: Figure better solution for this. */
+
+	/*	& > {
+		!* CASE: remove top margin from first element *!
 		*:first-child {
 			margin-top: 0;
 		}
 
-		/* CASE: remove bottom margin from bottom element */
+		!* CASE: remove bottom margin from bottom element *!
 		*:last-child {
 			margin-bottom: 0;
 		}
-	}
+	} */
 
 	/* -----------------------------------------------------------------------------
 	 * Headings
@@ -123,7 +125,8 @@
 
 	/* cite */
 	cite,
-	.cite {
+	.cite,
+	.wp-block-quote__citation {
 		display: block;
 		margin-top: var(--spacer-10);
 	}
@@ -143,7 +146,7 @@
 	 * Overrides default selector spacing.
 	 * ----------------------------------------------------------------------------- */
 
-	.t-overline {
+	.is-style-t-overline {
 		margin-bottom: var(--spacer-20);
 
 		& + * {
@@ -158,13 +161,19 @@
 	.alignfull,
 	.alignwide,
 	.aligncenter,
-	.alignnone {
+	.alignnone,
+	&[data-align="full"],
+	&[data-align="wide"],
+	&[data-align="center"],
+	&[data-align="none"] {
 		margin-top: var(--spacer-60);
 		margin-bottom: var(--spacer-60);
 	}
 
 	.alignleft,
-	.alignright {
+	.alignright,
+	&[data-align="right"],
+	&[data-align="left"] {
 		margin-top: var(--spacer-40);
 		margin-bottom: var(--spacer-40);
 

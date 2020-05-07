@@ -49,18 +49,22 @@ class Blocks_Definer implements Definer_Interface {
 			 */
 			self::STYLES         => DI\add( [
 				DI\factory( static function () {
-					return new Block_Style_Override( [ 'core/heading', 'core/paragraph' ], [
+					return new Block_Style_Override( [ 'core/paragraph' ], [
 						[
 							'name'  => 't-overline',
 							'label' => __( 'Overline', 'tribe' ),
 						],
+						[
+							'name'  => 't-leadin',
+							'label' => __( 'Lead-In', 'tribe' ),
+						],
 					] );
 				} ),
 				DI\factory( static function () {
-					return new Block_Style_Override( [ 'core/paragraph' ], [
+					return new Block_Style_Override( [ 'core/list' ], [
 						[
-							'name'  => 't-body-large',
-							'label' => __( 'Lead-In', 'tribe' ),
+							'name'  => 't-list-stylized',
+							'label' => __( 'Stylized', 'tribe' ),
 						],
 					] );
 				} ),
