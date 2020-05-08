@@ -44,7 +44,6 @@
 		border: var(--chosen-border-size) solid var(--chosen-border-color);
 		border-top: 0;
 		background-color: var(--chosen-drop-bgd-color);
-		box-shadow: 0 4px 5px rgba(0, 0, 0, 0.15);
 	}
 
 	&.chosen-with-drop .chosen-drop {
@@ -142,7 +141,7 @@
 			position: absolute;
 			right: 0;
 			color: var(--form-control-select-ui-color);
-			font-size: 22px;
+			font-size: 24px;
 			height: var(--chosen-height);
 			line-height: var(--chosen-font-line-height);
 			top: 0;
@@ -156,20 +155,21 @@
 			padding: var(--chosen-search-padding);
 			width: 100%;
 			height: var(--chosen-height);
+			border: 0;
 			border-bottom: 1px solid var(--form-border-color) !important;
 			background-color: var(--form-control-bgd-color);
 			border-radius: 0;
 
 			&:focus {
-				box-shadow: none;
 				border-left: 0;
 				border-right: 0;
+				border-top: 0;
 			}
 		}
 	}
 
 	.chosen-drop {
-		margin-top: -1px;
+		margin-top: 0;
 		border-radius: var(--chosen-drop-border-radius);
 		background-clip: padding-box;
 	}
@@ -292,7 +292,6 @@
 			&:focus {
 				color: var(--chosen-placeholder-color-focus);
 				border: 0 !important;
-				box-shadow: none !important;
 			}
 		}
 	}
