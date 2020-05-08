@@ -1,0 +1,83 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Media: Alignment
+ *
+ * Primarily for media blocks, alignments can apply a variety of blocks
+ * in the block editor.
+ *
+ * ----------------------------------------------------------------------------- */
+
+.alignfull,
+.alignwide,
+.aligncenter {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.alignfull {
+	max-width: none;
+}
+
+.alignwide {
+	max-width: var(--grid-width-staggered);
+}
+
+.aligncenter {
+	max-width: var(--grid-width-staggered-double);
+}
+
+/* -----------------------------------------------------------------------------
+ * Alignment: Left & Right
+ *
+ * Currently only applicable to images. Other forms of media don't have
+ * the correct markup to support left/right offset alignments.
+ * ----------------------------------------------------------------------------- */
+
+.alignleft,
+.alignright {
+
+	.wp-block-image & {
+
+		&:not(.is-resized) {
+			@media (--viewport-medium) {
+				max-width: var(--grid-5-col);
+			}
+		}
+
+		&.wp-image--caption {
+
+			img {
+				margin-left: 0;
+				margin-right: 0;
+			}
+		}
+	}
+
+	&.wp-block-embed,
+	&.wp-block-audio,
+	&.wp-block-video {
+		max-width: var(--grid-width-staggered-double);
+		margin-left: auto;
+		margin-right: auto;
+	}
+}
+
+.alignleft {
+
+	.wp-block-image & {
+		@media (--viewport-medium) {
+			float: left;
+			margin-right: var(--grid-gutter);
+		}
+	}
+}
+
+.alignright {
+
+	.wp-block-image & {
+		@media (--viewport-medium) {
+			float: right;
+			margin-left: var(--grid-gutter);
+		}
+	}
+}
