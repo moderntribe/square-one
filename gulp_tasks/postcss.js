@@ -11,23 +11,11 @@ const pkg = require( '../package.json' );
 const selectorsBefore = [
 	'.t-sink',
 	'.s-sink',
-	'.alignright',
-	'.alignleft',
-	'.aligncenter',
-	'.alignwide',
-	'.alignfull',
-	'.alignnone',
 ];
 
 const selectorsAfter = [
 	'[data-type^="core/"]',
 	'[data-type^="core/"]',
-	'[data-align="right"]',
-	'[data-align="left"]',
-	'[data-align="center"]',
-	'[data-align="wide"]',
-	'[data-align="full"]',
-	'[data-align="none"]',
 ];
 
 const sharedPlugins = [
