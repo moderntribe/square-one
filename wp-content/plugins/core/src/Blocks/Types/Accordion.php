@@ -28,7 +28,7 @@ class Accordion extends Block_Type_Config {
 			->add_layout_property( 'grid-template-areas', "'content' 'accordion'" )
 			//->add_conditional_layout_property( 'grid-template-areas', "'content accordion accordion'", self::LAYOUT, '==', self::LAYOUT_INLINE )
 			//->add_sidebar_section( $this->layout_sidebar() )
-			->add_content_section( $this->content_area() )
+			//->add_content_section( $this->content_area() )
 			->add_content_section( $this->accordions_area() )
 			->build();
 	}
