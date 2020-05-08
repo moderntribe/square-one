@@ -182,7 +182,7 @@ foreach ( $config_defaults as $config_default_key => $config_default_value ) {
 // ==============================================================
 
 if ( empty( $GLOBALS['table_prefix'] ) ) {
-	$GLOBALS['table_prefix'] = tribe_getenv( 'DB_TABLE_PREFIX', 'tribe_' );
+	$table_prefix = $GLOBALS['table_prefix'] = tribe_getenv( 'DB_TABLE_PREFIX', 'tribe_' );
 }
 
 if ( empty( $GLOBALS['memcached_servers'] ) ) {

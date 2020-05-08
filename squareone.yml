@@ -1,0 +1,6 @@
+# SquareOne Project Docker Config
+---
+
+# Automated Testing
+tests:
+  php-container: 'php-tests'
