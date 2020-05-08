@@ -17,7 +17,7 @@ class Hero extends Block_Type_Config {
 	public const NAME = 'tribe/hero';
 
 	public const BACKGROUND_IMAGE = 'bg-image';
-	public const ICON             = 'icon';
+	public const LEAD_IN          = 'lead-in';
 	public const TITLE            = 'title';
 	public const DESCRIPTION      = 'description';
 	public const CTA              = 'cta';
@@ -46,17 +46,17 @@ class Hero extends Block_Type_Config {
 	private function content_area(): Content_Section {
 		return $this->factory->content()
 			->section()
-			->add_class( 'test-hero__content content-wrap t-sink s-spa t-theme--light' )
+			->add_class( 'l-container test-hero__content t-sink t-theme--light' )
 			->add_field(
-				$this->factory->content()->field()->image( self::ICON )
-					->set_label( __( 'Icon', 'tribe' ) )
-					->add_class( 'test-hero__icon' )
+				$this->factory->content()->field()->text( self::LEAD_IN )
+					->set_placeholder( 'Some Lead In Text' )
+					->add_class( 'test-hero__leadin' )
 					->build()
 			)
 			->add_field(
 				$this->factory->content()->field()->text( self::TITLE )
-					->add_class( 'test-hero__title' )
-
+					->set_placeholder( 'A Heroic Title' )
+					->add_class( 'test-hero__title h1' )
 					->build()
 			)
 			->add_field(
@@ -66,6 +66,7 @@ class Hero extends Block_Type_Config {
 			)
 			->add_field(
 				$this->factory->content()->field()->link( self::CTA )
+					->add_class( 'test-hero__cta btn-submit' )
 					->build()
 			)
 			->build();
