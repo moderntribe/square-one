@@ -11,6 +11,26 @@
 	font-size: var(--chosen-font-size);
 	width: 100% !important;
 
+	&.chosen-with-drop,
+	&.chosen-container-multi {
+		&:after {
+			@mixin icon;
+
+			background-color: var(--chosen-bgd-color);
+			content: var(--icon-chevron-down);
+			position: absolute;
+			right: 1px;
+			color: var(--form-control-select-ui-color);
+			font-size: var(--form-control-select-ui-font-size);
+			height: calc(var(--chosen-height) - 2px);
+			line-height: var(--chosen-font-line-height);
+			top: 1px;
+			width: var(--chosen-height);
+			text-align: center;
+			z-index: 10;
+		}
+	}
+
 	* {
 		box-sizing: border-box;
 	}
@@ -360,6 +380,10 @@
 	}
 
 	&.chosen-with-drop {
+
+		&:after {
+			content: var(--icon-chevron-up);
+		}
 
 		.chosen-single {
 			border-color: var(--chosen-border-color-focus);
