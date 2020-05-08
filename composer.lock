@@ -995,12 +995,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:moderntribe/gutenpanels.git",
-                "reference": "7e80052396ee11827ca65aa73467cf5dd4ed1b21"
+                "reference": "518d991db5f02a54a20cd6c4aacbee2846f45605"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/gutenpanels/zipball/7e80052396ee11827ca65aa73467cf5dd4ed1b21",
-                "reference": "7e80052396ee11827ca65aa73467cf5dd4ed1b21",
+                "url": "https://api.github.com/repos/moderntribe/gutenpanels/zipball/518d991db5f02a54a20cd6c4aacbee2846f45605",
+                "reference": "518d991db5f02a54a20cd6c4aacbee2846f45605",
                 "shasum": ""
             },
             "require": {
@@ -1034,7 +1034,7 @@
                 }
             ],
             "description": "The Modern Tribe Panel Builder plugin, now with more Gutenberg!",
-            "time": "2020-05-05T09:59:43+00:00"
+            "time": "2020-05-08T13:02:18+00:00"
         },
         {
             "name": "moderntribe/panel-builder",
