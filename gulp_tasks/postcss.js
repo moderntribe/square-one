@@ -8,6 +8,28 @@ const browserSync = require( 'browser-sync' );
 const postcssFunctions = require( '../dev_components/theme/pcss/functions' );
 const pkg = require( '../package.json' );
 
+const selectorsBefore = [
+	'.t-sink',
+	'.s-sink',
+	'.alignright',
+	'.alignleft',
+	'.aligncenter',
+	'.alignwide',
+	'.alignfull',
+	'.alignnone',
+];
+
+const selectorsAfter = [
+	'[data-type^="core/"]',
+	'[data-type^="core/"]',
+	'[data-align="right"]',
+	'[data-align="left"]',
+	'[data-align="center"]',
+	'[data-align="wide"]',
+	'[data-align="full"]',
+	'[data-align="none"]',
+];
+
 const sharedPlugins = [
 	require( 'postcss-import-ext-glob' )( {
 		sort: 'asc',
@@ -35,7 +57,7 @@ const compilePlugins = sharedPlugins.concat( [
 ] );
 
 const compileGutenbergPlugins = sharedPlugins.concat( [
-	require( '@moderntribe/postcss-multi-selector-replace' )( { before: [ '.t-sink', '.s-sink' ], after: [ '[data-type^="core/"]', '[data-type^="core/"]' ] } ),
+	require( '@moderntribe/postcss-multi-selector-replace' )( { before: selectorsBefore, after: selectorsAfter } ),
 	require( 'postcss-assets' )( { loadPaths: [ `${ pkg.square1.paths.core_theme }/` ] } ),
 ] );
 

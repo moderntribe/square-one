@@ -1,0 +1,56 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Media: Alignments
+ *
+ * ----------------------------------------------------------------------------- */
+
+.alignfull,
+.alignwide,
+.aligncenter {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.alignfull {
+	max-width: none;
+}
+
+.alignwide {
+	max-width: var(--grid-width-staggered);
+}
+
+.aligncenter {
+	max-width: var(--grid-width-staggered-double);
+}
+
+.alignleft,
+.alignright {
+
+	&:not(.is-resized) {
+		@media (--viewport-medium) {
+			max-width: var(--grid-5-col);
+		}
+	}
+
+	&.wp-image--caption {
+
+		img {
+			margin-left: 0;
+			margin-right: 0;
+		}
+	}
+}
+
+.alignleft {
+	@media (--viewport-medium) {
+		float: left;
+		margin-right: var(--grid-gutter);
+	}
+}
+
+.alignright {
+	@media (--viewport-medium) {
+		float: right;
+		margin-left: var(--grid-gutter);
+	}
+}

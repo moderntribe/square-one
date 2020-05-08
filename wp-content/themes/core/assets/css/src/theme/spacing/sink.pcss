@@ -141,30 +141,21 @@
 	}
 
 	/* -----------------------------------------------------------------------------
-	 * Media: Alignments
+	 * Images
 	 * ----------------------------------------------------------------------------- */
 
-	.alignfull,
-	.alignwide,
-	.aligncenter,
-	.alignnone,
-	&[data-align="full"],
-	&[data-align="wide"],
-	&[data-align="center"],
-	&[data-align="none"] {
+	.wp-block-image {
 		margin-top: var(--spacer-60);
 		margin-bottom: var(--spacer-60);
-	}
 
-	.alignleft,
-	.alignright,
-	&[data-align="right"],
-	&[data-align="left"] {
-		margin-top: var(--spacer-40);
-		margin-bottom: var(--spacer-40);
+		&.alignleft,
+		&.alignright {
+			margin-top: var(--spacer-40);
+			margin-bottom: var(--spacer-40);
 
-		@media (--viewport-medium) {
-			margin-top: 5px;
+			@media (--viewport-medium) {
+				margin-top: 5px;
+			}
 		}
 	}
 
