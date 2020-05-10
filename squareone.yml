@@ -1,4 +1,15 @@
 # SquareOne Project Docker Config
+#
+# This file overrides default values from SquareOne Global Docker,
+# giving values appropriate to this project for some of the configuration
+# variables.
+#
+# Add variables here if the project requires a different value than the default
+# provided by SquareOne Global Docker
+#
+# See https://github.com/moderntribe/square1-global-docker/blob/master/config/squareone.yml
+# for the full list of variables that a project can override. Of particular interest
+# are those values under `local-docker` and `tests`
 ---
 
 # Automated Testing
