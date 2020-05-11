@@ -7,6 +7,7 @@ use Tribe\Gutenpanels\Blocks\Block_Type_Interface;
 use Tribe\Gutenpanels\Blocks\Sections\Content_Section;
 use Tribe\Gutenpanels\Blocks\Sections\Sidebar_Section;
 use Tribe\Project\Blocks\Block_Type_Config;
+use Tribe\Project\Blocks\Types\Support\Accordion_Section;
 
 class Accordion extends Block_Type_Config {
 

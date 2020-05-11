@@ -20,15 +20,24 @@ class Blocks_Definer implements Definer_Interface {
 		return [
 			self::TYPES => DI\add( [
 				DI\get( Types\Accordion::class ),
-				DI\get( Types\Accordion_Section::class ),
+				DI\get( Types\Support\Accordion_Section::class ),
+
 				DI\get( Types\Button::class ),
+
 				DI\get( Types\Hero::class ),
+
+				DI\get( Types\Media_Text::class ),
+				DI\get( Types\Support\Media_Text_Media::class ),
+				DI\get( Types\Support\Media_Text_Media_Embed::class ),
+				DI\get( Types\Support\Media_Text_Media_Image::class ),
+				DI\get( Types\Support\Media_Text_Text::class ),
 			] ),
 
 			self::CONTROLLER_MAP => DI\add( [
-				Types\Accordion::NAME => Controllers\Block\Accordion::class,
-				Types\Button::NAME    => Controllers\Block\Button::class,
-				Types\Hero::NAME      => Controllers\Block\Hero::class,
+				Types\Accordion::NAME  => Controllers\Block\Accordion::class,
+				Types\Button::NAME     => Controllers\Block\Button::class,
+				Types\Hero::NAME       => Controllers\Block\Hero::class,
+				Types\Media_Text::NAME => Controllers\Block\Debug::class,
 			] ),
 
 			/**

@@ -1,11 +1,12 @@
 <?php
 declare( strict_types=1 );
 
-namespace Tribe\Project\Blocks\Types;
+namespace Tribe\Project\Blocks\Types\Support;
 
 use Tribe\Gutenpanels\Blocks\Block_Type_Interface;
 use Tribe\Gutenpanels\Blocks\Sections\Content_Section;
 use Tribe\Project\Blocks\Block_Type_Config;
+use Tribe\Project\Blocks\Types\Accordion;
 
 class Accordion_Section extends Block_Type_Config {
 
