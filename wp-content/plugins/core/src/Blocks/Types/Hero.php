@@ -23,8 +23,8 @@ class Hero extends Block_Type_Config {
 	public const DESCRIPTION      = 'description';
 	public const CTA              = 'cta';
 	public const LAYOUT           = 'layout';
-	public const LAYOUT_LEFT      = 'left';
-	public const LAYOUT_CENTER    = 'center';
+	public const LAYOUT_LEFT      = 'alignleft';
+	public const LAYOUT_CENTER    = 'aligncenter';
 
 	public function build(): Block_Type_Interface {
 		return $this->factory->block( self::NAME )
@@ -81,7 +81,7 @@ class Hero extends Block_Type_Config {
 			->add_field(
 				$this->factory->toolbar()->field()->icon_select( self::LAYOUT )
 					->add_dashicon_option( self::LAYOUT_LEFT, __( 'Left', 'tribe' ), 'editor-alignleft' )
-					->add_dashicon_option( self::LAYOUT_LEFT, __( 'Center', 'tribe' ), 'editor-aligncenter' )
+					->add_dashicon_option( self::LAYOUT_CENTER, __( 'Center', 'tribe' ), 'editor-aligncenter' )
 					->build()
 			)
 			->build();

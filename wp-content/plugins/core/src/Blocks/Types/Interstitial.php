@@ -7,7 +7,6 @@ use Tribe\Gutenpanels\Blocks\Block_Type_Interface;
 use Tribe\Gutenpanels\Blocks\Sections\Content_Section;
 use Tribe\Gutenpanels\Blocks\Sections\Sidebar_Section;
 use Tribe\Gutenpanels\Blocks\Sections\Toolbar_Section;
-use Tribe\Gutenpanels\Blocks\Supports\Align;
 use Tribe\Project\Blocks\Block_Type_Config;
 
 class Interstitial extends Block_Type_Config {
