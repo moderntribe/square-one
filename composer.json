@@ -7,6 +7,9 @@
     }
   ],
   "config": {
+    "platform": {
+      "php": "7.2.29"
+    },
     "vendor-dir": "vendor",
     "sort-packages": true,
     "preferred-install": {
