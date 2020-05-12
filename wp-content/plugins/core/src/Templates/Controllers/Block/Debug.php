@@ -15,7 +15,7 @@ class Debug extends Block_Controller {
 			</div>',
 			sanitize_html_class( $this->block_type->name() ),
 			esc_html( $this->block_type->name() ),
-			esc_html( print_r( $this->attributes, true ) ),
+			str_replace( '[', '&#91;', esc_html( print_r( $this->attributes, true ) ) ), // replace brackets with entity to escape shortcode-like strings
 			esc_html( $this->content )
 		);
 	}

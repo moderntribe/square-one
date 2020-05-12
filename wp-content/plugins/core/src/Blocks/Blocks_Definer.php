@@ -26,6 +26,9 @@ class Blocks_Definer implements Definer_Interface {
 
 				DI\get( Types\Hero::class ),
 
+				DI\get( Types\Icon_Grid::class ),
+				DI\get( Types\Support\Icon_Grid_Card::class ),
+
 				DI\get( Types\Media_Text::class ),
 				DI\get( Types\Support\Media_Text_Media::class ),
 				DI\get( Types\Support\Media_Text_Media_Embed::class ),
@@ -37,6 +40,7 @@ class Blocks_Definer implements Definer_Interface {
 				Types\Accordion::NAME  => Controllers\Block\Accordion::class,
 				Types\Button::NAME     => Controllers\Block\Button::class,
 				Types\Hero::NAME       => Controllers\Block\Hero::class,
+				Types\Icon_Grid::NAME  => Controllers\Block\Debug::class,
 				Types\Media_Text::NAME => Controllers\Block\Debug::class,
 			] ),
 
