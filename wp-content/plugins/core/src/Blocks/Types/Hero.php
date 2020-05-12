@@ -6,6 +6,7 @@ namespace Tribe\Project\Blocks\Types;
 use Tribe\Gutenpanels\Blocks\Block_Type_Interface;
 use Tribe\Gutenpanels\Blocks\Sections\Content_Section;
 use Tribe\Gutenpanels\Blocks\Sections\Sidebar_Section;
+use Tribe\Gutenpanels\Blocks\Sections\Toolbar_Section;
 use Tribe\Project\Blocks\Block_Type_Config;
 
 /*
@@ -21,6 +22,9 @@ class Hero extends Block_Type_Config {
 	public const TITLE            = 'title';
 	public const DESCRIPTION      = 'description';
 	public const CTA              = 'cta';
+	public const LAYOUT           = 'layout';
+	public const LAYOUT_LEFT      = 'left';
+	public const LAYOUT_CENTER    = 'center';
 
 	public function build(): Block_Type_Interface {
 		return $this->factory->block( self::NAME )
@@ -29,6 +33,7 @@ class Hero extends Block_Type_Config {
 			->set_dashicon( 'menu-alt' )
 			->add_sidebar_section( $this->background_sidebar() )
 			->add_content_section( $this->content_area() )
+			->add_toolbar_section( $this->layout_toolbar() )
 			->add_data_source( 'background-image', self::BACKGROUND_IMAGE )
 			->build();
 	}
@@ -44,8 +49,7 @@ class Hero extends Block_Type_Config {
 	}
 
 	private function content_area(): Content_Section {
-		return $this->factory->content()
-			->section()
+		return $this->factory->content()->section()
 			->add_class( 'l-container test-hero__content t-sink t-theme--light' )
 			->add_field(
 				$this->factory->content()->field()->text( self::LEAD_IN )
@@ -67,6 +71,17 @@ class Hero extends Block_Type_Config {
 			->add_field(
 				$this->factory->content()->field()->link( self::CTA )
 					->add_class( 'test-hero__cta btn-submit' )
+					->build()
+			)
+			->build();
+	}
+
+	private function layout_toolbar(): Toolbar_Section {
+		return $this->factory->toolbar()->section()
+			->add_field(
+				$this->factory->toolbar()->field()->icon_select( self::LAYOUT )
+					->add_dashicon_option( self::LAYOUT_LEFT, __( 'Left', 'tribe' ), 'editor-alignleft' )
+					->add_dashicon_option( self::LAYOUT_LEFT, __( 'Center', 'tribe' ), 'editor-aligncenter' )
 					->build()
 			)
 			->build();

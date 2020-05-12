@@ -14,7 +14,6 @@ class Accordion extends Block_Type_Config {
 	public const NAME = 'tribe/accordion';
 
 	public const LAYOUT      = 'layout';
-	public const TAGLINE     = 'tagline';
 	public const TITLE       = 'title';
 	public const DESCRIPTION = 'description';
 	public const ACCORDION   = 'accordion';
@@ -25,17 +24,16 @@ class Accordion extends Block_Type_Config {
 	public function build(): Block_Type_Interface {
 		return $this->factory->block( self::NAME )
 			->set_label( 'Accordion' )
-			->set_dashicon( 'menu-alt3' )
+			->set_dashicon( 'menu-alt' )
 			->add_layout_property( 'grid-template-areas', "'content' 'accordion'" )
-			//->add_conditional_layout_property( 'grid-template-areas', "'content accordion accordion'", self::LAYOUT, '==', self::LAYOUT_INLINE )
-			//->add_sidebar_section( $this->layout_sidebar() )
-			//->add_content_section( $this->content_area() )
+			->add_sidebar_section( $this->layout_sidebar() )
+			->add_content_section( $this->content_area() )
 			->add_content_section( $this->accordions_area() )
 			->build();
 	}
 
 	private function layout_sidebar(): Sidebar_Section {
-		return $this->factory->sidebar()->section()->set_label( 'Layout Settings' )
+		return $this->factory->sidebar()->section()->set_label( __( 'Layout Settings', 'tribe' ) )
 			->add_field(
 				$this->factory->sidebar()->field()->image_select( self::LAYOUT )
 					->set_label( __( 'Layout', 'tribe' ) )
@@ -50,12 +48,6 @@ class Accordion extends Block_Type_Config {
 	private function content_area(): Content_Section {
 		return $this->factory->content()->section()
 			->set_layout_property( 'grid-area', 'content' )
-			->add_field(
-				$this->factory->content()->field()->text( self::TAGLINE )
-					->set_label( __( 'Tagline', 'tribe' ) )
-					->set_placeholder( __( 'Enter a short tagline', 'tribe' ) )
-					->build()
-			)
 			->add_field(
 				$this->factory->content()->field()->text( self::TITLE )
 					->set_label( __( 'Title', 'tribe' ) )
