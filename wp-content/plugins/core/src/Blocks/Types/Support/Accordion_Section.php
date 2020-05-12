@@ -20,14 +20,16 @@ class Accordion_Section extends Block_Type_Config {
 			->set_label( 'Accordion Section' )
 			->set_parents( Accordion::NAME )
 			->add_content_section( $this->content_area() )
+			->add_class( 'c-accordion__row' )
 			->build();
 	}
 
 	private function content_area(): Content_Section {
 		$header = $this->factory->content()->field()->text( self::HEADER )
-			->add_class( 'h3' );
+			->add_class( 'c-accordion__header' );
 
 		$content = $this->factory->content()->field()->flexible_container( self::CONTENT )
+			->add_class( 'c-accordion__content-inner' )
 			->add_template_block( 'core/paragraph' );
 
 		foreach ( $this->nested_block_types() as $type ) {

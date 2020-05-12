@@ -102,6 +102,10 @@ pipeline {
                             // Jenkins as owner
                             sh 'chown -R 110:117 .'
                         }
+                        dir("${BUILD_FOLDER}/wp-content/plugins/gutenpanels"){
+                            sh 'yarn install'
+                            sh 'yarn build'
+                        }
                     }
                 }
             }
