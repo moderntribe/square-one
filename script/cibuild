@@ -23,8 +23,10 @@ build_composer() {
 build_node() {
     echo "Building Node"
     npm install node-gyp
-    npm install
-    npm run build
+    npm install gulp-cli -g
+    npm run install:theme
+    npm run validate
+    npm run server_dist
 }
 
 while true; do
