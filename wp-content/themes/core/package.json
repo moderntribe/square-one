@@ -50,6 +50,8 @@
     "start": "npm run docker:start && yarn install && npm run gulp -- dist && npm run gulp -- dev",
     "dev": "npm run gulp -- dev",
     "dist": "npm run gulp -- dist",
+    "server_dist": "npm run gulp -- server_dist",
+    "validate": "npm run gulp -- validate",
     "js:build": "npx webpack",
     "js:theme:dev": "cross-env NODE_ENV=themedev npm run js:build",
     "js:admin:dev": "cross-env NODE_ENV=admindev npm run js:build",

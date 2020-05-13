@@ -10,6 +10,8 @@
     "gulp": "gulp",
     "dev": "cd wp-content/themes/core && npm run gulp -- dev",
     "dist": "cd wp-content/themes/core && npm run gulp -- dist",
+    "server_dist": "cd wp-content/themes/core && npm run gulp -- server_dist",
+    "validate": "cd wp-content/themes/core && npm run gulp -- validate",
     "codecept:run": "so test -- run",
     "codecept:debug": "so test --xdebug -- run",
     "docker:start": "so start",
