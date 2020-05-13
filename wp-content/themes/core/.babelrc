@@ -26,15 +26,15 @@
     ["module-resolver", {
       "root": ["."],
       "alias": {
-        "apps": "./wp-content/themes/core/assets/js/src/apps",
-        "config": "./wp-content/themes/core/assets/js/src/theme/config",
-        "common": "./wp-content/themes/core/assets/js/src/apps/common",
-        "components": "./wp-content/themes/core/components",
-        "constants": "./wp-content/themes/core/assets/js/src/apps/constants",
-        "Example": "./wp-content/themes/core/assets/js/src/apps/Example",
-        "integrations": "./wp-content/themes/core/integrations",
-        "pcss": "./wp-content/themes/core/assets/css/src/theme",
-        "utils": "./wp-content/themes/core/assets/js/src/utils"
+        "apps": "./assets/js/src/apps",
+        "config": "./assets/js/src/theme/config",
+        "common": "./assets/js/src/apps/common",
+        "components": "./components",
+        "constants": "./assets/js/src/apps/constants",
+        "Example": "./assets/js/src/apps/Example",
+        "integrations": "./integrations",
+        "pcss": "./assets/css/src/theme",
+        "utils": "./assets/js/src/utils"
       }
     }],
     "@babel/plugin-proposal-object-rest-spread",

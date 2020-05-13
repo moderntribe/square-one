@@ -1,6 +1,6 @@
 const gulp = require( 'gulp' );
 const requireDir = require( 'require-dir' );
-const tasks = requireDir( './gulp_tasks' );
+const tasks = requireDir( './gulp-tasks' );
 const browserSync = require( 'browser-sync' ).create( 'Tribe Dev' );
 
 let config = require( './local-config.json' );
@@ -34,7 +34,7 @@ const gulpTasks = [
 	/* Clean tasks */
 
 	'clean:coreIconsStart', // delete all files related to icons in pcss, in prep for reinjection
-	'clean:coreIconsEnd', // delete the zip file you pasted in dev_components
+	'clean:coreIconsEnd', // delete the zip file you pasted in library
 	'clean:themeMinCSS', // delete all minified css files in theme
 	'clean:themeMinJS', // delete all minified js files in theme
 
@@ -49,7 +49,7 @@ const gulpTasks = [
 
 	/* Decompress tasks */
 
-	'decompress:coreIcons', // extract the core-icons.zip from dev_components dir to dev_components/theme/icons/core
+	'decompress:coreIcons', // extract the core-icons.zip from library dir to library/theme/icons/core
 
 	/* Eslint tasks */
 

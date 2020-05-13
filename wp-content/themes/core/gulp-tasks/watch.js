@@ -87,8 +87,8 @@ module.exports = {
 		// watch php and twig
 
 		gulp.watch( [
-			`${ pkg.square1.paths.core_theme }/**/*.php`,
-			`${ pkg.square1.paths.core_theme }/**/*.twig`,
+			`./**/*.php`,
+			`./**/*.twig`,
 		] ).on( 'change', function() {
 			maybeReloadBrowserSync();
 		} );

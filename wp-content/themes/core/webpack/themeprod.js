@@ -24,7 +24,7 @@ module.exports = merge.strategy( {
 		externals,
 		output: {
 			path: resolve( `${ __dirname }/../`, pkg.square1.paths.core_theme_js_dist ),
-			publicPath: `/${ pkg.square1.paths.core_theme_js_dist }`,
+			publicPath: `/wp-content/themes/core/${ pkg.square1.paths.core_theme_js_dist }`,
 		},
 		plugins: [
 			new MiniCssExtractPlugin( {

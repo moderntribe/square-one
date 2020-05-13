@@ -10,9 +10,9 @@ const BundleAnalyzerPlugin = require( 'webpack-bundle-analyzer' ).BundleAnalyzer
  * Internal Dependencies
  */
 const devBase = require( './configs/dev-base.js' );
-const entry = require( './entry/theme' );
 const pkg = require( '../package.json' );
-const externals = require( './externals/theme' );
+const entry = require( './entry/admin' );
+const externals = require( './externals/admin' );
 
 module.exports = merge.strategy( {
 	plugins: 'append',
@@ -20,16 +20,16 @@ module.exports = merge.strategy( {
 	entry,
 	externals,
 	output: {
-		path: resolve( `${ __dirname }/../`, pkg.square1.paths.core_theme_js_dist ),
-		publicPath: `/${ pkg.square1.paths.core_theme_js_dist }`,
+		path: resolve( `${ __dirname }/../`, pkg.square1.paths.core_admin_js_dist ),
+		publicPath: `/wp-content/themes/core/${ pkg.square1.paths.core_admin_js_dist }`,
 	},
 	plugins: [
 		new MiniCssExtractPlugin( {
-			filename: '../../../css/dist/theme/[name].css',
+			filename: '../../../css/dist/admin/[name].css',
 		} ),
 		new BundleAnalyzerPlugin( {
 			analyzerMode: 'static',
-			reportFilename: resolve( `${ __dirname }/../`, 'reports/webpack-theme-bundle.html' ),
+			reportFilename: resolve( `${ __dirname }/../`, 'reports/webpack-admin-bundle.html' ),
 			openAnalyzer: false,
 		} ),
 	],
