@@ -68,7 +68,9 @@ jobs:
         run: docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-fpm composer install --optimize-autoloader -d /application/www
 
       - name: Setup node
-        uses: dcodeIO/setup-node-nvm@master
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.13.1'
 
       - name: Install gulp-cli
         run: npm install gulp-cli -g
