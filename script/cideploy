@@ -1,0 +1,33 @@
+#!/bin/bash
+# script/cideploy: Script that will deploy to a given environment.
+#                  This is primarily designed to run on the CI server.
+
+SCRIPTDIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+
+# Source configuration files
+source ${SCRIPTDIR}/local.ini
+# source more config files here
+
+# Variables
+ENVIRONMENT=$1
+[ -z "${ENVIRONMENT}" ] &&  { echo "ERROR: ENVIRONMENT cannot be empty" ; exit 1; }
+
+case ${ENVIRONMENT} in
+    dev)
+        echo "placeholder to deploy to ${ENVIRONMENT}"
+    ;;
+    staging)
+        echo "placeholder to deploy to ${ENVIRONMENT}"
+    ;;
+    production)
+        echo "placeholder to deploy to ${ENVIRONMENT}"
+    ;;
+    *)
+        echo "ERROR: no Repository defined for environment: ${ENVIRONMENT}. Check you config files."
+        exit 1
+    ;;
+esac
+
+# Choose your adventure and deploy to any system here.
+
+echo "Done"

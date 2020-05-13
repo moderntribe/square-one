@@ -37,7 +37,7 @@ jobs:
       - name: Create local config
         run: |
           php -r "file_exists( 'local-config.php' ) || copy( 'local-config-sample.php', 'local-config.php' );"
-          php -r "file_exists( 'local-config.json' ) || copy( 'local-config-sample.json', 'local-config.json' );"
+          php -r "file_exists( 'wp-content/themes/core/local-config.json' ) || copy( 'wp-content/themes/core/local-config-sample.json', 'wp-content/themes/core/local-config.json' );"
           php -r "file_exists( 'dev/tests/.env' ) || copy( 'dev/tests/.env-dist', 'dev/tests/.env' );"
           echo "define( 'TWIG_CACHE', false );" >> local-config.php
           echo "define( 'TRIBE_GLOMAR', false );" >> local-config.php
@@ -72,6 +72,9 @@ jobs:
         with:
           node-version: '12.13.1'
 
+      - name: Install gulp-cli
+        run: npm install gulp-cli -g
+
       - name: Get yarn cache directory
         id: yarn-cache-dir
         run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -85,10 +88,12 @@ jobs:
           restore-keys: ${{ runner.os }}-${{ env.cache_version }}-node-
 
       - name: Install node modules
-        run: yarn --frozen-lockfile
+        run: yarn install --frozen-lockfile
+        working-directory: wp-content/themes/core
 
       - name: Build assets
-        run: gulp dist
+        run: npm run server_dist
+        working-directory: wp-content/themes/core
 
       - name: Create test databases
         run: |
