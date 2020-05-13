@@ -18,6 +18,7 @@ module.exports = merge.strategy( {
 	mode: 'production',
 	devtool: false,
 	output: {
+		ecmaVersion: 5,
 		filename: '[name].[chunkhash].min.js',
 		chunkFilename: '[name].[chunkhash].min.js',
 	},
