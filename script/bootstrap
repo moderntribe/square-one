@@ -3,7 +3,7 @@
 #
 
 # Boostrap CI container
-apk add --no-cache composer rsync git openssh build-base bash zlib-dev libpng-dev pkgconfig autoconf automake libtool nasm yarn
+apk add --no-cache composer rsync git openssh build-base bash zlib-dev libpng-dev pkgconfig autoconf automake libtool nasm
 mkdir -p ~/.ssh/
 
 # Authorize wpengine and github
