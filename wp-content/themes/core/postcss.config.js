@@ -21,7 +21,7 @@ module.exports = ( { file, options, env } = {} ) => ( { // eslint-disable-line n
 		'postcss-preset-env': { stage: 0, autoprefixer: { grid: true } },
 		'postcss-calc': {},
 		'postcss-assets': {
-			loadPaths: [ `${ pkg.square1.paths.core_theme }/` ],
+			baseUrl: pkg.square1.paths.core_theme_postcss_assets_base_url,
 		},
 	},
 } );

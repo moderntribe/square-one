@@ -41,12 +41,12 @@ const sharedPlugins = [
 ];
 
 const compilePlugins = sharedPlugins.concat( [
-	require( 'postcss-assets' )( { loadPaths: [ `${ pkg.square1.paths.core_theme }/` ] } ),
+	require( 'postcss-assets' )( { baseUrl: pkg.square1.paths.core_theme_postcss_assets_base_url } ),
 ] );
 
 const compileGutenbergPlugins = sharedPlugins.concat( [
 	require( '@moderntribe/postcss-multi-selector-replace' )( { before: selectorsBefore, after: selectorsAfter } ),
-	require( 'postcss-assets' )( { loadPaths: [ `${ pkg.square1.paths.core_theme }/` ] } ),
+	require( 'postcss-assets' )( { baseUrl: pkg.square1.paths.core_theme_postcss_assets_base_url } ),
 ] );
 
 const legacyPlugins = [
@@ -59,7 +59,7 @@ const legacyPlugins = [
 	require( 'postcss-simple-vars' ),
 	require( 'postcss-nested' ),
 	require( 'postcss-preset-env' )( { browsers: [ 'last 20 versions', 'ie 6' ] } ),
-	require( 'postcss-assets' )( { loadPaths: [ `${ pkg.square1.paths.core_theme }/` ] } ),
+	require( 'postcss-assets' )( { baseUrl: pkg.square1.paths.core_theme_postcss_assets_base_url } ),
 ];
 
 /**

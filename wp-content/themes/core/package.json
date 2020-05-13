@@ -31,6 +31,7 @@
       "core_admin_relative_js_dist": "assets/js/dist/admin/",
       "core_admin_pcss": "assets/css/src/admin/",
       "core_plugin": "wp-content/plugins/core",
+      "core_theme_postcss_assets_base_url": "/wp-content/themes/core/",
       "npm": "node_modules",
       "component": "assets/library"
     }
