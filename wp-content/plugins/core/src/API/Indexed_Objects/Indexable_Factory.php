@@ -19,15 +19,15 @@ class Indexable_Factory {
 	/**
 	 * Creates the right indexable object.
 	 *
-	 * @param string $object_type The type of object we are indexing.
+	 * @param object $object The object we are indexing.
 	 *
 	 * @return Indexable
 	 * @throws IndexableNotFoundException
 	 */
-	public function make( string $object_type ): Indexable {
-		switch ( $object_type ) {
-			case WP_Post::OBJECT_TYPE:
-				return new WP_Post();
+	public function make( object $object ): Indexable {
+		switch ( $object ) {
+			case WP_Indexed_Post::OBJECT_TYPE:
+				return new WP_Indexed_Post( $object_type );
 		}
 
 		throw new IndexableNotFoundException( $object_type );

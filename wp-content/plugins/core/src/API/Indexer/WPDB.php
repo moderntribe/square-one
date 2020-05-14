@@ -18,14 +18,14 @@ class WPDB implements Indexer_Service {
 	/**
 	 * @inheritDoc
 	 */
-	public function save(  Indexable $indexable ): void {
+	public function save( Indexable $indexable ): void {
 		// TODO: Implement save() method.
 	}
 
 	/**
 	 * @inheritDoc
 	 */
-	public function delete(  Indexable $indexable ): void {
+	public function delete( Indexable $indexable ): void {
 		// TODO: Implement delete() method.
 	}
 }
