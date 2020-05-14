@@ -87,7 +87,7 @@ class Postloop extends Panel {
 			Image::ATTACHMENT   => $image,
 			Image::AS_BG        => false,
 			Image::USE_LAZYLOAD => false,
-			Image::SRC_SIZE     => Image_Sizes::FOUR_THREE,
+			Image::SRC_SIZE     => Image_Sizes::COMPONENT_CARD,
 		];
 
 		return $this->factory->get( Image::class, $options )->render();
