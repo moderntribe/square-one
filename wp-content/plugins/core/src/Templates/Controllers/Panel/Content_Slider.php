@@ -68,8 +68,8 @@ class Content_Slider extends Panel {
 					Content_Block::TITLE           => $this->get_content_block_title( $slide, $index, $depth ),
 					Content_Block::TEXT            => $this->get_content_block_text( $slide, $index, $depth ),
 					Content_Block::CLASSES         => [ 's-sink', 't-sink', 'c-content-block--content-slider' ],
-					Content_Block::CONTENT_CLASSES => [ 'c-content-block__desc--content-slider' ],
-					Content_Block::BUTTON          => $this->get_content_block_button( $slide ),
+					Content_Block::CONTAINER_CLASSES => [ 'c-content-block__desc--content-slider' ],
+					Content_Block::ACTION          => $this->get_content_block_button( $slide ),
 				];
 
 				$slide_markup .= $this->factory->get( Content_Block::class, $options )->render();

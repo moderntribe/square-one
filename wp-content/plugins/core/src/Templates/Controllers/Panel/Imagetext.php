@@ -53,9 +53,7 @@ class Imagetext extends Panel {
 
 		$options = [
 			Content_Block::TITLE           => $this->get_image_text_title( $panel_vars, $title_attrs ),
-			Content_Block::CLASSES         => '',
-			Content_Block::BUTTON          => $this->get_image_text_button( $panel_vars ),
-			Content_Block::CONTENT_CLASSES => '',
+			Content_Block::ACTION          => $this->get_image_text_button( $panel_vars ),
 			Content_Block::TEXT            => $this->get_image_text_text( $panel_vars, $description_attrs ),
 		];
 

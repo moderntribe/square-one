@@ -71,9 +71,7 @@ class Hero extends Panel {
 		$options = [
 			Content_Block::TITLE           => $this->get_hero_title( $title_attrs, $panel_vars ),
 			Content_Block::TEXT            => $this->get_hero_text( $description_attrs, $panel_vars ),
-			Content_Block::BUTTON          => $this->get_hero_button( $panel_vars ),
-			Content_Block::CLASSES         => [],
-			Content_Block::CONTENT_CLASSES => [],
+			Content_Block::ACTION          => $this->get_hero_button( $panel_vars ),
 		];
 
 		return $this->factory->get( Content_Block::class, $options )->render();

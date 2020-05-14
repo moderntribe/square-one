@@ -45,9 +45,7 @@ class Videotext extends Panel {
 		$options = [
 			Content_Block::TITLE           => $this->get_video_text_title( $panel_vars, $title_attrs ),
 			Content_Block::TEXT            => $this->get_video_text_text( $panel_vars, $description_attrs ),
-			Content_Block::CONTENT_CLASSES => '',
-			Content_Block::BUTTON          => $this->get_video_text_button( $panel_vars ),
-			Content_Block::CLASSES         => '',
+			Content_Block::ACTION          => $this->get_video_text_button( $panel_vars ),
 		];
 
 		return $this->factory->get( Content_Block::class, $options )->render();
