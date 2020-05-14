@@ -21,7 +21,7 @@ ssh-add ~/.ssh/id_rsa
 
 There are a few different playbooks that are included here:
 
-### `site.yml` for intial deployments
+### `site.yml` for initial deployments
 
 When you deploy for the first time on any inventory, you need to do:
 

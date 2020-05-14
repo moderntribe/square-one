@@ -44,8 +44,8 @@ Now the the server exists, you'll need to go to wherever the domain's nameserver
 
 In Ansible, an _"inventory"_ is essentially a server list file. Those can be found in `ansible/inventory/`. You'll need to edit the relevant inventory file that you are preparing. There are only a few things to change in there:
 
-1. Replace every occurence of `ENTER_IP_ADDRESS` with the IP Address of the EC2 server
-2. Replace every occurence of `.aws/CHANGEME.pem` with the name of the unencrypted pem file you set up earlier.
+1. Replace every occurrence of `ENTER_IP_ADDRESS` with the IP Address of the EC2 server
+2. Replace every occurrence of `.aws/CHANGEME.pem` with the name of the unencrypted pem file you set up earlier.
 3. Make any additional adjustments as needed (that's for advanced use - typically with staging and production where the database is on a separate RDS instance rather than right on the EC2 instance - if all else fails, ask your friendly neighborhood DevOps)
 
 ## Update group_vars variables
@@ -59,7 +59,7 @@ There's a pile of variables that are available and some key ones you need to upd
 
 ## Variable files
 
-Ansible has a lot of variables and we've broken them out into a nubmer of files. Some files are plain text while others are encrypted. Here's a run-down:
+Ansible has a lot of variables and we've broken them out into a number of files. Some files are plain text while others are encrypted. Here's a run-down:
 
 ### `common.yml`
 
