@@ -2,7 +2,7 @@
 /**
  * Exception for column data types.
  *
- * @package AAN
+ * @package Square1-API
  */
 declare( strict_types=1 );
 

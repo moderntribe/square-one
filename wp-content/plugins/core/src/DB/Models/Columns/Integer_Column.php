@@ -4,7 +4,7 @@
  *
  * Included types: INTEGER, INT, SMALLINT, TINYINT, MEDIUMINT, BIGINT.
  *
- * @package AAN
+ * @package Square1-API
  */
 declare( strict_types=1 );
 

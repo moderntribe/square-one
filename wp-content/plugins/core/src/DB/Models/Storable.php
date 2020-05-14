@@ -2,7 +2,7 @@
 /**
  * Interface for any model that can be saved as a record.
  *
- * @package AAN
+ * @package Square1-API
  */
 declare( strict_types=1 );
 

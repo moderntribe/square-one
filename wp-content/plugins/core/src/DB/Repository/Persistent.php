@@ -2,7 +2,7 @@
 /**
  * Interface for custom tables.
  *
- * @package AAN
+ * @package Square1-API
  */
 
 declare( strict_types=1 );

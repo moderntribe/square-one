@@ -2,7 +2,7 @@
 /**
  * The Where clause.
  *
- * @package AAN
+ * @package Square1-API
  */
 declare( strict_types=1 );
 

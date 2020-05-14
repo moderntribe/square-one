@@ -2,7 +2,7 @@
 /**
  * Exception to handle when no rows were updated.
  *
- * @package AAN
+ * @package Square1-API
  */
 declare( strict_types=1 );
 

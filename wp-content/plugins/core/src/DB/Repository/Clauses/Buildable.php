@@ -2,7 +2,7 @@
 /**
  * Interface for various SQL query components.
  *
- * @package AAN
+ * @package Square1-API
  */
 declare( strict_types=1 );
 

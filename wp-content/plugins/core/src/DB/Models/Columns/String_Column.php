@@ -4,7 +4,7 @@
  *
  * Included types: CHAR, VARCHAR, BLOB, and TEXT.
  *
- * @package AAN
+ * @package Square1-API
  */
 declare( strict_types=1 );
 

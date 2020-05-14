@@ -2,7 +2,7 @@
 /**
  * Exception to handle attempts to save a Storable in the wrong table.
  *
- * @package AAN
+ * @package Square1-API
  */
 declare( strict_types=1 );
 

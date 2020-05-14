@@ -2,7 +2,7 @@
 /**
  * Exception to handle WPDb errors.
  *
- * @package AAN
+ * @package Square1-API
  */
 declare( strict_types=1 );
 
