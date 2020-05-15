@@ -17,8 +17,8 @@ module.exports = merge.strategy( {
 	mode: 'development',
 	output: {
 		ecmaVersion: 5,
-		filename: '[name].[chunkhash].js',
-		chunkFilename: '[name].[chunkhash].js',
+		filename: '[name].js',
+		chunkFilename: '[name].js',
 	},
 	devtool: 'eval-source-map',
 	plugins: [
