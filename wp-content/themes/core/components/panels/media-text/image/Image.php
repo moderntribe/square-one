@@ -4,6 +4,7 @@ namespace Tribe\Project\Templates\Components\Panels\Media_Text;
 
 use Tribe\Project\Templates\Components\Image as Image_Component;
 use Tribe\Project\Templates\Models\Image as Image_Model;
+use Tribe\Project\Theme\Config\Image_Sizes;
 
 /**
  * Class Image
@@ -38,7 +39,9 @@ class Image extends \Tribe\Project\Templates\Components\Context {
 
 		if ( $this->image ) {
 			$data[ self::IMAGE ] = $this->factory->get( Image_Component::class, [
-				Image_Component::ATTACHMENT => $this->image,
+				Image_Component::ATTACHMENT   => $this->image,
+				Image_Component::SRC_SIZE     => Image_Sizes::COMPONENT_CARD,
+				Image_Component::USE_LAZYLOAD => false,
 			] )->render();
 		} else {
 			$data[ self::IMAGE ] = '';
