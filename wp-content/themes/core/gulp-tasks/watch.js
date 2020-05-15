@@ -1,7 +1,6 @@
 const gulp = require( 'gulp' );
 const pkg = require( '../package.json' );
 const browserSync = require( 'browser-sync' );
-const webpack = require( 'webpack' );
 const webpackStream = require( 'webpack-stream' );
 const merge = require( 'webpack-merge' );
 const webpackAdminDevConfig = require( '../webpack/admindev' );
@@ -17,6 +16,8 @@ webpackAdminDevConfig.module.rules = watchRules;
 webpackThemeDevConfig.module.rules = watchRules;
 webpackAdminDevConfig.plugins = watchPlugins.admin;
 webpackThemeDevConfig.plugins = watchPlugins.theme;
+delete webpackAdminDevConfig.output.ecmaVersion;
+delete webpackThemeDevConfig.output.ecmaVersion;
 
 function maybeReloadBrowserSync() {
 	const server = browserSync.get( 'Tribe Dev' );
@@ -95,7 +96,7 @@ module.exports = {
 	},
 	watchAdminJS() {
 		gulp.src( `${ pkg.square1.paths.core_admin_js_src }**/*.js` )
-			.pipe( webpackStream( merge( webpackAdminDevConfig, watchConfig ), webpack, function( err, stats ) {
+			.pipe( webpackStream( merge( webpackAdminDevConfig, watchConfig ), null, function( err, stats ) {
 				console.log( stats.toString( { colors: true } ) );
 				maybeReloadBrowserSync();
 			} ) )
@@ -107,7 +108,7 @@ module.exports = {
 			`${ pkg.square1.paths.core_theme_components }**/*.js`,
 			`${ pkg.square1.paths.core_theme_integrations }**/*.js`,
 		] )
-			.pipe( webpackStream( merge( webpackThemeDevConfig, watchConfig ), webpack, function( err, stats ) {
+			.pipe( webpackStream( merge( webpackThemeDevConfig, watchConfig ), null, function( err, stats ) {
 				console.log( stats.toString( { colors: true } ) );
 				maybeReloadBrowserSync();
 			} ) )

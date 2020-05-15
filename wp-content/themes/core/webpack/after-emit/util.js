@@ -137,9 +137,7 @@ module.exports = {
 			const handlePrefix = 'tribe-scripts-';
 			const fileNameArray = file.split( '.' );
 			// store chunkhash as version
-			const version = fileNameArray[ 1 ];
-			// remove chunkhash
-			fileNameArray.splice( 1, 1 );
+			const version = await filehash( `${ dir }/${ file }` );
 			// remove min
 			const minIndex = fileNameArray.indexOf( 'min' );
 			if ( minIndex > -1 ) {
@@ -159,7 +157,7 @@ module.exports = {
 					dependencies,
 				};
 			}
-			data.localize.push( file );
+			data.localize.push( `${ file }?ver=${ version }` );
 		} );
 		writeManifestFile( dir, data );
 	},

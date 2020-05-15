@@ -80,8 +80,10 @@ class Scripts {
 
 		$this->replace_jquery( $script_debug );
 
+		// If constant is true, set version to current timestamp, forcing cache invalidation on every page load
+		$timestamp = defined( 'ASSET_VERSION_TIMESTAMP' ) && ASSET_VERSION_TIMESTAMP === true ? time() : null;
 		foreach ( $this->build_parser->get_scripts() as $handle => $asset ) {
-			wp_register_script( $handle, $asset['uri'], $asset['dependencies'], $asset['version'], true );
+			wp_register_script( $handle, $asset['uri'], $asset['dependencies'], $timestamp ?? $asset['version'], true );
 		}
 	}
 
