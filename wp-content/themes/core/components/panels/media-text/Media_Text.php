@@ -8,12 +8,13 @@ use Tribe\Project\Templates\Components\Context;
 /**
  * Class Media_Text
  *
- * @property string   $title
- * @property string   $body
- * @property string   $cta_label
- * @property string   $cta_url
- * @property string   $cta_target
- * @property string   $cta_aria
+ * @property string   $width
+ * @property string   $layout
+ * @property string   $media
+ * @property string   $content
+ * @property string[] $container_classes
+ * @property string[] $media_classes
+ * @property string[] $content_classes
  * @property string[] $classes
  * @property string[] $attrs
  */
@@ -23,6 +24,8 @@ class Media_Text extends Context {
 	public const MEDIA             = 'media';
 	public const CONTENT           = 'content';
 	public const CONTAINER_CLASSES = 'container_classes';
+	public const MEDIA_CLASSES     = 'media_classes';
+	public const CONTENT_CLASSES   = 'content_classes';
 	public const CLASSES           = 'classes';
 	public const ATTRS             = 'attrs';
 
@@ -44,6 +47,14 @@ class Media_Text extends Context {
 		self::CONTAINER_CLASSES => [
 			self::DEFAULT       => [],
 			self::MERGE_CLASSES => [ 'media-text__container' ],
+		],
+		self::MEDIA_CLASSES     => [
+			self::DEFAULT       => [],
+			self::MERGE_CLASSES => [ 'media-text__media' ],
+		],
+		self::CONTENT_CLASSES   => [
+			self::DEFAULT       => [],
+			self::MERGE_CLASSES => [ 'media-text__content' ],
 		],
 		self::CLASSES           => [
 			self::DEFAULT       => [],

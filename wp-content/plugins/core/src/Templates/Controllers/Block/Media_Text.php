@@ -4,11 +4,12 @@ declare( strict_types=1 );
 namespace Tribe\Project\Templates\Controllers\Block;
 
 use Tribe\Project\Blocks\Types\Media_Text as Media_Text_Block;
+use Tribe\Project\Templates\Components\Content_Block;
+use Tribe\Project\Templates\Components\Image as Image_Component;
+use Tribe\Project\Templates\Components\Link;
 use Tribe\Project\Templates\Components\Panels\Media_Text as Container;
-use Tribe\Project\Templates\Components\Panels\Media_Text\Content;
-use Tribe\Project\Templates\Components\Panels\Media_Text\Embed;
-use Tribe\Project\Templates\Components\Panels\Media_Text\Image as Image_Component;
 use Tribe\Project\Templates\Models\Image;
+use Tribe\Project\Theme\Config\Image_Sizes;
 
 class Media_Text extends Block_Controller {
 
@@ -50,32 +51,25 @@ class Media_Text extends Block_Controller {
 
 	private function get_image( $attachment_id ): string {
 		try {
-			$image     = Image::factory( $attachment_id );
-			$component = $this->factory->get( Image_Component::class, [
-				Image_Component::IMAGE => $image,
-			] );
-
-			return $component->render();
+			return $this->factory->get( Image_Component::class, [
+				Image_Component::ATTACHMENT   => Image::factory( $attachment_id ),
+				Image_Component::SRC_SIZE     => Image_Sizes::COMPONENT_CARD,
+				Image_Component::USE_LAZYLOAD => false,
+			] )->render();
 		} catch ( \InvalidArgumentException $e ) {
 			return '';
 		}
 	}
 
 	private function get_embed( $url ): string {
-		return $this->factory->get( Embed::class, [
-			Embed::EMBED => $GLOBALS['wp_embed']->shortcode( [], $url ),
-		] )->render();
+		return $GLOBALS['wp_embed']->shortcode( [], $url );
 	}
 
 	private function get_text(): string {
-		$cta = $this->get_cta();
-
-		return $this->factory->get( Content::class, [
-			Content::TITLE      => $this->get_title(),
-			Content::BODY       => $this->get_content(),
-			Content::CTA_LABEL  => $cta['text'],
-			Content::CTA_URL    => $cta['url'],
-			Content::CTA_TARGET => $cta['target'],
+		return $this->factory->get( Content_Block::class, [
+			Content_Block::TITLE  => $this->get_title(),
+			Content_Block::TEXT   => $this->get_content(),
+			Content_Block::ACTION => $this->get_cta(),
 		] )->render();
 	}
 
@@ -87,13 +81,19 @@ class Media_Text extends Block_Controller {
 		return implode( "\n", wp_list_pluck( $this->attributes[ Media_Text_Block::CONTENT ] ?? [], 'content' ) );
 	}
 
-	private function get_cta(): array {
-		$cta = $this->attributes['cta'] ?? [];
-
-		return wp_parse_args( $cta, [
+	private function get_cta(): string {
+		$cta = wp_parse_args( $this->attributes['cta'] ?? [], [
 			'text'   => '',
 			'url'    => '',
 			'target' => '',
 		] );
+
+		return $this->factory->get( Link::class, [
+			Link::URL        => $cta['url'],
+			Link::CONTENT    => $cta['text'] ?: $cta['url'],
+			Link::TARGET     => $cta['target'],
+			Link::ARIA_LABEL => '', // TODO
+			Link::CLASSES    => [ 'media-text__cta' ],
+		] )->render();
 	}
 }
