@@ -19,8 +19,8 @@ module.exports = merge.strategy( {
 	devtool: false,
 	output: {
 		ecmaVersion: 5,
-		filename: '[name].[chunkhash].min.js',
-		chunkFilename: '[name].[chunkhash].min.js',
+		filename: '[name].min.js',
+		chunkFilename: '[name].min.js',
 	},
 	plugins: [
 		new webpack.DefinePlugin( {

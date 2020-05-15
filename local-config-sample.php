@@ -23,9 +23,9 @@ define( 'SCRIPT_DEBUG', true );
 define( 'WP_CACHE', false );
 
 /*
- * Enable CSS_VERSION_TIMESTAMP if you are doing front end dev on css to force cache invalidation without running a full build
+ * Enable ASSET_VERSION_TIMESTAMP if you are doing front end dev on css/js to force cache invalidation without running a full build
  */
-// define( 'CSS_VERSION_TIMESTAMP', true );
+// define( 'ASSET_VERSION_TIMESTAMP', true );
 
 define( 'TRIBE_DISABLE_PANELS_CACHE', true );
 
