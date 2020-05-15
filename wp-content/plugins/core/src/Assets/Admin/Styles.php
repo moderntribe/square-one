@@ -21,7 +21,7 @@ class Styles {
 	 */
 	public function register_styles(): void {
 		// If constant is true, set version to current timestamp, forcing cache invalidation on every page load
-		$timestamp = defined( 'CSS_VERSION_TIMESTAMP' ) && CSS_VERSION_TIMESTAMP === true ? time() : null;
+		$timestamp = defined( 'ASSET_VERSION_TIMESTAMP' ) && ASSET_VERSION_TIMESTAMP === true ? time() : null;
 		foreach ( $this->build_parser->get_styles() as $handle => $asset ) {
 			wp_register_style( $handle, $asset['uri'], $asset['dependencies'], $timestamp ?? $asset['version'], $asset['media'] );
 		}
