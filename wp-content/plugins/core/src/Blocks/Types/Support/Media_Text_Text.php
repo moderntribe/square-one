@@ -11,10 +11,6 @@ use Tribe\Project\Blocks\Types\Media_Text;
 class Media_Text_Text extends Block_Type_Config {
 	public const NAME = 'tribe/media-text--text';
 
-	public const TITLE   = 'title';
-	public const CONTENT = 'content';
-	public const CTA     = 'cta';
-
 	public function build(): Block_Type_Interface {
 		return $this->factory->block( self::NAME )
 			->set_label( 'Text' )
@@ -25,17 +21,17 @@ class Media_Text_Text extends Block_Type_Config {
 	}
 
 	private function content_area(): Content_Section {
-		$header = $this->factory->content()->field()->text( self::TITLE )
+		$header = $this->factory->content()->field()->text( Media_Text::TITLE )
 			->add_class( 'h2' );
 
-		$content = $this->factory->content()->field()->flexible_container( self::CONTENT )
+		$content = $this->factory->content()->field()->flexible_container( Media_Text::CONTENT )
 			->add_template_block( 'core/paragraph' );
 
 		foreach ( $this->nested_block_types() as $type ) {
 			$content->add_block_type( $type )->capture_nested_content( $type, 'content' );
 		}
 
-		$cta = $this->factory->content()->field()->link( self::CTA )
+		$cta = $this->factory->content()->field()->link( Media_Text::CTA )
 			->set_label( __( 'Call to Action', 'tribe' ) );
 
 		return $this->factory->content()->section()
