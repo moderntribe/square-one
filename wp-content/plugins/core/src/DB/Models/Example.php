@@ -55,7 +55,7 @@ class Example extends Base_Storable {
 	 * @param string $type
 	 * @param string $data
 	 */
-	public function __construct( int $ID = 0, string $created_on = '', int $user_id = 0, string $type = '', string $data = '' ) {
+	public function __construct( int $ID = 0, string $created_on = '', string $data = '' ) {
 		$this->ID         = $ID;
 		$this->created_on = $created_on;
 		$this->data       = $data;
