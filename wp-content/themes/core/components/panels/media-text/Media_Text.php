@@ -29,6 +29,8 @@ class Media_Text extends Context {
 	public const CLASSES           = 'classes';
 	public const ATTRS             = 'attrs';
 
+	private const TYPE = 'media-text';
+
 	protected $path = __DIR__ . '/media-text.twig';
 
 	protected $properties = [
@@ -46,19 +48,19 @@ class Media_Text extends Context {
 		],
 		self::CONTAINER_CLASSES => [
 			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [ 'media-text__container' ],
+			self::MERGE_CLASSES => [ self::TYPE . '__container' ],
 		],
 		self::MEDIA_CLASSES     => [
 			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [ 'media-text__media' ],
+			self::MERGE_CLASSES => [ self::TYPE . '__media' ],
 		],
 		self::CONTENT_CLASSES   => [
 			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [ 'media-text__content' ],
+			self::MERGE_CLASSES => [ self::TYPE . '__content' ],
 		],
 		self::CLASSES           => [
 			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [ 'c-panel', 'c-panel--media-text' ],
+			self::MERGE_CLASSES => [ 'c-panel', 'c-panel--' . self::TYPE ],
 		],
 		self::ATTRS             => [
 			self::DEFAULT          => [],
@@ -68,10 +70,10 @@ class Media_Text extends Context {
 
 	public function get_data(): array {
 		if ( $this->layout ) {
-			$this->properties[ self::CLASSES ][ self::MERGE_CLASSES ][] = 'media-text__layout-' . $this->layout;
+			$this->properties[ self::CLASSES ][ self::MERGE_CLASSES ][] = self::TYPE . '__layout-' . $this->layout;
 		}
 		if ( $this->width ) {
-			$this->properties[ self::CLASSES ][ self::MERGE_CLASSES ][] = 'media-text__width-' . $this->width;
+			$this->properties[ self::CLASSES ][ self::MERGE_CLASSES ][] = self::TYPE . '__width-' . $this->width;
 		}
 
 		return parent::get_data();
