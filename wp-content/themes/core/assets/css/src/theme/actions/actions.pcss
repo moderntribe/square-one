@@ -63,6 +63,44 @@ a.a-btn-tertiary {
 
 /* -----------------------------------------------------------------------------
  *
+ * Button: Icon Before
+ *
+ * Notes:
+ * + Uses icon classes for the actual icon value.
+ * + Has (hidden) icon before button text.
+ * + On hover/focus button text bumps right and icon is shown.
+ *
+ * Example:
+ * <button class="a-btn a-btn--has-icon-before icon-arrow-left">...</button>
+ * <a href="#" class="a-btn a-btn--has-icon-before icon-arrow-left">...</a>
+ *
+ * ----------------------------------------------------------------------------- */
+
+.a-btn--has-icon-before {
+	@mixin a-btn-icon-before;
+}
+
+/* -----------------------------------------------------------------------------
+ *
+ * Button: Icon After
+ *
+ * Notes:
+ * + Uses icon classes for the actual icon value.
+ * + Has (hidden) icon after button text.
+ * + On hover/focus button text bumps left and icon is shown.
+ *
+ * Example:
+ * <button class="a-btn a-btn--has-icon-after icon-arrow-righ">...</button>
+ * <a href="#" class="a-btn a-btn--has-icon-after icon-arrow-right">...</a>
+ *
+ * ----------------------------------------------------------------------------- */
+
+.a-btn--has-icon-after {
+	@mixin a-btn-icon-after;
+}
+
+/* -----------------------------------------------------------------------------
+ *
  * Call To Action: Primary
  *
  * Notes:

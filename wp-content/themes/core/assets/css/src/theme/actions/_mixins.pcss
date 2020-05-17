@@ -158,6 +158,68 @@
 }
 
 /* -----------------------------------------------------------------------------
+ * Button: Icon Before
+ * ----------------------------------------------------------------------------- */
+
+@define-mixin a-btn-icon-before {
+	position: relative;
+
+	&:before {
+		position: absolute;
+		top: 9px;
+		left: var(--spacer-30);
+		display: inline-block;
+		font-family: var(--font-family-core-icons);
+		font-weight: 400;
+		font-size: 1.4em;
+		opacity: 0;
+		transition: var(--transition);
+	}
+
+	&:focus,
+	&:active,
+	&:hover {
+		padding-right: var(--spacer-30);
+		padding-left: 56px; /* default padding + amount removed from right. */
+
+		&:before {
+			opacity: 1;
+		}
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Button: Icon After
+ * ----------------------------------------------------------------------------- */
+
+@define-mixin a-btn-icon-after {
+	position: relative;
+
+	&:before {
+		position: absolute;
+		top: 9px;
+		right: var(--spacer-30);
+		display: inline-block;
+		font-family: var(--font-family-core-icons);
+		font-weight: 400;
+		font-size: 1.4em;
+		opacity: 0;
+		transition: var(--transition);
+	}
+
+	&:focus,
+	&:active,
+	&:hover {
+		padding-left: var(--spacer-30);
+		padding-right: 56px; /* default padding + amount removed from left. */
+
+		&:before {
+			opacity: 1;
+		}
+	}
+}
+
+/* -----------------------------------------------------------------------------
  * Button: Submit
  * ----------------------------------------------------------------------------- */
 
@@ -180,8 +242,8 @@
 		position: absolute;
 		bottom: 0;
 		display: inline-block;
-		content: var(--icon-arrow-right);
 		padding-left: 10px;
+		content: var(--icon-arrow-right);
 		color: var(--color-primary);
 		font-family: var(--font-family-core-icons);
 		font-weight: 400;
