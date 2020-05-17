@@ -11,13 +11,14 @@ class Form_Styles {
 	 * @action gform_enqueue_scripts
 	 */
 	public function enqueue_gravity_forms_jquery_ui_styles(): void {
-
 		global $wp_scripts;
 		$jquery_ui = $wp_scripts->query( 'jquery-ui-core' );
-		wp_enqueue_style( 'jquery-ui-smoothness',
+		wp_enqueue_style(
+			'jquery-ui-smoothness',
 			'https://ajax.googleapis.com/ajax/libs/jqueryui/' . $jquery_ui->ver . '/themes/smoothness/jquery-ui.css',
-			false, 'screen' );
-
+			false,
+			'screen'
+		);
 	}
 
 	/**

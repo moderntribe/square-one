@@ -10,11 +10,14 @@
 
     <!-- Exclude files -->
     <exclude-pattern>*-config.php</exclude-pattern>
+    <exclude-pattern>*assets/</exclude-pattern>
     <exclude-pattern>*vendor/</exclude-pattern>
     <exclude-pattern>*tests/*</exclude-pattern>
     <exclude-pattern>*cli/*</exclude-pattern>
     <exclude-pattern>*.twig</exclude-pattern>
     <exclude-pattern>*webpack/</exclude-pattern>
+    <exclude-pattern>*Panels/Types/</exclude-pattern>
+    <exclude-pattern>*modular-content/</exclude-pattern>
 
     <!-- Rules -->
 
@@ -22,19 +25,22 @@
     <rule ref="PSR2">
         <exclude name="Generic.WhiteSpace.DisallowTabIndent"/>
         <exclude name="Generic.Files.LineLength.TooLong"/>
-        <exclude name="Squiz.Classes.ValidClassName.NotCamelCaps"/>
-        <exclude name="Squiz.Functions.FunctionDeclarationArgumentSpacing.SpacingAfterOpen"/>
-        <exclude name="Squiz.Functions.FunctionDeclarationArgumentSpacing.SpacingBeforeClose"/>
-        <exclude name="Squiz.Functions.MultiLineFunctionDeclaration.BraceOnSameLine"/>
-        <exclude name="Squiz.ControlStructures.ForEachLoopDeclaration.SpaceAfterOpen"/>
-        <exclude name="Squiz.ControlStructures.ControlSignature.SpaceAfterCloseBrace"/>
         <exclude name="PSR1.Files.SideEffects.FoundWithSymbols"/>
         <exclude name="PSR1.Methods.CamelCapsMethodName.NotCamelCaps"/>
         <exclude name="PSR2.Methods.FunctionCallSignature.SpaceAfterOpenBracket"/>
         <exclude name="PSR2.Methods.FunctionCallSignature.SpaceBeforeCloseBracket"/>
         <exclude name="PSR2.Classes.ClassDeclaration.OpenBraceNewLine"/>
+        <exclude name="PSR2.Classes.ClassDeclaration.CloseBraceAfterBody"/>
         <exclude name="PSR2.ControlStructures.ControlStructureSpacing.SpacingAfterOpenBrace"/>
         <exclude name="PSR2.ControlStructures.ControlStructureSpacing.SpaceBeforeCloseBrace"/>
+        <exclude name="Squiz.Classes.ValidClassName.NotCamelCaps"/>
+        <exclude name="Squiz.ControlStructures.ForEachLoopDeclaration.SpaceAfterOpen"/>
+        <exclude name="Squiz.ControlStructures.ControlSignature.SpaceAfterCloseBrace"/>
+        <exclude name="Squiz.Functions.FunctionDeclarationArgumentSpacing.SpacingAfterOpen"/>
+        <exclude name="Squiz.Functions.FunctionDeclarationArgumentSpacing.SpacingBeforeClose"/>
+        <exclude name="Squiz.Functions.MultiLineFunctionDeclaration.BraceOnSameLine"/>
+        <exclude name="Squiz.WhiteSpace.ControlStructureSpacing.SpacingAfterOpen"/>
+        <exclude name="Squiz.WhiteSpace.ControlStructureSpacing.SpacingBeforeClose"/>
     </rule>
 
     <!-- WordPress -->

@@ -385,7 +385,7 @@ class Image extends Context {
 		$shim_dir = trailingslashit( get_stylesheet_directory_uri() ) . 'img/theme/shims/';
 		$src      = $this->shim;
 
-		if ( empty ( $this->shim ) ) {
+		if ( empty( $this->shim ) ) {
 			if ( $this->auto_shim ) {
 				$src = $shim_dir . $this->src_size . '.png';
 			} else {

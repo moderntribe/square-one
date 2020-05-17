@@ -12,7 +12,6 @@ class Templates_Definer implements Definer_Interface {
 
 	public function define(): array {
 		return [
-
 			/**
 			 * The social networks that will be used for the
 			 * share links
@@ -27,7 +26,5 @@ class Templates_Definer implements Definer_Interface {
 			Social_Links::class => DI\create()
 				->constructor( DI\get( Component_Factory::class ), DI\get( self::SOCIAL_SHARING_NETWORKS ), false ),
 		];
-
 	}
-
 }

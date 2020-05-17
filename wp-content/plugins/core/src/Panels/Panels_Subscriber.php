@@ -29,7 +29,6 @@ class Panels_Subscriber extends Abstract_Subscriber {
 				Caching_Loop::preempt_panels_loop();
 			}, 0, 0 );
 		}
-
 	}
 
 }

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Tribe\Project\Taxonomies\Example;
-
 
 use Tribe\Libs\Taxonomy\Taxonomy_Config;
 use Tribe\Project\Post_Types\Sample\Sample;

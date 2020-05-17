@@ -3,7 +3,6 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Templates\Models;
 
-
 /**
  * Class Image_Derivative
  *

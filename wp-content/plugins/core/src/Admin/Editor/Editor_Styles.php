@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Tribe\Project\Admin\Editor;
-
 
 use Tribe\Project\Assets\Admin\Admin_Build_Parser;
 use Tribe\Project\Assets\Build_Parser;
@@ -58,11 +56,9 @@ class Editor_Styles {
 	 * @filter tiny_mce_before_init
 	 */
 	public function mce_editor_body_class( $settings ): array {
-
 		$settings['body_class'] = ( $settings['body_class'] ?? '' ) . ' s-sink t-sink';
 
 		return $settings;
-
 	}
 
 	/**

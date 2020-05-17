@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Tribe\Project\Theme\Media;
-
 
 use Tribe\Project\Templates\Component_Factory;
 use Tribe\Project\Templates\Components\Video;
