@@ -18,7 +18,6 @@ class Content_Block extends Context {
 	public const TAG               = 'tag';
 	public const CLASSES           = 'classes';
 	public const ATTRS             = 'attrs';
-	public const CONTAINER_CLASSES = 'container_classes';
 	public const LEADIN            = 'leadin';
 	public const TITLE             = 'title';
 	public const TEXT              = 'text';
@@ -37,10 +36,6 @@ class Content_Block extends Context {
 		self::ATTRS             => [
 			self::DEFAULT          => [],
 			self::MERGE_ATTRIBUTES => [],
-		],
-		self::CONTAINER_CLASSES => [
-			self::DEFAULT       => [ 'c-content-block__container' ],
-			self::MERGE_CLASSES => [],
 		],
 		self::LEADIN            => [
 			self::DEFAULT => '',
