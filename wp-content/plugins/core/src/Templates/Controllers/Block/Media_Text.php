@@ -4,10 +4,12 @@ declare( strict_types=1 );
 namespace Tribe\Project\Templates\Controllers\Block;
 
 use Tribe\Project\Blocks\Types\Media_Text as Media_Text_Block;
+use Tribe\Project\Templates\Components\Container as Container_Component;
 use Tribe\Project\Templates\Components\Content_Block;
 use Tribe\Project\Templates\Components\Image as Image_Component;
 use Tribe\Project\Templates\Components\Link;
 use Tribe\Project\Templates\Components\Panels\Media_Text as Container;
+use Tribe\Project\Templates\Components\Text;
 use Tribe\Project\Templates\Models\Image;
 use Tribe\Project\Theme\Config\Image_Sizes;
 
@@ -74,11 +76,23 @@ class Media_Text extends Block_Controller {
 	}
 
 	private function get_title(): string {
-		return $this->attributes[ Media_Text_Block::TITLE ] ?? '';
+		if ( empty($this->attributes[ Media_Text_Block::TITLE ] ) ) {
+			return '';
+		}
+
+		return $this->factory->get( Text::class, [
+			Text::TAG     => 'h2',
+			Text::CLASSES => [ 'media-text__title', 'h3' ],
+			Text::TEXT    => $this->attributes[ Media_Text_Block::TITLE ],
+		] )->render();
 	}
 
 	private function get_content(): string {
-		return implode( "\n", wp_list_pluck( $this->attributes[ Media_Text_Block::CONTENT ] ?? [], 'content' ) );
+		return $this->factory->get( Container_Component::class, [
+			Container_Component::TAG => 'div',
+			Container_Component::CLASSES => [ 'media-text__text', 't-sink', 's-sink' ],
+			Container_Component::CONTENT => implode( "\n", wp_list_pluck( $this->attributes[ Media_Text_Block::CONTENT ] ?? [], 'content' ) )
+		] )->render();
 	}
 
 	private function get_cta(): string {
@@ -88,12 +102,22 @@ class Media_Text extends Block_Controller {
 			'target' => '',
 		] );
 
-		return $this->factory->get( Link::class, [
+		if ( empty( $cta[ 'url' ] ) ) {
+			return '';
+		}
+
+		$cta_html = $this->factory->get( Link::class, [
 			Link::URL        => $cta['url'],
 			Link::CONTENT    => $cta['text'] ?: $cta['url'],
 			Link::TARGET     => $cta['target'],
 			Link::ARIA_LABEL => '', // TODO
-			Link::CLASSES    => [ 'media-text__cta' ],
+			Link::CLASSES    => [ 'a-btn' ],
+		] )->render();
+
+		return $this->factory->get( Text::class, [
+			Text::TAG => 'p',
+			Text::CLASSES => [ 'media-text__cta' ],
+			Text::TEXT => $cta_html,
 		] )->render();
 	}
 }
