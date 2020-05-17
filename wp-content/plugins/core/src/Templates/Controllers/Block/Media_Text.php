@@ -55,8 +55,12 @@ class Media_Text extends Block_Controller {
 		try {
 			return $this->factory->get( Image_Component::class, [
 				Image_Component::ATTACHMENT   => Image::factory( $attachment_id ),
-				Image_Component::SRC_SIZE     => Image_Sizes::COMPONENT_CARD,
-				Image_Component::USE_LAZYLOAD => false,
+				Image_Component::SRC_SIZE     => Image_Sizes::FOUR_THREE,
+				Image_Component::SRCSET_SIZES => [
+					Image_Sizes::FOUR_THREE_SMALL,
+					Image_Sizes::FOUR_THREE,
+					Image_Sizes::FOUR_THREE_LARGE,
+				],
 			] )->render();
 		} catch ( \InvalidArgumentException $e ) {
 			return '';
