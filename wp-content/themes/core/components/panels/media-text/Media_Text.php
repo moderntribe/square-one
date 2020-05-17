@@ -4,6 +4,7 @@ declare( strict_types=1 );
 namespace Tribe\Project\Templates\Components\Panels;
 
 use Tribe\Project\Templates\Components\Context;
+use Tribe\Project\Blocks\Types\Media_Text as Media_Text_Block;
 
 /**
  * Class Media_Text
@@ -29,8 +30,6 @@ class Media_Text extends Context {
 	public const CLASSES           = 'classes';
 	public const ATTRS             = 'attrs';
 
-	private const TYPE = 'media-text';
-
 	protected $path = __DIR__ . '/media-text.twig';
 
 	protected $properties = [
@@ -48,19 +47,19 @@ class Media_Text extends Context {
 		],
 		self::CONTAINER_CLASSES => [
 			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [ self::TYPE . '__container' ],
+			self::MERGE_CLASSES => [ 'media-text__container' ],
 		],
 		self::MEDIA_CLASSES     => [
 			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [ self::TYPE . '__media' ],
+			self::MERGE_CLASSES => [ 'media-text__media' ],
 		],
 		self::CONTENT_CLASSES   => [
 			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [ self::TYPE . '__content' ],
+			self::MERGE_CLASSES => [ 'media-text__content' ],
 		],
 		self::CLASSES           => [
 			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [ 'c-panel', 'c-panel--' . self::TYPE ],
+			self::MERGE_CLASSES => [ 'c-panel', 'c-panel--media-text' ],
 		],
 		self::ATTRS             => [
 			self::DEFAULT          => [],
@@ -70,10 +69,19 @@ class Media_Text extends Context {
 
 	public function get_data(): array {
 		if ( $this->layout ) {
-			$this->properties[ self::CLASSES ][ self::MERGE_CLASSES ][] = self::TYPE . '__layout-' . $this->layout;
+			$this->properties[ self::CLASSES ][ self::MERGE_CLASSES ][] = 'c-panel--layout-media-' . $this->layout;
 		}
+
 		if ( $this->width ) {
-			$this->properties[ self::CLASSES ][ self::MERGE_CLASSES ][] = self::TYPE . '__width-' . $this->width;
+			$this->properties[ self::CLASSES ][ self::MERGE_CLASSES ][] = 'c-panel--width-' . $this->width;
+		}
+
+		if ( $this->width === Media_Text_Block::WIDTH_BOXED ) {
+			$this->properties[ self::CONTAINER_CLASSES ][ self::MERGE_CLASSES ][] = 'l-container';
+		}
+
+		if ( $this->width === Media_Text_Block::WIDTH_FULL ) {
+			$this->properties[ self::CONTENT_CLASSES ][ self::MERGE_CLASSES ][] = 'l-container';
 		}
 
 		return parent::get_data();

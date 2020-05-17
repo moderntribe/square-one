@@ -73,9 +73,10 @@ class Media_Text extends Block_Controller {
 
 	private function get_text(): string {
 		return $this->factory->get( Content_Block::class, [
-			Content_Block::TITLE  => $this->get_title(),
-			Content_Block::TEXT   => $this->get_content(),
-			Content_Block::ACTION => $this->get_cta(),
+			Content_Block::CLASSES => [ 'media-text__content-container' ],
+			Content_Block::TITLE   => $this->get_title(),
+			Content_Block::TEXT    => $this->get_content(),
+			Content_Block::ACTION  => $this->get_cta(),
 		] )->render();
 	}
 
