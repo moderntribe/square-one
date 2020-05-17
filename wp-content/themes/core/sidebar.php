@@ -1,4 +1,3 @@
 <?php
 
-$template = \Tribe\Project\Templates\Sidebar::instance();
-echo $template->render();
+echo tribe_template( \Tribe\Project\Templates\Controllers\Sidebar\Main_Sidebar::class );

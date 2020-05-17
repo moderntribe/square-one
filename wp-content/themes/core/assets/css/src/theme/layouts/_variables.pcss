@@ -1,0 +1,57 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Variables: Grid
+ *
+ * ----------------------------------------------------------------------------- */
+
+:root {
+	/* -----------------------------------------------------------------------------
+	 * Gutters
+	 * ----------------------------------------------------------------------------- */
+
+	/* Gutter & Margin - Default */
+	--grid-margin: 44px;
+	--grid-gutter: 40px;
+	--grid-gutter-negative: calc(var(--grid-gutter) * -1);
+	--grid-gutter-half: calc(var(--grid-gutter) / 2);
+	--grid-gutter-half-negative: calc(var(--grid-gutter-half) * -1);
+
+	/* Gutter & Margin - Medium */
+	--grid-margin-medium: 44px;
+	--grid-gutter-medium: 24px;
+	--grid-gutter-medium-negative: calc(var(--grid-gutter-medium) * -1);
+	--grid-gutter-medium-half: calc(var(--grid-gutter-medium) / 2);
+	--grid-gutter-medium-half-negative: calc(var(--grid-gutter-medium-half) * -1);
+
+	/* Gutter & Margin - Small */
+	--grid-margin-small: 24px;
+	--grid-gutter-small: 24px;
+	--grid-margin-small-negative: calc(var(--grid-margin-small) * -1);
+	--grid-gutter-small-negative: calc(var(--grid-gutter-small) * -1);
+	--grid-gutter-small-half: calc(var(--grid-gutter-small) / 2);
+	--grid-gutter-small-half-negative: calc(var(--grid-gutter-small-half) * -1);
+
+	/* Grid Column Max Widths */
+	--grid-1-col: 64px;
+	--grid-2-col: calc((var(--grid-1-col) * 2) + var(--grid-gutter));
+	--grid-3-col: calc((var(--grid-1-col) * 3) + (var(--grid-gutter) * 2));
+	--grid-4-col: calc((var(--grid-1-col) * 4) + (var(--grid-gutter) * 3));
+	--grid-5-col: calc((var(--grid-1-col) * 5) + (var(--grid-gutter) * 4));
+	--grid-6-col: calc((var(--grid-1-col) * 6) + (var(--grid-gutter) * 5));
+	--grid-7-col: calc((var(--grid-1-col) * 7) + (var(--grid-gutter) * 6));
+	--grid-8-col: calc((var(--grid-1-col) * 8) + (var(--grid-gutter) * 7));
+	--grid-9-col: calc((var(--grid-1-col) * 9) + (var(--grid-gutter) * 8));
+	--grid-10-col: calc((var(--grid-1-col) * 10) + (var(--grid-gutter) * 9));
+	--grid-11-col: calc((var(--grid-1-col) * 11) + (var(--grid-gutter) * 10));
+	--grid-12-col: calc((var(--grid-1-col) * 12) + (var(--grid-gutter) * 11));
+
+	/* Grid Widths */
+	--grid-width: var(--grid-12-col);
+	--grid-width-staggered: var(--grid-10-col);
+	--grid-width-staggered-double: var(--grid-8-col);
+
+	/* Grid Max Widths - Grid + Outer Margins */
+	--grid-max-width: calc(var(--grid-width) + var(--grid-margin) * 2);
+	--grid-max-width-staggered: calc(var(--grid-width-staggered) + var(--grid-margin) * 2);
+	--grid-max-width-staggered-double: calc(var(--grid-width-staggered-double) + var(--grid-margin) * 2);
+}

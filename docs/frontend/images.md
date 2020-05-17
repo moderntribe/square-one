@@ -1,31 +1,9 @@
 #  Theme Images
 
-Images for the themes live in a folder named "img" at `/wp-content/themes/core/img/theme`. 
-
-## Template Tags
-
-### the_tribe_image( $image_id, $args )
-
-This template function has been reduced to a wrapper for the Twig Image Component.  View the full set of options and code examples in the the [component's documentation](/docs/frontend/components/image.md).
-
-#### Example Usage:
-
-##### Using:
-```php
-$args = [
-    'use_lazyload' => false,
-];
-the_tribe_image( get_post_thumbnail_id(), $args );
-```
-
-##### Yields:
-```html
-<figure class="c-image">
-    <img class="c-image__image" src="SRC TO LARGE IMAGE" alt="IMG ALT"  />
-</figure>
-```
-
-Additional usage examples are available in the Image Component's documentation.
+Images for the themes live in a folder named "img" at `/wp-content/themes/core/img/theme`.
+ 
+Use the Image Component to render an image from the theme or a user-uploaded image. View usage examples and the full
+set of options and code examples in the the [component's documentation](/docs/frontend/components/image.md).
 
 ## Table of Contents
 

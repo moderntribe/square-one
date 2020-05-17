@@ -109,17 +109,17 @@ And the panel controller using the Card component
 ```php
 <?php
 
-namespace Tribe\Project\Templates\Content\Panels;
+namespace Tribe\Project\Templates\Controllers\Panels;
 
-use Tribe\Project\Panels\Types\CardGrid as CardGridPanel;
+use Tribe\Project\Panels\Types\Cardgrid as CardGridPanel;
 use Tribe\Project\Templates\Components\Button;
 use Tribe\Project\Templates\Components\Card;
 use Tribe\Project\Templates\Components\Image;
 use Tribe\Project\Templates\Components\Text;
 use Tribe\Project\Templates\Components\Title;
-use Tribe\Project\Theme\Image_Sizes;
+use Tribe\Project\Theme\Config\Image_Sizes;
 
-class CardGrid extends Panel {
+class Cardgrid extends Panel {
 
 	public function get_data(): array {
 		$data       = parent::get_data();
@@ -166,18 +166,23 @@ class CardGrid extends Panel {
 
 	protected function get_card_image( $image_id ) {
 		if ( empty( $image_id ) ) {
-			return false;
+			return '';
+		}
+
+		try {
+			$image = \Tribe\Project\Templates\Models\Image::factory( $image_id );
+		} catch ( \Exception $e ) {
+			return '';
 		}
 
 		$options = [
-			Image::IMG_ID       => $image_id,
+			Image::ATTACHMENT   => $image,
 			Image::AS_BG        => false,
 			Image::USE_LAZYLOAD => false,
-			Image::ECHO         => false,
 			Image::SRC_SIZE     => Image_Sizes::COMPONENT_CARD,
 		];
 
-		$image_obj = Image::factory( $options );
+		$image_obj = $this->factory->get( Image::class, $options );
 
 		return $image_obj->render();
 	}
@@ -245,10 +250,6 @@ class CardGrid extends Panel {
 		$button_obj = Button::factory( $options );
 
 		return $button_obj->render();
-	}
-
-	public static function instance() {
-		return tribe_project()->container()['twig.templates.content/panels/cardgrid'];
 	}
 }
 ```

@@ -1,4 +1,3 @@
 <?php
 
-$template = new \Tribe\Project\Templates\Unsupported_Browser( 'page-templates/page-unsupported-browser.twig' );
-echo $template->render();
+echo tribe_template( \Tribe\Project\Templates\Controllers\Page\Page_Unsupported_Browser::class );

@@ -3,5 +3,7 @@
  * Template Name: Sections
  */
 
-$template = new \Tribe\Project\Templates\Page( 'page-templates/page-section.twig' );
-echo $template->render();
+
+use Tribe\Project\Templates\Controllers\Page\Page;
+
+echo tribe_template( Page::class, 'components/pages/page-section/page-section.twig' );

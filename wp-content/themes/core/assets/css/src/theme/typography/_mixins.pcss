@@ -1,0 +1,206 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Mixins: Typography
+ *
+ * ----------------------------------------------------------------------------- */
+
+/* -------------------------------------------------------------------------
+ * Display X-Large
+ * ------------------------------------------------------------------------- */
+
+@define-mixin t-display-x-large {
+	font-family: var(--font-family-sans-serif);
+	font-size: 56px;
+	line-height: 1.2;
+	font-weight: 700;
+	letter-spacing: -0.9px;
+}
+
+/* -------------------------------------------------------------------------
+ * Display Large
+ * ------------------------------------------------------------------------- */
+
+@define-mixin t-display-large {
+	font-family: var(--font-family-sans-serif);
+	font-size: 48px;
+	line-height: 1.17;
+	font-weight: 700;
+	letter-spacing: -0.3px;
+}
+
+/* -------------------------------------------------------------------------
+ * Display
+ * ------------------------------------------------------------------------- */
+
+@define-mixin t-display {
+	font-family: var(--font-family-sans-serif);
+	font-size: 40px;
+	line-height: 1.3;
+	font-weight: 700;
+	letter-spacing: -0.2px;
+}
+
+/* -------------------------------------------------------------------------
+ * Display Small
+ * ------------------------------------------------------------------------- */
+
+@define-mixin t-display-small {
+	font-family: var(--font-family-sans-serif);
+	font-size: 32px;
+	line-height: 1.44;
+	font-weight: 700;
+	letter-spacing: -0.1px;
+}
+
+/* -------------------------------------------------------------------------
+ * Display X-Small
+ * ------------------------------------------------------------------------- */
+
+@define-mixin t-display-x-small {
+	font-family: var(--font-family-sans-serif);
+	font-size: 24px;
+	line-height: 1.5;
+	font-weight: 700;
+}
+
+/* -------------------------------------------------------------------------
+ * Display XX-Small
+ * ------------------------------------------------------------------------- */
+
+@define-mixin t-display-xx-small {
+	font-family: var(--font-family-sans-serif);
+	font-size: 18px;
+	line-height: 1.56;
+	font-weight: 700;
+	letter-spacing: 0.1111px;
+}
+
+/* -------------------------------------------------------------------------
+ * Body Large
+ * ------------------------------------------------------------------------- */
+
+@define-mixin t-body-large {
+	font-family: var(--font-family-serif);
+	font-size: var(--font-size-body-large);
+	line-height: 1.9;
+	font-weight: 400;
+}
+
+/* -------------------------------------------------------------------------
+ * Body
+ * ------------------------------------------------------------------------- */
+
+@define-mixin t-body {
+	font-family: var(--font-family-serif);
+	font-size: var(--font-size-body);
+	line-height: 2;
+	font-weight: 400;
+}
+
+/* -------------------------------------------------------------------------
+ * Body Small
+ * ------------------------------------------------------------------------- */
+
+@define-mixin t-body-small {
+	font-family: var(--font-family-serif);
+	font-size: var(--font-size-body-small);
+	line-height: 2;
+	font-weight: 400;
+	letter-spacing: 0.1px;
+}
+
+/* -------------------------------------------------------------------------
+ * Overline
+ * ------------------------------------------------------------------------- */
+
+@define-mixin t-overline {
+	font-family: var(--font-family-sans-serif);
+	font-size: 14px;
+	line-height: 2;
+	font-weight: 400;
+	letter-spacing: 1.75px;
+	text-transform: uppercase;
+}
+
+/* -------------------------------------------------------------------------
+ * Caption
+ * ------------------------------------------------------------------------- */
+
+@define-mixin t-caption {
+	@mixin t-body-small;
+}
+
+/* -------------------------------------------------------------------------
+ * Button
+ * ------------------------------------------------------------------------- */
+
+@define-mixin t-button {
+	font-family: var(--font-family-sans-serif);
+	font-size: var(--font-size-body);
+	line-height: 1.125;
+	font-weight: 700;
+	letter-spacing: 0.02em;
+}
+
+/* -------------------------------------------------------------------------
+ * Text Button/Call To Action
+ * ------------------------------------------------------------------------- */
+
+@define-mixin t-text-button {
+	font-family: var(--font-family-sans-serif);
+	font-size: 18px;
+	line-height: 1.5556;
+	font-weight: 700;
+	letter-spacing: 0.1111px;
+}
+
+/* -------------------------------------------------------------------------
+ * Input
+ * ------------------------------------------------------------------------- */
+
+@define-mixin t-input {
+	font-family: var(--font-family-sans-serif);
+	font-size: var(--font-size-body);
+	line-height: 1.5;
+	font-weight: 400;
+}
+
+/* -------------------------------------------------------------------------
+ * Label
+ * ------------------------------------------------------------------------- */
+
+@define-mixin t-label {
+	font-family: var(--font-family-sans-serif);
+	font-size: 14px;
+	line-height: 1.4;
+	font-weight: 400;
+}
+
+/* -------------------------------------------------------------------------
+ * Quotes & Blockquotes
+ * ------------------------------------------------------------------------- */
+
+@define-mixin t-quote {
+	@mixin t-display-small;
+
+	quotes: '\201C' '\201D' '\2018' '\2019';
+
+	&:first-child {
+		text-indent: -0.5em;
+
+		&:before {
+			content: open-quote;
+		}
+	}
+
+	&:last-of-type {
+
+		&:after {
+			content: close-quote;
+		}
+	}
+
+	@media (--viewport-medium) {
+		@mixin t-display-large;
+	}
+}

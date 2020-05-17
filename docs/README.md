@@ -55,14 +55,10 @@ This is the deep dive development documentation for SquareOne. If you are new he
 	* [Custom Post Types](/docs/backend/post-types.md)
 	* [Custom Taxonomies](/docs/backend/taxonomies.md)
 	* [Object Meta](/docs/backend/object-meta.md)
-	* [Service Providers](/docs/backend/service-providers.md)
-	* [Template Controllers](/docs/backend/data.md)
+	* [Subscribers](/docs/backend/subscribers.md)
 	* [CLI](/docs/backend/cli.md)
 	* [Cache](/docs/backend/object-cache.md)
-	* [Request Object](/docs/backend/request.md)
-	* [Facades](/docs/backend/facades.md)
 	* [Schema](/docs/backend/schema.md)
-	* [Queues](/docs/backend/queues.md)
 
 * **Panel Builder**
 	* [Overview](/docs/panels/README.md)
@@ -71,7 +67,7 @@ This is the deep dive development documentation for SquareOne. If you are new he
 
 * **Tests and Code Quality**
 	* [Overview](/docs/tests/README.md)
-	* [Codeception](/docs/tests/codeception.md)
+	* [Codeception](/dev/tests/README.md)
 	* [Jest](/docs/tests/jest.md)
 
 * **Deploys with Ansible**
@@ -80,9 +76,14 @@ This is the deep dive development documentation for SquareOne. If you are new he
 	* [Initial Setup](/docs/ansible/initial-setup.md)
 	* [Executing Deploys](/docs/ansible/deploys.md)
 
+* **Deploys with Jenkins**
+	* [Overview](/docs/deploy/jenkins/README.md)
+
+* **Deploys with Bash**
+	* [Overview](/docs/deploy/bash/README.md)
+
 * **Plugins/Extensions**
 	* [Twig](https://twig.symfony.com/)
 	* [Posts 2 Post](https://github.com/scribu/wp-posts-to-posts/wiki)
 	* [Extended Post Types](https://github.com/johnbillion/extended-cpts/blob/master/README.md)
 	* [Extended Taxonomies](https://github.com/johnbillion/extended-taxos/blob/master/README.md)
-	* [Whoops](/docs/backend/whoops.md)

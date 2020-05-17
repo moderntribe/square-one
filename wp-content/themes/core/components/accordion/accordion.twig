@@ -1,0 +1,79 @@
+{#
+
+Component: Accordion
+
+Documentation: docs\theme\components\accordion.md
+
+Controller: wp-content\plugins\core\src\Templates\Components\Accordion.php
+Javascript: wp-content\plugins\core\assets\theme\js\src\components\accordion.js
+PostCSS: wp-content\plugins\core\assets\theme\pcss\components\_accordion.pcss
+
+Description: Use this wherever you need an accordion component. Check the docs for example usage.
+
+Attributes:
+	{
+		container_classes: 'c-accordion', // { string } the wrapper classes
+        container_attrs: 'data-js="c-accordion"', // { string }. any additional attributes
+        row_classes: 'c-accordion__row', // { string } the row classes
+        row_content_classes: 'c-accordion__content', // { string } the row content wrapper classes
+        row_content_inner_classes: 'c-accordion__content-inner', // { string } the row content inner classes
+        row_content_name: 'accordion_content', // { string } the content name attribute, if used in panel supply row content field name
+        row_header_classes: 'c-accordion__header', // { string } the row header classes
+        row_header_inner_classes: 'c-accordion__header-inner'.  // { string } The row header inner classes. wraps the row title text
+        row_header_name: 'title', // { string } the header name attribute, if used in panel supply row header text field name
+        rows: [], // { array }. an array of accordion rows.
+        rows[].content: '', // { string } The row content. HTML or what have you.
+        rows[].content_id: '', // { string } Unique id for the content.
+        rows[].header_id: '', // { string } Unique id for the header.
+        rows[].header_text: '', // { string } The header text.
+    }
+ #}
+
+<div
+	{{ container_classes }}
+	role="tablist"
+	aria-multiselectable="true"
+	{{ container_attrs }}
+>
+	{% for row in rows %}
+		<article {{ row_classes }}>
+			<button
+				aria-controls="{{ row.content_id|esc_attr }}"
+				aria-expanded="false"
+				aria-selected="false"
+				{{ row_header_classes }}
+				id="{{ row.header_id|esc_attr }}"
+				data-index="{{ loop.index0 }}"
+				role="tab"
+			>
+				<span
+					{{ row_header_inner_classes }}
+					data-depth="0"
+					data-name="{{ row_header_name }}"
+					data-index="{{ loop.index0 }}"
+					data-livetext
+				>
+					{{ row.header_text }}
+				</span>
+			</button>
+			<div
+				aria-hidden="true"
+				aria-labelledby="{{ row.header_id|esc_attr }}"
+				{{ row_content_classes }}
+				id="{{ row.content_id|esc_attr }}"
+				role="tabpanel"
+			>
+				<div
+					{{ row_content_inner_classes }}
+					data-depth="0"
+					data-name="{{ row_content_name }}"
+					data-index="{{ loop.index0 }}"
+					data-autop="true"
+					data-livetext
+				>
+					{{ row.content }}
+				</div>
+			</div>
+		</article>
+	{% endfor %}
+</div>

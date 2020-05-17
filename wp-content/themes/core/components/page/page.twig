@@ -1,0 +1,15 @@
+{{ subheader }}
+
+{% if post.content %}
+	<div class="">
+		{{ post.featured_image }}
+
+		<div class="t-sink s-sink l-sink l-sink--double">
+			{{ post.content }}
+		</div>
+	</div>
+{% endif %}
+
+{{ do_action( 'the_panels' ) }}
+
+{{ comments }}

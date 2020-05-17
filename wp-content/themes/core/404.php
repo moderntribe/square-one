@@ -1,4 +1,3 @@
 <?php
 
-$template = new \Tribe\Project\Templates\Error_404( '404.twig' );
-echo $template->render();
+echo tribe_template( \Tribe\Project\Templates\Controllers\Page\Error_404::class );

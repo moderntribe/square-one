@@ -1,4 +1,4 @@
 <?php
 
-$template = new \Tribe\Project\Templates\Index( 'archive.twig' );
-echo $template->render();
+// Uses same controller and template as index.php
+echo tribe_template( \Tribe\Project\Templates\Controllers\Page\Index::class );

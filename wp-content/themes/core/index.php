@@ -1,4 +1,3 @@
 <?php
 
-$template = new \Tribe\Project\Templates\Index( 'index.twig' );
-echo $template->render();
+echo tribe_template( \Tribe\Project\Templates\Controllers\Page\Index::class );

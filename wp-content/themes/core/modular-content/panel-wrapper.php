@@ -1,6 +1,6 @@
 <?php
 
-use Tribe\Project\Theme\Panel_Util;
+use Tribe\Libs\Utils\Markup_Utils;
 
 /**
  * A wrapper around each modular panel.
@@ -11,17 +11,17 @@ use Tribe\Project\Theme\Panel_Util;
  * @var string $html The rendered HTML of the panel
  */
 
-$panel_util = new Panel_Util();
 $classes    = ['panel'];
 
 // Child Panel
 if( $panel->get_depth() >= 1 ) {
 
 	$classes[] = 'panel-child';
+	$classes[] = sprintf( 'panel--type-%s', sanitize_html_class( $type ) );
 
 	?>
 
-	<article <?php echo $panel_util->wrapper_classes( $panel, $classes ); ?>>
+	<article <?php echo Markup_Utils::class_attribute( $classes, true ); ?>>
 
 		<?php echo $html; ?>
 
@@ -32,6 +32,6 @@ if( $panel->get_depth() >= 1 ) {
 // Parent Panel.
 else { ?>
 
-		<?php echo $html; ?>
+	<?php echo $html; ?>
 
 <?php } ?>

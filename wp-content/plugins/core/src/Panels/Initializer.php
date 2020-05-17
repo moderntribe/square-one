@@ -89,7 +89,7 @@ class Initializer {
 	 */
 	protected function set_supported_post_types() {
 		remove_post_type_support( 'post', 'modular-content' );
-		add_post_type_support( 'page', 'modular-content' );
+		remove_post_type_support( 'page', 'modular-content' );
 	}
 
 	/**
@@ -101,8 +101,8 @@ class Initializer {
 	 * @return void
 	 */
 	protected function set_view_directories() {
-		$this->ViewFinder = new \ModularContent\PanelViewFinder( trailingslashit( get_stylesheet_directory() ) . 'content/panels' );
-		$this->ViewFinder->add_directory( trailingslashit( get_template_directory() ) . 'content/panels' );
+		$this->ViewFinder = new \ModularContent\PanelViewFinder( trailingslashit( get_stylesheet_directory() ) . 'modular-content' );
+		$this->ViewFinder->add_directory( trailingslashit( get_template_directory() ) . 'modular-content' );
 	}
 
 	/**
@@ -267,14 +267,14 @@ class Initializer {
 	}
 
 	public function thumbnail_url( $filename ) {
-		return trailingslashit( get_stylesheet_directory_uri() ) . 'img/admin/panels/thumbnails/' . $filename;
+		return trailingslashit( get_stylesheet_directory_uri() ) . 'assets/img/admin/panels/thumbnails/' . $filename;
 	}
 
 	public function layout_icon_url( $filename ) {
-		return trailingslashit( get_stylesheet_directory_uri() ) . 'img/admin/panels/icons/standard/' . $filename;
+		return trailingslashit( get_stylesheet_directory_uri() ) . 'assets/img/admin/panels/icons/standard/' . $filename;
 	}
 
 	public function swatch_icon_url( $filename ) {
-		return trailingslashit( get_stylesheet_directory_uri() ) . 'img/admin/panels/icons/swatches/' . $filename;
+		return trailingslashit( get_stylesheet_directory_uri() ) . 'assets/img/admin/panels/icons/swatches/' . $filename;
 	}
 }
