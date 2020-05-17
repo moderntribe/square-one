@@ -1,6 +1,10 @@
 name: PHP Composer and Codesniffer
 
-on: [push]
+on:
+  pull_request:
+    paths:
+      - 'wp-content/plugins/core/**.php'
+      - 'wp-content/themes/core/**.php'
 
 jobs:
   sniff:
