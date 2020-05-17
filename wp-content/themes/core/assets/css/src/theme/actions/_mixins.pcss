@@ -24,18 +24,12 @@
 		text-decoration: underline;
 	}
 
+	/* CASE: Disabled */
 	&[disabled],
 	&.is-disabled {
 		opacity: 0.5;
 		cursor: default;
-
-		&:active,
-		&:hover,
-		&:focus {
-			text-decoration: none;
-			background-color: inherit;
-			border-color: inherit;
-		}
+		text-decoration: none;
 	}
 }
 
@@ -52,7 +46,19 @@
 	&:focus,
 	&:active,
 	&:hover {
+		color: var(--color-white);
 		background-color: var(--color-primary-70);
+	}
+
+	/* CASE: Disabled */
+	&[disabled],
+	&.is-disabled {
+
+		&:focus,
+		&:active,
+		&:hover {
+			background-color: var(--color-primary);
+		}
 	}
 
 	/* CASE: Reversed out/light theme */
@@ -84,7 +90,19 @@
 	&:focus,
 	&:active,
 	&:hover {
+		color: var(--color-primary);
 		background-color: var(--color-primary-10);
+	}
+
+	/* CASE: Disabled */
+	&[disabled],
+	&.is-disabled {
+
+		&:focus,
+		&:active,
+		&:hover {
+			background-color: transparent;
+		}
 	}
 
 	/* CASE: Reversed out/light theme */
@@ -96,6 +114,17 @@
 		&:active,
 		&:hover {
 			background-color: var(--color-primary-70);
+		}
+
+		/* CASE: Disabled */
+		&[disabled],
+		&.is-disabled {
+
+			&:focus,
+			&:active,
+			&:hover {
+				background-color: transparent;
+			}
 		}
 	}
 }
@@ -113,7 +142,19 @@
 	&:focus,
 	&:active,
 	&:hover {
+		color: var(--color-white);
 		background-color: var(--color-secondary-70);
+	}
+
+	/* CASE: Disabled */
+	&[disabled],
+	&.is-disabled {
+
+		&:focus,
+		&:active,
+		&:hover {
+			background-color: var(--color-secondary);
+		}
 	}
 }
 
