@@ -1,0 +1,80 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Component: Button
+ *
+ * ----------------------------------------------------------------------------- */
+
+/* -----------------------------------------------------------------------------
+ *
+ * Button: Primary
+ *
+ * Notes:
+ * + Has primary color for background.
+ * + On hover/focus animate background color
+ *
+ * Example:
+ * <button class="a-btn">...</button>
+ * <a href="#" class="a-btn">...</a>
+ *
+ * ----------------------------------------------------------------------------- */
+
+.a-btn,
+a.a-btn {
+	@mixin a-btn-primary;
+}
+
+/* -----------------------------------------------------------------------------
+ *
+ * Button: Secondary
+ *
+ * Notes:
+ * + Has primary color for outline/border
+ * + On hover/focus animate background color
+ *
+ * Example:
+ * <button class="a-btn-secondary">...</button>
+ * <a href="#" class="a-btn-secondary">...</a>
+ *
+ * ----------------------------------------------------------------------------- */
+
+.a-btn-secondary,
+a.a-btn-secondary {
+	@mixin a-btn-secondary;
+}
+
+/* -----------------------------------------------------------------------------
+ *
+ * Button: Tertiary
+ *
+ * Notes:
+ * + Has secondary color for background.
+ * + On hover/focus animate background color
+ *
+ * Example:
+ * <button class="a-btn-tertiary">...</button>
+ * <a href="#" class="a-btn-tertiary">...</a>
+ *
+ * ----------------------------------------------------------------------------- */
+
+.a-btn-tertiary,
+a.a-btn-tertiary {
+	@mixin a-btn-tertiary;
+}
+
+/* -----------------------------------------------------------------------------
+ *
+ * Call To Action: Primary
+ *
+ * Notes:
+ * + Enlarged text link styles
+ *
+ * Example:
+ * <button class="a-cta">...</button>
+ * <a href="#" class="a-cta">...</a>
+ *
+ * ----------------------------------------------------------------------------- */
+
+.a-cta,
+a.a-cta {
+	@mixin a-cta-primary;
+}
