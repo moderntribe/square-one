@@ -172,14 +172,40 @@
 @define-mixin a-cta-primary {
 	@mixin t-text-button;
 
+	position: relative;
+	display: inline-block;
+	color: var(--color-text);
+
+	&:after {
+		position: absolute;
+		bottom: 0;
+		display: inline-block;
+		content: var(--icon-arrow-right);
+		padding-left: 10px;
+		color: var(--color-primary);
+		font-family: var(--font-family-core-icons);
+		font-weight: 400;
+		font-size: 1.1em;
+		transition: var(--transition);
+	}
+
 	&:focus {
 		color: var(--color-primary);
 		text-decoration: underline;
+
+		&:after {
+			text-decoration: none;
+			padding-left: 24px;
+		}
 	}
 
 	&:active,
 	&:hover {
 		color: var(--color-primary);
+
+		&:after {
+			padding-left: 24px;
+		}
 	}
 
 	/* CASE: Reversed out/light theme */
