@@ -9,24 +9,20 @@
  *
  * ------------------------------------------------------------------------- */
 
-.s-sink {
+.s-sink > {
 	/* -----------------------------------------------------------------------------
 	 * First & last element overrides
 	 * ----------------------------------------------------------------------------- */
 
-	/* TODO: Figure better solution for this. */
+	/* CASE: remove top margin from first element */
+	*:first-child {
+		margin-top: 0;
+	}
 
-	/*	& > {
-		!* CASE: remove top margin from first element *!
-		*:first-child {
-			margin-top: 0;
-		}
-
-		!* CASE: remove bottom margin from bottom element *!
-		*:last-child {
-			margin-bottom: 0;
-		}
-	} */
+	/* CASE: remove bottom margin from bottom element */
+	*:last-child {
+		margin-bottom: 0;
+	}
 
 	/* -----------------------------------------------------------------------------
 	 * Headings
