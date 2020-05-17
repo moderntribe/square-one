@@ -5,13 +5,13 @@ namespace Tribe\Project\Theme\Config;
 
 
 class Image_Sizes {
-	public const CORE_FULL      = 'core-full';
-	public const CORE_MOBILE    = 'core-mobile';
-	public const SOCIAL_SHARE   = 'social-share';
-	public const COMPONENT_CARD = 'component-card';
-	public const FOUR_THREE     = 'four-three';
-	public const FOUR_THREE_SMALL     = 'four-three-small';
-	public const FOUR_THREE_LARGE     = 'four-three-large';
+	public const CORE_FULL        = 'core-full';
+	public const CORE_MOBILE      = 'core-mobile';
+	public const SOCIAL_SHARE     = 'social-share';
+	public const COMPONENT_CARD   = 'component-card';
+	public const FOUR_THREE       = 'four-three';
+	public const FOUR_THREE_SMALL = 'four-three-small';
+	public const FOUR_THREE_LARGE = 'four-three-large';
 
 	private $sizes = [
 		self::CORE_FULL      => [
