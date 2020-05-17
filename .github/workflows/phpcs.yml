@@ -3,9 +3,18 @@ name: PHP Composer and Codesniffer
 on: [push]
 
 jobs:
-  build:
+  sniff:
 
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.operating-system }}
+
+    strategy:
+      matrix:
+        operating-system: [ ubuntu-latest ]
+        php-versions: [ '7.3' ]
+
+    env:
+      cache_version: 0 # increment to flush all caches
+      php_extensions: tokenizer, xmlwriter, simplexml
 
     steps:
       - uses: actions/checkout@v2
@@ -15,23 +24,50 @@ jobs:
           TOKEN: ${{ secrets.GH_TOKEN }}
         run: composer config --global github-oauth.github.com $TOKEN
 
+      - name: Setup PHP extension cache
+        id: cache-php-extensions
+        uses: shivammathur/cache-extensions@v1
+        with:
+          php-version: ${{ matrix.php-versions }}
+          extensions: ${{ env.php_extensions }}
+          key: ${{ matrix.operating-system }}-${{ env.cache_version }}-phpextensions-${{ matrix.php-versions }}
+
+      - name: Cache PHP extensions
+        uses: actions/cache@v1
+        with:
+          path: ${{ steps.cache-php-extensions.outputs.dir }}
+          key: ${{ steps.cache-php-extensions.outputs.key }}
+          restore-keys: ${{ steps.cache-php-extensions.outputs.key }}
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+          extensions: ${{ env.php_extensions }}
+          coverage: none
+          tools: composer
+
       - name: Validate composer.json and composer.lock
         run: composer validate
 
-      - name: Check for Cached Dependencies
-        id: cache-dependencies
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - name: Check for Cached Composer Dependencies
+        id: cache-composer-dependencies
         uses: actions/cache@v1
         with:
-          path: vendor
-          key: ${{ runner.OS }}-build-${{ hashFiles('**/composer.lock') }}
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-${{ env.cache_version }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-${{ env.cache_version }}-composer-
 
-      - name: Install Dependencies
-        if: steps.cache-dependencies.outputs.cache-hit != 'true'
+      - name: Install composer dependencies
         env:
           WP_PLUGIN_ACF_KEY: ${{ secrets.WP_PLUGIN_ACF_KEY }}
           WP_PLUGIN_GF_KEY: ${{ secrets.WP_PLUGIN_GF_KEY }}
           WP_PLUGIN_GF_TOKEN: ${{ secrets.WP_PLUGIN_GF_TOKEN }}
-        run: composer install --prefer-dist --no-progress --no-suggest
+        run: composer install --prefer-dist --no-progress --no-suggest --optimize-autoloader
 
       - name: PHPCS
         run: ./vendor/bin/phpcs --standard=./phpcs.xml $( git diff-tree --no-commit-id --name-only -r ${GITHUB_SHA} | tr '\n' ' ' )
