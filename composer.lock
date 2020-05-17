@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "44e04de95cace184eadf6eac8a40697a",
+    "content-hash": "57b2b375a3633d445ca103ca4b7945a5",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -10423,10 +10423,10 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "moderntribe/panel-builder": 20,
-        "moderntribe/gutenpanels": 20,
-        "moderntribe/tribe-libs": 20,
         "humanmade/mercator": 20,
+        "moderntribe/gutenpanels": 20,
+        "moderntribe/panel-builder": 20,
+        "moderntribe/tribe-libs": 20,
         "roots/wp-password-bcrypt": 20,
         "filp/whoops": 20
     },
