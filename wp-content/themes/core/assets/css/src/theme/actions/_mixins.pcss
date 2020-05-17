@@ -54,6 +54,19 @@
 	&:hover {
 		background-color: var(--color-primary-70);
 	}
+
+	/* CASE: Reversed out/light theme */
+	&.is-style-light,
+	.t-theme--light & {
+		color: var(--color-primary);
+		background-color: var(--color-white);
+
+		&:focus,
+		&:active,
+		&:hover {
+			background-color: var(--color-white);
+		}
+	}
 }
 
 /* -----------------------------------------------------------------------------
@@ -72,6 +85,18 @@
 	&:active,
 	&:hover {
 		background-color: var(--color-primary-10);
+	}
+
+	/* CASE: Reversed out/light theme */
+	&.is-style-light,
+	.t-theme--light & {
+		color: var(--color-white);
+
+		&:focus,
+		&:active,
+		&:hover {
+			background-color: var(--color-primary-70);
+		}
 	}
 }
 
@@ -115,5 +140,17 @@
 	&:active,
 	&:hover {
 		color: var(--color-primary);
+	}
+
+	/* CASE: Reversed out/light theme */
+	&.is-style-light,
+	.t-theme--light & {
+		color: var(--color-white);
+
+		&:focus,
+		&:active,
+		&:hover {
+			color: var(--color-primary-30);
+		}
 	}
 }
