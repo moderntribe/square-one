@@ -117,7 +117,7 @@ class Media_Text extends Block_Controller {
 			Link::CONTENT    => $cta['text'] ?: $cta['url'],
 			Link::TARGET     => $cta['target'],
 			Link::ARIA_LABEL => '', // TODO
-			Link::CLASSES    => [ 'a-btn' ],
+			Link::CLASSES    => [ 'a-btn', 'a-btn--has-icon-after', 'icon-arrow-right' ],
 		] )->render();
 
 		return $this->factory->get( Text::class, [
