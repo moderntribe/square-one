@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<ruleset name="ModernTribe">
+    <description>Modern Tribe Coding Standards.</description>
+    <file>./wp-content/plugins/core</file>
+    <file>./wp-content/themes/core</file>
+    <!-- Headless - <file>./wp-content/themes/core</file> -->
+    <arg name="extensions" value="php"/>
+    <arg name="severity" value="4"/>
+    <arg name="tab-width" value="4"/>
+
+    <!-- Exclude files -->
+    <exclude-pattern>*-config.php</exclude-pattern>
+    <exclude-pattern>*assets/</exclude-pattern>
+    <exclude-pattern>*vendor/</exclude-pattern>
+    <exclude-pattern>*tests/*</exclude-pattern>
+    <exclude-pattern>*cli/*</exclude-pattern>
+    <exclude-pattern>*.twig</exclude-pattern>
+    <exclude-pattern>*webpack/</exclude-pattern>
+    <exclude-pattern>*Panels/Types/</exclude-pattern>
+    <exclude-pattern>*modular-content/</exclude-pattern>
+
+    <!-- Rules -->
+
+    <!-- PSR2 -->
+    <rule ref="PSR2">
+        <exclude name="Generic.WhiteSpace.DisallowTabIndent"/>
+        <exclude name="Generic.Files.LineLength.TooLong"/>
+        <exclude name="PSR1.Files.SideEffects.FoundWithSymbols"/>
+        <exclude name="PSR1.Methods.CamelCapsMethodName.NotCamelCaps"/>
+        <exclude name="PSR2.Methods.FunctionCallSignature.SpaceAfterOpenBracket"/>
+        <exclude name="PSR2.Methods.FunctionCallSignature.SpaceBeforeCloseBracket"/>
+        <exclude name="PSR2.Classes.ClassDeclaration.OpenBraceNewLine"/>
+        <exclude name="PSR2.Classes.ClassDeclaration.CloseBraceAfterBody"/>
+        <exclude name="PSR2.ControlStructures.ControlStructureSpacing.SpacingAfterOpenBrace"/>
+        <exclude name="PSR2.ControlStructures.ControlStructureSpacing.SpaceBeforeCloseBrace"/>
+        <exclude name="Squiz.Classes.ValidClassName.NotCamelCaps"/>
+        <exclude name="Squiz.ControlStructures.ForEachLoopDeclaration.SpaceAfterOpen"/>
+        <exclude name="Squiz.ControlStructures.ControlSignature.SpaceAfterCloseBrace"/>
+        <exclude name="Squiz.Functions.FunctionDeclarationArgumentSpacing.SpacingAfterOpen"/>
+        <exclude name="Squiz.Functions.FunctionDeclarationArgumentSpacing.SpacingBeforeClose"/>
+        <exclude name="Squiz.Functions.MultiLineFunctionDeclaration.BraceOnSameLine"/>
+        <exclude name="Squiz.WhiteSpace.ControlStructureSpacing.SpacingAfterOpen"/>
+        <exclude name="Squiz.WhiteSpace.ControlStructureSpacing.SpacingBeforeClose"/>
+    </rule>
+
+    <!-- WordPress -->
+    <rule ref="WordPressVIPMinimum">
+        <severity>3</severity>
+        <exclude name="WordPressVIPMinimum.Constants.ConstantString.NotCheckingConstantName"/>
+        <exclude name="WordPressVIPMinimum.Variables.VariableAnalysis"/>
+    </rule>
+
+    <rule ref="Generic.Functions.OpeningFunctionBraceKernighanRitchie"/>
+    <rule ref="Generic.Classes.OpeningBraceSameLine"/>
+    <rule ref="Generic.Arrays.DisallowLongArraySyntax.Found"/>
+    <rule ref="Generic.WhiteSpace.DisallowSpaceIndent"/>
+    <rule ref="Generic.WhiteSpace.ScopeIndent">
+        <properties>
+            <property name="indent" value="4"/>
+            <property name="tabIndent" value="true"/>
+        </properties>
+    </rule>
+
+    <rule ref="PHPCompatibility"/>
+    <rule ref="NeutronStandard.StrictTypes.RequireStrictTypes.StrictTypes">
+        <severity>3</severity>
+    </rule>
+    <rule ref="NeutronStandard.Functions.TypeHint.NoReturnType">
+        <severity>3</severity>
+    </rule>
+    <rule ref="NeutronStandard.Functions.TypeHint.NoArgumentType">
+        <severity>3</severity>
+    </rule>
+
+    <!-- variables: https://github.com/sirbrillig/VariableAnalysis/ -->
+    <rule ref="VariableAnalysis"/>
+    <rule ref="VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable">
+        <type>error</type>
+    </rule>
+    <rule ref="VariableAnalysis.CodeAnalysis.VariableAnalysis.UnusedVariable">
+        <severity>2</severity>
+    </rule>
+</ruleset>

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Tribe\Project\Taxonomies\Category;
-
 
 use Tribe\Libs\Taxonomy\Term_Object;
 

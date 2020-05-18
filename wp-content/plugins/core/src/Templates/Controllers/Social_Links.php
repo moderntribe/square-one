@@ -62,7 +62,6 @@ class Social_Links extends Abstract_Controller {
 		}
 
 		return $links;
-
 	}
 
 
@@ -147,7 +146,7 @@ class Social_Links extends Abstract_Controller {
 
 				return $this->link_component( $link, $label, $icon, $attributes );
 
-			case self::PINTEREST;
+			case self::PINTEREST:
 				if ( empty( $data['image_src'] ) ) {
 					return '';
 				}
@@ -225,7 +224,6 @@ class Social_Links extends Abstract_Controller {
 			default:
 				return '';
 		}
-
 	}
 
 	private function link_component( string $url = '', string $label = '', string $icon = '', array $attributes = [] ): string {
@@ -276,6 +274,5 @@ class Social_Links extends Abstract_Controller {
 		}
 
 		return $url;
-
 	}
 }

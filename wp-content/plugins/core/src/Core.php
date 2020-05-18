@@ -33,7 +33,7 @@ class Core {
 	/**
 	 * @var self
 	 */
-	private static $_instance;
+	private static $instance;
 
 	/**
 	 * @var ContainerInterface
@@ -163,11 +163,11 @@ class Core {
 	 * @return self
 	 */
 	public static function instance() {
-		if ( ! isset( self::$_instance ) ) {
-			self::$_instance = new self();
+		if ( ! isset( self::$instance ) ) {
+			self::$instance = new self();
 		}
 
-		return self::$_instance;
+		return self::$instance;
 	}
 
 }

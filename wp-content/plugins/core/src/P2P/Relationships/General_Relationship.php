@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Tribe\Project\P2P\Relationships;
-
 
 use Tribe\Libs\P2P\Relationship;
 use Tribe\Project\Post_Types\Event\Event;

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Tribe\Project\Panels;
-
 
 use ModularContent\Fields;
 use ModularContent\PanelType;
@@ -224,8 +222,8 @@ class Initializer {
 		$date .= '-';
 		$date .= isset( $input[ 'day' ] ) ? sprintf( '%02d', $input[ 'day' ] ) : date( 'd' );
 		$date .= " 23:59:59";
-		return $date;
 
+		return $date;
 	}
 
 	/**

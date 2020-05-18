@@ -3,7 +3,6 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Templates\Components\Comments;
 
-
 use Tribe\Project\Templates\Components\Context;
 
 class Comments_Section extends Context {

@@ -52,7 +52,6 @@ class Form_Markup {
 		}
 
 		return $choice_markup;
-
 	}
 
 	/**
@@ -108,6 +107,5 @@ class Form_Markup {
 		}
 
 		return $classes;
-
 	}
 }
