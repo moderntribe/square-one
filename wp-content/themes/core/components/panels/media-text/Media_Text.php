@@ -77,7 +77,7 @@ class Media_Text extends Context {
 		}
 
 		if ( $this->width === Media_Text_Block::WIDTH_BOXED ) {
-			$this->properties[ self::CONTAINER_CLASSES ][ self::MERGE_CLASSES ][] = 'l-container';
+			$this->properties[ self::CLASSES ][ self::MERGE_CLASSES ][] = 'l-container';
 		}
 
 		if ( $this->width === Media_Text_Block::WIDTH_FULL ) {
