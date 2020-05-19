@@ -16,8 +16,6 @@
     <exclude-pattern>*cli/*</exclude-pattern>
     <exclude-pattern>*.twig</exclude-pattern>
     <exclude-pattern>*webpack/</exclude-pattern>
-    <exclude-pattern>*Panels/Types/</exclude-pattern>
-    <exclude-pattern>*modular-content/</exclude-pattern>
 
     <!-- Rules -->
 
