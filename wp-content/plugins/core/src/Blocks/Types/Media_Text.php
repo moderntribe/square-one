@@ -31,7 +31,7 @@ class Media_Text extends Block_Type_Config {
 
 	public function build(): Block_Type_Interface {
 		return $this->factory->block( self::NAME )
-			->set_label( 'Media + Text' )
+			->set_label( __( 'Media + Text', 'tribe' ) )
 			->set_dashicon( 'menu-alt' )
 			->add_content_section( $this->child_container() )
 			->add_toolbar_section( $this->layout_toolbar() )

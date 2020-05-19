@@ -29,6 +29,11 @@ class Blocks_Definer implements Definer_Interface {
 				DI\get( Types\Support\Card_Grid_Select::class ),
 				DI\get( Types\Support\Card_Grid_Card::class ),
 
+				DI\get( Types\Content_Carousel::class ),
+				DI\get( Types\Support\Content_Carousel_Query::class ),
+				DI\get( Types\Support\Content_Carousel_Select::class ),
+				DI\get( Types\Support\Content_Carousel_Card::class ),
+
 				DI\get( Types\Hero::class ),
 
 				DI\get( Types\Icon_Grid::class ),
@@ -44,13 +49,14 @@ class Blocks_Definer implements Definer_Interface {
 			] ),
 
 			self::CONTROLLER_MAP => DI\add( [
-				Types\Accordion::NAME    => Controllers\Block\Accordion::class,
-				Types\Button::NAME       => Controllers\Block\Button::class,
-				Types\Card_Grid::NAME    => Controllers\Block\Debug::class,
-				Types\Hero::NAME         => Controllers\Block\Hero::class,
-				Types\Icon_Grid::NAME    => Controllers\Block\Debug::class,
-				Types\Interstitial::NAME => Controllers\Block\Debug::class,
-				Types\Media_Text::NAME   => Controllers\Block\Media_Text::class,
+				Types\Accordion::NAME        => Controllers\Block\Accordion::class,
+				Types\Button::NAME           => Controllers\Block\Button::class,
+				Types\Card_Grid::NAME        => Controllers\Block\Debug::class,
+				Types\Content_Carousel::NAME => Controllers\Block\Debug::class,
+				Types\Hero::NAME             => Controllers\Block\Hero::class,
+				Types\Icon_Grid::NAME        => Controllers\Block\Debug::class,
+				Types\Interstitial::NAME     => Controllers\Block\Debug::class,
+				Types\Media_Text::NAME       => Controllers\Block\Media_Text::class,
 			] ),
 
 			/**

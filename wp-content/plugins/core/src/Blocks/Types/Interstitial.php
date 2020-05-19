@@ -21,7 +21,7 @@ class Interstitial extends Block_Type_Config {
 
 	public function build(): Block_Type_Interface {
 		return $this->factory->block( self::NAME )
-			->set_label( 'Interstitial' )
+			->set_label( __( 'Interstitial', 'tribe' ) )
 			->set_dashicon( 'menu-alt' )
 			->add_data_source( 'background-image', self::IMAGE )
 			->add_sidebar_section( $this->background() )
