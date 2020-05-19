@@ -74,4 +74,4 @@ jobs:
         run: composer install --prefer-dist --no-progress --no-suggest --optimize-autoloader
 
       - name: PHPCS
-        run: ./vendor/bin/phpcs --standard=./phpcs.xml $( git diff-tree --no-commit-id --name-only -r ${GITHUB_SHA} | tr '\n' ' ' )
+        run: ./vendor/bin/phpcs --standard=./phpcs.xml
