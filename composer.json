@@ -39,11 +39,6 @@
     {
       "type":"vcs",
       "no-api": true,
-      "url":"git@github.com:moderntribe/panel-builder.git"
-    },
-    {
-      "type":"vcs",
-      "no-api": true,
       "url":"git@github.com:moderntribe/gutenpanels.git"
     },
     {
@@ -90,7 +85,6 @@
     "johnpbloch/wordpress-core-installer": "1.0.0",
     "mailgun/mailgun-php": "^2.8",
     "moderntribe/gutenpanels": "dev-epic/fidgety-feet",
-    "moderntribe/panel-builder": "dev-3.3-branch",
     "moderntribe/tribe-libs": "dev-epic/fidgety-feet",
     "monolog/monolog": "1.23.0",
     "php-di/php-di": "^6.0",
@@ -140,8 +134,7 @@
     "installer-paths": {
       "wp-content/mu-plugins/{$name}": [ "type:wordpress-muplugin"],
       "wp-content/plugins/{$name}":[
-        "type:wordpress-plugin",
-        "moderntribe/panel-builder"
+        "type:wordpress-plugin"
       ],
       "wp-content/plugins/s3-uploads": [ "humanmade/S3-Uploads" ]
     }

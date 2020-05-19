@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "57b2b375a3633d445ca103ca4b7945a5",
+    "content-hash": "e23c862b482b79140d9170e0d3a47104",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -20,16 +20,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.138.2",
+            "version": "3.138.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "20397150ba28912a599838c44f50f6113cae5a2b"
+                "reference": "f09630f3e54364d8f7029ddcb2f4bbae272ba754"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/20397150ba28912a599838c44f50f6113cae5a2b",
-                "reference": "20397150ba28912a599838c44f50f6113cae5a2b",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/f09630f3e54364d8f7029ddcb2f4bbae272ba754",
+                "reference": "f09630f3e54364d8f7029ddcb2f4bbae272ba754",
                 "shasum": ""
             },
             "require": {
@@ -100,7 +100,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2020-05-15T18:19:33+00:00"
+            "time": "2020-05-18T18:13:39+00:00"
         },
         {
             "name": "clue/stream-filter",
@@ -925,71 +925,6 @@
             "time": "2019-02-02T07:14:32+00:00"
         },
         {
-            "name": "moderntribe/ajax-queue",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "git@github.com:moderntribe/ajax-queue.git",
-                "reference": "6579564c44d78b558d275c22eea40c0433fd5a17"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/ajax-queue/zipball/6579564c44d78b558d275c22eea40c0433fd5a17",
-                "reference": "6579564c44d78b558d275c22eea40c0433fd5a17",
-                "shasum": ""
-            },
-            "type": "project",
-            "autoload": {
-                "psr-0": {
-                    "AJAXQueue": "src/"
-                }
-            },
-            "license": [
-                "Private"
-            ],
-            "description": "Group ajax calls",
-            "support": {
-                "source": "https://github.com/moderntribe/ajax-queue/tree/master",
-                "issues": "https://github.com/moderntribe/ajax-queue/issues"
-            },
-            "time": "2015-08-21T06:25:04+00:00"
-        },
-        {
-            "name": "moderntribe/attachment-helper",
-            "version": "1.0.1",
-            "source": {
-                "type": "git",
-                "url": "git@github.com:moderntribe/attachment-helper.git",
-                "reference": "96e35fcb4c0883702d3f91e95b00985273a8eae7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/attachment-helper/zipball/96e35fcb4c0883702d3f91e95b00985273a8eae7",
-                "reference": "96e35fcb4c0883702d3f91e95b00985273a8eae7",
-                "shasum": ""
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "AttachmentHelper\\": "AttachmentHelper"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jonathan Brinley",
-                    "email": "jonathan@tri.be"
-                }
-            ],
-            "description": "A library for adding a file upload field to an admin meta box",
-            "support": {
-                "source": "https://github.com/moderntribe/attachment-helper/tree/1.0.1"
-            },
-            "time": "2016-04-24T20:00:57+00:00"
-        },
-        {
             "name": "moderntribe/gutenpanels",
             "version": "dev-epic/fidgety-feet",
             "source": {
@@ -1038,56 +973,17 @@
             "time": "2020-05-15T03:08:40+00:00"
         },
         {
-            "name": "moderntribe/panel-builder",
-            "version": "dev-3.3-branch",
-            "source": {
-                "type": "git",
-                "url": "git@github.com:moderntribe/panel-builder.git",
-                "reference": "8c1418f77cf76d3cbf0cfe68cda00f719385e3cc"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/panel-builder/zipball/8c1418f77cf76d3cbf0cfe68cda00f719385e3cc",
-                "reference": "8c1418f77cf76d3cbf0cfe68cda00f719385e3cc",
-                "shasum": ""
-            },
-            "require": {
-                "moderntribe/ajax-queue": "dev-master",
-                "moderntribe/attachment-helper": "^1.0.0"
-            },
-            "require-dev": {
-                "lucatume/wp-browser": "^1.10"
-            },
-            "type": "wordpress-plugin",
-            "autoload": {
-                "psr-4": {
-                    "ModularContent\\": "ModularContent/"
-                }
-            },
-            "license": [
-                "proprietary"
-            ],
-            "authors": [
-                {
-                    "name": "Modern Tribe",
-                    "email": "peter@tri.be"
-                }
-            ],
-            "description": "The Modern Tribe Panel Builder plugin",
-            "time": "2020-05-08T04:44:54+00:00"
-        },
-        {
             "name": "moderntribe/tribe-libs",
             "version": "dev-epic/fidgety-feet",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moderntribe/tribe-libs.git",
-                "reference": "760b8c26e5cbe3a478303fe8b539493e7d47f37e"
+                "reference": "221c02023644ec63aff4070746727dae420a8fc4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/tribe-libs/zipball/760b8c26e5cbe3a478303fe8b539493e7d47f37e",
-                "reference": "760b8c26e5cbe3a478303fe8b539493e7d47f37e",
+                "url": "https://api.github.com/repos/moderntribe/tribe-libs/zipball/221c02023644ec63aff4070746727dae420a8fc4",
+                "reference": "221c02023644ec63aff4070746727dae420a8fc4",
                 "shasum": ""
             },
             "require": {
@@ -1124,9 +1020,19 @@
                 "moderntribe/square1-whoops": "self.version"
             },
             "require-dev": {
+                "automattic/phpcs-neutron-standard": "^1.5",
+                "automattic/vipwpcs": "^2.0.0",
+                "dealerdirect/phpcodesniffer-composer-installer": "^0.5.0",
                 "lucatume/wp-browser": "^2.3.4",
+                "phpcompatibility/php-compatibility": "*",
+                "phpcompatibility/phpcompatibility-wp": "^2.0",
+                "phpstan/phpstan": "^0.12.25",
                 "phpunit/phpunit": "^8.0",
-                "symplify/monorepo-builder": "^6.0"
+                "sirbrillig/phpcs-variable-analysis": "^2.0.1",
+                "squizlabs/php_codesniffer": "^3.4.2",
+                "symplify/monorepo-builder": "^6.0",
+                "szepeviktor/phpstan-wordpress": "^0.6.0",
+                "wp-cli/wp-cli": "^2.4"
             },
             "type": "library",
             "extra": {
@@ -1172,7 +1078,7 @@
                 "GPL-2.0-only"
             ],
             "description": "A library for use on Modern Tribe service projects.",
-            "time": "2020-05-15T14:46:37+00:00"
+            "time": "2020-05-18T20:50:14+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -10425,7 +10331,6 @@
     "stability-flags": {
         "humanmade/mercator": 20,
         "moderntribe/gutenpanels": 20,
-        "moderntribe/panel-builder": 20,
         "moderntribe/tribe-libs": 20,
         "roots/wp-password-bcrypt": 20,
         "filp/whoops": 20
@@ -10438,5 +10343,6 @@
     "platform-dev": [],
     "platform-overrides": {
         "php": "7.2.29"
-    }
+    },
+    "plugin-api-version": "1.1.0"
 }
