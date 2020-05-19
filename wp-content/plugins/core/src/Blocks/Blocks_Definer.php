@@ -51,8 +51,8 @@ class Blocks_Definer implements Definer_Interface {
 			self::CONTROLLER_MAP => DI\add( [
 				Types\Accordion::NAME        => Controllers\Block\Accordion::class,
 				Types\Button::NAME           => Controllers\Block\Button::class,
-				Types\Card_Grid::NAME        => Controllers\Block\Debug::class,
-				Types\Content_Carousel::NAME => Controllers\Block\Debug::class,
+				Types\Card_Grid::NAME        => Controllers\Block\Card_Grid::class,
+				Types\Content_Carousel::NAME => Controllers\Block\Content_Carousel::class,
 				Types\Hero::NAME             => Controllers\Block\Hero::class,
 				Types\Icon_Grid::NAME        => Controllers\Block\Debug::class,
 				Types\Interstitial::NAME     => Controllers\Block\Debug::class,
