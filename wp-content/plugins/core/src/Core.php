@@ -17,6 +17,7 @@ use Tribe\Project\Service_Providers\Post_Types\Page_Service_Provider;
 use Tribe\Project\Service_Providers\Post_Types\Post_Service_Provider;
 use Tribe\Project\Service_Providers\Post_Types\Sample_Service_Provider;
 use Tribe\Project\Service_Providers\Post_Types\Venue_Service_Provider;
+use Tribe\Project\Service_Providers\REST_Provider;
 use Tribe\Project\Service_Providers\Shortcode_Provider;
 use Tribe\Project\Service_Providers\Taxonomies\Category_Service_Provider;
 use Tribe\Project\Service_Providers\Taxonomies\Example_Taxonomy_Service_Provider;
@@ -64,6 +65,7 @@ class Core {
 		$this->providers['nav_menu']         = new Nav_Menu_Provider();
 		$this->providers['panels']           = new Panels_Provider();
 		$this->providers['p2p']              = new P2P_Provider();
+		$this->providers['rest']             = new REST_Provider();
 		$this->providers['settings']         = new Settings_Provider();
 		$this->providers['shortcodes']       = new Shortcode_Provider();
 		$this->providers['theme']            = new Theme_Provider();
