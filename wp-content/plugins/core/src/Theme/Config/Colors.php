@@ -72,7 +72,7 @@ class Colors {
 	 * @return array
 	 */
 	public function format_for_acf(): array {
-		return wp_list_pluck( $this->colors, 'label', 'color' );
+		return array_column( $this->colors, 'label', 'color' );
 	}
 
 	/**
