@@ -48,7 +48,7 @@ class Interstitial extends Context {
 			self::MERGE_CLASSES => [ 'interstitial__media' ],
 		],
 		self::CONTENT_CLASSES   => [
-			self::DEFAULT       => [],
+			self::DEFAULT       => [ 'l-container' ],
 			self::MERGE_CLASSES => [ 'interstitial__content' ],
 		],
 		self::CLASSES           => [

@@ -22,7 +22,6 @@ class Interstitial extends Block_Controller {
 		] )->render();
 	}
 
-
 	private function get_layout(): string {
 		return $this->attributes[ Interstitial_Block::LAYOUT ] ?? Interstitial_Block::LAYOUT_CENTER;
 	}
@@ -67,7 +66,7 @@ class Interstitial extends Block_Controller {
 
 		return $this->factory->get( Text::class, [
 			Text::TAG     => 'h2',
-			Text::CLASSES => [ 'interstitial__title', 'h2' ],
+			Text::CLASSES => [ 'interstitial__title', 'h3', 't-theme--light' ],
 			Text::TEXT    => $this->attributes[ Interstitial_Block::DESCRIPTION ],
 		] )->render();
 	}
