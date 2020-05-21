@@ -1,11 +1,15 @@
 <?php
+/**
+ * The base route controller.
+ *
+ * @package Square1-API
+ */
+declare( strict_types=1 );
 
 namespace Tribe\Project\API\Controllers;
 
 /**
- * Class Controller
- *
- * @package Tribe\API\Controllers
+ * Class Controller.
  */
 abstract class Controller implements Servable {
 
