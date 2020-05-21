@@ -41,19 +41,19 @@ class Interstitial extends Context {
 		],
 		self::CONTAINER_CLASSES => [
 			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [ 'interstitial__container' ],
+			self::MERGE_CLASSES => [ 'interstitial__container', 'l-container' ],
 		],
 		self::MEDIA_CLASSES     => [
 			self::DEFAULT       => [],
 			self::MERGE_CLASSES => [ 'interstitial__media' ],
 		],
 		self::CONTENT_CLASSES   => [
-			self::DEFAULT       => [ 'l-container' ],
+			self::DEFAULT       => [],
 			self::MERGE_CLASSES => [ 'interstitial__content' ],
 		],
 		self::CLASSES           => [
 			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [ 'c-panel', 'c-panel--interstitial' ],
+			self::MERGE_CLASSES => [ 'c-panel', 'c-panel--interstitial', 'c-panel--full-bleed' ],
 		],
 		self::ATTRS             => [
 			self::DEFAULT          => [],

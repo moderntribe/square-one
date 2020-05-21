@@ -37,11 +37,13 @@ class Interstitial extends Block_Controller {
 	private function get_image( $attachment_id ): string {
 		try {
 			return $this->factory->get( Image_Component::class, [
-				Image_Component::ATTACHMENT   => Image::factory( $attachment_id ),
-				Image_Component::AS_BG        => true,
-				Image_Component::IMG_CLASSES  => [ 'interstitial__img' ],
-				Image_Component::SRC_SIZE     => Image_Sizes::CORE_FULL,
-				Image_Component::SRCSET_SIZES => [
+				Image_Component::ATTACHMENT      => Image::factory( $attachment_id ),
+				Image_Component::AS_BG           => true,
+				Image_Component::WRAPPER_TAG     => 'div',
+				Image_Component::WRAPPER_CLASSES => [ 'interstitial__figure' ],
+				Image_Component::IMG_CLASSES     => [ 'interstitial__img', 'c-image__bg' ],
+				Image_Component::SRC_SIZE        => Image_Sizes::CORE_FULL,
+				Image_Component::SRCSET_SIZES    => [
 					Image_Sizes::CORE_FULL,
 					Image_Sizes::CORE_MOBILE,
 				],
