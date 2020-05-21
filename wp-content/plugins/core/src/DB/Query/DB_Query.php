@@ -280,7 +280,7 @@ class DB_Query {
 	 */
 	private function get_defaults(): array {
 		return [
-			self::TYPE     => Profile::NAME,
+			self::TYPE     => Example::NAME,
 			self::PER_PAGE => get_option( 'posts_per_page' ),
 		];
 	}

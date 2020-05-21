@@ -2,10 +2,6 @@
 
 This package creates and manages custom DB tables and their associated objects. Each table stores objects of a particular type, found in `Models`. To add a new table, simply create a new Model with the requisite methods, as required by the `Storable` interface. You then need to add it to the switch in DB_Query::get_storable_instance().
 
-## Hey Goober, where's the service provider?
-
-The services are instantiated through `DB_Query`, so I didn't find that I needed one.
-
 ## Usage
 
 The `Query\DB_Query` object works something like `WP_Query`:

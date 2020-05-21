@@ -25,7 +25,7 @@ abstract class Base_Storable implements Storable {
 	/**
 	 * @var string The prefix for this module.
 	 */
-	private static $package_prefix = 'qotd_';
+	private static $package_prefix = 'so_';
 
 	/**
 	 * @inheritDoc

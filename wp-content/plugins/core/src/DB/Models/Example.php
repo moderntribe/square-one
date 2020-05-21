@@ -27,7 +27,7 @@ class Example extends Base_Storable {
 	 * @see DB_Query
 	 */
 	public const NAME       = 'example';
-	public const ID         = 'id';
+	public const ID         = 'ID';
 	public const DATA       = 'data';
 	public const CREATED_ON = 'created_on';
 
