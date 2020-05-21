@@ -43,7 +43,7 @@ class Interstitial extends Block_Type_Config {
 	private function content_area(): Content_Section {
 		return $this->factory->content()->section()
 			->add_field(
-				$this->factory->content()->field()->richtext( self::DESCRIPTION )
+				$this->factory->content()->field()->text( self::DESCRIPTION )
 					->set_label( __( 'Description', 'tribe' ) )
 					->build()
 			)
