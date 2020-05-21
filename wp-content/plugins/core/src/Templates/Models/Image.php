@@ -24,7 +24,7 @@ class Image {
 	/** @var Image_Derivative[] */
 	private $sizes = [];
 
-	public function __construct( \WP_Post $attachment, string $title, string $alt, int $width, int $height, $sizes ) {
+	public function __construct( \WP_Post $attachment, string $title, string $alt, int $width, int $height, array $sizes ) {
 		$this->attachment = $attachment;
 		$this->title      = $title;
 		$this->alt        = $alt;
@@ -76,12 +76,12 @@ class Image {
 	}
 
 	private static function build_image_derivatives( $attachment_id ): array {
-		$registered_sizes = wp_get_additional_image_sizes();
 		$cached           = wp_cache_get( $attachment_id, self::CACHE_GROUP );
 		$sizes            = $cached ? unserialize( $cached, [ 'allowed_classes' => [ Image_Derivative::class ] ] ) : [];
 		if ( is_array( $sizes ) && ! empty( $sizes ) ) {
 			return $sizes;
 		}
+		$registered_sizes = wp_get_additional_image_sizes();
 		foreach ( array_merge( get_intermediate_image_sizes(), [ 'full' ] ) as $size ) {
 			$src = wp_get_attachment_image_src( $attachment_id, $size );
 			if ( ! $src ) {
