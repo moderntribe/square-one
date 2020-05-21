@@ -43,7 +43,7 @@ class Blocks_Definer implements Definer_Interface {
 				Types\Button::NAME       => Controllers\Block\Button::class,
 				Types\Hero::NAME         => Controllers\Block\Hero::class,
 				Types\Icon_Grid::NAME    => Controllers\Block\Debug::class,
-				Types\Interstitial::NAME => Controllers\Block\Debug::class,
+				Types\Interstitial::NAME => Controllers\Block\Interstitial::class,
 				Types\Media_Text::NAME   => Controllers\Block\Media_Text::class,
 			] ),
 
