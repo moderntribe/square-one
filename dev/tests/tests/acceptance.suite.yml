@@ -9,6 +9,10 @@ modules:
         - WPBrowser
         - WPDb
         - WPLoader
+        - REST:
+            url: '%WP_URL%/wp-json/'
+            depends: WPBrowser
+            part: Json
     config:
         WPBrowser:
             url: '%WP_URL%'
