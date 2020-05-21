@@ -60,8 +60,23 @@ class Link extends Context {
 
 		if ( $this->target === '_blank' ) {
 			$this->properties[ self::ATTRS ]['rel'] = 'noopener';
+			$this->properties[ self::CONTENT ][ self::VALUE ] .= $this->append_new_window_text();
 		}
 
 		return parent::get_data();
+	}
+
+	/**
+	 * Appends accessibility message for links set to open in a new window.
+	 *
+	 * @return string
+	 * @throws \Exception
+	 */
+	protected function append_new_window_text(): string {
+		return $this->factory->get( Text::class, [
+			Text::TAG     => 'span',
+			Text::CLASSES => [ 'u-visually-hidden' ],
+			Text::TEXT    => __( '(Opens new window)', 'tribe' ),
+		] )->render();
 	}
 }
