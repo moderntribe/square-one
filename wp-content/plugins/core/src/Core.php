@@ -4,6 +4,7 @@ namespace Tribe\Project;
 
 use Tribe\Libs\Container\Container_Provider;
 use Tribe\Project\Service_Providers\Admin_Provider;
+use Tribe\Project\Service_Providers\API_Provider;
 use Tribe\Project\Service_Providers\Asset_Provider;
 use Tribe\Project\Cache\Cache_Provider;
 use Tribe\Project\Service_Providers\CLI_Provider;
@@ -56,6 +57,7 @@ class Core {
 
 		// keep these in alphabetical order, it makes the list easier to skim
 		$this->providers['admin']            = new Admin_Provider();
+		$this->providers['api']              = new API_Provider();
 		$this->providers['assets']           = new Asset_Provider();
 		$this->providers['cache']            = new Cache_Provider(); // override tribe-libs default
 		$this->providers['cli']              = new CLI_Provider();

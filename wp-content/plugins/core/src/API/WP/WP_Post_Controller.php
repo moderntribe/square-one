@@ -9,9 +9,9 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\API\WP;
 
-use Tribe\Project\API\Indexed_Objects\Indexable;
-use Tribe\Project\API\Indexed_Objects\Indexable_Factory;
-use Tribe\Project\API\Indexer\Indexer_Service;
+use Tribe\Project\API\Index\Models\Indexable;
+use Tribe\Project\API\Index\Models\Indexable_Factory;
+use Tribe\Project\API\Index\Indexer\Indexer_Service;
 use Tribe\Project\DB\Exceptions\IndexableNotFoundException;
 
 /**
@@ -74,10 +74,8 @@ class WP_Post_Controller implements Hookable {
 	 * @return Indexable|null
 	 */
 	protected function get_indexable( object $post ): ?Indexable {
-		$post_type = $post->post_type ?? ( isset( $post->ID ) ? get_post_type( $post->ID ) : '' );
-
 		try {
-			return $this->factory->make( $post_type );
+			return $this->factory->make( $post );
 		} catch ( IndexableNotFoundException $e ) {
 			return;
 		}

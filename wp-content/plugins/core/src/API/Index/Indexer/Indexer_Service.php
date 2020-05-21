@@ -1,12 +1,18 @@
 <?php
+/**
+ * Service that adds Indexable objects to an index.
+ *
+ * @package Square1-API
+ */
+declare( strict_types=1 );
 
+namespace Tribe\Project\API\Index\Indexer;
 
-namespace Tribe\Project\API\Indexer;
+use Tribe\Project\API\Index\Models\Indexable;
 
-
-
-use Tribe\Project\API\Indexed_Objects\Indexable;
-
+/**
+ * Interface Indexer_Service.
+ */
 interface Indexer_Service {
 
 	/**

@@ -1,25 +1,31 @@
 <?php
+/**
+ * The database client service interface.
+ *
+ * @package Square1-API
+ */
+declare(strict_types=1);
 
-namespace Tribe\API\DB;
+namespace Tribe\Project\API\DB;
+
+use MeekroDB;
 
 /**
- * Class Meekro_DB_Service
- *
- * @package Tribe\API\DB
+ * Class Meekro_DB_Service.
  */
 class Meekro_DB_Service implements DB_Service {
 
 	/**
-	 * @var \MeekroDB The DB instance.
+	 * @var MeekroDB The DB instance.
 	 */
 	private $db;
 
 	/**
 	 * Meekro_DB_Service constructor.
 	 *
-	 * @param \MeekroDB $db
+	 * @param MeekroDB $db
 	 */
-	public function __construct( \MeekroDB $db ) {
+	public function __construct( MeekroDB $db ) {
 		$this->db = $db;
 
 		// Set MeekroDB to throw exceptions when the query fails.

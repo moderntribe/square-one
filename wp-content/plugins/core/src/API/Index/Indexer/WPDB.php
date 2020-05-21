@@ -1,11 +1,18 @@
 <?php
+/**
+ * WPDb-based indexing service.
+ *
+ * @package Square1-API
+ */
+declare( strict_types=1 );
 
+namespace Tribe\Project\API\Index\Indexer;
 
-namespace Tribe\Project\API\Indexer;
+use Tribe\Project\API\Index\Models\Indexable;
 
-
-use Tribe\Project\API\Indexed_Objects\Indexable;
-
+/**
+ * Class WPDB.
+ */
 class WPDB implements Indexer_Service {
 
 	/**

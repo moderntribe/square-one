@@ -7,7 +7,7 @@
  */
 declare( strict_types=1 );
 
-namespace Tribe\Project\API\Indexed_Objects;
+namespace Tribe\Project\API\Index\Models;
 
 use Tribe\Project\DB\Exceptions\IndexableNotFoundException;
 
@@ -15,7 +15,6 @@ use Tribe\Project\DB\Exceptions\IndexableNotFoundException;
  * Class Indexable_Factory.
  */
 class Indexable_Factory {
-
 	/**
 	 * Creates the right indexable object.
 	 *
@@ -25,11 +24,10 @@ class Indexable_Factory {
 	 * @throws IndexableNotFoundException
 	 */
 	public function make( object $object ): Indexable {
-		switch ( $object ) {
-			case WP_Indexed_Post::OBJECT_TYPE:
-				return new WP_Indexed_Post( $object_type );
+		if ( $object instanceof \WP_Post ) {
+			return new WP_Post( $object );
 		}
 
-		throw new IndexableNotFoundException( $object_type );
+		throw new IndexableNotFoundException( get_class( $object ) );
 	}
 }
