@@ -1,11 +1,14 @@
 {# Panel: Interstitial #}
+<section {{ classes }} {{ attrs }}>
+	<div {{ container_classes }}>
 
-{{ image }}
-
-<div class="l-container u-vertical-padding">
-	<div class="g-row {{ layout }}">
-		<div class="g-col--one-half s-sink t-sink {{ text_color }}">
-			{{ content_block }}
+		<div {{ media_classes }}>
+			{{ media }}
 		</div>
+
+		<div {{ content_classes }}>
+			{{ content }}
+		</div>
+
 	</div>
-</div>
+</section>
