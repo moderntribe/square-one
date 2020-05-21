@@ -14,6 +14,8 @@ class Config extends Post_Type_Config {
 			'supports'         => [ 'title', 'editor' ],
 			//'capability_type'  => $this->post_type(), // for custom caps
 			'capability_type'  => 'post', // to use default WP caps
+			'public'           => true,
+			'show_in_rest'     => true,
 		];
 	}
 

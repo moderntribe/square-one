@@ -12,6 +12,8 @@ namespace Tribe\Project\Service_Providers;
 use Pimple\Container;
 use Tribe\Project\Container\Service_Provider;
 use Tribe\Project\Post_Types\Sample\Sample;
+use Tribe\Project\REST\Routes\v1\Sample_Route;
+use Tribe\Project\REST\WP_Endpoints\Sample_Endpoint;
 use WP_REST_Request;
 use WP_REST_Response;
 
@@ -32,6 +34,9 @@ class REST_Provider extends Service_Provider {
 	 * @param Container $container The Pimple container.
 	 */
 	public function register( Container $container ): void {
+		$this->sample_endpoint( $container );
+		$this->sample_route( $container );
+
 		// Register custom routes.
 		add_action( 'rest_api_init', static function () use ( $container ) {
 			$container[ self::SAMPLE_RT ]->register_routes();
@@ -41,5 +46,27 @@ class REST_Provider extends Service_Provider {
 		add_filter( 'rest_prepare_' . Sample::NAME, static function ( WP_REST_Response $response, object $object, WP_REST_Request $request ) use ( $container ) {
 			return $container[ self::SAMPLE_EP ]->init( $response, $object->ID, $request );
 		}, 10, 3 );
+	}
+
+	/**
+	 * Add Sample_Endpoint service.
+	 *
+	 * @param Container $container
+	 */
+	public function sample_endpoint( Container $container ): void {
+		$container[ self::SAMPLE_EP ] = static function () use ( $container ): Sample_Endpoint {
+			return new Sample_Endpoint();
+		};
+	}
+
+	/**
+	 * Add Sample_Route service.
+	 *
+	 * @param Container $container
+	 */
+	public function sample_route( Container $container ): void {
+		$container[ self::SAMPLE_RT ] = static function () use ( $container ): Sample_Route {
+			return new Sample_Route();
+		};
 	}
 }
