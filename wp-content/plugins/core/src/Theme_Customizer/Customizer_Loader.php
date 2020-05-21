@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Tribe\Project\Theme_Customizer;
-
 
 class Customizer_Loader {
 	/**

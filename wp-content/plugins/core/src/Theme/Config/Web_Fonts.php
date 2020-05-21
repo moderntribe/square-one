@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Tribe\Project\Theme\Config;
-
 
 class Web_Fonts {
 	public const  PROVIDER_TYPEKIT = 'typekit';
@@ -50,7 +48,7 @@ class Web_Fonts {
 	 * @action after_setup_theme
 	 */
 	public function add_tinymce_editor_fonts(): void {
-		foreach( $this->get_font_urls() as $url ) {
+		foreach ( $this->get_font_urls() as $url ) {
 			add_editor_style( $url );
 		}
 	}
