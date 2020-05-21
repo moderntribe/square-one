@@ -7,7 +7,7 @@ API is a semi-independent API GET service based on [MeekroDB](https://meekro.com
 In order to field requests, the nginx/Apache rules need to have a directive for your api base. The following nginx block redirects request to `{URL}/api` to the router:
 
 ```nginxconfig
-	location /api {
+	location /so-api {
 		set $tryfile /cache/$arg_foo.$arg_bar.cached.json;
 		try_files $tryfile /wp-content/plugins/tribe-api/router.php$is_args$args;
 	}

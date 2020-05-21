@@ -15,7 +15,7 @@ use Tribe\API\Router\Router;
  * Because this is loaded outside of WP, we need to include our local config and Composer dependencies manually.
  */
 require_once '../../../local-config.php';
-require_once '../../../vendor/autoload.php';
+require_once './vendor/autoload.php';
 
 
 /**
