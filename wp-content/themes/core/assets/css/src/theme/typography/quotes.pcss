@@ -9,7 +9,7 @@
  * ----------------------------------------------------------------------------- */
 
 .quote,
-.t-sink q {
+.t-sink > q {
 	@mixin t-quote;
 
 	display: block;
@@ -20,7 +20,7 @@
  * ----------------------------------------------------------------------------- */
 
 .blockquote,
-.t-sink blockquote {
+.t-sink > blockquote {
 
 	p {
 		@mixin t-quote;
@@ -32,7 +32,7 @@
  * ----------------------------------------------------------------------------- */
 
 .cite,
-.t-sink cite,
+.t-sink > cite,
 .wp-block-quote__citation {
 	@mixin t-overline;
 

@@ -21,6 +21,14 @@ class Media_Text extends Block_Type_Config {
 	public const WIDTH_FULL  = 'full';
 	public const CONTAINER   = 'container';
 
+	public const TITLE   = 'title';
+	public const CONTENT = 'content';
+	public const CTA     = 'cta';
+
+	public const MEDIA_CONTAINER = 'media';
+	public const IMAGE           = 'image';
+	public const EMBED           = 'embed';
+
 	public function build(): Block_Type_Interface {
 		return $this->factory->block( self::NAME )
 			->set_label( 'Media + Text' )

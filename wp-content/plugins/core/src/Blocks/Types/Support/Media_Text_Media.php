@@ -11,8 +11,6 @@ use Tribe\Project\Blocks\Types\Media_Text;
 class Media_Text_Media extends Block_Type_Config {
 	public const NAME = 'tribe/media-text--media';
 
-	public const CONTAINER = 'media';
-
 	public function build(): Block_Type_Interface {
 		return $this->factory->block( self::NAME )
 			->set_label( 'Media' )
@@ -25,7 +23,7 @@ class Media_Text_Media extends Block_Type_Config {
 	private function child_container(): Content_Section {
 		return $this->factory->content()->section()
 			->add_field(
-				$this->factory->content()->field()->flexible_container( self::CONTAINER )
+				$this->factory->content()->field()->flexible_container( Media_Text::MEDIA_CONTAINER )
 					->add_block_type( 'tribe/media-text--media-image' )
 					->add_block_type( 'tribe/media-text--media-embed' )
 					->add_template_block( 'tribe/media-text--media-image' )
