@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash -xe
 # script/server: Launch the application and any extra required processes.
 #
 
