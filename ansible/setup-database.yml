@@ -1,8 +1,0 @@
----
-- name: Database Server Provisioning
-  become: yes
-  hosts: database
-  roles:
-    - tribe/roles/apt
-    - geerlingguy.mysql
-    - tribe/roles/rds-mariadb
