@@ -30,7 +30,8 @@
  * Alignment: Left & Right
  *
  * Currently only applicable to images. Other forms of media don't have
- * the correct markup to support left/right offset alignments.
+ * the correct markup to support left/right offset alignments. We're holding out
+ * for WP Core to standardize the markup for media blocks so this is possible.
  * ----------------------------------------------------------------------------- */
 
 .alignleft,
@@ -69,6 +70,10 @@
 			float: left;
 			margin-right: var(--grid-gutter);
 		}
+
+		@media (--viewport-full) {
+			margin-left: calc(-1 * (var(--grid-1-col) + var(--grid-gutter)));
+		}
 	}
 }
 
@@ -78,6 +83,10 @@
 		@media (--viewport-medium) {
 			float: right;
 			margin-left: var(--grid-gutter);
+		}
+
+		@media (--viewport-full) {
+			margin-right: calc(-1 * (var(--grid-1-col) + var(--grid-gutter)));
 		}
 	}
 }
