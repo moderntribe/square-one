@@ -162,9 +162,13 @@
 	/* CASE: Layout: Media Center */
 	.c-panel--layout-media-center & {
 		@media (--viewport-medium) {
-			display: flex;
-			flex-flow: row wrap;
-			justify-content: space-between;
+			display: grid;
+			grid-template-columns: 1fr var(--grid-gutter) 1fr;
+			grid-template-rows: auto;
+		}
+
+		@media (--viewport-full) {
+			grid-template-columns: 1fr var(--grid-gutter) 66.667%;
 		}
 	}
 }
@@ -179,14 +183,8 @@
 	/* CASE: Layout: Media Center */
 	.c-panel--layout-media-center & {
 		@media (--viewport-medium) {
-			width: calc(50% - var(--grid-gutter-medium));
-			max-width: var(--grid-4-col);
-			margin-right: var(--grid-gutter-medium);
-		}
-
-		@media (--viewport-full) {
-			width: calc(50% - var(--grid-gutter));
-			margin-right: var(--grid-gutter);
+			grid-column: 1;
+			grid-row: 1;
 		}
 	}
 }
@@ -199,8 +197,8 @@
 	/* CASE: Layout: Media Center */
 	.c-panel--layout-media-center & {
 		@media (--viewport-medium) {
-			flex: 1 0 auto;
-			max-width: var(--grid-8-col);
+			grid-column: 3;
+			grid-row: 1;
 		}
 	}
 }
@@ -215,8 +213,8 @@
 	/* CASE: Layout: Media Center */
 	.c-panel--layout-media-center & {
 		@media (--viewport-medium) {
-			flex: 1 0 auto;
-			max-width: var(--grid-8-col);
+			grid-column: 3;
+			grid-row: 2;
 		}
 	}
 }
