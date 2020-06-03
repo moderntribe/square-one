@@ -1,7 +1,5 @@
 # Block Editor
 
-TODO: documentation for working with the Block Editor
-
 ## Configuring Core Blocks
 
 WordPress core (and some other plugins) provide a large collection of blocks to get us started.
