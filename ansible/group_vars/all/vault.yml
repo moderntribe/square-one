@@ -1,6 +1,0 @@
----
-# GitHub OAuth Token is owned by tr1b0t
-vaulted_composer_github_oauth_token: ""
-
-vaulted_s3_uploads_key: 'CHANGEME'
-vaulted_s3_uploads_secret: 'CHANGEME'

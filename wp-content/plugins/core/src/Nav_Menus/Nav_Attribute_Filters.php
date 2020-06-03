@@ -83,7 +83,6 @@ class Nav_Attribute_Filters {
 		} );
 
 		return $classes;
-
 	}
 
 	/**
@@ -125,6 +124,5 @@ class Nav_Attribute_Filters {
 		$atts['class'] = implode( ' ', array_unique( $classes ) );
 
 		return $atts;
-
 	}
 }

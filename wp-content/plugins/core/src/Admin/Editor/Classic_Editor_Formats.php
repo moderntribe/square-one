@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Tribe\Project\Admin\Editor;
-
 
 class Classic_Editor_Formats {
 

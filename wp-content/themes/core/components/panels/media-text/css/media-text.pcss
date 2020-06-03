@@ -5,8 +5,8 @@
  * ----------------------------------------------------------------------------- */
 
 .c-panel--media-text {
-	/* CASE: Two Media + Text panels Stacked */
-	&.c-panel--width-full + .c-panel--media-text.c-panel--width-full {
+	/* CASE: Two Media + Text panels Stacked, both full-width and left/right aligned. */
+	&.c-panel--width-full:not(.c-panel--layout-media-center) + &.c-panel--width-full:not(.c-panel--layout-media-center) {
 		@media (--viewport-full) {
 			padding-top: 0;
 			margin-top: calc(-1 * var(--spacer-70));
@@ -19,24 +19,10 @@
  * ----------------------------------------------------------------------------- */
 
 .media-text__container {
-	/* CASE: Layout: Boxed */
-	.c-panel--width-boxed & {
+	/* CASE: Media Left/Right Aligned */
+	.c-panel--layout-media-right &,
+	.c-panel--layout-media-left & {
 		@media (--viewport-medium) {
-			display: flex;
-			flex-flow: row nowrap;
-			align-items: center;
-			justify-content: space-between;
-			margin: 0 var(--grid-gutter-small-half-negative);
-		}
-
-		@media (--viewport-full) {
-			margin: 0 var(--grid-gutter-half-negative);
-		}
-	}
-
-	/* CASE: Width: Full Bleed */
-	.c-panel--width-full & {
-		@media (--viewport-full) {
 			display: flex;
 			flex-flow: row nowrap;
 			align-items: center;
@@ -50,6 +36,25 @@
 			flex-direction: row-reverse;
 		}
 	}
+
+	/* CASE: Layout: Boxed, Media: Center Aligned */
+	.c-panel--width-boxed:not(.c-panel--layout-media-center) & {
+		@media (--viewport-medium) {
+			margin: 0 var(--grid-gutter-small-half-negative);
+		}
+
+		@media (--viewport-full) {
+			margin: 0 var(--grid-gutter-half-negative);
+		}
+	}
+
+	/* CASE: Width: Full Bleed */
+	.c-panel--width-full & {
+		@media (--viewport-full) {
+			max-width: var(--grid-width-full-bleed);
+			margin: 0 auto;
+		}
+	}
 }
 
 /* -----------------------------------------------------------------------------
@@ -57,8 +62,8 @@
  * ----------------------------------------------------------------------------- */
 
 .media-text__media {
-	/* CASE: Layout: Boxed */
-	.c-panel--width-boxed & {
+	/* CASE: Layout: Boxed, Media: Left/Right Aligned */
+	.c-panel--width-boxed:not(.c-panel--layout-media-center) & {
 		@media (--viewport-medium) {
 			width: calc(50% - var(--grid-gutter-small));
 			margin: 0 var(--grid-gutter-small-half);
@@ -69,21 +74,29 @@
 		}
 	}
 
-	/* CASE: Width: Full Bleed */
-	.c-panel--width-full & {
+	/* CASE: Width: Full Bleed, Media: Left/Right Aligned */
+	.c-panel--width-full:not(.c-panel--layout-media-center) & {
 		@media (--viewport-full) {
 			flex: 0 0 auto;
 			width: 50%;
 		}
 	}
-}
 
-/* -----------------------------------------------------------------------------
- * Media + Text: Media: Image
- * ----------------------------------------------------------------------------- */
+	/* -----------------------------------------------------------------------------
+	 * Media + Text: Media: Video
+	 * ----------------------------------------------------------------------------- */
 
-.media-text__img {
-	width: 100%;
+	.c-video {
+		aspect-ratio: '16:9';
+	}
+
+	/* -----------------------------------------------------------------------------
+	 * Media + Text: Media: Image
+	 * ----------------------------------------------------------------------------- */
+
+	.c-image {
+		width: 100%;
+	}
 }
 
 /* -----------------------------------------------------------------------------
@@ -91,8 +104,8 @@
  * ----------------------------------------------------------------------------- */
 
 .media-text__content {
-	/* CASE: Layout: Boxed */
-	.c-panel--width-boxed & {
+	/* CASE: Layout: Boxed, Media: Left/Right Aligned */
+	.c-panel--width-boxed:not(.c-panel--layout-media-center) & {
 		@media (--viewport-medium) {
 			width: calc(50% - var(--grid-gutter-small));
 			max-width: var(--grid-5-col);
@@ -104,8 +117,8 @@
 		}
 	}
 
-	/* CASE: Full-Bleed Width */
-	.c-panel--width-full & {
+	/* CASE: Full-Bleed Width, Media: Left/Right Aligned */
+	.c-panel--width-full:not(.c-panel--layout-media-center) & {
 		@media (--viewport-full) {
 			flex: 0 0 auto;
 			width: 50%;
@@ -145,27 +158,24 @@
  * ----------------------------------------------------------------------------- */
 
 .media-text__content-container {
-	padding-top: var(--spacer-40);
+	margin-top: var(--spacer-40);
 
-	/* CASE: Layout: Boxed */
-	.c-panel--width-boxed & {
-		@media (--viewport-medium) {
-			padding-bottom: var(--spacer-40);
-		}
+	@media (--viewport-medium) {
+		margin-top: 0;
+		width: 100%;
 	}
 
-	/* CASE: Width: Full Bleed */
-	.c-panel--width-full & {
+	/* CASE: Layout: Media Center */
+	.c-panel--layout-media-center & {
 		@media (--viewport-medium) {
-			display: flex;
-			flex-flow: row wrap;
-			justify-content: flex-end;
+			display: grid;
+			grid-template-columns: 1fr var(--grid-gutter) 1fr;
+			grid-template-rows: auto;
+			margin-top: var(--spacer-40);
 		}
 
 		@media (--viewport-full) {
-			display: block;
-			max-width: var(--grid-5-col);
-			padding-bottom: var(--spacer-40);
+			grid-template-columns: 1fr var(--grid-gutter) 66.667%;
 		}
 	}
 }
@@ -177,16 +187,11 @@
 .media-text__title {
 	margin-bottom: var(--spacer-10);
 
-	/* CASE: Width: Full Bleed */
-	.c-panel--width-full & {
+	/* CASE: Layout: Media Center */
+	.c-panel--layout-media-center & {
 		@media (--viewport-medium) {
-			width: 50%;
-			padding-right: calc(2 * var(--grid-gutter-small) + var(--grid-1-col));
-		}
-
-		@media (--viewport-full) {
-			width: auto;
-			padding-right: 0;
+			grid-column: 1;
+			grid-row: 1;
 		}
 	}
 }
@@ -196,14 +201,11 @@
  * ----------------------------------------------------------------------------- */
 
 .media-text__text {
-	/* CASE: Width: Full Bleed */
-	.c-panel--width-full & {
+	/* CASE: Layout: Media Center */
+	.c-panel--layout-media-center & {
 		@media (--viewport-medium) {
-			width: 50%;
-		}
-
-		@media (--viewport-full) {
-			width: auto;
+			grid-column: 3;
+			grid-row: 1;
 		}
 	}
 }
@@ -215,14 +217,11 @@
 .media-text__cta {
 	margin-top: var(--spacer-40);
 
-	/* CASE: Width: Full Bleed */
-	.c-panel--width-full & {
+	/* CASE: Layout: Media Center */
+	.c-panel--layout-media-center & {
 		@media (--viewport-medium) {
-			width: 50%;
-		}
-
-		@media (--viewport-full) {
-			width: auto;
+			grid-column: 3;
+			grid-row: 2;
 		}
 	}
 }

@@ -16,8 +16,6 @@ use Tribe\Project\Nav_Menus\Nav_Menus_Definer;
 use Tribe\Project\Nav_Menus\Nav_Menus_Subscriber;
 use Tribe\Project\Object_Meta\Object_Meta_Definer;
 use Tribe\Project\P2P\P2P_Definer;
-use Tribe\Project\Panels\Panels_Definer;
-use Tribe\Project\Panels\Panels_Subscriber;
 use Tribe\Project\Post_Types;
 use Tribe\Project\Settings\Settings_Definer;
 use Tribe\Project\Shortcodes\Shortcodes_Subscriber;
@@ -33,7 +31,7 @@ class Core {
 	/**
 	 * @var self
 	 */
-	private static $_instance;
+	private static $instance;
 
 	/**
 	 * @var ContainerInterface
@@ -48,7 +46,6 @@ class Core {
 		Nav_Menus_Definer::class,
 		Object_Meta_Definer::class,
 		P2P_Definer::class,
-		Panels_Definer::class,
 		Settings_Definer::class,
 		Templates_Definer::class,
 		Theme_Definer::class,
@@ -66,7 +63,6 @@ class Core {
 		Google_Tag_Manager_Subscriber::class,
 		Gravity_Forms_Subscriber::class,
 		Nav_Menus_Subscriber::class,
-		Panels_Subscriber::class,
 		Shortcodes_Subscriber::class,
 		Theme_Subscriber::class,
 		Templates_Subscriber::class,
@@ -163,11 +159,11 @@ class Core {
 	 * @return self
 	 */
 	public static function instance() {
-		if ( ! isset( self::$_instance ) ) {
-			self::$_instance = new self();
+		if ( ! isset( self::$instance ) ) {
+			self::$instance = new self();
 		}
 
-		return self::$_instance;
+		return self::$instance;
 	}
 
 }

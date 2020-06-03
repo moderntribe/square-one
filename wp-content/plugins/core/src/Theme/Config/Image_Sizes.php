@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Tribe\Project\Theme\Config;
-
 
 class Image_Sizes {
 	public const CORE_FULL        = 'core-full';

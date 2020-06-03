@@ -56,7 +56,6 @@ class Media_Text extends Block_Controller {
 			return $this->factory->get( Image_Component::class, [
 				Image_Component::ATTACHMENT   => Image::factory( $attachment_id ),
 				Image_Component::SRC_SIZE     => Image_Sizes::FOUR_THREE,
-				Image_Component::IMG_CLASSES  => [ 'media-text__img' ],
 				Image_Component::SRCSET_SIZES => [
 					Image_Sizes::FOUR_THREE_SMALL,
 					Image_Sizes::FOUR_THREE,
@@ -116,7 +115,6 @@ class Media_Text extends Block_Controller {
 			Link::URL        => $cta['url'],
 			Link::CONTENT    => $cta['text'] ?: $cta['url'],
 			Link::TARGET     => $cta['target'],
-			Link::ARIA_LABEL => '', // TODO
 			Link::CLASSES    => [ 'a-btn', 'a-btn--has-icon-after', 'icon-arrow-right' ],
 		] )->render();
 
