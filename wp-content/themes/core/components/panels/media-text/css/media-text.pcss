@@ -5,8 +5,8 @@
  * ----------------------------------------------------------------------------- */
 
 .c-panel--media-text {
-	/* CASE: Two Media + Text panels Stacked */
-	&.c-panel--width-full + .c-panel--media-text.c-panel--width-full {
+	/* CASE: Two Media + Text panels Stacked, both full-width and left/right aligned. */
+	&.c-panel--width-full:not(.c-panel--layout-media-center) + &.c-panel--width-full:not(.c-panel--layout-media-center) {
 		@media (--viewport-full) {
 			padding-top: 0;
 			margin-top: calc(-1 * var(--spacer-70));
@@ -19,24 +19,10 @@
  * ----------------------------------------------------------------------------- */
 
 .media-text__container {
-	/* CASE: Layout: Boxed */
-	.c-panel--width-boxed & {
+	/* CASE: Media Left/Right Aligned */
+	.c-panel--layout-media-right &,
+	.c-panel--layout-media-left & {
 		@media (--viewport-medium) {
-			display: flex;
-			flex-flow: row nowrap;
-			align-items: center;
-			justify-content: space-between;
-			margin: 0 var(--grid-gutter-small-half-negative);
-		}
-
-		@media (--viewport-full) {
-			margin: 0 var(--grid-gutter-half-negative);
-		}
-	}
-
-	/* CASE: Width: Full Bleed */
-	.c-panel--width-full & {
-		@media (--viewport-full) {
 			display: flex;
 			flex-flow: row nowrap;
 			align-items: center;
@@ -50,6 +36,25 @@
 			flex-direction: row-reverse;
 		}
 	}
+
+	/* CASE: Layout: Boxed */
+	.c-panel--width-boxed & {
+		@media (--viewport-medium) {
+			margin: 0 var(--grid-gutter-small-half-negative);
+		}
+
+		@media (--viewport-full) {
+			margin: 0 var(--grid-gutter-half-negative);
+		}
+	}
+
+	/* CASE: Width: Full Bleed */
+	.c-panel--width-full & {
+		@media (--viewport-full) {
+			max-width: var(--grid-width-full-bleed);
+			margin: 0 auto;
+		}
+	}
 }
 
 /* -----------------------------------------------------------------------------
@@ -58,7 +63,7 @@
 
 .media-text__media {
 	/* CASE: Layout: Boxed */
-	.c-panel--width-boxed & {
+	.c-panel--width-boxed:not(.c-panel--layout-media-center) & {
 		@media (--viewport-medium) {
 			width: calc(50% - var(--grid-gutter-small));
 			margin: 0 var(--grid-gutter-small-half);
@@ -70,7 +75,7 @@
 	}
 
 	/* CASE: Width: Full Bleed */
-	.c-panel--width-full & {
+	.c-panel--width-full:not(.c-panel--layout-media-center) & {
 		@media (--viewport-full) {
 			flex: 0 0 auto;
 			width: 50%;
@@ -92,7 +97,7 @@
 
 .media-text__content {
 	/* CASE: Layout: Boxed */
-	.c-panel--width-boxed & {
+	.c-panel--width-boxed:not(.c-panel--layout-media-center) & {
 		@media (--viewport-medium) {
 			width: calc(50% - var(--grid-gutter-small));
 			max-width: var(--grid-5-col);
@@ -105,7 +110,7 @@
 	}
 
 	/* CASE: Full-Bleed Width */
-	.c-panel--width-full & {
+	.c-panel--width-full:not(.c-panel--layout-media-center) & {
 		@media (--viewport-full) {
 			flex: 0 0 auto;
 			width: 50%;
@@ -154,18 +159,12 @@
 		}
 	}
 
-	/* CASE: Width: Full Bleed */
-	.c-panel--width-full & {
+	/* CASE: Layout: Media Center */
+	.c-panel--layout-media-center & {
 		@media (--viewport-medium) {
 			display: flex;
 			flex-flow: row wrap;
-			justify-content: flex-end;
-		}
-
-		@media (--viewport-full) {
-			display: block;
-			max-width: var(--grid-5-col);
-			padding-bottom: var(--spacer-40);
+			justify-content: space-between;
 		}
 	}
 }
@@ -177,16 +176,17 @@
 .media-text__title {
 	margin-bottom: var(--spacer-10);
 
-	/* CASE: Width: Full Bleed */
-	.c-panel--width-full & {
+	/* CASE: Layout: Media Center */
+	.c-panel--layout-media-center & {
 		@media (--viewport-medium) {
-			width: 50%;
-			padding-right: calc(2 * var(--grid-gutter-small) + var(--grid-1-col));
+			width: calc(50% - var(--grid-gutter-medium));
+			max-width: var(--grid-4-col);
+			margin-right: var(--grid-gutter-medium);
 		}
 
 		@media (--viewport-full) {
-			width: auto;
-			padding-right: 0;
+			width: calc(50% - var(--grid-gutter));
+			margin-right: var(--grid-gutter);
 		}
 	}
 }
@@ -196,14 +196,11 @@
  * ----------------------------------------------------------------------------- */
 
 .media-text__text {
-	/* CASE: Width: Full Bleed */
-	.c-panel--width-full & {
+	/* CASE: Layout: Media Center */
+	.c-panel--layout-media-center & {
 		@media (--viewport-medium) {
-			width: 50%;
-		}
-
-		@media (--viewport-full) {
-			width: auto;
+			flex: 1 0 auto;
+			max-width: var(--grid-8-col);
 		}
 	}
 }
@@ -215,14 +212,11 @@
 .media-text__cta {
 	margin-top: var(--spacer-40);
 
-	/* CASE: Width: Full Bleed */
-	.c-panel--width-full & {
+	/* CASE: Layout: Media Center */
+	.c-panel--layout-media-center & {
 		@media (--viewport-medium) {
-			width: 50%;
-		}
-
-		@media (--viewport-full) {
-			width: auto;
+			flex: 1 0 auto;
+			max-width: var(--grid-8-col);
 		}
 	}
 }
