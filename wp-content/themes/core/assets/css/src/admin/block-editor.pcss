@@ -20,6 +20,7 @@
 /* Theme Styles */
 @import "../theme/actions/all.pcss";
 @import "../theme/icons/all.pcss";
+@import "../theme/layouts/all.pcss";
 @import "../theme/media/all.pcss";
 @import "../theme/spacing/all.pcss";
 @import "../theme/typography/all.pcss";
@@ -27,7 +28,6 @@
 
 /* All Components */
 @import-glob "../../../../components/**/index.pcss";
-
 
 /* All Integrations
  Disabled since we don't need integration styles, except _maybe_ Swiper, in the block editor.
@@ -83,4 +83,13 @@
 			margin-top: var(--spacer-20);
 		}
 	}
+}
+
+/*
+ *
+ */
+.wp-block[data-type^="tribe/"] {
+	max-width: none;
+	margin-top: 0;
+	margin-bottom: 0;
 }
