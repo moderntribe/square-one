@@ -194,8 +194,41 @@ services:
       - localstack
 ```
 
+## Overriding Containers
 
-## Local Overrides
+Ideally, we can find containers on Docker Hub that we can use on our projects with just some customization in
+`docker-compose.yml`. Sometimes, though, we need to override how the container is built, extending it with our
+own `Dockerfile`. The most common scenario is a project that needs special extensions added to the PHP container.
+
+To extend the SquareOne container image, create a new `Dockerfile` at `dev/docker/phpdocker/php-fpm/Dockerfile`.
+This can be configured however it makes sense for the project, but typically it will look something like:
+
+```dockerfile
+FROM moderntribe/squareone-php:74-1.0.0
+
+# Install applications/extensions required for this project
+RUN apt-get update \
+    && apt-get -y --no-install-recommends install \
+       tideways-php \
+    && apt-get clean; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
+```
+
+Your service defintion for PHP will need to change in the project's `dev/docker/docker-compose.yml` to build the
+new image.
+
+```yaml
+x-php: &php
+  build:
+    context: .
+    dockerfile: phpdocker/php-fpm/Dockerfile
+  image: thisproject-php:7.4-rev0
+```
+
+The `image` key is used to distinguish this from images used on other projects. The revision number should increment
+every time a change is committed to the `Dockerfile` to automatically trigger a fresh build when a coworker pulls your
+changes.
+
+## Local Configuration Overrides
 
 The services defined in `dev/docker/docker-compose.yml` can be extended locally with a `docker-compose.override.yml`
 in the same directory. This file will be ignored by git and can include any customizations necessary to adapt the
