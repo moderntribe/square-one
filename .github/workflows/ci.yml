@@ -10,7 +10,7 @@ jobs:
     strategy:
       matrix:
         operating-system: [ ubuntu-latest ]
-        php-versions: [ '7.2' ]
+        php-versions: [ '7.4' ]
 
     env:
       cache_version: 2 # increment to flush all caches
