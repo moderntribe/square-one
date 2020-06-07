@@ -16,10 +16,7 @@ x-nginx: &nginx
     - ./phpdocker/nginx/fastcgi.conf:/etc/nginx/fastcgi_params
 
 x-php: &php
-  build:
-    context: .
-    dockerfile: phpdocker/php-fpm/Dockerfile
-  image: tribe-phpfpm:7.4-dev0
+  image: moderntribe/squareone-php:74-1.0.0
   working_dir: /application
   volumes:
     - ../..:/application/www:cached
