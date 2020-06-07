@@ -1,11 +1,14 @@
 version: "3.4"
 
+
 x-networks: &proxynetwork
   networks:
     - proxy
 
+
 x-internaldns: &internaldns
   dns: 172.20.10.250
+
 
 x-nginx: &nginx
   image: nginx:stable-alpine
@@ -14,6 +17,19 @@ x-nginx: &nginx
     - ../..:/application/www:cached
     - ./phpdocker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
     - ./phpdocker/nginx/fastcgi.conf:/etc/nginx/fastcgi_params
+
+
+x-memcache: &memcached
+  image: memcached:alpine
+
+
+x-chrome: &chrome
+  image: 'selenium/standalone-chrome:3.141.59-oxygen'
+  volumes:
+    - '/dev/shm:/dev/shm'
+  ports:
+    - 4444
+
 
 x-php: &php
   image: moderntribe/squareone-php:74-1.0.0
@@ -24,11 +40,6 @@ x-php: &php
     - ./phpdocker/php-fpm/ssmtp.conf:/etc/ssmtp/ssmtp.conf:ro
     - ./wp-cli.yml:/application/wp-cli.yml
     - ./composer:/application/.composer
-  <<: *internaldns
-  links:
-    - memcached
-    - redis
-    #- elasticsearch
   external_links:
     - "tribe-mysql:mysql"
     - "tribe-mail:mail"
@@ -44,99 +55,69 @@ x-php: &php
     - DB_TABLE_PREFIX=tribe_
     - WP_DEBUG_LOG='php://stderr'
 
-x-elasticsearch: &elasticsearch
-  <<: *proxynetwork
-  image: docker.elastic.co/elasticsearch/elasticsearch:5.2.2
-  environment:
-    - cluster.name=square1
-    - xpack.security.enabled=false
-    - bootstrap.memory_lock=true
-    - script.inline=false
-    - script.stored=false
-    - script.file=true
-    - script.engine.mustache.inline.search=true
-    - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-  ulimits:
-    memlock:
-      soft: -1
-      hard: -1
-    nofile:
-      soft: 65536
-      hard: 65536
-  ports:
-    - "9200"
-  volumes:
-    - ./elasticsearch/data:/usr/share/elasticsearch/data:delegated
-
 services:
 
-    redis:
-      <<: *proxynetwork
-      image: redis:alpine
+  memcached:
+    <<: *memcached
+    <<: *proxynetwork
 
-    #elasticsearch:
-    #  <<: *elasticsearch
+  php-fpm:
+    <<: *php
+    <<: *proxynetwork
+    <<: *internaldns
+    links:
+      - memcached
 
-    memcached:
-      <<: *proxynetwork
-      image: memcached:alpine
-
-    php-fpm:
-      <<: *proxynetwork
-      <<: *php
-
-    webserver:
-      <<: *proxynetwork
-      <<: *nginx
-      links:
-        - php-fpm:php
-      environment:
-        - VIRTUAL_HOST=square1.tribe,*.square1.tribe
+  webserver:
+    <<: *nginx
+    <<: *proxynetwork
+    links:
+      - php-fpm:php
+    environment:
+      - VIRTUAL_HOST=square1.tribe,*.square1.tribe
 
 
+  ##################################################
+  # Testing Containers
+  ##################################################
 
-    memcached-tests:
-      <<: *proxynetwork
-      image: memcached:alpine
+  memcached-tests:
+    <<: *memcached
+    <<: *proxynetwork
 
-    php-tests:
-      <<: *proxynetwork
-      <<: *php
-      links:
-        - memcached-tests:memcached
-        - redis
-        #- elasticsearch
-        - chrome
-      environment:
-        - COMPOSER_ALLOW_SUPERUSER=1
-        - COMPOSER_HOME=/application/.composer
-        - PAGER=more
-        - PHP_IDE_CONFIG=serverName=square1test.tribe
-        - DOMAIN_CURRENT_SITE=square1test.tribe
-        - DB_NAME=tribe_square1_acceptance
-        - DB_USER=root
-        - DB_PASSWORD=password
-        - DB_HOST=mysql
-        - DB_TABLE_PREFIX=tribe_
-        - WP_DEBUG_LOG='php://stderr'
-        - TRIBE_GLOMAR=false
+  php-tests:
+    <<: *php
+    <<: *proxynetwork
+    <<: *internaldns
+    links:
+      - memcached-tests:memcached
+      - chrome
+    environment:
+      - COMPOSER_ALLOW_SUPERUSER=1
+      - COMPOSER_HOME=/application/.composer
+      - PAGER=more
+      - PHP_IDE_CONFIG=serverName=square1test.tribe
+      - DOMAIN_CURRENT_SITE=square1test.tribe
+      - DB_NAME=tribe_square1_acceptance
+      - DB_USER=root
+      - DB_PASSWORD=password
+      - DB_HOST=mysql
+      - DB_TABLE_PREFIX=tribe_
+      - WP_DEBUG_LOG='php://stderr'
+      - TRIBE_GLOMAR=false
 
-    webserver-tests:
-      <<: *proxynetwork
-      <<: *nginx
-      links:
-        - php-tests:php
-      environment:
-        - VIRTUAL_HOST=square1test.tribe,*.square1test.tribe
+  webserver-tests:
+    <<: *nginx
+    <<: *proxynetwork
+    links:
+      - php-tests:php
+    environment:
+      - VIRTUAL_HOST=square1test.tribe,*.square1test.tribe
 
-    chrome:
-      <<: *proxynetwork
-      <<: *internaldns
-      image: 'selenium/standalone-chrome:3.141.59-oxygen'
-      volumes:
-        - '/dev/shm:/dev/shm'
-      ports:
-        - 4444
+  chrome:
+    <<: *chrome
+    <<: *proxynetwork
+    <<: *internaldns
 
 networks:
   proxy:
