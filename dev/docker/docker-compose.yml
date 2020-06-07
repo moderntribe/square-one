@@ -19,11 +19,11 @@ x-php: &php
   build:
     context: .
     dockerfile: phpdocker/php-fpm/Dockerfile
-  image: tribe-phpfpm:7.2-rev1
+  image: tribe-phpfpm:7.4-dev0
   working_dir: /application
   volumes:
     - ../..:/application/www:cached
-    - ./phpdocker/php-fpm/php-ini-overrides.ini:/etc/php/7.2/fpm/conf.d/99-overrides.ini
+    - ./phpdocker/php-fpm/php-ini-overrides.ini:/etc/php/7.4/fpm/conf.d/99-overrides.ini
     - ./phpdocker/php-fpm/ssmtp.conf:/etc/ssmtp/ssmtp.conf:ro
     - ./wp-cli.yml:/application/wp-cli.yml
     - ./composer:/application/.composer
@@ -31,14 +31,13 @@ x-php: &php
   links:
     - memcached
     - redis
-    - elasticsearch
+    #- elasticsearch
   external_links:
     - "tribe-mysql:mysql"
     - "tribe-mail:mail"
   environment:
     - COMPOSER_ALLOW_SUPERUSER=1
     - COMPOSER_HOME=/application/.composer
-    - PAGER=more
     - PHP_IDE_CONFIG=serverName=square1.tribe
     - DOMAIN_CURRENT_SITE=square1.tribe
     - DB_NAME=tribe_square1
@@ -48,35 +47,38 @@ x-php: &php
     - DB_TABLE_PREFIX=tribe_
     - WP_DEBUG_LOG='php://stderr'
 
+x-elasticsearch: &elasticsearch
+  <<: *proxynetwork
+  image: docker.elastic.co/elasticsearch/elasticsearch:5.2.2
+  environment:
+    - cluster.name=square1
+    - xpack.security.enabled=false
+    - bootstrap.memory_lock=true
+    - script.inline=false
+    - script.stored=false
+    - script.file=true
+    - script.engine.mustache.inline.search=true
+    - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+  ulimits:
+    memlock:
+      soft: -1
+      hard: -1
+    nofile:
+      soft: 65536
+      hard: 65536
+  ports:
+    - "9200"
+  volumes:
+    - ./elasticsearch/data:/usr/share/elasticsearch/data:delegated
+
 services:
 
     redis:
       <<: *proxynetwork
       image: redis:alpine
 
-    elasticsearch:
-      <<: *proxynetwork
-      image: docker.elastic.co/elasticsearch/elasticsearch:5.2.2
-      environment:
-        - cluster.name=square1
-        - xpack.security.enabled=false
-        - bootstrap.memory_lock=true
-        - script.inline=false
-        - script.stored=false
-        - script.file=true
-        - script.engine.mustache.inline.search=true
-        - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-      ulimits:
-        memlock:
-          soft: -1
-          hard: -1
-        nofile:
-          soft: 65536
-          hard: 65536
-      ports:
-        - "9200"
-      volumes:
-        - ./elasticsearch/data:/usr/share/elasticsearch/data:delegated
+    #elasticsearch:
+    #  <<: *elasticsearch
 
     memcached:
       <<: *proxynetwork
@@ -106,7 +108,7 @@ services:
       links:
         - memcached-tests:memcached
         - redis
-        - elasticsearch
+        #- elasticsearch
         - chrome
       environment:
         - COMPOSER_ALLOW_SUPERUSER=1
