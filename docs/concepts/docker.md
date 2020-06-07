@@ -204,7 +204,7 @@ To extend the SquareOne container image, create a new `Dockerfile` at `dev/docke
 This can be configured however it makes sense for the project, but typically it will look something like:
 
 ```dockerfile
-FROM moderntribe/squareone-php:74-1.0.0
+FROM moderntribe/squareone-php:74-1.1.0
 
 # Install applications/extensions required for this project
 RUN apt-get update \
