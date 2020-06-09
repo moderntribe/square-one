@@ -228,6 +228,13 @@ The `image` key is used to distinguish this from images used on other projects. 
 every time a change is committed to the `Dockerfile` to automatically trigger a fresh build when a coworker pulls your
 changes.
 
+### Making Upstream Changes
+
+If an update should make its way upstream to the base squareone-php image, submit a pull request on the
+[SquareOne Docker Images repo](https://github.com/moderntribe/squareone-docker-images). The documentation there
+will provide more details about tagging and releasing new versions. Once the new version has been tagged,
+update the image for the PHP services in `dev/docker/docker-compose.yml` to point to the new tag. 
+
 ## Local Configuration Overrides
 
 The services defined in `dev/docker/docker-compose.yml` can be extended locally with a `docker-compose.override.yml`
