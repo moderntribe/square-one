@@ -33,6 +33,9 @@ x-chrome: &chrome
 
 x-php: &php
   image: moderntribe/squareone-php:74-1.1.0
+  build:
+    args:
+      SQ1_UID: "${SQ1_UID}"
   working_dir: /application
   volumes:
     - ../..:/application/www:cached
