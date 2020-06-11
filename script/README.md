@@ -14,7 +14,7 @@ eval $(ssh-agent) ; ssh-add ${project_private_key.key} # Add private key to SSH 
 * If you need composer, find the Square One .env API keys in [1Password](https://moderntribe.1password.com/vaults/all/allitems/ydscklaxsrcy3l6rwoqoqz4xwa).
 
 ```shell
-./script/bootstrap
+./script/cibootstrap
 ./script/cibuild
 ./script/cideploy [dev|staging|production]
 ```
@@ -56,9 +56,9 @@ contributions.
 
 The following is a list of scripts and their primary responsibilities.
 
-### script/bootstrap
+### script/cibootstrap
 
-[`script/bootstrap`][bootstrap] is used solely for fulfilling dependencies of the project or the continuous integration server (Jenkins, Travis, Github Actions...).
+[`script/cibootstrap`][cibootstrap] is used solely for fulfilling dependencies of the project or the continuous integration server (Jenkins, Travis, Github Actions...).
 
 This can mean Linux programs, npm packages, Homebrew packages, PHP versions, Git submodules, etc.
 
@@ -73,29 +73,6 @@ its initial state. For Square One, it's when we create the initial Private Keys 
 
 This is also useful for ensuring that your bootstrapping actually works well.
 
-
-### script/server
-
-[`script/server`][server] is used to start the application like nginx or php-fpm.
-
-For a web application, this might start up any extra processes that the
-application requires to run in addition to itself.
-
-This might not be required if running inside a container or the system has the appropriate startup scripts.
-
-
-### script/test
-
-[`script/test`][test] is used to run the test suite of the application.
-
-A good pattern to support is having an optional argument that is a file path.
-This allows you to support running single tests.
-
-Linting can also be considered a form of testing. These tend to run faster than tests, so put them towards the beginning of a [`script/test`][test] so it fails faster if there's a linting problem.
-
-If you want run the tests via your CI, the [`script/test`][test] should be called from [`script/cibuild`][cibuild], so it should handle setting up the application appropriately based on the environment.
-
-
 ### script/cibuild
 
 [`script/cibuild`][cibuild] is used for your continuous integration server.
@@ -104,9 +81,16 @@ This script is typically only called from your CI server.
 You should set up any specific things for your environment here before your tests
 are run. Your test are run simply by calling [`script/test`][test].
 
+### script/cideploy
 
-[bootstrap]: script/bootstrap
+[`script/cideploy`][cideploy] is used for your continuous integration server.
+This script is also typically only called from your CI server and it's used to deploy your app to a specific environment.
+
+```
+./script/cideploy [dev|staging|production]
+```
+
+[cibootstrap]: script/cibootstrap
 [setup]: script/setup
-[server]: script/server
-[test]: script/test
 [cibuild]: script/cibuild
+[cideploy]: script/cideploy
