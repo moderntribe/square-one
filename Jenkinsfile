@@ -6,95 +6,69 @@ pipeline {
       reuseNode true
     }
   }
+  environment {
+    APP_NAME = 'square-one'
+    SLACK_CHANNEL = 'squareone'
+    GIT_SSH_KEYS = "${env.APP_NAME}-ssh-key"
+  }
   parameters {
-    gitParameter(branchFilter: 'origin/(.*)',
-      defaultValue: "develop",
-      name: 'BRANCH',
-      type: 'PT_BRANCH',
-      description: 'Which branch should be deployed ?')
     choice(name: 'DEPLOY_ENVIRONMENT',
       choices: 'null\ndev\nstaging\nproduction',
       description: 'To which environment should be deployed ?'
     )
-    booleanParam(name: 'MANUAL_DEPLOY',
-      defaultValue: false,
-      description: 'Is this a Manual Deploy?'
-    )
-  }
-
-  environment {
-    APP_NAME = "square-one"
-    SLACK_CHANNEL = "square-one"
-    GIT_SSH_KEYS = "${env.APP_NAME}-ssh-key"
   }
 
   stages {
-
     stage('Slack message') {
+      environment {
+        MSG_SLACK = "${params.DEPLOY_ENVIRONMENT == 'null' ? ' ' : "to `${params.DEPLOY_ENVIRONMENT}` "}"
+      }
       steps {
-        script {
-          env.REAL_BRANCH = "${params.MANUAL_DEPLOY == true ? params.BRANCH : env.BRANCH_NAME}"
-          env.MSG_SLACK   = "${params.MANUAL_DEPLOY == true ? "to `${params.DEPLOY_ENVIRONMENT}` manual" : " "}"
-        }
-        // Debug
-        echo "${params.DEPLOY_ENVIRONMENT} - ${params.BRANCH} - ${params.MANUAL_DEPLOY} - ${env.REAL_BRANCH} - ${env.MSG_SLACK}"
-
+        echo "${params.DEPLOY_ENVIRONMENT} - ${env.MSG_SLACK}"  // Debug
         slackSend(
           channel: "${SLACK_CHANNEL}",
-          message: "`${APP_NAME}` deploy of branch `${env.REAL_BRANCH}` ${env.MSG_SLACK} started: (build: <${RUN_DISPLAY_URL}|#${BUILD_NUMBER}>)"
+          message: "`${APP_NAME}` deploy of branch `${env.BRANCH_NAME}` started: (build: <${RUN_DISPLAY_URL}|#${BUILD_NUMBER}>)"
         )
       }
     }
     stage('Checkout code Github') {
       steps {
-        checkout([$class: 'GitSCM',
-            branches: [[name: "${env.REAL_BRANCH}" ]],
-            extensions: [[$class: 'WipeWorkspace']],
-            userRemoteConfigs: [[url: "${GIT_URL}", credentialsId: 'tr1b0t-github-api-token-as-user_password']]
-        ])
-
-        // Run the bootstrap before the parallel
-        sh script: 'sh ./script/bootstrap', label: 'Running Bootstrap'
+        checkout scm
+      }
+    }
+    stage('Bootstrap') {
+      steps {
+        sh script: './script/cibootstrap', label: 'Running Bootstrap'
       }
     }
 
     stage('Build Processes') {
       parallel {
         stage('Composer') {
+          environment {
+            GITHUB_TOKEN = credentials('tr1b0t-github-api-token')
+            COMPOSER_AUTH = """{ "github-oauth": { "github.com": "${GITHUB_TOKEN}"}}"""
+            COMPOSER_KEYS = credentials('square-one-compose-plugins-keys')
+          }
           steps {
-            withCredentials([file(credentialsId: "square-one-compose-plugins-keys", variable: "ENV_FILE")]) {
-                sh script: "cp $ENV_FILE .env", label: "Copy Composer .env to the root folder"
-                sh script: './script/cibuild composer', label: 'Running CI Build composer'
-            }
+            sh script: "cp ${COMPOSER_KEYS} .env", label: 'Copy Composer .env to the root folder'
+            sh script: './script/cibuild composer', label: 'Running CI Build composer'
           }
         }
 
         stage('Node') {
           steps {
-            sh script: './script/cibuild node', label: 'Running CI Build'
-            // Jenkins as owner
-            sh 'chown -R 110:117 .'
-           }
-        }
-      }
-    }
-
-    stage('Deploy Manual') {
-      when {
-        expression { params.MANUAL_DEPLOY == true }
-      }
-      steps {
-        sshagent (credentials: ["${GIT_SSH_KEYS}"]) {
-          sh "./script/cideploy ${params.DEPLOY_ENVIRONMENT}"
+            sh script: "./script/cibuild node", label: "Running CI Build"
+          }
         }
       }
     }
 
     stage('Deploy to Dev') {
       when {
-        allOf {
-          branch 'develop'
-          expression { params.MANUAL_DEPLOY == false }
+        anyOf {
+          expression { env.BRANCH_NAME == 'develop' && params.DEPLOY_ENVIRONMENT == 'null' }
+          expression { params.DEPLOY_ENVIRONMENT == 'dev' }
         }
       }
       steps {
@@ -106,9 +80,9 @@ pipeline {
 
     stage('Deploy to Staging') {
       when {
-        allOf {
-          branch 'server/staging'
-          expression { params.MANUAL_DEPLOY == false }
+        anyOf {
+          expression { env.BRANCH_NAME == 'server/staging' && params.DEPLOY_ENVIRONMENT == 'null' }
+          expression { params.DEPLOY_ENVIRONMENT == 'staging' }
         }
       }
       steps {
@@ -120,9 +94,9 @@ pipeline {
 
     stage('Deploy to Production') {
       when {
-        allOf {
-          branch 'server/production'
-          expression { params.MANUAL_DEPLOY == false }
+        anyOf {
+          expression { env.BRANCH_NAME == 'server/production' && params.DEPLOY_ENVIRONMENT == 'null' }
+          expression { params.DEPLOY_ENVIRONMENT == 'production' }
         }
       }
       steps {
@@ -137,10 +111,16 @@ pipeline {
       cleanWs()
     }
     failure {
-      slackSend(channel: "${SLACK_CHANNEL}", color: 'danger', message: "`${APP_NAME}` deploy of branch `${env.REAL_BRANCH}` ${env.MSG_SLACK} failed: (build: <${RUN_DISPLAY_URL}|#${BUILD_NUMBER}>)")
+      slackSend(
+        channel: "${SLACK_CHANNEL}", color: 'danger',
+        message: "`${APP_NAME}` deploy of branch `${env.BRANCH_NAME}` ${env.MSG_SLACK}failed: (build: <${RUN_DISPLAY_URL}|#${BUILD_NUMBER}>)"
+      )
     }
     success {
-      slackSend(channel: "${SLACK_CHANNEL}", color: 'good', message: "`${APP_NAME}` deploy of branch `${env.REAL_BRANCH}` ${env.MSG_SLACK} was successful: (build: <${RUN_DISPLAY_URL}|#${BUILD_NUMBER}>)")
+      slackSend(
+        channel: "${SLACK_CHANNEL}", color: 'good',
+        message: "`${APP_NAME}` deploy of branch `${env.BRANCH_NAME}` ${env.MSG_SLACK}was successful: (build: <${RUN_DISPLAY_URL}|#${BUILD_NUMBER}>)"
+      )
     }
   }
 }

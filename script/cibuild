@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -xe
 # script/cibuild: Setup environment for CI build, tests and prepare for a deploy.
 #                 This is primarily designed to run on the continuous integration server.
 
@@ -22,7 +22,6 @@ build_composer() {
 # Build node
 build_node() {
     echo "Building Node"
-    npm install node-gyp
     npm install gulp-cli -g
     npm run install:theme
     npm run validate
