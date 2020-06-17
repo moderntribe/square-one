@@ -15,8 +15,8 @@ x-nginx: &nginx
   working_dir: /application
   volumes:
     - ../..:/application/www:cached
-    - ./phpdocker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
-    - ./phpdocker/nginx/fastcgi.conf:/etc/nginx/fastcgi_params
+    - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+    - ./nginx/fastcgi.conf:/etc/nginx/fastcgi_params
 
 
 x-memcache: &memcached
@@ -32,12 +32,13 @@ x-chrome: &chrome
 
 
 x-php: &php
-  image: moderntribe/squareone-php:74-1.1.0
+  image: moderntribe/squareone-php:74-2.0.0
   working_dir: /application
+  user: "${SQ1_UID:-1000}:${SQ1_GID:-1000}"
   volumes:
     - ../..:/application/www:cached
-    - ./phpdocker/php-fpm/php-ini-overrides.ini:/etc/php/7.4/fpm/conf.d/99-overrides.ini
-    - ./phpdocker/php-fpm/ssmtp.conf:/etc/ssmtp/ssmtp.conf:ro
+    - ./php/php-ini-overrides.ini:/usr/local/etc/php/conf.d/zz-overrides.ini
+    - ./php/msmtp.conf:/etc/msmtprc:ro
     - ./wp-cli.yml:/application/wp-cli.yml
     - ./composer:/application/.composer
   external_links:
