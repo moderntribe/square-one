@@ -43,6 +43,7 @@ jobs:
           echo "define( 'TRIBE_GLOMAR', false );" >> local-config.php
           echo "define( 'FORCE_SSL_LOGIN', false );" >> local-config.php
           echo "define( 'FORCE_SSL_ADMIN', false );" >> local-config.php
+          printf 'SQ1_UID=%d\nSQ1_GID=%d\n' $(id -u) $(id -g) > dev/docker/.env
 
       - name: Create composer config files
         run: |
