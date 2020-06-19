@@ -3,14 +3,18 @@ const requireDir = require( 'require-dir' );
 const tasks = requireDir( './gulp-tasks' );
 const browserSync = require( 'browser-sync' ).create( 'Tribe Dev' );
 
-let config = require( './local-config.json' );
-
-if ( ! config ) {
-	config = {
-		proxy: 'square1.tribe',
-		certs_path: '',
-	};
+function module_exists( name ) {
+	try {
+		return require.resolve( name );
+	} catch ( e ) {
+		return false;
+	}
 }
+
+const config = module_exists( './local-config.json' ) ? require( './local-config.json' ) : {
+	proxy: 'square1.tribe',
+	certs_path: '',
+};
 
 /**
  * List out your tasks as defined in the gulp_tasks directory
