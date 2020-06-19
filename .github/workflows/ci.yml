@@ -16,7 +16,7 @@ jobs:
       cache_version: 2 # increment to flush all caches
       PROJECT_ID: square1
       COMPOSE_INTERACTIVE_NO_CLI: 1
-      COMPOSE_FILE: dev/docker/docker-compose.yml:dev/docker/docker-compose.gh.yml
+      COMPOSE_FILE: docker-compose.yml:docker-compose.gh.yml
 
     steps:
 
@@ -61,6 +61,7 @@ jobs:
 
       - name: Create docker network
         run: docker network create --driver=bridge --subnet=172.20.10.0/24 global_proxy
+        working-directory: dev/docker
 
       - name: Start project containers
         run: docker-compose --project-name=${{ env.PROJECT_ID }} up -d --force-recreate
@@ -68,6 +69,7 @@ jobs:
 
       - name: Install composer dependencies
         run: docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-fpm composer install --optimize-autoloader -d /application/www
+        working-directory: dev/docker
 
       - name: Setup node
         uses: actions/setup-node@v1
@@ -109,12 +111,16 @@ jobs:
 
       - name: Run unit tests
         run: docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests php /application/www/vendor/bin/codecept --config "/application/www/dev/tests" run unit
+        working-directory: dev/docker
 
       - name: Run integration tests
         run: docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests php /application/www/vendor/bin/codecept --config "/application/www/dev/tests" run integration
+        working-directory: dev/docker
 
       - name: Run acceptance tests
         run: docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests php /application/www/vendor/bin/codecept --config "/application/www/dev/tests" run acceptance
+        working-directory: dev/docker
 
       - name: Run webdriver tests
         run: docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests php /application/www/vendor/bin/codecept --config "/application/www/dev/tests" run webdriver
+        working-directory: dev/docker
