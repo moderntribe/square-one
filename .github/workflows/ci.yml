@@ -64,6 +64,7 @@ jobs:
 
       - name: Start project containers
         run: docker-compose --project-name=${{ env.PROJECT_ID }} up -d --force-recreate
+        working-directory: dev/docker
 
       - name: Install composer dependencies
         run: docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-fpm composer install --optimize-autoloader -d /application/www
