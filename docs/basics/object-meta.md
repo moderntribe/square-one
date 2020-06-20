@@ -185,7 +185,7 @@ array of items:
 |post_types|Post Types are identified by their class's `NAME` constant. For instance: `[ Post_Types\Page::NAME, Post_Types\Events::NAME ]`|
 |taxonomies|Taxonomies are identified by their class's `NAME` constant. For instance `[ Taxonomies\Category\Category::NAME ]`|
 |users| Users does not take an array of items, but simply accepts either `true` or `false`|
-|settings_pages|Settings pages are identified by the `slug` for any given Settings Page. This can be accessed like so: `[ Settings\General::instance()->get_slug() ]`|
+|settings_pages|Settings pages are identified by the `slug` for any given Settings Page. This can be accessed like so: `[ $container->get( Settings\General::class )->get_slug() ]`|
 |nav_menus|Menus are identified by the `theme_location` for any given menu. Passed in via `['location/menu_location_slug']`
 |nav_menu_items|When adding meta to the nav items added to a menu, you would pass in a `Menu Location` or `Menu term_id`: `['location/menu_location_slug']` or `[4]` or `all`
 
@@ -197,7 +197,7 @@ Example::class => static function ( ContainerInterface $container ) {
   return new Example( [
     'post_types'     => [ Post_Types\Page\Page::NAME, Post_Types\Post\Post::NAME ],
     'taxonomies'     => [ Taxonomies\Category\Category::NAME ],
-    'settings_pages' => [ Settings\General::instance()->get_slug() ],
+    'settings_pages' => [ $container->get( Settings\General::class )->get_slug() ],
     'users'          => true,
   ] );
 }
