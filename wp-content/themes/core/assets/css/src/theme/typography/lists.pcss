@@ -13,7 +13,8 @@ ul,
 ol,
 dl {
 
-	.t-sink & {
+	[data-type^="core/"] > &,
+	.t-sink > & {
 		@mixin t-body;
 	}
 }
@@ -29,7 +30,8 @@ li {}
  * ------------------------------------------------------------------------- */
 
 .t-list--bullets,
-.t-sink ul {
+[data-type^="core/"] > ul,
+.t-sink > ul {
 	list-style: disc outside;
 	padding-left: 1.5em;
 }
@@ -39,7 +41,7 @@ li {}
  * ------------------------------------------------------------------------- */
 
 .t-list--bullets-stylized,
-.t-sink ul.is-style-t-list-stylized {
+.t-sink > ul.is-style-t-list-stylized {
 	list-style: none;
 	padding-left: 0;
 
@@ -64,7 +66,8 @@ li {}
  * ------------------------------------------------------------------------- */
 
 .t-list--numbered,
-.t-sink ol {
+[data-type^="core/"] > ul,
+.t-sink > ol {
 	list-style: decimal outside;
 	padding-left: 1.5em;
 }
@@ -74,7 +77,7 @@ li {}
  * ------------------------------------------------------------------------- */
 
 .t-list--numbered-stylized,
-.t-sink ol.is-style-t-list-stylized {
+.t-sink > ol.is-style-t-list-stylized {
 	list-style: none;
 	padding-left: 0;
 	counter-reset: list-number;
@@ -102,14 +105,16 @@ li {}
  * ------------------------------------------------------------------------- */
 
 .dl,
-.t-sink dl {}
+[data-type^="core/"] > dl,
+.t-sink > dl {}
 
 /* -------------------------------------------------------------------------
  * Definition List: Term
  * ------------------------------------------------------------------------- */
 
 .dt,
-.t-sink dt {
+[data-type^="core/"] > dt,
+.t-sink > dt {
 	font-weight: 700;
 }
 
@@ -118,4 +123,5 @@ li {}
  * ------------------------------------------------------------------------- */
 
 .dd,
-.t-sink dd {}
+[data-type^="core/"] > dd,
+.t-sink > dd {}

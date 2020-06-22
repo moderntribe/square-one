@@ -9,7 +9,8 @@
  * ----------------------------------------------------------------------------- */
 
 .quote,
-.t-sink q {
+[data-type^="core/"] > q,
+.t-sink > q {
 	@mixin t-quote;
 
 	display: block;
@@ -20,8 +21,8 @@
  * ----------------------------------------------------------------------------- */
 
 .blockquote,
-.t-sink blockquote {
-
+[data-type^="core/"] > blockquote,
+.t-sink > blockquote {
 	@media (--viewport-full) {
 		position: relative;
 
@@ -45,7 +46,7 @@
  * ----------------------------------------------------------------------------- */
 
 .cite,
-.t-sink blockquote cite,
+.t-sink > blockquote cite,
 .wp-block-quote__citation {
 	@mixin t-overline;
 

@@ -9,7 +9,8 @@
  * ------------------------------------------------------------------------- */
 
 .h1,
-.t-sink h1 {
+[data-type^="core/"] > h1,
+.t-sink > h1 {
 	@mixin t-display-large;
 
 	@media (--viewport-medium) {
@@ -22,7 +23,8 @@
  * ------------------------------------------------------------------------- */
 
 .h2,
-.t-sink h2 {
+[data-type^="core/"] > h2,
+.t-sink > h2 {
 	@mixin t-display;
 
 	@media (--viewport-medium) {
@@ -35,7 +37,8 @@
  * ------------------------------------------------------------------------- */
 
 .h3,
-.t-sink h3 {
+[data-type^="core/"] > h3,
+.t-sink > h3 {
 	@mixin t-display-small;
 
 	@media (--viewport-medium) {
@@ -48,7 +51,8 @@
  * ------------------------------------------------------------------------- */
 
 .h4,
-.t-sink h4 {
+[data-type^="core/"] > h4,
+.t-sink > h4 {
 	@mixin t-display-x-small;
 
 	@media (--viewport-medium) {
@@ -61,7 +65,8 @@
  * ------------------------------------------------------------------------- */
 
 .h5,
-.t-sink h5 {
+[data-type^="core/"] > h5,
+.t-sink > h5 {
 	@mixin t-display-xx-small;
 
 	@media (--viewport-medium) {
@@ -74,6 +79,7 @@
  * ------------------------------------------------------------------------- */
 
 .h6,
-.t-sink h6 {
+[data-type^="core/"] > h6,
+.t-sink > h6 {
 	@mixin t-overline;
 }
