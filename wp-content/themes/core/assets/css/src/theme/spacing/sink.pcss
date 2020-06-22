@@ -10,10 +10,16 @@
  * ------------------------------------------------------------------------- */
 
 /* -----------------------------------------------------------------------------
- * First & Last Element Overrides
+ * Kitchen Sink Vertical Spacing
+ *
+ * Applicable to the front-end theme only.
  * ----------------------------------------------------------------------------- */
 
 .s-sink > {
+	/* -----------------------------------------------------------------------------
+	 * First & Last Element Overrides
+	 * ----------------------------------------------------------------------------- */
+
 	/* CASE: remove top margin from first element */
 	*:first-child {
 		margin-top: 0;
@@ -23,10 +29,56 @@
 	*:last-child {
 		margin-bottom: 0;
 	}
+
+	/* -----------------------------------------------------------------------------
+	 * Images
+	 * ----------------------------------------------------------------------------- */
+
+	.wp-block-image {
+		margin-top: var(--spacer-60);
+		margin-bottom: var(--spacer-60);
+
+		.alignleft,
+		.alignright {
+			margin-top: var(--spacer-40);
+			margin-bottom: var(--spacer-40);
+
+			@media (--viewport-medium) {
+				margin-top: 5px;
+			}
+		}
+	}
+
+	/* -----------------------------------------------------------------------------
+	 * Audio, Videos, & Embeds: Alignments
+	 * ----------------------------------------------------------------------------- */
+
+	.wp-block-audio,
+	.wp-block-video,
+	.wp-block-embed {
+		margin-top: var(--spacer-60);
+		margin-bottom: var(--spacer-60);
+	}
+
+	/* -----------------------------------------------------------------------------
+	 * Overline
+	 *
+	 * Overrides default selector spacing.
+	 * ----------------------------------------------------------------------------- */
+
+	.is-style-t-overline {
+		margin-bottom: var(--spacer-20);
+
+		& + * {
+			margin-top: var(--spacer-20);
+		}
+	}
 }
 
 /* -----------------------------------------------------------------------------
  * Kitchen Sink Vertical Spacing
+ *
+ * Applicable to the front-end theme and WP Core blocks in the editor.
  * ----------------------------------------------------------------------------- */
 
 [data-type^="core/"],
@@ -132,49 +184,5 @@
 
 	table {
 		margin: var(--spacer-60) auto;
-	}
-
-	/* -----------------------------------------------------------------------------
-	 * Images
-	 * ----------------------------------------------------------------------------- */
-
-	.wp-block-image {
-		margin-top: var(--spacer-60);
-		margin-bottom: var(--spacer-60);
-
-		.alignleft,
-		.alignright {
-			margin-top: var(--spacer-40);
-			margin-bottom: var(--spacer-40);
-
-			@media (--viewport-medium) {
-				margin-top: 5px;
-			}
-		}
-	}
-
-	/* -----------------------------------------------------------------------------
-	 * Audio, Videos, & Embeds: Alignments
-	 * ----------------------------------------------------------------------------- */
-
-	.wp-block-audio,
-	.wp-block-video,
-	.wp-block-embed {
-		margin-top: var(--spacer-60);
-		margin-bottom: var(--spacer-60);
-	}
-
-	/* -----------------------------------------------------------------------------
-	 * Overline
-	 *
-	 * Overrides default selector spacing.
-	 * ----------------------------------------------------------------------------- */
-
-	.is-style-t-overline {
-		margin-bottom: var(--spacer-20);
-
-		& + * {
-			margin-top: var(--spacer-20);
-		}
 	}
 }
