@@ -1,0 +1,30 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Media: Figure Captions
+ *
+ * ----------------------------------------------------------------------------- */
+
+[data-type^="core/"] figcaption,
+.t-sink figcaption,
+.wp-caption-text {
+	@mixin t-caption;
+
+	max-width: 100%;
+	text-align: left;
+	padding-top: var(--spacer-20);
+	padding-bottom: var(--spacer-40);
+	padding-left: var(--grid-margin-small);
+	padding-right: var(--grid-margin-small);
+	color: var(--color-text);
+	border-bottom: 1px solid var(--color-border);
+
+	@media (--viewport-medium) {
+		padding-left: var(--grid-margin);
+		padding-right: var(--grid-margin);
+	}
+
+	@media (--viewport-large) {
+		padding-left: 0;
+		padding-right: 0;
+	}
+}

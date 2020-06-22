@@ -15,7 +15,7 @@
 }
 
 .alignfull {
-	max-width: none;
+	max-width: var(--grid-width-full-bleed);
 }
 
 .alignwide {
@@ -38,7 +38,7 @@
 .alignright {
 
 	.wp-block-image & {
-
+		/* CASE: Image has not been resized by the editor */
 		&:not(.is-resized) {
 			@media (--viewport-medium) {
 				max-width: var(--grid-5-col);
