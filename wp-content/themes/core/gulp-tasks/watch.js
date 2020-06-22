@@ -70,7 +70,7 @@ module.exports = {
 			`${ pkg.square1.paths.core_theme_components }**/*.pcss`,
 			//`${ pkg.square1.paths.core_theme_integrations }**/*.pcss`,
 			`${ pkg.square1.paths.core_admin_pcss }block-editor.pcss`,
-			`${ pkg.square1.paths.core_admin_pcss }block-editor-reset.pcss`,
+			`${ pkg.square1.paths.core_admin_pcss }block-editor/**/*.pcss`,
 			`!${ pkg.square1.paths.core_theme_pcss }legacy.pcss`,
 			`!${ pkg.square1.paths.core_theme_pcss }content/page/_legacy.pcss`,
 		], gulp.parallel( 'postcss:adminBlockEditor' ) );
@@ -81,7 +81,7 @@ module.exports = {
 			`${ pkg.square1.paths.core_admin_pcss }**/*.pcss`,
 			`!${ pkg.square1.paths.core_admin_pcss }mce-editor.pcss`,
 			`!${ pkg.square1.paths.core_admin_pcss }block-editor.pcss`,
-			`!${ pkg.square1.paths.core_admin_pcss }block-editor-reset.pcss`,
+			`!${ pkg.square1.paths.core_admin_pcss }block-editor/**/*.pcss`,
 			`!${ pkg.square1.paths.core_admin_pcss }login.pcss`,
 		], gulp.parallel( 'postcss:admin' ) );
 

@@ -9,13 +9,13 @@
  *
  * ----------------------------------------------------------------------------- */
 
-/* Block Editor Reset */
-@import "block-editor-reset.pcss";
-
-/* All Variables, Mixins and Utility Classes */
+/* All Shared Variables, Mixins and Utility Classes */
 @import "../_variables.pcss";
 @import "../_mixins.pcss";
 @import "../_utilities.pcss";
+
+/* Block Editor */
+@import './block-editor/all.pcss';
 
 /* Theme Styles */
 @import "../theme/actions/all.pcss";
@@ -26,101 +26,9 @@
 @import "../theme/typography/all.pcss";
 @import "../theme/temp/all.pcss";
 
-/* All Components */
+/* All Theme Components */
 @import-glob "../../../../components/**/index.pcss";
 
 /* All Integrations
  Disabled since we don't need integration styles, except _maybe_ Swiper, in the block editor.
  @import-glob "../../../../integrations/ ** /index.pcss"; */
-
-/* -----------------------------------------------------------------------------
- * Global Defaults
- * ----------------------------------------------------------------------------- */
-
-.editor-styles-wrapper {
-	font: 400 normal 100% / 1.5 var(--font-family-base);
-	color: var(--color-text);
-	background: var(--color-bgd);
-
-	/* Disable WP Core's vertical spacing. */
-	.block-editor-block-list__block {
-		margin-top: 0;
-		margin-bottom: 0;
-	}
-}
-
-/* -----------------------------------------------------------------------------
- *
- * WP Core Block Styles & Overrides
- *
- * Styles that apply to WP Core blocks or reset styles applied
- * by the block editor and wp-admin.
- *
- * ----------------------------------------------------------------------------- */
-
-[data-type^="core/"] {
-	/* -----------------------------------------------------------------------------
-	 * Block Editor Kitchen Sink Grid Widths
-	 * ----------------------------------------------------------------------------- */
-
-	max-width: var(--grid-width-staggered-double);
-	width: calc(100% - 2 * var(--grid-gutter-small));
-
-	@media (--viewport-medium) {
-		width: calc(100% - 2 * var(--grid-gutter));
-	}
-
-	&[data-align="wide"] {
-		max-width: var(--grid-width-staggered);
-	}
-
-	&[data-align="full"] {
-		max-width: var(--grid-width);
-	}
-
-	/* -----------------------------------------------------------------------------
-	 * Headings
-	 *
-	 * Override WP-Core's wp-admin heading colors.
-	 * ----------------------------------------------------------------------------- */
-
-	h1,
-	h2,
-	h3 {
-		color: var(--color-text);
-	}
-
-	/* -----------------------------------------------------------------------------
-	 * Horizontal Rule/Separator
-	 *
-	 * Override WP-Core's heavy-selector max-width value.
-	 * ----------------------------------------------------------------------------- */
-	hr {
-		max-width: none !important;
-	}
-
-	/* -----------------------------------------------------------------------------
-	 * Overline
-	 *
-	 * Overrides default selector spacing.
-	 * ----------------------------------------------------------------------------- */
-
-	&.is-style-t-overline {
-
-		& + .wp-block > * {
-			margin-top: var(--spacer-20);
-		}
-	}
-}
-
-/* -----------------------------------------------------------------------------
- *
- * Modern Tribe Blocks Reset
- *
- * ----------------------------------------------------------------------------- */
-
-.wp-block[data-type^="tribe/"] {
-	max-width: none;
-	margin-top: 0;
-	margin-bottom: 0;
-}

@@ -1,0 +1,43 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Styles that apply to the general block editor.
+ *
+ * ----------------------------------------------------------------------------- */
+
+/* -----------------------------------------------------------------------------
+ * Global Styles
+ * ----------------------------------------------------------------------------- */
+
+.editor-styles-wrapper {
+	font: 400 normal 100% / 1.5 var(--font-family-base);
+	color: var(--color-text);
+	background: var(--color-bgd);
+
+	/* Disable WP Core's vertical spacing. */
+	.block-editor-block-list__block {
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+
+	/* -----------------------------------------------------------------------------
+	 * Headings
+	 *
+	 * Override WP-Core's Common wp-admin styles.
+	 * ----------------------------------------------------------------------------- */
+
+	h1,
+	h2,
+	h3 {
+		color: var(--color-text);
+		margin: 0;
+	}
+
+	/* -----------------------------------------------------------------------------
+	 * Horizontal Rule/Separator
+	 *
+	 * Override WP-Core's heavy-selector max-width value.
+	 * ----------------------------------------------------------------------------- */
+	hr {
+		max-width: none !important;
+	}
+}
