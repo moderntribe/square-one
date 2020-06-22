@@ -29,16 +29,6 @@
     {
       "type":"vcs",
       "no-api": true,
-      "url":"git@github.com:moderntribe/attachment-helper.git"
-    },
-    {
-      "type":"vcs",
-      "no-api": true,
-      "url":"git@github.com:moderntribe/ajax-queue.git"
-    },
-    {
-      "type":"vcs",
-      "no-api": true,
       "url":"git@github.com:moderntribe/gutenpanels.git"
     },
     {

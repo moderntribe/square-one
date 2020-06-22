@@ -204,7 +204,7 @@ To extend the SquareOne container image, create a new `Dockerfile` at `dev/docke
 This can be configured however it makes sense for the project, but typically it will look something like:
 
 ```dockerfile
-FROM moderntribe/squareone-php:74-1.1.0
+FROM moderntribe/squareone-php:74-2.0.1
 
 # Install applications/extensions required for this project
 RUN apt-get update \
@@ -236,6 +236,32 @@ will provide more details about tagging and releasing new versions. Once the new
 update the image for the PHP services in `dev/docker/docker-compose.yml` to point to the new tag. 
 
 ## Local Configuration Overrides
+
+### Overriding with Environment Variables
+
+The Docker Compose configuration will read some variables from your environment, or from a `.env` file placed in the
+`dev/docker` directory.
+
+Of particular note for users on Linux-based systems, this can be used to set the user and group ID of the `squareone`
+user running inside the PHP-FPM containers. For example, if your user and group IDs on your host system are both
+`1001`, you would set this with a `dev/docker/.env` that looks like:
+
+```dotenv
+SQ1_UID=1001
+SQ1_GID=1001
+```
+
+The container will run as a user with matching IDs, so that any files created inside the container (e.g., by uploading
+media to WordPress or running `composer install`) will be owned by your user on the host system as well.
+
+*Upgrade notice:* If you are updating from an older version of SquareOne, you may need to do a one-time update of your
+file ownership to fix any files that are currently owned by `root`. In the root directory of your project, run:
+
+```
+sudo chown -R "$(id -u):$(id -g)" .
+```
+
+### Overriding with `docker-compose.override.yml`
 
 The services defined in `dev/docker/docker-compose.yml` can be extended locally with a `docker-compose.override.yml`
 in the same directory. This file will be ignored by git and can include any customizations necessary to adapt the
