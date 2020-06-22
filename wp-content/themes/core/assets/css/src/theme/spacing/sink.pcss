@@ -9,37 +9,38 @@
  *
  * ------------------------------------------------------------------------- */
 
-.s-sink {
-	/* -----------------------------------------------------------------------------
-	 * First & last element overrides
-	 * ----------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ * First & Last Element Overrides
+ * ----------------------------------------------------------------------------- */
 
+.s-sink > {
 	/* CASE: remove top margin from first element */
-	/**:first-child {
+	*:first-child {
 		margin-top: 0;
 	}
-*/
-	/* CASE: remove bottom margin from bottom element */
-	/**:last-child {
-		margin-bottom: 0;
-	}*/
 
+	/* CASE: remove bottom margin from bottom element */
+	*:last-child {
+		margin-bottom: 0;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Kitchen Sink Vertical Spacing
+ * ----------------------------------------------------------------------------- */
+
+[data-type^="core/"],
+.s-sink > {
 	/* -----------------------------------------------------------------------------
 	 * Headings
 	 * ----------------------------------------------------------------------------- */
 
 	h1,
-	.h1,
 	h2,
-	.h2,
 	h3,
-	.h3,
 	h4,
-	.h4,
 	h5,
-	.h5,
-	h6,
-	.h6 {
+	h6 {
 		margin-top: var(--spacer-60);
 		margin-bottom: var(--spacer-20);
 	}
@@ -59,27 +60,30 @@
 
 	/* Shared */
 	ul,
-	.list-bullet,
 	ol,
-	.list-number,
-	dl,
-	.dl {
+	dl {
 		margin-top: var(--spacer-40);
 		margin-bottom: var(--spacer-40);
 	}
 
 	/* List Item */
-	li {
+	ol,
+	ul {
 
-		& ~ li {
-			margin-top: var(--spacer-20);
+		li {
+
+			& ~ li {
+				margin-top: var(--spacer-20);
+			}
 		}
 	}
 
 	/* Definition */
-	dd,
-	.dd {
-		margin-bottom: var(--spacer-40);
+	dl {
+
+		dd {
+			margin-bottom: var(--spacer-40);
+		}
 	}
 
 	/* -----------------------------------------------------------------------------
@@ -96,19 +100,15 @@
 
 	/* Shared */
 	blockquote,
-	.blockquote,
-	q,
-	.quote {
+	q {
 		margin: var(--spacer-60) auto;
 	}
 
 	/* q */
-	q,
-	.quote {}
+	q {}
 
 	/* blockquote */
-	blockquote,
-	.blockquote {
+	blockquote {
 
 		p {
 			margin: 0 auto;
@@ -121,7 +121,6 @@
 
 	/* cite */
 	cite,
-	.cite,
 	.wp-block-quote__citation {
 		display: block;
 		margin-top: var(--spacer-10);
@@ -131,8 +130,7 @@
 	 * Table
 	 * ----------------------------------------------------------------------------- */
 
-	table,
-	.table {
+	table {
 		margin: var(--spacer-60) auto;
 	}
 

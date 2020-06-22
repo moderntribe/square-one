@@ -51,9 +51,10 @@
 
 /* -----------------------------------------------------------------------------
  *
- * WP Core Block Styles
+ * WP Core Block Styles & Overrides
  *
- * Styles that apply to WP Core blocks.
+ * Styles that apply to WP Core blocks or reset styles applied
+ * by the block editor and wp-admin.
  *
  * ----------------------------------------------------------------------------- */
 
@@ -78,6 +79,27 @@
 	}
 
 	/* -----------------------------------------------------------------------------
+	 * Headings
+	 *
+	 * Override WP-Core's wp-admin heading colors.
+	 * ----------------------------------------------------------------------------- */
+
+	h1,
+	h2,
+	h3 {
+		color: var(--color-text);
+	}
+
+	/* -----------------------------------------------------------------------------
+	 * Horizontal Rule/Separator
+	 *
+	 * Override WP-Core's heavy-selector max-width value.
+	 * ----------------------------------------------------------------------------- */
+	hr {
+		max-width: none !important;
+	}
+
+	/* -----------------------------------------------------------------------------
 	 * Overline
 	 *
 	 * Overrides default selector spacing.
@@ -85,15 +107,18 @@
 
 	&.is-style-t-overline {
 
-		& + .wp-block * {
+		& + .wp-block > * {
 			margin-top: var(--spacer-20);
 		}
 	}
 }
 
-/*
+/* -----------------------------------------------------------------------------
  *
- */
+ * Modern Tribe Blocks Reset
+ *
+ * ----------------------------------------------------------------------------- */
+
 .wp-block[data-type^="tribe/"] {
 	max-width: none;
 	margin-top: 0;
