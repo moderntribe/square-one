@@ -5,7 +5,7 @@
  * ----------------------------------------------------------------------------- */
 
 .c-panel--media-text {
-	/* CASE: Two Media + Text panels Stacked, both full-width and left/right aligned. */
+	/* CASE: Two Media + Text panels Stacked, both Width: Full and Media: Left/Right */
 	&.c-panel--width-full:not(.c-panel--layout-media-center) + &.c-panel--width-full:not(.c-panel--layout-media-center) {
 		@media (--viewport-full) {
 			padding-top: 0;
@@ -19,28 +19,31 @@
  * ----------------------------------------------------------------------------- */
 
 .media-text__container {
-	/* CASE: Media Left/Right Aligned */
-	.c-panel--layout-media-right &,
-	.c-panel--layout-media-left & {
+	/* CASE: Width: Boxed, Media: Left/Right */
+	.c-panel--width-boxed:not(.c-panel--layout-media-center) & {
 		@media (--viewport-medium) {
 			display: flex;
-			flex-flow: row nowrap;
 			justify-content: space-between;
 		}
 	}
 
-	/* CASE: Layout Media Right */
-	.c-panel--layout-media-right & {
-		@media (--viewport-medium) {
-			flex-direction: row-reverse;
+	/* CASE: Width: Full */
+	.c-panel--width-full & {
+		max-width: var(--grid-width-full-bleed);
+		margin: 0 auto;
+	}
+
+	/* CASE: Width: Full, Media: Left/Right */
+	.c-panel--width-full:not(.c-panel--layout-media-center) & {
+		@media (--viewport-full) {
+			display: flex;
 		}
 	}
 
-	/* CASE: Width: Full Bleed */
-	.c-panel--width-full & {
-		@media (--viewport-full) {
-			max-width: var(--grid-width-full-bleed);
-			margin: 0 auto;
+	/* CASE: Media: Right */
+	.c-panel--layout-media-right & {
+		@media (--viewport-medium) {
+			flex-direction: row-reverse;
 		}
 	}
 }
@@ -50,14 +53,15 @@
  * ----------------------------------------------------------------------------- */
 
 .media-text__media {
-	/* CASE: Layout: Boxed, Media: Left/Right Aligned */
+	/* CASE: Width: Boxed, Media: Left/Right */
 	.c-panel--width-boxed:not(.c-panel--layout-media-center) & {
 		@media (--viewport-medium) {
+			flex: 0 0 auto;
 			width: calc(50% - var(--grid-gutter-half));
 		}
 	}
 
-	/* CASE: Width: Full Bleed, Media: Left/Right Aligned */
+	/* CASE: Width: Full, Media: Left/Right */
 	.c-panel--width-full:not(.c-panel--layout-media-center) & {
 		@media (--viewport-full) {
 			flex: 0 0 auto;
@@ -87,47 +91,44 @@
  * ----------------------------------------------------------------------------- */
 
 .media-text__content {
-	/* CASE: Layout: Boxed, Media: Left/Right Aligned */
-	.c-panel--width-boxed:not(.c-panel--layout-media-center) & {
+	/* CASE: Media: Left/Right */
+	.c-panel:not(.c-panel--layout-media-center) & {
 		@media (--viewport-medium) {
-			width: calc(50% - var(--grid-gutter-half));
-			max-width: var(--grid-5-col);
 			align-self: center;
 		}
 	}
 
-	/* CASE: Full-Bleed Width, Media: Left/Right Aligned */
+	/* CASE: Width: Boxed, Media: Left/Right */
+	.c-panel--width-boxed:not(.c-panel--layout-media-center) & {
+		@media (--viewport-medium) {
+			width: calc(50% - var(--grid-gutter-half));
+			max-width: var(--grid-5-col);
+		}
+	}
+
+	/* CASE: Width: Full, Media: Left/Right */
 	.c-panel--width-full:not(.c-panel--layout-media-center) & {
 		@media (--viewport-full) {
+			display: flex;
 			flex: 0 0 auto;
 			width: 50%;
-			max-width: var(--grid-6-col);
+			max-width: calc(var(--grid-gutter-half) + var(--grid-6-col) + var(--grid-margin));
+			margin: 0;
 		}
 	}
 
-	/* CASE: Width: Full Bleed, Layout: Media Right */
-	.c-panel--width-full.c-panel--layout-media-right & {
-		@media (--viewport-full) {
-			margin-right: 0;
-			padding-right: var(--grid-gutter-half);
-		}
-
-		@media (--viewport-xlarge) {
-			margin-right: var(--grid-1-col);
-		}
-	}
-
-	/* CASE: Width: Full Bleed, Layout: Media Right */
+	/* CASE: Width: Full, Media: Left */
 	.c-panel--width-full.c-panel--layout-media-left & {
 		@media (--viewport-full) {
-			display: flex;
 			justify-content: flex-end;
-			margin-left: 0;
 			padding-left: var(--grid-gutter-half);
 		}
+	}
 
-		@media (--viewport-xlarge) {
-			margin-left: var(--grid-1-col);
+	/* CASE: Width: Full, Media: Right */
+	.c-panel--width-full.c-panel--layout-media-right & {
+		@media (--viewport-full) {
+			padding-right: var(--grid-gutter-half);
 		}
 	}
 }
@@ -139,13 +140,18 @@
 .media-text__content-container {
 	margin-top: var(--spacer-40);
 
-	@media (--viewport-medium) {
-		width: 100%;
+	/* CASE: Width: Boxed, Media: Left/Right */
+	.c-panel--width-boxed:not(.c-panel--layout-media-center) & {
+		@media (--viewport-medium) {
+			margin-top: 0;
+		}
 	}
 
-	/* CASE: Layout: Media Center */
-	.c-panel:not(.c-panel--layout-media-center) & {
-		@media (--viewport-medium) {
+	/* CASE: Width: Full, Media: Left/Right */
+	.c-panel--width-full:not(.c-panel--layout-media-center) & {
+		@media (--viewport-full) {
+			width: 100%;
+			max-width: var(--grid-5-col);
 			margin-top: 0;
 		}
 	}
@@ -158,7 +164,7 @@
 .media-text__title {
 	margin-bottom: var(--spacer-10);
 
-	/* CASE: Layout: Media Center */
+	/* CASE: Media: Center */
 	.c-panel--layout-media-center & {
 		margin-bottom: 0;
 
@@ -178,7 +184,7 @@
  * ----------------------------------------------------------------------------- */
 
 .media-text__text {
-	/* CASE: Layout: Media Center */
+	/* CASE: Media: Center */
 	.c-panel--layout-media-center & {
 		@media (--viewport-medium) {
 			float: right;
@@ -198,7 +204,7 @@
 .media-text__cta {
 	margin-top: var(--spacer-40);
 
-	/* CASE: Layout: Media Center */
+	/* CASE: Media: Center */
 	.c-panel--layout-media-center & {
 		@media (--viewport-medium) {
 			float: right;
