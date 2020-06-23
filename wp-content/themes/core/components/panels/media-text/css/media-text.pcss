@@ -77,7 +77,7 @@
 	 * Media + Text: Media: Image
 	 * ----------------------------------------------------------------------------- */
 
-	.c-image {
+	.c-image__image {
 		width: 100%;
 	}
 }
@@ -140,21 +140,13 @@
 	margin-top: var(--spacer-40);
 
 	@media (--viewport-medium) {
-		margin-top: 0;
 		width: 100%;
 	}
 
 	/* CASE: Layout: Media Center */
-	.c-panel--layout-media-center & {
+	.c-panel:not(.c-panel--layout-media-center) & {
 		@media (--viewport-medium) {
-			display: grid;
-			grid-template-columns: 1fr var(--grid-gutter) 1fr;
-			grid-template-rows: auto;
-			margin-top: var(--spacer-40);
-		}
-
-		@media (--viewport-full) {
-			grid-template-columns: 1fr var(--grid-gutter) 66.667%;
+			margin-top: 0;
 		}
 	}
 }
