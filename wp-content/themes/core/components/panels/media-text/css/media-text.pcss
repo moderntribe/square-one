@@ -189,9 +189,15 @@
 
 	/* CASE: Layout: Media Center */
 	.c-panel--layout-media-center & {
+		margin-bottom: 0;
+
 		@media (--viewport-medium) {
-			grid-column: 1;
-			grid-row: 1;
+			float: left;
+			width: calc(50% - var(--grid-gutter-medium-half));
+		}
+
+		@media (--viewport-full) {
+			width: calc(33.3333% - var(--grid-gutter-half));
 		}
 	}
 }
@@ -204,8 +210,12 @@
 	/* CASE: Layout: Media Center */
 	.c-panel--layout-media-center & {
 		@media (--viewport-medium) {
-			grid-column: 3;
-			grid-row: 1;
+			float: right;
+			width: calc(50% - var(--grid-gutter-medium-half));
+		}
+
+		@media (--viewport-full) {
+			width: calc(66.6667% - var(--grid-gutter-half));
 		}
 	}
 }
@@ -220,8 +230,13 @@
 	/* CASE: Layout: Media Center */
 	.c-panel--layout-media-center & {
 		@media (--viewport-medium) {
-			grid-column: 3;
-			grid-row: 2;
+			float: right;
+			clear: right;
+			width: calc(50% - var(--grid-gutter-medium-half));
+		}
+
+		@media (--viewport-full) {
+			width: calc(66.6667% - var(--grid-gutter-half));
 		}
 	}
 }
