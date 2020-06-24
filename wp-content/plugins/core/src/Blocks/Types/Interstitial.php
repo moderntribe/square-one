@@ -16,15 +16,18 @@ class Interstitial extends Block_Type_Config {
 	public const DESCRIPTION   = 'description';
 	public const CTA           = 'cta';
 	public const LAYOUT        = 'layout';
-	public const LAYOUT_LEFT   = 'left';
-	public const LAYOUT_CENTER = 'center';
+	public const LAYOUT_LEFT   = 'layout-text-left';
+	public const LAYOUT_CENTER = 'layout-text-center';
 
 	public function build(): Block_Type_Interface {
 		return $this->factory->block( self::NAME )
 			->set_label( __( 'Interstitial', 'tribe' ) )
+			->add_class( 'c-panel c-panel--interstitial c-panel--full-bleed' )
+			->add_data_source( 'className-c-panel', self::LAYOUT )
 			->set_dashicon( 'menu-alt' )
-			->add_data_source( 'background-image', self::IMAGE )
+			->add_data_source( 'background-image', self::IMAGE ) /* TEMP until we get support for this on the HTML field. */
 			->add_sidebar_section( $this->background() )
+			->add_content_section( $this->background_area() )
 			->add_content_section( $this->content_area() )
 			->add_toolbar_section( $this->layout_toolbar() )
 			->build();
@@ -40,16 +43,33 @@ class Interstitial extends Block_Type_Config {
 			->build();
 	}
 
+	private function background_area(): Content_Section {
+		return $this->factory->content()->section()
+			->add_class( 'interstitial__figure' )
+			->add_field(
+				$this->factory->content()->field()->html( 'bkgrd' )
+					->add_class( 'interstitial__img c-image__bg' )
+					->set_content( '<div></div>' )
+					->add_data_source( 'background-image', self::IMAGE )
+					->build()
+			)
+			->build();
+	}
+
 	private function content_area(): Content_Section {
 		return $this->factory->content()->section()
+			->add_class( 'interstitial__content interstitial__content-container' )
 			->add_field(
 				$this->factory->content()->field()->text( self::DESCRIPTION )
 					->set_label( __( 'Description', 'tribe' ) )
+					->set_placeholder( 'Headline' )
+					->add_class( 'interstitial__title h3 t-theme--light' )
 					->build()
 			)
 			->add_field(
 				$this->factory->content()->field()->link( self::CTA )
 					->set_label( __( 'Call to Action', 'tribe' ) )
+					->add_class( 'a-btn a-btn--has-icon-after icon-arrow-right' )
 					->build()
 			)
 			->build();

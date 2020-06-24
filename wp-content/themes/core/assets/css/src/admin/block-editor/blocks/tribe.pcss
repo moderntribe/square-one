@@ -8,6 +8,66 @@
 
 .wp-block[data-type^="tribe/"] {
 	max-width: none;
-	margin-top: 0;
-	margin-bottom: 0;
+}
+
+/* -----------------------------------------------------------------------------
+ *
+ * Full-Bleed panel spacing
+ *
+ * ----------------------------------------------------------------------------- */
+
+.wp-block[data-type="tribe/hero"],
+.wp-block[data-type="tribe/interstitial"] {
+	/* CASE: If full bleed panel followed by a core block,
+	 * The core block gets top spacing. */
+	& + [data-type^="core"] {
+		margin-top: var(--spacer-60);
+
+		@media (--viewport-medium) {
+			margin-top: var(--spacer-70);
+		}
+	}
+
+	/* CASE: If core block followed by a full bleed panel,
+	 * The panel gets top spacing. */
+	[data-type^="core"] + & {
+		margin-top: var(--spacer-60);
+
+		@media (--viewport-medium) {
+			margin-top: var(--spacer-70);
+		}
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Panel: Interstitial
+ *
+ * TEMP: Until we get add_data_source() support for the html field.
+ * TEMP: Until we get a way to add a wrapper element around a field or section.
+ * ----------------------------------------------------------------------------- */
+.c-panel--interstitial {
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+
+	/* Overlay */
+	&:before {
+		content: '';
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		background-color: var(--color-black);
+		opacity: 0.5;
+	}
+
+	.interstitial__content {
+		width: 100%;
+		max-width: var(--grid-width-staggered-double);
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.a-btn {
+		margin-top: var(--spacer-30);
+	}
 }
