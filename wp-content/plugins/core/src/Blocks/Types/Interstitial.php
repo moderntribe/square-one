@@ -27,7 +27,7 @@ class Interstitial extends Block_Type_Config {
 			->set_dashicon( 'menu-alt' )
 			->add_data_source( 'background-image', self::IMAGE ) /* TEMP until we get support for this on the HTML field. */
 			->add_sidebar_section( $this->background() )
-			->add_content_section( $this->background_area() )
+			// ->add_content_section( $this->background_area() )
 			->add_content_section( $this->content_area() )
 			->add_toolbar_section( $this->layout_toolbar() )
 			->build();
@@ -43,6 +43,7 @@ class Interstitial extends Block_Type_Config {
 			->build();
 	}
 
+	/* TODO: Enable this once the html field type get `set_data_source()` support
 	private function background_area(): Content_Section {
 		return $this->factory->content()->section()
 			->add_class( 'interstitial__figure' )
@@ -54,7 +55,7 @@ class Interstitial extends Block_Type_Config {
 					->build()
 			)
 			->build();
-	}
+	}*/
 
 	private function content_area(): Content_Section {
 		return $this->factory->content()->section()
