@@ -8,16 +8,6 @@ const browserSync = require( 'browser-sync' );
 const postcssFunctions = require( '../assets/library/theme/pcss/functions' );
 const pkg = require( '../package.json' );
 
-const selectorsBefore = [
-	'.t-sink',
-	'.s-sink',
-];
-
-const selectorsAfter = [
-	'[data-type^="core/"]',
-	'[data-type^="core/"]',
-];
-
 const sharedPlugins = [
 	require( 'postcss-import-ext-glob' )( {
 		sort: 'asc',
@@ -45,7 +35,6 @@ const compilePlugins = sharedPlugins.concat( [
 ] );
 
 const compileGutenbergPlugins = sharedPlugins.concat( [
-	require( '@moderntribe/postcss-multi-selector-replace' )( { before: selectorsBefore, after: selectorsAfter } ),
 	require( 'postcss-assets' )( { baseUrl: pkg.square1.paths.core_theme_postcss_assets_base_url } ),
 ] );
 

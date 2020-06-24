@@ -1,0 +1,81 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Alignments as applied to the Block Editor
+ *
+ * ----------------------------------------------------------------------------- */
+
+/* -----------------------------------------------------------------------------
+ * Media Alignments
+ *
+ * Handle media alignments in the block editor.
+ * Overrides some complex default alignments.
+ * ----------------------------------------------------------------------------- */
+
+.block-editor-block-list__layout .block-editor-block-list__block {
+
+	.wp-block-audio,
+	.wp-block-video,
+	.wp-block-embed,
+	.wp-block-image {
+		margin-top: var(--spacer-60);
+		margin-bottom: var(--spacer-60);
+	}
+
+	/* CASE: Alignment: Full */
+	&[data-align="full"] {
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	/* CASE: Alignment: Left & Right */
+	&[data-align="left"] > .is-block-content,
+	&[data-align="right"] > .is-block-content {
+		margin: 0;
+
+		.wp-block-image {
+			margin-top: var(--spacer-40);
+			margin-bottom: var(--spacer-40);
+
+			@media (--viewport-medium) {
+				margin-top: 5px;
+			}
+
+			/* CASE: Image has not been resized by the editor. */
+			&:not(.is-resized) {
+				@media (--viewport-medium) {
+					max-width: var(--grid-5-col);
+				}
+			}
+		}
+	}
+
+	/* CASE: Alignment: Left */
+	&[data-align="left"] > .is-block-content {
+
+		.wp-block-image {
+			@media (--viewport-medium) {
+				float: left;
+				margin-right: var(--grid-gutter);
+			}
+
+			@media (--viewport-full) {
+				margin-left: calc(-1 * (var(--grid-1-col) + var(--grid-gutter)));
+			}
+		}
+	}
+
+	/* CASE: Alignment: Right */
+	&[data-align="right"] > .is-block-content {
+
+		.wp-block-image {
+			@media (--viewport-medium) {
+				float: right;
+				margin-left: var(--grid-gutter);
+			}
+
+			@media (--viewport-full) {
+				margin-right: calc(-1 * (var(--grid-1-col) + var(--grid-gutter)));
+			}
+		}
+	}
+}

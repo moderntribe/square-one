@@ -9,11 +9,11 @@ use Tribe\Project\Blocks\Block_Type_Config;
 use Tribe\Project\Blocks\Types\Media_Text;
 
 class Media_Text_Media extends Block_Type_Config {
-	public const NAME = 'tribe/media-text--media';
+	public const NAME = Media_Text::NAME . '--media';
 
 	public function build(): Block_Type_Interface {
 		return $this->factory->block( self::NAME )
-			->set_label( 'Media' )
+			->set_label( __( 'Media', 'tribe' ) )
 			->set_dashicon( 'menu-alt' )
 			->set_parents( Media_Text::NAME )
 			->add_content_section( $this->child_container() )

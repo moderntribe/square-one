@@ -17,7 +17,7 @@ class Icon_Grid extends Block_Type_Config {
 
 	public function build(): Block_Type_Interface {
 		return $this->factory->block( self::NAME )
-			->set_label( 'Icon Grid' )
+			->set_label( __( 'Icon Grid', 'tribe' ) )
 			->set_dashicon( 'menu-alt' )
 			->add_content_section( $this->content_area() )
 			->build();

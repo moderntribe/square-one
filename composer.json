@@ -8,7 +8,7 @@
   ],
   "config": {
     "platform": {
-      "php": "7.2.29"
+      "php": "7.4.7"
     },
     "vendor-dir": "vendor",
     "sort-packages": true,
@@ -25,16 +25,6 @@
     {
       "type": "composer",
       "url": "https://wpackagist.org"
-    },
-    {
-      "type":"vcs",
-      "no-api": true,
-      "url":"git@github.com:moderntribe/attachment-helper.git"
-    },
-    {
-      "type":"vcs",
-      "no-api": true,
-      "url":"git@github.com:moderntribe/ajax-queue.git"
     },
     {
       "type":"vcs",

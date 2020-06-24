@@ -7,7 +7,7 @@ use Tribe\Libs\ACF\ACF_Settings;
 class General extends ACF_Settings {
 
 	public function get_title() {
-		return 'General Settings';
+		return __( 'General Settings', 'tribe' );
 	}
 
 	public function get_capability() {

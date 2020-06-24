@@ -123,7 +123,6 @@
     "@babel/plugin-transform-regenerator": "^7.7.0",
     "@babel/preset-env": "^7.7.1",
     "@babel/preset-react": "^7.7.0",
-    "@moderntribe/postcss-multi-selector-replace": "^1.0.0",
     "babel-eslint": "^10.0.3",
     "babel-jest": "^24.9.0",
     "babel-loader": "^8.0.6",

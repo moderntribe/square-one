@@ -6,6 +6,7 @@
   "repository": "https://github.com/moderntribe/square-one.git",
   "scripts": {
     "install:theme": "cd wp-content/themes/core && yarn install",
+    "clean:theme": "cd wp-content/themes/core && rm -rf node_modules",
     "start": "npm run docker:start && cd wp-content/themes/core && yarn install && npm run gulp -- dist && npm run gulp -- dev",
     "gulp": "gulp",
     "dev": "cd wp-content/themes/core && npm run gulp -- dev",

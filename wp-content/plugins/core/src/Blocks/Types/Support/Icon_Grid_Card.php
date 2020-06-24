@@ -9,7 +9,7 @@ use Tribe\Project\Blocks\Block_Type_Config;
 use Tribe\Project\Blocks\Types\Icon_Grid;
 
 class Icon_Grid_Card extends Block_Type_Config {
-	public const NAME = 'tribe/icon-grid--card';
+	public const NAME = Icon_Grid::NAME . '--card';
 
 	public const ICON    = 'icon';
 	public const TITLE   = 'title';
@@ -18,7 +18,7 @@ class Icon_Grid_Card extends Block_Type_Config {
 
 	public function build(): Block_Type_Interface {
 		return $this->factory->block( self::NAME )
-			->set_label( 'Card' )
+			->set_label( __( 'Card', 'tribe' ) )
 			->set_dashicon( 'menu-alt' )
 			->set_parents( Icon_Grid::NAME )
 			->add_content_section( $this->content_area() )

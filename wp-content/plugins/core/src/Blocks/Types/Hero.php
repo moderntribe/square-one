@@ -39,7 +39,7 @@ class Hero extends Block_Type_Config {
 	}
 
 	private function background_sidebar(): Sidebar_Section {
-		return $this->factory->sidebar()->section()->set_label( 'Background Settings' )
+		return $this->factory->sidebar()->section()->set_label( __( 'Background Settings', 'tribe' ) )
 			->add_field(
 				$this->factory->sidebar()->field()->image( self::BACKGROUND_IMAGE )
 					->set_label( __( 'Background Image', 'tribe' ) )

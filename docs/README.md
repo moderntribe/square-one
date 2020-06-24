@@ -78,8 +78,10 @@ We use composer to manage all our external PHP dependencies so we can version lo
 ### Modern PHP Architecture
 We’ve built an OOP based architecture within the Core Plugin. This allows for single purpose principle, as well as other SOLID principles. Combined with PSR-4 we create a very approachable, extendable, and maintainable standards-focused code base.
 
-### Dependency Injection / Service Providers
-We use a dependency Injection package called Pimple, which allows us to gracefully inject Objects into other classes through containers.  This makes a clean separation so we can modify, extend, mock, or replace a Class without tight coupling. This isn’t novel, but something that all Modern PHP developers have come to expect.
+### Dependency Injection
+We use a dependency injection package called PHP-DI, which allows us to gracefully inject Objects into other classes
+through using an autowiring container.  This makes a clean separation so we can modify, extend, mock, or replace a Class
+without tight coupling. This isn’t novel, but something that all modern PHP developers have come to expect.
 
 ### Testability
 We bundle the Codeception testing framework, which is built on PHPUnit, in SquareOne. We also bundle WP-Browser–built by one of our own team members–that adds helper tools for testing WordPress.  Paired with our use of Dependency Injection, this modern testing stack allows us to write unit, integration, functional, and acceptance tests for the codebase.
@@ -95,9 +97,6 @@ SquareOne has been built for efficiency and reliability. There are many common f
 * WP-CLI - Run WordPress on the Command Line. We have integrations for running long running processes outside of WordPress, like migrations and data syncing procedures.
 * Queueing - We’ve built a queuing system into WordPress for events management. This is great for deferring background processes that are expensive and not required to be JIT.
 * Syndication - As an optional enhancement,  we’ve created a method of sharing content without content duplication we call syndication. This allows cross site queries and data sharing seamlessly across a large multi-site network.
-
-### Panels
-An optional Page Builder content management extension for WordPress. It’s lightyears ahead of the Core editing experience and provides Drag-and-Drop, dynamic querying, and more. In technology it’s agnostic of the CMS, but built to integrate seamlessly.
 
 ### The WordPress way
 

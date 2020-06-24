@@ -23,7 +23,7 @@ class Accordion extends Block_Type_Config {
 
 	public function build(): Block_Type_Interface {
 		return $this->factory->block( self::NAME )
-			->set_label( 'Accordion' )
+			->set_label( __( 'Accordion', 'tribe' ) )
 			->set_dashicon( 'menu-alt' )
 			->add_layout_property( 'grid-template-areas', "'content' 'accordion'" )
 			->add_sidebar_section( $this->layout_sidebar() )
@@ -67,7 +67,7 @@ class Accordion extends Block_Type_Config {
 			->set_layout_property( 'grid-area', 'accordion' )
 			->add_field(
 				$this->factory->content()->field()->flexible_container( self::ACCORDION )
-					->set_label( 'Accordion' )
+					->set_label( __( 'Accordion', 'tribe' ) )
 					->merge_nested_attributes( Accordion_Section::NAME )
 					->add_template_block( Accordion_Section::NAME )
 					->add_block_type( Accordion_Section::NAME )
