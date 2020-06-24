@@ -8,8 +8,12 @@
 	position: relative;
 	display: flex;
 	align-items: center;
-	padding: var(--spacer-90) 0;
+	padding: var(--spacer-80) 0;
 	background-color: var(--color-grey-dark);
+
+	@media (--viewport-full) {
+		padding: var(--spacer-90) 0;
+	}
 }
 
 /* -----------------------------------------------------------------------------
@@ -56,5 +60,5 @@
  * ----------------------------------------------------------------------------- */
 
 .interstitial__cta {
-	margin-top: var(--spacer-40);
+	margin-top: var(--spacer-30);
 }

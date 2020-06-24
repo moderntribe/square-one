@@ -32,6 +32,7 @@ class Interstitial extends Block_Type_Config {
 
 	private function background(): Sidebar_Section {
 		return $this->factory->sidebar()->section()
+			->set_label( __( 'Background Settings', 'tribe' ) )
 			->add_field(
 				$this->factory->content()->field()->image( self::IMAGE )
 					->set_label( __( 'Background Image', 'tribe' ) )

@@ -6,7 +6,7 @@ namespace Tribe\Project\Templates\Components\Panels;
 use Tribe\Project\Templates\Components\Context;
 
 /**
- * Class Media_Text
+ * Class Interstitial
  *
  * @property string   $layout
  * @property string   $media
