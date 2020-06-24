@@ -73,6 +73,30 @@
 			margin-top: var(--spacer-20);
 		}
 	}
+
+	/* -----------------------------------------------------------------------------
+	 * Panels
+	 * ----------------------------------------------------------------------------- */
+
+	/* CASE: If a full-bleed panel is followed by a non-panel element,
+	the following element should have some additional vertical spacing. */
+	.c-panel--full-bleed + *:not(.c-panel) {
+		margin-top: var(--spacer-60);
+
+		@media (--viewport-medium) {
+			margin-top: var(--spacer-70);
+		}
+	}
+
+	/* CASE: If a non-panel element is followed by a full-bleed panel,
+	the panel should have some additional vertical spacing. */
+	*:not(.c-panel) + .c-panel--full-bleed {
+		margin-top: var(--spacer-60);
+
+		@media (--viewport-medium) {
+			margin-top: var(--spacer-70);
+		}
+	}
 }
 
 /* -----------------------------------------------------------------------------
