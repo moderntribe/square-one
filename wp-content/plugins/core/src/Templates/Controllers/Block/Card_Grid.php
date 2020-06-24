@@ -105,7 +105,7 @@ class Card_Grid extends Block_Controller {
 	private function get_query_cards(): array {
 		// TODO: build a real query when we have a working posts query field
 		$query = new \WP_Query( [ 'post_type' => 'post', 'posts_per_page' => 4 ] );
-		return array_map( function( \WP_Post $post ) {
+		return array_map( function ( \WP_Post $post ) {
 			return $this->factory->get( Card::class, [
 				Card::TITLE  => get_the_title( $post ),
 				Card::TEXT   => get_the_excerpt( $post ),
