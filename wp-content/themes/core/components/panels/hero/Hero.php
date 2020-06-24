@@ -5,7 +5,6 @@ namespace Tribe\Project\Templates\Components\Panels;
 
 use Tribe\Project\Templates\Components\Context;
 
-
 /**
  * Class Hero
  *
