@@ -52,15 +52,28 @@ class Media_Text extends Block_Controller {
 	}
 
 	private function get_image( $attachment_id ): string {
+
+		$src_size     = Image_Sizes::FOUR_THREE;
+		$srcset_sizes = [
+			Image_Sizes::FOUR_THREE_SMALL,
+			Image_Sizes::FOUR_THREE,
+			Image_Sizes::FOUR_THREE_LARGE,
+		];
+
+		if ( $this->get_layout() === Media_Text_Block::MEDIA_CENTER ) {
+			$src_size     = Image_Sizes::SIXTEEN_NINE;
+			$srcset_sizes = [
+				Image_Sizes::SIXTEEN_NINE_SMALL,
+				Image_Sizes::SIXTEEN_NINE,
+				Image_Sizes::SIXTEEN_NINE_LARGE,
+			];
+		}
+
 		try {
 			return $this->factory->get( Image_Component::class, [
 				Image_Component::ATTACHMENT   => Image::factory( $attachment_id ),
-				Image_Component::SRC_SIZE     => Image_Sizes::FOUR_THREE,
-				Image_Component::SRCSET_SIZES => [
-					Image_Sizes::FOUR_THREE_SMALL,
-					Image_Sizes::FOUR_THREE,
-					Image_Sizes::FOUR_THREE_LARGE,
-				],
+				Image_Component::SRC_SIZE     => $src_size,
+				Image_Component::SRCSET_SIZES => $srcset_sizes,
 			] )->render();
 		} catch ( \InvalidArgumentException $e ) {
 			return '';
