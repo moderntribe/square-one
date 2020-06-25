@@ -23,4 +23,20 @@ class Menu extends Model {
 		return Menu_Helper::menu( $args );
 	}
 
+	public function secondary() {
+		$args = [
+			'theme_location'  => 'secondary',
+			'container'       => false,
+			'container_class' => '',
+			'menu_class'      => '',
+			'menu_id'         => '',
+			'depth'           => 1,
+			'items_wrap'      => '%3$s',
+			'fallback_cb'     => false,
+			'item_spacing'    => 'discard',
+		];
+
+		return Menu_Helper::menu( $args );
+	}
+
 }

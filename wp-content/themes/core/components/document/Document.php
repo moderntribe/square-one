@@ -39,9 +39,9 @@ class Document extends Component {
 
 					{{ component( 'main/Main.php', main ) }}
 
-					{{ sidebar }}
+					{{ component( 'sidebar/Sidebar.php', sidebar ) }}
 
-					{{ footer }}
+					{{ component( 'footer/site-footer/Site_Footer.php', footer ) }}
 
 				</div><!-- .l-wrapper -->
 

@@ -34,7 +34,6 @@ class Index extends Component {
 	}
 
 	protected function get_breadcrumbs() {
-		return '';
 		$news_url = get_permalink( get_option( 'page_for_posts' ) );
 
 		$items = [
@@ -49,9 +48,7 @@ class Index extends Component {
 			Breadcrumbs::WRAPPER_CLASSES => [],
 		];
 
-		$crumbs = $this->factory->get( Breadcrumbs::class, $options );
-
-		return $crumbs->render();
+		return $options;
 	}
 
 	public function get_pagination(): array {
@@ -106,7 +103,11 @@ class Index extends Component {
 
 	public function render(): void {
 		?>
-		{{ subheader }}
+		{{ component( 'header/subheader/Subheader.php', subheader ) }}
+
+		{% if breadcrumbs %}
+			{{ component( 'breadcrumbs/Breadcrumbs.php', breadcrumbs ) }}
+		{% endif %}
 
 		<div class="l-container">
 

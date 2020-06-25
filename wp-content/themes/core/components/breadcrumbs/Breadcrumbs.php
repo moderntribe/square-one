@@ -13,7 +13,7 @@ namespace Tribe\Project\Templates\Components;
  * @property string[] $link_classes
  * @property string[] $link_attrs
  */
-class Breadcrumbs extends Context {
+class Breadcrumbs extends Component {
 	public const ITEMS           = 'items';
 	public const WRAPPER_CLASSES = 'wrapper_classes';
 	public const WRAPPER_ATTRS   = 'wrapper_attrs';
@@ -22,35 +22,31 @@ class Breadcrumbs extends Context {
 	public const LINK_CLASSES    = 'link_classes';
 	public const LINK_ATTRS      = 'link_attrs';
 
-	protected $path = __DIR__ . '/breadcrumbs.twig';
+	public function init() {
+		$this->data['wrapper_classes'] = $this->merge_classes( $this->data['wrapper_classes'] ?? [] );
+		$this->data['wrapper_attrs']   = $this->merge_attrs( $this->data['wrapper_attrs'] ?? [] );
 
-	protected $properties = [
-		self::ITEMS           => [
-			self::DEFAULT => [],
-		],
-		self::WRAPPER_CLASSES => [
-			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [ 'l-container', 'c-breadcrumbs__wrapper' ],
-		],
-		self::WRAPPER_ATTRS   => [
-			self::DEFAULT          => [ 'c-container' ],
-			self::MERGE_ATTRIBUTES => [],
-		],
-		self::MAIN_CLASSES    => [
-			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [ 'c-breadcrumbs' ],
-		],
-		self::ITEM_CLASSES    => [
-			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [ 'c-breadcrumbs__item' ],
-		],
-		self::LINK_CLASSES    => [
-			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [ 'anchor', 'c-breadcrumbs__anchor' ],
-		],
-		self::LINK_ATTRS      => [
-			self::DEFAULT          => [],
-			self::MERGE_ATTRIBUTES => [],
-		],
-	];
+		$this->data['main_classes'] = $this->merge_classes( $this->data['main_classes'] ?? [] );
+		$this->data['item_classes'] = $this->merge_classes( $this->data['item_classes'] ?? [] );
+
+		$this->data['link_classes'] = $this->merge_classes( $this->data['link_classes'] ?? [] );
+		$this->data['link_attrs']   = $this->merge_attrs( $this->data['link_attrs'] ?? [] );
+	}
+
+	public function render(): void {
+		?>
+		<div {{ wrapper_classes }} {{ wrapper_attrs }}>
+			<ul {{ main_classes }}>
+
+				{% for item in items %}
+				<li {{ item_classes }}>
+					<a href="{{ item.url }}" {{ link_classes }} {{ link_attrs }}>
+						{{ item.label }}
+					</a>
+				</li>
+				{% endfor %}
+			</ul>
+		</div>
+		<?php
+	}
 }
