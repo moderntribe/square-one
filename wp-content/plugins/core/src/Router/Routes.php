@@ -8,12 +8,14 @@ class Routes {
 		$show = get_option( 'show_on_front' );
 
 		if ( $show === 'posts' ) {
-			$router->get( '/[{page:.+}]', 'IndexController@loop' );
+			$router->get( '/', 'IndexController@loop' );
+			$router->get( '/page/[{page}]', 'IndexController@loop' );
 		} else {
-			$router->get( '/[{page:.+}]', 'HomeController@home' );
+			$router->get( '/', 'MainController@home' );
+			$router->get( '/page/[{page}]', 'MainController@home' );
 		}
 
-
+		$router->get( '/{pagename}/', 'MainController@single' );
 		// etc for other routes
 	}
 

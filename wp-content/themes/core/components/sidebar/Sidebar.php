@@ -12,7 +12,7 @@ class Sidebar extends Component {
 
 	public function init() {
 		if ( ! isset( $this->data['sidebar_id'] ) ) {
-			throw new \UnexpectedValueException( 'Sidebar ID must be pased to Sidebar Component' );
+			return;
 		}
 
 		$this->data['active']  = is_active_sidebar( $this->data['sidebar_id'] );
