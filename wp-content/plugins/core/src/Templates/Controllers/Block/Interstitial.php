@@ -37,8 +37,9 @@ class Interstitial extends Block_Controller {
 	private function get_image( $attachment_id ): string {
 		try {
 			return $this->factory->get( Image_Component::class, [
-				Image_Component::ATTACHMENT      => Image::factory( $attachment_id ),
+				Image_Component::ATTACHMENT      => Image::factory( (int) $attachment_id ),
 				Image_Component::AS_BG           => true,
+				Image_Component::USE_LAZYLOAD    => false, // TEMP until we get lazyload in the block editor preview.
 				Image_Component::WRAPPER_TAG     => 'div',
 				Image_Component::WRAPPER_CLASSES => [ 'interstitial__figure' ],
 				Image_Component::IMG_CLASSES     => [ 'interstitial__img', 'c-image__bg' ],
