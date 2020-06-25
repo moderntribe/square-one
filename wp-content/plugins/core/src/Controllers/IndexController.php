@@ -23,7 +23,6 @@ class IndexController extends Controller {
 
 	protected function get_main_content() {
 		return [
-			Main::HEADER        => '',
 			Main::TEMPLATE_TYPE => 'page/index/Index.php',
 			Main::CONTENT       => $this->get_index_content(),
 		];
