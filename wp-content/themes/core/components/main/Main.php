@@ -3,18 +3,20 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Templates\Components;
 
-class Main extends Context {
-	public const HEADER  = 'header';
-	public const CONTENT = 'content';
+class Main extends Component {
+	public const HEADER        = 'header';
+	public const CONTENT       = 'content';
+	public const TEMPLATE_TYPE = 'template_type';
 
-	protected $path = __DIR__ . '/main.twig';
+	public function render(): void {
+		?>
+		<main id="main-content">
 
-	protected $properties = [
-		self::HEADER  => [
-			self::DEFAULT => '',
-		],
-		self::CONTENT => [
-			self::DEFAULT => '',
-		],
-	];
+			{{ header }}
+
+			{{ component( template_type, content ) }}
+
+		</main>
+		<?php
+	}
 }

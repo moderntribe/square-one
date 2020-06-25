@@ -3,40 +3,53 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Templates\Components\Document;
 
-use Tribe\Project\Templates\Components\Context;
+use Tribe\Project\Templates\Components\Component;
 
-class Document extends Context {
-	public const LANG       = 'language_attributes';
-	public const HEAD       = 'head';
-	public const BODY_CLASS = 'body_class';
-	public const MASTHEAD   = 'masthead';
-	public const MAIN       = 'main';
-	public const SIDEBAR    = 'sidebar';
-	public const FOOTER     = 'footer';
+class Document extends Component {
 
-	protected $path = __DIR__ . '/document.twig';
+	public function init() {
+		$this->data['language_attributes'] = $this->get_language_attributes();
+		$this->data['body_class']          = $this->get_body_class();
+	}
 
-	protected $properties = [
-		self::HEAD       => [
-			self::DEFAULT => '',
-		],
-		self::LANG       => [
-			self::DEFAULT => '',
-		],
-		self::BODY_CLASS => [
-			self::DEFAULT => '',
-		],
-		self::MASTHEAD   => [
-			self::DEFAULT => '',
-		],
-		self::MAIN       => [
-			self::DEFAULT => '',
-		],
-		self::SIDEBAR    => [
-			self::DEFAULT => '',
-		],
-		self::FOOTER     => [
-			self::DEFAULT => '',
-		],
-	];
+	protected function get_language_attributes() {
+		ob_start();
+		language_attributes();
+
+		return ob_get_clean();
+	}
+
+	protected function get_body_class() {
+		return implode( ' ', get_body_class() );
+	}
+
+	public function render(): void {
+		?>
+		<html {{ language_attributes }}>
+
+			{{ component( 'head/Head.php' ) }}
+
+			<body class="{{ body_class }}">
+
+				{{ do_action( 'tribe/body_opening_tag') }}
+
+				<div class="l-wrapper" data-js="site-wrap">
+
+					{{ component( 'header/masthead/Masthead.php', masthead ) }}
+
+					{{ component( 'main/Main.php', main ) }}
+
+					{{ sidebar }}
+
+					{{ footer }}
+
+				</div><!-- .l-wrapper -->
+
+				{{ do_action( 'wp_footer' ) }}
+
+			</body>
+
+		</html>
+		<?php
+	}
 }

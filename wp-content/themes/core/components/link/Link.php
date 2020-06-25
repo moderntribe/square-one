@@ -12,7 +12,7 @@ namespace Tribe\Project\Templates\Components;
  * @property string[] $attrs
  * @property string   $content
  */
-class Link extends Context {
+class Link extends Component {
 	public const URL        = 'url';
 	public const TARGET     = 'target';
 	public const ARIA_LABEL = 'aria_label';
@@ -20,50 +20,31 @@ class Link extends Context {
 	public const ATTRS      = 'attrs';
 	public const CONTENT    = 'content';
 
-	protected $path = __DIR__ . '/link.twig';
 
-	protected $properties = [
-		self::URL        => [
-			self::DEFAULT => '',
-		],
-		self::TARGET     => [
-			self::DEFAULT => '',
-		],
-		self::ARIA_LABEL => [
-			self::DEFAULT => '',
-		],
-		self::CLASSES    => [
-			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [],
-		],
-		self::ATTRS      => [
-			self::DEFAULT          => [],
-			self::MERGE_ATTRIBUTES => [],
-		],
-		self::CONTENT    => [
-			self::DEFAULT => '',
-		],
-	];
-
-	public function get_data(): array {
-		if ( $this->url ) {
-			$this->properties[ self::ATTRS ][ self::VALUE ]['href'] = $this->url;
+	public function init() {
+		if ( ! isset( $this->data[ self::ATTRS ] ) ) {
+			$this->data[ self::ATTRS ] = [];
 		}
 
-		if ( $this->aria_label ) {
-			$this->properties[ self::ATTRS ][ self::VALUE ]['aria-label'] = $this->aria_label;
+		if ( isset( $this->data['url'] ) ) {
+			$this->data[ self::ATTRS ]['href'] = $this->data['url'];
 		}
 
-		if ( $this->target ) {
-			$this->properties[ self::ATTRS ]['target'] = $this->target;
+		if ( isset( $this->data['aria_label'] ) ) {
+			$this->data[ self::ATTRS ]['aria-label'] = $this->data['aria_label'];
 		}
 
-		if ( $this->target === '_blank' ) {
-			$this->properties[ self::ATTRS ]['rel'] = 'noopener';
-			$this->properties[ self::CONTENT ][ self::VALUE ] .= $this->append_new_window_text();
+		if ( isset( $this->data['target'] ) ) {
+			$this->data[ self::ATTRS ]['target'] = $this->data['target'];
 		}
 
-		return parent::get_data();
+		if ( isset( $this->data['target'] ) && $this->data['target'] === '_blank' ) {
+			$this->data[ self::ATTRS ]['rel'] = 'noopener';
+			$this->data[ self::CONTENT ]      .= $this->append_new_window_text();
+		}
+
+		$this->data[ self::CLASSES ] = $this->merge_classes( $this->data[ self::CLASSES ] ?? [] );
+		$this->data[ self::ATTRS ]   = $this->merge_attrs( $this->data[ self::ATTRS ] ?? [] );
 	}
 
 	/**
@@ -73,10 +54,22 @@ class Link extends Context {
 	 * @throws \Exception
 	 */
 	protected function append_new_window_text(): string {
-		return $this->factory->get( Text::class, [
+		$args = [
 			Text::TAG     => 'span',
 			Text::CLASSES => [ 'u-visually-hidden' ],
 			Text::TEXT    => __( '(Opens new window)', 'tribe' ),
-		] )->render();
+		];
+
+		$component = new Text( $args );
+
+		return $component->get_render();
+	}
+
+	public function render(): void {
+		?>
+		<a {{ classes }} {{ attrs }}>
+			{{ content }}
+		</a>
+		<?php
 	}
 }

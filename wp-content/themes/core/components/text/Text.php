@@ -10,7 +10,7 @@ namespace Tribe\Project\Templates\Components;
  * @property string[] $classes
  * @property string[] $attrs
  */
-class Text extends Context {
+class Text extends Component {
 	public const TEXT    = 'content';
 	public const TAG     = 'tag';
 	public const CLASSES = 'classes';
