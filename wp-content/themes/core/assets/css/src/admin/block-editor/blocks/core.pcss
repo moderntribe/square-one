@@ -27,6 +27,12 @@
 		max-width: var(--grid-width-full-bleed);
 	}
 
+	/* CASE: core blocks within a panel should be reset. */
+	.c-panel & {
+		width: 100%;
+		max-width: none;
+	}
+
 	/* -----------------------------------------------------------------------------
 	 * Horizontal Rule/Separator
 	 *

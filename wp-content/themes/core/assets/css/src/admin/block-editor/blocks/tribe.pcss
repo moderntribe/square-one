@@ -71,3 +71,31 @@
 		margin-top: var(--spacer-30);
 	}
 }
+
+/* -----------------------------------------------------------------------------
+ * Panel: Accordion
+ *
+ * TEMP: Until we get a way to add a wrapper element around a field or section.
+ * TEMP: Until we get add_class for nested block fields.
+ * ----------------------------------------------------------------------------- */
+
+.wp-block[data-type="tribe/accordion"] {
+	/* CASE: Accordion: Inline */
+	.c-panel--layout-inline {
+		@media (--viewport-full) {
+			display: flex !important;
+			justify-content: space-between;
+		}
+	}
+
+	/* CASE: Accordion Stacked */
+	.c-panel--layout-stacked {
+		margin-left: auto;
+		margin-right: auto;
+		max-width: var(--grid-max-width-staggered-double);
+	}
+
+	[data-type="tribe/accordion-section"] .block-editor-inner-blocks {
+		padding-left: var(--grid-1-col);
+	}
+}
