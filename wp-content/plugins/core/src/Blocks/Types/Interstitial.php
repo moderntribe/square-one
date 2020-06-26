@@ -16,8 +16,8 @@ class Interstitial extends Block_Type_Config {
 	public const DESCRIPTION   = 'description';
 	public const CTA           = 'cta';
 	public const LAYOUT        = 'layout';
-	public const LAYOUT_LEFT   = 'layout-text-left';
-	public const LAYOUT_CENTER = 'layout-text-center';
+	public const LAYOUT_LEFT   = 'layout-left';
+	public const LAYOUT_CENTER = 'layout-center';
 
 	public function build(): Block_Type_Interface {
 		return $this->factory->block( self::NAME )
@@ -60,12 +60,12 @@ class Interstitial extends Block_Type_Config {
 
 	private function content_area(): Content_Section {
 		return $this->factory->content()->section()
-			->add_class( 'interstitial__content interstitial__content-container' )
+			->add_class( 'interstitial__content interstitial__content-container t-theme--light' )
 			->add_field(
 				$this->factory->content()->field()->text( self::DESCRIPTION )
 					->set_label( __( 'Description', 'tribe' ) )
 					->set_placeholder( 'Headline' )
-					->add_class( 'interstitial__title h3 t-theme--light' )
+					->add_class( 'interstitial__title h3' )
 					->build()
 			)
 			->add_field(
@@ -81,8 +81,9 @@ class Interstitial extends Block_Type_Config {
 		return $this->factory->toolbar()->section()
 			->add_field(
 				$this->factory->toolbar()->field()->icon_select( self::LAYOUT )
-					->add_dashicon_option( self::LAYOUT_LEFT, __( 'Align Left', 'tribe' ), 'editor-alignleft' )
-					->add_dashicon_option( self::LAYOUT_CENTER, __( 'Align Center', 'tribe' ), 'editor-aligncenter' )
+					->add_dashicon_option( self::LAYOUT_LEFT, __( 'Align Text Left', 'tribe' ), 'editor-alignleft' )
+					->add_dashicon_option( self::LAYOUT_CENTER, __( 'Align Text Center', 'tribe' ), 'editor-aligncenter' )
+					->set_default( self::LAYOUT_CENTER )
 					->build()
 			)
 			->build();

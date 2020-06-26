@@ -37,8 +37,9 @@ class Hero extends Block_Controller {
 	private function get_image( $attachment_id ): string {
 		try {
 			return $this->factory->get( Image_Component::class, [
-				Image_Component::ATTACHMENT      => Image::factory( $attachment_id ),
+				Image_Component::ATTACHMENT      => Image::factory( (int) $attachment_id ),
 				Image_Component::AS_BG           => true,
+				Image_Component::USE_LAZYLOAD    => false, // TEMP until we get lazyload in the block editor preview.
 				Image_Component::WRAPPER_TAG     => 'div',
 				Image_Component::WRAPPER_CLASSES => [ 'hero__figure' ],
 				Image_Component::IMG_CLASSES     => [ 'hero__img', 'c-image__bg' ],
@@ -55,7 +56,7 @@ class Hero extends Block_Controller {
 
 	private function get_content(): string {
 		return $this->factory->get( Content_Block::class, [
-			Content_Block::CLASSES => [ 'hero__content-container' ],
+			Content_Block::CLASSES => [ 'hero__content-container', 't-theme--light' ],
 			Content_Block::LEADIN  => $this->get_leadin(),
 			Content_Block::TITLE   => $this->get_headline(),
 			Content_Block::TEXT    => $this->get_text(),
@@ -70,7 +71,7 @@ class Hero extends Block_Controller {
 
 		return $this->factory->get( Text::class, [
 			Text::TAG     => 'p',
-			Text::CLASSES => [ 'hero__leadin', 'h6', 't-theme--light' ],
+			Text::CLASSES => [ 'hero__leadin', 'h6' ],
 			Text::TEXT    => $this->attributes[ Hero_Block::LEAD_IN ],
 		] )->render();
 	}
@@ -82,7 +83,7 @@ class Hero extends Block_Controller {
 
 		return $this->factory->get( Text::class, [
 			Text::TAG     => 'h2',
-			Text::CLASSES => [ 'hero__title', 'h1', 't-theme--light' ],
+			Text::CLASSES => [ 'hero__title', 'h1' ],
 			Text::TEXT    => $this->attributes[ Hero_Block::TITLE ],
 		] )->render();
 	}
@@ -93,7 +94,7 @@ class Hero extends Block_Controller {
 		}
 
 		return $this->factory->get( Text::class, [
-			Text::CLASSES => [ 'hero__description', 't-sink', 's-sink', 't-theme--light' ],
+			Text::CLASSES => [ 'hero__description', 't-sink', 's-sink' ],
 			Text::TEXT    => $this->attributes[ Hero_Block::DESCRIPTION ],
 		] )->render();
 	}
