@@ -21,23 +21,23 @@ namespace Tribe\Project\Templates\Components;
  * @property string[] $container_attrs
  * @property string[] $row_classes
  * @property string[] $row_header_classes
- * @property string[] $row_header_inner_classes
+ * @property string[] $row_header_container_classes
  * @property string[] $row_content_classes
- * @property string[] $row_content_inner_classes
+ * @property string[] $row_content_container_classes
  * @property string   $row_header_name
  * @property string   $row_content_name
  */
 class Accordion extends Context {
-	public const ROWS                      = 'rows';
-	public const CONTAINER_CLASSES         = 'container_classes';
-	public const CONTAINER_ATTRS           = 'container_attrs';
-	public const ROW_CLASSES               = 'row_classes';
-	public const ROW_HEADER_CLASSES        = 'row_header_classes';
-	public const ROW_HEADER_INNER_CLASSES  = 'row_header_inner_classes';
-	public const ROW_CONTENT_CLASSES       = 'row_content_classes';
-	public const ROW_CONTENT_INNER_CLASSES = 'row_content_inner_classes';
-	public const ROW_HEADER_NAME           = 'row_header_name';
-	public const ROW_CONTENT_NAME          = 'row_content_name';
+	public const ROWS                          = 'rows';
+	public const CONTAINER_CLASSES             = 'container_classes';
+	public const CONTAINER_ATTRS               = 'container_attrs';
+	public const ROW_CLASSES                   = 'row_classes';
+	public const ROW_HEADER_CLASSES            = 'row_header_classes';
+	public const ROW_HEADER_CONTAINER_CLASSES  = 'row_header_container_classes';
+	public const ROW_CONTENT_CLASSES           = 'row_content_classes';
+	public const ROW_CONTENT_CONTAINER_CLASSES = 'row_content_container_classes';
+	public const ROW_HEADER_NAME               = 'row_header_name';
+	public const ROW_CONTENT_NAME              = 'row_content_name';
 
 	protected $path = __DIR__ . '/accordion.twig';
 
@@ -61,7 +61,7 @@ class Accordion extends Context {
 			self::DEFAULT       => [],
 			self::MERGE_CLASSES => [ 'c-accordion__header', 'h5' ],
 		],
-		self::ROW_HEADER_INNER_CLASSES  => [
+		self::ROW_HEADER_CONTAINER_CLASSES  => [
 			self::DEFAULT       => [],
 			self::MERGE_CLASSES => [ 'c-accordion__header-container' ],
 		],
@@ -69,7 +69,7 @@ class Accordion extends Context {
 			self::DEFAULT       => [],
 			self::MERGE_CLASSES => [ 'c-accordion__content' ],
 		],
-		self::ROW_CONTENT_INNER_CLASSES => [
+		self::ROW_CONTENT_CONTAINER_CLASSES => [
 			self::DEFAULT       => [],
 			self::MERGE_CLASSES => [ 'c-accordion__content-container', 't-sink', 's-sink' ],
 		],
