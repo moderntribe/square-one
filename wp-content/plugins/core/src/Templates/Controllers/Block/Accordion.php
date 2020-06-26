@@ -15,7 +15,6 @@ class Accordion extends Block_Controller {
 	public function render( string $path = '' ): string {
 		return $this->factory->get( Container::class, [
 			Container::LAYOUT            => $this->get_layout(),
-			Container::WIDTH             => $this->get_width(),
 			Container::CONTAINER_CLASSES => $this->get_container_classes(),
 			Container::HEADER            => $this->get_header(),
 			Container::CONTENT           => $this->get_accordion( $this->attributes ),
@@ -26,14 +25,10 @@ class Accordion extends Block_Controller {
 		return $this->attributes[ Accordion_Block::LAYOUT ] ?? Accordion_Block::LAYOUT_STACKED;
 	}
 
-	private function get_width(): string {
-		return $this->attributes[ Accordion_Block::WIDTH ] ?? Accordion_Block::WIDTH_CENTER;
-	}
-
 	private function get_container_classes(): array {
 		$classes = [];
 
-		if ( $this->get_width() === Accordion_Block::WIDTH_CENTER && $this->get_layout() === Accordion_Block::LAYOUT_STACKED ) {
+		if ( $this->get_layout() === Accordion_Block::LAYOUT_STACKED ) {
 			$classes = [
 				'l-sink',
 				'l-sink--double'

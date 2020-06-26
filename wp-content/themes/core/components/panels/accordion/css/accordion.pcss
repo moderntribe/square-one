@@ -11,19 +11,11 @@
  * ----------------------------------------------------------------------------- */
 
 .accordion__container {
-	/* CASE: Accordion: Left/Right */
-	.c-panel--layout-left &,
-	.c-panel--layout-right & {
+	/* CASE: Accordion: Inline */
+	.c-panel--layout-inline & {
 		@media (--viewport-full) {
 			display: flex;
 			justify-content: space-between;
-		}
-	}
-
-	/* CASE: Accordion: Right */
-	.c-panel--layout-right & {
-		@media (--viewport-full) {
-			flex-direction: row-reverse;
 		}
 	}
 }
@@ -35,9 +27,8 @@
 .accordion__header {
 	margin-bottom: var(--spacer-40);
 
-	/* CASE: Accordion: Left/Right */
-	.c-panel--layout-left &,
-	.c-panel--layout-right & {
+	/* CASE: Accordion: Inline */
+	.c-panel--layout-inline & {
 		@media (--viewport-full) {
 			margin-bottom: 0;
 			width: var(--grid-5-col);
@@ -58,11 +49,9 @@
  * ----------------------------------------------------------------------------- */
 
 .accordion__content {
-	/* CASE: Accordion: Left/Right */
-	.c-panel--layout-left &,
-	.c-panel--layout-right & {
+	/* CASE: Accordion: Inline */
+	.c-panel--layout-inline & {
 		@media (--viewport-full) {
-			margin-bottom: 0;
 			width: var(--grid-7-col);
 		}
 	}

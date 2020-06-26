@@ -18,19 +18,15 @@ class Accordion extends Block_Type_Config {
 	public const ACCORDION   = 'accordion';
 
 	public const LAYOUT         = 'layout';
-	public const LAYOUT_LEFT    = 'layout-left';
-	public const LAYOUT_RIGHT   = 'layout-right';
+	public const LAYOUT_INLINE  = 'layout-inline';
 	public const LAYOUT_STACKED = 'layout-stacked';
-	public const WIDTH          = 'width';
-	public const WIDTH_CENTER   = 'width-center';
-	public const WIDTH_GRID     = 'width-grid';
 
 	public function build(): Block_Type_Interface {
 		return $this->factory->block( self::NAME )
 			->set_label( __( 'Accordion', 'tribe' ) )
 			->set_dashicon( 'menu-alt' )
+			->add_class( 'c-panel c-panel--accordion l-container' )
 			->add_data_source( 'className-c-panel', self::LAYOUT )
-			->add_data_source( 'className-c-panel', self::WIDTH )
 			->add_toolbar_section( $this->layout_toolbar() )
 			->add_content_section( $this->content_area() )
 			->add_content_section( $this->accordions_area() )
@@ -39,6 +35,7 @@ class Accordion extends Block_Type_Config {
 
 	private function content_area(): Content_Section {
 		return $this->factory->content()->section()
+			->add_class( 'accordion__header' )
 			->add_field(
 				$this->factory->content()->field()->text( self::TITLE )
 					->set_label( __( 'Title', 'tribe' ) )
@@ -56,6 +53,7 @@ class Accordion extends Block_Type_Config {
 
 	private function accordions_area(): Content_Section {
 		return $this->factory->content()->section()
+			->add_class( 'accordion__content' )
 			->add_field(
 				$this->factory->content()->field()->flexible_container( self::ACCORDION )
 					->set_label( __( 'Accordion', 'tribe' ) )
@@ -72,16 +70,9 @@ class Accordion extends Block_Type_Config {
 		return $this->factory->toolbar()->section()
 			->add_field(
 				$this->factory->toolbar()->field()->icon_select( self::LAYOUT )
-					->add_dashicon_option( self::LAYOUT_LEFT, __( 'Accordion Left', 'tribe' ), 'editor-alignleft' )
-					->add_dashicon_option( self::LAYOUT_STACKED, __( 'Accordion Stacked', 'tribe' ), 'editor-aligncenter' )
-					->add_dashicon_option( self::LAYOUT_RIGHT, __( 'Accordion Right', 'tribe' ), 'editor-alignright' )
+					->add_dashicon_option( self::LAYOUT_STACKED, __( 'Stacked', 'tribe' ), 'align-center' )
+					->add_dashicon_option( self::LAYOUT_INLINE, __( 'Inline', 'tribe' ), 'align-right' )
 					->set_default( self::LAYOUT_STACKED )
-					->build()
-			)
-			->add_field(
-				$this->factory->toolbar()->field()->icon_select( self::WIDTH )
-					->add_dashicon_option( self::WIDTH_CENTER, __( 'Content', 'tribe' ), 'editor-contract' )
-					->add_dashicon_option( self::WIDTH_GRID, __( 'Full', 'tribe' ), 'editor-expand' )
 					->build()
 			)
 			->build();

@@ -9,7 +9,6 @@ use Tribe\Project\Templates\Components\Context;
  * Class Accordion
  *
  * @property string   $layout
- * @property string   $width
  * @property string   $content
  * @property string   $header
  * @property string[] $container_classes
@@ -20,7 +19,6 @@ use Tribe\Project\Templates\Components\Context;
  */
 class Accordion extends Context {
 	public const LAYOUT            = 'layout';
-	public const WIDTH             = 'width';
 	public const CONTENT           = 'content';
 	public const HEADER            = 'header';
 	public const CONTAINER_CLASSES = 'container_classes';
@@ -32,9 +30,6 @@ class Accordion extends Context {
 
 	protected $properties = [
 		self::LAYOUT            => [
-			self::DEFAULT => '',
-		],
-		self::WIDTH            => [
 			self::DEFAULT => '',
 		],
 		self::CONTENT           => [
@@ -64,10 +59,6 @@ class Accordion extends Context {
 	public function get_data(): array {
 		if ( $this->layout ) {
 			$this->properties[ self::CLASSES ][ self::MERGE_CLASSES ][] = 'c-panel--' . $this->layout;
-		}
-
-		if ( $this->layout ) {
-			$this->properties[ self::CLASSES ][ self::MERGE_CLASSES ][] = 'c-panel--' . $this->width;
 		}
 
 		return parent::get_data();
