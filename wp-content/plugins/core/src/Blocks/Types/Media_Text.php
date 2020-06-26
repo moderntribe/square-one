@@ -3,6 +3,7 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Blocks\Types;
 
+use phpDocumentor\Reflection\Types\Self_;
 use Tribe\Gutenpanels\Blocks\Block_Type_Interface;
 use Tribe\Gutenpanels\Blocks\Sections\Content_Section;
 use Tribe\Gutenpanels\Blocks\Sections\Toolbar_Section;
@@ -33,7 +34,10 @@ class Media_Text extends Block_Type_Config {
 	public function build(): Block_Type_Interface {
 		return $this->factory->block( self::NAME )
 			->set_label( __( 'Media + Text', 'tribe' ) )
+			->add_class( 'c-panel c-panel--media-text' )
 			->set_dashicon( 'menu-alt' )
+			->add_data_source( 'className-c-panel', self::WIDTH )
+			->add_data_source( 'className-c-panel', self::LAYOUT )
 			->add_content_section( $this->child_container() )
 			->add_toolbar_section( $this->layout_toolbar() )
 			->build();
@@ -43,6 +47,7 @@ class Media_Text extends Block_Type_Config {
 		return $this->factory->content()->section()
 			->add_field(
 				$this->factory->content()->field()->fixed_container( self::CONTAINER )
+					->add_class( 'media-text__container' )
 					->add_template_block( Media_Text_Media::NAME )
 					->add_template_block( Media_Text_Text::NAME )
 					->merge_nested_attributes( Media_Text_Media::NAME )
@@ -59,12 +64,14 @@ class Media_Text extends Block_Type_Config {
 					->add_dashicon_option( self::MEDIA_LEFT, __( 'Media Left', 'tribe' ), 'editor-alignleft' )
 					->add_dashicon_option( self::MEDIA_CENTER, __( 'Media Center', 'tribe' ), 'editor-aligncenter' )
 					->add_dashicon_option( self::MEDIA_RIGHT, __( 'Media Right', 'tribe' ), 'editor-alignright' )
+					->set_default( self::MEDIA_LEFT )
 					->build()
 			)
 			->add_field(
 				$this->factory->toolbar()->field()->icon_select( self::WIDTH )
 					->add_dashicon_option( self::WIDTH_GRID, __( 'Grid Width', 'tribe' ), 'editor-contract' )
 					->add_dashicon_option( self::WIDTH_FULL, __( 'Full Width', 'tribe' ), 'editor-expand' )
+					->set_default( self::WIDTH_GRID )
 					->build()
 			)
 			->build();

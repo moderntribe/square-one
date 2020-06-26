@@ -16,6 +16,7 @@ class Media_Text_Media extends Block_Type_Config {
 			->set_label( __( 'Media', 'tribe' ) )
 			->set_dashicon( 'menu-alt' )
 			->set_parents( Media_Text::NAME )
+			->add_class( 'media-text__media' )
 			->add_content_section( $this->child_container() )
 			->build();
 	}

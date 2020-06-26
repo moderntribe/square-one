@@ -71,9 +71,10 @@ class Media_Text extends Block_Controller {
 
 		try {
 			return $this->factory->get( Image_Component::class, [
-				Image_Component::ATTACHMENT   => Image::factory( $attachment_id ),
+				Image_Component::ATTACHMENT   => Image::factory( (int) $attachment_id ),
 				Image_Component::SRC_SIZE     => $src_size,
 				Image_Component::SRCSET_SIZES => $srcset_sizes,
+				Image_Component::USE_LAZYLOAD => false, // TEMP: Until we get lazyload in the Editor Preview.
 			] )->render();
 		} catch ( \InvalidArgumentException $e ) {
 			return '';
