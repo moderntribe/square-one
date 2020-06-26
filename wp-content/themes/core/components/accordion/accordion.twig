@@ -1,33 +1,4 @@
-{#
-
-Component: Accordion
-
-Documentation: docs\theme\components\accordion.md
-
-Controller: wp-content\plugins\core\src\Templates\Components\Accordion.php
-Javascript: wp-content\plugins\core\assets\theme\js\src\components\accordion.js
-PostCSS: wp-content\plugins\core\assets\theme\pcss\components\_accordion.pcss
-
-Description: Use this wherever you need an accordion component. Check the docs for example usage.
-
-Attributes:
-	{
-		container_classes: 'c-accordion', // { string } the wrapper classes
-        container_attrs: 'data-js="c-accordion"', // { string }. any additional attributes
-        row_classes: 'c-accordion__row', // { string } the row classes
-        row_content_classes: 'c-accordion__content', // { string } the row content wrapper classes
-        row_content_inner_classes: 'c-accordion__content-inner', // { string } the row content inner classes
-        row_content_name: 'accordion_content', // { string } the content name attribute, if used in panel supply row content field name
-        row_header_classes: 'c-accordion__header', // { string } the row header classes
-        row_header_inner_classes: 'c-accordion__header-inner'.  // { string } The row header inner classes. wraps the row title text
-        row_header_name: 'title', // { string } the header name attribute, if used in panel supply row header text field name
-        rows: [], // { array }. an array of accordion rows.
-        rows[].content: '', // { string } The row content. HTML or what have you.
-        rows[].content_id: '', // { string } Unique id for the content.
-        rows[].header_id: '', // { string } Unique id for the header.
-        rows[].header_text: '', // { string } The header text.
-    }
- #}
+{# Component: Accordion #}
 
 <div
 	{{ container_classes }}

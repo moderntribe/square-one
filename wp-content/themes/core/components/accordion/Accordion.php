@@ -59,11 +59,11 @@ class Accordion extends Context {
 		],
 		self::ROW_HEADER_CLASSES        => [
 			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [ 'c-accordion__header' ],
+			self::MERGE_CLASSES => [ 'c-accordion__header', 'h5' ],
 		],
 		self::ROW_HEADER_INNER_CLASSES  => [
 			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [ 'c-accordion__header-inner' ],
+			self::MERGE_CLASSES => [ 'c-accordion__header-container' ],
 		],
 		self::ROW_CONTENT_CLASSES       => [
 			self::DEFAULT       => [],
@@ -71,7 +71,7 @@ class Accordion extends Context {
 		],
 		self::ROW_CONTENT_INNER_CLASSES => [
 			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [ 'c-accordion__content-inner' ],
+			self::MERGE_CLASSES => [ 'c-accordion__content-container', 't-sink', 's-sink' ],
 		],
 		self::ROW_HEADER_NAME           => [
 			self::DEFAULT => 'title',

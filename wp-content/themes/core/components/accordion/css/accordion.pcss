@@ -5,28 +5,23 @@
  * ----------------------------------------------------------------------------- */
 
 .c-accordion {
-	max-width: 800px;
 	margin: 0 auto;
 }
 
+/* -----------------------------------------------------------------------------
+ * Accordion: Row
+ * ----------------------------------------------------------------------------- */
+
 .c-accordion__row {
-	border: 1px solid var(--color-accordion-border);
-	margin-bottom: 2px;
-
-	&.active {
-
-		.c-accordion__header {
-
-			&:before {
-				content: var(--icon-minus);
-			}
-		}
-	}
+	border-bottom: 1px solid var(--color-neutral-10);
 }
 
+/* -----------------------------------------------------------------------------
+ * Accordion: Row Header (Trigger)
+ * ----------------------------------------------------------------------------- */
+
 .c-accordion__header {
-	font-weight: 700;
-	padding: var(--spacer-30);
+	padding: var(--spacer-30) 0;
 	background: none;
 	border: 0;
 	width: 100%;
@@ -35,11 +30,17 @@
 	&:before {
 		@mixin icon;
 
-		color: var(--color-primary);
-		content: var(--icon-plus);
+		position: relative;
+		display: block;
+		float: left;
+		width: var(--grid-1-col);
+		color: var(--color-grey-light);
+		content: var(--icon-chevron-down);
 		font-family: var(--font-family-core-icons);
-		font-size: 16px;
-		margin-right: var(--spacer-20);
+		font-size: var(--font-size-body-large);
+		line-height: 1.8;
+		text-align: center;
+		transition: 0.25s ease-in-out;
 	}
 
 	&:focus,
@@ -47,14 +48,32 @@
 		color: var(--color-primary);
 		transition: var(--transition);
 	}
+
+	/* CASE: Row is active */
+	.active & {
+		padding-bottom: var(--spacer-20);
+
+		&:before {
+			color: var(--color-text);
+			transform: rotate(-180deg);
+		}
+	}
 }
 
+/* -----------------------------------------------------------------------------
+ * Accordion: Row Content
+ * ----------------------------------------------------------------------------- */
+
 .c-accordion__content {
-	padding: 0 var(--spacer-30);
+	padding-left: var(--grid-1-col);
 	max-height: 0;
 	overflow: hidden;
 }
 
-.c-accordion__content-inner {
+/* -----------------------------------------------------------------------------
+ * Accordion: Row Content Container
+ * ----------------------------------------------------------------------------- */
+
+.c-accordion__content-container {
 	padding-bottom: var(--spacer-30);
 }

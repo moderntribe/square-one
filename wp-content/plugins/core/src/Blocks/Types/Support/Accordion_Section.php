@@ -29,7 +29,7 @@ class Accordion_Section extends Block_Type_Config {
 			->add_class( 'c-accordion__header h5' );
 
 		$content = $this->factory->content()->field()->flexible_container( self::CONTENT )
-			->add_class( 'c-accordion__content-inner' )
+			->add_class( 'c-accordion__content-container' )
 			->add_template_block( 'core/paragraph' );
 
 		foreach ( $this->nested_block_types() as $type ) {
