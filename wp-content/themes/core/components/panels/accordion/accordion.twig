@@ -1,9 +1,12 @@
 {# Panel: Accordion #}
+<section {{ classes }} {{ attrs }}>
+	<div {{ container_classes }}>
 
-<div class="s-content">
-	<div class="g-row" {{ attrs }}>
-		<div class="g-col">
-			{{ accordion }}
+		{{ header }}
+
+		<div {{ content_classes }}>
+			{{ content }}
 		</div>
+
 	</div>
-</div>
+</section>

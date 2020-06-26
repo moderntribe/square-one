@@ -1,0 +1,69 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Component: Panel: Accordion
+ *
+ * ----------------------------------------------------------------------------- */
+
+.c-panel--accordion {}
+
+/* -----------------------------------------------------------------------------
+ * Accordion: Container
+ * ----------------------------------------------------------------------------- */
+
+.accordion__container {
+	/* CASE: Accordion: Left/Right */
+	.c-panel--layout-left &,
+	.c-panel--layout-right & {
+		@media (--viewport-full) {
+			display: flex;
+			justify-content: space-between;
+		}
+	}
+
+	/* CASE: Accordion: Right */
+	.c-panel--layout-right & {
+		@media (--viewport-full) {
+			flex-direction: row-reverse;
+		}
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Accordion: Header
+ * ----------------------------------------------------------------------------- */
+
+.accordion__header {
+	margin-bottom: var(--spacer-40);
+
+	/* CASE: Accordion: Left/Right */
+	.c-panel--layout-left &,
+	.c-panel--layout-right & {
+		@media (--viewport-full) {
+			margin-bottom: 0;
+			width: var(--grid-5-col);
+		}
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Accordion: Description
+ * ----------------------------------------------------------------------------- */
+
+.accordion__description {
+	margin-top: var(--spacer-20);
+}
+
+/* -----------------------------------------------------------------------------
+ * Accordion: Content
+ * ----------------------------------------------------------------------------- */
+
+.accordion__content {
+	/* CASE: Accordion: Left/Right */
+	.c-panel--layout-left &,
+	.c-panel--layout-right & {
+		@media (--viewport-full) {
+			margin-bottom: 0;
+			width: var(--grid-7-col);
+		}
+	}
+}
