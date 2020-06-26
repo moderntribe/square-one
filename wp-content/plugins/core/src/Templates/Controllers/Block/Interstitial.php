@@ -56,7 +56,7 @@ class Interstitial extends Block_Controller {
 
 	private function get_content(): string {
 		return $this->factory->get( Content_Block::class, [
-			Content_Block::CLASSES => [ 'interstitial__content-container' ],
+			Content_Block::CLASSES => [ 'interstitial__content-container', 't-theme--light' ],
 			Content_Block::TITLE   => $this->get_headline(),
 			Content_Block::ACTION  => $this->get_cta(),
 		] )->render();
@@ -69,7 +69,7 @@ class Interstitial extends Block_Controller {
 
 		return $this->factory->get( Text::class, [
 			Text::TAG     => 'h2',
-			Text::CLASSES => [ 'interstitial__title', 'h3', 't-theme--light' ],
+			Text::CLASSES => [ 'interstitial__title', 'h3' ],
 			Text::TEXT    => $this->attributes[ Interstitial_Block::DESCRIPTION ],
 		] )->render();
 	}
