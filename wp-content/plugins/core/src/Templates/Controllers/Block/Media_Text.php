@@ -30,7 +30,7 @@ class Media_Text extends Block_Controller {
 	}
 
 	private function get_width(): string {
-		return $this->attributes[ Media_Text_Block::WIDTH ] ?? Media_Text_Block::WIDTH_BOXED;
+		return $this->attributes[ Media_Text_Block::WIDTH ] ?? Media_Text_Block::WIDTH_GRID;
 	}
 
 	private function get_media(): string {

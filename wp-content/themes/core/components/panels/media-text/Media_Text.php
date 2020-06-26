@@ -69,14 +69,14 @@ class Media_Text extends Context {
 
 	public function get_data(): array {
 		if ( $this->layout ) {
-			$this->properties[ self::CLASSES ][ self::MERGE_CLASSES ][] = 'c-panel--layout-media-' . $this->layout;
+			$this->properties[ self::CLASSES ][ self::MERGE_CLASSES ][] = 'c-panel--' . $this->layout;
 		}
 
 		if ( $this->width ) {
-			$this->properties[ self::CLASSES ][ self::MERGE_CLASSES ][] = 'c-panel--width-' . $this->width;
+			$this->properties[ self::CLASSES ][ self::MERGE_CLASSES ][] = 'c-panel--' . $this->width;
 		}
 
-		if ( $this->width === Media_Text_Block::WIDTH_BOXED ) {
+		if ( $this->width === Media_Text_Block::WIDTH_GRID ) {
 			$this->properties[ self::CLASSES ][ self::MERGE_CLASSES ][] = 'l-container';
 		}
 

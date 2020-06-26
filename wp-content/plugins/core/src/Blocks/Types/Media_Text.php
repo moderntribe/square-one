@@ -14,12 +14,12 @@ class Media_Text extends Block_Type_Config {
 	public const NAME = 'tribe/media-text';
 
 	public const LAYOUT       = 'layout';
-	public const MEDIA_LEFT   = 'left';
-	public const MEDIA_RIGHT  = 'right';
-	public const MEDIA_CENTER = 'center';
+	public const MEDIA_LEFT   = 'layout-left';
+	public const MEDIA_RIGHT  = 'layout-right';
+	public const MEDIA_CENTER = 'layout-center';
 	public const WIDTH        = 'width';
-	public const WIDTH_BOXED  = 'boxed';
-	public const WIDTH_FULL   = 'full';
+	public const WIDTH_GRID   = 'width-grid';
+	public const WIDTH_FULL   = 'width-full';
 	public const CONTAINER    = 'container';
 
 	public const TITLE   = 'title';
@@ -63,8 +63,8 @@ class Media_Text extends Block_Type_Config {
 			)
 			->add_field(
 				$this->factory->toolbar()->field()->icon_select( self::WIDTH )
-					->add_dashicon_option( self::WIDTH_BOXED, __( 'Boxed', 'tribe' ), 'editor-contract' )
-					->add_dashicon_option( self::WIDTH_FULL, __( 'Full', 'tribe' ), 'editor-expand' )
+					->add_dashicon_option( self::WIDTH_GRID, __( 'Grid Width', 'tribe' ), 'editor-contract' )
+					->add_dashicon_option( self::WIDTH_FULL, __( 'Full Width', 'tribe' ), 'editor-expand' )
 					->build()
 			)
 			->build();
