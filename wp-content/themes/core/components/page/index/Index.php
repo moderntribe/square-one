@@ -3,6 +3,7 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Templates\Components\Page;
 
+use Tribe\Project\Models\Post;
 use Tribe\Project\Templates\Components\Breadcrumbs;
 use Tribe\Project\Templates\Components\Component;
 use Tribe\Project\Templates\Components\Link;
@@ -10,6 +11,7 @@ use Tribe\Project\Templates\Components\Pagination;
 use Tribe\Project\Theme\Pagination_Util;
 
 class Index extends Component {
+
 	public const SUBHEADER   = 'subheader';
 	public const POSTS       = 'posts';
 	public const COMMENTS    = 'comments';
@@ -20,6 +22,21 @@ class Index extends Component {
 		$this->data[ self::PAGINATION ]  = $this->get_pagination();
 		$this->data[ self::BREADCRUMBS ] = $this->get_breadcrumbs();
 		$this->data[ self::COMMENTS ]    = $this->get_comments();
+		$this->data[ self::POSTS ]       = $this->get_posts();
+	}
+
+	protected function get_posts() {
+		$posts = [];
+		while ( have_posts() ) {
+			the_post();
+			$posts[] = new Post();
+		}
+		rewind_posts();
+
+		return [
+			Index::SUBHEADER => [],
+			Index::POSTS     => $posts,
+		];
 	}
 
 	protected function get_comments() {
@@ -37,15 +54,15 @@ class Index extends Component {
 		$news_url = get_permalink( get_option( 'page_for_posts' ) );
 
 		$items = [
-				[
-						'url'   => $news_url,
-						'label' => __( 'News', 'tribe' ),
-				],
+			[
+				'url'   => $news_url,
+				'label' => __( 'News', 'tribe' ),
+			],
 		];
 
 		$options = [
-				Breadcrumbs::ITEMS           => $items,
-				Breadcrumbs::WRAPPER_CLASSES => [],
+			Breadcrumbs::ITEMS           => $items,
+			Breadcrumbs::WRAPPER_CLASSES => [],
 		];
 
 		return $options;
@@ -55,11 +72,11 @@ class Index extends Component {
 		$links = $this->get_pagination_numbers();
 
 		return [
-				Pagination::LIST_CLASSES       => [ 'g-row', 'g-row--no-gutters', 'c-pagination__list' ],
-				Pagination::LIST_ITEM_CLASSES  => [ 'g-col', 'c-pagination__item' ],
-				Pagination::WRAPPER_CLASSES    => [ 'c-pagination', 'c-pagination--loop' ],
-				Pagination::WRAPPER_ATTRS      => [ 'aria-labelledby' => 'c-pagination__label-single' ],
-				Pagination::PAGINATION_NUMBERS => $links,
+			Pagination::LIST_CLASSES       => [ 'g-row', 'g-row--no-gutters', 'c-pagination__list' ],
+			Pagination::LIST_ITEM_CLASSES  => [ 'g-col', 'c-pagination__item' ],
+			Pagination::WRAPPER_CLASSES    => [ 'c-pagination', 'c-pagination--loop' ],
+			Pagination::WRAPPER_ATTRS      => [ 'aria-labelledby' => 'c-pagination__label-single' ],
+			Pagination::PAGINATION_NUMBERS => $links,
 		];
 	}
 
@@ -90,9 +107,9 @@ class Index extends Component {
 			}
 
 			$options = [
-					LINK::CLASSES => $number['classes'],
-					LINK::URL     => $number['url'],
-					LINK::CONTENT => $number['label'],
+				LINK::CLASSES => $number['classes'],
+				LINK::URL     => $number['url'],
+				LINK::CONTENT => $number['label'],
 			];
 
 			$links[] = $options;
@@ -103,29 +120,29 @@ class Index extends Component {
 
 	public function render(): void {
 		?>
-		{% if breadcrumbs %}
-			{{ component( 'breadcrumbs/Breadcrumbs.php', breadcrumbs ) }}
-		{% endif %}
+        {% if breadcrumbs %}
+        {{ component( 'breadcrumbs/Breadcrumbs.php', breadcrumbs ) }}
+        {% endif %}
 
-		{{ component( 'header/subheader/Subheader.php', subheader ) }}
+        {{ component( 'header/subheader/Subheader.php', subheader ) }}
 
-		<div class="l-container">
+        <div class="l-container">
 
-			{% if posts|length > 0 %}
+            {% if posts|length > 0 %}
 
-			{% for post in posts %}
-			{{ component( 'content/loop-item/Loop_Item.php', { 'post': post } ) }}
-			{% endfor %}
+            {% for post in posts %}
+            {{ component( 'content/loop-item/Loop_Item.php', { 'post': post } ) }}
+            {% endfor %}
 
-			{{ component( 'pagination/Pagination.php', pagination ) }}
+            {{ component( 'pagination/Pagination.php', pagination ) }}
 
-			{% else %}
+            {% else %}
 
-			{{ component( 'content/no-results/No_Results.php' ) }}
+            {{ component( 'content/no-results/No_Results.php' ) }}
 
-			{% endif %}
+            {% endif %}
 
-		</div>
+        </div>
 		<?php
 	}
 }

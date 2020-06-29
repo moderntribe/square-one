@@ -11,27 +11,20 @@ namespace Tribe\Project\Templates\Components;
  * @property string[] $attrs
  */
 class Text extends Component {
+
 	public const TEXT    = 'content';
 	public const TAG     = 'tag';
 	public const CLASSES = 'classes';
 	public const ATTRS   = 'attrs';
 
-	protected $path = __DIR__ . '/text.twig';
+	public function init() {
+		$this->data[ self::CLASSES ] = $this->merge_classes( $this->data[ self::CLASSES ] ?? [] );
+		$this->data[ self::ATTRS ]   = $this->merge_attrs( $this->data[ self::ATTRS ] ?? [] );
+	}
 
-	protected $properties = [
-		self::TEXT    => [
-			self::DEFAULT => '',
-		],
-		self::TAG     => [
-			self::DEFAULT => 'div',
-		],
-		self::CLASSES => [
-			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [],
-		],
-		self::ATTRS   => [
-			self::DEFAULT          => [],
-			self::MERGE_ATTRIBUTES => [],
-		],
-	];
+	public function render(): void {
+		?>
+        <{{ tag }} {{ classes }} {{ attrs }}>{{ content }}</{{ tag }}>
+		<?php
+	}
 }

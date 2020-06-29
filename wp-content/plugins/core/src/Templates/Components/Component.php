@@ -3,6 +3,8 @@
 namespace Tribe\Project\Templates\Components;
 
 use Tribe\Libs\Utils\Markup_Utils;
+use DI;
+use Tribe\Project\Components\Handler;
 
 abstract class Component {
 
@@ -17,8 +19,9 @@ abstract class Component {
 	}
 
 	public function get_render(): string {
+		$handler = tribe_project()->container()->get( Handler::class );
 		ob_start();
-		$this->render();
+		$handler->render_component( static::class, $this->data );
 
 		return ob_get_clean();
 	}

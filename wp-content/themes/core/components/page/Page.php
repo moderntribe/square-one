@@ -88,25 +88,27 @@ class Page extends Component {
 
 	public function render(): void {
 		?>
-		{% if breadcrumbs %}
-			{{ component( 'breadcrumbs/Breadcrumbs.php', breadcrumbs ) }}
-		{% endif %}
+        {% if breadcrumbs %}
+            {{ component( 'breadcrumbs/Breadcrumbs.php', breadcrumbs ) }}
+        {% endif %}
 
-		{{ component( 'header/subheader/Subheader.php', subheader ) }}
+        {{ component( 'header/subheader/Subheader.php', subheader ) }}
 
-		{% if post.content %}
-			<div class="">
-				{{ post.image }}
+        {% if post.content %}
+        <div class="">
+            {{ post.image }}
 
-				<div class="t-sink s-sink l-sink l-sink--double">
-					{{ post.content }}
-				</div>
-			</div>
-		{% endif %}
+            <div class="t-sink s-sink l-sink l-sink--double">
+                {{ post.content }}
+            </div>
+        </div>
 
-		{{ do_action( 'the_panels' ) }}
+        {{ component( 'pagination/Pagination.php', pagination ) }}
+        {% endif %}
 
-		{{ comments }}
+        {{ do_action( 'the_panels' ) }}
+
+        {{ comments }}
 		<?php
 	}
 }

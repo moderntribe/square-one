@@ -24,21 +24,6 @@ class IndexController extends Controller {
 	protected function get_main_content() {
 		return [
 			Main::TEMPLATE_TYPE => 'page/index/Index.php',
-			Main::CONTENT       => $this->get_index_content(),
-		];
-	}
-
-	protected function get_index_content() {
-		$posts = [];
-		while ( have_posts() ) {
-			the_post();
-			$posts[] = new Post();
-		}
-		rewind_posts();
-
-		return [
-			Index::SUBHEADER => [],
-			Index::POSTS     => $posts,
 		];
 	}
 
