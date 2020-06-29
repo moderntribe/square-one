@@ -16,7 +16,7 @@ class MainController extends Controller {
 		$args = [
 			'main'     => $this->get_main_content(),
 			'masthead' => $this->get_masthead_content(),
-			'sidebar'  => [],
+			'sidebar'  => $this->get_sidebar_content(),
 			'footer'   => $this->get_footer_content(),
 		];
 
@@ -50,6 +50,10 @@ class MainController extends Controller {
 	}
 
 	protected function get_sidebar_content() {
+		if ( is_page() ) {
+			return [];
+		}
+
 		return [
 			Sidebar::SIDEBAR_ID => 'main',
 		];
