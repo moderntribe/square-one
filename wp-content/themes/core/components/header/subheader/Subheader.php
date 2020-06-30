@@ -18,7 +18,7 @@ class Subheader extends Component {
 
 			<div class="l-container">
 
-				{{ title }}
+				{{ component( 'text/Text.php', title ) }}
 
 			</div>
 

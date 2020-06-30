@@ -12,6 +12,11 @@ abstract class Component {
 
 	public function __construct( $args ) {
 		$this->data = $args;
+		$this->merge_defaults();
+	}
+
+	private function merge_defaults() {
+		$this->data = wp_parse_args( $this->data, $this->defaults() );
 	}
 
 	public function data(): array {
@@ -51,6 +56,10 @@ abstract class Component {
 	}
 
 	public function init() {}
+
+	protected function defaults(): array {
+		return [];
+	}
 
 	abstract public function render(): void;
 

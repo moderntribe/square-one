@@ -17,3 +17,19 @@ function tribe_template( string $controller, string $path = '' ) {
 		return '<pre>' . print_r( $e, true ) . '</pre>';
 	}
 }
+
+/**
+ * @param string     $controller
+ * @param string     $method
+ * @param array|null $args
+ *
+ * @return string
+ */
+function tribe_controller( string $controller, string $method, array $args = null ) {
+	$container = tribe_project()->container();
+	try {
+		return $container->get( $controller )->$method( $args );
+	} catch ( \Exception $e ) {
+		return '<pre>' . print_r( $e, true ) . '</pre>';
+	}
+}

@@ -2,7 +2,7 @@
 
 namespace Tribe\Project\Models;
 
-use Tribe\Project\Templates\Components\Image;
+use Tribe\Project\Templates\Components\Image as Image_Component;
 use Tribe\Project\Theme\Config\Image_Sizes;
 use \WP_Post;
 
@@ -102,7 +102,6 @@ class Post extends Model {
 	}
 
 	public function image() {
-		return '';
 		$image_id = get_post_thumbnail_id( $this->ID );
 
 		if ( empty( $image_id ) ) {
@@ -110,25 +109,27 @@ class Post extends Model {
 		}
 
 		try {
-			$image = \Tribe\Project\Templates\Models\Image::factory( $image_id );
+			$image = new Image( $image_id );
 		} catch ( \Exception $e ) {
 			return '';
 		}
 
 		$options = [
-			Image::ATTACHMENT      => $image,
-			Image::AS_BG           => true,
-			Image::WRAPPER_CLASSES => [ 'item__image' ],
-			Image::SHIM            => trailingslashit( get_stylesheet_directory_uri() ) . 'assets/img/theme/shims/16x9.png',
-			Image::SRC_SIZE        => Image_Sizes::CORE_FULL,
-			Image::SRCSET_SIZES    => [
+			Image_Component::ATTACHMENT      => $image,
+			Image_Component::AS_BG           => false,
+			Image_Component::WRAPPER_CLASSES => [ 'item__image' ],
+			Image_Component::SHIM            => trailingslashit( get_stylesheet_directory_uri() ) . 'assets/img/theme/shims/16x9.png',
+			Image_Component::SRC_SIZE        => Image_Sizes::CORE_FULL,
+			Image_Component::SRCSET_SIZES    => [
 				Image_Sizes::CORE_FULL,
 				Image_Sizes::CORE_MOBILE,
 				Image_Sizes::SOCIAL_SHARE,
 			],
 		];
 
-		return $this->factory->get( Image::class, $options )->render();
+		$component = new Image_Component( $options );
+
+		return $component->get_render();
 	}
 
 	public function time() {

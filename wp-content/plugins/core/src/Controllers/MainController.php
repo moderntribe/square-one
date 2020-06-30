@@ -9,6 +9,7 @@ use Tribe\Project\Templates\Components\Main;
 use Tribe\Project\Templates\Components\Page\Index;
 use Tribe\Project\Templates\Components\Page\Page;
 use Tribe\Project\Templates\Components\Sidebar;
+use Tribe\Project\Templates\Components\Text;
 
 class MainController extends Controller {
 
@@ -33,9 +34,12 @@ class MainController extends Controller {
 	protected function get_single_content() {
 		return [
 			Page::SUBHEADER => [
-				Subheader::TITLE => get_the_title(),
+				Subheader::TITLE => [
+					Text::TEXT => get_the_title(),
+					Text::TAG  => 'h1',
+				],
 			],
-			Page::POST     => new Post(),
+			Page::POST      => new Post(),
 		];
 	}
 
