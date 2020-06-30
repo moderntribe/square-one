@@ -1,3 +1,5 @@
 <?php
 
-echo tribe_template( \Tribe\Project\Templates\Controllers\Comments::class );
+$comments = new \Tribe\Project\Templates\Components\Comments\Comments_Section();
+
+echo $comments->get_render();

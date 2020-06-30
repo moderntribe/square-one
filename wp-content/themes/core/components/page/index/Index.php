@@ -22,21 +22,6 @@ class Index extends Component {
 		$this->data[ self::PAGINATION ]  = $this->get_pagination();
 		$this->data[ self::BREADCRUMBS ] = $this->get_breadcrumbs();
 		$this->data[ self::COMMENTS ]    = $this->get_comments();
-		$this->data[ self::POSTS ]       = $this->get_posts();
-	}
-
-	protected function get_posts() {
-		$posts = [];
-		while ( have_posts() ) {
-			the_post();
-			$posts[] = new Post();
-		}
-		rewind_posts();
-
-		return [
-			Index::SUBHEADER => [],
-			Index::POSTS     => $posts,
-		];
 	}
 
 	protected function get_comments() {

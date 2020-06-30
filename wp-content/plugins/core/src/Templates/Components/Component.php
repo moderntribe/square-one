@@ -10,7 +10,7 @@ abstract class Component {
 
 	protected $data;
 
-	public function __construct( $args ) {
+	public function __construct( $args = [] ) {
 		$this->data = $args;
 		$this->merge_defaults();
 	}
