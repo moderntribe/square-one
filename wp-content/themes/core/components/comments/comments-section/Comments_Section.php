@@ -103,20 +103,18 @@ class Comments_Section extends Component {
 			$author = get_comment_author_link( $comment->comment_ID );
 			$edit   = $this->comment_edit_link( $comment->comment_ID, __( '(Edit)', 'tribe' ) );
 
-			$trackback = new Trackback( [
+			$this->factory->get( Trackback::class, [
 				Trackback::COMMENT_ID  => $comment->comment_ID,
 				Trackback::LABEL       => $label,
 				Trackback::AUTHOR_LINK => $author,
 				Trackback::EDIT_LINK   => $edit,
 				Trackback::CLASSES     => $classes,
-			] );
-
-			echo $trackback->get_render();
+			] )->output();
 
 			return;
 		}
 
-		$comment = new Comment( [
+		$this->factory->get( Comment::class, [
 			Comment::COMMENT_ID         => $comment->comment_ID,
 			Comment::AUTHOR             => get_comment_author( $comment ),
 			Comment::EDIT_LINK          => $this->comment_edit_link( $comment->comment_ID, __( 'Edit Comment', 'tribe' ) ),
@@ -130,9 +128,7 @@ class Comments_Section extends Component {
 				'max_depth'  => $args['max_depth'],
 			] ) ),
 			Comment::TIMESTAMP          => get_comment_time( 'U' ),
-		] );
-
-		echo $comment->get_render();
+		] )->output();
 	}
 
 	private function comment_edit_link( $comment_id, $text ): string {
@@ -141,13 +137,11 @@ class Comments_Section extends Component {
 			return '';
 		}
 
-		$link = new Link( [
+		return $this->factory->get( Link::class, [
 			Link::CLASSES => [ 'comment-edit-link' ],
 			Link::CONTENT => $text,
 			Link::URL     => $url,
-		] );
-
-		return $link->get_render();
+		] )->get_rendered_output();
 	}
 
 	public function render(): void {

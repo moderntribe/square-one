@@ -224,13 +224,11 @@ class Share extends Component {
 	private function link_text_component( $label ): string {
 		$classes = $this->data[ self::LABELED ] ? [] : [ 'u-visually-hidden' ];
 
-		$text = new Text( [
+		return $this->factory->get( Text::class, [
 			Text::TAG     => 'span',
 			Text::CLASSES => $classes,
 			Text::TEXT    => $label,
-		] );
-
-		return $text->get_render();
+		] )->get_rendered_output();
 	}
 
 	/**

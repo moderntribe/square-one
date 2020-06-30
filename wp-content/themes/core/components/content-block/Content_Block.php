@@ -9,45 +9,41 @@ namespace Tribe\Project\Templates\Components;
  * @property string[] $classes
  * @property string[] $attrs
  * @property string[] $container_classes
- * @property string   $leadin
- * @property string   $title
- * @property string   $text
- * @property string   $action
+ * @property array    $leadin
+ * @property array    $title
+ * @property array    $text
+ * @property array    $action
  */
-class Content_Block extends Context {
-	public const TAG               = 'tag';
-	public const CLASSES           = 'classes';
-	public const ATTRS             = 'attrs';
-	public const LEADIN            = 'leadin';
-	public const TITLE             = 'title';
-	public const TEXT              = 'text';
-	public const ACTION            = 'action';
+class Content_Block extends Component {
 
-	protected $path = __DIR__ . '/content-block.twig';
+	public const TAG     = 'tag';
+	public const CLASSES = 'classes';
+	public const ATTRS   = 'attrs';
+	public const LEADIN  = 'leadin';
+	public const TITLE   = 'title';
+	public const TEXT    = 'text';
+	public const ACTION  = 'action';
 
-	protected $properties = [
-		self::TAG               => [
-			self::DEFAULT => 'div',
-		],
-		self::CLASSES           => [
-			self::DEFAULT       => [ 'c-content-block' ],
-			self::MERGE_CLASSES => [],
-		],
-		self::ATTRS             => [
-			self::DEFAULT          => [],
-			self::MERGE_ATTRIBUTES => [],
-		],
-		self::LEADIN            => [
-			self::DEFAULT => '',
-		],
-		self::TITLE             => [
-			self::DEFAULT => '',
-		],
-		self::TEXT              => [
-			self::DEFAULT => '',
-		],
-		self::ACTION            => [
-			self::DEFAULT => '',
-		],
-	];
+	protected function defaults(): array {
+		return [
+			self::TAG     => 'div',
+			self::CLASSES => [ 'c-content-block' ],
+			self::ATTRS   => [],
+			self::LEADIN  => [],
+			self::TITLE   => [],
+			self::TEXT    => [],
+			self::ACTION  => [],
+		];
+	}
+
+	public function render(): void {
+		?>
+        <{{ tag }} {{ classes }} {{ attrs }}>
+        {{ component( 'text/Text.php', leadin ) }}
+        {{ component( 'text/Text.php', title ) }}
+        {{ component( 'text/Text.php', text ) }}
+        {{ component( 'button/Button.php', action ) }}
+        </{{ tag }}>
+		<?php
+	}
 }

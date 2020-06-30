@@ -13,6 +13,7 @@ namespace Tribe\Project\Templates\Components;
  * @property string   $content
  */
 class Link extends Component {
+
 	public const URL        = 'url';
 	public const TARGET     = 'target';
 	public const ARIA_LABEL = 'aria_label';
@@ -54,22 +55,18 @@ class Link extends Component {
 	 * @throws \Exception
 	 */
 	protected function append_new_window_text(): string {
-		$args = [
+		return $this->factory->get( Text::class, [
 			Text::TAG     => 'span',
 			Text::CLASSES => [ 'u-visually-hidden' ],
 			Text::TEXT    => __( '(Opens new window)', 'tribe' ),
-		];
-
-		$component = new Text( $args );
-
-		return $component->get_render();
+		] )->get_rendered_output();
 	}
 
 	public function render(): void {
 		?>
-		<a {{ classes }} {{ attrs }}>
-			{{ content }}
-		</a>
+        <a {{ classes }} {{ attrs }}>
+            {{ content }}
+        </a>
 		<?php
 	}
 }

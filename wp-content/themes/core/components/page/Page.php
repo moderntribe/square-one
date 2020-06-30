@@ -46,15 +46,12 @@ class Page extends Component {
 			return '';
 		}
 
-		$options = [
+
+		return $this->factory->get( Link::class, [
 			Link::CLASSES => [ 'c-pagination__link', 'anchor', 'pagination__item-anchor' ],
 			Link::URL     => get_the_permalink( $post_id ),
 			Link::CONTENT => get_the_title( $post_id ),
-		];
-
-		$link = new Link( $options );
-
-		return $link->get_render();
+		] )->get_rendered_output();
 	}
 
 	protected function get_comments() {
@@ -89,7 +86,7 @@ class Page extends Component {
 	public function render(): void {
 		?>
         {% if breadcrumbs %}
-            {{ component( 'breadcrumbs/Breadcrumbs.php', breadcrumbs ) }}
+        {{ component( 'breadcrumbs/Breadcrumbs.php', breadcrumbs ) }}
         {% endif %}
 
         {{ component( 'header/subheader/Subheader.php', subheader ) }}

@@ -2,6 +2,7 @@
 
 namespace Tribe\Project\Models;
 
+use Tribe\Project\Components\Component_Factory;
 use Tribe\Project\Templates\Components\Image as Image_Component;
 use Tribe\Project\Theme\Config\Image_Sizes;
 use \WP_Post;
@@ -102,6 +103,10 @@ class Post extends Model {
 	}
 
 	public function image() {
+		/**
+		 * @var Component_Factory $factory
+		 */
+		$factory = tribe_project()->container()->get( Component_Factory::class );
 		$image_id = get_post_thumbnail_id( $this->ID );
 
 		if ( empty( $image_id ) ) {
@@ -127,9 +132,7 @@ class Post extends Model {
 			],
 		];
 
-		$component = new Image_Component( $options );
-
-		return $component->get_render();
+		return $factory->get( Image_Component::class, $options )->get_rendered_output();
 	}
 
 	public function time() {

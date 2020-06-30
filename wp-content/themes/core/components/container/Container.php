@@ -8,33 +8,35 @@ namespace Tribe\Project\Templates\Components;
  * A component to contain arbitrary html and take classes/attributes. Useful when
  * composing more complex ui's in other controllers
  *
- * @property string   $content
+ * @property string   $content_component
+ * @property array    $content
  * @property string   $tag
  * @property string[] $classes
  * @property string[] $attrs
  */
-class Container extends Context {
-	public const CONTENT = 'content';
-	public const TAG     = 'tag';
-	public const CLASSES = 'classes';
-	public const ATTRS   = 'attrs';
+class Container extends Component {
 
-	protected $path = __DIR__ . '/container.twig';
+	public const CONTENT_COMPONENT = 'content_component';
+	public const CONTENT           = 'content';
+	public const TAG               = 'tag';
+	public const CLASSES           = 'classes';
+	public const ATTRS             = 'attrs';
 
-	protected $properties = [
-		self::CONTENT => [
-			self::DEFAULT => '',
-		],
-		self::TAG     => [
-			self::DEFAULT => 'div',
-		],
-		self::CLASSES => [
-			self::DEFAULT       => [ 'c-container' ],
-			self::MERGE_CLASSES => [],
-		],
-		self::ATTRS   => [
-			self::DEFAULT          => [],
-			self::MERGE_ATTRIBUTES => [],
-		],
-	];
+	protected function defaults(): array {
+		return [
+			self::CONTENT_COMPONENT => 'content-block/Content_Block.php',
+			self::CONTENT           => [],
+			self::TAG               => 'div',
+			self::CLASSES           => [ 'c-container' ],
+			self::ATTRS             => [],
+		];
+	}
+
+	public function render(): void {
+		?>
+		<{{ tag }} {{ classes }} {{ attrs }}>
+			{{ component( content_component, content ) }}
+		</{{ tag }}>
+		<?php
+	}
 }

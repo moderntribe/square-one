@@ -4,13 +4,39 @@ namespace Tribe\Project\Templates\Components;
 
 use Tribe\Libs\Utils\Markup_Utils;
 use DI;
+use Tribe\Project\Assets\Theme\Theme_Build_Parser;
+use Tribe\Project\Components\Component_Factory;
 use Tribe\Project\Components\Handler;
+use Twig\Environment;
+use Twig\Error\Error;
 
 abstract class Component {
 
+	/**
+	 * @var array
+	 */
 	protected $data;
 
-	public function __construct( $args = [] ) {
+	/**
+	 * @var Component_Factory
+	 */
+	protected $factory;
+
+	/**
+	 * @var Environment
+	 */
+	protected $twig;
+
+	/**
+	 * @var Theme_Build_Parser
+	 */
+	protected $build_parser;
+
+	public function __construct( Component_Factory $factory, Environment $twig, Theme_Build_Parser $build_parser, $args = [] ) {
+		$this->factory      = $factory;
+		$this->twig         = $twig;
+		$this->build_parser = $build_parser;
+
 		$this->data = $args;
 		$this->merge_defaults();
 	}
@@ -23,10 +49,28 @@ abstract class Component {
 		return $this->data;
 	}
 
-	public function get_render(): string {
-		$handler = tribe_project()->container()->get( Handler::class );
+	public function output(): void {
+		/**
+		 * @var Component $component
+		 */
+		$this->init();
+
 		ob_start();
-		$handler->render_component( static::class, $this->data );
+		$this->render();
+		$template = ob_get_clean();
+
+		try {
+			echo $this->twig->render( $this->twig->createTemplate( $template ), $this->data() );
+		} catch ( Error $e ) {
+			error_log( $e->getMessage() );
+
+			return;
+		}
+	}
+
+	public function get_rendered_output(): string {
+		ob_start();
+		$this->output();
 
 		return ob_get_clean();
 	}
@@ -55,7 +99,8 @@ abstract class Component {
 		return Markup_Utils::class_attribute( array_merge( ... $classes ), true );
 	}
 
-	public function init() {}
+	public function init() {
+	}
 
 	protected function defaults(): array {
 		return [];

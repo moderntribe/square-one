@@ -12,47 +12,29 @@ use Twig\Error\Error;
 class Handler {
 
 	/**
-	 * @var Environment
+	 * @var Component_Factory
 	 */
-	private $twig;
+	private $factory;
 
 	/**
 	 * @var Parser
 	 */
 	private $parser;
 
-	public function __construct( Environment $twig, Parser $parser ) {
-		$this->twig   = $twig;
-		$this->parser = $parser;
+	public function __construct( Component_Factory $factory, Parser $parser ) {
+		$this->factory = $factory;
+		$this->parser  = $parser;
 	}
 
 	public function render_component( string $component_name, array $args = [] ) {
 		if ( class_exists( $component_name ) ) {
-			$component = new $component_name( $args );
+			$component = $this->factory->get( $component_name, $args );
 		} else {
 			$classname = $this->get_component_from_path( $component_name );
-			$component = new $classname( $args );
+			$component = $this->factory->get( $classname, $args );
 		}
 
-		if ( ! is_a( $component, Component::class ) ) {
-			throw new \InvalidArgumentException( 'Component ' . $component_name . ' does not appear to be a valid Component class.' );
-		}
-
-		/**
-		 * @var Component $component
-		 */
-		$component->init();
-
-		ob_start();
-		$component->render();
-		$template = ob_get_clean();
-
-		try {
-			echo $this->twig->render( $this->twig->createTemplate( $template ), $component->data() );
-		} catch ( Error $e ) {
-			error_log( $e->getMessage() );
-			return;
-		}
+		$component->output();
 	}
 
 	private function get_component_from_path( string $path ) {

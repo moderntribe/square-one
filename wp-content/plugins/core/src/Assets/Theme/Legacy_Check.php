@@ -3,6 +3,7 @@
 namespace Tribe\Project\Assets\Theme;
 
 class Legacy_Check {
+
 	/** @var string */
 	private $unsupported_browser_path;
 
@@ -18,36 +19,25 @@ class Legacy_Check {
 	public function print_redirect_script(): void {
 		?>
 
-		<script type="text/javascript">
+        <script type="text/javascript">
 			function is_browser() {
-				return (
-					navigator.userAgent.indexOf("Chrome") !== -1 ||
-					navigator.userAgent.indexOf("Opera") !== -1 ||
-					navigator.userAgent.indexOf("Firefox") !== -1 ||
-					navigator.userAgent.indexOf("MSIE") !== -1 ||
-					navigator.userAgent.indexOf("Safari") !== -1 ||
-					navigator.userAgent.indexOf("Edge") !== -1
-				);
+				return (navigator.userAgent.indexOf("Chrome") !== - 1 || navigator.userAgent.indexOf("Opera") !== - 1 || navigator.userAgent.indexOf("Firefox") !== - 1 || navigator.userAgent.indexOf("MSIE") !== - 1 || navigator.userAgent.indexOf("Safari") !== - 1 || navigator.userAgent.indexOf("Edge") !== - 1);
 			}
 
 			function less_than_ie11() {
-				return (
-					!window.atob || // IE9 and below
-					Function('/*@cc_on return document.documentMode===10@*/')() // IE10
+				return (!window.atob || // IE9 and below
+						Function('/*@cc_on return document.documentMode===10@*/')() // IE10
 				);
 			}
 
 			function not_excluded_page() {
-				return (
-					window.location.href.indexOf("<?php echo $this->unsupported_browser_path; ?>") === -1 &&
-					document.title.toLowerCase().indexOf('page not found') === -1
-				);
+				return (window.location.href.indexOf("<?php echo $this->unsupported_browser_path; ?>") === - 1 && document.title.toLowerCase().indexOf('page not found') === - 1);
 			}
 
 			if (is_browser() && less_than_ie11() && not_excluded_page()) {
 				window.location = location.protocol + '//' + location.host + '<?php echo $this->unsupported_browser_path; ?>';
 			}
-		</script>
+        </script>
 
 		<?php
 	}
@@ -68,10 +58,10 @@ class Legacy_Check {
 	 *
 	 * @param string $template The template file to load.
 	 *
-	 * @return string
+	 * @return mixed
 	 * @filter template_include
 	 */
-	public function load_unsupported_template( $template ): string {
+	public function load_unsupported_template( $template ) {
 
 		global $wp_query;
 
@@ -79,12 +69,7 @@ class Legacy_Check {
 			return $template;
 		}
 
-		$new_template = locate_template( 'page-templates/page-unsupported-browser.php' );
-
-		if ( ! empty( $new_template ) ) {
-			return $new_template;
-		}
-
-		return $template;
+		tribe_controller( \Tribe\Project\Controllers\MainController::class, 'unsupported' );
+		exit;
 	}
 }

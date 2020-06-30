@@ -24,6 +24,10 @@ class MainController extends Controller {
 		$this->render_component( 'document/Document.php', $args );
 	}
 
+	public function unsupported() {
+		$this->render_component( 'page/page-unsupported-browser/Page_Unsupported_Browser.php', [] );
+	}
+
 	protected function get_main_content() {
 		return [
 			Main::TEMPLATE_TYPE => is_page() ? 'page/Page.php' : 'page/single/Single.php',

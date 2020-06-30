@@ -19,7 +19,7 @@ class Components_Definer implements Definer_Interface {
 			},
 
 			Handler::class => DI\create()
-				->constructor( DI\get( Environment::class ), DI\get( self::PARSER ) ),
+				->constructor( DI\get( Component_Factory::class ), DI\get( self::PARSER ) ),
 		];
 	}
 }
