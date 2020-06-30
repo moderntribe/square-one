@@ -11,33 +11,32 @@ namespace Tribe\Project\Templates\Components;
  * @property string[] $quote_attrs
  * @property string[] $cite_attrs
  */
-class Quote extends Context {
+class Quote extends Component {
+
 	public const QUOTE       = 'quote';
 	public const CITE        = 'cite';
 	public const CLASSES     = 'classes';
 	public const QUOTE_ATTRS = 'quote_attrs';
 	public const CITE_ATTRS  = 'cite_attrs';
 
-	protected $path = __DIR__ . '/quote.twig';
+	protected function defaults(): array {
+		return [
+			self::QUOTE       => '',
+			self::CITE        => '',
+			self::CLASSES     => [ 'c-quote' ],
+			self::QUOTE_ATTRS => [],
+			self::CITE_ATTRS  => [],
+		];
+	}
 
-	protected $properties = [
-		self::QUOTE       => [
-			self::DEFAULT => '',
-		],
-		self::CITE        => [
-			self::DEFAULT => '',
-		],
-		self::CLASSES     => [
-			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [ 'c-quote' ],
-		],
-		self::QUOTE_ATTRS => [
-			self::DEFAULT          => [],
-			self::MERGE_ATTRIBUTES => [],
-		],
-		self::CITE_ATTRS  => [
-			self::DEFAULT          => [],
-			self::MERGE_ATTRIBUTES => [],
-		],
-	];
+	public function render(): void {
+		?>
+		<blockquote {{ classes }}>
+			<p class="c-quote__text" {{ quote_attrs }}>{{ quote }}</p>
+			{% if cite %}
+				<cite class="c-quote__cite" {{ cite_attrs }}>{{ cite }}</cite>
+			{% endif %}
+		</blockquote>
+		<?php
+	}
 }

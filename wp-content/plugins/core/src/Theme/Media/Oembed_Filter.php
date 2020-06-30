@@ -2,7 +2,7 @@
 
 namespace Tribe\Project\Theme\Media;
 
-use Tribe\Project\Templates\Component_Factory;
+use Tribe\Project\Components\Component_Factory;
 use Tribe\Project\Templates\Components\Video;
 
 class Oembed_Filter {
@@ -68,7 +68,7 @@ class Oembed_Filter {
 			Video::TRIGGER_POSITION => Video::TRIGGER_POSITION_BOTTOM, // Options: bottom, center
 		];
 
-		$frontend_html = $this->component->get( Video::class, $options )->render();
+		$frontend_html = $this->component->get( Video::class, $options )->get_rendered_output();
 
 		$this->cache_frontend_html( $frontend_html, $url );
 

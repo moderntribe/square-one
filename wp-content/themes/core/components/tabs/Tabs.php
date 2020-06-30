@@ -2,9 +2,6 @@
 
 namespace Tribe\Project\Templates\Components;
 
-use Tribe\Project\Templates\Component_Factory;
-use Twig\Environment;
-
 /**
  * Class Tabs
  *
@@ -31,7 +28,8 @@ use Twig\Environment;
  * @property string[] $tab_content_inner_classes
  * @property string[] $tab_content_inner_attrs
  */
-class Tabs extends Context {
+class Tabs extends Component {
+
 	public const TABS                      = 'tabs';
 	public const WRAPPER_ID                = 'wrapper_id';
 	public const CONTAINER_CLASSES         = 'container_classes';
@@ -48,83 +46,32 @@ class Tabs extends Context {
 	public const TAB_CONTENT_INNER_CLASSES = 'tab_content_inner_classes';
 	public const TAB_CONTENT_INNER_ATTRS   = 'tab_content_inner_attrs';
 
-	private const TABLIST_BUTTONS           = 'tablist_buttons';
+	private const TABLIST_BUTTONS = 'tablist_buttons';
 
-	protected $path = __DIR__ . '/tabs.twig';
-
-	protected $properties = [
-		self::TABS                      => [
-			self::DEFAULT => [],
-		],
-		self::WRAPPER_ID                => [
-			self::DEFAULT => '',
-		],
-		self::CONTAINER_CLASSES         => [
-			self::DEFAULT       => [ 'c-tabs' ],
-			self::MERGE_CLASSES => [],
-		],
-		self::CONTAINER_ATTRS           => [
-			self::DEFAULT          => [],
-			self::MERGE_ATTRIBUTES => [ 'data-js' => 'c-tabs' ],
-		],
-		self::TAB_LIST_CLASSES          => [
-			self::DEFAULT       => [ 'c-tab__list' ],
-			self::MERGE_CLASSES => [],
-		],
-		self::TAB_LIST_ATTRS            => [
-			self::DEFAULT          => [],
-			self::MERGE_ATTRIBUTES => [ 'role' => 'tablist', 'data-js' => 'c-tablist' ],
-		],
-		self::TAB_BUTTON_CLASSES        => [
-			self::DEFAULT => [ 'c-tab__button' ],
-		],
-		self::TAB_BUTTON_ACTIVE_CLASS   => [
-			self::DEFAULT => 'c-tab__button--active',
-		],
-		self::TAB_BUTTON_ATTRS          => [
-			self::DEFAULT => [],
-		],
-		self::TAB_BUTTON_OPTIONS        => [
-			self::DEFAULT => [],
-		],
-		self::TAB_CONTENT_CLASSES       => [
-			self::DEFAULT       => [ 'c-tab__content', 's-sink t-sink' ],
-			self::MERGE_CLASSES => [],
-		],
-		self::TAB_CONTENT_ATTRS         => [
-			self::DEFAULT          => [],
-			self::MERGE_ATTRIBUTES => [ 'role' => 'tabpanel', 'tabindex' => 0 ],
-		],
-		self::TAB_CONTENT_ACTIVE_CLASS  => [
-			self::DEFAULT => 'c-tab__content--active',
-		],
-		self::TAB_CONTENT_INNER_CLASSES => [
-			self::DEFAULT       => [ 'c-tab__content-inner' ],
-			self::MERGE_CLASSES => [],
-		],
-		self::TAB_CONTENT_INNER_ATTRS   => [
-			self::DEFAULT          => [],
-			self::MERGE_ATTRIBUTES => [],
-		],
-	];
-
-	public function __construct( Environment $twig, Component_Factory $factory, array $properties = [] ) {
-		if ( empty( $properties[ self::WRAPPER_ID ] ) ) {
-			$properties[ self::WRAPPER_ID ] = uniqid( 'tab-', false );
-		}
-		parent::__construct( $twig, $factory, $properties );
+	protected function defaults(): array {
+		return [
+			self::TABS                      => [],
+			self::WRAPPER_ID                => uniqid( 'tab-', false ),
+			self::CONTAINER_CLASSES         => [ 'c-tabs' ],
+			self::CONTAINER_ATTRS           => [ 'data-js' => 'c-tabs' ],
+			self::TAB_LIST_CLASSES          => [ 'c-tab__list' ],
+			self::TAB_LIST_ATTRS            => [],
+			self::TAB_BUTTON_CLASSES        => [ 'c-tab__button' ],
+			self::TAB_BUTTON_ACTIVE_CLASS   => 'c-tab__button--active',
+			self::TAB_BUTTON_ATTRS          => [],
+			self::TAB_BUTTON_OPTIONS        => [],
+			self::TAB_CONTENT_CLASSES       => [ 'c-tab__content', 's-sink t-sink' ],
+			self::TAB_CONTENT_ATTRS         => [ 'role' => 'tabpanel', 'tabindex' => 0 ],
+			self::TAB_CONTENT_ACTIVE_CLASS  => 'c-tab__content--active',
+			self::TAB_CONTENT_INNER_CLASSES => [ 'c-tab__content-inner' ],
+			self::TAB_CONTENT_INNER_ATTRS   => [],
+		];
 	}
 
-	public function get_data(): array {
-		// add attributes to support active tab
-		$this->properties[ self::CONTAINER_ATTRS ][ self::MERGE_ATTRIBUTES ]['data-button-active-class']  = $this->tab_button_active_class;
-		$this->properties[ self::CONTAINER_ATTRS ][ self::MERGE_ATTRIBUTES ]['data-content-active-class'] = $this->tab_content_active_class;
-
-		$data = parent::get_data();
-
-		$data[ self::TABLIST_BUTTONS ] = $this->get_tablist_buttons();
-
-		return $data;
+	public function init() {
+		$this->data[ self::CONTAINER_ATTRS ]['data-button-active-class']  = $this->data[ self::TAB_BUTTON_ACTIVE_CLASS ];
+		$this->data[ self::CONTAINER_ATTRS ]['data-content-active-class'] = $this->data[ self::TAB_CONTENT_ACTIVE_CLASS ];
+		$this->data[ self::TABLIST_BUTTONS ]                              = $this->get_tablist_buttons();
 	}
 
 	/**
@@ -133,7 +80,7 @@ class Tabs extends Context {
 	 * @return string[]
 	 */
 	protected function get_tablist_buttons(): array {
-		$tabs    = $this->tabs;
+		$tabs    = $this->data[self::TABS];
 		$buttons = [];
 		foreach ( $tabs as $index => $tab ) {
 			$tab                       = wp_parse_args( $tab, [
@@ -152,10 +99,10 @@ class Tabs extends Context {
 				'aria-selected'  => ( $index === 0 ) ? 'true' : 'false',
 				'data-row-index' => $index,
 			];
-			$button_attributes         = array_merge( $button_attributes_default, $this->tab_button_attrs, $tab['btn_attrs'] );
-			$btn_classes               = $this->tab_button_classes;
+			$button_attributes         = array_merge( $button_attributes_default, $this->data[ self::TAB_BUTTON_ATTRS ], $tab['btn_attrs'] );
+			$btn_classes               = $this->data[ self::TAB_BUTTON_CLASSES ];
 			if ( $index === 0 ) {
-				$btn_classes[] = $this->tab_button_active_class;
+				$btn_classes[] = $this->data[ self::TAB_BUTTON_ACTIVE_CLASS ];
 			}
 			$options   = [
 				Button::CONTENT => $tab['tab_text'],
@@ -163,9 +110,36 @@ class Tabs extends Context {
 				Button::ATTRS   => $button_attributes,
 			];
 			$options   = wp_parse_args( $options, $tab['btn_options'] );
-			$buttons[] = $this->factory->get( Button::class, $options )->render();
+			$buttons[] = $this->factory->get( Button::class, $options )->get_rendered_output();
 		}
 
 		return $buttons;
+	}
+
+	public function render(): void {
+		?>
+		<div {{ container_classes|esc_attr }}" id="{{ tab_id|esc_attr }} {{ container_attrs }}>
+			<div {{ tab_list_classes|esc_attr }} {{ tab_list_attrs }}>
+				{% for button in tablist_buttons %}
+					{{ button }}
+				{% endfor %}
+			</div>
+
+			{% for tab in tabs %}
+				<div class="{{ tab_content_classes|esc_attr }} {% if loop.index0 == 0 %}{{ tab_content_active_class|esc_attr }}{% endif %}"
+					 aria-hidden="{% if loop.index0 == 0 %}false{% else %}true{% endif %}"
+					 id="{{ tab.content_id|esc_attr }}"
+					 aria-labelledby="{{ tab.tab_id|esc_attr }}"
+					 {{ tab_content_attrs }}
+				>
+					<div {{ tab_content_inner_classes }}
+							{{ tab_content_inner_attrs }}
+							{{ tab.content_attrs }}>
+						{{ tab.content }}
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+		<?php
 	}
 }
