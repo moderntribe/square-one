@@ -42,14 +42,14 @@ class Search extends Component {
 			'name' => 's',
 		];
 
-		$this->data[ self::FORM_CLASSES ]  = $this->merge_classes( [ 'c-search' ] );
-		$this->data[ self::FORM_ATTRS ]    = $this->merge_attrs( $form_attrs );
-		$this->data[ self::LABEL_CLASSES ] = $this->merge_classes( [ 'c-search__label' ] );
-		$this->data[ self::LABEL_ATTRS ]   = $this->merge_attrs( $label_attrs );
-		$this->data[ self::INPUT_CLASSES ] = $this->merge_classes( [ 'c-search__input' ] );
-		$this->data[ self::INPUT_ATTRS ]   = $this->merge_attrs( $input_attrs );
-		$this->data[ self::SUBMIT_BUTTON ] = $this->submit_button();
-		$this->data[ self::LABEL_TEXT ]    = __( 'Search', 'tribe' );
+		$this->data[ self::FORM_CLASSES ][]  = 'c-search';
+		$this->data[ self::FORM_ATTRS ]      = $form_attrs;
+		$this->data[ self::INPUT_ATTRS ]     = $input_attrs;
+		$this->data[ self::LABEL_ATTRS ]     = $label_attrs;
+		$this->data[ self::LABEL_CLASSES ][] = 'c-search__label';
+		$this->data[ self::INPUT_CLASSES ][] = 'c-search__input';
+		$this->data[ self::SUBMIT_BUTTON ]   = $this->submit_button();
+		$this->data[ self::LABEL_TEXT ]      = __( 'Search', 'tribe' );
 	}
 
 	protected function submit_button(): array {
@@ -69,11 +69,12 @@ class Search extends Component {
 	}
 
 	public function render(): void {
+	    $foo = 'bar';
 		?>
-        <form {{ form_classes }} {{ form_attrs }}>
+        <form {{ classes( form_classes ) }} {{ attributes( form_attrs ) }}>
 
-            <label {{ label_classes }} {{ label_attrs }}>{{ label_text }}</label>
-            <input {{ input_classes }} {{ input_attrs }}/>
+            <label {{ classes( label_classes ) }} {{ attributes( label_attrs ) }}>{{ label_text }}</label>
+            <input {{ classes( input_classes ) }} {{ attributes( input_attrs ) }}/>
 
             {{ component( 'button/Button.php', submit_button ) }}
 

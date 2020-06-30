@@ -18,6 +18,7 @@ namespace Tribe\Project\Templates\Components;
  * @property string   $pagination_numbers
  */
 class Pagination extends Component {
+
 	public const WRAPPER_CLASSES    = 'wrapper_classes';
 	public const WRAPPER_ATTRS      = 'wrapper_attrs';
 	public const LIST_CLASSES       = 'list_classes';
@@ -30,58 +31,58 @@ class Pagination extends Component {
 	public const NEXT_POST          = 'next_post';
 	public const PAGINATION_NUMBERS = 'pagination_numbers';
 
-	public function init() {
-		$this->data['wrapper_classes'] = $this->merge_classes( $this->data['wrapper_classes'] ?? [] );
-		$this->data['wrapper_attrs']   = $this->merge_attrs( $this->data['wrapper_attrs'] ?? [] );
-
-		$this->data['list_classes'] = $this->merge_classes( $this->data['list_classes'] ?? [] );
-		$this->data['list_attrs']   = $this->merge_attrs( $this->data['list_attrs'] ?? [] );
-
-		$this->data['list_item_classes'] = $this->merge_classes( $this->data['list_item_classes'] ?? [] );
-		$this->data['list_item_attrs']   = $this->merge_attrs( $this->data['list_item_attrs'] ?? [] );
+	protected function defaults(): array {
+		return [
+			self::WRAPPER_ATTRS     => [],
+			self::WRAPPER_CLASSES   => [],
+			self::LIST_CLASSES      => [],
+			self::LIST_ATTRS        => [],
+			self::LIST_ITEM_CLASSES => [],
+			self::LIST_ITEM_ATTRS   => [],
+		];
 	}
 
 	public function render(): void {
 		?>
-		<nav {{ wrapper_classes }} {{ wrapper_attrs }}>
+        <nav {{ classes( wrapper_classes ) }} {{ attributes( wrapper_attrs ) }}>
 
-			<ul {{ list_classes }} {{ list_attrs }}>
+            <ul {{ classes( list_classes ) }} {{ attributes( list_attrs ) }}>
 
-				{% if first_post %}
-				<li {{ list_item_classes }} {{ list_item_attrs }}>
-					{{ first_post }}
-				</li>
-				{% endif %}
+                {% if first_post %}
+                <li {{ classes( list_item_classes ) }} {{ attributes( list_item_attrs ) }}>
+                    {{ first_post }}
+                </li>
+                {% endif %}
 
-				{% if prev_post %}
-				<li {{ list_item_classes }} {{ list_item_attrs }}>
-					{{ prev_post }}
-				</li>
-				{% endif %}
+                {% if prev_post %}
+                <li {{ classes( list_item_classes ) }} {{ attributes( list_item_attrs ) }}>
+                    {{ prev_post }}
+                </li>
+                {% endif %}
 
-				{% if pagination_numbers %}
-				{% for number in pagination_numbers %}
-				<li {{ list_item_classes }} {{ list_item_attrs }}>
-					{{ component( 'link/Link.php', number ) }}
-				</li>
-				{% endfor %}
-				{% endif %}
+                {% if pagination_numbers %}
+                {% for number in pagination_numbers %}
+                <li {{ classes( list_item_classes ) }} {{ attributes( list_item_attrs ) }}>
+                    {{ component( 'link/Link.php', number ) }}
+                </li>
+                {% endfor %}
+                {% endif %}
 
-				{% if next_post %}
-				<li {{ list_item_classes }} {{ list_item_attrs }}>
-					{{ next_post }}
-				</li>
-				{% endif %}
+                {% if next_post %}
+                <li {{ classes( list_item_classes ) }} {{ attributes( list_item_attrs ) }}>
+                    {{ next_post }}
+                </li>
+                {% endif %}
 
-				{% if last_post %}
-				<li {{ list_item_classes }} {{ list_item_attrs }}>
-					{{ last_post }}
-				</li>
-				{% endif %}
+                {% if last_post %}
+                <li {{ classes( list_item_classes ) }} {{ attributes( list_item_attrs ) }}>
+                    {{ last_post }}
+                </li>
+                {% endif %}
 
-			</ul>
+            </ul>
 
-		</nav>
+        </nav>
 		<?php
 	}
 

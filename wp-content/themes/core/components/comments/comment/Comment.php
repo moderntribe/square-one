@@ -58,14 +58,11 @@ class Comment extends Component {
 			'c'              => date( 'c', $this->data[ self::TIMESTAMP ] ),
 			'g:i A - M j, Y' => date( 'g:i A - M j, Y', $this->data[ self::TIMESTAMP ] ),
 		];
-
-		$this->data[ self::CLASSES ]    = $this->merge_classes( $this->data[ self::CLASSES ] );
-		$this->data[ self::ATTRIBUTES ] = $this->merge_attrs( $this->data[ self::ATTRIBUTES ] );
 	}
 
 	public function render(): void {
 		?>
-		<li {{ attr }} {{ classes }}>
+		<li {{ attributes( attr ) }} {{ classes( classes ) }}>
 
 			<header class="comment__header">
 

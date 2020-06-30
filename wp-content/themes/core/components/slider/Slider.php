@@ -62,11 +62,11 @@ class Slider extends Component {
 
 	public function render(): void {
 		?>
-		<div {{ container_classes }}>
-			<div {{ main_classes }} {{ main_attrs }}>
-				<div {{ wrapper_classes }}>
+		<div {{ classes( container_classes ) }}>
+			<div {{ classes( main_classes ) }} {{ attributes( main_attrs ) }}>
+				<div {{ classes( wrapper_classes ) }}>
 					{% for slide in slides %}
-						<div {{ slide_classes }}>
+						<div {{ classes( slide_classes ) }}>
 							{{ slide }}
 						</div>
 					{% endfor %}
@@ -82,7 +82,7 @@ class Slider extends Component {
 				{% endif %}
 			</div>
 			{% if show_carousel %}
-				<div class="c-slider__carousel swiper-container" {{ carousel_attrs }}>
+				<div class="c-slider__carousel swiper-container" {{ attributes( carousel_attrs ) }}>
 					<div class="swiper-wrapper">
 						{% for thumbnail in thumbnails %}
 							<button class="c-slider__thumbnail swiper-slide" data-js="c-slider-thumb-trigger" data-index="{{ loop.index0 }}" aria-label="{{ __( 'Slide navigation for image' )|esc_html }} {{ loop.index }}">

@@ -43,9 +43,6 @@ class Link extends Component {
 			$this->data[ self::ATTRS ]['rel'] = 'noopener';
 			$this->data[ self::CONTENT ]      .= $this->append_new_window_text();
 		}
-
-		$this->data[ self::CLASSES ] = $this->merge_classes( $this->data[ self::CLASSES ] ?? [] );
-		$this->data[ self::ATTRS ]   = $this->merge_attrs( $this->data[ self::ATTRS ] ?? [] );
 	}
 
 	/**
@@ -64,7 +61,7 @@ class Link extends Component {
 
 	public function render(): void {
 		?>
-        <a {{ classes }} {{ attrs }}>
+        <a {{ classes( classes ) }} {{ attributes( attrs ) }}>
             {{ content }}
         </a>
 		<?php

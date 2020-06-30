@@ -118,23 +118,23 @@ class Tabs extends Component {
 
 	public function render(): void {
 		?>
-		<div {{ container_classes|esc_attr }}" id="{{ tab_id|esc_attr }} {{ container_attrs }}>
-			<div {{ tab_list_classes|esc_attr }} {{ tab_list_attrs }}>
+		<div {{ classes( container_classes )|esc_attr }}" id="{{ tab_id|esc_attr }} {{ attributes( container_attrs ) }}>
+			<div {{ classes( tab_list_classes )|esc_attr }} {{ attributes( tab_list_attrs ) }}>
 				{% for button in tablist_buttons %}
 					{{ button }}
 				{% endfor %}
 			</div>
 
 			{% for tab in tabs %}
-				<div class="{{ tab_content_classes|esc_attr }} {% if loop.index0 == 0 %}{{ tab_content_active_class|esc_attr }}{% endif %}"
+				<div class="{{ classes( tab_content_classes )|esc_attr }} {% if loop.index0 == 0 %}{{ tab_content_active_class|esc_attr }}{% endif %}"
 					 aria-hidden="{% if loop.index0 == 0 %}false{% else %}true{% endif %}"
 					 id="{{ tab.content_id|esc_attr }}"
 					 aria-labelledby="{{ tab.tab_id|esc_attr }}"
-					 {{ tab_content_attrs }}
+					 {{ attributes( tab_content_attrs ) }}
 				>
-					<div {{ tab_content_inner_classes }}
-							{{ tab_content_inner_attrs }}
-							{{ tab.content_attrs }}>
+					<div {{ classes( tab_content_inner_classes ) }}
+							{{ attributes( tab_content_inner_attrs ) }}
+							{{ attributes( tab.content_attrs ) }}>
 						{{ tab.content }}
 					</div>
 				</div>

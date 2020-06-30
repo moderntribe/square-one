@@ -47,7 +47,7 @@ class Video extends Component {
 
 	public function render(): void {
 		?>
-		<div {{ classes }} {{ attrs }}>
+		<div {{ classes( classes ) }} {{ attributes( attrs ) }}>
 			<a
 				href="{{ video_url|esc_url }}"
 				class="c-video__trigger"

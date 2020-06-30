@@ -17,14 +17,16 @@ class Text extends Component {
 	public const CLASSES = 'classes';
 	public const ATTRS   = 'attrs';
 
-	public function init() {
-		$this->data[ self::CLASSES ] = $this->merge_classes( $this->data[ self::CLASSES ] ?? [] );
-		$this->data[ self::ATTRS ]   = $this->merge_attrs( $this->data[ self::ATTRS ] ?? [] );
+	protected function defaults(): array {
+		return [
+			self::CLASSES => [],
+			self::ATTRS   => [],
+		];
 	}
 
 	public function render(): void {
 		?>
-        <{{ tag }} {{ classes }} {{ attrs }}>{{ content }}</{{ tag }}>
+        <{{ tag }} {{ classes( classes ) }} {{ attributes( attrs ) }}>{{ content }}</{{ tag }}>
 		<?php
 	}
 }

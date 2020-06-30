@@ -49,19 +49,19 @@ class Card extends Component {
 
 	public function render(): void {
 		?>
-		<div {{ card_classes }}>
+		<div {{ classes( card_classes ) }}>
 
 			{% if before_card %}
 				{{ before_card }}
 			{% endif %}
 
 			{% if image %}
-				<header {{ card_header_classes }}>
+				<header {{ classes( card_header_classes ) }}>
 					{{ component( 'image/Image.php', image ) }}
 				</header>
 			{% endif %}
 
-			<div {{ card_content_classes }}>
+			<div {{ classes( card_content_classes ) }}>
 
 				{% if pre_title %}
 					{{ pre_title }}

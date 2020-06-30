@@ -38,14 +38,11 @@ class Trackback extends Component {
 
 	public function init() {
 		$this->data[ self::ATTRIBUTES ]['id'] = sprintf( 'comment-%d', $this->data[ self::COMMENT_ID ] );
-
-		$this->data[ self::CLASSES ]    = $this->merge_classes( $this->data[ self::CLASSES ] );
-		$this->data[ self::ATTRIBUTES ] = $this->merge_attrs( $this->data[ self::ATTRIBUTES ] );
 	}
 
 	public function render(): void {
 		?>
-		<li {{ attr }} {{ classes }}>
+		<li {{ attributes( attr ) }} {{ classes( classes ) }}>
 			<p>
 				<strong>{{ label }}</strong>
 

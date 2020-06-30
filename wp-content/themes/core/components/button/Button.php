@@ -27,14 +27,11 @@ class Button extends Component {
 		if ( ! empty( $this->data[ self::ARIA_LABEL ] ) ) {
 			$this->data[ self::ATTRS ]['aria-label'] = $this->data[ self::ARIA_LABEL ];
 		}
-
-		$this->data[ self::ATTRS ]   = $this->merge_attrs( $this->data[ self::ATTRS ] ?? [] );
-		$this->data[ self::CLASSES ] = $this->merge_classes( $this->data[ self::CLASSES ] ?? [] );
 	}
 
 	public function render(): void {
 		?>
-		<button {{ classes }} {{ attrs }}>
+		<button {{ classes( classes ) }} {{ attributes( attrs ) }}>
 			{{ content }}
 		</button>
 		<?php

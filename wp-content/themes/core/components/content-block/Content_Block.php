@@ -38,7 +38,7 @@ class Content_Block extends Component {
 
 	public function render(): void {
 		?>
-        <{{ tag }} {{ classes }} {{ attrs }}>
+        <{{ tag }} {{ classes( classes ) }} {{ attributes( attrs ) }}>
         {{ component( 'text/Text.php', leadin ) }}
         {{ component( 'text/Text.php', title ) }}
         {{ component( 'text/Text.php', text ) }}
