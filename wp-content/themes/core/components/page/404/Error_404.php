@@ -3,20 +3,34 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Templates\Components\Page;
 
-use Tribe\Project\Templates\Components\Context;
+use Tribe\Project\Templates\Components\Component;
 
-class Error_404 extends Context {
-	public const TITLE     = 'error_404_browser_title';
-	public const CONTENT   = 'error_404_browser_content';
+class Error_404 extends Component {
 
-	protected $path = __DIR__ . '/404.twig';
+	public const TITLE   = 'error_404_browser_title';
+	public const CONTENT = 'error_404_browser_content';
 
-	protected $properties = [
-		self::TITLE     => [
-			self::DEFAULT => '',
-		],
-		self::CONTENT   => [
-			self::DEFAULT => '',
-		],
-	];
+	protected function defaults(): array {
+		return [
+			self::TITLE   => $this->get_404_page_title(),
+			self::CONTENT => $this->get_404_page_content(),
+		];
+	}
+
+	protected function get_404_page_title(): string {
+		return __( 'Whoops! We are having trouble locating your page!', 'tribe' );
+	}
+
+	protected function get_404_page_content(): string {
+		return __( "If you're lost or have reached this page in error, our apologies. Please use the navigation menu or the links in the footer to find your way through the site. Please e-mail us if you have any questions.", 'tribe' );
+	}
+
+	public function render(): void {
+		?>
+		<div class="l-container">
+			<h2>{{ error_404_browser_title }}</h2>
+			<p>{{ error_404_browser_content }}</p>
+		</div>
+		<?php
+	}
 }

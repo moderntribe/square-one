@@ -1,3 +1,3 @@
 <?php
 
-echo tribe_template( \Tribe\Project\Templates\Controllers\Page\Error_404::class );
+tribe_controller( \Tribe\Project\Controllers\Error_Controller::class, 'error_404' );
