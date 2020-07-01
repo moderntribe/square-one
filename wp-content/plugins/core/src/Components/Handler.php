@@ -5,10 +5,12 @@ namespace Tribe\Project\Components;
 use PhpParser\Node\Name;
 use PhpParser\Node\Stmt\Namespace_;
 use PhpParser\Parser;
-use Tribe\Project\Templates\Components\Component;
-use Twig\Environment;
-use Twig\Error\Error;
 
+/**
+ * Class Handler
+ *
+ * @package Tribe\Project\Components
+ */
 class Handler {
 
 	/**
@@ -21,11 +23,21 @@ class Handler {
 	 */
 	private $parser;
 
+	/**
+	 * Handler constructor.
+	 *
+	 * @param Component_Factory $factory
+	 * @param Parser            $parser
+	 */
 	public function __construct( Component_Factory $factory, Parser $parser ) {
 		$this->factory = $factory;
 		$this->parser  = $parser;
 	}
 
+	/**
+	 * @param string $component_name
+	 * @param array  $args
+	 */
 	public function render_component( string $component_name, array $args = [] ) {
 		/**
 		 * Allows plugins to perform actions before a component is rendered.
@@ -53,6 +65,11 @@ class Handler {
 		do_action( 'tribe/project/components/after_render', $component_name, $args );
 	}
 
+	/**
+	 * @param string $path
+	 *
+	 * @return string
+	 */
 	private function get_component_from_path( string $path ) {
 		/**
 		 * Allows plugins to modify the path passed before attempting to locate it.

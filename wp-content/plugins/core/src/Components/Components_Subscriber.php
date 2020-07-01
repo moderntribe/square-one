@@ -8,6 +8,11 @@ use Tribe\Libs\Utils\Markup_Utils;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
 
+/**
+ * Class Components_Subscriber
+ *
+ * @package Tribe\Project\Components
+ */
 class Components_Subscriber extends Abstract_Subscriber {
 
 	public function register(): void {

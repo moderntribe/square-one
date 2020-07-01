@@ -7,6 +7,11 @@ use Tribe\Project\Assets\Theme\Theme_Build_Parser;
 use Tribe\Project\Templates\Components\Component;
 use Twig\Environment;
 
+/**
+ * Class Component_Factory
+ *
+ * @package Tribe\Project\Components
+ */
 class Component_Factory {
 
 	/**
@@ -19,6 +24,12 @@ class Component_Factory {
 	 */
 	protected $build_parser;
 
+	/**
+	 * Component_Factory constructor.
+	 *
+	 * @param Environment        $twig
+	 * @param Theme_Build_Parser $build_parser
+	 */
 	public function __construct( Environment $twig, Theme_Build_Parser $build_parser ) {
 		$this->twig         = $twig;
 		$this->build_parser = $build_parser;

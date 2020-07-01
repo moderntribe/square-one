@@ -34,6 +34,16 @@ class Image_Derivative extends Model {
 	/** @var bool */
 	protected $is_match = false;
 
+	/**
+	 * Image_Derivative constructor.
+	 *
+	 * @param string $size
+	 * @param string $src
+	 * @param int    $width
+	 * @param int    $height
+	 * @param bool   $is_intermediate
+	 * @param bool   $is_match
+	 */
 	public function __construct( string $size = '', string $src = '', int $width = 0, int $height = 0, bool $is_intermediate = false, bool $is_match = false ) {
 		$this->size            = $size;
 		$this->src             = $src;

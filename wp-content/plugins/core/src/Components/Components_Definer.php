@@ -8,10 +8,18 @@ use PhpParser\ParserFactory;
 use Tribe\Libs\Container\Definer_Interface;
 use Twig\Environment;
 
+/**
+ * Class Components_Definer
+ *
+ * @package Tribe\Project\Components
+ */
 class Components_Definer implements Definer_Interface {
 
 	const PARSER = 'parser';
 
+	/**
+	 * @return array
+	 */
 	public function define(): array {
 		return [
 			self::PARSER => function () {

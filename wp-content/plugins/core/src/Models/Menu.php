@@ -5,8 +5,16 @@ namespace Tribe\Project\Models;
 use Tribe\Project\Nav_Menus\Menu as Menu_Helper;
 use Tribe\Project\Nav_Menus\Walker\Walker_Nav_Menu_Primary;
 
+/**
+ * Class Menu
+ *
+ * @package Tribe\Project\Models
+ */
 class Menu extends Model {
 
+	/**
+	 * @return string
+	 */
 	public function primary() {
 		$args = [
 			'theme_location'  => 'primary',
@@ -23,6 +31,9 @@ class Menu extends Model {
 		return Menu_Helper::menu( $args );
 	}
 
+	/**
+	 * @return string
+	 */
 	public function secondary() {
 		$args = [
 			'theme_location'  => 'secondary',

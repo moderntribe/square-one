@@ -3,6 +3,11 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Models;
 
+/**
+ * Class Image
+ *
+ * @package Tribe\Project\Models
+ */
 class Image extends Model {
 
 	private const CACHE_GROUP = 'tribe_image_model';
@@ -25,6 +30,11 @@ class Image extends Model {
 	/** @var Image_Derivative[] */
 	protected $sizes = [];
 
+	/**
+	 * Image constructor.
+	 *
+	 * @param int $attachment_id
+	 */
 	public function __construct( int $attachment_id ) {
 		$attachment = get_post( $attachment_id );
 
@@ -45,34 +55,64 @@ class Image extends Model {
 		$this->sizes      = $sizes;
 	}
 
+	/**
+	 * @param $size
+	 *
+	 * @return bool
+	 */
 	public function has_size( $size ): bool {
 		return array_key_exists( $size, $this->sizes );
 	}
 
+	/**
+	 * @param $size
+	 *
+	 * @return Image_Derivative
+	 */
 	public function get_size( $size ): Image_Derivative {
 		return $this->has_size( $size ) ? $this->sizes[ $size ] : new Image_Derivative();
 	}
 
+	/**
+	 * @return int
+	 */
 	public function width(): int {
 		return $this->width;
 	}
 
+	/**
+	 * @return int
+	 */
 	public function height(): int {
 		return $this->height;
 	}
 
+	/**
+	 * @return \WP_Post
+	 */
 	public function get_attachment_post(): \WP_Post {
 		return $this->attachment;
 	}
 
+	/**
+	 * @return string
+	 */
 	public function title(): string {
 		return $this->title;
 	}
 
+	/**
+	 * @return string
+	 */
 	public function alt(): string {
 		return $this->alt;
 	}
 
+	/**
+	 * @param $attachment_id
+	 *
+	 * @return array
+	 */
 	private static function build_image_derivatives( $attachment_id ): array {
 		$registered_sizes = wp_get_additional_image_sizes();
 		$cached           = wp_cache_get( $attachment_id, self::CACHE_GROUP );
