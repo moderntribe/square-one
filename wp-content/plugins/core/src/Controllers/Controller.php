@@ -2,6 +2,7 @@
 
 namespace Tribe\Project\Controllers;
 
+use Tribe\Project\Components\Component_Factory;
 use Tribe\Project\Components\Handler;
 
 /**
@@ -12,6 +13,11 @@ use Tribe\Project\Components\Handler;
 class Controller {
 
 	/**
+	 * @var Component_Factory
+	 */
+	protected $factory;
+
+	/**
 	 * @var Handler
 	 */
 	protected $handler;
@@ -20,9 +26,11 @@ class Controller {
 	 * Controller constructor.
 	 *
 	 * @param Handler $handler
+	 * @param Component_Factory $factory
 	 */
-	public function __construct( Handler $handler ) {
+	public function __construct( Handler $handler, Component_Factory $factory ) {
 		$this->handler = $handler;
+		$this->factory = $factory;
 	}
 
 	/**

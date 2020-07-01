@@ -19,6 +19,7 @@ class Text extends Component {
 
 	protected function defaults(): array {
 		return [
+			self::TAG     => 'div',
 			self::CLASSES => [],
 			self::ATTRS   => [],
 		];

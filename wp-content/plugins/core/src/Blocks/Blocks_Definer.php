@@ -7,10 +7,13 @@ use DI;
 use Tribe\Libs\Container\Definer_Interface;
 use Tribe\Project\Blocks\Builder\Block_Builder;
 use Tribe\Project\Blocks\Builder\Builder_Factory;
-use Tribe\Project\Templates\Component_Factory;
+use Tribe\Project\Components\Component_Factory;
+use Tribe\Project\Components\Handler;
+use Tribe\Project\Controllers\Blocks\Media_Text;
 use Tribe\Project\Templates\Controllers;
 
 class Blocks_Definer implements Definer_Interface {
+
 	public const TYPES          = 'blocks.types';
 	public const CONTROLLER_MAP = 'blocks.controller_map';
 	public const BLACKLIST      = 'blocks.blacklist';
@@ -49,20 +52,12 @@ class Blocks_Definer implements Definer_Interface {
 			] ),
 
 			self::CONTROLLER_MAP => DI\add( [
-				Types\Accordion::NAME        => Controllers\Block\Accordion::class,
-				Types\Button::NAME           => Controllers\Block\Button::class,
-				Types\Card_Grid::NAME        => Controllers\Block\Card_Grid::class,
-				Types\Content_Carousel::NAME => Controllers\Block\Content_Carousel::class,
-				Types\Hero::NAME             => Controllers\Block\Hero::class,
-				Types\Icon_Grid::NAME        => Controllers\Block\Debug::class,
-				Types\Interstitial::NAME     => Controllers\Block\Interstitial::class,
-				Types\Media_Text::NAME       => Controllers\Block\Media_Text::class,
+				Types\Media_Text::NAME => Media_Text::class,
 			] ),
 
 			/**
 			 * An array of core/3rd-party block types that should be unregistered
-			 */
-			self::BLACKLIST      => [
+			 */ self::BLACKLIST  => [
 				'core/buttons',
 				'core/button',
 				'core/rss',
@@ -74,8 +69,7 @@ class Blocks_Definer implements Definer_Interface {
 			 * An array of block type style overrides
 			 *
 			 * Each item in the array should be a factory that returns a Block_Style_Override
-			 */
-			self::STYLES         => DI\add( [
+			 */ self::STYLES     => DI\add( [
 				DI\factory( static function () {
 					return new Block_Style_Override( [ 'core/paragraph' ], [
 						[
@@ -98,11 +92,9 @@ class Blocks_Definer implements Definer_Interface {
 				} ),
 			] ),
 
-			Render_Filter::class => DI\create()
-				->constructor( DI\get( Component_Factory::class ), DI\get( self::CONTROLLER_MAP ) ),
+			Render_Filter::class => DI\create()->constructor( DI\get( Component_Factory::class ), DI\get( Handler::class ), DI\get( self::CONTROLLER_MAP ) ),
 
-			Allowed_Blocks::class => DI\create()
-				->constructor( DI\get( self::BLACKLIST ) ),
+			Allowed_Blocks::class => DI\create()->constructor( DI\get( self::BLACKLIST ) ),
 
 			\Tribe\Gutenpanels\Builder\Block_Builder::class             => DI\get( Block_Builder::class ),
 			\Tribe\Gutenpanels\Builder\Factories\Builder_Factory::class => DI\get( Builder_Factory::class ),

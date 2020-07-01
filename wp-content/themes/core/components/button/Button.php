@@ -12,12 +12,20 @@ namespace Tribe\Project\Templates\Components;
  * @property string   $content
  */
 class Button extends Component {
+
 	public const TYPE       = 'type';
 	public const ARIA_LABEL = 'aria_label';
 	public const CLASSES    = 'classes';
 	public const ATTRS      = 'attrs';
 	public const CONTENT    = 'content';
 
+	protected function defaults(): array {
+		return [
+			self::CLASSES => [],
+			self::ATTRS   => [],
+			self::CONTENT => '',
+		];
+	}
 
 	public function init() {
 		if ( ! empty( $this->data[ self::TYPE ] ) ) {
@@ -31,9 +39,9 @@ class Button extends Component {
 
 	public function render(): void {
 		?>
-		<button {{ classes|stringify }} {{ attrs|stringify }}>
-			{{ content }}
-		</button>
+        <button {{ classes|stringify }} {{ attrs|stringify }}>
+            {{ content }}
+        </button>
 		<?php
 	}
 }
