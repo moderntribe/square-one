@@ -91,6 +91,11 @@ class Router {
 	public function dispatch() {
 		$instance = $this;
 
+		/**
+		 * Allows plugins to perform actions before a route is dispatched. Typically used to add Routes.
+		 *
+		 * @param Router $instance
+		 */
 		do_action( 'tribe/project/router/before_dispatch', $instance );
 
 		$dispatcher = FastRoute\simpleDispatcher( function ( FastRoute\RouteCollector $r ) use ( $instance ) {
@@ -108,6 +113,16 @@ class Router {
 
 		$uri       = rawurldecode( $uri );
 		$routeInfo = $dispatcher->dispatch( $method, $uri );
+
+		/**
+		 * Allows plugins to perform an action after a route has been dispatched.
+		 *
+		 * @param Router $instance
+		 * @param string $method
+		 * @param string $uri
+		 * @param array $routeInfo
+		 */
+		do_action( 'tribe/project/router/after_dispatch', $instance, $method, $uri, $routeInfo );
 
 		switch ( $routeInfo[0] ) {
 			case FastRoute\Dispatcher::FOUND:

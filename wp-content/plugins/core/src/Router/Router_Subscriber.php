@@ -16,6 +16,9 @@ use Tribe\Project\Theme\Media\Oembed_Filter;
 
 class Router_Subscriber extends Abstract_Subscriber {
 	public function register(): void {
+		/**
+		 * Perform Route lookup before loading a template.
+		 */
 		add_filter( 'template_include', function( $template ) {
 			$has_route = $this->container->get( Router::class )->dispatch();
 
@@ -26,6 +29,9 @@ class Router_Subscriber extends Abstract_Subscriber {
 			exit;
 		});
 
+		/**
+		 * Add our custom routes to the Router.
+		 */
 		add_action( 'tribe/project/router/before_dispatch', function( $router ) {
 			$this->container->get( Routes::class )->add_routes( $router );
 		});

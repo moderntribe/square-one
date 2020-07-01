@@ -27,6 +27,14 @@ class Handler {
 	}
 
 	public function render_component( string $component_name, array $args = [] ) {
+		/**
+		 * Allows plugins to perform actions before a component is rendered.
+		 *
+		 * @param string $component_name - The name or path of the current component
+		 * @param array $args - the arguments being passed to the component
+		 */
+		do_action( 'tribe/project/components/before_render', $component_name, $args );
+
 		if ( class_exists( $component_name ) ) {
 			$component = $this->factory->get( $component_name, $args );
 		} else {
@@ -35,9 +43,24 @@ class Handler {
 		}
 
 		$component->output();
+
+		/**
+		 * Allows plugins to perform actions after a component is rendered.
+		 *
+		 * @param string $component_name - The name or path of the current component
+		 * @param array $args - the arguments being passed to the component
+		 */
+		do_action( 'tribe/project/components/after_render', $component_name, $args );
 	}
 
 	private function get_component_from_path( string $path ) {
+		/**
+		 * Allows plugins to modify the path passed before attempting to locate it.
+		 *
+		 * @param string $path - the current path being loaded.
+		 */
+		$path = apply_filters( 'tribe/project/components/component_path', $path );
+
 		$full_path = sprintf( '%s%s%s', trailingslashit( get_stylesheet_directory() ), 'components/', $path );
 
 		if ( ! file_exists( $full_path ) ) {
