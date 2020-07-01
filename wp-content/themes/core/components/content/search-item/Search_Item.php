@@ -3,32 +3,30 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Templates\Components\Content;
 
-use Tribe\Project\Templates\Components\Context;
+use Tribe\Project\Templates\Components\Component;
 
-class Search_Item extends Context {
-	public const POST_TYPE = 'post_type';
-	public const TITLE     = 'title';
-	public const EXCERPT   = 'excerpt';
-	public const PERMALINK = 'permalink';
-	public const IMAGE     = 'featured_image';
+class Search_Item extends Component {
+	public const POST = 'post';
 
-	protected $path = __DIR__ . '/search-item.twig';
+	public function render(): void {
+		?>
+		<article class="item-loop item-loop--search item-loop--{{ post.post_type|esc_attr }}">
 
-	protected $properties = [
-		self::POST_TYPE => [
-			self::DEFAULT => '',
-		],
-		self::TITLE     => [
-			self::DEFAULT => '',
-		],
-		self::EXCERPT   => [
-			self::DEFAULT => '',
-		],
-		self::PERMALINK => [
-			self::DEFAULT => '',
-		],
-		self::IMAGE     => [
-			self::DEFAULT => '',
-		],
-	];
+			<header class="item-loop__header">
+
+				<h3 class="item-loop__title">
+					<a href="{{ post.permalink|esc_url }}" rel="bookmark">
+						{{ post.title }}
+					</a>
+				</h3>
+
+			</header>
+
+			{{ post.image }}
+
+			{{ post.excerpt }}
+
+		</article>
+		<?php
+	}
 }

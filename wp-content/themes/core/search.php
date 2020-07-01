@@ -1,3 +1,3 @@
 <?php
 
-echo tribe_template( \Tribe\Project\Templates\Controllers\Page\Search::class );
+tribe_controller( \Tribe\Project\Controllers\IndexController::class, 'search' );

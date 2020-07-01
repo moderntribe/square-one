@@ -55,7 +55,7 @@ class Core {
 		Theme_Definer::class,
 		Yoast_SEO_Definer::class,
 		Components_Definer::class,
-		Router_Definer::class,
+//		Router_Definer::class,
 	];
 
 	/**
@@ -73,7 +73,7 @@ class Core {
 		Theme_Subscriber::class,
 		Templates_Subscriber::class,
 		Yoast_SEO_Subscriber::class,
-		Router_Subscriber::class,
+//		Router_Subscriber::class,
 		Components_Subscriber::class,
 
 		// our post types
