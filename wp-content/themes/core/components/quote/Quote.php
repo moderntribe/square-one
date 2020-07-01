@@ -31,10 +31,10 @@ class Quote extends Component {
 
 	public function render(): void {
 		?>
-		<blockquote {{ classes( classes ) }}>
-			<p class="c-quote__text" {{ attributes( quote_attrs ) }}>{{ quote }}</p>
+		<blockquote {{ classes|stringify }}>
+			<p class="c-quote__text" {{ quote_attrs|stringify }}>{{ quote }}</p>
 			{% if cite %}
-				<cite class="c-quote__cite" {{ attributes( cite_attrs ) }}>{{ cite }}</cite>
+				<cite class="c-quote__cite" {{ cite_attrs|stringify }}>{{ cite }}</cite>
 			{% endif %}
 		</blockquote>
 		<?php

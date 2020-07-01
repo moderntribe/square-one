@@ -34,7 +34,7 @@ class Container extends Component {
 
 	public function render(): void {
 		?>
-		<{{ tag }} {{ classes( classes ) }} {{ attributes( attrs ) }}>
+		<{{ tag }} {{ classes|stringify }} {{ attrs|stringify }}>
 			{{ component( content_component, content ) }}
 		</{{ tag }}>
 		<?php

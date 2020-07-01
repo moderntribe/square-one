@@ -31,7 +31,7 @@ class Button extends Component {
 
 	public function render(): void {
 		?>
-		<button {{ classes( classes ) }} {{ attributes( attrs ) }}>
+		<button {{ classes|stringify }} {{ attrs|stringify }}>
 			{{ content }}
 		</button>
 		<?php

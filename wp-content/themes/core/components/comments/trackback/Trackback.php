@@ -42,7 +42,7 @@ class Trackback extends Component {
 
 	public function render(): void {
 		?>
-		<li {{ attributes( attr ) }} {{ classes( classes ) }}>
+		<li {{ attr|stringify }} {{ classes|stringify }}>
 			<p>
 				<strong>{{ label }}</strong>
 

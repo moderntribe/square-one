@@ -62,7 +62,7 @@ class Comment extends Component {
 
 	public function render(): void {
 		?>
-		<li {{ attributes( attr ) }} {{ classes( classes ) }}>
+		<li {{ attr|stringify }} {{ classes|stringify }}>
 
 			<header class="comment__header">
 

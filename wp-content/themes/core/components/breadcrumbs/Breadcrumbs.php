@@ -36,12 +36,12 @@ class Breadcrumbs extends Component {
 
 	public function render(): void {
 		?>
-        <div {{ classes( wrapper_classes ) }} {{ attributes( wrapper_attrs ) }}>
-            <ul {{ classes( main_classes ) }}>
+        <div {{ wrapper_classes|stringify }} {{ wrapper_attrs|stringify }}>
+            <ul {{ main_classes|stringify }}>
 
                 {% for item in items %}
-                <li {{ classes( item_classes ) }}>
-                    <a href="{{ item.url }}" {{ classes( link_classes ) }} {{ attributes( link_attrs ) }}>
+                <li {{ item_classes|stringify }}>
+                    <a href="{{ item.url }}" {{ link_classes|stringify }} {{ link_attrs|stringify }}>
                         {{ item.label }}
                     </a>
                 </li>

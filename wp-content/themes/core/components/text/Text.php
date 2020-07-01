@@ -26,7 +26,7 @@ class Text extends Component {
 
 	public function render(): void {
 		?>
-        <{{ tag }} {{ classes( classes ) }} {{ attributes( attrs ) }}>{{ content }}</{{ tag }}>
+        <{{ tag }} {{ classes|stringify }} {{ attrs|stringify }}>{{ content }}</{{ tag }}>
 		<?php
 	}
 }

@@ -61,7 +61,7 @@ class Link extends Component {
 
 	public function render(): void {
 		?>
-        <a {{ classes( classes ) }} {{ attributes( attrs ) }}>
+        <a {{ classes|stringify }} {{ attrs|stringify }}>
             {{ content }}
         </a>
 		<?php

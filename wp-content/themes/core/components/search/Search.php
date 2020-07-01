@@ -71,10 +71,10 @@ class Search extends Component {
 	public function render(): void {
 	    $foo = 'bar';
 		?>
-        <form {{ classes( form_classes ) }} {{ attributes( form_attrs ) }}>
+        <form {{ form_classes|stringify }} {{ form_attrs|stringify }}>
 
-            <label {{ classes( label_classes ) }} {{ attributes( label_attrs ) }}>{{ label_text }}</label>
-            <input {{ classes( input_classes ) }} {{ attributes( input_attrs ) }}/>
+            <label {{ label_classes|stringify }} {{ label_attrs|stringify }}>{{ label_text }}</label>
+            <input {{ input_classes|stringify }} {{ input_attrs|stringify }}/>
 
             {{ component( 'button/Button.php', submit_button ) }}
 

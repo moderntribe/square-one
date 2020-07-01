@@ -78,8 +78,7 @@ class Single extends Component {
 		];
 
 		$options = [
-			Breadcrumbs::ITEMS           => $items,
-			Breadcrumbs::WRAPPER_CLASSES => [],
+			Breadcrumbs::ITEMS => $items,
 		];
 
 		return $options;

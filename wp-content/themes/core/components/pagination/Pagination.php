@@ -44,38 +44,38 @@ class Pagination extends Component {
 
 	public function render(): void {
 		?>
-        <nav {{ classes( wrapper_classes ) }} {{ attributes( wrapper_attrs ) }}>
+        <nav {{ wrapper_classes|stringify }} {{ wrapper_attrs|stringify }}>
 
-            <ul {{ classes( list_classes ) }} {{ attributes( list_attrs ) }}>
+            <ul {{ list_classes|stringify }} {{ list_attrs|stringify }}>
 
                 {% if first_post %}
-                <li {{ classes( list_item_classes ) }} {{ attributes( list_item_attrs ) }}>
+                <li {{ list_item_classes|stringify }} {{ list_item_attrs|stringify }}>
                     {{ first_post }}
                 </li>
                 {% endif %}
 
                 {% if prev_post %}
-                <li {{ classes( list_item_classes ) }} {{ attributes( list_item_attrs ) }}>
+                <li {{ list_item_classes|stringify }} {{ list_item_attrs|stringify }}>
                     {{ prev_post }}
                 </li>
                 {% endif %}
 
                 {% if pagination_numbers %}
                 {% for number in pagination_numbers %}
-                <li {{ classes( list_item_classes ) }} {{ attributes( list_item_attrs ) }}>
+                <li {{ list_item_classes|stringify }} {{ list_item_attrs|stringify }}>
                     {{ component( 'link/Link.php', number ) }}
                 </li>
                 {% endfor %}
                 {% endif %}
 
                 {% if next_post %}
-                <li {{ classes( list_item_classes ) }} {{ attributes( list_item_attrs ) }}>
+                <li {{ list_item_classes|stringify }} {{ list_item_attrs|stringify }}>
                     {{ next_post }}
                 </li>
                 {% endif %}
 
                 {% if last_post %}
-                <li {{ classes( list_item_classes ) }} {{ attributes( list_item_attrs ) }}>
+                <li {{ list_item_classes|stringify }} {{ list_item_attrs|stringify }}>
                     {{ last_post }}
                 </li>
                 {% endif %}
