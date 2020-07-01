@@ -11,11 +11,11 @@ class Routes {
 			$router->get( '/', 'IndexController@loop' );
 			$router->get( '/page/[{page}]', 'IndexController@loop' );
 		} else {
-			$router->get( '/', 'MainController@home' );
-			$router->get( '/page/[{page}]', 'MainController@home' );
+			$router->get( '/', 'SingleController@home' );
+			$router->get( '/page/[{page}]', 'SingleController@home' );
 		}
 
-		$router->get( '/{pagename}/', 'MainController@single' );
+		$router->get( '/{pagename}/', 'SingleController@single' );
 		// etc for other routes
 	}
 

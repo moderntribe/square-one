@@ -32,8 +32,9 @@ class Router {
 	 */
 	private $handler;
 
-	public function __construct( Handler $handler ) {
+	public function __construct( Handler $handler, array $controllers ) {
 		$this->handler = $handler;
+		$this->get_controllers( $controllers );
 	}
 
 	/**
@@ -71,19 +72,13 @@ class Router {
 	}
 
 	/**
-	 * @param       $uri
-	 * @param array $args
+	 * @param array $controllers
 	 */
-	private function get_controllers( $uri, array $args = [] ) {
-		$controller_files = scandir( dirname( __FILE__ ) . '/../Controllers' );
+	private function get_controllers( array $controllers ) {
+		$controllers = apply_filters( 'tribe/project/controllers/registered_controllers', $controllers );
 
-		$controller_files = array_filter( $controller_files, function ( $filename ) {
-			return strpos( $filename, '.php' ) !== false && $filename !== 'Controller.php';
-		} );
-
-		foreach ( $controller_files as $file ) {
-			$basename                       = str_replace( '.php', '', $file );
-			$classname                      = sprintf( 'Tribe\\Project\\Controllers\\%s', $basename );
+		foreach ( $controllers as $classname ) {
+			$basename = (new \ReflectionClass($classname))->getShortName();
 			$this->controllers[ $basename ] = new $classname( $this->handler );
 		}
 	}
@@ -113,9 +108,6 @@ class Router {
 
 		$uri       = rawurldecode( $uri );
 		$routeInfo = $dispatcher->dispatch( $method, $uri );
-		$args      = isset( $routeInfo[2] ) ? $routeInfo[2] : [];
-
-		$this->get_controllers( $uri, $args );
 
 		switch ( $routeInfo[0] ) {
 			case FastRoute\Dispatcher::FOUND:

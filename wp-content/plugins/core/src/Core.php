@@ -19,6 +19,7 @@ use Tribe\Project\Nav_Menus\Nav_Menus_Subscriber;
 use Tribe\Project\Object_Meta\Object_Meta_Definer;
 use Tribe\Project\P2P\P2P_Definer;
 use Tribe\Project\Post_Types;
+use Tribe\Project\Router\Router_Definer;
 use Tribe\Project\Router\Router_Subscriber;
 use Tribe\Project\Settings\Settings_Definer;
 use Tribe\Project\Shortcodes\Shortcodes_Subscriber;
@@ -54,6 +55,7 @@ class Core {
 		Theme_Definer::class,
 		Yoast_SEO_Definer::class,
 		Components_Definer::class,
+		Router_Definer::class,
 	];
 
 	/**

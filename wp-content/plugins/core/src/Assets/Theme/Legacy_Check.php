@@ -69,7 +69,7 @@ class Legacy_Check {
 			return $template;
 		}
 
-		tribe_controller( \Tribe\Project\Controllers\MainController::class, 'unsupported' );
+		tribe_controller( \Tribe\Project\Controllers\SingleController::class, 'unsupported' );
 		exit;
 	}
 }

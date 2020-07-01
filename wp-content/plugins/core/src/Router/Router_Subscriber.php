@@ -4,6 +4,8 @@ declare( strict_types=1 );
 namespace Tribe\Project\Router;
 
 use Tribe\Libs\Container\Abstract_Subscriber;
+use Tribe\Project\Controllers\IndexController;
+use Tribe\Project\Controllers\SingleController;
 use Tribe\Project\Router\Router;
 use Tribe\Project\Router\Routes;
 use Tribe\Project\Theme\Config\Image_Sizes;

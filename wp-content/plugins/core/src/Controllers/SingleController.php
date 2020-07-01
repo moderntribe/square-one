@@ -11,7 +11,7 @@ use Tribe\Project\Templates\Components\Page\Page;
 use Tribe\Project\Templates\Components\Sidebar;
 use Tribe\Project\Templates\Components\Text;
 
-class MainController extends Controller {
+class SingleController extends Controller {
 
 	public function single() {
 		$args = [
