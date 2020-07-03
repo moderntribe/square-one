@@ -1,26 +1,28 @@
 /* -----------------------------------------------------------------------------
  *
- * Component: Panel: Interstitial
+ * Component: Panel: Hero
  *
  * ----------------------------------------------------------------------------- */
 
-.c-panel--interstitial {
+.c-panel--hero {
 	position: relative;
 	display: flex;
 	align-items: center;
+	min-height: 640px;
 	padding: var(--spacer-80) 0;
 	background-color: var(--color-grey-dark);
 
-	@media (--viewport-full) {
+	@media (--viewport-medium) {
+		min-height: 720px;
 		padding: var(--spacer-90) 0;
 	}
 }
 
 /* -----------------------------------------------------------------------------
- * Interstitial: Background Image
+ * Hero: Background Image
  * ----------------------------------------------------------------------------- */
 
-.interstitial__img {
+.hero__img {
 	/* Overlay */
 	&:after {
 		content: '';
@@ -33,18 +35,18 @@
 }
 
 /* -----------------------------------------------------------------------------
- * Interstitial: Content
+ * Hero: Content
  * ----------------------------------------------------------------------------- */
 
-.interstitial__content {
+.hero__content {
 	position: relative;
 }
 
 /* -----------------------------------------------------------------------------
- * Interstitial: Content Container
+ * Hero: Content Container
  * ----------------------------------------------------------------------------- */
 
-.interstitial__content-container {
+.hero__content-container {
 	max-width: var(--grid-width-staggered-double);
 
 	/* CASE: Text: Centered */
@@ -56,9 +58,25 @@
 }
 
 /* -----------------------------------------------------------------------------
- * Interstitial: Call To Action
+ * Hero: Lead-In
  * ----------------------------------------------------------------------------- */
 
-.interstitial__cta {
+.hero__leadin {
+	margin-bottom: var(--spacer-20);
+}
+
+/* -----------------------------------------------------------------------------
+ * Hero: Description
+ * ----------------------------------------------------------------------------- */
+
+.hero__description {
+	margin-top: var(--spacer-20);
+}
+
+/* -----------------------------------------------------------------------------
+ * Hero: Call To Action
+ * ----------------------------------------------------------------------------- */
+
+.hero__cta {
 	margin-top: var(--spacer-30);
 }

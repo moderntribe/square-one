@@ -37,8 +37,9 @@ class Interstitial extends Block_Controller {
 	private function get_image( $attachment_id ): string {
 		try {
 			return $this->factory->get( Image_Component::class, [
-				Image_Component::ATTACHMENT      => Image::factory( $attachment_id ),
+				Image_Component::ATTACHMENT      => Image::factory( (int) $attachment_id ),
 				Image_Component::AS_BG           => true,
+				Image_Component::USE_LAZYLOAD    => false, // TEMP until we get lazyload in the block editor preview.
 				Image_Component::WRAPPER_TAG     => 'div',
 				Image_Component::WRAPPER_CLASSES => [ 'interstitial__figure' ],
 				Image_Component::IMG_CLASSES     => [ 'interstitial__img', 'c-image__bg' ],
@@ -55,7 +56,7 @@ class Interstitial extends Block_Controller {
 
 	private function get_content(): string {
 		return $this->factory->get( Content_Block::class, [
-			Content_Block::CLASSES => [ 'interstitial__content-container' ],
+			Content_Block::CLASSES => [ 'interstitial__content-container', 't-theme--light' ],
 			Content_Block::TITLE   => $this->get_headline(),
 			Content_Block::ACTION  => $this->get_cta(),
 		] )->render();
@@ -68,7 +69,7 @@ class Interstitial extends Block_Controller {
 
 		return $this->factory->get( Text::class, [
 			Text::TAG     => 'h2',
-			Text::CLASSES => [ 'interstitial__title', 'h3', 't-theme--light' ],
+			Text::CLASSES => [ 'interstitial__title', 'h3' ],
 			Text::TEXT    => $this->attributes[ Interstitial_Block::DESCRIPTION ],
 		] )->render();
 	}

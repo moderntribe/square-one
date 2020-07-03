@@ -6,7 +6,7 @@ namespace Tribe\Project\Templates\Components\Panels;
 use Tribe\Project\Templates\Components\Context;
 
 /**
- * Class Media_Text
+ * Class Interstitial
  *
  * @property string   $layout
  * @property string   $media
@@ -63,7 +63,7 @@ class Interstitial extends Context {
 
 	public function get_data(): array {
 		if ( $this->layout ) {
-			$this->properties[ self::CLASSES ][ self::MERGE_CLASSES ][] = 'c-panel--layout-text-' . $this->layout;
+			$this->properties[ self::CLASSES ][ self::MERGE_CLASSES ][] = 'c-panel--' . $this->layout;
 		}
 
 		return parent::get_data();

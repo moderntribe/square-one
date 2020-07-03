@@ -5,18 +5,11 @@
  * ----------------------------------------------------------------------------- */
 
 .c-panel {
-	/* TODO: Temp spacing styles for panels in general. */
 	padding-top: var(--spacer-60);
 	padding-bottom: var(--spacer-60);
 
 	@media (--viewport-medium) {
 		padding-top: var(--spacer-70);
 		padding-bottom: var(--spacer-70);
-	}
-
-	/* TODO: This is a temp hack. Stop looking at me swan!
-		 CASE: inside a spacing sink, if the panel is full-bleed, then the next non-panel element should get some vertical spacing. */
-	.s-sink &.c-panel--full-bleed + *:not(.c-panel) {
-		margin-top: var(--spacer-40);
 	}
 }

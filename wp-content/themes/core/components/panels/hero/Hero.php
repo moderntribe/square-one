@@ -5,57 +5,68 @@ namespace Tribe\Project\Templates\Components\Panels;
 
 use Tribe\Project\Templates\Components\Context;
 
-/*
- * @TODO: THIS IS NOT COMPLETE AND WILL BE PICKED BACK UP BY RYAN
+/**
+ * Class Hero
+ *
+ * @property string   $layout
+ * @property string   $media
+ * @property string   $content
+ * @property string[] $container_classes
+ * @property string[] $media_classes
+ * @property string[] $content_classes
+ * @property string[] $classes
+ * @property string[] $attrs
  */
-
 class Hero extends Context {
-
-	public const CLASSES    = 'classes';
-	public const ATTRIBUTES = 'attrs';
-
-	public const TITLE    = 'title';
-	public const SUBTITLE = 'subtitle';
-	public const CONTENT  = 'content';
-	public const CTA      = 'cta';
-	public const MEDIA    = 'media';
-
-	public const SETTING_HORIZONTAL_ALIGN = 'setting_horizontal_alignment';
-	public const SETTING_BGD_COLOR        = 'setting_background_color';
-	public const SETTING_TEXT_COLOR       = 'setting_text_color';
-
+	public const LAYOUT            = 'layout';
+	public const MEDIA             = 'media';
+	public const CONTENT           = 'content';
+	public const CONTAINER_CLASSES = 'container_classes';
+	public const MEDIA_CLASSES     = 'media_classes';
+	public const CONTENT_CLASSES   = 'content_classes';
+	public const CLASSES           = 'classes';
+	public const ATTRS             = 'attrs';
 
 	protected $path = __DIR__ . '/hero.twig';
 
 	protected $properties = [
-		self::CLASSES     => [
-			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [ 'b-hero' ],
+		self::LAYOUT            => [
+			self::DEFAULT => '',
 		],
-		self::ATTRIBUTES  => [
+		self::MEDIA             => [
+			self::DEFAULT => '',
+		],
+		self::CONTENT           => [
+			self::DEFAULT => '',
+		],
+		self::CONTAINER_CLASSES => [
+			self::DEFAULT       => [],
+			self::MERGE_CLASSES => [ 'hero__container', 'l-container' ],
+		],
+		self::MEDIA_CLASSES     => [
+			self::DEFAULT       => [],
+			self::MERGE_CLASSES => [ 'hero__media' ],
+		],
+		self::CONTENT_CLASSES   => [
+			self::DEFAULT       => [],
+			self::MERGE_CLASSES => [ 'hero__content' ],
+		],
+		self::CLASSES           => [
+			self::DEFAULT       => [],
+			self::MERGE_CLASSES => [ 'c-panel', 'c-panel--hero', 'c-panel--full-bleed' ],
+		],
+		self::ATTRS             => [
 			self::DEFAULT          => [],
 			self::MERGE_ATTRIBUTES => [],
 		],
-
-		self::TITLE       => [
-			self::DEFAULT => '',
-		],
-		self::SUBTITLE       => [
-			self::DEFAULT => '',
-		],
-		self::CONTENT     => [
-			self::DEFAULT => '',
-		],
-		self::MEDIA         => [
-			self::DEFAULT => '',
-		],
-		self::CTA         => [
-			self::DEFAULT => '',
-		],
-
-		self::SETTING_BGD_COLOR => [
-			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [],
-		],
 	];
+
+	public function get_data(): array {
+		if ( $this->layout ) {
+			$this->properties[ self::CLASSES ][ self::MERGE_CLASSES ][] = 'c-panel--' . $this->layout;
+		}
+
+		return parent::get_data();
+	}
+
 }
