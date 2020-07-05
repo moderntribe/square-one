@@ -11,6 +11,7 @@ use Tribe\Project\Components\Component_Factory;
 use Tribe\Project\Components\Handler;
 use Tribe\Project\Controllers\Blocks\Hero;
 use Tribe\Project\Controllers\Blocks\Media_Text;
+use Tribe\Project\Controllers\Blocks\Interstitial;
 use Tribe\Project\Templates\Controllers;
 
 class Blocks_Definer implements Definer_Interface {
@@ -55,6 +56,7 @@ class Blocks_Definer implements Definer_Interface {
 			self::CONTROLLER_MAP => DI\add( [
 				Types\Media_Text::NAME => Media_Text::class,
 				Types\Hero::NAME => Hero::class,
+				Types\Interstitial::NAME => Interstitial::class,
 			] ),
 
 			/**
