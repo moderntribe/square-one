@@ -21,6 +21,16 @@ class Link extends Component {
 	public const ATTRS      = 'attrs';
 	public const CONTENT    = 'content';
 
+	protected function defaults(): array {
+		return [
+			self::URL        => '',
+			self::TARGET     => '',
+			self::ARIA_LABEL => '',
+			self::CLASSES    => [],
+			self::ATTRS      => [],
+			self::CONTENT    => '',
+		];
+	}
 
 	public function init() {
 		if ( ! isset( $this->data[ self::ATTRS ] ) ) {

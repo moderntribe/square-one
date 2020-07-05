@@ -145,7 +145,7 @@ class Share extends Component {
 
 			case self::PINTEREST:
 				if ( empty( $data['image_src'] ) ) {
-					return '';
+					return [];
 				}
 
 				$label      = __( 'Share on Pinterest', 'tribe' );
@@ -202,7 +202,7 @@ class Share extends Component {
 				return $this->link_component( $link, $label, $icon, $attributes );
 
 			default:
-				return '';
+				return [];
 		}
 	}
 
