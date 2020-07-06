@@ -9,7 +9,7 @@ import gravityForms from 'integrations/gravity-forms';
 const init = () => {
 	gravityForms();
 
-	console.info( 'SquareOne FE: Initialized all integrations.' );
+	console.info( 'SquareOne Theme: Initialized all integrations.' );
 };
 
 export default init;

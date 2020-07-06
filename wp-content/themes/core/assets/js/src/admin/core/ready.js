@@ -47,7 +47,7 @@ const init = () => {
 
 	editor();
 
-	console.info( 'Square One BE: Initialized all javascript that targeted document ready.' );
+	console.info( 'SquareOne Admin: Initialized all javascript that targeted document ready.' );
 };
 
 /**

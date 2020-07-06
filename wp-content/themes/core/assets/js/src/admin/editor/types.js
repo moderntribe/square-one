@@ -17,7 +17,7 @@ const removeBlackListedBlocks = () => {
 
 	blocksToUnregister.forEach( type => unregisterBlockType( type ) );
 
-	console.info( 'SquareOne BE: Unregistered these blocks from Gutenberg: ', blocksToUnregister );
+	console.info( 'SquareOne Admin: Unregistered these blocks from Gutenberg: ', blocksToUnregister );
 };
 
 /**
