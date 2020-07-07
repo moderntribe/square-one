@@ -1,6 +1,6 @@
 #ui-datepicker-div {
 	background: var(--jquery-datepicker-bgd-color);
-	border: 1px solid var(--color-neutral-20);
+	border: 1px solid var(--color-grey-light);
 	border-bottom: 0;
 	border-radius: 0;
 	width: auto;
@@ -48,6 +48,10 @@
 	&.ui-datepicker .ui-datepicker-title {
 		margin: 0.4em 43px 0.3em;
 		color: var(--jquery-datepicker-color);
+
+		select + select {
+			margin-left: 4px;
+		}
 	}
 
 	&.ui-datepicker .ui-datepicker-prev-hover,
@@ -116,7 +120,7 @@
 
 	&.ui-datepicker th {
 		padding: 4px 0;
-		color: var(--color-neutral-90);
+		color: var(--color-grey);
 		font-size: var(--jquery-datepicker-font-size);
 		font-weight: normal;
 		border: 0;
@@ -167,9 +171,9 @@
 			position: absolute;
 			width: 30px;
 			height: 30px;
-			left: 3px;
+			left: 50%;
 			top: 50%;
-			transform: translateY(-50%);
+			transform: translate(-50%, -50%);
 			z-index: -1;
 		}
 	}
