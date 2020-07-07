@@ -1,8 +1,7 @@
 <?php
-
+declare( strict_types=1 );
 
 namespace Tribe\Project\Taxonomies\Post_Tag;
-
 
 use Tribe\Libs\Taxonomy\Term_Object;
 

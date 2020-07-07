@@ -162,7 +162,7 @@ const videoEmbeds = () => {
 	bindEvents();
 	setupOembeds();
 
-	console.info( 'Square One FE: Initialized video embeds scripts.' );
+	console.info( 'SquareOne Theme: Initialized video embeds scripts.' );
 };
 
 export default videoEmbeds;

@@ -10,13 +10,13 @@ jobs:
     strategy:
       matrix:
         operating-system: [ ubuntu-latest ]
-        php-versions: [ '7.2' ]
+        php-versions: [ '7.4' ]
 
     env:
       cache_version: 2 # increment to flush all caches
       PROJECT_ID: square1
       COMPOSE_INTERACTIVE_NO_CLI: 1
-      COMPOSE_FILE: dev/docker/docker-compose.yml:dev/docker/docker-compose.gh.yml
+      COMPOSE_FILE: docker-compose.yml:docker-compose.gh.yml
 
     steps:
 
@@ -37,12 +37,13 @@ jobs:
       - name: Create local config
         run: |
           php -r "file_exists( 'local-config.php' ) || copy( 'local-config-sample.php', 'local-config.php' );"
-          php -r "file_exists( 'local-config.json' ) || copy( 'local-config-sample.json', 'local-config.json' );"
+          php -r "file_exists( 'wp-content/themes/core/local-config.json' ) || copy( 'wp-content/themes/core/local-config-sample.json', 'wp-content/themes/core/local-config.json' );"
           php -r "file_exists( 'dev/tests/.env' ) || copy( 'dev/tests/.env-dist', 'dev/tests/.env' );"
           echo "define( 'TWIG_CACHE', false );" >> local-config.php
           echo "define( 'TRIBE_GLOMAR', false );" >> local-config.php
           echo "define( 'FORCE_SSL_LOGIN', false );" >> local-config.php
           echo "define( 'FORCE_SSL_ADMIN', false );" >> local-config.php
+          printf 'SQ1_UID=%d\nSQ1_GID=%d\n' $(id -u) $(id -g) > dev/docker/.env
 
       - name: Create composer config files
         run: |
@@ -60,17 +61,23 @@ jobs:
 
       - name: Create docker network
         run: docker network create --driver=bridge --subnet=172.20.10.0/24 global_proxy
+        working-directory: dev/docker
 
       - name: Start project containers
         run: docker-compose --project-name=${{ env.PROJECT_ID }} up -d --force-recreate
+        working-directory: dev/docker
 
       - name: Install composer dependencies
         run: docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-fpm composer install --optimize-autoloader -d /application/www
+        working-directory: dev/docker
 
       - name: Setup node
         uses: actions/setup-node@v1
         with:
           node-version: '12.13.1'
+
+      - name: Install gulp-cli
+        run: npm install gulp-cli -g
 
       - name: Get yarn cache directory
         id: yarn-cache-dir
@@ -85,10 +92,12 @@ jobs:
           restore-keys: ${{ runner.os }}-${{ env.cache_version }}-node-
 
       - name: Install node modules
-        run: yarn --frozen-lockfile
+        run: yarn install --frozen-lockfile
+        working-directory: wp-content/themes/core
 
       - name: Build assets
-        run: gulp dist
+        run: npm run server_dist
+        working-directory: wp-content/themes/core
 
       - name: Create test databases
         run: |
@@ -102,12 +111,16 @@ jobs:
 
       - name: Run unit tests
         run: docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests php /application/www/vendor/bin/codecept --config "/application/www/dev/tests" run unit
+        working-directory: dev/docker
 
       - name: Run integration tests
         run: docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests php /application/www/vendor/bin/codecept --config "/application/www/dev/tests" run integration
+        working-directory: dev/docker
 
       - name: Run acceptance tests
         run: docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests php /application/www/vendor/bin/codecept --config "/application/www/dev/tests" run acceptance
+        working-directory: dev/docker
 
       - name: Run webdriver tests
         run: docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests php /application/www/vendor/bin/codecept --config "/application/www/dev/tests" run webdriver
+        working-directory: dev/docker

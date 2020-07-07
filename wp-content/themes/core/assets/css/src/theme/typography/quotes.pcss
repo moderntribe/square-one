@@ -9,7 +9,8 @@
  * ----------------------------------------------------------------------------- */
 
 .quote,
-.t-sink q {
+[data-type^="core"] > q,
+.t-sink > q {
 	@mixin t-quote;
 
 	display: block;
@@ -20,7 +21,20 @@
  * ----------------------------------------------------------------------------- */
 
 .blockquote,
-.t-sink blockquote {
+[data-type^="core"] > blockquote,
+.t-sink > blockquote {
+	@media (--viewport-full) {
+		position: relative;
+
+		&:before {
+			content: '';
+			position: absolute;
+			left: calc(-1 * (var(--grid-1-col) + var(--grid-gutter)));
+			top: 0;
+			height: 100%;
+			border-left: 4px solid var(--color-primary);
+		}
+	}
 
 	p {
 		@mixin t-quote;
@@ -32,9 +46,12 @@
  * ----------------------------------------------------------------------------- */
 
 .cite,
-.t-sink cite {
+.t-sink > blockquote cite,
+.wp-block-quote__citation {
 	@mixin t-overline;
 
+	display: inline-block;
+	margin-top: var(--spacer-10);
 	font-style: normal;
 	color: var(--color-grey);
 }

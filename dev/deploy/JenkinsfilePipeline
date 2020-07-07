@@ -92,15 +92,18 @@ pipeline {
                             sh 'apk add --no-cache git openssh'
                             sh 'npm install -g gulp-cli'
 
-                            sh 'yarn install'
-                            sh 'cp local-config-sample.json local-config.json'
-                            sh 'gulp server_dist'
+                            sh 'yarn install:theme'
+                            sh 'yarn server_dist'
 
                             // Clean Up before packaging
-                            sh 'rm -rf node_modules'
+                            sh 'yarn clean:theme'
 
                             // Jenkins as owner
                             sh 'chown -R 110:117 .'
+                        }
+                        dir("${BUILD_FOLDER}/wp-content/plugins/gutenpanels"){
+                            sh 'yarn install'
+                            sh 'yarn build'
                         }
                     }
                 }

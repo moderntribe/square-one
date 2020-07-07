@@ -1,0 +1,130 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Component: Button
+ *
+ * ----------------------------------------------------------------------------- */
+
+/* -----------------------------------------------------------------------------
+ *
+ * Button: Primary
+ *
+ * Notes:
+ * + Has primary color for background.
+ * + On hover/focus animate background color
+ *
+ * Example:
+ * <button class="a-btn">...</button>
+ * <a href="#" class="a-btn">...</a>
+ *
+ * ----------------------------------------------------------------------------- */
+
+.a-btn,
+a.a-btn,
+[data-type^="core"] a.a-btn,
+.t-sink a.a-btn {
+	@mixin a-btn-primary;
+}
+
+/* -----------------------------------------------------------------------------
+ *
+ * Button: Secondary
+ *
+ * Notes:
+ * + Has primary color for outline/border
+ * + On hover/focus animate background color
+ *
+ * Example:
+ * <button class="a-btn-secondary">...</button>
+ * <a href="#" class="a-btn-secondary">...</a>
+ *
+ * ----------------------------------------------------------------------------- */
+
+.a-btn-secondary,
+a.a-btn-secondary,
+[data-type^="core"] a.a-btn-secondary,
+.t-sink a.a-btn-secondary {
+	@mixin a-btn-secondary;
+}
+
+/* -----------------------------------------------------------------------------
+ *
+ * Button: Tertiary
+ *
+ * Notes:
+ * + Has secondary color for background.
+ * + On hover/focus animate background color
+ *
+ * Example:
+ * <button class="a-btn-tertiary">...</button>
+ * <a href="#" class="a-btn-tertiary">...</a>
+ *
+ * ----------------------------------------------------------------------------- */
+
+.a-btn-tertiary,
+a.a-btn-tertiary,
+[data-type^="core"] a.a-btn-tertiary,
+.t-sink a.a-btn-tertiary {
+	@mixin a-btn-tertiary;
+}
+
+/* -----------------------------------------------------------------------------
+ *
+ * Button: Icon Before
+ *
+ * Notes:
+ * + Uses icon classes for the actual icon value.
+ * + Has (hidden) icon before button text.
+ * + On hover/focus button text bumps right and icon is shown.
+ *
+ * Example:
+ * <button class="a-btn a-btn--has-icon-before icon-arrow-left">...</button>
+ * <a href="#" class="a-btn a-btn--has-icon-before icon-arrow-left">...</a>
+ *
+ * ----------------------------------------------------------------------------- */
+
+.a-btn--has-icon-before,
+[data-type^="core"] a.a-btn--has-icon-before,
+.t-sink a.a-btn--has-icon-before {
+	@mixin a-btn-icon-before;
+}
+
+/* -----------------------------------------------------------------------------
+ *
+ * Button: Icon After
+ *
+ * Notes:
+ * + Uses icon classes for the actual icon value.
+ * + Has (hidden) icon after button text.
+ * + On hover/focus button text bumps left and icon is shown.
+ *
+ * Example:
+ * <button class="a-btn a-btn--has-icon-after icon-arrow-righ">...</button>
+ * <a href="#" class="a-btn a-btn--has-icon-after icon-arrow-right">...</a>
+ *
+ * ----------------------------------------------------------------------------- */
+
+.a-btn--has-icon-after,
+[data-type^="core"] a.a-btn--has-icon-after,
+.t-sink a.a-btn--has-icon-after {
+	@mixin a-btn-icon-after;
+}
+
+/* -----------------------------------------------------------------------------
+ *
+ * Call To Action: Primary
+ *
+ * Notes:
+ * + Enlarged text link styles
+ *
+ * Example:
+ * <button class="a-cta">...</button>
+ * <a href="#" class="a-cta">...</a>
+ *
+ * ----------------------------------------------------------------------------- */
+
+.a-cta,
+a.a-cta,
+[data-type^="core"] a.a-cta,
+.t-sink a.a-cta {
+	@mixin a-cta-primary;
+}

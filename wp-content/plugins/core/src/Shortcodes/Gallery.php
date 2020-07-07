@@ -2,7 +2,7 @@
 
 namespace Tribe\Project\Shortcodes;
 
-use Tribe\Project\Templates\Component_Factory;
+use Tribe\Project\Components\Component_Factory;
 use Tribe\Project\Templates\Components\Image;
 use Tribe\Project\Templates\Components\Slider;
 
@@ -55,7 +55,7 @@ class Gallery implements Shortcode {
 			Slider::MAIN_CLASSES    => [],
 		];
 
-		return $this->component->get( Slider::class, $options )->render();
+		return $this->component->get( Slider::class, $options )->get_rendered_output();
 	}
 
 	protected function get_attachments( $atts ) {
@@ -104,7 +104,7 @@ class Gallery implements Shortcode {
 
 		return array_filter( array_map( function ( $slide_id ) use ( $size ) {
 			try {
-				$image = \Tribe\Project\Templates\Models\Image::factory( $slide_id );
+				$image = new \Tribe\Project\Models\Image( $slide_id );
 			} catch ( \Exception $e ) {
 				return '';
 			}
@@ -115,7 +115,7 @@ class Gallery implements Shortcode {
 				Image::SRC_SIZE     => $size,
 			];
 
-			return $this->component->get( Image::class, $options )->render();
+			return $this->component->get( Image::class, $options )->get_rendered_output();
 		}, $slide_ids ) );
 	}
 }

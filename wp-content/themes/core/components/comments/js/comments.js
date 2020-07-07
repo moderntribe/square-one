@@ -57,7 +57,7 @@ const init = () => {
 
 	bindEvents();
 
-	console.info( 'Square One FE: Initialized comment form script.' );
+	console.info( 'SquareOne Theme: Initialized comment form script.' );
 };
 
 export default init;

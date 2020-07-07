@@ -9,39 +9,114 @@
  *
  * ------------------------------------------------------------------------- */
 
-.s-sink {
+/* -----------------------------------------------------------------------------
+ * Kitchen Sink Vertical Spacing
+ *
+ * Applicable to the front-end theme only.
+ * ----------------------------------------------------------------------------- */
+
+.s-sink > {
 	/* -----------------------------------------------------------------------------
-	 * First & last element overrides
+	 * First & Last Element Overrides
 	 * ----------------------------------------------------------------------------- */
 
-	& > {
-		/* CASE: remove top margin from first element */
-		*:first-child {
-			margin-top: 0;
-		}
+	/* CASE: remove top margin from first element */
+	*:first-child {
+		margin-top: 0;
+	}
 
-		/* CASE: remove bottom margin from bottom element */
-		*:last-child {
-			margin-bottom: 0;
+	/* CASE: remove bottom margin from bottom element */
+	*:last-child {
+		margin-bottom: 0;
+	}
+
+	/* -----------------------------------------------------------------------------
+	 * Images
+	 * ----------------------------------------------------------------------------- */
+
+	.wp-block-image {
+		margin-top: var(--spacer-60);
+		margin-bottom: var(--spacer-60);
+
+		.alignleft,
+		.alignright {
+			margin-top: var(--spacer-40);
+			margin-bottom: var(--spacer-40);
+
+			@media (--viewport-medium) {
+				margin-top: 5px;
+			}
 		}
 	}
 
+	/* -----------------------------------------------------------------------------
+	 * Audio, Videos, & Embeds: Alignments
+	 * ----------------------------------------------------------------------------- */
+
+	.wp-block-audio,
+	.wp-block-video,
+	.wp-block-embed {
+		margin-top: var(--spacer-60);
+		margin-bottom: var(--spacer-60);
+	}
+
+	/* -----------------------------------------------------------------------------
+	 * Overline
+	 *
+	 * Overrides default selector spacing.
+	 * ----------------------------------------------------------------------------- */
+
+	.is-style-t-overline {
+		margin-bottom: var(--spacer-20);
+
+		& + * {
+			margin-top: var(--spacer-20);
+		}
+	}
+
+	/* -----------------------------------------------------------------------------
+	 * Panels
+	 * ----------------------------------------------------------------------------- */
+
+	/* CASE: If a full-bleed panel is followed by a non-panel element,
+	the following element should have some additional vertical spacing. */
+	.c-panel--full-bleed + *:not(.c-panel) {
+		margin-top: var(--spacer-60);
+
+		@media (--viewport-medium) {
+			margin-top: var(--spacer-70);
+		}
+	}
+
+	/* CASE: If a non-panel element is followed by a full-bleed panel,
+	the panel should have some additional vertical spacing. */
+	*:not(.c-panel) + .c-panel--full-bleed {
+		margin-top: var(--spacer-60);
+
+		@media (--viewport-medium) {
+			margin-top: var(--spacer-70);
+		}
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Kitchen Sink Vertical Spacing
+ *
+ * Applicable to the front-end theme and WP Core blocks in the editor.
+ * ----------------------------------------------------------------------------- */
+
+[data-type^="core"],
+.s-sink > {
 	/* -----------------------------------------------------------------------------
 	 * Headings
 	 * ----------------------------------------------------------------------------- */
 
 	h1,
-	.h1,
 	h2,
-	.h2,
 	h3,
-	.h3,
 	h4,
-	.h4,
 	h5,
-	.h5,
-	h6,
-	.h6 {
+	h6 {
 		margin-top: var(--spacer-60);
 		margin-bottom: var(--spacer-20);
 	}
@@ -61,27 +136,30 @@
 
 	/* Shared */
 	ul,
-	.list-bullet,
 	ol,
-	.list-number,
-	dl,
-	.dl {
+	dl {
 		margin-top: var(--spacer-40);
 		margin-bottom: var(--spacer-40);
 	}
 
 	/* List Item */
-	li {
+	ol,
+	ul {
 
-		& ~ li {
-			margin-top: var(--spacer-20);
+		li {
+
+			& ~ li {
+				margin-top: var(--spacer-20);
+			}
 		}
 	}
 
 	/* Definition */
-	dd,
-	.dd {
-		margin-bottom: var(--spacer-40);
+	dl {
+
+		dd {
+			margin-bottom: var(--spacer-40);
+		}
 	}
 
 	/* -----------------------------------------------------------------------------
@@ -98,19 +176,15 @@
 
 	/* Shared */
 	blockquote,
-	.blockquote,
-	q,
-	.quote {
+	q {
 		margin: var(--spacer-60) auto;
 	}
 
 	/* q */
-	q,
-	.quote {}
+	q {}
 
 	/* blockquote */
-	blockquote,
-	.blockquote {
+	blockquote {
 
 		p {
 			margin: 0 auto;
@@ -123,7 +197,7 @@
 
 	/* cite */
 	cite,
-	.cite {
+	.wp-block-quote__citation {
 		display: block;
 		margin-top: var(--spacer-10);
 	}
@@ -132,65 +206,7 @@
 	 * Table
 	 * ----------------------------------------------------------------------------- */
 
-	table,
-	.table {
+	table {
 		margin: var(--spacer-60) auto;
-	}
-
-	/* -----------------------------------------------------------------------------
-	 * Overline
-	 *
-	 * Overrides default selector spacing.
-	 * ----------------------------------------------------------------------------- */
-
-	.t-overline {
-		margin-bottom: var(--spacer-20);
-
-		& + * {
-			margin-top: var(--spacer-20);
-		}
-	}
-
-	/* -----------------------------------------------------------------------------
-	 * Media: Alignments
-	 * ----------------------------------------------------------------------------- */
-
-	.alignfull,
-	.alignwide,
-	.aligncenter,
-	.alignnone {
-		margin-top: var(--spacer-60);
-		margin-bottom: var(--spacer-60);
-	}
-
-	.alignleft,
-	.alignright {
-		margin-top: var(--spacer-40);
-		margin-bottom: var(--spacer-40);
-
-		@media (--viewport-medium) {
-			margin-top: 5px;
-		}
-	}
-
-	/* -----------------------------------------------------------------------------
-	 * Audio, Videos, & Embeds: Alignments
-	 * ----------------------------------------------------------------------------- */
-
-	.wp-block-audio,
-	.wp-block-video,
-	.wp-block-embed {
-		margin-top: var(--spacer-60);
-		margin-bottom: var(--spacer-60);
-
-		&.alignleft,
-		&.alignright {
-			margin-top: var(--spacer-40);
-			margin-bottom: var(--spacer-40);
-
-			@media (--viewport-medium) {
-				margin-top: 5px;
-			}
-		}
 	}
 }

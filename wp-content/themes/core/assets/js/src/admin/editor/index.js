@@ -1,24 +1,6 @@
-import { getBlockTypes, unregisterBlockType } from '@wordpress/blocks';
-import { BLOCK_BLACKLIST } from '../config/wp-settings';
-
-/**
- * @function removeBlackListedBlocks
- * @description Takes an array supplied on our config object and unregisters those blocks from Gutenberg after first
- * checking that they are registered in the current admin context
- */
-
-const removeBlackListedBlocks = () => {
-	const registeredBlockTypes = getBlockTypes().map( block => block.name );
-	const blocksToUnregister = BLOCK_BLACKLIST.filter( blockName => registeredBlockTypes.includes( blockName ) );
-
-	if ( ! blocksToUnregister.length ) {
-		return;
-	}
-
-	blocksToUnregister.forEach( type => unregisterBlockType( type ) );
-
-	console.info( 'SquareOne BE: Unregistered these blocks from Gutenberg: ', blocksToUnregister );
-};
+import hooks from './hooks';
+import types from './types';
+import * as tools from 'utils/tools';
 
 /**
  * @function init
@@ -26,7 +8,14 @@ const removeBlackListedBlocks = () => {
  */
 
 const init = () => {
-	removeBlackListedBlocks();
+	hooks();
+	types();
+
+	if ( tools.getNodes( '#editor.block-editor__container', false, document, true )[ 0 ] ) {
+		import( './preview' /* webpackChunkName:"editor-preview" */ ).then( ( module ) => {
+			module.default();
+		} );
+	}
 };
 
 export default init;

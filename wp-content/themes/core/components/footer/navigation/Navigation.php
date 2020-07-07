@@ -3,16 +3,26 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Templates\Components\Footer;
 
-use Tribe\Project\Templates\Components\Context;
+use Tribe\Project\Templates\Components\Component;
 
-class Navigation extends Context {
+class Navigation extends Component {
 	public const MENU = 'menu';
 
-	protected $path = __DIR__ . '/navigation.twig';
+	public function render(): void {
+		?>
+		{% if menu %}
 
-	protected $properties = [
-		self::MENU => [
-			self::DEFAULT => '',
-		],
-	];
+			<nav class="site-footer__nav" aria-labelledby="site-footer__nav-label">
+
+				<h2 id="site-footer__nav-label" class="u-visually-hidden">{{ __( 'Secondary Navigation' )|esc_html }}</h2>
+
+				<ol class="site-footer__nav-list">
+					{{ menu }}
+				</ol>
+
+			</nav>
+
+		{% endif %}
+		<?php
+	}
 }

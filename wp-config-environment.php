@@ -181,8 +181,12 @@ foreach ( $config_defaults as $config_default_key => $config_default_value ) {
 // Change this if you have multiple installs in the same database
 // ==============================================================
 
-if ( empty( $table_prefix ) ) {
-	$table_prefix = tribe_getenv( 'DB_TABLE_PREFIX', 'tribe_' );
+if ( empty( $GLOBALS['table_prefix'] ) ) {
+	$table_prefix = $GLOBALS['table_prefix'] = tribe_getenv( 'DB_TABLE_PREFIX', 'tribe_' );
+}
+
+if ( empty( $GLOBALS['memcached_servers'] ) ) {
+	$GLOBALS['memcached_servers'] = [ [ tribe_getenv( 'MEMCACHED_HOST', 'memcached' ), tribe_getenv( 'MEMCACHED_PORT', '11211' ) ] ];
 }
 
 // ==============================================================

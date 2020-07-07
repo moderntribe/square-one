@@ -3,59 +3,66 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Templates\Components\Panels;
 
-use Tribe\Project\Templates\Components\Context;
+use Tribe\Project\Templates\Components\Component;
 
-/*
- * @TODO: THIS IS NOT COMPLETE AND WILL BE PICKED BACK UP BY RYAN
+/**
+ * Class Hero
+ *
+ * @property string   $layout
+ * @property string   $media
+ * @property string   $content
+ * @property string[] $container_classes
+ * @property string[] $media_classes
+ * @property string[] $content_classes
+ * @property string[] $classes
+ * @property string[] $attrs
  */
+class Hero extends Component {
 
-class Hero extends Context {
+	public const LAYOUT            = 'layout';
+	public const MEDIA             = 'media';
+	public const CONTENT           = 'content';
+	public const CONTAINER_CLASSES = 'container_classes';
+	public const MEDIA_CLASSES     = 'media_classes';
+	public const CONTENT_CLASSES   = 'content_classes';
+	public const CLASSES           = 'classes';
+	public const ATTRS             = 'attrs';
 
-	public const CLASSES    = 'classes';
-	public const ATTRIBUTES = 'attrs';
+	protected function defaults(): array {
+		return [
+			self::LAYOUT             => '',
+			self::MEDIA             => '',
+			self::CONTENT           => '',
+			self::CONTAINER_CLASSES => [ 'hero__container', 'l-container' ],
+			self::MEDIA_CLASSES     => [ 'hero__media' ],
+			self::CONTENT_CLASSES   => [ 'hero__content' ],
+			self::CLASSES           => [ 'c-panel', 'c-panel--hero', 'c-panel--full-bleed' ],
+			self::ATTRS             => [],
+		];
+	}
 
-	public const TITLE    = 'title';
-	public const SUBTITLE = 'subtitle';
-	public const CONTENT  = 'content';
-	public const CTA      = 'cta';
-	public const MEDIA    = 'media';
+	public function init() {
+		if ( $this->data[ self::LAYOUT ] ) {
+			$this->data[ self::CLASSES ][] = 'c-panel--' . $this->data[ self::LAYOUT ];
+		}
+	}
 
-	public const SETTING_HORIZONTAL_ALIGN = 'setting_horizontal_alignment';
-	public const SETTING_BGD_COLOR        = 'setting_background_color';
-	public const SETTING_TEXT_COLOR       = 'setting_text_color';
+	public function render(): void {
+		?>
+		<section {{ classes|stringify }} {{ attrs|stringify }}>
+			<div {{ container_classes|stringify }}>
 
+				<div {{ media_classes|stringify }}>
+					{{ component( 'image/Image.php', media ) }}
+				</div>
 
-	protected $path = __DIR__ . '/hero.twig';
+				<div {{ content_classes|stringify }}>
+					{{ component( 'content-block/Content_Block.php', content ) }}
+				</div>
 
-	protected $properties = [
-		self::CLASSES     => [
-			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [ 'b-hero' ],
-		],
-		self::ATTRIBUTES  => [
-			self::DEFAULT          => [],
-			self::MERGE_ATTRIBUTES => [],
-		],
+			</div>
+		</section>
+		<?php
+	}
 
-		self::TITLE       => [
-			self::DEFAULT => '',
-		],
-		self::SUBTITLE       => [
-			self::DEFAULT => '',
-		],
-		self::CONTENT     => [
-			self::DEFAULT => '',
-		],
-		self::MEDIA         => [
-			self::DEFAULT => '',
-		],
-		self::CTA         => [
-			self::DEFAULT => '',
-		],
-
-		self::SETTING_BGD_COLOR => [
-			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [],
-		],
-	];
 }

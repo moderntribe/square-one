@@ -1,0 +1,12 @@
+#!/bin/bash -xe
+# script/bootstrap: Resolve all dependencies that the application requires to run.
+#
+
+# Boostrap CI container
+apk add --no-cache composer rsync git openssh bash
+mkdir -p ~/.ssh/
+
+# Authorize wpengine and github
+ssh-keyscan -t rsa git.wpengine.com  >> ~/.ssh/known_hosts
+ssh-keyscan -t rsa github.com  >> ~/.ssh/known_hosts
+eval `ssh-agent -s`

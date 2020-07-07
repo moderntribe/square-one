@@ -46,7 +46,7 @@ class Nav_Attribute_Filters {
 		$classes[] = $args['theme_location'] . '__list-item';
 
 		// Depth
-		$classes[] .= $args['theme_location'] . '__list-item--depth-' . $depth;
+		$classes[] = $args['theme_location'] . '__list-item--depth-' . $depth;
 
 		// Has children items
 		if ( in_array( 'menu-item-has-children', $item->classes ) ) {
@@ -83,7 +83,6 @@ class Nav_Attribute_Filters {
 		} );
 
 		return $classes;
-
 	}
 
 	/**
@@ -125,6 +124,5 @@ class Nav_Attribute_Filters {
 		$atts['class'] = implode( ' ', array_unique( $classes ) );
 
 		return $atts;
-
 	}
 }

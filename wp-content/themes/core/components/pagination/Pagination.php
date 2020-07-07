@@ -17,7 +17,8 @@ namespace Tribe\Project\Templates\Components;
  * @property string   $next_post
  * @property string   $pagination_numbers
  */
-class Pagination extends Context {
+class Pagination extends Component {
+
 	public const WRAPPER_CLASSES    = 'wrapper_classes';
 	public const WRAPPER_ATTRS      = 'wrapper_attrs';
 	public const LIST_CLASSES       = 'list_classes';
@@ -30,47 +31,59 @@ class Pagination extends Context {
 	public const NEXT_POST          = 'next_post';
 	public const PAGINATION_NUMBERS = 'pagination_numbers';
 
-	protected $path = __DIR__ . '/pagination.twig';
+	protected function defaults(): array {
+		return [
+			self::WRAPPER_ATTRS     => [],
+			self::WRAPPER_CLASSES   => [],
+			self::LIST_CLASSES      => [],
+			self::LIST_ATTRS        => [],
+			self::LIST_ITEM_CLASSES => [],
+			self::LIST_ITEM_ATTRS   => [],
+		];
+	}
 
-	protected $properties = [
-		self::WRAPPER_CLASSES    => [
-			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [],
-		],
-		self::WRAPPER_ATTRS      => [
-			self::DEFAULT          => [],
-			self::MERGE_ATTRIBUTES => [],
-		],
-		self::LIST_CLASSES       => [
-			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [],
-		],
-		self::LIST_ATTRS         => [
-			self::DEFAULT          => [],
-			self::MERGE_ATTRIBUTES => [],
-		],
-		self::LIST_ITEM_CLASSES  => [
-			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [],
-		],
-		self::LIST_ITEM_ATTRS    => [
-			self::DEFAULT          => [],
-			self::MERGE_ATTRIBUTES => [],
-		],
-		self::FIRST_POST         => [
-			self::DEFAULT => '',
-		],
-		self::LAST_POST          => [
-			self::DEFAULT => '',
-		],
-		self::PREV_POST          => [
-			self::DEFAULT => '',
-		],
-		self::NEXT_POST          => [
-			self::DEFAULT => '',
-		],
-		self::PAGINATION_NUMBERS => [
-			self::DEFAULT => '',
-		],
-	];
+	public function render(): void {
+		?>
+        <nav {{ wrapper_classes|stringify }} {{ wrapper_attrs|stringify }}>
+
+            <ul {{ list_classes|stringify }} {{ list_attrs|stringify }}>
+
+                {% if first_post %}
+                <li {{ list_item_classes|stringify }} {{ list_item_attrs|stringify }}>
+                    {{ first_post }}
+                </li>
+                {% endif %}
+
+                {% if prev_post %}
+                <li {{ list_item_classes|stringify }} {{ list_item_attrs|stringify }}>
+                    {{ prev_post }}
+                </li>
+                {% endif %}
+
+                {% if pagination_numbers %}
+                {% for number in pagination_numbers %}
+                <li {{ list_item_classes|stringify }} {{ list_item_attrs|stringify }}>
+                    {{ component( 'link/Link.php', number ) }}
+                </li>
+                {% endfor %}
+                {% endif %}
+
+                {% if next_post %}
+                <li {{ list_item_classes|stringify }} {{ list_item_attrs|stringify }}>
+                    {{ next_post }}
+                </li>
+                {% endif %}
+
+                {% if last_post %}
+                <li {{ list_item_classes|stringify }} {{ list_item_attrs|stringify }}>
+                    {{ last_post }}
+                </li>
+                {% endif %}
+
+            </ul>
+
+        </nav>
+		<?php
+	}
+
 }

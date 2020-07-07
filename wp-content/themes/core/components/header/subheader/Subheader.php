@@ -3,16 +3,26 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Templates\Components\Header;
 
+use Tribe\Project\Templates\Components\Component;
 use Tribe\Project\Templates\Components\Context;
 
-class Subheader extends Context {
-	public const TITLE      = 'title';
+class Subheader extends Component {
+	public const TITLE = 'title';
 
-	protected $path = __DIR__ . '/subheader.twig';
+	public function render(): void {
+		if ( empty( $this->data['title'] ) ) {
+			return;
+		}
+		?>
+		<header>
 
-	protected $properties = [
-		self::TITLE      => [
-			self::DEFAULT => '',
-		],
-	];
+			<div class="l-container">
+
+				{{ component( 'text/Text.php', title ) }}
+
+			</div>
+
+		</header>
+		<?php
+	}
 }

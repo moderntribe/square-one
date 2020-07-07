@@ -62,7 +62,6 @@ class Social_Links extends Abstract_Controller {
 		}
 
 		return $links;
-
 	}
 
 
@@ -147,7 +146,7 @@ class Social_Links extends Abstract_Controller {
 
 				return $this->link_component( $link, $label, $icon, $attributes );
 
-			case self::PINTEREST;
+			case self::PINTEREST:
 				if ( empty( $data['image_src'] ) ) {
 					return '';
 				}
@@ -225,7 +224,6 @@ class Social_Links extends Abstract_Controller {
 			default:
 				return '';
 		}
-
 	}
 
 	private function link_component( string $url = '', string $label = '', string $icon = '', array $attributes = [] ): string {
@@ -244,7 +242,7 @@ class Social_Links extends Abstract_Controller {
 	}
 
 	private function link_text_component( $label ): string {
-		$classes = $this->labeled ? [] : [ 'u-visual-hide' ];
+		$classes = $this->labeled ? [] : [ 'u-visually-hidden' ];
 
 		return $this->factory->get( Text::class, [
 			Text::TAG     => 'span',
@@ -276,6 +274,5 @@ class Social_Links extends Abstract_Controller {
 		}
 
 		return $url;
-
 	}
 }

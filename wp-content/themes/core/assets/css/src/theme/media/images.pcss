@@ -17,79 +17,19 @@ img {
 
 /* -----------------------------------------------------------------------------
  * Media: Wrapper
+ *
+ * TinyMCE specific. Not applicable to the block editor.
  * ----------------------------------------------------------------------------- */
 
-.wp-block-image,
 .wp-image {
-	width: auto !important;
-	max-width: none;
+	width: auto;
 	margin: 0 auto;
-}
 
-.wp-image--no-caption {
-
-}
-
-.wp-image--caption {
-
-}
-
-/* -----------------------------------------------------------------------------
- * Media: Image Captions
- * ----------------------------------------------------------------------------- */
-
-.t-sink figcaption,
-.wp-caption-text {
-	@mixin t-caption;
-
-	max-width: 100%;
-	padding-top: var(--spacer-20);
-	padding-bottom: var(--spacer-40);
-	border-bottom: 1px solid var(--color-border);
-
-	.alignfull &,
-	.alignwide &,
-	.aligncenter &,
-	.alignnone & {
-		text-align: center;
+	img {
+		width: 100%;
 	}
 }
 
-/* -----------------------------------------------------------------------------
- * Media: Alignments
- * ----------------------------------------------------------------------------- */
+.wp-image--no-caption {}
 
-.aligncenter {
-	max-width: var(--grid-width-staggered-double);
-	margin-left: auto;
-	margin-right: auto;
-}
-
-.alignleft,
-.alignright {
-	@media (--viewport-medium) {
-		max-width: var(--grid-5-col);
-	}
-
-	&.wp-image--caption {
-
-		img {
-			margin-left: 0;
-			margin-right: 0;
-		}
-	}
-}
-
-.alignleft {
-	@media (--viewport-medium) {
-		float: left;
-		margin-right: var(--grid-gutter);
-	}
-}
-
-.alignright {
-	@media (--viewport-medium) {
-		float: right;
-		margin-left: var(--grid-gutter);
-	}
-}
+.wp-image--caption {}

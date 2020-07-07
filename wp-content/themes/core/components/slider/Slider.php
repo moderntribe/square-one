@@ -17,7 +17,8 @@ namespace Tribe\Project\Templates\Components;
  * @property string[] $main_attrs
  * @property string[] $carousel_attrs
  */
-class Slider extends Context {
+class Slider extends Component {
+
 	public const SHOW_CAROUSEL     = 'show_carousel';
 	public const SHOW_ARROWS       = 'show_arrows';
 	public const SHOW_PAGINATION   = 'show_pagination';
@@ -30,61 +31,68 @@ class Slider extends Context {
 	public const MAIN_ATTRS        = 'main_attrs';
 	public const CAROUSEL_ATTRS    = 'carousel_attrs';
 
-	protected $path = __DIR__ . '/slider.twig';
+	protected function defaults(): array {
+		return [
+			self::SHOW_CAROUSEL     => true,
+			self::SHOW_ARROWS       => true,
+			self::SHOW_PAGINATION   => false,
+			self::SLIDES            => [],
+			self::THUMBNAILS        => [],
+			self::CONTAINER_CLASSES => [ 'c-slider' ],
+			self::MAIN_CLASSES      => [ 'c-slider__main', 'swiper-container' ],
+			self::WRAPPER_CLASSES   => [ 'c-slider__wrapper', 'swiper-wrapper' ],
+			self::SLIDE_CLASSES     => [ 'c-slider__slide', 'swiper-slide' ],
+			self::MAIN_ATTRS        => [ 'data-js' => 'c-slider' ],
+			self::CAROUSEL_ATTRS    => [ 'data-js' => 'c-slider-carousel' ],
+		];
+	}
 
-	protected $properties = [
-		self::SHOW_CAROUSEL     => [
-			self::DEFAULT => true,
-		],
-		self::SHOW_ARROWS       => [
-			self::DEFAULT => true,
-		],
-		self::SHOW_PAGINATION   => [
-			self::DEFAULT => false,
-		],
-		self::SLIDES            => [
-			self::DEFAULT => [],
-		],
-		self::THUMBNAILS        => [
-			self::DEFAULT => [],
-		],
-		self::CONTAINER_CLASSES => [
-			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [ 'c-slider' ],
-		],
-		self::MAIN_CLASSES      => [
-			self::DEFAULT          => [],
-			self::MERGE_ATTRIBUTES => [ 'c-slider__main', 'swiper-container' ],
-		],
-		self::WRAPPER_CLASSES   => [
-			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [ 'c-slider__wrapper', 'swiper-wrapper' ],
-		],
-		self::SLIDE_CLASSES     => [
-			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [ 'c-slider__slide', 'swiper-slide' ],
-		],
-		self::MAIN_ATTRS        => [
-			self::DEFAULT          => [],
-			self::MERGE_ATTRIBUTES => [ 'data-js' => 'c-slider' ],
-		],
-		self::CAROUSEL_ATTRS    => [
-			self::DEFAULT          => [],
-			self::MERGE_ATTRIBUTES => [ 'data-js' => 'c-slider-carousel' ],
-		],
-	];
 
-	public function get_data(): array {
-		if ( $this->show_carousel ) {
-			$this->properties[ self::MAIN_CLASSES ][ self::MERGE_CLASSES ][] = 'c-slider__main--has-carousel';
+	public function init(): array {
+		if ( $this->data[ self::SHOW_CAROUSEL ] ) {
+			$this->data[ self::MAIN_CLASSES ][] = 'c-slider__main--has-carousel';
 		}
-		if ( $this->show_arrows ) {
-			$this->properties[ self::MAIN_CLASSES ][ self::MERGE_CLASSES ][] = 'c-slider__main--has-arrows';
+		if ( $this->data[ self::SHOW_ARROWS ] ) {
+			$this->data[ self::MAIN_CLASSES ][] = 'c-slider__main--has-arrows';
 		}
-		if ( $this->show_pagination ) {
-			$this->properties[ self::MAIN_CLASSES ][ self::MERGE_CLASSES ][] = 'c-slider__main--has-pagination';
+		if ( $this->data[ self::SHOW_PAGINATION ] ) {
+			$this->data[ self::MAIN_CLASSES ][] = 'c-slider__main--has-pagination';
 		}
+	}
 
-		return parent::get_data();
+	public function render(): void {
+		?>
+		<div {{ container_classes|stringify }}>
+			<div {{ main_classes|stringify }} {{ main_attrs|stringify }}>
+				<div {{ wrapper_classes|stringify }}>
+					{% for slide in slides %}
+						<div {{ slide_classes|stringify }}>
+							{{ slide }}
+						</div>
+					{% endfor %}
+				</div>
+				{% if show_arrows %}
+					<div class="c-slider__arrows">
+						<div class="c-slider__button c-slider__button--prev swiper-button-prev"></div>
+						<div class="c-slider__button c-slider__button--next swiper-button-next"></div>
+					</div>
+				{% endif %}
+				{% if show_pagination %}
+					<div class="c-slider__pagination swiper-pagination" data-js="c-slider-pagination"></div>
+				{% endif %}
+			</div>
+			{% if show_carousel %}
+				<div class="c-slider__carousel swiper-container" {{ carousel_attrs|stringify }}>
+					<div class="swiper-wrapper">
+						{% for thumbnail in thumbnails %}
+							<button class="c-slider__thumbnail swiper-slide" data-js="c-slider-thumb-trigger" data-index="{{ loop.index0 }}" aria-label="{{ __( 'Slide navigation for image' )|esc_html }} {{ loop.index }}">
+								{{ thumbnail }}
+							</button>
+						{% endfor %}
+					</div>
+				</div>
+			{% endif %}
+		</div>
+		<?php
 	}
 }

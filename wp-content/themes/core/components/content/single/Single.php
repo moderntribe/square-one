@@ -3,57 +3,58 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Templates\Components\Content;
 
-use Tribe\Project\Templates\Components\Context;
+use Tribe\Project\Templates\Components\Component;
+use Tribe\Project\Templates\Components\Share;
 
-class Single extends Context {
-	public const POST_TYPE = 'post_type';
-	public const TITLE     = 'title';
-	public const CONTENT   = 'content';
-	public const EXCERPT   = 'excerpt';
-	public const PERMALINK = 'permalink';
-	public const IMAGE     = 'featured_image';
-	public const TIMES     = 'time';
-	public const DATE      = 'date';
-	public const AUTHOR    = 'author';
-	public const SHARE     = 'social_share';
+class Single extends Component {
 
-	protected $path = __DIR__ . '/single.twig';
+	public const POST  = 'post';
+	public const SHARE = 'social_share';
 
-	protected $properties = [
-		self::POST_TYPE => [
-			self::DEFAULT => '',
-		],
-		self::TITLE     => [
-			self::DEFAULT => '',
-		],
-		self::CONTENT   => [
-			self::DEFAULT => '',
-		],
-		self::EXCERPT   => [
-			self::DEFAULT => '',
-		],
-		self::PERMALINK => [
-			self::DEFAULT => '',
-		],
-		self::IMAGE     => [
-			self::DEFAULT => '',
-		],
-		self::TIMES     => [
-			self::DEFAULT => [
-				'c' => '',
-			],
-		],
-		self::DATE      => [
-			self::DEFAULT => '',
-		],
-		self::AUTHOR    => [
-			self::DEFAULT => [
-				'name' => '',
-				'url'  => '',
-			],
-		],
-		self::SHARE     => [
-			self::DEFAULT => '',
-		],
-	];
+	public function init() {
+		$this->data[ self::SHARE ] = $this->get_social_share();
+	}
+
+	public function get_social_share() {
+		return [
+			Share::LABELED => true,
+		];
+	}
+
+	public function render(): void {
+		?>
+        <article class="item-single">
+
+            {{ post.image }}
+
+            <div class="item-single__content s-sink t-sink">
+                {{ post.content }}
+            </div>
+
+            <footer class="item-single__footer">
+
+                <ul class="item-single__meta">
+
+                    <li class="item-single__meta-date">
+                        <time datetime="">
+                            {{ post.date|esc_html }}
+                        </time>
+                    </li>
+
+                    <li class="item-single__meta-author">
+                        {{ __('by')|esc_html }}
+                        <a href="{{ post.author.url|esc_url }}" rel="author">
+                            {{ post.author.name|esc_html }}
+                        </a>
+                    </li>
+
+                </ul>
+
+                {{ component( 'share/Share.php', social_share ) }}
+
+            </footer>
+
+        </article>
+		<?php
+	}
 }

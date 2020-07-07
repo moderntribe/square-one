@@ -1,0 +1,64 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Component: Panel: Interstitial
+ *
+ * ----------------------------------------------------------------------------- */
+
+.c-panel--interstitial {
+	position: relative;
+	display: flex;
+	align-items: center;
+	padding: var(--spacer-80) 0;
+	background-color: var(--color-grey-dark);
+
+	@media (--viewport-full) {
+		padding: var(--spacer-90) 0;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Interstitial: Background Image
+ * ----------------------------------------------------------------------------- */
+
+.interstitial__img {
+	/* Overlay */
+	&:after {
+		content: '';
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		background-color: var(--color-black);
+		opacity: 0.5;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Interstitial: Content
+ * ----------------------------------------------------------------------------- */
+
+.interstitial__content {
+	position: relative;
+}
+
+/* -----------------------------------------------------------------------------
+ * Interstitial: Content Container
+ * ----------------------------------------------------------------------------- */
+
+.interstitial__content-container {
+	max-width: var(--grid-width-staggered-double);
+
+	/* CASE: Text: Centered */
+	.c-panel--layout-center & {
+		margin-left: auto;
+		margin-right: auto;
+		text-align: center;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Interstitial: Call To Action
+ * ----------------------------------------------------------------------------- */
+
+.interstitial__cta {
+	margin-top: var(--spacer-30);
+}

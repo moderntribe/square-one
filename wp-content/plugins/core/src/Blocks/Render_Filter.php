@@ -4,14 +4,22 @@ declare( strict_types=1 );
 namespace Tribe\Project\Blocks;
 
 use Tribe\Gutenpanels\Blocks\Block_Type;
-use Tribe\Project\Templates\Component_Factory;
+use Tribe\Project\Components\Handler;
+use Tribe\Project\Controllers\Blocks\Block_Controller;
+use Tribe\Project\Components\Component_Factory;
 use Tribe\Project\Templates\Controllers;
 
 class Render_Filter {
+
 	/**
 	 * @var Component_Factory
 	 */
 	private $factory;
+
+	/**
+	 * @var Handler
+	 */
+	private $handler;
 
 	/**
 	 * @var array A map of block type names to the Block_Controller class used to render it
@@ -19,8 +27,9 @@ class Render_Filter {
 	private $map;
 
 
-	public function __construct( Component_Factory $factory, array $map ) {
+	public function __construct( Component_Factory $factory, Handler $handler, array $map ) {
 		$this->factory = $factory;
+		$this->handler = $handler;
 		$this->map     = $map;
 	}
 
@@ -31,9 +40,11 @@ class Render_Filter {
 			return $prefiltered;
 		}
 
-		/** @var Controllers\Block\Block_Controller $controller */
-		$controller = new $this->map[$name]( $this->factory, $attributes, $content, $block_type );
+		/** @var Block_Controller $controller */
+		$controller = new $this->map[$name]( $this->handler, $this->factory );
 
-		return $controller->render();
+		ob_start();
+		$controller->render( $attributes, $content, $block_type );
+		return ob_get_clean();
 	}
 }

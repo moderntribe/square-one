@@ -26,22 +26,72 @@ main {
 
 /* -----------------------------------------------------------------------------
  *
- * Layout: Global Content Container
+ * Layout: Global Container
  *
  * ----------------------------------------------------------------------------- */
 
 .l-container {
-	@mixin clearfix;
-
-	max-width: var(--grid-width-default);
+	max-width: var(--grid-max-width);
 	margin-left: auto;
 	margin-right: auto;
-	padding-left: var(--grid-gutter-small);
-	padding-right: var(--grid-gutter-small);
+	padding-left: var(--grid-margin-small);
+	padding-right: var(--grid-margin-small);
 	width: 100%;
 
 	@media (--viewport-medium) {
-		padding-left: var(--grid-gutter);
-		padding-right: var(--grid-gutter);
+		padding-left: var(--grid-margin-medium);
+		padding-right: var(--grid-margin-medium);
+	}
+
+	@media (--viewport-full) {
+		padding-left: var(--grid-margin);
+		padding-right: var(--grid-margin);
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ *
+ * Layout: Kitchen Sink
+ *
+ * Usage: Block Editor Content
+ *
+ * Example:
+ *   ...
+ * <div class="l-sink">
+ * </div>
+ *
+ * ----------------------------------------------------------------------------- */
+
+.l-sink {
+
+	& > *:not(.alignwide):not(.alignfull):not(.alignleft):not(.alignright):not(.is-style-wide):not(.c-panel) {
+		max-width: var(--grid-width-staggered);
+		width: calc(100% - 2 * var(--grid-gutter-small));
+		margin-left: auto;
+		margin-right: auto;
+
+		@media (--viewport-medium) {
+			width: calc(100% - 2 * var(--grid-gutter));
+		}
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ *
+ * Layout: Kitchen Sink, Double
+ *
+ * Usage: Block Editor Content
+ *
+ * Example:
+ * <div class="l-sink l-sink--double">
+ *   ...
+ * </div>
+ *
+ * ----------------------------------------------------------------------------- */
+
+.l-sink--double {
+
+	& > *:not(.alignwide):not(.alignfull):not(.alignleft):not(.alignright):not(.is-style-wide):not(.c-panel) {
+		max-width: var(--grid-width-staggered-double);
 	}
 }
