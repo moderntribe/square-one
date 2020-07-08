@@ -6,7 +6,6 @@ use Tribe\Project\Models\Menu;
 use Tribe\Project\Models\Post;
 use Tribe\Project\Templates\Components\Header\Subheader;
 use Tribe\Project\Templates\Components\Main;
-use Tribe\Project\Templates\Components\Page\Index;
 use Tribe\Project\Templates\Components\Page\Page;
 use Tribe\Project\Templates\Components\Sidebar;
 use Tribe\Project\Templates\Components\Text;
