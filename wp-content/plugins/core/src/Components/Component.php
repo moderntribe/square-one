@@ -7,10 +7,22 @@ use DI;
 use Tribe\Project\Assets\Theme\Theme_Build_Parser;
 use Tribe\Project\Components\Component_Factory;
 use Tribe\Project\Components\Handler;
+use Tribe\Project\Models\Model;
+use Tribe\Project\Models\Post;
 use Twig\Environment;
 use Twig\Error\Error;
 
 abstract class Component {
+
+	/**
+	 * @var bool
+	 */
+	protected $debug = false;
+
+	/**
+	 * @var bool
+	 */
+	protected $truncate_debug_models = true;
 
 	/**
 	 * @var array
@@ -87,6 +99,10 @@ abstract class Component {
 		 */
 		$this->init();
 
+		if ( $this->debug ) {
+			$this->print_debug_info();
+		}
+
 		ob_start();
 		$this->render();
 		$template = ob_get_clean();
@@ -98,6 +114,32 @@ abstract class Component {
 
 			return;
 		}
+	}
+
+	protected function print_debug_info() {
+		$debug_data = $this->get_debug_data_recursive( $this->data );
+		echo '<pre>';
+		print_r( $debug_data );
+		echo '</pre>';
+	}
+
+	protected function get_debug_data_recursive( $data ) {
+		$return = [];
+		foreach ( $data as $key => $value ) {
+			if ( $this->truncate_debug_models && is_a( $value, Model::class ) ) {
+				$return[ $key ] = get_class( $value );
+				continue;
+			}
+
+			if ( is_array( $value ) ) {
+				$return[ $key ] = $this->get_debug_data_recursive( $value );
+				continue;
+			}
+
+			$return[ $key ] = $value;
+		}
+
+		return $return;
 	}
 
 	public function get_rendered_output(): string {
