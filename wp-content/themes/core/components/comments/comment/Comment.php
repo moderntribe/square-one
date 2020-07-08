@@ -3,7 +3,7 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Templates\Components\Comments;
 
-use Tribe\Project\Templates\Components\Component;
+use Tribe\Project\Components\Component;
 use Tribe\Project\Templates\Components\Context;
 
 /**
@@ -58,52 +58,5 @@ class Comment extends Component {
 			'c'              => date( 'c', $this->data[ self::TIMESTAMP ] ),
 			'g:i A - M j, Y' => date( 'g:i A - M j, Y', $this->data[ self::TIMESTAMP ] ),
 		];
-	}
-
-	public function render(): void {
-		?>
-		<li {{ attr|stringify }} {{ classes|stringify }}>
-
-			<header class="comment__header">
-
-				{{ gravatar }}
-
-
-				<h5 class="comment__title" rel="author">
-					<cite>{{ author }}</cite>
-				</h5>
-
-				<time class="comment__time" datetime="{{ time['c'] }}">
-					{{ time['g:i A - M j, Y'] }}
-				</time>
-
-			</header><!-- .comment-header -->
-
-			<div class="comment__text">
-
-				{% if edit_link %}
-					<p class="comment__action-edit">
-						{{ edit_link }}
-					</p>
-				{% endif %}
-
-				{{ comment_text }}
-
-			</div><!-- .comment-text -->
-
-			{% if moderation_message %}
-				<p class="comment__message-moderation">
-					{{ moderation_message }}
-				</p>
-			{% endif %}
-
-			{% if reply_link %}
-				<p class="comment__action-reply">
-					{{ reply_link }}
-				</p>
-			{% endif %}
-
-		</li>
-		<?php
 	}
 }

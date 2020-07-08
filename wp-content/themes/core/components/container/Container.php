@@ -2,6 +2,8 @@
 
 namespace Tribe\Project\Templates\Components;
 
+use Tribe\Project\Components\Component;
+
 /**
  * Class Container
  *
@@ -30,13 +32,5 @@ class Container extends Component {
 			self::CLASSES           => [ 'c-container' ],
 			self::ATTRS             => [],
 		];
-	}
-
-	public function render(): void {
-		?>
-		<{{ tag }} {{ classes|stringify }} {{ attrs|stringify }}>
-			{{ component( content_component, content ) }}
-		</{{ tag }}>
-		<?php
 	}
 }

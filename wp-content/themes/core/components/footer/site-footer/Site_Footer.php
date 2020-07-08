@@ -4,7 +4,7 @@ declare( strict_types=1 );
 namespace Tribe\Project\Templates\Components\Footer;
 
 use Tribe\Project\Object_Meta\Social_Settings;
-use Tribe\Project\Templates\Components\Component;
+use Tribe\Project\Components\Component;
 use Tribe\Project\Templates\Controllers\Traits\Copyright;
 
 class Site_Footer extends Component {
@@ -19,28 +19,5 @@ class Site_Footer extends Component {
 		$this->data[ self::COPYRIGHT ] = $this->get_copyright();
 		$this->data[ self::HOME_URL ]  = home_url( '/' );
 		$this->data[ self::BLOG_NAME ] = get_bloginfo( 'name' );
-	}
-
-	public function render(): void {
-		?>
-		<footer class="site-footer">
-
-			<div class="l-container">
-
-				{{ component( 'footer/navigation/Navigation.php', navigation ) }}
-
-				{{ component( 'follow/Follow.php' ) }}
-
-				<p>
-					{{ copyright }}
-					<a href="{{ home_url|esc_url }}" rel="external">
-						{{ name }}
-					</a>
-				</p>
-
-			</div>
-
-		</footer>
-		<?php
 	}
 }

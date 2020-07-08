@@ -3,7 +3,7 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Templates\Components\Page;
 
-use Tribe\Project\Templates\Components\Component;
+use Tribe\Project\Components\Component;
 use Tribe\Project\Templates\Controllers\Traits\Copyright;
 
 class Page_Unsupported_Browser extends Component {
@@ -66,118 +66,6 @@ class Page_Unsupported_Browser extends Component {
 		}
 
 		return esc_url( trailingslashit( get_stylesheet_directory_uri() ) . 'assets/img/theme/legacy-browser/' . $filename );
-	}
-
-	public function render(): void {
-		?>
-        <!DOCTYPE html>
-        <html {{ language_attributes }}>
-        <head>
-
-            <title>{{ __('Unsupported Browser') }} | {{ name }}</title>
-
-            {# // MISC Meta #}
-            <meta charset="utf-8">
-            <meta name="author" content="{{ name|esc_attr }}">
-            <meta http-equiv="cleartype" content="on">
-            <meta name="robots" content="noindex, nofollow">
-
-            {{ styles }}
-
-            <link rel="shortcut icon" href="{{ favicon|esc_url }}">
-
-            {{ do_action( 'tribe/unsupported_browser/head') }}
-
-        </head>
-        <body>
-
-        <div class="site-header">
-            <div class="l-container">
-                <h1 class="site-brand">
-                    <img src="{{ legacy_logo_header|esc_url }}"
-                         class="site-logo site-logo--header"
-                         alt="{{ name|esc_attr }} {{ __('logo') }}"/>
-                </h1>
-            </div>
-        </div>
-
-        <div class="site-content">
-            <div class="l-container">
-
-                <div class="site-content__content">
-                    <h2>{{ legacy_browser_title }}</h2>
-                    <p>{{ legacy_browser_content }}</p>
-                </div>
-
-                <ul class="browser-list">
-                    <li class="browser-list__item">
-                        <a href="http://www.google.com/chrome/"
-                           class="browser-list__item-anchor"
-                           rel="external noopener"
-                           target="_blank">
-		                           <span class="browser-list__item-image">
-		                               <img src="{{ legacy_browser_icon_chrome|esc_url }}"
-                                            alt="{{ __('Chrome browser logo') }}"/>
-		                           </span>
-                            {{ __('Chrome') }}
-                        </a>
-                    </li>
-                    <li class="browser-list__item">
-                        <a href="https://www.mozilla.org/firefox/new/"
-                           class="browser-list__item-anchor"
-                           rel="external noopener"
-                           target="_blank">
-		                           <span class="browser-list__item-image">
-		                               <img src="{{ legacy_browser_icon_firefox|esc_url }}"
-                                            alt="{{ __('Firefox browser logo') }}"/>
-		                           </span>
-                            {{ __('Firefox') }}
-                        </a>
-                    </li>
-                    <li class="browser-list__item">
-                        <a href="https://support.apple.com/downloads/#safari"
-                           class="browser-list__item-anchor"
-                           rel="external noopener"
-                           target="_blank">
-		                           <span class="browser-list__item-image">
-		                               <img src="{{ legacy_browser_icon_safari|esc_url }}"
-                                            alt="{{ __('Safari browser logo') }}"/>
-		                           </span>
-                            {{ __('Safari') }}
-                        </a>
-                    </li>
-                    <li class="browser-list__item">
-                        <a href="http://windows.microsoft.com/internet-explorer/download-ie"
-                           class="browser-list__item-anchor"
-                           rel="external noopener"
-                           target="_blank">
-		                           <span class="browser-list__item-image">
-		                               <img src="{{ legacy_browser_icon_ie|esc_url }}"
-                                            alt="{{ __('Internet Explorer browser logo') }}"/>
-		                           </span>
-                            {{ __('Internet Explorer') }}
-                        </a>
-                    </li>
-                </ul>
-
-            </div>
-        </div>
-
-        <div class="site-footer">
-            <div class="l-container">
-
-                <img src="{{ legacy_logo_footer|esc_url }}"
-                     class="site-logo site-logo--footer"
-                     alt="{{ name|esc_attr }} {{ __('logo') }}"/>
-
-                <p class="site-footer__copy">{{ copyright }} {{ name }}.</p>
-
-            </div>
-        </div>
-
-        </body>
-        </html>
-		<?php
 	}
 
 }

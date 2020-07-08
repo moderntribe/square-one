@@ -2,6 +2,8 @@
 
 namespace Tribe\Project\Templates\Components;
 
+use Tribe\Project\Components\Component;
+
 /**
  * Class Text
  *
@@ -23,11 +25,5 @@ class Text extends Component {
 			self::CLASSES => [],
 			self::ATTRS   => [],
 		];
-	}
-
-	public function render(): void {
-		?>
-        <{{ tag }} {{ classes|stringify }} {{ attrs|stringify }}>{{ content }}</{{ tag }}>
-		<?php
 	}
 }

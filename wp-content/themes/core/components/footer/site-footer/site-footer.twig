@@ -1,0 +1,18 @@
+<footer class="site-footer">
+
+    <div class="l-container">
+
+        {{ component( 'footer/navigation/Navigation.php', navigation ) }}
+
+        {{ component( 'follow/Follow.php' ) }}
+
+        <p>
+            {{ copyright }}
+            <a href="{{ home_url|esc_url }}" rel="external">
+                {{ name }}
+            </a>
+        </p>
+
+    </div>
+
+</footer>

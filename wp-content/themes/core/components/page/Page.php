@@ -4,7 +4,7 @@ declare( strict_types=1 );
 namespace Tribe\Project\Templates\Components\Page;
 
 use Tribe\Project\Templates\Components\Breadcrumbs;
-use Tribe\Project\Templates\Components\Component;
+use Tribe\Project\Components\Component;
 use Tribe\Project\Templates\Components\Link;
 use Tribe\Project\Templates\Components\Pagination;
 
@@ -81,31 +81,5 @@ class Page extends Component {
 		];
 
 		return $options;
-	}
-
-	public function render(): void {
-		?>
-        {% if breadcrumbs %}
-        {{ component( 'breadcrumbs/Breadcrumbs.php', breadcrumbs ) }}
-        {% endif %}
-
-        {{ component( 'header/subheader/Subheader.php', subheader ) }}
-
-        {% if post.content %}
-        <div class="">
-            {{ post.image }}
-
-            <div class="t-sink s-sink l-sink l-sink--double">
-                {{ post.content }}
-            </div>
-        </div>
-
-        {{ component( 'pagination/Pagination.php', pagination ) }}
-        {% endif %}
-
-        {{ do_action( 'the_panels' ) }}
-
-        {{ comments }}
-		<?php
 	}
 }

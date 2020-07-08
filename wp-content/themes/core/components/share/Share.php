@@ -2,6 +2,8 @@
 
 namespace Tribe\Project\Templates\Components;
 
+use Tribe\Project\Components\Component;
+
 use Tribe\Project\Theme\Config\Image_Sizes;
 
 /**
@@ -254,22 +256,5 @@ class Share extends Component {
 		}
 
 		return $url;
-	}
-
-	public function render(): void {
-		?>
-        <aside class="social-share">
-
-            <h6 class="social-share__title">{{ __( 'Share This' )|esc_html }}</h6>
-
-            <ul class="social-share-networks" data-js="social-share-networks">
-                {% for link in links %}
-                <li class="social-share-networks__item">{{ component( 'link/Link.php', link ) }}</li>
-                {% endfor %}
-            </ul>
-
-
-        </aside>
-		<?php
 	}
 }

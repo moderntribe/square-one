@@ -2,6 +2,8 @@
 
 namespace Tribe\Project\Templates\Components;
 
+use Tribe\Project\Components\Component;
+
 /**
  * Class Tabs
  *
@@ -114,32 +116,5 @@ class Tabs extends Component {
 		}
 
 		return $buttons;
-	}
-
-	public function render(): void {
-		?>
-		<div {{ container_classes|stringify|esc_attr }}" id="{{ tab_id|esc_attr }} {{ container_attrs|stringify }}>
-			<div {{ tab_list_classes|stringify|esc_attr }} {{ tab_list_attrs|stringify }}>
-				{% for button in tablist_buttons %}
-					{{ button }}
-				{% endfor %}
-			</div>
-
-			{% for tab in tabs %}
-				<div class="{{ tab_content_classes|stringify|esc_attr }} {% if loop.index0 == 0 %}{{ tab_content_active_class|esc_attr }}{% endif %}"
-					 aria-hidden="{% if loop.index0 == 0 %}false{% else %}true{% endif %}"
-					 id="{{ tab.content_id|esc_attr }}"
-					 aria-labelledby="{{ tab.tab_id|esc_attr }}"
-					 {{ tab_content_attrs|stringify }}
-				>
-					<div {{ tab_content_inner_classes|stringify }}
-							{{ tab_content_inner_attrs|stringify }}
-							{{ tab.content_attrs|stringify }}>
-						{{ tab.content }}
-					</div>
-				</div>
-			{% endfor %}
-		</div>
-		<?php
 	}
 }

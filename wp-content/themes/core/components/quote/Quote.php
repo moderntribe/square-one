@@ -2,6 +2,8 @@
 
 namespace Tribe\Project\Templates\Components;
 
+use Tribe\Project\Components\Component;
+
 /**
  * Class Quote
  *
@@ -27,16 +29,5 @@ class Quote extends Component {
 			self::QUOTE_ATTRS => [],
 			self::CITE_ATTRS  => [],
 		];
-	}
-
-	public function render(): void {
-		?>
-		<blockquote {{ classes|stringify }}>
-			<p class="c-quote__text" {{ quote_attrs|stringify }}>{{ quote }}</p>
-			{% if cite %}
-				<cite class="c-quote__cite" {{ cite_attrs|stringify }}>{{ cite }}</cite>
-			{% endif %}
-		</blockquote>
-		<?php
 	}
 }

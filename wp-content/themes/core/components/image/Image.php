@@ -2,6 +2,8 @@
 
 namespace Tribe\Project\Templates\Components;
 
+use Tribe\Project\Components\Component;
+
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Models\Image as Image_Model;
 
@@ -370,25 +372,5 @@ class Image extends Component {
 		}
 
 		return implode( ", \n", $attribute );
-	}
-
-	public function render(): void {
-		?>
-        <{{ wrapper.tag }} {{ wrapper.classes }} {{ wrapper.attrs }}>
-
-        {% if link is not empty %}
-        <a href="{{ link.url }}" {{ link.classes }} {{ link.attrs }}>
-            {% endif %}
-
-            {{ image }}
-
-            {% if link is not empty %}
-        </a>
-        {% endif %}
-
-        {{ html }}
-
-        </{{ wrapper.tag }}>
-		<?php
 	}
 }

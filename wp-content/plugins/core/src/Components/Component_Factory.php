@@ -4,7 +4,7 @@ declare( strict_types=1 );
 namespace Tribe\Project\Components;
 
 use Tribe\Project\Assets\Theme\Theme_Build_Parser;
-use Tribe\Project\Templates\Components\Component;
+use Tribe\Project\Components\Component;
 use Twig\Environment;
 
 /**

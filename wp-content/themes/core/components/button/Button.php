@@ -2,6 +2,8 @@
 
 namespace Tribe\Project\Templates\Components;
 
+use Tribe\Project\Components\Component;
+
 /**
  * Class Button
  *
@@ -35,13 +37,5 @@ class Button extends Component {
 		if ( ! empty( $this->data[ self::ARIA_LABEL ] ) ) {
 			$this->data[ self::ATTRS ]['aria-label'] = $this->data[ self::ARIA_LABEL ];
 		}
-	}
-
-	public function render(): void {
-		?>
-        <button {{ classes|stringify }} {{ attrs|stringify }}>
-            {{ content }}
-        </button>
-		<?php
 	}
 }

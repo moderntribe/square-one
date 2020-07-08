@@ -2,6 +2,8 @@
 
 namespace Tribe\Project\Templates\Components;
 
+use Tribe\Project\Components\Component;
+
 /**
  * Class Link
  *
@@ -67,13 +69,5 @@ class Link extends Component {
 			Text::CLASSES => [ 'u-visually-hidden' ],
 			Text::TEXT    => __( '(Opens new window)', 'tribe' ),
 		] )->get_rendered_output();
-	}
-
-	public function render(): void {
-		?>
-        <a {{ classes|stringify }} {{ attrs|stringify }}>
-            {{ content }}
-        </a>
-		<?php
 	}
 }

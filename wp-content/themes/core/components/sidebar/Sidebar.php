@@ -2,6 +2,8 @@
 
 namespace Tribe\Project\Templates\Components;
 
+use Tribe\Project\Components\Component;
+
 /**
  * Class Sidebar
  */
@@ -24,20 +26,6 @@ class Sidebar extends Component {
 		dynamic_sidebar( $this->data['sidebar_id'] );
 
 		return ob_get_clean();
-	}
-
-	public function render(): void {
-		?>
-		{% if active %}
-
-		<section class="sidebar" role="complementary">
-
-			{{ content }}
-
-		</section>
-
-		{% endif %}
-		<?php
 	}
 
 }

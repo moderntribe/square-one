@@ -3,7 +3,7 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Templates\Components\Panels;
 
-use Tribe\Project\Templates\Components\Component;
+use Tribe\Project\Components\Component;
 
 /**
  * Class Interstitial

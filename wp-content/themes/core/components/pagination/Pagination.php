@@ -2,6 +2,8 @@
 
 namespace Tribe\Project\Templates\Components;
 
+use Tribe\Project\Components\Component;
+
 /**
  * Class Pagination
  *
@@ -40,50 +42,6 @@ class Pagination extends Component {
 			self::LIST_ITEM_CLASSES => [],
 			self::LIST_ITEM_ATTRS   => [],
 		];
-	}
-
-	public function render(): void {
-		?>
-        <nav {{ wrapper_classes|stringify }} {{ wrapper_attrs|stringify }}>
-
-            <ul {{ list_classes|stringify }} {{ list_attrs|stringify }}>
-
-                {% if first_post %}
-                <li {{ list_item_classes|stringify }} {{ list_item_attrs|stringify }}>
-                    {{ first_post }}
-                </li>
-                {% endif %}
-
-                {% if prev_post %}
-                <li {{ list_item_classes|stringify }} {{ list_item_attrs|stringify }}>
-                    {{ prev_post }}
-                </li>
-                {% endif %}
-
-                {% if pagination_numbers %}
-                {% for number in pagination_numbers %}
-                <li {{ list_item_classes|stringify }} {{ list_item_attrs|stringify }}>
-                    {{ component( 'link/Link.php', number ) }}
-                </li>
-                {% endfor %}
-                {% endif %}
-
-                {% if next_post %}
-                <li {{ list_item_classes|stringify }} {{ list_item_attrs|stringify }}>
-                    {{ next_post }}
-                </li>
-                {% endif %}
-
-                {% if last_post %}
-                <li {{ list_item_classes|stringify }} {{ list_item_attrs|stringify }}>
-                    {{ last_post }}
-                </li>
-                {% endif %}
-
-            </ul>
-
-        </nav>
-		<?php
 	}
 
 }

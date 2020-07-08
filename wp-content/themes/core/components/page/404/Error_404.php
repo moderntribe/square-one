@@ -3,7 +3,7 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Templates\Components\Page;
 
-use Tribe\Project\Templates\Components\Component;
+use Tribe\Project\Components\Component;
 
 class Error_404 extends Component {
 
@@ -23,14 +23,5 @@ class Error_404 extends Component {
 
 	protected function get_404_page_content(): string {
 		return __( "If you're lost or have reached this page in error, our apologies. Please use the navigation menu or the links in the footer to find your way through the site. Please e-mail us if you have any questions.", 'tribe' );
-	}
-
-	public function render(): void {
-		?>
-		<div class="l-container">
-			<h2>{{ error_404_browser_title }}</h2>
-			<p>{{ error_404_browser_content }}</p>
-		</div>
-		<?php
 	}
 }

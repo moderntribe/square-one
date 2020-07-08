@@ -2,6 +2,8 @@
 
 namespace Tribe\Project\Templates\Components;
 
+use Tribe\Project\Components\Component;
+
 /**
  * Class Content_Block
  *
@@ -34,16 +36,5 @@ class Content_Block extends Component {
 			self::TEXT    => [],
 			self::ACTION  => [],
 		];
-	}
-
-	public function render(): void {
-		?>
-        <{{ tag }} {{ classes|stringify }} {{ attrs|stringify }}>
-        {{ component( 'text/Text.php', leadin ) }}
-        {{ component( 'text/Text.php', title ) }}
-        {{ component( 'text/Text.php', text ) }}
-        {{ component( 'button/Button.php', action ) }}
-        </{{ tag }}>
-		<?php
 	}
 }
