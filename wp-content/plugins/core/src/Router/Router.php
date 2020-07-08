@@ -2,6 +2,7 @@
 
 namespace Tribe\Project\Router;
 
+use DI;
 use FastRoute;
 use Tribe\Project\Components\Handler;
 
@@ -75,11 +76,10 @@ class Router {
 	 * @param array $controllers
 	 */
 	private function get_controllers( array $controllers ) {
-		$controllers = apply_filters( 'tribe/project/controllers/registered_controllers', $controllers );
 
 		foreach ( $controllers as $classname ) {
 			$basename = (new \ReflectionClass($classname))->getShortName();
-			$this->controllers[ $basename ] = new $classname( $this->handler );
+			$this->controllers[ $basename ] = DI\get( $classname );
 		}
 	}
 
