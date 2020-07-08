@@ -2,6 +2,8 @@
 
 namespace Tribe\Project\Templates\Components;
 
+use Tribe\Project\Components\Component;
+
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Models\Image as Image_Model;
 

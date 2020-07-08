@@ -2,6 +2,8 @@
 
 namespace Tribe\Project\Templates\Components;
 
+use Tribe\Project\Components\Component;
+
 use Tribe\Project\Theme\Config\Image_Sizes;
 
 /**

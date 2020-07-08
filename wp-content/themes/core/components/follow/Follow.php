@@ -3,7 +3,7 @@
 namespace Tribe\Project\Templates\Components\Follow;
 
 use Tribe\Project\Object_Meta\Social_Settings;
-use Tribe\Project\Templates\Components\Component;
+use Tribe\Project\Components\Component;
 
 class Follow extends Component {
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tribe\Project\Templates\Components;
+namespace Tribe\Project\Components;
 
 use Tribe\Libs\Utils\Markup_Utils;
 use DI;

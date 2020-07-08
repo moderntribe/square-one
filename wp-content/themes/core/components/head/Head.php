@@ -3,6 +3,8 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Templates\Components;
 
+use Tribe\Project\Components\Component;
+
 class Head extends Component {
 
 	public function init() {

@@ -5,7 +5,7 @@ namespace Tribe\Project\Templates\Components\Page;
 
 use Tribe\Project\Models\Post;
 use Tribe\Project\Templates\Components\Breadcrumbs;
-use Tribe\Project\Templates\Components\Component;
+use Tribe\Project\Components\Component;
 use Tribe\Project\Templates\Components\Content\Single as Single_Context;
 use Tribe\Project\Templates\Components\Context;
 use Tribe\Project\Templates\Components\Link;

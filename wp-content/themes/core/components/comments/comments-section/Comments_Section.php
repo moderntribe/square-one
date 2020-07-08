@@ -3,7 +3,7 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Templates\Components\Comments;
 
-use Tribe\Project\Templates\Components\Component;
+use Tribe\Project\Components\Component;
 use Tribe\Project\Templates\Components\Link;
 
 class Comments_Section extends Component {

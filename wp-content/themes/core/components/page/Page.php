@@ -4,7 +4,7 @@ declare( strict_types=1 );
 namespace Tribe\Project\Templates\Components\Page;
 
 use Tribe\Project\Templates\Components\Breadcrumbs;
-use Tribe\Project\Templates\Components\Component;
+use Tribe\Project\Components\Component;
 use Tribe\Project\Templates\Components\Link;
 use Tribe\Project\Templates\Components\Pagination;
 

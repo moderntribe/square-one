@@ -3,7 +3,7 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Templates\Components\Panels;
 
-use Tribe\Project\Templates\Components\Component;
+use Tribe\Project\Components\Component;
 use Tribe\Project\Templates\Components\Context;
 use Tribe\Project\Blocks\Types\Media_Text as Media_Text_Block;
 

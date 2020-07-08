@@ -4,7 +4,7 @@ declare( strict_types=1 );
 namespace Tribe\Project\Templates\Components\Footer;
 
 use Tribe\Project\Object_Meta\Social_Settings;
-use Tribe\Project\Templates\Components\Component;
+use Tribe\Project\Components\Component;
 use Tribe\Project\Templates\Controllers\Traits\Copyright;
 
 class Site_Footer extends Component {

@@ -3,7 +3,7 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Templates\Components\Document;
 
-use Tribe\Project\Templates\Components\Component;
+use Tribe\Project\Components\Component;
 
 class Document extends Component {
 

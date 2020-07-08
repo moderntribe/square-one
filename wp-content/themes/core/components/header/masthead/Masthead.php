@@ -3,6 +3,8 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Templates\Components;
 
+use Tribe\Project\Components\Component;
+
 class Masthead extends Component {
 
 	public const NAVIGATION = 'navigation';
