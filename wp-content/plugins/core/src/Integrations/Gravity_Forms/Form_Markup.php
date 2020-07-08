@@ -3,7 +3,7 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Integrations\Gravity_Forms;
 
-use Tribe\Project\Templates\Component_Factory;
+use Tribe\Project\Components\Component_Factory;
 use Tribe\Project\Templates\Components\Integrations\Gravity_Forms\Choice_Other;
 
 class Form_Markup {
@@ -45,7 +45,7 @@ class Form_Markup {
 				Choice_Other::FIELD_ID    => $field['id'],
 				Choice_Other::FIELD_INDEX => $index,
 				Choice_Other::LABEL       => __( 'Other', 'tribe' ),
-			] );
+			] )->get_rendered_output();
 
 			$choice_markup = str_replace( '</li>', $label . '</li>', $choice_markup );
 

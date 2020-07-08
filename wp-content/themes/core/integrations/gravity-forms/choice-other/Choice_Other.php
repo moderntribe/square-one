@@ -3,6 +3,7 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Templates\Components\Integrations\Gravity_Forms;
 
+use Tribe\Project\Components\Component;
 use Tribe\Project\Templates\Components\Context;
 
 /**
@@ -15,7 +16,8 @@ use Tribe\Project\Templates\Components\Context;
  * @property string[]   $attr
  * @property string[]   $classes
  */
-class Choice_Other extends Context {
+class Choice_Other extends Component {
+
 	public const FORM_ID     = 'form_id';
 	public const FIELD_ID    = 'field_id';
 	public const FIELD_INDEX = 'field_index';
@@ -23,36 +25,22 @@ class Choice_Other extends Context {
 	public const ATTRIBUTES  = 'attr';
 	public const CLASSES     = 'classes';
 
-	protected $properties = [
-		self::FORM_ID     => [
-			self::DEFAULT => 0,
-		],
-		self::FIELD_ID    => [
-			self::DEFAULT => 0,
-		],
-		self::FIELD_INDEX => [
-			self::DEFAULT => 0,
-		],
-		self::LABEL       => [
-			self::DEFAULT => '',
-		],
-		self::CLASSES     => [
-			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [ 'gf-radio-checkbox-other-placeholder' ],
-		],
-		self::ATTRIBUTES  => [
-			self::DEFAULT          => [],
-			self::MERGE_ATTRIBUTES => [],
-		],
-	];
+	protected function defaults(): array {
+		return [
+			self::FORM_ID     => 0,
+			self::FIELD_ID    => 0,
+			self::FIELD_INDEX => 0,
+			self::LABEL       => '',
+			self::CLASSES     => [ 'gf-radio-checkbox-other-placeholder' ],
+			self::ATTRIBUTES  => [],
+		];
+	}
 
-	public function get_data(): array {
-		$this->properties[ self::ATTRIBUTES ][ self::MERGE_ATTRIBUTES ]['for'] = $this->for_attribute();
-
-		return parent::get_data();
+	public function init(): array {
+		$this->data[ self::ATTRIBUTES ]['for'] = $this->for_attribute();
 	}
 
 	private function for_attribute(): string {
-		return sprintf( 'choice_%1$s_%2$s_%3$s', $this->form_id, $this->field_id, $this->field_index );
+		return sprintf( 'choice_%1$s_%2$s_%3$s', $this->data['form_id'], $this->data['field_id'], $this->data['field_index'] );
 	}
 }
