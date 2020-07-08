@@ -22,34 +22,4 @@ class Document extends Component {
 	protected function get_body_class() {
 		return implode( ' ', get_body_class() );
 	}
-
-	public function render(): void {
-		?>
-		<html {{ language_attributes }}>
-
-			{{ component( 'head/Head.php' ) }}
-
-			<body class="{{ body_class }}">
-
-				{{ do_action( 'tribe/body_opening_tag') }}
-
-				<div class="l-wrapper" data-js="site-wrap">
-
-					{{ component( 'header/masthead/Masthead.php', masthead ) }}
-
-					{{ component( 'main/Main.php', main ) }}
-
-					{{ component( 'sidebar/Sidebar.php', sidebar ) }}
-
-					{{ component( 'footer/site-footer/Site_Footer.php', footer ) }}
-
-				</div><!-- .l-wrapper -->
-
-				{{ do_action( 'wp_footer' ) }}
-
-			</body>
-
-		</html>
-		<?php
-	}
 }

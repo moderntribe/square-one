@@ -32,6 +32,11 @@ abstract class Component {
 	 */
 	protected $build_parser;
 
+	/**
+	 * @var string
+	 */
+	protected $twig_file = '';
+
 	public function __construct( Component_Factory $factory, Environment $twig, Theme_Build_Parser $build_parser, $args = [] ) {
 		$this->factory      = $factory;
 		$this->twig         = $twig;
@@ -47,6 +52,33 @@ abstract class Component {
 
 	public function data(): array {
 		return $this->data;
+	}
+
+	public function render(): void {
+		$twig_file = $this->get_twig_file_for_component();
+
+		include( $twig_file );
+	}
+
+	protected function get_twig_file_for_component() {
+		$dir = dirname( ( new \ReflectionClass( static::class ) )->getFileName() );
+
+		if ( ! empty( $this->twig_file ) ) {
+			return sprintf( '%s/%s', $dir, $this->twig_file );
+		}
+
+		$files = scandir( $dir );
+		$twigs = array_filter( $files, function ( $file ) {
+			$ext = pathinfo( $file, PATHINFO_EXTENSION );
+
+			return $ext === 'twig';
+		} );
+
+		if ( empty( $twigs ) ) {
+			throw new \ErrorException( 'Could not locate a valid Twig template for this component. Please ensure a .twig file exists in the same directory, or that you explicitely define the $twig_file property for this component.' );
+		}
+
+		return sprintf( '%s/%s', $dir, basename( array_shift( $twigs ) ) );
 	}
 
 	public function output(): void {
@@ -106,6 +138,5 @@ abstract class Component {
 		return [];
 	}
 
-	abstract public function render(): void;
 
 }

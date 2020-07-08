@@ -31,12 +31,4 @@ class Container extends Component {
 			self::ATTRS             => [],
 		];
 	}
-
-	public function render(): void {
-		?>
-		<{{ tag }} {{ classes|stringify }} {{ attrs|stringify }}>
-			{{ component( content_component, content ) }}
-		</{{ tag }}>
-		<?php
-	}
 }

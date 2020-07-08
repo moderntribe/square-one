@@ -68,12 +68,4 @@ class Link extends Component {
 			Text::TEXT    => __( '(Opens new window)', 'tribe' ),
 		] )->get_rendered_output();
 	}
-
-	public function render(): void {
-		?>
-        <a {{ classes|stringify }} {{ attrs|stringify }}>
-            {{ content }}
-        </a>
-		<?php
-	}
 }

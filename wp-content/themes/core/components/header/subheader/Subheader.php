@@ -8,21 +8,4 @@ use Tribe\Project\Templates\Components\Context;
 
 class Subheader extends Component {
 	public const TITLE = 'title';
-
-	public function render(): void {
-		if ( empty( $this->data['title'] ) ) {
-			return;
-		}
-		?>
-		<header>
-
-			<div class="l-container">
-
-				{{ component( 'text/Text.php', title ) }}
-
-			</div>
-
-		</header>
-		<?php
-	}
 }

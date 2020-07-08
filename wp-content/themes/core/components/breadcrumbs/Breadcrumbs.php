@@ -33,21 +33,4 @@ class Breadcrumbs extends Component {
 			self::LINK_ATTRS      => [],
 		];
 	}
-
-	public function render(): void {
-		?>
-        <div {{ wrapper_classes|stringify }} {{ wrapper_attrs|stringify }}>
-            <ul {{ main_classes|stringify }}>
-
-                {% for item in items %}
-                <li {{ item_classes|stringify }}>
-                    <a href="{{ item.url }}" {{ link_classes|stringify }} {{ link_attrs|stringify }}>
-                        {{ item.label }}
-                    </a>
-                </li>
-                {% endfor %}
-            </ul>
-        </div>
-		<?php
-	}
 }

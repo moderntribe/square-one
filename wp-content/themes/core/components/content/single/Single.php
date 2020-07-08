@@ -20,41 +20,4 @@ class Single extends Component {
 			Share::LABELED => true,
 		];
 	}
-
-	public function render(): void {
-		?>
-        <article class="item-single">
-
-            {{ post.image }}
-
-            <div class="item-single__content s-sink t-sink">
-                {{ post.content }}
-            </div>
-
-            <footer class="item-single__footer">
-
-                <ul class="item-single__meta">
-
-                    <li class="item-single__meta-date">
-                        <time datetime="">
-                            {{ post.date|esc_html }}
-                        </time>
-                    </li>
-
-                    <li class="item-single__meta-author">
-                        {{ __('by')|esc_html }}
-                        <a href="{{ post.author.url|esc_url }}" rel="author">
-                            {{ post.author.name|esc_html }}
-                        </a>
-                    </li>
-
-                </ul>
-
-                {{ component( 'share/Share.php', social_share ) }}
-
-            </footer>
-
-        </article>
-		<?php
-	}
 }

@@ -83,24 +83,4 @@ class Single extends Component {
 
 		return $options;
 	}
-
-	public function render(): void {
-		?>
-        {% if breadcrumbs %}
-        {{ component( 'breadcrumbs/Breadcrumbs.php', breadcrumbs ) }}
-        {% endif %}
-
-        {{ component( 'header/subheader/Subheader.php', subheader ) }}
-
-        <div class="l-container">
-            {{ component( 'content/single/Single.php', { 'post': post } ) }}
-
-            {{ component( 'pagination/Pagination.php', pagination ) }}
-        </div>
-
-        {{ do_action( 'the_panels') }}
-
-        {{ comments }}
-		<?php
-	}
 }

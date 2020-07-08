@@ -28,15 +28,4 @@ class Quote extends Component {
 			self::CITE_ATTRS  => [],
 		];
 	}
-
-	public function render(): void {
-		?>
-		<blockquote {{ classes|stringify }}>
-			<p class="c-quote__text" {{ quote_attrs|stringify }}>{{ quote }}</p>
-			{% if cite %}
-				<cite class="c-quote__cite" {{ cite_attrs|stringify }}>{{ cite }}</cite>
-			{% endif %}
-		</blockquote>
-		<?php
-	}
 }

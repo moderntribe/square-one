@@ -20,27 +20,4 @@ class Site_Footer extends Component {
 		$this->data[ self::HOME_URL ]  = home_url( '/' );
 		$this->data[ self::BLOG_NAME ] = get_bloginfo( 'name' );
 	}
-
-	public function render(): void {
-		?>
-		<footer class="site-footer">
-
-			<div class="l-container">
-
-				{{ component( 'footer/navigation/Navigation.php', navigation ) }}
-
-				{{ component( 'follow/Follow.php' ) }}
-
-				<p>
-					{{ copyright }}
-					<a href="{{ home_url|esc_url }}" rel="external">
-						{{ name }}
-					</a>
-				</p>
-
-			</div>
-
-		</footer>
-		<?php
-	}
 }

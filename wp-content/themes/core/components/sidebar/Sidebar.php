@@ -26,18 +26,4 @@ class Sidebar extends Component {
 		return ob_get_clean();
 	}
 
-	public function render(): void {
-		?>
-		{% if active %}
-
-		<section class="sidebar" role="complementary">
-
-			{{ content }}
-
-		</section>
-
-		{% endif %}
-		<?php
-	}
-
 }

@@ -43,25 +43,4 @@ class Follow extends Component {
 		return $links;
 	}
 
-	public function render(): void {
-		?>
-		<aside class="social-follow">
-
-			<ul class="social-follow__list">
-				{% for key, social_item in links %}
-				<li class="social-follow__item social-follow__item--{{ key|esc_attr }}">
-					<a href="{{ social_item.url|esc_url }}" class="social-follow__anchor" rel="me noopener"
-					   title="{{ social_item.title|esc_attr }}" target="_blank">
-						<i class="icon icon-{{ key|esc_attr }}"></i>
-						<span class="u-visually-hidden">{{ social_item.title|esc_html }}</span>
-					</a>
-				</li>
-				{% endfor %}
-
-			</ul>
-
-		</aside>
-		<?php
-	}
-
 }

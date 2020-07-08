@@ -24,10 +24,4 @@ class Text extends Component {
 			self::ATTRS   => [],
 		];
 	}
-
-	public function render(): void {
-		?>
-        <{{ tag }} {{ classes|stringify }} {{ attrs|stringify }}>{{ content }}</{{ tag }}>
-		<?php
-	}
 }

@@ -102,32 +102,4 @@ class Index extends Component {
 
 		return $links;
 	}
-
-	public function render(): void {
-		?>
-        {% if breadcrumbs %}
-        {{ component( 'breadcrumbs/Breadcrumbs.php', breadcrumbs ) }}
-        {% endif %}
-
-        {{ component( 'header/subheader/Subheader.php', subheader ) }}
-
-        <div class="l-container">
-
-            {% if posts|length > 0 %}
-
-            {% for post in posts %}
-            {{ component( 'content/loop-item/Loop_Item.php', { 'post': post } ) }}
-            {% endfor %}
-
-            {{ component( 'pagination/Pagination.php', pagination ) }}
-
-            {% else %}
-
-            {{ component( 'content/no-results/No_Results.php' ) }}
-
-            {% endif %}
-
-        </div>
-		<?php
-	}
 }

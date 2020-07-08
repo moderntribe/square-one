@@ -9,14 +9,4 @@ class Page_Example_App extends Component {
 
 	public const SUBHEADER = 'subheader';
 
-	public function render(): void {
-		?>
-        {{ component( 'header/subheader/Subheader.php', subheader ) }}
-
-        <div data-js="example-app" class="l-container s-sink t-sink">
-
-        </div>
-		<?php
-	}
-
 }

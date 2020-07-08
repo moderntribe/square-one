@@ -67,18 +67,4 @@ class Search extends Component {
 
 		return $options;
 	}
-
-	public function render(): void {
-	    $foo = 'bar';
-		?>
-        <form {{ form_classes|stringify }} {{ form_attrs|stringify }}>
-
-            <label {{ label_classes|stringify }} {{ label_attrs|stringify }}>{{ label_text }}</label>
-            <input {{ input_classes|stringify }} {{ input_attrs|stringify }}/>
-
-            {{ component( 'button/Button.php', submit_button ) }}
-
-        </form>
-		<?php
-	}
 }

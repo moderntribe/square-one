@@ -36,12 +36,4 @@ class Button extends Component {
 			$this->data[ self::ATTRS ]['aria-label'] = $this->data[ self::ARIA_LABEL ];
 		}
 	}
-
-	public function render(): void {
-		?>
-        <button {{ classes|stringify }} {{ attrs|stringify }}>
-            {{ content }}
-        </button>
-		<?php
-	}
 }

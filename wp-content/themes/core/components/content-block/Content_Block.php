@@ -35,15 +35,4 @@ class Content_Block extends Component {
 			self::ACTION  => [],
 		];
 	}
-
-	public function render(): void {
-		?>
-        <{{ tag }} {{ classes|stringify }} {{ attrs|stringify }}>
-        {{ component( 'text/Text.php', leadin ) }}
-        {{ component( 'text/Text.php', title ) }}
-        {{ component( 'text/Text.php', text ) }}
-        {{ component( 'button/Button.php', action ) }}
-        </{{ tag }}>
-		<?php
-	}
 }

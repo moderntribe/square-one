@@ -40,22 +40,4 @@ class Trackback extends Component {
 		$this->data[ self::ATTRIBUTES ]['id'] = sprintf( 'comment-%d', $this->data[ self::COMMENT_ID ] );
 	}
 
-	public function render(): void {
-		?>
-		<li {{ attr|stringify }} {{ classes|stringify }}>
-			<p>
-				<strong>{{ label }}</strong>
-
-				{{ author_link }}
-
-				{% if edit_link %}
-					<span class="comment__action-edit">
-						{{ edit_link }}
-					</span>
-				{% endif %}
-			</p>
-		</li>
-		<?php
-	}
-
 }

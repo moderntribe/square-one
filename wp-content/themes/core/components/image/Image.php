@@ -371,24 +371,4 @@ class Image extends Component {
 
 		return implode( ", \n", $attribute );
 	}
-
-	public function render(): void {
-		?>
-        <{{ wrapper.tag }} {{ wrapper.classes }} {{ wrapper.attrs }}>
-
-        {% if link is not empty %}
-        <a href="{{ link.url }}" {{ link.classes }} {{ link.attrs }}>
-            {% endif %}
-
-            {{ image }}
-
-            {% if link is not empty %}
-        </a>
-        {% endif %}
-
-        {{ html }}
-
-        </{{ wrapper.tag }}>
-		<?php
-	}
 }

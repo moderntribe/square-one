@@ -39,31 +39,4 @@ class Head extends Component {
 		// Archives
 		return get_the_archive_title();
 	}
-
-	public function render(): void {
-		?>
-		<head>
-
-			{# // TITLE: Handled by WP #}
-
-			{# // MISC Meta #}
-			<meta charset="utf-8">
-			<meta name="author" content="{{ name|esc_attr }}">
-			<link rel="pingback" href="{{ pingback_url|esc_url }}">
-
-			{# // MOBILE META #}
-			<meta name="HandheldFriendly" content="True">
-			<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-			{# // PLATFORM META: iOS & Android #}
-			<meta name="apple-mobile-web-app-title" content="{{ page_title|esc_attr }}">
-
-			{# // PLATFORM META: IE #}
-			<meta name="application-name" content="{{ name|esc_attr }}">
-
-			{{ do_action( 'wp_head' ) }}
-
-		</head>
-		<?php
-	}
 }
