@@ -9,10 +9,6 @@ use Tribe\Project\Blocks\Builder\Block_Builder;
 use Tribe\Project\Blocks\Builder\Builder_Factory;
 use Tribe\Project\Components\Component_Factory;
 use Tribe\Project\Components\Handler;
-use Tribe\Project\Controllers\Blocks\Hero;
-use Tribe\Project\Controllers\Blocks\Media_Text;
-use Tribe\Project\Controllers\Blocks\Interstitial;
-use Tribe\Project\Templates\Controllers;
 
 class Blocks_Definer implements Definer_Interface {
 
@@ -39,23 +35,18 @@ class Blocks_Definer implements Definer_Interface {
 				DI\get( Types\Support\Content_Carousel_Select::class ),
 				DI\get( Types\Support\Content_Carousel_Card::class ),
 
-				DI\get( Types\Hero::class ),
+				DI\get( Types\Hero\Hero::class ),
 
 				DI\get( Types\Icon_Grid::class ),
 				DI\get( Types\Support\Icon_Grid_Card::class ),
 
-				DI\get( Types\Interstitial::class ),
+				DI\get( Types\Interstitial\Interstitial::class ),
 
 				DI\get( Types\Media_Text\Media_Text::class ),
 				DI\get( Types\Media_Text\Support\Media_Text_Media::class ),
 				DI\get( Types\Media_Text\Support\Media_Text_Media_Embed::class ),
 				DI\get( Types\Media_Text\Support\Media_Text_Media_Image::class ),
 				DI\get( Types\Media_Text\Support\Media_Text_Text::class ),
-			] ),
-
-			self::CONTROLLER_MAP => DI\add( [
-				Types\Hero::NAME         => Hero::class,
-				Types\Interstitial::NAME => Interstitial::class,
 			] ),
 
 			/**

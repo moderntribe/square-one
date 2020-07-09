@@ -4,7 +4,7 @@ declare( strict_types=1 );
 namespace Tribe\Project\Templates\Components\Panels;
 
 use Tribe\Project\Components\Component;
-use Tribe\Project\Blocks\Types\Hero as Hero_Block;
+use Tribe\Project\Blocks\Types\Hero\Hero as Hero_Block;
 
 /**
  * Class Hero

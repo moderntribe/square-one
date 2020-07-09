@@ -1,9 +1,10 @@
 <?php
 declare( strict_types=1 );
 
-namespace Tribe\Project\Controllers\Blocks;
+namespace Tribe\Project\Blocks\Types\Hero;
 
-use Tribe\Project\Blocks\Types\Hero as Hero_Block;
+use Tribe\Project\Blocks\Types\Hero\Hero as Hero_Block;
+use Tribe\Project\Controllers\Blocks\Block_Controller;
 use Tribe\Project\Templates\Components\Content_Block;
 use Tribe\Project\Templates\Components\Image as Image_Component;
 use Tribe\Project\Templates\Components\Link;
@@ -12,7 +13,7 @@ use Tribe\Project\Templates\Components\Text;
 use Tribe\Project\Templates\Models\Image;
 use Tribe\Project\Theme\Config\Image_Sizes;
 
-class Hero extends Block_Controller {
+class Controller extends Block_Controller {
 
 	public function render( $attributes, $content, $block_type ) {
 		$this->attributes = $attributes;

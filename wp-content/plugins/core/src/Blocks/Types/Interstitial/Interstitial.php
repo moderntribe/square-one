@@ -1,7 +1,7 @@
 <?php
 declare( strict_types=1 );
 
-namespace Tribe\Project\Blocks\Types;
+namespace Tribe\Project\Blocks\Types\Interstitial;
 
 use Tribe\Gutenpanels\Blocks\Block_Type_Interface;
 use Tribe\Gutenpanels\Blocks\Sections\Content_Section;

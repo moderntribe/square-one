@@ -4,7 +4,7 @@ declare( strict_types=1 );
 namespace Tribe\Project\Templates\Components\Panels;
 
 use Tribe\Project\Components\Component;
-use Tribe\Project\Blocks\Types\Interstitial as Interstitial_Block;
+use Tribe\Project\Blocks\Types\Interstitial\Interstitial as Interstitial_Block;
 
 /**
  * Class Interstitial
