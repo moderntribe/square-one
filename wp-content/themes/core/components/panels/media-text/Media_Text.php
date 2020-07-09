@@ -4,7 +4,7 @@ declare( strict_types=1 );
 namespace Tribe\Project\Templates\Components\Panels;
 
 use Tribe\Project\Components\Component;
-use Tribe\Project\Blocks\Types\Media_Text as Media_Text_Block;
+use Tribe\Project\Blocks\Types\Media_Text\Media_Text as Media_Text_Block;
 
 /**
  * Class Media_Text

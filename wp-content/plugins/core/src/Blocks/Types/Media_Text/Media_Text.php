@@ -1,14 +1,14 @@
 <?php
 declare( strict_types=1 );
 
-namespace Tribe\Project\Blocks\Types;
+namespace Tribe\Project\Blocks\Types\Media_Text;
 
 use Tribe\Gutenpanels\Blocks\Block_Type_Interface;
 use Tribe\Gutenpanels\Blocks\Sections\Content_Section;
 use Tribe\Gutenpanels\Blocks\Sections\Toolbar_Section;
 use Tribe\Project\Blocks\Block_Type_Config;
-use Tribe\Project\Blocks\Types\Support\Media_Text_Media;
-use Tribe\Project\Blocks\Types\Support\Media_Text_Text;
+use Tribe\Project\Blocks\Types\Media_Text\Support\Media_Text_Media;
+use Tribe\Project\Blocks\Types\Media_Text\Support\Media_Text_Text;
 
 class Media_Text extends Block_Type_Config {
 	public const NAME = 'tribe/media-text';

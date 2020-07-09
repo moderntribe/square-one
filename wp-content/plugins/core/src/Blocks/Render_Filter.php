@@ -27,21 +27,22 @@ class Render_Filter {
 	private $map;
 
 
-	public function __construct( Component_Factory $factory, Handler $handler, array $map ) {
+	public function __construct( Component_Factory $factory, Handler $handler ) {
 		$this->factory = $factory;
 		$this->handler = $handler;
-		$this->map     = $map;
 	}
 
 	public function render( string $prefiltered, array $attributes, string $content, Block_Type $block_type ) {
+		$controllers = apply_filters( 'tribe/project/controllers/registered_block_controllers', [] );
+
 		$name = $block_type->name()->value();
 
-		if ( ! array_key_exists( $name, $this->map ) ) {
+		if ( ! array_key_exists( $name, $controllers ) ) {
 			return $prefiltered;
 		}
 
 		/** @var Block_Controller $controller */
-		$controller = new $this->map[$name]( $this->handler, $this->factory );
+		$controller = $controllers[$name];
 
 		ob_start();
 		$controller->render( $attributes, $content, $block_type );
