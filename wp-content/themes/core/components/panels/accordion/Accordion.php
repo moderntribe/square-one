@@ -3,7 +3,7 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Templates\Components\Panels;
 
-use Tribe\Project\Templates\Components\Context;
+use Tribe\Project\Components\Component;
 use \Tribe\Project\Blocks\Types\Accordion\Accordion as Accordion_Block;
 
 /**
@@ -17,7 +17,7 @@ use \Tribe\Project\Blocks\Types\Accordion\Accordion as Accordion_Block;
  * @property string[] $classes
  * @property string[] $attrs
  */
-class Accordion extends Context {
+class Accordion extends Component {
 
 	public const LAYOUT            = 'layout';
 	public const CONTENT           = 'content';
@@ -40,7 +40,7 @@ class Accordion extends Context {
 	}
 
 	public function init() {
-		$this->properties[ self::CLASSES ][] = 'c-panel--' . $this->layout;
+		$this->data[ self::CLASSES ][] = 'c-panel--' . $this->layout;
 	}
 
 }
