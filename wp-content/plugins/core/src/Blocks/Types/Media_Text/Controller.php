@@ -1,10 +1,10 @@
 <?php
+declare( strict_types=1 );
 
 namespace Tribe\Project\Blocks\Types\Media_Text;
 
 use Tribe\Project\Blocks\Types\Media_Text\Media_Text as Media_Text_Block;
 use Tribe\Project\Controllers\Blocks\Block_Controller;
-use Tribe\Project\Templates\Components\Container as Container_Component;
 use Tribe\Project\Templates\Components\Content_Block;
 use Tribe\Project\Templates\Components\Image as Image_Component;
 use Tribe\Project\Templates\Components\Link;
@@ -55,7 +55,7 @@ class Controller extends Block_Controller {
 	}
 
 	private function get_width(): string {
-		return $this->attributes[ Media_Text_Block::WIDTH ] ?? Media_Text_Block::WIDTH_BOXED;
+		return $this->attributes[ Media_Text_Block::WIDTH ] ?? Media_Text_Block::WIDTH_GRID;
 	}
 
 	private function get_media(): array {
@@ -77,7 +77,6 @@ class Controller extends Block_Controller {
 	}
 
 	private function get_image( $attachment_id ): array {
-
 		$src_size     = Image_Sizes::FOUR_THREE;
 		$srcset_sizes = [
 			Image_Sizes::FOUR_THREE_SMALL,
@@ -116,26 +115,22 @@ class Controller extends Block_Controller {
 			Content_Block::TITLE   => $this->get_title(),
 			Content_Block::TEXT    => $this->get_text(),
 			Content_Block::ACTION  => $this->get_cta(),
+			Content_Block::LAYOUT  => $this->get_layout() === Media_Text_Block::MEDIA_CENTER ? Content_Block::LAYOUT_INLINE : Content_Block::LAYOUT_LEFT,
 		];
 	}
 
 	private function get_title(): array {
-		if ( empty( $this->attributes[ Media_Text_Block::TITLE ] ) ) {
-			return [];
-		}
-
 		return [
 			Text::TAG     => 'h2',
 			Text::CLASSES => [ 'media-text__title', 'h3' ],
-			Text::TEXT    => $this->attributes[ Media_Text_Block::TITLE ],
+			Text::TEXT    => $this->attributes[ Media_Text_Block::TITLE ] ?? '',
 		];
 	}
 
 	private function get_text(): array {
 		return [
-			Container_Component::TAG     => 'div',
-			Container_Component::CLASSES => [ 'media-text__text', 't-sink', 's-sink' ],
-			Container_Component::CONTENT => implode( "\n", wp_list_pluck( $this->attributes[ Media_Text_Block::CONTENT ] ?? [], 'content' ) ),
+			Text::CLASSES => [ 'media-text__text', 't-sink', 's-sink' ],
+			Text::TEXT    => implode( "\n", wp_list_pluck( $this->attributes[ Media_Text_Block::CONTENT ] ?? [], 'content' ) )
 		];
 	}
 
@@ -146,21 +141,13 @@ class Controller extends Block_Controller {
 			'target' => '',
 		] );
 
-		if ( empty( $cta['url'] ) ) {
-			return [];
-		}
-
-		$cta_html = $this->factory->get( Link::class, [
-			Link::URL     => $cta['url'],
-			Link::CONTENT => $cta['text'] ?: $cta['url'],
-			Link::TARGET  => $cta['target'],
-			Link::CLASSES => [ 'a-btn', 'a-btn--has-icon-after', 'icon-arrow-right' ],
-		] )->get_rendered_output();
-
 		return [
-			Text::TAG     => 'p',
-			Text::CLASSES => [ 'media-text__cta' ],
-			Text::TEXT    => $cta_html,
+			Link::URL             => $cta['url'],
+			Link::CONTENT         => $cta['text'] ?: $cta['url'],
+			Link::TARGET          => $cta['target'],
+			Link::CLASSES         => [ 'a-btn', 'a-btn--has-icon-after', 'icon-arrow-right' ],
+			Link::WRAPPER_TAG     => 'p',
+			Link::WRAPPER_CLASSES => [ 'media-text__cta' ],
 		];
 	}
 }
