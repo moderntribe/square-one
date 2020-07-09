@@ -86,6 +86,10 @@ class Controller extends Block_Controller {
 			'target' => '',
 		] );
 
+		if ( empty( $cta[ 'url' ] ) ) {
+			return [];
+		}
+
 		return [
 			Link::URL             => $cta['url'],
 			Link::CONTENT         => $cta['text'] ?: $cta['url'],

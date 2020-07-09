@@ -56,4 +56,17 @@ class Content_Block extends Component {
 		$this->data[ self::TEXT ][ Text::CLASSES ][]           = 'c-content-block__text';
 		$this->data[ self::ACTION ][ Link::WRAPPER_CLASSES ][] = 'c-content-block__cta';
 	}
+
+	public function render(): void {
+		if (
+			empty( $this->data[ self::LEADIN ][ Text::TEXT ] ) &&
+			empty( $this->data[ self::TITLE ][ Text::TEXT ] ) &&
+			empty( $this->data[ self::TEXT ][ Text::TEXT ] ) &&
+			empty( $this->data[ self::ACTION ] )
+		) {
+			return;
+		}
+
+		parent::render();
+	}
 }
