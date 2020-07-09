@@ -73,7 +73,7 @@ class Interstitial extends Block_Controller {
 		return [
 			Text::TAG     => 'h2',
 			Text::CLASSES => [ 'interstitial__title', 'h3' ],
-			Text::TEXT    => $this->attributes[ Interstitial_Block::DESCRIPTION ],
+			Text::TEXT    => $this->attributes[ Interstitial_Block::DESCRIPTION ] ?? '',
 		];
 	}
 

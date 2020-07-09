@@ -75,7 +75,7 @@ class Hero extends Block_Controller {
 		return [
 			Text::TAG     => 'p',
 			Text::CLASSES => [ 'hero__leadin', 'h6' ],
-			Text::TEXT    => $this->attributes[ Hero_Block::LEAD_IN ],
+			Text::TEXT    => $this->attributes[ Hero_Block::LEAD_IN ] ?? '',
 		];
 	}
 
@@ -83,14 +83,14 @@ class Hero extends Block_Controller {
 		return [
 			Text::TAG     => 'h2',
 			Text::CLASSES => [ 'hero__title', 'h1' ],
-			Text::TEXT    => $this->attributes[ Hero_Block::TITLE ],
+			Text::TEXT    => $this->attributes[ Hero_Block::TITLE ] ?? '',
 		];
 	}
 
 	private function get_text(): array {
 		return [
 			Text::CLASSES => [ 'hero__description', 't-sink', 's-sink' ],
-			Text::TEXT    => $this->attributes[ Hero_Block::DESCRIPTION ],
+			Text::TEXT    => $this->attributes[ Hero_Block::DESCRIPTION ] ?? '',
 		];
 	}
 
