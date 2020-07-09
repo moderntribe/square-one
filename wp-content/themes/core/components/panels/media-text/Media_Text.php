@@ -5,7 +5,7 @@ namespace Tribe\Project\Templates\Components\Panels;
 
 use Tribe\Project\Components\Component;
 use Tribe\Project\Templates\Components\Context;
-use Tribe\Project\Blocks\Types\Media_Text as Media_Text_Block;
+use Tribe\Project\Blocks\Types\Media_Text\Media_Text as Media_Text_Block;
 
 /**
  * Class Media_Text

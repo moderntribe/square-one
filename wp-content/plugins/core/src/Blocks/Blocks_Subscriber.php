@@ -5,8 +5,10 @@ namespace Tribe\Project\Blocks;
 
 use Tribe\Gutenpanels\Registration\Registry;
 use Tribe\Libs\Container\Abstract_Subscriber;
+use Tribe\Project\Controllers\Blocks\Block_Controller;
 
 class Blocks_Subscriber extends Abstract_Subscriber {
+
 	public function register(): void {
 		add_action( 'tribe/gutenpanels/register', function ( Registry $registry ) {
 			foreach ( $this->container->get( Blocks_Definer::TYPES ) as $type ) {
@@ -31,6 +33,45 @@ class Blocks_Subscriber extends Abstract_Subscriber {
 				$style_override->register();
 			}
 		}, 10, 0 );
+
+		add_filter( 'tribe/project/controllers/registered_block_controllers', [ $this, 'instantiate_block_controllers' ], 10, 1 );
 	}
 
+	/**
+	 * Instantiate the block controllers for the various registered blocks.
+	 *
+	 * @param array $controllers
+	 *
+	 * @filter tribe/project/controllers/registered_block_controllers 10 1
+	 *
+	 * @return array
+	 */
+	public function instantiate_block_controllers( array $controllers ) {
+		$registered_blocks  = $this->container->get( Blocks_Definer::TYPES );
+		$mapped_controllers = $this->container->get( Blocks_Definer::CONTROLLER_MAP );
+
+		foreach ( $registered_blocks as $block ) {
+			/**
+			 * If the block is already manually mapped to a controller, respect that mapping here.s
+			 *
+			 * @var Block_Type_Config $block
+			 */
+			if ( isset( $mapped_controllers[ $block::NAME ] ) ) {
+				$controllers[ $block::NAME ] = $this->container->get( $mapped_controllers[ $block::NAME ] );
+				continue;
+			}
+
+			try {
+				$controller = $block->get_controller_for_block();
+			} catch ( \ReflectionException $e ) {
+				continue;
+			}
+
+			if ( $controller ) {
+				$controllers[ $block::NAME ] = $this->container->get( $controller );
+			}
+		}
+
+		return $controllers;
+	}
 }

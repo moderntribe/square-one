@@ -21,12 +21,6 @@ class Blocks_Definer implements Definer_Interface {
 	public const BLACKLIST      = 'blocks.blacklist';
 	public const STYLES         = 'blocks.style_overrides';
 
-	protected $controller_map = [
-		Types\Media_Text::NAME   => Media_Text::class,
-		Types\Hero::NAME         => Hero::class,
-		Types\Interstitial::NAME => Interstitial::class,
-	];
-
 	public function define(): array {
 		return [
 			self::TYPES => DI\add( [
@@ -52,14 +46,17 @@ class Blocks_Definer implements Definer_Interface {
 
 				DI\get( Types\Interstitial::class ),
 
-				DI\get( Types\Media_Text::class ),
-				DI\get( Types\Support\Media_Text_Media::class ),
-				DI\get( Types\Support\Media_Text_Media_Embed::class ),
-				DI\get( Types\Support\Media_Text_Media_Image::class ),
-				DI\get( Types\Support\Media_Text_Text::class ),
+				DI\get( Types\Media_Text\Media_Text::class ),
+				DI\get( Types\Media_Text\Support\Media_Text_Media::class ),
+				DI\get( Types\Media_Text\Support\Media_Text_Media_Embed::class ),
+				DI\get( Types\Media_Text\Support\Media_Text_Media_Image::class ),
+				DI\get( Types\Media_Text\Support\Media_Text_Text::class ),
 			] ),
 
-			self::CONTROLLER_MAP => DI\add( $this->controller_map ),
+			self::CONTROLLER_MAP => DI\add( [
+				Types\Hero::NAME         => Hero::class,
+				Types\Interstitial::NAME => Interstitial::class,
+			] ),
 
 			/**
 			 * An array of core/3rd-party block types that should be unregistered
@@ -98,23 +95,12 @@ class Blocks_Definer implements Definer_Interface {
 				} ),
 			] ),
 
-			Render_Filter::class => DI\create()->constructor( DI\get( Component_Factory::class ), DI\get( Handler::class ), $this->get_instantiated_block_controllers() ),
+			Render_Filter::class => DI\create()->constructor( DI\get( Component_Factory::class ), DI\get( Handler::class ) ),
 
 			Allowed_Blocks::class => DI\create()->constructor( DI\get( self::BLACKLIST ) ),
 
 			\Tribe\Gutenpanels\Builder\Block_Builder::class             => DI\get( Block_Builder::class ),
 			\Tribe\Gutenpanels\Builder\Factories\Builder_Factory::class => DI\get( Builder_Factory::class ),
 		];
-	}
-
-	public function get_instantiated_block_controllers() {
-		$controllers = apply_filters( 'tribe/project/controllers/registered_block_controllers', $this->controller_map );
-		$inst        = [];
-
-		foreach ( $controllers as $block_name => $controller_name ) {
-			$inst[ $block_name ] = DI\get( $controller_name );
-		}
-
-		return $inst;
 	}
 }
