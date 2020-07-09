@@ -33,7 +33,10 @@ class Controller extends Block_Controller {
 	}
 
 	private function get_container_classes(): array {
-		$classes = [];
+		$classes = [
+			'accordion__container',
+			'l-container'
+		];
 
 		if ( $this->get_layout() === Accordion_Block::LAYOUT_STACKED ) {
 			$classes = [
@@ -62,14 +65,14 @@ class Controller extends Block_Controller {
 		return  [
 			Text::TAG     => 'h2',
 			Text::CLASSES => [ 'accordion__title', 'h3' ],
-			Text::TEXT    => $this->attributes[ Accordion_Block::TITLE ],
+			Text::TEXT    => $this->attributes[ Accordion_Block::TITLE ] ?? '',
 		];
 	}
 
 	private function get_description(): array {
 		return [
 			Text::CLASSES => [ 'accordion__description', 't-sink', 's-sink' ],
-			Text::TEXT    => $this->attributes[ Accordion_Block::DESCRIPTION ],
+			Text::TEXT    => $this->attributes[ Accordion_Block::DESCRIPTION ] ?? '',
 		];
 	}
 

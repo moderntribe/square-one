@@ -40,7 +40,7 @@ class Accordion extends Component {
 	}
 
 	public function init() {
-		$this->data[ self::CLASSES ][] = 'c-panel--' . $this->layout;
+		$this->data[ self::CLASSES ][] = 'c-panel--' . $this->data[ self::LAYOUT ];
 	}
 
 }
