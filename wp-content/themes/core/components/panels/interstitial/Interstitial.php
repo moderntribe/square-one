@@ -47,22 +47,4 @@ class Interstitial extends Component {
 		}
 	}
 
-	public function render(): void {
-		?>
-		<section {{ classes|stringify }} {{ attrs|stringify }}>
-			<div {{ container_classes|stringify }}>
-
-				<div {{ media_classes|stringify }}>
-					{{ component( 'image/Image.php', media ) }}
-				</div>
-
-				<div {{ content_classes|stringify }}>
-					{{ component( 'content-block/Content_Block.php', content ) }}
-				</div>
-
-			</div>
-		</section>
-		<?php
-	}
-
 }

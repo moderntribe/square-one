@@ -70,10 +70,6 @@ class Interstitial extends Block_Controller {
 	}
 
 	private function get_headline(): array {
-		if ( empty($this->attributes[ Interstitial_Block::DESCRIPTION ] ) ) {
-			return [];
-		}
-
 		return [
 			Text::TAG     => 'h2',
 			Text::CLASSES => [ 'interstitial__title', 'h3' ],
@@ -88,21 +84,13 @@ class Interstitial extends Block_Controller {
 			'target' => '',
 		] );
 
-		if ( empty( $cta[ 'url' ] ) ) {
-			return [];
-		}
-
-		$cta_html = $this->factory->get( Link::class, [
-			Link::URL        => $cta['url'],
-			Link::CONTENT    => $cta['text'] ?: $cta['url'],
-			Link::TARGET     => $cta['target'],
-			Link::CLASSES    => [ 'a-btn', 'a-btn--has-icon-after', 'icon-arrow-right' ],
-		] )->get_rendered_output();
-
 		return [
-			Text::TAG => 'p',
-			Text::CLASSES => [ 'interstitial__cta' ],
-			Text::TEXT => $cta_html,
+			Link::URL             => $cta['url'],
+			Link::CONTENT         => $cta['text'] ?: $cta['url'],
+			Link::TARGET          => $cta['target'],
+			Link::CLASSES         => [ 'a-btn', 'a-btn--has-icon-after', 'icon-arrow-right' ],
+			Link::WRAPPER_TAG     => 'p',
+			Link::WRAPPER_CLASSES => [ 'interstitial__cta' ],
 		];
 	}
 }
