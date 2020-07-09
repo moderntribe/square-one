@@ -57,35 +57,13 @@ class Media_Text extends Component {
 			$this->data[ self::CLASSES ][] = 'c-panel--width-' . $this->data[ self::WIDTH ];
 		}
 
-		if ( $this->data[ self::WIDTH ] === Media_Text_Block::WIDTH_BOXED ) {
+		if ( $this->data[ self::WIDTH ] === Media_Text_Block::WIDTH_GRID ) {
 			$this->data[ self::CLASSES ][] = 'l-container';
 		}
 
 		if ( $this->data[ self::WIDTH ] === Media_Text_Block::WIDTH_FULL ) {
 			$this->data[ self::CONTENT_CLASSES ][] = 'l-container';
 		}
-	}
-
-	public function render(): void {
-		?>
-        <section {{ classes|stringify }} {{ attrs|stringify }}>
-            <div {{ container_classes|stringify }}>
-
-                <div {{ media_classes|stringify }}>
-                    {% if media_type == 'image' %}
-	                    {{ component( 'image/Image.php', media ) }}
-	                {% elseif media_type == 'embed' %}
-	                    {{ component( 'text/Text.php', media ) }}
-	                {% endif %}
-                </div>
-
-                <div {{ content_classes|stringify }}>
-                    {{ component( 'content-block/Content_Block.php', content ) }}
-                </div>
-
-            </div>
-        </section>
-		<?php
 	}
 
 }

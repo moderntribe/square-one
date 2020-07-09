@@ -18,7 +18,7 @@ class Media_Text extends Block_Type_Config {
 	public const MEDIA_RIGHT  = 'right';
 	public const MEDIA_CENTER = 'center';
 	public const WIDTH        = 'width';
-	public const WIDTH_BOXED  = 'boxed';
+	public const WIDTH_GRID   = 'grid';
 	public const WIDTH_FULL   = 'full';
 	public const CONTAINER    = 'container';
 
@@ -63,7 +63,7 @@ class Media_Text extends Block_Type_Config {
 			)
 			->add_field(
 				$this->factory->toolbar()->field()->icon_select( self::WIDTH )
-					->add_dashicon_option( self::WIDTH_BOXED, __( 'Boxed', 'tribe' ), 'editor-contract' )
+					->add_dashicon_option( self::WIDTH_GRID, __( 'Grid', 'tribe' ), 'editor-contract' )
 					->add_dashicon_option( self::WIDTH_FULL, __( 'Full', 'tribe' ), 'editor-expand' )
 					->build()
 			)
