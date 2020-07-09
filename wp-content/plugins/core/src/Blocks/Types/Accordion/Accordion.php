@@ -1,13 +1,13 @@
 <?php
 declare( strict_types=1 );
 
-namespace Tribe\Project\Blocks\Types;
+namespace Tribe\Project\Blocks\Types\Accordion;
 
 use Tribe\Gutenpanels\Blocks\Block_Type_Interface;
 use Tribe\Gutenpanels\Blocks\Sections\Content_Section;
 use Tribe\Gutenpanels\Blocks\Sections\Toolbar_Section;
 use Tribe\Project\Blocks\Block_Type_Config;
-use Tribe\Project\Blocks\Types\Support\Accordion_Section;
+use Tribe\Project\Blocks\Types\Accordion\Support\Accordion_Section;
 
 class Accordion extends Block_Type_Config {
 	public const NAME = 'tribe/accordion';

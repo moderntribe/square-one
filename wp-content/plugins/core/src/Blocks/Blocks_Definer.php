@@ -20,8 +20,8 @@ class Blocks_Definer implements Definer_Interface {
 	public function define(): array {
 		return [
 			self::TYPES => DI\add( [
-				DI\get( Types\Accordion::class ),
-				DI\get( Types\Support\Accordion_Section::class ),
+				DI\get( Types\Accordion\Accordion::class ),
+				DI\get( Types\Accordion\Support\Accordion_Section::class ),
 
 				DI\get( Types\Button::class ),
 
@@ -48,6 +48,8 @@ class Blocks_Definer implements Definer_Interface {
 				DI\get( Types\Media_Text\Support\Media_Text_Media_Image::class ),
 				DI\get( Types\Media_Text\Support\Media_Text_Text::class ),
 			] ),
+
+			self::CONTROLLER_MAP => DI\add( [] ),
 
 			/**
 			 * An array of core/3rd-party block types that should be unregistered

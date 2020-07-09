@@ -1,24 +1,31 @@
 <?php
 declare( strict_types=1 );
 
-namespace Tribe\Project\Templates\Controllers\Block;
+namespace Tribe\Project\Blocks\Types\Accordion;
 
-use Tribe\Project\Blocks\Types\Accordion as Accordion_Block;
-use Tribe\Project\Blocks\Types\Support\Accordion_Section as Accordion_Section_Block;
+use Tribe\Project\Blocks\Types\Accordion\Accordion as Accordion_Block;
+use Tribe\Project\Controllers\Blocks\Block_Controller;
+use Tribe\Project\Blocks\Types\Accordion\Support\Accordion_Section as Accordion_Section_Block;
 use Tribe\Project\Templates\Components\Accordion as Accordion_Component;
 use Tribe\Project\Templates\Components\Content_Block;
 use Tribe\Project\Templates\Components\Panels\Accordion as Container;
 use Tribe\Project\Templates\Components\Text;
 
-class Accordion extends Block_Controller {
+class Controller extends Block_Controller {
 
-	public function render( string $path = '' ): string {
-		return $this->factory->get( Container::class, [
+	public function render( $attributes, $content, $block_type ) {
+		$this->attributes = $attributes;
+		$this->content    = $content;
+		$this->block_type = $block_type;
+
+		$args = [
 			Container::LAYOUT            => $this->get_layout(),
 			Container::CONTAINER_CLASSES => $this->get_container_classes(),
 			Container::HEADER            => $this->get_header(),
 			Container::CONTENT           => $this->get_accordion( $this->attributes ),
-		] )->render();
+		];
+
+		$this->render_component( 'panels/accordion/Accordion.php', $args );
 	}
 
 	private function get_layout(): string {
@@ -38,53 +45,38 @@ class Accordion extends Block_Controller {
 		return $classes;
 	}
 
-	protected function get_header(): string {
-		$title       = $this->get_title();
-		$description = $this->get_description();
-
-		if ( empty( $title ) && empty( $description ) ) {
-			return '';
+	protected function get_header(): array {
+		if ( empty( $this->attributes[ Accordion_Block::TITLE ] ) && empty( $this->attributes[ Accordion_Block::DESCRIPTION ] ) ) {
+			return [];
 		}
 
-		return $this->factory->get( Content_Block::class, [
+		return [
 			Content_Block::TAG     => 'header',
 			Content_Block::CLASSES => [ 'accordion__header' ],
-			Content_Block::TITLE   => $title,
-			Content_Block::TEXT    => $description,
-		] )->render();
+			Content_Block::TITLE   => $this->get_title(),
+			Content_Block::TEXT    => $this->get_description(),
+		];
 	}
 
-	private function get_title(): string {
-		if ( empty($this->attributes[ Accordion_Block::TITLE ] ) ) {
-			return '';
-		}
-
-		return $this->factory->get( Text::class, [
+	private function get_title(): array {
+		return  [
 			Text::TAG     => 'h2',
 			Text::CLASSES => [ 'accordion__title', 'h3' ],
 			Text::TEXT    => $this->attributes[ Accordion_Block::TITLE ],
-		] )->render();
+		];
 	}
 
-	private function get_description(): string {
-		if ( empty($this->attributes[ Accordion_Block::DESCRIPTION ] ) ) {
-			return '';
-		}
-
-		return $this->factory->get( Text::class, [
+	private function get_description(): array {
+		return [
 			Text::CLASSES => [ 'accordion__description', 't-sink', 's-sink' ],
 			Text::TEXT    => $this->attributes[ Accordion_Block::DESCRIPTION ],
-		] )->render();
+		];
 	}
 
-	protected function get_accordion( array $attributes ): string {
-		$options = [
+	protected function get_accordion( array $attributes ): array {
+		return [
 			Accordion_Component::ROWS => $this->get_rows( $attributes ),
 		];
-
-		$accordion = $this->factory->get( Accordion_Component::class, $options );
-
-		return $accordion->render();
 	}
 
 	protected function get_rows( array $attributes ): array {
