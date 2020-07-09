@@ -59,12 +59,14 @@ class Media_Text extends Block_Type_Config {
 					->add_dashicon_option( self::MEDIA_LEFT, __( 'Media Left', 'tribe' ), 'editor-alignleft' )
 					->add_dashicon_option( self::MEDIA_CENTER, __( 'Media Center', 'tribe' ), 'editor-aligncenter' )
 					->add_dashicon_option( self::MEDIA_RIGHT, __( 'Media Right', 'tribe' ), 'editor-alignright' )
+					->set_default( self::MEDIA_LEFT )
 					->build()
 			)
 			->add_field(
 				$this->factory->toolbar()->field()->icon_select( self::WIDTH )
 					->add_dashicon_option( self::WIDTH_GRID, __( 'Grid', 'tribe' ), 'editor-contract' )
 					->add_dashicon_option( self::WIDTH_FULL, __( 'Full', 'tribe' ), 'editor-expand' )
+					->set_default( self::WIDTH_GRID )
 					->build()
 			)
 			->build();

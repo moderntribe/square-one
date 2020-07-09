@@ -21,6 +21,7 @@ class Content_Block extends Component {
 
 	public const TAG              = 'tag';
 	public const CLASSES          = 'classes';
+	public const LAYOUT           = 'layout';
 	public const ATTRS            = 'attrs';
 	public const LEADIN           = 'leadin';
 	public const TITLE            = 'title';
@@ -28,9 +29,15 @@ class Content_Block extends Component {
 	public const ACTION           = 'action';
 	public const ACTION_COMPONENT = 'action_component';
 
+	public const LAYOUT_LEFT    = 'left';
+	public const LAYOUT_CENTER  = 'center';
+	public const LAYOUT_STACKED = 'stacked';
+	public const LAYOUT_INLINE  = 'inline';
+
 	protected function defaults(): array {
 		return [
 			self::TAG              => 'div',
+			self::LAYOUT           => self::LAYOUT_LEFT,
 			self::CLASSES          => [ 'c-content-block' ],
 			self::ATTRS            => [],
 			self::LEADIN           => [],
@@ -39,5 +46,14 @@ class Content_Block extends Component {
 			self::ACTION           => [],
 			self::ACTION_COMPONENT => 'link/Link.php',
 		];
+	}
+
+	public function init() {
+		$this->data[ self::CLASSES ][]                         = 'c-content-block';
+		$this->data[ self::CLASSES ][]                         = 'c-content-block--layout-' . $this->data[ self::LAYOUT ];
+		$this->data[ self::LEADIN ][ Text::CLASSES ][]         = 'c-content-block__leadin';
+		$this->data[ self::TITLE ][ Text::CLASSES ][]          = 'c-content-block__title';
+		$this->data[ self::TEXT ][ Text::CLASSES ][]           = 'c-content-block__text';
+		$this->data[ self::ACTION ][ Link::WRAPPER_CLASSES ][] = 'c-content-block__cta';
 	}
 }

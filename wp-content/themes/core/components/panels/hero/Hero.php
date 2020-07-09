@@ -4,6 +4,7 @@ declare( strict_types=1 );
 namespace Tribe\Project\Templates\Components\Panels;
 
 use Tribe\Project\Components\Component;
+use Tribe\Project\Blocks\Types\Hero as Hero_Block;
 
 /**
  * Class Hero
@@ -30,7 +31,7 @@ class Hero extends Component {
 
 	protected function defaults(): array {
 		return [
-			self::LAYOUT             => '',
+			self::LAYOUT            => Hero_Block::LAYOUT_LEFT,
 			self::MEDIA             => '',
 			self::CONTENT           => '',
 			self::CONTAINER_CLASSES => [ 'hero__container', 'l-container' ],
@@ -42,9 +43,7 @@ class Hero extends Component {
 	}
 
 	public function init() {
-		if ( $this->data[ self::LAYOUT ] ) {
-			$this->data[ self::CLASSES ][] = 'c-panel--' . $this->data[ self::LAYOUT ];
-		}
+		$this->data[ self::CLASSES ][] = 'c-panel--' . $this->data[ self::LAYOUT ];
 	}
 
 }

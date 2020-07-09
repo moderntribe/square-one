@@ -34,7 +34,7 @@ class Hero extends Block_Controller {
 	}
 
 	private function get_layout(): string {
-		return $this->attributes[ Hero_Block::LAYOUT ] ?? Hero_Block::LAYOUT_CENTER;
+		return $this->attributes[ Hero_Block::LAYOUT ] ?? Hero_Block::LAYOUT_LEFT;
 	}
 
 	private function get_media(): array {
@@ -68,6 +68,7 @@ class Hero extends Block_Controller {
 			Content_Block::TITLE   => $this->get_headline(),
 			Content_Block::TEXT    => $this->get_text(),
 			Content_Block::ACTION  => $this->get_cta(),
+			Content_Block::LAYOUT  => $this->get_layout() === Hero_Block::LAYOUT_CENTER ? Content_Block::LAYOUT_CENTER : Content_Block::LAYOUT_LEFT,
 		];
 	}
 

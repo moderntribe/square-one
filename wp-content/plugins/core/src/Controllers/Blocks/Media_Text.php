@@ -116,6 +116,7 @@ class Media_Text extends Block_Controller {
 			Content_Block::TITLE   => $this->get_title(),
 			Content_Block::TEXT    => $this->get_text(),
 			Content_Block::ACTION  => $this->get_cta(),
+			Content_Block::LAYOUT  => $this->get_layout() === Media_Text_Block::MEDIA_CENTER ? Content_Block::LAYOUT_INLINE : Content_Block::LAYOUT_LEFT,
 		];
 	}
 

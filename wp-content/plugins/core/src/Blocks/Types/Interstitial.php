@@ -83,7 +83,7 @@ class Interstitial extends Block_Type_Config {
 				$this->factory->toolbar()->field()->icon_select( self::LAYOUT )
 					->add_dashicon_option( self::LAYOUT_LEFT, __( 'Align Text Left', 'tribe' ), 'editor-alignleft' )
 					->add_dashicon_option( self::LAYOUT_CENTER, __( 'Align Text Center', 'tribe' ), 'editor-aligncenter' )
-					->set_default( self::LAYOUT_CENTER )
+					->set_default( self::LAYOUT_LEFT )
 					->build()
 			)
 			->build();

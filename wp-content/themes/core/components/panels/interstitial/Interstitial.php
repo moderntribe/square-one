@@ -4,6 +4,7 @@ declare( strict_types=1 );
 namespace Tribe\Project\Templates\Components\Panels;
 
 use Tribe\Project\Components\Component;
+use Tribe\Project\Blocks\Types\Interstitial as Interstitial_Block;
 
 /**
  * Class Interstitial
@@ -30,7 +31,7 @@ class Interstitial extends Component {
 
 	protected function defaults(): array {
 		return [
-			self::LAYOUT             => '',
+			self::LAYOUT            => Interstitial_Block::LAYOUT_LEFT,
 			self::MEDIA             => '',
 			self::CONTENT           => '',
 			self::CONTAINER_CLASSES => [ 'interstitial__container', 'l-container' ],
@@ -42,9 +43,7 @@ class Interstitial extends Component {
 	}
 
 	public function init() {
-		if ( $this->data[ self::LAYOUT ] ) {
-			$this->data[ self::CLASSES ][] = 'c-panel--' . $this->data[ self::LAYOUT ];
-		}
+		$this->data[ self::CLASSES ][] = 'c-panel--' . $this->data[ self::LAYOUT ];
 	}
 
 }

@@ -34,7 +34,7 @@ class Interstitial extends Block_Controller {
 	}
 
 	private function get_layout(): string {
-		return $this->attributes[ Interstitial_Block::LAYOUT ] ?? Interstitial_Block::LAYOUT_CENTER;
+		return $this->attributes[ Interstitial_Block::LAYOUT ] ?? Interstitial_Block::LAYOUT_LEFT;
 	}
 
 	private function get_media(): array {
@@ -66,6 +66,7 @@ class Interstitial extends Block_Controller {
 			Content_Block::CLASSES => [ 'interstitial__content-container', 't-theme--light' ],
 			Content_Block::TITLE   => $this->get_headline(),
 			Content_Block::ACTION  => $this->get_cta(),
+			Content_Block::LAYOUT  => $this->get_layout() === Interstitial_Block::LAYOUT_CENTER ? Content_Block::LAYOUT_CENTER : Content_Block::LAYOUT_LEFT,
 		];
 	}
 

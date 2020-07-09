@@ -4,7 +4,6 @@ declare( strict_types=1 );
 namespace Tribe\Project\Templates\Components\Panels;
 
 use Tribe\Project\Components\Component;
-use Tribe\Project\Templates\Components\Context;
 use Tribe\Project\Blocks\Types\Media_Text as Media_Text_Block;
 
 /**
@@ -35,8 +34,8 @@ class Media_Text extends Component {
 
 	protected function defaults(): array {
 		return [
-			self::WIDTH             => '',
-			self::LAYOUT            => '',
+			self::WIDTH             => Media_Text_Block::WIDTH_GRID,
+			self::LAYOUT            => Media_Text_Block::MEDIA_LEFT,
 			self::MEDIA             => '',
 			self::CONTENT           => '',
 			self::CONTAINER_CLASSES => [ 'media-text__container' ],
@@ -49,13 +48,8 @@ class Media_Text extends Component {
 	}
 
 	public function init() {
-		if ( $this->data[ self::LAYOUT ] ) {
-			$this->data[ self::CLASSES ][] = 'c-panel--layout-media-' . $this->data[ self::LAYOUT ];
-		}
-
-		if ( $this->data[ self::WIDTH ] ) {
-			$this->data[ self::CLASSES ][] = 'c-panel--width-' . $this->data[ self::WIDTH ];
-		}
+		$this->data[ self::CLASSES ][] = 'c-panel--layout-media-' . $this->data[ self::LAYOUT ];
+		$this->data[ self::CLASSES ][] = 'c-panel--width-' . $this->data[ self::WIDTH ];
 
 		if ( $this->data[ self::WIDTH ] === Media_Text_Block::WIDTH_GRID ) {
 			$this->data[ self::CLASSES ][] = 'l-container';
