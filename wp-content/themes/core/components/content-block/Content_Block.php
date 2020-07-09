@@ -62,7 +62,7 @@ class Content_Block extends Component {
 			empty( $this->data[ self::LEADIN ][ Text::TEXT ] ) &&
 			empty( $this->data[ self::TITLE ][ Text::TEXT ] ) &&
 			empty( $this->data[ self::TEXT ][ Text::TEXT ] ) &&
-			empty( $this->data[ self::ACTION ] )
+			empty( $this->data[ self::ACTION ][ 'content' ] )
 		) {
 			return;
 		}
