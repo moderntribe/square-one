@@ -13,52 +13,63 @@ use Tribe\Project\Components\Component;
  * @property string[] $classes
  * @property string[] $attrs
  * @property string   $content
+ * @property string   $wrapper_tag
+ * @property string[] $wraper_classes
+ * @property string[] $wrapper_attrs
  */
 class Link extends Component {
 
-	public const URL        = 'url';
-	public const TARGET     = 'target';
-	public const ARIA_LABEL = 'aria_label';
-	public const CLASSES    = 'classes';
-	public const ATTRS      = 'attrs';
-	public const CONTENT    = 'content';
+	public const URL             = 'url';
+	public const TARGET          = 'target';
+	public const ARIA_LABEL      = 'aria_label';
+	public const CLASSES         = 'classes';
+	public const ATTRS           = 'attrs';
+	public const CONTENT         = 'content';
+	public const WRAPPER_TAG     = 'wrapper_tag';
+	public const WRAPPER_CLASSES = 'wrapper_classes';
+	public const WRAPPER_ATTRS   = 'wrapper_attrs';
+
+	protected $twig_file = 'link.twig'; // @TODO: Remove when we get explicit file name matching in the abstract Component class.
 
 	protected function defaults(): array {
 		return [
-			self::URL        => '',
-			self::TARGET     => '',
-			self::ARIA_LABEL => '',
-			self::CLASSES    => [],
-			self::ATTRS      => [],
-			self::CONTENT    => '',
+			self::URL             => '',
+			self::TARGET          => '',
+			self::ARIA_LABEL      => '',
+			self::CLASSES         => [],
+			self::ATTRS           => [],
+			self::CONTENT         => '',
+			self::WRAPPER_TAG     => '',
+			self::WRAPPER_CLASSES => [],
+			self::WRAPPER_ATTRS   => [],
 		];
 	}
 
 	public function init() {
-		if ( ! isset( $this->data[ self::ATTRS ] ) ) {
-			$this->data[ self::ATTRS ] = [];
+		if ( ! empty( $this->data[ self::WRAPPER_TAG ] ) ) {
+			$this->twig_file = 'link-with-wrapper.twig';
 		}
 
-		if ( isset( $this->data['url'] ) ) {
+		if ( ! empty( $this->data[ self::URL ] ) ) {
 			$this->data[ self::ATTRS ]['href'] = $this->data['url'];
 		}
 
-		if ( isset( $this->data['aria_label'] ) ) {
+		if ( ! empty( $this->data[ self::ARIA_LABEL ] ) ) {
 			$this->data[ self::ATTRS ]['aria-label'] = $this->data['aria_label'];
 		}
 
-		if ( isset( $this->data['target'] ) ) {
+		if ( ! empty( $this->data[ self::TARGET ] ) ) {
 			$this->data[ self::ATTRS ]['target'] = $this->data['target'];
 		}
 
-		if ( isset( $this->data['target'] ) && $this->data['target'] === '_blank' ) {
+		if ( ! empty( $this->data[ self::TARGET ] ) && $this->data[ self::TARGET ] === '_blank' ) {
 			$this->data[ self::ATTRS ]['rel'] = 'noopener';
-			$this->data[ self::CONTENT ]      .= $this->append_new_window_text();
+			$this->data[ self::CONTENT ]     .= $this->append_new_window_text();
 		}
 	}
 
 	/**
-	 * Appends accessibility message for links set to open in a new window.
+	 * Appends accessibility message for links set to open in a new tab/window.
 	 *
 	 * @return string
 	 * @throws \Exception

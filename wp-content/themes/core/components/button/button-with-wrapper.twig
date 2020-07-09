@@ -1,0 +1,8 @@
+{# Component: Button with a wrapper element #}
+{% if content %}
+{% if wrapper_tag %}<{{ wrapper_tag }} {{ wrapper_classes|stringify }} {{ wrapper_attrs|stringify }}>{% endif %}
+	<button {{ classes|stringify }} {{ attrs|stringify }}>
+		{{ content }}
+	</button>
+{% if wrapper_tag %}</{{ wrapper_tag }}>{% endif %}
+{% endif %}
