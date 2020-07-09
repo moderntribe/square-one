@@ -29,8 +29,6 @@ class Link extends Component {
 	public const WRAPPER_CLASSES = 'wrapper_classes';
 	public const WRAPPER_ATTRS   = 'wrapper_attrs';
 
-	protected $twig_file = 'link.twig'; // @TODO: Remove when we get explicit file name matching in the abstract Component class.
-
 	protected function defaults(): array {
 		return [
 			self::URL             => '',
