@@ -102,16 +102,30 @@
 	}
 }
 
-.c-panel--media-text {
+/* -----------------------------------------------------------------------------
+ * Panel: Media + Text
+ *
+ * ----------------------------------------------------------------------------- */
 
-	.block-editor-block-list__layout {
-		@media (--viewport-medium) {
-			display: flex;
-			justify-content: space-between;
+.c-panel--media-text {
+	/* CASE: Width: Grid */
+	&.c-panel--width-grid {
+
+		.media-text__container {
+			max-width: var(--grid-width);
+			margin-left: auto;
+			margin-right: auto;
 		}
 	}
 
-	/* CASE: Width: Grid, Media: Left/Right */
+	/* CASE: Media: Left/Right */
 	&:not(.c-panel--layout-center) {
+
+		.block-editor-block-list__layout {
+			@media (--viewport-medium) {
+				display: flex;
+				justify-content: space-between;
+			}
+		}
 	}
 }
