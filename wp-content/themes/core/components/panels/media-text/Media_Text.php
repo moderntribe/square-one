@@ -48,8 +48,8 @@ class Media_Text extends Component {
 	}
 
 	public function init() {
-		$this->data[ self::CLASSES ][] = 'c-panel--layout-media-' . $this->data[ self::LAYOUT ];
-		$this->data[ self::CLASSES ][] = 'c-panel--width-' . $this->data[ self::WIDTH ];
+		$this->data[ self::CLASSES ][] = 'c-panel--' . $this->data[ self::LAYOUT ];
+		$this->data[ self::CLASSES ][] = 'c-panel--' . $this->data[ self::WIDTH ];
 
 		if ( $this->data[ self::WIDTH ] === Media_Text_Block::WIDTH_GRID ) {
 			$this->data[ self::CLASSES ][] = 'l-container';
