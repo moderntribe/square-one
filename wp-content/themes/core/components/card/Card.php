@@ -2,22 +2,25 @@
 
 namespace Tribe\Project\Templates\Components;
 
+use Tribe\Project\Components\Component;
+
 /**
  * Class Card
  *
  * @property string   $before_card
  * @property string   $after_card
- * @property string   $title
- * @property string   $text
- * @property string   $image
+ * @property array   $title
+ * @property array   $text
+ * @property array   $image
  * @property string   $pre_title
  * @property string   $post_title
  * @property string[] $card_classes
  * @property string[] $card_header_classes
  * @property string[] $card_content_classes
- * @property string   $button
+ * @property array   $button
  */
-class Card extends Context {
+class Card extends Component {
+
 	public const BEFORE_CARD     = 'before_card';
 	public const AFTER_CARD      = 'after_card';
 	public const TITLE           = 'title';
@@ -30,44 +33,20 @@ class Card extends Context {
 	public const CONTENT_CLASSES = 'card_content_classes';
 	public const BUTTON          = 'button';
 
-	protected $path = __DIR__ . '/card.twig';
+	protected function defaults(): array {
+		return [
+			self::BEFORE_CARD     => '',
+			self::AFTER_CARD      => '',
+			self::TITLE           => [],
+			self::TEXT            => [],
+			self::IMAGE           => [],
+			self::PRE_TITLE       => '',
+			self::POST_TITLE      => '',
+			self::CARD_CLASSES    => [ 'c-card' ],
+			self::HEADER_CLASSES  => [ 'c-card__header' ],
+			self::CONTENT_CLASSES => [ 'c-card__content' ],
+			self::BUTTON          => [],
+		];
+	}
 
-	protected $properties = [
-		self::BEFORE_CARD     => [
-			self::DEFAULT => '',
-		],
-		self::AFTER_CARD      => [
-			self::DEFAULT => '',
-		],
-		self::TITLE           => [
-			self::DEFAULT => '',
-		],
-		self::TEXT            => [
-			self::DEFAULT => '',
-		],
-		self::IMAGE           => [
-			self::DEFAULT => '',
-		],
-		self::PRE_TITLE       => [
-			self::DEFAULT => '',
-		],
-		self::POST_TITLE      => [
-			self::DEFAULT => '',
-		],
-		self::CARD_CLASSES    => [
-			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [ 'c-card' ],
-		],
-		self::HEADER_CLASSES  => [
-			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [ 'c-card__header' ],
-		],
-		self::CONTENT_CLASSES => [
-			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [ 'c-card__content' ],
-		],
-		self::BUTTON          => [
-			self::DEFAULT => '',
-		],
-	];
 }

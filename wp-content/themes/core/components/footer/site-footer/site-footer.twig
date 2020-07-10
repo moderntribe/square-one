@@ -1,18 +1,18 @@
 <footer class="site-footer">
 
-	<div class="l-container">
+    <div class="l-container">
 
-		{{ navigation }}
+        {{ component( 'footer/navigation/Navigation.php', navigation ) }}
 
-		{{ include( 'components/follow/follow.twig' ) }}
+        {{ component( 'follow/Follow.php' ) }}
 
-		<p>
-			{{ copyright }}
-			<a href="{{ home_url|esc_url }}" rel="external">
-				{{ name }}
-			</a>
-		</p>
+        <p>
+            {{ copyright }}
+            <a href="{{ home_url|esc_url }}" rel="external">
+                {{ name }}
+            </a>
+        </p>
 
-	</div>
+    </div>
 
 </footer>

@@ -2,6 +2,8 @@
 
 namespace Tribe\Project\Templates\Components;
 
+use Tribe\Project\Components\Component;
+
 /**
  * Class Search
  *
@@ -14,7 +16,8 @@ namespace Tribe\Project\Templates\Components;
  * @property string[] $input_attrs
  * @property string   $submit_button
  */
-class Search extends Context {
+class Search extends Component {
+
 	public const FORM_CLASSES  = 'form_classes';
 	public const FORM_ATTRS    = 'form_attrs';
 	public const LABEL_CLASSES = 'label_classes';
@@ -24,38 +27,46 @@ class Search extends Context {
 	public const INPUT_ATTRS   = 'input_attrs';
 	public const SUBMIT_BUTTON = 'submit_button';
 
-	protected $path = __DIR__ . '/search.twig';
+	public function init() {
+		$form_attrs = [
+			'role'   => 'search',
+			'method' => 'get',
+			'action' => esc_url( get_home_url() ),
+		];
 
-	protected $properties = [
-		self::FORM_CLASSES  => [
-			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [],
-		],
-		self::FORM_ATTRS    => [
-			self::DEFAULT          => [],
-			self::MERGE_ATTRIBUTES => [],
-		],
-		self::LABEL_CLASSES => [
-			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [],
-		],
-		self::LABEL_ATTRS   => [
-			self::DEFAULT          => [],
-			self::MERGE_ATTRIBUTES => [],
-		],
-		self::LABEL_TEXT    => [
-			self::DEFAULT => '',
-		],
-		self::INPUT_CLASSES => [
-			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [],
-		],
-		self::INPUT_ATTRS   => [
-			self::DEFAULT          => [],
-			self::MERGE_ATTRIBUTES => [],
-		],
-		self::SUBMIT_BUTTON => [
-			self::DEFAULT => '',
-		],
-	];
+		$label_attrs = [
+			'for' => 's',
+		];
+
+		$input_attrs = [
+			'type' => 'text',
+			'id'   => 's',
+			'name' => 's',
+		];
+
+		$this->data[ self::FORM_CLASSES ][]  = 'c-search';
+		$this->data[ self::FORM_ATTRS ]      = $form_attrs;
+		$this->data[ self::INPUT_ATTRS ]     = $input_attrs;
+		$this->data[ self::LABEL_ATTRS ]     = $label_attrs;
+		$this->data[ self::LABEL_CLASSES ][] = 'c-search__label';
+		$this->data[ self::INPUT_CLASSES ][] = 'c-search__input';
+		$this->data[ self::SUBMIT_BUTTON ]   = $this->submit_button();
+		$this->data[ self::LABEL_TEXT ]      = __( 'Search', 'tribe' );
+	}
+
+	protected function submit_button(): array {
+		$btn_attrs = [
+			'name'  => 'submit',
+			'value' => __( 'Search', 'tribe' ),
+		];
+
+		$options = [
+			Button::CONTENT => __( 'Search', 'tribe' ),
+			Button::CLASSES => [ 'c-button' ],
+			Button::TYPE    => 'submit',
+			Button::ATTRS   => $btn_attrs,
+		];
+
+		return $options;
+	}
 }

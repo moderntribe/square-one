@@ -1,13 +1,19 @@
-{{ subheader }}
+{% if breadcrumbs %}
+    {{ component( 'breadcrumbs/Breadcrumbs.php', breadcrumbs ) }}
+{% endif %}
+
+{{ component( 'header/subheader/Subheader.php', subheader ) }}
 
 {% if post.content %}
-	<div class="">
-		{{ post.featured_image }}
+    <div class="">
+        {{ post.image }}
 
-		<div class="t-sink s-sink l-sink l-sink--double">
-			{{ post.content }}
-		</div>
-	</div>
+        <div class="t-sink s-sink l-sink l-sink--double">
+            {{ post.content }}
+        </div>
+    </div>
+
+    {{ component( 'pagination/Pagination.php', pagination ) }}
 {% endif %}
 
 {{ do_action( 'the_panels' ) }}

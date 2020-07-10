@@ -108,7 +108,7 @@ const gravityForms = () => {
 
 	bindEvents();
 
-	console.info( 'Square One FE: Initialized global form scripts.' );
+	console.info( 'SquareOne Theme: Initialized global form scripts.' );
 };
 
 export default gravityForms;

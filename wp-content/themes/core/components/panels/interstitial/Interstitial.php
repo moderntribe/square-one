@@ -3,7 +3,8 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Templates\Components\Panels;
 
-use Tribe\Project\Templates\Components\Context;
+use Tribe\Project\Components\Component;
+use Tribe\Project\Blocks\Types\Interstitial\Interstitial as Interstitial_Block;
 
 /**
  * Class Interstitial
@@ -17,7 +18,8 @@ use Tribe\Project\Templates\Components\Context;
  * @property string[] $classes
  * @property string[] $attrs
  */
-class Interstitial extends Context {
+class Interstitial extends Component {
+
 	public const LAYOUT            = 'layout';
 	public const MEDIA             = 'media';
 	public const CONTENT           = 'content';
@@ -27,46 +29,21 @@ class Interstitial extends Context {
 	public const CLASSES           = 'classes';
 	public const ATTRS             = 'attrs';
 
-	protected $path = __DIR__ . '/interstitial.twig';
+	protected function defaults(): array {
+		return [
+			self::LAYOUT            => Interstitial_Block::LAYOUT_LEFT,
+			self::MEDIA             => '',
+			self::CONTENT           => '',
+			self::CONTAINER_CLASSES => [ 'interstitial__container', 'l-container' ],
+			self::MEDIA_CLASSES     => [ 'interstitial__media' ],
+			self::CONTENT_CLASSES   => [ 'interstitial__content' ],
+			self::CLASSES           => [ 'c-panel', 'c-panel--interstitial', 'c-panel--full-bleed' ],
+			self::ATTRS             => [],
+		];
+	}
 
-	protected $properties = [
-		self::LAYOUT            => [
-			self::DEFAULT => '',
-		],
-		self::MEDIA             => [
-			self::DEFAULT => '',
-		],
-		self::CONTENT           => [
-			self::DEFAULT => '',
-		],
-		self::CONTAINER_CLASSES => [
-			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [ 'interstitial__container', 'l-container' ],
-		],
-		self::MEDIA_CLASSES     => [
-			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [ 'interstitial__media' ],
-		],
-		self::CONTENT_CLASSES   => [
-			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [ 'interstitial__content' ],
-		],
-		self::CLASSES           => [
-			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [ 'c-panel', 'c-panel--interstitial', 'c-panel--full-bleed' ],
-		],
-		self::ATTRS             => [
-			self::DEFAULT          => [],
-			self::MERGE_ATTRIBUTES => [],
-		],
-	];
-
-	public function get_data(): array {
-		if ( $this->layout ) {
-			$this->properties[ self::CLASSES ][ self::MERGE_CLASSES ][] = 'c-panel--' . $this->layout;
-		}
-
-		return parent::get_data();
+	public function init() {
+		$this->data[ self::CLASSES ][] = 'c-panel--' . $this->data[ self::LAYOUT ];
 	}
 
 }

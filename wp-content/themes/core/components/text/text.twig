@@ -1,21 +1,4 @@
-{#
-
-Component: Text
-
-Documentation: docs\theme\components\text.md
-
-Controller: wp-content\plugins\core\src\Templates\Components\Text.php
-PostCSS: wp-content\plugins\core\assets\theme\pcss\components\_text.pcss
-
-Description: Barebones text/html component to be used wherever you print text.
-
-Attributes:
-	{
-		tag: '', // string. The element tag. fallback is a div element.
-		classes: 'c-text', // string. The wrapper classes
-		attrs: '', // string. Data attributes for the text block. You'll want to pass in livetext attrs if using in panels
-		content: '', // string. Text/html.
-    }
- #}
-
-<{{ tag }} {{ classes }} {{ attrs }}>{{ content }}</{{ tag }}>
+{# Component: Text #}
+{% if content %}
+<{{ tag }} {{ classes|stringify }} {{ attrs|stringify }}>{{ content }}</{{ tag }}>
+{% endif %}

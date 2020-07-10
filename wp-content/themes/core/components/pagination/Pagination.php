@@ -2,6 +2,8 @@
 
 namespace Tribe\Project\Templates\Components;
 
+use Tribe\Project\Components\Component;
+
 /**
  * Class Pagination
  *
@@ -17,7 +19,8 @@ namespace Tribe\Project\Templates\Components;
  * @property string   $next_post
  * @property string   $pagination_numbers
  */
-class Pagination extends Context {
+class Pagination extends Component {
+
 	public const WRAPPER_CLASSES    = 'wrapper_classes';
 	public const WRAPPER_ATTRS      = 'wrapper_attrs';
 	public const LIST_CLASSES       = 'list_classes';
@@ -30,47 +33,15 @@ class Pagination extends Context {
 	public const NEXT_POST          = 'next_post';
 	public const PAGINATION_NUMBERS = 'pagination_numbers';
 
-	protected $path = __DIR__ . '/pagination.twig';
+	protected function defaults(): array {
+		return [
+			self::WRAPPER_ATTRS     => [],
+			self::WRAPPER_CLASSES   => [],
+			self::LIST_CLASSES      => [],
+			self::LIST_ATTRS        => [],
+			self::LIST_ITEM_CLASSES => [],
+			self::LIST_ITEM_ATTRS   => [],
+		];
+	}
 
-	protected $properties = [
-		self::WRAPPER_CLASSES    => [
-			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [],
-		],
-		self::WRAPPER_ATTRS      => [
-			self::DEFAULT          => [],
-			self::MERGE_ATTRIBUTES => [],
-		],
-		self::LIST_CLASSES       => [
-			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [],
-		],
-		self::LIST_ATTRS         => [
-			self::DEFAULT          => [],
-			self::MERGE_ATTRIBUTES => [],
-		],
-		self::LIST_ITEM_CLASSES  => [
-			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [],
-		],
-		self::LIST_ITEM_ATTRS    => [
-			self::DEFAULT          => [],
-			self::MERGE_ATTRIBUTES => [],
-		],
-		self::FIRST_POST         => [
-			self::DEFAULT => '',
-		],
-		self::LAST_POST          => [
-			self::DEFAULT => '',
-		],
-		self::PREV_POST          => [
-			self::DEFAULT => '',
-		],
-		self::NEXT_POST          => [
-			self::DEFAULT => '',
-		],
-		self::PAGINATION_NUMBERS => [
-			self::DEFAULT => '',
-		],
-	];
 }

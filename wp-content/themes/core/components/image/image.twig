@@ -1,32 +1,15 @@
-{# Component: Image
-
-Documentation: docs\theme\components\image.md
-
-Controller: wp-content\plugins\core\src\Templates\Components\Image.php
-PostCSS: wp-content\plugins\core\assets\theme\pcss\components\_image.pcss
-
-Description:
-The Image Component is the primary means by which we inject image markup into the site. The Image
-component functions somewhat differently than other components as it combines a lot of internal source code
-generation along with the general output of the image block. Lazy loading, srcset, background images,
-appending arbitrary html and more are available.
-
-For complete documentation & usage examples, checkout the component's documentation listed above.
-#}
-
-
 <{{ wrapper.tag }} {{ wrapper.classes }} {{ wrapper.attrs }}>
 
-	{% if link is not empty %}
-	<a href="{{ link.url }}" {{ link.classes }} {{ link.attrs }}>
-	{% endif %}
+    {% if link is not empty %}
+        <a href="{{ link.url }}" {{ link.classes }} {{ link.attrs }}>
+            {% endif %}
 
-	{{ image }}
+            {{ image }}
 
-	{% if link is not empty %}
-	</a>
-	{% endif %}
+            {% if link is not empty %}
+        </a>
+    {% endif %}
 
-	{{ html }}
+{{ html }}
 
 </{{ wrapper.tag }}>

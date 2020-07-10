@@ -110,7 +110,7 @@ const init = () => {
 
 	bindEvents();
 
-	console.info( 'Square One FE: Initialized tabs component scripts.' );
+	console.info( 'SquareOne Theme: Initialized tabs component scripts.' );
 };
 
 export default init;

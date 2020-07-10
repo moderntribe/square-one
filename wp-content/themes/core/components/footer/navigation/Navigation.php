@@ -3,16 +3,8 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Templates\Components\Footer;
 
-use Tribe\Project\Templates\Components\Context;
+use Tribe\Project\Components\Component;
 
-class Navigation extends Context {
+class Navigation extends Component {
 	public const MENU = 'menu';
-
-	protected $path = __DIR__ . '/navigation.twig';
-
-	protected $properties = [
-		self::MENU => [
-			self::DEFAULT => '',
-		],
-	];
 }

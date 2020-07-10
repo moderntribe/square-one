@@ -1,19 +1,23 @@
-{{ subheader }}
+{% if breadcrumbs %}
+    {{ component( 'breadcrumbs/Breadcrumbs.php', breadcrumbs ) }}
+{% endif %}
+
+{{ component( 'header/subheader/Subheader.php', subheader ) }}
 
 <div class="l-container">
 
-	{% if posts|length > 0 %}
+    {% if posts|length > 0 %}
 
-		{% for post in posts %}
-			{{ post }}
-		{% endfor %}
+        {% for post in posts %}
+            {{ component( 'content/loop-item/Loop_Item.php', { 'post': post } ) }}
+        {% endfor %}
 
-		{{ pagination }}
+        {{ component( 'pagination/Pagination.php', pagination ) }}
 
-	{% else %}
+    {% else %}
 
-		{{ include( 'components/no-results.twig' ) }}
+        {{ component( 'content/no-results/No_Results.php' ) }}
 
-	{% endif %}
+    {% endif %}
 
 </div>

@@ -3,6 +3,7 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Templates\Components\Comments;
 
+use Tribe\Project\Components\Component;
 use Tribe\Project\Templates\Components\Context;
 
 /**
@@ -18,7 +19,8 @@ use Tribe\Project\Templates\Components\Context;
  * @property string   $moderation_message
  * @property string   $reply_link
  */
-class Comment extends Context {
+class Comment extends Component {
+
 	public const COMMENT_ID         = 'comment_id';
 	public const CLASSES            = 'classes';
 	public const ATTRIBUTES         = 'attr';
@@ -29,58 +31,32 @@ class Comment extends Context {
 	public const MODERATION_MESSAGE = 'moderation_message';
 	public const REPLY_LINK         = 'reply_link';
 	public const TIMESTAMP          = 'timestamp';
+	public const TIME               = 'time';
 
-	protected $path = __DIR__ . '/comment.twig';
 
-	protected $properties = [
-		self::COMMENT_ID         => [
-			self::DEFAULT => 0,
-		],
-		self::CLASSES            => [
-			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [ 'post-interaction' ],
-		],
-		self::ATTRIBUTES         => [
-			self::DEFAULT          => [],
-			self::MERGE_ATTRIBUTES => [],
-		],
-		self::AUTHOR             => [
-			self::DEFAULT => '',
-		],
-		self::EDIT_LINK          => [
-			self::DEFAULT => '',
-		],
-		self::GRAVATAR           => [
-			self::DEFAULT => '',
-		],
-		self::COMMENT_TEXT       => [
-			self::DEFAULT => '',
-		],
-		self::MODERATION_MESSAGE => [
-			self::DEFAULT => '',
-		],
-		self::REPLY_LINK         => [
-			self::DEFAULT => '',
-		],
-		self::TIMESTAMP          => [
-			self::DEFAULT => 0,
-		],
-	];
-
-	public function get_data(): array {
-		$this->properties[ self::ATTRIBUTES ][ self::MERGE_ATTRIBUTES ]['id'] = sprintf( 'comment-%d', $this->comment_id );
-
-		$data = parent::get_data();
-
-		// massage the timestamp into the formats we need in the template
-		$data['time'] = [
-			'c'              => date( 'c', $data[ self::TIMESTAMP ] ),
-			'g:i A - M j, Y' => date( 'g:i A - M j, Y', $data[ self::TIMESTAMP ] ),
+	protected function defaults(): array {
+		return [
+			self::COMMENT_ID         => 0,
+			self::CLASSES            => [],
+			self::ATTRIBUTES         => [],
+			self::AUTHOR             => '',
+			self::EDIT_LINK          => '',
+			self::GRAVATAR           => '',
+			self::COMMENT_TEXT       => '',
+			self::MODERATION_MESSAGE => '',
+			self::REPLY_LINK         => '',
+			self::TIMESTAMP          => 0,
+			self::TIME               => [],
 		];
-		unset( $data[ self::TIMESTAMP ] );
-
-		return $data;
 	}
 
+	public function init() {
+		$this->data[ self::ATTRIBUTES ]['id'] = sprintf( 'comment-%d', $this->data[ self::COMMENT_ID ] );
 
+		// massage the timestamp into the formats we need in the template
+		$this->data['time'] = [
+			'c'              => date( 'c', $this->data[ self::TIMESTAMP ] ),
+			'g:i A - M j, Y' => date( 'g:i A - M j, Y', $this->data[ self::TIMESTAMP ] ),
+		];
+	}
 }

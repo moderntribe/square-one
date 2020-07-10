@@ -1,18 +1,17 @@
-<article class="item-loop item-loop--search item-loop--{{ post_type|esc_attr }}">
+<article class="item-loop item-loop--search item-loop--{{ post.post_type|esc_attr }}">
 
-	<header class="item-loop__header">
+    <header class="item-loop__header">
 
-		<h3 class="item-loop__title">
-			<a href="{{ permalink|esc_url }}" rel="bookmark">
-				{{ title }}
-			</a>
-		</h3>
+        <h3 class="item-loop__title">
+            <a href="{{ post.permalink|esc_url }}" rel="bookmark">
+                {{ post.title }}
+            </a>
+        </h3>
 
-	</header>
+    </header>
 
-	{{ featured_image }}
+    {{ post.image }}
 
-	{{ excerpt }}
+    {{ post.excerpt }}
 
 </article>
-

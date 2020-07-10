@@ -1,24 +1,24 @@
 {# Component: Accordion #}
 
 <div
-	{{ container_classes }}
+	{{ container_classes|stringify }}
 	role="tablist"
 	aria-multiselectable="true"
-	{{ container_attrs }}
+	{{ container_attrs|stringify }}
 >
 	{% for row in rows %}
-		<article {{ row_classes }}>
+		<article {{ row_classes|stringify }}>
 			<button
 				aria-controls="{{ row.content_id|esc_attr }}"
 				aria-expanded="false"
 				aria-selected="false"
-				{{ row_header_classes }}
+				{{ row_header_classes|stringify }}
 				id="{{ row.header_id|esc_attr }}"
 				data-index="{{ loop.index0 }}"
 				role="tab"
 			>
 				<span
-					{{ row_header_container_classes }}
+					{{ row_header_container_classes|stringify }}
 					data-depth="0"
 					data-name="{{ row_header_name }}"
 					data-index="{{ loop.index0 }}"
@@ -30,12 +30,12 @@
 			<div
 				aria-hidden="true"
 				aria-labelledby="{{ row.header_id|esc_attr }}"
-				{{ row_content_classes }}
+				{{ row_content_classes|stringify }}
 				id="{{ row.content_id|esc_attr }}"
 				role="tabpanel"
 			>
 				<div
-					{{ row_content_container_classes }}
+					{{ row_content_container_classes|stringify }}
 					data-depth="0"
 					data-name="{{ row_content_name }}"
 					data-index="{{ loop.index0 }}"

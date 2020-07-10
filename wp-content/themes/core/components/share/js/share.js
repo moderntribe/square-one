@@ -54,7 +54,7 @@ const socialShare = () => {
 
 	bindEvents();
 
-	console.info( 'Square One FE: Initialized global social content sharing scripts.' );
+	console.info( 'SquareOne Theme: Initialized global social content sharing scripts.' );
 };
 
 export default socialShare;

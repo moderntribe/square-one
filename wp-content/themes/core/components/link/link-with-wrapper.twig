@@ -1,0 +1,6 @@
+{# Component: Link with a wrapper element #}
+{% if url %}
+<{{ wrapper_tag }} {{ wrapper_classes|stringify }} {{ wrapper_attrs|stringify }}>
+	<a {{ classes|stringify }} {{ attrs|stringify }}>{{ content }}</a>
+</{{ wrapper_tag }}>
+{% endif %}

@@ -1,11 +1,13 @@
-{{ breadcrumbs }}
+{% if breadcrumbs %}
+    {{ component( 'breadcrumbs/Breadcrumbs.php', breadcrumbs ) }}
+{% endif %}
 
-{{ subheader }}
+{{ component( 'header/subheader/Subheader.php', subheader ) }}
 
 <div class="l-container">
-	{{ content }}
+    {{ component( 'content/single/Single.php', { 'post': post } ) }}
 
-	{{ pagination }}
+    {{ component( 'pagination/Pagination.php', pagination ) }}
 </div>
 
 {{ do_action( 'the_panels') }}

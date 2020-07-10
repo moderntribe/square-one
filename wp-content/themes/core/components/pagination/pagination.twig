@@ -1,41 +1,39 @@
-{# Component: Pagination #}
+<nav {{ wrapper_classes|stringify }} {{ wrapper_attrs|stringify }}>
 
-<nav {{ wrapper_classes }} {{ wrapper_attrs }}>
+    <ul {{ list_classes|stringify }} {{ list_attrs|stringify }}>
 
-	<ul {{ list_classes }} {{ list_attrs }}>
+        {% if first_post %}
+            <li {{ list_item_classes|stringify }} {{ list_item_attrs|stringify }}>
+                {{ first_post }}
+            </li>
+        {% endif %}
 
-		{% if first_post %}
-			<li {{ list_item_classes }} {{ list_item_attrs }}>
-				{{ first_post }}
-			</li>
-		{% endif %}
+        {% if prev_post %}
+            <li {{ list_item_classes|stringify }} {{ list_item_attrs|stringify }}>
+                {{ prev_post }}
+            </li>
+        {% endif %}
 
-		{% if prev_post %}
-			<li {{ list_item_classes }} {{ list_item_attrs }}>
-				{{ prev_post }}
-			</li>
-		{% endif %}
+        {% if pagination_numbers %}
+            {% for number in pagination_numbers %}
+                <li {{ list_item_classes|stringify }} {{ list_item_attrs|stringify }}>
+                    {{ component( 'link/Link.php', number ) }}
+                </li>
+            {% endfor %}
+        {% endif %}
 
-		{% if pagination_numbers %}
-			{% for number in pagination_numbers %}
-				<li {{ list_item_classes }} {{ list_item_attrs }}>
-					{{ number }}
-				</li>
-			{% endfor %}
-		{% endif %}
+        {% if next_post %}
+            <li {{ list_item_classes|stringify }} {{ list_item_attrs|stringify }}>
+                {{ next_post }}
+            </li>
+        {% endif %}
 
-		{% if next_post %}
-			<li {{ list_item_classes }} {{ list_item_attrs }}>
-				{{ next_post }}
-			</li>
-		{% endif %}
+        {% if last_post %}
+            <li {{ list_item_classes|stringify }} {{ list_item_attrs|stringify }}>
+                {{ last_post }}
+            </li>
+        {% endif %}
 
-		{% if last_post %}
-			<li {{ list_item_classes }} {{ list_item_attrs }}>
-				{{ last_post }}
-			</li>
-		{% endif %}
-
-	</ul>
+    </ul>
 
 </nav>

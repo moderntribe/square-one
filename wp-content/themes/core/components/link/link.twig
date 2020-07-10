@@ -1,3 +1,4 @@
-<a {{ classes }} {{ attrs }}>
-	{{ content }}
-</a>
+{# Component: Link #}
+{% if url %}
+<a {{ classes|stringify }} {{ attrs|stringify }}>{{ content }}</a>
+{% endif %}

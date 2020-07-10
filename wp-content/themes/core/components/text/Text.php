@@ -2,6 +2,8 @@
 
 namespace Tribe\Project\Templates\Components;
 
+use Tribe\Project\Components\Component;
+
 /**
  * Class Text
  *
@@ -10,28 +12,18 @@ namespace Tribe\Project\Templates\Components;
  * @property string[] $classes
  * @property string[] $attrs
  */
-class Text extends Context {
+class Text extends Component {
+
 	public const TEXT    = 'content';
 	public const TAG     = 'tag';
 	public const CLASSES = 'classes';
 	public const ATTRS   = 'attrs';
 
-	protected $path = __DIR__ . '/text.twig';
-
-	protected $properties = [
-		self::TEXT    => [
-			self::DEFAULT => '',
-		],
-		self::TAG     => [
-			self::DEFAULT => 'div',
-		],
-		self::CLASSES => [
-			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [],
-		],
-		self::ATTRS   => [
-			self::DEFAULT          => [],
-			self::MERGE_ATTRIBUTES => [],
-		],
-	];
+	protected function defaults(): array {
+		return [
+			self::TAG     => 'div',
+			self::CLASSES => [],
+			self::ATTRS   => [],
+		];
+	}
 }
