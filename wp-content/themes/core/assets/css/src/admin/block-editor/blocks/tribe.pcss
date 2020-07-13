@@ -105,11 +105,13 @@
 /* -----------------------------------------------------------------------------
  * Panel: Media + Text
  *
+ * Many hacks here. We'll probably need to revisit this sooner than later.
+ * For now, the EditUI is "usable".
  * ----------------------------------------------------------------------------- */
 
-.c-panel--media-text {
+.wp-block[data-type="tribe/media-text"] {
 	/* CASE: Width: Grid */
-	&.c-panel--width-grid {
+	.c-panel--width-grid {
 
 		.media-text__container {
 			max-width: var(--grid-width);
@@ -119,12 +121,79 @@
 	}
 
 	/* CASE: Media: Left/Right */
-	&:not(.c-panel--layout-center) {
+	.c-panel--layout-left,
+	.c-panel--layout-right {
 
-		.block-editor-block-list__layout {
+		.wp-block[data-type="tribe/media-text--media"],
+		.wp-block[data-type="tribe/media-text--text"] {
+			float: left;
+			width: 50%;
+
+			.media-text__media,
+			.media-text__content {
+				@media (--viewport-medium) {
+					width: 100%;
+					padding: 0 var(--grid-gutter-half);
+				}
+			}
+		}
+	}
+
+	/* CASE: Media: Right */
+	.c-panel--layout-right {
+
+		.wp-block[data-type="tribe/media-text--media"] {
+			float: right;
+		}
+	}
+
+	/* CASE: Media Centered */
+	.c-panel--layout-center {
+		/**
+		 * @TODO: Need: Add ability to wrap a container around these and add a conditional layout class other than
+		 * what we already have. This code duplicated the content-block classes for the current version.
+		 */
+		.media-text__content-container {
+			@mixin clearfix;
+
+			max-width: var(--grid-width);
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		.media-text__title {
 			@media (--viewport-medium) {
-				display: flex;
-				justify-content: space-between;
+				float: left;
+				clear: left;
+				width: calc(50% - var(--grid-gutter-medium-half));
+			}
+
+			@media (--viewport-full) {
+				width: calc(33.3333% - var(--grid-gutter-half));
+			}
+		}
+
+		.media-text__text {
+			@media (--viewport-medium) {
+				float: right;
+				width: calc(50% - var(--grid-gutter-medium-half));
+				margin-top: 0;
+			}
+
+			@media (--viewport-full) {
+				width: calc(66.6667% - var(--grid-gutter-half));
+			}
+		}
+
+		.media-text__cta { /* @TODO: This doesn't apply currently b/c we have no way to wrap the button element in a container. */
+			@media (--viewport-medium) {
+				float: right;
+				clear: right;
+				width: calc(50% - var(--grid-gutter-medium-half));
+			}
+
+			@media (--viewport-full) {
+				width: calc(66.6667% - var(--grid-gutter-half));
 			}
 		}
 	}
