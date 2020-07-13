@@ -1,3 +1,4 @@
-<button {{ classes|stringify }} {{ attrs|stringify }}>
-    {{ content }}
-</button>
+{# Component: Button #}
+{% if content %}
+<button {{ classes|stringify }} {{ attrs|stringify }}>{{ content }}</button>
+{% endif %}

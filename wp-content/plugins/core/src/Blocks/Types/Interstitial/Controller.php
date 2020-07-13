@@ -1,9 +1,10 @@
 <?php
 declare( strict_types=1 );
 
-namespace Tribe\Project\Controllers\Blocks;
+namespace Tribe\Project\Blocks\Types\Interstitial;
 
-use Tribe\Project\Blocks\Types\Interstitial as Interstitial_Block;
+use Tribe\Project\Blocks\Types\Interstitial\Interstitial as Interstitial_Block;
+use Tribe\Project\Controllers\Blocks\Block_Controller;
 use Tribe\Project\Templates\Components\Content_Block;
 use Tribe\Project\Templates\Components\Image as Image_Component;
 use Tribe\Project\Templates\Components\Link;
@@ -12,7 +13,7 @@ use Tribe\Project\Templates\Components\Text;
 use Tribe\Project\Templates\Models\Image;
 use Tribe\Project\Theme\Config\Image_Sizes;
 
-class Interstitial extends Block_Controller {
+class Controller extends Block_Controller {
 
 	public function render( $attributes, $content, $block_type ) {
 		$this->attributes = $attributes;
@@ -34,7 +35,7 @@ class Interstitial extends Block_Controller {
 	}
 
 	private function get_layout(): string {
-		return $this->attributes[ Interstitial_Block::LAYOUT ] ?? Interstitial_Block::LAYOUT_CENTER;
+		return $this->attributes[ Interstitial_Block::LAYOUT ] ?? Interstitial_Block::LAYOUT_LEFT;
 	}
 
 	private function get_media(): array {
@@ -66,18 +67,15 @@ class Interstitial extends Block_Controller {
 			Content_Block::CLASSES => [ 'interstitial__content-container', 't-theme--light' ],
 			Content_Block::TITLE   => $this->get_headline(),
 			Content_Block::ACTION  => $this->get_cta(),
+			Content_Block::LAYOUT  => $this->get_layout() === Interstitial_Block::LAYOUT_CENTER ? Content_Block::LAYOUT_CENTER : Content_Block::LAYOUT_LEFT,
 		];
 	}
 
 	private function get_headline(): array {
-		if ( empty($this->attributes[ Interstitial_Block::DESCRIPTION ] ) ) {
-			return [];
-		}
-
 		return [
 			Text::TAG     => 'h2',
 			Text::CLASSES => [ 'interstitial__title', 'h3' ],
-			Text::TEXT    => $this->attributes[ Interstitial_Block::DESCRIPTION ],
+			Text::TEXT    => $this->attributes[ Interstitial_Block::DESCRIPTION ] ?? '',
 		];
 	}
 
@@ -92,17 +90,13 @@ class Interstitial extends Block_Controller {
 			return [];
 		}
 
-		$cta_html = $this->factory->get( Link::class, [
-			Link::URL        => $cta['url'],
-			Link::CONTENT    => $cta['text'] ?: $cta['url'],
-			Link::TARGET     => $cta['target'],
-			Link::CLASSES    => [ 'a-btn', 'a-btn--has-icon-after', 'icon-arrow-right' ],
-		] )->get_rendered_output();
-
 		return [
-			Text::TAG => 'p',
-			Text::CLASSES => [ 'interstitial__cta' ],
-			Text::TEXT => $cta_html,
+			Link::URL             => $cta['url'],
+			Link::CONTENT         => $cta['text'] ?: $cta['url'],
+			Link::TARGET          => $cta['target'],
+			Link::CLASSES         => [ 'a-btn', 'a-btn--has-icon-after', 'icon-arrow-right' ],
+			Link::WRAPPER_TAG     => 'p',
+			Link::WRAPPER_CLASSES => [ 'interstitial__cta' ],
 		];
 	}
 }

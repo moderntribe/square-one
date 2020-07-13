@@ -4,8 +4,7 @@ declare( strict_types=1 );
 namespace Tribe\Project\Templates\Components\Panels;
 
 use Tribe\Project\Components\Component;
-use Tribe\Project\Templates\Components\Context;
-use Tribe\Project\Blocks\Types\Media_Text as Media_Text_Block;
+use Tribe\Project\Blocks\Types\Media_Text\Media_Text as Media_Text_Block;
 
 /**
  * Class Media_Text
@@ -35,8 +34,8 @@ class Media_Text extends Component {
 
 	protected function defaults(): array {
 		return [
-			self::WIDTH             => '',
-			self::LAYOUT            => '',
+			self::WIDTH             => Media_Text_Block::WIDTH_GRID,
+			self::LAYOUT            => Media_Text_Block::MEDIA_LEFT,
 			self::MEDIA             => '',
 			self::CONTENT           => '',
 			self::CONTAINER_CLASSES => [ 'media-text__container' ],
@@ -49,43 +48,16 @@ class Media_Text extends Component {
 	}
 
 	public function init() {
-		if ( $this->data[ self::LAYOUT ] ) {
-			$this->data[ self::CLASSES ][] = 'c-panel--layout-media-' . $this->data[ self::LAYOUT ];
-		}
+		$this->data[ self::CLASSES ][] = 'c-panel--layout-media-' . $this->data[ self::LAYOUT ];
+		$this->data[ self::CLASSES ][] = 'c-panel--width-' . $this->data[ self::WIDTH ];
 
-		if ( $this->data[ self::WIDTH ] ) {
-			$this->data[ self::CLASSES ][] = 'c-panel--width-' . $this->data[ self::WIDTH ];
-		}
-
-		if ( $this->data[ self::WIDTH ] === Media_Text_Block::WIDTH_BOXED ) {
+		if ( $this->data[ self::WIDTH ] === Media_Text_Block::WIDTH_GRID ) {
 			$this->data[ self::CLASSES ][] = 'l-container';
 		}
 
 		if ( $this->data[ self::WIDTH ] === Media_Text_Block::WIDTH_FULL ) {
 			$this->data[ self::CONTENT_CLASSES ][] = 'l-container';
 		}
-	}
-
-	public function render(): void {
-		?>
-        <section {{ classes|stringify }} {{ attrs|stringify }}>
-            <div {{ container_classes|stringify }}>
-
-                <div {{ media_classes|stringify }}>
-                    {% if media_type == 'image' %}
-	                    {{ component( 'image/Image.php', media ) }}
-	                {% elseif media_type == 'embed' %}
-	                    {{ component( 'text/Text.php', media ) }}
-	                {% endif %}
-                </div>
-
-                <div {{ content_classes|stringify }}>
-                    {{ component( 'content-block/Content_Block.php', content ) }}
-                </div>
-
-            </div>
-        </section>
-		<?php
 	}
 
 }

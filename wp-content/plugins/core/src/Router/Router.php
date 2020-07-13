@@ -34,8 +34,8 @@ class Router {
 	private $handler;
 
 	public function __construct( Handler $handler, array $controllers ) {
-		$this->handler = $handler;
-		$this->get_controllers( $controllers );
+		$this->handler     = $handler;
+		$this->controllers = $controllers;
 	}
 
 	/**
@@ -70,17 +70,6 @@ class Router {
 	 */
 	public function add_route( Route_Config $route ) {
 		$this->routes[] = $route;
-	}
-
-	/**
-	 * @param array $controllers
-	 */
-	private function get_controllers( array $controllers ) {
-
-		foreach ( $controllers as $classname ) {
-			$basename = (new \ReflectionClass($classname))->getShortName();
-			$this->controllers[ $basename ] = DI\get( $classname );
-		}
 	}
 
 	/**
@@ -120,7 +109,7 @@ class Router {
 		 * @param Router $instance
 		 * @param string $method
 		 * @param string $uri
-		 * @param array $routeInfo
+		 * @param array  $routeInfo
 		 */
 		do_action( 'tribe/project/router/after_dispatch', $instance, $method, $uri, $routeInfo );
 

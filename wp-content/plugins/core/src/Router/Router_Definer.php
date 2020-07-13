@@ -18,21 +18,23 @@ class Router_Definer implements Definer_Interface {
 
 	public const CONTROLLERS = 'controllers';
 
+	protected $controllers = [
+		IndexController::class,
+		SingleController::class,
+	];
+
 	/**
 	 * @return array
 	 */
 	public function define(): array {
 		return [
-			self::CONTROLLERS => DI\add( [
-				IndexController::class,
-				SingleController::class,
-			] ),
+			self::CONTROLLERS => DI\add( $this->controllers ),
 			Router::class     => DI\create( Router::class )->constructor( DI\get( Handler::class ), $this->get_instantiated_controllers() ),
 		];
 	}
 
 	public function get_instantiated_controllers() {
-		$controllers = DI\get( self::CONTROLLERS );
+		$controllers = $this->controllers;
 		$controllers = apply_filters( 'tribe/project/controllers/registered_controllers', $controllers );
 		$inst        = [];
 

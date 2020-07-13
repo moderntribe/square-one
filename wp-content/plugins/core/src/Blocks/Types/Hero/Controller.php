@@ -1,9 +1,10 @@
 <?php
 declare( strict_types=1 );
 
-namespace Tribe\Project\Controllers\Blocks;
+namespace Tribe\Project\Blocks\Types\Hero;
 
-use Tribe\Project\Blocks\Types\Hero as Hero_Block;
+use Tribe\Project\Blocks\Types\Hero\Hero as Hero_Block;
+use Tribe\Project\Controllers\Blocks\Block_Controller;
 use Tribe\Project\Templates\Components\Content_Block;
 use Tribe\Project\Templates\Components\Image as Image_Component;
 use Tribe\Project\Templates\Components\Link;
@@ -12,7 +13,7 @@ use Tribe\Project\Templates\Components\Text;
 use Tribe\Project\Templates\Models\Image;
 use Tribe\Project\Theme\Config\Image_Sizes;
 
-class Hero extends Block_Controller {
+class Controller extends Block_Controller {
 
 	public function render( $attributes, $content, $block_type ) {
 		$this->attributes = $attributes;
@@ -34,7 +35,7 @@ class Hero extends Block_Controller {
 	}
 
 	private function get_layout(): string {
-		return $this->attributes[ Hero_Block::LAYOUT ] ?? Hero_Block::LAYOUT_CENTER;
+		return $this->attributes[ Hero_Block::LAYOUT ] ?? Hero_Block::LAYOUT_LEFT;
 	}
 
 	private function get_media(): array {
@@ -68,41 +69,30 @@ class Hero extends Block_Controller {
 			Content_Block::TITLE   => $this->get_headline(),
 			Content_Block::TEXT    => $this->get_text(),
 			Content_Block::ACTION  => $this->get_cta(),
+			Content_Block::LAYOUT  => $this->get_layout() === Hero_Block::LAYOUT_CENTER ? Content_Block::LAYOUT_CENTER : Content_Block::LAYOUT_LEFT,
 		];
 	}
 
 	private function get_leadin(): array {
-		if ( empty( $this->attributes[ Hero_Block::LEAD_IN ] ) ) {
-			return [];
-		}
-
 		return [
 			Text::TAG     => 'p',
 			Text::CLASSES => [ 'hero__leadin', 'h6' ],
-			Text::TEXT    => $this->attributes[ Hero_Block::LEAD_IN ],
+			Text::TEXT    => $this->attributes[ Hero_Block::LEAD_IN ] ?? '',
 		];
 	}
 
 	private function get_headline(): array {
-		if ( empty( $this->attributes[ Hero_Block::TITLE ] ) ) {
-			return [];
-		}
-
 		return [
 			Text::TAG     => 'h2',
 			Text::CLASSES => [ 'hero__title', 'h1' ],
-			Text::TEXT    => $this->attributes[ Hero_Block::TITLE ],
+			Text::TEXT    => $this->attributes[ Hero_Block::TITLE ] ?? '',
 		];
 	}
 
 	private function get_text(): array {
-		if ( empty($this->attributes[ Hero_Block::DESCRIPTION ] ) ) {
-			return [];
-		}
-
 		return [
 			Text::CLASSES => [ 'hero__description', 't-sink', 's-sink' ],
-			Text::TEXT    => $this->attributes[ Hero_Block::DESCRIPTION ],
+			Text::TEXT    => $this->attributes[ Hero_Block::DESCRIPTION ] ?? '',
 		];
 	}
 
@@ -117,17 +107,13 @@ class Hero extends Block_Controller {
 			return [];
 		}
 
-		$cta_html = $this->factory->get( Link::class, [
-			Link::URL        => $cta['url'],
-			Link::CONTENT    => $cta['text'] ?: $cta['url'],
-			Link::TARGET     => $cta['target'],
-			Link::CLASSES    => [ 'a-btn', 'a-btn--has-icon-after', 'icon-arrow-right' ],
-		] )->get_rendered_output();
-
 		return [
-			Text::TAG => 'p',
-			Text::CLASSES => [ 'hero__cta' ],
-			Text::TEXT => $cta_html,
+			Link::URL             => $cta['url'],
+			Link::CONTENT         => $cta['text'] ?: $cta['url'],
+			Link::TARGET          => $cta['target'],
+			Link::CLASSES         => [ 'a-btn', 'a-btn--has-icon-after', 'icon-arrow-right' ],
+			Link::WRAPPER_TAG     => 'p',
+			Link::WRAPPER_CLASSES => [ 'hero__cta' ],
 		];
 	}
 }

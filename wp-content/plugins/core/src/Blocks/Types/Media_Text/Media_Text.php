@@ -1,14 +1,14 @@
 <?php
 declare( strict_types=1 );
 
-namespace Tribe\Project\Blocks\Types;
+namespace Tribe\Project\Blocks\Types\Media_Text;
 
 use Tribe\Gutenpanels\Blocks\Block_Type_Interface;
 use Tribe\Gutenpanels\Blocks\Sections\Content_Section;
 use Tribe\Gutenpanels\Blocks\Sections\Toolbar_Section;
 use Tribe\Project\Blocks\Block_Type_Config;
-use Tribe\Project\Blocks\Types\Support\Media_Text_Media;
-use Tribe\Project\Blocks\Types\Support\Media_Text_Text;
+use Tribe\Project\Blocks\Types\Media_Text\Support\Media_Text_Media;
+use Tribe\Project\Blocks\Types\Media_Text\Support\Media_Text_Text;
 
 class Media_Text extends Block_Type_Config {
 	public const NAME = 'tribe/media-text';
@@ -18,7 +18,7 @@ class Media_Text extends Block_Type_Config {
 	public const MEDIA_RIGHT  = 'right';
 	public const MEDIA_CENTER = 'center';
 	public const WIDTH        = 'width';
-	public const WIDTH_BOXED  = 'boxed';
+	public const WIDTH_GRID   = 'grid';
 	public const WIDTH_FULL   = 'full';
 	public const CONTAINER    = 'container';
 
@@ -59,12 +59,14 @@ class Media_Text extends Block_Type_Config {
 					->add_dashicon_option( self::MEDIA_LEFT, __( 'Media Left', 'tribe' ), 'editor-alignleft' )
 					->add_dashicon_option( self::MEDIA_CENTER, __( 'Media Center', 'tribe' ), 'editor-aligncenter' )
 					->add_dashicon_option( self::MEDIA_RIGHT, __( 'Media Right', 'tribe' ), 'editor-alignright' )
+					->set_default( self::MEDIA_LEFT )
 					->build()
 			)
 			->add_field(
 				$this->factory->toolbar()->field()->icon_select( self::WIDTH )
-					->add_dashicon_option( self::WIDTH_BOXED, __( 'Boxed', 'tribe' ), 'editor-contract' )
+					->add_dashicon_option( self::WIDTH_GRID, __( 'Grid', 'tribe' ), 'editor-contract' )
 					->add_dashicon_option( self::WIDTH_FULL, __( 'Full', 'tribe' ), 'editor-expand' )
+					->set_default( self::WIDTH_GRID )
 					->build()
 			)
 			->build();
