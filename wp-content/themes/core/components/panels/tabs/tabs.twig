@@ -1,13 +1,12 @@
 {# Panel: Tabs #}
+<section {{ classes|stringify }} {{ attrs|stringify }}>
+	<div {{ container_classes|stringify }}>
 
-<div class="s-content">
-	<div class="g-row"
-		 data-depth="0"
-		 data-name="tabs"
-		 data-livetext
-	>
-		<div class="g-col">
-			{{ tabs }}
+		{{ component( 'content-block/Content_Block.php', header ) }}
+
+		<div {{ content_classes|stringify }}>
+			{{ component( 'tabs/Tabs.php', content ) }}
 		</div>
+
 	</div>
-</div>
+</section>
