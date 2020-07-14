@@ -22,6 +22,7 @@ class Media_Text_Media_Image extends Block_Type_Config {
 
 	private function image_area(): Content_Section {
 		return $this->factory->content()->section()
+			->add_class( 'c-image' )
 			->add_field(
 				$this->factory->content()->field()->image( Media_Text::IMAGE )->build()
 			)
