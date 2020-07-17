@@ -44,21 +44,18 @@ class SingleController extends Controller {
 		$args = $this->get_static_page_args( 'page/page-kitchen-sink/Page_Kitchen_Sink.php' );
 
 		$this->render_component( 'document/Document.php', $args );
-
 	}
 
 	public function kitchen_sink_forms() {
 		$args = $this->get_static_page_args( 'page/page-kitchen-sink-forms/Page_Kitchen_Sink_Forms.php' );
 
 		$this->render_component( 'document/Document.php', $args );
-
 	}
 
 	public function section() {
 		$args = $this->get_static_page_args( 'page/page-section/Page_Section.php' );
 
 		$this->render_component( 'document/Document.php', $args );
-
 	}
 
 	protected function get_main_content() {
