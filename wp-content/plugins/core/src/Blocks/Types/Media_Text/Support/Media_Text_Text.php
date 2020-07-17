@@ -26,7 +26,8 @@ class Media_Text_Text extends Block_Type_Config {
 			->add_class( 'media-text__title h3' );
 
 		$content = $this->factory->content()->field()->flexible_container( Media_Text::CONTENT )
-			->add_class( 'media-text__text t-sink s-sink' ); // @TODO: This doesn't appear to work.
+			->add_class( 'media-text__text t-sink s-sink' ) // @TODO: This doesn't appear to work.
+			->add_template_block( 'core/paragraph' );
 
 		foreach ( $this->nested_block_types() as $type ) {
 			$content->add_block_type( $type )->capture_nested_content( $type, 'content' );
