@@ -27,7 +27,6 @@ class Media_Text_Media extends Block_Type_Config {
 				$this->factory->content()->field()->flexible_container( Media_Text::MEDIA_CONTAINER )
 					->add_block_type( 'tribe/media-text--media-image' )
 					->add_block_type( 'tribe/media-text--media-embed' )
-					->add_template_block( 'tribe/media-text--media-image' )
 					->set_max_blocks( 1 )
 					->merge_nested_attributes( 'tribe/media-text--media-image' )
 					->merge_nested_attributes( 'tribe/media-text--media-embed' )
