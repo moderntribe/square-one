@@ -1,0 +1,13 @@
+{# Panel: Links #}
+<section {{ classes|stringify }} {{ attrs|stringify }}>
+	<div {{ container_classes|stringify }}>
+
+		{{ component( 'content-block/Content_Block.php', header ) }}
+
+		<div {{ content_classes|stringify }}>
+			{# {% for row in rows %}{% endfor %} #}
+			{{ component( 'accordion/Accordion.php', content ) }}
+		</div>
+
+	</div>
+</section>
