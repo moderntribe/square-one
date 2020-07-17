@@ -2,13 +2,17 @@
 <section {{ classes|stringify }} {{ attrs|stringify }}>
 	<div {{ container_classes|stringify }}>
 
-		<div {{ media_classes|stringify }}>
-			{{ component( 'image/Image.php', media ) }}
-		</div>
+		{% if media %}
+			<div {{ media_classes|stringify }}>
+				{{ component( 'image/Image.php', media ) }}
+			</div>
+		{% endif %}
 
-		<div {{ content_classes|stringify }}>
-			{{ component( 'content-block/Content_Block.php', content ) }}
-		</div>
+		{% if content %}
+			<div {{ content_classes|stringify }}>
+				{{ component( 'content-block/Content_Block.php', content ) }}
+			</div>
+		{% endif %}
 
 	</div>
 </section>
