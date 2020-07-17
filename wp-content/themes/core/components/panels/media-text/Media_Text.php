@@ -3,8 +3,8 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Templates\Components\Panels;
 
-use Tribe\Project\Templates\Components\Context;
-use Tribe\Project\Blocks\Types\Media_Text as Media_Text_Block;
+use Tribe\Project\Components\Component;
+use Tribe\Project\Blocks\Types\Media_Text\Media_Text as Media_Text_Block;
 
 /**
  * Class Media_Text
@@ -19,7 +19,8 @@ use Tribe\Project\Blocks\Types\Media_Text as Media_Text_Block;
  * @property string[] $classes
  * @property string[] $attrs
  */
-class Media_Text extends Context {
+class Media_Text extends Component {
+
 	public const WIDTH             = 'width';
 	public const LAYOUT            = 'layout';
 	public const MEDIA             = 'media';
@@ -29,62 +30,34 @@ class Media_Text extends Context {
 	public const CONTENT_CLASSES   = 'content_classes';
 	public const CLASSES           = 'classes';
 	public const ATTRS             = 'attrs';
+	public const MEDIA_TYPE        = 'media_type';
 
-	protected $path = __DIR__ . '/media-text.twig';
+	protected function defaults(): array {
+		return [
+			self::WIDTH             => Media_Text_Block::WIDTH_GRID,
+			self::LAYOUT            => Media_Text_Block::MEDIA_LEFT,
+			self::MEDIA             => '',
+			self::CONTENT           => '',
+			self::CONTAINER_CLASSES => [ 'media-text__container' ],
+			self::MEDIA_CLASSES     => [ 'media-text__media' ],
+			self::CONTENT_CLASSES   => [ 'media-text__content' ],
+			self::CLASSES           => [ 'c-panel', 'c-panel--media-text' ],
+			self::ATTRS             => [],
+			self::MEDIA_TYPE        => 'image',
+		];
+	}
 
-	protected $properties = [
-		self::WIDTH             => [
-			self::DEFAULT => '',
-		],
-		self::LAYOUT            => [
-			self::DEFAULT => '',
-		],
-		self::MEDIA             => [
-			self::DEFAULT => '',
-		],
-		self::CONTENT           => [
-			self::DEFAULT => '',
-		],
-		self::CONTAINER_CLASSES => [
-			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [ 'media-text__container' ],
-		],
-		self::MEDIA_CLASSES     => [
-			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [ 'media-text__media' ],
-		],
-		self::CONTENT_CLASSES   => [
-			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [ 'media-text__content' ],
-		],
-		self::CLASSES           => [
-			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [ 'c-panel', 'c-panel--media-text' ],
-		],
-		self::ATTRS             => [
-			self::DEFAULT          => [],
-			self::MERGE_ATTRIBUTES => [],
-		],
-	];
+	public function init() {
+		$this->data[ self::CLASSES ][] = 'c-panel--' . $this->data[ self::LAYOUT ];
+		$this->data[ self::CLASSES ][] = 'c-panel--' . $this->data[ self::WIDTH ];
 
-	public function get_data(): array {
-		if ( $this->layout ) {
-			$this->properties[ self::CLASSES ][ self::MERGE_CLASSES ][] = 'c-panel--layout-media-' . $this->layout;
+		if ( $this->data[ self::WIDTH ] === Media_Text_Block::WIDTH_GRID ) {
+			$this->data[ self::CLASSES ][] = 'l-container';
 		}
 
-		if ( $this->width ) {
-			$this->properties[ self::CLASSES ][ self::MERGE_CLASSES ][] = 'c-panel--width-' . $this->width;
+		if ( $this->data[ self::WIDTH ] === Media_Text_Block::WIDTH_FULL ) {
+			$this->data[ self::CONTENT_CLASSES ][] = 'l-container';
 		}
-
-		if ( $this->width === Media_Text_Block::WIDTH_BOXED ) {
-			$this->properties[ self::CLASSES ][ self::MERGE_CLASSES ][] = 'l-container';
-		}
-
-		if ( $this->width === Media_Text_Block::WIDTH_FULL ) {
-			$this->properties[ self::CONTENT_CLASSES ][ self::MERGE_CLASSES ][] = 'l-container';
-		}
-
-		return parent::get_data();
 	}
 
 }

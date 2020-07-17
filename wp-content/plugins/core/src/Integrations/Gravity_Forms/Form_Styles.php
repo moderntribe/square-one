@@ -22,6 +22,19 @@ class Form_Styles {
 	}
 
 	/**
+	 * Dequeue styles for formsmain on Gravity Forms.
+	 * This prevents GF styles from interferring with our sink form styles.
+	 *
+	 * @action gform_enqueue_scripts
+	 */
+	public function dequeue_gravity_forms_formsmain_styles(): void {
+		global $wp_styles;
+		if ( isset ( $wp_styles->registered['gforms_formsmain_css'] ) ) {
+			unset( $wp_styles->registered['gforms_formsmain_css'] );
+		}
+	}
+
+	/**
 	 * Set enableAnimation for all forms to be false always. Removes a weird
 	 * collision between Gravity and GSAP jQuery plugin, our JS animation library, which is
 	 * worth the performance gain in animations used site wide over the Gravity

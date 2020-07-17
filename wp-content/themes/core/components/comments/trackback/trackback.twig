@@ -1,13 +1,13 @@
-<li {{ attr }} {{ classes }}>
-	<p>
-		<strong>{{ label }}</strong>
+<li {{ attr|stringify }} {{ classes|stringify }}>
+    <p>
+        <strong>{{ label }}</strong>
 
-		{{ author_link }}
+        {{ author_link }}
 
-		{% if edit_link %}
-			<span class="comment__action-edit">
-				{{ edit_link }}
-			</span>
-		{% endif %}
-	</p>
+        {% if edit_link %}
+            <span class="comment__action-edit">
+                {{ edit_link }}
+            </span>
+        {% endif %}
+    </p>
 </li>

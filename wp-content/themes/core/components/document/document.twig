@@ -1,26 +1,25 @@
-<!DOCTYPE html>
 <html {{ language_attributes }}>
 
-	{{ head }}
+    {{ component( 'head/Head.php' ) }}
 
-	<body class="{{ body_class }}">
+        <body class="{{ body_class }}">
 
-		{{ do_action( 'tribe/body_opening_tag') }}
+    {{ do_action( 'tribe/body_opening_tag') }}
 
-		<div class="l-wrapper" data-js="site-wrap">
+    <div class="l-wrapper" data-js="site-wrap">
 
-			{{ masthead }}
+        {{ component( 'header/masthead/Masthead.php', masthead ) }}
 
-			{{ main }}
+        {{ component( 'main/Main.php', main ) }}
 
-			{{ sidebar }}
+        {{ component( 'sidebar/Sidebar.php', sidebar ) }}
 
-			{{ footer }}
+        {{ component( 'footer/site-footer/Site_Footer.php', footer ) }}
 
-		</div><!-- .l-wrapper -->
+    </div><!-- .l-wrapper -->
 
-		{{ do_action( 'wp_footer' ) }}
+    {{ do_action( 'wp_footer' ) }}
 
-	</body>
+    </body>
 
 </html>

@@ -1,59 +1,22 @@
-{#
+<div {{ container_classes|stringify|esc_attr }}" id="{{ tab_id|esc_attr }} {{ container_attrs|stringify }}>
+<div {{ tab_list_classes|stringify|esc_attr }} {{ tab_list_attrs|stringify }}>
+    {% for button in tablist_buttons %}
+        {{ button }}
+    {% endfor %}
+</div>
 
-Component: Tabs
-
-Documentation: docs\theme\components\tabs.md
-
-Controller: content\plugins\core\src\Templates\Components\Tabs.php
-Javascript: content\themes\bamco\js\src\theme\components\tabs.js
-PostCSS: content\themes\bamco\pcss\components\_tabs.pcss
-
-Description: Use this wherever you need a tab component. Check the docs for example usage.
-
-Attributes:
-	{
-		container_classes: [ 'c-tabs' ], // { array } the wrapper classes
-		tab_id: 'tab-XXX', // { string } the id. Defaults to using uniqid()
-		tablist_classes : [ 'c-tab__list' ], // { array } the list classes
-		container_attrs: [], // { array }. any additional attributes as key value pair
-		tab_list_classes: '[ c-tab__list' ], // { array } the tablist classes
-		tab_list_attrs: [] // { array } Tablist attrs as key value pair
-		tab_button_classes: [ 'c-tab__button' ], // { array } the button classes
-		tab_button_active_class: 'c-tab__button--active', // { string } the active button class
-		tab_button_attrs: [] // { array } Tablist attrs as key value pair
-		tab_content_classes: [ 'c-tab__content' ], // { array } the row content wrapper classes
-		tab_content_attrs: [ ] // { array } tab content attrs.
-		tab_content_inner_classes: [ 'c-tab__content-inner' ], // { array } the row content inner classes
-		tab_content_active_class: 'c-tab__content--active', // { string } the active content class
-		tabs: [], // { array }. an array of tab rows.
-		tabs[].content: '', // { string } The row content. HTML or what have you.
-		tabs[].content_id: '', // { string } Unique id for the content.
-		tabs[].tab_id: '', // { string } Unique id for the header.
-		tabs[].tab_text: '', // { string } The tab text.
-		tabs[].btn_attrs: [], // { array } Additional button attrs. Passed into the buttons component so they must be an array
-		tabs[].content_attrs: '' , // { string } Additional tab inner content attrs.
-	}
- #}
-
-<div {{ container_classes|esc_attr }}" id="{{ tab_id|esc_attr }} {{ container_attrs }}>
-	<div {{ tab_list_classes|esc_attr }} {{ tab_list_attrs }}>
-		{% for button in tablist_buttons %}
-			{{ button }}
-		{% endfor %}
-	</div>
-
-	{% for tab in tabs %}
-		<div class="{{ tab_content_classes|esc_attr }} {% if loop.index0 == 0 %}{{ tab_content_active_class|esc_attr }}{% endif %}"
-			 aria-hidden="{% if loop.index0 == 0 %}false{% else %}true{% endif %}"
-			 id="{{ tab.content_id|esc_attr }}"
-			 aria-labelledby="{{ tab.tab_id|esc_attr }}"
-			 {{ tab_content_attrs }}
-		>
-			<div {{ tab_content_inner_classes }}
-					{{ tab_content_inner_attrs }}
-					{{ tab.content_attrs }}>
-				{{ tab.content }}
-			</div>
-		</div>
-	{% endfor %}
+{% for tab in tabs %}
+    <div class="{{ tab_content_classes|stringify|esc_attr }} {% if loop.index0 == 0 %}{{ tab_content_active_class|esc_attr }}{% endif %}"
+         aria-hidden="{% if loop.index0 == 0 %}false{% else %}true{% endif %}"
+         id="{{ tab.content_id|esc_attr }}"
+         aria-labelledby="{{ tab.tab_id|esc_attr }}"
+            {{ tab_content_attrs|stringify }}
+    >
+        <div {{ tab_content_inner_classes|stringify }}
+                {{ tab_content_inner_attrs|stringify }}
+                {{ tab.content_attrs|stringify }}>
+            {{ tab.content }}
+        </div>
+    </div>
+{% endfor %}
 </div>

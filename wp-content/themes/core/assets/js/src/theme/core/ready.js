@@ -77,7 +77,7 @@ const init = () => {
 	// 	} );
 	// }
 
-	console.info( 'Square One FE: Initialized all javascript that targeted document ready.' );
+	console.info( 'SquareOne Theme: Initialized all javascript that targeted document ready.' );
 };
 
 /**

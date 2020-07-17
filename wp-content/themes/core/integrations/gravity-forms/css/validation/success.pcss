@@ -1,28 +1,28 @@
 .gform_confirmation_wrapper {
-	margin: var(--gf-state-success-margin);
-	padding: var(--gf-state-success-padding);
+	margin: var(--spacer-70) auto;
+	padding: 68px 25px 80px;
 	text-align: center;
-	border: var(--gf-validation-border-size) solid var(--gf-state-success-border-color);
-	background-color: var(--gf-state-success-bgd-color);
-	border-radius: var(--gf-validation-border-radius);
-	color: var(--gf-state-success-color);
+	border: var(--form-border-size) solid var(--form-color-success);
+	background-color: var(--form-control-bgd-color);
+	border-radius: var(--form-border-radius);
+	color: var(--color-text);
 	position: relative;
 
 	&:before {
 		@mixin icon;
 
-		content: var(--gf-state-success-icon);
-		color: var(--gf-state-success-icon-color);
+		content: var(--icon-check);
+		color: var(--form-color-success);
 		text-align: center;
-		font-size: var(--gf-state-success-icon-font-size);
+		font-size: 65px;
 	}
 }
 
 .gform_confirmation_message {
-	max-width: var(--gf-validation-max-width);
+	max-width: 600px;
 	margin: 0 auto;
-	padding-top: var(--gf-state-success-icon-to-text-spacing);
-	letter-spacing: var(--gf-state-success-letter-spacing);
-	text-transform: var(--gf-state-success-text-transform);
-	font: var(--gf-state-success-font-style) var(--gf-state-success-font-weight) var(--gf-state-success-font-size) / var(--gf-state-success-line-height) var(--gf-state-success-font-family);
+	padding-top: 20px;
+	letter-spacing: normal;
+	text-transform: none;
+	font: normal 400 20px / 1.25 var(--form-font-family);
 }

@@ -5,38 +5,16 @@
  * ----------------------------------------------------------------------------- */
 
 :root {
-	/* -----------------------------------------------------------------------------
-	 * Borders
-	 * ----------------------------------------------------------------------------- */
-
-	--form-border-color: lightgrey;
-	--form-border-color-focus: darken(var(--form-border-color), 0.25);
-	--form-border-size: 1px;
-	--form-border-size-focus: var(--form-border-size);
-	--form-border-radius: 0;
 
 	/* -----------------------------------------------------------------------------
 	 * Colors
 	 * ----------------------------------------------------------------------------- */
 
 	--form-color: var(--color-text);
-	--form-color-secondary: var(--color-grey-light);
-	--form-color-error: red;
-	--form-color-required: var(--form-color-error);
-	--form-color-success: green;
-	--form-color-placeholder: grey;
-
-	/* -----------------------------------------------------------------------------
-	 * UI
-	 * ----------------------------------------------------------------------------- */
-
-	--form-ui-icon-color: lightgrey; /* Control icons */
-	--form-ui-icon-font-size: 20px; /* Control icons */
-	--form-ui-color: var(--color-grey-dark); /* Select icon */
-	--form-ui-bgd-color: var(--form-border-color);  /* Select, Checkbox, & Radio */
-	--form-ui-bgd-color-focus: var(--form-border-color-focus);  /* Select */
-	--form-ui-icon-select: '\e900'; /* Select */
-	--form-ui-icon-select-font-size: 25px; /* Select */
+	--form-color-secondary: var(--color-neutral-50);
+	--form-color-success: var(--color-alert-positive);
+	--form-color-error: var(--color-alert-negative);
+	--form-color-error-bgd: rgba(255, 61, 91, 0.1);
 
 	/* -----------------------------------------------------------------------------
 	 * Fonts
@@ -44,53 +22,51 @@
 
 	--form-font-family: var(--font-family-base);
 	--form-font-size: 16px;
-	--form-font-size-secondary: 14px; /* Label */
-	--form-font-weight-secondary: 700; /* Label */
-	--form-font-size-tertiary: 13px; /* Helper Text & Descriptions */
+	--form-font-size-secondary: 14px; /* Label & Legend */
+	--form-font-weight-secondary: 600; /* Label & Legend */
+	--form-font-size-tertiary: 11px; /* Helper Text & Descriptions */
 	--form-font-weight-tertiary: 400; /* Helper Text & Descriptions */
 	--form-letter-spacing: normal;
 	--form-text-transform: none;
-	--form-control-height: 45px;
 
 	/* -----------------------------------------------------------------------------
 	 * Spacing
 	 * ----------------------------------------------------------------------------- */
 
 	--form-margin: 28px;
-	--form-margin-small: var(--spacer-20);
-	--form-padding-horizontal: 20px;
-	--form-padding-vertical: 20px;
+	--form-margin-small: var(--spacer-10); /* Radio/Checkbox Controls, Helper Text */
+	--form-padding-horizontal: var(--spacer-20);
+	--form-padding-vertical: 12px;
 
 	/* -----------------------------------------------------------------------------
- * Placeholder
- * ----------------------------------------------------------------------------- */
+	 * Borders
+	 * ----------------------------------------------------------------------------- */
 
-	--form-placeholder-color: var(--form-color-placeholder);
-	--form-placeholder-color-focus: lighten(var(--form-color-placeholder), 0.25);
-	--form-placeholder-font-style: normal;
-	--form-placeholder-font-weight: 400;
-	--form-placeholder-font-size: var(--form-font-size);
-	--form-placeholder-font-line-height: inherit;
-	--form-placeholder-font-family: var(--form-font-family);
-	--form-placeholder-letter-spacing: var(--form-letter-spacing);
-	--form-placeholder-text-transform: var(--form-text-transform);
+	--form-border-color: var(--color-neutral-20);
+	--form-border-color-focus: var(--color-neutral-50);
+	--form-border-size: 1px;
+	--form-border-size-focus: var(--form-border-size);
+	--form-border-radius: 0;
 
 	/* -----------------------------------------------------------------------------
- * Controls
- * ----------------------------------------------------------------------------- */
+	 * Placeholder
+	 * ----------------------------------------------------------------------------- */
+
+	--form-placeholder-color: var(--color-neutral-50);
+	--form-placeholder-color-focus: var(--color-neutral-20);
+
+	/* -----------------------------------------------------------------------------
+	 * Controls
+	 * ----------------------------------------------------------------------------- */
 
 	--form-control-bgd-color: var(--color-white);
-	--form-control-border-color: var(--form-border-color);
-	--form-control-border-color-focus: var(--form-border-color-focus);
-	--form-control-border-radius: var(--form-border-radius);
-	--form-control-border-size: var(--form-border-size);
-	--form-control-border-size-focus: var(--form-border-size-focus);
 	--form-control-color: var(--form-color);
 	--form-control-font-style: normal;
 	--form-control-font-weight: 400;
 	--form-control-font-size: var(--form-font-size);
 	--form-control-font-line-height: 1.5;
 	--form-control-font-family: var(--form-font-family);
+	--form-control-height: 48px;
 	--form-control-letter-spacing: var(--form-letter-spacing);
 	--form-control-margin-bottom: var(--form-margin);
 	--form-control-padding: 0 var(--form-padding-horizontal);
@@ -100,11 +76,6 @@
 	 * Control Icon
 	 * ----------------------------------------------------------------------------- */
 
-	--form-control-icon-color: var(--form-ui-icon-color);
-	--form-control-icon-font-size: var(--form-ui-icon-font-size);
-	--form-control-icon-line-height: var(--form-control-height);
-	--form-control-icon-width: var(--form-control-height);
-	--form-control-icon-padding-right: var(--form-control-icon-width);
 	--form-control-icon-position-right: 0;
 	--form-control-icon-position-top: 0;
 
@@ -119,146 +90,45 @@
 	 * Control: Select
 	 * ----------------------------------------------------------------------------- */
 
-	--form-control-select-multiple-height: 100px;
-	--form-control-select-multiple-padding: var(--form-padding-vertical) var(--form-padding-horizontal);
 	--form-control-select-padding-right: calc(var(--form-control-select-ui-width) + var(--form-padding-horizontal));
-	--form-control-select-ui-bgd-color: var(--form-ui-bgd-color);
-	--form-control-select-ui-bgd-color-hover: var(--form-ui-bgd-color-focus);
-	--form-control-select-ui-border-radius-top-right: var(--form-control-border-radius);
-	--form-control-select-ui-border-radius-bottom-right: var(--form-control-border-radius);
-	--form-control-select-ui-color: var(--form-ui-color);
-	--form-control-select-ui-font-size: var(--form-ui-icon-select-font-size);
-	--form-control-select-ui-height: calc(var(--form-control-height) - 2px);
-	--form-control-select-ui-icon: var(--form-ui-icon-select);
-	--form-control-select-ui-line-height: var(--form-control-height);
-	--form-control-select-ui-position-right: 1px;
-	--form-control-select-ui-position-top: 1px;
+	--form-control-select-ui-color: var(--color-grey-dark);
 	--form-control-select-ui-width: var(--form-control-height);
+	--form-control-select-ui-bgd-color: var(--color-white);
+	--form-control-select-ui-bgd-color-hover: var(--color-white);
+	--form-control-select-ui-font-size: 25px;
 
 	/* -----------------------------------------------------------------------------
 	 * Control: Radio & Checkbox
 	 * ----------------------------------------------------------------------------- */
 
-	--form-control-group-radio-checkbox-padding-top: 8px;
-	--form-control-group-radio-checkbox-padding-bottom: 4px;
-	--form-control-radio-checkbox-label-color: var(--form-color);
-	--form-control-radio-checkbox-label-color-checked: var(--form-control-color);
-	--form-control-radio-checkbox-label-font-style: normal;
-	--form-control-radio-checkbox-label-font-weight: 400;
-	--form-control-radio-checkbox-label-font-size: var(--form-font-size-secondary);
-	--form-control-radio-checkbox-label-font-line-height: 1;
-	--form-control-radio-checkbox-label-font-family: var(--form-font-family);
-	--form-control-radio-checkbox-label-letter-spacing: var(--form-letter-spacing);
-	--form-control-radio-checkbox-label-max-width: 600px;
-	--form-control-radio-checkbox-label-text-transform: var(--form-text-transform);
-	--form-control-radio-checkbox-push-label-right: 10px;
-	--form-control-radio-checkbox-margin-top: var(--form-margin-small);
-	--form-control-radio-checkbox-hide-browser-ui-font-size: 12px;
-	--form-control-radio-checkbox-hide-browser-ui-position-left: 6px;
-	--form-control-radio-checkbox-hide-browser-ui-position-top: 2px;
-	--form-control-radio-checkbox-ui-border-color: var(--form-control-border-color);
-	--form-control-radio-checkbox-ui-border-color-focus: var(--form-border-color-focus);
-	--form-control-radio-checkbox-ui-border-size: var(--form-control-border-size);
-	--form-control-radio-checkbox-ui-border-size-focus: var(--form-control-border-size-focus);
+	--form-control-radio-checkbox-margin-top: var(--spacer-40);
+	--form-control-radio-checkbox-padding-left: var(--spacer-40);
+	--form-control-radio-checkbox-ui-border-color: var(--form-border-color);
+	--form-control-radio-checkbox-ui-border-color-focus: var(--color-neutral-70);
+	--form-control-radio-checkbox-ui-border-size: var(--form-border-size);
+	--form-control-radio-checkbox-ui-border-size-focus: var(--form-border-size-focus);
 	--form-control-radio-checkbox-ui-bgd-color: var(--form-control-bgd-color);
-	--form-control-radio-checkbox-ui-color: var(--form-ui-color);
-	--form-control-radio-checkbox-ui-height: calc(var(--form-control-height) / 2);
-	--form-control-radio-checkbox-ui-position-left: 0;
-	--form-control-radio-checkbox-ui-position-top: -2px;
-	--form-control-radio-checkbox-ui-push-label-right: 34px;
-	--form-control-radio-checkbox-ui-width: calc(var(--form-control-height) / 2);
-	--form-control-checkbox-ui-border-size: 2px;
-	--form-control-checkbox-ui-border-radius: var(--form-control-border-radius);
-	--form-control-checkbox-ui-height: 5px;
-	--form-control-checkbox-ui-position-left: 7px;
-	--form-control-checkbox-ui-position-top: 5px;
-	--form-control-checkbox-ui-width: 9px;
-	--form-control-radio-ui-position-left: 8px;
-	--form-control-radio-ui-position-top: 6px;
-	--form-control-radio-ui-width: 8px;
-	--form-control-radio-ui-height: 8px;
+	--form-control-radio-checkbox-ui-bgd-color-checked: var(--color-neutral-90);
+	--form-control-radio-checkbox-ui-color: var(--color-white);
+	--form-control-checkbox-size: calc((var(--form-control-height) / 2) - 2px);
+	--form-control-checkbox-position-top: -4px;
+	--form-control-checkbox-position-left: 0;
 
 	/* -----------------------------------------------------------------------------
 	 * Control: File
 	 * ----------------------------------------------------------------------------- */
 
-	--form-control-file-font-size: var(--form-font-size);
 	--form-control-file-padding: var(--form-padding-vertical) var(--form-padding-horizontal);
-
-	/* -----------------------------------------------------------------------------
- * Fieldset
- * ----------------------------------------------------------------------------- */
-
-	--form-fieldset-styled-border-size: var(--form-border-size);
-	--form-fieldset-styled-border-color: var(--form-border-color);
-	--form-fieldset-styled-border-radius: var(--form-border-radius);
-	--form-fieldset-styled-margin: 0 0 var(--form-margin);
-	--form-fieldset-styled-padding: var(--form-padding-vertical) var(--form-padding-horizontal);
-
-	/* -----------------------------------------------------------------------------
-	 * Label
-	 * ----------------------------------------------------------------------------- */
-
-	--form-label-color: var(--form-color);
-	--form-label-font-style: normal;
-	--form-label-font-weight: var(--form-font-weight-secondary);
-	--form-label-font-size: var(--form-font-size-secondary);
-	--form-label-font-line-height: 1;
-	--form-label-font-family: var(--form-font-family);
-	--form-label-letter-spacing: var(--form-letter-spacing);
-	--form-label-margin-bottom: var(--form-margin-small);
-	--form-label-text-transform: var(--form-text-transform);
 
 	/* -----------------------------------------------------------------------------
 	 * Control Helper Text
 	 * ----------------------------------------------------------------------------- */
 
-	--form-control-helper-color: var(--form-color-secondary);
-	--form-control-helper-font-style: normal;
 	--form-control-helper-font-weight: var(--form-font-weight-tertiary);
 	--form-control-helper-font-size: var(--form-font-size-tertiary);
-	--form-control-helper-font-line-height: 1.15;
+	--form-control-helper-font-line-height: 1.18;
 	--form-control-helper-font-family: var(--form-font-family);
-	--form-control-helper-letter-spacing: var(--form-letter-spacing);
-	--form-control-helper-margin-top: 8px;
-	--form-control-helper-padding: 0 8px;
+	--form-control-helper-letter-spacing: 0.5px;
 	--form-control-helper-text-transform: var(--form-text-transform);
 
-	/* -----------------------------------------------------------------------------
- * Legend
- * ----------------------------------------------------------------------------- */
-
-	--form-legend-color: var(--form-color);
-	--form-legend-font-style: normal;
-	--form-legend-font-weight: var(--form-font-weight-secondary);
-	--form-legend-font-size: var(--form-font-size-secondary);
-	--form-legend-font-line-height: 1;
-	--form-legend-font-family: var(--form-font-family);
-	--form-legend-letter-spacing: var(--form-letter-spacing);
-	--form-legend-margin-bottom: var(--form-margin-small);
-	--form-legend-text-transform: var(--form-text-transform);
-
-	/* -----------------------------------------------------------------------------
-	 * Legend, styled
-	 * ----------------------------------------------------------------------------- */
-
-	--form-legend-styled-color: var(--form-color);
-	--form-legend-styled-font-style: normal;
-	--form-legend-styled-font-weight: var(--form-font-weight-secondary);
-	--form-legend-styled-font-size: var(--form-font-size-secondary);
-	--form-legend-styled-font-line-height: 1;
-	--form-legend-styled-font-family: var(--form-font-family);
-	--form-legend-styled-letter-spacing: var(--form-letter-spacing);
-	--form-legend-styled-margin-bottom: var(--form-margin-small);
-	--form-legend-styled-padding: 0 8px;
-	--form-legend-styled-text-align: left;
-	--form-legend-styled-text-transform: var(--form-text-transform);
-
-	/* -----------------------------------------------------------------------------
-	 * Validation
-	 * ----------------------------------------------------------------------------- */
-
-	--form-state-color-error: var(--form-color-error);
-	--form-state-color-required: var(--form-color-required);
-	--form-state-color-success: var(--form-color-success);
 }

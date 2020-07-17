@@ -1,9 +1,11 @@
-<header>
+{% if title %}
+    <header>
 
-	<div class="l-container">
+        <div class="l-container">
 
-		{{ title }}
+            {{ component( 'text/Text.php', title ) }}
 
-	</div>
+        </div>
 
-</header>
+    </header>
+{% endif %}

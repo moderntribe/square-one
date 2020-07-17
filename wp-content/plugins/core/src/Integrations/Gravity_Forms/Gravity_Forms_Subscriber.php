@@ -22,6 +22,7 @@ class Gravity_Forms_Subscriber extends Abstract_Subscriber {
 
 		add_action( 'gform_enqueue_scripts', function () {
 			$this->container->get( Form_Styles::class )->enqueue_gravity_forms_jquery_ui_styles();
+			$this->container->get( Form_Styles::class )->dequeue_gravity_forms_formsmain_styles();
 		} );
 
 		add_filter( 'gform_pre_render', function ( $form ) {

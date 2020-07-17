@@ -3,18 +3,9 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Templates\Components;
 
-class Main extends Context {
-	public const HEADER  = 'header';
-	public const CONTENT = 'content';
+use Tribe\Project\Components\Component;
 
-	protected $path = __DIR__ . '/main.twig';
-
-	protected $properties = [
-		self::HEADER  => [
-			self::DEFAULT => '',
-		],
-		self::CONTENT => [
-			self::DEFAULT => '',
-		],
-	];
+class Main extends Component {
+	public const CONTENT       = 'content';
+	public const TEMPLATE_TYPE = 'template_type';
 }

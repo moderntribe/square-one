@@ -19,7 +19,7 @@ const init = () => {
 	tabs();
 	video();
 
-	console.info( 'SquareOne FE: Initialized all components.' );
+	console.info( 'SquareOne Theme: Initialized all components.' );
 };
 
 export default init;

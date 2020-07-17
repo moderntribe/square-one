@@ -2,6 +2,8 @@
 
 namespace Tribe\Project\Templates\Components;
 
+use Tribe\Project\Components\Component;
+
 /**
  * Class Accordion
  *
@@ -27,7 +29,8 @@ namespace Tribe\Project\Templates\Components;
  * @property string   $row_header_name
  * @property string   $row_content_name
  */
-class Accordion extends Context {
+class Accordion extends Component {
+
 	public const ROWS                          = 'rows';
 	public const CONTAINER_CLASSES             = 'container_classes';
 	public const CONTAINER_ATTRS               = 'container_attrs';
@@ -39,46 +42,19 @@ class Accordion extends Context {
 	public const ROW_HEADER_NAME               = 'row_header_name';
 	public const ROW_CONTENT_NAME              = 'row_content_name';
 
-	protected $path = __DIR__ . '/accordion.twig';
-
-	protected $properties = [
-		self::ROWS                      => [
-			self::DEFAULT => [],
-		],
-		self::CONTAINER_CLASSES         => [
-			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [ 'c-accordion' ],
-		],
-		self::CONTAINER_ATTRS           => [
-			self::DEFAULT          => [],
-			self::MERGE_ATTRIBUTES => [ 'data-js' => 'c-accordion' ],
-		],
-		self::ROW_CLASSES               => [
-			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [ 'c-accordion__row' ],
-		],
-		self::ROW_HEADER_CLASSES        => [
-			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [ 'c-accordion__header', 'h5' ],
-		],
-		self::ROW_HEADER_CONTAINER_CLASSES  => [
-			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [ 'c-accordion__header-container' ],
-		],
-		self::ROW_CONTENT_CLASSES       => [
-			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [ 'c-accordion__content' ],
-		],
-		self::ROW_CONTENT_CONTAINER_CLASSES => [
-			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [ 'c-accordion__content-container', 't-sink', 's-sink' ],
-		],
-		self::ROW_HEADER_NAME           => [
-			self::DEFAULT => 'title',
-		],
-		self::ROW_CONTENT_NAME          => [
-			self::DEFAULT => 'row_content',
-		],
-	];
+	protected function defaults(): array {
+		return [
+			self::ROWS                          => [],
+			self::CONTAINER_CLASSES             => [ 'c-accordion' ],
+			self::CONTAINER_ATTRS               => [ 'data-js' => 'c-accordion' ],
+			self::ROW_CLASSES                   => [ 'c-accordion__row' ],
+			self::ROW_HEADER_CLASSES            => [ 'c-accordion__header', 'h5' ],
+			self::ROW_HEADER_CONTAINER_CLASSES  => [ 'c-accordion__header-container' ],
+			self::ROW_CONTENT_CLASSES           => [ 'c-accordion__content' ],
+			self::ROW_CONTENT_CONTAINER_CLASSES => [ 'c-accordion__content-container', 't-sink', 's-sink' ],
+			self::ROW_HEADER_NAME               => 'title',
+			self::ROW_CONTENT_NAME              => 'row_content',
+		];
+	}
 
 }

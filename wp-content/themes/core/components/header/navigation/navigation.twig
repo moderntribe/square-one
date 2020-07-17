@@ -1,13 +1,11 @@
 {% if menu %}
+    <nav class="site-header__nav" aria-labelledby="site-header__nav-label">
 
-	<nav class="site-header__nav" aria-labelledby="site-header__nav-label">
+        <h2 id="site-header__nav-label" class="u-visually-hidden">{{ __( 'Primary Navigation' )|esc_html }}</h2>
 
-		<h2 id="site-header__nav-label" class="u-visually-hidden">{{ __( 'Primary Navigation' )|esc_html }}</h2>
+        <ol class="site-header__nav-list">
+            {{ menu }}
+        </ol>
 
-		<ol class="site-header__nav-list">
-			{{ menu }}
-		</ol>
-
-	</nav>
-
+    </nav>
 {% endif %}

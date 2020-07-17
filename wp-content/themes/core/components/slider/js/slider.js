@@ -173,7 +173,7 @@ const init = () => {
 	initSliders();
 	bindEvents();
 
-	console.info( 'Square One FE: Initialized slider component scripts.' );
+	console.info( 'SquareOne Theme: Initialized slider component scripts.' );
 };
 
 export default init;

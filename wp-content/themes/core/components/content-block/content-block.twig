@@ -1,8 +1,7 @@
 {# Component: Content Block #}
-
-<{{ tag }} {{ classes }} {{ attrs }}>
-	{{ leadin }}
-	{{ title }}
-	{{ text }}
-	{{ action }}
+<{{ tag }} {{ classes|stringify }} {{ attrs|stringify }}>
+	{{ component( 'text/Text.php', leadin ) }}
+	{{ component( 'text/Text.php', title ) }}
+	{{ component( 'text/Text.php', text ) }}
+	{{ component( action_component, action ) }}
 </{{ tag }}>

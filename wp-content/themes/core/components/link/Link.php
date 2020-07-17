@@ -2,6 +2,8 @@
 
 namespace Tribe\Project\Templates\Components;
 
+use Tribe\Project\Components\Component;
+
 /**
  * Class Link
  *
@@ -11,63 +13,61 @@ namespace Tribe\Project\Templates\Components;
  * @property string[] $classes
  * @property string[] $attrs
  * @property string   $content
+ * @property string   $wrapper_tag
+ * @property string[] $wraper_classes
+ * @property string[] $wrapper_attrs
  */
-class Link extends Context {
-	public const URL        = 'url';
-	public const TARGET     = 'target';
-	public const ARIA_LABEL = 'aria_label';
-	public const CLASSES    = 'classes';
-	public const ATTRS      = 'attrs';
-	public const CONTENT    = 'content';
+class Link extends Component {
 
-	protected $path = __DIR__ . '/link.twig';
+	public const URL             = 'url';
+	public const TARGET          = 'target';
+	public const ARIA_LABEL      = 'aria_label';
+	public const CLASSES         = 'classes';
+	public const ATTRS           = 'attrs';
+	public const CONTENT         = 'content';
+	public const WRAPPER_TAG     = 'wrapper_tag';
+	public const WRAPPER_CLASSES = 'wrapper_classes';
+	public const WRAPPER_ATTRS   = 'wrapper_attrs';
 
-	protected $properties = [
-		self::URL        => [
-			self::DEFAULT => '',
-		],
-		self::TARGET     => [
-			self::DEFAULT => '',
-		],
-		self::ARIA_LABEL => [
-			self::DEFAULT => '',
-		],
-		self::CLASSES    => [
-			self::DEFAULT       => [],
-			self::MERGE_CLASSES => [],
-		],
-		self::ATTRS      => [
-			self::DEFAULT          => [],
-			self::MERGE_ATTRIBUTES => [],
-		],
-		self::CONTENT    => [
-			self::DEFAULT => '',
-		],
-	];
+	protected function defaults(): array {
+		return [
+			self::URL             => '',
+			self::TARGET          => '',
+			self::ARIA_LABEL      => '',
+			self::CLASSES         => [],
+			self::ATTRS           => [],
+			self::CONTENT         => '',
+			self::WRAPPER_TAG     => '',
+			self::WRAPPER_CLASSES => [],
+			self::WRAPPER_ATTRS   => [],
+		];
+	}
 
-	public function get_data(): array {
-		if ( $this->url ) {
-			$this->properties[ self::ATTRS ][ self::VALUE ]['href'] = $this->url;
+	public function init() {
+		if ( ! empty( $this->data[ self::WRAPPER_TAG ] ) ) {
+			$this->twig_file = 'link-with-wrapper.twig';
 		}
 
-		if ( $this->aria_label ) {
-			$this->properties[ self::ATTRS ][ self::VALUE ]['aria-label'] = $this->aria_label;
+		if ( ! empty( $this->data[ self::URL ] ) ) {
+			$this->data[ self::ATTRS ]['href'] = $this->data['url'];
 		}
 
-		if ( $this->target ) {
-			$this->properties[ self::ATTRS ]['target'] = $this->target;
+		if ( ! empty( $this->data[ self::ARIA_LABEL ] ) ) {
+			$this->data[ self::ATTRS ]['aria-label'] = $this->data['aria_label'];
 		}
 
-		if ( $this->target === '_blank' ) {
-			$this->properties[ self::ATTRS ]['rel'] = 'noopener';
-			$this->properties[ self::CONTENT ][ self::VALUE ] .= $this->append_new_window_text();
+		if ( ! empty( $this->data[ self::TARGET ] ) ) {
+			$this->data[ self::ATTRS ]['target'] = $this->data['target'];
 		}
 
-		return parent::get_data();
+		if ( ! empty( $this->data[ self::TARGET ] ) && $this->data[ self::TARGET ] === '_blank' ) {
+			$this->data[ self::ATTRS ]['rel'] = 'noopener';
+			$this->data[ self::CONTENT ]     .= $this->append_new_window_text();
+		}
 	}
 
 	/**
-	 * Appends accessibility message for links set to open in a new window.
+	 * Appends accessibility message for links set to open in a new tab/window.
 	 *
 	 * @return string
 	 * @throws \Exception
@@ -77,6 +77,6 @@ class Link extends Context {
 			Text::TAG     => 'span',
 			Text::CLASSES => [ 'u-visually-hidden' ],
 			Text::TEXT    => __( '(Opens new window)', 'tribe' ),
-		] )->render();
+		] )->get_rendered_output();
 	}
 }

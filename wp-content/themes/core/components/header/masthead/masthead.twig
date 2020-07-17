@@ -1,20 +1,20 @@
 <header class="site-header">
 
-	<a
-		href="#main-content"
-		class="a11y-skip-link u-visually-hidden"
-	>
-		{{ __( 'Skip to main content' )|esc_html }}
-	</a>
+    <a
+            href="#main-content"
+            class="a11y-skip-link u-visually-hidden"
+    >
+        {{ __( 'Skip to main content' )|esc_html }}
+    </a>
 
-	<div class="l-container">
+    <div class="l-container">
 
-		{{ logo }}
+        {{ logo }}
 
-		{{ navigation }}
+        {{ component( 'header/navigation/Navigation.php', navigation ) }}
 
-		{{ search }}
+        {{ component( 'search/Search.php' ) }}
 
-	</div>
+    </div>
 
 </header>

@@ -3,7 +3,6 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Templates;
 
-use DI;
 use Tribe\Libs\Container\Definer_Interface;
 use Tribe\Project\Templates\Controllers\Social_Links;
 
@@ -22,9 +21,6 @@ class Templates_Definer implements Definer_Interface {
 				Social_Links::LINKEDIN,
 				Social_Links::EMAIL,
 			],
-
-			Social_Links::class => DI\create()
-				->constructor( DI\get( Component_Factory::class ), DI\get( self::SOCIAL_SHARING_NETWORKS ), false ),
 		];
 	}
 }
