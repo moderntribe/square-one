@@ -33,8 +33,13 @@ const options = {
 const closeOthers = ( row ) => {
 	tools.getNodes( '.active .c-accordion__content', true, row.parentNode, true ).forEach( accordion => slide.up( accordion, accordion.id, options.speed ) );
 	tools.getNodes( '.active', true, row.parentNode, true ).forEach( ( childRow ) => {
+		const header = childRow.querySelector( '.c-accordion__header' );
+		const content = childRow.querySelector( '.c-accordion__content' );
 		tools.removeClass( childRow, 'active' );
-		setAccInactiveAttributes( childRow.querySelectorAll( '.c-accordion__header' )[ 0 ], childRow.querySelectorAll( '.c-accordion__content' )[ 0 ] );
+		setAccInactiveAttributes( header, content );
+		_.delay( () => {
+			content.setAttribute( 'hidden', 'true' );
+		}, options.speed );
 	} );
 };
 
@@ -61,9 +66,11 @@ const setOffset = () => {
  */
 
 const openAccordion = ( header, content ) => {
-	closeOthers( header.parentNode );
-	tools.addClass( header.parentNode, 'active' );
+	const row = tools.closest( header, '.c-accordion__row' );
+	closeOthers( row );
+	tools.addClass( row, 'active' );
 	setAccActiveAttributes( header, content );
+	content.removeAttribute( 'hidden' );
 	setOffset();
 
 	slide.down( content, content.id, options.speed );
@@ -78,7 +85,7 @@ const openAccordion = ( header, content ) => {
 
 			offset: options.offset,
 			duration: 300,
-			$target: $( header.parentNode ),
+			$target: $( row ),
 		} );
 	}, options.speed );
 };
@@ -89,10 +96,12 @@ const openAccordion = ( header, content ) => {
  */
 
 const closeAccordion = ( header, content ) => {
-	tools.removeClass( header.parentNode, 'active' );
+	const row = tools.closest( header, '.c-accordion__row' );
+	tools.removeClass( row, 'active' );
 	setAccInactiveAttributes( header, content );
 	slide.up( content, content.id, options.speed );
 	_.delay( () => {
+		content.setAttribute( 'hidden', 'true' );
 		events.trigger( {
 			event: 'modern_tribe/accordion_animated',
 			native: false,
@@ -111,7 +120,8 @@ const handlePanelEvents = ( e ) => {
 		return;
 	}
 	const header = tools.getNodes( `.c-accordion__header[data-index="${ e.detail.rowIndex }"]`, false, panel, true )[ 0 ];
-	closeOthers( header.parentNode );
+	const row = tools.closest( header, '.c-accordion__row' );
+	closeOthers( row );
 	openAccordion( header, header.nextElementSibling );
 };
 
@@ -123,9 +133,10 @@ const handlePanelEvents = ( e ) => {
 
 const toggleItem = ( e ) => {
 	const header = e.delegateTarget;
-	const content = header.nextElementSibling;
+	const row = tools.closest( header, '.c-accordion__row' );
+	const content = row.querySelector( '.c-accordion__content' );
 
-	if ( tools.hasClass( header.parentNode, 'active' ) ) {
+	if ( tools.hasClass( row, 'active' ) ) {
 		closeAccordion( header, content );
 	} else {
 		openAccordion( header, content );

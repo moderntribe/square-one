@@ -22,6 +22,7 @@ use Tribe\Project\Components\Component;
  * @property string[] $container_classes
  * @property string[] $container_attrs
  * @property string[] $row_classes
+ * @property string   $row_header_tag
  * @property string[] $row_header_classes
  * @property string[] $row_header_container_classes
  * @property string[] $row_content_classes
@@ -35,6 +36,7 @@ class Accordion extends Component {
 	public const CONTAINER_CLASSES             = 'container_classes';
 	public const CONTAINER_ATTRS               = 'container_attrs';
 	public const ROW_CLASSES                   = 'row_classes';
+	public const ROW_HEADER_TAG                = 'row_header_tag';
 	public const ROW_HEADER_CLASSES            = 'row_header_classes';
 	public const ROW_HEADER_CONTAINER_CLASSES  = 'row_header_container_classes';
 	public const ROW_CONTENT_CLASSES           = 'row_content_classes';
@@ -47,6 +49,7 @@ class Accordion extends Component {
 			self::ROWS                          => [],
 			self::CONTAINER_CLASSES             => [ 'c-accordion' ],
 			self::CONTAINER_ATTRS               => [ 'data-js' => 'c-accordion' ],
+			self::ROW_HEADER_TAG                => 'h3',
 			self::ROW_CLASSES                   => [ 'c-accordion__row' ],
 			self::ROW_HEADER_CLASSES            => [ 'c-accordion__header', 'h5' ],
 			self::ROW_HEADER_CONTAINER_CLASSES  => [ 'c-accordion__header-container' ],
