@@ -28,7 +28,6 @@
 	/* CASE: Disabled */
 	&[disabled],
 	&.is-disabled {
-		opacity: 0.5;
 		cursor: default;
 	}
 }
@@ -53,11 +52,12 @@
 	/* CASE: Disabled */
 	&[disabled],
 	&.is-disabled {
+		background-color: var(--color-grey);
 
 		&:focus,
 		&:active,
 		&:hover {
-			background-color: var(--color-primary);
+			background-color: var(--color-grey);
 		}
 	}
 
@@ -90,6 +90,8 @@
 	/* CASE: Disabled */
 	&[disabled],
 	&.is-disabled {
+		color: var(--color-grey);
+		border-color: var(--color-grey);
 
 		&:focus,
 		&:active,
@@ -106,12 +108,14 @@
 		&:focus,
 		&:active,
 		&:hover {
-			background-color: var(--color-primary-70);
+			color: var(--color-primary-70);
 		}
 
 		/* CASE: Disabled */
 		&[disabled],
 		&.is-disabled {
+			color: var(--color-grey-light);
+			border-color: var(--color-grey-light);
 
 			&:focus,
 			&:active,
@@ -142,11 +146,12 @@
 	/* CASE: Disabled */
 	&[disabled],
 	&.is-disabled {
+		background-color: var(--color-grey);
 
 		&:focus,
 		&:active,
 		&:hover {
-			background-color: var(--color-secondary);
+			background-color: var(--color-grey);
 		}
 	}
 }
