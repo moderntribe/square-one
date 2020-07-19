@@ -30,7 +30,6 @@ class SingleController extends Controller {
 	public function example_app() {
 		$args = $this->get_static_page_args( 'page/page-example-app/Page_Example_App.php' );
 
-
 		$this->render_component( 'document/Document.php', $args );
 	}
 
