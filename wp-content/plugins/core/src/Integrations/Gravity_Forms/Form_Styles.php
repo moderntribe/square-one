@@ -29,7 +29,7 @@ class Form_Styles {
 	 */
 	public function dequeue_gravity_forms_formsmain_styles(): void {
 		global $wp_styles;
-		if ( isset ( $wp_styles->registered['gforms_formsmain_css'] ) ) {
+		if ( isset( $wp_styles->registered['gforms_formsmain_css'] ) ) {
 			unset( $wp_styles->registered['gforms_formsmain_css'] );
 		}
 	}
