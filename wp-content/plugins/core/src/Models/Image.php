@@ -135,11 +135,14 @@ class Image extends Model {
 				$match = false;
 			}
 
-			$sizes[ $size ] = new Image_Derivative( $size, $src[0], // src
+			$sizes[ $size ] = new Image_Derivative(
+				$size,
+				$src[0], // src
 				$src[1], // width
 				$src[2], // height
 				(bool) $src[3], // is_intermediate
-				$match );
+				$match
+			);
 		}
 
 		wp_cache_set( $attachment_id, serialize( $sizes ), self::CACHE_GROUP, HOUR_IN_SECONDS );
