@@ -3,16 +3,12 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Blocks\Types\Links;
 
-// use Tribe\Project\Blocks\Types\Accordion\Accordion as Accordion_Block;
 use Tribe\Project\Blocks\Types\Links\Links as Links_Block;
 use Tribe\Project\Controllers\Blocks\Block_Controller;
-use Tribe\Project\Blocks\Types\Accordion\Support\Accordion_Section as Accordion_Section_Block;
-use Tribe\Project\Blocks\Types\Button as Button_Block;
-use Tribe\Project\Templates\Components\Accordion as Accordion_Component; // Now Container
 use Tribe\Project\Templates\Components\Content_Block;
 use Tribe\Project\Templates\Components\Panels\Links as Container;
 use Tribe\Project\Templates\Components\Text;
-use Tribe\Project\Templates\Components\Button;
+use Tribe\Project\Templates\Components\Link;
 
 class Controller extends Block_Controller {
 
@@ -25,7 +21,7 @@ class Controller extends Block_Controller {
 			Container::LAYOUT            => $this->get_layout(),
 			Container::CONTAINER_CLASSES => $this->get_container_classes(),
 			Container::HEADER            => $this->get_header(),
-			// Container::CONTENT           => $this->get_links( $this->attributes ),
+			Container::LINKS             => $this->get_links( $this->attributes ),
 		];
 
 		$this->render_component( 'panels/links/Links.php', $args );
@@ -79,25 +75,21 @@ class Controller extends Block_Controller {
 		];
 	}
 
-//	protected function get_links( array $attributes ): array {
-//		return [
-//			Container::ROWS => $this->get_rows( $attributes ),
-//		];
-//	}
-//
-//	protected function get_rows( array $attributes ): array {
-//		$rows = $attributes[ Links_Block::LINKS ];
-//
-//		if ( empty( $rows ) ) {
-//			return [];
-//		}
-//
-//		return array_map( function ( $row ) {
-//			return [
-//				// Button::LINK => $row[ Button_Block::LINK ] ?? '',
-//				Button::CLASSES => [ 'c-btn', 'c-btn-primary' ],
-//				Button::ARIA_LABEL => $row[ Button_Block::ARIA ] ?? '',
-//			];
-//		}, $rows );
-//	}
+	protected function get_links( array $attributes ): array {
+		$rows = $attributes[ Links_Block::LINKS ];
+
+		if ( empty( $rows ) ) {
+			return [];
+		}
+
+		return array_map( function ( $row ) {
+			return [
+				Link::URL     => $row['url'] ?? '',
+				Link::CONTENT => $row['text'] ?? $row['url'],
+				Link::TARGET  => $row['target'],
+				Link::CLASSES => [ 'a-btn', 'a-btn--has-icon-after', 'icon-arrow-right' ],
+				// 'content'     => implode( "\n", wp_list_pluck( $row[ Accordion_Section_Block::CONTENT ] ?? [], 'content' ) ),
+			];
+		}, $rows );
+	}
 }

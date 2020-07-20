@@ -7,7 +7,6 @@ use Tribe\Gutenpanels\Blocks\Block_Type_Interface;
 use Tribe\Gutenpanels\Blocks\Sections\Content_Section;
 use Tribe\Gutenpanels\Blocks\Sections\Toolbar_Section;
 use Tribe\Project\Blocks\Block_Type_Config;
-use Tribe\Project\Blocks\Types\Button;
 
 class Links extends Block_Type_Config {
 	public const NAME = 'tribe/links';
@@ -15,6 +14,7 @@ class Links extends Block_Type_Config {
 	public const TITLE       = 'title';
 	public const DESCRIPTION = 'description';
 	public const LINKS       = 'links';
+	public const LINK_ITEM   = 'link_item';
 
 	public const LAYOUT         = 'layout';
 	public const LAYOUT_INLINE  = 'layout-inline';
@@ -28,7 +28,7 @@ class Links extends Block_Type_Config {
 	         ->add_data_source( 'className-c-panel', self::LAYOUT )
 	         ->add_toolbar_section( $this->layout_toolbar() )
 	         ->add_content_section( $this->content_area() )
-	         //->add_content_section( $this->links_area() )
+	         // ->add_content_section( $this->links_area() )
 	         ->build();
 	}
 
@@ -56,10 +56,14 @@ class Links extends Block_Type_Config {
 //			->add_field(
 //			$this->factory->content()->field()->flexible_container( self::LINKS )
 //				->set_label( __( 'Links', 'tribe' ) )
-//				->merge_nested_attributes( Button::NAME )
-//				->add_template_block( Button::NAME )
-//				->add_block_type( Button::NAME )
 //				->set_min_blocks( 1 )
+//				->set_max_blocks( 4 )
+//				->add_field(
+//					$this->factory->content()->field()->link( self::LINK_ITEM )
+//					              ->set_label( __( 'Call to Action', 'tribe' ) )
+//					              ->add_class( 'a-btn a-btn--has-icon-after icon-arrow-right' )
+//					              ->build()
+//				)
 //				->build()
 //			)
 //			->build();
