@@ -15,6 +15,7 @@ class Links extends Block_Type_Config {
 	public const DESCRIPTION = 'description';
 	public const LINKS       = 'links';
 	public const LINK_ITEM   = 'link_item';
+	public const LINKS_TITLE = 'links_title';
 
 	public const LAYOUT         = 'layout';
 	public const LAYOUT_INLINE  = 'layout-inline';
@@ -28,7 +29,7 @@ class Links extends Block_Type_Config {
 	         ->add_data_source( 'className-c-panel', self::LAYOUT )
 	         ->add_toolbar_section( $this->layout_toolbar() )
 	         ->add_content_section( $this->content_area() )
-	         // ->add_content_section( $this->links_area() )
+	         ->add_content_section( $this->links_area() )
 	         ->build();
 	}
 
@@ -50,24 +51,26 @@ class Links extends Block_Type_Config {
 			->build();
 	}
 
-//	private function links_area(): Content_Section {
-//		return $this->factory->content()->section()
-//			->add_class( 'links__content' )
+	private function links_area(): Content_Section {
+		return $this->factory->content()->section()
+			->add_class( 'links__content' )
+			->add_field(
+				$this->factory->content()->field()->text( self::LINKS_TITLE )
+				              ->set_label( __( 'List Title', 'tribe' ) )
+				              ->add_class( 'links__list-title h5' )
+				              ->build()
+			)
 //			->add_field(
-//			$this->factory->content()->field()->flexible_container( self::LINKS )
-//				->set_label( __( 'Links', 'tribe' ) )
-//				->set_min_blocks( 1 )
-//				->set_max_blocks( 4 )
-//				->add_field(
-//					$this->factory->content()->field()->link( self::LINK_ITEM )
-//					              ->set_label( __( 'Call to Action', 'tribe' ) )
-//					              ->add_class( 'a-btn a-btn--has-icon-after icon-arrow-right' )
-//					              ->build()
-//				)
-//				->build()
+//				$this->factory->content()->field()->flexible_container( self::LINKS )
+//					->set_label( __( 'Links', 'tribe' ) )
+//					->add_template_block( 'tribe/link' )
+//					->merge_nested_attributes( 'tribe/link' )
+//					->add_block_type( 'tribe/link' )
+//					->set_min_blocks( 1 )
+//					->build()
 //			)
-//			->build();
-//	}
+			->build();
+	}
 
 	private function layout_toolbar(): Toolbar_Section {
 		return $this->factory->toolbar()->section()

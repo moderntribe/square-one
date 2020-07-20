@@ -31,7 +31,7 @@
 	.c-panel--layout-inline & {
 		@media (--viewport-full) {
 			margin-bottom: 0;
-			width: var(--grid-5-col);
+			width: var(--grid-7-col);
 		}
 	}
 }
@@ -52,7 +52,61 @@
 	/* CASE: Accordion: Inline */
 	.c-panel--layout-inline & {
 		@media (--viewport-full) {
-			width: var(--grid-7-col);
+			width: var(--grid-5-col);
 		}
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Links: List
+ * ----------------------------------------------------------------------------- */
+
+.links__list {
+
+	li {
+		border-bottom: 1px solid var(--color-neutral-10);
+
+		&:last-child {
+			border-bottom: none;
+		}
+	}
+
+	a {
+		text-decoration: none;
+	}
+}
+
+.links__list-link {
+	display: block;
+	position: relative;
+	padding: var(--spacer-40) 0 var(--spacer-40) 28px;
+	background: none;
+	border: 0;
+	color: var(--color-primary);
+	font-size: 18px;
+	line-height: 1.555;
+	width: 100%;
+	text-align: left;
+
+	&:before {
+		@mixin icon;
+
+		position: absolute;
+		left: 0;
+		top: 28px;
+		display: block;
+		color: currentColor;
+		content: var(--icon-chevron-right);
+		font-family: var(--font-family-core-icons);
+		font-size: var(--font-size-body-large);
+		line-height: 1.8;
+		text-align: center;
+		transition: var(--transition);
+	}
+
+	&:focus,
+	&:hover {
+		color: var(--color-secondary);
+		transition: var(--transition);
 	}
 }

@@ -22,6 +22,7 @@ class Controller extends Block_Controller {
 			Container::CONTAINER_CLASSES => $this->get_container_classes(),
 			Container::HEADER            => $this->get_header(),
 			Container::LINKS             => $this->get_links( $this->attributes ),
+			Container::LINKS_TITLE       => $this->get_links_title(),
 		];
 
 		$this->render_component( 'panels/links/Links.php', $args );
@@ -57,6 +58,7 @@ class Controller extends Block_Controller {
 			Content_Block::CLASSES => [ 'links__header' ],
 			Content_Block::TITLE   => $this->get_title(),
 			Content_Block::TEXT    => $this->get_description(),
+			Content_Block::LAYOUT  => $this->get_layout() === Links_Block::LAYOUT_STACKED ? Content_Block::LAYOUT_INLINE : Content_Block::LAYOUT_LEFT,
 		];
 	}
 
@@ -72,6 +74,18 @@ class Controller extends Block_Controller {
 		return [
 			Text::CLASSES => [ 'links__description', 't-sink', 's-sink' ],
 			Text::TEXT    => $this->attributes[ Links_Block::DESCRIPTION ] ?? '',
+		];
+	}
+
+	private function get_links_title(): array {
+		if ( empty( $this->attributes[ Links_Block::LINKS_TITLE ] ) ) {
+			return [];
+		}
+
+		return  [
+			Text::TAG     => 'h3',
+			Text::CLASSES => [ 'links__list-title', 'h5' ],
+			Text::TEXT    => $this->attributes[ Links_Block::LINKS_TITLE ] ?? '',
 		];
 	}
 

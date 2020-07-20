@@ -26,6 +26,7 @@ class Links extends Component {
 	public const CLASSES           = 'classes';
 	public const ATTRS             = 'attrs';
 	public const LINKS             = 'links';
+	public const LINKS_TITLE       = 'links_title';
 
 	protected function defaults(): array {
 		return [
@@ -36,6 +37,7 @@ class Links extends Component {
 			self::CLASSES           => [ 'c-panel', 'c-panel--links' ],
 			self::ATTRS             => [],
 			self::LINKS             => [],
+			self::LINKS_TITLE       => '',
 		];
 	}
 

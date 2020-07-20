@@ -5,11 +5,22 @@
 		{{ component( 'content-block/Content_Block.php', header ) }}
 
 		<div {{ content_classes|stringify }}>
+			{% if links_title %}
+				{{ component( 'text/Text.php', links_title ) }}
+			{% endif %}
+			<ul class="links__list">
+				<li class="links__list-item"><a href="" class="links__list-link">Hundreds of thousands of something incredible</a></li>
+				<li class="links__list-item"><a href="" class="links__list-link">Vastness is bearable only through love two ghostly</a></li>
+				<li class="links__list-item"><a href="" class="links__list-link">Two ghostly white figures in coveralls and helmets</a></li>
+				<li class="links__list-item"><a href="" class="links__list-link">Tunguska event realm of the galaxies the sky calls to us hearts of the stars permanence</a></li>
+			</ul>
+			{#
 			{% for link in links %}
-				<div class="links__row">
+				<ul class="links__row">
 					{{ component( 'link/Link.php', link ) }}
-				</div>
+				</ul>
 			{% endfor %}
+			#}
 		</div>
 
 	</div>
