@@ -49,4 +49,15 @@ a {
 		outline: none;
 		text-decoration-color: inherit;
 	}
+
+	/* CASE: light theme */
+	.t-theme--light & {
+		color: var(--color-white);
+
+		&:focus,
+		&:active,
+		&:hover {
+			color: var(--color-primary-30);
+		}
+	}
 }

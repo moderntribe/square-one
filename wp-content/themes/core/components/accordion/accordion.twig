@@ -8,7 +8,7 @@
 >
 	{% for row in rows %}
 		<article {{ row_classes|stringify }}>
-			<button
+			<{{ row_header_tag }}><button
 				aria-controls="{{ row.content_id|esc_attr }}"
 				aria-expanded="false"
 				aria-selected="false"
@@ -26,8 +26,9 @@
 				>
 					{{ row.header_text }}
 				</span>
-			</button>
+			</button></{{ row_header_tag }}>
 			<div
+				hidden
 				aria-hidden="true"
 				aria-labelledby="{{ row.header_id|esc_attr }}"
 				{{ row_content_classes|stringify }}
