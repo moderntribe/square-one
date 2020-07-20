@@ -2,4 +2,5 @@
 
 namespace Tribe\Project\Templates\Components\Page;
 
-class Search extends Index {}
+class Search extends Index {
+}
