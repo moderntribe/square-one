@@ -58,7 +58,7 @@ class Controller extends Block_Controller {
 			Content_Block::CLASSES => [ 'links__header' ],
 			Content_Block::TITLE   => $this->get_title(),
 			Content_Block::TEXT    => $this->get_description(),
-			Content_Block::LAYOUT  => $this->get_layout() === Links_Block::LAYOUT_STACKED ? Content_Block::LAYOUT_INLINE : Content_Block::LAYOUT_LEFT,
+			Content_Block::LAYOUT  => Content_Block::LAYOUT_STACKED,
 		];
 	}
 
