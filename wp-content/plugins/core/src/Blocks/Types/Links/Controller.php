@@ -5,6 +5,7 @@ namespace Tribe\Project\Blocks\Types\Links;
 
 use Tribe\Project\Blocks\Types\Links\Links as Links_Block;
 use Tribe\Project\Controllers\Blocks\Block_Controller;
+use Tribe\Project\Blocks\Types\Links\Support\Link as Link_Block;
 use Tribe\Project\Templates\Components\Content_Block;
 use Tribe\Project\Templates\Components\Panels\Links as Container;
 use Tribe\Project\Templates\Components\Text;
@@ -98,11 +99,10 @@ class Controller extends Block_Controller {
 
 		return array_map( function ( $row ) {
 			return [
-				Link::URL     => $row['url'] ?? '',
-				Link::CONTENT => $row['text'] ?? $row['url'],
-				Link::TARGET  => $row['target'],
-				Link::CLASSES => [ 'a-btn', 'a-btn--has-icon-after', 'icon-arrow-right' ],
-				// 'content'     => implode( "\n", wp_list_pluck( $row[ Accordion_Section_Block::CONTENT ] ?? [], 'content' ) ),
+				Link::URL     => $row[ Link_Block::LINK ]['url'] ?? '',
+				Link::CONTENT => $row[ Link_Block::LINK ]['text'] ?? $row[ Link_Block::LINK ]['url'],
+				Link::TARGET  => $row[ Link_Block::LINK ]['target'],
+				Link::CLASSES => [ 'links__list-link' ],
 			];
 		}, $rows );
 	}

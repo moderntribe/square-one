@@ -7,6 +7,7 @@ use Tribe\Gutenpanels\Blocks\Block_Type_Interface;
 use Tribe\Gutenpanels\Blocks\Sections\Content_Section;
 use Tribe\Gutenpanels\Blocks\Sections\Toolbar_Section;
 use Tribe\Project\Blocks\Block_Type_Config;
+use Tribe\Project\Blocks\Types\Links\Support\Link;
 
 class Links extends Block_Type_Config {
 	public const NAME = 'tribe/links';
@@ -60,15 +61,15 @@ class Links extends Block_Type_Config {
 				              ->add_class( 'links__list-title h5' )
 				              ->build()
 			)
-//			->add_field(
-//				$this->factory->content()->field()->flexible_container( self::LINKS )
-//					->set_label( __( 'Links', 'tribe' ) )
-//					->add_template_block( 'tribe/link' )
-//					->merge_nested_attributes( 'tribe/link' )
-//					->add_block_type( 'tribe/link' )
-//					->set_min_blocks( 1 )
-//					->build()
-//			)
+			->add_field(
+				$this->factory->content()->field()->flexible_container( self::LINKS )
+					->set_label( __( 'Links List', 'tribe' ) )
+					->merge_nested_attributes( Link::NAME )
+					->add_template_block( Link::NAME )
+					->add_block_type( Link::NAME )
+					->set_min_blocks( 1 )
+					->build()
+			)
 			->build();
 	}
 
