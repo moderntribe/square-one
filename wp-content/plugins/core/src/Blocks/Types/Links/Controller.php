@@ -4,12 +4,12 @@ declare( strict_types=1 );
 namespace Tribe\Project\Blocks\Types\Links;
 
 use Tribe\Project\Blocks\Types\Links\Links as Links_Block;
-use Tribe\Project\Controllers\Blocks\Block_Controller;
 use Tribe\Project\Blocks\Types\Links\Support\Link as Link_Block;
+use Tribe\Project\Controllers\Blocks\Block_Controller;
 use Tribe\Project\Templates\Components\Content_Block;
+use Tribe\Project\Templates\Components\Link;
 use Tribe\Project\Templates\Components\Panels\Links as Container;
 use Tribe\Project\Templates\Components\Text;
-use Tribe\Project\Templates\Components\Link;
 
 class Controller extends Block_Controller {
 
@@ -36,13 +36,13 @@ class Controller extends Block_Controller {
 	private function get_container_classes(): array {
 		$classes = [
 			'links__container',
-			'l-container'
+			'l-container',
 		];
 
 		if ( $this->get_layout() === Links_Block::LAYOUT_STACKED ) {
 			$classes = [
 				'l-sink',
-				'l-sink--double'
+				'l-sink--double',
 			];
 		}
 
@@ -64,7 +64,7 @@ class Controller extends Block_Controller {
 	}
 
 	private function get_title(): array {
-		return  [
+		return [
 			Text::TAG     => 'h2',
 			Text::CLASSES => [ 'links__title', 'h3' ],
 			Text::TEXT    => $this->attributes[ Links_Block::TITLE ] ?? '',
@@ -83,7 +83,7 @@ class Controller extends Block_Controller {
 			return [];
 		}
 
-		return  [
+		return [
 			Text::TAG     => 'h3',
 			Text::CLASSES => [ 'links__list-title', 'h5' ],
 			Text::TEXT    => $this->attributes[ Links_Block::LINKS_TITLE ] ?? '',
@@ -91,7 +91,7 @@ class Controller extends Block_Controller {
 	}
 
 	protected function get_links( array $attributes ): array {
-		$rows = array_filter( $attributes[ Links_Block::LINKS ], function( $row ) {
+		$rows = array_filter( $attributes[ Links_Block::LINKS ], function ( $row ) {
 			return array_key_exists( Link_Block::LINK, $row );
 		} );
 
