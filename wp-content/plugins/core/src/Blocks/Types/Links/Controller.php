@@ -91,7 +91,9 @@ class Controller extends Block_Controller {
 	}
 
 	protected function get_links( array $attributes ): array {
-		$rows = $attributes[ Links_Block::LINKS ];
+		$rows = array_filter( $attributes[ Links_Block::LINKS ], function( $row ) {
+			return array_key_exists( Link_Block::LINK, $row );
+		} );
 
 		if ( empty( $rows ) ) {
 			return [];
@@ -101,7 +103,7 @@ class Controller extends Block_Controller {
 			return [
 				Link::URL     => $row[ Link_Block::LINK ]['url'] ?? '',
 				Link::CONTENT => $row[ Link_Block::LINK ]['text'] ?? $row[ Link_Block::LINK ]['url'],
-				Link::TARGET  => $row[ Link_Block::LINK ]['target'],
+				Link::TARGET  => $row[ Link_Block::LINK ]['target'] ?? '',
 				Link::CLASSES => [ 'links__list-link' ],
 			];
 		}, $rows );
