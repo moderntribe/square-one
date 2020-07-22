@@ -30,7 +30,7 @@ class Controller extends Block_Controller {
 	}
 
 	private function get_layout(): string {
-		return $this->attributes[ Links_Block::LAYOUT ] ?? Links_Block::LAYOUT_STACKED;
+		return $this->attributes[ Links_Block::LAYOUT ] ?? Links_Block::LAYOUT_INLINE;
 	}
 
 	private function get_container_classes(): array {
@@ -38,13 +38,6 @@ class Controller extends Block_Controller {
 			'links__container',
 			'l-container',
 		];
-
-		if ( $this->get_layout() === Links_Block::LAYOUT_STACKED ) {
-			$classes = [
-				'l-sink',
-				'l-sink--double',
-			];
-		}
 
 		return $classes;
 	}

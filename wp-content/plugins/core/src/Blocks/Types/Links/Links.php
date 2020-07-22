@@ -54,7 +54,7 @@ class Links extends Block_Type_Config {
 
 	private function links_area(): Content_Section {
 		return $this->factory->content()->section()
-			->add_class( 'links__content' )
+			->add_class( 'links__content links__list' )
 			->add_field(
 				$this->factory->content()->field()->text( self::LINKS_TITLE )
 				              ->set_label( __( 'List Title', 'tribe' ) )

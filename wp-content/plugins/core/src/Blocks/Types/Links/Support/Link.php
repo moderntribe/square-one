@@ -19,7 +19,6 @@ class Link extends Block_Type_Config {
 			->set_dashicon( 'menu-alt' )
 			->set_parents( Links::NAME )
 			->add_content_section( $this->content_area() )
-			->add_class( 'links__list' )
 			->build();
 	}
 
@@ -29,7 +28,7 @@ class Link extends Block_Type_Config {
 			->add_class( 'links__list-item' )
 			->add_field(
 				$this->factory->content()->field()->link( self::LINK )
-					->add_class( 'c-link-list__link' )
+					->add_class( 'links__list-link' )
 					->build()
 			)
 			->build();

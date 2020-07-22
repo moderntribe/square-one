@@ -6,36 +6,6 @@
 
 .c-panel--links {
 
-	/* CASE: Inline (default) */
-
-
-	/* CASE: Contents are inline (floated) */
-	&.c-panel--layout-stacked {
-
-		.c-content-block__title {
-			@media (--viewport-medium) {
-				float: left;
-				clear: left;
-				width: calc(50% - var(--grid-gutter-medium-half));
-			}
-
-			@media (--viewport-full) {
-				width: calc(66.6667% - var(--grid-gutter-half));
-			}
-		}
-
-		.c-content-block__text {
-			@media (--viewport-medium) {
-				float: right;
-				width: calc(50% - var(--grid-gutter-medium-half));
-				margin-top: 0;
-			}
-
-			@media (--viewport-full) {
-				width: calc(33.3333% - var(--grid-gutter-half));
-			}
-		}
-	}
 }
 
 /* -----------------------------------------------------------------------------
@@ -43,8 +13,8 @@
  * ----------------------------------------------------------------------------- */
 
 .links__container {
-	/* CASE: Accordion: Inline */
-	.c-panel--layout-inline & {
+	/* CASE: Links Inline (default) */
+	.c-panel:not(.c-panel--layout-stacked) & {
 		@media (--viewport-full) {
 			display: flex;
 			justify-content: space-between;
@@ -57,13 +27,38 @@
  * ----------------------------------------------------------------------------- */
 
 .links__header {
-	margin-bottom: var(--spacer-40);
+	/* CASE: Links Inline (default) */
+	.c-panel:not(.c-panel--layout-stacked) & {
+		margin-bottom: var(--spacer-20);
 
-	/* CASE: Accordion: Inline */
-	.c-panel--layout-inline & {
 		@media (--viewport-full) {
 			margin-bottom: 0;
-			width: var(--grid-7-col);
+			padding-right: var(--grid-gutter);
+			max-width: var(--grid-7-col);
+			width: calc(58.3333% + var(--grid-gutter));
+		}
+	}
+
+	/* CASE: Links Stacked: Content Block elements are inline (floated) */
+	.c-panel--layout-stacked & {
+		@mixin clearfix;
+
+		margin-bottom: var(--spacer-60);
+		max-width: none;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Links: Title
+ * ----------------------------------------------------------------------------- */
+
+.links__title {
+	/* CASE: Links Stacked: Content Block elements are inline (floated) */
+	.c-panel--layout-stacked & {
+		@media (--viewport-full) {
+			float: left;
+			clear: left;
+			width: calc(58.3333% - var(--grid-gutter-half));
 		}
 	}
 }
@@ -74,6 +69,19 @@
 
 .links__description {
 	margin-top: var(--spacer-20);
+
+	> p {
+		@mixin t-body-large;
+	}
+
+	/* CASE: Links Stacked: Content Block elements are inline (floated) */
+	.c-panel--layout-stacked & {
+		@media (--viewport-full) {
+			float: right;
+			margin-top: 0;
+			width: calc(41.6667% - var(--grid-gutter-half));
+		}
+	}
 }
 
 /* -----------------------------------------------------------------------------
@@ -81,10 +89,12 @@
  * ----------------------------------------------------------------------------- */
 
 .links__content {
-	/* CASE: Accordion: Inline */
-	.c-panel--layout-inline & {
+	/* CASE: Links Inline (default) */
+	.c-panel:not(.c-panel--layout-stacked) & {
 		@media (--viewport-full) {
-			width: var(--grid-5-col);
+			padding-left: var(--grid-gutter);
+			max-width: var(--grid-4-col);
+			width: calc(33.3333% + var(--grid-gutter));
 		}
 	}
 }
@@ -93,39 +103,48 @@
  * Links: List
  * ----------------------------------------------------------------------------- */
 
-.links__list {
+.links__list-title {
+	/* CASE: Links Inline (default) */
+	.c-panel:not(.c-panel--layout-stacked) & {
+		margin-bottom: var(--spacer-10);
+	}
+}
 
-	li {
+.links__list {
+	/* CASE: Links Stacked */
+	.c-panel--layout-stacked & li {
 		border-bottom: 1px solid var(--color-neutral-10);
 
 		&:last-child {
-			border-bottom: none;
+			border-bottom: 0;
 		}
-	}
-
-	a {
-		text-decoration: none;
 	}
 }
 
 .links__list-link {
+	@mixin t-text-button;
+
 	display: block;
 	position: relative;
-	padding: var(--spacer-40) 0 var(--spacer-40) 28px;
-	background: none;
-	border: 0;
-	color: var(--color-primary);
-	font-size: 18px;
-	line-height: 1.555;
-	width: 100%;
-	text-align: left;
+	padding: var(--spacer-10) 0 var(--spacer-10) 28px;
+	transition: var(--transition);
+
+	.c-panel--links & {
+		color: var(--color-primary);
+		text-decoration: none;
+
+		&:focus,
+		&:hover {
+			color: var(--color-secondary);
+		}
+	}
 
 	&:before {
 		@mixin icon;
 
 		position: absolute;
 		left: 0;
-		top: 28px;
+		top: 4px;
 		display: block;
 		color: currentColor;
 		content: var(--icon-chevron-right);
@@ -136,9 +155,12 @@
 		transition: var(--transition);
 	}
 
-	&:focus,
-	&:hover {
-		color: var(--color-secondary);
-		transition: var(--transition);
+	/* CASE: Links Stacked */
+	.c-panel--layout-stacked & {
+		padding: var(--spacer-40) 0 var(--spacer-40) 28px;
+
+		&:before {
+			top: 28px;
+		}
 	}
 }
