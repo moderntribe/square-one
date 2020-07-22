@@ -22,6 +22,14 @@ class Form_Styles {
 	}
 
 	/**
+	 * @return string
+	 * @filter pre_option_rg_gforms_disable_css
+	 */
+	public function disable_gravity_forms_css(): string {
+		return '1';
+	}
+
+	/**
 	 * Dequeue styles for formsmain on Gravity Forms.
 	 * This prevents GF styles from interferring with our sink form styles.
 	 *
