@@ -42,6 +42,8 @@ class Blocks_Definer implements Definer_Interface {
 
 				DI\get( Types\Interstitial\Interstitial::class ),
 
+				DI\get( Types\Lead_Form\Lead_Form::class ),
+
 				DI\get( Types\Media_Text\Media_Text::class ),
 				DI\get( Types\Media_Text\Support\Media_Text_Media::class ),
 				DI\get( Types\Media_Text\Support\Media_Text_Media_Embed::class ),
