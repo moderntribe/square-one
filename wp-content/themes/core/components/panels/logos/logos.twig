@@ -7,7 +7,7 @@
 		{% if logos %}
 			<ul {{ content_classes|stringify }}>
 				{% for logo in logos %}
-					<li class="logos__list-item">
+					<li class="logo">
 						{{ component( 'image/Image.php', logo ) }}
 					</li>
 				{% endfor %}

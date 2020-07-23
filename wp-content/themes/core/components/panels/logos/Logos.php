@@ -35,4 +35,8 @@ class Logos extends Component {
 		];
 	}
 
+	public function init() {
+		$this->data[ self::CONTENT_CLASSES ][] = sprintf( 'logos--count-%d', count( $this->data[ self::LOGOS ] ) );
+	}
+
 }

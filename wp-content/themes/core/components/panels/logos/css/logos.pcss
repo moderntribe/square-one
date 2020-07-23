@@ -7,5 +7,97 @@
 .c-panel--logos {}
 
 /* -----------------------------------------------------------------------------
- *
+ * Logos Block Header
  * ----------------------------------------------------------------------------- */
+
+.logos__header {
+	margin-bottom: var(--spacer-50);
+
+	@media (--viewport-medium) {
+		margin-bottom: var(--spacer-70);
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Logo List
+ * ----------------------------------------------------------------------------- */
+
+.logos__list {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;
+	margin: calc(-1 * var(--spacer-30)) var(--grid-gutter-small-half-negative);
+
+	@media (--viewport-medium) {
+		margin: calc(-1 * var(--spacer-30)) var(--grid-gutter-medium-half-negative);
+	}
+
+	@media (--viewport-full) {
+		margin: calc(-1 * var(--spacer-40)) var(--grid-gutter-half-negative);
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Logo List Item
+ * ----------------------------------------------------------------------------- */
+
+.logo {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 50%;
+	padding: var(--spacer-30) var(--grid-gutter-small-half);
+
+	@media (--viewport-medium) {
+		width: 25%;
+		padding: var(--spacer-30) var(--grid-gutter-medium-half);
+	}
+
+	@media (--viewport-full) {
+		padding: var(--spacer-40) var(--grid-gutter-half);
+	}
+
+	/* CASE: 4th logo in a set of 5 gets bummed to the next row to avoid leaving a single logo hanging. */
+	.logos--count-5 &:nth-child(4) {
+		@media (--viewport-medium) {
+			width: calc(25% + 1px);
+		}
+	}
+
+	/* CASE: 8th logo in a set of 9 gets bummed to the next row to avoid leaving a single logo hanging. */
+	.logos--count-9 &:nth-child(8) {
+		@media (--viewport-medium) {
+			width: calc(25% + 1px);
+		}
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Logo Link
+ * ----------------------------------------------------------------------------- */
+
+a.logo__link {
+	display: block;
+
+	&:hover {
+		opacity: 0.5;
+	}
+
+	&:focus {
+		outline: 1px dotted;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Logo Image
+ * ----------------------------------------------------------------------------- */
+
+.logo__img {
+	display: block;
+	max-height: 110px;
+
+	/* HACK: The current iteration of the image component doesn't output any width or height attributes for SVGs. */
+	&[src$=".svg"] {
+		width: 100%;
+	}
+}
