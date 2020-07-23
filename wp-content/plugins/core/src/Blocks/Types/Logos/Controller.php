@@ -28,55 +28,70 @@ class Controller extends Block_Controller {
 		$this->render_component( 'panels/logos/Logos.php', $args );
 	}
 
+	/**
+	 * @return array
+	 */
 	private function get_logos(): array {
-		if ( empty( $this->attributes[ Logos_Block::LOGOS ] ) ) {
-			return [];
+		$logos = [];
+
+		foreach ( $this->attributes[ Logos_Block::LOGOS ] as $logo_block ) {
+			// Don't add a logo if there's no image set in the block.
+			if ( empty( $logo_block[ Logo::IMAGE ] ) ) {
+				continue;
+			}
+
+			$logos[] = $this->get_single_logo( $logo_block );
 		}
 
-		return array_map( function ( $logo ) {
-			if ( empty( $logo[ Logo::IMAGE ] ) ) {
-				return [];
-			}
+		return $logos;
+	}
 
-			$logo_row = [
-				Image_Component::ATTACHMENT      => Image::factory( (int) $logo[ Logo::IMAGE ]['id'] ),
-				Image_Component::USE_LAZYLOAD    => true,
-				Image_Component::WRAPPER_CLASSES => [ 'logo__figure' ],
-				Image_Component::IMG_CLASSES     => [ 'logo__img' ],
-				Image_Component::SRC_SIZE        => 'large',
-				Image_Component::SRCSET_SIZES    => [ 'medium', 'large' ],
-			];
+	/**
+	 * @param array $logo_block
+	 *
+	 * @return array
+	 */
+	private function get_single_logo( array $logo_block ): array {
+		$logo = [
+			Image_Component::ATTACHMENT      => Image::factory( (int) $logo_block[ Logo::IMAGE ]['id'] ),
+			Image_Component::USE_LAZYLOAD    => true,
+			Image_Component::WRAPPER_CLASSES => [ 'logo__figure' ],
+			Image_Component::IMG_CLASSES     => [ 'logo__img' ],
+			Image_Component::SRC_SIZE        => 'large',
+			Image_Component::SRCSET_SIZES    => [ 'medium', 'large' ],
+		];
 
-			$link = wp_parse_args( $logo[ Logo::LINK ] ?? [], [
-				'text'   => '',
-				'url'    => '',
-				'target' => '',
-			] );
+		$link = wp_parse_args( $logo_block[ Logo::LINK ] ?? [], [
+			'text'   => '',
+			'url'    => '',
+			'target' => '',
+		] );
 
-			if ( ! empty( $logo[ Logo::LINK ]['url'] ) ) {
-				$logo_row[ Image_Component::LINK_URL ]     = $link['url'];
-				$logo_row[ Image_Component::LINK_TARGET ]  = $link['target'];
-				$logo_row[ Image_Component::LINK_CLASSES ] = [ 'logo__link' ];
-				$logo_row[ Image_Component::LINK_ATTRS ]   = ! empty( $link['text'] ) ? [ 'aria-label' => $link['text'] ] : [];
-			}
+		if ( ! empty( $link['url'] ) ) {
+			$logo[ Image_Component::LINK_URL ]     = $link['url'];
+			$logo[ Image_Component::LINK_TARGET ]  = $link['target'];
+			$logo[ Image_Component::LINK_CLASSES ] = [ 'logo__link' ];
+			$logo[ Image_Component::LINK_ATTRS ]   = ! empty( $link['text'] ) ? [ 'aria-label' => $link['text'] ] : [];
+		}
 
-			return $logo_row;
-		}, $this->attributes[ Logos_Block::LOGOS ] );
+		return $logo;
 	}
 
 	private function get_header(): array {
 		return [
-			Content_Block::CLASSES => [ 'logos__content-container' ],
+			Content_Block::TAG     => 'header',
+			Content_Block::CLASSES => [ 'logos__header' ],
 			Content_Block::TITLE   => $this->get_headline(),
 			Content_Block::TEXT    => $this->get_text(),
 			Content_Block::ACTION  => $this->get_cta(),
+			Content_Block::LAYOUT  => Content_Block::LAYOUT_CENTER,
 		];
 	}
 
 	private function get_headline(): array {
 		return [
 			Text::TAG     => 'h2',
-			Text::CLASSES => [ 'logos__title', 'h2' ],
+			Text::CLASSES => [ 'logos__title', 'h3' ],
 			Text::TEXT    => $this->attributes[ Logos_Block::TITLE ] ?? '',
 		];
 	}
