@@ -24,14 +24,14 @@ class Links extends Block_Type_Config {
 
 	public function build(): Block_Type_Interface {
 		return $this->factory->block( self::NAME )
-	         ->set_label( __( 'Links', 'tribe' ) )
-	         ->set_dashicon( 'menu-alt' )
-	         ->add_class( 'c-panel c-panel--links l-container' )
-	         ->add_data_source( 'className-c-panel', self::LAYOUT )
-	         ->add_toolbar_section( $this->layout_toolbar() )
-	         ->add_content_section( $this->content_area() )
-	         ->add_content_section( $this->links_area() )
-	         ->build();
+			->set_label( __( 'Links', 'tribe' ) )
+			->set_dashicon( 'menu-alt' )
+			->add_class( 'c-panel c-panel--links l-container' )
+			->add_data_source( 'className-c-panel', self::LAYOUT )
+			->add_toolbar_section( $this->layout_toolbar() )
+			->add_content_section( $this->content_area() )
+			->add_content_section( $this->links_area() )
+			->build();
 	}
 
 	private function content_area(): Content_Section {
@@ -57,9 +57,9 @@ class Links extends Block_Type_Config {
 			->add_class( 'links__content links__list' )
 			->add_field(
 				$this->factory->content()->field()->text( self::LINKS_TITLE )
-				              ->set_label( __( 'List Title', 'tribe' ) )
-				              ->add_class( 'links__list-title h5' )
-				              ->build()
+					->set_label( __( 'List Title', 'tribe' ) )
+					->add_class( 'links__list-title h5' )
+					->build()
 			)
 			->add_field(
 				$this->factory->content()->field()->flexible_container( self::LINKS )
