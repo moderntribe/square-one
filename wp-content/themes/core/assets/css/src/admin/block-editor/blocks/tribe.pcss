@@ -210,3 +210,45 @@
 		}
 	}
 }
+
+/* -----------------------------------------------------------------------------
+ * Panel: Links
+ *
+ * TEMP: Until we get a way to add a wrapper element around a field or section.
+ * TEMP: Until we get add_class for nested block fields.
+ * ----------------------------------------------------------------------------- */
+
+.wp-block[data-type="tribe/links"] {
+	/* CASE: Links: Inline */
+	.c-panel:not(.c-panel--layout-stacked) {
+		@media (--viewport-full) {
+			display: flex !important;
+			justify-content: space-between;
+		}
+	}
+
+	.links__title {
+		margin: 0;
+	}
+
+	.links__list-title {
+		margin-top: 0;
+	}
+
+	ul.links__list,
+	ul.links__list li {
+		margin: 0;
+	}
+
+	/* CASE: Links: Stacked */
+	.c-panel--layout-stacked {
+
+		.links__list-title {
+			margin-bottom: 0;
+		}
+
+		.block-editor-block-list__layout [data-type="tribe/links--link"] {
+			border-bottom: 1px solid var(--color-neutral-10);
+		}
+	}
+}
