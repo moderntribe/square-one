@@ -11,17 +11,15 @@ use Tribe\Project\Blocks\Block_Type_Config;
 class Lead_Form extends Block_Type_Config {
 	public const NAME = 'tribe/lead-form';
 
-	public const TITLE       = 'title';
-	public const DESCRIPTION = 'description';
-	public const FORM        = 'form';
-
-	public const LAYOUT         = 'layout';
-	public const LAYOUT_CENTER  = 'layout-center';
-	public const LAYOUT_LEFT    = 'layout-left';
-
-	public const WIDTH        = 'width';
-	public const WIDTH_GRID   = 'width-grid';
-	public const WIDTH_FULL   = 'width-full';
+	public const TITLE         = 'title';
+	public const DESCRIPTION   = 'description';
+	public const FORM          = 'form';
+	public const LAYOUT        = 'layout';
+	public const LAYOUT_CENTER = 'layout-center';
+	public const LAYOUT_LEFT   = 'layout-left';
+	public const WIDTH         = 'width';
+	public const WIDTH_GRID    = 'width-grid';
+	public const WIDTH_FULL    = 'width-full';
 
 	public function build(): Block_Type_Interface {
 		return $this->factory->block( self::NAME )
@@ -43,13 +41,13 @@ class Lead_Form extends Block_Type_Config {
 					->set_label( __( 'Title', 'tribe' ) )
 					->add_class( 'lead-form__title h3' )
 					->build()
-				)
+			)
 			->add_field(
 				$this->factory->content()->field()->richtext( self::DESCRIPTION )
 					->set_label( __( 'Description', 'tribe' ) )
 					->add_class( 'lead-form__description t-sink s-sink' )
 					->build()
-				)
+			)
 			// TODO: Add Gravity Forms form select field here?
 			->build();
 	}
@@ -72,5 +70,4 @@ class Lead_Form extends Block_Type_Config {
 			)
 			->build();
 	}
-
 }
