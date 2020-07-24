@@ -32,7 +32,7 @@ x-chrome: &chrome
 
 
 x-php: &php
-  image: moderntribe/squareone-php:74-2.0.1
+  image: moderntribe/squareone-php:74-2.1.1
   working_dir: /application
   user: "${SQ1_UID:-1000}:${SQ1_GID:-1000}"
   volumes:
