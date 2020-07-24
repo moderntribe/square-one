@@ -870,12 +870,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:moderntribe/gutenpanels.git",
-                "reference": "7a379630d272cf059c5046a7a00e4cdc5f38ed87"
+                "reference": "2fe33f13a07aeccb6d952b9dc3d24cf6b7503f9f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/gutenpanels/zipball/7a379630d272cf059c5046a7a00e4cdc5f38ed87",
-                "reference": "7a379630d272cf059c5046a7a00e4cdc5f38ed87",
+                "url": "https://api.github.com/repos/moderntribe/gutenpanels/zipball/2fe33f13a07aeccb6d952b9dc3d24cf6b7503f9f",
+                "reference": "2fe33f13a07aeccb6d952b9dc3d24cf6b7503f9f",
                 "shasum": ""
             },
             "require": {

@@ -28,5 +28,9 @@ class Gravity_Forms_Subscriber extends Abstract_Subscriber {
 		add_filter( 'gform_pre_render', function ( $form ) {
 			return $this->container->get( Form_Styles::class )->deactivate_gf_animations( $form );
 		} );
+
+		add_filter( 'pre_option_rg_gforms_disable_css', function () {
+			return $this->container->get( Form_Styles::class )->disable_gravity_forms_css();
+		}, 10, 0 );
 	}
 }
