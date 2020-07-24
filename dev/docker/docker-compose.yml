@@ -19,7 +19,7 @@ x-nginx: &nginx
     - ./nginx/fastcgi.conf:/etc/nginx/fastcgi_params
 
 
-x-memcache: &memcached
+x-memcached: &memcached
   image: memcached:alpine
 
 
