@@ -96,6 +96,7 @@ services:
       - chrome
     environment:
       - COMPOSER_ALLOW_SUPERUSER=1
+      - COMPOSER_MEMORY_LIMIT=-1
       - COMPOSER_HOME=/application/.composer
       - PAGER=more
       - PHP_IDE_CONFIG=serverName=square1test.tribe
