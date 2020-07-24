@@ -24,7 +24,6 @@ class Lead_Form extends Component {
 	public const CONTENT           = 'content';
 	public const FORM              = 'form';
 	public const CONTAINER_CLASSES = 'container_classes';
-	public const CONTENT_CLASSES   = 'content_classes';
 	public const FORM_CLASSES      = 'form_classes';
 	public const CLASSES           = 'classes';
 	public const ATTRS             = 'attrs';
@@ -34,9 +33,8 @@ class Lead_Form extends Component {
 			self::WIDTH             => Lead_Form_Block::WIDTH_GRID,
 			self::LAYOUT            => Lead_Form_Block::LAYOUT_CENTER,
 			self::CONTENT           => '',
-			self::FORM              => '',
+			self::FORM              => true,
 			self::CONTAINER_CLASSES => [ 'lead-form__container', ],
-			self::CONTENT_CLASSES   => [ 'lead-form__content' ],
 			self::FORM_CLASSES      => [ 'lead-form__form' ],
 			self::CLASSES           => [ 'c-panel', 'c-panel--lead-form' ],
 			self::ATTRS             => [],

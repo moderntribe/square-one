@@ -20,7 +20,6 @@ class Controller extends Block_Controller {
 			Container::WIDTH   => $this->get_width(),
 			Container::LAYOUT  => $this->get_layout(),
 			Container::CONTENT => $this->get_content(),
-			// Container::FORM    => false,
 		];
 
 		$this->render_component( 'panels/lead-form/Lead_Form.php', $args );
@@ -42,6 +41,7 @@ class Controller extends Block_Controller {
 		return [
 			Content_Block::TAG     => 'header',
 			Content_Block::CLASSES => [ 'lead-form__content' ],
+			Content_Block::LAYOUT  => $this->get_layout() === Lead_Form_Block::LAYOUT_CENTER ? Content_Block::LAYOUT_CENTER : Content_Block::LAYOUT_LEFT,
 			Content_Block::TITLE   => $this->get_title(),
 			Content_Block::TEXT    => $this->get_description(),
 		];
