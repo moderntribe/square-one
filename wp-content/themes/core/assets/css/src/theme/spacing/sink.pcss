@@ -78,9 +78,9 @@
 	 * Panels
 	 * ----------------------------------------------------------------------------- */
 
-	/* CASE: If a full-bleed panel is followed by a non-panel element,
+	/* CASE: If a full-bleed block is followed by a non-block element,
 	the following element should have some additional vertical spacing. */
-	.c-panel--full-bleed + *:not(.c-panel) {
+	.c-block--full-bleed + *:not(.c-block) {
 		margin-top: var(--spacer-60);
 
 		@media (--viewport-medium) {
@@ -88,9 +88,9 @@
 		}
 	}
 
-	/* CASE: If a non-panel element is followed by a full-bleed panel,
-	the panel should have some additional vertical spacing. */
-	*:not(.c-panel) + .c-panel--full-bleed {
+	/* CASE: If a non-block element is followed by a full-bleed block,
+	the block should have some additional vertical spacing. */
+	*:not(.c-block) + .c-block--full-bleed {
 		margin-top: var(--spacer-60);
 
 		@media (--viewport-medium) {

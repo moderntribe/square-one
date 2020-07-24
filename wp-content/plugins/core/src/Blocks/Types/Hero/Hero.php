@@ -25,8 +25,8 @@ class Hero extends Block_Type_Config {
 	public function build(): Block_Type_Interface {
 		return $this->factory->block( self::NAME )
 			->set_label( __( 'Hero', 'tribe' ) )
-			->add_class( 'c-panel c-panel--hero c-panel--full-bleed' )
-			->add_data_source( 'className-c-panel', self::LAYOUT )
+			->add_class( 'c-block c-panel--full-bleed b-hero' )
+			->add_data_source( 'className-c-block', self::LAYOUT )
 			->set_dashicon( 'menu-alt' )
 			->add_sidebar_section( $this->background_sidebar() )
 			->add_data_source( 'background-image', self::IMAGE ) /* TEMP until we get support for this on the HTML field. */
@@ -50,10 +50,10 @@ class Hero extends Block_Type_Config {
 	/* TODO: Enable this once the html field type get `set_data_source()` support
 	private function background_area(): Content_Section {
 		return $this->factory->content()->section()
-			->add_class( 'hero__figure' )
+			->add_class( 'b-hero__figure' )
 			->add_field(
 				$this->factory->content()->field()->html( 'bkgrd' )
-					->add_class( 'hero__img c-image__bg' )
+					->add_class( 'b-hero__img c-image__bg' )
 					->set_content( '<div></div>' )
 					->add_data_source( 'background-image', self::IMAGE )
 					->build()
@@ -63,31 +63,31 @@ class Hero extends Block_Type_Config {
 
 	private function content_area(): Content_Section {
 		return $this->factory->content()->section()
-			->add_class( 'hero__content hero__content-container t-theme--light' )
+			->add_class( 'b-hero__content b-hero__content-container t-theme--light' )
 			->add_field(
 				$this->factory->content()->field()->text( self::LEAD_IN )
 					->set_label( __( 'Lead-In', 'tribe' ) )
 					->set_placeholder( 'Lead-In or overline' )
-					->add_class( 'hero__leadin h6' )
+					->add_class( 'b-hero__leadin h6' )
 					->build()
 			)
 			->add_field(
 				$this->factory->content()->field()->text( self::TITLE )
 					->set_label( __( 'Headline', 'tribe' ) )
 					->set_placeholder( 'Headline' )
-					->add_class( 'hero__title h1' )
+					->add_class( 'b-hero__title h1' )
 					->build()
 			)
 			->add_field(
 				$this->factory->content()->field()->richtext( self::DESCRIPTION )
 					->set_label( __( 'Description', 'tribe' ) )
-					->add_class( 'hero__description t-sink s-sink' )
+					->add_class( 'b-hero__description t-sink s-sink' )
 					->build()
 			)
 			->add_field(
 				$this->factory->content()->field()->link( self::CTA )
 					->set_label( __( 'Call to Action', 'tribe' ) )
-					->add_class( 'test-hero__cta a-btn' )
+					->add_class( 'b-hero__cta a-btn' )
 					->build()
 			)
 			->build();

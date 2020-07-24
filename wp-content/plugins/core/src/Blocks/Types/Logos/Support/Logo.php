@@ -26,10 +26,10 @@ class Logo extends Block_Type_Config {
 
 	private function content_area(): Content_Section {
 		$image = $this->factory->content()->field()->image( self::IMAGE )
-					->add_class( 'logo__figure logo__img' );
+					->add_class( 'b-logo__figure b-logo__img' );
 
 		$link  = $this->factory->content()->field()->link( self::LINK )
-					->add_class( 'logo__link' );
+					->add_class( 'b-logo__link' );
 
 
 		return $this->factory->content()->section()

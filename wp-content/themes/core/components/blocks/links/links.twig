@@ -1,0 +1,22 @@
+{# Block: Links #}
+<section {{ classes|stringify }} {{ attrs|stringify }}>
+	<div {{ container_classes|stringify }}>
+
+		{{ component( 'content-block/Content_Block.php', header ) }}
+
+		<div {{ content_classes|stringify }}>
+			{% if links_title %}
+				{{ component( 'text/Text.php', links_title ) }}
+			{% endif %}
+
+			{% if links %}
+				<ul class="b-links__list">
+					{% for link in links %}
+						<li class="b-links__list-item">{{ component( 'link/Link.php', link ) }}</li>
+					{% endfor %}
+				</ul>
+			{% endif %}
+		</div>
+
+	</div>
+</section>

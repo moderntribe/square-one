@@ -9,7 +9,7 @@ use Tribe\Project\Controllers\Blocks\Block_Controller;
 use Tribe\Project\Templates\Components\Content_Block;
 use Tribe\Project\Templates\Components\Image as Image_Component;
 use Tribe\Project\Templates\Components\Link;
-use Tribe\Project\Templates\Components\Panels\Logos as Container;
+use Tribe\Project\Templates\Components\Blocks\Logos as Container;
 use Tribe\Project\Templates\Components\Text;
 use Tribe\Project\Templates\Models\Image;
 
@@ -25,7 +25,7 @@ class Controller extends Block_Controller {
 			Container::HEADER => $this->get_header(),
 		];
 
-		$this->render_component( 'panels/logos/Logos.php', $args );
+		$this->render_component( 'blocks/logos/Logos.php', $args );
 	}
 
 	/**
@@ -55,8 +55,8 @@ class Controller extends Block_Controller {
 		$logo = [
 			Image_Component::ATTACHMENT      => Image::factory( (int) $logo_block[ Logo::IMAGE ]['id'] ),
 			Image_Component::USE_LAZYLOAD    => true,
-			Image_Component::WRAPPER_CLASSES => [ 'logo__figure' ],
-			Image_Component::IMG_CLASSES     => [ 'logo__img' ],
+			Image_Component::WRAPPER_CLASSES => [ 'b-logo__figure' ],
+			Image_Component::IMG_CLASSES     => [ 'b-logo__img' ],
 			Image_Component::SRC_SIZE        => 'large',
 			Image_Component::SRCSET_SIZES    => [ 'medium', 'large' ],
 		];
@@ -70,7 +70,7 @@ class Controller extends Block_Controller {
 		if ( ! empty( $link['url'] ) ) {
 			$logo[ Image_Component::LINK_URL ]     = $link['url'];
 			$logo[ Image_Component::LINK_TARGET ]  = $link['target'];
-			$logo[ Image_Component::LINK_CLASSES ] = [ 'logo__link' ];
+			$logo[ Image_Component::LINK_CLASSES ] = [ 'b-logo__link' ];
 			$logo[ Image_Component::LINK_ATTRS ]   = ! empty( $link['text'] ) ? [ 'aria-label' => $link['text'] ] : [];
 		}
 
@@ -80,7 +80,7 @@ class Controller extends Block_Controller {
 	private function get_header(): array {
 		return [
 			Content_Block::TAG     => 'header',
-			Content_Block::CLASSES => [ 'logos__header' ],
+			Content_Block::CLASSES => [ 'b-logos__header' ],
 			Content_Block::TITLE   => $this->get_headline(),
 			Content_Block::TEXT    => $this->get_text(),
 			Content_Block::ACTION  => $this->get_cta(),
@@ -91,14 +91,14 @@ class Controller extends Block_Controller {
 	private function get_headline(): array {
 		return [
 			Text::TAG     => 'h2',
-			Text::CLASSES => [ 'logos__title', 'h3' ],
+			Text::CLASSES => [ 'b-logos__title', 'h3' ],
 			Text::TEXT    => $this->attributes[ Logos_Block::TITLE ] ?? '',
 		];
 	}
 
 	private function get_text(): array {
 		return [
-			Text::CLASSES => [ 'logos__description', 't-sink', 's-sink' ],
+			Text::CLASSES => [ 'b-logos__description', 't-sink', 's-sink' ],
 			Text::TEXT    => $this->attributes[ Logos_Block::DESCRIPTION ] ?? '',
 		];
 	}
@@ -120,7 +120,7 @@ class Controller extends Block_Controller {
 			Link::TARGET          => $cta['target'],
 			Link::CLASSES         => [ 'a-btn', 'a-btn--has-icon-after', 'icon-arrow-right' ],
 			Link::WRAPPER_TAG     => 'p',
-			Link::WRAPPER_CLASSES => [ 'logos__cta' ],
+			Link::WRAPPER_CLASSES => [ 'b-logos__cta' ],
 		];
 	}
 }

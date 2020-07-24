@@ -1,0 +1,18 @@
+{# Block: Logos #}
+<section {{ classes|stringify }} {{ attrs|stringify }}>
+	<div {{ container_classes|stringify }}>
+
+		{{ component( 'content-block/Content_Block.php', header ) }}
+
+		{% if logos %}
+			<ul {{ content_classes|stringify }}>
+				{% for logo in logos %}
+					<li class="b-logo">
+						{{ component( 'image/Image.php', logo ) }}
+					</li>
+				{% endfor %}
+			</ul>
+		{% endif %}
+
+	</div>
+</section>

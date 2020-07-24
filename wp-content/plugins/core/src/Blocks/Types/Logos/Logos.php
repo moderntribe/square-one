@@ -19,7 +19,7 @@ class Logos extends Block_Type_Config {
 	public function build(): Block_Type_Interface {
 		return $this->factory->block( self::NAME )
 			->set_label( __( 'Logos', 'tribe' ) )
-			->add_class( 'c-panel c-panel--logos' )
+			->add_class( 'c-block b-logos' )
 			->set_dashicon( 'menu-alt' )
 			->add_content_section( $this->content_area() )
 			->build();
@@ -31,19 +31,19 @@ class Logos extends Block_Type_Config {
 				$this->factory->content()->field()->text( self::TITLE )
 					->set_label( __( 'Headline', 'tribe' ) )
 					->set_placeholder( 'Headline' )
-					->add_class( 'logos__title h1' )
+					->add_class( 'b-logos__title h1' )
 					->build()
 			)
 			->add_field(
 				$this->factory->content()->field()->richtext( self::DESCRIPTION )
 					->set_label( __( 'Description', 'tribe' ) )
-					->add_class( 'logos__description t-sink s-sink' )
+					->add_class( 'b-logos__description t-sink s-sink' )
 					->build()
 			)
 			->add_field(
 				$this->factory->content()->field()->link( self::CTA )
 					->set_label( __( 'Call to Action', 'tribe' ) )
-					->add_class( 'logos__cta a-btn' )
+					->add_class( 'b-logos__cta a-btn' )
 					->build()
 			)
 			->add_field(
