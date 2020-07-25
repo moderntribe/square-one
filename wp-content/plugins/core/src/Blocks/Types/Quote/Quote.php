@@ -68,7 +68,7 @@ class Quote extends Block_Type_Config {
 			->add_field(
 				$this->factory->content()->field()->text( self::QUOTE )
 					->set_label( __( 'Quotation', 'tribe' ) )
-					->add_class( 'b-quote__quotation' )
+					->add_class( 'b-quote__text' )
 					->build()
 			)
 			->add_field(
