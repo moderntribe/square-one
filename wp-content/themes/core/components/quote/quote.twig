@@ -1,6 +1,16 @@
-<blockquote {{ classes|stringify }}>
-    <p class="c-quote__text" {{ quote_attrs|stringify }}>{{ quote }}</p>
-    {% if cite %}
-        <cite class="c-quote__cite" {{ cite_attrs|stringify }}>{{ cite }}</cite>
-    {% endif %}
+<blockquote {{ classes|stringify }} {{ attrs|stringify }}>
+	{{ component( 'text/Text.php', quote ) }}
+	{% if cite %}
+		<cite {{ cite_classes|stringify }} {{ cite_attrs|stringify }}>
+			{% if cite.image %}
+				{{ component( 'image/Image.php', cite.image ) }}
+			{% endif %}
+			{% if cite.name %}
+				{{ component( 'text/Text.php', cite.name ) }}
+			{% endif %}
+			{% if cite.title %}
+				{{ component( 'text/Text.php', cite.title ) }}
+			{% endif %}
+		</cite>
+	{% endif %}
 </blockquote>
