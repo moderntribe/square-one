@@ -1,0 +1,18 @@
+{# Block: Hero #}
+<section {{ classes|stringify }} {{ attrs|stringify }}>
+	<div {{ container_classes|stringify }}>
+
+		{% if media %}
+			<div {{ media_classes|stringify }}>
+				{{ component( 'image/Image.php', media ) }}
+			</div>
+		{% endif %}
+
+		{% if content %}
+			<div {{ content_classes|stringify }}>
+				{{ component( 'quote/Quote.php', content ) }}
+			</div>
+		{% endif %}
+
+	</div>
+</section>

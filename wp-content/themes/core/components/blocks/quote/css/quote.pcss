@@ -1,0 +1,43 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Component: Block: Quote
+ *
+ * ----------------------------------------------------------------------------- */
+
+.b-quote {
+	position: relative;
+	display: flex;
+	align-items: center;
+	min-height: 640px;
+	padding: var(--spacer-80) 0;
+	background-color: var(--color-grey-dark);
+
+	@media (--viewport-medium) {
+		min-height: 720px;
+		padding: var(--spacer-90) 0;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Quote: Background Image
+ * ----------------------------------------------------------------------------- */
+
+.b-quote__img {
+	/* Overlay */
+	&:after {
+		content: '';
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		background-color: var(--color-black);
+		opacity: 0.5;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Quote: Content
+ * ----------------------------------------------------------------------------- */
+
+.b-quote__content {
+	position: relative;
+}
