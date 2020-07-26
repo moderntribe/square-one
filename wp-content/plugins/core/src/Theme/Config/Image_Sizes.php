@@ -3,7 +3,7 @@
 namespace Tribe\Project\Theme\Config;
 
 class Image_Sizes {
-	public const SQUARE_XSMALL      = 'square_xsmall';
+	public const SQUARE_XSMALL      = 'square-xsmall';
 	public const SIXTEEN_NINE       = 'sixteen-nine';
 	public const SIXTEEN_NINE_SMALL = 'sixteen-nine-small';
 	public const SIXTEEN_NINE_LARGE = 'sixteen-nine-large';
