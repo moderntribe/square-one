@@ -47,10 +47,11 @@ class Controller extends Block_Controller {
 			Image_Component::WRAPPER_TAG     => 'div',
 			Image_Component::WRAPPER_CLASSES => [ 'b-quote__figure' ],
 			Image_Component::IMG_CLASSES     => [ 'b-quote__img', 'c-image__bg' ],
-			Image_Component::SRC_SIZE        => Image_Sizes::CORE_FULL,
+			Image_Component::SRC_SIZE        => Image_Sizes::SIXTEEN_NINE,
 			Image_Component::SRCSET_SIZES    => [
-				Image_Sizes::CORE_FULL,
-				Image_Sizes::CORE_MOBILE,
+				Image_Sizes::SIXTEEN_NINE_SMALL,
+				Image_Sizes::SIXTEEN_NINE,
+				Image_Sizes::SIXTEEN_NINE_LARGE,
 			],
 		];
 	}
