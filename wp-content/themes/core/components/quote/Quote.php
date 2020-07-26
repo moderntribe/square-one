@@ -54,20 +54,31 @@ class Quote extends Component {
 	}
 
 	private function setup_quote_text(): array {
+		/**
+		 * Note: HTML5 validation requires that the The block's `<section>` element contain a heading.
+		 * Therefore, we're setting the quote text to an `<h2>`. This means that the quote text cannot be multiple paragraphs.
+		 * However, given the designs for this block, and the notes on the design requesting a max number of lines
+		 * The `<h2>` designation doesn't seem like a limitation.
+		 */
 		return [
-			Text::TEXT    => self::QUOTE_TEXT,
-			Text::CLASSES => 'c-quote__text',
+			Text::TAG     => 'h2',
+			Text::TEXT    => $this->data[ self::QUOTE_TEXT ],
+			Text::CLASSES => [ 'c-quote__text', 'h3' ],
 		];
 	}
 
 	private function setup_quote_citation(): array {
 		$cite = [];
 
-		// If the citation has an image, the name & title are rendered as the figcaption content.
 		if ( ! empty( $this->data[ self::CITE_IMAGE ] ) ) {
 			$cite['image'] = $this->setup_cite_image();
-		} else {
+		}
+
+		if ( ! empty( $this->data[ self::CITE_NAME ] ) ) {
 			$cite['name'] = $this->setup_cite_name();
+		}
+
+		if ( ! empty( $this->data[ self::CITE_NAME ] ) ) {
 			$cite['title'] = $this->setup_cite_title();
 		}
 
@@ -75,25 +86,13 @@ class Quote extends Component {
 	}
 
 	private function setup_cite_image(): array {
-		$cite_image = [
+		return [
 			Image_Component::ATTACHMENT      => Image::factory( (int) $this->data[ self::CITE_IMAGE ]['id'] ),
+			Image_Component::WRAPPER_TAG     => 'span',
 			Image_Component::WRAPPER_CLASSES => [ 'c-quote__cite-figure' ],
 			Image_Component::IMG_CLASSES     => [ 'c-quote__cite-image' ],
 			Image_Component::SRC_SIZE        => Image_Sizes::SQUARE_XSMALL,
 		];
-
-		$rendered_cite_name  = $this->factory->get( Text::class, $this->setup_cite_name() )->get_rendered_output();
-		$rendered_cite_title = $this->factory->get( Text::class, $this->setup_cite_title() )->get_rendered_output();
-
-		if ( ! empty( $rendered_cite_name ) || ! empty( $rendered_cite_title ) ) {
-			$cite_image[ Image_Component::HTML ] = $this->factory->get( Text::class, [
-				Text::TAG     => 'figcaption',
-				Text::TEXT    => $rendered_cite_name . $rendered_cite_title,
-				Text::CLASSES => [ 'c-quote__cite-figcaption' ],
-			] );
-		}
-
-		return $cite_image;
 	}
 
 	private function setup_cite_name(): array {

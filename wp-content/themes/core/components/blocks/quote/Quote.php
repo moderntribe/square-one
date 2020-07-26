@@ -10,8 +10,8 @@ use Tribe\Project\Blocks\Types\Quote\Quote as Quote_Block;
  * Class Quote
  *
  * @property string   $layout
- * @property string   $media
- * @property string   $content
+ * @property string[] $media
+ * @property string[] $content
  * @property string[] $container_classes
  * @property string[] $media_classes
  * @property string[] $content_classes
@@ -31,12 +31,12 @@ class Quote extends Component {
 
 	protected function defaults(): array {
 		return [
-			self::LAYOUT            => Quote_Block::LAYOUT_LEFT,
-			self::MEDIA             => '',
-			self::CONTENT           => '',
+			self::LAYOUT            => Quote_Block::MEDIA_OVERLAY,
+			self::MEDIA             => [],
+			self::CONTENT           => [],
 			self::CONTAINER_CLASSES => [ 'b-quote__container', 'l-container' ],
 			self::MEDIA_CLASSES     => [ 'b-quote__media' ],
-			self::CONTENT_CLASSES   => [ 'b-quote__content' ],
+			self::CONTENT_CLASSES   => [ 'b-quote__content', 't-theme--light' ],
 			self::CLASSES           => [ 'c-block', 'b-quote', 'c-block--full-bleed' ],
 			self::ATTRS             => [],
 		];
