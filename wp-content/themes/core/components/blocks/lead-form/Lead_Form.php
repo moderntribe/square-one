@@ -34,16 +34,16 @@ class Lead_Form extends Component {
 			self::LAYOUT            => Lead_Form_Block::LAYOUT_CENTER,
 			self::CONTENT           => '',
 			self::FORM              => true,
-			self::CONTAINER_CLASSES => [ 'lead-form__container', ],
-			self::FORM_CLASSES      => [ 'lead-form__form' ],
-			self::CLASSES           => [ 'c-panel', 'c-panel--lead-form' ],
+			self::CONTAINER_CLASSES => [ 'b-lead-form__container' ],
+			self::FORM_CLASSES      => [ 'b-lead-form__form' ],
+			self::CLASSES           => [ 'c-block', 'b-lead-form' ],
 			self::ATTRS             => [],
 		];
 	}
 
 	public function init() {
-		$this->data[ self::CLASSES ][] = 'c-panel--' . $this->data[ self::LAYOUT ];
-		$this->data[ self::CLASSES ][] = 'c-panel--' . $this->data[ self::WIDTH ];
+		$this->data[ self::CLASSES ][] = 'c-block--' . $this->data[ self::LAYOUT ];
+		$this->data[ self::CLASSES ][] = 'c-block--' . $this->data[ self::WIDTH ];
 
 		if ( $this->data[ self::WIDTH ] === Lead_Form_Block::WIDTH_GRID ) {
 			$this->data[ self::CLASSES ][] = 'l-container';

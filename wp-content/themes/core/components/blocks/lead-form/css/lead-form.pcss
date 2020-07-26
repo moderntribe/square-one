@@ -1,12 +1,12 @@
 /* -----------------------------------------------------------------------------
  *
- * Component: Panel: Lead Form
+ * Component: Block: Lead Form
  *
  * ----------------------------------------------------------------------------- */
 
-.c-panel--lead-form {
+.b-lead-form {
 	/* CASE: Lead Form: Full Width */
-	&.c-panel--width-full {
+	&.c-block--width-full {
 		background-color: var(--color-primary-10);
 		padding: var(--spacer-50) 0;
 
@@ -20,9 +20,9 @@
  * Lead Form: Container
  * ----------------------------------------------------------------------------- */
 
-.lead-form__container {
+.b-lead-form__container {
 	/* CASE: Lead Form: Grid Width */
-	.c-panel--width-grid & {
+	.c-block--width-grid & {
 		background-color: var(--color-primary-10);
 		border-radius: 8px;
 		padding: var(--spacer-40) var(--spacer-30);
@@ -37,7 +37,7 @@
 	}
 
 	/* CASE: Lead Form: Full Width */
-	.c-panel--width-full & {
+	.c-block--width-full & {
 		@media (--viewport-full) {
 			display: flex;
 			align-items: center;
@@ -50,9 +50,9 @@
  * Lead Form: Content
  * ----------------------------------------------------------------------------- */
 
-.lead-form__content {
+.b-lead-form__content {
 	/* CASE: Lead Form: Full Width */
-	.c-panel--width-full & {
+	.c-block--width-full & {
 		@media (--viewport-full) {
 			max-width: var(--grid-7-col);
 			width: calc(58.3333% - var(--grid-gutter-half));
@@ -60,13 +60,13 @@
 	}
 
 	/* CASE: Lead Form: Full Width & Layout Center */
-	.c-panel--layout-center.c-panel--width-full & {
+	.c-block--layout-center.c-block--width-full & {
 		margin-left: 0;
 		margin-right: 0;
 	}
 }
 
-.lead-form__description {
+.b-lead-form__description {
 	margin-top: 0;
 
 	@media (--viewport-full) {
@@ -84,14 +84,14 @@
  * Lead Form: Form
  * ----------------------------------------------------------------------------- */
 
-.lead-form__form {
+.b-lead-form__form {
 	background-color: var(--color-primary-30); /* Temporary until GF Form embedded */
 	height: 100px; /* Temporary until GF Form embedded */
 	width: 100%; /* Temporary until GF Form embedded */
 	margin-top: var(--spacer-30);
 
 	/* CASE: Lead Form: Grid Width */
-	.c-panel--width-grid & {
+	.c-block--width-grid & {
 		max-width: 280px; /* Temporary until GF Form embedded */
 
 		@media (--viewport-full) {
@@ -100,13 +100,13 @@
 	}
 
 	/* CASE: Lead Form: Grid Width & Layout Center */
-	.c-panel--layout-center.c-panel--width-grid & {
+	.c-block--layout-center.c-block--width-grid & {
 		margin-left: auto;
 		margin-right: auto;
 	}
 
 	/* CASE: Lead Form: Full Width */
-	.c-panel--width-full & {
+	.c-block--width-full & {
 		@media (--viewport-full) {
 			margin-top: 0;
 			max-width: var(--grid-5-col);

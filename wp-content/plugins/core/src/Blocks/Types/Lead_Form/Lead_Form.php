@@ -25,9 +25,9 @@ class Lead_Form extends Block_Type_Config {
 		return $this->factory->block( self::NAME )
 			->set_label( __( 'Lead Form', 'tribe' ) )
 			->set_dashicon( 'menu-alt' )
-			->add_class( 'c-panel c-panel--lead-form' )
-			->add_data_source( 'className-c-panel', self::LAYOUT )
-			->add_data_source( 'className-c-panel', self::WIDTH )
+			->add_class( 'c-block b-lead-form' )
+			->add_data_source( 'className-c-block', self::LAYOUT )
+			->add_data_source( 'className-c-block', self::WIDTH )
 			->add_toolbar_section( $this->layout_toolbar() )
 			->add_content_section( $this->content_area() )
 			->build();
@@ -35,17 +35,17 @@ class Lead_Form extends Block_Type_Config {
 
 	private function content_area(): Content_Section {
 		return $this->factory->content()->section()
-			->add_class( 'lead-form__content' )
+			->add_class( 'b-lead-form__content' )
 			->add_field(
 				$this->factory->content()->field()->text( self::TITLE )
 					->set_label( __( 'Title', 'tribe' ) )
-					->add_class( 'lead-form__title h3' )
+					->add_class( 'b-lead-form__title h3' )
 					->build()
 			)
 			->add_field(
 				$this->factory->content()->field()->richtext( self::DESCRIPTION )
 					->set_label( __( 'Description', 'tribe' ) )
-					->add_class( 'lead-form__description t-sink s-sink' )
+					->add_class( 'b-lead-form__description t-sink s-sink' )
 					->build()
 			)
 			// TODO: Add Gravity Forms form select field here?
