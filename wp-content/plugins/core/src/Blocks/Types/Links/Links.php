@@ -26,8 +26,8 @@ class Links extends Block_Type_Config {
 		return $this->factory->block( self::NAME )
 			->set_label( __( 'Links', 'tribe' ) )
 			->set_dashicon( 'menu-alt' )
-			->add_class( 'c-panel c-panel--links l-container' )
-			->add_data_source( 'className-c-panel', self::LAYOUT )
+			->add_class( 'c-block b-links l-container' )
+			->add_data_source( 'className-c-block', self::LAYOUT )
 			->add_toolbar_section( $this->layout_toolbar() )
 			->add_content_section( $this->content_area() )
 			->add_content_section( $this->links_area() )
@@ -36,17 +36,17 @@ class Links extends Block_Type_Config {
 
 	private function content_area(): Content_Section {
 		return $this->factory->content()->section()
-			->add_class( 'links__header' )
+			->add_class( 'b-links__header' )
 			->add_field(
 				$this->factory->content()->field()->text( self::TITLE )
 					->set_label( __( 'Title', 'tribe' ) )
-					->add_class( 'links__title h3' )
+					->add_class( 'b-links__title h3' )
 					->build()
 			)
 			->add_field(
 				$this->factory->content()->field()->richtext( self::DESCRIPTION )
 					->set_label( __( 'Description', 'tribe' ) )
-					->add_class( 'links__description t-sink s-sink' )
+					->add_class( 'b-links__description t-sink s-sink' )
 					->build()
 			)
 			->build();
@@ -54,11 +54,11 @@ class Links extends Block_Type_Config {
 
 	private function links_area(): Content_Section {
 		return $this->factory->content()->section()
-			->add_class( 'links__content links__list' )
+			->add_class( 'b-links__content b-links__list' )
 			->add_field(
 				$this->factory->content()->field()->text( self::LINKS_TITLE )
 					->set_label( __( 'List Title', 'tribe' ) )
-					->add_class( 'links__list-title h5' )
+					->add_class( 'b-links__list-title h5' )
 					->build()
 			)
 			->add_field(

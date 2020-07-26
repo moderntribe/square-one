@@ -8,7 +8,7 @@ use Tribe\Project\Blocks\Types\Links\Support\Link as Link_Block;
 use Tribe\Project\Controllers\Blocks\Block_Controller;
 use Tribe\Project\Templates\Components\Content_Block;
 use Tribe\Project\Templates\Components\Link;
-use Tribe\Project\Templates\Components\Panels\Links as Container;
+use Tribe\Project\Templates\Components\Blocks\Links as Container;
 use Tribe\Project\Templates\Components\Text;
 
 class Controller extends Block_Controller {
@@ -26,7 +26,7 @@ class Controller extends Block_Controller {
 			Container::LINKS_TITLE       => $this->get_links_title(),
 		];
 
-		$this->render_component( 'panels/links/Links.php', $args );
+		$this->render_component( 'blocks/links/Links.php', $args );
 	}
 
 	private function get_layout(): string {
@@ -35,7 +35,7 @@ class Controller extends Block_Controller {
 
 	private function get_container_classes(): array {
 		$classes = [
-			'links__container',
+			'b-links__container',
 			'l-container',
 		];
 
@@ -49,7 +49,7 @@ class Controller extends Block_Controller {
 
 		return [
 			Content_Block::TAG     => 'header',
-			Content_Block::CLASSES => [ 'links__header' ],
+			Content_Block::CLASSES => [ 'b-links__header' ],
 			Content_Block::TITLE   => $this->get_title(),
 			Content_Block::TEXT    => $this->get_description(),
 			Content_Block::LAYOUT  => Content_Block::LAYOUT_STACKED,
@@ -59,14 +59,14 @@ class Controller extends Block_Controller {
 	private function get_title(): array {
 		return [
 			Text::TAG     => 'h2',
-			Text::CLASSES => [ 'links__title', 'h3' ],
+			Text::CLASSES => [ 'b-links__title', 'h3' ],
 			Text::TEXT    => $this->attributes[ Links_Block::TITLE ] ?? '',
 		];
 	}
 
 	private function get_description(): array {
 		return [
-			Text::CLASSES => [ 'links__description', 't-sink', 's-sink' ],
+			Text::CLASSES => [ 'b-links__description', 't-sink', 's-sink' ],
 			Text::TEXT    => $this->attributes[ Links_Block::DESCRIPTION ] ?? '',
 		];
 	}
@@ -78,7 +78,7 @@ class Controller extends Block_Controller {
 
 		return [
 			Text::TAG     => 'h3',
-			Text::CLASSES => [ 'links__list-title', 'h5' ],
+			Text::CLASSES => [ 'b-links__list-title', 'h5' ],
 			Text::TEXT    => $this->attributes[ Links_Block::LINKS_TITLE ] ?? '',
 		];
 	}
@@ -97,7 +97,7 @@ class Controller extends Block_Controller {
 				Link::URL     => $row[ Link_Block::LINK ]['url'] ?? '',
 				Link::CONTENT => $row[ Link_Block::LINK ]['text'] ?? $row[ Link_Block::LINK ]['url'],
 				Link::TARGET  => $row[ Link_Block::LINK ]['target'] ?? '',
-				Link::CLASSES => [ 'links__list-link' ],
+				Link::CLASSES => [ 'b-links__list-link' ],
 			];
 		}, $rows );
 	}

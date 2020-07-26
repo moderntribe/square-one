@@ -8,7 +8,7 @@ use Tribe\Project\Controllers\Blocks\Block_Controller;
 use Tribe\Project\Blocks\Types\Accordion\Support\Accordion_Section as Accordion_Section_Block;
 use Tribe\Project\Templates\Components\Accordion as Accordion_Component;
 use Tribe\Project\Templates\Components\Content_Block;
-use Tribe\Project\Templates\Components\Panels\Accordion as Container;
+use Tribe\Project\Templates\Components\Blocks\Accordion as Container;
 use Tribe\Project\Templates\Components\Text;
 
 class Controller extends Block_Controller {
@@ -25,7 +25,7 @@ class Controller extends Block_Controller {
 			Container::CONTENT           => $this->get_accordion( $this->attributes ),
 		];
 
-		$this->render_component( 'panels/accordion/Accordion.php', $args );
+		$this->render_component( 'blocks/accordion/Accordion.php', $args );
 	}
 
 	private function get_layout(): string {
@@ -34,7 +34,7 @@ class Controller extends Block_Controller {
 
 	private function get_container_classes(): array {
 		$classes = [
-			'accordion__container',
+			'b-accordion__container',
 			'l-container'
 		];
 
@@ -55,7 +55,7 @@ class Controller extends Block_Controller {
 
 		return [
 			Content_Block::TAG     => 'header',
-			Content_Block::CLASSES => [ 'accordion__header' ],
+			Content_Block::CLASSES => [ 'b-accordion__header' ],
 			Content_Block::TITLE   => $this->get_title(),
 			Content_Block::TEXT    => $this->get_description(),
 		];
@@ -64,14 +64,14 @@ class Controller extends Block_Controller {
 	private function get_title(): array {
 		return  [
 			Text::TAG     => 'h2',
-			Text::CLASSES => [ 'accordion__title', 'h3' ],
+			Text::CLASSES => [ 'b-accordion__title', 'h3' ],
 			Text::TEXT    => $this->attributes[ Accordion_Block::TITLE ] ?? '',
 		];
 	}
 
 	private function get_description(): array {
 		return [
-			Text::CLASSES => [ 'accordion__description', 't-sink', 's-sink' ],
+			Text::CLASSES => [ 'b-accordion__description', 't-sink', 's-sink' ],
 			Text::TEXT    => $this->attributes[ Accordion_Block::DESCRIPTION ] ?? '',
 		];
 	}

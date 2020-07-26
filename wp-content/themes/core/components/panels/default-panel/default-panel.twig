@@ -1,9 +1,0 @@
-
-<dl>
-	{% for field, value in panel if field != 'title' %}
-		<dt>{{ field|esc_html }}</dt>
-		<dd>
-			<pre>{{ value|print_r }}</pre>
-		</dd>
-	{% endfor %}
-</dl>

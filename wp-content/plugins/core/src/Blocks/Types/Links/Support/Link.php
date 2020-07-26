@@ -25,10 +25,10 @@ class Link extends Block_Type_Config {
 	private function content_area(): Content_Section {
 
 		return $this->factory->content()->section()
-			->add_class( 'links__list-item' )
+			->add_class( 'b-links__list-item' )
 			->add_field(
 				$this->factory->content()->field()->link( self::LINK )
-					->add_class( 'links__list-link' )
+					->add_class( 'b-links__list-link' )
 					->build()
 			)
 			->build();

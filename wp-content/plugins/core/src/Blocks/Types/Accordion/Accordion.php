@@ -24,8 +24,8 @@ class Accordion extends Block_Type_Config {
 		return $this->factory->block( self::NAME )
 			->set_label( __( 'Accordion', 'tribe' ) )
 			->set_dashicon( 'menu-alt' )
-			->add_class( 'c-panel c-panel--accordion l-container' )
-			->add_data_source( 'className-c-panel', self::LAYOUT )
+			->add_class( 'c-block b-accordion l-container' )
+			->add_data_source( 'className-c-block', self::LAYOUT )
 			->add_toolbar_section( $this->layout_toolbar() )
 			->add_content_section( $this->content_area() )
 			->add_content_section( $this->accordions_area() )
@@ -34,17 +34,17 @@ class Accordion extends Block_Type_Config {
 
 	private function content_area(): Content_Section {
 		return $this->factory->content()->section()
-			->add_class( 'accordion__header' )
+			->add_class( 'b-accordion__header' )
 			->add_field(
 				$this->factory->content()->field()->text( self::TITLE )
 					->set_label( __( 'Title', 'tribe' ) )
-					->add_class( 'accordion__title h3' )
+					->add_class( 'b-accordion__title h3' )
 					->build()
 			)
 			->add_field(
 				$this->factory->content()->field()->richtext( self::DESCRIPTION )
 					->set_label( __( 'Description', 'tribe' ) )
-					->add_class( 'accordion__description t-sink s-sink' )
+					->add_class( 'b-accordion__description t-sink s-sink' )
 					->build()
 			)
 			->build();
@@ -52,7 +52,7 @@ class Accordion extends Block_Type_Config {
 
 	private function accordions_area(): Content_Section {
 		return $this->factory->content()->section()
-			->add_class( 'accordion__content' )
+			->add_class( 'b-accordion__content' )
 			->add_field(
 				$this->factory->content()->field()->flexible_container( self::ACCORDION )
 					->set_label( __( 'Accordion', 'tribe' ) )

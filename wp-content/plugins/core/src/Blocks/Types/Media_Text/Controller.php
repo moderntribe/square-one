@@ -8,7 +8,7 @@ use Tribe\Project\Controllers\Blocks\Block_Controller;
 use Tribe\Project\Templates\Components\Content_Block;
 use Tribe\Project\Templates\Components\Image as Image_Component;
 use Tribe\Project\Templates\Components\Link;
-use Tribe\Project\Templates\Components\Panels\Media_Text as Container;
+use Tribe\Project\Templates\Components\Blocks\Media_Text as Container;
 use Tribe\Project\Templates\Components\Text;
 use Tribe\Project\Templates\Models\Image;
 use Tribe\Project\Theme\Config\Image_Sizes;
@@ -26,14 +26,14 @@ class Controller extends Block_Controller {
 			Container::LAYOUT            => $this->get_layout(),
 			Container::MEDIA             => $this->get_media(),
 			Container::CONTENT           => $this->get_content(),
-			Container::CONTAINER_CLASSES => [ 'media-text__container' ],
-			Container::MEDIA_CLASSES     => [ 'media-text__media' ],
-			Container::CONTENT_CLASSES   => [ 'media-text__content' ],
-			Container::CLASSES           => [ 'c-panel', 'c-panel--media-text' ],
+			Container::CONTAINER_CLASSES => [ 'b-media-text__container' ],
+			Container::MEDIA_CLASSES     => [ 'b-media-text__media' ],
+			Container::CONTENT_CLASSES   => [ 'b-media-text__content' ],
+			Container::CLASSES           => [ 'c-block', 'b-media-text' ],
 			Container::ATTRS             => [],
 		];
 
-		$this->render_component( 'panels/media-text/Media_Text.php', $args );
+		$this->render_component( 'blocks/media-text/Media_Text.php', $args );
 	}
 
 	private function get_media_type() {
@@ -111,7 +111,7 @@ class Controller extends Block_Controller {
 
 	private function get_content(): array {
 		return [
-			Content_Block::CLASSES => [ 'media-text__content-container' ],
+			Content_Block::CLASSES => [ 'b-media-text__content-container' ],
 			Content_Block::TITLE   => $this->get_title(),
 			Content_Block::TEXT    => $this->get_text(),
 			Content_Block::ACTION  => $this->get_cta(),
@@ -122,14 +122,14 @@ class Controller extends Block_Controller {
 	private function get_title(): array {
 		return [
 			Text::TAG     => 'h2',
-			Text::CLASSES => [ 'media-text__title', 'h3' ],
+			Text::CLASSES => [ 'b-media-text__title', 'h3' ],
 			Text::TEXT    => $this->attributes[ Media_Text_Block::TITLE ] ?? '',
 		];
 	}
 
 	private function get_text(): array {
 		return [
-			Text::CLASSES => [ 'media-text__text', 't-sink', 's-sink' ],
+			Text::CLASSES => [ 'b-media-text__text', 't-sink', 's-sink' ],
 			Text::TEXT    => implode( "\n", wp_list_pluck( $this->attributes[ Media_Text_Block::CONTENT ] ?? [], 'content' ) )
 		];
 	}
@@ -151,7 +151,7 @@ class Controller extends Block_Controller {
 			Link::TARGET          => $cta['target'],
 			Link::CLASSES         => [ 'a-btn', 'a-btn--has-icon-after', 'icon-arrow-right' ],
 			Link::WRAPPER_TAG     => 'p',
-			Link::WRAPPER_CLASSES => [ 'media-text__cta' ],
+			Link::WRAPPER_CLASSES => [ 'b-media-text__cta' ],
 		];
 	}
 }

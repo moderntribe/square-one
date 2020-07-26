@@ -33,9 +33,9 @@ class Media_Text extends Block_Type_Config {
 	public function build(): Block_Type_Interface {
 		return $this->factory->block( self::NAME )
 			->set_label( __( 'Media + Text', 'tribe' ) )
-			->add_class( 'c-panel c-panel--media-text' )
-			->add_data_source( 'className-c-panel', self::LAYOUT )
-			->add_data_source( 'className-c-panel', self::WIDTH )
+			->add_class( 'c-block b-media-text' )
+			->add_data_source( 'className-c-block', self::LAYOUT )
+			->add_data_source( 'className-c-block', self::WIDTH )
 			->set_dashicon( 'menu-alt' )
 			->add_content_section( $this->child_container() )
 			->add_toolbar_section( $this->layout_toolbar() )
@@ -44,7 +44,7 @@ class Media_Text extends Block_Type_Config {
 
 	private function child_container(): Content_Section {
 		return $this->factory->content()->section()
-			->add_class( 'media-text__container' )
+			->add_class( 'b-media-text__container' )
 			->add_field(
 				$this->factory->content()->field()->fixed_container( self::CONTAINER )
 					->add_template_block( Media_Text_Media::NAME )

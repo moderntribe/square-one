@@ -1,0 +1,12 @@
+{# Block: Accordion #}
+<section {{ classes|stringify }} {{ attrs|stringify }}>
+	<div {{ container_classes|stringify }}>
+
+		{{ component( 'content-block/Content_Block.php', header ) }}
+
+		<div {{ content_classes|stringify }}>
+			{{ component( 'accordion/Accordion.php', content ) }}
+		</div>
+
+	</div>
+</section>
