@@ -5,12 +5,14 @@
 			{% if cite.image %}
 				{{ component( 'image/Image.php', cite.image ) }}
 			{% endif %}
-			{% if cite.name %}
-				{{ component( 'text/Text.php', cite.name ) }}
-			{% endif %}
-			{% if cite.title %}
-				{{ component( 'text/Text.php', cite.title ) }}
-			{% endif %}
+			<span class="c-quote__cite-text">
+				{% if cite.name %}
+					{{ component( 'text/Text.php', cite.name ) }}
+				{% endif %}
+				{% if cite.title %}
+					{{ component( 'text/Text.php', cite.title ) }}
+				{% endif %}
+			</span>
 		</cite>
 	{% endif %}
 </blockquote>

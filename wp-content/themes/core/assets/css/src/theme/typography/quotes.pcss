@@ -12,8 +12,13 @@
 [data-type^="core"] > q,
 .t-sink > q {
 	@mixin t-quote;
+	@mixin t-display-small;
 
 	display: block;
+
+	@media (--viewport-medium) {
+		@mixin t-display-large;
+	}
 }
 
 /* -----------------------------------------------------------------------------
@@ -23,6 +28,12 @@
 .blockquote,
 [data-type^="core"] > blockquote,
 .t-sink > blockquote {
+	@mixin t-display-small;
+
+	@media (--viewport-medium) {
+		@mixin t-display-large;
+	}
+
 	@media (--viewport-full) {
 		position: relative;
 

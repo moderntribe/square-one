@@ -63,7 +63,7 @@ class Quote extends Component {
 		return [
 			Text::TAG     => 'h2',
 			Text::TEXT    => $this->data[ self::QUOTE_TEXT ],
-			Text::CLASSES => [ 'c-quote__text', 'h3' ],
+			Text::CLASSES => [ 'c-quote__text', 'h4' ],
 		];
 	}
 

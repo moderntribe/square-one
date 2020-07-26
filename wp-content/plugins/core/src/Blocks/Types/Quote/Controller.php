@@ -57,7 +57,7 @@ class Controller extends Block_Controller {
 
 	private function get_content(): array {
 		return [
-			Quote_Component::CLASSES    => [ 'b-quote__content-container', 'c-quote' ],
+			Quote_Component::CLASSES    => [ 'b-quote__content-container', 'l-sink--double', 'c-quote' ],
 			Quote_Component::QUOTE_TEXT => $this->attributes[ Quote_Block::QUOTE ] ?? '',
 			Quote_Component::CITE_NAME  => $this->attributes[ Quote_Block::CITE_NAME ] ?? '',
 			Quote_Component::CITE_TITLE => $this->attributes[ Quote_Block::CITE_TITLE ] ?? '',

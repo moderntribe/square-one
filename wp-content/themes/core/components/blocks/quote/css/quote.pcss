@@ -8,13 +8,28 @@
 	position: relative;
 	display: flex;
 	align-items: center;
-	min-height: 640px;
-	padding: var(--spacer-80) 0;
-	background-color: var(--color-grey-dark);
+	padding: var(--spacer-30) 0 var(--spacer-40);
+	background-color: var(--color-black);
 
 	@media (--viewport-medium) {
-		min-height: 720px;
-		padding: var(--spacer-90) 0;
+		padding: var(--spacer-50) 0 var(--spacer-60);
+	}
+
+	@media (--viewport-full) {
+		padding: 80px 0;
+	}
+
+	/* CASE: Layout Overlay */
+	&.c-block--layout-overlay {
+		padding: var(--spacer-70) 0;
+
+		@media (--viewport-medium) {
+			padding: 120px;
+		}
+
+		@media (--viewport-full) {
+			padding: var(--spacer-90) 0;
+		}
 	}
 }
 
@@ -40,4 +55,44 @@
 
 .b-quote__content {
 	position: relative;
+}
+
+.c-quote__text {
+	@mixin t-quote;
+
+	/* CASE: Layout Overlay */
+	.c-block--layout-overlay & {
+		@mixin t-display-small;
+
+		@media (--viewport-full) {
+			@mixin t-display;
+		}
+	}
+}
+
+.c-quote__cite {
+	display: flex;
+	flex-flow: row wrap;
+	align-items: center;
+	margin-top: var(--spacer-40);
+}
+
+.c-quote__cite-figure {
+	width: 80px;
+	overflow: hidden;
+	margin-right: var(--spacer-30);
+	border-radius: 50%;
+}
+
+.c-quote__cite-name {
+	@mixin t-input;
+
+	display: block;
+}
+
+.break,
+.c-quote__cite-title {
+	@mixin t-label;
+
+	display: block;
 }
