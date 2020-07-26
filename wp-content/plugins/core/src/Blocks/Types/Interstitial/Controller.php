@@ -27,7 +27,7 @@ class Controller extends Block_Controller {
 			Container::CONTAINER_CLASSES => [ 'b-interstitial__container', 'l-container' ],
 			Container::MEDIA_CLASSES     => [ 'b-interstitial__media' ],
 			Container::CONTENT_CLASSES   => [ 'b-interstitial__content' ],
-			Container::CLASSES           => [ 'c-block', 'c-panel--full-bleed', 'b-interstitial' ],
+			Container::CLASSES           => [ 'c-block', 'c-block--full-bleed', 'b-interstitial' ],
 			Container::ATTRS             => [],
 		];
 

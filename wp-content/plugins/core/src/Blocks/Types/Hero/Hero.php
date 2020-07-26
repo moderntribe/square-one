@@ -25,7 +25,7 @@ class Hero extends Block_Type_Config {
 	public function build(): Block_Type_Interface {
 		return $this->factory->block( self::NAME )
 			->set_label( __( 'Hero', 'tribe' ) )
-			->add_class( 'c-block c-panel--full-bleed b-hero' )
+			->add_class( 'c-block c-block--full-bleed b-hero' )
 			->add_data_source( 'className-c-block', self::LAYOUT )
 			->set_dashicon( 'menu-alt' )
 			->add_sidebar_section( $this->background_sidebar() )
