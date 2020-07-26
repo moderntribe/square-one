@@ -53,6 +53,9 @@ class Blocks_Definer implements Definer_Interface {
 				DI\get( Types\Media_Text\Support\Media_Text_Media_Embed::class ),
 				DI\get( Types\Media_Text\Support\Media_Text_Media_Image::class ),
 				DI\get( Types\Media_Text\Support\Media_Text_Text::class ),
+
+				DI\get( Types\Stats\Stats::class ),
+				DI\get( Types\Stats\Support\Statistic::class ),
 			] ),
 
 			self::CONTROLLER_MAP => DI\add( [] ),

@@ -1,0 +1,20 @@
+{# Block: Stats #}
+<section {{ classes|stringify }} {{ attrs|stringify }}>
+	<div {{ container_classes|stringify }}>
+
+		{{ component( 'content-block/Content_Block.php', header ) }}
+
+		{% if stats %}
+			<div {{ content_classes|stringify }}>
+				<ul class="b-stats__list">
+					{% for item in stats %}
+						<li class="b-stats__list-item">
+							{{ component( 'statistic/Statistic.php', item ) }}
+						</li>
+					{% endfor %}
+				</ul>
+			</div>
+		{% endif %}
+
+	</div>
+</section>
