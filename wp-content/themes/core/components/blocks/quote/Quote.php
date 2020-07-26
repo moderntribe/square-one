@@ -34,7 +34,7 @@ class Quote extends Component {
 			self::LAYOUT            => Quote_Block::MEDIA_OVERLAY,
 			self::MEDIA             => [],
 			self::CONTENT           => [],
-			self::CONTAINER_CLASSES => [ 'b-quote__container', 'l-container' ],
+			self::CONTAINER_CLASSES => [ 'b-quote__container' ],
 			self::MEDIA_CLASSES     => [ 'b-quote__media' ],
 			self::CONTENT_CLASSES   => [ 'b-quote__content', 't-theme--light' ],
 			self::CLASSES           => [ 'c-block', 'b-quote', 'c-block--full-bleed' ],
@@ -44,6 +44,12 @@ class Quote extends Component {
 
 	public function init() {
 		$this->data[ self::CLASSES ][] = 'c-block--' . $this->data[ self::LAYOUT ];
+
+		if ( $this->data[ self::LAYOUT ] === Quote_Block::MEDIA_OVERLAY ) {
+			$this->data[ self::CONTENT_CLASSES ][] = 'l-container';
+		} else {
+			$this->data[ self::CONTENT_CLASSES ][] = 'l-container';
+		}
 	}
 
 }
