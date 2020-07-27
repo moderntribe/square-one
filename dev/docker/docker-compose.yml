@@ -47,6 +47,7 @@ x-php: &php
   environment:
     - COMPOSER_ALLOW_SUPERUSER=1
     - COMPOSER_MEMORY_LIMIT=-1
+    - COMPOSER_PROCESS_TIMEOUT=2000
     - COMPOSER_HOME=/application/.composer
     - PHP_IDE_CONFIG=serverName=square1.tribe
     - DOMAIN_CURRENT_SITE=square1.tribe
@@ -97,6 +98,7 @@ services:
     environment:
       - COMPOSER_ALLOW_SUPERUSER=1
       - COMPOSER_MEMORY_LIMIT=-1
+      - COMPOSER_PROCESS_TIMEOUT=2000
       - COMPOSER_HOME=/application/.composer
       - PAGER=more
       - PHP_IDE_CONFIG=serverName=square1test.tribe
