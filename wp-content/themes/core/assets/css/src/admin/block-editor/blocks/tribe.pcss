@@ -12,13 +12,13 @@
 
 /* -----------------------------------------------------------------------------
  *
- * Full-Bleed panel spacing
+ * Full-Bleed block spacing
  *
  * ----------------------------------------------------------------------------- */
 
 .wp-block[data-type="tribe/hero"],
 .wp-block[data-type="tribe/interstitial"] {
-	/* CASE: If full bleed panel followed by a core block,
+	/* CASE: If full bleed block followed by a core block,
 	 * The core block gets top spacing. */
 	& + [data-type^="core"] {
 		margin-top: var(--spacer-60);
@@ -28,8 +28,8 @@
 		}
 	}
 
-	/* CASE: If core block followed by a full bleed panel,
-	 * The panel gets top spacing. */
+	/* CASE: If core block followed by a full bleed block,
+	 * The block gets top spacing. */
 	[data-type^="core"] + & {
 		margin-top: var(--spacer-60);
 
@@ -45,8 +45,8 @@
  * TEMP: Until we get add_data_source() support for the html field.
  * TEMP: Until we get a way to add a wrapper element around a field or section.
  * ----------------------------------------------------------------------------- */
-.c-panel--hero,
-.c-panel--interstitial {
+.b-hero,
+.b-interstitial {
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center;
@@ -61,8 +61,8 @@
 		opacity: 0.5;
 	}
 
-	.hero__content,
-	.interstitial__content {
+	.b-hero__content,
+	.b-interstitial__content {
 		width: 100%;
 		max-width: var(--grid-width-staggered-double);
 		margin-left: auto;
@@ -74,10 +74,10 @@
 	}
 
 	/* CASE: Contents are centered */
-	&.c-panel--layout-center {
+	&.c-block--layout-center {
 
-		.hero__content-container,
-		.interstitial__content-container {
+		.b-hero__content-container,
+		.b-interstitial__content-container {
 			text-align: center;
 			margin-left: auto;
 			margin-right: auto;
@@ -94,7 +94,7 @@
 
 .wp-block[data-type="tribe/accordion"] {
 	/* CASE: Accordion: Inline */
-	.c-panel--layout-inline {
+	.c-block--layout-inline {
 		@media (--viewport-full) {
 			display: flex !important;
 			justify-content: space-between;
@@ -102,13 +102,14 @@
 	}
 
 	/* CASE: Accordion Stacked */
-	.c-panel--layout-stacked {
+	.c-block--layout-stacked {
 		margin-left: auto;
 		margin-right: auto;
 		max-width: var(--grid-max-width-staggered-double);
 	}
 
 	[data-type="tribe/accordion-section"] .block-editor-inner-blocks {
+		overflow: hidden;
 		padding-left: var(--grid-1-col);
 	}
 }
@@ -122,9 +123,9 @@
 
 .wp-block[data-type="tribe/media-text"] {
 	/* CASE: Width: Grid */
-	.c-panel--width-grid {
+	.c-block--width-grid {
 
-		.media-text__container {
+		.b-media-text__container {
 			max-width: var(--grid-width);
 			margin-left: auto;
 			margin-right: auto;
@@ -132,16 +133,16 @@
 	}
 
 	/* CASE: Media: Left/Right */
-	.c-panel--layout-left,
-	.c-panel--layout-right {
+	.c-block--layout-left,
+	.c-block--layout-right {
 
 		.wp-block[data-type="tribe/media-text--media"],
 		.wp-block[data-type="tribe/media-text--text"] {
 			float: left;
 			width: 50%;
 
-			.media-text__media,
-			.media-text__content {
+			.b-media-text__media,
+			.b-media-text__content {
 				@media (--viewport-medium) {
 					width: 100%;
 					padding: 0 var(--grid-gutter-half);
@@ -151,7 +152,7 @@
 	}
 
 	/* CASE: Media: Right */
-	.c-panel--layout-right {
+	.c-block--layout-right {
 
 		.wp-block[data-type="tribe/media-text--media"] {
 			float: right;
@@ -159,12 +160,12 @@
 	}
 
 	/* CASE: Media Centered */
-	.c-panel--layout-center {
+	.c-block--layout-center {
 		/**
 		 * @TODO: Need: Add ability to wrap a container around these and add a conditional layout class other than
 		 * what we already have. This code duplicated the content-block classes for the current version.
 		 */
-		.media-text__content-container {
+		.b-media-text__content-container {
 			@mixin clearfix;
 
 			max-width: var(--grid-width);
@@ -172,7 +173,7 @@
 			margin-right: auto;
 		}
 
-		.media-text__title {
+		.b-media-text__title {
 			@media (--viewport-medium) {
 				float: left;
 				clear: left;
@@ -184,7 +185,7 @@
 			}
 		}
 
-		.media-text__text {
+		.b-media-text__text {
 			@media (--viewport-medium) {
 				float: right;
 				width: calc(50% - var(--grid-gutter-medium-half));
@@ -196,7 +197,7 @@
 			}
 		}
 
-		.media-text__cta { /* @TODO: This doesn't apply currently b/c we have no way to wrap the button element in a container. */
+		.b-media-text__cta { /* @TODO: This doesn't apply currently b/c we have no way to wrap the button element in a container. */
 			@media (--viewport-medium) {
 				float: right;
 				clear: right;
@@ -206,6 +207,48 @@
 			@media (--viewport-full) {
 				width: calc(66.6667% - var(--grid-gutter-half));
 			}
+		}
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Panel: Links
+ *
+ * TEMP: Until we get a way to add a wrapper element around a field or section.
+ * TEMP: Until we get add_class for nested block fields.
+ * ----------------------------------------------------------------------------- */
+
+.wp-block[data-type="tribe/links"] {
+	/* CASE: Links: Inline */
+	.c-block:not(.c-block--layout-stacked) {
+		@media (--viewport-full) {
+			display: flex !important;
+			justify-content: space-between;
+		}
+	}
+
+	.b-links__title {
+		margin: 0;
+	}
+
+	.b-links__list-title {
+		margin-top: 0;
+	}
+
+	ul.b-links__list,
+	ul.b-links__list li {
+		margin: 0;
+	}
+
+	/* CASE: Links: Stacked */
+	.c-block--layout-stacked {
+
+		.b-links__list-title {
+			margin-bottom: 0;
+		}
+
+		.block-editor-block-list__layout [data-type="tribe/links--link"] {
+			border-bottom: 1px solid var(--color-neutral-10);
 		}
 	}
 }

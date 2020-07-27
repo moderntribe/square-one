@@ -1,9 +1,9 @@
 .ginput_preview,
 .gf-file .validation_message {
-	background-color: var(--gf-control-file-preview-bgd-color);
+	background-color: darken(var(--form-control-bgd-color), 0.1);
 	height: auto;
-	font-size: var(--form-control-file-font-size);
-	padding: var(--gf-control-file-padding);
+	font-size: var(--form-font-size);
+	padding: var(--form-control-file-padding);
 	line-height: 1;
 	border: var(--gf-control-file-border-size) solid var(--gf-control-file-border-color);
 	border-top: 0;
@@ -34,7 +34,7 @@
 
 /* Multiple */
 .gform_drop_instructions {
-	font: var(--gf-control-file-font-style) var(--gf-control-file-font-weight) var(--gf-control-file-font-size) / var(--gf-control-file-line-height) var(--gf-control-file-font-family);
+	font: var(--form-control-font-style) var(--form-control-font-weight) var(--form-font-size) / 1 var(--form-font-family);
 
 	@media (--viewport-medium) {
 		margin-right: 10px;
@@ -43,14 +43,14 @@
 
 .gform_fileupload_multifile {
 	border: var(--gf-control-file-border-size) solid var(--gf-control-file-border-color);
-	padding: var(--gf-control-filemulti-padding);
-	background-color: var(--gf-control-file-bgd-color);
+	padding: var(--form-control-file-padding);
+	background-color: var(--form-control-bgd-color);
 
 	input[type="button"],
 	input[type="file"] {
 		@mixin a-btn-submit;
 
-		margin-top: var(--gf-control-filemulti-margin-top);
+		margin-top: var(--spacer-20);
 
 		@media (--viewport-medium) {
 			margin-top: 0;

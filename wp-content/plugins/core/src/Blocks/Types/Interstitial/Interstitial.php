@@ -22,8 +22,8 @@ class Interstitial extends Block_Type_Config {
 	public function build(): Block_Type_Interface {
 		return $this->factory->block( self::NAME )
 			->set_label( __( 'Interstitial', 'tribe' ) )
-			->add_class( 'c-panel c-panel--interstitial c-panel--full-bleed' )
-			->add_data_source( 'className-c-panel', self::LAYOUT )
+			->add_class( 'c-block c-block--full-bleed b-interstitial' )
+			->add_data_source( 'className-c-block', self::LAYOUT )
 			->set_dashicon( 'menu-alt' )
 			->add_data_source( 'background-image', self::IMAGE ) /* TEMP until we get support for this on the HTML field. */
 			->add_sidebar_section( $this->background() )
@@ -47,10 +47,10 @@ class Interstitial extends Block_Type_Config {
 	/* TODO: Enable this once the html field type get `set_data_source()` support
 	private function background_area(): Content_Section {
 		return $this->factory->content()->section()
-			->add_class( 'interstitial__figure' )
+			->add_class( 'b-interstitial__figure' )
 			->add_field(
 				$this->factory->content()->field()->html( 'bkgrd' )
-					->add_class( 'interstitial__img c-image__bg' )
+					->add_class( 'b-interstitial__img c-image__bg' )
 					->set_content( '<div></div>' )
 					->add_data_source( 'background-image', self::IMAGE )
 					->build()
@@ -60,12 +60,12 @@ class Interstitial extends Block_Type_Config {
 
 	private function content_area(): Content_Section {
 		return $this->factory->content()->section()
-			->add_class( 'interstitial__content interstitial__content-container t-theme--light' )
+			->add_class( 'b-interstitial__content b-interstitial__content-container t-theme--light' )
 			->add_field(
 				$this->factory->content()->field()->text( self::DESCRIPTION )
 					->set_label( __( 'Description', 'tribe' ) )
 					->set_placeholder( 'Headline' )
-					->add_class( 'interstitial__title h3' )
+					->add_class( 'b-interstitial__title h3' )
 					->build()
 			)
 			->add_field(

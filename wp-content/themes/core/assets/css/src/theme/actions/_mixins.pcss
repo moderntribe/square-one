@@ -16,6 +16,7 @@
 	height: auto;
 	padding: 12px var(--spacer-50);
 	border: 0;
+	border-radius: 0;
 	cursor: pointer;
 	text-decoration: none;
 	transition: var(--transition);
@@ -27,7 +28,6 @@
 	/* CASE: Disabled */
 	&[disabled],
 	&.is-disabled {
-		opacity: 0.5;
 		cursor: default;
 	}
 }
@@ -52,11 +52,12 @@
 	/* CASE: Disabled */
 	&[disabled],
 	&.is-disabled {
+		background-color: var(--color-grey);
 
 		&:focus,
 		&:active,
 		&:hover {
-			background-color: var(--color-primary);
+			background-color: var(--color-grey);
 		}
 	}
 
@@ -82,13 +83,15 @@
 	&:focus,
 	&:active,
 	&:hover {
-		color: var(--color-primary);
+		color: var(--color-primary-70);
 		background-color: var(--color-primary-10);
 	}
 
 	/* CASE: Disabled */
 	&[disabled],
 	&.is-disabled {
+		color: var(--color-grey);
+		border-color: var(--color-grey);
 
 		&:focus,
 		&:active,
@@ -102,15 +105,11 @@
 	.t-theme--light & {
 		color: var(--color-white);
 
-		&:focus,
-		&:active,
-		&:hover {
-			background-color: var(--color-primary-70);
-		}
-
 		/* CASE: Disabled */
 		&[disabled],
 		&.is-disabled {
+			color: var(--color-grey-light);
+			border-color: var(--color-grey-light);
 
 			&:focus,
 			&:active,
@@ -141,11 +140,12 @@
 	/* CASE: Disabled */
 	&[disabled],
 	&.is-disabled {
+		background-color: var(--color-grey);
 
 		&:focus,
 		&:active,
 		&:hover {
-			background-color: var(--color-secondary);
+			background-color: var(--color-grey);
 		}
 	}
 }

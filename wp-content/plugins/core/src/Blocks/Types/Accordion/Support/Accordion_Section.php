@@ -18,6 +18,7 @@ class Accordion_Section extends Block_Type_Config {
 	public function build(): Block_Type_Interface {
 		return $this->factory->block( self::NAME )
 			->set_label( __( 'Accordion Section', 'tribe' ) )
+			->set_dashicon( 'menu-alt' )
 			->set_parents( Accordion::NAME )
 			->add_content_section( $this->content_area() )
 			->add_class( 'c-accordion__row' )

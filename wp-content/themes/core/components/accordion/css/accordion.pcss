@@ -21,7 +21,8 @@
  * ----------------------------------------------------------------------------- */
 
 .c-accordion__header {
-	padding: var(--spacer-30) 0;
+	position: relative;
+	padding: var(--spacer-30) 0 var(--spacer-30) var(--grid-1-col);
 	background: none;
 	border: 0;
 	width: 100%;
@@ -30,7 +31,8 @@
 	&:before {
 		@mixin icon;
 
-		position: relative;
+		position: absolute;
+		left: 0;
 		display: block;
 		float: left;
 		width: var(--grid-1-col);

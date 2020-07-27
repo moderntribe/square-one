@@ -12,6 +12,6 @@ abstract class Block_Controller extends Controller {
 
 	protected $block_type;
 
-	public abstract function render( $attributes, $content, $block_type );
+	abstract public function render( $attributes, $content, $block_type );
 
 }

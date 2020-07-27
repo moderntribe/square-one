@@ -19,7 +19,7 @@ class Legacy_Check {
 	public function print_redirect_script(): void {
 		?>
 
-        <script type="text/javascript">
+		<script>
 			function is_browser() {
 				return (navigator.userAgent.indexOf("Chrome") !== - 1 || navigator.userAgent.indexOf("Opera") !== - 1 || navigator.userAgent.indexOf("Firefox") !== - 1 || navigator.userAgent.indexOf("MSIE") !== - 1 || navigator.userAgent.indexOf("Safari") !== - 1 || navigator.userAgent.indexOf("Edge") !== - 1);
 			}
@@ -37,7 +37,7 @@ class Legacy_Check {
 			if (is_browser() && less_than_ie11() && not_excluded_page()) {
 				window.location = location.protocol + '//' + location.host + '<?php echo $this->unsupported_browser_path; ?>';
 			}
-        </script>
+		</script>
 
 		<?php
 	}

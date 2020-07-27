@@ -1,0 +1,58 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Component: Block: Accordion
+ *
+ * ----------------------------------------------------------------------------- */
+
+.b-accordion {}
+
+/* -----------------------------------------------------------------------------
+ * Accordion: Container
+ * ----------------------------------------------------------------------------- */
+
+.b-accordion__container {
+	/* CASE: Accordion: Inline */
+	.c-block--layout-inline & {
+		@media (--viewport-full) {
+			display: flex;
+			justify-content: space-between;
+		}
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Accordion: Header
+ * ----------------------------------------------------------------------------- */
+
+.b-accordion__header {
+	margin-bottom: var(--spacer-40);
+
+	/* CASE: Accordion: Inline */
+	.c-block--layout-inline & {
+		@media (--viewport-full) {
+			margin-bottom: 0;
+			width: var(--grid-5-col);
+		}
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Accordion: Description
+ * ----------------------------------------------------------------------------- */
+
+.b-accordion__description {
+	margin-top: var(--spacer-20);
+}
+
+/* -----------------------------------------------------------------------------
+ * Accordion: Content
+ * ----------------------------------------------------------------------------- */
+
+.b-accordion__content {
+	/* CASE: Accordion: Inline */
+	.c-block--layout-inline & {
+		@media (--viewport-full) {
+			width: var(--grid-7-col);
+		}
+	}
+}

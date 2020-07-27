@@ -33,7 +33,8 @@ class Image_Derivative {
 	/** @var bool */
 	private $is_match = false;
 
-	public function __construct( string $size = '', string $src = '', int $width = 0, int $height = 0, bool $is_intermediate = false, bool $is_match = false ) {
+	/* TODO: Adjust method definition to allow SVG images which have `false` for the width & height arguments. */
+	public function __construct( string $size = '', string $src = '', $width = 0, $height = 0, bool $is_intermediate = false, bool $is_match = false ) {
 		$this->size            = $size;
 		$this->src             = $src;
 		$this->width           = $width;
