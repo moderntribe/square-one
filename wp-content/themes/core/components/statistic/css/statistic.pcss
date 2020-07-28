@@ -4,10 +4,11 @@
  *
  * ----------------------------------------------------------------------------- */
 
-.c-accordion {
+.c-statistic {
 	display: flex;
-	justify-content: center;
+	flex-direction: column;
 	align-items: center;
+	padding: var(--spacer-40);
 }
 
 /* -----------------------------------------------------------------------------
@@ -15,7 +16,10 @@
  * ----------------------------------------------------------------------------- */
 
 .c-statistic__value {
+	@mixin t-display;
+
 	color: var(--color-primary);
+	word-break: break-all; /* Break long numbers */
 }
 
 /* -----------------------------------------------------------------------------
@@ -26,4 +30,5 @@
 	@mixin t-overline;
 
 	color: var(--color-grey);
+	margin-top: var(--spacer-10);
 }

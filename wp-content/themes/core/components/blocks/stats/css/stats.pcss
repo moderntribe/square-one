@@ -4,7 +4,12 @@
  *
  * ----------------------------------------------------------------------------- */
 
-.b-stats {}
+.b-stats {
+
+	.c-statistic {
+		height: 100%;
+	}
+}
 
 /* -----------------------------------------------------------------------------
  * Stats: Container
@@ -36,8 +41,14 @@
 	}
 }
 
-.b-accordion__description {
+.b-stats__description {
 	margin-top: var(--spacer-10);
+
+	> p {
+		@media (--viewport-full) {
+			@mixin t-body-large;
+		}
+	}
 }
 
 /* -----------------------------------------------------------------------------
@@ -58,13 +69,79 @@
  * ----------------------------------------------------------------------------- */
 
 .b-stats__list {
-
+	@media (--viewport-medium) {
+		display: flex;
+		flex-flow: row wrap;
+	}
 }
 
-/* -----------------------------------------------------------------------------
- * Stats: Stat Card
- * ----------------------------------------------------------------------------- */
+.b-stats__list-item {
+	margin: 0;
+	padding: var(--spacer-20) 0;
 
-.b-stats__card {
+	@media (--viewport-medium) {
+		width: 50%;
 
+		&:nth-child(-n+2) {
+			flex-grow: 1;
+		}
+	}
+
+	@media (--viewport-full) {
+		width: 25%;
+
+		&:nth-child(-n+4) {
+			flex-grow: 1;
+		}
+	}
+
+	/* CASE: HAS DIVIDERS */
+	.c-block--layout-stacked & {
+		&:not(:last-child) {
+			border-bottom: 1px solid var(--color-grey-light);
+		}
+
+		/* CASE: Dividers: List: Hide last 2 element dividers */
+		@media (--viewport-medium) {
+			&:nth-last-child(-n+2):not(:nth-child(2n+2)) {
+				border-bottom: 0;
+			}
+		}
+
+		/* CASE: Dividers: List: Hide borders for last row */
+		@media (--viewport-full) {
+			&:nth-last-child(-n+4):not(:nth-child(4n+4)) {
+				border-bottom: 0;
+			}
+		}
+
+		/* CASE: Dividers: Medium Screens: Statistic */
+		@media (--viewport-medium) {
+			.c-statistic {
+				border-right: 1px solid var(--color-grey-light);
+			}
+
+			/* Hide last element border, if not divisible by 2 */
+			&:last-child:not(2n+2) .c-statistic {
+				border-right: 0;
+			}
+
+			/* CASE: Dividers: Tablet hide every second element border */
+			&:nth-child(even) .c-statistic {
+				border-right: 0;
+			}
+		}
+
+		/* CASE: Dividers: Large Screens: Statistic */
+		@media (--viewport-full) {
+			&:nth-child(even) .c-statistic {
+				border-right: 1px solid var(--color-grey-light);
+			}
+
+			/* Hide every fourth element border */
+			&:nth-child(4n) .c-statistic {
+				border-right: 0;
+			}
+		}
+	}
 }
