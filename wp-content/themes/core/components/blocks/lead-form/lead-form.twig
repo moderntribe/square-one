@@ -1,0 +1,16 @@
+{# Block: Lead Form #}
+<section {{ classes|stringify }} {{ attrs|stringify }}>
+	<div {{ container_classes|stringify }}>
+
+		{% if content %}
+			{{ component( 'content-block/Content_Block.php', content ) }}
+		{% endif %}
+
+		{% if form %}
+			<div {{ form_classes|stringify }}>
+				TODO: Embed Gravity Form
+			</div>
+		{% endif %}
+
+	</div>
+</section>

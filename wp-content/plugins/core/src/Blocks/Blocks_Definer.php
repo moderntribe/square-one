@@ -42,6 +42,8 @@ class Blocks_Definer implements Definer_Interface {
 
 				DI\get( Types\Interstitial\Interstitial::class ),
 
+				DI\get( Types\Lead_Form\Lead_Form::class ),
+
 				DI\get( Types\Links\Links::class ),
 				DI\get( Types\Links\Support\Link::class ),
 
@@ -56,6 +58,8 @@ class Blocks_Definer implements Definer_Interface {
 
 				DI\get( Types\Stats\Stats::class ),
 				DI\get( Types\Stats\Support\Statistic::class ),
+
+				DI\get( Types\Quote\Quote::class ),
 			] ),
 
 			self::CONTROLLER_MAP => DI\add( [] ),

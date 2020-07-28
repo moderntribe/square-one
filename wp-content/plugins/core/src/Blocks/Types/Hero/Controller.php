@@ -27,7 +27,7 @@ class Controller extends Block_Controller {
 			Container::CONTAINER_CLASSES => [ 'b-hero__container', 'l-container' ],
 			Container::MEDIA_CLASSES     => [ 'b-hero__media' ],
 			Container::CONTENT_CLASSES   => [ 'b-hero__content' ],
-			Container::CLASSES           => [ 'c-block', 'c-panel--full-bleed', 'b-hero' ],
+			Container::CLASSES           => [ 'c-block', 'c-block--full-bleed', 'b-hero' ],
 			Container::ATTRS             => [],
 		];
 
