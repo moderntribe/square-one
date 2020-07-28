@@ -181,8 +181,6 @@
  * ------------------------------------------------------------------------- */
 
 @define-mixin t-quote {
-	@mixin t-display-small;
-
 	quotes: '\201C' '\201D' '\2018' '\2019';
 
 	&:first-child {
@@ -198,9 +196,5 @@
 		&:after {
 			content: close-quote;
 		}
-	}
-
-	@media (--viewport-medium) {
-		@mixin t-display-large;
 	}
 }

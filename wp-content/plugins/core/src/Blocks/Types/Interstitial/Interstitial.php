@@ -22,7 +22,7 @@ class Interstitial extends Block_Type_Config {
 	public function build(): Block_Type_Interface {
 		return $this->factory->block( self::NAME )
 			->set_label( __( 'Interstitial', 'tribe' ) )
-			->add_class( 'c-block c-panel--full-bleed b-interstitial' )
+			->add_class( 'c-block c-block--full-bleed b-interstitial' )
 			->add_data_source( 'className-c-block', self::LAYOUT )
 			->set_dashicon( 'menu-alt' )
 			->add_data_source( 'background-image', self::IMAGE ) /* TEMP until we get support for this on the HTML field. */

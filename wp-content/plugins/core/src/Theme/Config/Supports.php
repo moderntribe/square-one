@@ -38,6 +38,8 @@ class Supports {
 			'comment-list',
 			'gallery',
 			'caption',
+			'script',
+			'style',
 		] );
 	}
 }
