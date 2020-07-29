@@ -269,13 +269,31 @@
 	/* TEMP: Reset width so easier to add values in editor. */
 	.wp-block[data-type="tribe/statistic"] {
 		width: 50%;
-
-		@media (--viewport-full) {
-			width: 25%;
-		}
+		margin-left: 0;
+		margin-right: 0;
 
 		.b-stats__list-item {
 			width: 100% !important;
+		}
+	}
+
+	/* CASE: Layout Stacked */
+	.c-block--layout-stacked {
+
+		.wp-block[data-type="tribe/statistic"] {
+			width: 50%;
+
+			@media (--viewport-full) {
+				width: 25%;
+			}
+		}
+	}
+
+	/* CASE: Layout Inline */
+	.c-block--layout-inline {
+		@media (--viewport-full) {
+			display: flex !important;
+			justify-content: space-between;
 		}
 	}
 }

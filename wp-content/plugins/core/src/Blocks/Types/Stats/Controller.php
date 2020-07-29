@@ -32,6 +32,10 @@ class Controller extends Block_Controller {
 		return $this->attributes[ Stats_Block::LAYOUT ] ?? Stats_Block::LAYOUT_INLINE;
 	}
 
+	private function get_content_align(): string {
+		return $this->attributes[ Stats_Block::CONTENT_ALIGN ] ?? Stats_Block::CONTENT_ALIGN_LEFT;
+	}
+
 	private function get_container_classes(): array {
 		$classes = [
 			'b-stats__container',
@@ -51,7 +55,7 @@ class Controller extends Block_Controller {
 			Content_Block::CLASSES => [ 'b-stats__header' ],
 			Content_Block::TITLE   => $this->get_title(),
 			Content_Block::TEXT    => $this->get_description(),
-			Content_Block::LAYOUT  => Content_Block::LAYOUT_STACKED,
+			Content_Block::LAYOUT  => $this->get_content_align() === Stats_Block::CONTENT_ALIGN_CENTER ? Content_Block::LAYOUT_CENTER : Content_Block::LAYOUT_STACKED,
 		];
 	}
 

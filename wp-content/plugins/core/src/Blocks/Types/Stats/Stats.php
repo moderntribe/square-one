@@ -20,6 +20,10 @@ class Stats extends Block_Type_Config {
 	public const LAYOUT_INLINE  = 'layout-inline';
 	public const LAYOUT_STACKED = 'layout-stacked';
 
+	public const CONTENT_ALIGN        = 'content';
+	public const CONTENT_ALIGN_LEFT   = 'content-left';
+	public const CONTENT_ALIGN_CENTER = 'content-center';
+
 	// TODO: Add boolean setting to display dividers.
 	public const DISPLAY          = 'display';
 	public const DISPLAY_DIVIDERS = 'display-dividers';
@@ -77,6 +81,13 @@ class Stats extends Block_Type_Config {
 				->add_dashicon_option( self::LAYOUT_STACKED, __( 'Stacked', 'tribe' ), 'align-center' )
 				->add_dashicon_option( self::LAYOUT_INLINE, __( 'Inline', 'tribe' ), 'align-right' )
 				->set_default( self::LAYOUT_STACKED )
+				->build()
+		)
+		->add_field(
+			$this->factory->toolbar()->field()->icon_select( self::CONTENT_ALIGN )
+				->add_dashicon_option( self::CONTENT_ALIGN_CENTER, __( 'Content Center', 'tribe' ), 'editor-aligncenter' )
+				->add_dashicon_option( self::CONTENT_ALIGN_LEFT, __( 'Content Left', 'tribe' ), 'editor-alignleft' )
+				->set_default( self::CONTENT_ALIGN_LEFT )
 				->build()
 		)
 		->build();
