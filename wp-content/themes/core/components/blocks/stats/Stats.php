@@ -20,6 +20,7 @@ use \Tribe\Project\Blocks\Types\Stats\Stats as Stats_Block;
 class Stats extends Component {
 
 	public const LAYOUT            = 'layout';
+	public const DISPLAY           = 'display';
 	public const HEADER            = 'header';
 	public const CONTAINER_CLASSES = 'container_classes';
 	public const CONTENT_CLASSES   = 'content_classes';
@@ -30,6 +31,7 @@ class Stats extends Component {
 	protected function defaults(): array {
 		return [
 			self::LAYOUT            => Stats_Block::LAYOUT_STACKED,
+			self::DISPLAY           => Stats_Block::DISPLAY_DIVIDERS,
 			self::HEADER            => '',
 			self::CONTAINER_CLASSES => [ 'b-stats__container', 'l-container' ],
 			self::CONTENT_CLASSES   => [ 'b-stats__content' ],
@@ -41,5 +43,6 @@ class Stats extends Component {
 
 	public function init() {
 		$this->data[ self::CLASSES ][] = 'c-block--' . $this->data[ self::LAYOUT ];
+		$this->data[ self::CLASSES ][] = 'c-block--' . $this->data[ self::DISPLAY ];
 	}
 }

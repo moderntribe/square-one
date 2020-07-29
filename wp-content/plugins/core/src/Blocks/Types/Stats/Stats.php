@@ -20,6 +20,10 @@ class Stats extends Block_Type_Config {
 	public const LAYOUT_INLINE  = 'layout-inline';
 	public const LAYOUT_STACKED = 'layout-stacked';
 
+	// TODO: Add boolean setting to display dividers.
+	public const DISPLAY          = 'display';
+	public const DISPLAY_DIVIDERS = 'display-dividers';
+
 	public function build(): Block_Type_Interface {
 		return $this->factory->block( self::NAME )
 			->set_label( __( 'Stats', 'tribe' ) )
@@ -52,10 +56,11 @@ class Stats extends Block_Type_Config {
 
 	private function links_area(): Content_Section {
 		return $this->factory->content()->section()
-			->add_class( 'b-stats__content b-stats__list' )
+			->add_class( 'b-stats__content' )
 			->add_field(
 				$this->factory->content()->field()->flexible_container( self::STATS )
 					->set_label( __( 'Stats List', 'tribe' ) )
+					->add_class( 'b-stats__list' )
 					->merge_nested_attributes( Statistic::NAME )
 					->add_template_block( Statistic::NAME )
 					->add_block_type( Statistic::NAME )

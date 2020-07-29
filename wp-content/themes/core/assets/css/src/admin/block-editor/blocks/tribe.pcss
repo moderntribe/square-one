@@ -252,3 +252,30 @@
 		}
 	}
 }
+
+/* -----------------------------------------------------------------------------
+ * Panel: Stats
+ * ----------------------------------------------------------------------------- */
+
+.wp-block[data-type="tribe/stats"] {
+
+	.b-stats__list .block-editor-block-list__layout {
+		@media (--viewport-full) {
+			display: flex;
+			flex-flow: row wrap;
+		}
+	}
+
+	/* TEMP: Reset width so easier to add values in editor. */
+	.wp-block[data-type="tribe/statistic"] {
+		width: 50%;
+
+		@media (--viewport-full) {
+			width: 25%;
+		}
+
+		.b-stats__list-item {
+			width: 100% !important;
+		}
+	}
+}

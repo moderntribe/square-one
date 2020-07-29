@@ -16,6 +16,7 @@
  * ----------------------------------------------------------------------------- */
 
 .b-stats__container {
+
 	/* CASE: Layout Inline */
 	.c-block--layout-inline & {
 		@media (--viewport-full) {
@@ -36,7 +37,11 @@
 	.c-block--layout-inline & {
 		@media (--viewport-full) {
 			margin-bottom: 0;
-			width: var(--grid-5-col);
+			width: calc(50% - var(--grid-gutter-half));
+		}
+
+		@media (--viewport-large) {
+			width: calc(41.6667% - var(--grid-gutter-half));
 		}
 	}
 }
@@ -56,10 +61,11 @@
  * ----------------------------------------------------------------------------- */
 
 .b-stats__content {
+
 	/* CASE: Layout Inline */
 	.c-block--layout-inline & {
 		@media (--viewport-full) {
-			width: var(--grid-7-col);
+			width: calc(50% - var(--grid-gutter-half));
 		}
 	}
 }
@@ -87,60 +93,74 @@
 		}
 	}
 
-	@media (--viewport-full) {
-		width: 25%;
+	/* CASE: Layout Stacked */
+	.c-block--layout-stacked & {
+		@media (--viewport-full) {
+			width: 25%;
 
-		&:nth-child(-n+4) {
-			flex-grow: 1;
+			&:nth-child(-n+4) {
+				flex-grow: 1;
+			}
 		}
 	}
+}
 
-	/* CASE: HAS DIVIDERS */
-	.c-block--layout-stacked & {
+/* -----------------------------------------------------------------------------
+ * CASE: Divided List
+ * ----------------------------------------------------------------------------- */
+
+.c-block--display-dividers {
+
+	.b-stats__list-item {
+
 		&:not(:last-child) {
 			border-bottom: 1px solid var(--color-grey-light);
 		}
 
-		/* CASE: Dividers: List: Hide last 2 element dividers */
+		/* CASE: All Layouts, Medium Screens, 2up list */
 		@media (--viewport-medium) {
+
+			/* 2up: Hide last 2 list element dividers */
 			&:nth-last-child(-n+2):not(:nth-child(2n+2)) {
 				border-bottom: 0;
 			}
-		}
 
-		/* CASE: Dividers: List: Hide borders for last row */
-		@media (--viewport-full) {
-			&:nth-last-child(-n+4):not(:nth-child(4n+4)) {
-				border-bottom: 0;
-			}
-		}
-
-		/* CASE: Dividers: Medium Screens: Statistic */
-		@media (--viewport-medium) {
 			.c-statistic {
 				border-right: 1px solid var(--color-grey-light);
 			}
 
-			/* Hide last element border, if not divisible by 2 */
+			/* 2up: Hide last element border, if not divisible by 2 */
 			&:last-child:not(2n+2) .c-statistic {
 				border-right: 0;
 			}
 
-			/* CASE: Dividers: Tablet hide every second element border */
+			/* 2up: Hide border for last element in row */
 			&:nth-child(even) .c-statistic {
 				border-right: 0;
 			}
 		}
+	}
 
-		/* CASE: Dividers: Large Screens: Statistic */
-		@media (--viewport-full) {
-			&:nth-child(even) .c-statistic {
-				border-right: 1px solid var(--color-grey-light);
-			}
+	/* CASE: Layout Stacked, 4up list */
+	&.c-block--layout-stacked {
 
-			/* Hide every fourth element border */
-			&:nth-child(4n) .c-statistic {
-				border-right: 0;
+		.b-stats__list-item {
+			@media (--viewport-full) {
+
+				/* 4up: Hide borders for last row */
+				&:nth-last-child(-n+4):not(:nth-child(4n+4)) {
+					border-bottom: 0;
+				}
+
+				/* 4up: Add back borders hidden for medium screens  */
+				&:nth-child(even) .c-statistic {
+					border-right: 1px solid var(--color-grey-light);
+				}
+
+				/* 4up: Hide border for last element in row */
+				&:nth-child(4n) .c-statistic {
+					border-right: 0;
+				}
 			}
 		}
 	}
