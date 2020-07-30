@@ -5,16 +5,20 @@ namespace Tribe\Project\Blocks;
 
 use Tribe\Gutenpanels\Registration\Registry;
 use Tribe\Libs\Container\Abstract_Subscriber;
-use Tribe\Project\Controllers\Blocks\Block_Controller;
+use Tribe\Project\Blocks\Lib\Block_Registrar;
 
 class Blocks_Subscriber extends Abstract_Subscriber {
 
 	public function register(): void {
-		add_action( 'tribe/gutenpanels/register', function ( Registry $registry ) {
-			foreach ( $this->container->get( Blocks_Definer::TYPES ) as $type ) {
-				/** @var Block_Type_Config $type */
-				$registry->register( $type->build() );
+		add_action( 'init', function () {
+			foreach ( $this->container->get( Blocks_Definer::ACF_TYPES ) as $type ) {
+				$this->container->get( Block_Registrar::class )->register( $type );
 			}
+		}, 10, 1 );
+
+		add_action( 'tribe/gutenpanels/register', function ( Registry $registry ) {
+			/** @var Block_Type_Config $type */
+			$registry->register( $type->build() );
 		}, 10, 1 );
 
 		add_action( 'tribe/gutenpanels/block/render', function ( $prefiltered, $attributes, $content, $block_type ) {

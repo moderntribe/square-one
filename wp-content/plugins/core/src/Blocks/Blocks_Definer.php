@@ -7,18 +7,24 @@ use DI;
 use Tribe\Libs\Container\Definer_Interface;
 use Tribe\Project\Blocks\Builder\Block_Builder;
 use Tribe\Project\Blocks\Builder\Builder_Factory;
+use Tribe\Project\Blocks\Lib\Block_Registrar;
+use Tribe\Project\Blocks\Types\Example\Example;
 use Tribe\Project\Components\Component_Factory;
 use Tribe\Project\Components\Handler;
 
 class Blocks_Definer implements Definer_Interface {
 
 	public const TYPES          = 'blocks.types';
+	public const ACF_TYPES      = 'blocks.acf.types';
 	public const CONTROLLER_MAP = 'blocks.controller_map';
 	public const BLACKLIST      = 'blocks.blacklist';
 	public const STYLES         = 'blocks.style_overrides';
 
 	public function define(): array {
 		return [
+			self::ACF_TYPES => DI\add( [
+					DI\get(Example::class), //ACF Block
+			]),
 			self::TYPES => DI\add( [
 				DI\get( Types\Accordion\Accordion::class ),
 				DI\get( Types\Accordion\Support\Accordion_Section::class ),
@@ -104,6 +110,10 @@ class Blocks_Definer implements Definer_Interface {
 
 			\Tribe\Gutenpanels\Builder\Block_Builder::class             => DI\get( Block_Builder::class ),
 			\Tribe\Gutenpanels\Builder\Factories\Builder_Factory::class => DI\get( Builder_Factory::class ),
+
+			Block_Registrar::class => static function () { //ACF Block Registrar
+				return new Block_Registrar();
+			},
 		];
 	}
 }
