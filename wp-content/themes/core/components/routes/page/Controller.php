@@ -1,7 +1,7 @@
 <?php
 declare( strict_types=1 );
 
-namespace Tribe\Project\Templates\Components\page\index;
+namespace Tribe\Project\Templates\Components\routes\page;
 
 use Tribe\Project\Templates\Factory_Method;
 use Tribe\Project\Templates\Models\Breadcrumb;
@@ -21,9 +21,18 @@ class Controller {
 	 */
 	public function render_header(): void {
 		do_action( 'get_header', null );
-		get_template_part( 'components/document/header/header', 'index' );
+		get_template_part( 'components/document/header/header', 'page' );
 	}
 
+	/**
+	 * Render the featured image component
+	 *
+	 * @return void
+	 */
+	public function render_featured_image(): void {
+		// TODO: use image component
+		echo get_the_post_thumbnail();
+	}
 
 	/**
 	 * Render the sidebar component
@@ -35,7 +44,7 @@ class Controller {
 	 */
 	public function render_sidebar(): void {
 		do_action( 'get_sidebar', null );
-		get_template_part( 'components/sidebar/sidebar', 'index', [ 'sidebar_id' => $this->sidebar_id ] );
+		get_template_part( 'components/sidebar/sidebar', 'page', [ 'sidebar_id' => $this->sidebar_id ] );
 	}
 
 	/**
@@ -48,22 +57,22 @@ class Controller {
 	 */
 	public function render_footer(): void {
 		do_action( 'get_footer', null );
-		get_template_part( 'components/document/footer/footer', 'index' );
+		get_template_part( 'components/document/footer/footer', 'page' );
 	}
 
 	public function render_breadcrumbs(): void {
-		get_template_part( 'components/breadcrumbs/breadcrumbs', 'index', [ 'breadcrumbs' => $this->get_breadcrumbs() ] );
+		get_template_part( 'components/breadcrumbs/breadcrumbs', 'page', [ 'breadcrumbs' => $this->get_breadcrumbs() ] );
 	}
 
 	/**
 	 * @return Breadcrumb[]
 	 */
 	protected function get_breadcrumbs(): array {
-		$page = get_option( 'page_for_posts' );
+		$page = get_the_ID();
 		$url  = $page ? get_permalink( $page ) : home_url();
 
 		return [
-			new Breadcrumb( $url, __( 'News', 'tribe' ) ),
+			new Breadcrumb( $url, get_the_title( $page ) ),
 		];
 	}
 }
