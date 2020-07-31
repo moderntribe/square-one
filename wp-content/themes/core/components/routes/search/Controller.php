@@ -1,7 +1,7 @@
 <?php
 declare( strict_types=1 );
 
-namespace Tribe\Project\Templates\Components\page\search;
+namespace Tribe\Project\Templates\Components\routes\search;
 
 use Tribe\Project\Templates\Factory_Method;
 use Tribe\Project\Templates\Models\Breadcrumb;
