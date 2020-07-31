@@ -1,7 +1,7 @@
 <?php
 declare( strict_types=1 );
 
-namespace Tribe\Project\Templates\Components\page;
+namespace Tribe\Project\Templates\Components\routes\index;
 
 use Tribe\Project\Templates\Factory_Method;
 use Tribe\Project\Templates\Models\Breadcrumb;
@@ -24,15 +24,6 @@ class Controller {
 		get_template_part( 'components/document/header/header', 'index' );
 	}
 
-	/**
-	 * Render the featured image component
-	 *
-	 * @return void
-	 */
-	public function render_featured_image(): void {
-		// TODO: use image component
-		echo get_the_post_thumbnail();
-	}
 
 	/**
 	 * Render the sidebar component
@@ -68,11 +59,11 @@ class Controller {
 	 * @return Breadcrumb[]
 	 */
 	protected function get_breadcrumbs(): array {
-		$page = get_the_ID();
+		$page = get_option( 'page_for_posts' );
 		$url  = $page ? get_permalink( $page ) : home_url();
 
 		return [
-			new Breadcrumb( $url, get_the_title( $page ) ),
+			new Breadcrumb( $url, __( 'News', 'tribe' ) ),
 		];
 	}
 }

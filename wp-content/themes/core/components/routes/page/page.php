@@ -1,9 +1,11 @@
 <?php
 declare( strict_types=1 );
 
-$controller = \Tribe\Project\Templates\Components\page\Controller::factory();
+$controller = \Tribe\Project\Templates\Components\routes\page\Controller::factory();
 
 $controller->render_header();
+
+the_post();
 
 ?>
 	<main id="main-content">

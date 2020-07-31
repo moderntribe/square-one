@@ -1,7 +1,7 @@
 <?php
 declare( strict_types=1 );
 
-$controller = \Tribe\Project\Templates\Components\page\index\Controller::factory();
+$controller = \Tribe\Project\Templates\Components\routes\index\Controller::factory();
 
 $controller->render_header();
 
