@@ -1,7 +1,7 @@
 <?php
 declare( strict_types=1 );
 
-$controller = \Tribe\Project\Templates\Components\page\index\Controller::factory();
+$controller = \Tribe\Project\Templates\Components\page\search\Controller::factory();
 
 $controller->render_header();
 
@@ -17,10 +17,8 @@ $controller->render_header();
 					the_post();
 					get_template_part( 'components/content/search/search', 'search' );
 				}
-				echo "Results";
 				get_template_part( 'components/pagination/loop/loop', 'search' );
 			}else{
-				echo "NO results";
 				get_template_part( 'components/content/no-results/no-results', 'search' );
 			}
 			?>
