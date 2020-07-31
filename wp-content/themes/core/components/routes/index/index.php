@@ -25,7 +25,7 @@ $controller->render_header();
 
 			else :
 
-				get_template_part( 'components/no_results', 'index' );
+				get_template_part( 'components/no_results/no_results', 'index' );
 
 			endif;
 			?>
