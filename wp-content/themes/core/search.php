@@ -1,3 +1,3 @@
 <?php
 
-get_template_part( 'components/page/search/search' );
+get_template_part( 'components/routes/search/search' );
