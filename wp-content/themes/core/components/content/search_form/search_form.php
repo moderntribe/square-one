@@ -1,7 +1,7 @@
 <?php
 declare( strict_types=1 );
 
-$controller = \Tribe\Project\Templates\Components\search\Controller::factory();
+$controller = \Tribe\Project\Templates\Components\content\search_form\Controller::factory();
 
 ?>
 <form class="c-search" role="search" method="get" action="<?php echo esc_url( $controller->action() ); ?>">

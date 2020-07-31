@@ -19,7 +19,7 @@ $controller = \Tribe\Project\Templates\Components\header\masthead\Controller::fa
 
 		<?php get_template_part( 'components/header/navigation/navigation' ); ?>
 
-		<?php get_template_part( 'components/search/search' ); ?>
+		<?php get_template_part( 'components/content/search_form/search_form' ); ?>
 
 	</div>
 
