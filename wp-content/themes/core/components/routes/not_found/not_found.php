@@ -8,13 +8,18 @@ $controller->render_header();
 	<main id="main-content">
 		<?php $controller->render_breadcrumbs(); ?>
 
-		<?php get_template_part( 'components/header/subheader/subheader' ); ?>
-
 		<div class="l-container">
-			<div class="l-container">
-				<h2>{{ error_404_browser_title }}</h2>
-				<p>{{ error_404_browser_content }}</p>
-			</div>
+				<aside class="not-found">
+
+					<h3 class="not-found__title">
+						<?php echo esc_html( __( '404 Page Not Found' ) ) ?>
+					</h3>
+
+					<p class="no-found__content">
+						<?php echo esc_html( __( 'The content you are looking for does not exist.' ) ) ?>
+					</p>
+
+				</aside>
 		</div>
 	</main>
 <?php
