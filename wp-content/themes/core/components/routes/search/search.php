@@ -12,16 +12,16 @@ $controller->render_header();
 		<div class="l-container">
 
 			<?php
-			if( have_posts() ) {
+			if( have_posts() ) :
 				echo "Results";
-				while ( have_posts() ) {
+				while ( have_posts() ) :
 					the_post();
 					get_template_part( 'components/content/search_item/search_item', 'search' );
-				}
+				endwhile;
 				get_template_part( 'components/pagination/loop/loop', 'search' );
-			}else{
+			else :
 				get_template_part( 'components/content/no_results/no_results', 'search' );
-			}
+			endif;
 			?>
 
 		</div>
