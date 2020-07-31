@@ -1,3 +1,3 @@
 <?php
 
-tribe_controller( \Tribe\Project\Controllers\IndexController::class, 'search' );
+get_template_part( 'components/page/search/search' );
