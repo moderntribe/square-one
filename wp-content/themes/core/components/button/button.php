@@ -11,4 +11,6 @@ if ( ! $controller->has_content() ) {
 	return;
 }
 ?>
-<button <?php echo $controller->classes(); ?> <?php echo $controller->attributes(); ?>><?php echo $controller->content(); ?></button>
+<button <?php echo $controller->classes(); ?> <?php echo $controller->attributes(); ?>>
+	<?php echo $controller->content(); ?>
+</button>

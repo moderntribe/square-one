@@ -4,7 +4,7 @@ declare( strict_types=1 );
 namespace Tribe\Project\Templates\Controllers\Content;
 
 use Exception;
-use Tribe\Project\Templates\Components\Content\Search_Item as Item_Context;
+use Tribe\Project\Templates\Components\Content\loop_item_search as Item_Context;
 use Tribe\Project\Templates\Components\Image;
 
 class Search_Item extends Loop_Item {

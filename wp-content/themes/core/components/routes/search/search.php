@@ -12,11 +12,11 @@ $controller->render_header();
 		<div class="l-container">
 
 			<?php
-			if( have_posts() ) :
+			if ( have_posts() ) :
 				echo "Results";
 				while ( have_posts() ) :
 					the_post();
-					get_template_part( 'components/content/search_item/search_item', 'search' );
+					get_template_part( 'components/content/loop_item_search/loop_item_search', 'search' );
 				endwhile;
 				get_template_part( 'components/pagination/loop/loop', 'search' );
 			else :
