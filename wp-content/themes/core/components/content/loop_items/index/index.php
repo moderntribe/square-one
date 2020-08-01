@@ -1,9 +1,8 @@
 <?php
 declare( strict_types=1 );
-
-$controller = \Tribe\Project\Templates\Components\content\loop_item\Controller::factory();
-
+$controller = \Tribe\Project\Templates\Components\content\loop_items\index\Controller::factory();
 ?>
+
 <article class="item-loop item-loop--<?php echo esc_attr( get_post_type() ) ?>">
 
 	<header class="item-loop__header">

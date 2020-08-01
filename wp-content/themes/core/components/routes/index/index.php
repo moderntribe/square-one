@@ -17,7 +17,7 @@ $controller->render_header();
 				while ( have_posts() ) :
 
 					the_post();
-					get_template_part( 'components/content/loop_item/loop_item', 'index' );
+					get_template_part( 'components/content/loop_items/index/index', 'index' );
 
 				endwhile;
 

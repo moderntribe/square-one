@@ -1,7 +1,7 @@
 <?php
 declare( strict_types=1 );
 
-namespace Tribe\Project\Templates\Components\content\loop_item;
+namespace Tribe\Project\Templates\Components\content\loop_items\index;
 
 use Tribe\Project\Templates\Factory_Method;
 

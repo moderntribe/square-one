@@ -1,6 +1,6 @@
 <?php
 
-$controller = \Tribe\Project\Templates\Components\content\loop_item_search\Controller::factory();
+$controller = \Tribe\Project\Templates\Components\content\loop_items\search\Controller::factory();
 
 ?>
 <article class="item-loop item-loop--search item-loop--<?php echo esc_attr( get_post_type() ); ?>">
