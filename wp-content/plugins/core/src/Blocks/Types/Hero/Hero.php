@@ -17,8 +17,8 @@ class Hero extends Block_Config {
 	public const DESCRIPTION   = 'description';
 	public const CTA           = 'cta';
 	public const LAYOUT        = 'layout';
-	public const LAYOUT_LEFT   = 'hero-layout-left';
-	public const LAYOUT_CENTER = 'hero-layout-center';
+	public const LAYOUT_LEFT   = 'left';
+	public const LAYOUT_CENTER = 'center';
 
 	/**
 	 * Register the block
@@ -37,27 +37,27 @@ class Hero extends Block_Config {
 	 * Register Fields for block
 	 */
 	public function add_fields() {
-		$this->add_field( new Field( self::TITLE, [
+		$this->add_field( new Field( self::NAME . '_' . self::TITLE, [
 				'label' => __( 'Title', 'tribe' ),
 				'name'  => self::TITLE,
 				'type'  => 'text',
 			] )
-		)->add_field( new Field( self::LEAD_IN, [
+		)->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
 				'label' => __( 'Lead in', 'tribe' ),
 				'name'  => self::LEAD_IN,
 				'type'  => 'text',
 			] )
-		)->add_field( new Field( self::IMAGE, [
+		)->add_field( new Field( self::NAME . '_' . self::IMAGE, [
 				'label' => __( 'Image', 'tribe' ),
 				'name'  => self::IMAGE,
 				'type'  => 'image',
 			] )
-		)->add_field( new Field( self::CTA, [
+		)->add_field( new Field( self::NAME . '_' . self::CTA, [
 				'label' => __( 'Call to Action', 'tribe' ),
 				'name'  => self::CTA,
 				'type'  => 'link',
 			] )
-		)->add_field( new Field( self::DESCRIPTION, [
+		)->add_field( new Field( self::NAME . '_' . self::DESCRIPTION, [
 				'label' => __( 'Description', 'tribe' ),
 				'name'  => self::DESCRIPTION,
 				'type'  => 'textarea',
@@ -69,17 +69,21 @@ class Hero extends Block_Config {
 	 * Register Settings for Block
 	 */
 	public function add_settings() {
-		$this->add_setting( new Field( self::LAYOUT, [
+		$this->add_setting( new Field( self::NAME . '_' . self::LAYOUT, [
 			'type'            => 'image_select',
 			'choices'         => [
-				self::LAYOUT_LEFT  => __( 'Align Left', 'tribe' ),
+				self::LAYOUT_LEFT   => __( 'Align Left', 'tribe' ),
 				self::LAYOUT_CENTER => __( 'Align Center', 'tribe' ),
 			],
 			'default_value'   => [
 				self::LAYOUT_CENTER,
 			],
 			'multiple'        => 0,
-			'image_path'      => trailingslashit( get_template_directory_uri() ) . 'assets/img/admin/blocks/',
+			'image_path'      => sprintf(
+				'%sassets/img/admin/blocks/%s/',
+				trailingslashit( get_template_directory_uri() ),
+				self::NAME
+			),
 			'image_extension' => 'svg',
 		] ) );
 	}
