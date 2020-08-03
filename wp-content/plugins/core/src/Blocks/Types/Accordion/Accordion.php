@@ -32,13 +32,13 @@ class Accordion extends Block_Config {
 	}
 
 	public function add_fields() {
-		$this->add_field( new Field( self::TITLE, [
+		$this->add_field( new Field( self::NAME . '_' . self::TITLE, [
 				'label' => __( 'Title', 'tribe' ),
 				'name'  => self::TITLE,
 				'type'  => 'text',
 			] )
 		)->add_field(
-			new Field( self::DESCRIPTION, [
+			new Field( self::NAME . '_' . self::DESCRIPTION, [
 				'label' => __( 'Description', 'tribe' ),
 				'name'  => self::DESCRIPTION,
 				'type'  => 'textarea',
@@ -52,7 +52,7 @@ class Accordion extends Block_Config {
 	 * @return Repeater
 	 */
 	protected function get_accordion_section() {
-		$group = new Repeater( self::ACCORDION );
+		$group = new Repeater( self::NAME . '_' . self::ACCORDION );
 		$group->set_attributes( [
 			'label'  => __( 'Accordion Section', 'tribe' ),
 			'name'   => self::ACCORDION,
@@ -78,7 +78,7 @@ class Accordion extends Block_Config {
 	}
 
 	public function add_settings() {
-		$this->add_setting( new Field( self::LAYOUT, [
+		$this->add_setting( new Field( self::NAME . '_' . self::LAYOUT, [
 			'type'            => 'image_select',
 			'choices'         => [
 				self::LAYOUT_INLINE  => __( 'Inline', 'tribe' ),
