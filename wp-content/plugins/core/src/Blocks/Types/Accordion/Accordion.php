@@ -11,15 +11,15 @@ use Tribe\Libs\ACF\Repeater;
 class Accordion extends Block_Config {
 	public const NAME = 'accordion';
 
-	public const TITLE             = 'title';
-	public const DESCRIPTION       = 'description';
-	public const ACCORDION         = 'accordion';
-	public const ACCORDION_HEADER  = 'accordion_header';
-	public const ACCORDION_CONTENT = 'accordion_content';
+	public const TITLE       = 'title';
+	public const DESCRIPTION = 'description';
+	public const ACCORDION   = 'accordion';
+	public const ROW_HEADER  = 'row_header';
+	public const ROW_CONTENT = 'row_content';
 
 	public const LAYOUT         = 'layout';
-	public const LAYOUT_INLINE  = 'layout-inline';
-	public const LAYOUT_STACKED = 'layout-stacked';
+	public const LAYOUT_INLINE  = 'inline';
+	public const LAYOUT_STACKED = 'stacked';
 
 	public function add_block() {
 		$this->set_block( new Block( self::NAME, [
@@ -60,16 +60,16 @@ class Accordion extends Block_Config {
 			'min'    => 0,
 			'max'    => 10,
 		] );
-		$header = new Field( self::ACCORDION_HEADER, [
-			'label' => __( 'Accordion Header', 'tribe' ),
-			'name'  => self::ACCORDION_HEADER,
+		$header = new Field( self::ROW_HEADER, [
+			'label' => __( 'Header', 'tribe' ),
+			'name'  => self::ROW_HEADER,
 			'type'  => 'text',
 		] );
 
 		$group->add_field( $header );
-		$content = new Field( self::ACCORDION_CONTENT, [
-			'label' => __( 'Accordion Content', 'tribe' ),
-			'name'  => self::ACCORDION_CONTENT,
+		$content = new Field( self::ROW_CONTENT, [
+			'label' => __( 'Content', 'tribe' ),
+			'name'  => self::ROW_CONTENT,
 			'type'  => 'textarea',
 		] );
 		$group->add_field( $content );
@@ -88,7 +88,11 @@ class Accordion extends Block_Config {
 				self::LAYOUT_STACKED,
 			],
 			'multiple'        => 0,
-			'image_path'      => trailingslashit( get_template_directory_uri() ) . 'assets/img/admin/blocks/',
+			'image_path'      => sprintf(
+				'%sassets/img/admin/blocks/%s/',
+				trailingslashit( get_template_directory_uri() ),
+				self::NAME
+			),
 			'image_extension' => 'svg',
 		] ) );
 	}
