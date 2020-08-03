@@ -3,7 +3,6 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Templates\Components\routes\unsupported_browser;
 
-use Tribe\Project\Components\Component;
 use Tribe\Project\Templates\Factory_Method;
 use Tribe\Project\Assets\Theme\Theme_Build_Parser;
 
