@@ -4,8 +4,8 @@ declare( strict_types=1 );
 namespace Tribe\Project\Blocks\Types\Example;
 
 use Tribe\Libs\ACF\Field;
-use Tribe\Project\Blocks\Lib\Block;
-use Tribe\Project\Blocks\Lib\Block_Config;
+use Tribe\Libs\ACF\Block;
+use Tribe\Libs\ACF\Block_Config;
 
 class Example extends Block_Config {
 

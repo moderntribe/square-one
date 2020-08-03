@@ -5,9 +5,7 @@ namespace Tribe\Project\Blocks;
 
 use DI;
 use Tribe\Libs\Container\Definer_Interface;
-use Tribe\Project\Blocks\Builder\Block_Builder;
-use Tribe\Project\Blocks\Builder\Builder_Factory;
-use Tribe\Project\Blocks\Lib\Block_Registrar;
+use Tribe\Project\Blocks\Types\Accordion\Accordion;
 use Tribe\Project\Blocks\Types\Example\Example;
 use Tribe\Project\Components\Component_Factory;
 use Tribe\Project\Components\Handler;
@@ -15,55 +13,16 @@ use Tribe\Project\Components\Handler;
 class Blocks_Definer implements Definer_Interface {
 
 	public const TYPES          = 'blocks.types';
-	public const ACF_TYPES      = 'blocks.acf.types';
 	public const CONTROLLER_MAP = 'blocks.controller_map';
 	public const BLACKLIST      = 'blocks.blacklist';
 	public const STYLES         = 'blocks.style_overrides';
 
 	public function define(): array {
 		return [
-			self::ACF_TYPES => DI\add( [
-					DI\get(Example::class), //ACF Block
-			]),
 			self::TYPES => DI\add( [
-				DI\get( Types\Accordion\Accordion::class ),
-				DI\get( Types\Accordion\Support\Accordion_Section::class ),
-
-				DI\get( Types\Button::class ),
-
-				DI\get( Types\Card_Grid::class ),
-				DI\get( Types\Support\Card_Grid_Query::class ),
-				DI\get( Types\Support\Card_Grid_Select::class ),
-				DI\get( Types\Support\Card_Grid_Card::class ),
-
-				DI\get( Types\Content_Carousel::class ),
-				DI\get( Types\Support\Content_Carousel_Query::class ),
-				DI\get( Types\Support\Content_Carousel_Select::class ),
-				DI\get( Types\Support\Content_Carousel_Card::class ),
-
-				DI\get( Types\Hero\Hero::class ),
-
-				DI\get( Types\Icon_Grid::class ),
-				DI\get( Types\Support\Icon_Grid_Card::class ),
-
-				DI\get( Types\Interstitial\Interstitial::class ),
-
-				DI\get( Types\Lead_Form\Lead_Form::class ),
-
-				DI\get( Types\Links\Links::class ),
-				DI\get( Types\Links\Support\Link::class ),
-
-				DI\get( Types\Logos\Logos::class ),
-				DI\get( Types\Logos\Support\Logo::class ),
-
-				DI\get( Types\Media_Text\Media_Text::class ),
-				DI\get( Types\Media_Text\Support\Media_Text_Media::class ),
-				DI\get( Types\Media_Text\Support\Media_Text_Media_Embed::class ),
-				DI\get( Types\Media_Text\Support\Media_Text_Media_Image::class ),
-				DI\get( Types\Media_Text\Support\Media_Text_Text::class ),
-
-				DI\get( Types\Quote\Quote::class ),
-			] ),
+					DI\get(Example::class),
+					DI\get(Accordion::class),
+			]),
 
 			self::CONTROLLER_MAP => DI\add( [] ),
 
@@ -108,12 +67,6 @@ class Blocks_Definer implements Definer_Interface {
 
 			Allowed_Blocks::class => DI\create()->constructor( DI\get( self::BLACKLIST ) ),
 
-			\Tribe\Gutenpanels\Builder\Block_Builder::class             => DI\get( Block_Builder::class ),
-			\Tribe\Gutenpanels\Builder\Factories\Builder_Factory::class => DI\get( Builder_Factory::class ),
-
-			Block_Registrar::class => static function () { //ACF Block Registrar
-				return new Block_Registrar();
-			},
 		];
 	}
 }
