@@ -24,9 +24,14 @@ class Controller{
 	public $legacy_browser_icon_safari;
 	public $legacy_browser_icon_ie;
 
+	/**
+	 * @var Theme_Build_Parser
+	 */
 	private $build_parser;
 
 	public function __construct()  {
+		$this->build_parser = new Theme_Build_Parser();
+
 		$this->home_url = home_url( '/' );
 		$this->name    = get_bloginfo( 'name' );
 		$this->styles       = $this->get_styles();
@@ -40,8 +45,6 @@ class Controller{
 		$this->legacy_browser_icon_safari  = $this->get_legacy_image_url( 'safari.png' );
 		$this->legacy_browser_icon_ie      = $this->get_legacy_image_url( 'ie.png' );
 
-		$this->build_parser = new Theme_Build_Parser();
-
 	}
 
 	protected function get_favicon(): string {
@@ -49,6 +52,7 @@ class Controller{
 	}
 
 	protected function get_styles(): string {
+
 		$legacy_css = $this->build_parser->get_legacy_style_handles();
 		ob_start();
 		$GLOBALS['wp_styles']->do_items( $legacy_css );
