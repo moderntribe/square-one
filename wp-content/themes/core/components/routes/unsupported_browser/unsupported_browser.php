@@ -1,30 +1,18 @@
-<!DOCTYPE html>
-<html {{ language_attributes }}>
-<head>
+<?php
+declare( strict_types=1 );
 
-    <title>{{ __('Unsupported Browser') }} | {{ name }}</title>
+$controller = \Tribe\Project\Templates\Components\routes\unsupported_browser\Controller::factory();
 
-    {# // MISC Meta #}
-    <meta charset="utf-8">
-    <meta name="author" content="{{ name|esc_attr }}">
-    <meta http-equiv="cleartype" content="on">
-    <meta name="robots" content="noindex, nofollow">
-
-    {{ styles }}
-
-    <link rel="shortcut icon" href="{{ favicon|esc_url }}">
-
-    {{ do_action( 'tribe/unsupported_browser/head') }}
-
-</head>
-<body>
+get_template_part( 'components/document/header/header' );
+?>
+<main id="main-content">
 
 <div class="site-header">
     <div class="l-container">
         <h1 class="site-brand">
-            <img src="{{ legacy_logo_header|esc_url }}"
+            <img src="<?php echo $controller->legacy_logo_header ?>"
                  class="site-logo site-logo--header"
-                 alt="{{ name|esc_attr }} {{ __('logo') }}"/>
+                 alt="<?php echo $controller->name?> <?php echo esc_attr( __('logo', 'tribe') ) ?>"/>
         </h1>
     </div>
 </div>
@@ -33,8 +21,8 @@
     <div class="l-container">
 
         <div class="site-content__content">
-            <h2>{{ legacy_browser_title }}</h2>
-            <p>{{ legacy_browser_content }}</p>
+            <h2><?php echo $controller->legacy_browser_title ?></h2>
+            <p><?php echo $controller->legacy_browser_content ?></p>
         </div>
 
         <ul class="browser-list">
@@ -44,10 +32,10 @@
                    rel="external noopener"
                    target="_blank">
 	                           <span class="browser-list__item-image">
-	                               <img src="{{ legacy_browser_icon_chrome|esc_url }}"
-                                        alt="{{ __('Chrome browser logo') }}"/>
+	                               <img src="<?php echo $controller->legacy_browser_icon_chrome ?>>"
+                                        alt="<?php echo esc_attr( __('Chrome browser logo', 'tribe') ) ?>"/>
 	                           </span>
-                    {{ __('Chrome') }}
+	                <?php echo esc_html( __('Chrome', 'tribe') ) ?>
                 </a>
             </li>
             <li class="browser-list__item">
@@ -56,10 +44,10 @@
                    rel="external noopener"
                    target="_blank">
 	                           <span class="browser-list__item-image">
-	                               <img src="{{ legacy_browser_icon_firefox|esc_url }}"
-                                        alt="{{ __('Firefox browser logo') }}"/>
+	                               <img src="<?php echo esc_url( $controller->legacy_browser_icon_firefox ) ?>>"
+                                        alt="<?php echo esc_attr( __('Firefox browser logo') ) ?>"/>
 	                           </span>
-                    {{ __('Firefox') }}
+	                <?php echo esc_html( __('Firefox') ) ?>
                 </a>
             </li>
             <li class="browser-list__item">
