@@ -7,7 +7,7 @@ $controller = \Tribe\Project\Templates\Components\routes\unsupported_browser\Con
 <html>
 <head>
 
-    <title><?php echo esc_attr( __('Unsupported Browser') ) ?> | <?php echo esc_html( $controller->name ) ?></title>
+    <title><?php echo esc_attr( __('Unsupported Browser', 'tribe') ) ?> | <?php echo esc_html( $controller->name ) ?></title>
 
     <meta charset="utf-8">
     <meta name="author" content="{{ name|esc_attr }}">
@@ -62,9 +62,9 @@ $controller = \Tribe\Project\Templates\Components\routes\unsupported_browser\Con
                    target="_blank">
 	                           <span class="browser-list__item-image">
 	                               <img src="<?php echo esc_url( $controller->legacy_browser_icon_firefox ) ?>"
-                                        alt="<?php echo esc_attr( __('Firefox browser logo') ) ?>"/>
+                                        alt="<?php echo esc_attr( __('Firefox browser logo', 'tribe') ) ?>"/>
 	                           </span>
-	                <?php echo esc_html( __('Firefox') ) ?>
+	                <?php echo esc_html( __('Firefox', 'tribe') ) ?>
                 </a>
             </li>
             <li class="browser-list__item">
@@ -74,9 +74,9 @@ $controller = \Tribe\Project\Templates\Components\routes\unsupported_browser\Con
                    target="_blank">
 	                           <span class="browser-list__item-image">
 	                               <img src="<?php echo esc_url( $controller->legacy_browser_icon_safari ) ?>"
-                                        alt="<?php echo esc_attr( __('Safari browser logo') ) ?>"/>
+                                        alt="<?php echo esc_attr( __('Safari browser logo', 'tribe') ) ?>"/>
 	                           </span>
-	                <?php echo esc_html( __('Safari') ) ?>
+	                <?php echo esc_html( __('Safari', 'tribe') ) ?>
                 </a>
             </li>
             <li class="browser-list__item">
@@ -86,9 +86,9 @@ $controller = \Tribe\Project\Templates\Components\routes\unsupported_browser\Con
                    target="_blank">
 	                           <span class="browser-list__item-image">
 	                               <img src="<?php echo esc_url( $controller->legacy_browser_icon_ie ) ?>"
-                                        alt=""<?php echo esc_attr( __('Internet Explorer browser logo') ) ?>"/>
+                                        alt=""<?php echo esc_attr( __('Internet Explorer browser logo', 'tribe') ) ?>"/>
 	                           </span>
-	                <?php echo esc_html( __('Internet Explorer') ) // TODO Move to Edge. No longer supporting IE11.?>
+	                <?php echo esc_html( __('Internet Explorer', 'tribe') ) // TODO Move to Edge. No longer supporting IE11.?>
                 </a>
             </li>
         </ul>
@@ -101,7 +101,7 @@ $controller = \Tribe\Project\Templates\Components\routes\unsupported_browser\Con
 
         <img src="<?php echo esc_url( $controller->legacy_logo_footer ) ?>"
              class="site-logo site-logo--footer"
-             alt="<?php echo esc_attr( $controller->name ) ?> <?php echo esc_attr( __('logo') ) ?>"/>
+             alt="<?php echo esc_attr( $controller->name ) ?> <?php echo esc_attr( __('logo', 'tribe') ) ?>"/>
 
         <p class="site-footer__copy"><?php sprintf( __( '%s %d All Rights Reserved.', 'tribe' ), '&copy;', date( 'Y' ) );?> <?php echo esc_attr( $controller->name ) ?>.</p>
 
