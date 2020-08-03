@@ -30,19 +30,19 @@ class Interstitial extends Block_Config {
 
 	protected function add_fields() {
 		$this->add_field(
-			new Field( self::IMAGE, [
+			new Field( self::NAME . '_' . self::IMAGE, [
 				'label' => __( 'Background Image', 'tribe' ),
 				'name'  => self::IMAGE,
 				'type'  => 'image',
 			] )
 		)->add_field(
-			new Field( self::DESCRIPTION, [
+			new Field( self::NAME . '_' . self::DESCRIPTION, [
 				'label' => __( 'Description', 'tribe' ),
 				'name'  => self::DESCRIPTION,
 				'type'  => 'textarea',
 			] )
 		)->add_field(
-			new Field( self::CTA, [
+			new Field( self::NAME . '_' . self::CTA, [
 				'label' => __( 'Call to Action', 'tribe' ),
 				'name'  => self::NAME,
 				'type'  => 'link',
@@ -51,7 +51,7 @@ class Interstitial extends Block_Config {
 	}
 
 	protected function add_settings() {
-		$this->add_setting( new Field( self::LAYOUT, [
+		$this->add_setting( new Field( self::NAME . '_' . self::LAYOUT, [
 			'type'            => 'image_select',
 			'choices'         => [
 				self::LAYOUT_LEFT   => __( 'Text Align Left', 'tribe' ),
