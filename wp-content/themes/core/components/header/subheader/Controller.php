@@ -9,7 +9,8 @@ class Controller {
 	use Factory_Method;
 
 	public function title(): string {
-		// TODO: hook up/use text component
+		// TODO: hook up/use text component.
+		//  Also, make sure it handles CPTs with dates.
 		return get_the_title();
 	}
 }
