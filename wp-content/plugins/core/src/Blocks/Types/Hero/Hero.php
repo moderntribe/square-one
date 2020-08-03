@@ -3,15 +3,13 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Blocks\Types\Hero;
 
-use Tribe\Gutenpanels\Blocks\Block_Type_Interface;
-use Tribe\Gutenpanels\Blocks\Sections\Content_Section;
-use Tribe\Gutenpanels\Blocks\Sections\Sidebar_Section;
-use Tribe\Gutenpanels\Blocks\Sections\Toolbar_Section;
-use Tribe\Project\Blocks\Block_Type_Config;
+use Tribe\Libs\ACF\Block;
+use Tribe\Libs\ACF\Block_Config;
+use Tribe\Libs\ACF\Field;
 
-class Hero extends Block_Type_Config {
+class Hero extends Block_Config {
 
-	public const NAME = 'tribe/hero';
+	public const NAME = 'hero';
 
 	public const IMAGE         = 'image';
 	public const LEAD_IN       = 'leadin';
@@ -19,90 +17,71 @@ class Hero extends Block_Type_Config {
 	public const DESCRIPTION   = 'description';
 	public const CTA           = 'cta';
 	public const LAYOUT        = 'layout';
-	public const LAYOUT_LEFT   = 'layout-left';
-	public const LAYOUT_CENTER = 'layout-center';
+	public const LAYOUT_LEFT   = 'hero-layout-left';
+	public const LAYOUT_CENTER = 'hero-layout-center';
 
-	public function build(): Block_Type_Interface {
-		return $this->factory->block( self::NAME )
-			->set_label( __( 'Hero', 'tribe' ) )
-			->add_class( 'c-block c-block--full-bleed b-hero' )
-			->add_data_source( 'className-c-block', self::LAYOUT )
-			->set_dashicon( 'menu-alt' )
-			->add_sidebar_section( $this->background_sidebar() )
-			->add_data_source( 'background-image', self::IMAGE ) /* TEMP until we get support for this on the HTML field. */
-			// ->add_content_section( $this->background_area() )
-			->add_content_section( $this->content_area() )
-			->add_toolbar_section( $this->layout_toolbar() )
-			->build();
+	/**
+	 * Register the block
+	 */
+	public function add_block() {
+		$this->set_block( new Block( self::NAME, [
+			'title'       => __( 'Hero', 'tribe' ),
+			'description' => __( 'Hero block', 'tribe' ),
+			'icon'        => '<svg width="28" height="19" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.254 5.968H19.85v1.054H8.254V5.968zm1.462 1.57h8.568v1.053H9.716V7.538z" fill="#000"/><path d="M2.82 2.437v14.126H25.2V2.437H2.82zm21.482 13.176H3.866V3.366h20.436v12.247z" fill="#000"/><path d="M10.092 16.15H2.884l10.614-3.242 1.693 1.012 5.433-3.243 4.409 2.623v2.85h-14.94z" fill="#000"/></svg>',
+			'keywords'    => [ __( 'hero', 'tribe' ), __( 'display', 'tribe' ) ],
+			'category'    => 'layout',
+		] ) );
 	}
 
-	private function background_sidebar(): Sidebar_Section {
-		return $this->factory->sidebar()->section()
-			->set_label( __( 'Background Settings', 'tribe' ) )
-			->add_field(
-				$this->factory->sidebar()->field()->image( self::IMAGE )
-					->set_label( __( 'Background Image', 'tribe' ) )
-					->build()
-			)
-			->build();
+	/**
+	 * Register Fields for block
+	 */
+	public function add_fields() {
+		$this->add_field( new Field( self::TITLE, [
+				'label' => __( 'Title', 'tribe' ),
+				'name'  => self::TITLE,
+				'type'  => 'text',
+			] )
+		)->add_field( new Field( self::LEAD_IN, [
+				'label' => __( 'Lead in', 'tribe' ),
+				'name'  => self::LEAD_IN,
+				'type'  => 'text',
+			] )
+		)->add_field( new Field( self::IMAGE, [
+				'label' => __( 'Image', 'tribe' ),
+				'name'  => self::IMAGE,
+				'type'  => 'image',
+			] )
+		)->add_field( new Field( self::CTA, [
+				'label' => __( 'Call to Action', 'tribe' ),
+				'name'  => self::CTA,
+				'type'  => 'link',
+			] )
+		)->add_field( new Field( self::DESCRIPTION, [
+				'label' => __( 'Description', 'tribe' ),
+				'name'  => self::DESCRIPTION,
+				'type'  => 'textarea',
+			] )
+		);
 	}
 
-	/* TODO: Enable this once the html field type get `set_data_source()` support
-	private function background_area(): Content_Section {
-		return $this->factory->content()->section()
-			->add_class( 'b-hero__figure' )
-			->add_field(
-				$this->factory->content()->field()->html( 'bkgrd' )
-					->add_class( 'b-hero__img c-image__bg' )
-					->set_content( '<div></div>' )
-					->add_data_source( 'background-image', self::IMAGE )
-					->build()
-			)
-			->build();
-	}*/
-
-	private function content_area(): Content_Section {
-		return $this->factory->content()->section()
-			->add_class( 'b-hero__content b-hero__content-container t-theme--light' )
-			->add_field(
-				$this->factory->content()->field()->text( self::LEAD_IN )
-					->set_label( __( 'Lead-In', 'tribe' ) )
-					->set_placeholder( 'Lead-In or overline' )
-					->add_class( 'b-hero__leadin h6' )
-					->build()
-			)
-			->add_field(
-				$this->factory->content()->field()->text( self::TITLE )
-					->set_label( __( 'Headline', 'tribe' ) )
-					->set_placeholder( 'Headline' )
-					->add_class( 'b-hero__title h1' )
-					->build()
-			)
-			->add_field(
-				$this->factory->content()->field()->richtext( self::DESCRIPTION )
-					->set_label( __( 'Description', 'tribe' ) )
-					->add_class( 'b-hero__description t-sink s-sink' )
-					->build()
-			)
-			->add_field(
-				$this->factory->content()->field()->link( self::CTA )
-					->set_label( __( 'Call to Action', 'tribe' ) )
-					->add_class( 'b-hero__cta a-btn' )
-					->build()
-			)
-			->build();
-	}
-
-	private function layout_toolbar(): Toolbar_Section {
-		return $this->factory->toolbar()->section()
-			->add_field(
-				$this->factory->toolbar()->field()->icon_select( self::LAYOUT )
-					->add_dashicon_option( self::LAYOUT_LEFT, __( 'Align Text Left', 'tribe' ), 'editor-alignleft' )
-					->add_dashicon_option( self::LAYOUT_CENTER, __( 'Align Text Center', 'tribe' ), 'editor-aligncenter' )
-					->set_default( self::LAYOUT_LEFT )
-					->build()
-			)
-			->build();
+	/**
+	 * Register Settings for Block
+	 */
+	public function add_settings() {
+		$this->add_setting( new Field( self::LAYOUT, [
+			'type'            => 'image_select',
+			'choices'         => [
+				self::LAYOUT_LEFT  => __( 'Align Left', 'tribe' ),
+				self::LAYOUT_CENTER => __( 'Align Center', 'tribe' ),
+			],
+			'default_value'   => [
+				self::LAYOUT_CENTER,
+			],
+			'multiple'        => 0,
+			'image_path'      => trailingslashit( get_template_directory_uri() ) . 'assets/img/admin/blocks/',
+			'image_extension' => 'svg',
+		] ) );
 	}
 
 }
