@@ -8,8 +8,8 @@ $controller = \Tribe\Project\Templates\Components\content\loop_items\index\Contr
 	<header class="item-loop__header">
 
 		<h3 class="item-loop__title">
-			<a href="<?php echo esc_url( get_permalink() ); ?>" rel="bookmark">
-				<?php echo get_the_title(); ?>
+			<a href="<?php the_permalink() ?>" rel="bookmark">
+				<?php the_title() ?>
 			</a>
 		</h3>
 

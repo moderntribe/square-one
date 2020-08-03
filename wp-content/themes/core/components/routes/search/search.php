@@ -13,7 +13,6 @@ $controller->render_header();
 
 			<?php
 			if ( have_posts() ) :
-				echo "Results";
 				while ( have_posts() ) :
 					the_post();
 					get_template_part( 'components/content/loop_items/search/search', 'search' );

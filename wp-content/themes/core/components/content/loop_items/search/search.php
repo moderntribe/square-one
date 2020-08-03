@@ -8,7 +8,7 @@ $controller = \Tribe\Project\Templates\Components\content\loop_items\search\Cont
 	<header class="item-loop__header">
 
 		<h3 class="item-loop__title">
-			<a href="<?php the_permalink(); ?>>" rel="bookmark">
+			<a href="<?php the_permalink() ?>" rel="bookmark">
 				<?php echo esc_html( get_the_title() ); ?>
 			</a>
 		</h3>
