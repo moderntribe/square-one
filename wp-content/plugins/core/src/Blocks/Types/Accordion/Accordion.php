@@ -3,78 +3,95 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Blocks\Types\Accordion;
 
-use Tribe\Gutenpanels\Blocks\Block_Type_Interface;
-use Tribe\Gutenpanels\Blocks\Sections\Content_Section;
-use Tribe\Gutenpanels\Blocks\Sections\Toolbar_Section;
-use Tribe\Project\Blocks\Block_Type_Config;
-use Tribe\Project\Blocks\Types\Accordion\Support\Accordion_Section;
+use Tribe\Libs\ACF\Field;
+use Tribe\Libs\ACF\Block;
+use Tribe\Libs\ACF\Block_Config;
+use Tribe\Libs\ACF\Repeater;
 
-class Accordion extends Block_Type_Config {
-	public const NAME = 'tribe/accordion';
+class Accordion extends Block_Config {
+	public const NAME = 'accordion';
 
-	public const TITLE       = 'title';
-	public const DESCRIPTION = 'description';
-	public const ACCORDION   = 'accordion';
+	public const TITLE             = 'title';
+	public const DESCRIPTION       = 'description';
+	public const ACCORDION         = 'accordion';
+	public const ACCORDION_HEADER  = 'accordion_header';
+	public const ACCORDION_CONTENT = 'accordion_content';
 
 	public const LAYOUT         = 'layout';
 	public const LAYOUT_INLINE  = 'layout-inline';
 	public const LAYOUT_STACKED = 'layout-stacked';
 
-	public function build(): Block_Type_Interface {
-		return $this->factory->block( self::NAME )
-			->set_label( __( 'Accordion', 'tribe' ) )
-			->set_dashicon( 'menu-alt' )
-			->add_class( 'c-block b-accordion l-container' )
-			->add_data_source( 'className-c-block', self::LAYOUT )
-			->add_toolbar_section( $this->layout_toolbar() )
-			->add_content_section( $this->content_area() )
-			->add_content_section( $this->accordions_area() )
-			->build();
+	public function add_block() {
+		$this->set_block( new Block( self::NAME, [
+			'title'       => __( 'Accordion', 'tribe' ),
+			'description' => __( 'The Accordion block', 'tribe' ),
+			'icon'        => '<svg width="24" height="18" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="#000" d="M0 0h23.7v2.7H0zM0 12h23.7v2.7H0zM0 15.3h23.7V18H0z"/><path fill="#fff" stroke="#000" d="M1.7 3.8h20v6.8h-20z"/></svg>',
+			'keywords'    => [ __( 'accordion', 'tribe' ) ],
+			'category'    => 'layout',
+		] ) );
 	}
 
-	private function content_area(): Content_Section {
-		return $this->factory->content()->section()
-			->add_class( 'b-accordion__header' )
-			->add_field(
-				$this->factory->content()->field()->text( self::TITLE )
-					->set_label( __( 'Title', 'tribe' ) )
-					->add_class( 'b-accordion__title h3' )
-					->build()
-			)
-			->add_field(
-				$this->factory->content()->field()->richtext( self::DESCRIPTION )
-					->set_label( __( 'Description', 'tribe' ) )
-					->add_class( 'b-accordion__description t-sink s-sink' )
-					->build()
-			)
-			->build();
+	public function add_fields() {
+		$this->add_field( new Field( self::TITLE, [
+				'label' => __( 'Title', 'tribe' ),
+				'name'  => self::TITLE,
+				'type'  => 'text',
+			] )
+		)->add_field(
+			new Field( self::DESCRIPTION, [
+				'label' => __( 'Description', 'tribe' ),
+				'name'  => self::DESCRIPTION,
+				'type'  => 'textarea',
+			] )
+		)->add_field(
+			$this->get_accordion_section()
+		);
 	}
 
-	private function accordions_area(): Content_Section {
-		return $this->factory->content()->section()
-			->add_class( 'b-accordion__content' )
-			->add_field(
-				$this->factory->content()->field()->flexible_container( self::ACCORDION )
-					->set_label( __( 'Accordion', 'tribe' ) )
-					->merge_nested_attributes( Accordion_Section::NAME )
-					->add_template_block( Accordion_Section::NAME )
-					->add_block_type( Accordion_Section::NAME )
-					->set_min_blocks( 1 )
-					->build()
-			)
-			->build();
+	/**
+	 * @return Repeater
+	 */
+	protected function get_accordion_section() {
+		$group = new Repeater( self::ACCORDION );
+		$group->set_attributes( [
+			'label'  => __( 'Accordion Section', 'tribe' ),
+			'name'   => self::ACCORDION,
+			'layout' => 'block',
+			'min'    => 0,
+			'max'    => 10,
+		] );
+		$header = new Field( self::ACCORDION_HEADER, [
+			'label' => __( 'Accordion Header', 'tribe' ),
+			'name'  => self::ACCORDION_HEADER,
+			'type'  => 'text',
+		] );
+
+		$group->add_field( $header );
+		$content = new Field( self::ACCORDION_CONTENT, [
+			'label' => __( 'Accordion Content', 'tribe' ),
+			'name'  => self::ACCORDION_CONTENT,
+			'type'  => 'textarea',
+		] );
+		$group->add_field( $content );
+
+		return $group;
 	}
 
-	private function layout_toolbar(): Toolbar_Section {
-		return $this->factory->toolbar()->section()
-			->add_field(
-				$this->factory->toolbar()->field()->icon_select( self::LAYOUT )
-					->add_dashicon_option( self::LAYOUT_STACKED, __( 'Stacked', 'tribe' ), 'align-center' )
-					->add_dashicon_option( self::LAYOUT_INLINE, __( 'Inline', 'tribe' ), 'align-right' )
-					->set_default( self::LAYOUT_STACKED )
-					->build()
-			)
-			->build();
+	public function add_settings() {
+		$this->add_setting( new Field( self::LAYOUT, [
+			'type'            => 'image_select',
+			'choices'         => [
+				self::LAYOUT_INLINE  => __( 'Inline', 'tribe' ),
+				self::LAYOUT_STACKED => __( 'Stacked', 'tribe' ),
+			],
+			'default_value'   => [
+				self::LAYOUT_STACKED,
+			],
+			'multiple'        => 0,
+			'image_path'      => trailingslashit( get_template_directory_uri() ) . 'assets/img/admin/blocks/',
+			'image_extension' => 'svg',
+		] ) );
 	}
+
 
 }
