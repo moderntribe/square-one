@@ -3,61 +3,83 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Blocks\Types\Logos;
 
-use Tribe\Gutenpanels\Blocks\Block_Type_Interface;
-use Tribe\Gutenpanels\Blocks\Sections\Content_Section;
-use Tribe\Project\Blocks\Block_Type_Config;
-use Tribe\Project\Blocks\Types\Logos\Support\Logo;
+use Tribe\Libs\ACF\Block;
+use Tribe\Libs\ACF\Block_Config;
+use Tribe\Libs\ACF\Field;
+use Tribe\Libs\ACF\Repeater;
 
-class Logos extends Block_Type_Config {
-	public const NAME = 'tribe/logos';
+class Logos extends Block_Config {
+	public const NAME = 'logos';
 
-	public const TITLE         = 'title';
-	public const DESCRIPTION   = 'description';
-	public const CTA           = 'cta';
-	public const LOGOS         = 'logos';
+	public const TITLE       = 'title';
+	public const DESCRIPTION = 'description';
+	public const CTA         = 'cta';
+	public const LOGOS       = 'logos';
+	public const LOGO_IMAGE  = 'image';
+	public const LOGO_LINK   = 'link';
 
-	public function build(): Block_Type_Interface {
-		return $this->factory->block( self::NAME )
-			->set_label( __( 'Logos', 'tribe' ) )
-			->add_class( 'c-block b-logos' )
-			->set_dashicon( 'menu-alt' )
-			->add_content_section( $this->content_area() )
-			->build();
+	public function add_block() {
+		$this->set_block( new Block( self::NAME, [
+			'title'       => __( 'Logos', 'tribe' ),
+			'description' => __( 'A collection of logos.', 'tribe' ),
+			'icon'        => 'screenoptions',
+			'keywords'    => [ __( 'logos', 'tribe' ) ],
+			'category'    => 'layout',
+		] ) );
 	}
 
-	private function content_area(): Content_Section {
-		return $this->factory->content()->section()
-			->add_field(
-				$this->factory->content()->field()->text( self::TITLE )
-					->set_label( __( 'Headline', 'tribe' ) )
-					->set_placeholder( 'Headline' )
-					->add_class( 'b-logos__title h1' )
-					->build()
-			)
-			->add_field(
-				$this->factory->content()->field()->richtext( self::DESCRIPTION )
-					->set_label( __( 'Description', 'tribe' ) )
-					->add_class( 'b-logos__description t-sink s-sink' )
-					->build()
-			)
-			->add_field(
-				$this->factory->content()->field()->link( self::CTA )
-					->set_label( __( 'Call to Action', 'tribe' ) )
-					->add_class( 'b-logos__cta a-btn' )
-					->build()
-			)
-			->add_field(
-				$this->factory->content()->field()->flexible_container( self::LOGOS )
-					->set_label( __( 'Logos', 'tribe' ) )
-					->set_min_blocks( 1 )
-					->set_max_blocks( 12 )
-					->add_block_type( Logo::NAME )
-					->add_template_block( Logo::NAME )
-					->merge_nested_attributes( Logo::NAME )
-					->discard_nested_content( Logo::NAME )
-					->build()
-			)
-			->build();
+	public function add_fields() {
+		$this->add_field( new Field( self::NAME . '_' . self::TITLE, [
+				'label' => __( 'Title', 'tribe' ),
+				'name'  => self::TITLE,
+				'type'  => 'text',
+			] )
+		)->add_field(
+			new Field( self::NAME . '_' . self::DESCRIPTION, [
+				'label' => __( 'Description', 'tribe' ),
+				'name'  => self::DESCRIPTION,
+				'type'  => 'textarea',
+			] )
+		)->add_field(
+			$this->get_logos_section()
+		);
+	}
+
+	/**
+	 * @return Repeater
+	 */
+	protected function get_logos_section() {
+		$group = new Repeater( self::NAME . '_' . self::LOGOS );
+		$group->set_attributes( [
+			'label'        => __( 'Logos', 'tribe' ),
+			'name'         => self::LOGOS,
+			'layout'       => 'block',
+			'min'          => 0,
+			'max'          => 12,
+			'button_label' => 'Add Logo',
+		] );
+
+		$logo_image = new Field( self::LOGO_IMAGE, [
+			'label'        => __( 'Logo Image', 'tribe' ),
+			'name'         => self::LOGO_IMAGE,
+			'type'         => 'image',
+			'preview_size' => 'medium',
+			'instructions' => __( 'Recommended image size: 200px tall with any aspect ratio.', 'tribe' ),
+		] );
+		$group->add_field( $logo_image );
+
+		$logo_link = new Field( self::LOGO_LINK, [
+			'label' => __( 'Logo Link', 'tribe' ),
+			'name' => self::LOGO_LINK,
+			'type' => 'link',
+		] );
+		$group->add_field( $logo_link );
+
+		return $group;
+	}
+
+	protected function add_settings() {
+		// No settings.
 	}
 
 }

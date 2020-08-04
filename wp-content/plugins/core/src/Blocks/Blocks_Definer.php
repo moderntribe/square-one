@@ -7,6 +7,7 @@ use DI;
 use Tribe\Libs\Container\Definer_Interface;
 use Tribe\Project\Blocks\Types\Accordion\Accordion;
 use Tribe\Project\Blocks\Types\Hero\Hero;
+use Tribe\Project\Blocks\Types\Logos\Logos;
 use Tribe\Project\Components\Component_Factory;
 use Tribe\Project\Components\Handler;
 
@@ -22,6 +23,7 @@ class Blocks_Definer implements Definer_Interface {
 			self::TYPES => DI\add( [
 					DI\get(Hero::class),
 					DI\get(Accordion::class),
+					DI\get(Logos::class),
 			]),
 
 			self::CONTROLLER_MAP => DI\add( [] ),
