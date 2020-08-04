@@ -6,6 +6,9 @@ namespace Tribe\Project\Blocks;
 use DI;
 use Tribe\Libs\Container\Definer_Interface;
 use Tribe\Project\Blocks\Types\Interstitial\Interstitial;
+use Tribe\Project\Blocks\Types\Accordion\Accordion;
+use Tribe\Project\Blocks\Types\Hero\Hero;
+use Tribe\Project\Blocks\Types\Lead_Form\Lead_Form;
 use Tribe\Project\Components\Component_Factory;
 use Tribe\Project\Components\Handler;
 
@@ -19,8 +22,11 @@ class Blocks_Definer implements Definer_Interface {
 	public function define(): array {
 		return [
 			self::TYPES => DI\add( [
-					DI\get(Interstitial::class),
-			]),
+				DI\get( Accordion::class ),
+				DI\get( Hero::class ),
+				DI\get( Interstitial::class ),
+				DI\get( Lead_Form::class ),
+			] ),
 
 			self::CONTROLLER_MAP => DI\add( [] ),
 
@@ -61,7 +67,8 @@ class Blocks_Definer implements Definer_Interface {
 				} ),
 			] ),
 
-			Render_Filter::class => DI\create()->constructor( DI\get( Component_Factory::class ), DI\get( Handler::class ) ),
+			Render_Filter::class => DI\create()->constructor( DI\get( Component_Factory::class ),
+				DI\get( Handler::class ) ),
 
 			Allowed_Blocks::class => DI\create()->constructor( DI\get( self::BLACKLIST ) ),
 
