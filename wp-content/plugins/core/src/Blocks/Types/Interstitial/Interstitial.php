@@ -31,9 +31,10 @@ class Interstitial extends Block_Config {
 	protected function add_fields() {
 		$this->add_field(
 			new Field( self::NAME . '_' . self::IMAGE, [
-				'label' => __( 'Background Image', 'tribe' ),
-				'name'  => self::IMAGE,
-				'type'  => 'image',
+				'label'        => __( 'Background Image', 'tribe' ),
+				'name'         => self::IMAGE,
+				'type'         => 'image',
+				'instructions' => __( 'Recommended image size: 1440px wide', 'tribe' ),
 			] )
 		)->add_field(
 			new Field( self::NAME . '_' . self::DESCRIPTION, [
