@@ -7,6 +7,7 @@ use DI;
 use Tribe\Libs\Container\Definer_Interface;
 use Tribe\Project\Blocks\Types\Accordion\Accordion;
 use Tribe\Project\Blocks\Types\Hero\Hero;
+use Tribe\Project\Blocks\Types\Quote\Quote;
 use Tribe\Project\Components\Component_Factory;
 use Tribe\Project\Components\Handler;
 
@@ -20,8 +21,9 @@ class Blocks_Definer implements Definer_Interface {
 	public function define(): array {
 		return [
 			self::TYPES => DI\add( [
-					DI\get(Hero::class),
 					DI\get(Accordion::class),
+					DI\get(Hero::class),
+					DI\get(Quote::class),
 			]),
 
 			self::CONTROLLER_MAP => DI\add( [] ),
