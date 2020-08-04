@@ -11,11 +11,12 @@ class Controller {
 
 	/**
 	 * Render the featured image component
-	 *
-	 * @return void
 	 */
-	public function render_featured_image(): void {
-		get_template_part( 'components/image/image', null, [
+	public function render_featured_image() {
+		if ( ! has_post_thumbnail() ) {
+			return '';
+		}
+		return get_template_part( 'components/image/image', null, [
 			'attachment' => Image::factory( (int) get_post_thumbnail_id() ),
 		] );
 	}

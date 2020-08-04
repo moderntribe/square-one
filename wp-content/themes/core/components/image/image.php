@@ -1,10 +1,6 @@
 <?php
 declare( strict_types=1 );
 $controller = \Tribe\Project\Templates\Components\image\Controller::factory( $args );
-
-if ( empty( $controller->attachment ) ) {
-	return;
-}
 ?>
 
 <<?php echo $controller->wrapper_tag(); ?>
