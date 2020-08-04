@@ -13,7 +13,10 @@ if ( ! $controller->has_content() ) {
 
 <?php echo $controller->wrapper_tag_open(); ?>
 
-	<button <?php echo $controller->classes(); ?> <?php echo $controller->attributes(); ?>>
+	<button
+		<?php echo $controller->classes(); ?>
+		<?php echo $controller->attributes(); ?>
+	>
 		<?php echo $controller->content(); ?>
 	</button>
 

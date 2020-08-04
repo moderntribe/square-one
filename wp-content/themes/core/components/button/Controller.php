@@ -54,7 +54,7 @@ class Controller {
 		if ( empty( $this->wrapper_tag ) ) {
 			return '';
 		}
-		return sprintf( '<%s%s %s>', $this->wrapper_tag, $this->wrapper_classes, $this->wrapper_attrs );
+		return sprintf( '<%s%s %s>', $this->wrapper_tag, $this->wrapper_classes(), $this->wrapper_attributes() );
 	}
 
 	public function wrapper_tag_close(): string {
