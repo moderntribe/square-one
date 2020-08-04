@@ -9,6 +9,7 @@ use Tribe\Project\Blocks\Types\Interstitial\Interstitial;
 use Tribe\Project\Blocks\Types\Accordion\Accordion;
 use Tribe\Project\Blocks\Types\Hero\Hero;
 use Tribe\Project\Blocks\Types\Lead_Form\Lead_Form;
+use Tribe\Project\Blocks\Types\Quote\Quote;
 use Tribe\Project\Components\Component_Factory;
 use Tribe\Project\Components\Handler;
 
@@ -26,6 +27,7 @@ class Blocks_Definer implements Definer_Interface {
 				DI\get( Hero::class ),
 				DI\get( Interstitial::class ),
 				DI\get( Lead_Form::class ),
+				DI\get( Quote::class ),
 			] ),
 
 			self::CONTROLLER_MAP => DI\add( [] ),
