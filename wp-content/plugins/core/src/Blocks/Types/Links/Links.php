@@ -3,7 +3,6 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Blocks\Types\Links;
 
-
 use Tribe\Libs\ACF\Block;
 use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Field;
