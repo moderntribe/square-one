@@ -67,9 +67,10 @@ class Blocks_Definer implements Definer_Interface {
 				} ),
 			] ),
 
-			Render_Filter::class => DI\create()->constructor( DI\get( Component_Factory::class ),
-				DI\get( Handler::class ) ),
-
+			Render_Filter::class  => DI\create()->constructor(
+				DI\get( Component_Factory::class ),
+				DI\get( Handler::class )
+			),
 			Allowed_Blocks::class => DI\create()->constructor( DI\get( self::BLACKLIST ) ),
 
 		];

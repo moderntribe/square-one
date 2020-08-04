@@ -69,6 +69,5 @@ class Interstitial extends Block_Config {
 			),
 			'image_extension' => 'svg',
 		] ) );
-
 	}
 }
