@@ -83,7 +83,7 @@ class Media_Text extends Block_Config {
 				'conditional_logic' => [
 					[
 						[
-							'field'    => self::NAME . '_' . self::MEDIA_TYPE,
+							'field'    => 'field_' . self::NAME . '_' . self::MEDIA_TYPE,
 							'operator' => '==',
 							'value'    => self::IMAGE,
 						],
@@ -97,7 +97,7 @@ class Media_Text extends Block_Config {
 				'conditional_logic' => [
 					[
 						[
-							'field'    => self::NAME . '_' . self::MEDIA_TYPE,
+							'field'    => 'field_' . self::NAME . '_' . self::MEDIA_TYPE,
 							'operator' => '==',
 							'value'    => self::EMBED,
 						],
