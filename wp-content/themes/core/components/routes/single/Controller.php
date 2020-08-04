@@ -25,16 +25,6 @@ class Controller {
 	}
 
 	/**
-	 * Render the featured image component
-	 *
-	 * @return void
-	 */
-	public function render_featured_image(): void {
-		// TODO: use image component
-		echo get_the_post_thumbnail();
-	}
-
-	/**
 	 * Render the sidebar component
 	 *
 	 * Bypasses the get_sidebar() function to

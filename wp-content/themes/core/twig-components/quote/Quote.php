@@ -3,7 +3,7 @@
 namespace Tribe\Project\Templates\Components;
 
 use Tribe\Project\Components\Component;
-use Tribe\Project\Templates\Components\Image as Image_Component;
+use Tribe\Project\Templates\Components\Controller as Image_Component;
 use Tribe\Project\Templates\Models\Image;
 use Tribe\Project\Theme\Config\Image_Sizes;
 

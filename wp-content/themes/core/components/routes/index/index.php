@@ -1,10 +1,8 @@
 <?php
 declare( strict_types=1 );
-
 $controller = \Tribe\Project\Templates\Components\routes\index\Controller::factory();
 
 $controller->render_header();
-
 ?>
 	<main id="main-content">
 		<?php $controller->render_breadcrumbs(); ?>
