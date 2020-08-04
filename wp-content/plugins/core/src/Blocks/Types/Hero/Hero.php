@@ -48,10 +48,10 @@ class Hero extends Block_Config {
 				'type'  => 'text',
 			] )
 		)->add_field( new Field( self::NAME . '_' . self::IMAGE, [
-				'label' => __( 'Image', 'tribe' ),
-				'name'  => self::IMAGE,
-				'type'  => 'image',
-				'instructions' => __('Recommended image size: 1440px wide and 720px high')
+				'label'        => __( 'Image', 'tribe' ),
+				'name'         => self::IMAGE,
+				'type'         => 'image',
+				'instructions' => __( 'Recommended image size: 1440px wide and 720px high', 'tribe' ),
 			] )
 		)->add_field( new Field( self::NAME . '_' . self::CTA, [
 				'label' => __( 'Call to Action', 'tribe' ),
