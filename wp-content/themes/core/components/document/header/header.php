@@ -7,8 +7,8 @@ $controller = \Tribe\Project\Templates\Components\document\header\Controller::fa
 <?php get_template_part( 'components/head/head' ); ?>
 <body class="<?php echo esc_attr( $controller->body_class() ); ?>">
 
-<?php do_action( 'tribe/body_opening_tag' ) ?>
+	<?php do_action( 'tribe/body_opening_tag' ) ?>
 
-<div class="l-wrapper" data-js="site-wrap">
+	<div class="l-wrapper" data-js="site-wrap">
 
-	<?php get_template_part( 'components/header/masthead/masthead' ); ?>
+		<?php get_template_part( 'components/header/masthead/masthead' ); ?>

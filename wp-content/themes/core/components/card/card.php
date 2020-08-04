@@ -1,3 +1,13 @@
+<?php
+declare( strict_types=1 );
+
+/**
+ * @var array $args Arguments passed to the template
+ */
+$controller = \Tribe\Project\Templates\Components\card\Controller::factory( $args );
+
+/*
+
 <div {{ card_classes|stringify }}>
 
     {% if before_card %}
@@ -39,3 +49,6 @@
     {% endif %}
 
 </div>
+
+*/
+?>
