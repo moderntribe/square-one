@@ -87,6 +87,7 @@ class Tabs extends Block_Config {
 	public function add_settings() {
 		$this->add_setting( new Field( self::NAME . '_' . self::LAYOUT, [
 			'type'            => 'image_select',
+			'name'            => self::LAYOUT,
 			'choices'         => [
 				self::LAYOUT_VERTICAL   => __( 'Vertical', 'tribe' ),
 				self::LAYOUT_HORIZONTAL => __( 'Horizontal', 'tribe' ),
