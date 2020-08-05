@@ -32,6 +32,7 @@ class Lead_Form extends Block_Config {
 			'icon'        => '<svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="#fff" stroke="#000" stroke-linecap="round" stroke-linejoin="round" d="M.5.5h19v19H.5z"/><path fill="#000" d="M3 4h14v2H3zM5 7h10v2H5zM14 12h4v4h-4z"/><path fill="#fff" stroke="#000" d="M2.5 12.5h11v3h-11z"/></svg>',
 			'keywords'    => [ __( 'form', 'tribe' ), __( 'display', 'tribe' ) ],
 			'category'    => 'layout',
+			'supports'    => [ 'align' => false ],
 		] ) );
 	}
 
