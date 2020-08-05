@@ -11,45 +11,44 @@ $controller = \Tribe\Project\Templates\Components\card\Controller::factory( $arg
 
 <div {{ card_classes|stringify }}>
 
-    {% if before_card %}
-        {{ before_card }}
-    {% endif %}
+	{% if before_card %}
+		{{ before_card }}
+	{% endif %}
 
-    {% if image %}
-        <header {{ card_header_classes|stringify }}>
-            {{ component( 'image/Image.php', image ) }}
-        </header>
-    {% endif %}
+	{% if image %}
+		<header {{ card_header_classes|stringify }}>
+			{{ component( 'image/Image.php', image ) }}
+		</header>
+	{% endif %}
 
-    <div {{ card_content_classes|stringify }}>
+	<div {{ card_content_classes|stringify }}>
 
-        {% if pre_title %}
-            {{ pre_title }}
-        {% endif %}
+		{% if pre_title %}
+			{{ pre_title }}
+		{% endif %}
 
-        {% if title %}
-            {{ component( 'text/Text.php', title ) }}
-        {% endif %}
+		{% if title %}
+			{{ component( 'text/Text.php', title ) }}
+		{% endif %}
 
-        {% if post_title %}
-            {{ post_title }}
-        {% endif %}
+		{% if post_title %}
+			{{ post_title }}
+		{% endif %}
 
-        {% if text %}
-            {{ component( 'text/Text.php', text ) }}
-        {% endif %}
+		{% if text %}
+			{{ component( 'text/Text.php', text ) }}
+		{% endif %}
 
-        {% if button %}
-            {{ component( 'button/Button.php', button ) }}
-        {% endif %}
+		{% if button %}
+			{{ component( 'button/Button.php', button ) }}
+		{% endif %}
 
-    </div>
+	</div>
 
-    {% if after_card %}
-        {{ after_card }}
-    {% endif %}
+	{% if after_card %}
+		{{ after_card }}
+	{% endif %}
 
 </div>
 
 */
-?>
