@@ -65,7 +65,7 @@ class Lead_Form extends Block_Config {
 		if ( ! class_exists( 'GFFormsModel' ) ) {
 			return [];
 		}
-		$choices = [];
+		$choices   = [];
 		$choices[] = __( 'Select One', 'tribe' );
 		foreach ( \GFFormsModel::get_forms() as $form ) {
 			$choices[ $form->id ] = $form->title;
@@ -81,6 +81,7 @@ class Lead_Form extends Block_Config {
 		$this->add_setting(
 			new Field( self::NAME . '_' . self::LAYOUT, [
 				'type'            => 'image_select',
+				'name'            => self::LAYOUT,
 				'choices'         => [
 					self::LAYOUT_LEFT   => __( 'Content Left', 'tribe' ),
 					self::LAYOUT_CENTER => __( 'Content Center', 'tribe' ),
@@ -99,6 +100,7 @@ class Lead_Form extends Block_Config {
 		)->add_setting(
 			new Field( self::NAME . '_' . self::WIDTH, [
 				'type'            => 'image_select',
+				'name'            => self::WIDTH,
 				'choices'         => [
 					self::WIDTH_GRID => __( 'Grid', 'tribe' ),
 					self::WIDTH_FULL => __( 'Full', 'tribe' ),

@@ -72,6 +72,7 @@ class Hero extends Block_Config {
 	public function add_settings() {
 		$this->add_setting( new Field( self::NAME . '_' . self::LAYOUT, [
 			'type'            => 'image_select',
+			'name'            => self::LAYOUT,
 			'choices'         => [
 				self::LAYOUT_LEFT   => __( 'Align Left', 'tribe' ),
 				self::LAYOUT_CENTER => __( 'Align Center', 'tribe' ),

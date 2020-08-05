@@ -54,6 +54,7 @@ class Interstitial extends Block_Config {
 	protected function add_settings() {
 		$this->add_setting( new Field( self::NAME . '_' . self::LAYOUT, [
 			'type'            => 'image_select',
+			'name'            => self::LAYOUT,
 			'choices'         => [
 				self::LAYOUT_LEFT   => __( 'Text Align Left', 'tribe' ),
 				self::LAYOUT_CENTER => __( 'Text Align Center', 'tribe' ),

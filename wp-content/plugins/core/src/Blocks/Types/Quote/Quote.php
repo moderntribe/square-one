@@ -83,6 +83,7 @@ class Quote extends Block_Config {
 	public function add_settings() {
 		$this->add_setting( new Field( self::NAME . '_' . self::LAYOUT, [
 			'label'           => __( 'Layout', 'tribe' ),
+			'name'            => self::LAYOUT,
 			'type'            => 'image_select',
 			'choices'         => [
 				self::MEDIA_LEFT    => __( 'Image Left', 'tribe' ),
