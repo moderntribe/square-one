@@ -4,9 +4,10 @@ declare( strict_types=1 );
 namespace Tribe\Project\Templates\Components\breadcrumbs;
 
 use Tribe\Libs\Utils\Markup_Utils;
+use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Models\Breadcrumb;
 
-class Controller {
+class Controller extends Abstract_Controller {
 	/**
 	 * @var array
 	 */
@@ -61,10 +62,6 @@ class Controller {
 	 */
 	public function items(): array {
 		return $this->breadcrumbs;
-	}
-
-	public static function factory( array $args = [] ): self {
-		return new self( $args );
 	}
 
 	public function wrapper_classes(): string {

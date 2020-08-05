@@ -3,6 +3,8 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Templates\Components\card;
 
+use Tribe\Project\Templates\Components\Abstract_Controller;
+
 /**
  * Class Card
  *
@@ -18,7 +20,7 @@ namespace Tribe\Project\Templates\Components\card;
  * @property string[] $card_content_classes
  * @property array    $button
  */
-class Controller {
+class Controller extends Abstract_Controller {
 	private $before_card;
 	private $after_card;
 	private $title;
@@ -44,9 +46,4 @@ class Controller {
 		$this->card_content_classes = (array) ( $args['card_content_classes'] ?? [ 'c-card__content' ] );
 		$this->button               = (array) ( $args['button'] ?? [] );
 	}
-
-	public static function factory( array $args = [] ): self {
-		return new self( $args );
-	}
-
 }

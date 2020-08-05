@@ -3,12 +3,11 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Templates\Components\routes\page;
 
-use Tribe\Project\Templates\Factory_Method;
+use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Models\Breadcrumb;
 use Tribe\Project\Templates\Models\Image;
 
-class Controller {
-	use Factory_Method;
+class Controller extends Abstract_Controller {
 
 	private $sidebar_id = '';
 
@@ -32,6 +31,7 @@ class Controller {
 		if ( ! has_post_thumbnail() ) {
 			return '';
 		}
+
 		return get_template_part( 'components/image/image', null, [
 			'attachment' => Image::factory( (int) get_post_thumbnail_id() ),
 		] );

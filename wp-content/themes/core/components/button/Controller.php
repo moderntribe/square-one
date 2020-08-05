@@ -4,8 +4,9 @@ declare( strict_types=1 );
 namespace Tribe\Project\Templates\Components\button;
 
 use Tribe\Libs\Utils\Markup_Utils;
+use Tribe\Project\Templates\Components\Abstract_Controller;
 
-class Controller {
+class Controller extends Abstract_Controller {
 	private $type;
 	private $classes;
 	private $attrs;
@@ -71,9 +72,4 @@ class Controller {
 	public function wrapper_attributes(): string {
 		return Markup_Utils::concat_attrs( $this->wrapper_attrs );
 	}
-
-	public static function factory( array $args = [] ): self {
-		return new self( $args );
-	}
-
 }

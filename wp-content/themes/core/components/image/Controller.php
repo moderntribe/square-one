@@ -3,6 +3,7 @@
 namespace Tribe\Project\Templates\Components\image;
 
 use Tribe\Libs\Utils\Markup_Utils;
+use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Models\Image as Image_Model;
 
 /**
@@ -36,7 +37,7 @@ use Tribe\Project\Templates\Models\Image as Image_Model;
  * @property string[]    $wrapper_classes
  * @property string      $wrapper_tag
  */
-class Controller {
+class Controller extends Abstract_Controller {
 	public $attachment;
 	private $img_url;
 	private $as_bg;
@@ -349,9 +350,5 @@ class Controller {
 		}
 
 		return implode( ", \n", $attribute );
-	}
-
-	public static function factory( array $args = [] ): self {
-		return new self( $args );
 	}
 }
