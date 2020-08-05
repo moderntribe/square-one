@@ -3,11 +3,10 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Templates\Components\routes\not_found;
 
-use Tribe\Project\Templates\Factory_Method;
+use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Models\Breadcrumb;
 
-class Controller {
-	use Factory_Method;
+class Controller extends Abstract_Controller {
 
 	private $sidebar_id = '';
 

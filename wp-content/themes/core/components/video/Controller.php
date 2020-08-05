@@ -4,6 +4,7 @@ declare( strict_types=1 );
 namespace Tribe\Project\Templates\Components\video;
 
 use Tribe\Libs\Utils\Markup_Utils;
+use Tribe\Project\Templates\Components\Abstract_Controller;
 
 /**
  * Class Video
@@ -17,7 +18,7 @@ use Tribe\Libs\Utils\Markup_Utils;
  * @property string   $thumbnail_url
  * @property string   $shim_url
  */
-class Controller {
+class Controller extends Abstract_Controller {
 	private $classes;
 	private $attrs;
 	public $video_url;
@@ -48,9 +49,4 @@ class Controller {
 	public function attributes(): string {
 		return Markup_Utils::concat_attrs( $this->attrs );
 	}
-
-	public static function factory( array $args = [] ): self {
-		return new self( $args );
-	}
-
 }

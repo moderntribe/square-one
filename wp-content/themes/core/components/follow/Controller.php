@@ -4,11 +4,10 @@ declare( strict_types=1 );
 namespace Tribe\Project\Templates\Components\follow;
 
 use Tribe\Project\Object_Meta\Social_Settings;
-use Tribe\Project\Templates\Factory_Method;
+use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Models\Social_Link;
 
-class Controller {
-	use Factory_Method;
+class Controller extends Abstract_Controller {
 
 	// Change the order of this array to change the display order
 	private $social_keys = [

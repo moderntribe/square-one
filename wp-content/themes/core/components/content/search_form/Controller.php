@@ -3,10 +3,9 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Templates\Components\content\search_form;
 
-use Tribe\Project\Templates\Factory_Method;
+use Tribe\Project\Templates\Components\Abstract_Controller;
 
-class Controller {
-	use Factory_Method;
+class Controller extends Abstract_Controller {
 
 	public function action(): string {
 		return get_home_url();

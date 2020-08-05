@@ -5,10 +5,9 @@ namespace Tribe\Project\Templates\Components\footer\navigation;
 
 use Tribe\Project\Nav_Menus\Menu;
 use Tribe\Project\Nav_Menus\Nav_Menus_Definer;
-use Tribe\Project\Templates\Factory_Method;
+use Tribe\Project\Templates\Components\Abstract_Controller;
 
-class Controller {
-	use Factory_Method;
+class Controller extends Abstract_Controller {
 
 	private $location = Nav_Menus_Definer::SECONDARY;
 

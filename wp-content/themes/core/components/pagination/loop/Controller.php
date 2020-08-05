@@ -4,9 +4,10 @@ declare( strict_types=1 );
 namespace Tribe\Project\Templates\Components\pagination\loop;
 
 use Tribe\Libs\Utils\Markup_Utils;
+use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Theme\Pagination_Util;
 
-class Controller {
+class Controller extends Abstract_Controller {
 
 	/**
 	 * @var array
@@ -111,9 +112,5 @@ class Controller {
 				'content' => $number['label'],
 			];
 		}, $numbers );
-	}
-
-	public static function factory( array $args = [] ): self {
-		return new self( $args );
 	}
 }

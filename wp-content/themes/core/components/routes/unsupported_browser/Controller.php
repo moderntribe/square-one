@@ -3,12 +3,10 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Templates\Components\routes\unsupported_browser;
 
-use Tribe\Project\Templates\Factory_Method;
 use Tribe\Project\Assets\Theme\Theme_Build_Parser;
+use Tribe\Project\Templates\Components\Abstract_Controller;
 
-class Controller{
-
-	use Factory_Method;
+class Controller extends Abstract_Controller {
 
 	public $home_url;
 	public $name;
@@ -28,22 +26,21 @@ class Controller{
 	 */
 	private $build_parser;
 
-	public function __construct()  {
-		$this->build_parser = new Theme_Build_Parser();
+	public function __construct( Theme_Build_Parser $build_parser ) {
+		$this->build_parser = $build_parser;
 
-		$this->home_url = home_url( '/' );
-		$this->name    = get_bloginfo( 'name' );
-		$this->styles       = $this->get_styles();
-		$this->favicon      = $this->get_favicon();
+		$this->home_url                    = home_url( '/' );
+		$this->name                        = get_bloginfo( 'name' );
+		$this->styles                      = $this->get_styles();
+		$this->favicon                     = $this->get_favicon();
 		$this->legacy_browser_title        = $this->get_legacy_page_title();
 		$this->legacy_browser_content      = $this->get_legacy_page_content();
-		$this->legacy_logo_header  = $this->get_legacy_image_url( 'logo-header.png' );
-		$this->legacy_logo_footer  = $this->get_legacy_image_url( 'logo-footer.png' );
+		$this->legacy_logo_header          = $this->get_legacy_image_url( 'logo-header.png' );
+		$this->legacy_logo_footer          = $this->get_legacy_image_url( 'logo-footer.png' );
 		$this->legacy_browser_icon_chrome  = $this->get_legacy_image_url( 'chrome.png' );
 		$this->legacy_browser_icon_firefox = $this->get_legacy_image_url( 'firefox.png' );
 		$this->legacy_browser_icon_safari  = $this->get_legacy_image_url( 'safari.png' );
 		$this->legacy_browser_icon_ie      = $this->get_legacy_image_url( 'ie.png' );
-
 	}
 
 	protected function get_favicon(): string {
@@ -51,7 +48,6 @@ class Controller{
 	}
 
 	protected function get_styles(): string {
-
 		$legacy_css = $this->build_parser->get_legacy_style_handles();
 		ob_start();
 		$GLOBALS['wp_styles']->do_items( $legacy_css );

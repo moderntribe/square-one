@@ -3,18 +3,17 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Templates\Components\sidebar;
 
-use Tribe\Project\Templates\Factory_Method;
+use Tribe\Project\Templates\Components\Abstract_Controller;
 
-class Controller {
-	use Factory_Method;
+class Controller extends Abstract_Controller {
 
 	/**
 	 * @var string
 	 */
 	private $sidebar_id;
 
-	public function __construct( string $sidebar_id ) {
-		$this->sidebar_id = $sidebar_id;
+	public function __construct( array $args = [] ) {
+		$this->sidebar_id = $args['sidebar_id'] ?? '';
 	}
 
 	public function active(): bool {
@@ -23,10 +22,6 @@ class Controller {
 
 	public function id(): string {
 		return $this->sidebar_id;
-	}
-
-	public static function factory( array $args = [] ): self {
-		return new self( $args['sidebar_id'] ?? '' );
 	}
 
 }

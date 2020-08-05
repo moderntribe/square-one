@@ -3,11 +3,10 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Templates\Components\footer\site_footer;
 
+use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Controllers\Traits\Copyright;
-use Tribe\Project\Templates\Factory_Method;
 
-class Controller {
-	use Factory_Method;
+class Controller extends Abstract_Controller {
 	use Copyright;
 
 	public function home_url(): string {

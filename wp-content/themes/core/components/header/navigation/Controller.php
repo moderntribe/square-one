@@ -6,10 +6,9 @@ namespace Tribe\Project\Templates\Components\header\navigation;
 use Tribe\Project\Nav_Menus\Menu;
 use Tribe\Project\Nav_Menus\Nav_Menus_Definer;
 use Tribe\Project\Nav_Menus\Walker\Walker_Nav_Menu_Primary;
-use Tribe\Project\Templates\Factory_Method;
+use Tribe\Project\Templates\Components\Abstract_Controller;
 
-class Controller {
-	use Factory_Method;
+class Controller extends Abstract_Controller {
 
 	private $location = Nav_Menus_Definer::PRIMARY;
 
