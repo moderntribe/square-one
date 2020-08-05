@@ -3,86 +3,92 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Blocks\Types\Links;
 
-use Tribe\Gutenpanels\Blocks\Block_Type_Interface;
-use Tribe\Gutenpanels\Blocks\Sections\Content_Section;
-use Tribe\Gutenpanels\Blocks\Sections\Toolbar_Section;
-use Tribe\Project\Blocks\Block_Type_Config;
-use Tribe\Project\Blocks\Types\Links\Support\Link;
+use Tribe\Libs\ACF\Block;
+use Tribe\Libs\ACF\Block_Config;
+use Tribe\Libs\ACF\Field;
+use Tribe\Libs\ACF\Repeater;
 
-class Links extends Block_Type_Config {
-	public const NAME = 'tribe/links';
+class Links extends Block_Config {
+	public const NAME = 'links';
 
 	public const TITLE       = 'title';
 	public const DESCRIPTION = 'description';
 	public const LINKS       = 'links';
-	public const LINK_ITEM   = 'link_item';
-	public const LINKS_TITLE = 'links_title';
+	public const LINK_ITEM   = 'item';
 
 	public const LAYOUT         = 'layout';
-	public const LAYOUT_INLINE  = 'layout-inline';
-	public const LAYOUT_STACKED = 'layout-stacked';
+	public const LAYOUT_INLINE  = 'inline';
+	public const LAYOUT_STACKED = 'stacked';
 
-	public function build(): Block_Type_Interface {
-		return $this->factory->block( self::NAME )
-			->set_label( __( 'Links', 'tribe' ) )
-			->set_dashicon( 'menu-alt' )
-			->add_class( 'c-block b-links l-container' )
-			->add_data_source( 'className-c-block', self::LAYOUT )
-			->add_toolbar_section( $this->layout_toolbar() )
-			->add_content_section( $this->content_area() )
-			->add_content_section( $this->links_area() )
-			->build();
+	public function add_block() {
+		$this->set_block( new Block( self::NAME, [
+			'title'       => __( 'links', 'tribe' ),
+			'description' => __( 'A list of links', 'tribe' ),
+			'icon'        => 'list-view',
+			'keywords'    => [ __( 'list', 'tribe' ) ],
+			'category'    => 'layout',
+		] ) );
 	}
 
-	private function content_area(): Content_Section {
-		return $this->factory->content()->section()
-			->add_class( 'b-links__header' )
-			->add_field(
-				$this->factory->content()->field()->text( self::TITLE )
-					->set_label( __( 'Title', 'tribe' ) )
-					->add_class( 'b-links__title h3' )
-					->build()
-			)
-			->add_field(
-				$this->factory->content()->field()->richtext( self::DESCRIPTION )
-					->set_label( __( 'Description', 'tribe' ) )
-					->add_class( 'b-links__description t-sink s-sink' )
-					->build()
-			)
-			->build();
+	public function add_fields() {
+		$this->add_field( new Field( self::NAME . '_' . self::TITLE, [
+				'label' => __( 'Title', 'tribe' ),
+				'name'  => self::TITLE,
+				'type'  => 'text',
+			] )
+		)->add_field(
+			new Field( self::NAME . '_' . self::DESCRIPTION, [
+				'label' => __( 'Description', 'tribe' ),
+				'name'  => self::DESCRIPTION,
+				'type'  => 'textarea',
+			] )
+		)->add_field(
+			$this->get_links_section()
+		);
 	}
 
-	private function links_area(): Content_Section {
-		return $this->factory->content()->section()
-			->add_class( 'b-links__content b-links__list' )
-			->add_field(
-				$this->factory->content()->field()->text( self::LINKS_TITLE )
-					->set_label( __( 'List Title', 'tribe' ) )
-					->add_class( 'b-links__list-title h5' )
-					->build()
-			)
-			->add_field(
-				$this->factory->content()->field()->flexible_container( self::LINKS )
-					->set_label( __( 'Links List', 'tribe' ) )
-					->merge_nested_attributes( Link::NAME )
-					->add_template_block( Link::NAME )
-					->add_block_type( Link::NAME )
-					->set_min_blocks( 1 )
-					->build()
-			)
-			->build();
+	/**
+	 * @return Repeater
+	 */
+	protected function get_links_section() {
+		$group = new Repeater( self::NAME . '_' . self::LINKS );
+		$group->set_attributes( [
+			'label'  => __( 'Links List', 'tribe' ),
+			'name'   => self::LINKS,
+			'layout' => 'block',
+			'min'    => 0,
+			'max'    => 10,
+		] );
+		$link = new Field( self::LINK_ITEM, [
+			'label' => __( 'Link', 'tribe' ),
+			'name'  => self::LINK_ITEM,
+			'type'  => 'link',
+		] );
+
+		$group->add_field( $link );
+
+		return $group;
 	}
 
-	private function layout_toolbar(): Toolbar_Section {
-		return $this->factory->toolbar()->section()
-		->add_field(
-			$this->factory->toolbar()->field()->icon_select( self::LAYOUT )
-				->add_dashicon_option( self::LAYOUT_STACKED, __( 'Stacked', 'tribe' ), 'align-center' )
-				->add_dashicon_option( self::LAYOUT_INLINE, __( 'Inline', 'tribe' ), 'align-right' )
-				->set_default( self::LAYOUT_STACKED )
-				->build()
-		)
-		->build();
+	public function add_settings() {
+		$this->add_setting( new Field( self::NAME . '_' . self::LAYOUT, [
+			'type'            => 'image_select',
+			'name'            => self::LAYOUT,
+			'choices'         => [
+				self::LAYOUT_INLINE  => __( 'Inline', 'tribe' ),
+				self::LAYOUT_STACKED => __( 'Stacked', 'tribe' ),
+			],
+			'default_value'   => [
+				self::LAYOUT_STACKED,
+			],
+			'multiple'        => 0,
+			'image_path'      => sprintf(
+				'%sassets/img/admin/blocks/%s/',
+				trailingslashit( get_template_directory_uri() ),
+				self::NAME
+			),
+			'image_extension' => 'svg',
+		] ) );
 	}
 
 }
