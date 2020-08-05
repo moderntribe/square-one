@@ -30,6 +30,7 @@ class Hero extends Block_Config {
 			'icon'        => '<svg width="28" height="19" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.254 5.968H19.85v1.054H8.254V5.968zm1.462 1.57h8.568v1.053H9.716V7.538z" fill="#000"/><path d="M2.82 2.437v14.126H25.2V2.437H2.82zm21.482 13.176H3.866V3.366h20.436v12.247z" fill="#000"/><path d="M10.092 16.15H2.884l10.614-3.242 1.693 1.012 5.433-3.243 4.409 2.623v2.85h-14.94z" fill="#000"/></svg>',
 			'keywords'    => [ __( 'hero', 'tribe' ), __( 'display', 'tribe' ) ],
 			'category'    => 'layout',
+			'supports'    => [ 'align' => false ],
 		] ) );
 	}
 
