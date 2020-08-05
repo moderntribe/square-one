@@ -5,10 +5,6 @@ namespace Tribe\Project\Blocks;
 
 use DI;
 use Tribe\Libs\Container\Definer_Interface;
-use Tribe\Project\Blocks\Builder\Block_Builder;
-use Tribe\Project\Blocks\Builder\Builder_Factory;
-use Tribe\Project\Components\Component_Factory;
-use Tribe\Project\Components\Handler;
 
 class Blocks_Definer implements Definer_Interface {
 
@@ -63,7 +59,8 @@ class Blocks_Definer implements Definer_Interface {
 
 			/**
 			 * An array of core/3rd-party block types that should be unregistered
-			 */ self::BLACKLIST  => [
+			 */
+			self::BLACKLIST  => [
 				'core/buttons',
 				'core/button',
 				'core/rss',
@@ -75,7 +72,8 @@ class Blocks_Definer implements Definer_Interface {
 			 * An array of block type style overrides
 			 *
 			 * Each item in the array should be a factory that returns a Block_Style_Override
-			 */ self::STYLES     => DI\add( [
+			 */
+			self::STYLES     => DI\add( [
 				DI\factory( static function () {
 					return new Block_Style_Override( [ 'core/paragraph' ], [
 						[
@@ -98,12 +96,7 @@ class Blocks_Definer implements Definer_Interface {
 				} ),
 			] ),
 
-			Render_Filter::class => DI\create()->constructor( DI\get( Component_Factory::class ), DI\get( Handler::class ) ),
-
 			Allowed_Blocks::class => DI\create()->constructor( DI\get( self::BLACKLIST ) ),
-
-			\Tribe\Gutenpanels\Builder\Block_Builder::class             => DI\get( Block_Builder::class ),
-			\Tribe\Gutenpanels\Builder\Factories\Builder_Factory::class => DI\get( Builder_Factory::class ),
 		];
 	}
 }
