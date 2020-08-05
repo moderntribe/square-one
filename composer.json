@@ -29,11 +29,6 @@
     {
       "type": "vcs",
       "no-api": true,
-      "url": "git@github.com:moderntribe/gutenpanels.git"
-    },
-    {
-      "type": "vcs",
-      "no-api": true,
       "url": "git@github.com:nickforddesign/acf-swatch.git"
     },
     {
