@@ -12,6 +12,7 @@ use Tribe\Project\Blocks\Types\Lead_Form\Lead_Form;
 use Tribe\Project\Blocks\Types\Logos\Logos;
 use Tribe\Project\Blocks\Types\Media_Text\Media_Text;
 use Tribe\Project\Blocks\Types\Quote\Quote;
+use Tribe\Project\Blocks\Types\Stats\Stats;
 use Tribe\Project\Components\Component_Factory;
 use Tribe\Project\Components\Handler;
 
@@ -30,8 +31,9 @@ class Blocks_Definer implements Definer_Interface {
 				DI\get( Media_Text::class ),
 				DI\get( Interstitial::class ),
 				DI\get( Lead_Form::class ),
-				DI\get(Logos::class),
+				DI\get( Logos::class ),
 				DI\get( Quote::class ),
+				DI\get( Stats::class ),
 			] ),
 
 			self::CONTROLLER_MAP => DI\add( [] ),
