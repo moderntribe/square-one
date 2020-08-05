@@ -19,7 +19,7 @@ x-nginx: &nginx
     - ./nginx/fastcgi.conf:/etc/nginx/fastcgi_params
 
 
-x-memcache: &memcached
+x-memcached: &memcached
   image: memcached:alpine
 
 
@@ -32,7 +32,7 @@ x-chrome: &chrome
 
 
 x-php: &php
-  image: moderntribe/squareone-php:74-2.0.1
+  image: moderntribe/squareone-php:74-2.1.1
   working_dir: /application
   user: "${SQ1_UID:-1000}:${SQ1_GID:-1000}"
   volumes:
@@ -46,6 +46,8 @@ x-php: &php
     - "tribe-mail:mail"
   environment:
     - COMPOSER_ALLOW_SUPERUSER=1
+    - COMPOSER_MEMORY_LIMIT=-1
+    - COMPOSER_PROCESS_TIMEOUT=0
     - COMPOSER_HOME=/application/.composer
     - PHP_IDE_CONFIG=serverName=square1.tribe
     - DOMAIN_CURRENT_SITE=square1.tribe
@@ -95,6 +97,8 @@ services:
       - chrome
     environment:
       - COMPOSER_ALLOW_SUPERUSER=1
+      - COMPOSER_MEMORY_LIMIT=-1
+      - COMPOSER_PROCESS_TIMEOUT=0
       - COMPOSER_HOME=/application/.composer
       - PAGER=more
       - PHP_IDE_CONFIG=serverName=square1test.tribe

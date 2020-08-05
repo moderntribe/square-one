@@ -3,11 +3,19 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Blocks;
 
+use Tribe\Libs\ACF\Block_Registrar;
+
 use Tribe\Libs\Container\Abstract_Subscriber;
 
 class Blocks_Subscriber extends Abstract_Subscriber {
 
 	public function register(): void {
+		add_action( 'init', function () {
+			foreach ( $this->container->get( Blocks_Definer::TYPES ) as $type ) {
+				$this->container->get( Block_Registrar::class )->register( $type );
+			}
+		}, 10, 1 );
+
 		add_filter( 'tribe/project/blocks/blacklist', function ( $types ) {
 			return $this->container->get( Allowed_Blocks::class )->filter_block_blacklist( $types );
 		}, 10, 2 );

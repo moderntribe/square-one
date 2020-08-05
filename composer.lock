@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "18f9306bbe56b2aa5c4aeb36c0533764",
+    "content-hash": "76dc4b93e35c61fd1d9b9bcf37feca46",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -271,6 +271,16 @@
                 "zikula"
             ],
             "time": "2017-08-09T07:53:48+00:00"
+        },
+        {
+            "name": "cyberwani/acf-image-select",
+            "version": "1.0",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:cyberwani/acf-image-select.git",
+                "reference": "master"
+            },
+            "type": "wordpress-plugin"
         },
         {
             "name": "ffraenz/private-composer-installer",
@@ -868,65 +878,17 @@
             "time": "2019-02-02T07:14:32+00:00"
         },
         {
-            "name": "moderntribe/gutenpanels",
-            "version": "dev-epic/fidgety-feet",
-            "source": {
-                "type": "git",
-                "url": "git@github.com:moderntribe/gutenpanels.git",
-                "reference": "2fe33f13a07aeccb6d952b9dc3d24cf6b7503f9f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/gutenpanels/zipball/2fe33f13a07aeccb6d952b9dc3d24cf6b7503f9f",
-                "reference": "2fe33f13a07aeccb6d952b9dc3d24cf6b7503f9f",
-                "shasum": ""
-            },
-            "require": {
-                "pimple/pimple": "~3.0@dev"
-            },
-            "require-dev": {
-                "lucatume/function-mocker": "~1.0",
-                "lucatume/wp-browser": "^2.3.4",
-                "mockery/mockery": "^1.2",
-                "phpstan/phpstan": "^0.12.0@dev",
-                "vlucas/phpdotenv": "^3.0"
-            },
-            "type": "wordpress-plugin",
-            "autoload": {
-                "psr-4": {
-                    "Tribe\\Gutenpanels\\": "src/php"
-                }
-            },
-            "autoload-dev": {
-                "psr-4": {
-                    "Tribe\\Gutenpanels\\Tests\\": "tests/codeception/_support",
-                    "Tribe\\Gutenpanels\\": "tests/codeception/unit/Tribe/Gutenpanels"
-                }
-            },
-            "license": [
-                "proprietary"
-            ],
-            "authors": [
-                {
-                    "name": "Modern Tribe",
-                    "email": "peter@tri.be"
-                }
-            ],
-            "description": "The Modern Tribe Panel Builder plugin, now with more Gutenberg!",
-            "time": "2020-07-21T10:22:53+00:00"
-        },
-        {
             "name": "moderntribe/tribe-libs",
             "version": "dev-epic/fidgety-feet",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moderntribe/tribe-libs.git",
-                "reference": "9b8f93ba061d2e54e0b5588259793d97b050fb8f"
+                "reference": "23935e79a16e0364f7d9114e6dfeaf105b4f15fb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/tribe-libs/zipball/9b8f93ba061d2e54e0b5588259793d97b050fb8f",
-                "reference": "9b8f93ba061d2e54e0b5588259793d97b050fb8f",
+                "url": "https://api.github.com/repos/moderntribe/tribe-libs/zipball/23935e79a16e0364f7d9114e6dfeaf105b4f15fb",
+                "reference": "23935e79a16e0364f7d9114e6dfeaf105b4f15fb",
                 "shasum": ""
             },
             "require": {
@@ -1021,7 +983,7 @@
                 "GPL-2.0-only"
             ],
             "description": "A library for use on Modern Tribe service projects.",
-            "time": "2020-05-19T01:51:54+00:00"
+            "time": "2020-07-31T20:23:57+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -1157,6 +1119,33 @@
                 "jsonpath"
             ],
             "time": "2019-12-30T18:03:34+00:00"
+        },
+        {
+            "name": "nickford/acf-swatch",
+            "version": "1.0.7",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:nickforddesign/acf-swatch.git",
+                "reference": "a4b814d9f10fac04032bc5c3f74ac4ce0572fc6b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nickforddesign/acf-swatch/zipball/a4b814d9f10fac04032bc5c3f74ac4ce0572fc6b",
+                "reference": "a4b814d9f10fac04032bc5c3f74ac4ce0572fc6b",
+                "shasum": ""
+            },
+            "type": "wordpress-plugin",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nick Ford",
+                    "email": "nickforddesign@gmail.com"
+                }
+            ],
+            "description": "This is a simple ACF Add-on field allowing the creation of color swatches that behave as radio buttons.",
+            "time": "2018-11-29T16:23:16+00:00"
         },
         {
             "name": "nikic/fast-route",
@@ -2001,56 +1990,6 @@
                 }
             ],
             "time": "2020-06-07T10:40:07+00:00"
-        },
-        {
-            "name": "pimple/pimple",
-            "version": "v3.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/silexphp/Pimple.git",
-                "reference": "e55d12f9d6a0e7f9c85992b73df1267f46279930"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/silexphp/Pimple/zipball/e55d12f9d6a0e7f9c85992b73df1267f46279930",
-                "reference": "e55d12f9d6a0e7f9c85992b73df1267f46279930",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.2.5",
-                "psr/container": "^1.0"
-            },
-            "require-dev": {
-                "symfony/phpunit-bridge": "^3.4|^4.4|^5.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.3.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Pimple": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                }
-            ],
-            "description": "Pimple, a simple Dependency Injection Container",
-            "homepage": "https://pimple.symfony.com",
-            "keywords": [
-                "container",
-                "dependency injection"
-            ],
-            "time": "2020-03-03T09:12:48+00:00"
         },
         {
             "name": "psr/container",
@@ -5466,6 +5405,54 @@
             "time": "2020-05-19T14:25:16+00:00"
         },
         {
+            "name": "moderntribe/gutenpanels",
+            "version": "dev-epic/fidgety-feet",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:moderntribe/gutenpanels.git",
+                "reference": "2fe33f13a07aeccb6d952b9dc3d24cf6b7503f9f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/moderntribe/gutenpanels/zipball/2fe33f13a07aeccb6d952b9dc3d24cf6b7503f9f",
+                "reference": "2fe33f13a07aeccb6d952b9dc3d24cf6b7503f9f",
+                "shasum": ""
+            },
+            "require": {
+                "pimple/pimple": "~3.0@dev"
+            },
+            "require-dev": {
+                "lucatume/function-mocker": "~1.0",
+                "lucatume/wp-browser": "^2.3.4",
+                "mockery/mockery": "^1.2",
+                "phpstan/phpstan": "^0.12.0@dev",
+                "vlucas/phpdotenv": "^3.0"
+            },
+            "type": "wordpress-plugin",
+            "autoload": {
+                "psr-4": {
+                    "Tribe\\Gutenpanels\\": "src/php"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Tribe\\Gutenpanels\\Tests\\": "tests/codeception/_support",
+                    "Tribe\\Gutenpanels\\": "tests/codeception/unit/Tribe/Gutenpanels"
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "Modern Tribe",
+                    "email": "peter@tri.be"
+                }
+            ],
+            "description": "The Modern Tribe Panel Builder plugin, now with more Gutenberg!",
+            "time": "2020-07-21T10:22:53+00:00"
+        },
+        {
             "name": "mustache/mustache",
             "version": "v2.13.0",
             "source": {
@@ -6731,6 +6718,56 @@
                 }
             ],
             "time": "2020-06-22T07:10:55+00:00"
+        },
+        {
+            "name": "pimple/pimple",
+            "version": "v3.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/silexphp/Pimple.git",
+                "reference": "e55d12f9d6a0e7f9c85992b73df1267f46279930"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/silexphp/Pimple/zipball/e55d12f9d6a0e7f9c85992b73df1267f46279930",
+                "reference": "e55d12f9d6a0e7f9c85992b73df1267f46279930",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2.5",
+                "psr/container": "^1.0"
+            },
+            "require-dev": {
+                "symfony/phpunit-bridge": "^3.4|^4.4|^5.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Pimple": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                }
+            ],
+            "description": "Pimple, a simple Dependency Injection Container",
+            "homepage": "https://pimple.symfony.com",
+            "keywords": [
+                "container",
+                "dependency injection"
+            ],
+            "time": "2020-03-03T09:12:48+00:00"
         },
         {
             "name": "psr/event-dispatcher",
@@ -11341,7 +11378,6 @@
     "stability-flags": {
         "humanmade/mercator": 20,
         "johnpbloch/wordpress-core": 20,
-        "moderntribe/gutenpanels": 20,
         "moderntribe/tribe-libs": 20,
         "roots/wp-password-bcrypt": 20,
         "filp/whoops": 20

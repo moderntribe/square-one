@@ -3,71 +3,121 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Blocks\Types\Lead_Form;
 
-use Tribe\Gutenpanels\Blocks\Block_Type_Interface;
-use Tribe\Gutenpanels\Blocks\Sections\Content_Section;
-use Tribe\Gutenpanels\Blocks\Sections\Toolbar_Section;
-use Tribe\Project\Blocks\Block_Type_Config;
+use Tribe\Libs\ACF\Block;
+use Tribe\Libs\ACF\Block_Config;
+use Tribe\Libs\ACF\Field;
 
-class Lead_Form extends Block_Type_Config {
-	public const NAME = 'tribe/lead-form';
+class Lead_Form extends Block_Config {
+	public const NAME = 'lead-form';
 
-	public const TITLE         = 'title';
-	public const DESCRIPTION   = 'description';
-	public const FORM          = 'form';
+	public const TITLE       = 'title';
+	public const DESCRIPTION = 'description';
+	public const FORM        = 'form';
+
 	public const LAYOUT        = 'layout';
-	public const LAYOUT_CENTER = 'layout-center';
-	public const LAYOUT_LEFT   = 'layout-left';
-	public const WIDTH         = 'width';
-	public const WIDTH_GRID    = 'width-grid';
-	public const WIDTH_FULL    = 'width-full';
+	public const LAYOUT_CENTER = 'center';
+	public const LAYOUT_LEFT   = 'left';
 
-	public function build(): Block_Type_Interface {
-		return $this->factory->block( self::NAME )
-			->set_label( __( 'Lead Form', 'tribe' ) )
-			->set_dashicon( 'menu-alt' )
-			->add_class( 'c-block b-lead-form' )
-			->add_data_source( 'className-c-block', self::LAYOUT )
-			->add_data_source( 'className-c-block', self::WIDTH )
-			->add_toolbar_section( $this->layout_toolbar() )
-			->add_content_section( $this->content_area() )
-			->build();
+	public const WIDTH      = 'width';
+	public const WIDTH_GRID = 'grid';
+	public const WIDTH_FULL = 'full';
+
+	/**
+	 * Register the block
+	 */
+	public function add_block() {
+		$this->set_block( new Block( self::NAME, [
+			'title'       => __( 'Lead Form', 'tribe' ),
+			'description' => __( 'A block with a form selector for a newsletter/lead form.', 'tribe' ),
+			'icon'        => '<svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="#fff" stroke="#000" stroke-linecap="round" stroke-linejoin="round" d="M.5.5h19v19H.5z"/><path fill="#000" d="M3 4h14v2H3zM5 7h10v2H5zM14 12h4v4h-4z"/><path fill="#fff" stroke="#000" d="M2.5 12.5h11v3h-11z"/></svg>',
+			'keywords'    => [ __( 'form', 'tribe' ), __( 'display', 'tribe' ) ],
+			'category'    => 'layout',
+			'supports'    => [ 'align' => false ],
+		] ) );
 	}
 
-	private function content_area(): Content_Section {
-		return $this->factory->content()->section()
-			->add_class( 'b-lead-form__content' )
-			->add_field(
-				$this->factory->content()->field()->text( self::TITLE )
-					->set_label( __( 'Title', 'tribe' ) )
-					->add_class( 'b-lead-form__title h3' )
-					->build()
-			)
-			->add_field(
-				$this->factory->content()->field()->richtext( self::DESCRIPTION )
-					->set_label( __( 'Description', 'tribe' ) )
-					->add_class( 'b-lead-form__description t-sink s-sink' )
-					->build()
-			)
-			// TODO: Add Gravity Forms form select field here?
-			->build();
+	/**
+	 * Register Fields for block
+	 */
+	public function add_fields() {
+		$this->add_field( new Field( self::NAME . '_' . self::TITLE, [
+				'label' => __( 'Title', 'tribe' ),
+				'name'  => self::TITLE,
+				'type'  => 'text',
+			] )
+		)->add_field( new Field( self::NAME . '_' . self::DESCRIPTION, [
+				'label' => __( 'Description', 'tribe' ),
+				'name'  => self::DESCRIPTION,
+				'type'  => 'textarea',
+			] )
+		)->add_field( new Field( self::NAME . '_' . self::FORM, [
+				'label'   => __( 'Form', 'tribe' ),
+				'name'    => self::FORM,
+				'type'    => 'select',
+				'choices' => $this->get_form_options(),
+			] )
+		);
 	}
 
-	private function layout_toolbar(): Toolbar_Section {
-		return $this->factory->toolbar()->section()
-			->add_field(
-				$this->factory->toolbar()->field()->icon_select( self::LAYOUT )
-					->add_dashicon_option( self::LAYOUT_CENTER, __( 'Content Center', 'tribe' ), 'editor-aligncenter' )
-					->add_dashicon_option( self::LAYOUT_LEFT, __( 'Content Left', 'tribe' ), 'editor-alignleft' )
-					->set_default( self::LAYOUT_CENTER )
-					->build()
-			)
-			->add_field(
-				$this->factory->toolbar()->field()->icon_select( self::WIDTH )
-					->add_dashicon_option( self::WIDTH_GRID, __( 'Grid', 'tribe' ), 'editor-contract' )
-					->add_dashicon_option( self::WIDTH_FULL, __( 'Full', 'tribe' ), 'editor-expand' )
-					->set_default( self::WIDTH_GRID )
-					->build()
-			)
-			->build();
+	/**
+	 * @return array
+	 */
+	protected function get_form_options() {
+		if ( ! class_exists( 'GFFormsModel' ) ) {
+			return [];
+		}
+		$choices   = [];
+		$choices[] = __( 'Select One', 'tribe' );
+		foreach ( \GFFormsModel::get_forms() as $form ) {
+			$choices[ $form->id ] = $form->title;
+		}
+
+		return $choices;
 	}
+
+	/**
+	 * Register Settings for Block
+	 */
+	public function add_settings() {
+		$this->add_setting(
+			new Field( self::NAME . '_' . self::LAYOUT, [
+				'type'            => 'image_select',
+				'name'            => self::LAYOUT,
+				'choices'         => [
+					self::LAYOUT_LEFT   => __( 'Content Left', 'tribe' ),
+					self::LAYOUT_CENTER => __( 'Content Center', 'tribe' ),
+				],
+				'default_value'   => [
+					self::LAYOUT_CENTER,
+				],
+				'multiple'        => 0,
+				'image_path'      => sprintf(
+					'%sassets/img/admin/blocks/%s/',
+					trailingslashit( get_template_directory_uri() ),
+					self::NAME
+				),
+				'image_extension' => 'svg',
+			] )
+		)->add_setting(
+			new Field( self::NAME . '_' . self::WIDTH, [
+				'type'            => 'image_select',
+				'name'            => self::WIDTH,
+				'choices'         => [
+					self::WIDTH_GRID => __( 'Grid', 'tribe' ),
+					self::WIDTH_FULL => __( 'Full', 'tribe' ),
+				],
+				'default_value'   => [
+					self::WIDTH_GRID,
+				],
+				'multiple'        => 0,
+				'image_path'      => sprintf(
+					'%sassets/img/admin/blocks/%s/',
+					trailingslashit( get_template_directory_uri() ),
+					self::NAME
+				),
+				'image_extension' => 'svg',
+			] )
+		);
+	}
+
 }
