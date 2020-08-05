@@ -5,8 +5,14 @@ namespace Tribe\Project\Blocks;
 
 use DI;
 use Tribe\Libs\Container\Definer_Interface;
-use Tribe\Project\Blocks\Builder\Block_Builder;
-use Tribe\Project\Blocks\Builder\Builder_Factory;
+use Tribe\Project\Blocks\Types\Interstitial\Interstitial;
+use Tribe\Project\Blocks\Types\Accordion\Accordion;
+use Tribe\Project\Blocks\Types\Hero\Hero;
+use Tribe\Project\Blocks\Types\Lead_Form\Lead_Form;
+use Tribe\Project\Blocks\Types\Links\Links;
+use Tribe\Project\Blocks\Types\Logos\Logos;
+use Tribe\Project\Blocks\Types\Media_Text\Media_Text;
+use Tribe\Project\Blocks\Types\Quote\Quote;
 use Tribe\Project\Components\Component_Factory;
 use Tribe\Project\Components\Handler;
 
@@ -20,43 +26,14 @@ class Blocks_Definer implements Definer_Interface {
 	public function define(): array {
 		return [
 			self::TYPES => DI\add( [
-				DI\get( Types\Accordion\Accordion::class ),
-				DI\get( Types\Accordion\Support\Accordion_Section::class ),
-
-				DI\get( Types\Button::class ),
-
-				DI\get( Types\Card_Grid::class ),
-				DI\get( Types\Support\Card_Grid_Query::class ),
-				DI\get( Types\Support\Card_Grid_Select::class ),
-				DI\get( Types\Support\Card_Grid_Card::class ),
-
-				DI\get( Types\Content_Carousel::class ),
-				DI\get( Types\Support\Content_Carousel_Query::class ),
-				DI\get( Types\Support\Content_Carousel_Select::class ),
-				DI\get( Types\Support\Content_Carousel_Card::class ),
-
-				DI\get( Types\Hero\Hero::class ),
-
-				DI\get( Types\Icon_Grid::class ),
-				DI\get( Types\Support\Icon_Grid_Card::class ),
-
-				DI\get( Types\Interstitial\Interstitial::class ),
-
-				DI\get( Types\Lead_Form\Lead_Form::class ),
-
-				DI\get( Types\Links\Links::class ),
-				DI\get( Types\Links\Support\Link::class ),
-
-				DI\get( Types\Logos\Logos::class ),
-				DI\get( Types\Logos\Support\Logo::class ),
-
-				DI\get( Types\Media_Text\Media_Text::class ),
-				DI\get( Types\Media_Text\Support\Media_Text_Media::class ),
-				DI\get( Types\Media_Text\Support\Media_Text_Media_Embed::class ),
-				DI\get( Types\Media_Text\Support\Media_Text_Media_Image::class ),
-				DI\get( Types\Media_Text\Support\Media_Text_Text::class ),
-
-				DI\get( Types\Quote\Quote::class ),
+				DI\get( Accordion::class ),
+				DI\get( Hero::class ),
+				DI\get( Media_Text::class ),
+				DI\get( Interstitial::class ),
+				DI\get( Lead_Form::class ),
+				DI\get( Links::class ),
+				DI\get( Logos::class ),
+				DI\get( Quote::class ),
 			] ),
 
 			self::CONTROLLER_MAP => DI\add( [] ),
@@ -98,12 +75,12 @@ class Blocks_Definer implements Definer_Interface {
 				} ),
 			] ),
 
-			Render_Filter::class => DI\create()->constructor( DI\get( Component_Factory::class ), DI\get( Handler::class ) ),
-
+			Render_Filter::class  => DI\create()->constructor(
+				DI\get( Component_Factory::class ),
+				DI\get( Handler::class )
+			),
 			Allowed_Blocks::class => DI\create()->constructor( DI\get( self::BLACKLIST ) ),
 
-			\Tribe\Gutenpanels\Builder\Block_Builder::class             => DI\get( Block_Builder::class ),
-			\Tribe\Gutenpanels\Builder\Factories\Builder_Factory::class => DI\get( Builder_Factory::class ),
 		];
 	}
 }
