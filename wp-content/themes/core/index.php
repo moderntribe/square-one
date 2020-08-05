@@ -1,3 +1,3 @@
 <?php
 
-tribe_controller( \Tribe\Project\Controllers\IndexController::class, 'loop' );
+get_template_part( 'components/routes/index/index' );

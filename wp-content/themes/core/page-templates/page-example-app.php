@@ -4,4 +4,4 @@
  */
 
 
-tribe_controller( \Tribe\Project\Controllers\SingleController::class, 'example_app' );
+get_template_part('components/routes/example_app/example_app');

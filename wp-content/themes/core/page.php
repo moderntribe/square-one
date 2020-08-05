@@ -1,3 +1,3 @@
 <?php
 
-tribe_controller( \Tribe\Project\Controllers\SingleController::class, 'single' );
+get_template_part( 'components/routes/page/page' );

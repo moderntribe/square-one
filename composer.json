@@ -91,7 +91,7 @@
     "humanmade/mercator": "dev-master#7f3846a",
     "humanmade/s3-uploads": "2.2.1",
     "johnbillion/extended-cpts": "^4.0",
-    "johnpbloch/wordpress-core": "5.4.*",
+    "johnpbloch/wordpress-core": "5.5.x-dev",
     "johnpbloch/wordpress-core-installer": "1.0.0",
     "mailgun/mailgun-php": "^2.8",
     "moderntribe/tribe-libs": "dev-epic/fidgety-feet",
@@ -152,11 +152,9 @@
   },
   "autoload": {
     "psr-4": {
-      "Tribe\\Project\\":"wp-content/plugins/core/src"
-    },
-    "classmap": [
-      "wp-content/themes/core/components/"
-    ]
+      "Tribe\\Project\\": "wp-content/plugins/core/src",
+      "Tribe\\Project\\Templates\\Components\\": "wp-content/themes/core/components"
+    }
   },
   "autoload-dev": {
     "psr-4": {

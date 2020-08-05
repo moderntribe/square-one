@@ -2,20 +2,9 @@
 
 namespace Tribe\Project\Shortcodes;
 
-use Tribe\Project\Components\Component_Factory;
-use Tribe\Project\Templates\Components\Image;
 use Tribe\Project\Templates\Components\Slider;
 
 class Gallery implements Shortcode {
-
-	/**
-	 * @var Component_Factory
-	 */
-	private $component;
-
-	public function __construct( Component_Factory $component_factory ) {
-		$this->component = $component_factory;
-	}
 
 	/**
 	 * Render the [gallery] shortcode when placed in content areas.
@@ -46,6 +35,8 @@ class Gallery implements Shortcode {
 			return '';
 		}
 
+		// TODO: work with new component system
+		return '';
 		$options = [
 			Slider::SLIDES          => $this->get_slides( $attachments ),
 			Slider::THUMBNAILS      => $this->get_slides( $attachments, 'thumbnail' ),
@@ -103,6 +94,8 @@ class Gallery implements Shortcode {
 		}
 
 		return array_filter( array_map( function ( $slide_id ) use ( $size ) {
+			// TODO: work with new component system
+			return '';
 			try {
 				$image = new \Tribe\Project\Models\Image( $slide_id );
 			} catch ( \Exception $e ) {
