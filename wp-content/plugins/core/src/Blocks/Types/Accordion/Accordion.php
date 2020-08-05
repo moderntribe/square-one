@@ -81,6 +81,7 @@ class Accordion extends Block_Config {
 	public function add_settings() {
 		$this->add_setting( new Field( self::NAME . '_' . self::LAYOUT, [
 			'type'            => 'image_select',
+			'name'            => self::LAYOUT,
 			'choices'         => [
 				self::LAYOUT_INLINE  => __( 'Inline', 'tribe' ),
 				self::LAYOUT_STACKED => __( 'Stacked', 'tribe' ),

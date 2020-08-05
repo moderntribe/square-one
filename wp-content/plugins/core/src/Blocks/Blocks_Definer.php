@@ -9,6 +9,7 @@ use Tribe\Project\Blocks\Types\Interstitial\Interstitial;
 use Tribe\Project\Blocks\Types\Accordion\Accordion;
 use Tribe\Project\Blocks\Types\Hero\Hero;
 use Tribe\Project\Blocks\Types\Lead_Form\Lead_Form;
+use Tribe\Project\Blocks\Types\Links\Links;
 use Tribe\Project\Blocks\Types\Logos\Logos;
 use Tribe\Project\Blocks\Types\Media_Text\Media_Text;
 use Tribe\Project\Blocks\Types\Quote\Quote;
@@ -31,6 +32,7 @@ class Blocks_Definer implements Definer_Interface {
 				DI\get( Media_Text::class ),
 				DI\get( Interstitial::class ),
 				DI\get( Lead_Form::class ),
+				DI\get( Links::class ),
 				DI\get( Logos::class ),
 				DI\get( Quote::class ),
 				DI\get( Tabs::class ),
