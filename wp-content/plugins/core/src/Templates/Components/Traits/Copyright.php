@@ -1,7 +1,7 @@
 <?php
 declare( strict_types=1 );
 
-namespace Tribe\Project\Templates\Controllers\Traits;
+namespace Tribe\Project\Templates\Components\Traits;
 
 trait Copyright {
 	public function copyright(): string {

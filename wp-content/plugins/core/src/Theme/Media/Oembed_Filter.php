@@ -2,7 +2,6 @@
 
 namespace Tribe\Project\Theme\Media;
 
-use Tribe\Project\Components\Component_Factory;
 use Tribe\Project\Templates\Components\video\Controller;
 
 class Oembed_Filter {
@@ -12,13 +11,8 @@ class Oembed_Filter {
 	public const PROVIDER_YOUTUBE = 'YouTube';
 
 	private $supported_providers = [];
-	/**
-	 * @var Component_Factory
-	 */
-	private $component;
 
-	public function __construct( Component_Factory $component, array $supported_providers = [ self::PROVIDER_VIMEO, self::PROVIDER_YOUTUBE ] ) {
-		$this->component = $component;
+	public function __construct( array $supported_providers = [ self::PROVIDER_VIMEO, self::PROVIDER_YOUTUBE ] ) {
 		$this->supported_providers = $supported_providers;
 	}
 
