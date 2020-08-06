@@ -40,11 +40,11 @@ class Controller extends Abstract_Controller {
 	private $links;
 
 	public function __construct( array $args = [] ) {
-		$this->wrapper_classes = array_merge( [ 'c-pagination', 'c-pagination--loop' ], (array) $args['wrapper_classes'] ?? [] );
+		$this->wrapper_classes = array_merge( [ 'c-pagination', 'c-pagination--loop' ], (array) ( $args['wrapper_classes'] ?? [] ) );
 		$this->wrapper_attrs   = (array) ( $args['wrapper_attrs'] ?? [ 'aria-labelledby' => 'c-pagination__label-single' ] );
-		$this->list_classes    = array_merge( [ 'c-pagination__list' ], (array) $args['list_classes'] ?? [] );
+		$this->list_classes    = array_merge( [ 'c-pagination__list' ], (array) ( $args['list_classes'] ?? [] ) );
 		$this->list_attrs      = (array) ( $args['list_attrs'] ?? [] );
-		$this->item_classes    = array_merge( [ 'c-pagination__item' ], (array) $args['item_classes'] ?? [] );
+		$this->item_classes    = array_merge( [ 'c-pagination__item' ], (array) ( $args['item_classes'] ?? [] ) );
 		$this->item_attrs      = (array) ( $args['item_attrs'] ?? [] );
 	}
 

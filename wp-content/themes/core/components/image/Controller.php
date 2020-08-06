@@ -82,7 +82,7 @@ class Controller extends Abstract_Controller {
 		// append an html string inside the wrapper. Useful for adding a `<figcaption>` or other markup after the image
 		$this->html = $args['html'] ?? '';
 		// pass classes for image tag. if lazyload is true class "lazyload" is auto added
-		$this->img_classes = array_merge( [ 'c-image__image' ], (array) $args['img_classes'] ?? [] );
+		$this->img_classes = array_merge( [ 'c-image__image' ], (array) ( $args['img_classes'] ?? [] ) );
 		// additional image attributes
 		$this->img_attrs = (array) ( $args['img_attrs'] ?? [] );
 		// pass specific image alternate text. if not included, will default to image title
@@ -90,7 +90,7 @@ class Controller extends Abstract_Controller {
 		// pass a link to wrap the image
 		$this->link_url = $args['link_url'] ?? '';
 		// pass link classes
-		$this->link_classes = array_merge( [ 'c-image__link' ], (array) $args['link_classes'] ?? [] );
+		$this->link_classes = array_merge( [ 'c-image__link' ], (array) ( $args['link_classes'] ?? [] ) );
 		// pass a link target
 		$this->link_target = $args['link_target'] ?? '';
 		// pass a link title
@@ -117,7 +117,7 @@ class Controller extends Abstract_Controller {
 		$this->use_srcset = $args['use_srcset'] ?? true;
 		$this->wrapper_attrs = (array) ( $args['wrapper_attrs'] ?? [] );
 		// pass classes for figure wrapper. If as_bg is set true gets auto class of "lazyload"
-		$this->wrapper_classes = array_merge( [ 'c-image' ], (array) $args['classes'] ?? [] );
+		$this->wrapper_classes = array_merge( [ 'c-image' ], (array) ( $args['classes'] ?? [] ) );
 		// html tag for the wrapper/background image container
 		$this->wrapper_tag = $args['wrapper_tag'] ?? 'figure';
 	}

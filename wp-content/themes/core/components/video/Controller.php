@@ -33,7 +33,7 @@ class Controller extends Abstract_Controller {
 
 	public function __construct( array $args = [] ) {
 		$this->trigger_position = $args['trigger_position'] ?? self::TRIGGER_POSITION_BOTTOM;
-		$this->classes          = array_merge( [ 'c-video', sprintf( 'c-video--trigger-%s', $this->trigger_position ) ], (array) $args['classes'] ?? [] );
+		$this->classes          = array_merge( [ 'c-video', sprintf( 'c-video--trigger-%s', $this->trigger_position ) ], (array) ( $args['classes'] ?? [] ) );
 		$this->attrs            = (array) ( $args['attrs'] ?? [] );
 		$this->video_url        = $args['video_url'] ?? '';
 		$this->video_title      = $args['video_title'] ?? '';
