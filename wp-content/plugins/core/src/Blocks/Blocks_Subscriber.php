@@ -10,7 +10,7 @@ use Tribe\Libs\Container\Abstract_Subscriber;
 class Blocks_Subscriber extends Abstract_Subscriber {
 
 	public function register(): void {
-		add_action( 'init', function () {
+		add_action( 'acf/init', function () {
 			foreach ( $this->container->get( Blocks_Definer::TYPES ) as $type ) {
 				$this->container->get( Block_Registrar::class )->register( $type );
 			}
