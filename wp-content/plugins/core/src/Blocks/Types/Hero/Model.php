@@ -18,7 +18,7 @@ class Model extends Base_Model {
 			'container_classes' => [ 'b-hero__container', 'l-container' ],
 			'media_classes'     => [ 'b-hero__media' ],
 			'content_classes'   => [ 'b-hero__content' ],
-			'calsses'           => [ 'c-block', 'c-block--full-bleed', 'b-hero' ],
+			'classes'           => [ 'c-block', 'c-block--full-bleed', 'b-hero' ],
 			'attr'              => [],
 		];
 	}
@@ -34,7 +34,7 @@ class Model extends Base_Model {
 	 * @return array
 	 */
 	private function get_media(): array {
-		if ( $this->get( Hero::IMAGE ) ) {
+		if ( ! $this->get( Hero::IMAGE ) ) {
 			return [];
 		}
 
