@@ -1,7 +1,7 @@
 <?php
 declare( strict_types=1 );
 
-namespace Tribe\Project\Templates\Components\head;
+namespace Tribe\Project\Templates\Components\document\head;
 
 use Tribe\Project\Templates\Components\Abstract_Controller;
 

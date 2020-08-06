@@ -39,7 +39,7 @@ class Oembed_Filter {
 			return $html;
 		}
 
-		$classes = [ 'c-video', 'c-video--lazy' ];
+		$classes = [ 'c-video--lazy' ];
 
 		if ( $data->provider_name === self::PROVIDER_YOUTUBE ) {
 			$embed_id    = $this->get_youtube_embed_id( $url );

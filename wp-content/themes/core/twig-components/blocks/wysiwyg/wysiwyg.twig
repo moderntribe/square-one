@@ -1,13 +1,13 @@
 {# Block: WYSIWYG #}
 
 <div class="s-content">
-	<div class="g-row g-row--center g-row--col-3--min-full"
-			 data-depth="0"
-			 data-name="columns"
-			 data-livetext>
+	<div data-depth="0"
+		data-name="columns"
+		data-livetext
+	>
 
 		{% for col in columns %}
-			<div class="g-col s-sink t-sink"
+			<div class="s-sink t-sink"
 					 data-depth="1"
 					 data-index="{{ loop.index0 }}"
 					 data-name="column_content"

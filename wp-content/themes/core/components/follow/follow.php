@@ -4,7 +4,7 @@ declare( strict_types=1 );
 $controller = \Tribe\Project\Templates\Components\follow\Controller::factory();
 
 ?>
-<aside class="social-follow">
+<div class="social-follow">
 
 	<ul class="social-follow__list">
 		<?php foreach ( $controller->social_links() as $item ) { ?>
@@ -18,4 +18,4 @@ $controller = \Tribe\Project\Templates\Components\follow\Controller::factory();
 		<?php } ?>
 	</ul>
 
-</aside>
+</div>
