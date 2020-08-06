@@ -21,7 +21,6 @@ class Model extends Base_Model {
 			'calsses'           => [ 'c-block', 'c-block--full-bleed', 'b-hero' ],
 			'attr'              => [],
 		];
-
 	}
 
 	/**

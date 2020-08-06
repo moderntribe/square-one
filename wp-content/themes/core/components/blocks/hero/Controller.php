@@ -9,15 +9,6 @@ use Tribe\Project\Templates\Components\Abstract_Controller;
 
 /**
  * Class Hero
- *
- * @property string   $layout
- * @property string   $media
- * @property string   $content
- * @property string[] $container_classes
- * @property string[] $media_classes
- * @property string[] $content_classes
- * @property string[] $classes
- * @property string[] $attrs
  */
 class Controller extends Abstract_Controller {
 
