@@ -1,25 +1,38 @@
 <?php
 declare( strict_types=1 );
-
-$controller = \Tribe\Project\Templates\Components\quote\Controller::factory();
-
+$controller = \Tribe\Project\Templates\Components\quote\Controller::factory( $args );
 ?>
 
-<blockquote <?php $controller->stringify( $controller->classes ) ?> <?php $controller->stringify( $controller->attrs ) ?>>
-	{{ component( 'text/Text.php', quote ) }}
-	<?php if ($controller->cite ): ?>
-		<cite <?php $controller->stringify( $controller->cite_classes ) ?> <?php $controller->stringify( $controller->cite_attrs ) ?>>
-			<?php if( $controller->cite['image'] ): ?>
-				{{ component( 'image/Image.php', cite.image ) }}
+<blockquote <?php echo $controller->render_classes( $controller->classes ) ?> <?php echo $controller->render_attrs( $controller->attrs ) ?>>
+
+	<?php if ( !empty($controller->text_text) ): ?>
+		<<?php echo $controller->render_text_tag_and_attrs() ?>>
+			<?php echo $controller->text_text ?>
+		</<?php echo esc_attr( $controller->text_tag ) ?>>
+	<?php endif; ?>
+
+	<?php if ( !empty( $controller->cite_name) ): ?>
+		<cite <?php echo $controller->render_classes( $controller->cite_classes ) ?> <?php echo $controller->render_attrs( $controller->cite_attrs ) ?>>
+
+			<?php if( !empty( $controller->cite_imag ) ): ?>
+				<?php
+					$controller->render_cite_image();
+				?>
 			<?php endif ?>
+
 			<span class="c-quote__cite-text">
-				{% if cite.name %}
-					{{ component( 'text/Text.php', cite.name ) }}
-				{% endif %}
-				{% if cite.title %}
-					{{ component( 'text/Text.php', cite.title ) }}
-				{% endif %}
+				<?php if ( !empty( $controller->cite_name) ): ?>
+					<span>
+						<?php echo $controller->cite_name ?>
+					</span>
+				<?php endif; ?>
+				<?php if ( !empty( $controller->cite_title) ): ?>
+					<span>
+						<?php echo $controller->cite_title ?>
+					</span>
+				<?php endif; ?>
 			</span>
+
 		</cite>
 	<? endif ?>
 </blockquote>
