@@ -16,9 +16,6 @@ $controller->render_header();
 			<?php echo $controller->render_featured_image(); ?>
 
 			<div class="t-sink s-sink l-sink l-sink--double">
-
-				<?php  get_template_part( 'components/quote/quote' );  ?>
-
 				<?php the_content(); ?>
 			</div>
 
