@@ -14,4 +14,3 @@ if ( ! function_exists( 'tribe_template_part' ) ) {
 		return ob_get_clean();
 	}
 }
-
