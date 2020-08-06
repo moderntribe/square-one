@@ -1,5 +1,5 @@
 <?php
-
+declare( strict_types=1 );
 $controller = \Tribe\Project\Templates\Components\routes\not_found\Controller::factory();
 
 $controller->render_header();
