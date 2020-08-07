@@ -2,7 +2,7 @@
 
 namespace Tribe\Project\Shortcodes;
 
-use Tribe\Project\Templates\Components\Slider;
+use Tribe\Project\Templates\Components\Controller;
 
 class Gallery implements Shortcode {
 
@@ -38,15 +38,15 @@ class Gallery implements Shortcode {
 		// TODO: work with new component system
 		return '';
 		$options = [
-			Slider::SLIDES          => $this->get_slides( $attachments ),
-			Slider::THUMBNAILS      => $this->get_slides( $attachments, 'thumbnail' ),
-			Slider::SHOW_CAROUSEL   => $atts['show_carousel'],
-			Slider::SHOW_ARROWS     => $atts['show_arrows'],
-			Slider::SHOW_PAGINATION => $atts['show_pagination'],
-			Slider::MAIN_CLASSES    => [],
+			Controller::SLIDES          => $this->get_slides( $attachments ),
+			Controller::THUMBNAILS      => $this->get_slides( $attachments, 'thumbnail' ),
+			Controller::SHOW_CAROUSEL   => $atts['show_carousel'],
+			Controller::SHOW_ARROWS     => $atts['show_arrows'],
+			Controller::SHOW_PAGINATION => $atts['show_pagination'],
+			Controller::MAIN_CLASSES    => [],
 		];
 
-		return $this->component->get( Slider::class, $options )->get_rendered_output();
+		return $this->component->get( Controller::class, $options )->get_rendered_output();
 	}
 
 	protected function get_attachments( $atts ) {
