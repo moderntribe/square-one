@@ -34,7 +34,6 @@ class Model extends Base_Model {
 	 */
 	private function get_media() {
 		return $this->get( Hero::IMAGE, false );
-
 	}
 
 	/**

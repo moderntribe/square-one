@@ -76,27 +76,32 @@ class Controller extends Abstract_Controller {
 		$this->attrs             = (array) ( $args[ 'attrs' ] ?? [] );
 	}
 
-	protected function get_content( $args ) {
+	/**
+	 * @param array $args
+	 *
+	 * @return array
+	 */
+	protected function get_content( $args ): array {
 		if ( ! isset( $args[ 'content' ] ) || empty( $args[ 'content' ] ) ) {
 			return [];
 		}
 
 		return [
 			'classes' => [ 'b-hero__content-container', 't-theme--light' ],
-			'leadin'  => $args['content'][Model::LEAD_IN] ?? '',
-			'title'   => $args['content'][Model::TITLE] ?? '',
-			'text'    => $args['content'][Model::TEXT] ?? '',
-			'action'  => $args['content'][Model::CTA] ?? [],
+			'leadin'  => $args[ 'content' ][ Model::LEAD_IN ] ?? '',
+			'title'   => $args[ 'content' ][ Model::TITLE ] ?? '',
+			'text'    => $args[ 'content' ][ Model::TEXT ] ?? '',
+			'action'  => $args[ 'content' ][ Model::CTA ] ?? [],
 			'layout'  => $this->layout,
 		];
 	}
 
 	/**
-	 * @param $args
+	 * @param array $args
 	 *
 	 * @return array
 	 */
-	protected function get_media( $args ) {
+	protected function get_media( $args ): array {
 		if ( ! isset( $args[ 'media' ] ) ) {
 			return [];
 		}
@@ -125,22 +130,37 @@ class Controller extends Abstract_Controller {
 		];
 	}
 
+	/**
+	 * @return string
+	 */
 	public function container_classes(): string {
 		return Markup_Utils::class_attribute( $this->container_classes );
 	}
 
+	/**
+	 * @return string
+	 */
 	public function media_classes(): string {
 		return Markup_Utils::class_attribute( $this->media_classes );
 	}
 
+	/**
+	 * @return string
+	 */
 	public function content_classes(): string {
 		return Markup_Utils::class_attribute( $this->content_classes );
 	}
 
+	/**
+	 * @return string
+	 */
 	public function classes(): string {
 		return Markup_Utils::class_attribute( $this->classes );
 	}
 
+	/**
+	 * @return string
+	 */
 	public function attrs(): string {
 		return Markup_Utils::class_attribute( $this->attrs );
 	}
