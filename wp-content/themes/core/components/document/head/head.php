@@ -1,6 +1,6 @@
 <?php
 declare( strict_types=1 );
-$controller = \Tribe\Project\Templates\Components\head\Controller::factory();
+$controller = \Tribe\Project\Templates\Components\document\head\Controller::factory();
 ?>
 <head>
 	<?php // TITLE: Handled by WP ?>

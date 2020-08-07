@@ -47,13 +47,13 @@ class Controller extends Abstract_Controller {
 
 	public function __construct( array $args = [] ) {
 		$this->breadcrumbs     = (array) ( $args['breadcrumbs'] ?? [] );
-		$this->wrapper_classes = (array) ( $args['wrapper_classes'] ?? [] );
+		$this->wrapper_classes = array_merge( [ 'c-breadcrumbs' ], (array) ( $args['wrapper_classes'] ?? [] ) );
 		$this->wrapper_attrs   = (array) ( $args['wrapper_attrs'] ?? [] );
-		$this->main_classes    = (array) ( $args['main_classes'] ?? [] );
+		$this->main_classes    = array_merge( [ 'c-breadcrumbs__list' ], (array) ( $args['main_classes'] ?? [] ) );
 		$this->main_attrs      = (array) ( $args['main_attrs'] ?? [] );
-		$this->item_classes    = (array) ( $args['item_classes'] ?? [] );
+		$this->item_classes    = array_merge( [ 'c-breadcrumbs__item' ], (array) ( $args['item_classes'] ?? [] ) );
 		$this->item_attrs      = (array) ( $args['item_attrs'] ?? [] );
-		$this->link_classes    = (array) ( $args['link_classes'] ?? [] );
+		$this->link_classes    = array_merge( [ 'c-breadcrumbs__anchor' ], (array) ( $args['link_classes'] ?? [] ) );
 		$this->link_attrs      = (array) ( $args['link_attrs'] ?? [] );
 	}
 

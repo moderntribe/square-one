@@ -3,7 +3,7 @@ declare( strict_types=1 );
 $controller = \Tribe\Project\Templates\Components\content\no_results\Controller::factory();
 ?>
 
-<aside class="no-results">
+<div class="no-results">
 
 	<h3 class="no-results__title">
 		<?php echo esc_html( __( 'No Posts', 'tribe' ) ); ?>
@@ -13,4 +13,4 @@ $controller = \Tribe\Project\Templates\Components\content\no_results\Controller:
 		<?php echo esc_html( __( 'Sorry, but there are currently no posts to see at this time.', 'tribe' ) ); ?>
 	</p>
 
-</aside>
+</div>

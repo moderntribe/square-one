@@ -41,9 +41,9 @@ class Controller extends Abstract_Controller {
 		$this->image                = (array) ( $args['image'] ?? [] );
 		$this->pre_title            = $args['pre_title'] ?? '';
 		$this->post_title           = $args['post_title'] ?? '';
-		$this->card_classes         = (array) ( $args['card_classes'] ?? [ 'c-card' ] );
-		$this->card_header_classes  = (array) ( $args['card_header_classes'] ?? [ 'c-card__header' ] );
-		$this->card_content_classes = (array) ( $args['card_content_classes'] ?? [ 'c-card__content' ] );
+		$this->card_classes         = array_merge( [ 'c-card' ], (array) ( $args['card_classes'] ?? [] ) );
+		$this->card_header_classes  = array_merge( [ 'c-card__header' ], (array) ( $args['card_header_classes'] ?? [] ) );
+		$this->card_content_classes = array_merge( [ 'c-card__content' ], (array) ( $args['card_content_classes'] ?? [] ) );
 		$this->button               = (array) ( $args['button'] ?? [] );
 	}
 }

@@ -4,7 +4,7 @@ $controller = \Tribe\Project\Templates\Components\document\header\Controller::fa
 ?>
 <!DOCTYPE html>
 <html <?php echo $controller->language_attributes(); ?>>
-<?php get_template_part( 'components/head/head' ); ?>
+<?php get_template_part( 'components/document/head/head' ); ?>
 <body class="<?php echo esc_attr( $controller->body_class() ); ?>">
 
 	<?php do_action( 'tribe/body_opening_tag' ) ?>

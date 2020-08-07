@@ -8,8 +8,8 @@ use Tribe\Project\Templates\Components\Abstract_Controller;
 class Controller extends Abstract_Controller {
 
 	public function title(): string {
-		// TODO: hook up/use text component.
-		//  Also, make sure it handles CPTs with dates.
+		// TODO: implement a wrapper/container component
+		// TODO: use the method in head/controller.php?
 		return get_the_title();
 	}
 }
