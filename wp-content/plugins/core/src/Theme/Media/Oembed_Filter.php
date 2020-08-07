@@ -61,12 +61,10 @@ class Oembed_Filter {
 			'trigger_label'    => $data->title,
 			'trigger_position' => Controller::TRIGGER_POSITION_BOTTOM, // Options: bottom, center
 		];
-
-		$frontend_html = get_template_part( 'components/video/video', null, $options );
-
+		$frontend_html = tribe_template_part( 'components/video/video', null, $options );
 		$this->cache_frontend_html( $frontend_html, $url );
 
-		return $html;
+		return $frontend_html;
 	}
 
 	private function get_layout_container_attrs( $provider_name, $embed_id, $title ): array {
