@@ -9,7 +9,7 @@ use Tribe\Project\Controllers\Blocks\Block_Controller;
 use Tribe\Project\Templates\Components\Content_Block;
 use Tribe\Project\Templates\Components\Link;
 use Tribe\Project\Templates\Components\Blocks\Links as Container;
-use Tribe\Project\Templates\Components\Text;
+use Tribe\Project\Templates\Components\Controller;
 
 class Controller extends Block_Controller {
 
@@ -58,16 +58,16 @@ class Controller extends Block_Controller {
 
 	private function get_title(): array {
 		return [
-			Text::TAG     => 'h2',
-			Text::CLASSES => [ 'b-links__title', 'h3' ],
-			Text::TEXT    => $this->attributes[ Links_Block::TITLE ] ?? '',
+			Controller::TAG     => 'h2',
+			Controller::CLASSES => [ 'b-links__title', 'h3' ],
+			Controller::TEXT    => $this->attributes[ Links_Block::TITLE ] ?? '',
 		];
 	}
 
 	private function get_description(): array {
 		return [
-			Text::CLASSES => [ 'b-links__description', 't-sink', 's-sink' ],
-			Text::TEXT    => $this->attributes[ Links_Block::DESCRIPTION ] ?? '',
+			Controller::CLASSES => [ 'b-links__description', 't-sink', 's-sink' ],
+			Controller::TEXT    => $this->attributes[ Links_Block::DESCRIPTION ] ?? '',
 		];
 	}
 
@@ -77,9 +77,9 @@ class Controller extends Block_Controller {
 		}
 
 		return [
-			Text::TAG     => 'h3',
-			Text::CLASSES => [ 'b-links__list-title', 'h5' ],
-			Text::TEXT    => $this->attributes[ Links_Block::LINKS_TITLE ] ?? '',
+			Controller::TAG     => 'h3',
+			Controller::CLASSES => [ 'b-links__list-title', 'h5' ],
+			Controller::TEXT    => $this->attributes[ Links_Block::LINKS_TITLE ] ?? '',
 		];
 	}
 

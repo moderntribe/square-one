@@ -9,7 +9,7 @@ use Tribe\Project\Templates\Components\Content_Block;
 use Tribe\Project\Templates\Components\Image as Image_Component;
 use Tribe\Project\Templates\Components\Link;
 use Tribe\Project\Templates\Components\Blocks\Hero as Container;
-use Tribe\Project\Templates\Components\Text;
+use Tribe\Project\Templates\Components\Controller;
 use Tribe\Project\Templates\Models\Image;
 use Tribe\Project\Theme\Config\Image_Sizes;
 
@@ -75,24 +75,24 @@ class Controller extends Block_Controller {
 
 	private function get_leadin(): array {
 		return [
-			Text::TAG     => 'p',
-			Text::CLASSES => [ 'b-hero__leadin', 'h6' ],
-			Text::TEXT    => $this->attributes[ Hero_Block::LEAD_IN ] ?? '',
+			Controller::TAG     => 'p',
+			Controller::CLASSES => [ 'b-hero__leadin', 'h6' ],
+			Controller::TEXT    => $this->attributes[ Hero_Block::LEAD_IN ] ?? '',
 		];
 	}
 
 	private function get_headline(): array {
 		return [
-			Text::TAG     => 'h2',
-			Text::CLASSES => [ 'b-hero__title', 'h1' ],
-			Text::TEXT    => $this->attributes[ Hero_Block::TITLE ] ?? '',
+			Controller::TAG     => 'h2',
+			Controller::CLASSES => [ 'b-hero__title', 'h1' ],
+			Controller::TEXT    => $this->attributes[ Hero_Block::TITLE ] ?? '',
 		];
 	}
 
 	private function get_text(): array {
 		return [
-			Text::CLASSES => [ 'b-hero__description', 't-sink', 's-sink' ],
-			Text::TEXT    => $this->attributes[ Hero_Block::DESCRIPTION ] ?? '',
+			Controller::CLASSES => [ 'b-hero__description', 't-sink', 's-sink' ],
+			Controller::TEXT    => $this->attributes[ Hero_Block::DESCRIPTION ] ?? '',
 		];
 	}
 
