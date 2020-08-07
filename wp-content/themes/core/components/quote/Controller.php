@@ -55,18 +55,17 @@ class Controller extends Abstract_Controller {
 		$this->cite_image   = (string) ( $args['cite_image'] ?? get_stylesheet_directory_uri() . '/components/quote/assets/img/default.jpg' );
 		$this->cite_classes = (array) ( $args['cite_classes'] ?? [ 'c-quote__cite' ] );
 		$this->cite_attrs   = (array) ( $args['cite_attrs'] ?? [] );
-
 	}
 
-	public function render_classes( $classes ): string {
+	public function render_classes( $classes ) : string {
 		return Markup_Utils::class_attribute( $classes );
 	}
 
-	public function render_attrs( $classes ): string {
+	public function render_attrs( $classes ) : string {
 		return Markup_Utils::concat_attrs( $classes );
 	}
 
-	public function render_text_tag_and_attrs(): string {
+	public function render_text_tag_and_attrs() : string {
 		$string = '';
 
 		$string .= esc_attr( $this->text_tag );
@@ -76,12 +75,14 @@ class Controller extends Abstract_Controller {
 		return $string;
 	}
 
-	public function render_cite_image(): void {
-		if( !empty( $this->cite_image ) ):
+	public function render_cite_image() : void {
+		if ( !empty( $this->cite_image ) ) :
 			return;
 		endif;
 
-		get_template_part( 'components/image/image', null,
+		get_template_part(
+			'components/image/image',
+			null,
 			[
 				'attachment' => $this->cite_image,
 				'wrapper_tag'=> 'span',
