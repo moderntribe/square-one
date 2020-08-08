@@ -10,4 +10,4 @@ $controller = \Tribe\Project\Templates\Components\container\Controller::factory(
 ?>
 <<?php echo $controller->tag(); ?> <?php echo $controller->classes(); ?> <?php echo $controller->attributes(); ?>>
 	<?php echo $controller->content(); ?>
-</<?php echo $controller->tag(); ?>
+</<?php echo $controller->tag(); ?>>
