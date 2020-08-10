@@ -1,4 +1,5 @@
 <?php
+// phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
 $controller = \Tribe\Project\Templates\Components\accordion\Controller::factory( $args );
 ?>
 <div
@@ -34,7 +35,7 @@ $controller = \Tribe\Project\Templates\Components\accordion\Controller::factory(
 				hidden
 				aria-hidden="true"
 				aria-labelledby="<?php echo esc_attr( $row[ 'header_id' ] ); ?>"
-			    <?php echo $controller->row_content_classes(); ?>
+			<?php echo $controller->row_content_classes(); ?>
 				id="<?php echo esc_attr( $row[ 'content_id' ] ); ?>"
 				role="tabpanel"
 		>
