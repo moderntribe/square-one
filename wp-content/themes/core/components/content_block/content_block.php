@@ -15,6 +15,30 @@ $controller = \Tribe\Project\Templates\Components\content_block\Controller::fact
 // you want control over and that feels less than ideal...
 // Same q for quote component too, too much?
 
+// Make sure to set reasonable, most used case defaults
+
+// Is there some amount of fixed stuff we can bake in here with design
+// we can simplify in this way below, say tags are fixed, but can tweak classes as an arg
+// which does provide simplicity and ability to trust what is here all the time
+// and also have more of the markup in the FE template
+
+// Only way we could simplify this and burn in more markup/classes here is if
+// design was comfy with global impacting changes when make a request or want a tweak
+
+// question of flexiblity / control vs. simplicity, best balance?
+
+// simplest: only args would be classes, attributes, content
+// middle: simplest + allow for ability to customize classes of text
+// control: everything is composable / render method with legit defaults
+
+// there is an arg for / question around for these mid level components
+// I don't know that we want to introduce the flexibility of tag/markup as it is
+// and instead we want to dictate that to simplify it's scope/what it does
+// might just mean we bake those in the controller as default for the text component
+// and don't allow for them to be customized? Would be a vote for middle option above
+
+// have tag just be a header or div as options?
+
 // chat out with Davee on Monday
 ?>
 
