@@ -18,28 +18,24 @@ if ( empty( $c->tabs ) ) {
 <div <?php echo $c->get_classes(); ?> <?php echo $c->get_attrs(); ?>>
 	<div class="c-tabs__tablist-wrapper">
 
-		<?php echo $c->get_toggle(); ?>
+		<?php if ( $c->layout === $c::LAYOUT_VERTICAL ) {
+			echo $c->get_dropdown_toggle();
+		} ?>
 
 		<div <?php $c->get_dropdown_classes(); ?> <?php $c->get_dropdown_attrs(); ?>>
 			<div <?php $c->get_tablist_classes(); ?> <?php $c->get_tablist_attrs(); ?>>
-				<?php foreach ( $c->get_buttons() as $button ) { ?>
-					<button
-						<?php echo Markup_Utils::class_attribute( $button['classes'] ); ?>
-						<?php echo Markup_Utils::concat_attrs( $button['attrs'] ); ?>
-					><?php echo $button['content']; ?></button>
-				<?php } ?>
+				<?php foreach ( $c->get_tab_buttons() as $button ) {
+					echo $button;
+				} ?>
 			</div>
 		</div>
 
 	</div>
 
 	<div class="c-tabs__tabpanels-wrapper">
-		<?php foreach ( $c->get_tabs() as $tab ) { ?>
-			<div
-				<?php echo Markup_Utils::class_attribute( $tab['classes'] ); ?>
-				<?php echo Markup_Utils::concat_attrs( $tab['attrs'] ); ?>
-			><?php echo $tab['content']; ?></div>
-		<?php } ?>
+		<?php foreach ( $c->get_tab_panels() as $tab ) {
+			echo $tab;
+		} ?>
 	</div>
 
 </div>
