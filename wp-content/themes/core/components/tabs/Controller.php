@@ -6,22 +6,74 @@ use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\Deferred_Component;
 
+/**
+ * Class Controller
+ *
+ * @package Tribe\Project\Templates\Components\tabs
+ */
 class Controller extends Abstract_Controller {
 	public const LAYOUT_HORIZONTAL = 'horizontal';
 	public const LAYOUT_VERTICAL   = 'vertical';
 
+	/**
+	 * @var array The collection of tabs to render. Each tab item should be an array in the following format:
+	 *            [
+	 *              'label'   => 'The Tab title or button label. Must be a string.',
+	 *              'content' => 'The contents of the tab. May be a text/html string or a Deferred_Component',
+	 *            ]
+	 */
 	public $tabs;
+
+	/**
+	 * @var array Classes applied to the component.
+	 */
 	public $classes;
+
+	/**
+	 * @var array Attributes applied to the component.
+	 */
 	public $attrs;
+
+	/**
+	 * @var string The layout applied to this instance of the component. Options are `horizontal` or `vertical`.
+	 */
 	public $layout;
+
+	/**
+	 * @var array Classes applied to the tabs toggle button. (Only applicable to the vertical layout.)
+	 */
 	public $toggle_classes;
+
+	/**
+	 * @var array Classes applied to each tab's trigger button.
+	 */
 	public $tab_button_classes;
+
+	/**
+	 * @var array Classes applied to each tab's tabpanel/content.
+	 */
 	public $tab_panel_classes;
 
+	/**
+	 * @var string Unique ID applied to this instance's tablist show/hide toggle.
+	 */
 	private $tablist_id;
+
+	/**
+	 * @var array The array of tab buttons/triggers to be rendered.
+	 */
 	private $tab_buttons;
+
+	/**
+	 * @var array The array of tabpanels/tab content to be rendered.
+	 */
 	private $tab_panels;
 
+	/**
+	 * Controller constructor.
+	 *
+	 * @param array $args
+	 */
 	public function __construct( array $args = [] ) {
 		$args = wp_parse_args( $args, $this->default() );
 
@@ -36,11 +88,14 @@ class Controller extends Abstract_Controller {
 		$this->toggle_classes     = (array) $args['toggle_classes'];
 		$this->tab_button_classes = (array) $args['tab_button_classes'];
 		$this->tab_panel_classes  = (array) $args['tab_panel_classes'];
+		$this->tablist_id         = uniqid( 'c-tabs__tablist--' );
 
-		$this->tablist_id = uniqid( 'c-tabs__tablist--' );
 		$this->init_tabs();
 	}
 
+	/**
+	 * @return array
+	 */
 	protected function default(): array {
 		return [
 			'tabs'               => [],
@@ -53,6 +108,9 @@ class Controller extends Abstract_Controller {
 		];
 	}
 
+	/**
+	 * @return array
+	 */
 	protected function required(): array {
 		return [
 			'classes'            => [ 'c-tabs' ],
@@ -63,6 +121,9 @@ class Controller extends Abstract_Controller {
 		];
 	}
 
+	/**
+	 * Loop through the tabs provided and setup the tab buttons and tab panels as deferred components.
+	 */
 	private function init_tabs() {
 		foreach ( $this->tabs as $index => $tab ) {
 			$tab_id              = uniqid();
@@ -71,6 +132,9 @@ class Controller extends Abstract_Controller {
 		}
 	}
 
+	/**
+	 * @return Deferred_Component
+	 */
 	public function get_dropdown_toggle(): Deferred_Component {
 		$args = [
 			'content' => $this->tabs[0]['label'] ?? __( 'Tab 1', 'tribe' ),
@@ -87,6 +151,13 @@ class Controller extends Abstract_Controller {
 		return defer_template_part( 'components/button/button', null, $args );
 	}
 
+	/**
+	 * @param array  $tab
+	 * @param string $tab_id
+	 * @param int    $index
+	 *
+	 * @return Deferred_Component
+	 */
 	private function get_tab_button( array $tab, string $tab_id, int $index ): Deferred_Component {
 		$args = [
 			'content' => $tab['label'] ?? sprintf( __( 'Tab %d', 'tribe' ), $index + 1 ),
@@ -107,9 +178,16 @@ class Controller extends Abstract_Controller {
 		return defer_template_part( 'components/button/button', null, $args );
 	}
 
+	/**
+	 * @param array  $tab
+	 * @param string $tab_id
+	 * @param int    $index
+	 *
+	 * @return Deferred_Component
+	 */
 	private function get_tab_panel( array $tab, string $tab_id, int $index ): Deferred_Component {
 		$args = [
-			'content' => $tab['content'],
+			'content' => $tab['content'] ?? '',
 			'classes' => $this->tab_panel_classes,
 			'attrs'   => [
 				'id'              => sprintf( 'c-tabs__tabpanel--%s', $tab_id ),
@@ -127,38 +205,62 @@ class Controller extends Abstract_Controller {
 		return defer_template_part( 'components/container/container', null, $args );
 	}
 
+	/**
+	 * @return string
+	 */
 	public function get_classes(): string {
 		$this->classes[] = sprintf( 'c-tabs--layout-%s', $this->layout );
 
 		return Markup_Utils::class_attribute( $this->classes );
 	}
 
+	/**
+	 * @return string
+	 */
 	public function get_attrs(): string {
 		$this->attrs['data-layout'] = $this->layout;
 
 		return Markup_Utils::concat_attrs( $this->attrs );
 	}
 
+	/**
+	 * @return string
+	 */
 	public function get_dropdown_classes(): string {
 		return Markup_Utils::class_attribute( [ 'c-tabs__tablist-dropdown' ] );
 	}
 
+	/**
+	 * @return string
+	 */
 	public function get_dropdown_attrs(): string {
 		return Markup_Utils::concat_attrs( [ 'id' => $this->tablist_id ] );
 	}
 
+	/**
+	 * @return string
+	 */
 	public function get_tablist_classes(): string {
 		return Markup_Utils::class_attribute( [ 'c-tabs__tablist' ] );
 	}
 
+	/**
+	 * @return string
+	 */
 	public function get_tablist_attrs(): string {
 		return Markup_Utils::concat_attrs( [ 'aria-orientation' => $this->layout ] );
 	}
 
+	/**
+	 * @return array
+	 */
 	public function get_tab_buttons(): array {
 		return $this->tab_buttons;
 	}
 
+	/**
+	 * @return array
+	 */
 	public function get_tab_panels(): array {
 		return $this->tab_panels;
 	}

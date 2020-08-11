@@ -1,8 +1,6 @@
 <?php
 declare( strict_types=1 );
 
-use \Tribe\Libs\Utils\Markup_Utils;
-
 /**
  * @var array $args Arguments passed to the template
  */
