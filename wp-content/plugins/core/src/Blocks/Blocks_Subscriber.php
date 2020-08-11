@@ -17,7 +17,7 @@ class Blocks_Subscriber extends Abstract_Subscriber {
 			}
 		}, 10, 1 );
 
-		add_action( 'tribe/project/block/render', function ( ... $args ) {
+		add_action( 'tribe/project/block/render', function ( ...$args ) {
 			$this->container->get( Block_Renderer::class )->render_template( ...$args );
 		}, 10, 4 );
 
