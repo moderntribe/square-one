@@ -13,11 +13,11 @@ $c = \Tribe\Project\Templates\Components\content_block\Controller::factory( $arg
 	<?php echo$c->attributes(); ?>
 >
 
-	<p class="c-content-block__leadin h6"></p>
+	<?php echo $c->render_leadin(); ?>
 
-	<h2 class="c-content-block__title h1"></h2>
+	<?php echo $c->render_title(); ?>
 
-	<div class="c-content-block__content t-sink s-sink"></div>
+	<?php echo $c->render_content(); ?>
 
 	<?php echo $c->render_cta(); ?>
 
