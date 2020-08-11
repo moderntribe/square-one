@@ -6,120 +6,216 @@ use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Models\Image as Image_Model;
 
-/**
- * Class Image
- *
- * @property Image_Model $attachment
- * @property string      $img_url
- * @property bool        $as_bg
- * @property bool        $auto_shim
- * @property bool        $auto_sizes_attr
- * @property int         $expand
- * @property string      $html
- * @property string[]    $img_classes
- * @property string[]    $img_attrs
- * @property string      $img_alt_text
- * @property string      $link_url
- * @property string[]    $link_classes
- * @property string      $link_target
- * @property string      $link_title
- * @property string []   $link_attrs
- * @property string      $parent_fit
- * @property string      $shim
- * @property bool        $src
- * @property string      $src_size
- * @property string[]    $srcset_sizes
- * @property string      $srcset_sizes_attr
- * @property bool        $use_hw_attr
- * @property bool        $use_lazyload
- * @property bool        $use_srcset
- * @property string[]    $wrapper_attrs
- * @property string[]    $wrapper_classes
- * @property string      $wrapper_tag
- */
 class Controller extends Abstract_Controller {
+	/**
+	 * @var object
+	 */
 	public $attachment;
+	/**
+	 * @var string
+	 */
 	private $img_url;
+	/**
+	 * @var bool
+	 */
 	private $as_bg;
+	/**
+	 * @var bool
+	 */
 	private $auto_shim;
+	/**
+	 * @var bool
+	 */
 	private $auto_sizes_attr;
+	/**
+	 * @var int
+	 */
 	private $expand;
+	/**
+	 * @var string
+	 */
 	public $html;
+	/**
+	 * @var string[]
+	 */
 	private $img_classes;
+	/**
+	 * @var string[]
+	 */
 	private $img_attrs;
+	/**
+	 * @var string
+	 */
 	private $img_alt_text;
+	/**
+	 * @var string
+	 */
 	public $link_url;
+	/**
+	 * @var string[]
+	 */
 	private $link_classes;
+	/**
+	 * @var string
+	 */
 	private $link_target;
+	/**
+	 * @var string
+	 */
 	private $link_title;
+	/**
+	 * @var string[]
+	 */
 	private $link_attrs;
+	/**
+	 * @var string
+	 */
 	private $parent_fit;
+	/**
+	 * @var string
+	 */
 	private $shim;
+	/**
+	 * @var bool
+	 */
 	private $src;
+	/**
+	 * @var string
+	 */
 	private $src_size;
+	/**
+	 * @var array
+	 */
 	private $srcset_sizes;
+	/**
+	 * @var string
+	 */
 	private $srcset_sizes_attr;
+	/**
+	 * @var bool
+	 */
 	private $use_hw_attr;
+	/**
+	 * @var bool
+	 */
 	private $use_lazyload;
+	/**
+	 * @var bool
+	 */
 	private $use_srcset;
-	private $wrapper_attrs;
-	private $wrapper_classes;
+	/**
+	 * @var string[]
+	 */
+	private $attrs;
+	/**
+	 * @var string[]
+	 */
+	private $classes;
+	/**
+	 * @var string
+	 */
 	private $wrapper_tag;
 
 	public function __construct( array $args = [] ) {
+		$args = wp_parse_args( $args, $this->defaults() );
+
+		foreach ( $this->required() as $key => $value ) {
+			$args[$key] = array_merge( $args[$key], $value );
+		}
+
 		// the WordPress attachment to use - takes precedence over IMG_URL
-		$this->attachment = $args['attachment'] ?? null;
-		// the Image URL - generate markup for an image via its URL. Only applicable if ATTACHMENT is empty
-		$this->img_url = $args['img_url'] ?? '';
-		// Generates a background image on a `<div>` instead of a traditional `<img>`
-		$this->as_bg = $args['as_bg'] ?? false;
-		// if true, shim dir as set will be used, src_size will be used as filename, with png as file type
-		$this->auto_shim = $args['auto_shim'] ?? true;
-		// if lazyloading the lib can auto create sizes attribute
-		$this->auto_sizes_attr = $args['auto_sizes_attr'] ?? false;
-		// the expand attribute is the threshold used by lazysizes. use negative to reveal once in viewport
-		$this->expand = $args['expand'] ?? 200;
-		// append an html string inside the wrapper. Useful for adding a `<figcaption>` or other markup after the image
-		$this->html = $args['html'] ?? '';
-		// pass classes for image tag. if lazyload is true class "lazyload" is auto added
-		$this->img_classes = array_merge( [ 'c-image__image' ], (array) ( $args['img_classes'] ?? [] ) );
-		// additional image attributes
-		$this->img_attrs = (array) ( $args['img_attrs'] ?? [] );
-		// pass specific image alternate text. if not included, will default to image title
-		$this->img_alt_text = $args['img_alt_text'] ?? '';
-		// pass a link to wrap the image
-		$this->link_url = $args['link_url'] ?? '';
-		// pass link classes
-		$this->link_classes = array_merge( [ 'c-image__link' ], (array) ( $args['link_classes'] ?? [] ) );
-		// pass a link target
-		$this->link_target = $args['link_target'] ?? '';
-		// pass a link title
-		$this->link_title = $args['link_title'] ?? '';
-		// pass additional link attributes
-		$this->link_attrs = (array) ( $args['link_attrs'] ?? [] );
-		// if lazyloading this combines with object fit css and the object fit polyfill
-		$this->parent_fit = $args['parent_fit'] ?? 'width';
-		// supply a manually specified shim for lazyloading. Will override auto_shim whether true/false
-		$this->shim = $args['shim'] ?? '';
-		// set to false to disable the src attribute. this is a fallback for non srcset browsers
-		$this->src = $args['src'] ?? true;
-		// this is the main src registered image size
-		$this->src_size = $args['src_size'] ?? 'large';
-		// this is registered sizes array for srcset
-		$this->srcset_sizes = (array) ( $args['srcset_sizes'] ?? [] );
-		// this is the srcset sizes attribute string used if auto is false
-		$this->srcset_sizes_attr = '(min-width: 1260px) 1260px, 100vw';
-		// this will set the width and height attributes on the img to be half the original for retina/hdpi. Only for not lazyloading and when src exists
-		$this->use_hw_attr = $args['use_hw_attr'] ?? false;
-		// lazyload this game? If `AS_BG` is true, `SRCSET_SIZES` must also be defined
-		$this->use_lazyload = $args['use_lazyload'] ?? true;
-		// srcset this game?
-		$this->use_srcset = $args['use_srcset'] ?? true;
-		$this->wrapper_attrs = (array) ( $args['wrapper_attrs'] ?? [] );
+		$this->attachment = $args['attachment'];
+		$this->attrs = (array) $args['attrs'];
 		// pass classes for figure wrapper. If as_bg is set true gets auto class of "lazyload"
-		$this->wrapper_classes = array_merge( [ 'c-image' ], (array) ( $args['classes'] ?? [] ) );
+		$this->classes = (array) $args['classes'];
 		// html tag for the wrapper/background image container
-		$this->wrapper_tag = $args['wrapper_tag'] ?? 'figure';
+		$this->wrapper_tag = $args['wrapper_tag'];
+		// the Image URL - generate markup for an image via its URL. Only applicable if ATTACHMENT is empty
+		$this->img_url = $args['img_url'];
+		// Generates a background image on a `<div>` instead of a traditional `<img>`
+		$this->as_bg = $args['as_bg'];
+		// if true, shim dir as set will be used, src_size will be used as filename, with png as file type
+		$this->auto_shim = $args['auto_shim'];
+		// if lazyloading the lib can auto create sizes attribute
+		$this->auto_sizes_attr = $args['auto_sizes_attr'];
+		// the expand attribute is the threshold used by lazysizes. use negative to reveal once in viewport
+		$this->expand = $args['expand'];
+		// append an html string inside the wrapper. Useful for adding a `<figcaption>` or other markup after the image
+		$this->html = $args['html'];
+		// pass classes for image tag. if lazyload is true class "lazyload" is auto added
+		$this->img_classes = (array) $args['img_classes'];
+		// additional image attributes
+		$this->img_attrs = (array) $args['img_attrs'];
+		// pass specific image alternate text. if not included, will default to image title
+		$this->img_alt_text = $args['img_alt_text'];
+		// pass a link to wrap the image
+		$this->link_url = $args['link_url'];
+		// pass link classes
+		$this->link_classes = (array) $args['link_classes'];
+		// pass a link target
+		$this->link_target = $args['link_target'];
+		// pass a link title
+		$this->link_title = $args['link_title'];
+		// pass additional link attributes
+		$this->link_attrs = (array) $args['link_attrs'];
+		// if lazyloading this combines with object fit css and the object fit polyfill
+		$this->parent_fit = $args['parent_fit'];
+		// supply a manually specified shim for lazyloading. Will override auto_shim whether true/false
+		$this->shim = $args['shim'];
+		// set to false to disable the src attribute. this is a fallback for non srcset browsers
+		$this->src = $args['src'];
+		// this is the main src registered image size
+		$this->src_size = $args['src_size'];
+		// this is registered sizes array for srcset
+		$this->srcset_sizes = (array) $args['srcset_sizes'];
+		// this is the srcset sizes attribute string used if auto is false
+		$this->srcset_sizes_attr = $args['srcset_sizes_attr'];
+		// this will set the width and height attributes on the img to be half the original for retina/hdpi. Only for not lazyloading and when src exists
+		$this->use_hw_attr = $args['use_hw_attr'];
+		// lazyload this game? If `AS_BG` is true, `SRCSET_SIZES` must also be defined
+		$this->use_lazyload = $args['use_lazyload'];
+		// srcset this game?
+		$this->use_srcset = $args['use_srcset'];
+	}
+
+	protected function defaults(): array {
+		return [
+			'attachment'        => null,
+			'attrs'             => [],
+			'classes'           => [],
+			'wrapper_tag'       => 'figure',
+			'img_url'           => '',
+			'as_bg'             => false,
+			'auto_shim'         => true,
+			'auto_sizes_attr'   => false,
+			'expand'            => 200,
+			'html'              => '',
+			'img_classes'       => [],
+			'img_attrs'         => [],
+			'img_alt_text'      => '',
+			'link_url'          => '',
+			'link_classes'      => [],
+			'link_target'       => '',
+			'link_title'        => '',
+			'link_attrs'        => [],
+			'parent_fit'        => 'width',
+			'shim'              => '',
+			'src'               => true,
+			'src_size'          => 'large',
+			'srcset_sizes'      => [],
+			'srcset_sizes_attr' => '(min-width: 1260px) 1260px, 100vw',
+			'use_hw_attr'       => false,
+			'use_lazyload'      => true,
+			'use_srcset'        => true,
+		];
+	}
+
+	protected function required(): array {
+		return [
+			'classes'      => [ 'c-image' ],
+			'img_classes'  => [ 'c-image__image' ],
+			'link_classes' => [ 'c-image__link' ],
+		];
 	}
 
 	public function should_lazy_load(): bool {
@@ -170,12 +266,12 @@ class Controller extends Abstract_Controller {
 		return esc_attr( $tag );
 	}
 
-	public function wrapper_classes(): string {
-		return Markup_Utils::class_attribute( $this->wrapper_classes );
+	public function classes(): string {
+		return Markup_Utils::class_attribute( $this->classes );
 	}
 
-	public function wrapper_attributes(): string {
-		return Markup_Utils::concat_attrs( $this->wrapper_attrs );
+	public function attributes(): string {
+		return Markup_Utils::concat_attrs( $this->attrs );
 	}
 
 	public function link_classes(): string {

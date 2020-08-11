@@ -26,10 +26,31 @@ class Controller extends Abstract_Controller {
 	private $content;
 
 	public function __construct( array $args = [] ) {
-		$this->tag     = $args['tag'] ?? 'div';
-		$this->classes = (array) ( $args['classes'] ?? [] );
-		$this->attrs   = (array) ( $args['attrs'] ?? [] );
-		$this->content = $args['content'] ?? '';
+		$args = wp_parse_args( $args, $this->defaults() );
+
+		foreach ( $this->required() as $key => $value ) {
+			$args[$key] = array_merge( $args[$key], $value );
+		}
+
+		$this->tag     = $args['tag'];
+		$this->classes = (array) $args['classes'];
+		$this->attrs   = (array) $args['attrs'];
+		$this->content = $args['content'];
+	}
+
+	protected function defaults(): array {
+		return [
+			'tag'     => '',
+			'classes' => [],
+			'attrs'   => [],
+			'content' => '',
+		];
+	}
+
+	protected function required(): array {
+		return [
+			'tag' => 'div',
+		];
 	}
 
 	public function tag(): string {

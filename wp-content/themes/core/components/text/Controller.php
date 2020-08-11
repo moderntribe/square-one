@@ -7,16 +7,47 @@ use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 
 class Controller extends Abstract_Controller {
-	public $content;
+	/**
+	 * @var string
+	 */
 	public $tag;
+	/**
+	 * @var string[]
+	 */
 	private $classes;
+	/**
+	 * @var string[]
+	 */
 	private $attrs;
+	/**
+	 * @var string
+	 */
+	public $content;
 
 	public function __construct( array $args = [] ) {
+		$args = wp_parse_args( $args, $this->defaults() );
+
+		foreach ( $this->required() as $key => $value ) {
+			$args[$key] = array_merge( $args[$key], $value );
+		}
+
 		$this->tag     = $args['tag'] ?? 'p';
 		$this->classes = (array) ( $args['classes'] ?? [] );
 		$this->attrs   = (array) ( $args['attrs'] ?? [] );
 		$this->content = $args['content'] ?? '';
+	}
+
+	protected function defaults(): array {
+		return [
+			'tag'     => 'p',
+			'classes' => [],
+			'attrs'   => [],
+			'content' => '',
+		];
+	}
+
+	protected function required(): array {
+		return [];
 	}
 
 	public function classes(): string {

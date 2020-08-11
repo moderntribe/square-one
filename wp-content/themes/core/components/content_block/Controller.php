@@ -9,45 +9,13 @@ use Tribe\Project\Templates\Components\Abstract_Controller;
  * Class Content_Block
  */
 class Controller extends Abstract_Controller {
-
-	/**
-	 * @var string
-	 */
 	public $tag;
-
-	/**
-	 * @var string[]
-	 */
 	public $classes;
-
-	/**
-	 * @var string
-	 */
 	public $layout;
-
-	/**
-	 * @var string[]
-	 */
 	public $attrs;
-
-	/**
-	 * @var string
-	 */
 	public $leadin;
-
-	/**
-	 * @var string
-	 */
 	public $title;
-
-	/**
-	 * @var string[]
-	 */
 	public $content;
-
-	/**
-	 * @var array
-	 */
 	public $cta;
 
 	public const LAYOUT_LEFT    = 'left';
@@ -55,29 +23,57 @@ class Controller extends Abstract_Controller {
 	public const LAYOUT_STACKED = 'stacked';
 	public const LAYOUT_INLINE  = 'inline';
 
-	public function __construct( $args ) {
+	public function __construct( array $args = [] ) {
+		$args = wp_parse_args( $args, $this->defaults() );
+
+		foreach ( $this->required() as $key => $value ) {
+			$args[$key] = array_merge( $args[$key], $value );
+		}
+
+		$this->tag     = $args['tag'];
+		$this->classes = (array) $args['classes'];
+		$this->attrs   = (array) $args['attrs'];
+		$this->layout  = $args['layout'];
+		$this->leadin  = (array) $args['leadin'];
+		$this->title   = (array) $args['title'];
+		$this->content = (array) $args['content'];
+		$this->cta     = (array) $args['cta'];
+
+		/*
 		$this->tag     = $args[ 'tag' ] ?? 'div';
 		$this->classes = array_merge( [ 'c-content-block', 'c-content-block--layout-' . $this->layout ], (array) ( $args[ 'classes' ] ?? [] ) );
 		$this->attrs   = (array) ( $args[ 'attrs' ] ?? [] );
 		$this->layout  = $args[ 'layout' ] ?? self::LAYOUT_LEFT;
-
 		$this->leadin  = $args[ 'leadin' ] ?? '';
 		$this->leadin_classes = array_merge( [ 'c-content-block__leadin' ], (array) ( $args[ 'leadin_classes' ] ?? [ 'h6' ] ) );
-
 		$this->title   = $args[ 'title' ] ?? '';
 		$this->title_classes = array_merge( [ 'c-content-block__title' ], (array) ( $args[ 'title_classes' ] ?? [ 'h1' ] ) );
-
 		$this->content    = $args[ 'content' ] ?? '';
 		$this->content_classes = array_merge( [ 'c-content-block__content', 't-sink', 's-sink' ], (array) ( $args[ 'content_classes' ] ?? [] ) );
-
 		$this->cta  = (array) ( $args[ 'cta' ] ?? [] );
+		*/
 	}
 
-	public function wrapper_classes(): string {
+	protected function defaults(): array {
+		return [
+			'tag'     => '',
+			'classes' => [],
+			'attrs'   => [],
+			'content' => '',
+		];
+	}
+
+	protected function required(): array {
+		return [
+			'tag' => 'div',
+		];
+	}
+
+	public function classes(): string {
 		return Markup_Utils::class_attribute( $this->classes );
 	}
 
-	public function wrapper_attributes(): string {
+	public function attributes(): string {
 		return Markup_Utils::concat_attrs( $this->attrs );
 	}
 

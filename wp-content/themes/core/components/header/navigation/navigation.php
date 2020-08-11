@@ -1,18 +1,15 @@
 <?php
 declare( strict_types=1 );
+$c = \Tribe\Project\Templates\Components\header\navigation\Controller::factory();
 
-$controller = \Tribe\Project\Templates\Components\header\navigation\Controller::factory();
-
-if ( ! $controller->has_menu() ) {
+if ( ! $c->has_menu() ) {
 	return;
 }
 ?>
-<nav class="site-header__nav" aria-labelledby="site-header__nav-label">
-
-	<h2 id="site-header__nav-label" class="u-visually-hidden"><?php echo esc_html( $controller->label() ); ?></h2>
+<nav class="site-header__nav" aria-label="<?php echo esc_attr( $c->label() ); ?>">
 
 	<ol class="site-header__nav-list">
-		<?php echo $controller->menu(); ?>
+		<?php echo $c->menu(); ?>
 	</ol>
 
 </nav>

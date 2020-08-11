@@ -1,14 +1,13 @@
 <?php
 declare( strict_types=1 );
-
-$controller = \Tribe\Project\Templates\Components\header\subheader\Controller::factory();
+$c = \Tribe\Project\Templates\Components\header\subheader\Controller::factory();
 ?>
 
 <header>
 
 	<div class="l-container">
 
-		<?php echo $controller->title(); ?>
+		<?php echo $c->title(); ?>
 
 	</div>
 

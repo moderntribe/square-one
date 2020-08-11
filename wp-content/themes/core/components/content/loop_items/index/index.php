@@ -1,6 +1,6 @@
 <?php
 declare( strict_types=1 );
-$controller = \Tribe\Project\Templates\Components\content\loop_items\index\Controller::factory();
+$c = \Tribe\Project\Templates\Components\content\loop_items\index\Controller::factory();
 ?>
 
 <article class="item-loop item-loop--<?php echo esc_attr( get_post_type() ); ?>">
@@ -15,7 +15,7 @@ $controller = \Tribe\Project\Templates\Components\content\loop_items\index\Contr
 
 	</header>
 
-	<?php echo $controller->render_featured_image(); ?>
+	<?php echo $c->render_featured_image(); ?>
 
 	<?php the_excerpt(); ?>
 
@@ -35,8 +35,8 @@ $controller = \Tribe\Project\Templates\Components\content\loop_items\index\Contr
 					esc_html_x( 'by %s', 'link to the author archive', 'tribe' ),
 					sprintf(
 						'<a href="%s" rel="author">%s</a>',
-						esc_url( $controller->author_url() ),
-						esc_html( $controller->author_name() )
+						esc_url( $c->author_url() ),
+						esc_html( $c->author_name() )
 					)
 				);
 				?>
