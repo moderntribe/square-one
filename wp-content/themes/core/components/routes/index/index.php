@@ -31,5 +31,5 @@ $c->render_header();
 		</div>
 	</main>
 <?php
-$controller->render_sidebar();
-$controller->render_footer();
+$c->render_sidebar();
+$c->render_footer();
