@@ -66,7 +66,12 @@ class Controller extends Abstract_Controller {
 	 */
 	public $previous_post;
 
-	public function __construct( $args ) {
+	/**
+	 * Controller constructor.
+	 *
+	 * @param array $args
+	 */
+	public function __construct( array $args = [] ) {
 		$args                    = $this->get_args( $args );
 		$this->wrapper_classes   = (array) $args[ 'wrapper_classes' ];
 		$this->wrapper_attrs     = (array) $args[ 'wrapper_attrs' ];
@@ -147,7 +152,6 @@ class Controller extends Abstract_Controller {
 			'attrs'   => [ 'rel' => 'next' ],
 		];
 	}
-
 
 	/**
 	 * @param array $args
