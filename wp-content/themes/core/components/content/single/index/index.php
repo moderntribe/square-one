@@ -30,7 +30,7 @@ $controller = \Tribe\Project\Templates\Components\content\single\index\Controlle
 
 		</ul>
 
-		<?php //TODO: Share Component ?>
+		<?php get_template_part('components/share/share') ?>
 
 	</footer>
 
