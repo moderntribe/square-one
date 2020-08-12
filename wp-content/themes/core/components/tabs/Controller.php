@@ -4,7 +4,7 @@ namespace Tribe\Project\Templates\Components\tabs;
 
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
-use Tribe\Project\Templates\Components\Deferred_Component;
+use Tribe\Project\Templates\Models\Tab;
 
 /**
  * Class Controller
@@ -16,43 +16,39 @@ class Controller extends Abstract_Controller {
 	public const LAYOUT_VERTICAL   = 'vertical';
 
 	/**
-	 * @var array The collection of tabs to render. Each tab item should be an array in the following format:
-	 *            [
-	 *              'label'   => 'The Tab title or button label. Must be a string.',
-	 *              'content' => 'The contents of the tab. May be a text/html string or a Deferred_Component',
-	 *            ]
+	 * @var Tab[] The collection of tabs to render. Each item should be a \Tribe\Project\Templates\Models\Tab object.
 	 */
-	public $tabs;
+	private $tabs;
 
 	/**
 	 * @var array Classes applied to the component.
 	 */
-	public $classes;
+	private $classes;
 
 	/**
 	 * @var array Attributes applied to the component.
 	 */
-	public $attrs;
+	private $attrs;
 
 	/**
 	 * @var string The layout applied to this instance of the component. Options are `horizontal` or `vertical`.
 	 */
-	public $layout;
+	private $layout;
 
 	/**
 	 * @var array Classes applied to the tabs toggle button. (Only applicable to the vertical layout.)
 	 */
-	public $toggle_classes;
+	private $toggle_classes;
 
 	/**
 	 * @var array Classes applied to each tab's trigger button.
 	 */
-	public $tab_button_classes;
+	private $tab_button_classes;
 
 	/**
 	 * @var array Classes applied to each tab's tabpanel/content.
 	 */
-	public $tab_panel_classes;
+	private $tab_panel_classes;
 
 	/**
 	 * @var string Unique ID applied to this instance's tablist show/hide toggle.
@@ -122,7 +118,7 @@ class Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * Loop through the tabs provided and setup the tab buttons and tab panels as deferred components.
+	 * Loop through the tabs provided and pre-render the tab button and tab panel components as strings.
 	 */
 	private function init_tabs() {
 		foreach ( $this->tabs as $index => $tab ) {
@@ -133,11 +129,17 @@ class Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return Deferred_Component
+	 * Render the tablist drop-down toggle for the vertical tabs layout.
+	 *
+	 * @return string
 	 */
-	public function get_dropdown_toggle(): Deferred_Component {
+	public function get_dropdown_toggle(): string {
+		if ( $this->layout === self::LAYOUT_HORIZONTAL ) {
+			return '';
+		}
+
 		$args = [
-			'content' => $this->tabs[0]['label'] ?? __( 'Tab 1', 'tribe' ),
+			'content' => $this->tabs[0]->label ?? __( 'Tab 1', 'tribe' ),
 			'classes' => $this->toggle_classes,
 			'attrs'   => [
 				'aria-controls' => $this->tablist_id,
@@ -148,19 +150,21 @@ class Controller extends Abstract_Controller {
 			],
 		];
 
-		return defer_template_part( 'components/button/button', null, $args );
+		return tribe_template_part( 'components/button/button', null, $args );
 	}
 
 	/**
+	 * Renders and individual tab list "tab" button.
+	 *
 	 * @param array  $tab
 	 * @param string $tab_id
 	 * @param int    $index
 	 *
-	 * @return Deferred_Component
+	 * @return string
 	 */
-	private function get_tab_button( array $tab, string $tab_id, int $index ): Deferred_Component {
+	private function get_tab_button( array $tab, string $tab_id, int $index ): string {
 		$args = [
-			'content' => $tab['label'] ?? sprintf( __( 'Tab %d', 'tribe' ), $index + 1 ),
+			'content' => $tab->label ?? sprintf( __( 'Tab %d', 'tribe' ), $index + 1 ),
 			'classes' => $this->tab_button_classes,
 			'attrs'   => [
 				'id'            => sprintf( 'c-tabs__tabbutton--%s', $tab_id ),
@@ -175,19 +179,21 @@ class Controller extends Abstract_Controller {
 			$args['attrs']['tabindex'] = '-1';
 		}
 
-		return defer_template_part( 'components/button/button', null, $args );
+		return tribe_template_part( 'components/button/button', null, $args );
 	}
 
 	/**
+	 * Renders an individual tab content, the "tabpanel".
+	 *
 	 * @param array  $tab
 	 * @param string $tab_id
 	 * @param int    $index
 	 *
-	 * @return Deferred_Component
+	 * @return string
 	 */
-	private function get_tab_panel( array $tab, string $tab_id, int $index ): Deferred_Component {
+	private function get_tab_panel( array $tab, string $tab_id, int $index ): string {
 		$args = [
-			'content' => $tab['content'] ?? '',
+			'content' => $tab->content ?? '',
 			'classes' => $this->tab_panel_classes,
 			'attrs'   => [
 				'id'              => sprintf( 'c-tabs__tabpanel--%s', $tab_id ),
@@ -202,7 +208,7 @@ class Controller extends Abstract_Controller {
 			$args['attrs']['hidden'] = '';
 		}
 
-		return defer_template_part( 'components/container/container', null, $args );
+		return tribe_template_part( 'components/container/container', null, $args );
 	}
 
 	/**
