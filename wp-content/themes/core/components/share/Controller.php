@@ -76,7 +76,11 @@ class Controller extends Abstract_Controller {
 		$links = [];
 
 		foreach ( $this->networks as $network ) {
-			$links[] = $this->build_link( $network, $data );
+			$link = $this->build_link( $network, $data );
+			if ( empty( $link ) ) {
+				continue;
+			}
+			$links[] = $link;
 		}
 
 		return $links;
@@ -257,10 +261,10 @@ class Controller extends Abstract_Controller {
 	private function link_text_component( $label ): string {
 		$classes = $this->labeled ? [] : [ 'u-visually-hidden' ];
 
-		return tribe_template_part( 'component/text/text', null, [
+		return tribe_template_part( 'components/text/text', null, [
 			'tag'     => 'span',
 			'classes' => $classes,
-			'text'    => $label,
+			'content' => $label,
 		] );
 	}
 
