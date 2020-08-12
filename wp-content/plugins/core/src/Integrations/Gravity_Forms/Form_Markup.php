@@ -3,8 +3,6 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Integrations\Gravity_Forms;
 
-use Tribe\Project\Templates\Components\Integrations\Gravity_Forms\Choice_Other;
-
 class Form_Markup {
 	/**
 	 * @var bool Used to enable/disable CSS classes that control icon placement inside some field types.
