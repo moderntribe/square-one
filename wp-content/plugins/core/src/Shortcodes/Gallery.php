@@ -2,20 +2,9 @@
 
 namespace Tribe\Project\Shortcodes;
 
-use Tribe\Project\Components\Component_Factory;
-use Tribe\Project\Templates\Components\Image;
-use Tribe\Project\Templates\Components\Slider;
+use Tribe\Project\Templates\Components\Controller;
 
 class Gallery implements Shortcode {
-
-	/**
-	 * @var Component_Factory
-	 */
-	private $component;
-
-	public function __construct( Component_Factory $component_factory ) {
-		$this->component = $component_factory;
-	}
 
 	/**
 	 * Render the [gallery] shortcode when placed in content areas.
@@ -46,16 +35,18 @@ class Gallery implements Shortcode {
 			return '';
 		}
 
+		// TODO: work with new component system
+		return '';
 		$options = [
-			Slider::SLIDES          => $this->get_slides( $attachments ),
-			Slider::THUMBNAILS      => $this->get_slides( $attachments, 'thumbnail' ),
-			Slider::SHOW_CAROUSEL   => $atts['show_carousel'],
-			Slider::SHOW_ARROWS     => $atts['show_arrows'],
-			Slider::SHOW_PAGINATION => $atts['show_pagination'],
-			Slider::MAIN_CLASSES    => [],
+			Controller::SLIDES          => $this->get_slides( $attachments ),
+			Controller::THUMBNAILS      => $this->get_slides( $attachments, 'thumbnail' ),
+			Controller::SHOW_CAROUSEL   => $atts['show_carousel'],
+			Controller::SHOW_ARROWS     => $atts['show_arrows'],
+			Controller::SHOW_PAGINATION => $atts['show_pagination'],
+			Controller::MAIN_CLASSES    => [],
 		];
 
-		return $this->component->get( Slider::class, $options )->get_rendered_output();
+		return $this->component->get( Controller::class, $options )->get_rendered_output();
 	}
 
 	protected function get_attachments( $atts ) {
@@ -103,6 +94,8 @@ class Gallery implements Shortcode {
 		}
 
 		return array_filter( array_map( function ( $slide_id ) use ( $size ) {
+			// TODO: work with new component system
+			return '';
 			try {
 				$image = new \Tribe\Project\Models\Image( $slide_id );
 			} catch ( \Exception $e ) {

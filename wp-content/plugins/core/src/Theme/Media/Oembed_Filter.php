@@ -2,8 +2,7 @@
 
 namespace Tribe\Project\Theme\Media;
 
-use Tribe\Project\Components\Component_Factory;
-use Tribe\Project\Templates\Components\Video;
+use Tribe\Project\Templates\Components\video\Controller;
 
 class Oembed_Filter {
 
@@ -12,13 +11,8 @@ class Oembed_Filter {
 	public const PROVIDER_YOUTUBE = 'YouTube';
 
 	private $supported_providers = [];
-	/**
-	 * @var Component_Factory
-	 */
-	private $component;
 
-	public function __construct( Component_Factory $component, array $supported_providers = [ self::PROVIDER_VIMEO, self::PROVIDER_YOUTUBE ] ) {
-		$this->component = $component;
+	public function __construct( array $supported_providers = [ self::PROVIDER_VIMEO, self::PROVIDER_YOUTUBE ] ) {
 		$this->supported_providers = $supported_providers;
 	}
 
@@ -45,7 +39,7 @@ class Oembed_Filter {
 			return $html;
 		}
 
-		$classes = [ 'c-video', 'c-video--lazy' ];
+		$classes = [ 'c-video--lazy' ];
 
 		if ( $data->provider_name === self::PROVIDER_YOUTUBE ) {
 			$embed_id    = $this->get_youtube_embed_id( $url );
@@ -60,19 +54,17 @@ class Oembed_Filter {
 		}
 
 		$options = [
-			Video::THUMBNAIL_URL    => $video_thumb,
-			Video::ATTRS            => $this->get_layout_container_attrs( $data->provider_name, $embed_id, $data->title ),
-			Video::CLASSES          => $classes,
-			Video::VIDEO_URL        => $url,
-			Video::TRIGGER_LABEL    => $data->title,
-			Video::TRIGGER_POSITION => Video::TRIGGER_POSITION_BOTTOM, // Options: bottom, center
+			'thumbnail_url'    => $video_thumb,
+			'attrs'            => $this->get_layout_container_attrs( $data->provider_name, $embed_id, $data->title ),
+			'classes'          => $classes,
+			'video_url'        => $url,
+			'trigger_label'    => $data->title,
+			'trigger_position' => Controller::TRIGGER_POSITION_BOTTOM, // Options: bottom, center
 		];
-
-		$frontend_html = $this->component->get( Video::class, $options )->get_rendered_output();
-
+		$frontend_html = tribe_template_part( 'components/video/video', null, $options );
 		$this->cache_frontend_html( $frontend_html, $url );
 
-		return $html;
+		return $frontend_html;
 	}
 
 	private function get_layout_container_attrs( $provider_name, $embed_id, $title ): array {

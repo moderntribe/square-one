@@ -349,38 +349,3 @@ npm run docker:start
 ```
 
 You should now have a fully functioning multisite setup.
-
-# WP-CLI and xdebug
-
-The first run of `npm run docker:start` will attempt to symlink your WP-CLI binary to `dev/bin/wp` when starting your local container. If this fails, manually symlink it:
-
-```bash
-ln -s /path/to/wp dev/bin/wp
-```
-
-In PhpStorm, you'll need to ensure you map your `wp` symlink to the docker container's `/usr/local/bin/wp` path and that both 
-your **Name** and **Host** on your Servers tab match your [Project ID](dev/docker/.projectID)'s hostname, e.g. `hlt.tribe` in this screenshot.
-
-![PhpStorm Server Panel Screenshot](media/phpstorm-wp-example.png)
-
-## Usage
-
-```bash
-cd dev/docker
-./exec.sh /bin/bash
-cd /application/www/dev/docker
-./wpx.sh {{command}}
-```
-Or, from your host machine, run:
-
-```bash
-cd dev/docker
-./exec.sh /application/www/dev/docker/wpx.sh {{command}}
-```
-
-Example
-
-```bash
-cd dev/docker
-./exec.sh /application/www/dev/docker/wpx.sh s1 cache-prime
-```

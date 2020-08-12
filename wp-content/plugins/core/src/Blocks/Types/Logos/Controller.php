@@ -10,7 +10,7 @@ use Tribe\Project\Templates\Components\Content_Block;
 use Tribe\Project\Templates\Components\Image as Image_Component;
 use Tribe\Project\Templates\Components\Link;
 use Tribe\Project\Templates\Components\Blocks\Logos as Container;
-use Tribe\Project\Templates\Components\Text;
+use Tribe\Project\Templates\Components\Controller;
 use Tribe\Project\Templates\Models\Image;
 
 class Controller extends Block_Controller {
@@ -90,16 +90,16 @@ class Controller extends Block_Controller {
 
 	private function get_headline(): array {
 		return [
-			Text::TAG     => 'h2',
-			Text::CLASSES => [ 'b-logos__title', 'h3' ],
-			Text::TEXT    => $this->attributes[ Logos_Block::TITLE ] ?? '',
+			Controller::TAG     => 'h2',
+			Controller::CLASSES => [ 'b-logos__title', 'h3' ],
+			Controller::TEXT    => $this->attributes[ Logos_Block::TITLE ] ?? '',
 		];
 	}
 
 	private function get_text(): array {
 		return [
-			Text::CLASSES => [ 'b-logos__description', 't-sink', 's-sink' ],
-			Text::TEXT    => $this->attributes[ Logos_Block::DESCRIPTION ] ?? '',
+			Controller::CLASSES => [ 'b-logos__description', 't-sink', 's-sink' ],
+			Controller::TEXT    => $this->attributes[ Logos_Block::DESCRIPTION ] ?? '',
 		];
 	}
 

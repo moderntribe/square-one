@@ -69,7 +69,7 @@ class Legacy_Check {
 			return $template;
 		}
 
-		tribe_controller( \Tribe\Project\Controllers\SingleController::class, 'unsupported' );
+		get_template_part( 'components/routes/unsupported_browser/unsupported_browser' );
 		exit;
 	}
 }

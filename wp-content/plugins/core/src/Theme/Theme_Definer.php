@@ -5,7 +5,6 @@ namespace Tribe\Project\Theme;
 
 use DI;
 use Tribe\Libs\Container\Definer_Interface;
-use Tribe\Project\Core;
 use Tribe\Project\Theme\Config\Colors;
 use Tribe\Project\Theme\Config\Font_Sizes;
 use Tribe\Project\Theme\Config\Gradients;

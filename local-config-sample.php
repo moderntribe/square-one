@@ -4,6 +4,10 @@
  *
  * You may include settings here that you only want
  * enabled on your local development checkouts
+ *
+ * The default WordPress databases defines are automatically populated in
+ * dev/docker/docker-compose.yml which you can override here with custom
+ * defines e.g. define( 'DB_NAME', 'tribe_square1' );
 */
 
 /*

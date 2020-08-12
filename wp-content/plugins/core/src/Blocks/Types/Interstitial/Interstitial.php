@@ -3,90 +3,73 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Blocks\Types\Interstitial;
 
-use Tribe\Gutenpanels\Blocks\Block_Type_Interface;
-use Tribe\Gutenpanels\Blocks\Sections\Content_Section;
-use Tribe\Gutenpanels\Blocks\Sections\Sidebar_Section;
-use Tribe\Gutenpanels\Blocks\Sections\Toolbar_Section;
-use Tribe\Project\Blocks\Block_Type_Config;
+use Tribe\Libs\ACF\Block;
+use Tribe\Libs\ACF\Block_Config;
+use Tribe\Libs\ACF\Field;
 
-class Interstitial extends Block_Type_Config {
-	public const NAME = 'tribe/interstitial';
+class Interstitial extends Block_Config {
+	public const NAME = 'interstitial';
 
-	public const IMAGE         = 'image';
-	public const DESCRIPTION   = 'description';
-	public const CTA           = 'cta';
+	public const IMAGE       = 'image';
+	public const DESCRIPTION = 'description';
+	public const CTA         = 'cta';
+
 	public const LAYOUT        = 'layout';
-	public const LAYOUT_LEFT   = 'layout-left';
-	public const LAYOUT_CENTER = 'layout-center';
+	public const LAYOUT_LEFT   = 'left';
+	public const LAYOUT_CENTER = 'center';
 
-	public function build(): Block_Type_Interface {
-		return $this->factory->block( self::NAME )
-			->set_label( __( 'Interstitial', 'tribe' ) )
-			->add_class( 'c-block c-block--full-bleed b-interstitial' )
-			->add_data_source( 'className-c-block', self::LAYOUT )
-			->set_dashicon( 'menu-alt' )
-			->add_data_source( 'background-image', self::IMAGE ) /* TEMP until we get support for this on the HTML field. */
-			->add_sidebar_section( $this->background() )
-			// ->add_content_section( $this->background_area() )
-			->add_content_section( $this->content_area() )
-			->add_toolbar_section( $this->layout_toolbar() )
-			->build();
+	public function add_block() {
+		$this->set_block( new Block( self::NAME, [
+			'title'       => __( 'Interstitial', 'tribe' ),
+			'description' => __( 'Interstitial block', 'tribe' ),
+			'icon'        => '<svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="#fff" stroke="#000" stroke-linecap="round" stroke-linejoin="round" d="M.5.5h19v19H.5z"/><path d="M13.6 12.7H6.4v3.6h7.2v-3.6zM3.7 4.6h12.6v1.8H3.7zM6.4 7.3h7.2v1.8H6.4z" fill="#000"/><path d="M10.517 14.305H8.732v.17h1.785v-.17zM10.517 14.393v-.567l.298.284.299.283-.299.283-.298.283v-.566z" fill="#fff"/></svg>',
+			'keywords'    => [ __( 'interstitial', 'tribe' ), __( 'display', 'tribe' ) ],
+			'category'    => 'layout',
+			'supports'    => [ 'align' => false ],
+		] ) );
 	}
 
-	private function background(): Sidebar_Section {
-		return $this->factory->sidebar()->section()
-			->set_label( __( 'Background Settings', 'tribe' ) )
-			->add_field(
-				$this->factory->content()->field()->image( self::IMAGE )
-					->set_label( __( 'Background Image', 'tribe' ) )
-					->build()
-			)
-			->build();
+	protected function add_fields() {
+		$this->add_field(
+			new Field( self::NAME . '_' . self::IMAGE, [
+				'label'        => __( 'Background Image', 'tribe' ),
+				'name'         => self::IMAGE,
+				'type'         => 'image',
+				'instructions' => __( 'Recommended image size: 1440px wide', 'tribe' ),
+			] )
+		)->add_field(
+			new Field( self::NAME . '_' . self::DESCRIPTION, [
+				'label' => __( 'Description', 'tribe' ),
+				'name'  => self::DESCRIPTION,
+				'type'  => 'textarea',
+			] )
+		)->add_field(
+			new Field( self::NAME . '_' . self::CTA, [
+				'label' => __( 'Call to Action', 'tribe' ),
+				'name'  => self::NAME,
+				'type'  => 'link',
+			] )
+		);
 	}
 
-	/* TODO: Enable this once the html field type get `set_data_source()` support
-	private function background_area(): Content_Section {
-		return $this->factory->content()->section()
-			->add_class( 'b-interstitial__figure' )
-			->add_field(
-				$this->factory->content()->field()->html( 'bkgrd' )
-					->add_class( 'b-interstitial__img c-image__bg' )
-					->set_content( '<div></div>' )
-					->add_data_source( 'background-image', self::IMAGE )
-					->build()
-			)
-			->build();
-	}*/
-
-	private function content_area(): Content_Section {
-		return $this->factory->content()->section()
-			->add_class( 'b-interstitial__content b-interstitial__content-container t-theme--light' )
-			->add_field(
-				$this->factory->content()->field()->text( self::DESCRIPTION )
-					->set_label( __( 'Description', 'tribe' ) )
-					->set_placeholder( 'Headline' )
-					->add_class( 'b-interstitial__title h3' )
-					->build()
-			)
-			->add_field(
-				$this->factory->content()->field()->link( self::CTA )
-					->set_label( __( 'Call to Action', 'tribe' ) )
-					->add_class( 'a-btn a-btn--has-icon-after icon-arrow-right' )
-					->build()
-			)
-			->build();
+	protected function add_settings() {
+		$this->add_setting( new Field( self::NAME . '_' . self::LAYOUT, [
+			'type'            => 'image_select',
+			'name'            => self::LAYOUT,
+			'choices'         => [
+				self::LAYOUT_LEFT   => __( 'Text Align Left', 'tribe' ),
+				self::LAYOUT_CENTER => __( 'Text Align Center', 'tribe' ),
+			],
+			'default_value'   => [
+				self::LAYOUT_LEFT,
+			],
+			'multiple'        => 0,
+			'image_path'      => sprintf(
+				'%sassets/img/admin/blocks/%s/',
+				trailingslashit( get_template_directory_uri() ),
+				self::NAME
+			),
+			'image_extension' => 'svg',
+		] ) );
 	}
-
-	private function layout_toolbar(): Toolbar_Section {
-		return $this->factory->toolbar()->section()
-			->add_field(
-				$this->factory->toolbar()->field()->icon_select( self::LAYOUT )
-					->add_dashicon_option( self::LAYOUT_LEFT, __( 'Align Text Left', 'tribe' ), 'editor-alignleft' )
-					->add_dashicon_option( self::LAYOUT_CENTER, __( 'Align Text Center', 'tribe' ), 'editor-aligncenter' )
-					->set_default( self::LAYOUT_LEFT )
-					->build()
-			)
-			->build();
-	}
-
 }

@@ -3,78 +3,105 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Blocks\Types\Tabs;
 
-use Tribe\Gutenpanels\Blocks\Block_Type_Interface;
-use Tribe\Gutenpanels\Blocks\Sections\Content_Section;
-use Tribe\Gutenpanels\Blocks\Sections\Toolbar_Section;
-use Tribe\Project\Blocks\Block_Type_Config;
-use Tribe\Project\Blocks\Types\Tabs\Support\Tabs_Section;
+use Tribe\Libs\ACF\Block;
+use Tribe\Libs\ACF\Block_Config;
+use Tribe\Libs\ACF\Field;
+use Tribe\Libs\ACF\Repeater;
 
-class Tabs extends Block_Type_Config {
-	public const NAME = 'tribe/tabs';
+class Tabs extends Block_Config {
+	public const NAME = 'tabs';
 
 	public const TITLE       = 'title';
 	public const DESCRIPTION = 'description';
-	public const TABS   = 'tabs';
+	public const TABS        = 'tabs';
+	public const TAB_HEADER  = 'row_header';
+	public const TAB_CONTENT = 'row_content';
 
 	public const LAYOUT            = 'layout';
-	public const LAYOUT_HORIZONTAL = 'layout-horizontal';
-	public const LAYOUT_VERTICAL   = 'layout-vertical';
+	public const LAYOUT_HORIZONTAL = 'horizontal';
+	public const LAYOUT_VERTICAL   = 'vertical';
 
-	public function build(): Block_Type_Interface {
-		return $this->factory->block( self::NAME )
-			->set_label( __( 'Tabs', 'tribe' ) )
-			->set_dashicon( 'menu-alt' )
-			->add_class( 'c-panel c-panel--tabs l-container' )
-			->add_data_source( 'className-c-panel', self::LAYOUT )
-			->add_toolbar_section( $this->layout_toolbar() )
-			->add_content_section( $this->content_area() )
-			->add_content_section( $this->tabs_area() )
-			->build();
+	/**
+	 * Register the block
+	 */
+	public function add_block() {
+		$this->set_block( new Block( self::NAME, [
+			'title'       => __( 'Tabs', 'tribe' ),
+			'description' => __( 'Tab block', 'tribe' ),
+			'icon'        => '<svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="#fff" stroke="#000" stroke-linecap="round" stroke-linejoin="round" d="M.5.5h19v19H.5z"/><path fill="#000" d="M1 1h6v4H1z"/><path fill="#fff" stroke="#000" d="M7.5 1.5h5v3h-5zM13.5 1.5h5v3h-5zM1.5 4.5h17v14h-17z"/><path fill="#151515" d="M3 6h12v1H3zM3 8h9v1H3zM3 10h13v1H3zM3 12h6v1H3z"/></svg>',
+			'keywords'    => [ __( 'tabs', 'tribe' ), __( 'display', 'tribe' ) ],
+			'category'    => 'layout',
+			'supports'    => [ 'align' => false ],
+		] ) );
 	}
 
-	private function content_area(): Content_Section {
-		return $this->factory->content()->section()
-			->add_class( 'tabs__header' )
-			->add_field(
-				$this->factory->content()->field()->text( self::TITLE )
-					->set_label( __( 'Title', 'tribe' ) )
-					->add_class( 'tabs__title h3' )
-					->build()
-			)
-			->add_field(
-				$this->factory->content()->field()->richtext( self::DESCRIPTION )
-					->set_label( __( 'Description', 'tribe' ) )
-					->add_class( 'tabs__description t-sink s-sink' )
-					->build()
-			)
-			->build();
+	/**
+	 * Register Fields for block
+	 */
+	public function add_fields() {
+		$this->add_field( new Field( self::NAME . '_' . self::TITLE, [
+				'label' => __( 'Title', 'tribe' ),
+				'name'  => self::TITLE,
+				'type'  => 'text',
+			] )
+		)->add_field( new Field( self::NAME . '_' . self::DESCRIPTION, [
+				'label' => __( 'Description', 'tribe' ),
+				'name'  => self::DESCRIPTION,
+				'type'  => 'textarea',
+			] )
+		)->add_field( $this->get_tab_section() );
 	}
 
-	private function tabs_area(): Content_Section {
-		return $this->factory->content()->section()
-			->add_class( 'tabs__content' )
-			->add_field(
-				$this->factory->content()->field()->flexible_container( self::TABS )
-					->set_label( __( 'Tabs', 'tribe' ) )
-					->merge_nested_attributes( Tabs_Section::NAME )
-					->add_template_block( Tabs_Section::NAME )
-					->add_block_type( Tabs_Section::NAME )
-					->set_min_blocks( 1 )
-					->build()
-			)
-			->build();
+	/**
+	 * @return Repeater
+	 */
+	protected function get_tab_section() {
+		$group = new Repeater( self::NAME . '_' . self::TABS );
+		$group->set_attributes( [
+			'label'  => __( 'Tab Section', 'tribe' ),
+			'name'   => self::TABS,
+			'layout' => 'block',
+			'min'    => 0,
+			'max'    => 10,
+		] );
+		$header = new Field( self::TAB_HEADER, [
+			'label' => __( 'Header', 'tribe' ),
+			'name'  => self::TAB_HEADER,
+			'type'  => 'text',
+		] );
+
+		$group->add_field( $header );
+		$content = new Field( self::TAB_CONTENT, [
+			'label' => __( 'Content', 'tribe' ),
+			'name'  => self::TAB_CONTENT,
+			'type'  => 'textarea',
+		] );
+		$group->add_field( $content );
+
+		return $group;
 	}
 
-	private function layout_toolbar(): Toolbar_Section {
-		return $this->factory->toolbar()->section()
-			->add_field(
-				$this->factory->toolbar()->field()->icon_select( self::LAYOUT )
-					->add_dashicon_option( self::LAYOUT_HORIZONTAL, __( 'Horizontal', 'tribe' ), 'image-flip-horizontal' )
-					->add_dashicon_option( self::LAYOUT_VERTICAL, __( 'Verical', 'tribe' ), 'image-flip-vertical' )
-					->set_default( self::LAYOUT_HORIZONTAL )
-					->build()
-			)
-			->build();
+	/**
+	 * Register Settings for Block
+	 */
+	public function add_settings() {
+		$this->add_setting( new Field( self::NAME . '_' . self::LAYOUT, [
+			'type'            => 'image_select',
+			'name'            => self::LAYOUT,
+			'choices'         => [
+				self::LAYOUT_VERTICAL   => __( 'Vertical', 'tribe' ),
+				self::LAYOUT_HORIZONTAL => __( 'Horizontal', 'tribe' ),
+			],
+			'default_value'   => [
+				self::LAYOUT_HORIZONTAL,
+			],
+			'multiple'        => 0,
+			'image_path'      => sprintf(
+				'%sassets/img/admin/blocks/%s/',
+				trailingslashit( get_template_directory_uri() ),
+				self::NAME
+			),
+			'image_extension' => 'svg',
+		] ) );
 	}
-
 }
