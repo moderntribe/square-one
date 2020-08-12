@@ -9,7 +9,7 @@ use Tribe\Project\Templates\Components\Traits\Page_Title;
 class Controller extends Abstract_Controller {
 	use Page_Title;
 
-	public function render_title(): string {
+	public function get_title(): string {
 		if ( empty( $this->page_title() ) ) {
 			return '';
 		}
