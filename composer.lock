@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6c370b01e55baa5960eaf5e932c9786d",
+    "content-hash": "63edad10f6766639c1b4a98eb2c834c7",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -400,10 +400,10 @@
         },
         {
             "name": "gravityforms/gravityforms",
-            "version": "2.4.16.7",
+            "version": "2.4.20",
             "dist": {
                 "type": "zip",
-                "url": "https://composer.utility.mtribe.site/gravityforms/?key={%WP_PLUGIN_GF_KEY}&token={%WP_PLUGIN_GF_TOKEN}&t=2.4.16.7"
+                "url": "https://composer.utility.mtribe.site/gravityforms/?key={%WP_PLUGIN_GF_KEY}&token={%WP_PLUGIN_GF_TOKEN}&t=2.4.20"
             },
             "require": {
                 "ffraenz/private-composer-installer": "^3.0"
@@ -2964,15 +2964,15 @@
         },
         {
             "name": "wpackagist-plugin/classic-editor",
-            "version": "1.5",
+            "version": "1.6",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/classic-editor/",
-                "reference": "tags/1.5"
+                "reference": "tags/1.6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/classic-editor.1.5.zip"
+                "url": "https://downloads.wordpress.org/plugin/classic-editor.1.6.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -2982,15 +2982,15 @@
         },
         {
             "name": "wpackagist-plugin/classic-editor-addon",
-            "version": "2.6.1",
+            "version": "2.6.3",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/classic-editor-addon/",
-                "reference": "tags/2.6.1"
+                "reference": "tags/2.6.3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/classic-editor-addon.2.6.1.zip"
+                "url": "https://downloads.wordpress.org/plugin/classic-editor-addon.2.6.3.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -3072,15 +3072,15 @@
         },
         {
             "name": "wpackagist-plugin/posts-to-posts",
-            "version": "1.6.5",
+            "version": "1.6.6",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/posts-to-posts/",
-                "reference": "tags/1.6.5"
+                "reference": "tags/1.6.6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/posts-to-posts.1.6.5.zip"
+                "url": "https://downloads.wordpress.org/plugin/posts-to-posts.1.6.6.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -3126,15 +3126,15 @@
         },
         {
             "name": "wpackagist-plugin/the-events-calendar",
-            "version": "5.1.4",
+            "version": "5.1.5",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/the-events-calendar/",
-                "reference": "tags/5.1.4"
+                "reference": "tags/5.1.5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/the-events-calendar.5.1.4.zip"
+                "url": "https://downloads.wordpress.org/plugin/the-events-calendar.5.1.5.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -3144,15 +3144,15 @@
         },
         {
             "name": "wpackagist-plugin/user-switching",
-            "version": "1.5.4",
+            "version": "1.5.5",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/user-switching/",
-                "reference": "tags/1.5.4"
+                "reference": "tags/1.5.5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/user-switching.1.5.4.zip"
+                "url": "https://downloads.wordpress.org/plugin/user-switching.1.5.5.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -3162,15 +3162,15 @@
         },
         {
             "name": "wpackagist-plugin/wordpress-seo",
-            "version": "14.1",
+            "version": "14.7",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/wordpress-seo/",
-                "reference": "tags/14.1"
+                "reference": "tags/14.7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wordpress-seo.14.1.zip"
+                "url": "https://downloads.wordpress.org/plugin/wordpress-seo.14.7.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
