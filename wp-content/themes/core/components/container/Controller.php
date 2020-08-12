@@ -40,7 +40,7 @@ class Controller extends Abstract_Controller {
 
 	protected function defaults(): array {
 		return [
-			'tag'     => '',
+			'tag'     => 'div',
 			'classes' => [],
 			'attrs'   => [],
 			'content' => '',
@@ -48,9 +48,7 @@ class Controller extends Abstract_Controller {
 	}
 
 	protected function required(): array {
-		return [
-			'tag' => 'div',
-		];
+		return [];
 	}
 
 	public function tag(): string {

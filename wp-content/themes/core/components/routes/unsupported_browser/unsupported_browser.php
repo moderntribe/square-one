@@ -38,7 +38,7 @@ $c = \Tribe\Project\Templates\Components\routes\unsupported_browser\Controller::
 		<div class="l-container">
 
 			<div class="site-content__content">
-				<h2><?php echo $c->legacy_browser_title; ?></h2>
+				<h2><?php echo esc_html( $c->legacy_browser_title ); ?></h2>
 				<p><?php echo $c->legacy_browser_content; ?></p>
 			</div>
 

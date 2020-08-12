@@ -71,7 +71,7 @@ class Controller extends Abstract_Controller {
 
 	protected function defaults(): array {
 		return [
-			'tag'     => '',
+			'tag'     => 'div',
 			'classes' => [],
 			'attrs'   => [],
 			'layout'  => self::LAYOUT_LEFT,
@@ -84,7 +84,6 @@ class Controller extends Abstract_Controller {
 
 	protected function required(): array {
 		return [
-			'tag'     => 'div',
 			'classes' => [ 'c-content-block', 'c-content-block--layout-' . $this->layout ],
 		];
 	}
@@ -110,7 +109,6 @@ class Controller extends Abstract_Controller {
 		}
 
 		$this->leadin['classes'][] = 'c-content-block__title';
-		$this->leadin['classes'][] = 'h1';
 
 		return $this->title;
 	}
