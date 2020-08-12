@@ -2,7 +2,6 @@
 
 namespace Tribe\Project\Templates\Components\share;
 
-
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Theme\Config\Image_Sizes;
 
@@ -107,8 +106,10 @@ class Controller extends Abstract_Controller {
 			// No pinterest for loops, because thats silly.
 			if ( in_array( self::PINTEREST, $this->networks, true ) && has_post_thumbnail( $post->ID ) ) {
 
-				$image               = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ),
-					Image_Sizes::CORE_FULL );
+				$image               = wp_get_attachment_image_src(
+					get_post_thumbnail_id( $post->ID ),
+					Image_Sizes::CORE_FULL 
+				);
 				$data[ 'image_src' ] = $image[ 0 ];
 
 			}
@@ -156,8 +157,11 @@ class Controller extends Abstract_Controller {
 
 			case self::EMAIL:
 				$label = __( 'Share through Email', 'tribe' );
-				$link  = sprintf( 'mailto:?subject=%1$s&body=%2$s', urlencode( $data[ 'title' ] ),
-					urlencode( esc_url_raw( $data[ 'link' ] ) ) );
+				$link  = sprintf(
+					'mailto:?subject=%1$s&body=%2$s',
+					urlencode( $data[ 'title' ] ),
+					urlencode( esc_url_raw( $data[ 'link' ] ) ) 
+				);
 				$icon  = 'icon-mail';
 
 				return $this->build_link_args( $link, $label, $icon );
@@ -176,9 +180,12 @@ class Controller extends Abstract_Controller {
 				}
 
 				$label      = __( 'Share on Pinterest', 'tribe' );
-				$link       = sprintf( 'http://pinterest.com/pin/create/button/?url=%1$s&amp;media=%2$s&amp;description=%3$s',
-					urlencode( esc_url_raw( $data[ 'link' ] ) ), urlencode( esc_url_raw( $data[ 'image_src' ] ) ),
-					urlencode( $data[ 'title' ] ) );
+				$link       = sprintf(
+					'http://pinterest.com/pin/create/button/?url=%1$s&amp;media=%2$s&amp;description=%3$s',
+					urlencode( esc_url_raw( $data[ 'link' ] ) ),
+					urlencode( esc_url_raw( $data[ 'image_src' ] ) ),
+					urlencode( $data[ 'title' ] ) 
+				);
 				$icon       = 'icon-pinterest';
 				$attributes = [
 					'data-js'     => 'social-share-popup',
@@ -196,8 +203,11 @@ class Controller extends Abstract_Controller {
 				}
 
 				$label      = __( 'Share on Twitter', 'tribe' );
-				$link       = sprintf( 'https://twitter.com/share?url=%1$s&text=%2$s',
-					urlencode( esc_url_raw( $data[ 'link' ] ) ), urlencode( $text ) );
+				$link       = sprintf(
+					'https://twitter.com/share?url=%1$s&text=%2$s',
+					urlencode( esc_url_raw( $data[ 'link' ] ) ),
+					urlencode( $text ) 
+				);
 				$icon       = 'icon-twitter';
 				$attributes = [
 					'data-js'     => 'social-share-popup',
@@ -209,8 +219,11 @@ class Controller extends Abstract_Controller {
 
 			case self::FACEBOOK:
 				$label      = __( 'Share on Facebook', 'tribe' );
-				$link       = sprintf( 'http://www.facebook.com/sharer.php?u=%1$s&t=%2$s',
-					urlencode( esc_url_raw( $data[ 'link' ] ) ), urlencode( $data[ 'title' ] ) );
+				$link       = sprintf(
+					'http://www.facebook.com/sharer.php?u=%1$s&t=%2$s',
+					urlencode( esc_url_raw( $data[ 'link' ] ) ),
+					urlencode( $data[ 'title' ] ) 
+				);
 				$icon       = 'icon-facebook';
 				$attributes = [
 					'data-js'     => 'social-share-popup',
@@ -222,8 +235,11 @@ class Controller extends Abstract_Controller {
 
 			case self::LINKEDIN:
 				$label      = __( 'Share on LinkedIn', 'tribe' );
-				$link       = sprintf( 'http://www.linkedin.com/shareArticle?mini=true&url=%1$s&title=%2$s',
-					urlencode( esc_url_raw( $data[ 'link' ] ) ), urlencode( $data[ 'title' ] ) );
+				$link       = sprintf(
+					'http://www.linkedin.com/shareArticle?mini=true&url=%1$s&title=%2$s',
+					urlencode( esc_url_raw( $data[ 'link' ] ) ),
+					urlencode( $data[ 'title' ] ) 
+				);
 				$icon       = 'icon-linkedin';
 				$attributes = [
 					'data-js'     => 'social-share-popup',
