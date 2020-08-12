@@ -4,12 +4,20 @@ declare( strict_types=1 );
 namespace Tribe\Project\Templates\Components\header\subheader;
 
 use Tribe\Project\Templates\Components\Abstract_Controller;
+use Tribe\Project\Templates\Components\Traits\Page_Title;
 
 class Controller extends Abstract_Controller {
+	use Page_Title;
 
-	public function title(): string {
-		// TODO: implement a wrapper/container component
-		// TODO: use the method in head/controller.php?
-		return get_the_title();
+	public function render_title(): string {
+		if ( empty( $this->page_title() ) ) {
+			return '';
+		}
+
+		return tribe_template_part( 'components/text/text', null, [
+			'tag'     => 'h1',
+			'classes' => [ 'page-title', 'h1' ],
+			'content' => $this->page_title(),
+		] );
 	}
 }

@@ -31,10 +31,10 @@ class Controller extends Abstract_Controller {
 			$args[$key] = array_merge( $args[$key], $value );
 		}
 
-		$this->tag     = $args['tag'] ?? 'p';
-		$this->classes = (array) ( $args['classes'] ?? [] );
-		$this->attrs   = (array) ( $args['attrs'] ?? [] );
-		$this->content = $args['content'] ?? '';
+		$this->tag     = $args['tag'];
+		$this->classes = (array) $args['classes'];
+		$this->attrs   = (array) $args['attrs'];
+		$this->content = $args['content'];
 	}
 
 	protected function defaults(): array {

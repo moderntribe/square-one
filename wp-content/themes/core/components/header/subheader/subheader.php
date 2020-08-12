@@ -7,7 +7,7 @@ $c = \Tribe\Project\Templates\Components\header\subheader\Controller::factory();
 
 	<div class="l-container">
 
-		<?php echo $c->title(); ?>
+		<?php echo $c->render_title(); ?>
 
 	</div>
 
