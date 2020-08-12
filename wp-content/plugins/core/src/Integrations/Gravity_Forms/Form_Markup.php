@@ -31,15 +31,15 @@ class Form_Markup {
 			$indices = array_keys( $field['choices'] );
 			$index   = array_pop( $indices );
 
-			// TODO: work with new component system
-			/*$label = $this->component->get( Choice_Other::class, [
-				Choice_Other::FORM_ID     => $field['formId'],
-				Choice_Other::FIELD_ID    => $field['id'],
-				Choice_Other::FIELD_INDEX => $index,
-				Choice_Other::LABEL       => __( 'Other', 'tribe' ),
-			] )->get_rendered_output();
+			$new_markup = sprintf(
+				'<label for="choice_%1$s_%2$s_%3$s" class="gf-radio-checkbox-other-placeholder"><span class="a11y-visual-hide">%4$s</span></label></li>',
+				$field['formId'],
+				$field['id'],
+				$index,
+				__( 'Other', 'tribe' )
+			);
 
-			$choice_markup = str_replace( '</li>', $label . '</li>', $choice_markup );*/
+			$choice_markup = str_replace( '</li>', $new_markup, $choice_markup );
 
 		}
 
