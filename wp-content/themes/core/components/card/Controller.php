@@ -5,45 +5,20 @@ namespace Tribe\Project\Templates\Components\card;
 
 use Tribe\Project\Templates\Components\Abstract_Controller;
 
-/**
- * Class Card
- *
- * @property string   $before_card
- * @property string   $after_card
- * @property array    $title
- * @property array    $text
- * @property array    $image
- * @property string   $pre_title
- * @property string   $post_title
- * @property string[] $card_classes
- * @property string[] $card_header_classes
- * @property string[] $card_content_classes
- * @property array    $button
- */
 class Controller extends Abstract_Controller {
-	private $before_card;
-	private $after_card;
-	private $title;
-	private $text;
-	private $image;
-	private $pre_title;
-	private $post_title;
-	private $card_classes;
-	private $card_header_classes;
-	private $card_content_classes;
-	private $button;
-
 	public function __construct( array $args = [] ) {
-		$this->before_card          = $args['before_card'] ?? '';
-		$this->after_card           = $args['after_card'] ?? '';
-		$this->title                = (array) ( $args['title'] ?? [] );
-		$this->text                 = (array) ( $args['text'] ?? [] );
-		$this->image                = (array) ( $args['image'] ?? [] );
-		$this->pre_title            = $args['pre_title'] ?? '';
-		$this->post_title           = $args['post_title'] ?? '';
-		$this->card_classes         = array_merge( [ 'c-card' ], (array) ( $args['card_classes'] ?? [] ) );
-		$this->card_header_classes  = array_merge( [ 'c-card__header' ], (array) ( $args['card_header_classes'] ?? [] ) );
-		$this->card_content_classes = array_merge( [ 'c-card__content' ], (array) ( $args['card_content_classes'] ?? [] ) );
-		$this->button               = (array) ( $args['button'] ?? [] );
+		$args = wp_parse_args( $args, $this->defaults() );
+
+		foreach ( $this->required() as $key => $value ) {
+			$args[$key] = array_merge( $args[$key], $value );
+		}
+	}
+
+	protected function defaults(): array {
+		return [];
+	}
+
+	protected function required(): array {
+		return [];
 	}
 }

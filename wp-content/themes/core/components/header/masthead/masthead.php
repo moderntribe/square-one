@@ -1,9 +1,8 @@
 <?php
 declare( strict_types=1 );
-
-$controller = \Tribe\Project\Templates\Components\header\masthead\Controller::factory();
-
+$c = \Tribe\Project\Templates\Components\header\masthead\Controller::factory();
 ?>
+
 <header class="site-header">
 
 	<a
@@ -15,7 +14,7 @@ $controller = \Tribe\Project\Templates\Components\header\masthead\Controller::fa
 
 	<div class="l-container">
 
-		<?php echo $controller->logo(); ?>
+		<?php echo $c->logo(); ?>
 
 		<?php get_template_part( 'components/header/navigation/navigation' ); ?>
 

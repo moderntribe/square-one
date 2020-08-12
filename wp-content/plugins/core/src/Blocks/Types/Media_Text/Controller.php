@@ -9,7 +9,7 @@ use Tribe\Project\Templates\Components\Content_Block;
 use Tribe\Project\Templates\Components\Image as Image_Component;
 use Tribe\Project\Templates\Components\Link;
 use Tribe\Project\Templates\Components\Blocks\Media_Text as Container;
-use Tribe\Project\Templates\Components\Text;
+use Tribe\Project\Templates\Components\Controller;
 use Tribe\Project\Templates\Models\Image;
 use Tribe\Project\Theme\Config\Image_Sizes;
 
@@ -104,8 +104,8 @@ class Controller extends Block_Controller {
 		$content = $GLOBALS['wp_embed']->shortcode( [], $url );
 
 		return [
-			Text::TAG  => 'div',
-			Text::TEXT => $content,
+			Controller::TAG  => 'div',
+			Controller::TEXT => $content,
 		];
 	}
 
@@ -121,16 +121,16 @@ class Controller extends Block_Controller {
 
 	private function get_title(): array {
 		return [
-			Text::TAG     => 'h2',
-			Text::CLASSES => [ 'b-media-text__title', 'h3' ],
-			Text::TEXT    => $this->attributes[ Media_Text_Block::TITLE ] ?? '',
+			Controller::TAG     => 'h2',
+			Controller::CLASSES => [ 'b-media-text__title', 'h3' ],
+			Controller::TEXT    => $this->attributes[ Media_Text_Block::TITLE ] ?? '',
 		];
 	}
 
 	private function get_text(): array {
 		return [
-			Text::CLASSES => [ 'b-media-text__text', 't-sink', 's-sink' ],
-			Text::TEXT    => implode( "\n", wp_list_pluck( $this->attributes[ Media_Text_Block::CONTENT ] ?? [], 'content' ) )
+			Controller::CLASSES => [ 'b-media-text__text', 't-sink', 's-sink' ],
+			Controller::TEXT    => implode( "\n", wp_list_pluck( $this->attributes[ Media_Text_Block::CONTENT ] ?? [], 'content' ) )
 		];
 	}
 

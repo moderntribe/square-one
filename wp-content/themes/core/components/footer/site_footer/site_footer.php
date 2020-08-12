@@ -1,8 +1,6 @@
 <?php
 declare( strict_types=1 );
-
-$controller = \Tribe\Project\Templates\Components\footer\site_footer\Controller::factory();
-
+$c = \Tribe\Project\Templates\Components\footer\site_footer\Controller::factory();
 ?>
 
 <footer class="site-footer">
@@ -13,9 +11,9 @@ $controller = \Tribe\Project\Templates\Components\footer\site_footer\Controller:
 		<?php get_template_part( 'components/follow/follow' ); ?>
 
 		<p>
-			<?php echo $controller->copyright(); ?>
-			<a href="<?php echo esc_url( $controller->home_url() ); ?>" rel="external">
-				<?php echo esc_html( $controller->name() ); ?>
+			<?php echo $c->copyright(); ?>
+			<a href="<?php echo esc_url( $c->home_url() ); ?>" rel="external">
+				<?php echo esc_html( $c->name() ); ?>
 			</a>
 		</p>
 

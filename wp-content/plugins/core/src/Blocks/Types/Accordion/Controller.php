@@ -9,7 +9,7 @@ use Tribe\Project\Blocks\Types\Accordion\Support\Accordion_Section as Accordion_
 use Tribe\Project\Templates\Components\Accordion as Accordion_Component;
 use Tribe\Project\Templates\Components\Content_Block;
 use Tribe\Project\Templates\Components\Blocks\Accordion as Container;
-use Tribe\Project\Templates\Components\Text;
+use Tribe\Project\Templates\Components\Controller;
 
 class Controller extends Block_Controller {
 
@@ -63,16 +63,16 @@ class Controller extends Block_Controller {
 
 	private function get_title(): array {
 		return  [
-			Text::TAG     => 'h2',
-			Text::CLASSES => [ 'b-accordion__title', 'h3' ],
-			Text::TEXT    => $this->attributes[ Accordion_Block::TITLE ] ?? '',
+			Controller::TAG     => 'h2',
+			Controller::CLASSES => [ 'b-accordion__title', 'h3' ],
+			Controller::TEXT    => $this->attributes[ Accordion_Block::TITLE ] ?? '',
 		];
 	}
 
 	private function get_description(): array {
 		return [
-			Text::CLASSES => [ 'b-accordion__description', 't-sink', 's-sink' ],
-			Text::TEXT    => $this->attributes[ Accordion_Block::DESCRIPTION ] ?? '',
+			Controller::CLASSES => [ 'b-accordion__description', 't-sink', 's-sink' ],
+			Controller::TEXT    => $this->attributes[ Accordion_Block::DESCRIPTION ] ?? '',
 		];
 	}
 
