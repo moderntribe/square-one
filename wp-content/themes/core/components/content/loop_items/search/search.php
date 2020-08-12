@@ -1,6 +1,6 @@
 <?php
 declare( strict_types=1 );
-$controller = \Tribe\Project\Templates\Components\content\loop_items\search\Controller::factory();
+$c = \Tribe\Project\Templates\Components\content\loop_items\search\Controller::factory();
 ?>
 
 <article class="item-loop item-loop--search item-loop--<?php echo esc_attr( get_post_type() ); ?>">
@@ -15,7 +15,7 @@ $controller = \Tribe\Project\Templates\Components\content\loop_items\search\Cont
 
 	</header>
 
-	<?php echo $controller->render_featured_image(); ?>
+	<?php echo $c->render_featured_image(); ?>
 
 	<?php the_excerpt(); ?>
 

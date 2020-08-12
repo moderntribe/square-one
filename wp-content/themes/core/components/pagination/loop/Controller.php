@@ -8,52 +8,76 @@ use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Theme\Pagination_Util;
 
 class Controller extends Abstract_Controller {
-
 	/**
-	 * @var array
+	 * @var string[]
 	 */
-	private $wrapper_classes;
+	private $classes;
 	/**
-	 * @var array
+	 * @var string[]
 	 */
-	private $wrapper_attrs;
+	private $attrs;
 	/**
-	 * @var array
+	 * @var string[]
 	 */
 	private $list_classes;
 	/**
-	 * @var array
+	 * @var string[]
 	 */
 	private $list_attrs;
 	/**
-	 * @var array
+	 * @var string[]
 	 */
 	private $item_classes;
 	/**
-	 * @var array
+	 * @var string[]
 	 */
 	private $item_attrs;
-
 	/**
 	 * @var array
 	 */
 	private $links;
 
 	public function __construct( array $args = [] ) {
-		$this->wrapper_classes = array_merge( [ 'c-pagination', 'c-pagination--loop' ], (array) ( $args['wrapper_classes'] ?? [] ) );
-		$this->wrapper_attrs   = (array) ( $args['wrapper_attrs'] ?? [ 'aria-labelledby' => 'c-pagination__label-single' ] );
-		$this->list_classes    = array_merge( [ 'c-pagination__list' ], (array) ( $args['list_classes'] ?? [] ) );
-		$this->list_attrs      = (array) ( $args['list_attrs'] ?? [] );
-		$this->item_classes    = array_merge( [ 'c-pagination__item' ], (array) ( $args['item_classes'] ?? [] ) );
-		$this->item_attrs      = (array) ( $args['item_attrs'] ?? [] );
+		$args = wp_parse_args( $args, $this->defaults() );
+
+		foreach ( $this->required() as $key => $value ) {
+			$args[$key] = array_merge( $args[$key], $value );
+		}
+
+		$this->classes      = (array) $args['classes'];
+		$this->attrs        = (array) $args['attrs'];
+		$this->list_classes = (array) $args['list_classes'];
+		$this->list_attrs   = (array) $args['list_attrs'];
+		$this->item_classes = (array) $args['item_classes'];
+		$this->item_attrs   = (array) $args['item_attrs'];
 	}
 
-	public function wrapper_classes(): string {
-		return Markup_Utils::class_attribute( $this->wrapper_classes );
+	protected function defaults(): array {
+		return [
+			'classes'      => [],
+			'attrs'        => [],
+			'list_classes' => [],
+			'list_attrs'   => [],
+			'item_classes' => [],
+			'item_attrs'   => [],
+		];
 	}
 
-	public function wrapper_attrs(): string {
-		return Markup_Utils::concat_attrs( $this->wrapper_attrs );
+	protected function required(): array {
+		return [
+			'classes'      => [ 'c-pagination', 'c-pagination--loop' ],
+			'attrs'        => [ 'aria-labelledby' => 'c-pagination__label-single' ],
+			'list_classes' => [ 'c-pagination__list' ],
+			'item_classes' => [ 'c-pagination__item' ],
+		];
+	}
+
+	public function classes(): string {
+		return Markup_Utils::class_attribute( $this->classes );
+	}
+
+	public function attributes(): string {
+		return Markup_Utils::concat_attrs( $this->attrs );
 	}
 
 	public function list_classes(): string {

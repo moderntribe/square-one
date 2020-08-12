@@ -1,6 +1,6 @@
 <?php
 declare( strict_types=1 );
-$controller = \Tribe\Project\Templates\Components\content\no_results\Controller::factory();
+$c = \Tribe\Project\Templates\Components\content\no_results\Controller::factory();
 ?>
 
 <div class="no-results">

@@ -7,7 +7,7 @@ use Tribe\Project\Blocks\Types\Lead_Form\Lead_Form as Lead_Form_Block;
 use Tribe\Project\Controllers\Blocks\Block_Controller;
 use Tribe\Project\Templates\Components\Content_Block;
 use Tribe\Project\Templates\Components\Panels\Lead_Form as Container;
-use Tribe\Project\Templates\Components\Text;
+use Tribe\Project\Templates\Components\Controller;
 
 class Controller extends Block_Controller {
 
@@ -49,16 +49,16 @@ class Controller extends Block_Controller {
 
 	private function get_title(): array {
 		return  [
-			Text::TAG     => 'h2',
-			Text::CLASSES => [ 'b-lead-form__title', 'h3' ],
-			Text::TEXT    => $this->attributes[ Lead_Form_Block::TITLE ] ?? '',
+			Controller::TAG     => 'h2',
+			Controller::CLASSES => [ 'b-lead-form__title', 'h3' ],
+			Controller::TEXT    => $this->attributes[ Lead_Form_Block::TITLE ] ?? '',
 		];
 	}
 
 	private function get_description(): array {
 		return [
-			Text::CLASSES => [ 'b-lead-form__description', 't-sink', 's-sink' ],
-			Text::TEXT    => $this->attributes[ Lead_Form_Block::DESCRIPTION ] ?? '',
+			Controller::CLASSES => [ 'b-lead-form__description', 't-sink', 's-sink' ],
+			Controller::TEXT    => $this->attributes[ Lead_Form_Block::DESCRIPTION ] ?? '',
 		];
 	}
 }

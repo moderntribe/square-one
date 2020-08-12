@@ -15,11 +15,11 @@ class Controller extends Abstract_Controller {
 	/**
 	 * @var array
 	 */
-	private $wrapper_classes;
+	private $classes;
 	/**
 	 * @var array
 	 */
-	private $wrapper_attrs;
+	private $attrs;
 	/**
 	 * @var array
 	 */
@@ -46,15 +46,44 @@ class Controller extends Abstract_Controller {
 	private $link_attrs;
 
 	public function __construct( array $args = [] ) {
-		$this->breadcrumbs     = (array) ( $args['breadcrumbs'] ?? [] );
-		$this->wrapper_classes = array_merge( [ 'c-breadcrumbs' ], (array) ( $args['wrapper_classes'] ?? [] ) );
-		$this->wrapper_attrs   = (array) ( $args['wrapper_attrs'] ?? [] );
-		$this->main_classes    = array_merge( [ 'c-breadcrumbs__list' ], (array) ( $args['main_classes'] ?? [] ) );
-		$this->main_attrs      = (array) ( $args['main_attrs'] ?? [] );
-		$this->item_classes    = array_merge( [ 'c-breadcrumbs__item' ], (array) ( $args['item_classes'] ?? [] ) );
-		$this->item_attrs      = (array) ( $args['item_attrs'] ?? [] );
-		$this->link_classes    = array_merge( [ 'c-breadcrumbs__anchor' ], (array) ( $args['link_classes'] ?? [] ) );
-		$this->link_attrs      = (array) ( $args['link_attrs'] ?? [] );
+		$args = wp_parse_args( $args, $this->defaults() );
+
+		foreach ( $this->required() as $key => $value ) {
+			$args[$key] = array_merge( $args[$key], $value );
+		}
+
+		$this->breadcrumbs  = (array) $args['breadcrumbs'];
+		$this->classes      = (array) $args['classes'];
+		$this->attrs        = (array) $args['attrs'];
+		$this->main_classes = (array) $args['main_classes'];
+		$this->main_attrs   = (array) $args['main_attrs'];
+		$this->item_classes = (array) $args['item_classes'];
+		$this->item_attrs   = (array) $args['item_attrs'];
+		$this->link_classes = (array) $args['link_classes'];
+		$this->link_attrs   = (array) $args['link_attrs'];
+	}
+
+	protected function defaults(): array {
+		return [
+			'breadcrumbs'  => [],
+			'classes'      => [],
+			'attrs'        => [],
+			'main_classes' => [],
+			'main_attrs'   => [],
+			'item_classes' => [],
+			'item_attrs'   => [],
+			'link_classes' => [],
+			'link_attrs'   => [],
+		];
+	}
+
+	protected function required(): array {
+		return [
+			'classes'      => [ 'c-breadcrumbs' ],
+			'main_classes' => [ 'c-breadcrumbs__list' ],
+			'item_classes' => [ 'c-breadcrumbs__item' ],
+			'link_classes' => [ 'c-breadcrumbs__anchor' ],
+		];
 	}
 
 	/**
@@ -64,12 +93,12 @@ class Controller extends Abstract_Controller {
 		return $this->breadcrumbs;
 	}
 
-	public function wrapper_classes(): string {
-		return Markup_Utils::class_attribute( $this->wrapper_classes );
+	public function classes(): string {
+		return Markup_Utils::class_attribute( $this->classes );
 	}
 
-	public function wrapper_attrs(): string {
-		return Markup_Utils::concat_attrs( $this->wrapper_attrs );
+	public function attributes(): string {
+		return Markup_Utils::concat_attrs( $this->attrs );
 	}
 
 	public function main_classes(): string {

@@ -5,20 +5,20 @@ declare( strict_types=1 );
  * @var array $args Arguments passed to the template
  */
 // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
-$controller = \Tribe\Project\Templates\Components\button\Controller::factory( $args );
+$c = \Tribe\Project\Templates\Components\button\Controller::factory( $args );
 
-if ( ! $controller->has_content() ) {
+if ( ! $c->has_content() ) {
 	return;
 }
 ?>
 
-<?php echo $controller->wrapper_tag_open(); ?>
+<?php echo $c->wrapper_tag_open(); ?>
 
 	<button
-		<?php echo $controller->classes(); ?>
-		<?php echo $controller->attributes(); ?>
+		<?php echo $c->classes(); ?>
+		<?php echo $c->attributes(); ?>
 	>
-		<?php echo $controller->content(); ?>
+		<?php echo $c->content(); ?>
 	</button>
 
-<?php echo $controller->wrapper_tag_close(); ?>
+<?php echo $c->wrapper_tag_close(); ?>
