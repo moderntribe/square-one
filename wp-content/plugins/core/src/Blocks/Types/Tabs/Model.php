@@ -37,14 +37,14 @@ class Model extends Base_Model {
 	 * @return string
 	 */
 	private function get_title(): string {
-		return $this->get( Tabs_Block::TITLE );
+		return $this->get( Tabs_Block::TITLE, '' );
 	}
 
 	/**
 	 * @return string
 	 */
 	private function get_description(): string {
-		return $this->get( Tabs_Block::DESCRIPTION );
+		return apply_filters( 'the_content', $this->get( Tabs_Block::DESCRIPTION, '' ) ); // TODO: Unsure why this get() doesn't apply the_content automatically.
 	}
 
 	/**
@@ -52,7 +52,11 @@ class Model extends Base_Model {
 	 */
 	private function get_tabs(): array {
 		$tab_objects = [];
-		$tabs_data   = get_field( Tabs_Block::TABS );//$this->get( Tabs_Block::TABS );
+		$tabs_data   = get_field( Tabs_Block::TABS ); // TODO: This doesn't appear to work: `$this->get( Tabs_Block::TABS, [] );` It returns the number of rows for the repeater as an integer.
+
+		if ( empty( $tabs_data ) ) {
+			return $tab_objects;
+		}
 
 		foreach ( $tabs_data as $tab ) {
 			$tab_objects[] = new Tab_Model( $tab[ Tabs_Block::TAB_LABEL ], $tab[ Tabs_Block::TAB_CONTENT ] );

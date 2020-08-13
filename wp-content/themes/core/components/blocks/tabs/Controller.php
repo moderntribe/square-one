@@ -76,7 +76,7 @@ class Controller extends Abstract_Controller {
 
 	public function get_tabs(): string {
 		$args = [
-			'tabs' => $this->tabs,
+			'tabs'   => $this->tabs,
 			'layout' => $this->layout,
 		];
 
@@ -86,7 +86,7 @@ class Controller extends Abstract_Controller {
 	private function get_title(): Deferred_Component {
 		$args = [
 			'tag'     => 'h2',
-			'classes' => [ 'b-tabs__title', 'h2' ],
+			'classes' => [ 'b-tabs__title', 'h3' ],
 			'content' => $this->title,
 		];
 
@@ -96,10 +96,10 @@ class Controller extends Abstract_Controller {
 	private function get_description(): Deferred_Component {
 		$args = [
 			'classes' => [ 'b-tabs__description', 't-sink', 's-sink' ],
-			'content' => $this->title,
+			'content' => $this->description,
 		];
 
-		return defer_template_part( 'components/text/text', null, $args );
+		return defer_template_part( 'components/container/container', null, $args );
 	}
 
 	/**

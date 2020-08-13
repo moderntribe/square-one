@@ -58,12 +58,12 @@ class Controller extends Abstract_Controller {
 	/**
 	 * @var array The array of tab buttons/triggers to be rendered.
 	 */
-	private $tab_buttons;
+	private $tab_buttons = [];
 
 	/**
 	 * @var array The array of tabpanels/tab content to be rendered.
 	 */
-	private $tab_panels;
+	private $tab_panels = [];
 
 	/**
 	 * Controller constructor.
