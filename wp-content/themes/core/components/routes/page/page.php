@@ -11,14 +11,8 @@ $c->render_header();
 
 		<?php get_template_part( 'components/header/subheader/subheader' ); ?>
 
-		<div class="l-container">
-
-			<?php echo $c->render_featured_image(); ?>
-
-			<div class="t-sink s-sink l-sink l-sink--double">
-				<?php the_content(); ?>
-			</div>
-
+		<div class="t-sink s-sink l-sink l-sink--double">
+			<?php the_content(); ?>
 		</div>
 
 	</main>
