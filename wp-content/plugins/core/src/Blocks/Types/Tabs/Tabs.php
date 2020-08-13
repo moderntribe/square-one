@@ -14,8 +14,8 @@ class Tabs extends Block_Config {
 	public const TITLE       = 'title';
 	public const DESCRIPTION = 'description';
 	public const TABS        = 'tabs';
-	public const TAB_HEADER  = 'row_header';
-	public const TAB_CONTENT = 'row_content';
+	public const TAB_LABEL   = 'tab_label';
+	public const TAB_CONTENT = 'tab_content';
 
 	public const LAYOUT            = 'layout';
 	public const LAYOUT_HORIZONTAL = 'horizontal';
@@ -58,23 +58,26 @@ class Tabs extends Block_Config {
 	protected function get_tab_section() {
 		$group = new Repeater( self::NAME . '_' . self::TABS );
 		$group->set_attributes( [
-			'label'  => __( 'Tab Section', 'tribe' ),
-			'name'   => self::TABS,
-			'layout' => 'block',
-			'min'    => 0,
-			'max'    => 10,
+			'label'        => __( 'Tab Section', 'tribe' ),
+			'name'         => self::TABS,
+			'layout'       => 'block',
+			'min'          => 0,
+			'max'          => 10,
+			'button_label' => __( 'Add Tab', 'tribe' ),
 		] );
-		$header = new Field( self::TAB_HEADER, [
-			'label' => __( 'Header', 'tribe' ),
-			'name'  => self::TAB_HEADER,
+		$header = new Field( self::TAB_LABEL, [
+			'label' => __( 'Tab Label', 'tribe' ),
+			'name'  => self::TAB_LABEL,
 			'type'  => 'text',
 		] );
 
 		$group->add_field( $header );
 		$content = new Field( self::TAB_CONTENT, [
-			'label' => __( 'Content', 'tribe' ),
-			'name'  => self::TAB_CONTENT,
-			'type'  => 'textarea',
+			'label'   => __( 'Tab Content', 'tribe' ),
+			'name'    => self::TAB_CONTENT,
+			'type'    => 'wysiwyg',
+			'toolbar' => 'basic',
+			'delay'   => 1,
 		] );
 		$group->add_field( $content );
 
