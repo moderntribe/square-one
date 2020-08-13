@@ -18,8 +18,8 @@ if ( empty( $c->get_tab_panels() ) ) {
 
 		<?php echo $c->get_dropdown_toggle(); ?>
 
-		<div <?php $c->get_dropdown_classes(); ?> <?php $c->get_dropdown_attrs(); ?>>
-			<div <?php $c->get_tablist_classes(); ?> <?php $c->get_tablist_attrs(); ?>>
+		<div <?php echo $c->get_dropdown_classes(); ?> <?php echo $c->get_dropdown_attrs(); ?>>
+			<div <?php echo $c->get_tablist_classes(); ?> <?php echo $c->get_tablist_attrs(); ?>>
 				<?php foreach ( $c->get_tab_buttons() as $button ) {
 					echo $button;
 				} ?>

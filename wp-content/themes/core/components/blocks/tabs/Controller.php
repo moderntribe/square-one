@@ -10,13 +10,13 @@ use Tribe\Project\Templates\Components\Deferred_Component;
 
 class Controller extends Abstract_Controller {
 
-	public $layout;
-	public $title;
-	public $description;
-	public $tabs;
-	public $classes;
-	public $attrs;
-	public $container_classes;
+	private $layout;
+	private $title;
+	private $description;
+	private $tabs;
+	private $classes;
+	private $attrs;
+	private $container_classes;
 
 	public function __construct( array $args = [] ) {
 		$args = wp_parse_args( $args, $this->default() );
@@ -45,7 +45,7 @@ class Controller extends Abstract_Controller {
 			'tabs'              => [],
 			'classes'           => [],
 			'attrs'             => [],
-			'container_classes' => 'l-container',
+			'container_classes' => [ 'l-container' ],
 		];
 	}
 
@@ -54,7 +54,7 @@ class Controller extends Abstract_Controller {
 	 */
 	protected function required(): array {
 		return [
-			'classes'           => [ 'c-block', 'b-tabs', 'c-block--' . $this->layout ],
+			'classes'           => [ 'c-block', 'b-tabs' ],
 			'container_classes' => [ 'b-tabs__container' ],
 		];
 	}
@@ -74,8 +74,13 @@ class Controller extends Abstract_Controller {
 		return tribe_template_part( 'components/content_block/content_block', null, $args );
 	}
 
-	public function get_tabs(): array {
-		return [];
+	public function get_tabs(): string {
+		$args = [
+			'tabs' => $this->tabs,
+			'layout' => $this->layout,
+		];
+
+		return tribe_template_part( 'components/tabs/tabs', null, $args );
 	}
 
 	private function get_title(): Deferred_Component {
@@ -85,7 +90,7 @@ class Controller extends Abstract_Controller {
 			'content' => $this->title,
 		];
 
-		return defer_template_part( 'component/text/text', null, $args );
+		return defer_template_part( 'components/text/text', null, $args );
 	}
 
 	private function get_description(): Deferred_Component {
@@ -94,7 +99,7 @@ class Controller extends Abstract_Controller {
 			'content' => $this->title,
 		];
 
-		return defer_template_part( 'component/text/text', null, $args );
+		return defer_template_part( 'components/text/text', null, $args );
 	}
 
 	/**
@@ -108,6 +113,7 @@ class Controller extends Abstract_Controller {
 	 * @return string
 	 */
 	public function classes(): string {
+		$this->classes[] = sprintf(  'c-block--layout-%s', $this->layout );
 		return Markup_Utils::class_attribute( $this->classes );
 	}
 

@@ -4,7 +4,7 @@ namespace Tribe\Project\Templates\Components\tabs;
 
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
-use Tribe\Project\Templates\Models\Tab;
+use Tribe\Project\Templates\Models\Tab as Tab_Model;
 
 /**
  * Class Controller
@@ -16,7 +16,7 @@ class Controller extends Abstract_Controller {
 	public const LAYOUT_VERTICAL   = 'vertical';
 
 	/**
-	 * @var Tab[] The collection of tabs to render. Each item should be a \Tribe\Project\Templates\Models\Tab object.
+	 * @var Tab_Model[] The collection of tabs to render. Each item should be a \Tribe\Project\Templates\Models\Tab object.
 	 */
 	private $tabs;
 
@@ -112,7 +112,7 @@ class Controller extends Abstract_Controller {
 			'classes'            => [ 'c-tabs' ],
 			'attrs'              => [ 'data-js' => 'c-tabs' ],
 			'toggle_classes'     => [ 'c-tabs__tablist-toggle' ],
-			'tab_button_classes' => [ 'c-tabs__tabbutton' ],
+			'tab_button_classes' => [ 'c-tabs__tab' ],
 			'tab_panel_classes'  => [ 'c-tabs__tabpanel' ],
 		];
 	}
@@ -156,18 +156,18 @@ class Controller extends Abstract_Controller {
 	/**
 	 * Renders and individual tab list "tab" button.
 	 *
-	 * @param array  $tab
-	 * @param string $tab_id
-	 * @param int    $index
+	 * @param Tab_Model $tab
+	 * @param string    $tab_id
+	 * @param int       $index
 	 *
 	 * @return string
 	 */
-	private function get_tab_button( array $tab, string $tab_id, int $index ): string {
+	private function get_tab_button( Tab_Model $tab, string $tab_id, int $index ): string {
 		$args = [
-			'content' => $tab->label ?? sprintf( __( 'Tab %d', 'tribe' ), $index + 1 ),
+			'content' => $tab->label ?: sprintf( __( 'Tab %d', 'tribe' ), $index + 1 ),
 			'classes' => $this->tab_button_classes,
 			'attrs'   => [
-				'id'            => sprintf( 'c-tabs__tabbutton--%s', $tab_id ),
+				'id'            => sprintf( 'c-tabs__tab--%s', $tab_id ),
 				'aria-controls' => sprintf( 'c-tabs__tabpanel--%s', $tab_id ),
 				'aria-selected' => $index === 0 ? 'true' : 'false',
 				'data-js'       => 'c-tabs__button',
@@ -185,19 +185,19 @@ class Controller extends Abstract_Controller {
 	/**
 	 * Renders an individual tab content, the "tabpanel".
 	 *
-	 * @param array  $tab
-	 * @param string $tab_id
-	 * @param int    $index
+	 * @param Tab_Model $tab
+	 * @param string    $tab_id
+	 * @param int       $index
 	 *
 	 * @return string
 	 */
-	private function get_tab_panel( array $tab, string $tab_id, int $index ): string {
+	private function get_tab_panel( Tab_Model $tab, string $tab_id, int $index ): string {
 		$args = [
 			'content' => $tab->content ?? '',
 			'classes' => $this->tab_panel_classes,
 			'attrs'   => [
 				'id'              => sprintf( 'c-tabs__tabpanel--%s', $tab_id ),
-				'aria-labelledby' => sprintf( 'c-tabs__tabbutton--%s', $tab_id ),
+				'aria-labelledby' => sprintf( 'c-tabs__tab--%s', $tab_id ),
 				'role'            => 'tabpanel',
 				'tabindex'        => '0',
 			],
@@ -254,7 +254,7 @@ class Controller extends Abstract_Controller {
 	 * @return string
 	 */
 	public function get_tablist_attrs(): string {
-		return Markup_Utils::concat_attrs( [ 'aria-orientation' => $this->layout ] );
+		return Markup_Utils::concat_attrs( [ 'aria-orientation' => $this->layout, 'role' => 'tablist' ] );
 	}
 
 	/**

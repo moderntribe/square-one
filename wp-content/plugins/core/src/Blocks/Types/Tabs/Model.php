@@ -52,7 +52,7 @@ class Model extends Base_Model {
 	 */
 	private function get_tabs(): array {
 		$tab_objects = [];
-		$tabs_data   = $this->get( Tabs_Block::TABS );
+		$tabs_data   = get_field( Tabs_Block::TABS );//$this->get( Tabs_Block::TABS );
 
 		foreach ( $tabs_data as $tab ) {
 			$tab_objects[] = new Tab_Model( $tab[ Tabs_Block::TAB_LABEL ], $tab[ Tabs_Block::TAB_CONTENT ] );
