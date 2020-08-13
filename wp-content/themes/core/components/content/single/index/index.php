@@ -30,7 +30,7 @@ $c = \Tribe\Project\Templates\Components\content\single\index\Controller::factor
 
 		</ul>
 
-		<?php get_template_part('components/share/share') ?>
+		<?php get_template_part( 'components/share/share' ) ?>
 
 	</footer>
 
