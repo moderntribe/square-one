@@ -88,6 +88,10 @@ class Controller extends Abstract_Controller {
 		];
 	}
 
+	public function tag(): string {
+		return tag_escape( $this->tag );
+	}
+
 	public function classes(): string {
 		return Markup_Utils::class_attribute( $this->classes );
 	}
@@ -98,33 +102,33 @@ class Controller extends Abstract_Controller {
 
 	public function render_leadin() {
 		$this->leadin['classes'][] = 'c-content-block__leadin';
-		$this->leadin['classes'][] = 'h6';
 
 		return $this->leadin;
 	}
 
 	public function render_title() {
-		if ( empty( $this->leadin['tag'] ) ) {
-			$this->leadin['tag'] = 'h2';
+		if ( empty( $this->title['tag'] ) ) {
+			$this->title['tag'] = 'h2';
 		}
 
-		$this->leadin['classes'][] = 'c-content-block__title';
+		$this->title['classes'][] = 'c-content-block__title';
 
 		return $this->title;
 	}
 
 	public function render_content() {
-		$this->leadin['classes'][] = 'c-content-block__content';
-		$this->leadin['classes'][] = 't-sink';
-		$this->leadin['classes'][] = 's-sink';
+		$this->content['tag']       = 'div';
+		$this->content['classes'][] = 'c-content-block__content';
+		$this->content['classes'][] = 't-sink';
+		$this->content['classes'][] = 's-sink';
 
 		return $this->content;
 	}
 
 	public function render_cta() {
-		$this->leadin['classes'][]                = 'c-content-block__cta-link';
-		$this->leadin['wrapper_tag']              = 'p';
-		$this->leadin['wrapper_tag']['classes'][] = 'c-content-block__cta';
+		$this->cta['classes'][]                = 'c-content-block__cta-link';
+		$this->cta['wrapper_tag']              = 'p';
+		$this->cta['wrapper_tag']['classes'][] = 'c-content-block__cta';
 
 		return $this->cta;
 	}
