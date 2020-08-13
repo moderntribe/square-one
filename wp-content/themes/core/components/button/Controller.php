@@ -102,13 +102,13 @@ class Controller extends Abstract_Controller {
 		if ( empty( $this->wrapper_tag ) ) {
 			return '';
 		}
-		return sprintf( '<%s%s %s>', $this->wrapper_tag, Markup_Utils::class_attribute( $this->wrapper_classes ), Markup_Utils::concat_attrs( $this->wrapper_attrs ) );
+		return sprintf( '<%s%s %s>', tag_escape( $this->wrapper_tag ), Markup_Utils::class_attribute( $this->wrapper_classes ), Markup_Utils::concat_attrs( $this->wrapper_attrs ) );
 	}
 
 	public function wrapper_tag_close(): string {
 		if ( empty( $this->wrapper_tag ) ) {
 			return '';
 		}
-		return sprintf( '</%s>', $this->wrapper_tag );
+		return sprintf( '</%s>', tag_escape( $this->wrapper_tag ) );
 	}
 }

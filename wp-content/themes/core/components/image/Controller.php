@@ -278,7 +278,7 @@ class Controller extends Abstract_Controller {
 			$tag = $this->as_bg ? 'div' : 'figure';
 		}
 
-		return esc_attr( $tag );
+		return tag_escape( $tag );
 	}
 
 	public function classes(): string {

@@ -12,9 +12,9 @@ if ( empty( $c->content ) ) {
 }
 ?>
 
-<<?php echo $c->tag; ?>
+<<?php echo $c->tag(); ?>
 	<?php echo $c->classes(); ?>
 	<?php echo $c->attributes(); ?>
 >
 	<?php echo $c->content; ?>
-</<?php echo $c->tag; ?>>
+</<?php echo $c->tag(); ?>>

@@ -50,6 +50,10 @@ class Controller extends Abstract_Controller {
 		return [];
 	}
 
+	public function tag(): string {
+		return tag_escape( $this->tag );
+	}
+
 	public function classes(): string {
 		return Markup_Utils::class_attribute( $this->classes );
 	}
