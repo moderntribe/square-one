@@ -75,10 +75,10 @@ class Controller extends Abstract_Controller {
 			'classes' => [],
 			'attrs'   => [],
 			'layout'  => self::LAYOUT_LEFT,
-			'leadin'  => null,
-			'title'   => null,
-			'content' => null,
-			'cta'     => null,
+			'leadin'  => [],
+			'title'   => [],
+			'content' => [],
+			'cta'     => [],
 		];
 	}
 
@@ -101,12 +101,20 @@ class Controller extends Abstract_Controller {
 	}
 
 	public function render_leadin() {
+		if ( empty( $this->leadin ) ) {
+			return '';
+		}
+
 		$this->leadin['classes'][] = 'c-content-block__leadin';
 
 		return $this->leadin;
 	}
 
 	public function render_title() {
+		if ( empty( $this->title ) ) {
+			return '';
+		}
+
 		if ( empty( $this->title['tag'] ) ) {
 			$this->title['tag'] = 'h2';
 		}
@@ -117,6 +125,10 @@ class Controller extends Abstract_Controller {
 	}
 
 	public function render_content() {
+		if ( empty( $this->content ) ) {
+			return '';
+		}
+
 		$this->content['tag']       = 'div';
 		$this->content['classes'][] = 'c-content-block__content';
 		$this->content['classes'][] = 't-sink';
@@ -126,6 +138,10 @@ class Controller extends Abstract_Controller {
 	}
 
 	public function render_cta() {
+		if ( empty( $this->cta ) ) {
+			return '';
+		}
+
 		$this->cta['classes'][]         = 'c-content-block__cta-link';
 		$this->cta['wrapper_tag']       = 'p';
 		$this->cta['wrapper_classes'][] = 'c-content-block__cta';
