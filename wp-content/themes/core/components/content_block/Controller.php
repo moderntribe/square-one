@@ -84,7 +84,7 @@ class Controller extends Abstract_Controller {
 
 	protected function required(): array {
 		return [
-			'classes' => [ 'c-content-block', 'c-content-block--layout-' . $this->layout ],
+			'classes' => [ 'c-content-block' ],
 		];
 	}
 
@@ -93,6 +93,7 @@ class Controller extends Abstract_Controller {
 	}
 
 	public function classes(): string {
+		$this->classes[] = sprintf( 'c-content-block--layout-%s', $this->layout );
 		return Markup_Utils::class_attribute( $this->classes );
 	}
 
