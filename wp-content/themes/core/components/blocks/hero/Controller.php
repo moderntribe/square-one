@@ -76,6 +76,9 @@ class Controller extends Abstract_Controller {
 		$this->init();
 	}
 
+	/**
+	 * @return array
+	 */
 	protected function defaults(): array {
 		return [
 			'layout'            => Hero_Block::LAYOUT_LEFT,
@@ -93,12 +96,16 @@ class Controller extends Abstract_Controller {
 		];
 	}
 
+	/**
+	 * @return array
+	 */
 	protected function required(): array {
-		return [
-
-		];
+		return [];
 	}
 
+	/**
+	 * Any required setup stuff
+	 */
 	protected function init() {
 		$this->classes[] = 'c-block--' . $this->layout;
 	}
@@ -113,14 +120,20 @@ class Controller extends Abstract_Controller {
 			return '';
 		}
 
-		return tribe_template_part('components/content_block/content_block', null, [
+		return tribe_template_part( 'components/content_block/content_block', null, [
 			'classes' => [ 'b-hero__content-container', 't-theme--light' ],
-			'leadin'  => $content[ Hero::LEAD_IN ] ?? '',
-			'title'   => $content[ Hero::TITLE ] ?? '',
-			'text'    => $content[ Hero::DESCRIPTION ] ?? '',
-			'action'  => $content[ Hero::CTA ] ?? [],
+			'leadin'  => defer_template_part( 'components/text/text', null, [
+				'content' => $content[ Hero::LEAD_IN ] ?? '',
+			] ),
+			'title'   => defer_template_part( 'components/text/text', null, [
+				'content' => $content[ Hero::TITLE ] ?? '',
+			] ),
+			'content' => defer_template_part( 'components/container/container', null, [
+				'content' => $content[ Hero::DESCRIPTION ] ?? '',
+			] ),
+			'cta'  => defer_template_part( 'components/link/link', null, $content[ Hero::CTA ] ?? [] ),
 			'layout'  => $this->layout,
-		]);
+		] );
 	}
 
 	/**
