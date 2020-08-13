@@ -6,7 +6,6 @@ namespace Tribe\Project\Templates\Components\blocks\hero;
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Blocks\Types\Hero\Hero as Hero_Block;
 use Tribe\Project\Blocks\Types\Hero\Hero;
-use Tribe\Project\Blocks\Types\Hero\Model;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Models\Image;
 use Tribe\Project\Theme\Config\Image_Sizes;
@@ -32,27 +31,27 @@ class Controller extends Abstract_Controller {
 	public $content;
 
 	/**
-	 * @var string[]
+	 * @var array
 	 */
 	public $container_classes;
 
 	/**
-	 * @var string[]
+	 * @var array
 	 */
 	public $media_classes;
 
 	/**
-	 * @var string[]
+	 * @var array
 	 */
 	public $content_classes;
 
 	/**
-	 * @var string []
+	 * @var array
 	 */
 	public $classes;
 
 	/**
-	 * @var string []
+	 * @var array
 	 */
 	public $attrs;
 
@@ -61,61 +60,80 @@ class Controller extends Abstract_Controller {
 	 * @param array $args
 	 */
 	public function __construct( array $args = [] ) {
-		$this->layout            = $args[ 'layout' ] ?? Hero_Block::LAYOUT_LEFT;
-		$this->media             = $this->get_media( $args );
-		$this->content           = $this->get_content( $args );
-		$this->container_classes = (array) ( $args[ 'container_classes' ] ?? [ 'b-hero__container', 'l-container' ] );
-		$this->media_classes     = (array) ( $args[ 'media_classes' ] ?? [ 'b-hero__media' ] );
-		$this->content_classes   = (array) ( $args[ 'content_classes' ] ?? [ 'b-hero__content' ] );
-		$this->classes           = (array) ( $args[ 'classes' ] ?? [
+		$args = wp_parse_args( $args, $this->defaults() );
+		foreach ( $this->required() as $key => $value ) {
+			$args[ $key ] = array_merge( $args[ $key ], $value );
+		}
+
+		$this->layout            = $args[ 'layout' ];
+		$this->media             = $this->get_image( $args[ 'media' ] );
+		$this->content           = $this->get_content( $args[ 'content' ] );
+		$this->container_classes = (array) $args[ 'container_classes' ];
+		$this->media_classes     = (array) $args[ 'media_classes' ];
+		$this->content_classes   = (array) $args[ 'content_classes' ];
+		$this->classes           = (array) $args[ 'classes' ];
+		$this->attrs             = (array) $args[ 'attrs' ];
+		$this->init();
+	}
+
+	protected function defaults(): array {
+		return [
+			'layout'            => Hero_Block::LAYOUT_LEFT,
+			'media'             => [],
+			'content'           => [],
+			'container_classes' => [ 'b-hero__container', 'l-container' ],
+			'media_classes'     => [ 'b-hero__media' ],
+			'content_classes'   => [ 'b-hero__content' ],
+			'classes'           => [
 				'c-block',
 				'b-hero',
 				'c-block--full-bleed',
-				'c-block--' . $this->layout,
-			] );
-		$this->attrs             = (array) ( $args[ 'attrs' ] ?? [] );
-	}
-
-	/**
-	 * @param array $args
-	 *
-	 * @return array
-	 */
-	protected function get_content( $args ): array {
-		if ( ! isset( $args[ 'content' ] ) || empty( $args[ 'content' ] ) ) {
-			return [];
-		}
-
-		return [
-			'classes' => [ 'b-hero__content-container', 't-theme--light' ],
-			'leadin'  => $args[ 'content' ][ Model::LEAD_IN ] ?? '',
-			'title'   => $args[ 'content' ][ Model::TITLE ] ?? '',
-			'text'    => $args[ 'content' ][ Model::TEXT ] ?? '',
-			'action'  => $args[ 'content' ][ Model::CTA ] ?? [],
-			'layout'  => $this->layout,
+			],
+			'attrs'             => [],
 		];
 	}
 
+	protected function required(): array {
+		return [
+
+		];
+	}
+
+	protected function init() {
+		$this->classes[] = 'c-block--' . $this->layout;
+	}
+
 	/**
 	 * @param array $args
 	 *
-	 * @return array
+	 * @return string
 	 */
-	protected function get_media( $args ): array {
-		if ( ! isset( $args[ 'media' ] ) ) {
-			return [];
+	protected function get_content( $content ): string {
+		if ( empty( $content ) ) {
+			return '';
 		}
 
-		return $this->get_image( $args[ 'media' ] );
+		return tribe_template_part('components/content_block/content_block', null, [
+			'classes' => [ 'b-hero__content-container', 't-theme--light' ],
+			'leadin'  => $content[ Hero::LEAD_IN ] ?? '',
+			'title'   => $content[ Hero::TITLE ] ?? '',
+			'text'    => $content[ Hero::DESCRIPTION ] ?? '',
+			'action'  => $content[ Hero::CTA ] ?? [],
+			'layout'  => $this->layout,
+		]);
 	}
 
 	/**
 	 * @param $attachment_id
 	 *
-	 * @return array
+	 * @return string
 	 */
-	protected function get_image( $attachment_id ): array {
-		return [
+	protected function get_image( $attachment_id ): string {
+		if ( empty( $attachment_id ) ) {
+			return '';
+		}
+
+		return tribe_template_part( 'components/image/image', null, [
 			'attachment'    => Image::factory( (int) $attachment_id ),
 			'as_bg'         => true,
 			'use_lazyload'  => true,
@@ -127,7 +145,7 @@ class Controller extends Abstract_Controller {
 				Image_Sizes::CORE_FULL,
 				Image_Sizes::CORE_MOBILE,
 			],
-		];
+		] );
 	}
 
 	/**
