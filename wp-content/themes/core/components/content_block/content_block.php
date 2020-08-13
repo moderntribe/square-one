@@ -8,7 +8,7 @@ declare( strict_types=1 );
 $c = \Tribe\Project\Templates\Components\content_block\Controller::factory( $args );
 ?>
 
-<<?php echo $c->tag; ?>
+<<?php echo $c->tag(); ?>
 	<?php echo $c->classes(); ?>
 	<?php echo$c->attributes(); ?>
 >
@@ -21,4 +21,4 @@ $c = \Tribe\Project\Templates\Components\content_block\Controller::factory( $arg
 
 	<?php echo $c->render_cta(); ?>
 
-</<?php echo $c->tag; ?>>
+</<?php echo $c->tag(); ?>>
