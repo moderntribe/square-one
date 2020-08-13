@@ -10,10 +10,10 @@ $c = \Tribe\Project\Templates\Components\comments\comment\Controller::factory( $
 
 	<header class="comment__header">
 
-		<?php echo $c->gravatar; ?>
+		<?php echo $c->get_gravatar(); ?>
 
 		<h5 class="comment__title" rel="author">
-			<cite><?php echo esc_html( $c->author ); ?></cite>
+			<cite><?php echo esc_html(  get_comment_author( $c->comment_id ) ); ?></cite>
 		</h5>
 
 		<time class="comment__time" datetime="<?php echo esc_attr( $c->time[ 'c' ] ); ?> ">
@@ -30,15 +30,11 @@ $c = \Tribe\Project\Templates\Components\comments\comment\Controller::factory( $
 			</p>
 		<?php } ?>
 
-		<?php echo wp_kses_post( $c->comment_text ); ?>
+		<?php echo wp_kses_post( get_comment_text( $c->comment_id ) ); ?>
 
 	</div><!-- .comment-text -->
 
-	<?php if ( ! empty( $c->moderation_message ) ) { ?>
-		<p class="comment__message-moderation">
-			<?php echo esc_html( $c->moderation_message ); ?>
-		</p>
-	<?php } ?>
+	<?php echo $c->get_moderation_message() ; ?>
 
 	<?php if ( ! empty( $c->reply_link ) ) { ?>
 		<p class="comment__action-reply">

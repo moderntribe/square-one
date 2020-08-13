@@ -33,5 +33,5 @@ $controller = \Tribe\Project\Templates\Components\content\single\index\Controlle
 		<?php //TODO: Share Component ?>
 
 	</footer>
-
+	<?php comments_template(); ?>
 </article>

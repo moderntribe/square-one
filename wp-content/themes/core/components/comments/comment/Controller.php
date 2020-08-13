@@ -3,7 +3,6 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Templates\Components\comments\comment;
 
-
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 
@@ -30,37 +29,12 @@ class Controller extends Abstract_Controller {
 	/**
 	 * @var string
 	 */
-	public $author;
-
-	/**
-	 * @var string
-	 */
 	public $edit_link;
 
 	/**
 	 * @var string
 	 */
-	public $gravatar;
-
-	/**
-	 * @var string
-	 */
-	public $comment_text;
-
-	/**
-	 * @var string
-	 */
-	public $moderation_message;
-
-	/**
-	 * @var string
-	 */
 	public $reply_link;
-
-	/**
-	 * @var string
-	 */
-	public $timestamp;
 
 	/**
 	 * @var array
@@ -77,17 +51,12 @@ class Controller extends Abstract_Controller {
 		foreach ( $this->required() as $key => $value ) {
 			$args[ $key ] = array_merge( $args[ $key ], $value );
 		}
-		$this->comment_id         = $args[ 'comment_id' ];
-		$this->classes            = (array) $args[ 'classes' ];
-		$this->attrs              = (array) $args[ 'attrs' ];
-		$this->author             = $args[ 'author' ];
-		$this->edit_link          = $args[ 'edit_link' ];
-		$this->gravatar           = $args[ 'gravatar' ];
-		$this->comment_text       = $args[ 'comment_text' ];
-		$this->moderation_message = $args[ 'moderation_message' ];
-		$this->reply_link         = $args[ 'rely_link' ];
-		$this->timestamp          = $args[ 'timestamp' ];
-		$this->time               = (array) $args[ 'time' ];
+		$this->comment_id = $args[ 'comment_id' ];
+		$this->classes    = (array) $args[ 'classes' ];
+		$this->attrs      = (array) $args[ 'attrs' ];
+		$this->edit_link  = $args[ 'edit_link' ];
+		$this->reply_link = $args[ 'rely_link' ];
+		$this->time       = (array) $args[ 'time' ];
 	}
 
 	/**
@@ -95,17 +64,12 @@ class Controller extends Abstract_Controller {
 	 */
 	protected function defaults(): array {
 		return [
-			'comment_id'         => 0,
-			'classes'            => [],
-			'attrs'              => [],
-			'author'             => '',
-			'edit_link'          => '',
-			'gravatar'           => '',
-			'comment_text'       => '',
-			'moderation_message' => '',
-			'reply_link'         => '',
-			'timestamp'          => 0,
-			'time'               => [],
+			'comment_id' => 0,
+			'classes'    => [],
+			'attrs'      => [],
+			'edit_link'  => '',
+			'reply_link' => '',
+			'time'       => [],
 		];
 	}
 
@@ -113,15 +77,18 @@ class Controller extends Abstract_Controller {
 	 * @return array
 	 */
 	protected function required(): array {
+		$timestamp = get_comment_time( 'U' );
+
 		return [
-			'attrs' => [
-				'id' => sprintf( 'comment-%d', $this->comment_id ),
-			],
-			'time'  => [
-				'c'              => date( 'c', $this->timestamp ),
-				'g:i A - M j, Y' => date( 'g:i A - M j, Y', $this->timestamp ),
+			'time' => [
+				'c'              => date( 'c', $timestamp ),
+				'g:i A - M j, Y' => date( 'g:i A - M j, Y', $timestamp ),
 			],
 		];
+	}
+
+	public function init() {
+		$this->attrs[ 'id' ] = sprintf( 'comment-%d', $this->comment_id );
 	}
 
 	/**
@@ -138,4 +105,26 @@ class Controller extends Abstract_Controller {
 		return Markup_Utils::concat_attrs( $this->attrs );
 	}
 
+	/**
+	 * @return bool|mixed|string|void
+	 */
+	public function get_gravatar() {
+		$gravatar = get_avatar( $this->comment_id, 150 );
+		if ( ! $gravatar ) {
+			return '';
+		}
+
+		return $gravatar;
+	}
+
+	public function get_moderation_message() {
+		$status = wp_get_comment_status( $this->comment_id );
+
+		return 'unapproved' === $status ? tribe_template_part( 'components/text/text', null, [
+				'content' => __( 'Your comment is awaiting moderation.', 'tribe' ),
+				'classes' => [ 'comment__message-moderation ' ],
+			]
+		)
+			: '';
+	}
 }
