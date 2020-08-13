@@ -55,7 +55,7 @@ class Controller extends Abstract_Controller {
 		$this->classes    = (array) $args[ 'classes' ];
 		$this->attrs      = (array) $args[ 'attrs' ];
 		$this->edit_link  = $args[ 'edit_link' ];
-		$this->reply_link = $args[ 'rely_link' ];
+		$this->reply_link = $args[ 'reply_link' ];
 		$this->time       = (array) $args[ 'time' ];
 	}
 
