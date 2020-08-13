@@ -63,7 +63,7 @@ class Controller extends Abstract_Controller {
 	 * @param array       $args
 	 * @param int         $depth
 	 *
-	 * @return void
+	 * @return string
 	 */
 	public function render_comment( $comment, $args, $depth ): void {
 		$classes = get_comment_class( [], $comment, $comment->comment_post_ID );
@@ -72,7 +72,7 @@ class Controller extends Abstract_Controller {
 			$label = $comment->comment_type === 'pingback' ? __( 'Pingback:', 'tribe' ) : __( 'Trackback:', 'tribe' );
 			$edit  = $this->comment_edit_link( $comment->comment_ID, __( '(Edit)', 'tribe' ) );
 
-			return tribe_template_part( 'components/comments/trackback/trackback', null, [
+			get_template_part( 'components/comments/trackback/trackback', null, [
 				'comment_id' => $comment->comment_ID,
 				'label'      => $label,
 				'edit_link'  => $edit,
@@ -80,7 +80,7 @@ class Controller extends Abstract_Controller {
 			] );
 		}
 
-		return tribe_template_part( 'components/comments/comment/comment', null, [
+		get_template_part( 'components/comments/comment/comment', null, [
 			'comment_id' => $comment->comment_ID,
 			'edit_link'  => $this->comment_edit_link( $comment->comment_ID, __( 'Edit Comment', 'tribe' ) ),
 			'classes'    => $classes,
