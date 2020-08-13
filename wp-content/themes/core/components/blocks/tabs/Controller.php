@@ -76,8 +76,9 @@ class Controller extends Abstract_Controller {
 
 	public function get_tabs(): string {
 		$args = [
-			'tabs'   => $this->tabs,
-			'layout' => $this->layout,
+			'tabs'    => $this->tabs,
+			'layout'  => $this->layout,
+			'classes' => [ 'b-tabs__content' ],
 		];
 
 		return tribe_template_part( 'components/tabs/tabs', null, $args );
