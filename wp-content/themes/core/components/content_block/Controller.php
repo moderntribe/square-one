@@ -126,9 +126,9 @@ class Controller extends Abstract_Controller {
 	}
 
 	public function render_cta() {
-		$this->cta['classes'][]                = 'c-content-block__cta-link';
-		$this->cta['wrapper_tag']              = 'p';
-		$this->cta['wrapper_tag']['classes'][] = 'c-content-block__cta';
+		$this->cta['classes'][]         = 'c-content-block__cta-link';
+		$this->cta['wrapper_tag']       = 'p';
+		$this->cta['wrapper_classes'][] = 'c-content-block__cta';
 
 		return $this->cta;
 	}
