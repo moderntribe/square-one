@@ -4,8 +4,6 @@ declare( strict_types=1 );
 namespace Tribe\Project\Templates\Components\blocks\hero;
 
 use Tribe\Libs\Utils\Markup_Utils;
-use Tribe\Project\Blocks\Types\Hero\Hero as Hero_Block;
-use Tribe\Project\Blocks\Types\Hero\Hero;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Models\Image;
 use Tribe\Project\Theme\Config\Image_Sizes;
@@ -28,7 +26,22 @@ class Controller extends Abstract_Controller {
 	/**
 	 * @var string
 	 */
-	public $content;
+	public $description;
+
+	/**
+	 * @var string
+	 */
+	public $title;
+
+	/**
+	 * @var string
+	 */
+	public $leadin;
+
+	/**
+	 * @var array
+	 */
+	public $cta;
 
 	/**
 	 * @var array
@@ -67,7 +80,10 @@ class Controller extends Abstract_Controller {
 
 		$this->layout            = $args[ 'layout' ];
 		$this->media             = $this->get_image( $args[ 'media' ] );
-		$this->content           = $this->get_content( $args[ 'content' ] );
+		$this->title             = $args[ 'title' ];
+		$this->description       = $args[ 'description' ];
+		$this->cta               = (array) $args[ 'cta' ];
+		$this->leadin            = $args[ 'leadin' ];
 		$this->container_classes = (array) $args[ 'container_classes' ];
 		$this->media_classes     = (array) $args[ 'media_classes' ];
 		$this->content_classes   = (array) $args[ 'content_classes' ];
@@ -81,9 +97,12 @@ class Controller extends Abstract_Controller {
 	 */
 	protected function defaults(): array {
 		return [
-			'layout'            => Hero_Block::LAYOUT_LEFT,
+			'layout'            => 'left',
 			'media'             => [],
-			'content'           => [],
+			'title'             => '',
+			'description'       => '',
+			'leadin'            => '',
+			'cta'               => [],
 			'container_classes' => [ 'b-hero__container', 'l-container' ],
 			'media_classes'     => [ 'b-hero__media' ],
 			'content_classes'   => [ 'b-hero__content' ],
@@ -115,23 +134,19 @@ class Controller extends Abstract_Controller {
 	 *
 	 * @return string
 	 */
-	protected function get_content( $content ): string {
-		if ( empty( $content ) ) {
-			return '';
-		}
-
+	public function get_content( ): string {
 		return tribe_template_part( 'components/content_block/content_block', null, [
 			'classes' => [ 'b-hero__content-container', 't-theme--light' ],
 			'leadin'  => defer_template_part( 'components/text/text', null, [
-				'content' => $content[ Hero::LEAD_IN ] ?? '',
+				'content' => $this->leadin,
 			] ),
 			'title'   => defer_template_part( 'components/text/text', null, [
-				'content' => $content[ Hero::TITLE ] ?? '',
+				'content' =>$this->title,
 			] ),
 			'content' => defer_template_part( 'components/container/container', null, [
-				'content' => $content[ Hero::DESCRIPTION ] ?? '',
+				'content' => $this->description,
 			] ),
-			'cta'  => defer_template_part( 'components/link/link', null, $content[ Hero::CTA ] ?? [] ),
+			'cta'     => defer_template_part( 'components/link/link', null, $this->cta ?? [] ),
 			'layout'  => $this->layout,
 		] );
 	}
