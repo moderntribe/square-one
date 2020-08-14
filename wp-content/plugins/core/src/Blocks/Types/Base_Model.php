@@ -24,10 +24,6 @@ class Base_Model {
 	 * @return bool|mixed
 	 */
 	public function get( $key, $default = false ) {
-		//The ACF $block['data'] array keys are different in preview mode and edit mode.
-		//This accounts for getting data in both modes.
-		$real_key = $this->mode === 'preview' ? 'field_' . $this->name . '_' . $key : $key;
-
-		return $this->data[ $real_key ] ?? $default;
+		return get_field( $key ) ?? $default;
 	}
 }
