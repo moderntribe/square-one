@@ -98,6 +98,9 @@ class Controller extends Abstract_Controller {
 		];
 	}
 
+	/**
+	 * Initial setup stuff
+	 */
 	public function init() {
 		$this->classes[] = 'c-block--' . $this->layout;
 
@@ -156,6 +159,9 @@ class Controller extends Abstract_Controller {
 		return Markup_Utils::class_attribute( $this->content_classes );
 	}
 
+	/**
+	 * Render the header/content-block
+	 */
 	public function render_header() {
 		$args = [
 			'title'   => defer_template_part( 'components/text/text', null, [
@@ -172,6 +178,9 @@ class Controller extends Abstract_Controller {
 		get_template_part( 'components/content_block/content_block', null, $args );
 	}
 
+	/**
+	 * Render the content/accordion component
+	 */
 	public function render_content() {
 		$args = [
 			'rows' => $this->rows,

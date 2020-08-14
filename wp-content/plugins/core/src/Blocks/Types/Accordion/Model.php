@@ -19,7 +19,10 @@ class Model extends Base_Model {
 		];
 	}
 
-	protected function get_accordion_rows() {
+	/**
+	 * @return array
+	 */
+	protected function get_accordion_rows(): array {
 		$rows = $this->get( Accordion::ACCORDION, [] );
 		$data = [];
 		foreach ( $rows as $row ) {
