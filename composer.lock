@@ -5121,16 +5121,16 @@
         },
         {
             "name": "lucatume/wp-browser",
-            "version": "2.6.6",
+            "version": "2.6.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lucatume/wp-browser.git",
-                "reference": "4f42d000acd44af3555ea7d6ead8d882d25154f2"
+                "reference": "0323640f8120900eac034ded2bd0cffb2ccbebfa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lucatume/wp-browser/zipball/4f42d000acd44af3555ea7d6ead8d882d25154f2",
-                "reference": "4f42d000acd44af3555ea7d6ead8d882d25154f2",
+                "url": "https://api.github.com/repos/lucatume/wp-browser/zipball/0323640f8120900eac034ded2bd0cffb2ccbebfa",
+                "reference": "0323640f8120900eac034ded2bd0cffb2ccbebfa",
                 "shasum": ""
             },
             "require": {
@@ -5200,7 +5200,7 @@
                 "codeception",
                 "wordpress"
             ],
-            "time": "2020-08-04T09:56:19+00:00"
+            "time": "2020-08-14T14:42:07+00:00"
         },
         {
             "name": "mck89/peast",
