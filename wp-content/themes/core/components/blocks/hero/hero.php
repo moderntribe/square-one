@@ -15,10 +15,8 @@ $c = \Tribe\Project\Templates\Components\blocks\hero\Controller::factory( $args 
 			</div>
 		<?php } ?>
 
-		<?php if ( ! empty( $c->content ) ) { ?>
-			<div <?php echo $c->content_classes(); ?>>
-				<?php echo $c->content; ?>
-			</div>
-		<?php } ?>
+		<div <?php echo $c->content_classes(); ?>>
+			<?php echo $c->get_content(); ?>
+		</div>
 	</div>
 </section>
