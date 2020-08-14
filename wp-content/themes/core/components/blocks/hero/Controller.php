@@ -134,14 +134,14 @@ class Controller extends Abstract_Controller {
 	 *
 	 * @return string
 	 */
-	public function get_content( ): string {
+	public function get_content(): string {
 		return tribe_template_part( 'components/content_block/content_block', null, [
 			'classes' => [ 'b-hero__content-container', 't-theme--light' ],
 			'leadin'  => defer_template_part( 'components/text/text', null, [
 				'content' => $this->leadin,
 			] ),
 			'title'   => defer_template_part( 'components/text/text', null, [
-				'content' =>$this->title,
+				'content' => $this->title,
 			] ),
 			'content' => defer_template_part( 'components/container/container', null, [
 				'content' => $this->description,
