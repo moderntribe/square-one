@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "63edad10f6766639c1b4a98eb2c834c7",
+    "content-hash": "7ee089363f4d3c753488dd843d82e483",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -20,16 +20,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.148.3",
+            "version": "3.149.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "04c268f63c915fe251954927713d506ed21c4b49"
+                "reference": "0ab4ac60f94d53d55f2c7374deb75d9a58961970"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/04c268f63c915fe251954927713d506ed21c4b49",
-                "reference": "04c268f63c915fe251954927713d506ed21c4b49",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/0ab4ac60f94d53d55f2c7374deb75d9a58961970",
+                "reference": "0ab4ac60f94d53d55f2c7374deb75d9a58961970",
                 "shasum": ""
             },
             "require": {
@@ -101,7 +101,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2020-08-12T18:16:38+00:00"
+            "time": "2020-08-13T18:10:50+00:00"
         },
         {
             "name": "clue/stream-filter",
@@ -271,16 +271,6 @@
                 "zikula"
             ],
             "time": "2017-08-09T07:53:48+00:00"
-        },
-        {
-            "name": "cyberwani/acf-image-select",
-            "version": "1.0",
-            "source": {
-                "type": "git",
-                "url": "git@github.com:cyberwani/acf-image-select.git",
-                "reference": "master"
-            },
-            "type": "wordpress-plugin"
         },
         {
             "name": "ffraenz/private-composer-installer",
@@ -1076,6 +1066,16 @@
                 "psr-3"
             ],
             "time": "2017-06-19T01:22:40+00:00"
+        },
+        {
+            "name": "msawicki/acf-image-select",
+            "version": "1.0",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:msawicki/ACF-Image-Select.git",
+                "reference": "master"
+            },
+            "type": "wordpress-plugin"
         },
         {
             "name": "mtdowling/jmespath.php",
@@ -4036,6 +4036,16 @@
                 "certificate",
                 "ssl",
                 "tls"
+            ],
+            "funding": [
+                {
+                    "url": "https://packagist.com",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/composer/composer",
+                    "type": "tidelift"
+                }
             ],
             "time": "2020-04-08T08:27:21+00:00"
         },

@@ -34,11 +34,11 @@
     {
       "type": "package",
       "package": {
-        "name": "cyberwani/acf-image-select",
+        "name": "msawicki/acf-image-select",
         "version": "1.0",
         "type": "wordpress-plugin",
         "source": {
-          "url": "git@github.com:cyberwani/acf-image-select.git",
+          "url": "git@github.com:msawicki/ACF-Image-Select.git",
           "type": "git",
           "reference": "master"
         }
@@ -79,7 +79,7 @@
     "php": "^7.2",
     "advanced-custom-fields/advanced-custom-fields-pro": "*",
     "composer/installers": "1.4.0",
-    "cyberwani/acf-image-select": "*",
+    "msawicki/acf-image-select": "*",
     "gravityforms/gravityforms": "*",
     "guzzlehttp/psr7": "^1.4",
     "humanmade/mercator": "dev-master#7f3846a",
