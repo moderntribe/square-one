@@ -50,7 +50,7 @@ class Comments_Pagination_Controller extends Abstract_Controller {
 	 * @return bool
 	 */
 	public function is_paged() {
-		return $this->paged;
+		return $this->paged && $this->max_pages > 1;
 	}
 
 	public function classes(): string {
@@ -68,10 +68,13 @@ class Comments_Pagination_Controller extends Abstract_Controller {
 
 		$prev_page = $this->comment_page - 1;
 
-		return tribe_template_part( 'components/link/link', null, [
-			'classes' => [],
-			'content' => __( '&larr; Older Comments' ),
-			'url'     => esc_url( get_comments_pagenum_link( $prev_page ) ),
+		return tribe_template_part( 'components/container/container', null, [
+			'tag'     => 'li',
+			'content' => defer_template_part( 'components/link/link', null, [
+				'classes' => [],
+				'content' => __( '&larr; Older Comments' ),
+				'url'     => esc_url( get_comments_pagenum_link( $prev_page ) ),
+			] ),
 		] );
 	}
 
@@ -85,10 +88,13 @@ class Comments_Pagination_Controller extends Abstract_Controller {
 			return '';
 		}
 
-		return tribe_template_part( 'components/link/link', null, [
-			'classes' => [],
-			'content' => __( 'Newer Comments &rarr;', 'tribe' ),
-			'url'     => esc_url( get_comments_pagenum_link( $next_page, $this->max_pages ) ),
+		return tribe_template_part( 'components/container/container', null, [
+			'tag'     => 'li',
+			'content' => defer_template_part( 'components/link/link', null, [
+				'classes' => [],
+				'content' => __( 'Newer Comments &rarr;', 'tribe' ),
+				'url'     => esc_url( get_comments_pagenum_link( $next_page, $this->max_pages ) ),
+			] ),
 		] );
 	}
 }

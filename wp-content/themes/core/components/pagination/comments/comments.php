@@ -16,7 +16,7 @@ if ( ! $c->is_paged() ) {
 	<?php echo $c->attrs(); ?>>
 
 	<h3 id="pagination__label-comments" class="a11y-visual-hide">
-		<?php esc_html_e('Comments Pagination', 'tribe');?>
+		<?php esc_html_e( 'Comments Pagination', 'tribe' ); ?>
 	</h3>
 
 	<ol class="pagination__list">
