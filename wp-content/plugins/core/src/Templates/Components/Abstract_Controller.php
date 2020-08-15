@@ -9,7 +9,7 @@ abstract class Abstract_Controller {
 		$args = wp_parse_args( $args, $this->defaults() );
 
 		foreach ( $this->required() as $key => $value ) {
-			$args[$key] = array_merge( $args[$key], $value );
+			$args[ $key ] = array_merge( $args[ $key ], $value );
 		}
 
 		return $args;
