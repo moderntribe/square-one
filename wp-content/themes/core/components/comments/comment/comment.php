@@ -13,33 +13,24 @@ $c = \Tribe\Project\Templates\Components\comments\comment\Controller::factory( $
 		<?php echo $c->get_gravatar(); ?>
 
 		<h5 class="comment__title" rel="author">
-			<cite><?php echo esc_html(  get_comment_author( $c->comment_id ) ); ?></cite>
+			<cite><?php echo esc_html(  get_comment_author() ); ?></cite>
 		</h5>
 
-		<time class="comment__time" datetime="<?php echo esc_attr( $c->time[ 'c' ] ); ?> ">
-			<?php echo esc_attr( $c->time[ 'g:i A - M j, Y' ] ); ?>
+		<time class="comment__time" datetime="<?php echo esc_attr( $c->time( 'c' ) ); ?> ">
+			<?php echo esc_html( $c->time( 'g:i A - M j, Y' ) ); ?>
 		</time>
 
 	</header><!-- .comment-header -->
 
 	<div class="comment__text">
+		<?php echo $c->edit_link(); ?>
 
-		<?php if ( ! empty( $c->edit_link ) ) { ?>
-			<p class="comment__action-edit">
-				<?php echo $c->edit_link; ?>
-			</p>
-		<?php } ?>
-
-		<?php echo wp_kses_post( get_comment_text( $c->comment_id ) ); ?>
+		<?php echo wp_kses_post( get_comment_text() ); ?>
 
 	</div><!-- .comment-text -->
 
 	<?php echo $c->get_moderation_message() ; ?>
 
-	<?php if ( ! empty( $c->reply_link ) ) { ?>
-		<p class="comment__action-reply">
-			<?php echo $c->reply_link; ?>
-		</p>
-	<?php } ?>
+	<?php echo $c->reply_link() ; ?>
 
 </li>

@@ -5,57 +5,42 @@ namespace Tribe\Project\Templates\Components\comments\trackback;
 
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
+use Tribe\Project\Templates\Components\comments\Comment_Edit_Link;
 
 /**
  * Class Trackback
  */
 class Controller extends Abstract_Controller {
+	use Comment_Edit_Link;
 
-	/**
-	 * @var int
-	 */
-	public $comment_id;
+	public const COMMENT_ID = 'comment_id';
+	public const CLASSES    = 'classes';
+	public const ATTRS      = 'attrs';
+	public const LABEL      = 'label';
 
-	/**
-	 * @var array
-	 */
-	public $classes;
-
-	/**
-	 * @var array
-	 */
-	public $attrs;
-
-	/**
-	 * @var string
-	 */
-	public $label;
-
-	/**
-	 * @var string
-	 */
-	public $edit_link;
+	private int    $comment_id;
+	private array  $classes;
+	private array  $attrs;
+	private string $label;
 
 	public function __construct( array $args = [] ) {
 		$args = wp_parse_args( $args, $this->defaults() );
 		foreach ( $this->required() as $key => $value ) {
 			$args[ $key ] = array_merge( $args[ $key ], $value );
 		}
-		$this->comment_id  = $args[ 'comment_id' ];
-		$this->classes     = $args[ 'classes' ];
-		$this->attrs       = $args[ 'attrs' ];
-		$this->label       = $args[ 'attrs' ];
-		$this->edit_link   = $args[ 'edit_link' ];
-		$this->init();
+
+		$this->comment_id = (int) $args[ self::COMMENT_ID ];
+		$this->classes    = (array) $args[ self::CLASSES ];
+		$this->attrs      = (array) $args[ self::ATTRS ];
+		$this->label      = (string) $args[ self::LABEL ];
 	}
 
 	protected function defaults(): array {
 		return [
-			'comment_id'  => 0,
-			'classes'     => [],
-			'attrs'       => [],
-			'labels'      => '',
-			'edit_link'   => '',
+			self::COMMENT_ID => 0,
+			self::CLASSES    => [],
+			self::ATTRS      => [],
+			self::LABEL      => __( 'Trackback', 'tribe' ),
 		];
 	}
 
@@ -66,22 +51,33 @@ class Controller extends Abstract_Controller {
 		return [];
 	}
 
-	public function init() {
-		$this->attrs[ 'id' ] = sprintf( 'comment-%d', $this->comment_id );
-	}
-
 	/**
 	 * @return string
 	 */
 	public function classes(): string {
-		return Markup_Utils::class_attribute( $this->classes );
+		return Markup_Utils::class_attribute( get_comment_class( $this->classes ) );
 	}
 
 	/**
 	 * @return string
 	 */
 	public function attributes(): string {
-		return Markup_Utils::concat_attrs( $this->attrs );
+		$attrs       = $this->attrs;
+		$attrs['id'] = sprintf( 'comment-%d', $this->comment_id );
+
+		return Markup_Utils::concat_attrs( $attrs );
+	}
+
+	public function edit_link(): string {
+		return $this->build_edit_link( __( '(Edit)', 'tribe' ) );
+	}
+
+	public function label(): string {
+		return $this->label;
+	}
+
+	public function trackback_link(): string {
+		return get_comment_author_link( $this->comment_id );
 	}
 
 }

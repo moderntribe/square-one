@@ -10,14 +10,10 @@ $c = \Tribe\Project\Templates\Components\comments\trackback\Controller::factory(
 
 <li <?php echo $c->classes(); ?><?php echo $c->attributes(); ?>>
 	<p>
-		<strong><?php echo esc_html( $c->label ); ?></strong>
+		<strong><?php echo esc_html( $c->label() ); ?></strong>
 
-		<?php echo get_comment_author_link( $c->comment_id ); ?>
+		<?php echo $c->trackback_link(); ?>
 
-		{% if edit_link %}
-		<span class="comment__action-edit">
-				{{ edit_link }}
-			</span>
-		{% endif %}
+		<?php echo $c->edit_link(); ?>
 	</p>
 </li>
