@@ -6,6 +6,7 @@ namespace Tribe\Project\Templates\Components\comments\comments_section;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\comments\comment\Comment_Controller;
 use Tribe\Project\Templates\Components\comments\trackback\Trackback_Controller;
+use Tribe\Project\Templates\Components\pagination\comments\Comments_Pagination_Controller;
 
 class Comments_Section_Controller extends Abstract_Controller {
 
@@ -52,7 +53,7 @@ class Comments_Section_Controller extends Abstract_Controller {
 		$paged = (bool) ( $count > 1 ? get_option( 'page_comments' ) : false );
 
 		return tribe_template_part( 'components/pagination/comments/comments', null, [
-			'paged' => $paged,
+			Comments_Pagination_Controller::PAGED => $paged,
 		] );
 	}
 

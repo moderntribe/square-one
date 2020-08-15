@@ -5,15 +5,15 @@ declare( strict_types=1 );
  * @var array $args Arguments passed to the template
  */
 // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
-$c = \Tribe\Project\Templates\Components\pagination\comments\Controller::factory( $args );
+$c = \Tribe\Project\Templates\Components\pagination\comments\Comments_Pagination_Controller::factory( $args );
 
 if ( ! $c->is_paged() ) {
 	return;
 }
 ?>
 
-<nav <?php echo $c->wrapper_classes(); ?>
-	<?php echo $c->wrapper_attrs(); ?>>
+<nav <?php echo $c->classes(); ?>
+	<?php echo $c->attrs(); ?>>
 
 	<h3 id="pagination__label-comments" class="a11y-visual-hide">
 		<?php esc_html_e('Comments Pagination', 'tribe');?>
