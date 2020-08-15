@@ -7,33 +7,84 @@ use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 
 class Controller extends Abstract_Controller {
+	/**
+	 * @var string
+	 */
 	private $url;
+	/**
+	 * @var string
+	 */
 	private $target;
+	/**
+	 * @var string
+	 */
 	private $aria_label;
+	/**
+	 * @var string[]
+	 */
 	private $classes;
+	/**
+	 * @var string[]
+	 */
 	private $attrs;
+	/**
+	 * @var string
+	 */
 	private $content;
+	/**
+	 * @var string
+	 */
 	public $wrapper_tag;
+	/**
+	 * @var string[]
+	 */
 	private $wrapper_classes;
+	/**
+	 * @var string[]
+	 */
 	private $wrapper_attrs;
 
 	public function __construct( array $args = [] ) {
-		$this->url             = $args['url'] ?? '';
-		$this->target          = $args['target'] ?? '';
-		$this->aria_label      = $args['aria_label'] ?? '';
-		$this->classes         = (array) ( $args['classes'] ?? [] );
-		$this->attrs           = (array) ( $args['attrs'] ?? [] );
-		$this->content         = $args['content'] ?? '';
-		$this->wrapper_tag     = $args['wrapper_tag'] ?? '';
-		$this->wrapper_classes = (array) ( $args['wrapper_classes'] ?? [] );
-		$this->wrapper_attrs   = (array) ( $args['wrapper_attrs'] ?? [] );
+		$args = wp_parse_args( $args, $this->defaults() );
+
+		foreach ( $this->required() as $key => $value ) {
+			$args[$key] = array_merge( $args[$key], $value );
+		}
+
+		$this->url             = $args['url'];
+		$this->target          = $args['target'];
+		$this->aria_label      = $args['aria_label'];
+		$this->classes         = (array) $args['classes'];
+		$this->attrs           = (array) $args['attrs'];
+		$this->content         = $args['content'];
+		$this->wrapper_tag     = $args['wrapper_tag'];
+		$this->wrapper_classes = (array) $args['wrapper_classes'];
+		$this->wrapper_attrs   = (array) $args['wrapper_attrs'];
+	}
+
+	protected function defaults(): array {
+		return [
+			'url'             => '',
+			'target'          => '',
+			'aria_label'      => '',
+			'classes'         => [],
+			'attrs'           => [],
+			'content'         => '',
+			'wrapper_tag'     => '',
+			'wrapper_classes' => [],
+			'wrapper_attrs'   => [],
+		];
+	}
+
+	protected function required(): array {
+		return [];
 	}
 
 	public function classes(): string {
 		return Markup_Utils::class_attribute( $this->classes );
 	}
 
-	public function attrs(): string {
+	public function attributes(): string {
 		$attrs = $this->attrs;
 		if ( ! empty( $this->url ) ) {
 			$attrs['href'] = esc_url_raw( $this->url );

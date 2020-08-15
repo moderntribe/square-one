@@ -1,7 +1,7 @@
 <?php
 declare( strict_types=1 );
 
-namespace Tribe\Project\Templates\Components\sidebar;
+namespace Tribe\Project\Templates\Components\text;
 
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
@@ -10,7 +10,7 @@ class Controller extends Abstract_Controller {
 	/**
 	 * @var string
 	 */
-	private $sidebar_id;
+	public $tag;
 	/**
 	 * @var string[]
 	 */
@@ -19,6 +19,10 @@ class Controller extends Abstract_Controller {
 	 * @var string[]
 	 */
 	private $attrs;
+	/**
+	 * @var string
+	 */
+	public $content;
 
 	public function __construct( array $args = [] ) {
 		$args = wp_parse_args( $args, $this->defaults() );
@@ -27,23 +31,23 @@ class Controller extends Abstract_Controller {
 			$args[$key] = array_merge( $args[$key], $value );
 		}
 
-		$this->sidebar_id = $args['sidebar_id'];
-		$this->classes    = (array) $args[ 'classes' ];
-		$this->attrs      = (array) $args[ 'attrs' ];
+		$this->tag     = $args['tag'];
+		$this->classes = (array) $args['classes'];
+		$this->attrs   = (array) $args['attrs'];
+		$this->content = $args['content'];
 	}
 
 	protected function defaults(): array {
 		return [
-			'sidebar_id' => '',
-			'classes'    => [],
-			'attrs'      => [ 'role' => 'complementary' ],
+			'tag'     => 'p',
+			'classes' => [],
+			'attrs'   => [],
+			'content' => '',
 		];
 	}
 
 	protected function required(): array {
-		return [
-			'classes' => [ 'sidebar' ],
-		];
+		return [];
 	}
 
 	public function classes(): string {
@@ -53,13 +57,4 @@ class Controller extends Abstract_Controller {
 	public function attributes(): string {
 		return Markup_Utils::concat_attrs( $this->attrs );
 	}
-
-	public function active(): bool {
-		return $this->sidebar_id && is_active_sidebar( $this->sidebar_id );
-	}
-
-	public function id(): string {
-		return $this->sidebar_id;
-	}
-
 }

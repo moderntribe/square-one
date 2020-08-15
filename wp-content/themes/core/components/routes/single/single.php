@@ -1,13 +1,13 @@
 <?php
 declare( strict_types=1 );
-$controller = \Tribe\Project\Templates\Components\routes\single\Controller::factory();
+$c = \Tribe\Project\Templates\Components\routes\single\Controller::factory();
 
-$controller->render_header();
+$c->render_header();
 ?>
 
 	<main id="main-content">
 
-		<?php $controller->render_breadcrumbs(); ?>
+		<?php $c->render_breadcrumbs(); ?>
 
 		<?php get_template_part( 'components/header/subheader/subheader' ) ?>
 
@@ -20,5 +20,5 @@ $controller->render_header();
 	</main>
 
 <?php
-$controller->render_sidebar();
-$controller->render_footer();
+$c->render_sidebar();
+$c->render_footer();

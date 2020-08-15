@@ -4,8 +4,10 @@ declare( strict_types=1 );
 namespace Tribe\Project\Templates\Components\document\head;
 
 use Tribe\Project\Templates\Components\Abstract_Controller;
+use Tribe\Project\Templates\Components\Traits\Page_Title;
 
 class Controller extends Abstract_Controller {
+	use Page_Title;
 
 	public function name(): string {
 		return get_bloginfo( 'name' );
@@ -13,34 +15,5 @@ class Controller extends Abstract_Controller {
 
 	public function pingback_url(): string {
 		return get_bloginfo( 'pingback_url' );
-	}
-
-	public function page_title(): string {
-		if ( is_front_page() ) {
-			return '';
-		}
-
-		// Blog
-		if ( is_home() ) {
-			return __( 'Blog', 'tribe' );
-		}
-
-		// Search
-		if ( is_search() ) {
-			return __( 'Search Results', 'tribe' );
-		}
-
-		// 404
-		if ( is_404() ) {
-			return __( 'Page Not Found (404)', 'tribe' );
-		}
-
-		// Singular
-		if ( is_singular() ) {
-			return get_the_title();
-		}
-
-		// Archives
-		return get_the_archive_title();
 	}
 }

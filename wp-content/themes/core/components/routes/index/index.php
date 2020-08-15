@@ -1,11 +1,11 @@
 <?php
 declare( strict_types=1 );
-$controller = \Tribe\Project\Templates\Components\routes\index\Controller::factory();
+$c = \Tribe\Project\Templates\Components\routes\index\Controller::factory();
 
-$controller->render_header();
+$c->render_header();
 ?>
 	<main id="main-content">
-		<?php $controller->render_breadcrumbs(); ?>
+		<?php $c->render_breadcrumbs(); ?>
 
 		<div class="l-container">
 
@@ -31,5 +31,5 @@ $controller->render_header();
 		</div>
 	</main>
 <?php
-$controller->render_sidebar();
-$controller->render_footer();
+$c->render_sidebar();
+$c->render_footer();
