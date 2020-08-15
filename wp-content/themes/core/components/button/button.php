@@ -11,14 +11,9 @@ if ( ! $c->has_content() ) {
 	return;
 }
 ?>
-
-<?php echo $c->wrapper_tag_open(); ?>
-
-	<button
-		<?php echo $c->classes(); ?>
-		<?php echo $c->attributes(); ?>
-	>
-		<?php echo $c->content(); ?>
-	</button>
-
-<?php echo $c->wrapper_tag_close(); ?>
+<button
+	<?php echo $c->classes(); ?>
+	<?php echo $c->attributes(); ?>
+>
+	<?php echo $c->content(); ?>
+</button>

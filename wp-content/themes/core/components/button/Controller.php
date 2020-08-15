@@ -27,18 +27,6 @@ class Controller extends Abstract_Controller {
 	 * @var string
 	 */
 	private $aria_label;
-	/**
-	 * @var string
-	 */
-	public $wrapper_tag;
-	/**
-	 * @var string[]
-	 */
-	private $wrapper_classes;
-	/**
-	 * @var string[]
-	 */
-	private $wrapper_attrs;
 
 	public function __construct( array $args = [] ) {
 		$args = wp_parse_args( $args, $this->defaults() );
@@ -52,9 +40,6 @@ class Controller extends Abstract_Controller {
 		$this->type            = $args['type'];
 		$this->aria_label      = $args['aria_label'];
 		$this->content         = $args['content'];
-		$this->wrapper_tag     = $args['wrapper_tag'];
-		$this->wrapper_classes = (array) $args['wrapper_classes'];
-		$this->wrapper_attrs   = (array) $args['wrapper_attrs'];
 	}
 
 	protected function defaults(): array {
@@ -64,9 +49,6 @@ class Controller extends Abstract_Controller {
 			'type'            => '',
 			'aria_label'      => '',
 			'content'         => '',
-			'wrapper_tag'     => '',
-			'wrapper_classes' => [],
-			'wrapper_attrs'   => [],
 		];
 	}
 
@@ -96,19 +78,5 @@ class Controller extends Abstract_Controller {
 		}
 
 		return Markup_Utils::concat_attrs( $attributes );
-	}
-
-	public function wrapper_tag_open(): string {
-		if ( empty( $this->wrapper_tag ) ) {
-			return '';
-		}
-		return sprintf( '<%s%s %s>', $this->wrapper_tag, Markup_Utils::class_attribute( $this->wrapper_classes ), Markup_Utils::concat_attrs( $this->wrapper_attrs ) );
-	}
-
-	public function wrapper_tag_close(): string {
-		if ( empty( $this->wrapper_tag ) ) {
-			return '';
-		}
-		return sprintf( '</%s>', $this->wrapper_tag );
 	}
 }
