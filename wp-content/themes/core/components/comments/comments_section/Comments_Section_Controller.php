@@ -4,12 +4,10 @@ declare( strict_types=1 );
 namespace Tribe\Project\Templates\Components\comments\comments_section;
 
 use Tribe\Project\Templates\Components\Abstract_Controller;
-use Tribe\Project\Templates\Components\comments\comment\Controller as Comment_Controller;
-use Tribe\Project\Templates\Components\comments\Comment_Edit_Link;
-use Tribe\Project\Templates\Components\comments\trackback\Controller as Trackback_Controller;
+use Tribe\Project\Templates\Components\comments\comment\Comment_Controller;
+use Tribe\Project\Templates\Components\comments\trackback\Trackback_Controller;
 
-class Controller extends Abstract_Controller {
-	use Comment_Edit_Link;
+class Comments_Section_Controller extends Abstract_Controller {
 
 	public function get_title() {
 		return sprintf(

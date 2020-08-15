@@ -5,7 +5,7 @@ declare( strict_types=1 );
  * @var array $args Arguments passed to the template
  */
 // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
-$c = \Tribe\Project\Templates\Components\comments\comment\Controller::factory( $args ); ?>
+$c = \Tribe\Project\Templates\Components\comments\comment\Comment_Controller::factory( $args ); ?>
 <li <?php echo $c->classes(); ?><?php echo $c->attributes(); ?>>
 
 	<header class="comment__header">

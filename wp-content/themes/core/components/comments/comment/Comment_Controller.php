@@ -10,7 +10,7 @@ use Tribe\Project\Templates\Components\comments\Comment_Edit_Link;
 /**
  * Class Comment
  */
-class Controller extends Abstract_Controller {
+class Comment_Controller extends Abstract_Controller {
 	use Comment_Edit_Link;
 
 	public const COMMENT_ID = 'comment_id';
