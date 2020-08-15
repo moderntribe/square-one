@@ -5,55 +5,54 @@ namespace Tribe\Project\Templates\Components\button;
 
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
+use Tribe\Project\Templates\Components\Deferred_Component;
 
-class Controller extends Abstract_Controller {
+class Button_Controller extends Abstract_Controller {
+	public const TYPE       = 'type';
+	public const CLASSES    = 'classes';
+	public const ATTRS      = 'attrs';
+	public const CONTENT    = 'content';
+	public const ARIA_LABEL = 'aria_label';
+
 	/**
 	 * @var string
 	 */
-	private $type;
+	private string $type;
 	/**
 	 * @var string[]
 	 */
-	private $classes;
+	private array $classes;
 	/**
 	 * @var string[]
 	 */
-	private $attrs;
+	private array $attrs;
 	/**
-	 * @var string
+	 * @var string|Deferred_Component
 	 */
 	private $content;
 	/**
 	 * @var string
 	 */
-	private $aria_label;
+	private string $aria_label;
 
 	public function __construct( array $args = [] ) {
-		$args = wp_parse_args( $args, $this->defaults() );
+		$args = $this->parse_args( $args );
 
-		foreach ( $this->required() as $key => $value ) {
-			$args[$key] = array_merge( $args[$key], $value );
-		}
-
-		$this->classes         = (array) $args['classes'];
-		$this->attrs           = (array) $args['attrs'];
-		$this->type            = $args['type'];
-		$this->aria_label      = $args['aria_label'];
-		$this->content         = $args['content'];
+		$this->classes    = (array) $args[ self::CLASSES ];
+		$this->attrs      = (array) $args[ self::ATTRS ];
+		$this->type       = (string) $args[ self::TYPE ];
+		$this->aria_label = (string) $args[ self::ARIA_LABEL ];
+		$this->content    = $args[ self::CONTENT ];
 	}
 
 	protected function defaults(): array {
 		return [
-			'classes'         => [],
-			'attrs'           => [],
-			'type'            => '',
-			'aria_label'      => '',
-			'content'         => '',
+			self::CLASSES    => [],
+			self::ATTRS      => [],
+			self::TYPE       => '',
+			self::ARIA_LABEL => '',
+			self::CONTENT    => '',
 		];
-	}
-
-	protected function required(): array {
-		return [];
 	}
 
 	public function has_content(): bool {
