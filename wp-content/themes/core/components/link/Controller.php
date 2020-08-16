@@ -31,18 +31,6 @@ class Controller extends Abstract_Controller {
 	 * @var string
 	 */
 	private $content;
-	/**
-	 * @var string
-	 */
-	public $wrapper_tag;
-	/**
-	 * @var string[]
-	 */
-	private $wrapper_classes;
-	/**
-	 * @var string[]
-	 */
-	private $wrapper_attrs;
 
 	public function __construct( array $args = [] ) {
 		$args = wp_parse_args( $args, $this->defaults() );
@@ -57,9 +45,6 @@ class Controller extends Abstract_Controller {
 		$this->classes         = (array) $args['classes'];
 		$this->attrs           = (array) $args['attrs'];
 		$this->content         = $args['content'];
-		$this->wrapper_tag     = $args['wrapper_tag'];
-		$this->wrapper_classes = (array) $args['wrapper_classes'];
-		$this->wrapper_attrs   = (array) $args['wrapper_attrs'];
 	}
 
 	protected function defaults(): array {
@@ -70,9 +55,6 @@ class Controller extends Abstract_Controller {
 			'classes'         => [],
 			'attrs'           => [],
 			'content'         => '',
-			'wrapper_tag'     => '',
-			'wrapper_classes' => [],
-			'wrapper_attrs'   => [],
 		];
 	}
 
@@ -115,27 +97,5 @@ class Controller extends Abstract_Controller {
 			'<span class="u-visually-hidden">%s</span>',
 			__( 'Opens new window', 'tribe' )
 		);
-	}
-
-	public function wrapper_tag_open(): string {
-		if ( empty( $this->wrapper_tag ) ) {
-			return '';
-		}
-		return sprintf( '<%s%s %s>', $this->wrapper_tag, $this->wrapper_classes(), $this->wrapper_attributes() );
-	}
-
-	public function wrapper_tag_close(): string {
-		if ( empty( $this->wrapper_tag ) ) {
-			return '';
-		}
-		return sprintf( '</%s>', $this->wrapper_tag );
-	}
-
-	public function wrapper_classes(): string {
-		return Markup_Utils::class_attribute( $this->wrapper_classes );
-	}
-
-	public function wrapper_attributes(): string {
-		return Markup_Utils::concat_attrs( $this->wrapper_attrs );
 	}
 }

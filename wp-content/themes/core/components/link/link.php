@@ -7,15 +7,9 @@ declare( strict_types=1 );
 // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
 $c = \Tribe\Project\Templates\Components\link\Controller::factory( $args );
 ?>
-
-<?php echo $c->wrapper_tag_open(); ?>
-
-	<a
-		<?php echo $c->classes(); ?>
-		<?php echo $c->attributes(); ?>
-	>
-		<?php echo $c->content(); ?>
-	</a>
-
-<?php echo $c->wrapper_tag_close(); ?>
-
+<a
+	<?php echo $c->classes(); ?>
+	<?php echo $c->attributes(); ?>
+>
+	<?php echo $c->content(); ?>
+</a>
