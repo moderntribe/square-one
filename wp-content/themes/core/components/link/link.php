@@ -5,7 +5,7 @@ declare( strict_types=1 );
  * @var array $args Arguments passed to the template
  */
 // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
-$c = \Tribe\Project\Templates\Components\link\Controller::factory( $args );
+$c = \Tribe\Project\Templates\Components\link\Link_Controller::factory( $args );
 ?>
 <a
 	<?php echo $c->classes(); ?>

@@ -6,60 +6,41 @@ namespace Tribe\Project\Templates\Components\link;
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 
-class Controller extends Abstract_Controller {
-	/**
-	 * @var string
-	 */
-	private $url;
-	/**
-	 * @var string
-	 */
-	private $target;
-	/**
-	 * @var string
-	 */
-	private $aria_label;
-	/**
-	 * @var string[]
-	 */
-	private $classes;
-	/**
-	 * @var string[]
-	 */
-	private $attrs;
-	/**
-	 * @var string
-	 */
-	private $content;
+class Link_Controller extends Abstract_Controller {
+	public const URL        = 'url';
+	public const TARGET     = 'target';
+	public const ARIA_LABEL = 'aria_label';
+	public const CLASSES    = 'classes';
+	public const ATTRS      = 'attrs';
+	public const CONTENT    = 'content';
+
+	private string $url;
+	private string $target;
+	private string $aria_label;
+	private array  $classes;
+	private array  $attrs;
+	private string $content;
 
 	public function __construct( array $args = [] ) {
-		$args = wp_parse_args( $args, $this->defaults() );
+		$args = $this->parse_args( $args );
 
-		foreach ( $this->required() as $key => $value ) {
-			$args[$key] = array_merge( $args[$key], $value );
-		}
-
-		$this->url             = $args['url'];
-		$this->target          = $args['target'];
-		$this->aria_label      = $args['aria_label'];
-		$this->classes         = (array) $args['classes'];
-		$this->attrs           = (array) $args['attrs'];
-		$this->content         = $args['content'];
+		$this->url        = (string) $args[ self::URL ];
+		$this->target     = (string) $args[ self::TARGET ];
+		$this->aria_label = (string) $args[ self::ARIA_LABEL ];
+		$this->classes    = (array) $args[ self::CLASSES ];
+		$this->attrs      = (array) $args[ self::ATTRS ];
+		$this->content    = (string) $args[ self::CONTENT ];
 	}
 
 	protected function defaults(): array {
 		return [
-			'url'             => '',
-			'target'          => '',
-			'aria_label'      => '',
-			'classes'         => [],
-			'attrs'           => [],
-			'content'         => '',
+			self::URL        => '',
+			self::TARGET     => '',
+			self::ARIA_LABEL => '',
+			self::CLASSES    => [],
+			self::ATTRS      => [],
+			self::CONTENT    => '',
 		];
-	}
-
-	protected function required(): array {
-		return [];
 	}
 
 	public function classes(): string {
@@ -78,7 +59,7 @@ class Controller extends Abstract_Controller {
 			$attrs['target'] = $this->target;
 		}
 		if ( $this->target === '_blank' ) {
-			$this->attrs['rel'] = 'noopener';
+			$attrs['rel'] = 'noopener';
 		}
 
 		return Markup_Utils::concat_attrs( $attrs );
@@ -89,6 +70,7 @@ class Controller extends Abstract_Controller {
 		if ( $this->target === '_blank' ) {
 			$content .= $this->new_window_text();
 		}
+
 		return $content;
 	}
 
