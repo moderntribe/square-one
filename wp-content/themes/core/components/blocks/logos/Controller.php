@@ -63,32 +63,32 @@ class Controller extends Abstract_Controller {
 		return Markup_Utils::concat_attrs( $this->attrs );
 	}
 
-	public function render_header( $args ): string {
+	public function get_header( $data ): string {
 		return tribe_template_part( 'components/content_block/content_block', null, [
 			'tag'     => 'header',
 			'classes' => [ 'b-logos__header' ],
 			'layout'  => Content_Block::LAYOUT_LEFT,
-			'title'   => $this->get_title( $args ),
-			'content' => $this->get_content( $args ),
-			'cta'     => $this->get_cta( $args ),
+			'title'   => $this->get_title(),
+			'content' => $this->get_content(),
+			'cta'     => $this->get_cta(),
 		] );
 	}
 
-	private function get_title( $args ): Deferred_Component {
+	private function get_title(): Deferred_Component {
 		return defer_template_part( 'components/text/text', null, [
 			'classes' => [ 'b-logos__title', 'h3' ],
-			'content' => $args['title'],
+			'content' => $this->title,
 		] );
 	}
 
-	public function get_content( $args ): Deferred_Component {
+	public function get_content(): Deferred_Component {
 		return defer_template_part( 'components/text/text', null, [
 			'classes' => [ 'b-logos__description' ],
-			'content' => $args['content'],
+			'content' => $this->title,
 		] );
 	}
 
-	public function get_cta( $args ): Deferred_Component {
+	public function get_cta(): Deferred_Component {
 		return defer_template_part( 'components/link/link', null, [
 			'classes'         => [ 'a-btn', 'a-btn--has-icon-after', 'icon-arrow-right' ],
 			'url'             => $args['cta']['url'],
