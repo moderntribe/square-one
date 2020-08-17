@@ -7,11 +7,11 @@ $c = \Tribe\Project\Templates\Components\content\single\index\Controller::factor
 
 	<?php echo $c->render_featured_image(); ?>
 
-	<div class="item-single__content s-sink t-sink">
+	<div class="item-single__content s-sink t-sink l-sink l-sink--double">
 		<?php the_content(); ?>
 	</div>
 
-	<footer class="item-single__footer">
+	<footer class="item-single__footer l-container">
 
 		<ul class="item-single__meta">
 
