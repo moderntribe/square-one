@@ -1,5 +1,12 @@
 <?php
 declare( strict_types=1 );
 
-$model = new \Tribe\Project\Blocks\Types\Accordion\Model( $args[ 'block' ] );// phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
-get_template_part( 'components/blocks/accordion/accordion', null, $model->get_data() );
+use Tribe\Project\Blocks\Types\Accordion\Accordion_Model;
+
+// phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
+$model = new Accordion_Model( $args[ 'block' ] );
+get_template_part(
+	'components/blocks/accordion/accordion',
+	null,
+	$model->get_data()
+);

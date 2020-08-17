@@ -6,7 +6,7 @@ namespace Tribe\Project\Blocks\Types\Accordion;
 use Tribe\Project\Blocks\Types\Base_Model;
 use Tribe\Project\Templates\Models\Accordion_Row;
 
-class Model extends Base_Model {
+class Accordion_Model extends Base_Model {
 	public function get_data() {
 		return [
 			'layout'      => $this->get(
