@@ -5,6 +5,7 @@ namespace Tribe\Project\Templates\Components\pagination\loop;
 
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
+use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Theme\Pagination_Util;
 
 class Controller extends Abstract_Controller {
@@ -127,9 +128,9 @@ class Controller extends Abstract_Controller {
 			}
 
 			return [
-				'classes' => $classes,
-				'url'     => $number['url'],
-				'content' => $number['label'],
+				Link_Controller::CLASSES => $classes,
+				Link_Controller::URL     => $number['url'],
+				Link_Controller::CONTENT => $number['label'],
 			];
 		}, $numbers );
 	}
