@@ -180,7 +180,7 @@ const handleTabsMobileClickOut = ( e ) => {
 		return;
 	}
 
-	const tabList = tools.closest( e.target, '[role="tablist"]' );
+	const tabList = tools.closest( e.target, '[data-js="c-tabs__tablist-wrapper"]' );
 
 	// If the clicked element is not inside a tablist, then just hide them all.
 	if ( ! tabList ) {

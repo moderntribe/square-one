@@ -4,6 +4,83 @@
  *
  * ----------------------------------------------------------------------------- */
 
+.c-tabs {
+	/* CASE: Vertical Layout */
+	&.c-tabs--layout-vertical {
+		@media (--viewport-full) {
+			display: flex;
+			flex-flow: row nowrap;
+		}
+	}
+}
+
+.c-tabs__tablist-wrapper {
+	/* CASE: Vertical Layout */
+	.c-tabs--layout-vertical & {
+		position: relative;
+		padding: var(--spacer-10) var(--spacer-20);
+		box-shadow: 0 4px 12px rgba(21, 21, 21, 0.15);
+
+		@media (--viewport-full) {
+			flex: 0 0 25%;
+			margin-right: var(--grid-gutter);
+			padding: var(--spacer-30) var(--spacer-40);
+		}
+	}
+}
+
+.c-tabs__tablist-toggle {
+	@mixin a-btn-reset;
+
+	position: relative;
+	display: block;
+	width: 100%;
+	text-align: left;
+	padding: var(--spacer-20) var(--spacer-30) var(--spacer-20) 0;
+	transition: var(--transition);
+
+	@media (--viewport-full) {
+		display: none;
+	}
+
+	&:after {
+		@mixin icon;
+
+		content: var(--icon-chevron-down);
+		position: absolute;
+		top: 0.5em;
+		right: 0;
+		font-size: 24px;
+	}
+
+	&:hover,
+	&:focus {
+		color: var(--color-link-hover);
+	}
+
+	&:focus {
+		outline: 1px dotted;
+	}
+}
+
+.c-tabs__tablist-dropdown {
+	/* CASE: Vertical Layout */
+	.c-tabs--layout-vertical & {
+		display: none;
+		position: absolute;
+		left: 0;
+		top: 100%;
+		width: 100%;
+		padding: var(--spacer-10) var(--spacer-20);
+		background: var(--color-bgd);
+		box-shadow: 0 12px 12px rgba(21, 21, 21, 0.15);
+
+		@media (--viewport-full) {
+			display: block;
+		}
+	}
+}
+
 .c-tabs__tablist {
 	/* CASE: Horizontal Layout */
 	.c-tabs--layout-horizontal & {
@@ -18,6 +95,17 @@
 
 		@media (--viewport-full) {
 			margin-right: 0;
+		}
+	}
+
+	/* CASE: Vertical Layout */
+	.c-tabs--layout-vertical & {
+		border-top: 1px solid var(--color-border);
+		margin-bottom: var(--spacer-20);
+
+		@media (--viewport-full) {
+			border-top: 0;
+			margin-bottom: 0;
 		}
 	}
 }
@@ -56,10 +144,62 @@
 			}
 		}
 	}
+
+	/* CASE: Vertical Layout */
+	.c-tabs--layout-vertical & {
+		position: relative;
+		display: block;
+		width: 100%;
+		text-align: left;
+		padding: var(--spacer-20) var(--spacer-30) var(--spacer-20) 0;
+		border-bottom: 1px solid var(--color-border);
+		transition: var(--transition);
+
+		&:hover,
+		&:focus {
+			color: var(--color-link-hover);
+		}
+
+		/* CASE: Selected Tab */
+		&[aria-selected="true"] {
+			color: var(--color-link-hover);
+
+			@media (--viewport-full) {
+
+				&:after {
+					@mixin icon;
+
+					content: var(--icon-chevron-right);
+					position: absolute;
+					top: 0.5em;
+					right: 0;
+					margin-left: var(--spacer-10);
+					font-size: 24px;
+				}
+			}
+
+			&:focus {
+				outline: 1px dotted;
+			}
+		}
+	}
 }
 
 .c-tabs__tabpanels-wrapper {
-	margin-top: var(--spacer-40);
+	/* CASE: Horizontal Layout */
+	.c-tabs--layout-horizontal & {
+		margin-top: var(--spacer-40);
+	}
+
+	/* CASE: Vertical Layout */
+	.c-tabs--layout-vertical & {
+		margin-top: var(--spacer-30);
+
+		@media (--viewport-full) {
+			flex: 1 0 auto;
+			margin-top: 0;
+		}
+	}
 }
 
 .c-tabs__tabpanel {

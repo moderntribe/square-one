@@ -15,7 +15,7 @@ if ( empty( $c->get_tab_panels() ) ) {
 ?>
 
 <div <?php echo $c->get_classes(); ?> <?php echo $c->get_attrs(); ?>>
-	<div class="c-tabs__tablist-wrapper">
+	<div class="c-tabs__tablist-wrapper" data-js="c-tabs__tablist-wrapper">
 
 		<?php echo $c->get_dropdown_toggle(); ?>
 
