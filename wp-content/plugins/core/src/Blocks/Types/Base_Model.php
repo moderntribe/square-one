@@ -24,10 +24,12 @@ class Base_Model {
 	 * @return bool|mixed
 	 */
 	public function get( $key, $default = false ) {
-		//The ACF $block['data'] array keys are different in preview mode and edit mode.
-		//This accounts for getting data in both modes.
-		$real_key = $this->mode === 'preview' ? 'field_' . $this->name . '_' . $key : $key;
-
-		return $this->data[ $real_key ] ?? $default;
+		$value = get_field( $key );
+		//check to support nullable type properties in components.
+		// ACF will in some cases return and empty string when we may want it to be null.
+		// This allows us to always determine the default.
+		return ! empty( $value )
+			? $value
+			: $default;
 	}
 }

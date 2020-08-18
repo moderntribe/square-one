@@ -10,7 +10,7 @@ $c = \Tribe\Project\Templates\Components\accordion\Controller::factory( $args );
 			<button <?php echo $c->row_header_classes(); ?>
 				<?php echo $c->row_header_attrs($row); ?>>
 					<span <?php echo $c->row_header_container_classes(); ?>>
-						<?php echo $row[ 'header_text' ]; ?>
+						<?php echo $row->header_text; ?>
 					</span>
 			</button>
 		</<?php echo esc_attr( $c->row_header_tag ); ?>>
@@ -18,7 +18,7 @@ $c = \Tribe\Project\Templates\Components\accordion\Controller::factory( $args );
 			<?php echo $c->row_content_attrs($row); ?>>
 			<div <?php echo $c->row_content_container_classes(); ?>
 				<?php echo $c->row_content_container_attrs(); ?>>
-				<?php echo $row[ 'content' ]; ?>
+				<?php echo $row->content; ?>
 			</div>
 		</div>
 	</article>

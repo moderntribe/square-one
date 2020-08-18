@@ -33,5 +33,5 @@ $c = \Tribe\Project\Templates\Components\content\single\index\Controller::factor
 		<?php get_template_part( 'components/share/share' ) ?>
 
 	</footer>
-
+	<?php comments_template(); ?>
 </article>

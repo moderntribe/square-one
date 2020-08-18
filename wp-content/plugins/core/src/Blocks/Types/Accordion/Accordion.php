@@ -87,7 +87,7 @@ class Accordion extends Block_Config {
 				self::LAYOUT_STACKED => __( 'Stacked', 'tribe' ),
 			],
 			'default_value'   => [
-				self::LAYOUT_STACKED,
+				self::LAYOUT_INLINE,
 			],
 			'multiple'        => 0,
 			'image_path'      => sprintf(
