@@ -231,7 +231,7 @@ const handleResize = () => {
 	}
 
 	// If the component state is NOT mobile, but the viewport state is, then hide all the tablists and update the component state.
-	if ( ! componentState.isMobile && state.is_mobile ) {
+	if ( ! componentState.isMobile && ! state.is_desktop ) {
 		el.mobileToggles.forEach( toggle => hideTabsDropDown( toggle ) );
 		componentState.isMobile = state.is_mobile;
 	}
