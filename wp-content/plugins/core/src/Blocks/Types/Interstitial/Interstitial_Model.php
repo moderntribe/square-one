@@ -15,7 +15,7 @@ class Interstitial_Model extends Base_Model {
 			Interstitial_Block_Controller::CONTENT => $this->get( Interstitial::DESCRIPTION, '' ),
 			Interstitial_Block_Controller::CTA     => $this->get_cta_args(),
 			Interstitial_Block_Controller::LAYOUT  => $this->get( Interstitial::LAYOUT, '' ),
-			Interstitial_Block_Controller::MEDIA   => $this->get( Interstitial::IMAGE, 0 ),
+			Interstitial_Block_Controller::MEDIA   => $this->get( Interstitial::IMAGE, null ),
 		];
 	}
 

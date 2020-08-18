@@ -27,7 +27,7 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 	public const ATTRS             = 'attrs';
 
 	public string $layout;
-	public int $media;
+	public ?int $media;
 	public string $content;
 	public array $cta;
 	public array $container_classes;
@@ -56,7 +56,7 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 	protected function defaults(): array {
 		return [
 			self::LAYOUT            => Interstitial_Block::LAYOUT_LEFT,
-			self::MEDIA             => '',
+			self::MEDIA             => null,
 			self::CONTENT           => '',
 			self::CTA               => '',
 			self::CONTAINER_CLASSES => [ 'b-interstitial__container', 'l-container' ],
