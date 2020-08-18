@@ -35,7 +35,7 @@ class Accordion_Model extends Base_Model {
 				$row[ Accordion::ROW_CONTENT ],
 				uniqid( 'accordion-header-' ),
 				uniqid( 'accordion-content-' ),
-				);
+			);
 		}
 
 		return $data;
