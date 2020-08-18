@@ -6,6 +6,8 @@ namespace Tribe\Project\Templates\Components\blocks\stats;
 use Tribe\Libs\Utils\Markup_Utils;
 use \Tribe\Project\Blocks\Types\Stats\Stats as Stats_Block;
 use Tribe\Project\Templates\Components\Abstract_Controller;
+use Tribe\Project\Templates\Components\Deferred_Component;
+use \Tribe\Project\Templates\Components\statistic\Controller as Statistic;
 
 /**
  * Class Hero
@@ -29,7 +31,7 @@ class Stats_Block_Controller extends Abstract_Controller {
 	public array $content_classes;
 	public array $classes;
 	public array $attrs;
-	public array $stats; // $rows
+	public array $stats;
 
 	public function __construct( array $args = [] ) {
 		$args = wp_parse_args( $args, $this->defaults() );
@@ -37,15 +39,16 @@ class Stats_Block_Controller extends Abstract_Controller {
 			$args[ $key ] = array_merge( $args[ $key ], $value );
 		}
 
-		$this->layout            = $args[ self::LAYOUT ];
-		$this->display           = $args[ self::DISPLAY ];
-		$this->title             = $args[ self::TITLE ];
-		$this->description       = $args[ self::DESCRIPTION ];
-		$this->container_classes = $args[ self::CONTAINER_CLASSES ];
-		$this->content_classes   = $args[ self::CONTENT_CLASSES ];
-		$this->classes           = $args[ self::CLASSES ];
-		$this->attrs             = $args[ self::ATTRS ];
-		$this->stats             = $args[ self::STATS ];
+		$this->layout            = (string) $args[ self::LAYOUT ];
+		$this->display           = (string) $args[ self::DISPLAY ];
+		$this->title             = (string) $args[ self::TITLE ];
+		$this->description       = (string) $args[ self::DESCRIPTION ];
+		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
+		$this->content_classes   = (array) $args[ self::CONTENT_CLASSES ];
+		$this->classes           = (array) $args[ self::CLASSES ];
+		$this->attrs             = (array) $args[ self::ATTRS ];
+		$this->stats             = (array) $args[ self::STATS ];
+		$this->get_stats();
 		$this->init();
 	}
 
@@ -104,9 +107,40 @@ class Stats_Block_Controller extends Abstract_Controller {
 		];
 	}
 
-
 	private function get_content_layout(): string {
 		return $this->attributes[ Stats_Block::CONTENT_ALIGN ] ?? Stats_Block::CONTENT_ALIGN_LEFT;
+	}
+
+	/**
+	 * @return array
+	 */
+	private function get_stats(): array {
+		$rows = array_filter( $this->stats, function ( $row ) {
+			return array_key_exists( Statistic::VALUE, $row );
+		} );
+
+		if ( empty( $rows ) ) {
+			return [];
+		}
+
+		return array_map( function ( $row ) {
+			return [
+				Statistic::VALUE => $this->get_statistic_value( $row ),
+				Statistic::LABEL => $this->get_statistic_label( $row ),
+			];
+		}, $rows );
+	}
+
+	private function get_statistic_value( $row ): Deferred_Component {
+		return defer_template_part( 'components/text/text', null, [
+			'content' => $row[ Statistic::VALUE ] ?? '',
+		] );
+	}
+
+	private function get_statistic_label( $row ): Deferred_Component {
+		return defer_template_part( 'components/text/text', null, [
+			'content' => $row[ Statistic::LABEL ] ?? '',
+		] );
 	}
 
 	/**

@@ -25,7 +25,7 @@ $c = Stats_Block_Controller::factory( $args ); ?>
 <!--					--><?php //get_template_part(
 //						'components/statistic/statistic',
 //						null,
-//						$c->get_statistic_args()
+//						$c->get_statistic_args($item)
 //					); ?>
 				</li>
 				<?php } ?>

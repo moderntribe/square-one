@@ -45,11 +45,11 @@ class Controller extends Abstract_Controller {
 			$args[ $key ] = array_merge( $args[ $key ], $value );
 		}
 
-		$this->tag     = $args[ self::TAG ];
+		$this->tag     = (string) $args[ self::TAG ];
 		$this->classes = (array) $args[  self::CLASSES ];
 		$this->attrs   = (array) $args[ self::ATTRS ];
-		$this->value   = $args[ self::VALUE ];
-		$this->label   = $args[ self::LABEL ];
+		$this->value   = (array) $args[ self::VALUE ];
+		$this->label   = (array) $args[ self::LABEL ];
 	}
 
 	protected function defaults(): array {
