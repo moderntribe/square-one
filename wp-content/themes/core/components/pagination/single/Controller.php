@@ -4,6 +4,7 @@ namespace Tribe\Project\Templates\Components\pagination\single;
 
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
+use Tribe\Project\Templates\Components\link\Link_Controller;
 
 class Controller extends Abstract_Controller {
 	/**
@@ -129,10 +130,10 @@ class Controller extends Abstract_Controller {
 		}
 
 		return [
-			'content' => get_the_title( $previous ),
-			'url'     => get_permalink( $previous ),
-			'classes' => [],
-			'attrs'   => [ 'rel' => 'prev' ],
+			Link_Controller::CONTENT => get_the_title( $previous ),
+			Link_Controller::URL     => get_permalink( $previous ),
+			Link_Controller::CLASSES => [],
+			Link_Controller::ATTRS   => [ 'rel' => 'prev' ],
 		];
 	}
 
@@ -146,10 +147,10 @@ class Controller extends Abstract_Controller {
 		}
 
 		return [
-			'content' => get_the_title( $next ),
-			'url'     => get_permalink( $next ),
-			'classes' => [],
-			'attrs'   => [ 'rel' => 'next' ],
+			Link_Controller::CONTENT => get_the_title( $next ),
+			Link_Controller::URL     => get_permalink( $next ),
+			Link_Controller::CLASSES => [],
+			Link_Controller::ATTRS   => [ 'rel' => 'next' ],
 		];
 	}
 
