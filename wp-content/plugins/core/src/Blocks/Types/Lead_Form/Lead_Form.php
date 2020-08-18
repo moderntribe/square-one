@@ -32,6 +32,7 @@ class Lead_Form extends Block_Config {
 			'icon'        => '<svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="#fff" stroke="#000" stroke-linecap="round" stroke-linejoin="round" d="M.5.5h19v19H.5z"/><path fill="#000" d="M3 4h14v2H3zM5 7h10v2H5zM14 12h4v4h-4z"/><path fill="#fff" stroke="#000" d="M2.5 12.5h11v3h-11z"/></svg>',
 			'keywords'    => [ __( 'form', 'tribe' ), __( 'display', 'tribe' ) ],
 			'category'    => 'layout',
+			'supports'    => [ 'align' => false ],
 		] ) );
 	}
 
@@ -65,7 +66,7 @@ class Lead_Form extends Block_Config {
 		if ( ! class_exists( 'GFFormsModel' ) ) {
 			return [];
 		}
-		$choices = [];
+		$choices   = [];
 		$choices[] = __( 'Select One', 'tribe' );
 		foreach ( \GFFormsModel::get_forms() as $form ) {
 			$choices[ $form->id ] = $form->title;
@@ -81,6 +82,7 @@ class Lead_Form extends Block_Config {
 		$this->add_setting(
 			new Field( self::NAME . '_' . self::LAYOUT, [
 				'type'            => 'image_select',
+				'name'            => self::LAYOUT,
 				'choices'         => [
 					self::LAYOUT_LEFT   => __( 'Content Left', 'tribe' ),
 					self::LAYOUT_CENTER => __( 'Content Center', 'tribe' ),
@@ -99,6 +101,7 @@ class Lead_Form extends Block_Config {
 		)->add_setting(
 			new Field( self::NAME . '_' . self::WIDTH, [
 				'type'            => 'image_select',
+				'name'            => self::WIDTH,
 				'choices'         => [
 					self::WIDTH_GRID => __( 'Grid', 'tribe' ),
 					self::WIDTH_FULL => __( 'Full', 'tribe' ),

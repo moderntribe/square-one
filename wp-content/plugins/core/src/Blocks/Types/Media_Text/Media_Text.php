@@ -113,6 +113,7 @@ class Media_Text extends Block_Config {
 	public function add_settings() {
 		$this->add_setting( new Field( self::NAME . '_' . self::LAYOUT, [
 			'label'           => __( 'Layout', 'tribe' ),
+			'name'            => self::LAYOUT,
 			'type'            => 'image_select',
 			'choices'         => [
 				self::MEDIA_LEFT   => __( 'Media Left', 'tribe' ),
@@ -131,6 +132,7 @@ class Media_Text extends Block_Config {
 			'image_extension' => 'svg',
 		] ) )->add_setting( new Field( self::NAME . '_' . self::WIDTH, [
 			'label'           => __( 'Width', 'tribe' ),
+			'name'            => self::WIDTH,
 			'type'            => 'image_select',
 			'choices'         => [
 				self::WIDTH_GRID => __( 'Grid', 'tribe' ),

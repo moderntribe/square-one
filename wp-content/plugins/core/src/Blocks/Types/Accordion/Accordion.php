@@ -28,6 +28,7 @@ class Accordion extends Block_Config {
 			'icon'        => '<svg width="24" height="18" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="#000" d="M0 0h23.7v2.7H0zM0 12h23.7v2.7H0zM0 15.3h23.7V18H0z"/><path fill="#fff" stroke="#000" d="M1.7 3.8h20v6.8h-20z"/></svg>',
 			'keywords'    => [ __( 'accordion', 'tribe' ) ],
 			'category'    => 'layout',
+			'supports'    => [ 'align' => false ],
 		] ) );
 	}
 
@@ -80,6 +81,7 @@ class Accordion extends Block_Config {
 	public function add_settings() {
 		$this->add_setting( new Field( self::NAME . '_' . self::LAYOUT, [
 			'type'            => 'image_select',
+			'name'            => self::LAYOUT,
 			'choices'         => [
 				self::LAYOUT_INLINE  => __( 'Inline', 'tribe' ),
 				self::LAYOUT_STACKED => __( 'Stacked', 'tribe' ),

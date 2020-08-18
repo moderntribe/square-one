@@ -8,8 +8,6 @@ use Tribe\Project\Assets\Assets_Subscriber;
 use Tribe\Project\Blocks\Blocks_Definer;
 use Tribe\Project\Blocks\Blocks_Subscriber;
 use Tribe\Project\Cache\Cache_Subscriber;
-use Tribe\Project\Components\Components_Definer;
-use Tribe\Project\Components\Components_Subscriber;
 use Tribe\Project\Integrations\Google_Tag_Manager\Google_Tag_Manager_Subscriber;
 use Tribe\Project\Integrations\Gravity_Forms\Gravity_Forms_Subscriber;
 use Tribe\Project\Integrations\Yoast_SEO\Yoast_SEO_Definer;
@@ -19,13 +17,9 @@ use Tribe\Project\Nav_Menus\Nav_Menus_Subscriber;
 use Tribe\Project\Object_Meta\Object_Meta_Definer;
 use Tribe\Project\P2P\P2P_Definer;
 use Tribe\Project\Post_Types;
-use Tribe\Project\Router\Router_Definer;
-use Tribe\Project\Router\Router_Subscriber;
 use Tribe\Project\Settings\Settings_Definer;
 use Tribe\Project\Shortcodes\Shortcodes_Subscriber;
 use Tribe\Project\Taxonomies;
-use Tribe\Project\Templates\Templates_Definer;
-use Tribe\Project\Templates\Templates_Subscriber;
 use Tribe\Project\Theme\Theme_Definer;
 use Tribe\Project\Theme\Theme_Subscriber;
 
@@ -51,11 +45,8 @@ class Core {
 		Object_Meta_Definer::class,
 		P2P_Definer::class,
 		Settings_Definer::class,
-		Templates_Definer::class,
 		Theme_Definer::class,
 		Yoast_SEO_Definer::class,
-		Components_Definer::class,
-//		Router_Definer::class,
 	];
 
 	/**
@@ -71,10 +62,7 @@ class Core {
 		Nav_Menus_Subscriber::class,
 		Shortcodes_Subscriber::class,
 		Theme_Subscriber::class,
-		Templates_Subscriber::class,
 		Yoast_SEO_Subscriber::class,
-//		Router_Subscriber::class,
-		Components_Subscriber::class,
 
 		// our post types
 		Post_Types\Sample\Subscriber::class,

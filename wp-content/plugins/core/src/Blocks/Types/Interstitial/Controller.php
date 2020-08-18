@@ -9,7 +9,7 @@ use Tribe\Project\Templates\Components\Content_Block;
 use Tribe\Project\Templates\Components\Image as Image_Component;
 use Tribe\Project\Templates\Components\Link;
 use Tribe\Project\Templates\Components\Blocks\Interstitial as Container;
-use Tribe\Project\Templates\Components\Text;
+use Tribe\Project\Templates\Components\Controller;
 use Tribe\Project\Templates\Models\Image;
 use Tribe\Project\Theme\Config\Image_Sizes;
 
@@ -73,9 +73,9 @@ class Controller extends Block_Controller {
 
 	private function get_headline(): array {
 		return [
-			Text::TAG     => 'h2',
-			Text::CLASSES => [ 'b-interstitial__title', 'h3' ],
-			Text::TEXT    => $this->attributes[ Interstitial_Block::DESCRIPTION ] ?? '',
+			Controller::TAG     => 'h2',
+			Controller::CLASSES => [ 'b-interstitial__title', 'h3' ],
+			Controller::TEXT    => $this->attributes[ Interstitial_Block::DESCRIPTION ] ?? '',
 		];
 	}
 
