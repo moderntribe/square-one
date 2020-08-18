@@ -4,18 +4,22 @@ declare( strict_types=1 );
 namespace Tribe\Project\Blocks\Types\Accordion;
 
 use Tribe\Project\Blocks\Types\Base_Model;
+use Tribe\Project\Templates\Components\blocks\accordion\Accordion_Block_Controller;
 use Tribe\Project\Templates\Models\Accordion_Row;
 
 class Accordion_Model extends Base_Model {
 	public function get_data() {
 		return [
-			'layout'      => $this->get(
+			Accordion_Block_Controller::LAYOUT      => $this->get(
 				Accordion::LAYOUT,
 				Accordion::LAYOUT_STACKED
 			),
-			'rows'        => $this->get_accordion_rows(),
-			'header'      => $this->get( Accordion::TITLE ),
-			'description' => $this->get( Accordion::DESCRIPTION ),
+			Accordion_Block_Controller::ROWS        => $this->get_accordion_rows(),
+			Accordion_Block_Controller::HEADER      => $this->get( Accordion::TITLE, '' ),
+			Accordion_Block_Controller::DESCRIPTION => $this->get(
+				Accordion::DESCRIPTION,
+				''
+			),
 		];
 	}
 
@@ -31,7 +35,7 @@ class Accordion_Model extends Base_Model {
 				$row[ Accordion::ROW_CONTENT ],
 				uniqid( 'accordion-header-' ),
 				uniqid( 'accordion-content-' ),
-			);
+				);
 		}
 
 		return $data;

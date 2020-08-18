@@ -11,64 +11,38 @@ use Tribe\Project\Templates\Components\Abstract_Controller;
  * Class Accordion
  */
 class Accordion_Block_Controller extends Abstract_Controller {
+	public const LAYOUT            = 'layout';
+	public const ROWS              = 'rows';
+	public const HEADER            = 'header';
+	public const DESCRIPTION       = 'description';
+	public const CONTAINER_CLASSES = 'container_classes';
+	public const CONTAINER_ATTRS   = 'container_attrs';
+	public const CONTENT_CLASSES   = 'content_classes';
+	public const CLASSES           = 'classes';
+	public const ATTRS             = 'attrs';
 
-	/**
-	 * @var string
-	 */
-	public $layout;
-
-	/**
-	 * @var array
-	 */
-	public $rows;
-
-	/**
-	 * @var string
-	 */
-	public $header;
-
-	/**
-	 * @var string
-	 */
-	public $description;
-
-	/**
-	 * @var array
-	 */
-	public $container_classes;
-
-	/**
-	 * @var array
-	 */
-	public $container_attrs;
-
-	/**
-	 * @var array
-	 */
-	public $content_classes;
-
-	/**
-	 * @var array
-	 */
-	public $classes;
-
-	/**
-	 * @var array
-	 */
-	public $attrs;
+	public string $layout;
+	public array $rows;
+	public string $header;
+	public string $description;
+	public array $container_classes;
+	public array $container_attrs;
+	public array $content_classes;
+	public array $classes;
+	public array $attrs;
 
 	public function __construct( array $args = [] ) {
 		$args = $this->get_args( $args );
 
-		$this->layout            = $args[ 'layout' ];
-		$this->rows              = $args[ 'rows' ];
-		$this->header            = $args[ 'header' ];
-		$this->description       = $args[ 'description' ];
-		$this->container_classes = $args[ 'container_classes' ];
-		$this->container_attrs   = $args[ 'container_attrs' ];
-		$this->content_classes   = $args[ 'content_classes' ];
-		$this->classes           = $args[ 'classes' ];
-		$this->attrs             = $args[ 'attrs' ];
+		$this->layout            = $args[ self::LAYOUT ];
+		$this->rows              = $args[ self::ROWS ];
+		$this->header            = $args[ self::HEADER ];
+		$this->description       = $args[ self::DESCRIPTION ];
+		$this->container_classes = $args[ self::CONTAINER_CLASSES ];
+		$this->container_attrs   = $args[ self::CONTAINER_ATTRS ];
+		$this->content_classes   = $args[ self::CONTENT_CLASSES ];
+		$this->classes           = $args[ self::CLASSES ];
+		$this->attrs             = $args[ self::ATTRS ];
 		$this->init();
 	}
 
@@ -77,15 +51,15 @@ class Accordion_Block_Controller extends Abstract_Controller {
 	 */
 	protected function defaults(): array {
 		return [
-			'layout'            => Accordion_Block::LAYOUT_STACKED,
-			'rows'              => [],
-			'header'            => '',
-			'description'       => '',
-			'container_classes' => [],
-			'container_attrs'   => [],
-			'content_classes'   => [ 'b-accordion__content' ],
-			'classes'           => [ 'c-block', 'b-accordion' ],
-			'attrs'             => [],
+			self::LAYOUT            => Accordion_Block::LAYOUT_STACKED,
+			self::ROWS              => [],
+			self::HEADER            => '',
+			self::DESCRIPTION       => '',
+			self::CONTAINER_CLASSES => [],
+			self::CONTAINER_ATTRS   => [],
+			self::CONTENT_CLASSES   => [ 'b-accordion__content' ],
+			self::CLASSES           => [ 'c-block', 'b-accordion' ],
+			self::ATTRS             => [],
 		];
 	}
 
@@ -94,7 +68,7 @@ class Accordion_Block_Controller extends Abstract_Controller {
 	 */
 	protected function required(): array {
 		return [
-			'container_classes' => [ 'b-accordion__container', 'l-container' ],
+			self::CONTAINER_CLASSES => [ 'b-accordion__container', 'l-container' ],
 		];
 	}
 
