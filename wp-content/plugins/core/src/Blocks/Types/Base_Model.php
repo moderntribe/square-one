@@ -28,6 +28,8 @@ class Base_Model {
 		//This accounts for getting data in both modes.
 		$real_key = $this->mode === 'preview' ? 'field_' . $this->name . '_' . $key : $key;
 
-		return $this->data[ $real_key ] ?? $default;
+		return ( isset( $this->data[ $real_key ] ) && ! empty( $this->data[ $real_key ] ) )
+			? $this->data[ $real_key ]
+			: $default;
 	}
 }
