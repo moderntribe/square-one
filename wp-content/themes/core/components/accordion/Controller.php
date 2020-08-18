@@ -4,6 +4,7 @@ namespace Tribe\Project\Templates\Components\accordion;
 
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
+use Tribe\Project\Templates\Models\Accordion_Row;
 
 /**
  * Class Accordion
@@ -15,19 +16,11 @@ use Tribe\Project\Templates\Components\Abstract_Controller;
  *  - Full accessibility baked in.
  *  - Lightweight CSS based height animations
  *  - One item open at a time, with scrolling to keep items on screen. Easily switchable in the js.
- *
- * rows take an array if items. Each row item should look like this.
- * [
- *     'header_text' => 'The Row Title',
- *     'header_id' => 'uid-123',
- *     'content_id' => 'uid-123',
- *     'content => 'Amazing accordion content',
- * ]
  */
 class Controller extends Abstract_Controller {
 
 	/**
-	 * @var string[]s
+	 * @var Accordion_Row[]
 	 */
 	public $rows;
 
@@ -128,11 +121,12 @@ class Controller extends Abstract_Controller {
 			'row_header_attrs'              => [],
 			'row_header_container_classes'  => [ 'c-accordion__header-container' ],
 			'row_content_classes'           => [ 'c-accordion__content' ],
-			'row_content_classes_attrs'     => [],
+			'row_content_attrs'             => [],
 			'row_content_container_attrs'   => [],
 			'row_content_container_classes' => [ 'c-accordion__content-container', 't-sink', 's-sink' ],
 			'row_header_name'               => 'title',
 			'row_content_name'              => 'row_content',
+
 		];
 	}
 
@@ -177,14 +171,14 @@ class Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @param array $row
+	 * @param Accordion_Row $row
 	 *
 	 * @return string
 	 */
-	public function row_content_attrs( array $row ): string {
+	public function row_content_attrs( Accordion_Row $row ): string {
 		return Markup_Utils::concat_attrs( array_merge( [
-			'id'              => esc_attr( $row[ 'content_id' ] ),
-			'aria-labelledby' => esc_attr( $row[ 'header_id' ] ),
+			'id'              => esc_attr( $row->content_id ),
+			'aria-labelledby' => esc_attr( $row->header_id ),
 		], $this->row_content_attrs ) );
 	}
 
@@ -224,14 +218,14 @@ class Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @param array row
+	 * @param Accordion_Row row
 	 *
 	 * @return string
 	 */
-	public function row_header_attrs( array $row ): string {
+	public function row_header_attrs( Accordion_Row $row ): string {
 		return Markup_Utils::concat_attrs( array_merge( [
-			'aria-controls' => esc_attr( $row[ 'content_id' ] ),
-			'id'            => esc_attr( $row[ 'header_id' ] ),
+			'aria-controls' => esc_attr( $row->content_id ),
+			'id'            => esc_attr( $row->header_id ),
 		], $this->row_header_attrs ) );
 	}
 
