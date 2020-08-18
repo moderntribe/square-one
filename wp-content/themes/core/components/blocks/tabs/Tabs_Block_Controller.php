@@ -7,6 +7,7 @@ use Tribe\Libs\Utils\Markup_Utils;
 use \Tribe\Project\Blocks\Types\Tabs\Tabs as Tabs_Block;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\Deferred_Component;
+use Tribe\Project\Templates\Components\tabs\Tabs_Controller;
 
 class Tabs_Block_Controller extends Abstract_Controller {
 	private const LAYOUT            = 'layout';
@@ -79,9 +80,9 @@ class Tabs_Block_Controller extends Abstract_Controller {
 
 	public function get_tabs(): string {
 		$args = [
-			'tabs'    => $this->tabs,
-			'layout'  => $this->layout,
-			'classes' => [ 'b-tabs__content' ],
+			Tabs_Controller::TABS    => $this->tabs,
+			Tabs_Controller::LAYOUT  => $this->layout,
+			Tabs_Controller::CLASSES => [ 'b-tabs__content' ],
 		];
 
 		return tribe_template_part( 'components/tabs/tabs', null, $args );

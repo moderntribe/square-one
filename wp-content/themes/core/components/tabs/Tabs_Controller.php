@@ -18,7 +18,7 @@ class Tabs_Controller extends Abstract_Controller {
 	public const LAYOUT             = 'layout';
 	public const TOGGLE_CLASSES     = 'toggle_classes';
 	public const TAB_BUTTON_CLASSES = 'tab_button_classes';
-	public const TAB_PANEL_CALSSES  = 'tab_panel_classes';
+	public const TAB_PANEL_CLASSES  = 'tab_panel_classes';
 	public const LAYOUT_HORIZONTAL  = 'horizontal';
 	public const LAYOUT_VERTICAL    = 'vertical';
 
@@ -43,19 +43,15 @@ class Tabs_Controller extends Abstract_Controller {
 	 * @param array $args
 	 */
 	public function __construct( array $args = [] ) {
-		$args = wp_parse_args( $args, $this->default() );
+		$args = $this->parse_args( $args );
 
-		foreach ( $this->required() as $key => $value ) {
-			$args[ $key ] = array_merge( $args[ $key ], $value );
-		}
-
-		$this->tabs               = (array) $args['tabs'];
-		$this->classes            = (array) $args['classes'];
-		$this->attrs              = (array) $args['attrs'];
-		$this->layout             = $args['layout'];
-		$this->toggle_classes     = (array) $args['toggle_classes'];
-		$this->tab_button_classes = (array) $args['tab_button_classes'];
-		$this->tab_panel_classes  = (array) $args['tab_panel_classes'];
+		$this->tabs               = $args[ self::TABS ];
+		$this->classes            = $args[ self::CLASSES ];
+		$this->attrs              = $args[ self::ATTRS ];
+		$this->layout             = $args[ self::LAYOUT ];
+		$this->toggle_classes     = $args[ self::TOGGLE_CLASSES ];
+		$this->tab_button_classes = $args[ self::TAB_BUTTON_CLASSES ];
+		$this->tab_panel_classes  = $args[ self::TAB_PANEL_CLASSES ];
 		$this->tablist_id         = uniqid( 'c-tabs__tablist--' );
 
 		$this->init_tabs();
@@ -64,15 +60,15 @@ class Tabs_Controller extends Abstract_Controller {
 	/**
 	 * @return array
 	 */
-	protected function default(): array {
+	protected function defaults(): array {
 		return [
-			'tabs'               => [],
-			'classes'            => [],
-			'attrs'              => [],
-			'layout'             => self::LAYOUT_HORIZONTAL,
-			'toggle_classes'     => [],
-			'tab_button_classes' => [],
-			'tab_panel_classes'  => [ 's-sink', 't-sink' ],
+			self::TABS               => [],
+			self::CLASSES            => [],
+			self::ATTRS              => [],
+			self::LAYOUT             => self::LAYOUT_HORIZONTAL,
+			self::TOGGLE_CLASSES     => [],
+			self::TAB_BUTTON_CLASSES => [],
+			self::TAB_PANEL_CLASSES  => [ 's-sink', 't-sink' ],
 		];
 	}
 
@@ -81,11 +77,11 @@ class Tabs_Controller extends Abstract_Controller {
 	 */
 	protected function required(): array {
 		return [
-			'classes'            => [ 'c-tabs' ],
-			'attrs'              => [ 'data-js' => 'c-tabs' ],
-			'toggle_classes'     => [ 'c-tabs__tablist-toggle' ],
-			'tab_button_classes' => [ 'c-tabs__tab' ],
-			'tab_panel_classes'  => [ 'c-tabs__tabpanel' ],
+			self::CLASSES            => [ 'c-tabs' ],
+			self::ATTRS              => [ 'data-js' => 'c-tabs' ],
+			self::TOGGLE_CLASSES     => [ 'c-tabs__tablist-toggle' ],
+			self::TAB_BUTTON_CLASSES => [ 'c-tabs__tab' ],
+			self::TAB_PANEL_CLASSES  => [ 'c-tabs__tabpanel' ],
 		];
 	}
 
@@ -165,7 +161,7 @@ class Tabs_Controller extends Abstract_Controller {
 	 */
 	private function get_tab_panel( Tab_Model $tab, string $tab_id, int $index ): string {
 		$args = [
-			'content' => $tab->content ?? '',
+			'content' => $tab->content ?: '&nbsp;', // If the tab content is empty, the container component won't render.
 			'classes' => $this->tab_panel_classes,
 			'attrs'   => [
 				'id'              => sprintf( 'c-tabs__tabpanel--%s', $tab_id ),
