@@ -15,7 +15,7 @@ if ( empty( $c->logos ) ) {
 <section <?php echo $c->classes(); ?> <?php echo $c->attributes(); ?>>
 	<div class="l-container b-logos__container">
 
-		<?php echo $c->render_header(); ?>
+		<?php echo $c->get_header(); ?>
 
 		<ul class="b-logos__list <?php printf( 'b-logos--count-%d', count( $c->logos ) ); ?>">
 			<?php foreach ( $c->logos as $logo ) { ?>

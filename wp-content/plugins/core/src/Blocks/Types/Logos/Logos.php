@@ -41,6 +41,12 @@ class Logos extends Block_Config {
 				'type'  => 'textarea',
 			] )
 		)->add_field(
+			new Field( self::NAME . '_' . self::CTA, [
+				'label' => __( 'Call to Action', 'tribe' ),
+				'name'  => self::CTA,
+				'type'  => 'link',
+			] )
+		)->add_field(
 			$this->get_logos_section()
 		);
 	}
