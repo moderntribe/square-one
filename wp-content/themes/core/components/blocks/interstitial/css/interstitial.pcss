@@ -1,0 +1,41 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Component: Block: Interstitial
+ *
+ * ----------------------------------------------------------------------------- */
+
+.b-interstitial {
+	position: relative;
+	display: flex;
+	align-items: center;
+	padding: var(--spacer-80) 0;
+	background-color: var(--color-grey-dark);
+
+	@media (--viewport-full) {
+		padding: var(--spacer-90) 0;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Interstitial: Background Image
+ * ----------------------------------------------------------------------------- */
+
+.b-interstitial__img {
+	/* Overlay */
+	&:after {
+		content: '';
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		background-color: var(--color-black);
+		opacity: 0.5;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Interstitial: Content
+ * ----------------------------------------------------------------------------- */
+
+.b-interstitial__content {
+	position: relative;
+}
