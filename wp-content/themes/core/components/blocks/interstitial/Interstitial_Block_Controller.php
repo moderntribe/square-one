@@ -123,7 +123,7 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 				null,
 				$this->get_headline_args()
 			),
-			'cta'     => defer_template_part( 'components/container/container', null, $this->get_cta_arg() ),
+			'cta'     => defer_template_part( 'components/container/container', null, $this->get_cta_args() ),
 			'layout'  => $this->layout,
 		];
 	}
