@@ -8,7 +8,7 @@ use Tribe\Project\Templates\Components\blocks\accordion\Accordion_Block_Controll
 use Tribe\Project\Templates\Models\Accordion_Row;
 
 class Accordion_Model extends Base_Model {
-	public function get_data() {
+	public function get_data(): array {
 		return [
 			Accordion_Block_Controller::LAYOUT      => $this->get(
 				Accordion::LAYOUT,
@@ -35,7 +35,7 @@ class Accordion_Model extends Base_Model {
 				$row[ Accordion::ROW_CONTENT ],
 				uniqid( 'accordion-header-' ),
 				uniqid( 'accordion-content-' ),
-			);
+				);
 		}
 
 		return $data;

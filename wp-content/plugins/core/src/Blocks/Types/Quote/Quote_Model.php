@@ -10,7 +10,7 @@ class Quote_Model extends Base_Model {
 	/**
 	 * @return array
 	 */
-	public function get_data() {
+	public function get_data(): array {
 		return [
 			Quote_Block_Controller::CITE_TITLE => $this->get( Quote::CITE_TITLE, '' ),
 			Quote_Block_Controller::CITE_NAME  => $this->get( Quote::CITE_NAME, '' ),
