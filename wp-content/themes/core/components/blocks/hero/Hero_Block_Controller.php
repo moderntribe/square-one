@@ -25,7 +25,7 @@ class Hero_Block_Controller extends Abstract_Controller {
 	public const ATTRS             = 'attrs';
 
 	public string $layout;
-	public string $media;
+	public ?int $media;
 	public string $description;
 	public string $title;
 	public string $leadin;

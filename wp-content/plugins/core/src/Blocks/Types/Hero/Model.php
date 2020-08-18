@@ -8,9 +8,10 @@ use Tribe\Project\Blocks\Types\Base_Model;
 class Model extends Base_Model {
 
 	public function get_data(): array {
+
 		return [
 			'layout'      => $this->get( Hero::LAYOUT, Hero::LAYOUT_LEFT ),
-			'media'       => $this->get( Hero::IMAGE, false ),
+			'media'       => $this->get( Hero::IMAGE, null ),
 			'leadin'      => $this->get( Hero::LEAD_IN, '' ),
 			'title'       => $this->get( Hero::TITLE, '' ),
 			'description' => $this->get( Hero::DESCRIPTION, '' ),
