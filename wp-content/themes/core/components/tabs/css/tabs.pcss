@@ -4,63 +4,67 @@
  *
  * ----------------------------------------------------------------------------- */
 
-.c-tab__list {
-	@mixin clearfix;
+.c-tabs__tablist {
+	/* CASE: Horizontal Layout */
+	.c-tabs--layout-horizontal & {
+		margin-right: var(--grid-margin-small-negative);
+		overflow-x: auto;
+		white-space: nowrap;
+		border-bottom: 1px solid var(--color-border);
+
+		@media (--viewport-medium) {
+			margin-right: var(--grid-margin-medium-negative);
+		}
+
+		@media (--viewport-full) {
+			margin-right: 0;
+		}
+	}
 }
 
-.c-tab__button {
-	font-weight: 700;
-	padding: 5px;
-	background: none;
-	text-align: left;
-	border: 1px solid var(--color-tabs-border);
-	margin: 0 5px 5px 0;
-	width: auto;
-	float: left;
-	display: inline-block;
-	vertical-align: baseline;
+.c-tabs__tab {
+	@mixin a-btn-reset;
 
-	&:before {
-		content: ' ';
-		min-height: 1em;
-		display: inline-block;
-		width: 1px;
-		left: -1px;
-	}
-
-	&:focus,
-	&:hover {
-		color: var(--color-primary);
+	/* CASE: Horizontal Layout */
+	.c-tabs--layout-horizontal & {
+		margin: 1px var(--spacer-40) 0 1px;
+		padding: calc(var(--spacer-20) + 4px) 4px;
+		background-image: linear-gradient(currentColor, currentColor);
+		background-position: 0 100%;
+		background-repeat: no-repeat;
+		background-size: 0 4px;
 		transition: var(--transition);
-	}
 
-	@media (--viewport-full) {
-		padding: var(--spacer-20);
-		border-bottom: 0;
-		margin: 0 5px 0 0;
+		@media (--viewport-medium) {
+			padding: calc(var(--spacer-20) + 4px) var(--spacer-10);
+			margin-right: var(--spacer-70);
+		}
+
+		&:hover,
+		&:focus {
+			color: var(--color-link-hover);
+			background-size: 100% 4px;
+		}
+
+		/* CASE: Selected Tab */
+		&[aria-selected="true"] {
+			color: var(--color-link-hover);
+			background-size: 100% 4px;
+
+			&:focus {
+				outline: 1px dotted;
+			}
+		}
 	}
 }
 
-.c-tab__button--active {
-	color: var(--color-primary);
-	background-color: var(--color-tabs-btn-bg);
+.c-tabs__tabpanels-wrapper {
+	margin-top: var(--spacer-40);
 }
 
-.c-tab__content {
-	border: 1px solid var(--color-tabs-border);
-	margin-bottom: var(--spacer-20);
-	padding: var(--spacer-20);
-	display: none;
+.c-tabs__tabpanel {
 
 	&:focus {
-		outline: none;
+		outline: 1px dotted;
 	}
-
-	@media (--viewport-full) {
-		margin-bottom: var(--spacer-40);
-	}
-}
-
-.c-tab__content--active {
-	display: block;
 }
