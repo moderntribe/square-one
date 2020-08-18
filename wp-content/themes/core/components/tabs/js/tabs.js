@@ -99,20 +99,23 @@ const handleTabClick = ( e ) => e.target.getAttribute( 'aria-selected' ) === 'fa
  * @param e
  */
 const handleTabListKeyDown = ( e ) => {
+	const container = tools.closest( e.target, '[data-js="c-tabs"]' );
+	const tabList = container.querySelector( '[role="tablist"]' );
+
 	const keyEvents = [
-		'ArrowUp',
-		'ArrowDown',
 		'ArrowLeft',
 		'ArrowRight',
 	];
+
+	if ( tabList.getAttribute( 'aria-orientation' ) === 'vertical' ) {
+		keyEvents.push( 'ArrowUp' );
+		keyEvents.push( 'ArrowDown' );
+	}
 
 	if ( ! keyEvents.includes( e.key ) ) {
 		return;
 	}
 
-	e.preventDefault();
-
-	const container = tools.closest( e.target, '[data-js="c-tabs"]' );
 	const tabButtons = tools.getNodes( '[role="tab"]', true, container, true );
 	const currentIndex = tabButtons.indexOf( document.activeElement );
 	const lastIndex = tabButtons.length - 1;
