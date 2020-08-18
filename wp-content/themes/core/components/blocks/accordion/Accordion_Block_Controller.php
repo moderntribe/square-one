@@ -10,7 +10,7 @@ use Tribe\Project\Templates\Components\Abstract_Controller;
 /**
  * Class Accordion
  */
-class Controller extends Abstract_Controller {
+class Accordion_Block_Controller extends Abstract_Controller {
 
 	/**
 	 * @var string
