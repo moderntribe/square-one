@@ -53,7 +53,6 @@ class Hero_Block_Controller extends Abstract_Controller {
 		$this->content_classes   = (array) $args[ self::CONTENT_CLASSES ];
 		$this->classes           = (array) $args[ self::CLASSES ];
 		$this->attrs             = (array) $args[ self::ATTRS ];
-		$this->init();
 	}
 
 	/**
@@ -77,20 +76,6 @@ class Hero_Block_Controller extends Abstract_Controller {
 			],
 			'attrs'             => [],
 		];
-	}
-
-	/**
-	 * @return array
-	 */
-	protected function required(): array {
-		return [];
-	}
-
-	/**
-	 * Any required setup stuff
-	 */
-	protected function init() {
-		$this->classes[] = 'c-block--' . $this->layout;
 	}
 
 	/**
@@ -165,6 +150,8 @@ class Hero_Block_Controller extends Abstract_Controller {
 	 * @return string
 	 */
 	public function classes(): string {
+		$this->classes[] = 'c-block--' . $this->layout;
+
 		return Markup_Utils::class_attribute( $this->classes );
 	}
 

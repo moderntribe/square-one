@@ -4,8 +4,6 @@ declare( strict_types=1 );
 namespace Tribe\Project\Templates\Components\blocks\interstitial;
 
 use Tribe\Libs\Utils\Markup_Utils;
-use Tribe\Project\Blocks\Types\Hero\Model;
-use Tribe\Project\Blocks\Types\Interstitial\Controller;
 use Tribe\Project\Blocks\Types\Interstitial\Interstitial as Interstitial_Block;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Models\Image;
@@ -47,7 +45,6 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 		$this->media_classes     = (array) $args[ self::MEDIA_CLASSES ];
 		$this->content_classes   = (array) $args[ self::CONTENT_CLASSES ];
 		$this->attrs             = (array) $args[ self::ATTRS ];
-		$this->init();
 	}
 
 	/**
@@ -65,10 +62,6 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 			self::CLASSES           => [ 'c-block', 'b-interstitial', 'c-block--full-bleed' ],
 			self::ATTRS             => [],
 		];
-	}
-
-	public function init() {
-		$this->classes[] = 'c-block--' . $this->layout;
 	}
 
 	/**
@@ -96,6 +89,8 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 	 * @return string
 	 */
 	public function classes(): string {
+		$this->classes[] = 'c-block--' . $this->layout;
+
 		return Markup_Utils::class_attribute( $this->classes );
 	}
 

@@ -32,7 +32,7 @@ class Accordion_Block_Controller extends Abstract_Controller {
 	public array $attrs;
 
 	public function __construct( array $args = [] ) {
-		$args = $this->get_args( $args );
+		$args = $this->parse_args( $args );
 
 		$this->layout            = $args[ self::LAYOUT ];
 		$this->rows              = $args[ self::ROWS ];
@@ -43,7 +43,6 @@ class Accordion_Block_Controller extends Abstract_Controller {
 		$this->content_classes   = $args[ self::CONTENT_CLASSES ];
 		$this->classes           = $args[ self::CLASSES ];
 		$this->attrs             = $args[ self::ATTRS ];
-		$this->init();
 	}
 
 	/**
@@ -73,35 +72,11 @@ class Accordion_Block_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * Initial setup stuff
-	 */
-	public function init() {
-		$this->classes[] = 'c-block--' . $this->layout;
-
-		if ( $this->layout === 'stacked' ) {
-			$this->container_classes[] = 'l-sink';
-			$this->container_classes[] = 'l-sink--double';
-		}
-	}
-
-	/**
-	 * @param array $args
-	 *
-	 * @return array
-	 */
-	protected function get_args( array $args ): array {
-		$args = wp_parse_args( $args, $this->defaults() );
-		foreach ( $this->required() as $key => $value ) {
-			$args[ $key ] = array_merge( $args[ $key ], $value );
-		}
-
-		return $args;
-	}
-
-	/**
 	 * @return string
 	 */
 	public function classes(): string {
+		$this->classes[] = 'c-block--' . $this->layout;
+
 		return Markup_Utils::class_attribute( $this->classes );
 	}
 
@@ -116,6 +91,11 @@ class Accordion_Block_Controller extends Abstract_Controller {
 	 * @return string
 	 */
 	public function container_classes(): string {
+		if ( $this->layout === 'stacked' ) {
+			$this->container_classes[] = 'l-sink';
+			$this->container_classes[] = 'l-sink--double';
+		}
+
 		return Markup_Utils::class_attribute( $this->container_classes );
 	}
 
