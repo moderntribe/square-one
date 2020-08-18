@@ -3,6 +3,7 @@
 namespace Tribe\Project\Templates\Components\share;
 
 use Tribe\Project\Templates\Components\Abstract_Controller;
+use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Theme\Config\Image_Sizes;
 
 /**
@@ -108,7 +109,7 @@ class Controller extends Abstract_Controller {
 
 				$image               = wp_get_attachment_image_src(
 					get_post_thumbnail_id( $post->ID ),
-					Image_Sizes::CORE_FULL 
+					Image_Sizes::CORE_FULL
 				);
 				$data[ 'image_src' ] = $image[ 0 ];
 
@@ -160,7 +161,7 @@ class Controller extends Abstract_Controller {
 				$link  = sprintf(
 					'mailto:?subject=%1$s&body=%2$s',
 					urlencode( $data[ 'title' ] ),
-					urlencode( esc_url_raw( $data[ 'link' ] ) ) 
+					urlencode( esc_url_raw( $data[ 'link' ] ) )
 				);
 				$icon  = 'icon-mail';
 
@@ -184,7 +185,7 @@ class Controller extends Abstract_Controller {
 					'http://pinterest.com/pin/create/button/?url=%1$s&amp;media=%2$s&amp;description=%3$s',
 					urlencode( esc_url_raw( $data[ 'link' ] ) ),
 					urlencode( esc_url_raw( $data[ 'image_src' ] ) ),
-					urlencode( $data[ 'title' ] ) 
+					urlencode( $data[ 'title' ] )
 				);
 				$icon       = 'icon-pinterest';
 				$attributes = [
@@ -206,7 +207,7 @@ class Controller extends Abstract_Controller {
 				$link       = sprintf(
 					'https://twitter.com/share?url=%1$s&text=%2$s',
 					urlencode( esc_url_raw( $data[ 'link' ] ) ),
-					urlencode( $text ) 
+					urlencode( $text )
 				);
 				$icon       = 'icon-twitter';
 				$attributes = [
@@ -222,7 +223,7 @@ class Controller extends Abstract_Controller {
 				$link       = sprintf(
 					'http://www.facebook.com/sharer.php?u=%1$s&t=%2$s',
 					urlencode( esc_url_raw( $data[ 'link' ] ) ),
-					urlencode( $data[ 'title' ] ) 
+					urlencode( $data[ 'title' ] )
 				);
 				$icon       = 'icon-facebook';
 				$attributes = [
@@ -238,7 +239,7 @@ class Controller extends Abstract_Controller {
 				$link       = sprintf(
 					'http://www.linkedin.com/shareArticle?mini=true&url=%1$s&title=%2$s',
 					urlencode( esc_url_raw( $data[ 'link' ] ) ),
-					urlencode( $data[ 'title' ] ) 
+					urlencode( $data[ 'title' ] )
 				);
 				$icon       = 'icon-linkedin';
 				$attributes = [
@@ -267,10 +268,10 @@ class Controller extends Abstract_Controller {
 		$attributes[ 'title' ] = $label;
 
 		return [
-			'classes' => $classes,
-			'url'     => $url,
-			'attrs'   => $attributes,
-			'content' => $this->link_text_component( $label ),
+			Link_Controller::CLASSES => $classes,
+			Link_Controller::URL     => $url,
+			Link_Controller::ATTRS   => $attributes,
+			Link_Controller::CONTENT => $this->link_text_component( $label ),
 		];
 	}
 
