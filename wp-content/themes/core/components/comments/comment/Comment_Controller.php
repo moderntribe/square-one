@@ -32,10 +32,8 @@ class Comment_Controller extends Abstract_Controller {
 	 * @param array $args
 	 */
 	public function __construct( array $args = [] ) {
-		$args = wp_parse_args( $args, $this->defaults() );
-		foreach ( $this->required() as $key => $value ) {
-			$args[ $key ] = array_merge( $args[ $key ], $value );
-		}
+		$args = $this->parse_args( $args );
+
 		$this->comment_id = (int) $args[ self::COMMENT_ID ];
 		$this->classes    = (array) $args[ self::CLASSES ];
 		$this->attrs      = (array) $args[ self::ATTRS ];
