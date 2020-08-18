@@ -24,6 +24,12 @@ class Base_Model {
 	 * @return bool|mixed
 	 */
 	public function get( $key, $default = false ) {
-		return get_field( $key ) ?? $default;
+		$value = get_field( $key );
+		//check to support nullable type properties in components.
+		// ACF will in some cases return and empty string when we may want it to be null.
+		// This allows us to always determine the default.
+		return ! empty( $value )
+			? $value
+			: $default;
 	}
 }
