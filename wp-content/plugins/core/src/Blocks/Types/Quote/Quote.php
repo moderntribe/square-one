@@ -46,8 +46,10 @@ class Quote extends Block_Config {
 				'type'          => 'image',
 				'return_format' => 'id',
 				'preview_size'  => 'medium',
-				'instructions'  => __( 'Recommended image size by layout:<br>Overlay: 1920px wide with a 16:9 aspect ratio.<br>Left/Right: 1536px wide with a 4:3 aspect ratio.',
-					'tribe' ),
+				'instructions'  => __(
+					'Recommended image size by layout:<br>Overlay: 1920px wide with a 16:9 aspect ratio.<br>Left/Right: 1536px wide with a 4:3 aspect ratio.',
+					'tribe' 
+				),
 			] )
 		)->add_field( new Field( self::NAME . '_' . self::QUOTE, [
 				'label'        => __( 'Quotation', 'tribe' ),
