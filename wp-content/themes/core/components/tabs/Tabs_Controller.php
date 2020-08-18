@@ -11,59 +11,31 @@ use Tribe\Project\Templates\Models\Tab as Tab_Model;
  *
  * @package Tribe\Project\Templates\Components\tabs
  */
-class Controller extends Abstract_Controller {
-	public const LAYOUT_HORIZONTAL = 'horizontal';
-	public const LAYOUT_VERTICAL   = 'vertical';
+class Tabs_Controller extends Abstract_Controller {
+	public const TABS               = 'tabs';
+	public const CLASSES            = 'classes';
+	public const ATTRS              = 'attrs';
+	public const LAYOUT             = 'layout';
+	public const TOGGLE_CLASSES     = 'toggle_classes';
+	public const TAB_BUTTON_CLASSES = 'tab_button_classes';
+	public const TAB_PANEL_CALSSES  = 'tab_panel_classes';
+	public const LAYOUT_HORIZONTAL  = 'horizontal';
+	public const LAYOUT_VERTICAL    = 'vertical';
 
 	/**
 	 * @var Tab_Model[] The collection of tabs to render. Each item should be a \Tribe\Project\Templates\Models\Tab object.
 	 */
-	private $tabs;
+	private array $tabs;
 
-	/**
-	 * @var array Classes applied to the component.
-	 */
-	private $classes;
-
-	/**
-	 * @var array Attributes applied to the component.
-	 */
-	private $attrs;
-
-	/**
-	 * @var string The layout applied to this instance of the component. Options are `horizontal` or `vertical`.
-	 */
-	private $layout;
-
-	/**
-	 * @var array Classes applied to the tabs toggle button. (Only applicable to the vertical layout.)
-	 */
-	private $toggle_classes;
-
-	/**
-	 * @var array Classes applied to each tab's trigger button.
-	 */
-	private $tab_button_classes;
-
-	/**
-	 * @var array Classes applied to each tab's tabpanel/content.
-	 */
-	private $tab_panel_classes;
-
-	/**
-	 * @var string Unique ID applied to this instance's tablist show/hide toggle.
-	 */
-	private $tablist_id;
-
-	/**
-	 * @var array The array of tab buttons/triggers to be rendered.
-	 */
-	private $tab_buttons = [];
-
-	/**
-	 * @var array The array of tabpanels/tab content to be rendered.
-	 */
-	private $tab_panels = [];
+	private array $classes;
+	private array $attrs;
+	private string $layout;
+	private array $toggle_classes;
+	private array $tab_button_classes;
+	private array $tab_panel_classes;
+	private string $tablist_id;
+	private array $tab_buttons = [];
+	private array $tab_panels = [];
 
 	/**
 	 * Controller constructor.

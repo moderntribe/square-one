@@ -1,16 +1,17 @@
 <?php
 declare( strict_types=1 );
 
+use \Tribe\Project\Templates\Components\tabs\Tabs_Controller;
+
 /**
  * @var array $args Arguments passed to the template
  */
 // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
-$c = \Tribe\Project\Templates\Components\tabs\Controller::factory( $args );
+$c = Tabs_Controller::factory( $args );
 
 if ( empty( $c->get_tab_panels() ) ) {
 	return;
 }
-
 ?>
 
 <div <?php echo $c->get_classes(); ?> <?php echo $c->get_attrs(); ?>>
