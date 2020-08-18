@@ -41,11 +41,7 @@ class Hero_Block_Controller extends Abstract_Controller {
 	 * @param array $args
 	 */
 	public function __construct( array $args = [] ) {
-		$args = wp_parse_args( $args, $this->defaults() );
-		foreach ( $this->required() as $key => $value ) {
-			$args[ $key ] = array_merge( $args[ $key ], $value );
-		}
-
+		$args                    = $this->parse_args( $args );
 		$this->layout            = $args[ self::LAYOUT ];
 		$this->media             = $args[ self::MEDIA ];
 		$this->title             = $args[ self::TITLE ];
