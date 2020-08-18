@@ -58,7 +58,7 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 			self::LAYOUT            => Interstitial_Block::LAYOUT_LEFT,
 			self::MEDIA             => null,
 			self::CONTENT           => '',
-			self::CTA               => '',
+			self::CTA               => [],
 			self::CONTAINER_CLASSES => [ 'b-interstitial__container', 'l-container' ],
 			self::MEDIA_CLASSES     => [ 'b-interstitial__media' ],
 			self::CONTENT_CLASSES   => [ 'b-interstitial__content' ],
@@ -158,7 +158,7 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 			'classes' => [ 'a-btn', 'a-btn--has-icon-after', 'icon-arrow-right' ],
 		];
 		$container_args = [
-			'content' => defer_template_part( 'component/link/link', null, $cta_args ),
+			'content' => defer_template_part( 'components/link/link', null, $cta_args ),
 			'tag'     => 'p',
 			'classes' => [ 'b-interstitial__cta' ],
 		];
