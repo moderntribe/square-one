@@ -11,62 +11,30 @@ use Tribe\Project\Theme\Config\Image_Sizes;
 /**
  * Class Hero
  */
-class Controller extends Abstract_Controller {
+class Hero_Block_Controller extends Abstract_Controller {
+	public const LAYOUT            = 'layout';
+	public const MEDIA             = 'media';
+	public const DESCRIPTION       = 'description';
+	public const TITLE             = 'title';
+	public const LEADIN            = 'leadin';
+	public const CTA               = 'cta';
+	public const CONTAINER_CLASSES = 'container_classes';
+	public const MEDIA_CLASSES     = 'media_classes';
+	public const CONTENT_CLASSES   = 'content_classes';
+	public const CLASSES           = 'classes';
+	public const ATTRS             = 'attrs';
 
-	/**
-	 * @var string
-	 */
-	public $layout;
-
-	/**
-	 * @var string
-	 */
-	public $media;
-
-	/**
-	 * @var string
-	 */
-	public $description;
-
-	/**
-	 * @var string
-	 */
-	public $title;
-
-	/**
-	 * @var string
-	 */
-	public $leadin;
-
-	/**
-	 * @var array
-	 */
-	public $cta;
-
-	/**
-	 * @var array
-	 */
-	public $container_classes;
-
-	/**
-	 * @var array
-	 */
-	public $media_classes;
-
-	/**
-	 * @var array
-	 */
-	public $content_classes;
-
-	/**
-	 * @var array
-	 */
-	public $classes;
-
-	/**
-	 * @var array
-	 */
-	public $attrs;
+	public string $layout;
+	public string $media;
+	public string $description;
+	public string $title;
+	public string $leadin;
+	public array $cta;
+	public array $container_classes;
+	public array $media_classes;
+	public array $content_classes;
+	public array $classes;
+	public array $attrs;
 
 	/**
 	 *
@@ -78,17 +46,17 @@ class Controller extends Abstract_Controller {
 			$args[ $key ] = array_merge( $args[ $key ], $value );
 		}
 
-		$this->layout            = $args[ 'layout' ];
-		$this->media             = $this->get_image( $args[ 'media' ] );
-		$this->title             = $args[ 'title' ];
-		$this->description       = $args[ 'description' ];
-		$this->cta               = (array) $args[ 'cta' ];
-		$this->leadin            = $args[ 'leadin' ];
-		$this->container_classes = (array) $args[ 'container_classes' ];
-		$this->media_classes     = (array) $args[ 'media_classes' ];
-		$this->content_classes   = (array) $args[ 'content_classes' ];
-		$this->classes           = (array) $args[ 'classes' ];
-		$this->attrs             = (array) $args[ 'attrs' ];
+		$this->layout            = $args[ self::LAYOUT ];
+		$this->media             = $args[ self::MEDIA ];
+		$this->title             = $args[ self::TITLE ];
+		$this->description       = $args[ self::DESCRIPTION ];
+		$this->cta               = (array) $args[ self::CTA ];
+		$this->leadin            = $args[ self::LEADIN ];
+		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
+		$this->media_classes     = (array) $args[ self::MEDIA_CLASSES ];
+		$this->content_classes   = (array) $args[ self::CONTENT_CLASSES ];
+		$this->classes           = (array) $args[ self::CLASSES ];
+		$this->attrs             = (array) $args[ self::ATTRS ];
 		$this->init();
 	}
 
@@ -132,10 +100,10 @@ class Controller extends Abstract_Controller {
 	/**
 	 * @param array $args
 	 *
-	 * @return string
+	 * @return array
 	 */
-	public function get_content(): string {
-		return tribe_template_part( 'components/content_block/content_block', null, [
+	public function get_content_args(): array {
+		return [
 			'classes' => [ 'b-hero__content-container', 't-theme--light' ],
 			'leadin'  => defer_template_part( 'components/text/text', null, [
 				'content' => $this->leadin,
@@ -148,21 +116,21 @@ class Controller extends Abstract_Controller {
 			] ),
 			'cta'     => defer_template_part( 'components/link/link', null, $this->cta ?? [] ),
 			'layout'  => $this->layout,
-		] );
+		];
 	}
 
 	/**
 	 * @param $attachment_id
 	 *
-	 * @return string
+	 * @return array
 	 */
-	protected function get_image( $attachment_id ): string {
-		if ( empty( $attachment_id ) ) {
-			return '';
+	public function get_image_args(): array {
+		if ( empty( $this->media ) ) {
+			return [];
 		}
 
-		return tribe_template_part( 'components/image/image', null, [
-			'attachment'    => Image::factory( (int) $attachment_id ),
+		return [
+			'attachment'    => Image::factory( (int) $this->media ),
 			'as_bg'         => true,
 			'use_lazyload'  => true,
 			'wrapper_tag'   => 'div',
@@ -173,7 +141,7 @@ class Controller extends Abstract_Controller {
 				Image_Sizes::CORE_FULL,
 				Image_Sizes::CORE_MOBILE,
 			],
-		] );
+		];
 	}
 
 	/**
