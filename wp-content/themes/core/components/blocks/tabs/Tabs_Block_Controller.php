@@ -40,7 +40,7 @@ class Tabs_Block_Controller extends Abstract_Controller {
 	/**
 	 * @return array
 	 */
-	protected function default(): array {
+	protected function defaults(): array {
 		return [
 			self::LAYOUT            => Tabs_Block::LAYOUT_HORIZONTAL,
 			self::TITLE             => '',
