@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "63edad10f6766639c1b4a98eb2c834c7",
+    "content-hash": "7ee089363f4d3c753488dd843d82e483",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -20,16 +20,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.148.3",
+            "version": "3.149.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "04c268f63c915fe251954927713d506ed21c4b49"
+                "reference": "8630a2426622d003e27382e2bd129cde5678ae85"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/04c268f63c915fe251954927713d506ed21c4b49",
-                "reference": "04c268f63c915fe251954927713d506ed21c4b49",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/8630a2426622d003e27382e2bd129cde5678ae85",
+                "reference": "8630a2426622d003e27382e2bd129cde5678ae85",
                 "shasum": ""
             },
             "require": {
@@ -101,7 +101,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2020-08-12T18:16:38+00:00"
+            "time": "2020-08-14T18:11:00+00:00"
         },
         {
             "name": "clue/stream-filter",
@@ -271,16 +271,6 @@
                 "zikula"
             ],
             "time": "2017-08-09T07:53:48+00:00"
-        },
-        {
-            "name": "cyberwani/acf-image-select",
-            "version": "1.0",
-            "source": {
-                "type": "git",
-                "url": "git@github.com:cyberwani/acf-image-select.git",
-                "reference": "master"
-            },
-            "type": "wordpress-plugin"
         },
         {
             "name": "ffraenz/private-composer-installer",
@@ -1076,6 +1066,16 @@
                 "psr-3"
             ],
             "time": "2017-06-19T01:22:40+00:00"
+        },
+        {
+            "name": "msawicki/acf-image-select",
+            "version": "1.0",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:msawicki/ACF-Image-Select.git",
+                "reference": "master"
+            },
+            "type": "wordpress-plugin"
         },
         {
             "name": "mtdowling/jmespath.php",
@@ -4037,6 +4037,16 @@
                 "ssl",
                 "tls"
             ],
+            "funding": [
+                {
+                    "url": "https://packagist.com",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/composer/composer",
+                    "type": "tidelift"
+                }
+            ],
             "time": "2020-04-08T08:27:21+00:00"
         },
         {
@@ -5111,16 +5121,16 @@
         },
         {
             "name": "lucatume/wp-browser",
-            "version": "2.6.6",
+            "version": "2.6.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lucatume/wp-browser.git",
-                "reference": "4f42d000acd44af3555ea7d6ead8d882d25154f2"
+                "reference": "0323640f8120900eac034ded2bd0cffb2ccbebfa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lucatume/wp-browser/zipball/4f42d000acd44af3555ea7d6ead8d882d25154f2",
-                "reference": "4f42d000acd44af3555ea7d6ead8d882d25154f2",
+                "url": "https://api.github.com/repos/lucatume/wp-browser/zipball/0323640f8120900eac034ded2bd0cffb2ccbebfa",
+                "reference": "0323640f8120900eac034ded2bd0cffb2ccbebfa",
                 "shasum": ""
             },
             "require": {
@@ -5190,7 +5200,7 @@
                 "codeception",
                 "wordpress"
             ],
-            "time": "2020-08-04T09:56:19+00:00"
+            "time": "2020-08-14T14:42:07+00:00"
         },
         {
             "name": "mck89/peast",
