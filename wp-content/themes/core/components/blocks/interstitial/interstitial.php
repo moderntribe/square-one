@@ -14,11 +14,15 @@ $c = Interstitial_Block_Controller::factory( $args );
 
 		<?php if ( $c->media ) { ?>
 			<div <?php echo $c->media_classes(); ?>>
-				<?php get_template_part( 'components/image/image', null, $c->get_media() ); ?>
+				<?php get_template_part(
+					'components/image/image',
+					null,
+					$c->get_media_args()
+				); ?>
 			</div>
 		<?php } ?>
 
-		<?php if ( $c->content ) { ?>
+		<?php if ( ! empty( $c->get_content() ) ) { ?>
 			<div <?php echo $c->content_classes(); ?>>
 				<?php get_template_part(
 					'components/content_block/content_block',

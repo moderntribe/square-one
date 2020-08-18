@@ -37,7 +37,7 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 	public array $attrs;
 
 	public function __construct( array $args = [] ) {
-		$args                    = wp_parse_args( $args, $this->defaults() );
+		$args                    = $this->parse_args( $args );
 		$this->classes           = (array) $args[ self::CLASSES ];
 		$this->layout            = $args[ self::LAYOUT ];
 		$this->media             = $args[ self::MEDIA ];
@@ -121,9 +121,9 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 			'title'   => defer_template_part(
 				'components/text/text',
 				null,
-				$this->get_headline() 
+				$this->get_headline_args()
 			),
-			'cta'     => defer_template_part( 'components/link/link', null, $this->get_cta() ),
+			'cta'     => defer_template_part( 'components/container/container', null, $this->get_cta_arg() ),
 			'layout'  => $this->layout,
 		];
 	}
@@ -131,7 +131,7 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 	/**
 	 * @return array
 	 */
-	protected function get_headline(): array {
+	protected function get_headline_args(): array {
 		return [
 			'tag'     => 'h2',
 			'classes' => [ 'b-interstitial__title', 'h3' ],
@@ -139,7 +139,7 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 		];
 	}
 
-	protected function get_cta(): array {
+	protected function get_cta_args(): array {
 
 		$cta = wp_parse_args( $this->cta, [
 			'text'   => '',
@@ -151,14 +151,19 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 			return [];
 		}
 
-		return [
-			'url'             => $cta[ 'url' ],
-			'content'         => $cta[ 'text' ] ? : $cta[ 'url' ],
-			'target'          => $cta[ 'target' ],
-			'classes'         => [ 'a-btn', 'a-btn--has-icon-after', 'icon-arrow-right' ],
-			'wrapper_tag'     => 'p',
-			'wrapper_classes' => [ 'b-interstitial__cta' ],
+		$cta_args       = [
+			'url'     => $cta[ 'url' ],
+			'content' => $cta[ 'text' ] ? : $cta[ 'url' ],
+			'target'  => $cta[ 'target' ],
+			'classes' => [ 'a-btn', 'a-btn--has-icon-after', 'icon-arrow-right' ],
 		];
+		$container_args = [
+			'content' => defer_template_part( 'component/link/link', null, $cta_args ),
+			'tag'     => 'p',
+			'classes' => [ 'b-interstitial__cta' ],
+		];
+
+		return $container_args;
 	}
 
 	/**
@@ -166,7 +171,7 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 	 *
 	 * @return array
 	 */
-	public function get_media(): array {
+	public function get_media_args(): array {
 		if ( ! $this->media ) {
 			return [];
 		}
