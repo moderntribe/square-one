@@ -1,11 +1,13 @@
 <?php
 declare( strict_types=1 );
 
+use \Tribe\Project\Templates\Components\quote\Quote_Controller;
+
 /**
  * @var array $args Arguments passed to the template
  */
 // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
-$c = \Tribe\Project\Templates\Components\quote\Controller::factory( $args );
+$c = Quote_Controller::factory( $args );
 ?>
 
 <blockquote
@@ -21,8 +23,9 @@ $c = \Tribe\Project\Templates\Components\quote\Controller::factory( $args );
 
 	<?php if ( $c->has_citation() ) { ?>
 		<cite class="c-quote__cite">
-
-			<?php echo $c->render_image(); ?>
+			<?php if ( $c->cite_image ) {
+				get_template_part( 'components/image/image', null, $c->get_image_args() );
+			} ?>
 
 			<span class="c-quote__cite-text">
 				<?php if ( ! empty( $c->cite_name ) ) { ?>
