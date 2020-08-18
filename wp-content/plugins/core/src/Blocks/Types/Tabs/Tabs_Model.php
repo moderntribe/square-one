@@ -12,7 +12,7 @@ use Tribe\Project\Templates\Models\Tab as Tab_Model;
  *
  * @package Tribe\Project\Blocks\Types\Tabs
  */
-class Model extends Base_Model {
+class Tabs_Model extends Base_Model {
 
 	/**
 	 * @return array

@@ -1,9 +1,13 @@
 <?php
+declare( strict_types=1 );
+
+use \Tribe\Project\Templates\Components\blocks\tabs\Tabs_Block_Controller;
+
 /**
  * @var array $args Arguments passed to the template
  */
 // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
-$c = \Tribe\Project\Templates\Components\blocks\tabs\Controller::factory( $args );
+$c = Tabs_Block_Controller::factory( $args );
 ?>
 <section <?php echo $c->classes(); ?> <?php echo $c->attrs(); ?>>
 	<div <?php echo $c->container_classes(); ?>>

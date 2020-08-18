@@ -8,30 +8,33 @@ use \Tribe\Project\Blocks\Types\Tabs\Tabs as Tabs_Block;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\Deferred_Component;
 
-class Controller extends Abstract_Controller {
+class Tabs_Block_Controller extends Abstract_Controller {
+	private const LAYOUT            = 'layout';
+	private const TITLE             = 'title';
+	private const DESCRIPTION       = 'description';
+	private const TABS              = 'tabs';
+	private const CLASSES           = 'classes';
+	private const ATTRS             = 'attrs';
+	private const CONTAINER_CLASSES = 'container_classes';
 
-	private $layout;
-	private $title;
-	private $description;
-	private $tabs;
-	private $classes;
-	private $attrs;
-	private $container_classes;
+	private string $layout;
+	private string $title;
+	private string $description;
+	private array $tabs;
+	private array $classes;
+	private array $attrs;
+	private array $container_classes;
 
 	public function __construct( array $args = [] ) {
-		$args = wp_parse_args( $args, $this->default() );
+		$args = $this->parse_args( $args );
 
-		foreach ( $this->required() as $key => $value ) {
-			$args[ $key ] = array_merge( $args[ $key ], $value );
-		}
-
-		$this->layout            = $args['layout'];
-		$this->title             = $args['title'];
-		$this->description       = $args['description'];
-		$this->tabs              = (array) $args['tabs'];
-		$this->classes           = (array) $args['classes'];
-		$this->attrs             = (array) $args['attrs'];
-		$this->container_classes = (array) $args['container_classes'];
+		$this->layout            = $args[ self::LAYOUT ];
+		$this->title             = $args[ self::TITLE ];
+		$this->description       = $args[ self::DESCRIPTION ];
+		$this->tabs              = $args[ self::TABS ];
+		$this->classes           = $args[ self::CLASSES ];
+		$this->attrs             = $args[ self::ATTRS ];
+		$this->container_classes = $args[ self::CONTAINER_CLASSES ];
 	}
 
 	/**
@@ -39,13 +42,13 @@ class Controller extends Abstract_Controller {
 	 */
 	protected function default(): array {
 		return [
-			'layout'            => Tabs_Block::LAYOUT_HORIZONTAL,
-			'title'             => '',
-			'description'       => '',
-			'tabs'              => [],
-			'classes'           => [],
-			'attrs'             => [],
-			'container_classes' => [ 'l-container' ],
+			self::LAYOUT            => Tabs_Block::LAYOUT_HORIZONTAL,
+			self::TITLE             => '',
+			self::DESCRIPTION       => '',
+			self::TABS              => [],
+			self::CLASSES           => [],
+			self::ATTRS             => [],
+			self::CONTAINER_CLASSES => [ 'l-container' ],
 		];
 	}
 
@@ -54,8 +57,8 @@ class Controller extends Abstract_Controller {
 	 */
 	protected function required(): array {
 		return [
-			'classes'           => [ 'c-block', 'b-tabs' ],
-			'container_classes' => [ 'b-tabs__container' ],
+			self::CLASSES           => [ 'c-block', 'b-tabs' ],
+			self::CONTAINER_CLASSES => [ 'b-tabs__container' ],
 		];
 	}
 
