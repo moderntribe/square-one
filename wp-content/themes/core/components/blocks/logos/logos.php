@@ -5,7 +5,7 @@ declare( strict_types=1 );
  * @var array $args Arguments passed to the template
  */
 // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
-$c = \Tribe\Project\Templates\Components\blocks\logos\Controller::factory( $args );
+$c = Tribe\Project\Templates\Components\blocks\logos\Logos_Block_Controller::factory( $args );
 
 if ( empty( $c->logos ) ) {
 	return;

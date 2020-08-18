@@ -9,35 +9,24 @@ use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Deferred_Component;
 use Tribe\Project\Templates\Components\content_block\Controller as Content_Block;
 
-class Controller extends Abstract_Controller {
-	/**
-	 * @var string[]
-	 */
-	private $classes;
-	/**
-	 * @var string[]
-	 */
-	private $attrs;
-	/**
-	 * @var array
-	 */
-	private $header;
-	/**
-	 * @var array
-	 */
-	public $logos;
+class Logos_Block_Controller extends Abstract_Controller {
+	public const CLASSES = 'classes';
+	public const ATTRS   = 'attrs';
+	public const HEADER  = 'header';
+	public const LOGOS   = 'logos';
+
+	public array $classes;
+	public array $attrs;
+	public array $header;
+	public array $logos;
 
 	public function __construct( array $args = [] ) {
-		$args = wp_parse_args( $args, $this->defaults() );
+		$args = $this->parse_args( $args );
 
-		foreach ( $this->required() as $key => $value ) {
-			$args[$key] = array_merge( $args[$key], $value );
-		}
-
-		$this->classes = (array) $args['classes'];
-		$this->attrs   = (array) $args['attrs'];
-		$this->header  = (array) $args['header'];
-		$this->logos   = (array) $args['logos'];
+		$this->classes = (array) $args[ self::CLASSES ];
+		$this->attrs   = (array) $args[ self::ATTRS ];
+		$this->header  = (array) $args[ self::HEADER ];
+		$this->logos   = (array) $args[ self::LOGOS ];
 	}
 
 	protected function defaults(): array {
