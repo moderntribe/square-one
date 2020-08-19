@@ -17,10 +17,10 @@ class Quote_Controller extends Abstract_Controller {
 
 	private array $classes;
 	private array $attrs;
-	public string $quote_text;
-	public string $cite_name;
-	public string $cite_title;
-	public ?int $cite_image;
+	private string $quote_text;
+	private string $cite_name;
+	private string $cite_title;
+	private int $cite_image;
 
 	public function __construct( array $args = [] ) {
 		$args             = $this->parse_args( $args );
@@ -49,11 +49,11 @@ class Quote_Controller extends Abstract_Controller {
 		];
 	}
 
-	public function classes(): string {
+	public function get_classes(): string {
 		return Markup_Utils::class_attribute( $this->classes );
 	}
 
-	public function attributes(): string {
+	public function get_attrs(): string {
 		return Markup_Utils::concat_attrs( $this->attrs );
 	}
 
@@ -74,4 +74,24 @@ class Quote_Controller extends Abstract_Controller {
 			'src_size'        => Image_Sizes::SQUARE_XSMALL,
 		];
 	}
+
+	public function get_quote() {
+		return $this->quote_text;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function get_cite_name() {
+		return $this->cite_name;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function get_cite_title() {
+		return $this->cite_title;
+	}
+
+
 }

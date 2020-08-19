@@ -27,17 +27,17 @@ class Quote_Block_Controller extends Abstract_Controller {
 	public const CLASSES           = 'classes';
 	public const ATTRS             = 'attrs';
 
-	public string $layout;
-	public ?int $media;
-	public string $cite_name;
-	public string $cite_title;
-	public ?int $cite_image;
-	public string $quote_text;
-	public array $container_classes;
-	public array $media_classes;
-	public array $content_classes;
-	public array $classes;
-	public array $attrs;
+	private string $layout;
+	private int $media;
+	private string $cite_name;
+	private string $cite_title;
+	private int $cite_image;
+	private string $quote_text;
+	private array $container_classes;
+	private array $media_classes;
+	private array $content_classes;
+	private array $classes;
+	private array $attrs;
 
 	public function __construct( array $args = [] ) {
 		$args                    = $this->parse_args( $args );
@@ -47,21 +47,24 @@ class Quote_Block_Controller extends Abstract_Controller {
 		$this->cite_title        = $args[ self::CITE_TITLE ];
 		$this->cite_image        = $args[ self::CITE_IMAGE ];
 		$this->quote_text        = $args[ self::QUOTE_TEXT ];
-		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
-		$this->media_classes     = (array) $args[ self::MEDIA_CLASSES ];
-		$this->content_classes   = (array) $args[ self::CONTENT_CLASSES ];
-		$this->classes           = (array) $args[ self::CLASSES ];
-		$this->attrs             = (array) $args[ self::ATTRS ];
+		$this->container_classes = $args[ self::CONTAINER_CLASSES ];
+		$this->media_classes     = $args[ self::MEDIA_CLASSES ];
+		$this->content_classes   = $args[ self::CONTENT_CLASSES ];
+		$this->classes           = $args[ self::CLASSES ];
+		$this->attrs             = $args[ self::ATTRS ];
 	}
 
+	/**
+	 * @return array
+	 */
 	protected function defaults(): array {
 		return [
 			self::LAYOUT            => Quote_Block::MEDIA_OVERLAY,
-			self::MEDIA             => [],
+			self::MEDIA             => 0,
 			self::QUOTE_TEXT        => '',
 			self::CITE_NAME         => '',
 			self::CITE_TITLE        => '',
-			self::CITE_IMAGE        => null,
+			self::CITE_IMAGE        => 0,
 			self::CONTAINER_CLASSES => [],
 			self::MEDIA_CLASSES     => [],
 			self::CONTENT_CLASSES   => [],
@@ -70,6 +73,9 @@ class Quote_Block_Controller extends Abstract_Controller {
 		];
 	}
 
+	/**
+	 * @return array
+	 */
 	protected function required(): array {
 		return [
 			self::CONTAINER_CLASSES => [ 'b-quote__container', 'l-container' ],
@@ -82,28 +88,28 @@ class Quote_Block_Controller extends Abstract_Controller {
 	/**
 	 * @return string
 	 */
-	public function container_classes(): string {
+	public function get_container_classes(): string {
 		return Markup_Utils::class_attribute( $this->container_classes );
 	}
 
 	/**
 	 * @return string
 	 */
-	public function media_classes(): string {
+	public function get_media_classes(): string {
 		return Markup_Utils::class_attribute( $this->media_classes );
 	}
 
 	/**
 	 * @return string
 	 */
-	public function content_classes(): string {
+	public function get_content_classes(): string {
 		return Markup_Utils::class_attribute( $this->content_classes );
 	}
 
 	/**
 	 * @return string
 	 */
-	public function classes(): string {
+	public function get_classes(): string {
 		$this->classes[] = 'c-block--' . $this->layout;
 
 		return Markup_Utils::class_attribute( $this->classes );
@@ -112,7 +118,7 @@ class Quote_Block_Controller extends Abstract_Controller {
 	/**
 	 * @return string
 	 */
-	public function attrs(): string {
+	public function get_attrs(): string {
 		return Markup_Utils::class_attribute( $this->attrs );
 	}
 
@@ -122,11 +128,18 @@ class Quote_Block_Controller extends Abstract_Controller {
 	 * @return array
 	 */
 	public function get_media_args(): array {
-		if ( ! $this->media ) {
+		if ( ! $this->has_image() ) {
 			return [];
 		}
 
 		return $this->get_image( $this->media );
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function has_image(): bool {
+		return (bool) $this->media;
 	}
 
 	/**

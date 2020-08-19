@@ -8,20 +8,19 @@ use Tribe\Project\Templates\Components\blocks\quote\Quote_Block_Controller;
 // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
 $c = Quote_Block_Controller::factory( $args ); ?>
 
-<section <?php echo $c->classes(); ?> <?php echo $c->attrs(); ?>>
-	<div <?php echo $c->container_classes(); ?>>
+<section <?php echo $c->get_classes(); ?> <?php echo $c->get_attrs(); ?>>
+	<div <?php echo $c->get_container_classes(); ?>>
 
-		<?php if ( $c->media ) { ?>
-			<div <?php echo $c->media_classes(); ?>>
-				<?php get_template_part(
-					'components/image/image',
+		<?php if ( $c->has_image() ) { ?>
+			<div <?php echo $c->get_media_classes(); ?>>
+				<?php get_template_part( 'components/image/image',
 					null,
 					$c->get_media_args()
 				); ?>
 			</div>
 		<?php } ?>
 
-		<div <?php echo $c->content_classes(); ?>>
+		<div <?php echo $c->get_content_classes(); ?>>
 			<?php get_template_part(
 				'components/quote/quote',
 				null,
