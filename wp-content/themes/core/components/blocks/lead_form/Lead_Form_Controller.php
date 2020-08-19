@@ -130,7 +130,7 @@ class Lead_Form_Controller extends Abstract_Controller {
 		return [
 			'tag'     => 'h2',
 			'classes' => [ 'b-lead-form__title', 'h3' ],
-			'content' => $this->title,
+			'content' => esc_html( $this->title ),
 		];
 	}
 
@@ -140,7 +140,7 @@ class Lead_Form_Controller extends Abstract_Controller {
 	protected function get_description_args(): array {
 		return [
 			'classes' => [ 'b-lead-form__description', 't-sink', 's-sink' ],
-			'content' => $this->description,
+			'content' => esc_html( $this->description ),
 		];
 	}
 
