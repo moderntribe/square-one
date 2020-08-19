@@ -18,7 +18,7 @@ class Admin_Subscriber extends Abstract_Subscriber {
 
 	private function editor(): void {
 		$this->editor_styles();
-		//$this->editor_formats();
+		$this->editor_formats();
 	}
 
 	private function editor_styles() {
@@ -37,6 +37,9 @@ class Admin_Subscriber extends Abstract_Subscriber {
 	}
 
 	private function editor_formats() {
+		add_filter( 'teeny_mce_buttons', function ( $buttons, $editor_id ) {
+			return $this->container->get(Classic_Editor_Formats::class)->teeny_mce_buttons( $buttons, $editor_id );
+		}, 10, 2 );
 		add_filter( 'mce_buttons', function ( $settings ) {
 			return $this->container->get( Classic_Editor_Formats::class )->mce_buttons( $settings );
 		}, 10, 1 );
