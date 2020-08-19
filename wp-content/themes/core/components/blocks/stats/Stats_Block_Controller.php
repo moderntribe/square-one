@@ -48,7 +48,6 @@ class Stats_Block_Controller extends Abstract_Controller {
 		$this->classes           = (array) $args[ self::CLASSES ];
 		$this->attrs             = (array) $args[ self::ATTRS ];
 		$this->stats             = (array) $args[ self::STATS ];
-		$this->init();
 	}
 
 	/**
@@ -67,14 +66,6 @@ class Stats_Block_Controller extends Abstract_Controller {
 			self::ATTRS             => [],
 			self::STATS             => [],
 		];
-	}
-
-	/**
-	 * Initial setup stuff
-	 */
-	public function init() {
-		$this->classes[] = 'c-block--' . $this->layout;
-		$this->classes[] = 'c-block--' . $this->display_dividers;
 	}
 
 	/**
@@ -156,6 +147,9 @@ class Stats_Block_Controller extends Abstract_Controller {
 	 * @return string
 	 */
 	public function classes(): string {
+		$this->classes[] = 'c-block--' . $this->layout;
+		$this->classes[] = 'c-block--' . $this->display_dividers;
+
 		return Markup_Utils::class_attribute( $this->classes );
 	}
 
