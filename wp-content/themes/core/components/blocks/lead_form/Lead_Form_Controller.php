@@ -1,0 +1,150 @@
+<?php
+declare( strict_types=1 );
+
+namespace Tribe\Project\Templates\Components\blocks\lead_form;
+
+use Tribe\Libs\Utils\Markup_Utils;
+use \Tribe\Project\Blocks\Types\Lead_Form\Lead_Form as Lead_Form_Block;
+use Tribe\Project\Templates\Components\Abstract_Controller;
+use Tribe\Project\Templates\Components\content_block\Controller;
+
+/**
+ * Class Lead_Form
+ */
+class Lead_Form_Controller extends Abstract_Controller {
+
+	public const WIDTH             = 'width';
+	public const LAYOUT            = 'layout';
+	public const TITLE             = 'title';
+	public const DESCRIPTION       = 'description';
+	public const FORM              = 'form';
+	public const CONTAINER_CLASSES = 'container_classes';
+	public const FORM_CLASSES      = 'form_classes';
+	public const CLASSES           = 'classes';
+	public const ATTRS             = 'attrs';
+
+	private string $width;
+	private string $layout;
+	private string $title;
+	private string $description;
+	private int $form;
+	private array $container_classes;
+	private array $form_classes;
+	private array $classes;
+	private array $attrs;
+
+	public function __construct( array $args = [] ) {
+		$args                    = $this->parse_args( $args );
+		$this->layout            = $args[ self::LAYOUT ];
+		$this->width             = $args[ self::WIDTH ];
+		$this->title             = $args[ self::TITLE ];
+		$this->description       = $args[ self::DESCRIPTION ];
+		$this->form              = $args[ self::FORM ];
+		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
+		$this->form_classes      = (array) $args[ self::FORM_CLASSES ];
+		$this->classes           = (array) $args[ self::CLASSES ];
+		$this->attrs             = (array) $args[ self::ATTRS ];
+	}
+
+	protected function defaults(): array {
+		return [
+			self::WIDTH             => Lead_Form_Block::WIDTH_GRID,
+			self::LAYOUT            => Lead_Form_Block::LAYOUT_CENTER,
+			self::TITLE             => '',
+			self::DESCRIPTION       => '',
+			self::FORM              => null,
+			self::CONTAINER_CLASSES => [],
+			self::FORM_CLASSES      => [],
+			self::CLASSES           => [],
+			self::ATTRS             => [],
+		];
+	}
+
+	protected function required(): array {
+		return [
+			self::CONTAINER_CLASSES => [ 'b-lead-form__container' ],
+			self::FORM_CLASSES      => [ 'b-lead-form__form' ],
+			self::CLASSES           => [ 'c-block', 'b-lead-form' ],
+		];
+	}
+
+	/**
+	 * @return string
+	 */
+	public function get_container_classes(): string {
+		if ( $this->width === Lead_Form_Block::WIDTH_FULL ) {
+			$this->container_classes[] = 'l-container';
+		}
+
+		return Markup_Utils::class_attribute( $this->container_classes );
+	}
+
+	/**
+	 * @return string
+	 */
+	public function get_classes(): string {
+		$this->classes[] = 'c-block--' . $this->layout;
+		$this->classes[] = 'c-block--' . $this->width;
+		if ( $this->width === Lead_Form_Block::WIDTH_GRID ) {
+			$this->classes[] = 'l-container';
+		}
+
+		return Markup_Utils::class_attribute( $this->classes );
+	}
+
+	/**
+	 * @return string
+	 */
+	public function get_attrs(): string {
+		return Markup_Utils::class_attribute( $this->attrs );
+	}
+
+
+	public function get_content_args(): array {
+		if ( empty( $this->title ) && empty( $this->description ) ) {
+			return [];
+		}
+
+		return [
+			'tag'     => 'header',
+			'classes' => [ 'b-lead-form__content' ],
+			'layout'  => $this->layout === Lead_Form_Block::LAYOUT_CENTER ? Controller::LAYOUT_CENTER : Controller::LAYOUT_LEFT,
+			'title'   => defer_template_part( 'components/text/text', null, $this->get_title_args() ),
+			'content' => defer_template_part( 'components/text/text', null, $this->get_description_args() ),
+		];
+	}
+
+	protected function get_title_args(): array {
+		return [
+			'tag'     => 'h2',
+			'classes' => [ 'b-lead-form__title', 'h3' ],
+			'content' => $this->title,
+		];
+	}
+
+	protected function get_description_args(): array {
+		return [
+			'classes' => [ 'b-lead-form__description', 't-sink', 's-sink' ],
+			'content' => $this->description,
+		];
+	}
+
+	public function get_form_id() {
+		return $this->form;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function get_form(): string {
+		if ( ! function_exists( 'gravity_form' ) ) {
+			return '';
+		}
+
+		return gravity_form( $this->form, false, false, false, null, false, 1, false );
+	}
+
+	public function get_form_classes(): string {
+		return Markup_Utils::class_attribute( $this->form_classes );
+	}
+}

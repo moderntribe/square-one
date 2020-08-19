@@ -8,7 +8,7 @@ use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Field;
 
 class Lead_Form extends Block_Config {
-	public const NAME = 'lead-form';
+	public const NAME = 'leadform';
 
 	public const TITLE       = 'title';
 	public const DESCRIPTION = 'description';
