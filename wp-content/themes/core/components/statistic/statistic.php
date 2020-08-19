@@ -6,7 +6,7 @@ declare( strict_types=1 );
  */
 
 // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
-$c = \Tribe\Project\Templates\Components\statistic\Controller::factory( $args );
+$c = \Tribe\Project\Templates\Components\statistic\Statistic_Controller::factory( $args );
 ?>
 
 <<?php echo $c->tag(); ?>

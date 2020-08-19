@@ -22,7 +22,7 @@ class Statistic_Controller extends Abstract_Controller {
 	private array $label;
 
 	public function __construct( array $args ) {
-		$args = $this->parse_parts( $args );
+		$args = $this->parse_args( $args );
 
 		$this->tag     = (string) $args[ self::TAG ];
 		$this->classes = (array) $args[  self::CLASSES ];

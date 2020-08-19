@@ -36,7 +36,7 @@ class Stats_Block_Controller extends Abstract_Controller {
 	public array $stats;
 
 	public function __construct( array $args = [] ) {
-		$args = $this->parse_parts( $args );
+		$args = $this->parse_args( $args );
 
 		$this->layout            = (string) $args[ self::LAYOUT ];
 		$this->content_align     = (string) $args[ self::CONTENT_ALIGN ];
