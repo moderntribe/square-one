@@ -22,10 +22,7 @@ class Statistic_Controller extends Abstract_Controller {
 	private array $label;
 
 	public function __construct( array $args ) {
-		$args = wp_parse_args( $args, $this->defaults() );
-		foreach ( $this->required() as $key => $value ) {
-			$args[ $key ] = array_merge( $args[ $key ], $value );
-		}
+		$args = $this->parse_parts( $args );
 
 		$this->tag     = (string) $args[ self::TAG ];
 		$this->classes = (array) $args[  self::CLASSES ];

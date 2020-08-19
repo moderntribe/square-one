@@ -36,10 +36,7 @@ class Stats_Block_Controller extends Abstract_Controller {
 	public array $stats;
 
 	public function __construct( array $args = [] ) {
-		$args = wp_parse_args( $args, $this->defaults() );
-		foreach ( $this->required() as $key => $value ) {
-			$args[ $key ] = array_merge( $args[ $key ], $value );
-		}
+		$args = $this->parse_parts( $args );
 
 		$this->layout            = (string) $args[ self::LAYOUT ];
 		$this->content_align     = (string) $args[ self::CONTENT_ALIGN ];
@@ -70,13 +67,6 @@ class Stats_Block_Controller extends Abstract_Controller {
 			self::ATTRS             => [],
 			self::STATS             => [],
 		];
-	}
-
-	/**
-	 * @return array
-	 */
-	protected function required(): array {
-		return [];
 	}
 
 	/**
