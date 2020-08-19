@@ -13,7 +13,8 @@ $c = Quote_Block_Controller::factory( $args ); ?>
 
 		<?php if ( $c->has_image() ) { ?>
 			<div <?php echo $c->get_media_classes(); ?>>
-				<?php get_template_part( 'components/image/image',
+				<?php get_template_part(
+					'components/image/image',
 					null,
 					$c->get_media_args()
 				); ?>

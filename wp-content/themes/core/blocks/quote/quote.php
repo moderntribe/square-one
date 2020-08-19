@@ -3,6 +3,7 @@
 declare( strict_types=1 );
 
 use Tribe\Project\Blocks\Types\Quote\Quote_Model;
+
 /**
  * @var array $args Arguments passed to the template
  */
