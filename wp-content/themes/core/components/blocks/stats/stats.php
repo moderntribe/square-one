@@ -19,14 +19,9 @@ $c = Stats_Block_Controller::factory( $args ); ?>
 
 		<div <?php echo $c->content_classes(); ?>>
 			<ul class="b-stats__list">
-				<?php foreach ( $c->stats as $item ) { ?>
+				<?php foreach ( $c->get_stats() as $item ) { ?>
 				<li class="b-stats__list-item">
-					Statistic
-<!--					--><?php //get_template_part(
-//						'components/statistic/statistic',
-//						null,
-//						$c->get_statistic_args($item)
-//					); ?>
+					<?php get_template_part( 'components/statistic/statistic', null, $item ); ?>
 				</li>
 				<?php } ?>
 			</ul>

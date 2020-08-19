@@ -6,15 +6,16 @@ namespace Tribe\Project\Templates\Components\blocks\stats;
 use Tribe\Libs\Utils\Markup_Utils;
 use \Tribe\Project\Blocks\Types\Stats\Stats as Stats_Block;
 use Tribe\Project\Templates\Components\Abstract_Controller;
-use Tribe\Project\Templates\Components\Deferred_Component;
 use \Tribe\Project\Templates\Components\statistic\Controller as Statistic;
+use \Tribe\Project\Templates\Components\content_block\Controller as Content_Block;
 
 /**
  * Class Hero
  */
 class Stats_Block_Controller extends Abstract_Controller {
 	public const LAYOUT            = 'layout';
-	public const DISPLAY           = 'display';
+	public const DISPLAY_DIVIDERS  = 'display_dividers';
+	public const CONTENT_ALIGN     = 'content_align';
 	public const TITLE             = 'title';
 	public const DESCRIPTION       = 'description';
 	public const CONTAINER_CLASSES = 'container_classes';
@@ -24,7 +25,8 @@ class Stats_Block_Controller extends Abstract_Controller {
 	public const STATS             = 'stats';
 
 	public string $layout;
-	public string $display;
+	public string $content_align;
+	public string $display_dividers;
 	public string $title;
 	public string $description;
 	public array $container_classes;
@@ -40,7 +42,8 @@ class Stats_Block_Controller extends Abstract_Controller {
 		}
 
 		$this->layout            = (string) $args[ self::LAYOUT ];
-		$this->display           = (string) $args[ self::DISPLAY ];
+		$this->content_align     = (string) $args[ self::CONTENT_ALIGN ];
+		$this->display_dividers  = (string) $args[ self::DISPLAY_DIVIDERS ];
 		$this->title             = (string) $args[ self::TITLE ];
 		$this->description       = (string) $args[ self::DESCRIPTION ];
 		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
@@ -48,7 +51,6 @@ class Stats_Block_Controller extends Abstract_Controller {
 		$this->classes           = (array) $args[ self::CLASSES ];
 		$this->attrs             = (array) $args[ self::ATTRS ];
 		$this->stats             = (array) $args[ self::STATS ];
-		$this->get_stats();
 		$this->init();
 	}
 
@@ -58,7 +60,8 @@ class Stats_Block_Controller extends Abstract_Controller {
 	protected function defaults(): array {
 		return [
 			self::LAYOUT            => Stats_Block::LAYOUT_STACKED,
-			self::DISPLAY           => Stats_Block::DISPLAY_DIVIDERS,
+			self::CONTENT_ALIGN     => Stats_Block::CONTENT_ALIGN_LEFT,
+			self::DISPLAY_DIVIDERS  => Stats_Block::DISPLAY_DIVIDERS,
 			self::TITLE             => '',
 			self::DESCRIPTION       => '',
 			self::CONTAINER_CLASSES => [ 'b-stats__container', 'l-container' ],
@@ -81,7 +84,7 @@ class Stats_Block_Controller extends Abstract_Controller {
 	 */
 	public function init() {
 		$this->classes[] = 'c-block--' . $this->layout;
-		$this->classes[] = 'c-block--' . $this->display;
+		$this->classes[] = 'c-block--' . $this->display_dividers;
 	}
 
 	/**
@@ -102,45 +105,29 @@ class Stats_Block_Controller extends Abstract_Controller {
 				'content' => $this->description,
 				'classes' => [ 'b-stats__description', 't-sink', 's-sink' ],
 			] ),
-			'layout'  => $this->layout,
-			// 'layout'  => $this->get_content_layout() === Stats_Block::CONTENT_ALIGN_CENTER ? Content_Block::LAYOUT_CENTER : Content_Block::LAYOUT_STACKED,
+			'layout'  => Stats_Block::CONTENT_ALIGN_CENTER === $this->content_align ? Content_Block::LAYOUT_CENTER : Content_Block::LAYOUT_STACKED,
 		];
-	}
-
-	private function get_content_layout(): string {
-		return $this->attributes[ Stats_Block::CONTENT_ALIGN ] ?? Stats_Block::CONTENT_ALIGN_LEFT;
 	}
 
 	/**
 	 * @return array
 	 */
-	private function get_stats(): array {
-		$rows = array_filter( $this->stats, function ( $row ) {
-			return array_key_exists( Statistic::VALUE, $row );
-		} );
+	public function get_stats(): array {
+		$statistic_args = [];
 
-		if ( empty( $rows ) ) {
-			return [];
+		foreach ( $this->stats as $item ) {
+			// Skip over statistic rows with no value.
+			if ( empty( $item[ Stats_Block::STAT_VALUE ] ) ) {
+				continue;
+			}
+
+			$statistic_args[] = [
+				Statistic::VALUE => $item[ Stats_Block::STAT_VALUE ],
+				Statistic::LABEL => $item[ Stats_Block::STAT_LABEL ] ?? '',
+			];
 		}
 
-		return array_map( function ( $row ) {
-			return [
-				Statistic::VALUE => $this->get_statistic_value( $row ),
-				Statistic::LABEL => $this->get_statistic_label( $row ),
-			];
-		}, $rows );
-	}
-
-	private function get_statistic_value( $row ): Deferred_Component {
-		return defer_template_part( 'components/text/text', null, [
-			'content' => $row[ Statistic::VALUE ] ?? '',
-		] );
-	}
-
-	private function get_statistic_label( $row ): Deferred_Component {
-		return defer_template_part( 'components/text/text', null, [
-			'content' => $row[ Statistic::LABEL ] ?? '',
-		] );
+		return $statistic_args;
 	}
 
 	/**

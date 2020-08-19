@@ -15,8 +15,8 @@ class Stats extends Block_Config {
 	public const TITLE        = 'title';
 	public const DESCRIPTION  = 'description';
 	public const STATS        = 'stats';
-	public const STAT_HEADER  = 'row_header';
-	public const STAT_CONTENT = 'row_content';
+	public const STAT_VALUE   = 'row_value';
+	public const STAT_LABEL   = 'row_label';
 
 	public const LAYOUT         = 'layout';
 	public const LAYOUT_INLINE  = 'inline';
@@ -26,7 +26,7 @@ class Stats extends Block_Config {
 	public const CONTENT_ALIGN_LEFT   = 'left';
 	public const CONTENT_ALIGN_CENTER = 'center';
 
-	public const DISPLAY_DIVIDERS = 'display-dividers';
+	public const DISPLAY_DIVIDERS = 'display_dividers';
 
 	public function add_block() {
 		$this->set_block( new Block( self::NAME, [
@@ -67,16 +67,16 @@ class Stats extends Block_Config {
 			'min'    => 0,
 			'max'    => 10,
 		] );
-		$header = new Field( self::STAT_HEADER, [
+		$header = new Field( self::STAT_VALUE, [
 			'label' => __( 'Title', 'tribe' ),
-			'name'  => self::STAT_HEADER,
+			'name'  => self::STAT_VALUE,
 			'type'  => 'text',
 		] );
 
 		$group->add_field( $header );
-		$content = new Field( self::STAT_CONTENT, [
+		$content = new Field( self::STAT_LABEL, [
 			'label' => __( 'Description', 'tribe' ),
-			'name'  => self::STAT_CONTENT,
+			'name'  => self::STAT_LABEL,
 			'type'  => 'textarea',
 		] );
 		$group->add_field( $content );
