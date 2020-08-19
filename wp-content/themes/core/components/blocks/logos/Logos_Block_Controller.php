@@ -167,10 +167,10 @@ class Logos_Block_Controller extends Abstract_Controller {
 			] );
 
 			if ( ! empty( $logo[ Logos::LOGO_LINK ] ) ) {
-				$image_args[ 'link_url' ]    = $link[ 'url' ];
-				$image_args[ 'link_target' ] = $link[ 'target' ];
-				$image_args[ 'link_title' ]  = $link[ 'title' ];
-
+				$image_args['link_url']     = $link['url'];
+				$image_args['link_target']  = $link['target'];
+				$image_args['link_title']   = $link['title'];
+				$image_args['link_classes'] = [ 'b-logo__link' ];
 			}
 			$component_args[] = $image_args;
 		}
