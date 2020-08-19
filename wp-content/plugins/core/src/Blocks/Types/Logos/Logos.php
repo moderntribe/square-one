@@ -29,7 +29,8 @@ class Logos extends Block_Config {
 	}
 
 	public function add_fields() {
-		$this->add_field( new Field( self::NAME . '_' . self::TITLE, [
+		$this->add_field(
+			new Field( self::NAME . '_' . self::TITLE, [
 				'label' => __( 'Title', 'tribe' ),
 				'name'  => self::TITLE,
 				'type'  => 'text',
@@ -66,18 +67,19 @@ class Logos extends Block_Config {
 		] );
 
 		$logo_image = new Field( self::LOGO_IMAGE, [
-			'label'        => __( 'Logo Image', 'tribe' ),
-			'name'         => self::LOGO_IMAGE,
-			'type'         => 'image',
-			'preview_size' => 'medium',
-			'instructions' => __( 'Recommended image size: 200px tall with any aspect ratio.', 'tribe' ),
+			'label'         => __( 'Logo Image', 'tribe' ),
+			'name'          => self::LOGO_IMAGE,
+			'type'          => 'image',
+			'return_format' => 'id',
+			'preview_size'  => 'medium',
+			'instructions'  => __( 'Recommended image size: 200px tall with any aspect ratio.', 'tribe' ),
 		] );
 		$group->add_field( $logo_image );
 
 		$logo_link = new Field( self::LOGO_LINK, [
 			'label' => __( 'Logo Link', 'tribe' ),
-			'name' => self::LOGO_LINK,
-			'type' => 'link',
+			'name'  => self::LOGO_LINK,
+			'type'  => 'link',
 		] );
 		$group->add_field( $logo_link );
 
