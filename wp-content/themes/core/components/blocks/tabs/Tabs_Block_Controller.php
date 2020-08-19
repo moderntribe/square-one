@@ -29,13 +29,13 @@ class Tabs_Block_Controller extends Abstract_Controller {
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
 
-		$this->layout            = $args[ self::LAYOUT ];
-		$this->title             = $args[ self::TITLE ];
-		$this->description       = $args[ self::DESCRIPTION ];
-		$this->tabs              = $args[ self::TABS ];
-		$this->classes           = $args[ self::CLASSES ];
-		$this->attrs             = $args[ self::ATTRS ];
-		$this->container_classes = $args[ self::CONTAINER_CLASSES ];
+		$this->layout            = (string) $args[ self::LAYOUT ];
+		$this->title             = (string) $args[ self::TITLE ];
+		$this->description       = (string) $args[ self::DESCRIPTION ];
+		$this->tabs              = (array) $args[ self::TABS ];
+		$this->classes           = (array) $args[ self::CLASSES ];
+		$this->attrs             = (array) $args[ self::ATTRS ];
+		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
 	}
 
 	/**

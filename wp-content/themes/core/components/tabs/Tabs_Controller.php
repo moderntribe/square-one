@@ -45,13 +45,13 @@ class Tabs_Controller extends Abstract_Controller {
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
 
-		$this->tabs               = $args[ self::TABS ];
-		$this->classes            = $args[ self::CLASSES ];
-		$this->attrs              = $args[ self::ATTRS ];
-		$this->layout             = $args[ self::LAYOUT ];
-		$this->toggle_classes     = $args[ self::TOGGLE_CLASSES ];
-		$this->tab_button_classes = $args[ self::TAB_BUTTON_CLASSES ];
-		$this->tab_panel_classes  = $args[ self::TAB_PANEL_CLASSES ];
+		$this->tabs               = (array) $args[ self::TABS ];
+		$this->classes            = (array) $args[ self::CLASSES ];
+		$this->attrs              = (array) $args[ self::ATTRS ];
+		$this->layout             = (string) $args[ self::LAYOUT ];
+		$this->toggle_classes     = (array) $args[ self::TOGGLE_CLASSES ];
+		$this->tab_button_classes = (array) $args[ self::TAB_BUTTON_CLASSES ];
+		$this->tab_panel_classes  = (array) $args[ self::TAB_PANEL_CLASSES ];
 		$this->tablist_id         = uniqid( 'c-tabs__tablist--' );
 
 		$this->init_tabs();
