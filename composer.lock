@@ -4,14 +4,14 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6ffcc32893cd7219106aece619259793",
+    "content-hash": "0576ec89f22eb9648885ba312d85c5a7",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
-            "version": "5.9.0-RC1",
+            "version": "5.9.0",
             "dist": {
                 "type": "zip",
-                "url": "https://connect.advancedcustomfields.com/index.php?a=download&p=pro&k={%WP_PLUGIN_ACF_KEY}&t=5.9.0-RC1"
+                "url": "https://connect.advancedcustomfields.com/index.php?a=download&p=pro&k={%WP_PLUGIN_ACF_KEY}&t=5.9.0"
             },
             "require": {
                 "ffraenz/private-composer-installer": "^3.0"
@@ -20,16 +20,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.150.0",
+            "version": "3.150.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "f0fd46027ca2e12851ae792d20513cb81b17bc32"
+                "reference": "d59b85d6854e58154e22a796322ba153ef69ade2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/f0fd46027ca2e12851ae792d20513cb81b17bc32",
-                "reference": "f0fd46027ca2e12851ae792d20513cb81b17bc32",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/d59b85d6854e58154e22a796322ba153ef69ade2",
+                "reference": "d59b85d6854e58154e22a796322ba153ef69ade2",
                 "shasum": ""
             },
             "require": {
@@ -101,7 +101,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2020-08-18T18:14:47+00:00"
+            "time": "2020-08-19T18:19:07+00:00"
         },
         {
             "name": "clue/stream-filter",
