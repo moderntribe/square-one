@@ -86,51 +86,26 @@ class Tabs_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * Loop through the tabs provided and pre-render the tab button and tab panel components as strings.
+	 * Loop through the tabs provided setup the tab button and tab panel components arguments for each.
 	 */
 	private function init_tabs() {
 		foreach ( $this->tabs as $index => $tab ) {
 			$tab_id              = uniqid();
-			$this->tab_buttons[] = $this->get_tab_button( $tab, $tab_id, $index );
-			$this->tab_panels[]  = $this->get_tab_panel( $tab, $tab_id, $index );
+			$this->tab_buttons[] = $this->get_tab_button_args( $tab, $tab_id, $index );
+			$this->tab_panels[]  = $this->get_tab_panel_args( $tab, $tab_id, $index );
 		}
 	}
 
 	/**
-	 * Render the tablist drop-down toggle for the vertical tabs layout.
-	 *
-	 * @return string
-	 */
-	public function get_dropdown_toggle(): string {
-		if ( $this->layout === self::LAYOUT_HORIZONTAL ) {
-			return '';
-		}
-
-		$args = [
-			'content' => $this->tabs[0]->label ?? __( 'Tab 1', 'tribe' ),
-			'classes' => $this->toggle_classes,
-			'attrs'   => [
-				'aria-controls' => $this->tablist_id,
-				'aria-expanded' => 'false',
-				'aria-haspopup' => 'true',
-				'aria-label'    => __( 'Toggle the tab list menu.', 'tribe' ),
-				'data-js'       => 'c-tabs__tablist-toggle',
-			],
-		];
-
-		return tribe_template_part( 'components/button/button', null, $args );
-	}
-
-	/**
-	 * Renders and individual tab list "tab" button.
+	 * Return arguments for an individual tab list "tab" button.
 	 *
 	 * @param Tab_Model $tab
 	 * @param string    $tab_id
 	 * @param int       $index
 	 *
-	 * @return string
+	 * @return array
 	 */
-	private function get_tab_button( Tab_Model $tab, string $tab_id, int $index ): string {
+	private function get_tab_button_args( Tab_Model $tab, string $tab_id, int $index ): array {
 		$args = [
 			'content' => $tab->label ?: sprintf( __( 'Tab %d', 'tribe' ), $index + 1 ),
 			'classes' => $this->tab_button_classes,
@@ -147,19 +122,19 @@ class Tabs_Controller extends Abstract_Controller {
 			$args['attrs']['tabindex'] = '-1';
 		}
 
-		return tribe_template_part( 'components/button/button', null, $args );
+		return $args;
 	}
 
 	/**
-	 * Renders an individual tab content, the "tabpanel".
+	 * Return arguments for an individual tab content, the "tabpanel".
 	 *
 	 * @param Tab_Model $tab
 	 * @param string    $tab_id
 	 * @param int       $index
 	 *
-	 * @return string
+	 * @return array
 	 */
-	private function get_tab_panel( Tab_Model $tab, string $tab_id, int $index ): string {
+	private function get_tab_panel_args( Tab_Model $tab, string $tab_id, int $index ): array {
 		$args = [
 			'content' => $tab->content ?: '&nbsp;', // If the tab content is empty, the container component won't render.
 			'classes' => $this->tab_panel_classes,
@@ -176,7 +151,30 @@ class Tabs_Controller extends Abstract_Controller {
 			$args['attrs']['hidden'] = '';
 		}
 
-		return tribe_template_part( 'components/container/container', null, $args );
+		return $args;
+	}
+
+	/**
+	 * Return arguments for the tablist drop-down toggle for the vertical tabs layout.
+	 *
+	 * @return array
+	 */
+	public function get_dropdown_toggle_args(): array {
+		if ( $this->layout === self::LAYOUT_HORIZONTAL ) {
+			return [];
+		}
+
+		return [
+			'content' => $this->tabs[0]->label ?? __( 'Tab 1', 'tribe' ),
+			'classes' => $this->toggle_classes,
+			'attrs'   => [
+				'aria-controls' => $this->tablist_id,
+				'aria-expanded' => 'false',
+				'aria-haspopup' => 'true',
+				'aria-label'    => __( 'Toggle the tab list menu.', 'tribe' ),
+				'data-js'       => 'c-tabs__tablist-toggle',
+			],
+		];
 	}
 
 	/**

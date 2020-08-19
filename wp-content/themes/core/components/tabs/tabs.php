@@ -17,12 +17,12 @@ if ( empty( $c->get_tab_panels() ) ) {
 <div <?php echo $c->get_classes(); ?> <?php echo $c->get_attrs(); ?>>
 	<div class="c-tabs__tablist-wrapper" data-js="c-tabs__tablist-wrapper">
 
-		<?php echo $c->get_dropdown_toggle(); ?>
+		<?php get_template_part( 'components/button/button', null, $c->get_dropdown_toggle_args() ); ?>
 
 		<div <?php echo $c->get_dropdown_classes(); ?> <?php echo $c->get_dropdown_attrs(); ?>>
 			<div <?php echo $c->get_tablist_classes(); ?> <?php echo $c->get_tablist_attrs(); ?>>
-				<?php foreach ( $c->get_tab_buttons() as $button ) {
-					echo $button;
+				<?php foreach ( $c->get_tab_buttons() as $button_args ) {
+					get_template_part( 'components/button/button', null, $button_args );
 				} ?>
 			</div>
 		</div>
@@ -30,8 +30,8 @@ if ( empty( $c->get_tab_panels() ) ) {
 	</div>
 
 	<div class="c-tabs__tabpanels-wrapper">
-		<?php foreach ( $c->get_tab_panels() as $tab ) {
-			echo $tab;
+		<?php foreach ( $c->get_tab_panels() as $tab_args ) {
+			get_template_part( 'components/container/container', null, $tab_args );
 		} ?>
 	</div>
 
