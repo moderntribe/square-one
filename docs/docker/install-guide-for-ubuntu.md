@@ -234,3 +234,38 @@ npm run docker:global:stop
 ```
 npm run docker:global:start
 ```
+
+# Troubleshooting
+
+### 1. After installing the global container, I can't access the internet at all. Or: I can only access the internet when the global container is on.
+
+1. Ensure that the resolvconf is installed.
+```
+sudo apt update && sudo apt install resolvconf
+```
+
+2. Create a resolv.conf head file. This will place any content above any auto generated `/etc/resolv.conf` content.
+```
+sudo nano /etc/resolvconf/resolv.conf.d/head
+```
+with following contents:
+```
+nameserver 127.0.0.1
+nameserver 1.1.1.1
+nameserver 1.0.0.1
+```
+Note: You can use your preferred nameservers here, as long as `127.0.0.1` is at the top. It's also possible NetworkManager will provide them automatically via DHCP.
+3. Start the service and see if it worked
+```
+sudo systemctl start resolvconf.service
+```
+4. Verify `/etc/resolv.conf` contains the proper nameservers
+
+`cat /etc/resolv.conf`
+
+Should display the following at the top of the file:
+
+nameserver 127.0.0.1
+nameserver 1.1.1.1
+nameserver 1.0.0.1
+4. Now restart your computer.
