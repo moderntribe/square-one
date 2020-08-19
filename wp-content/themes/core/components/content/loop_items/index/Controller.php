@@ -16,7 +16,7 @@ class Controller extends Abstract_Controller {
 			return '';
 		}
 
-		return get_template_part( 'components/image/image', null, [
+		return tribe_template_part( 'components/image/image', null, [
 			'attachment' => Image::factory( (int) get_post_thumbnail_id() ),
 		] );
 	}
