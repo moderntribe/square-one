@@ -82,7 +82,7 @@ class Controller extends Abstract_Controller {
 			return '';
 		}
 
-		return get_template_part( 'components/image/image', null, [
+		return tribe_template_part( 'components/image/image', null, [
 			'attachment'      => Image::factory( (int) $this->cite_image ),
 			'wrapper_tag'     => 'span',
 			'wrapper_classes' => [ 'c-quote__cite-figure' ],

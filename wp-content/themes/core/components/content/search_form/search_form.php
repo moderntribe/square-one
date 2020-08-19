@@ -10,6 +10,6 @@ $c = \Tribe\Project\Templates\Components\content\search_form\Controller::factory
 	</label>
 	<input class="c-search__input" type="text" id="s" name="s" />
 
-	<?php $c->render_button(); ?>
+	<?php echo $c->render_button(); ?>
 
 </form>

@@ -42,8 +42,8 @@ class Controller extends Abstract_Controller {
 		return get_home_url();
 	}
 
-	public function render_button(): void {
-		get_template_part( 'components/button/button', null, [
+	public function render_button(): string {
+		return tribe_template_part( 'components/button/button', null, [
 			'content' => __( 'Search', 'tribe' ),
 			'classes' => [ 'c-button' ],
 			'type'    => 'submit',
