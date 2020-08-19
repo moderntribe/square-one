@@ -68,16 +68,16 @@ class Stats extends Block_Config {
 			'max'    => 10,
 		] );
 		$header = new Field( self::ROW_VALUE, [
-			'label' => __( 'Title', 'tribe' ),
+			'label' => __( 'Value', 'tribe' ),
 			'name'  => self::ROW_VALUE,
 			'type'  => 'text',
 		] );
 
 		$group->add_field( $header );
 		$content = new Field( self::ROW_LABEL, [
-			'label' => __( 'Description', 'tribe' ),
+			'label' => __( 'Label', 'tribe' ),
 			'name'  => self::ROW_LABEL,
-			'type'  => 'textarea',
+			'type'  => 'text',
 		] );
 		$group->add_field( $content );
 
