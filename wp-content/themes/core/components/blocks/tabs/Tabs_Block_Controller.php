@@ -63,29 +63,25 @@ class Tabs_Block_Controller extends Abstract_Controller {
 		];
 	}
 
-	public function get_header(): string {
+	public function get_header_args(): array {
 		if ( empty( $this->title ) && empty( $this->description ) ) {
-			return '';
+			return [];
 		}
 
-		$args = [
+		return [
 			'tag'     => 'header',
 			'classes' => [ 'b-tabs__header' ],
 			'title'   => $this->get_title(),
 			'content' => $this->get_description(),
 		];
-
-		return tribe_template_part( 'components/content_block/content_block', null, $args );
 	}
 
-	public function get_tabs(): string {
-		$args = [
+	public function get_tabs_args(): array {
+		return [
 			Tabs_Controller::TABS    => $this->tabs,
 			Tabs_Controller::LAYOUT  => $this->layout,
 			Tabs_Controller::CLASSES => [ 'b-tabs__content' ],
 		];
-
-		return tribe_template_part( 'components/tabs/tabs', null, $args );
 	}
 
 	private function get_title(): Deferred_Component {
