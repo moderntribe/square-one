@@ -15,8 +15,8 @@ class Stats extends Block_Config {
 	public const TITLE        = 'title';
 	public const DESCRIPTION  = 'description';
 	public const STATS        = 'stats';
-	public const STAT_VALUE   = 'row_value';
-	public const STAT_LABEL   = 'row_label';
+	public const ROW_VALUE   = 'row_value';
+	public const ROW_LABEL   = 'row_label';
 
 	public const LAYOUT         = 'layout';
 	public const LAYOUT_INLINE  = 'inline';
@@ -67,16 +67,16 @@ class Stats extends Block_Config {
 			'min'    => 0,
 			'max'    => 10,
 		] );
-		$header = new Field( self::STAT_VALUE, [
+		$header = new Field( self::ROW_VALUE, [
 			'label' => __( 'Title', 'tribe' ),
-			'name'  => self::STAT_VALUE,
+			'name'  => self::ROW_VALUE,
 			'type'  => 'text',
 		] );
 
 		$group->add_field( $header );
-		$content = new Field( self::STAT_LABEL, [
+		$content = new Field( self::ROW_LABEL, [
 			'label' => __( 'Description', 'tribe' ),
-			'name'  => self::STAT_LABEL,
+			'name'  => self::ROW_LABEL,
 			'type'  => 'textarea',
 		] );
 		$group->add_field( $content );

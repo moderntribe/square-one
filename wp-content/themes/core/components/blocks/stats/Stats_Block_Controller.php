@@ -117,13 +117,13 @@ class Stats_Block_Controller extends Abstract_Controller {
 
 		foreach ( $this->stats as $item ) {
 			// Skip over statistic rows with no value.
-			if ( empty( $item[ Stats_Block::STAT_VALUE ] ) ) {
+			if ( empty( $item[ Stats_Block::ROW_VALUE ] ) ) {
 				continue;
 			}
 
 			$statistic_args[] = [
-				Statistic::VALUE => $item[ Stats_Block::STAT_VALUE ],
-				Statistic::LABEL => $item[ Stats_Block::STAT_LABEL ] ?? '',
+				Statistic::VALUE => $item[ Stats_Block::ROW_VALUE ],
+				Statistic::LABEL => $item[ Stats_Block::ROW_LABEL ] ?? '',
 			];
 		}
 
