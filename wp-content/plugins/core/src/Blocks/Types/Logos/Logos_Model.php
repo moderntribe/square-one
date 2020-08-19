@@ -17,7 +17,7 @@ class Logos_Model extends Base_Model {
 			Logos_Block_Controller::TITLE   => $this->get( Logos::TITLE, '' ),
 			Logos_Block_Controller::CONTENT => $this->get( Logos::DESCRIPTION, '' ),
 			Logos_Block_Controller::CTA     => $this->get_cta_args(),
-			Logos_Block_Controller::LOGOS   => $this->get( Logos::LOGOS, null ),
+			Logos_Block_Controller::LOGOS   => $this->get( Logos::LOGOS, [] ),
 		];
 	}
 
@@ -36,34 +36,5 @@ class Logos_Model extends Base_Model {
 			'url'     => $cta[ 'url' ],
 			'target'  => $cta[ 'target' ],
 		];
-	}
-
-	/**
-	 * @return array
-	 */
-	private function get_logos(): array {
-		$logos = $this->get( Logos::LOGOS, [] );
-		$data = [];
-		foreach ( $logos as $logo ) {
-			// Don't add a logo if there's no image set in the block.
-			if ( empty( $logo[ Logos::LOGO_IMAGE ] ) ) {
-				continue;
-			}
-			$link = wp_parse_args( $logo[ Logos::LOGO_LINK ], [
-				'title'  => '',
-				'url'    => '',
-				'target' => '',
-			] );
-			$data[] = [
-				'attachment' => Image::factory( (int) $logo[ Logos::LOGO_IMAGE ]['id'] ),
-				'link' => [
-					'content' => $link['title'],
-					'url'     => $link['url'],
-					'target'  => $link['target'],
-				],
-			];
-		}
-
-		return $data;
 	}
 }
