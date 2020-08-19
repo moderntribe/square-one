@@ -6,7 +6,7 @@ namespace Tribe\Project\Templates\Components\blocks\stats;
 use Tribe\Libs\Utils\Markup_Utils;
 use \Tribe\Project\Blocks\Types\Stats\Stats as Stats_Block;
 use Tribe\Project\Templates\Components\Abstract_Controller;
-use \Tribe\Project\Templates\Components\statistic\Controller as Statistic;
+use \Tribe\Project\Templates\Components\statistic\Statistic_Controller as Statistic;
 use \Tribe\Project\Templates\Components\content_block\Controller as Content_Block;
 
 /**

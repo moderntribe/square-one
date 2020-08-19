@@ -4,40 +4,22 @@ namespace Tribe\Project\Templates\Components\statistic;
 
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
-use Tribe\Project\Templates\Components\Deferred_Component;
 
 /**
- * Class Statistic
+ * Class Statistic_Controller
  */
-class Controller extends Abstract_Controller {
-	/**
-	 * @var string
-	 */
-	public $tag;
-	/**
-	 * @var string[]
-	 */
-	private $classes;
-	/**
-	 * @var string[]
-	 */
-	private $attrs;
-	/**
-	 * @var Deferred_Component
-	 * @uses components/text
-	 */
-	private $value;
-	/**
-	 * @var Deferred_Component
-	 * @uses components/text
-	 */
-	private $label;
-
+class Statistic_Controller extends Abstract_Controller {
 	public const TAG     = 'tag';
 	public const CLASSES = 'classes';
 	public const ATTRS   = 'attrs';
 	public const VALUE   = 'value';
 	public const LABEL   = 'label';
+
+	public string $tag;
+	private array $classes;
+	private array $attrs;
+	private array $value;
+	private array $label;
 
 	public function __construct( array $args ) {
 		$args = wp_parse_args( $args, $this->defaults() );
