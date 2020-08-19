@@ -1,26 +1,32 @@
 <?php
 declare( strict_types=1 );
 
+use Tribe\Project\Templates\Components\blocks\logos\Logos_Block_Controller;
+
 /**
  * @var array $args Arguments passed to the template
  */
 // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
-$c = Tribe\Project\Templates\Components\blocks\logos\Logos_Block_Controller::factory( $args );
+$c = Logos_Block_Controller::factory( $args );
 
 if ( empty( $c->logos ) ) {
 	return;
 }
 ?>
 
-<section <?php echo $c->classes(); ?> <?php echo $c->attributes(); ?>>
-	<div class="l-container b-logos__container">
+<section <?php echo $c->classes(); ?><?php echo $c->attributes(); ?>>
+	<div <?php echo $c->container_classes(); ?><?php echo $c->container_attrs(); ?>>
 
-		<?php echo $c->get_header(); ?>
+		<?php get_template_part(
+			'components/content_block/content_block',
+			null,
+			$c->get_header_args()
+		); ?>
 
-		<ul class="b-logos__list <?php printf( 'b-logos--count-%d', count( $c->logos ) ); ?>">
-			<?php foreach ( $c->logos as $logo ) { ?>
+		<ul <?php echo $c->content_classes(); ?>>
+			<?php foreach ( $c->get_logos() as $logo ) { ?>
 				<li class="b-logo">
-					{{ component( 'image/Image.php', logo ) }}
+					<?php get_template_part( 'components/image/image', null, $logo ); ?>
 				</li>
 			<?php } ?>
 		</ul>
