@@ -4,6 +4,7 @@ namespace Tribe\Project\Templates\Components\statistic;
 
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
+use Tribe\Project\Templates\Components\Deferred_Component;
 
 /**
  * Class Statistic_Controller
@@ -18,8 +19,8 @@ class Statistic_Controller extends Abstract_Controller {
 	public string $tag;
 	private array $classes;
 	private array $attrs;
-	private array $value;
-	private array $label;
+	private $value;
+	private $label;
 
 	public function __construct( array $args ) {
 		$args = $this->parse_args( $args );
@@ -27,8 +28,8 @@ class Statistic_Controller extends Abstract_Controller {
 		$this->tag     = (string) $args[ self::TAG ];
 		$this->classes = (array) $args[  self::CLASSES ];
 		$this->attrs   = (array) $args[ self::ATTRS ];
-		$this->value   = (array) $args[ self::VALUE ];
-		$this->label   = (array) $args[ self::LABEL ];
+		$this->value   = $args[ self::VALUE ];
+		$this->label   = $args[ self::LABEL ];
 	}
 
 	protected function defaults(): array {
@@ -93,6 +94,6 @@ class Statistic_Controller extends Abstract_Controller {
 
 		$this->label['classes'][] = 'c-statistic__label';
 
-		return $this->value;
+		return $this->label;
 	}
 }

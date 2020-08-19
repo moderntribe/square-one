@@ -6,6 +6,7 @@ namespace Tribe\Project\Templates\Components\blocks\stats;
 use Tribe\Libs\Utils\Markup_Utils;
 use \Tribe\Project\Blocks\Types\Stats\Stats as Stats_Block;
 use Tribe\Project\Templates\Components\Abstract_Controller;
+use Tribe\Project\Templates\Models\Statistic as Statistic_Model;
 use \Tribe\Project\Templates\Components\statistic\Statistic_Controller as Statistic;
 use \Tribe\Project\Templates\Components\content_block\Controller as Content_Block;
 
@@ -24,6 +25,11 @@ class Stats_Block_Controller extends Abstract_Controller {
 	public const ATTRS             = 'attrs';
 	public const STATS             = 'stats';
 
+	/**
+	 * @var Statistic_Model[] The collection of stats to render. Each item should be a \Tribe\Project\Templates\Models\Statistic object.
+	 */
+	private array $stats;
+
 	public string $layout;
 	public string $content_align;
 	public string $display_dividers;
@@ -33,7 +39,6 @@ class Stats_Block_Controller extends Abstract_Controller {
 	public array $content_classes;
 	public array $classes;
 	public array $attrs;
-	public array $stats;
 
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
@@ -48,6 +53,8 @@ class Stats_Block_Controller extends Abstract_Controller {
 		$this->classes           = (array) $args[ self::CLASSES ];
 		$this->attrs             = (array) $args[ self::ATTRS ];
 		$this->stats             = (array) $args[ self::STATS ];
+
+		$this->get_stats();
 	}
 
 	/**
@@ -91,6 +98,8 @@ class Stats_Block_Controller extends Abstract_Controller {
 	}
 
 	/**
+	 * Loop through the stats provided setup the statistic components arguments for each.
+	 *
 	 * @return array
 	 */
 	public function get_stats(): array {
@@ -98,9 +107,10 @@ class Stats_Block_Controller extends Abstract_Controller {
 
 		foreach ( $this->stats as $item ) {
 			// Skip over statistic rows with no value.
-			if ( empty( $item[ Stats_Block::ROW_VALUE ] ) ) {
-				continue;
-			}
+			// TODO: fix fatal error caused by calling $item[ Stats_Block::ROW_VALUE ].
+//			if ( empty( $item[ Stats_Block::ROW_VALUE ] ) ) {
+//				continue;
+//			}
 
 			$statistic_args[] = [
 				Statistic::VALUE => defer_template_part( 'components/text/text', null, $this->get_value_args( $item ) ),
@@ -112,20 +122,24 @@ class Stats_Block_Controller extends Abstract_Controller {
 	}
 
 	/**
+	 * @param Statistic_Model $item
+	 *
 	 * @return array
 	 */
-	protected function get_value_args( $item ): array {
+	protected function get_value_args( Statistic_Model $item ): array {
 		return [
-			'content' => esc_html( $item[ Stats_Block::ROW_VALUE ] ),
+			'content' => esc_html( $item->value ),
 		];
 	}
 
 	/**
+	 * @param Statistic_Model $item
+	 *
 	 * @return array
 	 */
-	protected function get_label_args( $item ): array {
+	protected function get_label_args( Statistic_Model $item ): array {
 		return [
-			'content' => esc_html( $item[ Stats_Block::ROW_LABEL ] ),
+			'content' => esc_html( $item->label ),
 		];
 	}
 
