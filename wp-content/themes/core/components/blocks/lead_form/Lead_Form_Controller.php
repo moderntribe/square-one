@@ -46,6 +46,9 @@ class Lead_Form_Controller extends Abstract_Controller {
 		$this->attrs             = (array) $args[ self::ATTRS ];
 	}
 
+	/**
+	 * @return array
+	 */
 	protected function defaults(): array {
 		return [
 			self::WIDTH             => Lead_Form_Block::WIDTH_GRID,
@@ -60,6 +63,9 @@ class Lead_Form_Controller extends Abstract_Controller {
 		];
 	}
 
+	/**
+	 * @return array
+	 */
 	protected function required(): array {
 		return [
 			self::CONTAINER_CLASSES => [ 'b-lead-form__container' ],
@@ -100,6 +106,9 @@ class Lead_Form_Controller extends Abstract_Controller {
 	}
 
 
+	/**
+	 * @return array
+	 */
 	public function get_content_args(): array {
 		if ( empty( $this->title ) && empty( $this->description ) ) {
 			return [];
@@ -114,6 +123,9 @@ class Lead_Form_Controller extends Abstract_Controller {
 		];
 	}
 
+	/**
+	 * @return array
+	 */
 	protected function get_title_args(): array {
 		return [
 			'tag'     => 'h2',
@@ -122,6 +134,9 @@ class Lead_Form_Controller extends Abstract_Controller {
 		];
 	}
 
+	/**
+	 * @return array
+	 */
 	protected function get_description_args(): array {
 		return [
 			'classes' => [ 'b-lead-form__description', 't-sink', 's-sink' ],
@@ -129,6 +144,9 @@ class Lead_Form_Controller extends Abstract_Controller {
 		];
 	}
 
+	/**
+	 * @return mixed
+	 */
 	public function get_form_id() {
 		return $this->form;
 	}
@@ -144,6 +162,9 @@ class Lead_Form_Controller extends Abstract_Controller {
 		return gravity_form( $this->form, false, false, false, null, false, 1, false );
 	}
 
+	/**
+	 * @return string
+	 */
 	public function get_form_classes(): string {
 		return Markup_Utils::class_attribute( $this->form_classes );
 	}

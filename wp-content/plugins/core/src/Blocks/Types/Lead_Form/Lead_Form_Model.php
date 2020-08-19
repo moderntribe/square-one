@@ -7,6 +7,9 @@ use Tribe\Project\Blocks\Types\Base_Model;
 use Tribe\Project\Templates\Components\blocks\lead_form\Lead_Form_Controller;
 
 class Lead_Form_Model extends Base_Model {
+	/**
+	 * @return array
+	 */
 	public function get_data(): array {
 		return [
 			Lead_Form_Controller::DESCRIPTION => $this->get( Lead_Form::DESCRIPTION, '' ),
