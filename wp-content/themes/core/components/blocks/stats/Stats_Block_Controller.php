@@ -67,11 +67,22 @@ class Stats_Block_Controller extends Abstract_Controller {
 			self::DISPLAY_DIVIDERS  => Stats_Block::DISPLAY_DIVIDERS,
 			self::TITLE             => '',
 			self::DESCRIPTION       => '',
-			self::CONTAINER_CLASSES => [ 'b-stats__container', 'l-container' ],
-			self::CONTENT_CLASSES   => [ 'b-stats__content' ],
-			self::CLASSES           => [ 'c-block', 'b-stats' ],
+			self::CONTAINER_CLASSES => [],
+			self::CONTENT_CLASSES   => [],
+			self::CLASSES           => [],
 			self::ATTRS             => [],
 			self::STATS             => [],
+		];
+	}
+
+	/**
+	 * @return array
+	 */
+	protected function required(): array {
+		return [
+			self::CLASSES           => [ 'c-block', 'b-stats' ],
+			self::CONTAINER_CLASSES => [ 'b-stats__container', 'l-container' ],
+			self::CONTENT_CLASSES   => [ 'b-stats__content' ],
 		];
 	}
 
