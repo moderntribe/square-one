@@ -147,8 +147,11 @@ class Stats_Block_Controller extends Abstract_Controller {
 	 * @return string
 	 */
 	public function classes(): string {
-		$this->classes[] = 'c-block--' . $this->layout;
-		$this->classes[] = 'c-block--' . $this->display_dividers;
+		$this->classes[] = 'c-block--layout-' . $this->layout;
+
+		if ( $this->display_dividers ) {
+			$this->classes[] = 'c-block--display_dividers';
+		}
 
 		return Markup_Utils::class_attribute( $this->classes );
 	}
