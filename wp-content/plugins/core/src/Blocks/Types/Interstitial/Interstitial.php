@@ -46,7 +46,7 @@ class Interstitial extends Block_Config {
 		)->add_field(
 			new Field( self::NAME . '_' . self::CTA, [
 				'label' => __( 'Call to Action', 'tribe' ),
-				'name'  => self::NAME,
+				'name'  => self::CTA,
 				'type'  => 'link',
 			] )
 		);

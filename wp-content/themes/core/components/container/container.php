@@ -11,7 +11,6 @@ if ( empty( $content ) ) {
 	return;
 }
 ?>
-
 <<?php echo $c->tag(); ?>
 	<?php echo $c->classes(); ?>
 	<?php echo $c->attributes(); ?>
