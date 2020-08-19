@@ -3,17 +3,10 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Blocks\Types\Media_Text;
 
-use Tribe\Project\Blocks\Types\Media_Text\Media_Text as Media_Text_Block;
-use Tribe\Project\Controllers\Blocks\Block_Controller;
-use Tribe\Project\Templates\Components\Content_Block;
-use Tribe\Project\Templates\Components\Image as Image_Component;
-use Tribe\Project\Templates\Components\Link;
-use Tribe\Project\Templates\Components\Blocks\Media_Text as Container;
-use Tribe\Project\Templates\Components\Controller;
-use Tribe\Project\Templates\Models\Image;
-use Tribe\Project\Theme\Config\Image_Sizes;
+use Tribe\Project\Blocks\Types\Base_Model;
+use Tribe\Project\Templates\Components\blocks\media_text\Media_Text_Block_Controller;
 
-class Controller extends Block_Controller {
+class Media_Text_Model extends Base_Model {
 
 	public function render( $attributes, $content, $block_type ) {
 		$this->attributes = $attributes;
@@ -104,8 +97,8 @@ class Controller extends Block_Controller {
 		$content = $GLOBALS['wp_embed']->shortcode( [], $url );
 
 		return [
-			Controller::TAG  => 'div',
-			Controller::TEXT => $content,
+			MediaTextModel::TAG  => 'div',
+			MediaTextModel::TEXT => $content,
 		];
 	}
 
@@ -121,16 +114,16 @@ class Controller extends Block_Controller {
 
 	private function get_title(): array {
 		return [
-			Controller::TAG     => 'h2',
-			Controller::CLASSES => [ 'b-media-text__title', 'h3' ],
-			Controller::TEXT    => $this->attributes[ Media_Text_Block::TITLE ] ?? '',
+			MediaTextModel::TAG     => 'h2',
+			MediaTextModel::CLASSES => [ 'b-media-text__title', 'h3' ],
+			MediaTextModel::TEXT    => $this->attributes[ Media_Text_Block::TITLE ] ?? '',
 		];
 	}
 
 	private function get_text(): array {
 		return [
-			Controller::CLASSES => [ 'b-media-text__text', 't-sink', 's-sink' ],
-			Controller::TEXT    => implode( "\n", wp_list_pluck( $this->attributes[ Media_Text_Block::CONTENT ] ?? [], 'content' ) )
+			MediaTextModel::CLASSES => [ 'b-media-text__text', 't-sink', 's-sink' ],
+			MediaTextModel::TEXT    => implode( "\n", wp_list_pluck( $this->attributes[ Media_Text_Block::CONTENT ] ?? [], 'content' ) )
 		];
 	}
 

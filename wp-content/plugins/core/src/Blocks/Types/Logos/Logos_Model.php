@@ -4,7 +4,6 @@ declare( strict_types=1 );
 namespace Tribe\Project\Blocks\Types\Logos;
 
 use Tribe\Project\Blocks\Types\Base_Model;
-use Tribe\Project\Templates\Models\Image;
 use Tribe\Project\Templates\Components\blocks\logos\Logos_Block_Controller;
 
 class Logos_Model extends Base_Model {

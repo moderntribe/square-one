@@ -1,10 +1,13 @@
 <?php
 declare( strict_types=1 );
 
-namespace Tribe\Project\Templates\Components\Blocks;
+namespace Tribe\Project\Templates\Components\blocks\media_text;
 
-use Tribe\Project\Components\Component;
+use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Blocks\Types\Media_Text\Media_Text as Media_Text_Block;
+use Tribe\Project\Templates\Components\Abstract_Controller;
+use Tribe\Project\Templates\Models\Image;
+use Tribe\Project\Theme\Config\Image_Sizes;
 
 /**
  * Class Media_Text
@@ -19,8 +22,7 @@ use Tribe\Project\Blocks\Types\Media_Text\Media_Text as Media_Text_Block;
  * @property string[] $classes
  * @property string[] $attrs
  */
-class Media_Text extends Component {
-
+class Media_Text_Block_Controller extends Abstract_Controller {
 	public const WIDTH             = 'width';
 	public const LAYOUT            = 'layout';
 	public const MEDIA             = 'media';
