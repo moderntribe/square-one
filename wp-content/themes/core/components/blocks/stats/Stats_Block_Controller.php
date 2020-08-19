@@ -122,12 +122,30 @@ class Stats_Block_Controller extends Abstract_Controller {
 			}
 
 			$statistic_args[] = [
-				Statistic::VALUE => $item[ Stats_Block::ROW_VALUE ],
-				Statistic::LABEL => $item[ Stats_Block::ROW_LABEL ] ?? '',
+				Statistic::VALUE => defer_template_part( 'components/text/text', null, $this->get_value_args( $item ) ),
+				Statistic::LABEL => defer_template_part( 'components/text/text', null, $this->get_label_args( $item ) ),
 			];
 		}
 
 		return $statistic_args;
+	}
+
+	/**
+	 * @return array
+	 */
+	protected function get_value_args( $item ): array {
+		return [
+			'content' => esc_html( $item[ Stats_Block::ROW_VALUE ] ),
+		];
+	}
+
+	/**
+	 * @return array
+	 */
+	protected function get_label_args( $item ): array {
+		return [
+			'content' => esc_html( $item[ Stats_Block::ROW_LABEL ] ),
+		];
 	}
 
 	/**
