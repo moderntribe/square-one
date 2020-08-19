@@ -14,9 +14,9 @@ class Quote_Model extends Base_Model {
 		return [
 			Quote_Block_Controller::CITE_TITLE => $this->get( Quote::CITE_TITLE, '' ),
 			Quote_Block_Controller::CITE_NAME  => $this->get( Quote::CITE_NAME, '' ),
-			Quote_Block_Controller::CITE_IMAGE => $this->get( Quote::CITE_IMAGE, null ),
+			Quote_Block_Controller::CITE_IMAGE => $this->get( Quote::CITE_IMAGE, 0 ),
 			Quote_Block_Controller::QUOTE_TEXT => $this->get( Quote::QUOTE, '' ),
-			Quote_Block_Controller::MEDIA      => $this->get( Quote::IMAGE, null ),
+			Quote_Block_Controller::MEDIA      => $this->get( Quote::IMAGE, 0 ),
 			Quote_Block_Controller::LAYOUT     => $this->get(
 				Quote::LAYOUT,
 				Quote::MEDIA_OVERLAY
