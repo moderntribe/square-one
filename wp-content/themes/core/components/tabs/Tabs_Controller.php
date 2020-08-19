@@ -206,7 +206,12 @@ class Tabs_Controller extends Abstract_Controller {
 	 * @return string
 	 */
 	public function get_dropdown_attrs(): string {
-		return Markup_Utils::concat_attrs( [ 'id' => $this->tablist_id ] );
+		$attrs = [
+			'id'      => $this->tablist_id,
+			'data-js' => 'c-tabs__tablist-dropdown',
+		];
+
+		return Markup_Utils::concat_attrs( $attrs );
 	}
 
 	/**

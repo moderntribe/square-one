@@ -22,6 +22,7 @@ const componentState = {
 const el = {
 	container: tools.getNodes( 'site-wrap' )[ 0 ],
 	tabsComponents: tools.getNodes( 'c-tabs', true ),
+	tablistDropdowns: tools.getNodes( 'c-tabs__tablist-dropdown', true ),
 	mobileToggles: tools.getNodes( 'c-tabs__tablist-toggle', true ),
 };
 
@@ -221,6 +222,18 @@ const handleTabsMobileKeyDown = ( e ) => {
 };
 
 /**
+ * Update tablist scroller for overflow and add/remove the relevant class.
+ */
+const handleScrollableTabsFit = () => {
+	el.tablistDropdowns.forEach( dropdown => {
+		const container = tools.closest( dropdown, '[data-js="c-tabs"]' );
+		if ( container.getAttribute( 'data-layout' ) === 'horizontal' ) {
+			dropdown.classList.toggle( 'is-scrollable', dropdown.scrollWidth > dropdown.clientWidth );
+		}
+	} );
+};
+
+/**
  * Handle browser resize events.
  */
 const handleResize = () => {
@@ -235,6 +248,8 @@ const handleResize = () => {
 		el.mobileToggles.forEach( toggle => hideTabsDropDown( toggle ) );
 		componentState.isMobile = state.is_mobile;
 	}
+
+	handleScrollableTabsFit();
 };
 
 /**
@@ -265,6 +280,7 @@ const init = () => {
 
 	cacheElements();
 	bindEvents();
+	handleScrollableTabsFit();
 
 	console.info( 'SquareOne Theme: Initialized tabs component scripts.' );
 };
