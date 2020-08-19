@@ -2,10 +2,12 @@
 
 namespace Tribe\Project\Blocks\Types;
 
-class Base_Model {
-	protected $mode;
-	protected $data;
-	protected $name;
+abstract class Base_Model {
+	protected string $mode;
+	protected array $data;
+	protected string $name;
+
+	abstract public function get_data(): array;
 
 	/**
 	 * Base_Controller constructor.
