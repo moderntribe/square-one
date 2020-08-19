@@ -46,9 +46,12 @@ class Stats extends Block_Config {
 			] )
 		)->add_field(
 			new Field( self::NAME . '_' . self::DESCRIPTION, [
-				'label' => __( 'Description', 'tribe' ),
-				'name'  => self::DESCRIPTION,
-				'type'  => 'textarea',
+				'label'        => __( 'Description', 'tribe' ),
+				'name'         => self::DESCRIPTION,
+				'type'         => 'wysiwyg',
+				'toolbar'      => 'basic',
+				'media_upload' => 0,
+				'delay'        => 1,
 			] )
 		)->add_field(
 			$this->get_stats_section()
