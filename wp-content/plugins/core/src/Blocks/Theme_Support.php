@@ -50,6 +50,7 @@ class Theme_Support {
 	}
 
 	private function color_palette(): void {
+		// TODO: Figure out how to completely disable these options for the time being.
 		add_theme_support( 'editor-color-palette', $this->get_colors() );
 		add_theme_support( 'editor-gradient-presets', $this->get_gradients() );
 	}

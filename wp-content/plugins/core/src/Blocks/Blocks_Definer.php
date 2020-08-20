@@ -47,12 +47,16 @@ class Blocks_Definer implements Definer_Interface {
 				'core/rss',
 				'core/social-links',
 				'core/spacer',
+				// TODO: Finish the complete list of core blocks to disable.
+				// TODO: Disable Block Patterns from 5.5
 			],
 
 			/**
 			 * An array of block type style overrides
 			 *
 			 * Each item in the array should be a factory that returns a Block_Style_Override
+			 *
+			 * TODO: Create a proper thumbnail of the style for the block editor: http://p.tri.be/dmsAwK
 			 */
 			self::STYLES     => DI\add( [
 				DI\factory( static function () {
