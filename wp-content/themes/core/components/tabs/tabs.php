@@ -1,27 +1,28 @@
 <?php
 declare( strict_types=1 );
 
+use \Tribe\Project\Templates\Components\tabs\Tabs_Controller;
+
 /**
  * @var array $args Arguments passed to the template
  */
 // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
-$c = \Tribe\Project\Templates\Components\tabs\Controller::factory( $args );
+$c = Tabs_Controller::factory( $args );
 
 if ( empty( $c->get_tab_panels() ) ) {
 	return;
 }
-
 ?>
 
 <div <?php echo $c->get_classes(); ?> <?php echo $c->get_attrs(); ?>>
-	<div class="c-tabs__tablist-wrapper">
+	<div class="c-tabs__tablist-wrapper" data-js="c-tabs__tablist-wrapper">
 
-		<?php echo $c->get_dropdown_toggle(); ?>
+		<?php get_template_part( 'components/button/button', null, $c->get_dropdown_toggle_args() ); ?>
 
-		<div <?php $c->get_dropdown_classes(); ?> <?php $c->get_dropdown_attrs(); ?>>
-			<div <?php $c->get_tablist_classes(); ?> <?php $c->get_tablist_attrs(); ?>>
-				<?php foreach ( $c->get_tab_buttons() as $button ) {
-					echo $button;
+		<div <?php echo $c->get_dropdown_classes(); ?> <?php echo $c->get_dropdown_attrs(); ?>>
+			<div <?php echo $c->get_tablist_classes(); ?> <?php echo $c->get_tablist_attrs(); ?>>
+				<?php foreach ( $c->get_tab_buttons() as $button_args ) {
+					get_template_part( 'components/button/button', null, $button_args );
 				} ?>
 			</div>
 		</div>
@@ -29,8 +30,8 @@ if ( empty( $c->get_tab_panels() ) ) {
 	</div>
 
 	<div class="c-tabs__tabpanels-wrapper">
-		<?php foreach ( $c->get_tab_panels() as $tab ) {
-			echo $tab;
+		<?php foreach ( $c->get_tab_panels() as $tab_args ) {
+			get_template_part( 'components/container/container', null, $tab_args );
 		} ?>
 	</div>
 

@@ -4,63 +4,261 @@
  *
  * ----------------------------------------------------------------------------- */
 
-.c-tab__list {
-	@mixin clearfix;
+.c-tabs {
+	/* CASE: Vertical Layout */
+	&.c-tabs--layout-vertical {
+		@media (--viewport-full) {
+			display: flex;
+			flex-flow: row nowrap;
+		}
+	}
 }
 
-.c-tab__button {
-	font-weight: 700;
-	padding: 5px;
-	background: none;
+/* -----------------------------------------------------------------------------
+ * Tablist Wrapper
+ * ----------------------------------------------------------------------------- */
+
+.c-tabs__tablist-wrapper {
+	/* CASE: Vertical Layout */
+	.c-tabs--layout-vertical & {
+		position: relative;
+		padding: var(--spacer-10) var(--spacer-20);
+		box-shadow: 0 4px 12px rgba(21, 21, 21, 0.15);
+
+		@media (--viewport-full) {
+			flex: 0 0 25%;
+			margin-right: var(--grid-gutter);
+			padding: var(--spacer-30) var(--spacer-40);
+		}
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Tablist Mobile Toggle Button
+ * ----------------------------------------------------------------------------- */
+
+.c-tabs__tablist-toggle {
+	@mixin a-btn-reset;
+
+	position: relative;
+	display: block;
+	width: 100%;
 	text-align: left;
-	border: 1px solid var(--color-tabs-border);
-	margin: 0 5px 5px 0;
-	width: auto;
-	float: left;
-	display: inline-block;
-	vertical-align: baseline;
-
-	&:before {
-		content: ' ';
-		min-height: 1em;
-		display: inline-block;
-		width: 1px;
-		left: -1px;
-	}
-
-	&:focus,
-	&:hover {
-		color: var(--color-primary);
-		transition: var(--transition);
-	}
+	padding: var(--spacer-20) var(--spacer-30) var(--spacer-20) 0;
+	transition: var(--transition);
 
 	@media (--viewport-full) {
-		padding: var(--spacer-20);
-		border-bottom: 0;
-		margin: 0 5px 0 0;
+		display: none;
 	}
-}
 
-.c-tab__button--active {
-	color: var(--color-primary);
-	background-color: var(--color-tabs-btn-bg);
-}
+	&:after {
+		@mixin icon;
 
-.c-tab__content {
-	border: 1px solid var(--color-tabs-border);
-	margin-bottom: var(--spacer-20);
-	padding: var(--spacer-20);
-	display: none;
+		content: var(--icon-chevron-down);
+		position: absolute;
+		top: 0.5em;
+		right: 0;
+		font-size: 24px;
+	}
+
+	&:hover,
+	&:focus {
+		color: var(--color-link-hover);
+	}
 
 	&:focus {
-		outline: none;
-	}
-
-	@media (--viewport-full) {
-		margin-bottom: var(--spacer-40);
+		outline: 1px dotted;
 	}
 }
 
-.c-tab__content--active {
-	display: block;
+/* -----------------------------------------------------------------------------
+ * Tablist Mobile Drop-Down
+ * ----------------------------------------------------------------------------- */
+
+.c-tabs__tablist-dropdown {
+	/* CASE: Horizontal Layout */
+	.c-tabs--layout-horizontal & {
+		white-space: nowrap;
+		border-bottom: 1px solid var(--color-border);
+	}
+
+	/* CASE: Vertical Layout */
+	.c-tabs--layout-vertical & {
+		display: none;
+		position: absolute;
+		left: 0;
+		top: 100%;
+		width: 100%;
+		padding: var(--spacer-10) var(--spacer-20);
+		background: var(--color-bgd);
+		box-shadow: 0 12px 12px rgba(21, 21, 21, 0.15);
+
+		@media (--viewport-full) {
+			display: block;
+			position: relative;
+			left: auto;
+			top: auto;
+			padding: 0;
+			background: transparent;
+			box-shadow: none;
+		}
+	}
+
+	/* CASE: The tablist is horizontally scrollable, thus the border should overflow-right */
+	&.is-scrollable {
+		margin-right: var(--grid-margin-small-negative);
+		overflow-x: scroll;
+		-ms-overflow-style: none;  /* IE and Edge */
+		scrollbar-width: none;  /* Firefox */
+
+		&::-webkit-scrollbar {
+			display: none; /* Webkit, Safari, Opera */
+		}
+
+		@media (--viewport-medium) {
+			margin-right: var(--grid-margin-medium-negative);
+		}
+
+		@media (--viewport-full) {
+			margin-right: 0;
+		}
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Tablist
+ * ----------------------------------------------------------------------------- */
+
+.c-tabs__tablist {
+	/* CASE: Horizontal Layout */
+	.c-tabs--layout-horizontal & {
+
+		@media (--viewport-medium) {
+		}
+
+		@media (--viewport-full) {
+		}
+	}
+
+	/* CASE: Vertical Layout */
+	.c-tabs--layout-vertical & {
+		border-top: 1px solid var(--color-border);
+		margin-bottom: var(--spacer-20);
+
+		@media (--viewport-full) {
+			border-top: 0;
+			margin-bottom: 0;
+		}
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Tablist Tab (Tab Button)
+ * ----------------------------------------------------------------------------- */
+
+.c-tabs__tab {
+	@mixin a-btn-reset;
+
+	/* CASE: Horizontal Layout */
+	.c-tabs--layout-horizontal & {
+		margin: 1px var(--spacer-40) 0 1px;
+		padding: calc(var(--spacer-20) + 4px) 4px;
+		background-image: linear-gradient(currentColor, currentColor);
+		background-position: 0 100%;
+		background-repeat: no-repeat;
+		background-size: 0 4px;
+		transition: var(--transition);
+
+		@media (--viewport-medium) {
+			padding: calc(var(--spacer-20) + 4px) var(--spacer-10);
+			margin-right: var(--spacer-70);
+		}
+
+		&:hover,
+		&:focus {
+			color: var(--color-link-hover);
+			background-size: 100% 4px;
+		}
+
+		/* CASE: Selected Tab */
+		&[aria-selected="true"] {
+			color: var(--color-link-hover);
+			background-size: 100% 4px;
+
+			&:focus {
+				outline: 1px dotted;
+			}
+		}
+	}
+
+	/* CASE: Vertical Layout */
+	.c-tabs--layout-vertical & {
+		position: relative;
+		display: block;
+		width: 100%;
+		text-align: left;
+		padding: var(--spacer-20) var(--spacer-30) var(--spacer-20) 0;
+		border-bottom: 1px solid var(--color-border);
+		transition: var(--transition);
+
+		&:hover,
+		&:focus {
+			color: var(--color-link-hover);
+		}
+
+		/* CASE: Selected Tab */
+		&[aria-selected="true"] {
+			color: var(--color-link-hover);
+
+			@media (--viewport-full) {
+
+				&:after {
+					@mixin icon;
+
+					content: var(--icon-chevron-right);
+					position: absolute;
+					top: 0.5em;
+					right: 0;
+					margin-left: var(--spacer-10);
+					font-size: 24px;
+				}
+			}
+
+			&:focus {
+				outline: 1px dotted;
+			}
+		}
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Tabpanels Wrapper
+ * ----------------------------------------------------------------------------- */
+
+.c-tabs__tabpanels-wrapper {
+	/* CASE: Horizontal Layout */
+	.c-tabs--layout-horizontal & {
+		margin-top: var(--spacer-40);
+	}
+
+	/* CASE: Vertical Layout */
+	.c-tabs--layout-vertical & {
+		margin-top: var(--spacer-30);
+
+		@media (--viewport-full) {
+			flex: 1 0 auto;
+			margin-top: 0;
+		}
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Tabpanel
+ * ----------------------------------------------------------------------------- */
+
+.c-tabs__tabpanel {
+
+	&:focus {
+		outline: 1px dotted;
+	}
 }
