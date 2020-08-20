@@ -97,16 +97,7 @@
 			margin-top: var(--spacer-70);
 		}
 	}
-}
 
-/* -----------------------------------------------------------------------------
- * Kitchen Sink Vertical Spacing
- *
- * Applicable to the front-end theme and WP Core blocks in the editor.
- * ----------------------------------------------------------------------------- */
-
-[data-type^="core"],
-.s-sink > {
 	/* -----------------------------------------------------------------------------
 	 * Headings
 	 * ----------------------------------------------------------------------------- */
@@ -125,6 +116,7 @@
 	 * Horizontal Rule
 	 * ----------------------------------------------------------------------------- */
 
+	.block-editor-block-list__block[data-type="core/separator"].block-editor-block-list__block, /* Hack to overcome Core block editor styles. */
 	hr {
 		margin-top: var(--spacer-60);
 		margin-bottom: var(--spacer-60);
@@ -175,6 +167,8 @@
 	 * ----------------------------------------------------------------------------- */
 
 	/* Shared */
+	[data-type="core/quote"] > blockquote, /* Hack to overcome Core block editor styles. */
+	[data-type="core/quote"] > q, /* Hack to overcome Core block editor styles. */
 	blockquote,
 	q {
 		margin: var(--spacer-60) auto;
@@ -184,6 +178,7 @@
 	q {}
 
 	/* blockquote */
+	[data-type="core/quote"] > blockquote, /* Hack to overcome Core block editor styles. */
 	blockquote {
 
 		p {
