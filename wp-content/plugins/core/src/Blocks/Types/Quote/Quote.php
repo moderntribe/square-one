@@ -32,7 +32,8 @@ class Quote extends Block_Config {
 			'icon'        => 'testimonial',
 			'keywords'    => [ __( 'quotation', 'tribe' ), __( 'display', 'tribe' ), __( 'text', 'tribe' ) ],
 			'category'    => 'layout',
-			'supports'    => [ 'align' => false ],
+			'align'       => 'full',
+			'supports'    => [ 'align' => 'full' ],
 		] ) );
 	}
 
