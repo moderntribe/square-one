@@ -22,6 +22,9 @@ class Admin_Subscriber extends Abstract_Subscriber {
 	}
 
 	private function editor_styles() {
+		add_filter( 'block_editor_settings', function ( $settings ) {
+			return $this->container->get( Editor_Styles::class )->remove_core_block_editor_styles( $settings );
+		}, 10, 1 );
 		add_action( 'enqueue_block_editor_assets', function () {
 			$this->container->get( Editor_Styles::class )->enqueue_block_editor_styles();
 		}, 10, 0 );

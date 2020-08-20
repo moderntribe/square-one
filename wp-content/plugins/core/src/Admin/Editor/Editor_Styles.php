@@ -17,6 +17,22 @@ class Editor_Styles {
 	}
 
 	/**
+	 * Remove the block editor styles from editor-styles.css injected by WP core.
+	 *
+	 * @param array $editor_settings
+	 *
+	 * @return array
+	 * @filter block_editor_settings
+	 * @see    edit-form-blocks.php
+	 *
+	 */
+	public function remove_core_block_editor_styles( array $editor_settings ): array {
+		$editor_settings['styles'] = array_slice( $editor_settings['styles'], 1 );
+
+		return $editor_settings;
+	}
+
+	/**
 	 * Enqueue our block editor styles.
 	 *
 	 * Using wp_enqueue_style instead of add_editor_style, because
