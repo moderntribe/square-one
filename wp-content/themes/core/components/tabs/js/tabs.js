@@ -20,7 +20,6 @@ const componentState = {
 };
 
 const el = {
-	container: tools.getNodes( 'site-wrap' )[ 0 ],
 	tabsComponents: tools.getNodes( 'c-tabs', true ),
 	tablistDropdowns: tools.getNodes( 'c-tabs__tablist-dropdown', true ),
 	mobileToggles: tools.getNodes( 'c-tabs__tablist-toggle', true ),
@@ -258,9 +257,9 @@ const handleResize = () => {
  */
 
 const bindEvents = () => {
-	delegate( el.container, '[role="tab"]', 'click', handleTabClick );
-	delegate( el.container, '[role="tablist"]', 'keydown', handleTabListKeyDown );
-	delegate( el.container, '[data-js="c-tabs__tablist-toggle"]', 'click', handleTabsMobileToggle );
+	delegate( el.tabsComponents, '[role="tab"]', 'click', handleTabClick );
+	delegate( el.tabsComponents, '[role="tablist"]', 'keydown', handleTabListKeyDown );
+	delegate( el.tabsComponents, '[data-js="c-tabs__tablist-toggle"]', 'click', handleTabsMobileToggle );
 
 	on( document, 'click', handleTabsMobileClickOut );
 	on( document, 'keyup', handleTabsMobileKeyDown );
