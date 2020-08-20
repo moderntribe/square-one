@@ -10,7 +10,7 @@ class Interstitial_Model extends Base_Model {
 	/**
 	 * @return array
 	 */
-	public function get_data() {
+	public function get_data(): array {
 		return [
 			Interstitial_Block_Controller::CONTENT => $this->get( Interstitial::DESCRIPTION, '' ),
 			Interstitial_Block_Controller::CTA     => $this->get_cta_args(),

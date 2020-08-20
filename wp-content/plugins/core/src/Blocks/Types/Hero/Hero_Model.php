@@ -5,7 +5,7 @@ namespace Tribe\Project\Blocks\Types\Hero;
 
 use Tribe\Project\Blocks\Types\Base_Model;
 
-class Model extends Base_Model {
+class Hero_Model extends Base_Model {
 
 	public function get_data(): array {
 		return [

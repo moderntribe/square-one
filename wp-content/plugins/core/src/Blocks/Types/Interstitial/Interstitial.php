@@ -35,6 +35,7 @@ class Interstitial extends Block_Config {
 				'label'        => __( 'Background Image', 'tribe' ),
 				'name'         => self::IMAGE,
 				'type'         => 'image',
+				'return_format' => 'id',
 				'instructions' => __( 'Recommended image size: 1440px wide', 'tribe' ),
 			] )
 		)->add_field(

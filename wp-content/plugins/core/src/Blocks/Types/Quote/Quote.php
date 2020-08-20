@@ -41,11 +41,15 @@ class Quote extends Block_Config {
 	 */
 	public function add_fields() {
 		$this->add_field( new Field( self::NAME . '_' . self::IMAGE, [
-				'label'        => __( 'Image', 'tribe' ),
-				'name'         => self::IMAGE,
-				'type'         => 'image',
-				'preview_size' => 'medium',
-				'instructions' => __( 'Recommended image size by layout:<br>Overlay: 1920px wide with a 16:9 aspect ratio.<br>Left/Right: 1536px wide with a 4:3 aspect ratio.', 'tribe' ),
+				'label'         => __( 'Image', 'tribe' ),
+				'name'          => self::IMAGE,
+				'type'          => 'image',
+				'return_format' => 'id',
+				'preview_size'  => 'medium',
+				'instructions'  => __(
+					'Recommended image size by layout:<br>Overlay: 1920px wide with a 16:9 aspect ratio.<br>Left/Right: 1536px wide with a 4:3 aspect ratio.',
+					'tribe' 
+				),
 			] )
 		)->add_field( new Field( self::NAME . '_' . self::QUOTE, [
 				'label'        => __( 'Quotation', 'tribe' ),
@@ -68,11 +72,12 @@ class Quote extends Block_Config {
 				'instructions' => __( 'Generally, the professional title of the person being quoted.', 'tribe' ),
 			] )
 		)->add_field( new Field( self::NAME . '_' . self::CITE_IMAGE, [
-				'label'        => __( 'Citation Image', 'tribe' ),
-				'name'         => self::CITE_IMAGE,
-				'type'         => 'image',
-				'preview_size' => Image_Sizes::SQUARE_XSMALL,
-				'instructions' => __( 'Generally, a profile image of the person being quoted.<br>Recommended image size: 150px wide with a 1:1 aspect ratio.', 'tribe' ),
+				'label'         => __( 'Citation Image', 'tribe' ),
+				'name'          => self::CITE_IMAGE,
+				'type'          => 'image',
+				'return_format' => 'id',
+				'preview_size'  => Image_Sizes::SQUARE_XSMALL,
+				'instructions'  => __( 'Generally, a profile image of the person being quoted.<br>Recommended image size: 150px wide with a 1:1 aspect ratio.', 'tribe' ),
 			] )
 		);
 	}
