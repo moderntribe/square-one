@@ -1,6 +1,9 @@
 <?php
 declare( strict_types=1 );
-$c = \Tribe\Project\Templates\Components\content\loop_items\search\Controller::factory();
+
+use \Tribe\Project\Templates\Components\content\loop_items\search\Search_Controller;
+
+$c = Search_Controller::factory();
 ?>
 
 <article class="item-loop item-loop--search item-loop--<?php echo esc_attr( get_post_type() ); ?>">
@@ -15,7 +18,13 @@ $c = \Tribe\Project\Templates\Components\content\loop_items\search\Controller::f
 
 	</header>
 
-	<?php echo $c->render_featured_image(); ?>
+	<?php if ( ! empty( $c->get_image_args() ) ) {
+		get_template_part(
+			'components/image/image',
+			null,
+			$c->get_image_args()
+		);
+	} ?>
 
 	<?php the_excerpt(); ?>
 

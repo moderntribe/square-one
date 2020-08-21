@@ -1,16 +1,23 @@
 <?php
 declare( strict_types=1 );
-$c = \Tribe\Project\Templates\Components\content\no_results\Controller::factory();
+
+use \Tribe\Project\Templates\Components\content\no_results\No_Results_Controller;
+
+/**
+ * @var array $args Arguments passed to the template
+ */
+// phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
+$c = No_Results_Controller::factory( $args );
 ?>
 
-<div class="no-results">
+<div <?php echo $c->get_classes(); ?>>
 
 	<h3 class="no-results__title">
-		<?php echo esc_html( __( 'No Posts', 'tribe' ) ); ?>
+		<?php echo $c->get_title(); ?>
 	</h3>
 
 	<p class="no-results__content">
-		<?php echo esc_html( __( 'Sorry, but there are currently no posts to see at this time.', 'tribe' ) ); ?>
+		<?php echo $c->get_content(); ?>
 	</p>
 
 </div>

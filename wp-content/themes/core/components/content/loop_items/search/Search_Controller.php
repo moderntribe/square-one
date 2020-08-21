@@ -7,18 +7,16 @@ use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\Image\Image_Controller;
 use Tribe\Project\Templates\Models\Image;
 
-class Controller extends Abstract_Controller {
+class Search_Controller extends Abstract_Controller {
 
-	/**
-	 * Render the featured image component
-	 */
-	public function render_featured_image() {
+	public function get_image_args() {
 		if ( ! has_post_thumbnail() ) {
-			return '';
+			return [];
 		}
 
-		return tribe_template_part( 'components/image/image', null, [
+		return [
 			Image_Controller::ATTACHMENT => Image::factory( (int) get_post_thumbnail_id() ),
-		] );
+		];
 	}
+
 }
