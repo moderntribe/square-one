@@ -39,7 +39,7 @@ class Comments_Pagination_Controller extends Abstract_Controller {
 		return [
 			self::CLASSES => [ 'pagination', 'pagination--comments' ],
 			self::ATTRS   => [
-				'aria-label' => esc_html_e( 'Comments Pagination', 'tribe' ),
+				'aria-label' => esc_html__( 'Comments Pagination', 'tribe' ),
 			],
 		];
 	}
