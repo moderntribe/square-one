@@ -24,7 +24,7 @@ class Container_Controller extends Abstract_Controller {
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
 
-		$this->tag     = $args[ self::TAG ];
+		$this->tag     = (string) $args[ self::TAG ];
 		$this->classes = (array) $args[ self::CLASSES ];
 		$this->attrs   = (array) $args[ self::ATTRS ];
 		$this->content = $args[ self::CONTENT ];
