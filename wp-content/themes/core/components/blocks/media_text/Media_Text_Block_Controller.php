@@ -6,7 +6,6 @@ namespace Tribe\Project\Templates\Components\blocks\media_text;
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Blocks\Types\Media_Text\Media_Text as Media_Text_Block;
 use Tribe\Project\Templates\Components\content_block\Controller as Content_Block_Controller;
-use Tribe\Project\Templates\Components\image\Controller as Image_Controller;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Models\Image;
 use Tribe\Project\Theme\Config\Image_Sizes;
