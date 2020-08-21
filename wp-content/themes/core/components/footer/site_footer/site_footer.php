@@ -15,8 +15,8 @@ $c = Site_Footer_Controller::factory();
 
 		<p>
 			<?php echo $c->get_copyright(); ?>
-			<a href="<?php echo $c->get_home_url(); ?>" rel="external">
-				<?php echo $c->get_site_name(); ?>
+			<a href="<?php echo home_url( '/' ); ?>" rel="external">
+				<?php echo get_bloginfo( 'name' ); ?>
 			</a>
 		</p>
 
