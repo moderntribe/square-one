@@ -18,10 +18,8 @@ class Comments_Pagination_Controller extends Abstract_Controller {
 	private int   $max_pages;
 
 	public function __construct( array $args = [] ) {
-		$args = wp_parse_args( $args, $this->defaults() );
-		foreach ( $this->required() as $key => $value ) {
-			$args[ $key ] = array_merge( $args[ $key ], $value );
-		}
+		$args = $this->parse_args( $args );
+
 		$this->classes      = (array) $args[ self::CLASSES ];
 		$this->attrs        = (array) $args[ self::ATTRS ];
 		$this->paged        = (bool) $args[ self::PAGED ];
@@ -41,7 +39,7 @@ class Comments_Pagination_Controller extends Abstract_Controller {
 		return [
 			self::CLASSES => [ 'pagination', 'pagination--comments' ],
 			self::ATTRS   => [
-				'aria-labelledby' => 'pagination__label-comments',
+				'aria-label' => esc_attr__( 'Comments Pagination', 'tribe' ),
 			],
 		];
 	}
@@ -53,11 +51,11 @@ class Comments_Pagination_Controller extends Abstract_Controller {
 		return $this->paged && $this->max_pages > 1;
 	}
 
-	public function classes(): string {
+	public function get_classes(): string {
 		return Markup_Utils::class_attribute( $this->classes );
 	}
 
-	public function attrs(): string {
+	public function get_attrs(): string {
 		return Markup_Utils::concat_attrs( $this->attrs );
 	}
 
@@ -72,7 +70,7 @@ class Comments_Pagination_Controller extends Abstract_Controller {
 			'tag'     => 'li',
 			'content' => defer_template_part( 'components/link/link', null, [
 				'classes' => [],
-				'content' => __( '&larr; Older Comments' ),
+				'content' => esc_html__( '&larr; Older Comments' ),
 				'url'     => esc_url( get_comments_pagenum_link( $prev_page ) ),
 			] ),
 		] );
@@ -92,7 +90,7 @@ class Comments_Pagination_Controller extends Abstract_Controller {
 			'tag'     => 'li',
 			'content' => defer_template_part( 'components/link/link', null, [
 				'classes' => [],
-				'content' => __( 'Newer Comments &rarr;', 'tribe' ),
+				'content' => esc_html__( 'Newer Comments &rarr;', 'tribe' ),
 				'url'     => esc_url( get_comments_pagenum_link( $next_page, $this->max_pages ) ),
 			] ),
 		] );
