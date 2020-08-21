@@ -16,7 +16,7 @@ class Statistic_Controller extends Abstract_Controller {
 	public const VALUE   = 'value';
 	public const LABEL   = 'label';
 
-	public string $tag;
+	private string $tag;
 	private array $classes;
 	private array $attrs;
 	private Deferred_Component $value;
@@ -51,25 +51,25 @@ class Statistic_Controller extends Abstract_Controller {
 	/**
 	 * @return string
 	 */
-	public function tag(): string {
+	public function get_tag(): string {
 		return tag_escape( $this->tag );
 	}
 
 	/**
 	 * @return string
 	 */
-	public function classes(): string {
+	public function get_classes(): string {
 		return Markup_Utils::class_attribute( $this->classes );
 	}
 
 	/**
 	 * @return string
 	 */
-	public function attributes(): string {
+	public function get_attrs(): string {
 		return Markup_Utils::concat_attrs( $this->attrs );
 	}
 
-	public function render_value() {
+	public function get_value() {
 		if ( empty( $this->value ) ) {
 			return '';
 		}
@@ -83,7 +83,7 @@ class Statistic_Controller extends Abstract_Controller {
 		return $this->value;
 	}
 
-	public function render_label() {
+	public function get_label() {
 		if ( empty( $this->label ) ) {
 			return '';
 		}
