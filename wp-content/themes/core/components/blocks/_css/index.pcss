@@ -5,11 +5,17 @@
  * ----------------------------------------------------------------------------- */
 
 .c-block {
+	max-width: var(--grid-max-width);
 	padding-top: var(--spacer-60);
 	padding-bottom: var(--spacer-60);
 
 	@media (--viewport-medium) {
 		padding-top: var(--spacer-70);
 		padding-bottom: var(--spacer-70);
+	}
+
+	/* CASE: Block is full-bleed */
+	&.c-block--full-bleed {
+		max-width: none;
 	}
 }
