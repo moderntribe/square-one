@@ -26,15 +26,13 @@ class Accordion_Model extends Base_Model {
 	/**
 	 * @return array
 	 */
-	protected function get_accordion_rows(): array {
+	public function get_accordion_rows(): array {
 		$rows = $this->get( Accordion::ACCORDION, [] );
 		$data = [];
 		foreach ( $rows as $row ) {
 			$data[] = new Accordion_Row(
 				$row[ Accordion::ROW_HEADER ],
-				$row[ Accordion::ROW_CONTENT ],
-				uniqid( 'accordion-header-' ),
-				uniqid( 'accordion-content-' ),
+				$row[ Accordion::ROW_CONTENT ]
 			);
 		}
 

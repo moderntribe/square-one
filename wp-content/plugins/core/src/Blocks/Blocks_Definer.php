@@ -13,6 +13,7 @@ use Tribe\Project\Blocks\Types\Links\Links;
 use Tribe\Project\Blocks\Types\Logos\Logos;
 use Tribe\Project\Blocks\Types\Media_Text\Media_Text;
 use Tribe\Project\Blocks\Types\Quote\Quote;
+use Tribe\Project\Blocks\Types\Stats\Stats;
 use Tribe\Project\Blocks\Types\Tabs\Tabs;
 
 class Blocks_Definer implements Definer_Interface {
@@ -33,6 +34,7 @@ class Blocks_Definer implements Definer_Interface {
 				DI\get( Links::class ),
 				DI\get( Logos::class ),
 				DI\get( Quote::class ),
+				DI\get( Stats::class ),
 				DI\get( Tabs::class ),
 			] ),
 
