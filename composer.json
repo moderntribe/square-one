@@ -76,7 +76,7 @@
     }
   ],
   "require": {
-    "php": "^7.2",
+    "php": "^7.4",
     "advanced-custom-fields/advanced-custom-fields-pro": "*",
     "composer/installers": "1.4.0",
     "msawicki/acf-image-select": "*",

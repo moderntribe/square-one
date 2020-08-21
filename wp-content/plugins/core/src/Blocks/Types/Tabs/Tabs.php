@@ -14,8 +14,8 @@ class Tabs extends Block_Config {
 	public const TITLE       = 'title';
 	public const DESCRIPTION = 'description';
 	public const TABS        = 'tabs';
-	public const TAB_HEADER  = 'row_header';
-	public const TAB_CONTENT = 'row_content';
+	public const TAB_LABEL   = 'tab_label';
+	public const TAB_CONTENT = 'tab_content';
 
 	public const LAYOUT            = 'layout';
 	public const LAYOUT_HORIZONTAL = 'horizontal';
@@ -31,7 +31,8 @@ class Tabs extends Block_Config {
 			'icon'        => '<svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="#fff" stroke="#000" stroke-linecap="round" stroke-linejoin="round" d="M.5.5h19v19H.5z"/><path fill="#000" d="M1 1h6v4H1z"/><path fill="#fff" stroke="#000" d="M7.5 1.5h5v3h-5zM13.5 1.5h5v3h-5zM1.5 4.5h17v14h-17z"/><path fill="#151515" d="M3 6h12v1H3zM3 8h9v1H3zM3 10h13v1H3zM3 12h6v1H3z"/></svg>',
 			'keywords'    => [ __( 'tabs', 'tribe' ), __( 'display', 'tribe' ) ],
 			'category'    => 'layout',
-			'supports'    => [ 'align' => false ],
+			'align'       => 'wide',
+			'supports'    => [ 'align' => [ 'wide' ] ],
 		] ) );
 	}
 
@@ -45,9 +46,12 @@ class Tabs extends Block_Config {
 				'type'  => 'text',
 			] )
 		)->add_field( new Field( self::NAME . '_' . self::DESCRIPTION, [
-				'label' => __( 'Description', 'tribe' ),
-				'name'  => self::DESCRIPTION,
-				'type'  => 'textarea',
+				'label'        => __( 'Description', 'tribe' ),
+				'name'         => self::DESCRIPTION,
+				'type'         => 'wysiwyg',
+				'toolbar'      => 'basic',
+				'media_upload' => 0,
+				'delay'        => 1,
 			] )
 		)->add_field( $this->get_tab_section() );
 	}
@@ -58,23 +62,25 @@ class Tabs extends Block_Config {
 	protected function get_tab_section() {
 		$group = new Repeater( self::NAME . '_' . self::TABS );
 		$group->set_attributes( [
-			'label'  => __( 'Tab Section', 'tribe' ),
-			'name'   => self::TABS,
-			'layout' => 'block',
-			'min'    => 0,
-			'max'    => 10,
+			'label'        => __( 'Tab Section', 'tribe' ),
+			'name'         => self::TABS,
+			'layout'       => 'block',
+			'min'          => 0,
+			'max'          => 10,
+			'button_label' => __( 'Add Tab', 'tribe' ),
 		] );
-		$header = new Field( self::TAB_HEADER, [
-			'label' => __( 'Header', 'tribe' ),
-			'name'  => self::TAB_HEADER,
+		$header = new Field( self::TAB_LABEL, [
+			'label' => __( 'Tab Label', 'tribe' ),
+			'name'  => self::TAB_LABEL,
 			'type'  => 'text',
 		] );
 
 		$group->add_field( $header );
 		$content = new Field( self::TAB_CONTENT, [
-			'label' => __( 'Content', 'tribe' ),
-			'name'  => self::TAB_CONTENT,
-			'type'  => 'textarea',
+			'label'   => __( 'Tab Content', 'tribe' ),
+			'name'    => self::TAB_CONTENT,
+			'type'    => 'wysiwyg',
+			'delay'   => 1,
 		] );
 		$group->add_field( $content );
 
