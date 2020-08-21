@@ -3,16 +3,20 @@ declare( strict_types=1 );
 
 use \Tribe\Project\Templates\Components\footer\navigation\Navigation_Controller;
 
-$c = Navigation_Controller::factory();
+/**
+ * @var array $args Arguments passed to the template
+ */
+// phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
+$c = Navigation_Controller::factory( $args );
 
 if ( ! $c->has_menu() ) {
 	return;
 }
 ?>
 
-<nav class="site-footer__nav" aria-label="<?php echo esc_html( __( 'Secondary Navigation', 'tribe' ) ); ?>">
+<nav <?php $c->get_classes(); ?> <?php $c->get_attrs(); ?>>
 
-	<ol class="site-footer__nav-list">
+	<ol <?php $c->get_nav_list_classes(); ?>>
 		<?php echo $c->get_menu(); ?>
 	</ol>
 
