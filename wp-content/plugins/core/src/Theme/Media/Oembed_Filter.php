@@ -2,7 +2,7 @@
 
 namespace Tribe\Project\Theme\Media;
 
-use Tribe\Project\Templates\Components\video\Controller;
+use Tribe\Project\Templates\Components\video\Video_Controller;
 
 class Oembed_Filter {
 
@@ -54,12 +54,12 @@ class Oembed_Filter {
 		}
 
 		$options = [
-			'thumbnail_url'    => $video_thumb,
-			'attrs'            => $this->get_layout_container_attrs( $data->provider_name, $embed_id, $data->title ),
-			'classes'          => $classes,
-			'video_url'        => $url,
-			'trigger_label'    => $data->title,
-			'trigger_position' => Controller::TRIGGER_POSITION_BOTTOM, // Options: bottom, center
+			Video_Controller::THUMBNAIL_URL    => $video_thumb,
+			Video_Controller::ATTRS            => $this->get_layout_container_attrs( $data->provider_name, $embed_id, $data->title ),
+			Video_Controller::CLASSES          => $classes,
+			Video_Controller::VIDEO_URL        => $url,
+			Video_Controller::TRIGGER_LABEL    => $data->title,
+			Video_Controller::TRIGGER_POSITION => Video_Controller::TRIGGER_POSITION_BOTTOM, // Options: bottom, center
 		];
 		$frontend_html = tribe_template_part( 'components/video/video', null, $options );
 		$this->cache_frontend_html( $frontend_html, $url );

@@ -15,24 +15,12 @@ class Button_Controller extends Abstract_Controller {
 	public const ARIA_LABEL = 'aria_label';
 
 	/**
-	 * @var string
-	 */
-	private string $type;
-	/**
-	 * @var string[]
-	 */
-	private array $classes;
-	/**
-	 * @var string[]
-	 */
-	private array $attrs;
-	/**
 	 * @var string|Deferred_Component
 	 */
 	private $content;
-	/**
-	 * @var string
-	 */
+	private string $type;
+	private array $classes;
+	private array $attrs;
 	private string $aria_label;
 
 	public function __construct( array $args = [] ) {
@@ -63,15 +51,17 @@ class Button_Controller extends Abstract_Controller {
 		return $this->content;
 	}
 
-	public function classes(): string {
+	public function get_classes(): string {
 		return Markup_Utils::class_attribute( $this->classes );
 	}
 
-	public function attributes(): string {
+	public function get_attrs(): string {
 		$attributes = $this->attrs;
+
 		if ( $this->type ) {
 			$attributes['type'] = $this->type;
 		}
+
 		if ( $this->aria_label ) {
 			$attributes['aria-label'] = $this->aria_label;
 		}
