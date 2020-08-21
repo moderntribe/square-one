@@ -8,120 +8,99 @@ use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Models\Breadcrumb;
 
 class Breadcrumbs_Controller extends Abstract_Controller {
-	/**
-	 * @var array
-	 */
-	private $breadcrumbs;
-	/**
-	 * @var array
-	 */
-	private $classes;
-	/**
-	 * @var array
-	 */
-	private $attrs;
-	/**
-	 * @var array
-	 */
-	private $main_classes;
-	/**
-	 * @var array
-	 */
-	private $main_attrs;
-	/**
-	 * @var array
-	 */
-	private $item_classes;
-	/**
-	 * @var array
-	 */
-	private $item_attrs;
-	/**
-	 * @var array
-	 */
-	private $link_classes;
-	/**
-	 * @var array
-	 */
-	private $link_attrs;
+	public const BREADCRUMBS  = 'breadcrumbs';
+	public const CLASSES      = 'classes';
+	public const ATTRS        = 'attrs';
+	public const MAIN_CLASSES = 'main_classes';
+	public const MAIN_ATTRS   = 'main_attrs';
+	public const ITEM_CLASSES = 'item_classes';
+	public const ITEM_ATTRS   = 'item_attrs';
+	public const LINK_CLASSES = 'link_classes';
+	public const LINK_ATTRS   = 'link_attrs';
+
+	private array $breadcrumbs;
+	private array $classes;
+	private array $attrs;
+	private array $main_classes;
+	private array $main_attrs;
+	private array $item_classes;
+	private array $item_attrs;
+	private array $link_classes;
+	private array $link_attrs;
 
 	public function __construct( array $args = [] ) {
-		$args = wp_parse_args( $args, $this->defaults() );
+		$args = $this->parse_args( $args );
 
-		foreach ( $this->required() as $key => $value ) {
-			$args[$key] = array_merge( $args[$key], $value );
-		}
-
-		$this->breadcrumbs  = (array) $args['breadcrumbs'];
-		$this->classes      = (array) $args['classes'];
-		$this->attrs        = (array) $args['attrs'];
-		$this->main_classes = (array) $args['main_classes'];
-		$this->main_attrs   = (array) $args['main_attrs'];
-		$this->item_classes = (array) $args['item_classes'];
-		$this->item_attrs   = (array) $args['item_attrs'];
-		$this->link_classes = (array) $args['link_classes'];
-		$this->link_attrs   = (array) $args['link_attrs'];
+		$this->breadcrumbs  = (array) $args[ 'breadcrumbs' ];
+		$this->classes      = (array) $args[ 'classes' ];
+		$this->attrs        = (array) $args[ 'attrs' ];
+		$this->main_classes = (array) $args[ 'main_classes' ];
+		$this->main_attrs   = (array) $args[ 'main_attrs' ];
+		$this->item_classes = (array) $args[ 'item_classes' ];
+		$this->item_attrs   = (array) $args[ 'item_attrs' ];
+		$this->link_classes = (array) $args[ 'link_classes' ];
+		$this->link_attrs   = (array) $args[ 'link_attrs' ];
 	}
 
 	protected function defaults(): array {
 		return [
-			'breadcrumbs'  => [],
-			'classes'      => [],
-			'attrs'        => [],
-			'main_classes' => [],
-			'main_attrs'   => [],
-			'item_classes' => [],
-			'item_attrs'   => [],
-			'link_classes' => [],
-			'link_attrs'   => [],
+			self::BREADCRUMBS  => [],
+			self::CLASSES      => [],
+			self::ATTRS        => [],
+			self::MAIN_CLASSES => [],
+			self::MAIN_ATTRS   => [],
+			self::ITEM_CLASSES => [],
+			self::ITEM_ATTRS   => [],
+			self::LINK_ATTRS   => [],
+			self::LINK_CLASSES => [],
 		];
 	}
 
 	protected function required(): array {
 		return [
-			'classes'      => [ 'c-breadcrumbs' ],
-			'main_classes' => [ 'c-breadcrumbs__list' ],
-			'item_classes' => [ 'c-breadcrumbs__item' ],
-			'link_classes' => [ 'c-breadcrumbs__anchor' ],
+			self::CLASSES       => [ 'c-breadcrumbs' ],
+			self::MAIN_CLASSES => [ 'c-breadcrumbs__list' ],
+			self::ITEM_CLASSES  => [ 'c-breadcrumbs__item' ],
+			self::LINK_CLASSES  => [ 'c-breadcrumbs__anchor' ],
 		];
 	}
 
 	/**
 	 * @return Breadcrumb[]
 	 */
-	public function items(): array {
+	public function get_items(): array {
 		return $this->breadcrumbs;
 	}
 
-	public function classes(): string {
+	public function get_classes(): string {
 		return Markup_Utils::class_attribute( $this->classes );
 	}
 
-	public function attributes(): string {
+	public function get_attrs(): string {
 		return Markup_Utils::concat_attrs( $this->attrs );
 	}
 
-	public function main_classes(): string {
+	public function get_main_classes(): string {
 		return Markup_Utils::class_attribute( $this->main_classes );
 	}
 
-	public function main_attrs(): string {
+	public function get_main_attrs(): string {
 		return Markup_Utils::concat_attrs( $this->main_attrs );
 	}
 
-	public function item_classes(): string {
+	public function get_item_classes(): string {
 		return Markup_Utils::class_attribute( $this->item_classes );
 	}
 
-	public function item_attrs(): string {
+	public function get_item_attrs(): string {
 		return Markup_Utils::concat_attrs( $this->item_attrs );
 	}
 
-	public function link_classes(): string {
+	public function get_link_classes(): string {
 		return Markup_Utils::class_attribute( $this->link_classes );
 	}
 
-	public function link_attrs(): string {
+	public function get_link_attrs(): string {
 		return Markup_Utils::concat_attrs( $this->link_attrs );
 	}
 
