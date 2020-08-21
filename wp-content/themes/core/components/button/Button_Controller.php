@@ -43,11 +43,15 @@ class Button_Controller extends Abstract_Controller {
 		];
 	}
 
+	protected function required(): array {
+		return [];
+	}
+
 	public function has_content(): bool {
 		return ! empty( $this->content );
 	}
 
-	public function content(): string {
+	public function get_content(): string {
 		return $this->content;
 	}
 

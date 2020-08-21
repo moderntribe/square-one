@@ -14,5 +14,5 @@ if ( ! $c->has_content() ) {
 }
 ?>
 <button <?php echo $c->get_classes(); ?> <?php echo $c->get_attrs(); ?>>
-	<?php echo $c->content(); ?>
+	<?php echo $c->get_content(); ?>
 </button>
