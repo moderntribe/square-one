@@ -7,6 +7,7 @@ use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Blocks\Types\Media_Text\Media_Text as Media_Text_Block;
 use Tribe\Project\Templates\Components\content_block\Controller as Content_Block_Controller;
 use Tribe\Project\Templates\Components\Abstract_Controller;
+use Tribe\Project\Templates\Components\Image\Image_Controller;
 use Tribe\Project\Templates\Models\Image;
 use Tribe\Project\Theme\Config\Image_Sizes;
 
@@ -188,14 +189,14 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 		}
 
 		return [
-			'attachment'    => Image::factory( (int) $this->image ),
-			'as_bg'         => true,
-			'use_lazyload'  => true,
-			'wrapper_tag'   => 'div',
-			'wrapper_class' => [ 'b-interstitial__figure' ],
-			'image_classes' => [ 'b-interstitial__img', 'c-image__bg' ],
-			'src_size'      => $src_size,
-			'srcset_size'   => $srcset_sizes,
+			Image_Controller::ATTACHMENT   => Image::factory( (int) $this->image ),
+			Image_Controller::AS_BG        => true,
+			Image_Controller::USE_LAZYLOAD => true,
+			Image_Controller::WRAPPER_TAG  => 'div',
+			Image_Controller::CLASSES      => [ 'b-interstitial__figure' ],
+			Image_Controller::IMG_CLASSES  => [ 'b-interstitial__img', 'c-image__bg' ],
+			Image_Controller::SRC_SIZE     => $src_size,
+			Image_Controller::SRCSET_SIZES => $srcset_sizes,
 		];
 	}
 

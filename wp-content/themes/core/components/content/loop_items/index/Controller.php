@@ -4,6 +4,7 @@ declare( strict_types=1 );
 namespace Tribe\Project\Templates\Components\content\loop_items\index;
 
 use Tribe\Project\Templates\Components\Abstract_Controller;
+use Tribe\Project\Templates\Components\Image\Image_Controller;
 use Tribe\Project\Templates\Models\Image;
 
 class Controller extends Abstract_Controller {
@@ -17,7 +18,7 @@ class Controller extends Abstract_Controller {
 		}
 
 		return tribe_template_part( 'components/image/image', null, [
-			'attachment' => Image::factory( (int) get_post_thumbnail_id() ),
+			Image_Controller::ATTACHMENT => Image::factory( (int) get_post_thumbnail_id() ),
 		] );
 	}
 

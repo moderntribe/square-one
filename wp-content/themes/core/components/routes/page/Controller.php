@@ -7,6 +7,7 @@ use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\sidebar\Sidebar_Controller;
 use Tribe\Project\Templates\Components\breadcrumbs\Breadcrumbs_Controller;
 use Tribe\Project\Templates\Models\Breadcrumb;
+use Tribe\Project\Templates\Components\Image\Image_Controller;
 use Tribe\Project\Templates\Models\Image;
 
 class Controller extends Abstract_Controller {
@@ -35,7 +36,7 @@ class Controller extends Abstract_Controller {
 		}
 
 		return tribe_template_part( 'components/image/image', null, [
-			'attachment' => Image::factory( (int) get_post_thumbnail_id() ),
+			Image_Controller::ATTACHMENT => Image::factory( (int) get_post_thumbnail_id() ),
 		] );
 	}
 

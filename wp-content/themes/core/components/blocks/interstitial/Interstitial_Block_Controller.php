@@ -6,6 +6,7 @@ namespace Tribe\Project\Templates\Components\blocks\interstitial;
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Blocks\Types\Interstitial\Interstitial as Interstitial_Block;
 use Tribe\Project\Templates\Components\Abstract_Controller;
+use Tribe\Project\Templates\Components\Image\Image_Controller;
 use Tribe\Project\Templates\Models\Image;
 use Tribe\Project\Theme\Config\Image_Sizes;
 
@@ -181,14 +182,14 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 	 */
 	protected function get_image( $attachment_id ): array {
 		return [
-			'attachment'    => Image::factory( (int) $attachment_id ),
-			'as_bg'         => true,
-			'use_lazyload'  => true,
-			'wrapper_tag'   => 'div',
-			'wrapper_class' => [ 'b-interstitial__figure' ],
-			'image_classes' => [ 'b-interstitial__img', 'c-image__bg' ],
-			'src_size'      => Image_Sizes::CORE_FULL,
-			'srcset_size'   => [
+			Image_Controller::ATTACHMENT   => Image::factory( (int) $attachment_id ),
+			Image_Controller::AS_BG        => true,
+			Image_Controller::USE_LAZYLOAD => true,
+			Image_Controller::WRAPPER_TAG  => 'div',
+			Image_Controller::CLASSES      => [ 'b-interstitial__figure' ],
+			Image_Controller::IMG_CLASSES  => [ 'b-interstitial__img', 'c-image__bg' ],
+			Image_Controller::SRC_SIZE     => Image_Sizes::CORE_FULL,
+			Image_Controller::SRCSET_SIZES => [
 				Image_Sizes::CORE_FULL,
 				Image_Sizes::CORE_MOBILE,
 			],
