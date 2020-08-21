@@ -59,7 +59,7 @@ class Accordion_Controller extends Abstract_Controller {
 		$this->rows                          = (array) $args[ self::ROWS ];
 		$this->container_classes             = (array) $args[ self::CONTAINER_CLASSES ];
 		$this->container_attrs               = (array) $args[ self::CONTAINER_ATTRS ];
-		$this->row_header_tag                = $args[ self::ROW_HEADER_TAG ];
+		$this->row_header_tag                = (string) $args[ self::ROW_HEADER_TAG ];
 		$this->row_classes                   = (array) $args[ self::ROW_CLASSES ];
 		$this->row_header_classes            = (array) $args[ self::ROW_HEADER_CLASSES ];
 		$this->row_header_attrs              = (array) $args[ self::ROW_HEADER_ATTRS ];
@@ -68,8 +68,8 @@ class Accordion_Controller extends Abstract_Controller {
 		$this->row_content_attrs             = (array) $args[ self::ROW_CONTENT_ATTRS ];
 		$this->row_content_container_classes = (array) $args[ self::ROW_CONTENT_CONTAINER_CLASSES ];
 		$this->row_content_container_attrs   = (array) $args[ self::ROW_CONTENT_CONTAINER_ATTRS ];
-		$this->row_header_name               = $args[ self::ROW_HEADER_NAME ];
-		$this->row_content_name              = $args[ self::ROW_CONTENT_NAME ];
+		$this->row_header_name               = (string) $args[ self::ROW_HEADER_NAME ];
+		$this->row_content_name              = (string) $args[ self::ROW_CONTENT_NAME ];
 	}
 
 	/**
