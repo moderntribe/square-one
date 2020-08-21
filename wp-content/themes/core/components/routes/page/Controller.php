@@ -4,6 +4,7 @@ declare( strict_types=1 );
 namespace Tribe\Project\Templates\Components\routes\page;
 
 use Tribe\Project\Templates\Components\Abstract_Controller;
+use Tribe\Project\Templates\Components\sidebar\Sidebar_Controller;
 use Tribe\Project\Templates\Components\breadcrumbs\Breadcrumbs_Controller;
 use Tribe\Project\Templates\Models\Breadcrumb;
 use Tribe\Project\Templates\Models\Image;
@@ -48,7 +49,11 @@ class Controller extends Abstract_Controller {
 	 */
 	public function render_sidebar(): void {
 		do_action( 'get_sidebar', null );
-		get_template_part( 'components/sidebar/sidebar', 'page', [ 'sidebar_id' => $this->sidebar_id ] );
+		get_template_part(
+			'components/sidebar/sidebar',
+			'page',
+			[ Sidebar_Controller::SIDEBAR_ID => $this->sidebar_id ]
+		);
 	}
 
 	/**
