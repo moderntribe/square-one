@@ -7,6 +7,7 @@ use Tribe\Libs\Utils\Markup_Utils;
 use \Tribe\Project\Blocks\Types\Lead_Form\Lead_Form as Lead_Form_Block;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\content_block\Content_Block_Controller;
+use Tribe\Project\Templates\Components\text\Text_Controller;
 
 /**
  * Class Lead_Form
@@ -120,11 +121,11 @@ class Lead_Form_Controller extends Abstract_Controller {
 		}
 
 		return [
-			'tag'     => 'header',
-			'classes' => [ 'b-lead-form__content' ],
-			'layout'  => $this->layout === Lead_Form_Block::LAYOUT_CENTER ? Content_Block_Controller::LAYOUT_CENTER : Content_Block_Controller::LAYOUT_LEFT,
-			'title'   => defer_template_part( 'components/text/text', null, $this->get_title_args() ),
-			'content' => defer_template_part( 'components/text/text', null, $this->get_description_args() ),
+			Content_Block_Controller::TAG     => 'header',
+			Content_Block_Controller::CLASSES => [ 'b-lead-form__content' ],
+			Content_Block_Controller::LAYOUT  => $this->layout === Lead_Form_Block::LAYOUT_CENTER ? Content_Block_Controller::LAYOUT_CENTER : Content_Block_Controller::LAYOUT_LEFT,
+			Content_Block_Controller::TITLE   => defer_template_part( 'components/text/text', null, $this->get_title_args() ),
+			Content_Block_Controller::CONTENT => defer_template_part( 'components/text/text', null, $this->get_description_args() ),
 		];
 	}
 
@@ -133,9 +134,9 @@ class Lead_Form_Controller extends Abstract_Controller {
 	 */
 	protected function get_title_args(): array {
 		return [
-			'tag'     => 'h2',
-			'classes' => [ 'b-lead-form__title', 'h3' ],
-			'content' => esc_html( $this->title ),
+			Text_Controller::TAG     => 'h2',
+			Text_Controller::CLASSES => [ 'b-lead-form__title', 'h3' ],
+			Text_Controller::CONTENT => esc_html( $this->title ),
 		];
 	}
 
@@ -144,8 +145,8 @@ class Lead_Form_Controller extends Abstract_Controller {
 	 */
 	protected function get_description_args(): array {
 		return [
-			'classes' => [ 'b-lead-form__description', 't-sink', 's-sink' ],
-			'content' => esc_html( $this->description ),
+			Text_Controller::CLASSES => [ 'b-lead-form__description', 't-sink', 's-sink' ],
+			Text_Controller::CONTENT => esc_html( $this->description ),
 		];
 	}
 
