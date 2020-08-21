@@ -17,17 +17,18 @@ class Accordion_Block_Controller extends Abstract_Controller {
 	public const HEADER            = 'header';
 	public const DESCRIPTION       = 'description';
 	public const CONTAINER_CLASSES = 'container_classes';
-	public const CONTAINER_ATTRS   = 'container_attrs';
 	public const CONTENT_CLASSES   = 'content_classes';
 	public const CLASSES           = 'classes';
 	public const ATTRS             = 'attrs';
+
+	public const LAYOUT_INLINE  = 'inline';
+	public const LAYOUT_STACKED = 'stacked';
 
 	private string $layout;
 	private array $rows;
 	private string $header;
 	private string $description;
 	private array $container_classes;
-	private array $container_attrs;
 	private array $content_classes;
 	private array $classes;
 	private array $attrs;
@@ -40,7 +41,6 @@ class Accordion_Block_Controller extends Abstract_Controller {
 		$this->header            = $args[ self::HEADER ];
 		$this->description       = $args[ self::DESCRIPTION ];
 		$this->container_classes = $args[ self::CONTAINER_CLASSES ];
-		$this->container_attrs   = $args[ self::CONTAINER_ATTRS ];
 		$this->content_classes   = $args[ self::CONTENT_CLASSES ];
 		$this->classes           = $args[ self::CLASSES ];
 		$this->attrs             = $args[ self::ATTRS ];
@@ -51,14 +51,13 @@ class Accordion_Block_Controller extends Abstract_Controller {
 	 */
 	protected function defaults(): array {
 		return [
-			self::LAYOUT            => Accordion_Block::LAYOUT_STACKED,
+			self::LAYOUT            => self::LAYOUT_STACKED,
 			self::ROWS              => [],
 			self::HEADER            => '',
 			self::DESCRIPTION       => '',
 			self::CONTAINER_CLASSES => [],
-			self::CONTAINER_ATTRS   => [],
-			self::CONTENT_CLASSES   => [ 'b-accordion__content' ],
-			self::CLASSES           => [ 'c-block', 'b-accordion' ],
+			self::CONTENT_CLASSES   => [],
+			self::CLASSES           => [],
 			self::ATTRS             => [],
 		];
 	}
@@ -69,6 +68,8 @@ class Accordion_Block_Controller extends Abstract_Controller {
 	protected function required(): array {
 		return [
 			self::CONTAINER_CLASSES => [ 'b-accordion__container', 'l-container' ],
+			self::CLASSES           => [ 'c-block', 'b-accordion' ],
+			self::CONTENT_CLASSES   => [ 'b-accordion__content' ],
 		];
 	}
 
@@ -92,19 +93,12 @@ class Accordion_Block_Controller extends Abstract_Controller {
 	 * @return string
 	 */
 	public function get_container_classes(): string {
-		if ( $this->layout === Accordion_Controller::LAYOUT_STACKED) {
+		if ( $this->layout === self::LAYOUT_STACKED ) {
 			$this->container_classes[] = 'l-sink';
 			$this->container_classes[] = 'l-sink--double';
 		}
 
 		return Markup_Utils::class_attribute( $this->container_classes );
-	}
-
-	/**
-	 * @return string
-	 */
-	public function get_container_attrs(): string {
-		return Markup_Utils::concat_attrs( $this->container_attrs );
 	}
 
 	/**
@@ -119,6 +113,7 @@ class Accordion_Block_Controller extends Abstract_Controller {
 	 */
 	public function get_header_args(): array {
 		return [
+			'tag' => 'header',
 			'title'   => defer_template_part( 'components/text/text', null, [
 				'content' => $this->header,
 				'tag'     => 'h2',
@@ -138,7 +133,6 @@ class Accordion_Block_Controller extends Abstract_Controller {
 	public function get_content_args(): array {
 		return [
 			Accordion_Controller::ROWS   => $this->rows,
-			Accordion_Controller::LAYOUT => $this->layout,
 		];
 	}
 

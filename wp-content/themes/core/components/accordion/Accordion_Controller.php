@@ -34,15 +34,11 @@ class Accordion_Controller extends Abstract_Controller {
 	public const ROW_HEADER_NAME               = 'row_header_name';
 	public const ROW_CONTENT_NAME              = 'row_content_name';
 	public const ROW_IDS                       = 'row_ids';
-	public const LAYOUT                        = 'layout';
-	public const LAYOUT_INLINE                 = 'inline';
-	public const LAYOUT_STACKED                = 'stacked';
 
 	/**
 	 * @var Accordion_Row[]
 	 */
 	private array $rows;
-	private string $layout;
 	private array $container_classes;
 	private array $container_attrs;
 	private array $row_classes;
@@ -74,7 +70,6 @@ class Accordion_Controller extends Abstract_Controller {
 		$this->row_content_container_attrs   = (array) $args[ self::ROW_CONTENT_CONTAINER_ATTRS ];
 		$this->row_header_name               = $args[ self::ROW_HEADER_NAME ];
 		$this->row_content_name              = $args[ self::ROW_CONTENT_NAME ];
-		$this->layout                        = $args[ self::LAYOUT ];
 	}
 
 	/**
@@ -97,7 +92,6 @@ class Accordion_Controller extends Abstract_Controller {
 			self::ROW_HEADER_NAME               => 'title',
 			self::ROW_CONTENT_NAME              => 'row_content',
 			self::ROW_IDS                       => [],
-			self::LAYOUT                        => self::LAYOUT_STACKED,
 		];
 	}
 

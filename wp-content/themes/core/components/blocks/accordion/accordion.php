@@ -11,8 +11,7 @@ $c = Accordion_Block_Controller::factory( $args );
 ?>
 
 <section <?php echo $c->get_classes(); ?><?php echo $c->get_attrs(); ?>>
-	<div <?php echo $c->get_container_classes(); ?>
-		<?php echo $c->get_container_attrs(); ?>>
+	<div <?php echo $c->get_container_classes(); ?>>
 
 		<?php get_template_part(
 				'components/content_block/content_block',
