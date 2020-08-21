@@ -79,7 +79,7 @@ class Single_Pagination_Controller extends Abstract_Controller {
 	protected function required(): array {
 		return [
 			self::CLASSES           => [ 'pagination', 'pagination--single' ],
-			self::ATTRS             => [ 'aria-label' => esc_html__( 'Post Pagination', 'tribe' ) ],
+			self::ATTRS             => [ 'aria-label' => esc_attr__( 'Post Pagination', 'tribe' ) ],
 			self::LIST_CLASSES      => [ 'pagination__item', 'pagination__item--next' ],
 			self::HEADER_CLASSES    => [ 'visual-hide' ],
 			self::HEADER_ATTRS      => [ 'id' => 'pagination__label-single' ],

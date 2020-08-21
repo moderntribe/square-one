@@ -50,7 +50,7 @@ class Loop_Pagination_Controller extends Abstract_Controller {
 	protected function required(): array {
 		return [
 			self::CLASSES      => [ 'c-pagination', 'c-pagination--loop' ],
-			self::ATTRS        => [ 'aria-labelledby' => 'c-pagination__label-single' ],
+			self::ATTRS        => [ 'aria-label' => esc_attr__( 'Loop Pagination', 'tribe' ) ],
 			self::LIST_CLASSES => [ 'c-pagination__list' ],
 			self::ITEM_CLASSES => [ 'c-pagination__item' ],
 		];
