@@ -10,14 +10,21 @@ use Tribe\Project\Templates\Components\blocks\accordion\Accordion_Block_Controll
 $c = Accordion_Block_Controller::factory( $args );
 ?>
 
-<section <?php echo $c->classes(); ?><?php echo $c->attrs(); ?>>
-	<div <?php echo $c->container_classes(); ?><?php echo $c->container_attrs(); ?>>
+<section <?php echo $c->get_classes(); ?><?php echo $c->get_attrs(); ?>>
+	<div <?php echo $c->get_container_classes(); ?>
+		<?php echo $c->get_container_attrs(); ?>>
 
-		<?php echo $c->render_header(); ?>
+		<?php get_template_part(
+				'components/content_block/content_block',
+				null, $c->get_header_args()
+		); ?>
 
-		<div <?php echo $c->content_classes(); ?>>
-			<?php echo $c->render_content(); ?>
+		<div <?php echo $c->get_content_classes(); ?>>
+			<?php get_template_part(
+				'components/accordion/accordion',
+				null,
+				$c->get_content_args()
+			); ?>
 		</div>
-
 	</div>
 </section>
