@@ -33,7 +33,7 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 	private array $media_classes;
 	private array $content_classes;
 	private string $media_type;
-	private ?int $image;
+	private int $image;
 	private string $video;
 	private string $title;
 	private string $content;

@@ -20,8 +20,8 @@ class Media_Text_Model extends Base_Model {
 			Media_Text_Block_Controller::CONTENT    => $this->get( Media_Text::CONTENT, '' ),
 			Media_Text_Block_Controller::CTA        => $this->get_cta_args(),
 			Media_Text_Block_Controller::MEDIA_TYPE => $this->get( Media_Text::MEDIA_TYPE, '' ),
-			Media_Text_Block_Controller::IMAGE      => $this->get( Media_Text::IMAGE, null ),
-			Media_Text_Block_Controller::VIDEO      => $this->get( Media_Text::EMBED, null ),
+			Media_Text_Block_Controller::IMAGE      => $this->get( Media_Text::IMAGE, 0 ),
+			Media_Text_Block_Controller::VIDEO      => $this->get( Media_Text::EMBED, '' ),
 		];
 	}
 
