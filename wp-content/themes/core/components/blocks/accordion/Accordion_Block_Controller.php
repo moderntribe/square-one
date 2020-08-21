@@ -115,9 +115,9 @@ class Accordion_Block_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * Render the header/content-block
+	 * @return array
 	 */
-	public function get_header_args() {
+	public function get_header_args(): array {
 		return [
 			'title'   => defer_template_part( 'components/text/text', null, [
 				'content' => $this->header,
@@ -133,13 +133,12 @@ class Accordion_Block_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * Render the content/accordion component
+	 * @return array
 	 */
-	public function get_content_args() {
+	public function get_content_args(): array {
 		return [
 			Accordion_Controller::ROWS => $this->rows,
 		];
-
 	}
 
 }
