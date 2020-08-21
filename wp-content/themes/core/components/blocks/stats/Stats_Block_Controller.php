@@ -8,7 +8,7 @@ use \Tribe\Project\Blocks\Types\Stats\Stats as Stats_Block;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Models\Statistic as Statistic_Model;
 use \Tribe\Project\Templates\Components\statistic\Statistic_Controller as Statistic;
-use \Tribe\Project\Templates\Components\content_block\Controller as Content_Block;
+use \Tribe\Project\Templates\Components\content_block\Content_Block_Controller_Controller;
 
 /**
  * Class Hero
@@ -104,7 +104,7 @@ class Stats_Block_Controller extends Abstract_Controller {
 				'content' => $this->description,
 				'classes' => [ 'b-stats__description', 't-sink', 's-sink' ],
 			] ),
-			'layout'  => Stats_Block::CONTENT_ALIGN_CENTER === $this->content_align ? Content_Block::LAYOUT_CENTER : Content_Block::LAYOUT_STACKED,
+			'layout'  => Stats_Block::CONTENT_ALIGN_CENTER === $this->content_align ? Content_Block_Controller::LAYOUT_CENTER : Content_Block_Controller::LAYOUT_STACKED,
 		];
 	}
 

@@ -6,7 +6,7 @@ namespace Tribe\Project\Templates\Components\blocks\links;
 use Tribe\Libs\Utils\Markup_Utils;
 use \Tribe\Project\Blocks\Types\Links\Links as Links_Block;
 use Tribe\Project\Templates\Components\Abstract_Controller;
-use Tribe\Project\Templates\Components\content_block\Controller;
+use Tribe\Project\Templates\Components\content_block\Content_Block_Controller;
 use Tribe\Project\Templates\Components\Deferred_Component;
 
 /**
@@ -88,7 +88,7 @@ class Links_Block_Controller extends Abstract_Controller {
 			'classes' => [ 'b-links__header' ],
 			'title'   => $this->get_title(),
 			'content' => $this->get_description(),
-			'layout'  => Controller::LAYOUT_STACKED,
+			'layout'  => Content_Block_Controller::LAYOUT_STACKED,
 		];
 	}
 
