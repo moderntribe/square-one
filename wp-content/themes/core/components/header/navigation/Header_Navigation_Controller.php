@@ -10,9 +10,9 @@ use Tribe\Project\Nav_Menus\Walker\Walker_Nav_Menu_Primary;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 
 class Header_Navigation_Controller extends Abstract_Controller {
-	public const CLASSES         = 'classes';
-	public const ATTRS           = 'attrs';
-	public const NAV_LIST_CLSSES = 'nav_list_classes';
+	public const CLASSES          = 'classes';
+	public const ATTRS            = 'attrs';
+	public const NAV_LIST_CLASSES = 'nav_list_classes';
 
 	private array $classes;
 	private array $attrs;
@@ -24,7 +24,7 @@ class Header_Navigation_Controller extends Abstract_Controller {
 
 		$this->classes          = (array) $args[ self::CLASSES ];
 		$this->attrs            = (array) $args[ self::ATTRS ];
-		$this->nav_list_classes = (array) $args[ self::NAV_LIST_CLSSES ];
+		$this->nav_list_classes = (array) $args[ self::NAV_LIST_CLASSES ];
 		$this->location         = Nav_Menus_Definer::PRIMARY;
 	}
 
