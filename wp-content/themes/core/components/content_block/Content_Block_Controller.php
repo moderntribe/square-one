@@ -26,7 +26,7 @@ class Content_Block_Controller extends Abstract_Controller {
 	public const LAYOUT_STACKED = 'stacked';
 	public const LAYOUT_INLINE  = 'inline';
 
-	public string $tag;
+	private string $tag;
 	private array $classes;
 	private array $attrs;
 	private string $layout;
