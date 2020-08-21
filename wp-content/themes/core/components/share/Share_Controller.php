@@ -4,6 +4,7 @@ namespace Tribe\Project\Templates\Components\share;
 
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\link\Link_Controller;
+use Tribe\Project\Templates\Components\text\Text_Controller;
 use Tribe\Project\Theme\Config\Image_Sizes;
 
 /**
@@ -261,9 +262,9 @@ class Share_Controller extends Abstract_Controller {
 		$classes = $this->labeled ? [] : [ 'u-visually-hidden' ];
 
 		return tribe_template_part( 'components/text/text', null, [
-			'tag'     => 'span',
-			'classes' => $classes,
-			'content' => $label,
+			Text_Controller::TAG     => 'span',
+			Text_Controller::CLASSES => $classes,
+			Text_Controller::CONTENT => $label,
 		] );
 	}
 
