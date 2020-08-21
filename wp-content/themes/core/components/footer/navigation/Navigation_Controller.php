@@ -7,19 +7,15 @@ use Tribe\Project\Nav_Menus\Menu;
 use Tribe\Project\Nav_Menus\Nav_Menus_Definer;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 
-class Controller extends Abstract_Controller {
+class Navigation_Controller extends Abstract_Controller {
 
-	private $location = Nav_Menus_Definer::SECONDARY;
-
-	public function label(): string {
-		return __( 'Secondary Navigation', 'tribe' );
-	}
+	private string $location = Nav_Menus_Definer::SECONDARY;
 
 	public function has_menu(): bool {
 		return has_nav_menu( $this->location );
 	}
 
-	public function menu(): string {
+	public function get_menu(): string {
 		$args = [
 			'theme_location'  => $this->location,
 			'container'       => false,

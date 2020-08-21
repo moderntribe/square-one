@@ -16,7 +16,7 @@ $c = \Tribe\Project\Templates\Components\document\head\Controller::factory();
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<?php // PLATFORM META: iOS & Android ?>
-	<meta name="apple-mobile-web-app-title" content="<?php echo esc_attr( $c->page_title() ); ?>">
+	<meta name="apple-mobile-web-app-title" content="<?php echo esc_attr( $c->get_page_title() ); ?>">
 
 	<?php // PLATFORM META: IE ?>
 	<meta name="application-name" content="<?php echo esc_attr( $c->name() ); ?>">
