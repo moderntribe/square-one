@@ -5,6 +5,7 @@ namespace Tribe\Project\Templates\Components\text;
 
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
+use Tribe\Project\Templates\Components\Deferred_Component;
 
 class Text_Controller extends Abstract_Controller {
 	public const TAG     = 'tag';
@@ -15,7 +16,11 @@ class Text_Controller extends Abstract_Controller {
 	private string $tag;
 	private array  $classes;
 	private array  $attrs;
-	private string $content;
+
+	/**
+	 * @var string|Deferred_Component
+	 */
+	private $content;
 
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
@@ -23,7 +28,7 @@ class Text_Controller extends Abstract_Controller {
 		$this->tag     = (string) $args['tag'];
 		$this->classes = (array) $args['classes'];
 		$this->attrs   = (array) $args['attrs'];
-		$this->content = (string) $args['content'];
+		$this->content = $args['content'];
 	}
 
 	protected function defaults(): array {
