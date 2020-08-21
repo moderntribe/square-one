@@ -2,6 +2,7 @@
 declare( strict_types=1 );
 
 use Tribe\Project\Templates\Components\content_block\Content_Block_Controller;
+
 /**
  * @var array $args Arguments passed to the template
  */

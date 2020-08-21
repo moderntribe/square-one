@@ -146,6 +146,5 @@ class Content_Block_Controller extends Abstract_Controller {
 			Container_Controller::TAG     => 'p',
 			Container_Controller::CONTENT => $this->cta->render(),
 		];
-
 	}
 }
