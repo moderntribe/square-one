@@ -26,8 +26,8 @@ class Share_Controller extends Abstract_Controller {
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
 
-		$this->labeled  = (bool) $args['labeled'];
-		$this->networks = (array) $args['networks'];
+		$this->labeled  = (bool) $args[ self::LABELED ];
+		$this->networks = (array) $args[ self::NETWORKS ];
 	}
 
 	protected function defaults(): array {

@@ -24,18 +24,18 @@ class Text_Controller extends Abstract_Controller {
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
 
-		$this->tag     = (string) $args['tag'];
-		$this->classes = (array) $args['classes'];
-		$this->attrs   = (array) $args['attrs'];
-		$this->content = $args['content'];
+		$this->tag     = (string) $args[ self::TAG ];
+		$this->classes = (array) $args[ self::CLASSES ];
+		$this->attrs   = (array) $args[ self::ATTRS ];
+		$this->content = $args[ self::CONTENT ];
 	}
 
 	protected function defaults(): array {
 		return [
-			'tag'     => 'p',
-			'classes' => [],
-			'attrs'   => [],
-			'content' => '',
+			self::TAG     => 'p',
+			self::CLASSES => [],
+			self::ATTRS   => [],
+			self::CONTENT => '',
 		];
 	}
 
