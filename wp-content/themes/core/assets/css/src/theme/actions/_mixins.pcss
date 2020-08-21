@@ -5,20 +5,31 @@
  * ----------------------------------------------------------------------------- */
 
 /* -----------------------------------------------------------------------------
+ * Reset default Button Styles
+ * ----------------------------------------------------------------------------- */
+
+@define-mixin a-btn-reset {
+	@mixin t-button;
+
+	padding: 0;
+	border: 0;
+	border-radius: 0;
+	background: transparent;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+/* -----------------------------------------------------------------------------
  * Global Button Defaults
  * ----------------------------------------------------------------------------- */
 
 @define-mixin a-btn-global {
-	@mixin t-button;
+	@mixin a-btn-reset;
 
 	display: inline-block;
 	width: auto;
 	height: auto;
 	padding: 12px var(--spacer-50);
-	border: 0;
-	border-radius: 0;
-	cursor: pointer;
-	text-decoration: none;
 	transition: var(--transition);
 
 	&:focus {
