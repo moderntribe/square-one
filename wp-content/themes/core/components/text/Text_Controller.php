@@ -13,14 +13,13 @@ class Text_Controller extends Abstract_Controller {
 	public const ATTRS   = 'attrs';
 	public const CONTENT = 'content';
 
-	private string $tag;
-	private array  $classes;
-	private array  $attrs;
-
 	/**
 	 * @var string|Deferred_Component
 	 */
 	private $content;
+	private string $tag;
+	private array  $classes;
+	private array  $attrs;
 
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );

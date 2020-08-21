@@ -15,16 +15,15 @@ class Link_Controller extends Abstract_Controller {
 	public const ATTRS      = 'attrs';
 	public const CONTENT    = 'content';
 
+	/**
+	 * @var string|Deferred_Component
+	 */
+	private $content;
 	private string $url;
 	private string $target;
 	private string $aria_label;
 	private array  $classes;
 	private array  $attrs;
-
-	/**
-	 * @var string|Deferred_Component
-	 */
-	private $content;
 
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );

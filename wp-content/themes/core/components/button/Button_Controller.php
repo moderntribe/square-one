@@ -14,15 +14,14 @@ class Button_Controller extends Abstract_Controller {
 	public const CONTENT    = 'content';
 	public const ARIA_LABEL = 'aria_label';
 
-	private string $type;
-	private array $classes;
-	private array $attrs;
-	private string $aria_label;
-
 	/**
 	 * @var string|Deferred_Component
 	 */
 	private $content;
+	private string $type;
+	private array $classes;
+	private array $attrs;
+	private string $aria_label;
 
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
