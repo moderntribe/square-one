@@ -7,7 +7,7 @@ use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Models\Breadcrumb;
 
-class Controller extends Abstract_Controller {
+class Breadcrumbs_Controller extends Abstract_Controller {
 	/**
 	 * @var array
 	 */
