@@ -7,10 +7,10 @@ use Tribe\Project\Object_Meta\Social_Settings;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Models\Social_Link;
 
-class Controller extends Abstract_Controller {
+class Follow_Controller extends Abstract_Controller {
 
 	// Change the order of this array to change the display order
-	private $social_keys = [
+	private array $social_keys = [
 		Social_Settings::FACEBOOK,
 		Social_Settings::TWITTER,
 		Social_Settings::YOUTUBE,
@@ -22,7 +22,7 @@ class Controller extends Abstract_Controller {
 	/**
 	 * @return Social_Link[]
 	 */
-	public function social_links(): array {
+	public function get_social_links(): array {
 		$links = [];
 
 		foreach ( $this->social_keys as $social_site ) {
