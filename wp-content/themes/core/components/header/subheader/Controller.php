@@ -10,14 +10,14 @@ class Controller extends Abstract_Controller {
 	use Page_Title;
 
 	public function get_title(): string {
-		if ( empty( $this->page_title() ) ) {
+		if ( empty( $this->get_page_title() ) ) {
 			return '';
 		}
 
 		return tribe_template_part( 'components/text/text', null, [
 			'tag'     => 'h1',
 			'classes' => [ 'page-title', 'h1' ],
-			'content' => $this->page_title(),
+			'content' => $this->get_page_title(),
 		] );
 	}
 }
