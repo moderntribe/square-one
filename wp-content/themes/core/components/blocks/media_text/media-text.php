@@ -16,9 +16,13 @@ $c = Media_Text_Block_Controller::factory( $args );
 
 		<div <?php echo $c->get_media_classes(); ?>>
 			<?php if ( $c->get_media_type() === Media_Text_Block::IMAGE ) {
-				{{ component( 'image/Image.php', media ) }}
-			} else if ( $c->get_media_type() === Media_Text_Block::EMBED ) {
-				{{ component( 'text/Text.php', media ) }}
+				get_template_part(
+					'components/image/image',
+					null,
+					$c->get_image_args()
+				);
+			} elseif ( $c->get_media_type() === Media_Text_Block::EMBED ) {
+				echo $c->get_video_embed();
 			} ?>
 		</div>
 

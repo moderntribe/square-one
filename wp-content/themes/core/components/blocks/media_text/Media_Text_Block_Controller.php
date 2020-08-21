@@ -5,7 +5,8 @@ namespace Tribe\Project\Templates\Components\blocks\media_text;
 
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Blocks\Types\Media_Text\Media_Text as Media_Text_Block;
-use Tribe\Project\Templates\Components\content_block\Controller;
+use Tribe\Project\Templates\Components\content_block\Controller as Content_Block_Controller;
+use Tribe\Project\Templates\Components\image\Controller as Image_Controller;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Models\Image;
 use Tribe\Project\Theme\Config\Image_Sizes;
@@ -126,14 +127,85 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 			'classes' => [ 'b-media-text__content-container' ],
 			'title'   => defer_template_part( 'components/text/text', null, [
 				'content' => $this->title,
-				Controller::CLASSES
+				'classes' => [ 'b-media-text__title', 'h3' ],
+				'tag'     => 'h2',
 			] ),
 			'content' => defer_template_part( 'components/container/container', null, [
 				'content' => $this->content,
+				'classes' => [ 'b-media-text__text', 't-sink', 's-sink' ],
 			] ),
-			'cta'     => defer_template_part( 'components/link/link', null, $this->cta ?? [] ),
-			'layout'  => $this->layout === Media_Text_Block::MEDIA_CENTER ? Controller::LAYOUT_INLINE : Controller::LAYOUT_LEFT,
+			'cta'     => defer_template_part( 'components/container/container', null, $this->get_cta_args() ),
+			'layout'  => $this->layout === Media_Text_Block::MEDIA_CENTER ? Content_Block_Controller::LAYOUT_INLINE : Content_Block_Controller::LAYOUT_LEFT,
 		];
+	}
+
+	protected function get_cta_args(): array {
+		$cta = wp_parse_args( $this->cta, [
+			'text'   => '',
+			'url'    => '',
+			'target' => '',
+		] );
+
+		if ( empty( $cta[ 'url' ] ) ) {
+			return [];
+		}
+
+		$cta_args = [
+			'url'     => $cta[ 'url' ],
+			'content' => $cta[ 'text' ] ? : $cta[ 'url' ],
+			'target'  => $cta[ 'target' ],
+			'classes' => [ 'a-btn', 'a-btn--has-icon-after', 'icon-arrow-right' ],
+		];
+
+		return [
+			'content' => defer_template_part( 'components/link/link', null, $cta_args ),
+			'tag'     => 'p',
+			'classes' => [ 'b-media-text__cta' ],
+		];
+	}
+
+	/**
+	 * @return array
+	 */
+	public function get_image_args(): array {
+		if ( ! $this->image ) {
+			return [];
+		}
+
+		$src_size     = Image_Sizes::FOUR_THREE;
+		$srcset_sizes = [
+			Image_Sizes::FOUR_THREE_SMALL,
+			Image_Sizes::FOUR_THREE,
+			Image_Sizes::FOUR_THREE_LARGE,
+		];
+
+		if ( $this->layout === Media_Text_Block::MEDIA_CENTER ) {
+			$src_size     = Image_Sizes::SIXTEEN_NINE;
+			$srcset_sizes = [
+				Image_Sizes::SIXTEEN_NINE_SMALL,
+				Image_Sizes::SIXTEEN_NINE,
+				Image_Sizes::SIXTEEN_NINE_LARGE,
+			];
+		}
+
+		return [
+			'attachment'    => Image::factory( (int) $this->image ),
+			'as_bg'         => true,
+			'use_lazyload'  => true,
+			'wrapper_tag'   => 'div',
+			'wrapper_class' => [ 'b-interstitial__figure' ],
+			'image_classes' => [ 'b-interstitial__img', 'c-image__bg' ],
+			'src_size'      => $src_size,
+			'srcset_size'   => $srcset_sizes,
+		];
+	}
+
+	public function get_video_embed(): string {
+		if ( ! $this->video ) {
+			return '';
+		}
+
+		return $this->video;
 	}
 
 }
