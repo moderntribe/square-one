@@ -6,7 +6,7 @@ namespace Tribe\Project\Templates\Components\blocks\lead_form;
 use Tribe\Libs\Utils\Markup_Utils;
 use \Tribe\Project\Blocks\Types\Lead_Form\Lead_Form as Lead_Form_Block;
 use Tribe\Project\Templates\Components\Abstract_Controller;
-use Tribe\Project\Templates\Components\content_block\Controller;
+use Tribe\Project\Templates\Components\content_block\Content_Block_Controller;
 
 /**
  * Class Lead_Form
@@ -117,7 +117,7 @@ class Lead_Form_Controller extends Abstract_Controller {
 		return [
 			'tag'     => 'header',
 			'classes' => [ 'b-lead-form__content' ],
-			'layout'  => $this->layout === Lead_Form_Block::LAYOUT_CENTER ? Controller::LAYOUT_CENTER : Controller::LAYOUT_LEFT,
+			'layout'  => $this->layout === Lead_Form_Block::LAYOUT_CENTER ? Content_Block_Controller::LAYOUT_CENTER : Content_Block_Controller::LAYOUT_LEFT,
 			'title'   => defer_template_part( 'components/text/text', null, $this->get_title_args() ),
 			'content' => defer_template_part( 'components/text/text', null, $this->get_description_args() ),
 		];
