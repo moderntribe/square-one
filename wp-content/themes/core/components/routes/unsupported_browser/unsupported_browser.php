@@ -1,22 +1,25 @@
 <?php
 declare( strict_types=1 );
-$c = \Tribe\Project\Templates\Components\routes\unsupported_browser\Controller::factory();
+
+use \Tribe\Project\Templates\Components\routes\unsupported_browser\Unsupported_Browser_Controller;
+
+$c = Unsupported_Browser_Controller::factory();
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
 
-	<title><?php echo esc_attr( __( 'Unsupported Browser', 'tribe' ) ); ?>
-		| <?php echo esc_html( $c->name ); ?></title>
+	<title><?php echo esc_html( __( 'Unsupported Browser', 'tribe' ) ); ?> | <?php bloginfo( 'name' ); ?></title>
 
 	<meta charset="utf-8">
-	<meta name="author" content="{{ name|esc_attr }}">
+	<meta name="author" content="<?php bloginfo( 'name' ); ?>">
 	<meta http-equiv="cleartype" content="on">
 	<meta name="robots" content="noindex, nofollow">
 
-	<?php echo $c->styles; ?>
+	<?php echo $c->get_styles(); ?>
 
-	<link rel="shortcut icon" href="<?php esc_url( $c->favicon ); ?>">
+	<link rel="shortcut icon" href="<?php echo esc_url( trailingslashit( get_template_directory_uri() ) . 'assets/img/theme/branding-assets/favicon.ico' ); ?>">
 
 	<?php do_action( 'tribe/unsupported_browser/head' ); ?>
 
@@ -27,9 +30,9 @@ $c = \Tribe\Project\Templates\Components\routes\unsupported_browser\Controller::
 	<div class="site-header">
 		<div class="l-container">
 			<h1 class="site-brand">
-				<img src="<?php echo $c->legacy_logo_header; ?>"
+				<img src="<?php echo $c->get_legacy_image_url( 'logo-header.png' ); ?>"
 					 class="site-logo site-logo--header"
-					 alt="<?php printf( '%s %s', esc_attr( $c->name ), esc_attr( __( 'logo', 'tribe' ) ) ); ?>" />
+					 alt="<?php printf( '%s %s', esc_attr( get_bloginfo( 'name' ) ), esc_attr( __( 'logo', 'tribe' ) ) ); ?>" />
 			</h1>
 		</div>
 	</div>
@@ -38,8 +41,8 @@ $c = \Tribe\Project\Templates\Components\routes\unsupported_browser\Controller::
 		<div class="l-container">
 
 			<div class="site-content__content">
-				<h2><?php echo esc_html( $c->legacy_browser_title ); ?></h2>
-				<p><?php echo $c->legacy_browser_content; ?></p>
+				<h2><?php echo esc_html( sprintf( '%s %s', __( 'Welcome to', 'tribe' ), get_bloginfo( 'name' ) ) ); ?></h2>
+				<p><?php echo sprintf( '%s <a href="http://browsehappy.com/" rel="external">%s</a>.', __( 'You are viewing this site in a browser that is no longer supported or secure. For the best possible experience, we recommend that you', 'tribe' ), __( 'update or use a modern browser', 'tribe' ) ); ?></p>
 			</div>
 
 			<ul class="browser-list">
@@ -49,7 +52,7 @@ $c = \Tribe\Project\Templates\Components\routes\unsupported_browser\Controller::
 					   rel="external noopener"
 					   target="_blank">
 						<span class="browser-list__item-image">
-						  <img src="<?php echo $c->legacy_browser_icon_chrome; ?>"
+						  <img src="<?php echo $c->get_legacy_image_url( 'chrome.png' ); ?>"
 							alt="<?php echo esc_attr( __( 'Chrome browser logo', 'tribe' ) ); ?>" />
 						</span>
 						<?php echo esc_html( __( 'Chrome', 'tribe' ) ); ?>
@@ -61,7 +64,7 @@ $c = \Tribe\Project\Templates\Components\routes\unsupported_browser\Controller::
 					   rel="external noopener"
 					   target="_blank">
 							   <span class="browser-list__item-image">
-								   <img src="<?php echo esc_url( $c->legacy_browser_icon_firefox ); ?>"
+								   <img src="<?php echo $c->get_legacy_image_url( 'firefox.png' ); ?>"
 										alt="<?php echo esc_attr( __( 'Firefox browser logo', 'tribe' ) ); ?>" />
 							   </span>
 						<?php echo esc_html( __( 'Firefox', 'tribe' ) ); ?>
@@ -73,7 +76,7 @@ $c = \Tribe\Project\Templates\Components\routes\unsupported_browser\Controller::
 					   rel="external noopener"
 					   target="_blank">
 							   <span class="browser-list__item-image">
-								   <img src="<?php echo esc_url( $c->legacy_browser_icon_safari ); ?>"
+								   <img src="<?php echo $c->get_legacy_image_url( 'safari.png' ); ?>"
 										alt="<?php echo esc_attr( __( 'Safari browser logo', 'tribe' ) ); ?>" />
 							   </span>
 						<?php echo esc_html( __( 'Safari', 'tribe' ) ); ?>
@@ -85,7 +88,7 @@ $c = \Tribe\Project\Templates\Components\routes\unsupported_browser\Controller::
 					   rel="external noopener"
 					   target="_blank">
 							   <span class="browser-list__item-image">
-								   <img src="<?php echo esc_url( $c->legacy_browser_icon_ie ); ?>"
+								   <img src="<?php echo $c->get_legacy_image_url( 'ie.png' ); ?>"
 										alt=""<?php echo esc_attr( __( 'Internet Explorer browser logo', 'tribe' ) ); ?>"/>
 							   </span>
 						<?php echo esc_html( __( 'Internet Explorer', 'tribe' ) ); // TODO Move to Edge. No longer supporting IE11.?>
@@ -99,12 +102,12 @@ $c = \Tribe\Project\Templates\Components\routes\unsupported_browser\Controller::
 	<div class="site-footer">
 		<div class="l-container">
 
-			<img src="<?php echo esc_url( $c->legacy_logo_footer ); ?>"
+			<img src="<?php echo esc_url( $c->get_legacy_image_url( 'logo-footer.png' ) ); ?>"
 				 class="site-logo site-logo--footer"
-				 alt="<?php printf( '%s %s', esc_attr( $c->name ), esc_attr( __( 'logo', 'tribe' ) ) ); ?>" />
+				 alt="<?php printf( '%s %s', esc_attr( get_bloginfo( 'name' ) ), esc_attr( __( 'logo', 'tribe' ) ) ); ?>" />
 
 			<p class="site-footer__copy">
-				<?php printf( __( '%s %d All Rights Reserved. %s.', 'tribe' ), '&copy;', date( 'Y' ), esc_attr( $c->name ) ); ?>
+				<?php printf( __( '%s %d All Rights Reserved. %s.', 'tribe' ), '&copy;', date( 'Y' ), esc_attr( get_bloginfo( 'name' ) ) ); ?>
 			</p>
 
 		</div>

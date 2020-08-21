@@ -1,6 +1,9 @@
 <?php
 declare( strict_types=1 );
-$c = \Tribe\Project\Templates\Components\routes\search\Controller::factory();
+
+use \Tribe\Project\Templates\Components\routes\search\Search_Controller;
+
+$c = Search_Controller::factory();
 
 $c->render_header();
 ?>

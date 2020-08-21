@@ -8,8 +8,11 @@ use Tribe\Project\Templates\Components\sidebar\Sidebar_Controller;
 use Tribe\Project\Templates\Components\breadcrumbs\Breadcrumbs_Controller;
 use Tribe\Project\Templates\Models\Breadcrumb;
 
-class Controller extends Abstract_Controller {
+class Single_Controller extends Abstract_Controller {
 
+	/**
+	 * @var int|string
+	 */
 	private $sidebar_id = '';
 
 	/**

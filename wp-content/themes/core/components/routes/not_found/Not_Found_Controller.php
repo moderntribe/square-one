@@ -1,16 +1,19 @@
 <?php
 declare( strict_types=1 );
 
-namespace Tribe\Project\Templates\Components\routes\search;
+namespace Tribe\Project\Templates\Components\routes\not_found;
 
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\sidebar\Sidebar_Controller;
 use Tribe\Project\Templates\Components\breadcrumbs\Breadcrumbs_Controller;
 use Tribe\Project\Templates\Models\Breadcrumb;
 
-class Controller extends Abstract_Controller {
+class Not_Found_Controller extends Abstract_Controller {
 
-	private $sidebar_id = '';
+	/**
+	 * @var int|string
+	 */
+	private string $sidebar_id = '';
 
 	/**
 	 * Render the header component
