@@ -48,11 +48,11 @@ class Link_Controller extends Abstract_Controller {
 		];
 	}
 
-	public function classes(): string {
+	public function get_classes(): string {
 		return Markup_Utils::class_attribute( $this->classes );
 	}
 
-	public function attributes(): string {
+	public function get_attrs(): string {
 		$attrs = $this->attrs;
 
 		if ( ! empty( $this->url ) ) {
@@ -74,7 +74,7 @@ class Link_Controller extends Abstract_Controller {
 		return Markup_Utils::concat_attrs( $attrs );
 	}
 
-	public function content(): string {
+	public function get_content(): string {
 		$content = $this->content;
 
 		if ( $this->target === '_blank' ) {

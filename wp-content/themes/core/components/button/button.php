@@ -13,6 +13,6 @@ if ( ! $c->has_content() ) {
 	return;
 }
 ?>
-<button <?php echo $c->classes(); ?> <?php echo $c->attributes(); ?>>
+<button <?php echo $c->get_classes(); ?> <?php echo $c->get_attrs(); ?>>
 	<?php echo $c->content(); ?>
 </button>

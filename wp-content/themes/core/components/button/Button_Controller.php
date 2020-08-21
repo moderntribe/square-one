@@ -52,11 +52,11 @@ class Button_Controller extends Abstract_Controller {
 		return $this->content;
 	}
 
-	public function classes(): string {
+	public function get_classes(): string {
 		return Markup_Utils::class_attribute( $this->classes );
 	}
 
-	public function attributes(): string {
+	public function get_attrs(): string {
 		$attributes = $this->attrs;
 
 		if ( $this->type ) {
