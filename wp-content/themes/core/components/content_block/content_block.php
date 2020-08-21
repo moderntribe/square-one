@@ -20,6 +20,6 @@ $c = Content_Block_Controller::factory( $args );
 
 	<?php echo $c->render_content(); ?>
 
-	<?php echo $c->render_cta(); ?>
+	<?php get_template_part('components/container/container', null, $c->get_cta_args()); ?>
 
 </<?php echo $c->get_tag(); ?>>

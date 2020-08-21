@@ -4,8 +4,9 @@ namespace Tribe\Project\Templates\Components\content_block;
 
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
+use Tribe\Project\Templates\Components\container\Container_Controller;
 use Tribe\Project\Templates\Components\Deferred_Component;
-use Tribe\Project\Templates\Components\text\Link_Controller;
+use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Templates\Components\text\Text_Controller;
 
 /**
@@ -30,21 +31,25 @@ class Content_Block_Controller extends Abstract_Controller {
 	private array $attrs;
 	private string $layout;
 	/**
+	 * @var Deferred_Component
 	 * @uses components/text
 	 */
 	private Deferred_Component $leadin;
 	/**
+	 * @var Deferred_Component
 	 * @uses components/text
 	 */
 	private Deferred_Component $title;
 	/**
+	 * @var Deferred_Component
 	 * @uses components/container
 	 */
 	private Deferred_Component $content;
 	/**
+	 * @var Deferred_Component
 	 * @uses components/link
 	 */
-	private Deferred_Component $cta;
+	private $cta;
 
 
 	public function __construct( array $args = [] ) {
@@ -130,15 +135,17 @@ class Content_Block_Controller extends Abstract_Controller {
 		return $this->content;
 	}
 
-	public function render_cta() {
+	public function get_cta_args() {
 		if ( empty( $this->cta ) ) {
 			return '';
 		}
+		$this->cta[ Link_Controller::CLASSES ][] = 'c-content-block__cta-link';
 
-		$this->cta[ Link_Controller::CLASSES ][]         = 'c-content-block__cta-link';
-		$this->cta[ Link_Controller::WRAPPER_TAG ]       = 'p';
-		$this->cta[ Link_Controller::WRAPPER_CLASSES ][] = 'c-content-block__cta';
+		return [
+			Container_Controller::CLASSES => [ 'c-content-block__cta' ],
+			Container_Controller::TAG     => 'p',
+			Container_Controller::CONTENT => $this->cta->render(),
+		];
 
-		return $this->cta;
 	}
 }
