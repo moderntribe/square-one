@@ -4,7 +4,6 @@ declare( strict_types=1 );
 namespace Tribe\Project\Templates\Components\blocks\accordion;
 
 use Tribe\Libs\Utils\Markup_Utils;
-use \Tribe\Project\Blocks\Types\Accordion\Accordion as Accordion_Block;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\accordion\Accordion_Controller;
 
@@ -34,8 +33,7 @@ class Accordion_Block_Controller extends Abstract_Controller {
 	private array $attrs;
 
 	public function __construct( array $args = [] ) {
-		$args = $this->parse_args( $args );
-
+		$args                    = $this->parse_args( $args );
 		$this->layout            = (string) $args[ self::LAYOUT ];
 		$this->rows              = (array) $args[ self::ROWS ];
 		$this->header            = (string) $args[ self::HEADER ];
