@@ -1,16 +1,21 @@
 <?php
 declare( strict_types=1 );
-$c = \Tribe\Project\Templates\Components\header\navigation\Controller::factory();
+
+use \Tribe\Project\Templates\Components\header\navigation\Header_Navigation_Controller;
+
+/**
+ * @var array $args Arguments passed to the template
+ */
+// phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
+$c = Header_Navigation_Controller::factory( $args );
 
 if ( ! $c->has_menu() ) {
 	return;
 }
 ?>
-<nav class="site-header__nav" aria-label="<?php echo esc_attr( $c->label() ); ?>">
-
-	<ol class="site-header__nav-list">
-		<?php echo $c->menu(); ?>
+<nav <?php $c->get_classes(); ?> <?php $c->get_attrs(); ?>>
+	<ol <?php $c->get_nav_list_classes(); ?>>
+		<?php echo $c->get_menu(); ?>
 	</ol>
-
 </nav>
 
