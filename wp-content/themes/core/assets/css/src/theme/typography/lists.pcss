@@ -13,7 +13,6 @@ ul,
 ol,
 dl {
 
-	[data-type^="core"] > &,
 	.t-sink > & {
 		@mixin t-body;
 	}
@@ -30,7 +29,6 @@ li {}
  * ------------------------------------------------------------------------- */
 
 .t-list--bullets,
-[data-type^="core"] > ul,
 .t-sink > ul {
 	list-style: disc outside;
 	padding-left: 1.5em;
@@ -41,7 +39,6 @@ li {}
  * ------------------------------------------------------------------------- */
 
 .t-list--bullets-stylized,
-[data-type^="core"] > ul.is-style-t-list-stylized,
 .t-sink > ul.is-style-t-list-stylized {
 	list-style: none;
 	padding-left: 0;
@@ -67,7 +64,6 @@ li {}
  * ------------------------------------------------------------------------- */
 
 .t-list--numbered,
-[data-type^="core"] > ol,
 .t-sink > ol {
 	list-style: decimal outside;
 	padding-left: 1.5em;
@@ -78,7 +74,6 @@ li {}
  * ------------------------------------------------------------------------- */
 
 .t-list--numbered-stylized,
-[data-type^="core"] > ol.is-style-t-list-stylized,
 .t-sink > ol.is-style-t-list-stylized {
 	list-style: none;
 	padding-left: 0;
@@ -107,7 +102,6 @@ li {}
  * ------------------------------------------------------------------------- */
 
 .dl,
-[data-type^="core"] > dl,
 .t-sink > dl {}
 
 /* -------------------------------------------------------------------------
@@ -115,7 +109,6 @@ li {}
  * ------------------------------------------------------------------------- */
 
 .dt,
-[data-type^="core"] > dt,
 .t-sink > dt {
 	font-weight: 700;
 }
@@ -125,5 +118,4 @@ li {}
  * ------------------------------------------------------------------------- */
 
 .dd,
-[data-type^="core"] > dd,
 .t-sink > dd {}

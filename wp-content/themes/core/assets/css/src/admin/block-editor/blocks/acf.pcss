@@ -7,32 +7,9 @@
  * ----------------------------------------------------------------------------- */
 
 /* -----------------------------------------------------------------------------
- Image Select Field: * Set a hard-size on the image select options.
+ * Block Widths based on Core's alignment options.
  * ----------------------------------------------------------------------------- */
 
-ul.acf-image-select-list {
-	display: flex;
-	flex-flow: row wrap;
-
-	li.acf-image-select {
-		display: block;
-		width: calc(33.333% - 10px);
-
-		label img {
-			transition: var(--transition);
-		}
-
-		&:focus,
-		&:hover {
-
-			label img {
-				border-color: #191e23; /* Match WordPress Core Styles */
-			}
-		}
-
-		label.acf-image-select-selected img {
-			border-color: #007cba; /* Match WordPress Core Styles */
-		}
-	}
-
+.wp-block[data-type^="acf/"] {
+	max-width: var(--grid-width);
 }

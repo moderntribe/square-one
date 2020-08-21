@@ -28,6 +28,7 @@ class Links extends Block_Config {
 			'icon'        => 'list-view',
 			'keywords'    => [ __( 'list', 'tribe' ) ],
 			'category'    => 'layout',
+			'supports'    => [ 'align' => false ],
 		] ) );
 	}
 

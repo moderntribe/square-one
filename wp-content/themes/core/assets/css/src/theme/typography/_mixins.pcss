@@ -82,7 +82,7 @@
 @define-mixin t-body-large {
 	font-family: var(--font-family-serif);
 	font-size: var(--font-size-body-large);
-	line-height: 1.9;
+	line-height: 1.5;
 	font-weight: 400;
 }
 
@@ -93,7 +93,7 @@
 @define-mixin t-body {
 	font-family: var(--font-family-serif);
 	font-size: var(--font-size-body);
-	line-height: 2;
+	line-height: 1.75;
 	font-weight: 400;
 }
 
@@ -104,7 +104,7 @@
 @define-mixin t-body-small {
 	font-family: var(--font-family-serif);
 	font-size: var(--font-size-body-small);
-	line-height: 2;
+	line-height: 1.5;
 	font-weight: 400;
 	letter-spacing: 0.1px;
 }
@@ -115,8 +115,8 @@
 
 @define-mixin t-overline {
 	font-family: var(--font-family-sans-serif);
-	font-size: 14px;
-	line-height: 2;
+	font-size: 16px;
+	line-height: 1.75;
 	font-weight: 400;
 	letter-spacing: 1.75px;
 	text-transform: uppercase;
@@ -136,7 +136,7 @@
 
 @define-mixin t-button {
 	font-family: var(--font-family-sans-serif);
-	font-size: var(--font-size-body);
+	font-size: 16px;
 	line-height: 1.125;
 	font-weight: 700;
 	letter-spacing: 0.02em;
@@ -160,7 +160,7 @@
 
 @define-mixin t-input {
 	font-family: var(--font-family-sans-serif);
-	font-size: var(--font-size-body);
+	font-size: 16px;
 	line-height: 1.5;
 	font-weight: 400;
 }
@@ -174,6 +174,18 @@
 	font-size: 14px;
 	line-height: 1.4;
 	font-weight: 400;
+}
+
+/* -------------------------------------------------------------------------
+ * Helper Text
+ * ------------------------------------------------------------------------- */
+
+@define-mixin t-helper {
+	font-family: var(--font-family-sans-serif);
+	font-size: 11px;
+	line-height: 1;
+	font-weight: 400;
+	letter-spacing: 0.5px;
 }
 
 /* -------------------------------------------------------------------------

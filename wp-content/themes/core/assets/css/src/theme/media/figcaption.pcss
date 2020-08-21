@@ -4,9 +4,8 @@
  *
  * ----------------------------------------------------------------------------- */
 
-figcaption,
-[data-type^="core"] figcaption,
-.wp-caption-text {
+.wp-block-image figcaption,  /* Hack to overcome Core block editor styles. */
+figcaption {
 	@mixin t-caption;
 
 	max-width: 100%;
