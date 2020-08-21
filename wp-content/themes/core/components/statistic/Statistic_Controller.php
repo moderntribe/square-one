@@ -19,8 +19,8 @@ class Statistic_Controller extends Abstract_Controller {
 	public string $tag;
 	private array $classes;
 	private array $attrs;
-	private $value;
-	private $label;
+	private Deferred_Component $value;
+	private Deferred_Component $label;
 
 	public function __construct( array $args ) {
 		$args = $this->parse_args( $args );

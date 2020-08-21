@@ -117,12 +117,6 @@ class Stats_Block_Controller extends Abstract_Controller {
 		$statistic_args = [];
 
 		foreach ( $this->stats as $item ) {
-			// Skip over statistic rows with no value.
-			// TODO: fix fatal error caused by calling $item[ Stats_Block::ROW_VALUE ].
-//			if ( empty( $item[ Stats_Block::ROW_VALUE ] ) ) {
-//				continue;
-//			}
-
 			$statistic_args[] = [
 				Statistic::VALUE => defer_template_part( 'components/text/text', null, $this->get_value_args( $item ) ),
 				Statistic::LABEL => defer_template_part( 'components/text/text', null, $this->get_label_args( $item ) ),
@@ -172,10 +166,10 @@ class Stats_Block_Controller extends Abstract_Controller {
 	 * @return string
 	 */
 	public function classes(): string {
-		$this->classes[] = 'c-block--layout-' . $this->layout;
+		$this->classes[] = 'b-stats--layout-' . $this->layout;
 
 		if ( $this->display_dividers ) {
-			$this->classes[] = 'c-block--display_dividers';
+			$this->classes[] = 'b-stats--display_dividers';
 		}
 
 		return Markup_Utils::class_attribute( $this->classes );

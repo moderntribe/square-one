@@ -18,7 +18,7 @@
 .b-stats__container {
 
 	/* CASE: Layout Inline */
-	.c-block--layout-inline & {
+	.b-stats--layout-inline & {
 		@media (--viewport-full) {
 			display: flex;
 			justify-content: space-between;
@@ -34,7 +34,7 @@
 	margin-bottom: var(--spacer-40);
 
 	/* CASE: Layout Inline */
-	.c-block--layout-inline & {
+	.b-stats--layout-inline & {
 		@media (--viewport-full) {
 			margin-bottom: 0;
 			width: calc(50% - var(--grid-gutter-half));
@@ -46,7 +46,7 @@
 	}
 
 	/* CASE: Layout Inline & Content Center */
-	.c-block--layout-inline &.c-content-block--layout-center {
+	.b-stats--layout-inline &.c-content-block--layout-center {
 		margin-left: 0;
 		margin-right: 0;
 	}
@@ -69,7 +69,7 @@
 .b-stats__content {
 
 	/* CASE: Layout Inline */
-	.c-block--layout-inline & {
+	.b-stats--layout-inline & {
 		@media (--viewport-full) {
 			width: calc(50% - var(--grid-gutter-half));
 		}
@@ -100,7 +100,7 @@
 	}
 
 	/* CASE: Layout Stacked */
-	.c-block--layout-stacked & {
+	.b-stats--layout-stacked & {
 		@media (--viewport-full) {
 			width: 25%;
 
@@ -115,7 +115,7 @@
  * CASE: Divided List
  * ----------------------------------------------------------------------------- */
 
-.c-block--display_dividers {
+.b-stats--display_dividers {
 
 	.b-stats__list-item {
 
@@ -148,7 +148,7 @@
 	}
 
 	/* CASE: Layout Stacked, 4up list */
-	&.c-block--layout-stacked {
+	&.b-stats--layout-stacked {
 
 		.b-stats__list-item {
 			@media (--viewport-full) {
