@@ -39,7 +39,7 @@ class Comments_Pagination_Controller extends Abstract_Controller {
 		return [
 			self::CLASSES => [ 'pagination', 'pagination--comments' ],
 			self::ATTRS   => [
-				'aria-label' => esc_html__( 'Comments Pagination', 'tribe' ),
+				'aria-label' => esc_attr__( 'Comments Pagination', 'tribe' ),
 			],
 		];
 	}
@@ -70,7 +70,7 @@ class Comments_Pagination_Controller extends Abstract_Controller {
 			'tag'     => 'li',
 			'content' => defer_template_part( 'components/link/link', null, [
 				'classes' => [],
-				'content' => __( '&larr; Older Comments' ),
+				'content' => esc_html__( '&larr; Older Comments' ),
 				'url'     => esc_url( get_comments_pagenum_link( $prev_page ) ),
 			] ),
 		] );
@@ -90,7 +90,7 @@ class Comments_Pagination_Controller extends Abstract_Controller {
 			'tag'     => 'li',
 			'content' => defer_template_part( 'components/link/link', null, [
 				'classes' => [],
-				'content' => __( 'Newer Comments &rarr;', 'tribe' ),
+				'content' => esc_html__( 'Newer Comments &rarr;', 'tribe' ),
 				'url'     => esc_url( get_comments_pagenum_link( $next_page, $this->max_pages ) ),
 			] ),
 		] );
