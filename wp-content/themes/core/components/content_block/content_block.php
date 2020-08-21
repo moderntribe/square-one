@@ -1,17 +1,17 @@
 <?php
 declare( strict_types=1 );
 
+use Tribe\Project\Templates\Components\content_block\Content_Block_Controller;
 /**
  * @var array $args Arguments passed to the template
  */
-
 // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
-$c = \Tribe\Project\Templates\Components\content_block\Controller::factory( $args );
+$c = Content_Block_Controller::factory( $args );
 ?>
 
-<<?php echo $c->tag(); ?>
-	<?php echo $c->classes(); ?>
-	<?php echo$c->attributes(); ?>
+<<?php echo $c->get_tag(); ?>
+	<?php echo $c->get_classes(); ?>
+	<?php echo$c->get_attrs(); ?>
 >
 
 	<?php echo $c->render_leadin(); ?>
@@ -22,4 +22,4 @@ $c = \Tribe\Project\Templates\Components\content_block\Controller::factory( $arg
 
 	<?php echo $c->render_cta(); ?>
 
-</<?php echo $c->tag(); ?>>
+</<?php echo $c->get_tag(); ?>>
