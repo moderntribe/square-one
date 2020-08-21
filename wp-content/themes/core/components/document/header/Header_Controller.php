@@ -5,13 +5,13 @@ namespace Tribe\Project\Templates\Components\document\header;
 
 use Tribe\Project\Templates\Components\Abstract_Controller;
 
-class Controller extends Abstract_Controller {
+class Header_Controller extends Abstract_Controller {
 
-	public function language_attributes(): string {
+	public function get_language_attributes(): string {
 		return get_language_attributes();
 	}
 
-	public function body_class(): string {
+	public function get_body_class(): string {
 		return implode( ' ', get_body_class() );
 	}
 }
