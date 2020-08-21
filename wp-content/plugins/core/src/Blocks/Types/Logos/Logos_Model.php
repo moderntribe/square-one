@@ -11,7 +11,7 @@ class Logos_Model extends Base_Model {
 	/**
 	 * @return array
 	 */
-	public function get_data() {
+	public function get_data(): array {
 		return [
 			Logos_Block_Controller::TITLE   => $this->get( Logos::TITLE, '' ),
 			Logos_Block_Controller::CONTENT => $this->get( Logos::DESCRIPTION, '' ),

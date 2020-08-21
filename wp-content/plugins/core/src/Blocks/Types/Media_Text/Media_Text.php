@@ -8,8 +8,7 @@ use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Field;
 
 class Media_Text extends Block_Config {
-
-	public const NAME = 'media-text';
+	public const NAME = 'mediatext';
 
 	public const LAYOUT       = 'layout';
 	public const MEDIA_LEFT   = 'left';
@@ -78,6 +77,7 @@ class Media_Text extends Block_Config {
 				'label'             => __( 'Image', 'tribe' ),
 				'name'              => self::IMAGE,
 				'type'              => 'image',
+				'return_format'     => 'id',
 				'preview_size'      => 'medium',
 				'instructions'      => __( 'Recommended image size by layout:<br>Center: 1920px wide with a 16:9 aspect ratio.<br>Left/Right: 1536px wide with a 4:3 aspect ratio.', 'tribe' ),
 				'conditional_logic' => [
