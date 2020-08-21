@@ -89,10 +89,15 @@ class Lead_Form_Controller extends Abstract_Controller {
 	 * @return string
 	 */
 	public function get_classes(): string {
-		$this->classes[] = 'c-block--' . $this->layout;
-		$this->classes[] = 'c-block--' . $this->width;
+		$this->classes[] = 'b-lead-form--layout-' . $this->layout;
+		$this->classes[] = 'b-lead-form--width-' . $this->width;
+
 		if ( $this->width === Lead_Form_Block::WIDTH_GRID ) {
 			$this->classes[] = 'l-container';
+		}
+
+		if ( $this->width === Lead_Form_Block::WIDTH_FULL ) {
+			$this->classes[] = 'c-block--full-bleed';
 		}
 
 		return Markup_Utils::class_attribute( $this->classes );
