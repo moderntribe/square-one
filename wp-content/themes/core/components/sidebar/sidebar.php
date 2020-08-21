@@ -1,6 +1,7 @@
 <?php
 declare( strict_types=1 );
 use Tribe\Project\Templates\Components\sidebar\Sidebar_Controller;
+
 /**
  * @var array $args Arguments passed to the template
  */
