@@ -34,11 +34,15 @@ class Accordion_Controller extends Abstract_Controller {
 	public const ROW_HEADER_NAME               = 'row_header_name';
 	public const ROW_CONTENT_NAME              = 'row_content_name';
 	public const ROW_IDS                       = 'row_ids';
+	public const LAYOUT                        = 'layout';
+	public const LAYOUT_INLINE                 = 'inline';
+	public const LAYOUT_STACKED                = 'stacked';
 
 	/**
 	 * @var Accordion_Row[]
 	 */
 	private array $rows;
+	private string $layout;
 	private array $container_classes;
 	private array $container_attrs;
 	private array $row_classes;
@@ -70,6 +74,7 @@ class Accordion_Controller extends Abstract_Controller {
 		$this->row_content_container_attrs   = (array) $args[ self::ROW_CONTENT_CONTAINER_ATTRS ];
 		$this->row_header_name               = $args[ self::ROW_HEADER_NAME ];
 		$this->row_content_name              = $args[ self::ROW_CONTENT_NAME ];
+		$this->layout                        = $args[ self::LAYOUT ];
 	}
 
 	/**
@@ -78,21 +83,21 @@ class Accordion_Controller extends Abstract_Controller {
 	protected function defaults(): array {
 		return [
 			self::ROWS                          => [],
-			self::CONTAINER_CLASSES             => [ 'c-accordion' ],
-			self::CONTAINER_ATTRS               => [ 'data-js' => 'c-accordion' ],
+			self::CONTAINER_CLASSES             => [],
+			self::CONTAINER_ATTRS               => [],
 			self::ROW_HEADER_TAG                => 'h3',
-			self::ROW_CLASSES                   => [ 'c-accordion__row' ],
-			self::ROW_HEADER_CLASSES            => [ 'c-accordion__header', 'h5' ],
+			self::ROW_CLASSES                   => [],
+			self::ROW_HEADER_CLASSES            => [],
 			self::ROW_HEADER_ATTRS              => [],
-			self::ROW_HEADER_CONTAINER_CLASSES  => [ 'c-accordion__header-container' ],
-			self::ROW_CONTENT_CLASSES           => [ 'c-accordion__content' ],
+			self::ROW_HEADER_CONTAINER_CLASSES  => [],
+			self::ROW_CONTENT_CLASSES           => [],
 			self::ROW_CONTENT_ATTRS             => [],
 			self::ROW_CONTENT_CONTAINER_ATTRS   => [],
-			self::ROW_CONTENT_CONTAINER_CLASSES => [ 'c-accordion__content-container', 't-sink', 's-sink' ],
+			self::ROW_CONTENT_CONTAINER_CLASSES => [],
 			self::ROW_HEADER_NAME               => 'title',
 			self::ROW_CONTENT_NAME              => 'row_content',
 			self::ROW_IDS                       => [],
-
+			self::LAYOUT                        => self::LAYOUT_STACKED,
 		];
 	}
 
@@ -101,21 +106,28 @@ class Accordion_Controller extends Abstract_Controller {
 	 */
 	protected function required(): array {
 		return [
-			self::CONTAINER_ATTRS             => [
+			self::CONTAINER_CLASSES             => [ 'c-accordion' ],
+			self::ROW_CLASSES                   => [ 'c-accordion__row' ],
+			self::ROW_HEADER_CLASSES            => [ 'c-accordion__header', 'h5' ],
+			self::ROW_HEADER_CONTAINER_CLASSES  => [ 'c-accordion__header-container' ],
+			self::ROW_CONTENT_CLASSES           => [ 'c-accordion__content' ],
+			self::ROW_CONTENT_CONTAINER_CLASSES => [ 'c-accordion__content-container', 't-sink', 's-sink' ],
+			self::CONTAINER_ATTRS               => [
 				'role'                 => 'tablist',
 				'aria-multiselectable' => 'true',
+				'data-js'              => 'c-accordion',
 			],
-			self::ROW_HEADER_ATTRS            => [
+			self::ROW_HEADER_ATTRS              => [
 				'aria-expanded' => 'false',
 				'aria-selected' => 'false',
 				'role'          => 'tab',
 			],
-			self::ROW_CONTENT_ATTRS           => [
+			self::ROW_CONTENT_ATTRS             => [
 				'hidden'      => 'true',
 				'aria-hidden' => 'true',
 				'role'        => 'tabpanel',
 			],
-			self::ROW_CONTENT_CONTAINER_ATTRS => [
+			self::ROW_CONTENT_CONTAINER_ATTRS   => [
 				'data-depth' => '0',
 				'data-autop' => 'true',
 			],

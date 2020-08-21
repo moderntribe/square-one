@@ -92,7 +92,7 @@ class Accordion_Block_Controller extends Abstract_Controller {
 	 * @return string
 	 */
 	public function get_container_classes(): string {
-		if ( $this->layout === 'stacked' ) {
+		if ( $this->layout === Accordion_Controller::LAYOUT_STACKED) {
 			$this->container_classes[] = 'l-sink';
 			$this->container_classes[] = 'l-sink--double';
 		}
@@ -137,7 +137,8 @@ class Accordion_Block_Controller extends Abstract_Controller {
 	 */
 	public function get_content_args(): array {
 		return [
-			Accordion_Controller::ROWS => $this->rows,
+			Accordion_Controller::ROWS   => $this->rows,
+			Accordion_Controller::LAYOUT => $this->layout,
 		];
 	}
 
