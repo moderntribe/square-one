@@ -5,6 +5,7 @@ namespace Tribe\Project\Templates\Components\link;
 
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
+use Tribe\Project\Templates\Components\Deferred_Component;
 
 class Link_Controller extends Abstract_Controller {
 	public const URL        = 'url';
@@ -19,7 +20,11 @@ class Link_Controller extends Abstract_Controller {
 	private string $aria_label;
 	private array  $classes;
 	private array  $attrs;
-	private string $content;
+
+	/**
+	 * @var string|Deferred_Component
+	 */
+	private $content;
 
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
@@ -29,7 +34,7 @@ class Link_Controller extends Abstract_Controller {
 		$this->aria_label = (string) $args[ self::ARIA_LABEL ];
 		$this->classes    = (array) $args[ self::CLASSES ];
 		$this->attrs      = (array) $args[ self::ATTRS ];
-		$this->content    = (string) $args[ self::CONTENT ];
+		$this->content    = $args[ self::CONTENT ];
 	}
 
 	protected function defaults(): array {
@@ -49,15 +54,19 @@ class Link_Controller extends Abstract_Controller {
 
 	public function attributes(): string {
 		$attrs = $this->attrs;
+
 		if ( ! empty( $this->url ) ) {
 			$attrs['href'] = esc_url_raw( $this->url );
 		}
+
 		if ( ! empty( $this->aria_label ) ) {
 			$attrs['aria-label'] = $this->aria_label;
 		}
+
 		if ( ! empty( $this->target ) ) {
 			$attrs['target'] = $this->target;
 		}
+
 		if ( $this->target === '_blank' ) {
 			$attrs['rel'] = 'noopener';
 		}
@@ -67,6 +76,7 @@ class Link_Controller extends Abstract_Controller {
 
 	public function content(): string {
 		$content = $this->content;
+
 		if ( $this->target === '_blank' ) {
 			$content .= $this->new_window_text();
 		}
@@ -75,9 +85,6 @@ class Link_Controller extends Abstract_Controller {
 	}
 
 	private function new_window_text(): string {
-		return sprintf(
-			'<span class="u-visually-hidden">%s</span>',
-			__( 'Opens new window', 'tribe' )
-		);
+		return sprintf( '<span class="u-visually-hidden">%s</span>', __( 'Opens new window', 'tribe' ) );
 	}
 }
