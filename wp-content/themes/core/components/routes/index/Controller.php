@@ -5,6 +5,7 @@ namespace Tribe\Project\Templates\Components\routes\index;
 
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\sidebar\Sidebar_Controller;
+use Tribe\Project\Templates\Components\breadcrumbs\Breadcrumbs_Controller;
 use Tribe\Project\Templates\Models\Breadcrumb;
 
 class Controller extends Abstract_Controller {
@@ -56,7 +57,12 @@ class Controller extends Abstract_Controller {
 	}
 
 	public function render_breadcrumbs(): void {
-		get_template_part( 'components/breadcrumbs/breadcrumbs', 'index', [ 'breadcrumbs' => $this->get_breadcrumbs() ] );
+		//TODO: let's make this get_breadcrumb_args() and render in template
+		get_template_part(
+			'components/breadcrumbs/breadcrumbs',
+			'index',
+			[ Breadcrumbs_Controller::BREADCRUMBS => $this->get_breadcrumbs() ]
+		);
 	}
 
 	/**

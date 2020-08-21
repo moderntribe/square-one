@@ -29,7 +29,7 @@ class Comments_Pagination_Controller extends Abstract_Controller {
 		$this->max_pages    = (int) get_comment_pages_count();
 	}
 
-	public function defaults() {
+	protected function defaults(): array {
 		return [
 			self::CLASSES => [],
 			self::ATTRS   => [],
@@ -37,7 +37,7 @@ class Comments_Pagination_Controller extends Abstract_Controller {
 		];
 	}
 
-	public function required() {
+	protected function required(): array {
 		return [
 			self::CLASSES => [ 'pagination', 'pagination--comments' ],
 			self::ATTRS   => [

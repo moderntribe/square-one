@@ -8,31 +8,23 @@
  * Quotes
  * ----------------------------------------------------------------------------- */
 
+[data-type="core/quote"] > q, /* Hack to overcome Core block editor styles. */
 .quote,
-[data-type^="core"] > q,
 .t-sink > q {
 	@mixin t-quote;
 	@mixin t-display-small;
 
 	display: block;
-
-	@media (--viewport-medium) {
-		@mixin t-display-large;
-	}
 }
 
 /* -----------------------------------------------------------------------------
  * Blockquotes
  * ----------------------------------------------------------------------------- */
 
+[data-type="core/quote"] > blockquote, /* Hack to overcome Core block editor styles. */
 .blockquote,
-[data-type^="core"] > blockquote,
 .t-sink > blockquote {
 	@mixin t-display-small;
-
-	@media (--viewport-medium) {
-		@mixin t-display-large;
-	}
 
 	@media (--viewport-full) {
 		position: relative;
@@ -49,6 +41,7 @@
 
 	p {
 		@mixin t-quote;
+		@mixin t-display-small;
 	}
 }
 
@@ -56,9 +49,9 @@
  * Cite
  * ----------------------------------------------------------------------------- */
 
+.wp-block-quote__citation, /* Hack to overcome Core block editor styles. */
 .cite,
-.t-sink > blockquote cite,
-.wp-block-quote__citation {
+.t-sink > blockquote cite {
 	@mixin t-overline;
 
 	display: inline-block;

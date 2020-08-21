@@ -25,6 +25,7 @@ class Logos extends Block_Config {
 			'icon'        => 'screenoptions',
 			'keywords'    => [ __( 'logos', 'tribe' ) ],
 			'category'    => 'layout',
+			'supports'    => [ 'align' => false ],
 		] ) );
 	}
 
