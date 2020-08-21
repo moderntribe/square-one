@@ -40,14 +40,14 @@ class Subheader_Controller extends Abstract_Controller {
 	}
 
 	public function get_title_args(): array {
-		if ( empty( $this->page_title() ) ) {
+		if ( empty( $this->get_page_title() ) ) {
 			return [];
 		}
 
 		return [
 			Text_Controller::TAG     => 'h1',
 			Text_Controller::CLASSES => [ 'page-title', 'h1' ],
-			Text_Controller::CONTENT => $this->page_title(),
+			Text_Controller::CONTENT => $this->get_page_title(),
 		];
 	}
 }

@@ -34,6 +34,7 @@ class Header_Navigation_Controller extends Abstract_Controller {
 			self::ATTRS   => [
 				'aria-label' => esc_html__( 'Primary Navigation', 'tribe' ),
 			],
+			self::NAV_LIST_CLASSES => [ 'site-header__nav-list' ],
 		];
 	}
 
