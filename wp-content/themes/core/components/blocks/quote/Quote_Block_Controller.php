@@ -41,12 +41,12 @@ class Quote_Block_Controller extends Abstract_Controller {
 
 	public function __construct( array $args = [] ) {
 		$args                    = $this->parse_args( $args );
-		$this->layout            = $args[ self::LAYOUT ];
-		$this->media             = $args[ self::MEDIA ];
-		$this->cite_name         = $args[ self::CITE_NAME ];
-		$this->cite_title        = $args[ self::CITE_TITLE ];
-		$this->cite_image        = $args[ self::CITE_IMAGE ];
-		$this->quote_text        = $args[ self::QUOTE_TEXT ];
+		$this->layout            = (string) $args[ self::LAYOUT ];
+		$this->media             = (int) $args[ self::MEDIA ];
+		$this->cite_name         = (string) $args[ self::CITE_NAME ];
+		$this->cite_title        = (string) $args[ self::CITE_TITLE ];
+		$this->cite_image        = (int) $args[ self::CITE_IMAGE ];
+		$this->quote_text        = (string) $args[ self::QUOTE_TEXT ];
 		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
 		$this->media_classes     = (array) $args[ self::MEDIA_CLASSES ];
 		$this->content_classes   = (array) $args[ self::CONTENT_CLASSES ];

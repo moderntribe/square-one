@@ -13,6 +13,7 @@ class Links extends Block_Config {
 
 	public const TITLE       = 'title';
 	public const DESCRIPTION = 'description';
+	public const LINKS_TITLE = 'links_title';
 	public const LINKS       = 'links';
 	public const LINK_ITEM   = 'item';
 
@@ -42,6 +43,12 @@ class Links extends Block_Config {
 				'label' => __( 'Description', 'tribe' ),
 				'name'  => self::DESCRIPTION,
 				'type'  => 'textarea',
+			] )
+		)->add_field(
+			new Field( self::NAME . '_' . self::LINKS_TITLE, [
+				'label' => __( 'Link List Title', 'tribe' ),
+				'name'  => self::LINKS_TITLE,
+				'type'  => 'text',
 			] )
 		)->add_field(
 			$this->get_links_section()
