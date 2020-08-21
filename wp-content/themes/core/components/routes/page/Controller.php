@@ -4,6 +4,7 @@ declare( strict_types=1 );
 namespace Tribe\Project\Templates\Components\routes\page;
 
 use Tribe\Project\Templates\Components\Abstract_Controller;
+use Tribe\Project\Templates\Components\breadcrumbs\Breadcrumbs_Controller;
 use Tribe\Project\Templates\Models\Breadcrumb;
 use Tribe\Project\Templates\Models\Image;
 
@@ -64,7 +65,12 @@ class Controller extends Abstract_Controller {
 	}
 
 	public function render_breadcrumbs(): void {
-		get_template_part( 'components/breadcrumbs/breadcrumbs', 'page', [ 'breadcrumbs' => $this->get_breadcrumbs() ] );
+		//TODO: let's make this get_breadcrumb_args() and render in template
+		get_template_part(
+			'components/breadcrumbs/breadcrumbs',
+			'page',
+			[ Breadcrumbs_Controller::BREADCRUMBS => $this->get_breadcrumbs() ]
+		);
 	}
 
 	/**
