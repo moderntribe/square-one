@@ -5,6 +5,7 @@ namespace Tribe\Project\Templates\Components\blocks\hero;
 
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
+use Tribe\Project\Templates\Components\Image\Image_Controller;
 use Tribe\Project\Templates\Models\Image;
 use Tribe\Project\Theme\Config\Image_Sizes;
 
@@ -111,14 +112,14 @@ class Hero_Block_Controller extends Abstract_Controller {
 		}
 
 		return [
-			'attachment'    => Image::factory( (int) $this->media ),
-			'as_bg'         => true,
-			'use_lazyload'  => true,
-			'wrapper_tag'   => 'div',
-			'wrapper_class' => [ 'b-hero__figure' ],
-			'image_classes' => [ 'b-hero__img', 'c-image__bg' ],
-			'src_size'      => Image_Sizes::CORE_FULL,
-			'srcset_size'   => [
+			Image_Controller::ATTACHMENT   => Image::factory( (int) $this->media ),
+			Image_Controller::AS_BG        => true,
+			Image_Controller::USE_LAZYLOAD => true,
+			Image_Controller::WRAPPER_TAG  => 'div',
+			Image_Controller::CLASSES      => [ 'b-hero__figure' ],
+			Image_Controller::IMG_CLASSES  => [ 'b-hero__img', 'c-image__bg' ],
+			Image_Controller::SRC_SIZE     => Image_Sizes::CORE_FULL,
+			Image_Controller::SRCSET_SIZES => [
 				Image_Sizes::CORE_FULL,
 				Image_Sizes::CORE_MOBILE,
 			],

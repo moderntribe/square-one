@@ -1,20 +1,19 @@
 <?php
 declare( strict_types=1 );
 
+use \Tribe\Project\Templates\Components\text\Text_Controller;
+
 /**
  * @var array $args Arguments passed to the template
  */
 // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
-$c = \Tribe\Project\Templates\Components\text\Controller::factory( $args );
+$c = Text_Controller::factory( $args );
 
-if ( empty( $c->content ) ) {
+if ( empty( $c->get_content() ) ) {
 	return;
 }
 ?>
 
-<<?php echo $c->tag(); ?>
-	<?php echo $c->classes(); ?>
-	<?php echo $c->attributes(); ?>
->
-	<?php echo $c->content; ?>
-</<?php echo $c->tag(); ?>>
+<<?php echo $c->get_tag(); ?> <?php echo $c->get_classes(); ?> <?php echo $c->get_attrs(); ?>>
+	<?php echo $c->get_content(); ?>
+</<?php echo $c->get_tag(); ?>>

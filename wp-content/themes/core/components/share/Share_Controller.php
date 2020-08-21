@@ -4,12 +4,15 @@ namespace Tribe\Project\Templates\Components\share;
 
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\link\Link_Controller;
+use Tribe\Project\Templates\Components\text\Text_Controller;
 use Tribe\Project\Theme\Config\Image_Sizes;
 
 /**
  * Class Search
  */
-class Controller extends Abstract_Controller {
+class Share_Controller extends Abstract_Controller {
+	public const NETWORKS  = 'networks';
+	public const LABELED   = 'labeled';
 	public const EMAIL     = 'email';
 	public const PRINT     = 'print';
 	public const PINTEREST = 'pinterest';
@@ -17,56 +20,36 @@ class Controller extends Abstract_Controller {
 	public const FACEBOOK  = 'facebook';
 	public const LINKEDIN  = 'linkedin';
 
-	/**
-	 * @var array
-	 */
-	public $links;
+	private bool $labeled;
+	private array $networks;
 
-	/**
-	 * @var bool
-	 */
-	public $labeled;
-
-	/**
-	 * @var array
-	 */
-	protected $networks = [
-		self::EMAIL,
-		self::PRINT,
-		self::PINTEREST,
-		self::TWITTER,
-		self::FACEBOOK,
-		self::LINKEDIN,
-	];
-
-	/**
-	 * Controller constructor.
-	 *
-	 * @param array $args
-	 */
 	public function __construct( array $args = [] ) {
-		$args          = wp_parse_args( $args, $this->defaults() );
-		$this->labeled = (bool) $args[ 'labeled' ];
+		$args = $this->parse_args( $args );
+
+		$this->labeled  = (bool) $args['labeled'];
+		$this->networks = (array) $args['networks'];
 	}
 
-	/**
-	 * @return array
-	 */
 	protected function defaults(): array {
 		return [
-			'labeled' => false,
+			self::LABELED  => false,
+			self::NETWORKS => [
+				self::EMAIL,
+				self::PRINT,
+				self::PINTEREST,
+				self::TWITTER,
+				self::FACEBOOK,
+				self::LINKEDIN,
+			],
 		];
 	}
 
 	/**
-	 * Loops over enabled networks and builds an array of formatted
-	 * share links
-	 **
+	 * Loops over enabled networks and builds an array of formatted share links
 	 *
 	 * @return array
 	 */
 	public function get_links() {
-
 		$data = $this->get_data();
 
 		if ( empty( $data ) ) {
@@ -279,9 +262,9 @@ class Controller extends Abstract_Controller {
 		$classes = $this->labeled ? [] : [ 'u-visually-hidden' ];
 
 		return tribe_template_part( 'components/text/text', null, [
-			'tag'     => 'span',
-			'classes' => $classes,
-			'content' => $label,
+			Text_Controller::TAG     => 'span',
+			Text_Controller::CLASSES => $classes,
+			Text_Controller::CONTENT => $label,
 		] );
 	}
 

@@ -1,11 +1,13 @@
 <?php
 declare( strict_types=1 );
 
+use \Tribe\Project\Templates\Components\card\Card_Controller;
+
 /**
  * @var array $args Arguments passed to the template
  */
 // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
-$c = \Tribe\Project\Templates\Components\card\Controller::factory( $args );
+$c = Card_Controller::factory( $args );
 
 /*
 

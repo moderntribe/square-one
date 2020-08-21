@@ -6,9 +6,10 @@ namespace Tribe\Project\Templates\Components\blocks\logos;
 use Tribe\Project\Blocks\Types\Logos\Logos;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Libs\Utils\Markup_Utils;
+use Tribe\Project\Templates\Components\content_block\Content_Block_Controller;
 use Tribe\Project\Templates\Components\Deferred_Component;
-use Tribe\Project\Templates\Components\content_block\Controller as Content_Block;
 use Tribe\Project\Templates\Components\link\Link_Controller;
+use Tribe\Project\Templates\Components\Image\Image_Controller;
 use Tribe\Project\Templates\Models\Image;
 
 class Logos_Block_Controller extends Abstract_Controller {
@@ -83,7 +84,7 @@ class Logos_Block_Controller extends Abstract_Controller {
 		return [
 			'tag'     => 'header',
 			'classes' => [ 'b-logos__header' ],
-			'layout'  => Content_Block::LAYOUT_LEFT,
+			'layout'  => Content_Block_Controller::LAYOUT_LEFT,
 			'title'   => $this->get_title(),
 			'content' => $this->get_content(),
 			'cta'     => defer_template_part( 'components/container/container', null, [
@@ -152,12 +153,12 @@ class Logos_Block_Controller extends Abstract_Controller {
 				continue;
 			}
 			$image_args = [
-				'attachment'      => Image::factory( (int) $logo[ Logos::LOGO_IMAGE ] ),
-				'use_lazyload'    => true,
-				'wrapper_classes' => [ 'b-logo__figure' ],
-				'img_classes'     => [ 'b-logo__img' ],
-				'src_size'        => 'large',
-				'srcset_sizes'    => [ 'medium', 'large' ],
+				Image_Controller::ATTACHMENT   => Image::factory( (int) $logo[ Logos::LOGO_IMAGE ] ),
+				Image_Controller::USE_LAZYLOAD => true,
+				Image_Controller::CLASSES      => [ 'b-logo__figure' ],
+				Image_Controller::IMG_CLASSES  => [ 'b-logo__img' ],
+				Image_Controller::SRC_SIZE     => 'large',
+				Image_Controller::SRCSET_SIZES => [ 'medium', 'large' ],
 			];
 
 			$link = wp_parse_args( $logo[ Logos::LOGO_LINK ], [
@@ -167,10 +168,10 @@ class Logos_Block_Controller extends Abstract_Controller {
 			] );
 
 			if ( ! empty( $logo[ Logos::LOGO_LINK ] ) ) {
-				$image_args[ 'link_url' ]     = $link[ 'url' ];
-				$image_args[ 'link_target' ]  = $link[ 'target' ];
-				$image_args[ 'link_title' ]   = $link[ 'title' ];
-				$image_args[ 'link_classes' ] = [ 'b-logo__link' ];
+				$image_args[ Image_Controller::LINK_URL ]     = $link['url'];
+				$image_args[ Image_Controller::LINK_TARGET ]  = $link['target'];
+				$image_args[ Image_Controller::LINK_TITLE ]   = $link['title'];
+				$image_args[ Image_Controller::LINK_CLASSES ] = [ 'b-logo__link' ];
 			}
 			$component_args[] = $image_args;
 		}

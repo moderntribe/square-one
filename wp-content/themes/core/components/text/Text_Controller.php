@@ -1,38 +1,30 @@
 <?php
 declare( strict_types=1 );
 
-namespace Tribe\Project\Templates\Components\container;
+namespace Tribe\Project\Templates\Components\text;
 
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\Deferred_Component;
 
-class Controller extends Abstract_Controller {
-	/**
-	 * @var string
-	 */
-	private $tag;
-	/**
-	 * @var string[]
-	 */
-	private $classes;
-	/**
-	 * @var string[]
-	 */
-	private $attrs;
+class Text_Controller extends Abstract_Controller {
+	public const TAG     = 'tag';
+	public const CLASSES = 'classes';
+	public const ATTRS   = 'attrs';
+	public const CONTENT = 'content';
+
 	/**
 	 * @var string|Deferred_Component
 	 */
 	private $content;
+	private string $tag;
+	private array  $classes;
+	private array  $attrs;
 
 	public function __construct( array $args = [] ) {
-		$args = wp_parse_args( $args, $this->defaults() );
+		$args = $this->parse_args( $args );
 
-		foreach ( $this->required() as $key => $value ) {
-			$args[$key] = array_merge( $args[$key], $value );
-		}
-
-		$this->tag     = $args['tag'];
+		$this->tag     = (string) $args['tag'];
 		$this->classes = (array) $args['classes'];
 		$this->attrs   = (array) $args['attrs'];
 		$this->content = $args['content'];
@@ -40,30 +32,26 @@ class Controller extends Abstract_Controller {
 
 	protected function defaults(): array {
 		return [
-			'tag'     => 'div',
+			'tag'     => 'p',
 			'classes' => [],
 			'attrs'   => [],
 			'content' => '',
 		];
 	}
 
-	protected function required(): array {
-		return [];
-	}
-
-	public function tag(): string {
+	public function get_tag(): string {
 		return tag_escape( $this->tag );
 	}
 
-	public function classes(): string {
+	public function get_classes(): string {
 		return Markup_Utils::class_attribute( $this->classes );
 	}
 
-	public function attributes(): string {
+	public function get_attrs(): string {
 		return Markup_Utils::concat_attrs( $this->attrs );
 	}
 
-	public function content(): string {
-		return (string) $this->content;
+	public function get_content(): string {
+		return $this->content;
 	}
 }

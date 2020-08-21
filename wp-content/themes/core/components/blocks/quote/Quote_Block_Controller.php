@@ -7,6 +7,7 @@ use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Blocks\Types\Quote\Quote as Quote_Block;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\quote\Quote_Controller;
+use Tribe\Project\Templates\Components\Image\Image_Controller;
 use Tribe\Project\Templates\Models\Image;
 use Tribe\Project\Theme\Config\Image_Sizes;
 
@@ -149,14 +150,14 @@ class Quote_Block_Controller extends Abstract_Controller {
 	 */
 	protected function get_image( $attachment_id ): array {
 		return [
-			'attachment'    => Image::factory( (int) $attachment_id ),
-			'as_bg'         => true,
-			'use_lazyload'  => true,
-			'wrapper_tag'   => 'div',
-			'wrapper_class' => [ 'b-quote__figure' ],
-			'image_classes' => [ 'b-quote__img', 'c-image__bg' ],
-			'src_size'      => Image_Sizes::SIXTEEN_NINE,
-			'srcset_size'   => [
+			Image_Controller::ATTACHMENT   => Image::factory( (int) $attachment_id ),
+			Image_Controller::AS_BG        => true,
+			Image_Controller::USE_LAZYLOAD => true,
+			Image_Controller::WRAPPER_TAG  => 'div',
+			Image_Controller::CLASSES      => [ 'b-quote__figure' ],
+			Image_Controller::IMG_CLASSES  => [ 'b-quote__img', 'c-image__bg' ],
+			Image_Controller::SRC_SIZE     => Image_Sizes::SIXTEEN_NINE,
+			Image_Controller::SRCSET_SIZES => [
 				Image_Sizes::SIXTEEN_NINE_SMALL,
 				Image_Sizes::SIXTEEN_NINE,
 				Image_Sizes::SIXTEEN_NINE_LARGE,
