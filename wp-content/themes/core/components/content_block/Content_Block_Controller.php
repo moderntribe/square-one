@@ -31,25 +31,25 @@ class Content_Block_Controller extends Abstract_Controller {
 	private array $attrs;
 	private string $layout;
 	/**
-	 * @var Deferred_Component
+	 * @var null|Deferred_Component
 	 * @uses components/text
 	 */
-	private Deferred_Component $leadin;
+	private ?Deferred_Component $leadin;
 	/**
-	 * @var Deferred_Component
+	 * @var null|Deferred_Component
 	 * @uses components/text
 	 */
-	private Deferred_Component $title;
+	private ?Deferred_Component $title;
 	/**
-	 * @var Deferred_Component
+	 * @var null|Deferred_Component
 	 * @uses components/container
 	 */
-	private Deferred_Component $content;
+	private ?Deferred_Component $content;
 	/**
-	 * @var Deferred_Component
+	 * @var null|Deferred_Component
 	 * @uses components/link
 	 */
-	private $cta;
+	private ?Deferred_Component $cta;
 
 
 	public function __construct( array $args = [] ) {
@@ -71,10 +71,10 @@ class Content_Block_Controller extends Abstract_Controller {
 			self::CLASSES => [],
 			self::ATTRS   => [],
 			self::LAYOUT  => self::LAYOUT_LEFT,
-			self::LEADIN  => [],
-			self::TITLE   => [],
-			self::CONTENT => [],
-			self::CTA     => [],
+			self::LEADIN  => null,
+			self::TITLE   => null,
+			self::CONTENT => null,
+			self::CTA     => null,
 		];
 	}
 
@@ -137,7 +137,7 @@ class Content_Block_Controller extends Abstract_Controller {
 
 	public function get_cta_args() {
 		if ( empty( $this->cta ) ) {
-			return '';
+			return [];
 		}
 		$this->cta[ Link_Controller::CLASSES ][] = 'c-content-block__cta-link';
 
