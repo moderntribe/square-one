@@ -25,7 +25,7 @@ class Hero_Block_Controller extends Abstract_Controller {
 	public const ATTRS             = 'attrs';
 
 	public string $layout;
-	public ?int $media;
+	public int $media;
 	public string $description;
 	public string $title;
 	public string $leadin;
@@ -42,12 +42,12 @@ class Hero_Block_Controller extends Abstract_Controller {
 	 */
 	public function __construct( array $args = [] ) {
 		$args                    = $this->parse_args( $args );
-		$this->layout            = $args[ self::LAYOUT ];
-		$this->media             = $args[ self::MEDIA ];
-		$this->title             = $args[ self::TITLE ];
-		$this->description       = $args[ self::DESCRIPTION ];
+		$this->layout            = (string) $args[ self::LAYOUT ];
+		$this->media             = (int) $args[ self::MEDIA ];
+		$this->title             = (string) $args[ self::TITLE ];
+		$this->description       = (string) $args[ self::DESCRIPTION ];
 		$this->cta               = (array) $args[ self::CTA ];
-		$this->leadin            = $args[ self::LEADIN ];
+		$this->leadin            = (string) $args[ self::LEADIN ];
 		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
 		$this->media_classes     = (array) $args[ self::MEDIA_CLASSES ];
 		$this->content_classes   = (array) $args[ self::CONTENT_CLASSES ];

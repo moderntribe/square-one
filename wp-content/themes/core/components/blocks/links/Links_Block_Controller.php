@@ -36,15 +36,15 @@ class Links_Block_Controller extends Abstract_Controller {
 
 	public function __construct( array $args = [] ) {
 		$args                    = $this->parse_args( $args );
-		$this->layout            = $args[ self::LAYOUT ];
-		$this->title             = $args[ self::TITLE ];
-		$this->description       = $args[ self::DESCRIPTION ];
+		$this->layout            = (string) $args[ self::LAYOUT ];
+		$this->title             = (string) $args[ self::TITLE ];
+		$this->description       = (string) $args[ self::DESCRIPTION ];
 		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
 		$this->content_classes   = (array) $args[ self::CONTENT_CLASSES ];
 		$this->classes           = (array) $args[ self::CLASSES ];
 		$this->attrs             = (array) $args[ self::ATTRS ];
 		$this->links             = (array) $args[ self::LINKS ];
-		$this->links_title       = $args[ self::LINKS_TITLE ];
+		$this->links_title       = (string) $args[ self::LINKS_TITLE ];
 	}
 
 	/**

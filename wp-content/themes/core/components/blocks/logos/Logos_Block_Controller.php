@@ -39,9 +39,9 @@ class Logos_Block_Controller extends Abstract_Controller {
 		$this->attrs             = (array) $args[ self::ATTRS ];
 		$this->title             = (string) $args[ self::TITLE ];
 		$this->content           = (string) $args[ self::CONTENT ];
-		$this->container_classes = $args[ self::CONTAINER_CLASSES ];
-		$this->container_attrs   = $args[ self::CONTAINER_ATTRS ];
-		$this->content_classes   = $args[ self::CONTENT_CLASSES ];
+		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
+		$this->container_attrs   = (array) $args[ self::CONTAINER_ATTRS ];
+		$this->content_classes   = (array) $args[ self::CONTENT_CLASSES ];
 		$this->cta               = (array) $args[ self::CTA ];
 		$this->logos             = (array) $args[ self::LOGOS ];
 	}
@@ -167,10 +167,10 @@ class Logos_Block_Controller extends Abstract_Controller {
 			] );
 
 			if ( ! empty( $logo[ Logos::LOGO_LINK ] ) ) {
-				$image_args['link_url']     = $link['url'];
-				$image_args['link_target']  = $link['target'];
-				$image_args['link_title']   = $link['title'];
-				$image_args['link_classes'] = [ 'b-logo__link' ];
+				$image_args[ 'link_url' ]     = $link[ 'url' ];
+				$image_args[ 'link_target' ]  = $link[ 'target' ];
+				$image_args[ 'link_title' ]   = $link[ 'title' ];
+				$image_args[ 'link_classes' ] = [ 'b-logo__link' ];
 			}
 			$component_args[] = $image_args;
 		}

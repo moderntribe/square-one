@@ -34,15 +34,15 @@ class Accordion_Block_Controller extends Abstract_Controller {
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
 
-		$this->layout            = $args[ self::LAYOUT ];
-		$this->rows              = $args[ self::ROWS ];
-		$this->header            = $args[ self::HEADER ];
-		$this->description       = $args[ self::DESCRIPTION ];
-		$this->container_classes = $args[ self::CONTAINER_CLASSES ];
-		$this->container_attrs   = $args[ self::CONTAINER_ATTRS ];
-		$this->content_classes   = $args[ self::CONTENT_CLASSES ];
-		$this->classes           = $args[ self::CLASSES ];
-		$this->attrs             = $args[ self::ATTRS ];
+		$this->layout            = (string) $args[ self::LAYOUT ];
+		$this->rows              = (array) $args[ self::ROWS ];
+		$this->header            = (string) $args[ self::HEADER ];
+		$this->description       = (string) $args[ self::DESCRIPTION ];
+		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
+		$this->container_attrs   = (array) $args[ self::CONTAINER_ATTRS ];
+		$this->content_classes   = (array) $args[ self::CONTENT_CLASSES ];
+		$this->classes           = (array) $args[ self::CLASSES ];
+		$this->attrs             = (array) $args[ self::ATTRS ];
 	}
 
 	/**
