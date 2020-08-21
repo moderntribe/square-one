@@ -26,8 +26,8 @@ class No_Results_Controller extends Abstract_Controller {
 	protected function defaults(): array {
 		return [
 			self::CLASSES => [],
-			self::TITLE   => __( 'No Posts', 'tribe' ),
-			self::CONTENT => __( 'Sorry, but there are currently no posts to see at this time.', 'tribe' ),
+			self::TITLE   => esc_html__( 'No Posts', 'tribe' ),
+			self::CONTENT => esc_html__( 'Sorry, but there are currently no posts to see at this time.', 'tribe' ),
 		];
 	}
 

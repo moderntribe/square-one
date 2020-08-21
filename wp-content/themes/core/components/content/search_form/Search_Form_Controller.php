@@ -36,7 +36,7 @@ class Search_Form_Controller extends Abstract_Controller {
 			self::FORM_ID     => 's',
 			self::ACTION      => get_home_url(),
 			self::PLACEHOLDER => '',
-			self::LABEL       => __( 'Search', 'tribe' ),
+			self::LABEL       => esc_html__( 'Search', 'tribe' ),
 		];
 	}
 
@@ -71,7 +71,7 @@ class Search_Form_Controller extends Abstract_Controller {
 			Button_Controller::CLASSES    => [ 'c-button' ],
 			Button_Controller::ATTRS      => [ 'name'  => 'submit' ],
 			Button_Controller::TYPE       => 'submit',
-			Button_Controller::CONTENT    => __( 'Search', 'tribe' ),
+			Button_Controller::CONTENT    => esc_html__( 'Search', 'tribe' ),
 		];
 	}
 }
