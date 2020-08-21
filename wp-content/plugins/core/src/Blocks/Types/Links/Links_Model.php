@@ -3,7 +3,6 @@
 
 namespace Tribe\Project\Blocks\Types\Links;
 
-
 use Tribe\Project\Blocks\Types\Base_Model;
 use Tribe\Project\Templates\Components\blocks\links\Links_Block_Controller;
 
