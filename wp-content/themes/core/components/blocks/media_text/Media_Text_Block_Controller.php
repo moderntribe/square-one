@@ -27,7 +27,8 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 	public const IMAGE             = 'image';
 	public const VIDEO             = 'video';
 	public const TITLE             = 'title';
-	public const CONTENT           = 'content';
+	public const LEADIN            = 'leadin';
+	public const DESCRIPTION       = 'description';
 	public const CTA               = 'cta';
 
 	private array  $classes;
@@ -41,7 +42,8 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 	private int    $image;
 	private string $video;
 	private string $title;
-	private string $content;
+	private string $leadin;
+	private string $description;
 	private array  $cta;
 
 	/**
@@ -61,7 +63,8 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 		$this->image             = (int) $args[ self::IMAGE ];
 		$this->video             = (string) $args[ self::VIDEO ];
 		$this->title             = (string) $args[ self::TITLE ];
-		$this->content           = (string) $args[ self::CONTENT ];
+		$this->leadin            = (string) $args[ self::LEADIN ];
+		$this->description       = (string) $args[ self::DESCRIPTION ];
 		$this->cta               = (array) $args[ self::CTA ];
 	}
 
@@ -78,7 +81,8 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 			self::IMAGE             => [],
 			self::VIDEO             => '',
 			self::TITLE             => '',
-			self::CONTENT           => '',
+			self::LEADIN            => '',
+			self::DESCRIPTION       => '',
 			self::CTA               => [],
 		];
 	}
@@ -131,12 +135,31 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 	 */
 	public function get_content_args(): array {
 		return [
-			Content_Block_Controller::CLASSES => [ 'b-media-text__content-container' ],
+			Content_Block_Controller::TAG     => 'header',
+			Content_Block_Controller::LEADIN  => $this->get_leadin(),
 			Content_Block_Controller::TITLE   => $this->get_title(),
 			Content_Block_Controller::CONTENT => $this->get_content(),
 			Content_Block_Controller::CTA     => $this->get_cta(),
 			Content_Block_Controller::LAYOUT  => $this->layout === Media_Text_Block::MEDIA_CENTER ? Content_Block_Controller::LAYOUT_INLINE : Content_Block_Controller::LAYOUT_LEFT,
+			Content_Block_Controller::CLASSES => [
+				'c-block__content-block',
+				'c-block__header',
+				'b-media-text__content-container'
+			],
 		];
+	}
+
+	/**
+	 * @return Deferred_Component
+	 */
+	private function get_leadin(): Deferred_Component {
+		return defer_template_part( 'components/text/text', null, [
+			Text_Controller::CLASSES => [
+				'c-block__leadin',
+				'b-media-text__leadin'
+			],
+			Text_Controller::CONTENT => $this->leadin ?? '',
+		] );
 	}
 
 	/**
@@ -145,7 +168,11 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 	private function get_title(): Deferred_Component {
 		return defer_template_part( 'components/text/text', null, [
 			Text_Controller::TAG     => 'h2',
-			Text_Controller::CLASSES => [ 'b-media-text__title', 'h3' ],
+			Text_Controller::CLASSES => [
+				'c-block__title',
+				'b-media-text__title',
+				'h3'
+			],
 			Text_Controller::CONTENT => $this->title ?? '',
 		] );
 	}
@@ -155,8 +182,13 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 	 */
 	private function get_content(): Deferred_Component {
 		return defer_template_part( 'components/container/container', null, [
-			Container_Controller::CLASSES => [ 'b-media-text__text', 't-sink', 's-sink' ],
-			Container_Controller::CONTENT => $this->content ?? '',
+			Container_Controller::CLASSES => [
+				'c-block__description',
+				'b-media-text__text',
+				't-sink',
+				's-sink'
+			],
+			Container_Controller::CONTENT => $this->description ?? '',
 		] );
 	}
 
@@ -171,7 +203,10 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 				$this->get_cta_args()
 			),
 			Container_Controller::TAG     => 'p',
-			Container_Controller::CLASSES => [ 'b-media-text__cta' ],
+			Container_Controller::CLASSES => [
+				'c-block__cta',
+				'b-media-text__cta'
+			],
 		] );
 	}
 
@@ -193,7 +228,12 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 			Link_Controller::URL     => $cta['url'],
 			Link_Controller::CONTENT => $cta['text'] ?: $cta['url'],
 			Link_Controller::TARGET  => $cta['target'],
-			Link_Controller::CLASSES => [ 'a-btn', 'a-btn--has-icon-after', 'icon-arrow-right' ],
+			Link_Controller::CLASSES => [
+				'c-block__cta-link',
+				'a-btn',
+				'a-btn--has-icon-after',
+				'icon-arrow-right'
+			],
 		];
 	}
 
