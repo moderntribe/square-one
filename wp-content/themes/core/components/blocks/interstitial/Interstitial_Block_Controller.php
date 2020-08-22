@@ -123,7 +123,7 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 	 * @return array
 	 */
 	public function get_content_args(): array {
-		if ( empty( $this->content ) && empty( $this->cta ) ) {
+		if ( empty( $this->title ) && empty( $this->cta ) ) {
 			return [];
 		}
 

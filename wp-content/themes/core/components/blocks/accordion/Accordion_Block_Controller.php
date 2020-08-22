@@ -124,6 +124,10 @@ class Accordion_Block_Controller extends Abstract_Controller {
 	 * @return array
 	 */
 	public function get_header_args(): array {
+		if ( empty( $this->title ) && empty( $this->description ) ) {
+			return [];
+		}
+
 		return [
 			Content_Block_Controller::TAG     => 'header',
 			Content_Block_Controller::TITLE   => $this->get_title(),
