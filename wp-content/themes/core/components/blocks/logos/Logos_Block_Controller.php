@@ -20,18 +20,20 @@ class Logos_Block_Controller extends Abstract_Controller {
 	public const CONTAINER_CLASSES = 'container_classes';
 	public const CONTENT_CLASSES   = 'content_classes';
 	public const TITLE             = 'title';
-	public const CONTENT           = 'content';
+	public const LEADIN            = 'leadin';
+	public const DESCRIPTION       = 'description';
 	public const CTA               = 'cta';
 	public const LOGOS             = 'logos';
 
-	public array  $classes;
-	public array  $attrs;
-	public string $title;
-	public string $content;
-	public array  $container_classes;
-	public array  $content_classes;
-	public array  $cta;
-	public array  $logos;
+	private array  $classes;
+	private array  $attrs;
+	private string $title;
+	private string $leadin;
+	private string $description;
+	private array  $cta;
+	private array  $container_classes;
+	private array  $content_classes;
+	private array  $logos;
 
 	/**
 	 * @param array $args
@@ -42,10 +44,11 @@ class Logos_Block_Controller extends Abstract_Controller {
 		$this->classes           = (array) $args[ self::CLASSES ];
 		$this->attrs             = (array) $args[ self::ATTRS ];
 		$this->title             = (string) $args[ self::TITLE ];
-		$this->content           = (string) $args[ self::CONTENT ];
+		$this->leadin            = (string) $args[ self::LEADIN ];
+		$this->description       = (string) $args[ self::DESCRIPTION ];
+		$this->cta               = (array) $args[ self::CTA ];
 		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
 		$this->content_classes   = (array) $args[ self::CONTENT_CLASSES ];
-		$this->cta               = (array) $args[ self::CTA ];
 		$this->logos             = (array) $args[ self::LOGOS ];
 	}
 
@@ -54,7 +57,8 @@ class Logos_Block_Controller extends Abstract_Controller {
 			self::CLASSES           => [],
 			self::ATTRS             => [],
 			self::TITLE             => '',
-			self::CONTENT           => '',
+			self::LEADIN            => '',
+			self::DESCRIPTION       => '',
 			self::CTA               => [],
 			self::LOGOS             => [],
 			self::CONTAINER_CLASSES => [],
@@ -104,14 +108,36 @@ class Logos_Block_Controller extends Abstract_Controller {
 	 * @return array
 	 */
 	public function get_header_args(): array {
+		if ( empty( $this->title ) && empty( $this->description ) ) {
+			return [];
+		}
+
 		return [
 			Content_Block_Controller::TAG     => 'header',
-			Content_Block_Controller::CLASSES => [ 'b-logos__header' ],
-			Content_Block_Controller::LAYOUT  => Content_Block_Controller::LAYOUT_LEFT,
+			Content_Block_Controller::LEADIN  => $this->get_leadin(),
 			Content_Block_Controller::TITLE   => $this->get_title(),
 			Content_Block_Controller::CONTENT => $this->get_content(),
 			Content_Block_Controller::CTA     => $this->get_cta(),
+			Content_Block_Controller::LAYOUT  => Content_Block_Controller::LAYOUT_LEFT,
+			Content_Block_Controller::CLASSES => [
+				'c-block__content-block',
+				'c-block__header',
+				'b-logos__header'
+			],
 		];
+	}
+
+	/**
+	 * @return Deferred_Component
+	 */
+	private function get_leadin(): Deferred_Component {
+		return defer_template_part( 'components/text/text', null, [
+			Text_Controller::CLASSES => [
+				'c-block__leadin',
+				'b-logos__leadin'
+			],
+			Text_Controller::CONTENT => $this->leadin ?? '',
+		] );
 	}
 
 	/**
@@ -120,7 +146,11 @@ class Logos_Block_Controller extends Abstract_Controller {
 	private function get_title(): Deferred_Component {
 		return defer_template_part( 'components/text/text', null, [
 			Text_Controller::TAG     => 'h2',
-			Text_Controller::CLASSES => [ 'b-logos__title', 'h3' ],
+			Text_Controller::CLASSES => [
+				'c-block__title',
+				'b-logos__title',
+				'h3'
+			],
 			Text_Controller::CONTENT => $this->title ?? '',
 		] );
 	}
@@ -129,9 +159,14 @@ class Logos_Block_Controller extends Abstract_Controller {
 	 * @return Deferred_Component
 	 */
 	private function get_content(): Deferred_Component {
-		return defer_template_part( 'components/text/text', null, [
-			Text_Controller::CLASSES => [ 'b-logos__description' ],
-			Text_Controller::CONTENT => $this->content ?? '',
+		return defer_template_part( 'components/container/container', null, [
+			Container_Controller::CLASSES => [
+				'c-block__description',
+				'b-logos__description',
+				't-sink',
+				's-sink'
+			],
+			Container_Controller::CONTENT => $this->description ?? '',
 		] );
 	}
 
@@ -146,7 +181,10 @@ class Logos_Block_Controller extends Abstract_Controller {
 				$this->get_cta_args()
 			),
 			Container_Controller::TAG     => 'p',
-			Container_Controller::CLASSES => [ 'b-logos__cta' ],
+			Container_Controller::CLASSES => [
+				'c-block__cta',
+				'b-logos__cta'
+			],
 		] );
 	}
 
@@ -168,7 +206,12 @@ class Logos_Block_Controller extends Abstract_Controller {
 			Link_Controller::URL     => $cta['url'],
 			Link_Controller::CONTENT => $cta['text'] ?: $cta['url'],
 			Link_Controller::TARGET  => $cta['target'],
-			Link_Controller::CLASSES => [ 'a-btn', 'a-btn--has-icon-after', 'icon-arrow-right' ],
+			Link_Controller::CLASSES => [
+				'c-block__cta-link',
+				'a-btn',
+				'a-btn--has-icon-after',
+				'icon-arrow-right'
+			],
 		];
 	}
 
