@@ -13,7 +13,7 @@ class Not_Found_Controller extends Abstract_Controller {
 	/**
 	 * @var int|string
 	 */
-	private string $sidebar_id = '';
+	private $sidebar_id = '';
 
 	/**
 	 * Render the header component

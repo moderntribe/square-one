@@ -11,7 +11,7 @@ class No_Results_Controller extends Abstract_Controller {
 	public const TITLE   = 'attachment';
 	public const CONTENT = 'attrs';
 
-	private array $classes;
+	private array  $classes;
 	private string $title;
 	private string $content;
 

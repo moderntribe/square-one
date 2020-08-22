@@ -28,11 +28,11 @@ class Tabs_Block_Controller extends Abstract_Controller {
 	private string $title;
 	private string $leadin;
 	private string $description;
-	private array $cta;
-	private array $tabs;
-	private array $classes;
-	private array $attrs;
-	private array $container_classes;
+	private array  $cta;
+	private array  $tabs;
+	private array  $classes;
+	private array  $attrs;
+	private array  $container_classes;
 
 	/**
 	 * @param array $args

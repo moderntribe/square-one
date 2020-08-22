@@ -31,20 +31,20 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 	public const DESCRIPTION       = 'description';
 	public const CTA               = 'cta';
 
-	private array $classes;
-	private array $attrs;
+	private array  $classes;
+	private array  $attrs;
 	private string $width;
 	private string $layout;
-	private array $container_classes;
-	private array $media_classes;
-	private array $content_classes;
+	private array  $container_classes;
+	private array  $media_classes;
+	private array  $content_classes;
 	private string $media_type;
-	private int $image;
+	private int    $image;
 	private string $video;
 	private string $title;
 	private string $leadin;
 	private string $description;
-	private array $cta;
+	private array  $cta;
 
 	/**
 	 * @param array $args

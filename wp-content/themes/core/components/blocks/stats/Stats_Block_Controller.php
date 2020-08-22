@@ -31,18 +31,18 @@ class Stats_Block_Controller extends Abstract_Controller {
 	/**
 	 * @var Statistic_Model[] The collection of stats to render. Each item should be a \Tribe\Project\Templates\Models\Statistic object.
 	 */
-	private array $stats;
+	private array  $stats;
 	private string $title;
 	private string $leadin;
 	private string $description;
-	private array $cta;
+	private array  $cta;
 	private string $layout;
 	private string $content_align;
 	private string $display_dividers;
-	private array $container_classes;
-	private array $content_classes;
-	private array $classes;
-	private array $attrs;
+	private array  $container_classes;
+	private array  $content_classes;
+	private array  $classes;
+	private array  $attrs;
 
 	/**
 	 * @param array $args

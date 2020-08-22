@@ -13,9 +13,9 @@ class Navigation_Controller extends Abstract_Controller {
 	public const ATTRS            = 'attrs';
 	public const NAV_LIST_CLASSES = 'nav_list_classes';
 
-	private array $classes;
-	private array $attrs;
-	private array $nav_list_classes;
+	private array  $classes;
+	private array  $attrs;
+	private array  $nav_list_classes;
 	private string $location;
 
 	public function __construct( array $args = [] ) {

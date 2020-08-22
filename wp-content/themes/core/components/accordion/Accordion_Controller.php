@@ -38,21 +38,21 @@ class Accordion_Controller extends Abstract_Controller {
 	/**
 	 * @var Accordion_Row[]
 	 */
-	private array $rows;
-	private array $container_classes;
-	private array $container_attrs;
-	private array $row_classes;
+	private array  $rows;
+	private array  $container_classes;
+	private array  $container_attrs;
+	private array  $row_classes;
 	private string $row_header_tag;
-	private array $row_header_classes;
-	private array $row_header_attrs;
-	private array $row_header_container_classes;
-	private array $row_content_classes;
-	private array $row_content_attrs;
-	private array $row_content_container_classes;
-	private array $row_content_container_attrs;
+	private array  $row_header_classes;
+	private array  $row_header_attrs;
+	private array  $row_header_container_classes;
+	private array  $row_content_classes;
+	private array  $row_content_attrs;
+	private array  $row_content_container_classes;
+	private array  $row_content_container_attrs;
 	private string $row_header_name;
 	private string $row_content_name;
-	private array $row_ids;
+	private array  $row_ids;
 
 	public function __construct( array $args = [] ) {
 		$args                                = $this->parse_args( $args );

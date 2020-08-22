@@ -30,12 +30,12 @@ class Lead_Form_Block_Controller extends Abstract_Controller {
 	private string $title;
 	private string $leadin;
 	private string $description;
-	private array $cta;
-	private int $form;
-	private array $container_classes;
-	private array $form_classes;
-	private array $classes;
-	private array $attrs;
+	private array  $cta;
+	private int    $form;
+	private array  $container_classes;
+	private array  $form_classes;
+	private array  $classes;
+	private array  $attrs;
 
 	/**
 	 * @param array $args

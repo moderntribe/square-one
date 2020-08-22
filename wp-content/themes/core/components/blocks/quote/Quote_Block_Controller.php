@@ -25,16 +25,16 @@ class Quote_Block_Controller extends Abstract_Controller {
 	public const ATTRS             = 'attrs';
 
 	private string $layout;
-	private int $media;
+	private int    $media;
 	private string $cite_name;
 	private string $cite_title;
-	private int $cite_image;
+	private int    $cite_image;
 	private string $quote_text;
-	private array $container_classes;
-	private array $media_classes;
-	private array $content_classes;
-	private array $classes;
-	private array $attrs;
+	private array  $container_classes;
+	private array  $media_classes;
+	private array  $content_classes;
+	private array  $classes;
+	private array  $attrs;
 
 	/**
 	 * @param array $args

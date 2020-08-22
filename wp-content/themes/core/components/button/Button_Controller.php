@@ -19,8 +19,8 @@ class Button_Controller extends Abstract_Controller {
 	 */
 	private $content;
 	private string $type;
-	private array $classes;
-	private array $attrs;
+	private array  $classes;
+	private array  $attrs;
 	private string $aria_label;
 
 	public function __construct( array $args = [] ) {
