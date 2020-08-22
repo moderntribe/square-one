@@ -48,13 +48,13 @@ class Comments_Section_Controller extends Abstract_Controller {
 		return ob_get_clean();
 	}
 
-	public function get_pagination() {
+	public function get_pagination_args() {
 		$count = get_comment_pages_count();
 		$paged = (bool) ( $count > 1 ? get_option( 'page_comments' ) : false );
 
-		return tribe_template_part( 'components/pagination/comments/comments', null, [
+		return [
 			Comments_Pagination_Controller::PAGED => $paged,
-		] );
+		];
 	}
 
 	/**
