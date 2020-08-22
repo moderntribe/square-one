@@ -45,8 +45,7 @@ class Accordion extends Block_Config {
 				'name'  => self::LEAD_IN,
 				'type'  => 'text',
 			] )
-		)->add_field(
-			new Field( self::NAME . '_' . self::DESCRIPTION, [
+		)->add_field( new Field( self::NAME . '_' . self::DESCRIPTION, [
 				'label'        => __( 'Description', 'tribe' ),
 				'name'         => self::DESCRIPTION,
 				'type'         => 'wysiwyg',

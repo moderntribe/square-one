@@ -18,7 +18,7 @@ use Tribe\Project\Theme\Config\Image_Sizes;
 class Interstitial_Block_Controller extends Abstract_Controller {
 	public const LAYOUT            = 'layout';
 	public const MEDIA             = 'media';
-	public const CONTENT           = 'content';
+	public const TITLE             = 'title';
 	public const CTA               = 'cta';
 	public const CONTAINER_CLASSES = 'container_classes';
 	public const MEDIA_CLASSES     = 'media_classes';
@@ -26,15 +26,15 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 	public const CLASSES           = 'classes';
 	public const ATTRS             = 'attrs';
 
-	public string $layout;
-	public int    $media;
-	public string $content;
-	public array  $cta;
-	public array  $container_classes;
-	public array  $media_classes;
-	public array  $content_classes;
-	public array  $classes;
-	public array  $attrs;
+	private string  $layout;
+	private int     $media;
+	private string  $title;
+	private array   $cta;
+	private array   $container_classes;
+	private array   $media_classes;
+	private array   $content_classes;
+	private array   $classes;
+	private array   $attrs;
 
 	/**
 	 * @param array $args
@@ -45,7 +45,7 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 		$this->classes           = (array) $args[ self::CLASSES ];
 		$this->layout            = (string) $args[ self::LAYOUT ];
 		$this->media             = (int) $args[ self::MEDIA ];
-		$this->content           = (string) $args[ self::CONTENT ];
+		$this->title             = (string) $args[ self::TITLE ];
 		$this->cta               = (array) $args[ self::CTA ];
 		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
 		$this->media_classes     = (array) $args[ self::MEDIA_CLASSES ];
@@ -60,7 +60,7 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 		return [
 			self::LAYOUT            => Interstitial_Block::LAYOUT_LEFT,
 			self::MEDIA             => null,
-			self::CONTENT           => '',
+			self::TITLE             => '',
 			self::CTA               => [],
 			self::CONTAINER_CLASSES => [],
 			self::MEDIA_CLASSES     => [],
@@ -128,10 +128,15 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 		}
 
 		return [
-			Content_Block_Controller::CLASSES => [ 'b-interstitial__content-container', 't-theme--light' ],
 			Content_Block_Controller::TITLE   => $this->get_title(),
 			Content_Block_Controller::CTA     => $this->get_cta(),
 			Content_Block_Controller::LAYOUT  => $this->layout,
+			Content_Block_Controller::CLASSES => [
+				'c-block__content-block',
+				'c-block__content',
+				'b-interstitial__content-container',
+				't-theme--light'
+			],
 		];
 	}
 
@@ -141,7 +146,11 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 	private function get_title(): Deferred_Component {
 		return defer_template_part( 'components/text/text', null, [
 			Text_Controller::TAG     => 'h2',
-			Text_Controller::CLASSES => [ 'b-interstitial__title', 'h3' ],
+			Text_Controller::CLASSES => [
+				'c-block__title',
+				'b-interstitial__title',
+				'h3'
+			],
 			Text_Controller::CONTENT => $this->title ?? '',
 		] );
 	}
@@ -157,7 +166,10 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 				$this->get_cta_args()
 			),
 			Container_Controller::TAG     => 'p',
-			Container_Controller::CLASSES => [ 'b-interstitial__cta' ],
+			Container_Controller::CLASSES => [
+				'c-block__cta',
+				'b-interstitial__cta'
+			],
 		] );
 	}
 
@@ -179,7 +191,12 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 			Link_Controller::URL     => $cta['url'],
 			Link_Controller::CONTENT => $cta['text'] ?: $cta['url'],
 			Link_Controller::TARGET  => $cta['target'],
-			Link_Controller::CLASSES => [ 'a-btn', 'a-btn--has-icon-after', 'icon-arrow-right' ],
+			Link_Controller::CLASSES => [
+				'c-block__cta-link',
+				'a-btn',
+				'a-btn--has-icon-after',
+				'icon-arrow-right'
+			],
 		];
 	}
 

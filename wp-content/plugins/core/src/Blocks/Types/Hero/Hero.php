@@ -60,12 +60,13 @@ class Hero extends Block_Config {
 				'type'  => 'link',
 			] )
 		)->add_field( new Field( self::NAME . '_' . self::IMAGE, [
-			'label'        => __( 'Image', 'tribe' ),
-			'name'         => self::IMAGE,
-			'type'         => 'image',
-			'return_format' => 'id',
-			'instructions' => __( 'Recommended image size: 1440px wide and 720px high', 'tribe' ),
-		] ) );
+				'label'        => __( 'Image', 'tribe' ),
+				'name'         => self::IMAGE,
+				'type'         => 'image',
+				'return_format' => 'id',
+				'instructions' => __( 'Recommended image size: 1440px wide and 720px high', 'tribe' ),
+			] )
+		);
 	}
 
 	/**
