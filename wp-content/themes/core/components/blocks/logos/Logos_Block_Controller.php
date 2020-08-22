@@ -18,7 +18,6 @@ class Logos_Block_Controller extends Abstract_Controller {
 	public const CLASSES           = 'classes';
 	public const ATTRS             = 'attrs';
 	public const CONTAINER_CLASSES = 'container_classes';
-	public const CONTAINER_ATTRS   = 'container_attrs';
 	public const CONTENT_CLASSES   = 'content_classes';
 	public const TITLE             = 'title';
 	public const CONTENT           = 'content';
@@ -30,7 +29,6 @@ class Logos_Block_Controller extends Abstract_Controller {
 	public string $title;
 	public string $content;
 	public array  $container_classes;
-	public array  $container_attrs;
 	public array  $content_classes;
 	public array  $cta;
 	public array  $logos;
@@ -46,7 +44,6 @@ class Logos_Block_Controller extends Abstract_Controller {
 		$this->title             = (string) $args[ self::TITLE ];
 		$this->content           = (string) $args[ self::CONTENT ];
 		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
-		$this->container_attrs   = (array) $args[ self::CONTAINER_ATTRS ];
 		$this->content_classes   = (array) $args[ self::CONTENT_CLASSES ];
 		$this->cta               = (array) $args[ self::CTA ];
 		$this->logos             = (array) $args[ self::LOGOS ];
@@ -61,7 +58,6 @@ class Logos_Block_Controller extends Abstract_Controller {
 			self::CTA               => [],
 			self::LOGOS             => [],
 			self::CONTAINER_CLASSES => [],
-			self::CONTAINER_ATTRS   => [],
 			self::CONTENT_CLASSES   => [],
 		];
 	}
@@ -123,18 +119,19 @@ class Logos_Block_Controller extends Abstract_Controller {
 	 */
 	private function get_title(): Deferred_Component {
 		return defer_template_part( 'components/text/text', null, [
+			Text_Controller::TAG     => 'h2',
 			Text_Controller::CLASSES => [ 'b-logos__title', 'h3' ],
-			Text_Controller::CONTENT => $this->title,
+			Text_Controller::CONTENT => $this->title ?? '',
 		] );
 	}
 
 	/**
 	 * @return Deferred_Component
 	 */
-	public function get_content(): Deferred_Component {
+	private function get_content(): Deferred_Component {
 		return defer_template_part( 'components/text/text', null, [
 			Text_Controller::CLASSES => [ 'b-logos__description' ],
-			Text_Controller::CONTENT => $this->content,
+			Text_Controller::CONTENT => $this->content ?? '',
 		] );
 	}
 
