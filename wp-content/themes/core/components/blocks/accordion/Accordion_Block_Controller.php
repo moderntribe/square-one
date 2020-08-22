@@ -130,7 +130,11 @@ class Accordion_Block_Controller extends Abstract_Controller {
 			Content_Block_Controller::LEADIN  => $this->get_leadin(),
 			Content_Block_Controller::CONTENT => $this->get_content(),
 			Content_Block_Controller::CTA     => $this->get_cta(),
-			Content_Block_Controller::CLASSES => [ 'b-accordion__header' ],
+			Content_Block_Controller::CLASSES => [
+				'c-block__content-block',
+				'c-block__header',
+				'b-accordion__header'
+			],
 		];
 	}
 
@@ -140,7 +144,11 @@ class Accordion_Block_Controller extends Abstract_Controller {
 	private function get_title(): Deferred_Component {
 		return defer_template_part( 'components/text/text', null, [
 			Text_Controller::TAG     => 'h2',
-			Text_Controller::CLASSES => [ 'c-block__title', 'b-accordion__title', 'h3' ],
+			Text_Controller::CLASSES => [
+				'c-block__title',
+				'b-accordion__title',
+				'h3'
+			],
 			Text_Controller::CONTENT => $this->title ?? '',
 		] );
 	}
@@ -150,7 +158,10 @@ class Accordion_Block_Controller extends Abstract_Controller {
 	 */
 	private function get_leadin(): Deferred_Component {
 		return defer_template_part( 'components/text/text', null, [
-			Text_Controller::CLASSES => [ 'c-block__leadin', 'b-accordion__leadin' ],
+			Text_Controller::CLASSES => [
+				'c-block__leadin',
+				'b-accordion__leadin'
+			],
 			Text_Controller::CONTENT => $this->leadin ?? '',
 		] );
 	}
@@ -159,9 +170,14 @@ class Accordion_Block_Controller extends Abstract_Controller {
 	 * @return Deferred_Component
 	 */
 	private function get_content(): Deferred_Component {
-		return defer_template_part( 'components/text/text', null, [
-			Text_Controller::CLASSES => [ 'c-block__description', 'b-accordion__description', 't-sink', 's-sink' ],
-			Text_Controller::CONTENT => $this->description ?? '',
+		return defer_template_part( 'components/container/container', null, [
+			Container_Controller::CLASSES => [
+				'c-block__description',
+				'b-accordion__description',
+				't-sink',
+				's-sink'
+			],
+			Container_Controller::CONTENT => $this->description ?? '',
 		] );
 	}
 
@@ -176,7 +192,10 @@ class Accordion_Block_Controller extends Abstract_Controller {
 				$this->get_cta_args()
 			),
 			Container_Controller::TAG     => 'p',
-			Container_Controller::CLASSES => [ 'c-block__cta', 'b-accordion__cta' ],
+			Container_Controller::CLASSES => [
+				'c-block__cta',
+				'b-accordion__cta'
+			],
 		] );
 	}
 
@@ -198,7 +217,12 @@ class Accordion_Block_Controller extends Abstract_Controller {
 			Link_Controller::URL     => $cta['url'],
 			Link_Controller::CONTENT => $cta['text'] ?: $cta['url'],
 			Link_Controller::TARGET  => $cta['target'],
-			Link_Controller::CLASSES => [ 'a-btn', 'a-btn--has-icon-after', 'icon-arrow-right' ],
+			Link_Controller::CLASSES => [
+				'c-block__cta-link',
+				'a-btn',
+				'a-btn--has-icon-after',
+				'icon-arrow-right'
+			],
 		];
 	}
 

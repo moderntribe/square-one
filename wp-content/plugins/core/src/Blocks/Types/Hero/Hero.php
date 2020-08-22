@@ -13,7 +13,7 @@ class Hero extends Block_Config {
 	public const IMAGE         = 'image';
 	public const LEAD_IN       = 'leadin';
 	public const TITLE         = 'title';
-	public const CONTENT       = 'content';
+	public const DESCRIPTION   = 'description';
 	public const CTA           = 'cta';
 	public const LAYOUT        = 'layout';
 	public const LAYOUT_LEFT   = 'left';
@@ -47,10 +47,12 @@ class Hero extends Block_Config {
 				'name'  => self::LEAD_IN,
 				'type'  => 'text',
 			] )
-		)->add_field( new Field( self::NAME . '_' . self::CONTENT, [
-				'label' => __( 'Description', 'tribe' ),
-				'name'  => self::CONTENT,
-				'type'  => 'textarea',
+		)->add_field( new Field( self::NAME . '_' . self::DESCRIPTION, [
+				'label'        => __( 'Description', 'tribe' ),
+				'name'         => self::DESCRIPTION,
+				'type'         => 'wysiwyg',
+				'toolbar'      => 'basic',
+				'media_upload' => 0,
 			] )
 		)->add_field( new Field( self::NAME . '_' . self::CTA, [
 				'label' => __( 'Call to Action', 'tribe' ),
