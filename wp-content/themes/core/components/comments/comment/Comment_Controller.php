@@ -20,11 +20,11 @@ class Comment_Controller extends Abstract_Controller {
 	public const DEPTH      = 'depth';
 	public const MAX_DEPTH  = 'max_depth';
 
-	private int   $comment_id;
+	private int $comment_id;
 	private array $classes;
 	private array $attrs;
-	private int   $depth;
-	private int   $max_depth;
+	private int $depth;
+	private int $max_depth;
 
 	/**
 	 * Comment constructor.

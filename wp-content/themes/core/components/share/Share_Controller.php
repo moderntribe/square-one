@@ -20,7 +20,7 @@ class Share_Controller extends Abstract_Controller {
 	public const FACEBOOK  = 'facebook';
 	public const LINKEDIN  = 'linkedin';
 
-	private bool  $labeled;
+	private bool $labeled;
 	private array $networks;
 
 	public function __construct( array $args = [] ) {

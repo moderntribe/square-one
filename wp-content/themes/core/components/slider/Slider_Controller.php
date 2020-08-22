@@ -25,9 +25,9 @@ class Slider_Controller extends Abstract_Controller {
 	private array $wrapper_classes;
 	private array $slide_classes;
 	private array $slides;
-	private bool  $show_arrows;
-	private bool  $show_pagination;
-	private bool  $show_carousel;
+	private bool $show_arrows;
+	private bool $show_pagination;
+	private bool $show_carousel;
 	private array $carousel_attrs;
 	private array $carousel_slides;
 

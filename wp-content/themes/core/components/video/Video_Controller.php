@@ -18,8 +18,8 @@ class Video_Controller extends Abstract_Controller {
 	public const TRIGGER_POSITION_CENTER = 'center';
 	public const TRIGGER_POSITION_BOTTOM = 'bottom';
 
-	private array  $classes;
-	private array  $attrs;
+	private array $classes;
+	private array $attrs;
 	private string $video_url;
 	private string $video_title;
 	private string $trigger_label;

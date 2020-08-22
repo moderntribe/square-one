@@ -13,9 +13,9 @@ class Comments_Pagination_Controller extends Abstract_Controller {
 
 	private array $classes;
 	private array $attrs;
-	private bool  $paged;
-	private int   $comment_page;
-	private int   $max_pages;
+	private bool $paged;
+	private int $comment_page;
+	private int $max_pages;
 
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );

@@ -16,12 +16,12 @@ class Quote_Controller extends Abstract_Controller {
 	public const CITE_TITLE = 'cite_title';
 	public const CITE_IMAGE = 'cite_image';
 
-	private array  $classes;
-	private array  $attrs;
+	private array $classes;
+	private array $attrs;
 	private string $quote_text;
 	private string $cite_name;
 	private string $cite_title;
-	private int    $cite_image;
+	private int $cite_image;
 
 	public function __construct( array $args = [] ) {
 		$args             = $this->parse_args( $args );

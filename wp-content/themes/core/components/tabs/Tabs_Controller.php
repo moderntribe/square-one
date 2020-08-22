@@ -25,16 +25,16 @@ class Tabs_Controller extends Abstract_Controller {
 	/**
 	 * @var Tab_Model[] The collection of tabs to render. Each item should be a \Tribe\Project\Templates\Models\Tab object.
 	 */
-	private array  $tabs;
-	private array  $classes;
-	private array  $attrs;
+	private array $tabs;
+	private array $classes;
+	private array $attrs;
 	private string $layout;
-	private array  $toggle_classes;
-	private array  $tab_button_classes;
-	private array  $tab_panel_classes;
+	private array $toggle_classes;
+	private array $tab_button_classes;
+	private array $tab_panel_classes;
 	private string $tablist_id;
-	private array  $tab_buttons = [];
-	private array  $tab_panels  = [];
+	private array $tab_buttons = [];
+	private array $tab_panels  = [];
 
 	/**
 	 * Controller constructor.

@@ -15,9 +15,9 @@ class Trackback_Controller extends Abstract_Controller {
 	public const ATTRS      = 'attrs';
 	public const LABEL      = 'label';
 
-	private int    $comment_id;
-	private array  $classes;
-	private array  $attrs;
+	private int $comment_id;
+	private array $classes;
+	private array $attrs;
 	private string $label;
 
 	public function __construct( array $args = [] ) {
