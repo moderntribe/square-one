@@ -8,6 +8,10 @@ use Tribe\Project\Templates\Components\blocks\links\Links_Block_Controller;
  */
 // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
 $c = Links_Block_Controller::factory( $args );
+
+if ( empty( $c->get_links() ) ) {
+	return;
+}
 ?>
 
 <section <?php echo $c->get_classes(); ?> <?php echo $c->get_attrs(); ?>>

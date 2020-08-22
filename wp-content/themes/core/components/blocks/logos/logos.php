@@ -9,7 +9,7 @@ use Tribe\Project\Templates\Components\blocks\logos\Logos_Block_Controller;
 // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
 $c = Logos_Block_Controller::factory( $args );
 
-if ( empty( $c->logos ) ) {
+if ( empty( $c->get_logos() ) ) {
 	return;
 }
 ?>

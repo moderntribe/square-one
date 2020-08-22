@@ -127,7 +127,7 @@ class Lead_Form_Block_Controller extends Abstract_Controller {
 	/**
 	 * @return array
 	 */
-	public function get_content_args(): array {
+	public function get_header_args(): array {
 		if ( empty( $this->title ) && empty( $this->description ) ) {
 			return [];
 		}

@@ -9,14 +9,15 @@ use Tribe\Libs\ACF\Block_Config;
 use Tribe\Project\Theme\Config\Image_Sizes;
 
 class Quote extends Block_Config {
-
 	public const NAME = 'quote';
 
-	public const IMAGE         = 'image';
-	public const QUOTE         = 'text';
-	public const CITE_NAME     = 'cite_name';
-	public const CITE_TITLE    = 'cite_title';
-	public const CITE_IMAGE    = 'cite_image';
+	public const IMAGE = 'image';
+
+	public const QUOTE      = 'text';
+	public const CITE_NAME  = 'cite_name';
+	public const CITE_TITLE = 'cite_title';
+	public const CITE_IMAGE = 'cite_image';
+
 	public const LAYOUT        = 'layout';
 	public const MEDIA_LEFT    = 'left';
 	public const MEDIA_RIGHT   = 'right';
@@ -48,7 +49,7 @@ class Quote extends Block_Config {
 				'preview_size'  => 'medium',
 				'instructions'  => __(
 					'Recommended image size by layout:<br>Overlay: 1920px wide with a 16:9 aspect ratio.<br>Left/Right: 1536px wide with a 4:3 aspect ratio.',
-					'tribe' 
+					'tribe'
 				),
 			] )
 		)->add_field( new Field( self::NAME . '_' . self::QUOTE, [

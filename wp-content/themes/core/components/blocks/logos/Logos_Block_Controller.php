@@ -220,6 +220,9 @@ class Logos_Block_Controller extends Abstract_Controller {
 	 */
 	public function get_logos(): array {
 		$component_args = [];
+		if ( empty( $this->logos ) ) {
+			return [];
+		}
 		foreach ( $this->logos as $logo ) {
 			// Don't add a logo if there's no image set in the block.
 			if ( empty( $logo[ Logos::LOGO_IMAGE ] ) ) {

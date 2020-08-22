@@ -16,7 +16,7 @@ $c = Stats_Block_Controller::factory( $args );
 		<?php get_template_part(
 			'components/content_block/content_block',
 			null,
-			$c->get_content_args()
+			$c->get_header_args()
 		) ?>
 
 		<div <?php echo $c->get_content_classes(); ?>>

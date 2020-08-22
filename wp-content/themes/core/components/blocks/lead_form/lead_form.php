@@ -17,7 +17,7 @@ $c = Lead_Form_Block_Controller::factory( $args );
 			<?php get_template_part(
 				'components/content_block/content_block',
 				null,
-				$c->get_content_args()
+				$c->get_header_args()
 			); ?>
 		<?php } ?>
 
