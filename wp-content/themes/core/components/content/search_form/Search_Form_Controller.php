@@ -14,7 +14,7 @@ class Search_Form_Controller extends Abstract_Controller {
 	public const PLACEHOLDER = 'placeholder';
 	public const LABEL       = 'label';
 
-	private array $classes;
+	private array  $classes;
 	private string $form_id;
 	private string $action;
 	private string $placeholder;

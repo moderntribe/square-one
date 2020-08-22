@@ -18,7 +18,7 @@ class Link_Controller extends Abstract_Controller {
 	/**
 	 * @var string|Deferred_Component
 	 */
-	private $content;
+	private        $content;
 	private string $url;
 	private string $target;
 	private string $aria_label;
@@ -45,6 +45,10 @@ class Link_Controller extends Abstract_Controller {
 			self::ATTRS      => [],
 			self::CONTENT    => '',
 		];
+	}
+
+	protected function required(): array {
+		return [];
 	}
 
 	public function get_classes(): string {

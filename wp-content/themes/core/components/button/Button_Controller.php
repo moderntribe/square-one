@@ -17,10 +17,10 @@ class Button_Controller extends Abstract_Controller {
 	/**
 	 * @var string|Deferred_Component
 	 */
-	private $content;
+	private        $content;
 	private string $type;
-	private array $classes;
-	private array $attrs;
+	private array  $classes;
+	private array  $attrs;
 	private string $aria_label;
 
 	public function __construct( array $args = [] ) {

@@ -3,15 +3,14 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Templates\Components\blocks\accordion;
 
+use PHP_CodeSniffer\Generators\Text;
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\accordion\Accordion_Controller;
+use Tribe\Project\Templates\Components\content_block\Content_Block_Controller;
+use Tribe\Project\Templates\Components\text\Text_Controller;
 
-/**
- * Class Accordion
- */
 class Accordion_Block_Controller extends Abstract_Controller {
-	public const LAYOUT            = 'layout';
 	public const ROWS              = 'rows';
 	public const HEADER            = 'header';
 	public const DESCRIPTION       = 'description';
@@ -19,18 +18,18 @@ class Accordion_Block_Controller extends Abstract_Controller {
 	public const CONTENT_CLASSES   = 'content_classes';
 	public const CLASSES           = 'classes';
 	public const ATTRS             = 'attrs';
-
-	public const LAYOUT_INLINE  = 'inline';
-	public const LAYOUT_STACKED = 'stacked';
+	public const LAYOUT            = 'layout';
+	public const LAYOUT_INLINE     = 'inline';
+	public const LAYOUT_STACKED    = 'stacked';
 
 	private string $layout;
-	private array $rows;
+	private array  $rows;
 	private string $header;
 	private string $description;
-	private array $container_classes;
-	private array $content_classes;
-	private array $classes;
-	private array $attrs;
+	private array  $container_classes;
+	private array  $content_classes;
+	private array  $classes;
+	private array  $attrs;
 
 	public function __construct( array $args = [] ) {
 		$args                    = $this->parse_args( $args );
@@ -111,17 +110,17 @@ class Accordion_Block_Controller extends Abstract_Controller {
 	 */
 	public function get_header_args(): array {
 		return [
-			'tag'     => 'header',
-			'title'   => defer_template_part( 'components/text/text', null, [
-				'content' => $this->header,
-				'tag'     => 'h2',
-				'classes' => [ 'b-accordion__title', 'h3' ],
+			Content_Block_Controller::TAG     => 'header',
+			Content_Block_Controller::TITLE   => defer_template_part( 'components/text/text', null, [
+				Text_Controller::CONTENT => $this->header,
+				Text_Controller::TAG     => 'h2',
+				Text_Controller::CLASSES => [ 'b-accordion__title', 'h3' ],
 			] ),
-			'content' => defer_template_part( 'components/text/text', null, [
-				'content' => $this->description,
-				'classes' => [ 'b-accordion__description', 't-sink', 's-sink' ],
+			Content_Block_Controller::CONTENT => defer_template_part( 'components/text/text', null, [
+				Text_Controller::CONTENT => $this->description,
+				Text_Controller::CLASSES => [ 'b-accordion__description', 't-sink', 's-sink' ],
 			] ),
-			'classes' => [ 'b-accordion__header' ],
+			Content_Block_Controller::CLASSES => [ 'b-accordion__header' ],
 		];
 	}
 

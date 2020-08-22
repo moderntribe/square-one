@@ -5,13 +5,13 @@ namespace Tribe\Project\Templates\Components\blocks\hero;
 
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
+use Tribe\Project\Templates\Components\container\Container_Controller;
+use Tribe\Project\Templates\Components\content_block\Content_Block_Controller;
+use Tribe\Project\Templates\Components\text\Text_Controller;
 use Tribe\Project\Templates\Components\Image\Image_Controller;
 use Tribe\Project\Templates\Models\Image;
 use Tribe\Project\Theme\Config\Image_Sizes;
 
-/**
- * Class Hero
- */
 class Hero_Block_Controller extends Abstract_Controller {
 	public const LAYOUT            = 'layout';
 	public const MEDIA             = 'media';
@@ -25,24 +25,24 @@ class Hero_Block_Controller extends Abstract_Controller {
 	public const CLASSES           = 'classes';
 	public const ATTRS             = 'attrs';
 
-	public string $layout;
-	public int $media;
-	public string $description;
-	public string $title;
-	public string $leadin;
-	public array $cta;
-	public array $container_classes;
-	public array $media_classes;
-	public array $content_classes;
-	public array $classes;
-	public array $attrs;
+	private string $layout;
+	private int    $media;
+	private string $description;
+	private string $title;
+	private string $leadin;
+	private array  $cta;
+	private array  $container_classes;
+	private array  $media_classes;
+	private array  $content_classes;
+	private array  $classes;
+	private array  $attrs;
 
 	/**
-	 *
 	 * @param array $args
 	 */
 	public function __construct( array $args = [] ) {
 		$args                    = $this->parse_args( $args );
+
 		$this->layout            = (string) $args[ self::LAYOUT ];
 		$this->media             = (int) $args[ self::MEDIA ];
 		$this->title             = (string) $args[ self::TITLE ];
@@ -61,49 +61,59 @@ class Hero_Block_Controller extends Abstract_Controller {
 	 */
 	protected function defaults(): array {
 		return [
-			'layout'            => 'left',
-			'media'             => [],
-			'title'             => '',
-			'description'       => '',
-			'leadin'            => '',
-			'cta'               => [],
-			'container_classes' => [ 'b-hero__container', 'l-container' ],
-			'media_classes'     => [ 'b-hero__media' ],
-			'content_classes'   => [ 'b-hero__content' ],
-			'classes'           => [
-				'c-block',
-				'b-hero',
-				'c-block--full-bleed',
-			],
-			'attrs'             => [],
+			self::LAYOUT            => 'left',
+			self::MEDIA             => [],
+			self::TITLE             => '',
+			self::DESCRIPTION       => '',
+			self::LEADIN            => '',
+			self::CTA               => [],
+			self::CONTAINER_CLASSES => [],
+			self::MEDIA_CLASSES     => [],
+			self::CONTENT_CLASSES   => [],
+			self::CLASSES           => [ 'c-block--full-bleed' ],
+			self::ATTRS             => [],
 		];
 	}
 
 	/**
-	 * @param array $args
-	 *
+	 * @return array
+	 */
+	protected function required(): array {
+		return [
+			self::CONTAINER_CLASSES => [ 'b-hero__container', 'l-container' ],
+			self::MEDIA_CLASSES     => [ 'b-hero__media' ],
+			self::CONTENT_CLASSES   => [ 'b-hero__content' ],
+			self::CLASSES           => [
+				'c-block',
+				'b-hero',
+			],
+		];
+	}
+
+	/**
 	 * @return array
 	 */
 	public function get_content_args(): array {
 		return [
-			'classes' => [ 'b-hero__content-container', 't-theme--light' ],
-			'leadin'  => defer_template_part( 'components/text/text', null, [
-				'content' => $this->leadin,
+			Content_Block_Controller::CLASSES => [
+				'b-hero__content-container',
+				't-theme--light',
+			],
+			Content_Block_Controller::LEADIN  => defer_template_part( 'components/text/text', null, [
+				Text_Controller::CONTENT => $this->leadin,
 			] ),
-			'title'   => defer_template_part( 'components/text/text', null, [
-				'content' => $this->title,
+			Content_Block_Controller::TITLE   => defer_template_part( 'components/text/text', null, [
+				Text_Controller::CONTENT => $this->title,
 			] ),
-			'content' => defer_template_part( 'components/container/container', null, [
-				'content' => $this->description,
+			Content_Block_Controller::CONTENT => defer_template_part( 'components/container/container', null, [
+				Container_Controller::CONTENT => $this->description,
 			] ),
-			'cta'     => defer_template_part( 'components/link/link', null, $this->cta ?? [] ),
-			'layout'  => $this->layout,
+			Content_Block_Controller::CTA     => defer_template_part( 'components/link/link', null, $this->cta ?? [] ),
+			Content_Block_Controller::LAYOUT  => $this->layout,
 		];
 	}
 
 	/**
-	 * @param $attachment_id
-	 *
 	 * @return array
 	 */
 	public function get_image_args(): array {
@@ -129,28 +139,28 @@ class Hero_Block_Controller extends Abstract_Controller {
 	/**
 	 * @return string
 	 */
-	public function container_classes(): string {
+	public function get_container_classes(): string {
 		return Markup_Utils::class_attribute( $this->container_classes );
 	}
 
 	/**
 	 * @return string
 	 */
-	public function media_classes(): string {
+	public function get_media_classes(): string {
 		return Markup_Utils::class_attribute( $this->media_classes );
 	}
 
 	/**
 	 * @return string
 	 */
-	public function content_classes(): string {
+	public function get_content_classes(): string {
 		return Markup_Utils::class_attribute( $this->content_classes );
 	}
 
 	/**
 	 * @return string
 	 */
-	public function classes(): string {
+	public function get_classes(): string {
 		$this->classes[] = 'c-block--' . $this->layout;
 
 		return Markup_Utils::class_attribute( $this->classes );
@@ -159,7 +169,7 @@ class Hero_Block_Controller extends Abstract_Controller {
 	/**
 	 * @return string
 	 */
-	public function attrs(): string {
+	public function get_attrs(): string {
 		return Markup_Utils::class_attribute( $this->attrs );
 	}
 }

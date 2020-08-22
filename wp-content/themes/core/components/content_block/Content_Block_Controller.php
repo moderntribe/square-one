@@ -27,8 +27,8 @@ class Content_Block_Controller extends Abstract_Controller {
 	public const LAYOUT_INLINE  = 'inline';
 
 	private string $tag;
-	private array $classes;
-	private array $attrs;
+	private array  $classes;
+	private array  $attrs;
 	private string $layout;
 	/**
 	 * @var Deferred_Component
@@ -50,7 +50,6 @@ class Content_Block_Controller extends Abstract_Controller {
 	 * @uses components/link
 	 */
 	private $cta;
-
 
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );

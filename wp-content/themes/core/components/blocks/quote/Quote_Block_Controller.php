@@ -11,9 +11,6 @@ use Tribe\Project\Templates\Components\Image\Image_Controller;
 use Tribe\Project\Templates\Models\Image;
 use Tribe\Project\Theme\Config\Image_Sizes;
 
-/**
- * Class Quote
- */
 class Quote_Block_Controller extends Abstract_Controller {
 
 	public const LAYOUT            = 'layout';

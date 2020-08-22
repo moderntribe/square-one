@@ -16,7 +16,7 @@ class Text_Controller extends Abstract_Controller {
 	/**
 	 * @var string|Deferred_Component
 	 */
-	private $content;
+	private        $content;
 	private string $tag;
 	private array  $classes;
 	private array  $attrs;
@@ -37,6 +37,10 @@ class Text_Controller extends Abstract_Controller {
 			self::ATTRS   => [],
 			self::CONTENT => '',
 		];
+	}
+
+	protected function required(): array {
+		return [];
 	}
 
 	public function get_tag(): string {

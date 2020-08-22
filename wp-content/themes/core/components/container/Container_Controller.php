@@ -14,8 +14,8 @@ class Container_Controller extends Abstract_Controller {
 	public const CONTENT = 'content';
 
 	private string $tag;
-	private array $classes;
-	private array $attrs;
+	private array  $classes;
+	private array  $attrs;
 	/**
 	 * @var string|Deferred_Component
 	 */
