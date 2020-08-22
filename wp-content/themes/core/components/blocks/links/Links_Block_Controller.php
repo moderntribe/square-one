@@ -29,12 +29,12 @@ class Links_Block_Controller extends Abstract_Controller {
 	private string $title;
 	private string $leadin;
 	private string $description;
-	private array  $cta;
-	private array  $container_classes;
-	private array  $content_classes;
-	private array  $classes;
-	private array  $attrs;
-	private array  $links;
+	private array $cta;
+	private array $container_classes;
+	private array $content_classes;
+	private array $classes;
+	private array $attrs;
+	private array $links;
 	private string $links_title;
 
 	/**

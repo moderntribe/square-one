@@ -25,15 +25,15 @@ class Logos_Block_Controller extends Abstract_Controller {
 	public const CTA               = 'cta';
 	public const LOGOS             = 'logos';
 
-	private array  $classes;
-	private array  $attrs;
+	private array $classes;
+	private array $attrs;
 	private string $title;
 	private string $leadin;
 	private string $description;
-	private array  $cta;
-	private array  $container_classes;
-	private array  $content_classes;
-	private array  $logos;
+	private array $cta;
+	private array $container_classes;
+	private array $content_classes;
+	private array $logos;
 
 	/**
 	 * @param array $args

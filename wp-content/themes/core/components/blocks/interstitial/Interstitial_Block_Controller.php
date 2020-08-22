@@ -26,15 +26,15 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 	public const CLASSES           = 'classes';
 	public const ATTRS             = 'attrs';
 
-	private string  $layout;
-	private int     $media;
-	private string  $title;
-	private array   $cta;
-	private array   $container_classes;
-	private array   $media_classes;
-	private array   $content_classes;
-	private array   $classes;
-	private array   $attrs;
+	private string $layout;
+	private int $media;
+	private string $title;
+	private array $cta;
+	private array $container_classes;
+	private array $media_classes;
+	private array $content_classes;
+	private array $classes;
+	private array $attrs;
 
 	/**
 	 * @param array $args

@@ -28,16 +28,16 @@ class Hero_Block_Controller extends Abstract_Controller {
 	public const ATTRS             = 'attrs';
 
 	private string $layout;
-	private int    $media;
+	private int $media;
 	private string $title;
 	private string $leadin;
 	private string $description;
-	private array  $cta;
-	private array  $container_classes;
-	private array  $media_classes;
-	private array  $content_classes;
-	private array  $classes;
-	private array  $attrs;
+	private array $cta;
+	private array $container_classes;
+	private array $media_classes;
+	private array $content_classes;
+	private array $classes;
+	private array $attrs;
 
 	/**
 	 * @param array $args
