@@ -26,6 +26,9 @@ class Tabs_Block_Controller extends Abstract_Controller {
 	private array $attrs;
 	private array $container_classes;
 
+	/**
+	 * @param array $args
+	 */
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
 

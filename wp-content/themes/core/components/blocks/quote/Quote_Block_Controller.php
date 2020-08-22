@@ -12,7 +12,6 @@ use Tribe\Project\Templates\Models\Image;
 use Tribe\Project\Theme\Config\Image_Sizes;
 
 class Quote_Block_Controller extends Abstract_Controller {
-
 	public const LAYOUT            = 'layout';
 	public const MEDIA             = 'media';
 	public const QUOTE_TEXT        = 'quote_text';
@@ -37,6 +36,9 @@ class Quote_Block_Controller extends Abstract_Controller {
 	private array $classes;
 	private array $attrs;
 
+	/**
+	 * @param array $args
+	 */
 	public function __construct( array $args = [] ) {
 		$args                    = $this->parse_args( $args );
 		$this->layout            = (string) $args[ self::LAYOUT ];

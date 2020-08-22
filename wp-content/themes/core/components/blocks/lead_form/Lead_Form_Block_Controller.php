@@ -7,12 +7,9 @@ use Tribe\Libs\Utils\Markup_Utils;
 use \Tribe\Project\Blocks\Types\Lead_Form\Lead_Form as Lead_Form_Block;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\content_block\Content_Block_Controller;
+use Tribe\Project\Templates\Components\text\Text_Controller;
 
-/**
- * Class Lead_Form
- */
-class Lead_Form_Controller extends Abstract_Controller {
-
+class Lead_Form_Block_Controller extends Abstract_Controller {
 	public const WIDTH             = 'width';
 	public const LAYOUT            = 'layout';
 	public const TITLE             = 'title';
@@ -27,14 +24,18 @@ class Lead_Form_Controller extends Abstract_Controller {
 	private string $layout;
 	private string $title;
 	private string $description;
-	private int $form;
-	private array $container_classes;
-	private array $form_classes;
-	private array $classes;
-	private array $attrs;
+	private int    $form;
+	private array  $container_classes;
+	private array  $form_classes;
+	private array  $classes;
+	private array  $attrs;
 
+	/**
+	 * @param array $args
+	 */
 	public function __construct( array $args = [] ) {
-		$args                    = $this->parse_args( $args );
+		$args = $this->parse_args( $args );
+
 		$this->layout            = $args[ self::LAYOUT ];
 		$this->width             = $args[ self::WIDTH ];
 		$this->title             = $args[ self::TITLE ];
@@ -115,32 +116,33 @@ class Lead_Form_Controller extends Abstract_Controller {
 		}
 
 		return [
-			'tag'     => 'header',
-			'classes' => [ 'b-lead-form__content' ],
-			'layout'  => $this->layout === Lead_Form_Block::LAYOUT_CENTER ? Content_Block_Controller::LAYOUT_CENTER : Content_Block_Controller::LAYOUT_LEFT,
-			'title'   => defer_template_part( 'components/text/text', null, $this->get_title_args() ),
-			'content' => defer_template_part( 'components/text/text', null, $this->get_description_args() ),
-		];
-	}
-
-	/**
-	 * @return array
-	 */
-	protected function get_title_args(): array {
-		return [
-			'tag'     => 'h2',
-			'classes' => [ 'b-lead-form__title', 'h3' ],
-			'content' => esc_html( $this->title ),
-		];
-	}
-
-	/**
-	 * @return array
-	 */
-	protected function get_description_args(): array {
-		return [
-			'classes' => [ 'b-lead-form__description', 't-sink', 's-sink' ],
-			'content' => esc_html( $this->description ),
+			Content_Block_Controller::TAG     => 'header',
+			Content_Block_Controller::CLASSES => [ 'b-lead-form__content' ],
+			Content_Block_Controller::LAYOUT  => $this->layout === Lead_Form_Block::LAYOUT_CENTER ? Content_Block_Controller::LAYOUT_CENTER : Content_Block_Controller::LAYOUT_LEFT,
+			Content_Block_Controller::TITLE   => defer_template_part(
+				'components/text/text',
+				null,
+				[
+					Text_Controller::TAG     => 'h2',
+					Text_Controller::CLASSES => [
+						'b-lead-form__title',
+						'h3',
+					],
+					Text_Controller::CONTENT => esc_html( $this->title ),
+				]
+			),
+			Content_Block_Controller::CONTENT => defer_template_part(
+				'components/text/text',
+				null,
+				[
+					Text_Controller::CLASSES => [
+						'b-lead-form__description',
+						't-sink',
+						's-sink',
+					],
+					Text_Controller::CONTENT => esc_html( $this->description ),
+				]
+			),
 		];
 	}
 

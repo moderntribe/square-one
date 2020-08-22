@@ -33,6 +33,9 @@ class Logos_Block_Controller extends Abstract_Controller {
 	public array $cta;
 	public array $logos;
 
+	/**
+	 * @param array $args
+	 */
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
 

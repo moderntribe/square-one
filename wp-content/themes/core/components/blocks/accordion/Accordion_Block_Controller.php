@@ -31,8 +31,12 @@ class Accordion_Block_Controller extends Abstract_Controller {
 	private array  $classes;
 	private array  $attrs;
 
+	/**
+	 * @param array $args
+	 */
 	public function __construct( array $args = [] ) {
-		$args                    = $this->parse_args( $args );
+		$args = $this->parse_args( $args );
+
 		$this->layout            = (string) $args[ self::LAYOUT ];
 		$this->rows              = (array) $args[ self::ROWS ];
 		$this->header            = (string) $args[ self::HEADER ];
@@ -111,15 +115,30 @@ class Accordion_Block_Controller extends Abstract_Controller {
 	public function get_header_args(): array {
 		return [
 			Content_Block_Controller::TAG     => 'header',
-			Content_Block_Controller::TITLE   => defer_template_part( 'components/text/text', null, [
-				Text_Controller::CONTENT => $this->header,
-				Text_Controller::TAG     => 'h2',
-				Text_Controller::CLASSES => [ 'b-accordion__title', 'h3' ],
-			] ),
-			Content_Block_Controller::CONTENT => defer_template_part( 'components/text/text', null, [
-				Text_Controller::CONTENT => $this->description,
-				Text_Controller::CLASSES => [ 'b-accordion__description', 't-sink', 's-sink' ],
-			] ),
+			Content_Block_Controller::TITLE   => defer_template_part(
+				'components/text/text',
+				null,
+				[
+					Text_Controller::CONTENT => $this->header,
+					Text_Controller::TAG     => 'h2',
+					Text_Controller::CLASSES => [
+						'b-accordion__title',
+						'h3',
+					],
+				]
+			),
+			Content_Block_Controller::CONTENT => defer_template_part(
+				'components/text/text',
+				null,
+				[
+					Text_Controller::CONTENT => $this->description,
+					Text_Controller::CLASSES => [
+						'b-accordion__description',
+						't-sink',
+						's-sink',
+					],
+				]
+			),
 			Content_Block_Controller::CLASSES => [ 'b-accordion__header' ],
 		];
 	}

@@ -1,12 +1,15 @@
 <?php
+declare( strict_types=1 );
 
-use Tribe\Project\Templates\Components\blocks\lead_form\Lead_Form_Controller;
+use Tribe\Project\Templates\Components\blocks\lead_form\Lead_Form_Block_Controller;
 
 /**
  * @var array $args Arguments passed to the template
  */
 // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
-$c = Lead_Form_Controller::factory( $args ); ?>
+$c = Lead_Form_Block_Controller::factory( $args );
+?>
+
 <section <?php echo $c->get_classes(); ?> <?php echo $c->get_attrs(); ?>>
 	<div <?php echo $c->get_container_classes(); ?>>
 

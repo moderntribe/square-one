@@ -1,4 +1,5 @@
 <?php
+declare( strict_types=1 );
 
 use Tribe\Project\Templates\Components\blocks\interstitial\Interstitial_Block_Controller;
 
@@ -9,11 +10,11 @@ use Tribe\Project\Templates\Components\blocks\interstitial\Interstitial_Block_Co
 $c = Interstitial_Block_Controller::factory( $args );
 ?>
 
-<section <?php echo $c->classes(); ?> <?php echo $c->attrs(); ?>>
-	<div <?php echo $c->container_classes(); ?>>
+<section <?php echo $c->get_classes(); ?> <?php echo $c->get_attrs(); ?>>
+	<div <?php echo $c->get_container_classes(); ?>>
 
 		<?php if ( $c->media ) { ?>
-			<div <?php echo $c->media_classes(); ?>>
+			<div <?php echo $c->get_media_classes(); ?>>
 				<?php get_template_part(
 					'components/image/image',
 					null,
@@ -22,12 +23,12 @@ $c = Interstitial_Block_Controller::factory( $args );
 			</div>
 		<?php } ?>
 
-		<?php if ( ! empty( $c->get_content() ) ) { ?>
-			<div <?php echo $c->content_classes(); ?>>
+		<?php if ( ! empty( $c->get_content_args() ) ) { ?>
+			<div <?php echo $c->get_content_classes(); ?>>
 				<?php get_template_part(
 					'components/content_block/content_block',
 					null,
-					$c->get_content()
+					$c->get_content_args()
 				); ?>
 			</div>
 		<?php } ?>

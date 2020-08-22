@@ -41,7 +41,7 @@ class Hero_Block_Controller extends Abstract_Controller {
 	 * @param array $args
 	 */
 	public function __construct( array $args = [] ) {
-		$args                    = $this->parse_args( $args );
+		$args = $this->parse_args( $args );
 
 		$this->layout            = (string) $args[ self::LAYOUT ];
 		$this->media             = (int) $args[ self::MEDIA ];
@@ -99,16 +99,32 @@ class Hero_Block_Controller extends Abstract_Controller {
 				'b-hero__content-container',
 				't-theme--light',
 			],
-			Content_Block_Controller::LEADIN  => defer_template_part( 'components/text/text', null, [
-				Text_Controller::CONTENT => $this->leadin,
-			] ),
-			Content_Block_Controller::TITLE   => defer_template_part( 'components/text/text', null, [
-				Text_Controller::CONTENT => $this->title,
-			] ),
-			Content_Block_Controller::CONTENT => defer_template_part( 'components/container/container', null, [
-				Container_Controller::CONTENT => $this->description,
-			] ),
-			Content_Block_Controller::CTA     => defer_template_part( 'components/link/link', null, $this->cta ?? [] ),
+			Content_Block_Controller::LEADIN  => defer_template_part(
+				'components/text/text',
+				null,
+				[
+					Text_Controller::CONTENT => $this->leadin,
+				]
+			),
+			Content_Block_Controller::TITLE   => defer_template_part(
+				'components/text/text',
+				null,
+				[
+					Text_Controller::CONTENT => $this->title,
+				]
+			),
+			Content_Block_Controller::CONTENT => defer_template_part(
+				'components/container/container',
+				null,
+				[
+					Container_Controller::CONTENT => $this->description,
+				]
+			),
+			Content_Block_Controller::CTA     => defer_template_part(
+				'components/link/link',
+				null,
+				$this->cta ?? []
+			),
 			Content_Block_Controller::LAYOUT  => $this->layout,
 		];
 	}

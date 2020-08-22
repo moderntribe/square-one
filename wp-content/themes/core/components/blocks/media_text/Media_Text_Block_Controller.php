@@ -40,6 +40,9 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 	private string $content;
 	private array $cta;
 
+	/**
+	 * @param array $args
+	 */
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
 

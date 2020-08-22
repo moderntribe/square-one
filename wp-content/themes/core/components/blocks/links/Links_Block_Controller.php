@@ -9,11 +9,7 @@ use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\content_block\Content_Block_Controller;
 use Tribe\Project\Templates\Components\Deferred_Component;
 
-/**
- * Class Links
- */
 class Links_Block_Controller extends Abstract_Controller {
-
 	public const LAYOUT            = 'layout';
 	public const DESCRIPTION       = 'description';
 	public const TITLE             = 'title';
@@ -34,6 +30,9 @@ class Links_Block_Controller extends Abstract_Controller {
 	private array $links;
 	private string $links_title;
 
+	/**
+	 * @param array $args
+	 */
 	public function __construct( array $args = [] ) {
 		$args                    = $this->parse_args( $args );
 		$this->layout            = (string) $args[ self::LAYOUT ];
