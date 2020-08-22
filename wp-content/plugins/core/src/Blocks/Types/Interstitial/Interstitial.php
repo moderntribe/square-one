@@ -11,6 +11,7 @@ class Interstitial extends Block_Config {
 	public const NAME = 'interstitial';
 
 	public const IMAGE = 'image';
+
 	public const TITLE = 'title';
 	public const CTA   = 'cta';
 

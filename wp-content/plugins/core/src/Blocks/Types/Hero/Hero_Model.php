@@ -8,7 +8,6 @@ use Tribe\Project\Templates\Components\blocks\hero\Hero_Block_Controller;
 use Tribe\Project\Templates\Components\link\Link_Controller;
 
 class Hero_Model extends Base_Model {
-
 	/**
 	 * @return array
 	 */

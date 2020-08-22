@@ -131,6 +131,7 @@ class Hero_Block_Controller extends Abstract_Controller {
 	 */
 	public function get_content_args(): array {
 		return [
+			Content_Block_Controller::TAG     => 'header',
 			Content_Block_Controller::LEADIN  => $this->get_leadin(),
 			Content_Block_Controller::TITLE   => $this->get_title(),
 			Content_Block_Controller::CONTENT => $this->get_content(),
@@ -138,7 +139,7 @@ class Hero_Block_Controller extends Abstract_Controller {
 			Content_Block_Controller::LAYOUT  => $this->layout,
 			Content_Block_Controller::CLASSES => [
 				'c-block__content-block',
-				'c-block__content',
+				'c-block__header',
 				'b-hero__content-container',
 				't-theme--light'
 			],

@@ -8,7 +8,6 @@ use Tribe\Project\Templates\Components\blocks\interstitial\Interstitial_Block_Co
 use Tribe\Project\Templates\Components\link\Link_Controller;
 
 class Interstitial_Model extends Base_Model {
-
 	/**
 	 * @return array
 	 */

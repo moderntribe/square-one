@@ -10,11 +10,13 @@ use Tribe\Libs\ACF\Field;
 class Hero extends Block_Config {
 	public const NAME = 'hero';
 
-	public const IMAGE         = 'image';
-	public const LEAD_IN       = 'leadin';
-	public const TITLE         = 'title';
-	public const DESCRIPTION   = 'description';
-	public const CTA           = 'cta';
+	public const IMAGE = 'image';
+
+	public const LEAD_IN     = 'leadin';
+	public const TITLE       = 'title';
+	public const DESCRIPTION = 'description';
+	public const CTA         = 'cta';
+
 	public const LAYOUT        = 'layout';
 	public const LAYOUT_LEFT   = 'left';
 	public const LAYOUT_CENTER = 'center';

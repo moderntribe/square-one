@@ -15,6 +15,7 @@ class Accordion extends Block_Config {
 	public const TITLE       = 'title';
 	public const DESCRIPTION = 'description';
 	public const CTA         = 'cta';
+
 	public const ACCORDION   = 'accordion';
 	public const ROW_HEADER  = 'row_header';
 	public const ROW_CONTENT = 'row_content';

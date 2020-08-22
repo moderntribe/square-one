@@ -9,7 +9,6 @@ use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Templates\Models\Accordion_Row;
 
 class Accordion_Model extends Base_Model {
-
 	/**
 	 * @return array
 	 */

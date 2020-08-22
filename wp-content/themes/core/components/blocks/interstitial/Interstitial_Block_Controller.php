@@ -128,12 +128,13 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 		}
 
 		return [
+			Content_Block_Controller::TAG     => 'header',
 			Content_Block_Controller::TITLE   => $this->get_title(),
 			Content_Block_Controller::CTA     => $this->get_cta(),
 			Content_Block_Controller::LAYOUT  => $this->layout,
 			Content_Block_Controller::CLASSES => [
 				'c-block__content-block',
-				'c-block__content',
+				'c-block__header',
 				'b-interstitial__content-container',
 				't-theme--light'
 			],
