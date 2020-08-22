@@ -13,7 +13,7 @@ class Hero_Model extends Base_Model {
 			'media'       => $this->get( Hero::IMAGE, 0 ),
 			'leadin'      => $this->get( Hero::LEAD_IN, '' ),
 			'title'       => $this->get( Hero::TITLE, '' ),
-			'description' => $this->get( Hero::DESCRIPTION, '' ),
+			'content' => $this->get( Hero::CONTENT, '' ),
 			'cta'         => $this->get_cta_args(),
 		];
 	}
