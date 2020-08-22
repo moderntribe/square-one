@@ -93,7 +93,7 @@ class Comment_Controller extends Abstract_Controller {
 	public function get_moderation_message_args() {
 		$status = wp_get_comment_status( $this->comment_id );
 		if ( 'unapproved' !== $status ) {
-			return '';
+			return [];
 		}
 
 		return [

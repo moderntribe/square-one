@@ -161,6 +161,9 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 		] );
 	}
 
+	/**
+	 * @return array
+	 */
 	private function get_cta_args(): array {
 		$cta = wp_parse_args( $this->cta, [
 			'text'   => '',
