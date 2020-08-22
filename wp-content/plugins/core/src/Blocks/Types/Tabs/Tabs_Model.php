@@ -4,47 +4,39 @@ declare( strict_types=1 );
 namespace Tribe\Project\Blocks\Types\Tabs;
 
 use Tribe\Project\Blocks\Types\Base_Model;
-use Tribe\Project\Blocks\Types\Tabs\Tabs as Tabs_Block;
-use Tribe\Project\Templates\Models\Tab as Tab_Model;
+use Tribe\Project\Templates\Components\link\Link_Controller;
+use Tribe\Project\Templates\Components\blocks\tabs\Tabs_Block_Controller;
 
-/**
- * Class Model
- *
- * @package Tribe\Project\Blocks\Types\Tabs
- */
 class Tabs_Model extends Base_Model {
-
 	/**
 	 * @return array
 	 */
 	public function get_data(): array {
 		return [
-			Tabs_Block::LAYOUT      => $this->get_layout(),
-			Tabs_Block::TITLE       => $this->get_title(),
-			Tabs_Block::DESCRIPTION => $this->get_description(),
-			Tabs_Block::TABS        => $this->get_tabs(),
+			Tabs_Block_Controller::LAYOUT      => $this->get( Tabs::LAYOUT, Tabs::LAYOUT_HORIZONTAL ),
+			Tabs_Block_Controller::TITLE       => $this->get( Tabs::TITLE, '' ),
+			Tabs_Block_Controller::LEADIN      => $this->get( Tabs::LEAD_IN, '' ),
+			Tabs_Block_Controller::DESCRIPTION => $this->get( Tabs::DESCRIPTION, '' ),
+			Tabs_Block_Controller::CTA         => $this->get_cta_args(),
+			Tabs_Block_Controller::TABS        => $this->get_tabs(),
 		];
 	}
 
 	/**
-	 * @return string
+	 * @return array
 	 */
-	private function get_layout(): string {
-		return $this->get( Tabs_Block::LAYOUT, Tabs_Block::LAYOUT_HORIZONTAL );
-	}
+	private function get_cta_args(): array {
+		$cta = wp_parse_args( $this->get( Tabs::CTA, [] ), [
+			'title'  => '',
+			'url'    => '',
+			'target' => '',
+		] );
 
-	/**
-	 * @return string
-	 */
-	private function get_title(): string {
-		return $this->get( Tabs_Block::TITLE, '' );
-	}
-
-	/**
-	 * @return string
-	 */
-	private function get_description(): string {
-		return $this->get( Tabs_Block::DESCRIPTION, '' );
+		return [
+			Link_Controller::CONTENT => $cta[ 'title' ],
+			Link_Controller::URL     => $cta[ 'url' ],
+			Link_Controller::TARGET  => $cta[ 'target' ],
+		];
 	}
 
 	/**
@@ -52,14 +44,14 @@ class Tabs_Model extends Base_Model {
 	 */
 	private function get_tabs(): array {
 		$tab_objects = [];
-		$tabs_data   = $this->get( Tabs_Block::TABS, [] );
+		$tabs_data   = $this->get( Tabs::TABS, [] );
 
 		if ( empty( $tabs_data ) ) {
 			return $tab_objects;
 		}
 
 		foreach ( $tabs_data as $tab ) {
-			$tab_objects[] = new Tab_Model( $tab[ Tabs_Block::TAB_LABEL ], $tab[ Tabs_Block::TAB_CONTENT ] );
+			$tab_objects[] = new Tab_Model( $tab[ Tabs::TAB_LABEL ], $tab[ Tabs::TAB_CONTENT ] );
 		}
 
 		return $tab_objects;
