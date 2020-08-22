@@ -7,6 +7,7 @@ use Tribe\Libs\Utils\Markup_Utils;
 use \Tribe\Project\Blocks\Types\Lead_Form\Lead_Form as Lead_Form_Block;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\content_block\Content_Block_Controller;
+use Tribe\Project\Templates\Components\Deferred_Component;
 use Tribe\Project\Templates\Components\text\Text_Controller;
 
 class Lead_Form_Block_Controller extends Abstract_Controller {
@@ -78,17 +79,6 @@ class Lead_Form_Block_Controller extends Abstract_Controller {
 	/**
 	 * @return string
 	 */
-	public function get_container_classes(): string {
-		if ( $this->width === Lead_Form_Block::WIDTH_FULL ) {
-			$this->container_classes[] = 'l-container';
-		}
-
-		return Markup_Utils::class_attribute( $this->container_classes );
-	}
-
-	/**
-	 * @return string
-	 */
 	public function get_classes(): string {
 		$this->classes[] = 'c-block--' . $this->layout;
 		$this->classes[] = 'c-block--' . $this->width;
@@ -106,6 +96,23 @@ class Lead_Form_Block_Controller extends Abstract_Controller {
 		return Markup_Utils::class_attribute( $this->attrs );
 	}
 
+	/**
+	 * @return string
+	 */
+	public function get_container_classes(): string {
+		if ( $this->width === Lead_Form_Block::WIDTH_FULL ) {
+			$this->container_classes[] = 'l-container';
+		}
+
+		return Markup_Utils::class_attribute( $this->container_classes );
+	}
+
+	/**
+	 * @return string
+	 */
+	public function get_form_classes(): string {
+		return Markup_Utils::class_attribute( $this->form_classes );
+	}
 
 	/**
 	 * @return array
@@ -119,31 +126,30 @@ class Lead_Form_Block_Controller extends Abstract_Controller {
 			Content_Block_Controller::TAG     => 'header',
 			Content_Block_Controller::CLASSES => [ 'b-lead-form__content' ],
 			Content_Block_Controller::LAYOUT  => $this->layout === Lead_Form_Block::LAYOUT_CENTER ? Content_Block_Controller::LAYOUT_CENTER : Content_Block_Controller::LAYOUT_LEFT,
-			Content_Block_Controller::TITLE   => defer_template_part(
-				'components/text/text',
-				null,
-				[
-					Text_Controller::TAG     => 'h2',
-					Text_Controller::CLASSES => [
-						'b-lead-form__title',
-						'h3',
-					],
-					Text_Controller::CONTENT => esc_html( $this->title ),
-				]
-			),
-			Content_Block_Controller::CONTENT => defer_template_part(
-				'components/text/text',
-				null,
-				[
-					Text_Controller::CLASSES => [
-						'b-lead-form__description',
-						't-sink',
-						's-sink',
-					],
-					Text_Controller::CONTENT => esc_html( $this->description ),
-				]
-			),
+			Content_Block_Controller::TITLE   => $this->get_title(),
+			Content_Block_Controller::CONTENT => $this->get_content(),
 		];
+	}
+
+	/**
+	 * @return Deferred_Component
+	 */
+	private function get_title(): Deferred_Component {
+		return defer_template_part( 'components/text/text', null, [
+			Text_Controller::TAG     => 'h2',
+			Text_Controller::CLASSES => [ 'b-lead-form__title', 'h3' ],
+			Text_Controller::CONTENT => $this->title ?? '',
+		] );
+	}
+
+	/**
+	 * @return Deferred_Component
+	 */
+	private function get_content(): Deferred_Component {
+		return defer_template_part( 'components/text/text', null, [
+			Text_Controller::CLASSES => [ 'b-lead-form__description', 't-sink', 's-sink' ],
+			Text_Controller::CONTENT => $this->description ?? '',
+		] );
 	}
 
 	/**
@@ -162,12 +168,5 @@ class Lead_Form_Block_Controller extends Abstract_Controller {
 		}
 
 		return gravity_form( $this->form, false, false, false, null, false, 1, false );
-	}
-
-	/**
-	 * @return string
-	 */
-	public function get_form_classes(): string {
-		return Markup_Utils::class_attribute( $this->form_classes );
 	}
 }

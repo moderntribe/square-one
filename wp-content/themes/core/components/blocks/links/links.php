@@ -1,4 +1,5 @@
 <?php
+declare( strict_types=1 );
 
 use Tribe\Project\Templates\Components\blocks\links\Links_Block_Controller;
 
@@ -11,7 +12,6 @@ $c = Links_Block_Controller::factory( $args );
 
 <section <?php echo $c->get_classes(); ?> <?php echo $c->get_attrs(); ?>>
 	<div <?php echo $c->get_container_classes(); ?>>
-
 
 		<?php get_template_part(
 			'components/content_block/content_block',
@@ -32,7 +32,11 @@ $c = Links_Block_Controller::factory( $args );
 				<ul class="b-links__list">
 					<?php foreach ( $c->get_links() as $link ) { ?>
 						<li class="b-links__list-item">
-							<?php get_template_part( 'components/link/link', null, $link ); ?>
+							<?php get_template_part(
+								'components/link/link',
+								null,
+								$link
+							); ?>
 						</li>
 					<?php } ?>
 				</ul>

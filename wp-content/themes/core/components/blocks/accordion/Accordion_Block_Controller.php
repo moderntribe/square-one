@@ -8,6 +8,7 @@ use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\accordion\Accordion_Controller;
 use Tribe\Project\Templates\Components\content_block\Content_Block_Controller;
+use Tribe\Project\Templates\Components\Deferred_Component;
 use Tribe\Project\Templates\Components\text\Text_Controller;
 
 class Accordion_Block_Controller extends Abstract_Controller {
@@ -115,32 +116,31 @@ class Accordion_Block_Controller extends Abstract_Controller {
 	public function get_header_args(): array {
 		return [
 			Content_Block_Controller::TAG     => 'header',
-			Content_Block_Controller::TITLE   => defer_template_part(
-				'components/text/text',
-				null,
-				[
-					Text_Controller::CONTENT => $this->header,
-					Text_Controller::TAG     => 'h2',
-					Text_Controller::CLASSES => [
-						'b-accordion__title',
-						'h3',
-					],
-				]
-			),
-			Content_Block_Controller::CONTENT => defer_template_part(
-				'components/text/text',
-				null,
-				[
-					Text_Controller::CONTENT => $this->description,
-					Text_Controller::CLASSES => [
-						'b-accordion__description',
-						't-sink',
-						's-sink',
-					],
-				]
-			),
+			Content_Block_Controller::TITLE   => $this->get_title(),
+			Content_Block_Controller::CONTENT => $this->get_content(),
 			Content_Block_Controller::CLASSES => [ 'b-accordion__header' ],
 		];
+	}
+
+	/**
+	 * @return Deferred_Component
+	 */
+	private function get_title(): Deferred_Component {
+		return defer_template_part( 'components/text/text', null, [
+			Text_Controller::TAG     => 'h2',
+			Text_Controller::CLASSES => [ 'b-accordion__title', 'h3' ],
+			Text_Controller::CONTENT => $this->header ?? '',
+		] );
+	}
+
+	/**
+	 * @return Deferred_Component
+	 */
+	private function get_content(): Deferred_Component {
+		return defer_template_part( 'components/text/text', null, [
+			Text_Controller::CLASSES => [ 'b-accordion__description', 't-sink', 's-sink' ],
+			Text_Controller::CONTENT => $this->description ?? '',
+		] );
 	}
 
 	/**
@@ -151,5 +151,4 @@ class Accordion_Block_Controller extends Abstract_Controller {
 			Accordion_Controller::ROWS => $this->rows,
 		];
 	}
-
 }

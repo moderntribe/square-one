@@ -7,6 +7,7 @@ use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\container\Container_Controller;
 use Tribe\Project\Templates\Components\content_block\Content_Block_Controller;
+use Tribe\Project\Templates\Components\Deferred_Component;
 use Tribe\Project\Templates\Components\text\Text_Controller;
 use Tribe\Project\Templates\Components\Image\Image_Controller;
 use Tribe\Project\Templates\Models\Image;
@@ -83,73 +84,24 @@ class Hero_Block_Controller extends Abstract_Controller {
 			self::CONTAINER_CLASSES => [ 'b-hero__container', 'l-container' ],
 			self::MEDIA_CLASSES     => [ 'b-hero__media' ],
 			self::CONTENT_CLASSES   => [ 'b-hero__content' ],
-			self::CLASSES           => [
-				'c-block',
-				'b-hero',
-			],
+			self::CLASSES           => [ 'c-block', 'b-hero' ],
 		];
 	}
 
 	/**
-	 * @return array
+	 * @return string
 	 */
-	public function get_content_args(): array {
-		return [
-			Content_Block_Controller::CLASSES => [
-				'b-hero__content-container',
-				't-theme--light',
-			],
-			Content_Block_Controller::LEADIN  => defer_template_part(
-				'components/text/text',
-				null,
-				[
-					Text_Controller::CONTENT => $this->leadin,
-				]
-			),
-			Content_Block_Controller::TITLE   => defer_template_part(
-				'components/text/text',
-				null,
-				[
-					Text_Controller::CONTENT => $this->title,
-				]
-			),
-			Content_Block_Controller::CONTENT => defer_template_part(
-				'components/container/container',
-				null,
-				[
-					Container_Controller::CONTENT => $this->description,
-				]
-			),
-			Content_Block_Controller::CTA     => defer_template_part(
-				'components/link/link',
-				null,
-				$this->cta ?? []
-			),
-			Content_Block_Controller::LAYOUT  => $this->layout,
-		];
+	public function get_classes(): string {
+		$this->classes[] = 'c-block--' . $this->layout;
+
+		return Markup_Utils::class_attribute( $this->classes );
 	}
 
 	/**
-	 * @return array
+	 * @return string
 	 */
-	public function get_image_args(): array {
-		if ( empty( $this->media ) ) {
-			return [];
-		}
-
-		return [
-			Image_Controller::ATTACHMENT   => Image::factory( (int) $this->media ),
-			Image_Controller::AS_BG        => true,
-			Image_Controller::USE_LAZYLOAD => true,
-			Image_Controller::WRAPPER_TAG  => 'div',
-			Image_Controller::CLASSES      => [ 'b-hero__figure' ],
-			Image_Controller::IMG_CLASSES  => [ 'b-hero__img', 'c-image__bg' ],
-			Image_Controller::SRC_SIZE     => Image_Sizes::CORE_FULL,
-			Image_Controller::SRCSET_SIZES => [
-				Image_Sizes::CORE_FULL,
-				Image_Sizes::CORE_MOBILE,
-			],
-		];
+	public function get_attrs(): string {
+		return Markup_Utils::class_attribute( $this->attrs );
 	}
 
 	/**
@@ -174,18 +126,75 @@ class Hero_Block_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return string
+	 * @return array
 	 */
-	public function get_classes(): string {
-		$this->classes[] = 'c-block--' . $this->layout;
-
-		return Markup_Utils::class_attribute( $this->classes );
+	public function get_content_args(): array {
+		return [
+			Content_Block_Controller::CLASSES => [ 'b-hero__content-container', 't-theme--light' ],
+			Content_Block_Controller::LEADIN  => $this->get_leadin(),
+			Content_Block_Controller::TITLE   => $this->get_title(),
+			Content_Block_Controller::CONTENT => $this->get_content(),
+			Content_Block_Controller::CTA     => $this->get_cta(),
+			Content_Block_Controller::LAYOUT  => $this->layout,
+		];
 	}
 
 	/**
-	 * @return string
+	 * @return Deferred_Component
 	 */
-	public function get_attrs(): string {
-		return Markup_Utils::class_attribute( $this->attrs );
+	private function get_leadin(): Deferred_Component {
+		return defer_template_part( 'components/text/text', null, [
+			Text_Controller::CONTENT => $this->leadin ?? '',
+		] );
+	}
+
+	/**
+	 * @return Deferred_Component
+	 */
+	private function get_title(): Deferred_Component {
+		return defer_template_part( 'components/text/text', null, [
+			Text_Controller::TAG     => 'h2',
+			Text_Controller::CLASSES => [ 'b-interstitial__title', 'h3' ],
+			Text_Controller::CONTENT => $this->title ?? '',
+		] );
+	}
+
+	/**
+	 * @return Deferred_Component
+	 */
+	private function get_content(): Deferred_Component {
+		return defer_template_part( 'components/container/container', null, [
+			Container_Controller::CONTENT => $this->description ?? '',
+		] );
+	}
+
+	/**
+	 * @return Deferred_Component
+	 */
+	private function get_cta(): Deferred_Component {
+		return defer_template_part( 'components/link/link', null, $this->cta ?? [] );
+	}
+
+	/**
+	 * @return array
+	 */
+	public function get_image_args(): array {
+		if ( empty( $this->media ) ) {
+			return [];
+		}
+
+		return [
+			Image_Controller::ATTACHMENT   => Image::factory( (int) $this->media ),
+			Image_Controller::AS_BG        => true,
+			Image_Controller::USE_LAZYLOAD => true,
+			Image_Controller::WRAPPER_TAG  => 'div',
+			Image_Controller::CLASSES      => [ 'b-hero__figure' ],
+			Image_Controller::IMG_CLASSES  => [ 'b-hero__img', 'c-image__bg' ],
+			Image_Controller::SRC_SIZE     => Image_Sizes::CORE_FULL,
+			Image_Controller::SRCSET_SIZES => [
+				Image_Sizes::CORE_FULL,
+				Image_Sizes::CORE_MOBILE,
+			],
+		];
 	}
 }

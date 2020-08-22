@@ -9,6 +9,7 @@ use \Tribe\Project\Templates\Components\blocks\tabs\Tabs_Block_Controller;
 // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
 $c = Tabs_Block_Controller::factory( $args );
 ?>
+
 <section <?php echo $c->classes(); ?> <?php echo $c->attrs(); ?>>
 	<div <?php echo $c->container_classes(); ?>>
 		<?php get_template_part( 'components/content_block/content_block', null, $c->get_header_args() ); ?>

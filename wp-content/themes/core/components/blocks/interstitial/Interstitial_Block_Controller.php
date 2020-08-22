@@ -8,6 +8,7 @@ use Tribe\Project\Blocks\Types\Interstitial\Interstitial as Interstitial_Block;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\container\Container_Controller;
 use Tribe\Project\Templates\Components\content_block\Content_Block_Controller;
+use Tribe\Project\Templates\Components\Deferred_Component;
 use Tribe\Project\Templates\Components\text\Text_Controller;
 use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Templates\Components\Image\Image_Controller;
@@ -84,6 +85,22 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 	/**
 	 * @return string
 	 */
+	public function get_classes(): string {
+		$this->classes[] = 'c-block--' . $this->layout;
+
+		return Markup_Utils::class_attribute( $this->classes );
+	}
+
+	/**
+	 * @return string
+	 */
+	public function get_attrs(): string {
+		return Markup_Utils::class_attribute( $this->attrs );
+	}
+
+	/**
+	 * @return string
+	 */
 	public function get_container_classes(): string {
 		return Markup_Utils::class_attribute( $this->container_classes );
 	}
@@ -103,22 +120,6 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return string
-	 */
-	public function get_classes(): string {
-		$this->classes[] = 'c-block--' . $this->layout;
-
-		return Markup_Utils::class_attribute( $this->classes );
-	}
-
-	/**
-	 * @return string
-	 */
-	public function get_attrs(): string {
-		return Markup_Utils::class_attribute( $this->attrs );
-	}
-
-	/**
 	 * @return array
 	 */
 	public function get_content_args(): array {
@@ -127,29 +128,40 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 		}
 
 		return [
-			Content_Block_Controller::CLASSES => [
-				'b-interstitial__content-container',
-				't-theme--light',
-			],
-			Content_Block_Controller::TITLE   => defer_template_part(
-				'components/text/text',
-				null,
-				[
-					Text_Controller::TAG     => 'h2',
-					Text_Controller::CLASSES => [ 'b-interstitial__title', 'h3' ],
-					Text_Controller::CONTENT => esc_html( $this->content ),
-				]
-			),
-			Content_Block_Controller::CTA     => defer_template_part(
-				'components/container/container',
-				null,
-				$this->get_cta_args()
-			),
+			Content_Block_Controller::CLASSES => [ 'b-interstitial__content-container', 't-theme--light' ],
+			Content_Block_Controller::TITLE   => $this->get_title(),
+			Content_Block_Controller::CTA     => $this->get_cta(),
 			Content_Block_Controller::LAYOUT  => $this->layout,
 		];
 	}
 
-	protected function get_cta_args(): array {
+	/**
+	 * @return Deferred_Component
+	 */
+	private function get_title(): Deferred_Component {
+		return defer_template_part( 'components/text/text', null, [
+			Text_Controller::TAG     => 'h2',
+			Text_Controller::CLASSES => [ 'b-interstitial__title', 'h3' ],
+			Text_Controller::CONTENT => $this->title ?? '',
+		] );
+	}
+
+	/**
+	 * @return Deferred_Component
+	 */
+	private function get_cta(): Deferred_Component {
+		return defer_template_part( 'components/container/container', null, [
+			Container_Controller::CONTENT => defer_template_part(
+				'components/link/link',
+				null,
+				$this->get_cta_args()
+			),
+			Container_Controller::TAG     => 'p',
+			Container_Controller::CLASSES => [ 'b-interstitial__cta' ],
+		] );
+	}
+
+	private function get_cta_args(): array {
 		$cta = wp_parse_args( $this->cta, [
 			'text'   => '',
 			'url'    => '',
@@ -160,25 +172,11 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 			return [];
 		}
 
-		$cta_args = [
+		return [
 			Link_Controller::URL     => $cta['url'],
 			Link_Controller::CONTENT => $cta['text'] ?: $cta['url'],
 			Link_Controller::TARGET  => $cta['target'],
-			Link_Controller::CLASSES => [
-				'a-btn',
-				'a-btn--has-icon-after',
-				'icon-arrow-right',
-			],
-		];
-
-		return [
-			Container_Controller::CONTENT => defer_template_part(
-				'components/link/link',
-				null,
-				$cta_args
-			),
-			Container_Controller::TAG     => 'p',
-			Container_Controller::CLASSES => [ 'b-interstitial__cta' ],
+			Link_Controller::CLASSES => [ 'a-btn', 'a-btn--has-icon-after', 'icon-arrow-right' ],
 		];
 	}
 
