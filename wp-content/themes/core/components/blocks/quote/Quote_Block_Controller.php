@@ -25,22 +25,23 @@ class Quote_Block_Controller extends Abstract_Controller {
 	public const ATTRS             = 'attrs';
 
 	private string $layout;
-	private int $media;
+	private int    $media;
 	private string $cite_name;
 	private string $cite_title;
-	private int $cite_image;
+	private int    $cite_image;
 	private string $quote_text;
-	private array $container_classes;
-	private array $media_classes;
-	private array $content_classes;
-	private array $classes;
-	private array $attrs;
+	private array  $container_classes;
+	private array  $media_classes;
+	private array  $content_classes;
+	private array  $classes;
+	private array  $attrs;
 
 	/**
 	 * @param array $args
 	 */
 	public function __construct( array $args = [] ) {
-		$args                    = $this->parse_args( $args );
+		$args = $this->parse_args( $args );
+
 		$this->layout            = (string) $args[ self::LAYOUT ];
 		$this->media             = (int) $args[ self::MEDIA ];
 		$this->cite_name         = (string) $args[ self::CITE_NAME ];
@@ -88,6 +89,22 @@ class Quote_Block_Controller extends Abstract_Controller {
 	/**
 	 * @return string
 	 */
+	public function get_classes(): string {
+		$this->classes[] = 'c-block--' . $this->layout;
+
+		return Markup_Utils::class_attribute( $this->classes );
+	}
+
+	/**
+	 * @return string
+	 */
+	public function get_attrs(): string {
+		return Markup_Utils::class_attribute( $this->attrs );
+	}
+
+	/**
+	 * @return string
+	 */
 	public function get_container_classes(): string {
 		return Markup_Utils::class_attribute( $this->container_classes );
 	}
@@ -107,35 +124,6 @@ class Quote_Block_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return string
-	 */
-	public function get_classes(): string {
-		$this->classes[] = 'c-block--' . $this->layout;
-
-		return Markup_Utils::class_attribute( $this->classes );
-	}
-
-	/**
-	 * @return string
-	 */
-	public function get_attrs(): string {
-		return Markup_Utils::class_attribute( $this->attrs );
-	}
-
-	/**
-	 * @param array $args
-	 *
-	 * @return array
-	 */
-	public function get_media_args(): array {
-		if ( ! $this->has_image() ) {
-			return [];
-		}
-
-		return $this->get_image( $this->media );
-	}
-
-	/**
 	 * @return bool
 	 */
 	public function has_image(): bool {
@@ -143,13 +131,15 @@ class Quote_Block_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @param $attachment_id
-	 *
 	 * @return array
 	 */
-	protected function get_image( $attachment_id ): array {
+	public function get_media_args(): array {
+		if ( ! $this->has_image() ) {
+			return [];
+		}
+
 		return [
-			Image_Controller::ATTACHMENT   => Image::factory( (int) $attachment_id ),
+			Image_Controller::ATTACHMENT   => Image::factory( (int) $this->media ),
 			Image_Controller::AS_BG        => true,
 			Image_Controller::USE_LAZYLOAD => true,
 			Image_Controller::WRAPPER_TAG  => 'div',
