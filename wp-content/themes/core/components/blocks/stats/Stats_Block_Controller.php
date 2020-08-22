@@ -6,19 +6,18 @@ namespace Tribe\Project\Templates\Components\blocks\stats;
 use Tribe\Libs\Utils\Markup_Utils;
 use \Tribe\Project\Blocks\Types\Stats\Stats as Stats_Block;
 use Tribe\Project\Templates\Components\Abstract_Controller;
+use Tribe\Project\Templates\Components\Deferred_Component;
 use Tribe\Project\Templates\Models\Statistic as Statistic_Model;
 use \Tribe\Project\Templates\Components\statistic\Statistic_Controller as Statistic;
-use \Tribe\Project\Templates\Components\content_block\Content_Block_Controller_Controller;
+use \Tribe\Project\Templates\Components\content_block\Content_Block_Controller;
+use \Tribe\Project\Templates\Components\text\Text_Controller;
 
-/**
- * Class Hero
- */
 class Stats_Block_Controller extends Abstract_Controller {
 	public const LAYOUT            = 'layout';
 	public const DISPLAY_DIVIDERS  = 'display_dividers';
 	public const CONTENT_ALIGN     = 'content_align';
 	public const TITLE             = 'title';
-	public const DESCRIPTION       = 'description';
+	public const CONTENT           = 'content';
 	public const CONTAINER_CLASSES = 'container_classes';
 	public const CONTENT_CLASSES   = 'content_classes';
 	public const CLASSES           = 'classes';
@@ -29,16 +28,15 @@ class Stats_Block_Controller extends Abstract_Controller {
 	 * @var Statistic_Model[] The collection of stats to render. Each item should be a \Tribe\Project\Templates\Models\Statistic object.
 	 */
 	private array $stats;
-
 	public string $layout;
 	public string $content_align;
 	public string $display_dividers;
 	public string $title;
-	public string $description;
-	public array $container_classes;
-	public array $content_classes;
-	public array $classes;
-	public array $attrs;
+	public string $content;
+	public array  $container_classes;
+	public array  $content_classes;
+	public array  $classes;
+	public array  $attrs;
 
 	/**
 	 * @param array $args
@@ -50,7 +48,7 @@ class Stats_Block_Controller extends Abstract_Controller {
 		$this->content_align     = (string) $args[ self::CONTENT_ALIGN ];
 		$this->display_dividers  = (string) $args[ self::DISPLAY_DIVIDERS ];
 		$this->title             = (string) $args[ self::TITLE ];
-		$this->description       = (string) $args[ self::DESCRIPTION ];
+		$this->content           = (string) $args[ self::CONTENT ];
 		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
 		$this->content_classes   = (array) $args[ self::CONTENT_CLASSES ];
 		$this->classes           = (array) $args[ self::CLASSES ];
@@ -69,7 +67,7 @@ class Stats_Block_Controller extends Abstract_Controller {
 			self::CONTENT_ALIGN     => Stats_Block::CONTENT_ALIGN_LEFT,
 			self::DISPLAY_DIVIDERS  => Stats_Block::DISPLAY_DIVIDERS,
 			self::TITLE             => '',
-			self::DESCRIPTION       => '',
+			self::CONTENT           => '',
 			self::CONTAINER_CLASSES => [],
 			self::CONTENT_CLASSES   => [],
 			self::CLASSES           => [],
@@ -90,25 +88,71 @@ class Stats_Block_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @param array $args
-	 *
+	 * @return string
+	 */
+	public function get_classes(): string {
+		$this->classes[] = 'b-stats--layout-' . $this->layout;
+
+		if ( $this->display_dividers ) {
+			$this->classes[] = 'b-stats--display_dividers';
+		}
+
+		return Markup_Utils::class_attribute( $this->classes );
+	}
+
+	/**
+	 * @return string
+	 */
+	public function get_attrs(): string {
+		return Markup_Utils::concat_attrs( $this->attrs );
+	}
+
+	/**
+	 * @return string
+	 */
+	public function get_container_classes(): string {
+		return Markup_Utils::class_attribute( $this->container_classes );
+	}
+
+	/**
+	 * @return string
+	 */
+	public function get_content_classes(): string {
+		return Markup_Utils::class_attribute( $this->content_classes );
+	}
+
+	/**
 	 * @return array
 	 */
 	public function get_content_args(): array {
 		return [
-			'tag'     => 'header',
-			'classes' => [ 'b-stats__header' ],
-			'title'   => defer_template_part( 'components/text/text', null, [
-				'content' => $this->title,
-				'tag'     => 'h2',
-				'classes' => [ 'b-stats__title', 'h3' ],
-			] ),
-			'content' => defer_template_part( 'components/text/text', null, [
-				'content' => $this->description,
-				'classes' => [ 'b-stats__description', 't-sink', 's-sink' ],
-			] ),
-			'layout'  => Stats_Block::CONTENT_ALIGN_CENTER === $this->content_align ? Content_Block_Controller::LAYOUT_CENTER : Content_Block_Controller::LAYOUT_STACKED,
+			Content_Block_Controller::TAG     => 'header',
+			Content_Block_Controller::CLASSES => [ 'b-stats__header' ],
+			Content_Block_Controller::TITLE   => $this->get_title(),
+			Content_Block_Controller::CONTENT => $this->get_content(),
+			Content_Block_Controller::LAYOUT  => Stats_Block::CONTENT_ALIGN_CENTER === $this->content_align ? Content_Block_Controller::LAYOUT_CENTER : Content_Block_Controller::LAYOUT_STACKED,
 		];
+	}
+
+	/**
+	 * @return Deferred_Component
+	 */
+	private function get_title(): Deferred_Component {
+		return defer_template_part( 'components/text/text', null, [
+			Text_Controller::TAG     => 'h2',
+			Text_Controller::CLASSES => [ 'b-stats__title', 'h3' ],
+			Text_Controller::CONTENT => $this->title ?? '',
+		] );
+	}
+
+	/**
+	 * @return Deferred_Component
+	 */
+	private function get_content(): Deferred_Component {
+		return defer_template_part( 'components/text/text', null, [
+			Text_Controller::CLASSES => [ 'b-stats__description', 't-sink', 's-sink' ],
+			Text_Controller::CONTENT => $this->content ?? '',
+		] );
 	}
 
 	/**
@@ -134,9 +178,9 @@ class Stats_Block_Controller extends Abstract_Controller {
 	 *
 	 * @return array
 	 */
-	protected function get_value_args( Statistic_Model $item ): array {
+	private function get_value_args( Statistic_Model $item ): array {
 		return [
-			'content' => esc_html( $item->value ),
+			Text_Controller::CONTENT => esc_html( $item->value ),
 		];
 	}
 
@@ -145,43 +189,9 @@ class Stats_Block_Controller extends Abstract_Controller {
 	 *
 	 * @return array
 	 */
-	protected function get_label_args( Statistic_Model $item ): array {
+	private function get_label_args( Statistic_Model $item ): array {
 		return [
-			'content' => esc_html( $item->label ),
+			Text_Controller::CONTENT => esc_html( $item->label ),
 		];
-	}
-
-	/**
-	 * @return string
-	 */
-	public function container_classes(): string {
-		return Markup_Utils::class_attribute( $this->container_classes );
-	}
-
-	/**
-	 * @return string
-	 */
-	public function content_classes(): string {
-		return Markup_Utils::class_attribute( $this->content_classes );
-	}
-
-	/**
-	 * @return string
-	 */
-	public function classes(): string {
-		$this->classes[] = 'b-stats--layout-' . $this->layout;
-
-		if ( $this->display_dividers ) {
-			$this->classes[] = 'b-stats--display_dividers';
-		}
-
-		return Markup_Utils::class_attribute( $this->classes );
-	}
-
-	/**
-	 * @return string
-	 */
-	public function attrs(): string {
-		return Markup_Utils::concat_attrs( $this->attrs );
 	}
 }
