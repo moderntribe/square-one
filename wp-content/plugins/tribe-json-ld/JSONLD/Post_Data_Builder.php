@@ -3,7 +3,6 @@
 
 namespace JSONLD;
 
-
 class Post_Data_Builder extends Data_Builder {
 	protected function build_data() {
 		/** @var \WP_Post $post */
@@ -54,16 +53,17 @@ class Post_Data_Builder extends Data_Builder {
 	 * @return string
 	 */
 	protected function get_post_description( $post ) {
-		if( class_exists( 'WPSEO_Frontend' ) ){
-			$object = \WPSEO_Frontend::get_instance();
-			$excerpt = $object->metadesc( false );
-			if( empty( $excerpt ) ){
-				$excerpt = $post->post_excerpt;
-			}
-			return $excerpt;
-		} else {
-			return $post->post_excerpt;
+		$description = '';
+
+		if ( function_exists('YoastSEO') ) {
+			$description = YoastSEO()->meta->for_current_page()->description;
 		}
+
+		if ( empty( $description ) ) {
+			$description = $post->post_excerpt;
+		}
+
+		return $description;
 	}
 
 	/**
@@ -71,9 +71,8 @@ class Post_Data_Builder extends Data_Builder {
 	 * @return string
 	 */
 	protected function get_post_title( $post ) {
-		if( class_exists( 'WPSEO_Frontend' ) ){
-			$object = \WPSEO_Frontend::get_instance();
-			return $object->title( false );
+		if ( function_exists('YoastSEO') ) {
+			return YoastSEO()->meta->for_current_page()->title;
 		} else {
 			return get_the_title( $post );
 		}
@@ -133,7 +132,7 @@ class Post_Data_Builder extends Data_Builder {
 	protected function get_author_name( $post ) {
 
 		$user_info = get_userdata( $post->post_author );
-		if( ! empty( $user_info->first_name ) && ! empty( $user_info->last_name ) ){
+		if ( ! empty( $user_info->first_name ) && ! empty( $user_info->last_name ) ) {
 			$name = sprintf( '%s %s', $user_info->first_name, $user_info->last_name );
 		} else {
 			$name = $user_info->display_name;
@@ -155,7 +154,6 @@ class Post_Data_Builder extends Data_Builder {
 		}
 
 		return $item_type;
-
 	}
 
 }
