@@ -1,6 +1,9 @@
 <?php
 declare( strict_types=1 );
-$c = \Tribe\Project\Templates\Components\routes\page\Controller::factory();
+
+use \Tribe\Project\Templates\Components\routes\page\Page_Controller;
+
+$c = Page_Controller::factory();
 
 $c->render_header();
 ?>
@@ -11,8 +14,10 @@ $c->render_header();
 
 		<?php get_template_part( 'components/header/subheader/subheader' ); ?>
 
-		<div class="t-sink s-sink l-sink l-sink--double">
-			<?php the_content(); ?>
+		<div class="l-container">
+
+			<?php get_template_part( 'components/content/page/index/index' ); ?>
+
 		</div>
 
 	</main>

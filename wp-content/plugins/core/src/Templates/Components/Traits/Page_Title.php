@@ -4,7 +4,7 @@ declare( strict_types=1 );
 namespace Tribe\Project\Templates\Components\Traits;
 
 trait Page_Title {
-	public function page_title(): string {
+	public function get_page_title(): string {
 		if ( is_front_page() ) {
 			return '';
 		}

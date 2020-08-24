@@ -1,15 +1,17 @@
 <?php
 declare( strict_types=1 );
 
+use \Tribe\Project\Templates\Components\share\Share_Controller;
+
 /**
  * @var array $args Arguments passed to the template
  */
 // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
-$c = \Tribe\Project\Templates\Components\share\Controller::factory( $args );
+$c = Share_Controller::factory( $args );
 ?>
-<aside class="social-share">
+<div class="social-share">
 
-	<h6 class="social-share__title"><?php esc_html_e( 'Share This', 'tribe' );?></h6>
+	<p class="social-share__title"><?php esc_html_e( 'Share This', 'tribe' );?></p>
 
 	<ul class="social-share-networks" data-js="social-share-networks">
 		<?php foreach ( $c->get_links() as $link ) { ?>
@@ -18,4 +20,4 @@ $c = \Tribe\Project\Templates\Components\share\Controller::factory( $args );
 			</li>
 		<?php } ?>
 	</ul>
-</aside>
+</div>

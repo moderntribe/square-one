@@ -10,9 +10,10 @@ use Tribe\Libs\ACF\Field;
 class Interstitial extends Block_Config {
 	public const NAME = 'interstitial';
 
-	public const IMAGE       = 'image';
-	public const DESCRIPTION = 'description';
-	public const CTA         = 'cta';
+	public const IMAGE = 'image';
+
+	public const TITLE = 'title';
+	public const CTA   = 'cta';
 
 	public const LAYOUT        = 'layout';
 	public const LAYOUT_LEFT   = 'left';
@@ -30,25 +31,22 @@ class Interstitial extends Block_Config {
 	}
 
 	protected function add_fields() {
-		$this->add_field(
-			new Field( self::NAME . '_' . self::IMAGE, [
-				'label'        => __( 'Background Image', 'tribe' ),
-				'name'         => self::IMAGE,
-				'type'         => 'image',
-				'return_format' => 'id',
-				'instructions' => __( 'Recommended image size: 1440px wide', 'tribe' ),
-			] )
-		)->add_field(
-			new Field( self::NAME . '_' . self::DESCRIPTION, [
-				'label' => __( 'Description', 'tribe' ),
-				'name'  => self::DESCRIPTION,
+		$this->add_field( new Field( self::NAME . '_' . self::TITLE, [
+				'label' => __( 'Title', 'tribe' ),
+				'name'  => self::TITLE,
 				'type'  => 'textarea',
 			] )
-		)->add_field(
-			new Field( self::NAME . '_' . self::CTA, [
+		)->add_field( new Field( self::NAME . '_' . self::CTA, [
 				'label' => __( 'Call to Action', 'tribe' ),
 				'name'  => self::CTA,
 				'type'  => 'link',
+			] )
+		)->add_field( new Field( self::NAME . '_' . self::IMAGE, [
+				'label'         => __( 'Background Image', 'tribe' ),
+				'name'          => self::IMAGE,
+				'type'          => 'image',
+				'return_format' => 'id',
+				'instructions'  => __( 'Recommended image size: 1440px wide', 'tribe' ),
 			] )
 		);
 	}

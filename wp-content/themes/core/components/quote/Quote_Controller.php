@@ -4,6 +4,7 @@ namespace Tribe\Project\Templates\Components\quote;
 
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Libs\Utils\Markup_Utils;
+use Tribe\Project\Templates\Components\Image\Image_Controller;
 use Tribe\Project\Templates\Models\Image;
 use Tribe\Project\Theme\Config\Image_Sizes;
 
@@ -15,12 +16,12 @@ class Quote_Controller extends Abstract_Controller {
 	public const CITE_TITLE = 'cite_title';
 	public const CITE_IMAGE = 'cite_image';
 
-	private array $classes;
-	private array $attrs;
+	private array  $classes;
+	private array  $attrs;
 	private string $quote_text;
 	private string $cite_name;
 	private string $cite_title;
-	private int $cite_image;
+	private int    $cite_image;
 
 	public function __construct( array $args = [] ) {
 		$args             = $this->parse_args( $args );
@@ -67,11 +68,11 @@ class Quote_Controller extends Abstract_Controller {
 		}
 
 		return [
-			'attachment'      => Image::factory( (int) $this->cite_image ),
-			'wrapper_tag'     => 'span',
-			'wrapper_classes' => [ 'c-quote__cite-figure' ],
-			'img_classes'     => [ 'c-quote__cite-image' ],
-			'src_size'        => Image_Sizes::SQUARE_XSMALL,
+			Image_Controller::ATTACHMENT  => Image::factory( (int) $this->cite_image ),
+			Image_Controller::WRAPPER_TAG => 'span',
+			Image_Controller::CLASSES     => [ 'c-quote__cite-figure' ],
+			Image_Controller::IMG_CLASSES => [ 'c-quote__cite-image' ],
+			Image_Controller::SRC_SIZE    => Image_Sizes::SQUARE_XSMALL,
 		];
 	}
 
@@ -92,6 +93,5 @@ class Quote_Controller extends Abstract_Controller {
 	public function get_cite_title() {
 		return $this->cite_title;
 	}
-
 
 }

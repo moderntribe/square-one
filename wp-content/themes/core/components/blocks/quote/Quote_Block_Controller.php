@@ -7,14 +7,11 @@ use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Blocks\Types\Quote\Quote as Quote_Block;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\quote\Quote_Controller;
+use Tribe\Project\Templates\Components\Image\Image_Controller;
 use Tribe\Project\Templates\Models\Image;
 use Tribe\Project\Theme\Config\Image_Sizes;
 
-/**
- * Class Quote
- */
 class Quote_Block_Controller extends Abstract_Controller {
-
 	public const LAYOUT            = 'layout';
 	public const MEDIA             = 'media';
 	public const QUOTE_TEXT        = 'quote_text';
@@ -28,19 +25,23 @@ class Quote_Block_Controller extends Abstract_Controller {
 	public const ATTRS             = 'attrs';
 
 	private string $layout;
-	private int $media;
+	private int    $media;
 	private string $cite_name;
 	private string $cite_title;
-	private int $cite_image;
+	private int    $cite_image;
 	private string $quote_text;
-	private array $container_classes;
-	private array $media_classes;
-	private array $content_classes;
-	private array $classes;
-	private array $attrs;
+	private array  $container_classes;
+	private array  $media_classes;
+	private array  $content_classes;
+	private array  $classes;
+	private array  $attrs;
 
+	/**
+	 * @param array $args
+	 */
 	public function __construct( array $args = [] ) {
-		$args                    = $this->parse_args( $args );
+		$args = $this->parse_args( $args );
+
 		$this->layout            = (string) $args[ self::LAYOUT ];
 		$this->media             = (int) $args[ self::MEDIA ];
 		$this->cite_name         = (string) $args[ self::CITE_NAME ];
@@ -88,6 +89,22 @@ class Quote_Block_Controller extends Abstract_Controller {
 	/**
 	 * @return string
 	 */
+	public function get_classes(): string {
+		$this->classes[] = 'c-block--' . $this->layout;
+
+		return Markup_Utils::class_attribute( $this->classes );
+	}
+
+	/**
+	 * @return string
+	 */
+	public function get_attrs(): string {
+		return Markup_Utils::class_attribute( $this->attrs );
+	}
+
+	/**
+	 * @return string
+	 */
 	public function get_container_classes(): string {
 		return Markup_Utils::class_attribute( $this->container_classes );
 	}
@@ -107,35 +124,6 @@ class Quote_Block_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return string
-	 */
-	public function get_classes(): string {
-		$this->classes[] = 'c-block--' . $this->layout;
-
-		return Markup_Utils::class_attribute( $this->classes );
-	}
-
-	/**
-	 * @return string
-	 */
-	public function get_attrs(): string {
-		return Markup_Utils::class_attribute( $this->attrs );
-	}
-
-	/**
-	 * @param array $args
-	 *
-	 * @return array
-	 */
-	public function get_media_args(): array {
-		if ( ! $this->has_image() ) {
-			return [];
-		}
-
-		return $this->get_image( $this->media );
-	}
-
-	/**
 	 * @return bool
 	 */
 	public function has_image(): bool {
@@ -143,20 +131,22 @@ class Quote_Block_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @param $attachment_id
-	 *
 	 * @return array
 	 */
-	protected function get_image( $attachment_id ): array {
+	public function get_media_args(): array {
+		if ( ! $this->has_image() ) {
+			return [];
+		}
+
 		return [
-			'attachment'    => Image::factory( (int) $attachment_id ),
-			'as_bg'         => true,
-			'use_lazyload'  => true,
-			'wrapper_tag'   => 'div',
-			'wrapper_class' => [ 'b-quote__figure' ],
-			'image_classes' => [ 'b-quote__img', 'c-image__bg' ],
-			'src_size'      => Image_Sizes::SIXTEEN_NINE,
-			'srcset_size'   => [
+			Image_Controller::ATTACHMENT   => Image::factory( (int) $this->media ),
+			Image_Controller::AS_BG        => true,
+			Image_Controller::USE_LAZYLOAD => true,
+			Image_Controller::WRAPPER_TAG  => 'div',
+			Image_Controller::CLASSES      => [ 'b-quote__figure' ],
+			Image_Controller::IMG_CLASSES  => [ 'b-quote__img', 'c-image__bg' ],
+			Image_Controller::SRC_SIZE     => Image_Sizes::SIXTEEN_NINE,
+			Image_Controller::SRCSET_SIZES => [
 				Image_Sizes::SIXTEEN_NINE_SMALL,
 				Image_Sizes::SIXTEEN_NINE,
 				Image_Sizes::SIXTEEN_NINE_LARGE,

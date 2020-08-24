@@ -1,4 +1,5 @@
 <?php
+declare( strict_types=1 );
 
 use Tribe\Project\Templates\Components\blocks\quote\Quote_Block_Controller;
 

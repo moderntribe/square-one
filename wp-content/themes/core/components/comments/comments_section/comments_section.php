@@ -1,11 +1,13 @@
 <?php
 declare( strict_types=1 );
 
+use \Tribe\Project\Templates\Components\comments\comments_section\Comments_Section_Controller;
+
 /**
  * @var array $args Arguments passed to the template
  */
 // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
-$c = \Tribe\Project\Templates\Components\comments\comments_section\Comments_Section_Controller::factory();
+$c = Comments_Section_Controller::factory();
 if ( post_password_required() ) {
 	return;
 }
@@ -15,14 +17,19 @@ if ( post_password_required() ) {
 
 	<?php if ( have_comments() ) { ?>
 
-		<h6 class="comments__title h4"><?php echo $c->get_title(); ?></h6>
+		<h6 class="comments__title h4">
+			<?php echo $c->get_title(); ?>
+		</h6>
 
 		<ol class="comments__list">
 			<?php echo $c->get_comments(); ?>
 		</ol>
 
-		<?php echo $c->get_pagination(); ?>
-
+		<?php get_template_part(
+			'components/pagination/comments/comments',
+			null,
+			$c->get_pagination_args()
+		); ?>
 
 		<?php if ( ! comments_open() && ! pings_open() ) { ?>
 			<p class="comments__none">

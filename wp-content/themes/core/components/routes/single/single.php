@@ -1,6 +1,9 @@
 <?php
 declare( strict_types=1 );
-$c = \Tribe\Project\Templates\Components\routes\single\Controller::factory();
+
+use \Tribe\Project\Templates\Components\routes\single\Single_Controller;
+
+$c = Single_Controller::factory();
 
 $c->render_header();
 ?>

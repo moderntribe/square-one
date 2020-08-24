@@ -1,9 +1,14 @@
 <?php
 declare( strict_types=1 );
-$c = \Tribe\Project\Templates\Components\routes\example_app\Controller::factory();
 
-get_template_part( 'components/document/header/header');
+use \Tribe\Project\Templates\Components\routes\example_app\Example_App_Controller;
+
+$c = Example_App_Controller::factory();
+
+$c->render_header();
 ?>
-<div data-js="example-app" class="l-container s-sink t-sink"></div>
+
+	<div data-js="example-app" class="l-container s-sink t-sink"></div>
+
 <?php
-get_template_part('components/document/footer/footer');
+$c->render_footer();

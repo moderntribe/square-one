@@ -7,9 +7,6 @@ use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\comments\Comment_Edit_Link;
 
-/**
- * Class Trackback
- */
 class Trackback_Controller extends Abstract_Controller {
 	use Comment_Edit_Link;
 
@@ -51,29 +48,29 @@ class Trackback_Controller extends Abstract_Controller {
 	/**
 	 * @return string
 	 */
-	public function classes(): string {
+	public function get_classes(): string {
 		return Markup_Utils::class_attribute( get_comment_class( $this->classes ) );
 	}
 
 	/**
 	 * @return string
 	 */
-	public function attributes(): string {
+	public function get_attrs(): string {
 		$attrs       = $this->attrs;
 		$attrs['id'] = sprintf( 'comment-%d', $this->comment_id );
 
 		return Markup_Utils::concat_attrs( $attrs );
 	}
 
-	public function edit_link(): string {
+	public function get_edit_link(): string {
 		return $this->build_edit_link( __( '(Edit)', 'tribe' ) );
 	}
 
-	public function label(): string {
+	public function get_label(): string {
 		return $this->label;
 	}
 
-	public function trackback_link(): string {
+	public function get_trackback_link(): string {
 		return get_comment_author_link( $this->comment_id );
 	}
 

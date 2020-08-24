@@ -1,51 +1,51 @@
 <?php
 declare( strict_types=1 );
 
+use \Tribe\Project\Templates\Components\slider\Slider_Controller;
+
 /**
  * @var array $args Arguments passed to the template
  */
 // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
-$c = \Tribe\Project\Templates\Components\slider\Controller::factory( $args );
+$c = Slider_Controller::factory( $args );
 
-if ( empty( $c->slides ) ) {
+if ( empty( $c->get_slides() ) ) {
 	return;
 }
 ?>
 
-<div <?php echo $c->classes(); ?>>
+<div <?php echo $c->get_classes(); ?>>
 
-	<div
-		<?php echo $c->main_classes(); ?>
-		<?php echo $c->main_attributes(); ?>
-	>
-		<div <?php echo $c->wrapper_classes(); ?>>
-			<?php foreach ( $c->slides as $slide ) { ?>
-				<div <?php echo $c->slide_classes(); ?>>
+	<div <?php echo $c->get_main_classes(); ?> <?php echo $c->get_main_attrs(); ?>>
+
+		<div <?php echo $c->get_wrapper_classes(); ?>>
+			<?php foreach ( $c->get_slides() as $slide ) { ?>
+				<div <?php echo $c->get_slide_classes(); ?>>
 					<?php echo $slide; ?>
 				</div>
 			<?php } ?>
 		</div>
 
-		<?php if ( $c->show_arrows ) { ?>
+		<?php if ( $c->should_show_arrows() ) { ?>
 			<div class="c-slider__arrows">
 				<div class="c-slider__button c-slider__button--prev swiper-button-prev"></div>
 				<div class="c-slider__button c-slider__button--next swiper-button-next"></div>
 			</div>
 		<?php } ?>
 
-		<?php if ( $c->show_pagination ) { ?>
+		<?php if ( $c->should_show_pagination() ) { ?>
 			<div class="c-slider__pagination swiper-pagination" data-js="c-slider-pagination"></div>
 		<?php } ?>
 
 	</div>
 
-	<?php if ( $c->show_carousel && ! empty( $c->carousel_slides ) ) { ?>
+	<?php if ( $c->should_show_carousel() && ! empty( $c->get_carousel_slides() ) ) { ?>
 		<div
 			class="c-slider__carousel swiper-container"
-			<?php echo $c->carousel_attributes(); ?>
+			<?php echo $c->get_carousel_attrs(); ?>
 		>
 			<div class="swiper-wrapper">
-				<?php foreach ( $c->carousel_slides as $index => $slide  ) { ?>
+				<?php foreach ( $c->get_carousel_slides() as $index => $slide  ) { ?>
 					<button
 						class="c-slider__thumbnail swiper-slide"
 						data-js="c-slider-thumb-trigger"

@@ -9,13 +9,13 @@ use Tribe\Project\Templates\Components\blocks\logos\Logos_Block_Controller;
 // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
 $c = Logos_Block_Controller::factory( $args );
 
-if ( empty( $c->logos ) ) {
+if ( empty( $c->get_logos() ) ) {
 	return;
 }
 ?>
 
-<section <?php echo $c->classes(); ?><?php echo $c->attributes(); ?>>
-	<div <?php echo $c->container_classes(); ?><?php echo $c->container_attrs(); ?>>
+<section <?php echo $c->get_classes(); ?><?php echo $c->get_attrs(); ?>>
+	<div <?php echo $c->get_container_classes(); ?>>
 
 		<?php get_template_part(
 			'components/content_block/content_block',
@@ -23,10 +23,14 @@ if ( empty( $c->logos ) ) {
 			$c->get_header_args()
 		); ?>
 
-		<ul <?php echo $c->content_classes(); ?>>
+		<ul <?php echo $c->get_content_classes(); ?>>
 			<?php foreach ( $c->get_logos() as $logo ) { ?>
 				<li class="b-logo">
-					<?php get_template_part( 'components/image/image', null, $logo ); ?>
+					<?php get_template_part(
+						'components/image/image',
+						null,
+						$logo
+					); ?>
 				</li>
 			<?php } ?>
 		</ul>

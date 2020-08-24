@@ -7,16 +7,18 @@ use Tribe\Libs\ACF\Block;
 use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Field;
 use Tribe\Libs\ACF\Repeater;
-use Tribe\Project\Blocks\Types\Stats\Support\Statistic;
 
 class Stats extends Block_Config {
 	public const NAME = 'stats';
 
-	public const TITLE        = 'title';
-	public const DESCRIPTION  = 'description';
-	public const STATS        = 'stats';
-	public const ROW_VALUE   = 'row_value';
-	public const ROW_LABEL   = 'row_label';
+	public const LEAD_IN     = 'leadin';
+	public const TITLE       = 'title';
+	public const DESCRIPTION = 'description';
+	public const CTA         = 'cta';
+
+	public const STATS     = 'stats';
+	public const ROW_VALUE = 'row_value';
+	public const ROW_LABEL = 'row_label';
 
 	public const LAYOUT         = 'layout';
 	public const LAYOUT_INLINE  = 'inline';
@@ -44,14 +46,22 @@ class Stats extends Block_Config {
 				'name'  => self::TITLE,
 				'type'  => 'text',
 			] )
-		)->add_field(
-			new Field( self::NAME . '_' . self::DESCRIPTION, [
+		)->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
+				'label' => __( 'Lead in', 'tribe' ),
+				'name'  => self::LEAD_IN,
+				'type'  => 'text',
+			] )
+		)->add_field( new Field( self::NAME . '_' . self::DESCRIPTION, [
 				'label'        => __( 'Description', 'tribe' ),
 				'name'         => self::DESCRIPTION,
 				'type'         => 'wysiwyg',
 				'toolbar'      => 'basic',
 				'media_upload' => 0,
-				'delay'        => 1,
+			] )
+		)->add_field( new Field( self::NAME . '_' . self::CTA, [
+				'label' => __( 'Call to Action', 'tribe' ),
+				'name'  => self::CTA,
+				'type'  => 'link',
 			] )
 		)->add_field(
 			$this->get_stats_section()
