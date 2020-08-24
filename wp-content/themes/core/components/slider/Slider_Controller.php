@@ -25,52 +25,52 @@ class Slider_Controller extends Abstract_Controller {
 	private array $wrapper_classes;
 	private array $slide_classes;
 	private array $slides;
-	private bool $show_arrows;
-	private bool $show_pagination;
-	private bool $show_carousel;
+	private bool  $show_arrows;
+	private bool  $show_pagination;
+	private bool  $show_carousel;
 	private array $carousel_attrs;
 	private array $carousel_slides;
 
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
 
-		$this->classes         = (array) $args['classes'];
-		$this->main_classes    = (array) $args['main_classes'];
-		$this->main_attrs      = (array) $args['main_attrs'];
-		$this->wrapper_classes = (array) $args['wrapper_classes'];
-		$this->slide_classes   = (array) $args['slide_classes'];
-		$this->slides          = (array) $args['slides'];
-		$this->show_arrows     = (bool) $args['show_arrows'];
-		$this->show_pagination = (bool) $args['show_pagination'];
-		$this->show_carousel   = (bool) $args['show_carousel'];
-		$this->carousel_attrs  = (array) $args['carousel_attrs'];
-		$this->carousel_slides = (array) $args['carousel_slides'];
+		$this->classes         = (array) $args[ self::CLASSES ];
+		$this->main_classes    = (array) $args[ self::MAIN_CLASSES ];
+		$this->main_attrs      = (array) $args[ self::MAIN_ATTRS ];
+		$this->wrapper_classes = (array) $args[ self::WRAPPER_CLASSES ];
+		$this->slide_classes   = (array) $args[ self::SLIDE_CLASSES ];
+		$this->slides          = (array) $args[ self::SLIDES ];
+		$this->show_arrows     = (bool) $args[ self::SHOW_ARROWS ];
+		$this->show_pagination = (bool) $args[ self::SHOW_PAGINATION ];
+		$this->show_carousel   = (bool) $args[ self::SHOW_CAROUSEL ];
+		$this->carousel_attrs  = (array) $args[ self::CAROUSEL_ATTRS ];
+		$this->carousel_slides = (array) $args[ self::CAROUSEL_SLIDES ];
 	}
 
 	protected function defaults(): array {
 		return [
-			'classes'         => [],
-			'main_classes'    => [],
-			'main_attrs'      => [],
-			'wrapper_classes' => [],
-			'slide_classes'   => [],
-			'slides'          => [],
-			'show_arrows'     => true,
-			'show_pagination' => false,
-			'show_carousel'   => false,
-			'carousel_attrs'  => [],
-			'carousel_slides' => [],
+			self::CLASSES         => [],
+			self::MAIN_CLASSES    => [],
+			self::MAIN_ATTRS      => [],
+			self::WRAPPER_CLASSES => [],
+			self::SLIDE_CLASSES   => [],
+			self::SLIDES          => [],
+			self::SHOW_ARROWS     => true,
+			self::SHOW_PAGINATION => false,
+			self::SHOW_CAROUSEL   => false,
+			self::CAROUSEL_ATTRS  => [],
+			self::CAROUSEL_SLIDES => [],
 		];
 	}
 
 	protected function required(): array {
 		return [
-			'classes'         => [ 'c-slider' ],
-			'main_classes'    => [ 'c-slider__main', 'swiper-container' ],
-			'main_attrs'      => [ 'data-js' => 'c-slider' ],
-			'wrapper_classes' => [ 'c-slider__wrapper', 'swiper-wrapper' ],
-			'slide_classes'   => [ 'c-slider__slide', 'swiper-slide' ],
-			'carousel_attrs'  => [ 'data-js' => 'c-slider-carousel' ],
+			self::CLASSES         => [ 'c-slider' ],
+			self::MAIN_CLASSES    => [ 'c-slider__main', 'swiper-container' ],
+			self::MAIN_ATTRS      => [ 'data-js' => 'c-slider' ],
+			self::WRAPPER_CLASSES => [ 'c-slider__wrapper', 'swiper-wrapper' ],
+			self::SLIDE_CLASSES   => [ 'c-slider__slide', 'swiper-slide' ],
+			self::CAROUSEL_ATTRS  => [ 'data-js' => 'c-slider-carousel' ],
 		];
 	}
 

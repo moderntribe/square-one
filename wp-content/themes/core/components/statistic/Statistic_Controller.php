@@ -16,9 +16,9 @@ class Statistic_Controller extends Abstract_Controller {
 	public const VALUE   = 'value';
 	public const LABEL   = 'label';
 
-	private string $tag;
-	private array $classes;
-	private array $attrs;
+	private string             $tag;
+	private array              $classes;
+	private array              $attrs;
 	private Deferred_Component $value;
 	private Deferred_Component $label;
 

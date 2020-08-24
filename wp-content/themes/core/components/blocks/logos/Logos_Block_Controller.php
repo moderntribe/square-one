@@ -6,7 +6,9 @@ namespace Tribe\Project\Templates\Components\blocks\logos;
 use Tribe\Project\Blocks\Types\Logos\Logos;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Libs\Utils\Markup_Utils;
+use Tribe\Project\Templates\Components\container\Container_Controller;
 use Tribe\Project\Templates\Components\content_block\Content_Block_Controller;
+use Tribe\Project\Templates\Components\text\Text_Controller;
 use Tribe\Project\Templates\Components\Deferred_Component;
 use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Templates\Components\Image\Image_Controller;
@@ -16,34 +18,37 @@ class Logos_Block_Controller extends Abstract_Controller {
 	public const CLASSES           = 'classes';
 	public const ATTRS             = 'attrs';
 	public const CONTAINER_CLASSES = 'container_classes';
-	public const CONTAINER_ATTRS   = 'container_attrs';
 	public const CONTENT_CLASSES   = 'content_classes';
 	public const TITLE             = 'title';
-	public const CONTENT           = 'content';
+	public const LEADIN            = 'leadin';
+	public const DESCRIPTION       = 'description';
 	public const CTA               = 'cta';
 	public const LOGOS             = 'logos';
 
-	public array $classes;
-	public array $attrs;
-	public string $title;
-	public string $content;
-	public array $container_classes;
-	public array $container_attrs;
-	public array $content_classes;
-	public array $cta;
-	public array $logos;
+	private array  $classes;
+	private array  $attrs;
+	private string $title;
+	private string $leadin;
+	private string $description;
+	private array  $cta;
+	private array  $container_classes;
+	private array  $content_classes;
+	private array  $logos;
 
+	/**
+	 * @param array $args
+	 */
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
 
 		$this->classes           = (array) $args[ self::CLASSES ];
 		$this->attrs             = (array) $args[ self::ATTRS ];
 		$this->title             = (string) $args[ self::TITLE ];
-		$this->content           = (string) $args[ self::CONTENT ];
-		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
-		$this->container_attrs   = (array) $args[ self::CONTAINER_ATTRS ];
-		$this->content_classes   = (array) $args[ self::CONTENT_CLASSES ];
+		$this->leadin            = (string) $args[ self::LEADIN ];
+		$this->description       = (string) $args[ self::DESCRIPTION ];
 		$this->cta               = (array) $args[ self::CTA ];
+		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
+		$this->content_classes   = (array) $args[ self::CONTENT_CLASSES ];
 		$this->logos             = (array) $args[ self::LOGOS ];
 	}
 
@@ -52,11 +57,11 @@ class Logos_Block_Controller extends Abstract_Controller {
 			self::CLASSES           => [],
 			self::ATTRS             => [],
 			self::TITLE             => '',
-			self::CONTENT           => '',
+			self::LEADIN            => '',
+			self::DESCRIPTION       => '',
 			self::CTA               => [],
 			self::LOGOS             => [],
 			self::CONTAINER_CLASSES => [],
-			self::CONTAINER_ATTRS   => [],
 			self::CONTENT_CLASSES   => [],
 		];
 	}
@@ -69,84 +74,155 @@ class Logos_Block_Controller extends Abstract_Controller {
 		];
 	}
 
-	public function classes(): string {
-		return Markup_Utils::class_attribute( $this->classes );
-	}
-
-	public function attributes(): string {
-		return Markup_Utils::concat_attrs( $this->attrs );
-	}
-
 	/**
-	 * @return array
+	 * @return string
 	 */
-	public function get_header_args(): array {
-		return [
-			'tag'     => 'header',
-			'classes' => [ 'b-logos__header' ],
-			'layout'  => Content_Block_Controller::LAYOUT_LEFT,
-			'title'   => $this->get_title(),
-			'content' => $this->get_content(),
-			'cta'     => defer_template_part( 'components/container/container', null, [
-				'tag'     => 'p',
-				'classes' => [ 'b-logos__cta' ],
-				'content' => $this->get_cta(),
-			] ),
-		];
-	}
-
-	private function get_title(): Deferred_Component {
-		return defer_template_part( 'components/text/text', null, [
-			'classes' => [ 'b-logos__title', 'h3' ],
-			'content' => $this->title,
-		] );
-	}
-
-	public function get_content(): Deferred_Component {
-		return defer_template_part( 'components/text/text', null, [
-			'classes' => [ 'b-logos__description' ],
-			'content' => $this->content,
-		] );
+	public function get_classes(): string {
+		return Markup_Utils::class_attribute( $this->classes );
 	}
 
 	/**
 	 * @return string
 	 */
-	public function container_classes(): string {
+	public function get_attrs(): string {
+		return Markup_Utils::concat_attrs( $this->attrs );
+	}
+
+	/**
+	 * @return string
+	 */
+	public function get_container_classes(): string {
 		return Markup_Utils::class_attribute( $this->container_classes );
 	}
 
 	/**
 	 * @return string
 	 */
-	public function container_attrs(): string {
-		return Markup_Utils::concat_attrs( $this->container_attrs );
-	}
-
-	/**
-	 * @return string
-	 */
-	public function content_classes(): string {
+	public function get_content_classes(): string {
 		$this->content_classes[] = sprintf( 'b-logos--count-%d', count( $this->logos ) );
 
 		return Markup_Utils::class_attribute( $this->content_classes );
 	}
 
-	public function get_cta(): string {
-		if ( empty( $this->cta[ 'url' ] ) ) {
-			return '';
+	/**
+	 * @return array
+	 */
+	public function get_header_args(): array {
+		if ( empty( $this->title ) && empty( $this->description ) ) {
+			return [];
 		}
 
-		return tribe_template_part( 'components/link/link', null, [
-			Link_Controller::CLASSES => [ 'a-btn', 'a-btn--has-icon-after', 'icon-arrow-right' ],
-			Link_Controller::URL     => $this->cta[ 'url' ],
-			Link_Controller::TARGET  => $this->cta[ 'target' ],
-			Link_Controller::CONTENT => $this->cta[ 'content' ],
+		return [
+			Content_Block_Controller::TAG     => 'header',
+			Content_Block_Controller::LEADIN  => $this->get_leadin(),
+			Content_Block_Controller::TITLE   => $this->get_title(),
+			Content_Block_Controller::CONTENT => $this->get_content(),
+			Content_Block_Controller::CTA     => $this->get_cta(),
+			Content_Block_Controller::LAYOUT  => Content_Block_Controller::LAYOUT_LEFT,
+			Content_Block_Controller::CLASSES => [
+				'c-block__content-block',
+				'c-block__header',
+				'b-logos__header'
+			],
+		];
+	}
+
+	/**
+	 * @return Deferred_Component
+	 */
+	private function get_leadin(): Deferred_Component {
+		return defer_template_part( 'components/text/text', null, [
+			Text_Controller::CLASSES => [
+				'c-block__leadin',
+				'b-logos__leadin'
+			],
+			Text_Controller::CONTENT => $this->leadin ?? '',
 		] );
 	}
 
-	public function get_logos() {
+	/**
+	 * @return Deferred_Component
+	 */
+	private function get_title(): Deferred_Component {
+		return defer_template_part( 'components/text/text', null, [
+			Text_Controller::TAG     => 'h2',
+			Text_Controller::CLASSES => [
+				'c-block__title',
+				'b-logos__title',
+				'h3'
+			],
+			Text_Controller::CONTENT => $this->title ?? '',
+		] );
+	}
+
+	/**
+	 * @return Deferred_Component
+	 */
+	private function get_content(): Deferred_Component {
+		return defer_template_part( 'components/container/container', null, [
+			Container_Controller::CLASSES => [
+				'c-block__description',
+				'b-logos__description',
+				't-sink',
+				's-sink'
+			],
+			Container_Controller::CONTENT => $this->description ?? '',
+		] );
+	}
+
+	/**
+	 * @return Deferred_Component
+	 */
+	private function get_cta(): Deferred_Component {
+		return defer_template_part( 'components/container/container', null, [
+			Container_Controller::CONTENT => defer_template_part(
+				'components/link/link',
+				null,
+				$this->get_cta_args()
+			),
+			Container_Controller::TAG     => 'p',
+			Container_Controller::CLASSES => [
+				'c-block__cta',
+				'b-logos__cta'
+			],
+		] );
+	}
+
+	/**
+	 * @return array
+	 */
+	private function get_cta_args(): array {
+		$cta = wp_parse_args( $this->cta, [
+			'text'   => '',
+			'url'    => '',
+			'target' => '',
+		] );
+
+		if ( empty( $cta[ 'url' ] ) ) {
+			return [];
+		}
+
+		return [
+			Link_Controller::URL     => $cta['url'],
+			Link_Controller::CONTENT => $cta['text'] ?: $cta['url'],
+			Link_Controller::TARGET  => $cta['target'],
+			Link_Controller::CLASSES => [
+				'c-block__cta-link',
+				'a-btn',
+				'a-btn--has-icon-after',
+				'icon-arrow-right'
+			],
+		];
+	}
+
+	/**
+	 * @return array
+	 */
+	public function get_logos(): array {
 		$component_args = [];
+		if ( empty( $this->logos ) ) {
+			return [];
+		}
 		foreach ( $this->logos as $logo ) {
 			// Don't add a logo if there's no image set in the block.
 			if ( empty( $logo[ Logos::LOGO_IMAGE ] ) ) {

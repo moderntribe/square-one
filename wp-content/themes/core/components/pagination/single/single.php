@@ -1,35 +1,30 @@
 <?php
+declare( strict_types=1 );
+
+use \Tribe\Project\Templates\Components\pagination\single\Single_Pagination_Controller;
+
+/**
+ * @var array $args Arguments passed to the template
+ */
 // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
-$c = \Tribe\Project\Templates\Components\pagination\single\Controller::factory( $args );
+$c = Single_Pagination_Controller::factory( $args );
 
+if ( empty( $c->get_previous_link_args() ) &&  empty( $c->get_next_link_args() ) ) {
+	return;
+}
 ?>
-<?php if ( ! empty( $c->previous_post ) || ! empty( $c->next_post ) ) { ?>
-	<nav <?php echo $c->wrapper_classes(); ?><?php echo $c->wrapper_attrs(); ?> >
+<nav <?php echo $c->get_classes(); ?><?php echo $c->get_attrs(); ?> >
+	<ol <?php echo $c->get_container_classes(); ?><?php echo $c->get_container_attrs(); ?>>
+		<?php if ( ! empty( $c->get_previous_link_args() ) ) { ?>
+			<li <?php echo $c->get_list_classes(); ?> <?php echo $c->get_list_attrs(); ?>>
+				<?php get_template_part( 'components/link/link', 'pagination', $c->get_previous_link_args() ); ?>
+			</li>
+		<?php } ?>
 
-		<h3 <?php echo $c->header_attrs(); ?><?php echo $c->header_classes(); ?>>
-			<?php esc_html_e( 'Post Pagination', 'tribe' ); ?>
-		</h3>
-
-		<ol <?php echo $c->container_classes(); ?><?php echo $c->container_attrs(); ?>>
-			<?php if ( ! empty( $c->previous_post ) ) { ?>
-				<li <?php echo $c->list_classes(); ?> <?php echo $c->list_attrs(); ?>>
-					<?php get_template_part(
-						'components/link/link',
-						'pagination',
-						$c->previous_post
-					); ?>
-				</li>
-			<?php } ?>
-
-			<?php if ( ! empty( $c->next_post ) ) { ?>
-				<li <?php echo $c->list_classes(); ?> <?php echo $c->list_attrs(); ?>>
-					<?php get_template_part(
-						'components/link/link',
-						'pagination',
-						$c->next_post
-					); ?>
-				</li>
-			<?php } ?>
-		</ol>
-	</nav>
-<?php }
+		<?php if ( ! empty( $c->get_next_link_args() ) ) { ?>
+			<li <?php echo $c->get_list_classes(); ?> <?php echo $c->get_list_attrs(); ?>>
+				<?php get_template_part( 'components/link/link', 'pagination', $c->get_next_link_args() ); ?>
+			</li>
+		<?php } ?>
+	</ol>
+</nav>

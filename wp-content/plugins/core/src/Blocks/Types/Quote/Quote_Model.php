@@ -21,7 +21,6 @@ class Quote_Model extends Base_Model {
 				Quote::LAYOUT,
 				Quote::MEDIA_OVERLAY
 			),
-
 		];
 	}
 }

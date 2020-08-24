@@ -1,2 +1,2 @@
 <?php
-get_template_part('components/comments/comments_section/comments_section');
+get_template_part( 'components/comments/comments_section/comments_section' );

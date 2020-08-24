@@ -18,8 +18,8 @@ class Video_Controller extends Abstract_Controller {
 	public const TRIGGER_POSITION_CENTER = 'center';
 	public const TRIGGER_POSITION_BOTTOM = 'bottom';
 
-	private array $classes;
-	private array $attrs;
+	private array  $classes;
+	private array  $attrs;
 	private string $video_url;
 	private string $video_title;
 	private string $trigger_label;
@@ -30,32 +30,32 @@ class Video_Controller extends Abstract_Controller {
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
 
-		$this->classes          = (array) $args['classes'];
-		$this->attrs            = (array) $args['attrs'];
-		$this->video_url        = (string) $args['video_url'];
-		$this->video_title      = (string) $args['video_title'];
-		$this->trigger_label    = (string) $args['trigger_label'];
-		$this->thumbnail_url    = (string) $args['thumbnail_url'];
-		$this->shim_url         = (string) $args['shim_url'];
-		$this->trigger_position = (string) $args['trigger_position'];
+		$this->classes          = (array) $args[ self::CLASSES ];
+		$this->attrs            = (array) $args[ self::ATTRS ];
+		$this->video_url        = (string) $args[ self::VIDEO_URL ];
+		$this->video_title      = (string) $args[ self::VIDEO_TITLE ];
+		$this->trigger_label    = (string) $args[ self::TRIGGER_LABEL ];
+		$this->thumbnail_url    = (string) $args[ self::THUMBNAIL_URL ];
+		$this->shim_url         = (string) $args[ self::SHIM_URL ];
+		$this->trigger_position = (string) $args[ self::TRIGGER_POSITION ];
 	}
 
 	protected function defaults(): array {
 		return [
-			'classes'          => [],
-			'attrs'            => [],
-			'video_url'        => '',
-			'video_title'      => '',
-			'trigger_label'    => __( 'Play Video', 'tribe' ),
-			'thumbnail_url'    => '',
-			'shim_url'         => trailingslashit( get_template_directory_uri() ) . 'assets/img/theme/shims/16x9.png',
-			'trigger_position' => self::TRIGGER_POSITION_BOTTOM,
+			self::CLASSES          => [],
+			self::ATTRS            => [],
+			self::VIDEO_URL        => '',
+			self::VIDEO_TITLE      => '',
+			self::TRIGGER_LABEL    => __( 'Play Video', 'tribe' ),
+			self::THUMBNAIL_URL    => '',
+			self::SHIM_URL         => trailingslashit( get_template_directory_uri() ) . 'assets/img/theme/shims/16x9.png',
+			self::TRIGGER_POSITION => self::TRIGGER_POSITION_BOTTOM,
 		];
 	}
 
 	protected function required(): array {
 		return [
-			'classes' => [ 'c-video', sprintf( 'c-video--trigger-%s', $this->trigger_position ) ],
+			self::CLASSES => [ 'c-video', sprintf( 'c-video--trigger-%s', $this->trigger_position ) ],
 		];
 	}
 

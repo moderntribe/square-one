@@ -11,8 +11,11 @@ use Tribe\Libs\ACF\Repeater;
 class Links extends Block_Config {
 	public const NAME = 'links';
 
+	public const LEAD_IN     = 'leadin';
 	public const TITLE       = 'title';
 	public const DESCRIPTION = 'description';
+	public const CTA         = 'cta';
+
 	public const LINKS_TITLE = 'links_title';
 	public const LINKS       = 'links';
 	public const LINK_ITEM   = 'item';
@@ -38,11 +41,22 @@ class Links extends Block_Config {
 				'name'  => self::TITLE,
 				'type'  => 'text',
 			] )
-		)->add_field(
-			new Field( self::NAME . '_' . self::DESCRIPTION, [
-				'label' => __( 'Description', 'tribe' ),
-				'name'  => self::DESCRIPTION,
-				'type'  => 'textarea',
+		)->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
+				'label' => __( 'Lead in', 'tribe' ),
+				'name'  => self::LEAD_IN,
+				'type'  => 'text',
+			] )
+		)->add_field( new Field( self::NAME . '_' . self::DESCRIPTION, [
+				'label'        => __( 'Description', 'tribe' ),
+				'name'         => self::DESCRIPTION,
+				'type'         => 'wysiwyg',
+				'toolbar'      => 'basic',
+				'media_upload' => 0,
+			] )
+		)->add_field( new Field( self::NAME . '_' . self::CTA, [
+				'label' => __( 'Call to Action', 'tribe' ),
+				'name'  => self::CTA,
+				'type'  => 'link',
 			] )
 		)->add_field(
 			new Field( self::NAME . '_' . self::LINKS_TITLE, [

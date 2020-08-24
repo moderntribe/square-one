@@ -4,17 +4,21 @@ declare( strict_types=1 );
 namespace Tribe\Project\Blocks\Types\Hero;
 
 use Tribe\Project\Blocks\Types\Base_Model;
+use Tribe\Project\Templates\Components\blocks\hero\Hero_Block_Controller;
+use Tribe\Project\Templates\Components\link\Link_Controller;
 
 class Hero_Model extends Base_Model {
-
+	/**
+	 * @return array
+	 */
 	public function get_data(): array {
 		return [
-			'layout'      => $this->get( Hero::LAYOUT, Hero::LAYOUT_LEFT ),
-			'media'       => $this->get( Hero::IMAGE, 0 ),
-			'leadin'      => $this->get( Hero::LEAD_IN, '' ),
-			'title'       => $this->get( Hero::TITLE, '' ),
-			'description' => $this->get( Hero::DESCRIPTION, '' ),
-			'cta'         => $this->get_cta_args(),
+			Hero_Block_Controller::LAYOUT      => $this->get( Hero::LAYOUT, Hero::LAYOUT_LEFT ),
+			Hero_Block_Controller::MEDIA       => $this->get( Hero::IMAGE, 0 ),
+			Hero_Block_Controller::TITLE       => $this->get( Hero::TITLE, '' ),
+			Hero_Block_Controller::LEADIN      => $this->get( Hero::LEAD_IN, '' ),
+			Hero_Block_Controller::DESCRIPTION => $this->get( Hero::DESCRIPTION, '' ),
+			Hero_Block_Controller::CTA         => $this->get_cta_args(),
 		];
 	}
 
@@ -29,9 +33,9 @@ class Hero_Model extends Base_Model {
 		] );
 
 		return [
-			'content' => $cta[ 'title' ],
-			'url'     => $cta[ 'url' ],
-			'target'  => $cta[ 'target' ],
+			Link_Controller::CONTENT => $cta[ 'title' ],
+			Link_Controller::URL     => $cta[ 'url' ],
+			Link_Controller::TARGET  => $cta[ 'target' ],
 		];
 	}
 }

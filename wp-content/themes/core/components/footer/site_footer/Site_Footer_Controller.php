@@ -6,14 +6,6 @@ namespace Tribe\Project\Templates\Components\footer\site_footer;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\Traits\Copyright;
 
-class Controller extends Abstract_Controller {
+class Site_Footer_Controller extends Abstract_Controller {
 	use Copyright;
-
-	public function home_url(): string {
-		return home_url( '/' );
-	}
-
-	public function name(): string {
-		return get_bloginfo( 'name' );
-	}
 }

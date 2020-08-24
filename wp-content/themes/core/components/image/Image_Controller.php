@@ -155,9 +155,9 @@ class Image_Controller extends Abstract_Controller {
 
 	protected function required(): array {
 		return [
-			'classes'      => [ 'c-image' ],
-			'img_classes'  => [ 'c-image__image' ],
-			'link_classes' => [ 'c-image__link' ],
+			self::CLASSES      => [ 'c-image' ],
+			self::IMG_CLASSES  => [ 'c-image__image' ],
+			self::LINK_CLASSES => [ 'c-image__link' ],
 		];
 	}
 

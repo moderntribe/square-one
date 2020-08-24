@@ -6,6 +6,7 @@ namespace Tribe\Project\Templates\Components\comments\comment;
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\comments\Comment_Edit_Link;
+use Tribe\Project\Templates\Components\text\Text_Controller;
 
 /**
  * Class Comment
@@ -24,7 +25,6 @@ class Comment_Controller extends Abstract_Controller {
 	private array $attrs;
 	private int   $depth;
 	private int   $max_depth;
-
 
 	/**
 	 * Comment constructor.
@@ -46,11 +46,11 @@ class Comment_Controller extends Abstract_Controller {
 	 */
 	protected function defaults(): array {
 		return [
-			'comment_id' => 0,
-			'classes'    => [],
-			'attrs'      => [],
-			'depth'      => 0,
-			'max_depth'  => - 1,
+			self::COMMENT_ID => 0,
+			self::CLASSES    => [],
+			self::ATTRS      => [],
+			self::DEPTH      => 0,
+			self::MAX_DEPTH  => - 1,
 		];
 	}
 
@@ -64,14 +64,14 @@ class Comment_Controller extends Abstract_Controller {
 	/**
 	 * @return string
 	 */
-	public function classes(): string {
+	public function get_classes(): string {
 		return Markup_Utils::class_attribute( get_comment_class( $this->classes ) );
 	}
 
 	/**
 	 * @return string
 	 */
-	public function attributes(): string {
+	public function get_attrs(): string {
 		$attrs       = $this->attrs;
 		$attrs['id'] = sprintf( 'comment-%d', $this->comment_id );
 
@@ -90,23 +90,23 @@ class Comment_Controller extends Abstract_Controller {
 		return $gravatar;
 	}
 
-	public function get_moderation_message() {
+	public function get_moderation_message_args() {
 		$status = wp_get_comment_status( $this->comment_id );
 		if ( 'unapproved' !== $status ) {
-			return '';
+			return [];
 		}
 
-		return tribe_template_part( 'components/text/text', null, [
-			'content' => __( 'Your comment is awaiting moderation.', 'tribe' ),
-			'classes' => [ 'comment__message-moderation ' ],
-		] );
+		return [
+			Text_Controller::CONTENT => __( 'Your comment is awaiting moderation.', 'tribe' ),
+			Text_Controller::CLASSES => [ 'comment__message-moderation ' ],
+		];
 	}
 
-	public function edit_link(): string {
+	public function get_edit_link(): string {
 		return $this->build_edit_link( __( 'Edit Comment', 'tribe' ) );
 	}
 
-	public function reply_link(): string {
+	public function get_reply_link(): string {
 		return get_comment_reply_link( [
 			'reply_text' => __( 'Reply', 'tribe' ),
 			'depth'      => $this->depth,
@@ -116,7 +116,7 @@ class Comment_Controller extends Abstract_Controller {
 		] ) ?: ''; // because WP does not give a consistent return type
 	}
 
-	public function time( $format = 'c' ): string {
+	public function get_time( $format = 'c' ): string {
 		return date( $format, get_comment_time( 'U' ) );
 	}
 }

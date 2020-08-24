@@ -11,8 +11,11 @@ use Tribe\Libs\ACF\Repeater;
 class Tabs extends Block_Config {
 	public const NAME = 'tabs';
 
+	public const LEAD_IN     = 'leadin';
 	public const TITLE       = 'title';
 	public const DESCRIPTION = 'description';
+	public const CTA         = 'cta';
+
 	public const TABS        = 'tabs';
 	public const TAB_LABEL   = 'tab_label';
 	public const TAB_CONTENT = 'tab_content';
@@ -44,13 +47,22 @@ class Tabs extends Block_Config {
 				'name'  => self::TITLE,
 				'type'  => 'text',
 			] )
+		)->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
+				'label' => __( 'Lead in', 'tribe' ),
+				'name'  => self::LEAD_IN,
+				'type'  => 'text',
+			] )
 		)->add_field( new Field( self::NAME . '_' . self::DESCRIPTION, [
 				'label'        => __( 'Description', 'tribe' ),
 				'name'         => self::DESCRIPTION,
 				'type'         => 'wysiwyg',
 				'toolbar'      => 'basic',
 				'media_upload' => 0,
-				'delay'        => 1,
+			] )
+		)->add_field( new Field( self::NAME . '_' . self::CTA, [
+				'label' => __( 'Call to Action', 'tribe' ),
+				'name'  => self::CTA,
+				'type'  => 'link',
 			] )
 		)->add_field( $this->get_tab_section() );
 	}

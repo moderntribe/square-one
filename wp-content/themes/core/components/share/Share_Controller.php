@@ -20,14 +20,14 @@ class Share_Controller extends Abstract_Controller {
 	public const FACEBOOK  = 'facebook';
 	public const LINKEDIN  = 'linkedin';
 
-	private bool $labeled;
+	private bool  $labeled;
 	private array $networks;
 
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
 
-		$this->labeled  = (bool) $args['labeled'];
-		$this->networks = (array) $args['networks'];
+		$this->labeled  = (bool) $args[ self::LABELED ];
+		$this->networks = (array) $args[ self::NETWORKS ];
 	}
 
 	protected function defaults(): array {

@@ -31,15 +31,15 @@ class Breadcrumbs_Controller extends Abstract_Controller {
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
 
-		$this->breadcrumbs  = (array) $args[ 'breadcrumbs' ];
-		$this->classes      = (array) $args[ 'classes' ];
-		$this->attrs        = (array) $args[ 'attrs' ];
-		$this->main_classes = (array) $args[ 'main_classes' ];
-		$this->main_attrs   = (array) $args[ 'main_attrs' ];
-		$this->item_classes = (array) $args[ 'item_classes' ];
-		$this->item_attrs   = (array) $args[ 'item_attrs' ];
-		$this->link_classes = (array) $args[ 'link_classes' ];
-		$this->link_attrs   = (array) $args[ 'link_attrs' ];
+		$this->breadcrumbs  = (array) $args[ self::BREADCRUMBS ];
+		$this->classes      = (array) $args[ self::CLASSES ];
+		$this->attrs        = (array) $args[ self::ATTRS ];
+		$this->main_classes = (array) $args[ self::MAIN_CLASSES ];
+		$this->main_attrs   = (array) $args[ self::MAIN_ATTRS ];
+		$this->item_classes = (array) $args[ self::ITEM_CLASSES ];
+		$this->item_attrs   = (array) $args[ self::ITEM_ATTRS ];
+		$this->link_classes = (array) $args[ self::LINK_CLASSES ];
+		$this->link_attrs   = (array) $args[ self::LINK_ATTRS ];
 	}
 
 	protected function defaults(): array {
@@ -58,10 +58,10 @@ class Breadcrumbs_Controller extends Abstract_Controller {
 
 	protected function required(): array {
 		return [
-			self::CLASSES       => [ 'c-breadcrumbs' ],
+			self::CLASSES      => [ 'c-breadcrumbs' ],
 			self::MAIN_CLASSES => [ 'c-breadcrumbs__list' ],
-			self::ITEM_CLASSES  => [ 'c-breadcrumbs__item' ],
-			self::LINK_CLASSES  => [ 'c-breadcrumbs__anchor' ],
+			self::ITEM_CLASSES => [ 'c-breadcrumbs__item' ],
+			self::LINK_CLASSES => [ 'c-breadcrumbs__anchor' ],
 		];
 	}
 

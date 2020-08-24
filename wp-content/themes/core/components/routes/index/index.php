@@ -1,6 +1,9 @@
 <?php
 declare( strict_types=1 );
-$c = \Tribe\Project\Templates\Components\routes\index\Controller::factory();
+
+use \Tribe\Project\Templates\Components\routes\index\Index_Controller;
+
+$c = Index_Controller::factory();
 
 $c->render_header();
 ?>

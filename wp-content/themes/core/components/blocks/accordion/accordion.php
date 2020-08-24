@@ -26,5 +26,6 @@ $c = Accordion_Block_Controller::factory( $args );
 				$c->get_content_args()
 			); ?>
 		</div>
+
 	</div>
 </section>
