@@ -34,7 +34,7 @@
     {
       "type": "vcs",
       "no-api": true,
-      "url": "git@github.com:msawicki/ACF-Image-Select.git"
+      "url": "git@github.com:moderntribe/ACF-Image-Select.git"
     },
     {
       "type": "package",
@@ -71,7 +71,7 @@
     "php": "^7.4",
     "advanced-custom-fields/advanced-custom-fields-pro": "*",
     "composer/installers": "1.4.0",
-    "msawicki/acf-image-select": "dev-master",
+    "moderntribe/acf-image-select": "dev-master",
     "gravityforms/gravityforms": "*",
     "guzzlehttp/psr7": "^1.4",
     "humanmade/mercator": "dev-master#7f3846a",
