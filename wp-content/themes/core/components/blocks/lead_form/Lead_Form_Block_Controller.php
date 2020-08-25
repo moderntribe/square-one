@@ -43,13 +43,13 @@ class Lead_Form_Block_Controller extends Abstract_Controller {
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
 
-		$this->layout            = $args[ self::LAYOUT ];
-		$this->width             = $args[ self::WIDTH ];
+		$this->layout            = (string) $args[ self::LAYOUT ];
+		$this->width             = (string) $args[ self::WIDTH ];
 		$this->title             = (string) $args[ self::TITLE ];
 		$this->leadin            = (string) $args[ self::LEADIN ];
 		$this->description       = (string) $args[ self::DESCRIPTION ];
 		$this->cta               = (array) $args[ self::CTA ];
-		$this->form              = $args[ self::FORM ];
+		$this->form              = (int) $args[ self::FORM ];
 		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
 		$this->form_classes      = (array) $args[ self::FORM_CLASSES ];
 		$this->classes           = (array) $args[ self::CLASSES ];
