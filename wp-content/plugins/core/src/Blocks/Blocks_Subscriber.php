@@ -22,7 +22,7 @@ class Blocks_Subscriber extends Abstract_Subscriber {
 		}, 10, 4 );
 
 		add_filter( 'allowed_block_types', function ( $types, $post ) {
-			return true; //$this->container->get( Allowed_Blocks::class )->register_allowed_blocks( $types, $post );
+			return $this->container->get( Allowed_Blocks::class )->register_allowed_blocks( $types, $post );
 		}, 10, 2 );
 
 		add_action( 'after_setup_theme', function () {
