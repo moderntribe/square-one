@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0576ec89f22eb9648885ba312d85c5a7",
+    "content-hash": "75cb851d420269a460ae32a3fd5c898f",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -20,16 +20,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.150.1",
+            "version": "3.150.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "d59b85d6854e58154e22a796322ba153ef69ade2"
+                "reference": "4c4e1cef09a6b510eae7a871ec394d124b5005fe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/d59b85d6854e58154e22a796322ba153ef69ade2",
-                "reference": "d59b85d6854e58154e22a796322ba153ef69ade2",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/4c4e1cef09a6b510eae7a871ec394d124b5005fe",
+                "reference": "4c4e1cef09a6b510eae7a871ec394d124b5005fe",
                 "shasum": ""
             },
             "require": {
@@ -101,7 +101,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2020-08-19T18:19:07+00:00"
+            "time": "2020-08-24T18:17:53+00:00"
         },
         {
             "name": "clue/stream-filter",
@@ -882,17 +882,41 @@
             "time": "2019-02-02T07:14:32+00:00"
         },
         {
+            "name": "moderntribe/acf-image-select",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:moderntribe/ACF-Image-Select.git",
+                "reference": "0b141935682a3c5fd23513ea911d6f40102ba65e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/moderntribe/ACF-Image-Select/zipball/0b141935682a3c5fd23513ea911d6f40102ba65e",
+                "reference": "0b141935682a3c5fd23513ea911d6f40102ba65e",
+                "shasum": ""
+            },
+            "type": "wordpress-plugin",
+            "authors": [
+                {
+                    "name": "Modern Tribe",
+                    "email": "admin@tri.be"
+                }
+            ],
+            "description": "Fork of ACF Image Select Field",
+            "time": "2020-08-25T17:29:54+00:00"
+        },
+        {
             "name": "moderntribe/tribe-libs",
             "version": "dev-epic/fidgety-feet",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moderntribe/tribe-libs.git",
-                "reference": "ac2001b5dffd6665d3d3136f10b0ef441b3c492c"
+                "reference": "d311fab93c7dd1d4c44d05107d467ddb73622f94"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/tribe-libs/zipball/ac2001b5dffd6665d3d3136f10b0ef441b3c492c",
-                "reference": "ac2001b5dffd6665d3d3136f10b0ef441b3c492c",
+                "url": "https://api.github.com/repos/moderntribe/tribe-libs/zipball/d311fab93c7dd1d4c44d05107d467ddb73622f94",
+                "reference": "d311fab93c7dd1d4c44d05107d467ddb73622f94",
                 "shasum": ""
             },
             "require": {
@@ -987,7 +1011,7 @@
                 "GPL-2.0-only"
             ],
             "description": "A library for use on Modern Tribe service projects.",
-            "time": "2020-08-15T00:31:21+00:00"
+            "time": "2020-08-20T02:44:15+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -1066,16 +1090,6 @@
                 "psr-3"
             ],
             "time": "2017-06-19T01:22:40+00:00"
-        },
-        {
-            "name": "msawicki/acf-image-select",
-            "version": "1.0",
-            "source": {
-                "type": "git",
-                "url": "git@github.com:msawicki/ACF-Image-Select.git",
-                "reference": "master"
-            },
-            "type": "wordpress-plugin"
         },
         {
             "name": "mtdowling/jmespath.php",
@@ -1366,16 +1380,16 @@
         },
         {
             "name": "php-di/php-di",
-            "version": "6.2.1",
+            "version": "6.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-DI/PHP-DI.git",
-                "reference": "6875fe557c244b3830862c072c7719ca4ac2efe4"
+                "reference": "40140b5bca07c5fed6919a0f1029ff67617faccd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-DI/PHP-DI/zipball/6875fe557c244b3830862c072c7719ca4ac2efe4",
-                "reference": "6875fe557c244b3830862c072c7719ca4ac2efe4",
+                "url": "https://api.github.com/repos/PHP-DI/PHP-DI/zipball/40140b5bca07c5fed6919a0f1029ff67617faccd",
+                "reference": "40140b5bca07c5fed6919a0f1029ff67617faccd",
                 "shasum": ""
             },
             "require": {
@@ -1434,7 +1448,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-06-18T09:54:32+00:00"
+            "time": "2020-08-23T16:23:17+00:00"
         },
         {
             "name": "php-di/phpdoc-reader",
@@ -1713,20 +1727,20 @@
         },
         {
             "name": "php-http/message",
-            "version": "1.8.0",
+            "version": "1.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/message.git",
-                "reference": "ce8f43ac1e294b54aabf5808515c3554a19c1e1c"
+                "reference": "2c7256e3c1aba0bfca70f099810f1c7712e00945"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/message/zipball/ce8f43ac1e294b54aabf5808515c3554a19c1e1c",
-                "reference": "ce8f43ac1e294b54aabf5808515c3554a19c1e1c",
+                "url": "https://api.github.com/repos/php-http/message/zipball/2c7256e3c1aba0bfca70f099810f1c7712e00945",
+                "reference": "2c7256e3c1aba0bfca70f099810f1c7712e00945",
                 "shasum": ""
             },
             "require": {
-                "clue/stream-filter": "^1.4",
+                "clue/stream-filter": "^1.4.1",
                 "php": "^7.1",
                 "php-http/message-factory": "^1.0.2",
                 "psr/http-message": "^1.0"
@@ -1737,6 +1751,7 @@
             "require-dev": {
                 "akeneo/phpspec-skip-example-extension": "^1.0",
                 "coduo/phpspec-data-provider-extension": "^1.0",
+                "ergebnis/composer-normalize": "^2.1",
                 "ext-zlib": "*",
                 "guzzlehttp/psr7": "^1.0",
                 "henrikbjorn/phpspec-code-coverage": "^1.0",
@@ -1781,7 +1796,7 @@
                 "message",
                 "psr-7"
             ],
-            "time": "2019-08-05T06:55:08+00:00"
+            "time": "2020-08-17T06:33:14+00:00"
         },
         {
             "name": "php-http/message-factory",
@@ -3985,16 +4000,16 @@
         },
         {
             "name": "composer/ca-bundle",
-            "version": "1.2.7",
+            "version": "1.2.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/ca-bundle.git",
-                "reference": "95c63ab2117a72f48f5a55da9740a3273d45b7fd"
+                "reference": "8a7ecad675253e4654ea05505233285377405215"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/ca-bundle/zipball/95c63ab2117a72f48f5a55da9740a3273d45b7fd",
-                "reference": "95c63ab2117a72f48f5a55da9740a3273d45b7fd",
+                "url": "https://api.github.com/repos/composer/ca-bundle/zipball/8a7ecad675253e4654ea05505233285377405215",
+                "reference": "8a7ecad675253e4654ea05505233285377405215",
                 "shasum": ""
             },
             "require": {
@@ -4037,7 +4052,21 @@
                 "ssl",
                 "tls"
             ],
-            "time": "2020-04-08T08:27:21+00:00"
+            "funding": [
+                {
+                    "url": "https://packagist.com",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/composer",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/composer/composer",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2020-08-23T12:54:47+00:00"
         },
         {
             "name": "composer/composer",
@@ -4853,16 +4882,16 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v7.25.0",
+            "version": "v7.26.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
-                "reference": "37a76782aef1bb83680143c4283b1bf3db751e96"
+                "reference": "56cd618b9801cdae35c389c71bb692fcb075ef64"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/contracts/zipball/37a76782aef1bb83680143c4283b1bf3db751e96",
-                "reference": "37a76782aef1bb83680143c4283b1bf3db751e96",
+                "url": "https://api.github.com/repos/illuminate/contracts/zipball/56cd618b9801cdae35c389c71bb692fcb075ef64",
+                "reference": "56cd618b9801cdae35c389c71bb692fcb075ef64",
                 "shasum": ""
             },
             "require": {
@@ -4893,20 +4922,20 @@
             ],
             "description": "The Illuminate Contracts package.",
             "homepage": "https://laravel.com",
-            "time": "2020-07-19T12:38:38+00:00"
+            "time": "2020-08-17T15:18:25+00:00"
         },
         {
             "name": "illuminate/support",
-            "version": "v7.25.0",
+            "version": "v7.26.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "9b0c0af8d2dd1a729f6337d0ed5c81a241ea43ab"
+                "reference": "893a17178ec34f749d6cfa92feec9843db55e39d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/9b0c0af8d2dd1a729f6337d0ed5c81a241ea43ab",
-                "reference": "9b0c0af8d2dd1a729f6337d0ed5c81a241ea43ab",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/893a17178ec34f749d6cfa92feec9843db55e39d",
+                "reference": "893a17178ec34f749d6cfa92feec9843db55e39d",
                 "shasum": ""
             },
             "require": {
@@ -4955,7 +4984,7 @@
             ],
             "description": "The Illuminate Support package.",
             "homepage": "https://laravel.com",
-            "time": "2020-08-10T13:58:23+00:00"
+            "time": "2020-08-20T13:40:03+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
@@ -5111,16 +5140,16 @@
         },
         {
             "name": "lucatume/wp-browser",
-            "version": "2.6.9",
+            "version": "2.6.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lucatume/wp-browser.git",
-                "reference": "dab7a0e01995f70fc11c5ef1a59ee8ffe726f299"
+                "reference": "2a838a67428904ab1bfa0a50515e185f7bc6b5fd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lucatume/wp-browser/zipball/dab7a0e01995f70fc11c5ef1a59ee8ffe726f299",
-                "reference": "dab7a0e01995f70fc11c5ef1a59ee8ffe726f299",
+                "url": "https://api.github.com/repos/lucatume/wp-browser/zipball/2a838a67428904ab1bfa0a50515e185f7bc6b5fd",
+                "reference": "2a838a67428904ab1bfa0a50515e185f7bc6b5fd",
                 "shasum": ""
             },
             "require": {
@@ -5133,7 +5162,7 @@
                 "ext-pdo": "*",
                 "mikemclin/laravel-wp-password": "~2.0.0",
                 "php": ">=5.6.0",
-                "symfony/filesystem": "^3.0",
+                "symfony/filesystem": ">=3.0",
                 "symfony/process": ">=2.7 <5.0",
                 "vria/nodiacritic": "^0.1.2",
                 "wp-cli/wp-cli-bundle": ">=2.0 <3.0.0",
@@ -5190,7 +5219,7 @@
                 "codeception",
                 "wordpress"
             ],
-            "time": "2020-08-19T16:26:29+00:00"
+            "time": "2020-08-25T11:24:27+00:00"
         },
         {
             "name": "mck89/peast",
@@ -5512,16 +5541,16 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "2.38.0",
+            "version": "2.39.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "d8f6a6a91d1eb9304527b040500f61923e97674b"
+                "reference": "0a41ea7f7fedacf307b7a339800e10356a042918"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/d8f6a6a91d1eb9304527b040500f61923e97674b",
-                "reference": "d8f6a6a91d1eb9304527b040500f61923e97674b",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/0a41ea7f7fedacf307b7a339800e10356a042918",
+                "reference": "0a41ea7f7fedacf307b7a339800e10356a042918",
                 "shasum": ""
             },
             "require": {
@@ -5597,7 +5626,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-08-04T19:12:46+00:00"
+            "time": "2020-08-24T12:35:58+00:00"
         },
         {
             "name": "phar-io/manifest",
@@ -7525,16 +7554,16 @@
         },
         {
             "name": "seld/jsonlint",
-            "version": "1.8.1",
+            "version": "1.8.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/jsonlint.git",
-                "reference": "3d5eb71705adfa34bd34b993400622932b2f62fd"
+                "reference": "590cfec960b77fd55e39b7d9246659e95dd6d337"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/jsonlint/zipball/3d5eb71705adfa34bd34b993400622932b2f62fd",
-                "reference": "3d5eb71705adfa34bd34b993400622932b2f62fd",
+                "url": "https://api.github.com/repos/Seldaek/jsonlint/zipball/590cfec960b77fd55e39b7d9246659e95dd6d337",
+                "reference": "590cfec960b77fd55e39b7d9246659e95dd6d337",
                 "shasum": ""
             },
             "require": {
@@ -7580,7 +7609,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-08-13T09:07:59+00:00"
+            "time": "2020-08-25T06:56:57+00:00"
         },
         {
             "name": "seld/phar-utils",
@@ -8198,26 +8227,26 @@
         },
         {
             "name": "symfony/filesystem",
-            "version": "v3.4.43",
+            "version": "v5.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
-                "reference": "0f625d0cb1e59c8c4ba61abb170125175218ff10"
+                "reference": "6e4320f06d5f2cce0d96530162491f4465179157"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/filesystem/zipball/0f625d0cb1e59c8c4ba61abb170125175218ff10",
-                "reference": "0f625d0cb1e59c8c4ba61abb170125175218ff10",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/6e4320f06d5f2cce0d96530162491f4465179157",
+                "reference": "6e4320f06d5f2cce0d96530162491f4465179157",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.5.9|>=7.0.8",
+                "php": ">=7.2.5",
                 "symfony/polyfill-ctype": "~1.8"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.4-dev"
+                    "dev-master": "5.1-dev"
                 }
             },
             "autoload": {
@@ -8258,7 +8287,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-05-30T17:48:24+00:00"
+            "time": "2020-05-30T20:35:19+00:00"
         },
         {
             "name": "symfony/finder",
@@ -11289,6 +11318,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "moderntribe/acf-image-select": 20,
         "humanmade/mercator": 20,
         "moderntribe/tribe-libs": 20,
         "roots/wp-password-bcrypt": 20,
