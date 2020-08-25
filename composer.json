@@ -32,17 +32,9 @@
       "url": "git@github.com:nickforddesign/acf-swatch.git"
     },
     {
-      "type": "package",
-      "package": {
-        "name": "msawicki/acf-image-select",
-        "version": "1.0",
-        "type": "wordpress-plugin",
-        "source": {
-          "url": "git@github.com:msawicki/ACF-Image-Select.git",
-          "type": "git",
-          "reference": "master"
-        }
-      }
+      "type": "vcs",
+      "no-api": true,
+      "url": "git@github.com:msawicki/ACF-Image-Select.git"
     },
     {
       "type": "package",
@@ -79,7 +71,7 @@
     "php": "^7.4",
     "advanced-custom-fields/advanced-custom-fields-pro": "*",
     "composer/installers": "1.4.0",
-    "msawicki/acf-image-select": "*",
+    "msawicki/acf-image-select": "dev-master",
     "gravityforms/gravityforms": "*",
     "guzzlehttp/psr7": "^1.4",
     "humanmade/mercator": "dev-master#7f3846a",
