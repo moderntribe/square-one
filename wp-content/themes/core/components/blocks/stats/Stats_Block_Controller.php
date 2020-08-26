@@ -72,7 +72,7 @@ class Stats_Block_Controller extends Abstract_Controller {
 	protected function defaults(): array {
 		return [
 			self::LAYOUT            => Stats::LAYOUT_STACKED,
-			self::CONTENT_ALIGN     => Stats::CONTENT_ALIGN_LEFT,
+			self::CONTENT_ALIGN     => Stats::CONTENT_ALIGN_CENTER,
 			self::DISPLAY_DIVIDERS  => Stats::DISPLAY_DIVIDERS,
 			self::CONTAINER_CLASSES => [],
 			self::CONTENT_CLASSES   => [],
@@ -106,6 +106,7 @@ class Stats_Block_Controller extends Abstract_Controller {
 		if ( $this->display_dividers ) {
 			$this->classes[] = 'b-stats--display_dividers';
 		}
+		$this->classes[] = 'b-stats--content-align-' . $this->content_align;
 
 		return Markup_Utils::class_attribute( $this->classes );
 	}

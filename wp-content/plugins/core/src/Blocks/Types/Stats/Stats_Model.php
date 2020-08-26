@@ -15,7 +15,7 @@ class Stats_Model extends Base_Model {
 	public function get_data(): array {
 		return [
 			Stats_Block_Controller::LAYOUT           => $this->get( Stats::LAYOUT, Stats::LAYOUT_STACKED ),
-			Stats_Block_Controller::CONTENT_ALIGN    => $this->get( Stats::CONTENT_ALIGN, Stats::CONTENT_ALIGN_LEFT ),
+			Stats_Block_Controller::CONTENT_ALIGN    => $this->get( Stats::CONTENT_ALIGN, Stats::CONTENT_ALIGN_CENTER ),
 			Stats_Block_Controller::DISPLAY_DIVIDERS => $this->get( Stats::DISPLAY_DIVIDERS, true ),
 			Stats_Block_Controller::TITLE            => $this->get( Stats::TITLE, '' ),
 			Stats_Block_Controller::LEADIN           => $this->get( Stats::LEAD_IN, '' ),

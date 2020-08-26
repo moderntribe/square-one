@@ -123,7 +123,7 @@ class Stats extends Block_Config {
 				self::CONTENT_ALIGN_LEFT   => __( 'Content Left', 'tribe' ),
 			],
 			'default_value'   => [
-				self::LAYOUT_STACKED,
+				self::CONTENT_ALIGN_CENTER,
 			],
 			'multiple'        => 0,
 			'image_path'      => sprintf(
