@@ -6,7 +6,6 @@ namespace Tribe\Project\Templates\Components\blocks\interstitial;
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Blocks\Types\Interstitial\Interstitial as Interstitial_Block;
 use Tribe\Project\Templates\Components\Abstract_Controller;
-use Tribe\Project\Templates\Components\container\Container_Controller;
 use Tribe\Project\Templates\Components\content_block\Content_Block_Controller;
 use Tribe\Project\Templates\Components\Deferred_Component;
 use Tribe\Project\Templates\Components\text\Text_Controller;
@@ -130,7 +129,7 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 		return [
 			Content_Block_Controller::TAG     => 'header',
 			Content_Block_Controller::TITLE   => $this->get_title(),
-			Content_Block_Controller::CTA     => $this->get_cta(),
+			Content_Block_Controller::CTA     => $this->get_cta_args(),
 			Content_Block_Controller::LAYOUT  => $this->layout,
 			Content_Block_Controller::CLASSES => [
 				'c-block__content-block',
@@ -159,36 +158,14 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 	/**
 	 * @return Deferred_Component
 	 */
-	private function get_cta(): Deferred_Component {
-		return defer_template_part( 'components/container/container', null, [
-			Container_Controller::CONTENT => defer_template_part(
-				'components/link/link',
-				null,
-				$this->get_cta_args()
-			),
-			Container_Controller::TAG     => 'p',
-			Container_Controller::CLASSES => [
-				'c-block__cta',
-				'b-interstitial__cta'
-			],
-		] );
-	}
-
-	/**
-	 * @return array
-	 */
-	private function get_cta_args(): array {
+	private function get_cta_args(): Deferred_Component {
 		$cta = wp_parse_args( $this->cta, [
 			'content' => '',
 			'url'     => '',
 			'target'  => '',
 		] );
 
-		if ( empty( $cta[ 'url' ] ) ) {
-			return [];
-		}
-
-		return [
+		return defer_template_part( 'components/link/link', null, [
 			Link_Controller::URL     => $cta['url'],
 			Link_Controller::CONTENT => $cta['content'] ?: $cta['url'],
 			Link_Controller::TARGET  => $cta['target'],
@@ -198,7 +175,7 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 				'a-btn--has-icon-after',
 				'icon-arrow-right'
 			],
-		];
+		] );
 	}
 
 	/**
@@ -214,8 +191,8 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 			Image_Controller::AS_BG        => true,
 			Image_Controller::USE_LAZYLOAD => true,
 			Image_Controller::WRAPPER_TAG  => 'div',
-			Image_Controller::CLASSES      => [ 'b-interstitial__figure' ],
-			Image_Controller::IMG_CLASSES  => [ 'b-interstitial__img', 'c-image__bg' ],
+			Image_Controller::CLASSES      => [ 'b-interstitial__figure', 'c-image--bg', 'c-image--overlay' ],
+			Image_Controller::IMG_CLASSES  => [ 'b-interstitial__img' ],
 			Image_Controller::SRC_SIZE     => Image_Sizes::CORE_FULL,
 			Image_Controller::SRCSET_SIZES => [
 				Image_Sizes::CORE_FULL,
