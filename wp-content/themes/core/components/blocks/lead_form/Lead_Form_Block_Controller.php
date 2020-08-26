@@ -199,35 +199,13 @@ class Lead_Form_Block_Controller extends Abstract_Controller {
 	 * @return Deferred_Component
 	 */
 	private function get_cta(): Deferred_Component {
-		return defer_template_part( 'components/container/container', null, [
-			Container_Controller::CONTENT => defer_template_part(
-				'components/link/link',
-				null,
-				$this->get_cta_args()
-			),
-			Container_Controller::TAG     => 'p',
-			Container_Controller::CLASSES => [
-				'c-block__cta',
-				'b-lead-form__cta'
-			],
-		] );
-	}
-
-	/**
-	 * @return array
-	 */
-	private function get_cta_args(): array {
 		$cta = wp_parse_args( $this->cta, [
 			'content' => '',
 			'url'     => '',
 			'target'  => '',
 		] );
 
-		if ( empty( $cta[ 'url' ] ) ) {
-			return [];
-		}
-
-		return [
+		return defer_template_part( 'components/link/link', null, [
 			Link_Controller::URL     => $cta['url'],
 			Link_Controller::CONTENT => $cta['content'] ?: $cta['url'],
 			Link_Controller::TARGET  => $cta['target'],
@@ -237,7 +215,7 @@ class Lead_Form_Block_Controller extends Abstract_Controller {
 				'a-btn--has-icon-after',
 				'icon-arrow-right'
 			],
-		];
+		] );
 	}
 
 	/**
