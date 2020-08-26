@@ -242,11 +242,6 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 
 		return [
 			Image_Controller::ATTACHMENT   => Image::factory( (int) $this->image ),
-			Image_Controller::AS_BG        => true,
-			Image_Controller::USE_LAZYLOAD => true,
-			Image_Controller::WRAPPER_TAG  => 'div',
-			Image_Controller::CLASSES      => [ 'b-interstitial__figure', 'c-image--bg' ],
-			Image_Controller::IMG_CLASSES  => [ 'b-interstitial__img' ],
 			Image_Controller::SRC_SIZE     => $src_size,
 			Image_Controller::SRCSET_SIZES => $srcset_sizes,
 		];

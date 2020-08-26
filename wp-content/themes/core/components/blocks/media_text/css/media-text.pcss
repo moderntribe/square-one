@@ -5,6 +5,12 @@
  * ----------------------------------------------------------------------------- */
 
 .b-media-text {
+	/* CASE: Width: Full */
+	&.c-block--width-full {
+		max-width: none;
+		width: 100%;
+	}
+
 	/* CASE: Two Media + Text Blocks Stacked, both Width: Full and Media: Left/Right */
 	&.c-block--width-full:not(.c-block--layout-center) + &.c-block--width-full:not(.c-block--layout-center) {
 		@media (--viewport-full) {
