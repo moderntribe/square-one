@@ -7,7 +7,7 @@ use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Blocks\Types\Quote\Quote as Quote_Block;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\quote\Quote_Controller;
-use Tribe\Project\Templates\Components\Image\Image_Controller;
+use Tribe\Project\Templates\Components\image\Image_Controller;
 use Tribe\Project\Templates\Models\Image;
 use Tribe\Project\Theme\Config\Image_Sizes;
 

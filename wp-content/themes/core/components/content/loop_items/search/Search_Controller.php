@@ -4,7 +4,7 @@ declare( strict_types=1 );
 namespace Tribe\Project\Templates\Components\content\loop_items\search;
 
 use Tribe\Project\Templates\Components\Abstract_Controller;
-use Tribe\Project\Templates\Components\Image\Image_Controller;
+use Tribe\Project\Templates\Components\image\Image_Controller;
 use Tribe\Project\Templates\Models\Image;
 
 class Search_Controller extends Abstract_Controller {
