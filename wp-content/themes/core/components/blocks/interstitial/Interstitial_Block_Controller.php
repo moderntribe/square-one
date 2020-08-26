@@ -128,7 +128,7 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 
 		return [
 			Content_Block_Controller::TITLE   => $this->get_title(),
-			Content_Block_Controller::CTA     => $this->get_cta_args(),
+			Content_Block_Controller::CTA     => $this->get_cta(),
 			Content_Block_Controller::LAYOUT  => $this->layout,
 			Content_Block_Controller::CLASSES => [
 				'c-block__content-block',
@@ -157,7 +157,7 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 	/**
 	 * @return Deferred_Component
 	 */
-	private function get_cta_args(): Deferred_Component {
+	private function get_cta(): Deferred_Component {
 		$cta = wp_parse_args( $this->cta, [
 			'content' => '',
 			'url'     => '',
