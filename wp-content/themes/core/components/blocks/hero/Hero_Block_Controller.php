@@ -4,6 +4,7 @@ declare( strict_types=1 );
 namespace Tribe\Project\Templates\Components\blocks\hero;
 
 use Tribe\Libs\Utils\Markup_Utils;
+use Tribe\Project\Blocks\Types\Hero\Hero as Hero_Block;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\container\Container_Controller;
 use Tribe\Project\Templates\Components\content_block\Content_Block_Controller;
@@ -63,8 +64,8 @@ class Hero_Block_Controller extends Abstract_Controller {
 	 */
 	protected function defaults(): array {
 		return [
-			self::LAYOUT            => 'left',
-			self::MEDIA             => [],
+			self::LAYOUT            => Hero_Block::LAYOUT_LEFT,
+			self::MEDIA             => null,
 			self::TITLE             => '',
 			self::LEADIN            => '',
 			self::DESCRIPTION       => '',
@@ -157,7 +158,8 @@ class Hero_Block_Controller extends Abstract_Controller {
 		return defer_template_part( 'components/text/text', null, [
 			Text_Controller::CLASSES => [
 				'c-block__leadin',
-				'b-hero__leadin'
+				'b-hero__leadin',
+				'h6',
 			],
 			Text_Controller::CONTENT => $this->leadin ?? '',
 		] );
@@ -197,35 +199,13 @@ class Hero_Block_Controller extends Abstract_Controller {
 	 * @return Deferred_Component
 	 */
 	private function get_cta(): Deferred_Component {
-		return defer_template_part( 'components/container/container', null, [
-			Container_Controller::CONTENT => defer_template_part(
-				'components/link/link',
-				null,
-				$this->get_cta_args()
-			),
-			Container_Controller::TAG     => 'p',
-			Container_Controller::CLASSES => [
-				'c-block__cta',
-				'b-hero__cta'
-			],
-		] );
-	}
-
-	/**
-	 * @return array
-	 */
-	private function get_cta_args(): array {
 		$cta = wp_parse_args( $this->cta, [
 			'content' => '',
 			'url'     => '',
 			'target'  => '',
 		] );
 
-		if ( empty( $cta[ 'url' ] ) ) {
-			return [];
-		}
-
-		return [
+		return defer_template_part( 'components/link/link', null, [
 			Link_Controller::URL     => $cta['url'],
 			Link_Controller::CONTENT => $cta['content'] ?: $cta['url'],
 			Link_Controller::TARGET  => $cta['target'],
@@ -235,7 +215,7 @@ class Hero_Block_Controller extends Abstract_Controller {
 				'a-btn--has-icon-after',
 				'icon-arrow-right'
 			],
-		];
+		] );
 	}
 
 	/**
@@ -251,8 +231,8 @@ class Hero_Block_Controller extends Abstract_Controller {
 			Image_Controller::AS_BG        => true,
 			Image_Controller::USE_LAZYLOAD => true,
 			Image_Controller::WRAPPER_TAG  => 'div',
-			Image_Controller::CLASSES      => [ 'b-hero__figure' ],
-			Image_Controller::IMG_CLASSES  => [ 'b-hero__img', 'c-image__bg' ],
+			Image_Controller::CLASSES      => [ 'b-interstitial__figure', 'c-image--bg', 'c-image--overlay' ],
+			Image_Controller::IMG_CLASSES  => [ 'b-hero__img' ],
 			Image_Controller::SRC_SIZE     => Image_Sizes::CORE_FULL,
 			Image_Controller::SRCSET_SIZES => [
 				Image_Sizes::CORE_FULL,
