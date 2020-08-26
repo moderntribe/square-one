@@ -135,9 +135,10 @@ class Content_Block_Controller extends Abstract_Controller {
 	}
 
 	public function get_cta_args() {
-		if ( empty( $this->cta ) ) {
+		if ( empty( $this->cta['url'] ) ) {
 			return [];
 		}
+
 		$this->cta[ Link_Controller::CLASSES ][] = 'c-content-block__cta-link';
 
 		return [
