@@ -215,9 +215,9 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 	 */
 	private function get_cta_args(): array {
 		$cta = wp_parse_args( $this->cta, [
-			'text'   => '',
-			'url'    => '',
-			'target' => '',
+			'content' => '',
+			'url'     => '',
+			'target'  => '',
 		] );
 
 		if ( empty( $cta[ 'url' ] ) ) {
@@ -226,7 +226,7 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 
 		return [
 			Link_Controller::URL     => $cta['url'],
-			Link_Controller::CONTENT => $cta['text'] ?: $cta['url'],
+			Link_Controller::CONTENT => $cta['content'] ?: $cta['url'],
 			Link_Controller::TARGET  => $cta['target'],
 			Link_Controller::CLASSES => [
 				'c-block__cta-link',
