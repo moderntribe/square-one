@@ -20,7 +20,7 @@ $c->render_header();
 				endwhile;
 				get_template_part( 'components/pagination/loop/loop', 'search' );
 			else :
-				get_template_part( 'components/content/no_results/no_results', 'search' );
+				get_template_part( 'components/no_results/no_results', 'search' );
 			endif;
 			?>
 
