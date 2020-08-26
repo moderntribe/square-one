@@ -78,7 +78,7 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 			self::MEDIA_CLASSES     => [],
 			self::CONTENT_CLASSES   => [],
 			self::MEDIA_TYPE        => Media_Text_Block::IMAGE,
-			self::IMAGE             => [],
+			self::IMAGE             => null,
 			self::VIDEO             => '',
 			self::TITLE             => '',
 			self::LEADIN            => '',
@@ -97,8 +97,8 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 	}
 
 	public function get_classes(): string {
-		$this->classes[] = 'c-block--' . $this->layout;
-		$this->classes[] = 'c-block--' . $this->width;
+		$this->classes[] = 'c-block--layout-' . $this->layout;
+		$this->classes[] = 'c-block--width-' . $this->width;
 
 		if ( $this->width === Media_Text_Block::WIDTH_GRID ) {
 			$this->classes[] = 'l-container';
@@ -245,8 +245,8 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 			Image_Controller::AS_BG        => true,
 			Image_Controller::USE_LAZYLOAD => true,
 			Image_Controller::WRAPPER_TAG  => 'div',
-			Image_Controller::CLASSES      => [ 'b-interstitial__figure' ],
-			Image_Controller::IMG_CLASSES  => [ 'b-interstitial__img', 'c-image__bg' ],
+			Image_Controller::CLASSES      => [ 'b-interstitial__figure', 'c-image--bg' ],
+			Image_Controller::IMG_CLASSES  => [ 'b-interstitial__img' ],
 			Image_Controller::SRC_SIZE     => $src_size,
 			Image_Controller::SRCSET_SIZES => $srcset_sizes,
 		];
