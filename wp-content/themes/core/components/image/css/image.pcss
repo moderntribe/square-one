@@ -4,27 +4,53 @@
  *
  * ----------------------------------------------------------------------------- */
 
-.c-image {
-	position: relative;
-	width: 100%;
-}
+/* -----------------------------------------------------------------------------
+ * Image Component: Wrapper element
+ *
+ * Generally, a `figure` for foreground usages and a `div` for background usages.
+ * Customizable via component's attributes.
+ * ----------------------------------------------------------------------------- */
 
-.c-image--square {
-	padding-bottom: 100%;
-}
+.c-image {}
 
-.c-image--rect {
-	padding-bottom: 70%;
-}
+/* -----------------------------------------------------------------------------
+ * Image Component: Image Link
+ *
+ * If provided, wraps the component's image element
+ * ----------------------------------------------------------------------------- */
 
-.c-image__bg {
-	background: center center no-repeat;
-	background-size: cover;
-	bottom: 0;
-	height: 100%;
-	left: 0;
-	position: absolute;
-	right: 0;
-	top: 0;
-	width: 100%;
+.c-image__link {}
+
+/* -----------------------------------------------------------------------------
+ * Image Component: Image Element
+ *
+ * An `img` for foreground usages and a `div` for background usages.
+ * ----------------------------------------------------------------------------- */
+
+.c-image__image {
+	/* CASE: Background image implementation. */
+	.c-image--bg & {
+		background: center center no-repeat;
+		background-size: cover;
+		bottom: 0;
+		height: 100%;
+		left: 0;
+		position: absolute;
+		right: 0;
+		top: 0;
+		width: 100%;
+	}
+
+	/* CASE: Apply an overlay. */
+	.c-image--overlay & {
+
+		&:after {
+			content: '';
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			background-color: var(--color-black);
+			opacity: 0.5;
+		}
+	}
 }
