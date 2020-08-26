@@ -33,8 +33,8 @@ class Quote_Block_Controller extends Abstract_Controller {
 	private array  $container_classes;
 	private array  $media_classes;
 	private array  $content_classes;
-	private array  $classes;
-	private array  $attrs;
+	protected array  $classes;
+	protected array  $attrs;
 
 	/**
 	 * @param array $args
@@ -90,7 +90,7 @@ class Quote_Block_Controller extends Abstract_Controller {
 	 * @return string
 	 */
 	public function get_classes(): string {
-		$this->classes[] = 'c-block--' . $this->layout;
+		$this->classes[] = 'c-block--layout-' . $this->layout;
 
 		return Markup_Utils::class_attribute( $this->classes );
 	}
@@ -138,19 +138,32 @@ class Quote_Block_Controller extends Abstract_Controller {
 			return [];
 		}
 
+		$classes       = [ 'b-quote__figure', 'c-image--bg' ];
+		$src           = Image_Sizes::FOUR_THREE;
+		$srcset        = [
+			Image_Sizes::FOUR_THREE_SMALL,
+			Image_Sizes::FOUR_THREE,
+			Image_Sizes::FOUR_THREE_LARGE,
+		];
+
+		if ( $this->layout === Quote_Block::MEDIA_OVERLAY ) {
+			$classes[]     = 'c-image--overlay';
+			$src           = Image_Sizes::SIXTEEN_NINE;
+			$srcset        = [
+				Image_Sizes::SIXTEEN_NINE_SMALL,
+				Image_Sizes::SIXTEEN_NINE,
+				Image_Sizes::SIXTEEN_NINE_LARGE,
+			];
+		}
+
 		return [
 			Image_Controller::ATTACHMENT   => Image::factory( (int) $this->media ),
 			Image_Controller::AS_BG        => true,
 			Image_Controller::USE_LAZYLOAD => true,
-			Image_Controller::WRAPPER_TAG  => 'div',
-			Image_Controller::CLASSES      => [ 'b-quote__figure' ],
-			Image_Controller::IMG_CLASSES  => [ 'b-quote__img', 'c-image__bg' ],
-			Image_Controller::SRC_SIZE     => Image_Sizes::SIXTEEN_NINE,
-			Image_Controller::SRCSET_SIZES => [
-				Image_Sizes::SIXTEEN_NINE_SMALL,
-				Image_Sizes::SIXTEEN_NINE,
-				Image_Sizes::SIXTEEN_NINE_LARGE,
-			],
+			Image_Controller::CLASSES      => $classes,
+			Image_Controller::IMG_CLASSES  => [ 'b-quote__img' ],
+			Image_Controller::SRC_SIZE     => $src,
+			Image_Controller::SRCSET_SIZES => $srcset,
 		];
 	}
 

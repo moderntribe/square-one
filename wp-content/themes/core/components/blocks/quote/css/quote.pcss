@@ -84,26 +84,16 @@
 }
 
 /* -----------------------------------------------------------------------------
- * Quote: Image
+ * Quote: Figure Element
  * ----------------------------------------------------------------------------- */
 
 .b-quote__figure {}
 
-.b-quote__img {
-	/* CASE: Layout: Media Overlay */
-	.c-block--layout-overlay & {
-		/* Overlay */
+/* -----------------------------------------------------------------------------
+ * Quote: Image Element
+ * ----------------------------------------------------------------------------- */
 
-		&:after {
-			content: '';
-			position: absolute;
-			width: 100%;
-			height: 100%;
-			background-color: var(--color-black);
-			opacity: 0.5;
-		}
-	}
-}
+.b-quote__img {}
 
 /* -----------------------------------------------------------------------------
  * Quote: Content
@@ -111,6 +101,11 @@
 
 .b-quote__content {
 	position: relative;
+
+	/* CASE: Layout: Media Overlay */
+	.c-block--layout-overlay & {
+		max-width: var(--grid-width-staggered-double);
+	}
 
 	/* CASE: Layout Left/Right */
 	.b-quote:not(.c-block--layout-overlay) & {
