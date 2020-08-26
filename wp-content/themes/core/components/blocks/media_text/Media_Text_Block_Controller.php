@@ -99,6 +99,7 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 	public function get_classes(): string {
 		$this->classes[] = 'c-block--' . $this->layout;
 		$this->classes[] = 'c-block--' . $this->width;
+
 		if ( $this->width === Media_Text_Block::WIDTH_GRID ) {
 			$this->classes[] = 'l-container';
 		}
@@ -156,7 +157,8 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 		return defer_template_part( 'components/text/text', null, [
 			Text_Controller::CLASSES => [
 				'c-block__leadin',
-				'b-media-text__leadin'
+				'b-media-text__leadin',
+				'h6',
 			],
 			Text_Controller::CONTENT => $this->leadin ?? '',
 		] );
@@ -171,7 +173,7 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 			Text_Controller::CLASSES => [
 				'c-block__title',
 				'b-media-text__title',
-				'h3'
+				'h3',
 			],
 			Text_Controller::CONTENT => $this->title ?? '',
 		] );
@@ -186,7 +188,7 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 				'c-block__description',
 				'b-media-text__text',
 				't-sink',
-				's-sink'
+				's-sink',
 			],
 			Container_Controller::CONTENT => $this->description ?? '',
 		] );
@@ -209,7 +211,7 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 				'c-block__cta-link',
 				'a-btn',
 				'a-btn--has-icon-after',
-				'icon-arrow-right'
+				'icon-arrow-right',
 			],
 		] );
 	}
