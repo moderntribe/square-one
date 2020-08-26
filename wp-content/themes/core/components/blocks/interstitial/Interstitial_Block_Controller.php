@@ -127,7 +127,6 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 		}
 
 		return [
-			Content_Block_Controller::TAG     => 'header',
 			Content_Block_Controller::TITLE   => $this->get_title(),
 			Content_Block_Controller::CTA     => $this->get_cta_args(),
 			Content_Block_Controller::LAYOUT  => $this->layout,
