@@ -75,8 +75,18 @@
 	}
 
 	/* -----------------------------------------------------------------------------
-	 * Panels
+	 * Blocks
 	 * ----------------------------------------------------------------------------- */
+
+	.c-block {
+		margin-top: var(--spacer-60);
+		margin-bottom: var(--spacer-60);
+
+		@media (--viewport-medium) {
+			margin-top: var(--spacer-70);
+			margin-bottom: var(--spacer-70);
+		}
+	}
 
 	/* CASE: If a full-bleed block is followed by a non-block element,
 	the following element should have some additional vertical spacing. */
@@ -95,6 +105,18 @@
 
 		@media (--viewport-medium) {
 			margin-top: var(--spacer-70);
+		}
+	}
+
+	/* CASE: Collapse spacing between any full-bleed or background-applied blocks. */
+	.c-block--full-bleed + .c-block--full-bleed,
+	.c-block--full-bleed + .c-block--vertical-padding,
+	.c-block--vertical-padding + .c-block--full-bleed,
+	.c-block--vertical-padding + .c-block--vertical-padding {
+		margin-top: calc(-1 * var(--spacer-60));
+
+		@media (--viewport-medium) {
+			margin-top: calc(-1 * var(--spacer-70));
 		}
 	}
 
