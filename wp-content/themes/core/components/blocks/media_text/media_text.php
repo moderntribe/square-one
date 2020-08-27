@@ -15,13 +15,13 @@ $c = Media_Text_Block_Controller::factory( $args );
 	<div <?php echo $c->get_container_classes(); ?>>
 
 		<div <?php echo $c->get_media_classes(); ?>>
-			<?php if ( $c->get_media_type() === Media_Text_Block::IMAGE ) {
+			<?php if ( $c->get_media_type() === Media_Text_Block::IMAGE && ! empty( $c->get_image_args() ) ) {
 				get_template_part(
 					'components/image/image',
 					null,
 					$c->get_image_args()
 				);
-			} elseif ( $c->get_media_type() === Media_Text_Block::EMBED ) {
+			} elseif ( $c->get_media_type() === Media_Text_Block::EMBED && ! empty( $c->get_video_embed() ) ) {
 				echo $c->get_video_embed();
 			} ?>
 		</div>

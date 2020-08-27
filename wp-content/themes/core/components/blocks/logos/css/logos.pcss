@@ -58,19 +58,18 @@
 	}
 
 	/* CASE: 4th logo in a set of 5 gets bummed to the next row to avoid leaving a single logo hanging. */
-	.b-logos__count-5 &:nth-child(4) {
+	.b-logos--count-5 &:nth-child(4) {
 		@media (--viewport-medium) {
 			width: calc(25% + 1px);
 		}
 	}
 
 	/* CASE: 8th logo in a set of 9 gets bummed to the next row to avoid leaving a single logo hanging. */
-	.b-logos__count-9 &:nth-child(8) {
+	.b-logos--count-9 &:nth-child(8) {
 		@media (--viewport-medium) {
 			width: calc(25% + 1px);
 		}
 	}
-
 }
 
 /* -----------------------------------------------------------------------------

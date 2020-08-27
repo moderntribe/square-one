@@ -85,7 +85,7 @@ class Accordion extends Block_Config {
 		$content = new Field( self::ROW_CONTENT, [
 			'label' => __( 'Content', 'tribe' ),
 			'name'  => self::ROW_CONTENT,
-			'type'  => 'textarea',
+			'type'  => 'wysiwyg',
 		] );
 		$group->add_field( $content );
 

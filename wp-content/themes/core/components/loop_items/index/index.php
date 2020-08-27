@@ -1,7 +1,7 @@
 <?php
 declare( strict_types=1 );
 
-use \Tribe\Project\Templates\Components\content\loop_items\index\Index_Controller;
+use \Tribe\Project\Templates\Components\loop_items\index\Index_Controller;
 
 $c = Index_Controller::factory();
 ?>

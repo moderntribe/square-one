@@ -9,13 +9,13 @@ use \Tribe\Project\Templates\Components\quote\Quote_Controller;
 // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
 $c = Quote_Controller::factory( $args );
 
+// TODO: Convert the hard-coded quote `h2` to a text component.
+
 ?>
 
 <blockquote <?php echo $c->get_classes(); ?> <?php echo $c->get_attrs(); ?>>
 	<?php if ( ! empty( $c->get_quote() ) ) { ?>
-		<h2 class="c-quote__text h4">
-			<?php echo esc_html( $c->get_quote() ); ?>
-		</h2>
+		<h2 class="c-quote__text h4"><?php echo esc_html( $c->get_quote() ); ?></h2>
 	<?php } ?>
 
 	<?php if ( $c->has_citation() ) { ?>
