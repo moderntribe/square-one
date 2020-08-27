@@ -16,7 +16,7 @@ use \Tribe\Project\Templates\Components\text\Text_Controller;
 
 class Stats_Block_Controller extends Abstract_Controller {
 	public const LAYOUT            = 'layout';
-	public const DISPLAY_DIVIDERS  = 'display_dividers';
+	public const DIVIDERS          = 'dividers';
 	public const CONTENT_ALIGN     = 'content_align';
 	public const CONTAINER_CLASSES = 'container_classes';
 	public const CONTENT_CLASSES   = 'content_classes';
@@ -38,7 +38,7 @@ class Stats_Block_Controller extends Abstract_Controller {
 	private array  $cta;
 	private string $layout;
 	private string $content_align;
-	private string $display_dividers;
+	private string $dividers;
 	private array  $container_classes;
 	private array  $content_classes;
 	private array  $classes;
@@ -52,7 +52,7 @@ class Stats_Block_Controller extends Abstract_Controller {
 
 		$this->layout            = (string) $args[ self::LAYOUT ];
 		$this->content_align     = (string) $args[ self::CONTENT_ALIGN ];
-		$this->display_dividers  = (string) $args[ self::DISPLAY_DIVIDERS ];
+		$this->dividers          = (string) $args[ self::DIVIDERS ];
 		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
 		$this->content_classes   = (array) $args[ self::CONTENT_CLASSES ];
 		$this->classes           = (array) $args[ self::CLASSES ];
@@ -72,8 +72,8 @@ class Stats_Block_Controller extends Abstract_Controller {
 	protected function defaults(): array {
 		return [
 			self::LAYOUT            => Stats::LAYOUT_STACKED,
-			self::CONTENT_ALIGN     => Stats::CONTENT_ALIGN_LEFT,
-			self::DISPLAY_DIVIDERS  => Stats::DISPLAY_DIVIDERS,
+			self::CONTENT_ALIGN     => Stats::CONTENT_ALIGN_CENTER,
+			self::DIVIDERS          => Stats::DIVIDERS_SHOW,
 			self::CONTAINER_CLASSES => [],
 			self::CONTENT_CLASSES   => [],
 			self::CLASSES           => [],
@@ -102,10 +102,8 @@ class Stats_Block_Controller extends Abstract_Controller {
 	 */
 	public function get_classes(): string {
 		$this->classes[] = 'b-stats--layout-' . $this->layout;
-
-		if ( $this->display_dividers ) {
-			$this->classes[] = 'b-stats--display_dividers';
-		}
+		$this->classes[] = 'b-stats--content-align-' . $this->content_align;
+		$this->classes[] = 'b-stats--dividers-' . $this->dividers;
 
 		return Markup_Utils::class_attribute( $this->classes );
 	}
@@ -114,6 +112,10 @@ class Stats_Block_Controller extends Abstract_Controller {
 	 * @return string
 	 */
 	public function get_attrs(): string {
+		$this->attrs[] = [
+			'data-stats-count' => count( $this->stats ),
+		];
+
 		return Markup_Utils::concat_attrs( $this->attrs );
 	}
 
