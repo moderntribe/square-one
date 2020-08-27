@@ -7,9 +7,17 @@
  * ----------------------------------------------------------------------------- */
 
 /* -----------------------------------------------------------------------------
- * Block Widths based on Core's alignment options.
+ * Global Styles applied to all ACF blocks.
  * ----------------------------------------------------------------------------- */
 
 .wp-block[data-type^="acf/"] {
-	max-width: var(--grid-width);
+	max-width: none;
+	width: 100%;
+	margin-top: var(--spacer-60);
+	margin-bottom: var(--spacer-60);
+
+	@media (--viewport-medium) {
+		margin-top: var(--spacer-70);
+		margin-bottom: var(--spacer-70);
+	}
 }
