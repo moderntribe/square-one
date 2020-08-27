@@ -100,10 +100,6 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 		$this->classes[] = 'c-block--layout-' . $this->layout;
 		$this->classes[] = 'c-block--width-' . $this->width;
 
-		if ( $this->width === Media_Text_Block::WIDTH_GRID ) {
-			$this->classes[] = 'l-container';
-		}
-
 		return Markup_Utils::class_attribute( $this->classes );
 	}
 
@@ -112,6 +108,10 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 	}
 
 	public function get_container_classes(): string {
+		if ( $this->width === Media_Text_Block::WIDTH_GRID ) {
+			$this->container_classes[] = 'l-container';
+		}
+
 		return Markup_Utils::class_attribute( $this->container_classes );
 	}
 
@@ -136,7 +136,6 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 	 */
 	public function get_content_args(): array {
 		return [
-			Content_Block_Controller::TAG     => 'header',
 			Content_Block_Controller::LEADIN  => $this->get_leadin(),
 			Content_Block_Controller::TITLE   => $this->get_title(),
 			Content_Block_Controller::CONTENT => $this->get_content(),

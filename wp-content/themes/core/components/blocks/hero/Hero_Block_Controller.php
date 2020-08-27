@@ -94,7 +94,7 @@ class Hero_Block_Controller extends Abstract_Controller {
 	 * @return string
 	 */
 	public function get_classes(): string {
-		$this->classes[] = 'c-block--' . $this->layout;
+		$this->classes[] = 'c-block--layout-' . $this->layout;
 
 		return Markup_Utils::class_attribute( $this->classes );
 	}
@@ -231,7 +231,7 @@ class Hero_Block_Controller extends Abstract_Controller {
 			Image_Controller::AS_BG        => true,
 			Image_Controller::USE_LAZYLOAD => true,
 			Image_Controller::WRAPPER_TAG  => 'div',
-			Image_Controller::CLASSES      => [ 'b-interstitial__figure', 'c-image--bg', 'c-image--overlay' ],
+			Image_Controller::CLASSES      => [ 'b-hero__figure', 'c-image--bg', 'c-image--overlay' ],
 			Image_Controller::IMG_CLASSES  => [ 'b-hero__img' ],
 			Image_Controller::SRC_SIZE     => Image_Sizes::CORE_FULL,
 			Image_Controller::SRCSET_SIZES => [

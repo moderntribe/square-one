@@ -105,11 +105,6 @@ class Accordion_Block_Controller extends Abstract_Controller {
 	 * @return string
 	 */
 	public function get_container_classes(): string {
-		if ( $this->layout === self::LAYOUT_STACKED ) {
-			$this->container_classes[] = 'l-sink';
-			$this->container_classes[] = 'l-sink--double';
-		}
-
 		return Markup_Utils::class_attribute( $this->container_classes );
 	}
 
