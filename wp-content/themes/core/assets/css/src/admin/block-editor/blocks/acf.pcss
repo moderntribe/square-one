@@ -13,11 +13,11 @@
 .wp-block[data-type^="acf/"] {
 	max-width: none;
 	width: 100%;
-	margin-top: var(--spacer-60);
-	margin-bottom: var(--spacer-60);
 
-	@media (--viewport-medium) {
-		margin-top: var(--spacer-70);
-		margin-bottom: var(--spacer-70);
+	/* Add a max-width to the edit UI for ACF blocks */
+	.acf-block-fields {
+		max-width: var(--grid-width);
+		margin-left: auto;
+		margin-right: auto;
 	}
 }
