@@ -28,7 +28,9 @@ class Stats extends Block_Config {
 	public const CONTENT_ALIGN_LEFT   = 'left';
 	public const CONTENT_ALIGN_CENTER = 'center';
 
-	public const DISPLAY_DIVIDERS = 'display_dividers';
+	public const DIVIDERS      = 'dividers';
+	public const DIVIDERS_SHOW = 'show';
+	public const DIVIDERS_HIDE = 'hide';
 
 	public function add_block() {
 		$this->set_block( new Block( self::NAME, [
@@ -123,7 +125,7 @@ class Stats extends Block_Config {
 				self::CONTENT_ALIGN_LEFT   => __( 'Content Left', 'tribe' ),
 			],
 			'default_value'   => [
-				self::LAYOUT_STACKED,
+				self::CONTENT_ALIGN_CENTER,
 			],
 			'multiple'        => 0,
 			'image_path'      => sprintf(
@@ -132,10 +134,17 @@ class Stats extends Block_Config {
 				self::NAME
 			),
 			'image_extension' => 'svg',
-		] ) )->add_setting( new Field( self::NAME . '_' . self::DISPLAY_DIVIDERS, [
-			'label' => __( 'Display Dividers', 'tribe' ),
-			'name'  => self::DISPLAY_DIVIDERS,
-			'type'  => 'true_false',
+		] ) )->add_setting( new Field( self::NAME . '_' . self::DIVIDERS, [
+			'label'         => __( 'Stat Dividers', 'tribe' ),
+			'name'          => self::DIVIDERS,
+			'type'          => 'radio',
+			'choices'       => [
+				self::DIVIDERS_SHOW => __( 'Show', 'tribe' ),
+				self::DIVIDERS_HIDE => __( 'Hide', 'tribe' ),
+			],
+			'default_value' => [
+				self::DIVIDERS_SHOW,
+			],
 		] ) );
 	}
 }
