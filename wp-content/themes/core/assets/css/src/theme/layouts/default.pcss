@@ -71,7 +71,7 @@ main {
 
 .l-sink {
 
-	& > * {
+	& > *:not(.c-block):not(.alignwide):not(.alignfull) {
 		max-width: var(--grid-width-staggered);
 		width: calc(100% - 2 * var(--grid-gutter-small));
 		margin-left: auto;
@@ -98,7 +98,7 @@ main {
 
 .l-sink--double {
 
-	& > * {
+	& > *:not(.c-block):not(.alignwide):not(.alignfull) {
 		max-width: var(--grid-width-staggered-double);
 	}
 }
