@@ -154,7 +154,8 @@
 			@media (--viewport-full) {
 
 				/* 4up: Hide borders for last row */
-				&:nth-last-child(-n+4):not(:nth-child(4n+4)) {
+				/* Target last 4 items, but not the first 4 */
+				&:nth-last-child(-n+4):not(:nth-child(-n+4)) {
 					border-bottom: 0;
 				}
 
@@ -164,8 +165,24 @@
 				}
 
 				/* 4up: Hide border for last element in row */
-				&:nth-child(even):last-child .c-statistic {
+				&:nth-child(4n+4) .c-statistic {
 					border-right: 0;
+				}
+			}
+		}
+
+		/* CASE: Single rows of stats */
+		&[data-stats-count="1"],
+		&[data-stats-count="2"],
+		&[data-stats-count="3"],
+		&[data-stats-count="4"] {
+
+			.b-stats__list-item {
+				@media (--viewport-full) {
+					/* 4up: Hide borders for last row */
+					&:nth-last-child(-n+4) {
+						border-bottom: 0;
+					}
 				}
 			}
 		}

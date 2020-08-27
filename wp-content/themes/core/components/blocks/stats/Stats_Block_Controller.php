@@ -112,6 +112,10 @@ class Stats_Block_Controller extends Abstract_Controller {
 	 * @return string
 	 */
 	public function get_attrs(): string {
+		$this->attrs[] = [
+			'data-stats-count' => count( $this->stats ),
+		];
+
 		return Markup_Utils::concat_attrs( $this->attrs );
 	}
 
