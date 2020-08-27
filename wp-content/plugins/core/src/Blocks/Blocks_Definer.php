@@ -44,9 +44,22 @@ class Blocks_Definer implements Definer_Interface {
 			 * This is an intentional subset of the complete list of block provided by Core:
 			 * https://wordpress.org/support/article/blocks/
 			 *
-			 * And any 3rd-party block supported by this project, such as Gravity Forms.
+			 * Includes our custom ACF blocks
+			 * TODO: Find a better method for allowing our custom ACF blocks (above) so we don't have to manually define them here.
+			 *
+			 * Includes any 3rd-party block supported by this project, such as Gravity Forms.
 			 */
 			self::ALLOW_LIST => [
+				'acf/accordion',
+				'acf/hero',
+				'acf/mediatext',
+				'acf/interstitial',
+				'acf/leadform',
+				'acf/links',
+				'acf/logos',
+				'acf/quote',
+				'acf/stats',
+				'acf/tabs',
 				'core/paragraph',
 				'core/heading',
 				'core/list',
