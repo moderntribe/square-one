@@ -21,3 +21,41 @@
 		margin-right: auto;
 	}
 }
+
+/* -----------------------------------------------------------------------------
+ * Accordion Block
+ *
+ * Unset hidden accordion row properties for the editor.
+ * ----------------------------------------------------------------------------- */
+
+.wp-block[data-type^="acf/accordion"] {
+
+	.c-accordion__content {
+		display: block;
+		max-height: none;
+		overflow: visible;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Accordion Block
+ *
+ * Unset hidden tabpanel row properties for the editor & provide some separation
+ * to each tabpanel while editing.
+ * ----------------------------------------------------------------------------- */
+
+.wp-block[data-type^="acf/tabs"] {
+
+	.c-tabs__tabpanel {
+		display: block;
+		margin-bottom: var(--spacer-30);
+		padding-bottom: var(--spacer-30);
+		border-bottom: 1px solid var(--color-border);
+
+		&:last-of-type {
+			margin-bottom: 0;
+			padding-bottom: 0;
+			border-bottom: none;
+		}
+	}
+}
