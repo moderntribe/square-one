@@ -3,54 +3,74 @@ declare( strict_types=1 );
 
 use \Tribe\Project\Templates\Components\card\Card_Controller;
 
+/*
+add data-js to allow for a fully "linked" card, like we used to do:
+
+https://inclusive-components.design/cards/
+
+d.bind_events = function() {
+    d.$el.body.on("click", ".use-target", function() {
+        a.location = c(this).find(".is-target").attr("href")
+    }).on(d.state.click, ".save-target", function(a) {
+        a.stopPropagation()
+    }),
+};
+card.style.cursor = 'pointer';
+also scope stanford 125
+*/
+
 /**
  * @var array $args Arguments passed to the template
  */
 // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
 $c = Card_Controller::factory( $args );
+?>
 
-/*
+<<?php echo $c->get_tag(); ?>
+	<?php echo $c->get_classes(); ?>
+	<?php echo$c->get_attrs(); ?>
+>
 
-<div {{ card_classes|stringify }}>
+	<?php if ( ! empty( $c->get_image_args() ) ) { ?>
+		<div <?php echo $c->get_media_wrapper_classes(); ?>>
+			<?php get_template_part(
+				'components/image/image',
+				null,
+				$c->get_image_args()
+			); ?>
+		</div>
+	<?php } ?>
 
-	{% if before_card %}
-		{{ before_card }}
-	{% endif %}
+	<div <?php echo $c->get_body_wrapper_classes(); ?>>
 
-	{% if image %}
-		<header {{ card_header_classes|stringify }}>
-			{{ component( 'image/Image.php', image ) }}
-		</header>
-	{% endif %}
+		<?php if ( ! empty( $c->render_title() ) ) { ?>
+			<header class="c-card__header c-card__section">
 
-	<div {{ card_content_classes|stringify }}>
+				<?php echo $c->render_meta_primary(); ?>
 
-		{% if pre_title %}
-			{{ pre_title }}
-		{% endif %}
+				<?php echo $c->render_title(); ?>
 
-		{% if title %}
-			{{ component( 'text/Text.php', title ) }}
-		{% endif %}
+				<?php echo $c->render_meta_secondary(); ?>
 
-		{% if post_title %}
-			{{ post_title }}
-		{% endif %}
+			</header>
+		<?php } ?>
 
-		{% if text %}
-			{{ component( 'text/Text.php', text ) }}
-		{% endif %}
+		<?php if ( ! empty( $c->render_content() ) ) { ?>
+			<div class="c-card__content c-card__section">
+				<?php echo $c->render_content(); ?>
+			</div>
+		<?php } ?>
 
-		{% if button %}
-			{{ component( 'button/Button.php', button ) }}
-		{% endif %}
+		<?php if ( ! empty( $c->get_cta_args() ) ) { ?>
+			<footer class="c-card__footer c-card__section">
+				<?php get_template_part(
+					'components/container/container',
+					null,
+					$c->get_cta_args()
+				); ?>
+			</footer>
+		<?php } ?>
 
 	</div>
 
-	{% if after_card %}
-		{{ after_card }}
-	{% endif %}
-
-</div>
-
-*/
+</<?php echo $c->get_tag(); ?>>
