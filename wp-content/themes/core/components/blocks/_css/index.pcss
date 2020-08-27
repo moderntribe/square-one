@@ -25,7 +25,7 @@
 }
 
 /* -----------------------------------------------------------------------------
- * CASE: If a full-bleed block is followed by a non-block element,
+ * CASE: If a full-bleed block is followed by a non-component-block element,
  * the following element should have some additional vertical spacing.
  * ----------------------------------------------------------------------------- */
 .c-block--full-bleed + *:not(.c-block) {
@@ -37,7 +37,7 @@
 }
 
 /* -----------------------------------------------------------------------------
- * CASE: If a non-block element is followed by a full-bleed block,
+ * CASE: If a non-component-block element is followed by a full-bleed block,
  * the block should have some additional vertical spacing.
  * ----------------------------------------------------------------------------- */
 *:not(.c-block) + .c-block--full-bleed {
