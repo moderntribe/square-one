@@ -104,7 +104,7 @@ class Links_Block_Controller extends Abstract_Controller {
 	 * @return string
 	 */
 	public function get_classes(): string {
-		$this->classes[] = 'c-block--' . $this->layout;
+		$this->classes[] = 'b-links--layout-' . $this->layout;
 
 		return Markup_Utils::class_attribute( $this->classes );
 	}
@@ -130,7 +130,7 @@ class Links_Block_Controller extends Abstract_Controller {
 			Content_Block_Controller::TITLE   => $this->get_title(),
 			Content_Block_Controller::CONTENT => $this->get_content(),
 			Content_Block_Controller::CTA     => $this->get_cta(),
-			Content_Block_Controller::LAYOUT  => Content_Block_Controller::LAYOUT_STACKED,
+			Content_Block_Controller::LAYOUT  => $this->layout === Links_Block::LAYOUT_STACKED ? Content_Block_Controller::LAYOUT_INLINE : Content_Block_Controller::LAYOUT_LEFT,
 			Content_Block_Controller::CLASSES => [
 				'c-block__content-block',
 				'c-block__header',
