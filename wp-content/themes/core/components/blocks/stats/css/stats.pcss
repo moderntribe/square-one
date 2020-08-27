@@ -179,9 +179,15 @@
 
 			.b-stats__list-item {
 				@media (--viewport-full) {
+
 					/* 4up: Hide borders for last row */
 					&:nth-last-child(-n+4) {
 						border-bottom: 0;
+					}
+
+					/* Hide border for last element in single row */
+					&:last-child .c-statistic {
+						border-right: 0;
 					}
 				}
 			}
