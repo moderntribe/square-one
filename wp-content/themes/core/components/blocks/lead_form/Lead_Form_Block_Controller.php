@@ -43,13 +43,13 @@ class Lead_Form_Block_Controller extends Abstract_Controller {
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
 
-		$this->layout            = $args[ self::LAYOUT ];
-		$this->width             = $args[ self::WIDTH ];
+		$this->layout            = (string) $args[ self::LAYOUT ];
+		$this->width             = (string) $args[ self::WIDTH ];
 		$this->title             = (string) $args[ self::TITLE ];
 		$this->leadin            = (string) $args[ self::LEADIN ];
 		$this->description       = (string) $args[ self::DESCRIPTION ];
 		$this->cta               = (array) $args[ self::CTA ];
-		$this->form              = $args[ self::FORM ];
+		$this->form              = (int) $args[ self::FORM ];
 		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
 		$this->form_classes      = (array) $args[ self::FORM_CLASSES ];
 		$this->classes           = (array) $args[ self::CLASSES ];
@@ -199,37 +199,15 @@ class Lead_Form_Block_Controller extends Abstract_Controller {
 	 * @return Deferred_Component
 	 */
 	private function get_cta(): Deferred_Component {
-		return defer_template_part( 'components/container/container', null, [
-			Container_Controller::CONTENT => defer_template_part(
-				'components/link/link',
-				null,
-				$this->get_cta_args()
-			),
-			Container_Controller::TAG     => 'p',
-			Container_Controller::CLASSES => [
-				'c-block__cta',
-				'b-lead-form__cta'
-			],
-		] );
-	}
-
-	/**
-	 * @return array
-	 */
-	private function get_cta_args(): array {
 		$cta = wp_parse_args( $this->cta, [
-			'text'   => '',
-			'url'    => '',
-			'target' => '',
+			'content' => '',
+			'url'     => '',
+			'target'  => '',
 		] );
 
-		if ( empty( $cta[ 'url' ] ) ) {
-			return [];
-		}
-
-		return [
+		return defer_template_part( 'components/link/link', null, [
 			Link_Controller::URL     => $cta['url'],
-			Link_Controller::CONTENT => $cta['text'] ?: $cta['url'],
+			Link_Controller::CONTENT => $cta['content'] ?: $cta['url'],
 			Link_Controller::TARGET  => $cta['target'],
 			Link_Controller::CLASSES => [
 				'c-block__cta-link',
@@ -237,7 +215,7 @@ class Lead_Form_Block_Controller extends Abstract_Controller {
 				'a-btn--has-icon-after',
 				'icon-arrow-right'
 			],
-		];
+		] );
 	}
 
 	/**

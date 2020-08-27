@@ -16,11 +16,11 @@ $c->render_header();
 			if ( have_posts() ) :
 				while ( have_posts() ) :
 					the_post();
-					get_template_part( 'components/content/loop_items/search/search', 'search' );
+					get_template_part( 'components/loop_items/search/search', 'search' );
 				endwhile;
 				get_template_part( 'components/pagination/loop/loop', 'search' );
 			else :
-				get_template_part( 'components/content/no_results/no_results', 'search' );
+				get_template_part( 'components/no_results/no_results', 'search' );
 			endif;
 			?>
 

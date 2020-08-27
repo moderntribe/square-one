@@ -5,10 +5,15 @@
  * ----------------------------------------------------------------------------- */
 
 .b-media-text {
+	/* CASE: Width: Full - This is different from `full-bleed`. */
+	&.c-block--width-full {
+		max-width: none;
+		width: 100%;
+	}
+
 	/* CASE: Two Media + Text Blocks Stacked, both Width: Full and Media: Left/Right */
 	&.c-block--width-full:not(.c-block--layout-center) + &.c-block--width-full:not(.c-block--layout-center) {
 		@media (--viewport-full) {
-			padding-top: 0;
 			margin-top: calc(-1 * var(--spacer-70));
 		}
 	}

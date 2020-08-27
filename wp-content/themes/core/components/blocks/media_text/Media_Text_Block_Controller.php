@@ -11,7 +11,7 @@ use Tribe\Project\Templates\Components\content_block\Content_Block_Controller;
 use Tribe\Project\Templates\Components\text\Text_Controller;
 use Tribe\Project\Templates\Components\Deferred_Component;
 use Tribe\Project\Templates\Components\link\Link_Controller;
-use Tribe\Project\Templates\Components\Image\Image_Controller;
+use Tribe\Project\Templates\Components\image\Image_Controller;
 use Tribe\Project\Templates\Models\Image;
 use Tribe\Project\Theme\Config\Image_Sizes;
 
@@ -78,7 +78,7 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 			self::MEDIA_CLASSES     => [],
 			self::CONTENT_CLASSES   => [],
 			self::MEDIA_TYPE        => Media_Text_Block::IMAGE,
-			self::IMAGE             => [],
+			self::IMAGE             => null,
 			self::VIDEO             => '',
 			self::TITLE             => '',
 			self::LEADIN            => '',
@@ -97,11 +97,8 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 	}
 
 	public function get_classes(): string {
-		$this->classes[] = 'c-block--' . $this->layout;
-		$this->classes[] = 'c-block--' . $this->width;
-		if ( $this->width === Media_Text_Block::WIDTH_GRID ) {
-			$this->classes[] = 'l-container';
-		}
+		$this->classes[] = 'c-block--layout-' . $this->layout;
+		$this->classes[] = 'c-block--width-' . $this->width;
 
 		return Markup_Utils::class_attribute( $this->classes );
 	}
@@ -111,6 +108,10 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 	}
 
 	public function get_container_classes(): string {
+		if ( $this->width === Media_Text_Block::WIDTH_GRID ) {
+			$this->container_classes[] = 'l-container';
+		}
+
 		return Markup_Utils::class_attribute( $this->container_classes );
 	}
 
@@ -135,7 +136,6 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 	 */
 	public function get_content_args(): array {
 		return [
-			Content_Block_Controller::TAG     => 'header',
 			Content_Block_Controller::LEADIN  => $this->get_leadin(),
 			Content_Block_Controller::TITLE   => $this->get_title(),
 			Content_Block_Controller::CONTENT => $this->get_content(),
@@ -156,7 +156,8 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 		return defer_template_part( 'components/text/text', null, [
 			Text_Controller::CLASSES => [
 				'c-block__leadin',
-				'b-media-text__leadin'
+				'b-media-text__leadin',
+				'h6',
 			],
 			Text_Controller::CONTENT => $this->leadin ?? '',
 		] );
@@ -171,7 +172,7 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 			Text_Controller::CLASSES => [
 				'c-block__title',
 				'b-media-text__title',
-				'h3'
+				'h3',
 			],
 			Text_Controller::CONTENT => $this->title ?? '',
 		] );
@@ -186,7 +187,7 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 				'c-block__description',
 				'b-media-text__text',
 				't-sink',
-				's-sink'
+				's-sink',
 			],
 			Container_Controller::CONTENT => $this->description ?? '',
 		] );
@@ -196,45 +197,22 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 	 * @return Deferred_Component
 	 */
 	private function get_cta(): Deferred_Component {
-		return defer_template_part( 'components/container/container', null, [
-			Container_Controller::CONTENT => defer_template_part(
-				'components/link/link',
-				null,
-				$this->get_cta_args()
-			),
-			Container_Controller::TAG     => 'p',
-			Container_Controller::CLASSES => [
-				'c-block__cta',
-				'b-media-text__cta'
-			],
-		] );
-	}
-
-	/**
-	 * @return array
-	 */
-	private function get_cta_args(): array {
 		$cta = wp_parse_args( $this->cta, [
-			'text'   => '',
-			'url'    => '',
-			'target' => '',
+			'content' => '',
+			'url'     => '',
+			'target'  => '',
 		] );
-
-		if ( empty( $cta[ 'url' ] ) ) {
-			return [];
-		}
-
-		return [
+		return defer_template_part( 'components/link/link', null, [
 			Link_Controller::URL     => $cta['url'],
-			Link_Controller::CONTENT => $cta['text'] ?: $cta['url'],
+			Link_Controller::CONTENT => $cta['content'] ?: $cta['url'],
 			Link_Controller::TARGET  => $cta['target'],
 			Link_Controller::CLASSES => [
 				'c-block__cta-link',
 				'a-btn',
 				'a-btn--has-icon-after',
-				'icon-arrow-right'
+				'icon-arrow-right',
 			],
-		];
+		] );
 	}
 
 	/**
@@ -263,11 +241,6 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 
 		return [
 			Image_Controller::ATTACHMENT   => Image::factory( (int) $this->image ),
-			Image_Controller::AS_BG        => true,
-			Image_Controller::USE_LAZYLOAD => true,
-			Image_Controller::WRAPPER_TAG  => 'div',
-			Image_Controller::CLASSES      => [ 'b-interstitial__figure' ],
-			Image_Controller::IMG_CLASSES  => [ 'b-interstitial__img', 'c-image__bg' ],
 			Image_Controller::SRC_SIZE     => $src_size,
 			Image_Controller::SRCSET_SIZES => $srcset_sizes,
 		];

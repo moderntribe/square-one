@@ -6,6 +6,7 @@ namespace Tribe\Project\Blocks\Types\Tabs;
 use Tribe\Project\Blocks\Types\Base_Model;
 use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Templates\Components\blocks\tabs\Tabs_Block_Controller;
+use Tribe\Project\Templates\Models\Tab as Tab_Model;
 
 class Tabs_Model extends Base_Model {
 	/**

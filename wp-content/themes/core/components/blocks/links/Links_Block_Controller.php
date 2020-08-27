@@ -104,7 +104,7 @@ class Links_Block_Controller extends Abstract_Controller {
 	 * @return string
 	 */
 	public function get_classes(): string {
-		$this->classes[] = 'c-block--' . $this->layout;
+		$this->classes[] = 'c-block--layout-' . $this->layout;
 
 		return Markup_Utils::class_attribute( $this->classes );
 	}
@@ -130,7 +130,7 @@ class Links_Block_Controller extends Abstract_Controller {
 			Content_Block_Controller::TITLE   => $this->get_title(),
 			Content_Block_Controller::CONTENT => $this->get_content(),
 			Content_Block_Controller::CTA     => $this->get_cta(),
-			Content_Block_Controller::LAYOUT  => Content_Block_Controller::LAYOUT_STACKED,
+			Content_Block_Controller::LAYOUT  => $this->layout === Links_Block::LAYOUT_STACKED ? Content_Block_Controller::LAYOUT_INLINE : Content_Block_Controller::LAYOUT_LEFT,
 			Content_Block_Controller::CLASSES => [
 				'c-block__content-block',
 				'c-block__header',
@@ -186,37 +186,15 @@ class Links_Block_Controller extends Abstract_Controller {
 	 * @return Deferred_Component
 	 */
 	private function get_cta(): Deferred_Component {
-		return defer_template_part( 'components/container/container', null, [
-			Container_Controller::CONTENT => defer_template_part(
-				'components/link/link',
-				null,
-				$this->get_cta_args()
-			),
-			Container_Controller::TAG     => 'p',
-			Container_Controller::CLASSES => [
-				'c-block__cta',
-				'b-links__cta'
-			],
-		] );
-	}
-
-	/**
-	 * @return array
-	 */
-	private function get_cta_args(): array {
 		$cta = wp_parse_args( $this->cta, [
-			'text'   => '',
-			'url'    => '',
-			'target' => '',
+			'content' => '',
+			'url'     => '',
+			'target'  => '',
 		] );
 
-		if ( empty( $cta[ 'url' ] ) ) {
-			return [];
-		}
-
-		return [
+		return defer_template_part( 'components/link/link', null, [
 			Link_Controller::URL     => $cta['url'],
-			Link_Controller::CONTENT => $cta['text'] ?: $cta['url'],
+			Link_Controller::CONTENT => $cta['content'] ?: $cta['url'],
 			Link_Controller::TARGET  => $cta['target'],
 			Link_Controller::CLASSES => [
 				'c-block__cta-link',
@@ -224,7 +202,7 @@ class Links_Block_Controller extends Abstract_Controller {
 				'a-btn--has-icon-after',
 				'icon-arrow-right'
 			],
-		];
+		] );
 	}
 
 	/**
