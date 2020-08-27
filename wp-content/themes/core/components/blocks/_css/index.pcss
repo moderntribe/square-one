@@ -9,30 +9,76 @@
  * ----------------------------------------------------------------------------- */
 
 .c-block {
+	margin-top: var(--spacer-60);
+	margin-bottom: var(--spacer-60);
+
+	@media (--viewport-medium) {
+		margin-top: var(--spacer-70);
+		margin-bottom: var(--spacer-70);
+	}
+
 	/* CASE: Block is full-bleed */
 	&.c-block--full-bleed {
 		max-width: none;
 		width: 100%;
 	}
+}
 
-	/* -----------------------------------------------------------------------------
-	 * CASE: Block has vertical padding
-	 *
-	 * Provides vertical spacing in addition to any vertical margin
-	 * applied between blocks. Different from a full-bleed block in that a
-	 * full-bleed block generally has custom vertical padding.
-	 *
-	 * Useful when applying background colors to blocks, or "zebra-striping".
-	 * ----------------------------------------------------------------------------- */
-	&.c-block--vertical-padding {
-		padding-top: var(--spacer-60);
-		padding-bottom: var(--spacer-60);
-		background-color: var(--color-grey-light);
+/* -----------------------------------------------------------------------------
+ * CASE: If a full-bleed block is followed by a non-block element,
+ * the following element should have some additional vertical spacing.
+ * ----------------------------------------------------------------------------- */
+.c-block--full-bleed + *:not(.c-block) {
+	margin-top: var(--spacer-60);
 
-		@media (--viewport-medium) {
-			padding-top: var(--spacer-70);
-			padding-bottom: var(--spacer-70);
-		}
+	@media (--viewport-medium) {
+		margin-top: var(--spacer-70);
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * CASE: If a non-block element is followed by a full-bleed block,
+ * the block should have some additional vertical spacing.
+ * ----------------------------------------------------------------------------- */
+*:not(.c-block) + .c-block--full-bleed {
+	margin-top: var(--spacer-60);
+
+	@media (--viewport-medium) {
+		margin-top: var(--spacer-70);
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * CASE: Collapse spacing between any full-bleed or background-applied blocks.
+ * ----------------------------------------------------------------------------- */
+.c-block--full-bleed + .c-block--full-bleed,
+.c-block--full-bleed + .c-block--vertical-padding,
+.c-block--vertical-padding + .c-block--full-bleed,
+.c-block--vertical-padding + .c-block--vertical-padding {
+	margin-top: calc(-1 * var(--spacer-60));
+
+	@media (--viewport-medium) {
+		margin-top: calc(-1 * var(--spacer-70));
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * CASE: Block has vertical padding
+ *
+ * Provides vertical spacing in addition to any vertical margin
+ * applied between blocks. Different from a full-bleed block in that a
+ * full-bleed block generally has custom vertical padding.
+ *
+ * Useful when applying background colors to blocks, or "zebra-striping".
+ * ----------------------------------------------------------------------------- */
+.c-block--vertical-padding {
+	padding-top: var(--spacer-60);
+	padding-bottom: var(--spacer-60);
+	background-color: var(--color-grey-light);
+
+	@media (--viewport-medium) {
+		padding-top: var(--spacer-70);
+		padding-bottom: var(--spacer-70);
 	}
 }
 
