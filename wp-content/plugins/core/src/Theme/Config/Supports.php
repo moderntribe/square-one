@@ -11,6 +11,7 @@ class Supports {
 	public function add_theme_supports() {
 		$this->support_thumbnails();
 		$this->support_title_tag();
+		$this->support_responsive_embeds();
 		$this->support_html5();
 	}
 
@@ -26,6 +27,10 @@ class Supports {
 	 */
 	private function support_title_tag() {
 		add_theme_support( 'title-tag' );
+	}
+
+	private function support_responsive_embeds() {
+		add_theme_support( 'responsive-embeds' );
 	}
 
 	/**
