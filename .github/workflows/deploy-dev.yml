@@ -16,6 +16,7 @@ jobs:
       ENVIRONMENT: dev
       COMPOSER_AUTH: '{ "github-oauth": { "github.com": "${{ secrets.GH_TOKEN }}" } }'
       BUILD_BRANCH: feeture/gha-deploys
+      DEPLOY_REPO: ${{ secret.DEV_DEPLOY_REPO }}
 
     steps:
 ### BUILD: General SquareOne build steps
@@ -31,7 +32,7 @@ jobs:
       - name: Install composer dependencies
         working-directory: ${{ env.BUILD_FOLDER }}
         run: |
-          echo "${{ secrets.WP_ENV }}" > .env
+          echo "${{ secrets.COMPOSER_ENV }}" > .env
           composer install --optimize-autoloader --ignore-platform-reqs --no-dev
           rm .env
           rm -rf vendor/moderntribe/tribe-libs/.git
@@ -63,13 +64,13 @@ jobs:
       - name: HOST SCM SSH KEY
         uses: webfactory/ssh-agent@v0.2.0
         with:
-          ssh-private-key: ${{secrets.HOST_SSH_KEY}}
+          ssh-private-key: ${{secrets.DEPLOY_PRIVATE_SSH_KEY}}
 
 # Get Build Repository and add wpengine to allowed hosts
       - name: HOST SCM
         run: |
           ssh-keyscan git.wpengine.com >> ~/.ssh/known_hosts
-          git clone ${{env.deploy_repo}} ${{env.DEPLOY_FOLDER}}
+          git clone ${{env.DEPLOY_REPO}} ${{env.DEPLOY_FOLDER}}
 
 # Rsync wordpress
       - name: Sync Build WP folder to Deploy directory
