@@ -16,7 +16,7 @@ jobs:
       ENVIRONMENT: prod
       COMPOSER_AUTH: '{ "github-oauth": { "github.com": "${{ secrets.GH_TOKEN }}" } }'
       BUILD_BRANCH: feeture/gha-deploys
-      DEPLOY_REPO: ${{ secret.PROD_DEPLOY_REPO }}
+      DEPLOY_REPO: ${{ secrets.PROD_DEPLOY_REPO }}
 
     steps:
 ### BUILD: General SquareOne build steps
