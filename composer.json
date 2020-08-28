@@ -91,6 +91,7 @@
     "roots/wp-password-bcrypt": "dev-master",
     "sunra/php-simple-html-dom-parser": "1.5.2",
     "vlucas/phpdotenv": "^3.0",
+    "wpackagist-plugin/acf-advanced-taxonomy-selector": "3.1.0",
     "wpackagist-plugin/classic-editor": "1.6",
     "wpackagist-plugin/classic-editor-addon": "2.6.3",
     "wpackagist-plugin/configure-smtp": "3.1",

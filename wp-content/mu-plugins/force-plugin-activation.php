@@ -15,14 +15,16 @@ class Force_Plugin_Activation {
 	 *
 	 * Add elements as plugin path: directory/file.php
 	 */
-	private $force_active = array(
+	private $force_active = [
 		'advanced-custom-fields-pro/acf.php',
 		'core/core.php',
 		'tribe-admin-dashboard/tribe-admin-dashboard.php',
 		'tribe-branding/tribe-branding.php',
 		'disable-emojis/disable-emojis.php',
 		'safe-svg/safe-svg.php',
-	);
+		'acf-image-select/acf-image-select.php',
+		'acf-advanced-taxonomy-selector/acf-advanced_taxonomy_selector.php',
+	];
 
 	/**
 	 * These plugins will be deactivated and can't
@@ -30,7 +32,7 @@ class Force_Plugin_Activation {
 	 *
 	 * Add elements as plugin path: directory/file.php
 	 */
-	private $force_deactive = array(
+	private $force_deactive = [
 		'debug-bar/debug-bar.php',
 		'debug-bar-action-hooks/debug-bar-action-hooks.php',
 		'debug-bar-console/debug-bar-console.php',
@@ -38,8 +40,8 @@ class Force_Plugin_Activation {
 		'debug-bar-extender/debug-bar-extender.php',
 		'rewrite-rules-inspector/rewrite-rules-inspector.php',
 		'wp-log-in-browser/wp-log-in-browser.php',
-		'wp-xhprof-profiler/xhprof-profiler.php'
-	);
+		'wp-xhprof-profiler/xhprof-profiler.php',
+	];
 
 	/**
 	 * These plugins will not show in the site plugins list.
@@ -47,7 +49,7 @@ class Force_Plugin_Activation {
 	 *
 	 * Add elements as plugin path: directory/file.php
 	 */
-	private $force_network_only = array(
+	private $force_network_only = [
 		'advanced-custom-fields-pro/acf.php',
 		'debug-bar/debug-bar.php',
 		'debug-bar-action-hooks/debug-bar-action-hooks.php',
@@ -56,8 +58,8 @@ class Force_Plugin_Activation {
 		'debug-bar-extender/debug-bar-extender.php',
 		'rewrite-rules-inspector/rewrite-rules-inspector.php',
 		'wp-log-in-browser/wp-log-in-browser.php',
-		'wp-xhprof-profiler/xhprof-profiler.php'
-	);
+		'wp-xhprof-profiler/xhprof-profiler.php',
+	];
 
 
 	public function __construct() {
@@ -78,11 +80,11 @@ class Force_Plugin_Activation {
 			//$this->force_deactive[] = 'term-sorter/term-sorter.php';
 		}
 
-		add_filter( 'option_active_plugins',               array( $this, 'force_plugins'       ), 10, 1 );
-		add_filter( 'site_option_active_sitewide_plugins', array( $this, 'force_plugins'       ), 10, 1 );
-		add_filter( 'plugin_action_links',                 array( $this, 'plugin_action_links' ), 99, 4 );
-		add_filter( 'network_admin_plugin_action_links',   array( $this, 'plugin_action_links' ), 99, 4 );
-		add_filter( 'all_plugins',                         array( $this, 'hide_from_blog'      ), 99, 1 );
+		add_filter( 'option_active_plugins', [ $this, 'force_plugins' ], 10, 1 );
+		add_filter( 'site_option_active_sitewide_plugins', [ $this, 'force_plugins' ], 10, 1 );
+		add_filter( 'plugin_action_links', [ $this, 'plugin_action_links' ], 99, 4 );
+		add_filter( 'network_admin_plugin_action_links', [ $this, 'plugin_action_links' ], 99, 4 );
+		add_filter( 'all_plugins', [ $this, 'hide_from_blog' ], 99, 1 );
 	}
 
 	/**
@@ -132,9 +134,9 @@ class Force_Plugin_Activation {
 	 * Removes the activate/deactivate links from the plugins list
 	 * if they are in the force active or force deactive lists.
 	 *
-	 * @param array $actions
+	 * @param array  $actions
 	 * @param string $plugin_file
-	 * @param array $plugin_data
+	 * @param array  $plugin_data
 	 * @param string $context
 	 *
 	 * @return array
@@ -142,7 +144,7 @@ class Force_Plugin_Activation {
 	public function plugin_action_links( $actions, $plugin_file, $plugin_data, $context ) {
 
 		if ( in_array( $plugin_file, $this->force_active ) ) {
-			unset( $actions['deactivate'] );
+			unset( $actions[ 'deactivate' ] );
 		}
 
 		if ( ! defined( 'WP_DEBUG' ) || ! WP_DEBUG ) {
