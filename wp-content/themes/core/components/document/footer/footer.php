@@ -14,4 +14,3 @@ $c = Footer_Controller::factory();
 
 </body>
 </html>
-

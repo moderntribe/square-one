@@ -3,6 +3,8 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Blocks;
 
+use Tribe\Libs\ACF\Block;
+
 /**
  * Class Allowed_Blocks
  *
@@ -10,23 +12,28 @@ namespace Tribe\Project\Blocks;
  */
 class Allowed_Blocks {
 	/**
-	 * @var array A list of blocks types to disable
+	 * @var array The list of blocks types allowed
 	 */
-	private $blacklist;
+	private array $allow_list;
 
-	public function __construct( array $blacklist ) {
-		$this->blacklist = $blacklist;
+	public function __construct( array $allow_list ) {
+		$this->allow_list = $allow_list;
 	}
 
 	/**
-	 * Add block types to the blacklist to disable in the block editor
+	 * Add block types to the allow list to enable in the block editor
 	 *
-	 * @param string[]
+	 * @param bool|array $allowed_types
+	 * @param \WP_Post $post
 	 *
 	 * @return array
-	 * @filter tribe/project/blocks/blacklist
+	 * @filter allowed_block_types
 	 */
-	public function filter_block_blacklist( array $types ): array {
-		return array_unique( array_merge( $types, $this->blacklist ) );
+	public function register_allowed_blocks( $allowed_types, \WP_Post $post ): array {
+		if ( is_bool( $allowed_types ) ) {
+			$allowed_types = [];
+		}
+
+		return array_unique( array_merge( $allowed_types, $this->allow_list ) );
 	}
 }

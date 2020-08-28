@@ -17,7 +17,7 @@ $c = Masthead_Controller::factory();
 
 		<?php get_template_part( 'components/header/navigation/navigation' ); ?>
 
-		<?php get_template_part( 'components/content/search_form/search_form' ); ?>
+		<?php get_template_part( 'components/search_form/search_form' ); ?>
 
 	</div>
 

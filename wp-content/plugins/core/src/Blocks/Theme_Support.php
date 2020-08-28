@@ -37,6 +37,7 @@ class Theme_Support {
 		$this->disable_custom_values();
 		$this->color_palette();
 		$this->fonts();
+		$this->disable_block_patterns();
 	}
 
 	private function alignment(): void {
@@ -66,4 +67,9 @@ class Theme_Support {
 	private function fonts(): void {
 		add_theme_support( 'editor-font-sizes', $this->font_sizes->format_for_blocks() );
 	}
+
+	private function disable_block_patterns(): void {
+		remove_theme_support( 'core-block-patterns' );
+	}
+
 }

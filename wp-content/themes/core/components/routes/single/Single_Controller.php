@@ -4,9 +4,11 @@ declare( strict_types=1 );
 namespace Tribe\Project\Templates\Components\routes\single;
 
 use Tribe\Project\Templates\Components\Abstract_Controller;
+use Tribe\Project\Templates\Components\image\Image_Controller;
 use Tribe\Project\Templates\Components\sidebar\Sidebar_Controller;
 use Tribe\Project\Templates\Components\breadcrumbs\Breadcrumbs_Controller;
 use Tribe\Project\Templates\Models\Breadcrumb;
+use Tribe\Project\Templates\Models\Image;
 
 class Single_Controller extends Abstract_Controller {
 
@@ -76,6 +78,16 @@ class Single_Controller extends Abstract_Controller {
 
 		return [
 			new Breadcrumb( $url, get_the_title( $page ) ),
+		];
+	}
+
+	public function get_image_args() {
+		if ( ! has_post_thumbnail() ) {
+			return [];
+		}
+
+		return [
+			Image_Controller::ATTACHMENT => Image::factory( (int) get_post_thumbnail_id() ),
 		];
 	}
 }

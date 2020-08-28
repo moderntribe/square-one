@@ -21,7 +21,7 @@ class Blocks_Definer implements Definer_Interface {
 
 	public const TYPES          = 'blocks.types';
 	public const CONTROLLER_MAP = 'blocks.controller_map';
-	public const BLACKLIST      = 'blocks.blacklist';
+	public const ALLOW_LIST     = 'blocks.allow_list';
 	public const STYLES         = 'blocks.style_overrides';
 
 	public function define(): array {
@@ -40,19 +40,56 @@ class Blocks_Definer implements Definer_Interface {
 				DI\get( Tabs::class ),
 			] ),
 
-			self::CONTROLLER_MAP => DI\add( [] ),
-
 			/**
-			 * An array of core/3rd-party block types that should be unregistered
+			 * Array of blocks supported by SquareOne
+			 *
+			 * This is an intentional subset of the complete list of block provided by Core:
+			 * https://wordpress.org/support/article/blocks/
+			 *
+			 * Includes our custom ACF blocks
+			 * TODO: Find a better method for allowing our custom ACF blocks (above) so we don't have to manually define them here.
+			 *
+			 * Includes any 3rd-party block supported by this project, such as Gravity Forms.
 			 */
-			self::BLACKLIST  => [
+			self::ALLOW_LIST => [
+				'acf/accordion',
+				'acf/hero',
+				'acf/mediatext',
+				'acf/interstitial',
+				'acf/leadform',
+				'acf/links',
+				'acf/logos',
+				'acf/quote',
+				'acf/stats',
+				'acf/tabs',
+				'core/paragraph',
+				'core/heading',
+				'core/list',
 				'core/buttons',
-				'core/button',
-				'core/rss',
-				'core/social-links',
-				'core/spacer',
-				// TODO: Finish the complete list of core blocks to disable.
-				// TODO: Disable Block Patterns from 5.5
+				'core/separator',
+				'core/image',
+				'core/gallery',
+				'core/audio',
+				'core/file',
+				'core/video',
+				'core/code',
+				'core/classic',
+				'core/custom-html',
+				'core/preformatted',
+				'core/table',
+				'core/shortcode',
+				'core/embed',
+				'core-embed/facebook',
+				'core-embed/twitter',
+				'core-embed/youtube',
+				'core-embed/instagram',
+				'core-embed/wordpress',
+				'core-embed/soundcloud',
+				'core-embed/flickr',
+				'core-embed/vimeo',
+				'core-embed/tumblr',
+				'core-embed/wordpress-tv',
+				'gravityforms/form',
 			],
 
 			/**
@@ -85,7 +122,7 @@ class Blocks_Definer implements Definer_Interface {
 				} ),
 			] ),
 
-			Allowed_Blocks::class => DI\create()->constructor( DI\get( self::BLACKLIST ) ),
+			Allowed_Blocks::class => DI\create()->constructor( DI\get( self::ALLOW_LIST ) ),
 		];
 	}
 }

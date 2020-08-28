@@ -21,8 +21,8 @@ class Blocks_Subscriber extends Abstract_Subscriber {
 			$this->container->get( Block_Renderer::class )->render_template( ...$args );
 		}, 10, 4 );
 
-		add_filter( 'tribe/project/blocks/blacklist', function ( $types ) {
-			return $this->container->get( Allowed_Blocks::class )->filter_block_blacklist( $types );
+		add_filter( 'allowed_block_types', function ( $types, $post ) {
+			return $this->container->get( Allowed_Blocks::class )->register_allowed_blocks( $types, $post );
 		}, 10, 2 );
 
 		add_action( 'after_setup_theme', function () {

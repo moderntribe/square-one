@@ -89,7 +89,7 @@ class Accordion_Block_Controller extends Abstract_Controller {
 	 * @return string
 	 */
 	public function get_classes(): string {
-		$this->classes[] = 'c-block--' . $this->layout;
+		$this->classes[] = 'c-block--layout-' . $this->layout;
 
 		return Markup_Utils::class_attribute( $this->classes );
 	}
@@ -105,11 +105,6 @@ class Accordion_Block_Controller extends Abstract_Controller {
 	 * @return string
 	 */
 	public function get_container_classes(): string {
-		if ( $this->layout === self::LAYOUT_STACKED ) {
-			$this->container_classes[] = 'l-sink';
-			$this->container_classes[] = 'l-sink--double';
-		}
-
 		return Markup_Utils::class_attribute( $this->container_classes );
 	}
 
@@ -164,7 +159,8 @@ class Accordion_Block_Controller extends Abstract_Controller {
 		return defer_template_part( 'components/text/text', null, [
 			Text_Controller::CLASSES => [
 				'c-block__leadin',
-				'b-accordion__leadin'
+				'b-accordion__leadin',
+				'h6',
 			],
 			Text_Controller::CONTENT => $this->leadin ?? '',
 		] );
@@ -189,37 +185,15 @@ class Accordion_Block_Controller extends Abstract_Controller {
 	 * @return Deferred_Component
 	 */
 	private function get_cta(): Deferred_Component {
-		return defer_template_part( 'components/container/container', null, [
-			Container_Controller::CONTENT => defer_template_part(
-				'components/link/link',
-				null,
-				$this->get_cta_args()
-			),
-			Container_Controller::TAG     => 'p',
-			Container_Controller::CLASSES => [
-				'c-block__cta',
-				'b-accordion__cta'
-			],
-		] );
-	}
-
-	/**
-	 * @return array
-	 */
-	private function get_cta_args(): array {
 		$cta = wp_parse_args( $this->cta, [
-			'text'   => '',
-			'url'    => '',
-			'target' => '',
+			'content' => '',
+			'url'     => '',
+			'target'  => '',
 		] );
 
-		if ( empty( $cta[ 'url' ] ) ) {
-			return [];
-		}
-
-		return [
+		return defer_template_part( 'components/link/link', null, [
 			Link_Controller::URL     => $cta['url'],
-			Link_Controller::CONTENT => $cta['text'] ?: $cta['url'],
+			Link_Controller::CONTENT => $cta['content'] ?: $cta['url'],
 			Link_Controller::TARGET  => $cta['target'],
 			Link_Controller::CLASSES => [
 				'c-block__cta-link',
@@ -227,7 +201,7 @@ class Accordion_Block_Controller extends Abstract_Controller {
 				'a-btn--has-icon-after',
 				'icon-arrow-right'
 			],
-		];
+		] );
 	}
 
 	/**

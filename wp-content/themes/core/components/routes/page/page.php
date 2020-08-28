@@ -14,10 +14,8 @@ $c->render_header();
 
 		<?php get_template_part( 'components/header/subheader/subheader' ); ?>
 
-		<div class="l-container">
-
-			<?php get_template_part( 'components/content/page/index/index' ); ?>
-
+		<div class="s-sink t-sink l-sink">
+			<?php the_content(); ?>
 		</div>
 
 	</main>

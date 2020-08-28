@@ -6,6 +6,45 @@
 
 .b-links {
 
+	/* CASE: Layout Stacked is slightly different than content block inline layout */
+	.c-content-block--layout-inline {
+
+		.c-block__title {
+
+			@media (--viewport-medium) {
+				float: none;
+				width: 100%;
+			}
+
+			@media (--viewport-full) {
+				float: left;
+				width: calc(58.3333% - var(--grid-gutter-half));
+			}
+		}
+
+		.c-block__description,
+		.c-content-block__cta {
+			@media (--viewport-medium) {
+				float: none;
+				width: 100%;
+			}
+
+			@media (--viewport-full) {
+				float: right;
+				width: calc(41.6667% - var(--grid-gutter-half));
+			}
+		}
+
+		.c-block__description {
+			@media (--viewport-medium) {
+				margin-top: var(--spacer-20);
+			}
+
+			@media (--viewport-full) {
+				margin-top: 0;
+			}
+		}
+	}
 }
 
 /* -----------------------------------------------------------------------------
@@ -13,8 +52,8 @@
  * ----------------------------------------------------------------------------- */
 
 .b-links__container {
-	/* CASE: Links Inline (default) */
-	.c-block:not(.c-block--layout-stacked) & {
+	/* CASE: Layout Inline */
+	.b-links--layout-inline & {
 		@media (--viewport-full) {
 			display: flex;
 			justify-content: space-between;
@@ -27,9 +66,9 @@
  * ----------------------------------------------------------------------------- */
 
 .b-links__header {
-	/* CASE: Links Inline (default) */
-	.c-block:not(.c-block--layout-stacked) & {
-		margin-bottom: var(--spacer-20);
+	/* CASE: Layout Inline */
+	.b-links--layout-inline & {
+		margin-bottom: var(--spacer-60);
 
 		@media (--viewport-full) {
 			margin-bottom: 0;
@@ -39,8 +78,8 @@
 		}
 	}
 
-	/* CASE: Links Stacked: Content Block elements are inline (floated) */
-	.c-block--layout-stacked & {
+	/* CASE: Layout Stacked: Content Block elements are inline (floated) */
+	.b-links--layout-stacked & {
 		@mixin clearfix;
 
 		margin-bottom: var(--spacer-60);
@@ -53,14 +92,7 @@
  * ----------------------------------------------------------------------------- */
 
 .b-links__title {
-	/* CASE: Links Stacked: Content Block elements are inline (floated) */
-	.c-block--layout-stacked & {
-		@media (--viewport-full) {
-			float: left;
-			clear: left;
-			width: calc(58.3333% - var(--grid-gutter-half));
-		}
-	}
+
 }
 
 /* -----------------------------------------------------------------------------
@@ -68,19 +100,14 @@
  * ----------------------------------------------------------------------------- */
 
 .b-links__description {
-	margin-top: var(--spacer-20);
 
 	> p {
 		@mixin t-body-large;
 	}
 
-	/* CASE: Links Stacked: Content Block elements are inline (floated) */
-	.c-block--layout-stacked & {
-		@media (--viewport-full) {
-			float: right;
-			margin-top: 0;
-			width: calc(41.6667% - var(--grid-gutter-half));
-		}
+	/* CASE: Layout Inline */
+	.b-links--layout-inline & {
+		margin-top: var(--spacer-20);
 	}
 }
 
@@ -89,8 +116,8 @@
  * ----------------------------------------------------------------------------- */
 
 .b-links__content {
-	/* CASE: Links Inline (default) */
-	.c-block:not(.c-block--layout-stacked) & {
+	/* CASE: Layout Inline */
+	.b-links--layout-inline & {
 		@media (--viewport-full) {
 			padding-left: var(--grid-gutter);
 			max-width: var(--grid-4-col);
@@ -104,16 +131,16 @@
  * ----------------------------------------------------------------------------- */
 
 .b-links__list-title {
-	/* CASE: Links Inline (default) */
-	.c-block:not(.c-block--layout-stacked) & {
+	/* CASE: Layout Inline */
+	.b-links--layout-inline & {
 		margin-bottom: var(--spacer-10);
 	}
 }
 
 .b-links__list {
-	/* CASE: Links Stacked */
-	.c-block--layout-stacked & li {
-		border-bottom: 1px solid var(--color-neutral-10);
+	/* CASE: Layout Stacked */
+	.b-links--layout-stacked & li {
+		border-bottom: 1px solid var(--color-grey-light);
 
 		&:last-child {
 			border-bottom: 0;
@@ -155,8 +182,8 @@
 		transition: var(--transition);
 	}
 
-	/* CASE: Links Stacked */
-	.c-block--layout-stacked & {
+	/* CASE: Layout Stacked */
+	.b-links--layout-stacked & {
 		padding: var(--spacer-40) 0 var(--spacer-40) 28px;
 
 		&:before {
