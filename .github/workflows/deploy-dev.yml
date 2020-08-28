@@ -1,117 +1,81 @@
-name: SquareOne CD - GIT
+name: Client Environment Dev Deployment
 
 on:
-  repository_dispatch:
-    types: manual-deploy
+  workflow_dispatch:
+  push:
+    branches:
+      - release/1/develop
 
 jobs:
-  cd:
+  deploy:
     runs-on: ubuntu-latest
 
     env:
       BUILD_FOLDER: ./build
       DEPLOY_FOLDER: ./deploy
-      ENVIRONMENT: dev
+      ENV: dev
+      ENV_URL: ${{ secrets.DEV_URL }}
+      SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
       COMPOSER_AUTH: '{ "github-oauth": { "github.com": "${{ secrets.GH_TOKEN }}" } }'
-      BUILD_BRANCH: feeture/gha-deploys
+
 
     steps:
+      # Get the build repository
       - name: BUILD SCM
         uses: actions/checkout@v2
         with:
-          path: ${{ env.BUILD_FOLDER }}
-          ref: ${{env.BUILD_BRANCH}}
+          ref: ${{github.ref}}
 
+      # Set required enviroment variables for Composer
       - name: Create .env
-        working-directory: ${{ env.BUILD_FOLDER }}
         run: |
-          printf '
-          WP_PLUGIN_ACF_KEY='${{ secrets.WP_PLUGIN_ACF_KEY }}'
-          WP_PLUGIN_GF_KEY='${{ secrets.WP_PLUGIN_GF_KEY }}'
-          WP_PLUGIN_GF_TOKEN='${{ secrets.WP_PLUGIN_GF_TOKEN }}'
-          ' > .env
-      - name: Create local config
-        working-directory: ${{ env.BUILD_FOLDER }}
+          echo "${{ secrets.WP_ENV }}" > .env
+
+      - name: Composer Build
         run: |
-          php -r "file_exists( 'local-config.php' ) || copy( 'local-config-sample.php', 'local-config.php' );"
-          php -r "file_exists( 'local-config.json' ) || copy( 'local-config-sample.json', 'local-config.json' );"
-          echo "define( 'ENVIRONMENT', ${{env.ENVIROMENT}} );" >> local-config.php
-      - name: Install composer dependencies
-        working-directory: ${{ env.BUILD_FOLDER }}
-        run: |
-          composer install --optimize-autoloader --ignore-platform-reqs --no-dev
-          rm .env
-          rm -rf vendor/moderntribe/tribe-libs/.git
-          rm -rf wp-content/plugins/panel-builder/.git
-          rm -rf wp-content/plugins/gutenpanels/.git
+          composer install --ignore-platform-reqs --no-dev --optimize-autoloader
+
       - name: Setup node
         uses: actions/setup-node@v1
         with:
           node-version: '12.13.1'
 
       - name: Get yarn cache directory
-        working-directory: ${{ env.BUILD_FOLDER }}
         id: yarn-cache-dir
         run: echo "::set-output name=dir::$(yarn cache dir)"
 
-      - name: Install node modules
-        working-directory: ${{ env.BUILD_FOLDER }}
-        run: yarn --frozen-lockfile
-
-      - name: Decrypt Host Enviroment Vars
-        working-directory: ${{ env.BUILD_FOLDER }}/dev/deploy
+      - name: Node Build
         run: |
-          echo '${{secrets.ANSIBLE_VAULTPASS}}' > ./.vaultpass
-          sh decrypt.sh
-          rm ./.vaultpass
-          source .host/config/${{env.ENVIRONMENT}}.cfg
-          echo "::set-env name=domain::$domain"
-          echo "::set-env name=deploy_repo::$deploy_repo"
-      - name: HOST SCM SSH KEY
-        uses: webfactory/ssh-agent@v0.2.0
+          npm install gulp-cli -g
+          npm install yarn
+          yarn install:theme
+          yarn run validate
+          yarn run server_dist
+
+    # switch to git merge deploys.
+
+
+      - name: Deploy WP Core
+        uses: burnett01/rsync-deployments@4.0
         with:
-          ssh-private-key: ${{secrets.HOST_SSH_KEY}}
+          switches: -rpv --delete --exclude=.git --exclude=.gitmodules  --exclude=.gitignore  --exclude=.htaccess  --exclude=wp-config.php  --exclude=wp-content --exclude=composer.json
+          path: wp/
+          remote_path: ${{secrets.SSH_PATH_DEV}}
+          remote_host: ${{secrets.SSH_HOST}}
+          remote_key: ${{secrets.SSH_KEY}}
+          remote_user: ${{secrets.SSH_USER_DEV}}
+          remote_port: ${{secrets.SSH_PORT_DEV}}
 
-      - name: HOST SCM
-        run: |
-          ssh-keyscan git.wpengine.com >> ~/.ssh/known_hosts
-          git clone ${{env.deploy_repo}} ${{env.DEPLOY_FOLDER}}
-      - name: Sync Build WP folder to Deploy directory
-        run: |
-          rsync -rpv --delete ${{env.BUILD_FOLDER}}/wp/ ${{env.DEPLOY_FOLDER}} \
-            --exclude=.git \
-            --exclude=.gitmodules \
-            --exclude=.gitignore \
-            --exclude=.htaccess \
-            --exclude=wp-config.php \
-            --exclude=wp-content
-      - name: Sync Build WP-CONTENT folder to Deploy directory
-        run: |
-          rsync -rpv --delete ${{env.BUILD_FOLDER}}/wp-content ${{env.DEPLOY_FOLDER}} \
-            --exclude=.git \
-            --exclude=.gitmodules \
-            --exclude=.gitignore \
-            --exclude=.htaccess \
-            --exclude=.babelrc \
-            --exclude=.editorconfig \
-            --exclude=.eslintrc \
-            --exclude=dev \
-            --exclude=dev_components \
-            --exclude=docs \
-            --exclude=gulp_tasks \
-            --exclude=node_modules \
-            --exclude=wp-content/object-cache.php \
-            --exclude=wp-content/plugins/core/assets/templates/cli
-      - name: Sync Build VENDOR folder to Deploy directory
-        run: |
-          rsync -rpv ${{env.BUILD_FOLDER}}/ ${{env.DEPLOY_FOLDER}} \
-            --include=build-process.php \
-            --include=vendor/*** \
-            --exclude=*
-      - name: Git Push to Host SCM
-        working-directory: ${{ env.DEPLOY_FOLDER }}
-        run: |
-          echo 'Deploying ${{env.GITHUB_REF}} to ${{env.ENVIRONMENT}}'
-          git add -Av
-          git commit --allow-empty -m 'Deploying ${env.BRANCH_NAME} to ${env.ENVIRONMENT}'
-          git push origin master
+      - name: Deploy WP and vendor directory
+        uses: burnett01/rsync-deployments@4.0
+        with:
+          switches: -rpv --include=vendor/*** --include=build-process.php --include=wp-content/*** --exclude=*
+          remote_path: ${{secrets.SSH_PATH_DEV}}
+          remote_host: ${{secrets.SSH_HOST}}
+          remote_key: ${{secrets.SSH_KEY}}
+          remote_user: ${{secrets.SSH_USER_DEV}}
+          remote_port: ${{secrets.SSH_PORT_DEV}}
+
+      - name: Slack Notification
+        run:  |
+          curl -X POST -H 'Content-type: application/json' --data "{'text':'Finished deploying ${{github.ref}} to ${{env.ENV}} -- ${{env.ENV_URL}}'}" ${{env.SLACK_WEBHOOK}}
