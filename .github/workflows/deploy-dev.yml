@@ -1,4 +1,4 @@
-name: Dev Deploy
+name: Production Deploy
 
 on:
   workflow_dispatch:
@@ -13,10 +13,10 @@ jobs:
     env:
       BUILD_FOLDER: ./build
       DEPLOY_FOLDER: ./deploy
-      ENVIRONMENT: dev
+      ENVIRONMENT: prod
       COMPOSER_AUTH: '{ "github-oauth": { "github.com": "${{ secrets.GH_TOKEN }}" } }'
       BUILD_BRANCH: feeture/gha-deploys
-      DEPLOY_REPO: ${{ secret.DEV_DEPLOY_REPO }}
+      DEPLOY_REPO: ${{ secret.PROD_DEPLOY_REPO }}
 
     steps:
 ### BUILD: General SquareOne build steps
