@@ -73,11 +73,12 @@ jobs:
 
 # Get Build Repository and add wpengine to allowed hosts
       - name: HOST SCM
+        working-directory: ${{ env.DEPLOY_FOLDER }}
         run: |
           ssh-keyscan git.wpengine.com >> ~/.ssh/known_hosts
+          git clone ${{env.DEPLOY_REPO}} ${{env.DEPLOY_FOLDER}}
           git config user.email "devops@tri.be"
           git config user.name "devops"
-          git clone ${{env.DEPLOY_REPO}} ${{env.DEPLOY_FOLDER}}
 
 # Rsync wordpress
       - name: Sync Build WP folder to Deploy directory
