@@ -40,7 +40,9 @@ jobs:
           rm -rf vendor/moderntribe/tribe-libs/.git
           rm -rf wp-content/plugins/panel-builder/.git
           rm -rf wp-content/plugins/gutenpanels/.git
-      - name: Setup node
+
+# Setup node version
+      - name: Setup node version
         uses: actions/setup-node@v1
         with:
           node-version: '12.13.1'
@@ -76,7 +78,7 @@ jobs:
         working-directory: ${{ env.DEPLOY_FOLDER }}
         run: |
           ssh-keyscan git.wpengine.com >> ~/.ssh/known_hosts
-          git clone ${{env.DEPLOY_REPO}} ${{env.DEPLOY_FOLDER}}
+          git clone ${{env.DEPLOY_REPO}} .
           git config user.email "devops@tri.be"
           git config user.name "devops"
 
