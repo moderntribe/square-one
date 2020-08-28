@@ -55,11 +55,12 @@ class Video_Controller extends Abstract_Controller {
 
 	protected function required(): array {
 		return [
-			self::CLASSES => [ 'c-video', sprintf( 'c-video--trigger-%s', $this->trigger_position ) ],
+			self::CLASSES => [ 'c-video' ],
 		];
 	}
 
 	public function get_classes(): string {
+		$this->classes[] = sprintf( 'c-video--trigger-%s', $this->trigger_position );
 		return Markup_Utils::class_attribute( $this->classes );
 	}
 
