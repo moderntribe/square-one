@@ -28,6 +28,8 @@ jobs:
           path: ${{ env.BUILD_FOLDER }}
           ref: ${{github.ref}}
 
+# Cache composer vendor folder TODO
+
 # Install composer: Add env for plugin keys, composer install, and cleanup
       - name: Install composer dependencies
         working-directory: ${{ env.BUILD_FOLDER }}
@@ -45,10 +47,13 @@ jobs:
 
 # Cache node_modules TODO
 
-# Install node modules
-      - name: Install node modules
+# Yarn Install and Build
+      - name: Yarn install and build
         working-directory: ${{ env.BUILD_FOLDER }}
-        run: yarn --frozen-lockfile
+        run: |
+          yarn install:theme
+          yarn validate
+          yarn server_dist
 
 # Create local config for environment based settings
       - name: Create local config
@@ -70,6 +75,8 @@ jobs:
       - name: HOST SCM
         run: |
           ssh-keyscan git.wpengine.com >> ~/.ssh/known_hosts
+          git config user.email "devops@tri.be"
+          git config user.name "devops"
           git clone ${{env.DEPLOY_REPO}} ${{env.DEPLOY_FOLDER}}
 
 # Rsync wordpress
