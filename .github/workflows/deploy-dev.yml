@@ -32,12 +32,13 @@ jobs:
 
 # Cache composer vendor folder to speed things up on unchanged builds
       - name: Cache Composer Vendor Folder
+        working-directory: ${{ env.BUILD_FOLDER }}
         uses: actions/cache@v2
         env:
           cache-name: cache-composer-vendor
         with:
           path: build/vendor
-          key: composer-${{ hashFiles('build/vendor/composer.lock') }}
+          key: composer-${{ hashFiles('**/composer.lock') }}
 
 # Composer Install: Add env for plugin keys, composer install, and cleanup
       - name: Composer Install
@@ -58,12 +59,13 @@ jobs:
 
 # Cache node_modules to speed things up on unchanged builds
       - name: Cache node_modules
+        working-directory: ${{ env.BUILD_FOLDER }}
         uses: actions/cache@v2
         env:
           cache-name: cache-node-modules
         with:
           path: build/wp-content/themes/core/node_modules
-          key: node-${{ hashFiles('build/wp-content/themes/core/yarn.lock') }}
+          key: node-${{ hashFiles('**/yarn.lock') }}
 
 # Yarn Install and Build
       - name: Yarn install and build
