@@ -13,7 +13,7 @@ jobs:
     env:
       BUILD_FOLDER: ./build
       DEPLOY_FOLDER: ./deploy
-      ENVIRONMENT: staging
+      ENVIRONMENT: dev
       COMPOSER_AUTH: '{ "github-oauth": { "github.com": "${{ secrets.GH_TOKEN }}" } }'
       BUILD_BRANCH: feeture/gha-deploys
       DEPLOY_REPO: ${{ secrets.DEV_DEPLOY_REPO }}
