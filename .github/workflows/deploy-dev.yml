@@ -39,8 +39,8 @@ jobs:
           path: ' ${{ env.BUILD_FOLDER }}/vendor'
           key: composer-${{ hashFiles('**/composer.lock') }}
 
-# Install composer: Add env for plugin keys, composer install, and cleanup
-      - name: Install composer dependencies
+# Composer Install: Add env for plugin keys, composer install, and cleanup
+      - name: Composer Install
         working-directory: ${{ env.BUILD_FOLDER }}
         run: |
           echo "${{ secrets.COMPOSER_ENV }}" > .env
