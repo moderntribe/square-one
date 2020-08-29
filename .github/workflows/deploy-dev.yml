@@ -21,7 +21,7 @@ jobs:
     steps:
 
 ##########
-### BUILD: General SquareOne build steps
+### BUILD: General SquareOne build steps, Composer and Node
 
 # Get Build Repository
       - name: Check out build branch
