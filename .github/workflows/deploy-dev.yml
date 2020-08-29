@@ -36,8 +36,8 @@ jobs:
         env:
           cache-name: cache-composer-vendor
         with:
-          path: ' ${{ env.BUILD_FOLDER }}/vendor'
-          key: composer-${{ hashFiles('**/composer.lock') }}
+          path: build/vendor
+          key: composer-${{ hashFiles('build/vendor/composer.lock') }}
 
 # Composer Install: Add env for plugin keys, composer install, and cleanup
       - name: Composer Install
@@ -62,8 +62,8 @@ jobs:
         env:
           cache-name: cache-node-modules
         with:
-          path: '${{ env.BUILD_FOLDER }}/wp-content/themes/core/node_modules'
-          key: node-${{ hashFiles('**/yarn.lock') }}
+          path: build/wp-content/themes/core/node_modules
+          key: node-${{ hashFiles('build/wp-content/themes/core/yarn.lock') }}
 
 # Yarn Install and Build
       - name: Yarn install and build
