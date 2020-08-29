@@ -14,9 +14,8 @@ jobs:
       BUILD_FOLDER: ./build
       DEPLOY_FOLDER: ./deploy
       ENVIRONMENT: production
-      COMPOSER_AUTH: '{ "github-oauth": { "github.com": "${{ secrets.GH_TOKEN }}" } }'
-      BUILD_BRANCH: feeture/gha-deploys
       DEPLOY_REPO: ${{ secrets.PROD_DEPLOY_REPO }}
+      COMPOSER_AUTH: '{ "github-oauth": { "github.com": "${{ secrets.GH_TOKEN }}" } }'
 
     steps:
 
