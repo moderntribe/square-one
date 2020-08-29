@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - server/production
+      - feature/gha-deploy
 
 jobs:
   deploy:
