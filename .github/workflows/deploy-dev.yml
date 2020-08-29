@@ -57,13 +57,13 @@ jobs:
           node-version: '12.13.1'
 
 # Cache node_modules
-    - name: Cache node_modules
-      uses: actions/cache@v2
-      env:
-        cache-name: cache-node-modules
-      with:
-        path: ${{ env.BUILD_FOLDER }}/wp-content/themes/core/node_modules
-        key: node-${{ hashFiles('${{ env.BUILD_FOLDER }}/wp-content/themes/core/yarn.lock') }}
+      - name: Cache node_modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ${{ env.BUILD_FOLDER }}/wp-content/themes/core/node_modules
+          key: node-${{ hashFiles('${{ env.BUILD_FOLDER }}/wp-content/themes/core/yarn.lock') }}
 
 # Yarn Install and Build
       - name: Yarn install and build
