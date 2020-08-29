@@ -30,7 +30,7 @@ jobs:
           path: ${{ env.BUILD_FOLDER }}
           ref: ${{github.ref}}
 
-# Cache composer vendor folder
+# Cache composer vendor folder to speed things up on unchanged builds
       - name: Cache Composer Vendor Folder
         uses: actions/cache@v2
         env:
@@ -56,7 +56,7 @@ jobs:
         with:
           node-version: '12.13.1'
 
-# Cache node_modules
+# Cache node_modules to speed things up on unchanged builds
       - name: Cache node_modules
         uses: actions/cache@v2
         env:
