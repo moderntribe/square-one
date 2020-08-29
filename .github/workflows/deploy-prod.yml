@@ -80,7 +80,7 @@ jobs:
       - name: HOST SCM
         run: |
           ssh-keyscan git.wpengine.com >> ~/.ssh/known_hosts
-          git clone ${{env.DEPLOY_REPO}} .
+          git clone ${{env.DEPLOY_REPO}} ${{env.DEPLOY_FOLDER}}
           cd ${{env.DEPLOY_FOLDER}}
           git config user.email "devops@tri.be"
           git config user.name "devops"
