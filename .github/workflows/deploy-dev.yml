@@ -32,12 +32,11 @@ jobs:
 
 # Cache composer vendor folder to speed things up on unchanged builds
       - name: Cache Composer Vendor Folder
-        working-directory: ${{ env.BUILD_FOLDER }}
         uses: actions/cache@v2
         env:
           cache-name: cache-composer-vendor
         with:
-          path: build/vendor
+          path: '**/vendor'
           key: composer-${{ hashFiles('**/composer.lock') }}
 
 # Composer Install: Add env for plugin keys, composer install, and cleanup
@@ -59,12 +58,11 @@ jobs:
 
 # Cache node_modules to speed things up on unchanged builds
       - name: Cache node_modules
-        working-directory: ${{ env.BUILD_FOLDER }}
         uses: actions/cache@v2
         env:
           cache-name: cache-node-modules
         with:
-          path: build/wp-content/themes/core/node_modules
+          path: '**/node_modules'
           key: node-${{ hashFiles('**/yarn.lock') }}
 
 # Yarn Install and Build
@@ -95,6 +93,7 @@ jobs:
 # Get Build Repository and add wpengine to allowed hosts
       - name: HOST SCM
         run: |
+          rm -rf ${{env.DEPLOY_FOLDER}}
           ssh-keyscan git.wpengine.com >> ~/.ssh/known_hosts
           git clone ${{env.DEPLOY_REPO}} ${{env.DEPLOY_FOLDER}}
           cd ${{env.DEPLOY_FOLDER}}
