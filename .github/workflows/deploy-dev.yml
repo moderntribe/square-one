@@ -1,10 +1,10 @@
-name: Production Deploy
+name: Dev Deploy
 
 on:
   workflow_dispatch:
   push:
     branches:
-      - server/production
+      - epic/fidgety-feet
 
 jobs:
   deploy:
@@ -13,10 +13,10 @@ jobs:
     env:
       BUILD_FOLDER: ./build
       DEPLOY_FOLDER: ./deploy
-      ENVIRONMENT: production
+      ENVIRONMENT: staging
       COMPOSER_AUTH: '{ "github-oauth": { "github.com": "${{ secrets.GH_TOKEN }}" } }'
       BUILD_BRANCH: feeture/gha-deploys
-      DEPLOY_REPO: ${{ secrets.PROD_DEPLOY_REPO }}
+      DEPLOY_REPO: ${{ secrets.STAGE_DEPLOY_REPO }}
 
     steps:
 
