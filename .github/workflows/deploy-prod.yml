@@ -19,19 +19,19 @@ jobs:
 
     steps:
 
-##########
-### BUILD: General SquareOne build steps
+      ##########
+      ### BUILD: General SquareOne build steps
 
-# Get Build Repository
+      # Get Build Repository
       - name: Check out build branch
         uses: actions/checkout@v2
         with:
           path: ${{ env.BUILD_FOLDER }}
           ref: ${{github.ref}}
 
-# Cache composer vendor folder TODO
+      # Cache composer vendor folder TODO
 
-# Install composer: Add env for plugin keys, composer install, and cleanup
+      # Install composer: Add env for plugin keys, composer install, and cleanup
       - name: Install composer dependencies
         working-directory: ${{ env.BUILD_FOLDER }}
         run: |
@@ -42,15 +42,15 @@ jobs:
           rm -rf wp-content/plugins/panel-builder/.git
           rm -rf wp-content/plugins/gutenpanels/.git
 
-# Setup node version
+      # Setup node version
       - name: Setup node version
         uses: actions/setup-node@v1
         with:
           node-version: '12.13.1'
 
-# Cache node_modules TODO
+      # Cache node_modules TODO
 
-# Yarn Install and Build
+      # Yarn Install and Build
       - name: Yarn install and build
         working-directory: ${{ env.BUILD_FOLDER }}
         run: |
@@ -58,7 +58,7 @@ jobs:
           yarn validate
           yarn server_dist
 
-# Create local config for environment based settings
+      # Create local config for environment based settings
       - name: Create local config
         working-directory: ${{ env.BUILD_FOLDER }}
         run: |
@@ -66,16 +66,16 @@ jobs:
           php -r "file_exists( 'local-config.json' ) || copy( 'local-config-sample.json', 'local-config.json' );"
           echo "define( 'ENVIRONMENT', ${{env.ENVIROMENT}} );" >> local-config.php
 
-##########
-### DEPLOY: Use the WPE git deploy hook method. TLDR; rsync our repo on their repo and push.
+      ##########
+      ### DEPLOY: Use the WPE git deploy hook method. TLDR; rsync our repo on their repo and push.
 
-# Setup SSH key for deploy environment
+      # Setup SSH key for deploy environment
       - name: HOST SCM SSH KEY
         uses: webfactory/ssh-agent@v0.2.0
         with:
           ssh-private-key: ${{secrets.DEPLOY_PRIVATE_SSH_KEY}}
 
-# Get Build Repository and add wpengine to allowed hosts
+      # Get Build Repository and add wpengine to allowed hosts
       - name: HOST SCM
         run: |
           ssh-keyscan git.wpengine.com >> ~/.ssh/known_hosts
@@ -84,7 +84,7 @@ jobs:
           git config user.email "devops@tri.be"
           git config user.name "devops"
 
-# Rsync wordpress
+      # Rsync wordpress
       - name: Sync Build WP folder to Deploy directory
         run: |
           rsync -rpv --delete ${{env.BUILD_FOLDER}}/wp/ ${{env.DEPLOY_FOLDER}} \
@@ -95,7 +95,7 @@ jobs:
             --exclude=wp-config.php \
             --exclude=wp-content
 
-# Rsync plugin and theme files
+      # Rsync plugin and theme files
       - name: Sync Build WP-CONTENT folder to Deploy directory
         run: |
           rsync -rpv --delete ${{env.BUILD_FOLDER}}/wp-content ${{env.DEPLOY_FOLDER}} \
@@ -114,7 +114,7 @@ jobs:
             --exclude=wp-content/object-cache.php \
             --exclude=wp-content/plugins/core/assets/templates/cli
 
-# Rsync Composer Vendor files
+      # Rsync Composer Vendor files
       - name: Sync Build VENDOR folder to Deploy directory
         run: |
           rsync -rpv ${{env.BUILD_FOLDER}}/ ${{env.DEPLOY_FOLDER}} \
@@ -122,7 +122,7 @@ jobs:
             --include=vendor/*** \
             --exclude=*
 
-# Git push to WPE to trigger deploy
+      # Git push to WPE to trigger deploy
       - name: Git Push to Host SCM
         working-directory: ${{ env.DEPLOY_FOLDER }}
         run: |
