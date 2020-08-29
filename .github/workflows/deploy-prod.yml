@@ -7,7 +7,7 @@ on:
       - feature/gha-deploy
 
 jobs:
-  deploy-dev:
+  deploy:
     runs-on: ubuntu-latest
 
     env:
@@ -19,6 +19,8 @@ jobs:
       DEPLOY_REPO: ${{ secrets.PROD_DEPLOY_REPO }}
 
     steps:
+
+##########
 ### BUILD: General SquareOne build steps
 
 # Get Build Repository
@@ -65,6 +67,7 @@ jobs:
           php -r "file_exists( 'local-config.json' ) || copy( 'local-config-sample.json', 'local-config.json' );"
           echo "define( 'ENVIRONMENT', ${{env.ENVIROMENT}} );" >> local-config.php
 
+##########
 ### DEPLOY: Use the WPE git deploy hook method. TLDR; rsync our repo on their repo and push.
 
 # Setup SSH key for deploy environment
@@ -75,10 +78,10 @@ jobs:
 
 # Get Build Repository and add wpengine to allowed hosts
       - name: HOST SCM
-        working-directory: ${{ env.DEPLOY_FOLDER }}
         run: |
           ssh-keyscan git.wpengine.com >> ~/.ssh/known_hosts
           git clone ${{env.DEPLOY_REPO}} .
+          cd ${{env.DEPLOY_FOLDER}}
           git config user.email "devops@tri.be"
           git config user.name "devops"
 
