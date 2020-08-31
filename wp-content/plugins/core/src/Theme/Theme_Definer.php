@@ -85,10 +85,10 @@ class Theme_Definer implements Definer_Interface {
 			 * TODO: FIx this. Currently disabled b/c Gutenberg is busted w/ our custom oEmbed covers.
 			 */
 			Oembed_Filter::class => DI\autowire()
-				->constructorParameter( 'supported_providers', [] /*[
-					Oembed_Filter::PROVIDER_VIMEO,
-					Oembed_Filter::PROVIDER_YOUTUBE,
-				]*/ ),
+				->constructorParameter( 'supported_providers', [
+					//Oembed_Filter::PROVIDER_VIMEO,
+					//Oembed_Filter::PROVIDER_YOUTUBE,
+				] ),
 
 			/**
 			 * @var string A valid TypeKit (Adobe Fonts) Project ID.
