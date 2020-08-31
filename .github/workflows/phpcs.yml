@@ -67,11 +67,9 @@ jobs:
           restore-keys: ${{ runner.os }}-${{ env.cache_version }}-composer-
 
       - name: Install composer dependencies
-        env:
-          WP_PLUGIN_ACF_KEY: ${{ secrets.WP_PLUGIN_ACF_KEY }}
-          WP_PLUGIN_GF_KEY: ${{ secrets.WP_PLUGIN_GF_KEY }}
-          WP_PLUGIN_GF_TOKEN: ${{ secrets.WP_PLUGIN_GF_TOKEN }}
-        run: composer install --prefer-dist --no-progress --no-suggest --optimize-autoloader
+        run: |
+          echo "${{ secrets.COMPOSER_ENV }}" > .env
+          composer install --prefer-dist --no-progress --no-suggest --optimize-autoloader
 
       - name: PHPCS
         run: ./vendor/bin/phpcs --standard=./phpcs.xml
