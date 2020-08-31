@@ -77,17 +77,17 @@ class Post_List extends Block_Config {
 				'type'  => 'link',
 			] )
 		)->add_field( new Field( self::NAME . '_' . self::QUERY_TYPE, [
-				'label'   => __( 'Type of Query', 'ur-core' ),
+				'label'   => __( 'Type of Query', 'tribe' ),
 				'name'    => self::QUERY_TYPE,
 				'type'    => 'select',
 				'choices' => [
-					self::QUERY_TYPE_AUTO   => __( 'Automatically Select Posts', 'ur-core' ),
-					self::QUERY_TYPE_MANUAL => __( 'Manually Select Posts', 'ur-core' ),
+					self::QUERY_TYPE_AUTO   => __( 'Automatically Select Posts', 'tribe' ),
+					self::QUERY_TYPE_MANUAL => __( 'Manually Select Posts', 'tribe' ),
 				],
 			] )
 		//Post select for manual query
 		)->add_field( new Field( self::NAME . '_' . self::POSTS, [
-				'label'             => __( 'Post Selection', 'ur-core' ),
+				'label'             => __( 'Post Selection', 'tribe' ),
 				'name'              => self::POSTS,
 				'min'               => 1,
 				'max'               => 20,
@@ -105,7 +105,7 @@ class Post_List extends Block_Config {
 			] )
 		//Post Type selection for dynamic selection
 		)->add_field( new Field( self::NAME . '_' . self::POST_TYPES, [
-				'label'             => __( 'Post Types', 'ur-core' ),
+				'label'             => __( 'Post Types', 'tribe' ),
 				'name'              => self::POST_TYPES,
 				'type'              => 'select',
 				'conditional_logic' => [
@@ -121,7 +121,7 @@ class Post_List extends Block_Config {
 				'choices'           => $this->get_post_types_labels(),
 			] )
 		)->add_field( new Field( self::NAME . '_' . self::LIMIT, [
-				'label'             => __( 'Limit', 'ur-core' ),
+				'label'             => __( 'Limit', 'tribe' ),
 				'name'              => self::LIMIT,
 				'min'               => 1,
 				'max'               => 20,
@@ -144,7 +144,7 @@ class Post_List extends Block_Config {
 //		//a custom field being written. This will work for now. Could be a future consideration.
 		foreach ( self::QUERY_POST_TYPES as $post_type ) {
 			$this->add_field( new Field( self::NAME . '_' . self::TAXONOMIES . '_' . $post_type, [
-				'label'             => __( 'Filter by Taxonomy Term', 'ur-core' ),
+				'label'             => __( 'Filter by Taxonomy Term', 'tribe' ),
 				'name'              => self::TAXONOMIES . '_' . $post_type,
 				'post_type'         => $post_type,
 				'type'              => 'advanced_taxonomy_selector',
