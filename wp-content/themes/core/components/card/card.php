@@ -47,17 +47,17 @@ $c = Card_Controller::factory( $args );
 			<header class="c-card__header c-card__section">
 
 				<?php get_template_part(
-						'components/container/container',
-						null,
-						$c->render_meta_primary()
+					'components/container/container',
+					null,
+					$c->render_meta_primary()
 				); ?>
 
 				<?php echo $c->render_title(); ?>
 
 				<?php  get_template_part(
-						'components/container/container',
-						null,
-						$c->render_meta_secondary()
+					'components/container/container',
+					null,
+					$c->render_meta_secondary()
 				); ?>
 
 			</header>
