@@ -196,3 +196,16 @@ if ( empty( $GLOBALS['memcached_servers'] ) ) {
 if ( ! defined( 'WP_DEBUG_DISPLAY' ) || ! WP_DEBUG_DISPLAY ) {
 	ini_set( 'display_errors', 0 );
 }
+
+if ( defined( 'WP_CLI' ) && WP_CLI ) {
+	\WP_CLI::add_wp_hook(
+		'enable_wp_debug_mode_checks',
+		static function ( $ret ) {
+			if ( WP_DEBUG_LOG && is_string( WP_DEBUG_LOG ) ) {
+				ini_set( 'error_log', WP_DEBUG_LOG );
+			}
+			return $ret;
+		},
+		11
+	);
+}
