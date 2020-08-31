@@ -40,7 +40,6 @@ jobs:
           rm .env
           rm -rf vendor/moderntribe/tribe-libs/.git
           rm -rf wp-content/plugins/panel-builder/.git
-          rm -rf wp-content/plugins/gutenpanels/.git
 
       # Setup node version
       - name: Setup node version
