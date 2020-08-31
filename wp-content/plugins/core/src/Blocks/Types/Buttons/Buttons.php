@@ -15,6 +15,7 @@ class Buttons extends Block_Config {
 	public const BUTTON_LINK       = 'button_link';
 	public const BUTTON_ARIA_LABEL = 'button_aria_label';
 	public const BUTTON_STYLE      = 'button_style';
+	public const BUTTON_CLASSES    = 'button_classes';
 
 	public const STYLE_PRIMARY   = 'primary';
 	public const STYLE_SECONDARY = 'secondary';
@@ -79,6 +80,14 @@ class Buttons extends Block_Config {
 		] );
 
 		$group->add_field( $button_style );
+
+		$classes = new Field( self::BUTTON_CLASSES, [
+			'label' => __( 'Custom Classes', 'tribe' ),
+			'name'  => self::BUTTON_CLASSES,
+			'type'  => 'text',
+		] );
+
+		$group->add_field( $classes );
 
 		$aria_label = new Field( self::BUTTON_ARIA_LABEL, [
 			'label' => __( 'Screen Reader Label', 'tribe' ),

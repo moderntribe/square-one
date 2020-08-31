@@ -92,10 +92,16 @@ class Buttons_Block_Controller extends Abstract_Controller {
 	}
 
 	private function get_button_classes( $button ): array {
-		$classes = [ 'a-btn' ];
+		$classes = [ 'b-buttons__button' ];
 
-		if ( $button[ Buttons::BUTTON_STYLE ] !== Buttons::STYLE_PRIMARY ) {
-			$classes = [ sprintf( 'a-btn-%s', (string) $button[ Buttons::BUTTON_STYLE ] ) ];
+		if ( $button[ Buttons::BUTTON_STYLE ] === Buttons::STYLE_PRIMARY ) {
+			$classes[] = 'a-btn';
+		} else {
+			$classes[] = sprintf( 'a-btn-%s', $button[ Buttons::BUTTON_STYLE ] );
+		}
+
+		if ( ! empty( $button[ Buttons::BUTTON_CLASSES ] ) ) {
+			$classes = array_merge( $classes, explode( ' ', $button[ Buttons::BUTTON_CLASSES ] ) );
 		}
 
 		return $classes;
