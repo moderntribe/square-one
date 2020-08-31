@@ -1,8 +1,0 @@
-.deploy
-.vaultpass
-.host/ansible_rsa*
-!.host/ansible_rsa.pub
-!.wpengine/*.vaulted
-.host/config/*
-!.host/config/*.vaulted
-!.host/config/*.sample
