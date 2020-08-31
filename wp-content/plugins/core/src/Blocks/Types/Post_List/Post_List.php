@@ -27,14 +27,13 @@ class Post_List extends Block_Config {
 	public const TAXONOMIES = 'taxonomy_terms'; //Conditional to Auto, one per post type
 	public const POST_TYPES = 'post_types'; //Conditional to Auto
 
-
 	public const LAYOUT         = 'layout';
 	public const LAYOUT_INLINE  = 'inline';
 	public const LAYOUT_STACKED = 'stacked';
 
 	public const QUERY_POST_TYPES = [
 		Post::NAME,
-		Sample::NAME
+		Sample::NAME,
 	];
 
 	/**
@@ -150,6 +149,7 @@ class Post_List extends Block_Config {
 				'post_type'         => $post_type,
 				'type'              => 'advanced_taxonomy_selector',
 				'field_type'        => 'multiselect',
+				'return_value'      => 'object',
 				'conditional_logic' => [
 					[
 						[
