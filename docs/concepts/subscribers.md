@@ -23,7 +23,7 @@ $container->get( Foo::class )->hook();
 ```
 
 ```php
-// Within Foobar_Class
+// Within Foo
 public function hook() {
    add_action( 'save_post', [ $this, 'do_save_post_action' ], 20, 1 );
 }
@@ -39,11 +39,11 @@ By contrast, consider the preferred pattern:
 
 ```php
 // Within the subscriber
-add_action( 'save_post', function( $post_id ) use ( $container ) {
-   $container->get( Foo::class )->do_save_post_action( $post_id );
+add_action( 'save_post', function( $post_id ) {
+   $this->container->get( Foo::class )->do_save_post_action( $post_id );
 }, 20, 1 );
 
-// In Foobar_Class
+// In Foo
 /**
  * @param int $post_id
  * @return void
@@ -71,8 +71,8 @@ Example: Adding in custom column names in an Edit Post table
 ```php
 // In the subscriber
 // Note that the argument for the closure is whatever the particular filter passes for arguments
-add_filter( 'manage_posts_columns', function ( $columns ) use ( $container ) {
-	return $container->get( My_Class::class )->replace_title_column( $columns );
+add_filter( 'manage_posts_columns', function ( $columns ) {
+	return $this->container->get( My_Class::class )->replace_title_column( $columns );
 }, 10, 1 );
 
 // In My_Class
@@ -89,11 +89,14 @@ public function replace_title_column( array $columns ): array {
 }
 ```
 
-### Notes
+## Annotations
 
-The **P2P_Subscriber** class handles the classes that work with the **Posts 2 Posts** plugin. 
-
-Learn more about Post 2 Post here and usage in this project here: [Posts 2 Posts](p2p.md)
+In the above examples, you may have noticed `@action` and `@filter` annotations preceding some
+methods. We have established this convention to help communicate the intention of these methods.
+An `@action`/`@filter` annotation says to other developers on the team (including yourself, next
+week, when you've forgotten why you did it this way) that this method is intended to be hooked
+into the specified WordPress hook. This makes it easier to review and reason about code that
+has been decoupled from its hooks.
 
 ## Why Class LazyLoading?
 
