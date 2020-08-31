@@ -1,6 +1,0 @@
-PARENTDIR="$(dirname "${SCRIPTDIR}")"
-PARENTDIR_NAME="$(basename "${PARENTDIR}")"
-
-CONFIG_FOLDER="${PARENTDIR}/dev/deploy/custom_deploy"
-CONFIG_FILE="${CONFIG_FOLDER}/config.ini"
-CERT_FILE="${CONFIG_FOLDER}/${PARENTDIR_NAME}.key"
