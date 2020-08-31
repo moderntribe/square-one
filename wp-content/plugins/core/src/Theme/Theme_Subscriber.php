@@ -26,7 +26,7 @@ class Theme_Subscriber extends Abstract_Subscriber {
 	private function media(): void {
 		$this->image_wrap();
 		$this->image_links();
-		//$this->oembed();  // TODO: FIx this. Currently disabled b/c Gutenberg is busted w/ our custom oEmbed covers.
+		$this->oembed();
 	}
 
 	private function body_classes() {

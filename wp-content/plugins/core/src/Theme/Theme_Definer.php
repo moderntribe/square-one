@@ -81,11 +81,16 @@ class Theme_Definer implements Definer_Interface {
 			Font_Sizes::class => DI\create()
 				->constructor( DI\get( self::CONFIG_FONT_SIZES ) ),
 
+			/**
+			 * Enable our custom oEmbed cover image markup.
+			 *
+			 * TODO: FIx this. Currently disabled b/c Gutenberg is busted w/ our custom oEmbed covers.
+			 */
 			Oembed_Filter::class => DI\autowire()
-				->constructorParameter( 'supported_providers', [
+				->constructorParameter( 'supported_providers', [] /*[
 					Oembed_Filter::PROVIDER_VIMEO,
 					Oembed_Filter::PROVIDER_YOUTUBE,
-				] ),
+				]*/ ),
 
 			/**
 			 * @var string A valid TypeKit (Adobe Fonts) Project ID.
