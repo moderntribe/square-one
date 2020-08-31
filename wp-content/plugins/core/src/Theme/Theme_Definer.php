@@ -97,13 +97,13 @@ class Theme_Definer implements Definer_Interface {
 			/**
 			 * @var array A collection of Google Font families to load.
 			 *
-			 * Any combination of valid Google font family declarations is acceptable.
+			 * A complete URL for Google Fonts usage.
 			 *
-			 * Example: `[ 'Tangerine', 'Cantarell:italic', 'Droid+Serif:b' ]`
+			 * Example: `https://fonts.googleapis.com/css2?family=Crimson+Pro&family=Literata`
 			 *
-			 * @link https://developers.google.com/fonts/docs/getting_started
+			 * @link https://developers.google.com/fonts/docs/css2
 			 */
-			self::CONFIG_GOOGLE_FONTS => [],
+			self::CONFIG_GOOGLE_FONTS => '',
 
 			/**
 			 * @var array Collection of custom webfont sources.
