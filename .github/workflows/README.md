@@ -25,7 +25,7 @@ In order to leverage this code-sniffing workflow, this project will need:
 1. A `.eslintrc` file in the root of the project that declares the standards that should be used.
 
 
-## `deploy-{enviroment}.yml`
+## `deploy-{environment}.yml`
 
 Runs a build and deployment of the application to the appropriate environment to a target Git Repository, in this case WPE. Each 
  environment is setup with pipeline deploys that will trigger automatically deploy when merged to the matching branch. `development`, `server/staging`, `server/production`. 
