@@ -36,39 +36,39 @@ echo $story->get_source_name();
 For information about hooking into WordPress using the container, see: [Subscribers](subscribers.md)
 
 PHP-DI is an autowiring container. It will use reflection to analyze typehints in requested classes
-to automatically resolve dependencies, in many cases with zero configuration required. Let's take one
-of our template controllers as an example.
+to automatically resolve dependencies, in many cases with zero configuration required. Let's take a
+look at how we would define a service.
 
 ```php
+namespace Tribe\Project\Activity_Analysis;
 
-class Page extends Abstract_Controller {
-	// property declarations at the top
+use Tribe\Libs\Queues\Contracts\Queue;
 
-	public function __construct(
-		Environment $twig,
-		Component_Factory $factory,
-		Header $header,
-		Subheader $subheader,
-		Main_Sidebar $sidebar,
-		Footer $footer
-	) {
-		parent::__construct( $twig, $factory );
-		$this->header    = $header;
-		$this->subheader = $subheader;
-		$this->sidebar   = $sidebar;
-		$this->footer    = $footer;
+/**
+ * A class responsible for tracking user activity so we can process
+ * it asynchronously for analytics purposes
+ */
+class Activity_Listener {
+    private Queue $queue;
+
+	public function __construct( Queue $queue ) {
+        $this->queue = $queue;
 	}
 
-	// and more functions below
+    /**
+     * @action save_post
+     */
+    public function post_was_saved( ... $args ) {
+        $this->queue->dispatch( Analyze_Activity::class, [ 'args' => $args ] );
+    }
 }
 ```
 
-To instantiate a `Page` template, we call `tribe_project()->container()->get( Page::class )`. This
-returns an instance with all of the constructor arguments resolved by the autowiring. Nowhere do
-we have to tell the container which `Header` or which `Footer` to pass into the `Page`. The type
-hinting is sufficient to communicate that to the container. It's as if we had called
-`tribe_project()->container()->get( Header::class )` and `tribe_project()->container()->get( Footer::class )`
-to get the arguments to pass.
+We don't need to do anything for the DI container to know how to instantiate this class. The
+`$queue` argument to the contructor has the `Queue` typehint. So the DI container will look
+for the class registered for the `Queue` interface, which it finds already done in the
+`Queues_Definier` class from `tribe-libs`.
+
 
 Some objects do require some manual configuration, though. Some common cases where this might occur:
 
@@ -77,28 +77,77 @@ Some objects do require some manual configuration, though. Some common cases whe
 3. A type hint is for an abstract class or an interface
 4. We want to specify a particular object or a particular subclass to satisfy the type hint
 
-When we need to configure the container, we do that by passing a definition file to the 
-`ContainerBuilder` from the `Core` class. We will do this in SquareOne using classing that
-implement `\Tribe\Libs\Container\Definer_Interface`. Each definer with implement
-the `define()` method, returning an array of definitions for the container.
-
-Continuing our example above, the `Page` class requires a `Twig\Environment`, which will require
-some configuration when we first instantiate it. This definition comes from the `Twig_Definer` class
-in the core plugin. In that definer, we'll find:
+Let's look at a case where we do need to configure some of the args.
 
 ```php
-Environment::class => DI\autowire()
-	->constructorParameter( 'options', DI\get( self::OPTIONS ) )
-	->method( 'addExtension', DI\get( Extension::class ) )
+namespace Tribe\Project\Activity_Analysis;
+
+use Tribe\Libs\Queues\Contracts\Queue;
+
+/**
+ * A class responsible for tracking user activity so we can process
+ * it asynchronously for analytics purposes
+ */
+class Activity_Listener {
+    private Queue $queue;
+    private int   $log_level;
+
+	public function __construct( Queue $queue, int $log_level = 1 ) {
+        $this->queue     = $queue;
+        $this->log_level = $log_level;
+	}
+
+    /**
+     * @action save_post
+     */
+    public function post_was_saved( ... $args ) {
+        if ( $this->log_level >= 2 ) {
+            $this->queue->dispatch( Analyze_Activity::class, [ 'args' => $args ] );
+        }
+    }
+}
 ```
 
-With this definition, we tell the container that the `Environment` should be instantiated
-with a particular value for the `$options` parameter in the constructor (defined elsewhere
-in the file, at `Twig_Definer::OPTIONS`), and that the `addExtension()` method should be
-called immediately on instantiation so that we can add our `Extension` from the core plugin.
+Since the `$log_level` argument is a primitive value rather than a class, the DI container cannot
+automatically resolve its value. Instead, we need a `Definer` to configure this class.
 
-In `Core`, we add `Twig_Definer::class` to the array in the `$definers` property so that the
-definitions from the file will be added to the container.
+```php
+namespace Tribe\Project\Activity_Analysis;
+
+use DI;
+use Tribe\Libs\Container\Definer_Interface;
+
+class Activity_Analysis_Definer implements Definer_Interface {
+    public function define(): array {
+        return [
+            Activity_Listener::class => DI\autowire()
+                ->constructorParameter( 'log_level', 2 ),
+        ];
+    }
+}
+```
+
+Notice how we only need to define the parameters that cannot be automatically inferred. An alternative
+way to define the class would be to bypass the autowiring and pass all of the constructor args:
+
+```php
+namespace Tribe\Project\Activity_Analysis;
+
+use DI;
+use Tribe\Libs\Container\Definer_Interface;
+use Tribe\Libs\Queues\Contracts\Queue;
+
+class Activity_Analysis_Definer implements Definer_Interface {
+    public function define(): array {
+        return [
+            Activity_Listener::class => DI\create()
+                ->constructor( DI\get( Queue::class ), 2 ),
+        ];
+    }
+}
+```
+
+Notice how we still use the DI container to get the object instances we need for the arguments.
 
 ## PhpStorm Code Navigation
 
