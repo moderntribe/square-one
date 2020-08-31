@@ -47,7 +47,7 @@ class Buttons extends Block_Config {
 			'label'  => __( 'Buttons', 'tribe' ),
 			'name'   => self::BUTTONS,
 			'layout' => 'block',
-			'min'    => 0,
+			'min'    => 1,
 			'max'    => 10,
 			'button_label' => __( 'Add Button', 'tribe' ),
 		] );
@@ -68,9 +68,7 @@ class Buttons extends Block_Config {
 				self::STYLE_SECONDARY => __( 'Secondary', 'tribe' ),
 				self::STYLE_TERTIARY  => __( 'Tertiary', 'tribe' ),
 			],
-			'default_value'   => [
-				self::STYLE_PRIMARY,
-			],
+			'default_value'   => self::STYLE_PRIMARY,
 			'multiple'        => 0,
 			'image_path'      => sprintf(
 				'%sassets/img/admin/blocks/%s/',
@@ -84,7 +82,7 @@ class Buttons extends Block_Config {
 
 		$aria_label = new Field( self::BUTTON_ARIA_LABEL, [
 			'label' => __( 'Screen Reader Label', 'tribe' ),
-			'name'  => self::BUTTON_LINK,
+			'name'  => self::BUTTON_ARIA_LABEL,
 			'type'  => 'text',
 			'instructions' => __( 'A custom label for screen readers if the button\'s action or purpose isn\'t easily identifiable. (Optional)', 'tribe' ),
 		] );

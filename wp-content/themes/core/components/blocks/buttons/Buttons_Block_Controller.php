@@ -44,7 +44,7 @@ class Buttons_Block_Controller extends Abstract_Controller {
 	 */
 	protected function required(): array {
 		return [
-			self::CLASSES  => [ 'c-block', 'b-buttons' ],
+			self::CLASSES  => [ 'b-buttons' ], // Note: This block does not use `c-block` intentionally.
 		];
 	}
 
@@ -77,11 +77,15 @@ class Buttons_Block_Controller extends Abstract_Controller {
 				'target' => '',
 			] );
 
+			if ( empty( $link['url'] ) ) {
+				return [];
+			}
+
 			return [
 				Link_Controller::URL        => $link['url'],
 				Link_Controller::CONTENT    => $link['title'] ?? $link['url'],
 				Link_Controller::TARGET     => $link['target'],
-				Link_Controller::ARIA_LABEL => [ Buttons::BUTTON_ARIA_LABEL ] ?? '',
+				Link_Controller::ARIA_LABEL => $button[ Buttons::BUTTON_ARIA_LABEL ] ?? '',
 				Link_Controller::CLASSES    => $this->get_button_classes( $button ),
 			];
 		}, $this->buttons );
