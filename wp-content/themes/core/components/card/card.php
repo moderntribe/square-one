@@ -46,11 +46,19 @@ $c = Card_Controller::factory( $args );
 		<?php if ( ! empty( $c->render_title() ) ) { ?>
 			<header class="c-card__header c-card__section">
 
-				<?php echo $c->render_meta_primary(); ?>
+				<?php get_template_part(
+						'components/container/container',
+						null,
+						$c->render_meta_primary()
+				); ?>
 
 				<?php echo $c->render_title(); ?>
 
-				<?php echo $c->render_meta_secondary(); ?>
+				<?php  get_template_part(
+						'components/container/container',
+						null,
+						$c->render_meta_secondary()
+				); ?>
 
 			</header>
 		<?php } ?>
@@ -61,13 +69,9 @@ $c = Card_Controller::factory( $args );
 			</div>
 		<?php } ?>
 
-		<?php if ( ! empty( $c->get_cta_args() ) ) { ?>
+		<?php if ( ! empty( $c->render_cta() ) ) {  ?>
 			<footer class="c-card__footer c-card__section">
-				<?php get_template_part(
-					'components/container/container',
-					null,
-					$c->get_cta_args()
-				); ?>
+				<?php echo $c->render_cta(); ?>
 			</footer>
 		<?php } ?>
 
