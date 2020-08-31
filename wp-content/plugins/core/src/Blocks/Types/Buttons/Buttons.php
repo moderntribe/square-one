@@ -102,7 +102,6 @@ class Buttons extends Block_Config {
 	}
 
 	public function add_settings() {
-
 	}
 
 }
