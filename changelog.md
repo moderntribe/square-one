@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2020.09
+* Changed: All-the-things. Major changes in support of our "Fidgety Feet" epic.
+    * Removed Twig
+    * Removed Pimple in favor of PHP's built-in autoloading.
+    * Theme structure & build system updates
+    * Added support for WP Core's block editor
+    * Removed Panel Builder in favor of Gutenberg blocks.
+    * Added ACF-based "Common Blocks"
+    * Much more.
+
 ## 2020.04
 * Updated: Force plugin activation comments
 * Added: JenkinsFile for pipeline build and deployment to hosted environments with Git Deploys
