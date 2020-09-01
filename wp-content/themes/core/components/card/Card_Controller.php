@@ -29,11 +29,11 @@ class Card_Controller extends Abstract_Controller {
 	public const CONTENT               = 'content';
 	public const CTA                   = 'cta';
 
-	public const MEDIA_TOP      = 'top';
-	public const MEDIA_RIGHT    = 'right';
-	public const MEDIA_BOTTOM   = 'bottom';
-	public const MEDIA_LEFT     = 'left';
-	public const MEDIA_BEHIND   = 'behind';
+	public const MEDIA_TOP    = 'top';
+	public const MEDIA_RIGHT  = 'right';
+	public const MEDIA_BOTTOM = 'bottom';
+	public const MEDIA_LEFT   = 'left';
+	public const MEDIA_BEHIND = 'behind';
 
 	public const LAYOUT_STACKED = 'stacked';
 	public const LAYOUT_INLINE  = 'inline';
@@ -134,7 +134,7 @@ class Card_Controller extends Abstract_Controller {
 		if ( ! empty( $this->image ) ) {
 			$this->classes[] = sprintf( 'c-card--media-%s', $this->media_position );
 
-			if ($this->media_position === self::MEDIA_TOP || $this->media_position === self::MEDIA_BOTTOM ) {
+			if ( $this->media_position === self::MEDIA_TOP || $this->media_position === self::MEDIA_BOTTOM ) {
 				$this->classes[] = 'c-card--' . self::LAYOUT_STACKED;
 			}
 
@@ -183,7 +183,11 @@ class Card_Controller extends Abstract_Controller {
 		];
 	}
 
-	public function render_meta_primary() {
+	public function render_meta_primary(): array {
+		if ( ! $this->meta_primary ) {
+			return [];
+		}
+
 		return [
 			Container_Controller::CLASSES => [ 'c-card__meta', 'c-card__meta--primary' ],
 			Container_Controller::TAG     => 'div',
@@ -191,20 +195,33 @@ class Card_Controller extends Abstract_Controller {
 		];
 	}
 
-	public function render_meta_secondary() {
+	/**
+	 * @return array
+	 */
+	public function render_meta_secondary(): array {
+		if ( ! $this->meta_secondary ) {
+			return [];
+		}
+
 		return [
 			Container_Controller::CLASSES => [ 'c-card__meta', 'c-card__meta--secondary' ],
 			Container_Controller::TAG     => 'div',
-			Container_Controller::CONTENT => $this->meta_primary->render(),
+			Container_Controller::CONTENT => $this->meta_secondary->render(),
 		];
 	}
 
+	/**
+	 * @return Deferred_Component|null
+	 */
 	public function render_title() {
 		$this->title[ Text_Controller::CLASSES ][] = 'c-card__title';
 
 		return $this->title;
 	}
 
+	/**
+	 * @return Deferred_Component|null
+	 */
 	public function render_content() {
 		$this->content[ Text_Controller::CLASSES ][] = 'c-card__text';
 		$this->content[ Text_Controller::CLASSES ][] = 'p';
@@ -212,8 +229,11 @@ class Card_Controller extends Abstract_Controller {
 		return $this->content;
 	}
 
-	public function get_cta_args() {
-		if ( empty( $this->cta['url'] ) ) {
+	/**
+	 * @return array|Deferred_Component|null
+	 */
+	public function render_cta() {
+		if ( empty( $this->cta[ 'url' ] ) ) {
 			return [];
 		}
 
