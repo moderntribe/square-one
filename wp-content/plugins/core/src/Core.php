@@ -86,7 +86,6 @@ class Core {
 		'\Tribe\Libs\Queues_Mysql\Mysql_Backend_Definer',
 		'\Tribe\Libs\Required_Page\Required_Page_Definer',
 		'\Tribe\Libs\Settings\Settings_Definer',
-		'\Tribe\Libs\Twig\Twig_Definer',
 		'\Tribe\Libs\Whoops\Whoops_Definer',
 	];
 
