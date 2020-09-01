@@ -76,7 +76,7 @@
     "humanmade/mercator": "dev-master#7f3846a",
     "humanmade/s3-uploads": "2.2.1",
     "johnbillion/extended-cpts": "^4.0",
-    "johnpbloch/wordpress-core": "5.5.0",
+    "johnpbloch/wordpress-core": "5.5.1",
     "johnpbloch/wordpress-core-installer": "1.0.0",
     "mailgun/mailgun-php": "^2.8",
     "moderntribe/acf-image-select": "dev-master",
@@ -101,9 +101,9 @@
     "wpackagist-plugin/posts-to-posts": "1.6.6",
     "wpackagist-plugin/regenerate-thumbnails": "3.1.3",
     "wpackagist-plugin/safe-svg": "1.9.9",
-    "wpackagist-plugin/the-events-calendar": "5.1.5",
+    "wpackagist-plugin/the-events-calendar": "5.1.6",
     "wpackagist-plugin/user-switching": "1.5.5",
-    "wpackagist-plugin/wordpress-seo": "14.7"
+    "wpackagist-plugin/wordpress-seo": "14.9"
   },
   "require-dev": {
     "automattic/phpcs-neutron-standard": "^1.5",
