@@ -1,0 +1,196 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Component: Block: Stats
+ *
+ * ----------------------------------------------------------------------------- */
+
+.b-stats {
+
+	.c-statistic {
+		height: 100%;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Stats: Container
+ * ----------------------------------------------------------------------------- */
+
+.b-stats__container {
+
+	/* CASE: Layout Inline */
+	.b-stats--layout-inline & {
+		@media (--viewport-full) {
+			display: flex;
+			justify-content: space-between;
+		}
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Stats: Content Block
+ * ----------------------------------------------------------------------------- */
+
+.b-stats__header {
+	margin-bottom: var(--spacer-40);
+
+	/* CASE: Layout Inline */
+	.b-stats--layout-inline & {
+		@media (--viewport-full) {
+			margin-bottom: 0;
+			width: calc(50% - var(--grid-gutter-half));
+		}
+
+		@media (--viewport-large) {
+			width: calc(41.6667% - var(--grid-gutter-half));
+		}
+	}
+
+	/* CASE: Layout Inline & Content Center */
+	.b-stats--layout-inline &.c-content-block--layout-center {
+		margin-left: 0;
+		margin-right: 0;
+	}
+}
+
+.b-stats__description {
+	margin-top: var(--spacer-10);
+
+	> p {
+		@media (--viewport-full) {
+			@mixin t-body-large;
+		}
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Stats: Content
+ * ----------------------------------------------------------------------------- */
+
+.b-stats__content {
+
+	/* CASE: Layout Inline */
+	.b-stats--layout-inline & {
+		@media (--viewport-full) {
+			width: calc(50% - var(--grid-gutter-half));
+		}
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Stats: List
+ * ----------------------------------------------------------------------------- */
+
+.b-stats__list {
+	@media (--viewport-medium) {
+		display: flex;
+		flex-flow: row wrap;
+	}
+}
+
+.b-stats__list-item {
+	margin: 0;
+	padding: var(--spacer-20) 0;
+
+	@media (--viewport-medium) {
+		width: 50%;
+
+		&:nth-child(-n+2) {
+			flex-grow: 1;
+		}
+	}
+
+	/* CASE: Layout Stacked */
+	.b-stats--layout-stacked & {
+		@media (--viewport-full) {
+			width: 25%;
+
+			&:nth-child(-n+4) {
+				flex-grow: 1;
+			}
+		}
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * CASE: Divided List
+ * ----------------------------------------------------------------------------- */
+
+.b-stats--dividers-show {
+
+	.b-stats__list-item {
+
+		&:not(:last-child) {
+			border-bottom: 1px solid var(--color-border);
+		}
+
+		/* CASE: All Layouts, Medium Screens, 2up list */
+		@media (--viewport-medium) {
+
+			/* 2up: Hide last 2 list element dividers */
+			&:nth-last-child(-n+2):not(:nth-child(2n+2)) {
+				border-bottom: 0;
+			}
+
+			.c-statistic {
+				border-right: 1px solid var(--color-border);
+			}
+
+			/* 2up: Hide last element border, if not divisible by 2 */
+			&:last-child:not(2n+2) .c-statistic {
+				border-right: 0;
+			}
+
+			/* 2up: Hide border for last element in row */
+			&:nth-child(even) .c-statistic {
+				border-right: 0;
+			}
+		}
+	}
+
+	/* CASE: Layout Stacked, 4up list */
+	&.b-stats--layout-stacked {
+
+		.b-stats__list-item {
+			@media (--viewport-full) {
+
+				/* 4up: Hide borders for last row */
+				/* Target last 4 items, but not the first 4 */
+				&:nth-last-child(-n+4):not(:nth-child(-n+4)) {
+					border-bottom: 0;
+				}
+
+				/* 4up: Add back borders hidden for medium screens  */
+				&:nth-child(even) .c-statistic {
+					border-right: 1px solid var(--color-grey-light);
+				}
+
+				/* 4up: Hide border for last element in row */
+				&:nth-child(4n+4) .c-statistic {
+					border-right: 0;
+				}
+			}
+		}
+
+		/* CASE: Single rows of stats */
+		&[data-stats-count="1"],
+		&[data-stats-count="2"],
+		&[data-stats-count="3"],
+		&[data-stats-count="4"] {
+
+			.b-stats__list-item {
+				@media (--viewport-full) {
+
+					/* 4up: Hide borders for last row */
+					&:nth-last-child(-n+4) {
+						border-bottom: 0;
+					}
+
+					/* Hide border for last element in single row */
+					&:last-child .c-statistic {
+						border-right: 0;
+					}
+				}
+			}
+		}
+	}
+}

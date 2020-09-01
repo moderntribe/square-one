@@ -1,0 +1,76 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Typography: Tables
+ *
+ * @TODO: Update per new designs (TBD).
+ * @TODO: responsive tables.
+ * @TODO: Add theme overrides for BG colors.
+ *
+ * ----------------------------------------------------------------------------- */
+
+/* -----------------------------------------------------------------------------
+ * Table
+ * ----------------------------------------------------------------------------- */
+
+.table,
+.t-sink > table {
+	font-size: var(--font-size-body-small);
+	border: 1px solid var(--color-grey);
+	text-align: left;
+	border-collapse: collapse;
+	width: 100%;
+	table-layout: fixed;
+
+	@media (--viewport-medium) {
+		font-size: var(--font-size-body);
+		table-layout: auto;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * TH
+ * ----------------------------------------------------------------------------- */
+
+.th,
+.t-sink > th {
+	padding: 14px 1em 12px;
+	font-weight: 700;
+	line-height: 1;
+
+	& ~ th {
+		border-left: 1px solid var(--color-grey);
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * TR
+ * ----------------------------------------------------------------------------- */
+
+.tr,
+.t-sink > tr {
+
+	thead & {
+		border-bottom: 1px solid var(--color-grey);
+	}
+
+	& ~ tr {
+		border-top: 1px solid var(--color-grey);
+	}
+
+	&:nth-of-type(even) {
+		background-color: var(--color-grey-light);
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * TD
+ * ----------------------------------------------------------------------------- */
+
+.td,
+.t-sink > td {
+	padding: 12px 1em 10px;
+
+	& ~ td {
+		border-left: 1px solid var(--color-grey);
+	}
+}

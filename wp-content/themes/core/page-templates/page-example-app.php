@@ -3,5 +3,4 @@
  * Template Name: Example React App
  */
 
-$template = new \Tribe\Project\Templates\Page( 'page-templates/page-example-app.twig' );
-echo $template->render();
+get_template_part( 'components/routes/example_app/example_app' );

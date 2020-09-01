@@ -1,4 +1,3 @@
 <?php
 
-$template = new \Tribe\Project\Templates\Page( 'page.twig' );
-echo $template->render();
+get_template_part( 'components/routes/page/page' );

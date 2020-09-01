@@ -1,4 +1,3 @@
 <?php
 
-$template = new \Tribe\Project\Templates\Search( 'search.twig' );
-echo $template->render();
+get_template_part( 'components/routes/search/search' );

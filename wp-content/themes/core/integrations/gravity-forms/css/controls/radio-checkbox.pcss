@@ -1,0 +1,78 @@
+.gf-checkbox,
+.gf-radio {
+
+	ul {
+
+		li {
+			padding-left: var(--form-control-radio-checkbox-padding-left);
+			margin: 0;
+		}
+	}
+
+	.ginput_container {
+		@mixin form-control-radio-checkbox-base;
+		@mixin form-control-group-radio-checkbox;
+	}
+}
+
+.gfield_checkbox,
+.gfield_radio {
+
+	li {
+		@mixin form-control-radio-checkbox;
+
+		.gf-radio-checkbox-other-placeholder {
+
+			&:before {
+				top: 11px;
+			}
+
+			&:after {
+				top: 19px;
+			}
+		}
+
+		input:focus ~ .gf-radio-checkbox-other-placeholder:before {
+			border-color: var(--form-control-radio-checkbox-ui-border-color-focus);
+			box-shadow: 0 0 0 var(--form-control-radio-checkbox-ui-border-size-focus) var(--form-control-radio-checkbox-ui-border-color-focus);
+		}
+
+		input:checked ~ .gf-radio-checkbox-other-placeholder {
+			color: var(--form-control-color);
+
+			&:after {
+				opacity: 1;
+			}
+		}
+
+		& ~ li {
+			margin-top: var(--form-control-radio-checkbox-margin-top);
+		}
+	}
+
+	input[value="gf_other_choice"] {
+
+		&[type="radio"],
+		&[type="checkbox"] {
+			top: 16px;
+		}
+
+		& + input {
+			@media (--viewport-medium) {
+				width: 50%;
+			}
+		}
+	}
+}
+
+.gfield_checkbox {
+	@mixin form-control-checkbox;
+
+	li input:checked + label:after {
+		content: var(--icon-check);
+	}
+}
+
+.gfield_radio {
+	@mixin form-control-radio;
+}

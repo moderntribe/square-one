@@ -1,0 +1,44 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Forms: Attributes
+ *
+ * ----------------------------------------------------------------------------- */
+
+/* -----------------------------------------------------------------------------
+ * Placeholder
+ * ----------------------------------------------------------------------------- */
+
+@mixin form-control-placeholder {
+	color: var(--form-placeholder-color);
+	opacity: 1;
+	letter-spacing: var(--form-letter-spacing);
+	text-transform: var(--form-text-transform);
+	font: normal 400 var(--form-font-size) var(--form-font-family);
+	line-height: inherit;
+}
+
+/* -----------------------------------------------------------------------------
+ * Focus
+ * ----------------------------------------------------------------------------- */
+
+input:not([type="button"]):not([type="reset"]):not([type="submit"]):focus,
+textarea:focus,
+select:focus {
+	border: var(--form-border-size-focus) solid var(--form-border-color-focus);
+
+	&::-webkit-input-placeholder {
+		color: var(--form-placeholder-color-focus);
+	}
+
+	&:-moz-placeholder {
+		color: var(--form-placeholder-color-focus);
+	}
+
+	&::-moz-placeholder {
+		color: var(--form-placeholder-color-focus);
+	}
+
+	&:-ms-input-placeholder {
+		color: var(--form-placeholder-color-focus);
+	}
+}

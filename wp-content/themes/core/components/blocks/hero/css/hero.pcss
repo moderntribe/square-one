@@ -1,0 +1,27 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Component: Block: Hero
+ *
+ * ----------------------------------------------------------------------------- */
+
+.b-hero {
+	position: relative;
+	display: flex;
+	align-items: center;
+	min-height: 640px;
+	padding: var(--spacer-80) 0;
+	background-color: var(--color-grey-dark);
+
+	@media (--viewport-medium) {
+		min-height: 720px;
+		padding: var(--spacer-90) 0;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Hero: Content
+ * ----------------------------------------------------------------------------- */
+
+.b-hero__content {
+	position: relative;
+}

@@ -1,16 +1,14 @@
 <?php
 /*
  * This is a sample local-config.php file
- * In it, you *must* include the four main database defines
  *
- * You may include other settings here that you only want
+ * You may include settings here that you only want
  * enabled on your local development checkouts
+ *
+ * The default WordPress databases defines are automatically populated in
+ * dev/docker/docker-compose.yml which you can override here with custom
+ * defines e.g. define( 'DB_NAME', 'tribe_square1' );
 */
-
-define( 'DB_NAME', 'tribe_square1' );
-define( 'DB_USER', 'root' );
-define( 'DB_PASSWORD', 'password' );
-define( 'DB_HOST', 'mysql' );
 
 /*
  * React dev
@@ -28,9 +26,12 @@ define( 'WP_DEBUG_DISPLAY', true );
 define( 'SCRIPT_DEBUG', true );
 define( 'WP_CACHE', false );
 
-define( 'TRIBE_DISABLE_PANELS_CACHE', true );
+/*
+ * Enable ASSET_VERSION_TIMESTAMP if you are doing front end dev on css/js to force cache invalidation without running a full build
+ */
+// define( 'ASSET_VERSION_TIMESTAMP', true );
 
-$GLOBALS[ 'memcached_servers' ] = [ [ 'memcached', 11211, ] ];
+define( 'TRIBE_DISABLE_PANELS_CACHE', true );
 
 /*
  * Whoops

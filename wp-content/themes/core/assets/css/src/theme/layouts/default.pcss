@@ -1,0 +1,104 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Layouts
+ *
+ * ----------------------------------------------------------------------------- */
+
+/* -----------------------------------------------------------------------------
+ *
+ * Layout: Global Site Wrapper
+ *
+ * ----------------------------------------------------------------------------- */
+
+.l-wrapper {
+
+}
+
+/* -----------------------------------------------------------------------------
+ *
+ * Layout: Main Content
+ *
+ * ----------------------------------------------------------------------------- */
+
+main {
+
+}
+
+/* -----------------------------------------------------------------------------
+ *
+ * Layout: Global Container
+ *
+ * Only applicable where the `l-sink` layout is either not applied
+ * such as a site masthead, footer, pagination, etc; or, where this layout is
+ * applied inside a block editor element.
+ *
+ * Should not apply around any element that container `the_content()` as
+ * the content requires the use of `l-sink` for mixed-width content.
+ *
+ * ----------------------------------------------------------------------------- */
+
+.l-container {
+	max-width: var(--grid-max-width);
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: var(--grid-margin-small);
+	padding-right: var(--grid-margin-small);
+	width: 100%;
+
+	@media (--viewport-medium) {
+		padding-left: var(--grid-margin-medium);
+		padding-right: var(--grid-margin-medium);
+	}
+
+	@media (--viewport-full) {
+		padding-left: var(--grid-margin);
+		padding-right: var(--grid-margin);
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ *
+ * Layout: Kitchen Sink
+ *
+ * Usage: Block Editor Content.
+ *
+ * Example:
+ *   ...
+ * <div class="l-sink">
+ * </div>
+ *
+ * ----------------------------------------------------------------------------- */
+
+.l-sink {
+
+	& > *:not(.c-block):not(.alignwide):not(.alignfull) {
+		max-width: var(--grid-width-staggered);
+		width: calc(100% - 2 * var(--grid-gutter-small));
+		margin-left: auto;
+		margin-right: auto;
+
+		@media (--viewport-medium) {
+			width: calc(100% - 2 * var(--grid-gutter));
+		}
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ *
+ * Layout: Kitchen Sink, Double
+ *
+ * Usage: Block Editor Content
+ *
+ * Example:
+ * <div class="l-sink l-sink--double">
+ *   ...
+ * </div>
+ *
+ * ----------------------------------------------------------------------------- */
+
+.l-sink--double {
+
+	& > *:not(.c-block):not(.alignwide):not(.alignfull) {
+		max-width: var(--grid-width-staggered-double);
+	}
+}

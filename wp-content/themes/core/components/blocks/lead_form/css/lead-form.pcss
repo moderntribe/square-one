@@ -1,0 +1,111 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Component: Block: Lead Form
+ *
+ * ----------------------------------------------------------------------------- */
+
+.b-lead-form {
+	/* CASE: Lead Form: Full Width */
+	&.b-lead-form--width-full {
+		background-color: var(--color-primary-10);
+		padding: var(--spacer-50) 0;
+
+		@media (--viewport-full) {
+			padding: var(--spacer-70) 0;
+		}
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Lead Form: Container
+ * ----------------------------------------------------------------------------- */
+
+.b-lead-form__container {
+	/* CASE: Lead Form: Grid Width */
+	.b-lead-form--width-grid & {
+		background-color: var(--color-primary-10);
+		border-radius: 8px;
+		padding: var(--spacer-40) var(--spacer-30);
+
+		@media (--viewport-medium) {
+			padding: var(--spacer-70) var(--spacer-50);
+		}
+
+		@media (--viewport-full) {
+			padding: var(--spacer-70) var(--spacer-70);
+		}
+	}
+
+	/* CASE: Lead Form: Full Width */
+	.b-lead-form--width-full & {
+		@media (--viewport-full) {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+		}
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Lead Form: Content
+ * ----------------------------------------------------------------------------- */
+
+.b-lead-form__content {
+	/* CASE: Lead Form: Full Width */
+	.b-lead-form--width-full & {
+		@media (--viewport-full) {
+			max-width: var(--grid-7-col);
+			width: calc(58.3333% - var(--grid-gutter-half));
+		}
+	}
+
+	/* CASE: Lead Form: Full Width & Layout Center */
+	.b-lead-form--layout-center.b-lead-form--width-full & {
+		margin-left: 0;
+		margin-right: 0;
+	}
+}
+
+.b-lead-form__description {
+	margin-top: 0;
+
+	@media (--viewport-full) {
+		margin-top: var(--spacer-10);
+	}
+
+	p {
+		@media (--viewport-full) {
+			@mixin t-body-large;
+		}
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Lead Form: Form
+ * ----------------------------------------------------------------------------- */
+
+.b-lead-form__form {
+	margin-top: var(--spacer-30);
+
+	/* CASE: Lead Form: Grid Width */
+	.b-lead-form--width-grid & {
+		@media (--viewport-full) {
+			margin-top: var(--spacer-40);
+		}
+	}
+
+	/* CASE: Lead Form: Grid Width & Layout Center */
+	.b-lead-form--layout-center.b-lead-form--width-grid & {
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	/* CASE: Lead Form: Full Width */
+	.b-lead-form--width-full & {
+		@media (--viewport-full) {
+			margin-top: 0;
+			max-width: var(--grid-5-col);
+			width: calc(41.6667% - var(--grid-gutter-half));
+		}
+	}
+}
