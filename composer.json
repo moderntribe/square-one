@@ -76,7 +76,7 @@
     "humanmade/mercator": "dev-master#7f3846a",
     "humanmade/s3-uploads": "2.2.1",
     "johnbillion/extended-cpts": "^4.0",
-    "johnpbloch/wordpress-core": "5.5.0",
+    "johnpbloch/wordpress-core": "5.5.1",
     "johnpbloch/wordpress-core-installer": "1.0.0",
     "mailgun/mailgun-php": "^2.8",
     "moderntribe/acf-image-select": "dev-master",
