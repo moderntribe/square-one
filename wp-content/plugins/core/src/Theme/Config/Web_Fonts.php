@@ -7,15 +7,14 @@ class Web_Fonts {
 	public const  PROVIDER_GOOGLE  = 'google';
 	public const  PROVIDER_CUSTOM  = 'custom';
 	private const TYPEKIT_API      = 'https://use.typekit.net';
-	private const GOOGLE_API       = 'https://fonts.googleapis.com';
 
 	/**
 	 * @var array
 	 */
-	private $fonts;
+	private array $fonts;
 
 	public function __construct( array $fonts = [] ) {
-		$this->fonts       = $fonts;
+		$this->fonts = $fonts;
 	}
 
 	/**
@@ -65,7 +64,7 @@ class Web_Fonts {
 
 		// Google
 		if ( ! empty( $this->fonts[ self::PROVIDER_GOOGLE ] ) ) {
-			$urls[ self::PROVIDER_GOOGLE ] = $this->get_google_url();
+			$urls[ self::PROVIDER_GOOGLE ] = $this->fonts[ self::PROVIDER_GOOGLE ];
 		}
 
 		// Custom
@@ -87,18 +86,5 @@ class Web_Fonts {
 		}
 
 		return sprintf( '%s%s.css', trailingslashit( self::TYPEKIT_API ), $this->fonts[ self::PROVIDER_TYPEKIT ] );
-	}
-
-	/**
-	 * Returns a fully-qualified Google Fonts URL from an array of font keys.
-	 *
-	 * @return string
-	 */
-	private function get_google_url(): string {
-		if ( empty( $this->fonts[ self::PROVIDER_GOOGLE ] ) ) {
-			return '';
-		}
-
-		return sprintf( '%scss?family=%s&display=swap', trailingslashit( self::GOOGLE_API ), implode( '|', $this->fonts[ self::PROVIDER_GOOGLE ] ) );
 	}
 }

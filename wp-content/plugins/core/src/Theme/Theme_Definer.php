@@ -21,12 +21,9 @@ class Theme_Definer implements Definer_Interface {
 
 	public const BLACK   = 'black';
 	public const WHITE   = 'white';
-	public const RED     = 'red';
-	public const ORANGE  = 'orange';
-	public const YELLOW  = 'yellow';
+	public const GREY    = 'grey';
+	public const BLUE    = 'blue';
 	public const GREEN   = 'green';
-	public const CYAN    = 'cyan';
-	public const MAGENTA = 'purple';
 
 	public const GRADIENT_CYAN_PURPLE = 'cyan-to-purple';
 	public const GRADIENT_ORANGE_RED  = 'orange-to-red';
@@ -39,13 +36,10 @@ class Theme_Definer implements Definer_Interface {
 			 */
 			self::CONFIG_COLORS => [
 				self::WHITE   => [ 'color' => '#ffffff', 'label' => __( 'White', 'tribe' ) ],
-				self::BLACK   => [ 'color' => '#000000', 'label' => __( 'Black', 'tribe' ) ],
-				self::RED     => [ 'color' => '#ff0000', 'label' => __( 'Red', 'tribe' ) ],
-				self::ORANGE  => [ 'color' => '#ff8800', 'label' => __( 'Orange', 'tribe' ) ],
-				self::YELLOW  => [ 'color' => '#ffff00', 'label' => __( 'Yellow', 'tribe' ) ],
-				self::GREEN   => [ 'color' => '#00ff00', 'label' => __( 'Green', 'tribe' ) ],
-				self::CYAN    => [ 'color' => '#00ffff', 'label' => __( 'Cyan', 'tribe' ) ],
-				self::MAGENTA => [ 'color' => '#ff00ff', 'label' => __( 'Magenta', 'tribe' ) ],
+				self::BLACK   => [ 'color' => '#151515', 'label' => __( 'Black', 'tribe' ) ],
+				self::GREY    => [ 'color' => '#696969', 'label' => __( 'Grey', 'tribe' ) ],
+				self::BLUE    => [ 'color' => '#0074e0', 'label' => __( 'Blue', 'tribe' ) ],
+				self::GREEN   => [ 'color' => '#18814e', 'label' => __( 'Green', 'tribe' ) ],
 			],
 
 			Colors::class          => DI\create()
@@ -53,16 +47,18 @@ class Theme_Definer implements Definer_Interface {
 
 			/**
 			 * Define the gradients that will be available in color palettes
+			 *
+			 * Note: Gradients are disabled by default.
 			 */
 			self::CONFIG_GRADIENTS => [
-				self::GRADIENT_CYAN_PURPLE => [
+				/*self::GRADIENT_CYAN_PURPLE => [
 					'gradient' => 'linear-gradient(135deg,rgba(0,255,255,1) 0%,rgb(155,81,224) 100%)',
 					'label'    => __( 'Cyan to Purple', 'tribe' ),
 				],
 				self::GRADIENT_ORANGE_RED  => [
 					'gradient' => 'linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%)',
 					'label'    => __( 'Orange to Red', 'tribe' ),
-				],
+				],*/
 			],
 
 			Gradients::class        => DI\create()
@@ -70,6 +66,8 @@ class Theme_Definer implements Definer_Interface {
 
 			/**
 			 * Define the font sizes that will be available for block settings
+			 *
+			 * Note: Custom font sizes are disabled by default.
 			 */
 			self::CONFIG_FONT_SIZES => [
 				//'large'  => [
@@ -81,10 +79,15 @@ class Theme_Definer implements Definer_Interface {
 			Font_Sizes::class => DI\create()
 				->constructor( DI\get( self::CONFIG_FONT_SIZES ) ),
 
+			/**
+			 * Enable our custom oEmbed cover image markup.
+			 *
+			 * TODO: FIx this. Currently disabled b/c Gutenberg is busted w/ our custom oEmbed covers.
+			 */
 			Oembed_Filter::class => DI\autowire()
 				->constructorParameter( 'supported_providers', [
-					Oembed_Filter::PROVIDER_VIMEO,
-					Oembed_Filter::PROVIDER_YOUTUBE,
+					//Oembed_Filter::PROVIDER_VIMEO,
+					//Oembed_Filter::PROVIDER_YOUTUBE,
 				] ),
 
 			/**
@@ -97,13 +100,13 @@ class Theme_Definer implements Definer_Interface {
 			/**
 			 * @var array A collection of Google Font families to load.
 			 *
-			 * Any combination of valid Google font family declarations is acceptable.
+			 * A complete URL for Google Fonts usage.
 			 *
-			 * Example: `[ 'Tangerine', 'Cantarell:italic', 'Droid+Serif:b' ]`
+			 * Example: `https://fonts.googleapis.com/css2?family=Crimson+Pro&family=Literata`
 			 *
-			 * @link https://developers.google.com/fonts/docs/getting_started
+			 * @link https://developers.google.com/fonts/docs/css2
 			 */
-			self::CONFIG_GOOGLE_FONTS => [],
+			self::CONFIG_GOOGLE_FONTS => '',
 
 			/**
 			 * @var array Collection of custom webfont sources.

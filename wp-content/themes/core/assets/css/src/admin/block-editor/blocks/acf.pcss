@@ -38,6 +38,24 @@
 }
 
 /* -----------------------------------------------------------------------------
+ * Buttons Block
+ *
+ * Set a proper max width.
+ * ----------------------------------------------------------------------------- */
+
+.wp-block[data-type^="acf/buttons"] {
+	/* -----------------------------------------------------------------------------
+	 * Block Editor Kitchen Sink Grid Widths
+	 * ----------------------------------------------------------------------------- */
+	max-width: var(--grid-width-staggered-double);
+	width: calc(100% - 2 * var(--grid-gutter-small));
+
+	@media (--viewport-medium) {
+		width: calc(100% - 2 * var(--grid-gutter));
+	}
+}
+
+/* -----------------------------------------------------------------------------
  * Accordion Block
  *
  * Unset hidden tabpanel row properties for the editor & provide some separation
