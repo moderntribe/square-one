@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d7980d87432d2f1b67b887999c8a1c82",
+    "content-hash": "b22f5f67e2ac65ecf5cb8681cf9af30a",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -907,16 +907,16 @@
         },
         {
             "name": "moderntribe/tribe-libs",
-            "version": "dev-epic/fidgety-feet",
+            "version": "v3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moderntribe/tribe-libs.git",
-                "reference": "d311fab93c7dd1d4c44d05107d467ddb73622f94"
+                "reference": "999025b287bc980c39ad363a9ab72cbd43635c0a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/tribe-libs/zipball/d311fab93c7dd1d4c44d05107d467ddb73622f94",
-                "reference": "d311fab93c7dd1d4c44d05107d467ddb73622f94",
+                "url": "https://api.github.com/repos/moderntribe/tribe-libs/zipball/999025b287bc980c39ad363a9ab72cbd43635c0a",
+                "reference": "999025b287bc980c39ad363a9ab72cbd43635c0a",
                 "shasum": ""
             },
             "require": {
@@ -1011,7 +1011,7 @@
                 "GPL-2.0-only"
             ],
             "description": "A library for use on Modern Tribe service projects.",
-            "time": "2020-08-20T02:44:15+00:00"
+            "time": "2020-09-01T17:22:29+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -11398,9 +11398,8 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "moderntribe/acf-image-select": 20,
         "humanmade/mercator": 20,
-        "moderntribe/tribe-libs": 20,
+        "moderntribe/acf-image-select": 20,
         "roots/wp-password-bcrypt": 20,
         "filp/whoops": 20
     },
