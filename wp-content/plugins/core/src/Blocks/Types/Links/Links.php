@@ -26,7 +26,7 @@ class Links extends Block_Config {
 
 	public function add_block() {
 		$this->set_block( new Block( self::NAME, [
-			'title'       => __( 'links', 'tribe' ),
+			'title'       => __( 'Links', 'tribe' ),
 			'description' => __( 'A list of links', 'tribe' ),
 			'icon'        => 'list-view',
 			'keywords'    => [ __( 'list', 'tribe' ) ],

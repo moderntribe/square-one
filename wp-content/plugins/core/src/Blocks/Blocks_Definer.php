@@ -62,6 +62,7 @@ class Blocks_Definer implements Definer_Interface {
 				'acf/leadform',
 				'acf/links',
 				'acf/logos',
+				'acf/postlist',
 				'acf/quote',
 				'acf/stats',
 				'acf/tabs',
