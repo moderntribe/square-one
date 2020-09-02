@@ -82,9 +82,7 @@ class Hero extends Block_Config {
 				self::LAYOUT_LEFT   => __( 'Align Left', 'tribe' ),
 				self::LAYOUT_CENTER => __( 'Align Center', 'tribe' ),
 			],
-			'default_value'   => [
-				self::LAYOUT_CENTER,
-			],
+			'default_value'   => self::LAYOUT_CENTER,
 			'multiple'        => 0,
 			'image_path'      => sprintf(
 				'%sassets/img/admin/blocks/%s/',

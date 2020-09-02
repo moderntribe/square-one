@@ -96,9 +96,7 @@ class Quote extends Block_Config {
 				self::MEDIA_OVERLAY => __( 'Image Overlay', 'tribe' ),
 				self::MEDIA_RIGHT   => __( 'Image Right', 'tribe' ),
 			],
-			'default_value'   => [
-				self::MEDIA_OVERLAY,
-			],
+			'default_value'   => self::MEDIA_OVERLAY,
 			'multiple'        => 0,
 			'image_path'      => sprintf(
 				'%sassets/img/admin/blocks/%s/',

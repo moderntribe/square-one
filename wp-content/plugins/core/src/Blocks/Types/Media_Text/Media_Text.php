@@ -126,9 +126,7 @@ class Media_Text extends Block_Config {
 				self::MEDIA_CENTER => __( 'Media Stacked', 'tribe' ),
 				self::MEDIA_RIGHT  => __( 'Media Right', 'tribe' ),
 			],
-			'default_value'   => [
-				self::MEDIA_CENTER,
-			],
+			'default_value'   => self::MEDIA_CENTER,
 			'multiple'        => 0,
 			'image_path'      => sprintf(
 				'%sassets/img/admin/blocks/%s/',
@@ -144,9 +142,7 @@ class Media_Text extends Block_Config {
 				self::WIDTH_GRID => __( 'Grid', 'tribe' ),
 				self::WIDTH_FULL => __( 'Full', 'tribe' ),
 			],
-			'default_value'   => [
-				self::WIDTH_GRID,
-			],
+			'default_value'   => self::WIDTH_GRID,
 			'multiple'        => 0,
 			'image_path'      => sprintf(
 				'%sassets/img/admin/blocks/%s/',

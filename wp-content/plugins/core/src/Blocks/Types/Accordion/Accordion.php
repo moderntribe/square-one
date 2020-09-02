@@ -100,9 +100,7 @@ class Accordion extends Block_Config {
 				self::LAYOUT_INLINE  => __( 'Inline', 'tribe' ),
 				self::LAYOUT_STACKED => __( 'Stacked', 'tribe' ),
 			],
-			'default_value'   => [
-				self::LAYOUT_INLINE,
-			],
+			'default_value'   => self::LAYOUT_INLINE,
 			'multiple'        => 0,
 			'image_path'      => sprintf(
 				'%sassets/img/admin/blocks/%s/',

@@ -107,9 +107,7 @@ class Stats extends Block_Config {
 				self::LAYOUT_INLINE  => __( 'Inline', 'tribe' ),
 				self::LAYOUT_STACKED => __( 'Stacked', 'tribe' ),
 			],
-			'default_value'   => [
-				self::LAYOUT_STACKED,
-			],
+			'default_value'   => self::LAYOUT_STACKED,
 			'multiple'        => 0,
 			'image_path'      => sprintf(
 				'%sassets/img/admin/blocks/%s/',
@@ -124,9 +122,7 @@ class Stats extends Block_Config {
 				self::CONTENT_ALIGN_CENTER => __( 'Content Center', 'tribe' ),
 				self::CONTENT_ALIGN_LEFT   => __( 'Content Left', 'tribe' ),
 			],
-			'default_value'   => [
-				self::CONTENT_ALIGN_CENTER,
-			],
+			'default_value'   => self::CONTENT_ALIGN_CENTER,
 			'multiple'        => 0,
 			'image_path'      => sprintf(
 				'%sassets/img/admin/blocks/%s/',

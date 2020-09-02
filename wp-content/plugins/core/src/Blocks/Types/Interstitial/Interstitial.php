@@ -59,9 +59,7 @@ class Interstitial extends Block_Config {
 				self::LAYOUT_LEFT   => __( 'Text Align Left', 'tribe' ),
 				self::LAYOUT_CENTER => __( 'Text Align Center', 'tribe' ),
 			],
-			'default_value'   => [
-				self::LAYOUT_LEFT,
-			],
+			'default_value'   => self::LAYOUT_LEFT,
 			'multiple'        => 0,
 			'image_path'      => sprintf(
 				'%sassets/img/admin/blocks/%s/',

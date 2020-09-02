@@ -102,9 +102,7 @@ class Lead_Form extends Block_Config {
 					self::LAYOUT_LEFT   => __( 'Content Left', 'tribe' ),
 					self::LAYOUT_CENTER => __( 'Content Center', 'tribe' ),
 				],
-				'default_value'   => [
-					self::LAYOUT_CENTER,
-				],
+				'default_value'   => self::LAYOUT_CENTER,
 				'multiple'        => 0,
 				'image_path'      => sprintf(
 					'%sassets/img/admin/blocks/%s/',
@@ -121,9 +119,7 @@ class Lead_Form extends Block_Config {
 					self::WIDTH_GRID => __( 'Grid', 'tribe' ),
 					self::WIDTH_FULL => __( 'Full', 'tribe' ),
 				],
-				'default_value'   => [
-					self::WIDTH_GRID,
-				],
+				'default_value'   => self::WIDTH_GRID,
 				'multiple'        => 0,
 				'image_path'      => sprintf(
 					'%sassets/img/admin/blocks/%s/',

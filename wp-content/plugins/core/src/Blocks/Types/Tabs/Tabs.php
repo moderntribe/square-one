@@ -109,9 +109,7 @@ class Tabs extends Block_Config {
 				self::LAYOUT_VERTICAL   => __( 'Vertical', 'tribe' ),
 				self::LAYOUT_HORIZONTAL => __( 'Horizontal', 'tribe' ),
 			],
-			'default_value'   => [
-				self::LAYOUT_HORIZONTAL,
-			],
+			'default_value'   => self::LAYOUT_HORIZONTAL,
 			'multiple'        => 0,
 			'image_path'      => sprintf(
 				'%sassets/img/admin/blocks/%s/',
