@@ -18,7 +18,7 @@ class Force_Plugin_Activation {
 	private $force_active = [
 		'advanced-custom-fields-pro/acf.php',
 		'core/core.php',
-		'tribe-admin-dashboard/tribe-admin-dashboard.php',
+		//'tribe-admin-dashboard/tribe-admin-dashboard.php',
 		'tribe-branding/tribe-branding.php',
 		'disable-emojis/disable-emojis.php',
 		'safe-svg/safe-svg.php',
