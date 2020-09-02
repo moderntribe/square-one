@@ -13,11 +13,6 @@ use Tribe\Project\Theme\Config\Image_Sizes;
 class Post_List extends Block_Config {
 	public const NAME = 'postlist';
 
-	public const LEAD_IN     = 'leadin';
-	public const TITLE       = 'title';
-	public const DESCRIPTION = 'description';
-	public const CTA         = 'cta';
-
 	public const QUERY_TYPE        = 'query_type';
 	public const QUERY_TYPE_AUTO   = 'query_type_auto';
 	public const QUERY_TYPE_MANUAL = 'query_type_manual';
@@ -26,10 +21,6 @@ class Post_List extends Block_Config {
 	public const LIMIT      = 'limit'; //Conditional to Auto
 	public const TAXONOMIES = 'taxonomy_terms'; //Conditional to Auto, one per post type
 	public const POST_TYPES = 'post_types'; //Conditional to Auto
-
-	public const LAYOUT         = 'layout';
-	public const LAYOUT_INLINE  = 'inline';
-	public const LAYOUT_STACKED = 'stacked';
 
 	public const QUERY_POST_TYPES = [
 		Post::NAME,
@@ -41,8 +32,8 @@ class Post_List extends Block_Config {
 	 */
 	public function add_block() {
 		$this->set_block( new Block( self::NAME, [
-			'title'       => __( 'Post List', 'tribe' ),
-			'description' => __( 'A block of curated posts', 'tribe' ),
+			'title'       => __( 'Post List Field', 'tribe' ),
+			'description' => __( 'A first pass on panel\'s post list field', 'tribe' ),
 			'icon'        => 'sticky',
 			'keywords'    => [ __( 'posts', 'tribe' ), __( 'display', 'tribe' ), __( 'text', 'tribe' ) ],
 			'category'    => 'layout',
@@ -54,29 +45,7 @@ class Post_List extends Block_Config {
 	 * Register Fields for block
 	 */
 	public function add_fields() {
-		$this->add_field( new Field( self::NAME . '_' . self::TITLE, [
-				'label' => __( 'Title', 'tribe' ),
-				'name'  => self::TITLE,
-				'type'  => 'text',
-			] )
-		)->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
-				'label' => __( 'Lead in', 'tribe' ),
-				'name'  => self::LEAD_IN,
-				'type'  => 'text',
-			] )
-		)->add_field( new Field( self::NAME . '_' . self::DESCRIPTION, [
-				'label'        => __( 'Description', 'tribe' ),
-				'name'         => self::DESCRIPTION,
-				'type'         => 'wysiwyg',
-				'toolbar'      => 'basic',
-				'media_upload' => 0,
-			] )
-		)->add_field( new Field( self::NAME . '_' . self::CTA, [
-				'label' => __( 'Call to Action', 'tribe' ),
-				'name'  => self::CTA,
-				'type'  => 'link',
-			] )
-		)->add_field( new Field( self::NAME . '_' . self::QUERY_TYPE, [
+		$this->add_field( new Field( self::NAME . '_' . self::QUERY_TYPE, [
 				'label'   => __( 'Type of Query', 'tribe' ),
 				'name'    => self::QUERY_TYPE,
 				'type'    => 'select',
@@ -172,24 +141,7 @@ class Post_List extends Block_Config {
 	 * Register Settings for Block
 	 */
 	public function add_settings() {
-		$this->add_setting( new Field( self::NAME . '_' . self::LAYOUT, [
-			'type'            => 'image_select',
-			'name'            => self::LAYOUT,
-			'choices'         => [
-				self::LAYOUT_INLINE  => __( 'Inline', 'tribe' ),
-				self::LAYOUT_STACKED => __( 'Stacked', 'tribe' ),
-			],
-			'default_value'   => [
-				self::LAYOUT_INLINE,
-			],
-			'multiple'        => 0,
-			'image_path'      => sprintf(
-				'%sassets/img/admin/blocks/%s/',
-				trailingslashit( get_template_directory_uri() ),
-				self::NAME
-			),
-			'image_extension' => 'svg',
-		] ) );
+		// No settings.
 	}
 
 	/**

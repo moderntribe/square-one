@@ -14,32 +14,7 @@ class Post_List_Model extends Base_Model {
 	 */
 	public function get_data(): array {
 		return [
-			Post_List_Controller::LAYOUT      => $this->get(
-				Post_List::LAYOUT,
-				Post_List::LAYOUT_STACKED
-			),
-			Post_List_Controller::TITLE       => $this->get( Post_List::TITLE, '' ),
-			Post_List_Controller::LEADIN      => $this->get( Post_List::LEAD_IN, '' ),
-			Post_List_Controller::DESCRIPTION => $this->get( Post_List::DESCRIPTION, '' ),
-			Post_List_Controller::CTA         => $this->get_cta_args(),
-			Post_List_Controller::POSTS       => $this->get_posts(),
-		];
-	}
-
-	/**
-	 * @return array
-	 */
-	private function get_cta_args(): array {
-		$cta = wp_parse_args( $this->get( Post_List::CTA, [] ), [
-			'title'  => '',
-			'url'    => '',
-			'target' => '',
-		] );
-
-		return [
-			Link_Controller::CONTENT => $cta[ 'title' ],
-			Link_Controller::URL     => $cta[ 'url' ],
-			Link_Controller::TARGET  => $cta[ 'target' ],
+			Post_List_Controller::POSTS => $this->get_posts(),
 		];
 	}
 
