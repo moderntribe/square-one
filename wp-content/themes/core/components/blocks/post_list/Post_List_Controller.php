@@ -40,7 +40,8 @@ class Post_List_Controller extends Abstract_Controller {
 	private array  $attrs;
 
 	public function __construct( array $args = [] ) {
-		$args                    = $this->parse_args( $args );
+		$args = $this->parse_args( $args );
+
 		$this->layout            = (string) $args[ self::LAYOUT ];
 		$this->title             = (string) $args[ self::TITLE ];
 		$this->leadin            = (string) $args[ self::LEADIN ];

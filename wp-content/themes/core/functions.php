@@ -18,264 +18,264 @@ function design_acf_init_block_types() {
 		// Hero
 		acf_register_block_type( [
 			'name'            => 'hero-design',
-			'title'           => 'Hero (UI/UX)',
+			'title'           => 'Hero Blank',
 			'description'     => 'A hero block.',
-			'render_template' => 'template-parts/blocks/testimonial/testimonial.php',
-			'category'        => 'design-play',
-			'icon'            => 'dashicons-carrot',
-			'keywords'        => [ 'design', 'hero', 'ui', 'ux' ],
+			'render_template' => '',
+			'category'        => 'blank-canvas',
+			'icon'            => 'buddicons-activity',
+			'keywords'        => [ 'hero', 'blank canvas' ],
 			'mode'            => 'preview',
 		] );
 
 		// Accordion
 		acf_register_block_type( [
 			'name'            => 'accordion-design',
-			'title'           => 'Accordion (UI/UX)',
+			'title'           => 'Accordion Blank',
 			'description'     => 'An accordion block.',
 			'render_template' => '',
-			'category'        => 'design-play',
-			'icon'            => 'dashicons-carrot',
-			'keywords'        => [ 'design', 'accordion', 'ui', 'ux' ],
+			'category'        => 'blank-canvas',
+			'icon'            => 'buddicons-activity',
+			'keywords'        => [ 'accordion', 'blank canvas' ],
 			'mode'            => 'preview',
 		] );
 
 		// Buttons
 		acf_register_block_type( [
 			'name'            => 'buttons-design',
-			'title'           => 'Buttons (UI/UX)',
+			'title'           => 'Buttons Blank',
 			'description'     => 'A buttons block.',
 			'render_template' => '',
-			'category'        => 'design-play',
-			'icon'            => 'dashicons-carrot',
-			'keywords'        => [ 'design', 'button', 'ui', 'ux' ],
+			'category'        => 'blank-canvas',
+			'icon'            => 'buddicons-activity',
+			'keywords'        => [ 'button', 'blank canvas' ],
 			'mode'            => 'preview',
 		] );
 
 		// Interstitial
 		acf_register_block_type( [
 			'name'            => 'interstitial-design',
-			'title'           => 'Interstitial (UI/UX)',
+			'title'           => 'Interstitial Blank',
 			'description'     => 'An interstitial block.',
 			'render_template' => '',
-			'category'        => 'design-play',
-			'icon'            => 'dashicons-carrot',
-			'keywords'        => [ 'design', 'interstitial', 'ui', 'ux' ],
+			'category'        => 'blank-canvas',
+			'icon'            => 'buddicons-activity',
+			'keywords'        => [ 'interstitial', 'blank canvas' ],
 			'mode'            => 'preview',
 		] );
 
 		// Lead Form
 		acf_register_block_type( [
 			'name'            => 'lead-form-design',
-			'title'           => 'Lead Form (UI/UX)',
+			'title'           => 'Lead Form Blank',
 			'description'     => 'A lead form block.',
 			'render_template' => '',
-			'category'        => 'design-play',
-			'icon'            => 'dashicons-carrot',
-			'keywords'        => [ 'design', 'lead form', 'form', 'ui', 'ux' ],
+			'category'        => 'blank-canvas',
+			'icon'            => 'buddicons-activity',
+			'keywords'        => [ 'lead form', 'form', 'blank canvas' ],
 			'mode'            => 'preview',
 		] );
 
 		// Links
 		acf_register_block_type( [
 			'name'            => 'links-design',
-			'title'           => 'Links (UI/UX)',
+			'title'           => 'Links Blank',
 			'description'     => 'A links block.',
 			'render_template' => '',
-			'category'        => 'design-play',
-			'icon'            => 'dashicons-carrot',
-			'keywords'        => [ 'design', 'links', 'ui', 'ux' ],
+			'category'        => 'blank-canvas',
+			'icon'            => 'buddicons-activity',
+			'keywords'        => [ 'links', 'blank canvas' ],
 			'mode'            => 'preview',
 		] );
 
 		// Logos
 		acf_register_block_type( [
 			'name'            => 'logos-design',
-			'title'           => 'Logos (UI/UX)',
+			'title'           => 'Logos Blank',
 			'description'     => 'A logos block.',
 			'render_template' => '',
-			'category'        => 'design-play',
-			'icon'            => 'dashicons-carrot',
-			'keywords'        => [ 'design', 'logos', 'ui', 'ux' ],
+			'category'        => 'blank-canvas',
+			'icon'            => 'buddicons-activity',
+			'keywords'        => [ 'logos', 'blank canvas' ],
 			'mode'            => 'preview',
 		] );
 
 		// Media + Text
 		acf_register_block_type( [
 			'name'            => 'media-text-design',
-			'title'           => 'Media + Text (UI/UX)',
+			'title'           => 'Media + Text Blank',
 			'description'     => 'A media and text block.',
 			'render_template' => '',
-			'category'        => 'design-play',
-			'icon'            => 'dashicons-carrot',
-			'keywords'        => [ 'design', 'media text', 'ui', 'ux' ],
+			'category'        => 'blank-canvas',
+			'icon'            => 'buddicons-activity',
+			'keywords'        => [ 'media text', 'blank canvas' ],
 			'mode'            => 'preview',
 		] );
 
 		// Post List
 		acf_register_block_type( [
 			'name'            => 'post-list-design',
-			'title'           => 'Post List (UI/UX)',
+			'title'           => 'Post List Blank',
 			'description'     => 'A post list block showing our post list ACF field.',
 			'render_template' => '',
-			'category'        => 'design-play',
-			'icon'            => 'dashicons-carrot',
-			'keywords'        => [ 'design', 'post list', 'ui', 'ux' ],
+			'category'        => 'blank-canvas',
+			'icon'            => 'buddicons-activity',
+			'keywords'        => [ 'post list', 'blank canvas' ],
 			'mode'            => 'preview',
 		] );
 
 		// Quote
 		acf_register_block_type( [
 			'name'            => 'quote-design',
-			'title'           => 'Quote (UI/UX)',
+			'title'           => 'Quote Blank',
 			'description'     => 'A quote block.',
 			'render_template' => '',
-			'category'        => 'design-play',
-			'icon'            => 'dashicons-carrot',
-			'keywords'        => [ 'design', 'quote', 'ui', 'ux' ],
+			'category'        => 'blank-canvas',
+			'icon'            => 'buddicons-activity',
+			'keywords'        => [ 'quote', 'blank canvas' ],
 			'mode'            => 'preview',
 		] );
 
 		// Stats
 		acf_register_block_type( [
 			'name'            => 'stats-design',
-			'title'           => 'Stats (UI/UX)',
+			'title'           => 'Stats Blank',
 			'description'     => 'A stats block.',
 			'render_template' => '',
-			'category'        => 'design-play',
-			'icon'            => 'dashicons-carrot',
-			'keywords'        => [ 'design', 'stats', 'ui', 'ux' ],
+			'category'        => 'blank-canvas',
+			'icon'            => 'buddicons-activity',
+			'keywords'        => [ 'stats', 'blank canvas' ],
 			'mode'            => 'preview',
 		] );
 
 		// Tabs
 		acf_register_block_type( [
 			'name'            => 'tabs-design',
-			'title'           => 'Tabs (UI/UX)',
+			'title'           => 'Tabs Blank',
 			'description'     => 'A tabs block.',
 			'render_template' => '',
-			'category'        => 'design-play',
-			'icon'            => 'dashicons-carrot',
-			'keywords'        => [ 'design', 'tabs', 'ui', 'ux' ],
+			'category'        => 'blank-canvas',
+			'icon'            => 'buddicons-activity',
+			'keywords'        => [ 'tabs', 'blank canvas' ],
 			'mode'            => 'preview',
 		] );
 
 		// WYSIWYG
 		acf_register_block_type( [
 			'name'            => 'wysiwyg-design',
-			'title'           => 'WYSIWYG (UI/UX)',
+			'title'           => 'WYSIWYG Blank',
 			'description'     => 'A WYSIWYG block.',
 			'render_template' => '',
-			'category'        => 'design-play',
-			'icon'            => 'dashicons-carrot',
-			'keywords'        => [ 'design', 'wysiwyg', 'ui', 'ux' ],
+			'category'        => 'blank-canvas',
+			'icon'            => 'buddicons-activity',
+			'keywords'        => [ 'wysiwyg', 'blank canvas' ],
 			'mode'            => 'preview',
 		] );
 
 		// Icon Grid
 		acf_register_block_type( [
 			'name'            => 'icon-grid-design',
-			'title'           => 'Icon Grid (UI/UX)',
+			'title'           => 'Icon Grid Blank',
 			'description'     => 'An icon grid block.',
 			'render_template' => '',
-			'category'        => 'design-play',
-			'icon'            => 'dashicons-carrot',
-			'keywords'        => [ 'design', 'icon grid', 'icon', 'ui', 'ux' ],
+			'category'        => 'blank-canvas',
+			'icon'            => 'buddicons-activity',
+			'keywords'        => [ 'icon grid', 'icon', 'blank canvas' ],
 			'mode'            => 'preview',
 		] );
 
 		// Card Grid
 		acf_register_block_type( [
 			'name'            => 'card-grid-design',
-			'title'           => 'Content Card Grid (UI/UX)',
+			'title'           => 'Content Card Grid Blank',
 			'description'     => 'A content card grid block.',
 			'render_template' => '',
-			'category'        => 'design-play',
-			'icon'            => 'dashicons-carrot',
-			'keywords'        => [ 'design', 'card grid', 'card', 'content', 'ui', 'ux' ],
+			'category'        => 'blank-canvas',
+			'icon'            => 'buddicons-activity',
+			'keywords'        => [ 'card grid', 'card', 'content', 'blank canvas' ],
 			'mode'            => 'preview',
 		] );
 
 		// Content Loop
 		acf_register_block_type( [
 			'name'            => 'content-loop-design',
-			'title'           => 'Content Loop (UI/UX)',
+			'title'           => 'Content Loop Blank',
 			'description'     => 'A content loop block.',
 			'render_template' => '',
-			'category'        => 'design-play',
-			'icon'            => 'dashicons-carrot',
-			'keywords'        => [ 'design', 'content loop', 'content', 'ui', 'ux' ],
+			'category'        => 'blank-canvas',
+			'icon'            => 'buddicons-activity',
+			'keywords'        => [ 'content loop', 'content', 'blank canvas' ],
 			'mode'            => 'preview',
 		] );
 
 		// Content Carousel
 		acf_register_block_type( [
 			'name'            => 'content-carousel-design',
-			'title'           => 'Content Carousel (UI/UX)',
+			'title'           => 'Content Carousel Blank',
 			'description'     => 'A content carousel block.',
 			'render_template' => '',
-			'category'        => 'design-play',
-			'icon'            => 'dashicons-carrot',
-			'keywords'        => [ 'design', 'content carousel', 'content', 'carousel', 'ui', 'ux' ],
+			'category'        => 'blank-canvas',
+			'icon'            => 'buddicons-activity',
+			'keywords'        => [ 'content carousel', 'content', 'carousel', 'blank canvas' ],
 			'mode'            => 'preview',
 		] );
 
 		// Gallery Grid
 		acf_register_block_type( [
 			'name'            => 'gallery-grid-design',
-			'title'           => 'Gallery Grid (UI/UX)',
+			'title'           => 'Gallery Grid Blank',
 			'description'     => 'A gallery grid block.',
 			'render_template' => '',
-			'category'        => 'design-play',
-			'icon'            => 'dashicons-carrot',
-			'keywords'        => [ 'design', 'gallery grid', 'gallery', 'ui', 'ux' ],
+			'category'        => 'blank-canvas',
+			'icon'            => 'buddicons-activity',
+			'keywords'        => [ 'gallery grid', 'gallery', 'blank canvas' ],
 			'mode'            => 'preview',
 		] );
 
 		// Gallery Slider
 		acf_register_block_type( [
 			'name'            => 'gallery-slider-design',
-			'title'           => 'Gallery Slider (UI/UX)',
+			'title'           => 'Gallery Slider Blank',
 			'description'     => 'A gallery slider block.',
 			'render_template' => '',
-			'category'        => 'design-play',
-			'icon'            => 'dashicons-carrot',
-			'keywords'        => [ 'design', 'gallery slider', 'gallery', 'slider', 'ui', 'ux' ],
+			'category'        => 'blank-canvas',
+			'icon'            => 'buddicons-activity',
+			'keywords'        => [ 'gallery slider', 'gallery', 'slider', 'blank canvas' ],
 			'mode'            => 'preview',
 		] );
 
 		// Events
 		acf_register_block_type( [
 			'name'            => 'events-design',
-			'title'           => 'Events (UI/UX)',
+			'title'           => 'Events Blank',
 			'description'     => 'An events block.',
 			'render_template' => '',
-			'category'        => 'design-play',
-			'icon'            => 'dashicons-carrot',
-			'keywords'        => [ 'design', 'events', 'content', 'ui', 'ux' ],
+			'category'        => 'blank-canvas',
+			'icon'            => 'buddicons-activity',
+			'keywords'        => [ 'events', 'content', 'blank canvas' ],
 			'mode'            => 'preview',
 		] );
 
 		// Mode: Auto
 		acf_register_block_type( [
 			'name'            => 'mode-auto-design',
-			'title'           => 'Mode: Auto (UI/UX)',
+			'title'           => 'Mode: Auto Blank',
 			'description'     => 'A block showing ACF "auto" mode.',
 			'render_template' => '',
-			'category'        => 'design-play',
-			'icon'            => 'dashicons-carrot',
-			'keywords'        => [ 'design', 'mode auto', 'ui', 'ux' ],
+			'category'        => 'blank-canvas',
+			'icon'            => 'buddicons-activity',
+			'keywords'        => [ 'mode auto', 'blank canvas' ],
 			'mode'            => 'auto',
 		] );
 
 		// Mode: Edit
 		acf_register_block_type( [
 			'name'            => 'mode-edit-design',
-			'title'           => 'Mode: Edit (UI/UX)',
+			'title'           => 'Mode: Edit Blank',
 			'description'     => 'A block showing ACF "edit" mode.',
 			'render_template' => '',
-			'category'        => 'design-play',
-			'icon'            => 'dashicons-carrot',
-			'keywords'        => [ 'design', 'mode edit', 'ui', 'ux' ],
+			'category'        => 'blank-canvas',
+			'icon'            => 'buddicons-activity',
+			'keywords'        => [ 'mode edit', 'blank canvas' ],
 			'mode'            => 'auto',
 		] );
 
@@ -291,9 +291,9 @@ function design_block_categories( $categories, $post ) {
 		$categories,
 		[
 			[
-				'slug'  => 'design-play',
-				'title' => 'UI/UX',
-				'icon'  => 'dashicons-buddicons-activity',
+				'slug'  => 'blank-canvas',
+				'title' => 'Blank Canvas',
+				'icon'  => 'buddicons-activity',
 			],
 		]
 	);

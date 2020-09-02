@@ -50,6 +50,7 @@ class Blocks_Definer implements Definer_Interface {
 			 *
 			 * Includes our custom ACF blocks
 			 * TODO: Find a better method for allowing our custom ACF blocks (above) so we don't have to manually define them here.
+			 * TODO: Add a filter for this list
 			 *
 			 * Includes any 3rd-party block supported by this project, such as Gravity Forms.
 			 */
@@ -94,6 +95,29 @@ class Blocks_Definer implements Definer_Interface {
 				'core-embed/tumblr',
 				'core-embed/wordpress-tv',
 				'gravityforms/form',
+				// TODO: Remove after design UI/UX pass on blocks is complete
+				'acf/hero-design',
+				'acf/accordion-design',
+				'acf/buttons-design',
+				'acf/interstitial-design',
+				'acf/lead-form-design',
+				'acf/links-design',
+				'acf/logos-design',
+				'acf/media-text-design',
+				'acf/post-list-design',
+				'acf/quote-design',
+				'acf/stats-design',
+				'acf/tabs-design',
+				'acf/wysiwyg-design',
+				'acf/icon-grid-design',
+				'acf/card-grid-design',
+				'acf/content-loop-design',
+				'acf/content-carousel-design',
+				'acf/gallery-grid-design',
+				'acf/gallery-slider-design',
+				'acf/events-design',
+				'acf/mode-auto-design',
+				'acf/mode-edit-design',
 			],
 
 			/**
