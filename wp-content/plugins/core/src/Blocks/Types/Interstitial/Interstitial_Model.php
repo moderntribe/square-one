@@ -13,10 +13,11 @@ class Interstitial_Model extends Base_Model {
 	 */
 	public function get_data(): array {
 		return [
-			Interstitial_Block_Controller::TITLE  => $this->get( Interstitial::TITLE, '' ),
-			Interstitial_Block_Controller::CTA    => $this->get_cta_args(),
-			Interstitial_Block_Controller::LAYOUT => $this->get( Interstitial::LAYOUT, '' ),
-			Interstitial_Block_Controller::MEDIA  => $this->get( Interstitial::IMAGE, 0 ),
+			Interstitial_Block_Controller::CLASSES => $this->getClassName(),
+			Interstitial_Block_Controller::TITLE   => $this->get( Interstitial::TITLE, '' ),
+			Interstitial_Block_Controller::CTA     => $this->get_cta_args(),
+			Interstitial_Block_Controller::LAYOUT  => $this->get( Interstitial::LAYOUT, '' ),
+			Interstitial_Block_Controller::MEDIA   => $this->get( Interstitial::IMAGE, 0 ),
 		];
 	}
 

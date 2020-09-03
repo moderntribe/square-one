@@ -14,6 +14,7 @@ class Accordion_Model extends Base_Model {
 	 */
 	public function get_data(): array {
 		return [
+			Accordion_Block_Controller::CLASSES     => $this->getClassName(),
 			Accordion_Block_Controller::LAYOUT      => $this->get( Accordion::LAYOUT, Accordion::LAYOUT_STACKED ),
 			Accordion_Block_Controller::ROWS        => $this->get_accordion_rows(),
 			Accordion_Block_Controller::TITLE       => $this->get( Accordion::TITLE, '' ),

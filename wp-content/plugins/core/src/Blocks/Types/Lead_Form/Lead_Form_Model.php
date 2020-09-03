@@ -13,6 +13,7 @@ class Lead_Form_Model extends Base_Model {
 	 */
 	public function get_data(): array {
 		return [
+			Lead_Form_Block_Controller::CLASSES     => $this->getClassName(),
 			Lead_Form_Block_Controller::LAYOUT      => $this->get( Lead_Form::LAYOUT, Lead_Form::LAYOUT_CENTER ),
 			Lead_Form_Block_Controller::WIDTH       => $this->get( Lead_Form::WIDTH, Lead_Form::WIDTH_GRID ),
 			Lead_Form_Block_Controller::TITLE       => $this->get( Lead_Form::TITLE, '' ),

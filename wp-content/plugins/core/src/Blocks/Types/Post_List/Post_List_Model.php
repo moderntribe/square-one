@@ -14,6 +14,7 @@ class Post_List_Model extends Base_Model {
 	 */
 	public function get_data(): array {
 		return [
+			Post_List_Controller::CLASSES     => $this->getClassName(),
 			Post_List_Controller::LAYOUT      => $this->get(
 				Post_List::LAYOUT,
 				Post_List::LAYOUT_STACKED

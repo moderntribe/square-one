@@ -13,6 +13,7 @@ class Logos_Model extends Base_Model {
 	 */
 	public function get_data(): array {
 		return [
+			Logos_Block_Controller::CLASSES     => $this->getClassName(),
 			Logos_Block_Controller::TITLE       => $this->get( Logos::TITLE, '' ),
 			Logos_Block_Controller::LEADIN      => $this->get( Logos::LEAD_IN, '' ),
 			Logos_Block_Controller::DESCRIPTION => $this->get( Logos::DESCRIPTION, '' ),

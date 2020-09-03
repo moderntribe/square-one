@@ -14,6 +14,7 @@ class Stats_Model extends Base_Model {
 	 */
 	public function get_data(): array {
 		return [
+			Stats_Block_Controller::CLASSES       => $this->getClassName(),
 			Stats_Block_Controller::LAYOUT        => $this->get( Stats::LAYOUT, Stats::LAYOUT_STACKED ),
 			Stats_Block_Controller::CONTENT_ALIGN => $this->get( Stats::CONTENT_ALIGN, Stats::CONTENT_ALIGN_CENTER ),
 			Stats_Block_Controller::DIVIDERS      => $this->get( Stats::DIVIDERS, Stats::DIVIDERS_SHOW ),
