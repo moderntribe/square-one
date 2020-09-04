@@ -29,6 +29,36 @@ class Buttons extends Block_Config {
 			'keywords'    => [ __( 'formatting', 'tribe' ) ],
 			'category'    => 'layout',
 			'supports'    => [ 'align' => false ],
+			'example'     => [
+				'attributes' => [
+					'mode' => 'preview',
+					'data' => [
+						self::BUTTONS => [
+							[
+								self::BUTTON_LINK       => [
+									'title'  => esc_html__( 'Lorem ipsum', 'tribe' ),
+									'url'    => '#',
+									'target' => '',
+								],
+								self::BUTTON_ARIA_LABEL => '',
+								self::BUTTON_CLASSES    => '',
+								self::BUTTON_STYLE      => self::STYLE_PRIMARY,
+							],
+							[
+								self::BUTTON_LINK       => [
+									'title'  => esc_html__( 'Lorem ipsum', 'tribe' ),
+									'url'    => '#',
+									'target' => '',
+								],
+								self::BUTTON_ARIA_LABEL => '',
+								self::BUTTON_CLASSES    => '',
+								self::BUTTON_STYLE      => self::STYLE_SECONDARY,
+							],
+						],
+
+					],
+				],
+			],
 		] ) );
 	}
 
@@ -45,11 +75,11 @@ class Buttons extends Block_Config {
 		$group = new Repeater( self::NAME . '_' . self::BUTTONS );
 
 		$group->set_attributes( [
-			'label'  => __( 'Buttons', 'tribe' ),
-			'name'   => self::BUTTONS,
-			'layout' => 'block',
-			'min'    => 1,
-			'max'    => 10,
+			'label'        => __( 'Buttons', 'tribe' ),
+			'name'         => self::BUTTONS,
+			'layout'       => 'block',
+			'min'          => 1,
+			'max'          => 10,
 			'button_label' => __( 'Add Button', 'tribe' ),
 		] );
 
@@ -90,10 +120,11 @@ class Buttons extends Block_Config {
 		$group->add_field( $classes );
 
 		$aria_label = new Field( self::BUTTON_ARIA_LABEL, [
-			'label' => __( 'Screen Reader Label', 'tribe' ),
-			'name'  => self::BUTTON_ARIA_LABEL,
-			'type'  => 'text',
-			'instructions' => __( 'A custom label for screen readers if the button\'s action or purpose isn\'t easily identifiable. (Optional)', 'tribe' ),
+			'label'        => __( 'Screen Reader Label', 'tribe' ),
+			'name'         => self::BUTTON_ARIA_LABEL,
+			'type'         => 'text',
+			'instructions' => __( 'A custom label for screen readers if the button\'s action or purpose isn\'t easily identifiable. (Optional)',
+				'tribe' ),
 		] );
 
 		$group->add_field( $aria_label );
