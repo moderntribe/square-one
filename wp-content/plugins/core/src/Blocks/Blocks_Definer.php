@@ -79,6 +79,7 @@ class Blocks_Definer implements Definer_Interface {
 				'core/classic',
 				'core/custom-html',
 				'core/preformatted',
+				'core/quote',
 				'core/table',
 				'core/shortcode',
 				'core/embed',
