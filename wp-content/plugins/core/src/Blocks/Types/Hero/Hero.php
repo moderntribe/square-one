@@ -32,6 +32,26 @@ class Hero extends Block_Config {
 			'keywords'    => [ __( 'hero', 'tribe' ), __( 'display', 'tribe' ) ],
 			'category'    => 'layout',
 			'supports'    => [ 'align' => false ],
+			'example'     => [
+				'attributes' => [
+					'mode' => 'preview',
+					'data' => [
+						self::LEAD_IN       => esc_html__( 'Lorem ipsum dolor sit amet.', 'tribe' ),
+						self::TITLE         => esc_html__( 'The Accordion Title', 'tribe' ),
+						self::DESCRIPTION   => esc_html__(
+							'Cras ut ornare dui, sed venenatis est. Donec euismod in leo quis consequat.',
+							'tribe'
+						),
+						self::CTA    => [
+							'title'  => esc_html__( 'Lorem ipsum', 'tribe' ),
+							'url'    => '#',
+							'target' => '',
+						],
+						//Images are output as IDs so it's sort of hard to get an image value for preview
+						self::IMAGE  => 0,
+					],
+				],
+			],
 		] ) );
 	}
 
