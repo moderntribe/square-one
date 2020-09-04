@@ -19,7 +19,7 @@ class Buttons extends Block_Config {
 
 	public const STYLE_PRIMARY   = 'primary';
 	public const STYLE_SECONDARY = 'secondary';
-	public const STYLE_TERTIARY  = 'tertiary';
+	public const STYLE_CTA       = 'cta';
 
 	public function add_block() {
 		$this->set_block( new Block( self::NAME, [
@@ -67,7 +67,7 @@ class Buttons extends Block_Config {
 			'choices'         => [
 				self::STYLE_PRIMARY   => __( 'Primary', 'tribe' ),
 				self::STYLE_SECONDARY => __( 'Secondary', 'tribe' ),
-				self::STYLE_TERTIARY  => __( 'Tertiary', 'tribe' ),
+				self::STYLE_CTA       => __( 'Text CTA', 'tribe' ),
 			],
 			'default_value'   => self::STYLE_PRIMARY,
 			'multiple'        => 0,
