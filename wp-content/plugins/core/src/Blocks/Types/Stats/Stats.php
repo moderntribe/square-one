@@ -43,7 +43,7 @@ class Stats extends Block_Config {
 				'attributes' => [
 					'mode' => 'preview',
 					'data' => [
-						self::TITLE       => __( 'A Stats Block', 'tribe' ),
+						self::TITLE       => __( 'We’ve got experience', 'tribe' ),
 						self::LEAD_IN     => __( 'Suspendisse potenti', 'tribe' ),
 						self::DESCRIPTION => __( 'Pellentesque diam diam, aliquet non mauris eu, posuere mollis urna. Nulla eget congue ligula, a aliquam lectus. Duis non diam maximus justo dictum porttitor in in risus.',
 							'tribe' ),

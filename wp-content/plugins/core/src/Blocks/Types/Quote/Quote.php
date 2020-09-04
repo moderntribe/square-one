@@ -34,6 +34,16 @@ class Quote extends Block_Config {
 			'keywords'    => [ __( 'quotation', 'tribe' ), __( 'display', 'tribe' ), __( 'text', 'tribe' ) ],
 			'category'    => 'layout',
 			'supports'    => [ 'align' => false ],
+			'example'     => [
+				'attributes' => [
+					'mode' => 'preview',
+					'data' => [
+						self::QUOTE      => __( 'Grow awareness while remembering to maximise share of voice. Leveraging agile so that as an end result, we think outside the box.', 'tribe' ),
+						self::CITE_NAME  => __( 'John Doe', 'tribe' ),
+						self::CITE_TITLE => __( 'Chief Executive', 'tribe' ),
+					],
+				],
+			],
 		] ) );
 	}
 
@@ -96,9 +106,7 @@ class Quote extends Block_Config {
 				self::MEDIA_OVERLAY => __( 'Image Overlay', 'tribe' ),
 				self::MEDIA_RIGHT   => __( 'Image Right', 'tribe' ),
 			],
-			'default_value'   => [
-				self::MEDIA_OVERLAY,
-			],
+			'default_value'   => self::MEDIA_OVERLAY,
 			'multiple'        => 0,
 			'image_path'      => sprintf(
 				'%sassets/img/admin/blocks/%s/',
