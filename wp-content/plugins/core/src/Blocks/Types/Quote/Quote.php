@@ -38,9 +38,11 @@ class Quote extends Block_Config {
 				'attributes' => [
 					'mode' => 'preview',
 					'data' => [
-						self::QUOTE      => __( 'Grow awareness while remembering to maximise share of voice. Leveraging agile so that as an end result, we think outside the box.', 'tribe' ),
-						self::CITE_NAME  => __( 'John Doe', 'tribe' ),
-						self::CITE_TITLE => __( 'Chief Executive', 'tribe' ),
+						self::QUOTE      => esc_html__( 'Grow awareness while remembering to maximise share of voice. Leveraging agile so that as an end result, we think outside the box.', 'tribe' ),
+						self::CITE_NAME  => esc_html__( 'John Doe', 'tribe' ),
+						self::CITE_TITLE => esc_html__( 'Chief Executive', 'tribe' ),
+						//Images are output as IDs so it's sort of hard to get an image value for preview
+						self::IMAGE      => 0,
 					],
 				],
 			],

@@ -51,11 +51,11 @@ class Post_List extends Block_Config {
 				'attributes' => [
 					'mode' => 'preview',
 					'data' => [
-						self::TITLE       => __( 'A Selection of Posts', 'tribe' ),
-						self::LEAD_IN     => __( 'Suspendisse potenti', 'tribe' ),
-						self::DESCRIPTION => __( 'Pellentesque diam diam, aliquet non mauris eu, posuere mollis urna. Nulla eget congue ligula, a aliquam lectus. Duis non diam maximus justo dictum porttitor in in risus.',
+						self::TITLE       => esc_html__( 'A Selection of Posts', 'tribe' ),
+						self::LEAD_IN     => esc_html__( 'Suspendisse potenti', 'tribe' ),
+						self::DESCRIPTION => esc_html__( 'Pellentesque diam diam, aliquet non mauris eu, posuere mollis urna. Nulla eget congue ligula, a aliquam lectus. Duis non diam maximus justo dictum porttitor in in risus.',
 							'tribe' ),
-						self::CTA         => [ 'title' => __( 'Call to Action', 'tribe' ), 'url' => '#' ],
+						self::CTA         => [ 'title' => esc_html__( 'Call to Action', 'tribe' ), 'url' => '#' ],
 						self::QUERY_TYPE  => self::QUERY_TYPE_AUTO,
 						self::LIMIT       => 3,
 					],

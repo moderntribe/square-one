@@ -43,31 +43,31 @@ class Stats extends Block_Config {
 				'attributes' => [
 					'mode' => 'preview',
 					'data' => [
-						self::TITLE       => __( 'We’ve got experience', 'tribe' ),
-						self::LEAD_IN     => __( 'Suspendisse potenti', 'tribe' ),
-						self::DESCRIPTION => __( 'Pellentesque diam diam, aliquet non mauris eu, posuere mollis urna. Nulla eget congue ligula, a aliquam lectus. Duis non diam maximus justo dictum porttitor in in risus.',
+						self::TITLE       => esc_html__( 'We’ve got experience', 'tribe' ),
+						self::LEAD_IN     => esc_html__( 'Suspendisse potenti', 'tribe' ),
+						self::DESCRIPTION => esc_html__( 'Pellentesque diam diam, aliquet non mauris eu, posuere mollis urna. Nulla eget congue ligula, a aliquam lectus. Duis non diam maximus justo dictum porttitor in in risus.',
 							'tribe' ),
 						self::CTA         => [
-							'title' => __( 'Call to Action', 'tribe' ),
+							'title' => esc_html__( 'Call to Action', 'tribe' ),
 							'url'   => '#',
 						],
 						self::LAYOUT      => self::LAYOUT_INLINE,
 						self::STATS       => [
 							[
-								self::ROW_VALUE => __( '2', 'tribe' ),
-								self::ROW_LABEL => __( 'Happy Clients', 'tribe' ),
+								self::ROW_VALUE => esc_html__( '2', 'tribe' ),
+								self::ROW_LABEL => esc_html__( 'Happy Clients', 'tribe' ),
 							],
 							[
-								self::ROW_VALUE => __( '5', 'tribe' ),
-								self::ROW_LABEL => __( 'Years', 'tribe' ),
+								self::ROW_VALUE => esc_html__( '5', 'tribe' ),
+								self::ROW_LABEL => esc_html__( 'Years', 'tribe' ),
 							],
 							[
-								self::ROW_VALUE => __( '8', 'tribe' ),
-								self::ROW_LABEL => __( 'Countries', 'tribe' ),
+								self::ROW_VALUE => esc_html__( '8', 'tribe' ),
+								self::ROW_LABEL => esc_html__( 'Countries', 'tribe' ),
 							],
 							[
-								self::ROW_VALUE => __( '9%', 'tribe' ),
-								self::ROW_LABEL => __( 'Effective', 'tribe' ),
+								self::ROW_VALUE => esc_html__( '9%', 'tribe' ),
+								self::ROW_LABEL => esc_html__( 'Effective', 'tribe' ),
 							],
 						],
 					],
