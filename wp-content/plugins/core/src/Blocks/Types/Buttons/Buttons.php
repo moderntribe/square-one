@@ -123,8 +123,10 @@ class Buttons extends Block_Config {
 			'label'        => __( 'Screen Reader Label', 'tribe' ),
 			'name'         => self::BUTTON_ARIA_LABEL,
 			'type'         => 'text',
-			'instructions' => __( 'A custom label for screen readers if the button\'s action or purpose isn\'t easily identifiable. (Optional)',
-				'tribe' ),
+			'instructions' => __(
+				'A custom label for screen readers if the button\'s action or purpose isn\'t easily identifiable. (Optional)',
+				'tribe'
+			),
 		] );
 
 		$group->add_field( $aria_label );
