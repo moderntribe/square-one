@@ -37,7 +37,7 @@ class Hero extends Block_Config {
 					'mode' => 'preview',
 					'data' => [
 						self::LEAD_IN       => esc_html__( 'Lorem ipsum dolor sit amet.', 'tribe' ),
-						self::TITLE         => esc_html__( 'The Accordion Title', 'tribe' ),
+						self::TITLE         => esc_html__( 'The Hero Title', 'tribe' ),
 						self::DESCRIPTION   => esc_html__(
 							'Cras ut ornare dui, sed venenatis est. Donec euismod in leo quis consequat.',
 							'tribe'
