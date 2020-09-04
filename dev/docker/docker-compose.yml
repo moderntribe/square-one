@@ -110,6 +110,7 @@ services:
       - DB_TABLE_PREFIX=tribe_
       - WP_DEBUG_LOG='php://stderr'
       - TRIBE_GLOMAR=false
+      - DISABLE_OBJECT_CACHE=true
 
   webserver-tests:
     <<: *nginx
