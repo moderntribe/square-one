@@ -45,8 +45,10 @@ class Stats extends Block_Config {
 					'data' => [
 						self::TITLE       => esc_html__( 'We’ve got experience', 'tribe' ),
 						self::LEAD_IN     => esc_html__( 'Suspendisse potenti', 'tribe' ),
-						self::DESCRIPTION => esc_html__( 'Pellentesque diam diam, aliquet non mauris eu, posuere mollis urna. Nulla eget congue ligula, a aliquam lectus. Duis non diam maximus justo dictum porttitor in in risus.',
-							'tribe' ),
+						self::DESCRIPTION => esc_html__(
+							'Pellentesque diam diam, aliquet non mauris eu, posuere mollis urna. Nulla eget congue ligula, a aliquam lectus. Duis non diam maximus justo dictum porttitor in in risus.',
+							'tribe' 
+						),
 						self::CTA         => [
 							'title' => esc_html__( 'Call to Action', 'tribe' ),
 							'url'   => '#',

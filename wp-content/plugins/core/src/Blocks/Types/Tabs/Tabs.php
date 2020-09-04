@@ -41,8 +41,10 @@ class Tabs extends Block_Config {
 					'data' => [
 						self::TITLE       => esc_html__( 'A Tabs Block', 'tribe' ),
 						self::LEAD_IN     => esc_html__( 'Suspendisse potenti', 'tribe' ),
-						self::DESCRIPTION => esc_html__( 'Pellentesque diam diam, aliquet non mauris eu, posuere mollis urna. Nulla eget congue ligula, a aliquam lectus. Duis non diam maximus justo dictum porttitor in in risus.',
-							'tribe' ),
+						self::DESCRIPTION => esc_html__(
+							'Pellentesque diam diam, aliquet non mauris eu, posuere mollis urna. Nulla eget congue ligula, a aliquam lectus. Duis non diam maximus justo dictum porttitor in in risus.',
+							'tribe' 
+						),
 						self::CTA         => [
 							'title' => esc_html__( 'Call to Action', 'tribe' ),
 							'url'   => '#',
@@ -50,15 +52,23 @@ class Tabs extends Block_Config {
 						self::TABS        => [
 							[
 								self::TAB_LABEL   => esc_html__( 'Tab One', 'tribe' ),
-								self::TAB_CONTENT => sprintf( '<p>%s</p>',
-									esc_html__( 'Sed aliquet quam posuere tellus convallis molestie. Aliquam neque tellus, viverra in augue ut, facilisis accumsan elit. Cras id convallis libero. Proin tincidunt elit quis bibendum faucibus. Pellentesque porttitor molestie eros at placerat. Morbi ac odio nec dolor commodo semper. Cras auctor euismod velit efficitur volutpat.',
-										'tribe' ) ),
+								self::TAB_CONTENT => sprintf(
+									'<p>%s</p>',
+									esc_html__(
+										'Sed aliquet quam posuere tellus convallis molestie. Aliquam neque tellus, viverra in augue ut, facilisis accumsan elit. Cras id convallis libero. Proin tincidunt elit quis bibendum faucibus. Pellentesque porttitor molestie eros at placerat. Morbi ac odio nec dolor commodo semper. Cras auctor euismod velit efficitur volutpat.',
+										'tribe' 
+									) 
+								),
 							],
 							[
 								self::TAB_LABEL   => esc_html__( 'Tab Two', 'tribe' ),
-								self::TAB_CONTENT => sprintf( '<p>%s</p>',
-									esc_html__( 'Sed aliquet quam posuere tellus convallis molestie. Aliquam neque tellus, viverra in augue ut, facilisis accumsan elit. Cras id convallis libero. Proin tincidunt elit quis bibendum faucibus. Pellentesque porttitor molestie eros at placerat. Morbi ac odio nec dolor commodo semper. Cras auctor euismod velit efficitur volutpat.',
-										'tribe' ) ),
+								self::TAB_CONTENT => sprintf(
+									'<p>%s</p>',
+									esc_html__(
+										'Sed aliquet quam posuere tellus convallis molestie. Aliquam neque tellus, viverra in augue ut, facilisis accumsan elit. Cras id convallis libero. Proin tincidunt elit quis bibendum faucibus. Pellentesque porttitor molestie eros at placerat. Morbi ac odio nec dolor commodo semper. Cras auctor euismod velit efficitur volutpat.',
+										'tribe' 
+									) 
+								),
 							],
 						],
 					],
