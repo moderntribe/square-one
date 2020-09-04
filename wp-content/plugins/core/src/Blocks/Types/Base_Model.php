@@ -6,7 +6,7 @@ abstract class Base_Model {
 	protected string $mode;
 	protected array  $data;
 	protected string $name;
-	protected string $className;
+	protected string $classes;
 
 	abstract public function get_data(): array;
 
@@ -16,10 +16,10 @@ abstract class Base_Model {
 	 * @param $block
 	 */
 	public function __construct( $block ) {
-		$this->mode      = $block['mode'] ?? 'preview';
-		$this->data      = $block['data'] ?? [];
-		$this->name      = $block['name'] ? str_replace( 'acf/', '', $block['name'] ) : '';
-		$this->className = $block['className'] ?? '';
+		$this->mode    = $block['mode'] ?? 'preview';
+		$this->data    = $block['data'] ?? [];
+		$this->name    = $block['name'] ? str_replace( 'acf/', '', $block['name'] ) : '';
+		$this->classes = $block['className'] ?? '';
 	}
 
 	/**
@@ -42,7 +42,7 @@ abstract class Base_Model {
 	 *
 	 * @return array
 	 */
-	public function getClassName(): array {
-		return explode( ' ', $this->className );
+	public function get_classes(): array {
+		return explode( ' ', $this->classes );
 	}
 }

@@ -13,7 +13,7 @@ class Media_Text_Model extends Base_Model {
 	 */
 	public function get_data(): array {
 		return [
-			Media_Text_Block_Controller::CLASSES     => $this->getClassName(),
+			Media_Text_Block_Controller::CLASSES     => $this->get_classes(),
 			Media_Text_Block_Controller::LAYOUT      => $this->get( Media_Text::LAYOUT, Media_Text::MEDIA_LEFT ),
 			Media_Text_Block_Controller::WIDTH       => $this->get( Media_Text::WIDTH, Media_Text::WIDTH_GRID ),
 			Media_Text_Block_Controller::TITLE       => $this->get( Media_Text::TITLE, '' ),
