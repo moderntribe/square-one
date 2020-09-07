@@ -94,10 +94,16 @@ class Buttons_Block_Controller extends Abstract_Controller {
 	private function get_button_classes( $button ): array {
 		$classes = [ 'b-buttons__button' ];
 
-		if ( $button[ Buttons::BUTTON_STYLE ] === Buttons::STYLE_PRIMARY ) {
-			$classes[] = 'a-btn';
-		} else {
-			$classes[] = sprintf( 'a-btn-%s', $button[ Buttons::BUTTON_STYLE ] );
+		switch ( $button[ Buttons::BUTTON_STYLE ] ) {
+			case Buttons::STYLE_SECONDARY:
+				$classes[] = sprintf( 'a-btn-%s', $button[ Buttons::BUTTON_STYLE ] );
+				break;
+			case Buttons::STYLE_CTA:
+				$classes[] = 'a-cta';
+				break;
+			default:
+				$classes[] = 'a-btn';
+				break;
 		}
 
 		if ( ! empty( $button[ Buttons::BUTTON_CLASSES ] ) ) {

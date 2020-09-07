@@ -14,6 +14,7 @@ class Tabs_Model extends Base_Model {
 	 */
 	public function get_data(): array {
 		return [
+			Tabs_Block_Controller::CLASSES     => $this->get_classes(),
 			Tabs_Block_Controller::LAYOUT      => $this->get( Tabs::LAYOUT, Tabs::LAYOUT_HORIZONTAL ),
 			Tabs_Block_Controller::TITLE       => $this->get( Tabs::TITLE, '' ),
 			Tabs_Block_Controller::LEADIN      => $this->get( Tabs::LEAD_IN, '' ),

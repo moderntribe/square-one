@@ -132,36 +132,6 @@
 }
 
 /* -----------------------------------------------------------------------------
- * Button: Tertiary
- * ----------------------------------------------------------------------------- */
-
-@define-mixin a-btn-tertiary {
-	@mixin a-btn-global;
-
-	color: var(--color-white);
-	background-color: var(--color-secondary);
-
-	&:focus,
-	&:active,
-	&:hover {
-		color: var(--color-white);
-		background-color: var(--color-secondary-70);
-	}
-
-	/* CASE: Disabled */
-	&[disabled],
-	&.is-disabled {
-		background-color: var(--color-grey);
-
-		&:focus,
-		&:active,
-		&:hover {
-			background-color: var(--color-grey);
-		}
-	}
-}
-
-/* -----------------------------------------------------------------------------
  * Button: Icon Before
  * ----------------------------------------------------------------------------- */
 

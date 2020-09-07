@@ -27,6 +27,21 @@ class Interstitial extends Block_Config {
 			'keywords'    => [ __( 'interstitial', 'tribe' ), __( 'display', 'tribe' ) ],
 			'category'    => 'layout',
 			'supports'    => [ 'align' => false ],
+			'example'     => [
+				'attributes' => [
+					'mode' => 'preview',
+					'data' => [
+						self::TITLE => esc_html__( 'The Interstitial Title', 'tribe' ),
+						self::CTA   => [
+							'title'  => esc_html__( 'Lorem ipsum', 'tribe' ),
+							'url'    => '#',
+							'target' => '',
+						],
+						//Images are output as IDs so it's sort of hard to get an image value for preview
+						self::IMAGE => 0,
+					],
+				],
+			],
 		] ) );
 	}
 

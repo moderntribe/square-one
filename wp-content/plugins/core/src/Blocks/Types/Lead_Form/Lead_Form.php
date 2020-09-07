@@ -36,6 +36,25 @@ class Lead_Form extends Block_Config {
 			'keywords'    => [ __( 'form', 'tribe' ), __( 'display', 'tribe' ) ],
 			'category'    => 'layout',
 			'supports'    => [ 'align' => false ],
+			'example'     => [
+				'attributes' => [
+					'mode' => 'preview',
+					'data' => [
+						self::LEAD_IN       => esc_html__( 'Lorem ipsum dolor sit amet.', 'tribe' ),
+						self::TITLE         => esc_html__( 'The Lead Form Title', 'tribe' ),
+						self::DESCRIPTION   => esc_html__(
+							'Cras ut ornare dui, sed venenatis est. Donec euismod in leo quis consequat.',
+							'tribe'
+						),
+						self::CTA   => [
+							'title'  => esc_html__( 'Lorem ipsum', 'tribe' ),
+							'url'    => '#',
+							'target' => '',
+						],
+						self::FORM => 1 //Will work if a site has a form added. Be blank if not.
+					],
+				],
+			],
 		] ) );
 	}
 
