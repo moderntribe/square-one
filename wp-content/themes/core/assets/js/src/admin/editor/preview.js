@@ -10,7 +10,7 @@ import 'lazysizes/plugins/bgset/ls.bgset';
  */
 
 const appendSinkCssClasses = () => {
-	const editorBlockList = document.querySelector( '.block-editor-block-list__layout' );
+	const editorBlockList = document.querySelector( '.is-root-container' );
 	if ( editorBlockList ) {
 		editorBlockList.classList.add( 't-sink', 's-sink' );
 	}
