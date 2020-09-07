@@ -1,14 +1,14 @@
 
 /* -----------------------------------------------------------------------------
  *
- * WP Core Block & Editor Alignment Styles & Overrides
+ * Block Editor
+ * Media Styles & Overrides
  *
- * Styles that apply to WP Core blocks or reset styles applied
- * by the block editor and wp-admin.
+ * Styles applicable to media in the block editor.
  *
  * ----------------------------------------------------------------------------- */
 
-.block-editor-block-list__layout {
+.is-root-container {
 
 	.wp-block-audio,
 	.wp-block-video,
@@ -16,12 +16,6 @@
 	figure.wp-block-image {
 		margin-top: var(--spacer-60);
 		margin-bottom: var(--spacer-60);
-	}
-
-	/* CASE: Alignment: Full */
-	.wp-block[data-align="full"] {
-		margin-left: auto;
-		margin-right: auto;
 	}
 
 	/* CASE: Alignment: Left & Right */
