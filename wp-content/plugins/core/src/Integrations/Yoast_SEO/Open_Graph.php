@@ -3,16 +3,9 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Integrations\Yoast_SEO;
 
+use Tribe\Project\Theme\Config\Image_Sizes;
+
 class Open_Graph {
-	/**
-	 * @var string
-	 */
-	private $image_size;
-
-	public function __construct( string $image_size ) {
-		$this->image_size = $image_size;
-	}
-
 	/**
 	 * Filter the size used for Open Graph images
 	 * @param string $size
@@ -20,7 +13,18 @@ class Open_Graph {
 	 * @return string
 	 * @filter wpseo_opengraph_image_size
 	 */
-	public function customize_wpseo_image_size( $size ) {
-		return $this->image_size;
+	public function customize_wpseo_opengraph_image_size( $size ) {
+		return Image_Sizes::SOCIAL_SHARE_OPENGRAPH;
+	}
+
+	/**
+	 * Filter the size used for Twitter images
+	 * @param string $size
+	 *
+	 * @return string
+	 * @filter wpseo_twitter_image_size
+	 */
+	public function customize_wpseo_twitter_image_size( $size ) {
+		return Image_Sizes::SOCIAL_SHARE_TWITTER;
 	}
 }
