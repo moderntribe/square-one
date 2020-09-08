@@ -47,10 +47,6 @@ class Theme_Subscriber extends Abstract_Subscriber {
 
 	private function brand_meta() {
 		add_filter( 'wp_head', function () {
-			return $this->container->get( Brand_Meta::class )->inject_ie_metro_icon_bgd_color_meta();
-		}, 10, 0 );
-
-		add_filter( 'wp_head', function () {
 			return $this->container->get( Brand_Meta::class )->inject_android_theme_color_meta();
 		}, 10, 0 );
 	}
