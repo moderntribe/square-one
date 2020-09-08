@@ -9,7 +9,6 @@ use WP_Customize_Media_Control;
 class Customizer_Settings {
 	public const SITE_BRANDING_LOGIN_LOGO          = 'site_branding_login_logo';
 	public const SITE_BRANDING_ANDROID_THEME_COLOR = 'site_branding_android_theme_color';
-	public const SITE_BRANDING_IE_BGD_COLOR        = 'site_branding_ie_bgd_color';
 
 	/**
 	 * Customize Customizer Settings
@@ -44,20 +43,6 @@ class Customizer_Settings {
 				'section'     => 'title_tagline',
 				'settings'    => self::SITE_BRANDING_ANDROID_THEME_COLOR,
 				'priority'    => 80,
-			]
-		) );
-
-		// IE Metro Icon Background Color
-		$wp_customize->add_setting( self::SITE_BRANDING_IE_BGD_COLOR );
-		$wp_customize->add_control( new WP_Customize_Color_Control(
-			$wp_customize,
-			self::SITE_BRANDING_IE_BGD_COLOR,
-			[
-				'label'       => __( 'IE Metro Icon Background Color', 'tribe' ),
-				'description' => __( 'Select the background color to be used behind the IE Metro Icon.', 'tribe' ),
-				'section'     => 'title_tagline',
-				'settings'    => self::SITE_BRANDING_IE_BGD_COLOR,
-				'priority'    => 90,
 			]
 		) );
 	}
