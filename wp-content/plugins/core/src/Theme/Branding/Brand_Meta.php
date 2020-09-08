@@ -1,7 +1,7 @@
 <?php
 declare( strict_types=1 );
 
-namespace Tribe\Project\Integrations\Site_Brand;
+namespace Tribe\Project\Theme\Branding;
 
 class Brand_Meta {
 	/**

@@ -4,6 +4,9 @@ declare( strict_types=1 );
 namespace Tribe\Project\Theme;
 
 use Tribe\Libs\Container\Abstract_Subscriber;
+use Tribe\Project\Theme\Branding\Brand_Meta;
+use Tribe\Project\Theme\Branding\Customizer_Settings;
+use Tribe\Project\Theme\Branding\Login_Screen;
 use Tribe\Project\Theme\Config\Image_Sizes;
 use Tribe\Project\Theme\Config\Supports;
 use Tribe\Project\Theme\Config\Web_Fonts;
@@ -13,8 +16,15 @@ use Tribe\Project\Theme\Media\Oembed_Filter;
 class Theme_Subscriber extends Abstract_Subscriber {
 	public function register(): void {
 		$this->body_classes();
+		$this->site_branding();
 		$this->media();
 		$this->config();
+	}
+
+	private function site_branding(): void {
+		$this->brand_meta();
+		$this->customizer_settings();
+		$this->login_screen();
 	}
 
 	private function config(): void {
@@ -33,6 +43,36 @@ class Theme_Subscriber extends Abstract_Subscriber {
 		add_filter( 'body_class', function ( $classes ) {
 			return $this->container->get( Body_Classes::class )->body_classes( $classes );
 		}, 10, 1 );
+	}
+
+	private function brand_meta() {
+		add_filter( 'wp_head', function () {
+			return $this->container->get( Brand_Meta::class )->inject_ie_metro_icon_bgd_color_meta();
+		}, 10, 0 );
+
+		add_filter( 'wp_head', function () {
+			return $this->container->get( Brand_Meta::class )->inject_android_theme_color_meta();
+		}, 10, 0 );
+	}
+
+	private function customizer_settings() {
+		add_filter( 'customize_register', function ( $wp_customize ) {
+			return $this->container->get( Customizer_Settings::class )->customize_customizer( $wp_customize );
+		}, 20, 1 );
+	}
+
+	private function login_screen() {
+		add_filter( 'login_enqueue_scripts', function () {
+			return $this->container->get( Login_Screen::class )->inject_login_logo();
+		} );
+
+		add_filter( 'login_headerurl', function ( $url ) {
+			return $this->container->get( Login_Screen::class )->customize_login_header_url( $url );
+		} );
+
+		add_filter( 'login_headertext', function ( $name ) {
+			return $this->container->get( Login_Screen::class )->customize_login_header_title( $name );
+		} );
 	}
 
 	private function image_sizes() {

@@ -10,7 +10,6 @@ use Tribe\Project\Blocks\Blocks_Subscriber;
 use Tribe\Project\Cache\Cache_Subscriber;
 use Tribe\Project\Integrations\Google_Tag_Manager\Google_Tag_Manager_Subscriber;
 use Tribe\Project\Integrations\Gravity_Forms\Gravity_Forms_Subscriber;
-use Tribe\Project\Integrations\Site_Brand\Site_Brand_Subscriber;
 use Tribe\Project\Integrations\Yoast_SEO\Yoast_SEO_Subscriber;
 use Tribe\Project\Nav_Menus\Nav_Menus_Definer;
 use Tribe\Project\Nav_Menus\Nav_Menus_Subscriber;
@@ -62,7 +61,6 @@ class Core {
 		Shortcodes_Subscriber::class,
 		Theme_Subscriber::class,
 		Yoast_SEO_Subscriber::class,
-		Site_Brand_Subscriber::class,
 
 		// our post types
 		Post_Types\Sample\Subscriber::class,
