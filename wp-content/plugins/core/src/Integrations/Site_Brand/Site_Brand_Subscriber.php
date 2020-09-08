@@ -23,12 +23,12 @@ class Site_Brand_Subscriber extends Abstract_Subscriber {
 			return $this->container->get( Login_Screen::class )->customize_login_header_title( $name );
 		} );
 
-		add_filter( 'wp_head', function ( $name ) {
-			return $this->container->get( Brand_Meta::class )->inject_ie_metro_icon_bgd_color_meta( $name );
+		add_filter( 'wp_head', function () {
+			return $this->container->get( Brand_Meta::class )->inject_ie_metro_icon_bgd_color_meta();
 		}, 10, 0 );
 
-		add_filter( 'wp_head', function ( $name ) {
-			return $this->container->get( Brand_Meta::class )->inject_android_theme_color_meta( $name );
+		add_filter( 'wp_head', function () {
+			return $this->container->get( Brand_Meta::class )->inject_android_theme_color_meta();
 		}, 10, 0 );
 	}
 }
