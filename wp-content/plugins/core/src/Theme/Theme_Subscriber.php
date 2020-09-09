@@ -47,13 +47,13 @@ class Theme_Subscriber extends Abstract_Subscriber {
 
 	private function brand_meta() {
 		add_action( 'wp_head', function () {
-			return $this->container->get( Brand_Meta::class )->inject_android_theme_color_meta();
+			$this->container->get( Brand_Meta::class )->inject_android_theme_color_meta();
 		}, 10, 0 );
 	}
 
 	private function customizer_settings() {
-		add_filter( 'customize_register', function ( $wp_customize ) {
-			return $this->container->get( Customizer_Settings::class )->customize_customizer( $wp_customize );
+		add_action( 'customize_register', function ( $wp_customize ) {
+			$this->container->get( Customizer_Settings::class )->register_customizer_controls( $wp_customize );
 		}, 20, 1 );
 	}
 

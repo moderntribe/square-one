@@ -14,9 +14,9 @@ class Customizer_Settings {
 	 * Customize Customizer Settings
 	 * @param $wp_customize
 	 *
-	 * @filter customize_register
+	 * @action customize_register
 	 */
-	public function customize_customizer( $wp_customize ) {
+	public function register_customizer_controls( $wp_customize ) {
 		// Login Logo
 		$wp_customize->add_setting( self::SITE_BRANDING_LOGIN_LOGO );
 		$wp_customize->add_control( new WP_Customize_Media_Control(
