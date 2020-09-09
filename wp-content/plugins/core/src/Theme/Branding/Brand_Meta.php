@@ -7,10 +7,10 @@ class Brand_Meta {
 	/**
 	 * Android Theme Color
 	 *
-	 * @filter wp_head
+	 * @action wp_head
 	 */
-	public function inject_android_theme_color_meta() {
+	public function inject_android_theme_color_meta(): void {
 		$theme_color = get_theme_mod( Customizer_Settings::SITE_BRANDING_ANDROID_THEME_COLOR, '#ffffff' );
-		echo '<meta name="theme-color" content="' . $theme_color . '">';
+		printf( '<meta name="theme-color" content="%s">', esc_attr( $theme_color ) );
 	}
 }

@@ -46,7 +46,7 @@ class Theme_Subscriber extends Abstract_Subscriber {
 	}
 
 	private function brand_meta() {
-		add_filter( 'wp_head', function () {
+		add_action( 'wp_head', function () {
 			return $this->container->get( Brand_Meta::class )->inject_android_theme_color_meta();
 		}, 10, 0 );
 	}
