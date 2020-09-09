@@ -14,9 +14,9 @@ if ( ! $c->has_menu() ) {
 }
 ?>
 
-<nav <?php $c->get_classes(); ?> <?php $c->get_attrs(); ?>>
+<nav <?php echo $c->get_classes(); ?> <?php echo $c->get_attrs(); ?>>
 
-	<ol <?php $c->get_nav_list_classes(); ?>>
+	<ol <?php echo $c->get_nav_list_classes(); ?>>
 		<?php echo $c->get_menu(); ?>
 	</ol>
 

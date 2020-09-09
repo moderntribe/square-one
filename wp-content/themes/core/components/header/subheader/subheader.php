@@ -10,7 +10,7 @@ use \Tribe\Project\Templates\Components\header\subheader\Subheader_Controller;
 $c = Subheader_Controller::factory( $args );
 ?>
 
-<header <?php $c->get_classes(); ?> <?php $c->get_attrs(); ?>>
+<header <?php echo $c->get_classes(); ?> <?php echo $c->get_attrs(); ?>>
 	<div class="l-container">
 		<?php get_template_part( 'components/text/text', null, $c->get_title_args() ); ?>
 	</div>
