@@ -23,8 +23,8 @@ class Login_Screen {
 			return;
 		}
 
-		$logo_width  = $logo_data[1] / 2 . 'px';
-		$logo_height = $logo_data[2] / 2 . 'px';
+		$logo_width  = $logo_data[1] / 2;
+		$logo_height = $logo_data[2] / 2;
 
 		?>
 		<style type="text/css">
