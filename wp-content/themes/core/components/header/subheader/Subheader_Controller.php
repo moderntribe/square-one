@@ -31,6 +31,10 @@ class Subheader_Controller extends Abstract_Controller {
 		];
 	}
 
+	protected function required(): array {
+		return [];
+	}
+
 	public function get_classes(): string {
 		return Markup_Utils::class_attribute( $this->classes );
 	}
