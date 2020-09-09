@@ -7,9 +7,9 @@ class Login_Screen {
 	/**
 	 * Add Login Logo
 	 *
-	 * @filter login_enqueue_scripts
+	 * @action login_enqueue_scripts
 	 */
-	public function inject_login_logo() {
+	public function inject_login_logo(): void {
 
 		$logo_id = get_theme_mod( Customizer_Settings::SITE_BRANDING_LOGIN_LOGO );
 

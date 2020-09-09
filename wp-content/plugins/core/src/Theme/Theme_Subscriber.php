@@ -58,8 +58,8 @@ class Theme_Subscriber extends Abstract_Subscriber {
 	}
 
 	private function login_screen() {
-		add_filter( 'login_enqueue_scripts', function () {
-			return $this->container->get( Login_Screen::class )->inject_login_logo();
+		add_action( 'login_enqueue_scripts', function () {
+			$this->container->get( Login_Screen::class )->inject_login_logo();
 		} );
 
 		add_filter( 'login_headerurl', function ( $url ) {
