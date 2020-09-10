@@ -1,0 +1,26 @@
+
+/* -----------------------------------------------------------------------------
+ *
+ * Block Editor
+ * Tab Block Styles & Overrides
+ *
+ * Styles applicable to this block in the block editor.
+ *
+ * ----------------------------------------------------------------------------- */
+
+.wp-block[data-type^="acf/tabs"] {
+	/* Unset hidden tabpanel row properties for the editor & provide
+	some separation to each tabpanel while editing. */
+	.c-tabs__tabpanel {
+		display: block;
+		margin-bottom: var(--spacer-30);
+		padding-bottom: var(--spacer-30);
+		border-bottom: 1px solid var(--color-border);
+
+		&:last-of-type {
+			margin-bottom: 0;
+			padding-bottom: 0;
+			border-bottom: none;
+		}
+	}
+}

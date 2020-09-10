@@ -32,6 +32,44 @@ class Links extends Block_Config {
 			'keywords'    => [ __( 'list', 'tribe' ) ],
 			'category'    => 'layout',
 			'supports'    => [ 'align' => false ],
+			'example' => [
+				'attributes' => [
+					'mode' => 'preview',
+					'data' => [
+						self::LEAD_IN     => esc_html__( 'Lorem ipsum dolor sit amet.', 'tribe' ),
+						self::TITLE       => esc_html__( 'Links', 'tribe' ),
+						self::DESCRIPTION => esc_html__(
+							'Cras ut ornare dui, sed venenatis est. Donec euismod in leo quis consequat.',
+							'tribe'
+						),
+						self::CTA => [
+							'title'  => esc_html__( 'Lorem ipsum', 'tribe' ),
+							'url'    => '#',
+						],
+						self::LINKS_TITLE => esc_html__( 'List Title', 'tribe' ),
+						self::LINKS => [
+							[
+								self::LINK_ITEM => [
+									'title'  => esc_html__( 'Lorem ipsum', 'tribe' ),
+									'url'    => '#',
+								],
+							],
+							[
+								self::LINK_ITEM => [
+									'title'  => esc_html__( 'Lorem ipsum', 'tribe' ),
+									'url'    => '#',
+								],
+							],
+							[
+								self::LINK_ITEM => [
+									'title'  => esc_html__( 'Lorem ipsum', 'tribe' ),
+									'url'    => '#',
+								],
+							],
+						],
+					],
+				],
+			],
 		] ) );
 	}
 

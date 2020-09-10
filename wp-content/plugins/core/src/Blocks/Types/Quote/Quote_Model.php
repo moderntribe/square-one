@@ -12,6 +12,7 @@ class Quote_Model extends Base_Model {
 	 */
 	public function get_data(): array {
 		return [
+			Quote_Block_Controller::CLASSES    => $this->get_classes(),
 			Quote_Block_Controller::CITE_TITLE => $this->get( Quote::CITE_TITLE, '' ),
 			Quote_Block_Controller::CITE_NAME  => $this->get( Quote::CITE_NAME, '' ),
 			Quote_Block_Controller::CITE_IMAGE => $this->get( Quote::CITE_IMAGE, 0 ),

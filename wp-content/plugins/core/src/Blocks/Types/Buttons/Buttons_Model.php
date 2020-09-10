@@ -12,6 +12,7 @@ class Buttons_Model extends Base_Model {
 	 */
 	public function get_data(): array {
 		return [
+			Buttons_Block_Controller::CLASSES => $this->get_classes(),
 			Buttons_Block_Controller::BUTTONS => $this->get( Buttons::BUTTONS, [] ),
 		];
 	}

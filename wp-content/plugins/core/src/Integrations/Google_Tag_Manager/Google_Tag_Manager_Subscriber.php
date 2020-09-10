@@ -14,5 +14,4 @@ class Google_Tag_Manager_Subscriber extends Abstract_Subscriber {
 			$this->container->get( GTM_Scripts::class )->inject_google_tag_manager_body_tag();
 		} );
 	}
-
 }

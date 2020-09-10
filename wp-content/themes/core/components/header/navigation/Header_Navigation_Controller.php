@@ -38,6 +38,10 @@ class Header_Navigation_Controller extends Abstract_Controller {
 		];
 	}
 
+	protected function required(): array {
+		return [];
+	}
+
 	public function has_menu(): bool {
 		return has_nav_menu( $this->location );
 	}

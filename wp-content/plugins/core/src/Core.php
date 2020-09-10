@@ -10,7 +10,6 @@ use Tribe\Project\Blocks\Blocks_Subscriber;
 use Tribe\Project\Cache\Cache_Subscriber;
 use Tribe\Project\Integrations\Google_Tag_Manager\Google_Tag_Manager_Subscriber;
 use Tribe\Project\Integrations\Gravity_Forms\Gravity_Forms_Subscriber;
-use Tribe\Project\Integrations\Yoast_SEO\Yoast_SEO_Definer;
 use Tribe\Project\Integrations\Yoast_SEO\Yoast_SEO_Subscriber;
 use Tribe\Project\Nav_Menus\Nav_Menus_Definer;
 use Tribe\Project\Nav_Menus\Nav_Menus_Subscriber;
@@ -46,7 +45,6 @@ class Core {
 		P2P_Definer::class,
 		Settings_Definer::class,
 		Theme_Definer::class,
-		Yoast_SEO_Definer::class,
 	];
 
 	/**

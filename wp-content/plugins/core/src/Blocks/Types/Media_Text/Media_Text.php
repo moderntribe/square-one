@@ -38,6 +38,26 @@ class Media_Text extends Block_Config {
 			'keywords'    => [ __( 'image', 'tribe' ), __( 'video', 'tribe' ), __( 'display', 'tribe' ), __( 'text', 'tribe' ) ],
 			'category'    => 'layout',
 			'supports'    => [ 'align' => false ],
+			'example' => [
+				'attributes' => [
+					'mode' => 'preview',
+					'data' => [
+						self::LEAD_IN     => esc_html__( 'Lorem ipsum dolor sit amet.', 'tribe' ),
+						self::TITLE       => esc_html__( 'A Media and Text Block', 'tribe' ),
+						self::DESCRIPTION => esc_html__(
+							'Cras ut ornare dui, sed venenatis est. Donec euismod in leo quis consequat.',
+							'tribe'
+						),
+						self::CTA => [
+							'title'  => esc_html__( 'Lorem ipsum', 'tribe' ),
+							'url'    => '#',
+							'target' => '',
+						],
+						//Images are output as IDs so it's sort of hard to get an image value for preview
+						self::IMAGE       => 0,
+					],
+				],
+			],
 		] ) );
 	}
 
@@ -75,7 +95,7 @@ class Media_Text extends Block_Config {
 					self::IMAGE => __( 'Image', 'tribe' ),
 					self::EMBED => __( 'Video oEmbed', 'tribe' ),
 				],
-				'default_value'   => [
+				'default_value' => [
 					self::IMAGE,
 				],
 			] )
