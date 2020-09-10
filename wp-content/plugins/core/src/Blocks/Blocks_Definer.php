@@ -77,7 +77,7 @@ class Blocks_Definer implements Definer_Interface {
 				'core/video',
 				'core/code',
 				'core/classic',
-				'core/custom-html',
+				'core/html',
 				'core/preformatted',
 				'core/quote',
 				'core/table',
