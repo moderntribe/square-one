@@ -42,6 +42,11 @@ class Card_Controller extends Abstract_Controller {
 	public const VARIANT_ELEVATED = 'elevated';
 	public const VARIANT_OUTLINED = 'outlined';
 
+	/**
+	 * @var int|string
+	 */
+	private $image;
+
 	private string $tag;
 	private array  $classes;
 	private array  $attrs;
@@ -50,7 +55,6 @@ class Card_Controller extends Abstract_Controller {
 	private string $variation;
 	private array  $media_wrapper_classes;
 	private array  $body_wrapper_classes;
-	private int    $image;
 	/**
 	 * @var null|Deferred_Component
 	 * @uses components/container
@@ -88,7 +92,7 @@ class Card_Controller extends Abstract_Controller {
 		$this->variation             = (string) $args[ self::VARIATION ];
 		$this->media_wrapper_classes = (array) $args[ self::MEDIA_WRAPPER_CLASSES ];
 		$this->body_wrapper_classes  = (array) $args[ self::BODY_WRAPPER_CLASSES ];
-		$this->image                 = (int) $args[ self::IMAGE ];
+		$this->image                 = $args[ self::IMAGE ];
 		$this->meta_primary          = $args[ self::META_PRIMARY ];
 		$this->meta_secondary        = $args[ self::META_SECONDARY ];
 		$this->title                 = $args[ self::TITLE ];

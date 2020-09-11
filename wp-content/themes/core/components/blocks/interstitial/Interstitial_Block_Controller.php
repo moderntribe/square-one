@@ -24,8 +24,12 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 	public const CLASSES           = 'classes';
 	public const ATTRS             = 'attrs';
 
+	/**
+	 * @var int|string
+	 */
+	private $media;
+
 	private string $layout;
-	private int    $media;
 	private string $title;
 	private array  $cta;
 	private array  $container_classes;
@@ -42,7 +46,7 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 
 		$this->classes           = (array) $args[ self::CLASSES ];
 		$this->layout            = (string) $args[ self::LAYOUT ];
-		$this->media             = (int) $args[ self::MEDIA ];
+		$this->media             = $args[ self::MEDIA ];
 		$this->title             = (string) $args[ self::TITLE ];
 		$this->cta               = (array) $args[ self::CTA ];
 		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
