@@ -282,11 +282,8 @@ class Image_Controller extends Abstract_Controller {
 		// we'll almost always set src, except if for some reason they wanted to only use srcset
 		if ( $this->src ) {
 			if ( $this->img_id ) {
-				[ $src, $src_width, $src_height ] = wp_get_attachment_image_src( $this->img_id, $this->src_size ) ?: [
-					'',
-					0,
-					0,
-				];
+				[ $src, $src_width, $src_height ] = wp_get_attachment_image_src( $this->img_id, $this->src_size )
+					?: [ '', 0, 0, ];
 			} else {
 				$src = $this->img_url;
 			}
@@ -426,8 +423,10 @@ class Image_Controller extends Abstract_Controller {
 
 		// If there are no sizes available after all that work, fallback to the original full size image.
 		if ( empty( $attribute ) ) {
-			$src         = wp_get_attachment_image_src( $this->img_id, 'full' );
-			$attribute[] = $this->build_srcset_string( ... $src );
+			$src = wp_get_attachment_image_src( $this->img_id, 'full' );
+			if ( $src ) {
+				$attribute[] = $this->build_srcset_string( ... $src );
+			}
 		}
 
 		return implode( ", \n", $attribute );
