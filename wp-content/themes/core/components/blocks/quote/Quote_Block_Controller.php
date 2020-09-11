@@ -8,7 +8,6 @@ use Tribe\Project\Blocks\Types\Quote\Quote as Quote_Block;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\quote\Quote_Controller;
 use Tribe\Project\Templates\Components\image\Image_Controller;
-use Tribe\Project\Templates\Models\Image;
 use Tribe\Project\Theme\Config\Image_Sizes;
 
 class Quote_Block_Controller extends Abstract_Controller {
@@ -157,7 +156,7 @@ class Quote_Block_Controller extends Abstract_Controller {
 		}
 
 		return [
-			Image_Controller::ATTACHMENT   => Image::factory( (int) $this->media ),
+			Image_Controller::IMG_ID       => $this->media,
 			Image_Controller::AS_BG        => true,
 			Image_Controller::USE_LAZYLOAD => true,
 			Image_Controller::CLASSES      => $classes,

@@ -10,7 +10,6 @@ use Tribe\Project\Templates\Components\Deferred_Component;
 use Tribe\Project\Templates\Components\image\Image_Controller;
 use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Templates\Components\text\Text_Controller;
-use Tribe\Project\Templates\Models\Image;
 use Tribe\Project\Theme\Config\Image_Sizes;
 
 class Card_Controller extends Abstract_Controller {
@@ -171,7 +170,7 @@ class Card_Controller extends Abstract_Controller {
 		}
 
 		return [
-			Image_Controller::ATTACHMENT   => Image::factory( (int) $this->image ),
+			Image_Controller::IMG_ID       => $this->image,
 			Image_Controller::AS_BG        => true,
 			Image_Controller::WRAPPER_TAG  => 'div',
 			Image_Controller::CLASSES      => [ 'c-card__image', 'c-image--bg' ],

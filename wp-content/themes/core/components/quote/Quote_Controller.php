@@ -5,7 +5,6 @@ namespace Tribe\Project\Templates\Components\quote;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\image\Image_Controller;
-use Tribe\Project\Templates\Models\Image;
 use Tribe\Project\Theme\Config\Image_Sizes;
 
 class Quote_Controller extends Abstract_Controller {
@@ -27,10 +26,10 @@ class Quote_Controller extends Abstract_Controller {
 		$args             = $this->parse_args( $args );
 		$this->classes    = (array) $args[ self::CLASSES ];
 		$this->attrs      = (array) $args[ self::ATTRS ];
-		$this->quote_text = $args[ self::QUOTE_TEXT ];
-		$this->cite_name  = $args[ self::CITE_NAME ];
-		$this->cite_title = $args[ self::CITE_TITLE ];
-		$this->cite_image = $args[ self::CITE_IMAGE ];
+		$this->quote_text = (string) $args[ self::QUOTE_TEXT ];
+		$this->cite_name  = (string) $args[ self::CITE_NAME ];
+		$this->cite_title = (string) $args[ self::CITE_TITLE ];
+		$this->cite_image = (int) $args[ self::CITE_IMAGE ];
 	}
 
 	protected function defaults(): array {
@@ -68,7 +67,7 @@ class Quote_Controller extends Abstract_Controller {
 		}
 
 		return [
-			Image_Controller::ATTACHMENT  => Image::factory( (int) $this->cite_image ),
+			Image_Controller::IMG_ID      => $this->cite_image,
 			Image_Controller::WRAPPER_TAG => 'span',
 			Image_Controller::CLASSES     => [ 'c-quote__cite-figure' ],
 			Image_Controller::IMG_CLASSES => [ 'c-quote__cite-image' ],

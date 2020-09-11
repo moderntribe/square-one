@@ -4,13 +4,12 @@ namespace Tribe\Project\Templates\Components\image;
 
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
-use Tribe\Project\Templates\Models\Image as Image_Model;
 
 class Image_Controller extends Abstract_Controller {
-	public const ATTACHMENT        = 'attachment';
 	public const ATTRS             = 'attrs';
 	public const CLASSES           = 'classes';
 	public const WRAPPER_TAG       = 'wrapper_tag';
+	public const IMG_ID            = 'img_id';
 	public const IMG_URL           = 'img_url';
 	public const AS_BG             = 'as_bg';
 	public const AUTO_SHIM         = 'auto_shim';
@@ -35,68 +34,95 @@ class Image_Controller extends Abstract_Controller {
 	public const USE_LAZYLOAD      = 'use_lazyload';
 	public const USE_SRCSET        = 'use_srcset';
 
-	// WordPress attachment to use - takes precedence over IMG_URL
-	private object $attachment;
-	// Image URL - generate markup for an image via its URL. Only applicable if ATTACHMENT is empty.
+	/** @var int ID of the WordPress attachment to use. Takes precedence over img_url */
+	private int $img_id;
+
+	/** @var string Image URL - generate markup for an image via its URL. Only applicable if img_url is empty. */
 	private string $img_url;
-	// Generates a background image on a `<div>` instead of a traditional `<img>`.
+
+	/** @var bool Generates a background image on a `<div>` instead of a traditional `<img>` */
 	private bool $as_bg;
-	// If true, shim dir as set will be used, src_size will be used as filename, with png as file type.
+
+	/** @var bool If true, shim dir as set will be used, src_size will be used as filename, with png as file type. */
 	private bool $auto_shim;
-	// If lazyloading the lib can auto create sizes attribute
+
+	/** @var bool If lazyloading the lib can auto create sizes attribute */
 	private bool $auto_sizes_attr;
-	// Expand attribute is the threshold used by lazysizes. Use negative to reveal once in viewport.
+
+	/** @var int Expand attribute is the threshold used by lazysizes. Use negative to reveal once in viewport. */
 	private int $expand;
-	// Append an html string inside the wrapper. Useful for adding a `<figcaption>` or other markup after the image.
+
+	/** @var string Append an html string inside the wrapper. Useful for adding a `<figcaption>` or other markup after the image. */
 	private string $html;
-	// Pass classes for image tag. if lazyload is true class "lazyload" is auto added.
+
+	/** @var array Pass classes for image tag. if lazyload is true class "lazyload" is auto added. */
 	private array $img_classes;
-	// Additional image attributes
+
+	/** @var array Additional image attributes */
 	private array $img_attrs;
-	// Pass specific image alternate text. If not included, will default to image alt text and then title.
+
+	/** @var string Pass specific image alternate text. If not included, will default to image alt text and then title. */
 	private string $img_alt_text;
-	// Pass a link to wrap the image
+
+	/** @var string Pass a link to wrap the image */
 	private string $link_url;
-	// Pass link classes
+
+	/** @var array Pass link classes */
 	private array $link_classes;
-	// Pass a link target
+
+	/** @var string Pass a link target */
 	private string $link_target;
-	// Pass a link title
+
+	/** @var string Pass a link title */
 	private string $link_title;
-	// Pass additional link attributes
+
+	/** @var array Pass additional link attributes */
 	private array $link_attrs;
-	// If lazyloading this combines with object fit css and the object fit polyfill
+
+	/** @var string If lazyloading this combines with object fit css and the object fit polyfill */
 	private string $parent_fit;
-	// Supply a manually specified shim for lazyloading. Will override auto_shim whether true/false.
+
+	/** @var string Supply a manually specified shim for lazyloading. Will override auto_shim whether true/false. */
 	private string $shim;
-	// Set to false to disable the src attribute. This is a fallback for non srcset browsers.
+
+	/** @var bool Set to false to disable the src attribute. This is a fallback for non srcset browsers. */
 	private bool $src;
-	// This is the main src registered image size
+
+	/** @var string This is the main src registered image size */
 	private string $src_size;
-	// This is registered sizes array for srcset
+
+	/** @var array This is registered sizes array for srcset */
 	private array $srcset_sizes;
-	// This is the srcset sizes attribute string used if auto is false
+
+	/** @var string This is the srcset sizes attribute string used if auto is false */
 	private string $srcset_sizes_attr;
-	// This will set the width and height attributes on the img to be half the original for retina/hdpi. Only for not lazyloading and when src exists.
+
+	/** @var bool This will set the width and height attributes on the img to be half the original for retina/hdpi. Only for not lazyloading and when src exists. */
 	private bool $use_hw_attr;
-	// Lazyload this game? If `AS_BG` is true, `SRCSET_SIZES` must also be defined.
+
+	/** @var bool Use lazyloading for this image? If `AS_BG` is true, `SRCSET_SIZES` must also be defined. */
 	private bool $use_lazyload;
-	// Srcset this game?
+
+	/** @var bool Use srcset for this image? */
 	private bool $use_srcset;
+
+	/** @var string[] */
 	private array $attrs;
-	// Pass classes for figure wrapper. If as_bg is set true gets auto class of "lazyload".
+
+	/** @var array Pass classes for figure wrapper. If as_bg is set true gets auto class of "lazyload". */
 	private array $classes;
-	// Html tag for the wrapper/background image container
+
+	/** @var string Html tag for the wrapper/background image container */
 	private string $wrapper_tag;
 
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
 
-		$this->attachment        = $args[ self::ATTACHMENT ];
+		$this->img_id            = (int) $args[ self::IMG_ID ];
+		$this->img_url           = (string) $args[ self::IMG_URL ];
 		$this->attrs             = (array) $args[ self::ATTRS ];
 		$this->classes           = (array) $args[ self::CLASSES ];
 		$this->wrapper_tag       = (string) $args[ self::WRAPPER_TAG ];
-		$this->img_url           = (string) $args[ self::IMG_URL ];
 		$this->as_bg             = (bool) $args[ self::AS_BG ];
 		$this->auto_shim         = (bool) $args[ self::AUTO_SHIM ];
 		$this->auto_sizes_attr   = (bool) $args[ self::AUTO_SIZES_ATTR ];
@@ -123,11 +149,11 @@ class Image_Controller extends Abstract_Controller {
 
 	protected function defaults(): array {
 		return [
-			self::ATTACHMENT        => null,
+			self::IMG_ID            => 0,
+			self::IMG_URL           => '',
 			self::ATTRS             => [],
 			self::CLASSES           => [],
 			self::WRAPPER_TAG       => 'figure',
-			self::IMG_URL           => '',
 			self::AS_BG             => false,
 			self::AUTO_SHIM         => true,
 			self::AUTO_SIZES_ATTR   => false,
@@ -162,7 +188,7 @@ class Image_Controller extends Abstract_Controller {
 	}
 
 	public function should_lazy_load(): bool {
-		$missing_src = empty( $this->attachment ) && empty( $this->img_url );
+		$missing_src = empty( $this->img_id ) && empty( $this->img_url );
 
 		return $this->use_lazyload && ! $missing_src;
 	}
@@ -175,7 +201,7 @@ class Image_Controller extends Abstract_Controller {
 	 * @return string
 	 */
 	public function get_image(): string {
-		$classes = $this->img_classes ?? [];
+		$classes = $this->img_classes;
 
 		if ( $this->should_lazy_load() ) {
 			$classes[] = 'lazyload';
@@ -235,12 +261,12 @@ class Image_Controller extends Abstract_Controller {
 		return Markup_Utils::concat_attrs( $attrs );
 	}
 
-	public function get_link_url(): string {
-		if ( ! $this->link_url ) {
-			return '';
-		}
+	public function has_link(): bool {
+		return ! empty( $this->link_url );
+	}
 
-		return esc_url( $this->link_url );
+	public function get_link_url(): string {
+		return $this->link_url;
 	}
 
 	/**
@@ -249,27 +275,29 @@ class Image_Controller extends Abstract_Controller {
 	 * @return string
 	 */
 	public function get_image_attributes(): string {
-		$attrs = $this->img_attrs;
-		/** @var Image_Model $attachment */
-		$attachment = $this->attachment;
-		$src_width  = '';
-		$src_height = '';
+		$attrs      = $this->img_attrs;
+		$src        = '';
+		$src_width  = 0;
+		$src_height = 0;
 		// we'll almost always set src, except if for some reason they wanted to only use srcset
-		if ( $attachment && $attachment->has_size( $this->src_size ) ) {
-			$resized    = $attachment->get_size( $this->src_size );
-			$src        = $resized->src;
-			$src_width  = $resized->width;
-			$src_height = $resized->height;
-		} else {
-			$src = $this->img_url;
+		if ( $this->src ) {
+			if ( $this->img_id ) {
+				[ $src, $src_width, $src_height ] = wp_get_attachment_image_src( $this->img_id, $this->src_size ) ?: [
+					'',
+					0,
+					0,
+				];
+			} else {
+				$src = $this->img_url;
+			}
 		}
 
 		// the alt text
 		$alt_text = $this->img_alt_text;
 
 		// Check for a specific alt meta value on the image post, otherwise fallback to the image post's title.
-		if ( empty( $alt_text ) && $attachment ) {
-			$alt_text = $attachment->alt() ?: $attachment->title();
+		if ( empty( $alt_text ) && $this->img_id ) {
+			$alt_text = get_post_meta( $this->img_id, '_wp_attachment_image_alt', true ) ?: get_the_title( $this->img_id );
 		}
 
 		if ( $this->as_bg ) {
@@ -371,32 +399,62 @@ class Image_Controller extends Abstract_Controller {
 	 * @return string
 	 */
 	public function get_srcset_attribute(): string {
-		if ( ! isset( $this->attachment ) ) {
+		if ( ! $this->img_id ) {
 			return '';
 		}
 
 		$attribute = [];
+		$all_sizes = wp_get_additional_image_sizes();
 
-		/** @var Image_Model $attachment */
-		$attachment = $this->attachment;
 		foreach ( $this->srcset_sizes as $size ) {
-			if ( $size === 'full' || ! $attachment->has_size( $size ) ) {
+			if ( $size === 'full' ) {
 				continue;
 			}
-			$resized = $attachment->get_size( $size );
-			if ( ! $resized->is_intermediate || ! $resized->is_match ) {
+			$src = wp_get_attachment_image_src( $this->img_id, $size );
+			if ( ! $src ) {
 				continue;
 			}
-			$attribute[] = sprintf( '%s %dw %dh', $resized->src, $resized->width, $resized->height );
+			// Don't add nonexistent intermediate sizes to the src_set. It ends up being the full-size image URL.
+			$use_size = ( true === $src[3] );
+			if ( ! $use_size && isset( $all_sizes[ $size ] ) ) {
+				$use_size = $this->image_matches_size( $src, $all_sizes[ $size ] );
+			}
+			if ( $use_size ) {
+				$attribute[] = $this->build_srcset_string( ... $src );
+			}
 		}
 
 		// If there are no sizes available after all that work, fallback to the original full size image.
-		if ( empty( $attribute ) && $attachment->has_size( 'full' ) ) {
-			$full        = $attachment->get_size( 'full' );
-			$attribute[] = sprintf( '%s %dw %dh', $full->src, $full->width, $full->height );
+		if ( empty( $attribute ) ) {
+			$src         = wp_get_attachment_image_src( $this->img_id, 'full' );
+			$attribute[] = $this->build_srcset_string( ... $src );
 		}
 
 		return implode( ", \n", $attribute );
+	}
+
+	private function build_srcset_string( $url, $width, $height ): string {
+		return sprintf( '%s %dw %dh', $url, $width, $height );
+	}
+
+	/**
+	 * Determine if the image meets the dimensions specified by the image size
+	 *
+	 * @param array $image An image array from wp_get_attachment_image_src()
+	 * @param array $size  An image size array from wp_get_additional_image_sizes()
+	 *
+	 * @return bool
+	 */
+	private function image_matches_size( array $image, array $size ): bool {
+		$image_width  = (int) $image[1];
+		$image_height = (int) $image[2];
+		$size_width   = (int) $size['width'];
+		$size_height  = (int) $size['height'];
+		if ( $size['crop'] ) {
+			return ( $image_width === $size_width && $image_height === $size_height );
+		} else {
+			return ( $image_width === $size_width || $image_height === $size_height );
+		}
 	}
 
 	public function get_html(): string {

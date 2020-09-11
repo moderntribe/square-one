@@ -12,7 +12,6 @@ use Tribe\Project\Templates\Components\text\Text_Controller;
 use Tribe\Project\Templates\Components\Deferred_Component;
 use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Templates\Components\image\Image_Controller;
-use Tribe\Project\Templates\Models\Image;
 use Tribe\Project\Theme\Config\Image_Sizes;
 
 class Media_Text_Block_Controller extends Abstract_Controller {
@@ -240,7 +239,7 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 		}
 
 		return [
-			Image_Controller::ATTACHMENT   => Image::factory( (int) $this->image ),
+			Image_Controller::IMG_ID       => $this->image,
 			Image_Controller::SRC_SIZE     => $src_size,
 			Image_Controller::SRCSET_SIZES => $srcset_sizes,
 		];
