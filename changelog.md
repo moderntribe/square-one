@@ -6,6 +6,8 @@ All notable changes to this project will be documented in this file.
 * Removed: The Image and Image_Derivative models are gone. The Image_Controller for
   the image component no longer accepts an "attachment" argument, opting instead
   for an "img_id" pointing to the WP attachment post.
+* Changed: Update block components to allow passing either a string or ID for image.
+* Fixed: Image_Controller no longer tries to lazyload images passed as strings.
 * Changed: All-the-things. Major changes in support of our "Fidgety Feet" epic.
     * Removed Twig
     * Removed Pimple in favor of PHP's built-in autoloading.
