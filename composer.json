@@ -24,17 +24,11 @@
   "repositories": [
     {
       "type": "composer",
+      "url": "https://amazing-wozniak-31fa75.netlify.app/"
+    },
+    {
+      "type": "composer",
       "url": "https://wpackagist.org"
-    },
-    {
-      "type": "vcs",
-      "no-api": true,
-      "url": "git@github.com:nickforddesign/acf-swatch.git"
-    },
-    {
-      "type": "vcs",
-      "no-api": true,
-      "url": "git@github.com:moderntribe/ACF-Image-Select.git"
     },
     {
       "type": "package",
@@ -80,7 +74,7 @@
     "johnpbloch/wordpress-core-installer": "1.0.0",
     "mailgun/mailgun-php": "^2.8",
     "moderntribe/acf-image-select": "dev-master",
-    "moderntribe/tribe-libs": "3.0.0",
+    "moderntribe/tribe-libs": "dev-feature/satis-prototype",
     "monolog/monolog": "1.23.0",
     "nickford/acf-swatch": "1.0.7",
     "nikic/fast-route": "^1.3",
