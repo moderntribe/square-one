@@ -8,20 +8,6 @@ class Image_ControllerTest extends \Codeception\TestCase\WPTestCase {
 	 */
 	protected $tester;
 
-	public function setUp(): void {
-		// Before...
-		parent::setUp();
-
-		// Your set up methods here.
-	}
-
-	public function tearDown(): void {
-		// Your tear down methods here.
-
-		// Then...
-		parent::tearDown();
-	}
-
 	// Tests
 	public function test_builds_image_srcset(): void {
 		$backup_sizes                          = $GLOBALS['_wp_additional_image_sizes'];
