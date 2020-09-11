@@ -188,7 +188,7 @@ class Image_Controller extends Abstract_Controller {
 	}
 
 	public function should_lazy_load(): bool {
-		$missing_src = empty( $this->img_id ) && empty( $this->img_url );
+		$missing_src = empty( $this->img_id );
 
 		return $this->use_lazyload && ! $missing_src;
 	}
@@ -304,7 +304,7 @@ class Image_Controller extends Abstract_Controller {
 			$attrs['alt'] = esc_attr( $alt_text );
 		}
 
-		if ( $this->use_lazyload ) {
+		if ( $this->use_lazyload && $this->should_lazy_load() ) {
 
 			// the expand attribute that controls threshold
 			$attrs['data-expand'] = esc_attr( $this->expand );
