@@ -232,6 +232,7 @@ class Hero_Block_Controller extends Abstract_Controller {
 		return [
 			Image_Controller::IMG_ID       => $this->media,
 			Image_Controller::AS_BG        => true,
+			Image_Controller::AUTO_SHIM    => false,
 			Image_Controller::USE_LAZYLOAD => true,
 			Image_Controller::WRAPPER_TAG  => 'div',
 			Image_Controller::CLASSES      => [ 'b-hero__figure', 'c-image--bg', 'c-image--overlay' ],

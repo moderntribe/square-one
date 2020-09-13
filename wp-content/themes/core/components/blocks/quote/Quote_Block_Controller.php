@@ -166,6 +166,7 @@ class Quote_Block_Controller extends Abstract_Controller {
 		return [
 			Image_Controller::IMG_ID       => $this->media,
 			Image_Controller::AS_BG        => true,
+			Image_Controller::AUTO_SHIM    => false,
 			Image_Controller::USE_LAZYLOAD => true,
 			Image_Controller::CLASSES      => $classes,
 			Image_Controller::IMG_CLASSES  => [ 'b-quote__img' ],
