@@ -102,7 +102,8 @@
     "wpackagist-plugin/safe-svg": "1.9.9",
     "wpackagist-plugin/the-events-calendar": "5.1.6",
     "wpackagist-plugin/user-switching": "1.5.5",
-    "wpackagist-plugin/wordpress-seo": "14.9"
+    "wpackagist-plugin/wordpress-seo": "14.9",
+    "wpackagist-plugin/wp-tota11y": "^1.1"
   },
   "require-dev": {
     "automattic/phpcs-neutron-standard": "^1.5",

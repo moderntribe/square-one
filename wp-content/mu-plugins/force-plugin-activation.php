@@ -40,6 +40,7 @@ class Force_Plugin_Activation {
 		'rewrite-rules-inspector/rewrite-rules-inspector.php',
 		'wp-log-in-browser/wp-log-in-browser.php',
 		'wp-xhprof-profiler/xhprof-profiler.php',
+		'wp-tota11y/wp-tota11y.php',
 	];
 
 	/**
@@ -58,6 +59,7 @@ class Force_Plugin_Activation {
 		'rewrite-rules-inspector/rewrite-rules-inspector.php',
 		'wp-log-in-browser/wp-log-in-browser.php',
 		'wp-xhprof-profiler/xhprof-profiler.php',
+		'wp-tota11y/wp-tota11y.php',
 	];
 
 
