@@ -15,9 +15,9 @@ $c = Image_Controller::factory( $args );
 	<?php echo $c->get_attrs(); ?>
 >
 
-	<?php if ( ! empty( $c->get_link_url() ) ) { ?>
+	<?php if ( $c->has_link() ) { ?>
 		<a
-			href="<?php echo $c->get_link_url(); ?>"
+			href="<?php echo esc_url( $c->get_link_url() ); ?>"
 			<?php echo $c->get_link_classes(); ?>
 			<?php echo $c->get_link_attributes(); ?>
 		>
@@ -25,7 +25,7 @@ $c = Image_Controller::factory( $args );
 
 		<?php echo $c->get_image(); ?>
 
-	<?php if ( ! empty( $c->get_link_url() ) ) { ?>
+	<?php if ( ! empty( $c->has_link() ) ) { ?>
 		</a>
 	<?php } ?>
 

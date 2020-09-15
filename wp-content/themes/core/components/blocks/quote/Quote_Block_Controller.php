@@ -8,7 +8,6 @@ use Tribe\Project\Blocks\Types\Quote\Quote as Quote_Block;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\quote\Quote_Controller;
 use Tribe\Project\Templates\Components\image\Image_Controller;
-use Tribe\Project\Templates\Models\Image;
 use Tribe\Project\Theme\Config\Image_Sizes;
 
 class Quote_Block_Controller extends Abstract_Controller {
@@ -24,11 +23,19 @@ class Quote_Block_Controller extends Abstract_Controller {
 	public const CLASSES           = 'classes';
 	public const ATTRS             = 'attrs';
 
+	/**
+	 * @var int|string
+	 */
+	private $cite_image;
+
+	/**
+	 * @var int|string
+	 */
+	private $media;
+
 	private string $layout;
-	private int    $media;
 	private string $cite_name;
 	private string $cite_title;
-	private int    $cite_image;
 	private string $quote_text;
 	private array  $container_classes;
 	private array  $media_classes;
@@ -43,10 +50,10 @@ class Quote_Block_Controller extends Abstract_Controller {
 		$args = $this->parse_args( $args );
 
 		$this->layout            = (string) $args[ self::LAYOUT ];
-		$this->media             = (int) $args[ self::MEDIA ];
+		$this->media             = $args[ self::MEDIA ];
 		$this->cite_name         = (string) $args[ self::CITE_NAME ];
 		$this->cite_title        = (string) $args[ self::CITE_TITLE ];
-		$this->cite_image        = (int) $args[ self::CITE_IMAGE ];
+		$this->cite_image        = $args[ self::CITE_IMAGE ];
 		$this->quote_text        = (string) $args[ self::QUOTE_TEXT ];
 		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
 		$this->media_classes     = (array) $args[ self::MEDIA_CLASSES ];
@@ -157,8 +164,9 @@ class Quote_Block_Controller extends Abstract_Controller {
 		}
 
 		return [
-			Image_Controller::ATTACHMENT   => Image::factory( (int) $this->media ),
+			Image_Controller::IMG_ID       => $this->media,
 			Image_Controller::AS_BG        => true,
+			Image_Controller::AUTO_SHIM    => false,
 			Image_Controller::USE_LAZYLOAD => true,
 			Image_Controller::CLASSES      => $classes,
 			Image_Controller::IMG_CLASSES  => [ 'b-quote__img' ],

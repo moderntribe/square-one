@@ -12,7 +12,6 @@ use Tribe\Project\Templates\Components\Deferred_Component;
 use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Templates\Components\text\Text_Controller;
 use Tribe\Project\Templates\Components\image\Image_Controller;
-use Tribe\Project\Templates\Models\Image;
 use Tribe\Project\Theme\Config\Image_Sizes;
 
 class Hero_Block_Controller extends Abstract_Controller {
@@ -28,8 +27,12 @@ class Hero_Block_Controller extends Abstract_Controller {
 	public const CLASSES           = 'classes';
 	public const ATTRS             = 'attrs';
 
+	/**
+	 * @var int|string
+	 */
+	private $media;
+
 	private string $layout;
-	private int    $media;
 	private string $title;
 	private string $leadin;
 	private string $description;
@@ -47,7 +50,7 @@ class Hero_Block_Controller extends Abstract_Controller {
 		$args = $this->parse_args( $args );
 
 		$this->layout            = (string) $args[ self::LAYOUT ];
-		$this->media             = (int) $args[ self::MEDIA ];
+		$this->media             = $args[ self::MEDIA ];
 		$this->title             = (string) $args[ self::TITLE ];
 		$this->leadin            = (string) $args[ self::LEADIN ];
 		$this->description       = (string) $args[ self::DESCRIPTION ];
@@ -227,8 +230,9 @@ class Hero_Block_Controller extends Abstract_Controller {
 		}
 
 		return [
-			Image_Controller::ATTACHMENT   => Image::factory( (int) $this->media ),
+			Image_Controller::IMG_ID       => $this->media,
 			Image_Controller::AS_BG        => true,
+			Image_Controller::AUTO_SHIM    => false,
 			Image_Controller::USE_LAZYLOAD => true,
 			Image_Controller::WRAPPER_TAG  => 'div',
 			Image_Controller::CLASSES      => [ 'b-hero__figure', 'c-image--bg', 'c-image--overlay' ],

@@ -12,7 +12,6 @@ use Tribe\Project\Templates\Components\text\Text_Controller;
 use Tribe\Project\Templates\Components\Deferred_Component;
 use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Templates\Components\image\Image_Controller;
-use Tribe\Project\Templates\Models\Image;
 
 class Logos_Block_Controller extends Abstract_Controller {
 	public const CLASSES           = 'classes';
@@ -208,7 +207,7 @@ class Logos_Block_Controller extends Abstract_Controller {
 				continue;
 			}
 			$image_args = [
-				Image_Controller::ATTACHMENT   => Image::factory( (int) $logo[ Logos::LOGO_IMAGE ] ),
+				Image_Controller::IMG_ID       => (int) $logo[ Logos::LOGO_IMAGE ],
 				Image_Controller::USE_LAZYLOAD => true,
 				Image_Controller::CLASSES      => [ 'b-logo__figure' ],
 				Image_Controller::IMG_CLASSES  => [ 'b-logo__img' ],

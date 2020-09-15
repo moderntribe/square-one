@@ -12,7 +12,6 @@ use Tribe\Project\Templates\Components\text\Text_Controller;
 use Tribe\Project\Templates\Components\Deferred_Component;
 use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Templates\Components\image\Image_Controller;
-use Tribe\Project\Templates\Models\Image;
 use Tribe\Project\Theme\Config\Image_Sizes;
 
 class Media_Text_Block_Controller extends Abstract_Controller {
@@ -31,6 +30,11 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 	public const DESCRIPTION       = 'description';
 	public const CTA               = 'cta';
 
+	/**
+	 * @var int|string
+	 */
+	private $image;
+
 	private array  $classes;
 	private array  $attrs;
 	private string $width;
@@ -39,7 +43,6 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 	private array  $media_classes;
 	private array  $content_classes;
 	private string $media_type;
-	private int    $image;
 	private string $video;
 	private string $title;
 	private string $leadin;
@@ -60,7 +63,7 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 		$this->media_classes     = (array) $args[ self::MEDIA_CLASSES ];
 		$this->content_classes   = (array) $args[ self::CONTENT_CLASSES ];
 		$this->media_type        = (string) $args[ self::MEDIA_TYPE ];
-		$this->image             = (int) $args[ self::IMAGE ];
+		$this->image             = $args[ self::IMAGE ];
 		$this->video             = (string) $args[ self::VIDEO ];
 		$this->title             = (string) $args[ self::TITLE ];
 		$this->leadin            = (string) $args[ self::LEADIN ];
@@ -240,7 +243,7 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 		}
 
 		return [
-			Image_Controller::ATTACHMENT   => Image::factory( (int) $this->image ),
+			Image_Controller::IMG_ID       => $this->image,
 			Image_Controller::SRC_SIZE     => $src_size,
 			Image_Controller::SRCSET_SIZES => $srcset_sizes,
 		];

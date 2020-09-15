@@ -11,7 +11,6 @@ use Tribe\Project\Templates\Components\Deferred_Component;
 use Tribe\Project\Templates\Components\text\Text_Controller;
 use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Templates\Components\image\Image_Controller;
-use Tribe\Project\Templates\Models\Image;
 use Tribe\Project\Theme\Config\Image_Sizes;
 
 class Interstitial_Block_Controller extends Abstract_Controller {
@@ -25,8 +24,12 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 	public const CLASSES           = 'classes';
 	public const ATTRS             = 'attrs';
 
+	/**
+	 * @var int|string
+	 */
+	private $media;
+
 	private string $layout;
-	private int    $media;
 	private string $title;
 	private array  $cta;
 	private array  $container_classes;
@@ -43,7 +46,7 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 
 		$this->classes           = (array) $args[ self::CLASSES ];
 		$this->layout            = (string) $args[ self::LAYOUT ];
-		$this->media             = (int) $args[ self::MEDIA ];
+		$this->media             = $args[ self::MEDIA ];
 		$this->title             = (string) $args[ self::TITLE ];
 		$this->cta               = (array) $args[ self::CTA ];
 		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
@@ -186,8 +189,9 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 		}
 
 		return [
-			Image_Controller::ATTACHMENT   => Image::factory( (int) $this->media ),
+			Image_Controller::IMG_ID       => $this->media,
 			Image_Controller::AS_BG        => true,
+			Image_Controller::AUTO_SHIM    => false,
 			Image_Controller::USE_LAZYLOAD => true,
 			Image_Controller::WRAPPER_TAG  => 'div',
 			Image_Controller::CLASSES      => [ 'b-interstitial__figure', 'c-image--bg', 'c-image--overlay' ],

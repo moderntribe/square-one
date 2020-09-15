@@ -10,7 +10,6 @@ use Tribe\Project\Templates\Components\Deferred_Component;
 use Tribe\Project\Templates\Components\image\Image_Controller;
 use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Templates\Components\text\Text_Controller;
-use Tribe\Project\Templates\Models\Image;
 use Tribe\Project\Theme\Config\Image_Sizes;
 
 class Card_Controller extends Abstract_Controller {
@@ -43,6 +42,11 @@ class Card_Controller extends Abstract_Controller {
 	public const VARIANT_ELEVATED = 'elevated';
 	public const VARIANT_OUTLINED = 'outlined';
 
+	/**
+	 * @var int|string
+	 */
+	private $image;
+
 	private string $tag;
 	private array  $classes;
 	private array  $attrs;
@@ -51,7 +55,6 @@ class Card_Controller extends Abstract_Controller {
 	private string $variation;
 	private array  $media_wrapper_classes;
 	private array  $body_wrapper_classes;
-	private int    $image;
 	/**
 	 * @var null|Deferred_Component
 	 * @uses components/container
@@ -89,7 +92,7 @@ class Card_Controller extends Abstract_Controller {
 		$this->variation             = (string) $args[ self::VARIATION ];
 		$this->media_wrapper_classes = (array) $args[ self::MEDIA_WRAPPER_CLASSES ];
 		$this->body_wrapper_classes  = (array) $args[ self::BODY_WRAPPER_CLASSES ];
-		$this->image                 = (int) $args[ self::IMAGE ];
+		$this->image                 = $args[ self::IMAGE ];
 		$this->meta_primary          = $args[ self::META_PRIMARY ];
 		$this->meta_secondary        = $args[ self::META_SECONDARY ];
 		$this->title                 = $args[ self::TITLE ];
@@ -171,7 +174,7 @@ class Card_Controller extends Abstract_Controller {
 		}
 
 		return [
-			Image_Controller::ATTACHMENT   => Image::factory( (int) $this->image ),
+			Image_Controller::IMG_ID       => $this->image,
 			Image_Controller::AS_BG        => true,
 			Image_Controller::WRAPPER_TAG  => 'div',
 			Image_Controller::CLASSES      => [ 'c-card__image', 'c-image--bg' ],
