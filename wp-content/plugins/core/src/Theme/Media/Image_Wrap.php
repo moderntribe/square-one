@@ -6,7 +6,6 @@ class Image_Wrap {
 
 	/**
 	 * Customize WP non-captioned image output
-	 * TODO: @backend code review this
 	 *
 	 * @param $html
 	 *
