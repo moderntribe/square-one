@@ -61,7 +61,7 @@ salient details. Here's the HTML we want to generate from a Button component:
 
 ## HTML Templates
 
-Our Button component's directory will contain a PHP file named `button.twig`. It will look like:
+Our Button component's directory will contain a PHP file named `button.php`. It will look like:
 
 ```php
 <?php
