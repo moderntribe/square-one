@@ -136,7 +136,7 @@ class Card_Grid_Controller extends Abstract_Controller {
 
 		return [
 			Content_Block_Controller::TAG     => 'header',
-			Content_Block_Controller::LAYOUT  => Content_Block_Controller::LAYOUT_CENTER,
+			Content_Block_Controller::LAYOUT  => $this->layout === Card_Grid::LAYOUT_INLINE ?: Content_Block_Controller::LAYOUT_CENTER,
 			Content_Block_Controller::TITLE   => $this->get_title(),
 			Content_Block_Controller::CONTENT => $this->get_content(),
 			Content_Block_Controller::CTA     => $this->get_cta(),
