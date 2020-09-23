@@ -85,6 +85,13 @@ class Card_Grid_Controller extends Abstract_Controller {
 	/**
 	 * @return string
 	 */
+	public function get_layout(): string {
+		return $this->layout;
+	}
+
+	/**
+	 * @return string
+	 */
 	public function get_classes(): string {
 		$this->classes[] = 'b-card-grid--layout-' . $this->layout;
 
@@ -136,7 +143,7 @@ class Card_Grid_Controller extends Abstract_Controller {
 			Content_Block_Controller::CLASSES => [
 				'c-block__content-block',
 				'c-block__header',
-				'b-card-grid__content',
+				'b-card-grid__header'
 			],
 		];
 	}

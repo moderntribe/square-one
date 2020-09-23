@@ -186,8 +186,8 @@ class Card_Grid extends Block_Config {
 				'type'            => 'image_select',
 				'name'            => self::LAYOUT,
 				'choices'         => [
-					self::LAYOUT_STACKED => __( 'Content Stacked', 'tribe' ),
-					self::LAYOUT_INLINE  => __( 'Content Inline', 'tribe' ),
+					self::LAYOUT_STACKED => __( 'Stacked', 'tribe' ),
+					self::LAYOUT_INLINE  => __( 'Inline', 'tribe' ),
 				],
 				'default_value'   => self::LAYOUT_STACKED,
 				'multiple'        => 0,
