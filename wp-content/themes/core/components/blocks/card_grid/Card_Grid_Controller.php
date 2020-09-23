@@ -9,9 +9,11 @@ use Tribe\Project\Templates\Components\card\Card_Controller;
 use Tribe\Project\Templates\Components\container\Container_Controller;
 use Tribe\Project\Templates\Components\content_block\Content_Block_Controller;
 use Tribe\Project\Templates\Components\Deferred_Component;
+use Tribe\Project\Templates\Components\image\Image_Controller;
 use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Templates\Components\text\Text_Controller;
 use Tribe\Project\Templates\Models\Post_List_Object;
+use Tribe\Project\Theme\Config\Image_Sizes;
 
 class Card_Grid_Controller extends Abstract_Controller {
 	public const TITLE             = 'title';
@@ -153,7 +155,7 @@ class Card_Grid_Controller extends Abstract_Controller {
 		foreach ( $this->posts as $post ) {
 			$link    = $post->get_link();
 			$cards[] = [
-				Card_Controller::TITLE   => defer_template_part(
+				Card_Controller::TITLE => defer_template_part(
 					'components/text/text',
 					null,
 					[
@@ -167,8 +169,19 @@ class Card_Grid_Controller extends Abstract_Controller {
 						Text_Controller::CONTENT => $post->get_excerpt(),
 					]
 				),
-				Card_Controller::IMAGE   => $post->get_image_id(),
-				Card_Controller::CTA     => defer_template_part(
+				Card_Controller::IMAGE => defer_template_part(
+					'components/image/image',
+					null,
+					[
+						Image_Controller::IMG_ID       => $post->get_image_id(),
+						Image_Controller::SRC_SIZE     => Image_Sizes::FOUR_THREE,
+						Image_Controller::SRCSET_SIZES => [
+							Image_Sizes::FOUR_THREE,
+							Image_Sizes::FOUR_THREE_SMALL,
+						],
+					]
+				),
+				Card_Controller::CTA => defer_template_part(
 					'components/link/link',
 					null,
 					[
