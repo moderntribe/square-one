@@ -26,54 +26,25 @@ also scope stanford 125
 $c = Card_Controller::factory( $args );
 ?>
 
-<<?php echo $c->get_tag(); ?>
-	<?php echo $c->get_classes(); ?>
-	<?php echo$c->get_attrs(); ?>
->
+<<?php echo $c->get_tag(); ?> <?php echo $c->get_classes(); ?> <?php echo$c->get_attrs(); ?>>
 
-	<?php if ( ! empty( $c->get_image_args() ) ) { ?>
-		<div <?php echo $c->get_media_wrapper_classes(); ?>>
-			<?php get_template_part(
-				'components/image/image',
-				null,
-				$c->get_image_args()
-			); ?>
+	<?php if ( ! empty( $c->render_image() ) ) { ?>
+		<div class="c-card__media">
+			<?php echo $c->render_image(); ?>
 		</div>
 	<?php } ?>
 
-	<div <?php echo $c->get_body_wrapper_classes(); ?>>
+	<div class="c-card__content">
 
-		<?php if ( ! empty( $c->render_title() ) ) { ?>
-			<header class="c-card__header c-card__section">
+		<?php echo $c->render_meta_primary(); ?>
 
-				<?php get_template_part(
-					'components/container/container',
-					null,
-					$c->render_meta_primary()
-				); ?>
+		<?php echo $c->render_title(); ?>
 
-				<?php echo $c->render_title(); ?>
+		<?php echo $c->render_meta_secondary(); ?>
 
-				<?php  get_template_part(
-					'components/container/container',
-					null,
-					$c->render_meta_secondary()
-				); ?>
+		<?php echo $c->render_description(); ?>
 
-			</header>
-		<?php } ?>
-
-		<?php if ( ! empty( $c->render_content() ) ) { ?>
-			<div class="c-card__content c-card__section">
-				<?php echo $c->render_content(); ?>
-			</div>
-		<?php } ?>
-
-		<?php if ( ! empty( $c->render_cta() ) ) {  ?>
-			<footer class="c-card__footer c-card__section">
-				<?php echo $c->render_cta(); ?>
-			</footer>
-		<?php } ?>
+		<?php get_template_part( 'components/container/container', null, $c->get_cta_args() ); ?>
 
 	</div>
 
