@@ -112,6 +112,10 @@ class Card_Controller extends Abstract_Controller {
 	 * @return Deferred_Component|null
 	 */
 	public function render_image() {
+		if ( empty( $this->image ) ) {
+			return null;
+		}
+
 		$this->image[ Image_Controller::CLASSES ][] = 'c-card__image';
 
 		return $this->image;
@@ -121,6 +125,10 @@ class Card_Controller extends Abstract_Controller {
 	 * @return Deferred_Component|null
 	 */
 	public function render_meta_primary() {
+		if ( empty( $this->meta_primary ) ) {
+			return null;
+		}
+
 		$this->meta_primary[ Container_Controller::CLASSES ][] = 'c-card__meta';
 		$this->meta_primary[ Container_Controller::CLASSES ][] = 'c-card__meta--primary';
 
@@ -131,6 +139,10 @@ class Card_Controller extends Abstract_Controller {
 	 * @return Deferred_Component|null
 	 */
 	public function render_meta_secondary() {
+		if ( empty( $this->meta_secondary ) ) {
+			return null;
+		}
+
 		$this->meta_secondary[ Container_Controller::CLASSES ][] = 'c-card__meta';
 		$this->meta_secondary[ Container_Controller::CLASSES ][] = 'c-card__meta--secondary';
 
@@ -141,6 +153,10 @@ class Card_Controller extends Abstract_Controller {
 	 * @return Deferred_Component|null
 	 */
 	public function render_title() {
+		if ( empty( $this->title ) ) {
+			return null;
+		}
+
 		$this->title[ Text_Controller::CLASSES ][] = 'c-card__title';
 
 		return $this->title;
@@ -150,6 +166,10 @@ class Card_Controller extends Abstract_Controller {
 	 * @return Deferred_Component|null
 	 */
 	public function render_description() {
+		if ( empty( $this->description ) ) {
+			return null;
+		}
+
 		$this->description[ Container_Controller::CLASSES ][] = 'c-card__description';
 
 		return $this->description;
