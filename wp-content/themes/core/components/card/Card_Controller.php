@@ -16,6 +16,8 @@ class Card_Controller extends Abstract_Controller {
 	public const CLASSES         = 'classes';
 	public const ATTRS           = 'attrs';
 	public const IMAGE           = 'image';
+	public const MEDIA_CLASSES   = 'media_classes';
+	public const CONTENT_CLASSES = 'content_classes';
 	public const META_PRIMARY    = 'meta_primary';
 	public const META_SECONDARY  = 'meta_secondary';
 	public const TITLE           = 'title';
@@ -31,6 +33,8 @@ class Card_Controller extends Abstract_Controller {
 	private string $tag;
 	private array  $classes;
 	private array  $attrs;
+	private array  $media_classes;
+	private array  $content_classes;
 	private string $style;
 	private bool   $use_target_link;
 
@@ -76,6 +80,8 @@ class Card_Controller extends Abstract_Controller {
 		$this->tag             = (string) $args[ self::TAG ];
 		$this->classes         = (array) $args[ self::CLASSES ];
 		$this->attrs           = (array) $args[ self::ATTRS ];
+		$this->media_classes   = (array) $args[ self::MEDIA_CLASSES ];
+		$this->content_classes = (array) $args[ self::CONTENT_CLASSES ];
 		$this->style           = (string) $args[ self::STYLE ];
 		$this->use_target_link = (bool) $args[ self::USE_TARGET_LINK ];
 		$this->image           = $args[ self::IMAGE ];
@@ -91,6 +97,8 @@ class Card_Controller extends Abstract_Controller {
 			self::TAG             => 'article',
 			self::CLASSES         => [],
 			self::ATTRS           => [],
+			self::MEDIA_CLASSES   => [],
+			self::CONTENT_CLASSES => [],
 			self::STYLE           => self::STYLE_PLAIN,
 			self::USE_TARGET_LINK => false,
 			self::IMAGE           => null,
@@ -104,7 +112,9 @@ class Card_Controller extends Abstract_Controller {
 
 	protected function required(): array {
 		return [
-			self::CLASSES => [ 'c-card' ],
+			self::CLASSES         => [ 'c-card' ],
+			self::MEDIA_CLASSES   => [ 'c-card__media' ],
+			self::CONTENT_CLASSES => [ 'c-card__content' ],
 		];
 	}
 
@@ -130,6 +140,14 @@ class Card_Controller extends Abstract_Controller {
 		}
 
 		return Markup_Utils::concat_attrs( $this->attrs );
+	}
+
+	public function get_media_classes(): string {
+		return Markup_Utils::class_attribute( $this->media_classes );
+	}
+
+	public function get_content_classes(): string {
+		return Markup_Utils::class_attribute( $this->content_classes );
 	}
 
 	/**

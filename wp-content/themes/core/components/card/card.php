@@ -29,12 +29,12 @@ $c = Card_Controller::factory( $args );
 <<?php echo $c->get_tag(); ?> <?php echo $c->get_classes(); ?> <?php echo$c->get_attrs(); ?>>
 
 	<?php if ( ! empty( $c->render_image() ) ) { ?>
-		<div class="c-card__media">
+		<div <?php echo $c->get_media_classes(); ?>>
 			<?php echo $c->render_image(); ?>
 		</div>
 	<?php } ?>
 
-	<div class="c-card__content">
+	<div <?php echo $c->get_content_classes(); ?>>
 
 		<?php echo $c->render_meta_primary(); ?>
 
