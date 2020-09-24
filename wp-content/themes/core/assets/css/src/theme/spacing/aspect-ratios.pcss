@@ -2,6 +2,21 @@
  *
  * Aspect Ratio Helpers
  *
+ * Useful for fixing the height of an element based on it's width.
+ *
+ * Apply the A/R class on the parent element.
+ * A `:before` pseudo element will in inserted on parent with the correct
+ * amount of padding and the child element will get absolutely positioned
+ * within.
+ *
+ * Note: these A/R classes don't automatically handle background image size
+ * or position since these are not background image specific.
+ *
+ * Example:
+ * <figure class="c-image c-image--bg s-aspect-ratio-4-3">
+ *     <div class="c-image__image" src="..."></div>
+ * </figure>
+ *
  * ------------------------------------------------------------------------- */
 
 .s-aspect-ratio-21-9 {
