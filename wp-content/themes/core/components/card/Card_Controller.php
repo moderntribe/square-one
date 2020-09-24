@@ -105,6 +105,10 @@ class Card_Controller extends Abstract_Controller {
 	}
 
 	public function get_classes(): string {
+		if ( $this->use_target_link ) {
+			$this->classes[] = 'has-target-link';
+		}
+
 		return Markup_Utils::class_attribute( $this->classes );
 	}
 

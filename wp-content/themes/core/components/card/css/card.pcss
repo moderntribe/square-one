@@ -7,6 +7,15 @@
 .c-card {
 	display: flex;
 	flex-flow: column nowrap;
+
+	/* CASE: Whole card is a link. */
+	&.has-target-link {
+		transition: var(--transition);
+
+		&:hover {
+			cursor: pointer;
+		}
+	}
 }
 
 /* -----------------------------------------------------------------------------
