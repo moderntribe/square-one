@@ -12,19 +12,21 @@ use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Templates\Components\text\Text_Controller;
 
 class Card_Controller extends Abstract_Controller {
-	public const TAG            = 'tag';
-	public const CLASSES        = 'classes';
-	public const ATTRS          = 'attrs';
-	public const IMAGE          = 'image';
-	public const META_PRIMARY   = 'meta_primary';
-	public const META_SECONDARY = 'meta_secondary';
-	public const TITLE          = 'title';
-	public const DESCRIPTION    = 'description';
-	public const CTA            = 'cta';
+	public const TAG             = 'tag';
+	public const CLASSES         = 'classes';
+	public const ATTRS           = 'attrs';
+	public const IMAGE           = 'image';
+	public const META_PRIMARY    = 'meta_primary';
+	public const META_SECONDARY  = 'meta_secondary';
+	public const TITLE           = 'title';
+	public const DESCRIPTION     = 'description';
+	public const CTA             = 'cta';
+	public const USE_TARGET_LINK = 'use_target_link';
 
 	private string $tag;
 	private array  $classes;
 	private array  $attrs;
+	private bool   $use_target_link;
 
 	/**
 	 * @var null|Deferred_Component
@@ -65,28 +67,30 @@ class Card_Controller extends Abstract_Controller {
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
 
-		$this->tag            = (string) $args[ self::TAG ];
-		$this->classes        = (array) $args[ self::CLASSES ];
-		$this->attrs          = (array) $args[ self::ATTRS ];
-		$this->image          = $args[ self::IMAGE ];
-		$this->meta_primary   = $args[ self::META_PRIMARY ];
-		$this->meta_secondary = $args[ self::META_SECONDARY ];
-		$this->title          = $args[ self::TITLE ];
-		$this->description    = $args[ self::DESCRIPTION ];
-		$this->cta            = $args[ self::CTA ];
+		$this->tag             = (string) $args[ self::TAG ];
+		$this->classes         = (array) $args[ self::CLASSES ];
+		$this->attrs           = (array) $args[ self::ATTRS ];
+		$this->use_target_link = (bool) $args[ self::USE_TARGET_LINK ];
+		$this->image           = $args[ self::IMAGE ];
+		$this->meta_primary    = $args[ self::META_PRIMARY ];
+		$this->meta_secondary  = $args[ self::META_SECONDARY ];
+		$this->title           = $args[ self::TITLE ];
+		$this->description     = $args[ self::DESCRIPTION ];
+		$this->cta             = $args[ self::CTA ];
 	}
 
 	protected function defaults(): array {
 		return [
-			self::TAG            => 'article',
-			self::CLASSES        => [],
-			self::ATTRS          => [],
-			self::IMAGE          => null,
-			self::META_PRIMARY   => null,
-			self::META_SECONDARY => null,
-			self::TITLE          => null,
-			self::DESCRIPTION    => null,
-			self::CTA            => null,
+			self::TAG             => 'article',
+			self::CLASSES         => [],
+			self::ATTRS           => [],
+			self::USE_TARGET_LINK => false,
+			self::IMAGE           => null,
+			self::META_PRIMARY    => null,
+			self::META_SECONDARY  => null,
+			self::TITLE           => null,
+			self::DESCRIPTION     => null,
+			self::CTA             => null,
 		];
 	}
 
@@ -105,6 +109,10 @@ class Card_Controller extends Abstract_Controller {
 	}
 
 	public function get_attrs(): string {
+		if ( $this->use_target_link ) {
+			$this->attrs[ 'data-js' ] = 'use-target-link';
+		}
+
 		return Markup_Utils::concat_attrs( $this->attrs );
 	}
 

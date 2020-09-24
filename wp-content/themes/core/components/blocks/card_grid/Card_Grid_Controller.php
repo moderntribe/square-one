@@ -165,17 +165,19 @@ class Card_Grid_Controller extends Abstract_Controller {
 			$link    = $post->get_link();
 			$uuid    = uniqid( 'p-' );
 			$cards[] = [
-				Card_Controller::TITLE       => defer_template_part(
+				Card_Controller::USE_TARGET_LINK => true,
+				Card_Controller::TITLE           => defer_template_part(
 					'components/text/text',
 					null,
 					[
 						Text_Controller::TAG     => 'h3',
 						Text_Controller::CLASSES => [ 'h5' ],
 						Text_Controller::CONTENT => $post->get_title(),
+						// Required for screen reader accessibility, below.
 						Text_Controller::ATTRS   => [ 'id' => $uuid . '-title' ],
 					]
 				),
-				Card_Controller::DESCRIPTION => defer_template_part(
+				Card_Controller::DESCRIPTION     => defer_template_part(
 					'components/container/container',
 					null,
 					[
@@ -183,7 +185,7 @@ class Card_Grid_Controller extends Abstract_Controller {
 						Container_Controller::CLASSES => [ 't-sink', 's-sink' ],
 					],
 				),
-				Card_Controller::IMAGE => defer_template_part(
+				Card_Controller::IMAGE           => defer_template_part(
 					'components/image/image',
 					null,
 					[
@@ -195,25 +197,20 @@ class Card_Grid_Controller extends Abstract_Controller {
 						],
 					],
 				),
-				Card_Controller::CTA => defer_template_part(
+				Card_Controller::CTA             => defer_template_part(
 					'components/link/link',
 					null,
 					[
 						Link_Controller::CONTENT => __( 'Read More', 'tribe' ),
-						Link_Controller::URL     => $link[ 'url' ],
+						Link_Controller::URL     => $link['url'],
 						Link_Controller::CLASSES => [ 'a-cta' ],
-
-						/**
-						 * The following attributes allow the link to be read aloud for screen readers as:
-						 * "[Post title], link, Read More"
-						 *
-						 * This is the most accessible way to handle a "Read More" link applied to multiple
-						 * items on the same page.
-						 */
 						Link_Controller::ATTRS   => [
+							// These attrs provide the most screen reader accessible link.
 							'id'               => $uuid . '-link',
 							'aria-labelledby'  => $uuid . '-title',
 							'aria-describedby' => $uuid . '-link',
+							// Sets this link as the card's click-within target link.
+							'data-js'          => 'target-link',
 						],
 					]
 				),
