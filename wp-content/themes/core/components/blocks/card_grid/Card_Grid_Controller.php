@@ -118,6 +118,15 @@ class Card_Grid_Controller extends Abstract_Controller {
 	 * @return string
 	 */
 	public function get_loop_classes(): string {
+		$card_count = count( $this->posts );
+
+		if ( $this->layout === Card_Grid::LAYOUT_INLINE ) {
+			$card_count++;
+		}
+
+		$this->loop_classes[] = $card_count % 4 === 0 ? 'g-4-up' : 'g-3-up';
+		$this->loop_classes[] = 'g-centered';
+
 		return Markup_Utils::class_attribute( $this->loop_classes );
 	}
 

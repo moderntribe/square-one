@@ -21,18 +21,4 @@
  * Cards Loop
  * ----------------------------------------------------------------------------- */
 
-.b-card-grid__loop {
-	display: grid;
-	grid-gap: var(--grid-gutter-small);
-	grid-template-columns: repeat(auto-fit, minmax(min(var(--grid-3-col), 100%), var(--grid-4-col)));
-	/*grid-template-columns: repeat(auto-fill, minmax(var(--grid-3-col), var(--grid-4-col)));*/
-	justify-content: center;
-
-	@media (--viewport-medium) {
-		grid-gap: var(--grid-gutter-medium);
-	}
-
-	@media (--viewport-full) {
-		grid-gap: var(--grid-gutter);
-	}
-}
+.b-card-grid__loop {}
