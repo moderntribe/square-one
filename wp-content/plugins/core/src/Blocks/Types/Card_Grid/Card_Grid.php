@@ -197,7 +197,8 @@ class Card_Grid extends Block_Config {
 					self::NAME
 				),
 				'image_extension' => 'svg',
-			] ) );
+			] ) 
+		);
 	}
 
 	/**
