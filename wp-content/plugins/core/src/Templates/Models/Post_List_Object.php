@@ -11,72 +11,135 @@ class Post_List_Object {
 	public const LINK      = 'link';
 	public const POST_TYPE = 'post_type';
 
-	private int $post_id;
-	private string $title;
-	private string $content;
-	private string $excerpt;
-	private int $image_id;
-	private array $link;
-	private string $post_type;
+	/**
+	 * @var int
+	 */
+	private $post_id;
 
-	public function __construct( array $args = [] ) {
-		$this->post_id   = (int) $args[ self::POST_ID ] ?? 0;
-		$this->title     = (string) $args[ self::TITLE ] ?? '';
-		$this->content   = (string) $args[ self::CONTENT ] ?? '';
-		$this->excerpt   = (string) $args[ self::EXCERPT ] ?? '';
-		$this->image_id  = (int) $args[ self::IMAGE ] ?? 0;
-		$this->link      = (array) $args[ self::LINK ] ?? [];
-		$this->post_type = (string) $args[ self::POST_TYPE ] ?? '';
-	}
+	/**
+	 * @var string
+	 */
+	private $title;
+
+	/**
+	 * @var string
+	 */
+	private $content;
+
+	/**
+	 * @var string
+	 */
+	private $excerpt;
+
+	/**
+	 * @var int
+	 */
+	private $image_id;
+
+	/**
+	 * @var array
+	 */
+	private $link;
+
+	/**
+	 * @var string
+	 */
+	private $post_type;
 
 	/**
 	 * @return int
 	 */
-	public function get_post_id(): int {
+	public function get_post_id() {
 		return $this->post_id;
 	}
 
 	/**
 	 * @return string
 	 */
-	public function get_title(): string {
+	public function get_title() {
 		return $this->title;
 	}
 
 	/**
 	 * @return string
 	 */
-	public function get_content(): string {
+	public function get_content() {
 		return $this->content;
 	}
 
 	/**
 	 * @return string
 	 */
-	public function get_excerpt(): string {
+	public function get_excerpt() {
 		return $this->excerpt;
 	}
 
 	/**
 	 * @return int
 	 */
-	public function get_image_id(): int {
+	public function get_image_id() {
 		return $this->image_id;
 	}
 
 	/**
 	 * @return array
 	 */
-	public function get_link(): array {
+	public function get_link() {
 		return $this->link;
 	}
 
 	/**
 	 * @return string
 	 */
-	public function get_post_type(): string {
+	public function get_post_type() {
 		return $this->post_type;
 	}
 
+
+	public function set_post_id( int $post_id ) {
+		$this->post_id = $post_id;
+
+		return $this;
+	}
+
+
+	public function set_title( string $title ) {
+		$this->title = $title;
+
+		return $this;
+	}
+
+
+	public function set_content( string $content ) {
+		$this->content = $content;
+
+		return $this;
+	}
+
+
+	public function set_excerpt( string $excerpt ) {
+		$this->excerpt = $excerpt;
+
+		return $this;
+	}
+
+
+	public function set_image_id( int $id ) {
+		$this->image_id = $id;
+
+		return $this;
+	}
+
+	public function set_link( array $link ) {
+		$this->link = $link;
+
+		return $this;
+	}
+
+	public function set_post_type( string $post_type ) {
+		$this->post_type = $post_type;
+
+		return $this;
+	}
 
 }
