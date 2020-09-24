@@ -37,10 +37,16 @@
     }
   },
   "browserslist": [
-    "last 3 versions",
-    "IE 11",
-    "iOS >= 9",
-    "Safari >= 9"
+    "last 2 versions",
+    "safari >= 13",
+    "ios >= 13",
+    "android >= 5.1",
+    "not ie <= 11",
+    "not ie_mob <= 11",
+    "not op_mini all",
+    "not bb <= 10",
+    "not samsung 4",
+    "not op_mob <= 12.1"
   ],
   "engines": {
     "node": "12.13.1",
@@ -74,7 +80,7 @@
   "dependencies": {
     "@types/react": "^16.9.11",
     "@vimeo/player": "^2.10.0",
-    "caniuse-lite": "1.0.30001011",
+    "caniuse-lite": "1.0.30001135",
     "classnames": "^2.2.6",
     "delegate": "^3.2.0",
     "es6-promise": "^4.2.8",
