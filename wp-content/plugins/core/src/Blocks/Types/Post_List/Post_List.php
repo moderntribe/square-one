@@ -72,7 +72,6 @@ class Post_List extends Block_Config {
 		)->add_field(
 			$this->get_manual_group()
 		);
-
 	}
 
 	protected function get_manual_group(): Repeater {

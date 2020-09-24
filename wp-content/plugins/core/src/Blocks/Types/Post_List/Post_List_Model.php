@@ -101,9 +101,9 @@ class Post_List_Model extends Base_Model {
 	 */
 	private function is_valid_post( Post_List_Object $post_object ): bool {
 		return ! ( empty( $post_object->get_title() ) &&
-		           empty( $post_object->get_excerpt() ) &&
-		           ! $post_object->get_image_id() &&
-		           empty( $post_object->get_link() ) );
+				   empty( $post_object->get_excerpt() ) &&
+				   ! $post_object->get_image_id() &&
+				   empty( $post_object->get_link() ) );
 	}
 
 	/**
@@ -178,16 +178,16 @@ class Post_List_Model extends Base_Model {
 		setup_postdata( $post );
 		$post_obj = new Post_List_Object();
 		$post_obj->set_title( get_the_title() )
-		         ->set_content( get_the_content() )
-		         ->set_excerpt( get_the_excerpt() )
-		         ->set_image_id( get_post_thumbnail_id() )
-		         ->set_link( [
-			         'url'    => get_the_permalink(),
-			         'target' => '',
-			         'label'  => get_the_title(),
-		         ] )
-		         ->set_post_type( get_post_type() )
-		         ->set_post_id( $_post->ID );
+				 ->set_content( get_the_content() )
+				 ->set_excerpt( get_the_excerpt() )
+				 ->set_image_id( get_post_thumbnail_id() )
+				 ->set_link( [
+					 'url'    => get_the_permalink(),
+					 'target' => '',
+					 'label'  => get_the_title(),
+				 ] )
+				 ->set_post_type( get_post_type() )
+				 ->set_post_id( $_post->ID );
 
 		wp_reset_postdata();
 
