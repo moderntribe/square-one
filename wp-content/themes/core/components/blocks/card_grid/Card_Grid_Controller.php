@@ -192,7 +192,7 @@ class Card_Grid_Controller extends Abstract_Controller {
 					[
 						Image_Controller::IMG_ID       => $post->get_image_id(),
 						Image_Controller::AS_BG        => true,
-						Image_Controller::CLASSES      => [ 'c-image--bg', 's-aspect-4-3' ],
+						Image_Controller::CLASSES      => [ 'c-image--bg', 's-aspect-ratio-4-3' ],
 						Image_Controller::SRC_SIZE     => Image_Sizes::FOUR_THREE,
 						Image_Controller::SRCSET_SIZES => [
 							Image_Sizes::FOUR_THREE,
