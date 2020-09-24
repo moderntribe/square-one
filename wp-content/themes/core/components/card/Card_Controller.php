@@ -23,9 +23,15 @@ class Card_Controller extends Abstract_Controller {
 	public const CTA             = 'cta';
 	public const USE_TARGET_LINK = 'use_target_link';
 
+	public const STYLE          = 'style';
+	public const STYLE_PLAIN    = 'plain';
+	public const STYLE_ELEVATED = 'elevated';
+	public const STYLE_OUTLINED = 'outlined';
+
 	private string $tag;
 	private array  $classes;
 	private array  $attrs;
+	private string $style;
 	private bool   $use_target_link;
 
 	/**
@@ -70,6 +76,7 @@ class Card_Controller extends Abstract_Controller {
 		$this->tag             = (string) $args[ self::TAG ];
 		$this->classes         = (array) $args[ self::CLASSES ];
 		$this->attrs           = (array) $args[ self::ATTRS ];
+		$this->style           = (string) $args[ self::STYLE ];
 		$this->use_target_link = (bool) $args[ self::USE_TARGET_LINK ];
 		$this->image           = $args[ self::IMAGE ];
 		$this->meta_primary    = $args[ self::META_PRIMARY ];
@@ -84,6 +91,7 @@ class Card_Controller extends Abstract_Controller {
 			self::TAG             => 'article',
 			self::CLASSES         => [],
 			self::ATTRS           => [],
+			self::STYLE           => self::STYLE_PLAIN,
 			self::USE_TARGET_LINK => false,
 			self::IMAGE           => null,
 			self::META_PRIMARY    => null,
@@ -107,6 +115,10 @@ class Card_Controller extends Abstract_Controller {
 	public function get_classes(): string {
 		if ( $this->use_target_link ) {
 			$this->classes[] = 'has-target-link';
+		}
+
+		if ( $this->style !== self::STYLE_PLAIN ) {
+			$this->classes[] = 'c-card--style-' . $this->style;
 		}
 
 		return Markup_Utils::class_attribute( $this->classes );

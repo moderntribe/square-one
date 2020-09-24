@@ -14,9 +14,20 @@
 
 		&:hover {
 			cursor: pointer;
+		}
+	}
 
-			.is-target-link {
+	/* CASE: Style: Outlined */
+	&.c-card--style-outlined {
+		padding: var(--spacer-30) 0;
+		border: 1px solid var(--color-border);
 
+		/* CASE: Whole card is a link. */
+		&.has-target-link {
+
+			&:hover,
+			&:focus-within {
+				border-color: var(--color-link-hover);
 			}
 		}
 	}
@@ -27,7 +38,12 @@
  * ----------------------------------------------------------------------------- */
 
 .c-card__media {
-	margin-bottom: var(--spacer-40);
+	margin-bottom: var(--spacer-30);
+
+	/* CASE: Style: Outlined */
+	.c-card--style-outlined & {
+		margin-top: calc(-1 * var(--spacer-30));
+	}
 }
 
 /* -----------------------------------------------------------------------------
@@ -36,6 +52,11 @@
 
 .c-card__content {
 	margin: 0 0 auto; /* Pushes the CTA to the bottom of the card. */
+
+	/* CASE: Style: Outlined */
+	.c-card--style-outlined & {
+		padding: 0 var(--spacer-30);
+	}
 }
 
 /* -----------------------------------------------------------------------------
@@ -74,4 +95,9 @@
 
 .c-card__cta {
 	margin-top: var(--spacer-30);
+
+	/* CASE: Style: Outlined */
+	.c-card--style-outlined & {
+		padding: 0 var(--spacer-30);
+	}
 }
