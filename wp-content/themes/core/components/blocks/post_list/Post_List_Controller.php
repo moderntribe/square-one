@@ -87,17 +87,22 @@ class Post_List_Controller extends Abstract_Controller {
 		$cards = [];
 		foreach ( $this->posts as $post ) {
 			$link    = $post->get_link();
+			$uuid    = uniqid( 'p-' );
 			$cards[] = [
-				Card_Controller::TITLE       => defer_template_part(
+				Card_Controller::STYLE           => Card_Controller::STYLE_ELEVATED,
+				Card_Controller::USE_TARGET_LINK => true,
+				Card_Controller::TITLE           => defer_template_part(
 					'components/text/text',
 					null,
 					[
 						Text_Controller::TAG     => 'h3',
 						Text_Controller::CLASSES => [ 'h5' ],
 						Text_Controller::CONTENT => $post->get_title(),
+						// Required for screen reader accessibility, below.
+						Text_Controller::ATTRS   => [ 'id' => $uuid . '-title' ],
 					]
 				),
-				Card_Controller::DESCRIPTION => defer_template_part(
+				Card_Controller::DESCRIPTION     => defer_template_part(
 					'components/container/container',
 					null,
 					[
@@ -105,11 +110,13 @@ class Post_List_Controller extends Abstract_Controller {
 						Container_Controller::CLASSES => [ 't-sink', 's-sink' ],
 					],
 				),
-				Card_Controller::IMAGE => defer_template_part(
+				Card_Controller::IMAGE           => defer_template_part(
 					'components/image/image',
 					null,
 					[
 						Image_Controller::IMG_ID       => $post->get_image_id(),
+						Image_Controller::AS_BG        => true,
+						Image_Controller::CLASSES      => [ 'c-image--bg', 's-aspect-4-3' ],
 						Image_Controller::SRC_SIZE     => Image_Sizes::FOUR_THREE,
 						Image_Controller::SRCSET_SIZES => [
 							Image_Sizes::FOUR_THREE,
@@ -117,13 +124,21 @@ class Post_List_Controller extends Abstract_Controller {
 						],
 					],
 				),
-				Card_Controller::CTA => defer_template_part(
+				Card_Controller::CTA             => defer_template_part(
 					'components/link/link',
 					null,
 					[
-						Link_Controller::CONTENT => $link[ 'label' ] ?? $link[ 'url' ],
-						Link_Controller::URL     => $link[ 'url' ],
-						Link_Controller::CLASSES => [ 'a-cta' ],
+						Link_Controller::CONTENT => __( 'Read More', 'tribe' ),
+						Link_Controller::URL     => $link['url'],
+						Link_Controller::CLASSES => [ 'a-cta', 'is-target-link' ],
+						Link_Controller::ATTRS   => [
+							// These attrs provide the most screen reader accessible link.
+							'id'               => $uuid . '-link',
+							'aria-labelledby'  => $uuid . '-title',
+							'aria-describedby' => $uuid . '-link',
+							// Sets this link as the card's click-within target link.
+							'data-js'          => 'target-link',
+						],
 					]
 				),
 			];
