@@ -5,6 +5,7 @@
  */
 
 import accordion from 'components/accordion';
+import card from 'components/card';
 import comments from 'components/comments';
 import share from 'components/share';
 import slider from 'components/slider';
@@ -13,6 +14,7 @@ import video from 'components/video';
 
 const init = () => {
 	accordion();
+	card();
 	comments();
 	share();
 	slider();
