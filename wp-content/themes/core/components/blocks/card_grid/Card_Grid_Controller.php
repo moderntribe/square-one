@@ -165,6 +165,7 @@ class Card_Grid_Controller extends Abstract_Controller {
 			$link    = $post->get_link();
 			$uuid    = uniqid( 'p-' );
 			$cards[] = [
+				Card_Controller::STYLE           => Card_Controller::STYLE_ELEVATED,
 				Card_Controller::USE_TARGET_LINK => true,
 				Card_Controller::TITLE           => defer_template_part(
 					'components/text/text',
@@ -190,6 +191,8 @@ class Card_Grid_Controller extends Abstract_Controller {
 					null,
 					[
 						Image_Controller::IMG_ID       => $post->get_image_id(),
+						Image_Controller::AS_BG        => true,
+						Image_Controller::CLASSES      => [ 'c-image--bg', 's-aspect-4-3' ],
 						Image_Controller::SRC_SIZE     => Image_Sizes::FOUR_THREE,
 						Image_Controller::SRCSET_SIZES => [
 							Image_Sizes::FOUR_THREE,
@@ -203,7 +206,7 @@ class Card_Grid_Controller extends Abstract_Controller {
 					[
 						Link_Controller::CONTENT => __( 'Read More', 'tribe' ),
 						Link_Controller::URL     => $link['url'],
-						Link_Controller::CLASSES => [ 'a-cta' ],
+						Link_Controller::CLASSES => [ 'a-cta', 'is-target-link' ],
 						Link_Controller::ATTRS   => [
 							// These attrs provide the most screen reader accessible link.
 							'id'               => $uuid . '-link',
