@@ -20,6 +20,7 @@ class Content_Columns_Model extends Base_Model {
 			Content_Columns_Block_Controller::CTA              => $this->get_cta_args( $this->get( Content_Columns::CTA, [] ) ),
 			Content_Columns_Block_Controller::CLASSES          => $this->get_classes(),
 			Content_Columns_Block_Controller::COLUMNS          => $this->get_rows(),
+			Content_Columns_Block_Controller::CONTENT_ALIGN    => $this->get( Content_Columns::CONTENT_ALIGN, Content_Columns::CONTENT_ALIGN_LEFT ),
 		];
 	}
 

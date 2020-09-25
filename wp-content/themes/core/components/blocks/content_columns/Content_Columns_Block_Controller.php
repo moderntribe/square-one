@@ -3,6 +3,7 @@
 namespace Tribe\Project\Templates\Components\blocks\content_columns;
 
 use Tribe\Libs\Utils\Markup_Utils;
+use \Tribe\Project\Blocks\Types\Content_Columns\Content_Columns;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\container\Container_Controller;
 use Tribe\Project\Templates\Components\content_block\Content_Block_Controller;
@@ -22,6 +23,7 @@ class Content_Columns_Block_Controller extends Abstract_Controller {
 	public const CTA               = 'cta';
 	public const COLUMNS           = 'columns';
 	public const COLUMN_CLASSES    = 'columns_classes';
+	public const CONTENT_ALIGN     = 'content_align';
 
 	private array  $classes;
 	private array  $attrs;
@@ -32,6 +34,7 @@ class Content_Columns_Block_Controller extends Abstract_Controller {
 	private array  $container_classes;
 	private array  $content_classes;
 	private array  $column_classes;
+	private string $content_align;
 
 	/**
 	 * @var Content_Column[]
@@ -51,6 +54,7 @@ class Content_Columns_Block_Controller extends Abstract_Controller {
 		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
 		$this->content_classes   = (array) $args[ self::CONTENT_CLASSES ];
 		$this->column_classes    = (array) $args[ self::COLUMN_CLASSES ];
+		$this->content_align     = (string) $args[ self::CONTENT_ALIGN ];
 	}
 
 	/**
@@ -68,6 +72,7 @@ class Content_Columns_Block_Controller extends Abstract_Controller {
 			self::LEADIN            => '',
 			self::DESCRIPTION       => '',
 			self::CTA               => [],
+			self::CONTENT_ALIGN     => Content_Columns::CONTENT_ALIGN_CENTER,
 		];
 	}
 
@@ -89,6 +94,7 @@ class Content_Columns_Block_Controller extends Abstract_Controller {
 		}
 
 		return [
+			Content_Block_Controller::LAYOUT  => $this->content_align,
 			Content_Block_Controller::TAG     => 'header',
 			Content_Block_Controller::LEADIN  => $this->get_leadin(),
 			Content_Block_Controller::TITLE   => $this->get_title(),
@@ -173,6 +179,7 @@ class Content_Columns_Block_Controller extends Abstract_Controller {
 		$title_tag     = empty( $this->title ) ? 'h2' : 'h3';
 		$title_classes = [ count( $this->columns ) === 1 ? 'h3' : 'h4' ];
 		return [
+			Content_Block_Controller::LAYOUT      => $this->content_align,
 			Content_Block_Controller::TITLE       => defer_template_part(
 				'components/text/text',
 				null,

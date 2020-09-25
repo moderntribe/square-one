@@ -19,6 +19,10 @@ class Content_Columns extends Block_Config {
 	public const COLUMN_CONTENT = 'col_content';
 	public const COLUMN_CTA     = 'col_cta';
 
+	public const CONTENT_ALIGN        = 'content-align';
+	public const CONTENT_ALIGN_LEFT   = 'left';
+	public const CONTENT_ALIGN_CENTER = 'center';
+
 	/**
 	 * Add our block
 	 */
@@ -123,5 +127,23 @@ class Content_Columns extends Block_Config {
 		return $group;
 	}
 
-	public function add_settings() {}
+	public function add_settings() {
+		$this->add_setting( new Field( self::NAME . '_' . self::CONTENT_ALIGN, [
+			'label'           => __( 'Content Alignment', 'tribe' ),
+			'type'            => 'image_select',
+			'name'            => self::CONTENT_ALIGN,
+			'choices'         => [
+				self::CONTENT_ALIGN_CENTER => __( 'Center', 'tribe' ),
+				self::CONTENT_ALIGN_LEFT   => __( 'Left', 'tribe' ),
+			],
+			'default_value'   => self::CONTENT_ALIGN_CENTER,
+			'multiple'        => 0,
+			'image_path'      => sprintf(
+				'%sassets/img/admin/blocks/%s/',
+				trailingslashit( get_template_directory_uri() ),
+				self::NAME
+			),
+			'image_extension' => 'svg',
+		] ) );
+	}
 }
