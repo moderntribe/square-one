@@ -16,7 +16,13 @@
  * Content Columns: Header
  * ----------------------------------------------------------------------------- */
 
-.b-content-columns__header {}
+.b-content-columns__header {
+	margin-bottom: var(--spacer-40);
+
+	@media (--viewport-medium) {
+		margin-bottom: var(--spacer-60);
+	}
+}
 
 /* -----------------------------------------------------------------------------
  * Content Columns: Content

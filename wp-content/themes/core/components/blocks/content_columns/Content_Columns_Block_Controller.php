@@ -94,7 +94,6 @@ class Content_Columns_Block_Controller extends Abstract_Controller {
 			Content_Block_Controller::TITLE   => $this->get_title(),
 			Content_Block_Controller::CONTENT => $this->get_content(),
 			Content_Block_Controller::CTA     => $this->get_cta(),
-			Content_Block_Controller::LAYOUT  => Content_Block_Controller::LAYOUT_CENTER,
 			Content_Block_Controller::CLASSES => [
 				'c-block__content-block',
 				'c-block__header',
@@ -126,7 +125,7 @@ class Content_Columns_Block_Controller extends Abstract_Controller {
 			Text_Controller::CLASSES => [
 				'c-block__title',
 				'b-content-columns__title',
-				'h2',
+				'h3',
 			],
 			Text_Controller::CONTENT => $this->title ?? '',
 		] );
@@ -172,9 +171,8 @@ class Content_Columns_Block_Controller extends Abstract_Controller {
 
 	public function get_content_args( Content_Column $column ) {
 		$title_tag     = empty( $this->title ) ? 'h2' : 'h3';
-		$title_classes = [ count( $this->columns ) === 1 ? 'h2' : 'h3' ];
+		$title_classes = [ count( $this->columns ) === 1 ? 'h3' : 'h4' ];
 		return [
-			Content_Block_Controller::LAYOUT      => Content_Block_Controller::LAYOUT_CENTER,
 			Content_Block_Controller::TITLE       => defer_template_part(
 				'components/text/text',
 				null,
@@ -195,10 +193,14 @@ class Content_Columns_Block_Controller extends Abstract_Controller {
 				'components/link/link',
 				null,
 				[
-					Link_Controller::CLASSES => [ 'a-cta' ],
 					Link_Controller::CONTENT => $column->get_cta()[ Link_Controller::CONTENT ],
 					Link_Controller::URL     => $column->get_cta()[ Link_Controller::URL ],
 					Link_Controller::TARGET  => $column->get_cta()[ Link_Controller::TARGET ],
+					Link_Controller::CLASSES => [
+						'a-btn',
+						'a-btn--has-icon-after',
+						'icon-arrow-right'
+					],
 				]
 			),
 		];
