@@ -27,7 +27,8 @@ $c = Content_Columns_Block_Controller::factory( $args );
 					<?php get_template_part(
 						'components/content_block/content_block',
 						null,
-						$c->get_content_args( $column ) );
+						$c->get_content_args( $column ) 
+					);
 					?>
 				</div>
 			<?php } ?>
