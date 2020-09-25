@@ -11,40 +11,13 @@ class Post_List_Object {
 	public const LINK      = 'link';
 	public const POST_TYPE = 'post_type';
 
-	/**
-	 * @var int
-	 */
-	private $post_id;
-
-	/**
-	 * @var string
-	 */
-	private $title;
-
-	/**
-	 * @var string
-	 */
-	private $content;
-
-	/**
-	 * @var string
-	 */
-	private $excerpt;
-
-	/**
-	 * @var int
-	 */
-	private $image_id;
-
-	/**
-	 * @var array
-	 */
-	private $link;
-
-	/**
-	 * @var string
-	 */
-	private $post_type;
+	private int $post_id = 0;
+	private string $title = '';
+	private string $content = '';
+	private string $excerpt = '';
+	private int $image_id = 0;
+	private array $link = [];
+	private string $post_type = '';
 
 	/**
 	 * @return int
