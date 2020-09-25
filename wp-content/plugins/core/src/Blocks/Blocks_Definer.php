@@ -6,6 +6,7 @@ namespace Tribe\Project\Blocks;
 use DI;
 use Tribe\Libs\Container\Definer_Interface;
 use Tribe\Project\Blocks\Types\Buttons\Buttons;
+use Tribe\Project\Blocks\Types\Content_Columns\Content_Columns;
 use Tribe\Project\Blocks\Types\Interstitial\Interstitial;
 use Tribe\Project\Blocks\Types\Accordion\Accordion;
 use Tribe\Project\Blocks\Types\Hero\Hero;
@@ -30,6 +31,7 @@ class Blocks_Definer implements Definer_Interface {
 			self::TYPES => DI\add( [
 				DI\get( Accordion::class ),
 				DI\get( Buttons::class ),
+				DI\get( Content_Columns::class ),
 				DI\get( Hero::class ),
 				DI\get( Media_Text::class ),
 				DI\get( Interstitial::class ),
@@ -57,6 +59,7 @@ class Blocks_Definer implements Definer_Interface {
 			self::ALLOW_LIST => [
 				'acf/accordion',
 				'acf/buttons',
+				'acf/contentcolumns',
 				'acf/hero',
 				'acf/mediatext',
 				'acf/interstitial',
