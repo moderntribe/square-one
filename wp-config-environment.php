@@ -128,7 +128,7 @@ $config_defaults = [
 	'WP_DEBUG_LOG'                   => tribe_getenv( 'WP_DEBUG_LOG', true ),
 	'WP_DEBUG_DISPLAY'               => tribe_getenv( 'WP_DEBUG_DISPLAY', true ),
 	'SAVEQUERIES'                    => tribe_getenv( 'SAVEQUERIES', true ),
-	'SCRIPT_DEBUG'                   => tribe_getenv( 'SCRIPT_DEBUG', false ),
+	'SCRIPT_DEBUG'                   => tribe_getenv( 'SCRIPT_DEBUG', true ),
 	'CONCATENATE_SCRIPTS'            => tribe_getenv( 'CONCATENATE_SCRIPTS', false ),
 	'COMPRESS_SCRIPTS'               => tribe_getenv( 'COMPRESS_SCRIPTS', false ),
 	'COMPRESS_CSS'                   => tribe_getenv( 'COMPRESS_CSS', false ),
@@ -161,6 +161,7 @@ if ( defined( 'ENVIRONMENT' ) && ENVIRONMENT === 'PRODUCTION' ) {
 	$config_defaults['WP_DEBUG_LOG']        = false;
 	$config_defaults['WP_DEBUG_DISPLAY']    = false;
 	$config_defaults['SAVEQUERIES']         = false;
+	$config_defaults['SCRIPT_DEBUG']        = false;
 	$config_defaults['CONCATENATE_SCRIPTS'] = true;
 	$config_defaults['COMPRESS_SCRIPTS']    = true;
 	$config_defaults['COMPRESS_CSS']        = true;
