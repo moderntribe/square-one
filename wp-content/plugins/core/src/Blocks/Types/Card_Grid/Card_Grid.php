@@ -6,7 +6,10 @@ namespace Tribe\Project\Blocks\Types\Card_Grid;
 use Tribe\Libs\ACF\Field;
 use Tribe\Libs\ACF\Block;
 use Tribe\Libs\ACF\Block_Config;
+use Tribe\Libs\ACF\Field_Group;
+use Tribe\Libs\ACF\Repeater;
 use Tribe\Project\Post_Types\Post\Post;
+use Tribe\Project\Post_Types\Sample\Sample;
 
 class Card_Grid extends Block_Config {
 	public const NAME = 'cardgrid';
@@ -19,13 +22,25 @@ class Card_Grid extends Block_Config {
 	public const QUERY_TYPE_AUTO   = 'query_type_auto';
 	public const QUERY_TYPE_MANUAL = 'query_type_manual';
 
-	public const POSTS      = 'posts'; //Conditional to Manual
-	public const LIMIT      = 'limit'; //Conditional to Auto
-	public const TAXONOMIES = 'taxonomy_terms'; //Conditional to Auto, one per post type
-	public const POST_TYPES = 'post_types'; //Conditional to Auto
+	// Manual query fields
+	public const MANUAL_QUERY        = 'manual_query';
+	public const MANUAL_POST_MESSAGE = 'manual_post_message';
+	public const MANUAL_POST         = 'manual_post';
+	public const MANUAL_TOGGLE       = 'manual_toggle';
+	public const MANUAL_TITLE        = 'manual_title';
+	public const MANUAL_EXCERPT      = 'manual_excerpt';
+	public const MANUAL_CTA          = 'manual_cta';
+	public const MANUAL_THUMBNAIL    = 'manual_thumbnail';
 
-	public const QUERY_POST_TYPES = [
+	//Query Fields
+	public const QUERY_GROUP      = 'query_group';
+	public const QUERY_LIMIT      = 'query_limit';
+	public const QUERY_TAXONOMIES = 'query_taxonomy_terms';
+	public const QUERY_POST_TYPES = 'query_post_types';
+
+	public const ALLOWED_POST_TYPES = [
 		Post::NAME,
+		Sample::NAME,
 	];
 
 	public const LAYOUT         = 'layout';
@@ -54,7 +69,7 @@ class Card_Grid extends Block_Config {
 						),
 						self::CTA         => [ 'title' => esc_html__( 'Call to Action', 'tribe' ), 'url' => '#' ],
 						self::QUERY_TYPE  => self::QUERY_TYPE_AUTO,
-						self::LIMIT       => 3,
+						self::QUERY_LIMIT => 3,
 					],
 				],
 			],
@@ -83,132 +98,212 @@ class Card_Grid extends Block_Config {
 				'type'  => 'link',
 			] )
 		)->add_field( new Field( self::NAME . '_' . self::QUERY_TYPE, [
-				'label'         => __( 'Type of Query', 'tribe' ),
-				'name'          => self::QUERY_TYPE,
-				'type'          => 'button_group',
-				'choices'       => [
-					self::QUERY_TYPE_AUTO   => __( 'Query', 'tribe' ),
+				'label'   => __( 'Type of Query', 'tribe' ),
+				'name'    => self::QUERY_TYPE,
+				'type'    => 'button_group',
+				'choices' => [
+					self::QUERY_TYPE_AUTO   => __( 'Automatic', 'tribe' ),
 					self::QUERY_TYPE_MANUAL => __( 'Manual', 'tribe' ),
 				],
-				'default_value' => self::QUERY_TYPE_AUTO,
-				'layout'        => 'horizontal',
 			] )
-		//Post select for manual query
-		)->add_field( new Field( self::NAME . '_' . self::POSTS, [
-				'label'             => __( 'Post Selection', 'tribe' ),
-				'name'              => self::POSTS,
-				'min'               => 2,
-				'max'               => 10,
-				'type'              => 'relationship',
-				'post_type'         => self::QUERY_POST_TYPES,
+		)->add_field(
+			$this->get_query_group_fields()
+		)->add_field(
+			$this->get_manual_group()
+		);
+	}
+
+	protected function get_manual_group(): Repeater {
+		$repeater = new Repeater( self::NAME . '_' . self::MANUAL_QUERY, [
+			'min'               => 2,
+			'max'               => 10,
+			'layout'            => 'row',
+			'name'              => self::MANUAL_QUERY,
+			'label'             => __( 'Manual Items', 'tribe' ),
+			'conditional_logic' => [
+				[
+					[
+						'field'    => 'field_' . self::NAME . '_' . self::QUERY_TYPE,
+						'operator' => '==',
+						'value'    => self::QUERY_TYPE_MANUAL,
+					],
+				],
+			],
+
+		] );
+
+		$repeater->add_field(
+			new Field( self::MANUAL_POST_MESSAGE, [
+				'label' => __( 'Start w/ Existing Content', 'tribe' ),
+				'name'  => self::MANUAL_POST_MESSAGE,
+			] )
+		)->add_field(
+			new Field( self::MANUAL_POST, [
+				'label'     => __( 'Post Selection', 'tribe' ),
+				'name'      => self::MANUAL_POST,
+				'type'      => 'post_object',
+				'post_type' => self::ALLOWED_POST_TYPES,
+
+			] )
+		)->add_field(
+			new Field( self::NAME . '_' . self::MANUAL_TOGGLE, [
+				'label'        => __( 'Create or Override Content', 'tribe' ),
+				'instructions' => __( 'Data entered below will overwrite the respective data from the post selected above.', 'tribe' ),
+				'name'         => self::MANUAL_TOGGLE,
+				'type'         => 'true_false',
+			] )
+		)->add_field(
+			new Field( self::MANUAL_TITLE, [
+				'label'             => __( 'Title', 'tribe' ),
+				'type'              => 'text',
+				'name'              => self::MANUAL_TITLE,
 				'conditional_logic' => [
 					[
-						[
-							'field'    => 'field_' . self::NAME . '_' . self::QUERY_TYPE,
-							'operator' => '==',
-							'value'    => self::QUERY_TYPE_MANUAL,
-						],
+						'field'    => 'field_' . self::NAME . '_' . self::MANUAL_TOGGLE,
+						'operator' => '==',
+						'value'    => '1',
 					],
 				],
 			] )
-		//Post Type selection for dynamic selection
-		)->add_field( new Field( self::NAME . '_' . self::POST_TYPES, [
-				'label'             => __( 'Post Types', 'tribe' ),
-				'name'              => self::POST_TYPES,
-				'type'              => 'select',
+		)->add_field(
+			new Field( self::MANUAL_EXCERPT, [
+				'label'             => __( 'Excerpt', 'tribe' ),
+				'type'              => 'textarea',
+				'name'              => self::MANUAL_EXCERPT,
 				'conditional_logic' => [
 					[
-						[
-							'field'    => 'field_' . self::NAME . '_' . self::QUERY_TYPE,
-							'operator' => '==',
-							'value'    => self::QUERY_TYPE_AUTO,
-						],
+						'field'    => 'field_' . self::NAME . '_' . self::MANUAL_TOGGLE,
+						'operator' => '==',
+						'value'    => '1',
 					],
 				],
-				'multiple'          => false,
-				'choices'           => $this->get_post_types_labels(),
 			] )
-		)->add_field( new Field( self::NAME . '_' . self::LIMIT, [
-				'label'             => __( 'Limit', 'tribe' ),
-				'name'              => self::LIMIT,
-				'min'               => 2,
-				'max'               => 10,
-				'step'              => 1,
-				'type'              => 'number',
-				'default_value'     => 2,
+		)->add_field(
+			new Field( self::MANUAL_CTA, [
+				'name'              => self::MANUAL_CTA,
+				'label'             => __( 'Call to Action', 'tribe' ),
+				'type'              => 'link',
 				'conditional_logic' => [
 					[
-						[
-							'field'    => 'field_' . self::NAME . '_' . self::QUERY_TYPE,
-							'operator' => '==',
-							'value'    => self::QUERY_TYPE_AUTO,
-						],
+						'field'    => 'field_' . self::NAME . '_' . self::MANUAL_TOGGLE,
+						'operator' => '==',
+						'value'    => '1',
+					],
+				],
+			] )
+		)->add_field(
+			new Field( self::MANUAL_THUMBNAIL, [
+				'name'              => self::MANUAL_THUMBNAIL,
+				'label'             => __( 'Thumbnail Image', 'tribe' ),
+				'type'              => 'image',
+				'return_format'     => 'id',
+				'conditional_logic' => [
+					[
+						'field'    => 'field_' . self::NAME . '_' . self::MANUAL_TOGGLE,
+						'operator' => '==',
+						'value'    => '1',
 					],
 				],
 			] )
 		);
 
-		// We need to loop through all public post types to get taxonomy terms that only relate to the post type.
-		// In a perfect world, we could conditionally update this field with javascript but that would require
-		// a custom field being written. This will work for now. Could be a future consideration.
-		foreach ( self::QUERY_POST_TYPES as $post_type ) {
-			$this->add_field( new Field( self::NAME . '_' . self::TAXONOMIES . '_' . $post_type, [
-				'label'             => __( 'Filter by Taxonomy Term', 'tribe' ),
-				'name'              => self::TAXONOMIES . '_' . $post_type,
-				'post_type'         => $post_type,
-				'type'              => 'advanced_taxonomy_selector',
-				'field_type'        => 'multiselect',
-				'return_value'      => 'object',
+		return $repeater;
+	}
+
+	protected function get_query_group_fields(): Field_Group {
+		$group = new Field_Group( self::NAME . '_' . self::QUERY_GROUP, [
+			'label'             => __( 'Build Your Query', 'tribe' ),
+			'name'              => self::QUERY_GROUP,
+			'conditional_logic' => [
+				[
+					[
+						'field'    => 'field_' . self::NAME . '_' . self::QUERY_TYPE,
+						'operator' => '==',
+						'value'    => self::QUERY_TYPE_AUTO,
+					],
+				],
+			],
+		] );
+		$group->add_field(
+			new Field( self::NAME . '_' . self::QUERY_POST_TYPES, [
+				'type'     => 'select',
+				'label'    => __( 'Post Types', 'tribe' ),
+				'multiple' => true,
+				'ui'       => true,
+				'name'     => self::QUERY_POST_TYPES,
+				'choices'  => $this->get_post_types_labels(),
+			] )
+		)->add_field(
+			new Field( self::NAME . '_' . self::QUERY_LIMIT, [
+				'label'         => __( 'Limit', 'tribe' ),
+				'name'          => self::QUERY_LIMIT,
+				'min'           => 2,
+				'max'           => 10,
+				'step'          => 1,
+				'type'          => 'range',
+				'default_value' => 2,
+			] )
+		)->add_field(
+			new Field( self::NAME . '_' . self::QUERY_TAXONOMIES, [
+				'type'          => 'select',
+				'multiple'      => true,
+				'label'         => __( 'Filter by Taxonomies', 'tribe' ),
+				'ui'            => true,
+				'name'          => self::QUERY_TAXONOMIES,
+				'return_format' => 'value',
+				'choices'       => $this->get_taxonomies_for_post_types(),
+			] )
+		);
+
+		//We need to loop through all public taxonomies to get taxonomy terms that only relate to the post type.
+		foreach ( $this->get_taxonomies_for_post_types() as $name => $label ) {
+			$group->add_field( new Field( self::NAME . '_' . self::QUERY_TAXONOMIES . '_' . $name, [
+				'label'             => sprintf(
+					__( 'Filter by %s Terms', 'tribe' ),
+					$label
+				),
+				'name'              => self::QUERY_TAXONOMIES . '_' . $name,
+				'type'              => 'taxonomy',
+				'field_type'        => 'multi_select',
+				'taxonomy'          => $name,
+				'allow_null'        => false,
+				'add_term'          => false,
+				'save_terms'        => false,
+				'load_terms'        => false,
+				'return_format'     => 'object',
 				'conditional_logic' => [
 					[
 						[
-							'field'    => 'field_ ' . self::NAME . '_' . self::QUERY_TYPE,
-							'operator' => '==',
-							'value'    => self::QUERY_TYPE_AUTO,
-						],
-						[
-							'field'    => 'field_' . self::NAME . '_' . self::POST_TYPES,
-							'operator' => '==',
-							'value'    => $post_type,
+							'field'    => 'field_' . self::NAME . '_' . self::QUERY_TAXONOMIES,
+							'operator' => '==contains',
+							'value'    => $name,
 						],
 					],
 				],
 			] ) );
 		}
+
+		return $group;
+	}
+	/**
+	 * @return array
+	 */
+	private function get_taxonomies_for_post_types(): array {
+		$taxonomies       = get_object_taxonomies( self::ALLOWED_POST_TYPES, 'object' );
+		$taxonomy_options = [];
+		foreach ( $taxonomies as $taxonomy ) {
+			$taxonomy_options[ $taxonomy->name ] = $taxonomy->label;
+		}
+
+		return $taxonomy_options;
 	}
 
 	/**
-	 * Register Settings for Block
+	 * @return array
 	 */
-	public function add_settings() {
-		$this->add_setting(
-			new Field( self::NAME . '_' . self::LAYOUT, [
-				'type'            => 'image_select',
-				'name'            => self::LAYOUT,
-				'choices'         => [
-					self::LAYOUT_STACKED => __( 'Stacked', 'tribe' ),
-					self::LAYOUT_INLINE  => __( 'Inline', 'tribe' ),
-				],
-				'default_value'   => self::LAYOUT_STACKED,
-				'multiple'        => 0,
-				'image_path'      => sprintf(
-					'%sassets/img/admin/blocks/%s/',
-					trailingslashit( get_template_directory_uri() ),
-					self::NAME
-				),
-				'image_extension' => 'svg',
-			] ) 
-		);
-	}
-
-	/**
-	 * @param $post_type_slug
-	 *
-	 * @return mixed
-	 */
-	private function get_post_types_labels() {
+	private function get_post_types_labels(): array {
 		$array = [];
-		foreach ( self::QUERY_POST_TYPES as $cpt ) {
+		foreach ( self::ALLOWED_POST_TYPES as $cpt ) {
 			$obj = get_post_type_object( $cpt );
 			if ( ! $obj ) {
 				continue;
