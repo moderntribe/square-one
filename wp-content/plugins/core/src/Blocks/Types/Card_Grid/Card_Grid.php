@@ -113,6 +113,30 @@ class Card_Grid extends Block_Config {
 		);
 	}
 
+	/**
+	 * Register Settings for Block
+	 */
+	public function add_settings() {
+		$this->add_setting(
+			new Field( self::NAME . '_' . self::LAYOUT, [
+				'type'            => 'image_select',
+				'name'            => self::LAYOUT,
+				'choices'         => [
+					self::LAYOUT_STACKED => __( 'Stacked', 'tribe' ),
+					self::LAYOUT_INLINE  => __( 'Inline', 'tribe' ),
+				],
+				'default_value'   => self::LAYOUT_STACKED,
+				'multiple'        => 0,
+				'image_path'      => sprintf(
+					'%sassets/img/admin/blocks/%s/',
+					trailingslashit( get_template_directory_uri() ),
+					self::NAME
+				),
+				'image_extension' => 'svg',
+			] )
+		);
+	}
+
 	protected function get_manual_group(): Repeater {
 		$repeater = new Repeater( self::NAME . '_' . self::MANUAL_QUERY, [
 			'min'               => 2,
