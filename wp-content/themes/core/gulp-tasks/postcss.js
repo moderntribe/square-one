@@ -47,7 +47,7 @@ const legacyPlugins = [
 	require( 'postcss-custom-properties' )( { preserve: false } ),
 	require( 'postcss-simple-vars' ),
 	require( 'postcss-nested' ),
-	require( 'postcss-preset-env' )( { browsers: [ 'last 20 versions', 'ie 6' ] } ),
+	require( 'postcss-preset-env' )( { browsers: [ 'last 20 versions' ] } ),
 	require( 'postcss-assets' )( { baseUrl: pkg.square1.paths.core_theme_postcss_assets_base_url } ),
 ];
 
