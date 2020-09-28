@@ -11,23 +11,13 @@ class Post_List_Object {
 	public const LINK      = 'link';
 	public const POST_TYPE = 'post_type';
 
-	private int $post_id;
-	private string $title;
-	private string $content;
-	private string $excerpt;
-	private int $image_id;
-	private array $link;
-	private string $post_type;
-
-	public function __construct( array $args = [] ) {
-		$this->post_id   = (int) $args[ self::POST_ID ] ?? 0;
-		$this->title     = (string) $args[ self::TITLE ] ?? '';
-		$this->content   = (string) $args[ self::CONTENT ] ?? '';
-		$this->excerpt   = (string) $args[ self::EXCERPT ] ?? '';
-		$this->image_id  = (int) $args[ self::IMAGE ] ?? 0;
-		$this->link      = (array) $args[ self::LINK ] ?? [];
-		$this->post_type = (string) $args[ self::POST_TYPE ] ?? '';
-	}
+	private int $post_id = 0;
+	private string $title = '';
+	private string $content = '';
+	private string $excerpt = '';
+	private int $image_id = 0;
+	private array $link = [];
+	private string $post_type = '';
 
 	/**
 	 * @return int
@@ -78,5 +68,83 @@ class Post_List_Object {
 		return $this->post_type;
 	}
 
+
+	/**
+	 * @param int $post_id
+	 *
+	 * @return Post_List_Object
+	 */
+	public function set_post_id( int $post_id ) {
+		$this->post_id = $post_id;
+
+		return $this;
+	}
+
+
+	/**
+	 * @param string $title
+	 *
+	 * @return Post_List_Object
+	 */
+	public function set_title( string $title ) {
+		$this->title = $title;
+
+		return $this;
+	}
+
+	/**
+	 * @param string $content
+	 *
+	 * @return Post_List_Object
+	 */
+	public function set_content( string $content ) {
+		$this->content = $content;
+
+		return $this;
+	}
+
+	/**
+	 * @param string $excerpt
+	 *
+	 * @return Post_List_Object
+	 */
+	public function set_excerpt( string $excerpt ) {
+		$this->excerpt = $excerpt;
+
+		return $this;
+	}
+
+	/**
+	 * @param int $id
+	 *
+	 * @return Post_List_Object
+	 */
+	public function set_image_id( int $id ) {
+		$this->image_id = $id;
+
+		return $this;
+	}
+
+	/**
+	 * @param array $link
+	 *
+	 * @return Post_List_Object
+	 */
+	public function set_link( array $link ) {
+		$this->link = $link;
+
+		return $this;
+	}
+
+	/**
+	 * @param string $post_type
+	 *
+	 * @return Post_List_Object
+	 */
+	public function set_post_type( string $post_type ) {
+		$this->post_type = $post_type;
+
+		return $this;
+	}
 
 }
