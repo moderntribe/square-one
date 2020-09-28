@@ -13,25 +13,12 @@
 /*
  * React dev
  */
-
 define( 'HMR_DEV', false );
-
-/*
- * Debugging
- */
-
-define( 'WP_DEBUG', true );
-define( 'SAVEQUERIES', true );
-define( 'WP_DEBUG_DISPLAY', true );
-define( 'SCRIPT_DEBUG', true );
-define( 'WP_CACHE', false );
 
 /*
  * Enable ASSET_VERSION_TIMESTAMP if you are doing front end dev on css/js to force cache invalidation without running a full build
  */
-// define( 'ASSET_VERSION_TIMESTAMP', true );
-
-define( 'TRIBE_DISABLE_PANELS_CACHE', true );
+define( 'ASSET_VERSION_TIMESTAMP', true );
 
 /*
  * Whoops
@@ -41,17 +28,9 @@ define( 'TRIBE_DISABLE_PANELS_CACHE', true );
 define( 'WHOOPS_ENABLE', true );
 
 /*
- * Multisite
- *
- * If you enable multisite in wp-config.php, ensure to provide your local.tribe URI here
- */
-//define( 'DOMAIN_CURRENT_SITE', 'square1.tribe' );
-
-/*
  * Glomar
  *
  * GLOMAR is a plugin that blocks the frontend of the site from public access.
  * If you would like to disable the plugin locally, add the following to your local-config.php.
  */
-
-//define( 'TRIBE_GLOMAR', false );
+define( 'TRIBE_GLOMAR', false );
