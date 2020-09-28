@@ -63,8 +63,8 @@ class Post_List extends Block_Config {
 				'name'    => self::QUERY_TYPE,
 				'type'    => 'button_group',
 				'choices' => [
-					self::QUERY_TYPE_AUTO   => __( 'Automatically Select Posts', 'tribe' ),
-					self::QUERY_TYPE_MANUAL => __( 'Manually Select Posts', 'tribe' ),
+					self::QUERY_TYPE_AUTO   => __( 'Automatic', 'tribe' ),
+					self::QUERY_TYPE_MANUAL => __( 'Manual', 'tribe' ),
 				],
 			] )
 		)->add_field(
@@ -78,7 +78,7 @@ class Post_List extends Block_Config {
 		$repeater = new Repeater( self::NAME . '_' . self::MANUAL_QUERY, [
 			'min'               => 2,
 			'max'               => 10,
-			'layout'            => 'block',
+			'layout'            => 'row',
 			'name'              => self::MANUAL_QUERY,
 			'label'             => __( 'Manual Items', 'tribe' ),
 			'conditional_logic' => [
@@ -109,7 +109,7 @@ class Post_List extends Block_Config {
 		)->add_field(
 			new Field( self::NAME . '_' . self::MANUAL_TOGGLE, [
 				'label'        => __( 'Create or Override Content', 'tribe' ),
-				'instructions' => __( 'Any data collected here will overwrite any post selected above.', 'tribe' ),
+				'instructions' => __( 'Data entered below will overwrite the respective data from the post selected above.', 'tribe' ),
 				'name'         => self::MANUAL_TOGGLE,
 				'type'         => 'true_false',
 			] )
