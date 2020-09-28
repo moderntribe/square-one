@@ -2,29 +2,33 @@
 * === UPDATES TO REPEATER FIELD ===
 * (REQUIRES 'ROW' LAYOUT) stack the fields in a sane manner, reduce some padding to give it room to breath
 */
-.edit-post-sidebar .acf-repeater.-row .acf-fields.-left>.acf-field:before {
-    display: none;
+
+.edit-post-sidebar .acf-repeater.-row .acf-fields.-left > .acf-field:before {
+	display: none;
 }
 
-.edit-post-sidebar .acf-block-panel .acf-fields>.acf-field-repeater {
-    margin-left: 4px;
-    margin-right: 4px;
-}
-.edit-post-sidebar .acf-block-panel .acf-fields>.acf-field .acf-repeater.-row .acf-label {
-    float: none;
-    width: 100%;
+.edit-post-sidebar .acf-block-panel .acf-fields > .acf-field-repeater {
+	margin-left: 4px;
+	margin-right: 4px;
 }
 
-.edit-post-sidebar .acf-repeater.-row .acf-fields.-left>.acf-field>.acf-input {
-    width: 100%;
+.edit-post-sidebar .acf-block-panel .acf-fields > .acf-field .acf-repeater.-row .acf-label {
+	float: none;
+	width: 100%;
 }
 
-.edit-post-sidebar .acf-block-panel .acf-fields>.acf-field .acf-repeater.-row .acf-field {
-    margin: 16px 0px;
+.edit-post-sidebar .acf-repeater.-row .acf-fields.-left > .acf-field > .acf-input {
+	width: 100%;
 }
-.edit-post-sidebar .acf-block-panel .acf-fields>.acf-field-repeater > .acf-label {
-    margin-left: 16px;
+
+.edit-post-sidebar .acf-block-panel .acf-fields > .acf-field .acf-repeater.-row .acf-field {
+	margin: 16px 0;
 }
+
+.edit-post-sidebar .acf-block-panel .acf-fields > .acf-field-repeater > .acf-label {
+	margin-left: 16px;
+}
+
 .edit-post-sidebar .acf-repeater .acf-row-handle {
-    width: 8px;
+	width: 8px;
 }
