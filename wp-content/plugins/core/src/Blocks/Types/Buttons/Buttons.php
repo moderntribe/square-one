@@ -134,7 +134,4 @@ class Buttons extends Block_Config {
 		return $group;
 	}
 
-	public function add_settings() {
-	}
-
 }

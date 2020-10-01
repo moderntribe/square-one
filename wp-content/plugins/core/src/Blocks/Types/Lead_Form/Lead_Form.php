@@ -6,6 +6,7 @@ namespace Tribe\Project\Blocks\Types\Lead_Form;
 use Tribe\Libs\ACF\Block;
 use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Field;
+use Tribe\Libs\ACF\Field_Section;
 
 class Lead_Form extends Block_Config {
 	public const NAME = 'leadform';
@@ -40,18 +41,18 @@ class Lead_Form extends Block_Config {
 				'attributes' => [
 					'mode' => 'preview',
 					'data' => [
-						self::LEAD_IN       => esc_html__( 'Lorem ipsum dolor sit amet.', 'tribe' ),
-						self::TITLE         => esc_html__( 'The Lead Form Title', 'tribe' ),
-						self::DESCRIPTION   => esc_html__(
+						self::LEAD_IN     => esc_html__( 'Lorem ipsum dolor sit amet.', 'tribe' ),
+						self::TITLE       => esc_html__( 'The Lead Form Title', 'tribe' ),
+						self::DESCRIPTION => esc_html__(
 							'Cras ut ornare dui, sed venenatis est. Donec euismod in leo quis consequat.',
 							'tribe'
 						),
-						self::CTA   => [
+						self::CTA         => [
 							'title'  => esc_html__( 'Lorem ipsum', 'tribe' ),
 							'url'    => '#',
 							'target' => '',
 						],
-						self::FORM => 1 //Will work if a site has a form added. Be blank if not.
+						self::FORM        => 1 //Will work if a site has a form added. Be blank if not.
 					],
 				],
 			],
@@ -62,35 +63,79 @@ class Lead_Form extends Block_Config {
 	 * Register Fields for block
 	 */
 	public function add_fields() {
-		$this->add_field( new Field( self::NAME . '_' . self::TITLE, [
-				'label' => __( 'Title', 'tribe' ),
-				'name'  => self::TITLE,
-				'type'  => 'text',
-			] )
-		)->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
-				'label' => __( 'Lead in', 'tribe' ),
-				'name'  => self::LEAD_IN,
-				'type'  => 'text',
-			] )
-		)->add_field( new Field( self::NAME . '_' . self::DESCRIPTION, [
-				'label'        => __( 'Description', 'tribe' ),
-				'name'         => self::DESCRIPTION,
-				'type'         => 'wysiwyg',
-				'toolbar'      => 'basic',
-				'media_upload' => 0,
-			] )
-		)->add_field( new Field( self::NAME . '_' . self::CTA, [
-				'label' => __( 'Call to Action', 'tribe' ),
-				'name'  => self::CTA,
-				'type'  => 'link',
-			] )
-		)->add_field( new Field( self::NAME . '_' . self::FORM, [
-				'label'   => __( 'Form', 'tribe' ),
-				'name'    => self::FORM,
-				'type'    => 'select',
-				'choices' => $this->get_form_options(),
-			] )
-		);
+		//==========================================
+		// Content Fields
+		//==========================================
+		$this->add_section( new Field_Section( __( 'Content', 'tribe' ), 'accordion' ) )
+			 ->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
+					 'label' => __( 'Lead in', 'tribe' ),
+					 'name'  => self::LEAD_IN,
+					 'type'  => 'text',
+				 ] )
+			 )->add_field( new Field( self::NAME . '_' . self::TITLE, [
+					'label' => __( 'Title', 'tribe' ),
+					'name'  => self::TITLE,
+					'type'  => 'text',
+				] )
+			)->add_field( new Field( self::NAME . '_' . self::DESCRIPTION, [
+					'label'        => __( 'Description', 'tribe' ),
+					'name'         => self::DESCRIPTION,
+					'type'         => 'wysiwyg',
+					'toolbar'      => 'basic',
+					'media_upload' => 0,
+				] )
+			)->add_field( new Field( self::NAME . '_' . self::CTA, [
+					'label' => __( 'Call to Action', 'tribe' ),
+					'name'  => self::CTA,
+					'type'  => 'link',
+				] )
+			)->add_field( new Field( self::NAME . '_' . self::FORM, [
+					'label'   => __( 'Form', 'tribe' ),
+					'name'    => self::FORM,
+					'type'    => 'select',
+					'choices' => $this->get_form_options(),
+				] )
+			);
+
+		//==========================================
+		// Setting Fields
+		//==========================================
+		$this->add_section( new Field_Section( __( 'Settings', 'tribe' ), 'accordion' ) )
+			 ->add_field(
+				 new Field( self::NAME . '_' . self::LAYOUT, [
+					 'type'            => 'image_select',
+					 'name'            => self::LAYOUT,
+					 'choices'         => [
+						 self::LAYOUT_LEFT   => __( 'Content Left', 'tribe' ),
+						 self::LAYOUT_CENTER => __( 'Content Center', 'tribe' ),
+					 ],
+					 'default_value'   => self::LAYOUT_CENTER,
+					 'multiple'        => 0,
+					 'image_path'      => sprintf(
+						 '%sassets/img/admin/blocks/%s/',
+						 trailingslashit( get_template_directory_uri() ),
+						 self::NAME
+					 ),
+					 'image_extension' => 'svg',
+				 ] )
+			 )->add_field(
+				 new Field( self::NAME . '_' . self::WIDTH, [
+					'type'            => 'image_select',
+					'name'            => self::WIDTH,
+					'choices'         => [
+						self::WIDTH_GRID => __( 'Grid', 'tribe' ),
+						self::WIDTH_FULL => __( 'Full', 'tribe' ),
+					],
+					'default_value'   => self::WIDTH_GRID,
+					'multiple'        => 0,
+					'image_path'      => sprintf(
+						'%sassets/img/admin/blocks/%s/',
+						trailingslashit( get_template_directory_uri() ),
+						self::NAME
+					),
+					'image_extension' => 'svg',
+				 ] )
+			 );
 	}
 
 	/**
@@ -109,45 +154,5 @@ class Lead_Form extends Block_Config {
 		return $choices;
 	}
 
-	/**
-	 * Register Settings for Block
-	 */
-	public function add_settings() {
-		$this->add_setting(
-			new Field( self::NAME . '_' . self::LAYOUT, [
-				'type'            => 'image_select',
-				'name'            => self::LAYOUT,
-				'choices'         => [
-					self::LAYOUT_LEFT   => __( 'Content Left', 'tribe' ),
-					self::LAYOUT_CENTER => __( 'Content Center', 'tribe' ),
-				],
-				'default_value'   => self::LAYOUT_CENTER,
-				'multiple'        => 0,
-				'image_path'      => sprintf(
-					'%sassets/img/admin/blocks/%s/',
-					trailingslashit( get_template_directory_uri() ),
-					self::NAME
-				),
-				'image_extension' => 'svg',
-			] )
-		)->add_setting(
-			new Field( self::NAME . '_' . self::WIDTH, [
-				'type'            => 'image_select',
-				'name'            => self::WIDTH,
-				'choices'         => [
-					self::WIDTH_GRID => __( 'Grid', 'tribe' ),
-					self::WIDTH_FULL => __( 'Full', 'tribe' ),
-				],
-				'default_value'   => self::WIDTH_GRID,
-				'multiple'        => 0,
-				'image_path'      => sprintf(
-					'%sassets/img/admin/blocks/%s/',
-					trailingslashit( get_template_directory_uri() ),
-					self::NAME
-				),
-				'image_extension' => 'svg',
-			] )
-		);
-	}
 
 }

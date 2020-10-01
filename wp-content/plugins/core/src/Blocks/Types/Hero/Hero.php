@@ -5,6 +5,7 @@ namespace Tribe\Project\Blocks\Types\Hero;
 
 use Tribe\Libs\ACF\Block;
 use Tribe\Libs\ACF\Block_Config;
+use Tribe\Libs\ACF\Field_Section;
 use Tribe\Libs\ACF\Field;
 
 class Hero extends Block_Config {
@@ -36,19 +37,19 @@ class Hero extends Block_Config {
 				'attributes' => [
 					'mode' => 'preview',
 					'data' => [
-						self::LEAD_IN       => esc_html__( 'Lorem ipsum dolor sit amet.', 'tribe' ),
-						self::TITLE         => esc_html__( 'The Hero Title', 'tribe' ),
-						self::DESCRIPTION   => esc_html__(
+						self::LEAD_IN     => esc_html__( 'Lorem ipsum dolor sit amet.', 'tribe' ),
+						self::TITLE       => esc_html__( 'The Hero Title', 'tribe' ),
+						self::DESCRIPTION => esc_html__(
 							'Cras ut ornare dui, sed venenatis est. Donec euismod in leo quis consequat.',
 							'tribe'
 						),
-						self::CTA    => [
+						self::CTA         => [
 							'title'  => esc_html__( 'Lorem ipsum', 'tribe' ),
 							'url'    => '#',
 							'target' => '',
 						],
 						//Images are output as IDs so it's sort of hard to get an image value for preview
-						self::IMAGE  => 0,
+						self::IMAGE       => 0,
 					],
 				],
 			],
@@ -59,58 +60,60 @@ class Hero extends Block_Config {
 	 * Register Fields for block
 	 */
 	public function add_fields() {
-		$this->add_field( new Field( self::NAME . '_' . self::TITLE, [
-				'label' => __( 'Title', 'tribe' ),
-				'name'  => self::TITLE,
-				'type'  => 'text',
-			] )
-		)->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
-				'label' => __( 'Lead in', 'tribe' ),
-				'name'  => self::LEAD_IN,
-				'type'  => 'text',
-			] )
-		)->add_field( new Field( self::NAME . '_' . self::DESCRIPTION, [
-				'label'        => __( 'Description', 'tribe' ),
-				'name'         => self::DESCRIPTION,
-				'type'         => 'wysiwyg',
-				'toolbar'      => 'basic',
-				'media_upload' => 0,
-			] )
-		)->add_field( new Field( self::NAME . '_' . self::CTA, [
-				'label' => __( 'Call to Action', 'tribe' ),
-				'name'  => self::CTA,
-				'type'  => 'link',
-			] )
-		)->add_field( new Field( self::NAME . '_' . self::IMAGE, [
-				'label'        => __( 'Image', 'tribe' ),
-				'name'         => self::IMAGE,
-				'type'         => 'image',
-				'return_format' => 'id',
-				'instructions' => __( 'Recommended image size: 1440px wide and 720px high', 'tribe' ),
-			] )
-		);
-	}
-
-	/**
-	 * Register Settings for Block
-	 */
-	public function add_settings() {
-		$this->add_setting( new Field( self::NAME . '_' . self::LAYOUT, [
-			'type'            => 'image_select',
-			'name'            => self::LAYOUT,
-			'choices'         => [
-				self::LAYOUT_LEFT   => __( 'Align Left', 'tribe' ),
-				self::LAYOUT_CENTER => __( 'Align Center', 'tribe' ),
-			],
-			'default_value'   => self::LAYOUT_CENTER,
-			'multiple'        => 0,
-			'image_path'      => sprintf(
-				'%sassets/img/admin/blocks/%s/',
-				trailingslashit( get_template_directory_uri() ),
-				self::NAME
-			),
-			'image_extension' => 'svg',
-		] ) );
+		//==========================================
+		// Content Fields
+		//==========================================
+		$this->add_section( new Field_Section( __( 'Content', 'tribe' ), 'accordion' ) )
+			 ->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
+					 'label' => __( 'Lead in', 'tribe' ),
+					 'name'  => self::LEAD_IN,
+					 'type'  => 'text',
+				 ] )
+			 )->add_field( new Field( self::NAME . '_' . self::TITLE, [
+					'label' => __( 'Title', 'tribe' ),
+					'name'  => self::TITLE,
+					'type'  => 'text',
+				] )
+			)->add_field( new Field( self::NAME . '_' . self::DESCRIPTION, [
+					'label'        => __( 'Description', 'tribe' ),
+					'name'         => self::DESCRIPTION,
+					'type'         => 'wysiwyg',
+					'toolbar'      => 'basic',
+					'media_upload' => 0,
+				] )
+			)->add_field( new Field( self::NAME . '_' . self::CTA, [
+					'label' => __( 'Call to Action', 'tribe' ),
+					'name'  => self::CTA,
+					'type'  => 'link',
+				] )
+			)->add_field( new Field( self::NAME . '_' . self::IMAGE, [
+					'label'         => __( 'Image', 'tribe' ),
+					'name'          => self::IMAGE,
+					'type'          => 'image',
+					'return_format' => 'id',
+					'instructions'  => __( 'Recommended image size: 1440px wide and 720px high', 'tribe' ),
+				] )
+			);
+		//==========================================
+		// Setting Fields
+		//==========================================
+		$this->add_section( new Field_Section( __( 'Settings', 'tribe' ), 'accordion' ) )
+			 ->add_field( new Field( self::NAME . '_' . self::LAYOUT, [
+				 'type'            => 'image_select',
+				 'name'            => self::LAYOUT,
+				 'choices'         => [
+					 self::LAYOUT_LEFT   => __( 'Align Left', 'tribe' ),
+					 self::LAYOUT_CENTER => __( 'Align Center', 'tribe' ),
+				 ],
+				 'default_value'   => self::LAYOUT_CENTER,
+				 'multiple'        => 0,
+				 'image_path'      => sprintf(
+					 '%sassets/img/admin/blocks/%s/',
+					 trailingslashit( get_template_directory_uri() ),
+					 self::NAME
+				 ),
+				 'image_extension' => 'svg',
+			 ] ) );
 	}
 
 }

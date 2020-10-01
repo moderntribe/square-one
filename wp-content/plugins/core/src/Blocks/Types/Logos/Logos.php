@@ -6,6 +6,7 @@ namespace Tribe\Project\Blocks\Types\Logos;
 use Tribe\Libs\ACF\Block;
 use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Field;
+use Tribe\Libs\ACF\Field_Section;
 use Tribe\Libs\ACF\Repeater;
 
 class Logos extends Block_Config {
@@ -28,7 +29,7 @@ class Logos extends Block_Config {
 			'keywords'    => [ __( 'logos', 'tribe' ) ],
 			'category'    => 'layout',
 			'supports'    => [ 'align' => false ],
-			'example' => [
+			'example'     => [
 				'attributes' => [
 					'mode' => 'preview',
 					'data' => [
@@ -38,12 +39,12 @@ class Logos extends Block_Config {
 							'Cras ut ornare dui, sed venenatis est. Donec euismod in leo quis consequat.',
 							'tribe'
 						),
-						self::CTA => [
+						self::CTA         => [
 							'title'  => esc_html__( 'Lorem ipsum', 'tribe' ),
 							'url'    => '#',
 							'target' => '',
 						],
-						self::LOGOS => [
+						self::LOGOS       => [
 							[
 								//Images are output as IDs so it's sort of hard to get an image value for preview
 								self::LOGO_IMAGE => 0,
@@ -60,31 +61,35 @@ class Logos extends Block_Config {
 	}
 
 	public function add_fields() {
-		$this->add_field( new Field( self::NAME . '_' . self::TITLE, [
-				'label' => __( 'Title', 'tribe' ),
-				'name'  => self::TITLE,
-				'type'  => 'text',
-			] )
-		)->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
-				'label' => __( 'Lead in', 'tribe' ),
-				'name'  => self::LEAD_IN,
-				'type'  => 'text',
-			] )
-		)->add_field( new Field( self::NAME . '_' . self::DESCRIPTION, [
-				'label'        => __( 'Description', 'tribe' ),
-				'name'         => self::DESCRIPTION,
-				'type'         => 'wysiwyg',
-				'toolbar'      => 'basic',
-				'media_upload' => 0,
-			] )
-		)->add_field( new Field( self::NAME . '_' . self::CTA, [
-				'label' => __( 'Call to Action', 'tribe' ),
-				'name'  => self::CTA,
-				'type'  => 'link',
-			] )
-		)->add_field(
-			$this->get_logos_section()
-		);
+		//==========================================
+		// Content Fields
+		//==========================================
+		$this->add_section( new Field_Section( __( 'Content', 'tribe' ), 'accordion' ) )
+			 ->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
+					 'label' => __( 'Lead in', 'tribe' ),
+					 'name'  => self::LEAD_IN,
+					 'type'  => 'text',
+				 ] )
+			 )->add_field( new Field( self::NAME . '_' . self::TITLE, [
+					'label' => __( 'Title', 'tribe' ),
+					'name'  => self::TITLE,
+					'type'  => 'text',
+				] )
+			)->add_field( new Field( self::NAME . '_' . self::DESCRIPTION, [
+					'label'        => __( 'Description', 'tribe' ),
+					'name'         => self::DESCRIPTION,
+					'type'         => 'wysiwyg',
+					'toolbar'      => 'basic',
+					'media_upload' => 0,
+				] )
+			)->add_field( new Field( self::NAME . '_' . self::CTA, [
+					'label' => __( 'Call to Action', 'tribe' ),
+					'name'  => self::CTA,
+					'type'  => 'link',
+				] )
+			)->add_field(
+				$this->get_logos_section()
+			);
 	}
 
 	/**
@@ -120,9 +125,4 @@ class Logos extends Block_Config {
 
 		return $group;
 	}
-
-	protected function add_settings() {
-		// No settings.
-	}
-
 }
