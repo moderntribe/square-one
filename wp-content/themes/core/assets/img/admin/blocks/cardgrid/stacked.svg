@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   id="svg18"
+   version="1.1"
+   fill="none"
+   viewBox="0 0 60 40"
+   height="40"
+   width="60">
+  <metadata
+     id="metadata24">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs22" />
+  <rect
+     id="rect2"
+     fill="white"
+     height="40"
+     width="60" />
+  <rect
+     id="rect4"
+     fill="#F1F1F1"
+     height="40"
+     width="60" />
+  <rect
+     id="rect6"
+     fill="#F1F1F1"
+     transform="translate(16.887 5.3997)"
+     height="27.907"
+     width="26.8657" />
+  <rect
+     id="rect8"
+     fill="black"
+     height="3"
+     width="31"
+     y="5"
+     x="14" />
+  <rect
+     id="rect10"
+     fill="black"
+     height="3"
+     width="17"
+     y="10"
+     x="21" />
+  <rect
+     style="fill:#cccccc;stroke-width:0.70710677"
+     id="rect12"
+     height="9"
+     width="16"
+     y="17"
+     x="5" />
+  <rect
+     style="fill:#cccccc;stroke-width:0.70710677"
+     id="rect14"
+     height="9"
+     width="14"
+     y="17"
+     x="23" />
+  <rect
+     style="fill:#cccccc;stroke-width:0.70710677"
+     id="rect16"
+     height="9"
+     width="16"
+     y="17"
+     x="39" />
+  <rect
+     x="5"
+     y="27.847458"
+     width="16"
+     height="9"
+     id="rect47"
+     style="fill:#cccccc;stroke-width:0.70710677" />
+  <rect
+     x="23"
+     y="27.847458"
+     width="14"
+     height="9"
+     id="rect49"
+     style="fill:#cccccc;stroke-width:0.70710677" />
+  <rect
+     x="39"
+     y="27.847458"
+     width="16"
+     height="9"
+     id="rect51"
+     style="fill:#cccccc;stroke-width:0.70710677" />
+</svg>

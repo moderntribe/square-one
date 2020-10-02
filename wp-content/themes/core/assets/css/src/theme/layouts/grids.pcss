@@ -1,0 +1,121 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Grids
+ *
+ * Provides basic grid layouts applied via a single CSS class to a container
+ * element. This are pre-defined grids with respective layouts at each
+ * breakpoint. They are not breakpoint specific.
+ *
+ * TODO:
+ *  Once gap/grid-gap are supported for flexbox, we can remove all the margins
+ *  and negative margins in favor of those properties.
+ *  @link: https://developer.mozilla.org/en-US/docs/Web/CSS/gap#Browser_compatibility
+ *
+ * ----------------------------------------------------------------------------- */
+
+/* -----------------------------------------------------------------------------
+ * 2-Up
+ * ----------------------------------------------------------------------------- */
+
+.g-2-up {
+	display: flex;
+	flex-flow: row wrap;
+	margin: var(--grid-gutter-small-half-negative) 0;
+
+	@media (--viewport-medium) {
+		margin: var(--grid-gutter-medium-half-negative);
+	}
+
+	@media (--viewport-full) {
+		margin: var(--grid-gutter-half-negative);
+	}
+
+	& > * {
+		width: 100%;
+		margin: var(--grid-gutter-small-half) 0;
+
+		@media (--viewport-medium) {
+			width: calc(50% - var(--grid-gutter-medium));
+			margin: var(--grid-gutter-medium-half);
+		}
+
+		@media (--viewport-full) {
+			width: calc(50% - var(--grid-gutter));
+			margin: var(--grid-gutter-half);
+		}
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * 3-Up
+ * ----------------------------------------------------------------------------- */
+
+.g-3-up {
+	display: flex;
+	flex-flow: row wrap;
+	margin: var(--grid-gutter-small-half-negative) 0;
+
+	@media (--viewport-medium) {
+		margin: var(--grid-gutter-medium-half-negative);
+	}
+
+	@media (--viewport-full) {
+		margin: var(--grid-gutter-half-negative);
+	}
+
+	& > * {
+		width: 100%;
+		margin: var(--grid-gutter-small-half) 0;
+
+		@media (--viewport-medium) {
+			width: calc(50% - var(--grid-gutter-medium));
+			margin: var(--grid-gutter-medium-half);
+		}
+
+		@media (--viewport-full) {
+			width: calc(33.3333% - var(--grid-gutter));
+			margin: var(--grid-gutter-half);
+		}
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * 4-Up
+ * ----------------------------------------------------------------------------- */
+
+.g-4-up {
+	display: flex;
+	flex-flow: row wrap;
+	margin: var(--grid-gutter-small-half-negative) 0;
+
+	@media (--viewport-medium) {
+		margin: var(--grid-gutter-medium-half-negative);
+	}
+
+	@media (--viewport-full) {
+		margin: var(--grid-gutter-half-negative);
+	}
+
+	& > * {
+		width: 100%;
+		margin: var(--grid-gutter-small-half) 0;
+
+		@media (--viewport-medium) {
+			width: calc(50% - var(--grid-gutter-medium));
+			margin: var(--grid-gutter-medium-half);
+		}
+
+		@media (--viewport-full) {
+			width: calc(25% - var(--grid-gutter));
+			margin: var(--grid-gutter-half);
+		}
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Centered
+ * ----------------------------------------------------------------------------- */
+
+.g-centered {
+	justify-content: center;
+}

@@ -1,0 +1,121 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Component: Card
+ *
+ * ----------------------------------------------------------------------------- */
+
+.c-card {
+	display: flex;
+	flex-flow: column nowrap;
+
+	/* CASE: Whole card is a link. */
+	&.has-target-link {
+		transition: var(--transition);
+
+		&:hover {
+			cursor: pointer;
+		}
+	}
+
+	/* CASE: Style: Elevated */
+	&.c-card--style-elevated {
+		padding: var(--spacer-30) 0;
+		box-shadow: var(--box-shadow-20);
+
+		/* CASE: Whole card is a link. */
+		&.has-target-link {
+
+			&:hover,
+			&:focus-within {
+				box-shadow: var(--box-shadow-20-hover);
+			}
+		}
+	}
+
+	/* CASE: Style: Outlined */
+	&.c-card--style-outlined {
+		padding: var(--spacer-30) 0;
+		border: 1px solid var(--color-border);
+
+		/* CASE: Whole card is a link. */
+		&.has-target-link {
+
+			&:hover,
+			&:focus-within {
+				border-color: var(--color-link-hover);
+			}
+		}
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Card Media Container
+ * ----------------------------------------------------------------------------- */
+
+.c-card__media {
+	margin-bottom: var(--spacer-30);
+
+	/* CASE: Style: Outlined & Elevated */
+	.c-card--style-elevated &,
+	.c-card--style-outlined & {
+		margin-top: calc(-1 * var(--spacer-30));
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Card Content Container
+ * ----------------------------------------------------------------------------- */
+
+.c-card__content {
+	margin: 0 0 auto; /* Pushes the CTA to the bottom of the card. */
+
+	/* CASE: Style: Outlined & Elevated */
+	.c-card--style-elevated &,
+	.c-card--style-outlined & {
+		padding: 0 var(--spacer-30);
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Card Meta
+ * ----------------------------------------------------------------------------- */
+
+.c-card__meta {
+	margin-bottom: var(--spacer-10);
+}
+
+/* -----------------------------------------------------------------------------
+ * Card Meta: Secondary
+ * ----------------------------------------------------------------------------- */
+
+.c-card__meta--secondary {
+	margin-top: var(--spacer-10);
+}
+
+/* -----------------------------------------------------------------------------
+ * Card Title
+ * ----------------------------------------------------------------------------- */
+
+.c-card__title {}
+
+/* -----------------------------------------------------------------------------
+ * Card Description
+ * ----------------------------------------------------------------------------- */
+
+.c-card__description {
+	margin-top: var(--spacer-10);
+}
+
+/* -----------------------------------------------------------------------------
+ * Card Call To Action
+ * ----------------------------------------------------------------------------- */
+
+.c-card__cta {
+	margin-top: var(--spacer-30);
+
+	/* CASE: Style: Outlined & Elevated */
+	.c-card--style-elevated &,
+	.c-card--style-outlined & {
+		padding: 0 var(--spacer-30);
+	}
+}

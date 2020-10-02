@@ -1,0 +1,193 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Component: Block: Links
+ *
+ * ----------------------------------------------------------------------------- */
+
+.b-links {
+
+	/* CASE: Layout Stacked is slightly different than content block inline layout */
+	.c-content-block--layout-inline {
+
+		.c-block__title {
+
+			@media (--viewport-medium) {
+				float: none;
+				width: 100%;
+			}
+
+			@media (--viewport-full) {
+				float: left;
+				width: calc(58.3333% - var(--grid-gutter-half));
+			}
+		}
+
+		.c-block__description,
+		.c-content-block__cta {
+			@media (--viewport-medium) {
+				float: none;
+				width: 100%;
+			}
+
+			@media (--viewport-full) {
+				float: right;
+				width: calc(41.6667% - var(--grid-gutter-half));
+			}
+		}
+
+		.c-block__description {
+			@media (--viewport-medium) {
+				margin-top: var(--spacer-20);
+			}
+
+			@media (--viewport-full) {
+				margin-top: 0;
+			}
+		}
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Links: Container
+ * ----------------------------------------------------------------------------- */
+
+.b-links__container {
+	/* CASE: Layout Inline */
+	.b-links--layout-inline & {
+		@media (--viewport-full) {
+			display: flex;
+			justify-content: space-between;
+		}
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Links: Header
+ * ----------------------------------------------------------------------------- */
+
+.b-links__header {
+	/* CASE: Layout Inline */
+	.b-links--layout-inline & {
+		margin-bottom: var(--spacer-60);
+
+		@media (--viewport-full) {
+			margin-bottom: 0;
+			padding-right: var(--grid-gutter);
+			max-width: var(--grid-7-col);
+			width: calc(58.3333% + var(--grid-gutter));
+		}
+	}
+
+	/* CASE: Layout Stacked: Content Block elements are inline (floated) */
+	.b-links--layout-stacked & {
+		@mixin clearfix;
+
+		margin-bottom: var(--spacer-60);
+		max-width: none;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Links: Title
+ * ----------------------------------------------------------------------------- */
+
+.b-links__title {
+
+}
+
+/* -----------------------------------------------------------------------------
+ * Links: Description
+ * ----------------------------------------------------------------------------- */
+
+.b-links__description {
+
+	> p {
+		@mixin t-body-large;
+	}
+
+	/* CASE: Layout Inline */
+	.b-links--layout-inline & {
+		margin-top: var(--spacer-20);
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Links: Content
+ * ----------------------------------------------------------------------------- */
+
+.b-links__content {
+	/* CASE: Layout Inline */
+	.b-links--layout-inline & {
+		@media (--viewport-full) {
+			padding-left: var(--grid-gutter);
+			max-width: var(--grid-4-col);
+			width: calc(33.3333% + var(--grid-gutter));
+		}
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Links: List
+ * ----------------------------------------------------------------------------- */
+
+.b-links__list-title {
+	/* CASE: Layout Inline */
+	.b-links--layout-inline & {
+		margin-bottom: var(--spacer-10);
+	}
+}
+
+.b-links__list {
+	/* CASE: Layout Stacked */
+	.b-links--layout-stacked & li {
+		border-bottom: 1px solid var(--color-grey-light);
+
+		&:last-child {
+			border-bottom: 0;
+		}
+	}
+}
+
+.b-links__list-link {
+	@mixin t-text-button;
+
+	display: block;
+	position: relative;
+	padding: var(--spacer-10) 0 var(--spacer-10) 28px;
+	transition: var(--transition);
+
+	.b-links & {
+		color: var(--color-primary);
+		text-decoration: none;
+
+		&:focus,
+		&:hover {
+			color: var(--color-secondary);
+		}
+	}
+
+	&:before {
+		@mixin icon;
+
+		position: absolute;
+		left: 0;
+		top: 4px;
+		display: block;
+		color: currentColor;
+		content: var(--icon-chevron-right);
+		font-family: var(--font-family-core-icons);
+		font-size: var(--font-size-body-large);
+		line-height: 1.8;
+		text-align: center;
+		transition: var(--transition);
+	}
+
+	/* CASE: Layout Stacked */
+	.b-links--layout-stacked & {
+		padding: var(--spacer-40) 0 var(--spacer-40) 28px;
+
+		&:before {
+			top: 28px;
+		}
+	}
+}

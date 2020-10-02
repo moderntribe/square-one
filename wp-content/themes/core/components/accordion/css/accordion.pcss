@@ -1,0 +1,81 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Component: Accordion
+ *
+ * ----------------------------------------------------------------------------- */
+
+.c-accordion {
+	margin: 0 auto;
+}
+
+/* -----------------------------------------------------------------------------
+ * Accordion: Row
+ * ----------------------------------------------------------------------------- */
+
+.c-accordion__row {
+	border-bottom: 1px solid var(--color-neutral-10);
+}
+
+/* -----------------------------------------------------------------------------
+ * Accordion: Row Header (Trigger)
+ * ----------------------------------------------------------------------------- */
+
+.c-accordion__header {
+	position: relative;
+	padding: var(--spacer-30) 0 var(--spacer-30) var(--grid-1-col);
+	background: none;
+	border: 0;
+	width: 100%;
+	text-align: left;
+
+	&:before {
+		@mixin icon;
+
+		position: absolute;
+		left: 0;
+		display: block;
+		float: left;
+		width: var(--grid-1-col);
+		color: var(--color-grey-light);
+		content: var(--icon-chevron-down);
+		font-family: var(--font-family-core-icons);
+		font-size: var(--font-size-body-large);
+		line-height: 1.8;
+		text-align: center;
+		transition: 0.25s ease-in-out;
+	}
+
+	&:focus,
+	&:hover {
+		color: var(--color-primary);
+		transition: var(--transition);
+	}
+
+	/* CASE: Row is active */
+	.active & {
+		padding-bottom: var(--spacer-20);
+
+		&:before {
+			color: var(--color-text);
+			transform: rotate(-180deg);
+		}
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Accordion: Row Content
+ * ----------------------------------------------------------------------------- */
+
+.c-accordion__content {
+	max-height: 0;
+	overflow: hidden;
+}
+
+/* -----------------------------------------------------------------------------
+ * Accordion: Row Content Container
+ * ----------------------------------------------------------------------------- */
+
+.c-accordion__content-container {
+	padding-left: var(--grid-1-col);
+	padding-bottom: var(--spacer-30);
+}

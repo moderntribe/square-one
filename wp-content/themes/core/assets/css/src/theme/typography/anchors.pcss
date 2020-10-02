@@ -1,0 +1,62 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Typography: Anchors
+ *
+ * ----------------------------------------------------------------------------- */
+
+/* -------------------------------------------------------------------------
+ * Anchor: Defaults
+ * ------------------------------------------------------------------------- */
+
+a {
+	transition: var(--transition);
+	color: inherit;
+	text-decoration: none;
+	outline: 0;
+	cursor: pointer;
+
+	&:visited,
+	&:hover {
+		color: inherit;
+	}
+
+	&:active,
+	&:focus {
+		outline: 1px dotted;
+		color: inherit;
+	}
+}
+
+/* -------------------------------------------------------------------------
+ * Anchor: Full
+ * ------------------------------------------------------------------------- */
+
+.anchor,
+.t-sink a {
+	color: var(--color-text);
+	text-decoration: underline;
+	font-weight: 700;
+	text-decoration-color: var(--color-link-focus);
+
+	&:hover {
+		color: var(--color-link-hover);
+		text-decoration-color: inherit;
+	}
+
+	&:focus {
+		color: var(--color-link-focus);
+		outline: none;
+		text-decoration-color: inherit;
+	}
+
+	/* CASE: light theme */
+	.t-theme--light & {
+		color: var(--color-white);
+
+		&:focus,
+		&:active,
+		&:hover {
+			color: var(--color-primary-30);
+		}
+	}
+}

@@ -1,0 +1,121 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Typography: Lists
+ *
+ * ----------------------------------------------------------------------------- */
+
+/* -------------------------------------------------------------------------
+ * Lists Shared
+ * ------------------------------------------------------------------------- */
+
+.t-list,
+ul,
+ol,
+dl {
+
+	.t-sink > & {
+		@mixin t-body;
+	}
+}
+
+/* -------------------------------------------------------------------------
+ * List Item
+ * ------------------------------------------------------------------------- */
+
+li {}
+
+/* -------------------------------------------------------------------------
+ * Unordered List
+ * ------------------------------------------------------------------------- */
+
+.t-list--bullets,
+.t-sink > ul {
+	list-style: disc outside;
+	padding-left: 1.5em;
+}
+
+/* -------------------------------------------------------------------------
+ * Unordered List: Stylized
+ * ------------------------------------------------------------------------- */
+
+.t-list--bullets-stylized,
+.t-sink > ul.is-style-t-list-stylized {
+	list-style: none;
+	padding-left: 0;
+
+	li {
+		position: relative;
+		padding-left: var(--spacer-40);
+
+		&:before {
+			@mixin icon;
+
+			content: var(--icon-bullet-round);
+			position: absolute;
+			left: 0;
+			font-size: var(--font-size-body-large);
+			line-height: 2rem; /* list item line-height */
+		}
+	}
+}
+
+/* -------------------------------------------------------------------------
+ * Ordered List
+ * ------------------------------------------------------------------------- */
+
+.t-list--numbered,
+.t-sink > ol {
+	list-style: decimal outside;
+	padding-left: 1.5em;
+}
+
+/* -------------------------------------------------------------------------
+ * Ordered List: Stylized
+ * ------------------------------------------------------------------------- */
+
+.t-list--numbered-stylized,
+.t-sink > ol.is-style-t-list-stylized {
+	list-style: none;
+	padding-left: 0;
+	counter-reset: list-number;
+
+	li {
+		position: relative;
+		padding-left: var(--spacer-40);
+		counter-increment: list-number;
+
+		&:before {
+			@mixin t-label;
+
+			content: counter(list-number);
+			position: absolute;
+			left: 0;
+			font-weight: 700;
+			line-height: 2rem; /* list item line-height */
+			color: var(--color-primary);
+		}
+	}
+}
+
+/* -------------------------------------------------------------------------
+ * Definition List
+ * ------------------------------------------------------------------------- */
+
+.dl,
+.t-sink > dl {}
+
+/* -------------------------------------------------------------------------
+ * Definition List: Term
+ * ------------------------------------------------------------------------- */
+
+.dt,
+.t-sink > dt {
+	font-weight: 700;
+}
+
+/* -------------------------------------------------------------------------
+ * Definition List: Definition
+ * ------------------------------------------------------------------------- */
+
+.dd,
+.t-sink > dd {}

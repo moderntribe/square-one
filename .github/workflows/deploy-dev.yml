@@ -1,0 +1,128 @@
+name: Dev Deploy
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      BUILD_FOLDER: ./build
+      DEPLOY_FOLDER: ./deploy
+      ENVIRONMENT: dev
+      DEPLOY_REPO: ${{ secrets.DEV_DEPLOY_REPO }}
+      COMPOSER_AUTH: '{ "github-oauth": { "github.com": "${{ secrets.GH_TOKEN }}" } }'
+
+    steps:
+
+      ##########
+      ### BUILD: General SquareOne build steps
+
+      # Get Build Repository
+      - name: Check out build branch
+        uses: actions/checkout@v2
+        with:
+          path: ${{ env.BUILD_FOLDER }}
+          ref: ${{github.ref}}
+
+      # Cache composer vendor folder TODO
+
+      # Install composer: Add env for plugin keys, composer install, and cleanup
+      - name: Install composer dependencies
+        working-directory: ${{ env.BUILD_FOLDER }}
+        run: |
+          echo "${{ secrets.COMPOSER_ENV }}" > .env
+          composer install --optimize-autoloader --ignore-platform-reqs --no-dev
+          rm .env
+          rm -rf vendor/moderntribe/tribe-libs/.git
+          rm -rf wp-content/plugins/panel-builder/.git
+
+      # Setup node version
+      - name: Setup node version
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.13.1'
+
+      # Cache node_modules TODO
+
+      # Yarn Install and Build
+      - name: Yarn install and build
+        working-directory: ${{ env.BUILD_FOLDER }}
+        run: |
+          yarn install:theme
+          yarn validate
+          yarn server_dist
+
+      # Create local config for environment based settings
+      - name: Create local config
+        working-directory: ${{ env.BUILD_FOLDER }}
+        run: |
+          php -r "file_exists( 'local-config.php' ) || copy( 'local-config-sample.php', 'local-config.php' );"
+          php -r "file_exists( 'local-config.json' ) || copy( 'local-config-sample.json', 'local-config.json' );"
+          echo "define( 'ENVIRONMENT', ${{env.ENVIROMENT}} );" >> local-config.php
+
+      ##########
+      ### DEPLOY: Use the WPE git deploy hook method. TLDR; rsync our repo on their repo and push.
+
+      # Setup SSH key for deploy environment
+      - name: HOST SCM SSH KEY
+        uses: webfactory/ssh-agent@v0.2.0
+        with:
+          ssh-private-key: ${{secrets.DEPLOY_PRIVATE_SSH_KEY}}
+
+      # Get Build Repository and add wpengine to allowed hosts
+      - name: HOST SCM
+        run: |
+          ssh-keyscan git.wpengine.com >> ~/.ssh/known_hosts
+          git clone ${{env.DEPLOY_REPO}} ${{env.DEPLOY_FOLDER}}
+          cd ${{env.DEPLOY_FOLDER}}
+          git config user.email "devops@tri.be"
+          git config user.name "devops"
+
+      # Rsync wordpress
+      - name: Sync Build WP folder to Deploy directory
+        run: |
+          rsync -rpv --delete ${{env.BUILD_FOLDER}}/wp/ ${{env.DEPLOY_FOLDER}} \
+            --exclude=.git \
+            --exclude=.gitmodules \
+            --exclude=.gitignore \
+            --exclude=.htaccess \
+            --exclude=wp-config.php \
+            --exclude=wp-content
+
+      # Rsync plugin and theme files
+      - name: Sync Build WP-CONTENT folder to Deploy directory
+        run: |
+          rsync -rpv --delete ${{env.BUILD_FOLDER}}/wp-content ${{env.DEPLOY_FOLDER}} \
+            --exclude=.git \
+            --exclude=.gitmodules \
+            --exclude=.gitignore \
+            --exclude=.htaccess \
+            --exclude=.babelrc \
+            --exclude=.editorconfig \
+            --exclude=.eslintrc \
+            --exclude=dev \
+            --exclude=dev_components \
+            --exclude=docs \
+            --exclude=gulp_tasks \
+            --exclude=node_modules \
+            --exclude=wp-content/object-cache.php \
+            --exclude=wp-content/plugins/core/assets/templates/cli
+
+      # Rsync Composer Vendor files
+      - name: Sync Build VENDOR folder to Deploy directory
+        run: |
+          rsync -rpv ${{env.BUILD_FOLDER}}/ ${{env.DEPLOY_FOLDER}} \
+            --include=build-process.php \
+            --include=vendor/*** \
+            --exclude=*
+
+      # Git push to WPE to trigger deploy
+      - name: Git Push to Host SCM
+        working-directory: ${{ env.DEPLOY_FOLDER }}
+        run: |
+          echo 'Deploying ${{env.GITHUB_REF}} to ${{env.ENVIRONMENT}}'
+          git add -Av
+          git commit --allow-empty -m 'Deploying ${env.BRANCH_NAME} to ${env.ENVIRONMENT}'
+          git push origin master

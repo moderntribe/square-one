@@ -13,5 +13,4 @@ The tests will be executed at the start of every `gulp dist` and on the server w
 ## Table of Contents
 
 * [Overview](/docs/tests/README.md)
-* [Codeception](/dev/tests/README.md)
 * [Jest](/docs/tests/jest.md)

@@ -26,8 +26,8 @@ spaces_within_imports = true
 indent_style = space
 indent_size = 2
 
-# Indentation override for all CSS under pcss directory
-[wp-content/themes/core/pcss/**/**/*.pcss]
+# Indentation override for all CSS under theme directory
+[wp-content/themes/core/**/**/*.pcss]
 indent_style = tab
 
 [*.json]

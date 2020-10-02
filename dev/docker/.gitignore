@@ -1,2 +1,4 @@
 docker-compose.override.yml
 acme.json
+/global
+.env

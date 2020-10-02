@@ -1,4 +1,3 @@
 <?php
 
-$template = new \Tribe\Project\Templates\Single( 'single.twig' );
-echo $template->render();
+get_template_part( 'components/routes/single/single' );

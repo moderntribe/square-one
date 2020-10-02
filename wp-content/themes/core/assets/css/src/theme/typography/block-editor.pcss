@@ -1,0 +1,43 @@
+
+/* -----------------------------------------------------------------------------
+ *
+ * Block Editor
+ * Typography Styles & Overrides
+ *
+ * Styles applicable to typography in the block editor.
+ *
+ * ----------------------------------------------------------------------------- */
+
+.wp-block {
+	/* -----------------------------------------------------------------------------
+	 * Horizontal Rule/Separator
+	 *
+	 * Override WP-Core's heavy-selector max-width value.
+	 * ----------------------------------------------------------------------------- */
+	hr {
+		max-width: none !important;
+	}
+
+	/* -----------------------------------------------------------------------------
+	 * Blockquotes
+	 *
+	 * Override WP-Core's default styles
+	 * ----------------------------------------------------------------------------- */
+	.wp-block-quote {
+		border-left: 0;
+		padding-left: 0;
+	}
+
+	/* -----------------------------------------------------------------------------
+	 * Overline
+	 *
+	 * Overrides default selector spacing for this editor style
+	 * ----------------------------------------------------------------------------- */
+
+	&.is-style-t-overline {
+
+		& + .wp-block > * {
+			margin-top: var(--spacer-20);
+		}
+	}
+}

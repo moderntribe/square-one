@@ -18,6 +18,8 @@ if ( file_exists( ABSPATH . '../vendor/autoload.php' ) ) {
 	// In core plugin
 	require_once trailingslashit(__DIR__ ) . 'vendor/autoload.php';
 }
+require_once trailingslashit( __DIR__ ) . 'functions/pluggable.php';
+require_once trailingslashit( __DIR__ ) . 'functions/templates.php';
 
 // Start the core plugin
 add_action( 'plugins_loaded', function () {
