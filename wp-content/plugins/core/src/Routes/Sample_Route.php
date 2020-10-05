@@ -21,7 +21,7 @@ class Sample_Route extends Abstract_Route {
 	 * @return array      Modified core JS configuration.
 	 */
 	public function js_config( array $data = [] ) : array {
-		$data['FormSubmitEndpoint'] = rest_url( '/mt-trial/v1/submit-form/' );
+		$data['FormSubmitEndpoint'] = rest_url( '/tribe/v1/submit-form/' );
 		return $data;
 	}
 
