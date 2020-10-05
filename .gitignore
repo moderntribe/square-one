@@ -130,8 +130,3 @@ dev/docker/global/.env
 #######################
 !dev/tests/tests/_data/*.sql
 dev/tests/tests/_support/_generated/
-
-# Compiled Files #
-######################
-themes/core/assets/css/dist
-themes/core/assets/js/dist
