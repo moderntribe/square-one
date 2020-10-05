@@ -12,6 +12,7 @@ use Tribe\Project\Theme\Config\Image_Sizes;
 class Quote extends Block_Config {
 	public const NAME = 'quote';
 
+	public const SECTION_CONTENT = 's-content';
 	public const IMAGE = 'image';
 
 	public const QUOTE      = 'text';
@@ -19,6 +20,7 @@ class Quote extends Block_Config {
 	public const CITE_TITLE = 'cite_title';
 	public const CITE_IMAGE = 'cite_image';
 
+	public const SECTION_SETTINGS  = 's-settings';
 	public const LAYOUT        = 'layout';
 	public const MEDIA_LEFT    = 'left';
 	public const MEDIA_RIGHT   = 'right';
@@ -60,7 +62,7 @@ class Quote extends Block_Config {
 		//==========================================
 		// Content Fields
 		//==========================================
-		$this->add_section( new Field_Section( __( 'Content', 'tribe' ), 'accordion' ) )
+		$this->add_section( new Field_Section( self::SECTION_CONTENT, __( 'Content', 'tribe' ), 'accordion' ) )
 			 ->add_field( new Field( self::NAME . '_' . self::IMAGE, [
 					 'label'         => __( 'Image', 'tribe' ),
 					 'name'          => self::IMAGE,
@@ -107,7 +109,7 @@ class Quote extends Block_Config {
 		//==========================================
 		// Setting Fields
 		//==========================================
-		$this->add_section( new Field_Section( __( 'Settings', 'tribe' ), 'accordion' ) )
+		$this->add_section( new Field_Section( self::SECTION_SETTINGS, __( 'Settings', 'tribe' ), 'accordion' ) )
 			 ->add_field( new Field( self::NAME . '_' . self::LAYOUT, [
 				 'label'           => __( 'Layout', 'tribe' ),
 				 'name'            => self::LAYOUT,

@@ -12,18 +12,20 @@ use Tribe\Libs\ACF\Repeater;
 class Links extends Block_Config {
 	public const NAME = 'links';
 
-	public const LEAD_IN     = 'leadin';
-	public const TITLE       = 'title';
-	public const DESCRIPTION = 'description';
-	public const CTA         = 'cta';
+	public const SECTION_CONTENT = 's-content';
+	public const LEAD_IN         = 'leadin';
+	public const TITLE           = 'title';
+	public const DESCRIPTION     = 'description';
+	public const CTA             = 'cta';
 
 	public const LINKS_TITLE = 'links_title';
 	public const LINKS       = 'links';
 	public const LINK_ITEM   = 'item';
 
-	public const LAYOUT         = 'layout';
-	public const LAYOUT_INLINE  = 'inline';
-	public const LAYOUT_STACKED = 'stacked';
+	public const SECTION_SETTINGS = 's-settings';
+	public const LAYOUT           = 'layout';
+	public const LAYOUT_INLINE    = 'inline';
+	public const LAYOUT_STACKED   = 'stacked';
 
 	public function add_block() {
 		$this->set_block( new Block( self::NAME, [
@@ -78,13 +80,13 @@ class Links extends Block_Config {
 		//==========================================
 		// Content Fields
 		//==========================================
-		$this->add_section( new Field_Section( __( 'Content', 'tribe' ), 'accordion' ) )
-			 ->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
-					 'label' => __( 'Lead in', 'tribe' ),
-					 'name'  => self::LEAD_IN,
-					 'type'  => 'text',
-				 ] )
-			 )->add_field( new Field( self::NAME . '_' . self::TITLE, [
+		$this->add_section( new Field_Section( self::SECTION_CONTENT, __( 'Content', 'tribe' ), 'accordion' ) )
+		     ->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
+				     'label' => __( 'Lead in', 'tribe' ),
+				     'name'  => self::LEAD_IN,
+				     'type'  => 'text',
+			     ] )
+		     )->add_field( new Field( self::NAME . '_' . self::TITLE, [
 					'label' => __( 'Title', 'tribe' ),
 					'name'  => self::TITLE,
 					'type'  => 'text',
@@ -114,23 +116,23 @@ class Links extends Block_Config {
 		//==========================================
 		// Setting Fields
 		//==========================================
-		$this->add_section( new Field_Section( __( 'Settings', 'tribe' ), 'accordion' ) )
-			 ->add_field( new Field( self::NAME . '_' . self::LAYOUT, [
-				 'type'            => 'image_select',
-				 'name'            => self::LAYOUT,
-				 'choices'         => [
-					 self::LAYOUT_INLINE  => __( 'Inline', 'tribe' ),
-					 self::LAYOUT_STACKED => __( 'Stacked', 'tribe' ),
-				 ],
-				 'default_value'   => self::LAYOUT_STACKED,
-				 'multiple'        => 0,
-				 'image_path'      => sprintf(
-					 '%sassets/img/admin/blocks/%s/',
-					 trailingslashit( get_template_directory_uri() ),
-					 self::NAME
-				 ),
-				 'image_extension' => 'svg',
-			 ] ) );
+		$this->add_section( new Field_Section( self::SECTION_SETTINGS, __( 'Settings', 'tribe' ), 'accordion' ) )
+		     ->add_field( new Field( self::NAME . '_' . self::LAYOUT, [
+			     'type'            => 'image_select',
+			     'name'            => self::LAYOUT,
+			     'choices'         => [
+				     self::LAYOUT_INLINE  => __( 'Inline', 'tribe' ),
+				     self::LAYOUT_STACKED => __( 'Stacked', 'tribe' ),
+			     ],
+			     'default_value'   => self::LAYOUT_STACKED,
+			     'multiple'        => 0,
+			     'image_path'      => sprintf(
+				     '%sassets/img/admin/blocks/%s/',
+				     trailingslashit( get_template_directory_uri() ),
+				     self::NAME
+			     ),
+			     'image_extension' => 'svg',
+		     ] ) );
 	}
 
 	/**

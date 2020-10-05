@@ -11,18 +11,21 @@ use Tribe\Libs\ACF\Field_Section;
 class Media_Text extends Block_Config {
 	public const NAME = 'mediatext';
 
-	public const LAYOUT       = 'layout';
-	public const MEDIA_LEFT   = 'left';
-	public const MEDIA_RIGHT  = 'right';
-	public const MEDIA_CENTER = 'center';
-	public const WIDTH        = 'width';
-	public const WIDTH_GRID   = 'grid';
-	public const WIDTH_FULL   = 'full';
+	public const SECTION_SETTINGS = 's-settings';
+	public const LAYOUT           = 'layout';
+	public const MEDIA_LEFT       = 'left';
+	public const MEDIA_RIGHT      = 'right';
+	public const MEDIA_CENTER     = 'center';
+	public const WIDTH            = 'width';
+	public const WIDTH_GRID       = 'grid';
+	public const WIDTH_FULL       = 'full';
 
-	public const LEAD_IN     = 'leadin';
-	public const TITLE       = 'title';
-	public const DESCRIPTION = 'description';
-	public const CTA         = 'cta';
+	public const SECTION_CONTENT = 's-content';
+	public const LEAD_IN         = 'leadin';
+	public const TITLE           = 'title';
+	public const DESCRIPTION     = 'description';
+	public const CTA             = 'cta';
+
 
 	public const MEDIA_TYPE = 'media_type';
 	public const IMAGE      = 'image';
@@ -74,13 +77,13 @@ class Media_Text extends Block_Config {
 		//==========================================
 		// Content Fields
 		//==========================================
-		$this->add_section( new Field_Section( __( 'Content', 'tribe' ), 'accordion' ) )
-			 ->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
-					 'label' => __( 'Lead in', 'tribe' ),
-					 'name'  => self::LEAD_IN,
-					 'type'  => 'text',
-				 ] )
-			 )->add_field( new Field( self::NAME . '_' . self::TITLE, [
+		$this->add_section( new Field_Section( self::SECTION_CONTENT, __( 'Content', 'tribe' ), 'accordion' ) )
+		     ->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
+				     'label' => __( 'Lead in', 'tribe' ),
+				     'name'  => self::LEAD_IN,
+				     'type'  => 'text',
+			     ] )
+		     )->add_field( new Field( self::NAME . '_' . self::TITLE, [
 					'label' => __( 'Title', 'tribe' ),
 					'name'  => self::TITLE,
 					'type'  => 'text',
@@ -117,7 +120,7 @@ class Media_Text extends Block_Config {
 					'preview_size'      => 'medium',
 					'instructions'      => __(
 						'Recommended image size by layout:<br>Center: 1920px wide with a 16:9 aspect ratio.<br>Left/Right: 1536px wide with a 4:3 aspect ratio.',
-						'tribe' 
+						'tribe'
 					),
 					'conditional_logic' => [
 						[
@@ -148,25 +151,25 @@ class Media_Text extends Block_Config {
 		//==========================================
 		// Setting Fields
 		//==========================================
-		$this->add_section( new Field_Section( __( 'Settings', 'tribe' ), 'accordion' ) )
-			 ->add_field( new Field( self::NAME . '_' . self::LAYOUT, [
-				 'label'           => __( 'Layout', 'tribe' ),
-				 'name'            => self::LAYOUT,
-				 'type'            => 'image_select',
-				 'choices'         => [
-					 self::MEDIA_LEFT   => __( 'Media Left', 'tribe' ),
-					 self::MEDIA_CENTER => __( 'Media Stacked', 'tribe' ),
-					 self::MEDIA_RIGHT  => __( 'Media Right', 'tribe' ),
-				 ],
-				 'default_value'   => self::MEDIA_CENTER,
-				 'multiple'        => 0,
-				 'image_path'      => sprintf(
-					 '%sassets/img/admin/blocks/%s/',
-					 trailingslashit( get_template_directory_uri() ),
-					 self::NAME
-				 ),
-				 'image_extension' => 'svg',
-			 ] ) )->add_field( new Field( self::NAME . '_' . self::WIDTH, [
+		$this->add_section( new Field_Section( self::SECTION_SETTINGS, __( 'Settings', 'tribe' ), 'accordion' ) )
+		     ->add_field( new Field( self::NAME . '_' . self::LAYOUT, [
+			     'label'           => __( 'Layout', 'tribe' ),
+			     'name'            => self::LAYOUT,
+			     'type'            => 'image_select',
+			     'choices'         => [
+				     self::MEDIA_LEFT   => __( 'Media Left', 'tribe' ),
+				     self::MEDIA_CENTER => __( 'Media Stacked', 'tribe' ),
+				     self::MEDIA_RIGHT  => __( 'Media Right', 'tribe' ),
+			     ],
+			     'default_value'   => self::MEDIA_CENTER,
+			     'multiple'        => 0,
+			     'image_path'      => sprintf(
+				     '%sassets/img/admin/blocks/%s/',
+				     trailingslashit( get_template_directory_uri() ),
+				     self::NAME
+			     ),
+			     'image_extension' => 'svg',
+		     ] ) )->add_field( new Field( self::NAME . '_' . self::WIDTH, [
 				'label'           => __( 'Width', 'tribe' ),
 				'name'            => self::WIDTH,
 				'type'            => 'image_select',

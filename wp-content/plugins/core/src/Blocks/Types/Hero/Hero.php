@@ -11,16 +11,18 @@ use Tribe\Libs\ACF\Field;
 class Hero extends Block_Config {
 	public const NAME = 'hero';
 
-	public const IMAGE = 'image';
+	public const SECTION_CONTENT = 's-content';
+	public const IMAGE           = 'image';
 
 	public const LEAD_IN     = 'leadin';
 	public const TITLE       = 'title';
 	public const DESCRIPTION = 'description';
 	public const CTA         = 'cta';
 
-	public const LAYOUT        = 'layout';
-	public const LAYOUT_LEFT   = 'left';
-	public const LAYOUT_CENTER = 'center';
+	public const SECTION_SETTINGS = 's-settings';
+	public const LAYOUT           = 'layout';
+	public const LAYOUT_LEFT      = 'left';
+	public const LAYOUT_CENTER    = 'center';
 
 	/**
 	 * Register the block
@@ -63,13 +65,13 @@ class Hero extends Block_Config {
 		//==========================================
 		// Content Fields
 		//==========================================
-		$this->add_section( new Field_Section( __( 'Content', 'tribe' ), 'accordion' ) )
-			 ->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
-					 'label' => __( 'Lead in', 'tribe' ),
-					 'name'  => self::LEAD_IN,
-					 'type'  => 'text',
-				 ] )
-			 )->add_field( new Field( self::NAME . '_' . self::TITLE, [
+		$this->add_section( new Field_Section( self::SECTION_CONTENT, __( 'Content', 'tribe' ), 'accordion' ) )
+		     ->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
+				     'label' => __( 'Lead in', 'tribe' ),
+				     'name'  => self::LEAD_IN,
+				     'type'  => 'text',
+			     ] )
+		     )->add_field( new Field( self::NAME . '_' . self::TITLE, [
 					'label' => __( 'Title', 'tribe' ),
 					'name'  => self::TITLE,
 					'type'  => 'text',
@@ -97,23 +99,23 @@ class Hero extends Block_Config {
 		//==========================================
 		// Setting Fields
 		//==========================================
-		$this->add_section( new Field_Section( __( 'Settings', 'tribe' ), 'accordion' ) )
-			 ->add_field( new Field( self::NAME . '_' . self::LAYOUT, [
-				 'type'            => 'image_select',
-				 'name'            => self::LAYOUT,
-				 'choices'         => [
-					 self::LAYOUT_LEFT   => __( 'Align Left', 'tribe' ),
-					 self::LAYOUT_CENTER => __( 'Align Center', 'tribe' ),
-				 ],
-				 'default_value'   => self::LAYOUT_CENTER,
-				 'multiple'        => 0,
-				 'image_path'      => sprintf(
-					 '%sassets/img/admin/blocks/%s/',
-					 trailingslashit( get_template_directory_uri() ),
-					 self::NAME
-				 ),
-				 'image_extension' => 'svg',
-			 ] ) );
+		$this->add_section( new Field_Section( self::SECTION_SETTINGS, __( 'Settings', 'tribe' ), 'accordion' ) )
+		     ->add_field( new Field( self::NAME . '_' . self::LAYOUT, [
+			     'type'            => 'image_select',
+			     'name'            => self::LAYOUT,
+			     'choices'         => [
+				     self::LAYOUT_LEFT   => __( 'Align Left', 'tribe' ),
+				     self::LAYOUT_CENTER => __( 'Align Center', 'tribe' ),
+			     ],
+			     'default_value'   => self::LAYOUT_CENTER,
+			     'multiple'        => 0,
+			     'image_path'      => sprintf(
+				     '%sassets/img/admin/blocks/%s/',
+				     trailingslashit( get_template_directory_uri() ),
+				     self::NAME
+			     ),
+			     'image_extension' => 'svg',
+		     ] ) );
 	}
 
 }

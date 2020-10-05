@@ -61,35 +61,31 @@ class Logos extends Block_Config {
 	}
 
 	public function add_fields() {
-		//==========================================
-		// Content Fields
-		//==========================================
-		$this->add_section( new Field_Section( __( 'Content', 'tribe' ), 'accordion' ) )
-			 ->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
-					 'label' => __( 'Lead in', 'tribe' ),
-					 'name'  => self::LEAD_IN,
-					 'type'  => 'text',
-				 ] )
-			 )->add_field( new Field( self::NAME . '_' . self::TITLE, [
-					'label' => __( 'Title', 'tribe' ),
-					'name'  => self::TITLE,
-					'type'  => 'text',
-				] )
-			)->add_field( new Field( self::NAME . '_' . self::DESCRIPTION, [
-					'label'        => __( 'Description', 'tribe' ),
-					'name'         => self::DESCRIPTION,
-					'type'         => 'wysiwyg',
-					'toolbar'      => 'basic',
-					'media_upload' => 0,
-				] )
-			)->add_field( new Field( self::NAME . '_' . self::CTA, [
-					'label' => __( 'Call to Action', 'tribe' ),
-					'name'  => self::CTA,
-					'type'  => 'link',
-				] )
-			)->add_field(
-				$this->get_logos_section()
-			);
+		$this->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
+				'label' => __( 'Lead in', 'tribe' ),
+				'name'  => self::LEAD_IN,
+				'type'  => 'text',
+			] )
+		)->add_field( new Field( self::NAME . '_' . self::TITLE, [
+				'label' => __( 'Title', 'tribe' ),
+				'name'  => self::TITLE,
+				'type'  => 'text',
+			] )
+		)->add_field( new Field( self::NAME . '_' . self::DESCRIPTION, [
+				'label'        => __( 'Description', 'tribe' ),
+				'name'         => self::DESCRIPTION,
+				'type'         => 'wysiwyg',
+				'toolbar'      => 'basic',
+				'media_upload' => 0,
+			] )
+		)->add_field( new Field( self::NAME . '_' . self::CTA, [
+				'label' => __( 'Call to Action', 'tribe' ),
+				'name'  => self::CTA,
+				'type'  => 'link',
+			] )
+		)->add_field(
+			$this->get_logos_section()
+		);
 	}
 
 	/**

@@ -7,6 +7,7 @@ use Tribe\Libs\ACF\Field;
 use Tribe\Libs\ACF\Block;
 use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Field_Group;
+use Tribe\Libs\ACF\Field_Section;
 use Tribe\Libs\ACF\Repeater;
 use Tribe\Project\Post_Types\Post\Post;
 use Tribe\Project\Post_Types\Sample\Sample;
@@ -14,9 +15,10 @@ use Tribe\Project\Post_Types\Sample\Sample;
 class Card_Grid extends Block_Config {
 	public const NAME = 'cardgrid';
 
-	public const TITLE       = 'title';
-	public const DESCRIPTION = 'description';
-	public const CTA         = 'cta';
+	public const SECTION_CONTENT = 's-content';
+	public const TITLE           = 'title';
+	public const DESCRIPTION     = 'description';
+	public const CTA             = 'cta';
 
 	public const QUERY_TYPE        = 'query_type';
 	public const QUERY_TYPE_AUTO   = 'query_type_auto';
@@ -38,14 +40,15 @@ class Card_Grid extends Block_Config {
 	public const QUERY_TAXONOMIES = 'query_taxonomy_terms';
 	public const QUERY_POST_TYPES = 'query_post_types';
 
+	public const SECTION_SETTINGS = 's-settings';
+	public const LAYOUT           = 'layout';
+	public const LAYOUT_STACKED   = 'stacked';
+	public const LAYOUT_INLINE    = 'inline';
+
 	public const ALLOWED_POST_TYPES = [
 		Post::NAME,
 		Sample::NAME,
 	];
-
-	public const LAYOUT         = 'layout';
-	public const LAYOUT_STACKED = 'stacked';
-	public const LAYOUT_INLINE  = 'inline';
 
 	/**
 	 * Register the block
@@ -80,61 +83,64 @@ class Card_Grid extends Block_Config {
 	 * Register Fields for block
 	 */
 	public function add_fields() {
-		$this->add_field( new Field( self::NAME . '_' . self::TITLE, [
-				'label' => __( 'Title', 'tribe' ),
-				'name'  => self::TITLE,
-				'type'  => 'text',
-			] )
-		)->add_field( new Field( self::NAME . '_' . self::DESCRIPTION, [
-				'label'        => __( 'Description', 'tribe' ),
-				'name'         => self::DESCRIPTION,
-				'type'         => 'wysiwyg',
-				'toolbar'      => 'basic',
-				'media_upload' => 0,
-			] )
-		)->add_field( new Field( self::NAME . '_' . self::CTA, [
-				'label' => __( 'Call to Action', 'tribe' ),
-				'name'  => self::CTA,
-				'type'  => 'link',
-			] )
-		)->add_field( new Field( self::NAME . '_' . self::QUERY_TYPE, [
-				'label'   => __( 'Type of Query', 'tribe' ),
-				'name'    => self::QUERY_TYPE,
-				'type'    => 'button_group',
-				'choices' => [
-					self::QUERY_TYPE_AUTO   => __( 'Automatic', 'tribe' ),
-					self::QUERY_TYPE_MANUAL => __( 'Manual', 'tribe' ),
-				],
-			] )
-		)->add_field(
-			$this->get_query_group_fields()
-		)->add_field(
-			$this->get_manual_group()
-		);
-	}
+		//==========================================
+		// Content Fields
+		//==========================================
+		$this->add_section( new Field_Section( self::SECTION_CONTENT, __( 'Content', 'tribe' ), 'accordion' ) )
+		     ->add_field( new Field( self::NAME . '_' . self::TITLE, [
+				     'label' => __( 'Title', 'tribe' ),
+				     'name'  => self::TITLE,
+				     'type'  => 'text',
+			     ] )
+		     )->add_field( new Field( self::NAME . '_' . self::DESCRIPTION, [
+					'label'        => __( 'Description', 'tribe' ),
+					'name'         => self::DESCRIPTION,
+					'type'         => 'wysiwyg',
+					'toolbar'      => 'basic',
+					'media_upload' => 0,
+				] )
+			)->add_field( new Field( self::NAME . '_' . self::CTA, [
+					'label' => __( 'Call to Action', 'tribe' ),
+					'name'  => self::CTA,
+					'type'  => 'link',
+				] )
+			)->add_field( new Field( self::NAME . '_' . self::QUERY_TYPE, [
+					'label'   => __( 'Type of Query', 'tribe' ),
+					'name'    => self::QUERY_TYPE,
+					'type'    => 'button_group',
+					'choices' => [
+						self::QUERY_TYPE_AUTO   => __( 'Automatic', 'tribe' ),
+						self::QUERY_TYPE_MANUAL => __( 'Manual', 'tribe' ),
+					],
+				] )
+			)->add_field(
+				$this->get_query_group_fields()
+			)->add_field(
+				$this->get_manual_group()
+			);
 
-	/**
-	 * Register Settings for Block
-	 */
-	public function add_settings() {
-		$this->add_setting(
-			new Field( self::NAME . '_' . self::LAYOUT, [
-				'type'            => 'image_select',
-				'name'            => self::LAYOUT,
-				'choices'         => [
-					self::LAYOUT_STACKED => __( 'Stacked', 'tribe' ),
-					self::LAYOUT_INLINE  => __( 'Inline', 'tribe' ),
-				],
-				'default_value'   => self::LAYOUT_STACKED,
-				'multiple'        => 0,
-				'image_path'      => sprintf(
-					'%sassets/img/admin/blocks/%s/',
-					trailingslashit( get_template_directory_uri() ),
-					self::NAME
-				),
-				'image_extension' => 'svg',
-			] )
-		);
+		//==========================================
+		// Setting Fields
+		//==========================================
+		$this->add_section( new Field_Section( self::SECTION_SETTINGS, __( 'Settings', 'tribe' ), 'accordion' ) )
+		     ->add_field(
+			     new Field( self::NAME . '_' . self::LAYOUT, [
+				     'type'            => 'image_select',
+				     'name'            => self::LAYOUT,
+				     'choices'         => [
+					     self::LAYOUT_STACKED => __( 'Stacked', 'tribe' ),
+					     self::LAYOUT_INLINE  => __( 'Inline', 'tribe' ),
+				     ],
+				     'default_value'   => self::LAYOUT_STACKED,
+				     'multiple'        => 0,
+				     'image_path'      => sprintf(
+					     '%sassets/img/admin/blocks/%s/',
+					     trailingslashit( get_template_directory_uri() ),
+					     self::NAME
+				     ),
+				     'image_extension' => 'svg',
+			     ] )
+		     );
 	}
 
 	protected function get_manual_group(): Repeater {
@@ -172,7 +178,8 @@ class Card_Grid extends Block_Config {
 		)->add_field(
 			new Field( self::NAME . '_' . self::MANUAL_TOGGLE, [
 				'label'        => __( 'Create or Override Content', 'tribe' ),
-				'instructions' => __( 'Data entered below will overwrite the respective data from the post selected above.', 'tribe' ),
+				'instructions' => __( 'Data entered below will overwrite the respective data from the post selected above.',
+					'tribe' ),
 				'name'         => self::MANUAL_TOGGLE,
 				'type'         => 'true_false',
 			] )
@@ -309,6 +316,7 @@ class Card_Grid extends Block_Config {
 
 		return $group;
 	}
+
 	/**
 	 * @return array
 	 */

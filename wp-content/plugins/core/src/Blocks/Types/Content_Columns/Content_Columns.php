@@ -5,20 +5,23 @@ namespace Tribe\Project\Blocks\Types\Content_Columns;
 use Tribe\Libs\ACF\Block;
 use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Field;
+use Tribe\Libs\ACF\Field_Section;
 use Tribe\Libs\ACF\Repeater;
 
 class Content_Columns extends Block_Config {
 	public const NAME = 'contentcolumns';
 
-	public const LEADIN      = 'leadin';
-	public const TITLE       = 'title';
-	public const DESCRIPTION = 'description';
-	public const CTA         = 'cta';
-	public const COLUMNS        = 'columns';
-	public const COLUMN_TITLE   = 'col_title';
-	public const COLUMN_CONTENT = 'col_content';
-	public const COLUMN_CTA     = 'col_cta';
+	public const SECTION_CONTENT = 's-content';
+	public const LEADIN          = 'leadin';
+	public const TITLE           = 'title';
+	public const DESCRIPTION     = 'description';
+	public const CTA             = 'cta';
+	public const COLUMNS         = 'columns';
+	public const COLUMN_TITLE    = 'col_title';
+	public const COLUMN_CONTENT  = 'col_content';
+	public const COLUMN_CTA      = 'col_cta';
 
+	public const SECTION_SETTINGS     = 's-settings';
 	public const CONTENT_ALIGN        = 'content-align';
 	public const CONTENT_ALIGN_LEFT   = 'left';
 	public const CONTENT_ALIGN_CENTER = 'center';
@@ -63,28 +66,54 @@ class Content_Columns extends Block_Config {
 	 * Add Fields
 	 */
 	protected function add_fields() {
-		$this->add_field( new Field( self::NAME . '_' . self::TITLE, [
-				'label' => __( 'Title', 'tribe' ),
-				'name'  => self::TITLE,
-				'type'  => 'text',
-			] )
-		)->add_field( new Field( self::NAME . '_' . self::LEADIN, [
-				'label' => __( 'Lead in', 'tribe' ),
-				'name'  => self::LEADIN,
-				'type'  => 'text',
-			] )
-		)->add_field( new Field( self::NAME . '_' . self::DESCRIPTION, [
-				'label'        => __( 'Description', 'tribe' ),
-				'name'         => self::DESCRIPTION,
-				'type'         => 'wysiwyg',
-				'toolbar'      => 'basic',
-				'media_upload' => 0,
-			] )
-		)->add_field( new Field( self::NAME . '_' . self::CTA, [
-			'label' => __( 'Call to Action', 'tribe' ),
-			'name'  => self::CTA,
-			'type'  => 'link',
-		] ) )->add_field( $this->get_links_section() );
+		//==========================================
+		// Content Fields
+		//==========================================
+		$this->add_section( new Field_Section( self::SECTION_CONTENT, __( 'Content', 'tribe' ), 'accordion' ) )
+		     ->add_field( new Field( self::NAME . '_' . self::TITLE, [
+				     'label' => __( 'Title', 'tribe' ),
+				     'name'  => self::TITLE,
+				     'type'  => 'text',
+			     ] )
+		     )->add_field( new Field( self::NAME . '_' . self::LEADIN, [
+					'label' => __( 'Lead in', 'tribe' ),
+					'name'  => self::LEADIN,
+					'type'  => 'text',
+				] )
+			)->add_field( new Field( self::NAME . '_' . self::DESCRIPTION, [
+					'label'        => __( 'Description', 'tribe' ),
+					'name'         => self::DESCRIPTION,
+					'type'         => 'wysiwyg',
+					'toolbar'      => 'basic',
+					'media_upload' => 0,
+				] )
+			)->add_field( new Field( self::NAME . '_' . self::CTA, [
+				'label' => __( 'Call to Action', 'tribe' ),
+				'name'  => self::CTA,
+				'type'  => 'link',
+			] ) )->add_field( $this->get_links_section() );
+
+		//==========================================
+		// Setting Fields
+		//==========================================
+		$this->add_section( new Field_Section( self::SECTION_SETTINGS, __( 'Settings', 'tribe' ), 'accordion' ) )
+		     ->add_field( new Field( self::NAME . '_' . self::CONTENT_ALIGN, [
+			     'label'           => __( 'Content Alignment', 'tribe' ),
+			     'type'            => 'image_select',
+			     'name'            => self::CONTENT_ALIGN,
+			     'choices'         => [
+				     self::CONTENT_ALIGN_CENTER => __( 'Center', 'tribe' ),
+				     self::CONTENT_ALIGN_LEFT   => __( 'Left', 'tribe' ),
+			     ],
+			     'default_value'   => self::CONTENT_ALIGN_CENTER,
+			     'multiple'        => 0,
+			     'image_path'      => sprintf(
+				     '%sassets/img/admin/blocks/%s/',
+				     trailingslashit( get_template_directory_uri() ),
+				     self::NAME
+			     ),
+			     'image_extension' => 'svg',
+		     ] ) );
 	}
 
 	/**
@@ -125,25 +154,5 @@ class Content_Columns extends Block_Config {
 		$group->add_field( $cta );
 
 		return $group;
-	}
-
-	public function add_settings() {
-		$this->add_setting( new Field( self::NAME . '_' . self::CONTENT_ALIGN, [
-			'label'           => __( 'Content Alignment', 'tribe' ),
-			'type'            => 'image_select',
-			'name'            => self::CONTENT_ALIGN,
-			'choices'         => [
-				self::CONTENT_ALIGN_CENTER => __( 'Center', 'tribe' ),
-				self::CONTENT_ALIGN_LEFT   => __( 'Left', 'tribe' ),
-			],
-			'default_value'   => self::CONTENT_ALIGN_CENTER,
-			'multiple'        => 0,
-			'image_path'      => sprintf(
-				'%sassets/img/admin/blocks/%s/',
-				trailingslashit( get_template_directory_uri() ),
-				self::NAME
-			),
-			'image_extension' => 'svg',
-		] ) );
 	}
 }

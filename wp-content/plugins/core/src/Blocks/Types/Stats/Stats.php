@@ -12,6 +12,7 @@ use Tribe\Libs\ACF\Repeater;
 class Stats extends Block_Config {
 	public const NAME = 'stats';
 
+	public const SECTION_CONTENT = 's-content';
 	public const LEAD_IN     = 'leadin';
 	public const TITLE       = 'title';
 	public const DESCRIPTION = 'description';
@@ -21,6 +22,7 @@ class Stats extends Block_Config {
 	public const ROW_VALUE = 'row_value';
 	public const ROW_LABEL = 'row_label';
 
+	public const SECTION_SETTINGS  = 's-settings';
 	public const LAYOUT         = 'layout';
 	public const LAYOUT_INLINE  = 'inline';
 	public const LAYOUT_STACKED = 'stacked';
@@ -83,7 +85,7 @@ class Stats extends Block_Config {
 		//==========================================
 		// Content Fields
 		//==========================================
-		$this->add_section( new Field_Section( __( 'Content', 'tribe' ), 'accordion' ) )
+		$this->add_section( new Field_Section( self::SECTION_CONTENT, __( 'Content', 'tribe' ), 'accordion' ) )
 			 ->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
 					 'label' => __( 'Lead in', 'tribe' ),
 					 'name'  => self::LEAD_IN,
@@ -113,7 +115,7 @@ class Stats extends Block_Config {
 		//==========================================
 		// Setting Fields
 		//==========================================
-		$this->add_section( new Field_Section( __( 'Settings', 'tribe' ), 'accordion' ) )
+		$this->add_section( new Field_Section( self::SECTION_SETTINGS, __( 'Settings', 'tribe' ), 'accordion' ) )
 			 ->add_field( new Field( self::NAME . '_' . self::LAYOUT, [
 				 'type'            => 'image_select',
 				 'name'            => self::LAYOUT,
