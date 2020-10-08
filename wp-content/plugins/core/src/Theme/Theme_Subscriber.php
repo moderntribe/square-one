@@ -12,6 +12,7 @@ use Tribe\Project\Theme\Config\Supports;
 use Tribe\Project\Theme\Config\Web_Fonts;
 use Tribe\Project\Theme\Media\Image_Wrap;
 use Tribe\Project\Theme\Media\Oembed_Filter;
+use Tribe\Project\Theme\Media\SVG_Filters;
 
 class Theme_Subscriber extends Abstract_Subscriber {
 	public function register(): void {
@@ -37,6 +38,7 @@ class Theme_Subscriber extends Abstract_Subscriber {
 		$this->image_wrap();
 		$this->image_links();
 		$this->oembed();
+		$this->svgs();
 	}
 
 	private function body_classes() {
@@ -104,6 +106,12 @@ class Theme_Subscriber extends Abstract_Subscriber {
 		add_filter( 'embed_oembed_html', function ( $html, $url, $attr, $post_id ) {
 			return $this->container->get( Oembed_Filter::class )->wrap_admin_oembed( $html, $url, $attr, $post_id );
 		}, 99, 4 );
+	}
+
+	private function svgs() {
+		add_filter( 'wp_get_attachment_image_src', function ( $image, $attachment_id, $size, $icon ) {
+			return $this->container->get( SVG_Filters::class )->set_accurate_sizes( $image, $attachment_id, $size, $icon );
+		}, 11, 4 );
 	}
 
 	private function supports() {
