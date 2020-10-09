@@ -30,6 +30,11 @@ class SVG_Filters {
 			return $image;
 		}
 
+		// Don't process images existing size with values
+		if ( $image[1] !== false && $image[2] !== false ) {
+			return $image;
+		}
+
 		$meta = wp_get_attachment_metadata( $attachment_id );
 
 		if ( is_array( $size ) ) {
