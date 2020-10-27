@@ -79,7 +79,7 @@ class Sample_Route extends Abstract_Route {
 	 * @return string The template name for the route.
 	 */
 	public function get_template() : string {
-		return locate_template( 'page-templates/sample.php' );
+		return locate_template( 'routes/sample.php' );
 	}
 
 	/**
