@@ -148,12 +148,14 @@
     "gulp-sourcemaps": "^2.6.4",
     "gulp-stylelint": "^10.0.0",
     "gulp-uglify": "^3.0.1",
+    "husky": "^1.1.2",
     "identity-obj-proxy": "^3.0.0",
     "ifdef-loader": "^2.1.4",
     "jest": "^24.9.0",
     "jest-cli": "^24.9.0",
     "jest-environment-jsdom": "^24.9.0",
     "jest-environment-jsdom-global": "^1.2.0",
+    "lint-staged": "^7.2.2",
     "mini-css-extract-plugin": "^0.8.0",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
     "postcss-aspect-ratio": "^1.0.0",
@@ -187,5 +189,18 @@
     "webpack-merge": "^4.2.2",
     "webpack-merge-and-include-globally": "^2.1.20",
     "webpack-stream": "^5.2.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": [
+        "lint-staged"
+      ]
+    }
+  },
+  "lint-staged": {
+    "*.php": [
+      "php -l",
+      "./vendor/bin/phpcs --extensions=php --warning-severity=8 -s"
+    ]
   }
 }
