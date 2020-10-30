@@ -130,7 +130,7 @@ Congratulations. You're done. Use this time to send Jonathan (@jbrinley) a taco 
 Verify that your Docker image's MySQL server is accessible with the following command:
 
 ```sh
-mysql -u root -h mysql.tribe -p
+docker exec -it tribe-mysql mysql -uroot -p
 $ Enter password:
 ```
 
