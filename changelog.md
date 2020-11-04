@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2020.10
+* Fixed: Typo in object-cache docs. 
+
+
 ## 2020.09
 * Updated: Various codebase configs.
     * local-config-sample.php: cleaned up no longer needed items
