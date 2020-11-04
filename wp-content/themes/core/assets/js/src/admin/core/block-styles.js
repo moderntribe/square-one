@@ -5,6 +5,7 @@
  * 				using the server-side unregister_block_styles function.
  */
 
+/* global wp */
 
 const unregisterStyles = () => {
 	wp.blocks.unregisterBlockStyle( 'core/image', [ 'rounded', 'default' ] );

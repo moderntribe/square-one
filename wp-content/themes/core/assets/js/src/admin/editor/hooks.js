@@ -1,3 +1,4 @@
+import React from 'react';
 import { addFilter } from '@wordpress/hooks';
 import { createHigherOrderComponent } from '@wordpress/compose';
 
@@ -8,6 +9,7 @@ import { createHigherOrderComponent } from '@wordpress/compose';
 
 const withStyleClassName = createHigherOrderComponent( ( BlockListBlock ) => {
 	return ( props ) => {
+		// eslint-disable-next-line
 		const { attributes: { className } } = props;
 		return <BlockListBlock { ...props } className={ className } />;
 	};
