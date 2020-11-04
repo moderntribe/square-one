@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "29f0bcb539dcae2b8c7cdaf67d200e48",
+    "content-hash": "cb3548877c64bd091a606b303e53a22d",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -20,16 +20,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.158.19",
+            "version": "3.158.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "b1c3c763e227e518768f0416cbd2b29c11f79561"
+                "reference": "25e4fe20837601adbf69921da2ef7d13ecf8932c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/b1c3c763e227e518768f0416cbd2b29c11f79561",
-                "reference": "b1c3c763e227e518768f0416cbd2b29c11f79561",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/25e4fe20837601adbf69921da2ef7d13ecf8932c",
+                "reference": "25e4fe20837601adbf69921da2ef7d13ecf8932c",
                 "shasum": ""
             },
             "require": {
@@ -101,7 +101,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2020-11-02T19:49:21+00:00"
+            "time": "2020-11-04T20:11:29+00:00"
         },
         {
             "name": "clue/stream-filter",
@@ -972,6 +972,38 @@
             ],
             "description": "Fork of ACF Image Select Field",
             "time": "2020-08-25T17:29:54+00:00"
+        },
+        {
+            "name": "moderntribe/tribe-acf-post-list-field",
+            "version": "dev-feature/field-settings",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:moderntribe/tribe-acf-post-list-field.git",
+                "reference": "f32e79df400b9be5e3c40045bb6c06fde992693f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/moderntribe/tribe-acf-post-list-field/zipball/f32e79df400b9be5e3c40045bb6c06fde992693f",
+                "reference": "f32e79df400b9be5e3c40045bb6c06fde992693f",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2"
+            },
+            "type": "wordpress-plugin",
+            "autoload": {
+                "psr-4": {
+                    "Tribe\\ACF_Post_List\\": "src"
+                }
+            },
+            "authors": [
+                {
+                    "name": "Modern Tribe",
+                    "email": "admin@tri.be"
+                }
+            ],
+            "description": "A post list field type for Advanced Custom Fields",
+            "time": "2020-11-04T14:49:09+00:00"
         },
         {
             "name": "moderntribe/tribe-libs",
@@ -11502,6 +11534,7 @@
     "stability-flags": {
         "humanmade/mercator": 20,
         "moderntribe/acf-image-select": 20,
+        "moderntribe/tribe-acf-post-list-field": 20,
         "roots/wp-password-bcrypt": 20,
         "filp/whoops": 20
     },

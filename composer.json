@@ -37,6 +37,11 @@
       "url": "git@github.com:moderntribe/ACF-Image-Select.git"
     },
     {
+      "type": "vcs",
+      "no-api": true,
+      "url": "git@github.com:moderntribe/tribe-acf-post-list-field.git"
+    },
+    {
       "type": "package",
       "package": {
         "name": "gravityforms/gravityforms",
@@ -81,6 +86,7 @@
     "mailgun/mailgun-php": "^2.8",
     "moderntribe/acf-image-select": "dev-master",
     "moderntribe/tribe-libs": "3.3.0",
+    "moderntribe/tribe-acf-post-list-field": "dev-feature/field-settings",
     "monolog/monolog": "1.23.0",
     "nickford/acf-swatch": "1.0.7",
     "nikic/fast-route": "^1.3",
