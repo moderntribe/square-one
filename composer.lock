@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ea2174674f06050bd4e81e81fc869acf",
+    "content-hash": "0b0e94d2c704955b1b8aa7a13b6475c5",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -281,6 +281,47 @@
                 "zikula"
             ],
             "time": "2017-08-09T07:53:48+00:00"
+        },
+        {
+            "name": "enshrined/svg-sanitize",
+            "version": "0.13.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/darylldoyle/svg-sanitizer.git",
+                "reference": "bc66593f255b7d2613d8f22041180036979b6403"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/darylldoyle/svg-sanitizer/zipball/bc66593f255b7d2613d8f22041180036979b6403",
+                "reference": "bc66593f255b7d2613d8f22041180036979b6403",
+                "shasum": ""
+            },
+            "require": {
+                "ext-dom": "*",
+                "ext-libxml": "*"
+            },
+            "require-dev": {
+                "codeclimate/php-test-reporter": "^0.1.2",
+                "phpunit/phpunit": "^6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "enshrined\\svgSanitize\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Daryll Doyle",
+                    "email": "daryll@enshrined.co.uk"
+                }
+            ],
+            "description": "An SVG sanitizer for PHP",
+            "time": "2020-01-20T01:34:17+00:00"
         },
         {
             "name": "ffraenz/private-composer-installer",
@@ -934,19 +975,20 @@
         },
         {
             "name": "moderntribe/tribe-libs",
-            "version": "v3.1.2",
+            "version": "v3.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moderntribe/tribe-libs.git",
-                "reference": "f1f0cdd3297e75bd7e6db690dd401b8dde9446dd"
+                "reference": "b81239279096d6061b12aa3eebe416c449256fc7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/tribe-libs/zipball/f1f0cdd3297e75bd7e6db690dd401b8dde9446dd",
-                "reference": "f1f0cdd3297e75bd7e6db690dd401b8dde9446dd",
+                "url": "https://api.github.com/repos/moderntribe/tribe-libs/zipball/b81239279096d6061b12aa3eebe416c449256fc7",
+                "reference": "b81239279096d6061b12aa3eebe416c449256fc7",
                 "shasum": ""
             },
             "require": {
+                "enshrined/svg-sanitize": "^0.13.3",
                 "filp/whoops": "^2.2@dev",
                 "php": "^7.2",
                 "php-di/php-di": "^6.0",
@@ -997,7 +1039,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.2-dev"
+                    "dev-master": "3.3-dev"
                 }
             },
             "autoload": {
@@ -1038,7 +1080,7 @@
                 "GPL-2.0-only"
             ],
             "description": "A library for use on Modern Tribe service projects.",
-            "time": "2020-09-24T19:13:12+00:00"
+            "time": "2020-11-04T15:18:43+00:00"
         },
         {
             "name": "monolog/monolog",
