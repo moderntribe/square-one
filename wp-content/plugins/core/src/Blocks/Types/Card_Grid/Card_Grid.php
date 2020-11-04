@@ -87,12 +87,12 @@ class Card_Grid extends Block_Config {
 		// Content Fields
 		//==========================================
 		$this->add_section( new Field_Section( self::SECTION_CONTENT, __( 'Content', 'tribe' ), 'accordion' ) )
-		     ->add_field( new Field( self::NAME . '_' . self::TITLE, [
-				     'label' => __( 'Title', 'tribe' ),
-				     'name'  => self::TITLE,
-				     'type'  => 'text',
-			     ] )
-		     )->add_field( new Field( self::NAME . '_' . self::DESCRIPTION, [
+			 ->add_field( new Field( self::NAME . '_' . self::TITLE, [
+					 'label' => __( 'Title', 'tribe' ),
+					 'name'  => self::TITLE,
+					 'type'  => 'text',
+				 ] )
+			 )->add_field( new Field( self::NAME . '_' . self::DESCRIPTION, [
 					'label'        => __( 'Description', 'tribe' ),
 					'name'         => self::DESCRIPTION,
 					'type'         => 'wysiwyg',
@@ -123,24 +123,24 @@ class Card_Grid extends Block_Config {
 		// Setting Fields
 		//==========================================
 		$this->add_section( new Field_Section( self::SECTION_SETTINGS, __( 'Settings', 'tribe' ), 'accordion' ) )
-		     ->add_field(
-			     new Field( self::NAME . '_' . self::LAYOUT, [
-				     'type'            => 'image_select',
-				     'name'            => self::LAYOUT,
-				     'choices'         => [
-					     self::LAYOUT_STACKED => __( 'Stacked', 'tribe' ),
-					     self::LAYOUT_INLINE  => __( 'Inline', 'tribe' ),
-				     ],
-				     'default_value'   => self::LAYOUT_STACKED,
-				     'multiple'        => 0,
-				     'image_path'      => sprintf(
-					     '%sassets/img/admin/blocks/%s/',
-					     trailingslashit( get_template_directory_uri() ),
-					     self::NAME
-				     ),
-				     'image_extension' => 'svg',
-			     ] )
-		     );
+			 ->add_field(
+				 new Field( self::NAME . '_' . self::LAYOUT, [
+					 'type'            => 'image_select',
+					 'name'            => self::LAYOUT,
+					 'choices'         => [
+						 self::LAYOUT_STACKED => __( 'Stacked', 'tribe' ),
+						 self::LAYOUT_INLINE  => __( 'Inline', 'tribe' ),
+					 ],
+					 'default_value'   => self::LAYOUT_STACKED,
+					 'multiple'        => 0,
+					 'image_path'      => sprintf(
+						 '%sassets/img/admin/blocks/%s/',
+						 trailingslashit( get_template_directory_uri() ),
+						 self::NAME
+					 ),
+					 'image_extension' => 'svg',
+				 ] )
+			 );
 	}
 
 	protected function get_manual_group(): Repeater {
@@ -178,8 +178,10 @@ class Card_Grid extends Block_Config {
 		)->add_field(
 			new Field( self::NAME . '_' . self::MANUAL_TOGGLE, [
 				'label'        => __( 'Create or Override Content', 'tribe' ),
-				'instructions' => __( 'Data entered below will overwrite the respective data from the post selected above.',
-					'tribe' ),
+				'instructions' => __(
+					'Data entered below will overwrite the respective data from the post selected above.',
+					'tribe' 
+				),
 				'name'         => self::MANUAL_TOGGLE,
 				'type'         => 'true_false',
 			] )

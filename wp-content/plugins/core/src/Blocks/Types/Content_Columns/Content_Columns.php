@@ -70,12 +70,12 @@ class Content_Columns extends Block_Config {
 		// Content Fields
 		//==========================================
 		$this->add_section( new Field_Section( self::SECTION_CONTENT, __( 'Content', 'tribe' ), 'accordion' ) )
-		     ->add_field( new Field( self::NAME . '_' . self::TITLE, [
-				     'label' => __( 'Title', 'tribe' ),
-				     'name'  => self::TITLE,
-				     'type'  => 'text',
-			     ] )
-		     )->add_field( new Field( self::NAME . '_' . self::LEADIN, [
+			 ->add_field( new Field( self::NAME . '_' . self::TITLE, [
+					 'label' => __( 'Title', 'tribe' ),
+					 'name'  => self::TITLE,
+					 'type'  => 'text',
+				 ] )
+			 )->add_field( new Field( self::NAME . '_' . self::LEADIN, [
 					'label' => __( 'Lead in', 'tribe' ),
 					'name'  => self::LEADIN,
 					'type'  => 'text',
@@ -97,23 +97,23 @@ class Content_Columns extends Block_Config {
 		// Setting Fields
 		//==========================================
 		$this->add_section( new Field_Section( self::SECTION_SETTINGS, __( 'Settings', 'tribe' ), 'accordion' ) )
-		     ->add_field( new Field( self::NAME . '_' . self::CONTENT_ALIGN, [
-			     'label'           => __( 'Content Alignment', 'tribe' ),
-			     'type'            => 'image_select',
-			     'name'            => self::CONTENT_ALIGN,
-			     'choices'         => [
-				     self::CONTENT_ALIGN_CENTER => __( 'Center', 'tribe' ),
-				     self::CONTENT_ALIGN_LEFT   => __( 'Left', 'tribe' ),
-			     ],
-			     'default_value'   => self::CONTENT_ALIGN_CENTER,
-			     'multiple'        => 0,
-			     'image_path'      => sprintf(
-				     '%sassets/img/admin/blocks/%s/',
-				     trailingslashit( get_template_directory_uri() ),
-				     self::NAME
-			     ),
-			     'image_extension' => 'svg',
-		     ] ) );
+			 ->add_field( new Field( self::NAME . '_' . self::CONTENT_ALIGN, [
+				 'label'           => __( 'Content Alignment', 'tribe' ),
+				 'type'            => 'image_select',
+				 'name'            => self::CONTENT_ALIGN,
+				 'choices'         => [
+					 self::CONTENT_ALIGN_CENTER => __( 'Center', 'tribe' ),
+					 self::CONTENT_ALIGN_LEFT   => __( 'Left', 'tribe' ),
+				 ],
+				 'default_value'   => self::CONTENT_ALIGN_CENTER,
+				 'multiple'        => 0,
+				 'image_path'      => sprintf(
+					 '%sassets/img/admin/blocks/%s/',
+					 trailingslashit( get_template_directory_uri() ),
+					 self::NAME
+				 ),
+				 'image_extension' => 'svg',
+			 ] ) );
 	}
 
 	/**

@@ -69,12 +69,12 @@ class Lead_Form extends Block_Config {
 		// Content Fields
 		//==========================================
 		$this->add_section( new Field_Section( self::SECTION_CONTENT, __( 'Content', 'tribe' ), 'accordion' ) )
-		     ->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
-				     'label' => __( 'Lead in', 'tribe' ),
-				     'name'  => self::LEAD_IN,
-				     'type'  => 'text',
-			     ] )
-		     )->add_field( new Field( self::NAME . '_' . self::TITLE, [
+			 ->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
+					 'label' => __( 'Lead in', 'tribe' ),
+					 'name'  => self::LEAD_IN,
+					 'type'  => 'text',
+				 ] )
+			 )->add_field( new Field( self::NAME . '_' . self::TITLE, [
 					'label' => __( 'Title', 'tribe' ),
 					'name'  => self::TITLE,
 					'type'  => 'text',
@@ -103,25 +103,25 @@ class Lead_Form extends Block_Config {
 		// Setting Fields
 		//==========================================
 		$this->add_section( new Field_Section( self::SECTION_SETTINGS, __( 'Settings', 'tribe' ), 'accordion' ) )
-		     ->add_field(
-			     new Field( self::NAME . '_' . self::LAYOUT, [
-				     'type'            => 'image_select',
-				     'name'            => self::LAYOUT,
-				     'choices'         => [
-					     self::LAYOUT_LEFT   => __( 'Content Left', 'tribe' ),
-					     self::LAYOUT_CENTER => __( 'Content Center', 'tribe' ),
-				     ],
-				     'default_value'   => self::LAYOUT_CENTER,
-				     'multiple'        => 0,
-				     'image_path'      => sprintf(
-					     '%sassets/img/admin/blocks/%s/',
-					     trailingslashit( get_template_directory_uri() ),
-					     self::NAME
-				     ),
-				     'image_extension' => 'svg',
-			     ] )
-		     )->add_field(
-				new Field( self::NAME . '_' . self::WIDTH, [
+			 ->add_field(
+				 new Field( self::NAME . '_' . self::LAYOUT, [
+					 'type'            => 'image_select',
+					 'name'            => self::LAYOUT,
+					 'choices'         => [
+						 self::LAYOUT_LEFT   => __( 'Content Left', 'tribe' ),
+						 self::LAYOUT_CENTER => __( 'Content Center', 'tribe' ),
+					 ],
+					 'default_value'   => self::LAYOUT_CENTER,
+					 'multiple'        => 0,
+					 'image_path'      => sprintf(
+						 '%sassets/img/admin/blocks/%s/',
+						 trailingslashit( get_template_directory_uri() ),
+						 self::NAME
+					 ),
+					 'image_extension' => 'svg',
+				 ] )
+			 )->add_field(
+				 new Field( self::NAME . '_' . self::WIDTH, [
 					'type'            => 'image_select',
 					'name'            => self::WIDTH,
 					'choices'         => [
@@ -136,8 +136,8 @@ class Lead_Form extends Block_Config {
 						self::NAME
 					),
 					'image_extension' => 'svg',
-				] )
-			);
+				 ] )
+			 );
 	}
 
 	/**
