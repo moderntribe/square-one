@@ -80,7 +80,7 @@
     "johnpbloch/wordpress-core-installer": "1.0.0",
     "mailgun/mailgun-php": "^2.8",
     "moderntribe/acf-image-select": "dev-master",
-    "moderntribe/tribe-libs": "3.1.2",
+    "moderntribe/tribe-libs": "3.3.0",
     "monolog/monolog": "1.23.0",
     "nickford/acf-swatch": "1.0.7",
     "nikic/fast-route": "^1.3",
