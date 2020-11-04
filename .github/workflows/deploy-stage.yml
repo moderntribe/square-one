@@ -58,7 +58,7 @@ jobs:
         working-directory: ${{ env.BUILD_FOLDER }}
         run: |
           yarn install:theme
-#          yarn validate
+          yarn validate
           yarn server_dist
 
       # Create local config for environment based settings
