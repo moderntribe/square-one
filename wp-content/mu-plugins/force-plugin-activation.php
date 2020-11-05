@@ -22,7 +22,7 @@ class Force_Plugin_Activation {
 		'disable-emojis/disable-emojis.php',
 		'safe-svg/safe-svg.php',
 		'acf-image-select/acf-image-select.php',
-		'acf-advanced-taxonomy-selector/acf-advanced_taxonomy_selector.php',
+		'tribe-acf-post-list-field/tribe-acf-post-list-field.php',
 	];
 
 	/**
