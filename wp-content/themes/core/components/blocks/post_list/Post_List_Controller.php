@@ -86,7 +86,7 @@ class Post_List_Controller extends Abstract_Controller {
 	public function get_posts_card_args() {
 		$cards = [];
 		foreach ( $this->posts as $post ) {
-			$link    = $post->get_link();
+			$link    = $post['link'];
 			$uuid    = uniqid( 'p-' );
 			$cards[] = [
 				Card_Controller::STYLE           => Card_Controller::STYLE_ELEVATED,
@@ -97,7 +97,7 @@ class Post_List_Controller extends Abstract_Controller {
 					[
 						Text_Controller::TAG     => 'h3',
 						Text_Controller::CLASSES => [ 'h5' ],
-						Text_Controller::CONTENT => $post->get_title(),
+						Text_Controller::CONTENT => $post['title'],
 						// Required for screen reader accessibility, below.
 						Text_Controller::ATTRS   => [ 'id' => $uuid . '-title' ],
 					]
@@ -106,7 +106,7 @@ class Post_List_Controller extends Abstract_Controller {
 					'components/container/container',
 					null,
 					[
-						Container_Controller::CONTENT => wpautop( $post->get_excerpt() ),
+						Container_Controller::CONTENT => wpautop( $post['excerpt'] ),
 						Container_Controller::CLASSES => [ 't-sink', 's-sink' ],
 					],
 				),
@@ -114,7 +114,7 @@ class Post_List_Controller extends Abstract_Controller {
 					'components/image/image',
 					null,
 					[
-						Image_Controller::IMG_ID       => $post->get_image_id(),
+						Image_Controller::IMG_ID       => $post['image_id'],
 						Image_Controller::AS_BG        => true,
 						Image_Controller::CLASSES      => [ 'c-image--bg', 's-aspect-4-3' ],
 						Image_Controller::SRC_SIZE     => Image_Sizes::FOUR_THREE,
