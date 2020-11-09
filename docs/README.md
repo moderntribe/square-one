@@ -100,7 +100,7 @@ SquareOne has been built for efficiency and reliability. There are many common f
 
 ## Content Management
 
-SquareOne was build to support the latest and greatest Gutenberg editor. In particular we leverage Advanced Custom Fields and fantastic tool to build custom blocks. It can also easily use the Classic editor and leverage many of the other page builders out there, like our very own modular content [Panels Builder](https://github.com/moderntribe/panel-builder).  
+SquareOne was build to support the latest and greatest Gutenberg editor. In particular we leverage Advanced Custom Fields, a fantastic tool to build custom blocks. It can also easily use the Classic editor and leverage many of the other page builders out there, like our very own modular content [Panels Builder](https://github.com/moderntribe/panel-builder).  
 
 ### The WordPress way
 
