@@ -47,7 +47,7 @@ Front-end development moves fast and we regularly review and adopt industry lead
 * Babel - Backwards compatible next generation JavaScript Support
 * Linting - Code quality and Syntax enforcement 
 
-These build tools provide several ways to package and bundle the front-end assets of the site. This includes Dev and Prod release bundles that optimize for each scenario. 
+These build tools provide several ways to package and bundle the front-end assets of the site. This includes Dev and Prod release bundles that optimize for each scenario. The Build tools also account for our components system, and will properly build and chunk for each component. 
 
 #### BEM
 We use Block Element Modifier (BEM) CSS class conventions for clear semantics, modular reusable components, and flexibility. 
@@ -65,7 +65,7 @@ The JS build stack allows for vanilla JavaScript or full blown React application
 We’ve baked in some advanced image handling into SquareOne, including src-set, responsive images, lazy-loading, and have some additional S3/CDN modules for offloading media. 
 
 #### Components
-We’ve enforce a component pattern to our Front-end tech so we can cleanly separate logic and presentation. This makes things more reusable and portable.
+We’ve enforce a component pattern to our Front-end tech so we can cleanly separate logic and presentation.  Each component is built to have it's own contained markup, styles, javascript, and models for maximum portability. This makes things very DRY and reusable and aligns well with a design system. 
 
 ## Back-End <a name="backend"></a>
 
