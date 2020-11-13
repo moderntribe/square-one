@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 ## 2020.11
 * Updated: docker-compose.yml php-fpm image from 74-2.1.1 to 74-2.1 to ensure composer v1.
 * Updated: Adds core/block to allow list to enable reusable blocks.
+* Updated: Order the block allow list alphabetically.
 
 ## 2020.10
 * Fixed: Typo in object-cache docs. 
