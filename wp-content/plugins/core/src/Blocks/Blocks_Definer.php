@@ -102,6 +102,7 @@ class Blocks_Definer implements Definer_Interface {
 				'core-embed/tumblr',
 				'core-embed/wordpress-tv',
 				'gravityforms/form',
+				'core/block',
 			],
 
 			/**
