@@ -30,6 +30,7 @@ class Blocks_Definer implements Definer_Interface {
 	public function define(): array {
 		return [
 			self::TYPES => DI\add( [
+				DI\get( Types\Content_Loop\Content_Loop::class ),
 				DI\get( Accordion::class ),
 				DI\get( Buttons::class ),
 				DI\get( Card_Grid::class ),
@@ -59,6 +60,7 @@ class Blocks_Definer implements Definer_Interface {
 			 * Includes any 3rd-party block supported by this project, such as Gravity Forms.
 			 */
 			self::ALLOW_LIST => [
+				'acf/contentloop',
 				'acf/accordion',
 				'acf/buttons',
 				'acf/cardgrid',
