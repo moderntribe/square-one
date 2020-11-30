@@ -43,6 +43,12 @@ class Content_Loop extends Block_Config {
 	public const QUERY_TAXONOMIES = 'query_taxonomy_terms';
 	public const QUERY_POST_TYPES = 'query_post_types';
 
+	//Layout Fields
+	public const LAYOUT           = 'layout';
+	public const LAYOUT_ROW       = 'layout_row';
+	public const LAYOUT_FEATURE   = 'layout_feature';
+	public const LAYOUT_COLUMNS   = 'layout_columns';
+
 	public const ALLOWED_POST_TYPES = [
 		Post::NAME,
 		Page::NAME,
@@ -111,7 +117,26 @@ class Content_Loop extends Block_Config {
 		//==========================================
 		// Setting Fields
 		//==========================================
-		$this->add_section( new Field_Section( self::SECTION_SETTINGS, __( 'Settings', 'tribe' ), 'accordion' ) );
+		$this->add_section( new Field_Section( self::SECTION_SETTINGS, __( 'Settings', 'tribe' ), 'accordion' ) )
+		->add_field(
+			new Field( self::NAME . '_' . self::LAYOUT, [
+				'type'            => 'image_select',
+				'name'            => self::LAYOUT,
+				'choices'         => [
+					self::LAYOUT_ROW       => __( 'Row', 'tribe' ),
+					self::LAYOUT_FEATURE   => __( 'Feature', 'tribe' ),
+					self::LAYOUT_COLUMNS   => __( 'Columns', 'tribe' ),
+				],
+				'default_value'   => self::LAYOUT_ROW,
+				'multiple'        => 0,
+				'image_path'      => sprintf(
+					'%sassets/img/admin/blocks/%s/',
+					trailingslashit( get_template_directory_uri() ),
+					self::NAME
+				),
+				'image_extension' => 'svg',
+			] )
+		);
 	}
 
 	protected function get_manual_group(): Repeater {

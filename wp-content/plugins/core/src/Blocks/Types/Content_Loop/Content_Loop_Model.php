@@ -23,6 +23,7 @@ class Content_Loop_Model extends \Tribe\Project\Blocks\Types\Base_Model {
 			Content_Loop_Controller::DESCRIPTION => $this->get( Content_Loop::DESCRIPTION, '' ),
 			Content_Loop_Controller::CTA         => $this->get_cta_args(),
 			Content_Loop_Controller::POSTS       => $this->get_posts(),
+			Content_Loop_Controller::LAYOUT      => $this->get( Content_Loop::LAYOUT, Content_Loop::LAYOUT_ROW ),
 		];
 	}
 
@@ -108,8 +109,6 @@ class Content_Loop_Model extends \Tribe\Project\Blocks\Types\Base_Model {
 		if ( $values[ Post_List::MANUAL_CTA ] && is_array( $values[ Post_List::MANUAL_CTA ] ) ) {
 			$post_object->set_link( $values[ Post_List::MANUAL_CTA ] );
 		}
-
-		$post_object->card_cta_icon = $values['card_cta_icon'];
 
 		return $post_object;
 	}

@@ -4,6 +4,7 @@ declare( strict_types=1 );
 namespace Tribe\Project\Templates\Components\blocks\content_loop;
 
 use Tribe\Libs\Utils\Markup_Utils;
+use \Tribe\Project\Blocks\Types\Content_Loop\Content_Loop as Content_Loop_Block;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\content_block\Content_Block_Controller;
 use Tribe\Project\Templates\Components\container\Container_Controller;
@@ -27,6 +28,7 @@ class Content_Loop_Controller extends Abstract_Controller {
 	public const DESCRIPTION       = 'description';
 	public const CTA               = 'cta';
 	public const POSTS             = 'posts';
+	public const LAYOUT            = 'layout';
 
 	/**
 	 * @var string[]
@@ -39,6 +41,7 @@ class Content_Loop_Controller extends Abstract_Controller {
 	private string $description;
 	private array  $cta;
 	private array  $content_classes;
+	private string $layout;
 	
 
 	public function __construct( array $args = [] ) {
@@ -53,6 +56,7 @@ class Content_Loop_Controller extends Abstract_Controller {
 		$this->cta               = (array) $args[ self::CTA ];
 		$this->content_classes   = (array) $args[ self::CONTENT_CLASSES ];
 		$this->posts             = (array) $args[ self::POSTS ];
+		$this->layout            = (string) $args[ self::LAYOUT ];
 	}
 
 	protected function defaults(): array {
@@ -66,6 +70,7 @@ class Content_Loop_Controller extends Abstract_Controller {
 			self::DESCRIPTION       => '',
 			self::CTA               => [],
 			self::POSTS             => [],
+			self::LAYOUT            => Content_Loop_Block::LAYOUT_ROW,
 		];
 	}
 
@@ -80,6 +85,8 @@ class Content_Loop_Controller extends Abstract_Controller {
 	 * @return string
 	 */
 	public function get_classes(): string {
+		$this->classes[] = 'b-content-loop--' . $this->layout;
+
 		return Markup_Utils::class_attribute( $this->classes );
 	}
 
@@ -95,6 +102,13 @@ class Content_Loop_Controller extends Abstract_Controller {
 	 */
 	public function get_container_classes(): string {
 		return Markup_Utils::class_attribute( $this->container_classes );
+	}
+
+	/**
+	 * @return string
+	 */
+	public function get_layout(): string {
+		return $this->layout;
 	}
 
 	/**
@@ -257,7 +271,12 @@ class Content_Loop_Controller extends Abstract_Controller {
 	 * @return string
 	 */
 	public function get_content_classes(): string {
-		$this->content_classes[] = 'g-3-up';
+		$this->content_classes[] = 'g-2-up';
+
+		if ( $this->layout === Content_Loop_Block::LAYOUT_ROW ) {
+			$this->content_classes[] = 'g-3-up';
+		}
+		
 
 		return Markup_Utils::class_attribute( $this->content_classes );
 	}
