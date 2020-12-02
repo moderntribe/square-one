@@ -36,6 +36,8 @@ class Content_Loop extends Block_Config {
 	public const MANUAL_EXCERPT      = 'manual_excerpt';
 	public const MANUAL_CTA          = 'manual_cta';
 	public const MANUAL_THUMBNAIL    = 'manual_thumbnail';
+	public const MANUAL_UPPER_META   = 'manual_upper_meta';
+	public const MANUAL_LOWER_META   = 'manual_lower_meta';
 
 	//Query Fields
 	public const QUERY_GROUP      = 'query_group';
@@ -81,18 +83,6 @@ class Content_Loop extends Block_Config {
 				'label' => __( 'Title', 'tribe' ),
 				'name'  => self::TITLE,
 				'type'  => 'text',
-				] )
-			)->add_field( new Field( self::NAME . '_' . self::LEADIN, [
-				'label' => __( 'Lead in', 'tribe' ),
-				'name'  => self::LEADIN,
-				'type'  => 'text',
-				] )
-			)->add_field( new Field( self::NAME . '_' . self::DESCRIPTION, [
-				'label'        => __( 'Description', 'tribe' ),
-				'name'         => self::DESCRIPTION,
-				'type'         => 'wysiwyg',
-				'toolbar'      => 'basic',
-				'media_upload' => 0,
 				] )
 			)->add_field( new Field( self::NAME . '_' . self::CTA, [
 					'label' => __( 'Call to Action', 'tribe' ),
@@ -178,10 +168,22 @@ class Content_Loop extends Block_Config {
 				'type'         => 'accordion',
 			] )
 		)->add_field(
+			new Field( self::MANUAL_UPPER_META, [
+				'label'             => __( 'Tag', 'tribe' ),
+				'type'              => 'text',
+				'name'              => self::MANUAL_UPPER_META,
+			] )
+		)->add_field(
 			new Field( self::MANUAL_TITLE, [
 				'label'             => __( 'Title', 'tribe' ),
 				'type'              => 'text',
 				'name'              => self::MANUAL_TITLE,
+			] )
+		)->add_field(
+			new Field( self::MANUAL_LOWER_META, [
+				'label'             => __( 'Date', 'tribe' ),
+				'type'              => 'text',
+				'name'              => self::MANUAL_LOWER_META,
 			] )
 		)->add_field(
 			new Field( self::MANUAL_EXCERPT, [

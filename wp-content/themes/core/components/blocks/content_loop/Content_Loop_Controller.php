@@ -76,7 +76,7 @@ class Content_Loop_Controller extends Abstract_Controller {
 
 	protected function required(): array {
 		return [
-			self::CLASSES           => [ 'c-block' ],
+			self::CLASSES           => [ 'c-block', 'b-content-loop' ],
 			self::CONTAINER_CLASSES => [ 'l-container' ],
 		];
 	}
@@ -111,33 +111,12 @@ class Content_Loop_Controller extends Abstract_Controller {
 		return $this->layout;
 	}
 
-	/**
-	 * @return array
-	 */
-	public function get_header_args(): array {
-		if ( empty( $this->title ) && empty( $this->description ) ) {
-			return [];
-		}
-
-		return [
-			Content_Block_Controller::TAG     => 'header',
-			Content_Block_Controller::LEADIN  => $this->get_leadin(),
-			Content_Block_Controller::TITLE   => $this->get_title(),
-			Content_Block_Controller::CONTENT => $this->get_content(),
-			Content_Block_Controller::CTA     => $this->get_cta(),
-			Content_Block_Controller::CLASSES => [
-				'c-block__content-block',
-				'c-block__header',
-				'b-content-columns__header',
-			],
-		];
-	}
-
 	public function get_posts_card_args() {
 		$cards = [];
 		foreach ( $this->posts as $post ) {
 			$link        = $post->get_link();
 			$uuid        = uniqid( 'p-' );
+			$cat         = $post->get_category();
 
 			$image_array = [
 				Image_Controller::IMG_ID       => $post->get_image_id(),
@@ -153,16 +132,32 @@ class Content_Loop_Controller extends Abstract_Controller {
 			$cards[] = [
 				Card_Controller::STYLE           => Card_Controller::STYLE_PLAIN,
 				Card_Controller::USE_TARGET_LINK => $link['url'] ? true : false,
+				Card_Controller::META_PRIMARY    => defer_template_part(
+					'components/container/container',
+					null,
+					[
+						Container_Controller::CONTENT =>  $cat[0]->name ?? '',
+						Container_Controller::CLASSES =>  [ 'b-content-loop__tag' ],
+					],
+				),
 				Card_Controller::TITLE           => defer_template_part(
 					'components/text/text',
 					null,
 					[
 						Text_Controller::TAG     => 'h3',
-						Text_Controller::CLASSES => ['h5'],
+						Text_Controller::CLASSES => [ 'h5' ],
 						Text_Controller::CONTENT => $post->get_title(),
 						// Required for screen reader accessibility, below.
 						Text_Controller::ATTRS   => [ 'id' => $uuid . '-title' ],
 					]
+				),
+				Card_Controller::META_SECONDARY  => defer_template_part(
+					'components/container/container',
+					null,
+					[
+						Container_Controller::CONTENT =>  $post->get_post_date() ?? '',
+						Container_Controller::CLASSES =>  [ 'b-content-loop__date' ],
+					],
 				),
 				Card_Controller::DESCRIPTION     => defer_template_part(
 					'components/container/container',
@@ -203,68 +198,104 @@ class Content_Loop_Controller extends Abstract_Controller {
 		return $cards;
 	}
 
-	/**
-	 * @return Deferred_Component
-	 */
-	private function get_leadin(): Deferred_Component {
-		return defer_template_part( 'components/text/text', null, [
-			Text_Controller::CLASSES => [
-				'c-block__leadin',
-				'h6',
-			],
-			Text_Controller::CONTENT => $this->leadin ?? '',
-		] );
+	public function get_posts_horiz_card_args() {
+		$cards = [];
+		foreach ( $this->posts as $post ) {
+			$link        = $post->get_link();
+			$uuid        = uniqid( 'p-' );
+			$cat         = $post->get_category();
+
+			$image_array = [
+				Image_Controller::IMG_ID       => $post->get_image_id(),
+				Image_Controller::AS_BG        => true,
+				Image_Controller::CLASSES      => [ 'c-image--bg', 's-aspect-ratio-16-9' ],
+				Image_Controller::SRC_SIZE     => Image_Sizes::FOUR_THREE,
+				Image_Controller::SRCSET_SIZES => [
+					Image_Sizes::FOUR_THREE,
+					Image_Sizes::FOUR_THREE_SMALL,
+				],
+			];
+
+			$cards[] = [
+				Card_Controller::STYLE           => Card_Controller::STYLE_PLAIN,
+				Card_Controller::USE_TARGET_LINK => $link['url'] ? true : false,
+				Card_Controller::META_PRIMARY    => defer_template_part(
+					'components/container/container',
+					null,
+					[
+						Container_Controller::CONTENT =>  $cat[0]->name ?? '',
+						Container_Controller::CLASSES =>  [ 'b-content-loop__tag' ],
+					],
+				),
+				Card_Controller::TITLE           => defer_template_part(
+					'components/link/link',
+					null,
+					[
+						Link_Controller::CLASSES => [ 'h5' ],
+						Link_Controller::CONTENT => $post->get_title(),
+						Link_Controller::URL     => $link['url'],
+						// Required for screen reader accessibility, below.
+						Link_Controller::ATTRS   => [
+							'data-js'          => 'target-link',
+						],
+					]
+				),
+				Card_Controller::META_SECONDARY  => defer_template_part(
+					'components/container/container',
+					null,
+					[
+						Container_Controller::CONTENT =>  $post->get_post_date() ?? '',
+						Container_Controller::CLASSES =>  [ 'b-content-loop__date' ],
+					],
+				),
+				Card_Controller::IMAGE           => defer_template_part(
+					'components/image/image',
+					null,
+					$image_array,
+				),
+			];
+		}
+
+		return $cards;
 	}
 
 	/**
-	 * @return Deferred_Component
+	 * @return array
 	 */
-	private function get_title(): Deferred_Component {
-		return defer_template_part( 'components/text/text', null, [
+	public function get_title_args(): array {
+		if ( empty( $this->title ) ) {
+			return [];
+		}
+
+		return [
 			Text_Controller::TAG     => 'h2',
 			Text_Controller::CLASSES => [
 				'c-block__title',
 				'h3',
 			],
-			Text_Controller::CONTENT => $this->title ?? '',
-		] );
+			Text_Controller::CONTENT => $this->title,
+		];
 	}
 
 	/**
-	 * @return Deferred_Component
+	 * @return array
 	 */
-	private function get_content(): Deferred_Component {
-		return defer_template_part( 'components/container/container', null, [
-			Container_Controller::CLASSES => [
-				'c-block__description',
-				't-sink',
-				's-sink',
-			],
-			Container_Controller::CONTENT => $this->description ?? '',
-		] );
-	}
-
-	/**
-	 * @return Deferred_Component
-	 */
-	private function get_cta(): Deferred_Component {
+	public function get_cta(): array {
 		$cta = wp_parse_args( $this->cta, [
 			'content' => '',
 			'url'     => '',
 			'target'  => '',
 		] );
 
-		return defer_template_part( 'components/link/link', null, [
+		return [
 			Link_Controller::URL     => $cta['url'],
 			Link_Controller::CONTENT => $cta['content'] ?: $cta['url'],
 			Link_Controller::TARGET  => $cta['target'],
 			Link_Controller::CLASSES => [
 				'c-block__cta-link',
-				'a-btn',
-				'a-btn--has-icon-after',
-				'icon-arrow-right'
+				'a-cta',
 			],
-		] );
+		];
 	}
 
 	/**

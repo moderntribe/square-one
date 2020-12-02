@@ -94,8 +94,18 @@ class Content_Loop_Model extends \Tribe\Project\Blocks\Types\Base_Model {
 			$post_object = new Post_List_Object();
 		}
 
+		if ( ! empty( $values[ Content_Loop::MANUAL_UPPER_META ] ) ) {
+			// Need to replicate the WP Taxonomy array the best we can here
+			$cat = (object) [ 'name' => $values[ Content_Loop::MANUAL_UPPER_META ] ];
+			$post_object->set_category( [ $cat ] );
+		}
+
 		if ( ! empty( $values[ Post_List::MANUAL_TITLE ] ) ) {
 			$post_object->set_title( $values[ Post_List::MANUAL_TITLE ] );
+		}
+
+		if ( ! empty( $values[ Content_Loop::MANUAL_LOWER_META ] ) ) {
+			$post_object->set_post_date( $values[ Content_Loop::MANUAL_LOWER_META ] );
 		}
 
 		if ( ! empty( $values[ Post_List::MANUAL_EXCERPT ] ) ) {
@@ -201,6 +211,7 @@ class Content_Loop_Model extends \Tribe\Project\Blocks\Types\Base_Model {
 		setup_postdata( $post );
 		$post_obj = new Post_List_Object();
 		$post_obj->set_title( get_the_title() )
+				 ->set_category( get_the_category() )
 				 ->set_content( get_the_content() )
 				 ->set_excerpt( get_the_excerpt() )
 				 ->set_image_id( get_post_thumbnail_id() )
@@ -210,7 +221,8 @@ class Content_Loop_Model extends \Tribe\Project\Blocks\Types\Base_Model {
 					 'label'  => get_the_title(),
 				 ] )
 				 ->set_post_type( get_post_type() )
-				 ->set_post_id( $_post->ID );
+				 ->set_post_id( $_post->ID )
+				 ->set_post_date( get_the_date() );
 
 		wp_reset_postdata();
 

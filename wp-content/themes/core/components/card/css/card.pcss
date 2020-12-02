@@ -119,3 +119,50 @@
 		padding: 0 var(--spacer-30);
 	}
 }
+
+/* -----------------------------------------------------------------------------
+ *
+ * Component: Card Horizontal
+ *
+ * ----------------------------------------------------------------------------- */
+
+.c-card--style-horizontal {
+	display: flex;
+	flex-flow: row;
+	align-items: center;
+
+	.c-card__title {
+		display: block;
+		text-decoration: none;
+
+		&:focus {
+			text-decoration: underline;
+		}
+	}
+ 
+	.c-card__media {
+		display: none;
+		flex-shrink: 0;
+
+		@media(--viewport-medium) {
+			display: block;
+			width: 152px;
+			margin-right: var(--spacer-30);
+			margin-bottom: 0;
+		}
+
+		@media(--viewport-large) {
+			width: 168px;
+		}
+	}
+
+	.c-card__content {
+		margin: 0;
+	}
+
+	&:hover {
+		.c-card__title {
+			color: var(--color-link-hover);
+		}
+	}
+}

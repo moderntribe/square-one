@@ -25,10 +25,11 @@ class Card_Controller extends Abstract_Controller {
 	public const CTA             = 'cta';
 	public const USE_TARGET_LINK = 'use_target_link';
 
-	public const STYLE          = 'style';
-	public const STYLE_PLAIN    = 'plain';
-	public const STYLE_ELEVATED = 'elevated';
-	public const STYLE_OUTLINED = 'outlined';
+	public const STYLE            = 'style';
+	public const STYLE_PLAIN      = 'plain';
+	public const STYLE_ELEVATED   = 'elevated';
+	public const STYLE_OUTLINED   = 'outlined';
+	public const STYLE_HORIZONTAL = 'horizontal';
 
 	private string $tag;
 	private array  $classes;
@@ -123,6 +124,20 @@ class Card_Controller extends Abstract_Controller {
 	}
 
 	public function get_classes(): string {
+		if ( $this->use_target_link ) {
+			$this->classes[] = 'has-target-link';
+		}
+
+		if ( $this->style !== self::STYLE_PLAIN ) {
+			$this->classes[] = 'c-card--style-' . $this->style;
+		}
+
+		return Markup_Utils::class_attribute( $this->classes );
+	}
+
+	public function get_horizontal_classes(): string {
+		$this->classes[] = 'c-card--style-horizontal';
+
 		if ( $this->use_target_link ) {
 			$this->classes[] = 'has-target-link';
 		}
