@@ -1,7 +1,70 @@
+.b-gallery-grid__content {
+    padding-top: var(--spacer-40);
+}
+
 /* -----------------------------------------------------------------------------
  *
  * Component: Gallery Grid
  *
  * ----------------------------------------------------------------------------- */
+
+.gallery-layout--one {
+	& > * + * {
+        margin-top: var(--grid-gutter-half);
+	}
+}
+
+.gallery-layout--two {
+    display: flex;
+	flex-flow: row wrap;
+	margin: var(--grid-gutter-medium-half-negative);
+
+	& > * {
+        width: calc(50% - var(--grid-gutter-medium));
+        margin: var(--grid-gutter-medium-half);
+	}
+}
+
+.gallery-layout--three {
+    display: flex;
+	flex-flow: row wrap;
+	margin: var(--grid-gutter-medium-half-negative);
+
+
+	@media (--viewport-full) {
+		margin: var(--grid-gutter-half-negative);
+	}
+
+	& > * {
+        width: calc(50% - var(--grid-gutter-medium));
+        margin: var(--grid-gutter-medium-half);
+
+		@media (--viewport-full) {
+			width: calc(33.3333% - var(--grid-gutter));
+			margin: var(--grid-gutter-half);
+		}
+	}
+}
+
+.gallery-layout--four {
+    display: flex;
+	flex-flow: row wrap;
+	margin: var(--grid-gutter-medium-half-negative);
+
+
+	@media (--viewport-full) {
+		margin: var(--grid-gutter-half-negative);
+	}
+
+	& > * {
+        width: calc(50% - var(--grid-gutter-medium));
+        margin: var(--grid-gutter-medium-half);
+
+		@media (--viewport-full) {
+			width: calc(25% - var(--grid-gutter));
+			margin: var(--grid-gutter-half);
+		}
+	}
+}
 
 

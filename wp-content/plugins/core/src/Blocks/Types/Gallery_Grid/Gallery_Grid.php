@@ -19,6 +19,14 @@ class Gallery_Grid extends Block_Config {
 	public const CTA         = 'cta';
 	public const GALLERY     = 'gallery';
 
+	public const GRID_LAYOUT = 'grid_layout';
+	public const ONE         = 'one';
+	public const TWO         = 'two';
+	public const THREE       = 'three';
+	public const FOUR        = 'four';
+	
+	public const SLIDESHOW   = 'slideshow';
+
 	public function add_block() {
 		$this->set_block( new Block( self::NAME, [
 			'title'       => __( 'Gallery Grid', 'tribe' ),
@@ -54,11 +62,6 @@ class Gallery_Grid extends Block_Config {
 					'toolbar'      => 'basic',
 					'media_upload' => 0,
 				] )
-			)->add_field( new Field( self::NAME . '_' . self::CTA, [
-					'label' => __( 'Call to Action', 'tribe' ),
-					'name'  => self::CTA,
-					'type'  => 'link',
-				] )
 			)->add_field( new Field( self::NAME . '_' . self::GALLERY, [
 					'label' => __( 'Gallery', 'tribe' ),
 					'name'  => self::GALLERY,
@@ -70,6 +73,24 @@ class Gallery_Grid extends Block_Config {
 		//==========================================
 		// Setting Fields
 		//==========================================
-		$this->add_section( new Field_Section( self::SECTION_SETTINGS, __( 'Settings', 'tribe' ), 'accordion' ) );
+		$this->add_section( new Field_Section( self::SECTION_SETTINGS, __( 'Settings', 'tribe' ), 'accordion' ) )
+		->add_field( new Field( self::NAME . '_' . self::GRID_LAYOUT, [
+			'label' => __( 'Grid Columns', 'tribe' ),
+			'name'  => self::GRID_LAYOUT,
+			'type'  => 'select',
+			'choices'       => [
+				self::ONE   => __( '1', 'tribe' ),
+				self::TWO   => __( '2', 'tribe' ),
+				self::THREE => __( '3', 'tribe' ),
+				self::FOUR  => __( '4', 'tribe' ),
+			],
+			'default_value' => self::THREE,
+			] )
+		)->add_field( new Field( self::NAME . '_' . self::SLIDESHOW, [
+			'label' => __( 'Use Slideshow?', 'tribe' ),
+			'name'  => self::SLIDESHOW,
+			'type'  => 'true_false',
+			] )
+		);
 	}
 }

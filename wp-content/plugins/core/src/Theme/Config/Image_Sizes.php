@@ -5,6 +5,7 @@ namespace Tribe\Project\Theme\Config;
 class Image_Sizes {
 	public const SQUARE_XSMALL          = 'square-xsmall';
 	public const SQUARE_MEDIUM          = 'square-medium';
+	public const SQUARE_LARGE           = 'square-large';
 	public const SIXTEEN_NINE           = 'sixteen-nine';
 	public const SIXTEEN_NINE_SMALL     = 'sixteen-nine-small';
 	public const SIXTEEN_NINE_LARGE     = 'sixteen-nine-large';
@@ -26,6 +27,11 @@ class Image_Sizes {
 		self::SQUARE_MEDIUM          => [
 			'width'  => 376,
 			'height' => 376,
+			'crop'   => true,
+		],
+		self::SQUARE_LARGE           => [
+			'width'  => 650,
+			'height' => 650,
 			'crop'   => true,
 		],
 		self::SIXTEEN_NINE_SMALL     => [
