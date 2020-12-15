@@ -92,13 +92,19 @@ class Gallery_Grid_Controller extends Abstract_Controller {
 		return $this->id;
 	}
 
-
 	public function get_classes(): string {
 		return Markup_Utils::class_attribute( $this->classes );
 	}
 
 	public function get_attributes(): string {
 		return Markup_Utils::concat_attrs( $this->attrs );
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function is_slideshow(): bool {
+		return $this->slideshow;
 	}
 
 	/**

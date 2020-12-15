@@ -8,6 +8,7 @@
 
     .swiper-wrapper {
         align-items: center;
+        padding: 20px 0;
     }
 
     .swiper-slide {
@@ -93,7 +94,7 @@
             font-size: 22px;
         }
 
-        @media (--viewport-medium) {
+        @media (--viewport-full) {
             display: flex;
         }
     }
@@ -193,8 +194,10 @@
     margin: 0 auto;
     padding: 0;
     max-width: 1000px;
+    width: 100%;
 
-    @media (--viewport-medium) {
+    @media (--viewport-full) {
+        width: 80%;
         padding: 0 20px;
     }
 }
@@ -205,7 +208,7 @@
     height: 34px;
 	padding: 0;
     position: fixed;
-    right: 10px;
+    right: 40px;
     top: 12px;
     width: 24px;
     z-index: 999999;
@@ -239,10 +242,6 @@
 	&:focus-visible {
 		border: none;
 	}
-
-    @media (--viewport-full) {
-        right: 60px;
-    }
 
     .admin-bar & {
         top: 47px;

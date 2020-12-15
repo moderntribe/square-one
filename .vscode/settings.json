@@ -1,0 +1,7 @@
+{
+    "phpcbf.standard": "ModernTribe",
+    "phpcbf.onsave": true,
+    "phpcbf.executablePath": "./vendor/bin/phpcbf",
+    "phpcbf.debug": true,
+    "phpcbf.documentFormattingProvider": true,
+}

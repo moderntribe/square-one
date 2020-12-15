@@ -2,6 +2,24 @@
     padding-top: var(--spacer-40);
 }
 
+.b-gallery-grid__header {
+
+	@media (--viewport-full) {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	.b-gallery-grid__cta {
+		margin-top: var(--spacer-30);
+		min-width: 250px;
+
+		@media (--viewport-full) {
+			text-align: right;
+		}
+	}
+}
+
 /* -----------------------------------------------------------------------------
  *
  * Component: Gallery Grid
