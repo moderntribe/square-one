@@ -1,0 +1,219 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Component: Video
+ *
+ * ----------------------------------------------------------------------------- */
+.c-video {
+	break-inside: avoid-column;
+	background-color: var(--color-grey-light);
+
+	br,
+	p {
+		display: none;
+	}
+
+	a {
+		text-decoration: none;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Play Button (Link)
+ * ----------------------------------------------------------------------------- */
+
+.c-video__trigger {
+	position: relative;
+	display: flex;
+	height: 100%;
+	transition: var(--transition);
+	padding: var(--spacer-30);
+
+	&:before {
+		content: '';
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		background: var(--gradient-video-trigger-overlay);
+		opacity: 0.85;
+		z-index: 1;
+	}
+
+	/* CASE: Small viewport video player active */
+	.c-video--is-small & {
+		padding: var(--spacer-20);
+	}
+
+	/* CASE: Trigger Action: Position Center */
+	.c-video--trigger-center & {
+		align-items: center;
+		justify-content: center;
+	}
+
+	/* CASE: Trigger Action: Position Bottom */
+	.c-video--trigger-bottom & {
+		align-items: flex-end;
+	}
+
+	/* CASE: Video is playing */
+	.c-video--is-playing & {
+		opacity: 0;
+		transition: var(--transition-ease-out-opacity);
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Cover Image
+ * ----------------------------------------------------------------------------- */
+
+.c-video__thumbnail {
+	margin: 0;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	/* CASE: Video data not loaded or loading */
+	&.lazyload,
+	&.lazyloading {
+		opacity: 0;
+	}
+
+	/* CASE: Video data loaded */
+	&.lazyloaded {
+		opacity: 1;
+		transition: var(--transition-opacity);
+	}
+
+	/* CASE: Low-resolution cover image applied */
+	.c-video--lazy-low-res & {
+		margin-top: -9.4%;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Play Button (Link) Trigger Wrapper
+ * ----------------------------------------------------------------------------- */
+
+.c-video__trigger-action {
+	opacity: 0;
+	position: relative;
+	z-index: 1;
+	color: var(--color-white);
+	transition: var(--transition-opacity);
+
+	@media (--viewport-full) {
+		width: 60%;
+	}
+
+	/* CASE: Small viewport video player active */
+	.c-video--is-small & {}
+
+	/* CASE: Trigger Action: Position Bottom */
+	.c-video--trigger-bottom & {
+		display: flex;
+		align-items: center;
+	}
+
+	/* CASE: Video data loaded */
+	.lazyloaded ~ & {
+		opacity: 1;
+		transition: var(--transition-ease-in-opacity);
+	}
+
+	/* CASE: Video is playing */
+	.c-video--is-playing & {
+		opacity: 0;
+		transition: var(--transition-ease-out-opacity);
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Trigger Icon
+ * ----------------------------------------------------------------------------- */
+
+.c-video__trigger-icon {
+	display: block;
+	margin: 48px auto var(--spacer-30); /* margin-top is 1/2 the height of the icon to improve vertical centering. */
+	width: 96px;
+	height: 96px;
+	text-align: center;
+	border-radius: 50%;
+	color: var(--color-text);
+	background-color: var(--color-white);
+	transition: var(--transition-embed-icon);
+
+	&:before {
+		@mixin icon;
+
+		font-size: 56px;
+		line-height: 99px;
+		margin-left: 4px;
+	}
+
+	/* CASE: Small viewport video player active */
+	.c-video--is-small & {
+		width: 56px;
+		height: 56px;
+		margin-top: 28px; /* margin-top is 1/2 the height of the icon to improve vertical centering. */
+		margin-bottom: var(--spacer-10);
+
+		&:before {
+			font-size: 28px;
+			line-height: 58px;
+			margin-left: 2px;
+		}
+	}
+
+	/* CASE: Trigger Action: Position Bottom */
+	.c-video--trigger-bottom & {
+		flex: 0 0 auto;
+		width: 64px;
+		height: 64px;
+		margin: 0 var(--spacer-20) 0 0;
+
+		&:before {
+			font-size: 36px;
+			line-height: 66px;
+		}
+	}
+
+	a:hover &,
+	a:focus & {
+		color: var(--color-white);
+		background-color: var(--color-primary);
+		transform: scale(1.1);
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Trigger Label
+ * ----------------------------------------------------------------------------- */
+
+.c-video__trigger-label {
+	@mixin t-display-x-small;
+
+	display: block;
+	text-align: center;
+
+	/* CASE: Small viewport video player active */
+	.c-video--is-small & {
+		@mixin t-display-xx-small;
+	}
+
+	/* CASE: Trigger Action: Position Bottom */
+	.c-video--trigger-bottom & {
+		@mixin t-body-large;
+
+		text-align: left;
+	}
+
+	/* CASE: Trigger Action: Position Bottom and small viewport player active */
+	.c-video--trigger-bottom.c-video--is-small & {
+		@mixin t-body;
+	}
+}

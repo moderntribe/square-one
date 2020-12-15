@@ -1,0 +1,56 @@
+# Containers to run during GitHub Actions
+version: '3.4'
+services:
+  dns-internal:
+    image: 'andyshinn/dnsmasq:latest'
+    container_name: tribe-dns-internal
+    command: >-
+      --log-facility=/proc/self/fd/2 --no-resolv --server=1.1.1.1 --address=/tribe/172.20.10.100 --address=/mysql.tribe/172.20.10.200 --address=/mailhog.tribe/172.20.10.90
+      --address=/smtp.tribe/172.20.10.90 --address=/host.tribe/${HOSTIP:-172.20.10.1}
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - 53/udp
+      - 53/tcp
+    networks:
+      proxy:
+        ipv4_address: 172.20.10.250
+
+  mysql:
+    image: mariadb
+    container_name: tribe-mysql
+    volumes:
+      - '${TRIBE_MYSQL_DATA_DIR:-~/mysql_data}:/var/lib/mysql'
+      - './mysql/mysql.cnf:/etc/mysql/conf.d/mysql.cnf:ro'
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+    ports:
+      - '3306:3306'
+    networks:
+      proxy:
+        ipv4_address: 172.20.10.200
+
+  mailhog:
+    image: 'mailhog/mailhog:latest'
+    container_name: tribe-mail
+    environment:
+      - VIRTUAL_HOST=mailhog.tribe
+      - VIRTUAL_PORT=8025
+    networks:
+      proxy:
+        ipv4_address: 172.20.10.90
+    ports:
+      - '1025:1025'
+
+  webserver-tests:
+    ports:
+      - '80:80'
+      - '443:443'
+    networks:
+      proxy:
+        ipv4_address: 172.20.10.100
+
+networks:
+  proxy:
+    external:
+      name: global_proxy

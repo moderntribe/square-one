@@ -1,4 +1,0 @@
----
-php_fpm_pm_start_servers: 12
-php_fpm_pm_min_spare_servers: 12
-php_fpm_pm_max_spare_servers: 12

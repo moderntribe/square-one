@@ -1,0 +1,39 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Advanced Custom Fields: Image Select Field modifications.
+ *
+ * ----------------------------------------------------------------------------- */
+
+/* -----------------------------------------------------------------------------
+ * Image Select Field:
+ * + Set a hard-size on the image select options.
+ * + Add better select option layout.
+ * ----------------------------------------------------------------------------- */
+
+ul.acf-image-select-list {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: flex-start;
+
+	li.acf-image-select {
+		display: block;
+		width: 70px;
+
+		label img {
+			transition: var(--transition);
+		}
+
+		&:focus,
+		&:hover {
+
+			label img {
+				border-color: #191e23; /* Match WordPress Core Styles */
+			}
+		}
+
+		label.acf-image-select-selected img {
+			border-color: #007cba; /* Match WordPress Core Styles */
+		}
+	}
+
+}

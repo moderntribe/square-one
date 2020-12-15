@@ -1,0 +1,76 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Media: WP Audio & Video
+ *
+ * ----------------------------------------------------------------------------- */
+
+/* -----------------------------------------------------------------------------
+ * TinyMCE Embeds
+ * ----------------------------------------------------------------------------- */
+
+.wp-video-shortcode.mejs-container,
+.wp-audio-shortcode.mejs-container {
+	margin-top: var(--spacer-70);
+	margin-bottom: var(--spacer-70);
+	background: var(--wp-oembed-bgd);
+
+	.mejs-controls {
+		background: var(--wp-oembed-bgd);
+	}
+
+	.mejs-overlay-button {
+		background-image: none;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Block Editor: Embeds
+ * ----------------------------------------------------------------------------- */
+
+.wp-block-embed__wrapper {
+
+	.wp-embed-aspect-21-9 & {
+		aspect-ratio: '21:9';
+	}
+
+	.wp-embed-aspect-18-9 & {
+		aspect-ratio: '18:9';
+	}
+
+	.wp-embed-aspect-16-9 & {
+		aspect-ratio: '16:9';
+	}
+
+	.wp-embed-aspect-4-3 & {
+		aspect-ratio: '4:3';
+	}
+
+	.wp-embed-aspect-1-1 & {
+		aspect-ratio: '1:1';
+	}
+
+	.wp-embed-aspect-9-16 & {
+		aspect-ratio: '9:16';
+	}
+
+	.wp-embed-aspect-1-2 & {
+		aspect-ratio: '1:2';
+	}
+
+	iframe {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Block Editor: Audio
+ * ----------------------------------------------------------------------------- */
+
+.wp-block-audio {
+
+	audio {
+		width: 100%;
+	}
+}

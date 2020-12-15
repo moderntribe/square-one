@@ -6,14 +6,14 @@ use Tribe\Libs\ACF;
 
 class Social_Settings extends ACF\ACF_Meta_Group {
 
-	const NAME = 'social_settings';
+	public const NAME = 'social_settings';
 
-	const FACEBOOK  = 'facebook';
-	const TWITTER   = 'twitter';
-	const YOUTUBE   = 'youtube';
-	const LINKEDIN  = 'linkedin';
-	const PINTEREST = 'pinterest';
-	const INSTAGRAM = 'instagram';
+	public const FACEBOOK  = 'facebook';
+	public const TWITTER   = 'twitter';
+	public const YOUTUBE   = 'youtube';
+	public const LINKEDIN  = 'linkedin';
+	public const PINTEREST = 'pinterest';
+	public const INSTAGRAM = 'instagram';
 
 	public function get_keys() {
 		return [

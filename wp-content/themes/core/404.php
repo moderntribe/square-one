@@ -1,4 +1,3 @@
 <?php
 
-$template = new \Tribe\Project\Templates\Error_404( '404.twig' );
-echo $template->render();
+get_template_part( 'components/routes/not_found/not_found' );

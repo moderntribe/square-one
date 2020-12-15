@@ -28,6 +28,7 @@ pimple.json
 local-config.php
 cache-config.php
 tests-config.php
+build-process.php
 wp-content/uploads/
 wp-content/blogs.dir/
 wp-content/upgrade/
@@ -84,8 +85,9 @@ dev/composer.phar
 local-config.json
 dev/docker/mysql/*
 !dev/docker/mysql/.gitkeep
-wp-content/themes/core/css
-wp-content/themes/core/js/dist
+wp-content/themes/core/assets/css/dist
+wp-content/themes/core/assets/js/dist
+wp-content/themes/core/assets/js/vendor
 
 # WP Engine #
 #############
@@ -107,9 +109,8 @@ wp-content/plugins/airplane-mode
 **/node_modules/
 **/bower_components/
 **/__coverage__/
-dev_components/react-app/test/__coverage__/
 dev/deploy/.deploy
-/reports
+wp-content/themes/core/reports
 
 # DevOps #
 #######################
@@ -126,3 +127,4 @@ dev/docker/global/.env
 # Testing #
 #######################
 !dev/tests/tests/_data/*.sql
+dev/tests/tests/_support/_generated/

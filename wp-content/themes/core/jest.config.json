@@ -1,0 +1,31 @@
+{
+    "collectCoverage": false,
+    "coverageDirectory": "<rootDir>/assets/js/test/__coverage__",
+    "coveragePathIgnorePatterns": [
+        "/node_modules",
+        "jest.setup.js"
+    ],
+    "coverageReporters": [
+        "json",
+        "lcov",
+        "text-summary"
+    ],
+    "moduleNameMapper": {
+        "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/assets/js/test/__mocks__/fileMock.js",
+        "\\.(css|pcss)$": "identity-obj-proxy"
+    },
+    "setupFiles": [
+        "<rootDir>/assets/js/test/setup.js"
+    ],
+    "roots": [
+        "<rootDir>/assets/js/test"
+    ],
+    "snapshotSerializers": [
+        "enzyme-to-json/serializer"
+    ],
+    "testRegex": ".*(test|spec)\\.jsx?$",
+    "testEnvironment": "jest-environment-jsdom-global",
+    "testPathIgnorePatterns": [
+        "/node_modules/"
+    ]
+}

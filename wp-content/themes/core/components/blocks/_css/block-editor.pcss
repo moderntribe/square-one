@@ -1,0 +1,19 @@
+/* -----------------------------------------------------------------------------
+ *
+ * ACF Blocks
+ *
+ * Styles applicable to "acf/" namespaced blocks.
+ *
+ * ----------------------------------------------------------------------------- */
+
+.wp-block[data-type^="acf/"] {
+	max-width: none;
+	width: 100%;
+
+	/* Add a max-width to the edit UI for ACF blocks */
+	.acf-block-fields {
+		max-width: var(--grid-width);
+		margin-left: auto;
+		margin-right: auto;
+	}
+}

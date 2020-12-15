@@ -6,9 +6,9 @@ use Tribe\Libs\ACF;
 
 class Analytics_Settings extends ACF\ACF_Meta_Group {
 
-	const NAME = 'analytics_settings';
+	public const NAME = 'analytics_settings';
 
-	const GOOGLE_TAG_MANAGER = 'id_google_tag_manager';
+	public const GOOGLE_TAG_MANAGER = 'id_google_tag_manager';
 
 	public function get_keys() {
 		return [

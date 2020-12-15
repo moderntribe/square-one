@@ -5,6 +5,7 @@ paths:
     support: tests/_support
     envs: tests/_envs
 actor_suffix: Tester
+bootstrap: _bootstrap.php
 extensions:
     enabled:
         - Codeception\Extension\RunFailed
@@ -19,15 +20,56 @@ extensions:
 params:
     - .env
 settings:
-    bootstrap: _bootstrap.php
     colors: true
     memory_limit: 1024M
     backup_globals: false
-env:
-    singlesite:
-    # nothing changes
-    multisite:
-        modules:
-            config:
-                WPLoader:
-                    multisite: true
+
+##
+# Module configurations that apply to all suites,
+# unless overridden in the suite file.
+##
+modules:
+    config:
+        WPDb:
+            dsn: 'mysql:host=%ACCEPTANCE_DB_HOST%;dbname=%ACCEPTANCE_DB_NAME%'
+            user: '%ACCEPTANCE_DB_USER%'
+            password: '%ACCEPTANCE_DB_PASS%'
+            dump: tests/_data/dump.sql
+            url: '%ACCEPTANCE_WP_URL%'
+            tablePrefix: '%TABLE_PREFIX%'
+            urlReplacement: false
+            # populate: true (We recommend each suite define this parameter explicitly)
+            # cleanup: true (We recommend each suite define this parameter explicitly)
+        WPBrowser:
+            cookies:
+                cookie-1:
+                    # This enables Xdebug on requests made by WPBrowser
+                    Name: XDEBUG_SESSION
+                    Value: # Empty. Automatically managed by testx.sh
+                    Domain: '%WP_DOMAIN%'
+            headers:
+                # This tells WordPress that this is a WPBrowser request
+                X_TRIBE_TESTING: 1
+                X_TEST_REQUEST: 1
+                X_WPBROWSER_REQUEST: 1
+        WPLoader:
+            # loadOnly: false (We recommend each suite define this parameter explicitly)
+            wpRootFolder: '%WP_ROOT_FOLDER%'
+            pluginsFolder: ../wp-content/plugins
+            dbName: '%TEST_DB_NAME%'
+            dbHost: '%TEST_DB_HOST%'
+            dbUser: '%TEST_DB_USER%'
+            dbPassword: '%TEST_DB_PASSWORD%'
+            tablePrefix: "%TABLE_PREFIX%"
+            domain: "%WP_DOMAIN%"
+            configFile: wp-config-environment.php
+            multisite: false
+            theme: core
+            plugins:
+                - core/core.php
+                - advanced-custom-fields-pro/acf.php
+            activatePlugins:
+                - core/core.php
+                - advanced-custom-fields-pro/acf.php
+            bootstrapActions:
+                - tribe/project/queues/mysql/init_table

@@ -1,0 +1,71 @@
+
+/* -----------------------------------------------------------------------------
+ *
+ * Block Editor
+ * Media Styles & Overrides
+ *
+ * Styles applicable to media in the block editor.
+ *
+ * ----------------------------------------------------------------------------- */
+
+.block-editor-block-list__layout {
+
+	.wp-block-audio,
+	.wp-block-video,
+	.wp-block-embed,
+	figure.wp-block-image {
+		margin-top: var(--spacer-60);
+		margin-bottom: var(--spacer-60);
+	}
+
+	/* CASE: Alignment: Left & Right */
+	.wp-block[data-align="left"],
+	.wp-block[data-align="right"] {
+
+		& > .wp-block-image {
+			margin-top: var(--spacer-40);
+			margin-bottom: var(--spacer-40);
+
+			@media (--viewport-medium) {
+				margin-top: 5px;
+			}
+
+			/* CASE: Image has not been resized by the editor. */
+			&:not(.is-resized) {
+				@media (--viewport-medium) {
+					max-width: var(--grid-5-col);
+				}
+			}
+		}
+	}
+
+	/* CASE: Alignment: Left */
+	.wp-block[data-align="left"] {
+
+		& > .wp-block-image {
+			@media (--viewport-medium) {
+				float: left;
+				margin-right: var(--grid-gutter);
+			}
+
+			@media (--viewport-full) {
+				margin-left: calc(-1 * (var(--grid-1-col) + var(--grid-gutter)));
+			}
+		}
+	}
+
+	/* CASE: Alignment: Right */
+	.wp-block[data-align="right"] {
+
+		& > .wp-block-image {
+			@media (--viewport-medium) {
+				float: right;
+				margin-left: var(--grid-gutter);
+			}
+
+			@media (--viewport-full) {
+				margin-right: calc(-1 * (var(--grid-1-col) + var(--grid-gutter)));
+			}
+		}
+	}
+}

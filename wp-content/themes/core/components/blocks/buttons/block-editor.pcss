@@ -1,0 +1,18 @@
+
+/* -----------------------------------------------------------------------------
+ *
+ * Block Editor
+ * Buttons Block Styles & Overrides
+ *
+ * Styles applicable to this block in the block editor.
+ *
+ * ----------------------------------------------------------------------------- */
+
+.wp-block[data-type^="acf/buttons"] {
+	max-width: var(--grid-width-staggered-double);
+	width: calc(100% - 2 * var(--grid-gutter-small));
+
+	@media (--viewport-medium) {
+		width: calc(100% - 2 * var(--grid-gutter));
+	}
+}

@@ -10,4 +10,5 @@ use Codeception\TestCase\WPTestCase;
  *
  * @package Tribe\Tests
  */
-class Test_Case extends WPTestCase {}
+class Test_Case extends WPTestCase {
+}

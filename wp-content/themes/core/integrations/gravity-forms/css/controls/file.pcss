@@ -1,0 +1,59 @@
+.ginput_preview,
+.gf-file .validation_message {
+	background-color: darken(var(--form-control-bgd-color), 0.1);
+	height: auto;
+	font-size: var(--form-font-size);
+	padding: var(--form-control-file-padding);
+	line-height: 1;
+	border: var(--gf-control-file-border-size) solid var(--gf-control-file-border-color);
+	border-top: 0;
+
+	img {
+		margin: 0 2px 0 0;
+		display: inline-block;
+		vertical-align: middle;
+	}
+
+	strong {
+		display: inline-block;
+		vertical-align: middle;
+		font-weight: normal;
+	}
+}
+
+.gf-file .validation_message {
+
+	li {
+		margin-bottom: 0;
+
+		& ~ li {
+			margin-top: 10px;
+		}
+	}
+}
+
+/* Multiple */
+.gform_drop_instructions {
+	font: var(--form-control-font-style) var(--form-control-font-weight) var(--form-font-size) / 1 var(--form-font-family);
+
+	@media (--viewport-medium) {
+		margin-right: 10px;
+	}
+}
+
+.gform_fileupload_multifile {
+	border: var(--gf-control-file-border-size) solid var(--gf-control-file-border-color);
+	padding: var(--form-control-file-padding);
+	background-color: var(--form-control-bgd-color);
+
+	input[type="button"],
+	input[type="file"] {
+		@mixin a-btn-submit;
+
+		margin-top: var(--spacer-20);
+
+		@media (--viewport-medium) {
+			margin-top: 0;
+		}
+	}
+}

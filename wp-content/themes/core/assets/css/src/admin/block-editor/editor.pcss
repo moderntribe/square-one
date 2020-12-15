@@ -1,0 +1,32 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Global Editor Styles & Overrides
+ *
+ * Styles that apply to the general block editor.
+ *
+ * ----------------------------------------------------------------------------- */
+
+.editor-styles-wrapper {
+	font: 400 normal 100% / 1.5 var(--font-family-base);
+	color: var(--color-text);
+	background: var(--color-bgd);
+}
+
+.block-editor-block-list__layout {
+	/* Unset WP Core's vertical spacing on some headings, paragraphs, etc. */
+	* {
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+
+	/* CASE: Alignment: Full */
+	.wp-block[data-align="full"] {
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	/* Reset/remove the browser's default margin n figure inside the block editor. */
+	figure {
+		margin: 0;
+	}
+}

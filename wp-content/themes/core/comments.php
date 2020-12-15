@@ -1,4 +1,2 @@
 <?php
-
-$template = new \Tribe\Project\Templates\Comments( 'comments.twig' );
-echo $template->render();
+get_template_part( 'components/comments/comments_section/comments_section' );

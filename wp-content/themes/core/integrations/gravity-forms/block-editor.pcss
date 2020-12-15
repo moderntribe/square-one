@@ -1,0 +1,106 @@
+
+/* -----------------------------------------------------------------------------
+ *
+ * Block Editor
+ * Gravity Forms Block Styles & Overrides
+ *
+ * Styles applicable to this block in the block editor.
+ *
+ * ----------------------------------------------------------------------------- */
+
+[data-type="gravityforms/form"] {
+
+	&.wp-block {
+		max-width: var(--grid-width-staggered-double);
+	}
+
+	/* -----------------------------------------------------------------------------
+	 * Block Editor Form Resets
+	 * ----------------------------------------------------------------------------- */
+
+	input[type="text"],
+	input[type="search"],
+	input[type="radio"],
+	input[type="tel"],
+	input[type="time"],
+	input[type="url"],
+	input[type="week"],
+	input[type="password"],
+	input[type="checkbox"],
+	input[type="color"],
+	input[type="date"],
+	input[type="datetime"],
+	input[type="datetime-local"],
+	input[type="email"],
+	input[type="month"],
+	input[type="number"],
+	select,
+	textarea {
+
+		&:focus {
+			border: var(--form-border-size-focus) solid var(--form-border-color-focus);
+			box-shadow: none;
+			color: var(--form-control-color);
+			transition: box-shadow 0s;
+		}
+	}
+
+	input[type="radio"],
+	input[type="checkbox"] {
+		margin: 0;
+		min-width: auto;
+		width: auto;
+
+		*:before,
+		*:after {
+			box-sizing: initial;
+		}
+	}
+
+	input[type="radio"] {
+
+		&:checked:before {
+			height: 0;
+			width: 0;
+			margin: 0;
+		}
+	}
+
+	input[type="checkbox"] {
+
+		&:checked:before {
+			content: '';
+			margin: 0;
+		}
+	}
+
+	/* -----------------------------------------------------------------------------
+	 * Form Element Style Overrides
+	 *
+	 * Override WP-Core-UI's opinionated styles for specific elements.
+	 * ----------------------------------------------------------------------------- */
+
+	.block-editor-page & {
+
+		select {
+			@mixin form-control;
+
+			max-width: none;
+			padding-right: 0;
+			cursor: pointer;
+
+			/* CASE: multiple */
+			&[multiple] {
+				font-size: var(--form-control-font-size);
+				height: 100px;
+				padding: var(--form-padding-vertical) var(--form-padding-horizontal);
+			}
+
+			&:focus {
+				border: var(--form-border-size-focus) solid var(--form-border-color-focus);
+				box-shadow: none;
+				color: var(--form-control-color);
+			}
+		}
+	}
+}

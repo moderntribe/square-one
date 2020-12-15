@@ -1,0 +1,19 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Typography: Paragraphs
+ *
+ * ----------------------------------------------------------------------------- */
+
+.t-sink > p {
+	@mixin t-body;
+
+	/* CASE: Overline style applied via the editor. */
+	&.is-style-t-overline {
+		@mixin t-overline;
+	}
+
+	/* CASE: Lead-In style applied via the editor. */
+	&.is-style-t-leadin {
+		@mixin t-body-large;
+	}
+}

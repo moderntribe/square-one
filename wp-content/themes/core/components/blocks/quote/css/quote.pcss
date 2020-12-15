@@ -1,0 +1,239 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Component: Block: Quote
+ *
+ * ----------------------------------------------------------------------------- */
+
+.b-quote {
+	position: relative;
+	display: flex;
+	align-items: center;
+	padding: 0;
+	background-color: var(--color-black);
+
+	/* CASE: Layout: Media Overlay */
+	&.c-block--layout-overlay {
+		padding: var(--spacer-70) 0;
+
+		@media (--viewport-medium) {
+			padding: 120px 0;
+		}
+
+		@media (--viewport-full) {
+			padding: var(--spacer-90) 0;
+		}
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Quote: Container
+ * ----------------------------------------------------------------------------- */
+
+.b-quote__container {
+	flex: 1 1 auto;
+
+	/* CASE: Layout: Media Left/Right */
+	.b-quote:not(.c-block--layout-overlay) & {
+		@media (--viewport-full) {
+			display: flex;
+			justify-content: flex-end;
+		}
+	}
+
+	/* CASE: Layout: Media Right */
+	.c-block--layout-right & {
+		@media (--viewport-full) {
+			flex-direction: row-reverse;
+		}
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Quote: Media Container
+ * ----------------------------------------------------------------------------- */
+
+.b-quote__media {
+	/* CASE: Layout Left/Right */
+	.b-quote:not(.c-block--layout-overlay) & {
+		aspect-ratio: '16:9';
+		margin-left: var(--grid-margin-small-negative);
+		margin-right: var(--grid-margin-small-negative);
+
+		@media (--viewport-medium) {
+			margin-left: var(--grid-margin-medium-negative);
+			margin-right: var(--grid-margin-medium-negative);
+		}
+
+		@media (--viewport-full) {
+			position: absolute;
+			margin: 0;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			width: 44.0625%; /* 5 of 12-columns plus gutters @ 1440px */
+		}
+	}
+
+	/* CASE: Layout: Media Right */
+	.b-quote.c-block--layout-right & {
+		@media (--viewport-full) {
+			left: auto;
+			right: 0;
+		}
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Quote: Figure Element
+ * ----------------------------------------------------------------------------- */
+
+.b-quote__figure {}
+
+/* -----------------------------------------------------------------------------
+ * Quote: Image Element
+ * ----------------------------------------------------------------------------- */
+
+.b-quote__img {}
+
+/* -----------------------------------------------------------------------------
+ * Quote: Content
+ * ----------------------------------------------------------------------------- */
+
+.b-quote__content {
+	position: relative;
+
+	/* CASE: Layout: Media Overlay */
+	.c-block--layout-overlay & {
+		max-width: var(--grid-width-staggered-double);
+	}
+
+	/* CASE: Layout Left/Right */
+	.b-quote:not(.c-block--layout-overlay) & {
+		padding-top: var(--spacer-30);
+		padding-bottom: var(--spacer-40);
+		display: flex;
+		flex: 0 0 auto;
+		flex-flow: row nowrap;
+		align-items: center;
+		justify-content: center;
+
+		@media (--viewport-medium) {
+			padding-top: var(--spacer-50);
+			padding-bottom: var(--spacer-60);
+		}
+
+		@media (--viewport-full) {
+			width: 53.75%; /* 7 of 12-columns plus gutters @ 1440px */
+			max-width: calc(var(--grid-gutter) + var(--grid-7-col) + var(--grid-margin));
+			margin: 0;
+			justify-content: flex-end;
+		}
+
+		@media (--viewport-large) {
+			padding-top: 80px;
+			padding-bottom: 80px;
+		}
+
+		.c-quote {
+			max-width: var(--grid-6-col);
+		}
+	}
+
+	/* CASE: Layout: Media Right */
+	.b-quote.c-block--layout-right & {
+		@media (--viewport-full) {
+			justify-content: flex-start;
+		}
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Quote: Content Container
+ * ----------------------------------------------------------------------------- */
+
+.b-quote__content-container {
+	max-width: 504px; /* 6 of 8-cols for medium breakpoints */
+
+	@media (--viewport-full) {
+		max-width: var(--grid-width-staggered-double);
+	}
+
+	/* CASE: Layout: Media Left/Right */
+	.b-quote:not(.c-block--layout-overlay) & {
+		@media (--viewport-full) {
+			max-width: var(--grid-6-col);
+			margin-left: var(--grid-gutter);
+		}
+	}
+
+	/* CASE: Layout: Media Right */
+	.b-quote.c-block--layout-right & {
+		@media (--viewport-full) {
+			margin-left: 0;
+			margin-right: var(--grid-gutter);
+		}
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Quote: Text
+ * ----------------------------------------------------------------------------- */
+
+.c-quote__text {
+	@mixin t-quote;
+
+	/* CASE: Layout: Media Overlay */
+	.c-block--layout-overlay & {
+		@mixin t-display-small;
+
+		@media (--viewport-full) {
+			@mixin t-display;
+		}
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Quote: Citation
+ * ----------------------------------------------------------------------------- */
+
+.c-quote__cite {
+	display: flex;
+	flex-flow: row wrap;
+	align-items: center;
+	margin-top: var(--spacer-40);
+}
+
+/* -----------------------------------------------------------------------------
+ * Quote: Citation Figure
+ * ----------------------------------------------------------------------------- */
+
+.c-quote__cite-figure {
+	width: 64px;
+	overflow: hidden;
+	margin-right: var(--spacer-30);
+	border-radius: 50%;
+
+	@media (--viewport-full) {
+		width: 80px;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Quote: Citation Name
+ * ----------------------------------------------------------------------------- */
+
+.c-quote__cite-name {
+	@mixin t-input;
+
+	display: block;
+}
+
+/* -----------------------------------------------------------------------------
+ * Quote: Citation Title
+ * ----------------------------------------------------------------------------- */
+
+.c-quote__cite-title {
+	@mixin t-label;
+
+	display: block;
+}
