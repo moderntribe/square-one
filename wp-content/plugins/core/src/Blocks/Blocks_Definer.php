@@ -86,7 +86,7 @@ class Blocks_Definer implements Definer_Interface {
 				'core/audio',
 				'core/block',
 				//'core/buttons',
-				'core/classic',
+				'core/freeform',
 				'core/code',
 				'core/embed',
 				'core/file',
