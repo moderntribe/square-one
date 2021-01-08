@@ -40,16 +40,19 @@ abstract class Base_Model {
 	}
 
 	/**
-	 * Get any block attributes to pass along to the block's controller.
+	 * Get any block attributes from the block editor.
 	 *
 	 * @return array|string[]
 	 */
 	protected function get_attrs(): array {
-		if ( empty( $this->anchor ) ) {
-			return [];
+		$attrs = [];
+
+		// "HTML Anchor" attribute
+		if ( ! empty( $this->anchor ) ) {
+			$attrs[ 'id '] = $this->anchor;
 		}
 
-		return [ 'id' => $this->anchor ];
+		return $attrs;
 	}
 
 	/**
