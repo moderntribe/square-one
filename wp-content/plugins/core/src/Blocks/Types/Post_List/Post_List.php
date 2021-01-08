@@ -50,7 +50,10 @@ class Post_List extends Block_Config {
 			'icon'        => 'sticky',
 			'keywords'    => [ __( 'posts', 'tribe' ), __( 'display', 'tribe' ), __( 'text', 'tribe' ) ],
 			'category'    => 'layout',
-			'supports'    => [ 'align' => false ],
+			'supports'    => [
+				'align'  => false,
+				'anchor' => true,
+			],
 		] ) );
 	}
 

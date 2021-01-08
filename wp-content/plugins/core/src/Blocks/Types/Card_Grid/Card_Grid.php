@@ -60,7 +60,10 @@ class Card_Grid extends Block_Config {
 			'icon'        => 'sticky',
 			'keywords'    => [ __( 'posts', 'tribe' ), __( 'display', 'tribe' ), __( 'text', 'tribe' ) ],
 			'category'    => 'layout',
-			'supports'    => [ 'align' => false ],
+			'supports'    => [
+				'align'  => false,
+				'anchor' => true,
+			],
 			'example'     => [
 				'attributes' => [
 					'mode' => 'preview',
@@ -180,7 +183,7 @@ class Card_Grid extends Block_Config {
 				'label'        => __( 'Create or Override Content', 'tribe' ),
 				'instructions' => __(
 					'Data entered below will overwrite the respective data from the post selected above.',
-					'tribe' 
+					'tribe'
 				),
 				'name'         => self::MANUAL_TOGGLE,
 				'type'         => 'true_false',
