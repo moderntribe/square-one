@@ -40,7 +40,7 @@ abstract class Base_Model {
 	}
 
 	/**
-	 * Get any ACF Block attributes to inject to the block's wrapper.
+	 * Get any block attributes to pass along to the block's controller.
 	 *
 	 * @return array|string[]
 	 */
