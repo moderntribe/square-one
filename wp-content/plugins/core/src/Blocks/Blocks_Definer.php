@@ -8,6 +8,7 @@ use Tribe\Libs\Container\Definer_Interface;
 use Tribe\Project\Blocks\Types\Buttons\Buttons;
 use Tribe\Project\Blocks\Types\Card_Grid\Card_Grid;
 use Tribe\Project\Blocks\Types\Content_Columns\Content_Columns;
+use Tribe\Project\Blocks\Types\Content_Loop\Content_Loop;
 use Tribe\Project\Blocks\Types\Interstitial\Interstitial;
 use Tribe\Project\Blocks\Types\Accordion\Accordion;
 use Tribe\Project\Blocks\Types\Hero\Hero;
@@ -30,7 +31,7 @@ class Blocks_Definer implements Definer_Interface {
 	public function define(): array {
 		return [
 			self::TYPES => DI\add( [
-				DI\get( Types\Content_Loop\Content_Loop::class ),
+				DI\get( Content_Loop::class ),
 				DI\get( Accordion::class ),
 				DI\get( Buttons::class ),
 				DI\get( Card_Grid::class ),
