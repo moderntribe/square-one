@@ -3,6 +3,7 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Blocks\Types\Content_Loop;
 
+use Tribe\Project\Blocks\Types\Base_Model;
 use Tribe\Project\Templates\Components\blocks\content_loop\Content_Loop_Controller;
 use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Templates\Models\Post_List_Object;
@@ -14,7 +15,7 @@ use Tribe\Project\Blocks\Types\Post_List\Post_List;
  * Responsible for mapping values from the block to arguments
  * for the component
  */
-class Content_Loop_Model extends \Tribe\Project\Blocks\Types\Base_Model {
+class Content_Loop_Model extends Base_Model {
 	public function get_data(): array {
 		return [
 			Content_Loop_Controller::CLASSES     => $this->get_classes(),
