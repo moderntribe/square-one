@@ -27,10 +27,3 @@ define( 'ASSET_VERSION_TIMESTAMP', true );
  */
 define( 'WHOOPS_ENABLE', true );
 
-/*
- * Glomar
- *
- * GLOMAR is a plugin that blocks the frontend of the site from public access.
- * If you would like to disable the plugin locally, add the following to your local-config.php.
- */
-define( 'TRIBE_GLOMAR', false );
