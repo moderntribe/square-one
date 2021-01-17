@@ -49,7 +49,7 @@ jobs:
           php-version: ${{ matrix.php-versions }}
           extensions: ${{ env.php_extensions }}
           coverage: none
-          tools: composer
+          tools: composer:v1
 
       - name: Validate composer.json and composer.lock
         run: composer validate

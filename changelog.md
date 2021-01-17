@@ -2,7 +2,26 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2021.01
+* Added: Support for the block editor's "HTML Anchor" field on our custom ACF blocks.
+* Fixed:  An issue where some of our block controllers were using the `class_attribute()` utility method to return attributes. (Block controllers are all correctly using `concat_attrs()` now.)
+
+## 2020.11
+* Updated: docker-compose.yml php-fpm image from 74-2.1.1 to 74-2.1 to ensure composer v1.
+* Updated: Adds core/block to allow list to enable reusable blocks.
+* Updated: Order the block allow list alphabetically.
+
+## 2020.10
+* Fixed: Typo in object-cache docs. 
+
+
 ## 2020.09
+* Updated: Various codebase configs.
+    * local-config-sample.php: cleaned up no longer needed items
+    * .env.sample: fixed typos and now incorrect vault reference
+    * Updated caniuse-lite to latest version
+    * Updated our browserslist to be more in line with testing policy (package.json, postcss, babeljs)
+    * wp-config.environment.php: updated usage of SCRIPT_DEBUG
 * Removed: The Image and Image_Derivative models are gone. The Image_Controller for
   the image component no longer accepts an "attachment" argument, opting instead
   for an "img_id" pointing to the WP attachment post.

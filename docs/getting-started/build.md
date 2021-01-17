@@ -8,7 +8,7 @@
    1. gulp-cli
 1. Build frontend assets
    1. `nvm use`
-   1. `yarn install`
+   1. `yarn install:theme`
    1. `gulp dist`
 1. Install backend dependencies
    1. `so composer install`
@@ -47,7 +47,7 @@ During dev you have 2 choices for gulp tasks to run when editing any pcss or jav
 
 Before you push code back upstream, you must run `yarn validate`. This will lint your js and css. If you code does not lint please correct the issues then run again before pushing upstream.
 
-You should also run yarn dist when you pull new work, to make sure you have built the latest files from other peoples work.
+You should also run `yarn dist` when you pull new work, to make sure you have built the latest files from other peoples work.
 
 
 ## Installing PHP dependencies

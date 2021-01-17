@@ -13,6 +13,7 @@ class Hero_Model extends Base_Model {
 	 */
 	public function get_data(): array {
 		return [
+			Hero_Block_Controller::ATTRS       => $this->get_attrs(),
 			Hero_Block_Controller::CLASSES     => $this->get_classes(),
 			Hero_Block_Controller::LAYOUT      => $this->get( Hero::LAYOUT, Hero::LAYOUT_LEFT ),
 			Hero_Block_Controller::MEDIA       => $this->get( Hero::IMAGE, 0 ),

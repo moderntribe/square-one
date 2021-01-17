@@ -21,6 +21,10 @@ jobs:
 
       ##########
       ### BUILD: General SquareOne build steps
+      - name: Setup PHP, with composer and extensions
+        uses: shivammathur/setup-php@v2 #https://github.com/shivammathur/setup-php
+        with:
+          tools: composer:v1
 
       # Get Build Repository
       - name: Check out build branch
@@ -70,7 +74,7 @@ jobs:
 
       # Setup SSH key for deploy environment
       - name: HOST SCM SSH KEY
-        uses: webfactory/ssh-agent@v0.2.0
+        uses: webfactory/ssh-agent@v0.4.1
         with:
           ssh-private-key: ${{secrets.DEPLOY_PRIVATE_SSH_KEY}}
 

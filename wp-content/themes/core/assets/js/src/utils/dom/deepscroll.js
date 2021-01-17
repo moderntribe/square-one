@@ -66,7 +66,7 @@ const deepScroll = ( opts ) => {
 		data[ `${ objectId }-down` ] = new Waypoint( {
 			element: el,
 			handler: dir => handleWaypointDown( dir, el ),
-			offset: `${ options.offset }px`,
+			offset: options.offset + 'px',
 		} );
 
 		data[ `${ objectId }-up` ] = new Waypoint( {

@@ -19,6 +19,10 @@ jobs:
       COMPOSE_FILE: docker-compose.yml:docker-compose.gh.yml
 
     steps:
+      - name: Setup PHP, with composer and extensions
+        uses: shivammathur/setup-php@v2 #https://github.com/shivammathur/setup-php
+        with:
+          tools: composer:v1
 
       - name: Checkout
         uses: actions/checkout@v2
@@ -118,5 +122,5 @@ jobs:
         working-directory: dev/docker
 
       - name: Run webdriver tests
-        run: docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests php /application/www/vendor/bin/codecept --config "/application/www/dev/tests" run webdriver
+        run: docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests php /application/www/vendor/bin/codecept -vvv --config "/application/www/dev/tests" run webdriver
         working-directory: dev/docker

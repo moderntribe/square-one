@@ -33,7 +33,7 @@ The `Cache` object provides a wrapper around WordPress's object caching to suppo
 keys and the invalidation of entire cache groups.
 
 * `$cache->set( $key, $value, $group, $expiration )` - sets a value in the cache
-* `$cache->get( $key, $value )` - retrieves the value
+* `$cache->get( $key, $group )` - retrieves the value
 * `$cache->delete( $key, $group )` - deletes the value
 
 The `$key` argument may be any serializable value, including arrays and objects.
