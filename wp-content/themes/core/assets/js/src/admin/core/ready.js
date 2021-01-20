@@ -13,6 +13,7 @@ import resize from './resize';
 import plugins from './plugins';
 import viewportDims from './viewport-dims';
 import editor from '../editor';
+import blockStyles from './block-styles';
 
 import { on, ready } from 'utils/events';
 
@@ -46,6 +47,9 @@ const init = () => {
 	// initialize the main scripts
 
 	editor();
+
+	// removes core block styles as needed
+	blockStyles();
 
 	console.info( 'SquareOne Admin: Initialized all javascript that targeted document ready.' );
 };

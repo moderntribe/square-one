@@ -6,11 +6,13 @@ namespace Tribe\Project\Blocks\Types\Stats;
 use Tribe\Libs\ACF\Block;
 use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Field;
+use Tribe\Libs\ACF\Field_Section;
 use Tribe\Libs\ACF\Repeater;
 
 class Stats extends Block_Config {
 	public const NAME = 'stats';
 
+	public const SECTION_CONTENT = 's-content';
 	public const LEAD_IN     = 'leadin';
 	public const TITLE       = 'title';
 	public const DESCRIPTION = 'description';
@@ -20,6 +22,7 @@ class Stats extends Block_Config {
 	public const ROW_VALUE = 'row_value';
 	public const ROW_LABEL = 'row_label';
 
+	public const SECTION_SETTINGS  = 's-settings';
 	public const LAYOUT         = 'layout';
 	public const LAYOUT_INLINE  = 'inline';
 	public const LAYOUT_STACKED = 'stacked';
@@ -47,7 +50,7 @@ class Stats extends Block_Config {
 						self::LEAD_IN     => esc_html__( 'Suspendisse potenti', 'tribe' ),
 						self::DESCRIPTION => esc_html__(
 							'Pellentesque diam diam, aliquet non mauris eu, posuere mollis urna. Nulla eget congue ligula, a aliquam lectus. Duis non diam maximus justo dictum porttitor in in risus.',
-							'tribe' 
+							'tribe'
 						),
 						self::CTA         => [
 							'title' => esc_html__( 'Call to Action', 'tribe' ),
@@ -79,31 +82,82 @@ class Stats extends Block_Config {
 	}
 
 	public function add_fields() {
-		$this->add_field( new Field( self::NAME . '_' . self::TITLE, [
-				'label' => __( 'Title', 'tribe' ),
-				'name'  => self::TITLE,
-				'type'  => 'text',
-			] )
-		)->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
-				'label' => __( 'Lead in', 'tribe' ),
-				'name'  => self::LEAD_IN,
-				'type'  => 'text',
-			] )
-		)->add_field( new Field( self::NAME . '_' . self::DESCRIPTION, [
-				'label'        => __( 'Description', 'tribe' ),
-				'name'         => self::DESCRIPTION,
-				'type'         => 'wysiwyg',
-				'toolbar'      => 'basic',
-				'media_upload' => 0,
-			] )
-		)->add_field( new Field( self::NAME . '_' . self::CTA, [
-				'label' => __( 'Call to Action', 'tribe' ),
-				'name'  => self::CTA,
-				'type'  => 'link',
-			] )
-		)->add_field(
-			$this->get_stats_section()
-		);
+		//==========================================
+		// Content Fields
+		//==========================================
+		$this->add_section( new Field_Section( self::SECTION_CONTENT, __( 'Content', 'tribe' ), 'accordion' ) )
+			 ->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
+					 'label' => __( 'Lead in', 'tribe' ),
+					 'name'  => self::LEAD_IN,
+					 'type'  => 'text',
+				 ] )
+			 )->add_field( new Field( self::NAME . '_' . self::TITLE, [
+					'label' => __( 'Title', 'tribe' ),
+					'name'  => self::TITLE,
+					'type'  => 'text',
+				] )
+			)->add_field( new Field( self::NAME . '_' . self::DESCRIPTION, [
+					'label'        => __( 'Description', 'tribe' ),
+					'name'         => self::DESCRIPTION,
+					'type'         => 'wysiwyg',
+					'toolbar'      => 'basic',
+					'media_upload' => 0,
+				] )
+			)->add_field( new Field( self::NAME . '_' . self::CTA, [
+					'label' => __( 'Call to Action', 'tribe' ),
+					'name'  => self::CTA,
+					'type'  => 'link',
+				] )
+			)->add_field(
+				$this->get_stats_section()
+			);
+
+		//==========================================
+		// Setting Fields
+		//==========================================
+		$this->add_section( new Field_Section( self::SECTION_SETTINGS, __( 'Settings', 'tribe' ), 'accordion' ) )
+			 ->add_field( new Field( self::NAME . '_' . self::LAYOUT, [
+				 'type'            => 'image_select',
+				 'name'            => self::LAYOUT,
+				 'choices'         => [
+					 self::LAYOUT_INLINE  => __( 'Inline', 'tribe' ),
+					 self::LAYOUT_STACKED => __( 'Stacked', 'tribe' ),
+				 ],
+				 'default_value'   => self::LAYOUT_STACKED,
+				 'multiple'        => 0,
+				 'image_path'      => sprintf(
+					 '%sassets/img/admin/blocks/%s/',
+					 trailingslashit( get_template_directory_uri() ),
+					 self::NAME
+				 ),
+				 'image_extension' => 'svg',
+			 ] ) )->add_field( new Field( self::NAME . '_' . self::CONTENT_ALIGN, [
+				'type'            => 'image_select',
+				'name'            => self::CONTENT_ALIGN,
+				'choices'         => [
+					self::CONTENT_ALIGN_CENTER => __( 'Content Center', 'tribe' ),
+					self::CONTENT_ALIGN_LEFT   => __( 'Content Left', 'tribe' ),
+				],
+				'default_value'   => self::CONTENT_ALIGN_CENTER,
+				'multiple'        => 0,
+				'image_path'      => sprintf(
+					'%sassets/img/admin/blocks/%s/',
+					trailingslashit( get_template_directory_uri() ),
+					self::NAME
+				),
+				'image_extension' => 'svg',
+			] ) )->add_field( new Field( self::NAME . '_' . self::DIVIDERS, [
+				'label'         => __( 'Stat Dividers', 'tribe' ),
+				'name'          => self::DIVIDERS,
+				'type'          => 'radio',
+				'choices'       => [
+					self::DIVIDERS_SHOW => __( 'Show', 'tribe' ),
+					self::DIVIDERS_HIDE => __( 'Hide', 'tribe' ),
+				],
+				'default_value' => [
+					self::DIVIDERS_SHOW,
+				],
+			 ] ) );
 	}
 
 	/**
@@ -135,48 +189,4 @@ class Stats extends Block_Config {
 		return $group;
 	}
 
-	public function add_settings() {
-		$this->add_setting( new Field( self::NAME . '_' . self::LAYOUT, [
-			'type'            => 'image_select',
-			'name'            => self::LAYOUT,
-			'choices'         => [
-				self::LAYOUT_INLINE  => __( 'Inline', 'tribe' ),
-				self::LAYOUT_STACKED => __( 'Stacked', 'tribe' ),
-			],
-			'default_value'   => self::LAYOUT_STACKED,
-			'multiple'        => 0,
-			'image_path'      => sprintf(
-				'%sassets/img/admin/blocks/%s/',
-				trailingslashit( get_template_directory_uri() ),
-				self::NAME
-			),
-			'image_extension' => 'svg',
-		] ) )->add_setting( new Field( self::NAME . '_' . self::CONTENT_ALIGN, [
-			'type'            => 'image_select',
-			'name'            => self::CONTENT_ALIGN,
-			'choices'         => [
-				self::CONTENT_ALIGN_CENTER => __( 'Content Center', 'tribe' ),
-				self::CONTENT_ALIGN_LEFT   => __( 'Content Left', 'tribe' ),
-			],
-			'default_value'   => self::CONTENT_ALIGN_CENTER,
-			'multiple'        => 0,
-			'image_path'      => sprintf(
-				'%sassets/img/admin/blocks/%s/',
-				trailingslashit( get_template_directory_uri() ),
-				self::NAME
-			),
-			'image_extension' => 'svg',
-		] ) )->add_setting( new Field( self::NAME . '_' . self::DIVIDERS, [
-			'label'         => __( 'Stat Dividers', 'tribe' ),
-			'name'          => self::DIVIDERS,
-			'type'          => 'radio',
-			'choices'       => [
-				self::DIVIDERS_SHOW => __( 'Show', 'tribe' ),
-				self::DIVIDERS_HIDE => __( 'Hide', 'tribe' ),
-			],
-			'default_value' => [
-				self::DIVIDERS_SHOW,
-			],
-		] ) );
-	}
 }

@@ -6,20 +6,23 @@ namespace Tribe\Project\Blocks\Types\Tabs;
 use Tribe\Libs\ACF\Block;
 use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Field;
+use Tribe\Libs\ACF\Field_Section;
 use Tribe\Libs\ACF\Repeater;
 
 class Tabs extends Block_Config {
 	public const NAME = 'tabs';
 
-	public const LEAD_IN     = 'leadin';
-	public const TITLE       = 'title';
-	public const DESCRIPTION = 'description';
-	public const CTA         = 'cta';
+	public const SECTION_CONTENT = 's-content';
+	public const LEAD_IN         = 'leadin';
+	public const TITLE           = 'title';
+	public const DESCRIPTION     = 'description';
+	public const CTA             = 'cta';
 
 	public const TABS        = 'tabs';
 	public const TAB_LABEL   = 'tab_label';
 	public const TAB_CONTENT = 'tab_content';
 
+	public const SECTION_SETTINGS  = 's-settings';
 	public const LAYOUT            = 'layout';
 	public const LAYOUT_HORIZONTAL = 'horizontal';
 	public const LAYOUT_VERTICAL   = 'vertical';
@@ -43,7 +46,7 @@ class Tabs extends Block_Config {
 						self::LEAD_IN     => esc_html__( 'Suspendisse potenti', 'tribe' ),
 						self::DESCRIPTION => esc_html__(
 							'Pellentesque diam diam, aliquet non mauris eu, posuere mollis urna. Nulla eget congue ligula, a aliquam lectus. Duis non diam maximus justo dictum porttitor in in risus.',
-							'tribe' 
+							'tribe'
 						),
 						self::CTA         => [
 							'title' => esc_html__( 'Call to Action', 'tribe' ),
@@ -56,8 +59,8 @@ class Tabs extends Block_Config {
 									'<p>%s</p>',
 									esc_html__(
 										'Sed aliquet quam posuere tellus convallis molestie. Aliquam neque tellus, viverra in augue ut, facilisis accumsan elit. Cras id convallis libero. Proin tincidunt elit quis bibendum faucibus. Pellentesque porttitor molestie eros at placerat. Morbi ac odio nec dolor commodo semper. Cras auctor euismod velit efficitur volutpat.',
-										'tribe' 
-									) 
+										'tribe'
+									)
 								),
 							],
 							[
@@ -66,8 +69,8 @@ class Tabs extends Block_Config {
 									'<p>%s</p>',
 									esc_html__(
 										'Sed aliquet quam posuere tellus convallis molestie. Aliquam neque tellus, viverra in augue ut, facilisis accumsan elit. Cras id convallis libero. Proin tincidunt elit quis bibendum faucibus. Pellentesque porttitor molestie eros at placerat. Morbi ac odio nec dolor commodo semper. Cras auctor euismod velit efficitur volutpat.',
-										'tribe' 
-									) 
+										'tribe'
+									)
 								),
 							],
 						],
@@ -81,29 +84,54 @@ class Tabs extends Block_Config {
 	 * Register Fields for block
 	 */
 	public function add_fields() {
-		$this->add_field( new Field( self::NAME . '_' . self::TITLE, [
-				'label' => __( 'Title', 'tribe' ),
-				'name'  => self::TITLE,
-				'type'  => 'text',
-			] )
-		)->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
-				'label' => __( 'Lead in', 'tribe' ),
-				'name'  => self::LEAD_IN,
-				'type'  => 'text',
-			] )
-		)->add_field( new Field( self::NAME . '_' . self::DESCRIPTION, [
-				'label'        => __( 'Description', 'tribe' ),
-				'name'         => self::DESCRIPTION,
-				'type'         => 'wysiwyg',
-				'toolbar'      => 'basic',
-				'media_upload' => 0,
-			] )
-		)->add_field( new Field( self::NAME . '_' . self::CTA, [
-				'label' => __( 'Call to Action', 'tribe' ),
-				'name'  => self::CTA,
-				'type'  => 'link',
-			] )
-		)->add_field( $this->get_tab_section() );
+		//==========================================
+		// Content Fields
+		//==========================================
+		$this->add_section( new Field_Section( self::SECTION_CONTENT, __( 'Content', 'tribe' ), 'accordion' ) )
+			 ->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
+					 'label' => __( 'Lead in', 'tribe' ),
+					 'name'  => self::LEAD_IN,
+					 'type'  => 'text',
+				 ] )
+			 )->add_field( new Field( self::NAME . '_' . self::TITLE, [
+					'label' => __( 'Title', 'tribe' ),
+					'name'  => self::TITLE,
+					'type'  => 'text',
+				] )
+			)->add_field( new Field( self::NAME . '_' . self::DESCRIPTION, [
+					'label'        => __( 'Description', 'tribe' ),
+					'name'         => self::DESCRIPTION,
+					'type'         => 'wysiwyg',
+					'toolbar'      => 'basic',
+					'media_upload' => 0,
+				] )
+			)->add_field( new Field( self::NAME . '_' . self::CTA, [
+					'label' => __( 'Call to Action', 'tribe' ),
+					'name'  => self::CTA,
+					'type'  => 'link',
+				] )
+			)->add_field( $this->get_tab_section() );
+
+		//==========================================
+		// Settings Fields
+		//==========================================
+		$this->add_section( new Field_Section( self::SECTION_SETTINGS, __( 'Settings', 'tribe' ), 'accordion' ) )
+			 ->add_field( new Field( self::NAME . '_' . self::LAYOUT, [
+				 'type'            => 'image_select',
+				 'name'            => self::LAYOUT,
+				 'choices'         => [
+					 self::LAYOUT_VERTICAL   => __( 'Vertical', 'tribe' ),
+					 self::LAYOUT_HORIZONTAL => __( 'Horizontal', 'tribe' ),
+				 ],
+				 'default_value'   => self::LAYOUT_HORIZONTAL,
+				 'multiple'        => 0,
+				 'image_path'      => sprintf(
+					 '%sassets/img/admin/blocks/%s/',
+					 trailingslashit( get_template_directory_uri() ),
+					 self::NAME
+				 ),
+				 'image_extension' => 'svg',
+			 ] ) );
 	}
 
 	/**
@@ -127,35 +155,14 @@ class Tabs extends Block_Config {
 
 		$group->add_field( $header );
 		$content = new Field( self::TAB_CONTENT, [
-			'label'   => __( 'Tab Content', 'tribe' ),
-			'name'    => self::TAB_CONTENT,
-			'type'    => 'wysiwyg',
-			'delay'   => 1,
+			'label' => __( 'Tab Content', 'tribe' ),
+			'name'  => self::TAB_CONTENT,
+			'type'  => 'wysiwyg',
+			'delay' => 1,
 		] );
 		$group->add_field( $content );
 
 		return $group;
 	}
 
-	/**
-	 * Register Settings for Block
-	 */
-	public function add_settings() {
-		$this->add_setting( new Field( self::NAME . '_' . self::LAYOUT, [
-			'type'            => 'image_select',
-			'name'            => self::LAYOUT,
-			'choices'         => [
-				self::LAYOUT_VERTICAL   => __( 'Vertical', 'tribe' ),
-				self::LAYOUT_HORIZONTAL => __( 'Horizontal', 'tribe' ),
-			],
-			'default_value'   => self::LAYOUT_HORIZONTAL,
-			'multiple'        => 0,
-			'image_path'      => sprintf(
-				'%sassets/img/admin/blocks/%s/',
-				trailingslashit( get_template_directory_uri() ),
-				self::NAME
-			),
-			'image_extension' => 'svg',
-		] ) );
-	}
 }

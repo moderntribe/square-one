@@ -6,18 +6,21 @@ namespace Tribe\Project\Blocks\Types\Interstitial;
 use Tribe\Libs\ACF\Block;
 use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Field;
+use Tribe\Libs\ACF\Field_Section;
 
 class Interstitial extends Block_Config {
 	public const NAME = 'interstitial';
 
-	public const IMAGE = 'image';
+	public const SECTION_CONTENT = 's-content';
+	public const IMAGE           = 'image';
 
 	public const TITLE = 'title';
 	public const CTA   = 'cta';
 
-	public const LAYOUT        = 'layout';
-	public const LAYOUT_LEFT   = 'left';
-	public const LAYOUT_CENTER = 'center';
+	public const SECTION_SETTINGS = 's-settings';
+	public const LAYOUT           = 'layout';
+	public const LAYOUT_LEFT      = 'left';
+	public const LAYOUT_CENTER    = 'center';
 
 	public function add_block() {
 		$this->set_block( new Block( self::NAME, [
@@ -46,42 +49,48 @@ class Interstitial extends Block_Config {
 	}
 
 	protected function add_fields() {
-		$this->add_field( new Field( self::NAME . '_' . self::TITLE, [
-				'label' => __( 'Title', 'tribe' ),
-				'name'  => self::TITLE,
-				'type'  => 'textarea',
-			] )
-		)->add_field( new Field( self::NAME . '_' . self::CTA, [
-				'label' => __( 'Call to Action', 'tribe' ),
-				'name'  => self::CTA,
-				'type'  => 'link',
-			] )
-		)->add_field( new Field( self::NAME . '_' . self::IMAGE, [
-				'label'         => __( 'Background Image', 'tribe' ),
-				'name'          => self::IMAGE,
-				'type'          => 'image',
-				'return_format' => 'id',
-				'instructions'  => __( 'Recommended image size: 1440px wide', 'tribe' ),
-			] )
-		);
+		//==========================================
+		// Content Fields
+		//==========================================
+		$this->add_section( new Field_Section( self::SECTION_CONTENT, __( 'Content', 'tribe' ), 'accordion' ) )
+			 ->add_field( new Field( self::NAME . '_' . self::TITLE, [
+					 'label' => __( 'Title', 'tribe' ),
+					 'name'  => self::TITLE,
+					 'type'  => 'textarea',
+				 ] )
+			 )->add_field( new Field( self::NAME . '_' . self::CTA, [
+					'label' => __( 'Call to Action', 'tribe' ),
+					'name'  => self::CTA,
+					'type'  => 'link',
+				] )
+			)->add_field( new Field( self::NAME . '_' . self::IMAGE, [
+					'label'         => __( 'Background Image', 'tribe' ),
+					'name'          => self::IMAGE,
+					'type'          => 'image',
+					'return_format' => 'id',
+					'instructions'  => __( 'Recommended image size: 1440px wide', 'tribe' ),
+				] )
+			);
+		//==========================================
+		// Setting Fields
+		//==========================================
+		$this->add_section( new Field_Section( self::SECTION_SETTINGS, __( 'Settings', 'tribe' ), 'accordion' ) )
+			 ->add_field( new Field( self::NAME . '_' . self::LAYOUT, [
+				 'type'            => 'image_select',
+				 'name'            => self::LAYOUT,
+				 'choices'         => [
+					 self::LAYOUT_LEFT   => __( 'Text Align Left', 'tribe' ),
+					 self::LAYOUT_CENTER => __( 'Text Align Center', 'tribe' ),
+				 ],
+				 'default_value'   => self::LAYOUT_LEFT,
+				 'multiple'        => 0,
+				 'image_path'      => sprintf(
+					 '%sassets/img/admin/blocks/%s/',
+					 trailingslashit( get_template_directory_uri() ),
+					 self::NAME
+				 ),
+				 'image_extension' => 'svg',
+			 ] ) );
 	}
 
-	protected function add_settings() {
-		$this->add_setting( new Field( self::NAME . '_' . self::LAYOUT, [
-			'type'            => 'image_select',
-			'name'            => self::LAYOUT,
-			'choices'         => [
-				self::LAYOUT_LEFT   => __( 'Text Align Left', 'tribe' ),
-				self::LAYOUT_CENTER => __( 'Text Align Center', 'tribe' ),
-			],
-			'default_value'   => self::LAYOUT_LEFT,
-			'multiple'        => 0,
-			'image_path'      => sprintf(
-				'%sassets/img/admin/blocks/%s/',
-				trailingslashit( get_template_directory_uri() ),
-				self::NAME
-			),
-			'image_extension' => 'svg',
-		] ) );
-	}
 }

@@ -106,6 +106,6 @@ If the team has an existing dev environment, you should import the seed data int
 
 If you can navigate to `https://DOMAIN.tribe` and see your site, huzzah! Next steps, work with your team to make sure all the proper configuration is in place. 
 
-If you can't load the site or have any issues along the way, reference the [full docker setup documentation](/docs/docker/README.md) – there are some quirks depending on your local setup it covers in detail. If you are still stuck, ping a Lead for help.
+If you can't load the site or have any issues along the way, reference the [full docker setup documentation](/docs/concepts/docker.md) – there are some quirks depending on your local setup it covers in detail. If you are still stuck, ping a Lead for help.
 
 
