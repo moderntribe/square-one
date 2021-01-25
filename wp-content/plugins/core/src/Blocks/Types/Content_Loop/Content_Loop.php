@@ -84,6 +84,16 @@ class Content_Loop extends Block_Config {
 				'name'  => self::TITLE,
 				'type'  => 'text',
 				] )
+			)->add_field( new Field( self::NAME . '_' . self::LEADIN, [
+					'label' => __( 'Lead in', 'tribe' ),
+					'name'  => self::LEADIN,
+					'type'  => 'text',
+				] )
+			)->add_field( new Field( self::NAME . '_' . self::DESCRIPTION, [
+					'label' => __( 'Description', 'tribe' ),
+					'name'  => self::DESCRIPTION,
+					'type'  => 'wysiwyg',
+				] )
 			)->add_field( new Field( self::NAME . '_' . self::CTA, [
 					'label' => __( 'Call to Action', 'tribe' ),
 					'name'  => self::CTA,

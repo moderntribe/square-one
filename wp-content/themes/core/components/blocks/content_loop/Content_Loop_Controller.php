@@ -262,32 +262,79 @@ class Content_Loop_Controller extends Abstract_Controller {
 	/**
 	 * @return array
 	 */
-	public function get_title_args(): array {
-		if ( empty( $this->title ) ) {
+	public function get_header_args(): array {
+		if ( empty( $this->title ) && empty( $this->description ) ) {
 			return [];
 		}
 
 		return [
+			Content_Block_Controller::TAG     => 'header',
+			Content_Block_Controller::LEADIN  => $this->get_leadin(),
+			Content_Block_Controller::TITLE   => $this->get_title(),
+			Content_Block_Controller::CONTENT => $this->get_content(),
+			Content_Block_Controller::CTA     => $this->get_cta(),
+			Content_Block_Controller::CLASSES => [
+				'c-block__content-block',
+				'c-block__header',
+				'b-content-loop__header',
+			],
+		];
+	}
+
+	/**
+	 * @return Deferred_Component
+	 */
+	private function get_leadin(): Deferred_Component {
+		return defer_template_part( 'components/text/text', null, [
+			Text_Controller::CLASSES => [
+				'c-block__leadin',
+				'b-content-loop__leadin',
+				'h6',
+			],
+			Text_Controller::CONTENT => $this->leadin ?? '',
+		] );
+	}
+
+	/**
+	 * @return Deferred_Component
+	 */
+	private function get_title(): Deferred_Component {
+		return defer_template_part( 'components/text/text', null, [
 			Text_Controller::TAG     => 'h2',
 			Text_Controller::CLASSES => [
 				'c-block__title',
 				'h3',
 			],
-			Text_Controller::CONTENT => $this->title,
-		];
+			Text_Controller::CONTENT => $this->title ?? '',
+		] );
 	}
 
 	/**
-	 * @return array
+	 * @return Deferred_Component
 	 */
-	public function get_cta(): array {
+	private function get_content(): Deferred_Component {
+		return defer_template_part( 'components/container/container', null, [
+			Container_Controller::CLASSES => [
+				'c-block__description',
+				'b-content-loop__description',
+				't-sink',
+				's-sink',
+			],
+			Container_Controller::CONTENT => $this->description ?? '',
+		] );
+	}
+
+	/**
+	 * @return Deferred_Component
+	 */
+	public function get_cta(): Deferred_Component {
 		$cta = wp_parse_args( $this->cta, [
 			'content' => '',
 			'url'     => '',
 			'target'  => '',
 		] );
 
-		return [
+		return defer_template_part( 'components/link/link', null, [
 			Link_Controller::URL     => $cta['url'],
 			Link_Controller::CONTENT => $cta['content'] ?: $cta['url'],
 			Link_Controller::TARGET  => $cta['target'],
@@ -295,7 +342,7 @@ class Content_Loop_Controller extends Abstract_Controller {
 				'c-block__cta-link',
 				'a-cta',
 			],
-		];
+		] );
 	}
 
 	/**

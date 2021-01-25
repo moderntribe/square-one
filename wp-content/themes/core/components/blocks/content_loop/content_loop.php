@@ -13,23 +13,11 @@ $c = \Tribe\Project\Templates\Components\blocks\content_loop\Content_Loop_Contro
 <section <?php echo $c->get_classes(); ?> <?php echo $c->get_attrs(); ?>>
 	<div <?php echo $c->get_container_classes(); ?>>
 
-		<div class="b-content-loop__header">
-			<?php if ( ! empty( $c->get_title_args() ) ) { ?>
-				<?php get_template_part(
-					'components/text/text',
-					null,
-					$c->get_title_args()
-				); ?>
-			<?php } ?>
-
-			<?php if ( $c->get_layout() !== Content_Loop::LAYOUT_FEATURE && ! empty( $c->get_cta() ) ) : ?>
-				<?php get_template_part(
-					'components/link/link',
-					null,
-					$c->get_cta()
-				); ?>
-			<?php endif; ?>
-		</div>
+		<?php get_template_part(
+			'components/content_block/content_block',
+			null,
+			$c->get_header_args()
+		); ?>
 
 		<div <?php echo $c->get_content_classes(); ?>>
 
@@ -52,13 +40,7 @@ $c = \Tribe\Project\Templates\Components\blocks\content_loop\Content_Loop_Contro
 					<?php } ?>
 
 					<?php if ( ! empty( $c->get_cta() ) ) : ?>
-						<div class="b-content-loop__secondary__cta">
-							<?php get_template_part(
-								'components/link/link',
-								null,
-								$c->get_cta()
-							); ?>
-						</div>
+						<?php echo $c->get_cta(); ?>
 					<?php endif; ?>
 				</div>
 
