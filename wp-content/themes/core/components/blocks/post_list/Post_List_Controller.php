@@ -73,7 +73,7 @@ class Post_List_Controller extends Abstract_Controller {
 	 * @return string
 	 */
 	public function get_attrs(): string {
-		return Markup_Utils::class_attribute( $this->attrs );
+		return Markup_Utils::concat_attrs( $this->attrs );
 	}
 
 	/**

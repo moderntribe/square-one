@@ -36,14 +36,17 @@ class Quote extends Block_Config {
 			'icon'        => 'testimonial',
 			'keywords'    => [ __( 'quotation', 'tribe' ), __( 'display', 'tribe' ), __( 'text', 'tribe' ) ],
 			'category'    => 'layout',
-			'supports'    => [ 'align' => false ],
+			'supports'    => [
+				'align'  => false,
+				'anchor' => true,
+			],
 			'example'     => [
 				'attributes' => [
 					'mode' => 'preview',
 					'data' => [
 						self::QUOTE      => esc_html__(
 							'Grow awareness while remembering to maximise share of voice. Leveraging agile so that as an end result, we think outside the box.',
-							'tribe' 
+							'tribe'
 						),
 						self::CITE_NAME  => esc_html__( 'John Doe', 'tribe' ),
 						self::CITE_TITLE => esc_html__( 'Chief Executive', 'tribe' ),
@@ -102,7 +105,7 @@ class Quote extends Block_Config {
 					'preview_size'  => Image_Sizes::SQUARE_XSMALL,
 					'instructions'  => __(
 						'Generally, a profile image of the person being quoted.<br>Recommended image size: 150px wide with a 1:1 aspect ratio.',
-						'tribe' 
+						'tribe'
 					),
 				] )
 			);

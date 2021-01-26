@@ -46,7 +46,10 @@ class Media_Text extends Block_Config {
 				__( 'text', 'tribe' ),
 			],
 			'category'    => 'layout',
-			'supports'    => [ 'align' => false ],
+			'supports'    => [
+				'align'  => false,
+				'anchor' => true,
+			],
 			'example'     => [
 				'attributes' => [
 					'mode' => 'preview',

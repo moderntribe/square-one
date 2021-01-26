@@ -20,7 +20,6 @@ class Force_Plugin_Activation {
 		'core/core.php',
 		//'tribe-admin-dashboard/tribe-admin-dashboard.php',
 		'disable-emojis/disable-emojis.php',
-		'safe-svg/safe-svg.php',
 		'acf-image-select/acf-image-select.php',
 		'tribe-acf-post-list-field/tribe-acf-post-list-field.php',
 	];
