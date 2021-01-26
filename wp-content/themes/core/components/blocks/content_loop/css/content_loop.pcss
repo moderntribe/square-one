@@ -9,6 +9,11 @@
 
     .c-block__cta-link {
         margin-top: var(--spacer-10);
+
+        @media (--viewport-medium) {
+            margin-right: 30px;
+            margin-top: 0;
+        }
     }
 
     @media (--viewport-medium) {
@@ -21,11 +26,6 @@
         "description cta";
         margin-bottom: var(--spacer-30);
         max-width: none;
-
-        .c-block__cta-link {
-            margin-right: 30px;
-            margin-top: 0;
-        }
     }
 
     .c-block__leadin {

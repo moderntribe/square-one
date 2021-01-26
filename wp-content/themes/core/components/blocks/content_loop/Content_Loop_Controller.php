@@ -122,10 +122,10 @@ class Content_Loop_Controller extends Abstract_Controller {
 				Image_Controller::IMG_ID       => $post->get_image_id(),
 				Image_Controller::AS_BG        => true,
 				Image_Controller::CLASSES      => [ 'c-image--bg', 's-aspect-ratio-16-9' ],
-				Image_Controller::SRC_SIZE     => Image_Sizes::FOUR_THREE,
+				Image_Controller::SRC_SIZE     => Image_Sizes::SIXTEEN_NINE_SMALL,
 				Image_Controller::SRCSET_SIZES => [
-					Image_Sizes::FOUR_THREE,
-					Image_Sizes::FOUR_THREE_SMALL,
+					Image_Sizes::SIXTEEN_NINE_SMALL,
+					Image_Sizes::SIXTEEN_NINE,
 				],
 			];
 
@@ -209,10 +209,10 @@ class Content_Loop_Controller extends Abstract_Controller {
 				Image_Controller::IMG_ID       => $post->get_image_id(),
 				Image_Controller::AS_BG        => true,
 				Image_Controller::CLASSES      => [ 'c-image--bg', 's-aspect-ratio-16-9' ],
-				Image_Controller::SRC_SIZE     => Image_Sizes::FOUR_THREE,
+				Image_Controller::SRC_SIZE     => Image_Sizes::SIXTEEN_NINE_SMALL,
 				Image_Controller::SRCSET_SIZES => [
-					Image_Sizes::FOUR_THREE,
-					Image_Sizes::FOUR_THREE_SMALL,
+					Image_Sizes::SIXTEEN_NINE_SMALL,
+					Image_Sizes::SIXTEEN_NINE,
 				],
 			];
 
