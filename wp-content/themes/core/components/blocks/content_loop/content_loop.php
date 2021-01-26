@@ -2,6 +2,7 @@
 declare( strict_types=1 );
 
 use Tribe\Project\Blocks\Types\Content_Loop\Content_Loop;
+use Tribe\Project\Templates\Components\card\Card_Controller;
 
 /**
  * @var array $args Arguments passed to the template
@@ -33,9 +34,9 @@ $c = \Tribe\Project\Templates\Components\blocks\content_loop\Content_Loop_Contro
 				</div>
 
 				<div class="b-content-loop__secondary">
-					<?php foreach ( $c->get_posts_horiz_card_args() as $index => $card_args ) { ?>
+					<?php foreach ( $c->get_posts_card_args( Card_Controller::STYLE_INLINE ) as $index => $card_args ) { ?>
 						<?php if ( $index !== 0 ) : ?>
-							<?php get_template_part( 'components/card/card', 'horizontal', $card_args ); ?>
+							<?php get_template_part( 'components/card/card', null, $card_args ); ?>
 						<?php endif; ?>
 					<?php } ?>
 
@@ -47,8 +48,8 @@ $c = \Tribe\Project\Templates\Components\blocks\content_loop\Content_Loop_Contro
 			<?php elseif ( $c->get_layout() === Content_Loop::LAYOUT_COLUMNS ) : ?>
 
 				<!-- Columns Layout -->
-				<?php foreach ( $c->get_posts_horiz_card_args() as $index => $card_args ) { ?>
-					<?php get_template_part( 'components/card/card', 'horizontal', $card_args ); ?>
+				<?php foreach ( $c->get_posts_card_args( Card_Controller::STYLE_INLINE ) as $index => $card_args ) { ?>
+					<?php get_template_part( 'components/card/card', null, $card_args ); ?>
 				<?php } ?>
 
 			<?php else : ?>

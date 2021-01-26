@@ -111,12 +111,17 @@ class Content_Loop_Controller extends Abstract_Controller {
 		return $this->layout;
 	}
 
-	public function get_posts_card_args() {
+	/**
+	 * @return array
+	 */
+	public function get_posts_card_args( string $layout = Card_Controller::STYLE_PLAIN ): array {
 		$cards = [];
 		foreach ( $this->posts as $post ) {
-			$link        = $post->get_link();
-			$uuid        = uniqid( 'p-' );
-			$cat         = $post->get_category();
+			$link                = $post->get_link();
+			$uuid                = uniqid( 'p-' );
+			$cat                 = $post->get_category();
+			$card_description    = [];
+			$card_cta            = [];
 
 			$image_array = [
 				Image_Controller::IMG_ID       => $post->get_image_id(),
@@ -129,8 +134,35 @@ class Content_Loop_Controller extends Abstract_Controller {
 				],
 			];
 
+			// CASE: If not Inline Card Style
+			if ( $layout !== Card_Controller::STYLE_INLINE ) {
+				$card_cta = 
+					[
+						Link_Controller::CONTENT => __( 'Read More', 'tribe' ),
+						Link_Controller::URL     => $link['url'],
+						Link_Controller::CLASSES => [
+							'c-block__cta-link',
+							'a-cta',
+						],
+						Link_Controller::ATTRS   => [
+							// These attrs provide the most screen reader accessible link.
+							'id'               => $uuid . '-link',
+							'aria-labelledby'  => $uuid . '-title',
+							'aria-describedby' => $uuid . '-link',
+							// Sets this link as the card's click-within target link.
+							'data-js'          => 'target-link',
+						],
+					];
+
+				$card_description = 
+					[
+						Container_Controller::CONTENT => wpautop( $post->get_excerpt() ),
+						Container_Controller::CLASSES => [ 't-sink', 's-sink' ],
+					];
+			}
+
 			$cards[] = [
-				Card_Controller::STYLE           => Card_Controller::STYLE_PLAIN,
+				Card_Controller::STYLE           => $layout,
 				Card_Controller::USE_TARGET_LINK => $link['url'] ? true : false,
 				Card_Controller::META_PRIMARY    => defer_template_part(
 					'components/container/container',
@@ -162,10 +194,7 @@ class Content_Loop_Controller extends Abstract_Controller {
 				Card_Controller::DESCRIPTION     => defer_template_part(
 					'components/container/container',
 					null,
-					[
-						Container_Controller::CONTENT => wpautop( $post->get_excerpt() ),
-						Container_Controller::CLASSES => [ 't-sink', 's-sink' ],
-					],
+					$card_description,
 				),
 				Card_Controller::IMAGE           => defer_template_part(
 					'components/image/image',
@@ -175,83 +204,7 @@ class Content_Loop_Controller extends Abstract_Controller {
 				Card_Controller::CTA             => defer_template_part(
 					'components/link/link',
 					null,
-					[
-						Link_Controller::CONTENT => __( 'Read More', 'tribe' ),
-						Link_Controller::URL     => $link['url'],
-						Link_Controller::CLASSES => [
-							'c-block__cta-link',
-							'a-cta',
-						],
-						Link_Controller::ATTRS   => [
-							// These attrs provide the most screen reader accessible link.
-							'id'               => $uuid . '-link',
-							'aria-labelledby'  => $uuid . '-title',
-							'aria-describedby' => $uuid . '-link',
-							// Sets this link as the card's click-within target link.
-							'data-js'          => 'target-link',
-						],
-					]
-				),
-			];
-		}
-
-		return $cards;
-	}
-
-	public function get_posts_horiz_card_args() {
-		$cards = [];
-		foreach ( $this->posts as $post ) {
-			$link        = $post->get_link();
-			$uuid        = uniqid( 'p-' );
-			$cat         = $post->get_category();
-
-			$image_array = [
-				Image_Controller::IMG_ID       => $post->get_image_id(),
-				Image_Controller::AS_BG        => true,
-				Image_Controller::CLASSES      => [ 'c-image--bg', 's-aspect-ratio-16-9' ],
-				Image_Controller::SRC_SIZE     => Image_Sizes::SIXTEEN_NINE_SMALL,
-				Image_Controller::SRCSET_SIZES => [
-					Image_Sizes::SIXTEEN_NINE_SMALL,
-					Image_Sizes::SIXTEEN_NINE,
-				],
-			];
-
-			$cards[] = [
-				Card_Controller::STYLE           => Card_Controller::STYLE_PLAIN,
-				Card_Controller::USE_TARGET_LINK => $link['url'] ? true : false,
-				Card_Controller::META_PRIMARY    => defer_template_part(
-					'components/container/container',
-					null,
-					[
-						Container_Controller::CONTENT =>  $cat[0]->name ?? '',
-						Container_Controller::CLASSES =>  [ 'b-content-loop__tag' ],
-					],
-				),
-				Card_Controller::TITLE           => defer_template_part(
-					'components/link/link',
-					null,
-					[
-						Link_Controller::CLASSES => [ 'h5' ],
-						Link_Controller::CONTENT => $post->get_title(),
-						Link_Controller::URL     => $link['url'],
-						// Required for screen reader accessibility, below.
-						Link_Controller::ATTRS   => [
-							'data-js'          => 'target-link',
-						],
-					]
-				),
-				Card_Controller::META_SECONDARY  => defer_template_part(
-					'components/container/container',
-					null,
-					[
-						Container_Controller::CONTENT =>  $post->get_post_date() ?? '',
-						Container_Controller::CLASSES =>  [ 'b-content-loop__date' ],
-					],
-				),
-				Card_Controller::IMAGE           => defer_template_part(
-					'components/image/image',
-					null,
-					$image_array,
+					$card_cta,
 				),
 			];
 		}
