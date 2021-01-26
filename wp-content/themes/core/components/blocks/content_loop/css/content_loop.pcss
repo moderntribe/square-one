@@ -11,7 +11,7 @@
         margin-top: var(--spacer-10);
 
         @media (--viewport-medium) {
-            margin-right: 30px;
+            margin-right: var(--spacer-40);
             margin-top: 0;
         }
     }
@@ -57,52 +57,13 @@
 
 /* -----------------------------------------------------------------------------
  *
- * Component: Content Loop
+ * Component: Content Loop Updates
  *
  * ----------------------------------------------------------------------------- */
-
-.b-content-loop .a-cta {
-    text-transform: uppercase;
-}
-
-.b-content-loop__tag {
-    display: inline-block;
-    background: var(--color-black);
-    color: var(--color-white);
-    padding: 4px 8px;
-    text-transform: uppercase;
-    font-size: 13px;
-    letter-spacing: 0.5px;
-}
-
-.b-content-loop__date {
-    font-family: var(--font-family-serif);
-    font-size: 18px;
-    letter-spacing: 0.1px;
-    color: var(--color-grey);
-}
 
 .b-content-loop {
     .c-card__description {
         margin-top: var(--spacer-30);
-    }
-
-    .c-card--style-horizontal {
-        margin-top: 0;
-        margin-bottom: 0;
-        padding: var(--spacer-20) 0;
-        border-bottom: 1px solid var(--color-grey-light);
-    }
-}
-
-.c-card--style-horizontal {
-    .b-content-loop__tag {
-        font-size: 11px;
-    }
-
-    .b-content-loop__date {
-        font-size: 16px;
-        margin-bottom: 0;
     }
 }
 
@@ -121,7 +82,7 @@
 
 /* -----------------------------------------------------------------------------
  *
- * Content Loop Feature
+ * CASE: Content Loop Feature
  *
  * ----------------------------------------------------------------------------- */
 

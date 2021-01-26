@@ -169,7 +169,7 @@ class Content_Loop_Controller extends Abstract_Controller {
 					null,
 					[
 						Container_Controller::CONTENT =>  $cat[0]->name ?? '',
-						Container_Controller::CLASSES =>  [ 'b-content-loop__tag' ],
+						Container_Controller::CLASSES =>  [ 't-tag' ],
 					],
 				),
 				Card_Controller::TITLE           => defer_template_part(
@@ -188,7 +188,7 @@ class Content_Loop_Controller extends Abstract_Controller {
 					null,
 					[
 						Container_Controller::CONTENT =>  $post->get_post_date() ?? '',
-						Container_Controller::CLASSES =>  [ 'b-content-loop__date' ],
+						Container_Controller::CLASSES =>  [ 'c-card__date' ],
 					],
 				),
 				Card_Controller::DESCRIPTION     => defer_template_part(
