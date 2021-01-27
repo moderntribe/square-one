@@ -201,7 +201,7 @@ class Gallery_Grid_Controller extends Abstract_Controller {
 	 */
 	protected function get_slider_options(): string {
 		$args = [
-			'preloadImages'         => "false",
+			'preloadImages'         => "true",
 			'lazy'                  => "true",
 			'watchSlidesVisibility' => "true",
 			'spaceBetween'          => 60,
@@ -247,6 +247,42 @@ class Gallery_Grid_Controller extends Abstract_Controller {
 	}
 
 	/**
+	 * @param int $img_id
+	 *
+	 * @return Deferred_Component
+	 */
+	public function get_slide_img( int $img_id ): Deferred_Component {
+		return defer_template_part( 'components/image/image', null,
+			[
+				Image_Controller::IMG_ID       => $img_id,
+				Image_Controller::AS_BG        => false,
+				Image_Controller::USE_LAZYLOAD => false,
+				Image_Controller::SRC_SIZE     => Image_Sizes::CORE_FULL,
+				Image_Controller::SRCSET_SIZES => [
+					'medium',
+					'medium_large',
+					'large',
+					Image_Sizes::CORE_FULL,
+				],
+			],
+		);
+	}
+
+	/**
+	 * @param int $index
+	 *
+	 * @return Deferred_Component
+	 */
+	protected function gallery_count( int $index ): Deferred_Component {
+		return defer_template_part( 'components/text/text', null, [
+			Text_Controller::CLASSES => [
+				'b-gallery-grid__meta-count',
+			],
+			Text_Controller::CONTENT => sprintf( __( '%d of %d', 'tribe' ), $index + 1, count( $this->get_gallery_img_ids() ) ),
+		] );
+	}
+
+	/**
 	 * @param int $slide_id
 	 *
 	 * @return string|Deferred_Component
@@ -260,7 +296,7 @@ class Gallery_Grid_Controller extends Abstract_Controller {
 
 		return defer_template_part( 'components/text/text', null, [
 			Text_Controller::CLASSES => [
-				'b-gallery__slide-caption',
+				'b-gallery-grid__meta-caption',
 			],
 			Text_Controller::CONTENT => esc_html( $thumbnail_image[0]->post_excerpt ) ?? '',
 		] );
@@ -272,13 +308,14 @@ class Gallery_Grid_Controller extends Abstract_Controller {
 	 * @return string
 	 */
 	protected function get_image_template( $index, $img_id ): string {
-		$img          = wp_get_attachment_image( $img_id, Image_Sizes::CORE_FULL );
+		$img          = $this->get_slide_img( $img_id );
 		$slide_markup = $img;
-		$slide_markup .= '
-			<div class="b-gallery-grid__meta-wrap">
-				<div class="b-gallery-grid__meta-count">' . ( $index + 1 ) . __(' OF ', 'tribe') . count( $this->get_gallery_img_ids() ) . '</div>
-				<div class="b-gallery-grid__meta-caption">' . $this->get_image_caption( $img_id ) . '</div>
-			</div>';
+		$slide_markup .= defer_template_part( 'components/container/container', null, [
+			Container_Controller::CLASSES => [
+				'b-gallery-grid__meta-wrap',
+			],
+			Container_Controller::CONTENT => $this->gallery_count( $index ) . $this->get_image_caption( $img_id ),
+		] );
 
 		return $slide_markup;
 	}
