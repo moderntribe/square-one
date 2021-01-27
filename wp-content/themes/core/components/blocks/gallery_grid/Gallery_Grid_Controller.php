@@ -197,6 +197,27 @@ class Gallery_Grid_Controller extends Abstract_Controller {
 	}
 
 	/**
+	 * @return string
+	 */
+	protected function get_slider_options(): string {
+		$args = [
+			'preloadImages'         => "false",
+			'lazy'                  => "true",
+			'watchSlidesVisibility' => "true",
+			'spaceBetween'          => 60,
+			'ally'                  => "true",
+			'keyboard'              => "true",
+			'grabCursor'            => "true",
+			'navigation'            => [
+				'nextEl' => '.swiper-button-next',
+				'prevEl' => '.swiper-button-prev',
+			],
+		];
+
+		return json_encode( $args );
+	}
+
+	/**
 	 * Get the Slider
 	 *
 	 * @return array
@@ -204,9 +225,7 @@ class Gallery_Grid_Controller extends Abstract_Controller {
 	public function get_slider_args(): array {
 		$main_attrs = [];
 
-		$swiper_options = '{"preloadImages":"false","lazy":"true","watchSlidesVisibility":"true","spaceBetween":60,"ally":"true","keyboard":"true","grabCursor":"true","navigation":{"nextEl":".swiper-button-next","prevEl":".swiper-button-prev"}}';
-
-		$main_attrs['data-swiper-options'] = $swiper_options;
+		$main_attrs['data-swiper-options'] = $this->get_slider_options();
 
 		$slider = [
 			Slider_Controller::SLIDES          => $this->get_slides(),

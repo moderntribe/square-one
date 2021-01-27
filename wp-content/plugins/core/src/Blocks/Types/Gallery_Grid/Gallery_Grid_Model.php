@@ -3,6 +3,7 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Blocks\Types\Gallery_Grid;
 
+use Tribe\Project\Blocks\Types\Base_Model;
 use Tribe\Project\Templates\Components\blocks\gallery_grid\Gallery_Grid_Controller;
 use Tribe\Project\Templates\Components\link\Link_Controller;
 
@@ -12,7 +13,7 @@ use Tribe\Project\Templates\Components\link\Link_Controller;
  * Responsible for mapping values from the block to arguments
  * for the component
  */
-class Gallery_Grid_Model extends \Tribe\Project\Blocks\Types\Base_Model {
+class Gallery_Grid_Model extends Base_Model {
 	public function get_data(): array {
 		return [
 			Gallery_Grid_Controller::CLASSES      => $this->get_classes(),
