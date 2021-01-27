@@ -126,7 +126,6 @@ jobs:
         working-directory: dev/docker
 
       - uses: actions/upload-artifact@v2
-        if: failure()
         with:
           name: webdriver-artifacts
           path: dev/tests/tests/_output/
