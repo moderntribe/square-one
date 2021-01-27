@@ -243,20 +243,7 @@ class Gallery_Grid_Controller extends Abstract_Controller {
 	 * @return array
 	 */
 	public function get_gallery_img_ids(): array {
-		$gallery_ids = [];
-
-		if ( empty( $this->gallery ) ) {
-			return $gallery_ids;
-		}
-
-		foreach ( $this->gallery as $img ) {
-			if ( empty( $img ) ) {
-				return [];
-			}
-			$gallery_ids[] = $img[ 'id' ];
-		}
-
-		return $gallery_ids;
+		return ! empty( $this->gallery ) ? array_filter( wp_list_pluck( $this->gallery, 'id' ) ) : [];
 	}
 
 	/**
