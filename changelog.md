@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## 2021.01
+* Fixed: CI GitHub Workflow failing and will collect artifacts if webdriver tests randomly fail for debugging.
 * Added: Support for the block editor's "HTML Anchor" field on our custom ACF blocks.
 * Fixed:  An issue where some of our block controllers were using the `class_attribute()` utility method to return attributes. (Block controllers are all correctly using `concat_attrs()` now.)
 
