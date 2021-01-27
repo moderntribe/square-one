@@ -349,6 +349,10 @@ class Gallery_Grid_Controller extends Abstract_Controller {
 		$img_bg       = true;
 		$img_bg_class = 'c-image--bg';
 		$img_aspect   = 's-aspect-ratio-1-1';
+		$img_srcset   = [
+			Image_Sizes::SQUARE_MEDIUM,
+			Image_Sizes::SQUARE_XSMALL
+		];
 
 		if ( empty( $ids ) ) {
 			return $gallery_imgs;
@@ -359,10 +363,21 @@ class Gallery_Grid_Controller extends Abstract_Controller {
 			$img_bg       = false;
 			$img_bg_class = '';
 			$img_aspect   = '';
+			$img_srcset   = [ 
+				'medium',
+				'medium_large',
+				Image_Sizes::CORE_FULL
+			];
 		}
 
 		if ( $this->grid_layout === self::TWO ) {
 			$img_size     = Image_Sizes::SQUARE_LARGE;
+			$img_srcset   = [
+				Image_Sizes::SQUARE_XSMALL,
+				Image_Sizes::SQUARE_MEDIUM,
+				Image_Sizes::SQUARE_LARGE
+				
+			];
 		}
 
 		foreach ( $ids as $id ) {
@@ -379,6 +394,7 @@ class Gallery_Grid_Controller extends Abstract_Controller {
 				],
 				Image_Controller::IMG_CLASSES => [ 'b-gallery_img' ],
 				Image_Controller::SRC_SIZE => $img_size,
+				Image_Controller::SRCSET_SIZES => $img_srcset,
 			];
 
 			$i ++;
