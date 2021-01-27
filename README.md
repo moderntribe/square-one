@@ -1,6 +1,6 @@
 ![./example/example.svg](./logo.svg)
 
-![Tests](https://github.com/moderntribe/square-one/workflows/ci/badge.svg)
+![Build Status](https://github.com/moderntribe/square-one/workflows/ci/badge.svg)
 
 SquareOne is a development framework lovingly maintained by Modern Tribe used for WordPress projects. It augments WordPress into a modern application framework. We think it's pretty neat.   
 
