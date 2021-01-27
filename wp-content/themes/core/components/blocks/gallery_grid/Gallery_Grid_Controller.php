@@ -14,6 +14,7 @@ use Tribe\Project\Templates\Components\button\Button_Controller;
 use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Templates\Components\slider\Slider_Controller;
 use Tribe\Project\Templates\Components\text\Text_Controller;
+use Tribe\Project\Templates\Components\dialog\Dialog_Controller;
 
 class Gallery_Grid_Controller extends Abstract_Controller {
 
@@ -401,5 +402,17 @@ class Gallery_Grid_Controller extends Abstract_Controller {
 		}
 
 		return $gallery_imgs;
+	}
+
+	/**
+	 *
+	 * @return array
+	 */
+	public function get_dialog_args(): array {
+		return [
+			Dialog_Controller::ID  => $this->get_block_id(),
+			Dialog_Controller::TITLE  => $this->get_slideshow_title(),
+			Dialog_Controller::CONTENT  => defer_template_part( 'components/slider/slider', null, $this->get_slider_args() ),
+		];
 	}
 }

@@ -41,24 +41,9 @@ $c = \Tribe\Project\Templates\Components\blocks\gallery_grid\Gallery_Grid_Contro
 </section>
 
 <?php if ( $c->is_slideshow() ) : ?>
-	<script data-js="dialog-content-<?php echo $c->get_block_id(); ?>" type="text/template">
-		<div class="c-dialog">
-			<div class="c-dialog__overlay">
-				<div class="c-dialog__header">
-					<div class="c-dialog__title"><?php echo $c->get_slideshow_title(); ?></div>
-				</div>
-				<div class="c-dialog__overlay-inner">
-					<div class="c-dialog__content-wrapper">
-						<div class="c-dialog__content-inner">
-							<?php get_template_part(
-								'components/slider/slider',
-								null,
-								$c->get_slider_args(),
-							) ?>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</script>
+	<?php get_template_part(
+		'components/dialog/dialog',
+		null,
+		$c->get_dialog_args(),
+	) ?>
 <?php endif; ?>
