@@ -128,5 +128,5 @@ jobs:
       - uses: actions/upload-artifact@v2
         if: ${{ failure() }}
         with:
-          name: webdriver-artifacts
+          name: test-artifacts
           path: dev/tests/tests/_output/
