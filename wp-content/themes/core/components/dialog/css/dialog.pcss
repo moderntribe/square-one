@@ -1,3 +1,5 @@
+
+
 /* -----------------------------------------------------------------------------
  *
  * Component: Dialog
@@ -20,7 +22,7 @@
     color: var(--color-white);
     height: 100%;
     left: 0;
-    overflow: scroll;
+    overflow: hidden;
     position: fixed;
     right: 0;
     top: 0;
@@ -37,10 +39,10 @@
 }
 
 .c-dialog__overlay-inner {
-    height: calc(100% - 68px);
+    height: calc(100% - var(--dialog-header-height));
     padding-top: var(--spacer-80);
     position: absolute;
-    top: 68px;
+    top: var(--dialog-header-height);
     width: 100%;
 
     @media (--viewport-wpadmin) {
@@ -62,7 +64,7 @@
     left: 0;
     padding: var(--spacer-30);
     width: 100%;
-    height: 68px;
+    height: var(--dialog-header-height);
     background: var(--color-black);
     z-index: 10;
     border-bottom: 1px solid var(--color-white);
@@ -75,14 +77,11 @@
 }
 
 .c-dialog__close-button {
-    background-color: transparent;
-    border: 0;
-    height: 34px;
-	padding: 0;
+    @mixin a-close;
+
     position: fixed;
     right: 40px;
-    top: 12px;
-    width: 24px;
+    top: 13px;
     z-index: 21;
 
     &:before {
@@ -91,33 +90,15 @@
 
     &:after {
         color: var(--color-white);
-        display: block;
-        content: var(--icon-close);
-        font-family: var(--font-family-core-icons);
-        font-size: 24px;
-        left: 0;
-        position: absolute;
-        transform: scale(1);
-        top: 5px;
-        transition: var(--transition);
     }
-
-    &:focus,
-    &:hover {
-
-        &:after {
-            color: var(--color-white);
-            transition: var(--transition);
-        }
-    }
-
-	&:focus-visible {
-		border: none;
-	}
 
     .admin-bar & {
-        top: 47px;
+        top: var(--spacer-wpadmin-mobile);
     }
+
+    &:focus {
+		outline: 1px dashed var(--color-white);
+	}
 }
 
 /* -----------------------------------------------------------------------------
