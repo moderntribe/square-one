@@ -1,16 +1,16 @@
 /* -----------------------------------------------------------------------------
  *
- * Component: Gallery Grid
+ * Component: Dialog
  *
  * This file is just a clearing-house, see the css directory
  * and edit the source files found there.
  *
  * ----------------------------------------------------------------------------- */
 
-import gallery_grid from './js/gallery_grid';
+import dialog from './js/dialog';
 
 const init = () => {
-	gallery_grid();
+	dialog();
 };
 
 export default init;

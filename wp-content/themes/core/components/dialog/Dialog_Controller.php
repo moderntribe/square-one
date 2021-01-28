@@ -39,7 +39,7 @@ class Dialog_Controller extends Abstract_Controller {
 	protected function defaults(): array {
 		return [
             self::TAG     => 'div',
-            self::ID      => uniqid(),
+            self::ID      => '',
 			self::CLASSES => [],
 			self::ATTRS   => [],
             self::CONTENT => '',

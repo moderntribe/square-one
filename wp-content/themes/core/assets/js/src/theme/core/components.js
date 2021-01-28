@@ -11,7 +11,7 @@ import share from 'components/share';
 import slider from 'components/slider';
 import tabs from 'components/tabs';
 import video from 'components/video';
-import blockGalleryGrid from 'components/blocks/gallery_grid';
+import dialog from 'components/dialog';
 
 const init = () => {
 	accordion();
@@ -21,7 +21,7 @@ const init = () => {
 	slider();
 	tabs();
 	video();
-	blockGalleryGrid();
+	dialog();
 
 	console.info( 'SquareOne Theme: Initialized all components.' );
 };

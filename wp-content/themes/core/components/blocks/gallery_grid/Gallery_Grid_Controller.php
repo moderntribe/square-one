@@ -182,6 +182,8 @@ class Gallery_Grid_Controller extends Abstract_Controller {
 	}
 
 	/**
+	 * data-content attribute with a matching ID to the dialog is required for dialog to work.
+	 * 
 	 * @return array
 	 */
 	public function get_slideshow_button() {
