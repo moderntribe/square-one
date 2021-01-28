@@ -5,6 +5,10 @@
  * ----------------------------------------------------------------------------- */
 
 .b-gallery-grid__content {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	column-gap: var(--grid-gutter-medium);
+	row-gap: var(--grid-gutter-medium);
     padding-top: var(--spacer-40);
 }
 
@@ -32,62 +36,26 @@
  *
  * ----------------------------------------------------------------------------- */
 
+
+
 .gallery-layout--one {
-	& > * + * {
-        margin-top: var(--grid-gutter-half);
-	}
-}
-
-.gallery-layout--two {
-    display: flex;
-	flex-flow: row wrap;
-	margin: var(--grid-gutter-medium-half-negative);
-
-	& > * {
-        width: calc(50% - var(--grid-gutter-medium));
-        margin: var(--grid-gutter-medium-half);
-	}
+	grid-template-columns: 1fr;
 }
 
 .gallery-layout--three {
-    display: flex;
-	flex-flow: row wrap;
-	margin: var(--grid-gutter-medium-half-negative);
-
-
 	@media (--viewport-full) {
-		margin: var(--grid-gutter-half-negative);
-	}
+		grid-template-columns: 1fr 1fr 1fr;
+		column-gap: var(--grid-gutter);
+		row-gap: var(--grid-gutter);
 
-	& > * {
-        width: calc(50% - var(--grid-gutter-medium));
-        margin: var(--grid-gutter-medium-half);
-
-		@media (--viewport-full) {
-			width: calc(33.3333% - var(--grid-gutter));
-			margin: var(--grid-gutter-half);
-		}
 	}
 }
 
 .gallery-layout--four {
-    display: flex;
-	flex-flow: row wrap;
-	margin: var(--grid-gutter-medium-half-negative);
-
-
-	@media (--viewport-full) {
-		margin: var(--grid-gutter-half-negative);
-	}
-
-	& > * {
-        width: calc(50% - var(--grid-gutter-medium));
-        margin: var(--grid-gutter-medium-half);
-
-		@media (--viewport-full) {
-			width: calc(25% - var(--grid-gutter));
-			margin: var(--grid-gutter-half);
-		}
+    @media (--viewport-full) {
+		grid-template-columns: 1fr 1fr 1fr 1fr;
+		column-gap: var(--grid-gutter);
+		row-gap: var(--grid-gutter);
 	}
 }
 
@@ -113,7 +81,7 @@
 .b-gallery-grid__meta-caption {
     flex: 1;
     text-align: left;
-    max-width: 580px;
+	max-width: var(--grid-6-col);
 }
 
 

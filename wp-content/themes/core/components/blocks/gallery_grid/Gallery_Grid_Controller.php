@@ -369,6 +369,7 @@ class Gallery_Grid_Controller extends Abstract_Controller {
 			$img_srcset   = [ 
 				'medium',
 				'medium_large',
+				'large',
 				Image_Sizes::CORE_FULL
 			];
 		}
