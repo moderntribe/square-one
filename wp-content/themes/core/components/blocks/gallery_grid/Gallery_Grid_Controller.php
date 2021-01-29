@@ -194,7 +194,7 @@ class Gallery_Grid_Controller extends Abstract_Controller {
 				'a-btn--has-icon-after',
 				'icon-arrow-right'
 			],
-			Button_Controller::ATTRS      => [ 'data-js'  => 'dialog-trigger', 'data-content' => 'dialog-content-' . $this->id ],
+			Button_Controller::ATTRS      => [ 'data-js'  => 'dialog-trigger', 'data-content' => 'dialog-content-' . $this->get_block_id() ],
 			Button_Controller::CONTENT    => esc_html__( 'View slideshow', 'tribe' ),
 		];
 	}

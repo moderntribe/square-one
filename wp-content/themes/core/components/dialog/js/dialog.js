@@ -26,6 +26,8 @@ const options = {
 /**
  * @function getMainOptsForDialog
  * @description Dialog specific options are put directly on the button as data-dialogOptions. This grabs them.
+ * 
+ * @param btn
  */
 
 const getOptionsDialog = ( btn ) => {
