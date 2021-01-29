@@ -29,8 +29,11 @@
 
 	/* CASE: Dialog */
 	.c-dialog & {
-		align-items: center;
-		padding: var(--spacer-30) 0;
+		padding: var(--spacer-30) 0 var(--spacer-70);
+
+		@media (--viewport-full) {
+			align-items: center;
+		}
 	}
 }
 
