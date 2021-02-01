@@ -49,7 +49,7 @@ jobs:
         run: |
           mkdir -p dev/docker/composer
           printf '{ "config": {}, "repositories": { "packagist": { "type": "composer", "url": "https://packagist.org" } } }' > dev/docker/composer/config.json
-          printf '{ "github-oauth": { "github.com": "%s" } }\n' ${{ secrets.GH_TOKEN }} > dev/docker/composer/auth.json
+          printf '{ "github-oauth": { "github.com": "%s" } }\n' "${{ secrets.GH_TOKEN }}" > dev/docker/composer/auth.json
 
       - name: Check for Cached Composer Dependencies
         id: cache-composer-dependencies
@@ -122,5 +122,11 @@ jobs:
         working-directory: dev/docker
 
       - name: Run webdriver tests
-        run: docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests php /application/www/vendor/bin/codecept --config "/application/www/dev/tests" run webdriver
+        run: docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests php /application/www/vendor/bin/codecept -vvv --config "/application/www/dev/tests" run webdriver
         working-directory: dev/docker
+
+      - uses: actions/upload-artifact@v2
+        if: ${{ failure() }}
+        with:
+          name: test-artifacts
+          path: dev/tests/tests/_output/

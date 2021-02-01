@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2021.01
+* Updated: selenium/standalone-chrome docker image to a tag that is updated frequently.
+* Fixed: CI GitHub Workflow failing and will collect artifacts if webdriver tests randomly fail for debugging.
+* Added: Support for the block editor's "HTML Anchor" field on our custom ACF blocks.
+* Fixed:  An issue where some of our block controllers were using the `class_attribute()` utility method to return attributes. (Block controllers are all correctly using `concat_attrs()` now.)
+
 ## 2020.11
 * Updated: docker-compose.yml php-fpm image from 74-2.1.1 to 74-2.1 to ensure composer v1.
 * Updated: Adds core/block to allow list to enable reusable blocks.

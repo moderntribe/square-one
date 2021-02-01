@@ -8,7 +8,7 @@
    1. gulp-cli
 1. Build frontend assets
    1. `nvm use`
-   1. `yarn install`
+   1. `yarn install:theme`
    1. `gulp dist`
 1. Install backend dependencies
    1. `so composer install`

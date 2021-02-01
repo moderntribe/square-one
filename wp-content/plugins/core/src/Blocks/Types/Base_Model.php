@@ -7,6 +7,7 @@ abstract class Base_Model {
 	protected array  $data;
 	protected string $name;
 	protected string $classes;
+	protected string $anchor;
 
 	abstract public function get_data(): array;
 
@@ -20,6 +21,7 @@ abstract class Base_Model {
 		$this->data    = $block['data'] ?? [];
 		$this->name    = $block['name'] ? str_replace( 'acf/', '', $block['name'] ) : '';
 		$this->classes = $block['className'] ?? '';
+		$this->anchor  = $block['anchor'] ?? '';
 	}
 
 	/**
@@ -35,6 +37,22 @@ abstract class Base_Model {
 		return ! empty( $value )
 			? $value
 			: $default;
+	}
+
+	/**
+	 * Get any block attributes from the block editor.
+	 *
+	 * @return array|string[]
+	 */
+	protected function get_attrs(): array {
+		$attrs = [];
+
+		// "HTML Anchor" attribute
+		if ( ! empty( $this->anchor ) ) {
+			$attrs[ 'id '] = $this->anchor;
+		}
+
+		return $attrs;
 	}
 
 	/**

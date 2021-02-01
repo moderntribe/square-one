@@ -85,11 +85,10 @@ class Blocks_Definer implements Definer_Interface {
 				'core-embed/youtube',
 				'core/audio',
 				'core/block',
-				//'core/buttons',
-				'core/classic',
 				'core/code',
 				'core/embed',
 				'core/file',
+				'core/freeform',
 				'core/gallery',
 				'core/heading',
 				'core/html',
@@ -103,6 +102,7 @@ class Blocks_Definer implements Definer_Interface {
 				'core/table',
 				'core/video',
 				'gravityforms/form',
+				//'core/buttons',
 			],
 
 			/**
