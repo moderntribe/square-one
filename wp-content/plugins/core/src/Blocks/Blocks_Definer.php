@@ -8,6 +8,7 @@ use Tribe\Libs\Container\Definer_Interface;
 use Tribe\Project\Blocks\Types\Buttons\Buttons;
 use Tribe\Project\Blocks\Types\Card_Grid\Card_Grid;
 use Tribe\Project\Blocks\Types\Content_Columns\Content_Columns;
+use Tribe\Project\Blocks\Types\Content_Loop\Content_Loop;
 use Tribe\Project\Blocks\Types\Interstitial\Interstitial;
 use Tribe\Project\Blocks\Types\Accordion\Accordion;
 use Tribe\Project\Blocks\Types\Hero\Hero;
@@ -30,6 +31,7 @@ class Blocks_Definer implements Definer_Interface {
 	public function define(): array {
 		return [
 			self::TYPES => DI\add( [
+				DI\get( Content_Loop::class ),
 				DI\get( Accordion::class ),
 				DI\get( Buttons::class ),
 				DI\get( Card_Grid::class ),
@@ -59,6 +61,7 @@ class Blocks_Definer implements Definer_Interface {
 			 * Includes any 3rd-party block supported by this project, such as Gravity Forms.
 			 */
 			self::ALLOW_LIST => [
+				'acf/contentloop',
 				'acf/accordion',
 				'acf/buttons',
 				'acf/cardgrid',
@@ -85,11 +88,10 @@ class Blocks_Definer implements Definer_Interface {
 				'core-embed/youtube',
 				'core/audio',
 				'core/block',
-				//'core/buttons',
-				'core/classic',
 				'core/code',
 				'core/embed',
 				'core/file',
+				'core/freeform',
 				'core/gallery',
 				'core/heading',
 				'core/html',
@@ -103,6 +105,7 @@ class Blocks_Definer implements Definer_Interface {
 				'core/table',
 				'core/video',
 				'gravityforms/form',
+				//'core/buttons',
 			],
 
 			/**

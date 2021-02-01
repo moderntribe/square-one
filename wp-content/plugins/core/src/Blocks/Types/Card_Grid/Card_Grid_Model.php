@@ -15,6 +15,7 @@ class Card_Grid_Model extends Base_Model {
 	 */
 	public function get_data(): array {
 		return [
+			Card_Grid_Controller::ATTRS       => $this->get_attrs(),
 			Card_Grid_Controller::CLASSES     => $this->get_classes(),
 			Card_Grid_Controller::TITLE       => $this->get( Card_Grid::TITLE, '' ),
 			Card_Grid_Controller::DESCRIPTION => $this->get( Card_Grid::DESCRIPTION, '' ),

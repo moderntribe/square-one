@@ -13,6 +13,7 @@ class Links_Model extends Base_Model {
 	 */
 	public function get_data(): array {
 		return [
+			Links_Block_Controller::ATTRS       => $this->get_attrs(),
 			Links_Block_Controller::CLASSES     => $this->get_classes(),
 			Links_Block_Controller::TITLE       => $this->get( Links::TITLE, '' ),
 			Links_Block_Controller::LEADIN      => $this->get( Links::LEAD_IN, '' ),

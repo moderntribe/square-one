@@ -14,6 +14,7 @@ class Content_Columns_Model extends Base_Model {
 	 */
 	public function get_data(): array {
 		return [
+			Content_Columns_Block_Controller::ATTRS            => $this->get_attrs(),
 			Content_Columns_Block_Controller::TITLE            => $this->get( Content_Columns::TITLE, '' ),
 			Content_Columns_Block_Controller::LEADIN           => $this->get( Content_Columns::LEADIN, '' ),
 			Content_Columns_Block_Controller::DESCRIPTION      => $this->get( Content_Columns::DESCRIPTION, '' ),

@@ -47,7 +47,7 @@ Front-end development moves fast and we regularly review and adopt industry lead
 * Babel - Backwards compatible next generation JavaScript Support
 * Linting - Code quality and Syntax enforcement 
 
-These build tools provide several ways to package and bundle the front-end assets of the site. This includes Dev and Prod release bundles that optimize for each scenario. 
+These build tools provide several ways to package and bundle the front-end assets of the site. This includes Dev and Prod release bundles that optimize for each scenario. The Build tools also account for our components system, and will properly build and chunk for each component. 
 
 #### BEM
 We use Block Element Modifier (BEM) CSS class conventions for clear semantics, modular reusable components, and flexibility. 
@@ -64,8 +64,8 @@ The JS build stack allows for vanilla JavaScript or full blown React application
 #### Image handling
 We’ve baked in some advanced image handling into SquareOne, including src-set, responsive images, lazy-loading, and have some additional S3/CDN modules for offloading media. 
 
-#### Components / Twig
-We’ve added Twig to our Front-end tech so we can cleanly separate logic and presentation. This also enforces componentization of our templates, making things more reusable and portable.
+#### Components
+We’ve enforce a component pattern to our Front-end tech so we can cleanly separate logic and presentation.  Each component is built to have it's own contained markup, styles, javascript, and models for maximum portability. This makes things very DRY and reusable and aligns well with a design system. 
 
 ## Back-End <a name="backend"></a>
 
@@ -86,8 +86,8 @@ without tight coupling. This isn’t novel, but something that all modern PHP de
 ### Testability
 We bundle the Codeception testing framework, which is built on PHPUnit, in SquareOne. We also bundle WP-Browser–built by one of our own team members–that adds helper tools for testing WordPress.  Paired with our use of Dependency Injection, this modern testing stack allows us to write unit, integration, functional, and acceptance tests for the codebase.
 
-### Abstractions
-SquareOne has been built for efficiency and reliability. There are many common features we build on every project and over time we’ve abstracted them into APIs so we scaffold and extend quickly. Here are some of the core abstractions we’ve built.
+### Tribe Libs
+SquareOne has been built for efficiency and reliability. There are many common features we build on every project and over time we’ve abstracted into our own library called [Tribe Libs](https://github.com/moderntribe/tribe-libs) so we scaffold and extend quickly. Here are some of the core abstractions we’ve built.
 	
 * Custom Post Types - Registering Custom Post Types is required for creating manageable lists of data. We’ve build an abstraction that combines with other typical needs beyond a basic post type.
 * Meta Data / Custom Fields - Combined with the CPT registration is the Custom fields and Meta Data registration. 
@@ -97,6 +97,10 @@ SquareOne has been built for efficiency and reliability. There are many common f
 * WP-CLI - Run WordPress on the Command Line. We have integrations for running long running processes outside of WordPress, like migrations and data syncing procedures.
 * Queueing - We’ve built a queuing system into WordPress for events management. This is great for deferring background processes that are expensive and not required to be JIT.
 * Syndication - As an optional enhancement,  we’ve created a method of sharing content without content duplication we call syndication. This allows cross site queries and data sharing seamlessly across a large multi-site network.
+
+## Content Management
+
+SquareOne was build to support the latest and greatest Gutenberg editor. In particular we leverage Advanced Custom Fields, a fantastic tool to build custom blocks. It can also easily use the Classic editor and leverage many of the other page builders out there, like our very own modular content [Panels Builder](https://github.com/moderntribe/panel-builder).  
 
 ### The WordPress way
 
