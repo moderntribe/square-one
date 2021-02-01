@@ -16,7 +16,6 @@ use Tribe\Project\Templates\Components\image\Image_Controller;
 use Tribe\Project\Theme\Config\Image_Sizes;
 use Tribe\Project\Templates\Components\card\Card_Controller;
 
-
 class Content_Loop_Controller extends Abstract_Controller {
 
 	public const CLASSES           = 'classes';
