@@ -12,6 +12,7 @@ use Tribe\Project\Blocks\Types\Content_Loop\Content_Loop;
 use Tribe\Project\Blocks\Types\Interstitial\Interstitial;
 use Tribe\Project\Blocks\Types\Accordion\Accordion;
 use Tribe\Project\Blocks\Types\Hero\Hero;
+use Tribe\Project\Blocks\Types\Icon_Grid\Icon_Grid;
 use Tribe\Project\Blocks\Types\Lead_Form\Lead_Form;
 use Tribe\Project\Blocks\Types\Links\Links;
 use Tribe\Project\Blocks\Types\Logos\Logos;
@@ -37,6 +38,7 @@ class Blocks_Definer implements Definer_Interface {
 				DI\get( Card_Grid::class ),
 				DI\get( Content_Columns::class ),
 				DI\get( Hero::class ),
+				DI\get( Icon_Grid::class ),
 				DI\get( Media_Text::class ),
 				DI\get( Interstitial::class ),
 				DI\get( Lead_Form::class ),
@@ -67,6 +69,7 @@ class Blocks_Definer implements Definer_Interface {
 				'acf/cardgrid',
 				'acf/contentcolumns',
 				'acf/hero',
+				'acf/icongrid',
 				'acf/interstitial',
 				'acf/leadform',
 				'acf/links',
