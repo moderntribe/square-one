@@ -4,7 +4,9 @@ namespace Tribe\Project\Templates\Models;
 
 class Post_List_Object {
 	public const POST_ID   = 'post_id';
+	public const POST_DATE = 'post_date';
 	public const TITLE     = 'title';
+	public const CATEGORY  = 'category';
 	public const CONTENT   = 'content';
 	public const EXCERPT   = 'excerpt';
 	public const IMAGE     = 'image';
@@ -12,7 +14,9 @@ class Post_List_Object {
 	public const POST_TYPE = 'post_type';
 
 	private int $post_id = 0;
+	private string $post_date = '';
 	private string $title = '';
+	private array $category = [];
 	private string $content = '';
 	private string $excerpt = '';
 	private int $image_id = 0;
@@ -29,8 +33,22 @@ class Post_List_Object {
 	/**
 	 * @return string
 	 */
+	public function get_post_date(): string {
+		return $this->post_date;
+	}
+
+	/**
+	 * @return string
+	 */
 	public function get_title(): string {
 		return $this->title;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function get_category(): array {
+		return $this->category;
 	}
 
 	/**
@@ -80,6 +98,16 @@ class Post_List_Object {
 		return $this;
 	}
 
+	/**
+	 * @param int $post_date
+	 *
+	 * @return Post_List_Object
+	 */
+	public function set_post_date( string $post_date ) {
+		$this->post_date = $post_date;
+
+		return $this;
+	}
 
 	/**
 	 * @param string $title
@@ -88,6 +116,17 @@ class Post_List_Object {
 	 */
 	public function set_title( string $title ) {
 		$this->title = $title;
+
+		return $this;
+	}
+
+	/**
+	 * @param array $category
+	 *
+	 * @return Post_List_Object
+	 */
+	public function set_category( array $category ) {
+		$this->category = $category;
 
 		return $this;
 	}
