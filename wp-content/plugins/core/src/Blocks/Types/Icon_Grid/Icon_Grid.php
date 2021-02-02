@@ -20,9 +20,11 @@ class Icon_Grid extends Block_Config {
 	public const LEADIN      = 'leadin';
 	public const CTA         = 'cta';
 
-	public const ICONS      = 'icons';
-	public const ICON_IMAGE = 'image';
-	public const ICON_LINK  = 'link';
+	public const ICONS            = 'icons';
+	public const ICON_IMAGE       = 'image';
+	public const ICON_TITLE       = 'icon_title';
+	public const ICON_DESCRIPTION = 'icon_description';
+	public const ICON_LINK        = 'link';
 
 	public function add_block() {
 		$this->set_block( new Block( self::NAME, [
@@ -91,7 +93,7 @@ class Icon_Grid extends Block_Config {
 			'button_label' => 'Add Icon Section',
 		] );
 
-		$logo_image = new Field( self::ICON_IMAGE, [
+		$icon_image = new Field( self::ICON_IMAGE, [
 			'label'         => __( 'Icon Image', 'tribe' ),
 			'name'          => self::ICON_IMAGE,
 			'type'          => 'image',
@@ -99,14 +101,28 @@ class Icon_Grid extends Block_Config {
 			'preview_size'  => 'medium',
 			'instructions'  => __( 'Recommended image size: 100px wide with any aspect ratio.', 'tribe' ),
 		] );
-		$group->add_field( $logo_image );
+		$group->add_field( $icon_image );
 
-		$logo_link = new Field( self::ICON_LINK, [
+		$icon_title = new Field( self::ICON_TITLE, [
+			'label' => __( 'Icon Title', 'tribe' ),
+			'name'  => self::ICON_TITLE,
+			'type'  => 'text',
+		] );
+		$group->add_field( $icon_title );
+
+		$icon_description = new Field( self::ICON_DESCRIPTION, [
+			'label' => __( 'Icon Description', 'tribe' ),
+			'name'  => self::ICON_DESCRIPTION,
+			'type'  => 'wysiwyg',
+		] );
+		$group->add_field( $icon_description );
+
+		$icon_link = new Field( self::ICON_LINK, [
 			'label' => __( 'Icon Section Link', 'tribe' ),
 			'name'  => self::ICON_LINK,
 			'type'  => 'link',
 		] );
-		$group->add_field( $logo_link );
+		$group->add_field( $icon_link );
 
 		return $group;
 	}

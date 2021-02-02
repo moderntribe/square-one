@@ -6,12 +6,14 @@ namespace Tribe\Project\Templates\Components\blocks\icon_grid;
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Blocks\Types\Icon_Grid\Icon_Grid;
 use Tribe\Project\Templates\Components\Abstract_Controller;
+use Tribe\Project\Templates\Components\card\Card_Controller;
 use Tribe\Project\Templates\Components\content_block\Content_Block_Controller;
 use Tribe\Project\Templates\Components\container\Container_Controller;
 use Tribe\Project\Templates\Components\Deferred_Component;
 use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Templates\Components\text\Text_Controller;
 use Tribe\Project\Templates\Components\image\Image_Controller;
+use Tribe\Project\Theme\Config\Image_Sizes;
 
 class Icon_Grid_Controller extends Abstract_Controller {
 
@@ -95,6 +97,9 @@ class Icon_Grid_Controller extends Abstract_Controller {
 	 * @return string
 	 */
 	public function get_content_classes(): string {
+		$this->content_classes[] = 'g-3-up';
+		$this->content_classes[] = 'g-centered';
+
 		return Markup_Utils::class_attribute( $this->content_classes );
 	}
 
@@ -108,6 +113,7 @@ class Icon_Grid_Controller extends Abstract_Controller {
 
 		return [
 			Content_Block_Controller::TAG     => 'header',
+			Content_Block_Controller::LAYOUT  => Content_Block_Controller::LAYOUT_CENTER,
 			Content_Block_Controller::LEADIN  => $this->get_leadin(),
 			Content_Block_Controller::TITLE   => $this->get_title(),
 			Content_Block_Controller::CONTENT => $this->get_content(),
@@ -179,48 +185,68 @@ class Icon_Grid_Controller extends Abstract_Controller {
 			Link_Controller::TARGET  => $cta['target'],
 			Link_Controller::CLASSES => [
 				'c-block__cta-link',
-				'a-cta',
+				'a-btn',
+				'a-btn--has-icon-after', 
+				'icon-arrow-right'
 			],
 		] );
 	}
 
-	/**
-	 * @return array
-	 */
-	public function get_icons(): array {
-		$component_args = [];
+	public function get_icon_card_args() {
 		if ( empty( $this->icons ) ) {
 			return [];
 		}
-		foreach ( $this->icons as $icon ) {
-			// Don't add a logo if there's no image set in the block.
-			if ( empty( $icon[ Icon_Grid::ICON_IMAGE ] ) ) {
-				continue;
-			}
-			$image_args = [
-				Image_Controller::IMG_ID       => (int) $icon[ Icon_Grid::ICON_IMAGE ],
-				Image_Controller::USE_LAZYLOAD => true,
-				Image_Controller::CLASSES      => [ 'b-logo__figure' ],
-				Image_Controller::IMG_CLASSES  => [ 'b-logo__img' ],
-				Image_Controller::SRC_SIZE     => 'large',
-				Image_Controller::SRCSET_SIZES => [ 'medium', 'large' ],
+
+		$cards = [];
+		foreach ( $this->icons as $card ) {
+			$cards[] = [
+				Card_Controller::STYLE           => Card_Controller::STYLE_PLAIN,
+				Card_Controller::TAG             => 'div',
+				Card_Controller::CLASSES         => ['is-centered-text'],
+				Card_Controller::USE_TARGET_LINK => false,
+				Card_Controller::TITLE           => defer_template_part(
+					'components/text/text',
+					null,
+					[
+						Text_Controller::TAG     => 'h3',
+						Text_Controller::CLASSES => [ 'h5' ],
+						Text_Controller::CONTENT => $card['icon_title'] ?? '',
+					]
+				),
+				Card_Controller::DESCRIPTION     => defer_template_part(
+					'components/container/container',
+					null,
+					[
+						Container_Controller::CONTENT => wpautop( $card['icon_description'] ) ?? '',
+						Container_Controller::CLASSES => [ 't-sink', 's-sink' ],
+					],
+				),
+				Card_Controller::IMAGE           => defer_template_part(
+					'components/image/image',
+					null,
+					[
+						Image_Controller::IMG_ID       => $card['image'] ?? null,
+						Image_Controller::AS_BG        => false,
+						Image_Controller::CLASSES      => [ ],
+						Image_Controller::SRC_SIZE     => Image_Sizes::FOUR_THREE,
+						Image_Controller::SRCSET_SIZES => [
+							Image_Sizes::FOUR_THREE,
+							Image_Sizes::FOUR_THREE_SMALL,
+						],
+					],
+				),
+				Card_Controller::CTA             => defer_template_part(
+					'components/link/link',
+					null,
+					[
+						Link_Controller::CONTENT => $card['link']['title'] ?? '',
+						Link_Controller::URL     => $card['link']['url'] ?? '',
+						Link_Controller::CLASSES => [ 'a-cta', 'is-target-link' ],
+					]
+				),
 			];
-
-			$link = wp_parse_args( $icon[ Icon_Grid::ICON_LINK ], [
-				'title'  => '',
-				'url'    => '',
-				'target' => '',
-			] );
-
-			if ( ! empty( $icon[ Icon_Grid::ICON_LINK ] ) ) {
-				$image_args[ Image_Controller::LINK_URL ]     = $link['url'];
-				$image_args[ Image_Controller::LINK_TARGET ]  = $link['target'];
-				$image_args[ Image_Controller::LINK_TITLE ]   = $link['title'];
-				$image_args[ Image_Controller::LINK_CLASSES ] = [ 'b-logo__link' ];
-			}
-			$component_args[] = $image_args;
 		}
 
-		return $component_args;
+		return $cards;
 	}
 }

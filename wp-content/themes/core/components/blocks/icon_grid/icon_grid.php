@@ -18,14 +18,8 @@ $c = \Tribe\Project\Templates\Components\blocks\icon_grid\Icon_Grid_Controller::
 
 		<div <?php echo $c->get_content_classes(); ?>>
 
-			<?php foreach ( $c->get_icons() as $icon ) { ?>
-				<div class="b-icon-grid">
-					<?php get_template_part(
-						'components/image/image',
-						null,
-						$icon
-					); ?>
-				</div>
+			<?php foreach ( $c->get_icon_card_args() as $card_args ) { ?>
+				<?php get_template_part( 'components/card/card', null, $card_args ); ?>
 			<?php } ?>
 		
 		</div>
