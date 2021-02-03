@@ -201,7 +201,7 @@ class Icon_Grid_Controller extends Abstract_Controller {
 		foreach ( $this->icons as $card ) {
 			$cards[] = [
 				Card_Controller::STYLE           => Card_Controller::STYLE_PLAIN,
-				Card_Controller::TAG             => 'div',
+				Card_Controller::TAG             => 'li',
 				Card_Controller::CLASSES         => ['is-centered-text'],
 				Card_Controller::USE_TARGET_LINK => false,
 				Card_Controller::TITLE           => defer_template_part(
@@ -227,11 +227,10 @@ class Icon_Grid_Controller extends Abstract_Controller {
 					[
 						Image_Controller::IMG_ID       => $card['image'] ?? null,
 						Image_Controller::AS_BG        => false,
-						Image_Controller::CLASSES      => [ ],
-						Image_Controller::SRC_SIZE     => Image_Sizes::FOUR_THREE,
+						Image_Controller::SRC_SIZE     => 'medium_large',
 						Image_Controller::SRCSET_SIZES => [
-							Image_Sizes::FOUR_THREE,
-							Image_Sizes::FOUR_THREE_SMALL,
+							'medium',
+							'medium_large',
 						],
 					],
 				),
