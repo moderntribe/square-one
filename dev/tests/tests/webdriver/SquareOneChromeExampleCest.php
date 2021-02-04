@@ -6,7 +6,7 @@ use Page\Webdriver\Search_Page_Example;
 class SquareOneChromeExampleCest extends Base_Webdriver_Cest {
 
 	public function i_can_set_the_site_title_in_the_customizer( WebDriverTester $I ) {
-		$site_title = __METHOD__ . rand( 0, 1000 );
+		$site_title = 'This is a test';
 
 		$I->makeScreenshot();
 		$I->loginAsAdmin();
@@ -14,15 +14,15 @@ class SquareOneChromeExampleCest extends Base_Webdriver_Cest {
 		$I->click( '#wp-admin-bar-customize a' );
 		$I->makeScreenshot();
 		$I->click( '#accordion-section-title_tagline' );
-		$I->waitForElementVisible( '#_customize-input-blogname', 3 );
+		$I->waitForElementVisible( '#_customize-input-blogname', 20 );
 		$I->fillField( '#_customize-input-blogname', $site_title );
 		$I->click( '#save' );
-		$I->waitForJqueryAjax();
+		$I->waitForJqueryAjax( 20 );
 		$I->makeScreenshot( __LINE__ . ' - After Saving' );
 		$I->assertEquals( $site_title, $I->grabOptionFromDatabase( 'blogname' ) );
 	}
 
-	public function can_search_on_homepage( WebDriverTester $I, Home_Page_Example $home_page, Search_Page_Example $search_page ) {
+	public function i_can_search_on_homepage( WebDriverTester $I, Home_Page_Example $home_page, Search_Page_Example $search_page ) {
 		$search_query = 'FooBarBaz';
 
 		$I->amOnPage( Home_Page_Example::$URL );
