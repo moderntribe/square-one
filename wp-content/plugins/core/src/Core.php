@@ -78,6 +78,7 @@ class Core {
 		'\Tribe\Libs\Cache\Cache_Definer',
 		'\Tribe\Libs\CLI\CLI_Definer',
 		'\Tribe\Libs\Generators\Generator_Definer',
+		'\Tribe\Libs\Media\Media_Definer',
 		'\Tribe\Libs\Object_Meta\Object_Meta_Definer',
 		'\Tribe\Libs\P2P\P2P_Definer',
 		'\Tribe\Libs\Queues\Queues_Definer',
