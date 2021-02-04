@@ -49,22 +49,26 @@ class Icon_Grid extends Block_Config {
 		// Content Fields
 		//==========================================
 		$this->add_section( new Field_Section( self::SECTION_CONTENT, __( 'Content', 'tribe' ), 'accordion' ) )
-			->add_field( new Field( self::NAME . '_' . self::TITLE, [
-				'label' => __( 'Title', 'tribe' ),
-				'name'  => self::TITLE,
-				'type'  => 'text',
+			->add_field( 
+				new Field( self::NAME . '_' . self::TITLE, [
+					'label' => __( 'Title', 'tribe' ),
+					'name'  => self::TITLE,
+					'type'  => 'text',
 				] )
-			)->add_field( new Field( self::NAME . '_' . self::LEADIN, [
+			)->add_field( 
+				new Field( self::NAME . '_' . self::LEADIN, [
 					'label' => __( 'Lead in', 'tribe' ),
 					'name'  => self::LEADIN,
 					'type'  => 'text',
 				] )
-			)->add_field( new Field( self::NAME . '_' . self::DESCRIPTION, [
+			)->add_field(
+				new Field( self::NAME . '_' . self::DESCRIPTION, [
 					'label' => __( 'Description', 'tribe' ),
 					'name'  => self::DESCRIPTION,
 					'type'  => 'wysiwyg',
 				] )
-			)->add_field( new Field( self::NAME . '_' . self::CTA, [
+			)->add_field(
+				new Field( self::NAME . '_' . self::CTA, [
 					'label' => __( 'Call to Action', 'tribe' ),
 					'name'  => self::CTA,
 					'type'  => 'link',
@@ -72,19 +76,13 @@ class Icon_Grid extends Block_Config {
 			)->add_field(
 				$this->get_icon_section()
 			);
-
-		//==========================================
-		// Setting Fields
-		//==========================================
-		$this->add_section( new Field_Section( self::SECTION_SETTINGS, __( 'Settings', 'tribe' ), 'accordion' ) );
 	}
 
 	/**
 	 * @return Repeater
 	 */
 	protected function get_icon_section() {
-		$group = new Repeater( self::NAME . '_' . self::ICONS );
-		$group->set_attributes( [
+		$group = new Repeater( self::NAME . '_' . self::ICONS, [
 			'label'        => __( 'Icon Section', 'tribe' ),
 			'name'         => self::ICONS,
 			'layout'       => 'block',
@@ -92,37 +90,35 @@ class Icon_Grid extends Block_Config {
 			'max'          => 12,
 			'button_label' => 'Add Icon Section',
 		] );
-
-		$icon_image = new Field( self::ICON_IMAGE, [
-			'label'         => __( 'Icon Image', 'tribe' ),
-			'name'          => self::ICON_IMAGE,
-			'type'          => 'image',
-			'return_format' => 'id',
-			'preview_size'  => 'medium',
-			'instructions'  => __( 'Recommended image size: 100px wide with any aspect ratio.', 'tribe' ),
-		] );
-		$group->add_field( $icon_image );
-
-		$icon_title = new Field( self::ICON_TITLE, [
-			'label' => __( 'Icon Title', 'tribe' ),
-			'name'  => self::ICON_TITLE,
-			'type'  => 'text',
-		] );
-		$group->add_field( $icon_title );
-
-		$icon_description = new Field( self::ICON_DESCRIPTION, [
-			'label' => __( 'Icon Description', 'tribe' ),
-			'name'  => self::ICON_DESCRIPTION,
-			'type'  => 'wysiwyg',
-		] );
-		$group->add_field( $icon_description );
-
-		$icon_link = new Field( self::ICON_LINK, [
-			'label' => __( 'Icon Section Link', 'tribe' ),
-			'name'  => self::ICON_LINK,
-			'type'  => 'link',
-		] );
-		$group->add_field( $icon_link );
+		
+		$group->add_field(
+			new Field( self::ICON_IMAGE, [
+				'label'         => __( 'Icon Image', 'tribe' ),
+				'name'          => self::ICON_IMAGE,
+				'type'          => 'image',
+				'return_format' => 'id',
+				'preview_size'  => 'medium',
+				'instructions'  => __( 'Recommended image size: 100px wide with any aspect ratio.', 'tribe' ),
+			] )
+		 )->add_field(
+			new Field( self::ICON_TITLE, [
+				'label' => __( 'Icon Title', 'tribe' ),
+				'name'  => self::ICON_TITLE,
+				'type'  => 'text',
+			] )
+		)->add_field(
+			new Field( self::ICON_DESCRIPTION, [
+				'label' => __( 'Icon Description', 'tribe' ),
+				'name'  => self::ICON_DESCRIPTION,
+				'type'  => 'wysiwyg',
+			 ] )
+		)->add_field(
+			new Field( self::ICON_LINK, [
+				'label' => __( 'Icon Section Link', 'tribe' ),
+				'name'  => self::ICON_LINK,
+				'type'  => 'link',
+			] )
+		);
 
 		return $group;
 	}
