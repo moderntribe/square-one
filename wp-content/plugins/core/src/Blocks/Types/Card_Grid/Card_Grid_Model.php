@@ -4,10 +4,8 @@ declare( strict_types=1 );
 namespace Tribe\Project\Blocks\Types\Card_Grid;
 
 use Tribe\Project\Blocks\Types\Base_Model;
-use Tribe\Project\Blocks\Types\Post_List\Post_List;
 use Tribe\Project\Templates\Components\blocks\card_grid\Card_Grid_Controller;
 use Tribe\Project\Templates\Components\link\Link_Controller;
-use Tribe\Project\Templates\Models\Post_List_Object;
 
 class Card_Grid_Model extends Base_Model {
 	/**
