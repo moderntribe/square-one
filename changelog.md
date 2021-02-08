@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2021.02
+* Add header and footer templates to ensure default TEC templates will load.
+
 ## 2021.01
 * Updated: selenium/standalone-chrome docker image to a tag that is updated frequently.
 * Fixed: CI GitHub Workflow failing and will collect artifacts if webdriver tests randomly fail for debugging.
