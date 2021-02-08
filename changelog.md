@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2021.02
+* Fixed: An issue with the callback used in the `scroll-to` script. Also added automatic focus switching when using the `smooth-anchors` script.
+
 ## 2021.01
 * Updated: selenium/standalone-chrome docker image to a tag that is updated frequently.
 * Fixed: CI GitHub Workflow failing and will collect artifacts if webdriver tests randomly fail for debugging.

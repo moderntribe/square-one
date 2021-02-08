@@ -33,7 +33,7 @@ const scrollTo = ( opts ) => {
 			}
 		}
 
-		$( 'html, body' ).animate( { scrollTop: position }, options.duration, options.easing, options.after_scroll );
+		$( 'html, body' ).animate( { scrollTop: position }, options.duration, options.easing, options.afterScroll );
 	}
 };
 

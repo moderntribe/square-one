@@ -19,6 +19,9 @@ const handleAnchorClick = ( e ) => {
 		offset: -150,
 		duration: 300,
 		$target: $( target ),
+		afterScroll: function() {
+			target.focus();
+		}
 	} );
 };
 
