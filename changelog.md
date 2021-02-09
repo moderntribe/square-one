@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ## 2021.02
 * Fixed: Add header and footer templates to ensure default TEC templates will load.
+* Updated: Adds Husky hooks for linting before committing code.
 
 ## 2021.01
 * Updated: selenium/standalone-chrome docker image to a tag that is updated frequently.
