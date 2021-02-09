@@ -5,7 +5,7 @@
 import * as tools from '../tools';
 import scrollTo from '../dom/scroll-to';
 
-const handleAnchorClick = ( e ) => {
+const handleAnchorClick = ( e, options ) => {
 	const target = document.getElementById( e.target.hash.substring( 1 ) );
 	if ( ! target ) {
 		return;
@@ -20,22 +20,39 @@ const handleAnchorClick = ( e ) => {
 		duration: 300,
 		$target: $( target ),
 		afterScroll: function() {
+			if ( ! options.auto_focus ) {
+				return;
+			}
+
+			if ( ! target.getAttribute( 'tabindex' ) ) {
+				target.setAttribute( 'tabindex', '-1' );
+			}
+
 			target.focus();
 		}
 	} );
 };
 
-const bindEvents = () => {
+const bindEvents = ( options ) => {
 	const anchorLinks = tools.convertElements( document.querySelectorAll( 'a[href^="#"]:not([href="#"])' ) );
 	if ( ! anchorLinks.length ) {
 		return;
 	}
 
-	anchorLinks.forEach( link => link.addEventListener( 'click', handleAnchorClick ) );
+	anchorLinks.forEach( link => link.addEventListener( 'click', ( e ) => {
+		handleAnchorClick( e, options );
+	} ) );
 };
 
-const init = () => {
-	bindEvents();
+const init = ( opts = {} ) => {
+	const options = {
+		auto_focus: false, // Focus the element after scolling
+	};
+
+	// merge options
+	Object.assign( options, opts );
+
+	bindEvents( options );
 };
 
 export default init;
