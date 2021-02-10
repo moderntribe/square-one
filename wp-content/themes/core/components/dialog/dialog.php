@@ -30,14 +30,14 @@ if ( empty( $content ) ) {
 ?>
 
 <script data-js="dialog-content-<?php echo $c->get_dialog_id(); ?>" type="text/template">
-    <div <?php echo $c->get_dialog_classes(); ?> <?php echo $c->get_dialog_attributes(); ?>>
-        <div <?php echo $c->get_overlay_classes(); ?> <?php echo $c->get_overlay_attributes(); ?>>
-            <?php echo $c->get_header(); ?>
-            <div <?php echo $c->get_content_wrapper_classes(); ?> <?php echo $c->get_content_wrapper_attributes(); ?>>
-                <div <?php echo $c->get_content_classes(); ?> <?php echo $c->get_content_attributes(); ?>>
-                    <?php echo $content; ?>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div <?php echo $c->get_dialog_classes(); ?> <?php echo $c->get_dialog_attributes(); ?>>
+		<div <?php echo $c->get_overlay_classes(); ?> <?php echo $c->get_overlay_attributes(); ?>>
+			<?php echo $c->get_header(); ?>
+			<div <?php echo $c->get_content_wrapper_classes(); ?> <?php echo $c->get_content_wrapper_attributes(); ?>>
+				<div <?php echo $c->get_content_classes(); ?> <?php echo $c->get_content_attributes(); ?>>
+					<?php echo $content; ?>
+				</div>
+			</div>
+		</div>
+	</div>
 </script>
