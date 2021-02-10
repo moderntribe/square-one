@@ -1,25 +1,51 @@
 <?php
 declare( strict_types=1 );
 
-namespace Tribe\Project\Blocks\Types\Post_List;
+namespace Tribe\Project\Blocks\Types\Content_Loop;
 
 use Tribe\Project\Blocks\Types\Base_Model;
-use Tribe\Project\Templates\Components\blocks\post_list\Post_List_Controller;
+use Tribe\Project\Templates\Components\blocks\content_loop\Content_Loop_Controller;
+use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Templates\Models\Post_List_Object;
+use Tribe\Project\Blocks\Types\Post_List\Post_List;
 
-class Post_List_Model extends Base_Model {
-	/**
-	 * @return array
-	 */
+/**
+ * Class Content_Loop_Model
+ *
+ * Responsible for mapping values from the block to arguments
+ * for the component
+ */
+class Content_Loop_Model extends Base_Model {
 	public function get_data(): array {
 		return [
-			Post_List_Controller::ATTRS   => $this->get_attrs(),
-			Post_List_Controller::CLASSES => $this->get_classes(),
-			Post_List_Controller::POSTS   => $this->get_posts(),
+			Content_Loop_Controller::CLASSES     => $this->get_classes(),
+			Content_Loop_Controller::TITLE       => $this->get( Content_Loop::TITLE, '' ),
+			Content_Loop_Controller::LEADIN      => $this->get( Content_Loop::LEADIN, '' ),
+			Content_Loop_Controller::DESCRIPTION => $this->get( Content_Loop::DESCRIPTION, '' ),
+			Content_Loop_Controller::CTA         => $this->get_cta_args(),
+			Content_Loop_Controller::POSTS       => $this->get_posts(),
+			Content_Loop_Controller::LAYOUT      => $this->get( Content_Loop::LAYOUT, Content_Loop::LAYOUT_ROW ),
 		];
 	}
 
 	/**
+	 * @return array
+	 */
+	private function get_cta_args(): array {
+		$cta = wp_parse_args( $this->get( Content_Loop::CTA, [] ), [
+			'title'  => '',
+			'url'    => '',
+			'target' => '',
+		] );
+
+		return [
+			Link_Controller::CONTENT => $cta['title'],
+			Link_Controller::URL     => $cta['url'],
+			Link_Controller::TARGET  => $cta['target'],
+		];
+	}
+
+		/**
 	 * @return array
 	 */
 	private function get_posts(): array {
@@ -41,19 +67,12 @@ class Post_List_Model extends Base_Model {
 		$post_array = [];
 		foreach ( $manual_rows as $row ) {
 			$post_obj = null;
-			if ( ! $row[ Post_List::MANUAL_POST ] && ! $row[ Post_List::MANUAL_TOGGLE ] ) {
-				continue; //no post and no override/custom
-			}
-
 			//Get manually selected post
 			if ( $row[ Post_List::MANUAL_POST ] && $row[ Post_List::MANUAL_POST ] instanceof \WP_Post ) {
 				$post_obj = $this->format_post( $row[ Post_List::MANUAL_POST ] );
 			}
 
-			//build custom or overwrite selected post above
-			if ( $row[ Post_List::MANUAL_TOGGLE ] ) {
-				$post_obj = $this->maybe_overwrite_values( $row, $post_obj );
-			}
+			$post_obj = $this->maybe_overwrite_values( $row, $post_obj );
 
 			//Check if we have data for this post to remove any empty rows
 			if ( ! $post_obj || ! $this->is_valid_post( $post_obj ) ) {
@@ -76,8 +95,18 @@ class Post_List_Model extends Base_Model {
 			$post_object = new Post_List_Object();
 		}
 
+		if ( ! empty( $values[ Content_Loop::MANUAL_UPPER_META ] ) ) {
+			// Need to replicate the WP Taxonomy array the best we can here
+			$cat = (object) [ 'name' => $values[ Content_Loop::MANUAL_UPPER_META ] ];
+			$post_object->set_category( [ $cat ] );
+		}
+
 		if ( ! empty( $values[ Post_List::MANUAL_TITLE ] ) ) {
 			$post_object->set_title( $values[ Post_List::MANUAL_TITLE ] );
+		}
+
+		if ( ! empty( $values[ Content_Loop::MANUAL_LOWER_META ] ) ) {
+			$post_object->set_post_date( $values[ Content_Loop::MANUAL_LOWER_META ] );
 		}
 
 		if ( ! empty( $values[ Post_List::MANUAL_EXCERPT ] ) ) {
@@ -151,6 +180,10 @@ class Post_List_Model extends Base_Model {
 	private function get_tax_query_args( array $field_group ): array {
 		$tax_and_terms = [];
 
+		if ( empty( $field_group[ Post_List::QUERY_TAXONOMIES ] ) ) {
+			return $tax_and_terms;
+		}
+
 		foreach ( $field_group[ Post_List::QUERY_TAXONOMIES ] as $taxonomy ) {
 			$terms = $field_group[ Post_List::QUERY_TAXONOMIES . '_' . $taxonomy ] ?? false;
 
@@ -179,6 +212,7 @@ class Post_List_Model extends Base_Model {
 		setup_postdata( $post );
 		$post_obj = new Post_List_Object();
 		$post_obj->set_title( get_the_title() )
+				 ->set_category( get_the_category() )
 				 ->set_content( get_the_content() )
 				 ->set_excerpt( get_the_excerpt() )
 				 ->set_image_id( get_post_thumbnail_id() )
@@ -188,7 +222,8 @@ class Post_List_Model extends Base_Model {
 					 'label'  => get_the_title(),
 				 ] )
 				 ->set_post_type( get_post_type() )
-				 ->set_post_id( $_post->ID );
+				 ->set_post_id( $_post->ID )
+				 ->set_post_date( get_the_date() );
 
 		wp_reset_postdata();
 
