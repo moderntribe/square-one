@@ -170,6 +170,18 @@ export const closest = ( el, selector ) => {
 };
 
 /**
+ * Checks to see if the element would be selected by the provided selector
+ *
+ * @param el
+ * @param selector
+ * @returns {*}
+ */
+
+export const matches = ( el, selector ) => {
+	return ( el.matches || el.matchesSelector || el.msMatchesSelector || el.mozMatchesSelector || el.webkitMatchesSelector || el.oMatchesSelector ).call( el, selector );
+};
+
+/**
  * Insert a node after another node
  *
  * @param newNode {Element|NodeList}

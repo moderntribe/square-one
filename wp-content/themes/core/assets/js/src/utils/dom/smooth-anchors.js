@@ -3,10 +3,13 @@
  */
 
 import * as tools from '../tools';
+import { trigger } from '../events';
 import scrollTo from '../dom/scroll-to';
 
-const handleAnchorClick = ( e, options ) => {
-	const target = document.getElementById( e.target.hash.substring( 1 ) );
+const handleAnchorClick = ( e ) => {
+	const anchor = e.currentTarget;
+	const hash = anchor.hash.substring( 1 );
+	const target = document.getElementById( hash );
 	if ( ! target ) {
 		return;
 	}
@@ -19,40 +22,23 @@ const handleAnchorClick = ( e, options ) => {
 		offset: -150,
 		duration: 300,
 		$target: $( target ),
-		afterScroll: function() {
-			if ( ! options.auto_focus ) {
-				return;
-			}
-
-			if ( ! target.getAttribute( 'tabindex' ) ) {
-				target.setAttribute( 'tabindex', '-1' );
-			}
-
-			target.focus();
-		}
+		afterScroll: () => {
+			trigger( { event: 'modern_tribe/trigger_smooth_anchor', native: false } );
+		},
 	} );
 };
 
-const bindEvents = ( options ) => {
+const bindEvents = () => {
 	const anchorLinks = tools.convertElements( document.querySelectorAll( 'a[href^="#"]:not([href="#"])' ) );
 	if ( ! anchorLinks.length ) {
 		return;
 	}
 
-	anchorLinks.forEach( link => link.addEventListener( 'click', ( e ) => {
-		handleAnchorClick( e, options );
-	} ) );
+	anchorLinks.forEach( link => link.addEventListener( 'click', handleAnchorClick ) );
 };
 
-const init = ( opts = {} ) => {
-	const options = {
-		auto_focus: false, // Focus the element after scolling
-	};
-
-	// merge options
-	Object.assign( options, opts );
-
-	bindEvents( options );
+const init = () => {
+	bindEvents();
 };
 
 export default init;
