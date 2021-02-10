@@ -10,8 +10,8 @@ use Tribe\Project\Templates\Components\container\Container_Controller;
 use Tribe\Project\Templates\Components\text\Text_Controller;
 
 class Dialog_Controller extends Abstract_Controller {
-    public const ID                         = 'id';
-    public const CONTENT                    = 'content';
+	public const ID                         = 'id';
+	public const CONTENT                    = 'content';
 	public const TITLE                      = 'title';
 	public const DIALOG_CLASSES             = 'dialog_classes';
 	public const DIALOG_ATTRIBUTES          = 'dialog_attributes';
@@ -23,7 +23,7 @@ class Dialog_Controller extends Abstract_Controller {
 	public const CONTENT_ATTRIBUTES         = 'content_attributes';
 
 	private string $id;
-    private string $title;
+	private string $title;
 	/**
 	 * @var string|Deferred_Component
 	 */
@@ -40,8 +40,8 @@ class Dialog_Controller extends Abstract_Controller {
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
 
-        $this->id                         = (string) $args[ self::ID ];
-        $this->content                    = $args[ self::CONTENT ];
+		$this->id                         = (string) $args[ self::ID ];
+		$this->content                    = $args[ self::CONTENT ];
 		$this->title                      = (string) $args[ self::TITLE ];
 		$this->dialog_classes             = (array) $args[ self::DIALOG_CLASSES ];
 		$this->dialog_attributes          = (array) $args[ self::DIALOG_ATTRIBUTES ];
@@ -55,8 +55,8 @@ class Dialog_Controller extends Abstract_Controller {
 
 	protected function defaults(): array {
 		return [
-            self::ID                          => '',
-            self::CONTENT                     => '',
+			self::ID                          => '',
+			self::CONTENT                     => '',
 			self::TITLE                       => '',
 			self::DIALOG_CLASSES              => [],
 			self::DIALOG_ATTRIBUTES           => [],
@@ -83,7 +83,7 @@ class Dialog_Controller extends Abstract_Controller {
 	* especially when multiple dialogs are used on a page.
 	* Typically the block ID itself works best.
 	*/
-    public function get_dialog_id(): string {
+	public function get_dialog_id(): string {
 		return (string) $this->id;
 	}
 	
@@ -144,7 +144,7 @@ class Dialog_Controller extends Abstract_Controller {
 			Container_Controller::CONTENT => $this->get_dialog_title() ?? '',
 		] );
 	}
-    
+	
 
 	public function get_content(): string {
 		return (string) $this->content;

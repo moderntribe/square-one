@@ -255,7 +255,9 @@ class Gallery_Grid_Controller extends Abstract_Controller {
 	 * @return Deferred_Component
 	 */
 	public function get_slide_img( int $img_id ): Deferred_Component {
-		return defer_template_part( 'components/image/image', null,
+		return defer_template_part(
+			'components/image/image',
+			null,
 			[
 				Image_Controller::IMG_ID       => $img_id,
 				Image_Controller::AS_BG        => false,
