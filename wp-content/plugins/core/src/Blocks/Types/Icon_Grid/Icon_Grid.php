@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare( strict_types=1 );
 
 namespace Tribe\Project\Blocks\Types\Icon_Grid;
 
@@ -21,10 +20,10 @@ class Icon_Grid extends Block_Config {
 	public const CTA         = 'cta';
 
 	public const ICONS            = 'icons';
-	public const ICON_IMAGE       = 'image';
+	public const ICON_IMAGE       = 'icon_image';
 	public const ICON_TITLE       = 'icon_title';
 	public const ICON_DESCRIPTION = 'icon_description';
-	public const ICON_LINK        = 'link';
+	public const ICON_LINK        = 'icon_link';
 
 	public function add_block() {
 		$this->set_block( new Block( self::NAME, [
@@ -44,7 +43,7 @@ class Icon_Grid extends Block_Config {
 	/**
 	 * Register Fields for block
 	 */
-	public function add_fields() {
+	public function add_fields(): void {
 		//==========================================
 		// Content Fields
 		//==========================================
@@ -81,14 +80,14 @@ class Icon_Grid extends Block_Config {
 	/**
 	 * @return Repeater
 	 */
-	protected function get_icon_section() {
+	protected function get_icon_section(): Repeater {
 		$group = new Repeater( self::NAME . '_' . self::ICONS, [
 			'label'        => __( 'Icon Section', 'tribe' ),
 			'name'         => self::ICONS,
 			'layout'       => 'block',
 			'min'          => 0,
 			'max'          => 12,
-			'button_label' => 'Add Icon Section',
+			'button_label' => __( 'Add Icon Section', 'tribe' ),
 		] );
 		
 		$group->add_field(
@@ -100,7 +99,7 @@ class Icon_Grid extends Block_Config {
 				'preview_size'  => 'medium',
 				'instructions'  => __( 'Recommended image size: 100px wide with any aspect ratio.', 'tribe' ),
 			] )
-		 )->add_field(
+		)->add_field(
 			new Field( self::ICON_TITLE, [
 				'label' => __( 'Icon Title', 'tribe' ),
 				'name'  => self::ICON_TITLE,

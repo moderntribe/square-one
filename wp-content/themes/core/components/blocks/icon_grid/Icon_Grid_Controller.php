@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare( strict_types=1 );
 
 namespace Tribe\Project\Templates\Components\blocks\icon_grid;
 
@@ -192,12 +191,13 @@ class Icon_Grid_Controller extends Abstract_Controller {
 		] );
 	}
 
-	public function get_icon_card_args() {
+	public function get_icon_card_args(): array {
+		$cards = [];
+
 		if ( empty( $this->icons ) ) {
-			return [];
+			return $cards;
 		}
 
-		$cards = [];
 		foreach ( $this->icons as $card ) {
 			$cards[] = [
 				Card_Controller::STYLE           => Card_Controller::STYLE_PLAIN,
@@ -225,7 +225,7 @@ class Icon_Grid_Controller extends Abstract_Controller {
 					'components/image/image',
 					null,
 					[
-						Image_Controller::IMG_ID       => $card['image'] ?? null,
+						Image_Controller::IMG_ID       => $card['icon_image'] ?? null,
 						Image_Controller::AS_BG        => false,
 						Image_Controller::SRC_SIZE     => 'medium_large',
 						Image_Controller::SRCSET_SIZES => [
@@ -238,8 +238,8 @@ class Icon_Grid_Controller extends Abstract_Controller {
 					'components/link/link',
 					null,
 					[
-						Link_Controller::CONTENT => $card['link']['title'] ?? '',
-						Link_Controller::URL     => $card['link']['url'] ?? '',
+						Link_Controller::CONTENT => $card['icon_link']['title'] ?? '',
+						Link_Controller::URL     => $card['icon_link']['url'] ?? '',
 						Link_Controller::CLASSES => [ 'a-cta', 'is-target-link' ],
 					]
 				),
