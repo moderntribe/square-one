@@ -25,7 +25,7 @@ class Icon_Grid extends Block_Config {
 	public const ICON_DESCRIPTION = 'icon_description';
 	public const ICON_LINK        = 'icon_link';
 
-	public function add_block() {
+	public function add_block(): void {
 		$this->set_block( new Block( self::NAME, [
 			'title'       => __( 'Icon Grid', 'tribe' ),
 			'description' => __( 'A grid layout block with icon selections', 'tribe' ), // TODO: describe the block
