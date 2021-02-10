@@ -15,6 +15,10 @@ Thumbs.db
 pimple.json
 .phpstorm.meta.php
 
+# IDE generated files #
+######################
+.vscode
+
 # Vim generated files #
 #######################
 

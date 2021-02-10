@@ -1,0 +1,114 @@
+
+
+/* -----------------------------------------------------------------------------
+ *
+ * Component: Dialog
+ *
+ * ----------------------------------------------------------------------------- */
+
+.c-dialog[aria-hidden="true"] {
+    display: none;
+}
+
+/* -----------------------------------------------------------------------------
+ *
+ * Dialog Overlay
+ *
+ * ----------------------------------------------------------------------------- */
+
+.c-dialog__overlay {
+    background-color: var(--color-black);
+    bottom: 0;
+    color: var(--color-white);
+    height: 100%;
+    left: 0;
+    overflow: hidden;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 100%;
+    z-index: 20;
+    display: flex;
+    flex-flow: column;
+
+    .admin-bar & {
+        top: var(--spacer-wpadmin-mobile);
+
+        @media (--viewport-wpadmin) {
+            top: var(--spacer-wpadmin-desktop);
+        }
+    }
+}
+
+/* -----------------------------------------------------------------------------
+ *
+ * Dialog Header
+ *
+ * ----------------------------------------------------------------------------- */
+
+.c-dialog__header {
+    padding: var(--spacer-30) var(--spacer-70);
+    width: 100%;
+    background: var(--color-black);
+    border-bottom: 1px solid var(--color-white);
+}
+
+.c-dialog__title {
+    font-size: 18px;
+    text-align: center;
+    text-transform: capitalize;
+}
+
+.c-dialog__close-button {
+    @mixin a-close;
+
+    position: fixed;
+    right: 10px;
+    top: 13px;
+    z-index: 21;
+
+    &:before {
+        display: none;
+    }
+
+    &:after {
+        color: var(--color-white);
+    }
+
+    .admin-bar & {
+        top: var(--spacer-wpadmin-mobile);
+    }
+
+    &:focus {
+		outline: 1px dashed var(--color-white);
+	}
+
+    @media (--viewport-medium) {
+        right: 40px;
+    }
+}
+
+/* -----------------------------------------------------------------------------
+ *
+ * Dialog Content
+ *
+ * ----------------------------------------------------------------------------- */
+
+.c-dialog__content-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+
+.c-dialog__content {
+    margin: 0 auto;
+    padding: 0;
+    max-width: 1000px;
+    width: 100%;
+
+    @media (--viewport-full) {
+        width: 80%;
+        padding: 0 var(--spacer-30);
+    }
+}
