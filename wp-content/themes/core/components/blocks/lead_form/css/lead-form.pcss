@@ -14,6 +14,13 @@
 			padding: var(--spacer-70) 0;
 		}
 	}
+
+	/* CASE: Lead Form: Background Dark */
+	&.b-lead-form--dark,
+	.b-lead-form__container.b-lead-form--dark {
+		background-color: var(--color-black);
+		color: var(--color-white);
+	}
 }
 
 /* -----------------------------------------------------------------------------
@@ -36,8 +43,9 @@
 		}
 	}
 
-	/* CASE: Lead Form: Full Width */
-	.b-lead-form--width-full & {
+	/* CASE: Lead Form: Form Right * Form Left */
+	.b-lead-form--layout-right &,
+	.b-lead-form--layout-left & {
 		@media (--viewport-full) {
 			display: flex;
 			align-items: center;
@@ -51,31 +59,22 @@
  * ----------------------------------------------------------------------------- */
 
 .b-lead-form__content {
-	/* CASE: Lead Form: Full Width */
-	.b-lead-form--width-full & {
+	/* CASE: Lead Form: Layout Left */
+
+	/* CASE: Lead Form: Form Right */
+	.b-lead-form--layout-right & {
 		@media (--viewport-full) {
-			max-width: var(--grid-7-col);
-			width: calc(58.3333% - var(--grid-gutter-half));
+			width: var(--grid-8-col);
+			padding-right: var(--grid-gutter);
 		}
 	}
 
-	/* CASE: Lead Form: Full Width & Layout Center */
-	.b-lead-form--layout-center.b-lead-form--width-full & {
-		margin-left: 0;
-		margin-right: 0;
-	}
-}
-
-.b-lead-form__description {
-	margin-top: 0;
-
-	@media (--viewport-full) {
-		margin-top: var(--spacer-10);
-	}
-
-	p {
+	/* CASE: Lead Form: Form Left */
+	.b-lead-form--layout-left & {
 		@media (--viewport-full) {
-			@mixin t-body-large;
+			width: var(--grid-8-col);
+			padding-left: var(--grid-gutter);
+			order: 2;
 		}
 	}
 }
@@ -86,26 +85,20 @@
 
 .b-lead-form__form {
 	margin-top: var(--spacer-30);
+	max-width: var(--grid-5-col);
 
-	/* CASE: Lead Form: Grid Width */
-	.b-lead-form--width-grid & {
-		@media (--viewport-full) {
-			margin-top: var(--spacer-40);
-		}
+	@media (--viewport-full) {
+		width: calc(41.6667% - var(--grid-gutter-half));
 	}
-
-	/* CASE: Lead Form: Grid Width & Layout Center */
-	.b-lead-form--layout-center.b-lead-form--width-grid & {
+	
+	/* CASE: Lead Form: Layout Bottom */
+	.b-lead-form--layout-bottom & {
 		margin-left: auto;
 		margin-right: auto;
 	}
 
-	/* CASE: Lead Form: Full Width */
-	.b-lead-form--width-full & {
-		@media (--viewport-full) {
-			margin-top: 0;
-			max-width: var(--grid-5-col);
-			width: calc(41.6667% - var(--grid-gutter-half));
-		}
+	/* CASE: Lead Form: Form Right */
+	.b-lead-form--layout-right & {
+		margin-top: 0;
 	}
 }

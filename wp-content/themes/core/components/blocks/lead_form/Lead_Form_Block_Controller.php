@@ -24,6 +24,7 @@ class Lead_Form_Block_Controller extends Abstract_Controller {
 	public const FORM_CLASSES      = 'form_classes';
 	public const CLASSES           = 'classes';
 	public const ATTRS             = 'attrs';
+	public const BACKGROUND        = 'background';
 
 	private string $width;
 	private string $layout;
@@ -36,6 +37,7 @@ class Lead_Form_Block_Controller extends Abstract_Controller {
 	private array  $form_classes;
 	private array  $classes;
 	private array  $attrs;
+	private string $background;
 
 	/**
 	 * @param array $args
@@ -54,6 +56,7 @@ class Lead_Form_Block_Controller extends Abstract_Controller {
 		$this->form_classes      = (array) $args[ self::FORM_CLASSES ];
 		$this->classes           = (array) $args[ self::CLASSES ];
 		$this->attrs             = (array) $args[ self::ATTRS ];
+		$this->background        = (string) $args[ self::BACKGROUND ];
 	}
 
 	/**
@@ -62,7 +65,8 @@ class Lead_Form_Block_Controller extends Abstract_Controller {
 	protected function defaults(): array {
 		return [
 			self::WIDTH             => Lead_Form_Block::WIDTH_GRID,
-			self::LAYOUT            => Lead_Form_Block::LAYOUT_CENTER,
+			self::LAYOUT            => Lead_Form_Block::LAYOUT_BOTTOM,
+			self::BACKGROUND        => Lead_Form_Block::BACKGROUND_LIGHT,
 			self::TITLE             => '',
 			self::LEADIN            => '',
 			self::DESCRIPTION       => '',
@@ -93,6 +97,11 @@ class Lead_Form_Block_Controller extends Abstract_Controller {
 		$this->classes[] = 'b-lead-form--layout-' . $this->layout;
 		$this->classes[] = 'b-lead-form--width-' . $this->width;
 
+		// CASE: Full Width and Background Dark
+		if ( $this->width === Lead_Form_Block::WIDTH_FULL && $this->background === Lead_Form_Block::BACKGROUND_DARK ) {
+			$this->classes[] = 'b-lead-form--dark';
+		}
+
 		if ( $this->width === Lead_Form_Block::WIDTH_GRID ) {
 			$this->classes[] = 'l-container';
 		}
@@ -119,6 +128,11 @@ class Lead_Form_Block_Controller extends Abstract_Controller {
 			$this->container_classes[] = 'l-container';
 		}
 
+		// CASE: Grid Width and Background Dark
+		if ( $this->width === Lead_Form_Block::WIDTH_GRID && $this->background === Lead_Form_Block::BACKGROUND_DARK ) {
+			$this->container_classes[] = 'b-lead-form--dark';
+		}
+
 		return Markup_Utils::class_attribute( $this->container_classes );
 	}
 
@@ -139,7 +153,7 @@ class Lead_Form_Block_Controller extends Abstract_Controller {
 
 		return [
 			Content_Block_Controller::TAG     => 'header',
-			Content_Block_Controller::LAYOUT  => $this->layout === Lead_Form_Block::LAYOUT_CENTER ? Content_Block_Controller::LAYOUT_CENTER : Content_Block_Controller::LAYOUT_LEFT,
+			Content_Block_Controller::LAYOUT  => $this->layout === Lead_Form_Block::LAYOUT_BOTTOM ? Content_Block_Controller::LAYOUT_CENTER : Content_Block_Controller::LAYOUT_LEFT,
 			Content_Block_Controller::LEADIN  => $this->get_leadin(),
 			Content_Block_Controller::TITLE   => $this->get_title(),
 			Content_Block_Controller::CONTENT => $this->get_content(),

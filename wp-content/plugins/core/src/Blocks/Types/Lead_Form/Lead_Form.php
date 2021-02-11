@@ -21,12 +21,17 @@ class Lead_Form extends Block_Config {
 
 	public const SECTION_SETTINGS = 's-settings';
 	public const LAYOUT           = 'layout';
-	public const LAYOUT_CENTER    = 'center';
 	public const LAYOUT_LEFT      = 'left';
+	public const LAYOUT_RIGHT     = 'right';
+	public const LAYOUT_BOTTOM    = 'bottom';
 
 	public const WIDTH      = 'width';
 	public const WIDTH_GRID = 'grid';
 	public const WIDTH_FULL = 'full';
+
+	public const BACKGROUND       = 'background';
+	public const BACKGROUND_LIGHT = 'background_light';
+	public const BACKGROUND_DARK  = 'background_dark';
 
 	/**
 	 * Register the block
@@ -72,12 +77,12 @@ class Lead_Form extends Block_Config {
 		// Content Fields
 		//==========================================
 		$this->add_section( new Field_Section( self::SECTION_CONTENT, __( 'Content', 'tribe' ), 'accordion' ) )
-			 ->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
-					 'label' => __( 'Lead in', 'tribe' ),
-					 'name'  => self::LEAD_IN,
-					 'type'  => 'text',
-				 ] )
-			 )->add_field( new Field( self::NAME . '_' . self::TITLE, [
+			->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
+					'label' => __( 'Lead in', 'tribe' ),
+					'name'  => self::LEAD_IN,
+					'type'  => 'text',
+				] )
+			)->add_field( new Field( self::NAME . '_' . self::TITLE, [
 					'label' => __( 'Title', 'tribe' ),
 					'name'  => self::TITLE,
 					'type'  => 'text',
@@ -106,32 +111,35 @@ class Lead_Form extends Block_Config {
 		// Setting Fields
 		//==========================================
 		$this->add_section( new Field_Section( self::SECTION_SETTINGS, __( 'Settings', 'tribe' ), 'accordion' ) )
-			 ->add_field(
-				 new Field( self::NAME . '_' . self::LAYOUT, [
-					 'type'            => 'image_select',
-					 'name'            => self::LAYOUT,
-					 'choices'         => [
-						 self::LAYOUT_LEFT   => __( 'Content Left', 'tribe' ),
-						 self::LAYOUT_CENTER => __( 'Content Center', 'tribe' ),
-					 ],
-					 'default_value'   => self::LAYOUT_CENTER,
-					 'multiple'        => 0,
-					 'image_path'      => sprintf(
-						 '%sassets/img/admin/blocks/%s/',
-						 trailingslashit( get_template_directory_uri() ),
-						 self::NAME
-					 ),
-					 'image_extension' => 'svg',
-				 ] )
-			 )->add_field(
-				 new Field( self::NAME . '_' . self::WIDTH, [
+			->add_field(
+				new Field( self::NAME . '_' . self::WIDTH, [
+				'type'            => 'image_select',
+				'name'            => self::WIDTH,
+				'label'           => __( 'Container Width', 'tribe' ),
+				'choices'         => [
+					self::WIDTH_GRID => __( 'Grid', 'tribe' ),
+					self::WIDTH_FULL => __( 'Full', 'tribe' ),
+				],
+				'default_value'   => self::WIDTH_GRID,
+				'multiple'        => 0,
+				'image_path'      => sprintf(
+					'%sassets/img/admin/blocks/%s/',
+					trailingslashit( get_template_directory_uri() ),
+					self::NAME
+				),
+				'image_extension' => 'svg',
+				] )
+			)->add_field(
+				new Field( self::NAME . '_' . self::LAYOUT, [
 					'type'            => 'image_select',
-					'name'            => self::WIDTH,
+					'name'            => self::LAYOUT,
+					'label'           => __( 'Form Layout', 'tribe' ),
 					'choices'         => [
-						self::WIDTH_GRID => __( 'Grid', 'tribe' ),
-						self::WIDTH_FULL => __( 'Full', 'tribe' ),
+						self::LAYOUT_LEFT   => __( 'Form Left', 'tribe' ),
+						self::LAYOUT_RIGHT  => __( 'Form Right', 'tribe' ),
+						self::LAYOUT_BOTTOM => __( 'Form Bottom', 'tribe' ),
 					],
-					'default_value'   => self::WIDTH_GRID,
+					'default_value'   => self::LAYOUT_BOTTOM,
 					'multiple'        => 0,
 					'image_path'      => sprintf(
 						'%sassets/img/admin/blocks/%s/',
@@ -139,8 +147,19 @@ class Lead_Form extends Block_Config {
 						self::NAME
 					),
 					'image_extension' => 'svg',
-				 ] )
-			 );
+				] )
+			)->add_field(
+				new Field( self::NAME . '_' . self::BACKGROUND, [
+					'type'            => 'radio',
+					'name'            => self::BACKGROUND,
+					'label'           => __( 'Background Color', 'tribe' ),
+					'choices'         => [
+						self::BACKGROUND_LIGHT   => __( 'Light', 'tribe' ),
+						self::BACKGROUND_DARK    => __( 'Dark', 'tribe' ),
+					],
+					'default_value'   => self::BACKGROUND_LIGHT,
+				] )
+			);
 	}
 
 	/**
