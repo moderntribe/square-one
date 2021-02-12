@@ -25,6 +25,7 @@ class Lead_Form_Block_Controller extends Abstract_Controller {
 	public const CLASSES           = 'classes';
 	public const ATTRS             = 'attrs';
 	public const BACKGROUND        = 'background';
+	public const FORM_FIELDS       = 'form_fields';
 
 	private string $width;
 	private string $layout;
@@ -38,6 +39,7 @@ class Lead_Form_Block_Controller extends Abstract_Controller {
 	private array  $classes;
 	private array  $attrs;
 	private string $background;
+	private string $form_fields;
 
 	/**
 	 * @param array $args
@@ -57,6 +59,7 @@ class Lead_Form_Block_Controller extends Abstract_Controller {
 		$this->classes           = (array) $args[ self::CLASSES ];
 		$this->attrs             = (array) $args[ self::ATTRS ];
 		$this->background        = (string) $args[ self::BACKGROUND ];
+		$this->form_fields       = (string) $args[ self::FORM_FIELDS ];
 	}
 
 	/**
@@ -67,6 +70,7 @@ class Lead_Form_Block_Controller extends Abstract_Controller {
 			self::WIDTH             => Lead_Form_Block::WIDTH_GRID,
 			self::LAYOUT            => Lead_Form_Block::LAYOUT_BOTTOM,
 			self::BACKGROUND        => Lead_Form_Block::BACKGROUND_LIGHT,
+			self::FORM_FIELDS       => Lead_Form_Block::FORM_STACKED,
 			self::TITLE             => '',
 			self::LEADIN            => '',
 			self::DESCRIPTION       => '',
@@ -140,6 +144,11 @@ class Lead_Form_Block_Controller extends Abstract_Controller {
 	 * @return string
 	 */
 	public function get_form_classes(): string {
+		// CASE: Inline Forms
+		if ( $this->form_fields === Lead_Form_Block::FORM_INLINE ) {
+			$this->form_classes[] = 'b-lead-form--fields-inline';
+		}
+
 		return Markup_Utils::class_attribute( $this->form_classes );
 	}
 

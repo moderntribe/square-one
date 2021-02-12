@@ -23,6 +23,33 @@
 			padding: 0;
 			font-size: 16px;
 		}
+
+		/* CASE: Lead Form: Form Fields Inline */
+		.b-lead-form--fields-inline & {
+			display: flex;
+			align-items: center;
+		}
+	}
+
+	.gform_body {
+		/* CASE: Lead Form: Form Fields Inline */
+		.b-lead-form--fields-inline & {
+			flex: 1;
+		}
+	}
+
+	.gfield_label {
+		/* CASE: Lead Form: Background Dark */
+		.b-lead-form--dark & {
+			color: var(--color-white);
+		}
+	}
+
+	.gform_footer {
+		/* CASE: Lead Form: Form Fields Inline */
+		.b-lead-form--fields-inline & {
+			margin-left: var(--spacer-10);
+		}
 	}
 
 	/* Inputs: Honeypot */

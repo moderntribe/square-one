@@ -33,6 +33,10 @@ class Lead_Form extends Block_Config {
 	public const BACKGROUND_LIGHT = 'background_light';
 	public const BACKGROUND_DARK  = 'background_dark';
 
+	public const FORM_FIELDS  = 'form_fields';
+	public const FORM_STACKED = 'form_stacked';
+	public const FORM_INLINE  = 'form_inline';
+
 	/**
 	 * Register the block
 	 */
@@ -130,6 +134,17 @@ class Lead_Form extends Block_Config {
 				'image_extension' => 'svg',
 				] )
 			)->add_field(
+				new Field( self::NAME . '_' . self::BACKGROUND, [
+					'type'            => 'radio',
+					'name'            => self::BACKGROUND,
+					'label'           => __( 'Background Color', 'tribe' ),
+					'choices'         => [
+						self::BACKGROUND_LIGHT   => __( 'Light', 'tribe' ),
+						self::BACKGROUND_DARK    => __( 'Dark', 'tribe' ),
+					],
+					'default_value'   => self::BACKGROUND_LIGHT,
+				] )
+			)->add_field(
 				new Field( self::NAME . '_' . self::LAYOUT, [
 					'type'            => 'image_select',
 					'name'            => self::LAYOUT,
@@ -149,15 +164,15 @@ class Lead_Form extends Block_Config {
 					'image_extension' => 'svg',
 				] )
 			)->add_field(
-				new Field( self::NAME . '_' . self::BACKGROUND, [
+				new Field( self::NAME . '_' . self::FORM_FIELDS, [
 					'type'            => 'radio',
-					'name'            => self::BACKGROUND,
-					'label'           => __( 'Background Color', 'tribe' ),
+					'name'            => self::FORM_FIELDS,
+					'label'           => __( 'Form Field Position', 'tribe' ),
 					'choices'         => [
-						self::BACKGROUND_LIGHT   => __( 'Light', 'tribe' ),
-						self::BACKGROUND_DARK    => __( 'Dark', 'tribe' ),
+						self::FORM_STACKED   => __( 'Stacked', 'tribe' ),
+						self::FORM_INLINE    => __( 'Inline', 'tribe' ),
 					],
-					'default_value'   => self::BACKGROUND_LIGHT,
+					'default_value'   => self::FORM_STACKED,
 				] )
 			);
 	}
