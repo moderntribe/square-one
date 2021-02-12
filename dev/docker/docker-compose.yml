@@ -24,7 +24,7 @@ x-memcached: &memcached
 
 
 x-chrome: &chrome
-  image: 'selenium/standalone-chrome:3.141.59-oxygen'
+  image: 'selenium/standalone-chrome:3.141.59'
   volumes:
     - '/dev/shm:/dev/shm'
   ports:
