@@ -135,7 +135,7 @@ class Icon_Grid_Controller extends Abstract_Controller {
 				'b-icon-grid__leadin',
 				'h6',
 			],
-			Text_Controller::CONTENT => $this->leadin ?? '',
+			Text_Controller::CONTENT => $this->leadin,
 		] );
 	}
 
@@ -149,7 +149,7 @@ class Icon_Grid_Controller extends Abstract_Controller {
 				'c-block__title',
 				'h3',
 			],
-			Text_Controller::CONTENT => $this->title ?? '',
+			Text_Controller::CONTENT => $this->title,
 		] );
 	}
 
@@ -164,7 +164,7 @@ class Icon_Grid_Controller extends Abstract_Controller {
 				't-sink',
 				's-sink',
 			],
-			Container_Controller::CONTENT => $this->description ?? '',
+			Container_Controller::CONTENT => $this->description,
 		] );
 	}
 
