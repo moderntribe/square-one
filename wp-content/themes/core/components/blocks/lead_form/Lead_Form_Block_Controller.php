@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare( strict_types=1 );
 
 namespace Tribe\Project\Templates\Components\blocks\lead_form;
 
@@ -244,7 +243,7 @@ class Lead_Form_Block_Controller extends Abstract_Controller {
 	/**
 	 * @return mixed
 	 */
-	public function get_form_id() {
+	public function get_form_id(): mixed {
 		return $this->form;
 	}
 
