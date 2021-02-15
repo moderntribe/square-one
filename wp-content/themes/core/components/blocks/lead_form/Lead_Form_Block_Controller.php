@@ -241,9 +241,9 @@ class Lead_Form_Block_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return mixed
+	 * @return int
 	 */
-	public function get_form_id(): mixed {
+	public function get_form_id(): int {
 		return $this->form;
 	}
 

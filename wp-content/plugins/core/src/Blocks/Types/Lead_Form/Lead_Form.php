@@ -116,7 +116,7 @@ class Lead_Form extends Block_Config {
 		$this->add_section( new Field_Section( self::SECTION_SETTINGS, __( 'Settings', 'tribe' ), 'accordion' ) )
 			->add_field(
 				new Field( self::NAME . '_' . self::WIDTH, [
-				'type'            => 'image_select',
+				'type'            => 'radio',
 				'name'            => self::WIDTH,
 				'label'           => __( 'Container Width', 'tribe' ),
 				'choices'         => [
@@ -124,13 +124,6 @@ class Lead_Form extends Block_Config {
 					self::WIDTH_FULL => __( 'Full', 'tribe' ),
 				],
 				'default_value'   => self::WIDTH_GRID,
-				'multiple'        => 0,
-				'image_path'      => sprintf(
-					'%sassets/img/admin/blocks/%s/',
-					trailingslashit( get_template_directory_uri() ),
-					self::NAME
-				),
-				'image_extension' => 'svg',
 				] )
 			)->add_field(
 				new Field( self::NAME . '_' . self::BACKGROUND, [
@@ -164,7 +157,7 @@ class Lead_Form extends Block_Config {
 				] )
 			)->add_field(
 				new Field( self::NAME . '_' . self::FORM_FIELDS, [
-					'type'            => 'radio',
+					'type'            => 'image_select',
 					'name'            => self::FORM_FIELDS,
 					'label'           => __( 'Form Field Position', 'tribe' ),
 					'choices'         => [
@@ -172,6 +165,13 @@ class Lead_Form extends Block_Config {
 						self::FORM_INLINE    => __( 'Inline', 'tribe' ),
 					],
 					'default_value'   => self::FORM_STACKED,
+					'multiple'        => 0,
+					'image_path'      => sprintf(
+						'%sassets/img/admin/blocks/%s/',
+						trailingslashit( get_template_directory_uri() ),
+						self::NAME
+					),
+					'image_extension' => 'svg',
 				] )
 			);
 	}
