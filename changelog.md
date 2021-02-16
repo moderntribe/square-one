@@ -3,6 +3,8 @@
 All notable changes to this project will be documented in this file.
 
 ## 2021.02
+* Fixed: An issue with the callback used in the `scroll-to` script.
+* Added: Handling for broken browser implementation of skip links and adding automatic focus switching for anchor hash links for a11y.
 * Fixed: Add header and footer templates to ensure default TEC templates will load.
 
 ## 2021.01
