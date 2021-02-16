@@ -25,10 +25,11 @@ class Card_Controller extends Abstract_Controller {
 	public const CTA             = 'cta';
 	public const USE_TARGET_LINK = 'use_target_link';
 
-	public const STYLE          = 'style';
-	public const STYLE_PLAIN    = 'plain';
-	public const STYLE_ELEVATED = 'elevated';
-	public const STYLE_OUTLINED = 'outlined';
+	public const STYLE            = 'style';
+	public const STYLE_PLAIN      = 'plain';
+	public const STYLE_ELEVATED   = 'elevated';
+	public const STYLE_OUTLINED   = 'outlined';
+	public const STYLE_INLINE     = 'inline';
 
 	private string $tag;
 	private array  $classes;

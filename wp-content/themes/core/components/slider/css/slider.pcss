@@ -13,9 +13,35 @@
 		margin: var(--spacer-70) auto;
 		max-width: none;
 	}
+
+	/*CASE: Dialog */
+	.c-dialog & {
+		margin: 0 auto;
+		position: relative;
+
+		@media (--viewport-medium) {
+			margin: 0 auto;
+		}
+	}
 }
 
-/* Main Slider */
+.c-slider__wrapper {
+
+	/* CASE: Dialog */
+	.c-dialog & {
+		padding: var(--spacer-30) 0 var(--spacer-70);
+
+		@media (--viewport-full) {
+			align-items: center;
+		}
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ *
+ * Main Slider
+ *
+ * ----------------------------------------------------------------------------- */
 
 .c-slider__main {
 
@@ -31,7 +57,11 @@
 	}
 }
 
-/* Carousel */
+/* -----------------------------------------------------------------------------
+ *
+ * Slider Carousel
+ *
+ * ----------------------------------------------------------------------------- */
 
 .c-slider__carousel {
 	margin-top: 10px;
@@ -42,5 +72,89 @@
 		padding: 0;
 		border: 0;
 		background: none;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ *
+ * Slider Arrows
+ *
+ * ----------------------------------------------------------------------------- */
+
+.c-slider__button--prev,
+.c-slider__button--next {
+
+	/* CASE: Dialog */
+	.c-dialog & {
+		display: none;
+		align-items: center;
+		justify-content: center;
+		top: 50%;
+		height: 50px;
+		width: 50px;
+		margin-top: 0;
+		border: 1px solid var(--color-white);
+		background: transparent;
+		color: var(--color-white);
+		transition: var(--transition);
+		transform: translateY(-50%);
+		opacity: 0.5;
+
+		&:before {
+			display: none;
+		}
+
+			&:after {
+			color: var(--color-white);
+			content: var(--icon-chevron-right);
+			font-family: var(--font-family-core-icons);
+			font-size: 22px;
+		}
+
+		&:focus,
+		&:hover {
+			background-color: var(--color-white);
+			opacity: 1;
+			transition: var(--transition);
+			
+
+			&:after {
+				color: var(--color-black);
+			}
+		}
+
+		&:focus {
+			outline: none;
+		}
+
+		@media (--viewport-full) {
+			display: flex;
+		}
+	}
+}
+
+.c-slider__button--next,
+.swiper-container-rtl .c-slider__button--prev {
+
+	/* CASE: Dialog */
+	.c-dialog & {
+		right: -102px;
+
+		&:after {
+			content: var(--icon-chevron-right);
+		}
+	}
+}
+
+.c-slider__button--prev,
+.swiper-container-rtl .c-slider__button--next {
+
+	/* CASE: Dialog */
+	.c-dialog & {
+		left: -102px;
+
+		&:after {
+			content: var(--icon-chevron-left);
+		}
 	}
 }
