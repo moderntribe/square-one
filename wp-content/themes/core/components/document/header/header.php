@@ -35,4 +35,8 @@ $c = Header_Controller::factory();
 
 	<div class="l-wrapper" data-js="site-wrap">
 
+		<a href="#main-content" class="a11y-skip-link u-visually-hidden">
+			<?php esc_html_e( 'Skip to main content', 'tribe' ); ?>
+		</a>
+
 		<?php get_template_part( 'components/header/masthead/masthead' ); ?>
