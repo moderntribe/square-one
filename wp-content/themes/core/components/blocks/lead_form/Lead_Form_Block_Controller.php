@@ -102,7 +102,7 @@ class Lead_Form_Block_Controller extends Abstract_Controller {
 
 		// CASE: Full Width and Background Dark
 		if ( $this->width === Lead_Form_Block::WIDTH_FULL && $this->background === Lead_Form_Block::BACKGROUND_DARK ) {
-			$this->classes[] = 'b-lead-form--dark';
+			$this->classes[] = 't-theme--light';
 		}
 
 		if ( $this->width === Lead_Form_Block::WIDTH_GRID ) {
@@ -133,7 +133,7 @@ class Lead_Form_Block_Controller extends Abstract_Controller {
 
 		// CASE: Grid Width and Background Dark
 		if ( $this->width === Lead_Form_Block::WIDTH_GRID && $this->background === Lead_Form_Block::BACKGROUND_DARK ) {
-			$this->container_classes[] = 'b-lead-form--dark';
+			$this->container_classes[] = 't-theme--light';
 		}
 
 		return Markup_Utils::class_attribute( $this->container_classes );
@@ -145,7 +145,7 @@ class Lead_Form_Block_Controller extends Abstract_Controller {
 	public function get_form_classes(): string {
 		// CASE: Inline Forms
 		if ( $this->form_fields === Lead_Form_Block::FORM_INLINE ) {
-			$this->form_classes[] = 'b-lead-form--fields-inline';
+			$this->form_classes[] = 'gform_inline';
 		}
 
 		return Markup_Utils::class_attribute( $this->form_classes );
