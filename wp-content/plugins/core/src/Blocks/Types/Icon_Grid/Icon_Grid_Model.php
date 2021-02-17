@@ -16,6 +16,7 @@ use Tribe\Project\Templates\Components\link\Link_Controller;
 class Icon_Grid_Model extends Base_Model {
 	public function get_data(): array {
 		return [
+			Icon_Grid_Controller::ATTRS       => $this->get_attrs(),
 			Icon_Grid_Controller::CLASSES     => $this->get_classes(),
 			Icon_Grid_Controller::TITLE       => $this->get( Icon_Grid::TITLE, '' ),
 			Icon_Grid_Controller::LEADIN      => $this->get( Icon_Grid::LEADIN, '' ),
