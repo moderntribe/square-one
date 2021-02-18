@@ -8,9 +8,11 @@ use Tribe\Libs\Container\Definer_Interface;
 use Tribe\Project\Blocks\Types\Buttons\Buttons;
 use Tribe\Project\Blocks\Types\Card_Grid\Card_Grid;
 use Tribe\Project\Blocks\Types\Content_Columns\Content_Columns;
+use Tribe\Project\Blocks\Types\Content_Loop\Content_Loop;
 use Tribe\Project\Blocks\Types\Interstitial\Interstitial;
 use Tribe\Project\Blocks\Types\Accordion\Accordion;
 use Tribe\Project\Blocks\Types\Hero\Hero;
+use Tribe\Project\Blocks\Types\Icon_Grid\Icon_Grid;
 use Tribe\Project\Blocks\Types\Lead_Form\Lead_Form;
 use Tribe\Project\Blocks\Types\Links\Links;
 use Tribe\Project\Blocks\Types\Logos\Logos;
@@ -18,6 +20,7 @@ use Tribe\Project\Blocks\Types\Media_Text\Media_Text;
 use Tribe\Project\Blocks\Types\Quote\Quote;
 use Tribe\Project\Blocks\Types\Stats\Stats;
 use Tribe\Project\Blocks\Types\Tabs\Tabs;
+use Tribe\Project\Blocks\Types\Gallery_Grid\Gallery_Grid;
 
 class Blocks_Definer implements Definer_Interface {
 
@@ -29,11 +32,14 @@ class Blocks_Definer implements Definer_Interface {
 	public function define(): array {
 		return [
 			self::TYPES => DI\add( [
+				DI\get( Content_Loop::class ),
 				DI\get( Accordion::class ),
 				DI\get( Buttons::class ),
 				DI\get( Card_Grid::class ),
 				DI\get( Content_Columns::class ),
+				DI\get( Gallery_Grid::class ),
 				DI\get( Hero::class ),
+				DI\get( Icon_Grid::class ),
 				DI\get( Media_Text::class ),
 				DI\get( Interstitial::class ),
 				DI\get( Lead_Form::class ),
@@ -57,11 +63,14 @@ class Blocks_Definer implements Definer_Interface {
 			 * Includes any 3rd-party block supported by this project, such as Gravity Forms.
 			 */
 			self::ALLOW_LIST => [
+				'acf/gallerygrid',
+				'acf/contentloop',
 				'acf/accordion',
 				'acf/buttons',
 				'acf/cardgrid',
 				'acf/contentcolumns',
 				'acf/hero',
+				'acf/icongrid',
 				'acf/interstitial',
 				'acf/leadform',
 				'acf/links',
