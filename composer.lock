@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7068fdff72dd56611027e2aea074c36a",
+    "content-hash": "f977f6d7c81e65d0ec43133b09fd7212",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -20,16 +20,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.173.7",
+            "version": "3.173.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "854b9f827438d1d69df6550d9ada40deaa6d44fe"
+                "reference": "4913ae66a988ffb3313bc138e8bd16273b68c8eb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/854b9f827438d1d69df6550d9ada40deaa6d44fe",
-                "reference": "854b9f827438d1d69df6550d9ada40deaa6d44fe",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/4913ae66a988ffb3313bc138e8bd16273b68c8eb",
+                "reference": "4913ae66a988ffb3313bc138e8bd16273b68c8eb",
                 "shasum": ""
             },
             "require": {
@@ -101,7 +101,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2021-02-11T19:13:05+00:00"
+            "time": "2021-02-18T19:20:31+00:00"
         },
         {
             "name": "clue/stream-filter",
@@ -986,19 +986,20 @@
         },
         {
             "name": "moderntribe/tribe-acf-post-list-field",
-            "version": "1.0.0",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "git@github.com:moderntribe/tribe-acf-post-list-field.git",
-                "reference": "8964eb02c6ad878637b74edac91136c0c74da668"
+                "reference": "860e79b45b3c628b1f88a649762c275573b2e68d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/tribe-acf-post-list-field/zipball/8964eb02c6ad878637b74edac91136c0c74da668",
-                "reference": "8964eb02c6ad878637b74edac91136c0c74da668",
+                "url": "https://api.github.com/repos/moderntribe/tribe-acf-post-list-field/zipball/860e79b45b3c628b1f88a649762c275573b2e68d",
+                "reference": "860e79b45b3c628b1f88a649762c275573b2e68d",
                 "shasum": ""
             },
             "require": {
+                "ext-json": "*",
                 "php": "^7.2"
             },
             "type": "wordpress-plugin",
@@ -1014,7 +1015,7 @@
                 }
             ],
             "description": "A post list field type for Advanced Custom Fields",
-            "time": "2021-02-02T13:47:32+00:00"
+            "time": "2021-02-18T01:15:06+00:00"
         },
         {
             "name": "moderntribe/tribe-libs",
@@ -2665,7 +2666,7 @@
         },
         {
             "name": "symfony/polyfill-ctype",
-            "version": "v1.22.0",
+            "version": "v1.22.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-ctype.git",
@@ -2741,16 +2742,16 @@
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.22.0",
+            "version": "v1.22.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "f377a3dd1fde44d37b9831d68dc8dea3ffd28e13"
+                "reference": "5232de97ee3b75b0360528dae24e73db49566ab1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/f377a3dd1fde44d37b9831d68dc8dea3ffd28e13",
-                "reference": "f377a3dd1fde44d37b9831d68dc8dea3ffd28e13",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/5232de97ee3b75b0360528dae24e73db49566ab1",
+                "reference": "5232de97ee3b75b0360528dae24e73db49566ab1",
                 "shasum": ""
             },
             "require": {
@@ -2814,11 +2815,11 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-01-07T16:49:33+00:00"
+            "time": "2021-01-22T09:19:47+00:00"
         },
         {
             "name": "symfony/polyfill-php73",
-            "version": "v1.22.0",
+            "version": "v1.22.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php73.git",
@@ -2894,7 +2895,7 @@
         },
         {
             "name": "symfony/polyfill-php80",
-            "version": "v1.22.0",
+            "version": "v1.22.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php80.git",
@@ -3430,27 +3431,26 @@
         },
         {
             "name": "automattic/phpcs-neutron-standard",
-            "version": "v1.6.0",
+            "version": "v1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Automattic/phpcs-neutron-standard.git",
-                "reference": "ecfaff20035751c1e3aab08483a2f11013d58cad"
+                "reference": "566ad70534296073afa9143858671356444ddead"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Automattic/phpcs-neutron-standard/zipball/ecfaff20035751c1e3aab08483a2f11013d58cad",
-                "reference": "ecfaff20035751c1e3aab08483a2f11013d58cad",
+                "url": "https://api.github.com/repos/Automattic/phpcs-neutron-standard/zipball/566ad70534296073afa9143858671356444ddead",
+                "reference": "566ad70534296073afa9143858671356444ddead",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.0"
+                "php": "^7.0 || ^8.0",
+                "squizlabs/php_codesniffer": "^3.3.0"
             },
             "require-dev": {
-                "dealerdirect/phpcodesniffer-composer-installer": "^0.4.4",
-                "limedeck/phpunit-detailed-printer": "^3.1",
-                "phpunit/phpunit": "^6.4",
-                "sirbrillig/phpcs-variable-analysis": "^2.0.1",
-                "squizlabs/php_codesniffer": "3.3.0"
+                "dealerdirect/phpcodesniffer-composer-installer": "^0.4.4 || ^0.5 || ^0.6 || ^0.7",
+                "phpunit/phpunit": "^5.0 || ^6.5 || ^7.0 || ^8.0",
+                "sirbrillig/phpcs-variable-analysis": "^2.0.1"
             },
             "type": "phpcodesniffer-standard",
             "autoload": {
@@ -3469,7 +3469,7 @@
                 }
             ],
             "description": "A set of phpcs sniffs for modern php development.",
-            "time": "2020-05-25T22:07:24+00:00"
+            "time": "2021-02-15T22:42:03+00:00"
         },
         {
             "name": "automattic/vipwpcs",
@@ -5077,16 +5077,16 @@
         },
         {
             "name": "illuminate/collections",
-            "version": "v8.27.0",
+            "version": "v8.28.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/collections.git",
-                "reference": "904b28a184a8e3570e5312e6d0438d7df4b641ce"
+                "reference": "7153004582fb4ab8809a9e491960e250e12a4e7b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/collections/zipball/904b28a184a8e3570e5312e6d0438d7df4b641ce",
-                "reference": "904b28a184a8e3570e5312e6d0438d7df4b641ce",
+                "url": "https://api.github.com/repos/illuminate/collections/zipball/7153004582fb4ab8809a9e491960e250e12a4e7b",
+                "reference": "7153004582fb4ab8809a9e491960e250e12a4e7b",
                 "shasum": ""
             },
             "require": {
@@ -5123,11 +5123,11 @@
             ],
             "description": "The Illuminate Collections package.",
             "homepage": "https://laravel.com",
-            "time": "2021-01-30T19:50:02+00:00"
+            "time": "2021-02-15T15:07:11+00:00"
         },
         {
             "name": "illuminate/contracts",
-            "version": "v8.27.0",
+            "version": "v8.28.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
@@ -5171,7 +5171,7 @@
         },
         {
             "name": "illuminate/macroable",
-            "version": "v8.27.0",
+            "version": "v8.28.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/macroable.git",
@@ -5213,16 +5213,16 @@
         },
         {
             "name": "illuminate/support",
-            "version": "v8.27.0",
+            "version": "v8.28.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "6894f5ec754e875274e7628d4959ad69e6b7b27d"
+                "reference": "b2f3711b8790de772703e003deb04d5766092b20"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/6894f5ec754e875274e7628d4959ad69e6b7b27d",
-                "reference": "6894f5ec754e875274e7628d4959ad69e6b7b27d",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/b2f3711b8790de772703e003deb04d5766092b20",
+                "reference": "b2f3711b8790de772703e003deb04d5766092b20",
                 "shasum": ""
             },
             "require": {
@@ -5273,7 +5273,7 @@
             ],
             "description": "The Illuminate Support package.",
             "homepage": "https://laravel.com",
-            "time": "2021-02-08T14:49:31+00:00"
+            "time": "2021-02-15T15:06:32+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
@@ -6153,28 +6153,28 @@
         },
         {
             "name": "phpcompatibility/phpcompatibility-paragonie",
-            "version": "1.3.0",
+            "version": "1.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPCompatibility/PHPCompatibilityParagonie.git",
-                "reference": "b862bc32f7e860d0b164b199bd995e690b4b191c"
+                "reference": "ddabec839cc003651f2ce695c938686d1086cf43"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPCompatibility/PHPCompatibilityParagonie/zipball/b862bc32f7e860d0b164b199bd995e690b4b191c",
-                "reference": "b862bc32f7e860d0b164b199bd995e690b4b191c",
+                "url": "https://api.github.com/repos/PHPCompatibility/PHPCompatibilityParagonie/zipball/ddabec839cc003651f2ce695c938686d1086cf43",
+                "reference": "ddabec839cc003651f2ce695c938686d1086cf43",
                 "shasum": ""
             },
             "require": {
                 "phpcompatibility/php-compatibility": "^9.0"
             },
             "require-dev": {
-                "dealerdirect/phpcodesniffer-composer-installer": "^0.5",
+                "dealerdirect/phpcodesniffer-composer-installer": "^0.7",
                 "paragonie/random_compat": "dev-master",
                 "paragonie/sodium_compat": "dev-master"
             },
             "suggest": {
-                "dealerdirect/phpcodesniffer-composer-installer": "^0.5 || This Composer plugin will sort out the PHP_CodeSniffer 'installed_paths' automatically.",
+                "dealerdirect/phpcodesniffer-composer-installer": "^0.7 || This Composer plugin will sort out the PHP_CodeSniffer 'installed_paths' automatically.",
                 "roave/security-advisories": "dev-master || Helps prevent installing dependencies with known security issues."
             },
             "type": "phpcodesniffer-standard",
@@ -6201,20 +6201,20 @@
                 "polyfill",
                 "standards"
             ],
-            "time": "2019-11-04T15:17:54+00:00"
+            "time": "2021-02-15T10:24:51+00:00"
         },
         {
             "name": "phpcompatibility/phpcompatibility-wp",
-            "version": "2.1.0",
+            "version": "2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPCompatibility/PHPCompatibilityWP.git",
-                "reference": "41bef18ba688af638b7310666db28e1ea9158b2f"
+                "reference": "b7dc0cd7a8f767ccac5e7637550ea1c50a67b09e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPCompatibility/PHPCompatibilityWP/zipball/41bef18ba688af638b7310666db28e1ea9158b2f",
-                "reference": "41bef18ba688af638b7310666db28e1ea9158b2f",
+                "url": "https://api.github.com/repos/PHPCompatibility/PHPCompatibilityWP/zipball/b7dc0cd7a8f767ccac5e7637550ea1c50a67b09e",
+                "reference": "b7dc0cd7a8f767ccac5e7637550ea1c50a67b09e",
                 "shasum": ""
             },
             "require": {
@@ -6222,10 +6222,10 @@
                 "phpcompatibility/phpcompatibility-paragonie": "^1.0"
             },
             "require-dev": {
-                "dealerdirect/phpcodesniffer-composer-installer": "^0.5"
+                "dealerdirect/phpcodesniffer-composer-installer": "^0.7"
             },
             "suggest": {
-                "dealerdirect/phpcodesniffer-composer-installer": "^0.5 || This Composer plugin will sort out the PHP_CodeSniffer 'installed_paths' automatically.",
+                "dealerdirect/phpcodesniffer-composer-installer": "^0.7 || This Composer plugin will sort out the PHP_CodeSniffer 'installed_paths' automatically.",
                 "roave/security-advisories": "dev-master || Helps prevent installing dependencies with known security issues."
             },
             "type": "phpcodesniffer-standard",
@@ -6251,7 +6251,7 @@
                 "standards",
                 "wordpress"
             ],
-            "time": "2019-08-28T14:22:28+00:00"
+            "time": "2021-02-15T12:58:46+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -8676,16 +8676,16 @@
         },
         {
             "name": "symfony/polyfill-intl-grapheme",
-            "version": "v1.22.0",
+            "version": "v1.22.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-intl-grapheme.git",
-                "reference": "267a9adeb8ecb8071040a740930e077cdfb987af"
+                "reference": "5601e09b69f26c1828b13b6bb87cb07cddba3170"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-intl-grapheme/zipball/267a9adeb8ecb8071040a740930e077cdfb987af",
-                "reference": "267a9adeb8ecb8071040a740930e077cdfb987af",
+                "url": "https://api.github.com/repos/symfony/polyfill-intl-grapheme/zipball/5601e09b69f26c1828b13b6bb87cb07cddba3170",
+                "reference": "5601e09b69f26c1828b13b6bb87cb07cddba3170",
                 "shasum": ""
             },
             "require": {
@@ -8750,20 +8750,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-01-07T16:49:33+00:00"
+            "time": "2021-01-22T09:19:47+00:00"
         },
         {
             "name": "symfony/polyfill-intl-normalizer",
-            "version": "v1.22.0",
+            "version": "v1.22.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-intl-normalizer.git",
-                "reference": "6e971c891537eb617a00bb07a43d182a6915faba"
+                "reference": "43a0283138253ed1d48d352ab6d0bdb3f809f248"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-intl-normalizer/zipball/6e971c891537eb617a00bb07a43d182a6915faba",
-                "reference": "6e971c891537eb617a00bb07a43d182a6915faba",
+                "url": "https://api.github.com/repos/symfony/polyfill-intl-normalizer/zipball/43a0283138253ed1d48d352ab6d0bdb3f809f248",
+                "reference": "43a0283138253ed1d48d352ab6d0bdb3f809f248",
                 "shasum": ""
             },
             "require": {
@@ -8831,7 +8831,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-01-07T17:09:11+00:00"
+            "time": "2021-01-22T09:19:47+00:00"
         },
         {
             "name": "symfony/process",
