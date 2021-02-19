@@ -56,12 +56,12 @@ class Content_Loop extends Block_Config {
 		// Content Fields
 		//==========================================
 		$this->add_section( new Field_Section( self::SECTION_CONTENT, __( 'Content', 'tribe' ), 'accordion' ) )
-		     ->add_field( new Field( self::NAME . '_' . self::TITLE, [
-				     'label' => __( 'Title', 'tribe' ),
-				     'name'  => self::TITLE,
-				     'type'  => 'text',
-			     ] )
-		     )->add_field( new Field( self::NAME . '_' . self::LEADIN, [
+			 ->add_field( new Field( self::NAME . '_' . self::TITLE, [
+					 'label' => __( 'Title', 'tribe' ),
+					 'name'  => self::TITLE,
+					 'type'  => 'text',
+				 ] )
+			 )->add_field( new Field( self::NAME . '_' . self::LEADIN, [
 					'label' => __( 'Lead in', 'tribe' ),
 					'name'  => self::LEADIN,
 					'type'  => 'text',
