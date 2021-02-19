@@ -11,7 +11,6 @@ use Tribe\Project\Templates\Components\container\Container_Controller;
 use Tribe\Project\Templates\Components\Deferred_Component;
 use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Templates\Components\text\Text_Controller;
-use Tribe\Project\Templates\Models\Post_List_Object;
 use Tribe\Project\Templates\Components\image\Image_Controller;
 use Tribe\Project\Theme\Config\Image_Sizes;
 use Tribe\Project\Templates\Components\card\Card_Controller;
@@ -29,19 +28,17 @@ class Content_Loop_Controller extends Abstract_Controller {
 	public const POSTS             = 'posts';
 	public const LAYOUT            = 'layout';
 
-	/**
-	 * @var string[]
-	 */
 	private array  $classes;
 	private array  $attrs;
 	private array  $container_classes;
+	private array  $content_classes;
 	private string $title;
 	private string $leadin;
 	private string $description;
 	private array  $cta;
-	private array  $content_classes;
+	private array  $posts;
 	private string $layout;
-	
+
 
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
@@ -111,19 +108,21 @@ class Content_Loop_Controller extends Abstract_Controller {
 	}
 
 	/**
+	 * @param string $layout
+	 *
 	 * @return array
 	 */
 	public function get_posts_card_args( string $layout = Card_Controller::STYLE_PLAIN ): array {
 		$cards = [];
 		foreach ( $this->posts as $post ) {
-			$link                = $post->get_link();
+			$link                = $post['link'];
 			$uuid                = uniqid( 'p-' );
-			$cat                 = $post->get_category();
+			$cat                 = get_the_category( $post['post_id'] );
 			$card_description    = [];
 			$card_cta            = [];
 
 			$image_array = [
-				Image_Controller::IMG_ID       => $post->get_image_id(),
+				Image_Controller::IMG_ID       => $post['image_id'],
 				Image_Controller::AS_BG        => true,
 				Image_Controller::CLASSES      => [ 'c-image--bg', 's-aspect-ratio-16-9' ],
 				Image_Controller::SRC_SIZE     => Image_Sizes::SIXTEEN_NINE_SMALL,
@@ -135,10 +134,11 @@ class Content_Loop_Controller extends Abstract_Controller {
 
 			// CASE: If not Inline Card Style
 			if ( $layout !== Card_Controller::STYLE_INLINE ) {
-				$card_cta = 
+				$card_cta =
 					[
 						Link_Controller::CONTENT => __( 'Read More', 'tribe' ),
 						Link_Controller::URL     => $link['url'],
+						Link_Controller::TARGET  => $link['target'],
 						Link_Controller::CLASSES => [
 							'c-block__cta-link',
 							'a-cta',
@@ -153,9 +153,9 @@ class Content_Loop_Controller extends Abstract_Controller {
 						],
 					];
 
-				$card_description = 
+				$card_description =
 					[
-						Container_Controller::CONTENT => wpautop( $post->get_excerpt() ),
+						Container_Controller::CONTENT => wpautop( $post['excerpt'] ),
 						Container_Controller::CLASSES => [ 't-sink', 's-sink' ],
 					];
 			}
@@ -177,7 +177,7 @@ class Content_Loop_Controller extends Abstract_Controller {
 					[
 						Text_Controller::TAG     => 'h3',
 						Text_Controller::CLASSES => [ 'h5' ],
-						Text_Controller::CONTENT => $post->get_title(),
+						Text_Controller::CONTENT => $post['title'],
 						// Required for screen reader accessibility, below.
 						Text_Controller::ATTRS   => [ 'id' => $uuid . '-title' ],
 					]
@@ -186,8 +186,8 @@ class Content_Loop_Controller extends Abstract_Controller {
 					'components/container/container',
 					null,
 					[
-						Container_Controller::CONTENT =>  $post->get_post_date() ?? '',
-						Container_Controller::CLASSES =>  [ 'c-card__date' ],
+						Container_Controller::CONTENT => get_the_date( 'F Y', $post['post_id'] ) ?? '',
+						Container_Controller::CLASSES => [ 'c-card__date' ],
 					],
 				),
 				Card_Controller::DESCRIPTION     => defer_template_part(
@@ -306,7 +306,7 @@ class Content_Loop_Controller extends Abstract_Controller {
 		if ( $this->layout === Content_Loop_Block::LAYOUT_ROW ) {
 			$this->content_classes[] = 'g-3-up';
 		}
-		
+
 
 		return Markup_Utils::class_attribute( $this->content_classes );
 	}

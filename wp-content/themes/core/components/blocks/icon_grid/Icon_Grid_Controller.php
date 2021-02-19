@@ -1,4 +1,5 @@
-<?php declare( strict_types=1 );
+<?php
+declare( strict_types=1 );
 
 namespace Tribe\Project\Templates\Components\blocks\icon_grid;
 
@@ -185,7 +186,7 @@ class Icon_Grid_Controller extends Abstract_Controller {
 			Link_Controller::CLASSES => [
 				'c-block__cta-link',
 				'a-btn',
-				'a-btn--has-icon-after', 
+				'a-btn--has-icon-after',
 				'icon-arrow-right'
 			],
 		] );
@@ -240,6 +241,7 @@ class Icon_Grid_Controller extends Abstract_Controller {
 					[
 						Link_Controller::CONTENT => $card['icon_link']['title'] ?? '',
 						Link_Controller::URL     => $card['icon_link']['url'] ?? '',
+						Link_Controller::TARGET  => $card['icon_link']['target'] ?? '',
 						Link_Controller::CLASSES => [ 'a-cta', 'is-target-link' ],
 					]
 				),

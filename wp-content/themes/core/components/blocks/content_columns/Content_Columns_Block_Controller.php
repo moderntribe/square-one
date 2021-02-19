@@ -1,4 +1,5 @@
 <?php
+declare( strict_types=1 );
 
 namespace Tribe\Project\Templates\Components\blocks\content_columns;
 

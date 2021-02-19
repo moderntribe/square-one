@@ -1,4 +1,5 @@
 <?php
+declare( strict_types=1 );
 
 namespace Tribe\Project\Templates\Components\blocks\card_grid;
 
@@ -30,12 +31,12 @@ class Card_Grid_Controller extends Abstract_Controller {
 	private string $title;
 	private string $description;
 	private array  $cta;
-	private array $posts;
-	private array $container_classes;
-	private array $loop_classes;
-	private array $loop_attrs;
-	private array $classes;
-	private array $attrs;
+	private array  $posts;
+	private array  $container_classes;
+	private array  $loop_classes;
+	private array  $loop_attrs;
+	private array  $classes;
+	private array  $attrs;
 
 	public function __construct( array $args = [] ) {
 		$args                    = $this->parse_args( $args );
@@ -202,6 +203,7 @@ class Card_Grid_Controller extends Abstract_Controller {
 					[
 						Link_Controller::CONTENT => __( 'Read More', 'tribe' ),
 						Link_Controller::URL     => $link['url'],
+						Link_Controller::TARGET  => $link['target'],
 						Link_Controller::CLASSES => [ 'a-cta', 'is-target-link' ],
 						Link_Controller::ATTRS   => [
 							// These attrs provide the most screen reader accessible link.

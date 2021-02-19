@@ -6,9 +6,7 @@ namespace Tribe\Project\Blocks\Types\Card_Grid;
 use Tribe\Libs\ACF\Field;
 use Tribe\Libs\ACF\Block;
 use Tribe\Libs\ACF\Block_Config;
-use Tribe\Libs\ACF\Field_Group;
 use Tribe\Libs\ACF\Field_Section;
-use Tribe\Libs\ACF\Repeater;
 use Tribe\Project\Post_Types\Post\Post;
 use Tribe\Project\Post_Types\Sample\Sample;
 use Tribe\Project\Taxonomies\Category\Category;
@@ -89,21 +87,25 @@ class Card_Grid extends Block_Config {
 					'type'  => 'link',
 				] )
 			)->add_field( new Field( self::NAME . '_' . self::POST_LIST, [
-					'label'           => __( 'Post List', 'tribe' ),
-					'name'            => self::POST_LIST,
-					'type'            => 'tribe_post_list',
-					'available_types' => 'both',
-					'post_types'      => [
+					'label'             => __( 'Post List', 'tribe' ),
+					'name'              => self::POST_LIST,
+					'type'              => 'tribe_post_list',
+					'available_types'   => 'both',
+					'post_types'        => [
 						Post::NAME,
 						Sample::NAME,
 					],
-					'taxonomies'      => [
+					'post_types_manual' => [
+						Post::NAME,
+						Sample::NAME,
+					],
+					'taxonomies'        => [
 						Post_Tag::NAME,
 						Category::NAME,
 						Example::NAME,
 					],
-					'limit_min'       => 2,
-					'limit_max'       => 10,
+					'limit_min'         => 2,
+					'limit_max'         => 10,
 				] )
 			);
 
