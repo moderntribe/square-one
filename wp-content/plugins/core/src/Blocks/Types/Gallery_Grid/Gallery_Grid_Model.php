@@ -16,6 +16,7 @@ use Tribe\Project\Templates\Components\link\Link_Controller;
 class Gallery_Grid_Model extends Base_Model {
 	public function get_data(): array {
 		return [
+			Gallery_Grid_Controller::ATTRS        => $this->get_attrs(),
 			Gallery_Grid_Controller::CLASSES      => $this->get_classes(),
 			Gallery_Grid_Controller::TITLE        => $this->get( Gallery_Grid::TITLE, '' ),
 			Gallery_Grid_Controller::DESCRIPTION  => $this->get( Gallery_Grid::DESCRIPTION, '' ),

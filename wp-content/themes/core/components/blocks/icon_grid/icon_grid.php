@@ -1,4 +1,5 @@
-<?php declare( strict_types=1 );
+<?php
+declare( strict_types=1 );
 
 /**
  * @var array $args Arguments passed to the template
@@ -20,7 +21,7 @@ $c = \Tribe\Project\Templates\Components\blocks\icon_grid\Icon_Grid_Controller::
 			<?php foreach ( $c->get_icon_card_args() as $card_args ) { ?>
 				<?php get_template_part( 'components/card/card', null, $card_args ); ?>
 			<?php } ?>
-		
+
 		</ul>
 
 	</div>
