@@ -76,3 +76,25 @@
 		}
 	}
 }
+
+/*
+* Utility class to use for inline forms.
+* Set up only for an individual form field and Submit button
+*/
+
+.gform_inline {
+	.gform_wrapper {
+		& > form {
+			display: flex;
+			align-items: center;
+		}
+
+		.gform_body {
+			flex: 1;
+		}
+
+		.gform_footer {
+			margin-left: var(--spacer-10);
+		}
+	}
+}
