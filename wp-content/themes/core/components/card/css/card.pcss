@@ -17,6 +17,11 @@
 		}
 	}
 
+	/* CASE: Centers all content within the card. */
+	&.is-centered-text {
+		text-align: center;
+	}
+
 	/* CASE: Style: Elevated */
 	&.c-card--style-elevated {
 		padding: var(--spacer-30) 0;
@@ -46,6 +51,28 @@
 			}
 		}
 	}
+
+	/* CASE: Style: Inline */
+	&.c-card--style-inline {
+		display: flex;
+		flex-flow: row;
+		align-items: center;
+		margin-top: 0;
+		margin-bottom: 0;
+		padding: var(--spacer-20) 0;
+		border-bottom: 1px solid var(--color-grey-light);
+
+		/* Need to drop the font size down a bit on the tag for inline cards */
+		.t-tag {
+			font-size: 11px;
+		}
+
+		&:hover {
+			.c-card__title {
+				color: var(--color-link-hover);
+			}
+		}
+	}
 }
 
 /* -----------------------------------------------------------------------------
@@ -59,6 +86,19 @@
 	.c-card--style-elevated &,
 	.c-card--style-outlined & {
 		margin-top: calc(-1 * var(--spacer-30));
+	}
+
+	/* CASE: Style: Inline */
+	.c-card--style-inline & {
+		display: none;
+		flex-shrink: 0;
+
+		@media(--viewport-medium) {
+			display: block;
+			width: var(--grid-2-col);
+			margin-right: var(--spacer-30);
+			margin-bottom: 0;
+		}
 	}
 }
 
@@ -96,7 +136,28 @@
  * Card Title
  * ----------------------------------------------------------------------------- */
 
-.c-card__title {}
+.c-card__title {
+
+	/* CASE: Style: Inline */
+	.c-card--style-inline & {
+		display: block;
+		text-decoration: none;
+
+		&:focus {
+			text-decoration: underline;
+		}
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Card Date
+ * ----------------------------------------------------------------------------- */
+
+.c-card__date {
+	@mixin t-body-small;
+
+	color: var(--color-grey);
+}
 
 /* -----------------------------------------------------------------------------
  * Card Description

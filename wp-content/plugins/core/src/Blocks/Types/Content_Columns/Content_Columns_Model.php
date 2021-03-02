@@ -14,14 +14,14 @@ class Content_Columns_Model extends Base_Model {
 	 */
 	public function get_data(): array {
 		return [
-			Content_Columns_Block_Controller::ATTRS            => $this->get_attrs(),
-			Content_Columns_Block_Controller::TITLE            => $this->get( Content_Columns::TITLE, '' ),
-			Content_Columns_Block_Controller::LEADIN           => $this->get( Content_Columns::LEADIN, '' ),
-			Content_Columns_Block_Controller::DESCRIPTION      => $this->get( Content_Columns::DESCRIPTION, '' ),
-			Content_Columns_Block_Controller::CTA              => $this->get_cta_args( $this->get( Content_Columns::CTA, [] ) ),
-			Content_Columns_Block_Controller::CLASSES          => $this->get_classes(),
-			Content_Columns_Block_Controller::COLUMNS          => $this->get_rows(),
-			Content_Columns_Block_Controller::CONTENT_ALIGN    => $this->get( Content_Columns::CONTENT_ALIGN, Content_Columns::CONTENT_ALIGN_LEFT ),
+			Content_Columns_Block_Controller::ATTRS         => $this->get_attrs(),
+			Content_Columns_Block_Controller::CLASSES       => $this->get_classes(),
+			Content_Columns_Block_Controller::TITLE         => $this->get( Content_Columns::TITLE, '' ),
+			Content_Columns_Block_Controller::LEADIN        => $this->get( Content_Columns::LEADIN, '' ),
+			Content_Columns_Block_Controller::DESCRIPTION   => $this->get( Content_Columns::DESCRIPTION, '' ),
+			Content_Columns_Block_Controller::CTA           => $this->get_cta_args( $this->get( Content_Columns::CTA, [] ) ),
+			Content_Columns_Block_Controller::COLUMNS       => $this->get_rows(),
+			Content_Columns_Block_Controller::CONTENT_ALIGN => $this->get( Content_Columns::CONTENT_ALIGN, Content_Columns::CONTENT_ALIGN_LEFT ),
 		];
 	}
 
