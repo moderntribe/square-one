@@ -20,7 +20,7 @@ class Gallery_Grid_Model extends Base_Model {
 			Gallery_Grid_Controller::CLASSES      => $this->get_classes(),
 			Gallery_Grid_Controller::TITLE        => $this->get( Gallery_Grid::TITLE, '' ),
 			Gallery_Grid_Controller::DESCRIPTION  => $this->get( Gallery_Grid::DESCRIPTION, '' ),
-			Gallery_Grid_Controller::GALLERY      => $this->get( Gallery_Grid::GALLERY, '' ),
+			Gallery_Grid_Controller::GALLERY      => $this->get( Gallery_Grid::GALLERY, [] ),
 			Gallery_Grid_Controller::GRID_LAYOUT  => $this->get( Gallery_Grid::GRID_LAYOUT, Gallery_Grid::THREE ),
 			Gallery_Grid_Controller::SLIDESHOW    => $this->get( Gallery_Grid::SLIDESHOW, false ),
 		];
