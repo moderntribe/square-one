@@ -15,65 +15,6 @@ $c->render_header();
 			<?php
 			if ( have_posts() ) :
 
-				get_template_part(
-					'components/slider/slider',
-					null,
-					[
-						Tribe\Project\Templates\Components\slider\Slider_Controller::SLIDES => [
-							'<img src="https://square1.tribe/wp-content/uploads/2021/03/Schmitt_Music.png"/>',
-							'<img src="https://square1.tribe/wp-content/uploads/2021/03/Schmitt_Music.png"/>',
-							'<img src="https://square1.tribe/wp-content/uploads/2021/03/Schmitt_Music.png"/>',
-							'<img src="https://square1.tribe/wp-content/uploads/2021/03/Schmitt_Music.png"/>',
-							'<img src="https://square1.tribe/wp-content/uploads/2021/03/Schmitt_Music.png"/>',
-							'<img src="https://square1.tribe/wp-content/uploads/2021/03/Schmitt_Music.png"/>',
-							'<img src="https://square1.tribe/wp-content/uploads/2021/03/Schmitt_Music.png"/>',
-							'<img src="https://square1.tribe/wp-content/uploads/2021/03/Schmitt_Music.png"/>',
-							'<img src="https://square1.tribe/wp-content/uploads/2021/03/Schmitt_Music.png"/>',
-							'<img src="https://square1.tribe/wp-content/uploads/2021/03/Schmitt_Music.png"/>',
-							'<img src="https://square1.tribe/wp-content/uploads/2021/03/Schmitt_Music.png"/>',
-							'<img src="https://square1.tribe/wp-content/uploads/2021/03/Schmitt_Music.png"/>',
-						],
-						Tribe\Project\Templates\Components\slider\Slider_Controller::SHOW_ARROWS     => true,
-						Tribe\Project\Templates\Components\slider\Slider_Controller::SHOW_PAGINATION => true,
-						Tribe\Project\Templates\Components\slider\Slider_Controller::SHOW_CAROUSEL   => true,
-						Tribe\Project\Templates\Components\slider\Slider_Controller::CAROUSEL_SLIDES => [
-							'<img src="https://square1.tribe/wp-content/uploads/2021/03/Schmitt_Music.png"/>',
-							'<img src="https://square1.tribe/wp-content/uploads/2021/03/Schmitt_Music.png"/>',
-							'<img src="https://square1.tribe/wp-content/uploads/2021/03/Schmitt_Music.png"/>',
-							'<img src="https://square1.tribe/wp-content/uploads/2021/03/Schmitt_Music.png"/>',
-							'<img src="https://square1.tribe/wp-content/uploads/2021/03/Schmitt_Music.png"/>',
-							'<img src="https://square1.tribe/wp-content/uploads/2021/03/Schmitt_Music.png"/>',
-							'<img src="https://square1.tribe/wp-content/uploads/2021/03/Schmitt_Music.png"/>',
-							'<img src="https://square1.tribe/wp-content/uploads/2021/03/Schmitt_Music.png"/>',
-							'<img src="https://square1.tribe/wp-content/uploads/2021/03/Schmitt_Music.png"/>',
-							'<img src="https://square1.tribe/wp-content/uploads/2021/03/Schmitt_Music.png"/>',
-							'<img src="https://square1.tribe/wp-content/uploads/2021/03/Schmitt_Music.png"/>',
-							'<img src="https://square1.tribe/wp-content/uploads/2021/03/Schmitt_Music.png"/>',
-						],
-					]
-				);
-
-				get_template_part(
-					'components/slider/slider',
-					null,
-					[
-						Tribe\Project\Templates\Components\slider\Slider_Controller::SLIDES => [
-								'<img src="https://square1.tribe/wp-content/uploads/2021/03/Schmitt_Music.png"/>',
-								'<img src="https://square1.tribe/wp-content/uploads/2021/03/Schmitt_Music.png"/>',
-								'<img src="https://square1.tribe/wp-content/uploads/2021/03/Schmitt_Music.png"/>',
-								'<img src="https://square1.tribe/wp-content/uploads/2021/03/Schmitt_Music.png"/>',
-								'<img src="https://square1.tribe/wp-content/uploads/2021/03/Schmitt_Music.png"/>',
-								'<img src="https://square1.tribe/wp-content/uploads/2021/03/Schmitt_Music.png"/>',
-								'<img src="https://square1.tribe/wp-content/uploads/2021/03/Schmitt_Music.png"/>',
-								'<img src="https://square1.tribe/wp-content/uploads/2021/03/Schmitt_Music.png"/>',
-								'<img src="https://square1.tribe/wp-content/uploads/2021/03/Schmitt_Music.png"/>',
-								'<img src="https://square1.tribe/wp-content/uploads/2021/03/Schmitt_Music.png"/>',
-								'<img src="https://square1.tribe/wp-content/uploads/2021/03/Schmitt_Music.png"/>',
-								'<img src="https://square1.tribe/wp-content/uploads/2021/03/Schmitt_Music.png"/>',
-						],
-					]
-				);
-
 				while ( have_posts() ) :
 
 					the_post();
