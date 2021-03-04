@@ -4,12 +4,12 @@
  */
 
 import _ from 'lodash';
-import { Swiper, Navigation, Pagination, A11y, Autoplay } from 'swiper/js/swiper.esm.js';
+import SwiperCore, { Navigation, Pagination, A11y, Autoplay, Thumbs } from 'swiper/core';
+
+SwiperCore.use( [ Navigation, Pagination, A11y, Autoplay, Thumbs ] );
 
 import * as tools from 'utils/tools';
 import * as tests from 'utils/tests';
-
-Swiper.use( [ Navigation, Pagination, A11y, Autoplay ] );
 
 const instances = {
 	swipers: {},
@@ -17,28 +17,19 @@ const instances = {
 
 const options = {
 	swiperMain: () => ( {
-		a11y: true,
+		a11y: {
+			enabled: true,
+		},
 	} ),
 	swiperThumbs: () => ( {
-		a11y: true,
+		a11y: {
+			enabled: true,
+		},
 		slidesPerView: 'auto',
 		touchRatio: 0.2,
 		watchSlidesVisibility: true,
 		watchSlidesProgress: true,
 	} ),
-};
-
-/**
- * @module
- * @description Update Pagination.
- */
-
-const updatePagination = ( slider, swiperId ) => {
-	const pagination = tools.getNodes( 'c-slider-pagination', false, slider )[ 0 ];
-	if ( ! pagination ) {
-		return;
-	}
-	pagination.setAttribute( 'data-id', swiperId );
 };
 
 /**
@@ -71,23 +62,23 @@ const getMainOptsForCarousel = ( carousel ) => {
  */
 
 const getMainOptsForSlider = ( slider, swiperId ) => {
+	const sliderWrapper = tools.closest( slider, '.c-slider' );
 	const opts = options.swiperMain();
 	if ( slider.classList.contains( 'c-slider__main--has-arrows' ) ) {
 		opts.navigation = {};
-		opts.navigation.nextEl = '.c-slider__button--next';
-		opts.navigation.prevEl = '.c-slider__button--prev';
+		opts.navigation.nextEl = sliderWrapper.querySelector( '.c-slider__button--next' );
+		opts.navigation.prevEl = sliderWrapper.querySelector( '.c-slider__button--prev' );
 	}
 	if ( slider.classList.contains( 'c-slider__main--has-pagination' ) ) {
 		opts.pagination = {};
-		opts.pagination.el = `.c-slider__pagination[data-id="${ swiperId }"]`;
+		opts.pagination.el = sliderWrapper.querySelector( '.c-slider__pagination' );
 		opts.pagination.clickable = true;
-		updatePagination( slider, swiperId );
 	}
 	if ( slider.classList.contains( 'c-slider__main--has-carousel' ) ) {
-		const carousel = slider.nextElementSibling;
+		const carousel = sliderWrapper.querySelector( '.c-slider__carousel' );
 		if ( carousel ) {
 			const swiperThumbId = _.uniqueId( 'swiper-carousel-' );
-			instances.swipers[ swiperThumbId ] = new Swiper( carousel, getMainOptsForCarousel( carousel ) );
+			instances.swipers[ swiperThumbId ] = new SwiperCore( carousel, getMainOptsForCarousel( carousel ) );
 			opts.thumbs = {};
 			opts.thumbs.swiper = instances.swipers[ swiperThumbId ];
 			updateCarousel( carousel, swiperId, swiperThumbId );
@@ -125,8 +116,9 @@ const initSliders = () => {
 	tools.getNodes( '[data-js="c-slider"]:not(.initialized)', true, document, true ).forEach( ( slider ) => {
 		const swiperMainId = _.uniqueId( 'swiper-' );
 		slider.classList.add( 'initialized' );
-		instances.swipers[ swiperMainId ] = new Swiper( slider, getMainOptsForSlider( slider, swiperMainId ) );
+		instances.swipers[ swiperMainId ] = new SwiperCore( slider, getMainOptsForSlider( slider, swiperMainId ) );
 		slider.setAttribute( 'data-id', swiperMainId );
+		slider.setAttribute( 'id', swiperMainId );
 	} );
 };
 
@@ -168,7 +160,7 @@ const bindEvents = () => {
 };
 
 const init = () => {
-	if ( ! Swiper ) {
+	if ( ! SwiperCore ) {
 		return;
 	}
 	initSliders();

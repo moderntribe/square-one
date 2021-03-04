@@ -46,7 +46,7 @@ class Gallery_Grid_Controller extends Abstract_Controller {
 	private string $description;
 	private array  $cta;
 	private array  $gallery;
-	private string $grid_layout;	
+	private string $grid_layout;
 	private bool   $slideshow;
 	private string $id;
 
@@ -120,7 +120,7 @@ class Gallery_Grid_Controller extends Abstract_Controller {
 	 */
 	public function get_content_classes(): string {
 		$this->content_classes[] = 'gallery-layout--' . $this->grid_layout;
-	
+
 		return Markup_Utils::class_attribute( $this->content_classes );
 	}
 
@@ -183,7 +183,7 @@ class Gallery_Grid_Controller extends Abstract_Controller {
 
 	/**
 	 * data-content attribute with a matching ID to the dialog is required for dialog to work.
-	 * 
+	 *
 	 * @return array
 	 */
 	public function get_slideshow_button() {
@@ -206,15 +206,9 @@ class Gallery_Grid_Controller extends Abstract_Controller {
 		$args = [
 			'preloadImages'         => "true",
 			'lazy'                  => "true",
-			'watchSlidesVisibility' => "true",
 			'spaceBetween'          => 60,
-			'ally'                  => "true",
 			'keyboard'              => "true",
 			'grabCursor'            => "true",
-			'navigation'            => [
-				'nextEl' => '.swiper-button-next',
-				'prevEl' => '.swiper-button-prev',
-			],
 		];
 
 		return json_encode( $args );
@@ -231,12 +225,9 @@ class Gallery_Grid_Controller extends Abstract_Controller {
 		$main_attrs['data-swiper-options'] = $this->get_slider_options();
 
 		$slider = [
-			Slider_Controller::SLIDES          => $this->get_slides(),
-			Slider_Controller::SHOW_CAROUSEL   => false,
-			Slider_Controller::SHOW_ARROWS     => true,
-			Slider_Controller::SHOW_PAGINATION => false,
-			Slider_Controller::MAIN_ATTRS      => $main_attrs,
-			Slider_Controller::CLASSES         => [ 'b-gallery-grid__slider' ],
+			Slider_Controller::SLIDES     => $this->get_slides(),
+			Slider_Controller::MAIN_ATTRS => $main_attrs,
+			Slider_Controller::CLASSES    => [ 'b-gallery-grid__slider' ],
 		];
 
 		return $slider;
@@ -368,7 +359,7 @@ class Gallery_Grid_Controller extends Abstract_Controller {
 			$img_bg       = false;
 			$img_bg_class = '';
 			$img_aspect   = '';
-			$img_srcset   = [ 
+			$img_srcset   = [
 				'medium',
 				'medium_large',
 				'large',
@@ -382,7 +373,7 @@ class Gallery_Grid_Controller extends Abstract_Controller {
 				Image_Sizes::SQUARE_XSMALL,
 				Image_Sizes::SQUARE_MEDIUM,
 				Image_Sizes::SQUARE_LARGE
-				
+
 			];
 		}
 

@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2021.03
+* Updated: updated swiper to latest and addressed slider component issues.
+* Updated: postcss gulp config to preserve custom properties and to allow for native use of focus-visible and focus-within.
+
 ## 2021.02
 * Fixed: An issue with the callback used in the `scroll-to` script.
 * Added: Handling for broken browser implementation of skip links and adding automatic focus switching for anchor hash links for a11y.

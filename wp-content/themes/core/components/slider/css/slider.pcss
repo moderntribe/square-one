@@ -4,20 +4,18 @@
  *
  * ----------------------------------------------------------------------------- */
 
-/* Container */
-
 .c-slider {
 	width: 100%;
+	position: relative;
 
 	.t-content & {
 		margin: var(--spacer-70) auto;
 		max-width: none;
 	}
 
-	/*CASE: Dialog */
+	/* CASE: Dialog */
 	.c-dialog & {
 		margin: 0 auto;
-		position: relative;
 
 		@media (--viewport-medium) {
 			margin: 0 auto;
@@ -26,7 +24,6 @@
 }
 
 .c-slider__wrapper {
-
 	/* CASE: Dialog */
 	.c-dialog & {
 		padding: var(--spacer-30) 0 var(--spacer-70);
@@ -83,7 +80,6 @@
 
 .c-slider__button--prev,
 .c-slider__button--next {
-
 	/* CASE: Dialog */
 	.c-dialog & {
 		display: none;
@@ -116,7 +112,6 @@
 			background-color: var(--color-white);
 			opacity: 1;
 			transition: var(--transition);
-			
 
 			&:after {
 				color: var(--color-black);
@@ -135,7 +130,6 @@
 
 .c-slider__button--next,
 .swiper-container-rtl .c-slider__button--prev {
-
 	/* CASE: Dialog */
 	.c-dialog & {
 		right: -102px;
@@ -148,7 +142,6 @@
 
 .c-slider__button--prev,
 .swiper-container-rtl .c-slider__button--next {
-
 	/* CASE: Dialog */
 	.c-dialog & {
 		left: -102px;
