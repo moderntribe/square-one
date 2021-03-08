@@ -1,0 +1,87 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Component: Gallery Grid
+ *
+ * ----------------------------------------------------------------------------- */
+
+.b-gallery-grid__content {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	column-gap: var(--grid-gutter-medium);
+	row-gap: var(--grid-gutter-medium);
+    padding-top: var(--spacer-40);
+}
+
+.b-gallery-grid__header {
+
+	@media (--viewport-full) {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	.b-gallery-grid__cta {
+		margin-top: var(--spacer-30);
+		min-width: 250px;
+
+		@media (--viewport-full) {
+			text-align: right;
+		}
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ *
+ * Gallery Grid Layouts
+ *
+ * ----------------------------------------------------------------------------- */
+
+
+
+.gallery-layout--one {
+	grid-template-columns: 1fr;
+}
+
+.gallery-layout--three {
+	@media (--viewport-full) {
+		grid-template-columns: 1fr 1fr 1fr;
+		column-gap: var(--grid-gutter);
+		row-gap: var(--grid-gutter);
+
+	}
+}
+
+.gallery-layout--four {
+    @media (--viewport-full) {
+		grid-template-columns: 1fr 1fr 1fr 1fr;
+		column-gap: var(--grid-gutter);
+		row-gap: var(--grid-gutter);
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ *
+ * Dialog Captions and Count
+ *
+ * ----------------------------------------------------------------------------- */
+
+.b-gallery-grid__meta-wrap {
+    display: flex;
+    flex-flow: row nowrap;
+    margin-top: var(--spacer-30);
+    padding: 0 var(--spacer-20);
+}
+
+.b-gallery-grid__meta-count {
+    width: 25%;
+    text-align: right;
+    padding-right: var(--spacer-40);
+}
+
+.b-gallery-grid__meta-caption {
+    flex: 1;
+    text-align: left;
+	max-width: var(--grid-6-col);
+}
+
+

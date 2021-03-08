@@ -75,22 +75,22 @@ class Slider_Controller extends Abstract_Controller {
 	}
 
 	public function get_classes(): string {
-		if ( $this->show_arrows ) {
-			$this->classes[] = 'c-slider__main--has-arrows';
-		}
-
-		if ( $this->show_pagination ) {
-			$this->classes[] = 'c-slider__main--has-pagination';
-		}
-
-		if ( $this->show_carousel ) {
-			$this->classes[] = 'c-slider__main--has-carousel';
-		}
-
 		return Markup_Utils::class_attribute( $this->classes );
 	}
 
 	public function get_main_classes(): string {
+		if ( $this->show_arrows ) {
+			$this->main_classes[] = 'c-slider__main--has-arrows';
+		}
+
+		if ( $this->show_pagination ) {
+			$this->main_classes[] = 'c-slider__main--has-pagination';
+		}
+
+		if ( $this->show_carousel ) {
+			$this->main_classes[] = 'c-slider__main--has-carousel';
+		}
+
 		return Markup_Utils::class_attribute( $this->main_classes );
 	}
 

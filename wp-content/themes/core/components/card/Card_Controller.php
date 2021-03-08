@@ -25,10 +25,11 @@ class Card_Controller extends Abstract_Controller {
 	public const CTA             = 'cta';
 	public const USE_TARGET_LINK = 'use_target_link';
 
-	public const STYLE          = 'style';
-	public const STYLE_PLAIN    = 'plain';
-	public const STYLE_ELEVATED = 'elevated';
-	public const STYLE_OUTLINED = 'outlined';
+	public const STYLE            = 'style';
+	public const STYLE_PLAIN      = 'plain';
+	public const STYLE_ELEVATED   = 'elevated';
+	public const STYLE_OUTLINED   = 'outlined';
+	public const STYLE_INLINE     = 'inline';
 
 	private string $tag;
 	private array  $classes;
@@ -153,7 +154,7 @@ class Card_Controller extends Abstract_Controller {
 	/**
 	 * @return Deferred_Component|null
 	 */
-	public function render_image() {
+	public function render_image(): ?Deferred_Component {
 		if ( empty( $this->image ) ) {
 			return null;
 		}
@@ -166,7 +167,7 @@ class Card_Controller extends Abstract_Controller {
 	/**
 	 * @return Deferred_Component|null
 	 */
-	public function render_meta_primary() {
+	public function render_meta_primary(): ?Deferred_Component {
 		if ( empty( $this->meta_primary ) ) {
 			return null;
 		}
@@ -180,7 +181,7 @@ class Card_Controller extends Abstract_Controller {
 	/**
 	 * @return Deferred_Component|null
 	 */
-	public function render_meta_secondary() {
+	public function render_meta_secondary(): ?Deferred_Component {
 		if ( empty( $this->meta_secondary ) ) {
 			return null;
 		}
@@ -194,7 +195,7 @@ class Card_Controller extends Abstract_Controller {
 	/**
 	 * @return Deferred_Component|null
 	 */
-	public function render_title() {
+	public function render_title(): ?Deferred_Component {
 		if ( empty( $this->title ) ) {
 			return null;
 		}
@@ -207,7 +208,7 @@ class Card_Controller extends Abstract_Controller {
 	/**
 	 * @return Deferred_Component|null
 	 */
-	public function render_description() {
+	public function render_description(): ?Deferred_Component {
 		if ( empty( $this->description ) ) {
 			return null;
 		}
@@ -217,7 +218,7 @@ class Card_Controller extends Abstract_Controller {
 		return $this->description;
 	}
 
-	public function get_cta_args() {
+	public function get_cta_args(): array {
 		if ( empty( $this->cta['url'] ) ) {
 			return [];
 		}
