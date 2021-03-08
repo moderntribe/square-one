@@ -16,7 +16,7 @@ use Tribe\Libs\Routes\Route_Definer;
 class Routes_Definer implements Definer_Interface {
 	public function define() : array {
 		return [
-			\Tribe\Libs\Routes\Route_Definer::ROUTES => DI\add(
+			\Tribe\Libs\Routes\Route_Definer::ROUTES      => DI\add(
 				[
 					DI\get( Sample_Route::class ),
 				]
