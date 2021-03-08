@@ -1,9 +1,16 @@
 <?php
+/**
+ * Sample route.
+ */
+declare( strict_types=1 );
 
 namespace Tribe\Project\Routes;
 
 use Tribe\Libs\Routes\Abstract_Route;
 
+/**
+ * Class to define a sample route.
+ */
 class Sample_Route extends Abstract_Route {
 	/**
 	 * Registers routes.

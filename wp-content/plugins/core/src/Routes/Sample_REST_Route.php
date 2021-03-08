@@ -1,9 +1,16 @@
 <?php
+/**
+ * Sample REST route.
+ */
+declare( strict_types=1 );
 
 namespace Tribe\Project\Routes;
 
 use Tribe\Libs\Routes\Abstract_Rest_Route;
 
+/**
+ * Class for an example REST route.
+ */
 class Sample_REST_Route extends Abstract_Rest_Route {
 	/**
 	 * Registers routes.
