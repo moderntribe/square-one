@@ -22,9 +22,10 @@ class Sample_REST_Route extends Abstract_Rest_Route {
 			$this->get_project_namespace(),
 			'/sample',
 			[
-				'methods'  => \WP_REST_Server::READABLE,
-				'callback' => [ $this, 'query' ],
-				'args'     => $this->get_supported_args(),
+				'methods'             => \WP_REST_Server::READABLE,
+				'callback'            => [ $this, 'query' ],
+				'args'                => $this->get_supported_args(),
+				'permission_callback' => '__return_true',
 			]
 		);
 	}
