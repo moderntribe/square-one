@@ -18,7 +18,6 @@ class Lead_Form_Block_Controller extends Abstract_Controller {
 	public const LEADIN            = 'leadin';
 	public const DESCRIPTION       = 'description';
 	public const CTA               = 'cta';
-	public const FORM              = 'form';
 	public const CONTAINER_CLASSES = 'container_classes';
 	public const FORM_CLASSES      = 'form_classes';
 	public const CLASSES           = 'classes';
@@ -32,7 +31,6 @@ class Lead_Form_Block_Controller extends Abstract_Controller {
 	private string $leadin;
 	private string $description;
 	private array  $cta;
-	private int    $form;
 	private array  $container_classes;
 	private array  $form_classes;
 	private array  $classes;
@@ -52,7 +50,6 @@ class Lead_Form_Block_Controller extends Abstract_Controller {
 		$this->leadin            = (string) $args[ self::LEADIN ];
 		$this->description       = (string) $args[ self::DESCRIPTION ];
 		$this->cta               = (array) $args[ self::CTA ];
-		$this->form              = (int) $args[ self::FORM ];
 		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
 		$this->form_classes      = (array) $args[ self::FORM_CLASSES ];
 		$this->classes           = (array) $args[ self::CLASSES ];
@@ -74,7 +71,6 @@ class Lead_Form_Block_Controller extends Abstract_Controller {
 			self::LEADIN            => '',
 			self::DESCRIPTION       => '',
 			self::CTA               => [],
-			self::FORM              => null,
 			self::CONTAINER_CLASSES => [],
 			self::FORM_CLASSES      => [],
 			self::CLASSES           => [],
@@ -241,13 +237,6 @@ class Lead_Form_Block_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return int
-	 */
-	public function get_form_id(): int {
-		return $this->form;
-	}
-
-	/**
 	 * @return string
 	 */
 	public function get_form(): string {
@@ -255,6 +244,8 @@ class Lead_Form_Block_Controller extends Abstract_Controller {
 			return '';
 		}
 
-		return gravity_form( $this->form, false, false, false, null, false, 1, false );
+		$allowed_blocks = [ 'gravityforms/form' ];
+
+		return '<InnerBlocks allowedBlocks="' . esc_attr( wp_json_encode( $allowed_blocks ) ) . '" />';
 	}
 }

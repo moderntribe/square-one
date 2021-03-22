@@ -20,11 +20,9 @@ $c = Lead_Form_Block_Controller::factory( $args );
 			); ?>
 		<?php } ?>
 
-		<?php if ( $c->get_form_id() ) { ?>
-			<div <?php echo $c->get_form_classes(); ?>>
-				<?php echo $c->get_form(); ?>
-			</div>
-		<?php } ?>
+		<div <?php echo $c->get_form_classes(); ?>>
+			<?php echo $c->get_form(); ?>
+		</div>
 
 	</div>
 </section>

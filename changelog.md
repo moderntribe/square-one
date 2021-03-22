@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## 2021.03
+* Updated: lead form block to use Gravity Forms child / inner block.
 * Updated: updated swiper to latest and addressed slider component issues.
 * Updated: postcss gulp config to preserve custom properties and to allow for native use of focus-visible and focus-within.
 
