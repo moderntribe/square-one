@@ -21,6 +21,7 @@ use Tribe\Project\Blocks\Types\Quote\Quote;
 use Tribe\Project\Blocks\Types\Stats\Stats;
 use Tribe\Project\Blocks\Types\Tabs\Tabs;
 use Tribe\Project\Blocks\Types\Gallery_Grid\Gallery_Grid;
+use Tribe\Project\Blocks\Types\Gallery_Slider\Gallery_Slider;
 
 class Blocks_Definer implements Definer_Interface {
 
@@ -38,6 +39,7 @@ class Blocks_Definer implements Definer_Interface {
 				DI\get( Content_Columns::class ),
 				DI\get( Content_Loop::class ),
 				DI\get( Gallery_Grid::class ),
+				DI\get( Gallery_Slider::class ),
 				DI\get( Hero::class ),
 				DI\get( Icon_Grid::class ),
 				DI\get( Interstitial::class ),
@@ -69,6 +71,7 @@ class Blocks_Definer implements Definer_Interface {
 				'acf/contentcolumns',
 				'acf/contentloop',
 				'acf/gallerygrid',
+				'acf/galleryslider',
 				'acf/hero',
 				'acf/icongrid',
 				'acf/interstitial',
