@@ -215,7 +215,7 @@ class Gallery_Slider_Controller extends Abstract_Controller {
 		$slider = [
 			Slider_Controller::SLIDES     => $this->get_slides(),
 			Slider_Controller::MAIN_ATTRS => $main_attrs,
-			Slider_Controller::CLASSES    => [ 'b-gallery-slider__slider' ],
+			Slider_Controller::CLASSES    => [ 'b-gallery-slider__slider', 'c-slider--arrows-below' ],
 		];
 
 		return $slider;
