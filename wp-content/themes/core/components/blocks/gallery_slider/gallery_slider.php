@@ -22,7 +22,11 @@ $c = \Tribe\Project\Templates\Components\blocks\gallery_slider\Gallery_Slider_Co
 		<?php } ?>
 
 		<div <?php echo $c->get_content_classes(); ?>>
-			Slider here
+			<?php get_template_part(
+					'components/slider/slider',
+					null,
+					$c->get_slider_args()
+			); ?>
 		</div>
 
 	</div>

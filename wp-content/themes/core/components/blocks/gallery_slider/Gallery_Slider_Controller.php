@@ -184,4 +184,122 @@ class Gallery_Slider_Controller extends Abstract_Controller {
 			],
 		] );
 	}
+
+	/**
+	 * @return string
+	 */
+	protected function get_slider_options(): string {
+		$args = [
+			'preloadImages'  => "true",
+			'lazy'           => "true",
+			'keyboard'       => "true",
+			'grabCursor'     => "true",
+			'slidesPerView'  => 3,
+			'centeredSlides' => "true",
+			'spaceBetween'   => 40,
+		];
+
+		return json_encode( $args );
+	}
+
+	/**
+	 * Get the Slider
+	 *
+	 * @return array
+	 */
+	public function get_slider_args(): array {
+		$main_attrs = [];
+
+		$main_attrs['data-swiper-options'] = $this->get_slider_options();
+
+		$slider = [
+			Slider_Controller::SLIDES     => $this->get_slides(),
+			Slider_Controller::MAIN_ATTRS => $main_attrs,
+			Slider_Controller::CLASSES    => [ 'b-gallery-slider__slider' ],
+		];
+
+		return $slider;
+	}
+
+	/**
+	 * Get Slides
+	 *
+	 * @return array
+	 */
+	public function get_slides(): array {
+		$img_ids = ! empty( $this->gallery ) ? array_filter( wp_list_pluck( $this->gallery, 'id' ) ) : [];
+		$slides  = [];
+
+		if ( empty( $img_ids ) ) {
+			return $slides;
+		}
+
+		foreach ( $img_ids as $img_id ) {
+			$slides[] = $this->get_image_template( $img_id );
+		}
+
+		return $slides;
+	}
+
+	/**
+	 * @param $img_id
+	 *
+	 * @return string
+	 */
+	protected function get_image_template( $img_id ): string {
+		$img          = $this->get_slide_img( $img_id );
+		$slide_markup = $img;
+		$slide_markup .= defer_template_part( 'components/container/container', null, [
+			Container_Controller::CLASSES => [
+				'b-gallery-slider__meta-wrap',
+			],
+			Container_Controller::CONTENT => $this->get_image_caption( $img_id ),
+		] );
+
+		return $slide_markup;
+	}
+
+	/**
+	 * @param int $img_id
+	 *
+	 * @return Deferred_Component
+	 */
+	public function get_slide_img( int $img_id ): Deferred_Component {
+		return defer_template_part(
+			'components/image/image',
+			null,
+			[
+				Image_Controller::IMG_ID       => $img_id,
+				Image_Controller::AS_BG        => false,
+				Image_Controller::USE_LAZYLOAD => false,
+				Image_Controller::SRC_SIZE     => Image_Sizes::CORE_FULL,
+				Image_Controller::SRCSET_SIZES => [
+					'medium',
+					'medium_large',
+					'large',
+					Image_Sizes::CORE_FULL,
+				],
+			],
+		);
+	}
+
+	/**
+	 * @param int $slide_id
+	 *
+	 * @return string|Deferred_Component
+	 */
+	protected function get_image_caption( int $slide_id ) {
+		$thumbnail_image = get_posts( [ 'p' => $slide_id, 'post_type' => 'attachment' ] );
+
+		if ( empty( $thumbnail_image ) && empty( $thumbnail_image[0] ) ) {
+			return '';
+		}
+
+		return defer_template_part( 'components/text/text', null, [
+			Text_Controller::CLASSES => [
+				'b-gallery-slider__meta-caption',
+			],
+			Text_Controller::CONTENT => esc_html( $thumbnail_image[0]->post_excerpt ) ?? '',
+		] );
+	}
 }
