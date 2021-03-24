@@ -245,8 +245,10 @@ class Lead_Form_Block_Controller extends Abstract_Controller {
 		}
 
 		// TODO: turn this into a filterable thing
-		$allowed_blocks = [ 'gravityforms/form' ];
+		$template = [
+			[ 'gravityforms/form', [] ],
+		];
 
-		return sprintf( '<InnerBlocks allowedBlocks="%s" />', esc_attr( wp_json_encode( $allowed_blocks ) ) );
+		return sprintf( '<InnerBlocks template="%s" templateLock="all" />', esc_attr( wp_json_encode( $template ) ) );
 	}
 }
