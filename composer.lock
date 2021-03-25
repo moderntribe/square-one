@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e5c6a59681db9f95bc140ed123397d3c",
+    "content-hash": "7e482242bb06f33c89a3c5fd257dd4e6",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -987,16 +987,16 @@
         },
         {
             "name": "moderntribe/tribe-acf-post-list-field",
-            "version": "2.1.2",
+            "version": "2.1.3",
             "source": {
                 "type": "git",
                 "url": "git@github.com:moderntribe/tribe-acf-post-list-field.git",
-                "reference": "c8902fc62f79bedfb0ed4138e905d8d117e28ac6"
+                "reference": "1f889d6665adee609ba9c3a11bbf0a803e1de390"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/tribe-acf-post-list-field/zipball/c8902fc62f79bedfb0ed4138e905d8d117e28ac6",
-                "reference": "c8902fc62f79bedfb0ed4138e905d8d117e28ac6",
+                "url": "https://api.github.com/repos/moderntribe/tribe-acf-post-list-field/zipball/1f889d6665adee609ba9c3a11bbf0a803e1de390",
+                "reference": "1f889d6665adee609ba9c3a11bbf0a803e1de390",
                 "shasum": ""
             },
             "require": {
@@ -1016,7 +1016,7 @@
                 }
             ],
             "description": "A post list field type for Advanced Custom Fields",
-            "time": "2021-03-10T21:16:59+00:00"
+            "time": "2021-03-25T05:57:52+00:00"
         },
         {
             "name": "moderntribe/tribe-libs",
@@ -1501,16 +1501,16 @@
         },
         {
             "name": "php-di/php-di",
-            "version": "6.3.0",
+            "version": "6.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-DI/PHP-DI.git",
-                "reference": "955cacea6b0beaba07e8c11b8367f5b3d5abe89f"
+                "reference": "78278800b18e7c5582fd4d4e629715f5eebbfcc0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-DI/PHP-DI/zipball/955cacea6b0beaba07e8c11b8367f5b3d5abe89f",
-                "reference": "955cacea6b0beaba07e8c11b8367f5b3d5abe89f",
+                "url": "https://api.github.com/repos/PHP-DI/PHP-DI/zipball/78278800b18e7c5582fd4d4e629715f5eebbfcc0",
+                "reference": "78278800b18e7c5582fd4d4e629715f5eebbfcc0",
                 "shasum": ""
             },
             "require": {
@@ -1527,7 +1527,7 @@
                 "doctrine/annotations": "~1.2",
                 "friendsofphp/php-cs-fixer": "^2.4",
                 "mnapoli/phpunit-easymock": "^1.2",
-                "ocramius/proxy-manager": "~2.0.2",
+                "ocramius/proxy-manager": "^2.0.2",
                 "phpstan/phpstan": "^0.12",
                 "phpunit/phpunit": "^8.5|^9.0"
             },
@@ -1569,7 +1569,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-10-12T14:39:15+00:00"
+            "time": "2021-03-25T10:29:47+00:00"
         },
         {
             "name": "php-di/phpdoc-reader",
