@@ -191,20 +191,20 @@ class Gallery_Slider_Controller extends Abstract_Controller {
 	 */
 	protected function get_slider_options(): string {
 		$args = [
-			'loop'           => "true",
-			'slidesPerView'  => 'auto',
-			'spaceBetween'   => 40,
-			'centeredSlides' => "true",
-			'preloadImages'  => "true",
-			'lazy'           => "true",
-			'keyboard'       => "true",
-			'grabCursor'     => "true",
+			'slidesPerView' => 'auto',
+			'spaceBetween'  => 40,
+			'preloadImages' => "true",
+			'lazy'          => "true",
+			'keyboard'      => "true",
+			'grabCursor'    => "true",
 		];
 
-		// FIXED IMAGE RATIO:
-		// 'loop' => "true",
-		// 'slidesPerView'  => 'auto',
-		// 'loopedSlides'   => 8, not sure if needed? testing works without
+		// Fixed image ratio swiper options.
+		// 'loopedSlides' => {number} slide count, not sure if needed? testing works without
+		if ( self::FIXED === $this->image_ratio ) {
+			$args['loop']           = "true";
+			$args['centeredSlides'] = "true";
+		}
 
 		return json_encode( $args );
 	}
@@ -254,8 +254,7 @@ class Gallery_Slider_Controller extends Abstract_Controller {
 	 * @return string
 	 */
 	protected function get_image_template( $img_id ): string {
-		$img          = $this->get_slide_img( $img_id );
-		$slide_markup = $img;
+		$slide_markup = $this->get_slide_img( $img_id );
 		$slide_markup .= defer_template_part( 'components/container/container', null, [
 			Container_Controller::CLASSES => [
 				'b-gallery-slider__meta-wrap',
@@ -272,25 +271,32 @@ class Gallery_Slider_Controller extends Abstract_Controller {
 	 * @return Deferred_Component
 	 */
 	public function get_slide_img( int $img_id ): Deferred_Component {
-		// FIXED IMAGE RATIO:
-		// Image size = 16:9
-		// Image classes = s-aspect-ratio-16-9
-		return defer_template_part(
-			'components/image/image',
-			null,
-			[
-				Image_Controller::IMG_ID       => $img_id,
-				Image_Controller::CLASSES      => [ 's-aspect-ratio-16-9' ],
-				Image_Controller::AS_BG        => false,
-				Image_Controller::USE_LAZYLOAD => false,
-				Image_Controller::SRC_SIZE     => Image_Sizes::SIXTEEN_NINE,
-				Image_Controller::SRCSET_SIZES => [
-					Image_Sizes::SIXTEEN_NINE_SMALL,
-					Image_Sizes::SIXTEEN_NINE,
-					Image_Sizes::SIXTEEN_NINE_LARGE,
-				],
+		$image_args = [
+			Image_Controller::IMG_ID       => $img_id,
+			Image_Controller::CLASSES      => [ 'b-gallery-slider__image' ],
+			Image_Controller::AS_BG        => false,
+			Image_Controller::USE_LAZYLOAD => false,
+			Image_Controller::SRC_SIZE     => Image_Sizes::CORE_FULL,
+			Image_Controller::SRCSET_SIZES => [
+				'medium',
+				'large',
+				Image_Sizes::CORE_MOBILE,
+				Image_Sizes::CORE_FULL,
 			],
-		);
+		];
+
+		// Fixed image ratio settings.
+		if ( self::FIXED === $this->image_ratio ) {
+			$image_args[ Image_Controller::CLASSES ][]    = 's-aspect-ratio-16-9';
+			$image_args[ Image_Controller::SRC_SIZE ]     = Image_Sizes::SIXTEEN_NINE;
+			$image_args[ Image_Controller::SRCSET_SIZES ] = [
+				Image_Sizes::SIXTEEN_NINE_SMALL,
+				Image_Sizes::SIXTEEN_NINE,
+				Image_Sizes::SIXTEEN_NINE_LARGE,
+			];
+		}
+
+		return defer_template_part( 'components/image/image', null, $image_args );
 	}
 
 	/**
