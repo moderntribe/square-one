@@ -18,9 +18,31 @@
 
 /* -----------------------------------------------------------------------------
  *
- * Gallery Slide
+ * Gallery Slider
  *
  * ----------------------------------------------------------------------------- */
+
+.b-gallery-slider__slider {
+
+	.c-slider__arrows {
+		max-width: calc(var(--grid-width) + (100% - var(--grid-width)) / 2);
+	}
+
+	/* CASE: Image Ratio Variable */
+	.b-gallery-slider--variable & {
+		position: relative;
+		overflow-x: hidden;
+	}
+}
+
+.c-slider__main {
+
+	/* CASE: Image Ratio Variable */
+	.b-gallery-slider--variable & {
+		max-width: calc(var(--grid-width) + (100% - var(--grid-width)) / 2);
+		margin: 0 0 0 auto;
+	}
+}
 
 .c-slider__slide {
 

@@ -206,6 +206,11 @@ class Gallery_Slider_Controller extends Abstract_Controller {
 			$args['centeredSlides'] = "true";
 		}
 
+		// Variable image ratio swiper options.
+		if ( self::VARIABLE === $this->image_ratio ) {
+			$args['slidesOffsetAfter'] = 40;
+		}
+
 		return json_encode( $args );
 	}
 
