@@ -6,6 +6,8 @@ All notable changes to this project will be documented in this file.
 * Updated: lead form block to use Gravity Forms child / inner block.
 * Updated: updated swiper to latest and addressed slider component issues.
 * Updated: postcss gulp config to preserve custom properties and to allow for native use of focus-visible and focus-within.
+* Updated: Updated WP Core to WP 5.7. Various plugin updates. Renamed Github actions to improve readability.
+* Fixed: Media + Text block icon image asset path.
 
 ## 2021.02
 * Fixed: An issue with the callback used in the `scroll-to` script.
