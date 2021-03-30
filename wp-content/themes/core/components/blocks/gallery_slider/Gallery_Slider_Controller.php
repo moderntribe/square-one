@@ -3,6 +3,7 @@ declare( strict_types=1 );
 
 namespace Tribe\Project\Templates\Components\blocks\gallery_slider;
 
+use Symfony\Component\DomCrawler\Image;
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\container\Container_Controller;
@@ -190,14 +191,20 @@ class Gallery_Slider_Controller extends Abstract_Controller {
 	 */
 	protected function get_slider_options(): string {
 		$args = [
+			'loop'           => "true",
+			'slidesPerView'  => 'auto',
+			'spaceBetween'   => 40,
+			'centeredSlides' => "true",
 			'preloadImages'  => "true",
 			'lazy'           => "true",
 			'keyboard'       => "true",
 			'grabCursor'     => "true",
-			'slidesPerView'  => 3,
-			'centeredSlides' => "true",
-			'spaceBetween'   => 40,
 		];
+
+		// FIXED IMAGE RATIO:
+		// 'loop' => "true",
+		// 'slidesPerView'  => 'auto',
+		// 'loopedSlides'   => 8, not sure if needed? testing works without
 
 		return json_encode( $args );
 	}
@@ -265,19 +272,22 @@ class Gallery_Slider_Controller extends Abstract_Controller {
 	 * @return Deferred_Component
 	 */
 	public function get_slide_img( int $img_id ): Deferred_Component {
+		// FIXED IMAGE RATIO:
+		// Image size = 16:9
+		// Image classes = s-aspect-ratio-16-9
 		return defer_template_part(
 			'components/image/image',
 			null,
 			[
 				Image_Controller::IMG_ID       => $img_id,
+				Image_Controller::CLASSES      => [ 's-aspect-ratio-16-9' ],
 				Image_Controller::AS_BG        => false,
 				Image_Controller::USE_LAZYLOAD => false,
-				Image_Controller::SRC_SIZE     => Image_Sizes::CORE_FULL,
+				Image_Controller::SRC_SIZE     => Image_Sizes::SIXTEEN_NINE,
 				Image_Controller::SRCSET_SIZES => [
-					'medium',
-					'medium_large',
-					'large',
-					Image_Sizes::CORE_FULL,
+					Image_Sizes::SIXTEEN_NINE_SMALL,
+					Image_Sizes::SIXTEEN_NINE,
+					Image_Sizes::SIXTEEN_NINE_LARGE,
 				],
 			],
 		);

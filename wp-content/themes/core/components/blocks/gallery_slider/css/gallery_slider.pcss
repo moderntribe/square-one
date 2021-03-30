@@ -5,7 +5,7 @@
  * ----------------------------------------------------------------------------- */
 
 .b-gallery-slider {
-
+	padding-bottom: var(--spacer-70); /* should blocks have vertical padding? */
 }
 
 .b-gallery-slider__header {
@@ -16,6 +16,10 @@
 	padding-top: var(--spacer-70);
 }
 
+.b-gallery-slider__meta-wrap {
+	margin-top: var(--spacer-10);
+}
+
 /* -----------------------------------------------------------------------------
  *
  * Gallery Image Ratios
@@ -24,6 +28,14 @@
 
 .b-gallery-slider--fixed {
 
+	.c-slider__slide {
+		width: calc(10/12 * 100%);
+		max-width: var(--grid-10-col);
+	}
+
+	.c-image {
+		overflow: hidden;
+	}
 }
 
 .b-gallery-slider--variable {
