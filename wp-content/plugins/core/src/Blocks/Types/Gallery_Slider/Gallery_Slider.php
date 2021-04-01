@@ -66,10 +66,14 @@ class Gallery_Slider extends Block_Config {
 					'type'  => 'link',
 				] )
 			)->add_field( new Field( self::NAME . '_' . self::GALLERY, [
-					'label' => __( 'Gallery', 'tribe' ),
-					'name'  => self::GALLERY,
-					'type'  => 'gallery',
-					'max'   => 12,
+					'label'        => __( 'Gallery', 'tribe' ),
+					'name'         => self::GALLERY,
+					'type'         => 'gallery',
+					'max'          => 12,
+					'instructions' => __(
+						'Recommended image size by layout:<br>Fixed: 1920px wide with a 16:9 aspect ratio.<br>Variable: 900px height minimum with any aspect ratio.',
+						'tribe'
+					),
 				] )
 			);
 
