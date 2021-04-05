@@ -40,7 +40,7 @@ class Sample_REST_Route extends Abstract_Rest_Route {
 			'name'          => [
 				'type'        => 'string',
 				'default'     => '',
-				'description' => 'Example argument.',
+				'description' => __( 'Example argument.', 'tribe' ),
 			],
 		];
 	}
