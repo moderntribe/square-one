@@ -59,7 +59,7 @@ class Sample_Route extends Abstract_Route {
 	 * @return string The pattern for the route.
 	 */
 	public function get_pattern(): string {
-		return '^sample$';
+		return '^sample\/?((?:19|20)\d{2}?)?\/?$';
 	}
 
 	/**
@@ -68,7 +68,9 @@ class Sample_Route extends Abstract_Route {
 	 * @return array Matches for the route.
 	 */
 	public function get_matches(): array {
-		return [];
+		return [
+			'year' => '$matches[1]',
+		];
 	}
 
 	/**
