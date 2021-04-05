@@ -1,10 +1,9 @@
-<?php
+<?php declare( strict_types=1 );
 /**
  * Subscribe routes to WP lifecycle hooks.
  *
  * @package Project
  */
-declare( strict_types=1 );
 
 namespace Tribe\Project\Routes;
 

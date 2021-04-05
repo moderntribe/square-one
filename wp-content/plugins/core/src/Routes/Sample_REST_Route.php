@@ -1,8 +1,9 @@
-<?php
+<?php declare( strict_types=1 );
 /**
  * Sample REST route.
+ *
+ * @package Project
  */
-declare( strict_types=1 );
 
 namespace Tribe\Project\Routes;
 

@@ -1,8 +1,10 @@
-<?php
+<?php declare( strict_types=1 );
 /**
  * Sample route.
+ *
+ * @package Project
  */
-declare( strict_types=1 );
+
 
 namespace Tribe\Project\Routes;
 
@@ -31,7 +33,7 @@ class Sample_Route extends Abstract_Route {
 	 */
 	public function get_request_methods(): array {
 		return [
-			'GET',
+			\WP_REST_Server::READABLE,
 		];
 	}
 

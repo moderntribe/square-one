@@ -1,8 +1,9 @@
-<?php
+<?php declare( strict_types=1 );
 /**
  * Defines all regular and REST routes to register.
+ *
+ * @package Project
  */
-declare( strict_types=1 );
 
 namespace Tribe\Project\Routes;
 
