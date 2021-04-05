@@ -49,6 +49,8 @@ class Sample_Route extends Abstract_Route {
 	/**
 	 * Returns the pattern for the route.
 	 *
+	 * Example: https://square1.tribe/sample/2021/
+	 *
 	 * @return string The pattern for the route.
 	 */
 	public function get_pattern(): string {

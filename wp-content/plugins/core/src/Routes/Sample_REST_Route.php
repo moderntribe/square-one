@@ -7,12 +7,12 @@
 
 namespace Tribe\Project\Routes;
 
-use Tribe\Libs\Routes\Abstract_Rest_Route;
+use Tribe\Libs\Routes\Abstract_REST_Route;
 
 /**
  * Class for an example REST route.
  */
-class Sample_REST_Route extends Abstract_Rest_Route {
+class Sample_REST_Route extends Abstract_REST_Route {
 	/**
 	 * Registers routes.
 	 *
@@ -49,6 +49,8 @@ class Sample_REST_Route extends Abstract_Rest_Route {
 	/**
 	 * Callback for REST endpoint.
 	 *
+	 * Example: https://square1.tribe/wp-json/tribe/v1/sample/?name=test
+	 *
 	 * @param \WP_REST_Request $request    The rest request class.
 	 * @return \WP_REST_Response|\WP_Error The response object, \WP_Error on failure.
 	 */
@@ -56,7 +58,10 @@ class Sample_REST_Route extends Abstract_Rest_Route {
 		return rest_ensure_response(
 			new \WP_Error(
 				'sample_error',
-				esc_html__( 'Sample REST Endpoint Error.', 'tribe' )
+				sprintf(
+					esc_html__( 'Sample REST Endpoint Error. Param Name: %1$s', 'tribe' ),
+					$request->get_param( 'name' )
+				)
 			)
 		);
 	}
