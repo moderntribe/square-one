@@ -13,15 +13,6 @@ use Tribe\Libs\Routes\Abstract_Route;
  */
 class Sample_Route extends Abstract_Route {
 	/**
-	 * Registers routes.
-	 *
-	 * @return void
-	 */
-	public function register(): void {
-		add_filter( 'core_js_config', [ $this, 'js_config' ] );
-	}
-
-	/**
 	 * Javascript configuration for this route.
 	 *
 	 * @param array $data The current core JS configuration.

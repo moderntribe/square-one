@@ -22,8 +22,7 @@ use Tribe\Project\Taxonomies;
 use Tribe\Project\Theme\Theme_Definer;
 use Tribe\Project\Theme\Theme_Subscriber;
 use Tribe\Project\Routes\Routes_Definer;
-use Tribe\Libs\Routes\Route_Subscriber;
-use Tribe\Libs\Routes\Router;
+use Tribe\Project\Routes\Routes_Subscriber;
 
 class Core {
 	public const PLUGIN_FILE = 'plugin.file';
@@ -62,7 +61,7 @@ class Core {
 		Google_Tag_Manager_Subscriber::class,
 		Gravity_Forms_Subscriber::class,
 		Nav_Menus_Subscriber::class,
-		Route_Subscriber::class,
+		Routes_Subscriber::class,
 		Shortcodes_Subscriber::class,
 		Theme_Subscriber::class,
 		Yoast_SEO_Subscriber::class,
@@ -105,6 +104,7 @@ class Core {
 		'\Tribe\Libs\P2P\P2P_Subscriber',
 		'\Tribe\Libs\Queues\Queues_Subscriber',
 		'\Tribe\Libs\Queues_Mysql\Mysql_Backend_Subscriber',
+		'\Tribe\Libs\Routes\Route_Subscriber',
 		'\Tribe\Libs\Required_Page\Required_Page_Subscriber',
 		'\Tribe\Libs\Settings\Settings_Subscriber',
 		'\Tribe\Libs\Whoops\Whoops_Subscriber',
