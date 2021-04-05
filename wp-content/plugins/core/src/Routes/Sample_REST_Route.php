@@ -17,7 +17,7 @@ class Sample_REST_Route extends Abstract_Rest_Route {
 	 *
 	 * @return void
 	 */
-	public function register() : void {
+	public function register(): void {
 		register_rest_route(
 			$this->get_project_namespace(),
 			'/sample',
@@ -35,7 +35,7 @@ class Sample_REST_Route extends Abstract_Rest_Route {
 	 *
 	 * @return array Valid parameters for this endpoint.
 	 */
-	public function get_supported_args() : array {
+	public function get_supported_args(): array {
 		return [
 			'name'          => [
 				'type'        => 'string',

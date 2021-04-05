@@ -14,7 +14,12 @@ use Tribe\Libs\Routes\Route_Definer;
  * Class to define routes to register.
  */
 class Routes_Definer implements Definer_Interface {
-	public function define() : array {
+	/**
+	 * Define routes that need to be registered.
+	 *
+	 * @return array REST and Regular routes that should be registered.
+	 */
+	public function define(): array {
 		return [
 			\Tribe\Libs\Routes\Route_Definer::ROUTES      => DI\add(
 				[

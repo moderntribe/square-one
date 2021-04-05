@@ -17,7 +17,7 @@ class Sample_Route extends Abstract_Route {
 	 *
 	 * @return void
 	 */
-	public function register() : void {
+	public function register(): void {
 		add_filter( 'core_js_config', [ $this, 'js_config' ] );
 	}
 
@@ -27,7 +27,7 @@ class Sample_Route extends Abstract_Route {
 	 * @param array $data The current core JS configuration.
 	 * @return array      Modified core JS configuration.
 	 */
-	public function js_config( array $data = [] ) : array {
+	public function js_config( array $data = [] ): array {
 		$data['FormSubmitEndpoint'] = rest_url( '/tribe/v1/submit-form/' );
 		return $data;
 	}
@@ -38,7 +38,7 @@ class Sample_Route extends Abstract_Route {
 	 *
 	 * @return array Acceptable request methods for this route.
 	 */
-	public function get_request_methods() : array {
+	public function get_request_methods(): array {
 		return [
 			'GET',
 		];
@@ -49,7 +49,7 @@ class Sample_Route extends Abstract_Route {
 	 *
 	 * @return string The name for the route.
 	 */
-	public function get_name() : string {
+	public function get_name(): string {
 		return 'sample';
 	}
 
@@ -58,7 +58,7 @@ class Sample_Route extends Abstract_Route {
 	 *
 	 * @return string The pattern for the route.
 	 */
-	public function get_pattern() : string {
+	public function get_pattern(): string {
 		return '^sample$';
 	}
 
@@ -67,7 +67,7 @@ class Sample_Route extends Abstract_Route {
 	 *
 	 * @return array Matches for the route.
 	 */
-	public function get_matches() : array {
+	public function get_matches(): array {
 		return [];
 	}
 
@@ -76,7 +76,7 @@ class Sample_Route extends Abstract_Route {
 	 *
 	 * @return array Query var names for the route.
 	 */
-	public function get_query_var_names() : array {
+	public function get_query_var_names(): array {
 		return array_keys( $this->get_matches() );
 	}
 
@@ -85,7 +85,7 @@ class Sample_Route extends Abstract_Route {
 	 *
 	 * @return string The template name for the route.
 	 */
-	public function get_template() : string {
+	public function get_template(): string {
 		return locate_template( 'routes/sample.php' );
 	}
 
@@ -94,7 +94,7 @@ class Sample_Route extends Abstract_Route {
 	 *
 	 * @return string Title for the page.
 	 */
-	public function get_title() : string {
+	public function get_title(): string {
 		return esc_html__( 'Sample | Project', 'project' );
 	}
 }
