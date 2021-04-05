@@ -25,7 +25,7 @@ $c = Header_Controller::factory();
 	<?php // PLATFORM META: IE ?>
 	<meta name="application-name" content="<?php bloginfo( 'name' ); ?>">
 
-	<?php do_action( 'wp_head' ) ?>
+	<?php do_action( 'wp_head' ); ?>
 
 </head>
 

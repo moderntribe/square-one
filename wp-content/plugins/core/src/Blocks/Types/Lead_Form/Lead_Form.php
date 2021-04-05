@@ -16,8 +16,6 @@ class Lead_Form extends Block_Config {
 	public const DESCRIPTION     = 'description';
 	public const CTA             = 'cta';
 
-	public const FORM = 'form';
-
 	public const SECTION_SETTINGS = 's-settings';
 	public const LAYOUT           = 'layout';
 	public const LAYOUT_LEFT      = 'left';
@@ -49,6 +47,7 @@ class Lead_Form extends Block_Config {
 			'supports'    => [
 				'align'  => false,
 				'anchor' => true,
+				'jsx'    => true,
 			],
 			'example'     => [
 				'attributes' => [
@@ -65,7 +64,6 @@ class Lead_Form extends Block_Config {
 							'url'    => '#',
 							'target' => '',
 						],
-						self::FORM        => 1 //Will work if a site has a form added. Be blank if not.
 					],
 				],
 			],
@@ -101,12 +99,6 @@ class Lead_Form extends Block_Config {
 					'label' => __( 'Call to Action', 'tribe' ),
 					'name'  => self::CTA,
 					'type'  => 'link',
-				] )
-			)->add_field( new Field( self::NAME . '_' . self::FORM, [
-					'label'   => __( 'Form', 'tribe' ),
-					'name'    => self::FORM,
-					'type'    => 'select',
-					'choices' => $this->get_form_options(),
 				] )
 			);
 
@@ -175,22 +167,5 @@ class Lead_Form extends Block_Config {
 				] )
 			);
 	}
-
-	/**
-	 * @return array
-	 */
-	protected function get_form_options() {
-		if ( ! class_exists( 'GFFormsModel' ) ) {
-			return [];
-		}
-		$choices   = [];
-		$choices[] = __( 'Select One', 'tribe' );
-		foreach ( \GFFormsModel::get_forms() as $form ) {
-			$choices[ $form->id ] = $form->title;
-		}
-
-		return $choices;
-	}
-
 
 }
