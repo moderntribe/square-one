@@ -59,7 +59,7 @@ class Sample_REST_Route extends Abstract_REST_Route {
 			new \WP_Error(
 				'sample_error',
 				sprintf(
-					esc_html__( 'Sample REST Endpoint Error. Param Name: %1$s', 'tribe' ),
+					esc_html__( 'Sample REST Endpoint Error. Params: {name: %1$s}', 'tribe' ),
 					$request->get_param( 'name' )
 				)
 			)
