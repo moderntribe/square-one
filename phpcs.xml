@@ -78,7 +78,6 @@
     <rule ref="Generic.Classes.OpeningBraceSameLine"/>
     <rule ref="Generic.Arrays.DisallowLongArraySyntax.Found"/>
     <rule ref="Generic.WhiteSpace.DisallowSpaceIndent"/>
-    <rule ref="Generic.WhiteSpace.DisallowSpaceIndent"/>
     <rule ref="Generic.Formatting.MultipleStatementAlignment"/>
     <rule ref="Generic.Files.EndFileNewline"/>
     <rule ref="Generic.WhiteSpace.ScopeIndent">
