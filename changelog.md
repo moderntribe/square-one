@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2021.04
+* Updated: docker php-ini-overrides.ini to use xdebug v3 configuration for latest docker builds.
+
 ## 2021.03
 * Updated: lead form block to use Gravity Forms child / inner block.
 * Updated: updated swiper to latest and addressed slider component issues.
