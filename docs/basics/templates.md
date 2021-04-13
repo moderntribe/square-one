@@ -2,4 +2,4 @@
 
 TODO: high level walkthrough of how the WP template hierarchy maps to our components
 
-For more detail, see [Architectural Concepts > Components](../architecture/components.md)
+For more detail, see [Concepts > Components](../concepts/components.md)
