@@ -321,8 +321,47 @@ the Template and the Controller inside the Component's directory. It starts with
 
 And let's not stop with just styles. We can have portable, component-specific behaviors encapsulated in JavaScript
 files that live right along side the Template. Create an `index.js` file to serve as a clearing-house, loading
-additional files found in the Component's `js` directory. The build system will find this `index.js` and load it
-(along with anything it imports) into the global JS bundle.
+additional files found in the Component's `js` directory. Then, append your component's main export to the `components.js` loader in `.../themes/core/assets/js/src/theme/core/components.js`
+
+Using this main components file, we can have fine control of the order in which webpack imports modules.
+
+```js
+/**
+ * @module
+ * @exports init
+ * @description Initializes all components found in the components directory of the theme
+ */
+
+import accordion from 'components/accordion';
+import card from 'components/card';
+import comments from 'components/comments';
+import share from 'components/share';
+import slider from 'components/slider';
+import tabs from 'components/tabs';
+import video from 'components/video';
+import dialog from 'components/dialog';
+
+// Import your component's module.
+import myComponent from 'components/my-component';
+
+const init = () => {
+	accordion();
+	card();
+	comments();
+	share();
+	slider();
+	tabs();
+	video();
+	dialog();
+
+	// Initialize your component's module.
+	myComponent();
+
+	console.info( 'SquareOne Theme: Initialized all components.' );
+};
+
+export default init;
+```
 
 ## Loading the Component
 
