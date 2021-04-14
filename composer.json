@@ -18,7 +18,7 @@
   },
   "description": "Modern Tribe's Square One WordPress setup",
   "type": "project",
-  "license": "Proprietary",
+  "license": "GPLv2",
   "minimum-stability": "dev",
   "prefer-stable": true,
   "repositories": [
