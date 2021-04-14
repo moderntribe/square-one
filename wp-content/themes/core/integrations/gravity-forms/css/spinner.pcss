@@ -21,6 +21,12 @@
 	@media (--viewport-medium) {
 		padding-right: 50px;
 	}
+
+	/* Case: Center Button so need to remove right padding */
+	.b-lead-form--layout-bottom & {
+		padding-right: 0;
+		text-align: center;
+	}
 }
 
 [id*="gform_ajax_spinner_"] {

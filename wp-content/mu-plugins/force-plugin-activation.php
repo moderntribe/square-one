@@ -21,7 +21,7 @@ class Force_Plugin_Activation {
 		//'tribe-admin-dashboard/tribe-admin-dashboard.php',
 		'disable-emojis/disable-emojis.php',
 		'acf-image-select/acf-image-select.php',
-		'acf-advanced-taxonomy-selector/acf-advanced_taxonomy_selector.php',
+		'tribe-acf-post-list-field/tribe-acf-post-list-field.php',
 	];
 
 	/**

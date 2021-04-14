@@ -31,6 +31,14 @@ const canLocalStore = () => {
 	}
 };
 
+const isElementVisible = ( el ) => {
+	return !! ( el.offsetWidth || el.offsetHeight || el.getClientRects().length );
+};
+
+const isElementHidden = ( el ) => {
+	return ! isElementVisible( el );
+};
+
 /**
  * @function supportsWorkers
  * @description Checks for both service worker support and indexedDb support, plus also checks if we want them loaded with a passed php constant messaged to js through our js config
@@ -71,6 +79,8 @@ function browserTests() {
 export {
 	isJson,
 	canLocalStore,
+	isElementVisible,
+	isElementHidden,
 	browserTests,
 	supportsWorkers,
 };

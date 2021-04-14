@@ -16,6 +16,13 @@ if ( empty( $c->get_slides() ) ) {
 
 <div <?php echo $c->get_classes(); ?>>
 
+	<?php if ( $c->should_show_arrows() ) { ?>
+		<div class="c-slider__arrows">
+			<div class="c-slider__button c-slider__button--prev swiper-button-prev"></div>
+			<div class="c-slider__button c-slider__button--next swiper-button-next"></div>
+		</div>
+	<?php } ?>
+
 	<div <?php echo $c->get_main_classes(); ?> <?php echo $c->get_main_attrs(); ?>>
 
 		<div <?php echo $c->get_wrapper_classes(); ?>>
@@ -25,13 +32,6 @@ if ( empty( $c->get_slides() ) ) {
 				</div>
 			<?php } ?>
 		</div>
-
-		<?php if ( $c->should_show_arrows() ) { ?>
-			<div class="c-slider__arrows">
-				<div class="c-slider__button c-slider__button--prev swiper-button-prev"></div>
-				<div class="c-slider__button c-slider__button--next swiper-button-next"></div>
-			</div>
-		<?php } ?>
 
 		<?php if ( $c->should_show_pagination() ) { ?>
 			<div class="c-slider__pagination swiper-pagination" data-js="c-slider-pagination"></div>

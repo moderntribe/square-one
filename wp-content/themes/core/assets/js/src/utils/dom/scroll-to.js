@@ -1,4 +1,3 @@
-
 /**
  * @function scrollTo
  * @since 1.0
@@ -8,7 +7,7 @@
 const scrollTo = ( opts ) => {
 	const options = Object.assign( {
 		auto: false,
-		auto_coefficent: 2.5,
+		autoCoefficient: 2.5,
 		afterScroll() {
 		},
 
@@ -16,6 +15,7 @@ const scrollTo = ( opts ) => {
 		easing: 'linear',
 		offset: 0,
 		$target: $(),
+		$scrollContainer: $( 'html, body' ),
 	}, opts );
 	let position;
 	let htmlPosition;
@@ -27,13 +27,13 @@ const scrollTo = ( opts ) => {
 			htmlPosition = $( 'html' ).scrollTop();
 
 			if ( position > htmlPosition ) {
-				options.duration = ( position - htmlPosition ) / options.auto_coefficent;
+				options.duration = ( position - htmlPosition ) / options.autoCoefficient;
 			} else {
-				options.duration = ( htmlPosition - position ) / options.auto_coefficent;
+				options.duration = ( htmlPosition - position ) / options.autoCoefficient;
 			}
 		}
 
-		$( 'html, body' ).animate( { scrollTop: position }, options.duration, options.easing, options.after_scroll );
+		options.$scrollContainer.animate( { scrollTop: position }, options.duration, options.easing, options.afterScroll );
 	}
 };
 

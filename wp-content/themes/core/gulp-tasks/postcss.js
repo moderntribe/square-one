@@ -18,7 +18,7 @@ const sharedPlugins = [
 		],
 	} ),
 	require( 'postcss-mixins' ),
-	require( 'postcss-custom-properties' )( { preserve: false } ),
+	require( 'postcss-custom-properties' )( { preserve: true } ),
 	require( 'postcss-simple-vars' ),
 	require( 'postcss-custom-media' ),
 	require( 'postcss-functions' )( { functions: postcssFunctions } ),
@@ -26,7 +26,7 @@ const sharedPlugins = [
 	require( 'postcss-aspect-ratio' ),
 	require( 'postcss-nested' ),
 	require( 'postcss-inline-svg' ),
-	require( 'postcss-preset-env' )( { stage: 0, autoprefixer: { grid: true } } ),
+	require( 'postcss-preset-env' )( { stage: 0, autoprefixer: { grid: true }, features: { 'focus-visible-pseudo-class': false, 'focus-within-pseudo-class': false } } ),
 	require( 'postcss-calc' ),
 ];
 

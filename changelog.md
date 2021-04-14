@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2021.04
+* Updated: docker php-ini-overrides.ini to use xdebug v3 configuration for latest docker builds.
+
+## 2021.03
+* Updated: lead form block to use Gravity Forms child / inner block.
+* Updated: updated swiper to latest and addressed slider component issues.
+* Updated: postcss gulp config to preserve custom properties and to allow for native use of focus-visible and focus-within.
+* Updated: Updated WP Core to WP 5.7. Various plugin updates. Renamed Github actions to improve readability.
+* Fixed: Media + Text block icon image asset path.
+
+## 2021.02
+* Fixed: An issue with the callback used in the `scroll-to` script.
+* Added: Handling for broken browser implementation of skip links and adding automatic focus switching for anchor hash links for a11y.
+* Fixed: Add header and footer templates to ensure default TEC templates will load.
+* Updated: Adds Husky hooks for linting before committing code.
+
 ## 2021.01
 * Updated: selenium/standalone-chrome docker image to a tag that is updated frequently.
 * Fixed: CI GitHub Workflow failing and will collect artifacts if webdriver tests randomly fail for debugging.

@@ -1,4 +1,5 @@
 <?php
+declare( strict_types=1 );
 
 namespace Tribe\Project\Templates\Components\blocks\card_grid;
 
@@ -12,7 +13,6 @@ use Tribe\Project\Templates\Components\Deferred_Component;
 use Tribe\Project\Templates\Components\image\Image_Controller;
 use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Templates\Components\text\Text_Controller;
-use Tribe\Project\Templates\Models\Post_List_Object;
 use Tribe\Project\Theme\Config\Image_Sizes;
 
 class Card_Grid_Controller extends Abstract_Controller {
@@ -31,15 +31,12 @@ class Card_Grid_Controller extends Abstract_Controller {
 	private string $title;
 	private string $description;
 	private array  $cta;
-	/**
-	 * @var Post_List_Object[]
-	 */
-	private array $posts;
-	private array $container_classes;
-	private array $loop_classes;
-	private array $loop_attrs;
-	private array $classes;
-	private array $attrs;
+	private array  $posts;
+	private array  $container_classes;
+	private array  $loop_classes;
+	private array  $loop_attrs;
+	private array  $classes;
+	private array  $attrs;
 
 	public function __construct( array $args = [] ) {
 		$args                    = $this->parse_args( $args );
@@ -162,7 +159,7 @@ class Card_Grid_Controller extends Abstract_Controller {
 	public function get_posts_card_args() {
 		$cards = [];
 		foreach ( $this->posts as $post ) {
-			$link    = $post->get_link();
+			$link    = $post['link'];
 			$uuid    = uniqid( 'p-' );
 			$cards[] = [
 				Card_Controller::STYLE           => Card_Controller::STYLE_ELEVATED,
@@ -173,7 +170,7 @@ class Card_Grid_Controller extends Abstract_Controller {
 					[
 						Text_Controller::TAG     => 'h3',
 						Text_Controller::CLASSES => [ 'h5' ],
-						Text_Controller::CONTENT => $post->get_title(),
+						Text_Controller::CONTENT => $post['title'],
 						// Required for screen reader accessibility, below.
 						Text_Controller::ATTRS   => [ 'id' => $uuid . '-title' ],
 					]
@@ -182,7 +179,7 @@ class Card_Grid_Controller extends Abstract_Controller {
 					'components/container/container',
 					null,
 					[
-						Container_Controller::CONTENT => wpautop( $post->get_excerpt() ),
+						Container_Controller::CONTENT => wpautop( $post['excerpt'] ),
 						Container_Controller::CLASSES => [ 't-sink', 's-sink' ],
 					],
 				),
@@ -190,7 +187,7 @@ class Card_Grid_Controller extends Abstract_Controller {
 					'components/image/image',
 					null,
 					[
-						Image_Controller::IMG_ID       => $post->get_image_id(),
+						Image_Controller::IMG_ID       => $post['image_id'],
 						Image_Controller::AS_BG        => true,
 						Image_Controller::CLASSES      => [ 'c-image--bg', 's-aspect-ratio-4-3' ],
 						Image_Controller::SRC_SIZE     => Image_Sizes::FOUR_THREE,
@@ -206,6 +203,7 @@ class Card_Grid_Controller extends Abstract_Controller {
 					[
 						Link_Controller::CONTENT => __( 'Read More', 'tribe' ),
 						Link_Controller::URL     => $link['url'],
+						Link_Controller::TARGET  => $link['target'],
 						Link_Controller::CLASSES => [ 'a-cta', 'is-target-link' ],
 						Link_Controller::ATTRS   => [
 							// These attrs provide the most screen reader accessible link.

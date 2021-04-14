@@ -19,6 +19,7 @@ import applyBrowserClasses from 'utils/dom/apply-browser-classes';
 import resize from './resize';
 import plugins from './plugins';
 import viewportDims from './viewport-dims';
+import anchorHashFocus from 'utils/dom/anchor-hash-focus';
 
 import components from './components';
 import integrations from './integrations';
@@ -55,6 +56,7 @@ const init = () => {
 	// set initial states
 
 	viewportDims();
+	anchorHashFocus();
 
 	// initialize global events
 

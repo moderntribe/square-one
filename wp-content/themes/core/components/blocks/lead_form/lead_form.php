@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare( strict_types=1 );
 
 use Tribe\Project\Templates\Components\blocks\lead_form\Lead_Form_Block_Controller;
 
@@ -21,11 +20,9 @@ $c = Lead_Form_Block_Controller::factory( $args );
 			); ?>
 		<?php } ?>
 
-		<?php if ( $c->get_form_id() ) { ?>
-			<div <?php echo $c->get_form_classes(); ?>>
-				<?php echo $c->get_form(); ?>
-			</div>
-		<?php } ?>
+		<div <?php echo $c->get_form_classes(); ?>>
+			<?php echo $c->get_form(); ?>
+		</div>
 
 	</div>
 </section>

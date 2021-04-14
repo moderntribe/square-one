@@ -3,10 +3,13 @@
  */
 
 import * as tools from '../tools';
+import { trigger } from '../events';
 import scrollTo from '../dom/scroll-to';
 
 const handleAnchorClick = ( e ) => {
-	const target = document.getElementById( e.target.hash.substring( 1 ) );
+	const anchor = e.currentTarget;
+	const hash = anchor.hash.substring( 1 );
+	const target = document.getElementById( hash );
 	if ( ! target ) {
 		return;
 	}
@@ -19,6 +22,9 @@ const handleAnchorClick = ( e ) => {
 		offset: -150,
 		duration: 300,
 		$target: $( target ),
+		afterScroll: () => {
+			trigger( { event: 'modern_tribe/trigger_smooth_anchor', native: false } );
+		},
 	} );
 };
 
