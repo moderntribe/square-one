@@ -155,7 +155,7 @@ $config_defaults = [
 // Assign default constant value overrides for production
 // ==============================================================
 
-if ( defined( 'WP_ENVIRONMENT_TYPE' ) && WP_ENVIRONMENT_TYPE === 'PRODUCTION' ) {
+if ( defined( 'WP_ENVIRONMENT_TYPE' ) && WP_ENVIRONMENT_TYPE === 'production' ) {
 	$config_defaults['WP_CACHE']            = true;
 	$config_defaults['WP_DEBUG']            = false;
 	$config_defaults['WP_DEBUG_LOG']        = false;

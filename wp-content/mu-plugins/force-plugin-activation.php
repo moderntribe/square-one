@@ -65,12 +65,12 @@ class Force_Plugin_Activation {
 	public function __construct() {
 
 		// Always block non-production sites from search engines and random visitors.
-		if ( ! defined( 'WP_ENVIRONMENT_TYPE' ) || WP_ENVIRONMENT_TYPE != 'PRODUCTION' ) {
+		if ( ! defined( 'WP_ENVIRONMENT_TYPE' ) || WP_ENVIRONMENT_TYPE != 'production' ) {
 			$this->force_active[] = 'tribe-glomar/tribe-glomar.php';
 		}
 		// If you are about to refactor this, pay attention.
 		// The next *if* is not the same as an *else* on the previous one.
-		if ( defined( 'WP_ENVIRONMENT_TYPE' ) && WP_ENVIRONMENT_TYPE == 'PRODUCTION' ) {
+		if ( defined( 'WP_ENVIRONMENT_TYPE' ) && WP_ENVIRONMENT_TYPE == 'production' ) {
 			$this->force_deactive[] = 'tribe-glomar/tribe-glomar.php';
 			$this->force_active[]   = 'limit-login-attempts/limit-login-attempts.php';
 		}
