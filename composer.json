@@ -18,7 +18,7 @@
   },
   "description": "Modern Tribe's Square One WordPress setup",
   "type": "project",
-  "license": "Proprietary",
+  "license": "GPLv2",
   "minimum-stability": "dev",
   "prefer-stable": true,
   "repositories": [
@@ -86,7 +86,7 @@
     "mailgun/mailgun-php": "^2.8",
     "moderntribe/acf-image-select": "dev-master",
     "moderntribe/tribe-libs": "3.4.0",
-    "moderntribe/tribe-acf-post-list-field": "^2.1",
+    "moderntribe/tribe-acf-post-list-field": "^2.0",
     "monolog/monolog": "1.23.0",
     "nickford/acf-swatch": "1.0.7",
     "nikic/fast-route": "^1.3",
