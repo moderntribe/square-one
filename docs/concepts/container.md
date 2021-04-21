@@ -33,7 +33,7 @@ echo $story->get_source_name();
 
 ## Configuring the Container
 
-For information about hooking into WordPress using the container, see: [Subscribers](subscribers.md)
+For information about hooking into WordPress using the container, see: [Subscribers](/docs/concepts/subscribers.md)
 
 PHP-DI is an autowiring container. It will use reflection to analyze typehints in requested classes
 to automatically resolve dependencies, in many cases with zero configuration required. Let's take a

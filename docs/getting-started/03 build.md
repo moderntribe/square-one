@@ -34,7 +34,7 @@ Then simply `yarn install` in the root of this project.
 
 ### Gulp
 
-This system uses gulp to run tasks. Make sure you have installed `node_modules` at root or theme with `yarn install:theme` using the correct version of node for the project (check the .nvmrc file at root to determine that and check the [node guide](/docs/build/node.md) here for details).
+This system uses gulp to run tasks. Make sure you have installed `node_modules` at root or theme with `yarn install:theme` using the correct version of node for the project (check the .nvmrc file at root to determine that).
 
 If you don't already have the [gulp-cli](https://www.npmjs.com/package/gulp-cli) installed globally on that node version do so.
 
