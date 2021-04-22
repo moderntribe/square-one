@@ -7,7 +7,7 @@ Whether you're using PhpStorm, VS Code, or another IDE, everyone needs to know h
 ## Visual Studio Code (VS Code)
 Download and enable the [PHPCS plugin by Ioannis Kappas](https://marketplace.visualstudio.com/items?itemName=ikappas.phpcs)
 
-Square One installs PHPCS on a per-project basis, so there is no need to install PHPCS globally. If you install it globally, know that you'll need to make sure your executable is following the correct phpcs.xml found in your project's root.
+SquareOne installs PHPCS on a per-project basis, so there is no need to install PHPCS globally. If you install it globally, know that you'll need to make sure your executable is following the correct phpcs.xml found in your project's root.
 
 If you're using the plugin linked above, you shouldn't need to worry about global vs. local. It is smart enough to look at the `composer.json` to determine if it should use the project's phpcs or your global executable.
 
