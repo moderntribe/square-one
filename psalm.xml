@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<psalm
+    throwExceptionOnError="0"
+    hideExternalErrors="true"
+    autoloader="vendor/autoload.php"
+>
+    <projectFiles>
+        <directory name="wp-content/plugins/core/src"/>
+    </projectFiles>
+    <plugins>
+        <pluginClass xmlns="https://getpsalm.org/schema/config" class="PsalmWordPress\Plugin"/>
+    </plugins>
+</psalm>
