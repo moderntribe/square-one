@@ -92,6 +92,7 @@ dev/docker/mysql/*
 wp-content/themes/core/assets/css/dist
 wp-content/themes/core/assets/js/dist
 wp-content/themes/core/assets/js/vendor
+psalm.xml
 
 # WP Engine #
 #############
