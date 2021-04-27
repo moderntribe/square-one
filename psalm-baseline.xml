@@ -438,6 +438,35 @@
       <code>$type</code>
     </MissingParamType>
   </file>
+  <file src="wp-content/plugins/core/src/Routes/Routes_Definer.php">
+    <MissingDependency occurrences="2">
+      <code>Sample_REST_Route</code>
+      <code>Sample_Route</code>
+    </MissingDependency>
+    <UndefinedClass occurrences="2">
+      <code>Route_Definer</code>
+      <code>Route_Definer</code>
+    </UndefinedClass>
+  </file>
+  <file src="wp-content/plugins/core/src/Routes/Routes_Subscriber.php">
+    <HookNotFound occurrences="1"/>
+    <MissingClosureParamType occurrences="1">
+      <code>$args</code>
+    </MissingClosureParamType>
+    <MissingDependency occurrences="1">
+      <code>Sample_Route</code>
+    </MissingDependency>
+  </file>
+  <file src="wp-content/plugins/core/src/Routes/Sample_REST_Route.php">
+    <UndefinedClass occurrences="1">
+      <code>Abstract_REST_Route</code>
+    </UndefinedClass>
+  </file>
+  <file src="wp-content/plugins/core/src/Routes/Sample_Route.php">
+    <UndefinedClass occurrences="1">
+      <code>Abstract_Route</code>
+    </UndefinedClass>
+  </file>
   <file src="wp-content/plugins/core/src/Shortcodes/Gallery.php">
     <MissingClosureParamType occurrences="1">
       <code>$slide_id</code>
