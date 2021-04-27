@@ -22,6 +22,9 @@ class Interstitial extends Block_Config {
 	public const LAYOUT_LEFT      = 'left';
 	public const LAYOUT_CENTER    = 'center';
 
+	/**
+	 * @return void
+	 */
 	public function add_block() {
 		$this->set_block( new Block( self::NAME, [
 			'title'       => __( 'Interstitial', 'tribe' ),
@@ -51,6 +54,9 @@ class Interstitial extends Block_Config {
 		] ) );
 	}
 
+	/**
+	 * @return void
+	 */
 	protected function add_fields() {
 		//==========================================
 		// Content Fields

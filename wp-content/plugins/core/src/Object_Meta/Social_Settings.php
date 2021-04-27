@@ -26,6 +26,9 @@ class Social_Settings extends ACF\ACF_Meta_Group {
 		];
 	}
 
+	/**
+	 * @return string
+	 */
 	public static function get_social_follow_message( $key ) {
 		switch ( $key ) {
 			case self::FACEBOOK:
@@ -59,7 +62,7 @@ class Social_Settings extends ACF\ACF_Meta_Group {
 		return $group->get_attributes();
 	}
 
-	private function get_social_field( $field_label, $field_id, $type = 'url' ) {
+	private function get_social_field( string $field_label, string $field_id, $type = 'url' ): ACF\Field {
 		$field = new ACF\Field( self::NAME . '_' . $field_id );
 		$field->set_attributes( [
 			'label' => $field_label,

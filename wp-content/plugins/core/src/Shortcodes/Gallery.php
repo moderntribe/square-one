@@ -49,7 +49,12 @@ class Gallery implements Shortcode {
 		return $this->component->get( Controller::class, $options )->get_rendered_output();
 	}
 
-	protected function get_attachments( $atts ) {
+	/**
+	 * @return (\WP_Post|int)[]
+	 *
+	 * @psalm-return array<array-key, \WP_Post|int>
+	 */
+	protected function get_attachments( array $atts ): array {
 		$id = (int) $atts['id'];
 
 		if ( ! empty( $atts['include'] ) ) {

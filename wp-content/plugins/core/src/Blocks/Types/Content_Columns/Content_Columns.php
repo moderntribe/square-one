@@ -27,7 +27,9 @@ class Content_Columns extends Block_Config {
 	public const CONTENT_ALIGN_CENTER = 'center';
 
 	/**
-	 * Add our block
+	 * 	 * Add our block
+	 *
+	 * @return void
 	 */
 	public function add_block() {
 		$this->set_block( new Block( self::NAME, [
@@ -66,7 +68,9 @@ class Content_Columns extends Block_Config {
 	}
 
 	/**
-	 * Add Fields
+	 * 	 * Add Fields
+	 *
+	 * @return void
 	 */
 	protected function add_fields() {
 		//==========================================

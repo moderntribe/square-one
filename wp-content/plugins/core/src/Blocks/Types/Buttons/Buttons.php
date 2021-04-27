@@ -21,6 +21,9 @@ class Buttons extends Block_Config {
 	public const STYLE_SECONDARY = 'secondary';
 	public const STYLE_CTA       = 'cta';
 
+	/**
+	 * @return void
+	 */
 	public function add_block() {
 		$this->set_block( new Block( self::NAME, [
 			'title'       => __( 'Buttons', 'tribe' ),
@@ -65,6 +68,9 @@ class Buttons extends Block_Config {
 		] ) );
 	}
 
+	/**
+	 * @return void
+	 */
 	public function add_fields() {
 		$this->add_field(
 			$this->get_links_section()

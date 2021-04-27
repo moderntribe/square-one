@@ -32,7 +32,9 @@ class Media_Text extends Block_Config {
 	public const EMBED      = 'embed';
 
 	/**
-	 * Register the block
+	 * 	 * Register the block
+	 *
+	 * @return void
 	 */
 	public function add_block() {
 		$this->set_block( new Block( self::NAME, [
@@ -74,7 +76,9 @@ class Media_Text extends Block_Config {
 	}
 
 	/**
-	 * Register Fields for block
+	 * 	 * Register Fields for block
+	 *
+	 * @return void
 	 */
 	public function add_fields() {
 		//==========================================

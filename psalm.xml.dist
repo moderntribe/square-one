@@ -3,9 +3,11 @@
     throwExceptionOnError="0"
     hideExternalErrors="true"
     autoloader="vendor/autoload.php"
+    errorBaseline="psalm-baseline.xml"
 >
     <projectFiles>
-        <directory name="wp-content/plugins/core/src"/>
+        <directory name="wp-content/plugins/core" />
+        <directory name="wp-content/themes/core" />
     </projectFiles>
     <plugins>
         <pluginClass xmlns="https://getpsalm.org/schema/config" class="PsalmWordPress\Plugin"/>

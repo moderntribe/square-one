@@ -27,6 +27,9 @@ class Gallery_Grid extends Block_Config {
 	
 	public const SLIDESHOW   = 'slideshow';
 
+	/**
+	 * @return void
+	 */
 	public function add_block() {
 		$this->set_block( new Block( self::NAME, [
 			'title'       => __( 'Gallery Grid', 'tribe' ),
@@ -43,7 +46,9 @@ class Gallery_Grid extends Block_Config {
 	}
 
 	/**
-	 * Register Fields for block
+	 * 	 * Register Fields for block
+	 *
+	 * @return void
 	 */
 	public function add_fields() {
 		//==========================================

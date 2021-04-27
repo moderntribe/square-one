@@ -15,7 +15,7 @@ class Menu {
 		$this->build_cache_key();
 	}
 
-	private function build_cache_key() {
+	private function build_cache_key(): void {
 		$cache_key = [
 			'args' => $this->args,
 			'url ' => isset( $_SERVER['REQUEST_URI'] ) ? $_SERVER['REQUEST_URI'] : '',

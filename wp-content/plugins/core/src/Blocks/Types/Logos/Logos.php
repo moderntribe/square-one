@@ -21,6 +21,9 @@ class Logos extends Block_Config {
 	public const LOGO_IMAGE = 'image';
 	public const LOGO_LINK  = 'link';
 
+	/**
+	 * @return void
+	 */
 	public function add_block() {
 		$this->set_block( new Block( self::NAME, [
 			'title'       => __( 'Logos', 'tribe' ),
@@ -63,6 +66,9 @@ class Logos extends Block_Config {
 		] ) );
 	}
 
+	/**
+	 * @return void
+	 */
 	public function add_fields() {
 		$this->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
 				'label' => __( 'Lead in', 'tribe' ),

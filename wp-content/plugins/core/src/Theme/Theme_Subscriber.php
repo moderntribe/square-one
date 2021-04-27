@@ -39,25 +39,25 @@ class Theme_Subscriber extends Abstract_Subscriber {
 		$this->oembed();
 	}
 
-	private function body_classes() {
+	private function body_classes(): void {
 		add_filter( 'body_class', function ( $classes ) {
 			return $this->container->get( Body_Classes::class )->body_classes( $classes );
 		}, 10, 1 );
 	}
 
-	private function brand_meta() {
+	private function brand_meta(): void {
 		add_action( 'wp_head', function () {
 			$this->container->get( Brand_Meta::class )->inject_android_theme_color_meta();
 		}, 10, 0 );
 	}
 
-	private function customizer_settings() {
+	private function customizer_settings(): void {
 		add_action( 'customize_register', function ( $wp_customize ) {
 			$this->container->get( Customizer_Settings::class )->register_customizer_controls( $wp_customize );
 		}, 20, 1 );
 	}
 
-	private function login_screen() {
+	private function login_screen(): void {
 		add_action( 'login_enqueue_scripts', function () {
 			$this->container->get( Login_Screen::class )->inject_login_logo();
 		} );
@@ -71,13 +71,13 @@ class Theme_Subscriber extends Abstract_Subscriber {
 		} );
 	}
 
-	private function image_sizes() {
+	private function image_sizes(): void {
 		add_action( 'after_setup_theme', function () {
 			$this->container->get( Image_Sizes::class )->register_sizes();
 		}, 10, 0 );
 	}
 
-	private function image_wrap() {
+	private function image_wrap(): void {
 		add_filter( 'the_content', function ( $html ) {
 			return $this->container->get( Image_Wrap::class )->customize_wp_image_non_captioned_output( $html );
 		}, 12, 1 );
@@ -86,13 +86,13 @@ class Theme_Subscriber extends Abstract_Subscriber {
 		}, 12, 1 );
 	}
 
-	private function image_links() {
+	private function image_links(): void {
 		add_filter( 'pre_option_image_default_link_type', function () {
 			return 'none';
 		}, 10, 1 );
 	}
 
-	private function oembed() {
+	private function oembed(): void {
 		add_filter( 'oembed_dataparse', function ( $html, $data, $url ) {
 			return $this->container->get( Oembed_Filter::class )->get_video_component( $html, $data, $url );
 		}, 999, 3 );
@@ -106,13 +106,13 @@ class Theme_Subscriber extends Abstract_Subscriber {
 		}, 99, 4 );
 	}
 
-	private function supports() {
+	private function supports(): void {
 		add_action( 'after_setup_theme', function () {
 			$this->container->get( Supports::class )->add_theme_supports();
 		}, 10, 0 );
 	}
 
-	private function web_fonts() {
+	private function web_fonts(): void {
 		add_action( 'wp_enqueue_scripts', function () {
 			$this->container->get( Web_Fonts::class )->enqueue_fonts();
 		}, 0, 0 );

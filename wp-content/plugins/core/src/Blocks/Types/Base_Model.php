@@ -26,10 +26,11 @@ abstract class Base_Model {
 
 	/**
 	 * @param $key
+	 * @param array|false|int|string $default
 	 *
 	 * @return bool|mixed
 	 */
-	public function get( $key, $default = false ) {
+	public function get( string $key, $default = false ) {
 		$value = get_field( $key );
 		//check to support nullable type properties in components.
 		// ACF will in some cases return and empty string when we may want it to be null.

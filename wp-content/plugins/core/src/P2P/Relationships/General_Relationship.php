@@ -21,6 +21,11 @@ class General_Relationship extends Relationship {
 		Event::NAME,
 	];
 
+	/**
+	 * @return (bool|string[])[]
+	 *
+	 * @psalm-return array{reciprocal: true, admin_box: array{show: string, context: string}, title: array{from: string, to: string}, from_labels: array{singular_name: string, search_items: string, not_found: string, create: string}, to_labels: array{singular_name: string, search_items: string, not_found: string, create: string}, can_create_post: false}
+	 */
 	protected function get_args() {
 		return [
 			'reciprocal'      => true,

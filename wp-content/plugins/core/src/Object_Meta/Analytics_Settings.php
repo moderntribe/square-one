@@ -29,7 +29,7 @@ class Analytics_Settings extends ACF\ACF_Meta_Group {
 		return $group->get_attributes();
 	}
 
-	private function get_site_tag_gtm_field() {
+	private function get_site_tag_gtm_field(): ACF\Field {
 		$field = new ACF\Field( self::NAME . '_' . self::GOOGLE_TAG_MANAGER );
 		$field->set_attributes( [
 			'label'       => __( 'Google Tag Manager ID', 'tribe' ),

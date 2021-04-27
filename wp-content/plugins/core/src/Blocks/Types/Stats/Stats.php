@@ -35,6 +35,9 @@ class Stats extends Block_Config {
 	public const DIVIDERS_SHOW = 'show';
 	public const DIVIDERS_HIDE = 'hide';
 
+	/**
+	 * @return void
+	 */
 	public function add_block() {
 		$this->set_block( new Block( self::NAME, [
 			'title'       => __( 'Stats', 'tribe' ),
@@ -85,6 +88,9 @@ class Stats extends Block_Config {
 		] ) );
 	}
 
+	/**
+	 * @return void
+	 */
 	public function add_fields() {
 		//==========================================
 		// Content Fields

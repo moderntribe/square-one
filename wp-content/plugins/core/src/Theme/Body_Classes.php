@@ -32,7 +32,7 @@ class Body_Classes {
 		return $classes;
 	}
 
-	private function is_singular() {
+	private function is_singular(): bool {
 		if ( ! is_singular() ) {
 			return false;
 		}
@@ -46,11 +46,11 @@ class Body_Classes {
 		return true;
 	}
 
-	private function have_panels() {
+	private function have_panels(): bool {
 		return ( function_exists( 'have_panels' ) && have_panels() );
 	}
 
-	private function post_name_class( $post ) {
+	private function post_name_class( $post ): string {
 		return sanitize_html_class( $post->post_type . '-' . $post->post_name );
 	}
 }

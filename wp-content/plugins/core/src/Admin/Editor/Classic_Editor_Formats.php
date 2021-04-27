@@ -9,8 +9,8 @@ class Classic_Editor_Formats {
 	 *
 	 * Adjusts the buttons added to the "teeny" or "basic" TinyMCE editor.
 	 *
-	 * @param $buttons
-	 * @param $editor_id
+	 * @param array $buttons
+	 * @param string $editor_id
 	 *
 	 * @return array
 	 */

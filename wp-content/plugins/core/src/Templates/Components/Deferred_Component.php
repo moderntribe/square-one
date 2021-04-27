@@ -27,7 +27,7 @@ class Deferred_Component extends \ArrayObject {
 		return $this->path;
 	}
 
-	public function name() {
+	public function name(): ?string {
 		return $this->name;
 	}
 

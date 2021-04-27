@@ -37,11 +37,14 @@ class Styles {
 	}
 
 	/**
-	 * Add a stylesheet to the login page
+	 * 	 * Add a stylesheet to the login page
+	 * 	 *
 	 *
 	 * @action login_enqueue_scripts
+	 *
+	 * @return void
 	 */
-	public function enqueue_login_styles() {
+	public function enqueue_login_styles(): void {
 		wp_enqueue_style( 'tribe-styles-login' );
 
 	}

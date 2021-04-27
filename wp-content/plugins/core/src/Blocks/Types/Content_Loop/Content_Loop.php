@@ -33,6 +33,9 @@ class Content_Loop extends Block_Config {
 	public const LAYOUT_FEATURE = 'layout_feature';
 	public const LAYOUT_COLUMNS = 'layout_columns';
 
+	/**
+	 * @return void
+	 */
 	public function add_block() {
 		$this->set_block( new Block( self::NAME, [
 			'title'       => __( 'Content Loop', 'tribe' ),
@@ -49,7 +52,9 @@ class Content_Loop extends Block_Config {
 	}
 
 	/**
-	 * Register Fields for block
+	 * 	 * Register Fields for block
+	 *
+	 * @return void
 	 */
 	public function add_fields() {
 		//==========================================

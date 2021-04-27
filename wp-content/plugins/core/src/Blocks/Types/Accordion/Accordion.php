@@ -26,6 +26,9 @@ class Accordion extends Block_Config {
 	public const LAYOUT_INLINE    = 'inline';
 	public const LAYOUT_STACKED   = 'stacked';
 
+	/**
+	 * @return void
+	 */
 	public function add_block() {
 		$this->set_block( new Block( self::NAME, [
 			'title'       => __( 'Accordion', 'tribe' ),
@@ -67,6 +70,9 @@ class Accordion extends Block_Config {
 		] ) );
 	}
 
+	/**
+	 * @return void
+	 */
 	public function add_fields() {
 		//==========================================
 		// Content Fields

@@ -17,11 +17,13 @@ class Oembed_Filter {
 	}
 
 	/**
-	 * Get custom video component markup.
+	 * 	 * Get custom video component markup.
+	 * 	 *
 	 *
 	 * @param $html
 	 * @param $data
 	 * @param $url
+	 * @param false|object $data
 	 *
 	 * @filter oembed_dataparse 999 3
 	 *
@@ -67,7 +69,7 @@ class Oembed_Filter {
 		return $frontend_html;
 	}
 
-	private function get_layout_container_attrs( $provider_name, $embed_id, $title ): array {
+	private function get_layout_container_attrs( $provider_name, string $embed_id, $title ): array {
 		return [
 			'data-js'             => 'c-video',
 			'data-embed-id'       => $embed_id,
@@ -198,18 +200,21 @@ class Oembed_Filter {
 	}
 
 	/**
-	 * Store the front-end HTML for a URL
-	 * in the options table
-	 *
-	 * WordPress will regenerate the oembed cache
-	 * whenever its cache expires. When it does so,
-	 * this filter will run again and update at the
-	 * same time.
+	 * 	 * Store the front-end HTML for a URL
+	 * 	 * in the options table
+	 * 	 *
+	 * 	 * WordPress will regenerate the oembed cache
+	 * 	 * whenever its cache expires. When it does so,
+	 * 	 * this filter will run again and update at the
+	 * 	 * same time.
+	 * 	 *
 	 *
 	 * @param string $frontend_html
 	 * @param string $url
+	 *
+	 * @return void
 	 */
-	private function cache_frontend_html( $frontend_html, $url ) {
+	private function cache_frontend_html( $frontend_html, $url ): void {
 		update_option( $this->get_cache_key( $url ), $frontend_html );
 	}
 

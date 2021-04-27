@@ -106,7 +106,7 @@ class Core {
 	];
 
 
-	public function init( string $plugin_path ) {
+	public function init( string $plugin_path ): void {
 		$this->init_container( $plugin_path );
 	}
 
