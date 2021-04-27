@@ -35,7 +35,8 @@
   "lint-staged": {
     "*.php": [
       "php -l",
-      "./vendor/bin/phpcs --standard=./phpcs.xml --extensions=php --warning-severity=8 -s"
+      "./vendor/bin/phpcs --standard=./phpcs.xml --extensions=php --warning-severity=8 -s",
+      "./vendor/bin/psalm"
     ],
     "*.js": [
       "eslint"
