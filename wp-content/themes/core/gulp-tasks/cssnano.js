@@ -7,7 +7,7 @@ const pkg = require( '../package.json' );
 function minify( src = [], dest = pkg.square1.paths.core_admin_css_dist ) {
 	return gulp.src( src )
 		.pipe( sourcemaps.init() )
-		.pipe( cssnano( { zindex: false } ) )
+		.pipe( cssnano( { zindex: false, discardUnused: { keyframes: false } } ) )
 		.pipe( rename( {
 			suffix: '.min',
 			extname: '.css',
