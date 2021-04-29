@@ -1,0 +1,59 @@
+name: PHP Composer and Codesniffer
+
+on:
+  pull_request:
+    paths:
+      - 'wp-content/plugins/core/**.php'
+      - 'wp-content/themes/core/**.php'
+
+jobs:
+  psalm:
+
+    runs-on: ${{ matrix.operating-system }}
+
+    strategy:
+      matrix:
+        operating-system: [ ubuntu-latest ]
+        php-versions: [ '7.4' ]
+
+    env:
+      cache_version: 0 # increment to flush all caches
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Add GitHub oAuth
+        env:
+          TOKEN: ${{ secrets.GH_TOKEN }}
+        run: composer config --global github-oauth.github.com $TOKEN
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+          extensions: ${{ env.php_extensions }}
+          coverage: none
+          tools: composer:v1
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate
+
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - name: Check for Cached Composer Dependencies
+        id: cache-composer-dependencies
+        uses: actions/cache@v1
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-${{ env.cache_version }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-${{ env.cache_version }}-composer-
+
+      - name: Install composer dependencies
+        run: |
+          echo "${{ secrets.COMPOSER_ENV }}" > .env
+          composer install --prefer-dist --no-progress --no-suggest --optimize-autoloader
+
+      - name: Psalm
+        run: ./vendor/bin/psalm
