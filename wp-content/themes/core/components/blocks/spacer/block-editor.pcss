@@ -1,0 +1,22 @@
+
+/* -----------------------------------------------------------------------------
+ *
+ * Block Editor
+ *
+ * Adding admin styles for the Spacer Block.
+ *
+ * ----------------------------------------------------------------------------- */
+
+.wp-block[data-type^="acf/spacer"] {
+	.b-spacer {
+		border: 1px dashed #c8c8c8;
+
+		&:before {
+			content: '[SPACER]';
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 100%;
+		}
+	}
+}

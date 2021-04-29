@@ -1,0 +1,40 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Component: Block: Spacer
+ *
+ * ----------------------------------------------------------------------------- */
+
+.b-spacer {
+	height: 24px;
+
+	@media (--viewport-medium) {
+		height: 48px;
+	}
+
+	/* CASE: Large Size */
+	&.b-spacer--large {
+		height: 48px;
+
+		@media (--viewport-medium) {
+			height: 96px;
+		}
+	}
+
+	/* CASE: Display only on desktop */
+	&.desktop-only {
+		display: none;
+
+		@media (--viewport-medium) {
+			display: block;
+		}
+	}
+
+	/* CASE: Display only on desktop */
+	&.mobile-only {
+		display: block;
+
+		@media (--viewport-medium) {
+			display: none;
+		}
+	}
+}
