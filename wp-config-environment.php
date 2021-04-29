@@ -50,6 +50,15 @@ if ( file_exists( __DIR__ . '/local-config.php' ) ) {
 // Assign default constant values
 // ==============================================================
 
+// Provide fallback if ENVIRONMENT is already present.
+if ( defined( 'ENVIRONMENT' ) ) {
+	define( 'WP_ENVIRONMENT_TYPE', strtolower( ENVIRONMENT ) );
+}
+
+if ( ! defined( 'WP_ENVIRONMENT_TYPE' ) ) {
+	define( 'WP_ENVIRONMENT_TYPE', 'production');
+}
+
 if ( ! isset( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) ) {
 	$_SERVER['HTTP_X_FORWARDED_PROTO'] = '';
 }
@@ -154,11 +163,6 @@ $config_defaults = [
 // ==============================================================
 // Assign default constant value overrides for production
 // ==============================================================
-
-// Update older versions to utilize new method.
-if ( defined( 'ENVIRONMENT' ) && ! defined( 'WP_ENVIRONMENT_TYPE' ) ) {
-	define( 'WP_ENVIRONMENT_TYPE', strtolower( ENVIRONMENT ) );
-}
 
 if ( defined( 'WP_ENVIRONMENT_TYPE' ) && WP_ENVIRONMENT_TYPE === 'production' ) {
 	$config_defaults['WP_CACHE']            = true;
