@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e5c6a59681db9f95bc140ed123397d3c",
+    "content-hash": "2084e2d7429879f613578697f2db5ea8",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -20,16 +20,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.178.5",
+            "version": "3.178.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "5a268a20272c0c9171570ed57f68b629e966deab"
+                "reference": "9443aecbf56eb43e0c7a409494ae4c09f4cebf5f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/5a268a20272c0c9171570ed57f68b629e966deab",
-                "reference": "5a268a20272c0c9171570ed57f68b629e966deab",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/9443aecbf56eb43e0c7a409494ae4c09f4cebf5f",
+                "reference": "9443aecbf56eb43e0c7a409494ae4c09f4cebf5f",
                 "shasum": ""
             },
             "require": {
@@ -101,7 +101,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2021-04-15T18:12:46+00:00"
+            "time": "2021-04-21T18:37:31+00:00"
         },
         {
             "name": "clue/stream-filter",
@@ -696,6 +696,7 @@
                 "composer/installers": "~1.0"
             },
             "type": "wordpress-muplugin",
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "GPL-2.0+"
             ],
@@ -711,10 +712,6 @@
             "keywords": [
                 "wordpress"
             ],
-            "support": {
-                "source": "https://github.com/humanmade/Mercator/tree/master",
-                "issues": "https://github.com/humanmade/Mercator/issues"
-            },
             "time": "2019-01-08T13:04:40+00:00"
         },
         {
@@ -1020,16 +1017,16 @@
         },
         {
             "name": "moderntribe/tribe-libs",
-            "version": "v3.4.0",
+            "version": "v3.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moderntribe/tribe-libs.git",
-                "reference": "1800836a93b046642d110b79b7c033c9dd71c496"
+                "reference": "6cabc3919a4a3eab1afbfcea0983c72f35a222cc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/tribe-libs/zipball/1800836a93b046642d110b79b7c033c9dd71c496",
-                "reference": "1800836a93b046642d110b79b7c033c9dd71c496",
+                "url": "https://api.github.com/repos/moderntribe/tribe-libs/zipball/6cabc3919a4a3eab1afbfcea0983c72f35a222cc",
+                "reference": "6cabc3919a4a3eab1afbfcea0983c72f35a222cc",
                 "shasum": ""
             },
             "require": {
@@ -1058,6 +1055,7 @@
                 "moderntribe/square1-queues-mysql": "self.version",
                 "moderntribe/square1-request": "self.version",
                 "moderntribe/square1-required-page": "self.version",
+                "moderntribe/square1-routes": "self.version",
                 "moderntribe/square1-schema": "self.version",
                 "moderntribe/square1-settings": "self.version",
                 "moderntribe/square1-taxonomy": "self.version",
@@ -1084,7 +1082,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.4-dev"
+                    "dev-master": "3.5-dev"
                 }
             },
             "autoload": {
@@ -1111,6 +1109,7 @@
                     "Tribe\\Libs\\Queues_Mysql\\": "src/Queues_Mysql/",
                     "Tribe\\Libs\\Request\\": "src/Request/",
                     "Tribe\\Libs\\Required_Page\\": "src/Required_Page/",
+                    "Tribe\\Libs\\Routes\\": "src/Routes/",
                     "Tribe\\Libs\\Schema\\": "src/Schema/",
                     "Tribe\\Libs\\Settings\\": "src/Settings/",
                     "Tribe\\Libs\\Taxonomy\\": "src/Taxonomy/",
@@ -1125,7 +1124,7 @@
                 "GPL-2.0-only"
             ],
             "description": "A library for use on Modern Tribe service projects.",
-            "time": "2020-11-23T20:39:44+00:00"
+            "time": "2021-04-22T12:52:25+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -1501,16 +1500,16 @@
         },
         {
             "name": "php-di/php-di",
-            "version": "6.3.1",
+            "version": "6.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-DI/PHP-DI.git",
-                "reference": "78278800b18e7c5582fd4d4e629715f5eebbfcc0"
+                "reference": "12a15cc288bbc89896dd80ce5a36731781613ba2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-DI/PHP-DI/zipball/78278800b18e7c5582fd4d4e629715f5eebbfcc0",
-                "reference": "78278800b18e7c5582fd4d4e629715f5eebbfcc0",
+                "url": "https://api.github.com/repos/PHP-DI/PHP-DI/zipball/12a15cc288bbc89896dd80ce5a36731781613ba2",
+                "reference": "12a15cc288bbc89896dd80ce5a36731781613ba2",
                 "shasum": ""
             },
             "require": {
@@ -1569,7 +1568,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-03-25T10:29:47+00:00"
+            "time": "2021-04-20T12:24:31+00:00"
         },
         {
             "name": "php-di/phpdoc-reader",
@@ -5093,16 +5092,16 @@
         },
         {
             "name": "illuminate/collections",
-            "version": "v8.37.0",
+            "version": "v8.38.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/collections.git",
-                "reference": "591e31015a8b0731708c54411cb52d50a00b2bc3"
+                "reference": "21690cd5591f2d42d792e5e4a687f9beba829f1d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/collections/zipball/591e31015a8b0731708c54411cb52d50a00b2bc3",
-                "reference": "591e31015a8b0731708c54411cb52d50a00b2bc3",
+                "url": "https://api.github.com/repos/illuminate/collections/zipball/21690cd5591f2d42d792e5e4a687f9beba829f1d",
+                "reference": "21690cd5591f2d42d792e5e4a687f9beba829f1d",
                 "shasum": ""
             },
             "require": {
@@ -5139,11 +5138,11 @@
             ],
             "description": "The Illuminate Collections package.",
             "homepage": "https://laravel.com",
-            "time": "2021-04-01T13:26:52+00:00"
+            "time": "2021-04-14T11:48:08+00:00"
         },
         {
             "name": "illuminate/contracts",
-            "version": "v8.37.0",
+            "version": "v8.38.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
@@ -5187,7 +5186,7 @@
         },
         {
             "name": "illuminate/macroable",
-            "version": "v8.37.0",
+            "version": "v8.38.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/macroable.git",
@@ -5229,16 +5228,16 @@
         },
         {
             "name": "illuminate/support",
-            "version": "v8.37.0",
+            "version": "v8.38.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "074a9b7adefcdd7108e19faa96bc9dacfe922062"
+                "reference": "735391f31e145aad4f7aff3d9736ef70452dd1fe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/074a9b7adefcdd7108e19faa96bc9dacfe922062",
-                "reference": "074a9b7adefcdd7108e19faa96bc9dacfe922062",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/735391f31e145aad4f7aff3d9736ef70452dd1fe",
+                "reference": "735391f31e145aad4f7aff3d9736ef70452dd1fe",
                 "shasum": ""
             },
             "require": {
@@ -5289,7 +5288,7 @@
             ],
             "description": "The Illuminate Support package.",
             "homepage": "https://laravel.com",
-            "time": "2021-04-11T23:26:41+00:00"
+            "time": "2021-04-15T11:51:39+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
