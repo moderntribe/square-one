@@ -6,6 +6,7 @@ namespace Tribe\Project\Object_Meta;
 use DI;
 use Psr\Container\ContainerInterface;
 use Tribe\Libs\Container\Definer_Interface;
+use Tribe\Project\Post_Types\Page\Page;
 use Tribe\Project\Settings;
 
 class Object_Meta_Definer implements Definer_Interface {
@@ -15,6 +16,7 @@ class Object_Meta_Definer implements Definer_Interface {
 			\Tribe\Libs\Object_Meta\Object_Meta_Definer::GROUPS => DI\add( [
 				DI\get( Analytics_Settings::class ),
 				DI\get( Social_Settings::class ),
+				DI\get( Page_Appearance::class ),
 			] ),
 
 			// add analytics settings to the general settings screen
@@ -30,6 +32,13 @@ class Object_Meta_Definer implements Definer_Interface {
 					'settings_pages' => [ $container->get( Settings\General::class )->get_slug() ],
 				] );
 			},
+
+			// add appearance settings to pages.
+			Page_Appearance::class                              => static function ( ContainerInterface $container ) {
+				return new Page_Appearance( [
+					'post_types' => [ Page::NAME ]
+				] );
+			}
 		];
 	}
 }
