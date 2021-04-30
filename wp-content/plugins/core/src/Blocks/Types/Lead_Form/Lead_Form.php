@@ -27,9 +27,12 @@ class Lead_Form extends Block_Config {
 	public const WIDTH_FULL = 'full';
 
 	public const COLOR_THEME         = 'color_theme';
-	public const COLOR_THEME_INHERIT = 'rgba(0,0,0,0)'; // transparent.
-	public const COLOR_THEME_LIGHT   = '#FFF';
-	public const COLOR_THEME_DARK    = '#000';
+	public const COLOR_THEME_CHOICES = [
+		'rgba(0,0,0,0)' => 'Page Theme',
+		'#FFF'          => 'Light',
+		'#000'          => 'Dark',
+	];
+	public const COLOR_THEME_DEFAULT = 'rgba(0,0,0,0)'; // transparent.
 
 	public const FORM_FIELDS  = 'form_fields';
 	public const FORM_STACKED = 'form_stacked';
@@ -123,13 +126,9 @@ class Lead_Form extends Block_Config {
 					'type'            => 'swatch',
 					'name'            => self::COLOR_THEME,
 					'label'           => __( 'Color Theme', 'tribe' ),
-					'choices'         => [
-						self::COLOR_THEME_INHERIT => __( 'Inherit From Page Theme', 'tribe' ),
-						self::COLOR_THEME_LIGHT   => __( 'Light', 'tribe' ),
-						self::COLOR_THEME_DARK    => __( 'Dark', 'tribe' ),
-					],
+					'choices'         => self::COLOR_THEME_CHOICES,
 					'allow_null'      => false,
-					'default_value'   => self::COLOR_THEME_INHERIT,
+					'default_value'   => self::COLOR_THEME_DEFAULT,
 				] )
 			)->add_field(
 				new Field( self::NAME . '_' . self::LAYOUT, [

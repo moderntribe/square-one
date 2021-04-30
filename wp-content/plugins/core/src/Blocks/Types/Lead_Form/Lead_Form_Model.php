@@ -20,7 +20,7 @@ class Lead_Form_Model extends Base_Model {
 			Lead_Form_Block_Controller::LEADIN      => $this->get( Lead_Form::LEAD_IN, '' ),
 			Lead_Form_Block_Controller::DESCRIPTION => $this->get( Lead_Form::DESCRIPTION, '' ),
 			Lead_Form_Block_Controller::CTA         => $this->get_cta_args(),
-			Lead_Form_Block_Controller::COLOR_THEME => $this->get( Lead_Form::COLOR_THEME, Lead_Form::COLOR_THEME_LIGHT ),
+			Lead_Form_Block_Controller::COLOR_THEME => $this->get( Lead_Form::COLOR_THEME, Lead_Form::COLOR_THEME_DEFAULT ),
 			Lead_Form_Block_Controller::FORM_FIELDS => $this->get( Lead_Form::FORM_FIELDS, Lead_Form::FORM_STACKED ),
 
 		];

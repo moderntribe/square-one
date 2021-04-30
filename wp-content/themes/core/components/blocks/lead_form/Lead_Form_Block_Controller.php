@@ -65,7 +65,7 @@ class Lead_Form_Block_Controller extends Abstract_Controller {
 		return [
 			self::WIDTH             => Lead_Form_Block::WIDTH_GRID,
 			self::LAYOUT            => Lead_Form_Block::LAYOUT_BOTTOM,
-			self::COLOR_THEME       => Lead_Form_Block::COLOR_THEME_LIGHT,
+			self::COLOR_THEME       => Lead_Form_Block::COLOR_THEME_DEFAULT,
 			self::FORM_FIELDS       => Lead_Form_Block::FORM_STACKED,
 			self::TITLE             => '',
 			self::LEADIN            => '',
