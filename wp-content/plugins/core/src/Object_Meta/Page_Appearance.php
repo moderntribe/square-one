@@ -10,6 +10,11 @@ class Page_Appearance extends ACF\ACF_Meta_Group {
 	public const NAME = 'page_appearance';
 
 	public const COLOR_THEME = 'color_theme';
+	public const COLOR_THEME_CHOICES = [
+		'#FFF' => 'Light',
+		'#000' => 'Dark',
+		'blue' => 'Blue',
+	];
 
 	public function get_keys(): array {
 		return [
@@ -30,15 +35,11 @@ class Page_Appearance extends ACF\ACF_Meta_Group {
 
 		$field = new ACF\Field( self::NAME . '_' . self::COLOR_THEME );
 		$field->set_attributes( [
-				'label' => 'Color Theme',
+				'label' => __( 'Color Theme', 'tribe' ),
 				'name' => 'color_theme',
 				'type' => 'swatch',
-				'choices' => [
-					'#FFF' => 'Light',
-					'#000' => 'Dark',
-					'blue' => 'Blue',
-				],
-				'allow_null' => 0,
+				'choices' => self::COLOR_THEME_CHOICES,
+				'allow_null' => false,
 			] );
 
 		return $field;
