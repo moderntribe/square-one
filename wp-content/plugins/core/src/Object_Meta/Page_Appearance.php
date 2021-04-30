@@ -13,7 +13,6 @@ class Page_Appearance extends ACF\ACF_Meta_Group {
 	public const COLOR_THEME_CHOICES = [
 		'#FFF' => 'Light',
 		'#000' => 'Dark',
-		'blue' => 'Blue',
 	];
 
 	public function get_keys(): array {
