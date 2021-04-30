@@ -26,9 +26,10 @@ class Lead_Form extends Block_Config {
 	public const WIDTH_GRID = 'grid';
 	public const WIDTH_FULL = 'full';
 
-	public const BACKGROUND       = 'background';
-	public const BACKGROUND_LIGHT = 'background_light';
-	public const BACKGROUND_DARK  = 'background_dark';
+	public const COLOR_THEME         = 'color_theme';
+	public const COLOR_THEME_INHERIT = 'rgba(0,0,0,0)'; // transparent.
+	public const COLOR_THEME_LIGHT   = '#FFF';
+	public const COLOR_THEME_DARK    = '#000';
 
 	public const FORM_FIELDS  = 'form_fields';
 	public const FORM_STACKED = 'form_stacked';
@@ -118,15 +119,17 @@ class Lead_Form extends Block_Config {
 				'default_value'   => self::WIDTH_GRID,
 				] )
 			)->add_field(
-				new Field( self::NAME . '_' . self::BACKGROUND, [
-					'type'            => 'radio',
-					'name'            => self::BACKGROUND,
-					'label'           => __( 'Background Color', 'tribe' ),
+				new Field( self::NAME . '_' . self::COLOR_THEME, [
+					'type'            => 'swatch',
+					'name'            => self::COLOR_THEME,
+					'label'           => __( 'Color Theme', 'tribe' ),
 					'choices'         => [
-						self::BACKGROUND_LIGHT   => __( 'Light', 'tribe' ),
-						self::BACKGROUND_DARK    => __( 'Dark', 'tribe' ),
+						self::COLOR_THEME_INHERIT => __( 'Inherit From Page Theme', 'tribe' ),
+						self::COLOR_THEME_LIGHT   => __( 'Light', 'tribe' ),
+						self::COLOR_THEME_DARK    => __( 'Dark', 'tribe' ),
 					],
-					'default_value'   => self::BACKGROUND_LIGHT,
+					'allow_null'      => false,
+					'default_value'   => self::COLOR_THEME_INHERIT,
 				] )
 			)->add_field(
 				new Field( self::NAME . '_' . self::LAYOUT, [

@@ -22,7 +22,7 @@ class Lead_Form_Block_Controller extends Abstract_Controller {
 	public const FORM_CLASSES      = 'form_classes';
 	public const CLASSES           = 'classes';
 	public const ATTRS             = 'attrs';
-	public const BACKGROUND        = 'background';
+	public const COLOR_THEME       = 'color_theme';
 	public const FORM_FIELDS       = 'form_fields';
 
 	private string $width;
@@ -35,7 +35,7 @@ class Lead_Form_Block_Controller extends Abstract_Controller {
 	private array  $form_classes;
 	private array  $classes;
 	private array  $attrs;
-	private string $background;
+	private string $color_theme;
 	private string $form_fields;
 
 	/**
@@ -54,7 +54,7 @@ class Lead_Form_Block_Controller extends Abstract_Controller {
 		$this->form_classes      = (array) $args[ self::FORM_CLASSES ];
 		$this->classes           = (array) $args[ self::CLASSES ];
 		$this->attrs             = (array) $args[ self::ATTRS ];
-		$this->background        = (string) $args[ self::BACKGROUND ];
+		$this->color_theme       = (string) $args[ self::COLOR_THEME ];
 		$this->form_fields       = (string) $args[ self::FORM_FIELDS ];
 	}
 
@@ -65,7 +65,7 @@ class Lead_Form_Block_Controller extends Abstract_Controller {
 		return [
 			self::WIDTH             => Lead_Form_Block::WIDTH_GRID,
 			self::LAYOUT            => Lead_Form_Block::LAYOUT_BOTTOM,
-			self::BACKGROUND        => Lead_Form_Block::BACKGROUND_LIGHT,
+			self::COLOR_THEME       => Lead_Form_Block::COLOR_THEME_LIGHT,
 			self::FORM_FIELDS       => Lead_Form_Block::FORM_STACKED,
 			self::TITLE             => '',
 			self::LEADIN            => '',
@@ -96,11 +96,6 @@ class Lead_Form_Block_Controller extends Abstract_Controller {
 		$this->classes[] = 'b-lead-form--layout-' . $this->layout;
 		$this->classes[] = 'b-lead-form--width-' . $this->width;
 
-		// CASE: Full Width and Background Dark
-		if ( $this->width === Lead_Form_Block::WIDTH_FULL && $this->background === Lead_Form_Block::BACKGROUND_DARK ) {
-			$this->classes[] = 't-theme--light';
-		}
-
 		if ( $this->width === Lead_Form_Block::WIDTH_GRID ) {
 			$this->classes[] = 'l-container';
 		}
@@ -116,6 +111,8 @@ class Lead_Form_Block_Controller extends Abstract_Controller {
 	 * @return string
 	 */
 	public function get_attrs(): string {
+		$this->attrs['style'] = '--' . self::COLOR_THEME . ': ' . $this->color_theme;
+
 		return Markup_Utils::concat_attrs( $this->attrs );
 	}
 
@@ -125,11 +122,6 @@ class Lead_Form_Block_Controller extends Abstract_Controller {
 	public function get_container_classes(): string {
 		if ( $this->width === Lead_Form_Block::WIDTH_FULL ) {
 			$this->container_classes[] = 'l-container';
-		}
-
-		// CASE: Grid Width and Background Dark
-		if ( $this->width === Lead_Form_Block::WIDTH_GRID && $this->background === Lead_Form_Block::BACKGROUND_DARK ) {
-			$this->container_classes[] = 't-theme--light';
 		}
 
 		return Markup_Utils::class_attribute( $this->container_classes );
