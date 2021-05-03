@@ -3,17 +3,9 @@
 All notable changes to this project will be documented in this file.
 
 ## 2021.05
-* Added: enabled the legacy markup for Gravity Forms 2.5 by default (until we can update our theme framework).
+* Updated: use the WP_ENVIRONMENT_TYPE constant added in Core v5.5.
 
 ## 2021.04
-* Updated: refreshed local-config-sample.php to have a more thorough set of constants you may need, especially now that we have a Local environment option.
-* Updated: newer version of spin.js requires some css, added that.
-* Updated: set a default set of theme image paths for postcss-inline-svg
-* Updated: disabled cssnano discarding "unused" keyframes. It was borking the spin.js css.
-* Updated: remove the tribe/body_opening_tag action in favor of wp_body_open and updated our GTM implementation to use it.
-* Fixed: body-lock.js needed an update to work correctly for safari/ios.
-* Updated: added a isLocked check for body-lock.js, it's handy.
-* Added: enabled the legacy markup for Gravity Forms 2.5 by default (until we can update our theme framework).  
 * Updated: docker php-ini-overrides.ini to use xdebug v3 configuration for latest docker builds.
 
 ## 2021.03

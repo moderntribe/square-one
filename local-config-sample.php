@@ -7,38 +7,22 @@
  *
  * The default WordPress databases defines are automatically populated in
  * dev/docker/docker-compose.yml which you can override here with custom
- * defines, e.g. define( 'DB_NAME', 'tribe_square1' ). If you are using Local,
- * you will need to define these here.
- */
-//define( 'DB_NAME', 'tribe_square1' );
-//define( 'DB_USER', 'root' );
-//define( 'DB_PASSWORD', 'root' );
-//define( 'DB_HOST', 'localhost' );
-//define( 'DB_TABLE_PREFIX', 'wp_' );
+ * defines e.g. define( 'DB_NAME', 'tribe_square1' );
+*/
 
-/*
- * Multisite
+/**
+ * Set the current environment type. Accepted values:
+ * - production (default)
+ * - staging
+ * - development
+ * - local
  *
- * If you enable multisite in wp-config.php, ensure to provide your local.tribe URI here
+ * @link https://make.wordpress.org/core/2020/07/24/new-wp_get_environment_type-function-in-wordpress-5-5/
  */
-//define( 'DOMAIN_CURRENT_SITE', 'square1.tribe' );
+define( 'WP_ENVIRONMENT_TYPE', 'development' );
 
-/*
- * Debugging
- */
-define( 'WP_DEBUG', true );
-define( 'WP_DEBUG_LOG', true );
-define( 'WP_DEBUG_DISPLAY', true );
-define( 'SAVEQUERIES', true );
-define( 'SCRIPT_DEBUG', true );
-define( 'WP_CACHE', false );
-
-/*
- * Panels
- *
- * If your project uses panels this will disable/enable panels caching.
- */
-//define( 'TRIBE_DISABLE_PANELS_CACHE', true );
+// Fallback for older environments.
+define( 'ENVIRONMENT', 'DEV' );
 
 /*
  * React dev
@@ -46,24 +30,13 @@ define( 'WP_CACHE', false );
 define( 'HMR_DEV', false );
 
 /*
- * Enable ASSET_VERSION_TIMESTAMP if you are doing front end dev on css/js
- * to force cache invalidation without running a full build.
+ * Enable ASSET_VERSION_TIMESTAMP if you are doing front end dev on css/js to force cache invalidation without running a full build
  */
 define( 'ASSET_VERSION_TIMESTAMP', true );
 
 /*
  * Whoops
  *
- * If you enable Whoops, the Whoops error library will be used to provide
- * better/prettier error logging.
+ * If you enable Whoops, the Whoops error library will be used to provide better/prettier error logging.
  */
 define( 'WHOOPS_ENABLE', true );
-
-/*
- * Glomar
- *
- * GLOMAR is a plugin that blocks the frontend of the site from public access.
- * If you would like to disable the plugin locally, add the following to your local-config.php.
- */
-define( 'TRIBE_GLOMAR', false );
-
