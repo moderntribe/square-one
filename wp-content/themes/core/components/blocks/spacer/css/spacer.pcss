@@ -5,18 +5,18 @@
  * ----------------------------------------------------------------------------- */
 
 .b-spacer {
-	height: 24px;
+	height: var(--spacer-30);
 
 	@media (--viewport-medium) {
-		height: 48px;
+		height: var(--spacer-60);
 	}
 
 	/* CASE: Large Size */
 	&.b-spacer--large {
-		height: 48px;
+		height: var(--spacer-60);
 
 		@media (--viewport-medium) {
-			height: 96px;
+			height: var(--spacer-80);
 		}
 	}
 
