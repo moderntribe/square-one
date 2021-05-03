@@ -10,7 +10,7 @@ jobs:
     env:
       BUILD_FOLDER: ./build
       DEPLOY_FOLDER: ./deploy
-      ENVIRONMENT: dev
+      ENVIRONMENT: development
       DEPLOY_REPO: ${{ secrets.DEV_DEPLOY_REPO }}
       COMPOSER_AUTH: '{ "github-oauth": { "github.com": "${{ secrets.GH_TOKEN }}" } }'
 
@@ -64,7 +64,7 @@ jobs:
         run: |
           php -r "file_exists( 'local-config.php' ) || copy( 'local-config-sample.php', 'local-config.php' );"
           php -r "file_exists( 'local-config.json' ) || copy( 'local-config-sample.json', 'local-config.json' );"
-          echo "define( 'ENVIRONMENT', ${{env.ENVIROMENT}} );" >> local-config.php
+          echo "define( 'WP_ENVIRONMENT_TYPE', ${{env.ENVIROMENT}} );" >> local-config.php
 
       ##########
       ### DEPLOY: Use the WPE git deploy hook method. TLDR; rsync our repo on their repo and push.
