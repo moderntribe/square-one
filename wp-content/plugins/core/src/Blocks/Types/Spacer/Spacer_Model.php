@@ -12,6 +12,7 @@ class Spacer_Model extends Base_Model {
 	 */
 	public function get_data(): array {
 		return [
+			Spacer_Block_Controller::ATTRS           => $this->get_attrs(),
 			Spacer_Block_Controller::CLASSES         => $this->get_classes(),
 			Spacer_Block_Controller::SIZE            => $this->get( Spacer::SIZE, Spacer::DEFAULT ),
 			Spacer_Block_Controller::DISPLAY_OPTIONS => $this->get( Spacer::DISPLAY_OPTIONS, Spacer::ALL_SCREENS ),

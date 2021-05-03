@@ -35,7 +35,10 @@ class Spacer extends Block_Config {
 				__( 'display', 'tribe' ),
 			],
 			'category' => 'design',
-			'supports' => [ 'align' => false ],
+			'supports' => [
+				'align'  => false,
+				'anchor' => true,
+			],
 			'example'  => [
 				'attributes' => [
 					'mode' => 'preview',
