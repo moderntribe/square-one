@@ -65,12 +65,19 @@ class Force_Plugin_Activation {
 	public function __construct() {
 
 		// Always block non-production sites from search engines and random visitors.
-		if ( ! defined( 'ENVIRONMENT' ) || ENVIRONMENT != 'PRODUCTION' ) {
+		if ( 'production' !== wp_get_environment_type() ) {
 			$this->force_active[] = 'tribe-glomar/tribe-glomar.php';
 		}
-		// If you are about to refactor this, pay attention.
-		// The next *if* is not the same as an *else* on the previous one.
-		if ( defined( 'ENVIRONMENT' ) && ENVIRONMENT == 'PRODUCTION' ) {
+
+		/**
+		 * If you are about to refactor this, pay attention.
+		 * The next *if* is not the same as an *else* on the previous one.
+		 *
+		 * Also, wp_get_environment_type defaults to 'production' if the constant is
+		 * not set, so we should always look for the explicit definition before doing
+		 * anything here.
+		 */
+		if ( defined( 'WP_ENVIRONMENT_TYPE' ) && WP_ENVIRONMENT_TYPE == 'production' ) {
 			$this->force_deactive[] = 'tribe-glomar/tribe-glomar.php';
 			$this->force_active[]   = 'limit-login-attempts/limit-login-attempts.php';
 		}

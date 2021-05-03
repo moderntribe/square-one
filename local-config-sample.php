@@ -10,6 +10,20 @@
  * defines e.g. define( 'DB_NAME', 'tribe_square1' );
 */
 
+/**
+ * Set the current environment type. Accepted values:
+ * - production (default)
+ * - staging
+ * - development
+ * - local
+ *
+ * @link https://make.wordpress.org/core/2020/07/24/new-wp_get_environment_type-function-in-wordpress-5-5/
+ */
+define( 'WP_ENVIRONMENT_TYPE', 'development' );
+
+// Fallback for older environments.
+define( 'ENVIRONMENT', 'DEV' );
+
 /*
  * React dev
  */
@@ -26,4 +40,3 @@ define( 'ASSET_VERSION_TIMESTAMP', true );
  * If you enable Whoops, the Whoops error library will be used to provide better/prettier error logging.
  */
 define( 'WHOOPS_ENABLE', true );
-
