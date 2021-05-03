@@ -19,13 +19,13 @@ class Routes_Subscriber extends Abstract_Subscriber {
 	 * @return void
 	 */
 	public function register(): void {
-		add_filter(
-			'core_js_config',
-			function ( ...$args ): array {
-				return $this->container->get( Sample_Route::class )->js_config( ...$args );
-			},
-			10,
-			1
-		);
+		// add_filter(
+		// 	'core_js_config',
+		// 	function ( ...$args ): array {
+		// 		return $this->container->get( Sample_Route::class )->js_config( ...$args );
+		// 	},
+		// 	10,
+		// 	1
+		// );
 	}
 }
