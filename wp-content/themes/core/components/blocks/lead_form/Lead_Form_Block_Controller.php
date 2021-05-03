@@ -111,7 +111,7 @@ class Lead_Form_Block_Controller extends Abstract_Controller {
 	 * @return string
 	 */
 	public function get_attrs(): string {
-		$this->attrs['style'] = '--' . self::COLOR_THEME . ': ' . $this->color_theme;
+		$this->attrs['style'] = sprintf('--%s:%s', self::COLOR_THEME, $this->color_theme );
 
 		return Markup_Utils::concat_attrs( $this->attrs );
 	}
