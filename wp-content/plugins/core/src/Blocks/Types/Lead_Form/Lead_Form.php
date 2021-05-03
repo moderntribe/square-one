@@ -27,12 +27,12 @@ class Lead_Form extends Block_Config {
 	public const WIDTH_FULL = 'full';
 
 	public const COLOR_THEME         = 'color_theme';
-	public const COLOR_THEME_CHOICES = [
-		'rgba(0,0,0,0)' => 'Page Theme',
-		'#FFF'          => 'Light',
-		'#000'          => 'Dark',
-	];
 	public const COLOR_THEME_DEFAULT = 'rgba(0,0,0,0)'; // transparent.
+	public const COLOR_THEME_CHOICES = [
+		self::COLOR_THEME_DEFAULT => 'Page Theme',
+		'#FFF'                    => 'Light',
+		'#000'                    => 'Dark',
+	];
 
 	public const FORM_FIELDS  = 'form_fields';
 	public const FORM_STACKED = 'form_stacked';
