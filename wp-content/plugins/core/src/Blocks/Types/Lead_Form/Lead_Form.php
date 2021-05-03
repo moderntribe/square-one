@@ -26,10 +26,10 @@ class Lead_Form extends Block_Config {
 	public const WIDTH_GRID = 'grid';
 	public const WIDTH_FULL = 'full';
 
+	public const PAGE_THEME_OVERRIDE = 'page_theme_override';
 	public const COLOR_THEME         = 'color_theme';
-	public const COLOR_THEME_DEFAULT = 'rgba(0,0,0,0)'; // transparent.
+	public const COLOR_THEME_DEFAULT = '#FFF'; // transparent.
 	public const COLOR_THEME_CHOICES = [
-		self::COLOR_THEME_DEFAULT => 'Page Theme',
 		'#FFF'                    => 'Light',
 		'#000'                    => 'Dark',
 	];
@@ -122,13 +122,30 @@ class Lead_Form extends Block_Config {
 				'default_value'   => self::WIDTH_GRID,
 				] )
 			)->add_field(
+				new Field( self::NAME . '_' . self::PAGE_THEME_OVERRIDE, [
+					'type'  => 'true_false',
+					'name'  => self::PAGE_THEME_OVERRIDE,
+					'label' => __( 'Override Page Theme', 'tribe' ),
+					'ui'    => true,
+				] )
+			)->add_field(
 				new Field( self::NAME . '_' . self::COLOR_THEME, [
-					'type'          => 'swatch',
-					'name'          => self::COLOR_THEME,
-					'label'         => __( 'Color Theme', 'tribe' ),
-					'choices'       => self::COLOR_THEME_CHOICES,
-					'allow_null'    => false,
-					'default_value' => self::COLOR_THEME_DEFAULT,
+					'type'              => 'swatch',
+					'name'              => self::COLOR_THEME,
+					'label'             => __( 'Color Theme', 'tribe' ),
+					'choices'           => self::COLOR_THEME_CHOICES,
+					'allow_null'        => false,
+					'allow_other'       => true,
+					'default_value'     => self::COLOR_THEME_DEFAULT,
+					'conditional_logic' => [
+						[
+							[
+								'field'    => 'field_' . self::NAME . '_' . self::PAGE_THEME_OVERRIDE,
+								'operator' => '==',
+								'value'    => '1',
+							]
+						]
+					],
 				] )
 			)->add_field(
 				new Field( self::NAME . '_' . self::LAYOUT, [
