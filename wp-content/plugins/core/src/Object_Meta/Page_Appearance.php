@@ -34,10 +34,10 @@ class Page_Appearance extends ACF\ACF_Meta_Group {
 
 		$field = new ACF\Field( self::NAME . '_' . self::COLOR_THEME );
 		$field->set_attributes( [
-				'label' => __( 'Color Theme', 'tribe' ),
-				'name' => 'color_theme',
-				'type' => 'swatch',
-				'choices' => self::COLOR_THEME_CHOICES,
+				'label'      => __( 'Color Theme', 'tribe' ),
+				'name'       => 'color_theme',
+				'type'       => 'swatch',
+				'choices'    => self::COLOR_THEME_CHOICES,
 				'allow_null' => false,
 			] );
 
