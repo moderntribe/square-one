@@ -20,21 +20,21 @@ class Object_Meta_Definer implements Definer_Interface {
 			] ),
 
 			// add analytics settings to the general settings screen
-			Analytics_Settings::class                           => static function ( ContainerInterface $container ) {
+			Analytics_Settings::class => static function ( ContainerInterface $container ) {
 				return new Analytics_Settings( [
 					'settings_pages' => [ $container->get( Settings\General::class )->get_slug() ],
 				] );
 			},
 
 			// add social settings to the general settings screen
-			Social_Settings::class                              => static function ( ContainerInterface $container ) {
+			Social_Settings::class => static function ( ContainerInterface $container ) {
 				return new Social_Settings( [
 					'settings_pages' => [ $container->get( Settings\General::class )->get_slug() ],
 				] );
 			},
 
 			// add appearance settings to pages.
-			Page_Appearance::class                              => static function ( ContainerInterface $container ) {
+			Page_Appearance::class => static function ( ContainerInterface $container ) {
 				return new Page_Appearance( [
 					'post_types' => [ Page::NAME ]
 				] );
