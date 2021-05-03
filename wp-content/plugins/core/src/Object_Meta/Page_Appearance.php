@@ -17,7 +17,7 @@ class Page_Appearance extends ACF\ACF_Meta_Group {
 
 	public function get_keys(): array {
 		return [
-			static::COLOR_THEME
+			self::COLOR_THEME
 		];
 	}
 
