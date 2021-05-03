@@ -123,12 +123,12 @@ class Lead_Form extends Block_Config {
 				] )
 			)->add_field(
 				new Field( self::NAME . '_' . self::COLOR_THEME, [
-					'type'            => 'swatch',
-					'name'            => self::COLOR_THEME,
-					'label'           => __( 'Color Theme', 'tribe' ),
-					'choices'         => self::COLOR_THEME_CHOICES,
-					'allow_null'      => false,
-					'default_value'   => self::COLOR_THEME_DEFAULT,
+					'type'          => 'swatch',
+					'name'          => self::COLOR_THEME,
+					'label'         => __( 'Color Theme', 'tribe' ),
+					'choices'       => self::COLOR_THEME_CHOICES,
+					'allow_null'    => false,
+					'default_value' => self::COLOR_THEME_DEFAULT,
 				] )
 			)->add_field(
 				new Field( self::NAME . '_' . self::LAYOUT, [
