@@ -52,7 +52,7 @@ class Spacer_Block_Controller extends Abstract_Controller {
 	 */
 	protected function required(): array {
 		return [
-			self::CLASSES => [ 'b-spacer' ],
+			self::CLASSES => [ 'b-spacer', 'alignfull' ],
 		];
 	}
 
