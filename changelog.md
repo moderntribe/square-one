@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2021.05
+* Updated: use the WP_ENVIRONMENT_TYPE constant added in Core v5.5.
+
 ## 2021.04
 * Updated: docker php-ini-overrides.ini to use xdebug v3 configuration for latest docker builds.
 
