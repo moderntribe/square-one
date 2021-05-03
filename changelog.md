@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## 2021.05
+* Added: documentation to get PHPCS configured in VS Code.
 * Updated: use the WP_ENVIRONMENT_TYPE constant added in Core v5.5.
 
 ## 2021.04
