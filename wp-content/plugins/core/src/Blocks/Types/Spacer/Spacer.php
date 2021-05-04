@@ -52,17 +52,16 @@ class Spacer extends Block_Config {
 	 * Register Fields for block
 	 */
 	public function add_fields() {
-		$this->add_section( new Field_Section( self::SECTION_CONTENT, __( 'Settings', 'tribe' ), 'accordion' ) )
-			->add_field( new Field( self::NAME . '_' . self::SIZE, [
-				'label'   => __( 'Appearance', 'tribe' ),
-				'name'    => self::SIZE,
-				'type'    => 'button_group',
-				'choices' => [
-					self::DEFAULT  => __( 'Default', 'tribe' ),
-					self::LARGE    => __( 'Large', 'tribe' ),
-				],
-				'default_value' => self::DEFAULT,
-			] )
+		$this->add_field( new Field( self::NAME . '_' . self::SIZE, [
+			'label'   => __( 'Appearance', 'tribe' ),
+			'name'    => self::SIZE,
+			'type'    => 'button_group',
+			'choices' => [
+				self::DEFAULT  => __( 'Default', 'tribe' ),
+				self::LARGE    => __( 'Large', 'tribe' ),
+			],
+			'default_value' => self::DEFAULT,
+		] )
 		)->add_field( new Field( self::NAME . '_' . self::DISPLAY_OPTIONS, [
 				'label'         => __( 'Show on', 'tribe' ),
 				'name'          => self::DISPLAY_OPTIONS,

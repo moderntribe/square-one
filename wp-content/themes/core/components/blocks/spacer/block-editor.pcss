@@ -11,5 +11,34 @@
 	.b-spacer {
 		border-top: 1px dashed #c8c8c8;
 		border-bottom: 1px dashed #c8c8c8;
+
+		/* In Admin, don't hide desktop/mobile so admins can still select it */
+		&.desktop-only {
+			display: block;
+
+			@media (--viewport-medium) {
+				display: block;
+			}
+		}
+
+		&.mobile-only {
+			display: block;
+
+			@media (--viewport-medium) {
+				display: block;
+			}
+		}
+	}
+
+	& + .wp-block[data-type^="acf/spacer"] {
+		.b-spacer {
+			border-top: 0;
+		}
+	}
+}
+
+.acf-field[data-key^="field_spacer_size"] {
+	.acf-label {
+		margin-bottom: 10px !important; /* the override isn't worth it */
 	}
 }
