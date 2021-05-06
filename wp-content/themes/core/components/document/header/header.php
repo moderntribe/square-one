@@ -31,7 +31,7 @@ $c = Header_Controller::factory();
 
 <body <?php body_class(); ?>>
 
-	<?php do_action( 'tribe/body_opening_tag' ) ?>
+	<?php do_action( 'wp_body_open' ) ?>
 
 	<div class="l-wrapper" data-js="site-wrap">
 

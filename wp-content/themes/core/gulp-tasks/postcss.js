@@ -25,7 +25,12 @@ const sharedPlugins = [
 	require( 'postcss-quantity-queries' ),
 	require( 'postcss-aspect-ratio' ),
 	require( 'postcss-nested' ),
-	require( 'postcss-inline-svg' ),
+	require( 'postcss-inline-svg' )( {
+		paths: [
+			pkg.square1.paths.core_theme_img,
+			pkg.square1.paths.core_admin_img,
+		],
+	} ),
 	require( 'postcss-preset-env' )( { stage: 0, autoprefixer: { grid: true }, features: { 'focus-visible-pseudo-class': false, 'focus-within-pseudo-class': false } } ),
 	require( 'postcss-calc' ),
 ];
