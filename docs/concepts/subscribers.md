@@ -1,7 +1,7 @@
 # Container Subscribers
 
 While all of the classes for the DI container are either [autowired or configured
-in defintion files](container.md), we still need to hook those classes into
+in defintion files](/docs/concepts/container.md), we still need to hook those classes into
 WordPress to make them do something. The responsibility of registering handlers
 for actions and filters belongs in subscriber classes.
 

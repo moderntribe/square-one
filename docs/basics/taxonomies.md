@@ -1,6 +1,6 @@
 # Custom Taxonomies
 
-Custom taxonomies are handled very similarly to [custom post types](./post-types.md).
+Custom taxonomies are handled very similarly to [custom post types](/docs/basics/post-types.md).
 
 ## Registration
 

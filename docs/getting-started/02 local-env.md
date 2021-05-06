@@ -8,4 +8,4 @@ TODO: guide to setting up a local dev environment using SquareOne Global Docker
 
 ## OS-Specific Considerations
 
-* [Installation guide for Ubuntu](./linux/install-guide-for-ubuntu.md)
+* [Installation guide for Ubuntu](/docs/getting-started/linux/install-guide-for-ubuntu.md)
