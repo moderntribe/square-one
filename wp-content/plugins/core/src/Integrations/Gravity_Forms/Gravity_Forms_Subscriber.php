@@ -11,6 +11,7 @@ class Gravity_Forms_Subscriber extends Abstract_Subscriber {
 		add_filter( 'gform_tabindex', '__return_false' );
 		add_filter( 'pre_option_rg_gforms_disable_css', '__return_true' );
 		add_filter( 'pre_option_rg_gforms_enable_html5', '__return_true' );
+		add_filter( 'gform_enable_legacy_markup', '__return_true' );
 
 		add_filter( 'gform_field_choice_markup_pre_render', function ( ...$args ) {
 			return $this->container->get( Form_Markup::class )->customize_gf_choice_other( ... $args );
