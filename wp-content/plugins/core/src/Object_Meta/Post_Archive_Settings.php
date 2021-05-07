@@ -34,7 +34,7 @@ class Post_Archive_Settings extends ACF\ACF_Meta_Group {
 			'label' => $label,
 			'name'  => $name,
 			'type'  => $type,
-		]);
+		] );
 
 		return $field;
 	}
