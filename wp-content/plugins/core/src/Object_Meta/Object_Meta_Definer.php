@@ -8,6 +8,7 @@ use Psr\Container\ContainerInterface;
 use Tribe\Libs\Container\Definer_Interface;
 use Tribe\Project\Settings;
 use Tribe\Project\Taxonomies\Category\Category;
+use Tribe\Project\Taxonomies\Post_Tag\Post_Tag;
 
 class Object_Meta_Definer implements Definer_Interface {
 	public function define(): array {
@@ -42,7 +43,7 @@ class Object_Meta_Definer implements Definer_Interface {
 
 			Taxonomy_Archive_Settings::class => static function (): Taxonomy_Archive_Settings {
 				return new Taxonomy_Archive_Settings( [
-					'taxonomies' => [ Category::NAME ],
+					'taxonomies' => [ Category::NAME, Post_Tag::NAME ],
 				] );
 			}
 		];
