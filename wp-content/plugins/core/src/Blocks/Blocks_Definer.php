@@ -1,18 +1,19 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Blocks;
 
 use DI;
 use Tribe\Libs\Container\Definer_Interface;
+use Tribe\Project\Blocks\Global_Field_Meta\Color_Meta;
+use Tribe\Project\Blocks\Types\Accordion\Accordion;
 use Tribe\Project\Blocks\Types\Buttons\Buttons;
 use Tribe\Project\Blocks\Types\Card_Grid\Card_Grid;
 use Tribe\Project\Blocks\Types\Content_Columns\Content_Columns;
 use Tribe\Project\Blocks\Types\Content_Loop\Content_Loop;
-use Tribe\Project\Blocks\Types\Interstitial\Interstitial;
-use Tribe\Project\Blocks\Types\Accordion\Accordion;
+use Tribe\Project\Blocks\Types\Gallery_Grid\Gallery_Grid;
 use Tribe\Project\Blocks\Types\Hero\Hero;
 use Tribe\Project\Blocks\Types\Icon_Grid\Icon_Grid;
+use Tribe\Project\Blocks\Types\Interstitial\Interstitial;
 use Tribe\Project\Blocks\Types\Lead_Form\Lead_Form;
 use Tribe\Project\Blocks\Types\Links\Links;
 use Tribe\Project\Blocks\Types\Logos\Logos;
@@ -21,18 +22,19 @@ use Tribe\Project\Blocks\Types\Quote\Quote;
 use Tribe\Project\Blocks\Types\Spacer\Spacer;
 use Tribe\Project\Blocks\Types\Stats\Stats;
 use Tribe\Project\Blocks\Types\Tabs\Tabs;
-use Tribe\Project\Blocks\Types\Gallery_Grid\Gallery_Grid;
 
 class Blocks_Definer implements Definer_Interface {
 
-	public const TYPES          = 'blocks.types';
-	public const CONTROLLER_MAP = 'blocks.controller_map';
-	public const ALLOW_LIST     = 'blocks.allow_list';
-	public const STYLES         = 'blocks.style_overrides';
+	public const TYPES                         = 'blocks.types';
+	public const CONTROLLER_MAP                = 'blocks.controller_map';
+	public const ALLOW_LIST                    = 'blocks.allow_list';
+	public const STYLES                        = 'blocks.style_overrides';
+	public const GLOBAL_BLOCK_FIELD_COLLECTION = 'blocks.global_block_field_collection';
+	public const IGNORED_GLOBAL_BLOCKS         = 'blocks.ignored_global_blocks';
 
 	public function define(): array {
 		return [
-			self::TYPES => DI\add( [
+			self::TYPES      => DI\add( [
 				DI\get( Accordion::class ),
 				DI\get( Buttons::class ),
 				DI\get( Card_Grid::class ),
@@ -144,7 +146,27 @@ class Blocks_Definer implements Definer_Interface {
 				} ),
 			] ),
 
-			Allowed_Blocks::class => DI\create()->constructor( DI\get( self::ALLOW_LIST ) ),
+			Allowed_Blocks::class               => DI\create()->constructor( DI\get( self::ALLOW_LIST ) ),
+
+			/**
+			 * Define global block field instances. Their
+			 * fields will be appended to existing blocks.
+			 */
+			self::GLOBAL_BLOCK_FIELD_COLLECTION => DI\add( [
+				DI\get( Color_Meta::class ),
+			] ),
+
+			/**
+			 * Define the blocks that will not have global
+			 * fields applied to them.
+			 */
+			self::IGNORED_GLOBAL_BLOCKS         => DI\add( [
+				Card_Grid::NAME,
+				Buttons::NAME,
+			] ),
+
+			Block_Bypass_Checker::class => DI\autowire()
+				->constructor( DI\get( self::IGNORED_GLOBAL_BLOCKS ) ),
 		];
 	}
 }
