@@ -23,7 +23,7 @@ class Taxonomy_Archive_Settings extends ACF\ACF_Meta_Group {
 			'label'        => __( 'Hero Image', 'tribe' ),
 			'name'         => self::HERO_IMAGE,
 			'type'         => 'image',
-			'instructions' => 'The hero image for this taxonomy\'s archive',
+			'instructions' => __( 'The hero image for this taxonomy\'s archive', 'tribe' ),
 		] ));
 
 		return $group->get_attributes();
