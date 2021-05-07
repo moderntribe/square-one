@@ -7,9 +7,9 @@ use Tribe\Libs\ACF;
 class Post_Archive_Settings extends ACF\ACF_Meta_Group {
 	public const NAME = 'post_archive_settings';
 
-	public const TITLE = 'title';
+	public const TITLE       = 'title';
 	public const DESCRIPTION = 'description';
-	public const HERO_IMAGE = 'hero_image';
+	public const HERO_IMAGE  = 'hero_image';
 
 	public function get_keys(): array {
 		return [
@@ -32,8 +32,8 @@ class Post_Archive_Settings extends ACF\ACF_Meta_Group {
 	private function get_field( string $label, string $name, string $type ): ACF\Field {
 		$field = new ACF\Field( self::NAME . '_' . $name, [
 			'label' => $label,
-			'name' => $name,
-			'type' => $type,
+			'name'  => $name,
+			'type'  => $type,
 		]);
 
 		return $field;
