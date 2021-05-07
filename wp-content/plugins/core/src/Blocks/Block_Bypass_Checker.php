@@ -9,7 +9,7 @@ class Block_Bypass_Checker {
 	 */
 	private array $block_names;
 
-	public function __construct( array $block_names ) {
+	public function __construct( array $block_names = [] ) {
 		$this->block_names = $block_names;
 	}
 
