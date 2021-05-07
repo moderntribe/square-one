@@ -19,13 +19,19 @@ class Taxonomy_Archive_Settings extends ACF\ACF_Meta_Group {
 		$group = new ACF\Group( self::NAME, $this->object_types );
 		$group->set( 'title', __( 'Archive Settings', 'tribe' ) );
 
-		$group->add_field( new ACF\Field( self::NAME . '_' . self::HERO_IMAGE, [
-			'label'        => __( 'Hero Image', 'tribe' ),
+		$group->add_field( $this->get_hero_field() );
+
+		return $group->get_attributes();
+	}
+
+	private function get_hero_field(): ACF\Field {
+		$field = new ACF\Field( self::NAME . '_' . self::HERO_IMAGE, [
+			'label'        => __( 'Hero Image', 'tribe'),
 			'name'         => self::HERO_IMAGE,
 			'type'         => 'image',
 			'instructions' => __( 'The hero image for this taxonomy\'s archive', 'tribe' ),
-		] ));
+		] );
 
-		return $group->get_attributes();
+		return $field;
 	}
 }
