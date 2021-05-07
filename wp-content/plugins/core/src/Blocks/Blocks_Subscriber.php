@@ -1,10 +1,10 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Blocks;
 
+use RuntimeException;
+use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Block_Registrar;
-
 use Tribe\Libs\ACF\Block_Renderer;
 use Tribe\Libs\Container\Abstract_Subscriber;
 
@@ -33,5 +33,38 @@ class Blocks_Subscriber extends Abstract_Subscriber {
 				$style_override->register();
 			}
 		}, 10, 0 );
+
+		$this->register_global_blocks();
+	}
+
+	/**
+	 * @throws RuntimeException
+	 */
+	private function register_global_blocks(): void {
+		$bypass_checker = $this->container->get( Block_Bypass_Checker::class );
+
+		add_filter( 'tribe/block/register/fields', function ( $fields, Block_Config $block ) use ( $bypass_checker ): array {
+
+			// Bypass adding global fields to specified blocks
+			if ( $bypass_checker->bypass( $block::NAME ) ) {
+				return $fields;
+			}
+
+			/** @var Global_Field_Meta\Meta $meta */
+			foreach ( $this->container->get( Blocks_Definer::GLOBAL_BLOCK_FIELD_COLLECTION ) as $meta ) {
+				if ( ! $meta instanceof Global_Field_Meta\Meta ) {
+					throw new RuntimeException(
+						sprintf(
+							'%s is not an instance of \Tribe\Project\Blocks\Global_Field_Meta\Meta',
+							get_class( $meta )
+						)
+					);
+				}
+
+				$fields = array_merge( $fields, $meta->get_fields() );
+			}
+
+			return $fields;
+		}, 10, 2 );
 	}
 }
