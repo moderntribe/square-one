@@ -74,7 +74,7 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v1
         with:
-          node-version: '12.13.1'
+          node-version: '14.15.1'
 
       - name: Install gulp-cli
         run: npm install gulp-cli -g
@@ -93,11 +93,12 @@ jobs:
 
       - name: Install node modules
         run: yarn install --frozen-lockfile
-        working-directory: wp-content/themes/core
 
       - name: Build assets
         run: npm run server_dist
-        working-directory: wp-content/themes/core
+
+      - name: Validate assets
+          run: npm run validate
 
       - name: Create test databases
         run: |
