@@ -82,15 +82,6 @@ module.exports = {
 			`!${ pkg.square1.paths.core_admin_pcss }block-editor/**/*.pcss`,
 			`!${ pkg.square1.paths.core_admin_pcss }login.pcss`,
 		], gulp.parallel( 'postcss:admin' ) );
-
-		// watch php and twig
-
-		gulp.watch( [
-			`./**/*.php`,
-			`./**/*.twig`,
-		] ).on( 'change', function() {
-			maybeReloadBrowserSync();
-		} );
 	},
 	watchAdminJS() {
 		gulp.src( `${ pkg.square1.paths.core_admin_js_src }**/*.js` )
