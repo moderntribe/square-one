@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tribe\Project\Blocks\Global_Field_Meta;
+namespace Tribe\Project\Blocks\Global_Field_Meta\Meta;
 
 use Tribe\Libs\ACF\Field;
 

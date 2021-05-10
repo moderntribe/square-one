@@ -4,7 +4,8 @@ namespace Tribe\Project\Blocks;
 
 use DI;
 use Tribe\Libs\Container\Definer_Interface;
-use Tribe\Project\Blocks\Global_Field_Meta\Color_Meta;
+use Tribe\Project\Blocks\Global_Field_Meta\Block_Controller;
+use Tribe\Project\Blocks\Global_Field_Meta\Meta\Color_Meta;
 use Tribe\Project\Blocks\Types\Accordion\Accordion;
 use Tribe\Project\Blocks\Types\Buttons\Buttons;
 use Tribe\Project\Blocks\Types\Card_Grid\Card_Grid;
@@ -30,7 +31,7 @@ class Blocks_Definer implements Definer_Interface {
 	public const ALLOW_LIST                    = 'blocks.allow_list';
 	public const STYLES                        = 'blocks.style_overrides';
 	public const GLOBAL_BLOCK_FIELD_COLLECTION = 'blocks.global_block_field_collection';
-	public const IGNORED_GLOBAL_BLOCKS         = 'blocks.ignored_global_blocks';
+	public const ALLOWED_GLOBAL_BLOCKS         = 'blocks.allowed_global_blocks';
 
 	public function define(): array {
 		return [
@@ -149,24 +150,26 @@ class Blocks_Definer implements Definer_Interface {
 			Allowed_Blocks::class               => DI\create()->constructor( DI\get( self::ALLOW_LIST ) ),
 
 			/**
-			 * Define global block field instances. Their
-			 * fields will be appended to existing blocks.
+			 * Define global block field instances. Their fields will
+			 * be appended to existing blocks in the list below.
 			 */
 			self::GLOBAL_BLOCK_FIELD_COLLECTION => DI\add( [
 				DI\get( Color_Meta::class ),
 			] ),
 
 			/**
-			 * Define the blocks that will not have global
-			 * fields applied to them.
+			 * Define the block names that will automatically include Global block
+			 * fields.
 			 */
-			self::IGNORED_GLOBAL_BLOCKS         => DI\add( [
-				Card_Grid::NAME,
-				Buttons::NAME,
+			self::ALLOWED_GLOBAL_BLOCKS         => DI\add( [
+				Hero::NAME,
+				Interstitial::NAME,
+				Lead_Form::NAME,
+				Quote::NAME,
 			] ),
 
-			Block_Bypass_Checker::class => DI\autowire()
-				->constructor( DI\get( self::IGNORED_GLOBAL_BLOCKS ) ),
+			Block_Controller::class => DI\autowire()
+				->constructor( DI\get( self::ALLOWED_GLOBAL_BLOCKS ) ),
 		];
 	}
 }
