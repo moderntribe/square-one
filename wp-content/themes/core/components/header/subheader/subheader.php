@@ -14,13 +14,11 @@ $c = Subheader_Controller::factory( $args );
 	<div <?php echo $c->get_container_classes(); ?>>
 
 		<?php if ( ! empty( $c->get_image_args() ) ) { ?>
+			
 			<div <?php echo $c->get_media_classes(); ?> >		
-				<?php get_template_part(
-					'components/image/image',
-					null,
-					$c->get_image_args()
-				); ?>
+				<?php get_template_part( 'components/image/image', null, $c->get_image_args()); ?>
 			</div>
+
 		<?php } ?>
 		
 		<div <?php echo $c->get_content_classes(); ?>>
@@ -28,6 +26,7 @@ $c = Subheader_Controller::factory( $args );
 			<?php $c->render_breadcrumbs(); ?>
 		
 			<?php get_template_part( 'components/text/text', null, $c->get_title_args() ); ?>
+
 		</div>
 		
 	</div>	
