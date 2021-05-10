@@ -108,7 +108,7 @@ class Subheader_Controller extends Abstract_Controller {
 			Image_Controller::AUTO_SHIM    => false,
 			Image_Controller::USE_LAZYLOAD => true,
 			Image_Controller::WRAPPER_TAG  => 'div',
-			Image_Controller::CLASSES      => [ 'c-image__figure', 'c-image--bg' ],
+			Image_Controller::CLASSES      => [ 'c-image--bg' ],
 			Image_Controller::IMG_CLASSES  => [ 'c-subheader__media__image' ],
 			Image_Controller::SRC_SIZE     => Image_Sizes::SIXTEEN_NINE,
 			Image_Controller::SRCSET_SIZES => [
