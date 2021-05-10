@@ -7,7 +7,6 @@ use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\image\Image_Controller;
 use Tribe\Project\Templates\Components\sidebar\Sidebar_Controller;
 
-
 class Page_Controller extends Abstract_Controller {
 
 	/**
