@@ -15,14 +15,14 @@ use Tribe\Project\Templates\Models\Breadcrumb;
 class Subheader_Controller extends Abstract_Controller {
 	use Page_Title;
 
-	public const CLASSES = 'classes';
-	public const ATTRS   = 'attrs';
+	public const CLASSES		   = 'classes';
+	public const ATTRS			   = 'attrs';
 	public const CONTAINER_CLASSES = 'container_classes';
 	public const MEDIA_CLASSES     = 'media_classes';
 	public const CONTENT_CLASSES   = 'content_classes';
 
-	private array $classes;
-	private array $attrs;
+	private array  $classes;
+	private array  $attrs;
 	private array  $container_classes;
 	private array  $media_classes;
 	private array  $content_classes;
@@ -39,8 +39,8 @@ class Subheader_Controller extends Abstract_Controller {
 
 	protected function defaults(): array {
 		return [
-			self::CLASSES => [],
-			self::ATTRS   => [],
+			self::CLASSES 			=> [],
+			self::ATTRS   			=> [],
 			self::CONTAINER_CLASSES => [],
 			self::MEDIA_CLASSES     => [],
 			self::CONTENT_CLASSES   => [],
