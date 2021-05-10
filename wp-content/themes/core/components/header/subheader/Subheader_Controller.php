@@ -15,8 +15,8 @@ use Tribe\Project\Templates\Models\Breadcrumb;
 class Subheader_Controller extends Abstract_Controller {
 	use Page_Title;
 
-	public const CLASSES		   = 'classes';
-	public const ATTRS			   = 'attrs';
+	public const CLASSES           = 'classes';
+	public const ATTRS             = 'attrs';
 	public const CONTAINER_CLASSES = 'container_classes';
 	public const MEDIA_CLASSES     = 'media_classes';
 	public const CONTENT_CLASSES   = 'content_classes';
@@ -30,8 +30,8 @@ class Subheader_Controller extends Abstract_Controller {
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
 
-		$this->classes			 = (array) $args[ self::CLASSES ];
-		$this->attrs			 = (array) $args[ self::ATTRS ];
+		$this->classes           = (array) $args[ self::CLASSES ];
+		$this->attrs             = (array) $args[ self::ATTRS ];
 		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
 		$this->media_classes     = (array) $args[ self::MEDIA_CLASSES ];
 		$this->content_classes   = (array) $args[ self::CONTENT_CLASSES ];
@@ -39,8 +39,8 @@ class Subheader_Controller extends Abstract_Controller {
 
 	protected function defaults(): array {
 		return [
-			self::CLASSES 			=> [],
-			self::ATTRS   			=> [],
+			self::CLASSES           => [],
+			self::ATTRS             => [],
 			self::CONTAINER_CLASSES => [],
 			self::MEDIA_CLASSES     => [],
 			self::CONTENT_CLASSES   => [],
