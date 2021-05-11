@@ -7,7 +7,7 @@ use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Block_Registrar;
 use Tribe\Libs\ACF\Block_Renderer;
 use Tribe\Libs\Container\Abstract_Subscriber;
-use Tribe\Project\Blocks\Global_Field_Meta\Block_Controller;
+use Tribe\Project\Blocks\Global_Fields\Block_Controller;
 
 class Blocks_Subscriber extends Abstract_Subscriber {
 
@@ -51,12 +51,12 @@ class Blocks_Subscriber extends Abstract_Subscriber {
 				return $fields;
 			}
 
-			/** @var Global_Field_Meta\Meta\Meta $meta */
+			/** @var Global_Fields\Meta $meta */
 			foreach ( $this->container->get( Blocks_Definer::GLOBAL_BLOCK_FIELD_COLLECTION ) as $meta ) {
-				if ( ! $meta instanceof Global_Field_Meta\Meta\Meta ) {
+				if ( ! $meta instanceof Global_Fields\Meta ) {
 					throw new RuntimeException(
 						sprintf(
-							'%s is not an instance of \Tribe\Project\Blocks\Global_Field_Meta\Meta',
+							'%s is not an instance of \Tribe\Project\Blocks\Global_Fields\Meta',
 							get_class( $meta )
 						)
 					);

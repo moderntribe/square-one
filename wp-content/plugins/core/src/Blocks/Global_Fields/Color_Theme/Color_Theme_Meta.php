@@ -1,12 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace Tribe\Project\Blocks\Global_Field_Meta\Meta;
+namespace Tribe\Project\Blocks\Global_Fields\Color_Theme;
 
 use Tribe\Libs\ACF\Field;
 use Tribe\Libs\ACF\Field_Section;
 use Tribe\Libs\ACF\Traits\With_Field_Prefix;
+use Tribe\Project\Blocks\Global_Fields\Block_Meta;
 
-class Color_Meta extends Block_Meta {
+class Color_Theme_Meta extends Block_Meta {
 
 	use With_Field_Prefix;
 

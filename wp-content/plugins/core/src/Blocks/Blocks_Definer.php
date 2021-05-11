@@ -4,8 +4,8 @@ namespace Tribe\Project\Blocks;
 
 use DI;
 use Tribe\Libs\Container\Definer_Interface;
-use Tribe\Project\Blocks\Global_Field_Meta\Block_Controller;
-use Tribe\Project\Blocks\Global_Field_Meta\Meta\Color_Meta;
+use Tribe\Project\Blocks\Global_Fields\Block_Controller;
+use Tribe\Project\Blocks\Global_Fields\Color_Theme\Color_Theme_Meta;
 use Tribe\Project\Blocks\Types\Accordion\Accordion;
 use Tribe\Project\Blocks\Types\Buttons\Buttons;
 use Tribe\Project\Blocks\Types\Card_Grid\Card_Grid;
@@ -154,7 +154,7 @@ class Blocks_Definer implements Definer_Interface {
 			 * be appended to existing blocks in the list below.
 			 */
 			self::GLOBAL_BLOCK_FIELD_COLLECTION => DI\add( [
-				DI\get( Color_Meta::class ),
+				DI\get( Color_Theme_Meta::class ),
 			] ),
 
 			/**
