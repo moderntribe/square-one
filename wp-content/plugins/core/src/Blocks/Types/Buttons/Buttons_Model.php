@@ -10,7 +10,7 @@ class Buttons_Model extends Base_Model {
 	/**
 	 * @return array
 	 */
-	public function get_data(): array {
+	protected function set_data(): array {
 		return [
 			Buttons_Block_Controller::ATTRS   => $this->get_attrs(),
 			Buttons_Block_Controller::CLASSES => $this->get_classes(),

@@ -1,12 +1,10 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Blocks\Types\Logos;
 
 use Tribe\Libs\ACF\Block;
 use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Field;
-use Tribe\Libs\ACF\Field_Section;
 use Tribe\Libs\ACF\Repeater;
 
 class Logos extends Block_Config {

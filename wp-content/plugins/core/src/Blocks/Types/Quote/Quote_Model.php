@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Blocks\Types\Quote;
 
@@ -10,7 +9,7 @@ class Quote_Model extends Base_Model {
 	/**
 	 * @return array
 	 */
-	public function get_data(): array {
+	protected function set_data(): array {
 		return [
 			Quote_Block_Controller::ATTRS      => $this->get_attrs(),
 			Quote_Block_Controller::CLASSES    => $this->get_classes(),

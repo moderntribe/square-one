@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Blocks\Types\Card_Grid;
 
@@ -11,7 +10,7 @@ class Card_Grid_Model extends Base_Model {
 	/**
 	 * @return array
 	 */
-	public function get_data(): array {
+	protected function set_data(): array {
 		return [
 			Card_Grid_Controller::ATTRS       => $this->get_attrs(),
 			Card_Grid_Controller::CLASSES     => $this->get_classes(),

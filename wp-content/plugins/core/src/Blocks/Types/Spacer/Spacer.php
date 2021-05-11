@@ -1,12 +1,10 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Blocks\Types\Spacer;
 
 use Tribe\Libs\ACF\Block;
 use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Field;
-use Tribe\Libs\ACF\Field_Section;
 
 class Spacer extends Block_Config {
 	public const NAME = 'spacer';

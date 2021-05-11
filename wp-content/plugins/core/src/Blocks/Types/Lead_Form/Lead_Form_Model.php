@@ -10,7 +10,7 @@ class Lead_Form_Model extends Base_Model {
 	/**
 	 * @return array
 	 */
-	public function get_data(): array {
+	protected function set_data(): array {
 		return [
 			Lead_Form_Block_Controller::ATTRS       => $this->get_attrs(),
 			Lead_Form_Block_Controller::CLASSES     => $this->get_classes(),

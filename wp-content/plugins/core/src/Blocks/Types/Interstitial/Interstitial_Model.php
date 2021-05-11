@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Blocks\Types\Interstitial;
 
@@ -11,7 +10,7 @@ class Interstitial_Model extends Base_Model {
 	/**
 	 * @return array
 	 */
-	public function get_data(): array {
+	protected function set_data(): array {
 		return [
 			Interstitial_Block_Controller::ATTRS   => $this->get_attrs(),
 			Interstitial_Block_Controller::CLASSES => $this->get_classes(),
