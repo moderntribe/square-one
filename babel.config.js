@@ -4,7 +4,6 @@ module.exports = {
 		[
 			'@babel/preset-env',
 			{
-				targets: 'last 2 versions, safari >= 13, ios >= 13, android >= 5.1, not ie <= 11, not ie_mob <= 11, not bb <= 10, not samsung 4, not op_mob <= 12.1',
 				useBuiltIns: 'entry',
 				modules: false,
 				corejs: '3.1',
@@ -41,7 +40,6 @@ module.exports = {
 				[
 					'@babel/preset-env',
 					{
-						targets: 'last 2 versions, safari >= 13, ios >= 13, android >= 5.1, not ie <= 11, not ie_mob <= 11, not bb <= 10, not samsung 4, not op_mob <= 12.1',
 						useBuiltIns: 'entry',
 						modules: 'commonjs',
 						corejs: '3.1',

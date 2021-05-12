@@ -36,11 +36,11 @@ const sharedPlugins = [
 ];
 
 const compilePlugins = sharedPlugins.concat( [
-	require( 'postcss-assets' )( { baseUrl: pkg.square1.paths.core_theme_postcss_assets_base_url } ),
+	require( 'postcss-assets' )( { loadPaths: [ `${ pkg.square1.paths.core_theme }/` ] } ),
 ] );
 
 const compileGutenbergPlugins = sharedPlugins.concat( [
-	require( 'postcss-assets' )( { baseUrl: pkg.square1.paths.core_theme_postcss_assets_base_url } ),
+	require( 'postcss-assets' )( { loadPaths: [ `${ pkg.square1.paths.core_theme }/` ] } ),
 ] );
 
 const legacyPlugins = [
@@ -53,7 +53,7 @@ const legacyPlugins = [
 	require( 'postcss-simple-vars' ),
 	require( 'postcss-nested' ),
 	require( 'postcss-preset-env' )( { browsers: [ 'last 20 versions' ] } ),
-	require( 'postcss-assets' )( { baseUrl: pkg.square1.paths.core_theme_postcss_assets_base_url } ),
+	require( 'postcss-assets' )( { loadPaths: [ `${ pkg.square1.paths.core_theme }/` ] } ),
 ];
 
 /**
