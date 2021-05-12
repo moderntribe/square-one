@@ -8,14 +8,14 @@ WordPress's behavior. The method `\Tribe\Project\Core::init()` serves as our ent
 All classes in the Core plugin follow the [PSR-4](https://www.php-fig.org/psr/psr-4/) specification for class namespaces.
 `wp-content/plugins/core/src` is the root of the `\Tribe\Project` namespace.
 
-The `Core` class is responsible for initializing the [DI container](../concepts/container.md) and calling
-all of the [Subscribers](../concepts/subscribers.md) to register their hooks with WordPress. From here, things become
+The `Core` class is responsible for initializing the [DI container](/docs/concepts/container.md) and calling
+all of the [Subscribers](/docs/concepts/subscribers.md) to register their hooks with WordPress. From here, things become
 much less linear, so we'll need to branch out in a few different directions.
 
 * `\Tribe\Project\Assets`: Theme assets for the front end and admin are registered and enqueued in
   `\Tribe\Project\Assets`. 
   
-* `\Tribe\Project\Blocks`: [Block types](../basics/blocks.md) for the block editor are defined by classes in the
+* `\Tribe\Project\Blocks`: [Block types](/docs/basics/blocks.md) for the block editor are defined by classes in the
   `\Tribe\Project\Blocks\Types` namespace and registered by adding to the list in
   `\Tribe\Project\Blocks\Blocks_Definer`.
   
@@ -34,23 +34,23 @@ much less linear, so we'll need to branch out in a few different directions.
 * `\Tribe\Project\P2P`: If using the [Posts to Posts](https://github.com/scribu/wp-posts-to-posts/wiki) plugin,
   new relationship types are registered using classes in the `\Tribe\Project\P2P` namespace.
 
-* `\Tribe\Project\Post_Types`: All of the [post types](../basics/post-types.md) we interact with have classes in
+* `\Tribe\Project\Post_Types`: All of the [post types](/docs/basics/post-types.md) we interact with have classes in
   the `\Tribe\Project\Post_Types` namespace. `Config` files will configure custom post types that we register.
   Classes extending `\Tribe\Libs\Post_Type\Post_Object` for each post type provide access to post meta and other
   helpful methods relating to those post types.
   
-* `\Tribe\Project\Settings`: New [admin settings](../basics/settings.md) pages are registered with classes in the
+* `\Tribe\Project\Settings`: New [admin settings](/docs/basics/settings.md) pages are registered with classes in the
   `\Tribe\Project\Settings` namespace.
   
 * `\Tribe\Project\Shortcodes`: Shortcodes are registered with classes in the `\Tribe\Project\Shortcodes` namespace.
 
-* `\Tribe\Project\Taxonomies`: All of the [taxonomies](../basics/taxonomies.md) we interact with have classes in
+* `\Tribe\Project\Taxonomies`: All of the [taxonomies](/docs/basics/taxonomies.md) we interact with have classes in
   the `\Tribe\Project\Taxonomies` namespace. `Config` files will configure custom taxonomies that we register.
   Classes extending `\Tribe\Libs\Taxonomy\Term_Object` for each taxonomy provide access to term meta and other
   helpful methods relating to those taxonomies.
   
 * `\Tribe\Project\Templates`: The Controllers under the `\Tribe\Project\Templates\Controllers` namespace are responsible
-  for loading the [template components](../concepts/components.md) with appropriate data.
+  for loading the [template components](/docs/basics/components.md) with appropriate data.
 
 * `\Tribe\Project\Theme`: To configure various theme settings, explore the `\Tribe\Project\Theme` namespace. Of
   particular note are the configuration options for colors, gradients, and fonts available in
@@ -68,7 +68,7 @@ in the theme's `components` directory.
 
 The components themselves are arranged in a largely flat structure, with a few deviations for components that may
 be naturally grouped together (e.g., page templates). Each component's directory contains its own JS and CSS, which
-are compiled into the `assets` directory by the [build system](../concepts/build-system.md).
+are compiled into the `assets` directory by the [build system](/docs/tooling/build-system.md).
 
 Assets that are globally relevant are also contained in the `assets` directory and compiled into the same `dist` files.
 
@@ -84,7 +84,7 @@ mention:
 
 * `dev/docker`: Configures the Docker container for running the project.
 
-* `dev/tests`: Contains the [codeception test suites](../tests/codeception.md).
+* `dev/tests`: Contains the codeception test suites.
 
 * `dev_componetns`: Resources for theme development.
 

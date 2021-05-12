@@ -18,6 +18,7 @@ use Tribe\Project\Blocks\Types\Links\Links;
 use Tribe\Project\Blocks\Types\Logos\Logos;
 use Tribe\Project\Blocks\Types\Media_Text\Media_Text;
 use Tribe\Project\Blocks\Types\Quote\Quote;
+use Tribe\Project\Blocks\Types\Spacer\Spacer;
 use Tribe\Project\Blocks\Types\Stats\Stats;
 use Tribe\Project\Blocks\Types\Tabs\Tabs;
 use Tribe\Project\Blocks\Types\Gallery_Grid\Gallery_Grid;
@@ -46,6 +47,7 @@ class Blocks_Definer implements Definer_Interface {
 				DI\get( Logos::class ),
 				DI\get( Media_Text::class ),
 				DI\get( Quote::class ),
+				DI\get( Spacer::class ),
 				DI\get( Stats::class ),
 				DI\get( Tabs::class ),
 			] ),
@@ -77,6 +79,7 @@ class Blocks_Definer implements Definer_Interface {
 				'acf/logos',
 				'acf/mediatext',
 				'acf/quote',
+				'acf/spacer',
 				'acf/stats',
 				'acf/tabs',
 				'core-embed/facebook',

@@ -28,7 +28,7 @@ $c = Hero_Block_Controller::factory( $args );
 				'components/content_block/content_block',
 				null,
 				$c->get_content_args()
-			) ?>
+			); ?>
 		</div>
 	</div>
 </section>
