@@ -43,14 +43,22 @@
 
 	/* CASE: Apply an overlay. */
 	.c-image--overlay & {
-
 		&:after {
-			content: '';
-			position: absolute;
-			width: 100%;
-			height: 100%;
+			@mixin image-overlay;
+
 			background-color: var(--color-black);
 			opacity: 0.5;
+		}
+	}
+
+	/* CASE: Apply a gradient overlay. */
+	.c-image--gradient-overlay & {
+		&:after {
+			@mixin image-overlay;
+
+			right: 22.5%;
+			background: linear-gradient(90deg, var(--color-neutral-90) 0%, rgba(21, 21, 21, 0.6) 63.54%, rgba(21, 21, 21, 0) 100%);
+			opacity: 0.9;
 		}
 	}
 }
