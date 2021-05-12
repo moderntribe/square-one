@@ -283,6 +283,11 @@
       <code>Quote</code>
     </PropertyNotSetInConstructor>
   </file>
+  <file src="wp-content/plugins/core/src/Blocks/Types/Spacer/Spacer.php">
+    <PropertyNotSetInConstructor occurrences="1">
+      <code>Spacer</code>
+    </PropertyNotSetInConstructor>
+  </file>
   <file src="wp-content/plugins/core/src/Blocks/Types/Stats/Stats.php">
     <PropertyNotSetInConstructor occurrences="1">
       <code>Stats</code>
@@ -344,17 +349,15 @@
       <code>Analytics_Settings::GOOGLE_TAG_MANAGER</code>
     </InvalidScalarArgument>
   </file>
-  <file src="wp-content/plugins/core/src/Integrations/Google_Tag_Manager/Google_Tag_Manager_Subscriber.php">
-    <HookNotFound occurrences="1"/>
-  </file>
   <file src="wp-content/plugins/core/src/Integrations/Gravity_Forms/Form_Styles.php">
     <PossiblyFalseArgument occurrences="1">
       <code>false</code>
     </PossiblyFalseArgument>
   </file>
   <file src="wp-content/plugins/core/src/Integrations/Gravity_Forms/Gravity_Forms_Subscriber.php">
-    <HookNotFound occurrences="9">
+    <HookNotFound occurrences="10">
       <code>add_filter( 'gform_confirmation_anchor', '__return_false' )</code>
+      <code>add_filter( 'gform_enable_legacy_markup', '__return_true' )</code>
       <code>add_filter( 'gform_tabindex', '__return_false' )</code>
       <code>add_filter( 'pre_option_rg_gforms_disable_css', '__return_true' )</code>
       <code>add_filter( 'pre_option_rg_gforms_enable_html5', '__return_true' )</code>
@@ -438,34 +441,10 @@
       <code>$type</code>
     </MissingParamType>
   </file>
-  <file src="wp-content/plugins/core/src/Routes/Routes_Definer.php">
-    <MissingDependency occurrences="2">
-      <code>Sample_REST_Route</code>
-      <code>Sample_Route</code>
-    </MissingDependency>
-    <UndefinedClass occurrences="2">
-      <code>Route_Definer</code>
-      <code>Route_Definer</code>
-    </UndefinedClass>
-  </file>
-  <file src="wp-content/plugins/core/src/Routes/Routes_Subscriber.php">
-    <HookNotFound occurrences="1"/>
-    <MissingClosureParamType occurrences="1">
-      <code>$args</code>
-    </MissingClosureParamType>
-    <MissingDependency occurrences="1">
-      <code>Sample_Route</code>
-    </MissingDependency>
-  </file>
   <file src="wp-content/plugins/core/src/Routes/Sample_REST_Route.php">
-    <UndefinedClass occurrences="1">
-      <code>Abstract_REST_Route</code>
-    </UndefinedClass>
-  </file>
-  <file src="wp-content/plugins/core/src/Routes/Sample_Route.php">
-    <UndefinedClass occurrences="1">
-      <code>Abstract_Route</code>
-    </UndefinedClass>
+    <PossiblyNullArgument occurrences="1">
+      <code>$request-&gt;get_param( 'name' )</code>
+    </PossiblyNullArgument>
   </file>
   <file src="wp-content/plugins/core/src/Shortcodes/Gallery.php">
     <MissingClosureParamType occurrences="1">
@@ -613,6 +592,11 @@
     </MissingClosureReturnType>
   </file>
   <file src="wp-content/themes/core/blocks/logos/logos.php">
+    <UndefinedGlobalVariable occurrences="1">
+      <code>$args</code>
+    </UndefinedGlobalVariable>
+  </file>
+  <file src="wp-content/themes/core/blocks/spacer/spacer.php">
     <UndefinedGlobalVariable occurrences="1">
       <code>$args</code>
     </UndefinedGlobalVariable>
@@ -886,6 +870,17 @@
     <LessSpecificImplementedReturnType occurrences="1">
       <code>array</code>
     </LessSpecificImplementedReturnType>
+  </file>
+  <file src="wp-content/themes/core/components/blocks/spacer/Spacer_Block_Controller.php">
+    <LessSpecificImplementedReturnType occurrences="1">
+      <code>array</code>
+    </LessSpecificImplementedReturnType>
+    <MismatchingDocblockPropertyType occurrences="1">
+      <code>array</code>
+    </MismatchingDocblockPropertyType>
+    <PossiblyInvalidArgument occurrences="1">
+      <code>$this-&gt;classes</code>
+    </PossiblyInvalidArgument>
   </file>
   <file src="wp-content/themes/core/components/blocks/stats/Stats_Block_Controller.php">
     <DocblockTypeContradiction occurrences="1">
