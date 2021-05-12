@@ -16,8 +16,12 @@
 	/* CASE: Page with featured image */
 	&.c-subheader--has-image {	
 		min-height: 440px;
-		align-items: flex-end;
-		padding:  var(--spacer-20) 0 var(--spacer-80) 0; 
+
+		@media (--viewport-medium) {
+			align-items: flex-end;
+			padding: var(--spacer-20) 0 var(--spacer-80) 0; 
+
+		}
 	}
 }
 
@@ -30,7 +34,11 @@
 }
 
 .c-subheader__title { 
-	margin-top: var(--spacer-20);
+	margin-top: var(--spacer-10);
+	
+	@media (--viewport-medium) {
+		margin-top: var(--spacer-20);
+	}
 }
 
 /* -----------------------------------------------------------------------------
