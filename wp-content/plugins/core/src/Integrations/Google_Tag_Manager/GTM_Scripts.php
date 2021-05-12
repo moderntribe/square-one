@@ -56,7 +56,7 @@ class GTM_Scripts {
 	 * Google Tag Manager (body tag)
 	 * @action wp_body_open
 	 */
-	public function inject_google_tag_manager_body_tag() {
+	public function inject_google_tag_manager_body_tag(): void {
 
 		$id = $this->settings->get_value( Analytics_Settings::GOOGLE_TAG_MANAGER );
 
