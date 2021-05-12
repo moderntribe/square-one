@@ -50,7 +50,7 @@ class Subheader_Controller extends Abstract_Controller {
 	protected function required(): array {
 		return [
 			self::CONTAINER_CLASSES => [ 'l-container' ], 
-			self::MEDIA_CLASSES     => [ 'c-subheader__media', 'c-image--gradient-overlay' ],
+			self::MEDIA_CLASSES     => [ 'c-subheader__media' ],
 			self::CONTENT_CLASSES   => [ 'c-subheader__content' ],
 			self::CLASSES           => [ 'c-subheader' ],
 		];
@@ -111,12 +111,10 @@ class Subheader_Controller extends Abstract_Controller {
 		}
 
 		return [
-			Image_Controller::IMG_ID => (int) get_post_thumbnail_id(),
-			Image_Controller::AS_BG        => true,
+			Image_Controller::IMG_ID       => (int) get_post_thumbnail_id(),
 			Image_Controller::AUTO_SHIM    => false,
 			Image_Controller::USE_LAZYLOAD => true,
-			Image_Controller::WRAPPER_TAG  => 'div',
-			Image_Controller::CLASSES      => [ 'c-image--bg' ],
+			Image_Controller::CLASSES      => [ 'c-image--overlay', 'c-image--figure' ],
 			Image_Controller::IMG_CLASSES  => [ 'c-subheader__media__image' ],
 			Image_Controller::SRC_SIZE     => Image_Sizes::SIXTEEN_NINE,
 			Image_Controller::SRCSET_SIZES => [
