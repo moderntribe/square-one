@@ -13,14 +13,14 @@
 	padding:  var(--spacer-20) 0;
 	color: var(--color-text);
 	margin-bottom: var(--spacer-80);
-}
 
-/* CASE: Page with featured image */
-body:not(.page-page-with-no-featured-image) .c-subheader { 
-	min-height: 440px;
-	align-items: flex-end;
-	padding:  var(--spacer-20) 0 var(--spacer-80) 0; 
-	color: var(--color-white);		
+	/* CASE: Page with featured image */
+	&.c-subheader--has-image {	
+		min-height: 440px;
+		align-items: flex-end;
+		padding:  var(--spacer-20) 0 var(--spacer-80) 0; 
+		color: var(--color-white);		
+	}
 }
 
 /* -----------------------------------------------------------------------------
@@ -41,16 +41,4 @@ body:not(.page-page-with-no-featured-image) .c-subheader {
 
 .c-subheader__media__image {
 	min-height: 440px;
-}
-
-.c-subheader__media__image:after {
-	content: '';
-	position: absolute;
-	height: 100%;
-	top: 0;
-	left: 0;
-	right: 22.5%;
-	background: linear-gradient(90deg, var(--color-neutral-90) 0%, rgba(21, 21, 21, 0.6) 63.54%, rgba(21, 21, 21, 0) 100%);
-	mix-blend-mode: normal;
-	opacity: 0.9;
 }

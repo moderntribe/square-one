@@ -50,13 +50,17 @@ class Subheader_Controller extends Abstract_Controller {
 	protected function required(): array {
 		return [
 			self::CONTAINER_CLASSES => [ 'l-container' ], 
-			self::MEDIA_CLASSES     => [ 'c-subheader__media' ],
+			self::MEDIA_CLASSES     => [ 'c-subheader__media', 'c-image--gradient-overlay' ],
 			self::CONTENT_CLASSES   => [ 'c-subheader__content' ],
 			self::CLASSES           => [ 'c-subheader' ],
 		];
 	}
 
 	public function get_classes(): string {
+		if ( has_post_thumbnail() ) {
+			$this->classes[] = 'c-subheader--has-image';
+		}
+		
 		return Markup_Utils::class_attribute( $this->classes );
 	}
 
@@ -76,7 +80,7 @@ class Subheader_Controller extends Abstract_Controller {
 		];
 	}
 
-		/**
+	/**
 	 * @return string
 	 */
 	public function get_container_classes(): string {
@@ -96,6 +100,10 @@ class Subheader_Controller extends Abstract_Controller {
 	public function get_content_classes(): string {
 		return Markup_Utils::class_attribute( $this->content_classes );
 	}
+
+	/**
+	 * @return array
+	 */
 
 	public function get_image_args() {
 		if ( ! has_post_thumbnail() ) {
@@ -122,7 +130,7 @@ class Subheader_Controller extends Abstract_Controller {
 		
 		get_template_part(
 			'components/breadcrumbs/breadcrumbs',
-			'page',
+			'null',
 			[ Breadcrumbs_Controller::BREADCRUMBS => $this->get_breadcrumbs() ]
 		);
 	}
