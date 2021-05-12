@@ -98,7 +98,7 @@ jobs:
         run: npm run server_dist
 
       - name: Validate assets
-          run: npm run validate
+        run: npm run validate
 
       - name: Create test databases
         run: |
