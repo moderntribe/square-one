@@ -24,12 +24,12 @@ class Routes_Definer implements Definer_Interface {
 		return [
 			Route_Definer::ROUTES      => DI\add(
 				[
-					// DI\get( Sample_Route::class ),
+					DI\get( Sample_Route::class ),
 				]
 			),
 			Route_Definer::REST_ROUTES => DI\add(
 				[
-					// DI\get( Sample_REST_Route::class ),
+					DI\get( Sample_REST_Route::class ),
 				]
 			),
 		];

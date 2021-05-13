@@ -17,11 +17,13 @@ class Sample_Route extends Abstract_Route {
 	/**
 	 * Javascript configuration for this route.
 	 *
+	 * Need to pass data to JS for this route? Do it here.
+	 *
 	 * @param array $data The current core JS configuration.
 	 * @return array      Modified core JS configuration.
 	 */
 	public function js_config( array $data = [] ): array {
-		$data['FormSubmitEndpoint'] = rest_url( '/tribe/v1/submit-form/' );
+		$data['sample_data_for_js'] = 'sample_data_for_js';
 		return $data;
 	}
 
@@ -34,6 +36,9 @@ class Sample_Route extends Abstract_Route {
 	public function get_request_methods(): array {
 		return [
 			\WP_REST_Server::READABLE,
+			// \WP_REST_Server::CREATABLE,
+			// \WP_REST_Server::EDITABLE,
+			// \WP_REST_Server::DELETABLE
 		];
 	}
 
@@ -49,12 +54,17 @@ class Sample_Route extends Abstract_Route {
 	/**
 	 * Returns the pattern for the route.
 	 *
-	 * Example: https://square1.tribe/sample/2021/
+	 * Multiple Example patterns:
+	 * - https://square1.tribe/sample/
+	 * - https://square1.tribe/sample/xyz/
+	 * - https://square1.tribe/sample/2021/
 	 *
 	 * @return string The pattern for the route.
 	 */
 	public function get_pattern(): string {
-		return '^sample\/?((?:19|20)\d{2}?)?\/?$';
+		//return 'sample/?$'; // /sample/
+		//return 'sample/(.?.+?)(?:/([0-9]+))?/?$'; // /sample/xyz/
+		return '^sample\/?((?:19|20)\d{2}?)?\/?$'; // /sample/2021/
 	}
 
 	/**
@@ -83,7 +93,7 @@ class Sample_Route extends Abstract_Route {
 	 * @return string The template name for the route.
 	 */
 	public function get_template(): string {
-		return locate_template( 'routes/sample.php' );
+		return locate_template( 'components/routes/example_custom/sample.php' );
 	}
 
 	/**

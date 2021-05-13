@@ -61,7 +61,6 @@ class Core {
 		Google_Tag_Manager_Subscriber::class,
 		Gravity_Forms_Subscriber::class,
 		Nav_Menus_Subscriber::class,
-		Routes_Subscriber::class,
 		Shortcodes_Subscriber::class,
 		Theme_Subscriber::class,
 		Yoast_SEO_Subscriber::class,
@@ -71,6 +70,9 @@ class Core {
 
 		// Custom Taxonomies.
 		Taxonomies\Example\Subscriber::class,
+
+		// Custom Routes
+		// Routes_Subscriber::class,
 	];
 
 	/**
