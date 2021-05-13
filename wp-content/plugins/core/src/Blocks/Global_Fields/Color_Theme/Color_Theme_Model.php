@@ -22,7 +22,7 @@ class Color_Theme_Model extends Block_Model {
 
 	protected function get_attrs(): array {
 		return [
-			'style' => sprintf( '--%s-%s', self::COLOR_THEME, $this->get_color_theme() ),
+			'style' => sprintf( '--%s:%s;', self::COLOR_THEME, $this->get_color_theme() ),
 		];
 	}
 
