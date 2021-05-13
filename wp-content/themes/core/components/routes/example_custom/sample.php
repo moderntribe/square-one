@@ -8,7 +8,7 @@
 
 get_header();
 ?>
-<p><?php echo esc_html__( 'Thing: ') . get_query_var( 'year' ); ?></p>
+<p><?php echo esc_html__( 'Thing: ') . get_query_var( 'thing' ); ?></p>
 <p><?php esc_html_e( 'Sample Route', 'tribe' ); ?></p>
 
 <?php

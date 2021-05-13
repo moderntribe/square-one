@@ -14,6 +14,13 @@ use Tribe\Libs\Container\Abstract_Subscriber;
  */
 class Routes_Subscriber extends Abstract_Subscriber {
 	/**
+	 * Router version number.
+	 *
+	 * @var float
+	 */
+	protected const VERSION = '1.1.1';
+
+	/**
 	 * Registers any WP lifecycle hooks for routes.
 	 *
 	 * @return void
@@ -27,5 +34,14 @@ class Routes_Subscriber extends Abstract_Subscriber {
 		// 	10,
 		// 	1
 		// );
+
+		add_filter(
+			'tribe_libs_router_version',
+			function ( ...$args ) {
+				return self::VERSION;
+			},
+			10,
+			1
+		);
 	}
 }

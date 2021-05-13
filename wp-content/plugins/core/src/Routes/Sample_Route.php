@@ -63,8 +63,8 @@ class Sample_Route extends Abstract_Route {
 	 */
 	public function get_pattern(): string {
 		//return 'sample/?$'; // /sample/
-		//return 'sample/(.?.+?)(?:/([0-9]+))?/?$'; // /sample/xyz/
-		return '^sample\/?((?:19|20)\d{2}?)?\/?$'; // /sample/2021/
+		return '^sample\/(.?.+)?\/?$'; // /sample/xyz/
+		//return '^sample\/?((?:19|20)\d{2}?)?\/?$'; // /sample/2021/
 	}
 
 	/**
@@ -74,7 +74,7 @@ class Sample_Route extends Abstract_Route {
 	 */
 	public function get_matches(): array {
 		return [
-			'year' => '$matches[1]',
+			'thing' => '$matches[1]',
 		];
 	}
 
