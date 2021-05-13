@@ -2,7 +2,7 @@
 
 namespace Tribe\Project\Blocks\Global_Fields;
 
-use Tribe\Project\Blocks\Traits\With_Get_Field;
+use Tribe\Libs\ACF\Traits\With_Get_Field;
 use Tribe\Project\Blocks\Types\Model;
 
 abstract class Block_Model implements Model {

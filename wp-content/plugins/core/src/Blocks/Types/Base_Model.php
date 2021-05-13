@@ -2,7 +2,7 @@
 
 namespace Tribe\Project\Blocks\Types;
 
-use Tribe\Project\Blocks\Traits\With_Get_Field;
+use Tribe\Libs\ACF\Traits\With_Get_Field;
 
 /**
  * The base block model.
