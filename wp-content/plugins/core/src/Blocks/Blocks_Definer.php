@@ -6,6 +6,7 @@ use DI;
 use Tribe\Libs\Container\Definer_Interface;
 use Tribe\Project\Blocks\Global_Fields\Block_Controller;
 use Tribe\Project\Blocks\Global_Fields\Color_Theme\Color_Theme_Meta;
+use Tribe\Project\Blocks\Global_Fields\Color_Theme\Color_Theme_Model;
 use Tribe\Project\Blocks\Types\Accordion\Accordion;
 use Tribe\Project\Blocks\Types\Buttons\Buttons;
 use Tribe\Project\Blocks\Types\Card_Grid\Card_Grid;
@@ -31,6 +32,7 @@ class Blocks_Definer implements Definer_Interface {
 	public const ALLOW_LIST                    = 'blocks.allow_list';
 	public const STYLES                        = 'blocks.style_overrides';
 	public const GLOBAL_BLOCK_FIELD_COLLECTION = 'blocks.global_block_field_collection';
+	public const GLOBAL_MODEL_COLLECTION       = 'blocks.global_model_collection';
 	public const ALLOWED_GLOBAL_BLOCKS         = 'blocks.allowed_global_blocks';
 
 	public function define(): array {
@@ -155,6 +157,15 @@ class Blocks_Definer implements Definer_Interface {
 			 */
 			self::GLOBAL_BLOCK_FIELD_COLLECTION => DI\add( [
 				DI\get( Color_Theme_Meta::class ),
+			] ),
+
+			/**
+			 * Define global field model instances to match the field
+			 * instances above. This field data will be passed to existing
+			 * block controllers in the list below.
+			 */
+			self::GLOBAL_MODEL_COLLECTION => DI\add( [
+				DI\get( Color_Theme_Model::class ),
 			] ),
 
 			/**
