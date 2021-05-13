@@ -16,6 +16,7 @@ abstract class Base_Model implements Model {
 	protected string $mode;
 	protected array  $data;
 	protected string $name;
+	protected string $id;
 	protected string $classes;
 	protected string $anchor;
 
@@ -36,7 +37,7 @@ abstract class Base_Model implements Model {
 		/**
 		 * Allow developers to attach extra model data.
 		 *
-		 * @param mixed[] $data The existing data on the model.
+		 * @param mixed[]    $data  The existing data on the model.
 		 * @param Base_Model $model The model instance.
 		 */
 		return (array) apply_filters( 'tribe/block/model/data', $this->set_data(), $this );
@@ -51,6 +52,7 @@ abstract class Base_Model implements Model {
 		$this->mode    = $block['mode'] ?? 'preview';
 		$this->data    = $block['data'] ?? [];
 		$this->name    = $block['name'] ? str_replace( 'acf/', '', $block['name'] ) : '';
+		$this->id      = $block['id'] ?? '';
 		$this->classes = $block['className'] ?? '';
 		$this->anchor  = $block['anchor'] ?? '';
 	}
@@ -65,10 +67,37 @@ abstract class Base_Model implements Model {
 
 		// "HTML Anchor" attribute
 		if ( ! empty( $this->anchor ) ) {
-			$attrs[ 'id '] = $this->anchor;
+			$attrs['id'] = $this->anchor;
 		}
 
 		return $attrs;
+	}
+
+	/**
+	 * Get the assigned ACF block ID.
+	 *
+	 * @return string
+	 */
+	public function get_id(): string {
+		return $this->id;
+	}
+
+	/**
+	 * Get the block name.
+	 *
+	 * @return string
+	 */
+	public function get_name(): string {
+		return $this->name;
+	}
+
+	/**
+	 * Get all the raw ACF block data.
+	 *
+	 * @return array
+	 */
+	public function get_raw_data(): array {
+		return $this->data;
 	}
 
 	/**
