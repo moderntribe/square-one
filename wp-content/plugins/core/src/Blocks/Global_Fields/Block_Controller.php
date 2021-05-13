@@ -10,6 +10,8 @@ namespace Tribe\Project\Blocks\Global_Fields;
 class Block_Controller {
 
 	/**
+	 * An array of block names that are allowed to have global fields.
+	 *
 	 * @var string[]
 	 */
 	private array $block_names;
@@ -31,6 +33,8 @@ class Block_Controller {
 	 * @return bool
 	 */
 	public function allowed( string $block_name ): bool {
+		$block_name = str_replace( 'acf/', '', $block_name );
+
 		return in_array( $block_name, $this->block_names, true );
 	}
 }
