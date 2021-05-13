@@ -8,6 +8,8 @@ use Tribe\Libs\ACF\Block_Registrar;
 use Tribe\Libs\ACF\Block_Renderer;
 use Tribe\Libs\Container\Abstract_Subscriber;
 use Tribe\Project\Blocks\Global_Fields\Block_Controller;
+use Tribe\Project\Blocks\Global_Fields\Block_Model;
+use Tribe\Project\Blocks\Types\Base_Model;
 
 class Blocks_Subscriber extends Abstract_Subscriber {
 
@@ -39,15 +41,14 @@ class Blocks_Subscriber extends Abstract_Subscriber {
 	}
 
 	/**
+	 * Inject global fields into blocks.
+	 *
 	 * @throws RuntimeException
 	 */
 	private function register_global_block_fields(): void {
 		add_filter( 'tribe/block/register/fields', function ( $fields, Block_Config $block ): array {
-
-			$controller = $this->container->get( Block_Controller::class );
-
-			// Only blocks specified will have global fields added to them.
-			if ( ! $controller->allowed( $block::NAME ) ) {
+			// Only specified blocks will have global fields added to them.
+			if ( ! $this->allows_global_fields( $block::NAME ) ) {
 				return $fields;
 			}
 
@@ -67,5 +68,40 @@ class Blocks_Subscriber extends Abstract_Subscriber {
 
 			return $fields;
 		}, 10, 2 );
+
+		add_filter( 'tribe/block/model/data', function ( $data, Base_Model $model ): array {
+			if ( ! $this->allows_global_fields( $model->get_name() ) ) {
+				return $data;
+			}
+
+			/** @var Block_Model $field_model */
+			foreach ( $this->container->get( Blocks_Definer::GLOBAL_MODEL_COLLECTION ) as $field_model ) {
+				if ( ! $field_model instanceof Block_Model ) {
+					throw new RuntimeException(
+						sprintf(
+							'%s is not an instance of \Tribe\Project\Blocks\Global_Fields\Block_Model',
+							get_class( $field_model )
+						)
+					);
+				}
+
+				$field_model->set_block_id( $model->get_id() );
+
+				$data = array_merge_recursive( $data, $field_model->get_data() );
+			}
+
+			return $data;
+		}, 10, 2 );
+	}
+
+	/**
+	 * Check if a block allows global field injection.
+	 *
+	 * @param string $block_name
+	 *
+	 * @return bool
+	 */
+	private function allows_global_fields( string $block_name ): bool {
+		return $this->container->get( Block_Controller::class )->allowed( $block_name );
 	}
 }
