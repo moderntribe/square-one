@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare( strict_types=1 );
 
 namespace Tribe\Project\Blocks;
 
@@ -9,7 +9,9 @@ use Tribe\Libs\ACF\Block_Renderer;
 use Tribe\Libs\Container\Abstract_Subscriber;
 use Tribe\Project\Blocks\Global_Fields\Block_Controller;
 use Tribe\Project\Blocks\Global_Fields\Block_Model;
+use Tribe\Project\Blocks\Global_Fields\Meta;
 use Tribe\Project\Blocks\Types\Base_Model;
+use Tribe\Project\Blocks\Types\Model;
 
 class Blocks_Subscriber extends Abstract_Subscriber {
 
@@ -47,8 +49,7 @@ class Blocks_Subscriber extends Abstract_Subscriber {
 	 */
 	private function register_global_block_fields(): void {
 		add_filter( 'tribe/block/register/fields', function ( $fields, Block_Config $block ): array {
-			// Only specified blocks will have global fields added to them.
-			if ( ! $this->allows_global_fields( $block::NAME ) ) {
+			if ( ! $this->block_allows_global_fields( $block::NAME ) ) {
 				return $fields;
 			}
 
@@ -63,6 +64,10 @@ class Blocks_Subscriber extends Abstract_Subscriber {
 					);
 				}
 
+				if ( ! $this->block_allows_specific_field_group( $block::NAME, $meta ) ) {
+					return $fields;
+				}
+
 				$fields = array_merge( $fields, $meta->get_fields() );
 			}
 
@@ -70,7 +75,7 @@ class Blocks_Subscriber extends Abstract_Subscriber {
 		}, 10, 2 );
 
 		add_filter( 'tribe/block/model/data', function ( $data, Base_Model $model ): array {
-			if ( ! $this->allows_global_fields( $model->get_name() ) ) {
+			if ( ! $this->block_allows_global_fields( $model->get_name() ) ) {
 				return $data;
 			}
 
@@ -83,6 +88,10 @@ class Blocks_Subscriber extends Abstract_Subscriber {
 							get_class( $field_model )
 						)
 					);
+				}
+
+				if ( ! $this->block_allows_specific_field_group( $model->get_name(), $field_model ) ) {
+					return $data;
 				}
 
 				$field_model->set_block_id( $model->get_id() );
@@ -101,7 +110,19 @@ class Blocks_Subscriber extends Abstract_Subscriber {
 	 *
 	 * @return bool
 	 */
-	private function allows_global_fields( string $block_name ): bool {
+	private function block_allows_global_fields( string $block_name ): bool {
 		return $this->container->get( Block_Controller::class )->allowed( $block_name );
+	}
+
+	/**
+	 * Check if a block only allows specific global field groups.
+	 *
+	 * @param string     $block_name
+	 * @param Meta|Model $instance
+	 *
+	 * @return bool
+	 */
+	private function block_allows_specific_field_group( string $block_name, $instance ): bool {
+		return $this->container->get( Block_Controller::class )->allows_specific_field_group( $block_name, $instance );
 	}
 }
