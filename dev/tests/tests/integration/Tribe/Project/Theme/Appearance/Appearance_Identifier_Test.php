@@ -1,12 +1,10 @@
 <?php
 
-namespace Tribe\Project;
+namespace Tribe\Project\Theme\Appearance;
 
 use WP_Query;
 use Tribe\Tests\Test_Case;
 use Tribe\Project\Object_Meta\Appearance\Appearance;
-use Tribe\Project\Theme\Appearance\Appearance_Identifier;
-use Tribe\Project\Theme\Appearance\Appearance_Class_Manager;
 
 class Appearance_Identifier_Test extends Test_Case {
 
