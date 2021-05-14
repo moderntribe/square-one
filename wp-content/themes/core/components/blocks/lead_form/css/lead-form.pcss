@@ -7,18 +7,12 @@
 .b-lead-form {
 	/* CASE: Lead Form: Full Width */
 	&.b-lead-form--width-full {
-		background-color: var(--color-primary-10);
+		background-color: var(--color-bgd-content);
 		padding: var(--spacer-50) 0;
 
 		@media (--viewport-full) {
 			padding: var(--spacer-70) 0;
 		}
-	}
-
-	/* CASE: Lead Form: Background Dark */
-	&.t-theme--light,
-	.b-lead-form__container.t-theme--light {
-		background-color: var(--color-black);
 	}
 }
 
@@ -29,7 +23,7 @@
 .b-lead-form__container {
 	/* CASE: Lead Form: Grid Width */
 	.b-lead-form--width-grid & {
-		background-color: var(--color-primary-10);
+		background-color: var(--color-bgd-content);
 		border-radius: 8px;
 		padding: var(--spacer-40) var(--spacer-30);
 
@@ -83,7 +77,7 @@
 .b-lead-form__form {
 	margin-top: var(--spacer-30);
 	max-width: var(--grid-5-col);
-	
+
 	/* CASE: Lead Form: Layout Bottom */
 	.b-lead-form--layout-bottom & {
 		margin-left: auto;

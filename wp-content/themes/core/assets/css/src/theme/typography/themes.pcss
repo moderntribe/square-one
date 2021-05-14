@@ -28,12 +28,17 @@
  *
  * ------------------------------------------------------------------------- */
 
-.t-theme--light {
+.t-text--light {
 	color: var(--color-white);
 
 	* {
 		color: var(--color-white);
 	}
+}
+
+.t-theme--light {
+	--color-bgd-content: var(--color-white);
+	--color-text: var(--color-black);
 }
 
 /* -------------------------------------------------------------------------
@@ -61,6 +66,11 @@
  *
  * ------------------------------------------------------------------------- */
 
-.t-theme--dark {
+.t-text--dark {
 
+}
+
+.t-theme--dark {
+	--color-bgd-content: var(--color-black);
+	--color-text: var(--color-white);
 }
