@@ -1,4 +1,4 @@
-<?php declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Object_Meta\Appearance;
 
@@ -14,6 +14,7 @@ interface Appearance {
 	public const COLOR_THEME_DEFAULT = '#FFF';
 	public const OPTION_LIGHT        = '#FFF';
 	public const OPTION_DARK         = '#000';
-	public const BODY_LIGHT_CLASS    = 't-theme--light';
-	public const BODY_DARK_CLASS     = 't-theme--dark';
+	public const CSS_LIGHT_CLASS    = 't-theme--light';
+	public const CSS_DARK_CLASS     = 't-theme--dark';
+	public const DEFAULT_CSS_CLASS  = self::CSS_LIGHT_CLASS;
 }

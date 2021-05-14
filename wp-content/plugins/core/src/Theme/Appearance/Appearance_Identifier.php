@@ -14,6 +14,12 @@ class Appearance_Identifier {
 
 	use With_Get_Field;
 
+	protected Appearance_Class_Manager $class_manager;
+
+	public function __construct( Appearance_Class_Manager $class_manager ) {
+		$this->class_manager = $class_manager;
+	}
+
 	/**
 	 * Get the current theme, first checking if it's overridden at the post level.
 	 *
@@ -40,5 +46,16 @@ class Appearance_Identifier {
 	 */
 	public function current_global_theme(): string {
 		return (string) $this->get( Appearance::COLOR_THEME, Appearance::COLOR_THEME_DEFAULT, 'option' );
+	}
+
+	/**
+	 * Get the Light or Dark class depending on the selection.
+	 *
+	 * @return string The Light or Dark Class.
+	 */
+	public function get_body_class(): string {
+		$hex = $this->current_theme();
+
+		return $this->class_manager->get_class_from_hex( $hex );
 	}
 }

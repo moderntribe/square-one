@@ -2,9 +2,6 @@
 
 namespace Tribe\Project\Theme;
 
-use OzdemirBurak\Iris\Color\Hex;
-use Throwable;
-use Tribe\Project\Object_Meta\Appearance\Appearance;
 use Tribe\Project\Theme\Appearance\Appearance_Identifier;
 
 class Body_Class {
@@ -41,7 +38,7 @@ class Body_Class {
 		}
 
 		$classes[] = $this->post_name_class( $post );
-		$classes[] = $this->get_appearance_class();
+		$classes[] = $this->appearance_identifier->get_body_class();
 
 		return $classes;
 	}
@@ -66,17 +63,5 @@ class Body_Class {
 
 	private function post_name_class( $post ): string {
 		return sanitize_html_class( $post->post_type . '-' . $post->post_name );
-	}
-
-	private function get_appearance_class(): string {
-		$current_theme = $this->appearance_identifier->current_theme();
-
-		try {
-			$color = new Hex( $current_theme );
-		} catch ( Throwable $e ) {
-			return Appearance::BODY_LIGHT_CLASS;
-		}
-
-		return $color->isDark() ? Appearance::BODY_DARK_CLASS : Appearance::BODY_LIGHT_CLASS;
 	}
 }
