@@ -11,4 +11,13 @@ use Codeception\TestCase\WPTestCase;
  * @package Tribe\Tests
  */
 class Test_Case extends WPTestCase {
+
+	public function _setUp() {
+		parent::_setUp();
+	}
+
+	public function _tearDown() {
+		parent::_tearDown();
+	}
+
 }
