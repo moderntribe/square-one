@@ -187,6 +187,7 @@ class Blocks_Definer implements Definer_Interface {
 					Color_Theme_Meta::class,
 					Color_Theme_Model::class,
 				],
+				Icon_Grid::NAME,
 				Interstitial::NAME,
 				Lead_Form::NAME,
 				Links::NAME,
