@@ -136,8 +136,7 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 			Content_Block_Controller::CLASSES => [
 				'c-block__content-block',
 				'c-block__header',
-				'b-interstitial__content-container',
-				't-theme--light'
+				'b-interstitial__content-container'
 			],
 		];
 	}

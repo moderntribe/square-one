@@ -72,12 +72,6 @@
 			background-color: var(--color-grey);
 		}
 	}
-
-	/* CASE: Reversed out/light text */
-	&.is-style-light,
-	.t-text--light & {
-		/* Currently no changes from default. */
-	}
 }
 
 /* -----------------------------------------------------------------------------
@@ -114,8 +108,7 @@
 	}
 
 	/* CASE: Reversed out/light theme */
-	&.is-style-light,
-	.t-text--light & {
+	.t-theme--dark & {
 		color: var(--color-white);
 
 		/* CASE: Disabled */
@@ -247,18 +240,6 @@
 
 		&:after {
 			padding-left: 24px;
-		}
-	}
-
-	/* CASE: Reversed out/light theme */
-	&.is-style-light,
-	.t-text--light & {
-		color: var(--color-white);
-
-		&:focus,
-		&:active,
-		&:hover {
-			color: var(--color-primary-30);
 		}
 	}
 }

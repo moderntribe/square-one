@@ -9,32 +9,26 @@
  * Theme: Light
  *
  * Notes:
- * + This can be used anywhere or can be paired up with .t-sink
- * + Also see the other base partials for use of this class as a parent
- *   selector (media, typography, etc.)
+ * + Used as a theme utility to change either the page or block container override.
+ * + Can be put as close to the element as needed to override.
+ *   Based on the --color-bgd-content and --color-text custom variables
  *
  * Example:
- * <div class="t-theme--light">
+ * <body class="t-theme--light">
  *   ...
  *   <div class="t-sink">
  *     ...
  *   </div>
- * </div>
+ * </body>
  *
  * Example:
- * <div class="t-sink t-theme--light">
- *   ...
- * </div>
+ * <body class="t-theme--dark">
+ *   <div class="t-sink t-theme--light">
+ *     ...
+ *   </div>
+ * </body>
  *
  * ------------------------------------------------------------------------- */
-
-.t-text--light {
-	color: var(--color-white);
-
-	* {
-		color: var(--color-white);
-	}
-}
 
 .t-theme--light {
 	--color-bgd-content: var(--color-white);
@@ -46,29 +40,26 @@
  * Theme: Dark
  *
  * Notes:
- * + Used by default in general, so not much probably needed here
- * + This can be used anywhere or can be paired up with .t-sink
- * + Also see the other base partials for use of this class as a parent
- *   selector (media, typography, etc.)
+ * + Used as a theme utility to change either the page or block container override.
+ * + Can be put as close to the element as needed to override.
+ *   Based on the --color-bgd-content and --color-text custom variables
  *
  * Example:
- * <div class="t-theme--dark">
+ * <body class="t-theme--dark">
  *   ...
  *   <div class="t-sink">
  *     ...
  *   </div>
- * </div>
+ * </body>
  *
  * Example:
- * <div class="t-sink t-theme--dark">
- *   ...
- * </div>
+ * <body class="t-theme--light">
+ *   <div class="t-sink t-theme--dark">
+ *     ...
+ *   </div>
+ * </body>
  *
  * ------------------------------------------------------------------------- */
-
-.t-text--dark {
-
-}
 
 .t-theme--dark {
 	--color-bgd-content: var(--color-black);

@@ -159,6 +159,12 @@
 	@mixin t-body-small;
 
 	color: var(--color-grey);
+
+	/* CASE: Dark Theme */
+	.t-theme--dark & {
+		color: var(--color-white);
+		opacity: 0.8;
+	}
 }
 
 /* -----------------------------------------------------------------------------
