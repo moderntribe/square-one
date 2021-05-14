@@ -64,18 +64,7 @@
     "js:theme:prod": "cross-env NODE_ENV=themeprod npm run js:build",
     "js:admin:prod": "cross-env NODE_ENV=adminprod npm run js:build",
     "app:example": "cross-env NODE_ENV=example webpack-dev-server --hot --https --port 3000",
-    "test": "cross-env NODE_ENV=test jest --config jest.config.json",
-    "codecept:run": "so test -- run",
-    "codecept:debug": "so test --xdebug -- run",
-    "docker:start": "so start",
-    "docker:stop": "so stop",
-    "docker:log": "so logs",
-    "docker:wp": "so wp --",
-    "docker:wpx": "so wp --xdebug --",
-    "docker:global:start": "so global:start",
-    "docker:global:stop": "so global:stop",
-    "docker:global:log": "so global:logs",
-    "docker:global:cert": "so global:cert"
+    "test": "cross-env NODE_ENV=test jest --config jest.config.json"
   },
   "husky": {
     "hooks": {
