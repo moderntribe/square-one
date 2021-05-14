@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Theme;
 
@@ -41,7 +40,7 @@ class Theme_Subscriber extends Abstract_Subscriber {
 
 	private function body_classes() {
 		add_filter( 'body_class', function ( $classes ) {
-			return $this->container->get( Body_Classes::class )->body_classes( $classes );
+			return $this->container->get( Body_Class::class )->add( $classes );
 		}, 10, 1 );
 	}
 
