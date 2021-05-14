@@ -32,6 +32,11 @@ class Appearance_Identifier_Test extends Test_Case {
 
 		$this->assertSame( Appearance::OPTION_DARK, $identifier->current_theme() );
 		$this->assertSame( Appearance::CSS_DARK_CLASS, $identifier->get_body_class() );
+
+		update_field( Appearance::COLOR_THEME, Appearance::OPTION_LIGHT, 'option' );
+
+		$this->assertSame( Appearance::OPTION_LIGHT, $identifier->current_theme() );
+		$this->assertSame( Appearance::CSS_LIGHT_CLASS, $identifier->get_body_class() );
 	}
 
 	public function test_it_gets_post_overridden_color_theme() {
