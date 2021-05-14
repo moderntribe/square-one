@@ -116,6 +116,7 @@ wp-content/plugins/airplane-mode
 **/__coverage__/
 dev/deploy/.deploy
 wp-content/themes/core/reports
+/reports
 
 # DevOps #
 #######################
