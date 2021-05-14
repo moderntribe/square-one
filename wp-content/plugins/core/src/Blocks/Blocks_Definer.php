@@ -164,22 +164,41 @@ class Blocks_Definer implements Definer_Interface {
 			 * instances above. This field data will be passed to existing
 			 * block controllers in the list below.
 			 */
-			self::GLOBAL_MODEL_COLLECTION => DI\add( [
+			self::GLOBAL_MODEL_COLLECTION       => DI\add( [
 				DI\get( Color_Theme_Model::class ),
 			] ),
 
 			/**
 			 * Define the block names that will automatically include Global block
 			 * fields.
+			 *
+			 * Optionally: The block name can be a key, with Meta/Model classes as values
+			 * to specify the exact Global block fields that block will use, and ignore
+			 * all others. Ensure to include BOTH the Meta/Model classes.
 			 */
 			self::ALLOWED_GLOBAL_BLOCKS         => DI\add( [
-				Hero::NAME,
+				Accordion::NAME,
+				Buttons::NAME,
+				Card_Grid::NAME,
+				Content_Columns::NAME,
+				Content_Loop::NAME,
+				Gallery_Grid::NAME,
+				Hero::NAME => [
+					Color_Theme_Meta::class,
+					Color_Theme_Model::class,
+				],
 				Interstitial::NAME,
 				Lead_Form::NAME,
+				Links::NAME,
+				Logos::NAME,
+				Media_Text::NAME,
 				Quote::NAME,
+				Spacer::NAME,
+				Stats::NAME,
+				Tabs::NAME,
 			] ),
 
-			Block_Controller::class => DI\autowire()
+			Block_Controller::class             => DI\autowire()
 				->constructor( DI\get( self::ALLOWED_GLOBAL_BLOCKS ) ),
 		];
 	}

@@ -1,20 +1,26 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Object_Meta;
 
 use DI;
 use Psr\Container\ContainerInterface;
 use Tribe\Libs\Container\Definer_Interface;
+use Tribe\Project\Object_Meta\Appearance\Global_Appearance_Settings;
+use Tribe\Project\Object_Meta\Appearance\Post_Appearance_Settings;
+use Tribe\Project\Post_Types\Page\Page;
+use Tribe\Project\Post_Types\Post\Post;
 use Tribe\Project\Settings;
 
 class Object_Meta_Definer implements Definer_Interface {
+
 	public function define(): array {
 		return [
 			// add our meta groups to the global array
 			\Tribe\Libs\Object_Meta\Object_Meta_Definer::GROUPS => DI\add( [
 				DI\get( Analytics_Settings::class ),
 				DI\get( Social_Settings::class ),
+				DI\get( Global_Appearance_Settings::class ),
+				DI\get( Post_Appearance_Settings::class ),
 			] ),
 
 			// add analytics settings to the general settings screen
@@ -28,6 +34,23 @@ class Object_Meta_Definer implements Definer_Interface {
 			Social_Settings::class                              => static function ( ContainerInterface $container ) {
 				return new Social_Settings( [
 					'settings_pages' => [ $container->get( Settings\General::class )->get_slug() ],
+				] );
+			},
+
+			// add global appearance settings
+			Global_Appearance_Settings::class                   => static function ( ContainerInterface $container ) {
+				return new Global_Appearance_Settings( [
+					'settings_pages' => [ $container->get( Settings\General::class )->get_slug() ],
+				] );
+			},
+
+			// add post level appearance settings
+			Post_Appearance_Settings::class                     => static function () {
+				return new Post_Appearance_Settings( [
+					'post_types' => [
+						Post::NAME,
+						Page::NAME,
+					],
 				] );
 			},
 		];
