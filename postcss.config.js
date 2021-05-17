@@ -1,4 +1,4 @@
-const postcssFunctions = require( './assets/library/theme/pcss/functions' );
+const postcssFunctions = require( './wp-content/themes/core/assets/library/theme/pcss/functions' );
 const pkg = require( './package.json' );
 
 module.exports = ( { file, options, env } = {} ) => ( { // eslint-disable-line no-unused-vars

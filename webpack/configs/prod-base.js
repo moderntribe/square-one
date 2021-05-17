@@ -9,26 +9,30 @@ const merge = require( 'webpack-merge' );
  */
 const base = require( './base.js' );
 const splitChunks = require( '../optimization/split-chunks' );
+const minimizer = require( '../optimization/minimizer' );
 
 module.exports = merge.strategy( {
 	plugins: 'append',
 } )( base, {
-	cache: true,
-	mode: 'development',
+	cache: false,
+	mode: 'production',
+	devtool: false,
 	output: {
-		ecmaVersion: 5,
-		filename: '[name].js',
-		chunkFilename: '[name].js',
+		filename: '[name].min.js',
+		chunkFilename: '[name].min.js',
 	},
-	devtool: 'eval-source-map',
 	plugins: [
+		new webpack.DefinePlugin( {
+			'process.env': { NODE_ENV: JSON.stringify( 'production' ) },
+		} ),
 		new webpack.LoaderOptionsPlugin( {
-			debug: true,
+			debug: false,
 		} ),
 	],
 	optimization: {
 		splitChunks,
 		noEmitOnErrors: true, // NoEmitOnErrorsPlugin
 		concatenateModules: true, //ModuleConcatenationPlugin
+		minimizer,
 	},
 } );

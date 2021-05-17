@@ -16,8 +16,6 @@ webpackAdminDevConfig.module.rules = watchRules;
 webpackThemeDevConfig.module.rules = watchRules;
 webpackAdminDevConfig.plugins = watchPlugins.admin;
 webpackThemeDevConfig.plugins = watchPlugins.theme;
-delete webpackAdminDevConfig.output.ecmaVersion;
-delete webpackThemeDevConfig.output.ecmaVersion;
 
 function maybeReloadBrowserSync() {
 	const server = browserSync.get( 'Tribe Dev' );
@@ -84,15 +82,6 @@ module.exports = {
 			`!${ pkg.square1.paths.core_admin_pcss }block-editor/**/*.pcss`,
 			`!${ pkg.square1.paths.core_admin_pcss }login.pcss`,
 		], gulp.parallel( 'postcss:admin' ) );
-
-		// watch php and twig
-
-		gulp.watch( [
-			`./**/*.php`,
-			`./**/*.twig`,
-		] ).on( 'change', function() {
-			maybeReloadBrowserSync();
-		} );
 	},
 	watchAdminJS() {
 		gulp.src( `${ pkg.square1.paths.core_admin_js_src }**/*.js` )

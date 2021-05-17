@@ -5,7 +5,7 @@ const rename = require( 'gulp-rename' );
 const gulpif = require( 'gulp-if' );
 const concat = require( 'gulp-concat' );
 const browserSync = require( 'browser-sync' );
-const postcssFunctions = require( '../assets/library/theme/pcss/functions' );
+const postcssFunctions = require( '../wp-content/themes/core/assets/library/theme/pcss/functions' );
 const pkg = require( '../package.json' );
 
 const sharedPlugins = [
@@ -36,11 +36,11 @@ const sharedPlugins = [
 ];
 
 const compilePlugins = sharedPlugins.concat( [
-	require( 'postcss-assets' )( { baseUrl: pkg.square1.paths.core_theme_postcss_assets_base_url } ),
+	require( 'postcss-assets' )( { loadPaths: [ `${ pkg.square1.paths.core_theme }/` ] } ),
 ] );
 
 const compileGutenbergPlugins = sharedPlugins.concat( [
-	require( 'postcss-assets' )( { baseUrl: pkg.square1.paths.core_theme_postcss_assets_base_url } ),
+	require( 'postcss-assets' )( { loadPaths: [ `${ pkg.square1.paths.core_theme }/` ] } ),
 ] );
 
 const legacyPlugins = [
@@ -53,7 +53,7 @@ const legacyPlugins = [
 	require( 'postcss-simple-vars' ),
 	require( 'postcss-nested' ),
 	require( 'postcss-preset-env' )( { browsers: [ 'last 20 versions' ] } ),
-	require( 'postcss-assets' )( { baseUrl: pkg.square1.paths.core_theme_postcss_assets_base_url } ),
+	require( 'postcss-assets' )( { loadPaths: [ `${ pkg.square1.paths.core_theme }/` ] } ),
 ];
 
 /**
