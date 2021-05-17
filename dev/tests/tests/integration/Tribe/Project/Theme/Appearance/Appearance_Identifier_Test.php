@@ -38,28 +38,55 @@ class Appearance_Identifier_Test extends Test_Case {
 	}
 
 	public function test_it_gets_post_overridden_color_theme() {
-		global $wp_query;
-
 		$post = $this->factory()->post->create_and_get();
 
 		// Make is_singular() return true
+		global $wp_query;
 		$wp_query                 = new WP_Query();
 		$wp_query->is_singular    = true;
 		$wp_query->queried_object = $post;
 
+		// General Settings = Light
 		update_field( Appearance::COLOR_THEME, Appearance::OPTION_LIGHT, 'option' );
+
+		// Post override = Dark
 		update_field( Appearance::COLOR_THEME, Appearance::OPTION_DARK, $post->ID );
 
 		$identifier = new Appearance_Identifier( $this->manager );
 
-		$this->assertSame( Appearance::OPTION_LIGHT, $identifier->current_theme() );
-		$this->assertSame( Appearance::CSS_LIGHT_CLASS, $identifier->get_body_class() );
+		// Empty Appearance::PAGE_THEME_OVERRIDE should return the default
+		$this->assertSame( Appearance::COLOR_THEME_DEFAULT, $identifier->current_theme() );
+		$this->assertSame( Appearance::DEFAULT_CSS_CLASS, $identifier->get_body_class() );
 
-		// Toggle must be checked
+		// Toggle on
 		update_field( Appearance::PAGE_THEME_OVERRIDE, '1', $post->ID );
 
 		$this->assertSame( Appearance::OPTION_DARK, $identifier->current_theme() );
 		$this->assertSame( Appearance::CSS_DARK_CLASS, $identifier->get_body_class() );
+	}
+
+	public function test_it_gets_default_theme_for_post() {
+		$post = $this->factory()->post->create_and_get();
+
+		// Make is_singular() return true
+		global $wp_query;
+		$wp_query                 = new WP_Query();
+		$wp_query->is_singular    = true;
+		$wp_query->queried_object = $post;
+
+		// General Settings = Light
+		update_field( Appearance::COLOR_THEME, Appearance::OPTION_LIGHT, 'option' );
+
+		// Post override = Dark
+		update_field( Appearance::COLOR_THEME, Appearance::OPTION_DARK, $post->ID );
+
+		// Toggle off
+		update_field( Appearance::PAGE_THEME_OVERRIDE, '0', $post->ID );
+
+		$identifier = new Appearance_Identifier( $this->manager );
+
+		$this->assertSame( Appearance::COLOR_THEME_DEFAULT, $identifier->current_theme() );
+		$this->assertSame( Appearance::DEFAULT_CSS_CLASS, $identifier->get_body_class() );
 	}
 
 }
