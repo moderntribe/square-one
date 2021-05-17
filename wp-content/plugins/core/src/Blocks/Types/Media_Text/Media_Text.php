@@ -85,6 +85,12 @@ class Media_Text extends Block_Config {
 					 'label' => __( 'Lead in', 'tribe' ),
 					 'name'  => self::LEAD_IN,
 					 'type'  => 'text',
+					 'wrapper' => [
+							'width' => '',
+							'class' => 'sq1-hide-label',
+							'id' => '',
+					 ],
+					 'placeholder'  => 'Leadin (optional)',
 				 ] )
 			 )->add_field( new Field( self::NAME . '_' . self::TITLE, [
 					'label' => __( 'Title', 'tribe' ),
