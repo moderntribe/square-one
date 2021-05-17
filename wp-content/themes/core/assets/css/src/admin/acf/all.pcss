@@ -1,0 +1,37 @@
+/* Image Select Field Mods */
+@import "acf-image-select.pcss";
+
+/* Image Field Mods */
+@import "acf-image.pcss";
+
+/* Repeater Field Mods */
+@import "acf-repeater.pcss";
+
+/* add utility text of 'sq1-hide-label' when you want to hide a field label in the admin, but will still need a label for accessiblity or other */
+.block-editor .edit-post-sidebar .sq1-hide-label > .acf-label {
+    display: none;
+}
+
+/* if hiding a label on a text field, increase the space above */
+.block-editor .edit-post-sidebar .sq1-hide-label.acf-field-text {
+    margin-top: 32px;
+}
+
+/* size down instructional text for all fields */
+.block-editor .acf-field .acf-input>p.description {
+    font-size: 11px;
+}
+
+/* if WYSIWYG tabs are present in the sidebar, don't float them to the right */
+.block-editor .edit-post-sidebar .wp-editor-tabs {
+    float: none;
+}
+.block-editor .edit-post-sidebar .wp-editor-tabs button {
+    margin: 5px 5px 0 0;
+}
+.test {
+
+}
+
+
+
