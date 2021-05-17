@@ -45,6 +45,20 @@ if ( file_exists( __DIR__ . '/local-config.php' ) ) {
 	include __DIR__ . '/local-config.php';
 }
 
+// Support a DATABASE_URL env var. Many PaaS like Heroku often provide credentials in this manner.
+if ( ! defined( 'DB_NAME' ) && tribe_getenv( 'DATABASE_URL', false )  ) {
+	$DSN = parse_url( tribe_getenv('DATABASE_URL' ) );
+	// ** MySQL settings - You can get this info from your web host ** //
+	/** The name of the database for WordPress */
+	define('DB_NAME', substr($DSN['path'], 1));
+	/** MySQL database username */
+	define('DB_USER', $DSN['user']);
+	/** MySQL database password */
+	define('DB_PASSWORD', $DSN['pass']);
+	/** MySQL hostname */
+	define('DB_HOST', $DSN['host']);
+}
+
 
 // ==============================================================
 // Assign default constant values
@@ -159,6 +173,12 @@ $config_defaults = [
 	// Glomar
 	'TRIBE_GLOMAR'                   => tribe_getenv( 'TRIBE_GLOMAR', '' ),
 ];
+
+// If running on DOKKU, match the domain to the SERVER
+if ( tribe_getenv( 'DOKKU_APP_TYPE', false ) ) {
+	$config_defaults['WP_SITEURL'] = $_SERVER['SERVER_NAME'];
+	$config_defaults['WP_HOME'] = $_SERVER['SERVER_NAME'];
+}
 
 // ==============================================================
 // Assign default constant value overrides for production
