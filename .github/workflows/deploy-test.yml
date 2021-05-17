@@ -1,0 +1,72 @@
+name: Deploy Test
+
+on:
+  pull_request:
+    branches:
+      - feature/review-apps
+    types: [ opened, reopened, closed, synchronize ]
+  push:
+    branches:
+      - feature/review-apps
+
+env:
+  APPNAME: so
+
+jobs:
+
+  deploy_app:
+    runs-on: ubuntu-latest
+    # only run on push to main
+    if: github.event_name == 'push' && github.ref == 'refs/heads/feature/review-apps'
+    steps:
+      - name: Cloning repo
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Push to dokku
+        uses: dokku/github-action@master
+        with:
+          git_remote_url: "ssh://dokku@moderntribe.qa:22/${{ env.APPNAME }}"
+          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+  deploy_test_app:
+    runs-on: ubuntu-latest
+    # only run when a pull request is opened on main
+    if: github.event_name == 'pull_request' && github.event.action == 'opened' || github.event.action == 'synchronize'
+    steps:
+      - name: Cloning repo
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Push to dokku
+        uses: dokku/github-action@master
+        with:
+          command: review-apps:create
+          git_remote_url: "ssh://dokku@moderntribe.qa:22/${{ env.APPNAME }}"
+          review_app_name: ${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}
+          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          git_push_flags: --force
+
+      - name: executing remote ssh commands using ssh key
+        uses: appleboy/ssh-action@master
+        with:
+          host: dokku.moderntribe.qa
+          username: dokku
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script: letsencrypt:enable ${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}
+
+  destroy_test_app:
+    runs-on: ubuntu-latest
+    # only run when a pull request is closed
+    if: github.event_name == 'pull_request' && github.event.action == 'closed'
+    steps:
+      - name: Destroy the review app
+        uses: dokku/github-action@master
+        with:
+          command: review-apps:destroy
+          git_remote_url: "ssh://dokku@moderntribe.qa:22/${{ env.APPNAME }}"
+          review_app_name: ${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}
+          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
