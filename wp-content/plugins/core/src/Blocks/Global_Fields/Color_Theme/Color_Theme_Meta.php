@@ -15,8 +15,6 @@ class Color_Theme_Meta extends Block_Meta implements Appearance {
 	public const NAME = 'global_color';
 
 	public const SECTION       = 's-colors';
-	public const OPTION_PAGE   = 'page';
-	public const OPTION_CUSTOM = 'custom';
 
 	protected function add_fields(): void {
 		$this->add_field( new Field_Section( self::SECTION, __( 'Appearance', 'tribe' ), 'accordion' ) )

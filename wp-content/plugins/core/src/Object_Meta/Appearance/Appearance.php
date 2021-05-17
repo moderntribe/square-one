@@ -14,7 +14,9 @@ interface Appearance {
 	public const COLOR_THEME_DEFAULT = '#FFF';
 	public const OPTION_LIGHT        = '#FFF';
 	public const OPTION_DARK         = '#000';
-	public const CSS_LIGHT_CLASS    = 't-theme--light';
-	public const CSS_DARK_CLASS     = 't-theme--dark';
-	public const DEFAULT_CSS_CLASS  = self::CSS_LIGHT_CLASS;
+	public const OPTION_PAGE         = 'page';
+	public const OPTION_CUSTOM       = 'custom';
+	public const CSS_LIGHT_CLASS     = 't-theme--light';
+	public const CSS_DARK_CLASS      = 't-theme--dark';
+	public const DEFAULT_CSS_CLASS   = self::CSS_LIGHT_CLASS;
 }
