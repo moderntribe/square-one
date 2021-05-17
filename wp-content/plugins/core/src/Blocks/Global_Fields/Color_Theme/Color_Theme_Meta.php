@@ -14,7 +14,9 @@ class Color_Theme_Meta extends Block_Meta implements Appearance {
 
 	public const NAME = 'global_color';
 
-	public const SECTION = 's-colors';
+	public const SECTION       = 's-colors';
+	public const OPTION_PAGE   = 'page';
+	public const OPTION_CUSTOM = 'custom';
 
 	protected function add_fields(): void {
 		$this->add_field( new Field_Section( self::SECTION, __( 'Appearance', 'tribe' ), 'accordion' ) )
@@ -24,13 +26,13 @@ class Color_Theme_Meta extends Block_Meta implements Appearance {
 
 	protected function get_page_theme_override_field(): Field {
 		return new Field( self::NAME . '_' . self::PAGE_THEME_OVERRIDE, [
-			'type'   => 'radio',
-			'name'   => self::PAGE_THEME_OVERRIDE,
-			'label'  => __( 'Color Theme', 'tribe' ),
-			'layout' => 'horizontal',
+			'type'    => 'radio',
+			'name'    => self::PAGE_THEME_OVERRIDE,
+			'label'   => __( 'Color Theme', 'tribe' ),
+			'layout'  => 'horizontal',
 			'choices' => [
-				'page'   => 'Page',
-				'custom' => 'Custom',
+				self::OPTION_PAGE   => __( 'Page', 'tribe' ),
+				self::OPTION_CUSTOM => __( 'Custom', 'tribe' ),
 			],
 		] );
 	}
@@ -51,7 +53,7 @@ class Color_Theme_Meta extends Block_Meta implements Appearance {
 					[
 						'field'    => $this->get_key_with_prefix( self::PAGE_THEME_OVERRIDE ),
 						'operator' => '==',
-						'value'    => 'custom',
+						'value'    => self::OPTION_CUSTOM,
 					],
 				],
 			],
