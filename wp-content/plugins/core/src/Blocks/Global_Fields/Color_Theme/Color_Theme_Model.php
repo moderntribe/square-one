@@ -37,9 +37,9 @@ class Color_Theme_Model extends Block_Model {
 	}
 
 	protected function get_color_theme(): string {
-		$has_theme = $this->get( Appearance::PAGE_THEME_OVERRIDE, false, $this->block_id );
+		$theme = $this->get( Appearance::PAGE_THEME_OVERRIDE, Appearance::OPTION_PAGE, $this->block_id );
 
-		if ( ! $has_theme ) {
+		if ( empty( $theme ) || Appearance::OPTION_PAGE === (string) $theme ) {
 			return Appearance::COLOR_THEME_DEFAULT;
 		}
 
