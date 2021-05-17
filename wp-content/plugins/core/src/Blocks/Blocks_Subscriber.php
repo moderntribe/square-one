@@ -1,4 +1,4 @@
-<?php declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Blocks;
 
@@ -7,11 +7,8 @@ use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Block_Registrar;
 use Tribe\Libs\ACF\Block_Renderer;
 use Tribe\Libs\Container\Abstract_Subscriber;
-use Tribe\Project\Blocks\Global_Fields\Block_Controller;
-use Tribe\Project\Blocks\Global_Fields\Block_Model;
-use Tribe\Project\Blocks\Global_Fields\Meta;
+use Tribe\Project\Blocks\Global_Fields\Block_Field_Merger;
 use Tribe\Project\Blocks\Types\Base_Model;
-use Tribe\Project\Blocks\Types\Model;
 
 class Blocks_Subscriber extends Abstract_Subscriber {
 
@@ -49,80 +46,15 @@ class Blocks_Subscriber extends Abstract_Subscriber {
 	 */
 	private function register_global_block_fields(): void {
 		add_filter( 'tribe/block/register/fields', function ( $fields, Block_Config $block ): array {
-			if ( ! $this->block_allows_global_fields( $block::NAME ) ) {
-				return $fields;
-			}
+			$collection = $this->container->get( Blocks_Definer::GLOBAL_BLOCK_FIELD_COLLECTION );
 
-			/** @var Global_Fields\Meta $meta */
-			foreach ( $this->container->get( Blocks_Definer::GLOBAL_BLOCK_FIELD_COLLECTION ) as $meta ) {
-				if ( ! $meta instanceof Global_Fields\Meta ) {
-					throw new RuntimeException(
-						sprintf(
-							'%s is not an instance of \Tribe\Project\Blocks\Global_Fields\Meta',
-							get_class( $meta )
-						)
-					);
-				}
-
-				if ( ! $this->block_allows_specific_field_group( $block::NAME, $meta ) ) {
-					return $fields;
-				}
-
-				$fields = array_merge( $fields, $meta->get_fields() );
-			}
-
-			return $fields;
+			return $this->container->get( Block_Field_Merger::class )->merge_block_fields( $block, $collection, $fields );
 		}, 10, 2 );
 
 		add_filter( 'tribe/block/model/data', function ( $data, Base_Model $model ): array {
-			if ( ! $this->block_allows_global_fields( $model->get_name() ) ) {
-				return $data;
-			}
+			$collection = $this->container->get( Blocks_Definer::GLOBAL_MODEL_COLLECTION );
 
-			/** @var Block_Model $field_model */
-			foreach ( $this->container->get( Blocks_Definer::GLOBAL_MODEL_COLLECTION ) as $field_model ) {
-				if ( ! $field_model instanceof Block_Model ) {
-					throw new RuntimeException(
-						sprintf(
-							'%s is not an instance of \Tribe\Project\Blocks\Global_Fields\Block_Model',
-							get_class( $field_model )
-						)
-					);
-				}
-
-				if ( ! $this->block_allows_specific_field_group( $model->get_name(), $field_model ) ) {
-					return $data;
-				}
-
-				$field_model->set_block_id( $model->get_id() );
-
-				$data = array_merge_recursive( $data, $field_model->get_data() );
-			}
-
-			return $data;
+			return $this->container->get( Block_Field_Merger::class )->merge_model_data( $model, $collection, $data );
 		}, 10, 2 );
-	}
-
-	/**
-	 * Check if a block allows global field injection.
-	 *
-	 * @param string $block_name
-	 *
-	 * @return bool
-	 */
-	private function block_allows_global_fields( string $block_name ): bool {
-		return $this->container->get( Block_Controller::class )->allowed( $block_name );
-	}
-
-	/**
-	 * Check if a block only allows specific global field groups.
-	 *
-	 * @param string     $block_name
-	 * @param Meta|Model $instance
-	 *
-	 * @return bool
-	 */
-	private function block_allows_specific_field_group( string $block_name, $instance ): bool {
-		return $this->container->get( Block_Controller::class )->allows_specific_field_group( $block_name, $instance );
 	}
 }

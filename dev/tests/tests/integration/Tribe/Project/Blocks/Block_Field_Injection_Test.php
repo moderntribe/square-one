@@ -8,10 +8,24 @@ use Tribe\Tests\Test_Case;
 use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Block_Registrar;
 use Tribe\Project\Blocks\Types\Base_Model;
+use Tribe\Project\Blocks\Global_Fields\Block_Meta;
+use Tribe\Project\Blocks\Global_Fields\Block_Model;
+use Tribe\Project\Blocks\Global_Fields\Block_Controller;
+use Tribe\Project\Blocks\Global_Fields\Block_Field_Merger;
 
 class Block_Field_Injection_Test extends Test_Case {
 
-	public function test_it_can_inject_fields_into_a_block() {
+	private Block_Controller $controller;
+
+	public function _setUp() {
+		parent::_setUp();
+
+		$this->controller = new Block_Controller( [
+			'test_block',
+		] );
+	}
+
+	public function test_it_injects_fields_into_a_block() {
 		$block = new class extends Block_Config {
 
 			public const NAME = 'test_block';
@@ -40,16 +54,28 @@ class Block_Field_Injection_Test extends Test_Case {
 
 		};
 
-		add_filter( 'tribe/block/register/fields', function ( $fields, Block_Config $block ): array {
-			$new_fields = [
-				new Field( 'injected_from_outside', [
+		$meta = new class extends Block_Meta {
+
+			public const NAME = 'test_block';
+
+			protected function add_fields(): void {
+				$this->add_field( new Field( 'injected_from_outside', [
 					'label' => 'Injected Field',
 					'name'  => 'from_outside',
 					'type'  => 'text',
-				] ),
-			];
+				] ) );
+			}
 
-			return array_merge( $fields, $new_fields );
+		};
+
+		$collection = [
+			$meta,
+		];
+
+		$field_merger = new Block_Field_Merger( $this->controller );
+
+		add_filter( 'tribe/block/register/fields', function ( $fields, Block_Config $block ) use ( $field_merger, $collection ): array {
+			return $field_merger->merge_block_fields( $block, $collection, $fields );
 		}, 9, 2 );
 
 		$block_registrar = new Block_Registrar();
@@ -80,12 +106,27 @@ class Block_Field_Injection_Test extends Test_Case {
 		$this->assertSame( $expected, $fields );
 	}
 
-	public function test_it_can_inject_fields_into_a_model() {
+	public function test_it_injects_data_into_a_model() {
 
-		add_filter( 'tribe/block/model/data', function ( $data, Base_Model $model ): array {
-			return array_merge_recursive( $data, [
-				'classes' => [ 'test' ],
-			] );
+		$block_model = new class extends Block_Model {
+
+			protected function set_data(): array {
+				return [
+					'attrs'   => [ 'something_else' ],
+					'classes' => [ 'test' ],
+				];
+			}
+
+		};
+
+		$collection = [
+			$block_model,
+		];
+
+		$field_merger = new Block_Field_Merger( $this->controller );
+
+		add_filter( 'tribe/block/model/data', function ( $data, Base_Model $model ) use ( $field_merger, $collection ): array {
+			return $field_merger->merge_model_data( $model, $collection, $data );
 		}, 10, 2 );
 
 		$block = [
@@ -106,11 +147,14 @@ class Block_Field_Injection_Test extends Test_Case {
 		};
 
 		$expected = [
-			'attrs'   => [ 'something' ],
+			'attrs'   => [ 'something', 'something_else' ],
 			'classes' => [ 'test' ],
 		];
 
-		$this->assertSame( $expected, $model->get_data() );
+		$data = $model->get_data();
+
+		$this->assertCount( 2, $data );
+		$this->assertSame( $expected, $data );
 	}
 
 }
