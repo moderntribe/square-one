@@ -19,9 +19,10 @@
  * Customizable via component's attributes.
  * ----------------------------------------------------------------------------- */
 
-.c-image {
+
+.c-image__image {
 	/* CASE: Background image implementation. */
-	&.c-image--bg .c-image__image {
+	.c-image--bg & {
 		background: center center no-repeat;
 		background-size: cover;
 		bottom: 0;
@@ -32,36 +33,37 @@
 		top: 0;
 		width: 100%;
 	}
+}
 
-	/* CASE: Using image in figure tag, (not as a background). */
-	&.c-image--figure {
-		height: 100%;
-		width:100%;
-		
-		img {
-			height: 100%;
-			width: 100%;
-			object-fit: cover;
-		}
-	}
-
-	/* CASE: Apply an overlay. */
-	&.c-image--overlay {
-		&:after {
-			@mixin image-overlay;
-
-			background-color: var(--color-black);
-			opacity: 0.5;
-		}
-	}
+/* CASE: Using image in figure tag, (not as a background). */
+.c-image--object-fit {
+	height: 100%;
+	width:100%;
 	
-	/* CASE: Apply a gradient overlay. */
-	&.c-image--gradient-overlay  {
-		&:after {
-			@mixin image-overlay;
-
-			background: linear-gradient(90deg, var(--color-neutral-90) 0%, rgba(21, 21, 21, 0.6) 63.54%, rgba(21, 21, 21, 0) 100%);
-			opacity: 0.9;
-		}
+	img {
+		height: 100%;
+		width: 100%;
+		object-fit: cover;
 	}
 }
+
+/* CASE: Apply an overlay. */
+.c-image--overlay {
+	&:after {
+		@mixin image-overlay;
+
+		background-color: var(--color-black);
+		opacity: 0.5;
+	}
+}
+
+/* CASE: Apply a gradient overlay. */
+.c-image--overlay-gradient {
+	&:after {
+		@mixin image-overlay;
+
+		background: linear-gradient(90deg, var(--color-neutral-90) 0%, rgba(21, 21, 21, 0.6) 63.54%, rgba(21, 21, 21, 0) 100%);
+		opacity: 0.9;
+	}
+}
+

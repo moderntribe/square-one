@@ -114,7 +114,7 @@ class Subheader_Controller extends Abstract_Controller {
 			Image_Controller::IMG_ID       => (int) get_post_thumbnail_id(),
 			Image_Controller::AUTO_SHIM    => false,
 			Image_Controller::USE_LAZYLOAD => true,
-			Image_Controller::CLASSES      => [ 'c-image--overlay', 'c-image--figure' ],
+			Image_Controller::CLASSES      => [ 'c-image--overlay', 'c-image--object-fit' ],
 			Image_Controller::IMG_CLASSES  => [ 'c-subheader__media__image' ],
 			Image_Controller::SRC_SIZE     => Image_Sizes::SIXTEEN_NINE,
 			Image_Controller::SRCSET_SIZES => [
