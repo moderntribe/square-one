@@ -120,3 +120,14 @@ jobs:
           git_remote_url: "ssh://dokku@moderntribe.qa:22/${{ env.APPNAME }}"
           review_app_name: ${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+
+      - name: Destroy DB
+        uses: appleboy/ssh-action@master
+        with:
+          host: dokku.moderntribe.qa
+          username: dokku
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            mariadb:destroy ${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}-database
