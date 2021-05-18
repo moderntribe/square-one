@@ -34,19 +34,8 @@
 /*
 * === WIDEN THE EDIT PAGE SIDEBAR ===
 */
-
-@media (min-width: 1200px) {
 .interface-complementary-area {
-    width: 350px;
+	@media (min-width: 1200px) {
+    	width: 350px;
+	}
 }
-}
-
-/* add utility text when you want to hide a field label in the admin, but will still need a label for accessiblity or other */
-.block-editor .edit-post-sidebar .sq1-hide-label > .acf-label {
-    display: none;
-}
-/* if hiding a label on a text field, increase the space above */
-.block-editor .edit-post-sidebar .sq1-hide-label.acf-field-text {
-    margin-top: 32px;
-}
-
