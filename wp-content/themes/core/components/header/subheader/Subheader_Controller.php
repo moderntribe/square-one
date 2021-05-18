@@ -105,7 +105,7 @@ class Subheader_Controller extends Abstract_Controller {
 	 * @return array
 	 */
 
-	public function get_image_args() {
+	public function get_image_args(): array {
 		if ( ! has_post_thumbnail() ) {
 			return [];
 		}
