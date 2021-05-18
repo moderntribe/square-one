@@ -49,7 +49,7 @@ jobs:
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
           git_push_flags: --force
 
-      - name: SSL and Clone DB
+      - name: SSL creation
         uses: appleboy/ssh-action@master
         with:
           host: dokku.moderntribe.qa
@@ -58,8 +58,35 @@ jobs:
           port: 22
           script: |
             letsencrypt:enable ${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}
+
+      - name: Unlink original DB
+        uses: appleboy/ssh-action@master
+        with:
+          host: dokku.moderntribe.qa
+          username: dokku
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
             mariadb:unlink ${{ env.APPNAME }}-database ${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}
+
+      - name: Clone DB
+        uses: appleboy/ssh-action@master
+        with:
+          host: dokku.moderntribe.qa
+          username: dokku
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
             mariadb:clone ${{ env.APPNAME }}-database ${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}-database
+
+      - name: Link new DB
+        uses: appleboy/ssh-action@master
+        with:
+          host: dokku.moderntribe.qa
+          username: dokku
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
             mariadb:link ${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}-database ${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}
 
   update_test_app:
