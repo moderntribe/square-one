@@ -79,7 +79,7 @@ class Force_Plugin_Activation {
 		 */
 		if ( defined( 'WP_ENVIRONMENT_TYPE' ) && WP_ENVIRONMENT_TYPE == 'production' ) {
 			$this->force_deactive[] = 'tribe-glomar/tribe-glomar.php';
-			$this->force_active[]   = 'limit-login-attempts/limit-login-attempts.php';
+			$this->force_active[]   = 'limit-login-attempts-reloaded/limit-login-attempts-reloaded.php';
 		}
 
 		// Specific config when unit tests are running
