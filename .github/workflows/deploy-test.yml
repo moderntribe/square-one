@@ -33,7 +33,7 @@ jobs:
   deploy_test_app:
     runs-on: ubuntu-latest
     # only run when a pull request is opened on main
-    if: github.event_name == 'pull_request' && github.event.action == 'opened'
+    if: github.event_name == 'pull_request' && github.event.action == 'opened' || github.event.action == 'reopened'
     steps:
       - name: Cloning repo
         uses: actions/checkout@v2
