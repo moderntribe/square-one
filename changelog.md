@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## 2021.05
+* Added: herokuish deployment support (dokku)
 * Added: documentation to get PHPCS configured in VS Code.
 * Updated: use the WP_ENVIRONMENT_TYPE constant added in Core v5.5.
 * Added: enabled the legacy markup for Gravity Forms 2.5 by default (until we can update our theme framework).
