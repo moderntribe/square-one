@@ -11,7 +11,6 @@ on:
 
 env:
   APPNAME: sq1
-  DOKKU_SERVER: ssh://dokku@moderntribe.qa:22
 
 jobs:
 
@@ -28,7 +27,7 @@ jobs:
       - name: Push to dokku
         uses: dokku/github-action@master
         with:
-          git_remote_url: "${{ env.DOKKU_SERVER }}/${{ env.APPNAME }}"
+          git_remote_url: "ssh://dokku@moderntribe.qa:22/${{ env.APPNAME }}"
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
 
   deploy_test_app:
@@ -45,7 +44,7 @@ jobs:
         uses: dokku/github-action@master
         with:
           command: review-apps:create
-          git_remote_url: "${{ env.DOKKU_SERVER }}/${{ env.APPNAME }}"
+          git_remote_url: "ssh://dokku@moderntribe.qa:22/${{ env.APPNAME }}"
           review_app_name: ${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
           git_push_flags: --force
@@ -68,6 +67,6 @@ jobs:
         uses: dokku/github-action@master
         with:
           command: review-apps:destroy
-          git_remote_url: "${{ env.DOKKU_SERVER }}/${{ env.APPNAME }}"
+          git_remote_url: "ssh://dokku@moderntribe.qa:22/${{ env.APPNAME }}"
           review_app_name: ${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
