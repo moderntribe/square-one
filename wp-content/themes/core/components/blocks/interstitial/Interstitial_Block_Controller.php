@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\blocks\interstitial;
 
@@ -174,7 +173,7 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 				'c-block__cta-link',
 				'a-btn',
 				'a-btn--has-icon-after',
-				'icon-arrow-right'
+				'icon-arrow-right',
 			],
 		] );
 	}
