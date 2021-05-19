@@ -7,6 +7,8 @@
 .c-card {
 	display: flex;
 	flex-flow: column nowrap;
+	background: var(--color-bgd-content);
+	color: var(--color-text);
 
 	/* CASE: Whole card is a link. */
 	&.has-target-link {
@@ -157,6 +159,12 @@
 	@mixin t-body-small;
 
 	color: var(--color-grey);
+
+	/* CASE: Dark Theme */
+	.t-theme--dark & {
+		color: var(--color-white);
+		opacity: 0.8;
+	}
 }
 
 /* -----------------------------------------------------------------------------

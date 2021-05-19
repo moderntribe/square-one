@@ -149,7 +149,6 @@ class Hero_Block_Controller extends Abstract_Controller {
 				'c-block__content-block',
 				'c-block__header',
 				'b-hero__content-container',
-				't-theme--light'
 			],
 		];
 	}

@@ -25,15 +25,10 @@
 	display: block;
 	margin-bottom: var(--form-margin-small);
 	padding: 0;
-	color: var(--form-color);
+	color: var(--color-text);
 	letter-spacing: normal;
 	text-transform: none;
 	font: normal 600 var(--form-font-size-secondary) / 1.4 var(--form-font-family);
-
-	/* CASE: Theme Light */
-	.t-theme--light & {
-		color: var(--color-white);
-	}
 }
 
 /* -----------------------------------------------------------------------------
@@ -45,7 +40,7 @@
 @define-mixin form-control-helper {
 	margin-top: var(--form-margin-small);
 	padding: 0;
-	color: var(--form-color-secondary);
+	color: var(--color-text);
 	letter-spacing: var(--form-control-helper-letter-spacing);
 	text-transform: var(--form-control-helper-text-transform);
 	font: normal var(--form-control-helper-font-weight) var(--form-control-helper-font-size) var(--form-control-helper-font-family);
@@ -104,7 +99,7 @@
 	display: block;
 	width: 100%;
 	height: var(--form-control-height);
-	color: var(--form-control-color);
+	color: var(--color-text);
 	letter-spacing: var(--form-control-letter-spacing);
 	text-transform: var(--form-control-text-transform);
 	font: var(--form-control-font-style) var(--form-control-font-weight) var(--form-control-font-size) var(--form-control-font-family);
@@ -181,7 +176,7 @@
 
 	label {
 		border-bottom: 1px solid transparent;
-		color: var(--form-control-color);
+		color: var(--color-text);
 		cursor: pointer;
 		margin-bottom: 0;
 		display: inline-block;
@@ -242,7 +237,7 @@
 	}
 
 	input:checked + label {
-		color: var(--form-control-color);
+		color: var(--color-text);
 
 		&:before {
 			background-color: var(--form-control-radio-checkbox-ui-bgd-color-checked);

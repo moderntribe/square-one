@@ -26,10 +26,6 @@ class Lead_Form extends Block_Config {
 	public const WIDTH_GRID = 'grid';
 	public const WIDTH_FULL = 'full';
 
-	public const BACKGROUND       = 'background';
-	public const BACKGROUND_LIGHT = 'background_light';
-	public const BACKGROUND_DARK  = 'background_dark';
-
 	public const FORM_FIELDS  = 'form_fields';
 	public const FORM_STACKED = 'form_stacked';
 	public const FORM_INLINE  = 'form_inline';
@@ -116,17 +112,6 @@ class Lead_Form extends Block_Config {
 					self::WIDTH_FULL => __( 'Full', 'tribe' ),
 				],
 				'default_value'   => self::WIDTH_GRID,
-				] )
-			)->add_field(
-				new Field( self::NAME . '_' . self::BACKGROUND, [
-					'type'            => 'radio',
-					'name'            => self::BACKGROUND,
-					'label'           => __( 'Background Color', 'tribe' ),
-					'choices'         => [
-						self::BACKGROUND_LIGHT   => __( 'Light', 'tribe' ),
-						self::BACKGROUND_DARK    => __( 'Dark', 'tribe' ),
-					],
-					'default_value'   => self::BACKGROUND_LIGHT,
 				] )
 			)->add_field(
 				new Field( self::NAME . '_' . self::LAYOUT, [

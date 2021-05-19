@@ -76,7 +76,7 @@ class Card_Grid_Controller extends Abstract_Controller {
 	protected function required(): array {
 		return [
 			self::CONTAINER_CLASSES => [ 'b-card-grid__container', 'l-container' ],
-			self::LOOP_CLASSES      => [ 'b-card-grid__loop' ],
+			self::LOOP_CLASSES      => [ 'b-card-grid__loop', 't-theme--light' ],
 			self::CLASSES           => [ 'c-block', 'b-card-grid' ],
 		];
 	}
