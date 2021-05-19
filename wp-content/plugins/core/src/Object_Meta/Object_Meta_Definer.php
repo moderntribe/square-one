@@ -51,7 +51,7 @@ class Object_Meta_Definer implements Definer_Interface {
 				return new Taxonomy_Archive_Settings( [
 					'taxonomies' => [ Category::NAME, Post_Tag::NAME ],
 				] );
-			}
+			},
 
 			// add global appearance settings
 			Global_Appearance_Settings::class                   => static function ( ContainerInterface $container ) {
