@@ -86,9 +86,7 @@ class Media_Text extends Block_Config {
 					 'name'     => self::LEAD_IN,
 					 'type'     => 'text',
 					 'wrapper'  => [
-							'width' => '',
 							'class' => 'tribe-acf-hide-label',
-							'id'    => '',
 					 ],
 					 'placeholder'  => 'Leadin (optional)',
 				 ] )
