@@ -6,6 +6,9 @@ All notable changes to this project will be documented in this file.
 * Added: documentation to get PHPCS configured in VS Code.
 * Updated: use the WP_ENVIRONMENT_TYPE constant added in Core v5.5.
 * Added: enabled the legacy markup for Gravity Forms 2.5 by default (until we can update our theme framework).
+* Fixed: small issue with webpack publicPath's being off.
+* Fixed: removed unnecessary Sage SVG plugin from composer.
+* Fixed: updated the Limit Login Attempts path for for force-activated plugins.
 
 ## 2021.04
 * Updated: refreshed local-config-sample.php to have a more thorough set of constants you may need, especially now that we have a Local environment option.
