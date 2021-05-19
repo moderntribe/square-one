@@ -15,6 +15,11 @@
 	}
 }
 
+/* remove bottom margin on any label that is meant to be hidden (this specificity is required) */
+.block-editor .edit-post-sidebar .acf-fields > .acf-field.tribe-acf-hide-label > .acf-label {
+	margin-bottom: 0;
+}
+
 .block-editor {
 	/* if hiding a label on a text field, increase the space above */
 	.acf-fields > .acf-field.tribe-acf-hide-label.acf-field-text {
