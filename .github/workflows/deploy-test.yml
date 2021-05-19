@@ -40,7 +40,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Push to dokku
+      - name: Push to Dokku and Build
         uses: dokku/github-action@master
         with:
           command: review-apps:create
@@ -130,4 +130,4 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            mariadb:destroy ${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}-database
+            mariadb:destroy ${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}-database -f
