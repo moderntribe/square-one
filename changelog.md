@@ -9,6 +9,11 @@ All notable changes to this project will be documented in this file.
 * Fixed: small issue with webpack publicPath's being off.
 * Fixed: removed unnecessary Sage SVG plugin from composer.
 * Fixed: updated the Limit Login Attempts path for for force-activated plugins.
+* Updated: Increase the width of the block sidebar
+* Updated: Spruce up the Repeater field, especially when used in ACF Block Sidebars
+* Updated: Spruce up the Image Field
+* Added: a utility class of ‘tribe-acf-hide-label’ to hide field labels in cases where they are unnecessary/exterraneous
+* Added:  a utility class of ‘tribe-acf-instructions’’. Apply to a Message field if you need ‘spoof’ ad-hoc instructional content.
 
 ## 2021.04
 * Updated: refreshed local-config-sample.php to have a more thorough set of constants you may need, especially now that we have a Local environment option.
