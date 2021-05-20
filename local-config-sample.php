@@ -21,10 +21,7 @@
  *
  * @link https://make.wordpress.org/core/2020/07/24/new-wp_get_environment_type-function-in-wordpress-5-5/
  */
-define( 'WP_ENVIRONMENT_TYPE', 'development' );
-
-// Fallback for older environments.
-define( 'ENVIRONMENT', 'DEV' );
+define( 'WP_ENVIRONMENT_TYPE', 'local' );
 
 /*
  * React dev
