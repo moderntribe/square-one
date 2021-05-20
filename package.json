@@ -68,15 +68,13 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": [
-        "lint-staged"
-      ]
+      "pre-commit": "lint-staged"
     }
   },
   "lint-staged": {
-    "*.php": [
+    "wp-content/{*themes,plugins*}/core/**/*.php": [
       "php -l",
-      "./vendor/bin/phpcs --standard=./phpcs.xml --extensions=php --warning-severity=8 -s"
+      "./vendor/bin/phpcs --standard=./phpcs.xml --warning-severity=8 -s"
     ]
   },
   "dependencies": {
