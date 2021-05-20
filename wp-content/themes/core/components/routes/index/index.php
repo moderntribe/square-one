@@ -8,7 +8,8 @@ $c = Index_Controller::factory();
 $c->render_header();
 ?>
 	<main id="main-content">
-		<?php $c->render_breadcrumbs(); ?>
+
+		<?php $c->render_subheader(); ?>
 
 		<div class="l-container">
 
@@ -18,7 +19,8 @@ $c->render_header();
 				while ( have_posts() ) :
 
 					the_post();
-					get_template_part( 'components/loop_items/index/index', 'index' );
+					//get_template_part( 'components/loop_items/index/index', 'index' );
+					get_template_part( 'components/loop_items/layout_a/index', 'index' );
 
 				endwhile;
 

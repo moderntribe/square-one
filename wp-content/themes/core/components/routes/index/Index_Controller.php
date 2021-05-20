@@ -28,6 +28,16 @@ class Index_Controller extends Abstract_Controller {
 		get_template_part( 'components/document/header/header', 'index' );
 	}
 
+	/**
+	 * Render the subheader component
+	 *
+	 *
+	 * @return void
+	 */
+	public function render_subheader(): void {
+		get_template_part( 'components/header/subheader_archive/subheader_archive', 'index' );
+	}
+
 
 	/**
 	 * Render the sidebar component
