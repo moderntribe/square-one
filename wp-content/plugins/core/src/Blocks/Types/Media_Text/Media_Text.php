@@ -82,9 +82,13 @@ class Media_Text extends Block_Config {
 		//==========================================
 		$this->add_section( new Field_Section( self::SECTION_CONTENT, __( 'Content', 'tribe' ), 'accordion' ) )
 			 ->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
-					 'label' => __( 'Lead in', 'tribe' ),
-					 'name'  => self::LEAD_IN,
-					 'type'  => 'text',
+					 'label'    => __( 'Lead in', 'tribe' ),
+					 'name'     => self::LEAD_IN,
+					 'type'     => 'text',
+					 'wrapper'  => [
+							'class' => 'tribe-acf-hide-label',
+					 ],
+					 'placeholder'  => 'Leadin (optional)',
 				 ] )
 			 )->add_field( new Field( self::NAME . '_' . self::TITLE, [
 					'label' => __( 'Title', 'tribe' ),
