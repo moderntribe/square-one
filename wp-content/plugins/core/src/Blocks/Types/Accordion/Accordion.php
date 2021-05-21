@@ -86,7 +86,8 @@ class Accordion extends Block_Config {
 					'label'        => __( 'Description', 'tribe' ),
 					'name'         => self::DESCRIPTION,
 					'type'         => 'wysiwyg',
-					'toolbar'      => 'basic',
+					'toolbar'      => 'minimal',
+					'tabs'         => 'visual',
 					'media_upload' => 0,
 				] )
 			)->add_field( new Field( self::NAME . '_' . self::CTA, [
@@ -140,9 +141,10 @@ class Accordion extends Block_Config {
 
 		$group->add_field( $header );
 		$content = new Field( self::ROW_CONTENT, [
-			'label' => __( 'Content', 'tribe' ),
-			'name'  => self::ROW_CONTENT,
-			'type'  => 'wysiwyg',
+			'label'   => __( 'Content', 'tribe' ),
+			'name'    => self::ROW_CONTENT,
+			'toolbar' => 'minimal',
+			'tabs'    => 'visual',
 		] );
 		$group->add_field( $content );
 

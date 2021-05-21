@@ -49,33 +49,36 @@ class Icon_Grid extends Block_Config {
 		// Content Fields
 		//==========================================
 		$this->add_section( new Field_Section( self::SECTION_CONTENT, __( 'Content', 'tribe' ), 'accordion' ) )
-			->add_field( 
-				new Field( self::NAME . '_' . self::TITLE, [
-					'label' => __( 'Title', 'tribe' ),
-					'name'  => self::TITLE,
-					'type'  => 'text',
-				] )
-			)->add_field( 
-				new Field( self::NAME . '_' . self::LEADIN, [
+			 ->add_field(
+				 new Field( self::NAME . '_' . self::TITLE, [
+					 'label' => __( 'Title', 'tribe' ),
+					 'name'  => self::TITLE,
+					 'type'  => 'text',
+				 ] )
+			 )->add_field(
+				 new Field( self::NAME . '_' . self::LEADIN, [
 					'label' => __( 'Lead in', 'tribe' ),
 					'name'  => self::LEADIN,
 					'type'  => 'text',
-				] )
-			)->add_field(
-				new Field( self::NAME . '_' . self::DESCRIPTION, [
-					'label' => __( 'Description', 'tribe' ),
-					'name'  => self::DESCRIPTION,
-					'type'  => 'wysiwyg',
-				] )
-			)->add_field(
-				new Field( self::NAME . '_' . self::CTA, [
+				 ] )
+			 )->add_field(
+				 new Field( self::NAME . '_' . self::DESCRIPTION, [
+					'label'        => __( 'Description', 'tribe' ),
+					'name'         => self::DESCRIPTION,
+					'type'         => 'wysiwyg',
+					'toolbar'      => 'minimal',
+					'tabs'         => 'visual',
+					'media_upload' => 0,
+				 ] )
+			 )->add_field(
+				 new Field( self::NAME . '_' . self::CTA, [
 					'label' => __( 'Call to Action', 'tribe' ),
 					'name'  => self::CTA,
 					'type'  => 'link',
-				] )
-			)->add_field(
-				$this->get_icon_section()
-			);
+				 ] )
+			 )->add_field(
+				 $this->get_icon_section()
+			 );
 	}
 
 	/**
@@ -90,7 +93,7 @@ class Icon_Grid extends Block_Config {
 			'max'          => 12,
 			'button_label' => __( 'Add Icon Section', 'tribe' ),
 		] );
-		
+
 		$group->add_field(
 			new Field( self::ICON_IMAGE, [
 				'label'         => __( 'Icon Image', 'tribe' ),
@@ -108,10 +111,13 @@ class Icon_Grid extends Block_Config {
 			] )
 		)->add_field(
 			new Field( self::ICON_DESCRIPTION, [
-				'label' => __( 'Icon Description', 'tribe' ),
-				'name'  => self::ICON_DESCRIPTION,
-				'type'  => 'wysiwyg',
-			 ] )
+				'label'        => __( 'Icon Description', 'tribe' ),
+				'name'         => self::ICON_DESCRIPTION,
+				'type'         => 'wysiwyg',
+				'toolbar'      => 'minimal',
+				'tabs'         => 'visual',
+				'media_upload' => 0,
+			] )
 		)->add_field(
 			new Field( self::ICON_LINK, [
 				'label' => __( 'Icon Section Link', 'tribe' ),

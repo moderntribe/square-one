@@ -98,7 +98,8 @@ class Links extends Block_Config {
 					'label'        => __( 'Description', 'tribe' ),
 					'name'         => self::DESCRIPTION,
 					'type'         => 'wysiwyg',
-					'toolbar'      => 'basic',
+					'toolbar'      => 'minimal',
+					'tabs'         => 'visual',
 					'media_upload' => 0,
 				] )
 			)->add_field( new Field( self::NAME . '_' . self::CTA, [

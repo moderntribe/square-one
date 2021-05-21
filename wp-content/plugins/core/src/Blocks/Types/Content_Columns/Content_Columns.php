@@ -87,7 +87,8 @@ class Content_Columns extends Block_Config {
 					'label'        => __( 'Description', 'tribe' ),
 					'name'         => self::DESCRIPTION,
 					'type'         => 'wysiwyg',
-					'toolbar'      => 'basic',
+					'toolbar'      => 'minimal',
+					'tabs'         => 'visual',
 					'media_upload' => 0,
 				] )
 			)->add_field( new Field( self::NAME . '_' . self::CTA, [
@@ -142,7 +143,8 @@ class Content_Columns extends Block_Config {
 			'label'        => __( 'Content', 'tribe' ),
 			'name'         => self::COLUMN_CONTENT,
 			'type'         => 'wysiwyg',
-			'toolbar'      => 'basic',
+			'toolbar'      => 'minimal',
+			'tabs'         => 'visual',
 			'media_upload' => 0,
 		] );
 

@@ -24,7 +24,7 @@ class Gallery_Grid extends Block_Config {
 	public const TWO         = 'two';
 	public const THREE       = 'three';
 	public const FOUR        = 'four';
-	
+
 	public const SLIDESHOW   = 'slideshow';
 
 	public function add_block() {
@@ -59,7 +59,8 @@ class Gallery_Grid extends Block_Config {
 					'label'        => __( 'Description', 'tribe' ),
 					'name'         => self::DESCRIPTION,
 					'type'         => 'wysiwyg',
-					'toolbar'      => 'basic',
+					'toolbar'      => 'minimal',
+					'tabs'         => 'visual',
 					'media_upload' => 0,
 				] )
 			)->add_field( new Field( self::NAME . '_' . self::GALLERY, [
