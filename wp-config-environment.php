@@ -3,7 +3,7 @@
  * Base environment configuration, loaded for all environments (including automated tests)
  */
 
-function tribe_isSSL() {
+function tribe_isSSL(): bool {
 	return ( ! empty( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] !== 'off' );
 }
 
@@ -51,12 +51,12 @@ if ( file_exists( __DIR__ . '/local-config.php' ) ) {
 // ==============================================================
 
 // Provide fallback if ENVIRONMENT is already present.
-if ( defined( 'ENVIRONMENT' ) ) {
+if ( defined( 'ENVIRONMENT' ) && ! defined( 'WP_ENVIRONMENT_TYPE' ) ) {
 	define( 'WP_ENVIRONMENT_TYPE', strtolower( ENVIRONMENT ) );
 }
 
 if ( ! defined( 'WP_ENVIRONMENT_TYPE' ) ) {
-	define( 'WP_ENVIRONMENT_TYPE', 'production');
+	define( 'WP_ENVIRONMENT_TYPE', 'development' );
 }
 
 if ( ! isset( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) ) {
@@ -214,6 +214,7 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
 			if ( WP_DEBUG_LOG && is_string( WP_DEBUG_LOG ) ) {
 				ini_set( 'error_log', WP_DEBUG_LOG );
 			}
+
 			return $ret;
 		},
 		11
