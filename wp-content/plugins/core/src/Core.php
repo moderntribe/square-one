@@ -19,7 +19,6 @@ use Tribe\Project\Post_Types;
 use Tribe\Project\Routes\Routes_Definer;
 use Tribe\Project\Routes\Routes_Subscriber;
 use Tribe\Project\Settings\Settings_Definer;
-use Tribe\Project\Shortcodes\Shortcodes_Subscriber;
 use Tribe\Project\Taxonomies;
 use Tribe\Project\Theme\Theme_Definer;
 use Tribe\Project\Theme\Theme_Subscriber;
@@ -63,7 +62,6 @@ class Core {
 		Gravity_Forms_Subscriber::class,
 		Nav_Menus_Subscriber::class,
 		Routes_Subscriber::class,
-		Shortcodes_Subscriber::class,
 		Theme_Subscriber::class,
 		Yoast_SEO_Subscriber::class,
 
