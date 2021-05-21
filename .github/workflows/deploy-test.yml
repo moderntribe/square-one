@@ -35,7 +35,7 @@ jobs:
     # only run when a pull request is opened on main
     if: github.event_name == 'pull_request' && github.event.action == 'opened' || github.event.action == 'reopened' && github.repository == ‘moderntribe/squareone’
     env:
-      REVIEW_APPNAME: ${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}
+      REVIEW_APPNAME: '${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}'
     steps:
       - name: Cloning repo
         uses: actions/checkout@v2
@@ -106,7 +106,7 @@ jobs:
     # only run when a pull request is opened on main
     if: github.event_name == 'pull_request' && github.event.action == 'synchronize' && github.repository == ‘moderntribe/squareone’
     env:
-      REVIEW_APPNAME: ${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}
+      REVIEW_APPNAME: '${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}'
     steps:
       - name: Cloning repo
         uses: actions/checkout@v2
@@ -127,7 +127,7 @@ jobs:
     # only run when a pull request is closed
     if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.repository == ‘moderntribe/squareone’
     env:
-      REVIEW_APPNAME: ${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}
+      REVIEW_APPNAME: '${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}'
     steps:
       - name: Destroy the review app
         uses: dokku/github-action@master
