@@ -11,133 +11,134 @@ on:
 
 env:
   APPNAME: sq1
+  REVIEW_APPNAME: ${{ env.REVIEW_APPNAME }}
 
 jobs:
 
   deploy_app:
     runs-on: ubuntu-latest
     # only run on push to main
-    if: github.event_name == 'push' && github.ref == 'refs/heads/feature/review-apps'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/feature/review-apps' && github.repository == ‘moderntribe/squareone’
     steps:
       - name: Cloning repo
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
 
-      - name: Push to dokku
+      - name: Push to Test
         uses: dokku/github-action@master
         with:
-          git_remote_url: "ssh://dokku@moderntribe.qa:22/${{ env.APPNAME }}"
+          git_remote_url: "ssh://${{ secrets.TEST_DEPLOY_USER }}${{ secrets.TEST_DOMAIN }}:22/${{ env.APPNAME }}"
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
 
   deploy_test_app:
     runs-on: ubuntu-latest
     # only run when a pull request is opened on main
-    if: github.event_name == 'pull_request' && github.event.action == 'opened' || github.event.action == 'reopened'
+    if: github.event_name == 'pull_request' && github.event.action == 'opened' || github.event.action == 'reopened' && github.repository == ‘moderntribe/squareone’
     steps:
       - name: Cloning repo
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
 
-      - name: Push to Dokku and Build
+      - name: Push to Test and Build
         uses: dokku/github-action@master
         with:
           command: review-apps:create
-          git_remote_url: "ssh://dokku@moderntribe.qa:22/${{ env.APPNAME }}"
-          review_app_name: ${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}
+          git_remote_url: "ssh://${{ secrets.TEST_DEPLOY_USER }}${{ secrets.TEST_DOMAIN }}:22/${{ env.APPNAME }}"
+          review_app_name: ${{ env.REVIEW_APPNAME }}
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
           git_push_flags: --force
 
       - name: SSL creation
         uses: appleboy/ssh-action@master
         with:
-          host: dokku.moderntribe.qa
-          username: dokku
+          host: ${{ secrets.TEST_DOMAIN }}
+          username: ${{ secrets.TEST_DEPLOY_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            letsencrypt:enable ${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}
+            letsencrypt:enable ${{ env.REVIEW_APPNAME }}
 
       - name: Unlink original DB
         uses: appleboy/ssh-action@master
         with:
-          host: dokku.moderntribe.qa
-          username: dokku
+          host: ${{ secrets.TEST_DOMAIN }}
+          username: ${{ secrets.TEST_DEPLOY_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            mariadb:unlink ${{ env.APPNAME }}-database ${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}
+            mariadb:unlink ${{ env.APPNAME }}-database ${{ env.REVIEW_APPNAME }}
 
       - name: Clone DB
         uses: appleboy/ssh-action@master
         with:
-          host: dokku.moderntribe.qa
-          username: dokku
+          host: ${{ secrets.TEST_DOMAIN }}
+          username: ${{ secrets.TEST_DEPLOY_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            mariadb:clone ${{ env.APPNAME }}-database ${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}-database
+            mariadb:clone ${{ env.APPNAME }}-database ${{ env.REVIEW_APPNAME }}-database
 
       - name: Link new DB
         uses: appleboy/ssh-action@master
         with:
-          host: dokku.moderntribe.qa
-          username: dokku
+          host: ${{ secrets.TEST_DOMAIN }}
+          username: ${{ secrets.TEST_DEPLOY_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            mariadb:link ${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}-database ${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}
+            mariadb:link ${{ env.REVIEW_APPNAME }}-database ${{ env.REVIEW_APPNAME }}
 
       - name: Search Replace DB
         uses: appleboy/ssh-action@master
         with:
-          host: dokku.moderntribe.qa
-          username: dokku
+          host: ${{ secrets.TEST_DOMAIN }}
+          username: ${{ secrets.TEST_DEPLOY_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            enter ${{ env.APPNAME }}-pr${{ github.event.pull_request.number }} web wp search-replace ${{ env.APPNAME }}.moderntribe.qa ${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}.moderntribe.qa
+            enter ${{ env.REVIEW_APPNAME }} web wp search-replace ${{ env.APPNAME }}.${{ secrets.TEST_DOMAIN }} ${{ env.REVIEW_APPNAME }}.${{ secrets.TEST_DOMAIN }}
 
   update_test_app:
     runs-on: ubuntu-latest
     # only run when a pull request is opened on main
-    if: github.event_name == 'pull_request' && github.event.action == 'synchronize'
+    if: github.event_name == 'pull_request' && github.event.action == 'synchronize' && github.repository == ‘moderntribe/squareone’
     steps:
       - name: Cloning repo
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
 
-      - name: Push to dokku
+      - name: Push to Test
         uses: dokku/github-action@master
         with:
           command: review-apps:create
-          git_remote_url: "ssh://dokku@moderntribe.qa:22/${{ env.APPNAME }}"
-          review_app_name: ${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}
+          git_remote_url: "ssh://${{ secrets.TEST_DEPLOY_USER }}${{ secrets.TEST_DOMAIN }}:22/${{ env.APPNAME }}"
+          review_app_name: ${{ env.REVIEW_APPNAME }}
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
           git_push_flags: --force
 
   destroy_test_app:
     runs-on: ubuntu-latest
     # only run when a pull request is closed
-    if: github.event_name == 'pull_request' && github.event.action == 'closed'
+    if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.repository == ‘moderntribe/squareone’
     steps:
       - name: Destroy the review app
         uses: dokku/github-action@master
         with:
           command: review-apps:destroy
-          git_remote_url: "ssh://dokku@moderntribe.qa:22/${{ env.APPNAME }}"
-          review_app_name: ${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}
+          git_remote_url: "ssh://${{ secrets.TEST_DEPLOY_USER }}${{ secrets.TEST_DOMAIN }}:22/${{ env.APPNAME }}"
+          review_app_name: ${{ env.REVIEW_APPNAME }}
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
 
 
       - name: Destroy DB
         uses: appleboy/ssh-action@master
         with:
-          host: dokku.moderntribe.qa
-          username: dokku
+          host: ${{ secrets.TEST_DOMAIN }}
+          username: ${{ secrets.TEST_DEPLOY_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            mariadb:destroy ${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}-database -f
+            mariadb:destroy ${{ env.REVIEW_APPNAME }}-database -f
