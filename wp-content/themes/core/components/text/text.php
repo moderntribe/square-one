@@ -9,7 +9,7 @@ use \Tribe\Project\Templates\Components\text\Text_Controller;
 // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
 $c = Text_Controller::factory( $args );
 
-if ( empty( $c->get_content() ) ) {
+if ( empty( $c->get_content() ) && $c->get_content() !== '0' ) {
 	return;
 }
 ?>
