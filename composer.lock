@@ -5692,16 +5692,16 @@
         },
         {
             "name": "moderntribe/coding-standards",
-            "version": "v1.0.4",
+            "version": "v1.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moderntribe/coding-standards.git",
-                "reference": "b2bddfa3b19247ef53651f9749330eac85a4c83e"
+                "reference": "06089a3e9e6762b47467b8426093a0d011247657"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/coding-standards/zipball/b2bddfa3b19247ef53651f9749330eac85a4c83e",
-                "reference": "b2bddfa3b19247ef53651f9749330eac85a4c83e",
+                "url": "https://api.github.com/repos/moderntribe/coding-standards/zipball/06089a3e9e6762b47467b8426093a0d011247657",
+                "reference": "06089a3e9e6762b47467b8426093a0d011247657",
                 "shasum": ""
             },
             "require": {
@@ -5730,10 +5730,10 @@
                 "style"
             ],
             "support": {
-                "source": "https://github.com/moderntribe/coding-standards/tree/v1.0.4",
+                "source": "https://github.com/moderntribe/coding-standards/tree/v1.0.5",
                 "issues": "https://github.com/moderntribe/coding-standards/issues"
             },
-            "time": "2021-05-21T15:51:21+00:00"
+            "time": "2021-05-21T16:30:27+00:00"
         },
         {
             "name": "mustache/mustache",
