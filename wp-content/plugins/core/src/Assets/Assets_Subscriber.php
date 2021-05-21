@@ -7,6 +7,22 @@ use Tribe\Libs\Container\Abstract_Subscriber;
 class Assets_Subscriber extends Abstract_Subscriber {
 
 	public function register(): void {
+		$theme = wp_get_theme();
+
+		if ( ! empty( $theme ) ) {
+			$checks = [
+				$theme->get_stylesheet(),
+				$theme->parent(),
+			];
+
+			$checks = array_filter( $checks );
+
+			// Bail if we're not using the core theme.
+			if ( ! in_array( 'core', $checks, true ) ) {
+				return;
+			}
+		}
+
 		$this->theme_resources();
 		$this->legacy_resources();
 		$this->admin_resources();

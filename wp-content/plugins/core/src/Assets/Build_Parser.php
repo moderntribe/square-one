@@ -15,15 +15,24 @@ abstract class Build_Parser {
 	protected string $js = '';
 
 	/**
-	 * @var bool
+	 * @var bool|null
 	 */
-	private $debug;
+	private ?bool $debug;
 
-	private $localize;
+	/**
+	 * @var string[][]
+	 */
+	private array $localize;
 
-	private $styles;
+	/**
+	 * @var string[][]
+	 */
+	private array $styles;
 
-	private $scripts;
+	/**
+	 * @var string[][]
+	 */
+	private array $scripts;
 
 	public function __construct( ?bool $debug = null ) {
 		$this->debug = $debug ?? $this->doing_script_debug();
@@ -62,17 +71,18 @@ abstract class Build_Parser {
 		$theme_uri = trailingslashit( get_template_directory_uri() );
 
 		$environment = $this->debug ? 'development' : 'production';
-		$css         = file_exists( $this->css_build_file() ) ? include( $this->css_build_file() ) : [];
-		$js          = file_exists( $this->js_build_file() ) ? include( $this->js_build_file() ) : [];
+		$css         = file_exists( $this->css_build_file() ) ? include $this->css_build_file() : [];
+		$js          = file_exists( $this->js_build_file() ) ? include $this->js_build_file() : [];
 
 		if ( isset( $css['localize'] ) ) {
 			$this->localize['css'] = $css['localize'];
 		}
+
 		if ( isset( $js['localize'] ) ) {
 			$this->localize['js'] = $js['localize'];
 		}
 
-		if ( isset( $css['enqueue'][ $environment ] ) ) {
+		if ( ! empty( $css['enqueue'][ $environment ] ) ) {
 			$this->styles = array_map( static function ( $asset ) use ( $theme_uri ) {
 				$asset['uri'] = $theme_uri . $asset['file'];
 
@@ -80,7 +90,7 @@ abstract class Build_Parser {
 			}, $css['enqueue'][ $environment ] );
 		}
 
-		if ( ! isset( $js['enqueue'][ $environment ] ) ) {
+		if ( empty( $js['enqueue'][ $environment ] ) ) {
 			return;
 		}
 

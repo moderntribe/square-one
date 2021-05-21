@@ -91,14 +91,17 @@ class Scripts {
 	 */
 	public function enqueue_scripts(): void {
 		$handles = $this->build_parser->get_script_handles();
-		foreach ( $handles as $handle ) {
-			wp_enqueue_script( $handle );
-		}
 
-		$this->localize_scripts( reset( $handles ) );
+		if ( ! empty( $handles ) ) {
+			foreach ( $handles as $handle ) {
+				wp_enqueue_script( $handle );
+			}
 
-		if ( defined( 'HMR_DEV' ) && HMR_DEV === true ) {
-			wp_enqueue_script( 'tribe-scripts-hmr-bundle', 'https://localhost:3000/app.js', $handles, time(), true );
+			$this->localize_scripts( (string) reset( $handles ) );
+
+			if ( defined( 'HMR_DEV' ) && HMR_DEV === true ) {
+				wp_enqueue_script( 'tribe-scripts-hmr-bundle', 'https://localhost:3000/app.js', $handles, time(), true );
+			}
 		}
 
 		// JS: Comments

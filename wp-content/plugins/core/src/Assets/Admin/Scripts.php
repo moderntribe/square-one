@@ -31,13 +31,17 @@ class Scripts {
 	 * @action admin_enqueue_scripts
 	 */
 	public function enqueue_scripts(): void {
-
 		$handles = $this->build_parser->get_script_handles();
+
+		if ( empty( $handles ) ) {
+			return;
+		}
+
 		foreach ( $handles as $handle ) {
 			wp_enqueue_script( $handle );
 		}
 
-		$this->localize_scripts( reset( $handles ) );
+		$this->localize_scripts( (string) reset( $handles ) );
 	}
 
 	private function localize_scripts( string $handle ): void {
