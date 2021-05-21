@@ -1,19 +1,19 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\blocks\logos;
 
+use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Blocks\Types\Logos\Logos;
 use Tribe\Project\Templates\Components\Abstract_Controller;
-use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\container\Container_Controller;
 use Tribe\Project\Templates\Components\content_block\Content_Block_Controller;
-use Tribe\Project\Templates\Components\text\Text_Controller;
 use Tribe\Project\Templates\Components\Deferred_Component;
-use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Templates\Components\image\Image_Controller;
+use Tribe\Project\Templates\Components\link\Link_Controller;
+use Tribe\Project\Templates\Components\text\Text_Controller;
 
 class Logos_Block_Controller extends Abstract_Controller {
+
 	public const CLASSES           = 'classes';
 	public const ATTRS             = 'attrs';
 	public const CONTAINER_CLASSES = 'container_classes';
@@ -24,15 +24,15 @@ class Logos_Block_Controller extends Abstract_Controller {
 	public const CTA               = 'cta';
 	public const LOGOS             = 'logos';
 
-	private array  $classes;
-	private array  $attrs;
+	private array $classes;
+	private array $attrs;
 	private string $title;
 	private string $leadin;
 	private string $description;
-	private array  $cta;
-	private array  $container_classes;
-	private array  $content_classes;
-	private array  $logos;
+	private array $cta;
+	private array $container_classes;
+	private array $content_classes;
+	private array $logos;
 
 	/**
 	 * @param array $args
@@ -121,13 +121,13 @@ class Logos_Block_Controller extends Abstract_Controller {
 			Content_Block_Controller::CLASSES => [
 				'c-block__content-block',
 				'c-block__header',
-				'b-logos__header'
+				'b-logos__header',
 			],
 		];
 	}
 
 	/**
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	private function get_leadin(): Deferred_Component {
 		return defer_template_part( 'components/text/text', null, [
@@ -141,7 +141,7 @@ class Logos_Block_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	private function get_title(): Deferred_Component {
 		return defer_template_part( 'components/text/text', null, [
@@ -156,7 +156,7 @@ class Logos_Block_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	private function get_content(): Deferred_Component {
 		return defer_template_part( 'components/container/container', null, [
@@ -171,7 +171,7 @@ class Logos_Block_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	private function get_cta(): Deferred_Component {
 		$cta = wp_parse_args( $this->cta, [
@@ -232,4 +232,5 @@ class Logos_Block_Controller extends Abstract_Controller {
 
 		return $component_args;
 	}
+
 }

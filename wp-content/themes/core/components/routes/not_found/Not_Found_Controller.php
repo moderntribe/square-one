@@ -1,11 +1,10 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\routes\not_found;
 
 use Tribe\Project\Templates\Components\Abstract_Controller;
-use Tribe\Project\Templates\Components\sidebar\Sidebar_Controller;
 use Tribe\Project\Templates\Components\breadcrumbs\Breadcrumbs_Controller;
+use Tribe\Project\Templates\Components\sidebar\Sidebar_Controller;
 use Tribe\Project\Templates\Models\Breadcrumb;
 
 class Not_Found_Controller extends Abstract_Controller {
@@ -69,7 +68,7 @@ class Not_Found_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return Breadcrumb[]
+	 * @return \Tribe\Project\Templates\Models\Breadcrumb[]
 	 */
 	protected function get_breadcrumbs(): array {
 		$page = get_option( 'page_for_posts' );
@@ -79,4 +78,5 @@ class Not_Found_Controller extends Abstract_Controller {
 			new Breadcrumb( $url, __( 'News', 'tribe' ) ),
 		];
 	}
+
 }

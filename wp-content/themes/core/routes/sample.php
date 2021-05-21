@@ -1,4 +1,5 @@
-<?php declare( strict_types=1 );
+<?php declare(strict_types=1);
+
 /**
  * Sample Route template.
  *
@@ -7,7 +8,7 @@
 
 get_header();
 ?>
-<p><?php echo esc_html__( 'Year: ') . get_query_var( 'year' ); ?></p>
+<p><?php echo esc_html__( 'Year: ' ) . get_query_var( 'year' ); ?></p>
 <p><?php esc_html_e( 'Sample Route', 'tribe' ); ?></p>
 
 <?php
