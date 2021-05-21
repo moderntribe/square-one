@@ -48,7 +48,7 @@ jobs:
         uses: dokku/github-action@master
         with:
           command: review-apps:create
-          git_remote_url: "ssh://${{ secrets.TEST_DEPLOY_USER }}${{ secrets.TEST_DOMAIN }}:22/${{ env.APPNAME }}"
+          git_remote_url: "ssh://${{ secrets.TEST_DEPLOY_USER }}@${{ secrets.TEST_DOMAIN }}:22/${{ env.APPNAME }}"
           review_app_name: ${{ env.REVIEW_APPNAME }}
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
           git_push_flags: --force
@@ -117,7 +117,7 @@ jobs:
         uses: dokku/github-action@master
         with:
           command: review-apps:create
-          git_remote_url: "ssh://${{ secrets.TEST_DEPLOY_USER }}${{ secrets.TEST_DOMAIN }}:22/${{ env.APPNAME }}"
+          git_remote_url: "ssh://${{ secrets.TEST_DEPLOY_USER }}@${{ secrets.TEST_DOMAIN }}:22/${{ env.APPNAME }}"
           review_app_name: ${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
           git_push_flags: --force
@@ -131,7 +131,7 @@ jobs:
         uses: dokku/github-action@master
         with:
           command: review-apps:destroy
-          git_remote_url: "ssh://${{ secrets.TEST_DEPLOY_USER }}${{ secrets.TEST_DOMAIN }}:22/${{ env.APPNAME }}"
+          git_remote_url: "ssh://${{ secrets.TEST_DEPLOY_USER }}@${{ secrets.TEST_DOMAIN }}:22/${{ env.APPNAME }}"
           review_app_name: ${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
 
