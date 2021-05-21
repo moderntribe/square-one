@@ -23,7 +23,6 @@ class Force_Plugin_Activation {
 	private array $force_active = [
 		'advanced-custom-fields-pro/acf.php',
 		'core/core.php',
-		//'tribe-admin-dashboard/tribe-admin-dashboard.php',
 		'disable-emojis/disable-emojis.php',
 		'acf-image-select/acf-image-select.php',
 		'tribe-acf-post-list-field/tribe-acf-post-list-field.php',
@@ -147,7 +146,7 @@ class Force_Plugin_Activation {
 
 	/**
 	 * Removes the activate/deactivate links from the plugins list
-	 * if they are in the force active or force deactive lists.
+	 * if they are in the force active or force deactivate lists.
 	 *
 	 * @param array  $actions
 	 * @param string $plugin_file
