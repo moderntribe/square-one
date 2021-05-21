@@ -89,6 +89,16 @@ jobs:
           script: |
             mariadb:link ${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}-database ${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}
 
+      - name: Search Replace DB
+        uses: appleboy/ssh-action@master
+        with:
+          host: dokku.moderntribe.qa
+          username: dokku
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            enter ${{ env.APPNAME }}-pr${{ github.event.pull_request.number }} web wp search-replace ${{ env.APPNAME }}.moderntribe.qa ${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}.moderntribe.qa
+
   update_test_app:
     runs-on: ubuntu-latest
     # only run when a pull request is opened on main
