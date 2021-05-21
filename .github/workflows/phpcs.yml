@@ -73,4 +73,4 @@ jobs:
           composer install --prefer-dist --no-progress --no-suggest --optimize-autoloader
 
       - name: PHPCS
-        run: ./vendor/bin/phpcs --standard=ModernTribe
+        run: ./vendor/bin/phpcs --standard=./phpcs.xml.dist
