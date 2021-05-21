@@ -9,7 +9,7 @@ All notable changes to this project will be documented in this file.
 * Added: phpcs.xml.dist with new coding standards (mostly formatting based for now).
 * Updated: Updated all relevant PHP files for phpcs.
 * Updated: .editorconfig to better match new phpcs formatting.  
-* Removed: mercator mu plugin https://github.com/humanmade/Mercator as multisite domain mapping have been in core for some time.
+* Removed: mercator mu plugin https://github.com/humanmade/Mercator as multisite domain mapping has been in core for some time.
 * Updated: workflows/phpcs.yml to use the new coding standard in GitHub workflows  
 * Fixed: Multiple blocks keywords not using `__()` properly.
 * Updated: Added mu-plugins to husky hooks phpcs git commit hook.  
