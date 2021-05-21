@@ -75,6 +75,7 @@
   ],
   "require": {
     "php": "^7.4",
+    "ext-json": "*",
     "composer-plugin-api": "^1.1",
     "advanced-custom-fields/advanced-custom-fields-pro": "*",
     "composer/installers": "1.4.0",
