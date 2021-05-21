@@ -17,7 +17,7 @@ jobs:
   deploy_app:
     runs-on: ubuntu-latest
     # only run on push to main
-    if: github.event_name == 'push' && github.ref == 'refs/heads/feature/review-apps' && github.repository == 'moderntribe/squareone'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/feature/review-apps' && github.repository == 'moderntribe/square-one'
     steps:
       - name: Cloning repo
         uses: actions/checkout@v2
@@ -33,7 +33,7 @@ jobs:
   deploy_test_app:
     runs-on: ubuntu-latest
     # only run when a pull request is opened on main
-    if: github.event_name == 'pull_request' && github.event.action == 'opened' || github.event.action == 'reopened' && github.repository == 'moderntribe/squareone'
+    if: github.event_name == 'pull_request' && github.event.action == 'opened' || github.event.action == 'reopened' && github.repository == 'moderntribe/square-one'
     steps:
       - name: Set the value
         run: |
@@ -106,7 +106,7 @@ jobs:
   update_test_app:
     runs-on: ubuntu-latest
     # only run when a pull request is opened on main
-    if: github.event_name == 'pull_request' && github.event.action == 'synchronize' && github.repository == 'moderntribe/squareone'
+    if: github.event_name == 'pull_request' && github.event.action == 'synchronize' && github.repository == 'moderntribe/square-one'
     steps:
       - name: Cloning repo
         uses: actions/checkout@v2
@@ -125,7 +125,7 @@ jobs:
   destroy_test_app:
     runs-on: ubuntu-latest
     # only run when a pull request is closed
-    if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.repository == 'moderntribe/squareone'
+    if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.repository == 'moderntribe/square-one'
     steps:
       - name: Destroy the review app
         uses: dokku/github-action@master
