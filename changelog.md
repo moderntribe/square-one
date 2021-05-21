@@ -3,14 +3,14 @@
 All notable changes to this project will be documented in this file.
 
 ## 2021.05
-* Updated: Move phpcs to https://github.com/moderntribe/coding-standards, updates standards for formatting.
+* Updated: Move phpcs to https://github.com/moderntribe/coding-standards
 * Removed: Broken Gallery shortcode/subscriber.
 * Removed: phpcs.xml, this should be git ignored.
-* Added: phpcs.xml.dist  
+* Added: phpcs.xml.dist with new coding standards (mostly formatting based for now).
 * Updated: Updated all relevant PHP files for phpcs.
 * Updated: .editorconfig to better match new phpcs formatting.  
 * Removed: mercator mu plugin https://github.com/humanmade/Mercator as multisite domain mapping have been in core for some time.
-* Updated: phpcs.yml to use the new coding standard in GitHub workflows  
+* Updated: workflows/phpcs.yml to use the new coding standard in GitHub workflows  
 * Fixed: Multiple blocks keywords not using `__()` properly.
 * Updated: Added mu-plugins to husky hooks phpcs git commit hook.  
 * Fixed: Husky hooks commits from scanning all PHP files with phpcs and limits to our core plugin/theme.
