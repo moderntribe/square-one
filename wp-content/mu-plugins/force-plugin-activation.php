@@ -1,5 +1,7 @@
 <?php declare(strict_types=1);
 
+namespace Tribe\Mu;
+
 /*
 Plugin Name:	Force Plugin Activation/Deactivation
 Plugin URI: 	http://danieldvork.in

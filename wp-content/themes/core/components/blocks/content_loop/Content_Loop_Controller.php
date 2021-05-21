@@ -160,7 +160,7 @@ class Content_Loop_Controller extends Abstract_Controller {
 
 			$cards[] = [
 				Card_Controller::STYLE           => $layout,
-				Card_Controller::USE_TARGET_LINK => $link['url'] ? true : false,
+				Card_Controller::USE_TARGET_LINK => (bool) $link['url'],
 				Card_Controller::META_PRIMARY    => defer_template_part(
 					'components/container/container',
 					null,
