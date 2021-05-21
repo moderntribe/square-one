@@ -72,7 +72,7 @@
     }
   },
   "lint-staged": {
-    "wp-content/{*themes,plugins*}/core/**/*.php": [
+    "wp-content/{*themes,mu-plugins,plugins*}/core/**/*.php": [
       "php -l",
       "./vendor/bin/phpcs --standard=./phpcs.xml --warning-severity=8 -s"
     ]
