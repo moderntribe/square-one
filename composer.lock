@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a444043d1dcae3f35873bc78bc177235",
+    "content-hash": "6a17dbb53f7053dc176fbc38cfe25315",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -677,42 +677,6 @@
                 "url"
             ],
             "time": "2021-04-26T09:17:50+00:00"
-        },
-        {
-            "name": "humanmade/mercator",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/humanmade/Mercator.git",
-                "reference": "7f3846a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/humanmade/Mercator/zipball/7f3846a",
-                "reference": "7f3846a",
-                "shasum": ""
-            },
-            "require": {
-                "composer/installers": "~1.0"
-            },
-            "type": "wordpress-muplugin",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0+"
-            ],
-            "authors": [
-                {
-                    "name": "Human Made Limited",
-                    "email": "support@humanmade.co.uk",
-                    "homepage": "http://hmn.md/"
-                }
-            ],
-            "description": "WordPress multisite domain mapping for the modern era.",
-            "homepage": "https://github.com/humanmade/Mercator",
-            "keywords": [
-                "wordpress"
-            ],
-            "time": "2019-01-08T13:04:40+00:00"
         },
         {
             "name": "humanmade/s3-uploads",
@@ -11742,7 +11706,6 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "humanmade/mercator": 20,
         "moderntribe/acf-image-select": 20,
         "roots/wp-password-bcrypt": 20,
         "filp/whoops": 20
@@ -11751,6 +11714,7 @@
     "prefer-lowest": false,
     "platform": {
         "php": "^7.4",
+        "ext-json": "*",
         "composer-plugin-api": "^1.1"
     },
     "platform-dev": [],
