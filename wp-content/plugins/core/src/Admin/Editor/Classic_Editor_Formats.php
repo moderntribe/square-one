@@ -14,7 +14,7 @@ class Classic_Editor_Formats {
 	 *
 	 * @return array
 	 */
-	public function teeny_mce_buttons( $buttons, $editor_id ) {
+	public function teeny_mce_buttons( $buttons, $editor_id ): array {
 		// Remove lists, underline, undo, redo, blockquote, alignments, fullscreen
 		// Add Format Select & Style Select
 		return [
@@ -32,9 +32,10 @@ class Classic_Editor_Formats {
 	 * @filter mce_buttons
 	 *
 	 * @param array $buttons
+	 *
 	 * @return array
 	 */
-	public function mce_buttons( $buttons ) {
+	public function mce_buttons( $buttons ): array {
 		// Remove formatselect
 		$tag_select = array_shift( $buttons );
 
@@ -44,7 +45,7 @@ class Classic_Editor_Formats {
 		// Remove WP More
 		$key = array_search( 'wp_more', $buttons );
 		if ( false !== $key ) {
-			unset( $buttons[$key] );
+			unset( $buttons[ $key ] );
 		}
 
 		return $buttons;
@@ -65,7 +66,7 @@ class Classic_Editor_Formats {
 	 * @return array $settings
 	 */
 	public function visual_editor_styles_dropdown( $settings ): array {
-		$style_formats = [
+		$style_formats             = [
 			/* Example single-level format
 			[
 				'title'    => __( 'Button', 'tribe' ),
@@ -107,5 +108,26 @@ class Classic_Editor_Formats {
 		$settings['style_formats'] = json_encode( $style_formats );
 
 		return $settings;
+	}
+
+	/**
+	 * Add minimal toolbar to use as default editor with custom blocks
+	 *
+	 * @filter acf/fields/wysiwyg/toolbars
+	 *
+	 * @param array $toolbars
+	 *
+	 * @return array
+	 */
+	public function add_minimal_toolbar( $toolbars ): array {
+		$toolbars['Minimal'][1] = [
+			'bold',
+			'italic',
+			'bullist',
+			'numlist',
+			'link'
+		];
+
+		return $toolbars;
 	}
 }

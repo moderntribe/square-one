@@ -38,13 +38,16 @@ class Admin_Subscriber extends Abstract_Subscriber {
 
 	private function editor_formats() {
 		add_filter( 'teeny_mce_buttons', function ( $buttons, $editor_id ) {
-			return $this->container->get(Classic_Editor_Formats::class)->teeny_mce_buttons( $buttons, $editor_id );
+			return $this->container->get( Classic_Editor_Formats::class )->teeny_mce_buttons( $buttons, $editor_id );
 		}, 10, 2 );
 		add_filter( 'mce_buttons', function ( $settings ) {
 			return $this->container->get( Classic_Editor_Formats::class )->mce_buttons( $settings );
 		}, 10, 1 );
 		add_filter( 'tiny_mce_before_init', function ( $settings ) {
 			return $this->container->get( Classic_Editor_Formats::class )->visual_editor_styles_dropdown( $settings );
+		}, 10, 1 );
+		add_filter( 'acf/fields/wysiwyg/toolbars', function ( $toolbars ) {
+			return $this->container->get( Classic_Editor_Formats::class )->add_minimal_toolbar( $toolbars );
 		}, 10, 1 );
 	}
 
