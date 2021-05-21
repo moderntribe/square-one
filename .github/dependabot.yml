@@ -1,7 +1,7 @@
 version: 2
 
 updates:
-  - package-ecosystem: "composer"
+  - package-ecosystem: "composer1"
     directory: "/"
     schedule:
       interval: "weekly"
