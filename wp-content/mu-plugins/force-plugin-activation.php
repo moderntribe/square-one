@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 /*
 Plugin Name:	Force Plugin Activation/Deactivation
 Plugin URI: 	http://danieldvork.in
@@ -14,8 +15,10 @@ class Force_Plugin_Activation {
 	 * These plugins will always be active.
 	 *
 	 * Add elements as plugin path: directory/file.php
+	 *
+	 * @var string[]
 	 */
-	private $force_active = [
+	private array $force_active = [
 		'advanced-custom-fields-pro/acf.php',
 		'core/core.php',
 		//'tribe-admin-dashboard/tribe-admin-dashboard.php',
@@ -29,8 +32,10 @@ class Force_Plugin_Activation {
 	 * be activated unless WP_DEBUG is true
 	 *
 	 * Add elements as plugin path: directory/file.php
+	 *
+	 * @var string[]
 	 */
-	private $force_deactive = [
+	private array $force_deactive = [
 		'debug-bar/debug-bar.php',
 		'debug-bar-action-hooks/debug-bar-action-hooks.php',
 		'debug-bar-console/debug-bar-console.php',
@@ -47,8 +52,10 @@ class Force_Plugin_Activation {
 	 * They will only show in the network admin.
 	 *
 	 * Add elements as plugin path: directory/file.php
+	 *
+	 * @var string[]
 	 */
-	private $force_network_only = [
+	private array $force_network_only = [
 		'advanced-custom-fields-pro/acf.php',
 		'debug-bar/debug-bar.php',
 		'debug-bar-action-hooks/debug-bar-action-hooks.php',
@@ -60,7 +67,6 @@ class Force_Plugin_Activation {
 		'wp-xhprof-profiler/xhprof-profiler.php',
 		'wp-tota11y/wp-tota11y.php',
 	];
-
 
 	public function __construct() {
 
@@ -151,12 +157,12 @@ class Force_Plugin_Activation {
 	public function plugin_action_links( $actions, $plugin_file, $plugin_data, $context ) {
 
 		if ( in_array( $plugin_file, $this->force_active ) ) {
-			unset( $actions[ 'deactivate' ] );
+			unset( $actions['deactivate'] );
 		}
 
 		if ( ! defined( 'WP_DEBUG' ) || ! WP_DEBUG ) {
 			if ( in_array( $plugin_file, $this->force_deactive ) ) {
-				unset( $actions[ 'activate' ] );
+				unset( $actions['activate'] );
 			}
 		}
 
@@ -185,9 +191,11 @@ class Force_Plugin_Activation {
 		}
 
 		foreach ( (array) $this->force_network_only as $slug ) {
-			if ( isset( $plugins[ $slug ] ) ) {
-				unset( $plugins[ $slug ] );
+			if ( ! isset( $plugins[ $slug ] ) ) {
+				continue;
 			}
+
+			unset( $plugins[ $slug ] );
 		}
 
 		return $plugins;
