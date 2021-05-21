@@ -11,7 +11,7 @@ on:
 
 env:
   APPNAME: sq1
-  REVIEW_APPNAME: ${{ env.REVIEW_APPNAME }}
+  REVIEW_APPNAME: ${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}
 
 jobs:
 
