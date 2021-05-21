@@ -34,9 +34,11 @@ jobs:
     runs-on: ubuntu-latest
     # only run when a pull request is opened on main
     if: github.event_name == 'pull_request' && github.event.action == 'opened' || github.event.action == 'reopened' && github.repository == ‘moderntribe/squareone’
-    env:
-      REVIEW_APPNAME: '${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}'
     steps:
+      - name: Set the value
+        run: |
+          echo "REVIEW_APPNAME=${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}" >> $GITHUB_ENV
+
       - name: Cloning repo
         uses: actions/checkout@v2
         with:
@@ -59,7 +61,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            letsencrypt:enable ${{ env.REVIEW_APPNAME }}
+            letsencrypt:enable ${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}
 
       - name: Unlink original DB
         uses: appleboy/ssh-action@master
@@ -69,7 +71,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            mariadb:unlink ${{ env.APPNAME }}-database ${{ env.REVIEW_APPNAME }}
+            mariadb:unlink ${{ env.APPNAME }}-database ${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}
 
       - name: Clone DB
         uses: appleboy/ssh-action@master
@@ -79,7 +81,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            mariadb:clone ${{ env.APPNAME }}-database ${{ env.REVIEW_APPNAME }}-database
+            mariadb:clone ${{ env.APPNAME }}-database ${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}-database
 
       - name: Link new DB
         uses: appleboy/ssh-action@master
@@ -89,7 +91,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            mariadb:link ${{ env.REVIEW_APPNAME }}-database ${{ env.REVIEW_APPNAME }}
+            mariadb:link ${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}-database ${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}
 
       - name: Search Replace DB
         uses: appleboy/ssh-action@master
@@ -99,14 +101,12 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            enter ${{ env.REVIEW_APPNAME }} web wp search-replace ${{ env.APPNAME }}.${{ secrets.TEST_DOMAIN }} ${{ env.REVIEW_APPNAME }}.${{ secrets.TEST_DOMAIN }}
+            enter ${{ env.APPNAME }}-pr${{ github.event.pull_request.number }} web wp search-replace ${{ env.APPNAME }}.${{ secrets.TEST_DOMAIN }} ${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}.${{ secrets.TEST_DOMAIN }}
 
   update_test_app:
     runs-on: ubuntu-latest
     # only run when a pull request is opened on main
     if: github.event_name == 'pull_request' && github.event.action == 'synchronize' && github.repository == ‘moderntribe/squareone’
-    env:
-      REVIEW_APPNAME: '${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}'
     steps:
       - name: Cloning repo
         uses: actions/checkout@v2
@@ -118,7 +118,7 @@ jobs:
         with:
           command: review-apps:create
           git_remote_url: "ssh://${{ secrets.TEST_DEPLOY_USER }}${{ secrets.TEST_DOMAIN }}:22/${{ env.APPNAME }}"
-          review_app_name: ${{ env.REVIEW_APPNAME }}
+          review_app_name: ${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
           git_push_flags: --force
 
@@ -126,15 +126,13 @@ jobs:
     runs-on: ubuntu-latest
     # only run when a pull request is closed
     if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.repository == ‘moderntribe/squareone’
-    env:
-      REVIEW_APPNAME: '${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}'
     steps:
       - name: Destroy the review app
         uses: dokku/github-action@master
         with:
           command: review-apps:destroy
           git_remote_url: "ssh://${{ secrets.TEST_DEPLOY_USER }}${{ secrets.TEST_DOMAIN }}:22/${{ env.APPNAME }}"
-          review_app_name: ${{ env.REVIEW_APPNAME }}
+          review_app_name: ${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
 
 
@@ -146,4 +144,4 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            mariadb:destroy ${{ env.REVIEW_APPNAME }}-database -f
+            mariadb:destroy ${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}-database -f
