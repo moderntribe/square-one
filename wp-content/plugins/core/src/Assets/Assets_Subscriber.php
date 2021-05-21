@@ -1,11 +1,11 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Assets;
 
 use Tribe\Libs\Container\Abstract_Subscriber;
 
 class Assets_Subscriber extends Abstract_Subscriber {
+
 	public function register(): void {
 		$this->theme_resources();
 		$this->legacy_resources();
@@ -73,4 +73,5 @@ class Assets_Subscriber extends Abstract_Subscriber {
 			$this->container->get( Admin\Styles::class )->enqueue_login_styles();
 		}, 10, 0 );
 	}
+
 }

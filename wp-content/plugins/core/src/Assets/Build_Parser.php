@@ -1,17 +1,18 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Assets;
 
 abstract class Build_Parser {
+
 	/**
 	 * @var string Path to the CSS build data file, relative to the theme directory
 	 */
-	protected $css = '';
+	protected string $css = '';
+
 	/**
 	 * @var string Path to the JS build data file, relative to the theme directory
 	 */
-	protected $js  = '';
+	protected string $js = '';
 
 	/**
 	 * @var bool
@@ -24,7 +25,7 @@ abstract class Build_Parser {
 
 	private $scripts;
 
-	public function __construct( bool $debug = null ) {
+	public function __construct( ?bool $debug = null ) {
 		$this->debug = $debug ?? $this->doing_script_debug();
 	}
 
@@ -33,9 +34,11 @@ abstract class Build_Parser {
 	}
 
 	protected function init(): void {
-		if ( ! isset( $this->localize ) ) {
-			$this->parse_build_files();
+		if ( isset( $this->localize ) ) {
+			return;
 		}
+
+		$this->parse_build_files();
 	}
 
 	protected function css_build_file(): string {
@@ -70,20 +73,22 @@ abstract class Build_Parser {
 		}
 
 		if ( isset( $css['enqueue'][ $environment ] ) ) {
-			$this->styles = array_map( function ( $asset ) use ( $theme_uri ) {
+			$this->styles = array_map( static function ( $asset ) use ( $theme_uri ) {
 				$asset['uri'] = $theme_uri . $asset['file'];
 
 				return $asset;
 			}, $css['enqueue'][ $environment ] );
 		}
 
-		if ( isset( $js['enqueue'][ $environment ] ) ) {
-			$this->scripts = array_map( function ( $asset ) use ( $theme_uri ) {
-				$asset['uri'] = $theme_uri . $asset['file'];
-
-				return $asset;
-			}, $js['enqueue'][ $environment ] );
+		if ( ! isset( $js['enqueue'][ $environment ] ) ) {
+			return;
 		}
+
+		$this->scripts = array_map( static function ( $asset ) use ( $theme_uri ) {
+			$asset['uri'] = $theme_uri . $asset['file'];
+
+			return $asset;
+		}, $js['enqueue'][ $environment ] );
 	}
 
 	public function get_localization(): array {
@@ -115,4 +120,5 @@ abstract class Build_Parser {
 
 		return array_keys( $this->scripts );
 	}
+
 }

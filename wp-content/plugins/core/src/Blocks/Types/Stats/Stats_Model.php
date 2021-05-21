@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Blocks\Types\Stats;
 
@@ -9,6 +8,7 @@ use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Templates\Models\Statistic as Statistic_Model;
 
 class Stats_Model extends Base_Model {
+
 	/**
 	 * @return array
 	 */
@@ -61,4 +61,5 @@ class Stats_Model extends Base_Model {
 
 		return $stat_objects;
 	}
+
 }

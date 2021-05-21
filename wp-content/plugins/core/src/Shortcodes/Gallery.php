@@ -1,8 +1,8 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Shortcodes;
 
-use Tribe\Project\Templates\Components\Controller;
+use Controller;
 
 class Gallery implements Shortcode {
 
@@ -37,6 +37,7 @@ class Gallery implements Shortcode {
 
 		// TODO: work with new component system
 		return '';
+
 		$options = [
 			Controller::SLIDES          => $this->get_slides( $attachments ),
 			Controller::THUMBNAILS      => $this->get_slides( $attachments, 'thumbnail' ),
@@ -96,9 +97,10 @@ class Gallery implements Shortcode {
 		return array_filter( array_map( function ( $slide_id ) use ( $size ) {
 			// TODO: work with new component system
 			return '';
+
 			try {
 				$image = new \Tribe\Project\Models\Image( $slide_id );
-			} catch ( \Exception $e ) {
+			} catch ( \Throwable $e ) {
 				return '';
 			}
 			$options = [
@@ -111,4 +113,5 @@ class Gallery implements Shortcode {
 			return $this->component->get( Image::class, $options )->get_rendered_output();
 		}, $slide_ids ) );
 	}
+
 }

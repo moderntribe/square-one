@@ -1,30 +1,22 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Assets\Admin;
 
 class Scripts {
-	/**
-	 * @var JS_Config
-	 */
-	private $config;
-	/**
-	 * @var JS_Localization
-	 */
-	private $localization;
-	/**
-	 * @var Admin_Build_Parser
-	 */
-	private $build_parser;
+
+	private JS_Config $config;
+	private JS_Localization $localization;
+	private Admin_Build_Parser $build_parser;
 
 	public function __construct( Admin_Build_Parser $build_parser, JS_Config $config, JS_Localization $localization ) {
 		$this->build_parser = $build_parser;
-		$this->config = $config;
+		$this->config       = $config;
 		$this->localization = $localization;
 	}
 
-
 	/**
 	 * @return void
+	 *
 	 * @action admin_init
 	 */
 	public function register_scripts(): void {
@@ -52,4 +44,5 @@ class Scripts {
 		wp_localize_script( $handle, 'modern_tribe_admin_i18n', $this->localization->get_data() );
 		wp_localize_script( $handle, 'modern_tribe_admin_config', $this->config->get_data() );
 	}
+
 }

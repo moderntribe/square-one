@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Admin;
 
@@ -8,6 +7,7 @@ use Tribe\Project\Admin\Editor\Classic_Editor_Formats;
 use Tribe\Project\Admin\Editor\Editor_Styles;
 
 class Admin_Subscriber extends Abstract_Subscriber {
+
 	public function register(): void {
 		$this->editor();
 
@@ -38,7 +38,7 @@ class Admin_Subscriber extends Abstract_Subscriber {
 
 	private function editor_formats() {
 		add_filter( 'teeny_mce_buttons', function ( $buttons, $editor_id ) {
-			return $this->container->get(Classic_Editor_Formats::class)->teeny_mce_buttons( $buttons, $editor_id );
+			return $this->container->get( Classic_Editor_Formats::class )->teeny_mce_buttons( $buttons, $editor_id );
 		}, 10, 2 );
 		add_filter( 'mce_buttons', function ( $settings ) {
 			return $this->container->get( Classic_Editor_Formats::class )->mce_buttons( $settings );

@@ -1,29 +1,22 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Assets\Theme;
 
 class Scripts {
-	/**
-	 * @var JS_Config
-	 */
-	private $config;
-	/**
-	 * @var JS_Localization
-	 */
-	private $localization;
-	/**
-	 * @var Theme_Build_Parser
-	 */
-	private $build_parser;
+
+	private JS_Config $config;
+	private JS_Localization $localization;
+	private Theme_Build_Parser $build_parser;
 
 	public function __construct( Theme_Build_Parser $build_parser, JS_Config $config, JS_Localization $localization ) {
 		$this->build_parser = $build_parser;
-		$this->config = $config;
+		$this->config       = $config;
 		$this->localization = $localization;
 	}
 
 	/**
 	 * @return void
+	 *
 	 * @action wp_footer
 	 */
 	public function add_early_polyfills(): void {
@@ -37,6 +30,7 @@ class Scripts {
 
 	/**
 	 * Output bugsnag code
+	 *
 	 * @action wp_head
 	 */
 	public function maybe_inject_bugsnag(): void {
@@ -51,6 +45,7 @@ class Scripts {
 
 	/**
 	 * Output preload directives in head for scripts in footer
+	 *
 	 * @action wp_head
 	 */
 	public function set_preloading_tags(): void {
@@ -60,19 +55,21 @@ class Scripts {
 			$script = $wp_scripts->registered[ $handle ];
 
 			//-- Weird way to check if script is being enqueued in the footer.
-			if ( isset( $script->extra['group'] ) && $script->extra['group'] === 1 ) {
-
-				//-- If version is set, append to end of source.
-				$source = $script->src . ( $script->ver ? "?ver={$script->ver}" : "" );
-
-				//-- Spit out the tag.
-				echo "<link rel='preload' href='{$source}' as='script'/>\n";
+			if ( ! isset( $script->extra['group'] ) || $script->extra['group'] !== 1 ) {
+				continue;
 			}
+
+			//-- If version is set, append to end of source.
+			$source = $script->src . ( $script->ver ? "?ver={$script->ver}" : "" );
+
+			//-- Spit out the tag.
+			echo "<link rel='preload' href='{$source}' as='script'/>\n";
 		}
 	}
 
 	/**
 	 * @return void
+	 *
 	 * @action template_redirect
 	 */
 	public function register_scripts(): void {
@@ -105,10 +102,11 @@ class Scripts {
 		}
 
 		// JS: Comments
-		if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
-			wp_enqueue_script( 'comment-reply' );
+		if ( ! is_singular() || ! comments_open() || ! get_option( 'thread_comments' ) ) {
+			return;
 		}
 
+		wp_enqueue_script( 'comment-reply' );
 	}
 
 	/**
@@ -134,4 +132,5 @@ class Scripts {
 		wp_localize_script( $handle, 'modern_tribe_i18n', $this->localization->get_data() );
 		wp_localize_script( $handle, 'modern_tribe_config', $this->config->get_data() );
 	}
+
 }

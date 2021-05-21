@@ -1,13 +1,10 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Assets\Admin;
 
-
 class Styles {
-	/**
-	 * @var Admin_Build_Parser
-	 */
-	private $build_parser;
+
+	private Admin_Build_Parser $build_parser;
 
 	public function __construct( Admin_Build_Parser $build_parser ) {
 		$this->build_parser = $build_parser;
@@ -17,6 +14,7 @@ class Styles {
 	 * Register all styles for later enqueue
 	 *
 	 * @return void
+	 *
 	 * @action admin_init
 	 */
 	public function register_styles(): void {
@@ -43,6 +41,6 @@ class Styles {
 	 */
 	public function enqueue_login_styles() {
 		wp_enqueue_style( 'tribe-styles-login' );
-
 	}
+
 }

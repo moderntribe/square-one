@@ -1,11 +1,11 @@
-<?php
-
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Nav_Menus;
 
 use Tribe\Libs\Cache\Cache;
 
 class Menu {
+
 	private $args      = [];
 	private $cache_key = '';
 
@@ -18,7 +18,7 @@ class Menu {
 	private function build_cache_key() {
 		$cache_key = [
 			'args' => $this->args,
-			'url ' => isset( $_SERVER['REQUEST_URI'] ) ? $_SERVER['REQUEST_URI'] : '',
+			'url ' => $_SERVER['REQUEST_URI'] ?? '',
 		];
 		if ( isset( $cache_key['args']['walker'] ) && is_object( $cache_key['args']['walker'] ) ) {
 			$cache_key['args']['walker'] = get_class( $cache_key['args']['walker'] );
@@ -50,4 +50,5 @@ class Menu {
 
 		return $menu->get_html();
 	}
+
 }
