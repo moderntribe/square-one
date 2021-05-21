@@ -68,15 +68,13 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": [
-        "lint-staged"
-      ]
+      "pre-commit": "lint-staged"
     }
   },
   "lint-staged": {
-    "*.php": [
+    "wp-content/{*themes,plugins*}/core/**/*.php": [
       "php -l",
-      "./vendor/bin/phpcs --standard=./phpcs.xml --extensions=php --warning-severity=8 -s"
+      "./vendor/bin/phpcs --standard=./phpcs.xml --warning-severity=8 -s"
     ]
   },
   "dependencies": {
@@ -89,7 +87,7 @@
     "gulp-eslint": "^6.0.0",
     "idx": "^2.4.0",
     "intersection-observer": "^0.7.0",
-    "jquery": "3.4.1",
+    "jquery": "3.6.0",
     "lazysizes": "^5.2.0",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
