@@ -1,6 +1,4 @@
-<?php
-
-// test
+<?php declare(strict_types=1);
 
 /*
 Plugin Name: Modern Tribe Core Functionality
