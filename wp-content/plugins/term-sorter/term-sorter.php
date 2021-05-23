@@ -9,7 +9,6 @@ Version: 1.0
 
 
 
-// test
 /**
  * Load all the plugin files and initialize appropriately
  *
