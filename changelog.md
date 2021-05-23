@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 
 ## 2021.05
+* Removed: husky hooks.
+* Added: lefthook git-hooks (see lefthook.yml and .lefthook folder) to replace husky hooks: https://github.com/evilmartians/lefthook
+* Added: run phpcs checks on commit via lefthook. 
+* Added: prefix commit messages with the Jira ticket from the branch.  
 * Updated: Move phpcs to https://github.com/moderntribe/coding-standards
 * Removed: Broken Gallery shortcode/subscriber.
 * Removed: phpcs.xml, this should be git ignored.
@@ -12,8 +16,6 @@ All notable changes to this project will be documented in this file.
 * Removed: mercator mu plugin https://github.com/humanmade/Mercator as multisite domain mapping has been in core for some time.
 * Updated: workflows/phpcs.yml to use the new coding standard in GitHub workflows  
 * Fixed: Multiple blocks keywords not using `__()` properly.
-* Updated: Added mu-plugins to husky hooks phpcs git commit hook.  
-* Fixed: Husky hooks commits from scanning all PHP files with phpcs and limits to our core plugin/theme.
 * Added: documentation to get PHPCS configured in VS Code.
 * Updated: use the WP_ENVIRONMENT_TYPE constant added in Core v5.5.
 * Added: enabled the legacy markup for Gravity Forms 2.5 by default (until we can update our theme framework).
