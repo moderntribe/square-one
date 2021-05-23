@@ -1,0 +1,20 @@
+# Lefthook git hooks
+# Refer for explanation to following link:
+# https://github.com/evilmartians/lefthook/blob/master/docs/full_guide.md
+
+# Only show errors
+skip_output:
+  - meta
+  - success
+  - summary
+
+pre-commit:
+  parallel: true
+  commands:
+    phpcs-core:
+      glob: "wp-content/{*themes,plugins*}/core/**/*.php"
+      run: ./vendor/bin/phpcs -s --standard=./phpcs.xml.dist {staged_files}
+    phpcs-mu:
+      glob: "wp-content/mu-plugins/*.php"
+      run: ./vendor/bin/phpcs -s --standard=./phpcs.xml.dist {staged_files}
+
