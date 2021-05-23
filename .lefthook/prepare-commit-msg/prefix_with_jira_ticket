@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
-# Prefixes commit messages [JIRA_TICKET] the commit message based on a branch format of
-# feature|bugfix/<ticket>/<branch_description>
+# Prefixes commit messages with [JIRA_TICKET].
+# Branch format: <prefix, e.g. feature or bugfix>/<jira_ticket>/<branch_description>
 #
 
 FILE=$1
