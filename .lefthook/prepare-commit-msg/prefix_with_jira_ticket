@@ -11,4 +11,4 @@ TICKET=[$(echo ${parts[1]} | grep -Eo '(\w+[-])?[0-9]+')]
 if [[ $TICKET == "[]" || "$MESSAGE" == "$TICKET"* ]]; then
   exit 0
 fi
-echo "[$TICKET] $MESSAGE" > $FILE
+echo "$TICKET $MESSAGE" > $FILE
