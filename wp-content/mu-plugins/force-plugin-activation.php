@@ -14,7 +14,7 @@ Author URI: 	http://danieldvork.in
 class Force_Plugin_Activation {
 
 	/**
-	 * These plugins will always be active.
+	 * These plugins will always be forced active.
 	 *
 	 * Add elements as plugin path: directory/file.php
 	 *
@@ -30,13 +30,13 @@ class Force_Plugin_Activation {
 
 	/**
 	 * These plugins will be deactivated and can't
-	 * be activated unless WP_DEBUG is true
+	 * be activated unless WP_DEBUG is true.
 	 *
 	 * Add elements as plugin path: directory/file.php
 	 *
 	 * @var string[]
 	 */
-	private array $force_deactive = [
+	private array $force_deactivate = [
 		'debug-bar/debug-bar.php',
 		'debug-bar-action-hooks/debug-bar-action-hooks.php',
 		'debug-bar-console/debug-bar-console.php',
@@ -85,13 +85,13 @@ class Force_Plugin_Activation {
 		 * anything here.
 		 */
 		if ( defined( 'WP_ENVIRONMENT_TYPE' ) && WP_ENVIRONMENT_TYPE === 'production' ) {
-			$this->force_deactive[] = 'tribe-glomar/tribe-glomar.php';
-			$this->force_active[]   = 'limit-login-attempts-reloaded/limit-login-attempts-reloaded.php';
+			$this->force_deactivate[] = 'tribe-glomar/tribe-glomar.php';
+			$this->force_active[]     = 'limit-login-attempts-reloaded/limit-login-attempts-reloaded.php';
 		}
 
 		// Specific config when unit tests are running
 		if ( defined( 'DIR_TESTDATA' ) && DIR_TESTDATA ) {
-			//$this->force_deactive[] = 'term-sorter/term-sorter.php';
+			//$this->force_deactivate[] = 'term-sorter/term-sorter.php';
 		}
 
 		add_filter( 'option_active_plugins', [ $this, 'force_plugins' ], 10, 1 );
@@ -130,7 +130,7 @@ class Force_Plugin_Activation {
 
 		// Remove our force-deactivated plugins unless WP_DEBUG is on. Forced removal when unit tests are running
 		if ( ( defined( 'DIR_TESTDATA' ) && DIR_TESTDATA ) || ! defined( 'WP_DEBUG' ) || ! WP_DEBUG ) {
-			$plugins = array_diff( (array) $plugins, $this->force_deactive );
+			$plugins = array_diff( (array) $plugins, $this->force_deactivate );
 		}
 
 		// Deduplicate
@@ -162,7 +162,7 @@ class Force_Plugin_Activation {
 		}
 
 		if ( ! defined( 'WP_DEBUG' ) || ! WP_DEBUG ) {
-			if ( in_array( $plugin_file, $this->force_deactive ) ) {
+			if ( in_array( $plugin_file, $this->force_deactivate ) ) {
 				unset( $actions['activate'] );
 			}
 		}

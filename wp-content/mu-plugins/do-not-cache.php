@@ -12,7 +12,7 @@ Version: 1.0
 /**
  * Disable page caching for the current page load
  */
-function trigger_do_not_cache() {
+function trigger_do_not_cache(): void {
 	nocache_headers();
 	if ( ! defined( 'DONOTCACHEPAGE' ) ) {
 		define( 'DONOTCACHEPAGE', true );
@@ -27,10 +27,8 @@ add_action( 'do_not_cache', 'trigger_do_not_cache' );
 
 /**
  * Set nocache headers when circumstances indicate
- *
- * @return void
  */
-function do_not_cache_set_headers() {
+function do_not_cache_set_headers(): void {
 	if ( defined( 'DOING_CRON' ) && DOING_CRON ) {
 		trigger_do_not_cache();
 	}
