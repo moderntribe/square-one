@@ -137,6 +137,23 @@ export const getNodes = ( selector = '', convert = false, node = document, custo
 };
 
 /**
+ * @function getFocusable
+ * @description Get focusable elements inside a container and return as an array.
+ *
+ * @param {HTMLElement} container the parent to search for focusable elements inside of
+ * @return {*[]}
+ */
+
+export const getFocusable = ( container = document ) => {
+	const focusable = convertElements(
+		container.querySelectorAll(
+			'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+		)
+	);
+	return focusable.filter( ( item ) => visible( item ) );
+};
+
+/**
  * Gets the closest ancestor that matches a selector string
  *
  * @param el
@@ -200,4 +217,20 @@ export const insertAfter = ( newNode, referenceNode ) => {
 
 export const insertBefore = ( newNode, referenceNode ) => {
 	referenceNode.parentNode.insertBefore( newNode, referenceNode );
+};
+
+/**
+ * @function visible
+ * @description Determine if an element is visible in the dom.
+ *
+ * @param {HTMLElement} elem The element to check
+ * @return {boolean}
+ */
+
+export const visible = ( elem ) => {
+	return !! (
+		elem.offsetWidth ||
+		elem.offsetHeight ||
+		elem.getClientRects().length
+	);
 };
