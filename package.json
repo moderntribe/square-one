@@ -102,7 +102,7 @@
     "voca": "^1.4.0",
     "whatwg-fetch": "^3.0.0",
     "workbox-cacheable-response": "^5.0.0",
-    "workbox-core": "^5.0.0",
+    "workbox-core": "^6.1.5",
     "workbox-expiration": "^5.0.0",
     "workbox-routing": "^5.0.0",
     "workbox-strategies": "^5.0.0",
