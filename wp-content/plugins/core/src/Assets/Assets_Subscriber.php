@@ -12,7 +12,7 @@ class Assets_Subscriber extends Abstract_Subscriber {
 		if ( ! empty( $theme ) ) {
 			$checks = [
 				$theme->get_stylesheet(),
-				$theme->parent(),
+				$theme->parent() ? $theme->parent()->get_stylesheet() : null,
 			];
 
 			$checks = array_filter( $checks );
