@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Blocks\Types\Logos;
 
@@ -8,6 +7,7 @@ use Tribe\Project\Templates\Components\blocks\logos\Logos_Block_Controller;
 use Tribe\Project\Templates\Components\link\Link_Controller;
 
 class Logos_Model extends Base_Model {
+
 	/**
 	 * @return array
 	 */
@@ -34,9 +34,10 @@ class Logos_Model extends Base_Model {
 		] );
 
 		return [
-			Link_Controller::CONTENT => $cta[ 'title' ],
-			Link_Controller::URL     => $cta[ 'url' ],
-			Link_Controller::TARGET  => $cta[ 'target' ],
+			Link_Controller::CONTENT => $cta['title'],
+			Link_Controller::URL     => $cta['url'],
+			Link_Controller::TARGET  => $cta['target'],
 		];
 	}
+
 }

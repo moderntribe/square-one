@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 use Tribe\Project\Templates\Components\blocks\hero\Hero_Block_Controller;
 

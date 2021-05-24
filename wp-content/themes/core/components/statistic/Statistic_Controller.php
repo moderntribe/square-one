@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\statistic;
 
@@ -10,15 +10,16 @@ use Tribe\Project\Templates\Components\Deferred_Component;
  * Class Statistic_Controller
  */
 class Statistic_Controller extends Abstract_Controller {
+
 	public const TAG     = 'tag';
 	public const CLASSES = 'classes';
 	public const ATTRS   = 'attrs';
 	public const VALUE   = 'value';
 	public const LABEL   = 'label';
 
-	private string             $tag;
-	private array              $classes;
-	private array              $attrs;
+	private string $tag;
+	private array $classes;
+	private array $attrs;
 	private Deferred_Component $value;
 	private Deferred_Component $label;
 
@@ -26,7 +27,7 @@ class Statistic_Controller extends Abstract_Controller {
 		$args = $this->parse_args( $args );
 
 		$this->tag     = (string) $args[ self::TAG ];
-		$this->classes = (array) $args[  self::CLASSES ];
+		$this->classes = (array) $args[ self::CLASSES ];
 		$this->attrs   = (array) $args[ self::ATTRS ];
 		$this->value   = $args[ self::VALUE ];
 		$this->label   = $args[ self::LABEL ];
@@ -96,4 +97,5 @@ class Statistic_Controller extends Abstract_Controller {
 
 		return $this->label;
 	}
+
 }

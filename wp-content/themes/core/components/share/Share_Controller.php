@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\share;
 
@@ -11,6 +11,7 @@ use Tribe\Project\Theme\Config\Image_Sizes;
  * Class Search
  */
 class Share_Controller extends Abstract_Controller {
+
 	public const NETWORKS  = 'networks';
 	public const LABELED   = 'labeled';
 	public const EMAIL     = 'email';
@@ -20,7 +21,7 @@ class Share_Controller extends Abstract_Controller {
 	public const FACEBOOK  = 'facebook';
 	public const LINKEDIN  = 'linkedin';
 
-	private bool  $labeled;
+	private bool $labeled;
 	private array $networks;
 
 	public function __construct( array $args = [] ) {
@@ -79,48 +80,38 @@ class Share_Controller extends Abstract_Controller {
 		$data = [];
 
 		if ( is_singular() || in_the_loop() ) {
-
 			global $post;
 
-			$data[ 'link' ]  = $this->normalize_url( get_permalink( $post->ID ) );
-			$data[ 'title' ] = wp_strip_all_tags( esc_attr( get_the_title( $post ) ) );
-			$data[ 'body' ]  = esc_attr( $post->post_excerpt );
+			$data['link']  = $this->normalize_url( get_permalink( $post->ID ) );
+			$data['title'] = wp_strip_all_tags( esc_attr( get_the_title( $post ) ) );
+			$data['body']  = esc_attr( $post->post_excerpt );
 
 			// only hunt for a featured image if pinterest active, and if we are on single.
 			// No pinterest for loops, because thats silly.
 			if ( in_array( self::PINTEREST, $this->networks, true ) && has_post_thumbnail( $post->ID ) ) {
-
-				$image               = wp_get_attachment_image_src(
+				$image             = wp_get_attachment_image_src(
 					get_post_thumbnail_id( $post->ID ),
 					Image_Sizes::CORE_FULL
 				);
-				$data[ 'image_src' ] = $image[ 0 ];
-
+				$data['image_src'] = $image[0];
 			}
-
 		} elseif ( is_tax() || is_category() || is_tag() ) {
-
 			$obj = get_queried_object();
 
-			$data[ 'link' ]  = $this->normalize_url( get_term_link( $obj, $obj->taxonomy ) );
-			$data[ 'title' ] = wp_strip_all_tags( esc_attr( $obj->name ) );
-			$data[ 'body' ]  = esc_attr( $obj->description );
-
+			$data['link']  = $this->normalize_url( get_term_link( $obj, $obj->taxonomy ) );
+			$data['title'] = wp_strip_all_tags( esc_attr( $obj->name ) );
+			$data['body']  = esc_attr( $obj->description );
 		} elseif ( is_post_type_archive() ) {
-
 			$obj = get_queried_object();
 
-			$data[ 'link' ]  = $this->normalize_url( get_post_type_archive_link( $obj->name ) );
-			$data[ 'title' ] = wp_strip_all_tags( esc_attr( $obj->label ) );
-			$data[ 'body' ]  = esc_attr( $obj->description );
-
+			$data['link']  = $this->normalize_url( get_post_type_archive_link( $obj->name ) );
+			$data['title'] = wp_strip_all_tags( esc_attr( $obj->label ) );
+			$data['body']  = esc_attr( $obj->description );
 		} elseif ( is_search() ) {
-
 			$query = get_search_query();
 
-			$data[ 'link' ]  = $this->normalize_url( get_search_link( $query ) );
-			$data[ 'title' ] = sprintf( __( 'Search Results: %s', 'tribe' ), esc_attr( $query ) );
-
+			$data['link']  = $this->normalize_url( get_search_link( $query ) );
+			$data['title'] = sprintf( __( 'Search Results: %s', 'tribe' ), esc_attr( $query ) );
 		}
 
 		return $data;
@@ -138,13 +129,12 @@ class Share_Controller extends Abstract_Controller {
 	private function build_link( $network, $data ) {
 
 		switch ( $network ) {
-
 			case self::EMAIL:
 				$label = __( 'Share through Email', 'tribe' );
 				$link  = sprintf(
 					'mailto:?subject=%1$s&body=%2$s',
-					urlencode( $data[ 'title' ] ),
-					urlencode( esc_url_raw( $data[ 'link' ] ) )
+					urlencode( $data['title'] ),
+					urlencode( esc_url_raw( $data['link'] ) )
 				);
 				$icon  = 'icon-mail';
 
@@ -159,16 +149,16 @@ class Share_Controller extends Abstract_Controller {
 				return $this->build_link_args( $link, $label, $icon, $attributes );
 
 			case self::PINTEREST:
-				if ( empty( $data[ 'image_src' ] ) ) {
+				if ( empty( $data['image_src'] ) ) {
 					return [];
 				}
 
 				$label      = __( 'Share on Pinterest', 'tribe' );
 				$link       = sprintf(
 					'http://pinterest.com/pin/create/button/?url=%1$s&amp;media=%2$s&amp;description=%3$s',
-					urlencode( esc_url_raw( $data[ 'link' ] ) ),
-					urlencode( esc_url_raw( $data[ 'image_src' ] ) ),
-					urlencode( $data[ 'title' ] )
+					urlencode( esc_url_raw( $data['link'] ) ),
+					urlencode( esc_url_raw( $data['image_src'] ) ),
+					urlencode( $data['title'] )
 				);
 				$icon       = 'icon-pinterest';
 				$attributes = [
@@ -181,15 +171,15 @@ class Share_Controller extends Abstract_Controller {
 
 			case self::TWITTER:
 				$character_limit = 280;
-				$text            = substr( $data[ 'title' ], 0, $character_limit - strlen( $data[ 'link' ] ) - 4 );
-				if ( $text !== $data[ 'title' ] ) {
+				$text            = substr( $data['title'], 0, $character_limit - strlen( $data['link'] ) - 4 );
+				if ( $text !== $data['title'] ) {
 					$text .= "...";
 				}
 
 				$label      = __( 'Share on Twitter', 'tribe' );
 				$link       = sprintf(
 					'https://twitter.com/share?url=%1$s&text=%2$s',
-					urlencode( esc_url_raw( $data[ 'link' ] ) ),
+					urlencode( esc_url_raw( $data['link'] ) ),
 					urlencode( $text )
 				);
 				$icon       = 'icon-twitter';
@@ -205,8 +195,8 @@ class Share_Controller extends Abstract_Controller {
 				$label      = __( 'Share on Facebook', 'tribe' );
 				$link       = sprintf(
 					'http://www.facebook.com/sharer.php?u=%1$s&t=%2$s',
-					urlencode( esc_url_raw( $data[ 'link' ] ) ),
-					urlencode( $data[ 'title' ] )
+					urlencode( esc_url_raw( $data['link'] ) ),
+					urlencode( $data['title'] )
 				);
 				$icon       = 'icon-facebook';
 				$attributes = [
@@ -221,8 +211,8 @@ class Share_Controller extends Abstract_Controller {
 				$label      = __( 'Share on LinkedIn', 'tribe' );
 				$link       = sprintf(
 					'http://www.linkedin.com/shareArticle?mini=true&url=%1$s&title=%2$s',
-					urlencode( esc_url_raw( $data[ 'link' ] ) ),
-					urlencode( $data[ 'title' ] )
+					urlencode( esc_url_raw( $data['link'] ) ),
+					urlencode( $data['title'] )
 				);
 				$icon       = 'icon-linkedin';
 				$attributes = [
@@ -248,7 +238,7 @@ class Share_Controller extends Abstract_Controller {
 		if ( $icon ) {
 			$classes[] = $icon;
 		}
-		$attributes[ 'title' ] = $label;
+		$attributes['title'] = $label;
 
 		return [
 			Link_Controller::CLASSES => $classes,
@@ -292,4 +282,5 @@ class Share_Controller extends Abstract_Controller {
 
 		return $url;
 	}
+
 }

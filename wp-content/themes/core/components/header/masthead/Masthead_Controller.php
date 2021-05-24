@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\header\masthead;
 
@@ -14,4 +13,5 @@ class Masthead_Controller extends Abstract_Controller {
 			get_bloginfo( 'blogname' )
 		);
 	}
+
 }

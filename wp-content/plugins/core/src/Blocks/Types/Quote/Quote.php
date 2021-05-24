@@ -1,30 +1,30 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Blocks\Types\Quote;
 
-use Tribe\Libs\ACF\Field;
 use Tribe\Libs\ACF\Block;
 use Tribe\Libs\ACF\Block_Config;
+use Tribe\Libs\ACF\Field;
 use Tribe\Libs\ACF\Field_Section;
 use Tribe\Project\Theme\Config\Image_Sizes;
 
 class Quote extends Block_Config {
+
 	public const NAME = 'quote';
 
 	public const SECTION_CONTENT = 's-content';
-	public const IMAGE = 'image';
+	public const IMAGE           = 'image';
 
 	public const QUOTE      = 'text';
 	public const CITE_NAME  = 'cite_name';
 	public const CITE_TITLE = 'cite_title';
 	public const CITE_IMAGE = 'cite_image';
 
-	public const SECTION_SETTINGS  = 's-settings';
-	public const LAYOUT        = 'layout';
-	public const MEDIA_LEFT    = 'left';
-	public const MEDIA_RIGHT   = 'right';
-	public const MEDIA_OVERLAY = 'overlay';
+	public const SECTION_SETTINGS = 's-settings';
+	public const LAYOUT           = 'layout';
+	public const MEDIA_LEFT       = 'left';
+	public const MEDIA_RIGHT      = 'right';
+	public const MEDIA_OVERLAY    = 'overlay';
 
 	/**
 	 * Register the block

@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Blocks\Types\Content_Columns;
 
@@ -9,6 +8,7 @@ use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Templates\Models\Content_Column;
 
 class Content_Columns_Model extends Base_Model {
+
 	/**
 	 * @return array
 	 */
@@ -36,14 +36,14 @@ class Content_Columns_Model extends Base_Model {
 		] );
 
 		return [
-			Link_Controller::CONTENT => esc_html( $cta[ 'title' ] ),
-			Link_Controller::URL     => esc_url( $cta[ 'url' ] ),
-			Link_Controller::TARGET  => esc_attr( $cta[ 'target' ] ),
+			Link_Controller::CONTENT => esc_html( $cta['title'] ),
+			Link_Controller::URL     => esc_url( $cta['url'] ),
+			Link_Controller::TARGET  => esc_attr( $cta['target'] ),
 		];
 	}
 
 	/**
-	 * @return Content_Column[]
+	 * @return \Tribe\Project\Templates\Models\Content_Column[]
 	 */
 	public function get_rows(): array {
 		$rows = $this->get( Content_Columns::COLUMNS, [] );
@@ -58,4 +58,5 @@ class Content_Columns_Model extends Base_Model {
 
 		return $data;
 	}
+
 }

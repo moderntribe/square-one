@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Blocks\Types\Interstitial;
 
@@ -9,6 +8,7 @@ use Tribe\Libs\ACF\Field;
 use Tribe\Libs\ACF\Field_Section;
 
 class Interstitial extends Block_Config {
+
 	public const NAME = 'interstitial';
 
 	public const SECTION_CONTENT = 's-content';

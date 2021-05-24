@@ -1,0 +1,33 @@
+# Lefthook git hooks
+# Refer for explanation to following link:
+# https://github.com/evilmartians/lefthook/blob/master/docs/full_guide.md
+
+# only show errors
+skip_output:
+  - meta
+  - success
+  - summary
+
+# alias for the phpcs command
+x-phpcs: &phpcs
+  run: ./vendor/bin/phpcs -s --standard=./phpcs.xml.dist {staged_files}
+
+# phpcs
+pre-commit:
+  parallel: true
+  commands:
+    phpcs-core-plugin:
+      glob: "wp-content/plugins/core/*.php"
+      <<: *phpcs
+    phpcs-core-theme:
+      glob: "wp-content/themes/core/*.php"
+      <<: *phpcs
+    phpcs-mu:
+      glob: "wp-content/mu-plugins/*.php"
+      <<: *phpcs
+
+# prefix with jira ticket
+prepare-commit-msg:
+  scripts:
+    "prefix_with_jira_ticket":
+      runner: bash

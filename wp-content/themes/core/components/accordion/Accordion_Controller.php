@@ -1,10 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\accordion;
 
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
-use Tribe\Project\Templates\Models\Accordion_Row;
 
 /**
  * Class Accordion
@@ -36,23 +35,23 @@ class Accordion_Controller extends Abstract_Controller {
 	public const ROW_IDS                       = 'row_ids';
 
 	/**
-	 * @var Accordion_Row[]
+	 * @var \Tribe\Project\Templates\Models\Accordion_Row[]
 	 */
-	private array  $rows;
-	private array  $container_classes;
-	private array  $container_attrs;
-	private array  $row_classes;
+	private array $rows;
+	private array $container_classes;
+	private array $container_attrs;
+	private array $row_classes;
 	private string $row_header_tag;
-	private array  $row_header_classes;
-	private array  $row_header_attrs;
-	private array  $row_header_container_classes;
-	private array  $row_content_classes;
-	private array  $row_content_attrs;
-	private array  $row_content_container_classes;
-	private array  $row_content_container_attrs;
+	private array $row_header_classes;
+	private array $row_header_attrs;
+	private array $row_header_container_classes;
+	private array $row_content_classes;
+	private array $row_content_attrs;
+	private array $row_content_container_classes;
+	private array $row_content_container_attrs;
 	private string $row_header_name;
 	private string $row_content_name;
-	private array  $row_ids;
+	private array $row_ids;
 
 	public function __construct( array $args = [] ) {
 		$args                                = $this->parse_args( $args );
@@ -129,14 +128,14 @@ class Accordion_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @param Accordion_Row $row
+	 * @param \Tribe\Project\Templates\Models\Accordion_Row $row
 	 *
 	 * @return string
 	 */
 	public function get_row_content_attrs( $row_key ): string {
 		return Markup_Utils::concat_attrs( array_merge( [
-			'id'              => esc_attr( $this->row_ids[ $row_key ][ 'content_id' ] ?? '' ),
-			'aria-labelledby' => esc_attr( $this->row_ids[ $row_key ][ 'header_id' ] ?? '' ),
+			'id'              => esc_attr( $this->row_ids[ $row_key ]['content_id'] ?? '' ),
+			'aria-labelledby' => esc_attr( $this->row_ids[ $row_key ]['header_id'] ?? '' ),
 		], $this->row_content_attrs ) );
 	}
 
@@ -198,8 +197,8 @@ class Accordion_Controller extends Abstract_Controller {
 	 */
 	public function get_row_header_attrs( $row_key ): string {
 		return Markup_Utils::concat_attrs( array_merge( [
-			'aria-controls' => esc_attr( $this->row_ids[ $row_key ][ 'content_id' ] ?? '' ),
-			'id'            => esc_attr( $this->row_ids[ $row_key ][ 'header_id' ] ?? '' ),
+			'aria-controls' => esc_attr( $this->row_ids[ $row_key ]['content_id'] ?? '' ),
+			'id'            => esc_attr( $this->row_ids[ $row_key ]['header_id'] ?? '' ),
 		], $this->row_header_attrs ) );
 	}
 
@@ -230,4 +229,5 @@ class Accordion_Controller extends Abstract_Controller {
 	public function get_row_header_tag() {
 		return $this->row_header_tag;
 	}
+
 }

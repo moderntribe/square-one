@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Admin\Editor;
 
@@ -32,6 +32,7 @@ class Classic_Editor_Formats {
 	 * @filter mce_buttons
 	 *
 	 * @param array $buttons
+	 *
 	 * @return array
 	 */
 	public function mce_buttons( $buttons ) {
@@ -44,7 +45,7 @@ class Classic_Editor_Formats {
 		// Remove WP More
 		$key = array_search( 'wp_more', $buttons );
 		if ( false !== $key ) {
-			unset( $buttons[$key] );
+			unset( $buttons[ $key ] );
 		}
 
 		return $buttons;
@@ -65,7 +66,7 @@ class Classic_Editor_Formats {
 	 * @return array $settings
 	 */
 	public function visual_editor_styles_dropdown( $settings ): array {
-		$style_formats = [
+		$style_formats             = [
 			/* Example single-level format
 			[
 				'title'    => __( 'Button', 'tribe' ),
@@ -108,4 +109,5 @@ class Classic_Editor_Formats {
 
 		return $settings;
 	}
+
 }

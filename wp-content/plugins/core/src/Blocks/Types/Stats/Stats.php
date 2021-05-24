@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Blocks\Types\Stats;
 
@@ -10,22 +9,23 @@ use Tribe\Libs\ACF\Field_Section;
 use Tribe\Libs\ACF\Repeater;
 
 class Stats extends Block_Config {
+
 	public const NAME = 'stats';
 
 	public const SECTION_CONTENT = 's-content';
-	public const LEAD_IN     = 'leadin';
-	public const TITLE       = 'title';
-	public const DESCRIPTION = 'description';
-	public const CTA         = 'cta';
+	public const LEAD_IN         = 'leadin';
+	public const TITLE           = 'title';
+	public const DESCRIPTION     = 'description';
+	public const CTA             = 'cta';
 
 	public const STATS     = 'stats';
 	public const ROW_VALUE = 'row_value';
 	public const ROW_LABEL = 'row_label';
 
-	public const SECTION_SETTINGS  = 's-settings';
-	public const LAYOUT         = 'layout';
-	public const LAYOUT_INLINE  = 'inline';
-	public const LAYOUT_STACKED = 'stacked';
+	public const SECTION_SETTINGS = 's-settings';
+	public const LAYOUT           = 'layout';
+	public const LAYOUT_INLINE    = 'inline';
+	public const LAYOUT_STACKED   = 'stacked';
 
 	public const CONTENT_ALIGN        = 'content';
 	public const CONTENT_ALIGN_LEFT   = 'left';
@@ -165,7 +165,7 @@ class Stats extends Block_Config {
 	}
 
 	/**
-	 * @return Repeater
+	 * @return \Tribe\Libs\ACF\Repeater
 	 */
 	protected function get_stats_section() {
 		$group = new Repeater( self::NAME . '_' . self::STATS );
