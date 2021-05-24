@@ -5,6 +5,7 @@ namespace Tribe\Project\Templates\Components\loop_items\search;
 
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\image\Image_Controller;
+use Tribe\Project\Theme\Config\Image_Sizes;
 
 class Search_Controller extends Abstract_Controller {
 
@@ -14,7 +15,13 @@ class Search_Controller extends Abstract_Controller {
 		}
 
 		return [
-			Image_Controller::IMG_ID => (int) get_post_thumbnail_id(),
+			Image_Controller::IMG_ID       => (int) get_post_thumbnail_id(),
+			Image_Controller::SRC_SIZE     => Image_Sizes::THREE_TWO,
+			Image_Controller::SRCSET_SIZES => [
+				Image_Sizes::THREE_TWO_XSMALL,
+				Image_Sizes::THREE_TWO_SMALL,
+				Image_Sizes::THREE_TWO,
+			],
 		];
 	}
 

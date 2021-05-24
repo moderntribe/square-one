@@ -17,6 +17,11 @@ class Image_Sizes {
 	public const FOUR_THREE_LARGE       = 'four-three-large';
 	public const SOCIAL_SHARE_OPENGRAPH = 'social-share-opengraph';
 	public const SOCIAL_SHARE_TWITTER   = 'social-share-twitter';
+	public const THREE_TWO_XSMALL       = 'three-two-xsmall';
+	public const THREE_TWO_SMALL        = 'three-two-small';
+	public const THREE_TWO              = 'three-two';
+	public const THREE_TWO_LARGE        = 'three-two-large';
+	public const THREE_TWO_XLARGE       = 'three-two-xlarge';
 
 	private $sizes = [
 		self::SQUARE_XSMALL          => [
@@ -77,6 +82,31 @@ class Image_Sizes {
 		self::FOUR_THREE_LARGE       => [
 			'width'  => 1536,
 			'height' => 1152,
+			'crop'   => true,
+		],
+		self::THREE_TWO_XSMALL       => [
+			'width'  => 150,
+			'height' => 100,
+			'crop'   => true,
+		],
+		self::THREE_TWO_SMALL        => [
+			'width'  => 300,
+			'height' => 200,
+			'crop'   => true,
+		],
+		self::THREE_TWO              => [
+			'width'  => 768,
+			'height' => 512,
+			'crop'   => true,
+		],
+		self::THREE_TWO_LARGE        => [
+			'width'  => 1024,
+			'height' => 682,
+			'crop'   => true,
+		],
+		self::THREE_TWO_XLARGE       => [
+			'width'  => 1280,
+			'height' => 853,
 			'crop'   => true,
 		],
 		self::SOCIAL_SHARE_OPENGRAPH => [

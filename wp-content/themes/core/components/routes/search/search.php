@@ -9,8 +9,8 @@ $c->render_header();
 ?>
 	<main id="main-content">
 
-		<div class="search-results__container">
-			<div class="l-container">
+		<div class="l-container">
+			<div class="search-results__container">
 				<h1 class="h2 search-results__title"><?php _e( 'Search', 'tribe' ); ?></h1>
 
 				<?php get_template_part( 'components/search_form/search_form', null, $c->get_search_form_args() ); ?>
