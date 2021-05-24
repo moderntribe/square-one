@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## 2021.05
+* Fixed: broken main README.md links
 * Removed: husky hooks.
 * Added: lefthook git-hooks (see lefthook.yml and .lefthook folder) to replace husky hooks: https://github.com/evilmartians/lefthook
 * Added: run phpcs checks on commit via lefthook. 
