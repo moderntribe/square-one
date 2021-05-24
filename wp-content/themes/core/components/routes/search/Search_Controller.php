@@ -6,6 +6,8 @@ namespace Tribe\Project\Templates\Components\routes\search;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\sidebar\Sidebar_Controller;
 use Tribe\Project\Templates\Components\breadcrumbs\Breadcrumbs_Controller;
+use \Tribe\Project\Templates\Components\search_form\Search_Form_Controller;
+use Tribe\Project\Templates\Components\text\Text_Controller;
 use Tribe\Project\Templates\Models\Breadcrumb;
 
 class Search_Controller extends Abstract_Controller {
@@ -69,14 +71,47 @@ class Search_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return Breadcrumb[]
+	 * @return array
 	 */
-	protected function get_breadcrumbs(): array {
-		$page = get_option( 'page_for_posts' );
-		$url  = $page ? get_permalink( $page ) : home_url();
+	public function get_search_form_args(): array {
+		$args = [
+			Search_Form_Controller::CLASSES => [ 'c-search--full', 'search-results__form' ],
+			Search_Form_Controller::FORM_ID => uniqid( 's-' ),
+			Search_Form_Controller::VALUE   => get_search_query(),
+		];
+
+		return $args;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function get_results_text_args() {
+		global $wp_query;
+		$total      = absint( $wp_query->found_posts );
+		$query_term = get_search_query();
+
+		if ( empty( $query_term ) ) {
+			return [];
+		}
+
+		if ( 0 === $total ) {
+			$text = sprintf(
+				__( 'Your search for &lsquo;%s&rsquo; returned 0 results', 'tribe' ),
+				$query_term
+			);
+		} else {
+			$text = sprintf(
+				_n( 'Showing %d result for &lsquo;%s&rsquo;', 'Showing %d results for &lsquo;%s&rsquo;', $total, 'tribe' ),
+				$total,
+				$query_term
+			);
+		}
 
 		return [
-			new Breadcrumb( $url, __( 'News', 'tribe' ) ),
+			Text_Controller::TAG     => 'p',
+			Text_Controller::CLASSES => [ 'search-results__summary' ],
+			Text_Controller::CONTENT => esc_html( $text ),
 		];
 	}
 }
