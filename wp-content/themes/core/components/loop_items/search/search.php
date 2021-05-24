@@ -8,22 +8,28 @@ $c = Search_Controller::factory();
 
 <article class="search-result search-result--<?php echo esc_attr( get_post_type() ); ?>">
 
-	<h3 class="search-result__title"><?php echo esc_html( get_the_title() ); ?></h3>
+	<div class="search-result__body">
+		<h2 class="search-result__title"><?php echo esc_html( get_the_title() ); ?></h2>
 
-	<div class="search-result__cta">
-		<a href="<?php the_permalink(); ?>" rel="bookmark">
-			<?php the_permalink(); ?>
-		</a>
+		<div class="search-result__excerpt">
+			<?php the_excerpt(); ?>
+		</div>
+
+		<div class="search-result__cta">
+			<a href="<?php the_permalink(); ?>" rel="bookmark">
+				<?php the_permalink(); ?>
+			</a>
+		</div>
 	</div>
 
-	<?php if ( ! empty( $c->get_image_args() ) ) {
-		get_template_part(
-			'components/image/image',
-			null,
-			$c->get_image_args()
-		);
-	} ?>
-
-	<?php the_excerpt(); ?>
+	<div class="search-result__image">
+		<?php if ( ! empty( $c->get_image_args() ) ) {
+			get_template_part(
+				'components/image/image',
+				null,
+				$c->get_image_args()
+			);
+		} ?>
+	</div>
 
 </article>
