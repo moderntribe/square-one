@@ -16,6 +16,7 @@ use Tribe\Project\Nav_Menus\Nav_Menus_Subscriber;
 use Tribe\Project\Object_Meta\Object_Meta_Definer;
 use Tribe\Project\P2P\P2P_Definer;
 use Tribe\Project\Post_Types;
+use Tribe\Project\Query\Query_Subscriber;
 use Tribe\Project\Settings\Settings_Definer;
 use Tribe\Project\Shortcodes\Shortcodes_Subscriber;
 use Tribe\Project\Taxonomies;
@@ -61,6 +62,7 @@ class Core {
 		Google_Tag_Manager_Subscriber::class,
 		Gravity_Forms_Subscriber::class,
 		Nav_Menus_Subscriber::class,
+		Query_Subscriber::class,
 		Routes_Subscriber::class,
 		Shortcodes_Subscriber::class,
 		Theme_Subscriber::class,
