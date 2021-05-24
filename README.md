@@ -8,9 +8,9 @@ SquareOne is a development framework lovingly maintained by Modern Tribe used fo
 
 * [Getting Started](/docs/README.md)
     * [Docker](/dev/docker/README.md)
-    * [Build](/docs/getting-started/build.md)
+    * [Build](/docs/getting-started/03%20build.md)
     * [Tests and Code Quality](/docs/tests/README.md)
-    * [Deployment](/docs/getting-started/deployment.md)
+    * [Deployment](/docs/getting-started/06%20deployment.md)
 
 ## Changelog
 
