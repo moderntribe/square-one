@@ -105,7 +105,7 @@
     "workbox-core": "^5.0.0",
     "workbox-expiration": "^5.0.0",
     "workbox-routing": "^5.0.0",
-    "workbox-strategies": "^5.0.0",
+    "workbox-strategies": "^6.1.5",
     "workbox-window": "^5.0.0"
   },
   "devDependencies": {
