@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Assets\Admin;
 
@@ -16,4 +16,5 @@ class JS_Config {
 
 		return $this->data;
 	}
+
 }

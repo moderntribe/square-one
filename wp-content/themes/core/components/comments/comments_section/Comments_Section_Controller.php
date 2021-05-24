@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\comments\comments_section;
 
@@ -92,4 +91,5 @@ class Comments_Section_Controller extends Abstract_Controller {
 			Comment_Controller::MAX_DEPTH  => $args['max_depth'],
 		] );
 	}
+
 }

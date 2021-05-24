@@ -5,6 +5,7 @@ namespace Tribe\Project\Object_Meta;
 use Tribe\Libs\ACF;
 
 class Taxonomy_Archive_Settings extends ACF\ACF_Meta_Group {
+
 	public const NAME = 'taxonomy_archive_settings';
 
 	public const HERO_IMAGE = 'hero_image';
@@ -26,7 +27,7 @@ class Taxonomy_Archive_Settings extends ACF\ACF_Meta_Group {
 
 	private function get_hero_field(): ACF\Field {
 		$field = new ACF\Field( self::NAME . '_' . self::HERO_IMAGE, [
-			'label'        => __( 'Hero Image', 'tribe'),
+			'label'        => __( 'Hero Image', 'tribe' ),
 			'name'         => self::HERO_IMAGE,
 			'type'         => 'image',
 			'instructions' => __( 'The hero image for this taxonomy\'s archive', 'tribe' ),
@@ -34,4 +35,5 @@ class Taxonomy_Archive_Settings extends ACF\ACF_Meta_Group {
 
 		return $field;
 	}
+
 }

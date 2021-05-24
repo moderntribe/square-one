@@ -1,19 +1,16 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\blocks\icon_grid;
 
 use Tribe\Libs\Utils\Markup_Utils;
-use Tribe\Project\Blocks\Types\Icon_Grid\Icon_Grid;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\card\Card_Controller;
-use Tribe\Project\Templates\Components\content_block\Content_Block_Controller;
 use Tribe\Project\Templates\Components\container\Container_Controller;
+use Tribe\Project\Templates\Components\content_block\Content_Block_Controller;
 use Tribe\Project\Templates\Components\Deferred_Component;
+use Tribe\Project\Templates\Components\image\Image_Controller;
 use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Templates\Components\text\Text_Controller;
-use Tribe\Project\Templates\Components\image\Image_Controller;
-use Tribe\Project\Theme\Config\Image_Sizes;
 
 class Icon_Grid_Controller extends Abstract_Controller {
 
@@ -27,15 +24,15 @@ class Icon_Grid_Controller extends Abstract_Controller {
 	public const CTA               = 'cta';
 	public const ICONS             = 'icons';
 
-	private array  $classes;
-	private array  $attrs;
-	private array  $container_classes;
-	private array  $content_classes;
+	private array $classes;
+	private array $attrs;
+	private array $container_classes;
+	private array $content_classes;
 	private string $title;
 	private string $leadin;
 	private string $description;
-	private array  $cta;
-	private array  $icons;
+	private array $cta;
+	private array $icons;
 
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
@@ -127,7 +124,7 @@ class Icon_Grid_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	private function get_leadin(): Deferred_Component {
 		return defer_template_part( 'components/text/text', null, [
@@ -141,7 +138,7 @@ class Icon_Grid_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	private function get_title(): Deferred_Component {
 		return defer_template_part( 'components/text/text', null, [
@@ -155,7 +152,7 @@ class Icon_Grid_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	private function get_content(): Deferred_Component {
 		return defer_template_part( 'components/container/container', null, [
@@ -170,7 +167,7 @@ class Icon_Grid_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	public function get_cta(): Deferred_Component {
 		$cta = wp_parse_args( $this->cta, [
@@ -187,7 +184,7 @@ class Icon_Grid_Controller extends Abstract_Controller {
 				'c-block__cta-link',
 				'a-btn',
 				'a-btn--has-icon-after',
-				'icon-arrow-right'
+				'icon-arrow-right',
 			],
 		] );
 	}
@@ -250,4 +247,5 @@ class Icon_Grid_Controller extends Abstract_Controller {
 
 		return $cards;
 	}
+
 }

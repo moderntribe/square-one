@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\pagination\comments;
 
@@ -7,15 +6,16 @@ use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 
 class Comments_Pagination_Controller extends Abstract_Controller {
+
 	public const CLASSES = 'classes';
 	public const ATTRS   = 'attrs';
 	public const PAGED   = 'paged';
 
 	private array $classes;
 	private array $attrs;
-	private bool  $paged;
-	private int   $comment_page;
-	private int   $max_pages;
+	private bool $paged;
+	private int $comment_page;
+	private int $max_pages;
 
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
@@ -95,4 +95,5 @@ class Comments_Pagination_Controller extends Abstract_Controller {
 			] ),
 		] );
 	}
+
 }

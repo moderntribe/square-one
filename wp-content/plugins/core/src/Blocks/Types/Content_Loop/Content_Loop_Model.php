@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Blocks\Types\Content_Loop;
 
@@ -14,6 +13,7 @@ use Tribe\Project\Templates\Components\link\Link_Controller;
  * for the component
  */
 class Content_Loop_Model extends Base_Model {
+
 	public function get_data(): array {
 		return [
 			Content_Loop_Controller::ATTRS       => $this->get_attrs(),

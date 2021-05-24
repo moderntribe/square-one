@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Admin\Editor;
 
@@ -8,7 +8,7 @@ use Tribe\Project\Assets\Build_Parser;
 class Editor_Styles {
 
 	/**
-	 * @var Admin_Build_Parser
+	 * @var \Tribe\Project\Assets\Admin\Admin_Build_Parser
 	 */
 	private $admin_build_parser;
 
@@ -22,9 +22,10 @@ class Editor_Styles {
 	 * @param array $editor_settings
 	 *
 	 * @return array
-	 * @filter block_editor_settings
-	 * @see    edit-form-blocks.php
 	 *
+	 * @filter block_editor_settings
+	 *
+	 * @see    edit-form-blocks.php
 	 */
 	public function remove_core_block_editor_styles( array $editor_settings ): array {
 		$editor_settings['styles'] = array_slice( $editor_settings['styles'], 1 );
@@ -53,6 +54,7 @@ class Editor_Styles {
 	 * @param array $settings
 	 *
 	 * @return array
+	 *
 	 * @filter tiny_mce_before_init
 	 */
 	public function mce_editor_body_class( $settings ): array {
@@ -68,6 +70,7 @@ class Editor_Styles {
 	 * this will only be enqueued in the MCE editor iframe.
 	 *
 	 * @return void
+	 *
 	 * @filter admin_init
 	 */
 	public function enqueue_mce_editor_styles(): void {
@@ -86,7 +89,7 @@ class Editor_Styles {
 	 *
 	 * @param string       $handle
 	 *
-	 * @param Build_Parser $build_parser
+	 * @param \Tribe\Project\Assets\Build_Parser $build_parser
 	 *
 	 * @return string
 	 */
@@ -98,4 +101,5 @@ class Editor_Styles {
 
 		return $styles[ $handle ]['file'];
 	}
+
 }

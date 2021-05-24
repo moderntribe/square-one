@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Theme\Media;
 
@@ -10,6 +10,7 @@ class Image_Wrap {
 	 * @param $html
 	 *
 	 * @return mixed
+	 *
 	 * @filter the_content
 	 */
 	public function customize_wp_image_non_captioned_output( $html ) {
@@ -18,7 +19,7 @@ class Image_Wrap {
 			return $html;
 		}
 
-		return preg_replace_callback( '/<p>((?:.(?!p>))*?)(<a[^>]*>)?\s*(<img[^>]+>)(<\/a>)?(.*?)<\/p>/i', function ( $matches ) {
+		return preg_replace_callback( '/<p>((?:.(?!p>))*?)(<a[^>]*>)?\s*(<img[^>]+>)(<\/a>)?(.*?)<\/p>/i', static function ( $matches ) {
 
 			/*
 			Groups 	Regex 			 Description
@@ -62,6 +63,7 @@ class Image_Wrap {
 	 * @param $html
 	 *
 	 * @return mixed
+	 *
 	 * @filter the_content
 	 */
 	public function customize_wp_image_captioned_output( $html ) {
@@ -111,4 +113,5 @@ class Image_Wrap {
 
 		return preg_replace( $patterns, $replacements, $html );
 	}
+
 }

@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\card;
 
@@ -12,6 +11,7 @@ use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Templates\Components\text\Text_Controller;
 
 class Card_Controller extends Abstract_Controller {
+
 	public const TAG             = 'tag';
 	public const CLASSES         = 'classes';
 	public const ATTRS           = 'attrs';
@@ -25,52 +25,58 @@ class Card_Controller extends Abstract_Controller {
 	public const CTA             = 'cta';
 	public const USE_TARGET_LINK = 'use_target_link';
 
-	public const STYLE            = 'style';
-	public const STYLE_PLAIN      = 'plain';
-	public const STYLE_ELEVATED   = 'elevated';
-	public const STYLE_OUTLINED   = 'outlined';
-	public const STYLE_INLINE     = 'inline';
+	public const STYLE          = 'style';
+	public const STYLE_PLAIN    = 'plain';
+	public const STYLE_ELEVATED = 'elevated';
+	public const STYLE_OUTLINED = 'outlined';
+	public const STYLE_INLINE   = 'inline';
 
 	private string $tag;
-	private array  $classes;
-	private array  $attrs;
-	private array  $media_classes;
-	private array  $content_classes;
+	private array $classes;
+	private array $attrs;
+	private array $media_classes;
+	private array $content_classes;
 	private string $style;
-	private bool   $use_target_link;
+	private bool $use_target_link;
 
 	/**
-	 * @var null|Deferred_Component
+	 * @var null|\Tribe\Project\Templates\Components\Deferred_Component
+	 *
 	 * @uses components/image
 	 */
 	private ?Deferred_Component $image;
 
 	/**
-	 * @var null|Deferred_Component
+	 * @var null|\Tribe\Project\Templates\Components\Deferred_Component
+	 *
 	 * @uses components/container
 	 */
 	private ?Deferred_Component $meta_primary;
 
 	/**
-	 * @var null|Deferred_Component
+	 * @var null|\Tribe\Project\Templates\Components\Deferred_Component
+	 *
 	 * @uses components/container
 	 */
 	private ?Deferred_Component $meta_secondary;
 
 	/**
-	 * @var null|Deferred_Component
+	 * @var null|\Tribe\Project\Templates\Components\Deferred_Component
+	 *
 	 * @uses components/text
 	 */
 	private ?Deferred_Component $title;
 
 	/**
-	 * @var null|Deferred_Component
+	 * @var null|\Tribe\Project\Templates\Components\Deferred_Component
+	 *
 	 * @uses components/container
 	 */
 	private ?Deferred_Component $description;
 
 	/**
-	 * @var null|Deferred_Component
+	 * @var null|\Tribe\Project\Templates\Components\Deferred_Component
+	 *
 	 * @uses components/link
 	 */
 	private ?Deferred_Component $cta;
@@ -137,7 +143,7 @@ class Card_Controller extends Abstract_Controller {
 
 	public function get_attrs(): string {
 		if ( $this->use_target_link ) {
-			$this->attrs[ 'data-js' ] = 'use-target-link';
+			$this->attrs['data-js'] = 'use-target-link';
 		}
 
 		return Markup_Utils::concat_attrs( $this->attrs );
@@ -152,7 +158,7 @@ class Card_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return Deferred_Component|null
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component|null
 	 */
 	public function render_image(): ?Deferred_Component {
 		if ( empty( $this->image ) ) {
@@ -165,7 +171,7 @@ class Card_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return Deferred_Component|null
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component|null
 	 */
 	public function render_meta_primary(): ?Deferred_Component {
 		if ( empty( $this->meta_primary ) ) {
@@ -179,7 +185,7 @@ class Card_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return Deferred_Component|null
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component|null
 	 */
 	public function render_meta_secondary(): ?Deferred_Component {
 		if ( empty( $this->meta_secondary ) ) {
@@ -193,7 +199,7 @@ class Card_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return Deferred_Component|null
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component|null
 	 */
 	public function render_title(): ?Deferred_Component {
 		if ( empty( $this->title ) ) {
@@ -206,7 +212,7 @@ class Card_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return Deferred_Component|null
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component|null
 	 */
 	public function render_description(): ?Deferred_Component {
 		if ( empty( $this->description ) ) {
@@ -231,4 +237,5 @@ class Card_Controller extends Abstract_Controller {
 			Container_Controller::CONTENT => $this->cta->render(),
 		];
 	}
+
 }

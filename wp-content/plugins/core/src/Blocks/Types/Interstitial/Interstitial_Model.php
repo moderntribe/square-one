@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Blocks\Types\Interstitial;
 
@@ -8,6 +7,7 @@ use Tribe\Project\Templates\Components\blocks\interstitial\Interstitial_Block_Co
 use Tribe\Project\Templates\Components\link\Link_Controller;
 
 class Interstitial_Model extends Base_Model {
+
 	/**
 	 * @return array
 	 */
@@ -33,9 +33,10 @@ class Interstitial_Model extends Base_Model {
 		] );
 
 		return [
-			Link_Controller::CONTENT => $cta[ 'title' ],
-			Link_Controller::URL     => $cta[ 'url' ],
-			Link_Controller::TARGET  => $cta[ 'target' ],
+			Link_Controller::CONTENT => $cta['title'],
+			Link_Controller::URL     => $cta['url'],
+			Link_Controller::TARGET  => $cta['target'],
 		];
 	}
+
 }

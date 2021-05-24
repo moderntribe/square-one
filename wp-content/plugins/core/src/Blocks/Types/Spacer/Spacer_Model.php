@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Blocks\Types\Spacer;
 
@@ -7,6 +6,7 @@ use Tribe\Project\Blocks\Types\Base_Model;
 use Tribe\Project\Templates\Components\blocks\spacer\Spacer_Block_Controller;
 
 class Spacer_Model extends Base_Model {
+
 	/**
 	 * @return array
 	 */
@@ -18,4 +18,5 @@ class Spacer_Model extends Base_Model {
 			Spacer_Block_Controller::DISPLAY_OPTIONS => $this->get( Spacer::DISPLAY_OPTIONS, Spacer::ALL_SCREENS ),
 		];
 	}
+
 }
