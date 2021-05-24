@@ -6,7 +6,7 @@ use \Tribe\Project\Templates\Components\loop_items\search\Search_Controller;
 $c = Search_Controller::factory();
 ?>
 
-<article class="search-result search-result--<?php echo esc_attr( get_post_type() ); ?>">
+<article class="search-result search-result--<?php echo esc_attr( get_post_type() ); ?>" data-js="use-target-link">
 
 	<div class="search-result__body">
 		<h2 class="search-result__title"><?php echo esc_html( get_the_title() ); ?></h2>
@@ -16,7 +16,7 @@ $c = Search_Controller::factory();
 		</div>
 
 		<div class="search-result__cta">
-			<a href="<?php the_permalink(); ?>" rel="bookmark">
+			<a href="<?php the_permalink(); ?>" rel="bookmark" data-js="target-link">
 				<?php the_permalink(); ?>
 			</a>
 		</div>

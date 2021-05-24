@@ -48,6 +48,7 @@
 	padding-top: var(--spacer-30);
 	padding-bottom: var(--spacer-30);
 	border-top: 1px solid var(--color-neutral-10);
+	cursor: pointer;
 
 	&:last-child {
 		border-bottom: 1px solid var(--color-neutral-10);
@@ -94,7 +95,8 @@
 	word-break: break-all; /* Break long URLs */
 
 	&:focus,
-	&:hover {
+	&:hover,
+	.search-result:hover & {
 		color: var(--color-primary);
 	}
 }
