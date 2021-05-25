@@ -158,20 +158,24 @@ class Content_Columns_Block_Controller extends Abstract_Controller {
 	 */
 	private function get_cta(): Deferred_Component {
 		$cta = wp_parse_args( $this->cta, [
-			'content' => '',
-			'url'     => '',
-			'target'  => '',
+			'content'        => '',
+			'url'            => '',
+			'target'         => '',
+			'add_aria_label' => false,
+			'aria_label'     => '',
 		] );
 
 		return defer_template_part( 'components/link/link', null, [
-			Link_Controller::URL     => $cta['url'],
-			Link_Controller::CONTENT => $cta['content'] ?: $cta['url'],
-			Link_Controller::TARGET  => $cta['target'],
-			Link_Controller::CLASSES => [
+			Link_Controller::URL            => $cta['url'],
+			Link_Controller::CONTENT        => $cta['content'] ?: $cta['url'],
+			Link_Controller::TARGET         => $cta['target'],
+			Link_Controller::ADD_ARIA_LABEL => $cta['add_aria_label'],
+			Link_Controller::ARIA_LABEL     => $cta['aria_label'],
+			Link_Controller::CLASSES        => [
 				'c-block__cta-link',
 				'a-btn',
 				'a-btn--has-icon-after',
-				'icon-arrow-right'
+				'icon-arrow-right',
 			],
 		] );
 	}
@@ -179,9 +183,10 @@ class Content_Columns_Block_Controller extends Abstract_Controller {
 	public function get_content_args( Content_Column $column ) {
 		$title_tag     = empty( $this->title ) ? 'h2' : 'h3';
 		$title_classes = [ count( $this->columns ) === 1 ? 'h3' : 'h4' ];
+
 		return [
-			Content_Block_Controller::LAYOUT      => $this->content_align,
-			Content_Block_Controller::TITLE       => defer_template_part(
+			Content_Block_Controller::LAYOUT  => $this->content_align,
+			Content_Block_Controller::TITLE   => defer_template_part(
 				'components/text/text',
 				null,
 				[
@@ -190,24 +195,26 @@ class Content_Columns_Block_Controller extends Abstract_Controller {
 					Text_Controller::CLASSES => $title_classes,
 				]
 			),
-			Content_Block_Controller::CONTENT     => defer_template_part(
+			Content_Block_Controller::CONTENT => defer_template_part(
 				'components/container/container',
 				null,
 				[
 					Container_Controller::CONTENT => wp_kses_post( $column->get_content() ),
 				]
 			),
-			Content_Block_Controller::CTA => defer_template_part(
+			Content_Block_Controller::CTA     => defer_template_part(
 				'components/link/link',
 				null,
 				[
-					Link_Controller::CONTENT => $column->get_cta()[ Link_Controller::CONTENT ],
-					Link_Controller::URL     => $column->get_cta()[ Link_Controller::URL ],
-					Link_Controller::TARGET  => $column->get_cta()[ Link_Controller::TARGET ],
-					Link_Controller::CLASSES => [
+					Link_Controller::CONTENT        => $column->get_cta()[ Link_Controller::CONTENT ],
+					Link_Controller::URL            => $column->get_cta()[ Link_Controller::URL ],
+					Link_Controller::TARGET         => $column->get_cta()[ Link_Controller::TARGET ],
+					Link_Controller::ADD_ARIA_LABEL => $column->get_cta()[ Link_Controller::ADD_ARIA_LABEL ],
+					Link_Controller::ARIA_LABEL     => $column->get_cta()[ Link_Controller::ARIA_LABEL ],
+					Link_Controller::CLASSES        => [
 						'a-btn',
 						'a-btn--has-icon-after',
-						'icon-arrow-right'
+						'icon-arrow-right',
 					],
 				]
 			),

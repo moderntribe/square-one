@@ -7,6 +7,7 @@ use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Field;
 use Tribe\Libs\ACF\Field_Section;
 use Tribe\Libs\ACF\Repeater;
+use Tribe\Project\Blocks\Fields\CTA;
 
 class Content_Columns extends Block_Config {
 	public const NAME = 'contentcolumns';
@@ -90,11 +91,9 @@ class Content_Columns extends Block_Config {
 					'toolbar'      => 'basic',
 					'media_upload' => 0,
 				] )
-			)->add_field( new Field( self::NAME . '_' . self::CTA, [
-				'label' => __( 'Call to Action', 'tribe' ),
-				'name'  => self::CTA,
-				'type'  => 'link',
-			] ) )->add_field( $this->get_links_section() );
+			)->add_field(
+				CTA::get_field( self::NAME )
+			)->add_field( $this->get_links_section() );
 
 		//==========================================
 		// Setting Fields
@@ -146,11 +145,7 @@ class Content_Columns extends Block_Config {
 			'media_upload' => 0,
 		] );
 
-		$cta = new Field( self::COLUMN_CTA, [
-			'label' => __( 'Call to Action', 'tribe' ),
-			'name'  => self::COLUMN_CTA,
-			'type'  => 'link',
-		] );
+		$cta = CTA::get_field( self::NAME );
 
 		$group->add_field( $text );
 		$group->add_field( $content );
