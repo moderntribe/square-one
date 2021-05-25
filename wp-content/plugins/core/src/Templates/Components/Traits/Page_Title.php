@@ -1,9 +1,9 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\Traits;
 
 trait Page_Title {
+
 	public function get_page_title(): string {
 		if ( is_front_page() ) {
 			return '';
@@ -32,4 +32,5 @@ trait Page_Title {
 		// Archives
 		return get_the_archive_title();
 	}
+
 }

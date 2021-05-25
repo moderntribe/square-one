@@ -1,4 +1,5 @@
-<?php declare( strict_types=1 );
+<?php declare(strict_types=1);
+
 /**
  * Sample REST route.
  *
@@ -13,6 +14,7 @@ use Tribe\Libs\Routes\Abstract_REST_Route;
  * Class for an example REST route.
  */
 class Sample_REST_Route extends Abstract_REST_Route {
+
 	/**
 	 * Registers routes.
 	 *
@@ -38,7 +40,7 @@ class Sample_REST_Route extends Abstract_REST_Route {
 	 */
 	public function get_supported_args(): array {
 		return [
-			'name'          => [
+			'name' => [
 				'type'        => 'string',
 				'default'     => '',
 				'description' => __( 'Example argument.', 'tribe' ),
@@ -52,6 +54,7 @@ class Sample_REST_Route extends Abstract_REST_Route {
 	 * Example: https://square1.tribe/wp-json/tribe/v1/sample/?name=test
 	 *
 	 * @param \WP_REST_Request $request    The rest request class.
+	 *
 	 * @return \WP_REST_Response|\WP_Error The response object, \WP_Error on failure.
 	 */
 	public function query( $request ) {
@@ -65,4 +68,5 @@ class Sample_REST_Route extends Abstract_REST_Route {
 			)
 		);
 	}
+
 }

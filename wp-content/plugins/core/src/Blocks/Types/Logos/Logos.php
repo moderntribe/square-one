@@ -1,15 +1,14 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Blocks\Types\Logos;
 
 use Tribe\Libs\ACF\Block;
 use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Field;
-use Tribe\Libs\ACF\Field_Section;
 use Tribe\Libs\ACF\Repeater;
 
 class Logos extends Block_Config {
+
 	public const NAME = 'logos';
 
 	public const LEAD_IN     = 'leadin';
@@ -92,7 +91,7 @@ class Logos extends Block_Config {
 	}
 
 	/**
-	 * @return Repeater
+	 * @return \Tribe\Libs\ACF\Repeater
 	 */
 	protected function get_logos_section() {
 		$group = new Repeater( self::NAME . '_' . self::LOGOS );
@@ -124,4 +123,5 @@ class Logos extends Block_Config {
 
 		return $group;
 	}
+
 }

@@ -1,19 +1,18 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\blocks\content_loop;
 
 use Tribe\Libs\Utils\Markup_Utils;
-use \Tribe\Project\Blocks\Types\Content_Loop\Content_Loop as Content_Loop_Block;
+use Tribe\Project\Blocks\Types\Content_Loop\Content_Loop as Content_Loop_Block;
 use Tribe\Project\Templates\Components\Abstract_Controller;
-use Tribe\Project\Templates\Components\content_block\Content_Block_Controller;
+use Tribe\Project\Templates\Components\card\Card_Controller;
 use Tribe\Project\Templates\Components\container\Container_Controller;
+use Tribe\Project\Templates\Components\content_block\Content_Block_Controller;
 use Tribe\Project\Templates\Components\Deferred_Component;
+use Tribe\Project\Templates\Components\image\Image_Controller;
 use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Templates\Components\text\Text_Controller;
-use Tribe\Project\Templates\Components\image\Image_Controller;
 use Tribe\Project\Theme\Config\Image_Sizes;
-use Tribe\Project\Templates\Components\card\Card_Controller;
 
 class Content_Loop_Controller extends Abstract_Controller {
 
@@ -28,17 +27,16 @@ class Content_Loop_Controller extends Abstract_Controller {
 	public const POSTS             = 'posts';
 	public const LAYOUT            = 'layout';
 
-	private array  $classes;
-	private array  $attrs;
-	private array  $container_classes;
-	private array  $content_classes;
+	private array $classes;
+	private array $attrs;
+	private array $container_classes;
+	private array $content_classes;
 	private string $title;
 	private string $leadin;
 	private string $description;
-	private array  $cta;
-	private array  $posts;
+	private array $cta;
+	private array $posts;
 	private string $layout;
-
 
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
@@ -115,11 +113,11 @@ class Content_Loop_Controller extends Abstract_Controller {
 	public function get_posts_card_args( string $layout = Card_Controller::STYLE_PLAIN ): array {
 		$cards = [];
 		foreach ( $this->posts as $post ) {
-			$link                = $post['link'];
-			$uuid                = uniqid( 'p-' );
-			$cat                 = get_the_category( $post['post_id'] );
-			$card_description    = [];
-			$card_cta            = [];
+			$link             = $post['link'];
+			$uuid             = uniqid( 'p-' );
+			$cat              = get_the_category( $post['post_id'] );
+			$card_description = [];
+			$card_cta         = [];
 
 			$image_array = [
 				Image_Controller::IMG_ID       => $post['image_id'],
@@ -162,13 +160,13 @@ class Content_Loop_Controller extends Abstract_Controller {
 
 			$cards[] = [
 				Card_Controller::STYLE           => $layout,
-				Card_Controller::USE_TARGET_LINK => $link['url'] ? true : false,
+				Card_Controller::USE_TARGET_LINK => (bool) $link['url'],
 				Card_Controller::META_PRIMARY    => defer_template_part(
 					'components/container/container',
 					null,
 					[
-						Container_Controller::CONTENT =>  $cat[0]->name ?? '',
-						Container_Controller::CLASSES =>  [ 't-tag' ],
+						Container_Controller::CONTENT => $cat[0]->name ?? '',
+						Container_Controller::CLASSES => [ 't-tag' ],
 					],
 				),
 				Card_Controller::TITLE           => defer_template_part(
@@ -195,16 +193,8 @@ class Content_Loop_Controller extends Abstract_Controller {
 					null,
 					$card_description,
 				),
-				Card_Controller::IMAGE           => defer_template_part(
-					'components/image/image',
-					null,
-					$image_array,
-				),
-				Card_Controller::CTA             => defer_template_part(
-					'components/link/link',
-					null,
-					$card_cta,
-				),
+				Card_Controller::IMAGE           => defer_template_part( 'components/image/image', null, $image_array ),
+				Card_Controller::CTA             => defer_template_part( 'components/link/link', null, $card_cta ),
 			];
 		}
 
@@ -234,7 +224,7 @@ class Content_Loop_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	private function get_leadin(): Deferred_Component {
 		return defer_template_part( 'components/text/text', null, [
@@ -248,7 +238,7 @@ class Content_Loop_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	private function get_title(): Deferred_Component {
 		return defer_template_part( 'components/text/text', null, [
@@ -262,7 +252,7 @@ class Content_Loop_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	private function get_content(): Deferred_Component {
 		return defer_template_part( 'components/container/container', null, [
@@ -277,7 +267,7 @@ class Content_Loop_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	public function get_cta(): Deferred_Component {
 		$cta = wp_parse_args( $this->cta, [
@@ -307,7 +297,7 @@ class Content_Loop_Controller extends Abstract_Controller {
 			$this->content_classes[] = 'g-3-up';
 		}
 
-
 		return Markup_Utils::class_attribute( $this->content_classes );
 	}
+
 }

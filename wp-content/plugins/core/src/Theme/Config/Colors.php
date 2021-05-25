@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Theme\Config;
 
@@ -49,6 +49,7 @@ class Colors {
 	 * This is the format expected by the block editor.
 	 *
 	 * @return array
+	 *
 	 * @see https://developer.wordpress.org/block-editor/developers/themes/theme-support/#block-color-palettes
 	 */
 	public function format_for_blocks(): array {
@@ -94,6 +95,5 @@ class Colors {
 
 		return '';
 	}
-
 
 }

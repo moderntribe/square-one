@@ -5,6 +5,7 @@ on:
     paths:
       - 'wp-content/plugins/core/**.php'
       - 'wp-content/themes/core/**.php'
+      - 'wp-content/mu-plugins/**.php'
 
 jobs:
   sniff:
@@ -72,4 +73,4 @@ jobs:
           composer install --prefer-dist --no-progress --no-suggest --optimize-autoloader
 
       - name: PHPCS
-        run: ./vendor/bin/phpcs --standard=./phpcs.xml
+        run: ./vendor/bin/phpcs --standard=./phpcs.xml.dist

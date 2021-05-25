@@ -1,10 +1,11 @@
-<?php
+<?php declare(strict_types=1);
+
 /**
  * Base environment configuration, loaded for all environments (including automated tests)
  */
 
-function tribe_isSSL() {
-	return ( ! empty( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] !== 'off' );
+function tribe_isSSL(): bool {
+	return ! empty( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] !== 'off';
 }
 
 function tribe_getenv( $name, $default = null ) {
@@ -19,7 +20,7 @@ function tribe_getenv( $name, $default = null ) {
 	}
 
 	if ( is_numeric( $env ) ) {
-		return ( $env - 0 );
+		return  $env - 0;
 	}
 
 	return $env;
@@ -37,7 +38,7 @@ if ( file_exists( __DIR__ . '/.env' ) ) {
 // ==============================================================
 
 if ( file_exists( dirname( __FILE__ ) . '/build-process.php' ) ) {
-	include( dirname( __FILE__ ) . '/build-process.php' );
+	include  dirname( __FILE__ ) . '/build-process.php';
 }
 
 
@@ -65,12 +66,12 @@ if ( ! defined( 'DB_NAME' ) && tribe_getenv( 'DATABASE_URL', false )  ) {
 // ==============================================================
 
 // Provide fallback if ENVIRONMENT is already present.
-if ( defined( 'ENVIRONMENT' ) ) {
+if ( defined( 'ENVIRONMENT' ) && ! defined( 'WP_ENVIRONMENT_TYPE' ) ) {
 	define( 'WP_ENVIRONMENT_TYPE', strtolower( ENVIRONMENT ) );
 }
 
 if ( ! defined( 'WP_ENVIRONMENT_TYPE' ) ) {
-	define( 'WP_ENVIRONMENT_TYPE', 'production');
+	define( 'WP_ENVIRONMENT_TYPE', 'development' );
 }
 
 if ( ! isset( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) ) {
@@ -174,12 +175,6 @@ $config_defaults = [
 	'TRIBE_GLOMAR'                   => tribe_getenv( 'TRIBE_GLOMAR', '' ),
 ];
 
-// If running on DOKKU, match the domain to the SERVER
-if ( tribe_getenv( 'DOKKU_APP_TYPE', false ) ) {
-	$config_defaults['WP_SITEURL'] = $_SERVER['SERVER_NAME'];
-	$config_defaults['WP_HOME'] = $_SERVER['SERVER_NAME'];
-}
-
 // ==============================================================
 // Assign default constant value overrides for production
 // ==============================================================
@@ -201,9 +196,11 @@ if ( defined( 'WP_ENVIRONMENT_TYPE' ) && WP_ENVIRONMENT_TYPE === 'production' ) 
 // ==============================================================
 
 foreach ( $config_defaults as $config_default_key => $config_default_value ) {
-	if ( ! defined( $config_default_key ) ) {
-		define( $config_default_key, $config_default_value );
+	if ( defined( $config_default_key ) ) {
+		continue;
 	}
+
+	define( $config_default_key, $config_default_value );
 }
 
 // ==============================================================
@@ -234,6 +231,7 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
 			if ( WP_DEBUG_LOG && is_string( WP_DEBUG_LOG ) ) {
 				ini_set( 'error_log', WP_DEBUG_LOG );
 			}
+
 			return $ret;
 		},
 		11

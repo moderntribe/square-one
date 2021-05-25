@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\pagination\single;
 
@@ -7,6 +7,7 @@ use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\link\Link_Controller;
 
 class Single_Pagination_Controller extends Abstract_Controller {
+
 	public const CLASSES           = 'classes';
 	public const ATTRS             = 'attrs';
 	public const LIST_CLASSES      = 'list_classes';

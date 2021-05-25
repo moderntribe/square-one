@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 use Tribe\Project\Templates\Components\blocks\links\Links_Block_Controller;
 
@@ -36,11 +35,7 @@ if ( empty( $c->get_links() ) ) {
 				<ul class="b-links__list">
 					<?php foreach ( $c->get_links() as $link ) { ?>
 						<li class="b-links__list-item">
-							<?php get_template_part(
-								'components/link/link',
-								null,
-								$link
-							); ?>
+							<?php get_template_part( 'components/link/link', null, $link ); ?>
 						</li>
 					<?php } ?>
 				</ul>
