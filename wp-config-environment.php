@@ -175,12 +175,6 @@ $config_defaults = [
 	'TRIBE_GLOMAR'                   => tribe_getenv( 'TRIBE_GLOMAR', '' ),
 ];
 
-// If running on DOKKU, match the domain to the SERVER
-if ( tribe_getenv( 'DOKKU_APP_TYPE', false ) ) {
-	$config_defaults['WP_SITEURL'] = $_SERVER['SERVER_NAME'];
-	$config_defaults['WP_HOME'] = $_SERVER['SERVER_NAME'];
-}
-
 // ==============================================================
 // Assign default constant value overrides for production
 // ==============================================================
