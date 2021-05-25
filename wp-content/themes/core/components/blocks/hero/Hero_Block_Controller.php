@@ -149,7 +149,7 @@ class Hero_Block_Controller extends Abstract_Controller {
 				'c-block__content-block',
 				'c-block__header',
 				'b-hero__content-container',
-				't-theme--light'
+				't-theme--light',
 			],
 		];
 	}
@@ -177,7 +177,7 @@ class Hero_Block_Controller extends Abstract_Controller {
 			Text_Controller::CLASSES => [
 				'c-block__title',
 				'b-hero__title',
-				'h3'
+				'h3',
 			],
 			Text_Controller::CONTENT => $this->title ?? '',
 		] );
@@ -192,7 +192,7 @@ class Hero_Block_Controller extends Abstract_Controller {
 				'c-block__description',
 				'b-hero__description',
 				't-sink',
-				's-sink'
+				's-sink',
 			],
 			Container_Controller::CONTENT => $this->description ?? '',
 		] );
@@ -203,20 +203,24 @@ class Hero_Block_Controller extends Abstract_Controller {
 	 */
 	private function get_cta(): Deferred_Component {
 		$cta = wp_parse_args( $this->cta, [
-			'content' => '',
-			'url'     => '',
-			'target'  => '',
+			'content'        => '',
+			'url'            => '',
+			'target'         => '',
+			'add_aria_label' => false,
+			'aria_label'     => '',
 		] );
 
 		return defer_template_part( 'components/link/link', null, [
-			Link_Controller::URL     => $cta['url'],
-			Link_Controller::CONTENT => $cta['content'] ?: $cta['url'],
-			Link_Controller::TARGET  => $cta['target'],
-			Link_Controller::CLASSES => [
+			Link_Controller::URL            => $cta['url'],
+			Link_Controller::CONTENT        => $cta['content'] ?: $cta['url'],
+			Link_Controller::TARGET         => $cta['target'],
+			Link_Controller::ADD_ARIA_LABEL => $cta['add_aria_label'],
+			Link_Controller::ARIA_LABEL     => $cta['aria_label'],
+			Link_Controller::CLASSES        => [
 				'c-block__cta-link',
 				'a-btn',
 				'a-btn--has-icon-after',
-				'icon-arrow-right'
+				'icon-arrow-right',
 			],
 		] );
 	}
