@@ -174,20 +174,24 @@ class Icon_Grid_Controller extends Abstract_Controller {
 	 */
 	public function get_cta(): Deferred_Component {
 		$cta = wp_parse_args( $this->cta, [
-			'content' => '',
-			'url'     => '',
-			'target'  => '',
+			'content'        => '',
+			'url'            => '',
+			'target'         => '',
+			'add_aria_label' => false,
+			'aria_label'     => '',
 		] );
 
 		return defer_template_part( 'components/link/link', null, [
-			Link_Controller::URL     => $cta['url'],
-			Link_Controller::CONTENT => $cta['content'] ?: $cta['url'],
-			Link_Controller::TARGET  => $cta['target'],
-			Link_Controller::CLASSES => [
+			Link_Controller::URL            => $cta['url'],
+			Link_Controller::CONTENT        => $cta['content'] ?: $cta['url'],
+			Link_Controller::TARGET         => $cta['target'],
+			Link_Controller::ADD_ARIA_LABEL => $cta['add_aria_label'],
+			Link_Controller::ARIA_LABEL     => $cta['aria_label'],
+			Link_Controller::CLASSES        => [
 				'c-block__cta-link',
 				'a-btn',
 				'a-btn--has-icon-after',
-				'icon-arrow-right'
+				'icon-arrow-right',
 			],
 		] );
 	}
@@ -203,7 +207,7 @@ class Icon_Grid_Controller extends Abstract_Controller {
 			$cards[] = [
 				Card_Controller::STYLE           => Card_Controller::STYLE_PLAIN,
 				Card_Controller::TAG             => 'li',
-				Card_Controller::CLASSES         => ['is-centered-text'],
+				Card_Controller::CLASSES         => [ 'is-centered-text' ],
 				Card_Controller::USE_TARGET_LINK => false,
 				Card_Controller::TITLE           => defer_template_part(
 					'components/text/text',
@@ -239,10 +243,12 @@ class Icon_Grid_Controller extends Abstract_Controller {
 					'components/link/link',
 					null,
 					[
-						Link_Controller::CONTENT => $card['icon_link']['title'] ?? '',
-						Link_Controller::URL     => $card['icon_link']['url'] ?? '',
-						Link_Controller::TARGET  => $card['icon_link']['target'] ?? '',
-						Link_Controller::CLASSES => [ 'a-cta', 'is-target-link' ],
+						Link_Controller::CONTENT        => $card['g-cta']['link']['title'] ?? '',
+						Link_Controller::URL            => $card['g-cta']['link']['url'] ?? '',
+						Link_Controller::TARGET         => $card['g-cta']['link']['target'] ?? '',
+						Link_Controller::ADD_ARIA_LABEL => $card['g-cta']['add_aria_label'] ?? '',
+						Link_Controller::ARIA_LABEL     => $card['g-cta']['aria_label'] ?? '',
+						Link_Controller::CLASSES        => [ 'a-cta', 'is-target-link' ],
 					]
 				),
 			];
