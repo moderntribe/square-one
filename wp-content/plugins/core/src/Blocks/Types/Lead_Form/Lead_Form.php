@@ -1,4 +1,4 @@
-<?php declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Blocks\Types\Lead_Form;
 
@@ -8,6 +8,7 @@ use Tribe\Libs\ACF\Field;
 use Tribe\Libs\ACF\Field_Section;
 
 class Lead_Form extends Block_Config {
+
 	public const NAME = 'leadform';
 
 	public const SECTION_CONTENT = 's-content';
@@ -108,25 +109,25 @@ class Lead_Form extends Block_Config {
 		$this->add_section( new Field_Section( self::SECTION_SETTINGS, __( 'Settings', 'tribe' ), 'accordion' ) )
 			->add_field(
 				new Field( self::NAME . '_' . self::WIDTH, [
-				'type'            => 'radio',
-				'name'            => self::WIDTH,
-				'label'           => __( 'Container Width', 'tribe' ),
-				'choices'         => [
+				'type'          => 'radio',
+				'name'          => self::WIDTH,
+				'label'         => __( 'Container Width', 'tribe' ),
+				'choices'       => [
 					self::WIDTH_GRID => __( 'Grid', 'tribe' ),
 					self::WIDTH_FULL => __( 'Full', 'tribe' ),
 				],
-				'default_value'   => self::WIDTH_GRID,
+				'default_value' => self::WIDTH_GRID,
 				] )
 			)->add_field(
 				new Field( self::NAME . '_' . self::BACKGROUND, [
-					'type'            => 'radio',
-					'name'            => self::BACKGROUND,
-					'label'           => __( 'Background Color', 'tribe' ),
-					'choices'         => [
-						self::BACKGROUND_LIGHT   => __( 'Light', 'tribe' ),
-						self::BACKGROUND_DARK    => __( 'Dark', 'tribe' ),
+					'type'          => 'radio',
+					'name'          => self::BACKGROUND,
+					'label'         => __( 'Background Color', 'tribe' ),
+					'choices'       => [
+						self::BACKGROUND_LIGHT => __( 'Light', 'tribe' ),
+						self::BACKGROUND_DARK  => __( 'Dark', 'tribe' ),
 					],
-					'default_value'   => self::BACKGROUND_LIGHT,
+					'default_value' => self::BACKGROUND_LIGHT,
 				] )
 			)->add_field(
 				new Field( self::NAME . '_' . self::LAYOUT, [
@@ -153,8 +154,8 @@ class Lead_Form extends Block_Config {
 					'name'            => self::FORM_FIELDS,
 					'label'           => __( 'Form Field Position', 'tribe' ),
 					'choices'         => [
-						self::FORM_STACKED   => __( 'Stacked', 'tribe' ),
-						self::FORM_INLINE    => __( 'Inline', 'tribe' ),
+						self::FORM_STACKED => __( 'Stacked', 'tribe' ),
+						self::FORM_INLINE  => __( 'Inline', 'tribe' ),
 					],
 					'default_value'   => self::FORM_STACKED,
 					'multiple'        => 0,

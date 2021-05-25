@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Theme\Media;
 
@@ -50,10 +50,10 @@ class Oembed_Filter {
 			}
 		} else {
 			$embed_id    = $this->get_vimeo_embed_id( $url );
-			$video_thumb = isset( $data->thumbnail_url ) ? $data->thumbnail_url : '';
+			$video_thumb = $data->thumbnail_url ?? '';
 		}
 
-		$options = [
+		$options       = [
 			Video_Controller::THUMBNAIL_URL    => $video_thumb,
 			Video_Controller::ATTRS            => $this->get_layout_container_attrs( $data->provider_name, $embed_id, $data->title ),
 			Video_Controller::CLASSES          => $classes,
@@ -181,7 +181,7 @@ class Oembed_Filter {
 	private function get_youtube_embed_id( $url ) {
 		preg_match( '#(?<=v=)[a-zA-Z0-9-]+(?=&)|(?<=v\/)[^&\n]+(?=\?)|(?<=v=)[^&\n]+|(?<=youtu.be/)[^&\n]+#', $url, $video_id );
 
-		return ! empty( $video_id[ 0 ] ) ? $video_id[ 0 ] : '';
+		return ! empty( $video_id[0] ) ? $video_id[0] : '';
 	}
 
 	/**
@@ -194,7 +194,7 @@ class Oembed_Filter {
 	private function get_vimeo_embed_id( $url ) {
 		preg_match( '/(https?:\/\/)?(www\.)?(player\.)?vimeo\.com\/([a-z]*\/)*([0-9]{6,11})[?]?.*/', $url, $video_id );
 
-		return ! empty( $video_id[ 5 ] ) ? $video_id[ 5 ] : '';
+		return ! empty( $video_id[5] ) ? $video_id[5] : '';
 	}
 
 	/**
@@ -223,4 +223,5 @@ class Oembed_Filter {
 
 		return static::CACHE_PREFIX . $hash;
 	}
+
 }

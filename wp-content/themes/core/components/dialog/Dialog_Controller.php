@@ -1,15 +1,15 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\dialog;
 
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
-use Tribe\Project\Templates\Components\Deferred_Component;
 use Tribe\Project\Templates\Components\container\Container_Controller;
+use Tribe\Project\Templates\Components\Deferred_Component;
 use Tribe\Project\Templates\Components\text\Text_Controller;
 
 class Dialog_Controller extends Abstract_Controller {
+
 	public const ID                         = 'id';
 	public const CONTENT                    = 'content';
 	public const TITLE                      = 'title';
@@ -24,8 +24,9 @@ class Dialog_Controller extends Abstract_Controller {
 
 	private string $id;
 	private string $title;
+
 	/**
-	 * @var string|Deferred_Component
+	 * @var string|\Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	private $content;
 	private array $dialog_classes;
@@ -55,17 +56,17 @@ class Dialog_Controller extends Abstract_Controller {
 
 	protected function defaults(): array {
 		return [
-			self::ID                          => '',
-			self::CONTENT                     => '',
-			self::TITLE                       => '',
-			self::DIALOG_CLASSES              => [],
-			self::DIALOG_ATTRIBUTES           => [],
-			self::OVERLAY_CLASSES             => [],
-			self::OVERLAY_ATTRIBUTES          => [],
-			self::CONTENT_WRAPPER_CLASSES     => [],
-			self::CONTENT_WRAPPER_ATTRIBUTES  => [],
-			self::CONTENT_CLASSES             => [],
-			self::CONTENT_ATTRIBUTES          => [],
+			self::ID                         => '',
+			self::CONTENT                    => '',
+			self::TITLE                      => '',
+			self::DIALOG_CLASSES             => [],
+			self::DIALOG_ATTRIBUTES          => [],
+			self::OVERLAY_CLASSES            => [],
+			self::OVERLAY_ATTRIBUTES         => [],
+			self::CONTENT_WRAPPER_CLASSES    => [],
+			self::CONTENT_WRAPPER_ATTRIBUTES => [],
+			self::CONTENT_CLASSES            => [],
+			self::CONTENT_ATTRIBUTES         => [],
 		];
 	}
 
@@ -120,7 +121,7 @@ class Dialog_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	public function get_dialog_title(): Deferred_Component {
 		return defer_template_part( 'components/text/text', null, [
@@ -133,7 +134,7 @@ class Dialog_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	public function get_header(): Deferred_Component {
 		return defer_template_part( 'components/container/container', null, [
@@ -149,4 +150,5 @@ class Dialog_Controller extends Abstract_Controller {
 	public function get_content(): string {
 		return (string) $this->content;
 	}
+
 }

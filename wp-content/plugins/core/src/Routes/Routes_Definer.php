@@ -1,4 +1,5 @@
-<?php declare( strict_types=1 );
+<?php declare(strict_types=1);
+
 /**
  * Defines all regular and REST routes to register.
  *
@@ -15,6 +16,7 @@ use Tribe\Libs\Routes\Route_Definer;
  * Class to define routes to register.
  */
 class Routes_Definer implements Definer_Interface {
+
 	/**
 	 * Define routes that need to be registered.
 	 *
@@ -34,4 +36,5 @@ class Routes_Definer implements Definer_Interface {
 			),
 		];
 	}
+
 }
