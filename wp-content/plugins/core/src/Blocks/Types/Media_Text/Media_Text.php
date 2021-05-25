@@ -7,6 +7,7 @@ use Tribe\Libs\ACF\Block;
 use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Field;
 use Tribe\Libs\ACF\Field_Section;
+use Tribe\Project\Blocks\Fields\CTA;
 
 class Media_Text extends Block_Config {
 	public const NAME = 'mediatext';
@@ -24,8 +25,6 @@ class Media_Text extends Block_Config {
 	public const LEAD_IN         = 'leadin';
 	public const TITLE           = 'title';
 	public const DESCRIPTION     = 'description';
-	public const CTA             = 'cta';
-
 
 	public const MEDIA_TYPE = 'media_type';
 	public const IMAGE      = 'image';
@@ -60,10 +59,12 @@ class Media_Text extends Block_Config {
 							'Cras ut ornare dui, sed venenatis est. Donec euismod in leo quis consequat.',
 							'tribe'
 						),
-						self::CTA         => [
-							'title'  => esc_html__( 'Lorem ipsum', 'tribe' ),
-							'url'    => '#',
-							'target' => '',
+						CTA::GROUP_CTA    => [
+							CTA::LINK => [
+								'title'  => esc_html__( 'Lorem ipsum', 'tribe' ),
+								'url'    => '#',
+								'target' => '',
+							],
 						],
 						//Images are output as IDs so it's sort of hard to get an image value for preview
 						self::IMAGE       => 0,
@@ -82,13 +83,13 @@ class Media_Text extends Block_Config {
 		//==========================================
 		$this->add_section( new Field_Section( self::SECTION_CONTENT, __( 'Content', 'tribe' ), 'accordion' ) )
 			 ->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
-					 'label'    => __( 'Lead in', 'tribe' ),
-					 'name'     => self::LEAD_IN,
-					 'type'     => 'text',
-					 'wrapper'  => [
-							'class' => 'tribe-acf-hide-label',
+					 'label'       => __( 'Lead in', 'tribe' ),
+					 'name'        => self::LEAD_IN,
+					 'type'        => 'text',
+					 'wrapper'     => [
+						 'class' => 'tribe-acf-hide-label',
 					 ],
-					 'placeholder'  => 'Leadin (optional)',
+					 'placeholder' => 'Leadin (optional)',
 				 ] )
 			 )->add_field( new Field( self::NAME . '_' . self::TITLE, [
 					'label' => __( 'Title', 'tribe' ),
@@ -102,11 +103,8 @@ class Media_Text extends Block_Config {
 					'toolbar'      => 'basic',
 					'media_upload' => 0,
 				] )
-			)->add_field( new Field( self::NAME . '_' . self::CTA, [
-					'label' => __( 'Call to Action', 'tribe' ),
-					'name'  => self::CTA,
-					'type'  => 'link',
-				] )
+			)->add_field(
+				CTA::get_field( self::NAME )
 			)->add_field( new Field( self::NAME . '_' . self::MEDIA_TYPE, [
 					'label'         => __( 'Media Type', 'tribe' ),
 					'name'          => self::MEDIA_TYPE,
