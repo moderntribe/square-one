@@ -27,7 +27,7 @@ jobs:
       - name: Push to Test
         uses: dokku/github-action@master
         with:
-          git_remote_url: "ssh://${{ secrets.TEST_DEPLOY_USER }}${{ secrets.TEST_DOMAIN }}:22/${{ env.APPNAME }}"
+          git_remote_url: "ssh://${{ secrets.TEST_DEPLOY_USER }}@${{ secrets.TEST_DOMAIN }}:22/${{ env.APPNAME }}"
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
 
   deploy_test_app:
