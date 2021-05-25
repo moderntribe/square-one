@@ -2,6 +2,7 @@ version: 2
 
 updates:
   - package-ecosystem: "composer"
+    target-branch: "main"
     directory: "/"
     schedule:
       interval: "weekly"
@@ -11,6 +12,7 @@ updates:
       - "dependencies"
 
   - package-ecosystem: "npm"
+    target-branch: "main"
     directory: "/"
     schedule:
       interval: "weekly"
