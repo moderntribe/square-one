@@ -8,6 +8,7 @@ use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Field;
 use Tribe\Libs\ACF\Field_Section;
 use Tribe\Libs\ACF\Repeater;
+use Tribe\Project\Blocks\Fields\CTA;
 
 class Logos extends Block_Config {
 	public const NAME = 'logos';
@@ -15,7 +16,6 @@ class Logos extends Block_Config {
 	public const LEAD_IN     = 'leadin';
 	public const TITLE       = 'title';
 	public const DESCRIPTION = 'description';
-	public const CTA         = 'cta';
 
 	public const LOGOS      = 'logos';
 	public const LOGO_IMAGE = 'image';
@@ -42,10 +42,12 @@ class Logos extends Block_Config {
 							'Cras ut ornare dui, sed venenatis est. Donec euismod in leo quis consequat.',
 							'tribe'
 						),
-						self::CTA         => [
-							'title'  => esc_html__( 'Lorem ipsum', 'tribe' ),
-							'url'    => '#',
-							'target' => '',
+						CTA::GROUP_CTA => [
+							CTA::LINK => [
+								'title'  => esc_html__( 'Lorem ipsum', 'tribe' ),
+								'url'    => '#',
+								'target' => '',
+							],
 						],
 						self::LOGOS       => [
 							[
@@ -81,11 +83,8 @@ class Logos extends Block_Config {
 				'toolbar'      => 'basic',
 				'media_upload' => 0,
 			] )
-		)->add_field( new Field( self::NAME . '_' . self::CTA, [
-				'label' => __( 'Call to Action', 'tribe' ),
-				'name'  => self::CTA,
-				'type'  => 'link',
-			] )
+		)->add_field(
+			CTA::get_field( self::NAME )
 		)->add_field(
 			$this->get_logos_section()
 		);
