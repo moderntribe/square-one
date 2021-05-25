@@ -9,6 +9,7 @@ use Tribe\Libs\ACF\Field;
 use Tribe\Libs\ACF\Field_Section;
 use Tribe\Libs\ACF\Field_Group;
 use Tribe\Libs\ACF\Repeater;
+use Tribe\Project\Blocks\Fields\CTA;
 use Tribe\Project\Post_Types\Page\Page;
 use Tribe\Project\Post_Types\Post\Post;
 use Tribe\Project\Taxonomies\Category\Category;
@@ -71,11 +72,8 @@ class Content_Loop extends Block_Config {
 					'name'  => self::DESCRIPTION,
 					'type'  => 'wysiwyg',
 				] )
-			)->add_field( new Field( self::NAME . '_' . self::CTA, [
-					'label' => __( 'Call to Action', 'tribe' ),
-					'name'  => self::CTA,
-					'type'  => 'link',
-				] )
+			)->add_field(
+				CTA::get_field( self::NAME )
 			)->add_field( new Field( self::NAME . '_' . self::POST_LIST, [
 					'label'             => __( 'Post List', 'tribe' ),
 					'name'              => self::POST_LIST,
