@@ -7,6 +7,7 @@ use Tribe\Libs\ACF\Field;
 use Tribe\Libs\ACF\Block;
 use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Field_Section;
+use Tribe\Project\Blocks\Fields\CTA;
 use Tribe\Project\Post_Types\Post\Post;
 use Tribe\Project\Post_Types\Sample\Sample;
 use Tribe\Project\Taxonomies\Category\Category;
@@ -81,11 +82,8 @@ class Card_Grid extends Block_Config {
 					'toolbar'      => 'basic',
 					'media_upload' => 0,
 				] )
-			)->add_field( new Field( self::NAME . '_' . self::CTA, [
-					'label' => __( 'Call to Action', 'tribe' ),
-					'name'  => self::CTA,
-					'type'  => 'link',
-				] )
+			)->add_field(
+				CTA::get_field( self::NAME )
 			)->add_field( new Field( self::NAME . '_' . self::POST_LIST, [
 					'label'             => __( 'Post List', 'tribe' ),
 					'name'              => self::POST_LIST,
