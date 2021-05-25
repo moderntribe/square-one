@@ -8,6 +8,7 @@ use Tribe\Libs\ACF\Field;
 use Tribe\Libs\ACF\Block;
 use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Repeater;
+use Tribe\Project\Blocks\Fields\CTA;
 
 class Accordion extends Block_Config {
 	public const NAME            = 'accordion';
@@ -89,11 +90,8 @@ class Accordion extends Block_Config {
 					'toolbar'      => 'basic',
 					'media_upload' => 0,
 				] )
-			)->add_field( new Field( self::NAME . '_' . self::CTA, [
-					'label' => __( 'Call to Action', 'tribe' ),
-					'name'  => self::CTA,
-					'type'  => 'link',
-				] )
+			)->add_field(
+				CTA::get_field( self::NAME )
 			)->add_field(
 				$this->get_accordion_section()
 			);

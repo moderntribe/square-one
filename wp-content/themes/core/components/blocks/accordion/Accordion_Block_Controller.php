@@ -132,7 +132,7 @@ class Accordion_Block_Controller extends Abstract_Controller {
 			Content_Block_Controller::CLASSES => [
 				'c-block__content-block',
 				'c-block__header',
-				'b-accordion__header'
+				'b-accordion__header',
 			],
 		];
 	}
@@ -146,7 +146,7 @@ class Accordion_Block_Controller extends Abstract_Controller {
 			Text_Controller::CLASSES => [
 				'c-block__title',
 				'b-accordion__title',
-				'h3'
+				'h3',
 			],
 			Text_Controller::CONTENT => $this->title ?? '',
 		] );
@@ -175,7 +175,7 @@ class Accordion_Block_Controller extends Abstract_Controller {
 				'c-block__description',
 				'b-accordion__description',
 				't-sink',
-				's-sink'
+				's-sink',
 			],
 			Container_Controller::CONTENT => $this->description ?? '',
 		] );
@@ -186,20 +186,24 @@ class Accordion_Block_Controller extends Abstract_Controller {
 	 */
 	private function get_cta(): Deferred_Component {
 		$cta = wp_parse_args( $this->cta, [
-			'content' => '',
-			'url'     => '',
-			'target'  => '',
+			'content'        => '',
+			'url'            => '',
+			'target'         => '',
+			'add_aria_label' => false,
+			'aria_label'     => '',
 		] );
 
 		return defer_template_part( 'components/link/link', null, [
-			Link_Controller::URL     => $cta['url'],
-			Link_Controller::CONTENT => $cta['content'] ?: $cta['url'],
-			Link_Controller::TARGET  => $cta['target'],
-			Link_Controller::CLASSES => [
+			Link_Controller::URL            => $cta['url'],
+			Link_Controller::CONTENT        => $cta['content'] ?: $cta['url'],
+			Link_Controller::TARGET         => $cta['target'],
+			Link_Controller::ADD_ARIA_LABEL => $cta['add_aria_label'],
+			Link_Controller::ARIA_LABEL     => $cta['aria_label'],
+			Link_Controller::CLASSES        => [
 				'c-block__cta-link',
 				'a-btn',
 				'a-btn--has-icon-after',
-				'icon-arrow-right'
+				'icon-arrow-right',
 			],
 		] );
 	}
