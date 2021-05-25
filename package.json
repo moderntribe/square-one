@@ -163,7 +163,7 @@
     "gulp-replace": "^1.0.0",
     "gulp-shell": "^0.7.1",
     "gulp-sourcemaps": "^2.6.4",
-    "gulp-stylelint": "^10.0.0",
+    "gulp-stylelint": "^11.0.0",
     "gulp-uglify": "^3.0.1",
     "identity-obj-proxy": "^3.0.0",
     "ifdef-loader": "^2.1.4",
