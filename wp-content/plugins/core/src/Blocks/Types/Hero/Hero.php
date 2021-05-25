@@ -18,7 +18,6 @@ class Hero extends Block_Config {
 	public const LEAD_IN     = 'leadin';
 	public const TITLE       = 'title';
 	public const DESCRIPTION = 'description';
-	public const CTA         = 'cta';
 
 	public const SECTION_SETTINGS = 's-settings';
 	public const LAYOUT           = 'layout';
@@ -49,10 +48,12 @@ class Hero extends Block_Config {
 							'Cras ut ornare dui, sed venenatis est. Donec euismod in leo quis consequat.',
 							'tribe'
 						),
-						self::CTA         => [
-							'title'  => esc_html__( 'Lorem ipsum', 'tribe' ),
-							'url'    => '#',
-							'target' => '',
+						CTA::GROUP_CTA => [
+							CTA::LINK => [
+								'title'  => esc_html__( 'Lorem ipsum', 'tribe' ),
+								'url'    => '#',
+								'target' => '',
+							],
 						],
 						//Images are output as IDs so it's sort of hard to get an image value for preview
 						self::IMAGE       => 0,
