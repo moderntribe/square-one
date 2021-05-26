@@ -1,8 +1,6 @@
-<?php
-
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Assets\Admin;
-
 
 class JS_Localization {
 
@@ -20,4 +18,5 @@ class JS_Localization {
 
 		return $js_i18n_array;
 	}
+
 }

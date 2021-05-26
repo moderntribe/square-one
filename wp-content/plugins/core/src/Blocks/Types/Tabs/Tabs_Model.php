@@ -1,14 +1,14 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Blocks\Types\Tabs;
 
 use Tribe\Project\Blocks\Types\Base_Model;
-use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Templates\Components\blocks\tabs\Tabs_Block_Controller;
+use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Templates\Models\Tab as Tab_Model;
 
 class Tabs_Model extends Base_Model {
+
 	/**
 	 * @return array
 	 */
@@ -36,9 +36,9 @@ class Tabs_Model extends Base_Model {
 		] );
 
 		return [
-			Link_Controller::CONTENT => $cta[ 'title' ],
-			Link_Controller::URL     => $cta[ 'url' ],
-			Link_Controller::TARGET  => $cta[ 'target' ],
+			Link_Controller::CONTENT => $cta['title'],
+			Link_Controller::URL     => $cta['url'],
+			Link_Controller::TARGET  => $cta['target'],
 		];
 	}
 
@@ -59,4 +59,5 @@ class Tabs_Model extends Base_Model {
 
 		return $tab_objects;
 	}
+
 }

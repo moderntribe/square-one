@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Admin;
 
@@ -8,6 +7,7 @@ use Tribe\Project\Admin\Editor\Classic_Editor_Formats;
 use Tribe\Project\Admin\Editor\Editor_Styles;
 
 class Admin_Subscriber extends Abstract_Subscriber {
+
 	public function register(): void {
 		$this->editor();
 

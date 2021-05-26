@@ -1,8 +1,7 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
-use Tribe\Project\Templates\Components\blocks\media_text\Media_Text_Block_Controller;
 use Tribe\Project\Blocks\Types\Media_Text\Media_Text as Media_Text_Block;
+use Tribe\Project\Templates\Components\blocks\media_text\Media_Text_Block_Controller;
 
 /**
  * @var array $args Arguments passed to the template

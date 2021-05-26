@@ -3,18 +3,31 @@
 All notable changes to this project will be documented in this file.
 
 ## 2021.05
-* Fixed: Husky hooks commits from scanning all PHP files with phpcs and limits to our core plugin/theme.
+* Fixed: broken main README.md links
+* Removed: husky hooks.
+* Added: lefthook git-hooks (see lefthook.yml and .lefthook folder) to replace husky hooks: https://github.com/evilmartians/lefthook
+* Added: run phpcs checks on commit via lefthook. 
+* Added: prefix commit messages with the Jira ticket from the branch.  
+* Updated: Move phpcs to https://github.com/moderntribe/coding-standards
+* Removed: Broken Gallery shortcode/subscriber.
+* Removed: phpcs.xml, this should be git ignored.
+* Added: phpcs.xml.dist with new coding standards (mostly formatting based for now).
+* Updated: Updated all relevant PHP files for phpcs.
+* Updated: .editorconfig to better match new phpcs formatting.  
+* Removed: mercator mu plugin https://github.com/humanmade/Mercator as multisite domain mapping has been in core for some time.
+* Updated: workflows/phpcs.yml to use the new coding standard in GitHub workflows  
+* Fixed: Multiple blocks keywords not using `__()` properly.
 * Added: documentation to get PHPCS configured in VS Code.
 * Updated: use the WP_ENVIRONMENT_TYPE constant added in Core v5.5.
 * Added: enabled the legacy markup for Gravity Forms 2.5 by default (until we can update our theme framework).
 * Fixed: small issue with webpack publicPath's being off.
 * Fixed: removed unnecessary Sage SVG plugin from composer.
-* Fixed: updated the Limit Login Attempts path for for force-activated plugins.
+* Fixed: updated the Limit Login Attempts path for force-activated plugins.
 * Updated: Increase the width of the block sidebar
 * Updated: Spruce up the Repeater field, especially when used in ACF Block Sidebars
 * Updated: Spruce up the Image Field
 * Added: a utility class of ‘tribe-acf-hide-label’ to hide field labels in cases where they are unnecessary/exterraneous
-* Added:  a utility class of ‘tribe-acf-instructions’’. Apply to a Message field if you need ‘spoof’ ad-hoc instructional content.
+* Added: a utility class of ‘tribe-acf-instructions’’. Apply to a Message field if you need ‘spoof’ ad-hoc instructional content.
 
 ## 2021.04
 * Updated: refreshed local-config-sample.php to have a more thorough set of constants you may need, especially now that we have a Local environment option.

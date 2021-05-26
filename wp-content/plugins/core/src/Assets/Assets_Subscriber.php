@@ -1,12 +1,28 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Assets;
 
 use Tribe\Libs\Container\Abstract_Subscriber;
 
 class Assets_Subscriber extends Abstract_Subscriber {
+
 	public function register(): void {
+		$theme = wp_get_theme();
+
+		if ( ! empty( $theme ) ) {
+			$checks = [
+				$theme->get_stylesheet(),
+				$theme->parent() ? $theme->parent()->get_stylesheet() : null,
+			];
+
+			$checks = array_filter( $checks );
+
+			// Bail if we're not using the core theme.
+			if ( ! in_array( 'core', $checks, true ) ) {
+				return;
+			}
+		}
+
 		$this->theme_resources();
 		$this->legacy_resources();
 		$this->admin_resources();
@@ -73,4 +89,5 @@ class Assets_Subscriber extends Abstract_Subscriber {
 			$this->container->get( Admin\Styles::class )->enqueue_login_styles();
 		}, 10, 0 );
 	}
+
 }

@@ -1,15 +1,13 @@
-<?php
-
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Assets\Theme;
-
 
 class JS_Config {
 
 	private $data;
 
 	public function get_data() {
-		if ( !isset( $this->data ) ) {
+		if ( ! isset( $this->data ) ) {
 			$this->data = [
 				'images_url'                 => trailingslashit( get_stylesheet_directory_uri() ) . 'assets/img/theme',
 				'template_url'               => trailingslashit( get_template_directory_uri() ),
@@ -22,4 +20,5 @@ class JS_Config {
 
 		return $this->data;
 	}
+
 }

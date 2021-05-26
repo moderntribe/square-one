@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Blocks\Types\Accordion;
 
@@ -9,6 +8,7 @@ use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Templates\Models\Accordion_Row;
 
 class Accordion_Model extends Base_Model {
+
 	/**
 	 * @return array
 	 */
@@ -36,9 +36,9 @@ class Accordion_Model extends Base_Model {
 		] );
 
 		return [
-			Link_Controller::CONTENT => $cta[ 'title' ],
-			Link_Controller::URL     => $cta[ 'url' ],
-			Link_Controller::TARGET  => $cta[ 'target' ],
+			Link_Controller::CONTENT => $cta['title'],
+			Link_Controller::URL     => $cta['url'],
+			Link_Controller::TARGET  => $cta['target'],
 		];
 	}
 
@@ -49,12 +49,10 @@ class Accordion_Model extends Base_Model {
 		$rows = $this->get( Accordion::ACCORDION, [] );
 		$data = [];
 		foreach ( $rows as $row ) {
-			$data[] = new Accordion_Row(
-				$row[ Accordion::ROW_HEADER ],
-				$row[ Accordion::ROW_CONTENT ]
-			);
+			$data[] = new Accordion_Row( $row[ Accordion::ROW_HEADER ], $row[ Accordion::ROW_CONTENT ] );
 		}
 
 		return $data;
 	}
+
 }

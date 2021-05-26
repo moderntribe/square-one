@@ -1,14 +1,10 @@
-<?php
-
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Assets\Theme;
 
-
 class Styles {
-	/**
-	 * @var Theme_Build_Parser
-	 */
-	private $build_parser;
+
+	private Theme_Build_Parser $build_parser;
 
 	public function __construct( Theme_Build_Parser $build_parser ) {
 		$this->build_parser = $build_parser;
@@ -18,6 +14,7 @@ class Styles {
 	 * Register all styles for later enqueue
 	 *
 	 * @return void
+	 *
 	 * @action template_redirect
 	 */
 	public function register_styles(): void {
@@ -48,4 +45,5 @@ class Styles {
 	public function dequeue_block_styles(): void {
 		wp_dequeue_style( 'wp-block-library' );
 	}
+
 }

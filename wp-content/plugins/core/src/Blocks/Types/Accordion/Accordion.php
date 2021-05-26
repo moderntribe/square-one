@@ -1,15 +1,15 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Blocks\Types\Accordion;
 
-use Tribe\Libs\ACF\Field_Section;
-use Tribe\Libs\ACF\Field;
 use Tribe\Libs\ACF\Block;
 use Tribe\Libs\ACF\Block_Config;
+use Tribe\Libs\ACF\Field;
+use Tribe\Libs\ACF\Field_Section;
 use Tribe\Libs\ACF\Repeater;
 
 class Accordion extends Block_Config {
+
 	public const NAME            = 'accordion';
 	public const SECTION_CONTENT = 's-content';
 	public const LEAD_IN         = 'leadin';
@@ -122,7 +122,7 @@ class Accordion extends Block_Config {
 	}
 
 	/**
-	 * @return Repeater
+	 * @return \Tribe\Libs\ACF\Repeater
 	 */
 	protected function get_accordion_section() {
 		$group = new Repeater( self::NAME . '_' . self::ACCORDION );

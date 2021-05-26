@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Blocks\Types\Tabs;
 
@@ -10,6 +9,7 @@ use Tribe\Libs\ACF\Field_Section;
 use Tribe\Libs\ACF\Repeater;
 
 class Tabs extends Block_Config {
+
 	public const NAME = 'tabs';
 
 	public const SECTION_CONTENT = 's-content';
@@ -139,7 +139,7 @@ class Tabs extends Block_Config {
 	}
 
 	/**
-	 * @return Repeater
+	 * @return \Tribe\Libs\ACF\Repeater
 	 */
 	protected function get_tab_section() {
 		$group = new Repeater( self::NAME . '_' . self::TABS );
