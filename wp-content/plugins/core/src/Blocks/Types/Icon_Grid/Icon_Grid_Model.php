@@ -31,8 +31,8 @@ class Icon_Grid_Model extends Base_Model {
 	 * @return array
 	 */
 	private function get_cta_args(): array {
-		$cta  = $this->get( CTA::GROUP_CTA );
-		$link = wp_parse_args( $cta['link'], [
+		$cta  = $this->get( CTA::GROUP_CTA, [] );
+		$link = wp_parse_args( $cta['link'] ?? [], [
 			'title'  => '',
 			'url'    => '',
 			'target' => '',
@@ -42,8 +42,8 @@ class Icon_Grid_Model extends Base_Model {
 			Link_Controller::CONTENT        => $link['title'],
 			Link_Controller::URL            => $link['url'],
 			Link_Controller::TARGET         => $link['target'],
-			Link_Controller::ADD_ARIA_LABEL => $cta['add_aria_label'],
-			Link_Controller::ARIA_LABEL     => $cta['aria_label'],
+			Link_Controller::ADD_ARIA_LABEL => $cta['add_aria_label'] ?? false,
+			Link_Controller::ARIA_LABEL     => $cta['aria_label'] ?? '',
 		];
 	}
 }
