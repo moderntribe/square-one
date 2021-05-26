@@ -43,7 +43,7 @@ class CTA {
 		$screen_reader_label = new Field( $block_name . '_' . self::ARIA_LABEL, [
 			'label'             => __( 'Screen Reader Label', 'tribe' ),
 			'instructions'      => __(
-				'A custom label for screen readers if the button\'s action or purpose isn\'t easily identifiable. (Optional)',
+				'A custom label for screen readers if the button\'s action or purpose isn\'t easily identifiable.',
 				'tribe'
 			),
 			'name'              => self::ARIA_LABEL,
