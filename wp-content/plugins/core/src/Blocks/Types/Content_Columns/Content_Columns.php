@@ -16,11 +16,9 @@ class Content_Columns extends Block_Config {
 	public const LEADIN          = 'leadin';
 	public const TITLE           = 'title';
 	public const DESCRIPTION     = 'description';
-	public const CTA             = 'cta';
 	public const COLUMNS         = 'columns';
 	public const COLUMN_TITLE    = 'col_title';
 	public const COLUMN_CONTENT  = 'col_content';
-	public const COLUMN_CTA      = 'col_cta';
 
 	public const SECTION_SETTINGS     = 's-settings';
 	public const CONTENT_ALIGN        = 'content-align';
@@ -52,10 +50,14 @@ class Content_Columns extends Block_Config {
 									'Cras ut ornare dui, sed venenatis est. Donec euismod in leo quis consequat.',
 									'tribe'
 								),
-								self::COLUMN_CTA     => [
-									'title'  => esc_html__( 'Lorem ipsum', 'tribe' ),
-									'url'    => '#',
-									'target' => '',
+								[
+									CTA::GROUP_CTA => [
+										CTA::LINK => [
+											'title'  => esc_html__( 'Lorem ipsum', 'tribe' ),
+											'url'    => '#',
+											'target' => '',
+										],
+									],
 								],
 							],
 						],

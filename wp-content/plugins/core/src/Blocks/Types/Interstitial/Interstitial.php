@@ -16,7 +16,6 @@ class Interstitial extends Block_Config {
 	public const IMAGE           = 'image';
 
 	public const TITLE = 'title';
-	public const CTA   = 'cta';
 
 	public const SECTION_SETTINGS = 's-settings';
 	public const LAYOUT           = 'layout';
@@ -39,10 +38,12 @@ class Interstitial extends Block_Config {
 					'mode' => 'preview',
 					'data' => [
 						self::TITLE => esc_html__( 'The Interstitial Title', 'tribe' ),
-						self::CTA   => [
-							'title'  => esc_html__( 'Lorem ipsum', 'tribe' ),
-							'url'    => '#',
-							'target' => '',
+						CTA::GROUP_CTA => [
+							CTA::LINK => [
+								'title'  => esc_html__( 'Lorem ipsum', 'tribe' ),
+								'url'    => '#',
+								'target' => '',
+							],
 						],
 						//Images are output as IDs so it's sort of hard to get an image value for preview
 						self::IMAGE => 0,

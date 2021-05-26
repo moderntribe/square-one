@@ -20,7 +20,6 @@ class Card_Grid extends Block_Config {
 	public const SECTION_CONTENT = 's-content';
 	public const TITLE           = 'title';
 	public const DESCRIPTION     = 'description';
-	public const CTA             = 'cta';
 
 	public const POST_LIST = 'post_list';
 
@@ -52,7 +51,13 @@ class Card_Grid extends Block_Config {
 							'Pellentesque diam diam, aliquet non mauris eu, posuere mollis urna. Nulla eget congue ligula, a aliquam lectus. Duis non diam maximus justo dictum porttitor in in risus.',
 							'tribe'
 						),
-						self::CTA         => [ 'title' => esc_html__( 'Call to Action', 'tribe' ), 'url' => '#' ],
+						CTA::GROUP_CTA => [
+							CTA::LINK => [
+								'title'  => esc_html__( 'Lorem ipsum', 'tribe' ),
+								'url'    => '#',
+								'target' => '',
+							],
+						],
 						self::POST_LIST   => [
 
 						],

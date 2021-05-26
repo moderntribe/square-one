@@ -16,7 +16,6 @@ class Accordion extends Block_Config {
 	public const LEAD_IN         = 'leadin';
 	public const TITLE           = 'title';
 	public const DESCRIPTION     = 'description';
-	public const CTA             = 'cta';
 
 	public const ACCORDION   = 'accordion';
 	public const ROW_HEADER  = 'row_header';
@@ -48,10 +47,12 @@ class Accordion extends Block_Config {
 							'Cras ut ornare dui, sed venenatis est. Donec euismod in leo quis consequat.',
 							'tribe'
 						),
-						self::CTA         => [
-							'title'  => esc_html__( 'Lorem ipsum', 'tribe' ),
-							'url'    => '#',
-							'target' => '',
+						CTA::GROUP_CTA => [
+							CTA::LINK => [
+								'title'  => esc_html__( 'Lorem ipsum', 'tribe' ),
+								'url'    => '#',
+								'target' => '',
+							],
 						],
 						self::ACCORDION   => [
 							[
