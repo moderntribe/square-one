@@ -51,7 +51,7 @@ class Tabs extends Block_Config {
 							'Pellentesque diam diam, aliquet non mauris eu, posuere mollis urna. Nulla eget congue ligula, a aliquam lectus. Duis non diam maximus justo dictum porttitor in in risus.',
 							'tribe'
 						),
-						CTA::GROUP_CTA => [
+						CTA::GROUP_CTA    => [
 							CTA::LINK => [
 								'title'  => esc_html__( 'Lorem ipsum', 'tribe' ),
 								'url'    => '#',

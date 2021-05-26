@@ -6,6 +6,7 @@ use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 
 class Link_Controller extends Abstract_Controller {
+
 	public const URL            = 'url';
 	public const TARGET         = 'target';
 	public const ADD_ARIA_LABEL = 'add_aria_label';
@@ -20,7 +21,7 @@ class Link_Controller extends Abstract_Controller {
 	private $content;
 	private string $url;
 	private string $target;
-	private bool   $add_aria_label;
+	private bool $add_aria_label;
 	private string $aria_label;
 	private array $classes;
 	private array $attrs;

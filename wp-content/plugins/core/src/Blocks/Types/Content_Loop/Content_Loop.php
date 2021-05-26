@@ -6,8 +6,6 @@ use Tribe\Libs\ACF\Block;
 use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Field;
 use Tribe\Libs\ACF\Field_Section;
-use Tribe\Libs\ACF\Field_Group;
-use Tribe\Libs\ACF\Repeater;
 use Tribe\Project\Blocks\Fields\CTA;
 use Tribe\Project\Post_Types\Page\Page;
 use Tribe\Project\Post_Types\Post\Post;

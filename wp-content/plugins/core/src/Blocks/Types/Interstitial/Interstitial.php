@@ -37,7 +37,7 @@ class Interstitial extends Block_Config {
 				'attributes' => [
 					'mode' => 'preview',
 					'data' => [
-						self::TITLE => esc_html__( 'The Interstitial Title', 'tribe' ),
+						self::TITLE    => esc_html__( 'The Interstitial Title', 'tribe' ),
 						CTA::GROUP_CTA => [
 							CTA::LINK => [
 								'title'  => esc_html__( 'Lorem ipsum', 'tribe' ),
@@ -46,7 +46,7 @@ class Interstitial extends Block_Config {
 							],
 						],
 						//Images are output as IDs so it's sort of hard to get an image value for preview
-						self::IMAGE => 0,
+						self::IMAGE    => 0,
 					],
 				],
 			],

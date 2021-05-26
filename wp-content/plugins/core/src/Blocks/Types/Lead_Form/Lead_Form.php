@@ -60,7 +60,7 @@ class Lead_Form extends Block_Config {
 							'Cras ut ornare dui, sed venenatis est. Donec euismod in leo quis consequat.',
 							'tribe'
 						),
-						CTA::GROUP_CTA => [
+						CTA::GROUP_CTA    => [
 							CTA::LINK => [
 								'title'  => esc_html__( 'Lorem ipsum', 'tribe' ),
 								'url'    => '#',

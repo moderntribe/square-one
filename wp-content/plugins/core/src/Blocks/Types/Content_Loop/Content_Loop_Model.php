@@ -47,4 +47,5 @@ class Content_Loop_Model extends Base_Model {
 			Link_Controller::ARIA_LABEL     => $cta['aria_label'] ?? '',
 		];
 	}
+
 }

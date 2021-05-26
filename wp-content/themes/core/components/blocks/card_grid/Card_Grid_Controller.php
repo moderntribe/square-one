@@ -277,4 +277,5 @@ class Card_Grid_Controller extends Abstract_Controller {
 			],
 		] );
 	}
+
 }

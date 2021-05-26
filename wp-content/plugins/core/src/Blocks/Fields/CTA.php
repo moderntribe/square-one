@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Blocks\Fields;
 
@@ -65,4 +64,5 @@ class CTA {
 
 		return $group;
 	}
+
 }

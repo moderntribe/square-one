@@ -3,11 +3,10 @@
 namespace Tribe\Project\Blocks\Types\Hero;
 
 use Tribe\Libs\ACF\Block;
-use Tribe\Libs\ACF\Field;
 use Tribe\Libs\ACF\Block_Config;
+use Tribe\Libs\ACF\Field;
 use Tribe\Libs\ACF\Field_Section;
 use Tribe\Project\Blocks\Fields\CTA;
-use Tribe\Libs\ACF\Field;
 
 class Hero extends Block_Config {
 
@@ -49,7 +48,7 @@ class Hero extends Block_Config {
 							'Cras ut ornare dui, sed venenatis est. Donec euismod in leo quis consequat.',
 							'tribe'
 						),
-						CTA::GROUP_CTA => [
+						CTA::GROUP_CTA    => [
 							CTA::LINK => [
 								'title'  => esc_html__( 'Lorem ipsum', 'tribe' ),
 								'url'    => '#',
@@ -120,4 +119,5 @@ class Hero extends Block_Config {
 				 'image_extension' => 'svg',
 			 ] ) );
 	}
+
 }
