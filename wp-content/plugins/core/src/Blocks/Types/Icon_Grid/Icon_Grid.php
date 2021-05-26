@@ -1,4 +1,4 @@
-<?php declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Blocks\Types\Icon_Grid;
 
@@ -82,7 +82,7 @@ class Icon_Grid extends Block_Config {
 	}
 
 	/**
-	 * @return Repeater
+	 * @return \Tribe\Libs\ACF\Repeater
 	 */
 	protected function get_icon_section(): Repeater {
 		$group = new Repeater( self::NAME . '_' . self::ICONS, [
@@ -128,4 +128,5 @@ class Icon_Grid extends Block_Config {
 
 		return $group;
 	}
+
 }

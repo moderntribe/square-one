@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Admin\Editor;
 
@@ -35,7 +35,7 @@ class Classic_Editor_Formats {
 	 *
 	 * @return array
 	 */
-	public function mce_buttons( $buttons ): array {
+	public function mce_buttons( array $buttons ): array {
 		// Remove formatselect
 		$tag_select = array_shift( $buttons );
 
@@ -65,7 +65,7 @@ class Classic_Editor_Formats {
 	 *
 	 * @return array $settings
 	 */
-	public function visual_editor_styles_dropdown( $settings ): array {
+	public function visual_editor_styles_dropdown( array $settings ): array {
 		$style_formats             = [
 			/* Example single-level format
 			[
@@ -119,15 +119,16 @@ class Classic_Editor_Formats {
 	 *
 	 * @return array
 	 */
-	public function add_minimal_toolbar( $toolbars ): array {
+	public function add_minimal_toolbar( array $toolbars ): array {
 		$toolbars['Minimal'][1] = [
 			'bold',
 			'italic',
 			'bullist',
 			'numlist',
-			'link'
+			'link',
 		];
 
 		return $toolbars;
 	}
+
 }
