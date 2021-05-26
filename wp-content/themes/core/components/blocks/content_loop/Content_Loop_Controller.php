@@ -301,10 +301,17 @@ class Content_Loop_Controller extends Abstract_Controller {
 	 * @return string
 	 */
 	public function get_content_classes(): string {
-		$this->content_classes[] = 'g-2-up';
-
+		
 		if ( $this->layout === Content_Loop_Block::LAYOUT_ROW ) {
+			$this->content_classes[] = 'row';
+		}
+
+		elseif ( $this->layout === Content_Loop_Block::LAYOUT_COLUMNS ) {
 			$this->content_classes[] = 'g-3-up';
+		}
+		
+		else {
+			$this->content_classes[] = 'g-2-up';
 		}
 
 

@@ -48,14 +48,14 @@ $c = \Tribe\Project\Templates\Components\blocks\content_loop\Content_Loop_Contro
 			<?php elseif ( $c->get_layout() === Content_Loop::LAYOUT_COLUMNS ) : ?>
 
 				<!-- Columns Layout -->
-				<?php foreach ( $c->get_posts_card_args( Card_Controller::STYLE_INLINE ) as $index => $card_args ) { ?>
+				<?php foreach ( $c->get_posts_card_args( Card_Controller::STYLE_PLAIN ) as $index => $card_args ) { ?>
 					<?php get_template_part( 'components/card/card', null, $card_args ); ?>
 				<?php } ?>
 
 			<?php else : ?>
 
 				<!-- Row Layout -->
-				<?php foreach ( $c->get_posts_card_args() as $card_args ) { ?>
+				<?php foreach ( $c->get_posts_card_args( Card_Controller::STYLE_INLINE ) as $index => $card_args ) { ?>
 					<?php get_template_part( 'components/card/card', null, $card_args ); ?>
 				<?php } ?>
 

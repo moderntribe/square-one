@@ -19,7 +19,7 @@ class Index_Controller extends Abstract_Controller {
 	
 	public const IS_TERM = 'is_term';
 
-	private bool $is_term;
+	private $is_term;
 
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
@@ -166,10 +166,10 @@ class Index_Controller extends Abstract_Controller {
 		
 		return [
 			Content_Loop_Controller::CLASSES => [ 'item-index__loop' ],
-			//Content_Loop_Controller::LAYOUT  => Content_Loop::LAYOUT_ROW,
+			Content_Loop_Controller::LAYOUT  => Content_Loop::LAYOUT_ROW,
 		//	Content_Loop_Controller::LAYOUT  => Content_Loop::LAYOUT_COLUMNS,
 			Content_Loop_Controller::POSTS   => $posts,
-		//	Content_Loop_Controller::VARIANT => Content_Loop_Controller::VARIANT_SMALL,
+		
 		];
 	}
 }
