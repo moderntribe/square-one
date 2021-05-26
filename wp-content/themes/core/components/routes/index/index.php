@@ -16,13 +16,12 @@ $c->render_header();
 			<?php
 			if ( have_posts() ) :
 
-				while ( have_posts() ) :
+				if ( $c->get_current_page() === 1 && ! empty( $c->get_featured_posts_args() ) ) :
+					get_template_part( 'components/blocks/content_loop/content_loop', null, $c->get_featured_posts_args() );
+				endif;
 
-					the_post();
-					//get_template_part( 'components/loop_items/index/index', 'index' );
-					get_template_part( 'components/loop_items/layout_a/index', 'index' );
-
-				endwhile;
+				get_template_part( 'components/blocks/content_loop/content_loop', null, $c->get_loop_args() );
+				
 
 				get_template_part( 'components/pagination/loop/loop', 'index' );
 
