@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Blocks\Types\Icon_Grid;
 
@@ -15,6 +14,7 @@ use Tribe\Project\Templates\Components\link\Link_Controller;
  * for the component
  */
 class Icon_Grid_Model extends Base_Model {
+
 	public function get_data(): array {
 		return [
 			Icon_Grid_Controller::ATTRS       => $this->get_attrs(),
@@ -46,4 +46,5 @@ class Icon_Grid_Model extends Base_Model {
 			Link_Controller::ARIA_LABEL     => $cta['aria_label'] ?? '',
 		];
 	}
+
 }

@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\blocks\card_grid;
 
@@ -16,6 +15,7 @@ use Tribe\Project\Templates\Components\text\Text_Controller;
 use Tribe\Project\Theme\Config\Image_Sizes;
 
 class Card_Grid_Controller extends Abstract_Controller {
+
 	public const TITLE             = 'title';
 	public const DESCRIPTION       = 'description';
 	public const CTA               = 'cta';
@@ -30,13 +30,13 @@ class Card_Grid_Controller extends Abstract_Controller {
 	private string $layout;
 	private string $title;
 	private string $description;
-	private array  $cta;
-	private array  $posts;
-	private array  $container_classes;
-	private array  $loop_classes;
-	private array  $loop_attrs;
-	private array  $classes;
-	private array  $attrs;
+	private array $cta;
+	private array $posts;
+	private array $container_classes;
+	private array $loop_classes;
+	private array $loop_attrs;
+	private array $classes;
+	private array $attrs;
 
 	public function __construct( array $args = [] ) {
 		$args                    = $this->parse_args( $args );
@@ -151,7 +151,7 @@ class Card_Grid_Controller extends Abstract_Controller {
 			Content_Block_Controller::CLASSES => [
 				'c-block__content-block',
 				'c-block__header',
-				'b-card-grid__header'
+				'b-card-grid__header',
 			],
 		];
 	}
@@ -222,7 +222,7 @@ class Card_Grid_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	private function get_title(): Deferred_Component {
 		return defer_template_part( 'components/text/text', null, [
@@ -237,7 +237,7 @@ class Card_Grid_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	private function get_content(): Deferred_Component {
 		return defer_template_part( 'components/container/container', null, [
@@ -252,7 +252,7 @@ class Card_Grid_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	private function get_cta(): Deferred_Component {
 		$cta = wp_parse_args( $this->cta, [

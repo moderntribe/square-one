@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\routes\unsupported_browser;
 
@@ -9,7 +8,7 @@ use Tribe\Project\Templates\Components\Abstract_Controller;
 class Unsupported_Browser_Controller extends Abstract_Controller {
 
 	/**
-	 * @var Theme_Build_Parser
+	 * @var \Tribe\Project\Assets\Theme\Theme_Build_Parser
 	 */
 	private $build_parser;
 

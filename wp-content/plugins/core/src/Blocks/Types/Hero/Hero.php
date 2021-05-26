@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Blocks\Types\Hero;
 
@@ -8,8 +7,10 @@ use Tribe\Libs\ACF\Field;
 use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Field_Section;
 use Tribe\Project\Blocks\Fields\CTA;
+use Tribe\Libs\ACF\Field;
 
 class Hero extends Block_Config {
+
 	public const NAME = 'hero';
 
 	public const SECTION_CONTENT = 's-content';

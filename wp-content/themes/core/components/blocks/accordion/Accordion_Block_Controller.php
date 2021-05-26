@@ -1,9 +1,7 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\blocks\accordion;
 
-use PHP_CodeSniffer\Generators\Text;
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\accordion\Accordion_Controller;
@@ -14,6 +12,7 @@ use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Templates\Components\text\Text_Controller;
 
 class Accordion_Block_Controller extends Abstract_Controller {
+
 	public const ROWS              = 'rows';
 	public const TITLE             = 'title';
 	public const LEADIN            = 'leadin';
@@ -28,15 +27,15 @@ class Accordion_Block_Controller extends Abstract_Controller {
 	public const LAYOUT_STACKED    = 'stacked';
 
 	private string $layout;
-	private array  $rows;
+	private array $rows;
 	private string $title;
 	private string $leadin;
 	private string $description;
-	private array  $cta;
-	private array  $container_classes;
-	private array  $content_classes;
-	private array  $classes;
-	private array  $attrs;
+	private array $cta;
+	private array $container_classes;
+	private array $content_classes;
+	private array $classes;
+	private array $attrs;
 
 	/**
 	 * @param array $args
@@ -138,7 +137,7 @@ class Accordion_Block_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	private function get_title(): Deferred_Component {
 		return defer_template_part( 'components/text/text', null, [
@@ -153,7 +152,7 @@ class Accordion_Block_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	private function get_leadin(): Deferred_Component {
 		return defer_template_part( 'components/text/text', null, [
@@ -167,7 +166,7 @@ class Accordion_Block_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	private function get_content(): Deferred_Component {
 		return defer_template_part( 'components/container/container', null, [
@@ -182,7 +181,7 @@ class Accordion_Block_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	private function get_cta(): Deferred_Component {
 		$cta = wp_parse_args( $this->cta, [
@@ -216,4 +215,5 @@ class Accordion_Block_Controller extends Abstract_Controller {
 			Accordion_Controller::ROWS => $this->rows,
 		];
 	}
+
 }

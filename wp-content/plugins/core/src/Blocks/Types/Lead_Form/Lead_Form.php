@@ -1,4 +1,4 @@
-<?php declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Blocks\Types\Lead_Form;
 
@@ -9,6 +9,7 @@ use Tribe\Libs\ACF\Field_Section;
 use Tribe\Project\Blocks\Fields\CTA;
 
 class Lead_Form extends Block_Config {
+
 	public const NAME = 'leadform';
 
 	public const SECTION_CONTENT = 's-content';

@@ -1,5 +1,4 @@
-<?php
-
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Blocks\Types\Links;
 
@@ -9,6 +8,7 @@ use Tribe\Project\Templates\Components\blocks\links\Links_Block_Controller;
 use Tribe\Project\Templates\Components\link\Link_Controller;
 
 class Links_Model extends Base_Model {
+
 	/**
 	 * @return array
 	 */
@@ -45,4 +45,5 @@ class Links_Model extends Base_Model {
 			Link_Controller::ARIA_LABEL     => $cta['aria_label'] ?? '',
 		];
 	}
+
 }

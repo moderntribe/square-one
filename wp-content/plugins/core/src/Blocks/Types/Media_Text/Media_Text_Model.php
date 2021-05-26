@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Blocks\Types\Media_Text;
 
@@ -9,6 +8,7 @@ use Tribe\Project\Templates\Components\blocks\media_text\Media_Text_Block_Contro
 use Tribe\Project\Templates\Components\link\Link_Controller;
 
 class Media_Text_Model extends Base_Model {
+
 	/**
 	 * @return array
 	 */
@@ -44,4 +44,5 @@ class Media_Text_Model extends Base_Model {
 			Link_Controller::ARIA_LABEL     => $cta['aria_label'] ?? '',
 		];
 	}
+
 }

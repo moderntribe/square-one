@@ -1,20 +1,18 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\blocks\gallery_grid;
 
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
+use Tribe\Project\Templates\Components\button\Button_Controller;
 use Tribe\Project\Templates\Components\container\Container_Controller;
 use Tribe\Project\Templates\Components\content_block\Content_Block_Controller;
 use Tribe\Project\Templates\Components\Deferred_Component;
+use Tribe\Project\Templates\Components\dialog\Dialog_Controller;
 use Tribe\Project\Templates\Components\image\Image_Controller;
-use Tribe\Project\Theme\Config\Image_Sizes;
-use Tribe\Project\Templates\Components\button\Button_Controller;
-use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Templates\Components\slider\Slider_Controller;
 use Tribe\Project\Templates\Components\text\Text_Controller;
-use Tribe\Project\Templates\Components\dialog\Dialog_Controller;
+use Tribe\Project\Theme\Config\Image_Sizes;
 
 class Gallery_Grid_Controller extends Abstract_Controller {
 
@@ -30,24 +28,24 @@ class Gallery_Grid_Controller extends Abstract_Controller {
 	public const GRID_LAYOUT       = 'grid_layout';
 	public const SLIDESHOW         = 'slideshow';
 
-	public const ONE               = 'one';
-	public const TWO               = 'two';
-	public const THREE             = 'three';
-	public const FOUR              = 'four';
+	public const ONE   = 'one';
+	public const TWO   = 'two';
+	public const THREE = 'three';
+	public const FOUR  = 'four';
 
 	/**
 	 * @var string[]
 	 */
-	private array  $classes;
-	private array  $attrs;
-	private array  $container_classes;
-	private array  $content_classes;
+	private array $classes;
+	private array $attrs;
+	private array $container_classes;
+	private array $content_classes;
 	private string $title;
 	private string $description;
-	private array  $cta;
-	private array  $gallery;
+	private array $cta;
+	private array $gallery;
 	private string $grid_layout;
-	private bool   $slideshow;
+	private bool $slideshow;
 	private string $id;
 
 	public function __construct( array $args = [] ) {
@@ -139,13 +137,13 @@ class Gallery_Grid_Controller extends Abstract_Controller {
 			Content_Block_Controller::CLASSES => [
 				'c-block__content-block',
 				'c-block__header',
-				'b-gallery-grid'
+				'b-gallery-grid',
 			],
 		];
 	}
 
 	/**
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	private function get_title(): Deferred_Component {
 		return defer_template_part( 'components/text/text', null, [
@@ -167,7 +165,7 @@ class Gallery_Grid_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	private function get_content(): Deferred_Component {
 		return defer_template_part( 'components/container/container', null, [
@@ -188,14 +186,14 @@ class Gallery_Grid_Controller extends Abstract_Controller {
 	 */
 	public function get_slideshow_button() {
 		return [
-			Button_Controller::CLASSES    => [
+			Button_Controller::CLASSES => [
 				'c-block__cta-link',
 				'a-btn',
 				'a-btn--has-icon-after',
-				'icon-arrow-right'
+				'icon-arrow-right',
 			],
-			Button_Controller::ATTRS      => [ 'data-js'  => 'dialog-trigger', 'data-content' => 'dialog-content-' . $this->get_block_id() ],
-			Button_Controller::CONTENT    => esc_html__( 'View slideshow', 'tribe' ),
+			Button_Controller::ATTRS   => [ 'data-js'  => 'dialog-trigger', 'data-content' => 'dialog-content-' . $this->get_block_id() ],
+			Button_Controller::CONTENT => esc_html__( 'View slideshow', 'tribe' ),
 		];
 	}
 
@@ -204,11 +202,11 @@ class Gallery_Grid_Controller extends Abstract_Controller {
 	 */
 	protected function get_slider_options(): string {
 		$args = [
-			'preloadImages'         => "true",
-			'lazy'                  => "true",
-			'spaceBetween'          => 60,
-			'keyboard'              => "true",
-			'grabCursor'            => "true",
+			'preloadImages' => "true",
+			'lazy'          => "true",
+			'spaceBetween'  => 60,
+			'keyboard'      => "true",
+			'grabCursor'    => "true",
 		];
 
 		return json_encode( $args );
@@ -243,7 +241,7 @@ class Gallery_Grid_Controller extends Abstract_Controller {
 	/**
 	 * @param int $img_id
 	 *
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	public function get_slide_img( int $img_id ): Deferred_Component {
 		return defer_template_part(
@@ -267,7 +265,7 @@ class Gallery_Grid_Controller extends Abstract_Controller {
 	/**
 	 * @param int $index
 	 *
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	protected function gallery_count( int $index ): Deferred_Component {
 		return defer_template_part( 'components/text/text', null, [
@@ -281,7 +279,7 @@ class Gallery_Grid_Controller extends Abstract_Controller {
 	/**
 	 * @param int $slide_id
 	 *
-	 * @return string|Deferred_Component
+	 * @return string|\Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	protected function get_image_caption( int $slide_id ) {
 		$thumbnail_image = get_posts( [ 'p' => $slide_id, 'post_type' => 'attachment' ] );
@@ -304,8 +302,8 @@ class Gallery_Grid_Controller extends Abstract_Controller {
 	 * @return string
 	 */
 	protected function get_image_template( $index, $img_id ): string {
-		$img          = $this->get_slide_img( $img_id );
-		$slide_markup = $img;
+		$img           = $this->get_slide_img( $img_id );
+		$slide_markup  = $img;
 		$slide_markup .= defer_template_part( 'components/container/container', null, [
 			Container_Controller::CLASSES => [
 				'b-gallery-grid__meta-wrap',
@@ -331,7 +329,7 @@ class Gallery_Grid_Controller extends Abstract_Controller {
 
 		return array_map( function ( $index, $slide_id ) {
 			return $this->get_image_template( $index, $slide_id );
-		}, array_keys($slide_ids), $slide_ids );
+		}, array_keys( $slide_ids ), $slide_ids );
 	}
 
 	/**
@@ -347,7 +345,7 @@ class Gallery_Grid_Controller extends Abstract_Controller {
 		$img_aspect   = 's-aspect-ratio-1-1';
 		$img_srcset   = [
 			Image_Sizes::SQUARE_MEDIUM,
-			Image_Sizes::SQUARE_XSMALL
+			Image_Sizes::SQUARE_XSMALL,
 		];
 
 		if ( empty( $ids ) ) {
@@ -363,34 +361,34 @@ class Gallery_Grid_Controller extends Abstract_Controller {
 				'medium',
 				'medium_large',
 				'large',
-				Image_Sizes::CORE_FULL
+				Image_Sizes::CORE_FULL,
 			];
 		}
 
 		if ( $this->grid_layout === self::TWO ) {
-			$img_size     = Image_Sizes::SQUARE_LARGE;
-			$img_srcset   = [
+			$img_size   = Image_Sizes::SQUARE_LARGE;
+			$img_srcset = [
 				Image_Sizes::SQUARE_XSMALL,
 				Image_Sizes::SQUARE_MEDIUM,
-				Image_Sizes::SQUARE_LARGE
+				Image_Sizes::SQUARE_LARGE,
 
 			];
 		}
 
 		foreach ( $ids as $id ) {
 			$gallery_imgs[] = [
-				Image_Controller::IMG_ID => $id,
-				Image_Controller::AS_BG => $img_bg,
+				Image_Controller::IMG_ID       => $id,
+				Image_Controller::AS_BG        => $img_bg,
 				Image_Controller::USE_LAZYLOAD => false,
-				Image_Controller::WRAPPER_TAG => 'div',
-				Image_Controller::CLASSES => [
+				Image_Controller::WRAPPER_TAG  => 'div',
+				Image_Controller::CLASSES      => [
 					'b-gallery-grid__figure',
 					'b-gallery-grid__figure--' . $i,
 					$img_aspect,
-					$img_bg_class
+					$img_bg_class,
 				],
-				Image_Controller::IMG_CLASSES => [ 'b-gallery_img' ],
-				Image_Controller::SRC_SIZE => $img_size,
+				Image_Controller::IMG_CLASSES  => [ 'b-gallery_img' ],
+				Image_Controller::SRC_SIZE     => $img_size,
 				Image_Controller::SRCSET_SIZES => $img_srcset,
 			];
 
@@ -401,14 +399,14 @@ class Gallery_Grid_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 *
 	 * @return array
 	 */
 	public function get_dialog_args(): array {
 		return [
-			Dialog_Controller::ID  => $this->get_block_id(),
-			Dialog_Controller::TITLE  => $this->get_slideshow_title(),
-			Dialog_Controller::CONTENT  => defer_template_part( 'components/slider/slider', null, $this->get_slider_args() ),
+			Dialog_Controller::ID      => $this->get_block_id(),
+			Dialog_Controller::TITLE   => $this->get_slideshow_title(),
+			Dialog_Controller::CONTENT => defer_template_part( 'components/slider/slider', null, $this->get_slider_args() ),
 		];
 	}
+
 }

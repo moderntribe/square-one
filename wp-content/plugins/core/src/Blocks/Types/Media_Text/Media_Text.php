@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Blocks\Types\Media_Text;
 
@@ -10,6 +9,7 @@ use Tribe\Libs\ACF\Field_Section;
 use Tribe\Project\Blocks\Fields\CTA;
 
 class Media_Text extends Block_Config {
+
 	public const NAME = 'mediatext';
 
 	public const SECTION_SETTINGS = 's-settings';
@@ -87,7 +87,7 @@ class Media_Text extends Block_Config {
 					 'name'        => self::LEAD_IN,
 					 'type'        => 'text',
 					 'wrapper'     => [
-						 'class' => 'tribe-acf-hide-label',
+							'class' => 'tribe-acf-hide-label',
 					 ],
 					 'placeholder' => 'Leadin (optional)',
 				 ] )
@@ -192,6 +192,5 @@ class Media_Text extends Block_Config {
 				'image_extension' => 'svg',
 			] ) );
 	}
-
 
 }

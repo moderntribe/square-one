@@ -1,11 +1,10 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Blocks\Types\Card_Grid;
 
-use Tribe\Libs\ACF\Field;
 use Tribe\Libs\ACF\Block;
 use Tribe\Libs\ACF\Block_Config;
+use Tribe\Libs\ACF\Field;
 use Tribe\Libs\ACF\Field_Section;
 use Tribe\Project\Blocks\Fields\CTA;
 use Tribe\Project\Post_Types\Post\Post;
@@ -15,6 +14,7 @@ use Tribe\Project\Taxonomies\Example\Example;
 use Tribe\Project\Taxonomies\Post_Tag\Post_Tag;
 
 class Card_Grid extends Block_Config {
+
 	public const NAME = 'cardgrid';
 
 	public const SECTION_CONTENT = 's-content';

@@ -1,4 +1,5 @@
-<?php declare( strict_types=1 );
+<?php declare(strict_types=1);
+
 /**
  * Sample route.
  *
@@ -14,14 +15,17 @@ use Tribe\Libs\Routes\Abstract_Route;
  * Class to define a sample route.
  */
 class Sample_Route extends Abstract_Route {
+
 	/**
 	 * Javascript configuration for this route.
 	 *
 	 * @param array $data The current core JS configuration.
+	 *
 	 * @return array      Modified core JS configuration.
 	 */
 	public function js_config( array $data = [] ): array {
 		$data['FormSubmitEndpoint'] = rest_url( '/tribe/v1/submit-form/' );
+
 		return $data;
 	}
 
@@ -94,4 +98,5 @@ class Sample_Route extends Abstract_Route {
 	public function get_title(): string {
 		return esc_html__( 'Sample | Project', 'project' );
 	}
+
 }

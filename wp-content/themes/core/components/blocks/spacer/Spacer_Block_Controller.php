@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\blocks\spacer;
 
@@ -8,6 +7,7 @@ use Tribe\Project\Blocks\Types\Spacer\Spacer as Spacer_Block;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 
 class Spacer_Block_Controller extends Abstract_Controller {
+
 	public const CONTAINER_CLASSES = 'container_classes';
 	public const CONTENT_CLASSES   = 'content_classes';
 	public const CLASSES           = 'classes';
@@ -18,8 +18,8 @@ class Spacer_Block_Controller extends Abstract_Controller {
 	/**
 	 * @var array|string
 	 */
-	private array  $classes;
-	private array  $attrs;
+	private array $classes;
+	private array $attrs;
 	private string $size;
 	private string $display_options;
 
@@ -77,4 +77,5 @@ class Spacer_Block_Controller extends Abstract_Controller {
 
 		return Markup_Utils::class_attribute( $this->classes );
 	}
+
 }

@@ -1,4 +1,4 @@
-<?php declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Blocks\Types\Lead_Form;
 
@@ -8,6 +8,7 @@ use Tribe\Project\Templates\Components\blocks\lead_form\Lead_Form_Block_Controll
 use Tribe\Project\Templates\Components\link\Link_Controller;
 
 class Lead_Form_Model extends Base_Model {
+
 	/**
 	 * @return array
 	 */
@@ -46,4 +47,5 @@ class Lead_Form_Model extends Base_Model {
 			Link_Controller::ARIA_LABEL     => $cta['aria_label'] ?? '',
 		];
 	}
+
 }

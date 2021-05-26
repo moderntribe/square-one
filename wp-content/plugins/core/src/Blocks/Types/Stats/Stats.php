@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Blocks\Types\Stats;
 
@@ -11,6 +10,7 @@ use Tribe\Libs\ACF\Repeater;
 use Tribe\Project\Blocks\Fields\CTA;
 
 class Stats extends Block_Config {
+
 	public const NAME = 'stats';
 
 	public const SECTION_CONTENT = 's-content';
@@ -165,7 +165,7 @@ class Stats extends Block_Config {
 	}
 
 	/**
-	 * @return Repeater
+	 * @return \Tribe\Libs\ACF\Repeater
 	 */
 	protected function get_stats_section() {
 		$group = new Repeater( self::NAME . '_' . self::STATS );

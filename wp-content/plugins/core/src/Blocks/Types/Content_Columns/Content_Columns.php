@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Blocks\Types\Content_Columns;
 
@@ -10,6 +10,7 @@ use Tribe\Libs\ACF\Repeater;
 use Tribe\Project\Blocks\Fields\CTA;
 
 class Content_Columns extends Block_Config {
+
 	public const NAME = 'contentcolumns';
 
 	public const SECTION_CONTENT = 's-content';
@@ -121,7 +122,7 @@ class Content_Columns extends Block_Config {
 	}
 
 	/**
-	 * @return Repeater
+	 * @return \Tribe\Libs\ACF\Repeater
 	 */
 	protected function get_links_section() {
 		$group = new Repeater( self::NAME . '_' . self::COLUMNS );
@@ -155,4 +156,5 @@ class Content_Columns extends Block_Config {
 
 		return $group;
 	}
+
 }

@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\blocks\media_text;
 
@@ -8,13 +7,14 @@ use Tribe\Project\Blocks\Types\Media_Text\Media_Text as Media_Text_Block;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\container\Container_Controller;
 use Tribe\Project\Templates\Components\content_block\Content_Block_Controller;
-use Tribe\Project\Templates\Components\text\Text_Controller;
 use Tribe\Project\Templates\Components\Deferred_Component;
-use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Templates\Components\image\Image_Controller;
+use Tribe\Project\Templates\Components\link\Link_Controller;
+use Tribe\Project\Templates\Components\text\Text_Controller;
 use Tribe\Project\Theme\Config\Image_Sizes;
 
 class Media_Text_Block_Controller extends Abstract_Controller {
+
 	public const CLASSES           = 'classes';
 	public const ATTRS             = 'attrs';
 	public const WIDTH             = 'width';
@@ -35,19 +35,19 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 	 */
 	private $image;
 
-	private array  $classes;
-	private array  $attrs;
+	private array $classes;
+	private array $attrs;
 	private string $width;
 	private string $layout;
-	private array  $container_classes;
-	private array  $media_classes;
-	private array  $content_classes;
+	private array $container_classes;
+	private array $media_classes;
+	private array $content_classes;
 	private string $media_type;
 	private string $video;
 	private string $title;
 	private string $leadin;
 	private string $description;
-	private array  $cta;
+	private array $cta;
 
 	/**
 	 * @param array $args
@@ -147,13 +147,13 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 			Content_Block_Controller::CLASSES => [
 				'c-block__content-block',
 				'c-block__header',
-				'b-media-text__content-container'
+				'b-media-text__content-container',
 			],
 		];
 	}
 
 	/**
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	private function get_leadin(): Deferred_Component {
 		return defer_template_part( 'components/text/text', null, [
@@ -167,7 +167,7 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	private function get_title(): Deferred_Component {
 		return defer_template_part( 'components/text/text', null, [
@@ -182,7 +182,7 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	private function get_content(): Deferred_Component {
 		return defer_template_part( 'components/container/container', null, [
@@ -197,7 +197,7 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	private function get_cta(): Deferred_Component {
 		$cta = wp_parse_args( $this->cta, [

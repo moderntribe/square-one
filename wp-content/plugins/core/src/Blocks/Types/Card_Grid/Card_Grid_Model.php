@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Blocks\Types\Card_Grid;
 
@@ -9,6 +8,7 @@ use Tribe\Project\Templates\Components\blocks\card_grid\Card_Grid_Controller;
 use Tribe\Project\Templates\Components\link\Link_Controller;
 
 class Card_Grid_Model extends Base_Model {
+
 	/**
 	 * @return array
 	 */
@@ -43,4 +43,5 @@ class Card_Grid_Model extends Base_Model {
 			Link_Controller::ARIA_LABEL     => $cta['aria_label'] ?? '',
 		];
 	}
+
 }

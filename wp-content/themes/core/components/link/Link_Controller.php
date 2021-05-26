@@ -1,11 +1,9 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\link;
 
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
-use Tribe\Project\Templates\Components\Deferred_Component;
 
 class Link_Controller extends Abstract_Controller {
 	public const URL            = 'url';
@@ -17,15 +15,15 @@ class Link_Controller extends Abstract_Controller {
 	public const CONTENT        = 'content';
 
 	/**
-	 * @var string|Deferred_Component
+	 * @var string|\Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	private $content;
 	private string $url;
 	private string $target;
 	private bool   $add_aria_label;
 	private string $aria_label;
-	private array  $classes;
-	private array  $attrs;
+	private array $classes;
+	private array $attrs;
 
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
@@ -94,4 +92,5 @@ class Link_Controller extends Abstract_Controller {
 	private function new_window_text(): string {
 		return sprintf( '<span class="u-visually-hidden">%s</span>', __( 'Opens new window', 'tribe' ) );
 	}
+
 }

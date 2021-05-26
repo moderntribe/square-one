@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\blocks\content_columns;
 
@@ -14,6 +13,7 @@ use Tribe\Project\Templates\Components\text\Text_Controller;
 use Tribe\Project\Templates\Models\Content_Column;
 
 class Content_Columns_Block_Controller extends Abstract_Controller {
+
 	public const CLASSES           = 'classes';
 	public const CONTAINER_CLASSES = 'container_classes';
 	public const CONTENT_CLASSES   = 'content_classes';
@@ -26,19 +26,19 @@ class Content_Columns_Block_Controller extends Abstract_Controller {
 	public const COLUMN_CLASSES    = 'columns_classes';
 	public const CONTENT_ALIGN     = 'content_align';
 
-	private array  $classes;
-	private array  $attrs;
+	private array $classes;
+	private array $attrs;
 	private string $title;
 	private string $leadin;
 	private string $description;
-	private array  $cta;
-	private array  $container_classes;
-	private array  $content_classes;
-	private array  $column_classes;
+	private array $cta;
+	private array $container_classes;
+	private array $content_classes;
+	private array $column_classes;
 	private string $content_align;
 
 	/**
-	 * @var Content_Column[]
+	 * @var \Tribe\Project\Templates\Models\Content_Column[]
 	 */
 	private array $columns;
 
@@ -110,7 +110,7 @@ class Content_Columns_Block_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	private function get_leadin(): Deferred_Component {
 		return defer_template_part( 'components/text/text', null, [
@@ -124,7 +124,7 @@ class Content_Columns_Block_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	private function get_title(): Deferred_Component {
 		return defer_template_part( 'components/text/text', null, [
@@ -139,7 +139,7 @@ class Content_Columns_Block_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	private function get_content(): Deferred_Component {
 		return defer_template_part( 'components/container/container', null, [
@@ -154,7 +154,7 @@ class Content_Columns_Block_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	private function get_cta(): Deferred_Component {
 		$cta = wp_parse_args( $this->cta, [
@@ -264,4 +264,5 @@ class Content_Columns_Block_Controller extends Abstract_Controller {
 	public function get_column_classes(): string {
 		return Markup_Utils::class_attribute( $this->column_classes );
 	}
+
 }

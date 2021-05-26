@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\blocks\hero;
 
@@ -9,12 +8,13 @@ use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\container\Container_Controller;
 use Tribe\Project\Templates\Components\content_block\Content_Block_Controller;
 use Tribe\Project\Templates\Components\Deferred_Component;
+use Tribe\Project\Templates\Components\image\Image_Controller;
 use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Templates\Components\text\Text_Controller;
-use Tribe\Project\Templates\Components\image\Image_Controller;
 use Tribe\Project\Theme\Config\Image_Sizes;
 
 class Hero_Block_Controller extends Abstract_Controller {
+
 	public const LAYOUT            = 'layout';
 	public const MEDIA             = 'media';
 	public const TITLE             = 'title';
@@ -36,12 +36,12 @@ class Hero_Block_Controller extends Abstract_Controller {
 	private string $title;
 	private string $leadin;
 	private string $description;
-	private array  $cta;
-	private array  $container_classes;
-	private array  $media_classes;
-	private array  $content_classes;
-	private array  $classes;
-	private array  $attrs;
+	private array $cta;
+	private array $container_classes;
+	private array $media_classes;
+	private array $content_classes;
+	private array $classes;
+	private array $attrs;
 
 	/**
 	 * @param array $args
@@ -155,7 +155,7 @@ class Hero_Block_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	private function get_leadin(): Deferred_Component {
 		return defer_template_part( 'components/text/text', null, [
@@ -169,7 +169,7 @@ class Hero_Block_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	private function get_title(): Deferred_Component {
 		return defer_template_part( 'components/text/text', null, [
@@ -184,7 +184,7 @@ class Hero_Block_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	private function get_content(): Deferred_Component {
 		return defer_template_part( 'components/container/container', null, [
@@ -199,7 +199,7 @@ class Hero_Block_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	private function get_cta(): Deferred_Component {
 		$cta = wp_parse_args( $this->cta, [
@@ -248,4 +248,5 @@ class Hero_Block_Controller extends Abstract_Controller {
 			],
 		];
 	}
+
 }

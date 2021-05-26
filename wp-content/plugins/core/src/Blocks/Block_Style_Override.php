@@ -1,9 +1,9 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Blocks;
 
 class Block_Style_Override {
+
 	/**
 	 * @var array The block types affected by this style override
 	 */
@@ -11,6 +11,7 @@ class Block_Style_Override {
 
 	/**
 	 * @var array[] The styles to register
+	 *
 	 * @link https://developer.wordpress.org/block-editor/developers/filters/block-filters/#register_block_style
 	 */
 	protected $register = [];
@@ -35,6 +36,7 @@ class Block_Style_Override {
 
 	/**
 	 * @return void
+	 *
 	 * @action after_setup_theme
 	 */
 	public function register(): void {
