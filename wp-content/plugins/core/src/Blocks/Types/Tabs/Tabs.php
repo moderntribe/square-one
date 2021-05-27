@@ -111,7 +111,8 @@ class Tabs extends Block_Config implements Cta_Field {
 					'label'        => __( 'Description', 'tribe' ),
 					'name'         => self::DESCRIPTION,
 					'type'         => 'wysiwyg',
-					'toolbar'      => 'basic',
+					'toolbar'      => 'minimal',
+					'tabs'         => 'visual',
 					'media_upload' => 0,
 				] )
 			)->add_field(
@@ -161,10 +162,12 @@ class Tabs extends Block_Config implements Cta_Field {
 
 		$group->add_field( $header );
 		$content = new Field( self::TAB_CONTENT, [
-			'label' => __( 'Tab Content', 'tribe' ),
-			'name'  => self::TAB_CONTENT,
-			'type'  => 'wysiwyg',
-			'delay' => 1,
+			'label'        => __( 'Tab Content', 'tribe' ),
+			'name'         => self::TAB_CONTENT,
+			'toolbar'      => 'minimal',
+			'tabs'         => 'visual',
+			'media_upload' => 0,
+			'delay'        => 1,
 		] );
 		$group->add_field( $content );
 

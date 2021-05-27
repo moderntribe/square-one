@@ -68,9 +68,12 @@ class Content_Loop extends Block_Config implements Cta_Field {
 					'type'  => 'text',
 				] )
 			)->add_field( new Field( self::NAME . '_' . self::DESCRIPTION, [
-					'label' => __( 'Description', 'tribe' ),
-					'name'  => self::DESCRIPTION,
-					'type'  => 'wysiwyg',
+					'label'        => __( 'Description', 'tribe' ),
+					'name'         => self::DESCRIPTION,
+					'type'         => 'wysiwyg',
+					'toolbar'      => 'minimal',
+					'tabs'         => 'visual',
+					'media_upload' => 0,
 				] )
 			)->add_field(
 				$this->get_cta_field( self::NAME )
@@ -100,25 +103,25 @@ class Content_Loop extends Block_Config implements Cta_Field {
 		// Setting Fields
 		//==========================================
 		$this->add_section( new Field_Section( self::SECTION_SETTINGS, __( 'Settings', 'tribe' ), 'accordion' ) )
-			->add_field(
-				new Field( self::NAME . '_' . self::LAYOUT, [
-					'type'            => 'image_select',
-					'name'            => self::LAYOUT,
-					'choices'         => [
-						self::LAYOUT_ROW     => __( 'Row', 'tribe' ),
-						self::LAYOUT_FEATURE => __( 'Feature', 'tribe' ),
-						self::LAYOUT_COLUMNS => __( 'Columns', 'tribe' ),
-					],
-					'default_value'   => self::LAYOUT_ROW,
-					'multiple'        => 0,
-					'image_path'      => sprintf(
-						'%sassets/img/admin/blocks/%s/',
-						trailingslashit( get_template_directory_uri() ),
-						self::NAME
-					),
-					'image_extension' => 'svg',
-				] )
-			);
+			 ->add_field(
+				 new Field( self::NAME . '_' . self::LAYOUT, [
+					 'type'            => 'image_select',
+					 'name'            => self::LAYOUT,
+					 'choices'         => [
+						 self::LAYOUT_ROW     => __( 'Row', 'tribe' ),
+						 self::LAYOUT_FEATURE => __( 'Feature', 'tribe' ),
+						 self::LAYOUT_COLUMNS => __( 'Columns', 'tribe' ),
+					 ],
+					 'default_value'   => self::LAYOUT_ROW,
+					 'multiple'        => 0,
+					 'image_path'      => sprintf(
+						 '%sassets/img/admin/blocks/%s/',
+						 trailingslashit( get_template_directory_uri() ),
+						 self::NAME
+					 ),
+					 'image_extension' => 'svg',
+				 ] )
+			 );
 	}
 
 }

@@ -33,7 +33,7 @@ class Icon_Grid extends Block_Config implements Cta_Field {
 			'title'       => __( 'Icon Grid', 'tribe' ),
 			'description' => __( 'A grid layout block with icon selections', 'tribe' ),
 			'icon'        => '<svg enable-background="new 0 0 146.3 106.3" version="1.1" viewBox="0 0 146.3 106.3" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"><style type="text/css">.st0{fill:#16D690;}.st1{fill:#21A6CB;}.st2{fill:#008F8F;}</style><polygon class="st0" points="145.2 106.3 72.6 42.3 26.5 1.2 0 106.3"/><polygon class="st1" points="145.2 106.3 0 106.3 72.6 42.3 118.6 1.2"/><polygon class="st2" points="72.6 42.3 145.2 106.3 0 106.3"/></svg>',
-			'keywords'    => [ __( 'icon', 'tribe' ), __( 'grid', 'tribe' ) ],
+			'keywords'    => [ __( 'icon', 'grid', 'tribe' ) ],
 			'category'    => 'common', // core categories: common, formatting, layout, widgets, embed
 			'supports'    => [
 				'align'  => false,
@@ -65,9 +65,12 @@ class Icon_Grid extends Block_Config implements Cta_Field {
 				 ] )
 			 )->add_field(
 				 new Field( self::NAME . '_' . self::DESCRIPTION, [
-					'label' => __( 'Description', 'tribe' ),
-					'name'  => self::DESCRIPTION,
-					'type'  => 'wysiwyg',
+					'label'        => __( 'Description', 'tribe' ),
+					'name'         => self::DESCRIPTION,
+					'type'         => 'wysiwyg',
+					'toolbar'      => 'minimal',
+					'tabs'         => 'visual',
+					'media_upload' => 0,
 				 ] )
 			 )->add_field(
 				 $this->get_cta_field( self::NAME )
@@ -106,9 +109,12 @@ class Icon_Grid extends Block_Config implements Cta_Field {
 			] )
 		)->add_field(
 			new Field( self::ICON_DESCRIPTION, [
-				'label' => __( 'Icon Description', 'tribe' ),
-				'name'  => self::ICON_DESCRIPTION,
-				'type'  => 'wysiwyg',
+				'label'        => __( 'Icon Description', 'tribe' ),
+				'name'         => self::ICON_DESCRIPTION,
+				'type'         => 'wysiwyg',
+				'toolbar'      => 'minimal',
+				'tabs'         => 'visual',
+				'media_upload' => 0,
 			] )
 		)->add_field(
 			$this->get_cta_field( self::NAME )
