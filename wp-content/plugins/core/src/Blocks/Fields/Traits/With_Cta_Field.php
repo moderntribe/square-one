@@ -5,9 +5,14 @@ namespace Tribe\Project\Blocks\Fields\Traits;
 use Tribe\Libs\ACF\Field;
 use Tribe\Libs\ACF\Field_Group;
 
+/**
+ * Reusable Cta Field for Blocks, should be used Cta_Field.php interface.
+ *
+ * @package Tribe\Project\Blocks\Fields\Traits
+ */
 trait With_Cta_Field {
 
-	public function get_cta_field( $block_name ): Field_Group {
+	public function get_cta_field( string $block_name ): Field_Group {
 		$group = new Field_Group( $block_name . '_' . self::GROUP_CTA );
 		$group->set_attributes( [
 			'label'  => __( 'Call to Action', 'tribe' ),

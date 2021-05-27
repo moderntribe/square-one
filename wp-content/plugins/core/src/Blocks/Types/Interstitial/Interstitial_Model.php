@@ -2,7 +2,7 @@
 
 namespace Tribe\Project\Blocks\Types\Interstitial;
 
-use Tribe\Project\Blocks\Fields\CTA;
+use Tribe\Project\Blocks\Fields\Cta_Field;
 use Tribe\Project\Blocks\Types\Base_Model;
 use Tribe\Project\Templates\Components\blocks\interstitial\Interstitial_Block_Controller;
 use Tribe\Project\Templates\Components\link\Link_Controller;
@@ -27,7 +27,7 @@ class Interstitial_Model extends Base_Model {
 	 * @return array
 	 */
 	private function get_cta_args(): array {
-		$cta  = $this->get( CTA::GROUP_CTA, [] );
+		$cta  = $this->get( Cta_Field::GROUP_CTA, [] );
 		$link = wp_parse_args( $cta['link'] ?? [], [
 			'title'  => '',
 			'url'    => '',

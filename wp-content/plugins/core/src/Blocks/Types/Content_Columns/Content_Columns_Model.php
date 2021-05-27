@@ -2,7 +2,7 @@
 
 namespace Tribe\Project\Blocks\Types\Content_Columns;
 
-use Tribe\Project\Blocks\Fields\CTA;
+use Tribe\Project\Blocks\Fields\Cta_Field;
 use Tribe\Project\Blocks\Types\Base_Model;
 use Tribe\Project\Templates\Components\blocks\content_columns\Content_Columns_Block_Controller;
 use Tribe\Project\Templates\Components\link\Link_Controller;
@@ -20,7 +20,7 @@ class Content_Columns_Model extends Base_Model {
 			Content_Columns_Block_Controller::TITLE         => $this->get( Content_Columns::TITLE, '' ),
 			Content_Columns_Block_Controller::LEADIN        => $this->get( Content_Columns::LEADIN, '' ),
 			Content_Columns_Block_Controller::DESCRIPTION   => $this->get( Content_Columns::DESCRIPTION, '' ),
-			Content_Columns_Block_Controller::CTA           => $this->get_cta_args( $this->get( CTA::GROUP_CTA, [] ) ),
+			Content_Columns_Block_Controller::CTA           => $this->get_cta_args( $this->get( Cta_Field::GROUP_CTA, [] ) ),
 			Content_Columns_Block_Controller::COLUMNS       => $this->get_rows(),
 			Content_Columns_Block_Controller::CONTENT_ALIGN => $this->get( Content_Columns::CONTENT_ALIGN, Content_Columns::CONTENT_ALIGN_LEFT ),
 		];
@@ -55,7 +55,7 @@ class Content_Columns_Model extends Base_Model {
 			$data[] = new Content_Column(
 				$row[ Content_Columns::COLUMN_TITLE ],
 				$row[ Content_Columns::COLUMN_CONTENT ],
-				$this->get_cta_args( (array) $row[ CTA::GROUP_CTA ] ),
+				$this->get_cta_args( (array) $row[ Cta_Field::GROUP_CTA ] ),
 			);
 		}
 
