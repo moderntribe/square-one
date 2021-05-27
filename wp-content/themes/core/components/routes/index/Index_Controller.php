@@ -176,10 +176,11 @@ class Index_Controller extends Abstract_Controller {
 			}
 		}
 		
-
+		$this->featured_posts_id = array_slice( $this->featured_posts_id, 0, 7 );
+		
 		return [
 			Content_Loop_Controller::LAYOUT => Content_Loop::LAYOUT_FEATURE,
-			Content_Loop_Controller::POSTS  => array_slice( $featured_posts, 0, 7 ),
+			Content_Loop_Controller::POSTS  => array_slice( $featured_posts, 0, 6 ),
 		];
 	}
 
@@ -193,7 +194,7 @@ class Index_Controller extends Abstract_Controller {
 
 		/* to exclude featured if we are displaying them */
 		$query = new WP_Query( [
-			'post__not_in' => $this->featured_posts_id,
+			'post__not_in' => array_slice( $this->featured_posts_id, 0 ,7 ),
 		] );
 
 		if ( ! empty( $query->posts ) ) {
