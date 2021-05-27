@@ -4,6 +4,8 @@ namespace Tribe\Project\Admin\Editor;
 
 class Classic_Editor_Formats {
 
+	public const MINIMAL = 'minimal';
+
 	/**
 	 * Filter "Basic" or "Teeny" TinyMCE Buttons
 	 *
@@ -120,7 +122,7 @@ class Classic_Editor_Formats {
 	 * @return array
 	 */
 	public function add_minimal_toolbar( array $toolbars ): array {
-		$toolbars['Minimal'][1] = [
+		$toolbars[ self::MINIMAL ][1] = [
 			'bold',
 			'italic',
 			'bullist',

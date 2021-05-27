@@ -7,6 +7,7 @@ use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Field;
 use Tribe\Libs\ACF\Field_Section;
 use Tribe\Libs\ACF\Repeater;
+use Tribe\Project\Admin\Editor\Classic_Editor_Formats;
 use Tribe\Project\Blocks\Fields\Cta_Field;
 use Tribe\Project\Blocks\Fields\Traits\With_Cta_Field;
 
@@ -91,7 +92,7 @@ class Accordion extends Block_Config implements Cta_Field {
 					'label'        => __( 'Description', 'tribe' ),
 					'name'         => self::DESCRIPTION,
 					'type'         => 'wysiwyg',
-					'toolbar'      => 'minimal',
+					'toolbar'      => Classic_Editor_Formats::MINIMAL,
 					'tabs'         => 'visual',
 					'media_upload' => 0,
 				] )
@@ -143,10 +144,12 @@ class Accordion extends Block_Config implements Cta_Field {
 
 		$group->add_field( $header );
 		$content = new Field( self::ROW_CONTENT, [
-			'label'   => __( 'Content', 'tribe' ),
-			'name'    => self::ROW_CONTENT,
-			'toolbar' => 'minimal',
-			'tabs'    => 'visual',
+			'label'        => __( 'Content', 'tribe' ),
+			'name'         => self::ROW_CONTENT,
+			'type'         => 'wysiwyg',
+			'toolbar'      => Classic_Editor_Formats::MINIMAL,
+			'tabs'         => 'visual',
+			'media_upload' => 0,
 		] );
 		$group->add_field( $content );
 

@@ -6,6 +6,7 @@ use Tribe\Libs\ACF\Block;
 use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Field;
 use Tribe\Libs\ACF\Field_Section;
+use Tribe\Project\Admin\Editor\Classic_Editor_Formats;
 
 class Gallery_Grid extends Block_Config {
 
@@ -59,7 +60,7 @@ class Gallery_Grid extends Block_Config {
 					'label'        => __( 'Description', 'tribe' ),
 					'name'         => self::DESCRIPTION,
 					'type'         => 'wysiwyg',
-					'toolbar'      => 'minimal',
+					'toolbar'      => Classic_Editor_Formats::MINIMAL,
 					'tabs'         => 'visual',
 					'media_upload' => 0,
 				] )
