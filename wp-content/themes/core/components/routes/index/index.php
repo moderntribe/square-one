@@ -3,7 +3,7 @@ declare( strict_types=1 );
 
 use \Tribe\Project\Templates\Components\routes\index\Index_Controller;
 
-$c = Index_Controller::factory();
+$c = Index_Controller::factory( $args );
 
 $c->render_header();
 ?>
@@ -16,6 +16,8 @@ $c->render_header();
 			<?php
 			if ( have_posts() ) :
 
+				get_template_part( 'components/text/text', null, $c->get_number_of_posts() );
+				
 				if ( $c->get_current_page() === 1 && ! empty( $c->get_featured_posts_args() ) ) :
 					get_template_part( 'components/blocks/content_loop/content_loop', null, $c->get_featured_posts_args() );
 				endif;
