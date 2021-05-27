@@ -75,10 +75,20 @@
     }
 	/* CASE: Row */
 	&.b-content-loop--layout_row {
-		.c-card__media, .c-card__content {
-			width: var(--grid-6-col);
-		}
+		.c-card {
+			flex-direction: row-reverse;
 
+			.c-card__media {
+				margin-left: var(--spacer-30);
+				margin-right: 0;
+			}
+
+			.c-card__media, 
+			.c-card__content {
+				width: var(--grid-6-col);
+			}
+		}
+		
 	}
 
     /* CASE: Feature */
