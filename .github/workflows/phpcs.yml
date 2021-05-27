@@ -26,7 +26,7 @@ jobs:
 
       - name: Add GitHub oAuth
         env:
-          TOKEN: ${{ secrets.GH_TOKEN }}
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: composer config --global github-oauth.github.com $TOKEN
 
       - name: Setup PHP extension cache
