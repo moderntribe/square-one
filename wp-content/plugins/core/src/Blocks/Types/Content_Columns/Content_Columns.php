@@ -7,9 +7,12 @@ use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Field;
 use Tribe\Libs\ACF\Field_Section;
 use Tribe\Libs\ACF\Repeater;
-use Tribe\Project\Blocks\Fields\CTA;
+use Tribe\Project\Blocks\Fields\Cta_Field;
+use Tribe\Project\Blocks\Fields\Traits\With_Cta_Field;
 
-class Content_Columns extends Block_Config {
+class Content_Columns extends Block_Config implements Cta_Field {
+
+	use With_Cta_Field;
 
 	public const NAME = 'contentcolumns';
 
@@ -51,13 +54,11 @@ class Content_Columns extends Block_Config {
 									'Cras ut ornare dui, sed venenatis est. Donec euismod in leo quis consequat.',
 									'tribe'
 								),
-								[
-									CTA::GROUP_CTA => [
-										CTA::LINK => [
-											'title'  => esc_html__( 'Lorem ipsum', 'tribe' ),
-											'url'    => '#',
-											'target' => '',
-										],
+								self::GROUP_CTA      => [
+									self::LINK => [
+										'title'  => esc_html__( 'Lorem ipsum', 'tribe' ),
+										'url'    => '#',
+										'target' => '',
 									],
 								],
 							],
@@ -95,7 +96,7 @@ class Content_Columns extends Block_Config {
 					'media_upload' => 0,
 				] )
 			)->add_field(
-				CTA::get_field( self::NAME )
+				$this->get_cta_field( self::NAME )
 			)->add_field( $this->get_links_section() );
 
 		//==========================================
@@ -124,7 +125,7 @@ class Content_Columns extends Block_Config {
 	/**
 	 * @return \Tribe\Libs\ACF\Repeater
 	 */
-	protected function get_links_section() {
+	protected function get_links_section(): Repeater {
 		$group = new Repeater( self::NAME . '_' . self::COLUMNS );
 		$group->set_attributes( [
 			'label'  => __( 'Columns', 'tribe' ),
@@ -148,7 +149,7 @@ class Content_Columns extends Block_Config {
 			'media_upload' => 0,
 		] );
 
-		$cta = CTA::get_field( self::NAME );
+		$cta = $this->get_cta_field( self::NAME );
 
 		$group->add_field( $text );
 		$group->add_field( $content );

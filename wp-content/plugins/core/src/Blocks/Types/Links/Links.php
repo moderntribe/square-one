@@ -7,9 +7,12 @@ use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Field;
 use Tribe\Libs\ACF\Field_Section;
 use Tribe\Libs\ACF\Repeater;
-use Tribe\Project\Blocks\Fields\CTA;
+use Tribe\Project\Blocks\Fields\Cta_Field;
+use Tribe\Project\Blocks\Fields\Traits\With_Cta_Field;
 
-class Links extends Block_Config {
+class Links extends Block_Config implements Cta_Field {
+
+	use With_Cta_Field;
 
 	public const NAME = 'links';
 
@@ -47,8 +50,8 @@ class Links extends Block_Config {
 							'Cras ut ornare dui, sed venenatis est. Donec euismod in leo quis consequat.',
 							'tribe'
 						),
-						CTA::GROUP_CTA    => [
-							CTA::LINK => [
+						self::GROUP_CTA   => [
+							self::LINK => [
 								'title'  => esc_html__( 'Lorem ipsum', 'tribe' ),
 								'url'    => '#',
 								'target' => '',
@@ -57,8 +60,8 @@ class Links extends Block_Config {
 						self::LINKS_TITLE => esc_html__( 'List Title', 'tribe' ),
 						self::LINKS       => [
 							[
-								CTA::GROUP_CTA => [
-									CTA::LINK => [
+								self::GROUP_CTA => [
+									self::LINK => [
 										'title'  => esc_html__( 'Lorem ipsum', 'tribe' ),
 										'url'    => '#',
 										'target' => '',
@@ -66,8 +69,8 @@ class Links extends Block_Config {
 								],
 							],
 							[
-								CTA::GROUP_CTA => [
-									CTA::LINK => [
+								self::GROUP_CTA => [
+									self::LINK => [
 										'title'  => esc_html__( 'Lorem ipsum', 'tribe' ),
 										'url'    => '#',
 										'target' => '',
@@ -75,8 +78,8 @@ class Links extends Block_Config {
 								],
 							],
 							[
-								CTA::GROUP_CTA => [
-									CTA::LINK => [
+								self::GROUP_CTA => [
+									self::LINK => [
 										'title'  => esc_html__( 'Lorem ipsum', 'tribe' ),
 										'url'    => '#',
 										'target' => '',
@@ -113,7 +116,7 @@ class Links extends Block_Config {
 					'media_upload' => 0,
 				] )
 			)->add_field(
-				CTA::get_field( self::NAME )
+				$this->get_cta_field( self::NAME )
 			)->add_field(
 				new Field( self::NAME . '_' . self::LINKS_TITLE, [
 					'label' => __( 'Link List Title', 'tribe' ),
@@ -149,7 +152,7 @@ class Links extends Block_Config {
 	/**
 	 * @return \Tribe\Libs\ACF\Repeater
 	 */
-	protected function get_links_section() {
+	protected function get_links_section(): Repeater {
 		$group = new Repeater( self::NAME . '_' . self::LINKS );
 		$group->set_attributes( [
 			'label'  => __( 'Links List', 'tribe' ),
@@ -158,7 +161,7 @@ class Links extends Block_Config {
 			'min'    => 0,
 			'max'    => 10,
 		] );
-		$link = CTA::get_field( self::NAME );
+		$link = $this->get_cta_field( self::NAME );
 
 		$group->add_field( $link );
 

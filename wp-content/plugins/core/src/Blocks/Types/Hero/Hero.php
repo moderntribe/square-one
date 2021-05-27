@@ -6,9 +6,12 @@ use Tribe\Libs\ACF\Block;
 use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Field;
 use Tribe\Libs\ACF\Field_Section;
-use Tribe\Project\Blocks\Fields\CTA;
+use Tribe\Project\Blocks\Fields\Cta_Field;
+use Tribe\Project\Blocks\Fields\Traits\With_Cta_Field;
 
-class Hero extends Block_Config {
+class Hero extends Block_Config implements Cta_Field {
+
+	use With_Cta_Field;
 
 	public const NAME = 'hero';
 
@@ -48,8 +51,8 @@ class Hero extends Block_Config {
 							'Cras ut ornare dui, sed venenatis est. Donec euismod in leo quis consequat.',
 							'tribe'
 						),
-						CTA::GROUP_CTA    => [
-							CTA::LINK => [
+						self::GROUP_CTA   => [
+							self::LINK => [
 								'title'  => esc_html__( 'Lorem ipsum', 'tribe' ),
 								'url'    => '#',
 								'target' => '',
@@ -89,7 +92,7 @@ class Hero extends Block_Config {
 					'media_upload' => 0,
 				] )
 			)->add_field(
-				CTA::get_field( self::NAME )
+				$this->get_cta_field( self::NAME )
 			)->add_field( new Field( self::NAME . '_' . self::IMAGE, [
 					'label'         => __( 'Image', 'tribe' ),
 					'name'          => self::IMAGE,
