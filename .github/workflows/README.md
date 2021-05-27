@@ -36,8 +36,8 @@ Runs a build and deployment of the application to the appropriate environment to
 Multiple Secrets must be configured:
 1. `DEV_DEPLOY_REPO` - the WPE git repository for the target environment.
 2. `DEPLOY_PRIVATE_SSH_KEY` - an authorized SSH Private Key (the pub key is entered into the WPE control panel) with the target git repo
-3. `GH_TOKEN` - This is an authorized github token for Composer installing packages from private/public repositories.
-4. `COMPOSER_ENV` - These are required environment variables needed for Composer.
+3. `COMPOSER_ENV` - These are required environment variables needed for Composer.
+4. `GITHUB_TOKEN` - (AUTOMATIC) This is an authorized GitHub token for Composer installing packages from private/public repositories. Note, GitHub automatically generates this for each repo. 
 
 ### Usage
 
