@@ -28,8 +28,8 @@ $c = Card_Controller::factory( $args );
 
 		<?php echo $c->render_description(); ?>
 
-	</div>
+		<?php get_template_part( 'components/container/container', null, $c->get_cta_args() ); ?>
 
-	<?php get_template_part( 'components/container/container', null, $c->get_cta_args() ); ?>
+	</div>
 
 </<?php echo $c->get_tag(); ?>>
