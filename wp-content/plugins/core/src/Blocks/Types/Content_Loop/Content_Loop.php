@@ -6,12 +6,16 @@ use Tribe\Libs\ACF\Block;
 use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Field;
 use Tribe\Libs\ACF\Field_Section;
+use Tribe\Project\Blocks\Fields\Cta_Field;
+use Tribe\Project\Blocks\Fields\Traits\With_Cta_Field;
 use Tribe\Project\Post_Types\Page\Page;
 use Tribe\Project\Post_Types\Post\Post;
 use Tribe\Project\Taxonomies\Category\Category;
 use Tribe\Project\Taxonomies\Post_Tag\Post_Tag;
 
-class Content_Loop extends Block_Config {
+class Content_Loop extends Block_Config implements Cta_Field {
+
+	use With_Cta_Field;
 
 	public const NAME = 'contentloop';
 
@@ -21,7 +25,6 @@ class Content_Loop extends Block_Config {
 	public const TITLE       = 'title';
 	public const DESCRIPTION = 'description';
 	public const LEADIN      = 'leadin';
-	public const CTA         = 'cta';
 
 	public const POST_LIST = 'post_list';
 
@@ -72,11 +75,8 @@ class Content_Loop extends Block_Config {
 					'tabs'         => 'visual',
 					'media_upload' => 0,
 				] )
-			)->add_field( new Field( self::NAME . '_' . self::CTA, [
-					'label' => __( 'Call to Action', 'tribe' ),
-					'name'  => self::CTA,
-					'type'  => 'link',
-				] )
+			)->add_field(
+				$this->get_cta_field( self::NAME )
 			)->add_field( new Field( self::NAME . '_' . self::POST_LIST, [
 					'label'             => __( 'Post List', 'tribe' ),
 					'name'              => self::POST_LIST,

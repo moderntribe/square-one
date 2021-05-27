@@ -6,8 +6,12 @@ use Tribe\Libs\ACF\Block;
 use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Field;
 use Tribe\Libs\ACF\Field_Section;
+use Tribe\Project\Blocks\Fields\Cta_Field;
+use Tribe\Project\Blocks\Fields\Traits\With_Cta_Field;
 
-class Lead_Form extends Block_Config {
+class Lead_Form extends Block_Config implements Cta_Field {
+
+	use With_Cta_Field;
 
 	public const NAME = 'leadform';
 
@@ -15,7 +19,6 @@ class Lead_Form extends Block_Config {
 	public const LEAD_IN         = 'leadin';
 	public const TITLE           = 'title';
 	public const DESCRIPTION     = 'description';
-	public const CTA             = 'cta';
 
 	public const SECTION_SETTINGS = 's-settings';
 	public const LAYOUT           = 'layout';
@@ -60,10 +63,12 @@ class Lead_Form extends Block_Config {
 							'Cras ut ornare dui, sed venenatis est. Donec euismod in leo quis consequat.',
 							'tribe'
 						),
-						self::CTA         => [
-							'title'  => esc_html__( 'Lorem ipsum', 'tribe' ),
-							'url'    => '#',
-							'target' => '',
+						self::GROUP_CTA   => [
+							self::LINK => [
+								'title'  => esc_html__( 'Lorem ipsum', 'tribe' ),
+								'url'    => '#',
+								'target' => '',
+							],
 						],
 					],
 				],
@@ -79,12 +84,12 @@ class Lead_Form extends Block_Config {
 		// Content Fields
 		//==========================================
 		$this->add_section( new Field_Section( self::SECTION_CONTENT, __( 'Content', 'tribe' ), 'accordion' ) )
-			->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
-					'label' => __( 'Lead in', 'tribe' ),
-					'name'  => self::LEAD_IN,
-					'type'  => 'text',
-				] )
-			)->add_field( new Field( self::NAME . '_' . self::TITLE, [
+			 ->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
+					 'label' => __( 'Lead in', 'tribe' ),
+					 'name'  => self::LEAD_IN,
+					 'type'  => 'text',
+				 ] )
+			 )->add_field( new Field( self::NAME . '_' . self::TITLE, [
 					'label' => __( 'Title', 'tribe' ),
 					'name'  => self::TITLE,
 					'type'  => 'text',
@@ -97,30 +102,27 @@ class Lead_Form extends Block_Config {
 					'tabs'         => 'visual',
 					'media_upload' => 0,
 				] )
-			)->add_field( new Field( self::NAME . '_' . self::CTA, [
-					'label' => __( 'Call to Action', 'tribe' ),
-					'name'  => self::CTA,
-					'type'  => 'link',
-				] )
+			)->add_field(
+				$this->get_cta_field( self::NAME )
 			);
 
 		//==========================================
 		// Setting Fields
 		//==========================================
 		$this->add_section( new Field_Section( self::SECTION_SETTINGS, __( 'Settings', 'tribe' ), 'accordion' ) )
-			->add_field(
-				new Field( self::NAME . '_' . self::WIDTH, [
-				'type'          => 'radio',
-				'name'          => self::WIDTH,
-				'label'         => __( 'Container Width', 'tribe' ),
-				'choices'       => [
-					self::WIDTH_GRID => __( 'Grid', 'tribe' ),
-					self::WIDTH_FULL => __( 'Full', 'tribe' ),
-				],
-				'default_value' => self::WIDTH_GRID,
-				] )
-			)->add_field(
-				new Field( self::NAME . '_' . self::BACKGROUND, [
+			 ->add_field(
+				 new Field( self::NAME . '_' . self::WIDTH, [
+					 'type'          => 'radio',
+					 'name'          => self::WIDTH,
+					 'label'         => __( 'Container Width', 'tribe' ),
+					 'choices'       => [
+						 self::WIDTH_GRID => __( 'Grid', 'tribe' ),
+						 self::WIDTH_FULL => __( 'Full', 'tribe' ),
+					 ],
+					 'default_value' => self::WIDTH_GRID,
+				 ] )
+			 )->add_field(
+				 new Field( self::NAME . '_' . self::BACKGROUND, [
 					'type'          => 'radio',
 					'name'          => self::BACKGROUND,
 					'label'         => __( 'Background Color', 'tribe' ),
@@ -129,9 +131,9 @@ class Lead_Form extends Block_Config {
 						self::BACKGROUND_DARK  => __( 'Dark', 'tribe' ),
 					],
 					'default_value' => self::BACKGROUND_LIGHT,
-				] )
-			)->add_field(
-				new Field( self::NAME . '_' . self::LAYOUT, [
+				 ] )
+			 )->add_field(
+				 new Field( self::NAME . '_' . self::LAYOUT, [
 					'type'            => 'image_select',
 					'name'            => self::LAYOUT,
 					'label'           => __( 'Form Layout', 'tribe' ),
@@ -148,9 +150,9 @@ class Lead_Form extends Block_Config {
 						self::NAME
 					),
 					'image_extension' => 'svg',
-				] )
-			)->add_field(
-				new Field( self::NAME . '_' . self::FORM_FIELDS, [
+				 ] )
+			 )->add_field(
+				 new Field( self::NAME . '_' . self::FORM_FIELDS, [
 					'type'            => 'image_select',
 					'name'            => self::FORM_FIELDS,
 					'label'           => __( 'Form Field Position', 'tribe' ),
@@ -166,8 +168,8 @@ class Lead_Form extends Block_Config {
 						self::NAME
 					),
 					'image_extension' => 'svg',
-				] )
-			);
+				 ] )
+			 );
 	}
 
 }
