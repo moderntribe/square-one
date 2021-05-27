@@ -9,6 +9,7 @@ use Tribe\Project\Templates\Components\sidebar\Sidebar_Controller;
 use Tribe\Project\Templates\Components\breadcrumbs\Breadcrumbs_Controller;
 use Tribe\Project\Templates\Models\Breadcrumb;
 use Tribe\Project\Blocks\Types\Content_Loop\Content_Loop;
+use Tribe\Project\Templates\Components\text\Text_Controller;
 use Tribe\Project\Templates\Components\blocks\content_loop\Content_Loop_Controller;
 use Tribe\Project\Templates\Components\Traits\Post_List_Field_Formatter;
 use WP_Query;
@@ -19,12 +20,14 @@ class Index_Controller extends Abstract_Controller {
 	
 	public const IS_TERM = 'is_term';
 
-	private $is_term;
+	private bool $is_term;
+	private string $number_of_posts;
+	private array $featured_posts_id = ['0'];
 
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
-
-		$this->is_term = (bool) $args[ self::IS_TERM ];
+		$this->is_term = (bool) $this->is_term();
+		
 	}
 
 	protected function defaults(): array {
@@ -32,6 +35,8 @@ class Index_Controller extends Abstract_Controller {
 			self::IS_TERM => false,
 		];
 	}
+
+	
 
 	/**
 	 * @var int|string
@@ -113,8 +118,34 @@ class Index_Controller extends Abstract_Controller {
 		];
 	}
 
+	/**
+	 * @return int
+	 */
+	public function is_term(): int {
+		return (int) get_queried_object()->term_id ?: 0;
+	}
+
+	/**
+	 * @return int
+	 */
 	public function get_current_page(): int {
 		return (int) get_query_var('paged') ?: 1;
+	}
+
+
+	/**
+	 * @return string $number_of_posts
+	 */
+	public function get_number_of_posts() {
+		$this->number_of_posts = wp_count_posts()->publish;
+		
+		return 
+		[
+			Text_Controller::TAG     => 'p',
+			Text_Controller::CLASSES => [ '' ],
+			Text_Controller::CONTENT => $this->number_of_posts.' '.__( 'posts in', 'tribe' ).' "'.get_the_archive_title().'" ',
+			
+		];
 	}
 
 	/**
@@ -127,8 +158,8 @@ class Index_Controller extends Abstract_Controller {
 			return [];
 		}
 
-		$posts = [];
-
+		$featured_posts = [];
+		
 		$query = new WP_Query( [
 			'tax_query' => [
 				[
@@ -140,13 +171,15 @@ class Index_Controller extends Abstract_Controller {
 
 		if ( ! empty( $query->posts ) ) {
 			foreach ( $query->posts as $post ) {
-				$posts[] = $this->formatted_post( $post, 45 );
+				$featured_posts[] = $this->formatted_post( $post, 45 );
+				$this->featured_posts_id[] = $post->ID;
 			}
 		}
+		
 
 		return [
 			Content_Loop_Controller::LAYOUT => Content_Loop::LAYOUT_FEATURE,
-			Content_Loop_Controller::POSTS  => array_slice( $posts, 0, 7 ),
+			Content_Loop_Controller::POSTS  => array_slice( $featured_posts, 0, 7 ),
 		];
 	}
 
@@ -158,16 +191,21 @@ class Index_Controller extends Abstract_Controller {
 	public function get_loop_args(): array {
 		$posts = [];
 
-		while ( have_posts() ) {
-			the_post();
-			$posts[] = $this->formatted_post( get_post(), 22 );
-		}
+		/* to exclude featured if we are displaying them */
+		$query = new WP_Query( [
+			'post__not_in' => $this->featured_posts_id,
+		] );
 
+		if ( ! empty( $query->posts ) ) {
+			foreach ( $query->posts as $post ) {
+				$posts[] = $this->formatted_post( $post, 45 );
+			}
+		}
 		
 		return [
 			Content_Loop_Controller::CLASSES => [ 'item-index__loop' ],
-			Content_Loop_Controller::LAYOUT  => Content_Loop::LAYOUT_ROW,
-		//	Content_Loop_Controller::LAYOUT  => Content_Loop::LAYOUT_COLUMNS,
+		//	Content_Loop_Controller::LAYOUT  => Content_Loop::LAYOUT_ROW,
+			Content_Loop_Controller::LAYOUT  => Content_Loop::LAYOUT_COLUMNS,
 			Content_Loop_Controller::POSTS   => $posts,
 		
 		];
