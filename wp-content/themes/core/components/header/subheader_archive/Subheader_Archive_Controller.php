@@ -6,12 +6,10 @@ namespace Tribe\Project\Templates\Components\header\subheader_archive;
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\text\Text_Controller;
-use Tribe\Project\Templates\Components\Traits\Page_Title;
 use Tribe\Project\Templates\Components\image\Image_Controller;
 use Tribe\Project\Theme\Config\Image_Sizes;
 
 class Subheader_Archive_Controller extends Abstract_Controller {
-	use Page_Title;
 
 	public const CLASSES = 'classes';
 	public const ATTRS   = 'attrs';
@@ -39,7 +37,6 @@ class Subheader_Archive_Controller extends Abstract_Controller {
 		$this->content_classes   = (array) $args[ self::CONTENT_CLASSES ];
 
 		$this->map_acf_fields();
-
 	}
 
 	protected function defaults(): array {
@@ -53,10 +50,19 @@ class Subheader_Archive_Controller extends Abstract_Controller {
 	}
 
 	protected function required(): array {
-		return [];
+		return [
+			self::CONTAINER_CLASSES => [ 'l-container' ], 
+			self::MEDIA_CLASSES     => [ 'c-subheader__media' ],
+			self::CONTENT_CLASSES   => [ 'c-subheader__content' ],
+			self::CLASSES           => [ 'c-subheader', 'c-subheader-archive' ],
+		];
 	}
 
 	public function get_classes(): string {
+		if ( has_post_thumbnail() ) {
+			$this->classes[] = 'c-subheader--has-image';
+		}
+
 		return Markup_Utils::class_attribute( $this->classes );
 	}
 
@@ -116,7 +122,7 @@ class Subheader_Archive_Controller extends Abstract_Controller {
 	
 		return [
 			Text_Controller::TAG     => 'p',
-			Text_Controller::CLASSES => [ '' ],
+			Text_Controller::CLASSES => [ 'c-subheader__description' ],
 			Text_Controller::CONTENT => $this->description,
 		];
 	}
@@ -127,7 +133,7 @@ class Subheader_Archive_Controller extends Abstract_Controller {
 	public function get_title_args(): array {
 		return [
 			Text_Controller::TAG     => 'h1',
-			Text_Controller::CLASSES => [ '' ],
+			Text_Controller::CLASSES => [ 'page-title', 'h1', 'c-subheader__title' ],
 			Text_Controller::CONTENT => $this->title,
 		];
 	}
