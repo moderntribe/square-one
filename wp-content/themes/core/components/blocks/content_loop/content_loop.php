@@ -40,7 +40,7 @@ $c = \Tribe\Project\Templates\Components\blocks\content_loop\Content_Loop_Contro
 						<?php endif; ?>
 					<?php } ?>
 
-					<?php if ( ! empty( $c->get_cta() ) ) : ?>
+					<?php if ( ! empty( $c->get_cta()['content'] ) ) : ?>
 						<?php echo $c->get_cta(); ?>
 					<?php endif; ?>
 				</div>
