@@ -41,9 +41,9 @@ class Subheader_Archive_Controller extends Abstract_Controller {
 
 	protected function defaults(): array {
 		return [
-			self::CLASSES => [ 'c-subheader' ],
+			self::CLASSES           => [ 'c-subheader' ],
 			self::CONTAINER_CLASSES => [ 'l-container' ], 
-			self::ATTRS   => [],
+			self::ATTRS             => [],
 			self::MEDIA_CLASSES     => [],
 			self::CONTENT_CLASSES   => [],
 		];
@@ -145,8 +145,6 @@ class Subheader_Archive_Controller extends Abstract_Controller {
 	 * Gets the content added in the meta fields 
 	 */
 	protected function map_acf_fields() {
-	
-
 		if ( is_category() ) {
 			
 			$term = get_queried_object();

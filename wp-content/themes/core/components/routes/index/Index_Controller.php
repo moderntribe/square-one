@@ -21,13 +21,13 @@ class Index_Controller extends Abstract_Controller {
 	public const IS_TERM = 'is_term';
 
 	private bool $is_term;
-	private string $number_of_posts;
 	private array $featured_posts_id = ['0'];
+	private $sidebar_id = '';
+
 
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
 		$this->is_term = (bool) $this->is_term();
-		
 	}
 
 	protected function defaults(): array {
@@ -36,12 +36,6 @@ class Index_Controller extends Abstract_Controller {
 		];
 	}
 
-	
-
-	/**
-	 * @var int|string
-	 */
-	private $sidebar_id = '';
 
 	/**
 	 * Render the header component
@@ -55,6 +49,7 @@ class Index_Controller extends Abstract_Controller {
 		do_action( 'get_header', null );
 		get_template_part( 'components/document/header/header', 'index' );
 	}
+
 
 	/**
 	 * Render the subheader component
@@ -97,8 +92,12 @@ class Index_Controller extends Abstract_Controller {
 		get_template_part( 'components/document/footer/footer', 'index' );
 	}
 
+	/**
+	 * Render the breadcrums component
+	 *
+	 * @return void
+	 */
 	public function render_breadcrumbs(): void {
-		//TODO: let's make this get_breadcrumb_args() and render in template
 		get_template_part(
 			'components/breadcrumbs/breadcrumbs',
 			'index',
@@ -125,6 +124,7 @@ class Index_Controller extends Abstract_Controller {
 		return (int) get_queried_object()->term_id ?: 0;
 	}
 
+
 	/**
 	 * @return int
 	 */
@@ -134,16 +134,14 @@ class Index_Controller extends Abstract_Controller {
 
 
 	/**
-	 * @return string $number_of_posts
+	 * @return void
 	 */
 	public function get_number_of_posts() {
-		$this->number_of_posts = wp_count_posts()->publish;
-		
 		return 
 		[
 			Text_Controller::TAG     => 'p',
 			Text_Controller::CLASSES => [ '' ],
-			Text_Controller::CONTENT => $this->number_of_posts.' '.__( 'posts in', 'tribe' ).' "'.get_the_archive_title().'" ',
+			Text_Controller::CONTENT => wp_count_posts()->publish.' '.__( 'posts in', 'tribe' ).' "'.get_the_archive_title().'" ',
 			
 		];
 	}
@@ -194,7 +192,7 @@ class Index_Controller extends Abstract_Controller {
 
 		/* to exclude featured if we are displaying them */
 		$query = new WP_Query( [
-			'post__not_in' => array_slice( $this->featured_posts_id, 0 ,7 ),
+			'post__not_in' => array_slice( $this->featured_posts_id, 0, 7 ),
 		] );
 
 		if ( ! empty( $query->posts ) ) {
@@ -202,10 +200,9 @@ class Index_Controller extends Abstract_Controller {
 				$posts[] = $this->formatted_post( $post, 45 );
 			}
 		}
-		
+		/** change LAYOUT to Content_Loop::LAYOUT_ROW to get one post per row */
 		return [
 			Content_Loop_Controller::CLASSES => [ 'item-index__loop' ],
-		//	Content_Loop_Controller::LAYOUT  => Content_Loop::LAYOUT_ROW,
 			Content_Loop_Controller::LAYOUT  => Content_Loop::LAYOUT_COLUMNS,
 			Content_Loop_Controller::POSTS   => $posts,
 		

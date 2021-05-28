@@ -24,21 +24,19 @@ $c->render_header();
 				endif;
 
 				get_template_part( 'components/blocks/content_loop/content_loop', null, $c->get_loop_args() );
+				
 				?>
 				
 				<div class="l-container"> 
 					<?php get_template_part( 'components/pagination/loop/loop', 'index' ); ?>
 				</div>
 				
-				<?php
-			else :
+			<?php else :
 
 				get_template_part( 'components/no_results/no_results', 'index' );
 
-			endif;
-			?>
+			endif; ?>
 
-		</div>
 	</main>
 <?php
 $c->render_sidebar();
