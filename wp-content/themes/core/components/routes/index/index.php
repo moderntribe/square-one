@@ -25,11 +25,9 @@ $c->render_header();
 
 				get_template_part( 'components/blocks/content_loop/content_loop', null, $c->get_loop_args() );
 				?>
+				
 				<div class="l-container"> 
-				<?php 
-				
-				get_template_part( 'components/pagination/loop/loop', 'index' ); ?>
-				
+					<?php get_template_part( 'components/pagination/loop/loop', 'index' ); ?>
 				</div>
 				
 				<?php
