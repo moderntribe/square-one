@@ -1,13 +1,14 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\quote;
 
-use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Libs\Utils\Markup_Utils;
+use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\image\Image_Controller;
 use Tribe\Project\Theme\Config\Image_Sizes;
 
 class Quote_Controller extends Abstract_Controller {
+
 	public const CLASSES    = 'classes';
 	public const ATTRS      = 'attrs';
 	public const QUOTE_TEXT = 'quote_text';
@@ -20,8 +21,8 @@ class Quote_Controller extends Abstract_Controller {
 	 */
 	private $cite_image;
 
-	private array  $classes;
-	private array  $attrs;
+	private array $classes;
+	private array $attrs;
 	private string $quote_text;
 	private string $cite_name;
 	private string $cite_title;

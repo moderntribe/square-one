@@ -1,13 +1,12 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\button;
 
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
-use Tribe\Project\Templates\Components\Deferred_Component;
 
 class Button_Controller extends Abstract_Controller {
+
 	public const TYPE       = 'type';
 	public const CLASSES    = 'classes';
 	public const ATTRS      = 'attrs';
@@ -15,12 +14,12 @@ class Button_Controller extends Abstract_Controller {
 	public const ARIA_LABEL = 'aria_label';
 
 	/**
-	 * @var string|Deferred_Component
+	 * @var string|\Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	private $content;
 	private string $type;
-	private array  $classes;
-	private array  $attrs;
+	private array $classes;
+	private array $attrs;
 	private string $aria_label;
 
 	public function __construct( array $args = [] ) {
@@ -72,4 +71,5 @@ class Button_Controller extends Abstract_Controller {
 
 		return Markup_Utils::concat_attrs( $attributes );
 	}
+
 }

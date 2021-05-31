@@ -1,13 +1,12 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\breadcrumbs;
 
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
-use Tribe\Project\Templates\Models\Breadcrumb;
 
 class Breadcrumbs_Controller extends Abstract_Controller {
+
 	public const BREADCRUMBS  = 'breadcrumbs';
 	public const CLASSES      = 'classes';
 	public const ATTRS        = 'attrs';
@@ -66,7 +65,7 @@ class Breadcrumbs_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return Breadcrumb[]
+	 * @return \Tribe\Project\Templates\Models\Breadcrumb[]
 	 */
 	public function get_items(): array {
 		return $this->breadcrumbs;

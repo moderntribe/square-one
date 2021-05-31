@@ -1,13 +1,14 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Models;
 
 class Tab {
+
 	/**
 	 * @var string
 	 */
 	public $label;
+
 	/**
 	 * @var string
 	 */
@@ -17,4 +18,5 @@ class Tab {
 		$this->label   = $label;
 		$this->content = $content;
 	}
+
 }

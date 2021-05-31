@@ -1,8 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Theme\Config;
 
 class Web_Fonts {
+
 	public const  PROVIDER_TYPEKIT = 'typekit';
 	public const  PROVIDER_GOOGLE  = 'google';
 	public const  PROVIDER_CUSTOM  = 'custom';
@@ -87,4 +88,5 @@ class Web_Fonts {
 
 		return sprintf( '%s%s.css', trailingslashit( self::TYPEKIT_API ), $this->fonts[ self::PROVIDER_TYPEKIT ] );
 	}
+
 }

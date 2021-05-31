@@ -1,8 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Models;
 
 class Content_Column {
+
 	/**
 	 * @var string
 	 */
@@ -51,6 +52,5 @@ class Content_Column {
 	public function get_cta(): array {
 		return $this->cta;
 	}
-
 
 }

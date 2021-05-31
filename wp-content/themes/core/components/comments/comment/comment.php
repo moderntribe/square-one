@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 use \Tribe\Project\Templates\Components\comments\comment\Comment_Controller;
 
@@ -37,6 +36,6 @@ $c = Comment_Controller::factory( $args );
 		$c->get_moderation_message_args()
 	); ?>
 
-	<?php echo $c->get_reply_link() ; ?>
+	<?php echo $c->get_reply_link(); ?>
 
 </li>

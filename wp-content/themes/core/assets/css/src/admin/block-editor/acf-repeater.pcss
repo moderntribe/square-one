@@ -1,0 +1,72 @@
+/*
+* ACF Repeater Styles & Overrides
+*
+* Modify spacing and sizing to better accommodate the sidebar
+* Small UX improvements
+*
+* ----------------------------------------------------------------------------- */
+
+.block-editor {
+	/* === Reduce the spacing a bit  === */
+	.acf-block-panel .acf-fields > {
+
+		.acf-repeater {
+			margin: 0 8px;
+		}
+
+		.acf-field-repeater {
+			margin-left: 4px;
+			margin-right: 4px;
+		}
+
+		.acf-field .acf-repeater.-row .acf-label {
+			float: none;
+			width: 100%;
+		}
+
+		.acf-field .acf-repeater.-row .acf-field {
+			margin: 16px 0;
+		}
+	}
+
+	/* === Adjust the handles to accomodate new spacing  === */
+	.acf-repeater {
+
+		.acf-row-handle {
+			width: 8px;
+			padding: 4px;
+		}
+
+		&.-row .acf-fields.-left > .acf-field:before {
+			display: none;
+		}
+
+		&.-row .acf-fields.-left > .acf-field > .acf-input {
+			width: 100%;
+		}
+
+		a.acf-icon.-collapse.small {
+			z-index: 2;
+		}
+	}
+
+	/* === CREATE SOME SEPARATION BETWEEN REPEATER ITEMS === */
+	.acf-repeater > table {
+		border-collapse: separate;
+		border-spacing: 0 15px;
+		background: none;
+		border: none;
+		margin-top: -15px;
+	}
+
+	/* give each item a border now that there's seperation */
+	.acf-repeater.-row > table > tbody > tr > td,
+	.acf-repeater.-block > table > tbody > tr > td {
+		border: 1px solid #e1e1e1;
+	}
+
+	/* left align the 'add' button on repeaters */
+	.acf-repeater > .acf-actions {
+		text-align: left;
+	}
+}

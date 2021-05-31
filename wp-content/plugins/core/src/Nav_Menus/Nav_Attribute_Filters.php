@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Nav_Menus;
 
@@ -18,6 +18,7 @@ class Nav_Attribute_Filters {
 	 * @param int    $depth   Depth of menu item. Used for padding.
 	 *
 	 * @return string
+	 *
 	 * @filter nav_menu_item_id
 	 */
 	public function customize_nav_item_id( $menu_id, $item, $args, $depth ): string {
@@ -33,6 +34,7 @@ class Nav_Attribute_Filters {
 	 * @param int    $depth   Depth of menu item. Used for padding.
 	 *
 	 * @return array
+	 *
 	 * @filter nav_menu_css_class
 	 */
 	public function customize_nav_item_classes( $classes, $item, $args, $depth ): array {
@@ -67,7 +69,7 @@ class Nav_Attribute_Filters {
 		 * Filter the array of classes to remove the classes added by WP Core.
 		 * Regex is designed to filter all classes defined in `_wp_menu_item_classes_by_context()`;
 		 */
-		$classes = array_filter( $classes, function ( $class ) {
+		$classes = array_filter( $classes, static function ( $class ) {
 
 			/**
 			 * Patterns used for matching:
@@ -101,6 +103,7 @@ class Nav_Attribute_Filters {
 	 * @param int    $depth Depth of menu item. Used for padding.
 	 *
 	 * @return array
+	 *
 	 * @filter nav_menu_link_attributes
 	 */
 	public function customize_nav_item_anchor_atts( $atts, $item, $args, $depth ): array {
@@ -125,4 +128,5 @@ class Nav_Attribute_Filters {
 
 		return $atts;
 	}
+
 }

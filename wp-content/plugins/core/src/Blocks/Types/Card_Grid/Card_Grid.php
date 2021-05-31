@@ -1,25 +1,28 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Blocks\Types\Card_Grid;
 
-use Tribe\Libs\ACF\Field;
 use Tribe\Libs\ACF\Block;
 use Tribe\Libs\ACF\Block_Config;
+use Tribe\Libs\ACF\Field;
 use Tribe\Libs\ACF\Field_Section;
+use Tribe\Project\Blocks\Fields\Cta_Field;
+use Tribe\Project\Blocks\Fields\Traits\With_Cta_Field;
 use Tribe\Project\Post_Types\Post\Post;
 use Tribe\Project\Post_Types\Sample\Sample;
 use Tribe\Project\Taxonomies\Category\Category;
 use Tribe\Project\Taxonomies\Example\Example;
 use Tribe\Project\Taxonomies\Post_Tag\Post_Tag;
 
-class Card_Grid extends Block_Config {
+class Card_Grid extends Block_Config implements Cta_Field {
+
+	use With_Cta_Field;
+
 	public const NAME = 'cardgrid';
 
 	public const SECTION_CONTENT = 's-content';
 	public const TITLE           = 'title';
 	public const DESCRIPTION     = 'description';
-	public const CTA             = 'cta';
 
 	public const POST_LIST = 'post_list';
 
@@ -51,7 +54,13 @@ class Card_Grid extends Block_Config {
 							'Pellentesque diam diam, aliquet non mauris eu, posuere mollis urna. Nulla eget congue ligula, a aliquam lectus. Duis non diam maximus justo dictum porttitor in in risus.',
 							'tribe'
 						),
-						self::CTA         => [ 'title' => esc_html__( 'Call to Action', 'tribe' ), 'url' => '#' ],
+						self::GROUP_CTA   => [
+							self::LINK => [
+								'title'  => esc_html__( 'Lorem ipsum', 'tribe' ),
+								'url'    => '#',
+								'target' => '',
+							],
+						],
 						self::POST_LIST   => [
 
 						],
@@ -81,11 +90,8 @@ class Card_Grid extends Block_Config {
 					'toolbar'      => 'basic',
 					'media_upload' => 0,
 				] )
-			)->add_field( new Field( self::NAME . '_' . self::CTA, [
-					'label' => __( 'Call to Action', 'tribe' ),
-					'name'  => self::CTA,
-					'type'  => 'link',
-				] )
+			)->add_field(
+				$this->get_cta_field( self::NAME )
 			)->add_field( new Field( self::NAME . '_' . self::POST_LIST, [
 					'label'             => __( 'Post List', 'tribe' ),
 					'name'              => self::POST_LIST,

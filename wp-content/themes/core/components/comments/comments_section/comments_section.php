@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 use \Tribe\Project\Templates\Components\comments\comments_section\Comments_Section_Controller;
 
@@ -16,7 +15,6 @@ if ( post_password_required() ) {
 <div id="comments" class="comments" data-js="comment-form">
 
 	<?php if ( have_comments() ) { ?>
-
 		<h6 class="comments__title h4">
 			<?php echo $c->get_title(); ?>
 		</h6>
