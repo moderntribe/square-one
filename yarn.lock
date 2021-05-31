@@ -9052,14 +9052,13 @@ min-document@^2.19.0:
   dependencies:
     dom-walk "^0.1.0"
 
-mini-css-extract-plugin@^0.9.0:
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/mini-css-extract-plugin/-/mini-css-extract-plugin-0.9.0.tgz#47f2cf07aa165ab35733b1fc97d4c46c0564339e"
-  integrity sha512-lp3GeY7ygcgAmVIcRPBVhIkf8Us7FZjA+ILpal44qLdSu11wmjKQ3d9k15lfD7pO4esu9eUIAW7qiYIBppv40A==
+mini-css-extract-plugin@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/mini-css-extract-plugin/-/mini-css-extract-plugin-1.6.0.tgz#b4db2525af2624899ed64a23b0016e0036411893"
+  integrity sha512-nPFKI7NSy6uONUo9yn2hIfb9vyYvkFu95qki0e21DQ9uaqNKDP15DGpK0KnV6wDroWxPHtExrdEwx/yDQ8nVRw==
   dependencies:
-    loader-utils "^1.1.0"
-    normalize-url "1.9.1"
-    schema-utils "^1.0.0"
+    loader-utils "^2.0.0"
+    schema-utils "^3.0.0"
     webpack-sources "^1.1.0"
 
 minimalistic-assert@^1.0.0, minimalistic-assert@^1.0.1:
@@ -9397,7 +9396,7 @@ normalize-selector@^0.2.0:
   resolved "https://registry.yarnpkg.com/normalize-selector/-/normalize-selector-0.2.0.tgz#d0b145eb691189c63a78d201dc4fdb1293ef0c03"
   integrity sha1-0LFF62kRicY6eNIB3E/bEpPvDAM=
 
-normalize-url@1.9.1, normalize-url@^1.4.0, normalize-url@^1.9.1:
+normalize-url@^1.4.0, normalize-url@^1.9.1:
   version "1.9.1"
   resolved "https://registry.yarnpkg.com/normalize-url/-/normalize-url-1.9.1.tgz#2cc0d66b31ea23036458436e3620d85954c66c3c"
   integrity sha1-LMDWazHqIwNkWENuNiDYWVTGbDw=
