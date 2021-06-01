@@ -95,15 +95,15 @@ class Search_Controller extends Abstract_Controller {
 			return [];
 		}
 
+		$text = sprintf(
+			_n( 'Showing %d result for &lsquo;%s&rsquo;', 'Showing %d results for &lsquo;%s&rsquo;', $total, 'tribe' ),
+			$total,
+			$query_term
+		);
+
 		if ( 0 === $total ) {
 			$text = sprintf(
 				__( 'Your search for &lsquo;%s&rsquo; returned 0 results', 'tribe' ),
-				$query_term
-			);
-		} else {
-			$text = sprintf(
-				_n( 'Showing %d result for &lsquo;%s&rsquo;', 'Showing %d results for &lsquo;%s&rsquo;', $total, 'tribe' ),
-				$total,
 				$query_term
 			);
 		}

@@ -16,7 +16,7 @@ class Search {
 	public function dont_do_search( $request, \WP_Query $query ) {
 		//This basically prevents the query for search but still provides the benefit of not
 		//sending back a 404 and still provides the page title, etc.
-		if ( $query->is_search() && ! is_admin() && empty( get_query_var( 's' ) ) ) {
+		if ( $query->is_search() && ! is_admin() && empty( $query->get( 's' ) ) ) {
 
 			/* prevent SELECT FOUND_ROWS() query */
 			$query->query_vars['no_found_rows'] = true;
@@ -24,7 +24,7 @@ class Search {
 			/* prevent post term and meta cache update queries */
 			$query->query_vars['cache_results'] = false;
 
-			return false;
+			return '';
 		}
 
 		return $request;
