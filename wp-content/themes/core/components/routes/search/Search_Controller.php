@@ -84,9 +84,9 @@ class Search_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return string
+	 * @return array
 	 */
-	public function get_results_text_args() {
+	public function get_results_text_args(): array {
 		global $wp_query;
 		$total      = absint( $wp_query->found_posts );
 		$query_term = get_search_query();
