@@ -7,8 +7,13 @@ use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Field;
 use Tribe\Libs\ACF\Field_Section;
 use Tribe\Libs\ACF\Repeater;
+use Tribe\Project\Admin\Editor\Classic_Editor_Formats;
+use Tribe\Project\Blocks\Fields\Cta_Field;
+use Tribe\Project\Blocks\Fields\Traits\With_Cta_Field;
 
-class Links extends Block_Config {
+class Links extends Block_Config implements Cta_Field {
+
+	use With_Cta_Field;
 
 	public const NAME = 'links';
 
@@ -16,11 +21,9 @@ class Links extends Block_Config {
 	public const LEAD_IN         = 'leadin';
 	public const TITLE           = 'title';
 	public const DESCRIPTION     = 'description';
-	public const CTA             = 'cta';
 
 	public const LINKS_TITLE = 'links_title';
 	public const LINKS       = 'links';
-	public const LINK_ITEM   = 'item';
 
 	public const SECTION_SETTINGS = 's-settings';
 	public const LAYOUT           = 'layout';
@@ -48,28 +51,40 @@ class Links extends Block_Config {
 							'Cras ut ornare dui, sed venenatis est. Donec euismod in leo quis consequat.',
 							'tribe'
 						),
-						self::CTA         => [
-							'title' => esc_html__( 'Lorem ipsum', 'tribe' ),
-							'url'   => '#',
+						self::GROUP_CTA   => [
+							self::LINK => [
+								'title'  => esc_html__( 'Lorem ipsum', 'tribe' ),
+								'url'    => '#',
+								'target' => '',
+							],
 						],
 						self::LINKS_TITLE => esc_html__( 'List Title', 'tribe' ),
 						self::LINKS       => [
 							[
-								self::LINK_ITEM => [
-									'title' => esc_html__( 'Lorem ipsum', 'tribe' ),
-									'url'   => '#',
+								self::GROUP_CTA => [
+									self::LINK => [
+										'title'  => esc_html__( 'Lorem ipsum', 'tribe' ),
+										'url'    => '#',
+										'target' => '',
+									],
 								],
 							],
 							[
-								self::LINK_ITEM => [
-									'title' => esc_html__( 'Lorem ipsum', 'tribe' ),
-									'url'   => '#',
+								self::GROUP_CTA => [
+									self::LINK => [
+										'title'  => esc_html__( 'Lorem ipsum', 'tribe' ),
+										'url'    => '#',
+										'target' => '',
+									],
 								],
 							],
 							[
-								self::LINK_ITEM => [
-									'title' => esc_html__( 'Lorem ipsum', 'tribe' ),
-									'url'   => '#',
+								self::GROUP_CTA => [
+									self::LINK => [
+										'title'  => esc_html__( 'Lorem ipsum', 'tribe' ),
+										'url'    => '#',
+										'target' => '',
+									],
 								],
 							],
 						],
@@ -98,14 +113,12 @@ class Links extends Block_Config {
 					'label'        => __( 'Description', 'tribe' ),
 					'name'         => self::DESCRIPTION,
 					'type'         => 'wysiwyg',
-					'toolbar'      => 'basic',
+					'toolbar'      => Classic_Editor_Formats::MINIMAL,
+					'tabs'         => 'visual',
 					'media_upload' => 0,
 				] )
-			)->add_field( new Field( self::NAME . '_' . self::CTA, [
-					'label' => __( 'Call to Action', 'tribe' ),
-					'name'  => self::CTA,
-					'type'  => 'link',
-				] )
+			)->add_field(
+				$this->get_cta_field( self::NAME )
 			)->add_field(
 				new Field( self::NAME . '_' . self::LINKS_TITLE, [
 					'label' => __( 'Link List Title', 'tribe' ),
@@ -141,7 +154,7 @@ class Links extends Block_Config {
 	/**
 	 * @return \Tribe\Libs\ACF\Repeater
 	 */
-	protected function get_links_section() {
+	protected function get_links_section(): Repeater {
 		$group = new Repeater( self::NAME . '_' . self::LINKS );
 		$group->set_attributes( [
 			'label'  => __( 'Links List', 'tribe' ),
@@ -150,11 +163,7 @@ class Links extends Block_Config {
 			'min'    => 0,
 			'max'    => 10,
 		] );
-		$link = new Field( self::LINK_ITEM, [
-			'label' => __( 'Link', 'tribe' ),
-			'name'  => self::LINK_ITEM,
-			'type'  => 'link',
-		] );
+		$link = $this->get_cta_field( self::NAME );
 
 		$group->add_field( $link );
 

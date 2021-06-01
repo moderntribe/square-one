@@ -39,9 +39,7 @@ $c->render_header();
 
 					<li class="item-single__meta-author">
 						<?php _e( 'by', 'tribe' ); ?>
-						<a href="<?php the_author_link(); ?>" rel="author">
-							<?php the_author(); ?>
-						</a>
+						<?php the_author_link(); ?>
 					</li>
 
 				</ul>
