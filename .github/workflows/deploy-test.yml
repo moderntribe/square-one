@@ -30,6 +30,54 @@ jobs:
           git_remote_url: "ssh://${{ secrets.TEST_DEPLOY_USER }}@${{ secrets.TEST_DOMAIN }}:22/${{ env.APPNAME }}"
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
 
+      - name: SUCCESS
+        if: success()
+        uses: tokorom/action-slack-incoming-webhook@main
+        env:
+          INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+        with:
+          text: ":green_check: Successful Test App Deployment"
+          attachments: |
+            [
+              {
+                "color": "good",
+                "fields": [
+                  {
+                    "title": "Test App URL",
+                    "value": "${{ env.APPNAME }}.${{ secrets.TEST_DOMAIN }}"
+                  },
+                  {
+                    "title": "GitHub Actions URL",
+                    "value": "${{ github.event.repository.url }}/actions/runs/${{ github.run_id }}"
+                  }
+                ]
+              }
+            ]
+
+      - name: FAILURE
+        if: failure()
+        uses: tokorom/action-slack-incoming-webhook@main
+        env:
+          INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+        with:
+          text: ":x: Failed Test App Deployment"
+          attachments: |
+            [
+              {
+                "color": "bad",
+                "fields": [
+                  {
+                    "title": "Test App URL",
+                    "value": "${{ env.APPNAME }}.${{ secrets.TEST_DOMAIN }}"
+                  },
+                  {
+                    "title": "GitHub Actions URL",
+                    "value": "${{ github.event.repository.url }}/actions/runs/${{ github.run_id }}"
+                  }
+                ]
+              }
+            ]
+
   deploy_test_app:
     runs-on: ubuntu-latest
     # only run when a pull request is opened on main
@@ -103,6 +151,55 @@ jobs:
           script: |
             enter ${{ env.APPNAME }}-pr${{ github.event.pull_request.number }} web wp search-replace ${{ env.APPNAME }}.${{ secrets.TEST_DOMAIN }} ${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}.${{ secrets.TEST_DOMAIN }}
 
+      - name: SUCCESS
+        if: success()
+        uses: tokorom/action-slack-incoming-webhook@main
+        env:
+          INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+        with:
+          text: ":green_check: Successful Test App Deployment"
+          attachments: |
+            [
+              {
+                "color": "good",
+                "fields": [
+                  {
+                    "title": "Test App URL",
+                    "value": "${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}.${{ secrets.TEST_DOMAIN }}"
+                  },
+                  {
+                    "title": "GitHub Actions URL",
+                    "value": "${{ github.event.repository.url }}/actions/runs/${{ github.run_id }}"
+                  }
+                ]
+              }
+            ]
+
+      - name: FAILURE
+        if: failure()
+        uses: tokorom/action-slack-incoming-webhook@main
+        env:
+          INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+        with:
+          text: ":x: Failed Test App Deployment"
+          attachments: |
+            [
+              {
+                "color": "bad",
+                "fields": [
+                  {
+                    "title": "Test App URL",
+                    "value": "${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}.${{ secrets.TEST_DOMAIN }}"
+                  },
+                  {
+                    "title": "GitHub Actions URL",
+                    "value": "${{ github.event.repository.url }}/actions/runs/${{ github.run_id }}"
+                  }
+                ]
+              }
+            ]
+
+
   update_test_app:
     runs-on: ubuntu-latest
     # only run when a pull request is opened on main
@@ -121,6 +218,54 @@ jobs:
           review_app_name: ${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
           git_push_flags: --force
+
+      - name: SUCCESS
+        if: success()
+        uses: tokorom/action-slack-incoming-webhook@main
+        env:
+          INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+        with:
+          text: ":green_check: Successful Test App Update Deployment"
+          attachments: |
+            [
+              {
+                "color": "good",
+                "fields": [
+                  {
+                    "title": "Test App URL",
+                    "value": "${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}.${{ secrets.TEST_DOMAIN }}"
+                  },
+                  {
+                    "title": "GitHub Actions URL",
+                    "value": "${{ github.event.repository.url }}/actions/runs/${{ github.run_id }}"
+                  }
+                ]
+              }
+            ]
+
+      - name: FAILURE
+        if: failure()
+        uses: tokorom/action-slack-incoming-webhook@main
+        env:
+          INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+        with:
+          text: ":x: Failed Test App Update Deployment"
+          attachments: |
+            [
+              {
+                "color": "bad",
+                "fields": [
+                  {
+                    "title": "Test App URL",
+                    "value": "${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}.${{ secrets.TEST_DOMAIN }}"
+                  },
+                  {
+                    "title": "GitHub Actions URL",
+                    "value": "${{ github.event.repository.url }}/actions/runs/${{ github.run_id }}"
+                  }
+                ]
+              }
+            ]
 
   destroy_test_app:
     runs-on: ubuntu-latest
@@ -145,3 +290,52 @@ jobs:
           port: 22
           script: |
             mariadb:destroy ${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}-database -f
+
+
+      - name: SUCCESS
+        if: success()
+        uses: tokorom/action-slack-incoming-webhook@main
+        env:
+          INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+        with:
+          text: ":green_check: Successfully Destroyed Test App"
+          attachments: |
+            [
+              {
+                "color": "good",
+                "fields": [
+                  {
+                    "title": "Test App Name",
+                    "value": "${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}"
+                  },
+                  {
+                    "title": "GitHub Actions URL",
+                    "value": "${{ github.event.repository.url }}/actions/runs/${{ github.run_id }}"
+                  }
+                ]
+              }
+            ]
+
+      - name: FAILURE
+        if: failure()
+        uses: tokorom/action-slack-incoming-webhook@main
+        env:
+          INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+        with:
+          text: ":x: Failed to Destroy Test App"
+          attachments: |
+            [
+              {
+                "color": "bad",
+                "fields": [
+                  {
+                    "title": "Test App Name",
+                    "value": "${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}"
+                  },
+                  {
+                    "title": "GitHub Actions URL",
+                    "value": "${{ github.event.repository.url }}/actions/runs/${{ github.run_id }}"
+                  }
+                ]
+              }
+            ]
