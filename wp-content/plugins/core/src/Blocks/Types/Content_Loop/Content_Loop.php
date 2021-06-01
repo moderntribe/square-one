@@ -6,12 +6,17 @@ use Tribe\Libs\ACF\Block;
 use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Field;
 use Tribe\Libs\ACF\Field_Section;
+use Tribe\Project\Admin\Editor\Classic_Editor_Formats;
+use Tribe\Project\Blocks\Fields\Cta_Field;
+use Tribe\Project\Blocks\Fields\Traits\With_Cta_Field;
 use Tribe\Project\Post_Types\Page\Page;
 use Tribe\Project\Post_Types\Post\Post;
 use Tribe\Project\Taxonomies\Category\Category;
 use Tribe\Project\Taxonomies\Post_Tag\Post_Tag;
 
-class Content_Loop extends Block_Config {
+class Content_Loop extends Block_Config implements Cta_Field {
+
+	use With_Cta_Field;
 
 	public const NAME = 'contentloop';
 
@@ -21,7 +26,6 @@ class Content_Loop extends Block_Config {
 	public const TITLE       = 'title';
 	public const DESCRIPTION = 'description';
 	public const LEADIN      = 'leadin';
-	public const CTA         = 'cta';
 
 	public const POST_LIST = 'post_list';
 
@@ -65,15 +69,15 @@ class Content_Loop extends Block_Config {
 					'type'  => 'text',
 				] )
 			)->add_field( new Field( self::NAME . '_' . self::DESCRIPTION, [
-					'label' => __( 'Description', 'tribe' ),
-					'name'  => self::DESCRIPTION,
-					'type'  => 'wysiwyg',
+					'label'        => __( 'Description', 'tribe' ),
+					'name'         => self::DESCRIPTION,
+					'type'         => 'wysiwyg',
+					'toolbar'      => Classic_Editor_Formats::MINIMAL,
+					'tabs'         => 'visual',
+					'media_upload' => 0,
 				] )
-			)->add_field( new Field( self::NAME . '_' . self::CTA, [
-					'label' => __( 'Call to Action', 'tribe' ),
-					'name'  => self::CTA,
-					'type'  => 'link',
-				] )
+			)->add_field(
+				$this->get_cta_field( self::NAME )
 			)->add_field( new Field( self::NAME . '_' . self::POST_LIST, [
 					'label'             => __( 'Post List', 'tribe' ),
 					'name'              => self::POST_LIST,
@@ -100,25 +104,25 @@ class Content_Loop extends Block_Config {
 		// Setting Fields
 		//==========================================
 		$this->add_section( new Field_Section( self::SECTION_SETTINGS, __( 'Settings', 'tribe' ), 'accordion' ) )
-			->add_field(
-				new Field( self::NAME . '_' . self::LAYOUT, [
-					'type'            => 'image_select',
-					'name'            => self::LAYOUT,
-					'choices'         => [
-						self::LAYOUT_ROW     => __( 'Row', 'tribe' ),
-						self::LAYOUT_FEATURE => __( 'Feature', 'tribe' ),
-						self::LAYOUT_COLUMNS => __( 'Columns', 'tribe' ),
-					],
-					'default_value'   => self::LAYOUT_ROW,
-					'multiple'        => 0,
-					'image_path'      => sprintf(
-						'%sassets/img/admin/blocks/%s/',
-						trailingslashit( get_template_directory_uri() ),
-						self::NAME
-					),
-					'image_extension' => 'svg',
-				] )
-			);
+			 ->add_field(
+				 new Field( self::NAME . '_' . self::LAYOUT, [
+					 'type'            => 'image_select',
+					 'name'            => self::LAYOUT,
+					 'choices'         => [
+						 self::LAYOUT_ROW     => __( 'Row', 'tribe' ),
+						 self::LAYOUT_FEATURE => __( 'Feature', 'tribe' ),
+						 self::LAYOUT_COLUMNS => __( 'Columns', 'tribe' ),
+					 ],
+					 'default_value'   => self::LAYOUT_ROW,
+					 'multiple'        => 0,
+					 'image_path'      => sprintf(
+						 '%sassets/img/admin/blocks/%s/',
+						 trailingslashit( get_template_directory_uri() ),
+						 self::NAME
+					 ),
+					 'image_extension' => 'svg',
+				 ] )
+			 );
 	}
 
 }

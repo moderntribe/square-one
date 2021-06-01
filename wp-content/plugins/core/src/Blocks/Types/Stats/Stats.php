@@ -7,8 +7,13 @@ use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Field;
 use Tribe\Libs\ACF\Field_Section;
 use Tribe\Libs\ACF\Repeater;
+use Tribe\Project\Admin\Editor\Classic_Editor_Formats;
+use Tribe\Project\Blocks\Fields\Cta_Field;
+use Tribe\Project\Blocks\Fields\Traits\With_Cta_Field;
 
-class Stats extends Block_Config {
+class Stats extends Block_Config implements Cta_Field {
+
+	use With_Cta_Field;
 
 	public const NAME = 'stats';
 
@@ -16,7 +21,6 @@ class Stats extends Block_Config {
 	public const LEAD_IN         = 'leadin';
 	public const TITLE           = 'title';
 	public const DESCRIPTION     = 'description';
-	public const CTA             = 'cta';
 
 	public const STATS     = 'stats';
 	public const ROW_VALUE = 'row_value';
@@ -56,9 +60,12 @@ class Stats extends Block_Config {
 							'Pellentesque diam diam, aliquet non mauris eu, posuere mollis urna. Nulla eget congue ligula, a aliquam lectus. Duis non diam maximus justo dictum porttitor in in risus.',
 							'tribe'
 						),
-						self::CTA         => [
-							'title' => esc_html__( 'Call to Action', 'tribe' ),
-							'url'   => '#',
+						self::GROUP_CTA   => [
+							self::LINK => [
+								'title'  => esc_html__( 'Lorem ipsum', 'tribe' ),
+								'url'    => '#',
+								'target' => '',
+							],
 						],
 						self::LAYOUT      => self::LAYOUT_INLINE,
 						self::STATS       => [
@@ -104,14 +111,12 @@ class Stats extends Block_Config {
 					'label'        => __( 'Description', 'tribe' ),
 					'name'         => self::DESCRIPTION,
 					'type'         => 'wysiwyg',
-					'toolbar'      => 'basic',
+					'toolbar'      => Classic_Editor_Formats::MINIMAL,
+					'tabs'         => 'visual',
 					'media_upload' => 0,
 				] )
-			)->add_field( new Field( self::NAME . '_' . self::CTA, [
-					'label' => __( 'Call to Action', 'tribe' ),
-					'name'  => self::CTA,
-					'type'  => 'link',
-				] )
+			)->add_field(
+				$this->get_cta_field( self::NAME )
 			)->add_field(
 				$this->get_stats_section()
 			);
@@ -167,7 +172,7 @@ class Stats extends Block_Config {
 	/**
 	 * @return \Tribe\Libs\ACF\Repeater
 	 */
-	protected function get_stats_section() {
+	protected function get_stats_section(): Repeater {
 		$group = new Repeater( self::NAME . '_' . self::STATS );
 		$group->set_attributes( [
 			'label'  => __( 'Stats List', 'tribe' ),

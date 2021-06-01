@@ -6,8 +6,12 @@ use Tribe\Libs\ACF\Block;
 use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Field;
 use Tribe\Libs\ACF\Field_Section;
+use Tribe\Project\Blocks\Fields\Cta_Field;
+use Tribe\Project\Blocks\Fields\Traits\With_Cta_Field;
 
-class Interstitial extends Block_Config {
+class Interstitial extends Block_Config implements Cta_Field {
+
+	use With_Cta_Field;
 
 	public const NAME = 'interstitial';
 
@@ -15,7 +19,6 @@ class Interstitial extends Block_Config {
 	public const IMAGE           = 'image';
 
 	public const TITLE = 'title';
-	public const CTA   = 'cta';
 
 	public const SECTION_SETTINGS = 's-settings';
 	public const LAYOUT           = 'layout';
@@ -37,14 +40,16 @@ class Interstitial extends Block_Config {
 				'attributes' => [
 					'mode' => 'preview',
 					'data' => [
-						self::TITLE => esc_html__( 'The Interstitial Title', 'tribe' ),
-						self::CTA   => [
-							'title'  => esc_html__( 'Lorem ipsum', 'tribe' ),
-							'url'    => '#',
-							'target' => '',
+						self::TITLE     => esc_html__( 'The Interstitial Title', 'tribe' ),
+						self::GROUP_CTA => [
+							self::LINK => [
+								'title'  => esc_html__( 'Lorem ipsum', 'tribe' ),
+								'url'    => '#',
+								'target' => '',
+							],
 						],
 						//Images are output as IDs so it's sort of hard to get an image value for preview
-						self::IMAGE => 0,
+						self::IMAGE     => 0,
 					],
 				],
 			],
@@ -61,12 +66,9 @@ class Interstitial extends Block_Config {
 					 'name'  => self::TITLE,
 					 'type'  => 'textarea',
 				 ] )
-			 )->add_field( new Field( self::NAME . '_' . self::CTA, [
-					'label' => __( 'Call to Action', 'tribe' ),
-					'name'  => self::CTA,
-					'type'  => 'link',
-				] )
-			)->add_field( new Field( self::NAME . '_' . self::IMAGE, [
+			 )->add_field(
+				 $this->get_cta_field( self::NAME )
+			 )->add_field( new Field( self::NAME . '_' . self::IMAGE, [
 					'label'         => __( 'Background Image', 'tribe' ),
 					'name'          => self::IMAGE,
 					'type'          => 'image',
