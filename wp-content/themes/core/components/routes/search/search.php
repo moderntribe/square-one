@@ -21,7 +21,7 @@ $c->render_header();
 				if ( have_posts() ) :
 					while ( have_posts() ) :
 						the_post();
-						get_template_part( 'components/loop_items/search/search', 'search' );
+						get_template_part( 'components/card/card', 'search', $c->get_card_args() );
 					endwhile;
 					get_template_part( 'components/pagination/loop/loop', 'search' );
 				endif;

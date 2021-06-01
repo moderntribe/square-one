@@ -30,6 +30,7 @@ class Card_Controller extends Abstract_Controller {
 	public const STYLE_ELEVATED   = 'elevated';
 	public const STYLE_OUTLINED   = 'outlined';
 	public const STYLE_INLINE     = 'inline';
+	public const STYLE_SEARCH     = 'search';
 
 	private string $tag;
 	private array  $classes;
