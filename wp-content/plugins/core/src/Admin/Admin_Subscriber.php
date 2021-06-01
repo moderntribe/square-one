@@ -46,6 +46,9 @@ class Admin_Subscriber extends Abstract_Subscriber {
 		add_filter( 'tiny_mce_before_init', function ( $settings ) {
 			return $this->container->get( Classic_Editor_Formats::class )->visual_editor_styles_dropdown( $settings );
 		}, 10, 1 );
+		add_filter( 'acf/fields/wysiwyg/toolbars', function ( $toolbars ) {
+			return $this->container->get( Classic_Editor_Formats::class )->add_minimal_toolbar( $toolbars );
+		}, 10, 1 );
 	}
 
 }
