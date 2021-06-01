@@ -30,7 +30,7 @@ class Nav_Attribute_Filters {
 	 *
 	 * @param array  $classes The CSS classes that are applied to the menu item's `<li>` element.
 	 * @param object $item    The current menu item.
-	 * @param array  $args    An array of {@see wp_nav_menu()} arguments.
+	 * @param array  $args    An array of {@see wp_nav_menu()} arguments
 	 * @param int    $depth   Depth of menu item. Used for padding.
 	 *
 	 * @return array
@@ -38,13 +38,6 @@ class Nav_Attribute_Filters {
 	 * @filter nav_menu_css_class
 	 */
 	public function customize_nav_item_classes( $classes, $item, $args, $depth ): array {
-
-		/*
-		 *  WP Core docs claim that $args is an array, but it comes
-		 * in as an object thanks to casting in wp_nav_menu()
-		 */
-		$args = (array) $args;
-
 		$classes[] = $args['theme_location'] . '__list-item';
 
 		// Depth
@@ -107,13 +100,6 @@ class Nav_Attribute_Filters {
 	 * @filter nav_menu_link_attributes
 	 */
 	public function customize_nav_item_anchor_atts( $atts, $item, $args, $depth ): array {
-
-		/*
-		 *  WP Core docs claim that $args is an array, but it comes
-		 * in as an object thanks to casting in wp_nav_menu()
-		 */
-		$args = (array) $args;
-
 		$classes = [
 			$args['theme_location'] . '__action',
 			$args['theme_location'] . '__action--depth-' . $depth,
