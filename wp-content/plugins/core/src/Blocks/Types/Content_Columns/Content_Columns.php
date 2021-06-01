@@ -7,8 +7,12 @@ use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Field;
 use Tribe\Libs\ACF\Field_Section;
 use Tribe\Libs\ACF\Repeater;
+use Tribe\Project\Blocks\Fields\Cta_Field;
+use Tribe\Project\Blocks\Fields\Traits\With_Cta_Field;
 
-class Content_Columns extends Block_Config {
+class Content_Columns extends Block_Config implements Cta_Field {
+
+	use With_Cta_Field;
 
 	public const NAME = 'contentcolumns';
 
@@ -16,11 +20,9 @@ class Content_Columns extends Block_Config {
 	public const LEADIN          = 'leadin';
 	public const TITLE           = 'title';
 	public const DESCRIPTION     = 'description';
-	public const CTA             = 'cta';
 	public const COLUMNS         = 'columns';
 	public const COLUMN_TITLE    = 'col_title';
 	public const COLUMN_CONTENT  = 'col_content';
-	public const COLUMN_CTA      = 'col_cta';
 
 	public const SECTION_SETTINGS     = 's-settings';
 	public const CONTENT_ALIGN        = 'content-align';
@@ -52,10 +54,12 @@ class Content_Columns extends Block_Config {
 									'Cras ut ornare dui, sed venenatis est. Donec euismod in leo quis consequat.',
 									'tribe'
 								),
-								self::COLUMN_CTA     => [
-									'title'  => esc_html__( 'Lorem ipsum', 'tribe' ),
-									'url'    => '#',
-									'target' => '',
+								self::GROUP_CTA      => [
+									self::LINK => [
+										'title'  => esc_html__( 'Lorem ipsum', 'tribe' ),
+										'url'    => '#',
+										'target' => '',
+									],
 								],
 							],
 						],
@@ -91,11 +95,9 @@ class Content_Columns extends Block_Config {
 					'toolbar'      => 'basic',
 					'media_upload' => 0,
 				] )
-			)->add_field( new Field( self::NAME . '_' . self::CTA, [
-				'label' => __( 'Call to Action', 'tribe' ),
-				'name'  => self::CTA,
-				'type'  => 'link',
-			] ) )->add_field( $this->get_links_section() );
+			)->add_field(
+				$this->get_cta_field( self::NAME )
+			)->add_field( $this->get_links_section() );
 
 		//==========================================
 		// Setting Fields
@@ -123,7 +125,7 @@ class Content_Columns extends Block_Config {
 	/**
 	 * @return \Tribe\Libs\ACF\Repeater
 	 */
-	protected function get_links_section() {
+	protected function get_links_section(): Repeater {
 		$group = new Repeater( self::NAME . '_' . self::COLUMNS );
 		$group->set_attributes( [
 			'label'  => __( 'Columns', 'tribe' ),
@@ -147,11 +149,7 @@ class Content_Columns extends Block_Config {
 			'media_upload' => 0,
 		] );
 
-		$cta = new Field( self::COLUMN_CTA, [
-			'label' => __( 'Call to Action', 'tribe' ),
-			'name'  => self::COLUMN_CTA,
-			'type'  => 'link',
-		] );
+		$cta = $this->get_cta_field( self::NAME );
 
 		$group->add_field( $text );
 		$group->add_field( $content );

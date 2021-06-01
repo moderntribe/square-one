@@ -158,16 +158,20 @@ class Content_Columns_Block_Controller extends Abstract_Controller {
 	 */
 	private function get_cta(): Deferred_Component {
 		$cta = wp_parse_args( $this->cta, [
-			'content' => '',
-			'url'     => '',
-			'target'  => '',
+			'content'        => '',
+			'url'            => '',
+			'target'         => '',
+			'add_aria_label' => false,
+			'aria_label'     => '',
 		] );
 
 		return defer_template_part( 'components/link/link', null, [
-			Link_Controller::URL     => $cta['url'],
-			Link_Controller::CONTENT => $cta['content'] ?: $cta['url'],
-			Link_Controller::TARGET  => $cta['target'],
-			Link_Controller::CLASSES => [
+			Link_Controller::URL            => $cta['url'],
+			Link_Controller::CONTENT        => $cta['content'] ?: $cta['url'],
+			Link_Controller::TARGET         => $cta['target'],
+			Link_Controller::ADD_ARIA_LABEL => $cta['add_aria_label'],
+			Link_Controller::ARIA_LABEL     => $cta['aria_label'],
+			Link_Controller::CLASSES        => [
 				'c-block__cta-link',
 				'a-btn',
 				'a-btn--has-icon-after',
@@ -202,10 +206,12 @@ class Content_Columns_Block_Controller extends Abstract_Controller {
 				'components/link/link',
 				null,
 				[
-					Link_Controller::CONTENT => $column->get_cta()[ Link_Controller::CONTENT ],
-					Link_Controller::URL     => $column->get_cta()[ Link_Controller::URL ],
-					Link_Controller::TARGET  => $column->get_cta()[ Link_Controller::TARGET ],
-					Link_Controller::CLASSES => [
+					Link_Controller::CONTENT        => $column->get_cta()[ Link_Controller::CONTENT ],
+					Link_Controller::URL            => $column->get_cta()[ Link_Controller::URL ],
+					Link_Controller::TARGET         => $column->get_cta()[ Link_Controller::TARGET ],
+					Link_Controller::ADD_ARIA_LABEL => $column->get_cta()[ Link_Controller::ADD_ARIA_LABEL ],
+					Link_Controller::ARIA_LABEL     => $column->get_cta()[ Link_Controller::ARIA_LABEL ],
+					Link_Controller::CLASSES        => [
 						'a-btn',
 						'a-btn--has-icon-after',
 						'icon-arrow-right',

@@ -7,8 +7,12 @@ use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Field;
 use Tribe\Libs\ACF\Field_Section;
 use Tribe\Libs\ACF\Repeater;
+use Tribe\Project\Blocks\Fields\Cta_Field;
+use Tribe\Project\Blocks\Fields\Traits\With_Cta_Field;
 
-class Icon_Grid extends Block_Config {
+class Icon_Grid extends Block_Config implements Cta_Field {
+
+	use With_Cta_Field;
 
 	public const NAME = 'icongrid';
 
@@ -18,13 +22,11 @@ class Icon_Grid extends Block_Config {
 	public const TITLE       = 'title';
 	public const DESCRIPTION = 'description';
 	public const LEADIN      = 'leadin';
-	public const CTA         = 'cta';
 
 	public const ICONS            = 'icons';
 	public const ICON_IMAGE       = 'icon_image';
 	public const ICON_TITLE       = 'icon_title';
 	public const ICON_DESCRIPTION = 'icon_description';
-	public const ICON_LINK        = 'icon_link';
 
 	public function add_block(): void {
 		$this->set_block( new Block( self::NAME, [
@@ -49,33 +51,29 @@ class Icon_Grid extends Block_Config {
 		// Content Fields
 		//==========================================
 		$this->add_section( new Field_Section( self::SECTION_CONTENT, __( 'Content', 'tribe' ), 'accordion' ) )
-			->add_field(
-				new Field( self::NAME . '_' . self::TITLE, [
-					'label' => __( 'Title', 'tribe' ),
-					'name'  => self::TITLE,
-					'type'  => 'text',
-				] )
-			)->add_field(
-				new Field( self::NAME . '_' . self::LEADIN, [
+			 ->add_field(
+				 new Field( self::NAME . '_' . self::TITLE, [
+					 'label' => __( 'Title', 'tribe' ),
+					 'name'  => self::TITLE,
+					 'type'  => 'text',
+				 ] )
+			 )->add_field(
+				 new Field( self::NAME . '_' . self::LEADIN, [
 					'label' => __( 'Lead in', 'tribe' ),
 					'name'  => self::LEADIN,
 					'type'  => 'text',
-				] )
-			)->add_field(
-				new Field( self::NAME . '_' . self::DESCRIPTION, [
+				 ] )
+			 )->add_field(
+				 new Field( self::NAME . '_' . self::DESCRIPTION, [
 					'label' => __( 'Description', 'tribe' ),
 					'name'  => self::DESCRIPTION,
 					'type'  => 'wysiwyg',
-				] )
-			)->add_field(
-				new Field( self::NAME . '_' . self::CTA, [
-					'label' => __( 'Call to Action', 'tribe' ),
-					'name'  => self::CTA,
-					'type'  => 'link',
-				] )
-			)->add_field(
-				$this->get_icon_section()
-			);
+				 ] )
+			 )->add_field(
+				 $this->get_cta_field( self::NAME )
+			 )->add_field(
+				 $this->get_icon_section()
+			 );
 	}
 
 	/**
@@ -111,13 +109,9 @@ class Icon_Grid extends Block_Config {
 				'label' => __( 'Icon Description', 'tribe' ),
 				'name'  => self::ICON_DESCRIPTION,
 				'type'  => 'wysiwyg',
-			 ] )
-		)->add_field(
-			new Field( self::ICON_LINK, [
-				'label' => __( 'Icon Section Link', 'tribe' ),
-				'name'  => self::ICON_LINK,
-				'type'  => 'link',
 			] )
+		)->add_field(
+			$this->get_cta_field( self::NAME )
 		);
 
 		return $group;
