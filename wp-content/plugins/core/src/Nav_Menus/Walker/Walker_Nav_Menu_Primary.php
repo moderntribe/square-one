@@ -25,6 +25,8 @@ class Walker_Nav_Menu_Primary extends \Walker_Nav_Menu {
 	 *
 	 * @see   Walker::start_lvl()
 	 *
+	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
+	 *
 	 * @since 3.0.0
 	 */
 	public function start_lvl( &$output, $depth = 0, $args = [] ) {
@@ -58,6 +60,8 @@ class Walker_Nav_Menu_Primary extends \Walker_Nav_Menu {
 	 * @param int    $id     Current item ID.
 	 *
 	 * @see   Walker::start_el()
+	 *
+	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 *
 	 * @since 3.0.0
 	 * @since 4.4.0 The {@see 'nav_menu_item_args'} filter was added.
