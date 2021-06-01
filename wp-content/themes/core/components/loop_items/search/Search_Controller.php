@@ -16,11 +16,11 @@ class Search_Controller extends Abstract_Controller {
 
 		return [
 			Image_Controller::IMG_ID       => (int) get_post_thumbnail_id(),
-			Image_Controller::SRC_SIZE     => Image_Sizes::THREE_TWO,
+			Image_Controller::SRC_SIZE     => Image_Sizes::FOUR_THREE,
 			Image_Controller::SRCSET_SIZES => [
-				Image_Sizes::THREE_TWO_XSMALL,
-				Image_Sizes::THREE_TWO_SMALL,
-				Image_Sizes::THREE_TWO,
+				Image_Sizes::FOUR_THREE_SMALL,
+				Image_Sizes::FOUR_THREE,
+				Image_Sizes::FOUR_THREE_LARGE,
 			],
 		];
 	}
