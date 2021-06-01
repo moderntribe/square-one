@@ -3,11 +3,11 @@ name: Deploy Test
 on:
   pull_request:
     branches:
-      - feature/review-apps
+      - server/test
     types: [ opened, reopened, closed, synchronize ]
   push:
     branches:
-      - feature/review-apps
+      - server/test
 
 env:
   APPNAME: sq1
@@ -17,7 +17,7 @@ jobs:
   deploy_app:
     runs-on: ubuntu-latest
     # only run on push to main
-    if: github.event_name == 'push' && github.ref == 'refs/heads/feature/review-apps' && github.repository == 'moderntribe/square-one'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/server/test' && github.repository == 'moderntribe/square-one'
     steps:
       - name: Cloning repo
         uses: actions/checkout@v2
