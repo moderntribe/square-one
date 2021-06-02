@@ -3,7 +3,6 @@
 namespace Tribe\Project\Templates\Components\routes\search;
 
 use Tribe\Project\Templates\Components\Abstract_Controller;
-use Tribe\Project\Templates\Components\sidebar\Sidebar_Controller;
 use Tribe\Project\Templates\Components\breadcrumbs\Breadcrumbs_Controller;
 use \Tribe\Project\Templates\Components\search_form\Search_Form_Controller;
 use Tribe\Project\Templates\Components\text\Text_Controller;
@@ -11,6 +10,8 @@ use Tribe\Project\Templates\Components\card\Card_Controller;
 use Tribe\Project\Templates\Components\image\Image_Controller;
 use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Theme\Config\Image_Sizes;
+use Tribe\Project\Templates\Components\sidebar\Sidebar_Controller;
+use Tribe\Project\Templates\Models\Breadcrumb;
 
 class Search_Controller extends Abstract_Controller {
 
