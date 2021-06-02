@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\routes\search;
 
@@ -190,4 +189,5 @@ class Search_Controller extends Abstract_Controller {
 
 		return $card_args;
 	}
+
 }

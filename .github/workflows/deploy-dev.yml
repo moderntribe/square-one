@@ -12,7 +12,7 @@ jobs:
       DEPLOY_FOLDER: ./deploy
       ENVIRONMENT: development
       DEPLOY_REPO: ${{ secrets.DEV_DEPLOY_REPO }}
-      COMPOSER_AUTH: '{ "github-oauth": { "github.com": "${{ secrets.GH_TOKEN }}" } }'
+      COMPOSER_AUTH: '{ "github-oauth": { "github.com": "${{ secrets.GITHUB_TOKEN }}" } }'
 
     steps:
 

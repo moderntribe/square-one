@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Blocks\Types\Gallery_Grid;
 
@@ -7,8 +6,10 @@ use Tribe\Libs\ACF\Block;
 use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Field;
 use Tribe\Libs\ACF\Field_Section;
+use Tribe\Project\Admin\Editor\Classic_Editor_Formats;
 
 class Gallery_Grid extends Block_Config {
+
 	public const NAME = 'gallerygrid';
 
 	public const SECTION_CONTENT  = 's-content';
@@ -24,8 +25,8 @@ class Gallery_Grid extends Block_Config {
 	public const TWO         = 'two';
 	public const THREE       = 'three';
 	public const FOUR        = 'four';
-	
-	public const SLIDESHOW   = 'slideshow';
+
+	public const SLIDESHOW = 'slideshow';
 
 	public function add_block() {
 		$this->set_block( new Block( self::NAME, [
@@ -59,7 +60,8 @@ class Gallery_Grid extends Block_Config {
 					'label'        => __( 'Description', 'tribe' ),
 					'name'         => self::DESCRIPTION,
 					'type'         => 'wysiwyg',
-					'toolbar'      => 'basic',
+					'toolbar'      => Classic_Editor_Formats::MINIMAL,
+					'tabs'         => 'visual',
 					'media_upload' => 0,
 				] )
 			)->add_field( new Field( self::NAME . '_' . self::GALLERY, [
@@ -75,9 +77,9 @@ class Gallery_Grid extends Block_Config {
 		//==========================================
 		$this->add_section( new Field_Section( self::SECTION_SETTINGS, __( 'Settings', 'tribe' ), 'accordion' ) )
 		->add_field( new Field( self::NAME . '_' . self::GRID_LAYOUT, [
-			'label' => __( 'Grid Columns', 'tribe' ),
-			'name'  => self::GRID_LAYOUT,
-			'type'  => 'select',
+			'label'         => __( 'Grid Columns', 'tribe' ),
+			'name'          => self::GRID_LAYOUT,
+			'type'          => 'select',
 			'choices'       => [
 				self::ONE   => __( '1', 'tribe' ),
 				self::TWO   => __( '2', 'tribe' ),
@@ -93,4 +95,5 @@ class Gallery_Grid extends Block_Config {
 			] )
 		);
 	}
+
 }

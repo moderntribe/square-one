@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\slider;
 
@@ -7,6 +6,7 @@ use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 
 class Slider_Controller extends Abstract_Controller {
+
 	public const CLASSES         = 'classes';
 	public const MAIN_CLASSES    = 'main_classes';
 	public const MAIN_ATTRS      = 'main_attrs';
@@ -25,9 +25,9 @@ class Slider_Controller extends Abstract_Controller {
 	private array $wrapper_classes;
 	private array $slide_classes;
 	private array $slides;
-	private bool  $show_arrows;
-	private bool  $show_pagination;
-	private bool  $show_carousel;
+	private bool $show_arrows;
+	private bool $show_pagination;
+	private bool $show_carousel;
 	private array $carousel_attrs;
 	private array $carousel_slides;
 
@@ -129,4 +129,5 @@ class Slider_Controller extends Abstract_Controller {
 	public function should_show_carousel(): bool {
 		return $this->show_carousel;
 	}
+
 }

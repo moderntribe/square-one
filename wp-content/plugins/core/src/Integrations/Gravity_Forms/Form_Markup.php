@@ -1,9 +1,9 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Integrations\Gravity_Forms;
 
 class Form_Markup {
+
 	/**
 	 * @var bool Used to enable/disable CSS classes that control icon placement inside some field types.
 	 */
@@ -13,6 +13,7 @@ class Form_Markup {
 	 * Add some custom markup to other option for radio & checkbox controls
 	 *
 	 * @link   https://docs.gravityforms.com/gform_field_choice_markup_pre_render/
+	 *
 	 * @filter gform_field_choice_markup_pre_render
 	 *
 	 * @param string $choice_markup
@@ -25,7 +26,6 @@ class Form_Markup {
 	public function customize_gf_choice_other( $choice_markup, $choice, $field, $value ): string {
 
 		if ( ! empty( $choice['isOtherChoice'] ) ) {
-
 			$indices = array_keys( $field['choices'] );
 			$index   = array_pop( $indices );
 
@@ -38,7 +38,6 @@ class Form_Markup {
 			);
 
 			$choice_markup = str_replace( '</li>', $new_markup, $choice_markup );
-
 		}
 
 		return $choice_markup;
@@ -48,6 +47,7 @@ class Form_Markup {
 	 * Add a custom class to the Gravity Forms select field
 	 *
 	 * @link   https://docs.gravityforms.com/gform_field_css_class/
+	 *
 	 * @filter gform_field_css_class
 	 *
 	 * @param string $classes
@@ -77,7 +77,7 @@ class Form_Markup {
 			$classes .= ' gf-textarea';
 		} elseif ( $field['type'] === 'date' || $field['inputType'] === 'date' ) {
 			$class_date_icon = ( $field['dateType'] === 'datepicker' ) ? $class_icon_simple : '';
-			$classes         .= ' gf-date gf-date-layout-' . $field['dateType'] . $class_date_icon;
+			$classes        .= ' gf-date gf-date-layout-' . $field['dateType'] . $class_date_icon;
 		} elseif ( $field['type'] === 'time' || $field['inputType'] === 'time' ) {
 			$classes .= ' gf-time';
 		} elseif ( $field['type'] === 'phone' || $field['inputType'] === 'phone' ) {
@@ -98,4 +98,5 @@ class Form_Markup {
 
 		return $classes;
 	}
+
 }

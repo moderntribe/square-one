@@ -1,5 +1,4 @@
-<?php
-
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Cache;
 
@@ -14,10 +13,12 @@ class Listener extends \Tribe\Libs\Cache\Listener {
 	public function save_post( $post_id, $post ) {
 		// Example usage:
 		// $this->cache->delete('some_cache_key', 'tribe');
-		if ( ! in_array( $post->post_status, [ 'auto-draft', 'inherit' ] ) ) {
-			$this->cache->flush_group( 'p2p_relationships' );
-			$this->cache->flush_group( 'nav' );
+		if ( in_array( $post->post_status, [ 'auto-draft', 'inherit' ] ) ) {
+			return;
 		}
+
+		$this->cache->flush_group( 'p2p_relationships' );
+		$this->cache->flush_group( 'nav' );
 	}
 
 	/**
@@ -44,4 +45,5 @@ class Listener extends \Tribe\Libs\Cache\Listener {
 	public function update_menu() {
 		$this->cache->flush_group( 'nav' );
 	}
+
 }

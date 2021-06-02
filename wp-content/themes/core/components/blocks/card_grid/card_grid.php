@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 use Tribe\Project\Blocks\Types\Card_Grid\Card_Grid;
 use Tribe\Project\Templates\Components\blocks\card_grid\Card_Grid_Controller;

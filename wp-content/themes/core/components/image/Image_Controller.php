@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\image;
 
@@ -6,6 +6,7 @@ use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 
 class Image_Controller extends Abstract_Controller {
+
 	public const ATTRS             = 'attrs';
 	public const CLASSES           = 'classes';
 	public const WRAPPER_TAG       = 'wrapper_tag';
@@ -305,7 +306,6 @@ class Image_Controller extends Abstract_Controller {
 		}
 
 		if ( $this->use_lazyload && $this->should_lazy_load() ) {
-
 			// the expand attribute that controls threshold
 			$attrs['data-expand'] = esc_attr( $this->expand );
 
@@ -345,9 +345,7 @@ class Image_Controller extends Abstract_Controller {
 			} else {
 				$attrs['src'] = esc_url( $shim_src );
 			}
-
 		} else {
-
 			// no lazyloading, standard stuffs
 			if ( $this->as_bg && ! empty( $src ) ) {
 				$attrs['style'] = sprintf( 'background-image:url(\'%s\');', esc_url( $src ) );
@@ -416,9 +414,11 @@ class Image_Controller extends Abstract_Controller {
 			if ( ! $use_size && isset( $all_sizes[ $size ] ) ) {
 				$use_size = $this->image_matches_size( $src, $all_sizes[ $size ] );
 			}
-			if ( $use_size ) {
-				$attribute[] = $this->build_srcset_string( ... $src );
+			if ( ! $use_size ) {
+				continue;
 			}
+
+			$attribute[] = $this->build_srcset_string( ... $src );
 		}
 
 		// If there are no sizes available after all that work, fallback to the original full size image.
@@ -450,10 +450,10 @@ class Image_Controller extends Abstract_Controller {
 		$size_width   = (int) $size['width'];
 		$size_height  = (int) $size['height'];
 		if ( $size['crop'] ) {
-			return ( $image_width === $size_width && $image_height === $size_height );
-		} else {
-			return ( $image_width === $size_width || $image_height === $size_height );
+			return  $image_width === $size_width && $image_height === $size_height;
 		}
+
+		return  $image_width === $size_width || $image_height === $size_height;
 	}
 
 	public function get_html(): string {
@@ -463,4 +463,5 @@ class Image_Controller extends Abstract_Controller {
 
 		return $this->html;
 	}
+
 }

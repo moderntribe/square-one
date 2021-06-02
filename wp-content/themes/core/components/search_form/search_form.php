@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 use \Tribe\Project\Templates\Components\search_form\Search_Form_Controller;
 

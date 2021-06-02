@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\video;
 
@@ -7,6 +6,7 @@ use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 
 class Video_Controller extends Abstract_Controller {
+
 	public const CLASSES                 = 'classes';
 	public const ATTRS                   = 'attrs';
 	public const VIDEO_URL               = 'video_url';
@@ -18,8 +18,8 @@ class Video_Controller extends Abstract_Controller {
 	public const TRIGGER_POSITION_CENTER = 'center';
 	public const TRIGGER_POSITION_BOTTOM = 'bottom';
 
-	private array  $classes;
-	private array  $attrs;
+	private array $classes;
+	private array $attrs;
 	private string $video_url;
 	private string $video_title;
 	private string $trigger_label;
@@ -61,6 +61,7 @@ class Video_Controller extends Abstract_Controller {
 
 	public function get_classes(): string {
 		$this->classes[] = sprintf( 'c-video--trigger-%s', $this->trigger_position );
+
 		return Markup_Utils::class_attribute( $this->classes );
 	}
 
@@ -83,4 +84,5 @@ class Video_Controller extends Abstract_Controller {
 	public function get_trigger_label(): string {
 		return esc_html( $this->trigger_label );
 	}
+
 }

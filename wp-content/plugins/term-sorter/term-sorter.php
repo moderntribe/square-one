@@ -17,7 +17,7 @@ Version: 1.0
 if ( !function_exists('term_sorter_load') ) { // play nice
 	function term_sorter_load() {
 		require( dirname(__FILE__). '/classes/Term_Sorter.php' );
-		add_action( 'plugins_loaded', array( 'Term_Sorter', 'init' ) );		
+		add_action( 'plugins_loaded', array( 'Term_Sorter', 'init' ) );
 	}
 
 	term_sorter_load();

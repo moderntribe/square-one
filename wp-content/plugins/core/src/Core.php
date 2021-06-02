@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Tribe\Project;
 
@@ -17,15 +17,15 @@ use Tribe\Project\Object_Meta\Object_Meta_Definer;
 use Tribe\Project\P2P\P2P_Definer;
 use Tribe\Project\Post_Types;
 use Tribe\Project\Query\Query_Subscriber;
+use Tribe\Project\Routes\Routes_Definer;
+use Tribe\Project\Routes\Routes_Subscriber;
 use Tribe\Project\Settings\Settings_Definer;
-use Tribe\Project\Shortcodes\Shortcodes_Subscriber;
 use Tribe\Project\Taxonomies;
 use Tribe\Project\Theme\Theme_Definer;
 use Tribe\Project\Theme\Theme_Subscriber;
-use Tribe\Project\Routes\Routes_Definer;
-use Tribe\Project\Routes\Routes_Subscriber;
 
 class Core {
+
 	public const PLUGIN_FILE = 'plugin.file';
 
 	/**
@@ -34,7 +34,7 @@ class Core {
 	private static $instance;
 
 	/**
-	 * @var ContainerInterface
+	 * @var \Psr\Container\ContainerInterface
 	 */
 	private $container;
 
@@ -64,7 +64,6 @@ class Core {
 		Nav_Menus_Subscriber::class,
 		Query_Subscriber::class,
 		Routes_Subscriber::class,
-		Shortcodes_Subscriber::class,
 		Theme_Subscriber::class,
 		Yoast_SEO_Subscriber::class,
 
@@ -112,7 +111,6 @@ class Core {
 		'\Tribe\Libs\Whoops\Whoops_Subscriber',
 	];
 
-
 	public function init( string $plugin_path ) {
 		$this->init_container( $plugin_path );
 	}
@@ -141,7 +139,7 @@ class Core {
 		$builder->useAutowiring( true );
 		$builder->useAnnotations( false );
 		$builder->addDefinitions( [ self::PLUGIN_FILE => $plugin_path ] );
-		$builder->addDefinitions( ... array_map( function ( $classname ) {
+		$builder->addDefinitions( ... array_map( static function ( $classname ) {
 			return ( new $classname() )->define();
 		}, $definers ) );
 

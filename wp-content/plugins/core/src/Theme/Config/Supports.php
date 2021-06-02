@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Theme\Config;
 
@@ -6,6 +6,7 @@ class Supports {
 
 	/**
 	 * @return void
+	 *
 	 * @action after_setup_theme
 	 */
 	public function add_theme_supports() {
@@ -47,4 +48,5 @@ class Supports {
 			'style',
 		] );
 	}
+
 }

@@ -1,9 +1,9 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Models;
 
 class Statistic {
+
 	public string $value;
 	public string $label;
 
@@ -17,4 +17,5 @@ class Statistic {
 		$this->value = $value;
 		$this->label = $label;
 	}
+
 }

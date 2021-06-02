@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 use \Tribe\Project\Templates\Components\routes\unsupported_browser\Unsupported_Browser_Controller;
 
