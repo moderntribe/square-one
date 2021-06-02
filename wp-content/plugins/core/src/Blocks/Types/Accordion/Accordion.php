@@ -15,20 +15,20 @@ class Accordion extends Block_Config implements Cta_Field {
 
 	use With_Cta_Field;
 
-	public const NAME            = 'accordion';
-	public const SECTION_CONTENT = 's-content';
-	public const LEAD_IN         = 'leadin';
-	public const TITLE           = 'title';
-	public const DESCRIPTION     = 'description';
+	public const NAME = 'accordion';
 
-	public const ACCORDION   = 'accordion';
-	public const ROW_HEADER  = 'row_header';
-	public const ROW_CONTENT = 'row_content';
+	public const LAYOUT         = 'layout';
+	public const LAYOUT_INLINE  = 'inline';
+	public const LAYOUT_STACKED = 'stacked';
 
-	public const SECTION_SETTINGS = 's-settings';
-	public const LAYOUT           = 'layout';
-	public const LAYOUT_INLINE    = 'inline';
-	public const LAYOUT_STACKED   = 'stacked';
+	public const LEAD_IN     = 'leadin';
+	public const TITLE       = 'title';
+	public const DESCRIPTION = 'description';
+
+	public const SECTION_ACCORDION = 's-accordion';
+	public const ACCORDION         = 'accordion';
+	public const ROW_HEADER        = 'row_header';
+	public const ROW_CONTENT       = 'row_content';
 
 	public function add_block() {
 		$this->set_block( new Block( self::NAME, [
@@ -108,7 +108,7 @@ class Accordion extends Block_Config implements Cta_Field {
 			] )
 		)->add_field(
 			$this->get_cta_field( self::NAME )
-		)->add_field(
+		)->add_section(
 			$this->get_accordion_section()
 		);
 	}
@@ -117,7 +117,7 @@ class Accordion extends Block_Config implements Cta_Field {
 	 * @return \Tribe\Libs\ACF\Field_Section
 	 */
 	protected function get_accordion_section(): Field_Section {
-		$section = new Field_Section( self::SECTION_SETTINGS, __( 'Accordion Items', 'tribe' ), 'accordion' );
+		$section = new Field_Section( self::SECTION_ACCORDION, __( 'Accordion Items', 'tribe' ), 'accordion' );
 		$group   = new Repeater( self::NAME . '_' . self::ACCORDION );
 		$group->set_attributes( [
 			'label'     => __( 'Accordion Section', 'tribe' ),
