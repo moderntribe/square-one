@@ -16,6 +16,7 @@ class Interstitial_Model extends Base_Model {
 		return [
 			Interstitial_Block_Controller::ATTRS   => $this->get_attrs(),
 			Interstitial_Block_Controller::CLASSES => $this->get_classes(),
+			Interstitial_Block_Controller::LEADIN  => $this->get( Interstitial::LEADIN, '' ),
 			Interstitial_Block_Controller::TITLE   => $this->get( Interstitial::TITLE, '' ),
 			Interstitial_Block_Controller::CTA     => $this->get_cta_args(),
 			Interstitial_Block_Controller::LAYOUT  => $this->get( Interstitial::LAYOUT, '' ),
