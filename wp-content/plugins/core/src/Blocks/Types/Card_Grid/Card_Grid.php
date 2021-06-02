@@ -6,6 +6,7 @@ use Tribe\Libs\ACF\Block;
 use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Field;
 use Tribe\Libs\ACF\Field_Section;
+use Tribe\Project\Admin\Editor\Classic_Editor_Formats;
 use Tribe\Project\Blocks\Fields\Cta_Field;
 use Tribe\Project\Blocks\Fields\Traits\With_Cta_Field;
 use Tribe\Project\Post_Types\Post\Post;
@@ -87,7 +88,7 @@ class Card_Grid extends Block_Config implements Cta_Field {
 					'label'        => __( 'Description', 'tribe' ),
 					'name'         => self::DESCRIPTION,
 					'type'         => 'wysiwyg',
-					'toolbar'      => 'minimal',
+					'toolbar'      => Classic_Editor_Formats::MINIMAL,
 					'tabs'         => 'visual',
 					'media_upload' => 0,
 				] )

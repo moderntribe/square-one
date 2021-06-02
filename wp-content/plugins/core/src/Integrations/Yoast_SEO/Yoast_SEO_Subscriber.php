@@ -8,11 +8,11 @@ class Yoast_SEO_Subscriber extends Abstract_Subscriber {
 
 	public function register(): void {
 		add_filter( 'wpseo_opengraph_image_size', function ( $size ) {
-			return $this->container->get( Open_Graph::class )->customize_wpseo_opengraph_image_size( $size );
+			return $this->container->get( Open_Graph::class )->customize_wpseo_opengraph_image_size( (string) $size );
 		}, 10, 1 );
 
 		add_filter( 'wpseo_twitter_image_size', function ( $size ) {
-			return $this->container->get( Open_Graph::class )->customize_wpseo_twitter_image_size( $size );
+			return $this->container->get( Open_Graph::class )->customize_wpseo_twitter_image_size( (string) $size );
 		}, 10, 1 );
 
 		// Remove WP SEO json-ld output in favor of the included functions
