@@ -76,10 +76,10 @@ class Search_Form_Controller extends Abstract_Controller {
 
 	public function get_clear_button_args(): array {
 		return [
-			Button_Controller::CLASSES    => [ 'c-search__clear-button' ],
-			Button_Controller::ATTRS      => [ 'name'  => 'reset', 'data-js' => 'search-form-clear'],
-			Button_Controller::TYPE       => 'reset',
-			Button_Controller::CONTENT    => '<span>' . esc_html__( 'Clear', 'tribe' ) . '</span>',
+			Button_Controller::CLASSES => [ 'c-search__clear-button' ],
+			Button_Controller::ATTRS   => [ 'name'  => 'reset', 'data-js' => 'search-form-clear'],
+			Button_Controller::TYPE    => 'reset',
+			Button_Controller::CONTENT => '<span>' . esc_html__( 'Clear', 'tribe' ) . '</span>',
 		];
 	}
 

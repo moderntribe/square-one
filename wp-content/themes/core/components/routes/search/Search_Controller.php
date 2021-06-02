@@ -4,14 +4,13 @@ namespace Tribe\Project\Templates\Components\routes\search;
 
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\breadcrumbs\Breadcrumbs_Controller;
-use \Tribe\Project\Templates\Components\search_form\Search_Form_Controller;
-use Tribe\Project\Templates\Components\text\Text_Controller;
 use Tribe\Project\Templates\Components\card\Card_Controller;
 use Tribe\Project\Templates\Components\image\Image_Controller;
 use Tribe\Project\Templates\Components\link\Link_Controller;
-use Tribe\Project\Theme\Config\Image_Sizes;
+use Tribe\Project\Templates\Components\search_form\Search_Form_Controller;
 use Tribe\Project\Templates\Components\sidebar\Sidebar_Controller;
-use Tribe\Project\Templates\Models\Breadcrumb;
+use Tribe\Project\Templates\Components\text\Text_Controller;
+use Tribe\Project\Theme\Config\Image_Sizes;
 
 class Search_Controller extends Abstract_Controller {
 
@@ -113,13 +112,13 @@ class Search_Controller extends Abstract_Controller {
 
 		return [
 			Text_Controller::TAG     => 'p',
-			Text_Controller::CLASSES => [ 'search-results__summary' ],
+			Text_Controller::CLASSES => [ 't-display-xx-small', 'search-results__summary' ],
 			Text_Controller::CONTENT => esc_html( $text ),
 		];
 	}
 
 	/**
-	 * @return Deferred_Component|null
+	 * @return \Tribe\Project\Templates\Components\routes\search\Deferred_Component|null
 	 */
 	protected function get_card_image() {
 		if ( empty( get_post_thumbnail_id() ) ) {
@@ -145,8 +144,8 @@ class Search_Controller extends Abstract_Controller {
 	 * @return array
 	 */
 	public function get_card_args(): array {
-		$uuid             = uniqid( 'p-' );
-		$card_args        = [
+		$uuid      = uniqid( 'p-' );
+		$card_args = [
 			Card_Controller::STYLE           => Card_Controller::STYLE_SEARCH,
 			Card_Controller::USE_TARGET_LINK => true,
 			Card_Controller::TAG             => 'article',
@@ -177,7 +176,7 @@ class Search_Controller extends Abstract_Controller {
 				[
 					Link_Controller::URL     => get_permalink(),
 					Link_Controller::CONTENT => get_permalink(),
-					Link_Controller::CLASSES => [ 't-caption-small' ],
+					Link_Controller::CLASSES => [ 't-helper' ],
 					Link_Controller::ATTRS   => [
 						'id'               => $uuid . '-link',
 						'aria-labelledby'  => $uuid . '-title',

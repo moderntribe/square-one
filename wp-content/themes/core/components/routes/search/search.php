@@ -14,7 +14,7 @@ $c->render_header();
 
 				<?php get_template_part( 'components/search_form/search_form', null, $c->get_search_form_args() ); ?>
 
-				<?php get_template_part( 'components/text/text', null, $c->get_results_text_args()); ?>
+				<?php get_template_part( 'components/text/text', null, $c->get_results_text_args() ); ?>
 
 				<?php
 				if ( have_posts() ) :
