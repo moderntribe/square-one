@@ -5,11 +5,11 @@ PHP Code Sniffing is the process of evaluating code formatting in an IDE to veri
 Whether you're using PhpStorm, VS Code, or another IDE, everyone needs to know how to get PHPCS running correctly to enforce a consistent coding style. Reviewing consistently formatted code helps reduce the cognitive load of peer reviews.
 
 ## Visual Studio Code (VS Code)
-Download and enable the [PHPCS plugin by Ioannis Kappas](https://marketplace.visualstudio.com/items?itemName=ikappas.phpcs)
+Download and enable the [PHP Sniffer & Beautifier](https://marketplace.visualstudio.com/items?itemName=ValeryanM.vscode-phpsab)
 
 SquareOne installs PHPCS on a per-project basis, so there is no need to install PHPCS globally. If you install it globally, know that you'll need to make sure your executable is following the correct phpcs.xml found in your project's root.
 
-If you're using the plugin linked above, you shouldn't need to worry about global vs. local. It is smart enough to look at the `composer.json` to determine if it should use the project's phpcs or your global executable.
+If you're using the plugin linked above, you shouldn't need to worry about global vs. local. It is smart enough to look at the `composer.json` to determine if it should use the project's phpcs or your global executable. The default settings work with our coding standards out-of-the box. Be sure that you don't have any conflicting settings listed in your local `settings.json` that may be left behind from unused extensions.
 
 One configuration you'll probably want to include in your `settings.json` is
 ```js
