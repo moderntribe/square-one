@@ -9,7 +9,7 @@ Download and enable the [PHP Sniffer & Beautifier](https://marketplace.visualstu
 
 SquareOne installs PHPCS on a per-project basis, so there is no need to install PHPCS globally. If you install it globally, know that you'll need to make sure your executable is following the correct phpcs.xml found in your project's root.
 
-If you're using the plugin linked above, you shouldn't need to worry about global vs. local. It is smart enough to look at the `composer.json` to determine if it should use the project's phpcs or your global executable. The default settings work with our coding standards out-of-the box. Be sure that you don't have any conflicting settings listed in your local `settings.json` that may be left behind from unused extensions.
+If you're using the plugin linked above, you shouldn't need to worry about global vs. local. It is smart enough to look at the `composer.json` to determine if it should use the project's phpcs or your global executable. The default settings work with our coding standards out-of-the-box. Be sure that you don't have any conflicting settings listed in your local `settings.json` that may be left behind from unused extensions.
 
 One configuration you'll probably want to include in your `settings.json` is
 ```js
