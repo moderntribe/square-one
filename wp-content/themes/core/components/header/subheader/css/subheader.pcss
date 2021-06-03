@@ -9,23 +9,19 @@
 	display: flex;
 	align-items: center;
 	background: var(--color-grey-light);
-	padding:  var(--spacer-20) 0;
+	padding:  var(--spacer-50) 0;
 	margin-bottom: var(--spacer-80);
-	min-height: 244px;
-
+	
 	@media (--viewport-medium) {
-		min-height: 260px;
+		padding:  var(--spacer-80) 0;
 	}
 }
 
 /* CASE: Page with featured image */
 .c-subheader--has-image {	
-	min-height: 308px;
-
+	
 	@media (--viewport-medium) {
 		align-items: flex-end;
-		padding: var(--spacer-20) 0 var(--spacer-80) 0; 
-		min-height: 440px;
 	}
 }
 
