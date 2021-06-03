@@ -125,7 +125,7 @@
 
 		@media (--viewport-medium) {
 			display: block;
-			width: 168px;
+			width: var(--grid-2-col);
 			flex-shrink: 0;
 		}
 	}
@@ -192,9 +192,8 @@
 
 	/* CASE: Style: Search */
 	.c-card--style-search & {
-		@mixin t-input;
+		@mixin t-display-xx-small;
 		margin-bottom: var(--spacer-10);
-		font-weight: 700;
 
 		@media (--viewport-full) {
 			@mixin t-display-x-small;
