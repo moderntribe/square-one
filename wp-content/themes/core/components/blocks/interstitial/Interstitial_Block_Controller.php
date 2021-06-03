@@ -154,7 +154,6 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 		return defer_template_part( 'components/text/text', null, [
 			Text_Controller::CLASSES => [
 				'c-block__leadin',
-				'b-tabs__leadin',
 			],
 			Text_Controller::CONTENT => $this->leadin ?? '',
 		] );
