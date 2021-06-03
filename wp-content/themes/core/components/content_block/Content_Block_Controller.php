@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\content_block;
 
@@ -13,6 +13,7 @@ use Tribe\Project\Templates\Components\text\Text_Controller;
  * Class Content_Block
  */
 class Content_Block_Controller extends Abstract_Controller {
+
 	public const TAG            = 'tag';
 	public const CLASSES        = 'classes';
 	public const ATTRS          = 'attrs';
@@ -27,26 +28,34 @@ class Content_Block_Controller extends Abstract_Controller {
 	public const LAYOUT_INLINE  = 'inline';
 
 	private string $tag;
-	private array  $classes;
-	private array  $attrs;
+	private array $classes;
+	private array $attrs;
 	private string $layout;
+
 	/**
-	 * @var null|Deferred_Component
+	 * @var null|\Tribe\Project\Templates\Components\Deferred_Component
+	 *
 	 * @uses components/text
 	 */
 	private ?Deferred_Component $leadin;
+
 	/**
-	 * @var null|Deferred_Component
+	 * @var null|\Tribe\Project\Templates\Components\Deferred_Component
+	 *
 	 * @uses components/text
 	 */
 	private ?Deferred_Component $title;
+
 	/**
-	 * @var null|Deferred_Component
+	 * @var null|\Tribe\Project\Templates\Components\Deferred_Component
+	 *
 	 * @uses components/container
 	 */
 	private ?Deferred_Component $content;
+
 	/**
-	 * @var null|Deferred_Component
+	 * @var null|\Tribe\Project\Templates\Components\Deferred_Component
+	 *
 	 * @uses components/link
 	 */
 	private ?Deferred_Component $cta;
@@ -102,7 +111,7 @@ class Content_Block_Controller extends Abstract_Controller {
 			return '';
 		}
 
-		$this->leadin[ 'classes' ][] = 'c-content-block__leadin';
+		$this->leadin['classes'][] = 'c-content-block__leadin';
 
 		return $this->leadin;
 	}
@@ -147,4 +156,5 @@ class Content_Block_Controller extends Abstract_Controller {
 			Container_Controller::CONTENT => $this->cta->render(),
 		];
 	}
+
 }

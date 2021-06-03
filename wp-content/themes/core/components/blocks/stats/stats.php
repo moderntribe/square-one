@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 use Tribe\Project\Templates\Components\blocks\stats\Stats_Block_Controller;
 
@@ -23,11 +22,7 @@ $c = Stats_Block_Controller::factory( $args );
 			<ul class="b-stats__list">
 				<?php foreach ( $c->get_stats() as $item ) { ?>
 					<li class="b-stats__list-item">
-						<?php get_template_part(
-							'components/statistic/statistic',
-							null,
-							$item
-						); ?>
+						<?php get_template_part( 'components/statistic/statistic', null, $item ); ?>
 					</li>
 				<?php } ?>
 			</ul>

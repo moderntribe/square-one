@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\blocks\interstitial;
 
@@ -8,12 +7,13 @@ use Tribe\Project\Blocks\Types\Interstitial\Interstitial as Interstitial_Block;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\content_block\Content_Block_Controller;
 use Tribe\Project\Templates\Components\Deferred_Component;
-use Tribe\Project\Templates\Components\text\Text_Controller;
-use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Templates\Components\image\Image_Controller;
+use Tribe\Project\Templates\Components\link\Link_Controller;
+use Tribe\Project\Templates\Components\text\Text_Controller;
 use Tribe\Project\Theme\Config\Image_Sizes;
 
 class Interstitial_Block_Controller extends Abstract_Controller {
+
 	public const LAYOUT            = 'layout';
 	public const MEDIA             = 'media';
 	public const TITLE             = 'title';
@@ -31,12 +31,12 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 
 	private string $layout;
 	private string $title;
-	private array  $cta;
-	private array  $container_classes;
-	private array  $media_classes;
-	private array  $content_classes;
-	private array  $classes;
-	private array  $attrs;
+	private array $cta;
+	private array $container_classes;
+	private array $media_classes;
+	private array $content_classes;
+	private array $classes;
+	private array $attrs;
 
 	/**
 	 * @param array $args
@@ -137,13 +137,13 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 				'c-block__content-block',
 				'c-block__header',
 				'b-interstitial__content-container',
-				't-theme--light'
+				't-theme--light',
 			],
 		];
 	}
 
 	/**
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	private function get_title(): Deferred_Component {
 		return defer_template_part( 'components/text/text', null, [
@@ -151,31 +151,35 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 			Text_Controller::CLASSES => [
 				'c-block__title',
 				'b-interstitial__title',
-				'h3'
+				'h3',
 			],
 			Text_Controller::CONTENT => $this->title ?? '',
 		] );
 	}
 
 	/**
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	private function get_cta(): Deferred_Component {
 		$cta = wp_parse_args( $this->cta, [
-			'content' => '',
-			'url'     => '',
-			'target'  => '',
+			'content'        => '',
+			'url'            => '',
+			'target'         => '',
+			'add_aria_label' => false,
+			'aria_label'     => '',
 		] );
 
 		return defer_template_part( 'components/link/link', null, [
-			Link_Controller::URL     => $cta['url'],
-			Link_Controller::CONTENT => $cta['content'] ?: $cta['url'],
-			Link_Controller::TARGET  => $cta['target'],
-			Link_Controller::CLASSES => [
+			Link_Controller::URL            => $cta['url'],
+			Link_Controller::CONTENT        => $cta['content'] ?: $cta['url'],
+			Link_Controller::TARGET         => $cta['target'],
+			Link_Controller::ADD_ARIA_LABEL => $cta['add_aria_label'],
+			Link_Controller::ARIA_LABEL     => $cta['aria_label'],
+			Link_Controller::CLASSES        => [
 				'c-block__cta-link',
 				'a-btn',
 				'a-btn--has-icon-after',
-				'icon-arrow-right'
+				'icon-arrow-right',
 			],
 		] );
 	}
@@ -203,4 +207,5 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 			],
 		];
 	}
+
 }

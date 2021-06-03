@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\header\navigation;
 
@@ -10,13 +9,14 @@ use Tribe\Project\Nav_Menus\Walker\Walker_Nav_Menu_Primary;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 
 class Header_Navigation_Controller extends Abstract_Controller {
+
 	public const CLASSES          = 'classes';
 	public const ATTRS            = 'attrs';
 	public const NAV_LIST_CLASSES = 'nav_list_classes';
 
-	private array  $classes;
-	private array  $attrs;
-	private array  $nav_list_classes;
+	private array $classes;
+	private array $attrs;
+	private array $nav_list_classes;
 	private string $location;
 
 	public function __construct( array $args = [] ) {
@@ -30,8 +30,8 @@ class Header_Navigation_Controller extends Abstract_Controller {
 
 	protected function defaults(): array {
 		return [
-			self::CLASSES => [ 'site-header__nav' ],
-			self::ATTRS   => [
+			self::CLASSES          => [ 'site-header__nav' ],
+			self::ATTRS            => [
 				'aria-label' => esc_html__( 'Primary Navigation', 'tribe' ),
 			],
 			self::NAV_LIST_CLASSES => [ 'site-header__nav-list' ],
@@ -73,4 +73,5 @@ class Header_Navigation_Controller extends Abstract_Controller {
 
 		return Menu::menu( $args );
 	}
+
 }

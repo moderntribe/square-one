@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\tabs;
 
@@ -12,6 +12,7 @@ use Tribe\Project\Templates\Models\Tab as Tab_Model;
  * @package Tribe\Project\Templates\Components\tabs
  */
 class Tabs_Controller extends Abstract_Controller {
+
 	public const TABS               = 'tabs';
 	public const CLASSES            = 'classes';
 	public const ATTRS              = 'attrs';
@@ -23,18 +24,18 @@ class Tabs_Controller extends Abstract_Controller {
 	public const LAYOUT_VERTICAL    = 'vertical';
 
 	/**
-	 * @var Tab_Model[] The collection of tabs to render. Each item should be a \Tribe\Project\Templates\Models\Tab object.
+	 * @var \Tribe\Project\Templates\Models\Tab[] The collection of tabs to render. Each item should be a \Tribe\Project\Templates\Models\Tab object.
 	 */
-	private array  $tabs;
-	private array  $classes;
-	private array  $attrs;
+	private array $tabs;
+	private array $classes;
+	private array $attrs;
 	private string $layout;
-	private array  $toggle_classes;
-	private array  $tab_button_classes;
-	private array  $tab_panel_classes;
+	private array $toggle_classes;
+	private array $tab_button_classes;
+	private array $tab_panel_classes;
 	private string $tablist_id;
-	private array  $tab_buttons = [];
-	private array  $tab_panels  = [];
+	private array $tab_buttons = [];
+	private array $tab_panels  = [];
 
 	/**
 	 * Controller constructor.
@@ -98,7 +99,7 @@ class Tabs_Controller extends Abstract_Controller {
 	/**
 	 * Return arguments for an individual tab list "tab" button.
 	 *
-	 * @param Tab_Model $tab
+	 * @param \Tribe\Project\Templates\Models\Tab $tab
 	 * @param string    $tab_id
 	 * @param int       $index
 	 *
@@ -127,7 +128,7 @@ class Tabs_Controller extends Abstract_Controller {
 	/**
 	 * Return arguments for an individual tab content, the "tabpanel".
 	 *
-	 * @param Tab_Model $tab
+	 * @param \Tribe\Project\Templates\Models\Tab $tab
 	 * @param string    $tab_id
 	 * @param int       $index
 	 *
@@ -240,4 +241,5 @@ class Tabs_Controller extends Abstract_Controller {
 	public function get_tab_panels(): array {
 		return $this->tab_panels;
 	}
+
 }

@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Theme;
 
@@ -12,6 +11,7 @@ use Tribe\Project\Theme\Config\Web_Fonts;
 use Tribe\Project\Theme\Media\Oembed_Filter;
 
 class Theme_Definer implements Definer_Interface {
+
 	public const CONFIG_COLORS       = 'theme.config.colors';
 	public const CONFIG_GRADIENTS    = 'theme.config.gradients';
 	public const CONFIG_FONT_SIZES   = 'theme.config.font-sizes';
@@ -19,11 +19,11 @@ class Theme_Definer implements Definer_Interface {
 	public const CONFIG_GOOGLE_FONTS = 'theme.config.google_fonts';
 	public const CONFIG_CUSTOM_FONTS = 'theme.config.custom_fonts';
 
-	public const BLACK   = 'black';
-	public const WHITE   = 'white';
-	public const GREY    = 'grey';
-	public const BLUE    = 'blue';
-	public const GREEN   = 'green';
+	public const BLACK = 'black';
+	public const WHITE = 'white';
+	public const GREY  = 'grey';
+	public const BLUE  = 'blue';
+	public const GREEN = 'green';
 
 	public const GRADIENT_CYAN_PURPLE = 'cyan-to-purple';
 	public const GRADIENT_ORANGE_RED  = 'orange-to-red';
@@ -34,15 +34,15 @@ class Theme_Definer implements Definer_Interface {
 			/**
 			 * Define the colors that will be available in color palettes
 			 */
-			self::CONFIG_COLORS => [
-				self::WHITE   => [ 'color' => '#ffffff', 'label' => __( 'White', 'tribe' ) ],
-				self::BLACK   => [ 'color' => '#151515', 'label' => __( 'Black', 'tribe' ) ],
-				self::GREY    => [ 'color' => '#696969', 'label' => __( 'Grey', 'tribe' ) ],
-				self::BLUE    => [ 'color' => '#0074e0', 'label' => __( 'Blue', 'tribe' ) ],
-				self::GREEN   => [ 'color' => '#18814e', 'label' => __( 'Green', 'tribe' ) ],
+			self::CONFIG_COLORS       => [
+				self::WHITE => [ 'color' => '#ffffff', 'label' => __( 'White', 'tribe' ) ],
+				self::BLACK => [ 'color' => '#151515', 'label' => __( 'Black', 'tribe' ) ],
+				self::GREY  => [ 'color' => '#696969', 'label' => __( 'Grey', 'tribe' ) ],
+				self::BLUE  => [ 'color' => '#0074e0', 'label' => __( 'Blue', 'tribe' ) ],
+				self::GREEN => [ 'color' => '#18814e', 'label' => __( 'Green', 'tribe' ) ],
 			],
 
-			Colors::class          => DI\create()
+			Colors::class             => DI\create()
 				->constructor( DI\get( self::CONFIG_COLORS ) ),
 
 			/**
@@ -50,7 +50,7 @@ class Theme_Definer implements Definer_Interface {
 			 *
 			 * Note: Gradients are disabled by default.
 			 */
-			self::CONFIG_GRADIENTS => [
+			self::CONFIG_GRADIENTS    => [
 				/*self::GRADIENT_CYAN_PURPLE => [
 					'gradient' => 'linear-gradient(135deg,rgba(0,255,255,1) 0%,rgb(155,81,224) 100%)',
 					'label'    => __( 'Cyan to Purple', 'tribe' ),
@@ -61,7 +61,7 @@ class Theme_Definer implements Definer_Interface {
 				],*/
 			],
 
-			Gradients::class        => DI\create()
+			Gradients::class          => DI\create()
 				->constructor( DI\get( self::CONFIG_GRADIENTS ) ),
 
 			/**
@@ -69,14 +69,14 @@ class Theme_Definer implements Definer_Interface {
 			 *
 			 * Note: Custom font sizes are disabled by default.
 			 */
-			self::CONFIG_FONT_SIZES => [
+			self::CONFIG_FONT_SIZES   => [
 				//'large'  => [
 				//	'size'  => 36,
 				//	'label' => __( 'Large', 'tribe' ),
 				//],
 			],
 
-			Font_Sizes::class => DI\create()
+			Font_Sizes::class         => DI\create()
 				->constructor( DI\get( self::CONFIG_FONT_SIZES ) ),
 
 			/**
@@ -84,7 +84,7 @@ class Theme_Definer implements Definer_Interface {
 			 *
 			 * TODO: FIx this. Currently disabled b/c Gutenberg is busted w/ our custom oEmbed covers.
 			 */
-			Oembed_Filter::class => DI\autowire()
+			Oembed_Filter::class      => DI\autowire()
 				->constructorParameter( 'supported_providers', [
 					//Oembed_Filter::PROVIDER_VIMEO,
 					//Oembed_Filter::PROVIDER_YOUTUBE,
@@ -95,7 +95,7 @@ class Theme_Definer implements Definer_Interface {
 			 *
 			 * Example: `zbo7iia`
 			 */
-			self::CONFIG_TYPEKIT_ID => '',
+			self::CONFIG_TYPEKIT_ID   => '',
 
 			/**
 			 * @var array A collection of Google Font families to load.
@@ -120,7 +120,7 @@ class Theme_Definer implements Definer_Interface {
 			 */
 			self::CONFIG_CUSTOM_FONTS => [],
 
-			Web_Fonts::class => DI\create()
+			Web_Fonts::class          => DI\create()
 				->constructor( [
 					Web_Fonts::PROVIDER_TYPEKIT => DI\get( self::CONFIG_TYPEKIT_ID ),
 					Web_Fonts::PROVIDER_GOOGLE  => DI\get( self::CONFIG_GOOGLE_FONTS ),

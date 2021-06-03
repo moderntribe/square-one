@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\search_form;
 
@@ -8,13 +7,14 @@ use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\button\Button_Controller;
 
 class Search_Form_Controller extends Abstract_Controller {
+
 	public const CLASSES     = 'classes';
 	public const FORM_ID     = 'form_id';
 	public const ACTION      = 'action';
 	public const PLACEHOLDER = 'placeholder';
 	public const LABEL       = 'label';
 
-	private array  $classes;
+	private array $classes;
 	private string $form_id;
 	private string $action;
 	private string $placeholder;
@@ -68,10 +68,11 @@ class Search_Form_Controller extends Abstract_Controller {
 
 	public function get_button_args(): array {
 		return [
-			Button_Controller::CLASSES    => [ 'c-button' ],
-			Button_Controller::ATTRS      => [ 'name'  => 'submit' ],
-			Button_Controller::TYPE       => 'submit',
-			Button_Controller::CONTENT    => esc_html__( 'Search', 'tribe' ),
+			Button_Controller::CLASSES => [ 'c-button' ],
+			Button_Controller::ATTRS   => [ 'name'  => 'submit' ],
+			Button_Controller::TYPE    => 'submit',
+			Button_Controller::CONTENT => esc_html__( 'Search', 'tribe' ),
 		];
 	}
+
 }

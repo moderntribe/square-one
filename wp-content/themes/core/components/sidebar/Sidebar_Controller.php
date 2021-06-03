@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\sidebar;
 
@@ -7,13 +6,14 @@ use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 
 class Sidebar_Controller extends Abstract_Controller {
+
 	public const SIDEBAR_ID = 'sidebar_id';
 	public const CLASSES    = 'classes';
 	public const ATTRS      = 'attrs';
 
 	private string $sidebar_id;
-	private array  $classes;
-	private array  $attrs;
+	private array $classes;
+	private array $attrs;
 
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );

@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 /*
 Plugin Name: Modern Tribe Core Functionality
 Description: Core functionality for this site.
@@ -11,18 +12,18 @@ Author URI:  http://www.tri.be
 if ( file_exists( ABSPATH . '../vendor/autoload.php' ) ) {
 	// WP subfolder
 	require_once ABSPATH . '../vendor/autoload.php';
-} elseif ( @file_exists( ABSPATH . 'vendor/autoload.php'  ) ) {
+} elseif ( @file_exists( ABSPATH . 'vendor/autoload.php' ) ) {
 	// WP standard
 	require_once ABSPATH . 'vendor/autoload.php';
-} elseif ( @file_exists( trailingslashit(__DIR__ ) . 'vendor/autoload.php'  ) ) {
+} elseif ( @file_exists( trailingslashit( __DIR__ ) . 'vendor/autoload.php' ) ) {
 	// In core plugin
-	require_once trailingslashit(__DIR__ ) . 'vendor/autoload.php';
+	require_once trailingslashit( __DIR__ ) . 'vendor/autoload.php';
 }
 require_once trailingslashit( __DIR__ ) . 'functions/pluggable.php';
 require_once trailingslashit( __DIR__ ) . 'functions/templates.php';
 
 // Start the core plugin
-add_action( 'plugins_loaded', function () {
+add_action( 'plugins_loaded', static function () {
 	tribe_project()->init( __FILE__ );
 }, 1, 0 );
 
