@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Settings;
 
@@ -7,6 +6,7 @@ use DI;
 use Tribe\Libs\Container\Definer_Interface;
 
 class Settings_Definer implements Definer_Interface {
+
 	public function define(): array {
 		return [
 
@@ -17,4 +17,5 @@ class Settings_Definer implements Definer_Interface {
 
 		];
 	}
+
 }

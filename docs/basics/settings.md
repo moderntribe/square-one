@@ -49,7 +49,7 @@ With the page thus configured, add it to the `\Tribe\Libs\Settings\Settings_Defi
 ## Adding Settings Fields
 
 Fields are added to settings screens in the same way that meta fields are added to post types or taxonomies. Read
-about [Object Meta](./object-meta.md) for more details.
+about [Object Meta](/docs/basics/object-meta.md) for more details.
 
 The object meta class for the settings group will be defined in `\Tribe\Project\Object_Meta\Object_Meta_Definer`
 with a `settings_pages` argument pointing to the slug of the settings page(s) to which it will be registered.

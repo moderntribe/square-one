@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Integrations\Gravity_Forms;
 
@@ -23,6 +22,7 @@ class Form_Styles {
 
 	/**
 	 * @return string
+	 *
 	 * @filter pre_option_rg_gforms_disable_css
 	 */
 	public function disable_gravity_forms_css(): string {
@@ -37,9 +37,11 @@ class Form_Styles {
 	 */
 	public function dequeue_gravity_forms_formsmain_styles(): void {
 		global $wp_styles;
-		if ( isset( $wp_styles->registered['gforms_formsmain_css'] ) ) {
-			unset( $wp_styles->registered['gforms_formsmain_css'] );
+		if ( ! isset( $wp_styles->registered['gforms_formsmain_css'] ) ) {
+			return;
 		}
+
+		unset( $wp_styles->registered['gforms_formsmain_css'] );
 	}
 
 	/**
@@ -51,6 +53,7 @@ class Form_Styles {
 	 * @param array $form
 	 *
 	 * @return array
+	 *
 	 * @filter gform_pre_render
 	 */
 	public function deactivate_gf_animations( $form = [] ) {
@@ -61,4 +64,5 @@ class Form_Styles {
 
 		return $form;
 	}
+
 }

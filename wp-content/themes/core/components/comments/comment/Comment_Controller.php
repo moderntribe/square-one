@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\comments\comment;
 
@@ -12,6 +11,7 @@ use Tribe\Project\Templates\Components\text\Text_Controller;
  * Class Comment
  */
 class Comment_Controller extends Abstract_Controller {
+
 	use Comment_Edit_Link;
 
 	public const COMMENT_ID = 'comment_id';
@@ -20,11 +20,11 @@ class Comment_Controller extends Abstract_Controller {
 	public const DEPTH      = 'depth';
 	public const MAX_DEPTH  = 'max_depth';
 
-	private int   $comment_id;
+	private int $comment_id;
 	private array $classes;
 	private array $attrs;
-	private int   $depth;
-	private int   $max_depth;
+	private int $depth;
+	private int $max_depth;
 
 	/**
 	 * Comment constructor.
@@ -119,4 +119,5 @@ class Comment_Controller extends Abstract_Controller {
 	public function get_time( $format = 'c' ): string {
 		return date( $format, get_comment_time( 'U' ) );
 	}
+
 }

@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Theme\Branding;
 
@@ -7,11 +6,13 @@ use WP_Customize_Color_Control;
 use WP_Customize_Media_Control;
 
 class Customizer_Settings {
+
 	public const SITE_BRANDING_LOGIN_LOGO          = 'site_branding_login_logo';
 	public const SITE_BRANDING_ANDROID_THEME_COLOR = 'site_branding_android_theme_color';
 
 	/**
 	 * Customize Customizer Settings
+	 *
 	 * @param $wp_customize
 	 *
 	 * @action customize_register
@@ -46,4 +47,5 @@ class Customizer_Settings {
 			]
 		) );
 	}
+
 }

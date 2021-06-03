@@ -1,0 +1,40 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Component: Block: Spacer
+ *
+ * ----------------------------------------------------------------------------- */
+
+.b-spacer {
+	height: var(--spacer-30);
+
+	@media (--viewport-medium) {
+		height: var(--spacer-60);
+	}
+
+	/* CASE: Large Size */
+	&.b-spacer--large {
+		height: var(--spacer-60);
+
+		@media (--viewport-medium) {
+			height: var(--spacer-80);
+		}
+	}
+
+	/* CASE: Display only on desktop */
+	&.desktop-only {
+		display: none;
+
+		@media (--viewport-medium) {
+			display: block;
+		}
+	}
+
+	/* CASE: Display only on mobile */
+	&.mobile-only {
+		display: block;
+
+		@media (--viewport-medium) {
+			display: none;
+		}
+	}
+}

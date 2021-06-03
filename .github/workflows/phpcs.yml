@@ -5,6 +5,7 @@ on:
     paths:
       - 'wp-content/plugins/core/**.php'
       - 'wp-content/themes/core/**.php'
+      - 'wp-content/mu-plugins/**.php'
 
 jobs:
   sniff:
@@ -25,7 +26,7 @@ jobs:
 
       - name: Add GitHub oAuth
         env:
-          TOKEN: ${{ secrets.GH_TOKEN }}
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: composer config --global github-oauth.github.com $TOKEN
 
       - name: Setup PHP extension cache
@@ -72,4 +73,4 @@ jobs:
           composer install --prefer-dist --no-progress --no-suggest --optimize-autoloader
 
       - name: PHPCS
-        run: ./vendor/bin/phpcs --standard=./phpcs.xml
+        run: ./vendor/bin/phpcs --standard=./phpcs.xml.dist

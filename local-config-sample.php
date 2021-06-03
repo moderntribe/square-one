@@ -23,9 +23,6 @@
  */
 define( 'WP_ENVIRONMENT_TYPE', 'development' );
 
-// Fallback for older environments.
-define( 'ENVIRONMENT', 'DEV' );
-
 /*
  * React dev
  */

@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\header\subheader;
 
@@ -13,6 +12,7 @@ use Tribe\Project\Templates\Components\breadcrumbs\Breadcrumbs_Controller;
 use Tribe\Project\Templates\Models\Breadcrumb;
 
 class Subheader_Controller extends Abstract_Controller {
+
 	use Page_Title;
 
 	public const CLASSES           = 'classes';
@@ -49,7 +49,7 @@ class Subheader_Controller extends Abstract_Controller {
 
 	protected function required(): array {
 		return [
-			self::CONTAINER_CLASSES => [ 'l-container' ], 
+			self::CONTAINER_CLASSES => [ 'l-container' ],
 			self::MEDIA_CLASSES     => [ 'c-subheader__media' ],
 			self::CONTENT_CLASSES   => [ 'c-subheader__content' ],
 			self::CLASSES           => [ 'c-subheader' ],
@@ -60,7 +60,7 @@ class Subheader_Controller extends Abstract_Controller {
 		if ( has_post_thumbnail() ) {
 			$this->classes[] = 'c-subheader--has-image';
 		}
-		
+
 		return Markup_Utils::class_attribute( $this->classes );
 	}
 
@@ -125,7 +125,7 @@ class Subheader_Controller extends Abstract_Controller {
 	}
 
 	public function render_breadcrumbs(): void {
-		
+
 		get_template_part(
 			'components/breadcrumbs/breadcrumbs',
 			'null',
@@ -133,9 +133,6 @@ class Subheader_Controller extends Abstract_Controller {
 		);
 	}
 
-	/**
-	 * @return Breadcrumb[]
-	 */
 	protected function get_breadcrumbs(): array {
 		$page = get_the_ID();
 		$url  = $page ? get_permalink( $page ) : home_url();

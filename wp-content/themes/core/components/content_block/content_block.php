@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 use Tribe\Project\Templates\Components\content_block\Content_Block_Controller;
 
@@ -21,6 +20,6 @@ $c = Content_Block_Controller::factory( $args );
 
 	<?php echo $c->render_content(); ?>
 
-	<?php get_template_part('components/container/container', null, $c->get_cta_args()); ?>
+	<?php get_template_part( 'components/container/container', null, $c->get_cta_args() ); ?>
 
 </<?php echo $c->get_tag(); ?>>

@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\follow;
 
@@ -20,7 +19,7 @@ class Follow_Controller extends Abstract_Controller {
 	];
 
 	/**
-	 * @return Social_Link[]
+	 * @return \Tribe\Project\Templates\Models\Social_Link[]
 	 */
 	public function get_social_links(): array {
 		$links = [];
@@ -28,13 +27,15 @@ class Follow_Controller extends Abstract_Controller {
 		foreach ( $this->social_keys as $social_site ) {
 			$social_link = get_field( $social_site, 'option' );
 
-			if ( ! empty( $social_link ) ) {
-				$links[] = new Social_Link(
-					$social_site,
-					$social_link,
-					Social_Settings::get_social_follow_message( $social_site )
-				);
+			if ( empty( $social_link ) ) {
+				continue;
 			}
+
+			$links[] = new Social_Link(
+				$social_site,
+				$social_link,
+				Social_Settings::get_social_follow_message( $social_site )
+			);
 		}
 
 		return $links;

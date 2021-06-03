@@ -1,11 +1,11 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Cache;
 
 use Tribe\Libs\Container\Abstract_Subscriber;
 
 class Cache_Subscriber extends Abstract_Subscriber {
+
 	public function register(): void {
 		$this->listen();
 	}
@@ -30,4 +30,5 @@ class Cache_Subscriber extends Abstract_Subscriber {
 			$this->container->get( Listener::class )->p2p_delete_connections( ...$args );
 		}, 10, 1 );
 	}
+
 }
