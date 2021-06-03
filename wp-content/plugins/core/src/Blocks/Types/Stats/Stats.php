@@ -7,6 +7,7 @@ use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Field;
 use Tribe\Libs\ACF\Field_Section;
 use Tribe\Libs\ACF\Repeater;
+use Tribe\Project\Admin\Editor\Classic_Editor_Formats;
 use Tribe\Project\Blocks\Fields\Cta_Field;
 use Tribe\Project\Blocks\Fields\Traits\With_Cta_Field;
 
@@ -110,7 +111,8 @@ class Stats extends Block_Config implements Cta_Field {
 					'label'        => __( 'Description', 'tribe' ),
 					'name'         => self::DESCRIPTION,
 					'type'         => 'wysiwyg',
-					'toolbar'      => 'basic',
+					'toolbar'      => Classic_Editor_Formats::MINIMAL,
+					'tabs'         => 'visual',
 					'media_upload' => 0,
 				] )
 			)->add_field(
