@@ -4,12 +4,12 @@ namespace Tribe\Project\Templates\Components\header\subheader;
 
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
+use Tribe\Project\Templates\Components\breadcrumbs\Breadcrumbs_Controller;
+use Tribe\Project\Templates\Components\image\Image_Controller;
 use Tribe\Project\Templates\Components\text\Text_Controller;
 use Tribe\Project\Templates\Components\Traits\Page_Title;
-use Tribe\Project\Templates\Components\image\Image_Controller;
-use Tribe\Project\Theme\Config\Image_Sizes;
-use Tribe\Project\Templates\Components\breadcrumbs\Breadcrumbs_Controller;
 use Tribe\Project\Templates\Models\Breadcrumb;
+use Tribe\Project\Theme\Config\Image_Sizes;
 
 class Subheader_Controller extends Abstract_Controller {
 
@@ -21,11 +21,11 @@ class Subheader_Controller extends Abstract_Controller {
 	public const MEDIA_CLASSES     = 'media_classes';
 	public const CONTENT_CLASSES   = 'content_classes';
 
-	private array  $classes;
-	private array  $attrs;
-	private array  $container_classes;
-	private array  $media_classes;
-	private array  $content_classes;
+	private array $classes;
+	private array $attrs;
+	private array $container_classes;
+	private array $media_classes;
+	private array $content_classes;
 
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
@@ -141,4 +141,5 @@ class Subheader_Controller extends Abstract_Controller {
 			new Breadcrumb( $url, get_the_title( $page ) ),
 		];
 	}
+
 }
