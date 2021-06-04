@@ -2,88 +2,26 @@
 
 namespace Tribe\Project\Templates\Components\routes\search;
 
-use Tribe\Project\Templates\Components\Abstract_Controller;
-use Tribe\Project\Templates\Components\breadcrumbs\Breadcrumbs_Controller;
 use Tribe\Project\Templates\Components\card\Card_Controller;
 use Tribe\Project\Templates\Components\Deferred_Component;
 use Tribe\Project\Templates\Components\image\Image_Controller;
 use Tribe\Project\Templates\Components\link\Link_Controller;
+use Tribe\Project\Templates\Components\routes\index\Index_Controller;
 use Tribe\Project\Templates\Components\search_form\Search_Form_Controller;
-use Tribe\Project\Templates\Components\sidebar\Sidebar_Controller;
 use Tribe\Project\Templates\Components\text\Text_Controller;
 use Tribe\Project\Theme\Config\Image_Sizes;
 
-class Search_Controller extends Abstract_Controller {
-
-	/**
-	 * @var int|string
-	 */
-	private $sidebar_id = '';
-
-	/**
-	 * Render the header component
-	 *
-	 * Bypasses the get_header() function to
-	 * load our component instead of header.php
-	 *
-	 * @return void
-	 */
-	public function render_header(): void {
-		do_action( 'get_header', null );
-		get_template_part( 'components/document/header/header', 'index' );
-	}
-
-
-	/**
-	 * Render the sidebar component
-	 *
-	 * Bypasses the get_sidebar() function to
-	 * load our component instead of sidebar.php
-	 *
-	 * @return void
-	 */
-	public function render_sidebar(): void {
-		do_action( 'get_sidebar', null );
-		get_template_part(
-			'components/sidebar/sidebar',
-			'index',
-			[ Sidebar_Controller::SIDEBAR_ID => $this->sidebar_id ]
-		);
-	}
-
-	/**
-	 * Render the footer component
-	 *
-	 * Bypasses the get_footer() function to
-	 * load our component instead of footer.php
-	 *
-	 * @return void
-	 */
-	public function render_footer(): void {
-		do_action( 'get_footer', null );
-		get_template_part( 'components/document/footer/footer', 'index' );
-	}
-
-	public function render_breadcrumbs(): void {
-		//TODO: let's make this get_breadcrumb_args() and render in template
-		get_template_part(
-			'components/breadcrumbs/breadcrumbs',
-			'index',
-			[ Breadcrumbs_Controller::BREADCRUMBS => $this->get_breadcrumbs() ]
-		);
-	}
+class Search_Controller extends Index_Controller {
 
 	/**
 	 * @return array
 	 */
 	public function get_search_form_args(): array {
-		$args = [
+		return [
 			Search_Form_Controller::CLASSES => [ 'c-search--full', 'search-results__form' ],
 			Search_Form_Controller::FORM_ID => uniqid( 's-' ),
 			Search_Form_Controller::VALUE   => get_search_query(),
 		];
-
-		return $args;
 	}
 
 	/**
@@ -118,9 +56,6 @@ class Search_Controller extends Abstract_Controller {
 		];
 	}
 
-	/**
-	 * @return ?\Tribe\Project\Templates\Components\Deferred_Component
-	 */
 	protected function get_card_image(): ?Deferred_Component {
 		if ( empty( get_post_thumbnail_id() ) ) {
 			return null;
@@ -142,11 +77,12 @@ class Search_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return array
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component[]
 	 */
 	public function get_card_args(): array {
-		$uuid      = uniqid( 'p-' );
-		$card_args = [
+		$uuid = uniqid( 'p-' );
+
+		return [
 			Card_Controller::STYLE           => Card_Controller::STYLE_SEARCH,
 			Card_Controller::USE_TARGET_LINK => true,
 			Card_Controller::TAG             => 'article',
@@ -187,8 +123,6 @@ class Search_Controller extends Abstract_Controller {
 				]
 			),
 		];
-
-		return $card_args;
 	}
 
 }
