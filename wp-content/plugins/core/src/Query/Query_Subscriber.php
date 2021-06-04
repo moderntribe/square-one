@@ -8,7 +8,7 @@ class Query_Subscriber extends Abstract_Subscriber {
 
 	public function register(): void {
 		add_filter( 'posts_request', function ( $request, $wp_query ) {
-			return $this->container->get( Search::class )->dont_do_search( (string) $request, $wp_query );
+			return $this->container->get( Search::class )->force_load_search_template( (string) $request, $wp_query );
 		}, 10, 2 );
 	}
 
