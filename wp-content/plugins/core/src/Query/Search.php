@@ -11,11 +11,10 @@ class Search {
 	 * @param           $request
 	 * @param \WP_Query $query
 	 *
-	 * @return bool
 	 *
 	 * @hook https://developer.wordpress.org/reference/hooks/posts_request/
 	 */
-	public function dont_do_search( $request, \WP_Query $query ) {
+	public function dont_do_search( string $request, \WP_Query $query ): string {
 		//This basically prevents the query for search but still provides the benefit of not
 		//sending back a 404 and still provides the page title, etc.
 		if ( $query->is_search() && ! is_admin() && empty( $query->get( 's' ) ) ) {

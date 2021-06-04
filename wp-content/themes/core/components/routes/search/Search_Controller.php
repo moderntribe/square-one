@@ -120,7 +120,7 @@ class Search_Controller extends Abstract_Controller {
 	/**
 	 * @return \Tribe\Project\Templates\Components\routes\search\Deferred_Component|null
 	 */
-	protected function get_card_image() {
+	protected function get_card_image(): ?Deferred_Component {
 		if ( empty( get_post_thumbnail_id() ) ) {
 			return null;
 		}
