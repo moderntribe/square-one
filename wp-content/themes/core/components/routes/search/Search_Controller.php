@@ -5,6 +5,7 @@ namespace Tribe\Project\Templates\Components\routes\search;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\breadcrumbs\Breadcrumbs_Controller;
 use Tribe\Project\Templates\Components\card\Card_Controller;
+use Tribe\Project\Templates\Components\Deferred_Component;
 use Tribe\Project\Templates\Components\image\Image_Controller;
 use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Templates\Components\search_form\Search_Form_Controller;
@@ -118,7 +119,7 @@ class Search_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return \Tribe\Project\Templates\Components\routes\search\Deferred_Component|null
+	 * @return ?\Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	protected function get_card_image(): ?Deferred_Component {
 		if ( empty( get_post_thumbnail_id() ) ) {
