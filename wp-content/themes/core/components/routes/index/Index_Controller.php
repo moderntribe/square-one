@@ -12,7 +12,7 @@ class Index_Controller extends Abstract_Controller {
 	/**
 	 * @var int|string
 	 */
-	private $sidebar_id = '';
+	protected $sidebar_id = '';
 
 	/**
 	 * Render the header component
