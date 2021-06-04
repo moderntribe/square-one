@@ -19,4 +19,28 @@ This setting will display the exact ruleset being used to highlight an error in 
 
 ## PhpStorm
 
-TODO
+1. In the Settings/Preferences, navigate to PHP | Quality Tools.
+
+2. On the Quality Tools page that opens, expand the PHP_CodeSniffer area and click the Browse button next to the Configuration list.
+
+3. In the PHP_CodeSniffer dialog that opens, go to: `project-folder/bin/`
+
+4. Select `phpcs` shortcut file then press Validate.
+
+5. Open the PHP Code Beutifier and Fixer settings and in the same folder select `phpcbf` shortcut file.
+
+6. Click the PHP_CodeSniffer inspection link
+
+7. In the new dialogue box that opens make sure the PHP_Codesniffer validation is checked. 
+
+8. In options section scroll to the coding standard dropdown and pick `custom`
+
+9. click the `...` button to open a dialogue box to select the `phpcs.xml.dist` in the root of the square one directory
+
+## Make sure project won't commit with errors
+
+1. Open terminal and navigate to the root of the Square One Project
+
+2. type `nvm use`
+
+3. type `yarn lefthook install -a`
