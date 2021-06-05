@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\pagination\loop;
 
@@ -9,6 +8,7 @@ use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Theme\Pagination_Util;
 
 class Loop_Pagination_Controller extends Abstract_Controller {
+
 	public const CLASSES      = 'classes';
 	public const ATTRS        = 'attrs';
 	public const LIST_CLASSES = 'list_classes';
@@ -96,7 +96,7 @@ class Loop_Pagination_Controller extends Abstract_Controller {
 			return [];
 		}
 
-		return array_map( function ( $number ) {
+		return array_map( static function ( $number ) {
 			$classes = $number['classes'];
 			if ( $number['active'] ) {
 				$classes[] = 'active';
@@ -117,4 +117,5 @@ class Loop_Pagination_Controller extends Abstract_Controller {
 			];
 		}, $numbers );
 	}
+
 }

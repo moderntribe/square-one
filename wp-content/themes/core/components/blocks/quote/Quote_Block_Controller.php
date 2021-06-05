@@ -1,16 +1,16 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\blocks\quote;
 
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Blocks\Types\Quote\Quote as Quote_Block;
 use Tribe\Project\Templates\Components\Abstract_Controller;
-use Tribe\Project\Templates\Components\quote\Quote_Controller;
 use Tribe\Project\Templates\Components\image\Image_Controller;
+use Tribe\Project\Templates\Components\quote\Quote_Controller;
 use Tribe\Project\Theme\Config\Image_Sizes;
 
 class Quote_Block_Controller extends Abstract_Controller {
+
 	public const LAYOUT            = 'layout';
 	public const MEDIA             = 'media';
 	public const QUOTE_TEXT        = 'quote_text';
@@ -37,11 +37,11 @@ class Quote_Block_Controller extends Abstract_Controller {
 	private string $cite_name;
 	private string $cite_title;
 	private string $quote_text;
-	private array  $container_classes;
-	private array  $media_classes;
-	private array  $content_classes;
-	private array  $classes;
-	private array  $attrs;
+	private array $container_classes;
+	private array $media_classes;
+	private array $content_classes;
+	private array $classes;
+	private array $attrs;
 
 	/**
 	 * @param array $args
@@ -145,18 +145,18 @@ class Quote_Block_Controller extends Abstract_Controller {
 			return [];
 		}
 
-		$classes       = [ 'b-quote__figure', 'c-image--bg' ];
-		$src           = Image_Sizes::FOUR_THREE;
-		$srcset        = [
+		$classes = [ 'b-quote__figure', 'c-image--bg' ];
+		$src     = Image_Sizes::FOUR_THREE;
+		$srcset  = [
 			Image_Sizes::FOUR_THREE_SMALL,
 			Image_Sizes::FOUR_THREE,
 			Image_Sizes::FOUR_THREE_LARGE,
 		];
 
 		if ( $this->layout === Quote_Block::MEDIA_OVERLAY ) {
-			$classes[]     = 'c-image--overlay';
-			$src           = Image_Sizes::SIXTEEN_NINE;
-			$srcset        = [
+			$classes[] = 'c-image--overlay';
+			$src       = Image_Sizes::SIXTEEN_NINE;
+			$srcset    = [
 				Image_Sizes::SIXTEEN_NINE_SMALL,
 				Image_Sizes::SIXTEEN_NINE,
 				Image_Sizes::SIXTEEN_NINE_LARGE,

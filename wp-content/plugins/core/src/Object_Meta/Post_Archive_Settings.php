@@ -5,6 +5,7 @@ namespace Tribe\Project\Object_Meta;
 use Tribe\Libs\ACF;
 
 class Post_Archive_Settings extends ACF\ACF_Meta_Group {
+
 	public const NAME = 'post_archive_settings';
 
 	public const TITLE       = 'title';
@@ -38,4 +39,5 @@ class Post_Archive_Settings extends ACF\ACF_Meta_Group {
 
 		return $field;
 	}
+
 }

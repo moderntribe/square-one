@@ -1,6 +1,4 @@
-<?php
-declare( strict_types=1 );
-
+<?php declare(strict_types=1);
 
 use Tribe\Project\Templates\Components\blocks\content_columns\Content_Columns_Block_Controller;
 

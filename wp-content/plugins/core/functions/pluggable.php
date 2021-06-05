@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /**
  * ATTENTION! This is not an ordinary WP pluggable function replacement.
@@ -6,11 +6,15 @@
  */
 
 use Tribe\Libs\Queues\Queue_Collection;
+use Tribe\Libs\Queues\Tasks\Email;
 
 if ( ! function_exists( 'wp_mail' ) &&
      ! ( defined( 'WP_CLI' ) && WP_CLI ) && // phpcs:ignore -- phpcs doesn't handle spaces used for alignment
      ( defined( 'QUEUE_MAIL' ) && QUEUE_MAIL ) ) // phpcs:ignore -- https://github.com/squizlabs/PHP_CodeSniffer/issues/1586
 {
+	/**
+	 * @throws \Exception
+	 */
 	function wp_mail( $to, $subject, $message, $headers = '', $attachments = [] ) {
 		$args = [
 			'to'          => $to,
@@ -25,10 +29,10 @@ if ( ! function_exists( 'wp_mail' ) &&
 
 		try {
 			$queue = $collection->get( $queue_name );
-		} catch ( \Exception $e ) {
-			throw new \Exception( __( 'The queue_name specified does not exist. This email message was not queued for send', 'tribe' ) );
+		} catch ( Throwable $e ) {
+			throw new Exception( __( 'The queue_name specified does not exist. This email message was not queued for send', 'tribe' ) );
 		}
 
-		$queue->dispatch( \Tribe\Libs\Queues\Tasks\Email::class, $args );
+		$queue->dispatch( Email::class, $args );
 	}
 }

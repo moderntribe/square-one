@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 use Tribe\Project\Templates\Components\Deferred_Component;
 
@@ -24,7 +24,7 @@ if ( ! function_exists( 'defer_template_part' ) ) {
 	 * @param string|null $name
 	 * @param array       $args
 	 *
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	function defer_template_part( $slug, $name = null, $args = [] ) {
 		return new Deferred_Component( $slug, $name, $args );

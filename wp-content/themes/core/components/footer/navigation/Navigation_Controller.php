@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\footer\navigation;
 
@@ -9,13 +8,14 @@ use Tribe\Project\Nav_Menus\Nav_Menus_Definer;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 
 class Navigation_Controller extends Abstract_Controller {
+
 	public const CLASSES          = 'classes';
 	public const ATTRS            = 'attrs';
 	public const NAV_LIST_CLASSES = 'nav_list_classes';
 
-	private array  $classes;
-	private array  $attrs;
-	private array  $nav_list_classes;
+	private array $classes;
+	private array $attrs;
+	private array $nav_list_classes;
 	private string $location;
 
 	public function __construct( array $args = [] ) {
@@ -75,4 +75,5 @@ class Navigation_Controller extends Abstract_Controller {
 
 		return Menu::menu( $args );
 	}
+
 }

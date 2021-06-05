@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 use Tribe\Project\Templates\Components\blocks\logos\Logos_Block_Controller;
 
@@ -22,11 +21,7 @@ $c = Logos_Block_Controller::factory( $args );
 		<ul <?php echo $c->get_content_classes(); ?>>
 			<?php foreach ( $c->get_logos() as $logo ) { ?>
 				<li class="b-logo">
-					<?php get_template_part(
-						'components/image/image',
-						null,
-						$logo
-					); ?>
+					<?php get_template_part( 'components/image/image', null, $logo ); ?>
 				</li>
 			<?php } ?>
 		</ul>

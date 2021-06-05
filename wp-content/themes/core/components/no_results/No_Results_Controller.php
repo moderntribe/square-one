@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\no_results;
 
@@ -7,11 +6,12 @@ use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 
 class No_Results_Controller extends Abstract_Controller {
+
 	public const CLASSES = 'classes';
 	public const TITLE   = 'attachment';
 	public const CONTENT = 'attrs';
 
-	private array  $classes;
+	private array $classes;
 	private string $title;
 	private string $content;
 
