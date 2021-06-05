@@ -124,21 +124,31 @@ class Subheader_Controller extends Abstract_Controller {
 		];
 	}
 
-	public function render_breadcrumbs(): void {
+	
+	/**
+	 * @return array
+	 */
 
-		get_template_part(
-			'components/breadcrumbs/breadcrumbs',
-			'null',
-			[ Breadcrumbs_Controller::BREADCRUMBS => $this->get_breadcrumbs() ]
-		);
-	}
+	public function get_breadcrumbs(): array {
+		$name = get_bloginfo( 'name' );
+		$url  = get_bloginfo( 'url' );
 
-	protected function get_breadcrumbs(): array {
-		$page = get_the_ID();
-		$url  = $page ? get_permalink( $page ) : home_url();
+		$breadcrumbs = [
+			new Breadcrumb( $url, __( 'Home', 'tribe' ) ),
+		];
 
+		$ancestors = (array) get_post_ancestors( get_the_ID() );
+
+		foreach ( $ancestors as $ancestor ) {
+			$ancestor_url	= get_the_permalink( $ancestor );
+			$ancestor_label = get_the_title( $ancestor );
+
+			$breadcrumbs[] = new Breadcrumb( $ancestor_url, $ancestor_label );
+		}
+		
 		return [
-			new Breadcrumb( $url, get_the_title( $page ) ),
+			Breadcrumbs_Controller::BREADCRUMBS  => $breadcrumbs,
+			Breadcrumbs_Controller::MAIN_CLASSES => [ 'u-sep-arrow' ],
 		];
 	}
 

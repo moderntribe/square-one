@@ -24,7 +24,7 @@ $c = Subheader_Controller::factory( $args );
 		
 		<div <?php echo $c->get_content_classes(); ?>>
 
-			<?php $c->render_breadcrumbs(); ?>
+			<?php get_template_part( 'components/breadcrumbs/breadcrumbs', 'null', $c->get_breadcrumbs() ); ?>
 		
 			<?php get_template_part( 'components/text/text', null, $c->get_title_args() ); ?>
 
