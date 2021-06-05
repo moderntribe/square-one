@@ -137,6 +137,22 @@ export const getNodes = ( selector = '', convert = false, node = document, custo
 };
 
 /**
+ * @function visible
+ * @description Determine if an element is visible in the dom.
+ *
+ * @param {HTMLElement} elem The element to check
+ * @return {boolean}
+ */
+
+export const visible = ( elem ) => {
+	return !! (
+		elem.offsetWidth ||
+		elem.offsetHeight ||
+		elem.getClientRects().length
+	);
+};
+
+/**
  * @function getFocusable
  * @description Get focusable elements inside a container and return as an array.
  *
@@ -217,20 +233,4 @@ export const insertAfter = ( newNode, referenceNode ) => {
 
 export const insertBefore = ( newNode, referenceNode ) => {
 	referenceNode.parentNode.insertBefore( newNode, referenceNode );
-};
-
-/**
- * @function visible
- * @description Determine if an element is visible in the dom.
- *
- * @param {HTMLElement} elem The element to check
- * @return {boolean}
- */
-
-export const visible = ( elem ) => {
-	return !! (
-		elem.offsetWidth ||
-		elem.offsetHeight ||
-		elem.getClientRects().length
-	);
 };
