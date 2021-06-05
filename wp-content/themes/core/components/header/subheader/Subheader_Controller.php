@@ -139,6 +139,8 @@ class Subheader_Controller extends Abstract_Controller {
 
 		$ancestors = (array) get_post_ancestors( get_the_ID() );
 
+		$ancestors = array_reverse( $ancestors, true );
+
 		foreach ( $ancestors as $ancestor ) {
 			$ancestor_url	= get_the_permalink( $ancestor );
 			$ancestor_label = get_the_title( $ancestor );
