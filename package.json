@@ -141,7 +141,7 @@
     "eslint": "^6.6.0",
     "eslint-config-products": "github:moderntribe/eslint-config-products",
     "eslint-config-wpcalypso": "^5.0.0",
-    "eslint-import-resolver-webpack": "^0.11.1",
+    "eslint-import-resolver-webpack": "^0.13.1",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jsdoc": "^18.0.0",
     "eslint-plugin-jsx-a11y": "^6.2.3",
