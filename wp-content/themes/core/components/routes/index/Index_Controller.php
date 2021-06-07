@@ -1,17 +1,16 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\routes\index;
 
+use Tribe\Project\Blocks\Types\Content_Loop\Content_Loop;
 use Tribe\Project\Taxonomies\Featured\Featured;
 use Tribe\Project\Templates\Components\Abstract_Controller;
-use Tribe\Project\Templates\Components\sidebar\Sidebar_Controller;
-use Tribe\Project\Templates\Components\breadcrumbs\Breadcrumbs_Controller;
-use Tribe\Project\Templates\Models\Breadcrumb;
-use Tribe\Project\Blocks\Types\Content_Loop\Content_Loop;
-use Tribe\Project\Templates\Components\text\Text_Controller;
 use Tribe\Project\Templates\Components\blocks\content_loop\Content_Loop_Controller;
+use Tribe\Project\Templates\Components\breadcrumbs\Breadcrumbs_Controller;
+use Tribe\Project\Templates\Components\sidebar\Sidebar_Controller;
+use Tribe\Project\Templates\Components\text\Text_Controller;
 use Tribe\Project\Templates\Components\Traits\Post_List_Field_Formatter;
+use Tribe\Project\Templates\Models\Breadcrumb;
 use WP_Query;
 
 class Index_Controller extends Abstract_Controller {
@@ -21,12 +20,11 @@ class Index_Controller extends Abstract_Controller {
 	public const IS_TERM = 'is_term';
 
 	private bool $is_term;
-	private array $featured_posts_id = ['0'];
-	private $sidebar_id = '';
-
+	private array $featured_posts_id = [ '0' ];
+	private $sidebar_id              = '';
 
 	public function __construct( array $args = [] ) {
-		$args = $this->parse_args( $args );
+		$args          = $this->parse_args( $args );
 		$this->is_term = (bool) $this->is_term();
 	}
 
@@ -53,7 +51,6 @@ class Index_Controller extends Abstract_Controller {
 
 	/**
 	 * Render the subheader component
-	 *
 	 *
 	 * @return void
 	 */
@@ -106,7 +103,7 @@ class Index_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return Breadcrumb[]
+	 * @return \Tribe\Project\Templates\Models\Breadcrumb[]
 	 */
 	protected function get_breadcrumbs(): array {
 		$page = get_option( 'page_for_posts' );
@@ -129,7 +126,7 @@ class Index_Controller extends Abstract_Controller {
 	 * @return int
 	 */
 	public function get_current_page(): int {
-		return (int) get_query_var('paged') ?: 1;
+		return (int) get_query_var( 'paged' ) ?: 1;
 	}
 
 
@@ -163,13 +160,13 @@ class Index_Controller extends Abstract_Controller {
 				[
 					'taxonomy' => Featured::NAME,
 					'operator' => 'EXISTS',
-				]
-			]
+				],
+			],
 		] );
 
 		if ( ! empty( $query->posts ) ) {
 			foreach ( $query->posts as $post ) {
-				$featured_posts[] = $this->formatted_post( $post, 45 );
+				$featured_posts[]          = $this->formatted_post( $post, 45 );
 				$this->featured_posts_id[] = $post->ID;
 			}
 		}
@@ -183,9 +180,7 @@ class Index_Controller extends Abstract_Controller {
 	}
 
 	/**
-	*
-	*
-	* @return array
+	 * @return array
 	*/
 	public function get_loop_args(): array {
 		$posts = [];
@@ -200,6 +195,7 @@ class Index_Controller extends Abstract_Controller {
 				$posts[] = $this->formatted_post( $post, 45 );
 			}
 		}
+
 		/** change LAYOUT to Content_Loop::LAYOUT_ROW to get one post per row */
 		return [
 			Content_Loop_Controller::CLASSES => [ 'item-index__loop' ],
@@ -208,4 +204,5 @@ class Index_Controller extends Abstract_Controller {
 		
 		];
 	}
+
 }

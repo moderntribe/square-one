@@ -10,7 +10,7 @@ trait Post_List_Field_Formatter {
 	/**
 	 * Format a post as the Post List Field expects.
 	 *
-	 * @param WP_Post $_post
+	 * @param \WP_Post $_post
 	 * @param int     $excerpt_words How many words the excerpt should be, 0 is no trimming.
 	 *
 	 * @return array
@@ -39,4 +39,5 @@ trait Post_List_Field_Formatter {
 
 		return $post_array;
 	}
+
 }

@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 use \Tribe\Project\Templates\Components\header\subheader_archive\Subheader_Archive_Controller;
 
@@ -16,10 +15,9 @@ $c = Subheader_Archive_Controller::factory( $args );
 	<div <?php echo $c->get_container_classes(); ?>>
 
 		<?php if ( ! empty( $c->get_image_args() ) ) { ?>
-			
 			<div <?php echo $c->get_media_classes(); ?> >		
 			
-				<?php get_template_part( 'components/image/image', null, $c->get_image_args()); ?>
+				<?php get_template_part( 'components/image/image', null, $c->get_image_args() ); ?>
 			
 			</div>
 

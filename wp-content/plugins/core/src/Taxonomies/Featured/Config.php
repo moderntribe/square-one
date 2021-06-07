@@ -1,13 +1,13 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Taxonomies\Featured;
 
 use Tribe\Libs\Taxonomy\Taxonomy_Config;
-
 use Tribe\Project\Post_Types\Post\Post;
 
 class Config extends Taxonomy_Config {
-	protected $taxonomy = Featured::NAME;
+
+	protected $taxonomy   = Featured::NAME;
 	protected $post_types = [
 		Post::NAME,
 	];
@@ -18,21 +18,22 @@ class Config extends Taxonomy_Config {
 	 * Arguments to pass when registering the taxonomy.
 	 *
 	 * @see register_extended_taxonomy() for accepted args.
+	 *
 	 * @return array
 	 */
 	public function get_args() {
 		return [
 			'hierarchical' => false,
-			'exclusive' => true,
-			'meta_box' => 'radio',
+			'exclusive'    => true,
+			'meta_box'     => 'radio',
 		];
 	}
 
 	public function get_labels() {
 		return [
 			'singular' => __( 'Featured', 'tribe' ),
-			'plural' => __( 'Featured', 'tribe' ),
-			'slug' => __( 'Featured', 'tribe' ),
+			'plural'   => __( 'Featured', 'tribe' ),
+			'slug'     => __( 'Featured', 'tribe' ),
 		];
 	}
 
@@ -42,4 +43,5 @@ class Config extends Taxonomy_Config {
 			
 		];
 	}
+
 }
