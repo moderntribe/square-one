@@ -118,8 +118,8 @@ $config_defaults = [
 	'NONCE_SALT'                     => '%%NONCE_SALT%%',
 
 	// Security Directives
-	'DISALLOW_FILE_EDIT'             => true,
-	'DISALLOW_FILE_MODS'             => true,
+	'DISALLOW_FILE_EDIT'             => tribe_getenv( 'DISALLOW_FILE_EDIT', true ),
+	'DISALLOW_FILE_MODS'             => tribe_getenv( 'DISALLOW_FILE_MODS', true ),
 	'FORCE_SSL_LOGIN'                => tribe_getenv( 'FORCE_SSL_LOGIN', true ),
 	'FORCE_SSL_ADMIN'                => tribe_getenv( 'FORCE_SSL_ADMIN', true ),
 
@@ -207,7 +207,7 @@ if ( empty( $GLOBALS['memcached_servers'] ) ) {
 // ==============================================================
 
 if ( ! defined( 'WP_DEBUG_DISPLAY' ) || ! WP_DEBUG_DISPLAY ) {
-	ini_set( 'display_errors', 0 );
+	ini_set( 'display_errors', '0' );
 }
 
 if ( defined( 'WP_CLI' ) && WP_CLI ) {
