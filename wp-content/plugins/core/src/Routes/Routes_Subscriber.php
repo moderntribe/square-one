@@ -1,4 +1,5 @@
-<?php declare( strict_types=1 );
+<?php declare(strict_types=1);
+
 /**
  * Subscribe routes to WP lifecycle hooks.
  *
@@ -13,6 +14,7 @@ use Tribe\Libs\Container\Abstract_Subscriber;
  * Subscribes routes to WP lifecycle hooks.
  */
 class Routes_Subscriber extends Abstract_Subscriber {
+
 	/**
 	 * Registers any WP lifecycle hooks for routes.
 	 *
@@ -28,4 +30,5 @@ class Routes_Subscriber extends Abstract_Subscriber {
 		// 	1
 		// );
 	}
+
 }

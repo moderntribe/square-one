@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Theme;
 
@@ -9,7 +9,7 @@ class Pagination_Util {
 	 */
 	protected $query;
 
-	public function __construct( \WP_Query $query = null ) {
+	public function __construct( ?\WP_Query $query = null ) {
 		global $wp_query;
 
 		$this->query = $query ?? $wp_query;
@@ -41,7 +41,6 @@ class Pagination_Util {
 
 		// Only add links on either side of current if we're not loading all the pages at once. Generate links for each applicable number we need to show.
 		if ( $links_offset ) {
-
 			$links[] = $paged;
 
 			for ( $i = max( 1, $paged - $links_offset ); $i < $paged; $i ++ ) {

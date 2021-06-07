@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\header\subheader;
 
@@ -9,6 +8,7 @@ use Tribe\Project\Templates\Components\text\Text_Controller;
 use Tribe\Project\Templates\Components\Traits\Page_Title;
 
 class Subheader_Controller extends Abstract_Controller {
+
 	use Page_Title;
 
 	public const CLASSES = 'classes';
@@ -54,4 +54,5 @@ class Subheader_Controller extends Abstract_Controller {
 			Text_Controller::CONTENT => $this->get_page_title(),
 		];
 	}
+
 }

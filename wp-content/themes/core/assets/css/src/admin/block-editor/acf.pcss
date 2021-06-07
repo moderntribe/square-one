@@ -1,0 +1,43 @@
+/* -----------------------------------------------------------------------------
+ *
+ * ACF Style Overrides
+ * Use this for sweeping/global changes.
+ *
+ * ----------------------------------------------------------------------------- */
+
+/**
+ * Visually hide ACF field labels that are lower-priority.
+ */
+.tribe-acf-hide-label {
+
+	& > .acf-label {
+		@mixin visually-hide;
+	}
+}
+
+/* remove bottom margin on any label that is meant to be hidden (this specificity is required) */
+.block-editor .edit-post-sidebar .acf-fields > .acf-field.tribe-acf-hide-label > .acf-label {
+	margin-bottom: 0;
+}
+
+.block-editor {
+	/* if hiding a label on a text field, increase the space above */
+	.acf-fields > .acf-field.tribe-acf-hide-label.acf-field-text {
+		margin-top: 24px;
+	}
+
+	/* size down instructional text for all fields */
+	.acf-field .acf-input > p.description,
+	.acf-block-component .tribe-acf-instructions p {
+		font-size: 11px;
+	}
+
+	/* if WYSIWYG tabs are present in the sidebar, don't float them to the right */
+	.wp-editor-tabs {
+		float: none;
+	}
+
+	.wp-editor-tabs button {
+		margin: 5px 5px 0 0;
+	}
+}

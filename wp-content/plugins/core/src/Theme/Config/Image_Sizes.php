@@ -1,8 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Theme\Config;
 
 class Image_Sizes {
+
 	public const SQUARE_XSMALL          = 'square-xsmall';
 	public const SQUARE_MEDIUM          = 'square-medium';
 	public const SQUARE_LARGE           = 'square-large';
@@ -93,6 +94,7 @@ class Image_Sizes {
 
 	/**
 	 * @return void
+	 *
 	 * @action after_setup_theme
 	 */
 	public function register_sizes() {
@@ -100,4 +102,5 @@ class Image_Sizes {
 			add_image_size( $key, $attributes['width'], $attributes['height'], $attributes['crop'] );
 		}
 	}
+
 }

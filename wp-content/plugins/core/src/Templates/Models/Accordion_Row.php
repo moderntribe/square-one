@@ -1,8 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Models;
 
 class Accordion_Row {
+
 	/**
 	 * @var string
 	 */
@@ -26,4 +27,5 @@ class Accordion_Row {
 		$this->header_text = $header_text;
 		$this->content     = $content;
 	}
+
 }

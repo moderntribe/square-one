@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 use \Tribe\Project\Templates\Components\routes\index\Index_Controller;
 
@@ -28,7 +27,7 @@ $c->render_header();
 				?>
 				
 				<div class="l-container"> 
-					<?php get_template_part( 'components/pagination/loop/loop', 'index' ); ?>
+					<?php //get_template_part( 'components/pagination/loop/loop', 'index' ); ?>
 				</div>
 				
 			<?php else :
