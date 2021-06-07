@@ -61,6 +61,7 @@ const gulpTasks = [
 	'eslint:apps', // lint the apps js according to the products lint rules, uses fix to auto correct common issues
 	'eslint:utils', // lint the utils js according to the products lint rules, uses fix to auto correct common issues
 	'eslint:admin', // lint the admin js according to the products lint rules, uses fix to auto correct common issues
+	'eslint:components', // lint the component js according to the products lint rules, uses fix to auto correct common issues
 
 	/* Footer tasks */
 
@@ -194,7 +195,7 @@ gulp.task( 'dev', gulp.parallel( watchTasks, async function() {
  */
 
 gulp.task( 'lint', gulp.series(
-	gulp.parallel( 'eslint:theme', 'eslint:apps', 'eslint:utils', 'eslint:admin', 'stylelint:theme', 'stylelint:apps' ),
+	gulp.parallel( 'eslint:theme', 'eslint:apps', 'eslint:utils', 'eslint:admin', 'eslint:components', 'stylelint:theme', 'stylelint:apps' ),
 ) );
 
 /**
