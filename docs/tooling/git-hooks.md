@@ -10,4 +10,4 @@ hooks in [.lefthook](../../.lefthook).
 
 Running `nvm use && yarn install` should automatically activate the appropriate hooks. If it does not, 
 you can do an aggressive install which removes all existing git hooks and re-installs the hooks 
-from Lefthook: `lefthook install -a`.
+from Lefthook: `yarn lefthook install -a`.
