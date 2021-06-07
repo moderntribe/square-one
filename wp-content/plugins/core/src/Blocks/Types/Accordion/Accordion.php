@@ -7,6 +7,7 @@ use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Field;
 use Tribe\Libs\ACF\Field_Section;
 use Tribe\Libs\ACF\Repeater;
+use Tribe\Project\Admin\Editor\Classic_Editor_Formats;
 use Tribe\Project\Blocks\Fields\Cta_Field;
 use Tribe\Project\Blocks\Fields\Traits\With_Cta_Field;
 
@@ -14,20 +15,20 @@ class Accordion extends Block_Config implements Cta_Field {
 
 	use With_Cta_Field;
 
-	public const NAME            = 'accordion';
-	public const SECTION_CONTENT = 's-content';
-	public const LEAD_IN         = 'leadin';
-	public const TITLE           = 'title';
-	public const DESCRIPTION     = 'description';
+	public const NAME = 'accordion';
 
-	public const ACCORDION   = 'accordion';
-	public const ROW_HEADER  = 'row_header';
-	public const ROW_CONTENT = 'row_content';
+	public const LAYOUT         = 'layout';
+	public const LAYOUT_INLINE  = 'inline';
+	public const LAYOUT_STACKED = 'stacked';
 
-	public const SECTION_SETTINGS = 's-settings';
-	public const LAYOUT           = 'layout';
-	public const LAYOUT_INLINE    = 'inline';
-	public const LAYOUT_STACKED   = 'stacked';
+	public const LEAD_IN     = 'leadin';
+	public const TITLE       = 'title';
+	public const DESCRIPTION = 'description';
+
+	public const SECTION_ACCORDION = 's-accordion';
+	public const ACCORDION         = 'accordion';
+	public const ROW_HEADER        = 'row_header';
+	public const ROW_CONTENT       = 'row_content';
 
 	public function add_block() {
 		$this->set_block( new Block( self::NAME, [
@@ -73,82 +74,81 @@ class Accordion extends Block_Config implements Cta_Field {
 	}
 
 	public function add_fields() {
-		//==========================================
-		// Content Fields
-		//==========================================
-		$this->add_section( new Field_Section( self::SECTION_CONTENT, __( 'Content', 'tribe' ), 'accordion' ) )
-			->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
-					 'label' => __( 'Lead in', 'tribe' ),
-					 'name'  => self::LEAD_IN,
-					 'type'  => 'text',
-				 ] )
-			 )->add_field( new Field( self::NAME . '_' . self::TITLE, [
-					'label' => __( 'Title', 'tribe' ),
-					'name'  => self::TITLE,
-					'type'  => 'text',
-				] )
-			)->add_field( new Field( self::NAME . '_' . self::DESCRIPTION, [
-					'label'        => __( 'Description', 'tribe' ),
-					'name'         => self::DESCRIPTION,
-					'type'         => 'wysiwyg',
-					'toolbar'      => 'basic',
-					'media_upload' => 0,
-				] )
-			)->add_field(
-				$this->get_cta_field( self::NAME )
-			)->add_field(
-				$this->get_accordion_section()
-			);
-
-		//==========================================
-		// Setting Fields
-		//==========================================
-		$this->add_section( new Field_Section( self::SECTION_SETTINGS, __( 'Settings', 'tribe' ), 'accordion' ) )
-			 ->add_field( new Field( self::NAME . '_' . self::LAYOUT, [
-				 'type'            => 'image_select',
-				 'name'            => self::LAYOUT,
-				 'choices'         => [
-					 self::LAYOUT_INLINE  => __( 'Inline', 'tribe' ),
-					 self::LAYOUT_STACKED => __( 'Stacked', 'tribe' ),
-				 ],
-				 'default_value'   => self::LAYOUT_INLINE,
-				 'multiple'        => 0,
-				 'image_path'      => sprintf(
-					 '%sassets/img/admin/blocks/%s/',
-					 trailingslashit( get_template_directory_uri() ),
-					 self::NAME
-				 ),
-				 'image_extension' => 'svg',
-			 ] ) );
+		$this->add_field( new Field( self::NAME . '_' . self::LAYOUT, [
+				'label'         => __( 'Layout', 'tribe' ),
+				'name'          => self::LAYOUT,
+				'type'          => 'button_group',
+				'choices'       => [
+					self::LAYOUT_INLINE  => __( 'Inline', 'tribe' ),
+					self::LAYOUT_STACKED => __( 'Stacked', 'tribe' ),
+				],
+				'default_value' => self::LAYOUT_INLINE,
+			] )
+		)->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
+				'label'       => __( 'Lead in', 'tribe' ),
+				'name'        => self::LEAD_IN,
+				'type'        => 'text',
+				'placeholder' => __( 'Leadin (optional)', 'tribe' ),
+				'wrapper'     => [
+					'class' => 'tribe-acf-hide-label',
+				],
+			] )
+		)->add_field( new Field( self::NAME . '_' . self::TITLE, [
+				'label' => __( 'Title', 'tribe' ),
+				'name'  => self::TITLE,
+				'type'  => 'text',
+			] )
+		)->add_field( new Field( self::NAME . '_' . self::DESCRIPTION, [
+				'label'        => __( 'Description', 'tribe' ),
+				'name'         => self::DESCRIPTION,
+				'type'         => 'wysiwyg',
+				'toolbar'      => Classic_Editor_Formats::MINIMAL,
+				'tabs'         => 'visual',
+				'media_upload' => 0,
+			] )
+		)->add_field(
+			$this->get_cta_field( self::NAME )
+		)->add_section(
+			$this->get_accordion_section()
+		);
 	}
 
 	/**
-	 * @return \Tribe\Libs\ACF\Repeater
+	 * @return \Tribe\Libs\ACF\Field_Section
 	 */
-	protected function get_accordion_section(): Repeater {
-		$group = new Repeater( self::NAME . '_' . self::ACCORDION );
+	protected function get_accordion_section(): Field_Section {
+		$section = new Field_Section( self::SECTION_ACCORDION, __( 'Accordion Items', 'tribe' ), 'accordion' );
+		$group   = new Repeater( self::NAME . '_' . self::ACCORDION );
 		$group->set_attributes( [
-			'label'  => __( 'Accordion Section', 'tribe' ),
-			'name'   => self::ACCORDION,
-			'layout' => 'block',
-			'min'    => 0,
-			'max'    => 10,
+			'label'     => __( 'Accordion Section', 'tribe' ),
+			'name'      => self::ACCORDION,
+			'layout'    => 'block',
+			'min'       => 0,
+			'max'       => 10,
+			'collapsed' => 'field_' . self::ROW_HEADER,
+			'wrapper'   => [
+				'class' => 'tribe-acf-hide-label',
+			],
 		] );
 		$header = new Field( self::ROW_HEADER, [
 			'label' => __( 'Header', 'tribe' ),
 			'name'  => self::ROW_HEADER,
 			'type'  => 'text',
 		] );
-
 		$group->add_field( $header );
 		$content = new Field( self::ROW_CONTENT, [
-			'label' => __( 'Content', 'tribe' ),
-			'name'  => self::ROW_CONTENT,
-			'type'  => 'wysiwyg',
+			'label'        => __( 'Content', 'tribe' ),
+			'name'         => self::ROW_CONTENT,
+			'type'         => 'wysiwyg',
+			'toolbar'      => Classic_Editor_Formats::MINIMAL,
+			'tabs'         => 'visual',
+			'media_upload' => 0,
 		] );
-		$group->add_field( $content );
 
-		return $group;
+		$group->add_field( $content );
+		$section->add_field( $group );
+
+		return $section;
 	}
 
 }
