@@ -7,10 +7,13 @@ $c = Index_Controller::factory( $args );
 $c->render_header();
 ?>
 	<main id="main-content">
-
 		<?php $c->render_subheader(); ?>
-			
-			<?php if ( have_posts() ) : ?>
+		
+		<?php if (  is_home() ) : ?>
+			<?php the_content(); ?>
+
+		<?php else :
+			if ( have_posts() ) : ?>
 				<div class="l-container"> 
 					<?php get_template_part( 'components/text/text', null, $c->get_number_of_posts() );?>
 				</div>
@@ -31,7 +34,8 @@ $c->render_header();
 				
 			<?php else :
 				get_template_part( 'components/no_results/no_results', 'index' );
-			endif; ?>
+			endif; 
+		endif; ?>
 
 	</main>
 <?php

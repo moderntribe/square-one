@@ -118,6 +118,10 @@ class Index_Controller extends Abstract_Controller {
 	 * @return int
 	 */
 	public function is_term(): int {
+		if ( is_home() ) {
+			return 0;
+		}
+
 		return (int) get_queried_object()->term_id ?: 0;
 	}
 

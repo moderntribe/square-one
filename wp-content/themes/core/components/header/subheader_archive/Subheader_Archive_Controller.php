@@ -33,7 +33,8 @@ class Subheader_Archive_Controller extends Abstract_Controller {
 		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
 		$this->media_classes     = (array) $args[ self::MEDIA_CLASSES ];
 		$this->content_classes   = (array) $args[ self::CONTENT_CLASSES ];
-
+		$this->title             = '';
+		$this->description       = '';
 		$this->map_acf_fields();
 	}
 
