@@ -16,6 +16,7 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 
 	public const LAYOUT            = 'layout';
 	public const MEDIA             = 'media';
+	public const LEADIN            = 'leadin';
 	public const TITLE             = 'title';
 	public const CTA               = 'cta';
 	public const CONTAINER_CLASSES = 'container_classes';
@@ -30,6 +31,7 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 	private $media;
 
 	private string $layout;
+	private string $leadin;
 	private string $title;
 	private array $cta;
 	private array $container_classes;
@@ -47,6 +49,7 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 		$this->classes           = (array) $args[ self::CLASSES ];
 		$this->layout            = (string) $args[ self::LAYOUT ];
 		$this->media             = $args[ self::MEDIA ];
+		$this->leadin            = (string) $args[ self::LEADIN ];
 		$this->title             = (string) $args[ self::TITLE ];
 		$this->cta               = (array) $args[ self::CTA ];
 		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
@@ -62,6 +65,7 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 		return [
 			self::LAYOUT            => Interstitial_Block::LAYOUT_LEFT,
 			self::MEDIA             => null,
+			self::LEADIN            => '',
 			self::TITLE             => '',
 			self::CTA               => [],
 			self::CONTAINER_CLASSES => [],
@@ -130,6 +134,7 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 		}
 
 		return [
+			Content_Block_Controller::LEADIN  => $this->get_leadin(),
 			Content_Block_Controller::TITLE   => $this->get_title(),
 			Content_Block_Controller::CTA     => $this->get_cta(),
 			Content_Block_Controller::LAYOUT  => $this->layout,
@@ -140,6 +145,18 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 				't-theme--light',
 			],
 		];
+	}
+
+	/**
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
+	 */
+	private function get_leadin(): Deferred_Component {
+		return defer_template_part( 'components/text/text', null, [
+			Text_Controller::CLASSES => [
+				'c-block__leadin',
+			],
+			Text_Controller::CONTENT => $this->leadin ?? '',
+		] );
 	}
 
 	/**
