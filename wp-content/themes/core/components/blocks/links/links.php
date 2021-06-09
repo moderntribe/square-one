@@ -8,9 +8,6 @@ use Tribe\Project\Templates\Components\blocks\links\Links_Block_Controller;
 // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
 $c = Links_Block_Controller::factory( $args );
 
-if ( empty( $c->get_links() ) ) {
-	return;
-}
 ?>
 
 <section <?php echo $c->get_classes(); ?> <?php echo $c->get_attrs(); ?>>
@@ -34,10 +31,12 @@ if ( empty( $c->get_links() ) ) {
 			<?php if ( ! empty( $c->get_links() ) ) { ?>
 				<ul class="b-links__list">
 					<?php foreach ( $c->get_links() as $link ) { ?>
+						<?php if ( ! empty( ( $link['url'] ?? '') ) ) : ?>
 						<li class="b-links__list-item">
 							<?php get_template_part( 'components/link/link', null, $link ); ?>
 						</li>
-					<?php } ?>
+						<?php endif;
+					} ?>
 				</ul>
 			<?php } ?>
 		</div>
