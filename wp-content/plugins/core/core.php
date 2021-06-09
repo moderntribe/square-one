@@ -32,6 +32,6 @@ add_action( 'plugins_loaded', static function () {
  *
  * @return \Tribe\Project\Core
  */
-function tribe_project() {
+function tribe_project () {
 	return \Tribe\Project\Core::instance();
 }
