@@ -32,6 +32,7 @@ preventing a PR from being able to be merged.
 * Updated: Spruce up the Image Field
 * Added: a utility class of ‘tribe-acf-hide-label’ to hide field labels in cases where they are unnecessary/exterraneous
 * Added: a utility class of ‘tribe-acf-instructions’’. Apply to a Message field if you need ‘spoof’ ad-hoc instructional content.
+* Fixed: Converts the button block to now use the button_group acf field time.
 
 ## 2021.04
 * Updated: refreshed local-config-sample.php to have a more thorough set of constants you may need, especially now that we have a Local environment option.
