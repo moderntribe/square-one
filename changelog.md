@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2021.06
+* Fixed: PHPCS workflow from not running when set as "Require status checks to pass before merging" if no files changed;
+preventing a PR from being able to be merged. 
+
 ## 2021.05
 * Fixed: broken main README.md links
 * Removed: husky hooks.
