@@ -214,7 +214,7 @@ class Tribe_Glomar_Admin {
 			$this->get_message(),
 			'glomar-message',
 			[
-				'media_buttons' => false,
+				'media_buttons' => true,
 				'textarea_name' => 'glomar-message',
 				'textarea_rows' => 12,
 				'tinymce'       => true,
