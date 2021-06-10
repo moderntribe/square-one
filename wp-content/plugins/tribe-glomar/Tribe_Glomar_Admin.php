@@ -216,7 +216,7 @@ class Tribe_Glomar_Admin {
 			[
 				'media_buttons' => false,
 				'textarea_name' => 'glomar-message',
-				'textarea_rows' => 4,
+				'textarea_rows' => 12,
 				'tinymce'       => true,
 				'quicktags'     => apply_filters(
 					'glomar_message_editor_quicktags',
