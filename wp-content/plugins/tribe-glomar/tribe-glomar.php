@@ -4,7 +4,7 @@ Plugin Name: Tribe Glomar
 Description: Force the frontend of the site to hide if you are not logged in.
 Author: Modern Tribe, Inc.
 Author URI: http://tri.be
-Version: 1.0.4
+Version: 1.0.5
 */
 
 /**
@@ -12,14 +12,18 @@ Version: 1.0.4
  *
  * @return void
  */
-if ( !function_exists('tribe_glomar_load') ) { // play nice
+if ( ! function_exists( 'tribe_glomar_load' ) ) { // play nice
 	function tribe_glomar_load() {
-		if ( defined( 'TRIBE_GLOMAR' ) && TRIBE_GLOMAR === false ) return;
-		if ( ! apply_filters( 'tribe_glomar', true ) ) return;
+		if ( defined( 'TRIBE_GLOMAR' ) && TRIBE_GLOMAR === false ) {
+			return;
+		}
+		if ( ! apply_filters( 'tribe_glomar', true ) ) {
+			return;
+		}
 
 		// ok, we have permission to load
-		require_once( 'Tribe_Glomar.php' );
-		require_once( 'Tribe_Glomar_Admin.php' );
+		require_once 'Tribe_Glomar.php';
+		require_once 'Tribe_Glomar_Admin.php';
 		Tribe_Glomar::init();
 	}
 
