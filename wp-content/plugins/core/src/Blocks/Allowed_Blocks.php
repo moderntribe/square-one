@@ -8,6 +8,7 @@ namespace Tribe\Project\Blocks;
  * Filters the block types that may be inserted in the block editor
  */
 class Allowed_Blocks {
+
 	/**
 	 * The list of blocks types allowed.
 	 *
@@ -31,6 +32,7 @@ class Allowed_Blocks {
 	 *
 	 * @param bool|array $allowed_types Currently allowed block types.
 	 * @param \WP_Post   $post          The current post object.
+	 *
 	 * @return array                    Modified allowed block types.
 	 */
 	public function register_allowed_blocks( $allowed_types, \WP_Post $post ): array {
@@ -38,4 +40,5 @@ class Allowed_Blocks {
 
 		return array_unique( array_merge( $allowed_types, apply_filters( 'tribe_allowed_blocks', $this->allow_list ) ) );
 	}
+
 }
