@@ -34,7 +34,7 @@ class Allowed_Blocks {
 	 * @return array                    Modified allowed block types.
 	 */
 	public function register_allowed_blocks( $allowed_types, \WP_Post $post ): array {
-		$allowed_types = ! is_array( $allowed_types ) ? [] $allow_types;
+		$allowed_types = ! is_array( $allowed_types ) ? [] : $allow_types;
 
 		return array_unique( array_merge( $allowed_types, apply_filters( 'tribe_allowed_blocks', $this->allow_list ) ) );
 	}
