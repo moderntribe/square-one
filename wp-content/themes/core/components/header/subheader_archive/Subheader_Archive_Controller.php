@@ -65,24 +65,18 @@ class Subheader_Archive_Controller extends Abstract_Controller {
 		return Markup_Utils::class_attribute( $this->classes );
 	}
 
-	/**
-	 * @return string
-	 */
+	
 	public function get_content_classes(): string {
 		return Markup_Utils::class_attribute( $this->content_classes );
 	}
 
-	/**
-	 * @return string
-	 */
+	
 	public function get_media_classes(): string {
 		return Markup_Utils::class_attribute( $this->media_classes );
 	}
 
 
-	/**
-	 * @return string
-	 */
+	
 	public function get_container_classes(): string {
 		return Markup_Utils::class_attribute( $this->container_classes );
 	}
@@ -92,9 +86,6 @@ class Subheader_Archive_Controller extends Abstract_Controller {
 	}
 
 	
-	/**
-	 * @return array
-	 */
 	public function get_image_args(): array {
 		if (  empty( $this->hero_image_id ) ) {
 			return [];
@@ -114,9 +105,7 @@ class Subheader_Archive_Controller extends Abstract_Controller {
 		];
 	}
 
-	/**
-	 * @return array
-	 */
+	
 	public function get_description_args(): array {
 		return [
 			Text_Controller::TAG     => 'p',
@@ -125,9 +114,7 @@ class Subheader_Archive_Controller extends Abstract_Controller {
 		];
 	}
 
-	/**
-	 * @return array
-	 */
+	
 	public function get_title_args(): array {
 		return [
 			Text_Controller::TAG     => 'h1',
@@ -145,14 +132,14 @@ class Subheader_Archive_Controller extends Abstract_Controller {
 	protected function map_acf_fields() {
 		if ( is_category() ) {
 			$term = get_queried_object();
-			
+		
 			if ( ! empty( $term ) ) {
 				$this->title       = $term->name;
 				$this->description = $term->category_description;
-			}
-	
-			if ( ! empty( get_field( 'hero_image', $term ) ) ) {
-				$this->hero_image_id = get_field( 'hero_image', $term )['ID'];
+
+				if ( ! empty( get_field( 'hero_image', $term->taxonomy.'_'.$term->term_id ) ) ) {
+					$this->hero_image_id = get_field( 'hero_image', $term->taxonomy.'_'.$term->term_id )['ID'];
+				}
 			}
 		} else {
 			if ( ! empty( get_field( 'title', 'option' ) ) ) {

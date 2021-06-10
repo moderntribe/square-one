@@ -317,7 +317,8 @@ class Content_Loop_Controller extends Abstract_Controller {
 	 * @return string
 	 */
 	public function get_content_classes(): string {
-		
+		$this->content_classes[] = 'g-2-up';
+
 		if ( $this->layout === Content_Loop_Block::LAYOUT_ROW ) {
 			$this->content_classes[] = '';
 		}
@@ -326,10 +327,6 @@ class Content_Loop_Controller extends Abstract_Controller {
 			$this->content_classes[] = 'g-3-up';
 		}
 		
-		else {
-			$this->content_classes[] = 'g-2-up';
-		}
-
 		return Markup_Utils::class_attribute( $this->content_classes );
 	}
 

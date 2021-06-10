@@ -9,7 +9,7 @@ $c->render_header();
 	<main id="main-content">
 		<?php $c->render_subheader(); ?>
 		
-		<?php if (  is_home() ) : ?>
+		<?php if ( is_front_page() ) : ?>
 			<?php the_content(); ?>
 
 		<?php else :
@@ -29,7 +29,8 @@ $c->render_header();
 				?>
 				
 				<div class="l-container"> 
-					<?php //get_template_part( 'components/pagination/loop/loop', 'index' ); ?>
+					<?php //get_template_part( 'components/pagination/loop/loop', 'search' ); ?>
+					
 				</div>
 				
 			<?php else :

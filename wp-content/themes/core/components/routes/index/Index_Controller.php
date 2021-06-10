@@ -114,9 +114,7 @@ class Index_Controller extends Abstract_Controller {
 		];
 	}
 
-	/**
-	 * @return int
-	 */
+
 	public function is_term(): int {
 		if ( is_home() ) {
 			return 0;
@@ -126,9 +124,6 @@ class Index_Controller extends Abstract_Controller {
 	}
 
 
-	/**
-	 * @return int
-	 */
 	public function get_current_page(): int {
 		return (int) get_query_var( 'paged' ) ?: 1;
 	}
@@ -149,9 +144,7 @@ class Index_Controller extends Abstract_Controller {
 
 	/**
 	* Get posts in the featured taxonomy.
-	*
-	* @return array
-	*/
+	 */
 	public function get_featured_posts_args(): array {
 		if ( $this->is_term ) {
 			return [];
@@ -162,8 +155,9 @@ class Index_Controller extends Abstract_Controller {
 		$query = new WP_Query( [
 			'tax_query' => [
 				[
-					'taxonomy' => Featured::NAME,
-					'operator' => 'EXISTS',
+					'taxonomy'       => Featured::NAME,
+					'operator'       => 'EXISTS',
+					'posts_per_page' => '7',
 				],
 			],
 		] );
@@ -183,15 +177,14 @@ class Index_Controller extends Abstract_Controller {
 		];
 	}
 
-	/**
-	 * @return array
-	*/
+	
 	public function get_loop_args(): array {
 		$posts = [];
 
 		/* to exclude featured if we are displaying them */
 		$query = new WP_Query( [
-			'post__not_in' => array_slice( $this->featured_posts_id, 0, 7 ),
+			'post__not_in'   => array_slice( $this->featured_posts_id, 0, 7 ),
+			'posts_per_page' => '9',
 		] );
 
 		if ( ! empty( $query->posts ) ) {
