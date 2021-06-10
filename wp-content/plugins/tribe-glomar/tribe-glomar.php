@@ -17,6 +17,7 @@ if ( ! function_exists( 'tribe_glomar_load' ) ) { // play nice
 		if ( defined( 'TRIBE_GLOMAR' ) && TRIBE_GLOMAR === false ) {
 			return;
 		}
+
 		if ( ! apply_filters( 'tribe_glomar', true ) ) {
 			return;
 		}

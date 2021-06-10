@@ -1,16 +1,29 @@
-<?php
-
+<?php declare(strict_types=1);
 /**
  * Force the frontend of the site to hide if you are not logged in.
  *
  * @see http://www.radiolab.org/story/confirm-nor-deny/
  */
 class Tribe_Glomar {
-
+	/**
+	 * Name of the cookie.
+	 *
+	 * @var string
+	 */
 	const COOKIE = 'wordpress_logged_in_glomar';
 
+	/**
+	 * Path for the frontend redirect.
+	 *
+	 * @var string
+	 */
 	private $path = 'glomar';
 
+	/**
+	 * Determines if the current site is public or not.
+	 *
+	 * @var bool
+	 */
 	private $is_public = false;
 
 	/**
@@ -29,9 +42,17 @@ class Tribe_Glomar {
 	 */
 	protected $min_admin_cap = 'edit_posts';
 
+	/**
+	 * Class constructor.
+	 */
 	private function __construct() {}
 
-	protected function add_hooks() {
+	/**
+	 * Hooks to register with WP Lifecycle.
+	 *
+	 * @return void
+	 */
+	protected function add_hooks(): void {
 
 		if ( defined( 'TRIBE_GLOMAR_PUBLIC' ) && TRIBE_GLOMAR_PUBLIC === true ) {
 			$this->is_public = true;
@@ -101,7 +122,6 @@ class Tribe_Glomar {
 		do_action( 'tribe_glomar_current_action', $action );
 		do_action( 'tribe_glomar_current_action_' . $action );
 	}
-
 
 	/**
 	 * Handle the "Redirect to login" action

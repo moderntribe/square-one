@@ -1,11 +1,9 @@
-<?php
-
+<?php declare(strict_types=1);
 /**
  * Class Tribe_Glomar_Admin
  */
 class Tribe_Glomar_Admin {
 	const SLUG = 'tribe_glomar_settings';
-
 
 	public function add_hooks() {
 		if ( is_multisite() ) {
@@ -16,12 +14,11 @@ class Tribe_Glomar_Admin {
 		}
 	}
 
-
 	public function register_admin_page() {
 		add_submenu_page(
 			is_multisite() ? 'settings.php' : 'options-general.php',
-			__( 'Glomar', 'tribe-glomar' ),
-			__( 'Glomar', 'tribe-glomar' ),
+			esc_html__( 'Glomar', 'tribe-glomar' ),
+			esc_html__( 'Glomar', 'tribe-glomar' ),
 			is_multisite() ? 'manage_network' : 'manage_options',
 			self::SLUG,
 			[ $this, 'display_admin_page' ]
@@ -29,14 +26,14 @@ class Tribe_Glomar_Admin {
 
 		add_settings_section(
 			'glomar-settings',
-			__( 'Access Settings', 'tribe-glomar' ),
+			esc_html__( 'Access Settings', 'tribe-glomar' ),
 			'__return_false',
 			self::SLUG
 		);
 
 		add_settings_field(
 			'glomar-ip-whitelist',
-			__( 'Permitted IP Address', 'tribe-glomar' ),
+			esc_html__( 'Permitted IP Address', 'tribe-glomar' ),
 			[ $this, 'display_ip_field' ],
 			self::SLUG,
 			'glomar-settings'
@@ -44,7 +41,7 @@ class Tribe_Glomar_Admin {
 
 		add_settings_field(
 			'glomar-secret',
-			__( 'Secret URL Parameter', 'tribe-glomar' ),
+			esc_html__( 'Secret URL Parameter', 'tribe-glomar' ),
 			[ $this, 'display_secret_field' ],
 			self::SLUG,
 			'glomar-settings'
@@ -52,7 +49,7 @@ class Tribe_Glomar_Admin {
 
 		add_settings_field(
 			'glomar-action',
-			__( 'Redirect the user to', 'tribe-glomar' ),
+			esc_html__( 'Redirect the user to', 'tribe-glomar' ),
 			[ $this, 'display_action_field' ],
 			self::SLUG,
 			'glomar-settings'
@@ -209,8 +206,10 @@ class Tribe_Glomar_Admin {
 
 	/**
 	 * Field for custom message.
+	 *
+	 * @return void
 	 */
-	public function display_message_field() {
+	public function display_message_field(): void {
 		wp_editor(
 			$this->get_message(),
 			'glomar-message',
@@ -222,16 +221,15 @@ class Tribe_Glomar_Admin {
 				'quicktags'     => apply_filters(
 					'glomar_message_editor_quicktags',
 					[
-						'buttons' => 'strong,em,link,block,del,ins,img,ol,ul,li,code,close', // this is default list minus the 'more' tag button.
+						'buttons' => 'strong,em,link,block,del,ins,img,ol,ul,li,code,close', // This is default list minus the 'more' tag button.
 					],
 				),
 			]
 		);
 	}
 
-	public function get_possible_actions() {
-
-		// Give a chance to individual sites to implement their own actions
+	public function get_possible_actions(): array {
+		// Give a chance to individual sites to implement their own actions.
 		return apply_filters(
 			'tribe_glomar_actions',
 			[
@@ -241,11 +239,13 @@ class Tribe_Glomar_Admin {
 		);
 	}
 
-	private function save_secret_field() {
-		if ( isset( $_POST['glomar-secret'] ) ) {
-			$secret = $this->sanitize_secret( $_POST['glomar-secret'] );
-			$this->set_option( 'glomar-secret', $secret );
+	private function save_secret_field(): void {
+		if ( empty( $_POST['glomar-secret'] ) ) {
+			return;
 		}
+
+		$secret = $this->sanitize_secret( $_POST['glomar-secret'] );
+		$this->set_option( 'glomar-secret', $secret );
 	}
 
 	private function save_action_field() {
@@ -308,9 +308,10 @@ class Tribe_Glomar_Admin {
 		return $action;
 	}
 
-
 	/**
-	 * @return string
+	 * Returns the frontend messaging for Glomar.
+	 *
+	 * @return string Frontend messaging.
 	 */
 	public function get_message() {
 		$message = (string) $this->get_option( 'glomar-message' );
