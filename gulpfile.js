@@ -222,7 +222,6 @@ gulp.task( 'validate', gulp.series(
  */
 
 gulp.task( 'server_dist', gulp.series(
-	gulp.parallel( 'validate' ),
 	gulp.parallel( 'clean:themeMinCSS', 'clean:themeMinJS', 'copy:themeJS' ),
 	gulp.parallel(
 		'postcss:theme',
