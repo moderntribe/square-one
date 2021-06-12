@@ -62,6 +62,7 @@ const gulpTasks = [
 	'eslint:utils', // lint the utils js according to the products lint rules, uses fix to auto correct common issues
 	'eslint:admin', // lint the admin js according to the products lint rules, uses fix to auto correct common issues
 	'eslint:components', // lint the component js according to the products lint rules, uses fix to auto correct common issues
+	'eslint:integrations', // lint the integration js according to the products lint rules, uses fix to auto correct common issues
 
 	/* Footer tasks */
 
@@ -108,6 +109,8 @@ const gulpTasks = [
 
 	'stylelint:theme', // lints and fixes the theme pcss
 	'stylelint:apps', // lints and fixes the apps pcss modules
+	'stylelint:components', // lints and fixes the component pcss modules
+	'stylelint:integrations', // lints and fixes the integrations folder pcss
 
 	/* Watch Tasks (THESE MUST BE LAST) */
 
@@ -195,7 +198,7 @@ gulp.task( 'dev', gulp.parallel( watchTasks, async function() {
  */
 
 gulp.task( 'lint', gulp.series(
-	gulp.parallel( 'eslint:theme', 'eslint:apps', 'eslint:utils', 'eslint:admin', 'eslint:components', 'stylelint:theme', 'stylelint:apps' ),
+	gulp.parallel( 'eslint:theme', 'eslint:apps', 'eslint:utils', 'eslint:admin', 'eslint:components', 'stylelint:theme', 'stylelint:apps', 'stylelint:components', 'stylelint:integrations' ),
 ) );
 
 /**
@@ -219,6 +222,7 @@ gulp.task( 'validate', gulp.series(
  */
 
 gulp.task( 'server_dist', gulp.series(
+	gulp.parallel( 'validate' ),
 	gulp.parallel( 'clean:themeMinCSS', 'clean:themeMinJS', 'copy:themeJS' ),
 	gulp.parallel(
 		'postcss:theme',
@@ -246,6 +250,7 @@ gulp.task( 'server_dist', gulp.series(
 
 gulp.task( 'dist', gulp.series(
 	'shell:yarnInstall',
+	gulp.parallel( 'validate' ),
 	gulp.parallel( 'clean:themeMinCSS', 'clean:themeMinJS', 'copy:themeJS' ),
 	gulp.parallel(
 		'postcss:theme',
