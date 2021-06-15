@@ -12,6 +12,7 @@ import slider from 'components/slider';
 import tabs from 'components/tabs';
 import video from 'components/video';
 import dialog from 'components/dialog';
+import search from 'components/routes/search';
 
 const init = () => {
 	accordion();
@@ -22,6 +23,7 @@ const init = () => {
 	tabs();
 	video();
 	dialog();
+	search();
 
 	console.info( 'SquareOne Theme: Initialized all components.' );
 };
