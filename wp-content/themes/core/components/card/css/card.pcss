@@ -194,10 +194,12 @@
 	/* CASE: Style: Search */
 	.c-card--style-search & {
 		@mixin t-display-xx-small;
+
 		margin-bottom: var(--spacer-10);
 
 		@media (--viewport-full) {
 			@mixin t-display-x-small;
+
 			margin-bottom: 0;
 		}
 	}
@@ -255,7 +257,6 @@
  * ----------------------------------------------------------------------------- */
 
 .c-card__cta-link {
-
 	/* CASE: Style: Search */
 	.c-card--style-search & {
 		word-break: break-all; /* Break long URLs */
