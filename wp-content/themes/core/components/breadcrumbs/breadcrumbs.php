@@ -14,15 +14,17 @@ $c = Breadcrumbs_Controller::factory( $args );
 	<?php echo $c->get_attrs(); ?>
 >
 
-	<ul <?php echo $c->get_main_classes(); ?> <?php echo $c->get_main_attrs(); ?>>
+	<ul itemscope itemtype="http://schema.org/BreadcrumbList" <?php echo $c->get_main_classes(); ?> <?php echo $c->get_main_attrs(); ?>>
 
-		<?php foreach ( $c->get_items() as $item ) { ?>
-			<li <?php echo $c->get_item_classes(); ?> <?php echo $c->get_item_attrs(); ?>>
-				<a href="<?php echo esc_url( $item->url ); ?>" <?php echo $c->get_link_classes(); ?> <?php echo $c->get_link_attrs(); ?>>
-					<?php echo esc_html( $item->label ); ?>
+		<?php foreach ( $c->get_items() as $item ) : ?>
+			<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem" <?php echo $c->get_item_classes(); ?> <?php echo $c->get_item_attrs(); ?>>
+				<a itemscope itemtype="http://schema.org/Thing" itemprop="item" href="<?php echo esc_url( $item->url ); ?>" <?php echo $c->get_link_classes(); ?> <?php echo $c->get_link_attrs(); ?>>
+					<span itemprop="name">
+						<?php echo esc_html( $item->label ); ?>
+					</span>
 				</a>
 			</li>
-		<?php } ?>
+		<?php endforeach; ?>
 
 	</ul>
 
