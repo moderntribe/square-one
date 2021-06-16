@@ -1,0 +1,68 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Component: Search Form
+ *
+ * ----------------------------------------------------------------------------- */
+
+.c-search {
+	position: relative;
+}
+
+.c-search__input {
+	width: 100%;
+	padding: var(--spacer-20) 76px var(--spacer-20) var(--spacer-30);
+	background: var(--color-white);
+	border: 1px solid var(--color-neutral-20);
+	color: var(--color-neutral-70);
+}
+
+.c-search__submit-button,
+.c-search__clear-button {
+	position: absolute;
+	display: flex;
+	top: 50%;
+	width: 32px;
+	height: 32px;
+	justify-content: center;
+	align-items: center;
+	border: 0;
+	background: transparent;
+	padding: 0;
+	transform: translateY(-50%);
+
+	span {
+		@mixin visually-hide;
+	}
+
+	&:before {
+		@mixin icon;
+
+		font-size: 26px;
+	}
+
+	&:focus {
+		outline: 1px dotted;
+	}
+
+	&:hover,
+	&:focus {
+		color: var(--color-primary);
+	}
+}
+
+.c-search__submit-button {
+	right: 12px;
+
+	&:before {
+		content: var(--icon-search);
+	}
+}
+
+.c-search__clear-button {
+	right: 44px;
+	color: var(--color-neutral-50);
+
+	&:before {
+		content: var(--icon-close);
+	}
+}
