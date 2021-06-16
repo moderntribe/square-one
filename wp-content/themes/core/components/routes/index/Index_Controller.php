@@ -10,13 +10,15 @@ use WP_Query;
 
 class Index_Controller extends Archive_Controller {
 
+	public array $featured_posts_id = [];
+
 	/**
 	* Get posts in the featured taxonomy.
 	 */
 	public function get_featured_posts_args(): array {
-		
+
 		$featured_posts = [];
-		
+
 		$query = new WP_Query( [
 			'tax_query' => [
 				[
@@ -33,9 +35,9 @@ class Index_Controller extends Archive_Controller {
 				$this->featured_posts_id[] = $post->ID;
 			}
 		}
-		
+
 		$this->featured_posts_id = array_slice( $this->featured_posts_id, 0, 7 );
-		
+
 		return [
 			Content_Loop_Controller::LAYOUT => Content_Loop::LAYOUT_FEATURE,
 			Content_Loop_Controller::POSTS  => array_slice( $featured_posts, 0, 6 ),
@@ -62,7 +64,7 @@ class Index_Controller extends Archive_Controller {
 			Content_Loop_Controller::CLASSES => [ 'item-index__loop' ],
 			Content_Loop_Controller::LAYOUT  => Content_Loop::LAYOUT_COLUMNS,
 			Content_Loop_Controller::POSTS   => $posts,
-		
+
 		];
 	}
 
