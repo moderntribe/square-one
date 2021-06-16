@@ -1,26 +1,17 @@
 name: PHP Composer and Codesniffer
 
-on:
-  pull_request:
-    paths:
-      - 'wp-content/plugins/core/**.php'
-      - 'wp-content/themes/core/**.php'
-      - 'wp-content/mu-plugins/**.php'
+on: pull_request
 
 jobs:
   sniff:
-
     runs-on: ${{ matrix.operating-system }}
-
     strategy:
       matrix:
         operating-system: [ ubuntu-latest ]
         php-versions: [ '7.4' ]
-
     env:
       cache_version: 0 # increment to flush all caches
       php_extensions: tokenizer, xmlwriter, simplexml
-
     steps:
       - uses: actions/checkout@v2
 
@@ -29,7 +20,19 @@ jobs:
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: composer config --global github-oauth.github.com $TOKEN
 
+      - name: Detect File Changes
+        uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          list-files: shell
+          filters: |
+            wpcontent:
+              - added|modified: 'wp-content/plugins/core/**/*.php'
+              - added|modified: 'wp-content/themes/core/**/*.php'
+              - added|modified: 'wp-content/mu-plugins/**/*.php'
+
       - name: Setup PHP extension cache
+        if: ${{ steps.filter.outputs.wpcontent == 'true' }}
         id: cache-php-extensions
         uses: shivammathur/cache-extensions@v1
         with:
@@ -38,6 +41,7 @@ jobs:
           key: ${{ matrix.operating-system }}-${{ env.cache_version }}-phpextensions-${{ matrix.php-versions }}
 
       - name: Cache PHP extensions
+        if: ${{ steps.filter.outputs.wpcontent == 'true' }}
         uses: actions/cache@v1
         with:
           path: ${{ steps.cache-php-extensions.outputs.dir }}
@@ -45,6 +49,7 @@ jobs:
           restore-keys: ${{ steps.cache-php-extensions.outputs.key }}
 
       - name: Setup PHP
+        if: ${{ steps.filter.outputs.wpcontent == 'true' }}
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-versions }}
@@ -53,13 +58,16 @@ jobs:
           tools: composer:v1
 
       - name: Validate composer.json and composer.lock
+        if: ${{ steps.filter.outputs.wpcontent == 'true' }}
         run: composer validate
 
       - name: Get composer cache directory
+        if: ${{ steps.filter.outputs.wpcontent == 'true' }}
         id: composer-cache
         run: echo "::set-output name=dir::$(composer config cache-files-dir)"
 
       - name: Check for Cached Composer Dependencies
+        if: ${{ steps.filter.outputs.wpcontent == 'true' }}
         id: cache-composer-dependencies
         uses: actions/cache@v1
         with:
@@ -68,9 +76,11 @@ jobs:
           restore-keys: ${{ runner.os }}-${{ env.cache_version }}-composer-
 
       - name: Install composer dependencies
+        if: ${{ steps.filter.outputs.wpcontent == 'true' }}
         run: |
           echo "${{ secrets.COMPOSER_ENV }}" > .env
           composer install --prefer-dist --no-progress --no-suggest --optimize-autoloader
 
       - name: PHPCS
-        run: ./vendor/bin/phpcs --standard=./phpcs.xml.dist
+        if: ${{ steps.filter.outputs.wpcontent == 'true' }}
+        run: ./vendor/bin/phpcs --standard=./phpcs.xml.dist ${{ steps.filter.outputs.wpcontent_files }}

@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2021.06
+* Added: Styles and additional functionality to the search template.
+* Fixed: PHPCS workflow from not running when set as "Require status checks to pass before merging" if no files changed;
+preventing a PR from being able to be merged. 
+
 ## 2021.05
 * Fixed: broken main README.md links
 * Removed: husky hooks.
@@ -28,6 +33,7 @@ All notable changes to this project will be documented in this file.
 * Updated: Spruce up the Image Field
 * Added: a utility class of ‘tribe-acf-hide-label’ to hide field labels in cases where they are unnecessary/exterraneous
 * Added: a utility class of ‘tribe-acf-instructions’’. Apply to a Message field if you need ‘spoof’ ad-hoc instructional content.
+* Fixed: Converts the button block to now use the button_group acf field time.
 
 ## 2021.04
 * Updated: refreshed local-config-sample.php to have a more thorough set of constants you may need, especially now that we have a Local environment option.
