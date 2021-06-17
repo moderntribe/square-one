@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 use \Tribe\Project\Templates\Components\card\Card_Controller;
 
@@ -10,7 +9,7 @@ use \Tribe\Project\Templates\Components\card\Card_Controller;
 $c = Card_Controller::factory( $args );
 ?>
 
-<<?php echo $c->get_tag(); ?> <?php echo $c->get_classes(); ?> <?php echo$c->get_attrs(); ?>>
+<<?php echo $c->get_tag(); ?> <?php echo $c->get_classes(); ?> <?php echo $c->get_attrs(); ?>>
 
 	<?php if ( ! empty( $c->render_image() ) ) { ?>
 		<div <?php echo $c->get_media_classes(); ?>>

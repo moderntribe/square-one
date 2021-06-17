@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Integrations\Google_Tag_Manager;
 
@@ -7,7 +7,7 @@ use Tribe\Project\Object_Meta\Analytics_Settings;
 class GTM_Scripts {
 
 	/**
-	 * @var Analytics_Settings
+	 * @var \Tribe\Project\Object_Meta\Analytics_Settings
 	 */
 	private $settings;
 
@@ -52,7 +52,7 @@ class GTM_Scripts {
 	/**
 	 * Google Tag Manager (body tag)
 	 *
-	 * @action tribe/body_opening_tag
+	 * @action wp_body_open
 	 */
 	public function inject_google_tag_manager_body_tag() {
 
@@ -72,4 +72,5 @@ class GTM_Scripts {
 
 		<?php
 	}
+
 }

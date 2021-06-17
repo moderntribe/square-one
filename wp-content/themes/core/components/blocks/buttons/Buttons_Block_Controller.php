@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\blocks\buttons;
 
@@ -9,6 +8,7 @@ use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\link\Link_Controller;
 
 class Buttons_Block_Controller extends Abstract_Controller {
+
 	public const CLASSES = 'classes';
 	public const ATTRS   = 'attrs';
 	public const BUTTONS = 'links';
@@ -44,7 +44,7 @@ class Buttons_Block_Controller extends Abstract_Controller {
 	 */
 	protected function required(): array {
 		return [
-			self::CLASSES  => [ 'b-buttons' ], // Note: This block does not use `c-block` intentionally.
+			self::CLASSES => [ 'b-buttons' ], // Note: This block does not use `c-block` intentionally.
 		];
 	}
 

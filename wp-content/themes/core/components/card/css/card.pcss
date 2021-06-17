@@ -73,6 +73,25 @@
 			}
 		}
 	}
+
+	/* CASE: Style: Search */
+	&.c-card--style-search {
+		padding-top: var(--spacer-30);
+		padding-bottom: var(--spacer-30);
+		border-top: 1px solid var(--color-neutral-10);
+
+		&:last-child {
+			border-bottom: 1px solid var(--color-neutral-10);
+		}
+
+		@media (--viewport-medium) {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			padding-top: var(--spacer-40);
+			padding-bottom: var(--spacer-40);
+		}
+	}
 }
 
 /* -----------------------------------------------------------------------------
@@ -100,6 +119,17 @@
 			margin-bottom: 0;
 		}
 	}
+
+	/* CASE: Style: Search */
+	.c-card--style-search & {
+		display: none;
+
+		@media (--viewport-medium) {
+			display: block;
+			width: var(--grid-2-col);
+			flex-shrink: 0;
+		}
+	}
 }
 
 /* -----------------------------------------------------------------------------
@@ -113,6 +143,19 @@
 	.c-card--style-elevated &,
 	.c-card--style-outlined & {
 		padding: 0 var(--spacer-30);
+	}
+
+	/* CASE: Style: Search */
+	.c-card--style-search & {
+		margin: 0;
+
+		@media (--viewport-medium) {
+			padding-right: var(--spacer-30);
+		}
+
+		@media (--viewport-full) {
+			padding-right: var(--spacer-50);
+		}
 	}
 }
 
@@ -147,6 +190,17 @@
 			text-decoration: underline;
 		}
 	}
+
+	/* CASE: Style: Search */
+	.c-card--style-search & {
+		@mixin t-display-xx-small;
+		margin-bottom: var(--spacer-10);
+
+		@media (--viewport-full) {
+			@mixin t-display-x-small;
+			margin-bottom: 0;
+		}
+	}
 }
 
 /* -----------------------------------------------------------------------------
@@ -165,10 +219,20 @@
 
 .c-card__description {
 	margin-top: var(--spacer-10);
+
+	/* CASE: Style: Search */
+	.c-card--style-search & {
+		margin-top: 0;
+		margin-bottom: var(--spacer-20);
+
+		@media (--viewport-medium) {
+			margin-bottom: var(--spacer-30);
+		}
+	}
 }
 
 /* -----------------------------------------------------------------------------
- * Card Call To Action
+ * Card Call To Action Container
  * ----------------------------------------------------------------------------- */
 
 .c-card__cta {
@@ -178,5 +242,28 @@
 	.c-card--style-elevated &,
 	.c-card--style-outlined & {
 		padding: 0 var(--spacer-30);
+	}
+
+	/* CASE: Style: Search */
+	.c-card--style-search & {
+		margin-top: 0;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Card Call To Action Link
+ * ----------------------------------------------------------------------------- */
+
+.c-card__cta-link {
+
+	/* CASE: Style: Search */
+	.c-card--style-search & {
+		word-break: break-all; /* Break long URLs */
+
+		&:focus,
+		&:hover,
+		.c-card--style-search:hover& { /* target a hover state on the parent card root element */
+			color: var(--color-primary);
+		}
 	}
 }

@@ -1,4 +1,7 @@
-<?php
+<?php declare(strict_types=1);
+
+namespace Tribe\Mu;
+
 /*
 Plugin Name:	Force Plugin Activation/Deactivation
 Plugin URI: 	http://danieldvork.in
@@ -11,14 +14,15 @@ Author URI: 	http://danieldvork.in
 class Force_Plugin_Activation {
 
 	/**
-	 * These plugins will always be active.
+	 * These plugins will always be forced active.
 	 *
 	 * Add elements as plugin path: directory/file.php
+	 *
+	 * @var string[]
 	 */
-	private $force_active = [
+	private array $force_active = [
 		'advanced-custom-fields-pro/acf.php',
 		'core/core.php',
-		//'tribe-admin-dashboard/tribe-admin-dashboard.php',
 		'disable-emojis/disable-emojis.php',
 		'acf-image-select/acf-image-select.php',
 		'tribe-acf-post-list-field/tribe-acf-post-list-field.php',
@@ -26,11 +30,13 @@ class Force_Plugin_Activation {
 
 	/**
 	 * These plugins will be deactivated and can't
-	 * be activated unless WP_DEBUG is true
+	 * be activated unless WP_DEBUG is true.
 	 *
 	 * Add elements as plugin path: directory/file.php
+	 *
+	 * @var string[]
 	 */
-	private $force_deactive = [
+	private array $force_deactivate = [
 		'debug-bar/debug-bar.php',
 		'debug-bar-action-hooks/debug-bar-action-hooks.php',
 		'debug-bar-console/debug-bar-console.php',
@@ -47,8 +53,10 @@ class Force_Plugin_Activation {
 	 * They will only show in the network admin.
 	 *
 	 * Add elements as plugin path: directory/file.php
+	 *
+	 * @var string[]
 	 */
-	private $force_network_only = [
+	private array $force_network_only = [
 		'advanced-custom-fields-pro/acf.php',
 		'debug-bar/debug-bar.php',
 		'debug-bar-action-hooks/debug-bar-action-hooks.php',
@@ -61,23 +69,29 @@ class Force_Plugin_Activation {
 		'wp-tota11y/wp-tota11y.php',
 	];
 
-
 	public function __construct() {
 
 		// Always block non-production sites from search engines and random visitors.
-		if ( ! defined( 'ENVIRONMENT' ) || ENVIRONMENT != 'PRODUCTION' ) {
+		if ( ! defined( 'WP_ENVIRONMENT_TYPE' ) || WP_ENVIRONMENT_TYPE !== 'production' ) {
 			$this->force_active[] = 'tribe-glomar/tribe-glomar.php';
 		}
-		// If you are about to refactor this, pay attention.
-		// The next *if* is not the same as an *else* on the previous one.
-		if ( defined( 'ENVIRONMENT' ) && ENVIRONMENT == 'PRODUCTION' ) {
-			$this->force_deactive[] = 'tribe-glomar/tribe-glomar.php';
-			$this->force_active[]   = 'limit-login-attempts/limit-login-attempts.php';
+
+		/**
+		 * If you are about to refactor this, pay attention.
+		 * The next *if* is not the same as an *else* on the previous one.
+		 *
+		 * Also, wp_get_environment_type defaults to 'production' if the constant is
+		 * not set, so we should always look for the explicit definition before doing
+		 * anything here.
+		 */
+		if ( defined( 'WP_ENVIRONMENT_TYPE' ) && WP_ENVIRONMENT_TYPE === 'production' ) {
+			$this->force_deactivate[] = 'tribe-glomar/tribe-glomar.php';
+			$this->force_active[]     = 'limit-login-attempts-reloaded/limit-login-attempts-reloaded.php';
 		}
 
 		// Specific config when unit tests are running
 		if ( defined( 'DIR_TESTDATA' ) && DIR_TESTDATA ) {
-			//$this->force_deactive[] = 'term-sorter/term-sorter.php';
+			//$this->force_deactivate[] = 'term-sorter/term-sorter.php';
 		}
 
 		add_filter( 'option_active_plugins', [ $this, 'force_plugins' ], 10, 1 );
@@ -116,7 +130,7 @@ class Force_Plugin_Activation {
 
 		// Remove our force-deactivated plugins unless WP_DEBUG is on. Forced removal when unit tests are running
 		if ( ( defined( 'DIR_TESTDATA' ) && DIR_TESTDATA ) || ! defined( 'WP_DEBUG' ) || ! WP_DEBUG ) {
-			$plugins = array_diff( (array) $plugins, $this->force_deactive );
+			$plugins = array_diff( (array) $plugins, $this->force_deactivate );
 		}
 
 		// Deduplicate
@@ -132,7 +146,7 @@ class Force_Plugin_Activation {
 
 	/**
 	 * Removes the activate/deactivate links from the plugins list
-	 * if they are in the force active or force deactive lists.
+	 * if they are in the force active or force deactivate lists.
 	 *
 	 * @param array  $actions
 	 * @param string $plugin_file
@@ -144,12 +158,12 @@ class Force_Plugin_Activation {
 	public function plugin_action_links( $actions, $plugin_file, $plugin_data, $context ) {
 
 		if ( in_array( $plugin_file, $this->force_active ) ) {
-			unset( $actions[ 'deactivate' ] );
+			unset( $actions['deactivate'] );
 		}
 
 		if ( ! defined( 'WP_DEBUG' ) || ! WP_DEBUG ) {
-			if ( in_array( $plugin_file, $this->force_deactive ) ) {
-				unset( $actions[ 'activate' ] );
+			if ( in_array( $plugin_file, $this->force_deactivate ) ) {
+				unset( $actions['activate'] );
 			}
 		}
 
@@ -178,9 +192,11 @@ class Force_Plugin_Activation {
 		}
 
 		foreach ( (array) $this->force_network_only as $slug ) {
-			if ( isset( $plugins[ $slug ] ) ) {
-				unset( $plugins[ $slug ] );
+			if ( ! isset( $plugins[ $slug ] ) ) {
+				continue;
 			}
+
+			unset( $plugins[ $slug ] );
 		}
 
 		return $plugins;

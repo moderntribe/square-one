@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Blocks;
 
@@ -10,15 +9,17 @@ use Tribe\Project\Theme\Config\Gradients;
 class Theme_Support {
 
 	/**
-	 * @var Colors
+	 * @var \Tribe\Project\Theme\Config\Colors
 	 */
 	private $colors;
+
 	/**
-	 * @var Gradients
+	 * @var \Tribe\Project\Theme\Config\Gradients
 	 */
 	private $gradients;
+
 	/**
-	 * @var Font_Sizes
+	 * @var \Tribe\Project\Theme\Config\Font_Sizes
 	 */
 	private $font_sizes;
 
@@ -30,6 +31,7 @@ class Theme_Support {
 
 	/**
 	 * @return void
+	 *
 	 * @action after_setup_theme
 	 */
 	public function register_theme_supports(): void {

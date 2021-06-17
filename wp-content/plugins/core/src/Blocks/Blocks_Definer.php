@@ -1,27 +1,27 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Blocks;
 
 use DI;
 use Tribe\Libs\Container\Definer_Interface;
+use Tribe\Project\Blocks\Types\Accordion\Accordion;
 use Tribe\Project\Blocks\Types\Buttons\Buttons;
 use Tribe\Project\Blocks\Types\Card_Grid\Card_Grid;
 use Tribe\Project\Blocks\Types\Content_Columns\Content_Columns;
 use Tribe\Project\Blocks\Types\Content_Loop\Content_Loop;
-use Tribe\Project\Blocks\Types\Interstitial\Interstitial;
-use Tribe\Project\Blocks\Types\Accordion\Accordion;
+use Tribe\Project\Blocks\Types\Gallery_Grid\Gallery_Grid;
+use Tribe\Project\Blocks\Types\Gallery_Slider\Gallery_Slider;
 use Tribe\Project\Blocks\Types\Hero\Hero;
 use Tribe\Project\Blocks\Types\Icon_Grid\Icon_Grid;
+use Tribe\Project\Blocks\Types\Interstitial\Interstitial;
 use Tribe\Project\Blocks\Types\Lead_Form\Lead_Form;
 use Tribe\Project\Blocks\Types\Links\Links;
 use Tribe\Project\Blocks\Types\Logos\Logos;
 use Tribe\Project\Blocks\Types\Media_Text\Media_Text;
 use Tribe\Project\Blocks\Types\Quote\Quote;
+use Tribe\Project\Blocks\Types\Spacer\Spacer;
 use Tribe\Project\Blocks\Types\Stats\Stats;
 use Tribe\Project\Blocks\Types\Tabs\Tabs;
-use Tribe\Project\Blocks\Types\Gallery_Grid\Gallery_Grid;
-use Tribe\Project\Blocks\Types\Gallery_Slider\Gallery_Slider;
 
 class Blocks_Definer implements Definer_Interface {
 
@@ -32,7 +32,7 @@ class Blocks_Definer implements Definer_Interface {
 
 	public function define(): array {
 		return [
-			self::TYPES => DI\add( [
+			self::TYPES           => DI\add( [
 				DI\get( Accordion::class ),
 				DI\get( Buttons::class ),
 				DI\get( Card_Grid::class ),
@@ -48,6 +48,7 @@ class Blocks_Definer implements Definer_Interface {
 				DI\get( Logos::class ),
 				DI\get( Media_Text::class ),
 				DI\get( Quote::class ),
+				DI\get( Spacer::class ),
 				DI\get( Stats::class ),
 				DI\get( Tabs::class ),
 			] ),
@@ -64,7 +65,7 @@ class Blocks_Definer implements Definer_Interface {
 			 *
 			 * Includes any 3rd-party block supported by this project, such as Gravity Forms.
 			 */
-			self::ALLOW_LIST => [
+			self::ALLOW_LIST      => [
 				'acf/accordion',
 				'acf/buttons',
 				'acf/cardgrid',
@@ -80,6 +81,7 @@ class Blocks_Definer implements Definer_Interface {
 				'acf/logos',
 				'acf/mediatext',
 				'acf/quote',
+				'acf/spacer',
 				'acf/stats',
 				'acf/tabs',
 				'core-embed/facebook',
@@ -121,7 +123,7 @@ class Blocks_Definer implements Definer_Interface {
 			 *
 			 * TODO: Create a proper thumbnail of the style for the block editor: http://p.tri.be/dmsAwK
 			 */
-			self::STYLES     => DI\add( [
+			self::STYLES          => DI\add( [
 				DI\factory( static function () {
 					return new Block_Style_Override( [ 'core/paragraph' ], [
 						[
@@ -147,4 +149,5 @@ class Blocks_Definer implements Definer_Interface {
 			Allowed_Blocks::class => DI\create()->constructor( DI\get( self::ALLOW_LIST ) ),
 		];
 	}
+
 }

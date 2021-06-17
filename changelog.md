@@ -2,7 +2,47 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2021.06
+* Added: Styles and additional functionality to the search template.
+* Fixed: PHPCS workflow from not running when set as "Require status checks to pass before merging" if no files changed;
+preventing a PR from being able to be merged. 
+
+## 2021.05
+* Fixed: broken main README.md links
+* Removed: husky hooks.
+* Added: lefthook git-hooks (see lefthook.yml and .lefthook folder) to replace husky hooks: https://github.com/evilmartians/lefthook
+* Added: run phpcs checks on commit via lefthook. 
+* Added: prefix commit messages with the Jira ticket from the branch.  
+* Updated: Move phpcs to https://github.com/moderntribe/coding-standards
+* Removed: Broken Gallery shortcode/subscriber.
+* Removed: phpcs.xml, this should be git ignored.
+* Added: phpcs.xml.dist with new coding standards (mostly formatting based for now).
+* Updated: Updated all relevant PHP files for phpcs.
+* Updated: .editorconfig to better match new phpcs formatting.  
+* Removed: mercator mu plugin https://github.com/humanmade/Mercator as multisite domain mapping has been in core for some time.
+* Updated: workflows/phpcs.yml to use the new coding standard in GitHub workflows  
+* Fixed: Multiple blocks keywords not using `__()` properly.
+* Added: documentation to get PHPCS configured in VS Code.
+* Updated: use the WP_ENVIRONMENT_TYPE constant added in Core v5.5.
+* Added: enabled the legacy markup for Gravity Forms 2.5 by default (until we can update our theme framework).
+* Fixed: small issue with webpack publicPath's being off.
+* Fixed: removed unnecessary Sage SVG plugin from composer.
+* Fixed: updated the Limit Login Attempts path for force-activated plugins.
+* Updated: Increase the width of the block sidebar
+* Updated: Spruce up the Repeater field, especially when used in ACF Block Sidebars
+* Updated: Spruce up the Image Field
+* Added: a utility class of ‘tribe-acf-hide-label’ to hide field labels in cases where they are unnecessary/exterraneous
+* Added: a utility class of ‘tribe-acf-instructions’’. Apply to a Message field if you need ‘spoof’ ad-hoc instructional content.
+* Fixed: Converts the button block to now use the button_group acf field time.
+
 ## 2021.04
+* Updated: refreshed local-config-sample.php to have a more thorough set of constants you may need, especially now that we have a Local environment option.
+* Updated: newer version of spin.js requires some css, added that.
+* Updated: set a default set of theme image paths for postcss-inline-svg
+* Updated: disabled cssnano discarding "unused" keyframes. It was borking the spin.js css.
+* Updated: remove the tribe/body_opening_tag action in favor of wp_body_open and updated our GTM implementation to use it.
+* Fixed: body-lock.js needed an update to work correctly for safari/ios.
+* Updated: added a isLocked check for body-lock.js, it's handy.
 * Updated: docker php-ini-overrides.ini to use xdebug v3 configuration for latest docker builds.
 
 ## 2021.03

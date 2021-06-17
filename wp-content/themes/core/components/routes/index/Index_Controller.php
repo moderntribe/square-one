@@ -1,11 +1,10 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\routes\index;
 
 use Tribe\Project\Templates\Components\Abstract_Controller;
-use Tribe\Project\Templates\Components\sidebar\Sidebar_Controller;
 use Tribe\Project\Templates\Components\breadcrumbs\Breadcrumbs_Controller;
+use Tribe\Project\Templates\Components\sidebar\Sidebar_Controller;
 use Tribe\Project\Templates\Models\Breadcrumb;
 
 class Index_Controller extends Abstract_Controller {
@@ -13,7 +12,7 @@ class Index_Controller extends Abstract_Controller {
 	/**
 	 * @var int|string
 	 */
-	private $sidebar_id = '';
+	protected $sidebar_id = '';
 
 	/**
 	 * Render the header component
@@ -69,7 +68,7 @@ class Index_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return Breadcrumb[]
+	 * @return \Tribe\Project\Templates\Models\Breadcrumb[]
 	 */
 	protected function get_breadcrumbs(): array {
 		$page = get_option( 'page_for_posts' );
@@ -79,4 +78,5 @@ class Index_Controller extends Abstract_Controller {
 			new Breadcrumb( $url, __( 'News', 'tribe' ) ),
 		];
 	}
+
 }

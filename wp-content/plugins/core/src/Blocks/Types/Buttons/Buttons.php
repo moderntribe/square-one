@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Blocks\Types\Buttons;
 
@@ -9,6 +8,7 @@ use Tribe\Libs\ACF\Field;
 use Tribe\Libs\ACF\Repeater;
 
 class Buttons extends Block_Config {
+
 	public const NAME = 'buttons';
 
 	public const BUTTONS           = 'buttons';
@@ -72,7 +72,7 @@ class Buttons extends Block_Config {
 	}
 
 	/**
-	 * @return Repeater
+	 * @return \Tribe\Libs\ACF\Repeater
 	 */
 	protected function get_links_section() {
 		$group = new Repeater( self::NAME . '_' . self::BUTTONS );
@@ -95,21 +95,19 @@ class Buttons extends Block_Config {
 		$group->add_field( $link );
 
 		$button_style = new Field( self::NAME . '_' . self::BUTTON_STYLE, [
-			'type'            => 'image_select',
-			'name'            => self::BUTTON_STYLE,
-			'choices'         => [
-				self::STYLE_PRIMARY   => __( 'Primary', 'tribe' ),
-				self::STYLE_SECONDARY => __( 'Secondary', 'tribe' ),
-				self::STYLE_CTA       => __( 'Text CTA', 'tribe' ),
+			'allow_null'    => 0,
+			'choices'       => [
+				self:: STYLE_PRIMARY   => __( 'Primary', 'tribe' ),
+				self:: STYLE_SECONDARY => __( 'Secondary', 'tribe' ),
+				self:: STYLE_CTA       => __( 'Text CTA', 'tribe' ),
 			],
-			'default_value'   => self::STYLE_PRIMARY,
-			'multiple'        => 0,
-			'image_path'      => sprintf(
-				'%sassets/img/admin/blocks/%s/',
-				trailingslashit( get_template_directory_uri() ),
-				self::NAME
-			),
-			'image_extension' => 'svg',
+			'default_value' => self::STYLE_PRIMARY,
+			'label'         => __( 'Style', 'tribe' ),
+			'layout'        => 'vertical',
+			'name'          => self::BUTTON_STYLE,
+			'return_format' => 'value',
+			'required'      => 0,
+			'type'          => 'button_group',
 		] );
 
 		$group->add_field( $button_style );

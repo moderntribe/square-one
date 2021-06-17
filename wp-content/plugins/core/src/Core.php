@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Tribe\Project;
 
@@ -16,13 +16,16 @@ use Tribe\Project\Nav_Menus\Nav_Menus_Subscriber;
 use Tribe\Project\Object_Meta\Object_Meta_Definer;
 use Tribe\Project\P2P\P2P_Definer;
 use Tribe\Project\Post_Types;
+use Tribe\Project\Query\Query_Subscriber;
+use Tribe\Project\Routes\Routes_Definer;
+use Tribe\Project\Routes\Routes_Subscriber;
 use Tribe\Project\Settings\Settings_Definer;
-use Tribe\Project\Shortcodes\Shortcodes_Subscriber;
 use Tribe\Project\Taxonomies;
 use Tribe\Project\Theme\Theme_Definer;
 use Tribe\Project\Theme\Theme_Subscriber;
 
 class Core {
+
 	public const PLUGIN_FILE = 'plugin.file';
 
 	/**
@@ -31,7 +34,7 @@ class Core {
 	private static $instance;
 
 	/**
-	 * @var ContainerInterface
+	 * @var \Psr\Container\ContainerInterface
 	 */
 	private $container;
 
@@ -43,6 +46,7 @@ class Core {
 		Nav_Menus_Definer::class,
 		Object_Meta_Definer::class,
 		P2P_Definer::class,
+		Routes_Definer::class,
 		Settings_Definer::class,
 		Theme_Definer::class,
 	];
@@ -58,14 +62,15 @@ class Core {
 		Google_Tag_Manager_Subscriber::class,
 		Gravity_Forms_Subscriber::class,
 		Nav_Menus_Subscriber::class,
-		Shortcodes_Subscriber::class,
+		Query_Subscriber::class,
+		Routes_Subscriber::class,
 		Theme_Subscriber::class,
 		Yoast_SEO_Subscriber::class,
 
-		// our post types
+		// Custom Post Types.
 		Post_Types\Sample\Subscriber::class,
 
-		// our taxonomies
+		// Custom Taxonomies.
 		Taxonomies\Example\Subscriber::class,
 	];
 
@@ -100,11 +105,11 @@ class Core {
 		'\Tribe\Libs\P2P\P2P_Subscriber',
 		'\Tribe\Libs\Queues\Queues_Subscriber',
 		'\Tribe\Libs\Queues_Mysql\Mysql_Backend_Subscriber',
+		'\Tribe\Libs\Routes\Route_Subscriber',
 		'\Tribe\Libs\Required_Page\Required_Page_Subscriber',
 		'\Tribe\Libs\Settings\Settings_Subscriber',
 		'\Tribe\Libs\Whoops\Whoops_Subscriber',
 	];
-
 
 	public function init( string $plugin_path ) {
 		$this->init_container( $plugin_path );
@@ -134,7 +139,7 @@ class Core {
 		$builder->useAutowiring( true );
 		$builder->useAnnotations( false );
 		$builder->addDefinitions( [ self::PLUGIN_FILE => $plugin_path ] );
-		$builder->addDefinitions( ... array_map( function ( $classname ) {
+		$builder->addDefinitions( ... array_map( static function ( $classname ) {
 			return ( new $classname() )->define();
 		}, $definers ) );
 

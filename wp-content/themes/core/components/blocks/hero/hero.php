@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 use Tribe\Project\Templates\Components\blocks\hero\Hero_Block_Controller;
 
@@ -28,7 +27,7 @@ $c = Hero_Block_Controller::factory( $args );
 				'components/content_block/content_block',
 				null,
 				$c->get_content_args()
-			) ?>
+			); ?>
 		</div>
 	</div>
 </section>

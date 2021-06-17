@@ -1,14 +1,15 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Blocks\Types\Tabs;
 
+use Tribe\Project\Blocks\Fields\Cta_Field;
 use Tribe\Project\Blocks\Types\Base_Model;
-use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Templates\Components\blocks\tabs\Tabs_Block_Controller;
+use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Templates\Models\Tab as Tab_Model;
 
 class Tabs_Model extends Base_Model {
+
 	/**
 	 * @return array
 	 */
@@ -29,16 +30,19 @@ class Tabs_Model extends Base_Model {
 	 * @return array
 	 */
 	private function get_cta_args(): array {
-		$cta = wp_parse_args( $this->get( Tabs::CTA, [] ), [
+		$cta  = $this->get( Cta_Field::GROUP_CTA, [] );
+		$link = wp_parse_args( $cta['link'] ?? [], [
 			'title'  => '',
 			'url'    => '',
 			'target' => '',
 		] );
 
 		return [
-			Link_Controller::CONTENT => $cta[ 'title' ],
-			Link_Controller::URL     => $cta[ 'url' ],
-			Link_Controller::TARGET  => $cta[ 'target' ],
+			Link_Controller::CONTENT        => $link['title'],
+			Link_Controller::URL            => $link['url'],
+			Link_Controller::TARGET         => $link['target'],
+			Link_Controller::ADD_ARIA_LABEL => $cta['add_aria_label'] ?? false,
+			Link_Controller::ARIA_LABEL     => $cta['aria_label'] ?? '',
 		];
 	}
 
@@ -59,4 +63,5 @@ class Tabs_Model extends Base_Model {
 
 		return $tab_objects;
 	}
+
 }

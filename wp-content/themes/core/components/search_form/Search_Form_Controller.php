@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\search_form;
 
@@ -8,17 +7,20 @@ use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\button\Button_Controller;
 
 class Search_Form_Controller extends Abstract_Controller {
+
 	public const CLASSES     = 'classes';
 	public const FORM_ID     = 'form_id';
 	public const ACTION      = 'action';
 	public const PLACEHOLDER = 'placeholder';
 	public const LABEL       = 'label';
+	public const VALUE       = 'value';
 
-	private array  $classes;
+	private array $classes;
 	private string $form_id;
 	private string $action;
 	private string $placeholder;
 	private string $label;
+	private string $value;
 
 	public function __construct( $args ) {
 		$args = $this->parse_args( $args );
@@ -28,6 +30,7 @@ class Search_Form_Controller extends Abstract_Controller {
 		$this->action      = (string) $args[ self::ACTION ];
 		$this->placeholder = (string) $args[ self::PLACEHOLDER ];
 		$this->label       = (string) $args[ self::LABEL ];
+		$this->value       = (string) $args[ self::VALUE ];
 	}
 
 	protected function defaults(): array {
@@ -37,6 +40,7 @@ class Search_Form_Controller extends Abstract_Controller {
 			self::ACTION      => get_home_url(),
 			self::PLACEHOLDER => '',
 			self::LABEL       => esc_html__( 'Search', 'tribe' ),
+			self::VALUE       => '',
 		];
 	}
 
@@ -62,16 +66,30 @@ class Search_Form_Controller extends Abstract_Controller {
 		return esc_attr__( $this->placeholder );
 	}
 
+	public function get_search_value(): string {
+		return $this->value;
+	}
+
 	public function get_label(): string {
 		return esc_html( $this->label );
 	}
 
-	public function get_button_args(): array {
+	public function get_clear_button_args(): array {
 		return [
-			Button_Controller::CLASSES    => [ 'c-button' ],
-			Button_Controller::ATTRS      => [ 'name'  => 'submit' ],
-			Button_Controller::TYPE       => 'submit',
-			Button_Controller::CONTENT    => esc_html__( 'Search', 'tribe' ),
+			Button_Controller::CLASSES => [ 'c-search__clear-button' ],
+			Button_Controller::ATTRS   => [ 'name'  => 'reset', 'data-js' => 'search-form-clear'],
+			Button_Controller::TYPE    => 'reset',
+			Button_Controller::CONTENT => '<span>' . esc_html__( 'Clear', 'tribe' ) . '</span>',
 		];
 	}
+
+	public function get_submit_button_args(): array {
+		return [
+			Button_Controller::CLASSES => [ 'c-search__submit-button' ],
+			Button_Controller::ATTRS   => [ 'name' => 'submit' ],
+			Button_Controller::TYPE    => 'submit',
+			Button_Controller::CONTENT => '<span>' . esc_html__( 'Search', 'tribe' ) . '</span>',
+		];
+	}
+
 }

@@ -1,28 +1,32 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Blocks\Types\Hero;
 
 use Tribe\Libs\ACF\Block;
 use Tribe\Libs\ACF\Block_Config;
-use Tribe\Libs\ACF\Field_Section;
 use Tribe\Libs\ACF\Field;
+use Tribe\Libs\ACF\Field_Section;
+use Tribe\Project\Admin\Editor\Classic_Editor_Formats;
+use Tribe\Project\Blocks\Fields\Cta_Field;
+use Tribe\Project\Blocks\Fields\Traits\With_Cta_Field;
 
-class Hero extends Block_Config {
+class Hero extends Block_Config implements Cta_Field {
+
+	use With_Cta_Field;
+
 	public const NAME = 'hero';
-
-	public const SECTION_CONTENT = 's-content';
-	public const IMAGE           = 'image';
 
 	public const LEAD_IN     = 'leadin';
 	public const TITLE       = 'title';
 	public const DESCRIPTION = 'description';
-	public const CTA         = 'cta';
 
-	public const SECTION_SETTINGS = 's-settings';
-	public const LAYOUT           = 'layout';
-	public const LAYOUT_LEFT      = 'left';
-	public const LAYOUT_CENTER    = 'center';
+	public const SECTION_BACKGROUND = 's-background';
+	public const IMAGE              = 'image';
+
+	public const SECTION_APPEARANCE = 's-appearance';
+	public const LAYOUT             = 'layout';
+	public const LAYOUT_LEFT        = 'left';
+	public const LAYOUT_CENTER      = 'center';
 
 	/**
 	 * Register the block
@@ -48,10 +52,12 @@ class Hero extends Block_Config {
 							'Cras ut ornare dui, sed venenatis est. Donec euismod in leo quis consequat.',
 							'tribe'
 						),
-						self::CTA         => [
-							'title'  => esc_html__( 'Lorem ipsum', 'tribe' ),
-							'url'    => '#',
-							'target' => '',
+						self::GROUP_CTA   => [
+							self::LINK => [
+								'title'  => esc_html__( 'Lorem ipsum', 'tribe' ),
+								'url'    => '#',
+								'target' => '',
+							],
 						],
 						//Images are output as IDs so it's sort of hard to get an image value for preview
 						self::IMAGE       => 0,
@@ -65,59 +71,55 @@ class Hero extends Block_Config {
 	 * Register Fields for block
 	 */
 	public function add_fields() {
-		//==========================================
-		// Content Fields
-		//==========================================
-		$this->add_section( new Field_Section( self::SECTION_CONTENT, __( 'Content', 'tribe' ), 'accordion' ) )
-			 ->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
-					 'label' => __( 'Lead in', 'tribe' ),
-					 'name'  => self::LEAD_IN,
-					 'type'  => 'text',
+		$this->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
+				'label'       => __( 'Lead in', 'tribe' ),
+				'name'        => self::LEAD_IN,
+				'type'        => 'text',
+				'placeholder' => __( 'Lead in (optional)', 'tribe' ),
+				'wrapper'     => [
+					'class' => 'tribe-acf-hide-label',
+				],
+			] )
+		)->add_field( new Field( self::NAME . '_' . self::TITLE, [
+				'label' => __( 'Title', 'tribe' ),
+				'name'  => self::TITLE,
+				'type'  => 'text',
+			] )
+		)->add_field( new Field( self::NAME . '_' . self::DESCRIPTION, [
+				'label'        => __( 'Description', 'tribe' ),
+				'name'         => self::DESCRIPTION,
+				'type'         => 'wysiwyg',
+				'toolbar'      => Classic_Editor_Formats::MINIMAL,
+				'tabs'         => 'visual',
+				'media_upload' => 0,
+			] )
+		)->add_field(
+			$this->get_cta_field( self::NAME )
+		);
+
+		$this->add_section( new Field_Section( self::SECTION_BACKGROUND, __( 'Background', 'tribe' ), 'accordion' ) )
+			 ->add_field( new Field( self::NAME . '_' . self::IMAGE, [
+					 'label'         => __( 'Image', 'tribe' ),
+					 'name'          => self::IMAGE,
+					 'type'          => 'image',
+					 'return_format' => 'id',
+					 'instructions'  => __( 'Landscape orientation recommended. Minimum 1700px wide.', 'tribe' ),
+					 'wrapper'       => [
+						 'class' => 'tribe-acf-hide-label',
+					 ],
 				 ] )
-			 )->add_field( new Field( self::NAME . '_' . self::TITLE, [
-					'label' => __( 'Title', 'tribe' ),
-					'name'  => self::TITLE,
-					'type'  => 'text',
-				] )
-			)->add_field( new Field( self::NAME . '_' . self::DESCRIPTION, [
-					'label'        => __( 'Description', 'tribe' ),
-					'name'         => self::DESCRIPTION,
-					'type'         => 'wysiwyg',
-					'toolbar'      => 'basic',
-					'media_upload' => 0,
-				] )
-			)->add_field( new Field( self::NAME . '_' . self::CTA, [
-					'label' => __( 'Call to Action', 'tribe' ),
-					'name'  => self::CTA,
-					'type'  => 'link',
-				] )
-			)->add_field( new Field( self::NAME . '_' . self::IMAGE, [
-					'label'         => __( 'Image', 'tribe' ),
-					'name'          => self::IMAGE,
-					'type'          => 'image',
-					'return_format' => 'id',
-					'instructions'  => __( 'Recommended image size: 1440px wide and 720px high', 'tribe' ),
-				] )
-			);
-		//==========================================
-		// Setting Fields
-		//==========================================
-		$this->add_section( new Field_Section( self::SECTION_SETTINGS, __( 'Settings', 'tribe' ), 'accordion' ) )
+			 );
+
+		$this->add_section( new Field_Section( self::SECTION_APPEARANCE, __( 'Appearance', 'tribe' ), 'accordion' ) )
 			 ->add_field( new Field( self::NAME . '_' . self::LAYOUT, [
-				 'type'            => 'image_select',
-				 'name'            => self::LAYOUT,
-				 'choices'         => [
-					 self::LAYOUT_LEFT   => __( 'Align Left', 'tribe' ),
-					 self::LAYOUT_CENTER => __( 'Align Center', 'tribe' ),
+				 'label'         => __( 'Text Alignment', 'tribe' ),
+				 'type'          => 'button_group',
+				 'name'          => self::LAYOUT,
+				 'choices'       => [
+					 self::LAYOUT_LEFT   => __( 'Left', 'tribe' ),
+					 self::LAYOUT_CENTER => __( 'Center', 'tribe' ),
 				 ],
-				 'default_value'   => self::LAYOUT_CENTER,
-				 'multiple'        => 0,
-				 'image_path'      => sprintf(
-					 '%sassets/img/admin/blocks/%s/',
-					 trailingslashit( get_template_directory_uri() ),
-					 self::NAME
-				 ),
-				 'image_extension' => 'svg',
+				 'default_value' => self::LAYOUT_CENTER,
 			 ] ) );
 	}
 

@@ -1,6 +1,7 @@
 # OS generated files #
 ######################
 
+
 .DS_Store*
 ehthumbs.db
 ._*
@@ -115,6 +116,7 @@ wp-content/plugins/airplane-mode
 **/__coverage__/
 dev/deploy/.deploy
 wp-content/themes/core/reports
+/reports
 
 # DevOps #
 #######################
@@ -132,3 +134,9 @@ dev/docker/global/.env
 #######################
 !dev/tests/tests/_data/*.sql
 dev/tests/tests/_support/_generated/
+
+# Code Quality #
+###############
+phpcs.xml
+.phpcs-cache
+
