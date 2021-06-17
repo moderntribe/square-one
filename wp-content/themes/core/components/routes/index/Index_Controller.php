@@ -3,9 +3,7 @@
 namespace Tribe\Project\Templates\Components\routes\index;
 
 use Tribe\Project\Templates\Components\Abstract_Controller;
-use Tribe\Project\Templates\Components\breadcrumbs\Breadcrumbs_Controller;
 use Tribe\Project\Templates\Components\sidebar\Sidebar_Controller;
-use Tribe\Project\Templates\Models\Breadcrumb;
 
 class Index_Controller extends Abstract_Controller {
 
@@ -57,4 +55,5 @@ class Index_Controller extends Abstract_Controller {
 		do_action( 'get_footer', null );
 		get_template_part( 'components/document/footer/footer', 'index' );
 	}
+
 }

@@ -1,4 +1,5 @@
 <?php declare(strict_types=1);
+
 /**
  * Base class for other controllers to extend.
  *
@@ -7,9 +8,8 @@
 
 namespace Tribe\Project\Templates\Components;
 
-use Tribe\Project\Templates\Components\breadcrumbs\Breadcrumbs_Controller;
 use Tribe\Project\Templates\Models\Breadcrumb;
-use Tribe\Project\Post_Types\Page\Page;
+use Tribe\Project\Templates\Components\breadcrumbs\Breadcrumbs_Controller;
 
 /**
  * Class for other controllers to extend.
@@ -106,6 +106,7 @@ abstract class Abstract_Controller {
 	 * Returns singular breadcrumbs.
 	 *
 	 * @param array $breadcrumbs Current breadcrumbs.
+	 *
 	 * @return array             Modified breadcrumbs.
 	 */
 	protected function get_singular_breadcrumbs( array $breadcrumbs = [] ): array {
@@ -126,6 +127,7 @@ abstract class Abstract_Controller {
 	 * Returns taxonomy archive breadcrumbs.
 	 *
 	 * @param array $breadcrumbs Current breadcrumbs.
+	 *
 	 * @return array             Modified breadcrumbs.
 	 */
 	protected function get_taxonomy_archive_breadcrumbs( array $breadcrumbs = [] ): array {
@@ -145,11 +147,7 @@ abstract class Abstract_Controller {
 		// Loop through term ancestors to build breadcrumbs.
 		if ( ! empty( $ancestors ) ) {
 			foreach ( array_reverse( $ancestors ) as $ancestor ) {
-				$term = get_term_by(
-					'id',
-					$ancestor,
-					$wp_query->queried_object->taxonomy
-				);
+				$term = get_term_by( 'id', $ancestor, $wp_query->queried_object->taxonomy );
 
 				// Skip if not a valid term.
 				if ( ! ( $term instanceof \WP_Term ) ) {
@@ -164,4 +162,5 @@ abstract class Abstract_Controller {
 
 		return $breadcrumbs;
 	}
+
 }
