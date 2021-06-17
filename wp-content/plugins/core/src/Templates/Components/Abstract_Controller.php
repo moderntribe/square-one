@@ -8,8 +8,8 @@
 
 namespace Tribe\Project\Templates\Components;
 
-use Tribe\Project\Templates\Models\Breadcrumb;
 use Tribe\Project\Templates\Components\breadcrumbs\Breadcrumbs_Controller;
+use Tribe\Project\Templates\Models\Breadcrumb;
 
 /**
  * Class for other controllers to extend.
