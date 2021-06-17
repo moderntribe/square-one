@@ -18,11 +18,19 @@ $c = Breadcrumbs_Controller::factory( $args );
 
 		<?php foreach ( $c->get_items() as $item ) : ?>
 			<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem" <?php echo $c->get_item_classes(); ?> <?php echo $c->get_item_attrs(); ?>>
-				<a itemscope itemtype="http://schema.org/Thing" itemprop="item" href="<?php echo esc_url( $item->url ); ?>" <?php echo $c->get_link_classes(); ?> <?php echo $c->get_link_attrs(); ?>>
-					<span itemprop="name">
-						<?php echo esc_html( $item->label ); ?>
+				<?php if ( ! empty( $item->url ) ) : ?>
+					<a itemscope itemtype="http://schema.org/Thing" itemprop="item" href="<?php echo esc_url( $item->url ); ?>" <?php echo $c->get_link_classes(); ?> <?php echo $c->get_link_attrs(); ?>>
+						<span itemprop="name">
+							<?php echo esc_html( $item->label ); ?>
+						</span>
+					</a>
+				<?php else : ?>
+					<span itemscope itemtype="http://schema.org/Thing" itemprop="item">
+						<span itemprop="name">
+							<?php echo esc_html( $item->label ); ?>
+						</span>
 					</span>
-				</a>
+				<?php endif; ?>
 			</li>
 		<?php endforeach; ?>
 

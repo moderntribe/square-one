@@ -160,7 +160,7 @@ abstract class Abstract_Controller {
 			}
 		}
 
-		$breadcrumbs[] = new Breadcrumb( get_term_link( $wp_query->queried_object->term_id, $wp_query->queried_object->taxonomy ), single_term_title( '', false ) );
+		$breadcrumbs[] = new Breadcrumb( '', single_term_title( '', false ) );
 
 		return $breadcrumbs;
 	}
