@@ -27,8 +27,8 @@ class Config extends Taxonomy_Config {
 			'exclusive'    => true,
 			'meta_box'     => 'radio',
 			'show_in_menu' => false,
-			'show_ui' => true,
-			'public' => false
+			'show_ui'      => true,
+			'public'       => false,
 		];
 	}
 
