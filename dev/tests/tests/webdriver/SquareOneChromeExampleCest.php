@@ -1,8 +1,5 @@
 <?php
 
-use Page\Webdriver\Home_Page_Example;
-use Page\Webdriver\Search_Page_Example;
-
 class SquareOneChromeExampleCest extends Base_Webdriver_Cest {
 
 	public function i_can_set_the_site_title_in_the_customizer( WebDriverTester $I ) {
@@ -22,11 +19,10 @@ class SquareOneChromeExampleCest extends Base_Webdriver_Cest {
 		$I->assertEquals( $site_title, $I->grabOptionFromDatabase( 'blogname' ) );
 	}
 
-	public function i_can_search_on_homepage( WebDriverTester $I, Home_Page_Example $home_page, Search_Page_Example $search_page ) {
-		$search_query = 'FooBarBaz';
-
-		$I->amOnPage( Home_Page_Example::$URL );
-		$home_page->search( $search_query );
-		$search_page->see_search_query( $search_query );
+	public function i_can_view_the_search_results_page_with_no_results( WebDriverTester $I ) {
+		$I->amOnPage( '/search/missing%20term' );
+		$I->seeElement( '.c-search--full' );
+		$I->seeInField( '.c-search__input', 'missing term' );
+		$I->seeInSource( 'returned 0 results' );
 	}
 }
