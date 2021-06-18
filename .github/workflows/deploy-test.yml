@@ -3,7 +3,7 @@ name: Deploy Test
 on:
   pull_request:
     branches:
-      - server/test
+      - sprint/**
     types: [ opened, reopened, closed, synchronize ]
   push:
     branches:
@@ -36,7 +36,7 @@ jobs:
         env:
           INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
         with:
-          text: ":green_check: Successful Test App Deployment"
+          text: ":green_check: PR${{ github.event.pull_request.number }} Test App Deployment Successful "
           attachments: |
             [
               {
@@ -48,7 +48,7 @@ jobs:
                   },
                   {
                     "title": "GitHub Actions URL",
-                    "value": "${{ github.event.repository.url }}/actions/runs/${{ github.run_id }}"
+                    "value": "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
                   }
                 ]
               }
@@ -60,7 +60,7 @@ jobs:
         env:
           INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
         with:
-          text: ":x: Failed Test App Deployment"
+          text: ":x: PR${{ github.event.pull_request.number }} Test App Deployment Failed"
           attachments: |
             [
               {
@@ -72,7 +72,7 @@ jobs:
                   },
                   {
                     "title": "GitHub Actions URL",
-                    "value": "${{ github.event.repository.url }}/actions/runs/${{ github.run_id }}"
+                    "value": "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
                   }
                 ]
               }
@@ -157,7 +157,7 @@ jobs:
         env:
           INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
         with:
-          text: ":green_check: Successful Test App Deployment"
+          text: ":green_check: PR${{ github.event.pull_request.number }} Test App Deployment Successful"
           attachments: |
             [
               {
@@ -169,7 +169,7 @@ jobs:
                   },
                   {
                     "title": "GitHub Actions URL",
-                    "value": "${{ github.event.repository.url }}/actions/runs/${{ github.run_id }}"
+                    "value": "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
                   }
                 ]
               }
@@ -181,7 +181,7 @@ jobs:
         env:
           INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
         with:
-          text: ":x: Failed Test App Deployment"
+          text: ":x: PR${{ github.event.pull_request.number }} Test App Deployment Failed"
           attachments: |
             [
               {
@@ -193,7 +193,7 @@ jobs:
                   },
                   {
                     "title": "GitHub Actions URL",
-                    "value": "${{ github.event.repository.url }}/actions/runs/${{ github.run_id }}"
+                    "value": "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
                   }
                 ]
               }
@@ -225,7 +225,7 @@ jobs:
         env:
           INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
         with:
-          text: ":green_check: Successful Test App Update Deployment"
+          text: ":green_check: PR${{ github.event.pull_request.number }} Test App Update Successful"
           attachments: |
             [
               {
@@ -237,7 +237,7 @@ jobs:
                   },
                   {
                     "title": "GitHub Actions URL",
-                    "value": "${{ github.event.repository.url }}/actions/runs/${{ github.run_id }}"
+                    "value": "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
                   }
                 ]
               }
@@ -249,7 +249,7 @@ jobs:
         env:
           INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
         with:
-          text: ":x: Failed Test App Update Deployment"
+          text: ":x: PR${{ github.event.pull_request.number }} Test App Update Failed"
           attachments: |
             [
               {
@@ -261,7 +261,7 @@ jobs:
                   },
                   {
                     "title": "GitHub Actions URL",
-                    "value": "${{ github.event.repository.url }}/actions/runs/${{ github.run_id }}"
+                    "value": "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
                   }
                 ]
               }
@@ -298,7 +298,7 @@ jobs:
         env:
           INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
         with:
-          text: ":green_check: Successfully Destroyed Test App"
+          text: ":boom: PR${{ github.event.pull_request.number }} Test App Destruction Successful"
           attachments: |
             [
               {
@@ -310,7 +310,7 @@ jobs:
                   },
                   {
                     "title": "GitHub Actions URL",
-                    "value": "${{ github.event.repository.url }}/actions/runs/${{ github.run_id }}"
+                    "value": "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
                   }
                 ]
               }
@@ -322,7 +322,7 @@ jobs:
         env:
           INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
         with:
-          text: ":x: Failed to Destroy Test App"
+          text: ":x: PR${{ github.event.pull_request.number }} Test App Destruction Failed"
           attachments: |
             [
               {
@@ -334,7 +334,7 @@ jobs:
                   },
                   {
                     "title": "GitHub Actions URL",
-                    "value": "${{ github.event.repository.url }}/actions/runs/${{ github.run_id }}"
+                    "value": "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
                   }
                 ]
               }
