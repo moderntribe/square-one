@@ -75,7 +75,7 @@ class Pagination_Util {
 		sort( $links );
 		foreach ( $links as $link ) {
 			$active   = $paged == $link;
-			$values[] = $this->get_link_array( get_pagenum_link( $link ), $link, [], $active );
+			$values[] = $this->get_link_array( get_pagenum_link( $link ), (string) $link, [], $active );
 		}
 
 		// If we're showing ellipses, add them here as long as they're necessary.
