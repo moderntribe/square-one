@@ -7,6 +7,7 @@ use Tribe\Project\Templates\Components\content_block\Content_Block_Controller;
  */
 // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
 $c = Content_Block_Controller::factory( $args );
+//TODO: Rename this. Block? What block?
 ?>
 
 <<?php echo $c->get_tag(); ?>

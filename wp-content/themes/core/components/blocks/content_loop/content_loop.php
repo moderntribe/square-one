@@ -6,7 +6,6 @@ use Tribe\Project\Templates\Components\card\Card_Controller;
 /**
  * @var array $args Arguments passed to the template
  */
-// phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
 $c = \Tribe\Project\Templates\Components\blocks\content_loop\Content_Loop_Controller::factory( $args );
 ?>
 
@@ -23,11 +22,10 @@ $c = \Tribe\Project\Templates\Components\blocks\content_loop\Content_Loop_Contro
 
 			<?php if ( $c->get_layout() === Content_Loop::LAYOUT_FEATURE ) : ?>
 				<!-- Feature Layout -->
-
 				<div class="b-content-loop__featured">
 					<?php foreach ( $c->get_posts_card_args() as $index => $card_args ) { ?>
 						<?php if ( $index === 0 ) : ?>
-							<?php get_template_part( 'components/card/card', null, $card_args ); ?>		
+							<?php get_template_part( 'components/card/card', null, $card_args ); ?>
 						<?php endif; ?>
 					<?php } ?>
 				</div>
@@ -57,7 +55,6 @@ $c = \Tribe\Project\Templates\Components\blocks\content_loop\Content_Loop_Contro
 				<?php } ?>
 
 			<?php endif; ?>
-	
 		</div>
 
 	</div>

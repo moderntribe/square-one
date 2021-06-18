@@ -26,6 +26,9 @@ class Config extends Taxonomy_Config {
 			'hierarchical' => false,
 			'exclusive'    => true,
 			'meta_box'     => 'radio',
+			'show_in_menu' => false,
+			'show_ui'      => true,
+			'public'       => false,
 		];
 	}
 
@@ -33,14 +36,13 @@ class Config extends Taxonomy_Config {
 		return [
 			'singular' => __( 'Featured', 'tribe' ),
 			'plural'   => __( 'Featured', 'tribe' ),
-			'slug'     => __( 'Featured', 'tribe' ),
+			'slug'     => __( 'featured', 'tribe' ),
 		];
 	}
 
 	public function default_terms() {
 		return [
 			'yes' => __( 'yes', 'tribe' ),
-			
 		];
 	}
 
