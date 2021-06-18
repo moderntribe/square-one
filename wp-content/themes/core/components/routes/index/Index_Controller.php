@@ -6,7 +6,6 @@ use Tribe\Project\Blocks\Types\Content_Loop\Content_Loop;
 use Tribe\Project\Taxonomies\Featured\Featured;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\blocks\content_loop\Content_Loop_Controller;
-use Tribe\Project\Templates\Components\text\Text_Controller;
 use Tribe\Project\Templates\Components\Traits\Post_List_Field_Formatter;
 use Tribe\Project\Templates\Models\Breadcrumb;
 use WP_Query;
@@ -28,15 +27,6 @@ class Index_Controller extends Abstract_Controller {
 		return [
 			new Breadcrumb( $url, __( 'News', 'tribe' ) ),
 		];
-	}
-
-	public function get_number_of_posts(): array {
-		return
-			[
-				Text_Controller::TAG     => 'p',
-				Text_Controller::CLASSES => [ '' ],
-				Text_Controller::CONTENT => wp_count_posts()->publish.' '.__( 'posts in', 'tribe' ).' "'.get_the_archive_title().'" ',
-			];
 	}
 
 	public function get_loop_args(): array {

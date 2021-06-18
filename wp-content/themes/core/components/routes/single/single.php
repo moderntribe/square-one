@@ -1,15 +1,23 @@
 <?php declare(strict_types=1);
 
+use Tribe\Project\Templates\Components\breadcrumbs\Breadcrumbs_Controller;
 use \Tribe\Project\Templates\Components\routes\single\Single_Controller;
+use Tribe\Project\Templates\Components\sidebar\Sidebar_Controller;
 
 $c = Single_Controller::factory();
 
-$c->render_header();
+get_header();
 ?>
 
 	<main id="main-content">
 
-		<?php $c->render_breadcrumbs(); ?>
+		<?php
+		get_template_part(
+			'components/breadcrumbs/breadcrumbs',
+			'single',
+			[ Breadcrumbs_Controller::BREADCRUMBS => $c->get_breadcrumbs() ]
+		);
+		?>
 
 		<?php get_template_part( 'components/header/subheader/subheader' ) ?>
 
@@ -55,5 +63,10 @@ $c->render_header();
 	</main>
 
 <?php
-$c->render_sidebar();
-$c->render_footer();
+do_action( 'get_sidebar', null );
+get_template_part(
+	'components/sidebar/sidebar',
+	'single',
+	[ Sidebar_Controller::SIDEBAR_ID => $c->sidebar_id ]
+);
+get_footer();

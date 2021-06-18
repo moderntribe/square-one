@@ -4,10 +4,10 @@ use \Tribe\Project\Templates\Components\routes\example_app\Example_App_Controlle
 
 $c = Example_App_Controller::factory();
 
-$c->render_header();
+get_header();
 ?>
 
 	<div data-js="example-app" class="l-container s-sink t-sink"></div>
 
 <?php
-$c->render_footer();
+get_footer();
