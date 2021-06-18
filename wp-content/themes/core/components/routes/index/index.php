@@ -10,11 +10,7 @@ get_header();
 	<main id="main-content">
 		<?php get_template_part( 'components/header/subheader_archive/subheader_archive', 'index' ); ?>
 
-		<?php if ( have_posts() ) : ?>
-			<div class="l-container">
-				<p><?php echo wp_count_posts()->publish . ' ' . __( 'posts in', 'tribe' ) . ' "' . get_the_archive_title() . '"';  ?></p>
-			</div>
-			<?php
+		<?php if ( have_posts() ) :
 			if ( $c->get_current_page() === 1 && ! empty( $c->get_featured_posts_args() ) ) :
 				get_template_part( 'components/blocks/content_loop/content_loop', null, $c->get_featured_posts_args() );
 			endif;
