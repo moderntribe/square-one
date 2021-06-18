@@ -36,7 +36,7 @@ jobs:
         env:
           INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
         with:
-          text: ":green_check: PR${{ github.event.pull_request.number }} Test App Deployment Successful "
+          text: ":green_check: Server/Test App Deployment Successful "
           attachments: |
             [
               {
@@ -60,7 +60,7 @@ jobs:
         env:
           INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
         with:
-          text: ":x: PR${{ github.event.pull_request.number }} Test App Deployment Failed"
+          text: ":x:  Server/Test Test App Deployment Failed"
           attachments: |
             [
               {
