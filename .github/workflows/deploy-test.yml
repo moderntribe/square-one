@@ -48,7 +48,7 @@ jobs:
                   },
                   {
                     "title": "GitHub Actions URL",
-                    "value": "${{ env.GITHUB_SERVER_URL }}/${{ env.GITHUB_REPOSITORY }}/actions/runs/${{ env.GITHUB_RUN_ID }}"
+                    "value": "${{ github.event.repository.url }}/actions/runs/${{ github.run_id }}"
                   }
                 ]
               }
@@ -72,7 +72,7 @@ jobs:
                   },
                   {
                     "title": "GitHub Actions URL",
-                    "value": "${{ env.GITHUB_SERVER_URL }}/${{ env.GITHUB_REPOSITORY }}/actions/runs/${{ env.GITHUB_RUN_ID }}"
+                    "value": "${{ github.event.repository.url }}/actions/runs/${{ github.run_id }}"
                   }
                 ]
               }
@@ -169,7 +169,7 @@ jobs:
                   },
                   {
                     "title": "GitHub Actions URL",
-                    "value": "${{ env.GITHUB_SERVER_URL }}/${{ env.GITHUB_REPOSITORY }}/actions/runs/${{ env.GITHUB_RUN_ID }}"
+                    "value": "${{ github.event.repository.url }}/actions/runs/${{ github.run_id }}"
                   }
                 ]
               }
@@ -193,7 +193,7 @@ jobs:
                   },
                   {
                     "title": "GitHub Actions URL",
-                    "value": "${{ env.GITHUB_SERVER_URL }}/${{ env.GITHUB_REPOSITORY }}/actions/runs/${{ env.GITHUB_RUN_ID }}"
+                    "value": "${{ github.event.repository.url }}/actions/runs/${{ github.run_id }}"
                   }
                 ]
               }
@@ -237,7 +237,7 @@ jobs:
                   },
                   {
                     "title": "GitHub Actions URL",
-                    "value": "${{ env.GITHUB_SERVER_URL }}/${{ env.GITHUB_REPOSITORY }}/actions/runs/${{ env.GITHUB_RUN_ID }}"
+                    "value": "${{ github.event.repository.url }}/actions/runs/${{ github.run_id }}"
                   }
                 ]
               }
@@ -261,7 +261,7 @@ jobs:
                   },
                   {
                     "title": "GitHub Actions URL",
-                    "value": "${{ env.GITHUB_SERVER_URL }}/${{ env.GITHUB_REPOSITORY }}/actions/runs/${{ env.GITHUB_RUN_ID }}"
+                    "value": "${{ github.event.repository.url }}/actions/runs/${{ github.run_id }}"
                   }
                 ]
               }
@@ -310,7 +310,7 @@ jobs:
                   },
                   {
                     "title": "GitHub Actions URL",
-                    "value": "${{ env.GITHUB_SERVER_URL }}/${{ env.GITHUB_REPOSITORY }}/actions/runs/${{ env.GITHUB_RUN_ID }}"
+                    "value": "${{ github.event.repository.url }}/actions/runs/${{ github.run_id }}"
                   }
                 ]
               }
@@ -334,7 +334,7 @@ jobs:
                   },
                   {
                     "title": "GitHub Actions URL",
-                    "value": "${{ env.GITHUB_SERVER_URL }}/${{ env.GITHUB_REPOSITORY }}/actions/runs/${{ env.GITHUB_RUN_ID }}"
+                    "value": "${{ github.event.repository.url }}/actions/runs/${{ github.run_id }}"
                   }
                 ]
               }
