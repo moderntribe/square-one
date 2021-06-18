@@ -15,8 +15,7 @@ updates:
     target-branch: "main"
     directory: "/"
     schedule:
-      interval: "weekly"
-      day: "monday"
+      interval: "monthly"
     labels:
       - "npm"
       - "dependencies"
