@@ -53,6 +53,7 @@
     "npm": "6.14.8"
   },
   "scripts": {
+    "build": "gulp server_dist",
     "gulp": "gulp",
     "run": "npm run docker:start && yarn install && npm run gulp -- dist && npm run gulp -- dev",
     "dev": "npm run gulp -- dev",
