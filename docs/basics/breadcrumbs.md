@@ -2,7 +2,7 @@
 
 ## Default functionality
 
-Default breadcrumb functionality is in `Tribe\Project\Templates\Component\Abstract_Controller` in the `render_breadcrumbs` and `get_breadcrumbs` functions. By default, this will take the current post or archive page and build out breadcrumb links accordingly. If the post type or taxonomy is hierarchical, breadcrumbs will be built using the parent items.
+Default breadcrumb functionality is in `Tribe\Project\Templates\Component\Abstract_Controller` in the `render_breadcrumbs` and `get_breadcrumbs` methods. By default, this will take the current post or archive page and build out breadcrumb links accordingly. If the post type or taxonomy is hierarchical, breadcrumbs will be built using the parent items.
 
 ## Overriding Breadcrumbs
 Breadcrumbs can be overridden in the child component controllers. For example, if you want to override default breadcrumb functonality in for the pages the breadcrumbs should be overridden in `Tribe\Project\Templates\Components\routes\page\Page_Controller.php`.
