@@ -1,20 +1,17 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\blocks\gallery_slider;
 
-use Symfony\Component\DomCrawler\Image;
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\container\Container_Controller;
 use Tribe\Project\Templates\Components\content_block\Content_Block_Controller;
 use Tribe\Project\Templates\Components\Deferred_Component;
 use Tribe\Project\Templates\Components\image\Image_Controller;
-use Tribe\Project\Theme\Config\Image_Sizes;
-use Tribe\Project\Templates\Components\button\Button_Controller;
 use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Templates\Components\slider\Slider_Controller;
 use Tribe\Project\Templates\Components\text\Text_Controller;
+use Tribe\Project\Theme\Config\Image_Sizes;
 
 class Gallery_Slider_Controller extends Abstract_Controller {
 
@@ -35,14 +32,14 @@ class Gallery_Slider_Controller extends Abstract_Controller {
 	/**
 	 * @var string[]
 	 */
-	private array  $classes;
-	private array  $attrs;
-	private array  $container_classes;
-	private array  $content_classes;
+	private array $classes;
+	private array $attrs;
+	private array $container_classes;
+	private array $content_classes;
 	private string $title;
 	private string $description;
-	private array  $cta;
-	private array  $gallery;
+	private array $cta;
+	private array $gallery;
 	private string $image_ratio;
 	private string $id;
 
@@ -128,13 +125,13 @@ class Gallery_Slider_Controller extends Abstract_Controller {
 			Content_Block_Controller::CLASSES => [
 				'c-block__content-block',
 				'c-block__header',
-				'b-gallery-slider__header'
+				'b-gallery-slider__header',
 			],
 		];
 	}
 
 	/**
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	private function get_title(): Deferred_Component {
 		return defer_template_part( 'components/text/text', null, [
@@ -149,7 +146,7 @@ class Gallery_Slider_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	private function get_content(): Deferred_Component {
 		return defer_template_part( 'components/container/container', null, [
@@ -164,7 +161,7 @@ class Gallery_Slider_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	private function get_cta(): Deferred_Component {
 		$cta = wp_parse_args( $this->cta, [
@@ -181,7 +178,7 @@ class Gallery_Slider_Controller extends Abstract_Controller {
 				'c-block__cta-link',
 				'a-btn',
 				'a-btn--has-icon-after',
-				'icon-arrow-right'
+				'icon-arrow-right',
 			],
 		] );
 	}
@@ -259,7 +256,7 @@ class Gallery_Slider_Controller extends Abstract_Controller {
 	 * @return string
 	 */
 	protected function get_image_template( $img_id ): string {
-		$slide_markup = $this->get_slide_img( $img_id );
+		$slide_markup  = $this->get_slide_img( $img_id );
 		$slide_markup .= defer_template_part( 'components/container/container', null, [
 			Container_Controller::CLASSES => [
 				'b-gallery-slider__meta-wrap',
@@ -273,7 +270,7 @@ class Gallery_Slider_Controller extends Abstract_Controller {
 	/**
 	 * @param int $img_id
 	 *
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	public function get_slide_img( int $img_id ): Deferred_Component {
 		$image_args = [
@@ -307,7 +304,7 @@ class Gallery_Slider_Controller extends Abstract_Controller {
 	/**
 	 * @param int $slide_id
 	 *
-	 * @return string|Deferred_Component
+	 * @return string|\Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	protected function get_image_caption( int $slide_id ) {
 		$thumbnail_image = get_posts( [ 'p' => $slide_id, 'post_type' => 'attachment' ] );
@@ -323,4 +320,5 @@ class Gallery_Slider_Controller extends Abstract_Controller {
 			Text_Controller::CONTENT => esc_html( $thumbnail_image[0]->post_excerpt ) ?? '',
 		] );
 	}
+
 }

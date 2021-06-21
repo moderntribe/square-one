@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Blocks\Types\Gallery_Slider;
 
@@ -14,6 +13,7 @@ use Tribe\Project\Templates\Components\link\Link_Controller;
  * for the component
  */
 class Gallery_Slider_Model extends Base_Model {
+
 	/**
 	 * @return array
 	 */
@@ -45,4 +45,5 @@ class Gallery_Slider_Model extends Base_Model {
 			Link_Controller::TARGET  => $cta['target'],
 		];
 	}
+
 }

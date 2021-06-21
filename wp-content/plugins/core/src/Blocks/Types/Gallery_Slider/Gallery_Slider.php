@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Blocks\Types\Gallery_Slider;
 
@@ -9,6 +8,7 @@ use Tribe\Libs\ACF\Field;
 use Tribe\Libs\ACF\Field_Section;
 
 class Gallery_Slider extends Block_Config {
+
 	public const NAME = 'galleryslider';
 
 	public const SECTION_CONTENT  = 's-content';
@@ -23,7 +23,7 @@ class Gallery_Slider extends Block_Config {
 	public const FIXED       = 'fixed';
 	public const VARIABLE    = 'variable';
 
-	public const SLIDESHOW   = 'slideshow';
+	public const SLIDESHOW = 'slideshow';
 
 	public function add_block() {
 		$this->set_block( new Block( self::NAME, [
@@ -82,10 +82,10 @@ class Gallery_Slider extends Block_Config {
 		//==========================================
 		$this->add_section( new Field_Section( self::SECTION_SETTINGS, __( 'Settings', 'tribe' ), 'accordion' ) )
 		->add_field( new Field( self::NAME . '_' . self::IMAGE_RATIO, [
-			'label' => __( 'Image Ratio', 'tribe' ),
-			'name'  => self::IMAGE_RATIO,
-			'type'  => 'select',
-			'choices' => [
+			'label'         => __( 'Image Ratio', 'tribe' ),
+			'name'          => self::IMAGE_RATIO,
+			'type'          => 'select',
+			'choices'       => [
 				self::FIXED    => __( 'Fixed', 'tribe' ),
 				self::VARIABLE => __( 'Variable', 'tribe' ),
 			],
@@ -93,4 +93,5 @@ class Gallery_Slider extends Block_Config {
 			] )
 		);
 	}
+
 }
