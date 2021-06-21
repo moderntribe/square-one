@@ -56,12 +56,6 @@
 			max-width: var(--grid-10-col);
 		}
 	}
-
-	/* CASE: Image Ratio Variable */
-	.b-gallery-slider--variable & {
-		height: 467px;
-		width: auto;
-	}
 }
 
 /* -----------------------------------------------------------------------------
@@ -82,9 +76,12 @@
 
 	/* CASE: Image Ratio Variable */
 	.b-gallery-slider--variable & {
-		height: 100%;
-		max-height: 467px;
+		height: 50vh;
 		width: auto;
+
+		@media (--viewport-large) {
+			height: 467px;
+		}
 	}
 }
 
@@ -96,14 +93,4 @@
 
 .b-gallery-slider__meta-wrap {
 	margin-top: var(--spacer-10);
-
-	/* CASE: Image Ratio Variable */
-	.b-gallery-slider--variable & {
-		position: absolute;
-		background: rgba(255, 255, 255, 0.75);
-		bottom: 0;
-		left: 0;
-		width: 100%;
-		padding: var(--spacer-10);
-	}
 }
