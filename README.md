@@ -1,6 +1,7 @@
 ![./example/example.svg](./logo.svg)
 
 [![Codeception Tests](https://github.com/moderntribe/square-one/actions/workflows/ci.yml/badge.svg)](https://github.com/moderntribe/square-one/actions/workflows/ci.yml)
+[![PHP Composer and Codesniffer](https://github.com/moderntribe/square-one/actions/workflows/phpcs.yml/badge.svg)](https://github.com/moderntribe/square-one/actions/workflows/phpcs.yml)
 
 SquareOne is a development framework lovingly maintained by Modern Tribe used for WordPress projects. It augments WordPress into a modern application framework. We think it's pretty neat.   
 
