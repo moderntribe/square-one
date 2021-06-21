@@ -239,7 +239,7 @@ class Links_Block_Controller extends Abstract_Controller {
 		return array_map( static function ( $row ) {
 			return [
 				Link_Controller::URL            => $row['g-cta']['link']['url'] ?? '',
-				Link_Controller::CONTENT        => $row['g-cta']['link']['title'] ?? $row['g-cta']['link']['url'],
+				Link_Controller::CONTENT        => $row['g-cta']['link']['title'] ?? '',
 				Link_Controller::TARGET         => $row['g-cta']['link']['target'] ?? '',
 				Link_Controller::ADD_ARIA_LABEL => $row['g-cta']['add_aria_label'] ?? '',
 				Link_Controller::ARIA_LABEL     => $row['g-cta']['aria_label'] ?? '',

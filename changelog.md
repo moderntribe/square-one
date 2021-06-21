@@ -8,6 +8,8 @@ All notable changes to this project will be documented in this file.
 preventing a PR from being able to be merged. 
 
 ## 2021.05
+* Added: herokuish deployment support (dokku)
+* Fixed: Husky hooks commits from scanning all PHP files with phpcs and limits to our core plugin/theme.
 * Fixed: broken main README.md links
 * Removed: husky hooks.
 * Added: lefthook git-hooks (see lefthook.yml and .lefthook folder) to replace husky hooks: https://github.com/evilmartians/lefthook

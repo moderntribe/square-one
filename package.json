@@ -54,6 +54,7 @@
     "npm": "6.14.8"
   },
   "scripts": {
+    "build": "gulp server_dist",
     "gulp": "gulp",
     "run": "npm run docker:start && yarn install && npm run gulp -- dist && npm run gulp -- dev",
     "dev": "npm run gulp -- dev",
@@ -70,7 +71,7 @@
   },
   "dependencies": {
     "@types/react": "^16.9.11",
-    "@vimeo/player": "^2.10.0",
+    "@vimeo/player": "^2.15.3",
     "caniuse-lite": "1.0.30001235",
     "classnames": "^2.2.6",
     "delegate": "^3.2.0",
@@ -193,7 +194,7 @@
     "postcss-quantity-queries": "^0.5.0",
     "postcss-reporter": "^6.0.1",
     "postcss-simple-vars": "^5.0.2",
-    "prettier": "^2.2.1",
+    "prettier": "^2.3.1",
     "regenerator-runtime": "^0.13.3",
     "require-dir": "^1.2.0",
     "style-loader": "^1.0.0",
