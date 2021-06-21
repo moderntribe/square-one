@@ -72,11 +72,8 @@ class Not_Found_Controller extends Abstract_Controller {
 	 * @return \Tribe\Project\Templates\Models\Breadcrumb[]
 	 */
 	protected function get_breadcrumbs(): array {
-		$page = get_option( 'page_for_posts' );
-		$url  = $page ? get_permalink( $page ) : home_url();
-
 		return [
-			new Breadcrumb( $url, __( 'News', 'tribe' ) ),
+			new Breadcrumb( '', __( 'Not Found', 'tribe' ) ),
 		];
 	}
 
