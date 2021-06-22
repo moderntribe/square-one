@@ -126,18 +126,4 @@ class Subheader_Controller extends Abstract_Controller {
 		];
 	}
 
-	/**
-	 * Returns breadcrumbs for the post.
-	 *
-	 * @return array \Tribe\Project\Templates\Models\Breadcrumb[] Breadcrumbs for the post.
-	 */
-	public function get_breadcrumbs(): array {
-
-		return [
-			Breadcrumbs_Controller::BREADCRUMBS => [
-				new Breadcrumb( get_site_url(), esc_html__( 'Home', 'tribe' ) ),
-			],
-		];
-	}
-
 }
