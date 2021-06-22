@@ -7,6 +7,7 @@ use \Tribe\Project\Templates\Components\header\subheader\Subheader_Controller;
  */
 // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
 $c = Subheader_Controller::factory( $args );
+
 ?>
 
 <header <?php echo $c->get_classes(); ?> <?php echo $c->get_attrs(); ?>>		

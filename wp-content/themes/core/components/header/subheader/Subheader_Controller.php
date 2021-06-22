@@ -4,6 +4,7 @@ namespace Tribe\Project\Templates\Components\header\subheader;
 
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
+use Tribe\Project\Templates\Components\Traits\Breadcrumbs;
 use Tribe\Project\Templates\Components\breadcrumbs\Breadcrumbs_Controller;
 use Tribe\Project\Templates\Components\image\Image_Controller;
 use Tribe\Project\Templates\Components\text\Text_Controller;
@@ -14,6 +15,7 @@ use Tribe\Project\Theme\Config\Image_Sizes;
 class Subheader_Controller extends Abstract_Controller {
 
 	use Page_Title;
+	use Breadcrumbs;
 
 	public const CLASSES           = 'classes';
 	public const ATTRS             = 'attrs';
@@ -124,33 +126,17 @@ class Subheader_Controller extends Abstract_Controller {
 		];
 	}
 
-	
 	/**
-	 * @return array
+	 * Returns breadcrumbs for the post.
+	 *
+	 * @return array \Tribe\Project\Templates\Models\Breadcrumb[] Breadcrumbs for the post.
 	 */
-
 	public function get_breadcrumbs(): array {
-		$name = get_bloginfo( 'name' );
-		$url  = get_bloginfo( 'url' );
 
-		$breadcrumbs = [
-			new Breadcrumb( $url, __( 'Home', 'tribe' ) ),
-		];
-
-		$ancestors = (array) get_post_ancestors( get_the_ID() );
-
-		$ancestors = array_reverse( $ancestors, true );
-
-		foreach ( $ancestors as $ancestor ) {
-			$ancestor_url	= get_the_permalink( $ancestor );
-			$ancestor_label = get_the_title( $ancestor );
-
-			$breadcrumbs[] = new Breadcrumb( $ancestor_url, $ancestor_label );
-		}
-		
 		return [
-			Breadcrumbs_Controller::BREADCRUMBS  => $breadcrumbs,
-			Breadcrumbs_Controller::MAIN_CLASSES => [ 'u-sep-arrow' ],
+			Breadcrumbs_Controller::BREADCRUMBS => [
+				new Breadcrumb( get_site_url(), esc_html__( 'Home', 'tribe' ) ),
+			],
 		];
 	}
 
