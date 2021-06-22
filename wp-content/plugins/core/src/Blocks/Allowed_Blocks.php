@@ -21,14 +21,12 @@ class Allowed_Blocks {
 	 *
 	 * @param array $allow_list Allowed block types list.
 	 */
-	public function __construct( array $allow_list ) {
+	public function __construct( array $allow_list = [] ) {
 		$this->allow_list = $allow_list;
 	}
 
 	/**
 	 * Add block types to the allow list to enable in the block editor.
-	 * 
-	 * @filter allowed_block_types
 	 *
 	 * @param bool|array $allowed_types Currently allowed block types.
 	 * @param \WP_Post   $post          The current post object.
