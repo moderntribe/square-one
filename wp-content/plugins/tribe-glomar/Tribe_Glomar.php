@@ -44,8 +44,12 @@ class Tribe_Glomar {
 
 	/**
 	 * Class constructor.
+	 *
+	 * @param Tribe_Glomar_Admin Instance of the admin class.
 	 */
-	private function __construct() {}
+	private function __construct( Tribe_Glomar_Admin $admin ) {
+		$this->admin = new Tribe_Glomar_Admin();
+	}
 
 	/**
 	 * Hooks to register with WP Lifecycle.
@@ -71,8 +75,6 @@ class Tribe_Glomar {
 
 		add_action( 'tribe_glomar_current_action_glomar', [ $this, 'handle_glomar_page' ] );
 		add_action( 'tribe_glomar_current_action_login', [ $this, 'handle_redirect_login' ] );
-
-		$this->admin = new Tribe_Glomar_Admin();
 
 		if ( is_admin() ) {
 			$this->admin->add_hooks();
@@ -168,7 +170,7 @@ class Tribe_Glomar {
 	 * Intercept the page loads with the Glomar 404.
 	 */
 	public function intercept_pageload() {
-		// Skip redirect if we're already at the glomar page
+		// Skip redirect if we're already at the glomar page.
 		if ( isset( $_SERVER['REQUEST_URI'] ) && home_url( str_replace( '/wp', '', $_SERVER['REQUEST_URI'] ) ) === home_url( $this->path ) ) {
 			return;
 		}
@@ -178,7 +180,8 @@ class Tribe_Glomar {
 			if ( apply_filters( 'glomar_disable_page_cache', true ) ) {
 				do_action( 'do_not_cache' );
 			}
-			// set a cookie so page caching knows to let us in
+
+			// Set a cookie so page caching knows to let us in.
 			setcookie( self::COOKIE, '1', time() + ( MINUTE_IN_SECONDS * 10 ), COOKIEPATH, COOKIE_DOMAIN );
 			return;
 		}
@@ -285,8 +288,8 @@ class Tribe_Glomar {
 	 * @static
 	 * @return void
 	 */
-	public static function init() {
-		self::$instance = self::get_instance();
+	public static function init( Tribe_Glomar_Admin $admin ) {
+		self::$instance = self::get_instance( $admin );
 		self::$instance->add_hooks();
 	}
 
@@ -296,9 +299,9 @@ class Tribe_Glomar {
 	 * @static
 	 * @return Tribe_Glomar
 	 */
-	public static function get_instance() {
+	public static function get_instance( Tribe_Glomar_Admin $admin ) {
 		if ( ! is_a( self::$instance, __CLASS__ ) ) {
-			self::$instance = new self();
+			self::$instance = new self( $admin );
 		}
 
 		return self::$instance;

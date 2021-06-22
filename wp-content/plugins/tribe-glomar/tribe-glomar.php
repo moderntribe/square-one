@@ -25,7 +25,7 @@ if ( ! function_exists( 'tribe_glomar_load' ) ) { // play nice
 		// ok, we have permission to load
 		require_once 'Tribe_Glomar.php';
 		require_once 'Tribe_Glomar_Admin.php';
-		Tribe_Glomar::init();
+		Tribe_Glomar::init( new Tribe_Glomar_Admin() );
 	}
 
 	add_action( 'plugins_loaded', 'tribe_glomar_load' );
