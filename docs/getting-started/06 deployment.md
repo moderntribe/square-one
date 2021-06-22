@@ -1,76 +1,73 @@
 # Deployment
 
-The Jenkins deployment configurations are located in `/dev/deploy/`.
+SquareOne has built in orchestration for deployments using GitHub Actions located in the `.github/workflows/` folder.
 
 ## Overview
 
-Jenkins is a trusty CI/CD playform that can be used for all sorts of automation. 
-When using a Git based Managed Host, we often configure SquareOne for deploys with Jenkins. 
-The following instructions will show how to configure Jenkins for both a Multi-branch pipeline deploy
-for a GitOps flow, or a more traditional manual deploy setup. 
+GitHub Actions is a CI/CD platform that can be used for all sorts of automation. 
+When using a Git based Managed Host, we often configure SquareOne for deploys with GitHub actions. 
+The following instructions will show how to configure GitHub actions to support manual or GitOps flow deployments.
+It will also show how to deploy to a standard WordPress Managed Host, or a Herokiush Host.
 
-We like to use a combination, manual for our Dev environment so we can deploy any branch for QA testing, 
-and multi-branch pipeline for a strict GitOps flow on Staging and Production.
+## Requirements
 
-### Requirements
+* A SquareOne based repository on GitHub.
+* GitHub Account with GitHub Actions activated. For public repositories this is free, for private you require a 
+  paid organization account.
 
-* Latest Jenkins with the following plugins
-    * Blue Ocean
-    * CVS
-    * docker-build-step
-    * Git Parameter
-    * Pipeline
-    * Slack Notification
-    * SSH Agent
-* WordPress Host that uses Git based deployments (WPEngine, Pantheon, Etc)
-* Ansible vault - used to encrypt server configs and access
+## Managed Host Git Based Deployments
+
+### IMPORTANT
+* It's highly recommended setting up the Dev environment first and backing up prior to the first deploy.
+* This deployment workflow assumes WordPress is in the root folder of the project.
+* This deployment workflow assumes you have a host with Git Based deployments.
 
 ### General Configuration
+1. Ensure Actions are enabled for your Org and for the repository
+1. Create a branch for each environment. Recommended `server/*`, like `server/dev`, `server/prod`, etc. 
+   Make sure each branches code matches what you want on the target environment.
+1. Setup Repository Secrets:
+    1. DEV_DEPLOY_REPO = The git repository address (in ssh format)
+    1. COMPOSER_ENV = License Keys required for some premium plugins installed via composer.
+    1. DEPLOY_PRIVATE_SSH_KEY = The Private SSH key configured on your target host.
 
-1. Jenkins needs to be authenticated with your CVS provider.
-1. Make a `.dev/.vaultpass` file with a random string in it. This will be the encryption key used by Ansible Vault.
-1. Run the `dev/init.sh` script to generate the initial required configurations.
-1. Goto the `dev/deploy/.host/config` folder and configure all the .cfg files according to your CVS and host.
-1. Run `dev/encrypt.sh` and commit only the encrypted files to the repo.
-1. Setup the Host with the generated `dev/deploy/.host/config/ansible_rsa.pub` for Git Deploys.
+### How to Manually Deploy
 
-Now you are ready to setup the Pipelines. Choose your style below:
+Make sure the workflow is configured for the `on.workflow_dispatch` trigger.
 
+```yaml
+on:
+  workflow_dispatch:
+```
 
-## Jenkins Manual Deploys
+1. Goto `https://github.com/{your-org}/{your-repo}}/actions/workflows/deploy-{env}.yml` for the desired environment. For example, if I want
+   to deploy to the Dev server I would choose the `deploy-dev` workflow.
+1. Click the `Run Workflow` dropdown, chose the correct server branch you wish to deploy to the selected workflow.  For example, if I want
+   to deploy to the Dev server I would choose the `server/dev` branch.
+1. Click the `Run Workflow` button. The SquareOne project will now build and deploy the artifact to your environment.
 
-The manual Jenkins pipeline deploys allow deployment of any branch to the dev environment.
+### How to GitOps Deploy
 
-### Configuration
+Make sure the workflow is configured for the `on.branches.push` trigger.
 
-1. Login to Jenkins and create a new Pipeline Deploy project
-1. Setup you CVS to point at your project Repo.
-1. Check "Do not allow concurrent builds"
-1. Check "This project is parameterized"
-1. Add a new Git Parameter with this info- Name: `BRANCH_NAME`, Description: `Which branch should be deployed ?`, Parameter Type: `branch`, Default Value: `server/dev`
-1. Pipeline, add you repo info, set Mode to `Pipeline cript from SCM` and Script Path to `dev/deploy/JenkinsfileManual`. 
-1. Save.
+```yaml
+on:
+  push:
+    branches:
+      - server/dev
+```
 
-### Deploys
-Simply click the play button to `Build with Parameters` and select the desired branch
+1. Merge or commit to the `server/dev` branch. A deployment will now run. Example: `git commit --allow-empty -m "Deploy Dev"`
 
+## Dokku Based Deployments
 
-## Jenkins Multi-branch pipeline Deploys
+Heroku is very popular Hosting PaaS provider. Many "App engines" have now modeled themselves on how Heroku has configured their systems,
+hence the term Herokuish. We use Dokku (an open source alternative) in some cases, so we've built in full Herokuish support into SQ1. 
 
-### Configuration
-
-1. Login to Jenkins and create a new Multi-Branch Pipeline Deploy project
-2. Setup you CVS to point at your project Repo.
-3. Build strategies, include only server branches `server/*`
-4. Build configuration, set Mode to `by Jenkinsfile` and Script Path to `dev/deploy/JenkinsfilePipeline`
-5. Scan Repository Triggers, set to a reasonable interval. This is how often a deploy will trigger if 
-changes to a server branch are detected.
-6. Save.
-
-### Deploys
-After the initial repository scan is complete, you will see a list of the server 
-branches that exist. You can now manually trigger a build by clicking the play button 
-next to it, or simply push code to the branch.
-
+If you want to use a Herokuish setup, you are probably familiar with how it works, so we won't cover it in detail here. 
+But in broad strokes you'll need the php and nodejs buildpacks and then reference our local install docs for any required config. 
+From there, we bundle a Procfile and the needed Nginx and PHP config. If you want WP-CLI installed on your web service, add our custom [SquareOne buildpack](https://github.com/moderntribe/heroku-buildpack-sq1)
+can do that for you. Because SQ1 is WordPress it requires you set up your own DB service and optional object caching service. Then all WP config
+variables are wired to pull from Environment variables you can configure on your Herokuish provider.
 
 

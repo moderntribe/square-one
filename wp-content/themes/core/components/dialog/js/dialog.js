@@ -26,12 +26,12 @@ const options = {
 /**
  * @function getMainOptsForDialog
  * @description Dialog specific options are put directly on the button as data-dialogOptions. This grabs them.
- * 
+ *
  * @param btn
  */
 
 const getOptionsDialog = ( btn ) => {
-    const opts = options.dialog;
+	const opts = options.dialog;
 
 	if ( btn.dataset.dialogOptions ) {
 		Object.assign( opts, JSON.parse( btn.dataset.dialogOptions ) );
@@ -45,22 +45,22 @@ const getOptionsDialog = ( btn ) => {
  */
 
 const initDialogs = () => {
-    // Need to check for multiple trigger buttons
+	// Need to check for multiple trigger buttons
 	el.triggers.forEach( ( btn ) => {
 		const dialogId = btn.getAttribute( 'data-content' );
 		// If this has multiple triggers, skip creating a new instance after the first one.
-		if ( instances.dialogs[ dialogId ]  ) {
+		if ( instances.dialogs[ dialogId ] ) {
 			return;
 		}
 
-        options.dialog.trigger = `[data-js="dialog-trigger"][data-content="${ dialogId }"]`;
-        instances.dialogs[ dialogId ] = new A11yDialog( getOptionsDialog( btn ) );
+		options.dialog.trigger = `[data-js="dialog-trigger"][data-content="${ dialogId }"]`;
+		instances.dialogs[ dialogId ] = new A11yDialog( getOptionsDialog( btn ) );
 
-        // This function will initialize the swiper slider when the dialog loads if it's not already initialized.
-        instances.dialogs[ dialogId ].on('show', function () {
-            trigger( { event: 'modern_tribe/component_dialog_rendered', native: false } );
-        });
-    } );
+		// This function will initialize the swiper slider when the dialog loads if it's not already initialized.
+		instances.dialogs[ dialogId ].on( 'show', function() {
+			trigger( { event: 'modern_tribe/component_dialog_rendered', native: false } );
+		} );
+	} );
 };
 
 /**
@@ -71,7 +71,7 @@ const initDialogs = () => {
 const init = () => {
 	if ( ! el.triggers.length ) {
 		return;
-    }
+	}
 
 	initDialogs();
 
