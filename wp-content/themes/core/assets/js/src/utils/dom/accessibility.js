@@ -71,6 +71,6 @@ const focusLoop = ( e = {}, trigger = null, container = null ) => {
 		firstFocusableEl.focus();
 		e.preventDefault();
 	}
-}
+};
 
 export { focusLoop, setAccActiveAttributes, setAccInactiveAttributes };

@@ -10,14 +10,6 @@ const el = {
 };
 
 /**
-* Update each search input on page load.
-*
-* @param e
-*/
-const setInputState = ( e ) => updateInput( e.target );
-
-
-/**
 * Reset all search forms on click.
 *
 * @param e
