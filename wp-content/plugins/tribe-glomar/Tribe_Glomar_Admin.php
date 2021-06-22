@@ -316,6 +316,7 @@ class Tribe_Glomar_Admin {
 	public function get_message() {
 		$message = (string) $this->get_option( 'glomar-message' );
 
+		// Set the default message if a custom message is not set.
 		if ( empty( $message ) ) {
 			$message = '<p><a href="http://www.radiolab.org/story/confirm-nor-deny/"><img width="100%" src="https://i.imgur.com/Ax05U04.jpg"></a></p>' .
 			'<h1>' . __( 'You\'ve been Glomar\'d', 'tribe' ) . '</h1>' .

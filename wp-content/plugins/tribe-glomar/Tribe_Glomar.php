@@ -160,8 +160,8 @@ class Tribe_Glomar {
 		add_filter( 'nocache_headers', '__return_empty_array' ); // you can cache this page
 
 		wp_die(
-			$this->admin->get_message(),
-			__( "You've been Glomar'd", 'tribe' ),
+			wp_kses_post( $this->admin->get_message() ),
+			__( 'You\'ve been Glomar\'d', 'tribe' ),
 			[ 'response' => $response_code ]
 		);
 	}
