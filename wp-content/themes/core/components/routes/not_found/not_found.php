@@ -7,17 +7,16 @@ $c = Not_Found_Controller::factory();
 $c->render_header();
 ?>
 	<main id="main-content">
-		<?php $c->render_breadcrumbs(); ?>
 
 		<div class="l-container t-sink">
 
 			<div class="not-found">
 
-				<h3 class="not-found__title h1">
+				<h1 class="not-found__title h1">
 					<?php echo esc_html( __( 'Error 404: I’m pretty sure you broke it' ) ); ?>
-				</h3>
+				</h1>
 
-				<p class="no-found__content">
+				<p class="not-found__content">
 					<?php printf(
 						__( 'Start over from <a href="%s">home</a>, use the navigation to get back on track or search for something.' ),
 						esc_url( get_site_url() ),

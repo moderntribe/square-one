@@ -3,10 +3,8 @@
 namespace Tribe\Project\Templates\Components\routes\not_found;
 
 use Tribe\Project\Templates\Components\Abstract_Controller;
-use Tribe\Project\Templates\Components\breadcrumbs\Breadcrumbs_Controller;
 use Tribe\Project\Templates\Components\search_form\Search_Form_Controller;
 use Tribe\Project\Templates\Components\sidebar\Sidebar_Controller;
-use Tribe\Project\Templates\Models\Breadcrumb;
 
 class Not_Found_Controller extends Abstract_Controller {
 
@@ -59,30 +57,11 @@ class Not_Found_Controller extends Abstract_Controller {
 		get_template_part( 'components/document/footer/footer', 'index' );
 	}
 
-	public function render_breadcrumbs(): void {
-		//TODO: let's make this get_breadcrumb_args() and render in template
-		get_template_part(
-			'components/breadcrumbs/breadcrumbs',
-			'index',
-			[ Breadcrumbs_Controller::BREADCRUMBS => $this->get_breadcrumbs() ]
-		);
-	}
-
-	/**
-	 * @return \Tribe\Project\Templates\Models\Breadcrumb[]
-	 */
-	protected function get_breadcrumbs(): array {
-		return [
-			new Breadcrumb( '', __( 'Not Found', 'tribe' ) ),
-		];
-	}
-
 	/**
 	 * @return array
 	 */
 	public function get_search_form_args(): array {
 		return [
-			Search_Form_Controller::CLASSES     => [ 'c-search--full', 'search-results__form' ],
 			Search_Form_Controller::FORM_ID     => uniqid( 's-' ),
 			Search_Form_Controller::PLACEHOLDER => __( 'Search', 'tribe' ),
 		];

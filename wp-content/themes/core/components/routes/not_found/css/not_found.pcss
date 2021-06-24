@@ -11,20 +11,20 @@
 
 }
 
-.no-found__content {
-	font-size: var(--font-size-body);
-	font-family: var(--font-family-serif);
-	max-width: var(--grid-7-col);
+.not-found__content {
+	@mixin t-body;
+
+	max-width: var(--grid-max-width-staggered-double);
 	margin: var(--spacer-20) auto var(--spacer-60);
 
 	@media (--viewport-medium) {
 		margin-top: var(--spacer-30);
-		margin-bottom: 80px;
+		margin-bottom: var(--spacer-70);
 	}
 }
 
 .no-found__search {
-	max-width: var(--grid-8-col);
+	max-width: var(--grid-max-width-staggered-double);
 	margin-left: auto;
 	margin-right: auto;
 }
