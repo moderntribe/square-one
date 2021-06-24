@@ -21,6 +21,7 @@
       "core_theme_integrations": "wp-content/themes/core/integrations/",
       "core_theme_fonts": "wp-content/themes/core/assets/fonts/theme/",
       "core_theme_pcss": "wp-content/themes/core/assets/css/src/theme/",
+      "core_components_pcss": "wp-content/themes/core/components/",
       "core_apps_js_src": "wp-content/themes/core/assets/js/src/apps/",
       "core_utils_js_src": "wp-content/themes/core/assets/js/src/utils/",
       "core_admin_css": "wp-content/themes/core/assets/css/dist/admin/",

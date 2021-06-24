@@ -13,4 +13,4 @@ const init = () => {
 	search();
 };
 
- export default init;
+export default init;
