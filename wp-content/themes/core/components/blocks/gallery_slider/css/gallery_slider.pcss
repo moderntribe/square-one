@@ -31,7 +31,6 @@
 	/* CASE: Image Ratio Variable */
 	.b-gallery-slider--variable & {
 		position: relative;
-		overflow-x: hidden;
 	}
 }
 
@@ -41,6 +40,7 @@
 	.b-gallery-slider--variable & {
 		max-width: calc(var(--grid-width) + (100% - var(--grid-width)) / 2);
 		margin: 0 0 0 auto;
+		overflow: visible;
 	}
 }
 
@@ -54,6 +54,19 @@
 		@media (--viewport-medium) {
 			width: calc(10 / 12 * 100%);
 			max-width: var(--grid-10-col);
+		}
+	}
+
+	/* CASE: Image Ratio Variable */
+	.b-gallery-slider--variable & {
+		margin-right: var(--grid-gutter-small);
+
+		@media (--viewport-medium) {
+			margin-right: var(--grid-gutter-medium);
+		}
+
+		@media (--viewport-full) {
+			margin-right: var(--grid-gutter);
 		}
 	}
 }

@@ -75,7 +75,7 @@ class Gallery_Slider_Controller extends Abstract_Controller {
 	protected function required(): array {
 		return [
 			self::CLASSES           => [ 'c-block', 'b-gallery-slider' ],
-			self::CONTAINER_CLASSES => [ 'b-gallery-slider__container', ],
+			self::CONTAINER_CLASSES => [ 'b-gallery-slider__container', 'l-container' ],
 			self::CONTENT_CLASSES   => [ 'b-gallery-slider__content' ],
 		];
 	}
@@ -205,7 +205,7 @@ class Gallery_Slider_Controller extends Abstract_Controller {
 
 		// Variable image ratio swiper options.
 		if ( self::VARIABLE === $this->image_ratio ) {
-			$args['slidesOffsetAfter'] = 40;
+			$args['spaceBetween'] = 0;
 		}
 
 		return json_encode( $args );
@@ -222,9 +222,10 @@ class Gallery_Slider_Controller extends Abstract_Controller {
 		$main_attrs['data-swiper-options'] = $this->get_slider_options();
 
 		$slider = [
-			Slider_Controller::SLIDES     => $this->get_slides(),
-			Slider_Controller::MAIN_ATTRS => $main_attrs,
-			Slider_Controller::CLASSES    => [ 'b-gallery-slider__slider', 'c-slider--arrows-below' ],
+			Slider_Controller::SLIDES       => $this->get_slides(),
+			Slider_Controller::MAIN_ATTRS   => $main_attrs,
+			Slider_Controller::CLASSES      => [ 'b-gallery-slider__slider', 'c-slider--arrows-below' ],
+			Slider_Controller::MAIN_CLASSES => [ 'b-gallery-slider--' . $this->image_ratio ],
 		];
 
 		return $slider;
