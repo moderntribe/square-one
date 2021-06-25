@@ -75,7 +75,7 @@ class Gallery_Slider_Controller extends Abstract_Controller {
 	protected function required(): array {
 		return [
 			self::CLASSES           => [ 'c-block', 'b-gallery-slider' ],
-			self::CONTAINER_CLASSES => [ 'b-gallery-slider__container', 'l-container' ],
+			self::CONTAINER_CLASSES => [ 'b-gallery-slider__container' ],
 			self::CONTENT_CLASSES   => [ 'b-gallery-slider__content' ],
 		];
 	}
@@ -105,6 +105,10 @@ class Gallery_Slider_Controller extends Abstract_Controller {
 	 * @return string
 	 */
 	public function get_content_classes(): string {
+		if ( self::VARIABLE === $this->image_ratio ) {
+			$this->content_classes[] = 'l-container';
+		}
+
 		return Markup_Utils::class_attribute( $this->content_classes );
 	}
 

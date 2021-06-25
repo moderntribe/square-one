@@ -11,11 +11,13 @@ $c = \Tribe\Project\Templates\Components\blocks\gallery_slider\Gallery_Slider_Co
 	<div <?php echo $c->get_container_classes(); ?>>
 
 		<?php if ( ! empty( $c->get_header_args() ) ) { ?>
-			<?php get_template_part(
-				'components/content_block/content_block',
-				null,
-				$c->get_header_args()
-			); ?>
+			<div class="l-container">
+				<?php get_template_part(
+					'components/content_block/content_block',
+					null,
+					$c->get_header_args()
+				); ?>
+			</div>
 		<?php } ?>
 
 		<div <?php echo $c->get_content_classes(); ?>>
