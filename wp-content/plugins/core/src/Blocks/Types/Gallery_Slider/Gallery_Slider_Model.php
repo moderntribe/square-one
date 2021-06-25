@@ -19,13 +19,14 @@ class Gallery_Slider_Model extends Base_Model {
 	 */
 	public function get_data(): array {
 		return [
-			Gallery_Slider_Controller::ATTRS       => $this->get_attrs(),
-			Gallery_Slider_Controller::CLASSES     => $this->get_classes(),
-			Gallery_Slider_Controller::TITLE       => $this->get( Gallery_Slider::TITLE, '' ),
-			Gallery_Slider_Controller::DESCRIPTION => $this->get( Gallery_Slider::DESCRIPTION, '' ),
-			Gallery_Slider_Controller::CTA         => $this->get_cta_args(),
-			Gallery_Slider_Controller::GALLERY     => $this->get( Gallery_Slider::GALLERY, [] ),
-			Gallery_Slider_Controller::IMAGE_RATIO => $this->get( Gallery_Slider::IMAGE_RATIO, Gallery_Slider::FIXED ),
+			Gallery_Slider_Controller::ATTRS           => $this->get_attrs(),
+			Gallery_Slider_Controller::CLASSES         => $this->get_classes(),
+			Gallery_Slider_Controller::TITLE           => $this->get( Gallery_Slider::TITLE, '' ),
+			Gallery_Slider_Controller::DESCRIPTION     => $this->get( Gallery_Slider::DESCRIPTION, '' ),
+			Gallery_Slider_Controller::CTA             => $this->get_cta_args(),
+			Gallery_Slider_Controller::GALLERY         => $this->get( Gallery_Slider::GALLERY, [] ),
+			Gallery_Slider_Controller::IMAGE_RATIO     => $this->get( Gallery_Slider::IMAGE_RATIO, Gallery_Slider::FIXED ),
+			Gallery_Slider_Controller::CAPTION_DISPLAY => $this->get( Gallery_Slider::CAPTION_DISPLAY, Gallery_Slider::CAPTION_DISPLAY_SHOW ),
 		];
 	}
 

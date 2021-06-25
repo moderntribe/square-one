@@ -25,9 +25,13 @@ class Gallery_Slider_Controller extends Abstract_Controller {
 	public const CTA               = 'cta';
 	public const GALLERY           = 'gallery';
 	public const IMAGE_RATIO       = 'image_ratio';
+	public const CAPTION_DISPLAY   = 'caption_display';
 
 	public const FIXED    = 'fixed';
 	public const VARIABLE = 'variable';
+
+	public const CAPTION_DISPLAY_SHOW = 'caption_display_show';
+	public const CAPTION_DISPLAY_HIDE = 'caption_display_hide';
 
 	/**
 	 * @var string[]
@@ -41,6 +45,7 @@ class Gallery_Slider_Controller extends Abstract_Controller {
 	private array $cta;
 	private array $gallery;
 	private string $image_ratio;
+	private string $caption_display;
 	private string $id;
 
 	public function __construct( array $args = [] ) {
@@ -55,6 +60,7 @@ class Gallery_Slider_Controller extends Abstract_Controller {
 		$this->cta               = (array) $args[ self::CTA ];
 		$this->gallery           = (array) $args[ self::GALLERY ];
 		$this->image_ratio       = (string) $args[ self::IMAGE_RATIO ];
+		$this->caption_display   = (string) $args[ self::CAPTION_DISPLAY ];
 		$this->id                = uniqid();
 	}
 
@@ -69,6 +75,7 @@ class Gallery_Slider_Controller extends Abstract_Controller {
 			self::CTA               => [],
 			self::GALLERY           => [],
 			self::IMAGE_RATIO       => self::FIXED,
+			self::CAPTION_DISPLAY   => self::CAPTION_DISPLAY_SHOW,
 		];
 	}
 
@@ -258,16 +265,22 @@ class Gallery_Slider_Controller extends Abstract_Controller {
 	/**
 	 * @param $img_id
 	 *
+	 * Get markup with or without caption based on block setting.
+	 *
 	 * @return string
 	 */
 	protected function get_image_template( $img_id ): string {
-		$slide_markup  = $this->get_slide_img( $img_id );
-		$slide_markup .= defer_template_part( 'components/container/container', null, [
-			Container_Controller::CLASSES => [
-				'b-gallery-slider__meta-wrap',
-			],
-			Container_Controller::CONTENT => $this->get_image_caption( $img_id ),
-		] );
+		if ( self::CAPTION_DISPLAY_SHOW === $this->caption_display ) {
+			$slide_markup  = $this->get_slide_img( $img_id );
+			$slide_markup .= defer_template_part( 'components/container/container', null, [
+				Container_Controller::CLASSES => [
+					'b-gallery-slider__meta-wrap',
+				],
+				Container_Controller::CONTENT => $this->get_image_caption( $img_id ),
+			] );
+		} else {
+			$slide_markup = $this->get_slide_img( $img_id )->render();
+		}
 
 		return $slide_markup;
 	}

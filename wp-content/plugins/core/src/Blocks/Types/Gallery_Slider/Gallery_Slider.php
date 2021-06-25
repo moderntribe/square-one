@@ -23,6 +23,10 @@ class Gallery_Slider extends Block_Config {
 	public const FIXED       = 'fixed';
 	public const VARIABLE    = 'variable';
 
+	public const CAPTION_DISPLAY      = 'caption_display';
+	public const CAPTION_DISPLAY_SHOW = 'caption_display_show';
+	public const CAPTION_DISPLAY_HIDE = 'caption_display_hide';
+
 	public const SLIDESHOW = 'slideshow';
 
 	public function add_block() {
@@ -84,12 +88,22 @@ class Gallery_Slider extends Block_Config {
 		->add_field( new Field( self::NAME . '_' . self::IMAGE_RATIO, [
 			'label'         => __( 'Image Ratio', 'tribe' ),
 			'name'          => self::IMAGE_RATIO,
-			'type'          => 'select',
+			'type'          => 'button_group',
 			'choices'       => [
 				self::FIXED    => __( 'Fixed', 'tribe' ),
 				self::VARIABLE => __( 'Variable', 'tribe' ),
 			],
 			'default_value' => self::FIXED,
+			] )
+		)->add_field( new Field( self::NAME . '_' . self::CAPTION_DISPLAY, [
+			'label'         => __( 'Show Image Captions?', 'tribe' ),
+			'name'          => self::CAPTION_DISPLAY,
+			'type'          => 'button_group',
+			'choices'       => [
+				self::CAPTION_DISPLAY_SHOW => __( 'Yes', 'tribe' ),
+				self::CAPTION_DISPLAY_HIDE => __( 'No', 'tribe' ),
+			],
+			'default_value' => self::CAPTION_DISPLAY_SHOW,
 			] )
 		);
 	}
