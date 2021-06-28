@@ -3,11 +3,14 @@
 All notable changes to this project will be documented in this file.
 
 ## 2021.06
+* Added Styles for the Not Found Page
 * Added: Styles and additional functionality to the search template.
 * Fixed: PHPCS workflow from not running when set as "Require status checks to pass before merging" if no files changed;
-preventing a PR from being able to be merged. 
+preventing a PR from being able to be merged.
 
 ## 2021.05
+* Added: herokuish deployment support (dokku)
+* Fixed: Husky hooks commits from scanning all PHP files with phpcs and limits to our core plugin/theme.
 * Fixed: broken main README.md links
 * Removed: husky hooks.
 * Added: lefthook git-hooks (see lefthook.yml and .lefthook folder) to replace husky hooks: https://github.com/evilmartians/lefthook
