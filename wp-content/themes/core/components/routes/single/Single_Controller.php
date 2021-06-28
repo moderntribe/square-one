@@ -10,6 +10,8 @@ use Tribe\Project\Templates\Models\Breadcrumb;
 
 class Single_Controller extends Abstract_Controller {
 
+	use Breadcrumbs;
+
 	/**
 	 * @var int|string
 	 */
@@ -56,27 +58,6 @@ class Single_Controller extends Abstract_Controller {
 	public function render_footer(): void {
 		do_action( 'get_footer', null );
 		get_template_part( 'components/document/footer/footer', 'single' );
-	}
-
-	public function render_breadcrumbs(): void {
-		//TODO: let's make this get_breadcrumb_args() and render in template
-		get_template_part(
-			'components/breadcrumbs/breadcrumbs',
-			'single',
-			[ Breadcrumbs_Controller::BREADCRUMBS => $this->get_breadcrumbs() ]
-		);
-	}
-
-	/**
-	 * @return \Tribe\Project\Templates\Models\Breadcrumb[]
-	 */
-	protected function get_breadcrumbs(): array {
-		$page = get_the_ID();
-		$url  = $page ? get_permalink( $page ) : home_url();
-
-		return [
-			new Breadcrumb( $url, get_the_title( $page ) ),
-		];
 	}
 
 	public function get_image_args() {

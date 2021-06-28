@@ -9,9 +9,7 @@ $c->render_header();
 
 	<main id="main-content">
 
-		<?php $c->render_breadcrumbs(); ?>
-
-		<?php get_template_part( 'components/header/subheader/subheader' ) ?>
+		<?php get_template_part( 'components/header/subheader/subheader' ); ?>
 
 		<article class="item-single">
 

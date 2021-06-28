@@ -4,8 +4,11 @@ namespace Tribe\Project\Templates\Components\routes\index;
 
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\sidebar\Sidebar_Controller;
+use Tribe\Project\Templates\Components\Traits\Breadcrumbs;
 
 class Index_Controller extends Abstract_Controller {
+
+	use Breadcrumbs;
 
 	/**
 	 * @var int|string
