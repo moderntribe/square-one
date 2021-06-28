@@ -83,6 +83,10 @@ class Link_Controller extends Abstract_Controller {
 	public function get_content(): string {
 		$content = $this->content;
 
+		if ( ! is_string( $content ) ) {
+			$content = (string) $content;
+		}
+
 		if ( $this->target === '_blank' ) {
 			$content .= $this->new_window_text();
 		}
