@@ -4,12 +4,10 @@ namespace Tribe\Project\Templates\Components\header\subheader;
 
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
-use Tribe\Project\Templates\Components\Traits\Breadcrumbs;
-use Tribe\Project\Templates\Components\breadcrumbs\Breadcrumbs_Controller;
 use Tribe\Project\Templates\Components\image\Image_Controller;
 use Tribe\Project\Templates\Components\text\Text_Controller;
+use Tribe\Project\Templates\Components\Traits\Breadcrumbs;
 use Tribe\Project\Templates\Components\Traits\Page_Title;
-use Tribe\Project\Templates\Models\Breadcrumb;
 use Tribe\Project\Theme\Config\Image_Sizes;
 
 class Subheader_Controller extends Abstract_Controller {

@@ -8,8 +8,6 @@
 
 namespace Tribe\Project\Templates\Components;
 
-use Tribe\Project\Templates\Components\Traits\Breadcrumbs;
-
 /**
  * Class for other controllers to extend.
  */

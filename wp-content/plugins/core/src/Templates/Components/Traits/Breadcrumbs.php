@@ -41,17 +41,19 @@ trait Breadcrumbs {
 	 * @return void
 	 */
 	protected function get_singular_breadcrumbs(): void {
-		if ( is_post_type_hierarchical( get_post_type() ) ) {
-			$parent_ids = get_post_ancestors( get_the_ID() );
-			
-			// Bail early if no parent IDs.
-			if ( empty( $parent_ids ) ) {
-				return;
-			}
+		if ( ! is_post_type_hierarchical( get_post_type() ) ) {
+			return;
+		}
 
-			foreach ( array_reverse( $parent_ids ) as $parent_id ) {
-				$this->response[] = new Breadcrumb( get_the_permalink( $parent_id ), get_the_title( $parent_id ) );
-			}
+		$parent_ids = get_post_ancestors( get_the_ID() );
+		
+		// Bail early if no parent IDs.
+		if ( empty( $parent_ids ) ) {
+			return;
+		}
+
+		foreach ( array_reverse( $parent_ids ) as $parent_id ) {
+			$this->response[] = new Breadcrumb( get_the_permalink( $parent_id ), get_the_title( $parent_id ) );
 		}
 	}
 
