@@ -160,3 +160,22 @@ determined. Provide a hint with a preceeding docblock, where appropriate.
 /** @var Something $something */
 $something = $container->get( 'my.string' );
 ```
+
+Even simpler, you can add a `.phpstorm.meta.php` in the root of the project to auto-enable PHPstorm to assume which class is being loaded. 
+This is much cleaner and simpler. Note, it will only support full `Class::class` resolution and not a container reference
+like `foo.bar`.
+
+
+```php
+<?php
+// .phpstorm.meta.php
+namespace PHPSTORM_META
+{
+    override(\Psr\Container\ContainerInterface::get(0), map([
+        '' => '@',
+    ]));
+    override(\DI\Container::get(0), map([
+        '' => '@',
+    ]));
+}
+```
