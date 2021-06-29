@@ -14,7 +14,7 @@ get_header();
 			<div class="l-container">
 				<p><?php echo wp_count_posts()->publish . ' ' . __( 'posts in', 'tribe' ) . ' "' . get_the_archive_title() . '"';  ?></p>
 			</div>
-			<?php get_template_part( 'components/blocks/content_loop/content_loop', null, $c->get_loop_args() ); ?>
+			<?php get_template_part( 'components/blocks/content_loop/content_loop', null, $c->get_content_loop_data() ); ?>
 		<?php else :
 			get_template_part( 'components/no_results/no_results', 'index' );
 		endif; ?>

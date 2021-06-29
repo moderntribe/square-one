@@ -29,7 +29,7 @@ class Index_Controller extends Abstract_Controller {
 		];
 	}
 
-	public function get_loop_args(): array {
+	public function get_content_loop_data(): array {
 		global $wp_query;
 		$posts = [];
 
@@ -50,9 +50,9 @@ class Index_Controller extends Abstract_Controller {
 	/**
 	 * Get posts in the featured taxonomy.
 	 */
-	public function get_featured_posts_args(): array {
+	public function get_content_loop_featured_data(): array {
 
-		$featured_post_query = $this->get_featured_posts();
+		$featured_post_query = $this->get_featured_posts_query();
 		$featured_post_array = [];
 
 		if ( ! $featured_post_query->have_posts() ) {
@@ -69,14 +69,16 @@ class Index_Controller extends Abstract_Controller {
 		];
 	}
 
-	protected function get_featured_posts(): WP_Query {
+	protected function get_featured_posts_query(): WP_Query {
 		// Get featured posts
 		return new WP_Query( [
 			'tax_query' => [
 				[
 					'taxonomy'       => Featured::NAME,
-					'operator'       => 'EXISTS',
-					'posts_per_page' => '7',
+					'terms'          => ['yes'],
+					'field'          => 'slug',
+					'operator'       => 'IN',
+					'posts_per_page' => '7', // Exactly 7, because this is using the featured post block layout
 				],
 			],
 		] );
