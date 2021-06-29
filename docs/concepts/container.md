@@ -161,7 +161,7 @@ determined. Provide a hint with a preceeding docblock, where appropriate.
 $something = $container->get( 'my.string' );
 ```
 
-Even simpler, you can add a `.phpstorm.meta.php` in the root of the project to auto-enable PHPstorm to assume which class is being loaded. 
+Even simpler, you can add a `.phpstorm.meta.php` in the root of the project to enable PHPstorm to assume which class is being loaded. 
 This is much cleaner and simpler. Note, it will only support full `Class::class` resolution and not a container reference
 like `foo.bar`.
 
