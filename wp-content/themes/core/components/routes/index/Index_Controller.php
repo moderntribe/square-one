@@ -3,12 +3,11 @@
 namespace Tribe\Project\Templates\Components\routes\index;
 
 use Tribe\Project\Blocks\Types\Content_Loop\Content_Loop;
-use Tribe\Project\Taxonomies\Featured\Featured;
+use Tribe\Project\Object_Meta\Post_Archive_Featured_Settings;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\blocks\content_loop\Content_Loop_Controller;
 use Tribe\Project\Templates\Components\Traits\Post_List_Field_Formatter;
 use Tribe\Project\Templates\Models\Breadcrumb;
-use WP_Query;
 
 class Index_Controller extends Abstract_Controller {
 
@@ -48,18 +47,18 @@ class Index_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * Get posts in the featured taxonomy.
+	 * Get posts in the featured posts from the Post Archive Settings page
 	 */
 	public function get_content_loop_featured_data(): array {
 
-		$featured_post_query = $this->get_featured_posts_query();
+		$featured_post_query = get_field( Post_Archive_Featured_Settings::FEATURED_POSTS, 'option' );
 		$featured_post_array = [];
 
-		if ( ! $featured_post_query->have_posts() ) {
+		if ( empty( $featured_post_query ) ) {
 			return [];
 		}
 
-		foreach ( $featured_post_query->posts as $post ) {
+		foreach ( $featured_post_query as $post ) {
 			$featured_post_array[] = $this->formatted_post( $post, 45 );
 		}
 
@@ -67,21 +66,6 @@ class Index_Controller extends Abstract_Controller {
 			Content_Loop_Controller::LAYOUT => Content_Loop::LAYOUT_FEATURE,
 			Content_Loop_Controller::POSTS  => array_slice( $featured_post_array, 0, 6 ),
 		];
-	}
-
-	protected function get_featured_posts_query(): WP_Query {
-		// Get featured posts
-		return new WP_Query( [
-			'tax_query' => [
-				[
-					'taxonomy'       => Featured::NAME,
-					'terms'          => ['yes'],
-					'field'          => 'slug',
-					'operator'       => 'IN',
-					'posts_per_page' => '7', // Exactly 7, because this is using the featured post block layout
-				],
-			],
-		] );
 	}
 
 	// TODO: This should be a utility method somewhere
