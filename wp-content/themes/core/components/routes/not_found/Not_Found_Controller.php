@@ -3,8 +3,7 @@
 namespace Tribe\Project\Templates\Components\routes\not_found;
 
 use Tribe\Project\Templates\Components\Abstract_Controller;
-use Tribe\Project\Templates\Components\breadcrumbs\Breadcrumbs_Controller;
-use Tribe\Project\Templates\Models\Breadcrumb;
+use Tribe\Project\Templates\Components\search_form\Search_Form_Controller;
 
 class Not_Found_Controller extends Abstract_Controller {
 
@@ -13,24 +12,13 @@ class Not_Found_Controller extends Abstract_Controller {
 	 */
 	public $sidebar_id = '';
 
-	public function render_breadcrumbs(): void {
-		//TODO: let's make this get_breadcrumb_args() and render in template
-		get_template_part(
-			'components/breadcrumbs/breadcrumbs',
-			'index',
-			[ Breadcrumbs_Controller::BREADCRUMBS => $this->get_breadcrumbs() ]
-		);
-	}
-
 	/**
-	 * @return \Tribe\Project\Templates\Models\Breadcrumb[]
+	 * @return array
 	 */
-	protected function get_breadcrumbs(): array {
-		$page = get_option( 'page_for_posts' );
-		$url  = $page ? get_permalink( $page ) : home_url();
-
+	public function get_search_form_args(): array {
 		return [
-			new Breadcrumb( $url, __( 'News', 'tribe' ) ),
+			Search_Form_Controller::FORM_ID     => uniqid( 's-' ),
+			Search_Form_Controller::PLACEHOLDER => __( 'Search', 'tribe' ),
 		];
 	}
 

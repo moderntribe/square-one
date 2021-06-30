@@ -37,7 +37,7 @@ class Object_Meta_Definer implements Definer_Interface {
 
 			Post_Archive_Settings::class                        => static function ( ContainerInterface $container ) {
 				return new Post_Archive_Settings( [
-					'settings_pages' => [ $container->get( Settings\General::class )->get_slug() ],
+					'settings_pages' => [ $container->get( Settings\Post_Settings::class )->get_slug() ],
 				] );
 			},
 

@@ -8,19 +8,25 @@ $c = Not_Found_Controller::factory();
 get_header();
 ?>
 	<main id="main-content">
-		<?php $c->render_breadcrumbs(); ?>
 
-		<div class="l-container">
+		<div class="l-container t-sink">
 
 			<div class="not-found">
 
-				<h3 class="not-found__title">
-					<?php echo esc_html( __( '404 Page Not Found' ) ); ?>
-				</h3>
+				<h1 class="not-found__title h1">
+					<?php echo esc_html( __( 'Error 404: I’m pretty sure you broke it' ) ); ?>
+				</h1>
 
-				<p class="no-found__content">
-					<?php echo esc_html( __( 'The content you are looking for does not exist.' ) ); ?>
+				<p class="not-found__content">
+					<?php printf(
+						__( 'Start over from <a href="%s">home</a>, use the navigation to get back on track or search for something.' ),
+						esc_url( get_site_url() ),
+					); ?>
 				</p>
+
+				<div class="not-found__search">
+					<?php get_template_part( 'components/search_form/search_form', null, $c->get_search_form_args() ); ?>
+				</div>
 
 			</div>
 
