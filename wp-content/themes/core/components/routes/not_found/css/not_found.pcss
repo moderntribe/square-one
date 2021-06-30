@@ -1,0 +1,36 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Route: Not Found Page
+ *
+ * ----------------------------------------------------------------------------- */
+
+.not-found {
+	text-align: center;
+	margin: var(--spacer-60) 0;
+
+	@media (--viewport-medium) {
+		margin: var(--spacer-80) 0;
+	}
+}
+
+.not-found__title {
+
+}
+
+.not-found__content {
+	@mixin t-body;
+
+	max-width: var(--grid-max-width-staggered-double);
+	margin: var(--spacer-20) auto var(--spacer-60);
+
+	@media (--viewport-medium) {
+		margin-top: var(--spacer-30);
+		margin-bottom: var(--spacer-70);
+	}
+}
+
+.not-found__search {
+	max-width: var(--grid-max-width-staggered-double);
+	margin-left: auto;
+	margin-right: auto;
+}
