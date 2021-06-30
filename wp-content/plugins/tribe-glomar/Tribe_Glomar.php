@@ -182,7 +182,7 @@ class Tribe_Glomar {
 			}
 
 			// Set a cookie so page caching knows to let us in.
-			setcookie( self::COOKIE, '1', time() + ( MINUTE_IN_SECONDS * 10 ), COOKIEPATH, COOKIE_DOMAIN );
+			setcookie( self::COOKIE, '1', time() + ( MINUTE_IN_SECONDS * 10 ), COOKIEPATH, (string) COOKIE_DOMAIN );
 			return;
 		}
 
