@@ -5,6 +5,7 @@ namespace Tribe\Project\Templates\Components\routes\single;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\image\Image_Controller;
 use Tribe\Project\Templates\Components\sidebar\Sidebar_Controller;
+use Tribe\Project\Templates\Components\Traits\Breadcrumbs;
 
 class Single_Controller extends Abstract_Controller {
 
