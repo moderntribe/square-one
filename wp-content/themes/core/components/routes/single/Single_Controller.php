@@ -3,10 +3,8 @@
 namespace Tribe\Project\Templates\Components\routes\single;
 
 use Tribe\Project\Templates\Components\Abstract_Controller;
-use Tribe\Project\Templates\Components\breadcrumbs\Breadcrumbs_Controller;
 use Tribe\Project\Templates\Components\image\Image_Controller;
 use Tribe\Project\Templates\Components\sidebar\Sidebar_Controller;
-use Tribe\Project\Templates\Models\Breadcrumb;
 
 class Single_Controller extends Abstract_Controller {
 
