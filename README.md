@@ -20,7 +20,7 @@ SquareOne is a development framework lovingly maintained by Modern Tribe used fo
 
 ## Support
 
-Usage of SquareOne is not actively supported by Modern Tribe outside of client contracts. Pull requests and suggestions are welcome and will be addressed based on business need.
+Modern Tribe is actively working on SquareOne. Bug reports, feature requests, questions, and pull requests are welcome and will be addressed based on need.
 
 ## Modern Tribe
 
