@@ -40,8 +40,8 @@ class Subheader_Archive_Controller extends Abstract_Controller {
 
 	protected function defaults(): array {
 		return [
-			self::CLASSES           => [ 'c-subheader' ],
-			self::CONTAINER_CLASSES => [ 'l-container' ], 
+			self::CLASSES           => [],
+			self::CONTAINER_CLASSES => [],
 			self::ATTRS             => [],
 			self::MEDIA_CLASSES     => [],
 			self::CONTENT_CLASSES   => [],
@@ -50,10 +50,11 @@ class Subheader_Archive_Controller extends Abstract_Controller {
 
 	protected function required(): array {
 		return [
-			self::CONTAINER_CLASSES => [ 'l-container' ], 
+			self::CLASSES           => [ 'c-subheader', 'c-subheader-archive' ],
+			self::CONTAINER_CLASSES => [ 'l-container' ],
 			self::MEDIA_CLASSES     => [ 'c-subheader__media' ],
 			self::CONTENT_CLASSES   => [ 'c-subheader__content' ],
-			self::CLASSES           => [ 'c-subheader', 'c-subheader-archive' ],
+
 		];
 	}
 
@@ -65,18 +66,18 @@ class Subheader_Archive_Controller extends Abstract_Controller {
 		return Markup_Utils::class_attribute( $this->classes );
 	}
 
-	
+
 	public function get_content_classes(): string {
 		return Markup_Utils::class_attribute( $this->content_classes );
 	}
 
-	
+
 	public function get_media_classes(): string {
 		return Markup_Utils::class_attribute( $this->media_classes );
 	}
 
 
-	
+
 	public function get_container_classes(): string {
 		return Markup_Utils::class_attribute( $this->container_classes );
 	}
@@ -85,12 +86,12 @@ class Subheader_Archive_Controller extends Abstract_Controller {
 		return Markup_Utils::concat_attrs( $this->attrs );
 	}
 
-	
+
 	public function get_image_args(): array {
 		if (  empty( $this->hero_image_id ) ) {
 			return [];
 		}
-	
+
 		return [
 			Image_Controller::IMG_ID       => (int) $this->hero_image_id,
 			Image_Controller::AUTO_SHIM    => false,
@@ -105,7 +106,7 @@ class Subheader_Archive_Controller extends Abstract_Controller {
 		];
 	}
 
-	
+
 	public function get_description_args(): array {
 		return [
 			Text_Controller::TAG     => 'p',
@@ -114,7 +115,7 @@ class Subheader_Archive_Controller extends Abstract_Controller {
 		];
 	}
 
-	
+
 	public function get_title_args(): array {
 		return [
 			Text_Controller::TAG     => 'h1',
@@ -125,14 +126,14 @@ class Subheader_Archive_Controller extends Abstract_Controller {
 
 
 	/**
-	 * Get ACF fields 
-	 * 
-	 * Gets the content added in the meta fields 
+	 * Get ACF fields
+	 *
+	 * Gets the content added in the meta fields
 	 */
 	protected function map_acf_fields() {
 		if ( is_category() ) {
 			$term = get_queried_object();
-		
+
 			if ( ! empty( $term ) ) {
 				$this->title       = $term->name;
 				$this->description = $term->category_description;
@@ -145,15 +146,15 @@ class Subheader_Archive_Controller extends Abstract_Controller {
 			if ( ! empty( get_field( 'title', 'option' ) ) ) {
 				$this->title = get_field( 'title', 'option' );
 			}
-	
+
 			if ( ! empty( get_field( 'description', 'option' ) ) ) {
 				$this->description = get_field( 'description', 'option' );
 			}
-	
+
 			if ( ! empty( get_field( 'hero_image', 'option' ) ) ) {
 				$this->hero_image_id = get_field( 'hero_image', 'option' )['ID'];
 			}
-		}	
+		}
 	}
 
 }
