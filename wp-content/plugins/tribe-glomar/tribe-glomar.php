@@ -1,10 +1,15 @@
 <?php
-/*
-Plugin Name: Tribe Glomar
-Description: Force the frontend of the site to hide if you are not logged in.
-Author: Modern Tribe, Inc.
-Author URI: http://tri.be
-Version: 1.0.5
+declare(strict_types=1);
+
+/**
+* Plugin Name: Tribe Glomar
+* Description: Force the frontend of the site to hide if you are not logged in.
+* Author: Modern Tribe, Inc.
+* Author URI: http://tri.be
+* Version: 1.0.5
+* License: GPL v2 or later
+* License URI: http://www.gnu.org/licenses/gpl-2.0.txt
+* Requires PHP: 7.4
 */
 
 /**
@@ -13,7 +18,7 @@ Version: 1.0.5
  * @return void
  */
 if ( ! function_exists( 'tribe_glomar_load' ) ) { // play nice
-	function tribe_glomar_load() {
+	function tribe_glomar_load() : void {
 		if ( defined( 'TRIBE_GLOMAR' ) && TRIBE_GLOMAR === false ) {
 			return;
 		}

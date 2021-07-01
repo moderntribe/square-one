@@ -1,9 +1,11 @@
 <?php declare(strict_types=1);
+
 /**
  * Class Tribe_Glomar_Admin
  */
 class Tribe_Glomar_Admin {
-	const SLUG = 'tribe_glomar_settings';
+
+	public const SLUG = 'tribe_glomar_settings';
 
 	public function add_hooks() {
 		if ( is_multisite() ) {
@@ -63,31 +65,33 @@ class Tribe_Glomar_Admin {
 			'glomar-settings'
 		);
 
-		if ( ! is_multisite() ) {
-			register_setting(
-				self::SLUG,
-				'glomar-ip-whitelist',
-				[ $this, 'sanitize_ip_list' ]
-			);
-
-			register_setting(
-				self::SLUG,
-				'glomar-secret',
-				[ $this, 'sanitize_secret' ]
-			);
-
-			register_setting(
-				self::SLUG,
-				'glomar-action',
-				[ $this, 'sanitize_action' ]
-			);
-
-			register_setting(
-				self::SLUG,
-				'glomar-message',
-				[ $this, 'sanitize_message' ]
-			);
+		if ( is_multisite() ) {
+			return;
 		}
+
+		register_setting(
+			self::SLUG,
+			'glomar-ip-whitelist',
+			[ $this, 'sanitize_ip_list' ]
+		);
+
+		register_setting(
+			self::SLUG,
+			'glomar-secret',
+			[ $this, 'sanitize_secret' ]
+		);
+
+		register_setting(
+			self::SLUG,
+			'glomar-action',
+			[ $this, 'sanitize_action' ]
+		);
+
+		register_setting(
+			self::SLUG,
+			'glomar-message',
+			[ $this, 'sanitize_message' ]
+		);
 	}
 
 	public function display_admin_page() {
@@ -136,7 +140,7 @@ class Tribe_Glomar_Admin {
 				network_admin_url( 'settings.php' )
 			)
 		);
-		exit();
+		exit;
 	}
 
 	/******** IP Address Field ********/
@@ -153,10 +157,12 @@ class Tribe_Glomar_Admin {
 	}
 
 	private function save_ip_field() {
-		if ( isset( $_POST['glomar-ip-whitelist'] ) ) {
-			$addresses = $this->sanitize_ip_list( $_POST['glomar-ip-whitelist'] );
-			$this->set_option( 'glomar-ip-whitelist', $addresses );
+		if ( ! isset( $_POST['glomar-ip-whitelist'] ) ) {
+			return;
 		}
+
+		$addresses = $this->sanitize_ip_list( $_POST['glomar-ip-whitelist'] );
+		$this->set_option( 'glomar-ip-whitelist', $addresses );
 	}
 
 	public function sanitize_ip_list( $list ) {
@@ -172,10 +178,13 @@ class Tribe_Glomar_Admin {
 
 		foreach ( $list as $a ) {
 			$a = trim( $a );
-			if ( preg_match( '!^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$!', $a ) ) {
-				$save[] = $a;
+			if ( ! preg_match( '!^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$!', $a ) ) {
+				continue;
 			}
+
+			$save[] = $a;
 		}
+
 		return $save;
 	}
 
@@ -268,6 +277,7 @@ class Tribe_Glomar_Admin {
 
 	public function sanitize_secret( $secret ) {
 		$secret = sanitize_title( $secret );
+
 		return $secret;
 	}
 
@@ -318,9 +328,15 @@ class Tribe_Glomar_Admin {
 
 		// Set the default message if a custom message is not set.
 		if ( empty( $message ) ) {
-			$message = '<p><a href="http://www.radiolab.org/story/confirm-nor-deny/"><img width="100%" src="https://i.imgur.com/Ax05U04.jpg"></a></p>' .
-			'<h1>' . __( 'You\'ve been Glomar\'d', 'tribe' ) . '</h1>' .
-			'<p>' . __( 'We can neither confirm nor deny the existence or nonexistence of records responsive to your request. The fact of the existence or nonexistence of requested records is currently and properly classified and is intelligence sources and methods information that is protected from disclosure.', 'tribe' ) . '</p>';
+			$message =
+			'<h1>' . __( 'Access Denied', 'tribe' ) . '</h1>' .
+			'<p>' . sprintf(
+				wp_kses_post(
+					__( 'You are not allowed to access this site. Please <a href="%s" title="Login">login</a> or request access from an administrator', 'tribe' )
+				),
+				wp_login_url()
+			)
+			. '</p>';
 		}
 
 		return $message;
@@ -331,9 +347,9 @@ class Tribe_Glomar_Admin {
 	private function get_option( $option, $default = false ) {
 		if ( is_multisite() ) {
 			return get_site_option( $option, $default );
-		} else {
-			return get_option( $option, $default );
 		}
+
+		return get_option( $option, $default );
 	}
 
 	private function set_option( $option, $value ) {
@@ -343,4 +359,5 @@ class Tribe_Glomar_Admin {
 			update_option( $option, $value );
 		}
 	}
+
 }

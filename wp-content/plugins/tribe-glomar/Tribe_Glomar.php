@@ -1,16 +1,18 @@
 <?php declare(strict_types=1);
+
 /**
  * Force the frontend of the site to hide if you are not logged in.
  *
  * @see http://www.radiolab.org/story/confirm-nor-deny/
  */
 class Tribe_Glomar {
+
 	/**
 	 * Name of the cookie.
 	 *
 	 * @var string
 	 */
-	const COOKIE = 'wordpress_logged_in_glomar';
+	public const COOKIE = 'wordpress_logged_in_glomar';
 
 	/**
 	 * Path for the frontend redirect.
@@ -29,9 +31,9 @@ class Tribe_Glomar {
 	/**
 	 * Holds instance of the admin class.
 	 *
-	 * @var Tribe_Glomar_Admin
+	 * @var \Tribe_Glomar_Admin
 	 */
-	private $admin = null;
+	private ?Tribe_Glomar_Admin $admin = null;
 
 	/**
 	 * Minimum capability used to determine if a user has 'admin access',
@@ -40,7 +42,7 @@ class Tribe_Glomar {
 	 *
 	 * @var string
 	 */
-	protected $min_admin_cap = 'edit_posts';
+	protected string $min_admin_cap = 'edit_posts';
 
 	/**
 	 * Class constructor.
@@ -76,21 +78,25 @@ class Tribe_Glomar {
 		add_action( 'tribe_glomar_current_action_glomar', [ $this, 'handle_glomar_page' ] );
 		add_action( 'tribe_glomar_current_action_login', [ $this, 'handle_redirect_login' ] );
 
-		if ( is_admin() ) {
-			$this->admin->add_hooks();
+		if ( ! is_admin() ) {
+			return;
 		}
+
+		$this->admin->add_hooks();
 	}
 
 	/**
 	 * Rewrite robots_txt to avoid sitemaps etc.
 	 *
 	 * @param string $output
+	 *
 	 * @return string
 	 */
-	public function rewrite_robots_txt( $output ) {
+	public function rewrite_robots_txt( $output ): string {
 		$output  = "User-agent: *\n";
 		$output .= "Disallow: /wp-admin/\n";
 		$output .= "Disallow: /wp-includes/\n";
+
 		return $output;
 	}
 
@@ -101,7 +107,7 @@ class Tribe_Glomar {
 	 *
 	 * @return int
 	 */
-	public function filter_public_option( $option ) {
+	public function filter_public_option( $option ): int {
 		return ( $option == 2 ) ? 2 : 0;
 	}
 
@@ -110,11 +116,11 @@ class Tribe_Glomar {
 	}
 
 	/**
-	 * @param WP $wp
+	 * @param \WP $wp
 	 *
 	 * @return void
 	 */
-	public function handle_request( $wp ) {
+	public function handle_request( WP $wp ) {
 		if ( ! isset( $wp->query_vars['glomar'] ) ) {
 			return;
 		}
@@ -154,6 +160,7 @@ class Tribe_Glomar {
 
 	/**
 	 * Show a default glomar message if there's no glomar template on the theme.
+	 *
 	 * @param int $response_code
 	 */
 	protected function handle_glomar_page_default( $response_code ) {
@@ -183,6 +190,7 @@ class Tribe_Glomar {
 
 			// Set a cookie so page caching knows to let us in.
 			setcookie( self::COOKIE, '1', time() + ( MINUTE_IN_SECONDS * 10 ), COOKIEPATH, (string) COOKIE_DOMAIN );
+
 			return;
 		}
 
@@ -199,7 +207,7 @@ class Tribe_Glomar {
 		do_action( 'do_not_cache' );
 
 		wp_safe_redirect( home_url( $this->path ), 303 );
-		exit();
+		exit;
 	}
 
 	/**
@@ -207,10 +215,9 @@ class Tribe_Glomar {
 	 *
 	 * @return bool
 	 */
-	private function bypass() {
+	private function bypass(): bool {
 
 		if ( is_user_logged_in() ) {
-
 			if ( current_user_can( $this->min_admin_cap ) ) {
 				return true; // assumes that we've made this a splash page and lower level users should not bypass it.
 			}
@@ -249,6 +256,7 @@ class Tribe_Glomar {
 
 		if ( ! empty( $_GET[ $secret ] ) ) {
 			setcookie( $secret, '1', time() + ( DAY_IN_SECONDS * 30 ), COOKIEPATH, COOKIE_DOMAIN );
+
 			return true;
 		}
 
@@ -268,14 +276,12 @@ class Tribe_Glomar {
 	 * Clear the cookie when the user logs out.
 	 */
 	public function clear_cookie_on_logout() {
-		if ( ! $this->is_ip_whitelisted() ) {
-			setcookie( self::COOKIE, '1', time() - YEAR_IN_SECONDS, COOKIEPATH, COOKIE_DOMAIN );
+		if ( $this->is_ip_whitelisted() ) {
+			return;
 		}
+
+		setcookie( self::COOKIE, '1', time() - YEAR_IN_SECONDS, COOKIEPATH, COOKIE_DOMAIN );
 	}
-
-	/********** SINGLETON FUNCTIONS **********/
-
-	/* Don't edit below here! */
 
 	/**
 	 * Instance of this class for use as singleton
@@ -286,6 +292,7 @@ class Tribe_Glomar {
 	 * Create the instance of the class
 	 *
 	 * @static
+	 *
 	 * @return void
 	 */
 	public static function init( Tribe_Glomar_Admin $admin ) {
@@ -297,7 +304,8 @@ class Tribe_Glomar {
 	 * Get (and instantiate, if necessary) the instance of the class
 	 *
 	 * @static
-	 * @return Tribe_Glomar
+	 *
+	 * @return \Tribe_Glomar
 	 */
 	public static function get_instance( Tribe_Glomar_Admin $admin ) {
 		if ( ! is_a( self::$instance, __CLASS__ ) ) {
