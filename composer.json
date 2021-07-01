@@ -61,7 +61,7 @@
       "type": "package",
       "package": {
         "name": "advanced-custom-fields/advanced-custom-fields-pro",
-        "version": "5.9.5",
+        "version": "5.9.7",
         "type": "wordpress-plugin",
         "dist": {
           "type": "zip",
@@ -102,13 +102,13 @@
     "wpackagist-plugin/configure-smtp": "3.1",
     "wpackagist-plugin/disable-emojis": "1.7.2",
     "wpackagist-plugin/gravity-forms-wcag-20-form-fields": "1.7.2",
-    "wpackagist-plugin/limit-login-attempts-reloaded": "2.20.5",
+    "wpackagist-plugin/limit-login-attempts-reloaded": "2.22.1",
     "wpackagist-plugin/posts-to-posts": "1.6.6",
-    "wpackagist-plugin/redirection": "5.0.1",
+    "wpackagist-plugin/redirection": "5.1.1",
     "wpackagist-plugin/regenerate-thumbnails": "3.1.5",
-    "wpackagist-plugin/the-events-calendar": "5.4.0.2",
-    "wpackagist-plugin/user-switching": "1.5.6",
-    "wpackagist-plugin/wordpress-seo": "16.0.2",
+    "wpackagist-plugin/the-events-calendar": "5.8.0",
+    "wpackagist-plugin/user-switching": "1.5.7",
+    "wpackagist-plugin/wordpress-seo": "16.6.1",
     "wpackagist-plugin/wp-tota11y": "^1.2.0"
   },
   "require-dev": {
