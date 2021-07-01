@@ -16,7 +16,7 @@ We stand by WordPress as the first in class CMS, and paired with SquareOne it ca
 SquareOne is battle tested at various scales from a simple brochure site to a site handling millions of hits a day. It supports fully cached sites, dynamic sites, complex applications, API headless,  and commerce sites with proven success.
 
 ### Coding Standards
-SquareOne follows the WordPress Coding Standards with some enhancements for using some of the latest technology like PHP7+, next generation JavaScript, and more.
+SquareOne follows the [WordPress Coding Standards with some enhancements](https://github.com/moderntribe/coding-standards) for using some of the latest technology like PHP7+, next generation JavaScript, and more.
 
 ### SOLID Principle
 SquareOne has been architected to follow the [SOLID](https://en.wikipedia.org/wiki/SOLID) principles. This allows for the use of modern architecture, OOP based practices, testability, and more. 
@@ -26,11 +26,11 @@ SquareOne has embedded docs that cover every part of the system. In addition, in
 
 ## DevOps
 
-### SquareOne Local
-We’ve built our own Docker-based local development environment. It allows for the local dev environment to be managed by code so everyone can keep infrastructure in sync. It’s comprised of a Global container stack that manages DNS and SQL, and the Project Container stack that runs the HTTP container, caching layer, and other required services for the project. This stack is optional, but makes it easy to get up and running with identical environment quickly.
+### SquareOne Local CLI
+SquareOne pairs with [SquareOne Docker CLI](https://github.com/moderntribe/square1-global-docker) our command Line driven local development environment based on docker. It allows for the local dev environment to be managed by code so everyone can keep infrastructure in sync. It’s comprised of a Global container stack that manages DNS and persistent storage, and the Project Container stack that runs the HTTP container, caching layer, and other required services for the project. This stack is optional, but is designed to be turn key with SquareOne – making it easy to get up and running with identical environment quickly.
 	
 ### Security
-SquareOne also has years of security best practices bundled and our coding standards require heavy use of validation, sanitation, and nonce to verify any actions. It also bundles Apache and Nginx configurations that enforce many best practice security policies around WordPress. If project secrets are required, we leverage environment variables to keep them safe.
+SquareOne also has years of security best practices and our coding standards require heavy use of validation, sanitation, and nonce to verify any actions. It also bundles Apache and Nginx configurations that enforce many best practice security policies around WordPress. If project secrets are required, we leverage environment variables to keep them safe.
 
 ### Deployments
 SquareOne bundles infrastructure as code and supports various deployment methods. It can be integrated with a CI/CD tool or be deployed manually. SquareOne can be configured to deploy for common managed hosts (WP Engine, Pantheon) or for a custom setup.
@@ -65,7 +65,7 @@ The JS build stack allows for vanilla JavaScript or full blown React application
 We’ve baked in some advanced image handling into SquareOne, including src-set, responsive images, lazy-loading, and have some additional S3/CDN modules for offloading media. 
 
 #### Components
-We’ve enforce a component pattern to our Front-end tech so we can cleanly separate logic and presentation.  Each component is built to have it's own contained markup, styles, javascript, and models for maximum portability. This makes things very DRY and reusable and aligns well with a design system. 
+We enforce a component pattern to our Front-end to cleanly separate logic and presentation.  Each component is built to have it's own contained markup, styles, javascript, and models for maximum portability. This makes things very DRY and reusable and aligns well with a design system. 
 
 ## Back-End <a name="backend"></a>
 
@@ -100,7 +100,7 @@ SquareOne has been built for efficiency and reliability. There are many common f
 
 ## Content Management
 
-SquareOne was build to support the latest and greatest Gutenberg editor. In particular we leverage Advanced Custom Fields, a fantastic tool to build custom blocks. It can also easily use the Classic editor and leverage many of the other page builders out there, like our very own modular content [Panels Builder](https://github.com/moderntribe/panel-builder).  
+SquareOne was build to support the latest and greatest Gutenberg editor. In particular we leverage Advanced Custom Fields, a fantastic tool to build custom blocks. It can also easily use the Classic editor and leverage many of the other page builders out there, like our very own modular content [Panels Builder](https://github.com/moderntribe/panel-builder) or the WordPress Block Editor.  
 
 ### The WordPress way
 
