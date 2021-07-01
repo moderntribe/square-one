@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 /**
 * Plugin Name: Tribe Glomar
@@ -17,8 +16,12 @@ declare(strict_types=1);
  *
  * @return void
  */
+
+use Tribe\Plugin\Tribe_Glomar;
+use Tribe\Plugin\Tribe_Glomar_Admin;
+
 if ( ! function_exists( 'tribe_glomar_load' ) ) { // play nice
-	function tribe_glomar_load() : void {
+	function tribe_glomar_load(): void {
 		if ( defined( 'TRIBE_GLOMAR' ) && TRIBE_GLOMAR === false ) {
 			return;
 		}

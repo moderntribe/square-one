@@ -1,5 +1,7 @@
 <?php declare(strict_types=1);
 
+namespace Tribe\Plugin;
+
 /**
  * Class Tribe_Glomar_Admin
  */

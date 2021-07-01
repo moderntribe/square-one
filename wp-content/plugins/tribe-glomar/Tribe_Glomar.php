@@ -1,5 +1,7 @@
 <?php declare(strict_types=1);
 
+namespace Tribe\Plugin;
+
 /**
  * Force the frontend of the site to hide if you are not logged in.
  *
@@ -31,7 +33,7 @@ class Tribe_Glomar {
 	/**
 	 * Holds instance of the admin class.
 	 *
-	 * @var \Tribe_Glomar_Admin
+	 * @var \Tribe\Plugin\Tribe_Glomar_Admin|null
 	 */
 	private ?Tribe_Glomar_Admin $admin = null;
 
@@ -120,7 +122,7 @@ class Tribe_Glomar {
 	 *
 	 * @return void
 	 */
-	public function handle_request( WP $wp ) {
+	public function handle_request( \WP $wp ) {
 		if ( ! isset( $wp->query_vars['glomar'] ) ) {
 			return;
 		}
@@ -305,7 +307,7 @@ class Tribe_Glomar {
 	 *
 	 * @static
 	 *
-	 * @return \Tribe_Glomar
+	 * @return \Tribe\Plugin\Tribe_Glomar
 	 */
 	public static function get_instance( Tribe_Glomar_Admin $admin ) {
 		if ( ! is_a( self::$instance, __CLASS__ ) ) {
