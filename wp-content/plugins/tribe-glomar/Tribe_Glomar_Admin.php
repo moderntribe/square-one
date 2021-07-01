@@ -165,7 +165,7 @@ class Tribe_Glomar_Admin {
 		$this->set_option( 'glomar-ip-whitelist', $addresses );
 	}
 
-	public function sanitize_ip_list( $list ) {
+	public function sanitize_ip_list( $list ): array {
 		if ( empty( $list ) ) {
 			return [];
 		}
@@ -188,7 +188,7 @@ class Tribe_Glomar_Admin {
 		return $save;
 	}
 
-	public function allowed_ip_addresses() {
+	public function allowed_ip_addresses(): array {
 		return (array) $this->get_option( 'glomar-ip-whitelist', [ '127.0.0.1' ] );
 	}
 
@@ -275,7 +275,7 @@ class Tribe_Glomar_Admin {
 		$this->set_option( 'glomar-message', $message );
 	}
 
-	public function sanitize_secret( $secret ) {
+	public function sanitize_secret( $secret ): string {
 		$secret = sanitize_title( $secret );
 
 		return $secret;
@@ -291,11 +291,11 @@ class Tribe_Glomar_Admin {
 		return $action;
 	}
 
-	public function sanitize_message( $message ) {
+	public function sanitize_message( $message ): string {
 		return wp_kses_post( $message );
 	}
 
-	public function get_secret() {
+	public function get_secret(): string {
 		$secret = (string) $this->get_option( 'glomar-secret' );
 
 		if ( empty( $secret ) ) {
@@ -308,7 +308,7 @@ class Tribe_Glomar_Admin {
 	/**
 	 * @return string
 	 */
-	public function get_action() {
+	public function get_action(): string {
 		$action = (string) $this->get_option( 'glomar-action' );
 
 		if ( empty( $action ) ) {
@@ -323,7 +323,7 @@ class Tribe_Glomar_Admin {
 	 *
 	 * @return string Frontend messaging.
 	 */
-	public function get_message() {
+	public function get_message(): string {
 		$message = (string) $this->get_option( 'glomar-message' );
 
 		// Set the default message if a custom message is not set.
