@@ -50,7 +50,7 @@ class Subheader_Archive_Controller extends Abstract_Controller {
 
 	protected function required(): array {
 		return [
-			self::CLASSES           => [ 'c-subheader', 'c-subheader-archive' ],
+			self::CLASSES           => [ 'c-subheader', 'c-subheader--archive' ],
 			self::CONTAINER_CLASSES => [ 'l-container' ],
 			self::MEDIA_CLASSES     => [ 'c-subheader__media' ],
 			self::CONTENT_CLASSES   => [ 'c-subheader__content' ],
