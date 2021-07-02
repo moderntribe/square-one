@@ -15,7 +15,7 @@ class Featured_Posts {
 	 * @hook https://developer.wordpress.org/reference/hooks/pre_get_post/
 	 */
 	public function remove_featured_posts_from_main_query( WP_Query $query ): WP_Query {
-		//return $query;
+
 		if ( ! is_home() || ! $query->is_main_query() ) {
 			return $query;
 		}
