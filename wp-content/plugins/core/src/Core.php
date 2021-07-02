@@ -72,7 +72,6 @@ class Core {
 
 		// Custom Taxonomies.
 		Taxonomies\Example\Subscriber::class,
-		//Taxonomies\Featured\Subscriber::class,
 
 	];
 
