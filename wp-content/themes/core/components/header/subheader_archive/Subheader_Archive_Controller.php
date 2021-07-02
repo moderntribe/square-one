@@ -15,6 +15,9 @@ class Subheader_Archive_Controller extends Abstract_Controller {
 	public const CONTAINER_CLASSES = 'container_classes';
 	public const MEDIA_CLASSES     = 'media_classes';
 	public const CONTENT_CLASSES   = 'content_classes';
+	public const TITLE             = 'title';
+	public const DESCRIPTION       = 'description';
+	public const HERO_IMAGE_ID     = 'hero_image';
 
 	private array $classes;
 	private array $attrs;
@@ -33,9 +36,9 @@ class Subheader_Archive_Controller extends Abstract_Controller {
 		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
 		$this->media_classes     = (array) $args[ self::MEDIA_CLASSES ];
 		$this->content_classes   = (array) $args[ self::CONTENT_CLASSES ];
-		$this->title             = '';
-		$this->description       = '';
-		$this->map_acf_fields();
+		$this->title             = (string) $args[ self::TITLE ];
+		$this->description       = (string) $args[ self::DESCRIPTION ];
+		$this->hero_image_id     = (int) $args[ self::HERO_IMAGE_ID ];
 	}
 
 	protected function defaults(): array {
@@ -45,6 +48,10 @@ class Subheader_Archive_Controller extends Abstract_Controller {
 			self::ATTRS             => [],
 			self::MEDIA_CLASSES     => [],
 			self::CONTENT_CLASSES   => [],
+			self::TITLE             => '',
+			self::DESCRIPTION       => '',
+			self::HERO_IMAGE_ID     => 0,
+
 		];
 	}
 
@@ -122,39 +129,6 @@ class Subheader_Archive_Controller extends Abstract_Controller {
 			Text_Controller::CLASSES => [ 'page-title', 'h1', 'c-subheader__title' ],
 			Text_Controller::CONTENT => $this->title,
 		];
-	}
-
-
-	/**
-	 * Get ACF fields
-	 *
-	 * Gets the content added in the meta fields
-	 */
-	protected function map_acf_fields() {
-		if ( is_category() ) {
-			$term = get_queried_object();
-
-			if ( ! empty( $term ) ) {
-				$this->title       = $term->name;
-				$this->description = $term->category_description;
-
-				if ( ! empty( get_field( 'hero_image', $term->taxonomy.'_'.$term->term_id ) ) ) {
-					$this->hero_image_id = get_field( 'hero_image', $term->taxonomy.'_'.$term->term_id )['ID'];
-				}
-			}
-		} else {
-			if ( ! empty( get_field( 'title', 'option' ) ) ) {
-				$this->title = get_field( 'title', 'option' );
-			}
-
-			if ( ! empty( get_field( 'description', 'option' ) ) ) {
-				$this->description = get_field( 'description', 'option' );
-			}
-
-			if ( ! empty( get_field( 'hero_image', 'option' ) ) ) {
-				$this->hero_image_id = get_field( 'hero_image', 'option' )['ID'];
-			}
-		}
 	}
 
 }
