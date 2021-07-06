@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tribe\Project\Templates\Components\routes\index;
+namespace Tribe\Project\Templates\routes\index;
 
 use Tribe\Project\Blocks\Types\Content_Loop\Content_Loop;
 use Tribe\Project\Object_Meta\Post_Archive_Featured_Settings;

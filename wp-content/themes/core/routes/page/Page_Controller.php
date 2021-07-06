@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tribe\Project\Templates\Components\routes\page;
+namespace Tribe\Project\Templates\routes\page;
 
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\header\subheader\Subheader_Controller;

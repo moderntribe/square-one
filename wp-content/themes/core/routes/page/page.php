@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
-use \Tribe\Project\Templates\Components\routes\page\Page_Controller;
 use Tribe\Project\Templates\Components\sidebar\Sidebar_Controller;
+use Tribe\Project\Templates\Routes\page\Page_Controller;
 
 $c = Page_Controller::factory();
 

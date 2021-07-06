@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tribe\Project\Templates\Components\routes\not_found;
+namespace Tribe\Project\Templates\Routes\not_found;
 
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\search_form\Search_Form_Controller;

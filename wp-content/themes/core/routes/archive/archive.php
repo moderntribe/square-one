@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
-use \Tribe\Project\Templates\Components\routes\archive\Archive_Controller;
 use Tribe\Project\Templates\Components\sidebar\Sidebar_Controller;
+use Tribe\Project\Templates\Routes\archive\Archive_Controller;
 
 $c = Archive_Controller::factory();
 

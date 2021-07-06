@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
 use Tribe\Project\Templates\Components\breadcrumbs\Breadcrumbs_Controller;
-use \Tribe\Project\Templates\Components\routes\single\Single_Controller;
+use \Tribe\Project\Templates\Routes\single\Single_Controller;
 use Tribe\Project\Templates\Components\sidebar\Sidebar_Controller;
 
 $c = Single_Controller::factory();

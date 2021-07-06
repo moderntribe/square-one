@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-use \Tribe\Project\Templates\Components\routes\unsupported_browser\Unsupported_Browser_Controller;
+use \Tribe\Project\Templates\Routes\unsupported_browser\Unsupported_Browser_Controller;
 
 $c = Unsupported_Browser_Controller::factory();
 ?>

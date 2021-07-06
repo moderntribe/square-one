@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
-use \Tribe\Project\Templates\Components\routes\search\Search_Controller;
 use Tribe\Project\Templates\Components\sidebar\Sidebar_Controller;
+use Tribe\Project\Templates\Routes\search\Search_Controller;
 
 $c = Search_Controller::factory();
 

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tribe\Project\Templates\Components\routes\example_app;
+namespace Tribe\Project\Templates\Routes\example_app;
 
 use Tribe\Project\Templates\Components\Abstract_Controller;
 

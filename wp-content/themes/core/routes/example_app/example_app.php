@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-use \Tribe\Project\Templates\Components\routes\example_app\Example_App_Controller;
+use \Tribe\Project\Templates\Routes\example_app\Example_App_Controller;
 
 $c = Example_App_Controller::factory();
 

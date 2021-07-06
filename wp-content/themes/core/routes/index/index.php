@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
-use \Tribe\Project\Templates\Components\routes\index\Index_Controller;
 use Tribe\Project\Templates\Components\sidebar\Sidebar_Controller;
+use Tribe\Project\Templates\Routes\index\Index_Controller;
 
 $c = Index_Controller::factory();
 
