@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
-use \Tribe\Project\Templates\Routes\not_found\Not_Found_Controller;
 use Tribe\Project\Templates\Components\sidebar\Sidebar_Controller;
+use Tribe\Project\Templates\Routes\not_found\Not_Found_Controller;
 
 $c = Not_Found_Controller::factory();
 
