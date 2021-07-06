@@ -10,26 +10,13 @@ use Tribe\Project\Templates\Components\blocks\content_loop\Content_Loop_Controll
 use Tribe\Project\Templates\Components\header\subheader\Subheader_Controller;
 use Tribe\Project\Templates\Components\Traits\Page_Title;
 use Tribe\Project\Templates\Components\Traits\Post_List_Field_Formatter;
-use Tribe\Project\Templates\Models\Breadcrumb;
 
 class Index_Controller extends Abstract_Controller {
 
 	use Post_List_Field_Formatter;
+	use Page_Title;
 
 	public string $sidebar_id = '';
-
-	/**
-	 * @return \Tribe\Project\Templates\Models\Breadcrumb[]
-	 */
-	// TODO: This should probably be a component call rather than managed in every page controller
-	protected function get_breadcrumbs(): array {
-		$page = get_option( 'page_for_posts' );
-		$url  = $page ? get_permalink( $page ) : home_url();
-
-		return [
-			new Breadcrumb( $url, __( 'News', 'tribe' ) ),
-		];
-	}
 
 	public function get_content_loop_data(): array {
 		global $wp_query;
@@ -75,8 +62,6 @@ class Index_Controller extends Abstract_Controller {
 	public function get_current_page(): int {
 		return (int) get_query_var( 'paged' ) ?: 1;
 	}
-
-	use Page_Title;
 
 	/**
 	 * Prepare data for the Subheader Component
