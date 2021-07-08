@@ -1,6 +1,5 @@
 <?php declare(strict_types=1);
 
-use Tribe\Project\Templates\Components\breadcrumbs\Breadcrumbs_Controller;
 use Tribe\Project\Templates\Components\sidebar\Sidebar_Controller;
 use Tribe\Project\Templates\Routes\single\Single_Controller;
 
@@ -11,25 +10,9 @@ get_header();
 
 	<main id="main-content">
 
-		<?php
-		get_template_part(
-			'components/breadcrumbs/breadcrumbs',
-			'single',
-			[ Breadcrumbs_Controller::BREADCRUMBS => $c->get_breadcrumbs() ]
-		);
-		?>
-
-		<?php get_template_part( 'components/header/subheader/subheader' ) ?>
+		<?php get_template_part( 'components/header/subheader/subheader', null, $c->get_subheader_args() ); ?>
 
 		<article class="item-single">
-
-			<?php if ( ! empty( $c->get_image_args() ) ) {
-				get_template_part(
-					'components/image/image',
-					null,
-					$c->get_image_args()
-				);
-			} ?>
 
 			<div class="item-single__content s-sink t-sink l-sink l-sink--double">
 				<?php the_content(); ?>
