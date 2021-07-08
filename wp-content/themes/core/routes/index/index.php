@@ -11,7 +11,7 @@ get_header();
 		<?php get_template_part( 'components/header/subheader/subheader', 'index', $c->get_subheader_args() ); ?>
 
 		<?php if ( have_posts() ) :
-			if ( $c->get_current_page() === 1 && ! empty( $c->get_content_loop_featured_data() ) ) :
+			if ( $c->get_current_page() === 1 && ! empty( $c->get_content_loop_featured_args() ) ) :
 				get_template_part( 'components/blocks/content_loop/content_loop', null, $c->get_content_loop_featured_args() );
 			endif;
 			get_template_part( 'components/blocks/content_loop/content_loop', null, $c->get_content_loop_args() ); ?>
