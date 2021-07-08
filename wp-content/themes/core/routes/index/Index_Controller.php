@@ -18,7 +18,7 @@ class Index_Controller extends Abstract_Controller {
 
 	public string $sidebar_id = '';
 
-	public function get_content_loop_data(): array {
+	public function get_content_loop_args(): array {
 		global $wp_query;
 		$posts = [];
 
@@ -39,7 +39,7 @@ class Index_Controller extends Abstract_Controller {
 	/**
 	 * Get posts in the featured posts from the Post Archive Settings page
 	 */
-	public function get_content_loop_featured_data(): array {
+	public function get_content_loop_featured_args(): array {
 
 		$featured_post_query = get_field( Post_Archive_Featured_Settings::FEATURED_POSTS, 'option' );
 		$featured_post_array = [];
