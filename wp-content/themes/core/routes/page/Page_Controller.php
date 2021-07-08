@@ -1,33 +1,14 @@
 <?php declare(strict_types=1);
 
-namespace Tribe\Project\Templates\routes\page;
+namespace Tribe\Project\Templates\Routes\page;
 
-use Tribe\Project\Templates\Components\Abstract_Controller;
-use Tribe\Project\Templates\Components\header\subheader\Subheader_Controller;
-use Tribe\Project\Templates\Components\Traits\Page_Title;
+use Tribe\Project\Templates\Routes\single\Single_Controller;
 
-class Page_Controller extends Abstract_Controller {
-
-	use Page_Title;
+class Page_Controller extends Single_Controller {
 
 	/**
 	 * @var int|string
 	 */
 	public $sidebar_id = '';
-
-	public function get_subheader_args(): array {
-		return [
-			Subheader_Controller::TITLE         => $this->get_page_title(),
-			Subheader_Controller::HERO_IMAGE_ID => $this->get_image_args(),
-		];
-	}
-
-	public function get_image_args(): ?int {
-		if ( ! has_post_thumbnail() ) {
-			return null;
-		}
-
-		return (int) get_post_thumbnail_id();
-	}
 
 }
