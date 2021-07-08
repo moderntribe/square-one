@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## 2021.06
+* Added styles and data handling for the index and archive pages.
 * Updated: Moved Post Archive settings from General Settings to post archive settings
 * Added Styles for the Not Found Page
 * Added: Styles and additional functionality to the search template.

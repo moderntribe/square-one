@@ -142,6 +142,7 @@
   "autoload": {
     "psr-4": {
       "Tribe\\Project\\": "wp-content/plugins/core/src",
+      "Tribe\\Project\\Templates\\Routes\\": "wp-content/themes/core/routes",
       "Tribe\\Project\\Templates\\Components\\": "wp-content/themes/core/components"
     }
   },

@@ -31,13 +31,11 @@ class Post_Archive_Settings extends ACF\ACF_Meta_Group {
 	}
 
 	private function get_field( string $label, string $name, string $type ): ACF\Field {
-		$field = new ACF\Field( self::NAME . '_' . $name, [
+		return new ACF\Field( self::NAME . '_' . $name, [
 			'label' => $label,
 			'name'  => $name,
 			'type'  => $type,
 		] );
-
-		return $field;
 	}
 
 }
