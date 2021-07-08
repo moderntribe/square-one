@@ -20,6 +20,7 @@ module.exports = {
 					config: './wp-content/themes/core/assets/js/src/theme/config',
 					common: './wp-content/themes/core/assets/js/src/apps/common',
 					components: './wp-content/themes/core/components',
+					routes: './wp-content/themes/core/routes',
 					constants: './wp-content/themes/core/assets/js/src/apps/constants',
 					Example: './wp-content/themes/core/assets/js/src/apps/Example',
 					integrations: './wp-content/themes/core/integrations',

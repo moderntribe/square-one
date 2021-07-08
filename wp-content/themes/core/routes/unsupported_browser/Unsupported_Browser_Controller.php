@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tribe\Project\Templates\Components\routes\unsupported_browser;
+namespace Tribe\Project\Templates\Routes\unsupported_browser;
 
 use Tribe\Project\Assets\Theme\Theme_Build_Parser;
 use Tribe\Project\Templates\Components\Abstract_Controller;

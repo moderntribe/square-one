@@ -1,27 +1,18 @@
 <?php declare(strict_types=1);
 
-use \Tribe\Project\Templates\Components\routes\single\Single_Controller;
+use Tribe\Project\Templates\Components\sidebar\Sidebar_Controller;
+use Tribe\Project\Templates\Routes\single\Single_Controller;
 
 $c = Single_Controller::factory();
 
-$c->render_header();
+get_header();
 ?>
 
 	<main id="main-content">
 
-		<?php $c->render_breadcrumbs(); ?>
-
-		<?php get_template_part( 'components/header/subheader/subheader' ) ?>
+		<?php get_template_part( 'components/header/subheader/subheader', null, $c->get_subheader_args() ); ?>
 
 		<article class="item-single">
-
-			<?php if ( ! empty( $c->get_image_args() ) ) {
-				get_template_part(
-					'components/image/image',
-					null,
-					$c->get_image_args()
-				);
-			} ?>
 
 			<div class="item-single__content s-sink t-sink l-sink l-sink--double">
 				<?php the_content(); ?>
@@ -55,5 +46,10 @@ $c->render_header();
 	</main>
 
 <?php
-$c->render_sidebar();
-$c->render_footer();
+do_action( 'get_sidebar', null );
+get_template_part(
+	'components/sidebar/sidebar',
+	'single',
+	[ Sidebar_Controller::SIDEBAR_ID => $c->sidebar_id ]
+);
+get_footer();

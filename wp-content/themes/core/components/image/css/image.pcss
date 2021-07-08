@@ -19,7 +19,6 @@
  * Customizable via component's attributes.
  * ----------------------------------------------------------------------------- */
 
-
 .c-image__image {
 	/* CASE: Background image implementation. */
 	.c-image--bg & {
@@ -38,8 +37,8 @@
 /* CASE: Using image in figure tag, (not as a background). */
 .c-image--object-fit {
 	height: 100%;
-	width:100%;
-	
+	width: 100%;
+
 	img {
 		height: 100%;
 		width: 100%;
@@ -49,6 +48,7 @@
 
 /* CASE: Apply an overlay. */
 .c-image--overlay {
+
 	&:after {
 		@mixin image-overlay;
 
@@ -59,6 +59,7 @@
 
 /* CASE: Apply a gradient overlay. */
 .c-image--overlay-gradient {
+
 	&:after {
 		@mixin image-overlay;
 
@@ -66,4 +67,3 @@
 		opacity: 0.9;
 	}
 }
-

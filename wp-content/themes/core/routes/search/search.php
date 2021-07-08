@@ -1,10 +1,11 @@
 <?php declare(strict_types=1);
 
-use \Tribe\Project\Templates\Components\routes\search\Search_Controller;
+use Tribe\Project\Templates\Components\sidebar\Sidebar_Controller;
+use Tribe\Project\Templates\Routes\search\Search_Controller;
 
 $c = Search_Controller::factory();
 
-$c->render_header();
+get_header();
 ?>
 	<main id="main-content">
 
@@ -30,5 +31,10 @@ $c->render_header();
 		</div>
 	</main>
 <?php
-$c->render_sidebar();
-$c->render_footer();
+do_action( 'get_sidebar', null );
+get_template_part(
+	'components/sidebar/sidebar',
+	'index',
+	[ Sidebar_Controller::SIDEBAR_ID => $c->sidebar_id ]
+);
+get_footer();
