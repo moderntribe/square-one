@@ -29,9 +29,10 @@ trait Breadcrumbs {
 		} elseif ( is_archive() ) {
 			$this->get_taxonomy_archive_breadcrumbs();
 		}
-	
+
 		return [
-			Breadcrumbs_Controller::BREADCRUMBS => $this->response,
+			Breadcrumbs_Controller::BREADCRUMBS  => $this->response,
+			Breadcrumbs_Controller::MAIN_CLASSES => [ 'u-sep-arrow' ],
 		];
 	}
 
@@ -46,7 +47,7 @@ trait Breadcrumbs {
 		}
 
 		$parent_ids = get_post_ancestors( get_the_ID() );
-		
+
 		// Bail early if no parent IDs.
 		if ( empty( $parent_ids ) ) {
 			return;
