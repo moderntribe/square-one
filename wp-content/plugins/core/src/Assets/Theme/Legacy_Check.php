@@ -69,7 +69,7 @@ class Legacy_Check {
 			return $template;
 		}
 
-		get_template_part( 'components/routes/unsupported_browser/unsupported_browser' );
+		get_template_part( 'routes/unsupported_browser/unsupported_browser' );
 		exit;
 	}
 

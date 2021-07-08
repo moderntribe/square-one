@@ -15,11 +15,11 @@ trait Breadcrumbs {
 	protected $response = [];
 
 	/**
-	 * Returns breadcrumbs for the post.
+	 * Returns breadcrumbs arguments for the post.
 	 *
 	 * @return array \Tribe\Project\Templates\Models\Breadcrumb[] Breadcrumbs for the post.
 	 */
-	public function get_breadcrumbs(): array {
+	public function get_breadcrumb_args(): array {
 		// Start of breadcrumbs.
 		$this->response[] = new Breadcrumb( get_site_url(), esc_html__( 'Home', 'tribe' ) );
 

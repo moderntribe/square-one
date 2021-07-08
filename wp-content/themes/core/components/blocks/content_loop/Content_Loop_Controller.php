@@ -130,8 +130,27 @@ class Content_Loop_Controller extends Abstract_Controller {
 				],
 			];
 
-			// CASE: If not Inline Card Style
-			if ( $layout !== Card_Controller::STYLE_INLINE ) {
+			$card_cta =
+				[
+					Link_Controller::CONTENT => __( 'Read More', 'tribe' ),
+					Link_Controller::URL     => $link['url'],
+					Link_Controller::TARGET  => $link['target'],
+					Link_Controller::CLASSES => [
+						'u-hidden',
+					],
+					Link_Controller::ATTRS   => [
+						// These attrs provide the most screen reader accessible link.
+						'id'               => $uuid . '-link',
+						'aria-labelledby'  => $uuid . '-title',
+						'aria-describedby' => $uuid . '-link',
+						// Sets this link as the card's click-within target link.
+						'data-js'          => 'target-link',
+					],
+				];
+
+			// CASE: If not Inline Card Style and is the featured layout
+			
+			if ( $layout !== Card_Controller::STYLE_INLINE || $this->layout !== 'layout_feature') {
 				$card_cta =
 					[
 						Link_Controller::CONTENT => __( 'Read More', 'tribe' ),
@@ -150,6 +169,7 @@ class Content_Loop_Controller extends Abstract_Controller {
 							'data-js'          => 'target-link',
 						],
 					];
+
 
 				$card_description =
 					[
@@ -300,9 +320,13 @@ class Content_Loop_Controller extends Abstract_Controller {
 		$this->content_classes[] = 'g-2-up';
 
 		if ( $this->layout === Content_Loop_Block::LAYOUT_ROW ) {
-			$this->content_classes[] = 'g-3-up';
+			$this->content_classes[] = '';
 		}
 
+		elseif ( $this->layout === Content_Loop_Block::LAYOUT_COLUMNS ) {
+			$this->content_classes[] = 'g-3-up';
+		}
+		
 		return Markup_Utils::class_attribute( $this->content_classes );
 	}
 
