@@ -14,12 +14,14 @@ There are some block types that should be removed from the editor. Some reasons 
 
 By default, we are hiding some blocks and using an "Allow List" to add a block type, add it to the
 `\Tribe\Project\Blocks\Blocks_Definer::ALLOWLIST` array in `\Tribe\Project\Blocks\Blocks_Definer`. 
-The block types in this array will be passed to through the `allowed_block_types` filter.
+The block types in this array will be passed to through the `allowed_block_types` filter. Also, note, 
+we have a `tribe_allowed_blocks` filter that can be used to prefilter prior to hitting the Wordpress 
+`allowed_block_types` filter. 
 
-Note that some care should be taken to avoid errors when WordPress uses nested block types. For
+Some care should be taken to avoid errors when WordPress uses nested block types. For
 example, removing the `core/button` block will trigger an error in the editor, because the `core/buttons`
-block expects it to be available. They must be removed together.
-
+block expects it to be available. They must be removed together. Welcome to the world of nested components :)
+    
 ### Configuring Block Options
 
 Some block types provide various settings/options. E.g., font sizes, colors, styles. These can be
