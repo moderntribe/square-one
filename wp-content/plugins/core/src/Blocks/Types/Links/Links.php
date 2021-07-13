@@ -99,27 +99,27 @@ class Links extends Block_Config implements Cta_Field {
 
 	public function add_fields() {
 		$this->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
-					'label'       => esc_html__( 'Lead in', 'tribe' ),
-					'name'        => self::LEAD_IN,
-					'type'        => 'text',
-					'placeholder' => esc_html__( 'Leadin (optional)', 'tribe' ),
-					'wrapper'     => [
-						'class' => 'tribe-acf-hide-label',
-					],
-				] )
-			 )->add_field( new Field( self::NAME . '_' . self::TITLE, [
-					'label' => esc_html__( 'Title', 'tribe' ),
-					'name'  => self::TITLE,
-					'type'  => 'text',
-				] )
+				'label'       => esc_html__( 'Lead in', 'tribe' ),
+				'name'        => self::LEAD_IN,
+				'type'        => 'text',
+				'placeholder' => esc_html__( 'Leadin (optional)', 'tribe' ),
+				'wrapper'     => [
+					'class' => 'tribe-acf-hide-label',
+				],
+			] )
+			)->add_field( new Field( self::NAME . '_' . self::TITLE, [
+				'label' => esc_html__( 'Title', 'tribe' ),
+				'name'  => self::TITLE,
+				'type'  => 'text',
+			] )
 			)->add_field( new Field( self::NAME . '_' . self::DESCRIPTION, [
-					'label'        => esc_html__( 'Description', 'tribe' ),
-					'name'         => self::DESCRIPTION,
-					'type'         => 'wysiwyg',
-					'toolbar'      => Classic_Editor_Formats::MINIMAL,
-					'tabs'         => 'visual',
-					'media_upload' => 0,
-				] )
+				'label'        => esc_html__( 'Description', 'tribe' ),
+				'name'         => self::DESCRIPTION,
+				'type'         => 'wysiwyg',
+				'toolbar'      => Classic_Editor_Formats::MINIMAL,
+				'tabs'         => 'visual',
+				'media_upload' => 0,
+			] )
 			)->add_field(
 				$this->get_cta_field( self::NAME )
 			);
