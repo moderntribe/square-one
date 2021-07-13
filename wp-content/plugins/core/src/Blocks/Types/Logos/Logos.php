@@ -96,7 +96,6 @@ class Logos extends Block_Config implements Cta_Field {
 
 		$this->add_section( new Field_Section( self::SECTION_LOGOS, esc_html__( 'Logos', 'tribe' ), 'accordion' ) )
 			->add_field( $this->get_logos_section() );
-
 	}
 
 	/**
