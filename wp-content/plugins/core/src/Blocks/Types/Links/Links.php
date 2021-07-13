@@ -125,16 +125,15 @@ class Links extends Block_Config implements Cta_Field {
 			);
 
 		$this->add_section( new Field_Section( self::SECTION_LINKS, esc_html__( 'Links', 'tribe' ), 'accordion' ) )
-			 ->add_field(
-				new Field( self::NAME . '_' . self::LINKS_TITLE, [
-					'label'       => esc_html__( 'Link List Title', 'tribe' ),
-					'name'        => self::LINKS_TITLE,
-					'type'        => 'text',
-					'placeholder' => esc_html( 'Link List Title (optional)', 'tribe' ),
-					'wrapper'     => [
-						'class' => 'tribe-acf-hide-label',
-					],
-				] )
+			 ->add_field( new Field( self::NAME . '_' . self::LINKS_TITLE, [
+				'label'       => esc_html__( 'Link List Title', 'tribe' ),
+				'name'        => self::LINKS_TITLE,
+				'type'        => 'text',
+				'placeholder' => esc_html( 'Link List Title (optional)', 'tribe' ),
+				'wrapper'     => [
+					'class' => 'tribe-acf-hide-label',
+				],
+			] )
 			)->add_field(
 				$this->get_links_section()
 			);
