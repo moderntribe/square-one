@@ -22,9 +22,9 @@ class Stats extends Block_Config implements Cta_Field {
 	public const TITLE           = 'title';
 	public const DESCRIPTION     = 'description';
 
-	public const LAYOUT           = 'layout';
-	public const LAYOUT_INLINE    = 'inline';
-	public const LAYOUT_STACKED   = 'stacked';
+	public const LAYOUT         = 'layout';
+	public const LAYOUT_INLINE  = 'inline';
+	public const LAYOUT_STACKED = 'stacked';
 
 	public const CONTENT_ALIGN        = 'content';
 	public const CONTENT_ALIGN_LEFT   = 'left';
