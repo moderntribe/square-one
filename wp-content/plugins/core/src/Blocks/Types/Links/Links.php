@@ -99,14 +99,14 @@ class Links extends Block_Config implements Cta_Field {
 
 	public function add_fields() {
 		$this->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
-					 'label'       => esc_html__( 'Lead in', 'tribe' ),
-					 'name'        => self::LEAD_IN,
-					 'type'        => 'text',
-					 'placeholder' => esc_html__( 'Leadin (optional)', 'tribe' ),
-					 'wrapper'     => [
+					'label'       => esc_html__( 'Lead in', 'tribe' ),
+					'name'        => self::LEAD_IN,
+					'type'        => 'text',
+					'placeholder' => esc_html__( 'Leadin (optional)', 'tribe' ),
+					'wrapper'     => [
 						'class' => 'tribe-acf-hide-label',
 					],
-				 ] )
+				] )
 			 )->add_field( new Field( self::NAME . '_' . self::TITLE, [
 					'label' => esc_html__( 'Title', 'tribe' ),
 					'name'  => self::TITLE,
@@ -178,9 +178,9 @@ class Links extends Block_Config implements Cta_Field {
 		$group->add_field( $link );
 
 		$group->add_field( new Field( self::NAME . '_' . self::LINK_HEADER, [
-			'label'        => esc_html__( 'Link Header', 'tribe' ),
-			'name'         => self::LINK_HEADER,
-			'type'         => 'text',
+			'label' => esc_html__( 'Link Header', 'tribe' ),
+			'name'  => self::LINK_HEADER,
+			'type'  => 'text',
 		] )
 		)->add_field( new Field( self::NAME . '_' . self::LINK_CONTENT, [
 			'label'        => esc_html__( 'Link Content', 'tribe' ),
