@@ -32,7 +32,7 @@ class Sample_REST_Route extends Abstract_REST_Route {
 			]
 		);
 	}
-	
+
 	/**
 	 * List of valid query parameters supported by the endpoint.
 	 *
