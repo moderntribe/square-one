@@ -257,7 +257,7 @@ class Tribe_Glomar {
 		}
 
 		if ( ! empty( $_GET[ $secret ] ) ) {
-			setcookie( $secret, '1', time() + ( DAY_IN_SECONDS * 30 ), COOKIEPATH, COOKIE_DOMAIN );
+			setcookie( $secret, '1', time() + ( DAY_IN_SECONDS * 30 ), COOKIEPATH, (string) COOKIE_DOMAIN );
 
 			return true;
 		}
