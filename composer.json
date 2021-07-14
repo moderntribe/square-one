@@ -121,6 +121,7 @@
     "codeception/module-webdriver": "^1.0",
     "codeception/util-universalframework": "^1.0",
     "filp/whoops": "^2.2@dev",
+    "larapack/dd": "^1.1",
     "lucatume/function-mocker": "~1.0",
     "lucatume/wp-browser": "^2.4",
     "mockery/mockery": "^1.3",
