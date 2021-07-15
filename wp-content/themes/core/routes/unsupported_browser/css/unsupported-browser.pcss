@@ -47,7 +47,7 @@ a {
 
 	&:hover,
 	&:focus {
-		color: var(--legacy-color-link-hover);
+		text-decoration: underline;
 	}
 
 	&:focus {
@@ -76,8 +76,10 @@ a {
  * ----------------------------------------------------------------------------- */
 
 .site-header {
-	background-color: var(--legacy-bgd-header);
-	padding: var(--legacy-header-padding);
+}
+
+.site-header--underline {
+	border-bottom: 1px solid var(--color-black);
 }
 
 /* -----------------------------------------------------------------------------
@@ -88,11 +90,12 @@ a {
 
 .site-content {
 	padding: var(--legacy-content-padding);
-	max-width: var(--legacy-max-width);
-	margin: 0 auto;
 }
 
 .site-content__content {
+	font-family: var(--font-family-serif);
+	max-width: var(--legacy-max-width);
+	margin: 0 auto;
 
 	* {
 		font-size: var(--legacy-content-font-size);
@@ -123,12 +126,15 @@ a {
  * ----------------------------------------------------------------------------- */
 
 .site-footer {
-	background-color: var(--legacy-bgd-footer);
-	color: var(--legacy-color-footer);
 	padding: var(--legacy-footer-padding);
 }
 
+.site-footer--overline {
+	border-top: 1px solid var(--color-black);
+}
+
 .site-footer__copy {
+	padding: var(--legacy-footer-padding) 0;
 	font-size: var(--legacy-footer-content-font-size);
 	line-height: var(--legacy-footer-content-line-height);
 }
@@ -141,6 +147,7 @@ a {
 
 .site-brand {
 	line-height: 0;
+	padding: var(--spacer-50) 0;
 }
 
 .site-logo {
@@ -191,9 +198,12 @@ a {
 .browser-list__item-image {
 	display: block;
 	margin: var(--legacy-browser-list-image-spacing);
-	border: var(--legacy-browser-list-image-border);
 	background-color: var(--legacy-browser-list-image-bgd);
 	border-radius: var(--legacy-browser-list-image-border-radius);
-	line-height: 0;
+	box-shadow: 0 4px 12px rgba(21, 21, 21, 0.15);
 	padding: var(--legacy-browser-list-image-padding);
+
+	& img {
+		padding-bottom: 10px;
+	}
 }
