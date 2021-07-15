@@ -61,7 +61,7 @@
       "type": "package",
       "package": {
         "name": "advanced-custom-fields/advanced-custom-fields-pro",
-        "version": "5.9.7",
+        "version": "5.9.8",
         "type": "wordpress-plugin",
         "dist": {
           "type": "zip",
@@ -87,7 +87,7 @@
     "johnpbloch/wordpress-core-installer": "1.0.0",
     "mailgun/mailgun-php": "^2.8",
     "moderntribe/acf-image-select": "dev-master",
-    "moderntribe/tribe-libs": "3.4.2",
+    "moderntribe/tribe-libs": "^3.4",
     "moderntribe/tribe-acf-post-list-field": "^2.0",
     "monolog/monolog": "1.23.0",
     "nickford/acf-swatch": "1.0.7",
@@ -108,8 +108,8 @@
     "wpackagist-plugin/regenerate-thumbnails": "3.1.5",
     "wpackagist-plugin/the-events-calendar": "5.8.0",
     "wpackagist-plugin/user-switching": "1.5.7",
-    "wpackagist-plugin/wordpress-seo": "16.6.1",
-    "wpackagist-plugin/wp-tota11y": "^1.2.0"
+    "wpackagist-plugin/wordpress-seo": "16.7",
+    "wpackagist-plugin/wp-tota11y": "1.2.0"
   },
   "require-dev": {
     "codeception/codeception": "^4.0",
