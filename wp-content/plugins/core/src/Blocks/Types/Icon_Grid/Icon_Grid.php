@@ -17,9 +17,9 @@ class Icon_Grid extends Block_Config implements Cta_Field {
 
 	public const NAME = 'icongrid';
 
-	public const LAYOUT         = 'layout';
-	public const LAYOUT_INLINE  = 'inline';
-	public const LAYOUT_LIST    = 'list';
+	public const LAYOUT        = 'layout';
+	public const LAYOUT_INLINE = 'inline';
+	public const LAYOUT_LIST   = 'list';
 
 	public const SECTION_ICONS    = 's-icons';
 	public const SECTION_SETTINGS = 's-settings';
@@ -53,16 +53,16 @@ class Icon_Grid extends Block_Config implements Cta_Field {
 	 */
 	public function add_fields(): void {
 		$this->add_field(
-			new Field( self::NAME . '_' . self::LAYOUT, [
-				'label'         => esc_html__( 'Layout', 'tribe' ),
-				'name'          => self::LAYOUT,
-				'type'          => 'button_group',
-				'choices'       => [
-					self::LAYOUT_INLINE  => esc_html__( 'Inline', 'tribe' ),
-					self::LAYOUT_LIST    => esc_html__( 'List', 'tribe' ),
-				],
-				'default_value' => self::LAYOUT_INLINE,
-			] )
+				new Field( self::NAME . '_' . self::LAYOUT, [
+					'label'         => esc_html__( 'Layout', 'tribe' ),
+					'name'          => self::LAYOUT,
+					'type'          => 'button_group',
+					'choices'       => [
+						self::LAYOUT_INLINE => esc_html__( 'Inline', 'tribe' ),
+						self::LAYOUT_LIST   => esc_html__( 'List', 'tribe' ),
+					],
+					'default_value' => self::LAYOUT_INLINE,
+				] )
 			)->add_field(
 				 new Field( self::NAME . '_' . self::TITLE, [
 					 'label' => esc_html__( 'Title', 'tribe' ),

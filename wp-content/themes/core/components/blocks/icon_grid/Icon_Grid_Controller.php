@@ -95,6 +95,7 @@ class Icon_Grid_Controller extends Abstract_Controller {
 	 */
 	public function get_container_classes(): string {
 		$this->container_classes[] = 'layout-' . $this->layout;
+
 		return Markup_Utils::class_attribute( $this->container_classes );
 	}
 
