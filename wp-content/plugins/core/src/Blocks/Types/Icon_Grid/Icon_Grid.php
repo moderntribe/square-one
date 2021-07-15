@@ -53,15 +53,15 @@ class Icon_Grid extends Block_Config implements Cta_Field {
 	 */
 	public function add_fields(): void {
 		$this->add_field(
-				new Field( self::NAME . '_' . self::LAYOUT, [
-					'label'         => esc_html__( 'Layout', 'tribe' ),
-					'name'          => self::LAYOUT,
-					'type'          => 'button_group',
-					'choices'       => [
-						self::LAYOUT_INLINE => esc_html__( 'Inline', 'tribe' ),
-						self::LAYOUT_LIST   => esc_html__( 'List', 'tribe' ),
-					],
-					'default_value' => self::LAYOUT_INLINE,
+			new Field( self::NAME . '_' . self::LAYOUT, [
+				'label'         => esc_html__( 'Layout', 'tribe' ),
+				'name'          => self::LAYOUT,
+				'type'          => 'button_group',
+				'choices'       => [
+					self::LAYOUT_INLINE => esc_html__( 'Inline', 'tribe' ),
+					self::LAYOUT_LIST   => esc_html__( 'List', 'tribe' ),
+				],
+				'default_value' => self::LAYOUT_INLINE,
 				] )
 			)->add_field(
 				 new Field( self::NAME . '_' . self::TITLE, [
