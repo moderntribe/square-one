@@ -63,14 +63,14 @@ class Icon_Grid extends Block_Config implements Cta_Field {
 				],
 				'default_value' => self::LAYOUT_INLINE,
 				] )
-			)->add_field(
-				 new Field( self::NAME . '_' . self::TITLE, [
+		)->add_field(
+			new Field( self::NAME . '_' . self::TITLE, [
 					 'label' => esc_html__( 'Title', 'tribe' ),
 					 'name'  => self::TITLE,
 					 'type'  => 'text',
 				 ] )
-			 )->add_field(
-				 new Field( self::NAME . '_' . self::LEADIN, [
+		)->add_field(
+			new Field( self::NAME . '_' . self::LEADIN, [
 					'label'   => esc_html__( 'Lead in', 'tribe' ),
 					'name'    => self::LEADIN,
 					'type'    => 'text',
@@ -78,8 +78,8 @@ class Icon_Grid extends Block_Config implements Cta_Field {
 						'class' => 'tribe-acf-hide-label',
 					],
 				 ] )
-			 )->add_field(
-				 new Field( self::NAME . '_' . self::DESCRIPTION, [
+		)->add_field(
+			new Field( self::NAME . '_' . self::DESCRIPTION, [
 					'label'        => esc_html__( 'Description', 'tribe' ),
 					'name'         => self::DESCRIPTION,
 					'type'         => 'wysiwyg',
@@ -87,9 +87,9 @@ class Icon_Grid extends Block_Config implements Cta_Field {
 					'tabs'         => 'visual',
 					'media_upload' => false,
 				 ] )
-			 )->add_field(
-				 $this->get_cta_field( self::NAME )
-			 );
+		)->add_field(
+			$this->get_cta_field( self::NAME )
+		);
 
 		$this->add_section( new Field_Section( self::SECTION_ICONS, esc_html__( 'Icon Items', 'tribe' ), 'accordion' )
 			 )->add_field(
