@@ -4,14 +4,14 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3da46421da713cc3c66b2d39bf5967a5",
+    "content-hash": "58d4137da23f4a1abd74eabee22c5a26",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
-            "version": "5.9.7",
+            "version": "5.9.8",
             "dist": {
                 "type": "zip",
-                "url": "https://connect.advancedcustomfields.com/index.php?a=download&p=pro&k={%WP_PLUGIN_ACF_KEY}&t=5.9.7"
+                "url": "https://connect.advancedcustomfields.com/index.php?a=download&p=pro&k={%WP_PLUGIN_ACF_KEY}&t=5.9.8"
             },
             "require": {
                 "ffraenz/private-composer-installer": "^3.0"
@@ -20,16 +20,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.185.8",
+            "version": "3.185.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "d30661623a1835ba4bb406675f865c4b40b4b425"
+                "reference": "2c66ec7eab4ce3ca93f86295ac4e0fe56ddec128"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/d30661623a1835ba4bb406675f865c4b40b4b425",
-                "reference": "d30661623a1835ba4bb406675f865c4b40b4b425",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/2c66ec7eab4ce3ca93f86295ac4e0fe56ddec128",
+                "reference": "2c66ec7eab4ce3ca93f86295ac4e0fe56ddec128",
                 "shasum": ""
             },
             "require": {
@@ -101,7 +101,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2021-07-07T18:14:28+00:00"
+            "time": "2021-07-14T18:15:40+00:00"
         },
         {
             "name": "clue/stream-filter",
@@ -380,16 +380,16 @@
         },
         {
             "name": "filp/whoops",
-            "version": "2.13.0",
+            "version": "2.14.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filp/whoops.git",
-                "reference": "2edbc73a4687d9085c8f20f398eebade844e8424"
+                "reference": "fdf92f03e150ed84d5967a833ae93abffac0315b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filp/whoops/zipball/2edbc73a4687d9085c8f20f398eebade844e8424",
-                "reference": "2edbc73a4687d9085c8f20f398eebade844e8424",
+                "url": "https://api.github.com/repos/filp/whoops/zipball/fdf92f03e150ed84d5967a833ae93abffac0315b",
+                "reference": "fdf92f03e150ed84d5967a833ae93abffac0315b",
                 "shasum": ""
             },
             "require": {
@@ -443,7 +443,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-06-04T12:00:00+00:00"
+            "time": "2021-07-13T12:00:00+00:00"
         },
         {
             "name": "gravityforms/gravityforms",
@@ -951,16 +951,16 @@
         },
         {
             "name": "moderntribe/tribe-acf-post-list-field",
-            "version": "v2.2.3",
+            "version": "v2.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moderntribe/tribe-acf-post-list-field.git",
-                "reference": "210f6023edcc1dfa20dbd0ea3c9d0349eabc3fa7"
+                "reference": "a7ecb57784324c59402cbfd07a6eaaff32a06370"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/tribe-acf-post-list-field/zipball/210f6023edcc1dfa20dbd0ea3c9d0349eabc3fa7",
-                "reference": "210f6023edcc1dfa20dbd0ea3c9d0349eabc3fa7",
+                "url": "https://api.github.com/repos/moderntribe/tribe-acf-post-list-field/zipball/a7ecb57784324c59402cbfd07a6eaaff32a06370",
+                "reference": "a7ecb57784324c59402cbfd07a6eaaff32a06370",
                 "shasum": ""
             },
             "require": {
@@ -981,23 +981,23 @@
             ],
             "description": "A post list field type for Advanced Custom Fields",
             "support": {
-                "source": "https://github.com/moderntribe/tribe-acf-post-list-field/tree/v2.2.3",
+                "source": "https://github.com/moderntribe/tribe-acf-post-list-field/tree/v2.2.4",
                 "issues": "https://github.com/moderntribe/tribe-acf-post-list-field/issues"
             },
-            "time": "2021-06-15T21:33:03+00:00"
+            "time": "2021-07-14T17:58:13+00:00"
         },
         {
             "name": "moderntribe/tribe-libs",
-            "version": "v3.4.2",
+            "version": "v3.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moderntribe/tribe-libs.git",
-                "reference": "4b9529b3f8daf1b0fcbe7b81f7793ce1538db5e4"
+                "reference": "5ffe0dfa90a083294f84fcaed8b9163bd221733a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/tribe-libs/zipball/4b9529b3f8daf1b0fcbe7b81f7793ce1538db5e4",
-                "reference": "4b9529b3f8daf1b0fcbe7b81f7793ce1538db5e4",
+                "url": "https://api.github.com/repos/moderntribe/tribe-libs/zipball/5ffe0dfa90a083294f84fcaed8b9163bd221733a",
+                "reference": "5ffe0dfa90a083294f84fcaed8b9163bd221733a",
                 "shasum": ""
             },
             "require": {
@@ -1038,7 +1038,7 @@
             "require-dev": {
                 "automattic/phpcs-neutron-standard": "^1.5",
                 "automattic/vipwpcs": "^2.0.0",
-                "dealerdirect/phpcodesniffer-composer-installer": "^0.5.0",
+                "dealerdirect/phpcodesniffer-composer-installer": "0.7.1",
                 "lucatume/wp-browser": "^2.6.10",
                 "phpcompatibility/php-compatibility": "*",
                 "phpcompatibility/phpcompatibility-wp": "^2.0",
@@ -1095,7 +1095,7 @@
                 "GPL-2.0-only"
             ],
             "description": "A library for use on Modern Tribe service projects.",
-            "time": "2021-04-29T18:10:21+00:00"
+            "time": "2021-07-15T03:27:25+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -1585,16 +1585,16 @@
         },
         {
             "name": "php-http/client-common",
-            "version": "1.10.0",
+            "version": "1.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/client-common.git",
-                "reference": "c0390ae3c8f2ae9d50901feef0127fb9e396f6b4"
+                "reference": "11d34cad40647848aa98536494f9da63571af9da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/client-common/zipball/c0390ae3c8f2ae9d50901feef0127fb9e396f6b4",
-                "reference": "c0390ae3c8f2ae9d50901feef0127fb9e396f6b4",
+                "url": "https://api.github.com/repos/php-http/client-common/zipball/11d34cad40647848aa98536494f9da63571af9da",
+                "reference": "11d34cad40647848aa98536494f9da63571af9da",
                 "shasum": ""
             },
             "require": {
@@ -1642,7 +1642,7 @@
                 "http",
                 "httplug"
             ],
-            "time": "2019-11-18T08:54:36+00:00"
+            "time": "2021-07-11T14:33:59+00:00"
         },
         {
             "name": "php-http/curl-client",
@@ -3315,15 +3315,15 @@
         },
         {
             "name": "wpackagist-plugin/wordpress-seo",
-            "version": "16.6.1",
+            "version": "16.7",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/wordpress-seo/",
-                "reference": "tags/16.6.1"
+                "reference": "tags/16.7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wordpress-seo.16.6.1.zip"
+                "url": "https://downloads.wordpress.org/plugin/wordpress-seo.16.7.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -4809,16 +4809,16 @@
         },
         {
             "name": "gettext/gettext",
-            "version": "v4.8.4",
+            "version": "v4.8.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-gettext/Gettext.git",
-                "reference": "58bc0f7f37e78efb0f9758f93d4a0f669f0f84a1"
+                "reference": "ef2e312dff383fc0e4cd62dd39042e1157f137d4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-gettext/Gettext/zipball/58bc0f7f37e78efb0f9758f93d4a0f669f0f84a1",
-                "reference": "58bc0f7f37e78efb0f9758f93d4a0f669f0f84a1",
+                "url": "https://api.github.com/repos/php-gettext/Gettext/zipball/ef2e312dff383fc0e4cd62dd39042e1157f137d4",
+                "reference": "ef2e312dff383fc0e4cd62dd39042e1157f137d4",
                 "shasum": ""
             },
             "require": {
@@ -4826,7 +4826,7 @@
                 "php": ">=5.4.0"
             },
             "require-dev": {
-                "illuminate/view": "*",
+                "illuminate/view": "^5.0.x-dev",
                 "phpunit/phpunit": "^4.8|^5.7|^6.5",
                 "squizlabs/php_codesniffer": "^3.0",
                 "symfony/yaml": "~2",
@@ -4881,27 +4881,26 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2021-03-10T19:35:49+00:00"
+            "time": "2021-07-13T16:45:53+00:00"
         },
         {
             "name": "gettext/languages",
-            "version": "2.6.0",
+            "version": "2.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-gettext/Languages.git",
-                "reference": "38ea0482f649e0802e475f0ed19fa993bcb7a618"
+                "reference": "4ad818b6341e177b7c508ec4c37e18932a7b788a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-gettext/Languages/zipball/38ea0482f649e0802e475f0ed19fa993bcb7a618",
-                "reference": "38ea0482f649e0802e475f0ed19fa993bcb7a618",
+                "url": "https://api.github.com/repos/php-gettext/Languages/zipball/4ad818b6341e177b7c508ec4c37e18932a7b788a",
+                "reference": "4ad818b6341e177b7c508ec4c37e18932a7b788a",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.16.0",
                 "phpunit/phpunit": "^4.8 || ^5.7 || ^6.5 || ^7.5 || ^8.4"
             },
             "bin": [
@@ -4942,7 +4941,17 @@
                 "translations",
                 "unicode"
             ],
-            "time": "2019-11-13T10:30:21+00:00"
+            "funding": [
+                {
+                    "url": "https://paypal.me/mlocati",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/mlocati",
+                    "type": "github"
+                }
+            ],
+            "time": "2021-07-14T15:03:58+00:00"
         },
         {
             "name": "hamcrest/hamcrest-php",
@@ -5037,7 +5046,7 @@
         },
         {
             "name": "illuminate/collections",
-            "version": "v8.49.2",
+            "version": "v8.50.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/collections.git",
@@ -5087,7 +5096,7 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v8.49.2",
+            "version": "v8.50.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
@@ -5131,7 +5140,7 @@
         },
         {
             "name": "illuminate/macroable",
-            "version": "v8.49.2",
+            "version": "v8.50.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/macroable.git",
@@ -5173,16 +5182,16 @@
         },
         {
             "name": "illuminate/support",
-            "version": "v8.49.2",
+            "version": "v8.50.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "0ecdbb8e61919e972c120c0956fb1c0a3b085967"
+                "reference": "383e46e8942402503b381c4994a968a8ee642087"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/0ecdbb8e61919e972c120c0956fb1c0a3b085967",
-                "reference": "0ecdbb8e61919e972c120c0956fb1c0a3b085967",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/383e46e8942402503b381c4994a968a8ee642087",
+                "reference": "383e46e8942402503b381c4994a968a8ee642087",
                 "shasum": ""
             },
             "require": {
@@ -5201,7 +5210,7 @@
             },
             "suggest": {
                 "illuminate/filesystem": "Required to use the composer class (^8.0).",
-                "league/commonmark": "Required to use Str::markdown() and Stringable::markdown() (^1.3).",
+                "league/commonmark": "Required to use Str::markdown() and Stringable::markdown() (^1.3|^2.0).",
                 "ramsey/uuid": "Required to use Str::uuid() (^4.0).",
                 "symfony/process": "Required to use the composer class (^5.1.4).",
                 "symfony/var-dumper": "Required to use the dd function (^5.1.4).",
@@ -5233,7 +5242,7 @@
             ],
             "description": "The Illuminate Support package.",
             "homepage": "https://laravel.com",
-            "time": "2021-07-02T16:40:19+00:00"
+            "time": "2021-07-09T13:40:46+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
@@ -5478,16 +5487,16 @@
         },
         {
             "name": "mck89/peast",
-            "version": "v1.13.0",
+            "version": "v1.13.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mck89/peast.git",
-                "reference": "db38b1524f5bda921cbda2385e440c2bb71d18b4"
+                "reference": "ad912d4cf6ac682974058b6d49df4c2bf93d424d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mck89/peast/zipball/db38b1524f5bda921cbda2385e440c2bb71d18b4",
-                "reference": "db38b1524f5bda921cbda2385e440c2bb71d18b4",
+                "url": "https://api.github.com/repos/mck89/peast/zipball/ad912d4cf6ac682974058b6d49df4c2bf93d424d",
+                "reference": "ad912d4cf6ac682974058b6d49df4c2bf93d424d",
                 "shasum": ""
             },
             "require": {
@@ -5499,7 +5508,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.13.0-dev"
+                    "dev-master": "1.13.2-dev"
                 }
             },
             "autoload": {
@@ -5519,7 +5528,7 @@
                 }
             ],
             "description": "Peast is PHP library that generates AST for JavaScript code",
-            "time": "2021-05-22T16:06:09+00:00"
+            "time": "2021-07-14T09:31:25+00:00"
         },
         {
             "name": "mikemclin/laravel-wp-password",
@@ -6464,28 +6473,27 @@
         },
         {
             "name": "phpstan/phpdoc-parser",
-            "version": "0.5.4",
+            "version": "0.5.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "e352d065af1ae9b41c12d1dfd309e90f7b1f55c9"
+                "reference": "ea0b17460ec38e20d7eb64e7ec49b5d44af5d28c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/e352d065af1ae9b41c12d1dfd309e90f7b1f55c9",
-                "reference": "e352d065af1ae9b41c12d1dfd309e90f7b1f55c9",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/ea0b17460ec38e20d7eb64e7ec49b5d44af5d28c",
+                "reference": "ea0b17460ec38e20d7eb64e7ec49b5d44af5d28c",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.1 || ^8.0"
             },
             "require-dev": {
-                "phing/phing": "^2.16.3",
                 "php-parallel-lint/php-parallel-lint": "^1.2",
                 "phpstan/extension-installer": "^1.0",
-                "phpstan/phpstan": "^0.12.60",
+                "phpstan/phpstan": "^0.12.87",
                 "phpstan/phpstan-strict-rules": "^0.12.5",
-                "phpunit/phpunit": "^7.5.20",
+                "phpunit/phpunit": "^9.5",
                 "symfony/process": "^5.2"
             },
             "type": "library",
@@ -6506,7 +6514,7 @@
                 "MIT"
             ],
             "description": "PHPDoc parser with support for nullable, intersection and generic types",
-            "time": "2021-04-03T14:46:19+00:00"
+            "time": "2021-06-11T13:24:46+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -8154,32 +8162,32 @@
         },
         {
             "name": "slevomat/coding-standard",
-            "version": "7.0.9",
+            "version": "7.0.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/slevomat/coding-standard.git",
-                "reference": "d59652e000bcde019459dcba677de030867d0232"
+                "reference": "5716052725863953ddc2f8a7e934c09cb64bdf73"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/slevomat/coding-standard/zipball/d59652e000bcde019459dcba677de030867d0232",
-                "reference": "d59652e000bcde019459dcba677de030867d0232",
+                "url": "https://api.github.com/repos/slevomat/coding-standard/zipball/5716052725863953ddc2f8a7e934c09cb64bdf73",
+                "reference": "5716052725863953ddc2f8a7e934c09cb64bdf73",
                 "shasum": ""
             },
             "require": {
                 "dealerdirect/phpcodesniffer-composer-installer": "^0.6.2 || ^0.7",
                 "php": "^7.1 || ^8.0",
-                "phpstan/phpdoc-parser": "0.5.1 - 0.5.4",
+                "phpstan/phpdoc-parser": "0.5.1 - 0.5.5",
                 "squizlabs/php_codesniffer": "^3.6.0"
             },
             "require-dev": {
                 "phing/phing": "2.16.4",
                 "php-parallel-lint/php-parallel-lint": "1.3.0",
-                "phpstan/phpstan": "0.12.88",
+                "phpstan/phpstan": "0.12.91",
                 "phpstan/phpstan-deprecation-rules": "0.12.6",
-                "phpstan/phpstan-phpunit": "0.12.19",
-                "phpstan/phpstan-strict-rules": "0.12.9",
-                "phpunit/phpunit": "7.5.20|8.5.5|9.5.5"
+                "phpstan/phpstan-phpunit": "0.12.20",
+                "phpstan/phpstan-strict-rules": "0.12.10",
+                "phpunit/phpunit": "7.5.20|8.5.5|9.5.6"
             },
             "type": "phpcodesniffer-standard",
             "extra": {
@@ -8207,7 +8215,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-06-07T10:08:42+00:00"
+            "time": "2021-07-13T17:47:03+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",
@@ -11655,23 +11663,23 @@
         },
         {
             "name": "zordius/lightncandy",
-            "version": "v1.2.5",
+            "version": "v1.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zordius/lightncandy.git",
-                "reference": "37aa381e0f27d411a630062070c7a5a2174c62e7"
+                "reference": "b451f73e8b5c73e62e365997ba3c993a0376b72a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zordius/lightncandy/zipball/37aa381e0f27d411a630062070c7a5a2174c62e7",
-                "reference": "37aa381e0f27d411a630062070c7a5a2174c62e7",
+                "url": "https://api.github.com/repos/zordius/lightncandy/zipball/b451f73e8b5c73e62e365997ba3c993a0376b72a",
+                "reference": "b451f73e8b5c73e62e365997ba3c993a0376b72a",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.1.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^7"
+                "phpunit/phpunit": ">=7"
             },
             "type": "library",
             "extra": {
@@ -11703,7 +11711,7 @@
                 "php",
                 "template"
             ],
-            "time": "2020-03-08T06:00:24+00:00"
+            "time": "2021-07-11T04:52:41+00:00"
         }
     ],
     "aliases": [],
