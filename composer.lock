@@ -4,14 +4,14 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3975d127c867cbf216aa24fd942330d5",
+    "content-hash": "ab93dc19379831947297946767b2f344",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
-            "version": "5.9.7",
+            "version": "5.9.8",
             "dist": {
                 "type": "zip",
-                "url": "https://connect.advancedcustomfields.com/index.php?a=download&p=pro&k={%WP_PLUGIN_ACF_KEY}&t=5.9.7"
+                "url": "https://connect.advancedcustomfields.com/index.php?a=download&p=pro&k={%WP_PLUGIN_ACF_KEY}&t=5.9.8"
             },
             "require": {
                 "ffraenz/private-composer-installer": "^3.0"
@@ -988,16 +988,16 @@
         },
         {
             "name": "moderntribe/tribe-libs",
-            "version": "v3.4.2",
+            "version": "v3.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moderntribe/tribe-libs.git",
-                "reference": "4b9529b3f8daf1b0fcbe7b81f7793ce1538db5e4"
+                "reference": "5ffe0dfa90a083294f84fcaed8b9163bd221733a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/tribe-libs/zipball/4b9529b3f8daf1b0fcbe7b81f7793ce1538db5e4",
-                "reference": "4b9529b3f8daf1b0fcbe7b81f7793ce1538db5e4",
+                "url": "https://api.github.com/repos/moderntribe/tribe-libs/zipball/5ffe0dfa90a083294f84fcaed8b9163bd221733a",
+                "reference": "5ffe0dfa90a083294f84fcaed8b9163bd221733a",
                 "shasum": ""
             },
             "require": {
@@ -1038,7 +1038,7 @@
             "require-dev": {
                 "automattic/phpcs-neutron-standard": "^1.5",
                 "automattic/vipwpcs": "^2.0.0",
-                "dealerdirect/phpcodesniffer-composer-installer": "^0.5.0",
+                "dealerdirect/phpcodesniffer-composer-installer": "0.7.1",
                 "lucatume/wp-browser": "^2.6.10",
                 "phpcompatibility/php-compatibility": "*",
                 "phpcompatibility/phpcompatibility-wp": "^2.0",
@@ -1095,7 +1095,7 @@
                 "GPL-2.0-only"
             ],
             "description": "A library for use on Modern Tribe service projects.",
-            "time": "2021-04-29T18:10:21+00:00"
+            "time": "2021-07-15T03:27:25+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -3315,15 +3315,15 @@
         },
         {
             "name": "wpackagist-plugin/wordpress-seo",
-            "version": "16.6.1",
+            "version": "16.7",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/wordpress-seo/",
-                "reference": "tags/16.6.1"
+                "reference": "tags/16.7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wordpress-seo.16.6.1.zip"
+                "url": "https://downloads.wordpress.org/plugin/wordpress-seo.16.7.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
