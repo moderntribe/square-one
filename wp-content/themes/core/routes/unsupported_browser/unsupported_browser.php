@@ -52,7 +52,7 @@ $c = Unsupported_Browser_Controller::factory();
 		<div class="l-container">
 
 			<div class="site-content__content">
-				<h2><?php echo esc_html( sprintf( '%s %s', __( 'Folks, time to get a new browser', 'tribe' ), get_bloginfo( 'name' ) ) ); ?></h2>
+				<h2><?php esc_html_e( 'Folks, time to get a new browser', 'tribe' ); ?></h2>
 				<p><?php echo sprintf( '%s <a href="http://browsehappy.com/" rel="external">%s</a>.', __( 'You are viewing this site in a browser that is no longer supported or secure. For the best possible experience, we recommend that you', 'tribe' ), __( 'update or use a modern browser', 'tribe' ) ); ?></p>
 			</div>
 
