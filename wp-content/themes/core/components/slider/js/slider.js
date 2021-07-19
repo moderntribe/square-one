@@ -4,6 +4,7 @@
  */
 
 import _ from 'lodash';
+import { trigger } from 'utils/events';
 import SwiperCore, { Navigation, Pagination, A11y, Autoplay, Thumbs } from 'swiper/core';
 
 SwiperCore.use( [ Navigation, Pagination, A11y, Autoplay, Thumbs ] );
@@ -119,6 +120,13 @@ const initSliders = () => {
 		instances.swipers[ swiperMainId ] = new SwiperCore( slider, getMainOptsForSlider( slider, swiperMainId ) );
 		slider.setAttribute( 'data-id', swiperMainId );
 		slider.setAttribute( 'id', swiperMainId );
+		instances.swipers[ swiperMainId ].on( 'imagesReady', () => {
+			trigger( {
+				event: 'modern_tribe/swiper_images_ready',
+				data: { slider: instances.swipers[ swiperMainId ] },
+				native: false,
+			} );
+		} );
 	} );
 };
 

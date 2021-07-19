@@ -10,6 +10,7 @@ use Tribe\Project\Blocks\Types\Card_Grid\Card_Grid;
 use Tribe\Project\Blocks\Types\Content_Columns\Content_Columns;
 use Tribe\Project\Blocks\Types\Content_Loop\Content_Loop;
 use Tribe\Project\Blocks\Types\Gallery_Grid\Gallery_Grid;
+use Tribe\Project\Blocks\Types\Gallery_Slider\Gallery_Slider;
 use Tribe\Project\Blocks\Types\Hero\Hero;
 use Tribe\Project\Blocks\Types\Icon_Grid\Icon_Grid;
 use Tribe\Project\Blocks\Types\Interstitial\Interstitial;
@@ -38,6 +39,7 @@ class Blocks_Definer implements Definer_Interface {
 				DI\get( Content_Columns::class ),
 				DI\get( Content_Loop::class ),
 				DI\get( Gallery_Grid::class ),
+				DI\get( Gallery_Slider::class ),
 				DI\get( Hero::class ),
 				DI\get( Icon_Grid::class ),
 				DI\get( Interstitial::class ),
@@ -70,6 +72,7 @@ class Blocks_Definer implements Definer_Interface {
 				'acf/contentcolumns',
 				'acf/contentloop',
 				'acf/gallerygrid',
+				'acf/galleryslider',
 				'acf/hero',
 				'acf/icongrid',
 				'acf/interstitial',

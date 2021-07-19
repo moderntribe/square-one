@@ -1,0 +1,110 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Component: Gallery Slider
+ *
+ * ----------------------------------------------------------------------------- */
+
+.b-gallery-slider {
+	padding-bottom: var(--spacer-70); /* should blocks have vertical padding? */
+
+	/* CASE: Image Ratio Variable */
+	&.b-gallery-slider--variable {
+		overflow: hidden;
+	}
+}
+
+.b-gallery-slider__header {
+
+}
+
+.b-gallery-slider__content {
+	padding-top: var(--spacer-70);
+}
+
+/* -----------------------------------------------------------------------------
+ *
+ * Gallery Slider
+ *
+ * ----------------------------------------------------------------------------- */
+
+.b-gallery-slider__slider {
+
+	.c-slider__arrows {
+		max-width: calc(var(--grid-width) + (100% - var(--grid-width)) / 2);
+	}
+
+	/* CASE: Image Ratio Variable */
+	.b-gallery-slider--variable & {
+		position: relative;
+	}
+}
+
+.c-slider__main {
+	/* CASE: Image Ratio Variable */
+	.b-gallery-slider--variable & {
+		max-width: calc(var(--grid-width) + (100% - var(--grid-width)) / 2);
+		margin: 0 0 0 auto;
+		overflow: visible;
+	}
+}
+
+.c-slider__slide {
+	/* CASE: Image Ratio Fixed */
+	.b-gallery-slider--fixed & {
+		width: calc(8 / 12 * 100%);
+		max-width: var(--grid-8-col);
+
+		@media (--viewport-medium) {
+			width: calc(10 / 12 * 100%);
+			max-width: var(--grid-10-col);
+		}
+	}
+
+	/* CASE: Image Ratio Variable */
+	.b-gallery-slider--variable & {
+		margin-right: var(--grid-gutter-small);
+
+		@media (--viewport-medium) {
+			margin-right: var(--grid-gutter-medium);
+		}
+
+		@media (--viewport-full) {
+			margin-right: var(--grid-gutter);
+		}
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ *
+ * Gallery Image
+ *
+ * ----------------------------------------------------------------------------- */
+
+.b-gallery-slider__image {
+	/* CASE: Image Ratio Fixed */
+	.b-gallery-slider--fixed & {
+		overflow: hidden;
+	}
+}
+
+.c-image__image {
+	/* CASE: Image Ratio Variable */
+	.b-gallery-slider--variable & {
+		height: 50vh;
+		width: auto;
+
+		@media (--viewport-large) {
+			height: 467px;
+		}
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ *
+ * Gallery Image Caption
+ *
+ * ----------------------------------------------------------------------------- */
+
+.b-gallery-slider__meta-wrap {
+	margin-top: var(--spacer-10);
+}
