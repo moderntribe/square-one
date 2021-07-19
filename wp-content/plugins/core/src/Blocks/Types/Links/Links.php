@@ -166,11 +166,12 @@ class Links extends Block_Config implements Cta_Field {
 	protected function get_links_section(): Repeater {
 		$group = new Repeater( self::NAME . '_' . self::LINKS );
 		$group->set_attributes( [
-			'label'  => esc_html__( 'Links List', 'tribe' ),
-			'name'   => self::LINKS,
-			'layout' => 'block',
-			'min'    => 0,
-			'max'    => 10,
+			'label'        => esc_html__( 'Links List', 'tribe' ),
+			'name'         => self::LINKS,
+			'layout'       => 'block',
+			'min'          => 0,
+			'max'          => 10,
+			'button_label' => esc_html__( 'Add Link', 'tribe' ),
 		] );
 		$link = $this->get_cta_field( self::NAME );
 
