@@ -108,7 +108,7 @@ $c = Unsupported_Browser_Controller::factory();
 								   <img src="<?php echo $c->get_legacy_image_url( 'edge.svg' ); ?>"
 										alt=""<?php echo esc_attr( __( 'Edge browser logo', 'tribe' ) ); ?>"/>
 									<br/>
-								   <?php echo esc_html( __( 'Edge', 'tribe' ) ); // TODO Move to Edge. No longer supporting IE11.?>
+								   <?php echo esc_html( __( 'Edge', 'tribe' ) ); ?>
 							   </span>
 
 					</a>
