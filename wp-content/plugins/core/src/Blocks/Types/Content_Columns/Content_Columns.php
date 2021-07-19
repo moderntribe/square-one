@@ -134,11 +134,12 @@ class Content_Columns extends Block_Config implements Cta_Field {
 	protected function get_links_section(): Repeater {
 		$group = new Repeater( self::NAME . '_' . self::COLUMNS );
 		$group->set_attributes( [
-			'label'  => __( 'Columns', 'tribe' ),
-			'name'   => self::COLUMNS,
-			'layout' => 'block',
-			'min'    => 1,
-			'max'    => 3,
+			'label'        => esc_html__( 'Columns', 'tribe' ),
+			'name'         => self::COLUMNS,
+			'layout'       => 'block',
+			'min'          => 1,
+			'max'          => 3,
+			'button_label' => esc_html__( 'Add Column', 'tribe' ),
 		] );
 
 		$text = new Field( self::COLUMN_TITLE, [
