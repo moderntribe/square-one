@@ -29,7 +29,7 @@ $c = Unsupported_Browser_Controller::factory();
 	<div class="site-header">
 		<div class="l-container">
 			<div class="g-row g-row--col-1">
-				<div class="g-col site-header--underline">
+				<div class="g-col site-header__underline">
 					<h1 class="site-brand">
 						<?php
 						if ( $c->get_logo_url() ) : ?>
@@ -121,7 +121,7 @@ $c = Unsupported_Browser_Controller::factory();
 	<div class="site-footer">
 		<div class="l-container">
 			<div class="g-row g-row--col-1">
-				<div class="site-footer--overline">
+				<div class="site-footer__overline">
 					<p class="site-footer__copy">
 						<?php printf(
 							__( '%s %d All Rights Reserved. %s.', 'tribe' ),
