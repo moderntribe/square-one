@@ -21,11 +21,13 @@ class Content_Columns extends Block_Config implements Cta_Field {
 	public const LEADIN          = 'leadin';
 	public const TITLE           = 'title';
 	public const DESCRIPTION     = 'description';
+	
+	public const SECTION_COLUMNS = 's-columns';
 	public const COLUMNS         = 'columns';
 	public const COLUMN_TITLE    = 'col_title';
 	public const COLUMN_CONTENT  = 'col_content';
 
-	public const SECTION_SETTINGS     = 's-settings';
+	public const SECTION_SETTINGS     = 's-appearance';
 	public const CONTENT_ALIGN        = 'content-align';
 	public const CONTENT_ALIGN_LEFT   = 'left';
 	public const CONTENT_ALIGN_CENTER = 'center';
@@ -78,19 +80,18 @@ class Content_Columns extends Block_Config implements Cta_Field {
 		//==========================================
 		// Content Fields
 		//==========================================
-		$this->add_section( new Field_Section( self::SECTION_CONTENT, __( 'Content', 'tribe' ), 'accordion' ) )
-			 ->add_field( new Field( self::NAME . '_' . self::TITLE, [
-					 'label' => __( 'Title', 'tribe' ),
+		$this->add_field( new Field( self::NAME . '_' . self::TITLE, [
+					 'label' => esc_html__( 'Title', 'tribe' ),
 					 'name'  => self::TITLE,
 					 'type'  => 'text',
 				 ] )
 			 )->add_field( new Field( self::NAME . '_' . self::LEADIN, [
-					'label' => __( 'Lead in', 'tribe' ),
+					'label' => esc_html__( 'Lead in', 'tribe' ),
 					'name'  => self::LEADIN,
 					'type'  => 'text',
 				] )
 			)->add_field( new Field( self::NAME . '_' . self::DESCRIPTION, [
-					'label'        => __( 'Description', 'tribe' ),
+					'label'        => esc_html__( 'Description', 'tribe' ),
 					'name'         => self::DESCRIPTION,
 					'type'         => 'wysiwyg',
 					'toolbar'      => Classic_Editor_Formats::MINIMAL,
@@ -99,19 +100,22 @@ class Content_Columns extends Block_Config implements Cta_Field {
 				] )
 			)->add_field(
 				$this->get_cta_field( self::NAME )
-			)->add_field( $this->get_links_section() );
+			);
+
+			$this->add_section( new Field_Section( self::SECTION_COLUMNS, esc_html__( 'Columns', 'tribe' ), 'accordion' ) )
+				->add_field( $this->get_links_section() );
 
 		//==========================================
 		// Setting Fields
 		//==========================================
-		$this->add_section( new Field_Section( self::SECTION_SETTINGS, __( 'Settings', 'tribe' ), 'accordion' ) )
+		$this->add_section( new Field_Section( self::SECTION_SETTINGS, esc_html__( 'Appearance', 'tribe' ), 'accordion' ) )
 			 ->add_field( new Field( self::NAME . '_' . self::CONTENT_ALIGN, [
-				 'label'           => __( 'Content Alignment', 'tribe' ),
+				 'label'           => esc_html__( 'Content Alignment', 'tribe' ),
 				 'type'            => 'image_select',
 				 'name'            => self::CONTENT_ALIGN,
 				 'choices'         => [
-					 self::CONTENT_ALIGN_CENTER => __( 'Center', 'tribe' ),
-					 self::CONTENT_ALIGN_LEFT   => __( 'Left', 'tribe' ),
+					 self::CONTENT_ALIGN_CENTER => esc_html__( 'Center', 'tribe' ),
+					 self::CONTENT_ALIGN_LEFT   => esc_html__( 'Left', 'tribe' ),
 				 ],
 				 'default_value'   => self::CONTENT_ALIGN_CENTER,
 				 'multiple'        => 0,
