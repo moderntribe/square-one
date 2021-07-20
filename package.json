@@ -8,6 +8,7 @@
     "paths": {
       "core_theme": "wp-content/themes/core/",
       "core_theme_components": "wp-content/themes/core/components/",
+      "core_theme_routes": "wp-content/themes/core/routes/",
       "core_theme_js_common": "wp-content/themes/core/assets/js/src/common/",
       "core_theme_js_util": "wp-content/themes/core/assets/js/src/utils/",
       "core_theme_css": "wp-content/themes/core/assets/css/dist/theme/",
