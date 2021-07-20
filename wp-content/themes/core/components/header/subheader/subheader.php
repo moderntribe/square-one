@@ -7,6 +7,7 @@ use \Tribe\Project\Templates\Components\header\subheader\Subheader_Controller;
  */
 // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
 $c = Subheader_Controller::factory( $args );
+
 ?>
 
 <header <?php echo $c->get_classes(); ?> <?php echo $c->get_attrs(); ?>>
@@ -24,7 +25,7 @@ $c = Subheader_Controller::factory( $args );
 
 		<div <?php echo $c->get_content_classes(); ?>>
 
-			<?php get_template_part( 'components/breadcrumbs/breadcrumbs', 'null', $c->get_breadcrumbs_args() ); ?>
+			<?php get_template_part( 'components/breadcrumbs/breadcrumbs', 'null', $c->get_breadcrumb_args() ); ?>
 			<?php get_template_part( 'components/text/text', null, $c->get_title_args() ); ?>
 			<?php get_template_part( 'components/text/text', null, $c->get_description_args() ); ?>
 

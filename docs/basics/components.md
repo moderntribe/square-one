@@ -31,7 +31,7 @@ of tools that are generalized enough to be configured into _custom_ solutions fo
 
 To use the LEGO analogy from before, even the most basic 70’s LEGO set of small colorful bricks can be turned into a
 limitless number of creations! The advantage of LEGO isn’t that the end result always looks the same, it’s that they’ve
-been engineered to fit together in a consistent matter so the builder can spend less time worrying about how to stick
+been engineered to fit together in a consistent manner so the builder can spend less time worrying about how to stick
 them together and more time just creating!
 
 That’s our hope with Components. Take away the menial task of making a fresh button from scratch every time and just
@@ -99,10 +99,6 @@ all seen this before:
   }; ?>
   <?php // repeat for 20 other attributes we might have ?>
 >
-  <?php if ( $icon ) { ?>
-    <span class="icon-<?php echo sanitize_html_class( $icon ); ?>"></span>
-  <?php } ?>
-  <?php echo $text; ?>
 </button>
 ```
 
@@ -210,7 +206,7 @@ And who wouldn’t? They let us define strings right within a Class and referenc
 needed. Goodbye hardcoding! Goodbye search-and-replace-all-instances-whoops-I-forgot-one-now-the-site-is-white
 -screening-time-to-update-my-resume! Constants are great.
 
-We set up constants for the names of all arguments that might be passed to our temlates.. This is handy for a couple
+We set up constants for the names of all arguments that might be passed to our templates. This is handy for a couple
 reasons - first, it allows us to use an IDE’s autocomplete when instantiating requesting this component (more on that
 later). Second, it acts as a sort of reference for what this component accepts as options.
  
@@ -257,7 +253,7 @@ protected function defaults(): array {
 }
 ```
 
-Use the `defaults()` method to configure those default values. Often we'll just want propertly typed empty values,
+Use the `defaults()` method to configure those default values. Often we'll just want empty values,
 but sometimes we'll have other reasonable defaults. 
 
 ```php
@@ -323,7 +319,7 @@ And let's not stop with just styles. We can have portable, component-specific be
 files that live right along side the Template. Create an `index.js` file to serve as a clearing-house, loading
 additional files found in the Component's `js` directory. Then, append your component's main export to the `components.js` loader in `.../themes/core/assets/js/src/theme/core/components.js`
 
-Using this main components file, we can have fine control of the order in which webpack imports modules.
+Using this main [components.js](wp-content/themes/core/assets/js/src/theme/core/components.js) file, we can have fine control of the order in which webpack imports modules.
 
 ```js
 /**
