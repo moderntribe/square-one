@@ -80,10 +80,10 @@ class Card_Grid extends Block_Config implements Cta_Field {
 		// Content Fields
 		//==========================================
 		$this->add_field( new Field( self::NAME . '_' . self::LEADIN, [
-					'label' => esc_html__( 'Leadin', 'tribe' ),
-					'name'  => self::LEADIN,
-					'type'  => 'text',
-					'wrapper'     => [
+					'label'   => esc_html__( 'Leadin', 'tribe' ),
+					'name'    => self::LEADIN,
+					'type'    => 'text',
+					'wrapper' => [
 						'class' => 'tribe-acf-hide-label',
 					],
 				] )
