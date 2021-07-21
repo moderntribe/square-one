@@ -14,6 +14,7 @@ class Supports {
 		$this->support_title_tag();
 		$this->support_responsive_embeds();
 		$this->support_html5();
+		$this->remove_support_block_widgets();
 	}
 
 	/**
@@ -47,6 +48,13 @@ class Supports {
 			'script',
 			'style',
 		] );
+	}
+
+	/**
+	 * Disable Block Editor Widget Support
+	 */
+	private function remove_support_block_widgets() {
+		remove_theme_support( 'widgets-block-editor' );
 	}
 
 }
