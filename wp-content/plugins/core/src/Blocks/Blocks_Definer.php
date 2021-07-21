@@ -92,6 +92,7 @@ class Blocks_Definer implements Definer_Interface {
 				'core-embed/wordpress',
 				'core-embed/youtube',
 				'core/audio',
+				//'core/query', // WP 5.8
 				//'core/buttons',
 				'core/block',
 				'core/code',
