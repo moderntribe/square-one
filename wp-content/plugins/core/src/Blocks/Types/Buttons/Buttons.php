@@ -40,20 +40,20 @@ class Buttons extends Block_Config implements Cta_Field {
 					'data' => [
 						self::BUTTONS => [
 							[
-								self::BUTTON_LINK       => [
+								self::BUTTON_LINK  => [
 									'title'  => esc_html__( 'Lorem ipsum', 'tribe' ),
 									'url'    => '#',
 									'target' => '',
 								],
-								self::BUTTON_STYLE      => self::STYLE_PRIMARY,
+								self::BUTTON_STYLE => self::STYLE_PRIMARY,
 							],
 							[
-								self::BUTTON_LINK       => [
+								self::BUTTON_LINK  => [
 									'title'  => esc_html__( 'Lorem ipsum', 'tribe' ),
 									'url'    => '#',
 									'target' => '',
 								],
-								self::BUTTON_STYLE      => self::STYLE_SECONDARY,
+								self::BUTTON_STYLE => self::STYLE_SECONDARY,
 							],
 						],
 
