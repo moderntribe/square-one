@@ -12,7 +12,7 @@ class Deny_Blocks {
 	/**
 	 * @var array A list of blocks types to disable
 	 */
-	private $denylist;
+	private array $denylist;
 
 	public function __construct( array $denylist ) {
 		$this->denylist = $denylist;
