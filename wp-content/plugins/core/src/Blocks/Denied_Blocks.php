@@ -3,11 +3,11 @@
 namespace Tribe\Project\Blocks;
 
 /**
- * Class Deny_Blocks
+ * Class Denied_Blocks
  *
  * Provides an array of block names to remove from the editor.
  */
-class Deny_Blocks {
+class Denied_Blocks {
 
 	/**
 	 * @var array A list of blocks types to disable
