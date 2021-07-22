@@ -32,7 +32,7 @@ class Blocks_Definer implements Definer_Interface {
 
 	public function define(): array {
 		return [
-			self::TYPES          => DI\add( [
+			self::TYPES            => DI\add( [
 				DI\get( Accordion::class ),
 				DI\get( Buttons::class ),
 				DI\get( Card_Grid::class ),
@@ -59,7 +59,7 @@ class Blocks_Definer implements Definer_Interface {
 			 *
 			 * @see: https://developer.wordpress.org/block-editor/reference-guides/filters/block-filters/#using-a-deny-list
 			 */
-			self::DENY_LIST      => [
+			self::DENY_LIST        => [
 				'core/archives',
 				'core/button',
 				'core/buttons',
@@ -89,7 +89,7 @@ class Blocks_Definer implements Definer_Interface {
 			 *
 			 * TODO: Create a proper thumbnail of the style for the block editor: http://p.tri.be/dmsAwK
 			 */
-			self::STYLES         => DI\add( [
+			self::STYLES           => DI\add( [
 				DI\factory( static function () {
 					return new Block_Style_Override( [ 'core/paragraph' ], [
 						[
@@ -112,7 +112,7 @@ class Blocks_Definer implements Definer_Interface {
 				} ),
 			] ),
 
-			Denied_Blocks::class => DI\create()->constructor( DI\get( self::DENY_LIST ) ),
+			Block_Deny_List::class => DI\create()->constructor( DI\get( self::DENY_LIST ) ),
 		];
 	}
 

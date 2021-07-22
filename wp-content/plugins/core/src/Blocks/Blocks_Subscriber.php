@@ -23,7 +23,7 @@ class Blocks_Subscriber extends Abstract_Subscriber {
 		 * Adds the deny list to the JS_Config class.
 		 */
 		add_filter( 'tribe/project/blocks/denylist', function ( array $types ): array {
-			return $this->container->get( Denied_Blocks::class )->filter_block_denylist( $types );
+			return $this->container->get( Block_Deny_List::class )->filter_block_denylist( $types );
 		}, 10, 1 );
 
 		add_action( 'after_setup_theme', function () {
