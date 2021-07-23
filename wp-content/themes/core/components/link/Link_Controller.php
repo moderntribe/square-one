@@ -4,6 +4,7 @@ namespace Tribe\Project\Templates\Components\link;
 
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
+use Tribe\Project\Templates\Components\text\Text_Controller;
 
 class Link_Controller extends Abstract_Controller {
 
@@ -14,6 +15,8 @@ class Link_Controller extends Abstract_Controller {
 	public const CLASSES        = 'classes';
 	public const ATTRS          = 'attrs';
 	public const CONTENT        = 'content';
+	public const HEADER         = 'header';
+	public const DESCRIPTION    = 'description';
 
 	/**
 	 * @var string|\Tribe\Project\Templates\Components\Deferred_Component
@@ -25,6 +28,8 @@ class Link_Controller extends Abstract_Controller {
 	private string $aria_label;
 	private array $classes;
 	private array $attrs;
+	private string $link_header;
+	private string $description;
 
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
@@ -35,7 +40,9 @@ class Link_Controller extends Abstract_Controller {
 		$this->aria_label     = (string) $args[ self::ARIA_LABEL ];
 		$this->classes        = (array) $args[ self::CLASSES ];
 		$this->attrs          = (array) $args[ self::ATTRS ];
-		$this->content        = $args[ self::CONTENT ];
+		$this->content        = (string) $args[ self::CONTENT ];
+		$this->link_header    = (string) $args[ self::HEADER ];
+		$this->description    = (string) $args[ self::DESCRIPTION ];
 	}
 
 	protected function defaults(): array {
@@ -47,6 +54,8 @@ class Link_Controller extends Abstract_Controller {
 			self::CLASSES        => [],
 			self::ATTRS          => [],
 			self::CONTENT        => '',
+			self::HEADER         => '',
+			self::DESCRIPTION    => '',
 		];
 	}
 
@@ -92,6 +101,20 @@ class Link_Controller extends Abstract_Controller {
 		}
 
 		return $content;
+	}
+
+	public function get_link_header_args() {
+		return [
+			Text_Controller::CONTENT => $this->link_header,
+			Text_Controller::TAG     => 'h3',
+		];
+	}
+
+	public function get_link_description_args() {
+		return [
+			Text_Controller::CONTENT => $this->description,
+			Text_Controller::TAG     => 'div',
+		];
 	}
 
 	private function new_window_text(): string {
