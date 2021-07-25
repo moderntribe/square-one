@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2021.07
+* Fixed: SQONE-652 webpack config for dynamic imports fixed for dev tasks. 
+
 ## 2021.06
 * Added styles and data handling for the index and archive pages.
 * Updated: Moved Post Archive settings from General Settings to post archive settings
