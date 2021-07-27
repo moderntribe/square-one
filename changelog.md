@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2021.07
+* Added: `SQ1_DEBUG` define allow force deactivated plugins to be enabled.
+* Updated: force-plugin-activation.php mu plugin to php7.4 and to use `SQ1_DEBUG` constant instead of `WP_DEBUG`.
+When `WP_ENVIRONMENT_TYPE` is set to `development`, it automatically sets `WP_DEBUG` to true if it's not already set
+and this can lead to unexpected behavior on environments without `WP_DEBUG` defined.
+  
 ## 2021.06
 * Added styles and data handling for the index and archive pages.
 * Updated: Moved Post Archive settings from General Settings to post archive settings
