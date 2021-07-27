@@ -181,8 +181,6 @@
     "postcss-aspect-ratio": "^1.0.0",
     "postcss-assets": "^5.0.0",
     "postcss-calc": "^7.0.1",
-    "postcss-custom-media": "^7.0.8",
-    "postcss-custom-properties": "^9.0.2",
     "postcss-functions": "^3.0.0",
     "postcss-import": "12.0.1",
     "postcss-import-ext-glob": "^1.1.0",
