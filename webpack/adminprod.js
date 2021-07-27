@@ -22,6 +22,7 @@ module.exports = merge.strategy( {
 	externals,
 	output: {
 		path: resolve( `${ __dirname }/../`, pkg.square1.paths.core_admin_js_dist ),
+		publicPath: `/${ pkg.square1.paths.core_admin_js_dist }`,
 	},
 	plugins: [
 		new MiniCssExtractPlugin( {

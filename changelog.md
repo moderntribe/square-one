@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## 2021.07
+* Fixed: SQONE-652 webpack config for dynamic imports fixed for dev tasks.
 * Fixed: SQONE-658: Update PostCSS config to remove duplicate selectors.
 
 ## 2021.06
