@@ -29,12 +29,15 @@ class Allowed_Blocks {
 	 * Add block types to the allow list to enable in the block editor.
 	 *
 	 * @param bool|array $allowed_types Currently allowed block types.
-	 * @param \WP_Post   $post          The current post object.
+	 * @param \WP_Block_Editor_Context   $block_editor_context          The current post object.
+	 *
+	 * @filter allowed_block_types_all > tribe_allowed_blocks
 	 *
 	 * @return array                    Modified allowed block types.
 	 */
-	public function register_allowed_blocks( $allowed_types, \WP_Post $post ): array {
-		$allowed_types = ! is_array( $allowed_types ) ? [] : $allow_types;
+	public function register_allowed_blocks_all( $allowed_types, \WP_Block_Editor_Context $block_editor_context ): array {
+
+		$allowed_types = ! is_array( $allowed_types ) ? [] : $allowed_types;
 
 		return array_unique( array_merge( $allowed_types, $this->allow_list ) );
 	}
