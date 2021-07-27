@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2021.07
+* Updated: WordPress 5.8
+* Added: Disabled Block widgets from wp5.8
+* Updated: Allow block filter change for wp45.8
+
 ## 2021.06
 * Added styles and data handling for the index and archive pages.
 * Updated: Moved Post Archive settings from General Settings to post archive settings
