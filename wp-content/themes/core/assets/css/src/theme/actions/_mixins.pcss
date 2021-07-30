@@ -299,3 +299,21 @@
 		outline: 1px dashed;
 	}
 }
+
+/* -----------------------------------------------------------------------------
+ * A: Tags style link
+ * ----------------------------------------------------------------------------- */
+
+@define-mixin a-tag-link {
+	@mixin t-tag;
+
+	&:visited {
+		color: var(--color-white);
+	}
+
+	&:hover {
+		color: var(--color-white);
+		text-decoration: underline;
+	}
+
+}

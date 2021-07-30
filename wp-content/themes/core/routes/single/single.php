@@ -10,36 +10,31 @@ get_header();
 
 	<main id="main-content">
 
-		<?php get_template_part( 'components/header/subheader/subheader', null, $c->get_subheader_args() ); ?>
-
 		<article class="item-single">
+			<?php
+			get_template_part( 'components/header/subheader/subheader', 'single', $c->get_subheader_args() ); ?>
 
 			<div class="item-single__content s-sink t-sink l-sink l-sink--double">
-				<?php the_content(); ?>
+				<?php
+				if ( have_posts() ) {
+					the_post();
+					the_content(); // Block Content Only
+				}
+				?>
 			</div>
 
-			<footer class="item-single__footer l-container">
+			<?php // comments_template(); ?>
 
-				<ul class="item-single__meta">
+			<footer>
+				<div class="l-container">
+					<div class="s-sink t-sink l-sink l-sink--double">
+						<div class="h4"><?php the_author(); ?></div>
+						<p><?php the_author_meta( 'description' ); ?></p>
+					</div>
 
-					<li class="item-single__meta-date">
-						<time datetime="<?php echo esc_attr( get_the_time( 'c' ) ); ?>">
-							<?php the_date(); ?>
-						</time>
-					</li>
-
-					<li class="item-single__meta-author">
-						<?php _e( 'by', 'tribe' ); ?>
-						<?php the_author_link(); ?>
-					</li>
-
-				</ul>
-
-				<?php get_template_part( 'components/share/share' ) ?>
-
+					<?php get_template_part( 'components/pagination/single/single' ); ?>
+				</div>
 			</footer>
-
-			<?php comments_template(); ?>
 
 		</article>
 

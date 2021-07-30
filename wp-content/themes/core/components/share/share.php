@@ -10,7 +10,7 @@ $c = Share_Controller::factory( $args );
 ?>
 <div class="social-share">
 
-	<p class="social-share__title"><?php esc_html_e( 'Share This', 'tribe' );?></p>
+	<p class="social-share__title u-visually-hidden"><?php esc_html_e( 'Share This', 'tribe' );?></p>
 
 	<ul class="social-share-networks" data-js="social-share-networks">
 		<?php foreach ( $c->get_links() as $link ) { ?>
