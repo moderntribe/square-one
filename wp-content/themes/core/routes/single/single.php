@@ -1,7 +1,6 @@
 <?php declare(strict_types=1);
 
 use Tribe\Project\Templates\Components\sidebar\Sidebar_Controller;
-use Tribe\Project\Templates\Components\tags_list\Tags_List_Controller;
 use Tribe\Project\Templates\Routes\single\Single_Controller;
 
 $c = Single_Controller::factory();
