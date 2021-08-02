@@ -17,8 +17,8 @@ $c = Subheader_Single_Controller::factory( $args );
 		<div <?php echo $c->get_content_classes(); ?>>
 
 			<?php
-			foreach ( $c->get_taxonomy_terms() as $tax ) {
-				get_template_part( 'components/link/link', 'null', $c->parse_term_to_link_args( $tax ) );
+			if ( $c->get_tag_name() !== null && $c->get_tag_link() !== null ) {
+				get_template_part( 'components/link/link', 'null', $c->get_tag_args() );
 			}
 			?>
 

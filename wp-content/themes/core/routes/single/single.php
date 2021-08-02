@@ -23,18 +23,15 @@ get_header();
 				?>
 			</div>
 
-			<?php // comments_template(); ?>
-
-			<footer>
-				<div class="l-container">
-					<div class="s-sink t-sink l-sink l-sink--double">
-						<div class="h4"><?php the_author(); ?></div>
-						<p><?php the_author_meta( 'description' ); ?></p>
-					</div>
-
-					<?php get_template_part( 'components/pagination/single/single' ); ?>
+			<div class="l-container">
+				<div class="">
+					<?php get_template_part( 'components/share/share' ) ?>
 				</div>
-			</footer>
+			</div>
+
+			<?php get_template_part( 'components/footer/single_footer/single_footer', null, $c->get_content_footer_args() ); ?>
+
+			<?php // comments_template(); ?>
 
 		</article>
 
