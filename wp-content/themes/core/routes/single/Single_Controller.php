@@ -6,6 +6,7 @@ use Tribe\Project\Taxonomies\Category\Category;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\footer\single_footer\Single_Footer_Controller;
 use Tribe\Project\Templates\Components\header\subheader\Subheader_Single_Controller;
+use Tribe\Project\Templates\Components\tags_list\Tags_List_Controller;
 use Tribe\Project\Templates\Components\Traits\Page_Title;
 
 class Single_Controller extends Abstract_Controller {
@@ -61,6 +62,18 @@ class Single_Controller extends Abstract_Controller {
 		}
 
 		return $terms;
+	}
+
+	public function get_tags_list_args(): array {
+		$tags_list = [];
+		/** @var \WP_Term $term */
+		foreach ( $this->get_taxonomy_terms() as $term ) {
+			$tags_list[ $term->name ] = get_term_link( $term );
+		}
+
+		return [
+			Tags_List_Controller::TAGS => $tags_list,
+		];
 	}
 
 }

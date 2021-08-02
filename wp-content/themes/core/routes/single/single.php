@@ -1,6 +1,7 @@
 <?php declare(strict_types=1);
 
 use Tribe\Project\Templates\Components\sidebar\Sidebar_Controller;
+use Tribe\Project\Templates\Components\tags_list\Tags_List_Controller;
 use Tribe\Project\Templates\Routes\single\Single_Controller;
 
 $c = Single_Controller::factory();
@@ -24,7 +25,10 @@ get_header();
 			</div>
 
 			<div class="l-container">
-				<div class="">
+				<div class="c-tag-meta">
+					<?php
+					get_template_part( 'components/tags_list/tags_list', null, $c->get_tags_list_args() );
+					?>
 					<?php get_template_part( 'components/share/share' ) ?>
 				</div>
 			</div>
