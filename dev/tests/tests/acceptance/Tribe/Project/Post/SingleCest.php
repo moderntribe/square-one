@@ -13,7 +13,7 @@ class SingleCest {
 
 	public function post_should_display_date_and_author( AcceptanceTester $I ) {
 		$post_id = $I->havePostInDatabase( [
-			'post_status'  => 'publish',
+			'post_status' => 'publish',
 		] );
 
 		$posts_table = $I->grabPostsTableName();
