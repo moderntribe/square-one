@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2021.07
+* Fixed: `the_date()` and `the_author_link()` not rendering anything on a post single.
+
 ## 2021.06
 * Added styles and data handling for the index and archive pages.
 * Updated: Moved Post Archive settings from General Settings to post archive settings
