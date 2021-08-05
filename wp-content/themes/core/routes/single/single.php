@@ -23,16 +23,10 @@ get_header();
 				?>
 			</div>
 
-			<div class="l-container">
-				<div class="c-tag-meta">
-					<?php
-					get_template_part( 'components/tags_list/tags_list', null, $c->get_tags_list_args() );
-					?>
-					<?php get_template_part( 'components/share/share' ) ?>
-				</div>
-			</div>
 
-			<?php get_template_part( 'components/footer/single_footer/single_footer', null, $c->get_content_footer_args() ); ?>
+			<div class="l-container">
+				<?php get_template_part( 'components/footer/single_footer/single_footer', null, $c->get_single_footer_args() ); ?>
+			</div>
 
 			<?php // comments_template(); ?>
 

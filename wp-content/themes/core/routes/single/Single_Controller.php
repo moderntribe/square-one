@@ -35,9 +35,9 @@ class Single_Controller extends Abstract_Controller {
 		];
 	}
 
-	public function get_content_footer_args(): array {
+	public function get_single_footer_args(): array {
 		return [
-			Single_Footer_Controller::CLASSES => [],
+			Single_Footer_Controller::TAGS_LIST_COMPONENT => defer_template_part( 'components/tags_list/tags_list', null, $this->get_tags_list_args() ),
 		];
 	}
 

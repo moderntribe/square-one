@@ -9,6 +9,7 @@ const postcssFunctions = require( '../wp-content/themes/core/assets/library/them
 const pkg = require( '../package.json' );
 
 const sharedPlugins = [
+	require( 'postcss-custom-properties' )( { preserve: false } ),
 	require( 'postcss-import-ext-glob' )( {
 		sort: 'asc',
 	} ),
@@ -18,7 +19,6 @@ const sharedPlugins = [
 		],
 	} ),
 	require( 'postcss-mixins' ),
-	require( 'postcss-custom-properties' )( { preserve: true } ),
 	require( 'postcss-simple-vars' ),
 	require( 'postcss-custom-media' ),
 	require( 'postcss-functions' )( { functions: postcssFunctions } ),
