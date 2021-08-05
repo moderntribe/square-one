@@ -9,7 +9,6 @@ modules:
         - \Helper\Acceptance
         - WPDb
         - WPBrowser
-        - WPLoader
     config:
         WPBrowser:
             url: '%ACCEPTANCE_WP_URL%'
