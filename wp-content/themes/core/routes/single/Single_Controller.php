@@ -8,10 +8,12 @@ use Tribe\Project\Templates\Components\footer\single_footer\Single_Footer_Contro
 use Tribe\Project\Templates\Components\header\subheader\Subheader_Single_Controller;
 use Tribe\Project\Templates\Components\tags_list\Tags_List_Controller;
 use Tribe\Project\Templates\Components\Traits\Page_Title;
+use Tribe\Project\Templates\Components\Traits\Primary_Term;
 
 class Single_Controller extends Abstract_Controller {
 
 	use Page_Title;
+	use Primary_Term;
 
 	/**
 	 * @var int|string
@@ -21,7 +23,7 @@ class Single_Controller extends Abstract_Controller {
 	public function get_subheader_args(): array {
 		global $post;
 
-		$term = $this->get_first_taxonomy_term();
+		$term = $this->get_primary_term( $post->ID );
 
 		return [
 			Subheader_Single_Controller::TITLE                => $this->get_page_title(),
