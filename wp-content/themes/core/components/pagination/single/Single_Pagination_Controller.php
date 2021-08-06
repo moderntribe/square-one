@@ -18,8 +18,6 @@ class Single_Pagination_Controller extends Abstract_Controller {
 	public const ITEM_ATTRS        = 'item_attrs';
 	public const CONTAINER_CLASSES = 'container_classes';
 	public const CONTAINER_ATTRS   = 'container_attrs';
-	public const NEXT_POST         = 'next_post';
-	public const PREVIOUS_POST     = 'previous_post';
 
 	private array $classes;
 	private array $attrs;
@@ -31,8 +29,6 @@ class Single_Pagination_Controller extends Abstract_Controller {
 	private array $item_attrs;
 	private array $container_classes;
 	private array $container_attrs;
-	private array $next_post;
-	private array $previous_post;
 
 	/**
 	 * Controller constructor.
@@ -52,8 +48,6 @@ class Single_Pagination_Controller extends Abstract_Controller {
 		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
 		$this->header_classes    = (array) $args[ self::HEADER_CLASSES ];
 		$this->header_attrs      = (array) $args[ self::HEADER_ATTRS ];
-		$this->next_post         = $this->get_next_link_args();
-		$this->previous_post     = $this->get_previous_link_args();
 	}
 
 	/**
