@@ -45,20 +45,6 @@ class Single_Controller extends Abstract_Controller {
 		];
 	}
 
-	public function get_first_taxonomy_term(): ?\WP_Term {
-		$terms = $this->get_taxonomy_terms();
-
-		if ( empty( $terms ) ) {
-			return null;
-		}
-
-		if ( $terms[0] instanceof \WP_Term ) {
-			return $terms[0];
-		}
-
-		return null;
-	}
-
 	public function get_taxonomy_terms(): array {
 		global $post;
 
