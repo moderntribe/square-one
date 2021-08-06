@@ -83,7 +83,7 @@ class Single_Pagination_Controller extends Abstract_Controller {
 		return [
 			self::CLASSES           => [ 'pagination', 'pagination--single' ],
 			self::ATTRS             => [ 'aria-label' => esc_attr__( 'Post Pagination', 'tribe' ) ],
-			self::LIST_CLASSES      => [ 'pagination__item', 'pagination__item--next' ],
+			self::LIST_CLASSES      => [ 'pagination__item' ],
 			self::HEADER_CLASSES    => [ 'visual-hide' ],
 			self::HEADER_ATTRS      => [ 'id' => 'pagination__label-single' ],
 			self::CONTAINER_CLASSES => [ 'pagination__list' ],
@@ -101,9 +101,9 @@ class Single_Pagination_Controller extends Abstract_Controller {
 		}
 
 		return [
-			Link_Controller::CONTENT => empty( $this->previous_link_label ) ? get_the_title( $previous ) : $this->previous_link_label,
+			Link_Controller::CONTENT => '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M17.5 9.27051V10.7288L5.70937 10.7288L9.77812 14.8049L8.75 15.833L2.91667 9.99967L8.75 4.16634L9.78542 5.19446L5.70937 9.27051L17.5 9.27051Z" fill="#151515"/></svg>' . ( empty( $this->previous_link_label ) ? get_the_title( $previous ) : $this->previous_link_label ),
 			Link_Controller::URL     => get_permalink( $previous ),
-			Link_Controller::CLASSES => [],
+			Link_Controller::CLASSES => ['pagination__item-link--previous'],
 			Link_Controller::ATTRS   => [ 'rel' => 'prev' ],
 		];
 	}
@@ -119,9 +119,9 @@ class Single_Pagination_Controller extends Abstract_Controller {
 		}
 
 		return [
-			Link_Controller::CONTENT => empty( $this->next_link_label ) ? get_the_title( $next ) : $this->next_link_label,
+			Link_Controller::CONTENT => ( empty( $this->next_link_label ) ? get_the_title( $next ) : $this->next_link_label ) . '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M2.5 10.7295V9.27116H14.2906L10.2219 5.19512L11.25 4.16699L17.0833 10.0003L11.25 15.8337L10.2146 14.8055L14.2906 10.7295H2.5Z" fill="#151515"/></svg>',
 			Link_Controller::URL     => get_permalink( $next ),
-			Link_Controller::CLASSES => [],
+			Link_Controller::CLASSES => ['pagination__item-link--next'],
 			Link_Controller::ATTRS   => [ 'rel' => 'next' ],
 		];
 	}
