@@ -18,7 +18,9 @@ trait Primary_Term {
 		if ( $this->has_yoast() ) {
 			$primary_term_id = yoast_get_primary_term_id( $taxonomy, $post_id );
 
-			return get_term( $primary_term_id );
+			if ( false !== $primary_term_id ) {
+				return get_term( $primary_term_id );
+			}
 		}
 
 		// No Yoast fallback
