@@ -25,14 +25,17 @@ class Single_Controller extends Abstract_Controller {
 
 		$term = $this->get_primary_term( $post->ID );
 
-		return [
-			Subheader_Single_Controller::TITLE                => $this->get_page_title(),
-			Subheader_Single_Controller::DATE                 => get_the_date(),
-			Subheader_Single_Controller::AUTHOR               => get_the_author_meta( 'display_name', $post->post_author ),
-			Subheader_Single_Controller::SHOULD_RENDER_BYLINE => true,
-			Subheader_Single_Controller::TAG_NAME             => $term->name,
-			Subheader_Single_Controller::TAG_LINK             => get_term_link( $term ),
-		];
+		$args[ Subheader_Single_Controller::TITLE ]                = $this->get_page_title();
+		$args[ Subheader_Single_Controller::DATE ]                 = get_the_date();
+		$args[ Subheader_Single_Controller::AUTHOR ]               = get_the_author_meta( 'display_name', $post->post_author );
+		$args[ Subheader_Single_Controller::SHOULD_RENDER_BYLINE ] = true;
+
+		if ( $term instanceof \WP_Term ) {
+			$args[ Subheader_Single_Controller::TAG_NAME ] = $term->name;
+			$args[ Subheader_Single_Controller::TAG_LINK ] = get_term_link( $term );
+		}
+
+		return $args;
 	}
 
 	public function get_single_footer_args(): array {
