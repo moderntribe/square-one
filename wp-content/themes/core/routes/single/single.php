@@ -25,20 +25,16 @@ get_header();
 			</div>
 
 
-			<div class="l-container">
-				<?php get_template_part( 'components/footer/single_footer/single_footer', null, $c->get_single_footer_args() ); ?>
-			</div>
-
-			<div class="l-container">
-				<?php get_template_part( 'components/pagination/single/single', null, [
-						Single_Pagination_Controller::NEXT_LINK_LABEL     => esc_html__( 'Next article', 'tribe' ),
-						Single_Pagination_Controller::PREVIOUS_LINK_LABEL => esc_html__( 'Previous article', 'tribe' ),
-				]); ?>
-			</div>
+			<?php get_template_part( 'components/footer/single_footer/single_footer', null, $c->get_single_footer_args() ); ?>
 
 			<?php // comments_template(); ?>
 
 		</article>
+
+		<?php get_template_part( 'components/pagination/single/single', null, [
+				Single_Pagination_Controller::NEXT_LINK_LABEL     => esc_html__( 'Next article', 'tribe' ),
+				Single_Pagination_Controller::PREVIOUS_LINK_LABEL => esc_html__( 'Previous article', 'tribe' ),
+		]); ?>
 
 	</main>
 
