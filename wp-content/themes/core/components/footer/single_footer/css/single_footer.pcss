@@ -4,4 +4,38 @@
  *
  * ----------------------------------------------------------------------------- */
 
+.c-single-footer {
+	position: relative;
+}
 
+.c-single-footer__content {
+	max-width: var(--grid-8-col);
+	margin: var(--spacer-60) auto;
+
+	@media (--viewport-medium) {
+		display: flex;
+		flex-flow: row nowrap;
+		justify-content: space-between;
+		gap: var(--grid-gutter);
+	}
+}
+
+.c-single-footer__author {
+	max-width: var(--grid-8-col);
+	margin: var(--spacer-60) auto;
+	font-family: var(--font-family-serif);
+	font-style: italic;
+	border-top: 1px solid var(--color-border);
+	padding: var(--spacer-50) 0;
+}
+
+.c-single-footer__author-name {
+	font-size: var(--font-size-body);
+	line-height: 32px;
+	font-weight: bold;
+}
+
+.c-single-footer__author-description {
+	font-size: var(--font-size-body-small);
+	line-height: 32px;
+}

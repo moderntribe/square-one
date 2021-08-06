@@ -36,8 +36,12 @@ class Single_Controller extends Abstract_Controller {
 	}
 
 	public function get_single_footer_args(): array {
+		global $post;
+
 		return [
 			Single_Footer_Controller::TAGS_LIST_COMPONENT => defer_template_part( 'components/tags_list/tags_list', null, $this->get_tags_list_args() ),
+			Single_Footer_Controller::AUTHOR_NAME         => get_the_author_meta( 'display_name', $post->post_author ),
+			Single_Footer_Controller::AUTHOR_DESCRIPTION  => get_the_author_meta( 'description', $post->post_author ),
 		];
 	}
 
