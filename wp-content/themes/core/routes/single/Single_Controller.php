@@ -22,7 +22,7 @@ class Single_Controller extends Abstract_Controller {
 		];
 	}
 
-	public function get_image_id(): int {
+	protected function get_image_id(): int {
 		return (int) get_post_thumbnail_id();
 	}
 
