@@ -15,23 +15,23 @@ class Subheader_Controller extends Abstract_Controller {
 	use Page_Title;
 	use Breadcrumbs;
 
-	public const CLASSES           = 'classes';
 	public const ATTRS             = 'attrs';
+	public const CLASSES           = 'classes';
 	public const CONTAINER_CLASSES = 'container_classes';
-	public const MEDIA_CLASSES     = 'media_classes';
 	public const CONTENT_CLASSES   = 'content_classes';
-	public const TITLE             = 'title';
 	public const DESCRIPTION       = 'description';
 	public const HERO_IMAGE_ID     = 'hero_image';
+	public const MEDIA_CLASSES     = 'media_classes';
+	public const TITLE             = 'title';
 
-	private array $classes;
 	private array $attrs;
+	private array $classes;
 	private array $container_classes;
-	private array $media_classes;
 	private array $content_classes;
-	private string $title;
+	private array $media_classes;
+	private int $hero_image_id;
 	private string $description;
-	private ?int $hero_image_id;
+	private string $title;
 
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
@@ -41,18 +41,21 @@ class Subheader_Controller extends Abstract_Controller {
 		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
 		$this->media_classes     = (array) $args[ self::MEDIA_CLASSES ];
 		$this->content_classes   = (array) $args[ self::CONTENT_CLASSES ];
-		$this->title             = (string) ( $args[ self::TITLE ] ?? '' );
-		$this->description       = (string) ( $args[ self::DESCRIPTION ] ?? '' );
-		$this->hero_image_id     = (int) ( $args[ self::HERO_IMAGE_ID ] ?? null );
+		$this->title             = (string) $args[ self::TITLE ];
+		$this->description       = (string) $args[ self::DESCRIPTION ];
+		$this->hero_image_id     = (int) $args[ self::HERO_IMAGE_ID ];
 	}
 
 	protected function defaults(): array {
 		return [
-			self::CLASSES           => [],
 			self::ATTRS             => [],
+			self::CLASSES           => [],
 			self::CONTAINER_CLASSES => [],
-			self::MEDIA_CLASSES     => [],
 			self::CONTENT_CLASSES   => [],
+			self::DESCRIPTION       => '',
+			self::HERO_IMAGE_ID     => 0,
+			self::MEDIA_CLASSES     => [],
+			self::TITLE             => '',
 		];
 	}
 
@@ -111,7 +114,7 @@ class Subheader_Controller extends Abstract_Controller {
 		}
 
 		return [
-			Image_Controller::IMG_ID       => (int) $this->hero_image_id,
+			Image_Controller::IMG_ID       => $this->hero_image_id,
 			Image_Controller::AUTO_SHIM    => false,
 			Image_Controller::USE_LAZYLOAD => true,
 			Image_Controller::CLASSES      => [ 'c-image--overlay', 'c-image--object-fit' ],
