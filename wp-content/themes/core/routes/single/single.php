@@ -15,14 +15,16 @@ get_header();
 			<?php
 			get_template_part( 'components/header/subheader/subheader', 'single', $c->get_subheader_args() ); ?>
 
-			<div class="item-single__content s-sink t-sink l-sink l-sink--double<?php echo has_post_thumbnail() ? ' item-single__content--has-image' : ''; ?>">
+			<?php if ( has_post_thumbnail() ) : ?>
+				<div class="item-single__featured-image">
+					<?php get_template_part( 'components/image/image', null, $c->get_featured_image_args() ); ?>
+				</div>
+			<?php endif; ?>
+
+			<div class="item-single__content s-sink t-sink l-sink l-sink--double">
 				<?php
 				if ( have_posts() ) {
 					the_post();
-
-					if ( has_post_thumbnail() ) {
-						get_template_part( 'components/image/image', null, $c->get_featured_image_args() );
-					}
 
 					the_content(); // Block Content Only
 				}
