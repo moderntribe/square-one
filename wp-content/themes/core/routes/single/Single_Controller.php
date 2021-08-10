@@ -6,9 +6,11 @@ use Tribe\Project\Taxonomies\Category\Category;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\footer\single_footer\Single_Footer_Controller;
 use Tribe\Project\Templates\Components\header\subheader\Subheader_Single_Controller;
+use Tribe\Project\Templates\Components\image\Image_Controller;
 use Tribe\Project\Templates\Components\tags_list\Tags_List_Controller;
 use Tribe\Project\Templates\Components\Traits\Page_Title;
 use Tribe\Project\Templates\Components\Traits\Primary_Term;
+use Tribe\Project\Theme\Config\Image_Sizes;
 
 class Single_Controller extends Abstract_Controller {
 
@@ -69,6 +71,21 @@ class Single_Controller extends Abstract_Controller {
 		return [
 			Tags_List_Controller::TAGS => $tags_list,
 		];
+	}
+
+	public function get_featured_image_args(): array {
+		global $post;
+
+		return [
+				Image_Controller::IMG_ID       => get_post_thumbnail_id( $post->ID ),
+				Image_Controller::AS_BG        => false,
+				Image_Controller::CLASSES      => [ 'c-single-featured-image' ],
+				Image_Controller::SRC_SIZE     => Image_Sizes::CORE_FULL,
+				Image_Controller::SRCSET_SIZES => [
+					Image_Sizes::CORE_MOBILE,
+					Image_Sizes::CORE_FULL,
+				],
+			];
 	}
 
 }
