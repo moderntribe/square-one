@@ -17,7 +17,7 @@ class Pagination_Util {
 	/**
 	 * Returns an array of pagination number links.
 	 *
-	 * @param int  $links_offset    - the max # of links to show on either side of the current page. False for all pages.
+	 * @param int  $links_offset    - the max # of links to show on either side of the current page. 0 for all pages.
 	 * @param bool $show_next_prev  - show links for next/prev page.
 	 * @param bool $show_first_last - show links for first/last page.
 	 * @param bool $show_ellipses   - show ellipses when pages exist beyond offset on either side of current page.
