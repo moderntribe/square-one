@@ -25,7 +25,9 @@ class Loop_Pagination_Controller extends Abstract_Controller {
 	private array $item_attrs;
 	private array $links;
 
-	public function __construct( array $args = [] ) {
+	private Pagination_Util $pagination;
+
+	public function __construct( Pagination_Util $pagination, array $args = [] ) {
 		$args = $this->parse_args( $args );
 
 		$this->classes      = (array) $args[ self::CLASSES ];
@@ -34,6 +36,7 @@ class Loop_Pagination_Controller extends Abstract_Controller {
 		$this->list_attrs   = (array) $args[ self::LIST_ATTRS ];
 		$this->item_classes = (array) $args[ self::ITEM_CLASSES ];
 		$this->item_attrs   = (array) $args[ self::ITEM_ATTRS ];
+		$this->pagination   = $pagination;
 	}
 
 	protected function defaults(): array {
@@ -88,9 +91,8 @@ class Loop_Pagination_Controller extends Abstract_Controller {
 		return $this->links;
 	}
 
-	private function build_links(): array {
-		$pagination = new Pagination_Util();
-		$numbers    = $pagination->numbers( 2, true, false, false );
+	protected function build_links(): array {
+		$numbers = $this->pagination->numbers( 2, true, false, false );
 
 		if ( empty( $numbers ) ) {
 			return [];
