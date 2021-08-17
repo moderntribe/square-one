@@ -457,7 +457,7 @@ class Image_Controller extends Abstract_Controller {
 	}
 
 	public function get_html(): string {
-		if ( $this->html ) {
+		if ( empty( $this->html ) ) {
 			return '';
 		}
 
