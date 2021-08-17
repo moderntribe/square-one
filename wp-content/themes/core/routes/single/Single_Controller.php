@@ -86,6 +86,8 @@ class Single_Controller extends Abstract_Controller {
 					Image_Sizes::CORE_FULL,
 				],
 				Image_Controller::IMG_ALT_TEXT => get_post_meta( get_post_thumbnail_id( $post->ID ), '_wp_attachment_image_alt', true ),
+				Image_Controller::HTML         => '<figcaption>Some random HTML</figcaption>',
+				// Add caption to IMage Component? <figure-caption>
 			];
 	}
 

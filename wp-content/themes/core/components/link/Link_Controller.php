@@ -14,6 +14,8 @@ class Link_Controller extends Abstract_Controller {
 	public const ARIA_LABEL     = 'aria_label';
 	public const CLASSES        = 'classes';
 	public const ATTRS          = 'attrs';
+	public const ICON_CLASSES   = 'icon_classes';
+	public const IS_ICON_BEFORE = 'is_icon_before';
 	public const CONTENT        = 'content';
 	public const HEADER         = 'header';
 	public const DESCRIPTION    = 'description';
@@ -28,6 +30,8 @@ class Link_Controller extends Abstract_Controller {
 	private string $aria_label;
 	private array $classes;
 	private array $attrs;
+	private array $icon_classes;
+	private bool $is_icon_before;
 	private string $link_header;
 	private string $description;
 
@@ -40,6 +44,8 @@ class Link_Controller extends Abstract_Controller {
 		$this->aria_label     = (string) $args[ self::ARIA_LABEL ];
 		$this->classes        = (array) $args[ self::CLASSES ];
 		$this->attrs          = (array) $args[ self::ATTRS ];
+		$this->icon_classes   = (array) $args[ self::ICON_CLASSES ];
+		$this->is_icon_before = (bool) $args[ self::IS_ICON_BEFORE ];
 		$this->content        = (string) $args[ self::CONTENT ];
 		$this->link_header    = (string) $args[ self::HEADER ];
 		$this->description    = (string) $args[ self::DESCRIPTION ];
@@ -52,6 +58,8 @@ class Link_Controller extends Abstract_Controller {
 			self::ADD_ARIA_LABEL => false,
 			self::ARIA_LABEL     => '',
 			self::CLASSES        => [],
+			self::ICON_CLASSES   => [],
+			self::IS_ICON_BEFORE => true,
 			self::ATTRS          => [],
 			self::CONTENT        => '',
 			self::HEADER         => '',
@@ -65,6 +73,10 @@ class Link_Controller extends Abstract_Controller {
 
 	public function get_classes(): string {
 		return Markup_Utils::class_attribute( $this->classes );
+	}
+
+	public function get_icon_classes(): string {
+		return Markup_Utils::class_attribute( $this->icon_classes );
 	}
 
 	public function get_attrs(): string {
@@ -119,6 +131,14 @@ class Link_Controller extends Abstract_Controller {
 
 	private function new_window_text(): string {
 		return sprintf( '<span class="u-visually-hidden">%s</span>', __( 'Opens new window', 'tribe' ) );
+	}
+
+	public function is_icon_before(): bool {
+		return $this->is_icon_before;
+	}
+
+	public function icon_has_classes(): bool {
+		return ! empty( $this->icon_classes );
 	}
 
 }
