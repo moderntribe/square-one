@@ -12,8 +12,7 @@ get_header();
 	<main id="main-content">
 
 		<article class="item-single">
-			<?php
-			get_template_part( 'components/header/subheader/subheader', 'single', $c->get_subheader_args() ); ?>
+			<?php get_template_part( 'components/header/subheader/subheader', 'single', $c->get_subheader_args() ); ?>
 
 			<?php if ( has_post_thumbnail() ) : ?>
 				<div class="item-single__featured-image">
