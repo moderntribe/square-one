@@ -14,17 +14,19 @@ class Comment_Controller extends Abstract_Controller {
 
 	use Comment_Edit_Link;
 
-	public const COMMENT_ID = 'comment_id';
-	public const CLASSES    = 'classes';
 	public const ATTRS      = 'attrs';
+	public const CLASSES    = 'classes';
+	public const COMMENT_ID = 'comment_id';
 	public const DEPTH      = 'depth';
 	public const MAX_DEPTH  = 'max_depth';
+	public const STYLE      = 'style';
 
-	private int $comment_id;
-	private array $classes;
 	private array $attrs;
+	private array $classes;
+	private int $comment_id;
 	private int $depth;
 	private int $max_depth;
+	private string $style;
 
 	/**
 	 * Comment constructor.
@@ -34,11 +36,12 @@ class Comment_Controller extends Abstract_Controller {
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
 
-		$this->comment_id = (int) $args[ self::COMMENT_ID ];
-		$this->classes    = (array) $args[ self::CLASSES ];
 		$this->attrs      = (array) $args[ self::ATTRS ];
+		$this->classes    = (array) $args[ self::CLASSES ];
+		$this->comment_id = (int) $args[ self::COMMENT_ID ];
 		$this->depth      = (int) $args[ self::DEPTH ];
 		$this->max_depth  = (int) $args[ self::MAX_DEPTH ];
+		$this->style      = (string) $args[ self::STYLE ];
 	}
 
 	/**
@@ -46,11 +49,12 @@ class Comment_Controller extends Abstract_Controller {
 	 */
 	protected function defaults(): array {
 		return [
-			self::COMMENT_ID => 0,
-			self::CLASSES    => [],
 			self::ATTRS      => [],
+			self::CLASSES    => [],
+			self::COMMENT_ID => 0,
 			self::DEPTH      => 0,
 			self::MAX_DEPTH  => - 1,
+			self::STYLE      => 'ol',
 		];
 	}
 
@@ -118,6 +122,15 @@ class Comment_Controller extends Abstract_Controller {
 
 	public function get_time( $format = 'c' ): string {
 		return date( $format, get_comment_time( 'U' ) );
+	}
+
+	public function get_starting_markup_element(): string {
+		$element = 'li';
+		if ( 'div' === $this->style ) {
+			$element = 'div';
+		}
+
+		return $element;
 	}
 
 }
