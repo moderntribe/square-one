@@ -9,7 +9,7 @@ use \Tribe\Project\Templates\Components\comments\comment\Comment_Controller;
 $c = Comment_Controller::factory( $args );
 ?>
 
-<<?php echo $c->get_starting_markup_element(); ?> <?php echo $c->get_classes(); ?><?php echo $c->get_attrs(); ?>>
+<<?php echo $c->get_tag(); ?> <?php echo $c->get_classes(); ?><?php echo $c->get_attrs(); ?>>
 
 	<header class="comment__header">
 

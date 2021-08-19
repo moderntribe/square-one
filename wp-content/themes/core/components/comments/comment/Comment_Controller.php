@@ -124,7 +124,7 @@ class Comment_Controller extends Abstract_Controller {
 		return date( $format, get_comment_time( 'U' ) );
 	}
 
-	public function get_starting_markup_element(): string {
+	public function get_tag(): string {
 		$element = 'li';
 		if ( 'div' === $this->style ) {
 			$element = 'div';
