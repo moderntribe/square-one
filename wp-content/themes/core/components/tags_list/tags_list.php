@@ -13,7 +13,7 @@ if ( empty( $c->get_tags() ) ) {
 	return;
 }
 ?>
-<div <?php echo $c->get_classes(); ?> <?php echo $c->get_attributes(); ?>>
+<div class="tags <?php echo $c->get_classes(); ?> <?php echo $c->get_attributes(); ?>>
 	<?php
 	foreach ($c->get_tags() as $tag_name => $tag_link) {
 		get_template_part('components/link/link', null, [

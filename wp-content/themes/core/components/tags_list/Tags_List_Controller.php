@@ -45,7 +45,7 @@ class Tags_List_Controller extends Abstract_Controller {
 	}
 
 	public function get_classes(): string {
-		return Markup_Utils::class_attribute( $this->classes );
+		return Markup_Utils::class_attribute( $this->classes, true );
 	}
 
 	public function get_attributes(): string {
