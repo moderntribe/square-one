@@ -18,15 +18,24 @@
 		justify-content: space-between;
 		gap: var(--grid-gutter);
 	}
+
+	.social-share-networks__item:first-child {
+		margin-left: 0;
+	}
 }
 
 .c-single-footer__author {
 	max-width: var(--grid-8-col);
-	margin: var(--spacer-60) auto 0;
+	margin: var(--spacer-50) auto 0;
+	padding: var(--spacer-50) 0 0 0;
 	font-family: var(--font-family-serif);
 	font-style: italic;
 	border-top: 1px solid var(--color-border);
-	padding: var(--spacer-50) 0 0 0;
+
+	@media (--viewport-medium) {
+		margin: var(--spacer-60) auto 0;
+		padding: var(--spacer-50) 0 0 0;
+	}
 }
 
 .c-single-footer__author-name {
