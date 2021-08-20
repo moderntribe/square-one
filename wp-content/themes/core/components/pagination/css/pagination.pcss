@@ -42,16 +42,18 @@ Pagination Single
 }
 
 .pagination__list {
-	@media (--viewport-medium) {
-		display: flex;
-		flex-flow: row nowrap;
-		justify-content: space-between;
-		gap: var(--grid-gutter);
-	}
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-between;
+	gap: var(--grid-gutter);
 
 	.pagination__item {
-		font-size: var(--font-size-body-small);
+		font-size: 14px;
 		font-weight: bold;
+
+		@media (--viewport-medium) {
+			font-size: var(--font-size-body-small);
+		}
 	}
 
 	.pagination__item-link--next {
