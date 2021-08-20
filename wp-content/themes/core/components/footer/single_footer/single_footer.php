@@ -3,8 +3,9 @@
 /**
  * @var array $args Arguments passed to the template
  */
-// phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
-$c = \Tribe\Project\Templates\Components\footer\single_footer\Single_Footer_Controller::factory( $args );
+use Tribe\Project\Templates\Components\footer\single_footer\Single_Footer_Controller;
+
+$c = Single_Footer_Controller::factory( $args );
 ?>
 <div <?php echo $c->get_classes(); ?> <?php echo $c->get_attributes(); ?> >
 		<div class="c-single-footer__content">
