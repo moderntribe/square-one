@@ -282,7 +282,7 @@ class Tribe_Glomar {
 			return;
 		}
 
-		setcookie( self::COOKIE, '1', time() - YEAR_IN_SECONDS, COOKIEPATH, COOKIE_DOMAIN );
+		setcookie( self::COOKIE, '1', time() - YEAR_IN_SECONDS, COOKIEPATH, (string) COOKIE_DOMAIN );
 	}
 
 	/**
