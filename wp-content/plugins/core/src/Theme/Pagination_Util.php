@@ -2,14 +2,13 @@
 
 namespace Tribe\Project\Theme;
 
+use WP_Query;
+
 class Pagination_Util {
 
-	/**
-	 * @var \WP_Query $query
-	 */
-	protected $query;
+	protected WP_Query $query;
 
-	public function __construct( ?\WP_Query $query = null ) {
+	public function __construct( ?WP_Query $query = null ) {
 		global $wp_query;
 
 		$this->query = $query ?? $wp_query;
@@ -18,14 +17,14 @@ class Pagination_Util {
 	/**
 	 * Returns an array of pagination number links.
 	 *
-	 * @param bool $links_offset    - the max # of links to show on either side of the current page. False for all pages.
+	 * @param int  $links_offset    - the max # of links to show on either side of the current page. 0 for all pages.
 	 * @param bool $show_next_prev  - show links for next/prev page.
 	 * @param bool $show_first_last - show links for first/last page.
 	 * @param bool $show_ellipses   - show ellipses when pages exist beyond offset on either side of current page.
 	 *
 	 * @return array
 	 */
-	public function numbers( $links_offset = false, $show_next_prev = true, $show_first_last = true, $show_ellipses = true ) {
+	public function numbers( int $links_offset = 0, bool $show_next_prev = true, bool $show_first_last = true, bool $show_ellipses = true ): array {
 		$links  = [];
 		$values = [];
 
@@ -36,8 +35,8 @@ class Pagination_Util {
 
 		$paged    = get_query_var( 'paged' ) ? absint( get_query_var( 'paged' ) ) : 1;
 		$max      = (int) $this->query->max_num_pages;
-		$is_first = $paged == 1;
-		$is_last  = $paged == $max;
+		$is_first = $paged === 1;
+		$is_last  = $paged === $max;
 
 		// Only add links on either side of current if we're not loading all the pages at once. Generate links for each applicable number we need to show.
 		if ( $links_offset ) {
@@ -74,7 +73,7 @@ class Pagination_Util {
 		// Sort the $links in case they're out of numeric order, then add any that we've generated so far to the return values.
 		sort( $links );
 		foreach ( $links as $link ) {
-			$active   = $paged == $link;
+			$active   = $paged === $link;
 			$values[] = $this->get_link_array( get_pagenum_link( $link ), (string) $link, [], $active );
 		}
 
@@ -108,7 +107,7 @@ class Pagination_Util {
 	 *
 	 * @return array
 	 */
-	protected function get_link_array( string $url, string $label, array $classes = [], bool $active = false, bool $next = false, bool $prev = false  ) {
+	protected function get_link_array( string $url, string $label, array $classes = [], bool $active = false, bool $next = false, bool $prev = false  ): array {
 		return [
 			'url'     => $url,
 			'label'   => $label,
