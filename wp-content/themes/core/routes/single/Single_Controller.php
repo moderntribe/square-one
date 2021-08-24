@@ -90,7 +90,6 @@ class Single_Controller extends Abstract_Controller {
 				],
 				Image_Controller::IMG_ALT_TEXT => ! empty( $alt_text ) ? $alt_text : '',
 				Image_Controller::HTML         => ! empty( $caption ) ? '<figcaption class="item-single__featured-image-caption">' . wp_get_attachment_caption( $image_id ) . '</figcaption>' : '',
-				// Add caption to IMage Component? <figure-caption>
 			];
 	}
 
