@@ -98,6 +98,7 @@ module.exports = {
 		gulp.src( [
 			`${ pkg.square1.paths.core_theme_js_src }**/*.js`,
 			`${ pkg.square1.paths.core_theme_components }**/*.js`,
+			`${ pkg.square1.paths.core_theme_routes }**/*.js`,
 			`${ pkg.square1.paths.core_theme_integrations }**/*.js`,
 		] )
 			.pipe( webpackStream( merge( webpackThemeDevConfig, watchConfig ), null, function( err, stats ) {
