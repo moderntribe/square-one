@@ -17,13 +17,13 @@ $c = Link_Controller::factory( $args );
 <a <?php echo $c->get_classes(); ?> <?php echo $c->get_attrs(); ?>>
 
 	<?php if ( $c->icon_has_classes() && $c->is_icon_before() ) : ?>
-			<i  <?php echo $c->get_icon_classes(); ?> aria-hidden="true"></i>
+			<span  <?php echo $c->get_icon_classes(); ?> aria-hidden="true"></span>
 	<?php endif; ?>
 
 	<?php echo $c->get_content(); ?>
 
 	<?php if ( $c->icon_has_classes() && ! $c->is_icon_before() ) : ?>
-			<i  <?php echo $c->get_icon_classes(); ?> aria-hidden="true"></i>
+			<span  <?php echo $c->get_icon_classes(); ?> aria-hidden="true"></span>
 	<?php endif; ?>
 </a>
 
