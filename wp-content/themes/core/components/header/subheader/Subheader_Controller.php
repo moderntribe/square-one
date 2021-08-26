@@ -70,7 +70,7 @@ class Subheader_Controller extends Abstract_Controller {
 
 	public function get_classes(): string {
 		if ( ! empty( $this->hero_image_id ) ) {
-			$this->classes[] = 'c-subheader--has-background-color';
+			$this->classes[] = 'c-subheader--has-background';
 		}
 
 		return Markup_Utils::class_attribute( $this->classes );
