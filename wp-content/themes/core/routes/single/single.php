@@ -31,7 +31,18 @@ get_header();
 			</div>
 
 			<div class="l-container">
-				<?php get_template_part( 'components/footer/single_footer/single_footer', null, $c->get_single_footer_args() ); ?>
+				<div class="c-single-footer__content">
+					<?php get_template_part( 'components/tags_list/tags_list', null, $c->get_tags_list_args() ); ?>
+					<?php get_template_part( 'components/share/share' ) ?>
+				</div>
+				<div class="c-single-footer__author">
+					<div class="c-single-footer__author-name">
+						<?php echo esc_html( get_the_author_meta( 'display_name', $post->post_author ) ); ?>
+					</div>
+					<div class="c-single-footer__author-description">
+						<?php echo wp_kses_post( get_the_author_meta( 'description', $post->post_author ) ) ?>
+					</div>
+				</div>
 			</div>
 
 			<?php // comments_template(); ?>

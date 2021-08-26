@@ -4,7 +4,6 @@ namespace Tribe\Project\Templates\Routes\single;
 
 use Tribe\Project\Taxonomies\Category\Category;
 use Tribe\Project\Templates\Components\Abstract_Controller;
-use Tribe\Project\Templates\Components\footer\single_footer\Single_Footer_Controller;
 use Tribe\Project\Templates\Components\header\subheader\Subheader_Single_Controller;
 use Tribe\Project\Templates\Components\image\Image_Controller;
 use Tribe\Project\Templates\Components\tags_list\Tags_List_Controller;
@@ -38,16 +37,6 @@ class Single_Controller extends Abstract_Controller {
 		}
 
 		return $args;
-	}
-
-	public function get_single_footer_args(): array {
-		global $post;
-
-		return [
-			Single_Footer_Controller::TAGS_LIST_COMPONENT => defer_template_part( 'components/tags_list/tags_list', null, $this->get_tags_list_args() ),
-			Single_Footer_Controller::AUTHOR_NAME         => get_the_author_meta( 'display_name', $post->post_author ),
-			Single_Footer_Controller::AUTHOR_DESCRIPTION  => get_the_author_meta( 'description', $post->post_author ),
-		];
 	}
 
 	public function get_taxonomy_terms(): array {
