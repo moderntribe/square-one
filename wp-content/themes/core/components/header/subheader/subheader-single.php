@@ -25,7 +25,7 @@ $c = Subheader_Single_Controller::factory( $args );
 			<?php get_template_part( 'components/text/text', null, $c->get_title_args() ); ?>
 		</div>
 
-		<div class="c-subheader__meta">
+		<div class="c-subheader__meta t-body">
 			<?php if ( $c->should_render_byline() ) : ?>
 				<div>
 					<div class="c-subheader__meta-author">
