@@ -17,10 +17,11 @@ $c = Subheader_Single_Controller::factory( $args );
 		<div <?php echo $c->get_content_classes(); ?>>
 
 			<?php
-			if ( $c->get_tag_name() !== null && $c->get_tag_link() !== null ) {
-				get_template_part( 'components/link/link', 'null', $c->get_tag_args() );
-			}
-			?>
+			if ( $c->get_tag_name() !== null && $c->get_tag_link() !== null ) { ?>
+				<div>
+					<?php get_template_part( 'components/link/link', 'null', $c->get_tag_args() ); ?>
+				</div>
+			<?php } ?>
 
 			<?php get_template_part( 'components/text/text', null, $c->get_title_args() ); ?>
 		</div>
