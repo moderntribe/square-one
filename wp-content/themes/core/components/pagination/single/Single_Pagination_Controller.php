@@ -103,7 +103,7 @@ class Single_Pagination_Controller extends Abstract_Controller {
 		return [
 			Link_Controller::CONTENT      => ( empty( $this->previous_link_label ) ? get_the_title( $previous ) : $this->previous_link_label ),
 			Link_Controller::URL          => get_permalink( $previous ),
-			Link_Controller::CLASSES      => ['pagination__item-link--previous',],
+			Link_Controller::CLASSES      => ['pagination__item-link--previous', 'icon' ],
 			Link_Controller::ATTRS        => [ 'rel' => 'prev' ],
 			Link_Controller::ICON_CLASSES => [ 'icon','icon-arrow-left' ],
 		];

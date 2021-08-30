@@ -24,22 +24,23 @@ $c = Subheader_Single_Controller::factory( $args );
 			<?php } ?>
 
 			<?php get_template_part( 'components/text/text', null, $c->get_title_args() ); ?>
-		</div>
 
-		<div class="c-subheader__meta t-body">
-			<?php if ( $c->should_render_byline() ) : ?>
-				<div>
-					<div class="c-subheader__meta-author">
-						<?php echo esc_html( $c->get_author() ); ?>
+			<div class="c-subheader__meta">
+				<?php if ( $c->should_render_byline() ) : ?>
+					<div>
+						<div class="c-subheader__meta-author">
+							<?php echo esc_html( $c->get_author() ); ?>
+						</div>
+						<div class="c-subheader__meta-date">
+							<time datetime="<?php echo esc_attr( get_the_time( 'c' ) ); ?>">
+								<?php echo esc_html( $c->get_date() ); ?>
+							</time>
+						</div>
 					</div>
-					<div class="c-subheader__meta-date">
-						<time datetime="<?php echo esc_attr( get_the_time( 'c' ) ); ?>">
-							<?php echo esc_html( $c->get_date() ); ?>
-						</time>
-					</div>
-				</div>
-			<?php endif; ?>
-			<?php get_template_part( 'components/share/share' ) ?>
+				<?php endif; ?>
+				<?php get_template_part( 'components/share/share' ) ?>
+			</div>
+
 		</div>
 
 	</div>
