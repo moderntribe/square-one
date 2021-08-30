@@ -36,7 +36,7 @@ class Single_Controller extends Abstract_Controller {
 			$args[ Subheader_Single_Controller::TAG_LINK ] = get_term_link( $term );
 		}
 
-		$args[ Subheader_Single_Controller::CONTENT_CLASSES ] = ['l-sink','l-sink--double'];
+		$args[ Subheader_Single_Controller::CONTENT_CLASSES ] = [ 'l-sink', 'l-sink--double' ];
 
 		return $args;
 	}
