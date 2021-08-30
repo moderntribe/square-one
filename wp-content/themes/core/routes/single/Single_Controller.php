@@ -71,14 +71,14 @@ class Single_Controller extends Abstract_Controller {
 		return [
 				Image_Controller::IMG_ID       => $image_id,
 				Image_Controller::AS_BG        => false,
-				Image_Controller::CLASSES      => [ 'c-single-featured-image' ],
+				Image_Controller::CLASSES      => [ 'c-single-featured-image', 'alignwide' ],
 				Image_Controller::SRC_SIZE     => Image_Sizes::CORE_FULL,
 				Image_Controller::SRCSET_SIZES => [
 					Image_Sizes::CORE_MOBILE,
 					Image_Sizes::CORE_FULL,
 				],
 				Image_Controller::IMG_ALT_TEXT => ! empty( $alt_text ) ? $alt_text : '',
-				Image_Controller::HTML         => ! empty( $caption ) ? '<figcaption class="item-single__featured-image-caption">' . wp_get_attachment_caption( $image_id ) . '</figcaption>' : '',
+				Image_Controller::HTML         => ! empty( $caption ) ? '<figcaption class="item-single__featured-image-caption t-caption">' . wp_get_attachment_caption( $image_id ) . '</figcaption>' : '',
 			];
 	}
 

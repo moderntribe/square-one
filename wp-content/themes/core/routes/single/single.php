@@ -15,7 +15,7 @@ get_header();
 			<?php get_template_part( 'components/header/subheader/subheader', 'single', $c->get_subheader_args() ); ?>
 
 			<?php if ( has_post_thumbnail() ) : ?>
-				<div class="item-single__featured-image">
+				<div class="item-single__featured-image l-sink">
 					<?php get_template_part( 'components/image/image', null, $c->get_featured_image_args() ); ?>
 				</div>
 			<?php endif; ?>
