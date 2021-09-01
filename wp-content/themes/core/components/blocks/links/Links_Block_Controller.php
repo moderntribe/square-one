@@ -244,6 +244,8 @@ class Links_Block_Controller extends Abstract_Controller {
 				Link_Controller::ADD_ARIA_LABEL => $row['g-cta']['add_aria_label'] ?? '',
 				Link_Controller::ARIA_LABEL     => $row['g-cta']['aria_label'] ?? '',
 				Link_Controller::CLASSES        => [ 'b-links__list-link' ],
+				Link_Controller::HEADER         => $row['link_header'] ?? '',
+				Link_Controller::DESCRIPTION    => $row['link_content'] ?? '',
 			];
 		}, $rows );
 	}

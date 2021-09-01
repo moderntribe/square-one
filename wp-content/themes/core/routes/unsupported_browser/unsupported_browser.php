@@ -28,11 +28,23 @@ $c = Unsupported_Browser_Controller::factory();
 
 	<div class="site-header">
 		<div class="l-container">
-			<h1 class="site-brand">
-				<img src="<?php echo $c->get_legacy_image_url( 'logo-header.png' ); ?>"
-					 class="site-logo site-logo--header"
-					 alt="<?php printf( '%s %s', esc_attr( get_bloginfo( 'name' ) ), esc_attr( __( 'logo', 'tribe' ) ) ); ?>" />
-			</h1>
+			<div class="g-row g-row--col-1">
+				<div class="g-col site-header__underline">
+					<h1 class="site-brand">
+						<?php
+						if ( $c->get_logo_url() ) : ?>
+						<img src="<?php echo $c->get_logo_url(); ?>"
+							 class="site-logo site-logo--header"
+							 alt="<?php printf( '%s %s', esc_attr( get_bloginfo( 'name' ) ), esc_attr( __( 'logo', 'tribe' ) ) ); ?>" />
+							<?php
+						else :
+							esc_attr_e( get_bloginfo( 'name' ) );
+						endif;
+						?>
+
+					</h1>
+				</div>
+			</div>
 		</div>
 	</div>
 
@@ -40,7 +52,7 @@ $c = Unsupported_Browser_Controller::factory();
 		<div class="l-container">
 
 			<div class="site-content__content">
-				<h2><?php echo esc_html( sprintf( '%s %s', __( 'Welcome to', 'tribe' ), get_bloginfo( 'name' ) ) ); ?></h2>
+				<h2><?php esc_html_e( 'Folks, time to get a new browser', 'tribe' ); ?></h2>
 				<p><?php echo sprintf( '%s <a href="http://browsehappy.com/" rel="external">%s</a>.', __( 'You are viewing this site in a browser that is no longer supported or secure. For the best possible experience, we recommend that you', 'tribe' ), __( 'update or use a modern browser', 'tribe' ) ); ?></p>
 			</div>
 
@@ -51,10 +63,12 @@ $c = Unsupported_Browser_Controller::factory();
 					   rel="external noopener"
 					   target="_blank">
 						<span class="browser-list__item-image">
-						  <img src="<?php echo $c->get_legacy_image_url( 'chrome.png' ); ?>"
+						  <img src="<?php echo $c->get_legacy_image_url( 'chrome.svg' ); ?>"
 							alt="<?php echo esc_attr( __( 'Chrome browser logo', 'tribe' ) ); ?>" />
+							<br/>
+							<?php echo esc_html( __( 'Chrome', 'tribe' ) ); ?>
 						</span>
-						<?php echo esc_html( __( 'Chrome', 'tribe' ) ); ?>
+
 					</a>
 				</li>
 				<li class="browser-list__item">
@@ -63,10 +77,12 @@ $c = Unsupported_Browser_Controller::factory();
 					   rel="external noopener"
 					   target="_blank">
 							   <span class="browser-list__item-image">
-								   <img src="<?php echo $c->get_legacy_image_url( 'firefox.png' ); ?>"
+								   <img src="<?php echo $c->get_legacy_image_url( 'firefox.svg' ); ?>"
 										alt="<?php echo esc_attr( __( 'Firefox browser logo', 'tribe' ) ); ?>" />
+									<br/>
+									<?php echo esc_html( __( 'Firefox', 'tribe' ) ); ?>
 							   </span>
-						<?php echo esc_html( __( 'Firefox', 'tribe' ) ); ?>
+
 					</a>
 				</li>
 				<li class="browser-list__item">
@@ -75,22 +91,26 @@ $c = Unsupported_Browser_Controller::factory();
 					   rel="external noopener"
 					   target="_blank">
 							   <span class="browser-list__item-image">
-								   <img src="<?php echo $c->get_legacy_image_url( 'safari.png' ); ?>"
+								   <img src="<?php echo $c->get_legacy_image_url( 'safari.svg' ); ?>"
 										alt="<?php echo esc_attr( __( 'Safari browser logo', 'tribe' ) ); ?>" />
-							   </span>
-						<?php echo esc_html( __( 'Safari', 'tribe' ) ); ?>
+									<br/>
+								   <?php echo esc_html( __( 'Safari', 'tribe' ) ); ?>
+								</span>
+
 					</a>
 				</li>
 				<li class="browser-list__item">
-					<a href="http://windows.microsoft.com/internet-explorer/download-ie"
+					<a href="https://www.microsoft.com/en-us/edge"
 					   class="browser-list__item-anchor"
 					   rel="external noopener"
 					   target="_blank">
 							   <span class="browser-list__item-image">
-								   <img src="<?php echo $c->get_legacy_image_url( 'ie.png' ); ?>"
-										alt=""<?php echo esc_attr( __( 'Internet Explorer browser logo', 'tribe' ) ); ?>"/>
+								   <img src="<?php echo $c->get_legacy_image_url( 'edge.svg' ); ?>"
+										alt=""<?php echo esc_attr( __( 'Edge browser logo', 'tribe' ) ); ?>"/>
+									<br/>
+								   <?php echo esc_html( __( 'Edge', 'tribe' ) ); ?>
 							   </span>
-						<?php echo esc_html( __( 'Internet Explorer', 'tribe' ) ); // TODO Move to Edge. No longer supporting IE11.?>
+
 					</a>
 				</li>
 			</ul>
@@ -100,15 +120,18 @@ $c = Unsupported_Browser_Controller::factory();
 
 	<div class="site-footer">
 		<div class="l-container">
-
-			<img src="<?php echo esc_url( $c->get_legacy_image_url( 'logo-footer.png' ) ); ?>"
-				 class="site-logo site-logo--footer"
-				 alt="<?php printf( '%s %s', esc_attr( get_bloginfo( 'name' ) ), esc_attr( __( 'logo', 'tribe' ) ) ); ?>" />
-
-			<p class="site-footer__copy">
-				<?php printf( __( '%s %d All Rights Reserved. %s.', 'tribe' ), '&copy;', date( 'Y' ), esc_attr( get_bloginfo( 'name' ) ) ); ?>
-			</p>
-
+			<div class="g-row g-row--col-1">
+				<div class="site-footer__overline">
+					<p class="site-footer__copy">
+						<?php printf(
+							__( '%s %d All Rights Reserved. %s.', 'tribe' ),
+							'&copy;',
+							date( 'Y' ),
+							esc_attr( get_bloginfo( 'name' ) )
+						); ?>
+					</p>
+				</div>
+			</div>
 		</div>
 	</div>
 

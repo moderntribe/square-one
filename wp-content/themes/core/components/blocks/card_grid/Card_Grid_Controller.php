@@ -17,6 +17,7 @@ use Tribe\Project\Theme\Config\Image_Sizes;
 class Card_Grid_Controller extends Abstract_Controller {
 
 	public const TITLE             = 'title';
+	public const LEADIN            = 'leadin';
 	public const DESCRIPTION       = 'description';
 	public const CTA               = 'cta';
 	public const POSTS             = 'posts';
@@ -29,6 +30,7 @@ class Card_Grid_Controller extends Abstract_Controller {
 
 	private string $layout;
 	private string $title;
+	private string $leadin;
 	private string $description;
 	private array $cta;
 	private array $posts;
@@ -41,6 +43,7 @@ class Card_Grid_Controller extends Abstract_Controller {
 	public function __construct( array $args = [] ) {
 		$args                    = $this->parse_args( $args );
 		$this->title             = (string) $args[ self::TITLE ];
+		$this->leadin            = (string) $args[ self::LEADIN ];
 		$this->description       = (string) $args[ self::DESCRIPTION ];
 		$this->cta               = (array) $args[ self::CTA ];
 		$this->posts             = (array) $args[ self::POSTS ];
@@ -58,6 +61,7 @@ class Card_Grid_Controller extends Abstract_Controller {
 	protected function defaults(): array {
 		return [
 			self::TITLE             => '',
+			self::LEADIN            => '',
 			self::DESCRIPTION       => '',
 			self::POSTS             => [],
 			self::CTA               => [],
@@ -146,6 +150,7 @@ class Card_Grid_Controller extends Abstract_Controller {
 			Content_Block_Controller::TAG     => 'header',
 			Content_Block_Controller::LAYOUT  => $this->layout === Card_Grid::LAYOUT_INLINE ?: Content_Block_Controller::LAYOUT_CENTER,
 			Content_Block_Controller::TITLE   => $this->get_title(),
+			Content_Block_Controller::LEADIN  => $this->get_leadin(),
 			Content_Block_Controller::CONTENT => $this->get_content(),
 			Content_Block_Controller::CTA     => $this->get_cta(),
 			Content_Block_Controller::CLASSES => [
@@ -233,6 +238,20 @@ class Card_Grid_Controller extends Abstract_Controller {
 				'h3',
 			],
 			Text_Controller::CONTENT => $this->title ?? '',
+		] );
+	}
+
+	/**
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
+	 */
+	private function get_leadin(): Deferred_Component {
+		return defer_template_part( 'components/text/text', null, [
+			Text_Controller::TAG     => 'p',
+			Text_Controller::CLASSES => [
+				'c-block__leadin',
+				'b-card-grid__leadin',
+			],
+			Text_Controller::CONTENT => $this->leadin ?? '',
 		] );
 	}
 

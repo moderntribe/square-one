@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2021.08
+* Added: Block Deny List, removing the requirement to list all allowed blocks.
+* Added: Post Single Template and styles.
+* Fixed: Image Component Caption display bug
+* Fixed: Glomar Cookie Constant issue
+* Updated: ACF block field sets for better UX.
+* Added: Routes to the gulp build system
+
+## 2021.07
+* Updated: WordPress 5.8
+* Added: Disabled Block widgets from wp5.8
+* Updated: Allow block filter change for wp45.8
+* Fixed: SQONE-652: webpack config for dynamic imports fixed for dev tasks.
+* Fixed: SQONE-658: Update PostCSS config to remove duplicate selectors.
+
 ## 2021.06
 * Added styles and data handling for the index and archive pages.
 * Updated: Moved Post Archive settings from General Settings to post archive settings

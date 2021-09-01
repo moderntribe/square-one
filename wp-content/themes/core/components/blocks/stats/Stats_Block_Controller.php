@@ -160,6 +160,7 @@ class Stats_Block_Controller extends Abstract_Controller {
 			Text_Controller::CLASSES => [
 				'c-block__leadin',
 				'b-stats__leadin',
+				'tribe-acf-hide-label',
 			],
 			Text_Controller::CONTENT => $this->leadin ?? '',
 		] );

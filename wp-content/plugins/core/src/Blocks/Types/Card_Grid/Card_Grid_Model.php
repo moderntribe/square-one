@@ -17,6 +17,7 @@ class Card_Grid_Model extends Base_Model {
 			Card_Grid_Controller::ATTRS       => $this->get_attrs(),
 			Card_Grid_Controller::CLASSES     => $this->get_classes(),
 			Card_Grid_Controller::TITLE       => $this->get( Card_Grid::TITLE, '' ),
+			Card_Grid_Controller::LEADIN      => $this->get( Card_Grid::LEADIN, '' ),
 			Card_Grid_Controller::DESCRIPTION => $this->get( Card_Grid::DESCRIPTION, '' ),
 			Card_Grid_Controller::CTA         => $this->get_cta_args(),
 			Card_Grid_Controller::POSTS       => $this->get( Card_Grid::POST_LIST, [] ),

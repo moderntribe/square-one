@@ -46,9 +46,30 @@ class Subheader_Controller extends Abstract_Controller {
 		$this->hero_image_id     = (int) $args[ self::HERO_IMAGE_ID ];
 	}
 
+	protected function defaults(): array {
+		return [
+			self::ATTRS             => [],
+			self::CLASSES           => [],
+			self::CONTAINER_CLASSES => [],
+			self::CONTENT_CLASSES   => [],
+			self::DESCRIPTION       => '',
+			self::HERO_IMAGE_ID     => 0,
+			self::MEDIA_CLASSES     => [],
+			self::TITLE             => '',
+		];
+	}
+
+	protected function required(): array {
+		return [
+			self::MEDIA_CLASSES   => [ 'c-subheader__media' ],
+			self::CONTENT_CLASSES => [ 'c-subheader__content' ],
+			self::CLASSES         => [ 'c-subheader'],
+		];
+	}
+
 	public function get_classes(): string {
 		if ( ! empty( $this->hero_image_id ) ) {
-			$this->classes[] = 'c-subheader--has-image';
+			$this->classes[] = 'c-subheader--has-background';
 		}
 
 		return Markup_Utils::class_attribute( $this->classes );
@@ -102,28 +123,6 @@ class Subheader_Controller extends Abstract_Controller {
 				Image_Sizes::SIXTEEN_NINE,
 				Image_Sizes::SIXTEEN_NINE_SMALL,
 			],
-		];
-	}
-
-	protected function defaults(): array {
-		return [
-			self::ATTRS             => [],
-			self::CLASSES           => [],
-			self::CONTAINER_CLASSES => [],
-			self::CONTENT_CLASSES   => [],
-			self::DESCRIPTION       => '',
-			self::HERO_IMAGE_ID     => 0,
-			self::MEDIA_CLASSES     => [],
-			self::TITLE             => '',
-		];
-	}
-
-	protected function required(): array {
-		return [
-			self::CLASSES           => [ 'c-subheader' ],
-			self::CONTAINER_CLASSES => [ 'l-container' ],
-			self::CONTENT_CLASSES   => [ 'c-subheader__content' ],
-			self::MEDIA_CLASSES     => [ 'c-subheader__media' ],
 		];
 	}
 
