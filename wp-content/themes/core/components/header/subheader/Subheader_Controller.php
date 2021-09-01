@@ -49,7 +49,7 @@ class Subheader_Controller extends Abstract_Controller {
 	protected function defaults(): array {
 		return [
 			self::ATTRS             => [],
-			self::CLASSES           => [],
+			self::CLASSES           => [ 'c-subheader--has-background' ],
 			self::CONTAINER_CLASSES => [],
 			self::CONTENT_CLASSES   => [],
 			self::DESCRIPTION       => '',
@@ -64,7 +64,7 @@ class Subheader_Controller extends Abstract_Controller {
 			self::CONTAINER_CLASSES => [ 'l-container' ],
 			self::MEDIA_CLASSES     => [ 'c-subheader__media' ],
 			self::CONTENT_CLASSES   => [ 'c-subheader__content' ],
-			self::CLASSES           => [ 'c-subheader', 'c-subheader--has-background'],
+			self::CLASSES           => [ 'c-subheader'],
 		];
 	}
 
