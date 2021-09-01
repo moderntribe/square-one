@@ -41,6 +41,7 @@ class Subheader_Single_Controller extends Subheader_Controller {
 	protected function defaults(): array {
 		$defaults = parent::defaults();
 
+		$defaults[ self::CLASSES ]              = [];
 		$defaults[ self::TAG_NAME ]             = null;
 		$defaults[ self::TAG_LINK ]             = null;
 		$defaults[ self::DATE ]                 = '';
