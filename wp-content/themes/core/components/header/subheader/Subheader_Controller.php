@@ -64,13 +64,13 @@ class Subheader_Controller extends Abstract_Controller {
 			self::CONTAINER_CLASSES => [ 'l-container' ],
 			self::MEDIA_CLASSES     => [ 'c-subheader__media' ],
 			self::CONTENT_CLASSES   => [ 'c-subheader__content' ],
-			self::CLASSES           => [ 'c-subheader'],
+			self::CLASSES           => [ 'c-subheader', 'c-subheader--has-background'],
 		];
 	}
 
 	public function get_classes(): string {
 		if ( ! empty( $this->hero_image_id ) ) {
-			$this->classes[] = 'c-subheader--has-background';
+			$this->classes[] = 'c-subheader--has-image';
 		}
 
 		return Markup_Utils::class_attribute( $this->classes );
