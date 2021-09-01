@@ -1,8 +1,14 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
-## 2021.07
-* Added Block Deny List, removing the requirement to list all allowed blocks.
+
+## 2021.08
+* Added: Block Deny List, removing the requirement to list all allowed blocks.
+* Added: Post Single Template and styles.
+* Fixed: Image Component Caption display bug
+* Fixed: Glomar Cookie Constant issue
+* Updated: ACF block field sets for better UX.
+* Added: Routes to the gulp build system
 
 ## 2021.07
 * Updated: WordPress 5.8
