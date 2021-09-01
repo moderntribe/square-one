@@ -101,11 +101,10 @@ class Single_Pagination_Controller extends Abstract_Controller {
 		}
 
 		return [
-			Link_Controller::CONTENT      => ( empty( $this->previous_link_label ) ? get_the_title( $previous ) : $this->previous_link_label ),
-			Link_Controller::URL          => get_permalink( $previous ),
-			Link_Controller::CLASSES      => [ 'pagination__item-link--previous' ],
-			Link_Controller::ATTRS        => [ 'rel' => 'prev' ],
-			Link_Controller::ICON_CLASSES => [ 'icon','icon-arrow-left' ],
+			Link_Controller::CONTENT => ( empty( $this->previous_link_label ) ? get_the_title( $previous ) : $this->previous_link_label ),
+			Link_Controller::URL     => get_permalink( $previous ),
+			Link_Controller::CLASSES => [ 'pagination__item-link--previous' ],
+			Link_Controller::ATTRS   => [ 'rel' => 'prev' ],
 		];
 	}
 
@@ -120,12 +119,10 @@ class Single_Pagination_Controller extends Abstract_Controller {
 		}
 
 		return [
-			Link_Controller::CONTENT        => ( empty( $this->next_link_label ) ? get_the_title( $next ) : $this->next_link_label ),
-			Link_Controller::URL            => get_permalink( $next ),
-			Link_Controller::CLASSES        => ['pagination__item-link--next'],
-			Link_Controller::ATTRS          => [ 'rel' => 'next' ],
-			Link_Controller::ICON_CLASSES   => ['icon','icon-arrow-right'],
-			Link_Controller::IS_ICON_BEFORE => false,
+			Link_Controller::CONTENT => ( empty( $this->next_link_label ) ? get_the_title( $next ) : $this->next_link_label ),
+			Link_Controller::URL     => get_permalink( $next ),
+			Link_Controller::CLASSES => ['pagination__item-link--next'],
+			Link_Controller::ATTRS   => [ 'rel' => 'next' ],
 		];
 	}
 

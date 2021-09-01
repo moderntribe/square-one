@@ -57,15 +57,32 @@ Pagination Single
 	}
 
 	.pagination__item-link--next {
-		font-family: var(--font-family-sans-serif);
 
 		&:after {
-			padding-left: 10px;
-			margin-top: 5px;
+			@mixin icon;
+
+			content: var(--icon-arrow-right);
+			transform: rotateZ(0deg);
+			transition: 0.1s var(--ease-in-quad);
+
+			&:hover {
+				text-decoration: none;
+			}
 		}
 	}
 
 	.pagination__item-link--previous {
 
+		&:before {
+			@mixin icon;
+
+			content: var(--icon-arrow-left);
+			transform: rotateZ(0deg);
+			transition: 0.1s var(--ease-in-quad);
+
+			&:hover {
+				text-decoration: none;
+			}
+		}
 	}
 }
