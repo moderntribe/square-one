@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-use \Tribe\Project\Templates\Components\footer\site_footer\Site_Footer_Controller;
+use \Tribe\Project\Templates\Components\site_footer\Site_Footer_Controller;
 
 $c = Site_Footer_Controller::factory();
 ?>

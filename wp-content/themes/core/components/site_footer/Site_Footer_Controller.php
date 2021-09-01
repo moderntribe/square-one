@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tribe\Project\Templates\Components\footer\site_footer;
+namespace Tribe\Project\Templates\Components\site_footer;
 
 use Tribe\Project\Nav_Menus\Nav_Menus_Definer;
 use Tribe\Project\Templates\Components\Abstract_Controller;
