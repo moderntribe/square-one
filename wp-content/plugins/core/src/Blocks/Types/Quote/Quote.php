@@ -51,14 +51,9 @@ class Quote extends Block_Config {
 							'tribe'
 						),
 						self::GROUP_CITE => [
-							self::CITE_NAME => esc_html__( 'John Doe', 'tribe' ),
-						],
-						self::GROUP_CITE => [
+							self::CITE_NAME  => esc_html__( 'John Doe', 'tribe' ),
 							self::CITE_TITLE => esc_html__( 'Chief Executive', 'tribe' ),
-						],
-						self::GROUP_CITE => [
-							//Images are output as IDs so it's sort of hard to get an image value for preview
-							self::IMAGE => 0,
+							self::IMAGE      => 0,
 						],
 					],
 				],

@@ -1,5 +1,6 @@
 <?php declare(strict_types=1);
 
+use Tribe\Project\Templates\Components\pagination\single\Single_Pagination_Controller;
 use Tribe\Project\Templates\Components\sidebar\Sidebar_Controller;
 use Tribe\Project\Templates\Routes\single\Single_Controller;
 
@@ -10,38 +11,56 @@ get_header();
 
 	<main id="main-content">
 
-		<?php get_template_part( 'components/header/subheader/subheader', null, $c->get_subheader_args() ); ?>
-
 		<article class="item-single">
+			<?php get_template_part( 'components/header/subheader/subheader', 'single', $c->get_subheader_args() ); ?>
+
+			<?php if ( has_post_thumbnail() ) : ?>
+				<div class="item-single__featured-image l-sink">
+					<?php get_template_part( 'components/image/image', null, $c->get_featured_image_args() ); ?>
+				</div>
+			<?php endif; ?>
 
 			<div class="item-single__content s-sink t-sink l-sink l-sink--double">
-				<?php the_content(); ?>
+				<?php
+				if ( have_posts() ) {
+					the_post();
+
+					the_content(); // Block Content Only
+				}
+				?>
 			</div>
 
-			<footer class="item-single__footer l-container">
+			<div class="l-sink l-sink--double">
+				<div class="r-single-footer__content">
+					<div class="r-single-term-list">
+						<?php
+						foreach ( $c->get_taxonomy_terms() as $term ) {
+							get_template_part( 'components/link/link', null, $c->get_term_link_args( $term ) );
+						}?>
+					</div>
 
-				<ul class="item-single__meta">
+					<?php get_template_part( 'components/share/share' ); ?>
+				</div>
+				<div class="r-single-footer__author">
+					<div class="r-single-footer__author-name">
+						<?php echo esc_html( get_the_author_meta( 'display_name', $post->post_author ) ); ?>
+					</div>
+					<div class="r-single-footer__author-description">
+						<?php echo wp_kses_post( get_the_author_meta( 'description', $post->post_author ) ) ?>
+					</div>
+				</div>
+			</div>
 
-					<li class="item-single__meta-date">
-						<time datetime="<?php echo esc_attr( get_the_time( 'c' ) ); ?>">
-							<?php the_date(); ?>
-						</time>
-					</li>
-
-					<li class="item-single__meta-author">
-						<?php _e( 'by', 'tribe' ); ?>
-						<?php the_author_link(); ?>
-					</li>
-
-				</ul>
-
-				<?php get_template_part( 'components/share/share' ) ?>
-
-			</footer>
-
-			<?php comments_template(); ?>
+			<?php // comments_template(); ?>
 
 		</article>
+
+		<div class="l-sink l-sink--double">
+			<?php get_template_part( 'components/pagination/single/single', null, [
+					Single_Pagination_Controller::NEXT_LINK_LABEL     => esc_html__( 'Next article', 'tribe' ),
+					Single_Pagination_Controller::PREVIOUS_LINK_LABEL => esc_html__( 'Previous article', 'tribe' ),
+			]); ?>
+		</div>
 
 	</main>
 

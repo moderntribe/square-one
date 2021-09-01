@@ -67,6 +67,7 @@ class Link_Controller extends Abstract_Controller {
 		return Markup_Utils::class_attribute( $this->classes );
 	}
 
+
 	public function get_attrs(): string {
 		$attrs = $this->attrs;
 
@@ -103,14 +104,14 @@ class Link_Controller extends Abstract_Controller {
 		return $content;
 	}
 
-	public function get_link_header_args() {
+	public function get_link_header_args(): array {
 		return [
 			Text_Controller::CONTENT => $this->link_header,
 			Text_Controller::TAG     => 'h3',
 		];
 	}
 
-	public function get_link_description_args() {
+	public function get_link_description_args(): array {
 		return [
 			Text_Controller::CONTENT => $this->description,
 			Text_Controller::TAG     => 'div',
