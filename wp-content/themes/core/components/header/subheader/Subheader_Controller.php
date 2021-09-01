@@ -49,7 +49,7 @@ class Subheader_Controller extends Abstract_Controller {
 	protected function defaults(): array {
 		return [
 			self::ATTRS             => [],
-			self::CLASSES           => [],
+			self::CLASSES           => [ 'c-subheader--has-background' ],
 			self::CONTAINER_CLASSES => [],
 			self::CONTENT_CLASSES   => [],
 			self::DESCRIPTION       => '',
@@ -61,15 +61,17 @@ class Subheader_Controller extends Abstract_Controller {
 
 	protected function required(): array {
 		return [
-			self::MEDIA_CLASSES   => [ 'c-subheader__media' ],
-			self::CONTENT_CLASSES => [ 'c-subheader__content' ],
-			self::CLASSES         => [ 'c-subheader'],
+			self::CONTAINER_CLASSES => [ 'l-container' ],
+			self::MEDIA_CLASSES     => [ 'c-subheader__media' ],
+			self::CONTENT_CLASSES   => [ 'c-subheader__content' ],
+			self::CLASSES           => [ 'c-subheader'],
 		];
 	}
 
 	public function get_classes(): string {
 		if ( ! empty( $this->hero_image_id ) ) {
-			$this->classes[] = 'c-subheader--has-background';
+			$this->classes[] = 'c-subheader--has-image';
+			$this->classes[] = 't-theme--light';
 		}
 
 		return Markup_Utils::class_attribute( $this->classes );

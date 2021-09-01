@@ -5,6 +5,8 @@
  * ----------------------------------------------------------------------------- */
 
 .c-subheader {
+	position: relative;
+	display: flex;
 	align-items: center;
 	margin-bottom: var(--spacer-80);
 
@@ -22,14 +24,9 @@
 	}
 }
 
-/* CASE: Page with featured image or a background color */
+/* CASE: Page with no featured image and has a background color */
 .c-subheader--has-background {
 	background: var(--color-grey-light);
-	color: var(--color-white);
-
-	@media (--viewport-medium) {
-		align-items: flex-end;
-	}
 }
 
 /* -----------------------------------------------------------------------------
