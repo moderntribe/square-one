@@ -12,8 +12,7 @@ Item Single
 }
 
 .item-single__featured-image {
-	max-width: var(--grid-10-col);
-	margin: 0 auto;
+
 }
 
 .item-single__featured-image-caption {
@@ -29,7 +28,6 @@ Single Footer
 }
 
 .c-single-footer__content {
-	max-width: var(--grid-8-col);
 	margin: var(--spacer-60) auto;
 
 	@media (--viewport-medium) {
@@ -44,15 +42,16 @@ Single Footer
 }
 
 .c-single-footer__author {
-	max-width: var(--grid-8-col);
-	margin: var(--spacer-50) auto 0;
+	margin-top: var(--spacer-50);
+	margin-bottom: 0;
 	padding-top: var(--spacer-50);
 	font-family: var(--font-family-serif);
 	font-style: italic;
 	border-top: 1px solid var(--color-border);
 
 	@media (--viewport-medium) {
-		margin: var(--spacer-60) auto 0;
+		margin-top: var(--spacer-60);
+		margin-bottom: 0;
 		padding-top: var(--spacer-50);
 	}
 }

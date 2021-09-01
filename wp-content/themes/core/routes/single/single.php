@@ -30,7 +30,7 @@ get_header();
 				?>
 			</div>
 
-			<div class="l-container">
+			<div class="l-sink l-sink--double">
 				<div class="c-single-footer__content">
 					<?php get_template_part( 'components/tags_list/tags_list', null, $c->get_tags_list_args() ); ?>
 					<?php get_template_part( 'components/share/share' ) ?>
@@ -49,7 +49,7 @@ get_header();
 
 		</article>
 
-		<div class="l-container">
+		<div class="l-sink l-sink--double">
 			<?php get_template_part( 'components/pagination/single/single', null, [
 					Single_Pagination_Controller::NEXT_LINK_LABEL     => esc_html__( 'Next article', 'tribe' ),
 					Single_Pagination_Controller::PREVIOUS_LINK_LABEL => esc_html__( 'Previous article', 'tribe' ),
