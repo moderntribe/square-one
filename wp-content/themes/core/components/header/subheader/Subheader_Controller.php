@@ -61,10 +61,9 @@ class Subheader_Controller extends Abstract_Controller {
 
 	protected function required(): array {
 		return [
-			self::CONTAINER_CLASSES => [ 'l-container' ],
-			self::MEDIA_CLASSES     => [ 'c-subheader__media' ],
-			self::CONTENT_CLASSES   => [ 'c-subheader__content' ],
-			self::CLASSES           => [ 'c-subheader'],
+			self::MEDIA_CLASSES   => [ 'c-subheader__media' ],
+			self::CONTENT_CLASSES => [ 'c-subheader__content' ],
+			self::CLASSES         => [ 'c-subheader'],
 		];
 	}
 
