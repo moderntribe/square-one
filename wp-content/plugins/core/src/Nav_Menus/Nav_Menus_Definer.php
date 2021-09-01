@@ -20,7 +20,7 @@ class Nav_Menus_Definer implements Definer_Interface {
 				DI\get( 'menu.footer' ),
 				DI\get( 'menu.legal' ),
 			],
-			'menu.main'     => static function () {
+			'menu.primary'  => static function () {
 				return new Menu_Location( Nav_Menus_Definer::PRIMARY, __( 'Masthead: Main', 'tribe' ) );
 			},
 			'menu.footer'   => static function () {
