@@ -6,7 +6,7 @@ use Tribe\Project\Taxonomies\Category\Category;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\header\subheader\Subheader_Single_Controller;
 use Tribe\Project\Templates\Components\image\Image_Controller;
-use Tribe\Project\Templates\Components\tags_list\Tags_List_Controller;
+use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Templates\Components\Traits\Page_Title;
 use Tribe\Project\Templates\Components\Traits\Primary_Term;
 use Tribe\Project\Theme\Config\Image_Sizes;
@@ -52,15 +52,11 @@ class Single_Controller extends Abstract_Controller {
 		return $terms;
 	}
 
-	public function get_tags_list_args(): array {
-		$tags_list = [];
-		/** @var \WP_Term $term */
-		foreach ( $this->get_taxonomy_terms() as $term ) {
-			$tags_list[ $term->name ] = get_term_link( $term );
-		}
-
-		return [
-			Tags_List_Controller::TAGS => $tags_list,
+	public function get_term_link_args( $term ): array {
+		return  [
+			Link_Controller::CONTENT => $term->name,
+			Link_Controller::URL     => get_term_link( $term ),
+			Link_Controller::CLASSES => ['a-tag-link','a-tag-link--secondary','c-tags-list__list_item'],
 		];
 	}
 

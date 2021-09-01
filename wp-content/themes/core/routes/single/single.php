@@ -31,15 +31,21 @@ get_header();
 			</div>
 
 			<div class="l-sink l-sink--double">
-				<div class="c-single-footer__content">
-					<?php get_template_part( 'components/tags_list/tags_list', null, $c->get_tags_list_args() ); ?>
-					<?php get_template_part( 'components/share/share' ) ?>
+				<div class="r-single-footer__content">
+					<div class="r-single-term-list">
+						<?php
+						foreach ( $c->get_taxonomy_terms() as $term ) {
+							get_template_part( 'components/link/link', null, $c->get_term_link_args( $term ) );
+						}?>
+					</div>
+
+					<?php get_template_part( 'components/share/share' ); ?>
 				</div>
-				<div class="c-single-footer__author">
-					<div class="c-single-footer__author-name">
+				<div class="r-single-footer__author">
+					<div class="r-single-footer__author-name">
 						<?php echo esc_html( get_the_author_meta( 'display_name', $post->post_author ) ); ?>
 					</div>
-					<div class="c-single-footer__author-description">
+					<div class="r-single-footer__author-description">
 						<?php echo wp_kses_post( get_the_author_meta( 'description', $post->post_author ) ) ?>
 					</div>
 				</div>
