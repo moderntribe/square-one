@@ -19,12 +19,12 @@ class Blocks_Subscriber extends Abstract_Subscriber {
 			$this->container->get( Block_Renderer::class )->render_template( ...$args );
 		}, 10, 4 );
 
-		add_filter( 'allowed_block_types_all', function ( $types, \WP_Block_Editor_Context $block_editor_context ) {
-			return apply_filters(
-				'tribe_allowed_blocks',
-				(array) $this->container->get( Allowed_Blocks::class )->register_allowed_blocks_all( $types, $block_editor_context ),
-			);
-		}, 10, 2 );
+		/**
+		 * Adds the deny list to the JS_Config class.
+		 */
+		add_filter( 'tribe/project/blocks/denylist', function ( array $types ): array {
+			return $this->container->get( Block_Deny_List::class )->filter_block_denylist( $types );
+		}, 10, 1 );
 
 		add_action( 'after_setup_theme', function () {
 			$this->container->get( Theme_Support::class )->register_theme_supports();

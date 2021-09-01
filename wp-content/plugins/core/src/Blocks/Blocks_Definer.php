@@ -25,14 +25,14 @@ use Tribe\Project\Blocks\Types\Tabs\Tabs;
 
 class Blocks_Definer implements Definer_Interface {
 
-	public const TYPES          = 'blocks.types';
 	public const CONTROLLER_MAP = 'blocks.controller_map';
-	public const ALLOW_LIST     = 'blocks.allow_list';
+	public const DENY_LIST      = 'blocks.deny_list';
 	public const STYLES         = 'blocks.style_overrides';
+	public const TYPES          = 'blocks.types';
 
 	public function define(): array {
 		return [
-			self::TYPES           => DI\add( [
+			self::TYPES            => DI\add( [
 				DI\get( Accordion::class ),
 				DI\get( Buttons::class ),
 				DI\get( Card_Grid::class ),
@@ -54,67 +54,32 @@ class Blocks_Definer implements Definer_Interface {
 			] ),
 
 			/**
-			 * Array of blocks supported by SquareOne
+			 * Array of blocks blocked by SquareOne. The blocking is handled in
+			 * js.
 			 *
-			 * This is an intentional subset of the complete list of block provided by Core:
-			 * https://wordpress.org/support/article/blocks/
-			 *
-			 * Includes our custom ACF blocks
-			 * TODO: Find a better method for allowing our custom ACF blocks (above) so we don't have to manually define them here.
-			 * TODO: Add a filter for this list
-			 *
-			 * Includes any 3rd-party block supported by this project, such as Gravity Forms.
+			 * @see: https://developer.wordpress.org/block-editor/reference-guides/filters/block-filters/#using-a-deny-list
 			 */
-			self::ALLOW_LIST      => [
-				'acf/accordion',
-				'acf/buttons',
-				'acf/cardgrid',
-				'acf/contentcolumns',
-				'acf/contentloop',
-				'acf/gallerygrid',
-				'acf/galleryslider',
-				'acf/hero',
-				'acf/icongrid',
-				'acf/interstitial',
-				'acf/leadform',
-				'acf/links',
-				'acf/logos',
-				'acf/mediatext',
-				'acf/quote',
-				'acf/spacer',
-				'acf/stats',
-				'acf/tabs',
-				'core-embed/facebook',
-				'core-embed/flickr',
-				'core-embed/instagram',
-				'core-embed/soundcloud',
-				'core-embed/tumblr',
-				'core-embed/twitter',
-				'core-embed/vimeo',
-				'core-embed/wordpress-tv',
-				'core-embed/wordpress',
-				'core-embed/youtube',
-				'core/audio',
-				//'core/query', // WP 5.8
-				//'core/buttons',
-				'core/block',
-				'core/code',
-				'core/embed',
-				'core/file',
-				'core/freeform',
+			self::DENY_LIST        => [
+				'core/archives',
+				'core/button',
+				'core/buttons',
+				'core/calendar',
+				'core/categories',
+				'core/columns',
+				'core/cover',
 				'core/gallery',
-				'core/heading',
 				'core/html',
-				'core/image',
-				'core/list',
-				'core/paragraph',
-				'core/preformatted',
-				'core/quote',
-				'core/separator',
-				'core/shortcode',
-				'core/table',
-				'core/video',
-				'gravityforms/form',
+				'core/latest-comments',
+				'core/latest-posts',
+				'core/media-text',
+				'core/more',
+				'core/nextpage',
+				'core/rss',
+				'core/search',
+				'core/social-links',
+				'core/spacer',
+				'core/tag-cloud',
+				'core/verse',
 			],
 
 			/**
@@ -124,7 +89,7 @@ class Blocks_Definer implements Definer_Interface {
 			 *
 			 * TODO: Create a proper thumbnail of the style for the block editor: http://p.tri.be/dmsAwK
 			 */
-			self::STYLES          => DI\add( [
+			self::STYLES           => DI\add( [
 				DI\factory( static function () {
 					return new Block_Style_Override( [ 'core/paragraph' ], [
 						[
@@ -147,7 +112,7 @@ class Blocks_Definer implements Definer_Interface {
 				} ),
 			] ),
 
-			Allowed_Blocks::class => DI\create()->constructor( DI\get( self::ALLOW_LIST ) ),
+			Block_Deny_List::class => DI\create()->constructor( DI\get( self::DENY_LIST ) ),
 		];
 	}
 

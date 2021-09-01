@@ -1,6 +1,8 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## 2021.07
+* Added Block Deny List, removing the requirement to list all allowed blocks.
 
 ## 2021.07
 * Updated: WordPress 5.8
