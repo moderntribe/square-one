@@ -122,12 +122,4 @@ class Link_Controller extends Abstract_Controller {
 		return sprintf( '<span class="u-visually-hidden">%s</span>', __( 'Opens new window', 'tribe' ) );
 	}
 
-	public function is_icon_before(): bool {
-		return $this->is_icon_before;
-	}
-
-	public function icon_has_classes(): bool {
-		return ! empty( $this->icon_classes );
-	}
-
 }
