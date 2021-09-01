@@ -1,4 +1,4 @@
-<?php declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\navigation;
 
@@ -78,4 +78,5 @@ class Navigation_Controller extends Abstract_Controller {
 
 		return Menu::menu( $this->nav_menu_args );
 	}
+
 }
