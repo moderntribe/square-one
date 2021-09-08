@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2021.09
+* Fixed: Reusable & Group block width repair.
+
 ## 2021.08
 * Added: Block Deny List, removing the requirement to list all allowed blocks.
 * Added: Post Single Template and styles.
