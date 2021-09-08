@@ -23,10 +23,29 @@ class Navigation_Controller extends Abstract_Controller {
 		'fallback_cb' => false,
 	];
 
+	/**
+	 * @var string
+	 */
 	private string $location;
+
+	/**
+	 * @var string[]
+	 */
 	private array $classes;
+
+	/**
+	 * @var array
+	 */
 	private array $attrs;
+
+	/**
+	 * @var string[]
+	 */
 	private array $nav_list_classes;
+
+	/**
+	 * @var array
+	 */
 	private array $nav_menu_args;
 
 	public function __construct( array $args = [] ) {
@@ -37,22 +56,6 @@ class Navigation_Controller extends Abstract_Controller {
 		$this->attrs            = (array) $args[ self::ATTRS ];
 		$this->nav_list_classes = (array) $args[ self::NAV_LIST_CLASSES ];
 		$this->nav_menu_args    = $this->parse_menu_args( $args[ self::NAV_MENU_ARGS ] );
-	}
-
-	protected function defaults(): array {
-		return [
-			self::LOCATION         => '',
-			self::CLASSES          => [ 'c-nav' ],
-			self::ATTRS            => [],
-			self::NAV_LIST_CLASSES => [ 'c-nav__list' ],
-			self::NAV_MENU_ARGS    => [],
-		];
-	}
-
-	private function parse_menu_args( $menu_args ): array {
-		$menu_args['theme_location'] = $this->location;
-
-		return wp_parse_args( $menu_args, self::DEFAULT_NAV_MENU_ARGS );
 	}
 
 	public function has_menu(): bool {
@@ -77,6 +80,22 @@ class Navigation_Controller extends Abstract_Controller {
 		}
 
 		return Menu::menu( $this->nav_menu_args );
+	}
+
+	protected function defaults(): array {
+		return [
+			self::LOCATION         => '',
+			self::CLASSES          => [ 'c-nav' ],
+			self::ATTRS            => [],
+			self::NAV_LIST_CLASSES => [ 'c-nav__list' ],
+			self::NAV_MENU_ARGS    => [],
+		];
+	}
+
+	private function parse_menu_args( array $menu_args ): array {
+		$menu_args['theme_location'] = $this->location;
+
+		return wp_parse_args( $menu_args, self::DEFAULT_NAV_MENU_ARGS );
 	}
 
 }
