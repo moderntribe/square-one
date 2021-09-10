@@ -43,6 +43,10 @@
       "url": "git@github.com:moderntribe/coding-standards.git"
     },
     {
+      "type": "vcs",
+      "url": "git@github.com:bordoni/phpass.git"
+    },
+    {
       "type": "package",
       "package": {
         "name": "gravityforms/gravityforms",
@@ -123,7 +127,7 @@
     "filp/whoops": "^2.2@dev",
     "larapack/dd": "^1.1",
     "lucatume/function-mocker": "~1.0",
-    "lucatume/wp-browser": "^2.4",
+    "lucatume/wp-browser": "^3.0.9",
     "mockery/mockery": "^1.3",
     "moderntribe/coding-standards": "^1.0",
     "php-http/httplug": "^1.1",

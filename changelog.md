@@ -3,6 +3,8 @@
 All notable changes to this project will be documented in this file.
 
 ## 2021.09
+* Fixed: Replace deleted repo https://github.com/hautelook/phpass with https://github.com/bordoni/phpass
+* Updated: wp-browser to 3.0.9
 * Fixed: Reusable & Group block width repair.
 * Added: Generic navigation menu component.
 
