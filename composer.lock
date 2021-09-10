@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "322aa848879ad3f6cd4e6a2166eb4685",
+    "content-hash": "071654d5f4fdd03511490166c336a0f0",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -66,16 +66,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.193.1",
+            "version": "3.193.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "5294e06519479b9f41d6e18a88d077c4837a58ff"
+                "reference": "d5080f7a1bb63569c19b8de06f787808eca70cc6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/5294e06519479b9f41d6e18a88d077c4837a58ff",
-                "reference": "5294e06519479b9f41d6e18a88d077c4837a58ff",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/d5080f7a1bb63569c19b8de06f787808eca70cc6",
+                "reference": "d5080f7a1bb63569c19b8de06f787808eca70cc6",
                 "shasum": ""
             },
             "require": {
@@ -148,7 +148,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2021-09-09T18:28:04+00:00"
+            "time": "2021-09-10T18:21:27+00:00"
         },
         {
             "name": "clue/stream-filter",
@@ -829,16 +829,16 @@
         },
         {
             "name": "johnpbloch/wordpress-core",
-            "version": "5.8.0",
+            "version": "5.7.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/johnpbloch/wordpress-core.git",
-                "reference": "30d5db01a682521b0a6cc827953f016486504312"
+                "reference": "35bb368e1faa16dc4c0252f8b059f209f33a8d51"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/johnpbloch/wordpress-core/zipball/30d5db01a682521b0a6cc827953f016486504312",
-                "reference": "30d5db01a682521b0a6cc827953f016486504312",
+                "url": "https://api.github.com/repos/johnpbloch/wordpress-core/zipball/35bb368e1faa16dc4c0252f8b059f209f33a8d51",
+                "reference": "35bb368e1faa16dc4c0252f8b059f209f33a8d51",
                 "shasum": ""
             },
             "require": {
@@ -846,7 +846,7 @@
                 "php": ">=5.6.20"
             },
             "provide": {
-                "wordpress/core-implementation": "5.8.0"
+                "wordpress/core-implementation": "5.7.3"
             },
             "type": "wordpress-core",
             "notification-url": "https://packagist.org/downloads/",
@@ -866,7 +866,7 @@
                 "cms",
                 "wordpress"
             ],
-            "time": "2021-07-20T16:52:26+00:00"
+            "time": "2021-09-09T02:45:54+00:00"
         },
         {
             "name": "johnpbloch/wordpress-core-installer",
@@ -991,9 +991,6 @@
                 }
             ],
             "description": "Fork of ACF Image Select Field",
-            "support": {
-                "source": "https://github.com/moderntribe/ACF-Image-Select/tree/1.0.2"
-            },
             "time": "2021-03-24T18:45:19+00:00"
         },
         {
@@ -1304,10 +1301,6 @@
                 }
             ],
             "description": "This is a simple ACF Add-on field allowing the creation of color swatches that behave as radio buttons.",
-            "support": {
-                "source": "https://github.com/nickforddesign/acf-swatch/tree/1.0.7",
-                "issues": "https://github.com/nickforddesign/acf-swatch/issues"
-            },
             "time": "2018-11-29T16:23:16+00:00"
         },
         {
@@ -2500,16 +2493,6 @@
             "keywords": [
                 "wordpress wp bcrypt password"
             ],
-            "funding": [
-                {
-                    "url": "https://github.com/roots",
-                    "type": "github"
-                },
-                {
-                    "url": "https://www.patreon.com/rootsdev",
-                    "type": "patreon"
-                }
-            ],
             "time": "2019-07-15T16:31:23+00:00"
         },
         {
@@ -3229,7 +3212,7 @@
                 "url": "https://downloads.wordpress.org/plugin/disable-emojis.1.7.3.zip"
             },
             "require": {
-                "composer/installers": "~1.0 || ~2.0"
+                "composer/installers": "~1.0"
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/disable-emojis/"
@@ -3265,7 +3248,7 @@
                 "url": "https://downloads.wordpress.org/plugin/limit-login-attempts-reloaded.2.23.1.zip"
             },
             "require": {
-                "composer/installers": "~1.0 || ~2.0"
+                "composer/installers": "~1.0"
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/limit-login-attempts-reloaded/"
@@ -3301,7 +3284,7 @@
                 "url": "https://downloads.wordpress.org/plugin/redirection.5.1.3.zip"
             },
             "require": {
-                "composer/installers": "~1.0 || ~2.0"
+                "composer/installers": "~1.0"
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/redirection/"
@@ -3337,7 +3320,7 @@
                 "url": "https://downloads.wordpress.org/plugin/the-events-calendar.5.9.0.zip"
             },
             "require": {
-                "composer/installers": "~1.0 || ~2.0"
+                "composer/installers": "~1.0"
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/the-events-calendar/"
@@ -3373,7 +3356,7 @@
                 "url": "https://downloads.wordpress.org/plugin/wordpress-seo.17.0.zip"
             },
             "require": {
-                "composer/installers": "~1.0 || ~2.0"
+                "composer/installers": "~1.0"
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/wordpress-seo/"
