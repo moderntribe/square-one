@@ -1035,16 +1035,16 @@
         },
         {
             "name": "moderntribe/tribe-libs",
-            "version": "v3.4.4",
+            "version": "3.4.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moderntribe/tribe-libs.git",
-                "reference": "5ffe0dfa90a083294f84fcaed8b9163bd221733a"
+                "reference": "0bf843d2ca3fdf502855eda08cd1dbf67a7aa11d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/tribe-libs/zipball/5ffe0dfa90a083294f84fcaed8b9163bd221733a",
-                "reference": "5ffe0dfa90a083294f84fcaed8b9163bd221733a",
+                "url": "https://api.github.com/repos/moderntribe/tribe-libs/zipball/0bf843d2ca3fdf502855eda08cd1dbf67a7aa11d",
+                "reference": "0bf843d2ca3fdf502855eda08cd1dbf67a7aa11d",
                 "shasum": ""
             },
             "require": {
@@ -1086,7 +1086,7 @@
                 "automattic/phpcs-neutron-standard": "^1.5",
                 "automattic/vipwpcs": "^2.0.0",
                 "dealerdirect/phpcodesniffer-composer-installer": "0.7.1",
-                "lucatume/wp-browser": "^2.6.10",
+                "lucatume/wp-browser": "^3.0.9",
                 "phpcompatibility/php-compatibility": "*",
                 "phpcompatibility/phpcompatibility-wp": "^2.0",
                 "phpstan/phpstan": "^0.12.25",
@@ -1095,7 +1095,7 @@
                 "squizlabs/php_codesniffer": "^3.4.2",
                 "symplify/monorepo-builder": "^8.2",
                 "szepeviktor/phpstan-wordpress": "^0.6.0",
-                "wp-cli/wp-cli": "^2.4"
+                "wp-cli/wp-cli": "^2.5"
             },
             "type": "library",
             "extra": {
@@ -1142,7 +1142,7 @@
                 "GPL-2.0-only"
             ],
             "description": "A library for use on Modern Tribe service projects.",
-            "time": "2021-07-15T03:27:25+00:00"
+            "time": "2021-09-10T18:10:05+00:00"
         },
         {
             "name": "monolog/monolog",
