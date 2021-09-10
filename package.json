@@ -130,7 +130,7 @@
     "babel-loader": "^8.0.6",
     "babel-plugin-lodash": "^3.3.4",
     "babel-plugin-module-resolver": "^3.2.0",
-    "browser-sync": "^2.26.7",
+    "browser-sync": "^2.27.5",
     "concat": "^1.0.3",
     "core-js": "^3.13.1",
     "cross-env": "^6.0.3",
