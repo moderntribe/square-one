@@ -71,6 +71,7 @@ class Assets_Subscriber extends Abstract_Subscriber {
 		add_action( 'admin_init', function () {
 			$this->container->get( Admin\Scripts::class )->register_scripts();
 			$this->container->get( Admin\Styles::class )->register_styles();
+			$this->container->get( Admin\Styles::class )->remove_editor_style_reset();
 		}, 10, 0 );
 
 
