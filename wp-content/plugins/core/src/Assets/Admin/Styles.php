@@ -54,7 +54,7 @@ class Styles {
 	 * This function may well be able to removed when the block editor is fully iframed
 	 * per the Gutenberg issue discussion linked below.
 	 *
-	 * See https://github.com/WordPress/gutenberg/pull/33522 for context.
+	 * @link https://github.com/WordPress/gutenberg/pull/33522 for context.
 	 *
 	 * @action admin_enqueue_scripts
 	 */
