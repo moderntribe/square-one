@@ -78,7 +78,7 @@ $c = \Tribe\Example\Templates\Components\button\Button_Controller\Button_Control
 </button>
 ```
 
-The first few lines contain some boilerplate that we'll see at the top of very template:
+The first few lines contain some boilerplate that we'll see at the top of every template:
 
 1. The `$args` array will contain arguments that have been passed into the template. Note that phpcs doesn't
    know about it, so include a comment to tell it that we know what we're doing.
