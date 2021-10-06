@@ -100,7 +100,7 @@ has been decoupled from its hooks.
 
 ## Why Class LazyLoading?
 
-Previously we covered the pattern of registering classes within the definter, and registering
+Previously we covered the pattern of registering classes within the definer, and registering
 hooks/actions/filters within the subscriber (vs. registering them, say, in a `hooks()` method
 on the class itself).
 
