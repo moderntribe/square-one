@@ -12,6 +12,10 @@ get_header();
 
 		<?php get_template_part( 'components/header/subheader/subheader', null, $c->get_subheader_args() ); ?>
 
+		<div class="l-container">
+			<?php get_template_part( 'components/section_nav/section_nav', null, [] ); ?>
+		</div>
+
 		<div class="s-sink t-sink l-sink">
 			<?php the_content(); ?>
 		</div>
