@@ -9,12 +9,15 @@ use \Tribe\Project\Templates\Components\section_nav\Section_Nav_Controller;
 $c = Section_Nav_Controller::factory( $args );
 
 ?>
-<nav <?php echo $c->get_classes(); ?> <?php echo $c->get_attrs(); ?>>
+<div <?php echo $c->get_classes(); ?> <?php echo $c->get_attrs(); ?>>
 
 	<?php echo $c->get_mobile_toggle(); ?>
 
 	<div <?php echo $c->get_container_classes(); ?> <?php echo $c->get_container_attrs(); ?>>
-		<ul>
+
+		<?php echo $c->get_nav_menu(); ?>
+
+		<!--<ul>
 
 			<li>
 				<span>Menu Item</span>
@@ -41,8 +44,8 @@ $c = Section_Nav_Controller::factory( $args );
 				</ul>
 			</li>
 
-			<!-- The following should be dynamically created & injected only when necessary. -->
-			<!-- li>
+			The following should be dynamically created & injected only when necessary.
+			<li>
 				<button>Dynamic More Toggle</button>
 				<div>
 					<ul>
@@ -51,10 +54,10 @@ $c = Section_Nav_Controller::factory( $args );
 						<li>Dynamic Child Menu Item</li>
 					</ul>
 				</div>
-			</li -->
-			<!-- End dynamic -->
+			</li>
+			End dynamic
 
-		</ul>
+		</ul>-->
 	</div>
 
-</nav>
+</div>

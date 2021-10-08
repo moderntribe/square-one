@@ -6,6 +6,7 @@ use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\button\Button_Controller;
 use Tribe\Project\Templates\Components\Deferred_Component;
+use Tribe\Project\Templates\Components\navigation\Navigation_Controller;
 
 class Section_Nav_Controller extends Abstract_Controller {
 
@@ -13,7 +14,7 @@ class Section_Nav_Controller extends Abstract_Controller {
 	public const CLASSES           = 'classes';
 	public const CONTAINER_ATTRS   = 'container_attrs';
 	public const CONTAINER_CLASSES = 'container_classes';
-	public const MENU_ID           = 'menu';
+	public const MENU              = 'menu';
 	public const TOGGLE_LABEL      = 'toggle_label';
 
 	/**
@@ -37,9 +38,9 @@ class Section_Nav_Controller extends Abstract_Controller {
 	private array $container_classes;
 
 	/**
-	 * @var int
+	 * @var int|string|\WP_Term
 	 */
-	private int $menu_id;
+	private $menu;
 
 	/**
 	 * @var string
@@ -66,7 +67,7 @@ class Section_Nav_Controller extends Abstract_Controller {
 		$this->classes           = (array) $args[ self::CLASSES ];
 		$this->container_attrs   = (array) $args[ self::CONTAINER_ATTRS ];
 		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
-		$this->menu_id           = (int) $args[ self::MENU_ID ];
+		$this->menu              = $args[ self::MENU ];
 		$this->toggle_label      = (string) $args[ self::TOGGLE_LABEL ];
 	}
 
@@ -99,13 +100,20 @@ class Section_Nav_Controller extends Abstract_Controller {
 		] );
 	}
 
+	public function get_nav_menu(): Deferred_Component {
+		return defer_template_part( 'components/navigation/navigation', null, [
+			Navigation_Controller::MENU          => $this->menu,
+			Navigation_Controller::NAV_MENU_ARGS => [ 'depth' => 2 ],
+		] );
+	}
+
 	protected function defaults(): array {
 		return [
 			self::ATTRS             => [],
 			self::CLASSES           => [],
 			self::CONTAINER_ATTRS   => [],
 			self::CONTAINER_CLASSES => [],
-			self::MENU_ID           => 0,
+			self::MENU              => 51, // TODO: Reset this to `0` when done with dev.
 			self::TOGGLE_LABEL      => esc_html__( 'In this section', 'tribe' ),
 		];
 	}
