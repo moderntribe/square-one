@@ -18,4 +18,3 @@ if ( ! $c->has_menu() ) {
 		<?php echo $c->get_menu(); ?>
 	</ol>
 </nav>
-
