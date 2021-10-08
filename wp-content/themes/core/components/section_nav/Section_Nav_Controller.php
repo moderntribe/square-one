@@ -102,8 +102,10 @@ class Section_Nav_Controller extends Abstract_Controller {
 
 	public function get_nav_menu(): Deferred_Component {
 		return defer_template_part( 'components/navigation/navigation', null, [
-			Navigation_Controller::MENU          => $this->menu,
-			Navigation_Controller::NAV_MENU_ARGS => [ 'depth' => 2 ],
+			Navigation_Controller::MENU             => $this->menu,
+			Navigation_Controller::MENU_LOCATION    => 'section-nav',
+			Navigation_Controller::NAV_LIST_CLASSES => [ 'c-section-nav__list' ],
+			Navigation_Controller::NAV_MENU_ARGS    => [ 'depth' => 2 ],
 		] );
 	}
 
