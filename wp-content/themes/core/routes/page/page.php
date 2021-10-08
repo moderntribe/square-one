@@ -12,6 +12,7 @@ get_header();
 
 		<?php get_template_part( 'components/header/subheader/subheader', null, $c->get_subheader_args() ); ?>
 
+		<?php // TODO: Remove this after dev. ?>
 		<div class="l-container">
 			<?php get_template_part( 'components/section_nav/section_nav', null, [] ); ?>
 		</div>
