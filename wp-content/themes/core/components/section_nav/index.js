@@ -7,10 +7,16 @@
  *
  * ----------------------------------------------------------------------------- */
 
-import section_nav from './js/section_nav';
+import { getNodes } from 'utils/tools';
 
 const init = () => {
-	section_nav();
+	const sectionNavs = getNodes( 'c-section-nav' );
+
+	if ( sectionNavs.length ) {
+		import( './js/section-nav' /* webpackChunkName:"sectionNav" */ ).then( ( module ) => {
+			module.default( sectionNavs );
+		} );
+	}
 };
 
 export default init;
