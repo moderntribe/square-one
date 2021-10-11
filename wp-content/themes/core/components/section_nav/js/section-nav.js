@@ -19,12 +19,28 @@ const componentState = {
 	isMobile: state.is_mobile,
 };
 
-const openSectionNav = ( toggle, container ) => {
+/**
+ * Open a particular Section Nav menu.
+ *
+ * @param sectionNav
+ */
+const openSectionNav = ( sectionNav ) => {
+	const toggle = sectionNav.querySelector( '[data-js="c-section-nav__container-toggle"]' );
+	const container = sectionNav.querySelector( '[data-js="c-section-nav__container"]' );
+
 	container.style.display = 'block';
 	toggle.setAttribute( 'aria-expanded', 'true' );
 };
 
-const closeSectionNav = ( toggle, container, sectionNav ) => {
+/**
+ * Close a particular Section Nav menu.
+ *
+ * @param sectionNav
+ */
+const closeSectionNav = ( sectionNav ) => {
+	const toggle = sectionNav.querySelector( '[data-js="c-section-nav__container-toggle"]' );
+	const container = sectionNav.querySelector( '[data-js="c-section-nav__container"]' );
+
 	// Bail if already closed.
 	if ( toggle.getAttribute( 'aria-expanded' ) !== 'true' ) {
 		return;
@@ -39,20 +55,32 @@ const closeSectionNav = ( toggle, container, sectionNav ) => {
 	toggle.setAttribute( 'aria-expanded', 'false' );
 };
 
+/**
+ * Toggle all section Nav menus.
+ *
+ * @param closeNavs
+ */
 const toggleAllSectionNavs = ( closeNavs = true ) => {
 	el.sectionNavs.forEach( ( sectionNav ) => {
-		const toggle = sectionNav.querySelector( '[data-js="c-section-nav__container-toggle"]' );
-		const container = sectionNav.querySelector( '[data-js="c-section-nav__container"]' );
-		closeNavs ? closeSectionNav( toggle, container, sectionNav ) : openSectionNav( toggle, container );
+		closeNavs ? closeSectionNav( sectionNav ) : openSectionNav( sectionNav );
 	} );
 };
 
+/**
+ * Handle click events for Section Nav menus on mobile.
+ *
+ * @param e
+ */
 const toggleSectionNav = ( e ) => {
-	const toggle = e.target;
-	const container = document.getElementById( toggle.getAttribute( 'aria-controls' ) );
-	e.target.getAttribute( 'aria-expanded' ) === 'false' ? openSectionNav( toggle, container ) : closeSectionNav( toggle, container );
+	const sectionNav = e.target.closest( '[data-js="c-section-nav"]' );
+	e.target.getAttribute( 'aria-expanded' ) === 'false' ? openSectionNav( sectionNav ) : closeSectionNav( sectionNav );
 };
 
+/**
+ * Handle Escape key events for this module.
+ *
+ * @param e
+ */
 const handleEscKeyUp = ( e ) => {
 	if ( e.key !== 'Escape' || ! componentState.isMobile ) {
 		return;
@@ -61,6 +89,9 @@ const handleEscKeyUp = ( e ) => {
 	toggleAllSectionNavs( true );
 };
 
+/**
+ * Handle resize events for this module.
+ */
 const handleResize = () => {
 	// If viewport state larger than mobile, but component state is mobile, update component state to match and show all section navs.
 	if ( state.v_width >= MOBILE_BREAKPOINT && componentState.isMobile ) {
@@ -75,6 +106,9 @@ const handleResize = () => {
 	}
 };
 
+/**
+ * Build events for this module.
+ */
 const bindEvents = () => {
 	delegate( el.container, '[data-js="c-section-nav__container-toggle"]', 'click', toggleSectionNav );
 
@@ -83,10 +117,8 @@ const bindEvents = () => {
 };
 
 /**
- * @function init
- * @description Kick off this module's functions
+ * Kick off this module's functions
  */
-
 const init = ( sectionNavs ) => {
 	if ( ! sectionNavs.length ) {
 		return;
