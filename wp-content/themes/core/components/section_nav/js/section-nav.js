@@ -16,7 +16,7 @@ const el = {
 };
 
 const componentState = {
-	isMobile: state.is_mobile,
+	isMobile: state.v_width < MOBILE_BREAKPOINT,
 };
 
 /**
@@ -89,6 +89,20 @@ const handleEscKeyUp = ( e ) => {
 	toggleAllSectionNavs( true );
 };
 
+const navFits = sectionNav => sectionNav.offsetWidth >= sectionNav.scrollWidth;
+
+const handleNavFit = ( sectionNav ) => {
+	if ( componentState.isMobile ) {
+		return;
+	}
+
+	if ( navFits( sectionNav ) ) {
+		return;
+	}
+
+
+};
+
 /**
  * Handle resize events for this module.
  */
@@ -104,6 +118,10 @@ const handleResize = () => {
 		toggleAllSectionNavs( true );
 		componentState.isMobile = true;
 	}
+};
+
+const handleInitialState = () => {
+	el.sectionNavs.forEach( sectionNav => handleNavFit( sectionNav ) );
 };
 
 /**
@@ -126,6 +144,7 @@ const init = ( sectionNavs ) => {
 
 	el.sectionNavs = sectionNavs;
 
+	handleInitialState();
 	bindEvents();
 
 	console.info( 'SquareOne Theme: Initialized Section Nav component scripts.' );

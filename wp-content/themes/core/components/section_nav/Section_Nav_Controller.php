@@ -114,7 +114,7 @@ class Section_Nav_Controller extends Abstract_Controller {
 			self::CLASSES           => [],
 			self::CONTAINER_ATTRS   => [],
 			self::CONTAINER_CLASSES => [],
-			self::MENU              => 51, // TODO: Reset this to `0` when done with dev.
+			self::MENU              => 0,
 			self::TOGGLE_LABEL      => esc_html__( 'In this section', 'tribe' ),
 		];
 	}

@@ -1,5 +1,6 @@
 <?php declare(strict_types=1);
 
+use Tribe\Project\Templates\Components\section_nav\Section_Nav_Controller;
 use Tribe\Project\Templates\Components\sidebar\Sidebar_Controller;
 use Tribe\Project\Templates\Routes\page\Page_Controller;
 
@@ -14,7 +15,14 @@ get_header();
 
 		<?php // TODO: Remove this after dev. ?>
 		<div class="l-container">
-			<?php get_template_part( 'components/section_nav/section_nav', null, [] ); ?>
+			<?php get_template_part( 'components/section_nav/section_nav', null, [
+				Section_Nav_Controller::MENU => 51,
+			] ); ?>
+		</div>
+		<div class="l-container">
+			<?php get_template_part( 'components/section_nav/section_nav', null, [
+				Section_Nav_Controller::MENU => 52,
+			] ); ?>
 		</div>
 
 		<div class="s-sink t-sink l-sink">
