@@ -16,6 +16,7 @@ class Section_Nav_Controller extends Abstract_Controller {
 	public const CONTAINER_CLASSES = 'container_classes';
 	public const MENU              = 'menu';
 	public const TOGGLE_LABEL      = 'toggle_label';
+	public const MORE_LABEL        = 'more_label';
 
 	/**
 	 * @var string[]
@@ -50,6 +51,11 @@ class Section_Nav_Controller extends Abstract_Controller {
 	/**
 	 * @var string
 	 */
+	private string $more_label;
+
+	/**
+	 * @var string
+	 */
 	private string $unique_id;
 
 	/**
@@ -57,9 +63,15 @@ class Section_Nav_Controller extends Abstract_Controller {
 	 */
 	private string $container_id;
 
+	/**
+	 * @var string
+	 */
+	private string $more_id;
+
 	public function __construct( array $args = [] ) {
 		$this->unique_id    = uniqid();
-		$this->container_id = sprintf( 'c-section__container--%s', $this->unique_id );
+		$this->container_id = sprintf( 'c-section-nav__container--%s', $this->unique_id );
+		$this->more_id      = sprintf( 'c-section-nav__more--%s', $this->unique_id );
 
 		$args = $this->parse_args( $args );
 
@@ -69,6 +81,7 @@ class Section_Nav_Controller extends Abstract_Controller {
 		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
 		$this->menu              = $args[ self::MENU ];
 		$this->toggle_label      = (string) $args[ self::TOGGLE_LABEL ];
+		$this->more_label        = (string) $args[ self::MORE_LABEL ];
 	}
 
 	public function get_attrs(): string {
@@ -85,6 +98,30 @@ class Section_Nav_Controller extends Abstract_Controller {
 
 	public function get_container_classes(): string {
 		return Markup_Utils::class_attribute( $this->container_classes );
+	}
+
+	public function get_more_attrs(): string {
+		return Markup_Utils::concat_attrs( [
+			'id'      => $this->more_id,
+			'data-js' => 'c-section-nav__more',
+		] );
+	}
+
+	public function get_more_classes(): string {
+		return Markup_Utils::class_attribute( [ 'c-section-nav__more' ] );
+	}
+
+	public function get_more_toggle(): Deferred_Component {
+		return defer_template_part( 'components/button/button', null, [
+			Button_Controller::ATTRS   => [
+				'data-js'       => 'c-section-nav__more-toggle',
+				'aria-controls' => $this->more_id,
+				'aria-expanded' => 'false',
+				'aria-haspopup' => 'true',
+			],
+			Button_Controller::CLASSES => [ 'c-section-nav__more-toggle' ],
+			Button_Controller::CONTENT => esc_html( $this->more_label ),
+		] );
 	}
 
 	public function get_mobile_toggle(): Deferred_Component {
@@ -105,6 +142,7 @@ class Section_Nav_Controller extends Abstract_Controller {
 			Navigation_Controller::MENU             => $this->menu,
 			Navigation_Controller::MENU_LOCATION    => 'section-nav',
 			Navigation_Controller::NAV_LIST_CLASSES => [ 'c-section-nav__list' ],
+			Navigation_Controller::NAV_LIST_ATTRS   => [ 'data-js' => 'c-section-nav__list' ],
 		] );
 	}
 
@@ -116,12 +154,16 @@ class Section_Nav_Controller extends Abstract_Controller {
 			self::CONTAINER_CLASSES => [],
 			self::MENU              => 0,
 			self::TOGGLE_LABEL      => esc_html__( 'In this section', 'tribe' ),
+			self::MORE_LABEL        => esc_html__( 'More', 'tribe' ),
 		];
 	}
 
 	protected function required(): array {
 		return [
-			self::ATTRS             => [ 'data-js' => 'c-section-nav' ],
+			self::ATTRS             => [
+				'id'      => sprintf( 'c-section-nav--%s', $this->unique_id ),
+				'data-js' => 'c-section-nav',
+			],
 			self::CLASSES           => [ 'c-section-nav' ],
 			self::CONTAINER_ATTRS   => [
 				'id'      => $this->container_id,

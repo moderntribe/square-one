@@ -100,7 +100,16 @@ const handleNavFit = ( sectionNav ) => {
 		return;
 	}
 
+	const template = sectionNav.querySelector( '[data-template="more"]' );
+	const sectionNavList = sectionNav.querySelector( '[data-js="c-section-nav__list"]' );
+	const moreMenu = document.importNode( template.content, true );
+	const moreList = moreMenu.querySelector( '[data-js="c-section-nav__list--more"]' );
+	sectionNavList.append( moreMenu );
 
+	do {
+		const lastItem = sectionNavList.querySelector( 'li:nth-last-child(2)' );
+		moreList.append( lastItem );
+	} while ( ! navFits( sectionNav ) );
 };
 
 /**

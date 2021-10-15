@@ -14,50 +14,19 @@ $c = Section_Nav_Controller::factory( $args );
 	<?php echo $c->get_mobile_toggle(); ?>
 
 	<div <?php echo $c->get_container_classes(); ?> <?php echo $c->get_container_attrs(); ?>>
-
 		<?php echo $c->get_nav_menu(); ?>
-
-		<!--<ul>
-
-			<li>
-				<span>Menu Item</span>
-				<ul>
-					<li>Child Menu Item</li>
-					<li>Child Menu Item</li>
-					<li>Child Menu Item</li>
-					<li>Child Menu Item</li>
-					<li>Child Menu Item</li>
-					<li>Child Menu Item</li>
-					<li>Child Menu Item</li>
-				</ul>
-			</li>
-			<li>
-				<span>Menu Item</span>
-				<ul>
-					<li>Child Menu Item</li>
-					<li>Child Menu Item</li>
-					<li>Child Menu Item</li>
-					<li>Child Menu Item</li>
-					<li>Child Menu Item</li>
-					<li>Child Menu Item</li>
-					<li>Child Menu Item</li>
-				</ul>
-			</li>
-
-			The following should be dynamically created & injected only when necessary.
-			<li>
-				<button>Dynamic More Toggle</button>
-				<div>
-					<ul>
-						<li>Dynamic Child Menu Item</li>
-						<li>Dynamic Child Menu Item</li>
-						<li>Dynamic Child Menu Item</li>
-					</ul>
-				</div>
-			</li>
-			End dynamic
-
-		</ul>-->
 	</div>
+
+	<template data-template="more">
+		<li
+			class="section-nav__list-item section-nav__list-item--depth-0 section-nav__list-item--more"
+			data-js="c-section-nav__list-item--more"
+		>
+			<?php echo $c->get_more_toggle(); ?>
+			<div <?php echo $c->get_more_classes(); ?> <?php echo $c->get_more_attrs(); ?>>
+				<ul class="c-section-nav__list--more" data-js="c-section-nav__list--more"></ul>
+			</div>
+		</li>
+	</template>
 
 </div>
