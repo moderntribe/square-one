@@ -12,6 +12,7 @@ class Navigation_Controller extends Abstract_Controller {
 	public const CLASSES          = 'classes';
 	public const MENU             = 'menu';
 	public const MENU_LOCATION    = 'menu_location';
+	public const NAV_LIST_ATTRS   = 'nav_list_attrs';
 	public const NAV_LIST_CLASSES = 'nav_list_classes';
 	public const NAV_MENU_ARGS    = 'nav_menu_args';
 
@@ -49,6 +50,11 @@ class Navigation_Controller extends Abstract_Controller {
 	/**
 	 * @var array
 	 */
+	private array $nav_list_attrs;
+
+	/**
+	 * @var array
+	 */
 	private array $nav_list_classes;
 
 	/**
@@ -63,6 +69,7 @@ class Navigation_Controller extends Abstract_Controller {
 		$this->classes          = (array) $args[ self::CLASSES ];
 		$this->menu             = $args[ self::MENU ];
 		$this->menu_location    = (string) $args[ self::MENU_LOCATION ];
+		$this->nav_list_attrs   = (array) $args[ self::NAV_LIST_ATTRS ];
 		$this->nav_list_classes = (array) $args[ self::NAV_LIST_CLASSES ];
 		$this->nav_menu_args    = $this->parse_menu_args( $args[ self::NAV_MENU_ARGS ] );
 	}
@@ -73,6 +80,10 @@ class Navigation_Controller extends Abstract_Controller {
 
 	public function get_classes(): string {
 		return Markup_Utils::class_attribute( $this->classes );
+	}
+
+	public function get_nav_list_attrs(): string {
+		return Markup_Utils::concat_attrs( $this->nav_list_attrs );
 	}
 
 	public function get_nav_list_classes(): string {
@@ -102,6 +113,7 @@ class Navigation_Controller extends Abstract_Controller {
 			self::CLASSES          => [ 'c-nav' ],
 			self::MENU             => null,
 			self::MENU_LOCATION    => '',
+			self::NAV_LIST_ATTRS   => [],
 			self::NAV_LIST_CLASSES => [ 'c-nav__list' ],
 			self::NAV_MENU_ARGS    => [],
 		];
