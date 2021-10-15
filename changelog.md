@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2021.10
+* Fixed: Misc small repairs to common blocks per QA on other projects.
+
 ## 2021.09
 * Fixed: Style guide typography regression caused by Core's reset.css enqueuing in the block editor with the v5.8.0 release of WordPress.
 * Updated: ci GitHub action to allow manual runs

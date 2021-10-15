@@ -53,12 +53,6 @@
 
 .b-stats__description {
 	margin-top: var(--spacer-10);
-
-	> p {
-		@media (--viewport-full) {
-			@mixin t-body-large;
-		}
-	}
 }
 
 /* -----------------------------------------------------------------------------
@@ -121,6 +115,11 @@
 			border-bottom: 1px solid var(--color-border);
 		}
 
+		/* 2up: Hide border for last element in row */
+		&:nth-child(even) .c-statistic {
+			border-right: 0;
+		}
+
 		/* CASE: All Layouts, Medium Screens, 2up list */
 		@media (--viewport-medium) {
 			/* 2up: Hide last 2 list element dividers */
@@ -134,11 +133,6 @@
 
 			/* 2up: Hide last element border, if not divisible by 2 */
 			&:last-child:not(2n+2) .c-statistic { /* stylelint-disable-line selector-type-no-unknown */
-				border-right: 0;
-			}
-
-			/* 2up: Hide border for last element in row */
-			&:nth-child(even) .c-statistic {
 				border-right: 0;
 			}
 		}
@@ -186,6 +180,17 @@
 						border-right: 0;
 					}
 				}
+			}
+		}
+	}
+
+	/* CASE: Layout Inline, single stat gets no border */
+	&.b-stats--layout-inline {
+
+		.b-stats__list-item {
+
+			&:only-child .c-statistic {
+				border-right: 0;
 			}
 		}
 	}
