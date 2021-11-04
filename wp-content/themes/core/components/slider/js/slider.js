@@ -112,7 +112,7 @@ const focusRow = ( index, rowIndex, jumpTo ) => {
 
 /**
  * @module
- * @description Swiper init.
+ * @description Swiper init. Make sure to keep this idempotent/safe to call multiple times!
  */
 
 const initSliders = () => {
@@ -157,8 +157,8 @@ const previewChangeHandler = ( e ) => {
 };
 
 const test = ( what ) => {
-	console.log('test', what);
-}
+	console.log( 'test', what );
+};
 
 /**
  * @module
@@ -171,9 +171,7 @@ const bindEvents = () => {
 	document.addEventListener( 'modular_content/repeater_row_deactivated', previewChangeHandler );
 	document.addEventListener( 'modular_content/repeater_row_added', previewChangeHandler );
 	if ( window.acf ) {
-		console.log('bound to acf render_block_preview');
-		// window.acf.addAction( 'render_block_preview', previewChangeHandler );
-		window.acf.addAction( 'render_block_preview', test );
+		window.acf.addAction( 'render_block_preview', initSliders );
 	}
 	document.addEventListener( 'modern_tribe/component_dialog_rendered', initSliders );
 };

@@ -7,8 +7,8 @@
 import slider from 'components/slider';
 
 const init = () => {
-  slider();
-  console.info( 'SquareOne Admin: Initialized all components.' );
+	slider();
+	console.info( 'SquareOne Admin: Initialized all components.' );
 };
 
 export default init;
