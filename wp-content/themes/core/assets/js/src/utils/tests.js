@@ -1,5 +1,4 @@
-// @TODO: Allow this to be optional somehow?
-// import { BLOCK_THEME_SERVICE_WORKER } from 'config/wp-settings';
+import { BLOCK_THEME_SERVICE_WORKER } from 'config/wp-settings';
 
 /**
  * @module
@@ -46,8 +45,7 @@ const isElementHidden = ( el ) => {
  */
 
 // @TODO: Make this degrade with optional service worker support.
-// const supportsWorkers = () => ( 'serviceWorker' in navigator && 'indexedDB' in window && ! BLOCK_THEME_SERVICE_WORKER );
-const supportsWorkers = false;
+const supportsWorkers = () => ( 'serviceWorker' in navigator && 'indexedDB' in window && ! BLOCK_THEME_SERVICE_WORKER );
 
 const android = /(android)/i.test( navigator.userAgent );
 const chrome = !! window.chrome;
