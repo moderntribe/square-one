@@ -1,4 +1,5 @@
-import { BLOCK_THEME_SERVICE_WORKER } from 'config/wp-settings';
+// @TODO: Allow this to be optional somehow?
+// import { BLOCK_THEME_SERVICE_WORKER } from 'config/wp-settings';
 
 /**
  * @module
@@ -44,7 +45,9 @@ const isElementHidden = ( el ) => {
  * @description Checks for both service worker support and indexedDb support, plus also checks if we want them loaded with a passed php constant messaged to js through our js config
  */
 
-const supportsWorkers = () => ( 'serviceWorker' in navigator && 'indexedDB' in window && ! BLOCK_THEME_SERVICE_WORKER );
+// @TODO: Make this degrade with optional service worker support.
+// const supportsWorkers = () => ( 'serviceWorker' in navigator && 'indexedDB' in window && ! BLOCK_THEME_SERVICE_WORKER );
+const supportsWorkers = false;
 
 const android = /(android)/i.test( navigator.userAgent );
 const chrome = !! window.chrome;

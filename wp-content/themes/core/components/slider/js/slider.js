@@ -21,6 +21,8 @@ const options = {
 		a11y: {
 			enabled: true,
 		},
+		watchSlidesVisibility: true,
+		watchOverflow: true,
 	} ),
 	swiperThumbs: () => ( {
 		a11y: {
@@ -154,6 +156,10 @@ const previewChangeHandler = ( e ) => {
 	}, 50 );
 };
 
+const test = ( what ) => {
+	console.log('test', what);
+}
+
 /**
  * @module
  * @description Bind Events.
@@ -164,6 +170,11 @@ const bindEvents = () => {
 	document.addEventListener( 'modular_content/repeater_row_activated', previewChangeHandler );
 	document.addEventListener( 'modular_content/repeater_row_deactivated', previewChangeHandler );
 	document.addEventListener( 'modular_content/repeater_row_added', previewChangeHandler );
+	if ( window.acf ) {
+		console.log('bound to acf render_block_preview');
+		// window.acf.addAction( 'render_block_preview', previewChangeHandler );
+		window.acf.addAction( 'render_block_preview', test );
+	}
 	document.addEventListener( 'modern_tribe/component_dialog_rendered', initSliders );
 };
 
