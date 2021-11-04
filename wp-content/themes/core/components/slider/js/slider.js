@@ -156,10 +156,6 @@ const previewChangeHandler = ( e ) => {
 	}, 50 );
 };
 
-const test = ( what ) => {
-	console.log( 'test', what );
-};
-
 /**
  * @module
  * @description Bind Events.
