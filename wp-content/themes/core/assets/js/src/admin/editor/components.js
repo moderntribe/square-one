@@ -11,7 +11,7 @@ const init = () => {
 	// Note that initializing sliders in the block editor is incompatible with
 	// service workers because it requires data that's not available in the
 	// editor.
-	if ( ! tests.supportsWorkers && tools.getNodes( '[data-js="c-slider"]', false, document, true )[ 0 ] ) {
+	if ( ! tests.supportsWorkers() && tools.getNodes( '[data-js="c-slider"]', false, document, true )[ 0 ] ) {
 		import( 'components/slider' /* webpackChunkName:"editor-slider" */ ).then( ( module ) => {
 			module.default();
 		} );
