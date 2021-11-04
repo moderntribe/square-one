@@ -1,5 +1,6 @@
-
-const wp = window.modern_tribe_config;
+// It's possible our context is the block editor in the admin theme, so fall
+// back to that config.
+const wp = window.modern_tribe_config || window.modern_tribe_admin_config || {};
 
 export const IMAGES_URL = wp.images_url;
 export const TEMPLATE_URL = wp.template_url;
