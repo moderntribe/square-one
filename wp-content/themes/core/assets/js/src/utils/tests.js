@@ -43,6 +43,7 @@ const isElementHidden = ( el ) => {
  * @function supportsWorkers
  * @description Checks for both service worker support and indexedDb support, plus also checks if we want them loaded with a passed php constant messaged to js through our js config
  */
+
 const supportsWorkers = () => ( 'serviceWorker' in navigator && 'indexedDB' in window && ! BLOCK_THEME_SERVICE_WORKER );
 
 const android = /(android)/i.test( navigator.userAgent );
