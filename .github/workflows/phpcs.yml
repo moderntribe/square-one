@@ -55,7 +55,8 @@ jobs:
           php-version: ${{ matrix.php-versions }}
           extensions: ${{ env.php_extensions }}
           coverage: none
-          tools: composer:v1
+        env:
+          COMPOSER_TOKEN: ${{ secrets.token }}
 
       - name: Validate composer.json and composer.lock
         if: ${{ steps.filter.outputs.wpcontent == 'true' }}
