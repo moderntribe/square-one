@@ -57,7 +57,7 @@
           "url": "https://composer.utility.mtribe.site/gravityforms/?key={%WP_PLUGIN_GF_KEY}&token={%WP_PLUGIN_GF_TOKEN}&t={%VERSION}"
         },
         "require": {
-          "ffraenz/private-composer-installer": "^3.0"
+          "ffraenz/private-composer-installer": "^5.0"
         }
       }
     },
@@ -72,7 +72,7 @@
           "url": "https://connect.advancedcustomfields.com/index.php?a=download&p=pro&k={%WP_PLUGIN_ACF_KEY}&t={%VERSION}"
         },
         "require": {
-          "ffraenz/private-composer-installer": "^3.0"
+          "ffraenz/private-composer-installer": "^5.0"
         }
       }
     }
@@ -80,15 +80,13 @@
   "require": {
     "php": "^7.4",
     "ext-json": "*",
-    "composer-plugin-api": "^1.1",
     "advanced-custom-fields/advanced-custom-fields-pro": "*",
-    "composer/installers": "1.4.0",
     "gravityforms/gravityforms": "*",
     "guzzlehttp/psr7": "^1.4",
     "humanmade/s3-uploads": "2.2.1",
     "johnbillion/extended-cpts": "^4.0",
     "johnpbloch/wordpress-core": "5.7.3",
-    "johnpbloch/wordpress-core-installer": "1.0.0",
+    "johnpbloch/wordpress-core-installer": "2.0.*",
     "mailgun/mailgun-php": "^2.8",
     "moderntribe/acf-image-select": "dev-master",
     "moderntribe/tribe-acf-post-list-field": "^2.0",
@@ -102,7 +100,7 @@
     "php-http/curl-client": "^1.7",
     "roots/wp-password-bcrypt": "dev-master",
     "sunra/php-simple-html-dom-parser": "1.5.2",
-    "vlucas/phpdotenv": "^3.0",
+    "vlucas/phpdotenv": "^5.3",
     "wpackagist-plugin/configure-smtp": "3.1",
     "wpackagist-plugin/disable-emojis": "1.7.3",
     "wpackagist-plugin/gravity-forms-wcag-20-form-fields": "1.7.2",
