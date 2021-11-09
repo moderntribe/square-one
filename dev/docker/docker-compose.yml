@@ -1,14 +1,11 @@
 version: "3.4"
 
-
 x-networks: &proxynetwork
   networks:
     - proxy
 
-
 x-internaldns: &internaldns
   dns: 172.20.10.250
-
 
 x-nginx: &nginx
   image: nginx:stable-alpine
@@ -22,7 +19,6 @@ x-nginx: &nginx
 x-memcached: &memcached
   image: memcached:alpine
 
-
 x-chrome: &chrome
   image: 'selenium/standalone-chrome:3.141.59'
   volumes:
@@ -30,9 +26,8 @@ x-chrome: &chrome
   ports:
     - 4444
 
-
 x-php: &php
-  image: moderntribe/squareone-php:74-2.1
+  image: moderntribe/squareone-php:74-3.0
   working_dir: /application
   user: "${SQ1_UID:-1000}:${SQ1_GID:-1000}"
   volumes:
@@ -129,5 +124,3 @@ networks:
   proxy:
     external:
       name: global_proxy
-
-
