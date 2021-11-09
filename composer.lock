@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2afded110f797b66ae73ea5718a78392",
+    "content-hash": "18e122431cf7d1839b33a5ac337649a3",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -3538,15 +3538,15 @@
         },
         {
             "name": "wpackagist-plugin/limit-login-attempts-reloaded",
-            "version": "2.23.1",
+            "version": "2.23.2",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/limit-login-attempts-reloaded/",
-                "reference": "tags/2.23.1"
+                "reference": "tags/2.23.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/limit-login-attempts-reloaded.2.23.1.zip"
+                "url": "https://downloads.wordpress.org/plugin/limit-login-attempts-reloaded.2.23.2.zip"
             },
             "require": {
                 "composer/installers": "~1.0 || ~2.0"
@@ -3610,15 +3610,15 @@
         },
         {
             "name": "wpackagist-plugin/the-events-calendar",
-            "version": "5.9.0",
+            "version": "5.10.1",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/the-events-calendar/",
-                "reference": "tags/5.9.0"
+                "reference": "tags/5.10.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/the-events-calendar.5.9.0.zip"
+                "url": "https://downloads.wordpress.org/plugin/the-events-calendar.5.10.1.zip"
             },
             "require": {
                 "composer/installers": "~1.0 || ~2.0"
@@ -3628,15 +3628,15 @@
         },
         {
             "name": "wpackagist-plugin/user-switching",
-            "version": "1.5.7",
+            "version": "1.5.8",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/user-switching/",
-                "reference": "tags/1.5.7"
+                "reference": "tags/1.5.8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/user-switching.1.5.7.zip"
+                "url": "https://downloads.wordpress.org/plugin/user-switching.1.5.8.zip"
             },
             "require": {
                 "composer/installers": "~1.0 || ~2.0"
@@ -3646,15 +3646,15 @@
         },
         {
             "name": "wpackagist-plugin/wordpress-seo",
-            "version": "17.0",
+            "version": "17.5",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/wordpress-seo/",
-                "reference": "tags/17.0"
+                "reference": "tags/17.5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wordpress-seo.17.0.zip"
+                "url": "https://downloads.wordpress.org/plugin/wordpress-seo.17.5.zip"
             },
             "require": {
                 "composer/installers": "~1.0 || ~2.0"
