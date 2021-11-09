@@ -3,9 +3,10 @@
 All notable changes to this project will be documented in this file.
 
 ## 2021.11
+* Updated: docker image to 74-3.0, composer v2 support (requires `so` v5.3.0+)
 * Added: Entrypoint for component scripts to run in the block editor.
 * Added: Slider component JS behaviors in the block editor.
-
+ 
 ## 2021.10
 * Fixed: Misc small repairs to common blocks per QA on other projects.
 
