@@ -139,7 +139,7 @@
     "css-loader": "^3.2.0",
     "cssnano": "^4.1.10",
     "del": "^5.1.0",
-    "enhanced-resolve": "^4.1.1",
+    "enhanced-resolve": "^5.8.3",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.1",
     "enzyme-to-json": "^3.4.3",
