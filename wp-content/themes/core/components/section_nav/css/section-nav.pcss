@@ -59,6 +59,12 @@
 	@media (--viewport-small) {
 		display: block;
 	}
+
+	.c-nav {
+		@media (--viewport-small) {
+			display: flex; /* Collapse whitespace inside the section nav container to properly menu item fit. */
+		}
+	}
 }
 
 .c-section-nav__list {
