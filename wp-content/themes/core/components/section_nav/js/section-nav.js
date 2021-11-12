@@ -89,27 +89,80 @@ const handleEscKeyUp = ( e ) => {
 	toggleAllSectionNavs( true );
 };
 
-const navFits = sectionNav => sectionNav.offsetWidth >= sectionNav.scrollWidth;
+const navFits = sectionNav => sectionNav.offsetWidth > sectionNav.scrollWidth;
 
-const handleNavFit = ( sectionNav ) => {
-	if ( componentState.isMobile ) {
-		return;
-	}
-
-	if ( navFits( sectionNav ) ) {
-		return;
-	}
-
+const injectMoreMenu = ( sectionNav ) => {
 	const template = sectionNav.querySelector( '[data-template="more"]' );
 	const sectionNavList = sectionNav.querySelector( '[data-js="c-section-nav__list"]' );
 	const moreMenu = document.importNode( template.content, true );
-	const moreList = moreMenu.querySelector( '[data-js="c-section-nav__list--more"]' );
 	sectionNavList.append( moreMenu );
+};
+
+const fileItems = ( sectionNav ) => {
+	if ( ! sectionNav.querySelector( '[data-js="c-section-nav__list--more"]' ) ) {
+		injectMoreMenu( sectionNav );
+	}
+
+	const sectionNavList = sectionNav.querySelector( '[data-js="c-section-nav__list"]' );
+	const moreList = sectionNavList.querySelector( '[data-js="c-section-nav__list--more"]' );
 
 	do {
-		const lastItem = sectionNavList.querySelector( 'li:nth-last-child(2)' );
+		const lastItem = sectionNavList.querySelector( 'li:nth-last-child(2)' ); // Inject items just before the "More" item.
 		moreList.append( lastItem );
 	} while ( ! navFits( sectionNav ) );
+};
+
+const unfileItems = ( sectionNav ) => {
+	const sectionNavList = sectionNav.querySelector( '[data-js="c-section-nav__list"]' );
+	const moreList = sectionNavList.querySelector( '[data-js="c-section-nav__list--more"]' );
+
+	if ( ! moreList ) {
+		return;
+	}
+
+	const lastItem = moreList.querySelector( 'li:first-child' );
+
+	// console.info( lastItem );
+
+	if ( lastItem ) {
+		sectionNavList.insertBefore( lastItem, moreList );
+	}
+
+/*	do {
+		const lastItem = moreList.querySelector( 'li:first-child' );
+		sectionNavList.append( lastItem );
+		console.info( lastItem );
+	} while ( navFits( sectionNav ) && moreList.querySelector( 'li:first-child' ) );*/
+};
+
+const handleNavFit = ( sectionNav ) => {
+	if ( componentState.isMobile ) {
+		console.info( 'Unfile all the items and remove the more menu.' );
+		return;
+	}
+
+	// const sectionNavList = sectionNav.querySelector( '[data-js="c-section-nav__list"]' );
+
+	if ( sectionNav.scrollWidth <= sectionNav.offsetWidth ) {
+		console.info( 'Unfile an item, repeat until no more items, then remove "more" menu' );
+		//unfileItems( sectionNav );
+	}
+
+	// if scrollWidth is greater than offsetWidth, check for more, append it, and file an item.
+	if ( sectionNav.scrollWidth > sectionNav.offsetWidth ) {
+		console.info( 'check for and inject "More", file an item and repeat.' );
+		//fileItems( sectionNav );
+	}
+};
+
+const sectionNavResizeObserver = new ResizeObserver( entries => {
+	for ( const entry of entries ) {
+		handleNavFit( entry.target );
+	}
+} );
+
+const handleInitialState = () => {
+	el.sectionNavs.forEach( sectionNav => sectionNavResizeObserver.observe( sectionNav ) );
 };
 
 /**
@@ -127,10 +180,6 @@ const handleResize = () => {
 		toggleAllSectionNavs( true );
 		componentState.isMobile = true;
 	}
-};
-
-const handleInitialState = () => {
-	el.sectionNavs.forEach( sectionNav => handleNavFit( sectionNav ) );
 };
 
 /**
