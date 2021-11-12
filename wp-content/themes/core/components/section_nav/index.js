@@ -7,10 +7,8 @@
  *
  * ----------------------------------------------------------------------------- */
 
-import { getNodes } from 'utils/tools';
-
 const init = () => {
-	const sectionNavs = getNodes( 'c-section-nav' );
+	const sectionNavs = document.querySelectorAll( '[data-js="c-section-nav"]' );
 
 	if ( sectionNavs.length ) {
 		import( './js/section-nav' /* webpackChunkName:"sectionNav" */ ).then( ( module ) => {
