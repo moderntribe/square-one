@@ -135,3 +135,9 @@ dev/docker/global/.env
 #######################
 !dev/tests/tests/_data/*.sql
 dev/tests/tests/_support/_generated/
+
+# Code Quality #
+###############
+phpcs.xml
+.phpcs-cache
+

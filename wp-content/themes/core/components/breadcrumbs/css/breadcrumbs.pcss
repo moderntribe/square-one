@@ -10,12 +10,18 @@
 
 .c-breadcrumbs__list {
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
+
+	@media (--viewport-small) {
+		flex-direction: row;
+	}
 }
 
 .c-breadcrumbs__item {
-	margin-right: 10px;
+	margin-right: var(--spacer-10);
 	width: auto;
+	display: flex;
+	align-items: center;
 
 	&:last-child {
 		margin-right: 0;
@@ -24,4 +30,11 @@
 
 .c-breadcrumbs__anchor {
 
+	&:hover {
+		text-decoration: underline;
+	}
+
+	@media (--viewport-small) {
+		margin-right: var(--spacer-10);
+	}
 }

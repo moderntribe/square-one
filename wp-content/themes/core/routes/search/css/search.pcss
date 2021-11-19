@@ -1,0 +1,40 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Route: Search Results
+ *
+ * ----------------------------------------------------------------------------- */
+
+.search-results__container {
+	max-width: var(--grid-width-staggered-double);
+	margin: 0 auto;
+	padding-top: var(--spacer-70);
+	padding-bottom: var(--spacer-70);
+}
+
+.search-results__title {
+	margin-bottom: var(--spacer-20);
+
+	@media (--viewport-medium) {
+		margin-bottom: var(--spacer-30);
+	}
+}
+
+.search-results__form {
+	margin-bottom: var(--spacer-40);
+
+	@media (--viewport-medium) {
+		margin-bottom: var(--spacer-70);
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Search Results: Summary
+ * ----------------------------------------------------------------------------- */
+
+.search-results__summary {
+	margin-bottom: var(--spacer-20);
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+}

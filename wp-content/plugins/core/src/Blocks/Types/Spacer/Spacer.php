@@ -1,26 +1,25 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Blocks\Types\Spacer;
 
 use Tribe\Libs\ACF\Block;
 use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Field;
-use Tribe\Libs\ACF\Field_Section;
 
 class Spacer extends Block_Config {
+
 	public const NAME = 'spacer';
 
-	public const SIZE           = 'size';
-	public const DEFAULT        = 'default';
-	public const LARGE          = 'large';
+	public const SIZE            = 'size';
+	public const DEFAULT         = 'default';
+	public const LARGE = 'large';
 
 	public const DISPLAY_OPTIONS = 'display_options';
 	public const ALL_SCREENS     = 'all-screens';
 	public const DESKTOP_ONLY    = 'desktop-only';
 	public const MOBILE_ONLY     = 'mobile-only';
 
-	public const SECTION_CONTENT  = 's-content';
+	public const SECTION_CONTENT = 's-content';
 
 	/**
 	 * Register the block
@@ -34,12 +33,12 @@ class Spacer extends Block_Config {
 				__( 'spacer', 'tribe' ),
 				__( 'display', 'tribe' ),
 			],
-			'category' => 'design',
-			'supports' => [
+			'category'    => 'design',
+			'supports'    => [
 				'align'  => false,
 				'anchor' => true,
 			],
-			'example'  => [
+			'example'     => [
 				'attributes' => [
 					'mode' => 'preview',
 					'data' => [],
@@ -53,20 +52,20 @@ class Spacer extends Block_Config {
 	 */
 	public function add_fields(): void {
 		$this->add_field( new Field( self::NAME . '_' . self::SIZE, [
-			'label'   => __( 'Appearance', 'tribe' ),
-			'name'    => self::SIZE,
-			'type'    => 'button_group',
-			'choices' => [
-				self::DEFAULT  => __( 'Default', 'tribe' ),
-				self::LARGE    => __( 'Large', 'tribe' ),
+			'label'         => __( 'Appearance', 'tribe' ),
+			'name'          => self::SIZE,
+			'type'          => 'button_group',
+			'choices'       => [
+				self::DEFAULT => __( 'Default', 'tribe' ),
+				self::LARGE   => __( 'Large', 'tribe' ),
 			],
 			'default_value' => self::DEFAULT,
 		] )
 		)->add_field( new Field( self::NAME . '_' . self::DISPLAY_OPTIONS, [
 				'label'         => __( 'Show on', 'tribe' ),
 				'name'          => self::DISPLAY_OPTIONS,
-				'type'    => 'radio',
-				'choices' => [
+				'type'          => 'radio',
+				'choices'       => [
 					self::ALL_SCREENS  => __( 'All Screens', 'tribe' ),
 					self::DESKTOP_ONLY => __( 'Desktop Only', 'tribe' ),
 					self::MOBILE_ONLY  => __( 'Mobile Only', 'tribe' ),
@@ -75,4 +74,5 @@ class Spacer extends Block_Config {
 			] )
 		);
 	}
+
 }

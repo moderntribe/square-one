@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /**
  * Nothing should be here. If you are tempted to add functions here, consult with your

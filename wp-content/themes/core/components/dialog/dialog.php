@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 use Tribe\Project\Templates\Components\dialog\Dialog_Controller;
 
@@ -21,8 +20,8 @@ use Tribe\Project\Templates\Components\dialog\Dialog_Controller;
  * @var array $args Arguments passed to the template
  */
 // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
-$c         = Dialog_Controller::factory( $args );
-$content   = $c->get_content();
+$c       = Dialog_Controller::factory( $args );
+$content = $c->get_content();
 
 if ( empty( $content ) ) {
 	return;

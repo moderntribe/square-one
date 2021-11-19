@@ -1,20 +1,20 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\blocks\stats;
 
 use Tribe\Libs\Utils\Markup_Utils;
-use \Tribe\Project\Blocks\Types\Stats\Stats;
+use Tribe\Project\Blocks\Types\Stats\Stats;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\container\Container_Controller;
+use Tribe\Project\Templates\Components\content_block\Content_Block_Controller;
 use Tribe\Project\Templates\Components\Deferred_Component;
 use Tribe\Project\Templates\Components\link\Link_Controller;
+use Tribe\Project\Templates\Components\statistic\Statistic_Controller;
+use Tribe\Project\Templates\Components\text\Text_Controller;
 use Tribe\Project\Templates\Models\Statistic as Statistic_Model;
-use \Tribe\Project\Templates\Components\statistic\Statistic_Controller;
-use \Tribe\Project\Templates\Components\content_block\Content_Block_Controller;
-use \Tribe\Project\Templates\Components\text\Text_Controller;
 
 class Stats_Block_Controller extends Abstract_Controller {
+
 	public const LAYOUT            = 'layout';
 	public const DIVIDERS          = 'dividers';
 	public const CONTENT_ALIGN     = 'content_align';
@@ -29,20 +29,20 @@ class Stats_Block_Controller extends Abstract_Controller {
 	public const STATS             = 'stats';
 
 	/**
-	 * @var Statistic_Model[] The collection of stats to render. Each item should be a \Tribe\Project\Templates\Models\Statistic object.
+	 * @var \Tribe\Project\Templates\Models\Statistic[] The collection of stats to render. Each item should be a \Tribe\Project\Templates\Models\Statistic object.
 	 */
-	private array  $stats;
+	private array $stats;
 	private string $title;
 	private string $leadin;
 	private string $description;
-	private array  $cta;
+	private array $cta;
 	private string $layout;
 	private string $content_align;
 	private string $dividers;
-	private array  $container_classes;
-	private array  $content_classes;
-	private array  $classes;
-	private array  $attrs;
+	private array $container_classes;
+	private array $content_classes;
+	private array $classes;
+	private array $attrs;
 
 	/**
 	 * @param array $args
@@ -147,26 +147,27 @@ class Stats_Block_Controller extends Abstract_Controller {
 			Content_Block_Controller::CLASSES => [
 				'c-block__content-block',
 				'c-block__header',
-				'b-stats__header'
+				'b-stats__header',
 			],
 		];
 	}
 
 	/**
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	private function get_leadin(): Deferred_Component {
 		return defer_template_part( 'components/text/text', null, [
 			Text_Controller::CLASSES => [
 				'c-block__leadin',
-				'b-stats__leadin'
+				'b-stats__leadin',
+				'h6',
 			],
 			Text_Controller::CONTENT => $this->leadin ?? '',
 		] );
 	}
 
 	/**
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	private function get_title(): Deferred_Component {
 		return defer_template_part( 'components/text/text', null, [
@@ -174,14 +175,14 @@ class Stats_Block_Controller extends Abstract_Controller {
 			Text_Controller::CLASSES => [
 				'c-block__title',
 				'b-stats__title',
-				'h3'
+				'h3',
 			],
 			Text_Controller::CONTENT => $this->title ?? '',
 		] );
 	}
 
 	/**
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	private function get_content(): Deferred_Component {
 		return defer_template_part( 'components/container/container', null, [
@@ -189,31 +190,35 @@ class Stats_Block_Controller extends Abstract_Controller {
 				'c-block__description',
 				'b-stats__description',
 				't-sink',
-				's-sink'
+				's-sink',
 			],
 			Container_Controller::CONTENT => $this->description ?? '',
 		] );
 	}
 
 	/**
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	private function get_cta(): Deferred_Component {
 		$cta = wp_parse_args( $this->cta, [
-			'content' => '',
-			'url'     => '',
-			'target'  => '',
+			'content'        => '',
+			'url'            => '',
+			'target'         => '',
+			'add_aria_label' => false,
+			'aria_label'     => '',
 		] );
 
 		return defer_template_part( 'components/link/link', null, [
-			Link_Controller::URL     => $cta['url'],
-			Link_Controller::CONTENT => $cta['content'] ?: $cta['url'],
-			Link_Controller::TARGET  => $cta['target'],
-			Link_Controller::CLASSES => [
+			Link_Controller::URL            => $cta['url'],
+			Link_Controller::CONTENT        => $cta['content'] ?: $cta['url'],
+			Link_Controller::TARGET         => $cta['target'],
+			Link_Controller::ADD_ARIA_LABEL => $cta['add_aria_label'],
+			Link_Controller::ARIA_LABEL     => $cta['aria_label'],
+			Link_Controller::CLASSES        => [
 				'c-block__cta-link',
 				'a-btn',
 				'a-btn--has-icon-after',
-				'icon-arrow-right'
+				'icon-arrow-right',
 			],
 		] );
 	}
@@ -237,7 +242,7 @@ class Stats_Block_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @param Statistic_Model $item
+	 * @param \Tribe\Project\Templates\Models\Statistic $item
 	 *
 	 * @return array
 	 */
@@ -248,7 +253,7 @@ class Stats_Block_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @param Statistic_Model $item
+	 * @param \Tribe\Project\Templates\Models\Statistic $item
 	 *
 	 * @return array
 	 */
@@ -257,4 +262,5 @@ class Stats_Block_Controller extends Abstract_Controller {
 			Text_Controller::CONTENT => esc_html( $item->label ),
 		];
 	}
+
 }

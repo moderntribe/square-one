@@ -1,19 +1,16 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\blocks\icon_grid;
 
 use Tribe\Libs\Utils\Markup_Utils;
-use Tribe\Project\Blocks\Types\Icon_Grid\Icon_Grid;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\card\Card_Controller;
-use Tribe\Project\Templates\Components\content_block\Content_Block_Controller;
 use Tribe\Project\Templates\Components\container\Container_Controller;
+use Tribe\Project\Templates\Components\content_block\Content_Block_Controller;
 use Tribe\Project\Templates\Components\Deferred_Component;
+use Tribe\Project\Templates\Components\image\Image_Controller;
 use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Templates\Components\text\Text_Controller;
-use Tribe\Project\Templates\Components\image\Image_Controller;
-use Tribe\Project\Theme\Config\Image_Sizes;
 
 class Icon_Grid_Controller extends Abstract_Controller {
 
@@ -21,21 +18,23 @@ class Icon_Grid_Controller extends Abstract_Controller {
 	public const ATTRS             = 'attrs';
 	public const CONTAINER_CLASSES = 'container_classes';
 	public const CONTENT_CLASSES   = 'content_classes';
+	public const LAYOUT            = 'layout';
 	public const TITLE             = 'title';
 	public const LEADIN            = 'leadin';
 	public const DESCRIPTION       = 'description';
 	public const CTA               = 'cta';
 	public const ICONS             = 'icons';
 
-	private array  $classes;
-	private array  $attrs;
-	private array  $container_classes;
-	private array  $content_classes;
+	private array $classes;
+	private array $attrs;
+	private array $container_classes;
+	private array $content_classes;
+	private string $layout;
 	private string $title;
 	private string $leadin;
 	private string $description;
-	private array  $cta;
-	private array  $icons;
+	private array $cta;
+	private array $icons;
 
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
@@ -44,6 +43,7 @@ class Icon_Grid_Controller extends Abstract_Controller {
 		$this->attrs             = (array) $args[ self::ATTRS ];
 		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
 		$this->content_classes   = (array) $args[ self::CONTENT_CLASSES ];
+		$this->layout            = (string) $args[ self::LAYOUT ];
 		$this->title             = (string) $args[ self::TITLE ];
 		$this->leadin            = (string) $args[ self::LEADIN ];
 		$this->description       = (string) $args[ self::DESCRIPTION ];
@@ -57,6 +57,7 @@ class Icon_Grid_Controller extends Abstract_Controller {
 			self::ATTRS             => [],
 			self::CONTAINER_CLASSES => [],
 			self::CONTENT_CLASSES   => [],
+			self::LAYOUT            => '',
 			self::TITLE             => '',
 			self::LEADIN            => '',
 			self::DESCRIPTION       => '',
@@ -67,7 +68,10 @@ class Icon_Grid_Controller extends Abstract_Controller {
 
 	protected function required(): array {
 		return [
-			self::CLASSES           => [ 'c-block', 'b-icon-grid' ],
+			self::CLASSES           => [
+				'c-block',
+				'b-icon-grid',
+			],
 			self::CONTAINER_CLASSES => [ 'l-container' ],
 		];
 	}
@@ -90,6 +94,8 @@ class Icon_Grid_Controller extends Abstract_Controller {
 	 * @return string
 	 */
 	public function get_container_classes(): string {
+		$this->container_classes[] = 'layout-' . $this->layout;
+
 		return Markup_Utils::class_attribute( $this->container_classes );
 	}
 
@@ -127,7 +133,7 @@ class Icon_Grid_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	private function get_leadin(): Deferred_Component {
 		return defer_template_part( 'components/text/text', null, [
@@ -141,7 +147,7 @@ class Icon_Grid_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	private function get_title(): Deferred_Component {
 		return defer_template_part( 'components/text/text', null, [
@@ -155,7 +161,7 @@ class Icon_Grid_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	private function get_content(): Deferred_Component {
 		return defer_template_part( 'components/container/container', null, [
@@ -170,24 +176,28 @@ class Icon_Grid_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	public function get_cta(): Deferred_Component {
 		$cta = wp_parse_args( $this->cta, [
-			'content' => '',
-			'url'     => '',
-			'target'  => '',
+			'content'        => '',
+			'url'            => '',
+			'target'         => '',
+			'add_aria_label' => false,
+			'aria_label'     => '',
 		] );
 
 		return defer_template_part( 'components/link/link', null, [
-			Link_Controller::URL     => $cta['url'],
-			Link_Controller::CONTENT => $cta['content'] ?: $cta['url'],
-			Link_Controller::TARGET  => $cta['target'],
-			Link_Controller::CLASSES => [
+			Link_Controller::URL            => $cta['url'],
+			Link_Controller::CONTENT        => $cta['content'] ?: $cta['url'],
+			Link_Controller::TARGET         => $cta['target'],
+			Link_Controller::ADD_ARIA_LABEL => $cta['add_aria_label'],
+			Link_Controller::ARIA_LABEL     => $cta['aria_label'],
+			Link_Controller::CLASSES        => [
 				'c-block__cta-link',
 				'a-btn',
 				'a-btn--has-icon-after',
-				'icon-arrow-right'
+				'icon-arrow-right',
 			],
 		] );
 	}
@@ -203,7 +213,7 @@ class Icon_Grid_Controller extends Abstract_Controller {
 			$cards[] = [
 				Card_Controller::STYLE           => Card_Controller::STYLE_PLAIN,
 				Card_Controller::TAG             => 'li',
-				Card_Controller::CLASSES         => ['is-centered-text'],
+				Card_Controller::CLASSES         => [ 'is-centered-text' ],
 				Card_Controller::USE_TARGET_LINK => false,
 				Card_Controller::TITLE           => defer_template_part(
 					'components/text/text',
@@ -239,10 +249,12 @@ class Icon_Grid_Controller extends Abstract_Controller {
 					'components/link/link',
 					null,
 					[
-						Link_Controller::CONTENT => $card['icon_link']['title'] ?? '',
-						Link_Controller::URL     => $card['icon_link']['url'] ?? '',
-						Link_Controller::TARGET  => $card['icon_link']['target'] ?? '',
-						Link_Controller::CLASSES => [ 'a-cta', 'is-target-link' ],
+						Link_Controller::CONTENT        => $card['g-cta']['link']['title'] ?? '',
+						Link_Controller::URL            => $card['g-cta']['link']['url'] ?? '',
+						Link_Controller::TARGET         => $card['g-cta']['link']['target'] ?? '',
+						Link_Controller::ADD_ARIA_LABEL => $card['g-cta']['add_aria_label'] ?? '',
+						Link_Controller::ARIA_LABEL     => $card['g-cta']['aria_label'] ?? '',
+						Link_Controller::CLASSES        => [ 'a-cta', 'is-target-link' ],
 					]
 				),
 			];
@@ -250,4 +262,5 @@ class Icon_Grid_Controller extends Abstract_Controller {
 
 		return $cards;
 	}
+
 }

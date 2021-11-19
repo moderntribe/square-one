@@ -1,11 +1,10 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Assets\Theme;
 
 class Legacy_Check {
 
-	/** @var string */
-	private $unsupported_browser_path;
+	private string $unsupported_browser_path;
 
 	public function __construct( $unsupported_browser_path = '/unsupported-browser/' ) {
 		$this->unsupported_browser_path = $unsupported_browser_path;
@@ -59,6 +58,7 @@ class Legacy_Check {
 	 * @param string $template The template file to load.
 	 *
 	 * @return mixed
+	 *
 	 * @filter template_include
 	 */
 	public function load_unsupported_template( $template ) {
@@ -69,7 +69,8 @@ class Legacy_Check {
 			return $template;
 		}
 
-		get_template_part( 'components/routes/unsupported_browser/unsupported_browser' );
+		get_template_part( 'routes/unsupported_browser/unsupported_browser' );
 		exit;
 	}
+
 }

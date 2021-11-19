@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\P2P\Relationships;
 
@@ -8,6 +8,7 @@ use Tribe\Project\Post_Types\Page\Page;
 use Tribe\Project\Post_Types\Post\Post;
 
 class General_Relationship extends Relationship {
+
 	public const NAME = 'related_posts';
 
 	protected $from = [
@@ -52,4 +53,5 @@ class General_Relationship extends Relationship {
 			'can_create_post' => false,
 		];
 	}
+
 }

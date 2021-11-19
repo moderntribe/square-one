@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Blocks\Types\Buttons;
 
@@ -7,15 +6,18 @@ use Tribe\Libs\ACF\Block;
 use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Field;
 use Tribe\Libs\ACF\Repeater;
+use Tribe\Project\Blocks\Fields\Cta_Field;
+use Tribe\Project\Blocks\Fields\Traits\With_Cta_Field;
 
-class Buttons extends Block_Config {
+class Buttons extends Block_Config implements Cta_Field {
+
+	use With_Cta_Field;
+
 	public const NAME = 'buttons';
 
-	public const BUTTONS           = 'buttons';
-	public const BUTTON_LINK       = 'button_link';
-	public const BUTTON_ARIA_LABEL = 'button_aria_label';
-	public const BUTTON_STYLE      = 'button_style';
-	public const BUTTON_CLASSES    = 'button_classes';
+	public const BUTTONS      = 'buttons';
+	public const BUTTON_LINK  = 'button_link';
+	public const BUTTON_STYLE = 'button_style';
 
 	public const STYLE_PRIMARY   = 'primary';
 	public const STYLE_SECONDARY = 'secondary';
@@ -41,24 +43,20 @@ class Buttons extends Block_Config {
 					'data' => [
 						self::BUTTONS => [
 							[
-								self::BUTTON_LINK       => [
+								self::BUTTON_LINK  => [
 									'title'  => esc_html__( 'Lorem ipsum', 'tribe' ),
 									'url'    => '#',
 									'target' => '',
 								],
-								self::BUTTON_ARIA_LABEL => '',
-								self::BUTTON_CLASSES    => '',
-								self::BUTTON_STYLE      => self::STYLE_PRIMARY,
+								self::BUTTON_STYLE => self::STYLE_PRIMARY,
 							],
 							[
-								self::BUTTON_LINK       => [
+								self::BUTTON_LINK  => [
 									'title'  => esc_html__( 'Lorem ipsum', 'tribe' ),
 									'url'    => '#',
 									'target' => '',
 								],
-								self::BUTTON_ARIA_LABEL => '',
-								self::BUTTON_CLASSES    => '',
-								self::BUTTON_STYLE      => self::STYLE_SECONDARY,
+								self::BUTTON_STYLE => self::STYLE_SECONDARY,
 							],
 						],
 
@@ -78,7 +76,7 @@ class Buttons extends Block_Config {
 	}
 
 	/**
-	 * @return Repeater
+	 * @return \Tribe\Libs\ACF\Repeater
 	 */
 	protected function get_links_section() {
 		$group = new Repeater( self::NAME . '_' . self::BUTTONS );
@@ -92,53 +90,25 @@ class Buttons extends Block_Config {
 			'button_label' => __( 'Add Button', 'tribe' ),
 		] );
 
-		$link = new Field( self::BUTTON_LINK, [
-			'label' => __( 'Link', 'tribe' ),
-			'name'  => self::BUTTON_LINK,
-			'type'  => 'link',
-		] );
-
-		$group->add_field( $link );
+		$group->add_field( $this->get_cta_field( self::NAME ) );
 
 		$button_style = new Field( self::NAME . '_' . self::BUTTON_STYLE, [
-			'type'            => 'image_select',
-			'name'            => self::BUTTON_STYLE,
-			'choices'         => [
-				self::STYLE_PRIMARY   => __( 'Primary', 'tribe' ),
-				self::STYLE_SECONDARY => __( 'Secondary', 'tribe' ),
-				self::STYLE_CTA       => __( 'Text CTA', 'tribe' ),
+			'allow_null'    => 0,
+			'choices'       => [
+				self:: STYLE_PRIMARY   => __( 'Primary', 'tribe' ),
+				self:: STYLE_SECONDARY => __( 'Secondary', 'tribe' ),
+				self:: STYLE_CTA       => __( 'Text CTA', 'tribe' ),
 			],
-			'default_value'   => self::STYLE_PRIMARY,
-			'multiple'        => 0,
-			'image_path'      => sprintf(
-				'%sassets/img/admin/blocks/%s/',
-				trailingslashit( get_template_directory_uri() ),
-				self::NAME
-			),
-			'image_extension' => 'svg',
+			'default_value' => self::STYLE_PRIMARY,
+			'label'         => __( 'Style', 'tribe' ),
+			'layout'        => 'horizontal',
+			'name'          => self::BUTTON_STYLE,
+			'return_format' => 'value',
+			'required'      => 0,
+			'type'          => 'button_group',
 		] );
 
 		$group->add_field( $button_style );
-
-		$classes = new Field( self::BUTTON_CLASSES, [
-			'label' => __( 'Custom Classes', 'tribe' ),
-			'name'  => self::BUTTON_CLASSES,
-			'type'  => 'text',
-		] );
-
-		$group->add_field( $classes );
-
-		$aria_label = new Field( self::BUTTON_ARIA_LABEL, [
-			'label'        => __( 'Screen Reader Label', 'tribe' ),
-			'name'         => self::BUTTON_ARIA_LABEL,
-			'type'         => 'text',
-			'instructions' => __(
-				'A custom label for screen readers if the button\'s action or purpose isn\'t easily identifiable. (Optional)',
-				'tribe'
-			),
-		] );
-
-		$group->add_field( $aria_label );
 
 		return $group;
 	}

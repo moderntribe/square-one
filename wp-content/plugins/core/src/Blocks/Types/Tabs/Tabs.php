@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Blocks\Types\Tabs;
 
@@ -8,24 +7,28 @@ use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Field;
 use Tribe\Libs\ACF\Field_Section;
 use Tribe\Libs\ACF\Repeater;
+use Tribe\Project\Admin\Editor\Classic_Editor_Formats;
+use Tribe\Project\Blocks\Fields\Cta_Field;
+use Tribe\Project\Blocks\Fields\Traits\With_Cta_Field;
 
-class Tabs extends Block_Config {
+class Tabs extends Block_Config implements Cta_Field {
+
+	use With_Cta_Field;
+
 	public const NAME = 'tabs';
 
-	public const SECTION_CONTENT = 's-content';
-	public const LEAD_IN         = 'leadin';
-	public const TITLE           = 'title';
-	public const DESCRIPTION     = 'description';
-	public const CTA             = 'cta';
-
-	public const TABS        = 'tabs';
-	public const TAB_LABEL   = 'tab_label';
-	public const TAB_CONTENT = 'tab_content';
-
-	public const SECTION_SETTINGS  = 's-settings';
 	public const LAYOUT            = 'layout';
 	public const LAYOUT_HORIZONTAL = 'horizontal';
 	public const LAYOUT_VERTICAL   = 'vertical';
+
+	public const LEAD_IN     = 'leadin';
+	public const TITLE       = 'title';
+	public const DESCRIPTION = 'description';
+
+	public const SECTION_TABS = 's-tabs';
+	public const TABS         = 'tabs';
+	public const TAB_LABEL    = 'tab_label';
+	public const TAB_CONTENT  = 'tab_content';
 
 	/**
 	 * 	 * Register the block
@@ -53,9 +56,12 @@ class Tabs extends Block_Config {
 							'Pellentesque diam diam, aliquet non mauris eu, posuere mollis urna. Nulla eget congue ligula, a aliquam lectus. Duis non diam maximus justo dictum porttitor in in risus.',
 							'tribe'
 						),
-						self::CTA         => [
-							'title' => esc_html__( 'Call to Action', 'tribe' ),
-							'url'   => '#',
+						self::GROUP_CTA   => [
+							self::LINK => [
+								'title'  => esc_html__( 'Lorem ipsum', 'tribe' ),
+								'url'    => '#',
+								'target' => '',
+							],
 						],
 						self::TABS        => [
 							[
@@ -91,61 +97,49 @@ class Tabs extends Block_Config {
 	 * @return void
 	 */
 	public function add_fields() {
-		//==========================================
-		// Content Fields
-		//==========================================
-		$this->add_section( new Field_Section( self::SECTION_CONTENT, __( 'Content', 'tribe' ), 'accordion' ) )
-			 ->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
-					 'label' => __( 'Lead in', 'tribe' ),
-					 'name'  => self::LEAD_IN,
-					 'type'  => 'text',
-				 ] )
-			 )->add_field( new Field( self::NAME . '_' . self::TITLE, [
-					'label' => __( 'Title', 'tribe' ),
-					'name'  => self::TITLE,
-					'type'  => 'text',
-				] )
-			)->add_field( new Field( self::NAME . '_' . self::DESCRIPTION, [
-					'label'        => __( 'Description', 'tribe' ),
-					'name'         => self::DESCRIPTION,
-					'type'         => 'wysiwyg',
-					'toolbar'      => 'basic',
-					'media_upload' => 0,
-				] )
-			)->add_field( new Field( self::NAME . '_' . self::CTA, [
-					'label' => __( 'Call to Action', 'tribe' ),
-					'name'  => self::CTA,
-					'type'  => 'link',
-				] )
-			)->add_field( $this->get_tab_section() );
-
-		//==========================================
-		// Settings Fields
-		//==========================================
-		$this->add_section( new Field_Section( self::SECTION_SETTINGS, __( 'Settings', 'tribe' ), 'accordion' ) )
-			 ->add_field( new Field( self::NAME . '_' . self::LAYOUT, [
-				 'type'            => 'image_select',
-				 'name'            => self::LAYOUT,
-				 'choices'         => [
-					 self::LAYOUT_VERTICAL   => __( 'Vertical', 'tribe' ),
-					 self::LAYOUT_HORIZONTAL => __( 'Horizontal', 'tribe' ),
-				 ],
-				 'default_value'   => self::LAYOUT_HORIZONTAL,
-				 'multiple'        => 0,
-				 'image_path'      => sprintf(
-					 '%sassets/img/admin/blocks/%s/',
-					 trailingslashit( get_template_directory_uri() ),
-					 self::NAME
-				 ),
-				 'image_extension' => 'svg',
-			 ] ) );
+		$this->add_field( new Field( self::NAME . '_' . self::LAYOUT, [
+				'label'         => __( 'Layout', 'tribe' ),
+				'type'          => 'button_group',
+				'name'          => self::LAYOUT,
+				'choices'       => [
+					self::LAYOUT_HORIZONTAL => __( 'Horizontal', 'tribe' ),
+					self::LAYOUT_VERTICAL   => __( 'Vertical', 'tribe' ),
+				],
+				'default_value' => self::LAYOUT_HORIZONTAL,
+			] )
+		)->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
+				'label'       => __( 'Lead in', 'tribe' ),
+				'name'        => self::LEAD_IN,
+				'type'        => 'text',
+				'placeholder' => __( 'Leadin (optional)', 'tribe' ),
+				'wrapper'     => [
+					'class' => 'tribe-acf-hide-label',
+				],
+			] )
+		)->add_field( new Field( self::NAME . '_' . self::TITLE, [
+				'label' => __( 'Title', 'tribe' ),
+				'name'  => self::TITLE,
+				'type'  => 'text',
+			] )
+		)->add_field( new Field( self::NAME . '_' . self::DESCRIPTION, [
+				'label'        => __( 'Description', 'tribe' ),
+				'name'         => self::DESCRIPTION,
+				'type'         => 'wysiwyg',
+				'toolbar'      => Classic_Editor_Formats::MINIMAL,
+				'tabs'         => 'visual',
+				'media_upload' => 0,
+			] )
+		)->add_field(
+			$this->get_cta_field( self::NAME )
+		)->add_section( $this->get_tab_section() );
 	}
 
 	/**
-	 * @return Repeater
+	 * @return \Tribe\Libs\ACF\Field_Section
 	 */
-	protected function get_tab_section() {
-		$group = new Repeater( self::NAME . '_' . self::TABS );
+	protected function get_tab_section(): Field_Section {
+		$section = new Field_Section( self::SECTION_TABS, __( 'Tabs', 'tribe' ), 'accordion' );
+		$group   = new Repeater( self::NAME . '_' . self::TABS );
 		$group->set_attributes( [
 			'label'        => __( 'Tab Section', 'tribe' ),
 			'name'         => self::TABS,
@@ -153,23 +147,31 @@ class Tabs extends Block_Config {
 			'min'          => 0,
 			'max'          => 10,
 			'button_label' => __( 'Add Tab', 'tribe' ),
+			'collapsed'    => 'field_' . self::TAB_LABEL,
+			'wrapper'      => [
+				'class' => 'tribe-acf-hide-label',
+			],
 		] );
 		$header = new Field( self::TAB_LABEL, [
 			'label' => __( 'Tab Label', 'tribe' ),
 			'name'  => self::TAB_LABEL,
 			'type'  => 'text',
 		] );
-
 		$group->add_field( $header );
 		$content = new Field( self::TAB_CONTENT, [
-			'label' => __( 'Tab Content', 'tribe' ),
-			'name'  => self::TAB_CONTENT,
-			'type'  => 'wysiwyg',
-			'delay' => 1,
+			'label'        => __( 'Tab Content', 'tribe' ),
+			'name'         => self::TAB_CONTENT,
+			'type'         => 'wysiwyg',
+			'toolbar'      => Classic_Editor_Formats::MINIMAL,
+			'tabs'         => 'visual',
+			'media_upload' => 0,
+			'delay'        => 1,
 		] );
-		$group->add_field( $content );
 
-		return $group;
+		$group->add_field( $content );
+		$section->add_field( $group );
+
+		return $section;
 	}
 
 }

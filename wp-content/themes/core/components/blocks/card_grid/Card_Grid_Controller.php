@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\blocks\card_grid;
 
@@ -16,7 +15,9 @@ use Tribe\Project\Templates\Components\text\Text_Controller;
 use Tribe\Project\Theme\Config\Image_Sizes;
 
 class Card_Grid_Controller extends Abstract_Controller {
+
 	public const TITLE             = 'title';
+	public const LEADIN            = 'leadin';
 	public const DESCRIPTION       = 'description';
 	public const CTA               = 'cta';
 	public const POSTS             = 'posts';
@@ -29,18 +30,20 @@ class Card_Grid_Controller extends Abstract_Controller {
 
 	private string $layout;
 	private string $title;
+	private string $leadin;
 	private string $description;
-	private array  $cta;
-	private array  $posts;
-	private array  $container_classes;
-	private array  $loop_classes;
-	private array  $loop_attrs;
-	private array  $classes;
-	private array  $attrs;
+	private array $cta;
+	private array $posts;
+	private array $container_classes;
+	private array $loop_classes;
+	private array $loop_attrs;
+	private array $classes;
+	private array $attrs;
 
 	public function __construct( array $args = [] ) {
 		$args                    = $this->parse_args( $args );
 		$this->title             = (string) $args[ self::TITLE ];
+		$this->leadin            = (string) $args[ self::LEADIN ];
 		$this->description       = (string) $args[ self::DESCRIPTION ];
 		$this->cta               = (array) $args[ self::CTA ];
 		$this->posts             = (array) $args[ self::POSTS ];
@@ -58,6 +61,7 @@ class Card_Grid_Controller extends Abstract_Controller {
 	protected function defaults(): array {
 		return [
 			self::TITLE             => '',
+			self::LEADIN            => '',
 			self::DESCRIPTION       => '',
 			self::POSTS             => [],
 			self::CTA               => [],
@@ -146,12 +150,13 @@ class Card_Grid_Controller extends Abstract_Controller {
 			Content_Block_Controller::TAG     => 'header',
 			Content_Block_Controller::LAYOUT  => $this->layout === Card_Grid::LAYOUT_INLINE ?: Content_Block_Controller::LAYOUT_CENTER,
 			Content_Block_Controller::TITLE   => $this->get_title(),
+			Content_Block_Controller::LEADIN  => $this->get_leadin(),
 			Content_Block_Controller::CONTENT => $this->get_content(),
 			Content_Block_Controller::CTA     => $this->get_cta(),
 			Content_Block_Controller::CLASSES => [
 				'c-block__content-block',
 				'c-block__header',
-				'b-card-grid__header'
+				'b-card-grid__header',
 			],
 		];
 	}
@@ -222,7 +227,7 @@ class Card_Grid_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	private function get_title(): Deferred_Component {
 		return defer_template_part( 'components/text/text', null, [
@@ -237,7 +242,21 @@ class Card_Grid_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
+	 */
+	private function get_leadin(): Deferred_Component {
+		return defer_template_part( 'components/text/text', null, [
+			Text_Controller::TAG     => 'p',
+			Text_Controller::CLASSES => [
+				'c-block__leadin',
+				'b-card-grid__leadin',
+			],
+			Text_Controller::CONTENT => $this->leadin ?? '',
+		] );
+	}
+
+	/**
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	private function get_content(): Deferred_Component {
 		return defer_template_part( 'components/container/container', null, [
@@ -252,24 +271,28 @@ class Card_Grid_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	private function get_cta(): Deferred_Component {
 		$cta = wp_parse_args( $this->cta, [
-			'content' => '',
-			'url'     => '',
-			'target'  => '',
+			'content'        => '',
+			'url'            => '',
+			'target'         => '',
+			'add_aria_label' => false,
+			'aria_label'     => '',
 		] );
 
 		return defer_template_part( 'components/link/link', null, [
-			Link_Controller::URL     => $cta['url'],
-			Link_Controller::CONTENT => $cta['content'] ?: $cta['url'],
-			Link_Controller::TARGET  => $cta['target'],
-			Link_Controller::CLASSES => [
+			Link_Controller::URL            => $cta['url'],
+			Link_Controller::CONTENT        => $cta['content'] ?: $cta['url'],
+			Link_Controller::TARGET         => $cta['target'],
+			Link_Controller::ADD_ARIA_LABEL => $cta['add_aria_label'],
+			Link_Controller::ARIA_LABEL     => $cta['aria_label'],
+			Link_Controller::CLASSES        => [
 				'c-block__cta-link',
 				'a-btn',
 				'a-btn--has-icon-after',
-				'icon-arrow-right'
+				'icon-arrow-right',
 			],
 		] );
 	}

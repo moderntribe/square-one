@@ -1,8 +1,8 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Blocks\Types\Icon_Grid;
 
+use Tribe\Project\Blocks\Fields\Cta_Field;
 use Tribe\Project\Blocks\Types\Base_Model;
 use Tribe\Project\Templates\Components\blocks\icon_grid\Icon_Grid_Controller;
 use Tribe\Project\Templates\Components\link\Link_Controller;
@@ -14,10 +14,12 @@ use Tribe\Project\Templates\Components\link\Link_Controller;
  * for the component
  */
 class Icon_Grid_Model extends Base_Model {
+
 	public function get_data(): array {
 		return [
 			Icon_Grid_Controller::ATTRS       => $this->get_attrs(),
 			Icon_Grid_Controller::CLASSES     => $this->get_classes(),
+			Icon_Grid_Controller::LAYOUT      => $this->get( Icon_Grid::LAYOUT, [] ),
 			Icon_Grid_Controller::TITLE       => $this->get( Icon_Grid::TITLE, '' ),
 			Icon_Grid_Controller::LEADIN      => $this->get( Icon_Grid::LEADIN, '' ),
 			Icon_Grid_Controller::DESCRIPTION => $this->get( Icon_Grid::DESCRIPTION, '' ),
@@ -30,16 +32,20 @@ class Icon_Grid_Model extends Base_Model {
 	 * @return array
 	 */
 	private function get_cta_args(): array {
-		$cta = wp_parse_args( $this->get( Icon_Grid::CTA, [] ), [
+		$cta  = $this->get( Cta_Field::GROUP_CTA, [] );
+		$link = wp_parse_args( $cta['link'] ?? [], [
 			'title'  => '',
 			'url'    => '',
 			'target' => '',
 		] );
 
 		return [
-			Link_Controller::CONTENT => $cta['title'],
-			Link_Controller::URL     => $cta['url'],
-			Link_Controller::TARGET  => $cta['target'],
+			Link_Controller::CONTENT        => $link['title'],
+			Link_Controller::URL            => $link['url'],
+			Link_Controller::TARGET         => $link['target'],
+			Link_Controller::ADD_ARIA_LABEL => $cta['add_aria_label'] ?? false,
+			Link_Controller::ARIA_LABEL     => $cta['aria_label'] ?? '',
 		];
 	}
+
 }

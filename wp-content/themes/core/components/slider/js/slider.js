@@ -4,6 +4,7 @@
  */
 
 import _ from 'lodash';
+import { trigger } from 'utils/events';
 import SwiperCore, { Navigation, Pagination, A11y, Autoplay, Thumbs } from 'swiper/core';
 
 SwiperCore.use( [ Navigation, Pagination, A11y, Autoplay, Thumbs ] );
@@ -20,6 +21,8 @@ const options = {
 		a11y: {
 			enabled: true,
 		},
+		watchSlidesVisibility: true,
+		watchOverflow: true,
 	} ),
 	swiperThumbs: () => ( {
 		a11y: {
@@ -109,7 +112,7 @@ const focusRow = ( index, rowIndex, jumpTo ) => {
 
 /**
  * @module
- * @description Swiper init.
+ * @description Swiper init. Make sure to keep this idempotent/safe to call multiple times!
  */
 
 const initSliders = () => {
@@ -119,6 +122,13 @@ const initSliders = () => {
 		instances.swipers[ swiperMainId ] = new SwiperCore( slider, getMainOptsForSlider( slider, swiperMainId ) );
 		slider.setAttribute( 'data-id', swiperMainId );
 		slider.setAttribute( 'id', swiperMainId );
+		instances.swipers[ swiperMainId ].on( 'imagesReady', () => {
+			trigger( {
+				event: 'modern_tribe/swiper_images_ready',
+				data: { slider: instances.swipers[ swiperMainId ] },
+				native: false,
+			} );
+		} );
 	} );
 };
 
@@ -156,6 +166,9 @@ const bindEvents = () => {
 	document.addEventListener( 'modular_content/repeater_row_activated', previewChangeHandler );
 	document.addEventListener( 'modular_content/repeater_row_deactivated', previewChangeHandler );
 	document.addEventListener( 'modular_content/repeater_row_added', previewChangeHandler );
+	if ( window.acf ) {
+		window.acf.addAction( 'render_block_preview', initSliders );
+	}
 	document.addEventListener( 'modern_tribe/component_dialog_rendered', initSliders );
 };
 

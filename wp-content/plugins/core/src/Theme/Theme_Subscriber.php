@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Theme;
 
@@ -14,6 +13,7 @@ use Tribe\Project\Theme\Media\Image_Wrap;
 use Tribe\Project\Theme\Media\Oembed_Filter;
 
 class Theme_Subscriber extends Abstract_Subscriber {
+
 	public function register(): void {
 		$this->body_classes();
 		$this->site_branding();
@@ -87,7 +87,7 @@ class Theme_Subscriber extends Abstract_Subscriber {
 	}
 
 	private function image_links(): void {
-		add_filter( 'pre_option_image_default_link_type', function () {
+		add_filter( 'pre_option_image_default_link_type', static function () {
 			return 'none';
 		}, 10, 1 );
 	}

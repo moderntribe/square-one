@@ -12,7 +12,6 @@ jobs:
       DEPLOY_FOLDER: ./deploy
       ENVIRONMENT: development
       DEPLOY_REPO: ${{ secrets.DEV_DEPLOY_REPO }}
-      COMPOSER_AUTH: '{ "github-oauth": { "github.com": "${{ secrets.GH_TOKEN }}" } }'
 
     steps:
 
@@ -21,7 +20,9 @@ jobs:
       - name: Setup PHP, with composer and extensions
         uses: shivammathur/setup-php@v2 #https://github.com/shivammathur/setup-php
         with:
-          tools: composer:v1
+          php-version: '7.4'
+        env:
+          COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # Get Build Repository
       - name: Check out build branch

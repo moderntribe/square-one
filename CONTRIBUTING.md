@@ -19,10 +19,10 @@ We use Pull Requests to develop conversations around ideas, and turn ideas into 
 
 ### TL;DR
 
+* PHP: Use [Modern Tribe coding standards](https://github.com/moderntribe/coding-standards), which are an extended version of the [WP coding standards](https://make.wordpress.org/core/handbook/best-practices/coding-standards/php/)
 * JS: Use our linting rules
-* PHP: [WP coding standards](https://make.wordpress.org/core/handbook/best-practices/coding-standards/php/)
 * PostCSS: Use our linting rules
 
 ## Support
 
-Usage of Square One is not actively supported by Modern Tribe outside of client contracts. Pull requests and suggestions are welcome and will be addressed based on business need.
+Modern Tribe is actively working on SquareOne. Bug reports, feature requests, questions, and pull requests are welcome and will be addressed based on need.

@@ -2,10 +2,74 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2021.11
+* Updated: docker image to 74-3.0, composer v2 support (requires `so` v5.3.0+)
+* Added: Entrypoint for component scripts to run in the block editor.
+* Added: Slider component JS behaviors in the block editor.
+ 
+## 2021.10
+* Fixed: Misc small repairs to common blocks per QA on other projects.
+
+## 2021.09
+* Fixed: Style guide typography regression caused by Core's reset.css enqueuing in the block editor with the v5.8.0 release of WordPress.
+* Updated: ci GitHub action to allow manual runs
+* Fixed: Replace deleted repo https://github.com/hautelook/phpass with https://github.com/bordoni/phpass
+* Updated: wp-browser to 3.0.9
+* Fixed: Reusable & Group block width repair.
+* Added: Generic navigation menu component.
+
+## 2021.08
+* Added: Block Deny List, removing the requirement to list all allowed blocks.
+* Added: Post Single Template and styles.
+* Fixed: Image Component Caption display bug
+* Fixed: Glomar Cookie Constant issue
+* Updated: ACF block field sets for better UX.
+* Added: Routes to the gulp build system
+
+## 2021.07
+* Updated: WordPress 5.8
+* Added: Disabled Block widgets from wp5.8
+* Updated: Allow block filter change for wp45.8
+* Fixed: SQONE-652: webpack config for dynamic imports fixed for dev tasks.
+* Fixed: SQONE-658: Update PostCSS config to remove duplicate selectors.
+
+## 2021.06
+* Added styles and data handling for the index and archive pages.
+* Updated: Moved Post Archive settings from General Settings to post archive settings
+* Added Styles for the Not Found Page
+* Added: Styles and additional functionality to the search template.
+* Fixed: PHPCS workflow from not running when set as "Require status checks to pass before merging" if no files changed;
+preventing a PR from being able to be merged.
+
 ## 2021.05
+* Added: herokuish deployment support (dokku)
+* Fixed: Husky hooks commits from scanning all PHP files with phpcs and limits to our core plugin/theme.
+* Fixed: broken main README.md links
+* Removed: husky hooks.
+* Added: lefthook git-hooks (see lefthook.yml and .lefthook folder) to replace husky hooks: https://github.com/evilmartians/lefthook
+* Added: run phpcs checks on commit via lefthook. 
+* Added: prefix commit messages with the Jira ticket from the branch.  
+* Updated: Move phpcs to https://github.com/moderntribe/coding-standards
+* Removed: Broken Gallery shortcode/subscriber.
+* Removed: phpcs.xml, this should be git ignored.
+* Added: phpcs.xml.dist with new coding standards (mostly formatting based for now).
+* Updated: Updated all relevant PHP files for phpcs.
+* Updated: .editorconfig to better match new phpcs formatting.  
+* Removed: mercator mu plugin https://github.com/humanmade/Mercator as multisite domain mapping has been in core for some time.
+* Updated: workflows/phpcs.yml to use the new coding standard in GitHub workflows  
+* Fixed: Multiple blocks keywords not using `__()` properly.
 * Added: documentation to get PHPCS configured in VS Code.
 * Updated: use the WP_ENVIRONMENT_TYPE constant added in Core v5.5.
 * Added: enabled the legacy markup for Gravity Forms 2.5 by default (until we can update our theme framework).
+* Fixed: small issue with webpack publicPath's being off.
+* Fixed: removed unnecessary Sage SVG plugin from composer.
+* Fixed: updated the Limit Login Attempts path for force-activated plugins.
+* Updated: Increase the width of the block sidebar
+* Updated: Spruce up the Repeater field, especially when used in ACF Block Sidebars
+* Updated: Spruce up the Image Field
+* Added: a utility class of ‘tribe-acf-hide-label’ to hide field labels in cases where they are unnecessary/exterraneous
+* Added: a utility class of ‘tribe-acf-instructions’’. Apply to a Message field if you need ‘spoof’ ad-hoc instructional content.
+* Fixed: Converts the button block to now use the button_group acf field time.
 
 ## 2021.04
 * Updated: refreshed local-config-sample.php to have a more thorough set of constants you may need, especially now that we have a Local environment option.

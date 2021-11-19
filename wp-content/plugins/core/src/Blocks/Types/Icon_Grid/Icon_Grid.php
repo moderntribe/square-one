@@ -1,4 +1,4 @@
-<?php declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Blocks\Types\Icon_Grid;
 
@@ -7,24 +7,31 @@ use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Field;
 use Tribe\Libs\ACF\Field_Section;
 use Tribe\Libs\ACF\Repeater;
+use Tribe\Project\Admin\Editor\Classic_Editor_Formats;
+use Tribe\Project\Blocks\Fields\Cta_Field;
+use Tribe\Project\Blocks\Fields\Traits\With_Cta_Field;
 
-class Icon_Grid extends Block_Config {
+class Icon_Grid extends Block_Config implements Cta_Field {
+
+	use With_Cta_Field;
 
 	public const NAME = 'icongrid';
 
-	public const SECTION_CONTENT  = 's-content';
+	public const LAYOUT        = 'layout';
+	public const LAYOUT_INLINE = 'inline';
+	public const LAYOUT_LIST   = 'list';
+
+	public const SECTION_ICONS    = 's-icons';
 	public const SECTION_SETTINGS = 's-settings';
 
 	public const TITLE       = 'title';
 	public const DESCRIPTION = 'description';
 	public const LEADIN      = 'leadin';
-	public const CTA         = 'cta';
 
 	public const ICONS            = 'icons';
 	public const ICON_IMAGE       = 'icon_image';
 	public const ICON_TITLE       = 'icon_title';
 	public const ICON_DESCRIPTION = 'icon_description';
-	public const ICON_LINK        = 'icon_link';
 
 	public function add_block(): void {
 		$this->set_block( new Block( self::NAME, [
@@ -45,81 +52,96 @@ class Icon_Grid extends Block_Config {
 	 * Register Fields for block
 	 */
 	public function add_fields(): void {
-		//==========================================
-		// Content Fields
-		//==========================================
-		$this->add_section( new Field_Section( self::SECTION_CONTENT, __( 'Content', 'tribe' ), 'accordion' ) )
-			->add_field( 
-				new Field( self::NAME . '_' . self::TITLE, [
-					'label' => __( 'Title', 'tribe' ),
-					'name'  => self::TITLE,
-					'type'  => 'text',
+		$this->add_field(
+			new Field( self::NAME . '_' . self::LAYOUT, [
+				'label'         => esc_html__( 'Layout', 'tribe' ),
+				'name'          => self::LAYOUT,
+				'type'          => 'button_group',
+				'choices'       => [
+					self::LAYOUT_INLINE => esc_html__( 'Inline', 'tribe' ),
+					self::LAYOUT_LIST   => esc_html__( 'List', 'tribe' ),
+				],
+				'default_value' => self::LAYOUT_INLINE,
 				] )
-			)->add_field( 
-				new Field( self::NAME . '_' . self::LEADIN, [
-					'label' => __( 'Lead in', 'tribe' ),
-					'name'  => self::LEADIN,
-					'type'  => 'text',
-				] )
-			)->add_field(
-				new Field( self::NAME . '_' . self::DESCRIPTION, [
-					'label' => __( 'Description', 'tribe' ),
-					'name'  => self::DESCRIPTION,
-					'type'  => 'wysiwyg',
-				] )
-			)->add_field(
-				new Field( self::NAME . '_' . self::CTA, [
-					'label' => __( 'Call to Action', 'tribe' ),
-					'name'  => self::CTA,
-					'type'  => 'link',
-				] )
-			)->add_field(
-				$this->get_icon_section()
-			);
+		)->add_field(
+			new Field( self::NAME . '_' . self::TITLE, [
+					 'label' => esc_html__( 'Title', 'tribe' ),
+					 'name'  => self::TITLE,
+					 'type'  => 'text',
+				 ] )
+		)->add_field(
+			new Field( self::NAME . '_' . self::LEADIN, [
+					'label'   => esc_html__( 'Lead in', 'tribe' ),
+					'name'    => self::LEADIN,
+					'type'    => 'text',
+					'wrapper' => [
+						'class' => 'tribe-acf-hide-label',
+					],
+				 ] )
+		)->add_field(
+			new Field( self::NAME . '_' . self::DESCRIPTION, [
+					'label'        => esc_html__( 'Description', 'tribe' ),
+					'name'         => self::DESCRIPTION,
+					'type'         => 'wysiwyg',
+					'toolbar'      => Classic_Editor_Formats::MINIMAL,
+					'tabs'         => 'visual',
+					'media_upload' => false,
+				 ] )
+		)->add_field(
+			$this->get_cta_field( self::NAME )
+		);
+
+		$this->add_section( new Field_Section( self::SECTION_ICONS, esc_html__( 'Icon Items', 'tribe' ), 'accordion' )
+			 )->add_field(
+				 $this->get_icon_section()
+			 );
 	}
 
 	/**
-	 * @return Repeater
+	 * @return \Tribe\Libs\ACF\Repeater
 	 */
 	protected function get_icon_section(): Repeater {
 		$group = new Repeater( self::NAME . '_' . self::ICONS, [
-			'label'        => __( 'Icon Section', 'tribe' ),
+			'label'        => esc_html__( 'Icon Section', 'tribe' ),
 			'name'         => self::ICONS,
 			'layout'       => 'block',
 			'min'          => 0,
 			'max'          => 12,
-			'button_label' => __( 'Add Icon Section', 'tribe' ),
+			'button_label' => esc_html__( 'Add Icon Section', 'tribe' ),
+			'wrapper'      => [
+				'class' => 'tribe-acf-hide-label',
+			],
 		] );
-		
+
 		$group->add_field(
 			new Field( self::ICON_IMAGE, [
-				'label'         => __( 'Icon Image', 'tribe' ),
+				'label'         => esc_html__( 'Icon Image', 'tribe' ),
 				'name'          => self::ICON_IMAGE,
 				'type'          => 'image',
 				'return_format' => 'id',
 				'preview_size'  => 'medium',
-				'instructions'  => __( 'Recommended image size: 100px wide with any aspect ratio.', 'tribe' ),
+				'instructions'  => esc_html__( 'Recommended image size: 100px wide with any aspect ratio.', 'tribe' ),
 			] )
 		)->add_field(
 			new Field( self::ICON_TITLE, [
-				'label' => __( 'Icon Title', 'tribe' ),
+				'label' => esc_html__( 'Icon Title', 'tribe' ),
 				'name'  => self::ICON_TITLE,
 				'type'  => 'text',
 			] )
 		)->add_field(
 			new Field( self::ICON_DESCRIPTION, [
-				'label' => __( 'Icon Description', 'tribe' ),
-				'name'  => self::ICON_DESCRIPTION,
-				'type'  => 'wysiwyg',
-			 ] )
-		)->add_field(
-			new Field( self::ICON_LINK, [
-				'label' => __( 'Icon Section Link', 'tribe' ),
-				'name'  => self::ICON_LINK,
-				'type'  => 'link',
+				'label'        => esc_html__( 'Icon Description', 'tribe' ),
+				'name'         => self::ICON_DESCRIPTION,
+				'type'         => 'wysiwyg',
+				'toolbar'      => Classic_Editor_Formats::MINIMAL,
+				'tabs'         => 'visual',
+				'media_upload' => false,
 			] )
+		)->add_field(
+			$this->get_cta_field( self::NAME )
 		);
 
 		return $group;
 	}
+
 }

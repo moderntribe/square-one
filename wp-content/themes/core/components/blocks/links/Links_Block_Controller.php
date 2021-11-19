@@ -1,18 +1,18 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\blocks\links;
 
 use Tribe\Libs\Utils\Markup_Utils;
-use \Tribe\Project\Blocks\Types\Links\Links as Links_Block;
+use Tribe\Project\Blocks\Types\Links\Links as Links_Block;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\container\Container_Controller;
 use Tribe\Project\Templates\Components\content_block\Content_Block_Controller;
-use Tribe\Project\Templates\Components\text\Text_Controller;
-use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Templates\Components\Deferred_Component;
+use Tribe\Project\Templates\Components\link\Link_Controller;
+use Tribe\Project\Templates\Components\text\Text_Controller;
 
 class Links_Block_Controller extends Abstract_Controller {
+
 	public const LAYOUT            = 'layout';
 	public const TITLE             = 'title';
 	public const LEADIN            = 'leadin';
@@ -29,12 +29,12 @@ class Links_Block_Controller extends Abstract_Controller {
 	private string $title;
 	private string $leadin;
 	private string $description;
-	private array  $cta;
-	private array  $container_classes;
-	private array  $content_classes;
-	private array  $classes;
-	private array  $attrs;
-	private array  $links;
+	private array $cta;
+	private array $container_classes;
+	private array $content_classes;
+	private array $classes;
+	private array $attrs;
+	private array $links;
 	private string $links_title;
 
 	/**
@@ -134,26 +134,26 @@ class Links_Block_Controller extends Abstract_Controller {
 			Content_Block_Controller::CLASSES => [
 				'c-block__content-block',
 				'c-block__header',
-				'b-links__header'
+				'b-links__header',
 			],
 		];
 	}
 
 	/**
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	private function get_leadin(): Deferred_Component {
 		return defer_template_part( 'components/text/text', null, [
 			Text_Controller::CLASSES => [
 				'c-block__leadin',
-				'b-links__leadin'
+				'b-links__leadin',
 			],
 			Text_Controller::CONTENT => $this->leadin ?? '',
 		] );
 	}
 
 	/**
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	private function get_title(): Deferred_Component {
 		return defer_template_part( 'components/text/text', null, [
@@ -161,14 +161,14 @@ class Links_Block_Controller extends Abstract_Controller {
 			Text_Controller::CLASSES => [
 				'c-block__title',
 				'b-links__title',
-				'h3'
+				'h3',
 			],
 			Text_Controller::CONTENT => $this->title ?? '',
 		] );
 	}
 
 	/**
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	private function get_content(): Deferred_Component {
 		return defer_template_part( 'components/container/container', null, [
@@ -176,31 +176,35 @@ class Links_Block_Controller extends Abstract_Controller {
 				'c-block__description',
 				'b-links__description',
 				't-sink',
-				's-sink'
+				's-sink',
 			],
 			Container_Controller::CONTENT => $this->description ?? '',
 		] );
 	}
 
 	/**
-	 * @return Deferred_Component
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	private function get_cta(): Deferred_Component {
 		$cta = wp_parse_args( $this->cta, [
-			'content' => '',
-			'url'     => '',
-			'target'  => '',
+			'content'        => '',
+			'url'            => '',
+			'target'         => '',
+			'add_aria_label' => false,
+			'aria_label'     => '',
 		] );
 
 		return defer_template_part( 'components/link/link', null, [
-			Link_Controller::URL     => $cta['url'],
-			Link_Controller::CONTENT => $cta['content'] ?: $cta['url'],
-			Link_Controller::TARGET  => $cta['target'],
-			Link_Controller::CLASSES => [
+			Link_Controller::URL            => $cta['url'],
+			Link_Controller::CONTENT        => $cta['content'] ?: $cta['url'],
+			Link_Controller::TARGET         => $cta['target'],
+			Link_Controller::ADD_ARIA_LABEL => $cta['add_aria_label'],
+			Link_Controller::ARIA_LABEL     => $cta['aria_label'],
+			Link_Controller::CLASSES        => [
 				'c-block__cta-link',
 				'a-btn',
 				'a-btn--has-icon-after',
-				'icon-arrow-right'
+				'icon-arrow-right',
 			],
 		] );
 	}
@@ -224,20 +228,24 @@ class Links_Block_Controller extends Abstract_Controller {
 	 * @return array
 	 */
 	public function get_links(): array {
-		$rows = array_filter( $this->links, function ( $row ) {
-			return array_key_exists( 'item', $row );
+		$rows = array_filter( $this->links, static function ( $row ) {
+			return array_key_exists( 'g-cta', $row );
 		} );
 
 		if ( empty( $rows ) ) {
 			return [];
 		}
 
-		return array_map( function ( $row ) {
+		return array_map( static function ( $row ) {
 			return [
-				Link_Controller::URL     => $row['item']['url'] ?? '',
-				Link_Controller::CONTENT => $row['item']['title'] ?? $row['item']['url'],
-				Link_Controller::TARGET  => $row['item']['target'] ?? '',
-				Link_Controller::CLASSES => [ 'b-links__list-link' ],
+				Link_Controller::URL            => $row['g-cta']['link']['url'] ?? '',
+				Link_Controller::CONTENT        => $row['g-cta']['link']['title'] ?? '',
+				Link_Controller::TARGET         => $row['g-cta']['link']['target'] ?? '',
+				Link_Controller::ADD_ARIA_LABEL => $row['g-cta']['add_aria_label'] ?? '',
+				Link_Controller::ARIA_LABEL     => $row['g-cta']['aria_label'] ?? '',
+				Link_Controller::CLASSES        => [ 'b-links__list-link' ],
+				Link_Controller::HEADER         => $row['link_header'] ?? '',
+				Link_Controller::DESCRIPTION    => $row['link_content'] ?? '',
 			];
 		}, $rows );
 	}

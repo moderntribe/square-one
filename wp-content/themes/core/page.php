@@ -1,3 +1,3 @@
-<?php
+<?php declare(strict_types=1);
 
-get_template_part( 'components/routes/page/page' );
+get_template_part( 'routes/page/page' );

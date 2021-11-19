@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 use \Tribe\Project\Templates\Components\comments\comment\Comment_Controller;
 
@@ -10,7 +9,7 @@ use \Tribe\Project\Templates\Components\comments\comment\Comment_Controller;
 $c = Comment_Controller::factory( $args );
 ?>
 
-<li <?php echo $c->get_classes(); ?><?php echo $c->get_attrs(); ?>>
+<<?php echo $c->get_tag(); ?> <?php echo $c->get_classes(); ?><?php echo $c->get_attrs(); ?>>
 
 	<header class="comment__header">
 
@@ -37,6 +36,4 @@ $c = Comment_Controller::factory( $args );
 		$c->get_moderation_message_args()
 	); ?>
 
-	<?php echo $c->get_reply_link() ; ?>
-
-</li>
+	<?php echo $c->get_reply_link(); ?>

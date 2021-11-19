@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Blocks\Types\Content_Columns;
 
@@ -7,21 +7,27 @@ use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Field;
 use Tribe\Libs\ACF\Field_Section;
 use Tribe\Libs\ACF\Repeater;
+use Tribe\Project\Admin\Editor\Classic_Editor_Formats;
+use Tribe\Project\Blocks\Fields\Cta_Field;
+use Tribe\Project\Blocks\Fields\Traits\With_Cta_Field;
 
-class Content_Columns extends Block_Config {
+class Content_Columns extends Block_Config implements Cta_Field {
+
+	use With_Cta_Field;
+
 	public const NAME = 'contentcolumns';
 
 	public const SECTION_CONTENT = 's-content';
 	public const LEADIN          = 'leadin';
 	public const TITLE           = 'title';
 	public const DESCRIPTION     = 'description';
-	public const CTA             = 'cta';
+	
+	public const SECTION_COLUMNS = 's-columns';
 	public const COLUMNS         = 'columns';
 	public const COLUMN_TITLE    = 'col_title';
 	public const COLUMN_CONTENT  = 'col_content';
-	public const COLUMN_CTA      = 'col_cta';
 
-	public const SECTION_SETTINGS     = 's-settings';
+	public const SECTION_SETTINGS     = 's-appearance';
 	public const CONTENT_ALIGN        = 'content-align';
 	public const CONTENT_ALIGN_LEFT   = 'left';
 	public const CONTENT_ALIGN_CENTER = 'center';
@@ -53,10 +59,12 @@ class Content_Columns extends Block_Config {
 									'Cras ut ornare dui, sed venenatis est. Donec euismod in leo quis consequat.',
 									'tribe'
 								),
-								self::COLUMN_CTA     => [
-									'title'  => esc_html__( 'Lorem ipsum', 'tribe' ),
-									'url'    => '#',
-									'target' => '',
+								self::GROUP_CTA      => [
+									self::LINK => [
+										'title'  => esc_html__( 'Lorem ipsum', 'tribe' ),
+										'url'    => '#',
+										'target' => '',
+									],
 								],
 							],
 						],
@@ -76,41 +84,42 @@ class Content_Columns extends Block_Config {
 		//==========================================
 		// Content Fields
 		//==========================================
-		$this->add_section( new Field_Section( self::SECTION_CONTENT, __( 'Content', 'tribe' ), 'accordion' ) )
-			 ->add_field( new Field( self::NAME . '_' . self::TITLE, [
-					 'label' => __( 'Title', 'tribe' ),
+		$this->add_field( new Field( self::NAME . '_' . self::TITLE, [
+					 'label' => esc_html__( 'Title', 'tribe' ),
 					 'name'  => self::TITLE,
 					 'type'  => 'text',
 				 ] )
 			 )->add_field( new Field( self::NAME . '_' . self::LEADIN, [
-					'label' => __( 'Lead in', 'tribe' ),
+					'label' => esc_html__( 'Lead in', 'tribe' ),
 					'name'  => self::LEADIN,
 					'type'  => 'text',
 				] )
 			)->add_field( new Field( self::NAME . '_' . self::DESCRIPTION, [
-					'label'        => __( 'Description', 'tribe' ),
+					'label'        => esc_html__( 'Description', 'tribe' ),
 					'name'         => self::DESCRIPTION,
 					'type'         => 'wysiwyg',
-					'toolbar'      => 'basic',
+					'toolbar'      => Classic_Editor_Formats::MINIMAL,
+					'tabs'         => 'visual',
 					'media_upload' => 0,
 				] )
-			)->add_field( new Field( self::NAME . '_' . self::CTA, [
-				'label' => __( 'Call to Action', 'tribe' ),
-				'name'  => self::CTA,
-				'type'  => 'link',
-			] ) )->add_field( $this->get_links_section() );
+			)->add_field(
+				$this->get_cta_field( self::NAME )
+			);
+
+			$this->add_section( new Field_Section( self::SECTION_COLUMNS, esc_html__( 'Columns', 'tribe' ), 'accordion' ) )
+				->add_field( $this->get_links_section() );
 
 		//==========================================
 		// Setting Fields
 		//==========================================
-		$this->add_section( new Field_Section( self::SECTION_SETTINGS, __( 'Settings', 'tribe' ), 'accordion' ) )
+		$this->add_section( new Field_Section( self::SECTION_SETTINGS, esc_html__( 'Appearance', 'tribe' ), 'accordion' ) )
 			 ->add_field( new Field( self::NAME . '_' . self::CONTENT_ALIGN, [
-				 'label'           => __( 'Content Alignment', 'tribe' ),
+				 'label'           => esc_html__( 'Content Alignment', 'tribe' ),
 				 'type'            => 'image_select',
 				 'name'            => self::CONTENT_ALIGN,
 				 'choices'         => [
-					 self::CONTENT_ALIGN_CENTER => __( 'Center', 'tribe' ),
-					 self::CONTENT_ALIGN_LEFT   => __( 'Left', 'tribe' ),
+					 self::CONTENT_ALIGN_CENTER => esc_html__( 'Center', 'tribe' ),
+					 self::CONTENT_ALIGN_LEFT   => esc_html__( 'Left', 'tribe' ),
 				 ],
 				 'default_value'   => self::CONTENT_ALIGN_CENTER,
 				 'multiple'        => 0,
@@ -124,16 +133,17 @@ class Content_Columns extends Block_Config {
 	}
 
 	/**
-	 * @return Repeater
+	 * @return \Tribe\Libs\ACF\Repeater
 	 */
-	protected function get_links_section() {
+	protected function get_links_section(): Repeater {
 		$group = new Repeater( self::NAME . '_' . self::COLUMNS );
 		$group->set_attributes( [
-			'label'  => __( 'Columns', 'tribe' ),
-			'name'   => self::COLUMNS,
-			'layout' => 'block',
-			'min'    => 1,
-			'max'    => 3,
+			'label'        => esc_html__( 'Columns', 'tribe' ),
+			'name'         => self::COLUMNS,
+			'layout'       => 'block',
+			'min'          => 1,
+			'max'          => 3,
+			'button_label' => esc_html__( 'Add Column', 'tribe' ),
 		] );
 
 		$text = new Field( self::COLUMN_TITLE, [
@@ -146,15 +156,12 @@ class Content_Columns extends Block_Config {
 			'label'        => __( 'Content', 'tribe' ),
 			'name'         => self::COLUMN_CONTENT,
 			'type'         => 'wysiwyg',
-			'toolbar'      => 'basic',
+			'toolbar'      => Classic_Editor_Formats::MINIMAL,
+			'tabs'         => 'visual',
 			'media_upload' => 0,
 		] );
 
-		$cta = new Field( self::COLUMN_CTA, [
-			'label' => __( 'Call to Action', 'tribe' ),
-			'name'  => self::COLUMN_CTA,
-			'type'  => 'link',
-		] );
+		$cta = $this->get_cta_field( self::NAME );
 
 		$group->add_field( $text );
 		$group->add_field( $content );
@@ -162,4 +169,5 @@ class Content_Columns extends Block_Config {
 
 		return $group;
 	}
+
 }

@@ -1,19 +1,20 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components;
 
 class Deferred_Component extends \ArrayObject {
+
 	/**
 	 * @var string
 	 */
 	private $path;
+
 	/**
 	 * @var string|null
 	 */
 	private $name;
 
-	public function __construct( string $path, string $name = null, array $args = [] ) {
+	public function __construct( string $path, ?string $name = null, array $args = [] ) {
 		$this->path = $path;
 		$this->name = $name;
 		parent::__construct( $args );
@@ -38,4 +39,5 @@ class Deferred_Component extends \ArrayObject {
 	public function __toString(): string {
 		return $this->render();
 	}
+
 }

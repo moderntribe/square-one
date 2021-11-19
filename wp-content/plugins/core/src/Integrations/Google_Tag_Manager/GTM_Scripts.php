@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Integrations\Google_Tag_Manager;
 
@@ -7,7 +7,7 @@ use Tribe\Project\Object_Meta\Analytics_Settings;
 class GTM_Scripts {
 
 	/**
-	 * @var Analytics_Settings
+	 * @var \Tribe\Project\Object_Meta\Analytics_Settings
 	 */
 	private $settings;
 
@@ -74,4 +74,5 @@ class GTM_Scripts {
 
 		<?php
 	}
+
 }

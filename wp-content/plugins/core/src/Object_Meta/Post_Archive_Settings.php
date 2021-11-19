@@ -5,6 +5,7 @@ namespace Tribe\Project\Object_Meta;
 use Tribe\Libs\ACF;
 
 class Post_Archive_Settings extends ACF\ACF_Meta_Group {
+
 	public const NAME = 'post_archive_settings';
 
 	public const TITLE       = 'title';
@@ -30,12 +31,11 @@ class Post_Archive_Settings extends ACF\ACF_Meta_Group {
 	}
 
 	private function get_field( string $label, string $name, string $type ): ACF\Field {
-		$field = new ACF\Field( self::NAME . '_' . $name, [
+		return new ACF\Field( self::NAME . '_' . $name, [
 			'label' => $label,
 			'name'  => $name,
 			'type'  => $type,
 		] );
-
-		return $field;
 	}
+
 }

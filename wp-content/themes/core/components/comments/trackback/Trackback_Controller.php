@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\comments\trackback;
 
@@ -8,6 +7,7 @@ use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\comments\Comment_Edit_Link;
 
 class Trackback_Controller extends Abstract_Controller {
+
 	use Comment_Edit_Link;
 
 	public const COMMENT_ID = 'comment_id';
@@ -15,9 +15,9 @@ class Trackback_Controller extends Abstract_Controller {
 	public const ATTRS      = 'attrs';
 	public const LABEL      = 'label';
 
-	private int    $comment_id;
-	private array  $classes;
-	private array  $attrs;
+	private int $comment_id;
+	private array $classes;
+	private array $attrs;
 	private string $label;
 
 	public function __construct( array $args = [] ) {

@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 use \Tribe\Project\Templates\Components\search_form\Search_Form_Controller;
 
@@ -15,9 +14,10 @@ $c = Search_Form_Controller::factory( $args );
 	role="search"
 	method="get"
 	action="<?php echo $c->get_action(); ?>"
+	data-js="search-form"
 >
 
-	<label class="c-search__label" for="<?php echo $c->get_form_id(); ?>">
+	<label class="c-search__label u-visually-hidden" for="<?php echo $c->get_form_id(); ?>">
 		<?php echo $c->get_label(); ?>
 	</label>
 
@@ -27,12 +27,20 @@ $c = Search_Form_Controller::factory( $args );
 		id="<?php echo $c->get_form_id(); ?>"
 		name="s"
 		placeholder="<?php echo $c->get_placeholder(); ?>"
+		data-js="search-form-input"
+		value="<?php echo esc_attr( $c->get_search_value() ); ?>"
 	/>
 
 	<?php get_template_part(
 		'components/button/button',
 		null,
-		$c->get_button_args()
+		$c->get_clear_button_args()
+	); ?>
+
+	<?php get_template_part(
+		'components/button/button',
+		null,
+		$c->get_submit_button_args()
 	); ?>
 
 </form>

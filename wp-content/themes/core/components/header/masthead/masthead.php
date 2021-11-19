@@ -1,5 +1,5 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
+
 use \Tribe\Project\Templates\Components\header\masthead\Masthead_Controller;
 
 $c = Masthead_Controller::factory();
@@ -12,8 +12,6 @@ $c = Masthead_Controller::factory();
 		<?php echo $c->get_logo(); ?>
 
 		<?php get_template_part( 'components/header/navigation/navigation' ); ?>
-
-		<?php get_template_part( 'components/search_form/search_form' ); ?>
 
 	</div>
 

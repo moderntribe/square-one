@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\comments\comments_section;
 
@@ -60,7 +59,10 @@ class Comments_Section_Controller extends Abstract_Controller {
 	/**
 	 * Renders a comment and echos it. This is the callback
 	 * for wp_list_comments(), and is expected to be called
-	 * in the context of an output buffer.
+	 * in the context of an output buffer. The callback is
+	 * called by the start_el method of the walker and
+	 * should not include a closing element. The closing
+	 * element is provided by the end_el method.
 	 *
 	 * @param \WP_Comment $comment
 	 * @param array       $args
@@ -90,6 +92,8 @@ class Comments_Section_Controller extends Abstract_Controller {
 			Comment_Controller::COMMENT_ID => $comment->comment_ID,
 			Comment_Controller::DEPTH      => $depth,
 			Comment_Controller::MAX_DEPTH  => $args['max_depth'],
+			Comment_Controller::STYLE      => $args['style'],
 		] );
 	}
+
 }

@@ -1,9 +1,9 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Theme\Branding;
 
 class Login_Screen {
+
 	/**
 	 * Add Login Logo
 	 *
@@ -44,6 +44,7 @@ class Login_Screen {
 	 * @param string $url
 	 *
 	 * @return string
+	 *
 	 * @filter login_headerurl
 	 */
 	public function customize_login_header_url( $url ): string {
@@ -56,9 +57,11 @@ class Login_Screen {
 	 * @param string $name
 	 *
 	 * @return string
+	 *
 	 * @filter login_headertext
 	 */
 	public function customize_login_header_title( $name ): string {
 		return get_bloginfo( 'name' );
 	}
+
 }

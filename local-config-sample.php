@@ -23,13 +23,17 @@
  */
 define( 'WP_ENVIRONMENT_TYPE', 'development' );
 
-// Fallback for older environments.
-define( 'ENVIRONMENT', 'DEV' );
-
 /*
  * React dev
  */
 define( 'HMR_DEV', false );
+
+/*
+ * Theme service worker
+ * 
+ * If your project needs to make use of the theme service worker, enable it here.
+ */
+// define( 'ENABLE_THEME_SERVICE_WORKER', true );
 
 /*
  * Panels

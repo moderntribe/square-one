@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\blocks\buttons;
 
@@ -9,6 +8,7 @@ use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\link\Link_Controller;
 
 class Buttons_Block_Controller extends Abstract_Controller {
+
 	public const CLASSES = 'classes';
 	public const ATTRS   = 'attrs';
 	public const BUTTONS = 'links';
@@ -44,7 +44,7 @@ class Buttons_Block_Controller extends Abstract_Controller {
 	 */
 	protected function required(): array {
 		return [
-			self::CLASSES  => [ 'b-buttons' ], // Note: This block does not use `c-block` intentionally.
+			self::CLASSES => [ 'b-buttons' ], // Note: This block does not use `c-block` intentionally.
 		];
 	}
 
@@ -62,33 +62,29 @@ class Buttons_Block_Controller extends Abstract_Controller {
 		return Markup_Utils::concat_attrs( $this->attrs );
 	}
 
+
 	/**
 	 * @return array
 	 */
 	public function get_buttons(): array {
-		if ( empty( $this->buttons ) ) {
+		$rows = array_filter( $this->buttons, static function ( $row ) {
+			return array_key_exists( 'g-cta', $row );
+		} );
+
+		if ( empty( $rows ) ) {
 			return [];
 		}
 
-		return array_map( function ( $button ) {
-			$link = wp_parse_args( $button[ Buttons::BUTTON_LINK ], [
-				'title'  => '',
-				'url'    => '',
-				'target' => '',
-			] );
-
-			if ( empty( $link['url'] ) ) {
-				return [];
-			}
-
+		return array_map( static function ( $row ) {
 			return [
-				Link_Controller::URL        => $link['url'],
-				Link_Controller::CONTENT    => $link['title'] ?? $link['url'],
-				Link_Controller::TARGET     => $link['target'],
-				Link_Controller::ARIA_LABEL => $button[ Buttons::BUTTON_ARIA_LABEL ] ?? '',
-				Link_Controller::CLASSES    => $this->get_button_classes( $button ),
+				Link_Controller::URL            => $row['g-cta']['link']['url'] ?? '',
+				Link_Controller::CONTENT        => $row['g-cta']['link']['title'] ?? '',
+				Link_Controller::TARGET         => $row['g-cta']['link']['target'] ?? '',
+				Link_Controller::ADD_ARIA_LABEL => $row['g-cta']['add_aria_label'] ?? '',
+				Link_Controller::ARIA_LABEL     => $row['g-cta']['aria_label'] ?? '',
+				Link_Controller::CLASSES        => [ 'b-links__list-link' ],
 			];
-		}, $this->buttons );
+		}, $rows );
 	}
 
 	private function get_button_classes( $button ): array {

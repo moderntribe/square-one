@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Theme\Config;
 
@@ -6,6 +6,7 @@ class Supports {
 
 	/**
 	 * @return void
+	 *
 	 * @action after_setup_theme
 	 */
 	public function add_theme_supports() {
@@ -13,6 +14,7 @@ class Supports {
 		$this->support_title_tag();
 		$this->support_responsive_embeds();
 		$this->support_html5();
+		$this->remove_support_block_widgets();
 	}
 
 	/**
@@ -53,4 +55,12 @@ class Supports {
 			'style',
 		] );
 	}
+
+	/**
+	 * Disable Block Editor Widget Support
+	 */
+	private function remove_support_block_widgets() {
+		remove_theme_support( 'widgets-block-editor' );
+	}
+
 }

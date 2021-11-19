@@ -1,5 +1,4 @@
-<?php
-
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Blocks\Types\Buttons;
 
@@ -7,6 +6,7 @@ use Tribe\Project\Blocks\Types\Base_Model;
 use Tribe\Project\Templates\Components\blocks\buttons\Buttons_Block_Controller;
 
 class Buttons_Model extends Base_Model {
+
 	/**
 	 * @return array
 	 */
@@ -17,4 +17,5 @@ class Buttons_Model extends Base_Model {
 			Buttons_Block_Controller::BUTTONS => $this->get( Buttons::BUTTONS, [] ),
 		];
 	}
+
 }

@@ -22,7 +22,7 @@ To access the core container, call `tribe_project()->container()`
 
 Many classes—including all post types classes (which extend `Post_Object`) and taxonomy classes
 (which extend `Term_Object` )—contain a static `factory()` method.  This is used to retrieve
-an specific instance of a class.  Typically an id is passed to retrieve it.
+a specific instance of a class.  Typically an id is passed to retrieve it.
 
 ```php
 $story = Feed_Story::factory( $post_id );
@@ -159,4 +159,23 @@ determined. Provide a hint with a preceeding docblock, where appropriate.
 ```php
 /** @var Something $something */
 $something = $container->get( 'my.string' );
+```
+
+Even simpler, you can add a `.phpstorm.meta.php` in the root of the project to enable PHPstorm to assume which class is being loaded. 
+This is much cleaner and simpler. Note, it will only support full `Class::class` resolution and not a container reference
+like `foo.bar`.
+
+
+```php
+<?php
+// .phpstorm.meta.php
+namespace PHPSTORM_META
+{
+    override(\Psr\Container\ContainerInterface::get(0), map([
+        '' => '@',
+    ]));
+    override(\DI\Container::get(0), map([
+        '' => '@',
+    ]));
+}
 ```

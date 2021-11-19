@@ -1,5 +1,4 @@
-<?php
-declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Project\Templates\Components\pagination\loop;
 
@@ -9,51 +8,62 @@ use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Theme\Pagination_Util;
 
 class Loop_Pagination_Controller extends Abstract_Controller {
-	public const CLASSES      = 'classes';
-	public const ATTRS        = 'attrs';
-	public const LIST_CLASSES = 'list_classes';
-	public const LIST_ATTRS   = 'list_attrs';
-	public const ITEM_CLASSES = 'item_classes';
-	public const ITEM_ATTRS   = 'item_attrs';
-	public const LINKS        = 'links';
 
-	private array $classes;
+	public const ATTRS        = 'attrs';
+	public const CLASSES      = 'classes';
+	public const ITEM_ATTRS   = 'item_attrs';
+	public const ITEM_CLASSES = 'item_classes';
+	public const LINKS        = 'links';
+	public const LIST_ATTRS   = 'list_attrs';
+	public const LIST_CLASSES = 'list_classes';
+
+	/**
+	 * @var string[]
+	 */
 	private array $attrs;
-	private array $list_classes;
-	private array $list_attrs;
-	private array $item_classes;
+
+	/**
+	 * @var string[]
+	 */
+	private array $classes;
+
+	/**
+	 * @var string[]
+	 */
 	private array $item_attrs;
+
+	/**
+	 * @var string[]
+	 */
+	private array $item_classes;
+
+	/**
+	 * @var string[]
+	 */
 	private array $links;
 
-	public function __construct( array $args = [] ) {
+	/**
+	 * @var string[]
+	 */
+	private array $list_attrs;
+
+	/**
+	 * @var string[]
+	 */
+	private array $list_classes;
+
+	private Pagination_Util $pagination;
+
+	public function __construct( Pagination_Util $pagination, array $args = [] ) {
 		$args = $this->parse_args( $args );
 
-		$this->classes      = (array) $args[ self::CLASSES ];
 		$this->attrs        = (array) $args[ self::ATTRS ];
-		$this->list_classes = (array) $args[ self::LIST_CLASSES ];
-		$this->list_attrs   = (array) $args[ self::LIST_ATTRS ];
-		$this->item_classes = (array) $args[ self::ITEM_CLASSES ];
+		$this->classes      = (array) $args[ self::CLASSES ];
 		$this->item_attrs   = (array) $args[ self::ITEM_ATTRS ];
-	}
-
-	protected function defaults(): array {
-		return [
-			self::CLASSES      => [],
-			self::ATTRS        => [],
-			self::LIST_CLASSES => [],
-			self::LIST_ATTRS   => [],
-			self::ITEM_CLASSES => [],
-			self::ITEM_ATTRS   => [],
-		];
-	}
-
-	protected function required(): array {
-		return [
-			self::CLASSES      => [ 'c-pagination', 'c-pagination--loop' ],
-			self::ATTRS        => [ 'aria-label' => esc_attr__( 'Loop Pagination', 'tribe' ) ],
-			self::LIST_CLASSES => [ 'c-pagination__list' ],
-			self::ITEM_CLASSES => [ 'c-pagination__item' ],
-		];
+		$this->item_classes = (array) $args[ self::ITEM_CLASSES ];
+		$this->list_attrs   = (array) $args[ self::LIST_ATTRS ];
+		$this->list_classes = (array) $args[ self::LIST_CLASSES ];
+		$this->pagination   = $pagination;
 	}
 
 	public function get_classes(): string {
@@ -88,15 +98,34 @@ class Loop_Pagination_Controller extends Abstract_Controller {
 		return $this->links;
 	}
 
+	protected function defaults(): array {
+		return [
+			self::ATTRS        => [],
+			self::CLASSES      => [],
+			self::ITEM_ATTRS   => [],
+			self::ITEM_CLASSES => [],
+			self::LIST_ATTRS   => [],
+			self::LIST_CLASSES => [],
+		];
+	}
+
+	protected function required(): array {
+		return [
+			self::ATTRS        => [ 'aria-label' => esc_attr__( 'Loop Pagination', 'tribe' ) ],
+			self::CLASSES      => [ 'c-pagination', 'c-pagination--loop' ],
+			self::ITEM_CLASSES => [ 'c-pagination__item' ],
+			self::LIST_CLASSES => [ 'c-pagination__list' ],
+		];
+	}
+
 	private function build_links(): array {
-		$pagination = new Pagination_Util();
-		$numbers    = $pagination->numbers( 2, true, false, false );
+		$numbers = $this->pagination->numbers( 2, true, false, false );
 
 		if ( empty( $numbers ) ) {
 			return [];
 		}
 
-		return array_map( function ( $number ) {
+		return array_map( static function ( $number ) {
 			$classes = $number['classes'];
 			if ( $number['active'] ) {
 				$classes[] = 'active';
@@ -117,4 +146,5 @@ class Loop_Pagination_Controller extends Abstract_Controller {
 			];
 		}, $numbers );
 	}
+
 }

@@ -37,4 +37,19 @@ module.exports = {
 			`${ pkg.square1.paths.core_admin_js_src }**/*`,
 		], pkg.square1.paths.core_admin_js_src );
 	},
+	components() {
+		return lint( [
+			`${ pkg.square1.paths.core_theme_components }**/*.js`,
+		], pkg.square1.paths.core_theme_components );
+	},
+	routes() {
+		return lint( [
+			`${ pkg.square1.paths.core_theme_routes }**/*.js`,
+		], pkg.square1.paths.core_theme_routes );
+	},
+	integrations() {
+		return lint( [
+			`${ pkg.square1.paths.core_theme_integrations }**/*.js`,
+		], pkg.square1.paths.core_theme_integrations );
+	}
 };

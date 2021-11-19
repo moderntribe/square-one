@@ -1,13 +1,20 @@
-<?php
+<?php declare(strict_types=1);
+
 /**
  * Base environment configuration, loaded for all environments (including automated tests)
  */
 
-function tribe_isSSL() {
-	return ( ! empty( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] !== 'off' );
+function tribe_isSSL(): bool {
+	return ! empty( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] !== 'off';
 }
 
-function tribe_getenv( $name, $default = null ) {
+/**
+ * @param  string  $name
+ * @param  mixed   $default
+ *
+ * @return array|int|mixed|string|null
+ */
+function tribe_getenv( string $name, $default = null ) {
 	$env = getenv( $name );
 	if ( $env === false ) {
 		return $default;
@@ -19,7 +26,7 @@ function tribe_getenv( $name, $default = null ) {
 	}
 
 	if ( is_numeric( $env ) ) {
-		return ( $env - 0 );
+		return  $env - 0;
 	}
 
 	return $env;
@@ -28,7 +35,7 @@ function tribe_getenv( $name, $default = null ) {
 
 if ( file_exists( __DIR__ . '/.env' ) ) {
 	require_once __DIR__ . '/vendor/autoload.php';
-	$dotenv = Dotenv\Dotenv::create( __DIR__ );
+	$dotenv = Dotenv\Dotenv::createUnsafeImmutable( __DIR__ );
 	$dotenv->load();
 }
 
@@ -36,13 +43,27 @@ if ( file_exists( __DIR__ . '/.env' ) ) {
 // Load build process timestamp
 // ==============================================================
 
-if ( file_exists( dirname( __FILE__ ) . '/build-process.php' ) ) {
-	include( dirname( __FILE__ ) . '/build-process.php' );
+if ( file_exists( __DIR__ . '/build-process.php' ) ) {
+	include __DIR__ . '/build-process.php';
 }
 
 
 if ( file_exists( __DIR__ . '/local-config.php' ) ) {
 	include __DIR__ . '/local-config.php';
+}
+
+// Support a DATABASE_URL env var. Many PaaS like Heroku often provide credentials in this manner.
+if ( ! defined( 'DB_NAME' ) && tribe_getenv( 'DATABASE_URL', false ) ) {
+	$DSN = parse_url( tribe_getenv( 'DATABASE_URL' ) );
+	// ** MySQL settings - You can get this info from your web host ** //
+	/** The name of the database for WordPress */
+	define( 'DB_NAME', substr( $DSN['path'], 1 ) );
+	/** MySQL database username */
+	define( 'DB_USER', $DSN['user'] );
+	/** MySQL database password */
+	define( 'DB_PASSWORD', $DSN['pass'] );
+	/** MySQL hostname */
+	define( 'DB_HOST', $DSN['host'] );
 }
 
 
@@ -51,17 +72,18 @@ if ( file_exists( __DIR__ . '/local-config.php' ) ) {
 // ==============================================================
 
 // Provide fallback if ENVIRONMENT is already present.
-if ( defined( 'ENVIRONMENT' ) ) {
+if ( defined( 'ENVIRONMENT' ) && ! defined( 'WP_ENVIRONMENT_TYPE' ) ) {
 	define( 'WP_ENVIRONMENT_TYPE', strtolower( ENVIRONMENT ) );
 }
 
 if ( ! defined( 'WP_ENVIRONMENT_TYPE' ) ) {
-	define( 'WP_ENVIRONMENT_TYPE', 'production');
+	define( 'WP_ENVIRONMENT_TYPE', 'development' );
 }
 
 if ( ! isset( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) ) {
 	$_SERVER['HTTP_X_FORWARDED_PROTO'] = '';
 }
+
 if ( ! isset( $_SERVER['HTTP_HOST'] ) ) {
 	$_SERVER['HTTP_HOST'] = 'local-cli';
 }
@@ -117,8 +139,8 @@ $config_defaults = [
 	'NONCE_SALT'                     => '%%NONCE_SALT%%',
 
 	// Security Directives
-	'DISALLOW_FILE_EDIT'             => true,
-	'DISALLOW_FILE_MODS'             => true,
+	'DISALLOW_FILE_EDIT'             => tribe_getenv( 'DISALLOW_FILE_EDIT', true ),
+	'DISALLOW_FILE_MODS'             => tribe_getenv( 'DISALLOW_FILE_MODS', true ),
 	'FORCE_SSL_LOGIN'                => tribe_getenv( 'FORCE_SSL_LOGIN', true ),
 	'FORCE_SSL_ADMIN'                => tribe_getenv( 'FORCE_SSL_ADMIN', true ),
 
@@ -181,9 +203,11 @@ if ( defined( 'WP_ENVIRONMENT_TYPE' ) && WP_ENVIRONMENT_TYPE === 'production' ) 
 // ==============================================================
 
 foreach ( $config_defaults as $config_default_key => $config_default_value ) {
-	if ( ! defined( $config_default_key ) ) {
-		define( $config_default_key, $config_default_value );
+	if ( defined( $config_default_key ) ) {
+		continue;
 	}
+
+	define( $config_default_key, $config_default_value );
 }
 
 // ==============================================================
@@ -204,7 +228,7 @@ if ( empty( $GLOBALS['memcached_servers'] ) ) {
 // ==============================================================
 
 if ( ! defined( 'WP_DEBUG_DISPLAY' ) || ! WP_DEBUG_DISPLAY ) {
-	ini_set( 'display_errors', 0 );
+	ini_set( 'display_errors', '0' );
 }
 
 if ( defined( 'WP_CLI' ) && WP_CLI ) {
@@ -214,6 +238,7 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
 			if ( WP_DEBUG_LOG && is_string( WP_DEBUG_LOG ) ) {
 				ini_set( 'error_log', WP_DEBUG_LOG );
 			}
+
 			return $ret;
 		},
 		11
