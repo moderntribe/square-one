@@ -112,7 +112,6 @@ class Core {
 		'\Tribe\Libs\Whoops\Whoops_Subscriber',
 	];
 
-
 	public function init( string $plugin_path ): void {
 		$this->init_container( $plugin_path );
 	}

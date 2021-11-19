@@ -7,7 +7,6 @@ class Listener extends \Tribe\Libs\Cache\Listener {
 	/**
 	 * A post has been created, updated, or trashed
 	 *
-	 *
 	 * @param int    $post_id
 	 * @param object $post
 	 *
@@ -27,18 +26,16 @@ class Listener extends \Tribe\Libs\Cache\Listener {
 	/**
 	 * A p2p relation has been created.
 	 *
-	 *
 	 * @param $p2p_id
 	 *
 	 * @return void
 	 */
-	public function p2p_created_connection($p2p_id): void {
+	public function p2p_created_connection( $p2p_id ): void {
 		$this->cache->flush_group( 'p2p_relationships' );
 	}
 
 	/**
 	 * One or more p2p relations have been deleted.
-	 *
 	 *
 	 * @param $p2p_ids
 	 *

@@ -149,8 +149,8 @@ class Content_Loop_Controller extends Abstract_Controller {
 				];
 
 			// CASE: If not Inline Card Style and is the featured layout
-			
-			if ( $layout !== Card_Controller::STYLE_INLINE || $this->layout !== 'layout_feature') {
+
+			if ( $layout !== Card_Controller::STYLE_INLINE || $this->layout !== 'layout_feature' ) {
 				$card_cta =
 					[
 						Link_Controller::CONTENT => __( 'Read More', 'tribe' ),
@@ -326,7 +326,7 @@ class Content_Loop_Controller extends Abstract_Controller {
 		elseif ( $this->layout === Content_Loop_Block::LAYOUT_COLUMNS ) {
 			$this->content_classes[] = 'g-3-up';
 		}
-		
+
 		return Markup_Utils::class_attribute( $this->content_classes );
 	}
 

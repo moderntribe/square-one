@@ -10,9 +10,9 @@ class Spacer extends Block_Config {
 
 	public const NAME = 'spacer';
 
-	public const SIZE            = 'size';
-	public const DEFAULT         = 'default';
-	public const LARGE = 'large';
+	public const SIZE    = 'size';
+	public const DEFAULT = 'default';
+	public const LARGE   = 'large';
 
 	public const DISPLAY_OPTIONS = 'display_options';
 	public const ALL_SCREENS     = 'all-screens';
