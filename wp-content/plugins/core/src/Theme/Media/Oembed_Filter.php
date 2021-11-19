@@ -17,13 +17,11 @@ class Oembed_Filter {
 	}
 
 	/**
-	 * 	 * Get custom video component markup.
-	 * 	 *
+	 * Get custom video component markup.
 	 *
 	 * @param $html
 	 * @param $data
 	 * @param $url
-	 * @param false|object $data
 	 *
 	 * @filter oembed_dataparse 999 3
 	 *
@@ -200,14 +198,13 @@ class Oembed_Filter {
 	}
 
 	/**
-	 * 	 * Store the front-end HTML for a URL
-	 * 	 * in the options table
-	 * 	 *
-	 * 	 * WordPress will regenerate the oembed cache
-	 * 	 * whenever its cache expires. When it does so,
-	 * 	 * this filter will run again and update at the
-	 * 	 * same time.
-	 * 	 *
+	 * Store the front-end HTML for a URL
+	 * in the options table
+	 *
+	 * WordPress will regenerate the oembed cache
+	 * whenever its cache expires. When it does so,
+	 * this filter will run again and update at the
+	 * same time.
 	 *
 	 * @param string $frontend_html
 	 * @param string $url

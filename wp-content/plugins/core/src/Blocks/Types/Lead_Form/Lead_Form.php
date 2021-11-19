@@ -36,7 +36,7 @@ class Lead_Form extends Block_Config implements Cta_Field {
 	public const BACKGROUND_DARK    = 'background_dark';
 
 	/**
-	 * 	 * Register the block
+	 * Register the block
 	 *
 	 * @return void
 	 */
@@ -76,7 +76,7 @@ class Lead_Form extends Block_Config implements Cta_Field {
 	}
 
 	/**
-	 * 	 * Register Fields for block
+	 * Register Fields for block
 	 *
 	 * @return void
 	 */

@@ -33,7 +33,7 @@ class Content_Columns extends Block_Config implements Cta_Field {
 	public const CONTENT_ALIGN_CENTER = 'center';
 
 	/**
-	 * 	 * Add our block
+	 * Add our block
 	 *
 	 * @return void
 	 */
@@ -76,7 +76,7 @@ class Content_Columns extends Block_Config implements Cta_Field {
 	}
 
 	/**
-	 * 	 * Add Fields
+	 * Add Fields
 	 *
 	 * @return void
 	 */

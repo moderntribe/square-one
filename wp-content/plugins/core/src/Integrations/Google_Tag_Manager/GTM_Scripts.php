@@ -16,8 +16,7 @@ class GTM_Scripts {
 	}
 
 	/**
-	 * 	 *  Google Tag Manager (head tag)
-	 * 	 *
+	 * Google Tag Manager (head tag)
 	 *
 	 * @action wp_head
 	 *

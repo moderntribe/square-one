@@ -29,7 +29,7 @@ class Quote extends Block_Config {
 	public const IMAGE                      = 'image';
 
 	/**
-	 * 	 * Register the block
+	 * Register the block
 	 *
 	 * @return void
 	 */
@@ -64,7 +64,7 @@ class Quote extends Block_Config {
 	}
 
 	/**
-	 * 	 * Register Fields for block
+	 * Register Fields for block
 	 *
 	 * @return void
 	 */

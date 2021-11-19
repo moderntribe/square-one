@@ -33,7 +33,7 @@ class Media_Text extends Block_Config implements Cta_Field {
 	public const MEDIA_CENTER  = 'center';
 
 	/**
-	 * 	 * Register the block
+	 * Register the block
 	 *
 	 * @return void
 	 */
@@ -79,7 +79,7 @@ class Media_Text extends Block_Config implements Cta_Field {
 	}
 
 	/**
-	 * 	 * Register Fields for block
+	 * Register Fields for block
 	 *
 	 * @return void
 	 */

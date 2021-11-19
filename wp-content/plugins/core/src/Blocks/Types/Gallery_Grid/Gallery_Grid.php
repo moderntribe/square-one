@@ -44,7 +44,7 @@ class Gallery_Grid extends Block_Config {
 	}
 
 	/**
-	 * 	 * Register Fields for block
+	 * Register Fields for block
 	 *
 	 * @return void
 	 */

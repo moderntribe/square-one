@@ -31,7 +31,7 @@ class Tabs extends Block_Config implements Cta_Field {
 	public const TAB_CONTENT  = 'tab_content';
 
 	/**
-	 * 	 * Register the block
+	 * Register the block
 	 *
 	 * @return void
 	 */
@@ -92,7 +92,7 @@ class Tabs extends Block_Config implements Cta_Field {
 	}
 
 	/**
-	 * 	 * Register Fields for block
+	 * Register Fields for block
 	 *
 	 * @return void
 	 */

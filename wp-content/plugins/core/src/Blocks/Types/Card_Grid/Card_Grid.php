@@ -34,7 +34,7 @@ class Card_Grid extends Block_Config implements Cta_Field {
 	public const LAYOUT_INLINE    = 'inline';
 
 	/**
-	 * 	 * Register the block
+	 * Register the block
 	 *
 	 * @return void
 	 */
@@ -75,7 +75,7 @@ class Card_Grid extends Block_Config implements Cta_Field {
 	}
 
 	/**
-	 * 	 * Register Fields for block
+	 * Register Fields for block
 	 *
 	 * @return void
 	 */

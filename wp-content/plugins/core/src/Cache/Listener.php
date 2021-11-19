@@ -5,8 +5,8 @@ namespace Tribe\Project\Cache;
 class Listener extends \Tribe\Libs\Cache\Listener {
 
 	/**
-	 * 	 * A post has been created, updated, or trashed
-	 * 	 *
+	 * A post has been created, updated, or trashed
+	 *
 	 *
 	 * @param int    $post_id
 	 * @param object $post
@@ -25,8 +25,8 @@ class Listener extends \Tribe\Libs\Cache\Listener {
 	}
 
 	/**
-	 * 	 * A p2p relation has been created.
-	 * 	 *
+	 * A p2p relation has been created.
+	 *
 	 *
 	 * @param $p2p_id
 	 *
@@ -37,8 +37,8 @@ class Listener extends \Tribe\Libs\Cache\Listener {
 	}
 
 	/**
-	 * 	 * One or more p2p relations have been deleted.
-	 * 	 *
+	 * One or more p2p relations have been deleted.
+	 *
 	 *
 	 * @param $p2p_ids
 	 *
@@ -49,7 +49,7 @@ class Listener extends \Tribe\Libs\Cache\Listener {
 	}
 
 	/**
-	 * 	 * A Menu has been edited or repositioned
+	 * A Menu has been edited or repositioned
 	 *
 	 * @return void
 	 */

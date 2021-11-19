@@ -29,7 +29,7 @@ class Hero extends Block_Config implements Cta_Field {
 	public const LAYOUT_CENTER      = 'center';
 
 	/**
-	 * 	 * Register the block
+	 * Register the block
 	 *
 	 * @return void
 	 */
@@ -70,7 +70,7 @@ class Hero extends Block_Config implements Cta_Field {
 	}
 
 	/**
-	 * 	 * Register Fields for block
+	 * Register Fields for block
 	 *
 	 * @return void
 	 */

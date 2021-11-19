@@ -18,7 +18,7 @@ class Supports {
 	}
 
 	/**
-	 * 	 * Supports: enable Featured Images
+	 * Supports: enable Featured Images
 	 *
 	 * @return void
 	 */
@@ -27,7 +27,7 @@ class Supports {
 	}
 
 	/**
-	 * 	 * Supports: enable Document Title Tag
+	 * Supports: enable Document Title Tag
 	 *
 	 * @return void
 	 */
@@ -40,7 +40,7 @@ class Supports {
 	}
 
 	/**
-	 * 	 * Support: switch core WordPress markup to output valid HTML5
+	 * Support: switch core WordPress markup to output valid HTML5
 	 *
 	 * @return void
 	 */
