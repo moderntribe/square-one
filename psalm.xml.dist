@@ -1,13 +1,21 @@
 <?xml version="1.0"?>
 <psalm
     throwExceptionOnError="0"
+    errorLevel="5"
+    resolveFromConfigFile="true"
     hideExternalErrors="true"
     autoloader="vendor/autoload.php"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://getpsalm.org/schema/config"
+    xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
     errorBaseline="psalm-baseline.xml"
 >
     <projectFiles>
         <directory name="wp-content/plugins/core" />
         <directory name="wp-content/themes/core" />
+        <ignoreFiles>
+            <directory name="vendor" />
+        </ignoreFiles>
     </projectFiles>
     <plugins>
         <pluginClass xmlns="https://getpsalm.org/schema/config" class="PsalmWordPress\Plugin"/>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="4.7.1@cd53e047a58f71f646dd6bf45476076ab07b5d44">
+<files psalm-version="4.12.0@e42bc4a23f67acba28a23bb09c348e2ff38a1d87">
   <file src="wp-content/plugins/core/core.php">
     <UndefinedConstant occurrences="4">
       <code>ABSPATH</code>
@@ -7,352 +7,44 @@
       <code>ABSPATH</code>
       <code>ABSPATH</code>
     </UndefinedConstant>
-    <UnresolvableInclude occurrences="5">
-      <code>require_once ABSPATH . '../vendor/autoload.php'</code>
-      <code>require_once ABSPATH . 'vendor/autoload.php'</code>
-      <code>require_once trailingslashit( __DIR__ ) . 'functions/pluggable.php'</code>
-      <code>require_once trailingslashit( __DIR__ ) . 'functions/templates.php'</code>
-      <code>require_once trailingslashit(__DIR__ ) . 'vendor/autoload.php'</code>
-    </UnresolvableInclude>
   </file>
   <file src="wp-content/plugins/core/functions/panels.php">
-    <DocblockTypeContradiction occurrences="8">
-      <code>$options[ 'force_alt_label' ]</code>
-      <code>true === $options[ 'data_livetext' ]</code>
-      <code>true === $options[ 'data_livetext' ]</code>
-      <code>true === $options[ 'data_livetext' ]</code>
-      <code>true === $options[ 'data_livetext' ]</code>
-      <code>true === $options[ 'data_livetext' ]</code>
-      <code>true === $options[ 'data_livetext' ]</code>
-      <code>true === $options[ 'data_livetext' ]</code>
-    </DocblockTypeContradiction>
-    <MissingReturnType occurrences="3">
-      <code>the_panel_description</code>
-      <code>the_panel_link</code>
-      <code>the_panel_title</code>
-    </MissingReturnType>
-    <PossiblyFalseArgument occurrences="1">
-      <code>$options[ 'data_autop' ]</code>
-    </PossiblyFalseArgument>
-    <PossiblyNullArgument occurrences="2">
-      <code>$content</code>
-      <code>$title</code>
-    </PossiblyNullArgument>
-    <RedundantConditionGivenDocblockType occurrences="4">
-      <code>$link['label']</code>
-      <code>''</code>
-      <code>''</code>
-      <code>empty( $options[ 'css_class' ] )</code>
-    </RedundantConditionGivenDocblockType>
+    <InvalidArgument occurrences="1">
+      <code>$options['data_autop']</code>
+    </InvalidArgument>
+    <NullArgument occurrences="2">
+      <code>$options['data_name']</code>
+      <code>$options['data_name']</code>
+    </NullArgument>
     <UndefinedFunction occurrences="3">
       <code>is_panel_preview()</code>
       <code>is_panel_preview()</code>
       <code>is_panel_preview()</code>
     </UndefinedFunction>
   </file>
-  <file src="wp-content/plugins/core/src/Assets/Admin/JS_Config.php">
-    <MissingPropertyType occurrences="1">
-      <code>$data</code>
-    </MissingPropertyType>
-    <MissingReturnType occurrences="1">
-      <code>get_data</code>
-    </MissingReturnType>
-  </file>
-  <file src="wp-content/plugins/core/src/Assets/Admin/Scripts.php">
-    <InvalidScalarArgument occurrences="1">
-      <code>$timestamp ?? $asset['version']</code>
-    </InvalidScalarArgument>
-  </file>
-  <file src="wp-content/plugins/core/src/Assets/Admin/Styles.php">
-    <InvalidScalarArgument occurrences="1">
-      <code>$timestamp ?? $asset['version']</code>
-    </InvalidScalarArgument>
-  </file>
-  <file src="wp-content/plugins/core/src/Assets/Assets_Subscriber.php">
-    <MissingClosureParamType occurrences="1">
-      <code>$template</code>
-    </MissingClosureParamType>
-    <MissingClosureReturnType occurrences="1">
-      <code>function ( $template ) {</code>
-    </MissingClosureReturnType>
-  </file>
-  <file src="wp-content/plugins/core/src/Assets/Build_Parser.php">
-    <MissingClosureParamType occurrences="2">
-      <code>$asset</code>
-      <code>$asset</code>
-    </MissingClosureParamType>
-    <MissingClosureReturnType occurrences="2">
-      <code>function ( $asset ) use ( $theme_uri ) {</code>
-      <code>function ( $asset ) use ( $theme_uri ) {</code>
-    </MissingClosureReturnType>
-    <MissingPropertyType occurrences="3">
-      <code>$localize</code>
-      <code>$scripts</code>
-      <code>$styles</code>
-    </MissingPropertyType>
-    <UnresolvableInclude occurrences="2">
-      <code>include( $this-&gt;css_build_file() )</code>
-      <code>include( $this-&gt;js_build_file() )</code>
-    </UnresolvableInclude>
-  </file>
-  <file src="wp-content/plugins/core/src/Assets/Theme/JS_Config.php">
-    <MissingPropertyType occurrences="1">
-      <code>$data</code>
-    </MissingPropertyType>
-    <MissingReturnType occurrences="1">
-      <code>get_data</code>
-    </MissingReturnType>
-  </file>
-  <file src="wp-content/plugins/core/src/Assets/Theme/Legacy_Check.php">
-    <MissingParamType occurrences="1">
-      <code>$unsupported_browser_path</code>
-    </MissingParamType>
-  </file>
-  <file src="wp-content/plugins/core/src/Assets/Theme/Scripts.php">
-    <InvalidScalarArgument occurrences="2">
-      <code>$timestamp ?? $asset['version']</code>
-      <code>time()</code>
-    </InvalidScalarArgument>
-  </file>
-  <file src="wp-content/plugins/core/src/Assets/Theme/Styles.php">
-    <InvalidScalarArgument occurrences="1">
-      <code>$timestamp ?? $asset['version']</code>
-    </InvalidScalarArgument>
-  </file>
-  <file src="wp-content/plugins/core/src/Blocks/Block_Style_Override.php">
-    <InvalidArgument occurrences="1">
-      <code>$handle</code>
-    </InvalidArgument>
+  <file src="wp-content/plugins/core/src/Admin/Admin_Subscriber.php">
+    <HookNotFound occurrences="1"/>
   </file>
   <file src="wp-content/plugins/core/src/Blocks/Blocks_Subscriber.php">
-    <HookNotFound occurrences="2"/>
-    <MissingClosureParamType occurrences="3">
-      <code>$args</code>
-      <code>$post</code>
-      <code>$types</code>
-    </MissingClosureParamType>
-    <MissingClosureReturnType occurrences="1">
-      <code>function ( $types, $post ) {</code>
-    </MissingClosureReturnType>
-  </file>
-  <file src="wp-content/plugins/core/src/Blocks/Types/Accordion/Accordion.php">
-    <PropertyNotSetInConstructor occurrences="1">
-      <code>Accordion</code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="wp-content/plugins/core/src/Blocks/Types/Accordion/Accordion_Model.php">
-    <PossiblyInvalidArgument occurrences="1">
-      <code>$this-&gt;get( Accordion::CTA, [] )</code>
-    </PossiblyInvalidArgument>
-    <PossiblyInvalidIterator occurrences="1">
-      <code>$rows</code>
-    </PossiblyInvalidIterator>
+    <HookNotFound occurrences="3"/>
   </file>
   <file src="wp-content/plugins/core/src/Blocks/Types/Base_Model.php">
-    <MissingParamType occurrences="1">
-      <code>$block</code>
-    </MissingParamType>
     <UndefinedFunction occurrences="1">
       <code>get_field( $key )</code>
     </UndefinedFunction>
   </file>
-  <file src="wp-content/plugins/core/src/Blocks/Types/Buttons/Buttons.php">
-    <PropertyNotSetInConstructor occurrences="1">
-      <code>Buttons</code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="wp-content/plugins/core/src/Blocks/Types/Card_Grid/Card_Grid.php">
-    <PropertyNotSetInConstructor occurrences="1">
-      <code>Card_Grid</code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="wp-content/plugins/core/src/Blocks/Types/Card_Grid/Card_Grid_Model.php">
-    <PossiblyInvalidArgument occurrences="1">
-      <code>$this-&gt;get( Card_Grid::CTA, [] )</code>
-    </PossiblyInvalidArgument>
-  </file>
-  <file src="wp-content/plugins/core/src/Blocks/Types/Content_Columns/Content_Columns.php">
-    <PropertyNotSetInConstructor occurrences="1">
-      <code>Content_Columns</code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="wp-content/plugins/core/src/Blocks/Types/Content_Columns/Content_Columns_Model.php">
-    <PossiblyInvalidArgument occurrences="1">
-      <code>$this-&gt;get( Content_Columns::CTA, [] )</code>
-    </PossiblyInvalidArgument>
-    <PossiblyInvalidIterator occurrences="1">
-      <code>$rows</code>
-    </PossiblyInvalidIterator>
-  </file>
-  <file src="wp-content/plugins/core/src/Blocks/Types/Content_Loop/Content_Loop.php">
-    <PropertyNotSetInConstructor occurrences="1">
-      <code>Content_Loop</code>
-    </PropertyNotSetInConstructor>
-    <TooManyArguments occurrences="1">
-      <code>__( 'content', 'loop', 'tribe' )</code>
-    </TooManyArguments>
-  </file>
-  <file src="wp-content/plugins/core/src/Blocks/Types/Content_Loop/Content_Loop_Model.php">
-    <PossiblyInvalidArgument occurrences="1">
-      <code>$this-&gt;get( Content_Loop::CTA, [] )</code>
-    </PossiblyInvalidArgument>
-  </file>
-  <file src="wp-content/plugins/core/src/Blocks/Types/Gallery_Grid/Gallery_Grid.php">
-    <PropertyNotSetInConstructor occurrences="1">
-      <code>Gallery_Grid</code>
-    </PropertyNotSetInConstructor>
-    <TooManyArguments occurrences="1">
-      <code>__( 'gallery', 'grid', 'image', 'tribe' )</code>
-    </TooManyArguments>
-  </file>
-  <file src="wp-content/plugins/core/src/Blocks/Types/Hero/Hero.php">
-    <PropertyNotSetInConstructor occurrences="1">
-      <code>Hero</code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="wp-content/plugins/core/src/Blocks/Types/Hero/Hero_Model.php">
-    <PossiblyInvalidArgument occurrences="1">
-      <code>$this-&gt;get( Hero::CTA, [] )</code>
-    </PossiblyInvalidArgument>
-  </file>
-  <file src="wp-content/plugins/core/src/Blocks/Types/Icon_Grid/Icon_Grid.php">
-    <PropertyNotSetInConstructor occurrences="1">
-      <code>Icon_Grid</code>
-    </PropertyNotSetInConstructor>
-    <TooManyArguments occurrences="1">
-      <code>__( 'icon', 'grid', 'tribe' )</code>
-    </TooManyArguments>
-  </file>
-  <file src="wp-content/plugins/core/src/Blocks/Types/Icon_Grid/Icon_Grid_Model.php">
-    <PossiblyInvalidArgument occurrences="1">
-      <code>$this-&gt;get( Icon_Grid::CTA, [] )</code>
-    </PossiblyInvalidArgument>
-  </file>
-  <file src="wp-content/plugins/core/src/Blocks/Types/Interstitial/Interstitial.php">
-    <PropertyNotSetInConstructor occurrences="1">
-      <code>Interstitial</code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="wp-content/plugins/core/src/Blocks/Types/Interstitial/Interstitial_Model.php">
-    <PossiblyInvalidArgument occurrences="1">
-      <code>$this-&gt;get( Interstitial::CTA, [] )</code>
-    </PossiblyInvalidArgument>
-  </file>
-  <file src="wp-content/plugins/core/src/Blocks/Types/Lead_Form/Lead_Form.php">
-    <PropertyNotSetInConstructor occurrences="1">
-      <code>Lead_Form</code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="wp-content/plugins/core/src/Blocks/Types/Lead_Form/Lead_Form_Model.php">
-    <PossiblyInvalidArgument occurrences="1">
-      <code>$this-&gt;get( Lead_Form::CTA, [] )</code>
-    </PossiblyInvalidArgument>
-  </file>
-  <file src="wp-content/plugins/core/src/Blocks/Types/Links/Links.php">
-    <PropertyNotSetInConstructor occurrences="1">
-      <code>Links</code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="wp-content/plugins/core/src/Blocks/Types/Links/Links_Model.php">
-    <PossiblyInvalidArgument occurrences="1">
-      <code>$this-&gt;get( Links::CTA, [] )</code>
-    </PossiblyInvalidArgument>
-  </file>
-  <file src="wp-content/plugins/core/src/Blocks/Types/Logos/Logos.php">
-    <PropertyNotSetInConstructor occurrences="1">
-      <code>Logos</code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="wp-content/plugins/core/src/Blocks/Types/Logos/Logos_Model.php">
-    <PossiblyInvalidArgument occurrences="1">
-      <code>$this-&gt;get( Logos::CTA, [] )</code>
-    </PossiblyInvalidArgument>
-  </file>
-  <file src="wp-content/plugins/core/src/Blocks/Types/Media_Text/Media_Text.php">
-    <PropertyNotSetInConstructor occurrences="1">
-      <code>Media_Text</code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="wp-content/plugins/core/src/Blocks/Types/Media_Text/Media_Text_Model.php">
-    <PossiblyInvalidArgument occurrences="1">
-      <code>$this-&gt;get( Media_Text::CTA, [] )</code>
-    </PossiblyInvalidArgument>
-  </file>
-  <file src="wp-content/plugins/core/src/Blocks/Types/Quote/Quote.php">
-    <PropertyNotSetInConstructor occurrences="1">
-      <code>Quote</code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="wp-content/plugins/core/src/Blocks/Types/Spacer/Spacer.php">
-    <PropertyNotSetInConstructor occurrences="1">
-      <code>Spacer</code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="wp-content/plugins/core/src/Blocks/Types/Stats/Stats.php">
-    <PropertyNotSetInConstructor occurrences="1">
-      <code>Stats</code>
-    </PropertyNotSetInConstructor>
-  </file>
   <file src="wp-content/plugins/core/src/Blocks/Types/Stats/Stats_Model.php">
-    <PossiblyInvalidArgument occurrences="1">
-      <code>$this-&gt;get( Stats::CTA, [] )</code>
-    </PossiblyInvalidArgument>
     <UndefinedFunction occurrences="1">
       <code>get_field( Stats::STATS )</code>
     </UndefinedFunction>
   </file>
-  <file src="wp-content/plugins/core/src/Blocks/Types/Tabs/Tabs.php">
-    <PropertyNotSetInConstructor occurrences="1">
-      <code>Tabs</code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="wp-content/plugins/core/src/Blocks/Types/Tabs/Tabs_Model.php">
-    <PossiblyInvalidArgument occurrences="1">
-      <code>$this-&gt;get( Tabs::CTA, [] )</code>
-    </PossiblyInvalidArgument>
-    <PossiblyInvalidIterator occurrences="1">
-      <code>$tabs_data</code>
-    </PossiblyInvalidIterator>
-  </file>
   <file src="wp-content/plugins/core/src/Cache/Cache_Subscriber.php">
     <HookNotFound occurrences="2"/>
-    <MissingClosureParamType occurrences="3">
-      <code>$args</code>
-      <code>$args</code>
-      <code>$args</code>
-    </MissingClosureParamType>
-  </file>
-  <file src="wp-content/plugins/core/src/Cache/Listener.php">
-    <MissingParamType occurrences="2">
-      <code>$p2p_id</code>
-      <code>$p2p_ids</code>
-    </MissingParamType>
-  </file>
-  <file src="wp-content/plugins/core/src/Core.php">
-    <InvalidStringClass occurrences="2">
-      <code>new $classname()</code>
-      <code>new $subscriber_class( $this-&gt;container )</code>
-    </InvalidStringClass>
-    <MissingClosureReturnType occurrences="1">
-      <code>function ( $classname ) {</code>
-    </MissingClosureReturnType>
-    <MissingConstructor occurrences="1">
-      <code>$container</code>
-    </MissingConstructor>
-    <RedundantPropertyInitializationCheck occurrences="1">
-      <code>isset( self::$instance )</code>
-    </RedundantPropertyInitializationCheck>
-  </file>
-  <file src="wp-content/plugins/core/src/Integrations/Google_Tag_Manager/GTM_Scripts.php">
-    <InvalidScalarArgument occurrences="2">
-      <code>Analytics_Settings::GOOGLE_TAG_MANAGER</code>
-      <code>Analytics_Settings::GOOGLE_TAG_MANAGER</code>
-    </InvalidScalarArgument>
   </file>
   <file src="wp-content/plugins/core/src/Integrations/Gravity_Forms/Form_Styles.php">
-    <PossiblyFalseArgument occurrences="1">
+    <InvalidArgument occurrences="1">
       <code>false</code>
-    </PossiblyFalseArgument>
+    </InvalidArgument>
   </file>
   <file src="wp-content/plugins/core/src/Integrations/Gravity_Forms/Gravity_Forms_Subscriber.php">
     <HookNotFound occurrences="10">
@@ -362,69 +54,11 @@
       <code>add_filter( 'pre_option_rg_gforms_disable_css', '__return_true' )</code>
       <code>add_filter( 'pre_option_rg_gforms_enable_html5', '__return_true' )</code>
     </HookNotFound>
-    <MissingClosureParamType occurrences="3">
-      <code>$args</code>
-      <code>$args</code>
-      <code>$form</code>
-    </MissingClosureParamType>
-    <MissingClosureReturnType occurrences="4">
-      <code>function ( $form ) {</code>
-      <code>function ( ...$args ) {</code>
-      <code>function ( ...$args ) {</code>
-      <code>function () {</code>
-    </MissingClosureReturnType>
   </file>
   <file src="wp-content/plugins/core/src/Integrations/Yoast_SEO/Yoast_SEO_Subscriber.php">
     <HookNotFound occurrences="3">
       <code>add_filter( 'wpseo_json_ld_output', '__return_false' )</code>
     </HookNotFound>
-    <MissingClosureParamType occurrences="2">
-      <code>$size</code>
-      <code>$size</code>
-    </MissingClosureParamType>
-    <MissingClosureReturnType occurrences="2">
-      <code>function ( $size ) {</code>
-      <code>function ( $size ) {</code>
-    </MissingClosureReturnType>
-  </file>
-  <file src="wp-content/plugins/core/src/Nav_Menus/Menu.php">
-    <MissingParamType occurrences="1">
-      <code>$args</code>
-    </MissingParamType>
-    <MissingPropertyType occurrences="2">
-      <code>$args</code>
-      <code>$cache_key</code>
-    </MissingPropertyType>
-    <MissingReturnType occurrences="1">
-      <code>get_html</code>
-    </MissingReturnType>
-  </file>
-  <file src="wp-content/plugins/core/src/Nav_Menus/Nav_Attribute_Filters.php">
-    <RedundantCastGivenDocblockType occurrences="2">
-      <code>(array) $args</code>
-      <code>(array) $args</code>
-    </RedundantCastGivenDocblockType>
-  </file>
-  <file src="wp-content/plugins/core/src/Nav_Menus/Nav_Menus_Subscriber.php">
-    <MissingClosureParamType occurrences="12">
-      <code>$args</code>
-      <code>$args</code>
-      <code>$args</code>
-      <code>$atts</code>
-      <code>$classes</code>
-      <code>$depth</code>
-      <code>$depth</code>
-      <code>$depth</code>
-      <code>$item</code>
-      <code>$item</code>
-      <code>$item</code>
-      <code>$menu_id</code>
-    </MissingClosureParamType>
-    <MissingClosureReturnType occurrences="3">
-      <code>function ( $atts, $item, $args, $depth ) {</code>
-      <code>function ( $classes, $item, $args, $depth ) {</code>
-      <code>function ( $menu_id, $item, $args, $depth ) {</code>
-    </MissingClosureReturnType>
   </file>
   <file src="wp-content/plugins/core/src/Object_Meta/Analytics_Settings.php">
     <ParamNameMismatch occurrences="2">
@@ -435,43 +69,12 @@
       <code>get_field( $key, $post_id )</code>
     </UndefinedFunction>
   </file>
-  <file src="wp-content/plugins/core/src/Object_Meta/Social_Settings.php">
-    <MissingParamType occurrences="2">
-      <code>$key</code>
-      <code>$type</code>
-    </MissingParamType>
-  </file>
-  <file src="wp-content/plugins/core/src/Routes/Sample_REST_Route.php">
-    <PossiblyNullArgument occurrences="1">
-      <code>$request-&gt;get_param( 'name' )</code>
-    </PossiblyNullArgument>
-  </file>
-  <file src="wp-content/plugins/core/src/Shortcodes/Gallery.php">
-    <MissingClosureParamType occurrences="1">
-      <code>$slide_id</code>
-    </MissingClosureParamType>
-    <MissingParamType occurrences="2">
-      <code>$size</code>
-      <code>$slide_ids</code>
-    </MissingParamType>
-    <PossiblyInvalidPropertyFetch occurrences="1">
-      <code>$post-&gt;ID</code>
-    </PossiblyInvalidPropertyFetch>
-  </file>
-  <file src="wp-content/plugins/core/src/Shortcodes/Shortcodes_Subscriber.php">
-    <MissingClosureParamType occurrences="3">
-      <code>$attr</code>
-      <code>$instance</code>
-      <code>$output</code>
-    </MissingClosureParamType>
-    <MissingClosureReturnType occurrences="1">
-      <code>function ( $output, $attr, $instance ) {</code>
-    </MissingClosureReturnType>
+  <file src="wp-content/plugins/core/src/Query/Featured_Posts.php">
+    <UndefinedFunction occurrences="1">
+      <code>get_field( Post_Archive_Featured_Settings::FEATURED_POSTS, 'option' )</code>
+    </UndefinedFunction>
   </file>
   <file src="wp-content/plugins/core/src/Templates/Components/Abstract_Controller.php">
-    <DocblockTypeContradiction occurrences="1">
-      <code>is_array( $value )</code>
-    </DocblockTypeContradiction>
     <UndefinedFunction occurrences="1">
       <code>tribe_project()</code>
     </UndefinedFunction>
@@ -484,112 +87,21 @@
       <code>tribe_template_part( $this-&gt;path(), $this-&gt;name(), $this-&gt;args() )</code>
     </UndefinedFunction>
   </file>
-  <file src="wp-content/plugins/core/src/Theme/Body_Classes.php">
-    <MissingParamType occurrences="2">
-      <code>$classes</code>
-      <code>$post</code>
-    </MissingParamType>
-  </file>
-  <file src="wp-content/plugins/core/src/Theme/Branding/Customizer_Settings.php">
-    <MissingParamType occurrences="1">
-      <code>$wp_customize</code>
-    </MissingParamType>
-  </file>
-  <file src="wp-content/plugins/core/src/Theme/Config/Image_Sizes.php">
-    <MissingPropertyType occurrences="1">
-      <code>$sizes</code>
-    </MissingPropertyType>
-  </file>
-  <file src="wp-content/plugins/core/src/Theme/Media/Image_Wrap.php">
-    <MissingClosureParamType occurrences="1">
-      <code>$matches</code>
-    </MissingClosureParamType>
-    <MissingParamType occurrences="2">
-      <code>$html</code>
-      <code>$html</code>
-    </MissingParamType>
+  <file src="wp-content/plugins/core/src/Templates/Components/Traits/Primary_Term.php">
+    <InvalidReturnType occurrences="1">
+      <code>?\WP_Term</code>
+    </InvalidReturnType>
+    <UndefinedFunction occurrences="1">
+      <code>yoast_get_primary_term_id( $taxonomy, $post_id )</code>
+    </UndefinedFunction>
   </file>
   <file src="wp-content/plugins/core/src/Theme/Media/Oembed_Filter.php">
-    <DocblockTypeContradiction occurrences="1">
-      <code>$video_id === null</code>
-    </DocblockTypeContradiction>
-    <InvalidDocblock occurrences="1">
-      <code>public function get_video_component( $html, $data, $url ) {</code>
-    </InvalidDocblock>
-    <MissingParamType occurrences="16">
-      <code>$attr</code>
-      <code>$attr</code>
-      <code>$attr</code>
-      <code>$data</code>
-      <code>$html</code>
-      <code>$html</code>
-      <code>$html</code>
-      <code>$html</code>
-      <code>$post_id</code>
-      <code>$post_id</code>
-      <code>$provider_name</code>
-      <code>$title</code>
-      <code>$url</code>
-      <code>$url</code>
-      <code>$url</code>
-      <code>$url</code>
-    </MissingParamType>
-    <MissingReturnType occurrences="3">
-      <code>filter_frontend_html_from_cache</code>
-      <code>get_video_component</code>
-      <code>wrap_admin_oembed</code>
-    </MissingReturnType>
-    <PossiblyFalseArgument occurrences="1">
-      <code>$provider</code>
-    </PossiblyFalseArgument>
     <UndefinedFunction occurrences="1">
       <code>tribe_template_part( 'components/video/video', null, $options )</code>
     </UndefinedFunction>
   </file>
-  <file src="wp-content/plugins/core/src/Theme/Pagination_Util.php">
-    <InvalidOperand occurrences="2">
-      <code>$links_offset</code>
-      <code>$links_offset</code>
-    </InvalidOperand>
-    <InvalidScalarArgument occurrences="2">
-      <code>$link</code>
-      <code>$link</code>
-    </InvalidScalarArgument>
-    <RedundantCastGivenDocblockType occurrences="1">
-      <code>(int) $this-&gt;query-&gt;max_num_pages</code>
-    </RedundantCastGivenDocblockType>
-  </file>
   <file src="wp-content/plugins/core/src/Theme/Theme_Subscriber.php">
     <HookNotFound occurrences="2"/>
-    <MissingClosureParamType occurrences="17">
-      <code>$attr</code>
-      <code>$attr</code>
-      <code>$classes</code>
-      <code>$data</code>
-      <code>$html</code>
-      <code>$html</code>
-      <code>$html</code>
-      <code>$html</code>
-      <code>$html</code>
-      <code>$name</code>
-      <code>$post_id</code>
-      <code>$post_id</code>
-      <code>$url</code>
-      <code>$url</code>
-      <code>$url</code>
-      <code>$url</code>
-      <code>$wp_customize</code>
-    </MissingClosureParamType>
-    <MissingClosureReturnType occurrences="8">
-      <code>function ( $classes ) {</code>
-      <code>function ( $html ) {</code>
-      <code>function ( $html ) {</code>
-      <code>function ( $html, $data, $url ) {</code>
-      <code>function ( $html, $url, $attr, $post_id ) {</code>
-      <code>function ( $html, $url, $attr, $post_id ) {</code>
-      <code>function ( $name ) {</code>
-      <code>function ( $url ) {</code>
-    </MissingClosureReturnType>
   </file>
   <file src="wp-content/themes/core/blocks/logos/logos.php">
     <UndefinedGlobalVariable occurrences="1">
@@ -602,19 +114,9 @@
     </UndefinedGlobalVariable>
   </file>
   <file src="wp-content/themes/core/components/accordion/Accordion_Controller.php">
-    <InvalidDocblockParamName occurrences="1">
-      <code>$row</code>
-    </InvalidDocblockParamName>
     <LessSpecificImplementedReturnType occurrences="1">
       <code>array</code>
     </LessSpecificImplementedReturnType>
-    <MissingParamType occurrences="2">
-      <code>$row_key</code>
-      <code>$row_key</code>
-    </MissingParamType>
-    <PropertyNotSetInConstructor occurrences="1">
-      <code>$row_ids</code>
-    </PropertyNotSetInConstructor>
   </file>
   <file src="wp-content/themes/core/components/accordion/accordion.php">
     <UndefinedGlobalVariable occurrences="1">
@@ -622,248 +124,74 @@
     </UndefinedGlobalVariable>
   </file>
   <file src="wp-content/themes/core/components/blocks/accordion/Accordion_Block_Controller.php">
-    <DocblockTypeContradiction occurrences="1">
-      <code>$cta['content']</code>
-    </DocblockTypeContradiction>
     <LessSpecificImplementedReturnType occurrences="1">
       <code>array</code>
     </LessSpecificImplementedReturnType>
-    <RedundantConditionGivenDocblockType occurrences="1">
-      <code>$cta['url']</code>
-    </RedundantConditionGivenDocblockType>
-    <RedundantPropertyInitializationCheck occurrences="6">
-      <code>$this-&gt;description</code>
-      <code>$this-&gt;leadin</code>
-      <code>$this-&gt;title</code>
-      <code>''</code>
-      <code>''</code>
-      <code>''</code>
-    </RedundantPropertyInitializationCheck>
     <UndefinedFunction occurrences="4"/>
   </file>
   <file src="wp-content/themes/core/components/blocks/buttons/Buttons_Block_Controller.php">
     <LessSpecificImplementedReturnType occurrences="1">
       <code>array</code>
     </LessSpecificImplementedReturnType>
-    <MissingParamType occurrences="1">
-      <code>$button</code>
-    </MissingParamType>
-    <RedundantConditionGivenDocblockType occurrences="1">
-      <code>empty( $link['url'] )</code>
-    </RedundantConditionGivenDocblockType>
+    <UndefinedConstant occurrences="2">
+      <code>Buttons::BUTTON_CLASSES</code>
+      <code>Buttons::BUTTON_CLASSES</code>
+    </UndefinedConstant>
   </file>
   <file src="wp-content/themes/core/components/blocks/card_grid/Card_Grid_Controller.php">
-    <DocblockTypeContradiction occurrences="1">
-      <code>$cta['content']</code>
-    </DocblockTypeContradiction>
     <LessSpecificImplementedReturnType occurrences="1">
       <code>array</code>
     </LessSpecificImplementedReturnType>
-    <MissingReturnType occurrences="1">
-      <code>get_posts_card_args</code>
-    </MissingReturnType>
-    <RedundantConditionGivenDocblockType occurrences="1">
-      <code>$cta['url']</code>
-    </RedundantConditionGivenDocblockType>
-    <RedundantPropertyInitializationCheck occurrences="4">
-      <code>$this-&gt;description</code>
-      <code>$this-&gt;title</code>
-      <code>''</code>
-      <code>''</code>
-    </RedundantPropertyInitializationCheck>
-    <UndefinedFunction occurrences="7"/>
+    <UndefinedFunction occurrences="8"/>
   </file>
   <file src="wp-content/themes/core/components/blocks/content_columns/Content_Columns_Block_Controller.php">
-    <DocblockTypeContradiction occurrences="1">
-      <code>$cta['content']</code>
-    </DocblockTypeContradiction>
-    <MissingReturnType occurrences="2">
-      <code>get_columns</code>
-      <code>get_content_args</code>
-    </MissingReturnType>
-    <RedundantConditionGivenDocblockType occurrences="1">
-      <code>$cta['url']</code>
-    </RedundantConditionGivenDocblockType>
-    <RedundantPropertyInitializationCheck occurrences="6">
-      <code>$this-&gt;description</code>
-      <code>$this-&gt;leadin</code>
-      <code>$this-&gt;title</code>
-      <code>''</code>
-      <code>''</code>
-      <code>''</code>
-    </RedundantPropertyInitializationCheck>
     <UndefinedFunction occurrences="7"/>
   </file>
   <file src="wp-content/themes/core/components/blocks/content_loop/Content_Loop_Controller.php">
-    <DocblockTypeContradiction occurrences="2">
-      <code>$cta['content']</code>
-      <code>''</code>
-    </DocblockTypeContradiction>
-    <RedundantConditionGivenDocblockType occurrences="2">
-      <code>$cta['url']</code>
-      <code>get_the_date( 'F Y', $post['post_id'] )</code>
-    </RedundantConditionGivenDocblockType>
-    <RedundantPropertyInitializationCheck occurrences="6">
-      <code>$this-&gt;description</code>
-      <code>$this-&gt;leadin</code>
-      <code>$this-&gt;title</code>
-      <code>''</code>
-      <code>''</code>
-      <code>''</code>
-    </RedundantPropertyInitializationCheck>
-    <UndefinedFunction occurrences="10"/>
+    <UndefinedFunction occurrences="10">
+      <code>defer_template_part( 'components/image/image', null, $image_array )</code>
+      <code>defer_template_part( 'components/link/link', null, $card_cta )</code>
+    </UndefinedFunction>
   </file>
   <file src="wp-content/themes/core/components/blocks/gallery_grid/Gallery_Grid_Controller.php">
-    <DocblockTypeContradiction occurrences="1">
-      <code>''</code>
-    </DocblockTypeContradiction>
-    <ImplicitToStringCast occurrences="1">
-      <code>string</code>
-    </ImplicitToStringCast>
-    <MissingParamType occurrences="2">
-      <code>$img_id</code>
-      <code>$index</code>
-    </MissingParamType>
-    <PossiblyInvalidPropertyFetch occurrences="1">
-      <code>$thumbnail_image[0]-&gt;post_excerpt</code>
-    </PossiblyInvalidPropertyFetch>
-    <RedundantConditionGivenDocblockType occurrences="1">
-      <code>esc_html( $thumbnail_image[0]-&gt;post_excerpt )</code>
-    </RedundantConditionGivenDocblockType>
-    <RedundantPropertyInitializationCheck occurrences="6">
-      <code>$this-&gt;description</code>
-      <code>$this-&gt;title</code>
-      <code>$this-&gt;title</code>
-      <code>''</code>
-      <code>''</code>
-      <code>''</code>
-    </RedundantPropertyInitializationCheck>
-    <UndefinedFunction occurrences="7">
-      <code>defer_template_part( 'components/slider/slider', null, $this-&gt;get_slider_args() )</code>
+    <UndefinedFunction occurrences="8"/>
+  </file>
+  <file src="wp-content/themes/core/components/blocks/gallery_slider/Gallery_Slider_Controller.php">
+    <UndefinedFunction occurrences="6">
+      <code>defer_template_part( 'components/image/image', null, $image_args )</code>
     </UndefinedFunction>
   </file>
   <file src="wp-content/themes/core/components/blocks/hero/Hero_Block_Controller.php">
-    <DocblockTypeContradiction occurrences="1">
-      <code>$cta['content']</code>
-    </DocblockTypeContradiction>
     <LessSpecificImplementedReturnType occurrences="1">
       <code>array</code>
     </LessSpecificImplementedReturnType>
-    <RedundantConditionGivenDocblockType occurrences="1">
-      <code>$cta['url']</code>
-    </RedundantConditionGivenDocblockType>
-    <RedundantPropertyInitializationCheck occurrences="6">
-      <code>$this-&gt;description</code>
-      <code>$this-&gt;leadin</code>
-      <code>$this-&gt;title</code>
-      <code>''</code>
-      <code>''</code>
-      <code>''</code>
-    </RedundantPropertyInitializationCheck>
     <UndefinedFunction occurrences="4"/>
   </file>
   <file src="wp-content/themes/core/components/blocks/icon_grid/Icon_Grid_Controller.php">
-    <DocblockTypeContradiction occurrences="2">
-      <code>$cta['content']</code>
-      <code>''</code>
-    </DocblockTypeContradiction>
-    <RedundantConditionGivenDocblockType occurrences="2">
-      <code>$cta['url']</code>
-      <code>wpautop( $card['icon_description'] )</code>
-    </RedundantConditionGivenDocblockType>
     <UndefinedFunction occurrences="8"/>
   </file>
   <file src="wp-content/themes/core/components/blocks/interstitial/Interstitial_Block_Controller.php">
-    <DocblockTypeContradiction occurrences="1">
-      <code>$cta['content']</code>
-    </DocblockTypeContradiction>
     <LessSpecificImplementedReturnType occurrences="1">
       <code>array</code>
     </LessSpecificImplementedReturnType>
-    <RedundantConditionGivenDocblockType occurrences="1">
-      <code>$cta['url']</code>
-    </RedundantConditionGivenDocblockType>
-    <RedundantPropertyInitializationCheck occurrences="2">
-      <code>$this-&gt;title</code>
-      <code>''</code>
-    </RedundantPropertyInitializationCheck>
-    <UndefinedFunction occurrences="2"/>
+    <UndefinedFunction occurrences="3"/>
   </file>
   <file src="wp-content/themes/core/components/blocks/lead_form/Lead_Form_Block_Controller.php">
-    <DocblockTypeContradiction occurrences="1">
-      <code>$cta['content']</code>
-    </DocblockTypeContradiction>
     <LessSpecificImplementedReturnType occurrences="1">
       <code>array</code>
     </LessSpecificImplementedReturnType>
-    <PossiblyFalseArgument occurrences="1">
-      <code>wp_json_encode( $template )</code>
-    </PossiblyFalseArgument>
-    <RedundantConditionGivenDocblockType occurrences="1">
-      <code>$cta['url']</code>
-    </RedundantConditionGivenDocblockType>
-    <RedundantPropertyInitializationCheck occurrences="6">
-      <code>$this-&gt;description</code>
-      <code>$this-&gt;leadin</code>
-      <code>$this-&gt;title</code>
-      <code>''</code>
-      <code>''</code>
-      <code>''</code>
-    </RedundantPropertyInitializationCheck>
     <UndefinedFunction occurrences="4"/>
   </file>
   <file src="wp-content/themes/core/components/blocks/links/Links_Block_Controller.php">
-    <DocblockTypeContradiction occurrences="1">
-      <code>$cta['content']</code>
-    </DocblockTypeContradiction>
     <LessSpecificImplementedReturnType occurrences="1">
       <code>array</code>
     </LessSpecificImplementedReturnType>
-    <RedundantConditionGivenDocblockType occurrences="1">
-      <code>$cta['url']</code>
-    </RedundantConditionGivenDocblockType>
-    <RedundantPropertyInitializationCheck occurrences="6">
-      <code>$this-&gt;description</code>
-      <code>$this-&gt;leadin</code>
-      <code>$this-&gt;title</code>
-      <code>''</code>
-      <code>''</code>
-      <code>''</code>
-    </RedundantPropertyInitializationCheck>
     <UndefinedFunction occurrences="4"/>
   </file>
   <file src="wp-content/themes/core/components/blocks/logos/Logos_Block_Controller.php">
-    <DocblockTypeContradiction occurrences="1">
-      <code>$cta['content']</code>
-    </DocblockTypeContradiction>
-    <RedundantConditionGivenDocblockType occurrences="1">
-      <code>$cta['url']</code>
-    </RedundantConditionGivenDocblockType>
-    <RedundantPropertyInitializationCheck occurrences="6">
-      <code>$this-&gt;description</code>
-      <code>$this-&gt;leadin</code>
-      <code>$this-&gt;title</code>
-      <code>''</code>
-      <code>''</code>
-      <code>''</code>
-    </RedundantPropertyInitializationCheck>
     <UndefinedFunction occurrences="4"/>
   </file>
   <file src="wp-content/themes/core/components/blocks/media_text/Media_Text_Block_Controller.php">
-    <DocblockTypeContradiction occurrences="1">
-      <code>$cta['content']</code>
-    </DocblockTypeContradiction>
-    <RedundantConditionGivenDocblockType occurrences="1">
-      <code>$cta['url']</code>
-    </RedundantConditionGivenDocblockType>
-    <RedundantPropertyInitializationCheck occurrences="6">
-      <code>$this-&gt;description</code>
-      <code>$this-&gt;leadin</code>
-      <code>$this-&gt;title</code>
-      <code>''</code>
-      <code>''</code>
-      <code>''</code>
-    </RedundantPropertyInitializationCheck>
     <UndefinedFunction occurrences="4"/>
   </file>
   <file src="wp-content/themes/core/components/blocks/quote/Quote_Block_Controller.php">
@@ -875,65 +203,21 @@
     <LessSpecificImplementedReturnType occurrences="1">
       <code>array</code>
     </LessSpecificImplementedReturnType>
-    <MismatchingDocblockPropertyType occurrences="1">
-      <code>array</code>
-    </MismatchingDocblockPropertyType>
-    <PossiblyInvalidArgument occurrences="1">
-      <code>$this-&gt;classes</code>
-    </PossiblyInvalidArgument>
   </file>
   <file src="wp-content/themes/core/components/blocks/stats/Stats_Block_Controller.php">
-    <DocblockTypeContradiction occurrences="1">
-      <code>$cta['content']</code>
-    </DocblockTypeContradiction>
     <LessSpecificImplementedReturnType occurrences="1">
       <code>array</code>
     </LessSpecificImplementedReturnType>
-    <RedundantConditionGivenDocblockType occurrences="1">
-      <code>$cta['url']</code>
-    </RedundantConditionGivenDocblockType>
-    <RedundantPropertyInitializationCheck occurrences="6">
-      <code>$this-&gt;description</code>
-      <code>$this-&gt;leadin</code>
-      <code>$this-&gt;title</code>
-      <code>''</code>
-      <code>''</code>
-      <code>''</code>
-    </RedundantPropertyInitializationCheck>
     <UndefinedFunction occurrences="6">
       <code>defer_template_part( 'components/text/text', null, $this-&gt;get_label_args( $item ) )</code>
       <code>defer_template_part( 'components/text/text', null, $this-&gt;get_value_args( $item ) )</code>
     </UndefinedFunction>
   </file>
   <file src="wp-content/themes/core/components/blocks/tabs/Tabs_Block_Controller.php">
-    <DocblockTypeContradiction occurrences="1">
-      <code>$cta['content']</code>
-    </DocblockTypeContradiction>
     <LessSpecificImplementedReturnType occurrences="1">
       <code>array</code>
     </LessSpecificImplementedReturnType>
-    <RedundantConditionGivenDocblockType occurrences="1">
-      <code>$cta['url']</code>
-    </RedundantConditionGivenDocblockType>
-    <RedundantPropertyInitializationCheck occurrences="6">
-      <code>$this-&gt;description</code>
-      <code>$this-&gt;leadin</code>
-      <code>$this-&gt;title</code>
-      <code>''</code>
-      <code>''</code>
-      <code>''</code>
-    </RedundantPropertyInitializationCheck>
     <UndefinedFunction occurrences="4"/>
-  </file>
-  <file src="wp-content/themes/core/components/button/Button_Controller.php">
-    <ImplicitToStringCast occurrences="1">
-      <code>string</code>
-    </ImplicitToStringCast>
-  </file>
-  <file src="wp-content/themes/core/components/comments/Comment_Edit_Link.php">
-    <MissingParamType occurrences="1">
-      <code>$text</code>
-    </MissingParamType>
   </file>
   <file src="wp-content/themes/core/components/comments/comment/Comment_Controller.php">
     <InvalidArgument occurrences="1">
@@ -942,52 +226,13 @@
     <LessSpecificImplementedReturnType occurrences="1">
       <code>array</code>
     </LessSpecificImplementedReturnType>
-    <MissingParamType occurrences="1">
-      <code>$format</code>
-    </MissingParamType>
-    <MissingReturnType occurrences="1">
-      <code>get_moderation_message_args</code>
-    </MissingReturnType>
-  </file>
-  <file src="wp-content/themes/core/components/comments/comments_section/Comments_Section_Controller.php">
-    <InvalidScalarArgument occurrences="2">
-      <code>get_comments_number()</code>
-      <code>get_comments_number()</code>
-    </InvalidScalarArgument>
-    <MissingReturnType occurrences="4">
-      <code>get_comment_form</code>
-      <code>get_comments</code>
-      <code>get_pagination_args</code>
-      <code>get_title</code>
-    </MissingReturnType>
   </file>
   <file src="wp-content/themes/core/components/comments/trackback/Trackback_Controller.php">
     <LessSpecificImplementedReturnType occurrences="1">
       <code>array</code>
     </LessSpecificImplementedReturnType>
   </file>
-  <file src="wp-content/themes/core/components/content_block/Content_Block_Controller.php">
-    <MissingReturnType occurrences="4">
-      <code>get_cta_args</code>
-      <code>render_content</code>
-      <code>render_leadin</code>
-      <code>render_title</code>
-    </MissingReturnType>
-  </file>
   <file src="wp-content/themes/core/components/dialog/Dialog_Controller.php">
-    <RedundantCast occurrences="1">
-      <code>(string) $this-&gt;id</code>
-    </RedundantCast>
-    <RedundantCondition occurrences="1">
-      <code>$this-&gt;get_dialog_title()</code>
-    </RedundantCondition>
-    <RedundantPropertyInitializationCheck occurrences="2">
-      <code>$this-&gt;title</code>
-      <code>''</code>
-    </RedundantPropertyInitializationCheck>
-    <TypeDoesNotContainNull occurrences="1">
-      <code>''</code>
-    </TypeDoesNotContainNull>
     <UndefinedFunction occurrences="2"/>
   </file>
   <file src="wp-content/themes/core/components/follow/Follow_Controller.php">
@@ -995,216 +240,81 @@
       <code>get_field( $social_site, 'option' )</code>
     </UndefinedFunction>
   </file>
-  <file src="wp-content/themes/core/components/image/Image_Controller.php">
-    <InvalidScalarArgument occurrences="1">
-      <code>$this-&gt;expand</code>
-    </InvalidScalarArgument>
-    <MissingParamType occurrences="3">
-      <code>$height</code>
-      <code>$url</code>
-      <code>$width</code>
-    </MissingParamType>
+  <file src="wp-content/themes/core/components/header/subheader/Subheader_Single_Controller.php">
+    <InvalidNullableReturnType occurrences="2">
+      <code>string</code>
+      <code>string</code>
+    </InvalidNullableReturnType>
+    <NullableReturnStatement occurrences="2">
+      <code>$this-&gt;tag_link</code>
+      <code>$this-&gt;tag_name</code>
+    </NullableReturnStatement>
   </file>
   <file src="wp-content/themes/core/components/image/image.php">
     <InvalidArgument occurrences="1">
       <code>$c-&gt;has_link()</code>
     </InvalidArgument>
   </file>
-  <file src="wp-content/themes/core/components/link/Link_Controller.php">
-    <ImplicitToStringCast occurrences="1">
-      <code>string</code>
-    </ImplicitToStringCast>
-  </file>
-  <file src="wp-content/themes/core/components/loop_items/index/Index_Controller.php">
-    <MissingReturnType occurrences="1">
-      <code>get_image_args</code>
-    </MissingReturnType>
-  </file>
-  <file src="wp-content/themes/core/components/loop_items/index/index.php">
-    <InvalidScalarArgument occurrences="3">
-      <code>get_the_author_meta( 'ID' )</code>
-      <code>get_the_time( 'F j, Y' )</code>
-      <code>get_the_time( 'c' )</code>
-    </InvalidScalarArgument>
-    <PossiblyFalseArgument occurrences="1">
-      <code>get_post_type()</code>
-    </PossiblyFalseArgument>
-    <PossiblyNullArgument occurrences="1">
-      <code>get_the_author()</code>
-    </PossiblyNullArgument>
-  </file>
-  <file src="wp-content/themes/core/components/loop_items/search/Search_Controller.php">
-    <MissingReturnType occurrences="1">
-      <code>get_image_args</code>
-    </MissingReturnType>
-  </file>
-  <file src="wp-content/themes/core/components/loop_items/search/search.php">
-    <PossiblyFalseArgument occurrences="1">
-      <code>get_post_type()</code>
-    </PossiblyFalseArgument>
-  </file>
   <file src="wp-content/themes/core/components/pagination/comments/Comments_Pagination_Controller.php">
-    <MissingReturnType occurrences="1">
-      <code>get_previous_link</code>
-    </MissingReturnType>
-    <RedundantCastGivenDocblockType occurrences="1">
-      <code>(int) get_comment_pages_count()</code>
-    </RedundantCastGivenDocblockType>
     <UndefinedFunction occurrences="4"/>
   </file>
-  <file src="wp-content/themes/core/components/pagination/loop/Loop_Pagination_Controller.php">
-    <InvalidScalarArgument occurrences="1">
-      <code>2</code>
-    </InvalidScalarArgument>
-    <PropertyNotSetInConstructor occurrences="1">
-      <code>$links</code>
-    </PropertyNotSetInConstructor>
-    <RedundantPropertyInitializationCheck occurrences="1">
-      <code>isset( $this-&gt;links )</code>
-    </RedundantPropertyInitializationCheck>
-  </file>
   <file src="wp-content/themes/core/components/pagination/single/Single_Pagination_Controller.php">
-    <InvalidScalarArgument occurrences="4">
-      <code>$next</code>
-      <code>$next</code>
-      <code>$previous</code>
-      <code>$previous</code>
-    </InvalidScalarArgument>
     <LessSpecificImplementedReturnType occurrences="1">
       <code>array</code>
     </LessSpecificImplementedReturnType>
   </file>
-  <file src="wp-content/themes/core/components/quote/Quote_Controller.php">
-    <MissingReturnType occurrences="2">
-      <code>get_image_args</code>
-      <code>get_quote</code>
-    </MissingReturnType>
-  </file>
-  <file src="wp-content/themes/core/components/routes/index/Index_Controller.php">
-    <PossiblyFalseArgument occurrences="1">
-      <code>$url</code>
-    </PossiblyFalseArgument>
-  </file>
-  <file src="wp-content/themes/core/components/routes/not_found/Not_Found_Controller.php">
-    <PossiblyFalseArgument occurrences="1">
-      <code>$url</code>
-    </PossiblyFalseArgument>
-  </file>
-  <file src="wp-content/themes/core/components/routes/page/Page_Controller.php">
-    <MissingReturnType occurrences="1">
-      <code>get_image_args</code>
-    </MissingReturnType>
-    <PossiblyFalseArgument occurrences="2">
-      <code>$page</code>
-      <code>$url</code>
-    </PossiblyFalseArgument>
-  </file>
-  <file src="wp-content/themes/core/components/routes/search/Search_Controller.php">
-    <PossiblyFalseArgument occurrences="1">
-      <code>$url</code>
-    </PossiblyFalseArgument>
-  </file>
-  <file src="wp-content/themes/core/components/routes/single/Single_Controller.php">
-    <MissingReturnType occurrences="1">
-      <code>get_image_args</code>
-    </MissingReturnType>
-    <PossiblyFalseArgument occurrences="2">
-      <code>$page</code>
-      <code>$url</code>
-    </PossiblyFalseArgument>
-  </file>
-  <file src="wp-content/themes/core/components/routes/single/single.php">
-    <InvalidScalarArgument occurrences="1">
-      <code>get_the_time( 'c' )</code>
-    </InvalidScalarArgument>
-  </file>
-  <file src="wp-content/themes/core/components/routes/unsupported_browser/Unsupported_Browser_Controller.php">
-    <MissingParamType occurrences="1">
-      <code>$filename</code>
-    </MissingParamType>
-  </file>
-  <file src="wp-content/themes/core/components/search_form/Search_Form_Controller.php">
-    <MissingParamType occurrences="1">
-      <code>$args</code>
-    </MissingParamType>
-  </file>
   <file src="wp-content/themes/core/components/share/Share_Controller.php">
-    <DocblockTypeContradiction occurrences="1">
-      <code>is_scalar( $url )</code>
-    </DocblockTypeContradiction>
     <InvalidGlobal occurrences="1">
       <code>global $post;</code>
     </InvalidGlobal>
-    <MissingParamType occurrences="1">
-      <code>$label</code>
-    </MissingParamType>
-    <PossiblyFalseArgument occurrences="3">
-      <code>get_permalink( $post-&gt;ID )</code>
-      <code>get_post_thumbnail_id( $post-&gt;ID )</code>
-      <code>get_post_type_archive_link( $obj-&gt;name )</code>
-    </PossiblyFalseArgument>
-    <PossiblyInvalidArgument occurrences="2">
-      <code>$obj</code>
-      <code>get_term_link( $obj, $obj-&gt;taxonomy )</code>
-    </PossiblyInvalidArgument>
-    <PossiblyInvalidArrayAccess occurrences="1">
-      <code>$image[ 0 ]</code>
-    </PossiblyInvalidArrayAccess>
-    <PossiblyNullArgument occurrences="6">
-      <code>$obj-&gt;description</code>
-      <code>$obj-&gt;description</code>
-      <code>$obj-&gt;label</code>
-      <code>$obj-&gt;name</code>
-      <code>$obj-&gt;name</code>
-      <code>$obj-&gt;taxonomy</code>
-    </PossiblyNullArgument>
-    <PossiblyNullPropertyFetch occurrences="6">
-      <code>$obj-&gt;description</code>
-      <code>$obj-&gt;description</code>
-      <code>$obj-&gt;label</code>
-      <code>$obj-&gt;name</code>
-      <code>$obj-&gt;name</code>
-      <code>$obj-&gt;taxonomy</code>
-    </PossiblyNullPropertyFetch>
     <UndefinedFunction occurrences="1"/>
-    <UndefinedMagicPropertyFetch occurrences="6">
-      <code>$obj-&gt;description</code>
-      <code>$obj-&gt;description</code>
-      <code>$obj-&gt;label</code>
-      <code>$obj-&gt;name</code>
-      <code>$obj-&gt;name</code>
-      <code>$obj-&gt;taxonomy</code>
-    </UndefinedMagicPropertyFetch>
     <UndefinedPropertyFetch occurrences="1">
       <code>$obj-&gt;taxonomy</code>
     </UndefinedPropertyFetch>
-  </file>
-  <file src="wp-content/themes/core/components/slider/slider.php">
-    <InvalidOperand occurrences="1">
-      <code>$index</code>
-    </InvalidOperand>
-  </file>
-  <file src="wp-content/themes/core/components/statistic/Statistic_Controller.php">
-    <MissingReturnType occurrences="2">
-      <code>get_label</code>
-      <code>get_value</code>
-    </MissingReturnType>
-    <TypeDoesNotContainType occurrences="2">
-      <code>empty( $this-&gt;label )</code>
-      <code>empty( $this-&gt;value )</code>
-    </TypeDoesNotContainType>
   </file>
   <file src="wp-content/themes/core/components/tabs/Tabs_Controller.php">
     <LessSpecificImplementedReturnType occurrences="1">
       <code>array</code>
     </LessSpecificImplementedReturnType>
-    <MissingReturnType occurrences="1">
-      <code>init_tabs</code>
-    </MissingReturnType>
   </file>
-  <file src="wp-content/themes/core/components/text/Text_Controller.php">
-    <ImplicitToStringCast occurrences="1">
-      <code>string</code>
-    </ImplicitToStringCast>
+  <file src="wp-content/themes/core/routes/index/Index_Controller.php">
+    <UndefinedFunction occurrences="5">
+      <code>get_field( 'description', 'option' )</code>
+      <code>get_field( 'hero_image', 'option' )</code>
+      <code>get_field( 'title', 'option' )</code>
+      <code>get_field( Post_Archive_Featured_Settings::FEATURED_POSTS, 'option' )</code>
+      <code>get_field( Post_Archive_Settings::HERO_IMAGE, $term-&gt;taxonomy.'_'.$term-&gt;term_id )</code>
+    </UndefinedFunction>
+    <UndefinedPropertyFetch occurrences="3">
+      <code>$term-&gt;category_description</code>
+      <code>$term-&gt;taxonomy</code>
+      <code>$term-&gt;term_id</code>
+    </UndefinedPropertyFetch>
+  </file>
+  <file src="wp-content/themes/core/routes/search/Search_Controller.php">
+    <InvalidReturnStatement occurrences="1"/>
+    <InvalidReturnType occurrences="1">
+      <code>\Tribe\Project\Templates\Components\Deferred_Component[]</code>
+    </InvalidReturnType>
+    <UndefinedFunction occurrences="4"/>
+  </file>
+  <file src="wp-content/themes/core/routes/single/Single_Controller.php">
+    <InvalidReturnStatement occurrences="1">
+      <code>$terms</code>
+    </InvalidReturnStatement>
+    <InvalidReturnType occurrences="1">
+      <code>array</code>
+    </InvalidReturnType>
+  </file>
+  <file src="wp-content/themes/core/routes/single/single.php">
+    <UndefinedGlobalVariable occurrences="2">
+      <code>$post</code>
+      <code>$post</code>
+    </UndefinedGlobalVariable>
+  </file>
+  <file src="wp-content/themes/core/routes/unsupported_browser/unsupported_browser.php">
+    <InvalidArgument occurrences="1">
+      <code>$c-&gt;get_logo_url()</code>
+    </InvalidArgument>
   </file>
 </files>
