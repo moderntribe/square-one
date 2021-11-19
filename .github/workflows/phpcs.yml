@@ -1,4 +1,4 @@
-name: PHP Composer and Codesniffer
+name: PHP Composer, Codesniffer, and Static Analysis
 
 on: pull_request
 
@@ -85,3 +85,7 @@ jobs:
       - name: PHPCS
         if: ${{ steps.filter.outputs.wpcontent == 'true' }}
         run: ./vendor/bin/phpcs --standard=./phpcs.xml.dist ${{ steps.filter.outputs.wpcontent_files }}
+
+      - name: Psalm
+        if: ${{ steps.filter.outputs.wpcontent == 'true' }}
+        run: ./vendor/bin/psalm ${{ steps.filter.outputs.wpcontent_files }}
