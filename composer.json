@@ -91,7 +91,7 @@
     "moderntribe/acf-image-select": "dev-master",
     "moderntribe/tribe-acf-post-list-field": "^2.0",
     "moderntribe/tribe-libs": "^3.4",
-    "monolog/monolog": "1.23.0",
+    "monolog/monolog": "^2.0",
     "nickford/acf-swatch": "1.0.7",
     "php-di/php-di": "^6.0",
     "php-http/client-common": "^1.9.0",
