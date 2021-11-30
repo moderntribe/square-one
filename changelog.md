@@ -3,6 +3,8 @@
 All notable changes to this project will be documented in this file.
 
 ## 2021.11
+* Removed: monolog. This dependency will be managed by tribe-libs.
+* Updated: tribe libs to 3.4.8.
 * Updated: docker image to 74-3.0, composer v2 support (requires `so` v5.3.0+)
 * Added: Entrypoint for component scripts to run in the block editor.
 * Added: Slider component JS behaviors in the block editor.
