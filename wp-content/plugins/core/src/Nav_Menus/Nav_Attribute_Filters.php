@@ -12,6 +12,61 @@ use stdClass;
 class Nav_Attribute_Filters {
 
 	/**
+	 * Generate a class prefix based on wp_nav_menu() parameters.
+	 *
+	 * Because `menu` overrides `theme_location`, and `theme_location` is used if
+	 * `menu` is empty or menu does not exist, the solution is to get the slugs
+	 * of both menus, and if they're equal, use the theme location. If they're not equal,
+	 * then use the menu slug.
+	 *
+	 * @param stdClass $args An object of {@see wp_nav_menu()} arguments.
+	 *
+	 * @return string
+	 *
+	 * @todo evaluate: prepending "location-" and "menu-" is backwards-compatibility issue
+	 */
+	protected function get_class_prefix( stdClass $args ): string {
+		$menu = wp_get_nav_menu_object( $args->menu );
+		$locations = get_nav_menu_locations();
+
+		$menu_slug = '';
+		$location_menu_slug = '';
+
+		// Get slug of menu if exists.
+		if ( $menu ) {
+			$menu_slug = $menu->slug;
+		}
+
+		// Get theme location's menu.
+		if ( $args->theme_location && $locations && isset( $locations[ $args->theme_location ] ) ) {
+			$location_menu = wp_get_nav_menu_object( $locations[ $args->theme_location ] );
+		}
+
+		// Get theme location's menu's slug.
+		if ( ! empty( $location_menu ) ) {
+			$location_menu_slug = $location_menu->slug;
+		}
+
+		// Both slugs are empty, we've got nothing: bail.
+		if ( ! $menu_slug && ! $location_menu_slug ) {
+			return '';
+		}
+
+		// Menu and location menu slug are equal: use theme location.
+		if ( $menu_slug === $location_menu_slug ) {
+			return 'location-' . $args->theme_location;
+		}
+
+		// Menu slug is empty and theme location is specified: use theme location.
+		if ( ! $menu_slug && $args->theme_location ) {
+			return 'location-' . $args->theme_location;
+		}
+
+		// Must be a specified menu.
+		return 'menu-' . $menu_slug;
+	}
+
+	/**
 	 * Remove the ID attributed from the nav item
 	 *
 	 * @param string    $menu_id The ID that is applied to the menu item's `<li>` element.
@@ -42,26 +97,30 @@ class Nav_Attribute_Filters {
 	 * @filter nav_menu_css_class
 	 */
 	public function customize_nav_item_classes( array $classes, object $item, stdClass $args, int $depth ): array {
-		$theme_location = $args->theme_location;
+		$class_prefix = $this->get_class_prefix( $args );
 
-		$classes[] = $theme_location . '__list-item';
+		if ( empty( $class_prefix ) ) {
+			return $classes;
+		}
+
+		$classes[] = $class_prefix . '__list-item';
 
 		// Depth
-		$classes[] = $theme_location . '__list-item--depth-' . $depth;
+		$classes[] = $class_prefix . '__list-item--depth-' . $depth;
 
 		// Has children items
 		if ( in_array( 'menu-item-has-children', $item->classes ) ) {
-			$classes[] = $theme_location . '__list-item--has-children';
+			$classes[] = $class_prefix . '__list-item--has-children';
 		}
 
 		// Is Parent Item
 		if ( in_array( 'current-menu-parent', $item->classes ) ) {
-			$classes[] = $theme_location . '__list-item--is-current-parent';
+			$classes[] = $class_prefix . '__list-item--is-current-parent';
 		}
 
 		// Is Current Item
 		if ( in_array( 'current-menu-item', $item->classes ) ) {
-			$classes[] = $theme_location . '__list-item--is-current';
+			$classes[] = $class_prefix . '__list-item--is-current';
 		}
 
 		/**
@@ -105,16 +164,20 @@ class Nav_Attribute_Filters {
 	 * @filter nav_menu_link_attributes
 	 */
 	public function customize_nav_item_anchor_atts( array $atts, object $item, stdClass $args, int $depth ): array {
-		$theme_location = $args->theme_location;
+		$class_prefix = $this->get_class_prefix( $args );
+
+		if ( empty( $class_prefix ) ) {
+			return $atts;
+		}
 
 		$classes = [
-			$theme_location . '__action',
-			$theme_location . '__action--depth-' . $depth,
+			$class_prefix . '__action',
+			$class_prefix . '__action--depth-' . $depth,
 		];
 
 		// Has children items
 		if ( in_array( 'menu-item-has-children', $item->classes ) ) {
-			$classes[] = $theme_location . '__action--has-children';
+			$classes[] = $class_prefix . '__action--has-children';
 		}
 
 		$atts['class'] = implode( ' ', array_unique( $classes ) );
