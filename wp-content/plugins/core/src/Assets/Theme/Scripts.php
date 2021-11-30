@@ -100,7 +100,7 @@ class Scripts {
 			$this->localize_scripts( (string) reset( $handles ) );
 
 			if ( defined( 'HMR_DEV' ) && HMR_DEV === true ) {
-				wp_enqueue_script( 'tribe-scripts-hmr-bundle', 'https://localhost:3000/app.js', $handles, time(), true );
+				wp_enqueue_script( 'tribe-scripts-hmr-bundle', 'http://localhost:3000/app.js', $handles, time(), true );
 			}
 		}
 

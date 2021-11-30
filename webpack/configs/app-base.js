@@ -1,26 +1,48 @@
 /**
  * External Dependencies
  */
+const path = require( 'path' );
 const webpack = require( 'webpack' );
 
 module.exports = {
+	resolve: {
+		extensions: [ '.js', '.jsx', '.json', '.pcss' ],
+	},
+	resolveLoader: {
+		modules: [ path.resolve( `${ __dirname }/../../`, 'node_modules' ) ],
+	},
 	devtool: 'eval-source-map',
 	devServer: {
 		disableHostCheck: true,
 		headers: {
 			'Access-Control-Allow-Origin': '*',
 		},
+		port: 3000,
+		hot: true,
 	},
 	plugins: [
-		new webpack.HashedModuleIdsPlugin(),
+		new webpack.IgnorePlugin( {
+			resourceRegExp: /^\.\/locale$/,
+			contextRegExp: /moment$/,
+		} ),
 		new webpack.LoaderOptionsPlugin( {
 			debug: true,
 		} ),
+		new webpack.HotModuleReplacementPlugin(),
 	],
 	module: {
 		rules: [
 			{
-				test: /\.pcss$/,
+				test: /\.js$/,
+				exclude: [ /node_modules\/(?!(swiper|dom7)\/).*/ ],
+				use: [
+					{
+						loader: 'babel-loader',
+					},
+				],
+			},
+			{
+				test: /\.p?css$/,
 				use: [
 					'style-loader',
 					{
@@ -43,8 +65,8 @@ module.exports = {
 		],
 	},
 	optimization: {
-		namedModules: true, // NamedModulesPlugin()
-		noEmitOnErrors: true, // NoEmitOnErrorsPlugin
+		emitOnErrors: false, // NoEmitOnErrorsPlugin
 		concatenateModules: true, //ModuleConcatenationPlugin
+		moduleIds: 'deterministic',
 	},
 };
