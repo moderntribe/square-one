@@ -8,7 +8,13 @@ function tribe_isSSL(): bool {
 	return ! empty( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] !== 'off';
 }
 
-function tribe_getenv( $name, $default = null ) {
+/**
+ * @param  string  $name
+ * @param  mixed   $default
+ *
+ * @return array|int|mixed|string|null
+ */
+function tribe_getenv( string $name, $default = null ) {
 	$env = getenv( $name );
 	if ( $env === false ) {
 		return $default;
@@ -29,7 +35,7 @@ function tribe_getenv( $name, $default = null ) {
 
 if ( file_exists( __DIR__ . '/.env' ) ) {
 	require_once __DIR__ . '/vendor/autoload.php';
-	$dotenv = Dotenv\Dotenv::create( __DIR__ );
+	$dotenv = Dotenv\Dotenv::createUnsafeImmutable( __DIR__ );
 	$dotenv->load();
 }
 
@@ -37,8 +43,8 @@ if ( file_exists( __DIR__ . '/.env' ) ) {
 // Load build process timestamp
 // ==============================================================
 
-if ( file_exists( dirname( __FILE__ ) . '/build-process.php' ) ) {
-	include  dirname( __FILE__ ) . '/build-process.php';
+if ( file_exists( __DIR__ . '/build-process.php' ) ) {
+	include __DIR__ . '/build-process.php';
 }
 
 
@@ -47,17 +53,17 @@ if ( file_exists( __DIR__ . '/local-config.php' ) ) {
 }
 
 // Support a DATABASE_URL env var. Many PaaS like Heroku often provide credentials in this manner.
-if ( ! defined( 'DB_NAME' ) && tribe_getenv( 'DATABASE_URL', false )  ) {
-	$DSN = parse_url( tribe_getenv('DATABASE_URL' ) );
+if ( ! defined( 'DB_NAME' ) && tribe_getenv( 'DATABASE_URL', false ) ) {
+	$DSN = parse_url( tribe_getenv( 'DATABASE_URL' ) );
 	// ** MySQL settings - You can get this info from your web host ** //
 	/** The name of the database for WordPress */
-	define('DB_NAME', substr($DSN['path'], 1));
+	define( 'DB_NAME', substr( $DSN['path'], 1 ) );
 	/** MySQL database username */
-	define('DB_USER', $DSN['user']);
+	define( 'DB_USER', $DSN['user'] );
 	/** MySQL database password */
-	define('DB_PASSWORD', $DSN['pass']);
+	define( 'DB_PASSWORD', $DSN['pass'] );
 	/** MySQL hostname */
-	define('DB_HOST', $DSN['host']);
+	define( 'DB_HOST', $DSN['host'] );
 }
 
 
@@ -77,6 +83,7 @@ if ( ! defined( 'WP_ENVIRONMENT_TYPE' ) ) {
 if ( ! isset( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) ) {
 	$_SERVER['HTTP_X_FORWARDED_PROTO'] = '';
 }
+
 if ( ! isset( $_SERVER['HTTP_HOST'] ) ) {
 	$_SERVER['HTTP_HOST'] = 'local-cli';
 }

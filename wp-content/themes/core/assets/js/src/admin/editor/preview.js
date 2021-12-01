@@ -3,6 +3,7 @@ import 'lazysizes/plugins/object-fit/ls.object-fit';
 import 'lazysizes/plugins/parent-fit/ls.parent-fit';
 import 'lazysizes/plugins/respimg/ls.respimg';
 import 'lazysizes/plugins/bgset/ls.bgset';
+import components from './components';
 
 /**
  * @function appendSinkCssClasses
@@ -23,6 +24,7 @@ const appendSinkCssClasses = () => {
 
 const init = () => {
 	appendSinkCssClasses();
+	components();
 
 	console.info( 'SquareOne Admin: Initialized scripts needed for the editor preview.' );
 };

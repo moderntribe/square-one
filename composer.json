@@ -57,7 +57,7 @@
           "url": "https://composer.utility.mtribe.site/gravityforms/?key={%WP_PLUGIN_GF_KEY}&token={%WP_PLUGIN_GF_TOKEN}&t={%VERSION}"
         },
         "require": {
-          "ffraenz/private-composer-installer": "^3.0"
+          "ffraenz/private-composer-installer": "^5.0"
         }
       }
     },
@@ -72,7 +72,7 @@
           "url": "https://connect.advancedcustomfields.com/index.php?a=download&p=pro&k={%WP_PLUGIN_ACF_KEY}&t={%VERSION}"
         },
         "require": {
-          "ffraenz/private-composer-installer": "^3.0"
+          "ffraenz/private-composer-installer": "^5.0"
         }
       }
     }
@@ -80,39 +80,35 @@
   "require": {
     "php": "^7.4",
     "ext-json": "*",
-    "composer-plugin-api": "^1.1",
     "advanced-custom-fields/advanced-custom-fields-pro": "*",
-    "composer/installers": "1.4.0",
     "gravityforms/gravityforms": "*",
     "guzzlehttp/psr7": "^1.4",
     "humanmade/s3-uploads": "2.2.1",
     "johnbillion/extended-cpts": "^4.0",
     "johnpbloch/wordpress-core": "5.7.3",
-    "johnpbloch/wordpress-core-installer": "1.0.0",
+    "johnpbloch/wordpress-core-installer": "2.0.*",
     "mailgun/mailgun-php": "^2.8",
     "moderntribe/acf-image-select": "dev-master",
     "moderntribe/tribe-acf-post-list-field": "^2.0",
     "moderntribe/tribe-libs": "^3.4",
     "monolog/monolog": "1.23.0",
     "nickford/acf-swatch": "1.0.7",
-    "nikic/fast-route": "^1.3",
-    "nikic/php-parser": "^4.5",
     "php-di/php-di": "^6.0",
     "php-http/client-common": "^1.9.0",
     "php-http/curl-client": "^1.7",
     "roots/wp-password-bcrypt": "dev-master",
     "sunra/php-simple-html-dom-parser": "1.5.2",
-    "vlucas/phpdotenv": "^3.0",
+    "vlucas/phpdotenv": "^5.3",
     "wpackagist-plugin/configure-smtp": "3.1",
     "wpackagist-plugin/disable-emojis": "1.7.3",
     "wpackagist-plugin/gravity-forms-wcag-20-form-fields": "1.7.2",
-    "wpackagist-plugin/limit-login-attempts-reloaded": "2.23.1",
+    "wpackagist-plugin/limit-login-attempts-reloaded": "2.23.2",
     "wpackagist-plugin/posts-to-posts": "1.6.6",
     "wpackagist-plugin/redirection": "5.1.3",
     "wpackagist-plugin/regenerate-thumbnails": "3.1.5",
-    "wpackagist-plugin/the-events-calendar": "5.9.0",
-    "wpackagist-plugin/user-switching": "1.5.7",
-    "wpackagist-plugin/wordpress-seo": "17.0",
+    "wpackagist-plugin/the-events-calendar": "5.10.1",
+    "wpackagist-plugin/user-switching": "1.5.8",
+    "wpackagist-plugin/wordpress-seo": "17.5",
     "wpackagist-plugin/wp-tota11y": "1.2.0"
   },
   "require-dev": {
