@@ -75,7 +75,6 @@
     "@babel/runtime": "^7.16.3",
     "@types/react": "^16.9.11",
     "@vimeo/player": "^2.15.3",
-    "caniuse-lite": "1.0.30001235",
     "classnames": "^2.2.6",
     "delegate": "^3.2.0",
     "es6-promise": "^4.2.8",
