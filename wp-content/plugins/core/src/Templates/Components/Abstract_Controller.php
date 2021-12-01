@@ -1,7 +1,16 @@
 <?php declare(strict_types=1);
 
+/**
+ * Base class for other controllers to extend.
+ *
+ * @package Tribe
+ */
+
 namespace Tribe\Project\Templates\Components;
 
+/**
+ * Class for other controllers to extend.
+ */
 abstract class Abstract_Controller {
 
 	/**
@@ -17,7 +26,7 @@ abstract class Abstract_Controller {
 
 		foreach ( $this->required() as $key => $value ) {
 			if ( ! is_array( $value ) ) {
-				throw new \UnexpectedValueException( __( 'Required arguments should be of the type array', 'tribe' ) );
+				throw new \UnexpectedValueException( esc_html__( 'Required arguments should be of the type array', 'tribe' ) );
 			}
 			$args[ $key ] = array_merge( $args[ $key ], $value );
 		}

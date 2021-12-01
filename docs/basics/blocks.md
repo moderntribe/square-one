@@ -12,16 +12,12 @@ There are some block types that should be removed from the editor. Some reasons 
 * Blocks that encourage a client to make bad design choices
 * Blocks that we have replaced with custom block types
 
-By default, we are hiding some blocks and using an "Allow List" to add a block type, add it to the
-`\Tribe\Project\Blocks\Blocks_Definer::ALLOWLIST` array in `\Tribe\Project\Blocks\Blocks_Definer`. 
-The block types in this array will be passed to through the `allowed_block_types` filter. Also, note, 
-we have a `tribe_allowed_blocks` filter that can be used to prefilter prior to hitting the Wordpress 
-`allowed_block_types` filter. 
+You can remove blocks by adding the block name to the `\Tribe\Project\Blocks\Blocks_Definer::DENY_LIST`
+array. Some care should be taken to avoid errors when WordPress uses nested block types. For example,
+removing the `core/button` block will trigger an error in the editor, because the `core/buttons`
+block expects it to be available. They must be removed together. Welcome to the world of nested
+components :)
 
-Some care should be taken to avoid errors when WordPress uses nested block types. For
-example, removing the `core/button` block will trigger an error in the editor, because the `core/buttons`
-block expects it to be available. They must be removed together. Welcome to the world of nested components :)
-    
 ### Configuring Block Options
 
 Some block types provide various settings/options. E.g., font sizes, colors, styles. These can be
@@ -51,8 +47,8 @@ New block type that we register will be configured in a class that extends
  ACF documentation for registering a block. [ACF Block Registration](https://www.advancedcustomfields.com/resources/acf_register_block_type/)
 
 To register the block type defined by your class, add it to the
-`\Tribe\Project\Blocks\Blocks_Definer::TYPES` array in `\Tribe\Project\Blocks\Blocks_Definer` as well
-ass the `\Tribe\Project\Blocks\Blocks_Definer::ALLOWLIST` keeping in mind ACF prefixes your block name with `acf/`
+`\Tribe\Project\Blocks\Blocks_Definer::TYPES` array in `\Tribe\Project\Blocks\Blocks_Definer`
+keeping in mind ACF prefixes your block name with `acf/`
 
 Some general guidelines to follow:
 

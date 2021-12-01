@@ -8,18 +8,18 @@ use Tribe\Project\Templates\Components\link\Link_Controller;
 
 class Single_Pagination_Controller extends Abstract_Controller {
 
-	public const CLASSES           = 'classes';
-	public const ATTRS             = 'attrs';
-	public const LIST_CLASSES      = 'list_classes';
-	public const HEADER_CLASSES    = 'header_classes';
-	public const HEADER_ATTRS      = 'header_attrs';
-	public const LIST_ATTRS        = 'list_attrs';
-	public const ITEM_CLASSES      = 'item_classes';
-	public const ITEM_ATTRS        = 'item_attrs';
-	public const CONTAINER_CLASSES = 'container_classes';
-	public const CONTAINER_ATTRS   = 'container_attrs';
-	public const NEXT_POST         = 'next_post';
-	public const PREVIOUS_POST     = 'previous_post';
+	public const CLASSES             = 'classes';
+	public const ATTRS               = 'attrs';
+	public const LIST_CLASSES        = 'list_classes';
+	public const HEADER_CLASSES      = 'header_classes';
+	public const HEADER_ATTRS        = 'header_attrs';
+	public const LIST_ATTRS          = 'list_attrs';
+	public const ITEM_CLASSES        = 'item_classes';
+	public const ITEM_ATTRS          = 'item_attrs';
+	public const CONTAINER_CLASSES   = 'container_classes';
+	public const CONTAINER_ATTRS     = 'container_attrs';
+	public const PREVIOUS_LINK_LABEL = 'previous_link_label';
+	public const NEXT_LINK_LABEL     = 'next_link_label';
 
 	private array $classes;
 	private array $attrs;
@@ -31,8 +31,8 @@ class Single_Pagination_Controller extends Abstract_Controller {
 	private array $item_attrs;
 	private array $container_classes;
 	private array $container_attrs;
-	private array $next_post;
-	private array $previous_post;
+	private string $previous_link_label;
+	private string $next_link_label;
 
 	/**
 	 * Controller constructor.
@@ -42,18 +42,18 @@ class Single_Pagination_Controller extends Abstract_Controller {
 	public function __construct( array $args = [] ) {
 		$args = $this->get_args( $args );
 
-		$this->classes           = (array) $args[ self::CLASSES ];
-		$this->attrs             = (array) $args[ self::ATTRS ];
-		$this->list_classes      = (array) $args[ self::LIST_CLASSES ];
-		$this->list_attrs        = (array) $args[ self::LIST_ATTRS ];
-		$this->item_classes      = (array) $args[ self::ITEM_CLASSES ];
-		$this->item_attrs        = (array) $args[ self::ITEM_ATTRS ];
-		$this->container_attrs   = (array) $args[ self::CONTAINER_ATTRS ];
-		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
-		$this->header_classes    = (array) $args[ self::HEADER_CLASSES ];
-		$this->header_attrs      = (array) $args[ self::HEADER_ATTRS ];
-		$this->next_post         = $this->get_next_link_args();
-		$this->previous_post     = $this->get_previous_link_args();
+		$this->classes             = (array) $args[ self::CLASSES ];
+		$this->attrs               = (array) $args[ self::ATTRS ];
+		$this->list_classes        = (array) $args[ self::LIST_CLASSES ];
+		$this->list_attrs          = (array) $args[ self::LIST_ATTRS ];
+		$this->item_classes        = (array) $args[ self::ITEM_CLASSES ];
+		$this->item_attrs          = (array) $args[ self::ITEM_ATTRS ];
+		$this->container_attrs     = (array) $args[ self::CONTAINER_ATTRS ];
+		$this->container_classes   = (array) $args[ self::CONTAINER_CLASSES ];
+		$this->header_classes      = (array) $args[ self::HEADER_CLASSES ];
+		$this->header_attrs        = (array) $args[ self::HEADER_ATTRS ];
+		$this->previous_link_label = (string) $args[ self::PREVIOUS_LINK_LABEL ];
+		$this->next_link_label     = (string) $args[ self::NEXT_LINK_LABEL ];
 	}
 
 	/**
@@ -61,16 +61,18 @@ class Single_Pagination_Controller extends Abstract_Controller {
 	 */
 	protected function defaults(): array {
 		return [
-			self::CLASSES           => [],
-			self::ATTRS             => [],
-			self::LIST_CLASSES      => [],
-			self::ITEM_CLASSES      => [],
-			self::ITEM_ATTRS        => [],
-			self::LIST_ATTRS        => [],
-			self::CONTAINER_ATTRS   => [],
-			self::CONTAINER_CLASSES => [],
-			self::HEADER_CLASSES    => [],
-			self::HEADER_ATTRS      => [],
+			self::CLASSES             => [],
+			self::ATTRS               => [],
+			self::LIST_CLASSES        => [],
+			self::ITEM_CLASSES        => [],
+			self::ITEM_ATTRS          => [],
+			self::LIST_ATTRS          => [],
+			self::CONTAINER_ATTRS     => [],
+			self::CONTAINER_CLASSES   => [],
+			self::HEADER_CLASSES      => [],
+			self::HEADER_ATTRS        => [],
+			self::PREVIOUS_LINK_LABEL => '',
+			self::NEXT_LINK_LABEL     => '',
 		];
 	}
 
@@ -81,7 +83,7 @@ class Single_Pagination_Controller extends Abstract_Controller {
 		return [
 			self::CLASSES           => [ 'pagination', 'pagination--single' ],
 			self::ATTRS             => [ 'aria-label' => esc_attr__( 'Post Pagination', 'tribe' ) ],
-			self::LIST_CLASSES      => [ 'pagination__item', 'pagination__item--next' ],
+			self::LIST_CLASSES      => [ 'pagination__item' ],
 			self::HEADER_CLASSES    => [ 'visual-hide' ],
 			self::HEADER_ATTRS      => [ 'id' => 'pagination__label-single' ],
 			self::CONTAINER_CLASSES => [ 'pagination__list' ],
@@ -99,9 +101,9 @@ class Single_Pagination_Controller extends Abstract_Controller {
 		}
 
 		return [
-			Link_Controller::CONTENT => get_the_title( $previous ),
+			Link_Controller::CONTENT => ( empty( $this->previous_link_label ) ? get_the_title( $previous ) : $this->previous_link_label ),
 			Link_Controller::URL     => get_permalink( $previous ),
-			Link_Controller::CLASSES => [],
+			Link_Controller::CLASSES => [ 'pagination__item-link--previous' ],
 			Link_Controller::ATTRS   => [ 'rel' => 'prev' ],
 		];
 	}
@@ -117,9 +119,9 @@ class Single_Pagination_Controller extends Abstract_Controller {
 		}
 
 		return [
-			Link_Controller::CONTENT => get_the_title( $next ),
+			Link_Controller::CONTENT => ( empty( $this->next_link_label ) ? get_the_title( $next ) : $this->next_link_label ),
 			Link_Controller::URL     => get_permalink( $next ),
-			Link_Controller::CLASSES => [],
+			Link_Controller::CLASSES => ['pagination__item-link--next'],
 			Link_Controller::ATTRS   => [ 'rel' => 'next' ],
 		];
 	}

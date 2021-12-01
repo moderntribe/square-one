@@ -18,20 +18,27 @@ const sharedPlugins = [
 		],
 	} ),
 	require( 'postcss-mixins' ),
-	require( 'postcss-custom-properties' )( { preserve: true } ),
 	require( 'postcss-simple-vars' ),
-	require( 'postcss-custom-media' ),
 	require( 'postcss-functions' )( { functions: postcssFunctions } ),
 	require( 'postcss-quantity-queries' ),
 	require( 'postcss-aspect-ratio' ),
-	require( 'postcss-nested' ),
+	require( 'postcss-nested' ), // TODO: Investigate if postcss-nesting (https://github.com/jonathantneal/postcss-nesting) is more appropriate (CSSWG draft & supported by postcss-preset-env)
 	require( 'postcss-inline-svg' )( {
 		paths: [
 			pkg.square1.paths.core_theme_img,
 			pkg.square1.paths.core_admin_img,
 		],
 	} ),
-	require( 'postcss-preset-env' )( { stage: 0, autoprefixer: { grid: true }, features: { 'focus-visible-pseudo-class': false, 'focus-within-pseudo-class': false } } ),
+	require( 'postcss-preset-env' )( {
+		stage: 0,
+		autoprefixer: { grid: true },
+		preserve: false, // Comment this line to preserve CSS custom properties (css variables)
+		features: {
+			// 'custom-properties': false, // Uncomment this line to ONLY use CSS custom properties (no fallbacks)
+			'focus-visible-pseudo-class': false,
+			'focus-within-pseudo-class': false,
+		},
+	} ),
 	require( 'postcss-calc' ),
 ];
 
@@ -49,10 +56,9 @@ const legacyPlugins = [
 		prefix: '_',
 	} ),
 	require( 'postcss-mixins' ),
-	require( 'postcss-custom-properties' )( { preserve: false } ),
 	require( 'postcss-simple-vars' ),
 	require( 'postcss-nested' ),
-	require( 'postcss-preset-env' )( { browsers: [ 'last 20 versions' ] } ),
+	require( 'postcss-preset-env' )( { browsers: [ 'last 20 versions' ], preserve: false } ),
 	require( 'postcss-assets' )( { loadPaths: [ `${ pkg.square1.paths.core_theme }/` ] } ),
 ];
 

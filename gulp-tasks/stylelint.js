@@ -41,6 +41,18 @@ module.exports = {
 			} ) )
 			.pipe( gulp.dest( pkg.square1.paths.core_components_pcss ) );
 	},
+	routes() {
+		return gulp.src( [
+			`${ pkg.square1.paths.core_routes_pcss }**/*.pcss`,
+		] )
+			.pipe( stylelint( {
+				fix: true,
+				reporters: [
+					{ formatter: 'string', console: true },
+				],
+			} ) )
+			.pipe( gulp.dest( pkg.square1.paths.core_routes_pcss ) );
+	},
 	integrations() {
 		return gulp.src( [
 			`${ pkg.square1.paths.core_theme_integrations }**/*.pcss`,

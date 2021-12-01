@@ -5,6 +5,7 @@ namespace Tribe\Project\Blocks\Types\Logos;
 use Tribe\Libs\ACF\Block;
 use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Field;
+use Tribe\Libs\ACF\Field_Section;
 use Tribe\Libs\ACF\Repeater;
 use Tribe\Project\Admin\Editor\Classic_Editor_Formats;
 use Tribe\Project\Blocks\Fields\Cta_Field;
@@ -20,16 +21,17 @@ class Logos extends Block_Config implements Cta_Field {
 	public const TITLE       = 'title';
 	public const DESCRIPTION = 'description';
 
-	public const LOGOS      = 'logos';
-	public const LOGO_IMAGE = 'image';
-	public const LOGO_LINK  = 'link';
+	public const SECTION_LOGOS = 's-logos';
+	public const LOGOS         = 'logos';
+	public const LOGO_IMAGE    = 'image';
+	public const LOGO_LINK     = 'link';
 
 	public function add_block() {
 		$this->set_block( new Block( self::NAME, [
-			'title'       => __( 'Logos', 'tribe' ),
-			'description' => __( 'A collection of logos.', 'tribe' ),
+			'title'       => esc_html__( 'Logos', 'tribe' ),
+			'description' => esc_html__( 'A collection of logos.', 'tribe' ),
 			'icon'        => 'screenoptions',
-			'keywords'    => [ __( 'logos', 'tribe' ) ],
+			'keywords'    => [ esc_html__( 'logos', 'tribe' ) ],
 			'category'    => 'layout',
 			'supports'    => [
 				'align'  => false,
@@ -70,17 +72,18 @@ class Logos extends Block_Config implements Cta_Field {
 
 	public function add_fields() {
 		$this->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
-				'label' => __( 'Lead in', 'tribe' ),
-				'name'  => self::LEAD_IN,
-				'type'  => 'text',
+				'label'       => esc_html__( 'Lead in', 'tribe' ),
+				'name'        => self::LEAD_IN,
+				'type'        => 'text',
+				'placeholder' => esc_html__( 'Leadin (optional)', 'tribe' ),
 			] )
 		)->add_field( new Field( self::NAME . '_' . self::TITLE, [
-				'label' => __( 'Title', 'tribe' ),
+				'label' => esc_html__( 'Title', 'tribe' ),
 				'name'  => self::TITLE,
 				'type'  => 'text',
 			] )
 		)->add_field( new Field( self::NAME . '_' . self::DESCRIPTION, [
-				'label'        => __( 'Description', 'tribe' ),
+				'label'        => esc_html__( 'Description', 'tribe' ),
 				'name'         => self::DESCRIPTION,
 				'type'         => 'wysiwyg',
 				'toolbar'      => Classic_Editor_Formats::MINIMAL,
@@ -89,9 +92,10 @@ class Logos extends Block_Config implements Cta_Field {
 			] )
 		)->add_field(
 			$this->get_cta_field( self::NAME )
-		)->add_field(
-			$this->get_logos_section()
 		);
+
+		$this->add_section( new Field_Section( self::SECTION_LOGOS, esc_html__( 'Logos', 'tribe' ), 'accordion' ) )
+			->add_field( $this->get_logos_section() );
 	}
 
 	/**
@@ -100,12 +104,15 @@ class Logos extends Block_Config implements Cta_Field {
 	protected function get_logos_section(): Repeater {
 		$group = new Repeater( self::NAME . '_' . self::LOGOS );
 		$group->set_attributes( [
-			'label'        => __( 'Logos', 'tribe' ),
+			'label'        => esc_html__( 'Logos', 'tribe' ),
 			'name'         => self::LOGOS,
 			'layout'       => 'block',
 			'min'          => 0,
 			'max'          => 12,
-			'button_label' => 'Add Logo',
+			'button_label' => esc_html__( 'Add Logo', 'tribe' ),
+			'wrapper'      => [
+				'class' => 'tribe-acf-hide-label',
+			],
 		] );
 
 		$logo_image = new Field( self::LOGO_IMAGE, [

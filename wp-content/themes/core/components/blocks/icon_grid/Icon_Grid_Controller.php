@@ -18,6 +18,7 @@ class Icon_Grid_Controller extends Abstract_Controller {
 	public const ATTRS             = 'attrs';
 	public const CONTAINER_CLASSES = 'container_classes';
 	public const CONTENT_CLASSES   = 'content_classes';
+	public const LAYOUT            = 'layout';
 	public const TITLE             = 'title';
 	public const LEADIN            = 'leadin';
 	public const DESCRIPTION       = 'description';
@@ -28,6 +29,7 @@ class Icon_Grid_Controller extends Abstract_Controller {
 	private array $attrs;
 	private array $container_classes;
 	private array $content_classes;
+	private string $layout;
 	private string $title;
 	private string $leadin;
 	private string $description;
@@ -41,6 +43,7 @@ class Icon_Grid_Controller extends Abstract_Controller {
 		$this->attrs             = (array) $args[ self::ATTRS ];
 		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
 		$this->content_classes   = (array) $args[ self::CONTENT_CLASSES ];
+		$this->layout            = (string) $args[ self::LAYOUT ];
 		$this->title             = (string) $args[ self::TITLE ];
 		$this->leadin            = (string) $args[ self::LEADIN ];
 		$this->description       = (string) $args[ self::DESCRIPTION ];
@@ -54,6 +57,7 @@ class Icon_Grid_Controller extends Abstract_Controller {
 			self::ATTRS             => [],
 			self::CONTAINER_CLASSES => [],
 			self::CONTENT_CLASSES   => [],
+			self::LAYOUT            => '',
 			self::TITLE             => '',
 			self::LEADIN            => '',
 			self::DESCRIPTION       => '',
@@ -64,7 +68,10 @@ class Icon_Grid_Controller extends Abstract_Controller {
 
 	protected function required(): array {
 		return [
-			self::CLASSES           => [ 'c-block', 'b-icon-grid' ],
+			self::CLASSES           => [
+				'c-block',
+				'b-icon-grid',
+			],
 			self::CONTAINER_CLASSES => [ 'l-container' ],
 		];
 	}
@@ -87,6 +94,8 @@ class Icon_Grid_Controller extends Abstract_Controller {
 	 * @return string
 	 */
 	public function get_container_classes(): string {
+		$this->container_classes[] = 'layout-' . $this->layout;
+
 		return Markup_Utils::class_attribute( $this->container_classes );
 	}
 
