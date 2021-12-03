@@ -8,7 +8,6 @@
 	border: 1px solid var(--color-border);
 
 	@media (--viewport-small) {
-		overflow: hidden;
 		border: none;
 	}
 }
@@ -59,12 +58,6 @@
 	@media (--viewport-small) {
 		display: block;
 	}
-
-	.c-nav {
-		@media (--viewport-small) {
-			display: flex; /* Collapse whitespace inside the section nav container to properly menu item fit. */
-		}
-	}
 }
 
 .c-section-nav__list {
@@ -91,8 +84,14 @@
 		}
 	}
 
-	&:first-child {
-		font-weight: 700;
+	/* CASE: items within the "More" menu */
+	.c-section-nav__list--more & {
+		display: block;
+		margin: 0;
+
+		& ~ li {
+			margin-top: 12px;
+		}
 	}
 }
 
@@ -112,6 +111,27 @@
 	}
 }
 
+.section-nav__list-item--more {
+	display: none;
+	position: relative;
+
+	/* CASE: the more menu is active. */
+	.c-section-nav--more-active & {
+		display: flex;
+	}
+}
+
+.c-section-nav__more-toggle {
+	@mixin a-btn-reset;
+}
+
 .c-section-nav__more {
 	display: none;
+	position: absolute;
+	top: calc(100% + var(--spacer-10));
+	right: calc(-1 * var(--spacer-10));
+	padding: var(--spacer-30) var(--spacer-40);
+	background: var(--color-bgd-content);
+	border: 1px solid var(--color-border);
+	border-radius: var(--spacer-10);
 }

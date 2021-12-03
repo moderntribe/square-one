@@ -89,8 +89,45 @@ const handleEscKeyUp = ( e ) => {
 	toggleAllSectionNavs( true );
 };
 
-const navFits = sectionNav => sectionNav.offsetWidth > sectionNav.scrollWidth;
+/**
+ * Reset the nav to its default state
+ *
+ * @param sectionNav
+ */
+const resetNav = ( sectionNav ) => {
+	// Reset the respective classes
+	sectionNav.classList.remove( 'c-section-nav--more-active' );
 
+	// Bail if there's no "more" list item
+	if ( ! sectionNav.querySelector( '[data-js="c-section-nav__list-item--more"]' ) ) {
+		return;
+	}
+
+	const sectionNavList = sectionNav.querySelector( '[data-js="c-section-nav__list"]' );
+	const moreListItem = sectionNavList.querySelector( '[data-js="c-section-nav__list-item--more"]' );
+	const moreList = sectionNavList.querySelector( '[data-js="c-section-nav__list--more"]' );
+	const items = moreList.querySelectorAll( 'li' );
+
+	// Move all the items back to the top-level menu
+	items.forEach( item => sectionNavList.insertBefore( item, moreListItem ) );
+};
+
+/**
+ * Check if the nav fits
+ *
+ * If the scroll width of the component is less than or equal to
+ * the offset width of the component, then the nav fits.
+ *
+ * @param sectionNav
+ * @returns {boolean}
+ */
+const navFits = sectionNav => sectionNav.offsetWidth >= sectionNav.scrollWidth;
+
+/**
+ * Injects the more menu markup from the respective JS <template> into the section nav list.
+ *
+ * @param sectionNav
+ */
 const injectMoreMenu = ( sectionNav ) => {
 	const template = sectionNav.querySelector( '[data-template="more"]' );
 	const sectionNavList = sectionNav.querySelector( '[data-js="c-section-nav__list"]' );
@@ -98,7 +135,14 @@ const injectMoreMenu = ( sectionNav ) => {
 	sectionNavList.append( moreMenu );
 };
 
+/**
+ * Loop through all the menu items and file them into the More menu until the nav fits.
+ *
+ * @param sectionNav
+ */
 const fileItems = ( sectionNav ) => {
+	sectionNav.classList.add( 'c-section-nav--more-active' );
+
 	if ( ! sectionNav.querySelector( '[data-js="c-section-nav__list--more"]' ) ) {
 		injectMoreMenu( sectionNav );
 	}
@@ -107,60 +151,41 @@ const fileItems = ( sectionNav ) => {
 	const moreList = sectionNavList.querySelector( '[data-js="c-section-nav__list--more"]' );
 
 	do {
-		const lastItem = sectionNavList.querySelector( 'li:nth-last-child(2)' ); // Inject items just before the "More" item.
-		moreList.append( lastItem );
+		// Grab the list item just before the "More" item
+		const lastItem = sectionNavList.querySelector( 'li:nth-last-child(2)' );
+		moreList.prepend( lastItem );
 	} while ( ! navFits( sectionNav ) );
 };
 
-const unfileItems = ( sectionNav ) => {
-	const sectionNavList = sectionNav.querySelector( '[data-js="c-section-nav__list"]' );
-	const moreList = sectionNavList.querySelector( '[data-js="c-section-nav__list--more"]' );
-
-	if ( ! moreList ) {
-		return;
-	}
-
-	const lastItem = moreList.querySelector( 'li:first-child' );
-
-	// console.info( lastItem );
-
-	if ( lastItem ) {
-		sectionNavList.insertBefore( lastItem, moreList );
-	}
-
-/*	do {
-		const lastItem = moreList.querySelector( 'li:first-child' );
-		sectionNavList.append( lastItem );
-		console.info( lastItem );
-	} while ( navFits( sectionNav ) && moreList.querySelector( 'li:first-child' ) );*/
-};
-
+/**
+ * Handle the fit of the nav for desktop.
+ *
+ * @param sectionNav
+ */
 const handleNavFit = ( sectionNav ) => {
-	if ( componentState.isMobile ) {
-		console.info( 'Unfile all the items and remove the more menu.' );
+	resetNav( sectionNav );
+
+	if ( componentState.isMobile || navFits( sectionNav ) ) {
 		return;
 	}
 
-	// const sectionNavList = sectionNav.querySelector( '[data-js="c-section-nav__list"]' );
-
-	if ( sectionNav.scrollWidth <= sectionNav.offsetWidth ) {
-		console.info( 'Unfile an item, repeat until no more items, then remove "more" menu' );
-		//unfileItems( sectionNav );
-	}
-
-	// if scrollWidth is greater than offsetWidth, check for more, append it, and file an item.
-	if ( sectionNav.scrollWidth > sectionNav.offsetWidth ) {
-		console.info( 'check for and inject "More", file an item and repeat.' );
-		//fileItems( sectionNav );
-	}
+	fileItems( sectionNav );
 };
 
+/**
+ * Set up the resizeObserver callback
+ *
+ * @type {ResizeObserver}
+ */
 const sectionNavResizeObserver = new ResizeObserver( entries => {
 	for ( const entry of entries ) {
 		handleNavFit( entry.target );
 	}
 } );
 
+/**
+ * Loop through any SectionNav components and attach the ResizeObserver to handle the desktop "more" menu.
+ */
 const handleInitialState = () => {
 	el.sectionNavs.forEach( sectionNav => sectionNavResizeObserver.observe( sectionNav ) );
 };
