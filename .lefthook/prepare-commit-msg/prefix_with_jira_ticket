@@ -7,8 +7,11 @@
 FILE=$1
 MESSAGE=$(cat $FILE)
 IFS=/ read -a parts <<< $(git rev-parse --abbrev-ref HEAD)
+
+IS_SPECIAL_BRANCH=$(echo ${parts[0]} | grep -i 'release/\|sprint/')
+[[ ! -z "$IS_SPECIAL_BRANCH" ]] || exit 0
+
 TICKET=[$(echo ${parts[1]} | grep -Eo '(\w+[-])?[0-9]+')]
-if [[ $TICKET == "[]" || "$MESSAGE" == "$TICKET"* ]]; then
-  exit 0
-fi
+[[ $TICKET == "[]" || "$MESSAGE" == "$TICKET"* ]] || exit 0
+
 echo "$TICKET $MESSAGE" > $FILE
