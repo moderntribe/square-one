@@ -36,6 +36,10 @@
     },
     {
       "type": "vcs",
+      "url": "git@github.com:msawicki/acf-menu-chooser.git"
+    },
+    {
+      "type": "vcs",
       "url": "git@github.com:moderntribe/tribe-acf-post-list-field.git"
     },
     {
@@ -88,6 +92,7 @@
     "johnpbloch/wordpress-core": "5.7.3",
     "johnpbloch/wordpress-core-installer": "2.0.*",
     "mailgun/mailgun-php": "^2.8",
+    "msawicki/acf-menu-chooser": "dev-master",
     "moderntribe/acf-image-select": "dev-master",
     "moderntribe/tribe-acf-post-list-field": "^2.0",
     "moderntribe/tribe-libs": "^3.4",
