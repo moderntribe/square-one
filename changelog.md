@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 * Updated: docker image to 74-3.0, composer v2 support (requires `so` v5.3.0+)
 * Added: Entrypoint for component scripts to run in the block editor.
 * Added: Slider component JS behaviors in the block editor.
+* Added: check that `theme_location` parameter of `wp_nav_menu()` is populated before adding classes
  
 ## 2021.10
 * Fixed: Misc small repairs to common blocks per QA on other projects.
