@@ -113,17 +113,6 @@ const resetNav = ( sectionNav ) => {
 };
 
 /**
- * Check if the nav fits
- *
- * If the scroll width of the component is less than or equal to
- * the offset width of the component, then the nav fits.
- *
- * @param sectionNav
- * @returns {boolean}
- */
-const navFits = sectionNav => sectionNav.offsetWidth >= sectionNav.scrollWidth;
-
-/**
  * Injects the more menu markup from the respective JS <template> into the section nav list.
  *
  * @param sectionNav
@@ -134,6 +123,17 @@ const injectMoreMenu = ( sectionNav ) => {
 	const moreMenu = document.importNode( template.content, true );
 	sectionNavList.append( moreMenu );
 };
+
+/**
+ * Check if the nav fits
+ *
+ * If the scroll width of the component is less than or equal to
+ * the offset width of the component, then the nav fits.
+ *
+ * @param sectionNav
+ * @returns {boolean}
+ */
+const navFits = sectionNav => sectionNav.offsetWidth >= sectionNav.scrollWidth;
 
 /**
  * Loop through all the menu items and file them into the More menu until the nav fits.
@@ -198,6 +198,7 @@ const handleResize = () => {
 	if ( state.v_width >= MOBILE_BREAKPOINT && componentState.isMobile ) {
 		toggleAllSectionNavs( false );
 		componentState.isMobile = false;
+		el.sectionNavs.forEach( sectionNav => handleNavFit( sectionNav ) );
 	}
 
 	// If viewport state is mobile, but component state is NOT, update component state and hide all section navs.

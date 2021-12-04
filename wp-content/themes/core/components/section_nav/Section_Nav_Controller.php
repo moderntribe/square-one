@@ -119,7 +119,7 @@ class Section_Nav_Controller extends Abstract_Controller {
 				'aria-expanded' => 'false',
 				'aria-haspopup' => 'true',
 			],
-			Button_Controller::CLASSES => [ 'c-section-nav__more-toggle' ],
+			Button_Controller::CLASSES => [ 'c-section-nav__toggle', 'c-section-nav__more-toggle' ],
 			Button_Controller::CONTENT => esc_html( $this->more_label ),
 		] );
 	}
@@ -132,7 +132,7 @@ class Section_Nav_Controller extends Abstract_Controller {
 				'aria-expanded' => 'false',
 				'aria-haspopup' => 'true',
 			],
-			Button_Controller::CLASSES => [ 'c-section-nav__container-toggle' ],
+			Button_Controller::CLASSES => [ 'c-section-nav__toggle', 'c-section-nav__container-toggle' ],
 			Button_Controller::CONTENT => esc_html( $this->toggle_label ),
 		] );
 	}
