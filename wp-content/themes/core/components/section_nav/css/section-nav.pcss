@@ -76,7 +76,7 @@
 }
 
 /* -----------------------------------------------------------------------------
- * Section Nav Mobile Container
+ * Section Nav Container
  * ----------------------------------------------------------------------------- */
 
 .c-section-nav__container {
@@ -84,6 +84,22 @@
 
 	/* CASE: The mobile menu is open or it's showing the desktop layout. */
 	.c-section-nav--visible & {
+		display: flex;
+		flex-flow: row nowrap;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Section Nav Desktop Label (optional)
+ * ----------------------------------------------------------------------------- */
+
+.c-section-nav__label--desktop {
+	display: none;
+	margin-right: var(--spacer-50);
+	white-space: nowrap;
+	font-weight: 700;
+
+	@media (--viewport-small) {
 		display: block;
 	}
 }
@@ -107,10 +123,6 @@
  * ----------------------------------------------------------------------------- */
 
 .section-nav__list-item {
-	@media (--viewport-small) {
-		display: flex;
-		flex-flow: row nowrap;
-	}
 
 	& ~ li {
 		@media (--viewport-small) {
@@ -120,7 +132,6 @@
 
 	/* CASE: items within the "More" menu */
 	.c-section-nav__list--more & {
-		display: block;
 		margin: 0;
 
 		& ~ li {

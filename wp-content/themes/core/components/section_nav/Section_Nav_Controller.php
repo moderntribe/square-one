@@ -7,6 +7,7 @@ use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\button\Button_Controller;
 use Tribe\Project\Templates\Components\Deferred_Component;
 use Tribe\Project\Templates\Components\navigation\Navigation_Controller;
+use Tribe\Project\Templates\Components\text\Text_Controller;
 
 class Section_Nav_Controller extends Abstract_Controller {
 
@@ -15,7 +16,8 @@ class Section_Nav_Controller extends Abstract_Controller {
 	public const CONTAINER_ATTRS   = 'container_attrs';
 	public const CONTAINER_CLASSES = 'container_classes';
 	public const MENU              = 'menu';
-	public const TOGGLE_LABEL      = 'toggle_label';
+	public const MOBILE_LABEL      = 'mobile_label';
+	public const DESKTOP_LABEL     = 'desktop_label';
 	public const MORE_LABEL        = 'more_label';
 
 	/**
@@ -46,7 +48,12 @@ class Section_Nav_Controller extends Abstract_Controller {
 	/**
 	 * @var string
 	 */
-	private string $toggle_label;
+	private string $mobile_label;
+
+	/**
+	 * @var string
+	 */
+	private string $desktop_label;
 
 	/**
 	 * @var string
@@ -80,7 +87,8 @@ class Section_Nav_Controller extends Abstract_Controller {
 		$this->container_attrs   = (array) $args[ self::CONTAINER_ATTRS ];
 		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
 		$this->menu              = $args[ self::MENU ];
-		$this->toggle_label      = (string) $args[ self::TOGGLE_LABEL ];
+		$this->mobile_label      = (string) $args[ self::MOBILE_LABEL ];
+		$this->desktop_label     = (string) $args[ self::DESKTOP_LABEL ];
 		$this->more_label        = (string) $args[ self::MORE_LABEL ];
 	}
 
@@ -133,7 +141,14 @@ class Section_Nav_Controller extends Abstract_Controller {
 				'aria-haspopup' => 'true',
 			],
 			Button_Controller::CLASSES => [ 'c-section-nav__toggle', 'c-section-nav__toggle--mobile' ],
-			Button_Controller::CONTENT => esc_html( $this->toggle_label ),
+			Button_Controller::CONTENT => esc_html( $this->mobile_label ),
+		] );
+	}
+
+	public function get_desktop_label(): Deferred_Component {
+		return defer_template_part( 'components/text/text', null, [
+			Text_Controller::CLASSES => [ 'c-section-nav__label--desktop' ],
+			Text_Controller::CONTENT => $this->desktop_label,
 		] );
 	}
 
@@ -153,7 +168,8 @@ class Section_Nav_Controller extends Abstract_Controller {
 			self::CONTAINER_ATTRS   => [],
 			self::CONTAINER_CLASSES => [],
 			self::MENU              => 0,
-			self::TOGGLE_LABEL      => esc_html__( 'In this section', 'tribe' ),
+			self::MOBILE_LABEL      => esc_html__( 'In this section', 'tribe' ),
+			self::DESKTOP_LABEL     => '',
 			self::MORE_LABEL        => esc_html__( 'More', 'tribe' ),
 		];
 	}
