@@ -20,26 +20,74 @@ const componentState = {
 };
 
 /**
- * Open a particular Section Nav menu.
+ * Close a particular More menu.
  *
  * @param sectionNav
  */
-const openSectionNav = ( sectionNav ) => {
-	const toggle = sectionNav.querySelector( '[data-js="c-section-nav__container-toggle"]' );
-	const container = sectionNav.querySelector( '[data-js="c-section-nav__container"]' );
+const closeMoreMenu = ( sectionNav ) => {
+	const toggle = sectionNav.querySelector( '[data-js="c-section-nav__toggle--more"]' );
 
-	container.style.display = 'block';
+	// Bail if no more menu or it's already closed.
+	if ( ! toggle || toggle.getAttribute( 'aria-expanded' ) !== 'true' ) {
+		return;
+	}
+
+	// Move focus to the sectionNav's toggle if it's currently inside the nav being closed.
+	if ( document.activeElement.closest( '[data-js="c-section-nav"]' ) === sectionNav ) {
+		toggle.focus();
+	}
+
+	sectionNav.classList.remove( 'c-section-nav--more-active' );
+	toggle.setAttribute( 'aria-expanded', 'false' );
+};
+
+/**
+ * Close all the Section Nav More menus.
+ */
+const closeAllMoreMenus = () => el.sectionNavs.forEach( sectionNav => closeMoreMenu( sectionNav ) );
+
+/**
+ * Open a particular More menu.
+ *
+ * @param sectionNav
+ */
+const openMoreMenu = ( sectionNav ) => {
+	const toggle = sectionNav.querySelector( '[data-js="c-section-nav__toggle--more"]' );
+
+	closeAllMoreMenus();
+	sectionNav.classList.add( 'c-section-nav--more-active' );
 	toggle.setAttribute( 'aria-expanded', 'true' );
 };
 
 /**
- * Close a particular Section Nav menu.
+ * Handle click events for Section Nav More menus.
+ *
+ * @param e
+ */
+const toggleMoreMenu = ( e ) => {
+	const sectionNav = e.target.closest( '[data-js="c-section-nav"]' );
+	e.target.getAttribute( 'aria-expanded' ) === 'false' ? openMoreMenu( sectionNav ) : closeMoreMenu( sectionNav );
+};
+
+/**
+ * Open a particular Section Nav menu on mobile.
+ *
+ * @param sectionNav
+ */
+const openSectionNav = ( sectionNav ) => {
+	const toggle = sectionNav.querySelector( '[data-js="c-section-nav__toggle--mobile"]' );
+
+	sectionNav.classList.add( 'c-section-nav--visible' );
+	toggle.setAttribute( 'aria-expanded', 'true' );
+};
+
+/**
+ * Close a particular Section Nav menu on mobile.
  *
  * @param sectionNav
  */
 const closeSectionNav = ( sectionNav ) => {
-	const toggle = sectionNav.querySelector( '[data-js="c-section-nav__container-toggle"]' );
-	const container = sectionNav.querySelector( '[data-js="c-section-nav__container"]' );
+	const toggle = sectionNav.querySelector( '[data-js="c-section-nav__toggle--mobile"]' );
 
 	// Bail if already closed.
 	if ( toggle.getAttribute( 'aria-expanded' ) !== 'true' ) {
@@ -51,7 +99,7 @@ const closeSectionNav = ( sectionNav ) => {
 		toggle.focus();
 	}
 
-	container.style.display = 'none';
+	sectionNav.classList.remove( 'c-section-nav--visible' );
 	toggle.setAttribute( 'aria-expanded', 'false' );
 };
 
@@ -60,9 +108,9 @@ const closeSectionNav = ( sectionNav ) => {
  *
  * @param closeNavs
  */
-const toggleAllSectionNavs = ( closeNavs = true ) => {
+const toggleAllSectionNavs = ( closeNavs = 'close' ) => {
 	el.sectionNavs.forEach( ( sectionNav ) => {
-		closeNavs ? closeSectionNav( sectionNav ) : openSectionNav( sectionNav );
+		closeNavs === 'close' ? closeSectionNav( sectionNav ) : openSectionNav( sectionNav );
 	} );
 };
 
@@ -77,31 +125,25 @@ const toggleSectionNav = ( e ) => {
 };
 
 /**
- * Handle Escape key events for this module.
- *
- * @param e
- */
-const handleEscKeyUp = ( e ) => {
-	if ( e.key !== 'Escape' || ! componentState.isMobile ) {
-		return;
-	}
-
-	toggleAllSectionNavs( true );
-};
-
-/**
  * Reset the nav to its default state
  *
  * @param sectionNav
  */
 const resetNav = ( sectionNav ) => {
 	// Reset the respective classes
-	sectionNav.classList.remove( 'c-section-nav--more-active' );
+	sectionNav.classList.remove( 'c-section-nav--more-initialized' );
+
+	if ( ! componentState.isMobile ) {
+		sectionNav.classList.add( 'c-section-nav--visible' );
+	}
 
 	// Bail if there's no "more" list item
 	if ( ! sectionNav.querySelector( '[data-js="c-section-nav__list-item--more"]' ) ) {
 		return;
 	}
+
+	// Close the more menu, if it's open.
+	closeMoreMenu( sectionNav );
 
 	const sectionNavList = sectionNav.querySelector( '[data-js="c-section-nav__list"]' );
 	const moreListItem = sectionNavList.querySelector( '[data-js="c-section-nav__list-item--more"]' );
@@ -141,7 +183,7 @@ const navFits = sectionNav => sectionNav.offsetWidth >= sectionNav.scrollWidth;
  * @param sectionNav
  */
 const fileItems = ( sectionNav ) => {
-	sectionNav.classList.add( 'c-section-nav--more-active' );
+	sectionNav.classList.add( 'c-section-nav--more-initialized' );
 
 	if ( ! sectionNav.querySelector( '[data-js="c-section-nav__list--more"]' ) ) {
 		injectMoreMenu( sectionNav );
@@ -196,23 +238,37 @@ const handleInitialState = () => {
 const handleResize = () => {
 	// If viewport state larger than mobile, but component state is mobile, update component state to match and show all section navs.
 	if ( state.v_width >= MOBILE_BREAKPOINT && componentState.isMobile ) {
-		toggleAllSectionNavs( false );
+		toggleAllSectionNavs( 'open' );
 		componentState.isMobile = false;
 		el.sectionNavs.forEach( sectionNav => handleNavFit( sectionNav ) );
 	}
 
 	// If viewport state is mobile, but component state is NOT, update component state and hide all section navs.
 	if ( state.v_width < MOBILE_BREAKPOINT && ! componentState.isMobile ) {
-		toggleAllSectionNavs( true );
+		toggleAllSectionNavs( 'close' );
 		componentState.isMobile = true;
 	}
+};
+
+/**
+ * Handle Escape key events for this module.
+ *
+ * @param e
+ */
+const handleEscKeyUp = ( e ) => {
+	if ( e.key !== 'Escape' ) {
+		return;
+	}
+
+	componentState.isMobile ? toggleAllSectionNavs( 'close' ) : closeAllMoreMenus();
 };
 
 /**
  * Build events for this module.
  */
 const bindEvents = () => {
-	delegate( el.container, '[data-js="c-section-nav__container-toggle"]', 'click', toggleSectionNav );
+	delegate( el.container, '[data-js="c-section-nav__toggle--mobile"]', 'click', toggleSectionNav );
+	delegate( el.container, '[data-js="c-section-nav__toggle--more"]', 'click', toggleMoreMenu );
 
 	on( document, 'keyup', handleEscKeyUp );
 	on( document, 'modern_tribe/resize_executed', handleResize );

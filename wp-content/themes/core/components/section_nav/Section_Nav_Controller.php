@@ -114,12 +114,12 @@ class Section_Nav_Controller extends Abstract_Controller {
 	public function get_more_toggle(): Deferred_Component {
 		return defer_template_part( 'components/button/button', null, [
 			Button_Controller::ATTRS   => [
-				'data-js'       => 'c-section-nav__more-toggle',
+				'data-js'       => 'c-section-nav__toggle--more',
 				'aria-controls' => $this->more_id,
 				'aria-expanded' => 'false',
 				'aria-haspopup' => 'true',
 			],
-			Button_Controller::CLASSES => [ 'c-section-nav__toggle', 'c-section-nav__more-toggle' ],
+			Button_Controller::CLASSES => [ 'c-section-nav__toggle', 'c-section-nav__toggle--more' ],
 			Button_Controller::CONTENT => esc_html( $this->more_label ),
 		] );
 	}
@@ -127,12 +127,12 @@ class Section_Nav_Controller extends Abstract_Controller {
 	public function get_mobile_toggle(): Deferred_Component {
 		return defer_template_part( 'components/button/button', null, [
 			Button_Controller::ATTRS   => [
-				'data-js'       => 'c-section-nav__container-toggle',
+				'data-js'       => 'c-section-nav__toggle--mobile',
 				'aria-controls' => $this->container_id,
 				'aria-expanded' => 'false',
 				'aria-haspopup' => 'true',
 			],
-			Button_Controller::CLASSES => [ 'c-section-nav__toggle', 'c-section-nav__container-toggle' ],
+			Button_Controller::CLASSES => [ 'c-section-nav__toggle', 'c-section-nav__toggle--mobile' ],
 			Button_Controller::CONTENT => esc_html( $this->toggle_label ),
 		] );
 	}

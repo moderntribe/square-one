@@ -8,7 +8,13 @@
 	border: 1px solid var(--color-border);
 
 	@media (--viewport-small) {
+		overflow: hidden;
 		border: none;
+	}
+
+	/* CASE: the more menu is in use. */
+	&.c-section-nav--more-initialized {
+		overflow: visible;
 	}
 }
 
@@ -20,7 +26,7 @@
 	&:after {
 		@mixin icon;
 
-		content: var(--icon-chevron-down);
+		content: var(--icon-chevron-up);
 		position: absolute;
 		transition: var(--transition);
 	}
@@ -39,7 +45,7 @@
 	}
 }
 
-.c-section-nav__container-toggle {
+.c-section-nav__toggle--mobile {
 	display: block;
 	width: 100%;
 	padding: var(--spacer-20) var(--spacer-30);
@@ -61,7 +67,8 @@
 .c-section-nav__container {
 	display: none;
 
-	@media (--viewport-small) {
+	/* CASE: The mobile menu is open or it's showing the desktop layout. */
+	.c-section-nav--visible & {
 		display: block;
 	}
 }
@@ -122,14 +129,12 @@
 	position: relative;
 
 	/* CASE: the more menu is active. */
-	.c-section-nav--more-active & {
+	.c-section-nav--more-initialized & {
 		display: flex;
 	}
 }
 
-.c-section-nav__more-toggle {
-	@mixin a-btn-reset;
-
+.c-section-nav__toggle--more {
 	padding-right: 1.5em;
 
 	&:after {
@@ -139,12 +144,17 @@
 }
 
 .c-section-nav__more {
-	/*display: none;*/
+	display: none;
 	position: absolute;
+	z-index: 1;
 	top: calc(100% + var(--spacer-10));
 	right: calc(-1 * var(--spacer-10));
 	padding: var(--spacer-30) var(--spacer-40);
 	background: var(--color-bgd-content);
 	border: 1px solid var(--color-border);
 	border-radius: var(--spacer-10);
+
+	.c-section-nav--more-active & {
+		display: block;
+	}
 }

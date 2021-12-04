@@ -21,7 +21,7 @@ get_header();
 		</div>
 		<div class="l-container">
 			<?php get_template_part( 'components/section_nav/section_nav', null, [
-				Section_Nav_Controller::MENU => 52,
+				Section_Nav_Controller::MENU => 51,
 			] ); ?>
 		</div>
 
