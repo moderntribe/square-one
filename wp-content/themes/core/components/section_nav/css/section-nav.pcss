@@ -16,6 +16,15 @@
 	&.c-section-nav--more-initialized {
 		overflow: visible;
 	}
+
+	/* CASE: position this section nav sticky on scroll. */
+	&.c-section-nav--sticky {
+		@media (--viewport-small) {
+			position: sticky;
+			top: var(--spacer-30);
+			background: var(--color-bgd-content);
+		}
+	}
 }
 
 /* -----------------------------------------------------------------------------

@@ -19,6 +19,7 @@ class Section_Nav_Controller extends Abstract_Controller {
 	public const MOBILE_LABEL      = 'mobile_label';
 	public const DESKTOP_LABEL     = 'desktop_label';
 	public const MORE_LABEL        = 'more_label';
+	public const STICKY            = 'sticky';
 
 	/**
 	 * @var string[]
@@ -61,6 +62,11 @@ class Section_Nav_Controller extends Abstract_Controller {
 	private string $more_label;
 
 	/**
+	 * @var bool
+	 */
+	private bool $sticky;
+
+	/**
 	 * @var string
 	 */
 	private string $unique_id;
@@ -90,6 +96,7 @@ class Section_Nav_Controller extends Abstract_Controller {
 		$this->mobile_label      = (string) $args[ self::MOBILE_LABEL ];
 		$this->desktop_label     = (string) $args[ self::DESKTOP_LABEL ];
 		$this->more_label        = (string) $args[ self::MORE_LABEL ];
+		$this->sticky            = (bool) $args[ self::STICKY ];
 	}
 
 	public function get_attrs(): string {
@@ -97,6 +104,10 @@ class Section_Nav_Controller extends Abstract_Controller {
 	}
 
 	public function get_classes(): string {
+		if ( $this->sticky ) {
+			$this->classes[] = 'c-section-nav--sticky';
+		}
+
 		return Markup_Utils::class_attribute( $this->classes );
 	}
 
@@ -171,6 +182,7 @@ class Section_Nav_Controller extends Abstract_Controller {
 			self::MOBILE_LABEL      => esc_html__( 'In this section', 'tribe' ),
 			self::DESKTOP_LABEL     => '',
 			self::MORE_LABEL        => esc_html__( 'More', 'tribe' ),
+			self::STICKY            => false,
 		];
 	}
 
