@@ -27,13 +27,15 @@ const componentState = {
 const closeMoreMenu = ( sectionNav ) => {
 	const toggle = sectionNav.querySelector( '[data-js="c-section-nav__toggle--more"]' );
 
-	// Bail if no more menu or it's already closed.
-	if ( ! toggle || toggle.getAttribute( 'aria-expanded' ) !== 'true' ) {
+	// Bail if no more menu.
+	if ( ! toggle ) {
 		return;
 	}
 
 	// Move focus to the sectionNav's toggle if it's currently inside the nav being closed.
-	if ( document.activeElement.closest( '[data-js="c-section-nav"]' ) === sectionNav ) {
+	const moreListItem = sectionNav.querySelector( '[data-js="c-section-nav__list-item--more"]' );
+
+	if ( document.activeElement.closest( '[data-js="c-section-nav__list-item--more"]' ) === moreListItem ) {
 		toggle.focus();
 	}
 
@@ -88,11 +90,6 @@ const openSectionNav = ( sectionNav ) => {
  */
 const closeSectionNav = ( sectionNav ) => {
 	const toggle = sectionNav.querySelector( '[data-js="c-section-nav__toggle--mobile"]' );
-
-	// Bail if already closed.
-	if ( toggle.getAttribute( 'aria-expanded' ) !== 'true' ) {
-		return;
-	}
 
 	// Move focus to the sectionNav's toggle if it's currently inside the nav being closed.
 	if ( document.activeElement.closest( '[data-js="c-section-nav"]' ) === sectionNav ) {
@@ -264,13 +261,77 @@ const handleEscKeyUp = ( e ) => {
 };
 
 /**
+ * Handle "out" events on mobile for this module.
+ *
+ * @param sectionNav
+ * @param targetEl
+ */
+const handleOutMobile = ( sectionNav, targetEl ) => {
+	// If the section nav is not visible or the focused element is still within this section nav, bail.
+	if ( ! sectionNav.classList.contains( 'c-section-nav--visible' ) ||
+		targetEl.closest( '[data-js="c-section-nav"]' ) === sectionNav ) {
+		return;
+	}
+
+	closeSectionNav( sectionNav );
+};
+
+/**
+ * Handle "out" events on desktop for this module.
+ *
+ * @param sectionNav
+ * @param targetEl
+ */
+const handleOutDesktop = ( sectionNav, targetEl ) => {
+	const moreListItem = sectionNav.querySelector( '[data-js="c-section-nav__list-item--more"]' );
+
+	// If the More menu isn't active or the focused element is still within this more menu, bail.
+	if ( ! sectionNav.classList.contains( 'c-section-nav--more-active' ) ||
+		targetEl.closest( '[data-js="c-section-nav__list-item--more"]' ) === moreListItem ) {
+		return;
+	}
+
+	closeMoreMenu( sectionNav );
+};
+
+/**
+ * Handle click outside event for this module.
+ *
+ * @param e
+ */
+const handleClickOut = ( e ) => {
+	el.sectionNavs.forEach( ( sectionNav ) => componentState.isMobile
+		? handleOutMobile( sectionNav, e.target )
+		: handleOutDesktop( sectionNav, e.target ) );
+};
+
+/**
+ * Handle Tab outside events for this module.
+ *
+ * @param e
+ */
+const handleTabKeyUp = ( e ) => {
+	if ( e.key !== 'Tab' ) {
+		return;
+	}
+
+	el.sectionNavs.forEach( ( sectionNav ) => componentState.isMobile
+		? handleOutMobile( sectionNav, e.target )
+		: handleOutDesktop( sectionNav, e.target ) );
+};
+
+/**
  * Build events for this module.
  */
 const bindEvents = () => {
-	delegate( el.container, '[data-js="c-section-nav__toggle--mobile"]', 'click', toggleSectionNav );
 	delegate( el.container, '[data-js="c-section-nav__toggle--more"]', 'click', toggleMoreMenu );
+	delegate( el.container, '[data-js="c-section-nav__toggle--more"]', 'keyup', handleEscKeyUp );
+	delegate( el.container, '[data-js="c-section-nav__toggle--mobile"]', 'click', toggleSectionNav );
+	delegate( el.container, '[data-js="c-section-nav__toggle--mobile"]', 'keyup', handleEscKeyUp );
+	delegate( el.container, '.section-nav__list-item a', 'keyup', handleEscKeyUp );
 
-	on( document, 'keyup', handleEscKeyUp );
+	on( document, 'click', handleClickOut );
+	on( document, 'keyup', handleTabKeyUp );
 	on( document, 'modern_tribe/resize_executed', handleResize );
 };
 

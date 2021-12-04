@@ -26,7 +26,7 @@
 	&:after {
 		@mixin icon;
 
-		content: var(--icon-chevron-up);
+		content: var(--icon-chevron-down);
 		position: absolute;
 		transition: var(--transition);
 	}
@@ -36,7 +36,7 @@
 		text-decoration: underline;
 	}
 
-	/* CASE: Mobile menu active */
+	/* CASE: Toggle active */
 	&[aria-expanded="true"] {
 
 		&:after {
