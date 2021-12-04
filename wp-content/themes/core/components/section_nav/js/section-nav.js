@@ -87,8 +87,14 @@ const openSectionNav = ( sectionNav ) => {
  * Close a particular Section Nav menu on mobile.
  *
  * @param sectionNav
+ * @param useDefaultState
  */
-const closeSectionNav = ( sectionNav ) => {
+const closeSectionNav = ( sectionNav, useDefaultState = true ) => {
+	// Bail early if this nav defaults to open and this close event was not a direct user action.
+	if ( useDefaultState && sectionNav.dataset.initOpen ) {
+		return;
+	}
+
 	const toggle = sectionNav.querySelector( '[data-js="c-section-nav__toggle--mobile"]' );
 
 	// Move focus to the sectionNav's toggle if it's currently inside the nav being closed.
@@ -118,7 +124,7 @@ const toggleAllSectionNavs = ( closeNavs = 'close' ) => {
  */
 const toggleSectionNav = ( e ) => {
 	const sectionNav = e.target.closest( '[data-js="c-section-nav"]' );
-	e.target.getAttribute( 'aria-expanded' ) === 'false' ? openSectionNav( sectionNav ) : closeSectionNav( sectionNav );
+	e.target.getAttribute( 'aria-expanded' ) === 'false' ? openSectionNav( sectionNav ) : closeSectionNav( sectionNav, false );
 };
 
 /**

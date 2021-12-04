@@ -16,9 +16,10 @@ get_header();
 		<?php // TODO: Remove this after dev. ?>
 		<div class="l-container">
 			<?php get_template_part( 'components/section_nav/section_nav', null, [
-				Section_Nav_Controller::MENU          => 51,
-				Section_Nav_Controller::DESKTOP_LABEL => 'Jump To',
-				Section_Nav_Controller::STICKY        => true,
+				Section_Nav_Controller::MENU             => 51,
+				Section_Nav_Controller::DESKTOP_LABEL    => 'Jump To',
+				Section_Nav_Controller::STICKY           => true,
+				Section_Nav_Controller::MOBILE_INIT_OPEN => true,
 			] ); ?>
 
 			<?php get_template_part( 'components/section_nav/section_nav', null, [

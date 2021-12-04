@@ -20,6 +20,7 @@ class Section_Nav_Controller extends Abstract_Controller {
 	public const DESKTOP_LABEL     = 'desktop_label';
 	public const MORE_LABEL        = 'more_label';
 	public const STICKY            = 'sticky';
+	public const MOBILE_INIT_OPEN  = 'mobile_init_open';
 
 	/**
 	 * @var string[]
@@ -67,6 +68,11 @@ class Section_Nav_Controller extends Abstract_Controller {
 	private bool $sticky;
 
 	/**
+	 * @var bool
+	 */
+	private bool $mobile_init_open;
+
+	/**
 	 * @var string
 	 */
 	private string $unique_id;
@@ -97,15 +103,24 @@ class Section_Nav_Controller extends Abstract_Controller {
 		$this->desktop_label     = (string) $args[ self::DESKTOP_LABEL ];
 		$this->more_label        = (string) $args[ self::MORE_LABEL ];
 		$this->sticky            = (bool) $args[ self::STICKY ];
+		$this->mobile_init_open  = (bool) $args[ self::MOBILE_INIT_OPEN ];
 	}
 
 	public function get_attrs(): string {
+		if ( $this->mobile_init_open ) {
+			$this->attrs['data-init-open'] = 'true';
+		}
+
 		return Markup_Utils::concat_attrs( $this->attrs );
 	}
 
 	public function get_classes(): string {
 		if ( $this->sticky ) {
 			$this->classes[] = 'c-section-nav--sticky';
+		}
+
+		if ( $this->mobile_init_open ) {
+			$this->classes[] = 'c-section-nav--visible';
 		}
 
 		return Markup_Utils::class_attribute( $this->classes );
@@ -148,7 +163,7 @@ class Section_Nav_Controller extends Abstract_Controller {
 			Button_Controller::ATTRS   => [
 				'data-js'       => 'c-section-nav__toggle--mobile',
 				'aria-controls' => $this->container_id,
-				'aria-expanded' => 'false',
+				'aria-expanded' => $this->mobile_init_open ? 'true' : 'false',
 				'aria-haspopup' => 'true',
 			],
 			Button_Controller::CLASSES => [ 'c-section-nav__toggle', 'c-section-nav__toggle--mobile' ],
@@ -183,6 +198,7 @@ class Section_Nav_Controller extends Abstract_Controller {
 			self::DESKTOP_LABEL     => '',
 			self::MORE_LABEL        => esc_html__( 'More', 'tribe' ),
 			self::STICKY            => false,
+			self::MOBILE_INIT_OPEN  => false,
 		];
 	}
 
