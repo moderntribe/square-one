@@ -177,13 +177,16 @@ const injectMoreMenu = ( sectionNav ) => {
 /**
  * Check if the nav fits
  *
- * If the scroll width of the component is less than or equal to
- * the offset width of the component, then the nav fits.
+ * If the scroll width of the container within the component is less than or equal to
+ * the offset width of the container, then the nav fits.
  *
  * @param sectionNav
  * @returns {boolean}
  */
-const navFits = sectionNav => sectionNav.offsetWidth >= sectionNav.scrollWidth;
+const navFits = ( sectionNav ) => {
+	const container = sectionNav.querySelector( '[data-js="c-section-nav__container"]' );
+	return container.offsetWidth >= container.scrollWidth;
+};
 
 /**
  * Loop through all the menu items and file them into the More menu until the nav fits.
@@ -235,7 +238,7 @@ const sectionNavResizeObserver = new ResizeObserver( ( [ entry ] ) => handleNavF
  * @type {IntersectionObserver}
  */
 const sectionNavIntersectionObserver = new IntersectionObserver( ( [ entry ] ) => {
-	entry.target.classList.toggle( 'c-section-nav--is-sticky', entry.intersectionRatio < 1 );
+	entry.target.classList.toggle( 'c-section-nav--stuck', entry.intersectionRatio < 1 );
 }, intObserverOpts );
 
 /**

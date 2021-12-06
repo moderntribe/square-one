@@ -19,10 +19,21 @@
 
 	/* CASE: position this section nav sticky on scroll. */
 	&.c-section-nav--sticky {
+		position: sticky;
+		top: var(--spacer-30); /* Be sure to adjust the intObserverOpts rootMargin value in `section-nav.js`. */
+		background: var(--color-bgd-content);
+
 		@media (--viewport-small) {
-			position: sticky;
-			top: var(--spacer-30);
-			background: var(--color-bgd-content);
+			background: transparent;
+		}
+	}
+
+	/* CASE: The section nav is "stuck" while scrolling. */
+	&.c-section-nav--stuck {
+		box-shadow: var(--box-shadow-10);
+
+		@media (--viewport-small) {
+			box-shadow: none;
 		}
 	}
 }
@@ -96,6 +107,33 @@
 		display: flex;
 		flex-flow: row nowrap;
 	}
+
+	/* CASE: position this section nav sticky on scroll. */
+	.c-section-nav--sticky & {
+		transition: var(--transition);
+
+		@media (--viewport-small) {
+			padding: var(--spacer-20) var(--grid-gutter-small);
+			border: 1px solid var(--color-border);
+			background: var(--color-bgd-content);
+		}
+	}
+
+	/* CASE: The section nav is "stuck" while scrolling. */
+	.c-section-nav--stuck & {
+		@media (--viewport-small) {
+			box-shadow: var(--box-shadow-10);
+		}
+	}
+
+	/* CASE: Section Nav *NOT* Sticky
+	/* Remove the padding added by `l-container` to keep text justified when there's not a "sticky" wrapper. */
+	.c-section-nav:not(.c-section-nav--sticky) & {
+		@media (--viewport-small) {
+			padding-left: 0;
+			padding-right: 0;
+		}
+	}
 }
 
 /* -----------------------------------------------------------------------------
@@ -118,7 +156,7 @@
  * ----------------------------------------------------------------------------- */
 
 .c-section-nav__list {
-	padding: 0 var(--spacer-30) var(--spacer-20);
+	padding: 0 0 var(--spacer-20);
 
 	@media (--viewport-small) {
 		display: flex;
@@ -152,10 +190,11 @@
 /* -----------------------------------------------------------------------------
  * Section Nav Actions (links)
  * ----------------------------------------------------------------------------- */
-
-.section-nav__action {
+/* Selector necessary to override default t-sink link styles. */
+a.section-nav__action {
 	display: inline-block;
 	padding: 6px 0;
+	text-decoration: none;
 
 	@media (--viewport-small) {
 		padding: 0;
@@ -164,7 +203,6 @@
 
 	&:focus,
 	&:hover {
-		outline: none;
 		text-decoration: underline;
 	}
 }
@@ -209,10 +247,10 @@
 	padding: var(--spacer-30) var(--spacer-40);
 	background: var(--color-bgd-content);
 	border: 1px solid var(--color-border);
-	border-radius: var(--spacer-10);
 
 	/* CASE: More menu active */
 	.c-section-nav--more-active & {
 		display: block;
+		box-shadow: var(--box-shadow-10);
 	}
 }
