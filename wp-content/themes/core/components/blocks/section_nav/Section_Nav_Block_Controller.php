@@ -2,7 +2,6 @@
 
 namespace Tribe\Project\Templates\Components\blocks\section_nav;
 
-use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use \Tribe\Project\Templates\Components\section_nav\Section_Nav_Controller;
 
@@ -78,37 +77,19 @@ class Section_Nav_Block_Controller extends Abstract_Controller {
 	}
 
 	/**
-	 * @return string
-	 */
-	public function get_attrs(): string {
-		return Markup_Utils::concat_attrs( $this->attrs );
-	}
-
-	/**
-	 * @return string
-	 */
-	public function get_classes(): string {
-		return Markup_Utils::class_attribute( $this->classes );
-	}
-
-	/**
-	 * @return string
-	 */
-	public function get_container_classes(): string {
-		return Markup_Utils::class_attribute( $this->container_classes );
-	}
-
-	/**
 	 * @return array
 	 */
 	public function get_section_nav_args(): array {
 		return [
-			Section_Nav_Controller::MENU             => $this->menu_id,
-			Section_Nav_Controller::MOBILE_LABEL     => $this->mobile_label,
-			Section_Nav_Controller::MORE_LABEL       => $this->more_label,
-			Section_Nav_Controller::DESKTOP_LABEL    => $this->desktop_label,
-			Section_Nav_Controller::STICKY           => $this->sticky,
-			Section_Nav_Controller::MOBILE_INIT_OPEN => $this->mobile_init_open,
+			Section_Nav_Controller::ATTRS             => $this->attrs,
+			Section_Nav_Controller::CLASSES           => $this->classes,
+			Section_Nav_Controller::CONTAINER_CLASSES => $this->container_classes,
+			Section_Nav_Controller::MENU              => $this->menu_id,
+			Section_Nav_Controller::MOBILE_LABEL      => $this->mobile_label,
+			Section_Nav_Controller::MORE_LABEL        => $this->more_label,
+			Section_Nav_Controller::DESKTOP_LABEL     => $this->desktop_label,
+			Section_Nav_Controller::STICKY            => $this->sticky,
+			Section_Nav_Controller::MOBILE_INIT_OPEN  => $this->mobile_init_open,
 
 		];
 	}
@@ -135,8 +116,7 @@ class Section_Nav_Block_Controller extends Abstract_Controller {
 	 */
 	protected function required(): array {
 		return [
-			self::CLASSES           => [ 'c-block', 'b-section-nav' ],
-			self::CONTAINER_CLASSES => [ 'b-section-nav__container', 'l-container' ],
+			self::CLASSES => [ 'b-section-nav' ],
 		];
 	}
 
