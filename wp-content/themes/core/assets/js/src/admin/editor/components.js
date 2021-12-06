@@ -6,7 +6,11 @@
 
 import * as tools from 'utils/tools';
 
+import sectionNav from 'components/section_nav';
+
 const init = () => {
+	sectionNav();
+
 	if ( tools.getNodes( '[data-js="c-slider"]', false, document, true )[ 0 ] ) {
 		import( 'components/slider' /* webpackChunkName:"editor-slider" */ ).then( ( module ) => {
 			module.default();
