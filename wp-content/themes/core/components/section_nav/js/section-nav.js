@@ -11,8 +11,13 @@ import state from 'config/state';
 
 const MOBILE_BREAKPOINT = 600;
 
+const intObserverOpts = {
+	threshold: 1,
+	rootMargin: '-25px 0px 0px 0px', /* Set to 1px LESS than the `top: Npx` value applied to `.c-section-nav` when sticky. */
+};
+
 const el = {
-	container: document.querySelector( '[data-js="site-wrap"]' ),
+	container: document.querySelector( '[data-js="site-wrap"]' ) ?? document.querySelector( '.is-root-container.block-editor-block-list__layout' ),
 };
 
 const componentState = {
@@ -218,21 +223,36 @@ const handleNavFit = ( sectionNav ) => {
 };
 
 /**
- * Set up the resizeObserver callback
+ * Set up the resizeObserver callback for each SectionNav.
  *
  * @type {ResizeObserver}
  */
-const sectionNavResizeObserver = new ResizeObserver( entries => {
-	for ( const entry of entries ) {
-		handleNavFit( entry.target );
-	}
-} );
+const sectionNavResizeObserver = new ResizeObserver( ( [ entry ] ) => handleNavFit( entry.target ) );
+
+/**
+ * Set up the IntersectionObserver callback for each SectionNav.
+ *
+ * @type {IntersectionObserver}
+ */
+const sectionNavIntersectionObserver = new IntersectionObserver( ( [ entry ] ) => {
+	entry.target.classList.toggle( 'c-section-nav--is-sticky', entry.intersectionRatio < 1 );
+}, intObserverOpts );
+
+/**
+ * Initialize the observers applied to each SectionNav.
+ *
+ * @param sectionNav
+ */
+const initializeObservers = ( sectionNav ) => {
+	sectionNavResizeObserver.observe( sectionNav );
+	sectionNavIntersectionObserver.observe( sectionNav );
+};
 
 /**
  * Loop through any SectionNav components and attach the ResizeObserver to handle the desktop "more" menu.
  */
 const handleInitialState = () => {
-	el.sectionNavs.forEach( sectionNav => sectionNavResizeObserver.observe( sectionNav ) );
+	el.sectionNavs.forEach( sectionNav => initializeObservers( sectionNav ) );
 };
 
 /**
@@ -345,7 +365,7 @@ const bindEvents = () => {
  * Kick off this module's functions
  */
 const init = ( sectionNavs ) => {
-	if ( ! sectionNavs.length ) {
+	if ( ! sectionNavs.length || ! el.container ) {
 		return;
 	}
 
