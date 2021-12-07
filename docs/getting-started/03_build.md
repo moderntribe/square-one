@@ -6,12 +6,12 @@
    1. nvm
    1. yarn
    1. gulp-cli
-1. Build frontend assets
+1. Build frontend development assets
    1. `nvm use`
-   1. `yarn install:theme`
+   1. `yarn install`
    1. `gulp dist`
-1. Install backend dependencies
-   1. `so composer install`
+1. Install backend development dependencies
+   1. `composer install` or `so composer install` if using SquareOne Global Docker
 
 ## Building Frontend Assets
 
@@ -56,6 +56,14 @@ You should also run `yarn dist` when you pull new work, to make sure you have bu
 We use [Composer](https://getcomposer.org/) to maintain PHP dependencies. This allows us to **not** version
 control stuff that is already version controlled elsewhere.
 
+### Installing Dependencies via Composer
+
+On host machine:
+`composer isntall`
+
+If using SquareOne Global Docker:
+`so composer install`
+
 ### Composer in Docker
 Traditionally, composer projects use the native `composer` command (e.g. `composer install`,
 `composer update`). Because SquareOne operates in Docker containers, we cannot rely on composer
@@ -65,16 +73,12 @@ in the docker container that has all the expected system requirements such as th
 As such, SquareOne Global provides the `so composer` command that mirrors the native `composer` command.
 The only difference is that it runs *inside* the docker php-fpm container.
 
-### Setting Up SquareOne
-When you initially start your docker containers using the
-`so start` command, composer will look for a `composer/auth.json` file
-in your `dev/docker` directory. This is a specially formatted JSON file used to authenticate
-against Github for private repo access. If it doesn't exist, you will be prompted to visit
-a URL on Github that will grant an oAuth token. Copy this token and paste it onto the command
-line at the prompt, which will then create the `auth.json` file.
+## Production Builds
 
-After the containers launch, the `so start` command will automatically also run
-`composer install` and setup SquareOne. However, there may be times where, say, a version of
-WordPress needs to be bumped or a plugin needs updating. Make the change in `composer.json`
-and run `so composer update`. This will download the updated packages and install
-in place. It will also upddate the `composer.lock` file which should be committed.
+Production builds are not committed to the repository and are handled as part of deployments through CI tools. The commands run during a production deployment are:
+
+```shell
+composer install --optimize-autoloader --ignore-platform-reqs --no-dev
+nvm use && yarn install
+gulp server_dist
+```

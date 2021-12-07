@@ -80,12 +80,10 @@ within the `integrations` directory. These components, too, will be compiled int
 Outside of the Core plugin and Core theme, most of the project consists of development tools. Some notable places to
 mention:
 
-* `dev/deploy`: Scripts to deploy the project from Jenkins.
+* `.github`: Github actions workflows
 
 * `dev/docker`: Configures the Docker container for running the project.
 
 * `dev/tests`: Contains the codeception test suites.
-
-* `dev_componetns`: Resources for theme development.
 
 * `docs`: This documentation.
