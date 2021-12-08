@@ -5,6 +5,13 @@
  * ----------------------------------------------------------------------------- */
 
 .b-section-nav {
-	margin-top: var(--spacer-40);
-	margin-bottom: var(--spacer-40);
+	/** Dupes the width values from `l-sink`.
+	 * This is b/c the section nav is both an block and sticky element.
+	 */
+	width: calc(100% - 2 * var(--grid-gutter-small));
+	margin: var(--spacer-40) auto;
+
+	@media (--viewport-medium) {
+		width: calc(100% - 2 * var(--grid-gutter));
+	}
 }

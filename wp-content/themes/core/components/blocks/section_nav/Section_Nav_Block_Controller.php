@@ -116,7 +116,7 @@ class Section_Nav_Block_Controller extends Abstract_Controller {
 	 */
 	protected function required(): array {
 		return [
-			self::CLASSES           => [ 'b-section-nav' ],
+			self::CLASSES           => [ 'c-block', 'b-section-nav' ],
 			self::CONTAINER_CLASSES => [ 'b-section-nav__container', 'l-container' ],
 		];
 	}
