@@ -40,12 +40,7 @@ Memcached Server
 
 ### Install SquareOne Global Docker
 
-Copy the following in your terminal:
-
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/moderntribe/square1-global-docker/master/install/install.sh)"
-
-> Note for macOS users: This script will install brew and all the requirements listed above.
-> Note for Debian users: This script will install and configure all the required packages.
+[Follow SquareOne Global Docker install instructions.](https://github.com/moderntribe/square1-global-docker#installation)
 
 ### Clone Project
 
