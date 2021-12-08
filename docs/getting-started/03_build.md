@@ -61,7 +61,7 @@ control stuff that is already version controlled elsewhere.
 ### Installing Dependencies via Composer
 
 On host machine:
-`composer isntall`
+`composer install`
 
 If using SquareOne Global Docker:
 `so composer install`
