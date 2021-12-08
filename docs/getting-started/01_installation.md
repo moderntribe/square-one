@@ -79,6 +79,8 @@ When you spin up the containers for the first time, the PHP build process is com
 2. `nvm use && yarn install` - This will change to the correct node version and install node dependencies.
 3. `gulp` - This will build the CSS/JS bundles for the app.
 
+> Note: [See more complete build documentation here.](docs/getting-started/02_build.md) 
+
 ## Configuration
 
 ### Configure SquareOne (WordPress)
@@ -114,7 +116,7 @@ header.
 As noted, SquareOne is all intents and purposes, is WordPress. So it can be run on any local development environment that supports WordPress, with a few tweaks:
 
 1. WordPress is installed in a sub-folder as a dependency. We've bundled a custom Nginx file that handles this nicely here `dev/docker/nginx/nginx.conf`.
-2. All build steps are required for the application to work, documented above under the "Build SquareOne"
+2. All configuration and build steps are required for the application to work, documented above.
 
 ### LocalWP
 For those who want to use [LocalWP](https://localwp.com/), a popular local development environment, we provide a plugin that handles the Nginx config for you [here](https://github.com/moderntribe/square-one-localwp-addon). 
