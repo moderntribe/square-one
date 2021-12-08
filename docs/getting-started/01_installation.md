@@ -92,7 +92,7 @@ The `local-config.php` is not tracked in git, so it will be generated for each e
 1. Copy the `local-config-sample.php` to `local-config.php`, and add your configuration there.
 
 > NOTE:
->* IF you are configuring secrets only needed at build time the `.env` file is the best place.
+>* IF you are configuring secrets only needed at build time, the `.env` file is the best place.
 >* IF you need to add custom configuration or environment secrets, the `local-config.php` is the best place.
 >* IF you need to share configuration, you can modify the `wp-config-enviroment.php` and commit.
 
