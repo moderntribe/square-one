@@ -39,7 +39,9 @@ SquareOne has the same baseline [requirements as WordPress](https://wordpress.or
 1. [Install SquareOne Global Docker CLI](https://github.com/moderntribe/square1-global-docker#installation)
 1. Create a new empty repository for your project.
 1. run `so create` in a new folder. This will create a brand new Sq1 Project and provide prompts for configuration.
-1. run `so start`. That's it!
+1. run `so start`.
+1. [Build SquareOne](docs/getting-started/02_build.md)
+1. That's it!
 
 ## Installing an *EXISTING* SquareOne Project with SquareOne Global Docker
 
@@ -47,6 +49,27 @@ SquareOne has the same baseline [requirements as WordPress](https://wordpress.or
 
 1. [Install Docker for your platform](https://www.docker.com/get-started)
 1. [Install SquareOne Global Docker CLI](https://github.com/moderntribe/square1-global-docker#installation)
+1. Clone a copy of the project into a working root folder. `git clone git@github.com:moderntribe/project-name.git .`
+1. Run `so boostrap` or `so boostrap --multisite`. This will create a DB and automatically configure SquareOne.
+1. Ask for an existing DB from a colleague or get a production export. 
+1. Using a MySQL client, connect to `mysql.tribe` with user `root` and password `password`.
+1. Import the DB to the `tribe_projectid` database.
+1. Run `so migrate-domain`.
+1. [Build SquareOne](docs/getting-started/02_build.md)   
+1. That's it!
+
+## SquareOne with an Alternative Local Development Environment
+
+As noted, SquareOne in all intents and purposes, is WordPress. So it can be run on any local development environment 
+that supports WordPress assuming you address these two additional requirements:
+
+1. WordPress is installed in a sub-folder as a dependency. We've bundled a custom Nginx file that handles this nicely here `dev/docker/nginx/nginx.conf`.
+2. All configuration and build steps must be completed.
+
+### LocalWP
+For those who want to use [LocalWP](https://localwp.com/), a popular local development environment, we provide a plugin that handles the Nginx config for you [here](https://github.com/moderntribe/square-one-localwp-addon).
+
+## Manually Setup and Configure SquareOne
 
 ### Clone Project
 
@@ -60,26 +83,17 @@ some secrets are required.
 1. Copy the `.env.sample` file and name it `.env`
 2. Fill in the required secrets from [1Password](https://start.1password.com/open/i?a=MTSABMIBDJF4PHQCMXYNWKAL4U&v=k2qbci5enqpfc4am7uvlwt6w4m&i=v67do7z62rd5nb7nrfkeih2uxa&h=moderntribe.1password.com).
 
-Notes
-* Never commit a .env file to the repository. They are only for storing env secrets and should not be saved to the codebase.
-* Some licensed plugins are required for SquareOne projects (specifically ACF & GravityForms). Removing them is possible, but is not covered here.
-
-### Start the Project
-
-1. Goto any squareone project folder and run `so start`
-
-Notes:
-* This command will automatically start the Global and Local project containers. For other commands, please see the [SquareOne Global Docker](https://github.com/moderntribe/square1-global-docker#squareone-docker) documentation.
+> NOTE:
+> * Never commit a .env file to the repository. They are only for storing env secrets and should not be saved to the codebase.
+> * Some licensed plugins are required for SquareOne projects (specifically ACF & GravityForms). Removing them is possible, but is not covered here.
 
 ## Build SquareOne
-
-When you spin up the containers for the first time, the PHP build process is completed for you. You will still need to manually run the Frontend Build. Here are all the build commands for reference:
 
 1. `composer install` - This builds the PHP app and installs WordPress and plugin. (Note, if you are using `so` you can run `so composer install`)
 2. `nvm use && yarn install` - This will change to the correct node version and install node dependencies.
 3. `gulp` - This will build the CSS/JS bundles for the app.
 
-> Note: [See more complete build documentation here.](docs/getting-started/02_build.md) 
+> NOTE: [See more complete build documentation here.](docs/getting-started/02_build.md) 
 
 ## Configuration
 
@@ -96,6 +110,11 @@ The `local-config.php` is not tracked in git, so it will be generated for each e
 >* IF you need to add custom configuration or environment secrets, the `local-config.php` is the best place.
 >* IF you need to share configuration, you can modify the `wp-config-enviroment.php` and commit.
 
+### Choose a local dev toolset
+
+If you are not using [SquareOne Global Docker](https://github.com/moderntribe/square1-global-docker), 
+you need some other Local Development Environment that is WordPress compatible and can meet SquareOne requirments.
+
 ### Create a Database
 
 1. Using a MySQL client, connect to `mysql.tribe` with user `root` and password `password`
@@ -104,19 +123,8 @@ The `local-config.php` is not tracked in git, so it will be generated for each e
 
 ### Import Seed Database
 
-If the team has an existing dev environment, you should import the seed data into your local as a starting point. If there is no DB yet, follow the standard WordPress install process.
+If the team has an existing dev environment, you should import a database into your local as a starting point. If there is no DB yet, follow the standard WordPress install process.
 
-### Success
+### That's all!
 
-If you can navigate to `https://DOMAIN.tribe` and see your site, huzzah! Next steps, work with your team to make sure all the proper configuration is in place.
-header.
 
-## SquareOne with an alternative local development environment
-
-As noted, SquareOne is all intents and purposes, is WordPress. So it can be run on any local development environment that supports WordPress, with a few tweaks:
-
-1. WordPress is installed in a sub-folder as a dependency. We've bundled a custom Nginx file that handles this nicely here `dev/docker/nginx/nginx.conf`.
-2. All configuration and build steps are required for the application to work, documented above.
-
-### LocalWP
-For those who want to use [LocalWP](https://localwp.com/), a popular local development environment, we provide a plugin that handles the Nginx config for you [here](https://github.com/moderntribe/square-one-localwp-addon). 
