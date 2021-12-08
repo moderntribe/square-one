@@ -59,7 +59,7 @@ Notes
 
 ### Start the Project
 
-1. Goto any squareone project roo and run `so start`
+1. Goto any squareone project folder and run `so start`
 
 Notes:
 * This command will automatically start the Global and Local project containers. For other commands, please see the [SquareOne Global Docker](https://github.com/moderntribe/square1-global-docker) documentation.
