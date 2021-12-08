@@ -75,7 +75,7 @@ to behave appropriately in all environments because *composer runs on the host m
 in the docker container that has all the expected system requirements such as the appropriate PHP version.*
 
 As such, SquareOne Global provides the `so composer` command that mirrors the native `composer` command.
-The only difference is that it runs *inside* the docker php-fpm container.
+The only difference is that it runs *inside* the docker php-fpm container with the correct version for that project.
 
 ## Production Builds
 
