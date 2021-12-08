@@ -99,13 +99,21 @@ If the team has an existing dev environment, you should import the seed data int
 ### Success
 
 If you can navigate to `https://DOMAIN.tribe` and see your site, huzzah! Next steps, work with your team to make sure all the proper configuration is in place.
+header.
 
-## SquareOne with an alternative local dev environment
+## Creating a new SquareOne Project with SquareOne Global Docker
 
-As noted, SquareOne is all intents and purposes, WordPress. So it can be run on any local dev environment that supports WordPress, with a few tweaks:
+1. [Install Square One Global Docker](https://github.com/moderntribe/square1-global-docker#installation)
+1. Create a new empty repository for your project.
+1. run `so create` in a new folder. This will create a brand new Sq1 Project and provide prompts for configuration.
+1. That's it!
 
-1. WordPress is installed in a sub-folder as a dependency. We've bundled a custm Nginx file that handles this nicely here `dev/docker/nginx/nginx.conf`.
-2. All build steps are still required for the Application to work, documented above under the "Build SquareOne" header.
+## SquareOne with an alternative local development environment
+
+As noted, SquareOne is all intents and purposes, is WordPress. So it can be run on any local development environment that supports WordPress, with a few tweaks:
+
+1. WordPress is installed in a sub-folder as a dependency. We've bundled a custom Nginx file that handles this nicely here `dev/docker/nginx/nginx.conf`.
+2. All build steps are required for the application to work, documented above under the "Build SquareOne"
 
 ### LocalWP
-For those who want to use [LocalWP](https://localwp.com/), another popular local development environment, we provide a plugin that handles the Nginx config for you [here](https://github.com/moderntribe/square-one-localwp-addon). 
+For those who want to use [LocalWP](https://localwp.com/), a popular local development environment, we provide a plugin that handles the Nginx config for you [here](https://github.com/moderntribe/square-one-localwp-addon). 
