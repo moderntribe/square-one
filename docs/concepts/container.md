@@ -1,35 +1,21 @@
 # Container / Core.php
 
-This plugin uses a container based framework. In particular we use the [PHP-DI](http://php-di.org/)
-dependency injection container that implements the [PSR-11 container interface](https://www.php-fig.org/psr/psr-11/).
+This plugin uses a container based framework called [PHP-DI](http://php-di.org/).
+This is a container implements the [PSR-11 container interface](https://www.php-fig.org/psr/psr-11/).
 
-Containers are used for dependency injection.  Containers allow objects to be instantiated as
-needed and can be used to set default behaviors and properties.
+Containers are used for [dependency injection](https://php-di.org/doc/understanding-di.html). Containers allow objects 
+to be instantiated as needed and can be used to set default behaviors and properties. This is beneficial because it will
+only run code that is used.
 
 The container uses [definition files](http://php-di.org/doc/definition.html),
 [autowiring](http://php-di.org/doc/autowiring.html), and callback functions to instantiate
 on an as-needed basis.
 
-The core container is created in `Core.php` and is a singleton.  Only one instance will exist,
+The core container is created in `plugins/core/src/Core.php` and is a singleton.  Only one instance will exist,
 no matter where it's accessed. The data and objects being passed and generated affect only the
 core container.
 
-To access the core container, call `tribe_project()->container()`
-
----
-
-## Factory Method
-
-Many classes—including all post types classes (which extend `Post_Object`) and taxonomy classes
-(which extend `Term_Object` )—contain a static `factory()` method.  This is used to retrieve
-a specific instance of a class.  Typically an id is passed to retrieve it.
-
-```php
-$story = Feed_Story::factory( $post_id );
-echo $story->get_source_name();
-```
-
----
+To access the core container from anywhere, call `tribe_project()->container()`
 
 ## Configuring the Container
 
