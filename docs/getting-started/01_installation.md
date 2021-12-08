@@ -108,4 +108,4 @@ As noted, SquareOne is all intents and purposes, WordPress. So it can be run on 
 2. All build steps are still required for the Application to work, documented above under the "Build SquareOne" header.
 
 ### LocalWP
-For those who want to use LocalWP, another popular locla dev env, we provide a plugin that handles the Nginx config for you [here](https://github.com/moderntribe/square-one-localwp-addon). 
+For those who want to use LocalWP, another popular local development environment, we provide a plugin that handles the Nginx config for you [here](https://github.com/moderntribe/square-one-localwp-addon). 
