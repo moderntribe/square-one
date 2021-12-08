@@ -14,8 +14,12 @@ $c = Section_Nav_Controller::factory( $args );
 	<?php echo $c->get_mobile_toggle(); ?>
 
 	<div <?php echo $c->get_container_classes(); ?> <?php echo $c->get_container_attrs(); ?>>
-		<?php echo $c->get_desktop_label(); ?>
-		<?php echo $c->get_nav_menu(); ?>
+
+		<div class="c-section-nav__inner" data-js="c-section-nav__inner">
+			<?php echo $c->get_desktop_label(); ?>
+			<?php echo $c->get_nav_menu(); ?>
+		</div>
+
 	</div>
 
 	<template data-template="more">

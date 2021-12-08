@@ -177,15 +177,15 @@ const injectMoreMenu = ( sectionNav ) => {
 /**
  * Check if the nav fits
  *
- * If the scroll width of the container within the component is less than or equal to
- * the offset width of the container, then the nav fits.
+ * If the scroll width of the inner wrapper within the component is less than or equal to
+ * the offset width of the inner wrapper, then the nav fits.
  *
  * @param sectionNav
  * @returns {boolean}
  */
 const navFits = ( sectionNav ) => {
-	const container = sectionNav.querySelector( '[data-js="c-section-nav__container"]' );
-	return container.offsetWidth >= container.scrollWidth;
+	const inner = sectionNav.querySelector( '[data-js="c-section-nav__inner"]' );
+	return inner.offsetWidth >= inner.scrollWidth;
 };
 
 /**

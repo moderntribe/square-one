@@ -104,8 +104,7 @@
 
 	/* CASE: The mobile menu is open or it's showing the desktop layout. */
 	.c-section-nav--visible & {
-		display: flex;
-		flex-flow: row nowrap;
+		display: block;
 	}
 
 	/* CASE: position this section nav sticky on scroll. */
@@ -136,13 +135,18 @@
 	}
 }
 
+.c-section-nav__inner {
+	display: flex;
+	flex-flow: row nowrap;
+}
+
 /* -----------------------------------------------------------------------------
  * Section Nav Desktop Label (optional)
  * ----------------------------------------------------------------------------- */
 
 .c-section-nav__label--desktop {
 	display: none;
-	margin-right: var(--spacer-50);
+	padding-right: var(--spacer-50);
 	white-space: nowrap;
 	font-weight: 700;
 
@@ -189,8 +193,10 @@
 
 /* -----------------------------------------------------------------------------
  * Section Nav Actions (links)
+ *
+ * `a` selector necessary to override default t-sink link styles.
  * ----------------------------------------------------------------------------- */
-/* Selector necessary to override default t-sink link styles. */
+
 a.section-nav__action {
 	display: inline-block;
 	padding: 6px 0;
@@ -227,6 +233,7 @@ a.section-nav__action {
 
 .c-section-nav__toggle--more {
 	padding-right: 1.5em;
+	white-space: nowrap;
 
 	&:after {
 		right: 0;
