@@ -18,10 +18,11 @@ Memcached Server
 * Latest recommended
 
 ## Development Requirements
+
 * Git
 
 ### PHP
-* Composer v2
+* Composer
 
 ### Nodejs
 * Node Version Manager (nvm)
@@ -48,14 +49,15 @@ Clone a copy of the project into a working root folder. `git clone git@github.co
 
 ### Environment Install Variables
 
-SquareOne uses .env files for managing secrets required at build time. You can see an `.env.sample` file in the root. Before installation, some secrets are required.
+SquareOne uses .env files for managing secrets required at build time. You can see an `.env.sample` file in the root. Before installation, 
+some secrets are required.
 
 1. Copy the `.env.sample` file and name it `.env`
-2. Fill in the required secrets
+2. Fill in the required secrets from [1Password](https://start.1password.com/open/i?a=MTSABMIBDJF4PHQCMXYNWKAL4U&v=k2qbci5enqpfc4am7uvlwt6w4m&i=v67do7z62rd5nb7nrfkeih2uxa&h=moderntribe.1password.com).
 
 Notes
 * Never commit a .env file to the repository. They are only for storing env secrets and should not be saved to the codebase.
-* Some licensed plugins are required for SquareOne projects (ACF, GravityForms). Removing them is possible, but is not covered here.
+* Some licensed plugins are required for SquareOne projects (specifically ACF & GravityForms). Removing them is possible, but is not covered here.
 
 ### Start the Project
 
@@ -66,7 +68,7 @@ Notes:
 
 ## Build SquareOne
 
-When you spin up the containers for the first time, some of the build process are completed for you. If for any reason you need to run them again, here are the commands:
+When you spin up the containers for the first time, the PHP build process is completed for you. You will still need to manually run the Frontend Build. Here are all the build commands for reference:
 
 1. `composer install` - This builds the PHP app and installs WordPress and plugin. (Note, if you are using `so` you can run `so composer install`)
 2. `nvm use && yarn install` - This will change to the correct node version and install node dependencies.
@@ -77,13 +79,14 @@ When you spin up the containers for the first time, some of the build process ar
 ### Configure SquareOne (WordPress)
 
 Look at the `wp-config.php` and you'll see it's not standard. In addition, look at the `wp-config-enviroment.php` file. This is where we handle a lot of the configuration for you.
-Any existing project all the defaults will be added to the `wp-config-enviroment.php` file. Then on any environment, you can set or override any setting in the local-config.php
+Any existing project all the defaults will be added to the `wp-config-enviroment.php` file. Then on any environment, you can set or override any setting in the `local-config.php`. 
+The `local-config.php` is not tracked in git, so it will be generated for each environment specifically based off the `local-config-sample.php`.
 
 1. Copy the `local-config-sample.php` to `local-config.php`, and add your configuration there.
 
 > NOTE:
 >* IF you are configuring secrets only needed at build time the `.env` file is the best place.
->* IF you need to add custom configuration, the `local-config.php` is the best place.
+>* IF you need to add custom configuration or environment secrets, the `local-config.php` is the best place.
 >* IF you need to share configuration, you can modify the `wp-config-enviroment.php` and commit.
 
 ### Create a Database
