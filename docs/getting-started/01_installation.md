@@ -6,42 +6,47 @@ SquareOne has the same baseline [requirements as WordPress](https://wordpress.or
 
 ## Server Requirements
 
-HTTP Server
+#### HTTP Server
 * Nginx or Apache
-* PHP 7.4+ recommended
+* PHP 7.4+
 * HTTPS Support
 
-SQL Server
+#### SQL Server
 * MySql 5.7+ or MariaDB 10.1+, latest recommended
 
-Memcached Server
+#### Memcached Server
 * Latest recommended
 
 ## Development Requirements
 
 * Git
 
-### PHP
+#### PHP
 * Composer
 
-### Nodejs
+#### Nodejs
 * Node Version Manager (nvm)
 * Node
 * Yarn
 * Gulp
 
-### Docker (if using [SquareOne Global Docker](https://github.com/moderntribe/square1-global-docker))
-* Docker
-
-> Note: If you are using [SquareOne Global Docker](https://github.com/moderntribe/square1-global-docker) all the PHP dependencies are handled for you.
-
-## Installing an existing SquareOne Project with SquareOne Global Docker (Recommended)
-
+## Included Development Environment, SquareOne Global Docker
 [SquareOne Global Docker](https://github.com/moderntribe/square1-global-docker) is a Docker CLI tool and configuration. The CLI tool will orchestrate the local development environment. It runs two sets of containers, Global Containers (DNS, SSL, SQL management for all SquareOne Projects) and the Local containers for this specific project (HTTP, Cache, Search, etc.). We've built in everything you need for a distributable development environment.
+
+## Creating a *NEW* SquareOne Project with SquareOne Global Docker
+
+1. [Install Docker for your platform](https://www.docker.com/get-started)
+1. [Install SquareOne Global Docker CLI](https://github.com/moderntribe/square1-global-docker#installation)
+1. Create a new empty repository for your project.
+1. run `so create` in a new folder. This will create a brand new Sq1 Project and provide prompts for configuration.
+1. run `so start`. That's it!
+
+## Installing an *EXISTING* SquareOne Project with SquareOne Global Docker
 
 ### Install SquareOne Global Docker
 
-[Follow SquareOne Global Docker install instructions.](https://github.com/moderntribe/square1-global-docker#installation)
+1. [Install Docker for your platform](https://www.docker.com/get-started)
+1. [Install SquareOne Global Docker CLI](https://github.com/moderntribe/square1-global-docker#installation)
 
 ### Clone Project
 
@@ -103,13 +108,6 @@ If the team has an existing dev environment, you should import the seed data int
 
 If you can navigate to `https://DOMAIN.tribe` and see your site, huzzah! Next steps, work with your team to make sure all the proper configuration is in place.
 header.
-
-## Creating a new SquareOne Project with SquareOne Global Docker
-
-1. [Install Square One Global Docker](https://github.com/moderntribe/square1-global-docker#installation)
-1. Create a new empty repository for your project.
-1. run `so create` in a new folder. This will create a brand new Sq1 Project and provide prompts for configuration.
-1. That's it!
 
 ## SquareOne with an alternative local development environment
 
