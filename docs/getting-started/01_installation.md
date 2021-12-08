@@ -48,7 +48,7 @@ Clone a copy of the project into a working root folder. `git clone git@github.co
 
 ### Environment Install Variables
 
-SquareOne uses .env files for managing secrets required at build time. You can see an `.env.sample` file in the root. Before installation some secrets are required.
+SquareOne uses .env files for managing secrets required at build time. You can see an `.env.sample` file in the root. Before installation, some secrets are required.
 
 1. Copy the `.env.sample` file and name it `.env`
 2. Fill in the required secrets
