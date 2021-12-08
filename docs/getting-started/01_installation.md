@@ -19,12 +19,20 @@ Memcached Server
 
 ## Development Requirements
 * Git
+
+### PHP
 * Composer v2
+
+### Nodejs
 * Node Version Manager (nvm)
 * Node
 * Yarn
 * Gulp
+
+### Docker (if using [SquareOne Global Docker](https://github.com/moderntribe/square1-global-docker))
 * Docker
+
+> Note: If you are using [SquareOne Global Docker](https://github.com/moderntribe/square1-global-docker) all the PHP dependencies are handled for you.
 
 ## Installing an existing SquareOne Project with SquareOne Global Docker (Recommended)
 

@@ -13,6 +13,8 @@
 1. Install backend development dependencies
    1. `composer install` or `so composer install` if using SquareOne Global Docker
 
+> Note: Make sure your composer version matches the project requirments. As of Oct 2021, Composer v2.
+
 ## Building Frontend Assets
 
 ### Node
@@ -63,6 +65,8 @@ On host machine:
 
 If using SquareOne Global Docker:
 `so composer install`
+
+> Note: Make sure your composer version matches the project requirments. As of Oct 2021, Composer v2.
 
 ### Composer in Docker
 Traditionally, composer projects use the native `composer` command (e.g. `composer install`,
