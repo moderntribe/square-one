@@ -262,6 +262,21 @@ const handleInitialState = () => {
 };
 
 /**
+ * Handle the ACF editor preview update.
+ *
+ * @param $block
+ */
+const handlePreviewUpdate = ( $block ) => {
+	const sectionNav = $block.find( '[data-js="c-section-nav"]' )[ 0 ];
+
+	if ( ! sectionNav ) {
+		return;
+	}
+
+	handleNavFit( sectionNav );
+};
+
+/**
  * Be sure the component state's viewport width is based on whichever JS bundle is being loaded (theme or admin).
  */
 const updateViewportWidth = () => componentState.vWidth = state.v_width || adminState.v_width;
@@ -372,6 +387,10 @@ const bindEvents = () => {
 	on( document, 'click', handleClickOut );
 	on( document, 'keyup', handleTabKeyUp );
 	on( document, 'modern_tribe/resize_executed', handleResize );
+
+	if ( window.acf ) {
+		window.acf.addAction( 'render_block_preview/type=sectionnav', handlePreviewUpdate );
+	}
 };
 
 /**
