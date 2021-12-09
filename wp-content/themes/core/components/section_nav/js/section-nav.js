@@ -8,6 +8,7 @@ import delegate from 'delegate';
 
 import { on } from 'utils/events';
 import state from 'config/state';
+import adminState from '../../../assets/js/src/admin/config/state';
 
 const MOBILE_BREAKPOINT = 600;
 
@@ -21,6 +22,7 @@ const el = {
 };
 
 const componentState = {
+	vWidth: state.v_width,
 	isMobile: state.v_width < MOBILE_BREAKPOINT,
 };
 
@@ -252,25 +254,33 @@ const initializeObservers = ( sectionNav ) => {
 };
 
 /**
- * Loop through any SectionNav components and attach the ResizeObserver to handle the desktop "more" menu.
+ * Handle the initial state for the component.
  */
 const handleInitialState = () => {
+	componentState.isMobile = componentState.vWidth < MOBILE_BREAKPOINT;
 	el.sectionNavs.forEach( sectionNav => initializeObservers( sectionNav ) );
 };
+
+/**
+ * Be sure the component state's viewport width is based on whichever JS bundle is being loaded (theme or admin).
+ */
+const updateViewportWidth = () => componentState.vWidth = state.v_width || adminState.v_width;
 
 /**
  * Handle resize events for this module.
  */
 const handleResize = () => {
+	updateViewportWidth();
+
 	// If viewport state larger than mobile, but component state is mobile, update component state to match and show all section navs.
-	if ( state.v_width >= MOBILE_BREAKPOINT && componentState.isMobile ) {
+	if ( componentState.vWidth >= MOBILE_BREAKPOINT && componentState.isMobile ) {
 		toggleAllSectionNavs( 'open' );
 		componentState.isMobile = false;
 		el.sectionNavs.forEach( sectionNav => handleNavFit( sectionNav ) );
 	}
 
 	// If viewport state is mobile, but component state is NOT, update component state and hide all section navs.
-	if ( state.v_width < MOBILE_BREAKPOINT && ! componentState.isMobile ) {
+	if ( componentState.vWidth < MOBILE_BREAKPOINT && ! componentState.isMobile ) {
 		toggleAllSectionNavs( 'close' );
 		componentState.isMobile = true;
 	}
@@ -374,6 +384,7 @@ const init = ( sectionNavs ) => {
 
 	el.sectionNavs = sectionNavs;
 
+	updateViewportWidth();
 	handleInitialState();
 	bindEvents();
 
