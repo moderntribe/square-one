@@ -117,9 +117,9 @@ you need some other Local Development Environment that is WordPress compatible a
 
 ### Create a Database
 
-1. Using a MySQL client, connect to `mysql.tribe` with user `root` and password `password`
+1. Using a MySQL client, connect to your local mysql
 2. Create a db of your naming
-3. Add credentials to the `local-config.php`
+3. Add the standard WordPress database credentials to the `local-config.php`
 
 ### Import Seed Database
 
