@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2021.12
+* Fixed: docker compose (v2) support: `WARN[0000] network proxy: network.external.name is deprecated in favor of network.name` 
+
 ## 2021.11
 * Fixed: Lefthook - Don't prefix commits for sprint or release branches
 * Updated: docker image to 74-3.0, composer v2 support (requires `so` v5.3.0+)
