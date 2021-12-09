@@ -8,13 +8,7 @@
 	border: 1px solid var(--color-border);
 
 	@media (--viewport-small) {
-		overflow: hidden;
 		border: none;
-	}
-
-	/* CASE: the more menu is in use. */
-	&.c-section-nav--more-initialized {
-		overflow: visible;
 	}
 
 	/* CASE: position this section nav sticky on scroll. */
@@ -101,6 +95,15 @@
 
 .c-section-nav__container {
 	display: none;
+
+	@media (--viewport-small) {
+		overflow: hidden;
+	}
+
+	/* CASE: the more menu is in use. */
+	.c-section-nav--more-initialized & {
+		overflow: visible;
+	}
 
 	/* CASE: The mobile menu is open or it's showing the desktop layout. */
 	.c-section-nav--visible & {
