@@ -27,7 +27,7 @@ It will also show how to deploy to a standard WordPress Managed Host, or a Herok
 
 ### How to Deploy
 
-1. Goto the GitHib Actions for the desired project. Then selece the desired workflow. For example, if I want
+1. Goto the GitHib Actions for the desired project. Then select the desired workflow. For example, if I want
    to deploy to the Dev server I would choose the `deploy-dev` workflow.
 1. Click the `Run Workflow` dropdown, chose the correct server branch you wish to deploy to the selected workflow.  For example, if I want
    to deploy to the Dev server I could choose the `server/dev` branch or any other desired feature branch.
