@@ -47,44 +47,13 @@ class Section_Nav_Controller extends Abstract_Controller {
 	 */
 	private $menu;
 
-	/**
-	 * @var string
-	 */
 	private string $mobile_label;
-
-	/**
-	 * @var string
-	 */
 	private string $desktop_label;
-
-	/**
-	 * @var string
-	 */
 	private string $more_label;
-
-	/**
-	 * @var bool
-	 */
 	private bool $sticky;
-
-	/**
-	 * @var bool
-	 */
 	private bool $mobile_init_open;
-
-	/**
-	 * @var string
-	 */
 	private string $unique_id;
-
-	/**
-	 * @var string
-	 */
 	private string $container_id;
-
-	/**
-	 * @var string
-	 */
 	private string $more_id;
 
 	public function __construct( array $args = [] ) {
