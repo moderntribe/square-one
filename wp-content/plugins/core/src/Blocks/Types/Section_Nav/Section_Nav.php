@@ -19,8 +19,11 @@ class Section_Nav extends Block_Config {
 	public const MOBILE_LABEL  = 'mobile_label';
 	public const MORE_LABEL    = 'more_label';
 
-	public const STICKY           = 'sticky';
-	public const MOBILE_INIT_OPEN = 'mobile_init_open';
+	public const STICKY = 'sticky';
+
+	public const MOBILE_INIT        = 'mobile_init';
+	public const MOBILE_INIT_OPEN   = 'mobile_init_open';
+	public const MOBILE_INIT_CLOSED = 'mobile_init_closed';
 
 	public function add_block() {
 		$this->set_block( new Block( self::NAME, [
@@ -91,13 +94,15 @@ class Section_Nav extends Block_Config {
 					'type'  => 'true_false',
 					'ui'    => 1,
 				] )
-			)->add_field( new Field( self::NAME . '_' . self::MOBILE_INIT_OPEN, [
-					'label'       => __( 'Default state on mobile', 'tribe' ),
-					'name'        => self::MOBILE_INIT_OPEN,
-					'type'        => 'true_false',
-					'ui'          => 1,
-					'ui_on_text'  => esc_html__( 'Open', 'tribe' ),
-					'ui_off_text' => esc_html__( 'Closed', 'tribe' ),
+			)->add_field( new Field( self::NAME . '_' . self::MOBILE_INIT, [
+					'label'         => __( 'Default state on mobile', 'tribe' ),
+					'name'          => self::MOBILE_INIT,
+					'type'          => 'button_group',
+					'choices'       => [
+						self::MOBILE_INIT_CLOSED => esc_html__( 'Closed', 'tribe' ),
+						self::MOBILE_INIT_OPEN   => esc_html__( 'Open', 'tribe' ),
+					],
+					'default_Value' => self::MOBILE_INIT_CLOSED,
 				] )
 			);
 	}

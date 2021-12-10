@@ -3,6 +3,7 @@
 namespace Tribe\Project\Templates\Components\section_nav;
 
 use Tribe\Libs\Utils\Markup_Utils;
+use Tribe\Project\Blocks\Types\Section_Nav\Section_Nav;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\button\Button_Controller;
 use Tribe\Project\Templates\Components\Deferred_Component;
@@ -20,7 +21,7 @@ class Section_Nav_Controller extends Abstract_Controller {
 	public const DESKTOP_LABEL     = 'desktop_label';
 	public const MORE_LABEL        = 'more_label';
 	public const STICKY            = 'sticky';
-	public const MOBILE_INIT_OPEN  = 'mobile_init_open';
+	public const MOBILE_INIT       = 'mobile_init';
 
 	/**
 	 * @var string[]
@@ -68,9 +69,9 @@ class Section_Nav_Controller extends Abstract_Controller {
 	private bool $sticky;
 
 	/**
-	 * @var bool
+	 * @var string
 	 */
-	private bool $mobile_init_open;
+	private string $mobile_init;
 
 	/**
 	 * @var string
@@ -103,11 +104,11 @@ class Section_Nav_Controller extends Abstract_Controller {
 		$this->desktop_label     = (string) $args[ self::DESKTOP_LABEL ];
 		$this->more_label        = (string) $args[ self::MORE_LABEL ];
 		$this->sticky            = (bool) $args[ self::STICKY ];
-		$this->mobile_init_open  = (bool) $args[ self::MOBILE_INIT_OPEN ];
+		$this->mobile_init       = (string) $args[ self::MOBILE_INIT ];
 	}
 
 	public function get_attrs(): string {
-		if ( $this->mobile_init_open ) {
+		if ( $this->mobile_init === Section_Nav::MOBILE_INIT_OPEN ) {
 			$this->attrs['data-init-open'] = 'true';
 		}
 
@@ -119,7 +120,7 @@ class Section_Nav_Controller extends Abstract_Controller {
 			$this->classes[] = 'c-section-nav--sticky';
 		}
 
-		if ( $this->mobile_init_open ) {
+		if ( $this->mobile_init === Section_Nav::MOBILE_INIT_OPEN ) {
 			$this->classes[] = 'c-section-nav--visible';
 		}
 
@@ -163,7 +164,7 @@ class Section_Nav_Controller extends Abstract_Controller {
 			Button_Controller::ATTRS   => [
 				'data-js'       => 'c-section-nav__toggle--mobile',
 				'aria-controls' => $this->container_id,
-				'aria-expanded' => $this->mobile_init_open ? 'true' : 'false',
+				'aria-expanded' => $this->mobile_init ? 'true' : 'false',
 				'aria-haspopup' => 'true',
 			],
 			Button_Controller::CLASSES => [ 'c-section-nav__toggle', 'c-section-nav__toggle--mobile' ],
@@ -198,7 +199,7 @@ class Section_Nav_Controller extends Abstract_Controller {
 			self::DESKTOP_LABEL     => '',
 			self::MORE_LABEL        => esc_html__( 'More', 'tribe' ),
 			self::STICKY            => false,
-			self::MOBILE_INIT_OPEN  => false,
+			self::MOBILE_INIT       => false,
 		];
 	}
 

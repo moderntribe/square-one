@@ -2,6 +2,7 @@
 
 namespace Tribe\Project\Templates\Components\blocks\section_nav;
 
+use Tribe\Project\Blocks\Types\Section_Nav\Section_Nav;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use \Tribe\Project\Templates\Components\section_nav\Section_Nav_Controller;
 
@@ -15,7 +16,7 @@ class Section_Nav_Block_Controller extends Abstract_Controller {
 	public const MORE_LABEL        = 'more_label';
 	public const DESKTOP_LABEL     = 'desktop_label';
 	public const STICKY            = 'sticky';
-	public const MOBILE_INIT_OPEN  = 'mobile_init_open';
+	public const MOBILE_INIT       = 'mobile_init';
 
 	/**
 	 * @var string[]
@@ -58,9 +59,9 @@ class Section_Nav_Block_Controller extends Abstract_Controller {
 	private bool $sticky;
 
 	/**
-	 * @var bool
+	 * @var string
 	 */
-	private bool $mobile_init_open;
+	private string $mobile_init;
 
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
@@ -73,7 +74,7 @@ class Section_Nav_Block_Controller extends Abstract_Controller {
 		$this->more_label        = (string) $args[ self::MORE_LABEL ];
 		$this->desktop_label     = (string) $args[ self::DESKTOP_LABEL ];
 		$this->sticky            = (bool) $args[ self::STICKY ];
-		$this->mobile_init_open  = (bool) $args[ self::MOBILE_INIT_OPEN ];
+		$this->mobile_init       = (string) $args[ self::MOBILE_INIT ];
 	}
 
 	/**
@@ -89,7 +90,7 @@ class Section_Nav_Block_Controller extends Abstract_Controller {
 			Section_Nav_Controller::MORE_LABEL        => $this->more_label,
 			Section_Nav_Controller::DESKTOP_LABEL     => $this->desktop_label,
 			Section_Nav_Controller::STICKY            => $this->sticky,
-			Section_Nav_Controller::MOBILE_INIT_OPEN  => $this->mobile_init_open,
+			Section_Nav_Controller::MOBILE_INIT       => $this->mobile_init,
 
 		];
 	}
@@ -107,7 +108,7 @@ class Section_Nav_Block_Controller extends Abstract_Controller {
 			self::MORE_LABEL        => esc_html__( 'More', 'tribe' ),
 			self::DESKTOP_LABEL     => '',
 			self::STICKY            => false,
-			self::MOBILE_INIT_OPEN  => false,
+			self::MOBILE_INIT       => Section_Nav::MOBILE_INIT_CLOSED,
 		];
 	}
 
