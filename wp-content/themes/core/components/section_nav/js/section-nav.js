@@ -244,7 +244,7 @@ const sectionNavIntersectionObserver = new IntersectionObserver( ( [ entry ] ) =
 }, intObserverOpts );
 
 /**
- * Initialize the observers applied to each SectionNav.
+ * Initialize the observers to the SectionNav.
  *
  * @param sectionNav
  */
