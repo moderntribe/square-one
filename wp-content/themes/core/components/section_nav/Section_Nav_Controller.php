@@ -20,7 +20,7 @@ class Section_Nav_Controller extends Abstract_Controller {
 	public const DESKTOP_LABEL     = 'desktop_label';
 	public const MORE_LABEL        = 'more_label';
 	public const STICKY            = 'sticky';
-	public const MOBILE_INIT       = 'mobile_init';
+	public const MOBILE_INIT_OPEN  = 'mobile_init_open';
 
 	/**
 	 * @var string[]
@@ -51,15 +51,7 @@ class Section_Nav_Controller extends Abstract_Controller {
 	private string $desktop_label;
 	private string $more_label;
 	private bool $sticky;
-
-	/**
-	 * @var string
-	 */
-	private string $mobile_init;
-
-	/**
-	 * @var string
-	 */
+	private bool $mobile_init_open;
 	private string $unique_id;
 	private string $container_id;
 	private string $more_id;
@@ -80,11 +72,11 @@ class Section_Nav_Controller extends Abstract_Controller {
 		$this->desktop_label     = (string) $args[ self::DESKTOP_LABEL ];
 		$this->more_label        = (string) $args[ self::MORE_LABEL ];
 		$this->sticky            = (bool) $args[ self::STICKY ];
-		$this->mobile_init       = (string) $args[ self::MOBILE_INIT ];
+		$this->mobile_init_open  = (bool) $args[ self::MOBILE_INIT_OPEN ];
 	}
 
 	public function get_attrs(): string {
-		if ( $this->mobile_init === Section_Nav::MOBILE_INIT_OPEN ) {
+		if ( $this->mobile_init_open ) {
 			$this->attrs['data-init-open'] = 'true';
 		}
 
@@ -96,7 +88,7 @@ class Section_Nav_Controller extends Abstract_Controller {
 			$this->classes[] = 'c-section-nav--sticky';
 		}
 
-		if ( $this->mobile_init === Section_Nav::MOBILE_INIT_OPEN ) {
+		if ( $this->mobile_init_open ) {
 			$this->classes[] = 'c-section-nav--visible';
 		}
 
@@ -140,7 +132,7 @@ class Section_Nav_Controller extends Abstract_Controller {
 			Button_Controller::ATTRS   => [
 				'data-js'       => 'c-section-nav__toggle--mobile',
 				'aria-controls' => $this->container_id,
-				'aria-expanded' => $this->mobile_init ? 'true' : 'false',
+				'aria-expanded' => $this->mobile_init_open ? 'true' : 'false',
 				'aria-haspopup' => 'true',
 			],
 			Button_Controller::CLASSES => [ 'c-section-nav__toggle', 'c-section-nav__toggle--mobile' ],
@@ -175,7 +167,7 @@ class Section_Nav_Controller extends Abstract_Controller {
 			self::DESKTOP_LABEL     => '',
 			self::MORE_LABEL        => esc_html__( 'More', 'tribe' ),
 			self::STICKY            => false,
-			self::MOBILE_INIT       => false,
+			self::MOBILE_INIT_OPEN  => false,
 		];
 	}
 

@@ -16,7 +16,7 @@ class Section_Nav_Block_Controller extends Abstract_Controller {
 	public const MORE_LABEL        = 'more_label';
 	public const DESKTOP_LABEL     = 'desktop_label';
 	public const STICKY            = 'sticky';
-	public const MOBILE_INIT       = 'mobile_init';
+	public const MOBILE_INIT_OPEN  = 'mobile_init';
 
 	/**
 	 * @var string[]
@@ -33,35 +33,12 @@ class Section_Nav_Block_Controller extends Abstract_Controller {
 	 */
 	private array $container_classes;
 
-	/**
-	 * @var int
-	 */
 	private int $menu_id;
-
-	/**
-	 * @var string
-	 */
 	private string $mobile_label;
-
-	/**
-	 * @var string
-	 */
 	private string $more_label;
-
-	/**
-	 * @var string
-	 */
 	private string $desktop_label;
-
-	/**
-	 * @var bool
-	 */
 	private bool $sticky;
-
-	/**
-	 * @var string
-	 */
-	private string $mobile_init;
+	private bool $mobile_init_open;
 
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
@@ -74,7 +51,7 @@ class Section_Nav_Block_Controller extends Abstract_Controller {
 		$this->more_label        = (string) $args[ self::MORE_LABEL ];
 		$this->desktop_label     = (string) $args[ self::DESKTOP_LABEL ];
 		$this->sticky            = (bool) $args[ self::STICKY ];
-		$this->mobile_init       = (string) $args[ self::MOBILE_INIT ];
+		$this->mobile_init_open  = (bool) $args[ self::MOBILE_INIT_OPEN ];
 	}
 
 	/**
@@ -90,7 +67,7 @@ class Section_Nav_Block_Controller extends Abstract_Controller {
 			Section_Nav_Controller::MORE_LABEL        => $this->more_label,
 			Section_Nav_Controller::DESKTOP_LABEL     => $this->desktop_label,
 			Section_Nav_Controller::STICKY            => $this->sticky,
-			Section_Nav_Controller::MOBILE_INIT       => $this->mobile_init,
+			Section_Nav_Controller::MOBILE_INIT_OPEN  => $this->mobile_init_open,
 
 		];
 	}
@@ -108,7 +85,7 @@ class Section_Nav_Block_Controller extends Abstract_Controller {
 			self::MORE_LABEL        => esc_html__( 'More', 'tribe' ),
 			self::DESKTOP_LABEL     => '',
 			self::STICKY            => false,
-			self::MOBILE_INIT       => Section_Nav::MOBILE_INIT_CLOSED,
+			self::MOBILE_INIT_OPEN  => false,
 		];
 	}
 
