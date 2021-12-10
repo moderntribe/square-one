@@ -2,7 +2,6 @@
 
 namespace Tribe\Project\Templates\Components\blocks\section_nav;
 
-use Tribe\Project\Blocks\Types\Section_Nav\Section_Nav;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use \Tribe\Project\Templates\Components\section_nav\Section_Nav_Controller;
 
