@@ -3,7 +3,6 @@
 namespace Tribe\Project\Templates\Components\section_nav;
 
 use Tribe\Libs\Utils\Markup_Utils;
-use Tribe\Project\Blocks\Types\Section_Nav\Section_Nav;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\button\Button_Controller;
 use Tribe\Project\Templates\Components\Deferred_Component;
@@ -48,24 +47,9 @@ class Section_Nav_Controller extends Abstract_Controller {
 	 */
 	private $menu;
 
-	/**
-	 * @var string
-	 */
 	private string $mobile_label;
-
-	/**
-	 * @var string
-	 */
 	private string $desktop_label;
-
-	/**
-	 * @var string
-	 */
 	private string $more_label;
-
-	/**
-	 * @var bool
-	 */
 	private bool $sticky;
 
 	/**
@@ -77,15 +61,7 @@ class Section_Nav_Controller extends Abstract_Controller {
 	 * @var string
 	 */
 	private string $unique_id;
-
-	/**
-	 * @var string
-	 */
 	private string $container_id;
-
-	/**
-	 * @var string
-	 */
 	private string $more_id;
 
 	public function __construct( array $args = [] ) {

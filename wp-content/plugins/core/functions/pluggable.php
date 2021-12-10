@@ -10,8 +10,7 @@ use Tribe\Libs\Queues\Tasks\Email;
 
 if ( ! function_exists( 'wp_mail' ) &&
      ! ( defined( 'WP_CLI' ) && WP_CLI ) && // phpcs:ignore -- phpcs doesn't handle spaces used for alignment
-     ( defined( 'QUEUE_MAIL' ) && QUEUE_MAIL ) ) // phpcs:ignore -- https://github.com/squizlabs/PHP_CodeSniffer/issues/1586
-{
+	 ( defined( 'QUEUE_MAIL' ) && QUEUE_MAIL ) ) {
 	/**
 	 * @throws \Exception
 	 */
