@@ -14,7 +14,7 @@ const MOBILE_BREAKPOINT = 600;
 
 const intObserverOpts = {
 	threshold: 1,
-	rootMargin: '-25px 0px 0px 0px', /* Set to 1px LESS than the `top: Npx` value applied to `.c-section-nav` when sticky. */
+	rootMargin: '-49px 0px 0px 0px', /* Set to 1px LESS than the `top: Npx` value applied to `.c-section-nav` when sticky. */
 };
 
 const el = {
