@@ -53,6 +53,12 @@ class Scripts {
 
 		foreach ( $wp_scripts->queue as $handle ) {
 			$script = $wp_scripts->registered[ $handle ];
+			
+			// Prevent preloading of scripts with no source.
+			// This most commonly occurs with script aliases (ex: `jquery` and `jquery-core`).
+			if ( empty( $scripts->src ) ) {
+				continue;
+			}
 
 			//-- Weird way to check if script is being enqueued in the footer.
 			if ( ! isset( $script->extra['group'] ) || $script->extra['group'] !== 1 ) {
