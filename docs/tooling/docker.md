@@ -1,17 +1,17 @@
 # Docker
 
 This project uses Docker containers to build the local development environment. This environment
-is managed using the file `dev/docker/docker-compose.yml`.
+is managed using the CLI tool [SquareOne Global Docker](https://github.com/moderntribe/square1-global-docker).
 
-The Docker Compose configuration will launch all the containers necessary to run a default SquareOne project. These
+The Docker Compose configuration in the `dev/docker/` folder will launch all the containers necessary to run the project. These
 services include:
 
-* nginx
+* Nginx
 * PHP-FPM
 * Memcached
 * Instances of the above specific to running automated tests
 * Selenium with Chrome for use in webdriver tests
-
+* Additional container services as configured
 
 ## Adding Services
 
@@ -200,11 +200,13 @@ Ideally, we can find containers on Docker Hub that we can use on our projects wi
 `docker-compose.yml`. Sometimes, though, we need to override how the container is built, extending it with our
 own `Dockerfile`. The most common scenario is a project that needs special extensions added to the PHP container.
 
-To extend the SquareOne container image, create a new `Dockerfile` at `dev/docker/phpdocker/php-fpm/Dockerfile`.
+To extend a SquareOne container image, create a new `Dockerfile` at `dev/docker/service-name/Dockerfile`.
 This can be configured however it makes sense for the project, but typically it will look something like:
 
+Example of extending the squareone-php container:
+
 ```dockerfile
-FROM moderntribe/squareone-php:74-2.0.1
+FROM moderntribe/squareone-php:74-3.0
 
 # Install applications/extensions required for this project
 RUN apt-get update \
@@ -226,7 +228,9 @@ x-php: &php
 
 The `image` key is used to distinguish this from images used on other projects. The revision number should increment
 every time a change is committed to the `Dockerfile` to automatically trigger a fresh build when a coworker pulls your
-changes.
+changes. 
+
+> Note, custom images will only be stored locally.
 
 ### Making Upstream Changes
 
