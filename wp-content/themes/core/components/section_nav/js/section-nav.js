@@ -248,9 +248,14 @@ const sectionNavIntersectionObserver = new IntersectionObserver( ( [ entry ] ) =
  *
  * @param sectionNav
  */
-const initializeObservers = ( sectionNav ) => {
+const initializeSectionNav = ( sectionNav ) => {
+	if ( sectionNav.dataset.initialized ) {
+		return;
+	}
+
 	sectionNavResizeObserver.observe( sectionNav );
 	sectionNavIntersectionObserver.observe( sectionNav );
+	sectionNav.setAttribute( 'data-initialized', true );
 };
 
 /**
@@ -258,7 +263,7 @@ const initializeObservers = ( sectionNav ) => {
  */
 const handleInitialState = () => {
 	componentState.isMobile = componentState.vWidth < MOBILE_BREAKPOINT;
-	el.sectionNavs.forEach( sectionNav => initializeObservers( sectionNav ) );
+	el.sectionNavs.forEach( sectionNav => initializeSectionNav( sectionNav ) );
 };
 
 /**
