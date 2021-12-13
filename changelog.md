@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2021.12
+* Fixed: prevented preloading of current document when a dependency alias is enqueued in the footer
+* Added: support to preload dependencies of aliases
+
 ## 2021.11
 * Fixed: Lefthook - Don't prefix commits for sprint or release branches
 * Updated: docker image to 74-3.0, composer v2 support (requires `so` v5.3.0+)
