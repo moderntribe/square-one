@@ -65,7 +65,6 @@ module.exports = {
 		],
 	},
 	optimization: {
-		emitOnErrors: false, // NoEmitOnErrorsPlugin
 		concatenateModules: true, //ModuleConcatenationPlugin
 		moduleIds: 'deterministic',
 	},

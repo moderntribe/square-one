@@ -31,7 +31,6 @@ module.exports = merge.strategy( {
 	],
 	optimization: {
 		splitChunks,
-		noEmitOnErrors: true, // NoEmitOnErrorsPlugin
 		concatenateModules: true, //ModuleConcatenationPlugin
 		minimizer,
 	},
