@@ -34,7 +34,7 @@ class Menu {
 			$cache->set( $this->cache_key, $nav, 'tribe_nav_menu' );
 		}
 
-		return $nav;
+		return $nav ?: '';
 	}
 
 	/**
