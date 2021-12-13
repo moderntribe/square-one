@@ -26,7 +26,7 @@ class Menu {
 		$this->cache_key = $cache_key;
 	}
 
-	private function get_html() {
+	private function get_html(): string {
 		$cache = new Cache();
 		$nav   = $cache->get( $this->cache_key, 'tribe_nav_menu' );
 		if ( empty( $nav ) ) {
@@ -34,7 +34,7 @@ class Menu {
 			$cache->set( $this->cache_key, $nav, 'tribe_nav_menu' );
 		}
 
-		return $nav;
+		return $nav ?: '';
 	}
 
 	/**

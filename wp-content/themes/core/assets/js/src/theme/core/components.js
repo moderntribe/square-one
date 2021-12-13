@@ -8,6 +8,7 @@ import accordion from 'components/accordion';
 import card from 'components/card';
 import comments from 'components/comments';
 import navigation from 'components/navigation';
+import sectionNav from 'components/section_nav';
 import share from 'components/share';
 import slider from 'components/slider';
 import tabs from 'components/tabs';
@@ -21,6 +22,7 @@ const init = () => {
 	card();
 	comments();
 	navigation();
+	sectionNav();
 	share();
 	slider();
 	tabs();

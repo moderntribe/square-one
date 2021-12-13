@@ -72,9 +72,9 @@
     "test": "cross-env NODE_ENV=test jest --config jest.config.json"
   },
   "dependencies": {
+    "@babel/runtime": "^7.16.3",
     "@types/react": "^16.9.11",
     "@vimeo/player": "^2.15.3",
-    "caniuse-lite": "1.0.30001235",
     "classnames": "^2.2.6",
     "delegate": "^3.2.0",
     "es6-promise": "^4.2.8",
@@ -123,6 +123,7 @@
     "@babel/plugin-syntax-dynamic-import": "^7.0.0",
     "@babel/plugin-transform-object-assign": "^7.0.0",
     "@babel/plugin-transform-regenerator": "^7.7.0",
+    "@babel/plugin-transform-runtime": "^7.16.0",
     "@babel/preset-env": "^7.7.1",
     "@babel/preset-react": "^7.7.0",
     "babel-eslint": "^10.0.3",

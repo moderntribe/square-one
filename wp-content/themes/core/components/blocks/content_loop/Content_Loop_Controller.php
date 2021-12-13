@@ -150,7 +150,7 @@ class Content_Loop_Controller extends Abstract_Controller {
 
 			// CASE: If not Inline Card Style and is the featured layout
 			
-			if ( $layout !== Card_Controller::STYLE_INLINE || $this->layout !== 'layout_feature') {
+			if ( $layout !== Card_Controller::STYLE_INLINE || $this->layout !== 'layout_feature' ) {
 				$card_cta =
 					[
 						Link_Controller::CONTENT => __( 'Read More', 'tribe' ),

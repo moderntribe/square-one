@@ -44,7 +44,7 @@ if ( empty( $c->get_slides() ) ) {
 			<?php echo $c->get_carousel_attrs(); ?>
 		>
 			<div class="swiper-wrapper">
-				<?php foreach ( $c->get_carousel_slides() as $index => $slide  ) { ?>
+				<?php foreach ( $c->get_carousel_slides() as $index => $slide ) { ?>
 					<button
 						class="c-slider__thumbnail swiper-slide"
 						data-js="c-slider-thumb-trigger"

@@ -32,6 +32,7 @@ module.exports = {
 		'@babel/plugin-proposal-object-rest-spread',
 		'@babel/plugin-syntax-dynamic-import',
 		'@babel/plugin-transform-regenerator',
+		'@babel/plugin-transform-runtime',
 		'@babel/plugin-proposal-class-properties',
 		'@babel/plugin-transform-object-assign',
 	],
