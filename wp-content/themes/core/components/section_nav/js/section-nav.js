@@ -232,15 +232,19 @@ const handleNavFit = ( sectionNav ) => {
  *
  * @type {ResizeObserver}
  */
-const sectionNavResizeObserver = new ResizeObserver( ( [ entry ] ) => handleNavFit( entry.target ) );
+const sectionNavResizeObserver = new ResizeObserver( ( entries ) => {
+	entries.forEach( entry => handleNavFit( entry.target ) );
+} );
 
 /**
  * Set up the IntersectionObserver callback for each SectionNav.
  *
  * @type {IntersectionObserver}
  */
-const sectionNavIntersectionObserver = new IntersectionObserver( ( [ entry ] ) => {
-	entry.target.classList.toggle( 'c-section-nav--stuck', entry.intersectionRatio < 1 );
+const sectionNavIntersectionObserver = new IntersectionObserver( ( entries ) => {
+	entries.forEach( ( entry ) => {
+		entry.target.classList.toggle( 'c-section-nav--stuck', entry.intersectionRatio < 1 );
+	} );
 }, intObserverOpts );
 
 /**
@@ -253,8 +257,14 @@ const initializeSectionNav = ( sectionNav ) => {
 		return;
 	}
 
+	// Attach the resize observer
 	sectionNavResizeObserver.observe( sectionNav );
-	sectionNavIntersectionObserver.observe( sectionNav );
+
+	// If this is a sticky instance, attach the intersection observer.
+	if ( sectionNav.classList.contains( 'c-section-nav--sticky' ) ) {
+		sectionNavIntersectionObserver.observe( sectionNav );
+	}
+
 	sectionNav.setAttribute( 'data-initialized', true );
 };
 
