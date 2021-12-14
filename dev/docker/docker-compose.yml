@@ -122,5 +122,5 @@ services:
 
 networks:
   proxy:
-    external:
-      name: global_proxy
+    external: true
+    name: global_proxy

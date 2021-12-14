@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## 2021.12
+* Fixed: docker compose (v2) support: `WARN[0000] network proxy: network.external.name is deprecated in favor of network.name`
 * Added: Section Nav component & block.
 * Added: generic navigation component.
 * Updated: Node & NPM to latest LTS (v16.13.1), updated node package versions where supported.
