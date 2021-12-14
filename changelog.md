@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2021.12
+* Added: Section Nav component & block.
+* Added: generic navigation component.
+* Updated: Node & NPM to latest LTS (v16.13.1), updated node package versions where supported.
+* Fixed: A posible PHP fatal when a anv menu is cached, but empty and the cache layer returns an unexpected boolean instead of an empty string.
+* Fixed: Several minor deprecation warnings in the webpack config.
+
 ## 2021.11
 * Fixed: Lefthook - Don't prefix commits for sprint or release branches
 * Updated: docker image to 74-3.0, composer v2 support (requires `so` v5.3.0+)
