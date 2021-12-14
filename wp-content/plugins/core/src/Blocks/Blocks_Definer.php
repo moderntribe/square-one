@@ -19,6 +19,7 @@ use Tribe\Project\Blocks\Types\Links\Links;
 use Tribe\Project\Blocks\Types\Logos\Logos;
 use Tribe\Project\Blocks\Types\Media_Text\Media_Text;
 use Tribe\Project\Blocks\Types\Quote\Quote;
+use Tribe\Project\Blocks\Types\Section_Nav\Section_Nav;
 use Tribe\Project\Blocks\Types\Spacer\Spacer;
 use Tribe\Project\Blocks\Types\Stats\Stats;
 use Tribe\Project\Blocks\Types\Tabs\Tabs;
@@ -48,6 +49,7 @@ class Blocks_Definer implements Definer_Interface {
 				DI\get( Logos::class ),
 				DI\get( Media_Text::class ),
 				DI\get( Quote::class ),
+				DI\get( Section_Nav::class ),
 				DI\get( Spacer::class ),
 				DI\get( Stats::class ),
 				DI\get( Tabs::class ),

@@ -79,9 +79,11 @@ jobs:
         working-directory: dev/docker
 
       - name: Setup node
-        uses: actions/setup-node@v1
+        id: nvm
+        run: echo ::set-output name=NODE_VERSION::$(cat .nvmrc)
+      - uses: actions/setup-node@v2
         with:
-          node-version: '14.15.1'
+          node-version: ${{ steps.nvm.outputs.NODE_VERSION }}
 
       - name: Install gulp-cli
         run: npm install gulp-cli -g
