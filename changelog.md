@@ -9,6 +9,8 @@ All notable changes to this project will be documented in this file.
 * Updated: Node & NPM to latest LTS (v16.13.1), updated node package versions where supported.
 * Fixed: A posible PHP fatal when a anv menu is cached, but empty and the cache layer returns an unexpected boolean instead of an empty string.
 * Fixed: Several minor deprecation warnings in the webpack config.
+* Fixed: prevented preloading of current document when a dependency alias is enqueued in the footer
+* Added: support to preload dependencies of aliases
 
 ## 2021.11
 * Fixed: Lefthook - Don't prefix commits for sprint or release branches
