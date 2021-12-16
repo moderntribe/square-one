@@ -206,7 +206,7 @@
     "webpack": "^5.3.2",
     "webpack-bundle-analyzer": "^3.6.0",
     "webpack-cli": "^4.7.2",
-    "webpack-dev-server": "^3.11.0",
+    "webpack-dev-server": "^4.6.0",
     "webpack-merge": "^4.2.2",
     "webpack-merge-and-include-globally": "^2.1.20",
     "webpack-stream": "^6.1.2",
