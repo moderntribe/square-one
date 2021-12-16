@@ -13,6 +13,8 @@ All notable changes to this project will be documented in this file.
 * Added: support to preload dependencies of aliases
 
 ## 2021.11
+* Removed: monolog. This dependency will be managed by tribe-libs.
+* Updated: tribe libs to 3.4.8.
 * Fixed: Lefthook - Don't prefix commits for sprint or release branches
 * Updated: docker image to 74-3.0, composer v2 support (requires `so` v5.3.0+)
 * Added: Entrypoint for component scripts to run in the block editor.
