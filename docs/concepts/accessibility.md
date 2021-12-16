@@ -1,7 +1,7 @@
 #  Accessibility
 
 SquareOne does it's best to lay a foundation for building themes that are accessible to all. Here are 
-the guidelines we follow, which are are focused on building sites that are reachable and maintain 
+the guidelines we follow, which are focused on building sites that are reachable and maintain 
 the same level of functionality whether interacted with by screen reader or through the use of a keyboard:
 
 ## What Is Accessibility?
@@ -21,7 +21,8 @@ For us this means building sites that are accessible by ensuring:
 
 ## Validating Code
 
-You should not only actively be building accessibility into your code and features, but also verifying and testing as well. Currently we utilize [tota11y](http://khan.github.io/tota11y/) for testing our theme's accessibility while we work.
+You should not only actively be building accessibility into your code and features, but also verifying and testing as well.
+Currently we utilize [tota11y](http://khan.github.io/tota11y/) for testing our theme's accessibility while we work.
 
 ## Resources
 

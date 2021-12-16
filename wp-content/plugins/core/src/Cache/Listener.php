@@ -26,7 +26,7 @@ class Listener extends \Tribe\Libs\Cache\Listener {
 	 *
 	 * @param $p2p_id
 	 */
-	public function p2p_created_connection($p2p_id) {
+	public function p2p_created_connection( $p2p_id ) {
 		$this->cache->flush_group( 'p2p_relationships' );
 	}
 

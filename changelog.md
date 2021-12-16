@@ -2,12 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2021.12
+* Fixed: docker compose (v2) support: `WARN[0000] network proxy: network.external.name is deprecated in favor of network.name`
+* Added: Section Nav component & block.
+* Added: generic navigation component.
+* Updated: Node & NPM to latest LTS (v16.13.1), updated node package versions where supported.
+* Fixed: A posible PHP fatal when a anv menu is cached, but empty and the cache layer returns an unexpected boolean instead of an empty string.
+* Fixed: Several minor deprecation warnings in the webpack config.
+* Fixed: prevented preloading of current document when a dependency alias is enqueued in the footer
+* Added: support to preload dependencies of aliases
+
 ## 2021.11
 * Removed: monolog. This dependency will be managed by tribe-libs.
 * Updated: tribe libs to 3.4.8.
+* Fixed: Lefthook - Don't prefix commits for sprint or release branches
 * Updated: docker image to 74-3.0, composer v2 support (requires `so` v5.3.0+)
 * Added: Entrypoint for component scripts to run in the block editor.
 * Added: Slider component JS behaviors in the block editor.
+* Added: check that `theme_location` parameter of `wp_nav_menu()` is populated before adding classes
  
 ## 2021.10
 * Fixed: Misc small repairs to common blocks per QA on other projects.

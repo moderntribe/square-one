@@ -1,9 +1,10 @@
 name: 'ESLint'
 on:
+  push:
+    branches:
+      - main
   pull_request:
-    paths:
-      - 'wp-content/plugins/core/**.js'
-      - 'wp-content/themes/core/**.js'
+
 jobs:
   eslint:
     runs-on: ubuntu-latest

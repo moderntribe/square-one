@@ -110,7 +110,7 @@ class Subheader_Controller extends Abstract_Controller {
 	}
 
 	public function get_image_args(): array {
-		if (  empty( $this->hero_image_id ) ) {
+		if ( empty( $this->hero_image_id ) ) {
 			return [];
 		}
 

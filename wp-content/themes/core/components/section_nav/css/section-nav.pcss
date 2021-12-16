@@ -1,0 +1,266 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Component: Section Nav
+ *
+ * ----------------------------------------------------------------------------- */
+
+.c-section-nav {
+	border: 1px solid var(--color-border);
+
+	@media (--viewport-small) {
+		border: none;
+	}
+
+	/* CASE: position this section nav sticky on scroll. */
+	&.c-section-nav--sticky {
+		position: sticky;
+		top: var(--spacer-60); /* Be sure to adjust the intObserverOpts rootMargin value in `section-nav.js`. */
+		background: var(--color-bgd-content);
+
+		@media (--viewport-small) {
+			background: transparent;
+		}
+	}
+
+	/* CASE: The section nav is "stuck" while scrolling. */
+	&.c-section-nav--stuck {
+		box-shadow: var(--box-shadow-10);
+
+		@media (--viewport-small) {
+			box-shadow: none;
+		}
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Section Nav Toggles
+ *
+ * Applies base styling for both the mobile menu button and
+ * desktop "more" menu button.
+ * ----------------------------------------------------------------------------- */
+
+.c-section-nav__toggle {
+	@mixin a-btn-reset;
+
+	position: relative;
+
+	&:after {
+		@mixin icon;
+
+		content: var(--icon-chevron-down);
+		position: absolute;
+		transition: var(--transition);
+	}
+
+	&:focus,
+	&:hover {
+		text-decoration: underline;
+	}
+
+	/* CASE: Toggle active */
+	&[aria-expanded="true"] {
+
+		&:after {
+			transform: rotate(180deg);
+		}
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Section Nav Mobile Toggle Button
+ * ----------------------------------------------------------------------------- */
+
+.c-section-nav__toggle--mobile {
+	display: block;
+	width: 100%;
+	padding: var(--spacer-20) var(--spacer-30);
+	text-align: left;
+	line-height: 1.5;
+	letter-spacing: 0;
+
+	@media (--viewport-small) {
+		display: none;
+	}
+
+	&:after {
+		top: var(--spacer-20);
+		right: var(--spacer-30);
+		font-size: 24px;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Section Nav Container
+ * ----------------------------------------------------------------------------- */
+
+.c-section-nav__container {
+	display: none;
+
+	@media (--viewport-small) {
+		overflow: hidden;
+	}
+
+	/* CASE: the more menu is in use. */
+	.c-section-nav--more-initialized & {
+		overflow: visible;
+	}
+
+	/* CASE: The mobile menu is open or it's showing the desktop layout. */
+	.c-section-nav--visible & {
+		display: block;
+	}
+
+	/* CASE: position this section nav sticky on scroll. */
+	.c-section-nav--sticky & {
+		transition: var(--transition);
+
+		@media (--viewport-small) {
+			padding: var(--spacer-20) var(--grid-gutter-small);
+			border: 1px solid var(--color-border);
+			background: var(--color-bgd-content);
+		}
+	}
+
+	/* CASE: The section nav is "stuck" while scrolling. */
+	.c-section-nav--stuck & {
+		@media (--viewport-small) {
+			box-shadow: var(--box-shadow-10);
+		}
+	}
+
+	/* CASE: Section Nav *NOT* Sticky
+	/* Remove the padding added by `l-container` to keep text justified when there's not a "sticky" wrapper. */
+	.c-section-nav:not(.c-section-nav--sticky) & {
+		@media (--viewport-small) {
+			padding-left: 0;
+			padding-right: 0;
+		}
+	}
+}
+
+.c-section-nav__inner {
+	display: flex;
+	flex-flow: row nowrap;
+}
+
+/* -----------------------------------------------------------------------------
+ * Section Nav Desktop Label (optional)
+ * ----------------------------------------------------------------------------- */
+
+.c-section-nav__label--desktop {
+	display: none;
+	padding-right: var(--spacer-50);
+	white-space: nowrap;
+	font-weight: 700;
+
+	@media (--viewport-small) {
+		display: block;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Section Nav List
+ * ----------------------------------------------------------------------------- */
+
+.c-section-nav__list {
+	padding: 0 0 var(--spacer-20);
+
+	@media (--viewport-small) {
+		display: flex;
+		flex-flow: row nowrap;
+		padding: 0;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Section Nav List Items
+ * ----------------------------------------------------------------------------- */
+
+.section-nav__list-item {
+
+	& ~ li {
+		@media (--viewport-small) {
+			margin-left: var(--spacer-50);
+		}
+	}
+
+	/* CASE: items within the "More" menu */
+	.c-section-nav__list--more & {
+		margin: 0;
+
+		& ~ li {
+			margin-top: 12px;
+		}
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Section Nav Actions (links)
+ *
+ * `a` selector necessary to override default t-sink link styles.
+ * ----------------------------------------------------------------------------- */
+
+a.section-nav__action {
+	display: inline-block;
+	padding: 6px 0;
+	text-decoration: none;
+
+	@media (--viewport-small) {
+		padding: 0;
+		white-space: nowrap;
+	}
+
+	&:focus,
+	&:hover {
+		text-decoration: underline;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Section Nav "More" list item
+ * ----------------------------------------------------------------------------- */
+
+.section-nav__list-item--more {
+	display: none;
+	position: relative;
+
+	/* CASE: the more menu is active. */
+	.c-section-nav--more-initialized & {
+		display: flex;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Section Nav "More" Toggle Button
+ * ----------------------------------------------------------------------------- */
+
+.c-section-nav__toggle--more {
+	padding-right: 1.5em;
+	white-space: nowrap;
+
+	&:after {
+		right: 0;
+		font-size: 1.25em;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Section Nav "More" Container
+ * ----------------------------------------------------------------------------- */
+
+.c-section-nav__more {
+	display: none;
+	position: absolute;
+	z-index: 1;
+	top: calc(100% + var(--spacer-10));
+	right: calc(-1 * var(--spacer-10));
+	padding: var(--spacer-30) var(--spacer-40);
+	background: var(--color-bgd-content);
+	border: 1px solid var(--color-border);
+
+	/* CASE: More menu active */
+	.c-section-nav--more-active & {
+		display: block;
+		box-shadow: var(--box-shadow-10);
+	}
+}

@@ -42,6 +42,10 @@ class Nav_Attribute_Filters {
 	 * @filter nav_menu_css_class
 	 */
 	public function customize_nav_item_classes( array $classes, object $item, stdClass $args, int $depth ): array {
+		if ( empty( $args->theme_location ) ) {
+			return $classes;
+		}
+
 		$theme_location = $args->theme_location;
 
 		$classes[] = $theme_location . '__list-item';
@@ -105,6 +109,10 @@ class Nav_Attribute_Filters {
 	 * @filter nav_menu_link_attributes
 	 */
 	public function customize_nav_item_anchor_atts( array $atts, object $item, stdClass $args, int $depth ): array {
+		if ( empty( $args->theme_location ) ) {
+			return $atts;
+		}
+
 		$theme_location = $args->theme_location;
 
 		$classes = [
