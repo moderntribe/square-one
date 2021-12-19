@@ -6,7 +6,7 @@ on:
 
 env:
   APPNAME: sq1
-  SERVER: "{{ env.TEST_DOMAIN }}"
+  SERVER: ${{ env.TEST_DOMAIN }}
   TEAM_SERVER: dokku01
 
 jobs:
