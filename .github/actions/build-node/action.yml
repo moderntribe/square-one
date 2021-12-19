@@ -11,6 +11,7 @@ runs:
             node-version-file: '.nvmrc'
 
         - name: Yarn install and build
+          shell: bash
           run: |
             yarn install
             npm run validate
