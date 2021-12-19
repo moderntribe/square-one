@@ -78,7 +78,8 @@ jobs:
       - name: Yarn install and build
         run: |
           yarn install
-          gulp server_dist
+          npm run validate
+          npm run server_dist
 
       - name: Add dist files from yarn build
         env:
