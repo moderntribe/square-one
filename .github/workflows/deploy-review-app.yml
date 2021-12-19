@@ -132,7 +132,7 @@ jobs:
       - name: FAILURE
         if: failure()
         uses: tokorom/action-slack-incoming-webhook@main
-        cenv:
+        env:
           INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
         with:
           text: ":x: Failed on Review App Deployment"
