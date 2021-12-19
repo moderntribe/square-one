@@ -15,7 +15,7 @@ jobs:
   create_review_app:
     runs-on: ubuntu-latest
     # only run when a pull request is opened on main
-    if: github.event_name == 'pull_request' && github.event.action == 'opened' && github.repository == 'moderntribe/square-one'
+    if: (github.event_name == 'pull_request' && github.event.action == 'opened' || github.event.action == 'synchronize') && github.repository == 'moderntribe/square-one'
     steps:
       - name: Set Variables
         run: |
