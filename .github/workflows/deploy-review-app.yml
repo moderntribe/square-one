@@ -83,17 +83,6 @@ jobs:
       - name: Build Node
         uses: ./.github/actions/square1/build-node
 
-      # - name: Setup node version
-      #   uses: actions/setup-node@v2
-      #   with:
-      #     node-version-file: '.nvmrc'
-
-      # - name: Yarn install and build
-      #   run: |
-      #     yarn install
-      #     npm run validate
-      #     npm run server_dist
-
       - name: Add dist files from yarn build
         env:
           BRANCH: ${{ steps.extract_pr.outputs.branch }}
@@ -115,53 +104,75 @@ jobs:
           git remote add dokku dokku@${{ env.SERVER }}:${{ env.REVIEW_APP }}
           git push dokku ${BRANCH}:master --force
 
-      - name: SUCCESS
-        if: success()
-        uses: tokorom/action-slack-incoming-webhook@main
-        env:
-          INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
-        with:
-          text: ":green_check: Successful on Review App Deployment"
-          attachments: |
-            [
-              {
-                "color": "good",
-                "fields": [
-                  {
-                    "title": "Test Review App URL",
-                    "value": "${{ env.REVIEW_APP }}.${{ env.SERVER }}"
-                  },
-                  {
-                    "title": "GitHub Actions URL",
-                    "value": "${{ env.GHA_URL }}"
-                  }
-                ]
-              }
-            ]
 
-      - name: FAILURE
-        if: failure()
-        uses: tokorom/action-slack-incoming-webhook@main
-        env:
-          INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+      - name: Slack Message success
+        uses: ./.github/actions/utils/slack-message-deploy
+        if: success()
         with:
-          text: ":x: Failed on Review App Deployment"
-          attachments: |
-            [
-              {
-                "color": "bad",
-                "fields": [
-                  {
-                    "title": "Test Review App URL",
-                    "value": "${{ env.REVIEW_APP }}.${{ env.SERVER }}"
-                  },
-                  {
-                    "title": "GitHub Actions URL",
-                    "value": "${{ env.GHA_URL }}"
-                  }
-                ]
-              }
-            ]
+          webhook_url: ${{ secrets.SLACK_WEBHOOK }}
+          message: ":green_check: Successful on Review App Deployment"
+          server_url: "${{ env.REVIEW_APP }}.${{ env.SERVER }}"
+          gha_url: "${{ env.GHA_URL }}"
+          color: "good"
+
+      - name: Slack Message Failure
+        uses: ./.github/actions/utils/slack-message-deploy
+        if: failure()
+        with:
+          webhook_url: ${{ secrets.SLACK_WEBHOOK }}
+          message: ":x: Failed on Review App Deployment"
+          server_url: "${{ env.REVIEW_APP }}.${{ env.SERVER }}"
+          gha_url: "${{ env.GHA_URL }}"
+          color: "bad"
+
+
+      # - name: SUCCESS
+      #   if: success()
+      #   uses: tokorom/action-slack-incoming-webhook@main
+      #   env:
+      #     INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+      #   with:
+      #     text: ":green_check: Successful on Review App Deployment"
+      #     attachments: |
+      #       [
+      #         {
+      #           "color": "good",
+      #           "fields": [
+      #             {
+      #               "title": "Test Review App URL",
+      #               "value": "${{ env.REVIEW_APP }}.${{ env.SERVER }}"
+      #             },
+      #             {
+      #               "title": "GitHub Actions URL",
+      #               "value": "${{ env.GHA_URL }}"
+      #             }
+      #           ]
+      #         }
+      #       ]
+
+      # - name: FAILURE
+      #   if: failure()
+      #   uses: tokorom/action-slack-incoming-webhook@main
+      #   env:
+      #     INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+      #   with:
+      #     text: ":x: Failed on Review App Deployment"
+      #     attachments: |
+      #       [
+      #         {
+      #           "color": "bad",
+      #           "fields": [
+      #             {
+      #               "title": "Test Review App URL",
+      #               "value": "${{ env.REVIEW_APP }}.${{ env.SERVER }}"
+      #             },
+      #             {
+      #               "title": "GitHub Actions URL",
+      #               "value": "${{ env.GHA_URL }}"
+      #             }
+      #           ]
+      #         }
+      #       ]
 
   destroy_review_app:
     runs-on: ubuntu-latest
