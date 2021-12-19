@@ -52,17 +52,17 @@ jobs:
     runs-on: ubuntu-latest
     if: (github.event_name == 'pull_request' && github.event.action == 'opened' || github.event.action == 'synchronize') && github.repository == 'moderntribe/square-one'
     steps:
-      - name: Set Variables
-        run: |
-          echo "REVIEW_APP=${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}" >> $GITHUB_ENV
-          echo "GHA_URL=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" >> $GITHUB_ENV
+      # - name: Set Variables
+      #   run: |
+      #     echo "REVIEW_APP=${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}" >> $GITHUB_ENV
+      #     echo "GHA_URL=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" >> $GITHUB_ENV
 
-      - name: Extract PR branch name
-        shell: bash
-        run: echo "##[set-output name=branch;]$(echo ${BASE_BRANCH#refs/heads/})"
-        env:
-          BASE_BRANCH: ${{ github.event.pull_request.head.ref }}
-        id: extract_pr
+      # - name: Extract PR branch name
+      #   shell: bash
+      #   run: echo "##[set-output name=branch;]$(echo ${BASE_BRANCH#refs/heads/})"
+      #   env:
+      #     BASE_BRANCH: ${{ github.event.pull_request.head.ref }}
+      #   id: extract_pr
 
       - name: Cloning repo for Pull Requests
         uses: actions/checkout@v2
@@ -76,9 +76,13 @@ jobs:
           fetch-depth: 0
           repository: moderntribe/actions
           token: ${{ secrets.GH_BOT_TOKEN }}
-          path: '.github/actions'
+          path: ".github/actions"
           ref: "add_basic_sq1"
 
+      - name: Set common variables
+        uses: ./.github/actions/utils/common-variables
+        with:
+          base_branch: "${{ github.event.pull_request.head.ref }}"
 
       # - name: Build Node
       #   uses: ./.github/actions/square1/build-node
@@ -92,17 +96,6 @@ jobs:
       #     git add ./wp-content/ --force
       #     git commit --allow-empty -m "Deploying from GHA - branch=${BRANCH}"
 
-      # - uses: webfactory/ssh-agent@v0.5.3
-      #   with:
-      #     ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-      # - name: Deploy to ${{ env.REVIEW_APP }}
-      #   env:
-      #     BRANCH: ${{ steps.extract_pr.outputs.branch }}
-      #     GIT_SSH_COMMAND: "ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
-      #   run: |
-      #     git remote add dokku dokku@${{ env.SERVER }}:${{ env.REVIEW_APP }}
-      #     git push dokku ${BRANCH}:master --force
 
       - name: Deploy
         uses: ./.github/actions/deploy/gitdeploy
@@ -110,7 +103,7 @@ jobs:
           ssh_private_key: "${{ secrets.SSH_PRIVATE_KEY }}"
           server: "dokku@${{ env.SERVER }}"
           app: "${{ env.REVIEW_APP }}"
-          branch: "${{ steps.extract_pr.outputs.branch }}"
+          branch: "${{ env.BRANCH }}"
 
       - name: Slack Message success
         uses: ./.github/actions/utils/slack-message-deploy
