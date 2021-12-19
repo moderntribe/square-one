@@ -70,8 +70,11 @@ jobs:
           fetch-depth: 0
           ref: ${{ github.event.pull_request.head.ref }}
 
-      - uses: ./.github/actions/build-node
-        name: Test
+      # - name: Build Node
+      #   uses: ./.github/actions/build-node
+
+      - name: Build Node
+        uses: moderntribe/actions/buildnode@add_basic_sq1
 
       # - name: Setup node version
       #   uses: actions/setup-node@v2
