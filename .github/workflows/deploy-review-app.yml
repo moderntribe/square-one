@@ -80,46 +80,53 @@ jobs:
           ref: "add_basic_sq1"
 
 
-      - name: Build Node
-        uses: ./.github/actions/square1/build-node
+      # - name: Build Node
+      #   uses: ./.github/actions/square1/build-node
 
-      - name: Add dist files from yarn build
-        env:
-          BRANCH: ${{ steps.extract_pr.outputs.branch }}
-        run: |
-          git config --global user.name "github actions modern tribe"
-          git config --global user.email "devops@tri.be"
-          git add ./wp-content/ --force
-          git commit --allow-empty -m "Deploying from GHA - branch=${BRANCH}"
+      # - name: Add dist files from yarn build
+      #   env:
+      #     BRANCH: ${{ steps.extract_pr.outputs.branch }}
+      #   run: |
+      #     git config --global user.name "github actions modern tribe"
+      #     git config --global user.email "devops@tri.be"
+      #     git add ./wp-content/ --force
+      #     git commit --allow-empty -m "Deploying from GHA - branch=${BRANCH}"
 
-      - uses: webfactory/ssh-agent@v0.5.3
+      # - uses: webfactory/ssh-agent@v0.5.3
+      #   with:
+      #     ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      # - name: Deploy to ${{ env.REVIEW_APP }}
+      #   env:
+      #     BRANCH: ${{ steps.extract_pr.outputs.branch }}
+      #     GIT_SSH_COMMAND: "ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
+      #   run: |
+      #     git remote add dokku dokku@${{ env.SERVER }}:${{ env.REVIEW_APP }}
+      #     git push dokku ${BRANCH}:master --force
+
+      - name: Deploy
+        uses: ./.github/actions/deploy/gitdeploy
         with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-      - name: Deploy to ${{ env.REVIEW_APP }}
-        env:
-          BRANCH: ${{ steps.extract_pr.outputs.branch }}
-          GIT_SSH_COMMAND: "ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
-        run: |
-          git remote add dokku dokku@${{ env.SERVER }}:${{ env.REVIEW_APP }}
-          git push dokku ${BRANCH}:master --force
-
+          ssh_private_key: "${{ secrets.SSH_PRIVATE_KEY }}"
+          server: "dokku@${{ env.SERVER }}"
+          app: "${{ env.REVIEW_APP }}"
+          branch: "${{ steps.extract_pr.outputs.branch }}"
 
       - name: Slack Message success
         uses: ./.github/actions/utils/slack-message-deploy
         if: success()
         with:
-          webhook_url: ${{ secrets.SLACK_WEBHOOK }}
+          webhook_url: "${{ secrets.SLACK_WEBHOOK }}"
           message: ":green_check: Successful on Review App Deployment"
           server_url: "${{ env.REVIEW_APP }}.${{ env.SERVER }}"
           gha_url: "${{ env.GHA_URL }}"
           color: "good"
 
-      - name: Slack Message Failure
+      - name: Slack Message failure
         uses: ./.github/actions/utils/slack-message-deploy
         if: failure()
         with:
-          webhook_url: ${{ secrets.SLACK_WEBHOOK }}
+          webhook_url: "${{ secrets.SLACK_WEBHOOK }}"
           message: ":x: Failed on Review App Deployment"
           server_url: "${{ env.REVIEW_APP }}.${{ env.SERVER }}"
           gha_url: "${{ env.GHA_URL }}"
