@@ -10,45 +10,7 @@ env:
   TEAM_SERVER: dokku01
 
 jobs:
-  create_review_app:
-    runs-on: ubuntu-latest
-    # only run when a pull request is opened on main
-    if: (github.event_name == 'pull_request' && github.event.action == 'opened' || github.event.action == 'synchronize') && github.repository == 'moderntribe/square-one'
-    steps:
-      - name: Set Variables
-        run: |
-          echo "REVIEW_APP=${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}" >> $GITHUB_ENV
-          echo "GHA_URL=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" >> $GITHUB_ENV
-
-      - uses: webfactory/ssh-agent@v0.5.3
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-      - name: Check if ${{ env.REVIEW_APP }} already exists
-        id: test_app
-        env:
-          SSH_COMMAND: "ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
-        run: |
-          exists=$(${SSH_COMMAND} dokku@${{ env.SERVER }} apps:exists ${{ env.REVIEW_APP }} && echo "true" || echo "false")
-          echo "##[set-output name=app_exists;]$(echo ${exists})"
-
-      - name: Repository Dispatch | Launch ${{ env.REVIEW_APP }}
-        if: steps.test_app.outputs.app_exists == 'false'
-        uses: peter-evans/repository-dispatch@v1
-        with:
-          repository: moderntribe/dokku-ansible
-          event-type: create-review-app
-          token: ${{ secrets.GH_BOT_TOKEN }}
-          client-payload: |
-            {
-              "review_app_name": "${{ env.REVIEW_APP }}",
-              "app_name": "${{ env.APPNAME }}",
-              "server": "${{ env.TEAM_SERVER }}",
-              "action_url": "${{ env.GHA_URL }}"
-            }
-
   deploy_review_app:
-    needs: create_review_app
     runs-on: ubuntu-latest
     if: (github.event_name == 'pull_request' && github.event.action == 'opened' || github.event.action == 'synchronize') && github.repository == 'moderntribe/square-one'
     steps:
@@ -70,9 +32,9 @@ jobs:
       - name: Set common variables
         uses: ./.github/actions/utils/common-variables
         with:
-          base_branch: "${{ github.event.pull_request.head.ref }}"
+          base_branch: ${{ github.event.pull_request.head.ref }}
 
-      - name: Create review app
+      - name: Create review app ${{ env.REVIEW_APP }}
         uses: ./.github/actions/dokku/create-review-app
         with:
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
@@ -83,45 +45,40 @@ jobs:
           github_pat_token: ${{ secrets.GH_BOT_TOKEN }}
           gha_url: ${{ env.GHA_URL }}
 
-      # - name: Build Node
-      #   uses: ./.github/actions/square1/build-node
+      - name: Build Node
+        uses: ./.github/actions/square1/build-node
 
-      # - name: Add dist files from yarn build
-      #   env:
-      #     BRANCH: ${{ steps.extract_pr.outputs.branch }}
-      #   run: |
-      #     git config --global user.name "github actions modern tribe"
-      #     git config --global user.email "devops@tri.be"
-      #     git add ./wp-content/ --force
-      #     git commit --allow-empty -m "Deploying from GHA - branch=${BRANCH}"
+      - name: Commit Files Node Files
+        uses: ./.github/actions/utils/commit-files
+        with:
+          folder: ./wp-content/
 
-
-      - name: Deploy
+      - name: Deploy to ${{ env.REVIEW_APP }}
         uses: ./.github/actions/deploy/gitdeploy
         with:
-          ssh_private_key: "${{ secrets.SSH_PRIVATE_KEY }}"
+          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
           server: "dokku@${{ env.SERVER }}"
-          app: "${{ env.REVIEW_APP }}"
-          branch: "${{ env.BRANCH }}"
+          app: ${{ env.REVIEW_APP }}
+          branch: ${{ env.BRANCH }}
 
       - name: Slack Message success
         uses: ./.github/actions/utils/slack-message-deploy
         if: success()
         with:
-          webhook_url: "${{ secrets.SLACK_WEBHOOK }}"
+          webhook_url: ${{ secrets.SLACK_WEBHOOK }}
           message: ":green_check: Successful on Review App Deployment"
           server_url: "${{ env.REVIEW_APP }}.${{ env.SERVER }}"
-          gha_url: "${{ env.GHA_URL }}"
+          gha_url: ${{ env.GHA_URL }}
           color: "good"
 
       - name: Slack Message failure
         uses: ./.github/actions/utils/slack-message-deploy
         if: failure()
         with:
-          webhook_url: "${{ secrets.SLACK_WEBHOOK }}"
+          webhook_url: ${{ secrets.SLACK_WEBHOOK }}
           message: ":x: Failed on Review App Deployment"
           server_url: "${{ env.REVIEW_APP }}.${{ env.SERVER }}"
-          gha_url: "${{ env.GHA_URL }}"
+          gha_url: ${{ env.GHA_URL }}
           color: "bad"
 
   destroy_review_app:
@@ -129,45 +86,36 @@ jobs:
     # only run when a pull request is closed
     if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.repository == 'moderntribe/square-one'
     steps:
-      - name: Set Variables
-        run: |
-          echo "REVIEW_APPNAME=${{ env.APPNAME }}-pr${{ github.event.pull_request.number }}" >> $GITHUB_ENV
-          echo "GHA_URL=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" >> $GITHUB_ENV
 
-      - name: Repository Dispatch | Delete ${{ env.REVIEW_APP }}
-        uses: peter-evans/repository-dispatch@v1
+      - name: Cloning Actions
+        uses: actions/checkout@v2
         with:
-          repository: moderntribe/dokku-ansible/
-          event-type: delete-review-app
+          fetch-depth: 0
+          repository: moderntribe/actions
           token: ${{ secrets.GH_BOT_TOKEN }}
-          client-payload: |
-            {
-              "review_app_name": "${{ env.REVIEW_APPNAME }}",
-              "app_name": "${{ env.APPNAME }}",
-              "server": "${{ env.TEAM_SERVER }}",
-              "action_url": "${{ env.GHA_URL }}"
-            }
+          path: ".github/actions"
+          ref: "add_basic_sq1"
 
-      - name: FAILURE
-        if: failure()
-        uses: tokorom/action-slack-incoming-webhook@main
-        env:
-          INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+      - name: Set common variables
+        uses: ./.github/actions/utils/common-variables
+
+      - name: Delete review app ${{ env.REVIEW_APP }}
+        uses: ./.github/actions/dokku/delete-review-app
         with:
-          text: ":x: Failed to Destroy App"
-          attachments: |
-            [
-              {
-                "color": "bad",
-                "fields": [
-                  {
-                    "title": "Test App Name",
-                    "value": "${{ env.REVIEW_APPNAME }}"
-                  },
-                  {
-                    "title": "GitHub Actions URL",
-                    "value": "${{ env.GHA_URL }}"
-                  }
-                ]
-              }
-            ]
+          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          server: "dokku@${{ env.SERVER }}"
+          team_server: ${{ env.TEAM_SERVER }}
+          app: ${{ env.APPNAME }}
+          review_app: ${{ env.REVIEW_APP }}
+          github_pat_token: ${{ secrets.GH_BOT_TOKEN }}
+          gha_url: ${{ env.GHA_URL }}
+
+      - name: Slack Message failure
+        uses: ./.github/actions/utils/slack-message-deploy
+        if: failure()
+        with:
+          webhook_url: ${{ secrets.SLACK_WEBHOOK }}
+          message: ":x: Failed to Destroy App"
+          server_url: "${{ env.REVIEW_APP }}.${{ env.SERVER }}"
+          gha_url: ${{ env.GHA_URL }}
+          color: "bad"
