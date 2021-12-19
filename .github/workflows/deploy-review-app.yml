@@ -77,6 +77,8 @@ jobs:
           repository: moderntribe/actions
           token: ${{ secrets.GH_BOT_TOKEN }}
           path: '.github/actions'
+          ref: "add_basic_sq1"
+
 
       - name: Build Node
         uses: ./.github/actions/build-node
