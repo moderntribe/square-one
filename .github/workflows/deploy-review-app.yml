@@ -2,8 +2,6 @@ name: Deploy Review App
 
 on:
   pull_request:
-    branches:
-      - sprint/**
     types: [ opened, closed, synchronize ]
 
 env:

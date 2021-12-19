@@ -1,12 +1,9 @@
 name: Deploy Test
-
 on:
   push:
     branches:
       - server/test
   pull_request:
-    branches:
-      - sprint/**
     types: [ opened, closed, synchronize ]
 
 env:
