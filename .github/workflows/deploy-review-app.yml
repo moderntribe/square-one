@@ -70,16 +70,19 @@ jobs:
           fetch-depth: 0
           ref: ${{ github.event.pull_request.head.ref }}
 
-      - name: Setup node version
-        uses: actions/setup-node@v2
-        with:
-          node-version-file: '.nvmrc'
+      - uses: ./.github/actions/build-node
+        name: Test
 
-      - name: Yarn install and build
-        run: |
-          yarn install
-          npm run validate
-          npm run server_dist
+      # - name: Setup node version
+      #   uses: actions/setup-node@v2
+      #   with:
+      #     node-version-file: '.nvmrc'
+
+      # - name: Yarn install and build
+      #   run: |
+      #     yarn install
+      #     npm run validate
+      #     npm run server_dist
 
       - name: Add dist files from yarn build
         env:
@@ -101,7 +104,6 @@ jobs:
         run: |
           git remote add dokku dokku@${{ env.SERVER }}:${{ env.REVIEW_APP }}
           git push dokku ${BRANCH}:master --force
-
 
       - name: SUCCESS
         if: success()
@@ -130,7 +132,7 @@ jobs:
       - name: FAILURE
         if: failure()
         uses: tokorom/action-slack-incoming-webhook@main
-        env:
+        cenv:
           INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
         with:
           text: ":x: Failed on Review App Deployment"
