@@ -81,7 +81,7 @@ jobs:
 
 
       - name: Build Node
-        uses: ./.github/actions/build-node
+        uses: ./.github/actions/square1/build-node
 
       # - name: Setup node version
       #   uses: actions/setup-node@v2
