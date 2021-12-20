@@ -79,7 +79,6 @@
     "delegate": "^3.2.0",
     "es6-promise": "^4.2.8",
     "idx": "^2.4.0",
-    "intersection-observer": "^0.12.0",
     "jquery": "3.6.0",
     "lazysizes": "^5.2.0",
     "lodash": "^4.17.15",
