@@ -25,8 +25,6 @@ module.exports = {
 	},
 	themeMinJS() {
 		return del( [
-			`${ pkg.square1.paths.core_theme_js_dist }*.js`,
-			`${ pkg.square1.paths.core_admin_js_dist }*.js`,
 			`${ pkg.square1.paths.core_theme_js_dist }*.min.js`,
 			`${ pkg.square1.paths.core_admin_js_dist }*.min.js`,
 			`${ pkg.square1.paths.core_theme_js_dist }*.*.js`,
