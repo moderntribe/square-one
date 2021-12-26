@@ -6,8 +6,8 @@ on:
 
 env:
   APPNAME: sq1
-  SERVER: dokku01
-  SERVER_URL: ${{ secrets.TEST_DOMAIN }}
+  SERVER: ${{ secrets.TEST_DOMAIN }}
+  MT_ACTIONS_VERSION: add_basic_sq1
 
 jobs:
   deploy_review_app:
@@ -20,14 +20,14 @@ jobs:
           fetch-depth: 0
           ref: ${{ github.event.pull_request.head.ref }}
 
-      - name: Cloning Actions Repos
+      - name: Cloning Actions Repository
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
           repository: moderntribe/actions
-          token: ${{ secrets.GH_BOT_TOKEN }}
           path: .github/actions
-          ref: add_basic_sq1
+          token: ${{ secrets.GH_BOT_TOKEN }}
+          ref: ${{ env.MT_ACTIONS_VERSION }}
 
       - name: Set common variables
         uses: ./.github/actions/utils/common-variables
@@ -40,7 +40,6 @@ jobs:
           app_name: ${{ env.APPNAME }}
           review_app_name: ${{ env.REVIEW_APP }}
           server: ${{ env.SERVER }}
-          server_url: ${{ env.SERVER_URL }}
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
           github_pat_token: ${{ secrets.GH_BOT_TOKEN }}
           gha_url: ${{ env.GHA_URL }}
@@ -57,8 +56,7 @@ jobs:
         uses: ./.github/actions/deploy/gitdeploy
         with:
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-          server: "dokku@${{ env.SERVER_URL }}"
-          app: ${{ env.REVIEW_APP }}
+          git_url: "dokku@${{ env.SERVER }}:${{ env.REVIEW_APP }}"
           branch: ${{ env.BRANCH }}
 
       - name: Slack Message success
@@ -67,7 +65,7 @@ jobs:
         with:
           webhook_url: ${{ secrets.SLACK_WEBHOOK }}
           message: ":green_check: Successful on Review App Deployment"
-          app_url: "${{ env.REVIEW_APP }}.${{ env.SERVER_URL }}"
+          app_url: "${{ env.REVIEW_APP }}.${{ env.SERVER }}"
           gha_url: ${{ env.GHA_URL }}
           color: "good"
 
@@ -77,7 +75,7 @@ jobs:
         with:
           webhook_url: ${{ secrets.SLACK_WEBHOOK }}
           message: ":x: Failed on Review App Deployment"
-          app_url: "${{ env.REVIEW_APP }}.${{ env.SERVER_URL }}"
+          app_url: "${{ env.REVIEW_APP }}.${{ env.SERVER }}"
           gha_url: ${{ env.GHA_URL }}
           color: "bad"
 
@@ -87,14 +85,14 @@ jobs:
     if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.repository == 'moderntribe/square-one'
     steps:
 
-      - name: Cloning Actions Repos
+      - name: Cloning Actions Repository
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
           repository: moderntribe/actions
-          token: ${{ secrets.GH_BOT_TOKEN }}
           path: .github/actions
-          ref: add_basic_sq1
+          token: ${{ secrets.GH_BOT_TOKEN }}
+          ref: ${{ env.MT_ACTIONS_VERSION }}
 
       - name: Set common variables
         uses: ./.github/actions/utils/common-variables
@@ -114,6 +112,6 @@ jobs:
         with:
           webhook_url: ${{ secrets.SLACK_WEBHOOK }}
           message: ":x: Failed to Destroy App"
-          app_url: "${{ env.REVIEW_APP }}.${{ env.SERVER_URL }}"
+          app_url: "${{ env.REVIEW_APP }}.${{ env.SERVER }}"
           gha_url: ${{ env.GHA_URL }}
           color: "bad"
