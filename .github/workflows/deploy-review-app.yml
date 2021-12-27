@@ -35,7 +35,7 @@ jobs:
           base_branch: ${{ github.event.pull_request.head.ref }}
 
       - name: Setup SSH
-        uses: ./.github/actions/utls/ssh-agent
+        uses: ./.github/actions/utils/ssh-agent
         with:
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
           server: "${{ env.SERVER }}"
