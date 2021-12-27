@@ -49,13 +49,13 @@ jobs:
           github_pat_token: ${{ secrets.GH_BOT_TOKEN }}
           gha_url: ${{ env.GHA_URL }}
 
-      - name: Build Node
-        uses: ./.github/actions/square1/build-node
+      # - name: Build Node
+      #   uses: ./.github/actions/square1/build-node
 
-      - name: Commit Files Node Files
-        uses: ./.github/actions/utils/commit-files
-        with:
-          folder: ./wp-content/
+      # - name: Commit Files Node Files
+      #   uses: ./.github/actions/utils/commit-files
+      #   with:
+      #     folder: ./wp-content/
 
       - name: Deploy to ${{ env.REVIEW_APP }}
         uses: ./.github/actions/deploy/gitdeploy
