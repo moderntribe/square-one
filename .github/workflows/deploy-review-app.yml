@@ -20,8 +20,6 @@ jobs:
           fetch-depth: 0
           ref: ${{ github.event.pull_request.head.ref }}
 
-      - run: exit 1
-
       - name: Cloning Actions Repository
         uses: actions/checkout@v2
         with:
@@ -30,6 +28,8 @@ jobs:
           path: .github/actions
           token: ${{ secrets.GH_BOT_TOKEN }}
           ref: ${{ env.ACTIONS_TAG }}
+
+      - run: exit 1
 
       - name: Set common variables
         uses: ./.github/actions/utils/common-variables
