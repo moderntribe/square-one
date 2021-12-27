@@ -34,37 +34,34 @@ jobs:
         with:
           base_branch: ${{ github.event.pull_request.head.ref }}
 
-      - run: exit 1
+      - name: Setup SSH
+        uses: ./.github/actions/utils/ssh-agent
+        with:
+          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          server: "${{ env.SERVER }}"
 
+      - name: Create review app ${{ env.REVIEW_APP }}
+        uses: ./.github/actions/dokku/create-review-app
+        with:
+          app_name: ${{ env.APPNAME }}
+          review_app_name: ${{ env.REVIEW_APP }}
+          server: ${{ env.SERVER }}
+          github_pat_token: ${{ secrets.GH_BOT_TOKEN }}
+          gha_url: ${{ env.GHA_URL }}
 
-      # - name: Setup SSH
-      #   uses: ./.github/actions/utils/ssh-agent
-      #   with:
-      #     ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-      #     server: "${{ env.SERVER }}"
+      - name: Build Node
+        uses: ./.github/actions/square1/build-node
 
-      # - name: Create review app ${{ env.REVIEW_APP }}
-      #   uses: ./.github/actions/dokku/create-review-app
-      #   with:
-      #     app_name: ${{ env.APPNAME }}
-      #     review_app_name: ${{ env.REVIEW_APP }}
-      #     server: ${{ env.SERVER }}
-      #     github_pat_token: ${{ secrets.GH_BOT_TOKEN }}
-      #     gha_url: ${{ env.GHA_URL }}
+      - name: Commit Files Node Files
+        uses: ./.github/actions/utils/commit-files
+        with:
+          folder: ./wp-content/
 
-      # - name: Build Node
-      #   uses: ./.github/actions/square1/build-node
-
-      # - name: Commit Files Node Files
-      #   uses: ./.github/actions/utils/commit-files
-      #   with:
-      #     folder: ./wp-content/
-
-      # - name: Deploy to ${{ env.REVIEW_APP }}
-      #   uses: ./.github/actions/deploy/gitdeploy
-      #   with:
-      #     git_url: "dokku@${{ env.SERVER }}:${{ env.REVIEW_APP }}"
-      #     branch: ${{ env.BRANCH }}
+      - name: Deploy to ${{ env.REVIEW_APP }}
+        uses: ./.github/actions/deploy/gitdeploy
+        with:
+          git_url: "dokku@${{ env.SERVER }}:${{ env.REVIEW_APP }}"
+          branch: ${{ env.BRANCH }}
 
       - name: Slack Notification
         if: success()|| failure() || cancelled()
