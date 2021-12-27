@@ -29,12 +29,13 @@ jobs:
           token: ${{ secrets.GH_BOT_TOKEN }}
           ref: ${{ env.ACTIONS_TAG }}
 
-      - run: exit 1
-
       - name: Set common variables
         uses: ./.github/actions/utils/common-variables
         with:
           base_branch: ${{ github.event.pull_request.head.ref }}
+
+      - run: exit 1
+
 
       # - name: Setup SSH
       #   uses: ./.github/actions/utils/ssh-agent
