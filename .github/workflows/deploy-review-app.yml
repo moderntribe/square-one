@@ -7,7 +7,7 @@ on:
 env:
   APPNAME: sq1
   SERVER: ${{ secrets.TEST_DOMAIN }}
-  MT_ACTIONS_VERSION: add_basic_sq1
+  ACTIONS_TAG: add_basic_sq1
 
 jobs:
   deploy_review_app:
@@ -27,7 +27,7 @@ jobs:
           repository: moderntribe/actions
           path: .github/actions
           token: ${{ secrets.GH_BOT_TOKEN }}
-          ref: ${{ env.MT_ACTIONS_VERSION }}
+          ref: ${{ env.ACTIONS_TAG }}
 
       - name: Set common variables
         uses: ./.github/actions/utils/common-variables
@@ -76,7 +76,7 @@ jobs:
           repository: moderntribe/actions
           path: .github/actions
           token: ${{ secrets.GH_BOT_TOKEN }}
-          ref: ${{ env.MT_ACTIONS_VERSION }}
+          ref: ${{ env.ACTIONS_TAG }}
 
       - name: Set common variables
         uses: ./.github/actions/utils/common-variables
