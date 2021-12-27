@@ -20,34 +20,34 @@ jobs:
           fetch-depth: 0
           ref: ${{ github.event.pull_request.head.ref }}
 
-      - name: Cloning Actions Repository
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 1
-          repository: moderntribe/actions
-          path: .github/actions
-          token: ${{ secrets.GH_BOT_TOKEN }}
-          ref: ${{ env.ACTIONS_TAG }}
+      # - name: Cloning Actions Repository
+      #   uses: actions/checkout@v2
+      #   with:
+      #     fetch-depth: 1
+      #     repository: moderntribe/actions
+      #     path: .github/actions
+      #     token: ${{ secrets.GH_BOT_TOKEN }}
+      #     ref: ${{ env.ACTIONS_TAG }}
 
-      - name: Set common variables
-        uses: ./.github/actions/utils/common-variables
-        with:
-          base_branch: ${{ github.event.pull_request.head.ref }}
+      # - name: Set common variables
+      #   uses: ./.github/actions/utils/common-variables
+      #   with:
+      #     base_branch: ${{ github.event.pull_request.head.ref }}
 
-      - name: Setup SSH
-        uses: ./.github/actions/utils/ssh-agent
-        with:
-          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-          server: "${{ env.SERVER }}"
+      # - name: Setup SSH
+      #   uses: ./.github/actions/utils/ssh-agent
+      #   with:
+      #     ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+      #     server: "${{ env.SERVER }}"
 
-      - name: Create review app ${{ env.REVIEW_APP }}
-        uses: ./.github/actions/dokku/create-review-app
-        with:
-          app_name: ${{ env.APPNAME }}
-          review_app_name: ${{ env.REVIEW_APP }}
-          server: ${{ env.SERVER }}
-          github_pat_token: ${{ secrets.GH_BOT_TOKEN }}
-          gha_url: ${{ env.GHA_URL }}
+      # - name: Create review app ${{ env.REVIEW_APP }}
+      #   uses: ./.github/actions/dokku/create-review-app
+      #   with:
+      #     app_name: ${{ env.APPNAME }}
+      #     review_app_name: ${{ env.REVIEW_APP }}
+      #     server: ${{ env.SERVER }}
+      #     github_pat_token: ${{ secrets.GH_BOT_TOKEN }}
+      #     gha_url: ${{ env.GHA_URL }}
 
       # - name: Build Node
       #   uses: ./.github/actions/square1/build-node
