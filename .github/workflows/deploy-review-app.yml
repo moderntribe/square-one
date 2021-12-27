@@ -34,13 +34,18 @@ jobs:
         with:
           base_branch: ${{ github.event.pull_request.head.ref }}
 
+      - name: Setup SSH
+        uses: ./.github/actions/utls/ssh-agent
+        with:
+          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          server: "${{ env.SERVER }}"
+
       - name: Create review app ${{ env.REVIEW_APP }}
         uses: ./.github/actions/dokku/create-review-app
         with:
           app_name: ${{ env.APPNAME }}
           review_app_name: ${{ env.REVIEW_APP }}
           server: ${{ env.SERVER }}
-          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
           github_pat_token: ${{ secrets.GH_BOT_TOKEN }}
           gha_url: ${{ env.GHA_URL }}
 
@@ -51,6 +56,13 @@ jobs:
         uses: ./.github/actions/utils/commit-files
         with:
           folder: ./wp-content/
+
+      - name: Deploy to ${{ env.REVIEW_APP }}
+        uses: ./.github/actions/deploy/gitdeploy
+        with:
+          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          git_url: "dokku@${{ env.SERVER }}:${{ env.REVIEW_APP }}"
+          branch: ${{ env.BRANCH }}
 
       - name: Slack Notification
         if: success()|| failure() || cancelled()
