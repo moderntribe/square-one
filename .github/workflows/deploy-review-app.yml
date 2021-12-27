@@ -17,13 +17,13 @@ jobs:
       - name: Cloning repo for Pull Requests
         uses: actions/checkout@v2
         with:
-          fetch-depth: 0
+          fetch-depth: 1
           ref: ${{ github.event.pull_request.head.ref }}
 
       - name: Cloning Actions Repository
         uses: actions/checkout@v2
         with:
-          fetch-depth: 0
+          fetch-depth: 1
           repository: moderntribe/actions
           path: .github/actions
           token: ${{ secrets.GH_BOT_TOKEN }}
@@ -52,32 +52,16 @@ jobs:
         with:
           folder: ./wp-content/
 
-      - name: Deploy to ${{ env.REVIEW_APP }}
-        uses: ./.github/actions/deploy/gitdeploy
+      - name: Slack Notification
+        if: success()|| failure() || cancelled()
+        uses: ./.github/actions/slack
         with:
-          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-          git_url: "dokku@${{ env.SERVER }}:${{ env.REVIEW_APP }}"
           branch: ${{ env.BRANCH }}
-
-      - name: Slack Message success
-        uses: ./.github/actions/utils/slack-message-deploy
-        if: success()
-        with:
-          webhook_url: ${{ secrets.SLACK_WEBHOOK }}
-          message: ":green_check: Successful on Review App Deployment"
+          environment: ${{ env.REVIEW_APP }}
+          slack_webhook_url: ${{ secrets.SLACK_WEBHOOK }}
           app_url: "${{ env.REVIEW_APP }}.${{ env.SERVER }}"
           gha_url: ${{ env.GHA_URL }}
-          color: "good"
-
-      - name: Slack Message failure
-        uses: ./.github/actions/utils/slack-message-deploy
-        if: failure()
-        with:
-          webhook_url: ${{ secrets.SLACK_WEBHOOK }}
-          message: ":x: Failed on Review App Deployment"
-          app_url: "${{ env.REVIEW_APP }}.${{ env.SERVER }}"
-          gha_url: ${{ env.GHA_URL }}
-          color: "bad"
+          status: ${{ job.status }}
 
   destroy_review_app:
     runs-on: ubuntu-latest
@@ -88,7 +72,7 @@ jobs:
       - name: Cloning Actions Repository
         uses: actions/checkout@v2
         with:
-          fetch-depth: 0
+          fetch-depth: 1
           repository: moderntribe/actions
           path: .github/actions
           token: ${{ secrets.GH_BOT_TOKEN }}
@@ -106,12 +90,13 @@ jobs:
           github_pat_token: ${{ secrets.GH_BOT_TOKEN }}
           gha_url: ${{ env.GHA_URL }}
 
-      - name: Slack Message failure
-        uses: ./.github/actions/utils/slack-message-deploy
+      - name: Slack Notification
         if: failure()
+        uses: ./.github/actions/slack
         with:
-          webhook_url: ${{ secrets.SLACK_WEBHOOK }}
-          message: ":x: Failed to Destroy App"
+          branch: ${{ env.BRANCH }}
+          environment: ${{ env.REVIEW_APP }}
+          slack_webhook_url: ${{ secrets.SLACK_WEBHOOK }}
           app_url: "${{ env.REVIEW_APP }}.${{ env.SERVER }}"
           gha_url: ${{ env.GHA_URL }}
-          color: "bad"
+          status: ${{ job.status }}
