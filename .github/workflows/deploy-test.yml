@@ -17,7 +17,7 @@ jobs:
       - name: Cloning repo
         uses: actions/checkout@v2
         with:
-          fetch-depth: 1
+          fetch-depth: 0
 
       - name: Push to Test
         uses: dokku/github-action@master

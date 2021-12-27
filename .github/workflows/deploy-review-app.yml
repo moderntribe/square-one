@@ -17,7 +17,7 @@ jobs:
       - name: Cloning repo for Pull Requests
         uses: actions/checkout@v2
         with:
-          fetch-depth: 1
+          fetch-depth: 0
           ref: ${{ github.event.pull_request.head.ref }}
 
       - name: Cloning Actions Repository
@@ -60,7 +60,6 @@ jobs:
       - name: Deploy to ${{ env.REVIEW_APP }}
         uses: ./.github/actions/deploy/gitdeploy
         with:
-          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
           git_url: "dokku@${{ env.SERVER }}:${{ env.REVIEW_APP }}"
           branch: ${{ env.BRANCH }}
 
