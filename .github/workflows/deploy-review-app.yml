@@ -54,7 +54,7 @@ jobs:
 
       - name: Slack Notification
         if: success()|| failure() || cancelled()
-        uses: ./.github/actions/slack
+        uses: ./.github/actions/utils/slack-message-deploy
         with:
           branch: ${{ env.BRANCH }}
           environment: ${{ env.REVIEW_APP }}
@@ -92,7 +92,7 @@ jobs:
 
       - name: Slack Notification
         if: failure()
-        uses: ./.github/actions/slack
+        uses: ./.github/actions/utils/slack-message-deploy
         with:
           branch: ${{ env.BRANCH }}
           environment: ${{ env.REVIEW_APP }}
