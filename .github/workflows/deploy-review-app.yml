@@ -20,6 +20,8 @@ jobs:
           fetch-depth: 0
           ref: ${{ github.event.pull_request.head.ref }}
 
+      - run: exit 1
+
       - name: Cloning Actions Repository
         uses: actions/checkout@v2
         with:
