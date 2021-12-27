@@ -57,11 +57,11 @@ jobs:
       #   with:
       #     folder: ./wp-content/
 
-      - name: Deploy to ${{ env.REVIEW_APP }}
-        uses: ./.github/actions/deploy/gitdeploy
-        with:
-          git_url: "dokku@${{ env.SERVER }}:${{ env.REVIEW_APP }}"
-          branch: ${{ env.BRANCH }}
+      # - name: Deploy to ${{ env.REVIEW_APP }}
+      #   uses: ./.github/actions/deploy/gitdeploy
+      #   with:
+      #     git_url: "dokku@${{ env.SERVER }}:${{ env.REVIEW_APP }}"
+      #     branch: ${{ env.BRANCH }}
 
       - name: Slack Notification
         if: success()|| failure() || cancelled()
