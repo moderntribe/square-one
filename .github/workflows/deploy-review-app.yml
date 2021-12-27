@@ -14,20 +14,20 @@ jobs:
     runs-on: ubuntu-latest
     if: (github.event_name == 'pull_request' && github.event.action == 'opened' || github.event.action == 'synchronize') && github.repository == 'moderntribe/square-one'
     steps:
-      - name: Cloning repo for Pull Requests
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-          ref: ${{ github.event.pull_request.head.ref }}
-
-      # - name: Cloning Actions Repository
+      # - name: Cloning repo for Pull Requests
       #   uses: actions/checkout@v2
       #   with:
-      #     fetch-depth: 1
-      #     repository: moderntribe/actions
-      #     path: .github/actions
-      #     token: ${{ secrets.GH_BOT_TOKEN }}
-      #     ref: ${{ env.ACTIONS_TAG }}
+      #     fetch-depth: 0
+      #     ref: ${{ github.event.pull_request.head.ref }}
+
+      - name: Cloning Actions Repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+          repository: moderntribe/actions
+          path: .github/actions
+          token: ${{ secrets.GH_BOT_TOKEN }}
+          ref: ${{ env.ACTIONS_TAG }}
 
       # - name: Set common variables
       #   uses: ./.github/actions/utils/common-variables
