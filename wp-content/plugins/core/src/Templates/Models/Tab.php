@@ -4,15 +4,9 @@ namespace Tribe\Project\Templates\Models;
 
 class Tab {
 
-	/**
-	 * @var string
-	 */
-	public $label;
+	public string $label;
 
-	/**
-	 * @var string
-	 */
-	public $content;
+	public string $content;
 
 	public function __construct( string $label, string $content ) {
 		$this->label   = $label;

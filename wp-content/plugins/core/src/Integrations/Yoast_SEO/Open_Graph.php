@@ -15,7 +15,7 @@ class Open_Graph {
 	 *
 	 * @filter wpseo_opengraph_image_size
 	 */
-	public function customize_wpseo_opengraph_image_size( $size ) {
+	public function customize_wpseo_opengraph_image_size( string $size ): string {
 		return Image_Sizes::SOCIAL_SHARE_OPENGRAPH;
 	}
 
@@ -28,7 +28,7 @@ class Open_Graph {
 	 *
 	 * @filter wpseo_twitter_image_size
 	 */
-	public function customize_wpseo_twitter_image_size( $size ) {
+	public function customize_wpseo_twitter_image_size( string $size ): string {
 		return Image_Sizes::SOCIAL_SHARE_TWITTER;
 	}
 

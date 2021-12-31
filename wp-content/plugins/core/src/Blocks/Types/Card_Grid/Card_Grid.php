@@ -36,7 +36,7 @@ class Card_Grid extends Block_Config implements Cta_Field {
 	/**
 	 * Register the block
 	 */
-	public function add_block() {
+	public function add_block(): void {
 		$this->set_block( new Block( self::NAME, [
 			'title'       => esc_html__( 'Card Grid', 'tribe' ),
 			'description' => esc_html__( 'A block of curated posts', 'tribe' ),
@@ -75,7 +75,7 @@ class Card_Grid extends Block_Config implements Cta_Field {
 	/**
 	 * Register Fields for block
 	 */
-	public function add_fields() {
+	public function add_fields(): void {
 		//==========================================
 		// Content Fields
 		//==========================================

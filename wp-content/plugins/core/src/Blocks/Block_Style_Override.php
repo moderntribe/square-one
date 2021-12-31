@@ -5,28 +5,28 @@ namespace Tribe\Project\Blocks;
 class Block_Style_Override {
 
 	/**
-	 * @var array The block types affected by this style override
+	 * @var string[] The block types affected by this style override.
 	 */
-	protected $block_types = [];
+	protected array $block_types = [];
 
 	/**
-	 * @var array[] The styles to register
+	 * @var string[][] The styles to register.
 	 *
 	 * @link https://developer.wordpress.org/block-editor/developers/filters/block-filters/#register_block_style
 	 */
-	protected $register = [];
+	protected array $register = [];
 
 	/**
-	 * @var string[] The styles to unregister
+	 * @var string[][] The styles to unregister.
 	 */
-	protected $unregister = [];
+	protected array $unregister = [];
 
 	/**
 	 * Block_Style_Override constructor.
 	 *
-	 * @param string[] $block_types
-	 * @param array[]  $register
-	 * @param string[] $unregister
+	 * @param string[]   $block_types
+	 * @param string[][] $register
+	 * @param string[][] $unregister
 	 */
 	public function __construct( array $block_types, array $register = [], array $unregister = [] ) {
 		$this->block_types = $block_types;
@@ -35,8 +35,6 @@ class Block_Style_Override {
 	}
 
 	/**
-	 * @return void
-	 *
 	 * @action after_setup_theme
 	 */
 	public function register(): void {
@@ -44,6 +42,7 @@ class Block_Style_Override {
 			foreach ( $this->register as $style ) {
 				register_block_style( $type, $style );
 			}
+
 			foreach ( $this->unregister as $handle ) {
 				unregister_block_style( $type, $handle );
 			}

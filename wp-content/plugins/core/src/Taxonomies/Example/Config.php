@@ -5,13 +5,24 @@ namespace Tribe\Project\Taxonomies\Example;
 use Tribe\Libs\Taxonomy\Taxonomy_Config;
 use Tribe\Project\Post_Types\Sample\Sample;
 
+// phpcs:disable SlevomatCodingStandard.TypeHints.PropertyTypeHint.MissingNativeTypeHint
 class Config extends Taxonomy_Config {
 
-	protected $taxonomy   = Example::NAME;
+	/**
+	 * @var string
+	 */
+	protected $taxonomy = Example::NAME;
+
+	/**
+	 * @var string[]
+	 */
 	protected $post_types = [
 		Sample::NAME,
 	];
 
+	/**
+	 * @var int
+	 */
 	protected $version = 1;
 
 	/**
@@ -21,7 +32,7 @@ class Config extends Taxonomy_Config {
 	 *
 	 * @return array
 	 */
-	public function get_args() {
+	public function get_args(): array {
 		return [
 			'hierarchical' => false,
 			'exclusive'    => true,
@@ -29,7 +40,7 @@ class Config extends Taxonomy_Config {
 		];
 	}
 
-	public function get_labels() {
+	public function get_labels(): array {
 		return [
 			'singular' => __( 'Example', 'tribe' ),
 			'plural'   => __( 'Examples', 'tribe' ),
@@ -37,7 +48,7 @@ class Config extends Taxonomy_Config {
 		];
 	}
 
-	public function default_terms() {
+	public function default_terms(): array {
 		return [
 			'first'  => __( 'First Default Term', 'tribe' ),
 			'second' => __( 'Second Default Term', 'tribe' ),

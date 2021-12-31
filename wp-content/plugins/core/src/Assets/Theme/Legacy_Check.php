@@ -6,7 +6,7 @@ class Legacy_Check {
 
 	private string $unsupported_browser_path;
 
-	public function __construct( $unsupported_browser_path = '/unsupported-browser/' ) {
+	public function __construct( string $unsupported_browser_path = '/unsupported-browser/' ) {
 		$this->unsupported_browser_path = $unsupported_browser_path;
 	}
 
@@ -55,17 +55,16 @@ class Legacy_Check {
 	/**
 	 * Loads the unsupported browser template
 	 *
+	 * @filter template_include
+	 *
 	 * @param string $template The template file to load.
 	 *
 	 * @return mixed
-	 *
-	 * @filter template_include
 	 */
-	public function load_unsupported_template( $template ) {
-
+	public function load_unsupported_template( string $template ) {
 		global $wp_query;
 
-		if ( ! array_key_exists( 'unsupported', $wp_query->query ) || '1' != $wp_query->query['unsupported'] ) {
+		if ( ! array_key_exists( 'unsupported', $wp_query->query ) || '1' !== $wp_query->query['unsupported'] ) {
 			return $template;
 		}
 

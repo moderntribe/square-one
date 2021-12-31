@@ -10,7 +10,10 @@ class Oembed_Filter {
 	public const PROVIDER_VIMEO   = 'Vimeo';
 	public const PROVIDER_YOUTUBE = 'YouTube';
 
-	private $supported_providers = [];
+	/**
+	 * @var array|string[]
+	 */
+	private array $supported_providers;
 
 	public function __construct( array $supported_providers = [ self::PROVIDER_VIMEO, self::PROVIDER_YOUTUBE ] ) {
 		$this->supported_providers = $supported_providers;
@@ -19,15 +22,15 @@ class Oembed_Filter {
 	/**
 	 * Get custom video component markup.
 	 *
-	 * @param $html
-	 * @param $data
-	 * @param $url
+	 * @param string $html
+	 * @param object $data
+	 * @param string $url
 	 *
 	 * @filter oembed_dataparse 999 3
 	 *
 	 * @return string
 	 */
-	public function get_video_component( $html, $data, $url ) {
+	public function get_video_component( string $html, object $data, string $url ): string {
 
 		// Admin should not get custom markup.
 		if ( is_admin() ) {
@@ -67,22 +70,19 @@ class Oembed_Filter {
 		return $frontend_html;
 	}
 
-	private function get_layout_container_attrs( $provider_name, $embed_id, $title ): array {
-		return [
-			'data-js'             => 'c-video',
-			'data-embed-id'       => $embed_id,
-			'data-embed-provider' => $provider_name,
-			'data-embed-title'    => $title,
-		];
-	}
-
 	/**
 	 * If we've cached replacement HTML for a URL, override
 	 * the default with the cached value.
 	 *
+	 * @param string|false $html
+	 * @param string $url
+	 * @param array $attr
+	 *
 	 * @filter embed_oembed_html 1
+	 *
+	 * @return mixed
 	 */
-	public function filter_frontend_html_from_cache( $html, $url, $attr, $post_id ) {
+	public function filter_frontend_html_from_cache( $html, string $url, array $attr ) {
 		if ( is_admin() ) {
 			return $html;
 		}
@@ -98,17 +98,33 @@ class Oembed_Filter {
 		return empty( $cached ) ? $html : $cached;
 	}
 
+	/**
+	 * Add wrapper around embeds for admin visual editor styling.
+	 *
+	 * @param string|false $html
+	 *
+	 * @filter embed_oembed_html 99
+	 *
+	 * @return string|false
+	 */
+	public function wrap_admin_oembed( $html, string $url, array $attr, int $post_id ) {
+		if ( ! is_admin() ) {
+			return $html;
+		}
+
+		return sprintf( '<div class="wp-embed"><div class="wp-embed-wrap">%s</div></div>', $html );
+	}
 
 	/**
 	 * Get a fresh copy of our custom markup if our cache doesn't exist.
 	 *
-	 * @param $html
-	 * @param $url
-	 * @param $attr
+	 * @param string $html
+	 * @param string $url
+	 * @param array  $attr
 	 *
 	 * @return string
 	 */
-	protected function get_fresh_frontend_html( $html, $url, $attr ) {
+	protected function get_fresh_frontend_html( string $html, string $url, array $attr ): string {
 
 		/**
 		 * @var \WP_oEmbed $oembed .
@@ -120,17 +136,14 @@ class Oembed_Filter {
 		return $this->get_video_component( $html, $data, $url );
 	}
 
-	/**
-	 * Add wrapper around embeds for admin visual editor styling
-	 *
-	 * @filter embed_oembed_html 99
-	 */
-	public function wrap_admin_oembed( $html, $url, $attr, $post_id ) {
-		if ( ! is_admin() ) {
-			return $html;
-		}
 
-		return sprintf( '<div class="wp-embed"><div class="wp-embed-wrap">%s</div></div>', $html );
+	private function get_layout_container_attrs( string $provider_name, string $embed_id, string $title ): array {
+		return [
+			'data-js'             => 'c-video',
+			'data-embed-id'       => $embed_id,
+			'data-embed-provider' => $provider_name,
+			'data-embed-title'    => $title,
+		];
 	}
 
 	/**
@@ -143,11 +156,11 @@ class Oembed_Filter {
 	 *
 	 * @return string
 	 */
-	private function get_youtube_max_resolution_thumbnail( $url ) {
+	private function get_youtube_max_resolution_thumbnail( string $url ): string {
 
 		$video_id = $this->get_youtube_embed_id( $url );
 
-		if ( $video_id === null ) {
+		if ( empty( $video_id ) ) {
 			return '';
 		}
 
@@ -178,10 +191,10 @@ class Oembed_Filter {
 	 *
 	 * @return string
 	 */
-	private function get_youtube_embed_id( $url ) {
+	private function get_youtube_embed_id( string $url ): string {
 		preg_match( '#(?<=v=)[a-zA-Z0-9-]+(?=&)|(?<=v\/)[^&\n]+(?=\?)|(?<=v=)[^&\n]+|(?<=youtu.be/)[^&\n]+#', $url, $video_id );
 
-		return ! empty( $video_id[0] ) ? $video_id[0] : '';
+		return ! empty( $video_id[0] ) ? (string) $video_id[0] : '';
 	}
 
 	/**
@@ -191,10 +204,10 @@ class Oembed_Filter {
 	 *
 	 * @return string
 	 */
-	private function get_vimeo_embed_id( $url ) {
+	private function get_vimeo_embed_id( string $url ): string {
 		preg_match( '/(https?:\/\/)?(www\.)?(player\.)?vimeo\.com\/([a-z]*\/)*([0-9]{6,11})[?]?.*/', $url, $video_id );
 
-		return ! empty( $video_id[5] ) ? $video_id[5] : '';
+		return ! empty( $video_id[5] ) ? (string) $video_id[5] : '';
 	}
 
 	/**
@@ -209,7 +222,7 @@ class Oembed_Filter {
 	 * @param string $frontend_html
 	 * @param string $url
 	 */
-	private function cache_frontend_html( $frontend_html, $url ) {
+	private function cache_frontend_html( string $frontend_html, string $url ): void {
 		update_option( $this->get_cache_key( $url ), $frontend_html );
 	}
 
@@ -218,7 +231,7 @@ class Oembed_Filter {
 	 *
 	 * @return string The option name to use to store the cache for a URL
 	 */
-	private function get_cache_key( $url ) {
+	private function get_cache_key( string $url ): string {
 		$hash = md5( $url );
 
 		return static::CACHE_PREFIX . $hash;

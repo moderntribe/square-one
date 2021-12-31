@@ -29,7 +29,7 @@ class Gallery_Slider extends Block_Config {
 
 	public const SLIDESHOW = 'slideshow';
 
-	public function add_block() {
+	public function add_block(): void {
 		$this->set_block( new Block( self::NAME, [
 			'title'       => __( 'Gallery Slider', 'tribe' ),
 			'description' => __( 'A custom block by Modern Tribe', 'tribe' ), // TODO: describe the block
@@ -47,7 +47,7 @@ class Gallery_Slider extends Block_Config {
 	/**
 	 * Register Fields for block
 	 */
-	public function add_fields() {
+	public function add_fields(): void {
 		//==========================================
 		// Content Fields
 		//==========================================

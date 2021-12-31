@@ -8,20 +8,9 @@ use Tribe\Project\Theme\Config\Gradients;
 
 class Theme_Support {
 
-	/**
-	 * @var \Tribe\Project\Theme\Config\Colors
-	 */
-	private $colors;
-
-	/**
-	 * @var \Tribe\Project\Theme\Config\Gradients
-	 */
-	private $gradients;
-
-	/**
-	 * @var \Tribe\Project\Theme\Config\Font_Sizes
-	 */
-	private $font_sizes;
+	private Colors $colors;
+	private Gradients $gradients;
+	private Font_Sizes $font_sizes;
 
 	public function __construct( Colors $colors, Gradients $gradients, Font_Sizes $font_sizes ) {
 		$this->colors     = $colors;
@@ -30,8 +19,6 @@ class Theme_Support {
 	}
 
 	/**
-	 * @return void
-	 *
 	 * @action after_setup_theme
 	 */
 	public function register_theme_supports(): void {

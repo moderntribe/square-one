@@ -11,12 +11,12 @@ class Classic_Editor_Formats {
 	 *
 	 * Adjusts the buttons added to the "teeny" or "basic" TinyMCE editor.
 	 *
-	 * @param $buttons
-	 * @param $editor_id
+	 * @param array  $buttons
+	 * @param string $editor_id
 	 *
-	 * @return array
+	 * @return string[]
 	 */
-	public function teeny_mce_buttons( $buttons, $editor_id ): array {
+	public function teeny_mce_buttons( array $buttons, string $editor_id ): array {
 		// Remove lists, underline, undo, redo, blockquote, alignments, fullscreen
 		// Add Format Select & Style Select
 		return [
@@ -56,7 +56,7 @@ class Classic_Editor_Formats {
 	/**
 	 * Visual Editor Style Tags Drop-Down
 	 *
-	 * Adds a Formats dropdown to the right of the element selector for TinyMCE instances.
+	 * Adds a "Formats" dropdown to the right of the element selector for TinyMCE instances.
 	 *
 	 * @see    http://p.tri.be/l2nG2 Screenshot
 	 * @see    http://archive.tinymce.com/wiki.php/Configuration3x:style_formats TinyMCE Documentation
@@ -68,7 +68,7 @@ class Classic_Editor_Formats {
 	 * @return array $settings
 	 */
 	public function visual_editor_styles_dropdown( array $settings ): array {
-		$style_formats             = [
+		$style_formats = [
 			/* Example single-level format
 			[
 				'title'    => __( 'Button', 'tribe' ),
@@ -107,6 +107,7 @@ class Classic_Editor_Formats {
 				],
 			],
 		];
+
 		$settings['style_formats'] = json_encode( $style_formats );
 
 		return $settings;

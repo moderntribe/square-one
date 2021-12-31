@@ -4,15 +4,9 @@ namespace Tribe\Project\Templates\Models;
 
 class Breadcrumb {
 
-	/**
-	 * @var string
-	 */
-	public $url;
+	public string $url;
 
-	/**
-	 * @var string
-	 */
-	public $label;
+	public string $label;
 
 	public function __construct( string $url, string $label ) {
 		$this->url   = $url;

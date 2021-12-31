@@ -40,7 +40,7 @@ class Scripts {
 			return;
 		}
 		?>
-		<script src="//d2wy8f7a9ursnm.cloudfront.net/v5/bugsnag.min.js"></script>
+		<script src="https://d2wy8f7a9ursnm.cloudfront.net/v5/bugsnag.min.js"></script>
 		<script>window.bugsnagClient = bugsnag(<?php echo json_encode( BUGSNAG_API_KEY ); ?>);</script>
 		<?php
 	}
@@ -86,14 +86,6 @@ class Scripts {
 		}
 	}
 
-	protected function print_preload_tag( _WP_Dependency $script ): void {
-		//-- If version is set, append to end of source.
-		$source = $script->src . ( $script->ver ? "?ver={$script->ver}" : "" );
-
-		//-- Spit out the tag.
-		echo "<link rel='preload' href='{$source}' as='script'/>\n";
-	}
-
 	/**
 	 * @return void
 	 *
@@ -137,6 +129,14 @@ class Scripts {
 		}
 
 		wp_enqueue_script( 'comment-reply' );
+	}
+
+	protected function print_preload_tag( _WP_Dependency $script ): void {
+		//-- If version is set, append to end of source.
+		$source = $script->src . ( $script->ver ? "?ver={$script->ver}" : "" );
+
+		//-- Spit out the tag.
+		echo "<link rel='preload' href='{$source}' as='script'/>\n";
 	}
 
 	/**

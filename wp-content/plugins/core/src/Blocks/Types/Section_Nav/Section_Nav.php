@@ -25,7 +25,7 @@ class Section_Nav extends Block_Config {
 	public const MOBILE_INIT_OPEN   = 'mobile_init_open';
 	public const MOBILE_INIT_CLOSED = 'mobile_init_closed';
 
-	public function add_block() {
+	public function add_block(): void {
 		$this->set_block( new Block( self::NAME, [
 			'title'       => __( 'Section Nav', 'tribe' ),
 			'description' => __( 'A block to insert a nav menu within a page with several layout options.', 'tribe' ),
@@ -43,7 +43,7 @@ class Section_Nav extends Block_Config {
 	/**
 	 * Register Fields for block
 	 */
-	public function add_fields() {
+	public function add_fields(): void {
 		//==========================================
 		// Content Fields
 		//==========================================

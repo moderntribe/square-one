@@ -27,7 +27,7 @@ class Login_Screen {
 		$logo_height = $logo_data[2] / 2;
 
 		?>
-		<style type="text/css">
+		<style>
 			.login h1 a {
 				background: transparent url(<?php echo esc_url( $logo_data[0] ); ?>) 50% 50% no-repeat !important;
 				width: <?php printf( '%dpx', $logo_width ); ?> !important;
@@ -41,26 +41,22 @@ class Login_Screen {
 	/**
 	 * Login Header Url
 	 *
-	 * @param string $url
-	 *
 	 * @return string
 	 *
 	 * @filter login_headerurl
 	 */
-	public function customize_login_header_url( $url ): string {
+	public function customize_login_header_url(): string {
 		return get_home_url();
 	}
 
 	/**
 	 * Login Header Title
 	 *
-	 * @param string $name
-	 *
 	 * @return string
 	 *
 	 * @filter login_headertext
 	 */
-	public function customize_login_header_title( $name ): string {
+	public function customize_login_header_title(): string {
 		return get_bloginfo( 'name' );
 	}
 

@@ -25,7 +25,7 @@ class Gallery_Grid extends Block_Config {
 	public const COLUMNS_FOUR     = 'four';
 	public const USE_SLIDESHOW    = 'use_slideshow';
 
-	public function add_block() {
+	public function add_block(): void {
 		$this->set_block( new Block( self::NAME, [
 			'title'       => __( 'Gallery Grid', 'tribe' ),
 			'description' => __( 'A custom block by Modern Tribe', 'tribe' ), // TODO: describe the block
@@ -43,7 +43,7 @@ class Gallery_Grid extends Block_Config {
 	/**
 	 * Register Fields for block
 	 */
-	public function add_fields() {
+	public function add_fields(): void {
 		$this->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
 				'label'       => __( 'Lead in', 'tribe' ),
 				'name'        => self::LEAD_IN,

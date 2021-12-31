@@ -14,6 +14,15 @@ namespace Tribe\Project\Templates\Components;
 abstract class Abstract_Controller {
 
 	/**
+	 * @param array $args
+	 *
+	 * @return static
+	 */
+	public static function factory( array $args = [] ) {
+		return tribe_project()->container()->make( static::class, [ 'args' => $args ] );
+	}
+
+	/**
 	 * Merge the passed arguments with the default and
 	 * required arguments defined by the controller
 	 *
@@ -57,15 +66,6 @@ abstract class Abstract_Controller {
 	 */
 	protected function required(): array {
 		return [];
-	}
-
-	/**
-	 * @param array $args
-	 *
-	 * @return static
-	 */
-	public static function factory( array $args = [] ) {
-		return tribe_project()->container()->make( static::class, [ 'args' => $args ] );
 	}
 
 }

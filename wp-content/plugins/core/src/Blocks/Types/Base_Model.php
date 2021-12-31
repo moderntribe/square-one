@@ -4,8 +4,12 @@ namespace Tribe\Project\Blocks\Types;
 
 abstract class Base_Model {
 
-	protected string $mode;
+	/**
+	 * @var mixed[]
+	 */
 	protected array $data;
+
+	protected string $mode;
 	protected string $name;
 	protected string $classes;
 	protected string $anchor;
@@ -15,9 +19,9 @@ abstract class Base_Model {
 	/**
 	 * Base_Controller constructor.
 	 *
-	 * @param $block
+	 * @param mixed[] $block
 	 */
-	public function __construct( $block ) {
+	public function __construct( array $block ) {
 		$this->mode    = $block['mode'] ?? 'preview';
 		$this->data    = $block['data'] ?? [];
 		$this->name    = $block['name'] ? str_replace( 'acf/', '', $block['name'] ) : '';
@@ -26,9 +30,10 @@ abstract class Base_Model {
 	}
 
 	/**
-	 * @param $key
+	 * @param int|string $key
+	 * @param mixed $default
 	 *
-	 * @return bool|mixed
+	 * @return false|mixed
 	 */
 	public function get( $key, $default = false ) {
 		$value = get_field( $key );
@@ -39,6 +44,15 @@ abstract class Base_Model {
 		return ! empty( $value )
 			? $value
 			: $default;
+	}
+
+	/**
+	 * Get the "Additional Class Names" value from the block editor.
+	 *
+	 * @return array
+	 */
+	public function get_classes(): array {
+		return explode( ' ', $this->classes );
 	}
 
 	/**
@@ -55,15 +69,6 @@ abstract class Base_Model {
 		}
 
 		return $attrs;
-	}
-
-	/**
-	 * Get the "Additional Class Names" value from the block editor.
-	 *
-	 * @return array
-	 */
-	public function get_classes(): array {
-		return explode( ' ', $this->classes );
 	}
 
 }

@@ -7,10 +7,7 @@ use Tribe\Project\Assets\Build_Parser;
 
 class Editor_Styles {
 
-	/**
-	 * @var \Tribe\Project\Assets\Admin\Admin_Build_Parser
-	 */
-	private $admin_build_parser;
+	private Admin_Build_Parser $admin_build_parser;
 
 	public function __construct( Admin_Build_Parser $admin_build_parser ) {
 		$this->admin_build_parser = $admin_build_parser;
@@ -57,7 +54,7 @@ class Editor_Styles {
 	 *
 	 * @filter tiny_mce_before_init
 	 */
-	public function mce_editor_body_class( $settings ): array {
+	public function mce_editor_body_class( array $settings ): array {
 		$settings['body_class'] = ( $settings['body_class'] ?? '' ) . ' s-sink t-sink';
 
 		return $settings;
@@ -93,7 +90,7 @@ class Editor_Styles {
 	 *
 	 * @return string
 	 */
-	private function get_asset_path( $handle, Build_Parser $build_parser ): string {
+	private function get_asset_path( string $handle, Build_Parser $build_parser ): string {
 		$styles = $build_parser->get_styles();
 		if ( ! array_key_exists( $handle, $styles ) ) {
 			return '';
