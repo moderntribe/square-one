@@ -15,8 +15,10 @@ class Page_Controller extends Index_Controller {
 	public function get_subheader_args(): array {
 		global $post;
 
+		$args                                = [];
 		$args[ Subheader_Controller::TITLE ] = $this->get_page_title();
 		$hero_image                          = (int) get_post_thumbnail_id( $post->ID );
+
 		if ( ! empty( $hero_image ) ) {
 			$args[ Subheader_Controller::HERO_IMAGE_ID ] = $hero_image;
 		}

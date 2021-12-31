@@ -4,12 +4,14 @@ namespace Tribe\Project\Templates\Routes\single;
 
 use Tribe\Project\Taxonomies\Category\Category;
 use Tribe\Project\Templates\Components\Abstract_Controller;
+use Tribe\Project\Templates\Components\header\subheader\Subheader_Controller;
 use Tribe\Project\Templates\Components\header\subheader\Subheader_Single_Controller;
 use Tribe\Project\Templates\Components\image\Image_Controller;
 use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Templates\Components\Traits\Page_Title;
 use Tribe\Project\Templates\Components\Traits\Primary_Term;
 use Tribe\Project\Theme\Config\Image_Sizes;
+use WP_Term;
 
 class Single_Controller extends Abstract_Controller {
 
@@ -26,17 +28,18 @@ class Single_Controller extends Abstract_Controller {
 
 		$term = $this->get_primary_term( $post->ID );
 
-		$args[ Subheader_Single_Controller::TITLE ]                = $this->get_page_title();
+		$args                                                      = [];
+		$args[ Subheader_Controller::TITLE ]                       = $this->get_page_title();
 		$args[ Subheader_Single_Controller::DATE ]                 = get_the_date();
 		$args[ Subheader_Single_Controller::AUTHOR ]               = get_the_author_meta( 'display_name', $post->post_author );
 		$args[ Subheader_Single_Controller::SHOULD_RENDER_BYLINE ] = true;
 
-		if ( $term instanceof \WP_Term ) {
+		if ( $term instanceof WP_Term ) {
 			$args[ Subheader_Single_Controller::TAG_NAME ] = $term->name;
 			$args[ Subheader_Single_Controller::TAG_LINK ] = get_term_link( $term );
 		}
 
-		$args[ Subheader_Single_Controller::CONTENT_CLASSES ] = [ 'l-sink', 'l-sink--double' ];
+		$args[ Subheader_Controller::CONTENT_CLASSES ] = [ 'l-sink', 'l-sink--double' ];
 
 		return $args;
 	}
@@ -45,6 +48,7 @@ class Single_Controller extends Abstract_Controller {
 		global $post;
 
 		$terms = get_the_terms( $post->ID, Category::NAME );
+
 		if ( ! $terms ) {
 			return [];
 		}
@@ -52,7 +56,7 @@ class Single_Controller extends Abstract_Controller {
 		return $terms;
 	}
 
-	public function get_term_link_args( $term ): array {
+	public function get_term_link_args( WP_Term $term ): array {
 		return  [
 			Link_Controller::CONTENT => $term->name,
 			Link_Controller::URL     => get_term_link( $term ),
@@ -62,6 +66,7 @@ class Single_Controller extends Abstract_Controller {
 
 	public function get_featured_image_args(): array {
 		global $post;
+
 		$image_id = (int) get_post_thumbnail_id( $post->ID );
 		$caption  = (string) wp_get_attachment_caption( $image_id );
 		$alt_text = (string) get_post_meta( $image_id, '_wp_attachment_image_alt', true );
