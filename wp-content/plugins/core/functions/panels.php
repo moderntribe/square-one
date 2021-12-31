@@ -9,7 +9,7 @@
  * @since tribe-square-one 1.0
  */
 
-function the_panel_title( $title = null, $options = [] ) {
+function the_panel_title( ?string $title = null, array $options = [] ): void {
 
 	if ( empty( $title ) && ! is_panel_preview() ) {
 		return;
@@ -68,7 +68,7 @@ function the_panel_title( $title = null, $options = [] ) {
  * @since tribe-square-one 1.0
  */
 
-function the_panel_description( $content = null, $options = [] ) {
+function the_panel_description( ?string $content = null, array $options = [] ): void {
 
 	if ( empty( $content ) && ! is_panel_preview() ) {
 		return;
@@ -107,7 +107,7 @@ function the_panel_description( $content = null, $options = [] ) {
  *
  * @since tribe-square-one 1.0
  */
-function get_panel_link( $link, $options = [] ) {
+function get_panel_link( array $link, array $options = [] ) {
 	if ( ! isset( $link['url'] ) ) {
 		return false;
 	}
@@ -137,7 +137,7 @@ function get_panel_link( $link, $options = [] ) {
  *
  * @since tribe-square-one 1.0
  */
-function the_panel_link( $link, $options = [] ) {
+function the_panel_link( array $link, array $options = [] ): void {
 	if ( ! isset( $link['url'] ) ) {
 		return;
 	}
