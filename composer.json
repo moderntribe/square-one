@@ -149,7 +149,11 @@
       "Tribe\\Project\\": "wp-content/plugins/core/src",
       "Tribe\\Project\\Templates\\Routes\\": "wp-content/themes/core/routes",
       "Tribe\\Project\\Templates\\Components\\": "wp-content/themes/core/components"
-    }
+    },
+    "files": [
+      "wp-content/plugins/core/functions/pluggable.php",
+      "wp-content/plugins/core/functions/templates.php"
+    ]
   },
   "autoload-dev": {
     "psr-4": {
