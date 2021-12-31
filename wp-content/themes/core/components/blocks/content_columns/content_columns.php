@@ -5,7 +5,6 @@ use Tribe\Project\Templates\Components\blocks\content_columns\Content_Columns_Bl
 /**
  * @var array $args Arguments passed to the template
  */
-// phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
 $c = Content_Columns_Block_Controller::factory( $args );
 ?>
 
@@ -25,7 +24,7 @@ $c = Content_Columns_Block_Controller::factory( $args );
 					<?php get_template_part(
 						'components/content_block/content_block',
 						null,
-						$c->get_content_args( $column ) 
+						$c->get_content_args( $column )
 					);
 					?>
 				</div>

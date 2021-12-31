@@ -1,11 +1,10 @@
 <?php declare(strict_types=1);
 
-use \Tribe\Project\Templates\Components\video\Video_Controller;
+use Tribe\Project\Templates\Components\video\Video_Controller;
 
 /**
- * @var array $args Arguments passed to the template
+ * @var array $args ACF block data..
  */
-// phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
 $c = Video_Controller::factory( $args );
 ?>
 

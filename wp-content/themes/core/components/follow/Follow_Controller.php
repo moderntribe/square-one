@@ -8,7 +8,11 @@ use Tribe\Project\Templates\Models\Social_Link;
 
 class Follow_Controller extends Abstract_Controller {
 
-	// Change the order of this array to change the display order
+	/**
+	 * Change the order of this array to change the display order.
+	 *
+	 * @var string[]
+	 */
 	private array $social_keys = [
 		Social_Settings::FACEBOOK,
 		Social_Settings::TWITTER,

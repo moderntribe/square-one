@@ -7,61 +7,73 @@ use Tribe\Project\Templates\Components\Abstract_Controller;
 
 class Breadcrumbs_Controller extends Abstract_Controller {
 
+	public const ATTRS        = 'attrs';
 	public const BREADCRUMBS  = 'breadcrumbs';
 	public const CLASSES      = 'classes';
-	public const ATTRS        = 'attrs';
-	public const MAIN_CLASSES = 'main_classes';
-	public const MAIN_ATTRS   = 'main_attrs';
-	public const ITEM_CLASSES = 'item_classes';
 	public const ITEM_ATTRS   = 'item_attrs';
-	public const LINK_CLASSES = 'link_classes';
+	public const ITEM_CLASSES = 'item_classes';
 	public const LINK_ATTRS   = 'link_attrs';
+	public const LINK_CLASSES = 'link_classes';
+	public const MAIN_ATTRS   = 'main_attrs';
+	public const MAIN_CLASSES = 'main_classes';
 
-	private array $breadcrumbs;
-	private array $classes;
+	/**
+	 * @var string[]
+	 */
 	private array $attrs;
-	private array $main_classes;
-	private array $main_attrs;
-	private array $item_classes;
+
+	/**
+	 * @var \Tribe\Project\Templates\Models\Breadcrumb[]
+	 */
+	private array $breadcrumbs;
+
+	/**
+	 * @var string[]
+	 */
+	private array $classes;
+
+	/**
+	 * @var string[]
+	 */
 	private array $item_attrs;
-	private array $link_classes;
+
+	/**
+	 * @var string[]
+	 */
+	private array $item_classes;
+
+	/**
+	 * @var string[]
+	 */
 	private array $link_attrs;
+
+	/**
+	 * @var string[]
+	 */
+	private array $link_classes;
+
+	/**
+	 * @var string[]
+	 */
+	private array $main_attrs;
+
+	/**
+	 * @var string[]
+	 */
+	private array $main_classes;
 
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
 
+		$this->attrs        = (array) $args[ self::ATTRS ];
 		$this->breadcrumbs  = (array) $args[ self::BREADCRUMBS ];
 		$this->classes      = (array) $args[ self::CLASSES ];
-		$this->attrs        = (array) $args[ self::ATTRS ];
-		$this->main_classes = (array) $args[ self::MAIN_CLASSES ];
-		$this->main_attrs   = (array) $args[ self::MAIN_ATTRS ];
-		$this->item_classes = (array) $args[ self::ITEM_CLASSES ];
 		$this->item_attrs   = (array) $args[ self::ITEM_ATTRS ];
-		$this->link_classes = (array) $args[ self::LINK_CLASSES ];
+		$this->item_classes = (array) $args[ self::ITEM_CLASSES ];
 		$this->link_attrs   = (array) $args[ self::LINK_ATTRS ];
-	}
-
-	protected function defaults(): array {
-		return [
-			self::BREADCRUMBS  => [],
-			self::CLASSES      => [],
-			self::ATTRS        => [],
-			self::MAIN_CLASSES => [],
-			self::MAIN_ATTRS   => [],
-			self::ITEM_CLASSES => [],
-			self::ITEM_ATTRS   => [],
-			self::LINK_ATTRS   => [],
-			self::LINK_CLASSES => [],
-		];
-	}
-
-	protected function required(): array {
-		return [
-			self::CLASSES      => [ 'c-breadcrumbs' ],
-			self::MAIN_CLASSES => [ 'c-breadcrumbs__list' ],
-			self::ITEM_CLASSES => [ 'c-breadcrumbs__item' ],
-			self::LINK_CLASSES => [ 'c-breadcrumbs__anchor' ],
-		];
+		$this->link_classes = (array) $args[ self::LINK_CLASSES ];
+		$this->main_attrs   = (array) $args[ self::MAIN_ATTRS ];
+		$this->main_classes = (array) $args[ self::MAIN_CLASSES ];
 	}
 
 	/**
@@ -101,6 +113,29 @@ class Breadcrumbs_Controller extends Abstract_Controller {
 
 	public function get_link_attrs(): string {
 		return Markup_Utils::concat_attrs( $this->link_attrs );
+	}
+
+	protected function defaults(): array {
+		return [
+			self::ATTRS        => [],
+			self::BREADCRUMBS  => [],
+			self::CLASSES      => [],
+			self::ITEM_ATTRS   => [],
+			self::ITEM_CLASSES => [],
+			self::LINK_ATTRS   => [],
+			self::LINK_CLASSES => [],
+			self::MAIN_ATTRS   => [],
+			self::MAIN_CLASSES => [],
+		];
+	}
+
+	protected function required(): array {
+		return [
+			self::CLASSES      => [ 'c-breadcrumbs' ],
+			self::ITEM_CLASSES => [ 'c-breadcrumbs__item' ],
+			self::LINK_CLASSES => [ 'c-breadcrumbs__anchor' ],
+			self::MAIN_CLASSES => [ 'c-breadcrumbs__list' ],
+		];
 	}
 
 }

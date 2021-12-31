@@ -7,14 +7,21 @@ use Tribe\Project\Templates\Components\Abstract_Controller;
 
 class Container_Controller extends Abstract_Controller {
 
-	public const TAG     = 'tag';
-	public const CLASSES = 'classes';
 	public const ATTRS   = 'attrs';
+	public const CLASSES = 'classes';
 	public const CONTENT = 'content';
+	public const TAG     = 'tag';
 
-	private string $tag;
-	private array $classes;
+	/**
+	 * @var string[]
+	 */
 	private array $attrs;
+
+	/**
+	 * @var string[]
+	 */
+	private array $classes;
+	private string $tag;
 
 	/**
 	 * @var string|\Tribe\Project\Templates\Components\Deferred_Component
@@ -24,21 +31,11 @@ class Container_Controller extends Abstract_Controller {
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
 
-		$this->tag     = (string) $args[ self::TAG ];
-		$this->classes = (array) $args[ self::CLASSES ];
 		$this->attrs   = (array) $args[ self::ATTRS ];
+		$this->classes = (array) $args[ self::CLASSES ];
 		$this->content = $args[ self::CONTENT ];
+		$this->tag     = (string) $args[ self::TAG ];
 	}
-
-	protected function defaults(): array {
-		return [
-			self::TAG     => 'div',
-			self::CLASSES => [],
-			self::ATTRS   => [],
-			self::CONTENT => '',
-		];
-	}
-
 
 	public function get_tag(): string {
 		return tag_escape( $this->tag );
@@ -54,6 +51,15 @@ class Container_Controller extends Abstract_Controller {
 
 	public function get_content(): string {
 		return (string) $this->content;
+	}
+
+	protected function defaults(): array {
+		return [
+			self::TAG     => 'div',
+			self::CLASSES => [],
+			self::ATTRS   => [],
+			self::CONTENT => '',
+		];
 	}
 
 }

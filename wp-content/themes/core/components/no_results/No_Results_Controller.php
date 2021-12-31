@@ -11,6 +11,9 @@ class No_Results_Controller extends Abstract_Controller {
 	public const TITLE   = 'attachment';
 	public const CONTENT = 'attrs';
 
+	/**
+	 * @var string[]
+	 */
 	private array $classes;
 	private string $title;
 	private string $content;
@@ -21,6 +24,18 @@ class No_Results_Controller extends Abstract_Controller {
 		$this->classes = (array) $args[ self::CLASSES ];
 		$this->title   = (string) $args[ self::TITLE ];
 		$this->content = (string) $args[ self::CONTENT ];
+	}
+
+	public function get_classes(): string {
+		return Markup_Utils::class_attribute( $this->classes );
+	}
+
+	public function get_title(): string {
+		return esc_html( $this->title );
+	}
+
+	public function get_content(): string {
+		return esc_html( $this->content );
 	}
 
 	protected function defaults(): array {
@@ -35,18 +50,6 @@ class No_Results_Controller extends Abstract_Controller {
 		return [
 			self::CLASSES => [ 'no-results' ],
 		];
-	}
-
-	public function get_classes(): string {
-		return Markup_Utils::class_attribute( $this->classes );
-	}
-
-	public function get_title(): string {
-		return esc_html( $this->title );
-	}
-
-	public function get_content(): string {
-		return esc_html( $this->content );
 	}
 
 }

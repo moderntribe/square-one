@@ -5,9 +5,7 @@ use Tribe\Project\Templates\Components\header\subheader\Subheader_Single_Control
 /**
  * @var array $args Arguments passed to the template
  */
-// phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
 $c = Subheader_Single_Controller::factory( $args );
-
 ?>
 
 <header <?php echo $c->get_classes(); ?> <?php echo $c->get_attrs(); ?>>

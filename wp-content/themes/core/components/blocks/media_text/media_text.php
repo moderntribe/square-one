@@ -6,7 +6,6 @@ use Tribe\Project\Templates\Components\blocks\media_text\Media_Text_Block_Contro
 /**
  * @var array $args Arguments passed to the template
  */
-// phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
 $c = Media_Text_Block_Controller::factory( $args );
 ?>
 

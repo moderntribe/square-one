@@ -8,46 +8,32 @@ use Tribe\Project\Templates\Components\button\Button_Controller;
 
 class Search_Form_Controller extends Abstract_Controller {
 
+	public const ACTION      = 'action';
 	public const CLASSES     = 'classes';
 	public const FORM_ID     = 'form_id';
-	public const ACTION      = 'action';
-	public const PLACEHOLDER = 'placeholder';
 	public const LABEL       = 'label';
+	public const PLACEHOLDER = 'placeholder';
 	public const VALUE       = 'value';
 
+	/**
+	 * @var string[]
+	 */
 	private array $classes;
-	private string $form_id;
 	private string $action;
-	private string $placeholder;
+	private string $form_id;
 	private string $label;
+	private string $placeholder;
 	private string $value;
 
-	public function __construct( $args ) {
+	public function __construct( array $args ) {
 		$args = $this->parse_args( $args );
 
+		$this->action      = (string) $args[ self::ACTION ];
 		$this->classes     = (array) $args[ self::CLASSES ];
 		$this->form_id     = (string) $args[ self::FORM_ID ];
-		$this->action      = (string) $args[ self::ACTION ];
-		$this->placeholder = (string) $args[ self::PLACEHOLDER ];
 		$this->label       = (string) $args[ self::LABEL ];
+		$this->placeholder = (string) $args[ self::PLACEHOLDER ];
 		$this->value       = (string) $args[ self::VALUE ];
-	}
-
-	protected function defaults(): array {
-		return [
-			self::CLASSES     => [],
-			self::FORM_ID     => 's',
-			self::ACTION      => get_home_url(),
-			self::PLACEHOLDER => '',
-			self::LABEL       => esc_html__( 'Search', 'tribe' ),
-			self::VALUE       => '',
-		];
-	}
-
-	protected function required(): array {
-		return [
-			'classes' => [ 'c-search' ],
-		];
 	}
 
 	public function get_classes(): string {
@@ -89,6 +75,23 @@ class Search_Form_Controller extends Abstract_Controller {
 			Button_Controller::ATTRS   => [ 'name' => 'submit' ],
 			Button_Controller::TYPE    => 'submit',
 			Button_Controller::CONTENT => '<span>' . esc_html__( 'Search', 'tribe' ) . '</span>',
+		];
+	}
+
+	protected function defaults(): array {
+		return [
+			self::CLASSES     => [],
+			self::FORM_ID     => 's',
+			self::ACTION      => get_home_url(),
+			self::PLACEHOLDER => '',
+			self::LABEL       => esc_html__( 'Search', 'tribe' ),
+			self::VALUE       => '',
+		];
+	}
+
+	protected function required(): array {
+		return [
+			'classes' => [ 'c-search' ],
 		];
 	}
 

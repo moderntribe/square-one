@@ -1,11 +1,10 @@
 <?php declare(strict_types=1);
 
-use \Tribe\Project\Templates\Components\text\Text_Controller;
+use Tribe\Project\Templates\Components\text\Text_Controller;
 
 /**
  * @var array $args Arguments passed to the template
  */
-// phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
 $c = Text_Controller::factory( $args );
 
 if ( empty( $c->get_content() ) && $c->get_content() !== '0' ) {

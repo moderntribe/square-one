@@ -5,7 +5,6 @@ use Tribe\Project\Templates\Components\blocks\stats\Stats_Block_Controller;
 /**
  * @var array $args Arguments passed to the template
  */
-// phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
 $c = Stats_Block_Controller::factory( $args );
 ?>
 

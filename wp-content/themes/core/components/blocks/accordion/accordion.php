@@ -5,7 +5,6 @@ use Tribe\Project\Templates\Components\blocks\accordion\Accordion_Block_Controll
 /**
  * @var array $args Arguments passed to the template
  */
-// phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
 $c = Accordion_Block_Controller::factory( $args );
 ?>
 
