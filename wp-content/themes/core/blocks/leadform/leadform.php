@@ -3,9 +3,8 @@
 use Tribe\Project\Blocks\Types\Lead_Form\Lead_Form_Model;
 
 /**
- * @var array $args Arguments passed to the template
+ * @var array $args ACF block data..
  */
-// phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
 $model = new Lead_Form_Model( $args['block'] );
 
 get_template_part(
