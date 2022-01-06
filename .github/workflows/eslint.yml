@@ -36,4 +36,4 @@ jobs:
         with:
           fail_on_error: true
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          eslint_flags: 'wp-content/{*themes,plugins*}/core/**/*.js'
+          eslint_flags: '-c ${{ github.workspace }}/.eslintrc --ignore-path ${{ github.workspace }}/.eslintignore ${{ github.workspace }}/wp-content/{*themes,plugins*}/core/**/*.js'
