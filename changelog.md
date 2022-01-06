@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2022.01
+* Fixed: eslint GitHub action to run same validation as deploys and to properly check pcss files.
+
 ## 2021.12
 * Fixed: docker compose (v2) support: `WARN[0000] network proxy: network.external.name is deprecated in favor of network.name`
 * Added: Section Nav component & block.
