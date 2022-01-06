@@ -26,7 +26,14 @@ jobs:
         with:
           node-version: ${{ steps.nvm.outputs.NODE_VERSION }}
 
-      - name: Lint
+      - name: Install and validate
         run: |
           yarn install
           npm run validate
+
+      - name: Lint
+      - uses: reviewdog/action-eslint@v1
+        with:
+          fail_on_error: true
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          eslint_flags: 'wp-content/{*themes,plugins*}/core/**/*.js'
