@@ -6,7 +6,7 @@ use Tribe\Project\Object_Meta\Analytics_Settings;
 
 class GTM_Scripts {
 
-	private \Tribe\Project\Object_Meta\Analytics_Settings $settings;
+	private Analytics_Settings $settings;
 
 	public function __construct( Analytics_Settings $settings ) {
 		$this->settings = $settings;
