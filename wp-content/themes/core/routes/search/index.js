@@ -10,7 +10,7 @@ import search from './js/search';
 */
 
 const init = () => {
-	search();
+	search ();
 };
 
 export default init;
