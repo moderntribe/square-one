@@ -4,23 +4,28 @@ on:
     branches:
       - main
   pull_request:
-
+    paths:
+      - 'wp-content/plugins/core/**.js'
+      - 'wp-content/themes/core/**.js'
+      - 'wp-content/plugins/core/**.pcss'
+      - 'wp-content/themes/core/**.pcss'
 jobs:
   eslint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
         with:
           fetch-depth: 1
+
       - name: Get Node.js version
         id: nvm
         run: echo ::set-output name=NODE_VERSION::$(cat .nvmrc)
-      - uses: actions/setup-node@v2
+        uses: actions/setup-node@v2
         with:
           node-version: ${{ steps.nvm.outputs.NODE_VERSION }}
-      - run: yarn install
-      - uses: reviewdog/action-eslint@v1
-        with:
-          fail_on_error: true
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          eslint_flags: 'wp-content/{*themes,plugins*}/core/**/*.js'
+
+      - name: Lint
+        run: |
+          yarn install
+          npm run validate
