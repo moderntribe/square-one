@@ -11,7 +11,7 @@ on:
 jobs:
   create_review_app:
     if: (github.event_name == 'pull_request' && github.event.action == 'opened' || github.event.action == 'synchronize')
-    uses: moderntribe/actions/.github/workflows/create-review-app.yml@v1
+    uses: moderntribe/actions/.github/workflows/create-review-app.yml@fix_create_review_app
     with:
       app_name: sq1
     secrets:
