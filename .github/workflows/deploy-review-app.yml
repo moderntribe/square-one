@@ -17,6 +17,7 @@ jobs:
     secrets:
       github_pat_token: ${{ secrets.GH_BOT_TOKEN }}
       server: ${{ secrets.TEST_DOMAIN }}
+      ssh_private_key: ${{ secrets.DOKKU_DEPLOY_KEY }}
 
   deploy_review_app:
     if: (github.event_name == 'pull_request' && github.event.action == 'opened' || github.event.action == 'synchronize')
