@@ -21,9 +21,8 @@ jobs:
 
   deploy_review_app:
     if: (github.event_name == 'pull_request' && github.event.action == 'opened' || github.event.action == 'synchronize')
-    uses: moderntribe/squareone/.github/workflows/dokku-deploy.yml@add_deploy_folder
+    uses: moderntribe/square-one/.github/workflows/dokku-deploy.yml@add_deploy_folder
     with:
-      # workflows don't support env
       app_name: sq1
       branch: ${{ github.event.pull_request.head.ref }}
       is_review_app: true
@@ -34,11 +33,9 @@ jobs:
       slack_webhook: ${{ secrets.SLACK_WEBHOOK }}
 
   destroy_review_app:
-    # only run when a pull request is closed
-    if: github.event_name == 'pull_request' && github.event.action == 'closed'
+    if: (github.event_name == 'pull_request' && github.event.action == 'closed')
     uses: moderntribe/actions/.github/workflows/delete-review-app.yml@review_app_workflow
     with:
-      # workflows don't support env
       app_name: sq1
     secrets:
       github_pat_token: ${{ secrets.GH_BOT_TOKEN }}
