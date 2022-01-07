@@ -1,0 +1,83 @@
+name: Reusable Workflow - Deploy Dokku
+on:
+  workflow_call:
+    inputs:
+      app_name:
+        required: true
+        type: string
+        description: Dokku Original App Name
+      branch:
+        required: true
+        type: string
+        description: Branch to be deployed
+      is_review_app:
+        default: false
+        required: false
+        type: boolean
+        description: Flag if this is a review app or not
+    secrets:
+      github_pat_token:
+        required: true
+      server:
+        required: true
+      ssh_private_key:
+        required: true
+      slack_webhook:
+        required: true
+
+jobs:
+  deploy_dokku:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cloning repo
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          ref: ${{ inputs.branch }}
+
+      - name: Set common variables
+        uses: moderntribe/actions/utils/common-variables@v1
+        with:
+          app_name: ${{ inputs.app_name }}
+          base_branch: ${{ inputs.branch }}
+
+      - name: Setup SSH
+        uses: moderntribe/actions/utils/ssh-agent@v1
+        with:
+          ssh_private_key: ${{ secrets.ssh_private_key }}
+          server: ${{ secrets.server }}
+
+      - name: Build Node
+        uses: moderntribe/actions/square1/build-node@v1
+
+      - name: Commit Files Node Files
+        uses: moderntribe/actions/utils/commit-files@v1
+        with:
+          folder: ./wp-content/
+
+      - name: Define app to deploy
+        id: define_app
+        run: |
+          if [[ ${{ inputs.is_review_app }} == "true" ]]; then
+            echo ::set-output name=deploy_app::${{ env.REVIEW_APP }}
+          else
+            echo ::set-output name=deploy_app::${{ inputs.app_name }}
+          fi
+
+      - name: Deploy to ${{ steps.define_app.outputs.deploy_app }}
+        uses: moderntribe/actions/deploy/gitdeploy@v1
+        with:
+          git_url: "dokku@${{ secrets.server }}:${{ steps.define_app.outputs.deploy_app }}"
+          branch: ${{ env.BRANCH }}
+
+      - name: Slack Notification
+        if: success()|| failure() || cancelled()
+        uses: moderntribe/actions/utils/slack-message-deploy@v1
+        with:
+          branch: ${{ env.BRANCH }}
+          environment: ${{ steps.define_app.outputs.deploy_app }}
+          slack_webhook_url: ${{ secrets.slack_webhook }}
+          app_url: "${{ steps.define_app.outputs.deploy_app }}.${{ secrets.server }}"
+          gha_url: ${{ env.GHA_URL }}
+          status: ${{ job.status }}
+
