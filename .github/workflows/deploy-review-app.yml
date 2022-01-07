@@ -20,18 +20,18 @@ jobs:
           ref: ${{ github.event.pull_request.head.ref }}
 
       - name: Set common variables
-        uses: moderntribe/actions/utils/common-variables@v1
+        uses: moderntribe/actions/utils/common-variables@v1.0.0
         with:
           base_branch: ${{ github.event.pull_request.head.ref }}
 
       - name: Setup SSH
-        uses: moderntribe/actions/utils/ssh-agent@v1
+        uses: moderntribe/actions/utils/ssh-agent@v1.0.0
         with:
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
           server: "${{ env.SERVER }}"
 
       - name: Create review app ${{ env.REVIEW_APP }}
-        uses: moderntribe/actions/dokku/create-review-app@v1
+        uses: moderntribe/actions/dokku/create-review-app@v1.0.0
         with:
           app_name: ${{ env.APPNAME }}
           review_app_name: ${{ env.REVIEW_APP }}
@@ -40,22 +40,22 @@ jobs:
           gha_url: ${{ env.GHA_URL }}
 
       - name: Build Node
-        uses: moderntribe/actions/square1/build-node@v1
+        uses: moderntribe/actions/square1/build-node@v1.0.0
 
       - name: Commit Files Node Files
-        uses: moderntribe/actions/utils/commit-files@v1
+        uses: moderntribe/actions/utils/commit-files@v1.0.0
         with:
           folder: ./wp-content/
 
       - name: Deploy to ${{ env.REVIEW_APP }}
-        uses: moderntribe/actions/deploy/gitdeploy@v1
+        uses: moderntribe/actions/deploy/gitdeploy@v1.0.0
         with:
           git_url: "dokku@${{ env.SERVER }}:${{ env.REVIEW_APP }}"
           branch: ${{ env.BRANCH }}
 
       - name: Slack Notification
         if: success()|| failure() || cancelled()
-        uses: moderntribe/actions/utils/slack-message-deploy@v1
+        uses: moderntribe/actions/utils/slack-message-deploy@v1.0.0
         with:
           branch: ${{ env.BRANCH }}
           environment: ${{ env.REVIEW_APP }}
@@ -70,10 +70,10 @@ jobs:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
     steps:
       - name: Set common variables
-        uses: moderntribe/actions/utils/common-variables@v1
+        uses: moderntribe/actions/utils/common-variables@v1.0.0
 
       - name: Delete review app ${{ env.REVIEW_APP }}
-        uses: moderntribe/actions/dokku/delete-review-app@v1
+        uses: moderntribe/actions/dokku/delete-review-app@v1.0.0
         with:
           app_name: ${{ env.APPNAME }}
           review_app_name: ${{ env.REVIEW_APP }}
@@ -83,7 +83,7 @@ jobs:
 
       - name: Slack Notification
         if: failure()
-        uses: moderntribe/actions/utils/slack-message-deploy@v1
+        uses: moderntribe/actions/utils/slack-message-deploy@v1.0.0
         with:
           branch: ${{ env.BRANCH }}
           environment: ${{ env.REVIEW_APP }}
