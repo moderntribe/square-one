@@ -3,7 +3,6 @@
 namespace Tribe\Project;
 
 use DI\ContainerBuilder;
-use Psr\Container\ContainerInterface;
 use Tribe\Project\Admin\Admin_Subscriber;
 use Tribe\Project\Assets\Assets_Subscriber;
 use Tribe\Project\Blocks\Blocks_Definer;
@@ -29,7 +28,10 @@ class Core {
 
 	public const PLUGIN_FILE = 'plugin.file';
 
-	private ContainerInterface $container;
+	/**
+	 * @var \Psr\Container\ContainerInterface|\Invoker\InvokerInterface|\DI\FactoryInterface
+	 */
+	private $container;
 
 	/**
 	 * @var string[] Names of classes implementing Definer_Interface.
@@ -118,14 +120,23 @@ class Core {
 		return self::$instance;
 	}
 
+	/**
+	 * @throws \Exception
+	 */
 	public function init( string $plugin_path ): void {
 		$this->init_container( $plugin_path );
 	}
 
-	public function container(): ContainerInterface {
+	/**
+	 * @return \Psr\Container\ContainerInterface|\Invoker\InvokerInterface|\DI\FactoryInterface
+	 */
+	public function container() {
 		return $this->container;
 	}
 
+	/**
+	 * @throws \Exception
+	 */
 	private function init_container( string $plugin_path ): void {
 
 		// combine definers/subscribers from the project and libs

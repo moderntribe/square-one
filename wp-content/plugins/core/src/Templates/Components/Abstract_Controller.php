@@ -12,6 +12,9 @@ abstract class Abstract_Controller {
 	/**
 	 * @param array $args
 	 *
+	 * @throws \DI\DependencyException
+	 * @throws \DI\NotFoundException
+	 *
 	 * @return \Tribe\Project\Templates\Components\Abstract_Controller
 	 */
 	public static function factory( array $args = [] ): Abstract_Controller {
