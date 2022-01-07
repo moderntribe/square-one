@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7401387a818c8843142bc46181b69e33",
+    "content-hash": "f0724ae9f022fd6269286af40508e9f1",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -3723,15 +3723,15 @@
         },
         {
             "name": "wpackagist-plugin/the-events-calendar",
-            "version": "5.10.1",
+            "version": "5.12.2",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/the-events-calendar/",
-                "reference": "tags/5.10.1"
+                "reference": "tags/5.12.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/the-events-calendar.5.10.1.zip"
+                "url": "https://downloads.wordpress.org/plugin/the-events-calendar.5.12.2.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -3759,15 +3759,15 @@
         },
         {
             "name": "wpackagist-plugin/wordpress-seo",
-            "version": "17.5",
+            "version": "17.8",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/wordpress-seo/",
-                "reference": "tags/17.5"
+                "reference": "tags/17.8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wordpress-seo.17.5.zip"
+                "url": "https://downloads.wordpress.org/plugin/wordpress-seo.17.8.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
