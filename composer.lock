@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "48acb78b47036161c4695bae2d6510f0",
+    "content-hash": "7401387a818c8843142bc46181b69e33",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -1063,16 +1063,16 @@
         },
         {
             "name": "johnpbloch/wordpress-core",
-            "version": "5.7.5",
+            "version": "5.8.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/johnpbloch/wordpress-core.git",
-                "reference": "9a1ebb6acb17f2d2bcc1b203c52a43ada46173a5"
+                "reference": "9f80e45b0a8116df03a41e4ccea09a434528b063"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/johnpbloch/wordpress-core/zipball/9a1ebb6acb17f2d2bcc1b203c52a43ada46173a5",
-                "reference": "9a1ebb6acb17f2d2bcc1b203c52a43ada46173a5",
+                "url": "https://api.github.com/repos/johnpbloch/wordpress-core/zipball/9f80e45b0a8116df03a41e4ccea09a434528b063",
+                "reference": "9f80e45b0a8116df03a41e4ccea09a434528b063",
                 "shasum": ""
             },
             "require": {
@@ -1080,7 +1080,7 @@
                 "php": ">=5.6.20"
             },
             "provide": {
-                "wordpress/core-implementation": "5.7.5"
+                "wordpress/core-implementation": "5.8.3"
             },
             "type": "wordpress-core",
             "notification-url": "https://packagist.org/downloads/",
@@ -1107,7 +1107,7 @@
                 "source": "https://core.trac.wordpress.org/browser",
                 "wiki": "https://codex.wordpress.org/"
             },
-            "time": "2022-01-06T19:24:13+00:00"
+            "time": "2022-01-06T19:24:18+00:00"
         },
         {
             "name": "johnpbloch/wordpress-core-installer",

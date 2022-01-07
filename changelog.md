@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ## 2022.01 
 * Updated: coding standards to [version 2](https://github.com/moderntribe/coding-standards/tree/2.0.x).
-* Updated: WordPress to 5.7.5 (security release)
+* Updated: WordPress to 5.8.3 (security release)
 * Updated: ACF Pro to 5.11.4
 
 ## 2021.12
