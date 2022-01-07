@@ -25,11 +25,11 @@ jobs:
     with:
       app_name: sq1
       branch: ${{ github.event.pull_request.head.ref }}
-      is_review_app: true
+      # is_review_app: false
     secrets:
       github_pat_token: ${{ secrets.GH_BOT_TOKEN }}
       server: ${{ secrets.TEST_DOMAIN }}
-      ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+      ssh_private_key: ${{ secrets.DOKKU_DEPLOY_KEY }}
       slack_webhook: ${{ secrets.SLACK_WEBHOOK }}
 
   destroy_review_app:

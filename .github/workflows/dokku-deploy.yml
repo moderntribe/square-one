@@ -56,7 +56,8 @@ jobs:
       #   with:
       #     folder: ./wp-content/
 
-      - id: define_app
+      - name: Define APP to deploy
+        id: define_app
         run: |
           if [[ ${{ inputs.is_review_app }} == "true" ]]; then
             echo ::set-output name=deploy_app::${{ env.REVIEW_APP }}
