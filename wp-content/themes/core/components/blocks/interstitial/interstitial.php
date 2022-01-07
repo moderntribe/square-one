@@ -5,7 +5,6 @@ use Tribe\Project\Templates\Components\blocks\interstitial\Interstitial_Block_Co
 /**
  * @var array $args Arguments passed to the template
  */
-// phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
 $c = Interstitial_Block_Controller::factory( $args );
 ?>
 

@@ -10,51 +10,36 @@ class Trackback_Controller extends Abstract_Controller {
 
 	use Comment_Edit_Link;
 
-	public const COMMENT_ID = 'comment_id';
-	public const CLASSES    = 'classes';
 	public const ATTRS      = 'attrs';
+	public const CLASSES    = 'classes';
+	public const COMMENT_ID = 'comment_id';
 	public const LABEL      = 'label';
 
-	private int $comment_id;
-	private array $classes;
+	/**
+	 * @var string[]
+	 */
 	private array $attrs;
+
+	/**
+	 * @var string[]
+	 */
+	private array $classes;
+	private int $comment_id;
 	private string $label;
 
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
 
-		$this->comment_id = (int) $args[ self::COMMENT_ID ];
-		$this->classes    = (array) $args[ self::CLASSES ];
 		$this->attrs      = (array) $args[ self::ATTRS ];
+		$this->classes    = (array) $args[ self::CLASSES ];
+		$this->comment_id = (int) $args[ self::COMMENT_ID ];
 		$this->label      = (string) $args[ self::LABEL ];
 	}
 
-	protected function defaults(): array {
-		return [
-			self::COMMENT_ID => 0,
-			self::CLASSES    => [],
-			self::ATTRS      => [],
-			self::LABEL      => __( 'Trackback', 'tribe' ),
-		];
-	}
-
-	/**
-	 * @return array
-	 */
-	protected function required(): array {
-		return [];
-	}
-
-	/**
-	 * @return string
-	 */
 	public function get_classes(): string {
 		return Markup_Utils::class_attribute( get_comment_class( $this->classes ) );
 	}
 
-	/**
-	 * @return string
-	 */
 	public function get_attrs(): string {
 		$attrs       = $this->attrs;
 		$attrs['id'] = sprintf( 'comment-%d', $this->comment_id );
@@ -72,6 +57,19 @@ class Trackback_Controller extends Abstract_Controller {
 
 	public function get_trackback_link(): string {
 		return get_comment_author_link( $this->comment_id );
+	}
+
+	protected function defaults(): array {
+		return [
+			self::ATTRS      => [],
+			self::CLASSES    => [],
+			self::COMMENT_ID => 0,
+			self::LABEL      => __( 'Trackback', 'tribe' ),
+		];
+	}
+
+	protected function required(): array {
+		return [];
 	}
 
 }

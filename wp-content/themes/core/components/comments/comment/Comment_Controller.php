@@ -7,9 +7,6 @@ use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\comments\Comment_Edit_Link;
 use Tribe\Project\Templates\Components\text\Text_Controller;
 
-/**
- * Class Comment
- */
 class Comment_Controller extends Abstract_Controller {
 
 	use Comment_Edit_Link;
@@ -21,18 +18,20 @@ class Comment_Controller extends Abstract_Controller {
 	public const MAX_DEPTH  = 'max_depth';
 	public const STYLE      = 'style';
 
+	/**
+	 * @var string[]
+	 */
 	private array $attrs;
+
+	/**
+	 * @var string[]
+	 */
 	private array $classes;
 	private int $comment_id;
 	private int $depth;
 	private int $max_depth;
 	private string $style;
 
-	/**
-	 * Comment constructor.
-	 *
-	 * @param array $args
-	 */
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
 
@@ -44,37 +43,10 @@ class Comment_Controller extends Abstract_Controller {
 		$this->style      = (string) $args[ self::STYLE ];
 	}
 
-	/**
-	 * @return array
-	 */
-	protected function defaults(): array {
-		return [
-			self::ATTRS      => [],
-			self::CLASSES    => [],
-			self::COMMENT_ID => 0,
-			self::DEPTH      => 0,
-			self::MAX_DEPTH  => - 1,
-			self::STYLE      => 'ol',
-		];
-	}
-
-	/**
-	 * @return array
-	 */
-	protected function required(): array {
-		return [];
-	}
-
-	/**
-	 * @return string
-	 */
 	public function get_classes(): string {
 		return Markup_Utils::class_attribute( get_comment_class( $this->classes ) );
 	}
 
-	/**
-	 * @return string
-	 */
 	public function get_attrs(): string {
 		$attrs       = $this->attrs;
 		$attrs['id'] = sprintf( 'comment-%d', $this->comment_id );
@@ -82,11 +54,9 @@ class Comment_Controller extends Abstract_Controller {
 		return Markup_Utils::concat_attrs( $attrs );
 	}
 
-	/**
-	 * @return string
-	 */
-	public function get_gravatar() {
+	public function get_gravatar(): string {
 		$gravatar = get_avatar( $this->comment_id, 150 );
+
 		if ( ! $gravatar ) {
 			return '';
 		}
@@ -94,8 +64,9 @@ class Comment_Controller extends Abstract_Controller {
 		return $gravatar;
 	}
 
-	public function get_moderation_message_args() {
+	public function get_moderation_message_args(): array {
 		$status = wp_get_comment_status( $this->comment_id );
+
 		if ( 'unapproved' !== $status ) {
 			return [];
 		}
@@ -117,11 +88,11 @@ class Comment_Controller extends Abstract_Controller {
 			'max_depth'  => $this->max_depth,
 			'before'     => '<p class="comment__action-reply">',
 			'after'      => '</p>',
-		] ) ?: ''; // because WP does not give a consistent return type
+		] ) ?: '';
 	}
 
-	public function get_time( $format = 'c' ): string {
-		return date( $format, get_comment_time( 'U' ) );
+	public function get_time( string $format = 'c' ): string {
+		return get_comment_time( $format );
 	}
 
 	public function get_tag(): string {
@@ -131,6 +102,21 @@ class Comment_Controller extends Abstract_Controller {
 		}
 
 		return $element;
+	}
+
+	protected function defaults(): array {
+		return [
+			self::ATTRS      => [],
+			self::CLASSES    => [],
+			self::COMMENT_ID => 0,
+			self::DEPTH      => 0,
+			self::MAX_DEPTH  => - 1,
+			self::STYLE      => 'ol',
+		];
+	}
+
+	protected function required(): array {
+		return [];
 	}
 
 }

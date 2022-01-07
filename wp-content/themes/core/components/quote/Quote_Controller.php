@@ -9,49 +9,37 @@ use Tribe\Project\Theme\Config\Image_Sizes;
 
 class Quote_Controller extends Abstract_Controller {
 
-	public const CLASSES    = 'classes';
 	public const ATTRS      = 'attrs';
-	public const QUOTE_TEXT = 'quote_text';
+	public const CITE_IMAGE = 'cite_image';
 	public const CITE_NAME  = 'cite_name';
 	public const CITE_TITLE = 'cite_title';
-	public const CITE_IMAGE = 'cite_image';
+	public const CLASSES    = 'classes';
+	public const QUOTE_TEXT = 'quote_text';
+
+	private int $cite_image;
 
 	/**
-	 * @var int|string
+	 * @var string[]
 	 */
-	private $cite_image;
-
-	private array $classes;
 	private array $attrs;
-	private string $quote_text;
+
+	/**
+	 * @var string[]
+	 */
+	private array $classes;
 	private string $cite_name;
 	private string $cite_title;
+	private string $quote_text;
 
 	public function __construct( array $args = [] ) {
-		$args             = $this->parse_args( $args );
-		$this->classes    = (array) $args[ self::CLASSES ];
+		$args = $this->parse_args( $args );
+
 		$this->attrs      = (array) $args[ self::ATTRS ];
-		$this->quote_text = (string) $args[ self::QUOTE_TEXT ];
+		$this->cite_image = (int) $args[ self::CITE_IMAGE ];
 		$this->cite_name  = (string) $args[ self::CITE_NAME ];
 		$this->cite_title = (string) $args[ self::CITE_TITLE ];
-		$this->cite_image = $args[ self::CITE_IMAGE ];
-	}
-
-	protected function defaults(): array {
-		return [
-			self::CLASSES    => [],
-			self::ATTRS      => [],
-			self::QUOTE_TEXT => '',
-			self::CITE_NAME  => '',
-			self::CITE_TITLE => '',
-			self::CITE_IMAGE => null,
-		];
-	}
-
-	protected function required(): array {
-		return [
-			self::CLASSES => [ 'c-quote' ],
-		];
+		$this->classes    = (array) $args[ self::CLASSES ];
+		$this->quote_text = (string) $args[ self::QUOTE_TEXT ];
 	}
 
 	public function get_classes(): string {
@@ -66,7 +54,7 @@ class Quote_Controller extends Abstract_Controller {
 		return ! ( empty( $this->cite_name ) && empty( $this->cite_title ) && empty( $this->cite_image ) );
 	}
 
-	public function get_image_args() {
+	public function get_image_args(): array {
 		if ( empty( $this->cite_image ) ) {
 			return [];
 		}
@@ -80,22 +68,33 @@ class Quote_Controller extends Abstract_Controller {
 		];
 	}
 
-	public function get_quote() {
+	public function get_quote(): string {
 		return $this->quote_text;
 	}
 
-	/**
-	 * @return mixed
-	 */
-	public function get_cite_name() {
+	public function get_cite_name(): string {
 		return $this->cite_name;
 	}
 
-	/**
-	 * @return mixed
-	 */
-	public function get_cite_title() {
+	public function get_cite_title(): string {
 		return $this->cite_title;
+	}
+
+	protected function defaults(): array {
+		return [
+			self::ATTRS      => [],
+			self::CITE_IMAGE => 0,
+			self::CITE_NAME  => '',
+			self::CITE_TITLE => '',
+			self::CLASSES    => [],
+			self::QUOTE_TEXT => '',
+		];
+	}
+
+	protected function required(): array {
+		return [
+			self::CLASSES => [ 'c-quote' ],
+		];
 	}
 
 }

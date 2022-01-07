@@ -9,21 +9,24 @@ Author URI:  http://www.tri.be
 */
 
 // Some hosts do not allow sub-folder WP installs, this check will cover multiple conditions.
-if ( file_exists( ABSPATH . '../vendor/autoload.php' ) ) {
-	// WP subfolder
-	require_once ABSPATH . '../vendor/autoload.php';
-} elseif ( @file_exists( ABSPATH . 'vendor/autoload.php' ) ) {
+$tribe_autoloaders = [
+	// WP sub folder
+	trailingslashit( ABSPATH ) . '../vendor/autoload.php',
 	// WP standard
-	require_once ABSPATH . 'vendor/autoload.php';
-} elseif ( @file_exists( trailingslashit( __DIR__ ) . 'vendor/autoload.php' ) ) {
-	// In core plugin
-	require_once trailingslashit( __DIR__ ) . 'vendor/autoload.php';
+	trailingslashit( ABSPATH ) . 'vendor/autoload.php',
+	// In the core plugin
+	trailingslashit( __DIR__ ) . 'vendor/autoload.php',
+];
+
+foreach ( $tribe_autoloaders as $autoloader ) {
+	if ( file_exists( $autoloader ) ) {
+		require_once $autoloader;
+		break;
+	}
 }
-require_once trailingslashit( __DIR__ ) . 'functions/pluggable.php';
-require_once trailingslashit( __DIR__ ) . 'functions/templates.php';
 
 // Start the core plugin
-add_action( 'plugins_loaded', static function () {
+add_action( 'plugins_loaded', static function (): void {
 	tribe_project()->init( __FILE__ );
 }, 1, 0 );
 
@@ -32,6 +35,6 @@ add_action( 'plugins_loaded', static function () {
  *
  * @return \Tribe\Project\Core
  */
-function tribe_project() {
+function tribe_project(): \Tribe\Project\Core {
 	return \Tribe\Project\Core::instance();
 }

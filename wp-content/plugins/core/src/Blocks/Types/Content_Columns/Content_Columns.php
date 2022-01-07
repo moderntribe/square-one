@@ -35,7 +35,7 @@ class Content_Columns extends Block_Config implements Cta_Field {
 	/**
 	 * Add our block
 	 */
-	public function add_block() {
+	public function add_block(): void {
 		$this->set_block( new Block( self::NAME, [
 			'title'       => __( 'Content Columns', 'tribe' ),
 			'description' => __( 'Blocks of content arranged in a grid', 'tribe' ),
@@ -76,7 +76,7 @@ class Content_Columns extends Block_Config implements Cta_Field {
 	/**
 	 * Add Fields
 	 */
-	protected function add_fields() {
+	protected function add_fields(): void {
 		//==========================================
 		// Content Fields
 		//==========================================

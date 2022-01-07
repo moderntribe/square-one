@@ -2,7 +2,9 @@
 
 use Tribe\Project\Templates\Components\accordion\Accordion_Controller;
 
-// phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
+/**
+ * @var $args
+ */
 $c = Accordion_Controller::factory( $args );
 ?>
 <div <?php echo $c->get_container_classes(); ?>
@@ -24,6 +26,6 @@ $c = Accordion_Controller::factory( $args );
 				<?php echo wp_kses_post( $row->content ); ?>
 			</div>
 		</div>
-		</article>
+	</article>
 	<?php } ?>
 </div>

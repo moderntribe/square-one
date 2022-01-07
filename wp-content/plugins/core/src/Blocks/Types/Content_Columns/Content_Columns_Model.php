@@ -27,6 +27,23 @@ class Content_Columns_Model extends Base_Model {
 	}
 
 	/**
+	 * @return \Tribe\Project\Templates\Models\Content_Column[]
+	 */
+	public function get_rows(): array {
+		$rows = $this->get( Content_Columns::COLUMNS, [] );
+		$data = [];
+		foreach ( $rows as $row ) {
+			$data[] = new Content_Column(
+				$row[ Content_Columns::COLUMN_TITLE ],
+				$row[ Content_Columns::COLUMN_CONTENT ],
+				$this->get_cta_args( (array) $row[ Cta_Field::GROUP_CTA ] ),
+			);
+		}
+
+		return $data;
+	}
+
+	/**
 	 * @return array
 	 */
 	private function get_cta_args( array $cta ): array {
@@ -43,23 +60,6 @@ class Content_Columns_Model extends Base_Model {
 			Link_Controller::ADD_ARIA_LABEL => $cta['add_aria_label'] ?? false,
 			Link_Controller::ARIA_LABEL     => $cta['aria_label'] ?? '',
 		];
-	}
-
-	/**
-	 * @return \Tribe\Project\Templates\Models\Content_Column[]
-	 */
-	public function get_rows(): array {
-		$rows = $this->get( Content_Columns::COLUMNS, [] );
-		$data = [];
-		foreach ( $rows as $row ) {
-			$data[] = new Content_Column(
-				$row[ Content_Columns::COLUMN_TITLE ],
-				$row[ Content_Columns::COLUMN_CONTENT ],
-				$this->get_cta_args( (array) $row[ Cta_Field::GROUP_CTA ] ),
-			);
-		}
-
-		return $data;
 	}
 
 }

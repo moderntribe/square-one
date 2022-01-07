@@ -7,7 +7,7 @@ use Tribe\Project\Templates\Components\image\Image_Controller;
 
 class Index_Controller extends Abstract_Controller {
 
-	public function get_image_args() {
+	public function get_image_args(): array {
 		if ( ! has_post_thumbnail() ) {
 			return [];
 		}

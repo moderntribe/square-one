@@ -1,11 +1,10 @@
 <?php declare(strict_types=1);
 
-use \Tribe\Project\Templates\Components\share\Share_Controller;
+use Tribe\Project\Templates\Components\share\Share_Controller;
 
 /**
  * @var array $args Arguments passed to the template
  */
-// phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
 $c = Share_Controller::factory( $args );
 ?>
 <div class="social-share">

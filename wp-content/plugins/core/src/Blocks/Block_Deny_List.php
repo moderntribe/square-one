@@ -10,7 +10,7 @@ namespace Tribe\Project\Blocks;
 class Block_Deny_List {
 
 	/**
-	 * @var array A list of blocks types to disable
+	 * @var string[] A list of blocks types to disable
 	 */
 	private array $denylist;
 

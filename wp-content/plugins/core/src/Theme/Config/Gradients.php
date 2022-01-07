@@ -2,12 +2,15 @@
 
 namespace Tribe\Project\Theme\Config;
 
+/**
+ * @TODO rename this to a proper class name.
+ */
 class Gradients {
 
 	/**
-	 * @var array
+	 * @var string[][]
 	 */
-	private $gradients;
+	private array $gradients;
 
 	/**
 	 * Colors constructor.
@@ -25,7 +28,7 @@ class Gradients {
 	/**
 	 * Get a list of gradient options.
 	 *
-	 * @return array
+	 * @return string[][]
 	 */
 	public function get_gradients(): array {
 		return $this->gradients;
@@ -47,7 +50,7 @@ class Gradients {
 	 *
 	 * This is the format expected by the block editor.
 	 *
-	 * @return array
+	 * @return string[]
 	 *
 	 * @see https://developer.wordpress.org/block-editor/developers/themes/theme-support/#block-gradient-presets
 	 */

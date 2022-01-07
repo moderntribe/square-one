@@ -1,13 +1,11 @@
 <?php declare(strict_types=1);
 
-use \Tribe\Project\Templates\Components\section_nav\Section_Nav_Controller;
+use Tribe\Project\Templates\Components\section_nav\Section_Nav_Controller;
 
 /**
  * @var array $args Arguments passed to the template
  */
-// phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
 $c = Section_Nav_Controller::factory( $args );
-
 ?>
 <div <?php echo $c->get_classes(); ?> <?php echo $c->get_attrs(); ?>>
 

@@ -5,7 +5,6 @@ use Tribe\Project\Templates\Components\container\Container_Controller;
 /**
  * @var array $args Arguments passed to the template
  */
-// phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
 $c       = Container_Controller::factory( $args );
 $content = $c->get_content();
 if ( empty( $content ) ) {

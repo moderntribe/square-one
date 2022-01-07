@@ -5,7 +5,6 @@ use Tribe\Project\Templates\Components\image\Image_Controller;
 /**
  * @var array $args Arguments passed to the template
  */
-// phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
 $c = Image_Controller::factory( $args );
 ?>
 

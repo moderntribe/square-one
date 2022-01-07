@@ -21,33 +21,33 @@ class Admin_Subscriber extends Abstract_Subscriber {
 		$this->editor_formats();
 	}
 
-	private function editor_styles() {
+	private function editor_styles(): void {
 		add_filter( 'block_editor_settings', function ( $settings ) {
-			return $this->container->get( Editor_Styles::class )->remove_core_block_editor_styles( $settings );
+			return $this->container->get( Editor_Styles::class )->remove_core_block_editor_styles( (array) $settings );
 		}, 10, 1 );
-		add_action( 'enqueue_block_editor_assets', function () {
+		add_action( 'enqueue_block_editor_assets', function (): void {
 			$this->container->get( Editor_Styles::class )->enqueue_block_editor_styles();
 		}, 10, 0 );
 		add_filter( 'tiny_mce_before_init', function ( $settings ) {
-			return $this->container->get( Editor_Styles::class )->mce_editor_body_class( $settings );
+			return $this->container->get( Editor_Styles::class )->mce_editor_body_class( (array) $settings );
 		}, 10, 1 );
 		add_action( 'admin_init', function () {
 			return $this->container->get( Editor_Styles::class )->enqueue_mce_editor_styles();
 		}, 10, 1 );
 	}
 
-	private function editor_formats() {
+	private function editor_formats(): void {
 		add_filter( 'teeny_mce_buttons', function ( $buttons, $editor_id ) {
-			return $this->container->get( Classic_Editor_Formats::class )->teeny_mce_buttons( $buttons, $editor_id );
+			return $this->container->get( Classic_Editor_Formats::class )->teeny_mce_buttons( (array) $buttons, (string) $editor_id );
 		}, 10, 2 );
 		add_filter( 'mce_buttons', function ( $settings ) {
-			return $this->container->get( Classic_Editor_Formats::class )->mce_buttons( $settings );
+			return $this->container->get( Classic_Editor_Formats::class )->mce_buttons( (array) $settings );
 		}, 10, 1 );
 		add_filter( 'tiny_mce_before_init', function ( $settings ) {
-			return $this->container->get( Classic_Editor_Formats::class )->visual_editor_styles_dropdown( $settings );
+			return $this->container->get( Classic_Editor_Formats::class )->visual_editor_styles_dropdown( (array) $settings );
 		}, 10, 1 );
 		add_filter( 'acf/fields/wysiwyg/toolbars', function ( $toolbars ) {
-			return $this->container->get( Classic_Editor_Formats::class )->add_minimal_toolbar( $toolbars );
+			return $this->container->get( Classic_Editor_Formats::class )->add_minimal_toolbar( (array) $toolbars );
 		}, 10, 1 );
 	}
 

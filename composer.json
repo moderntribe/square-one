@@ -69,7 +69,7 @@
       "type": "package",
       "package": {
         "name": "advanced-custom-fields/advanced-custom-fields-pro",
-        "version": "5.10.2",
+        "version": "5.11.4",
         "type": "wordpress-plugin",
         "dist": {
           "type": "zip",
@@ -89,7 +89,7 @@
     "guzzlehttp/psr7": "^1.4",
     "humanmade/s3-uploads": "2.2.1",
     "johnbillion/extended-cpts": "^4.0",
-    "johnpbloch/wordpress-core": "5.7.3",
+    "johnpbloch/wordpress-core": "5.8.3",
     "johnpbloch/wordpress-core-installer": "2.0.*",
     "mailgun/mailgun-php": "^2.8",
     "msawicki/acf-menu-chooser": "dev-master",
@@ -110,9 +110,9 @@
     "wpackagist-plugin/posts-to-posts": "1.6.6",
     "wpackagist-plugin/redirection": "5.1.3",
     "wpackagist-plugin/regenerate-thumbnails": "3.1.5",
-    "wpackagist-plugin/the-events-calendar": "5.10.1",
+    "wpackagist-plugin/the-events-calendar": "5.12.2",
     "wpackagist-plugin/user-switching": "1.5.8",
-    "wpackagist-plugin/wordpress-seo": "17.5",
+    "wpackagist-plugin/wordpress-seo": "17.8",
     "wpackagist-plugin/wp-tota11y": "1.2.0"
   },
   "require-dev": {
@@ -129,7 +129,7 @@
     "lucatume/function-mocker": "~1.0",
     "lucatume/wp-browser": "^3.0.9",
     "mockery/mockery": "^1.3",
-    "moderntribe/coding-standards": "^1.0",
+    "moderntribe/coding-standards": "^2.0",
     "php-http/httplug": "^1.1",
     "phpunit/phpunit": "^8.0 || ^9.0 <9.5",
     "wp-cli/wp-cli": "^2.5.0"
@@ -149,7 +149,11 @@
       "Tribe\\Project\\": "wp-content/plugins/core/src",
       "Tribe\\Project\\Templates\\Routes\\": "wp-content/themes/core/routes",
       "Tribe\\Project\\Templates\\Components\\": "wp-content/themes/core/components"
-    }
+    },
+    "files": [
+      "wp-content/plugins/core/functions/pluggable.php",
+      "wp-content/plugins/core/functions/templates.php"
+    ]
   },
   "autoload-dev": {
     "psr-4": {

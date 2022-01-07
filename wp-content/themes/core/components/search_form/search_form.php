@@ -1,11 +1,10 @@
 <?php declare(strict_types=1);
 
-use \Tribe\Project\Templates\Components\search_form\Search_Form_Controller;
+use Tribe\Project\Templates\Components\search_form\Search_Form_Controller;
 
 /**
  * @var array $args Arguments passed to the template
  */
-// phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
 $c = Search_Form_Controller::factory( $args );
 ?>
 

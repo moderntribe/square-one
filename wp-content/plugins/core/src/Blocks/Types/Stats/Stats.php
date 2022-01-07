@@ -39,7 +39,7 @@ class Stats extends Block_Config implements Cta_Field {
 	public const ROW_VALUE     = 'row_value';
 	public const ROW_LABEL     = 'row_label';
 
-	public function add_block() {
+	public function add_block(): void {
 		$this->set_block( new Block( self::NAME, [
 			'title'       => esc_html__( 'Stats', 'tribe' ),
 			'description' => esc_html__( 'Useful for showing various stats/numbers with sub-text', 'tribe' ),
@@ -92,7 +92,7 @@ class Stats extends Block_Config implements Cta_Field {
 		] ) );
 	}
 
-	public function add_fields() {
+	public function add_fields(): void {
 		$this->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
 					 'label'       => esc_html__( 'Lead in', 'tribe' ),
 					 'name'        => self::LEAD_IN,

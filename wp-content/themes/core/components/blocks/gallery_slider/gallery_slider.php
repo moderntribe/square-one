@@ -1,10 +1,11 @@
 <?php declare(strict_types=1);
 
+use Tribe\Project\Templates\Components\blocks\gallery_slider\Gallery_Slider_Controller;
+
 /**
  * @var array $args Arguments passed to the template
  */
-// phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
-$c = \Tribe\Project\Templates\Components\blocks\gallery_slider\Gallery_Slider_Controller::factory( $args );
+$c = Gallery_Slider_Controller::factory( $args );
 ?>
 
 <section <?php echo $c->get_classes(); ?> <?php echo $c->get_attributes(); ?>>

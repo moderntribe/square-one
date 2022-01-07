@@ -6,7 +6,6 @@ use Tribe\Project\Templates\Components\blocks\card_grid\Card_Grid_Controller;
 /**
  * @var array $args Arguments passed to the template
  */
-// phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
 $c = Card_Grid_Controller::factory( $args );
 ?>
 

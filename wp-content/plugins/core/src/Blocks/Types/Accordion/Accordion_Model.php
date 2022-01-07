@@ -10,9 +10,6 @@ use Tribe\Project\Templates\Models\Accordion_Row;
 
 class Accordion_Model extends Base_Model {
 
-	/**
-	 * @return array
-	 */
 	public function get_data(): array {
 		return [
 			Accordion_Block_Controller::ATTRS       => $this->get_attrs(),
@@ -26,9 +23,16 @@ class Accordion_Model extends Base_Model {
 		];
 	}
 
-	/**
-	 * @return array
-	 */
+	public function get_accordion_rows(): array {
+		$rows = $this->get( Accordion::ACCORDION, [] );
+		$data = [];
+		foreach ( $rows as $row ) {
+			$data[] = new Accordion_Row( $row[ Accordion::ROW_HEADER ], $row[ Accordion::ROW_CONTENT ] );
+		}
+
+		return $data;
+	}
+
 	private function get_cta_args(): array {
 		$cta  = $this->get( Cta_Field::GROUP_CTA, [] );
 		$link = wp_parse_args( $cta['link'] ?? [], [
@@ -44,19 +48,6 @@ class Accordion_Model extends Base_Model {
 			Link_Controller::ADD_ARIA_LABEL => $cta['add_aria_label'] ?? false,
 			Link_Controller::ARIA_LABEL     => $cta['aria_label'] ?? '',
 		];
-	}
-
-	/**
-	 * @return array
-	 */
-	public function get_accordion_rows(): array {
-		$rows = $this->get( Accordion::ACCORDION, [] );
-		$data = [];
-		foreach ( $rows as $row ) {
-			$data[] = new Accordion_Row( $row[ Accordion::ROW_HEADER ], $row[ Accordion::ROW_CONTENT ] );
-		}
-
-		return $data;
 	}
 
 }

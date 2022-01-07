@@ -16,100 +16,86 @@ use Tribe\Project\Theme\Config\Image_Sizes;
 
 class Content_Loop_Controller extends Abstract_Controller {
 
-	public const CLASSES           = 'classes';
 	public const ATTRS             = 'attrs';
+	public const CLASSES           = 'classes';
 	public const CONTAINER_CLASSES = 'container_classes';
 	public const CONTENT_CLASSES   = 'content_classes';
-	public const TITLE             = 'title';
-	public const LEADIN            = 'leadin';
-	public const DESCRIPTION       = 'description';
 	public const CTA               = 'cta';
-	public const POSTS             = 'posts';
+	public const DESCRIPTION       = 'description';
 	public const LAYOUT            = 'layout';
+	public const LEADIN            = 'leadin';
+	public const POSTS             = 'posts';
+	public const TITLE             = 'title';
 
-	private array $classes;
+	/**
+	 * @var string[]
+	 */
 	private array $attrs;
+
+	/**
+	 * @var string[]
+	 */
+	private array $classes;
+
+	/**
+	 * @var string[]
+	 */
 	private array $container_classes;
+
+	/**
+	 * @var string[]
+	 */
 	private array $content_classes;
-	private string $title;
-	private string $leadin;
-	private string $description;
+
+	/**
+	 * @var string[]
+	 */
 	private array $cta;
+
+	/**
+	 * @var array<string, mixed>
+	 *
+	 * @see \Tribe\ACF_Post_List\Post_List_Field::format_post()
+	 */
 	private array $posts;
+	private string $description;
 	private string $layout;
+	private string $leadin;
+	private string $title;
 
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
 
-		$this->classes           = (array) $args[ self::CLASSES ];
 		$this->attrs             = (array) $args[ self::ATTRS ];
+		$this->classes           = (array) $args[ self::CLASSES ];
 		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
-		$this->title             = (string) $args[ self::TITLE ];
-		$this->leadin            = (string) $args[ self::LEADIN ];
-		$this->description       = (string) $args[ self::DESCRIPTION ];
-		$this->cta               = (array) $args[ self::CTA ];
 		$this->content_classes   = (array) $args[ self::CONTENT_CLASSES ];
-		$this->posts             = (array) $args[ self::POSTS ];
+		$this->cta               = (array) $args[ self::CTA ];
+		$this->description       = (string) $args[ self::DESCRIPTION ];
 		$this->layout            = (string) $args[ self::LAYOUT ];
+		$this->leadin            = (string) $args[ self::LEADIN ];
+		$this->posts             = (array) $args[ self::POSTS ];
+		$this->title             = (string) $args[ self::TITLE ];
 	}
 
-	protected function defaults(): array {
-		return [
-			self::CLASSES           => [],
-			self::ATTRS             => [],
-			self::CONTAINER_CLASSES => [],
-			self::CONTENT_CLASSES   => [],
-			self::TITLE             => '',
-			self::LEADIN            => '',
-			self::DESCRIPTION       => '',
-			self::CTA               => [],
-			self::POSTS             => [],
-			self::LAYOUT            => Content_Loop_Block::LAYOUT_ROW,
-		];
-	}
-
-	protected function required(): array {
-		return [
-			self::CLASSES           => [ 'c-block', 'b-content-loop' ],
-			self::CONTAINER_CLASSES => [ 'l-container' ],
-		];
-	}
-
-	/**
-	 * @return string
-	 */
 	public function get_classes(): string {
 		$this->classes[] = 'b-content-loop--' . $this->layout;
 
 		return Markup_Utils::class_attribute( $this->classes );
 	}
 
-	/**
-	 * @return string
-	 */
 	public function get_attrs(): string {
 		return Markup_Utils::concat_attrs( $this->attrs );
 	}
 
-	/**
-	 * @return string
-	 */
 	public function get_container_classes(): string {
 		return Markup_Utils::class_attribute( $this->container_classes );
 	}
 
-	/**
-	 * @return string
-	 */
 	public function get_layout(): string {
 		return $this->layout;
 	}
 
-	/**
-	 * @param string $layout
-	 *
-	 * @return array
-	 */
 	public function get_posts_card_args( string $layout = Card_Controller::STYLE_PLAIN ): array {
 		$cards = [];
 		foreach ( $this->posts as $post ) {
@@ -117,7 +103,6 @@ class Content_Loop_Controller extends Abstract_Controller {
 			$uuid             = uniqid( 'p-' );
 			$cat              = get_the_category( $post['post_id'] );
 			$card_description = [];
-			$card_cta         = [];
 
 			$image_array = [
 				Image_Controller::IMG_ID       => $post['image_id'],
@@ -149,7 +134,7 @@ class Content_Loop_Controller extends Abstract_Controller {
 				];
 
 			// CASE: If not Inline Card Style and is the featured layout
-			
+
 			if ( $layout !== Card_Controller::STYLE_INLINE || $this->layout !== 'layout_feature' ) {
 				$card_cta =
 					[
@@ -221,9 +206,6 @@ class Content_Loop_Controller extends Abstract_Controller {
 		return $cards;
 	}
 
-	/**
-	 * @return array
-	 */
 	public function get_header_args(): array {
 		if ( empty( $this->title ) && empty( $this->description ) ) {
 			return [];
@@ -240,6 +222,69 @@ class Content_Loop_Controller extends Abstract_Controller {
 				'c-block__header',
 				'b-content-loop__header',
 			],
+		];
+	}
+
+	/**
+	 * @return \Tribe\Project\Templates\Components\Deferred_Component
+	 */
+	public function get_cta(): Deferred_Component {
+		$cta = wp_parse_args( $this->cta, [
+			'content'        => '',
+			'url'            => '',
+			'target'         => '',
+			'add_aria_label' => false,
+			'aria_label'     => '',
+		] );
+
+		return defer_template_part( 'components/link/link', null, [
+			Link_Controller::URL            => $cta['url'],
+			Link_Controller::CONTENT        => $cta['content'] ?: $cta['url'],
+			Link_Controller::TARGET         => $cta['target'],
+			Link_Controller::ADD_ARIA_LABEL => $cta['add_aria_label'],
+			Link_Controller::ARIA_LABEL     => $cta['aria_label'],
+			Link_Controller::CLASSES        => [
+				'c-block__cta-link',
+				'a-btn',
+				'a-btn--has-icon-after',
+				'icon-arrow-right',
+			],
+		] );
+	}
+
+	public function get_content_classes(): string {
+		$this->content_classes[] = 'g-2-up';
+
+		if ( $this->layout === Content_Loop_Block::LAYOUT_ROW ) {
+			$this->content_classes[] = '';
+		}
+
+		elseif ( $this->layout === Content_Loop_Block::LAYOUT_COLUMNS ) {
+			$this->content_classes[] = 'g-3-up';
+		}
+
+		return Markup_Utils::class_attribute( $this->content_classes );
+	}
+
+	protected function defaults(): array {
+		return [
+			self::ATTRS             => [],
+			self::CLASSES           => [],
+			self::CONTAINER_CLASSES => [],
+			self::CONTENT_CLASSES   => [],
+			self::CTA               => [],
+			self::DESCRIPTION       => '',
+			self::LAYOUT            => Content_Loop_Block::LAYOUT_ROW,
+			self::LEADIN            => '',
+			self::POSTS             => [],
+			self::TITLE             => '',
+		];
+	}
+
+	protected function required(): array {
+		return [
+			self::CLASSES           => [ 'c-block', 'b-content-loop' ],
+			self::CONTAINER_CLASSES => [ 'l-container' ],
 		];
 	}
 
@@ -284,50 +329,6 @@ class Content_Loop_Controller extends Abstract_Controller {
 			],
 			Container_Controller::CONTENT => $this->description ?? '',
 		] );
-	}
-
-	/**
-	 * @return \Tribe\Project\Templates\Components\Deferred_Component
-	 */
-	public function get_cta(): Deferred_Component {
-		$cta = wp_parse_args( $this->cta, [
-			'content'        => '',
-			'url'            => '',
-			'target'         => '',
-			'add_aria_label' => false,
-			'aria_label'     => '',
-		] );
-
-		return defer_template_part( 'components/link/link', null, [
-			Link_Controller::URL            => $cta['url'],
-			Link_Controller::CONTENT        => $cta['content'] ?: $cta['url'],
-			Link_Controller::TARGET         => $cta['target'],
-			Link_Controller::ADD_ARIA_LABEL => $cta['add_aria_label'],
-			Link_Controller::ARIA_LABEL     => $cta['aria_label'],
-			Link_Controller::CLASSES        => [
-				'c-block__cta-link',
-				'a-btn',
-				'a-btn--has-icon-after',
-				'icon-arrow-right',
-			],
-		] );
-	}
-
-	/**
-	 * @return string
-	 */
-	public function get_content_classes(): string {
-		$this->content_classes[] = 'g-2-up';
-
-		if ( $this->layout === Content_Loop_Block::LAYOUT_ROW ) {
-			$this->content_classes[] = '';
-		}
-
-		elseif ( $this->layout === Content_Loop_Block::LAYOUT_COLUMNS ) {
-			$this->content_classes[] = 'g-3-up';
-		}
-		
-		return Markup_Utils::class_attribute( $this->content_classes );
 	}
 
 }

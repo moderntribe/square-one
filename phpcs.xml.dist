@@ -24,6 +24,7 @@
     <exclude-pattern>*-config.php</exclude-pattern>
     <exclude-pattern>*vendor/</exclude-pattern>
     <exclude-pattern>*tests/*</exclude-pattern>
+    <exclude-pattern>*.twig</exclude-pattern>
     <exclude-pattern>*webpack/</exclude-pattern>
 
     <!-- Include the Modern Tribe coding standard -->

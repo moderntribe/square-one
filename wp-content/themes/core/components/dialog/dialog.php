@@ -7,7 +7,7 @@ use Tribe\Project\Templates\Components\dialog\Dialog_Controller;
 *
 * Description: A component that adds a Dialog to the page and allows for custom content to be placed inside
 *
-* Requirements: 
+* Requirements:
 * - An external button that has a data-js attribute of dialog-trigger
 * - The external button also needs a data-content attribute of 'dialog-content-" + a unique id
 * - The unique ID will also be passed to this dialog component
@@ -19,7 +19,6 @@ use Tribe\Project\Templates\Components\dialog\Dialog_Controller;
 /**
  * @var array $args Arguments passed to the template
  */
-// phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
 $c       = Dialog_Controller::factory( $args );
 $content = $c->get_content();
 

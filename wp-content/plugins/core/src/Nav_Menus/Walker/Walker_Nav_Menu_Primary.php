@@ -3,6 +3,7 @@
 namespace Tribe\Project\Nav_Menus\Walker;
 
 use Tribe\Libs\Utils\Markup_Utils;
+use Walker_Nav_Menu;
 
 /**
  * Class Walker_Nav_Menu_Primary
@@ -11,10 +12,10 @@ use Tribe\Libs\Utils\Markup_Utils;
  *
  * @package Tribe\Project\Nav
  */
-class Walker_Nav_Menu_Primary extends \Walker_Nav_Menu {
+class Walker_Nav_Menu_Primary extends Walker_Nav_Menu {
 
 	// Capture our parent item for a sub-menu
-	private $current_item;
+	private object $current_item;
 
 	/**
 	 * Starts the list before the elements are added.
@@ -29,7 +30,7 @@ class Walker_Nav_Menu_Primary extends \Walker_Nav_Menu {
 	 *
 	 * @since 3.0.0
 	 */
-	public function start_lvl( &$output, $depth = 0, $args = [] ) {
+	public function start_lvl( &$output, $depth = 0, $args = [] ): void {
 
 		/*
 		 *  WP Core docs claim that $args is an array, but it comes
@@ -66,7 +67,7 @@ class Walker_Nav_Menu_Primary extends \Walker_Nav_Menu {
 	 * @since 3.0.0
 	 * @since 4.4.0 The {@see 'nav_menu_item_args'} filter was added.
 	 */
-	public function start_el( &$output, $item, $depth = 0, $args = [], $id = 0 ) {
+	public function start_el( &$output, $item, $depth = 0, $args = [], $id = 0 ): void {
 
 		// Setup our parent item
 		$this->current_item = $item;

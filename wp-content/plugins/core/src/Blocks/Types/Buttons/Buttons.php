@@ -23,7 +23,7 @@ class Buttons extends Block_Config implements Cta_Field {
 	public const STYLE_SECONDARY = 'secondary';
 	public const STYLE_CTA       = 'cta';
 
-	public function add_block() {
+	public function add_block(): void {
 		$this->set_block( new Block( self::NAME, [
 			'title'       => __( 'Buttons', 'tribe' ),
 			'description' => __( 'One or more links styled to look like buttons.', 'tribe' ),
@@ -63,7 +63,7 @@ class Buttons extends Block_Config implements Cta_Field {
 		] ) );
 	}
 
-	public function add_fields() {
+	public function add_fields(): void {
 		$this->add_field(
 			$this->get_links_section()
 		);
@@ -72,7 +72,7 @@ class Buttons extends Block_Config implements Cta_Field {
 	/**
 	 * @return \Tribe\Libs\ACF\Repeater
 	 */
-	protected function get_links_section() {
+	protected function get_links_section(): \Tribe\Libs\ACF\Repeater {
 		$group = new Repeater( self::NAME . '_' . self::BUTTONS );
 
 		$group->set_attributes( [

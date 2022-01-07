@@ -1,15 +1,13 @@
 <?php declare(strict_types=1);
 
-use \Tribe\Project\Templates\Components\quote\Quote_Controller;
+use Tribe\Project\Templates\Components\quote\Quote_Controller;
 
 /**
  * @var array $args Arguments passed to the template
  */
-// phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
 $c = Quote_Controller::factory( $args );
 
 // TODO: Convert the hard-coded quote `h2` to a text component.
-
 ?>
 
 <blockquote <?php echo $c->get_classes(); ?> <?php echo $c->get_attrs(); ?>>

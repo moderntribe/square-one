@@ -10,12 +10,23 @@ use Tribe\Project\Templates\Components\Abstract_Controller;
 
 class Header_Navigation_Controller extends Abstract_Controller {
 
-	public const CLASSES          = 'classes';
 	public const ATTRS            = 'attrs';
+	public const CLASSES          = 'classes';
 	public const NAV_LIST_CLASSES = 'nav_list_classes';
 
-	private array $classes;
+	/**
+	 * @var string[]
+	 */
 	private array $attrs;
+
+	/**
+	 * @var string[]
+	 */
+	private array $classes;
+
+	/**
+	 * @var string[]
+	 */
 	private array $nav_list_classes;
 	private string $location;
 
@@ -26,20 +37,6 @@ class Header_Navigation_Controller extends Abstract_Controller {
 		$this->attrs            = (array) $args[ self::ATTRS ];
 		$this->nav_list_classes = (array) $args[ self::NAV_LIST_CLASSES ];
 		$this->location         = Nav_Menus_Definer::PRIMARY;
-	}
-
-	protected function defaults(): array {
-		return [
-			self::CLASSES          => [ 'site-header__nav' ],
-			self::ATTRS            => [
-				'aria-label' => esc_html__( 'Primary Navigation', 'tribe' ),
-			],
-			self::NAV_LIST_CLASSES => [ 'site-header__nav-list' ],
-		];
-	}
-
-	protected function required(): array {
-		return [];
 	}
 
 	public function has_menu(): bool {
@@ -72,6 +69,20 @@ class Header_Navigation_Controller extends Abstract_Controller {
 		];
 
 		return Menu::menu( $args );
+	}
+
+	protected function defaults(): array {
+		return [
+			self::CLASSES          => [ 'site-header__nav' ],
+			self::ATTRS            => [
+				'aria-label' => esc_html__( 'Primary Navigation', 'tribe' ),
+			],
+			self::NAV_LIST_CLASSES => [ 'site-header__nav-list' ],
+		];
+	}
+
+	protected function required(): array {
+		return [];
 	}
 
 }

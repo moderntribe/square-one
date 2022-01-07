@@ -56,9 +56,9 @@ class Form_Styles {
 	 *
 	 * @filter gform_pre_render
 	 */
-	public function deactivate_gf_animations( $form = [] ) {
+	public function deactivate_gf_animations( array $form = [] ): array {
 
-		if ( isset( $form['enableAnimation'] ) && $form['enableAnimation'] == true ) {
+		if ( isset( $form['enableAnimation'] ) && $form['enableAnimation'] === true ) {
 			$form['enableAnimation'] = false;
 		}
 

@@ -4,15 +4,9 @@ namespace Tribe\Project\Templates\Models;
 
 class Accordion_Row {
 
-	/**
-	 * @var string
-	 */
-	public $header_text;
+	public string $header_text;
 
-	/**
-	 * @var string
-	 */
-	public $content;
+	public string $content;
 
 	/**
 	 * Accordion_Row constructor.

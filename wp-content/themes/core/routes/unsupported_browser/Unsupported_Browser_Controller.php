@@ -7,10 +7,7 @@ use Tribe\Project\Templates\Components\Abstract_Controller;
 
 class Unsupported_Browser_Controller extends Abstract_Controller {
 
-	/**
-	 * @var \Tribe\Project\Assets\Theme\Theme_Build_Parser
-	 */
-	private $build_parser;
+	private Theme_Build_Parser $build_parser;
 
 	public function __construct( Theme_Build_Parser $build_parser ) {
 		$this->build_parser = $build_parser;
@@ -24,7 +21,7 @@ class Unsupported_Browser_Controller extends Abstract_Controller {
 		return ob_get_clean();
 	}
 
-	public function get_legacy_image_url( $filename ): string {
+	public function get_legacy_image_url( string $filename ): string {
 		if ( empty( $filename ) ) {
 			return '';
 		}

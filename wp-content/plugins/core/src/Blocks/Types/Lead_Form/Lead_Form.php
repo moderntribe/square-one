@@ -38,7 +38,7 @@ class Lead_Form extends Block_Config implements Cta_Field {
 	/**
 	 * Register the block
 	 */
-	public function add_block() {
+	public function add_block(): void {
 		$this->set_block( new Block( self::NAME, [
 			'title'       => __( 'Lead Form', 'tribe' ),
 			'description' => __( 'A block with a form selector for a newsletter/lead form.', 'tribe' ),
@@ -76,7 +76,7 @@ class Lead_Form extends Block_Config implements Cta_Field {
 	/**
 	 * Register Fields for block
 	 */
-	public function add_fields() {
+	public function add_fields(): void {
 		$this->add_field(
 			new Field( self::NAME . '_' . self::WIDTH, [
 				'type'          => 'button_group',

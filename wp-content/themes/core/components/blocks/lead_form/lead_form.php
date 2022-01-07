@@ -5,7 +5,6 @@ use Tribe\Project\Templates\Components\blocks\lead_form\Lead_Form_Block_Controll
 /**
  * @var array $args Arguments passed to the template
  */
-// phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
 $c = Lead_Form_Block_Controller::factory( $args );
 ?>
 

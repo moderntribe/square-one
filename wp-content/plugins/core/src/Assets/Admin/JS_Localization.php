@@ -11,12 +11,10 @@ class JS_Localization {
 	 *
 	 * @return array
 	 */
-	public function get_data() {
-		$js_i18n_array = [
+	public function get_data(): array {
+		return [
 
 		];
-
-		return $js_i18n_array;
 	}
 
 }

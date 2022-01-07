@@ -1,8 +1,9 @@
 <?php declare(strict_types=1);
 
+use Tribe\Project\Blocks\Types\Gallery_Slider\Gallery_Slider_Model;
+
 /**
- * @var array $args Arguments passed to the template
+ * @var array $args ACF block data..
  */
-// phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
-$model = new \Tribe\Project\Blocks\Types\Gallery_Slider\Gallery_Slider_Model( $args['block'] );
+$model = new Gallery_Slider_Model( $args['block'] );
 get_template_part( 'components/blocks/gallery_slider/gallery_slider', null, $model->get_data() );

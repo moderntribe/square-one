@@ -24,7 +24,7 @@ class Spacer extends Block_Config {
 	/**
 	 * Register the block
 	 */
-	public function add_block() {
+	public function add_block(): void {
 		$this->set_block( new Block( self::NAME, [
 			'title'       => __( 'Spacer', 'tribe' ),
 			'description' => __( 'Add space between blocks.', 'tribe' ),
@@ -50,7 +50,7 @@ class Spacer extends Block_Config {
 	/**
 	 * Register Fields for block
 	 */
-	public function add_fields() {
+	public function add_fields(): void {
 		$this->add_field( new Field( self::NAME . '_' . self::SIZE, [
 			'label'         => __( 'Appearance', 'tribe' ),
 			'name'          => self::SIZE,
