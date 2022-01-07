@@ -17,54 +17,22 @@ jobs:
       app_name: sq1
     secrets:
       github_pat_token: ${{ secrets.GH_BOT_TOKEN }}
-      server: "dokku01"
+      server: ${{ secrets.TEST_DOMAIN }}
 
 
   deploy_review_app:
-    runs-on: ubuntu-latest
     if: (github.event_name == 'pull_request' && github.event.action == 'opened' || github.event.action == 'synchronize')
-    steps:
-      - name: Cloning repo for Pull Requests
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-          ref: ${{ github.event.pull_request.head.ref }}
-
-      - name: Set common variables
-        uses: moderntribe/actions/utils/common-variables@v1
-        with:
-          base_branch: ${{ github.event.pull_request.head.ref }}
-
-      - name: Setup SSH
-        uses: moderntribe/actions/utils/ssh-agent@v1
-        with:
-          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-          server: "${{ env.SERVER }}"
-
-      - name: Build Node
-        uses: moderntribe/actions/square1/build-node@v1
-
-      - name: Commit Files Node Files
-        uses: moderntribe/actions/utils/commit-files@v1
-        with:
-          folder: ./wp-content/
-
-      - name: Deploy to ${{ env.REVIEW_APP }}
-        uses: moderntribe/actions/deploy/gitdeploy@v1
-        with:
-          git_url: "dokku@${{ env.SERVER }}:${{ env.REVIEW_APP }}"
-          branch: ${{ env.BRANCH }}
-
-      - name: Slack Notification
-        if: success()|| failure() || cancelled()
-        uses: moderntribe/actions/utils/slack-message-deploy@v1
-        with:
-          branch: ${{ env.BRANCH }}
-          environment: ${{ env.REVIEW_APP }}
-          slack_webhook_url: ${{ secrets.SLACK_WEBHOOK }}
-          app_url: "${{ env.REVIEW_APP }}.${{ env.SERVER }}"
-          gha_url: ${{ env.GHA_URL }}
-          status: ${{ job.status }}
+    uses: moderntribe/actions/.github/workflows/create-review-app.yml@review_app_workflow
+    with:
+      # workflows don't support env
+      app_name: sq1
+      branch: ${{ github.event.pull_request.head.ref }}
+      is_review_app: true
+    secrets:
+      github_pat_token: ${{ secrets.GH_BOT_TOKEN }}
+      server: ${{ secrets.TEST_DOMAIN }}
+      ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+      slack_webhook: ${{ secrets.SLACK_WEBHOOK }}
 
   destroy_review_app:
     # only run when a pull request is closed
