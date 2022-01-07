@@ -15,27 +15,9 @@ jobs:
     with:
       # workflows don't support env
       app_name: sq1
-    secrets:
-      github_pat_token: ${{ secrets.TEST_DOMAIN }}
       server: ${{ secrets.TEST_DOMAIN }}
-
-
-    # runs-on: ubuntu-latest
-    # if: (github.event_name == 'pull_request' && github.event.action == 'opened' || github.event.action == 'synchronize')
-    # steps:
-    #   - name: Set common variables
-    #     uses: moderntribe/actions/utils/common-variables@v1
-    #     with:
-    #       base_branch: ${{ github.event.pull_request.head.ref }}
-
-    #   - name: Create review app ${{ env.REVIEW_APP }}
-    #     uses: moderntribe/actions/dokku/create-review-app@v1
-    #     with:
-    #       app_name: ${{ env.APPNAME }}
-    #       review_app_name: ${{ env.REVIEW_APP }}
-    #       server: ${{ env.SERVER }}
-    #       github_pat_token: ${{ secrets.GH_BOT_TOKEN }}
-    #       gha_url: ${{ env.GHA_URL }}
+    secrets:
+      github_pat_token: ${{ secrets.GH_BOT_TOKEN }}
 
   deploy_review_app:
     runs-on: ubuntu-latest
@@ -84,29 +66,12 @@ jobs:
           status: ${{ job.status }}
 
   destroy_review_app:
-    runs-on: ubuntu-latest
     # only run when a pull request is closed
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
-    steps:
-      - name: Set common variables
-        uses: moderntribe/actions/utils/common-variables@v1
-
-      - name: Delete review app ${{ env.REVIEW_APP }}
-        uses: moderntribe/actions/dokku/delete-review-app@v1
-        with:
-          app_name: ${{ env.APPNAME }}
-          review_app_name: ${{ env.REVIEW_APP }}
-          server: ${{ env.SERVER }}
-          github_pat_token: ${{ secrets.GH_BOT_TOKEN }}
-          gha_url: ${{ env.GHA_URL }}
-
-      - name: Slack Notification
-        if: failure()
-        uses: moderntribe/actions/utils/slack-message-deploy@v1
-        with:
-          branch: ${{ env.BRANCH }}
-          environment: ${{ env.REVIEW_APP }}
-          slack_webhook_url: ${{ secrets.SLACK_WEBHOOK }}
-          app_url: "${{ env.REVIEW_APP }}.${{ env.SERVER }}"
-          gha_url: ${{ env.GHA_URL }}
-          status: ${{ job.status }}
+    uses: moderntribe/actions/.github/workflows/delete-review-app.yml@review_app_workflow
+    with:
+      # workflows don't support env
+      app_name: sq1
+      server: ${{ secrets.TEST_DOMAIN }}
+    secrets:
+      github_pat_token: ${{ secrets.GH_BOT_TOKEN }}
