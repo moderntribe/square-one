@@ -7,12 +7,11 @@ on:
 env:
   APPNAME: sq1
   SERVER: ${{ secrets.TEST_DOMAIN }}
-  ACTIONS_TAG: add_basic_sq1
 
 jobs:
   deploy_review_app:
     runs-on: ubuntu-latest
-    if: (github.event_name == 'pull_request' && github.event.action == 'opened' || github.event.action == 'synchronize') && github.repository == 'moderntribe/square-one'
+    if: (github.event_name == 'pull_request' && github.event.action == 'opened' || github.event.action == 'synchronize')
     steps:
       - name: Cloning repo for Pull Requests
         uses: actions/checkout@v2
@@ -20,28 +19,19 @@ jobs:
           fetch-depth: 0
           ref: ${{ github.event.pull_request.head.ref }}
 
-      - name: Cloning Actions Repository
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 1
-          repository: moderntribe/actions
-          path: .github/actions
-          token: ${{ secrets.GH_BOT_TOKEN }}
-          ref: ${{ env.ACTIONS_TAG }}
-
       - name: Set common variables
-        uses: ./.github/actions/utils/common-variables
+        uses: moderntribe/actions/utils/common-variables@v1
         with:
           base_branch: ${{ github.event.pull_request.head.ref }}
 
       - name: Setup SSH
-        uses: ./.github/actions/utils/ssh-agent
+        uses: moderntribe/actions/utils/ssh-agent@v1
         with:
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
           server: "${{ env.SERVER }}"
 
       - name: Create review app ${{ env.REVIEW_APP }}
-        uses: ./.github/actions/dokku/create-review-app
+        uses: moderntribe/actions/dokku/create-review-app@v1
         with:
           app_name: ${{ env.APPNAME }}
           review_app_name: ${{ env.REVIEW_APP }}
@@ -50,22 +40,22 @@ jobs:
           gha_url: ${{ env.GHA_URL }}
 
       - name: Build Node
-        uses: ./.github/actions/square1/build-node
+        uses: moderntribe/actions/square1/build-node@v1
 
       - name: Commit Files Node Files
-        uses: ./.github/actions/utils/commit-files
+        uses: moderntribe/actions/utils/commit-files@v1
         with:
           folder: ./wp-content/
 
       - name: Deploy to ${{ env.REVIEW_APP }}
-        uses: ./.github/actions/deploy/gitdeploy
+        uses: moderntribe/actions/deploy/gitdeploy@v1
         with:
           git_url: "dokku@${{ env.SERVER }}:${{ env.REVIEW_APP }}"
           branch: ${{ env.BRANCH }}
 
       - name: Slack Notification
         if: success()|| failure() || cancelled()
-        uses: ./.github/actions/utils/slack-message-deploy
+        uses: moderntribe/actions/utils/slack-message-deploy@v1
         with:
           branch: ${{ env.BRANCH }}
           environment: ${{ env.REVIEW_APP }}
@@ -77,23 +67,13 @@ jobs:
   destroy_review_app:
     runs-on: ubuntu-latest
     # only run when a pull request is closed
-    if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.repository == 'moderntribe/square-one'
+    if: github.event_name == 'pull_request' && github.event.action == 'closed'
     steps:
-
-      - name: Cloning Actions Repository
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 1
-          repository: moderntribe/actions
-          path: .github/actions
-          token: ${{ secrets.GH_BOT_TOKEN }}
-          ref: ${{ env.ACTIONS_TAG }}
-
       - name: Set common variables
-        uses: ./.github/actions/utils/common-variables
+        uses: moderntribe/actions/utils/common-variables@v1
 
       - name: Delete review app ${{ env.REVIEW_APP }}
-        uses: ./.github/actions/dokku/delete-review-app
+        uses: moderntribe/actions/dokku/delete-review-app@v1
         with:
           app_name: ${{ env.APPNAME }}
           review_app_name: ${{ env.REVIEW_APP }}
@@ -103,7 +83,7 @@ jobs:
 
       - name: Slack Notification
         if: failure()
-        uses: ./.github/actions/utils/slack-message-deploy
+        uses: moderntribe/actions/utils/slack-message-deploy@v1
         with:
           branch: ${{ env.BRANCH }}
           environment: ${{ env.REVIEW_APP }}
