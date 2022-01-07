@@ -19,18 +19,18 @@ jobs:
       server: ${{ secrets.TEST_DOMAIN }}
       ssh_private_key: ${{ secrets.DOKKU_DEPLOY_KEY }}
 
-  deploy_review_app:
-    if: (github.event_name == 'pull_request' && github.event.action == 'opened' || github.event.action == 'synchronize')
-    uses: moderntribe/square-one/.github/workflows/dokku-deploy.yml@main
-    with:
-      app_name: sq1
-      branch: ${{ github.event.pull_request.head.ref }}
-      is_review_app: true
-    secrets:
-      github_pat_token: ${{ secrets.GH_BOT_TOKEN }}
-      server: ${{ secrets.TEST_DOMAIN }}
-      ssh_private_key: ${{ secrets.DOKKU_DEPLOY_KEY }}
-      slack_webhook: ${{ secrets.SLACK_WEBHOOK }}
+  # deploy_review_app:
+  #   if: (github.event_name == 'pull_request' && github.event.action == 'opened' || github.event.action == 'synchronize')
+  #   uses: moderntribe/square-one/.github/workflows/dokku-deploy.yml@main
+  #   with:
+  #     app_name: sq1
+  #     branch: ${{ github.event.pull_request.head.ref }}
+  #     is_review_app: true
+  #   secrets:
+  #     github_pat_token: ${{ secrets.GH_BOT_TOKEN }}
+  #     server: ${{ secrets.TEST_DOMAIN }}
+  #     ssh_private_key: ${{ secrets.DOKKU_DEPLOY_KEY }}
+  #     slack_webhook: ${{ secrets.SLACK_WEBHOOK }}
 
   destroy_review_app:
     if: (github.event_name == 'pull_request' && github.event.action == 'closed')
