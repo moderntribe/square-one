@@ -15,10 +15,10 @@ jobs:
     with:
       # workflows don't support env
       app_name: sq1
-      server: ${{ secrets.TEST_DOMAIN }}
     secrets:
       github_pat_token: ${{ secrets.TEST_DOMAIN }}
-      # github_pat_token: ${{ secrets.GH_BOT_TOKEN }}
+      server: ${{ secrets.TEST_DOMAIN }}
+
 
     # runs-on: ubuntu-latest
     # if: (github.event_name == 'pull_request' && github.event.action == 'opened' || github.event.action == 'synchronize')

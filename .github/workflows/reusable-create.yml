@@ -6,20 +6,10 @@ on:
         required: true
         type: string
         description: Dokku Original App Name
-      review_app_name:
-        required: true
-        type: string
-        description: Dokku Review App Name
-      server:
-        required: true
-        type: string
-        description: Server Name
-      gha_url:
-        required: true
-        type: string
-        description: Github Actions Run URL
     secrets:
       github_pat_token:
+        required: true
+      server:
         required: true
 jobs:
   reusable_workflow_job:
@@ -34,6 +24,6 @@ jobs:
         with:
           app_name: ${{ inputs.app_name }}
           review_app_name: ${{ inputs.review_app_name }}
-          server: ${{ inputs.server }}
+          server: ${{ secrets.server }}
           github_pat_token: ${{ secrets.github_pat_token }}
           gha_url: ${{ inputs.gha_url }}
