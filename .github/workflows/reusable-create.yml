@@ -1,3 +1,4 @@
+name: Reusable Workflow - Create Review App
 on:
   workflow_call:
     inputs:
@@ -28,7 +29,7 @@ jobs:
       - name: Set common variables
         uses: moderntribe/actions/utils/common-variables@v1
 
-      - name: Create review app ${{ env.REVIEW_APP }}
+      - name: Create review app ${{ inputs.review_app_name }}
         uses: moderntribe/actions/dokku/create-review-app@v1
         with:
           app_name: ${{ inputs.app_name }}
