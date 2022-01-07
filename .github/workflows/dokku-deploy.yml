@@ -48,13 +48,13 @@ jobs:
           ssh_private_key: ${{ secrets.ssh_private_key }}
           server: ${{ inputs.server }}
 
-      - name: Build Node
-        uses: moderntribe/actions/square1/build-node@v1
+      # - name: Build Node
+      #   uses: moderntribe/actions/square1/build-node@v1
 
-      - name: Commit Files Node Files
-        uses: moderntribe/actions/utils/commit-files@v1
-        with:
-          folder: ./wp-content/
+      # - name: Commit Files Node Files
+      #   uses: moderntribe/actions/utils/commit-files@v1
+      #   with:
+      #     folder: ./wp-content/
 
       - id: define_app
         run: |
@@ -64,7 +64,7 @@ jobs:
             echo ::set-output name=deploy_app::${{ inputs.app_name }}
           fi
 
-      - name: Deploy to ${{ inputs.app_name }}
+      - name: Deploy to ${{ steps.define_app.outputs.deploy_app }}
         uses: moderntribe/actions/deploy/gitdeploy@v1
         with:
           git_url: "dokku@${{ inputs.server }}:${{ steps.define_app.outputs.deploy_app }}"
