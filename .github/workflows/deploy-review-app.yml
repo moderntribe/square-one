@@ -10,7 +10,7 @@ env:
 
 jobs:
   create_review_app:
-    uses: moderntribe/square-one/.github/workflows/reusable-create@add_deploy_folder
+    uses: moderntribe/square-one/.github/workflows/reusable-create.yml@add_deploy_folder
     with:
       app_name: ${{ env.APPNAME }}
       review_app_name: ${{ env.REVIEW_APP }}
