@@ -30,7 +30,7 @@ jobs:
   deploy_dokku:
     runs-on: ubuntu-latest
     steps:
-      - name: Cloning repo for Pull Requests
+      - name: Cloning repo
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
@@ -48,15 +48,15 @@ jobs:
           ssh_private_key: ${{ secrets.ssh_private_key }}
           server: ${{ secrets.server }}
 
-      # - name: Build Node
-      #   uses: moderntribe/actions/square1/build-node@v1
+      - name: Build Node
+        uses: moderntribe/actions/square1/build-node@v1
 
-      # - name: Commit Files Node Files
-      #   uses: moderntribe/actions/utils/commit-files@v1
-      #   with:
-      #     folder: ./wp-content/
+      - name: Commit Files Node Files
+        uses: moderntribe/actions/utils/commit-files@v1
+        with:
+          folder: ./wp-content/
 
-      - name: Define APP to deploy
+      - name: Define app to deploy
         id: define_app
         run: |
           if [[ ${{ inputs.is_review_app }} == "true" ]]; then
