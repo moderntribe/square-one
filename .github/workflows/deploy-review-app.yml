@@ -11,7 +11,7 @@ on:
 jobs:
   create_review_app:
     if: (github.event_name == 'pull_request' && github.event.action == 'opened' || github.event.action == 'synchronize')
-    uses: moderntribe/actions/.github/workflows/create-review-app.yml@review_app_workflow
+    uses: moderntribe/actions/.github/workflows/create-review-app.yml@v1
     with:
       app_name: sq1
     secrets:
@@ -20,7 +20,7 @@ jobs:
 
   deploy_review_app:
     if: (github.event_name == 'pull_request' && github.event.action == 'opened' || github.event.action == 'synchronize')
-    uses: ${{ github.repository }}/.github/workflows/dokku-deploy.yml@add_deploy_folder
+    uses: moderntribe/square-one/.github/workflows/dokku-deploy.yml@main
     with:
       app_name: sq1
       branch: ${{ github.event.pull_request.head.ref }}
@@ -33,7 +33,7 @@ jobs:
 
   destroy_review_app:
     if: (github.event_name == 'pull_request' && github.event.action == 'closed')
-    uses: moderntribe/actions/.github/workflows/delete-review-app.yml@review_app_workflow
+    uses: moderntribe/actions/.github/workflows/delete-review-app.yml@v1
     with:
       app_name: sq1
     secrets:
