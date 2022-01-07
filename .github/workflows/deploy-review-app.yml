@@ -22,7 +22,7 @@ jobs:
 
   deploy_review_app:
     if: (github.event_name == 'pull_request' && github.event.action == 'opened' || github.event.action == 'synchronize')
-    uses: moderntribe/actions/.github/workflows/create-review-app.yml@review_app_workflow
+    uses: moderntribe/squareone/.github/workflows/deploy-dokku.yml@add_deploy_folder
     with:
       # workflows don't support env
       app_name: sq1
