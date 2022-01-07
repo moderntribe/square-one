@@ -58,7 +58,11 @@ class Image_Wrap {
 			return sprintf( '<figure class="wp-image wp-image--no-caption %s">%s</figure>%s', $alignment, $image, $content );
 		}, $html );
 
-		return $result ?: $html;
+		if ( is_array( $result ) || empty( $result ) ) {
+			return $html;
+		}
+
+		return $result;
 	}
 
 	/**
