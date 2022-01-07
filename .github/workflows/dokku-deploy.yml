@@ -46,7 +46,7 @@ jobs:
         uses: moderntribe/actions/utils/ssh-agent@v1
         with:
           ssh_private_key: ${{ secrets.ssh_private_key }}
-          server: ${{ inputs.server }}
+          server: ${{ secrets.server }}
 
       # - name: Build Node
       #   uses: moderntribe/actions/square1/build-node@v1
@@ -67,7 +67,7 @@ jobs:
       - name: Deploy to ${{ steps.define_app.outputs.deploy_app }}
         uses: moderntribe/actions/deploy/gitdeploy@v1
         with:
-          git_url: "dokku@${{ inputs.server }}:${{ steps.define_app.outputs.deploy_app }}"
+          git_url: "dokku@${{ secrets.server }}:${{ steps.define_app.outputs.deploy_app }}"
           branch: ${{ env.BRANCH }}
 
       - name: Slack Notification
@@ -77,7 +77,7 @@ jobs:
           branch: ${{ env.BRANCH }}
           environment: ${{ steps.define_app.outputs.deploy_app }}
           slack_webhook_url: ${{ secrets.slack_webhook }}
-          app_url: "${{ steps.define_app.outputs.deploy_app }}.${{ inputs.server }}"
+          app_url: "${{ steps.define_app.outputs.deploy_app }}.${{ secrets.server }}"
           gha_url: ${{ env.GHA_URL }}
           status: ${{ job.status }}
 
