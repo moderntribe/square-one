@@ -15,9 +15,10 @@ jobs:
     with:
       # workflows don't support env
       app_name: sq1
-      server: ${{ secrets.TEST_DOMAIN }}
     secrets:
       github_pat_token: ${{ secrets.GH_BOT_TOKEN }}
+      server: "dokku01"
+
 
   deploy_review_app:
     runs-on: ubuntu-latest
