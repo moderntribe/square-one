@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy_app:
-    uses: moderntribe/square-one/.github/workflows/dokku-deploy.yml@add_deploy_folder
+    uses: moderntribe/square-one/.github/workflows/dokku-deploy.yml@main
     with:
       app_name: sq1
       branch: ${{ github.ref }}
