@@ -5,70 +5,15 @@ on:
     branches:
       - server/test
 
-env:
-  APPNAME: sq1
-
 jobs:
   deploy_app:
-    runs-on: ubuntu-latest
-    # only run on push to main
-    if: github.event_name == 'push' && github.ref == 'refs/heads/server/test' && github.repository == 'moderntribe/square-one'
-    steps:
-      - name: Cloning repo
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-
-      - name: Push to Test
-        uses: dokku/github-action@master
-        with:
-          git_remote_url: "ssh://${{ secrets.TEST_DEPLOY_USER }}@${{ secrets.TEST_DOMAIN }}:22/${{ env.APPNAME }}"
-          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-      - name: SUCCESS
-        if: success()
-        uses: tokorom/action-slack-incoming-webhook@main
-        env:
-          INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
-        with:
-          text: ":green_check: Server/Test App Deployment Successful "
-          attachments: |
-            [
-              {
-                "color": "good",
-                "fields": [
-                  {
-                    "title": "Test App URL",
-                    "value": "${{ env.APPNAME }}.${{ secrets.TEST_DOMAIN }}"
-                  },
-                  {
-                    "title": "GitHub Actions URL",
-                    "value": "${{ github.event.repository.url }}/actions/runs/${{ github.run_id }}"
-                  }
-                ]
-              }
-            ]
-
-      - name: FAILURE
-        if: failure()
-        uses: tokorom/action-slack-incoming-webhook@main
-        env:
-          INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
-        with:
-          text: ":x:  Server/Test Test App Deployment Failed"
-          attachments: |
-            [
-              {
-                "color": "bad",
-                "fields": [
-                  {
-                    "title": "Test App URL",
-                    "value": "${{ env.APPNAME }}.${{ secrets.TEST_DOMAIN }}"
-                  },
-                  {
-                    "title": "GitHub Actions URL",
-                    "value": "${{ github.event.repository.url }}/actions/runs/${{ github.run_id }}"
-                  }
-                ]
-              }
-            ]
+    uses: moderntribe/square-one/.github/workflows/dokku-deploy.yml@add_deploy_folder
+    with:
+      app_name: sq1
+      branch: ${{ github.ref }}
+      is_review_app: false
+    secrets:
+      github_pat_token: ${{ secrets.GH_BOT_TOKEN }}
+      server: ${{ secrets.TEST_DOMAIN }}
+      ssh_private_key: ${{ secrets.DOKKU_DEPLOY_KEY }}
+      slack_webhook: ${{ secrets.SLACK_WEBHOOK }}

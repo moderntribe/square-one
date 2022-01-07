@@ -15,7 +15,6 @@ on:
         required: false
         type: boolean
         description: Flag if this is a review app or not
-
     secrets:
       github_pat_token:
         required: true
