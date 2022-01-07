@@ -13,8 +13,8 @@ jobs:
     if: (github.event_name == 'pull_request' && github.event.action == 'opened' || github.event.action == 'synchronize')
     uses: moderntribe/square-one/.github/workflows/reusable-create.yml@add_deploy_folder
     with:
-      app_name: "${{ env.APPNAME }}"
-      server: "${{ env.SERVER }}"
+      app_name: sq1
+      server: ${{ secrets.TEST_DOMAIN }}
     secrets:
       github_pat_token: ${{ secrets.GH_BOT_TOKEN }}
 
