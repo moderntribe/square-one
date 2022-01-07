@@ -1,0 +1,38 @@
+on:
+  workflow_call:
+    inputs:
+      app_name:
+        required: true
+        type: string
+        description: Dokku Original App Name
+      review_app_name:
+        required: true
+        type: string
+        description: Dokku Review App Name
+      server:
+        required: true
+        type: string
+        description: Server Name
+      gha_url:
+        required: true
+        type: string
+        description: Github Actions Run URL
+    secrets:
+      github_pat_token:
+        required: true
+jobs:
+  reusable_workflow_job:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Set common variables
+        uses: moderntribe/actions/utils/common-variables@v1
+
+      - name: Create review app ${{ env.REVIEW_APP }}
+        uses: moderntribe/actions/dokku/create-review-app@v1
+        with:
+          app_name: ${{ inputs.app_name }}
+          review_app_name: ${{ inputs.review_app_name }}
+          server: ${{ inputs.server }}
+          github_pat_token: ${{ secrets.github_pat_token }}
+          gha_url: ${{ inputs.gha_url }}

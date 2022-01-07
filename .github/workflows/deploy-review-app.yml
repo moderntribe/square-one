@@ -9,6 +9,33 @@ env:
   SERVER: ${{ secrets.TEST_DOMAIN }}
 
 jobs:
+  create_review_app:
+    uses: moderntribe/square-one/.github/workflows/reusable-create@add_deploy_folder
+    with:
+      app_name: ${{ env.APPNAME }}
+      review_app_name: ${{ env.REVIEW_APP }}
+      server: ${{ env.SERVER }}
+      gha_url: ${{ env.GHA_URL }}
+    secrets:
+      github_pat_token: ${{ secrets.GH_BOT_TOKEN }}
+
+    # runs-on: ubuntu-latest
+    # if: (github.event_name == 'pull_request' && github.event.action == 'opened' || github.event.action == 'synchronize')
+    # steps:
+    #   - name: Set common variables
+    #     uses: moderntribe/actions/utils/common-variables@v1
+    #     with:
+    #       base_branch: ${{ github.event.pull_request.head.ref }}
+
+    #   - name: Create review app ${{ env.REVIEW_APP }}
+    #     uses: moderntribe/actions/dokku/create-review-app@v1
+    #     with:
+    #       app_name: ${{ env.APPNAME }}
+    #       review_app_name: ${{ env.REVIEW_APP }}
+    #       server: ${{ env.SERVER }}
+    #       github_pat_token: ${{ secrets.GH_BOT_TOKEN }}
+    #       gha_url: ${{ env.GHA_URL }}
+
   deploy_review_app:
     runs-on: ubuntu-latest
     if: (github.event_name == 'pull_request' && github.event.action == 'opened' || github.event.action == 'synchronize')
@@ -29,15 +56,6 @@ jobs:
         with:
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
           server: "${{ env.SERVER }}"
-
-      - name: Create review app ${{ env.REVIEW_APP }}
-        uses: moderntribe/actions/dokku/create-review-app@v1
-        with:
-          app_name: ${{ env.APPNAME }}
-          review_app_name: ${{ env.REVIEW_APP }}
-          server: ${{ env.SERVER }}
-          github_pat_token: ${{ secrets.GH_BOT_TOKEN }}
-          gha_url: ${{ env.GHA_URL }}
 
       - name: Build Node
         uses: moderntribe/actions/square1/build-node@v1
