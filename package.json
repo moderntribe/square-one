@@ -105,13 +105,7 @@
     "swiper": "^6.7.5",
     "verge": "^1.10.2",
     "voca": "^1.4.0",
-    "whatwg-fetch": "^3.0.0",
-    "workbox-cacheable-response": "^5.0.0",
-    "workbox-core": "^5.0.0",
-    "workbox-expiration": "^5.0.0",
-    "workbox-routing": "^5.0.0",
-    "workbox-strategies": "^5.0.0",
-    "workbox-window": "^5.0.0"
+    "whatwg-fetch": "^3.0.0"
   },
   "devDependencies": {
     "@arkweid/lefthook": "^0.7.5",
@@ -203,7 +197,7 @@
     "stylelint-config-standard": "^19.0.0",
     "stylelint-order": "^3.1.1",
     "terser-webpack-plugin": "^2.2.1",
-    "webpack": "^5.3.2",
+    "webpack": "^5.66.0",
     "webpack-bundle-analyzer": "^3.6.0",
     "webpack-cli": "^4.7.2",
     "webpack-dev-server": "^3.11.0",
