@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## 2022.01 
+* Updated: added allowed plugins to composer.json
 * Updated: coding standards to [version 2](https://github.com/moderntribe/coding-standards/tree/2.0.x).
 * Updated: WordPress 5.7.3 > 5.8.3 (security release)
 * Updated: ACF Pro 5.10.2 > 5.11.4
