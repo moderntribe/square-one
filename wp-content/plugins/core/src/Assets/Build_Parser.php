@@ -14,9 +14,6 @@ abstract class Build_Parser {
 	 */
 	protected string $js = '';
 
-	/**
-	 * @var bool|null
-	 */
 	private ?bool $debug;
 
 	/**
@@ -38,8 +35,34 @@ abstract class Build_Parser {
 		$this->debug = $debug ?? $this->doing_script_debug();
 	}
 
-	private function doing_script_debug(): bool {
-		return defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG === true;
+	public function get_localization(): array {
+		$this->init();
+
+		return $this->localize;
+	}
+
+	public function get_styles(): array {
+		$this->init();
+
+		return $this->styles;
+	}
+
+	public function get_scripts(): array {
+		$this->init();
+
+		return $this->scripts;
+	}
+
+	public function get_style_handles(): array {
+		$this->init();
+
+		return array_keys( $this->styles );
+	}
+
+	public function get_script_handles(): array {
+		$this->init();
+
+		return array_keys( $this->scripts );
 	}
 
 	protected function init(): void {
@@ -60,6 +83,10 @@ abstract class Build_Parser {
 		$theme_directory = trailingslashit( get_template_directory() );
 
 		return $theme_directory . $this->js;
+	}
+
+	private function doing_script_debug(): bool {
+		return defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG === true;
 	}
 
 
@@ -99,36 +126,6 @@ abstract class Build_Parser {
 
 			return $asset;
 		}, $js['enqueue'][ $environment ] );
-	}
-
-	public function get_localization(): array {
-		$this->init();
-
-		return $this->localize;
-	}
-
-	public function get_styles(): array {
-		$this->init();
-
-		return $this->styles;
-	}
-
-	public function get_scripts(): array {
-		$this->init();
-
-		return $this->scripts;
-	}
-
-	public function get_style_handles(): array {
-		$this->init();
-
-		return array_keys( $this->styles );
-	}
-
-	public function get_script_handles(): array {
-		$this->init();
-
-		return array_keys( $this->scripts );
 	}
 
 }

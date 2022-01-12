@@ -6,10 +6,11 @@ use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\comments\comment\Comment_Controller;
 use Tribe\Project\Templates\Components\comments\trackback\Trackback_Controller;
 use Tribe\Project\Templates\Components\pagination\comments\Comments_Pagination_Controller;
+use WP_Comment;
 
 class Comments_Section_Controller extends Abstract_Controller {
 
-	public function get_title() {
+	public function get_title(): string {
 		return sprintf(
 			_nx(
 				__( '%1$s Comment', 'tribe' ),
@@ -21,7 +22,7 @@ class Comments_Section_Controller extends Abstract_Controller {
 		);
 	}
 
-	public function get_comments() {
+	public function get_comments(): string {
 		return wp_list_comments( [
 			'callback'   => [ $this, 'render_comment' ],
 			'style'      => 'ol',
@@ -30,7 +31,7 @@ class Comments_Section_Controller extends Abstract_Controller {
 		] );
 	}
 
-	public function get_comment_form() {
+	public function get_comment_form(): string {
 		$user          = wp_get_current_user();
 		$user_identity = $user->exists() ? $user->display_name : '';
 		$logged_in_as  = sprintf( esc_html__( 'Logged in as %s', 'tribe' ), $user_identity );
@@ -44,10 +45,10 @@ class Comments_Section_Controller extends Abstract_Controller {
 			'class_submit'       => 'submit c-btn',
 		] );
 
-		return ob_get_clean();
+		return (string) ob_get_clean();
 	}
 
-	public function get_pagination_args() {
+	public function get_pagination_args(): array {
 		$count = get_comment_pages_count();
 		$paged = (bool) ( $count > 1 ? get_option( 'page_comments' ) : false );
 
@@ -70,7 +71,7 @@ class Comments_Section_Controller extends Abstract_Controller {
 	 *
 	 * @return void
 	 */
-	public function render_comment( \WP_Comment $comment, array $args, int $depth ): void {
+	public function render_comment( WP_Comment $comment, array $args, int $depth ): void {
 		if ( in_array( $comment->comment_type, [ 'pingback', 'trackback' ], true ) ) {
 			$this->render_trackback_comment( $comment );
 		} else {
@@ -78,7 +79,7 @@ class Comments_Section_Controller extends Abstract_Controller {
 		}
 	}
 
-	private function render_trackback_comment( \WP_Comment $comment ): void {
+	private function render_trackback_comment( WP_Comment $comment ): void {
 		$label = $comment->comment_type === 'pingback' ? __( 'Pingback:', 'tribe' ) : __( 'Trackback:', 'tribe' );
 
 		get_template_part( 'components/comments/trackback/trackback', null, [
@@ -87,7 +88,7 @@ class Comments_Section_Controller extends Abstract_Controller {
 		] );
 	}
 
-	private function render_regular_comment( \WP_Comment $comment, array $args, int $depth ): void {
+	private function render_regular_comment( WP_Comment $comment, array $args, int $depth ): void {
 		get_template_part( 'components/comments/comment/comment', null, [
 			Comment_Controller::COMMENT_ID => $comment->comment_ID,
 			Comment_Controller::DEPTH      => $depth,

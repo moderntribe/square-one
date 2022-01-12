@@ -9,10 +9,10 @@ class Listener extends \Tribe\Libs\Cache\Listener {
 	 *
 	 * @param int    $post_id
 	 * @param object $post
+	 *
+	 * @example $this->cache->delete( 'some_cache_key', 'tribe' );
 	 */
-	public function save_post( $post_id, $post ) {
-		// Example usage:
-		// $this->cache->delete('some_cache_key', 'tribe');
+	public function save_post( int $post_id, object $post ): void {
 		if ( in_array( $post->post_status, [ 'auto-draft', 'inherit' ] ) ) {
 			return;
 		}
@@ -24,25 +24,25 @@ class Listener extends \Tribe\Libs\Cache\Listener {
 	/**
 	 * A p2p relation has been created.
 	 *
-	 * @param $p2p_id
+	 * @param array $p2p_id
 	 */
-	public function p2p_created_connection( $p2p_id ) {
+	public function p2p_created_connection( array $p2p_id ): void {
 		$this->cache->flush_group( 'p2p_relationships' );
 	}
 
 	/**
 	 * One or more p2p relations have been deleted.
 	 *
-	 * @param $p2p_ids
+	 * @param array $p2p_ids
 	 */
-	public function p2p_delete_connections( $p2p_ids ) {
+	public function p2p_delete_connections( array $p2p_ids ): void {
 		$this->cache->flush_group( 'p2p_relationships' );
 	}
 
 	/**
 	 * A Menu has been edited or repositioned
 	 */
-	public function update_menu() {
+	public function update_menu(): void {
 		$this->cache->flush_group( 'nav' );
 	}
 

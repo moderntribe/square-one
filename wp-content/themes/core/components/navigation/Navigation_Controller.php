@@ -28,12 +28,12 @@ class Navigation_Controller extends Abstract_Controller {
 	];
 
 	/**
-	 * @var array
+	 * @var string[]
 	 */
 	private array $attrs;
 
 	/**
-	 * @var array
+	 * @var string[]
 	 */
 	private array $classes;
 
@@ -42,23 +42,20 @@ class Navigation_Controller extends Abstract_Controller {
 	 */
 	private $menu;
 
-	/**
-	 * @var string
-	 */
 	private string $menu_location;
 
 	/**
-	 * @var array
+	 * @var string[]
 	 */
 	private array $nav_list_attrs;
 
 	/**
-	 * @var array
+	 * @var string[]
 	 */
 	private array $nav_list_classes;
 
 	/**
-	 * @var array
+	 * @var string[]
 	 */
 	private array $nav_menu_args;
 
@@ -71,7 +68,7 @@ class Navigation_Controller extends Abstract_Controller {
 		$this->menu_location    = (string) $args[ self::MENU_LOCATION ];
 		$this->nav_list_attrs   = (array) $args[ self::NAV_LIST_ATTRS ];
 		$this->nav_list_classes = (array) $args[ self::NAV_LIST_CLASSES ];
-		$this->nav_menu_args    = $this->parse_menu_args( $args[ self::NAV_MENU_ARGS ] );
+		$this->nav_menu_args    = $this->parse_menu_args( (array) $args[ self::NAV_MENU_ARGS ] );
 	}
 
 	public function get_attrs(): string {
@@ -119,7 +116,7 @@ class Navigation_Controller extends Abstract_Controller {
 		];
 	}
 
-	private function parse_menu_args( $menu_args ): array {
+	private function parse_menu_args( array $menu_args ): array {
 		$menu_args['menu']           = $this->menu;
 		$menu_args['theme_location'] = $this->menu_location;
 

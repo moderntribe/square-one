@@ -7,19 +7,19 @@ class Image_Wrap {
 	/**
 	 * Customize WP non-captioned image output
 	 *
-	 * @param $html
-	 *
-	 * @return mixed
+	 * @param string $html
 	 *
 	 * @filter the_content
+	 *
+	 * @return string
 	 */
-	public function customize_wp_image_non_captioned_output( $html ) {
+	public function customize_wp_image_non_captioned_output( string $html ): string {
 
 		if ( ! is_singular() && ! in_the_loop() && ! is_main_query() ) {
 			return $html;
 		}
 
-		return preg_replace_callback( '/<p>((?:.(?!p>))*?)(<a[^>]*>)?\s*(<img[^>]+>)(<\/a>)?(.*?)<\/p>/i', static function ( $matches ) {
+		$result = preg_replace_callback( '/<p>((?:.(?!p>))*?)(<a[^>]*>)?\s*(<img[^>]+>)(<\/a>)?(.*?)<\/p>/i', static function ( $matches ) {
 
 			/*
 			Groups 	Regex 			 Description
@@ -40,14 +40,16 @@ class Image_Wrap {
 
 			// image and (optional) link: <a ...><img ...></a>
 			$image = $matches[2] . $matches[3] . $matches[4];
+
 			// content before and after image. wrap in <p> unless it's empty
 			$content = trim( $matches[1] . $matches[5] );
+
 			if ( $content ) {
 				$content = '<p>' . $content . '</p>';
 			}
 
 			// move alignment classes to our non-caption image wrapper & remove from image
-			// mimicks markup for captioned images
+			// mimics markup for captioned images
 			preg_match( '#class\s*=\s*"[^"]*(alignnone|alignleft|aligncenter|alignright)[^"]*"#', $image, $alignment_match );
 			$alignment = empty( $alignment_match[1] ) ? 'alignnone' : $alignment_match[1];
 
@@ -55,18 +57,24 @@ class Image_Wrap {
 
 			return sprintf( '<figure class="wp-image wp-image--no-caption %s">%s</figure>%s', $alignment, $image, $content );
 		}, $html );
+
+		if ( is_array( $result ) || empty( $result ) ) {
+			return $html;
+		}
+
+		return $result;
 	}
 
 	/**
 	 * Customize WP captioned image output
 	 *
-	 * @param $html
-	 *
-	 * @return mixed
+	 * @param string $html
 	 *
 	 * @filter the_content
+	 *
+	 * @return string
 	 */
-	public function customize_wp_image_captioned_output( $html ) {
+	public function customize_wp_image_captioned_output( string $html ): string {
 		if ( ! is_singular() && ! in_the_loop() && ! is_main_query() ) {
 			return $html;
 		}
@@ -111,7 +119,7 @@ class Image_Wrap {
 			'wp-image wp-image--caption align',
 		];
 
-		return preg_replace( $patterns, $replacements, $html );
+		return preg_replace( $patterns, $replacements, $html ) ?: $html;
 	}
 
 }

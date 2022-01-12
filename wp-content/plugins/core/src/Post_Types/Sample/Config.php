@@ -6,9 +6,10 @@ use Tribe\Libs\Post_Type\Post_Type_Config;
 
 class Config extends Post_Type_Config {
 
+	// phpcs:ignore SlevomatCodingStandard.TypeHints.PropertyTypeHint.MissingAnyTypeHint
 	protected $post_type = Sample::NAME;
 
-	public function get_args() {
+	public function get_args(): array {
 		return [
 			'hierarchical'     => false,
 			'enter_title_here' => __( 'Sample', 'tribe' ),
@@ -19,7 +20,7 @@ class Config extends Post_Type_Config {
 		];
 	}
 
-	public function get_labels() {
+	public function get_labels(): array {
 		return [
 			'singular' => __( 'Sample', 'tribe' ),
 			'plural'   => __( 'Samples', 'tribe' ),

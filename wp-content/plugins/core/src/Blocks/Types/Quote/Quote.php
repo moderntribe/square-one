@@ -31,7 +31,7 @@ class Quote extends Block_Config {
 	/**
 	 * Register the block
 	 */
-	public function add_block() {
+	public function add_block(): void {
 		$this->set_block( new Block( self::NAME, [
 			'title'       => __( 'Quote + Image', 'tribe' ),
 			'description' => __( 'A combined quotation and associated image with several layout options.', 'tribe' ),
@@ -64,7 +64,7 @@ class Quote extends Block_Config {
 	/**
 	 * Register Fields for block
 	 */
-	public function add_fields() {
+	public function add_fields(): void {
 		$this->add_field( new Field( self::NAME . '_' . self::QUOTE, [
 				'label' => __( 'Quote Text', 'tribe' ),
 				'name'  => self::QUOTE,

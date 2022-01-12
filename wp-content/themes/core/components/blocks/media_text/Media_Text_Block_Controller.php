@@ -15,43 +15,59 @@ use Tribe\Project\Theme\Config\Image_Sizes;
 
 class Media_Text_Block_Controller extends Abstract_Controller {
 
-	public const CLASSES           = 'classes';
 	public const ATTRS             = 'attrs';
-	public const WIDTH             = 'width';
-	public const LAYOUT            = 'layout';
+	public const CLASSES           = 'classes';
 	public const CONTAINER_CLASSES = 'container_classes';
-	public const MEDIA_CLASSES     = 'media_classes';
 	public const CONTENT_CLASSES   = 'content_classes';
-	public const MEDIA_TYPE        = 'media_type';
-	public const IMAGE             = 'image';
-	public const VIDEO             = 'video';
-	public const TITLE             = 'title';
-	public const LEADIN            = 'leadin';
-	public const DESCRIPTION       = 'description';
 	public const CTA               = 'cta';
+	public const DESCRIPTION       = 'description';
+	public const IMAGE             = 'image';
+	public const LAYOUT            = 'layout';
+	public const LEADIN            = 'leadin';
+	public const MEDIA_CLASSES     = 'media_classes';
+	public const MEDIA_TYPE        = 'media_type';
+	public const TITLE             = 'title';
+	public const VIDEO             = 'video';
+	public const WIDTH             = 'width';
 
 	/**
-	 * @var int|string
+	 * @var string[]
 	 */
-	private $image;
-
-	private array $classes;
 	private array $attrs;
-	private string $width;
-	private string $layout;
+
+	/**
+	 * @var string[]
+	 */
+	private array $classes;
+
+	/**
+	 * @var string[]
+	 */
 	private array $container_classes;
-	private array $media_classes;
+
+	/**
+	 * @var string[]
+	 */
 	private array $content_classes;
-	private string $media_type;
-	private string $video;
-	private string $title;
-	private string $leadin;
-	private string $description;
+
+	/**
+	 * @var string[]
+	 */
 	private array $cta;
 
 	/**
-	 * @param array $args
+	 * @var string[]
 	 */
+	private array $media_classes;
+	private int $image;
+	private string $description;
+	private string $layout;
+	private string $leadin;
+	private string $media_type;
+	private string $title;
+	private string $video;
+	private string $width;
+
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
 
@@ -63,40 +79,12 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 		$this->media_classes     = (array) $args[ self::MEDIA_CLASSES ];
 		$this->content_classes   = (array) $args[ self::CONTENT_CLASSES ];
 		$this->media_type        = (string) $args[ self::MEDIA_TYPE ];
-		$this->image             = $args[ self::IMAGE ];
+		$this->image             = (int) $args[ self::IMAGE ];
 		$this->video             = (string) $args[ self::VIDEO ];
 		$this->title             = (string) $args[ self::TITLE ];
 		$this->leadin            = (string) $args[ self::LEADIN ];
 		$this->description       = (string) $args[ self::DESCRIPTION ];
 		$this->cta               = (array) $args[ self::CTA ];
-	}
-
-	protected function defaults(): array {
-		return [
-			self::CLASSES           => [],
-			self::ATTRS             => [],
-			self::WIDTH             => Media_Text_Block::WIDTH_GRID,
-			self::LAYOUT            => Media_Text_Block::MEDIA_LEFT,
-			self::CONTAINER_CLASSES => [],
-			self::MEDIA_CLASSES     => [],
-			self::CONTENT_CLASSES   => [],
-			self::MEDIA_TYPE        => Media_Text_Block::IMAGE,
-			self::IMAGE             => null,
-			self::VIDEO             => '',
-			self::TITLE             => '',
-			self::LEADIN            => '',
-			self::DESCRIPTION       => '',
-			self::CTA               => [],
-		];
-	}
-
-	protected function required(): array {
-		return [
-			self::CLASSES           => [ 'c-block', 'b-media-text' ],
-			self::CONTAINER_CLASSES => [ 'b-media-text__container' ],
-			self::MEDIA_CLASSES     => [ 'b-media-text__media' ],
-			self::CONTENT_CLASSES   => [ 'b-media-text__content' ],
-		];
 	}
 
 	public function get_classes(): string {
@@ -134,9 +122,6 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 		return $this->media_type;
 	}
 
-	/**
-	 * @return array
-	 */
 	public function get_content_args(): array {
 		return [
 			Content_Block_Controller::LEADIN  => $this->get_leadin(),
@@ -149,6 +134,73 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 				'c-block__header',
 				'b-media-text__content-container',
 			],
+		];
+	}
+
+	/**
+	 * @return array
+	 */
+	public function get_image_args(): array {
+		if ( ! $this->image ) {
+			return [];
+		}
+
+		$src_size     = Image_Sizes::FOUR_THREE;
+		$srcset_sizes = [
+			Image_Sizes::FOUR_THREE_SMALL,
+			Image_Sizes::FOUR_THREE,
+			Image_Sizes::FOUR_THREE_LARGE,
+		];
+
+		if ( $this->layout === Media_Text_Block::MEDIA_CENTER ) {
+			$src_size     = Image_Sizes::SIXTEEN_NINE;
+			$srcset_sizes = [
+				Image_Sizes::SIXTEEN_NINE_SMALL,
+				Image_Sizes::SIXTEEN_NINE,
+				Image_Sizes::SIXTEEN_NINE_LARGE,
+			];
+		}
+
+		return [
+			Image_Controller::IMG_ID       => $this->image,
+			Image_Controller::SRC_SIZE     => $src_size,
+			Image_Controller::SRCSET_SIZES => $srcset_sizes,
+		];
+	}
+
+	public function get_video_embed(): string {
+		if ( ! $this->video ) {
+			return '';
+		}
+
+		return $this->video;
+	}
+
+	protected function defaults(): array {
+		return [
+			self::ATTRS             => [],
+			self::CLASSES           => [],
+			self::CONTAINER_CLASSES => [],
+			self::CONTENT_CLASSES   => [],
+			self::CTA               => [],
+			self::DESCRIPTION       => '',
+			self::IMAGE             => 0,
+			self::LAYOUT            => Media_Text_Block::MEDIA_LEFT,
+			self::LEADIN            => '',
+			self::MEDIA_CLASSES     => [],
+			self::MEDIA_TYPE        => Media_Text_Block::IMAGE,
+			self::TITLE             => '',
+			self::VIDEO             => '',
+			self::WIDTH             => Media_Text_Block::WIDTH_GRID,
+		];
+	}
+
+	protected function required(): array {
+		return [
+			self::CLASSES           => [ 'c-block', 'b-media-text' ],
+			self::CONTAINER_CLASSES => [ 'b-media-text__container' ],
+			self::CONTENT_CLASSES   => [ 'b-media-text__content' ],
+			self::MEDIA_CLASSES     => [ 'b-media-text__media' ],
 		];
 	}
 
@@ -221,48 +273,6 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 				'icon-arrow-right',
 			],
 		] );
-	}
-
-	/**
-	 * @return array
-	 */
-	public function get_image_args(): array {
-		if ( ! $this->image ) {
-			return [];
-		}
-
-		$src_size     = Image_Sizes::FOUR_THREE;
-		$srcset_sizes = [
-			Image_Sizes::FOUR_THREE_SMALL,
-			Image_Sizes::FOUR_THREE,
-			Image_Sizes::FOUR_THREE_LARGE,
-		];
-
-		if ( $this->layout === Media_Text_Block::MEDIA_CENTER ) {
-			$src_size     = Image_Sizes::SIXTEEN_NINE;
-			$srcset_sizes = [
-				Image_Sizes::SIXTEEN_NINE_SMALL,
-				Image_Sizes::SIXTEEN_NINE,
-				Image_Sizes::SIXTEEN_NINE_LARGE,
-			];
-		}
-
-		return [
-			Image_Controller::IMG_ID       => $this->image,
-			Image_Controller::SRC_SIZE     => $src_size,
-			Image_Controller::SRCSET_SIZES => $srcset_sizes,
-		];
-	}
-
-	/**
-	 * @return string
-	 */
-	public function get_video_embed(): string {
-		if ( ! $this->video ) {
-			return '';
-		}
-
-		return $this->video;
 	}
 
 }

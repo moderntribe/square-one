@@ -1,12 +1,10 @@
 <?php declare(strict_types=1);
 
-use \Tribe\Project\Templates\Components\statistic\Statistic_Controller;
+use Tribe\Project\Templates\Components\statistic\Statistic_Controller;
 
 /**
  * @var array $args Arguments passed to the template
  */
-
-// phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
 $c = Statistic_Controller::factory( $args );
 ?>
 

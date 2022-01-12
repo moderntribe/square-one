@@ -14,28 +14,51 @@ use Tribe\Project\Templates\Models\Content_Column;
 
 class Content_Columns_Block_Controller extends Abstract_Controller {
 
-	public const CLASSES           = 'classes';
-	public const CONTAINER_CLASSES = 'container_classes';
-	public const CONTENT_CLASSES   = 'content_classes';
 	public const ATTRS             = 'attrs';
-	public const TITLE             = 'title';
-	public const LEADIN            = 'leadin';
-	public const DESCRIPTION       = 'description';
-	public const CTA               = 'cta';
+	public const CLASSES           = 'classes';
 	public const COLUMNS           = 'columns';
 	public const COLUMN_CLASSES    = 'columns_classes';
+	public const CONTAINER_CLASSES = 'container_classes';
 	public const CONTENT_ALIGN     = 'content_align';
+	public const CONTENT_CLASSES   = 'content_classes';
+	public const CTA               = 'cta';
+	public const DESCRIPTION       = 'description';
+	public const LEADIN            = 'leadin';
+	public const TITLE             = 'title';
 
-	private array $classes;
+	/**
+	 * @var string[]
+	 */
 	private array $attrs;
-	private string $title;
-	private string $leadin;
-	private string $description;
-	private array $cta;
-	private array $container_classes;
-	private array $content_classes;
+
+	/**
+	 * @var string[]
+	 */
+	private array $classes;
+
+	/**
+	 * @var string[]
+	 */
 	private array $column_classes;
+
+	/**
+	 * @var string[]
+	 */
+	private array $container_classes;
+
+	/**
+	 * @var string[]
+	 */
+	private array $content_classes;
+
+	/**
+	 * @var string[]
+	 */
+	private array $cta;
 	private string $content_align;
+	private string $description;
+	private string $leadin;
+	private string $title;
 
 	/**
 	 * @var \Tribe\Project\Templates\Models\Content_Column[]
@@ -45,50 +68,19 @@ class Content_Columns_Block_Controller extends Abstract_Controller {
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
 
-		$this->classes           = (array) $args[ self::CLASSES ];
 		$this->attrs             = (array) $args[ self::ATTRS ];
-		$this->title             = (string) $args[ self::TITLE ];
-		$this->leadin            = (string) $args[ self::LEADIN ];
-		$this->description       = (string) $args[ self::DESCRIPTION ];
-		$this->cta               = (array) $args[ self::CTA ];
+		$this->classes           = (array) $args[ self::CLASSES ];
+		$this->column_classes    = (array) $args[ self::COLUMN_CLASSES ];
 		$this->columns           = (array) $args[ self::COLUMNS ];
 		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
-		$this->content_classes   = (array) $args[ self::CONTENT_CLASSES ];
-		$this->column_classes    = (array) $args[ self::COLUMN_CLASSES ];
 		$this->content_align     = (string) $args[ self::CONTENT_ALIGN ];
+		$this->content_classes   = (array) $args[ self::CONTENT_CLASSES ];
+		$this->cta               = (array) $args[ self::CTA ];
+		$this->description       = (string) $args[ self::DESCRIPTION ];
+		$this->leadin            = (string) $args[ self::LEADIN ];
+		$this->title             = (string) $args[ self::TITLE ];
 	}
 
-	/**
-	 * @return array
-	 */
-	protected function defaults(): array {
-		return [
-			self::COLUMNS           => [],
-			self::CONTAINER_CLASSES => [],
-			self::CONTENT_CLASSES   => [],
-			self::COLUMN_CLASSES    => [],
-			self::CLASSES           => [],
-			self::ATTRS             => [],
-			self::TITLE             => '',
-			self::LEADIN            => '',
-			self::DESCRIPTION       => '',
-			self::CTA               => [],
-			self::CONTENT_ALIGN     => Content_Columns::CONTENT_ALIGN_CENTER,
-		];
-	}
-
-	protected function required(): array {
-		return [
-			self::CLASSES           => [ 'c-block', 'b-content-columns' ],
-			self::CONTAINER_CLASSES => [ 'l-container', 'b-content-columns__container' ],
-			self::CONTENT_CLASSES   => [ 'b-content-columns__content' ],
-			self::COLUMN_CLASSES    => [ 'b-content-columns__column' ],
-		];
-	}
-
-	/**
-	 * @return array
-	 */
 	public function get_header_args(): array {
 		if ( empty( $this->title ) && empty( $this->description ) ) {
 			return [];
@@ -109,78 +101,7 @@ class Content_Columns_Block_Controller extends Abstract_Controller {
 		];
 	}
 
-	/**
-	 * @return \Tribe\Project\Templates\Components\Deferred_Component
-	 */
-	private function get_leadin(): Deferred_Component {
-		return defer_template_part( 'components/text/text', null, [
-			Text_Controller::CLASSES => [
-				'c-block__leadin',
-				'b-content-columns__leadin',
-				'h6',
-			],
-			Text_Controller::CONTENT => $this->leadin ?? '',
-		] );
-	}
-
-	/**
-	 * @return \Tribe\Project\Templates\Components\Deferred_Component
-	 */
-	private function get_title(): Deferred_Component {
-		return defer_template_part( 'components/text/text', null, [
-			Text_Controller::TAG     => 'h2',
-			Text_Controller::CLASSES => [
-				'c-block__title',
-				'b-content-columns__title',
-				'h3',
-			],
-			Text_Controller::CONTENT => $this->title ?? '',
-		] );
-	}
-
-	/**
-	 * @return \Tribe\Project\Templates\Components\Deferred_Component
-	 */
-	private function get_content(): Deferred_Component {
-		return defer_template_part( 'components/container/container', null, [
-			Container_Controller::CLASSES => [
-				'c-block__description',
-				'b-content-columns__description',
-				't-sink',
-				's-sink',
-			],
-			Container_Controller::CONTENT => $this->description ?? '',
-		] );
-	}
-
-	/**
-	 * @return \Tribe\Project\Templates\Components\Deferred_Component
-	 */
-	private function get_cta(): Deferred_Component {
-		$cta = wp_parse_args( $this->cta, [
-			'content'        => '',
-			'url'            => '',
-			'target'         => '',
-			'add_aria_label' => false,
-			'aria_label'     => '',
-		] );
-
-		return defer_template_part( 'components/link/link', null, [
-			Link_Controller::URL            => $cta['url'],
-			Link_Controller::CONTENT        => $cta['content'] ?: $cta['url'],
-			Link_Controller::TARGET         => $cta['target'],
-			Link_Controller::ADD_ARIA_LABEL => $cta['add_aria_label'],
-			Link_Controller::ARIA_LABEL     => $cta['aria_label'],
-			Link_Controller::CLASSES        => [
-				'c-block__cta-link',
-				'a-btn',
-				'a-btn--has-icon-after',
-				'icon-arrow-right',
-			],
-		] );
-	}
-
-	public function get_content_args( Content_Column $column ) {
+	public function get_content_args( Content_Column $column ): array {
 		$title_tag     = empty( $this->title ) ? 'h2' : 'h3';
 		$title_classes = [ count( $this->columns ) === 1 ? 'h3' : 'h4' ];
 
@@ -221,36 +142,24 @@ class Content_Columns_Block_Controller extends Abstract_Controller {
 		];
 	}
 
-	/**
-	 * @return string
-	 */
 	public function get_classes(): string {
 		$this->classes[] = sprintf( 'b-content-columns--count-%d', count( $this->columns ) );
 
 		return Markup_Utils::class_attribute( $this->classes );
 	}
 
-	/**
-	 * @return string
-	 */
 	public function get_attrs(): string {
 		return Markup_Utils::concat_attrs( $this->attrs );
 	}
 
-	public function get_columns() {
+	public function get_columns(): array {
 		return $this->columns;
 	}
 
-	/**
-	 * @return string
-	 */
 	public function get_container_classes(): string {
 		return Markup_Utils::class_attribute( $this->container_classes );
 	}
 
-	/**
-	 * @return string
-	 */
 	public function get_content_classes(): string {
 		$this->content_classes[] = 'g-centered';
 		$this->content_classes[] = sprintf( 'g-%d-up', count( $this->columns ) );
@@ -258,11 +167,92 @@ class Content_Columns_Block_Controller extends Abstract_Controller {
 		return Markup_Utils::class_attribute( $this->content_classes );
 	}
 
-	/**
-	 * @return string
-	 */
 	public function get_column_classes(): string {
 		return Markup_Utils::class_attribute( $this->column_classes );
+	}
+
+	protected function defaults(): array {
+		return [
+			self::ATTRS             => [],
+			self::CLASSES           => [],
+			self::COLUMNS           => [],
+			self::COLUMN_CLASSES    => [],
+			self::CONTAINER_CLASSES => [],
+			self::CONTENT_ALIGN     => Content_Columns::CONTENT_ALIGN_CENTER,
+			self::CONTENT_CLASSES   => [],
+			self::CTA               => [],
+			self::DESCRIPTION       => '',
+			self::LEADIN            => '',
+			self::TITLE             => '',
+		];
+	}
+
+	protected function required(): array {
+		return [
+			self::CLASSES           => [ 'c-block', 'b-content-columns' ],
+			self::COLUMN_CLASSES    => [ 'b-content-columns__column' ],
+			self::CONTAINER_CLASSES => [ 'l-container', 'b-content-columns__container' ],
+			self::CONTENT_CLASSES   => [ 'b-content-columns__content' ],
+		];
+	}
+
+	private function get_leadin(): Deferred_Component {
+		return defer_template_part( 'components/text/text', null, [
+			Text_Controller::CLASSES => [
+				'c-block__leadin',
+				'b-content-columns__leadin',
+				'h6',
+			],
+			Text_Controller::CONTENT => $this->leadin ?? '',
+		] );
+	}
+
+	private function get_title(): Deferred_Component {
+		return defer_template_part( 'components/text/text', null, [
+			Text_Controller::TAG     => 'h2',
+			Text_Controller::CLASSES => [
+				'c-block__title',
+				'b-content-columns__title',
+				'h3',
+			],
+			Text_Controller::CONTENT => $this->title ?? '',
+		] );
+	}
+
+	private function get_content(): Deferred_Component {
+		return defer_template_part( 'components/container/container', null, [
+			Container_Controller::CLASSES => [
+				'c-block__description',
+				'b-content-columns__description',
+				't-sink',
+				's-sink',
+			],
+			Container_Controller::CONTENT => $this->description ?? '',
+		] );
+	}
+
+	private function get_cta(): Deferred_Component {
+		$cta = wp_parse_args( $this->cta, [
+			'content'        => '',
+			'url'            => '',
+			'target'         => '',
+			'add_aria_label' => false,
+			'aria_label'     => '',
+		] );
+
+		return defer_template_part( 'components/link/link', null, [
+			Link_Controller::URL            => $cta['url'],
+			Link_Controller::CONTENT        => $cta['content'] ?: $cta['url'],
+			Link_Controller::TARGET         => $cta['target'],
+			Link_Controller::ADD_ARIA_LABEL => $cta['add_aria_label'],
+			Link_Controller::ARIA_LABEL     => $cta['aria_label'],
+			Link_Controller::CLASSES        => [
+				'c-block__cta-link',
+				'a-btn',
+				'a-btn--has-icon-after',
+				'icon-arrow-right',
+			],
+		] );
 	}
 
 }

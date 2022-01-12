@@ -33,7 +33,7 @@ class Tabs extends Block_Config implements Cta_Field {
 	/**
 	 * Register the block
 	 */
-	public function add_block() {
+	public function add_block(): void {
 		$this->set_block( new Block( self::NAME, [
 			'title'       => __( 'Tabs', 'tribe' ),
 			'description' => __( 'Tab block', 'tribe' ),
@@ -92,7 +92,7 @@ class Tabs extends Block_Config implements Cta_Field {
 	/**
 	 * Register Fields for block
 	 */
-	public function add_fields() {
+	public function add_fields(): void {
 		$this->add_field( new Field( self::NAME . '_' . self::LAYOUT, [
 				'label'         => __( 'Layout', 'tribe' ),
 				'type'          => 'button_group',

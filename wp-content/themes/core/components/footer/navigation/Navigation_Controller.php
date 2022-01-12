@@ -9,39 +9,33 @@ use Tribe\Project\Templates\Components\Abstract_Controller;
 
 class Navigation_Controller extends Abstract_Controller {
 
-	public const CLASSES          = 'classes';
 	public const ATTRS            = 'attrs';
+	public const CLASSES          = 'classes';
 	public const NAV_LIST_CLASSES = 'nav_list_classes';
 
-	private array $classes;
+	/**
+	 * @var string[]
+	 */
 	private array $attrs;
+
+	/**
+	 * @var string[]
+	 */
+	private array $classes;
+
+	/**
+	 * @var string[]
+	 */
 	private array $nav_list_classes;
 	private string $location;
 
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
 
-		$this->classes          = (array) $args[ self::CLASSES ];
 		$this->attrs            = (array) $args[ self::ATTRS ];
-		$this->nav_list_classes = (array) $args[ self::NAV_LIST_CLASSES ];
+		$this->classes          = (array) $args[ self::CLASSES ];
 		$this->location         = Nav_Menus_Definer::SECONDARY;
-	}
-
-	protected function defaults(): array {
-		return [
-			self::CLASSES          => [],
-			self::ATTRS            => [
-				'aria-label' => esc_html__( 'Secondary Navigation', 'tribe' ),
-			],
-			self::NAV_LIST_CLASSES => [],
-		];
-	}
-
-	protected function required(): array {
-		return [
-			self::CLASSES          => [ 'site-footer__nav' ],
-			self::NAV_LIST_CLASSES => [ 'site-footer__nav-list' ],
-		];
+		$this->nav_list_classes = (array) $args[ self::NAV_LIST_CLASSES ];
 	}
 
 	public function get_classes(): string {
@@ -74,6 +68,23 @@ class Navigation_Controller extends Abstract_Controller {
 		];
 
 		return Menu::menu( $args );
+	}
+
+	protected function defaults(): array {
+		return [
+			self::ATTRS            => [
+				'aria-label' => esc_html__( 'Secondary Navigation', 'tribe' ),
+			],
+			self::CLASSES          => [],
+			self::NAV_LIST_CLASSES => [],
+		];
+	}
+
+	protected function required(): array {
+		return [
+			self::CLASSES          => [ 'site-footer__nav' ],
+			self::NAV_LIST_CLASSES => [ 'site-footer__nav-list' ],
+		];
 	}
 
 }

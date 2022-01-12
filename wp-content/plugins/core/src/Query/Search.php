@@ -10,10 +10,12 @@ class Search {
 	 * Prevents the query for the WP Core search from running when there is no search term `?s=`,
 	 * but still returns the search route (page title, template, etc).
 	 *
-	 * @param string $request
+	 * @param string    $request
 	 * @param \WP_Query $query
 	 *
-	 * @hook https://developer.wordpress.org/reference/hooks/posts_request/
+	 * @filter posts_request
+	 *
+	 * @return string
 	 */
 	public function force_load_search_template( string $request, WP_Query $query ): string {
 		/*

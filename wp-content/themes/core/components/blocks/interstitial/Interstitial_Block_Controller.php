@@ -14,120 +14,88 @@ use Tribe\Project\Theme\Config\Image_Sizes;
 
 class Interstitial_Block_Controller extends Abstract_Controller {
 
-	public const LAYOUT            = 'layout';
-	public const MEDIA             = 'media';
-	public const LEADIN            = 'leadin';
-	public const TITLE             = 'title';
-	public const CTA               = 'cta';
-	public const CONTAINER_CLASSES = 'container_classes';
-	public const MEDIA_CLASSES     = 'media_classes';
-	public const CONTENT_CLASSES   = 'content_classes';
-	public const CLASSES           = 'classes';
 	public const ATTRS             = 'attrs';
+	public const CLASSES           = 'classes';
+	public const CONTAINER_CLASSES = 'container_classes';
+	public const CONTENT_CLASSES   = 'content_classes';
+	public const CTA               = 'cta';
+	public const LAYOUT            = 'layout';
+	public const LEADIN            = 'leadin';
+	public const MEDIA             = 'media';
+	public const MEDIA_CLASSES     = 'media_classes';
+	public const TITLE             = 'title';
 
 	/**
-	 * @var int|string
+	 * @var string[]
 	 */
-	private $media;
-
-	private string $layout;
-	private string $leadin;
-	private string $title;
-	private array $cta;
-	private array $container_classes;
-	private array $media_classes;
-	private array $content_classes;
-	private array $classes;
 	private array $attrs;
 
 	/**
-	 * @param array $args
+	 * @var string[]
 	 */
+	private array $classes;
+
+	/**
+	 * @var string[]
+	 */
+	private array $container_classes;
+
+	/**
+	 * @var string[]
+	 */
+	private array $content_classes;
+
+	/**
+	 * @var string[]
+	 */
+	private array $cta;
+
+	/**
+	 * @var string[]
+	 */
+	private array $media_classes;
+	private int $media;
+	private string $layout;
+	private string $leadin;
+	private string $title;
+
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
 
-		$this->classes           = (array) $args[ self::CLASSES ];
-		$this->layout            = (string) $args[ self::LAYOUT ];
-		$this->media             = $args[ self::MEDIA ];
-		$this->leadin            = (string) $args[ self::LEADIN ];
-		$this->title             = (string) $args[ self::TITLE ];
-		$this->cta               = (array) $args[ self::CTA ];
-		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
-		$this->media_classes     = (array) $args[ self::MEDIA_CLASSES ];
-		$this->content_classes   = (array) $args[ self::CONTENT_CLASSES ];
 		$this->attrs             = (array) $args[ self::ATTRS ];
+		$this->classes           = (array) $args[ self::CLASSES ];
+		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
+		$this->content_classes   = (array) $args[ self::CONTENT_CLASSES ];
+		$this->cta               = (array) $args[ self::CTA ];
+		$this->layout            = (string) $args[ self::LAYOUT ];
+		$this->leadin            = (string) $args[ self::LEADIN ];
+		$this->media             = (int) $args[ self::MEDIA ];
+		$this->media_classes     = (array) $args[ self::MEDIA_CLASSES ];
+		$this->title             = (string) $args[ self::TITLE ];
 	}
 
-	/**
-	 * @return array
-	 */
-	protected function defaults(): array {
-		return [
-			self::LAYOUT            => Interstitial_Block::LAYOUT_LEFT,
-			self::MEDIA             => null,
-			self::LEADIN            => '',
-			self::TITLE             => '',
-			self::CTA               => [],
-			self::CONTAINER_CLASSES => [],
-			self::MEDIA_CLASSES     => [],
-			self::CONTENT_CLASSES   => [],
-			self::CLASSES           => [ 'c-block--full-bleed' ],
-			self::ATTRS             => [],
-		];
-	}
-
-	/**
-	 * @return array
-	 */
-	protected function required(): array {
-		return [
-			self::CONTAINER_CLASSES => [ 'b-interstitial__container', 'l-container' ],
-			self::MEDIA_CLASSES     => [ 'b-interstitial__media' ],
-			self::CONTENT_CLASSES   => [ 'b-interstitial__content' ],
-			self::CLASSES           => [ 'c-block', 'b-interstitial' ],
-		];
-	}
-
-	/**
-	 * @return string
-	 */
 	public function get_classes(): string {
 		$this->classes[] = 'c-block--layout-' . $this->layout;
 
 		return Markup_Utils::class_attribute( $this->classes );
 	}
 
-	/**
-	 * @return string
-	 */
 	public function get_attrs(): string {
 		return Markup_Utils::concat_attrs( $this->attrs );
 	}
 
-	/**
-	 * @return string
-	 */
 	public function get_container_classes(): string {
 		return Markup_Utils::class_attribute( $this->container_classes );
 	}
 
-	/**
-	 * @return string
-	 */
 	public function get_media_classes(): string {
 		return Markup_Utils::class_attribute( $this->media_classes );
 	}
 
-	/**
-	 * @return string
-	 */
 	public function get_content_classes(): string {
 		return Markup_Utils::class_attribute( $this->content_classes );
 	}
 
-	/**
-	 * @return array
-	 */
 	public function get_content_args(): array {
 		if ( empty( $this->title ) && empty( $this->cta ) ) {
 			return [];
@@ -147,9 +115,51 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 		];
 	}
 
-	/**
-	 * @return \Tribe\Project\Templates\Components\Deferred_Component
-	 */
+	public function get_media_args(): array {
+		if ( ! $this->media ) {
+			return [];
+		}
+
+		return [
+			Image_Controller::IMG_ID       => $this->media,
+			Image_Controller::AS_BG        => true,
+			Image_Controller::AUTO_SHIM    => false,
+			Image_Controller::USE_LAZYLOAD => true,
+			Image_Controller::WRAPPER_TAG  => 'div',
+			Image_Controller::CLASSES      => [ 'b-interstitial__figure', 'c-image--bg', 'c-image--overlay' ],
+			Image_Controller::IMG_CLASSES  => [ 'b-interstitial__img' ],
+			Image_Controller::SRC_SIZE     => Image_Sizes::CORE_FULL,
+			Image_Controller::SRCSET_SIZES => [
+				Image_Sizes::CORE_FULL,
+				Image_Sizes::CORE_MOBILE,
+			],
+		];
+	}
+
+	protected function defaults(): array {
+		return [
+			self::ATTRS             => [],
+			self::CLASSES           => [ 'c-block--full-bleed' ],
+			self::CONTAINER_CLASSES => [],
+			self::CONTENT_CLASSES   => [],
+			self::CTA               => [],
+			self::LAYOUT            => Interstitial_Block::LAYOUT_LEFT,
+			self::LEADIN            => '',
+			self::MEDIA             => 0,
+			self::MEDIA_CLASSES     => [],
+			self::TITLE             => '',
+		];
+	}
+
+	protected function required(): array {
+		return [
+			self::CLASSES           => [ 'c-block', 'b-interstitial' ],
+			self::CONTAINER_CLASSES => [ 'b-interstitial__container', 'l-container' ],
+			self::CONTENT_CLASSES   => [ 'b-interstitial__content' ],
+			self::MEDIA_CLASSES     => [ 'b-interstitial__media' ],
+		];
+	}
+
 	private function get_leadin(): Deferred_Component {
 		return defer_template_part( 'components/text/text', null, [
 			Text_Controller::CLASSES => [
@@ -159,9 +169,6 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 		] );
 	}
 
-	/**
-	 * @return \Tribe\Project\Templates\Components\Deferred_Component
-	 */
 	private function get_title(): Deferred_Component {
 		return defer_template_part( 'components/text/text', null, [
 			Text_Controller::TAG     => 'h2',
@@ -174,9 +181,6 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 		] );
 	}
 
-	/**
-	 * @return \Tribe\Project\Templates\Components\Deferred_Component
-	 */
 	private function get_cta(): Deferred_Component {
 		$cta = wp_parse_args( $this->cta, [
 			'content'        => '',
@@ -199,30 +203,6 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 				'icon-arrow-right',
 			],
 		] );
-	}
-
-	/**
-	 * @return array
-	 */
-	public function get_media_args(): array {
-		if ( ! $this->media ) {
-			return [];
-		}
-
-		return [
-			Image_Controller::IMG_ID       => $this->media,
-			Image_Controller::AS_BG        => true,
-			Image_Controller::AUTO_SHIM    => false,
-			Image_Controller::USE_LAZYLOAD => true,
-			Image_Controller::WRAPPER_TAG  => 'div',
-			Image_Controller::CLASSES      => [ 'b-interstitial__figure', 'c-image--bg', 'c-image--overlay' ],
-			Image_Controller::IMG_CLASSES  => [ 'b-interstitial__img' ],
-			Image_Controller::SRC_SIZE     => Image_Sizes::CORE_FULL,
-			Image_Controller::SRCSET_SIZES => [
-				Image_Sizes::CORE_FULL,
-				Image_Sizes::CORE_MOBILE,
-			],
-		];
 	}
 
 }

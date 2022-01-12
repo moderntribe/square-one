@@ -1,11 +1,10 @@
 <?php declare(strict_types=1);
 
-use \Tribe\Project\Templates\Components\slider\Slider_Controller;
+use Tribe\Project\Templates\Components\slider\Slider_Controller;
 
 /**
  * @var array $args Arguments passed to the template
  */
-// phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
 $c = Slider_Controller::factory( $args );
 
 if ( empty( $c->get_slides() ) ) {

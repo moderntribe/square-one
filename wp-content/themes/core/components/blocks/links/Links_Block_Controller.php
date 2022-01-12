@@ -13,29 +13,54 @@ use Tribe\Project\Templates\Components\text\Text_Controller;
 
 class Links_Block_Controller extends Abstract_Controller {
 
-	public const LAYOUT            = 'layout';
-	public const TITLE             = 'title';
-	public const LEADIN            = 'leadin';
-	public const DESCRIPTION       = 'description';
-	public const CTA               = 'cta';
+	public const ATTRS             = 'attrs';
+	public const CLASSES           = 'classes';
 	public const CONTAINER_CLASSES = 'container_classes';
 	public const CONTENT_CLASSES   = 'content_classes';
-	public const CLASSES           = 'classes';
-	public const ATTRS             = 'attrs';
+	public const CTA               = 'cta';
+	public const DESCRIPTION       = 'description';
+	public const LAYOUT            = 'layout';
+	public const LEADIN            = 'leadin';
 	public const LINKS             = 'links';
 	public const LINKS_TITLE       = 'links_title';
+	public const TITLE             = 'title';
 
-	private string $layout;
-	private string $title;
-	private string $leadin;
-	private string $description;
-	private array $cta;
-	private array $container_classes;
-	private array $content_classes;
-	private array $classes;
+	/**
+	 * @var string[]
+	 */
 	private array $attrs;
+
+	/**
+	 * @var string[]
+	 */
+	private array $classes;
+
+	/**
+	 * @var string[]
+	 */
+	private array $container_classes;
+
+	/**
+	 * @var string[]
+	 */
+	private array $content_classes;
+
+	/**
+	 * @var string[]
+	 */
+	private array $cta;
+
+	/**
+	 * @var mixed[]
+	 *
+	 * @see \Tribe\Project\Blocks\Types\Links\Links::get_links_section()
+	 */
 	private array $links;
+	private string $description;
+	private string $layout;
+	private string $leadin;
 	private string $links_title;
+	private string $title;
 
 	/**
 	 * @param array $args
@@ -43,82 +68,37 @@ class Links_Block_Controller extends Abstract_Controller {
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
 
-		$this->layout            = (string) $args[ self::LAYOUT ];
-		$this->title             = (string) $args[ self::TITLE ];
-		$this->leadin            = (string) $args[ self::LEADIN ];
-		$this->description       = (string) $args[ self::DESCRIPTION ];
-		$this->cta               = (array) $args[ self::CTA ];
+		$this->attrs             = (array) $args[ self::ATTRS ];
+		$this->classes           = (array) $args[ self::CLASSES ];
 		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
 		$this->content_classes   = (array) $args[ self::CONTENT_CLASSES ];
-		$this->classes           = (array) $args[ self::CLASSES ];
-		$this->attrs             = (array) $args[ self::ATTRS ];
+		$this->cta               = (array) $args[ self::CTA ];
+		$this->description       = (string) $args[ self::DESCRIPTION ];
+		$this->layout            = (string) $args[ self::LAYOUT ];
+		$this->leadin            = (string) $args[ self::LEADIN ];
 		$this->links             = (array) $args[ self::LINKS ];
 		$this->links_title       = (string) $args[ self::LINKS_TITLE ];
+		$this->title             = (string) $args[ self::TITLE ];
 	}
 
-	/**
-	 * @return array
-	 */
-	protected function defaults(): array {
-		return [
-			self::LAYOUT            => Links_Block::LAYOUT_STACKED,
-			self::TITLE             => '',
-			self::LEADIN            => '',
-			self::DESCRIPTION       => '',
-			self::CTA               => [],
-			self::CONTAINER_CLASSES => [],
-			self::CONTENT_CLASSES   => [],
-			self::CLASSES           => [],
-			self::ATTRS             => [],
-			self::LINKS             => [],
-			self::LINKS_TITLE       => '',
-		];
-	}
-
-	/**
-	 * @return array
-	 */
-	protected function required(): array {
-		return [
-			self::CONTAINER_CLASSES => [ 'b-links__container', 'l-container' ],
-			self::CONTENT_CLASSES   => [ 'b-links__content' ],
-			self::CLASSES           => [ 'c-block', 'b-links' ],
-		];
-	}
-
-	/**
-	 * @return string
-	 */
 	public function get_container_classes(): string {
 		return Markup_Utils::class_attribute( $this->container_classes );
 	}
 
-	/**
-	 * @return string
-	 */
 	public function get_content_classes(): string {
 		return Markup_Utils::class_attribute( $this->content_classes );
 	}
 
-	/**
-	 * @return string
-	 */
 	public function get_classes(): string {
 		$this->classes[] = 'c-block--layout-' . $this->layout;
 
 		return Markup_Utils::class_attribute( $this->classes );
 	}
 
-	/**
-	 * @return string
-	 */
 	public function get_attrs(): string {
 		return Markup_Utils::concat_attrs( $this->attrs );
 	}
 
-	/**
-	 * @return array
-	 */
 	public function get_header_args(): array {
 		if ( empty( $this->title ) && empty( $this->description ) ) {
 			return [];
@@ -139,9 +119,65 @@ class Links_Block_Controller extends Abstract_Controller {
 		];
 	}
 
-	/**
-	 * @return \Tribe\Project\Templates\Components\Deferred_Component
-	 */
+	public function get_links_title_args(): array {
+		if ( empty( $this->links_title ) ) {
+			return [];
+		}
+
+		return [
+			Text_Controller::TAG     => 'h3',
+			Text_Controller::CLASSES => [ 'b-links__list-title', 'h5' ],
+			Text_Controller::CONTENT => $this->links_title,
+		];
+	}
+
+	public function get_links(): array {
+		$rows = array_filter( $this->links, static function ( $row ) {
+			return array_key_exists( 'g-cta', $row );
+		} );
+
+		if ( empty( $rows ) ) {
+			return [];
+		}
+
+		return array_map( static function ( $row ) {
+			return [
+				Link_Controller::URL            => $row['g-cta']['link']['url'] ?? '',
+				Link_Controller::CONTENT        => $row['g-cta']['link']['title'] ?? '',
+				Link_Controller::TARGET         => $row['g-cta']['link']['target'] ?? '',
+				Link_Controller::ADD_ARIA_LABEL => $row['g-cta']['add_aria_label'] ?? '',
+				Link_Controller::ARIA_LABEL     => $row['g-cta']['aria_label'] ?? '',
+				Link_Controller::CLASSES        => [ 'b-links__list-link' ],
+				Link_Controller::HEADER         => $row['link_header'] ?? '',
+				Link_Controller::DESCRIPTION    => $row['link_content'] ?? '',
+			];
+		}, $rows );
+	}
+
+	protected function defaults(): array {
+		return [
+			self::ATTRS             => [],
+			self::CLASSES           => [],
+			self::CONTAINER_CLASSES => [],
+			self::CONTENT_CLASSES   => [],
+			self::CTA               => [],
+			self::DESCRIPTION       => '',
+			self::LAYOUT            => Links_Block::LAYOUT_STACKED,
+			self::LEADIN            => '',
+			self::LINKS             => [],
+			self::LINKS_TITLE       => '',
+			self::TITLE             => '',
+		];
+	}
+
+	protected function required(): array {
+		return [
+			self::CONTAINER_CLASSES => [ 'b-links__container', 'l-container' ],
+			self::CONTENT_CLASSES   => [ 'b-links__content' ],
+			self::CLASSES           => [ 'c-block', 'b-links' ],
+		];
+	}
+
 	private function get_leadin(): Deferred_Component {
 		return defer_template_part( 'components/text/text', null, [
 			Text_Controller::CLASSES => [
@@ -152,9 +188,6 @@ class Links_Block_Controller extends Abstract_Controller {
 		] );
 	}
 
-	/**
-	 * @return \Tribe\Project\Templates\Components\Deferred_Component
-	 */
 	private function get_title(): Deferred_Component {
 		return defer_template_part( 'components/text/text', null, [
 			Text_Controller::TAG     => 'h2',
@@ -167,9 +200,6 @@ class Links_Block_Controller extends Abstract_Controller {
 		] );
 	}
 
-	/**
-	 * @return \Tribe\Project\Templates\Components\Deferred_Component
-	 */
 	private function get_content(): Deferred_Component {
 		return defer_template_part( 'components/container/container', null, [
 			Container_Controller::CLASSES => [
@@ -182,9 +212,6 @@ class Links_Block_Controller extends Abstract_Controller {
 		] );
 	}
 
-	/**
-	 * @return \Tribe\Project\Templates\Components\Deferred_Component
-	 */
 	private function get_cta(): Deferred_Component {
 		$cta = wp_parse_args( $this->cta, [
 			'content'        => '',
@@ -207,47 +234,6 @@ class Links_Block_Controller extends Abstract_Controller {
 				'icon-arrow-right',
 			],
 		] );
-	}
-
-	/**
-	 * @return array
-	 */
-	public function get_links_title_args(): array {
-		if ( empty( $this->links_title ) ) {
-			return [];
-		}
-
-		return [
-			Text_Controller::TAG     => 'h3',
-			Text_Controller::CLASSES => [ 'b-links__list-title', 'h5' ],
-			Text_Controller::CONTENT => $this->links_title,
-		];
-	}
-
-	/**
-	 * @return array
-	 */
-	public function get_links(): array {
-		$rows = array_filter( $this->links, static function ( $row ) {
-			return array_key_exists( 'g-cta', $row );
-		} );
-
-		if ( empty( $rows ) ) {
-			return [];
-		}
-
-		return array_map( static function ( $row ) {
-			return [
-				Link_Controller::URL            => $row['g-cta']['link']['url'] ?? '',
-				Link_Controller::CONTENT        => $row['g-cta']['link']['title'] ?? '',
-				Link_Controller::TARGET         => $row['g-cta']['link']['target'] ?? '',
-				Link_Controller::ADD_ARIA_LABEL => $row['g-cta']['add_aria_label'] ?? '',
-				Link_Controller::ARIA_LABEL     => $row['g-cta']['aria_label'] ?? '',
-				Link_Controller::CLASSES        => [ 'b-links__list-link' ],
-				Link_Controller::HEADER         => $row['link_header'] ?? '',
-				Link_Controller::DESCRIPTION    => $row['link_content'] ?? '',
-			];
-		}, $rows );
 	}
 
 }

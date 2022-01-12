@@ -16,108 +16,93 @@ use Tribe\Project\Theme\Config\Image_Sizes;
 
 class Card_Grid_Controller extends Abstract_Controller {
 
-	public const TITLE             = 'title';
-	public const LEADIN            = 'leadin';
-	public const DESCRIPTION       = 'description';
-	public const CTA               = 'cta';
-	public const POSTS             = 'posts';
-	public const CONTAINER_CLASSES = 'container_classes';
-	public const LOOP_CLASSES      = 'loop_classes';
-	public const LOOP_ATTRS        = 'loop_attrs';
-	public const CLASSES           = 'classes';
 	public const ATTRS             = 'attrs';
+	public const CLASSES           = 'classes';
+	public const CONTAINER_CLASSES = 'container_classes';
+	public const CTA               = 'cta';
+	public const DESCRIPTION       = 'description';
 	public const LAYOUT            = 'layout';
+	public const LEADIN            = 'leadin';
+	public const LOOP_ATTRS        = 'loop_attrs';
+	public const LOOP_CLASSES      = 'loop_classes';
+	public const POSTS             = 'posts';
+	public const TITLE             = 'title';
 
-	private string $layout;
-	private string $title;
-	private string $leadin;
-	private string $description;
-	private array $cta;
-	private array $posts;
-	private array $container_classes;
-	private array $loop_classes;
-	private array $loop_attrs;
-	private array $classes;
+	/**
+	 * @var string[]
+	 */
 	private array $attrs;
 
+	/**
+	 * @var string[]
+	 */
+	private array $classes;
+
+	/**
+	 * @var string[]
+	 */
+	private array $container_classes;
+
+	/**
+	 * @var string[]
+	 */
+	private array $cta;
+
+	/**
+	 * @var string[]
+	 */
+	private array $loop_attrs;
+
+	/**
+	 * @var string[]
+	 */
+	private array $loop_classes;
+
+	/**
+	 * @var array<string, mixed>
+	 *
+	 * @see \Tribe\ACF_Post_List\Post_List_Field::format_post()
+	 */
+	private array $posts;
+	private string $description;
+	private string $layout;
+	private string $leadin;
+	private string $title;
+
 	public function __construct( array $args = [] ) {
-		$args                    = $this->parse_args( $args );
-		$this->title             = (string) $args[ self::TITLE ];
-		$this->leadin            = (string) $args[ self::LEADIN ];
-		$this->description       = (string) $args[ self::DESCRIPTION ];
-		$this->cta               = (array) $args[ self::CTA ];
-		$this->posts             = (array) $args[ self::POSTS ];
-		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
-		$this->loop_classes      = (array) $args[ self::LOOP_CLASSES ];
-		$this->loop_attrs        = (array) $args[ self::LOOP_ATTRS ];
-		$this->classes           = (array) $args[ self::CLASSES ];
+		$args = $this->parse_args( $args );
+
 		$this->attrs             = (array) $args[ self::ATTRS ];
+		$this->classes           = (array) $args[ self::CLASSES ];
+		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
+		$this->cta               = (array) $args[ self::CTA ];
+		$this->description       = (string) $args[ self::DESCRIPTION ];
 		$this->layout            = (string) $args[ self::LAYOUT ];
+		$this->leadin            = (string) $args[ self::LEADIN ];
+		$this->loop_attrs        = (array) $args[ self::LOOP_ATTRS ];
+		$this->loop_classes      = (array) $args[ self::LOOP_CLASSES ];
+		$this->posts             = (array) $args[ self::POSTS ];
+		$this->title             = (string) $args[ self::TITLE ];
 	}
 
-	/**
-	 * @return array
-	 */
-	protected function defaults(): array {
-		return [
-			self::TITLE             => '',
-			self::LEADIN            => '',
-			self::DESCRIPTION       => '',
-			self::POSTS             => [],
-			self::CTA               => [],
-			self::CONTAINER_CLASSES => [],
-			self::LOOP_CLASSES      => [],
-			self::LOOP_ATTRS        => [],
-			self::CLASSES           => [],
-			self::ATTRS             => [],
-			self::LAYOUT            => Card_Grid::LAYOUT_STACKED,
-		];
-	}
-
-	/**
-	 * @return array
-	 */
-	protected function required(): array {
-		return [
-			self::CONTAINER_CLASSES => [ 'b-card-grid__container', 'l-container' ],
-			self::LOOP_CLASSES      => [ 'b-card-grid__loop' ],
-			self::CLASSES           => [ 'c-block', 'b-card-grid' ],
-		];
-	}
-
-	/**
-	 * @return string
-	 */
 	public function get_layout(): string {
 		return $this->layout;
 	}
 
-	/**
-	 * @return string
-	 */
 	public function get_classes(): string {
 		$this->classes[] = 'b-card-grid--layout-' . $this->layout;
 
 		return Markup_Utils::class_attribute( $this->classes );
 	}
 
-	/**
-	 * @return string
-	 */
 	public function get_attrs(): string {
 		return Markup_Utils::concat_attrs( $this->attrs );
 	}
 
-	/**
-	 * @return string
-	 */
 	public function get_container_classes(): string {
 		return Markup_Utils::class_attribute( $this->container_classes );
 	}
 
-	/**
-	 * @return string
-	 */
 	public function get_loop_classes(): string {
 		$card_count = count( $this->posts );
 
@@ -131,16 +116,10 @@ class Card_Grid_Controller extends Abstract_Controller {
 		return Markup_Utils::class_attribute( $this->loop_classes );
 	}
 
-	/**
-	 * @return string
-	 */
 	public function get_loop_attrs(): string {
 		return Markup_Utils::concat_attrs( $this->loop_attrs );
 	}
 
-	/**
-	 * @return array
-	 */
 	public function get_header_args(): array {
 		if ( empty( $this->title ) && empty( $this->description ) ) {
 			return [];
@@ -161,8 +140,9 @@ class Card_Grid_Controller extends Abstract_Controller {
 		];
 	}
 
-	public function get_posts_card_args() {
+	public function get_posts_card_args(): array {
 		$cards = [];
+
 		foreach ( $this->posts as $post ) {
 			$link    = $post['link'];
 			$uuid    = uniqid( 'p-' );
@@ -226,9 +206,30 @@ class Card_Grid_Controller extends Abstract_Controller {
 		return $cards;
 	}
 
-	/**
-	 * @return \Tribe\Project\Templates\Components\Deferred_Component
-	 */
+	protected function defaults(): array {
+		return [
+			self::ATTRS             => [],
+			self::CLASSES           => [],
+			self::CONTAINER_CLASSES => [],
+			self::CTA               => [],
+			self::DESCRIPTION       => '',
+			self::LAYOUT            => Card_Grid::LAYOUT_STACKED,
+			self::LEADIN            => '',
+			self::LOOP_ATTRS        => [],
+			self::LOOP_CLASSES      => [],
+			self::POSTS             => [],
+			self::TITLE             => '',
+		];
+	}
+
+	protected function required(): array {
+		return [
+			self::CLASSES           => [ 'c-block', 'b-card-grid' ],
+			self::CONTAINER_CLASSES => [ 'b-card-grid__container', 'l-container' ],
+			self::LOOP_CLASSES      => [ 'b-card-grid__loop' ],
+		];
+	}
+
 	private function get_title(): Deferred_Component {
 		return defer_template_part( 'components/text/text', null, [
 			Text_Controller::TAG     => 'h2',
@@ -241,9 +242,6 @@ class Card_Grid_Controller extends Abstract_Controller {
 		] );
 	}
 
-	/**
-	 * @return \Tribe\Project\Templates\Components\Deferred_Component
-	 */
 	private function get_leadin(): Deferred_Component {
 		return defer_template_part( 'components/text/text', null, [
 			Text_Controller::TAG     => 'p',
@@ -255,9 +253,6 @@ class Card_Grid_Controller extends Abstract_Controller {
 		] );
 	}
 
-	/**
-	 * @return \Tribe\Project\Templates\Components\Deferred_Component
-	 */
 	private function get_content(): Deferred_Component {
 		return defer_template_part( 'components/container/container', null, [
 			Container_Controller::CLASSES => [
@@ -270,9 +265,6 @@ class Card_Grid_Controller extends Abstract_Controller {
 		] );
 	}
 
-	/**
-	 * @return \Tribe\Project\Templates\Components\Deferred_Component
-	 */
 	private function get_cta(): Deferred_Component {
 		$cta = wp_parse_args( $this->cta, [
 			'content'        => '',

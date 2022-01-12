@@ -13,86 +13,68 @@ use Tribe\Project\Templates\Components\text\Text_Controller;
 
 class Lead_Form_Block_Controller extends Abstract_Controller {
 
-	public const WIDTH             = 'width';
-	public const LAYOUT            = 'layout';
-	public const TITLE             = 'title';
-	public const LEADIN            = 'leadin';
-	public const DESCRIPTION       = 'description';
-	public const CTA               = 'cta';
-	public const CONTAINER_CLASSES = 'container_classes';
-	public const FORM_CLASSES      = 'form_classes';
-	public const CLASSES           = 'classes';
 	public const ATTRS             = 'attrs';
 	public const BACKGROUND        = 'background';
+	public const CLASSES           = 'classes';
+	public const CONTAINER_CLASSES = 'container_classes';
+	public const CTA               = 'cta';
+	public const DESCRIPTION       = 'description';
+	public const FORM_CLASSES      = 'form_classes';
 	public const FORM_FIELDS       = 'form_fields';
-
-	private string $width;
-	private string $layout;
-	private string $title;
-	private string $leadin;
-	private string $description;
-	private array $cta;
-	private array $container_classes;
-	private array $form_classes;
-	private array $classes;
-	private array $attrs;
-	private string $background;
-	private string $form_fields;
+	public const LAYOUT            = 'layout';
+	public const LEADIN            = 'leadin';
+	public const TITLE             = 'title';
+	public const WIDTH             = 'width';
 
 	/**
-	 * @param array $args
+	 * @var string[]
 	 */
+	private array $attrs;
+
+	/**
+	 * @var string[]
+	 */
+	private array $classes;
+
+	/**
+	 * @var string[]
+	 */
+	private array $container_classes;
+
+	/**
+	 * @var string[]
+	 */
+	private array $cta;
+
+	/**
+	 * @var string[]
+	 */
+	private array $form_classes;
+	private string $background;
+	private string $description;
+	private string $form_fields;
+	private string $layout;
+	private string $leadin;
+	private string $title;
+	private string $width;
+
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
 
-		$this->layout            = (string) $args[ self::LAYOUT ];
-		$this->width             = (string) $args[ self::WIDTH ];
-		$this->title             = (string) $args[ self::TITLE ];
-		$this->leadin            = (string) $args[ self::LEADIN ];
-		$this->description       = (string) $args[ self::DESCRIPTION ];
-		$this->cta               = (array) $args[ self::CTA ];
-		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
-		$this->form_classes      = (array) $args[ self::FORM_CLASSES ];
-		$this->classes           = (array) $args[ self::CLASSES ];
 		$this->attrs             = (array) $args[ self::ATTRS ];
 		$this->background        = (string) $args[ self::BACKGROUND ];
+		$this->classes           = (array) $args[ self::CLASSES ];
+		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
+		$this->cta               = (array) $args[ self::CTA ];
+		$this->description       = (string) $args[ self::DESCRIPTION ];
+		$this->form_classes      = (array) $args[ self::FORM_CLASSES ];
 		$this->form_fields       = (string) $args[ self::FORM_FIELDS ];
+		$this->layout            = (string) $args[ self::LAYOUT ];
+		$this->leadin            = (string) $args[ self::LEADIN ];
+		$this->title             = (string) $args[ self::TITLE ];
+		$this->width             = (string) $args[ self::WIDTH ];
 	}
 
-	/**
-	 * @return array
-	 */
-	protected function defaults(): array {
-		return [
-			self::WIDTH             => Lead_Form_Block::WIDTH_GRID,
-			self::LAYOUT            => Lead_Form_Block::LAYOUT_BOTTOM,
-			self::BACKGROUND        => Lead_Form_Block::BACKGROUND_LIGHT,
-			self::FORM_FIELDS       => Lead_Form_Block::FORM_STACKED,
-			self::TITLE             => '',
-			self::LEADIN            => '',
-			self::DESCRIPTION       => '',
-			self::CTA               => [],
-			self::CONTAINER_CLASSES => [],
-			self::FORM_CLASSES      => [],
-			self::CLASSES           => [],
-			self::ATTRS             => [],
-		];
-	}
-
-	/**
-	 * @return array
-	 */
-	protected function required(): array {
-		return [
-			self::CONTAINER_CLASSES => [ 'b-lead-form__container' ],
-			self::FORM_CLASSES      => [ 'b-lead-form__form' ],
-			self::CLASSES           => [ 'c-block', 'b-lead-form' ],
-		];
-	}
-
-	/**
-	 * @return string
-	 */
 	public function get_classes(): string {
 		$this->classes[] = 'b-lead-form--layout-' . $this->layout;
 		$this->classes[] = 'b-lead-form--width-' . $this->width;
@@ -113,16 +95,10 @@ class Lead_Form_Block_Controller extends Abstract_Controller {
 		return Markup_Utils::class_attribute( $this->classes );
 	}
 
-	/**
-	 * @return string
-	 */
 	public function get_attrs(): string {
 		return Markup_Utils::concat_attrs( $this->attrs );
 	}
 
-	/**
-	 * @return string
-	 */
 	public function get_container_classes(): string {
 		if ( $this->width === Lead_Form_Block::WIDTH_FULL ) {
 			$this->container_classes[] = 'l-container';
@@ -136,9 +112,6 @@ class Lead_Form_Block_Controller extends Abstract_Controller {
 		return Markup_Utils::class_attribute( $this->container_classes );
 	}
 
-	/**
-	 * @return string
-	 */
 	public function get_form_classes(): string {
 		// CASE: Inline Forms
 		if ( $this->form_fields === Lead_Form_Block::FORM_INLINE ) {
@@ -148,9 +121,6 @@ class Lead_Form_Block_Controller extends Abstract_Controller {
 		return Markup_Utils::class_attribute( $this->form_classes );
 	}
 
-	/**
-	 * @return array
-	 */
 	public function get_header_args(): array {
 		if ( empty( $this->title ) && empty( $this->description ) ) {
 			return [];
@@ -171,9 +141,44 @@ class Lead_Form_Block_Controller extends Abstract_Controller {
 		];
 	}
 
-	/**
-	 * @return \Tribe\Project\Templates\Components\Deferred_Component
-	 */
+	public function get_form(): string {
+		if ( ! function_exists( 'gravity_form' ) ) {
+			return '';
+		}
+
+		// TODO: turn this into a filterable thing
+		$template = [
+			[ 'gravityforms/form', [] ],
+		];
+
+		return sprintf( '<InnerBlocks template="%s" templateLock="all" />', esc_attr( wp_json_encode( $template ) ) );
+	}
+
+	protected function defaults(): array {
+		return [
+			self::ATTRS             => [],
+			self::BACKGROUND        => Lead_Form_Block::BACKGROUND_LIGHT,
+			self::CLASSES           => [],
+			self::CONTAINER_CLASSES => [],
+			self::CTA               => [],
+			self::DESCRIPTION       => '',
+			self::FORM_CLASSES      => [],
+			self::FORM_FIELDS       => Lead_Form_Block::FORM_STACKED,
+			self::LAYOUT            => Lead_Form_Block::LAYOUT_BOTTOM,
+			self::LEADIN            => '',
+			self::TITLE             => '',
+			self::WIDTH             => Lead_Form_Block::WIDTH_GRID,
+		];
+	}
+
+	protected function required(): array {
+		return [
+			self::CONTAINER_CLASSES => [ 'b-lead-form__container' ],
+			self::FORM_CLASSES      => [ 'b-lead-form__form' ],
+			self::CLASSES           => [ 'c-block', 'b-lead-form' ],
+		];
+	}
+
 	private function get_leadin(): Deferred_Component {
 		return defer_template_part( 'components/text/text', null, [
 			Text_Controller::CLASSES => [
@@ -184,9 +189,6 @@ class Lead_Form_Block_Controller extends Abstract_Controller {
 		] );
 	}
 
-	/**
-	 * @return \Tribe\Project\Templates\Components\Deferred_Component
-	 */
 	private function get_title(): Deferred_Component {
 		return defer_template_part( 'components/text/text', null, [
 			Text_Controller::TAG     => 'h2',
@@ -199,9 +201,6 @@ class Lead_Form_Block_Controller extends Abstract_Controller {
 		] );
 	}
 
-	/**
-	 * @return \Tribe\Project\Templates\Components\Deferred_Component
-	 */
 	private function get_content(): Deferred_Component {
 		return defer_template_part( 'components/container/container', null, [
 			Container_Controller::CLASSES => [
@@ -214,9 +213,6 @@ class Lead_Form_Block_Controller extends Abstract_Controller {
 		] );
 	}
 
-	/**
-	 * @return \Tribe\Project\Templates\Components\Deferred_Component
-	 */
 	private function get_cta(): Deferred_Component {
 		$cta = wp_parse_args( $this->cta, [
 			'content'        => '',
@@ -239,22 +235,6 @@ class Lead_Form_Block_Controller extends Abstract_Controller {
 				'icon-arrow-right',
 			],
 		] );
-	}
-
-	/**
-	 * @return string
-	 */
-	public function get_form(): string {
-		if ( ! function_exists( 'gravity_form' ) ) {
-			return '';
-		}
-
-		// TODO: turn this into a filterable thing
-		$template = [
-			[ 'gravityforms/form', [] ],
-		];
-
-		return sprintf( '<InnerBlocks template="%s" templateLock="all" />', esc_attr( wp_json_encode( $template ) ) );
 	}
 
 }

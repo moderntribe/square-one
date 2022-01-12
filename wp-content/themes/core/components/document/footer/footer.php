@@ -1,7 +1,8 @@
 <?php declare(strict_types=1);
 
-use \Tribe\Project\Templates\Components\document\footer\Footer_Controller;
+use Tribe\Project\Templates\Components\document\footer\Footer_Controller;
 
+// phpcs:ignore SlevomatCodingStandard.Variables.UnusedVariable.UnusedVariable
 $c = Footer_Controller::factory();
 ?>
 

@@ -35,7 +35,7 @@ class Media_Text extends Block_Config implements Cta_Field {
 	/**
 	 * Register the block
 	 */
-	public function add_block() {
+	public function add_block(): void {
 		$this->set_block( new Block( self::NAME, [
 			'title'       => __( 'Media + Text', 'tribe' ),
 			'description' => __( 'An image or video plus text content with several layout options.', 'tribe' ),
@@ -79,7 +79,7 @@ class Media_Text extends Block_Config implements Cta_Field {
 	/**
 	 * Register Fields for block
 	 */
-	public function add_fields() {
+	public function add_fields(): void {
 		$this->add_field( new Field( self::NAME . '_' . self::WIDTH, [
 				'label'         => __( 'Block Width', 'tribe' ),
 				'name'          => self::WIDTH,

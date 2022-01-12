@@ -26,7 +26,7 @@ class Logos extends Block_Config implements Cta_Field {
 	public const LOGO_IMAGE    = 'image';
 	public const LOGO_LINK     = 'link';
 
-	public function add_block() {
+	public function add_block(): void {
 		$this->set_block( new Block( self::NAME, [
 			'title'       => esc_html__( 'Logos', 'tribe' ),
 			'description' => esc_html__( 'A collection of logos.', 'tribe' ),
@@ -70,7 +70,7 @@ class Logos extends Block_Config implements Cta_Field {
 		] ) );
 	}
 
-	public function add_fields() {
+	public function add_fields(): void {
 		$this->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
 				'label'       => esc_html__( 'Lead in', 'tribe' ),
 				'name'        => self::LEAD_IN,

@@ -5,7 +5,6 @@ use Tribe\Project\Templates\Components\blocks\links\Links_Block_Controller;
 /**
  * @var array $args Arguments passed to the template
  */
-// phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
 $c = Links_Block_Controller::factory( $args );
 
 ?>

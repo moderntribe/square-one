@@ -4,15 +4,16 @@ namespace Tribe\Project\Templates\Components\Traits;
 
 use Tribe\Project\Templates\Components\breadcrumbs\Breadcrumbs_Controller;
 use Tribe\Project\Templates\Models\Breadcrumb;
+use WP_Term;
 
 trait Breadcrumbs {
 
 	/**
 	 * Holds breadcrumbs for the post.
 	 *
-	 * @var array
+	 * @var \Tribe\Project\Templates\Models\Breadcrumb[]
 	 */
-	protected $response = [];
+	protected array $response = [];
 
 	/**
 	 * Returns breadcrumbs arguments for the post.
@@ -71,9 +72,6 @@ trait Breadcrumbs {
 			return;
 		}
 
-		// Hold link output.
-		$output = '';
-
 		// Get ancestors for term.
 		$ancestors = get_ancestors( $wp_query->queried_object->term_id, $wp_query->queried_object->taxonomy );
 
@@ -83,7 +81,7 @@ trait Breadcrumbs {
 				$term = get_term_by( 'id', $ancestor, $wp_query->queried_object->taxonomy );
 
 				// Skip if not a valid term.
-				if ( ! ( $term instanceof \WP_Term ) ) {
+				if ( ! ( $term instanceof WP_Term ) ) {
 					continue;
 				}
 

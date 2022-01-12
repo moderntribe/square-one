@@ -97,7 +97,7 @@ class Force_Plugin_Activation {
 
 		add_filter( 'option_active_plugins', [ $this, 'force_plugins' ], 10, 1 );
 		add_filter( 'site_option_active_sitewide_plugins', [ $this, 'force_plugins' ], 10, 1 );
-		add_filter( 'plugin_action_links', [ $this, 'plugin_action_links' ], 99, 4 );
+		add_filter( 'plugin_action_links', [ $this, 'plugin_action_links' ], 99, 2 );
 		add_filter( 'network_admin_plugin_action_links', [ $this, 'plugin_action_links' ], 99, 4 );
 		add_filter( 'all_plugins', [ $this, 'hide_from_blog' ], 99, 1 );
 	}
@@ -122,7 +122,7 @@ class Force_Plugin_Activation {
 		 * active_sitewide_plugins has the number as key and the plugin path as value
 		 * I'm standardizing so we can run the array operations below, then flipping back if needed.
 		 */
-		if ( current_filter() == 'site_option_active_sitewide_plugins' ) {
+		if ( current_filter() === 'site_option_active_sitewide_plugins' ) {
 			$plugins = array_flip( $plugins );
 		}
 
@@ -138,7 +138,7 @@ class Force_Plugin_Activation {
 		$plugins = array_unique( $plugins );
 
 		// Flip back if needed (see comment above)
-		if ( current_filter() == 'site_option_active_sitewide_plugins' ) {
+		if ( current_filter() === 'site_option_active_sitewide_plugins' ) {
 			$plugins = array_flip( $plugins );
 		}
 
@@ -151,12 +151,10 @@ class Force_Plugin_Activation {
 	 *
 	 * @param array  $actions
 	 * @param string $plugin_file
-	 * @param array  $plugin_data
-	 * @param string $context
 	 *
 	 * @return array
 	 */
-	public function plugin_action_links( $actions, $plugin_file, $plugin_data, $context ) {
+	public function plugin_action_links( array $actions, string $plugin_file ): array {
 
 		if ( in_array( $plugin_file, $this->force_active ) ) {
 			unset( $actions['deactivate'] );
@@ -181,7 +179,7 @@ class Force_Plugin_Activation {
 	 *
 	 * @return array mixed
 	 */
-	public function hide_from_blog( $plugins ) {
+	public function hide_from_blog( array $plugins ): array {
 
 		if ( ! is_multisite() ) {
 			return $plugins;

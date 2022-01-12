@@ -1,11 +1,10 @@
 <?php declare(strict_types=1);
 
-use \Tribe\Project\Templates\Components\pagination\single\Single_Pagination_Controller;
+use Tribe\Project\Templates\Components\pagination\single\Single_Pagination_Controller;
 
 /**
  * @var array $args Arguments passed to the template
  */
-// phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
 $c = Single_Pagination_Controller::factory( $args );
 
 if ( empty( $c->get_previous_link_args() ) && empty( $c->get_next_link_args() ) ) {

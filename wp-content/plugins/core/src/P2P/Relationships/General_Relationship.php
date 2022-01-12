@@ -7,22 +7,30 @@ use Tribe\Project\Post_Types\Event\Event;
 use Tribe\Project\Post_Types\Page\Page;
 use Tribe\Project\Post_Types\Post\Post;
 
+// phpcs:disable SlevomatCodingStandard.TypeHints.PropertyTypeHint.MissingNativeTypeHint
 class General_Relationship extends Relationship {
 
 	public const NAME = 'related_posts';
 
+	/**
+	 * @var string[]
+	 */
 	protected $from = [
 		Page::NAME,
 		Post::NAME,
 		Event::NAME,
 	];
-	protected $to   = [
+
+	/**
+	 * @var string[]
+	 */
+	protected $to = [
 		Page::NAME,
 		Post::NAME,
 		Event::NAME,
 	];
 
-	protected function get_args() {
+	protected function get_args(): array {
 		return [
 			'reciprocal'      => true,
 			'admin_box'       => [

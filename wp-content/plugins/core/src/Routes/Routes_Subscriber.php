@@ -1,11 +1,5 @@
 <?php declare(strict_types=1);
 
-/**
- * Subscribe routes to WP lifecycle hooks.
- *
- * @package Project
- */
-
 namespace Tribe\Project\Routes;
 
 use Tribe\Libs\Container\Abstract_Subscriber;

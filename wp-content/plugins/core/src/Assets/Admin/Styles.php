@@ -39,7 +39,7 @@ class Styles {
 	 *
 	 * @action login_enqueue_scripts
 	 */
-	public function enqueue_login_styles() {
+	public function enqueue_login_styles(): void {
 		wp_enqueue_style( 'tribe-styles-login' );
 	}
 

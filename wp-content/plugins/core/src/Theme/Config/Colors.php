@@ -5,9 +5,9 @@ namespace Tribe\Project\Theme\Config;
 class Colors {
 
 	/**
-	 * @var array
+	 * @var string[][]
 	 */
-	private $colors;
+	private array $colors;
 
 	/**
 	 * Colors constructor.
@@ -86,7 +86,7 @@ class Colors {
 	 *
 	 * @return string
 	 */
-	public function get_name_by_value( $hex = '' ): string {
+	public function get_name_by_value( string $hex = '' ): string {
 		foreach ( $this->colors as $key => $value ) {
 			if ( $value['color'] === $hex ) {
 				return $key;

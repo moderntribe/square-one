@@ -56,26 +56,6 @@ class Search_Controller extends Index_Controller {
 		];
 	}
 
-	protected function get_card_image(): ?Deferred_Component {
-		if ( empty( get_post_thumbnail_id() ) ) {
-			return null;
-		}
-
-		return defer_template_part(
-			'components/image/image',
-			null,
-			[
-				Image_Controller::IMG_ID       => get_post_thumbnail_id(),
-				Image_Controller::SRC_SIZE     => Image_Sizes::FOUR_THREE,
-				Image_Controller::SRCSET_SIZES => [
-					Image_Sizes::FOUR_THREE_SMALL,
-					Image_Sizes::FOUR_THREE,
-					Image_Sizes::FOUR_THREE_LARGE,
-				],
-			],
-		);
-	}
-
 	/**
 	 * @return \Tribe\Project\Templates\Components\Deferred_Component[]
 	 */
@@ -123,6 +103,26 @@ class Search_Controller extends Index_Controller {
 				]
 			),
 		];
+	}
+
+	protected function get_card_image(): ?Deferred_Component {
+		if ( empty( get_post_thumbnail_id() ) ) {
+			return null;
+		}
+
+		return defer_template_part(
+			'components/image/image',
+			null,
+			[
+				Image_Controller::IMG_ID       => get_post_thumbnail_id(),
+				Image_Controller::SRC_SIZE     => Image_Sizes::FOUR_THREE,
+				Image_Controller::SRCSET_SIZES => [
+					Image_Sizes::FOUR_THREE_SMALL,
+					Image_Sizes::FOUR_THREE,
+					Image_Sizes::FOUR_THREE_LARGE,
+				],
+			],
+		);
 	}
 
 }

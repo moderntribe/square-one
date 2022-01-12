@@ -26,10 +26,9 @@ use Tribe\Project\Blocks\Types\Tabs\Tabs;
 
 class Blocks_Definer implements Definer_Interface {
 
-	public const CONTROLLER_MAP = 'blocks.controller_map';
-	public const DENY_LIST      = 'blocks.deny_list';
-	public const STYLES         = 'blocks.style_overrides';
-	public const TYPES          = 'blocks.types';
+	public const DENY_LIST = 'blocks.deny_list';
+	public const STYLES    = 'blocks.style_overrides';
+	public const TYPES     = 'blocks.types';
 
 	public function define(): array {
 		return [
@@ -114,7 +113,7 @@ class Blocks_Definer implements Definer_Interface {
 				} ),
 			] ),
 
-			Block_Deny_List::class => DI\create()->constructor( DI\get( self::DENY_LIST ) ),
+			Block_Deny_List::class => DI\autowire()->constructor( DI\get( self::DENY_LIST ) ),
 		];
 	}
 

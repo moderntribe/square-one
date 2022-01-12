@@ -5,7 +5,6 @@ use Tribe\Project\Templates\Components\breadcrumbs\Breadcrumbs_Controller;
 /**
  * @var array $args Arguments passed to the template
  */
-// phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
 $c = Breadcrumbs_Controller::factory( $args );
 
 ?>

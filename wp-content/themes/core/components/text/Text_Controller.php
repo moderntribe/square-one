@@ -7,18 +7,26 @@ use Tribe\Project\Templates\Components\Abstract_Controller;
 
 class Text_Controller extends Abstract_Controller {
 
-	public const TAG     = 'tag';
-	public const CLASSES = 'classes';
 	public const ATTRS   = 'attrs';
+	public const CLASSES = 'classes';
 	public const CONTENT = 'content';
+	public const TAG     = 'tag';
 
 	/**
 	 * @var string|\Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	private $content;
-	private string $tag;
-	private array $classes;
+
+	/**
+	 * @var string[]
+	 */
 	private array $attrs;
+
+	/**
+	 * @var string[]
+	 */
+	private array $classes;
+	private string $tag;
 
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
@@ -27,19 +35,6 @@ class Text_Controller extends Abstract_Controller {
 		$this->classes = (array) $args[ self::CLASSES ];
 		$this->attrs   = (array) $args[ self::ATTRS ];
 		$this->content = $args[ self::CONTENT ];
-	}
-
-	protected function defaults(): array {
-		return [
-			self::TAG     => 'p',
-			self::CLASSES => [],
-			self::ATTRS   => [],
-			self::CONTENT => '',
-		];
-	}
-
-	protected function required(): array {
-		return [];
 	}
 
 	public function get_tag(): string {
@@ -55,7 +50,20 @@ class Text_Controller extends Abstract_Controller {
 	}
 
 	public function get_content(): string {
-		return $this->content;
+		return (string) $this->content;
+	}
+
+	protected function defaults(): array {
+		return [
+			self::TAG     => 'p',
+			self::CLASSES => [],
+			self::ATTRS   => [],
+			self::CONTENT => '',
+		];
+	}
+
+	protected function required(): array {
+		return [];
 	}
 
 }

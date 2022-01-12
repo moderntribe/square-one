@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2022.01 
+* Updated: added allowed plugins to composer.json
+* Updated: coding standards to [version 2](https://github.com/moderntribe/coding-standards/tree/2.0.x).
+* Updated: WordPress 5.7.3 > 5.8.3 (security release)
+* Updated: ACF Pro 5.10.2 > 5.11.4
+* Updated: TEC 5.10.1 > 5.12.2
+* Updated: Yoast 17.5 > 17.8
+
 ## 2021.12
 * Fixed: docker compose (v2) support: `WARN[0000] network proxy: network.external.name is deprecated in favor of network.name`
 * Added: Section Nav component & block.

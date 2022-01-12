@@ -24,10 +24,29 @@ class Subheader_Controller extends Abstract_Controller {
 	public const MEDIA_CLASSES     = 'media_classes';
 	public const TITLE             = 'title';
 
+	/**
+	 * @var string[]
+	 */
 	private array $attrs;
+
+	/**
+	 * @var string[]
+	 */
 	private array $classes;
+
+	/**
+	 * @var string[]
+	 */
 	private array $container_classes;
+
+	/**
+	 * @var string[]
+	 */
 	private array $content_classes;
+
+	/**
+	 * @var string[]
+	 */
 	private array $media_classes;
 	private int $hero_image_id;
 	private string $description;
@@ -36,36 +55,14 @@ class Subheader_Controller extends Abstract_Controller {
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
 
-		$this->classes           = (array) $args[ self::CLASSES ];
 		$this->attrs             = (array) $args[ self::ATTRS ];
+		$this->classes           = (array) $args[ self::CLASSES ];
 		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
-		$this->media_classes     = (array) $args[ self::MEDIA_CLASSES ];
 		$this->content_classes   = (array) $args[ self::CONTENT_CLASSES ];
-		$this->title             = (string) $args[ self::TITLE ];
 		$this->description       = (string) $args[ self::DESCRIPTION ];
 		$this->hero_image_id     = (int) $args[ self::HERO_IMAGE_ID ];
-	}
-
-	protected function defaults(): array {
-		return [
-			self::ATTRS             => [],
-			self::CLASSES           => [ 'c-subheader--has-background' ],
-			self::CONTAINER_CLASSES => [],
-			self::CONTENT_CLASSES   => [],
-			self::DESCRIPTION       => '',
-			self::HERO_IMAGE_ID     => 0,
-			self::MEDIA_CLASSES     => [],
-			self::TITLE             => '',
-		];
-	}
-
-	protected function required(): array {
-		return [
-			self::CONTAINER_CLASSES => [ 'l-container' ],
-			self::MEDIA_CLASSES     => [ 'c-subheader__media' ],
-			self::CONTENT_CLASSES   => [ 'c-subheader__content' ],
-			self::CLASSES           => [ 'c-subheader'],
-		];
+		$this->media_classes     = (array) $args[ self::MEDIA_CLASSES ];
+		$this->title             = (string) $args[ self::TITLE ];
 	}
 
 	public function get_classes(): string {
@@ -125,6 +122,28 @@ class Subheader_Controller extends Abstract_Controller {
 				Image_Sizes::SIXTEEN_NINE,
 				Image_Sizes::SIXTEEN_NINE_SMALL,
 			],
+		];
+	}
+
+	protected function defaults(): array {
+		return [
+			self::ATTRS             => [],
+			self::CLASSES           => [ 'c-subheader--has-background' ],
+			self::CONTAINER_CLASSES => [],
+			self::CONTENT_CLASSES   => [],
+			self::DESCRIPTION       => '',
+			self::HERO_IMAGE_ID     => 0,
+			self::MEDIA_CLASSES     => [],
+			self::TITLE             => '',
+		];
+	}
+
+	protected function required(): array {
+		return [
+			self::CLASSES           => [ 'c-subheader'],
+			self::CONTAINER_CLASSES => [ 'l-container' ],
+			self::CONTENT_CLASSES   => [ 'c-subheader__content' ],
+			self::MEDIA_CLASSES     => [ 'c-subheader__media' ],
 		];
 	}
 

@@ -15,7 +15,7 @@ class Social_Settings extends ACF\ACF_Meta_Group {
 	public const PINTEREST = 'pinterest';
 	public const INSTAGRAM = 'instagram';
 
-	public function get_keys() {
+	public function get_keys(): array {
 		return [
 			static::FACEBOOK,
 			static::TWITTER,
@@ -26,7 +26,21 @@ class Social_Settings extends ACF\ACF_Meta_Group {
 		];
 	}
 
-	public static function get_social_follow_message( $key ) {
+	public function get_group_config(): array {
+		$group = new ACF\Group( self::NAME, $this->object_types );
+		$group->set( 'title', __( 'Social Media Settings', 'tribe' ) );
+
+		$group->add_field( $this->get_social_field( __( 'Facebook', 'tribe' ), self::FACEBOOK ) );
+		$group->add_field( $this->get_social_field( __( 'Twitter', 'tribe' ), self::TWITTER ) );
+		$group->add_field( $this->get_social_field( __( 'LinkedIn', 'tribe' ), self::LINKEDIN ) );
+		$group->add_field( $this->get_social_field( __( 'Pinterest', 'tribe' ), self::PINTEREST ) );
+		$group->add_field( $this->get_social_field( __( 'YouTube', 'tribe' ), self::YOUTUBE ) );
+		$group->add_field( $this->get_social_field( __( 'Instagram', 'tribe' ), self::INSTAGRAM ) );
+
+		return $group->get_attributes();
+	}
+
+	public static function get_social_follow_message( string $key ): string {
 		switch ( $key ) {
 			case self::FACEBOOK:
 				return __( 'Like us on Facebook', 'tribe' );
@@ -51,21 +65,7 @@ class Social_Settings extends ACF\ACF_Meta_Group {
 		}
 	}
 
-	public function get_group_config() {
-		$group = new ACF\Group( self::NAME, $this->object_types );
-		$group->set( 'title', __( 'Social Media Settings', 'tribe' ) );
-
-		$group->add_field( $this->get_social_field( __( 'Facebook', 'tribe' ), self::FACEBOOK ) );
-		$group->add_field( $this->get_social_field( __( 'Twitter', 'tribe' ), self::TWITTER ) );
-		$group->add_field( $this->get_social_field( __( 'LinkedIn', 'tribe' ), self::LINKEDIN ) );
-		$group->add_field( $this->get_social_field( __( 'Pinterest', 'tribe' ), self::PINTEREST ) );
-		$group->add_field( $this->get_social_field( __( 'YouTube', 'tribe' ), self::YOUTUBE ) );
-		$group->add_field( $this->get_social_field( __( 'Instagram', 'tribe' ), self::INSTAGRAM ) );
-
-		return $group->get_attributes();
-	}
-
-	private function get_social_field( $field_label, $field_id, $type = 'url' ) {
+	private function get_social_field( string $field_label, string $field_id, string $type = 'url' ): ACF\Field {
 		$field = new ACF\Field( self::NAME . '_' . $field_id );
 		$field->set_attributes( [
 			'label' => $field_label,

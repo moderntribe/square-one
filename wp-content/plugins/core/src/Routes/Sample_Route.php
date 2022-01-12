@@ -1,12 +1,5 @@
 <?php declare(strict_types=1);
 
-/**
- * Sample route.
- *
- * @package Project
- */
-
-
 namespace Tribe\Project\Routes;
 
 use Tribe\Libs\Routes\Abstract_Route;

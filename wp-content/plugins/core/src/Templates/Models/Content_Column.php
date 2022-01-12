@@ -4,20 +4,13 @@ namespace Tribe\Project\Templates\Models;
 
 class Content_Column {
 
-	/**
-	 * @var string
-	 */
-	protected $title;
+	protected string $title;
+	protected string $content;
 
 	/**
-	 * @var string
+	 * @var string[]
 	 */
-	protected $content;
-
-	/**
-	 * @var array
-	 */
-	protected $cta;
+	protected array $cta;
 
 	/**
 	 * Content_Column constructor.
@@ -26,7 +19,7 @@ class Content_Column {
 	 * @param string $content
 	 * @param array  $cta
 	 */
-	public function __construct( $title, $content, $cta ) {
+	public function __construct( string $title, string $content, array $cta ) {
 		$this->title   = $title;
 		$this->content = $content;
 		$this->cta     = $cta;
@@ -47,7 +40,7 @@ class Content_Column {
 	}
 
 	/**
-	 * @return array
+	 * @return string[]
 	 */
 	public function get_cta(): array {
 		return $this->cta;

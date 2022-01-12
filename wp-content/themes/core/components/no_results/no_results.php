@@ -1,11 +1,10 @@
 <?php declare(strict_types=1);
 
-use \Tribe\Project\Templates\Components\no_results\No_Results_Controller;
+use Tribe\Project\Templates\Components\no_results\No_Results_Controller;
 
 /**
  * @var array $args Arguments passed to the template
  */
-// phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
 $c = No_Results_Controller::factory( $args );
 ?>
 

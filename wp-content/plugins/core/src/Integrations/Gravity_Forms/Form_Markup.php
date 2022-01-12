@@ -7,7 +7,7 @@ class Form_Markup {
 	/**
 	 * @var bool Used to enable/disable CSS classes that control icon placement inside some field types.
 	 */
-	private $activate_icons = false;
+	private bool $activate_icons = false;
 
 	/**
 	 * Add some custom markup to other option for radio & checkbox controls
@@ -23,7 +23,7 @@ class Form_Markup {
 	 *
 	 * @return string
 	 */
-	public function customize_gf_choice_other( $choice_markup, $choice, $field, $value ): string {
+	public function customize_gf_choice_other( string $choice_markup, array $choice, array $field, string $value ): string {
 
 		if ( ! empty( $choice['isOtherChoice'] ) ) {
 			$indices = array_keys( $field['choices'] );
@@ -56,7 +56,7 @@ class Form_Markup {
 	 *
 	 * @return string
 	 */
-	public function add_gf_select_field_class( $classes, $field, $form ): string {
+	public function add_gf_select_field_class( string $classes, array $field, array $form ): string {
 
 		$class_icon_simple  = $this->activate_icons ? ' form-control-icon' : '';
 		$class_icon_complex = $this->activate_icons ? ' form-control-icon-complex' : '';

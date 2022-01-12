@@ -5,7 +5,6 @@ use Tribe\Project\Templates\Components\sidebar\Sidebar_Controller;
 /**
  * @var array $args Arguments passed to the template
  */
-// phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
 $c = Sidebar_Controller::factory( $args );
 
 if ( ! $c->is_active() ) {

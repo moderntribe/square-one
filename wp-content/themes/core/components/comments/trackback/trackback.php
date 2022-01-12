@@ -1,11 +1,10 @@
 <?php declare(strict_types=1);
 
-use \Tribe\Project\Templates\Components\comments\trackback\Trackback_Controller;
+use Tribe\Project\Templates\Components\comments\trackback\Trackback_Controller;
 
 /**
  * @var array $args Arguments passed to the template
  */
-// phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
 $c = Trackback_Controller::factory( $args );
 ?>
 

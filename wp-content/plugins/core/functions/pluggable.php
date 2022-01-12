@@ -11,10 +11,19 @@ use Tribe\Libs\Queues\Tasks\Email;
 if ( ! function_exists( 'wp_mail' ) &&
      ! ( defined( 'WP_CLI' ) && WP_CLI ) && // phpcs:ignore -- phpcs doesn't handle spaces used for alignment
 	 ( defined( 'QUEUE_MAIL' ) && QUEUE_MAIL ) ) {
+
 	/**
+	 * @param string|string[] $to
+	 * @param string          $subject
+	 * @param string          $message
+	 * @param string|string[] $headers
+	 * @param string|string[] $attachments
+	 *
 	 * @throws \Exception
+	 * @throws \Psr\Container\ContainerExceptionInterface
+	 * @throws \Psr\Container\NotFoundExceptionInterface
 	 */
-	function wp_mail( $to, $subject, $message, $headers = '', $attachments = [] ) {
+	function wp_mail( $to, string $subject, string $message, $headers = '', $attachments = [] ): void {
 		$args = [
 			'to'          => $to,
 			'subject'     => $subject,

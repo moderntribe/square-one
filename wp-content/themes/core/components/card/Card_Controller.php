@@ -32,52 +32,55 @@ class Card_Controller extends Abstract_Controller {
 	public const STYLE_INLINE   = 'inline';
 	public const STYLE_SEARCH   = 'search';
 
-	private string $tag;
-	private array $classes;
+	/**
+	 * @var string[]
+	 */
 	private array $attrs;
-	private array $media_classes;
-	private array $content_classes;
-	private string $style;
-	private bool $use_target_link;
 
 	/**
-	 * @var null|\Tribe\Project\Templates\Components\Deferred_Component
-	 *
+	 * @var string[]
+	 */
+	private array $classes;
+
+	/**
+	 * @var string[]
+	 */
+	private array $content_classes;
+
+	/**
+	 * @var string[]
+	 */
+	private array $media_classes;
+	private bool $use_target_link;
+	private string $style;
+	private string $tag;
+
+	/**
 	 * @uses components/image
 	 */
 	private ?Deferred_Component $image;
 
 	/**
-	 * @var null|\Tribe\Project\Templates\Components\Deferred_Component
-	 *
 	 * @uses components/container
 	 */
 	private ?Deferred_Component $meta_primary;
 
 	/**
-	 * @var null|\Tribe\Project\Templates\Components\Deferred_Component
-	 *
 	 * @uses components/container
 	 */
 	private ?Deferred_Component $meta_secondary;
 
 	/**
-	 * @var null|\Tribe\Project\Templates\Components\Deferred_Component
-	 *
 	 * @uses components/text
 	 */
 	private ?Deferred_Component $title;
 
 	/**
-	 * @var null|\Tribe\Project\Templates\Components\Deferred_Component
-	 *
 	 * @uses components/container
 	 */
 	private ?Deferred_Component $description;
 
 	/**
-	 * @var null|\Tribe\Project\Templates\Components\Deferred_Component
-	 *
 	 * @uses components/link
 	 */
 	private ?Deferred_Component $cta;
@@ -85,45 +88,19 @@ class Card_Controller extends Abstract_Controller {
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
 
-		$this->tag             = (string) $args[ self::TAG ];
-		$this->classes         = (array) $args[ self::CLASSES ];
 		$this->attrs           = (array) $args[ self::ATTRS ];
-		$this->media_classes   = (array) $args[ self::MEDIA_CLASSES ];
+		$this->classes         = (array) $args[ self::CLASSES ];
 		$this->content_classes = (array) $args[ self::CONTENT_CLASSES ];
-		$this->style           = (string) $args[ self::STYLE ];
-		$this->use_target_link = (bool) $args[ self::USE_TARGET_LINK ];
+		$this->cta             = $args[ self::CTA ];
+		$this->description     = $args[ self::DESCRIPTION ];
 		$this->image           = $args[ self::IMAGE ];
+		$this->media_classes   = (array) $args[ self::MEDIA_CLASSES ];
 		$this->meta_primary    = $args[ self::META_PRIMARY ];
 		$this->meta_secondary  = $args[ self::META_SECONDARY ];
+		$this->style           = (string) $args[ self::STYLE ];
+		$this->tag             = (string) $args[ self::TAG ];
 		$this->title           = $args[ self::TITLE ];
-		$this->description     = $args[ self::DESCRIPTION ];
-		$this->cta             = $args[ self::CTA ];
-	}
-
-	protected function defaults(): array {
-		return [
-			self::TAG             => 'article',
-			self::CLASSES         => [],
-			self::ATTRS           => [],
-			self::MEDIA_CLASSES   => [],
-			self::CONTENT_CLASSES => [],
-			self::STYLE           => self::STYLE_PLAIN,
-			self::USE_TARGET_LINK => false,
-			self::IMAGE           => null,
-			self::META_PRIMARY    => null,
-			self::META_SECONDARY  => null,
-			self::TITLE           => null,
-			self::DESCRIPTION     => null,
-			self::CTA             => null,
-		];
-	}
-
-	protected function required(): array {
-		return [
-			self::CLASSES         => [ 'c-card' ],
-			self::MEDIA_CLASSES   => [ 'c-card__media' ],
-			self::CONTENT_CLASSES => [ 'c-card__content' ],
-		];
+		$this->use_target_link = (bool) $args[ self::USE_TARGET_LINK ];
 	}
 
 	public function get_tag(): string {
@@ -158,9 +135,6 @@ class Card_Controller extends Abstract_Controller {
 		return Markup_Utils::class_attribute( $this->content_classes );
 	}
 
-	/**
-	 * @return \Tribe\Project\Templates\Components\Deferred_Component|null
-	 */
 	public function render_image(): ?Deferred_Component {
 		if ( empty( $this->image ) ) {
 			return null;
@@ -171,9 +145,6 @@ class Card_Controller extends Abstract_Controller {
 		return $this->image;
 	}
 
-	/**
-	 * @return \Tribe\Project\Templates\Components\Deferred_Component|null
-	 */
 	public function render_meta_primary(): ?Deferred_Component {
 		if ( empty( $this->meta_primary ) ) {
 			return null;
@@ -185,9 +156,6 @@ class Card_Controller extends Abstract_Controller {
 		return $this->meta_primary;
 	}
 
-	/**
-	 * @return \Tribe\Project\Templates\Components\Deferred_Component|null
-	 */
 	public function render_meta_secondary(): ?Deferred_Component {
 		if ( empty( $this->meta_secondary ) ) {
 			return null;
@@ -199,9 +167,6 @@ class Card_Controller extends Abstract_Controller {
 		return $this->meta_secondary;
 	}
 
-	/**
-	 * @return \Tribe\Project\Templates\Components\Deferred_Component|null
-	 */
 	public function render_title(): ?Deferred_Component {
 		if ( empty( $this->title ) ) {
 			return null;
@@ -212,9 +177,6 @@ class Card_Controller extends Abstract_Controller {
 		return $this->title;
 	}
 
-	/**
-	 * @return \Tribe\Project\Templates\Components\Deferred_Component|null
-	 */
 	public function render_description(): ?Deferred_Component {
 		if ( empty( $this->description ) ) {
 			return null;
@@ -236,6 +198,32 @@ class Card_Controller extends Abstract_Controller {
 			Container_Controller::TAG     => 'p',
 			Container_Controller::CLASSES => [ 'c-card__cta' ],
 			Container_Controller::CONTENT => $this->cta->render(),
+		];
+	}
+
+	protected function defaults(): array {
+		return [
+			self::ATTRS           => [],
+			self::CLASSES         => [],
+			self::CONTENT_CLASSES => [],
+			self::CTA             => null,
+			self::DESCRIPTION     => null,
+			self::IMAGE           => null,
+			self::MEDIA_CLASSES   => [],
+			self::META_PRIMARY    => null,
+			self::META_SECONDARY  => null,
+			self::STYLE           => self::STYLE_PLAIN,
+			self::TAG             => 'article',
+			self::TITLE           => null,
+			self::USE_TARGET_LINK => false,
+		];
+	}
+
+	protected function required(): array {
+		return [
+			self::CLASSES         => [ 'c-card' ],
+			self::CONTENT_CLASSES => [ 'c-card__content' ],
+			self::MEDIA_CLASSES   => [ 'c-card__media' ],
 		];
 	}
 

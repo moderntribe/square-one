@@ -30,7 +30,7 @@ class Accordion extends Block_Config implements Cta_Field {
 	public const ROW_HEADER        = 'row_header';
 	public const ROW_CONTENT       = 'row_content';
 
-	public function add_block() {
+	public function add_block(): void {
 		$this->set_block( new Block( self::NAME, [
 			'title'       => __( 'Accordion', 'tribe' ),
 			'description' => __( 'The Accordion block', 'tribe' ),
@@ -73,7 +73,7 @@ class Accordion extends Block_Config implements Cta_Field {
 		] ) );
 	}
 
-	public function add_fields() {
+	public function add_fields(): void {
 		$this->add_field( new Field( self::NAME . '_' . self::LAYOUT, [
 				'label'         => __( 'Layout', 'tribe' ),
 				'name'          => self::LAYOUT,

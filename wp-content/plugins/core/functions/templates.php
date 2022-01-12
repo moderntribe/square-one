@@ -8,13 +8,14 @@ if ( ! function_exists( 'tribe_template_part' ) ) {
 	 * @param string|null $name
 	 * @param array       $args
 	 *
-	 * @return false|string
+	 * @return string
 	 */
-	function tribe_template_part( $slug, $name = null, $args = [] ) {
+	function tribe_template_part( string $slug, ?string $name = null, array $args = [] ): string {
 		ob_start();
+
 		get_template_part( $slug, $name, $args );
 
-		return ob_get_clean();
+		return (string) ob_get_clean();
 	}
 }
 
@@ -26,7 +27,7 @@ if ( ! function_exists( 'defer_template_part' ) ) {
 	 *
 	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
-	function defer_template_part( $slug, $name = null, $args = [] ) {
+	function defer_template_part( string $slug, ?string $name = null, array $args = [] ): Deferred_Component {
 		return new Deferred_Component( $slug, $name, $args );
 	}
 }

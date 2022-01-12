@@ -3,6 +3,7 @@
 namespace Tribe\Project\Theme\Branding;
 
 use WP_Customize_Color_Control;
+use WP_Customize_Manager;
 use WP_Customize_Media_Control;
 
 class Customizer_Settings {
@@ -13,11 +14,11 @@ class Customizer_Settings {
 	/**
 	 * Customize Customizer Settings
 	 *
-	 * @param $wp_customize
+	 * @param \WP_Customize_Manager $wp_customize
 	 *
 	 * @action customize_register
 	 */
-	public function register_customizer_controls( $wp_customize ): void {
+	public function register_customizer_controls( WP_Customize_Manager $wp_customize ): void {
 		// Login Logo
 		$wp_customize->add_setting( self::SITE_BRANDING_LOGIN_LOGO );
 		$wp_customize->add_control( new WP_Customize_Media_Control(
