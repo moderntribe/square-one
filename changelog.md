@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file.
 * Updated: ACF Pro 5.10.2 > 5.11.4
 * Updated: TEC 5.10.1 > 5.12.2
 * Updated: Yoast 17.5 > 17.8
+* Removed: Service Worker (PWA) support
 
 ## 2021.12
 * Fixed: docker compose (v2) support: `WARN[0000] network proxy: network.external.name is deprecated in favor of network.name`
