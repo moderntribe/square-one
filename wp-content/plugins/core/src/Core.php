@@ -8,6 +8,7 @@ use Tribe\Project\Assets\Assets_Subscriber;
 use Tribe\Project\Blocks\Blocks_Definer;
 use Tribe\Project\Blocks\Blocks_Subscriber;
 use Tribe\Project\Cache\Cache_Subscriber;
+use Tribe\Project\CLI\CLI_Definer;
 use Tribe\Project\Integrations\Google_Tag_Manager\Google_Tag_Manager_Subscriber;
 use Tribe\Project\Integrations\Gravity_Forms\Gravity_Forms_Subscriber;
 use Tribe\Project\Integrations\Yoast_SEO\Yoast_SEO_Subscriber;
@@ -38,6 +39,7 @@ class Core {
 	 */
 	private array $definers = [
 		Blocks_Definer::class,
+		CLI_Definer::class,
 		Nav_Menus_Definer::class,
 		Object_Meta_Definer::class,
 		P2P_Definer::class,
