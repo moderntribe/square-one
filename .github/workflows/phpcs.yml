@@ -56,7 +56,7 @@ jobs:
           extensions: ${{ env.php_extensions }}
           coverage: none
         env:
-          COMPOSER_TOKEN: ${{ secrets.token }}
+          COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Validate composer.json and composer.lock
         if: ${{ steps.filter.outputs.wpcontent == 'true' }}
