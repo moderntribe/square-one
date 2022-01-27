@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file.
 * Updated: TEC 5.10.1 > 5.12.2
 * Updated: Yoast 17.5 > 17.8
 * Removed: Service Worker (PWA) support
+* Updated: Ensures Swiper.js `imagesReady` event listener is always added during initialization of a new Swiper instance.
 
 ## 2021.12
 * Fixed: docker compose (v2) support: `WARN[0000] network proxy: network.external.name is deprecated in favor of network.name`
