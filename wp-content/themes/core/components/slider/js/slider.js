@@ -21,6 +21,28 @@ const options = {
 		a11y: {
 			enabled: true,
 		},
+		/**
+		 * Register Swiper.js event handlers
+		 * https://swiperjs.com/swiper-api#param-on
+		 *
+		 * Allows event handlers to be added upon swiper initialization.
+		 *
+		 * See all available events: https://swiperjs.com/swiper-api#events
+		 */
+		on: {
+			/**
+			 * Event will be fired right after all inner images are loaded.
+			 * Note that updateOnImagesReady parameter should be also enabled on
+			 * a Swiper instance to properly fire this event.
+			 */
+			imagesReady: ( swiper ) => {
+				trigger( {
+					event: 'modern_tribe/swiper_images_ready',
+					data: { swiper }, // passes the current swiper instance
+					native: false,
+				} );
+			},
+		},
 		watchSlidesVisibility: true,
 		watchOverflow: true,
 	} ),
@@ -122,13 +144,6 @@ const initSliders = () => {
 		instances.swipers[ swiperMainId ] = new SwiperCore( slider, getMainOptsForSlider( slider, swiperMainId ) );
 		slider.setAttribute( 'data-id', swiperMainId );
 		slider.setAttribute( 'id', swiperMainId );
-		instances.swipers[ swiperMainId ].on( 'imagesReady', () => {
-			trigger( {
-				event: 'modern_tribe/swiper_images_ready',
-				data: { slider: instances.swipers[ swiperMainId ] },
-				native: false,
-			} );
-		} );
 	} );
 };
 
