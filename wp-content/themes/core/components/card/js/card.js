@@ -7,6 +7,8 @@
  * ----------------------------------------------------------------------------- */
 
 import delegate from 'delegate';
+import * as tools from 'utils/tools';
+
 
 /* Maximum amount of time between mousedown & mouseup to be considered a true click */
 const MOUSEUP_THRESHOLD = 200;
@@ -16,6 +18,7 @@ const EXCLUDED_TARGETS = [ 'A', 'BUTTON' ];
 
 const el = {
 	siteWrap: document.querySelector( '[data-js="site-wrap"]' ),
+	container: tools.getNodes( 'c-card' ),
 };
 
 const state = {
@@ -86,6 +89,10 @@ const bindEvents = () => {
  * init
  */
 const init = () => {
+	if ( el.container.length === 0 ) {
+		return;
+	}
+
 	bindEvents();
 
 	console.info( 'SquareOne Theme: Initialized card component scripts.' );

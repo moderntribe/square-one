@@ -42,7 +42,7 @@ const bindEvents = () => {
  * @description Initialize if gallery slider blocks are on the page.
  */
 const init = () => {
-	if ( ! gallerySliderBlocks ) {
+	if ( gallerySliderBlocks.length === 0 ) {
 		return;
 	}
 

@@ -18,6 +18,10 @@ import * as slide from 'utils/dom/slide';
 import * as tools from 'utils/tools';
 import * as events from 'utils/events';
 
+const el = {
+	container: tools.getNodes( 'c-accordion' ),
+};
+
 const siteWrap = tools.getNodes( 'site-wrap' )[ 0 ];
 const pn = document.getElementById( 'panel-navigation' );
 const options = {
@@ -160,6 +164,10 @@ const bindEvents = () => {
  */
 
 const init = () => {
+	if ( el.container.length === 0 ) {
+		return;
+	}
+
 	setOffset();
 	bindEvents();
 

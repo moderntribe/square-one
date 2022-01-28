@@ -9,7 +9,7 @@ import * as tools from 'utils/tools';
 import scrollTo from 'utils/dom/scroll-to';
 
 const el = {
-	container: tools.getNodes( 'site-wrap' )[ 0 ],
+	container: tools.getNodes( '.gform_wrapper', false, document, true ),
 };
 
 let spinner;
@@ -93,7 +93,7 @@ const bindEvents = () => {
  */
 
 const gravityForms = () => {
-	if ( ! el.container ) {
+	if ( el.container.length === 0 ) {
 		return;
 	}
 
