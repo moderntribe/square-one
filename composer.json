@@ -94,7 +94,7 @@
     "gravityforms/gravityforms": "*",
     "guzzlehttp/psr7": "^1.4",
     "humanmade/s3-uploads": "2.2.1",
-    "johnbillion/extended-cpts": "^4.0",
+    "johnbillion/extended-cpts": "^5.0",
     "johnpbloch/wordpress-core": "5.8.3",
     "johnpbloch/wordpress-core-installer": "2.0.*",
     "mailgun/mailgun-php": "^2.8",
