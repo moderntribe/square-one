@@ -13,6 +13,7 @@ All notable changes to this project will be documented in this file.
 * Updated: Yoast 17.5 > 17.8
 * Removed: Service Worker (PWA) support
 * Updated: Ensures Swiper.js `imagesReady` event listener is always added during initialization of a new Swiper instance.
+* Fixed: Social share component now properly triggers popup when more than one component is present on a page.
 * Updated: Fixed several components whose JavaScript could initialize even when component isn't present on a page.
 
 ## 2021.12
