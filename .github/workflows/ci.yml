@@ -43,8 +43,8 @@ jobs:
 
       - name: Create local config
         run: |
-          php -r "file_exists( 'local-config.php' ) || copy( 'local-config-sample.php', 'local-config.php' );"
-          php -r "file_exists( 'wp-content/themes/core/local-config.json' ) || copy( 'wp-content/themes/core/local-config-sample.json', 'wp-content/themes/core/local-config.json' );"
+          php -r "file_exists( 'public/local-config.php' ) || copy( 'public/local-config-sample.php', 'public/local-config.php' );"
+          php -r "file_exists( 'public/wp-content/themes/core/local-config.json' ) || copy( 'public/wp-content/themes/core/local-config-sample.json', 'public/wp-content/themes/core/local-config.json' );"
           php -r "file_exists( 'dev/tests/.env' ) || copy( 'dev/tests/.env-dist', 'dev/tests/.env' );"
           echo "define( 'TWIG_CACHE', false );" >> local-config.php
           echo "define( 'TRIBE_GLOMAR', false );" >> local-config.php
@@ -120,19 +120,19 @@ jobs:
           chmod -R 777 ${{ github.workspace }}/cache/
 
       - name: Run unit tests
-        run: docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests php /application/www/vendor/bin/codecept --config "/application/www/dev/tests" run unit
+        run: docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests php /application/www/public/vendor/bin/codecept --config "/application/www/dev/tests" run unit
         working-directory: dev/docker
 
       - name: Run integration tests
-        run: docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests php /application/www/vendor/bin/codecept --config "/application/www/dev/tests" run integration
+        run: docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests php /application/www/public/vendor/bin/codecept --config "/application/www/dev/tests" run integration
         working-directory: dev/docker
 
       - name: Run acceptance tests
-        run: docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests php /application/www/vendor/bin/codecept --config "/application/www/dev/tests" run acceptance
+        run: docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests php /application/www/public/vendor/bin/codecept --config "/application/www/dev/tests" run acceptance
         working-directory: dev/docker
 
       - name: Run webdriver tests
-        run: docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests php /application/www/vendor/bin/codecept -vvv --config "/application/www/dev/tests" run webdriver
+        run: docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests php /application/www/public/vendor/bin/codecept -vvv --config "/application/www/dev/tests" run webdriver
         working-directory: dev/docker
 
       - uses: actions/upload-artifact@v2
