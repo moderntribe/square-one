@@ -16,9 +16,9 @@
     <arg value="nps"/>
 
     <!-- Directories to be checked -->
-    <file>./wp-content/plugins/core</file>
-    <file>./wp-content/themes/core</file>
-    <file>./wp-content/mu-plugins</file>
+    <file>./public/wp-content/plugins/core</file>
+    <file>./public/wp-content/themes/core</file>
+    <file>./public/wp-content/mu-plugins</file>
 
     <!-- Exclude files -->
     <exclude-pattern>*-config.php</exclude-pattern>

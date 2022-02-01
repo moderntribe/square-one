@@ -10,20 +10,20 @@ skip_output:
 
 # alias for the phpcs command
 x-phpcs: &phpcs
-  run: ./vendor/bin/phpcs -s --standard=./phpcs.xml.dist {staged_files}
+  run: ./public/vendor/bin/phpcs -s --standard=./phpcs.xml.dist {staged_files}
 
 # phpcs
 pre-commit:
   parallel: true
   commands:
     phpcs-core-plugin:
-      glob: "wp-content/plugins/core/*.php"
+      glob: "public/wp-content/plugins/core/*.php"
       <<: *phpcs
     phpcs-core-theme:
-      glob: "wp-content/themes/core/*.php"
+      glob: "public/wp-content/themes/core/*.php"
       <<: *phpcs
     phpcs-mu:
-      glob: "wp-content/mu-plugins/*.php"
+      glob: "public/wp-content/mu-plugins/*.php"
       <<: *phpcs
 
 # prefix with jira ticket

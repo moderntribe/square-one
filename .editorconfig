@@ -17,7 +17,7 @@ indent_size = 2
 trim_trailing_whitespace = false
 
 # Indentation override for all JS under theme directory
-[wp-content/themes/core/**/*.js]
+[public/wp-content/themes/core/**/*.js]
 indent_style = tab
 spaces_within_imports = true
 
@@ -27,14 +27,14 @@ indent_style = space
 indent_size = 2
 
 # Indentation override for all CSS under theme directory
-[wp-content/themes/core/**/**/*.pcss]
+[public/wp-content/themes/core/**/**/*.pcss]
 indent_style = tab
 
 [*.json]
 indent_style = space
 tab_width = 4
 
-[wp-content/{plugins,themes}/core/**.php]
+[public/wp-content/{plugins,themes}/core/**.php]
 indent_style = tab
 ij_formatter_off_tag = @formatter:off
 ij_formatter_on_tag = @formatter:on

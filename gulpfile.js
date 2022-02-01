@@ -11,7 +11,7 @@ function module_exists( name ) {
 	}
 }
 
-const config = module_exists( './local-config.json' ) ? require( './local-config.json' ) : {
+const config = module_exists( './public/local-config.json' ) ? require( './public/local-config.json' ) : {
 	proxy: 'square1.tribe',
 	certs_path: '',
 };

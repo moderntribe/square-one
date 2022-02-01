@@ -5,7 +5,7 @@ const rename = require( 'gulp-rename' );
 const gulpif = require( 'gulp-if' );
 const concat = require( 'gulp-concat' );
 const browserSync = require( 'browser-sync' );
-const postcssFunctions = require( '../wp-content/themes/core/assets/library/theme/pcss/functions' );
+const postcssFunctions = require( '../public/wp-content/themes/core/assets/library/theme/pcss/functions' );
 const pkg = require( '../package.json' );
 
 const sharedPlugins = [

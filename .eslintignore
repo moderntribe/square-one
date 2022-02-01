@@ -1,5 +1,5 @@
 vendor/**
-wp-content/themes/core/pcss/**/*.pcss
+public/wp-content/themes/core/pcss/**/*.pcss
 node_modules/**
 **/node_modules
 __snapshots__

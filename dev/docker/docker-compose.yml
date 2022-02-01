@@ -11,10 +11,9 @@ x-nginx: &nginx
   image: nginx:stable-alpine
   working_dir: /application
   volumes:
-    - ../..:/application/www:cached
+    - ../../public:/application/www:cached
     - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
     - ./nginx/fastcgi.conf:/etc/nginx/fastcgi_params
-
 
 x-memcached: &memcached
   image: memcached:alpine
@@ -31,7 +30,8 @@ x-php: &php
   working_dir: /application
   user: "${SQ1_UID:-1000}:${SQ1_GID:-1000}"
   volumes:
-    - ../..:/application/www:cached
+    - ../../public:/application/www:cached
+    - ../../dev:/application/www/dev
     - ./php/php-ini-overrides.ini:/usr/local/etc/php/conf.d/zz-overrides.ini
     - ./php/msmtp.conf:/etc/msmtprc:ro
     - ./wp-cli.yml:/application/wp-cli.yml

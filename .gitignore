@@ -34,27 +34,27 @@ local-config.php
 cache-config.php
 tests-config.php
 build-process.php
-wp-content/uploads/
-wp-content/blogs.dir/
-wp-content/upgrade/
-wp-content/backup-db/
-wp-content/backups/
-wp-content/cache/
-wp-content/advanced-cache.php
-wp-content/wp-cache-config.php
-wp-content/tests/
-wp-content/logs/
-wp-content/mu-plugins/mu.local.php
+public/wp-content/uploads/
+public/wp-content/blogs.dir/
+public/wp-content/upgrade/
+public/wp-content/backup-db/
+public/wp-content/backups/
+public/wp-content/cache/
+public/wp-content/advanced-cache.php
+public/wp-content/wp-cache-config.php
+public/wp-content/tests/
+public/wp-content/logs/
+public/wp-content/mu-plugins/mu.local.php
 
-wp-content/mu-plugins/mercator/
-wp-content/plugins/*
-!wp-content/plugins/core
-!wp-content/plugins/term-sorter
-!wp-content/plugins/tribe-301-redirects
-!wp-content/plugins/tribe-admin-dashboard
-!wp-content/plugins/tribe-branding
-!wp-content/plugins/tribe-glomar
-!wp-content/plugins/tribe-json-ld
+public/wp-content/mu-plugins/mercator/
+public/wp-content/plugins/*
+!public/wp-content/plugins/core
+!public/wp-content/plugins/term-sorter
+!public/wp-content/plugins/tribe-301-redirects
+!public/wp-content/plugins/tribe-admin-dashboard
+!public/wp-content/plugins/tribe-branding
+!public/wp-content/plugins/tribe-glomar
+!public/wp-content/plugins/tribe-json-ld
 
 # Packages #
 ############
@@ -90,22 +90,22 @@ dev/composer.phar
 local-config.json
 dev/docker/mysql/*
 !dev/docker/mysql/.gitkeep
-wp-content/themes/core/assets/css/dist
-wp-content/themes/core/assets/js/dist
-wp-content/themes/core/assets/js/vendor
+public/wp-content/themes/core/assets/css/dist
+public/wp-content/themes/core/assets/js/dist
+public/wp-content/themes/core/assets/js/vendor
 
 # WP Engine #
 #############
 
-wp-content/mu-plugins/wpengine-common
-wp-content/mu-plugins/attachment-helper
-wp-content/mu-plugins/limit-login-attempts
-wp-content/mu-plugins/force-strong-passwords
-wp-content/mu-plugins/mu-plugin.php
-wp-content/mu-plugins/slt-force-strong-passwords.php
-wp-content/mu-plugins/wpe_bnseosnvlsoier_private_ips.php
-wp-content/mysql.sql
-wp-content/plugins/airplane-mode
+public/wp-content/mu-plugins/wpengine-common
+public/wp-content/mu-plugins/attachment-helper
+public/wp-content/mu-plugins/limit-login-attempts
+public/wp-content/mu-plugins/force-strong-passwords
+public/wp-content/mu-plugins/mu-plugin.php
+public/wp-content/mu-plugins/slt-force-strong-passwords.php
+public/wp-content/mu-plugins/wpe_bnseosnvlsoier_private_ips.php
+public/wp-content/mysql.sql
+public/wp-content/plugins/airplane-mode
 /nbproject/
 
 # Theme #
@@ -115,7 +115,7 @@ wp-content/plugins/airplane-mode
 **/bower_components/
 **/__coverage__/
 dev/deploy/.deploy
-wp-content/themes/core/reports
+public/wp-content/themes/core/reports
 /reports
 
 # DevOps #
@@ -123,6 +123,9 @@ wp-content/themes/core/reports
 /.garden-*
 /.env
 /vendor
+/public/vendor
+/public/.env
+/public/wp
 dev/docker/composer/
 dev/docker/composer-config.json
 dev/docker/composer-cache/
@@ -142,5 +145,5 @@ phpcs.xml
 
 
 
-# Added by so cli 
+# Added by so cli
 *.local.php
