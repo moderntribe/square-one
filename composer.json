@@ -97,7 +97,7 @@
     "johnbillion/extended-cpts": "^4.0",
     "johnpbloch/wordpress-core": "5.8.3",
     "johnpbloch/wordpress-core-installer": "2.0.*",
-    "mailgun/mailgun-php": "^2.8",
+    "mailgun/mailgun-php": "^3.2",
     "msawicki/acf-menu-chooser": "dev-master",
     "moderntribe/acf-image-select": "dev-master",
     "moderntribe/tribe-acf-post-list-field": "^2.0",

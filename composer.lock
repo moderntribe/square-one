@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f0724ae9f022fd6269286af40508e9f1",
+    "content-hash": "e45fab129fe310864b6611e9d8b4a898",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -1165,41 +1165,45 @@
         },
         {
             "name": "mailgun/mailgun-php",
-            "version": "2.8.1",
+            "version": "3.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mailgun/mailgun-php.git",
-                "reference": "4af0346851914ae0d9a58bf9ddf17eb48f6498c8"
+                "reference": "a084abdb8601c0380b668651c169e0560fb435d0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mailgun/mailgun-php/zipball/4af0346851914ae0d9a58bf9ddf17eb48f6498c8",
-                "reference": "4af0346851914ae0d9a58bf9ddf17eb48f6498c8",
+                "url": "https://api.github.com/repos/mailgun/mailgun-php/zipball/a084abdb8601c0380b668651c169e0560fb435d0",
+                "reference": "a084abdb8601c0380b668651c169e0560fb435d0",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.5 || ^7.0",
-                "php-http/client-common": "^1.1",
-                "php-http/discovery": "^1.0",
-                "php-http/httplug": "^1.0 || ^2.0",
-                "php-http/message": "^1.0",
+                "php": "^7.1",
+                "php-http/client-common": "^1.9 || ^2.0",
+                "php-http/discovery": "^1.6",
                 "php-http/multipart-stream-builder": "^1.0",
-                "webmozart/assert": "^1.2"
+                "psr/http-client": "^1.0",
+                "webmozart/assert": "^1.6"
             },
             "require-dev": {
-                "guzzlehttp/psr7": "^1.4",
                 "nyholm/nsa": "^1.1",
-                "php-http/guzzle6-adapter": "^1.0",
-                "phpunit/phpunit": "~4.8"
+                "nyholm/psr7": "^1.0",
+                "php-http/guzzle6-adapter": "^1.0 || ^2.0",
+                "phpunit/phpunit": "^7.5"
             },
             "suggest": {
                 "guzzlehttp/psr7": "PSR-7 message implementation that also provides common utility methods",
                 "php-http/curl-client": "cURL client for PHP-HTTP"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0-dev"
+                }
+            },
             "autoload": {
-                "psr-0": {
-                    "Mailgun": "src/"
+                "psr-4": {
+                    "Mailgun\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1215,9 +1219,9 @@
             "description": "The Mailgun SDK provides methods for all API functions.",
             "support": {
                 "issues": "https://github.com/mailgun/mailgun-php/issues",
-                "source": "https://github.com/mailgun/mailgun-php/tree/2.8.1"
+                "source": "https://github.com/mailgun/mailgun-php/tree/3.2.0"
             },
-            "time": "2019-02-02T07:14:32+00:00"
+            "time": "2020-11-25T07:33:50+00:00"
         },
         {
             "name": "mhcg/monolog-wp-cli",
@@ -2987,16 +2991,16 @@
         },
         {
             "name": "symfony/options-resolver",
-            "version": "v5.4.0",
+            "version": "v5.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/options-resolver.git",
-                "reference": "b0fb78576487af19c500aaddb269fd36701d4847"
+                "reference": "cc1147cb11af1b43f503ac18f31aa3bec213aba8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/options-resolver/zipball/b0fb78576487af19c500aaddb269fd36701d4847",
-                "reference": "b0fb78576487af19c500aaddb269fd36701d4847",
+                "url": "https://api.github.com/repos/symfony/options-resolver/zipball/cc1147cb11af1b43f503ac18f31aa3bec213aba8",
+                "reference": "cc1147cb11af1b43f503ac18f31aa3bec213aba8",
                 "shasum": ""
             },
             "require": {
@@ -3036,7 +3040,7 @@
                 "options"
             ],
             "support": {
-                "source": "https://github.com/symfony/options-resolver/tree/v5.4.0"
+                "source": "https://github.com/symfony/options-resolver/tree/v5.4.3"
             },
             "funding": [
                 {
@@ -3052,7 +3056,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-11-23T10:19:22+00:00"
+            "time": "2022-01-02T09:53:40+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -10068,5 +10072,5 @@
     "platform-overrides": {
         "php": "7.4.7"
     },
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.2.0"
 }
