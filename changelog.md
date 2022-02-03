@@ -2,7 +2,8 @@
 
 All notable changes to this project will be documented in this file.
 
-## 2022.01 
+## 2022.01
+* Added: `proxy_ssl_server_name on;` in nginx.conf to allow proxying to production domains if they are using Cloudflare.
 * Fixed: phpcs GitHub workflow using the wrong secret.
 * Added: An empty CLI_Definer to easier register commands.
 * Updated: added allowed plugins to composer.json
