@@ -138,6 +138,7 @@
     "wp-cli/wp-cli": "^2.5.0"
   },
   "extra": {
+    "enable-patching": true,
     "wordpress-install-dir": "wp",
     "installer-paths": {
       "wp-content/mu-plugins/{$name}": [ "type:wordpress-muplugin"],

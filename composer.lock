@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "33fbfc7afe9fa5cec3965f065064f216",
+    "content-hash": "52f95ddce15acceeab60f93bc1e8871e",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -70,16 +70,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.209.17",
+            "version": "3.209.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "3ed5a5ff379e518a4e8c089e412207774daa25e7"
+                "reference": "db08dfe00bbd68658ebff98b1970c54752b37c90"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/3ed5a5ff379e518a4e8c089e412207774daa25e7",
-                "reference": "3ed5a5ff379e518a4e8c089e412207774daa25e7",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/db08dfe00bbd68658ebff98b1970c54752b37c90",
+                "reference": "db08dfe00bbd68658ebff98b1970c54752b37c90",
                 "shasum": ""
             },
             "require": {
@@ -155,9 +155,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.209.17"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.209.18"
             },
-            "time": "2022-02-03T19:19:22+00:00"
+            "time": "2022-02-04T19:56:33+00:00"
         },
         {
             "name": "clue/stream-filter",
@@ -5687,16 +5687,16 @@
         },
         {
             "name": "moderntribe/coding-standards",
-            "version": "v2.1.1",
+            "version": "v2.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moderntribe/coding-standards.git",
-                "reference": "abfb7697c6c8d0caefaf041b2529a78c74e910dd"
+                "reference": "b208d465f95b420ead84e5052681dcdd9313b9e1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/coding-standards/zipball/abfb7697c6c8d0caefaf041b2529a78c74e910dd",
-                "reference": "abfb7697c6c8d0caefaf041b2529a78c74e910dd",
+                "url": "https://api.github.com/repos/moderntribe/coding-standards/zipball/b208d465f95b420ead84e5052681dcdd9313b9e1",
+                "reference": "b208d465f95b420ead84e5052681dcdd9313b9e1",
                 "shasum": ""
             },
             "require": {
@@ -5713,7 +5713,7 @@
                 "enable-patching": true,
                 "patches": {
                     "wp-coding-standards/wpcs": {
-                        "Add PHP 8 support until WordPress releases a new version": "patches/PHP-8-ControlStructureSpacing.patch"
+                        "Add PHP 8 support until WordPress releases a new version": "https://github.com/WordPress/WordPress-Coding-Standards/commit/7cd46bed1e6a7a2af3fe24c7f4a044da3076d8f4.patch"
                     }
                 }
             },
@@ -5736,9 +5736,9 @@
             ],
             "support": {
                 "issues": "https://github.com/moderntribe/coding-standards/issues",
-                "source": "https://github.com/moderntribe/coding-standards/tree/v2.1.1"
+                "source": "https://github.com/moderntribe/coding-standards/tree/v2.1.2"
             },
-            "time": "2022-02-04T19:01:48+00:00"
+            "time": "2022-02-04T20:25:15+00:00"
         },
         {
             "name": "mustache/mustache",
