@@ -19,7 +19,8 @@
       "dealerdirect/phpcodesniffer-composer-installer": true,
       "composer/installers": true,
       "ffraenz/private-composer-installer": true,
-      "johnpbloch/wordpress-core-installer": true
+      "johnpbloch/wordpress-core-installer": true,
+      "cweagans/composer-patches": true
     }
   },
   "description": "Modern Tribe's Square One WordPress setup",
@@ -47,10 +48,6 @@
     {
       "type": "vcs",
       "url": "git@github.com:moderntribe/tribe-acf-post-list-field.git"
-    },
-    {
-      "type": "vcs",
-      "url": "git@github.com:moderntribe/coding-standards.git"
     },
     {
       "type": "vcs",
