@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## 2022.02
-* Updated: Coding standards to v2.1.1, PHP8 sniffer fixes.
+* Updated: Coding standards to v2.1.2, PHP8 sniffer fixes.
 * Updated: Added composer patches to allowed composer plugins.
 
 ## 2022.01
