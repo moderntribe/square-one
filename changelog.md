@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2022.02
+* Updated: Coding standards to v2.1.1, PHP8 sniffer fixes.
+* Updated: Added composer patches to allowed composer plugins.
+
 ## 2022.01
 * Added: Custom "so project:test" command to run all automated testing suites (requires `so` 5.5.0+)
 * Added: `proxy_ssl_server_name on;` in nginx.conf to allow proxying to production domains if they are using Cloudflare.
