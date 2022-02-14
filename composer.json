@@ -115,7 +115,7 @@
     "wpackagist-plugin/regenerate-thumbnails": "3.1.5",
     "wpackagist-plugin/the-events-calendar": "5.12.2",
     "wpackagist-plugin/user-switching": "1.5.8",
-    "wpackagist-plugin/wordpress-seo": "17.8",
+    "wpackagist-plugin/wordpress-seo": "18.1",
     "wpackagist-plugin/wp-tota11y": "1.2.0"
   },
   "require-dev": {
