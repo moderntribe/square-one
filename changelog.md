@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2022.03
+* Changed: Replaced `msawicki/acf-menu-chooser` with a forked https://github.com/moderntribe/acf-menu-chooser that includes security fixes and is also added to packagist.
+* Updated: ACF (5.12), Tribe Libs (3.4.10), Redirection (5.2.3), Yoast (18.2), TEC (5.14.0.4)
+
 ## 2022.02
 * Updated: Coding standards to v2.1.2, PHP8 sniffer fixes.
 * Updated: Added composer patches to allowed composer plugins.
@@ -27,7 +31,7 @@ All notable changes to this project will be documented in this file.
 * Added: Section Nav component & block.
 * Added: generic navigation component.
 * Updated: Node & NPM to latest LTS (v16.13.1), updated node package versions where supported.
-* Fixed: A posible PHP fatal when a anv menu is cached, but empty and the cache layer returns an unexpected boolean instead of an empty string.
+* Fixed: A possible PHP fatal when a nav menu is cached, but empty and the cache layer returns an unexpected boolean instead of an empty string.
 * Fixed: Several minor deprecation warnings in the webpack config.
 * Fixed: prevented preloading of current document when a dependency alias is enqueued in the footer
 * Added: support to preload dependencies of aliases

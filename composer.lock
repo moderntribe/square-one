@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "52f95ddce15acceeab60f93bc1e8871e",
+    "content-hash": "8dc1c29d92014a3bbdf506363ac14300",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -1302,6 +1302,28 @@
             "time": "2021-03-24T18:45:19+00:00"
         },
         {
+            "name": "moderntribe/acf-menu-chooser",
+            "version": "v1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/moderntribe/acf-menu-chooser.git",
+                "reference": "ea7ce489aabab5693524de54279c486408a7e720"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/moderntribe/acf-menu-chooser/zipball/ea7ce489aabab5693524de54279c486408a7e720",
+                "reference": "ea7ce489aabab5693524de54279c486408a7e720",
+                "shasum": ""
+            },
+            "type": "wordpress-plugin",
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "A fork of acf-menu-chooser by reyhoun/acf-menu-chooser. Original can be found at https://github.com/reyhoun/acf-menu-chooser",
+            "support": {
+                "source": "https://github.com/moderntribe/acf-menu-chooser/tree/v1.1.1"
+            },
+            "time": "2022-03-07T22:06:45+00:00"
+        },
+        {
             "name": "moderntribe/tribe-acf-post-list-field",
             "version": "v2.2.7",
             "source": {
@@ -1340,16 +1362,16 @@
         },
         {
             "name": "moderntribe/tribe-libs",
-            "version": "3.4.8",
+            "version": "3.4.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moderntribe/tribe-libs.git",
-                "reference": "a4ce17df08bc9b65b1c17ceae522fde367a5a66c"
+                "reference": "4384216bab9608208cf4ef9655a514e60661ffd4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/tribe-libs/zipball/a4ce17df08bc9b65b1c17ceae522fde367a5a66c",
-                "reference": "a4ce17df08bc9b65b1c17ceae522fde367a5a66c",
+                "url": "https://api.github.com/repos/moderntribe/tribe-libs/zipball/4384216bab9608208cf4ef9655a514e60661ffd4",
+                "reference": "4384216bab9608208cf4ef9655a514e60661ffd4",
                 "shasum": ""
             },
             "require": {
@@ -1422,33 +1444,33 @@
                 ],
                 "psr-4": {
                     "Tribe\\Libs\\ACF\\": "src/ACF/",
-                    "Tribe\\Libs\\Assets\\": "src/Assets/",
-                    "Tribe\\Libs\\Blog_Copier\\": "src/Blog_Copier/",
                     "Tribe\\Libs\\CLI\\": "src/CLI/",
-                    "Tribe\\Libs\\Cache\\": "src/Cache/",
-                    "Tribe\\Libs\\Container\\": "src/Container/",
-                    "Tribe\\Libs\\Generators\\": "src/Generators/",
                     "Tribe\\Libs\\Log\\": "src/Log/",
-                    "Tribe\\Libs\\Media\\": "src/Media/",
                     "Tribe\\Libs\\Nav\\": "src/Nav/",
-                    "Tribe\\Libs\\Object_Meta\\": "src/Object_Meta/",
-                    "Tribe\\Libs\\Oembed\\": "src/Oembed/",
                     "Tribe\\Libs\\P2P\\": "src/P2P/",
-                    "Tribe\\Libs\\Pipeline\\": "src/Pipeline/",
-                    "Tribe\\Libs\\Post_Meta\\": "src/Post_Meta/",
-                    "Tribe\\Libs\\Post_Type\\": "src/Post_Type/",
-                    "Tribe\\Libs\\Queues\\": "src/Queues/",
-                    "Tribe\\Libs\\Queues_Mysql\\": "src/Queues_Mysql/",
-                    "Tribe\\Libs\\Request\\": "src/Request/",
-                    "Tribe\\Libs\\Required_Page\\": "src/Required_Page/",
-                    "Tribe\\Libs\\Routes\\": "src/Routes/",
-                    "Tribe\\Libs\\Schema\\": "src/Schema/",
-                    "Tribe\\Libs\\Settings\\": "src/Settings/",
-                    "Tribe\\Libs\\Taxonomy\\": "src/Taxonomy/",
                     "Tribe\\Libs\\Twig\\": "src/Twig/",
                     "Tribe\\Libs\\User\\": "src/User/",
+                    "Tribe\\Libs\\Cache\\": "src/Cache/",
+                    "Tribe\\Libs\\Media\\": "src/Media/",
                     "Tribe\\Libs\\Utils\\": "src/Utils/",
-                    "Tribe\\Libs\\Whoops\\": "src/Whoops/"
+                    "Tribe\\Libs\\Assets\\": "src/Assets/",
+                    "Tribe\\Libs\\Oembed\\": "src/Oembed/",
+                    "Tribe\\Libs\\Queues\\": "src/Queues/",
+                    "Tribe\\Libs\\Routes\\": "src/Routes/",
+                    "Tribe\\Libs\\Schema\\": "src/Schema/",
+                    "Tribe\\Libs\\Whoops\\": "src/Whoops/",
+                    "Tribe\\Libs\\Request\\": "src/Request/",
+                    "Tribe\\Libs\\Pipeline\\": "src/Pipeline/",
+                    "Tribe\\Libs\\Settings\\": "src/Settings/",
+                    "Tribe\\Libs\\Taxonomy\\": "src/Taxonomy/",
+                    "Tribe\\Libs\\Container\\": "src/Container/",
+                    "Tribe\\Libs\\Post_Meta\\": "src/Post_Meta/",
+                    "Tribe\\Libs\\Post_Type\\": "src/Post_Type/",
+                    "Tribe\\Libs\\Generators\\": "src/Generators/",
+                    "Tribe\\Libs\\Blog_Copier\\": "src/Blog_Copier/",
+                    "Tribe\\Libs\\Object_Meta\\": "src/Object_Meta/",
+                    "Tribe\\Libs\\Queues_Mysql\\": "src/Queues_Mysql/",
+                    "Tribe\\Libs\\Required_Page\\": "src/Required_Page/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1458,9 +1480,9 @@
             "description": "A library for use on Modern Tribe service projects.",
             "support": {
                 "issues": "https://github.com/moderntribe/tribe-libs/issues",
-                "source": "https://github.com/moderntribe/tribe-libs/tree/3.4.8"
+                "source": "https://github.com/moderntribe/tribe-libs/tree/3.4.10"
             },
-            "time": "2021-11-29T23:46:08+00:00"
+            "time": "2022-02-11T21:42:54+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -1560,28 +1582,6 @@
                 }
             ],
             "time": "2021-10-01T21:08:31+00:00"
-        },
-        {
-            "name": "msawicki/acf-menu-chooser",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/msawicki/acf-menu-chooser.git",
-                "reference": "c8a879390df7ec8c2929715d19792d76fc62ac2e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/msawicki/acf-menu-chooser/zipball/c8a879390df7ec8c2929715d19792d76fc62ac2e",
-                "reference": "c8a879390df7ec8c2929715d19792d76fc62ac2e",
-                "shasum": ""
-            },
-            "default-branch": true,
-            "type": "wordpress-plugin",
-            "description": "A fork of acf-menu-chooser by reyhoun/acf-menu-chooser. Original can be found at https://github.com/reyhoun/acf-menu-chooser",
-            "support": {
-                "source": "https://github.com/msawicki/acf-menu-chooser/tree/master"
-            },
-            "time": "2020-01-08T20:06:07+00:00"
         },
         {
             "name": "mtdowling/jmespath.php",
@@ -3687,15 +3687,15 @@
         },
         {
             "name": "wpackagist-plugin/redirection",
-            "version": "5.1.3",
+            "version": "5.2.3",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/redirection/",
-                "reference": "tags/5.1.3"
+                "reference": "tags/5.2.3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/redirection.5.1.3.zip"
+                "url": "https://downloads.wordpress.org/plugin/redirection.5.2.3.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -3723,15 +3723,15 @@
         },
         {
             "name": "wpackagist-plugin/the-events-calendar",
-            "version": "5.12.2",
+            "version": "5.14.0.4",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/the-events-calendar/",
-                "reference": "tags/5.12.2"
+                "reference": "tags/5.14.0.4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/the-events-calendar.5.12.2.zip"
+                "url": "https://downloads.wordpress.org/plugin/the-events-calendar.5.14.0.4.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -3759,15 +3759,15 @@
         },
         {
             "name": "wpackagist-plugin/wordpress-seo",
-            "version": "17.8",
+            "version": "18.2",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/wordpress-seo/",
-                "reference": "tags/17.8"
+                "reference": "tags/18.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wordpress-seo.17.8.zip"
+                "url": "https://downloads.wordpress.org/plugin/wordpress-seo.18.2.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -10110,7 +10110,6 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "msawicki/acf-menu-chooser": 20,
         "moderntribe/acf-image-select": 20,
         "roots/wp-password-bcrypt": 20,
         "filp/whoops": 20
