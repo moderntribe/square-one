@@ -80,23 +80,26 @@ const openAccordion = ( header, content ) => {
 
 	slide.down( content, content.id, options.speed );
 
-	if ( ! el.container[ 0 ].dataset.scrollto ) {
-		return;
-	}
-
 	_.delay( () => {
-		scrollTo( {
-			after_scroll: () => {
-				events.trigger( {
-					event: 'modern_tribe/accordion_animated',
-					native: false,
-				} );
-			},
+		if ( ! el.container[ 0 ].dataset.scrollto ) {
+			events.trigger( {
+				event: 'modern_tribe/accordion_animated',
+				native: false,
+			} );
+		} else {
+			scrollTo( {
+				after_scroll: () => {
+					events.trigger( {
+						event: 'modern_tribe/accordion_animated',
+						native: false,
+					} );
+				},
 
-			offset: options.offset,
-			duration: 300,
-			$target: $( row ),
-		} );
+				offset: options.offset,
+				duration: 300,
+				$target: $( row ),
+			} );
+		}
 	}, options.speed );
 };
 
