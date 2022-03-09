@@ -185,7 +185,7 @@ class Force_Plugin_Activation {
 			return $plugins;
 		}
 
-		// Plugins like Jetpack sync may run
+		// Plugins like Jetpack sync may run this outside of the current screen scope.
 		if ( ! function_exists( 'get_current_screen' ) ) {
 			return $plugins;
 		}
