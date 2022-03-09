@@ -25,7 +25,7 @@ class Accordion_Block_Controller extends Abstract_Controller {
 	public const LEADIN            = 'leadin';
 	public const ROWS              = 'rows';
 	public const TITLE             = 'title';
-	public const SCROLL_TO 		   = 'scroll_to';
+	public const SCROLL_TO         = 'scroll_to';
 
 	/**
 	 * @var string[]
