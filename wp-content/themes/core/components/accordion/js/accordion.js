@@ -12,7 +12,6 @@
 import _ from 'lodash';
 import delegate from 'delegate';
 
-import { setAccActiveAttributes, setAccInactiveAttributes } from 'utils/dom/accessibility';
 import scrollTo from 'utils/dom/scroll-to';
 import * as slide from 'utils/dom/slide';
 import * as tools from 'utils/tools';
@@ -40,7 +39,8 @@ const closeOthers = ( row ) => {
 		const header = childRow.querySelector( '.c-accordion__header' );
 		const content = childRow.querySelector( '.c-accordion__content' );
 		tools.removeClass( childRow, 'active' );
-		setAccInactiveAttributes( header, content );
+		header.setAttribute( 'aria-expanded', 'false' );
+		content.setAttribute( 'aria-hidden', 'true' );
 		_.delay( () => {
 			content.setAttribute( 'hidden', 'true' );
 		}, options.speed );
@@ -73,7 +73,8 @@ const openAccordion = ( header, content ) => {
 	const row = tools.closest( header, '.c-accordion__row' );
 	closeOthers( row );
 	tools.addClass( row, 'active' );
-	setAccActiveAttributes( header, content );
+	header.setAttribute( 'aria-expanded', 'true' );
+	content.setAttribute( 'aria-hidden', 'false' );
 	content.removeAttribute( 'hidden' );
 	setOffset();
 
@@ -102,7 +103,8 @@ const openAccordion = ( header, content ) => {
 const closeAccordion = ( header, content ) => {
 	const row = tools.closest( header, '.c-accordion__row' );
 	tools.removeClass( row, 'active' );
-	setAccInactiveAttributes( header, content );
+	header.setAttribute( 'aria-expanded', 'false' );
+	content.setAttribute( 'aria-hidden', 'true' );
 	slide.up( content, content.id, options.speed );
 	_.delay( () => {
 		content.setAttribute( 'hidden', 'true' );

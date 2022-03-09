@@ -214,19 +214,14 @@ class Accordion_Controller extends Abstract_Controller {
 			self::ROW_CONTENT_CLASSES           => [ 'c-accordion__content' ],
 			self::ROW_CONTENT_CONTAINER_CLASSES => [ 'c-accordion__content-container', 't-sink', 's-sink' ],
 			self::CONTAINER_ATTRS               => [
-				'role'                 => 'tablist',
-				'aria-multiselectable' => 'true',
-				'data-js'              => 'c-accordion',
+				'data-js' => 'c-accordion',
 			],
 			self::ROW_HEADER_ATTRS              => [
 				'aria-expanded' => 'false',
-				'aria-selected' => 'false',
-				'role'          => 'tab',
 			],
 			self::ROW_CONTENT_ATTRS             => [
 				'hidden'      => 'true',
 				'aria-hidden' => 'true',
-				'role'        => 'tabpanel',
 			],
 			self::ROW_CONTENT_CONTAINER_ATTRS   => [
 				'data-depth' => '0',
