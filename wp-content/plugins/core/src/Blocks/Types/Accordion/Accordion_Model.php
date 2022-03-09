@@ -20,6 +20,7 @@ class Accordion_Model extends Base_Model {
 			Accordion_Block_Controller::LEADIN      => $this->get( Accordion::LEAD_IN, '' ),
 			Accordion_Block_Controller::DESCRIPTION => $this->get( Accordion::DESCRIPTION, '' ),
 			Accordion_Block_Controller::CTA         => $this->get_cta_args(),
+			Accordion_Block_Controller::SCROLL_TO   => $this->get( Accordion::SCROLL_TO, false ),
 		];
 	}
 

@@ -21,6 +21,8 @@ class Accordion extends Block_Config implements Cta_Field {
 	public const LAYOUT_INLINE  = 'inline';
 	public const LAYOUT_STACKED = 'stacked';
 
+	public const SCROLL_TO = 'scroll_to';
+
 	public const LEAD_IN     = 'leadin';
 	public const TITLE       = 'title';
 	public const DESCRIPTION = 'description';
@@ -83,6 +85,13 @@ class Accordion extends Block_Config implements Cta_Field {
 					self::LAYOUT_STACKED => __( 'Stacked', 'tribe' ),
 				],
 				'default_value' => self::LAYOUT_INLINE,
+			] )
+		)->add_field( new Field( self::NAME . '_' . self::SCROLL_TO, [
+			'label'         => __( 'Scroll to Item', 'tribe' ),
+			'name'          => self::SCROLL_TO,
+			'message'       => __( 'Scroll to item after opening?', 'tribe' ),
+			'type'          => 'true_false',
+			'default_value' => false,
 			] )
 		)->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
 				'label'       => __( 'Lead in', 'tribe' ),

@@ -79,6 +79,11 @@ const openAccordion = ( header, content ) => {
 	setOffset();
 
 	slide.down( content, content.id, options.speed );
+
+	if ( ! el.container[ 0 ].dataset.scrollto ) {
+		return;
+	}
+
 	_.delay( () => {
 		scrollTo( {
 			after_scroll: () => {
