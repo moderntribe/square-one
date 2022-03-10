@@ -185,12 +185,17 @@ class Force_Plugin_Activation {
 			return $plugins;
 		}
 
+		// Plugins like Jetpack sync may run this outside of the current screen scope.
+		if ( ! function_exists( 'get_current_screen' ) ) {
+			return $plugins;
+		}
+
 		$screen = get_current_screen();
 		if ( $screen && $screen->in_admin( 'network' ) ) {
 			return $plugins;
 		}
 
-		foreach ( (array) $this->force_network_only as $slug ) {
+		foreach ( $this->force_network_only as $slug ) {
 			if ( ! isset( $plugins[ $slug ] ) ) {
 				continue;
 			}
