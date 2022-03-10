@@ -87,11 +87,11 @@ class Accordion extends Block_Config implements Cta_Field {
 				'default_value' => self::LAYOUT_INLINE,
 			] )
 		)->add_field( new Field( self::NAME . '_' . self::SCROLL_TO, [
-			'label'         => __( 'Scroll to Item', 'tribe' ),
+			'label'         => __( 'Scroll to item after opening?', 'tribe' ),
 			'name'          => self::SCROLL_TO,
-			'message'       => __( 'Scroll to item after opening?', 'tribe' ),
 			'type'          => 'true_false',
 			'default_value' => false,
+			'ui'            => 1,
 			] )
 		)->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
 				'label'       => __( 'Lead in', 'tribe' ),

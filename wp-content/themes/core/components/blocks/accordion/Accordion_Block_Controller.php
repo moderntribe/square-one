@@ -121,10 +121,8 @@ class Accordion_Block_Controller extends Abstract_Controller {
 
 	public function get_content_args(): array {
 		return [
-			Accordion_Controller::ROWS            => $this->rows,
-			Accordion_Controller::CONTAINER_ATTRS => [
-				'data-scrollto' => $this->scroll_to,
-			],
+			Accordion_Controller::ROWS      => $this->rows,
+			Accordion_Controller::SCROLL_TO => $this->scroll_to,
 		];
 	}
 

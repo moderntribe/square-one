@@ -33,6 +33,7 @@ class Accordion_Controller extends Abstract_Controller {
 	public const ROW_HEADER_NAME               = 'row_header_name';
 	public const ROW_CONTENT_NAME              = 'row_content_name';
 	public const ROW_IDS                       = 'row_ids';
+	public const SCROLL_TO                     = 'scroll_to';
 
 	/**
 	 * @var string[]
@@ -113,6 +114,8 @@ class Accordion_Controller extends Abstract_Controller {
 		$this->row_header_name               = (string) $args[ self::ROW_HEADER_NAME ];
 		$this->row_header_tag                = (string) $args[ self::ROW_HEADER_TAG ];
 		$this->rows                          = (array) $args[ self::ROWS ];
+
+		$this->container_attrs['data-scrollto'] = (bool) $args[ self::SCROLL_TO ];
 
 		$this->row_ids = array_map( static fn() => [
 			'content_id' => uniqid( 'accordion-content-' ),
@@ -202,6 +205,7 @@ class Accordion_Controller extends Abstract_Controller {
 			self::ROW_HEADER_NAME               => 'title',
 			self::ROW_HEADER_TAG                => 'h3',
 			self::ROW_IDS                       => [],
+			self::SCROLL_TO                     => false,
 		];
 	}
 

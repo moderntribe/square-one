@@ -69,10 +69,9 @@ const setOffset = () => {
  * @function triggerAfterScroll
  * @description - Trigger the `modern_tribe/accordion_animated` event
  */
-const triggerAfterScroll = ( data ) => () => events.trigger( {
+const triggerAfterScroll = () => events.trigger( {
 	event: 'modern_tribe/accordion_animated',
 	native: false,
-	data,
 } );
 
 /**
@@ -98,7 +97,7 @@ const openAccordion = ( header, content ) => {
 			return;
 		}
 		scrollTo( {
-			afterScroll: triggerAfterScroll(),
+			afterScroll: triggerAfterScroll,
 			offset: options.offset,
 			duration: 300,
 			$target: $( row ),
@@ -119,10 +118,7 @@ const closeAccordion = ( header, content ) => {
 	slide.up( content, content.id, options.speed );
 	_.delay( () => {
 		content.setAttribute( 'hidden', 'true' );
-		events.trigger( {
-			event: 'modern_tribe/accordion_animated',
-			native: false,
-		} );
+		triggerAfterScroll();
 	}, options.speed );
 };
 
