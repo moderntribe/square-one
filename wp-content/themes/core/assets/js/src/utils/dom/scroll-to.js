@@ -15,7 +15,7 @@ const scrollTo = ( opts ) => {
 		easing: 'linear',
 		offset: 0,
 		$target: $(),
-		$scrollContainer: $( 'html, body' ),
+		$scrollContainer: $( 'html' ),
 	}, opts );
 	let position;
 	let htmlPosition;
