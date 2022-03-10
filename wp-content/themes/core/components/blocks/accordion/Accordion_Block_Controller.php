@@ -52,6 +52,9 @@ class Accordion_Block_Controller extends Abstract_Controller {
 	 */
 	private array $cta;
 
+	/**
+	 * @var bool Whether scrolling is enabled
+	 */
 	private bool $scroll_to;
 
 	/**

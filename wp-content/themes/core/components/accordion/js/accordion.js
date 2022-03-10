@@ -65,12 +65,24 @@ const setOffset = () => {
 };
 
 /**
+ *
+ * @function triggerAfterScroll
+ * @description - Trigger the `modern_tribe/accordion_animated` event
+ */
+const triggerAfterScroll = ( data ) => () => events.trigger( {
+	event: 'modern_tribe/accordion_animated',
+	native: false,
+	data,
+} );
+
+/**
  * @function openAccordion
  * @description Toggle the accordion open
  */
 
 const openAccordion = ( header, content ) => {
 	const row = tools.closest( header, '.c-accordion__row' );
+	const accordion = tools.closest( header, '.c-accordion' );
 	closeOthers( row );
 	tools.addClass( row, 'active' );
 	header.setAttribute( 'aria-expanded', 'true' );
@@ -81,25 +93,16 @@ const openAccordion = ( header, content ) => {
 	slide.down( content, content.id, options.speed );
 
 	_.delay( () => {
-		if ( ! el.container[ 0 ].dataset.scrollto ) {
-			events.trigger( {
-				event: 'modern_tribe/accordion_animated',
-				native: false,
-			} );
-		} else {
-			scrollTo( {
-				after_scroll: () => {
-					events.trigger( {
-						event: 'modern_tribe/accordion_animated',
-						native: false,
-					} );
-				},
-
-				offset: options.offset,
-				duration: 300,
-				$target: $( row ),
-			} );
+		if ( ! accordion.dataset.scrollto ) {
+			triggerAfterScroll();
+			return;
 		}
+		scrollTo( {
+			afterScroll: triggerAfterScroll(),
+			offset: options.offset,
+			duration: 300,
+			$target: $( row ),
+		} );
 	}, options.speed );
 };
 
@@ -144,7 +147,6 @@ const handlePanelEvents = ( e ) => {
  * @param {object} e The js event object.
  * @description Toggle the active accordion item using class methods.
  */
-
 const toggleItem = ( e ) => {
 	const header = e.delegateTarget;
 	const row = tools.closest( header, '.c-accordion__row' );
