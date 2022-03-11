@@ -16,14 +16,14 @@ class Form_Markup {
 	 *
 	 * @filter gform_field_choice_markup_pre_render
 	 *
-	 * @param string $choice_markup
-	 * @param array  $choice
-	 * @param array  $field
-	 * @param string $value
+	 * @param string       $choice_markup
+	 * @param array        $choice
+	 * @param object       $field
+	 * @param array|string $value // GF docs says this should be a string, but both strings and arrays may be returned as of v2.5
 	 *
 	 * @return string
 	 */
-	public function customize_gf_choice_other( string $choice_markup, array $choice, array $field, string $value ): string {
+	public function customize_gf_choice_other( string $choice_markup, array $choice, object $field, $value ): string {
 
 		if ( ! empty( $choice['isOtherChoice'] ) ) {
 			$indices = array_keys( $field['choices'] );
@@ -51,12 +51,12 @@ class Form_Markup {
 	 * @filter gform_field_css_class
 	 *
 	 * @param string $classes
-	 * @param array  $field
+	 * @param object $field
 	 * @param array  $form
 	 *
 	 * @return string
 	 */
-	public function add_gf_select_field_class( string $classes, array $field, array $form ): string {
+	public function add_gf_select_field_class( string $classes, object $field, array $form ): string {
 
 		$class_icon_simple  = $this->activate_icons ? ' form-control-icon' : '';
 		$class_icon_complex = $this->activate_icons ? ' form-control-icon-complex' : '';
