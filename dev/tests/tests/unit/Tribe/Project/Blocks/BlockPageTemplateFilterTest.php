@@ -1,4 +1,4 @@
-<?php declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 use Codeception\Test\Unit;
 use Tribe\Project\Blocks\Block_Page_Template_Filter;
@@ -20,7 +20,7 @@ final class BlockPageTemplateFilterTest extends Unit {
 		$filter = new Block_Page_Template_Filter( $block_list );
 		$list   = $filter->get_block_list();
 
-		$this->assertCount(2, $list );
+		$this->assertCount( 2, $list );
 
 		$this->assertSame( [
 			'acf/block_one',
