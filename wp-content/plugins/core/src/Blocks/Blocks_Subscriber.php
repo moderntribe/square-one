@@ -20,10 +20,18 @@ class Blocks_Subscriber extends Abstract_Subscriber {
 		}, 10, 4 );
 
 		/**
-		 * Adds the deny list to the JS_Config class.
+		 * Adds the Deny List to the JS_Config class.
 		 */
 		add_filter( 'tribe/project/blocks/denylist', function ( array $types ): array {
 			return $this->container->get( Block_Deny_List::class )->filter_block_denylist( $types );
+		}, 10, 1 );
+
+		/**
+		 * Limit certain blocks to being available only on certain page templates
+		 * by adding a global object list via the JS_Config class.
+		 */
+		add_filter( 'tribe/project/blocks/page_template_filter', function (): array {
+			return $this->container->get( Block_Page_Template_Filter::class )->get_block_list();
 		}, 10, 1 );
 
 		add_action( 'after_setup_theme', function (): void {
