@@ -16,7 +16,6 @@ use Tribe\Project\Nav_Menus\Nav_Menus_Definer;
 use Tribe\Project\Nav_Menus\Nav_Menus_Subscriber;
 use Tribe\Project\Object_Meta\Object_Meta_Definer;
 use Tribe\Project\P2P\P2P_Definer;
-use Tribe\Project\P2P\P2P_Subscriber;
 use Tribe\Project\Post_Types;
 use Tribe\Project\Query\Query_Subscriber;
 use Tribe\Project\Routes\Routes_Definer;
@@ -64,7 +63,6 @@ class Core {
 		Routes_Subscriber::class,
 		Theme_Subscriber::class,
 		Yoast_SEO_Subscriber::class,
-		P2P_Subscriber::class,
 
 		// Custom Post Types.
 		Post_Types\Sample\Subscriber::class,
