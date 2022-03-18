@@ -3,7 +3,7 @@
 /**
  * Holds various filters for P2P.
  *
- * @package DATAORG
+ * @package Tribe
  */
 
 namespace Tribe\Project\P2P;
