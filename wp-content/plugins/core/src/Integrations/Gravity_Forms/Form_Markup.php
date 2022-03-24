@@ -18,12 +18,13 @@ class Form_Markup {
 	 *
 	 * @param string       $choice_markup
 	 * @param array        $choice
-	 * @param object       $field
+	 * @param array|object $field
 	 * @param array|string $value // GF docs says this should be a string, but both strings and arrays may be returned as of v2.5
 	 *
 	 * @return string
 	 */
-	public function customize_gf_choice_other( string $choice_markup, array $choice, object $field, $value ): string {
+	public function customize_gf_choice_other( string $choice_markup, array $choice, $field, $value ): string {
+		$field = (array) $field;
 
 		if ( ! empty( $choice['isOtherChoice'] ) ) {
 			$indices = array_keys( $field['choices'] );
