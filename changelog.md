@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
 * Updated: Aligns accordion component with WAI-ARIA standard
 * Fixed: Jetpack sync calls the `all_plugins` filter outside of a screen context, causing fatal errors in our force plugin activation MU plugin when using multisite.
 * Added: Enable/disable scrolling behavior on accordion blocks
+* Fixed: Adds styling for nested lists in t-sink context
 * Fixed: Corrects parameter type for P2P cache method
 
 ## 2022.02
