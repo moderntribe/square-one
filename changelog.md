@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 * Updated WordPress: 5.9.2
 * Updated plugins: ACF, TEC, Gravity Forms, Yoast
 * Updated: Tribe Libs to 3.4.12
+* Fixed: Corrects parameter type for P2P cache method
 * Fixed: Adds styling for nested lists in t-sink context
 * Changed: Replaced `msawicki/acf-menu-chooser` with a forked https://github.com/moderntribe/acf-menu-chooser that includes security fixes and is also added to packagist.
 * Updated: ACF (5.12), Tribe Libs (3.4.10), Redirection (5.2.3), Yoast (18.2), TEC (5.14.0.4)
