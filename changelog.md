@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## 2022.03
-* Updated WordPress: 5.9.2
+* Updated WordPress: 5.9.2 / new tests dump.sql
 * Updated plugins: ACF, TEC, Gravity Forms, Yoast
 * Updated: Tribe Libs to 3.4.12
 * Fixed: Corrects parameter type for P2P cache method
