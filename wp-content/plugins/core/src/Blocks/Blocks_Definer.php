@@ -32,7 +32,7 @@ class Blocks_Definer implements Definer_Interface {
 
 	public function define(): array {
 		return [
-			self::TYPES            => DI\add( [
+			self::TYPES                       => DI\add( [
 				DI\get( Accordion::class ),
 				DI\get( Buttons::class ),
 				DI\get( Card_Grid::class ),
@@ -60,7 +60,7 @@ class Blocks_Definer implements Definer_Interface {
 			 *
 			 * @see: https://developer.wordpress.org/block-editor/reference-guides/filters/block-filters/#using-a-deny-list
 			 */
-			self::DENY_LIST        => [
+			self::DENY_LIST                   => [
 				'core/archives',
 				'core/button',
 				'core/buttons',
@@ -90,7 +90,7 @@ class Blocks_Definer implements Definer_Interface {
 			 *
 			 * TODO: Create a proper thumbnail of the style for the block editor: http://p.tri.be/dmsAwK
 			 */
-			self::STYLES           => DI\add( [
+			self::STYLES                      => DI\add( [
 				DI\factory( static function () {
 					return new Block_Style_Override( [ 'core/paragraph' ], [
 						[
@@ -113,7 +113,22 @@ class Blocks_Definer implements Definer_Interface {
 				} ),
 			] ),
 
-			Block_Deny_List::class => DI\autowire()->constructor( DI\get( self::DENY_LIST ) ),
+			Block_Deny_List::class            => DI\autowire()->constructor( DI\get( self::DENY_LIST ) ),
+
+			/**
+			 * Limit certain blocks to being available only on certain page templates.
+			 *
+			 * key: The page template slug.
+			 * values: A list of block names that will only appear when that page template is selected.
+			 *
+			 * @see get_page_template_slug()
+			 */
+			Block_Page_Template_Filter::class => DI\autowire()
+				->constructor( [
+					 /*'page-templates/page-template-name.php' => [
+						 Block_Type::NAME,
+					 ],*/
+				] ),
 		];
 	}
 
