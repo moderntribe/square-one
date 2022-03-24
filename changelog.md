@@ -3,13 +3,16 @@
 All notable changes to this project will be documented in this file.
 
 ## 2022.03
+* Updated WordPress: 5.9.2 / new tests dump.sql
+* Updated plugins: ACF, TEC, Gravity Forms, Yoast
+* Updated: Tribe Libs to 3.4.12
+* Fixed: Corrects parameter type for P2P cache method
+* Fixed: Adds styling for nested lists in t-sink context
 * Changed: Replaced `msawicki/acf-menu-chooser` with a forked https://github.com/moderntribe/acf-menu-chooser that includes security fixes and is also added to packagist.
 * Updated: ACF (5.12), Tribe Libs (3.4.10), Redirection (5.2.3), Yoast (18.2), TEC (5.14.0.4)
 * Updated: Aligns accordion component with WAI-ARIA standard
 * Fixed: Jetpack sync calls the `all_plugins` filter outside of a screen context, causing fatal errors in our force plugin activation MU plugin when using multisite.
 * Added: Enable/disable scrolling behavior on accordion blocks
-* Fixed: Adds styling for nested lists in t-sink context
-* Fixed: Corrects parameter type for P2P cache method
 
 ## 2022.02
 * Updated: Coding standards to v2.1.2, PHP8 sniffer fixes.
