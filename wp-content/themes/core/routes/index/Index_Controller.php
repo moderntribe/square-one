@@ -116,12 +116,12 @@ class Index_Controller extends Abstract_Controller {
 			return [];
 		}
 
-		$category = Term_Object::factory( $term->term_id );
+		$taxonomy = Term_Object::factory( $term->term_id );
 
 		return array_filter( [
 			Subheader_Controller::TITLE         => $term->name,
 			Subheader_Controller::DESCRIPTION   => $term->description,
-			Subheader_Controller::HERO_IMAGE_ID => $category->get_meta( Taxonomy_Archive_Settings::HERO_IMAGE )['ID'] ?? [],
+			Subheader_Controller::HERO_IMAGE_ID => $taxonomy->get_meta( Taxonomy_Archive_Settings::HERO_IMAGE )['ID'] ?? [],
 		] );
 	}
 
