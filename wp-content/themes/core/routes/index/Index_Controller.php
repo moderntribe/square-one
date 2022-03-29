@@ -78,8 +78,9 @@ class Index_Controller extends Abstract_Controller {
 		}
 
 		return [
-			Content_Loop_Controller::LAYOUT => Content_Loop::LAYOUT_FEATURE,
-			Content_Loop_Controller::POSTS  => array_slice( $featured_post_array, 0, $max_posts ),
+			Content_Loop_Controller::LAYOUT            => Content_Loop::LAYOUT_FEATURE,
+			Content_Loop_Controller::POSTS             => array_slice( $featured_post_array, 0, $max_posts ),
+			Content_Loop_Controller::ENABLE_PAGINATION => false,
 		];
 	}
 

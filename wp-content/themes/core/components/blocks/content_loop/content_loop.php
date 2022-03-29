@@ -45,7 +45,7 @@ $c = Content_Loop_Controller::factory( $args );
 
 			<?php elseif ( $c->get_layout() === Content_Loop::LAYOUT_COLUMNS ) : ?>
 				<!-- Columns Layout -->
-				<?php foreach ( $c->get_posts_card_args( Card_Controller::STYLE_PLAIN ) as $card_args ) { ?>
+				<?php foreach ( $c->get_posts_card_args() as $card_args ) { ?>
 					<?php get_template_part( 'components/card/card', '', $card_args ); ?>
 				<?php } ?>
 
@@ -58,7 +58,9 @@ $c = Content_Loop_Controller::factory( $args );
 			<?php endif; ?>
 		</div>
 
-		<?php get_template_part( 'components/pagination/loop/loop' ); ?>
+		<?php if ( $c->is_pagination_enabled() ) {
+			get_template_part( 'components/pagination/loop/loop', 'index' );
+		} ?>
 
 	</div>
 </section>

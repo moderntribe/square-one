@@ -26,6 +26,7 @@ class Content_Loop_Controller extends Abstract_Controller {
 	public const LEADIN            = 'leadin';
 	public const POSTS             = 'posts';
 	public const TITLE             = 'title';
+	public const ENABLE_PAGINATION = 'enable_pagination';
 
 	/**
 	 * @var string[]
@@ -62,6 +63,7 @@ class Content_Loop_Controller extends Abstract_Controller {
 	private string $layout;
 	private string $leadin;
 	private string $title;
+	private bool $enable_pagination;
 
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
@@ -72,6 +74,7 @@ class Content_Loop_Controller extends Abstract_Controller {
 		$this->content_classes   = (array) $args[ self::CONTENT_CLASSES ];
 		$this->cta               = (array) $args[ self::CTA ];
 		$this->description       = (string) $args[ self::DESCRIPTION ];
+		$this->enable_pagination = (bool) $args[ self::ENABLE_PAGINATION ];
 		$this->layout            = (string) $args[ self::LAYOUT ];
 		$this->leadin            = (string) $args[ self::LEADIN ];
 		$this->posts             = (array) $args[ self::POSTS ];
@@ -94,6 +97,10 @@ class Content_Loop_Controller extends Abstract_Controller {
 
 	public function get_layout(): string {
 		return $this->layout;
+	}
+
+	public function is_pagination_enabled(): bool {
+		return $this->enable_pagination;
 	}
 
 	public function get_posts_card_args( string $layout = Card_Controller::STYLE_PLAIN ): array {
@@ -274,6 +281,7 @@ class Content_Loop_Controller extends Abstract_Controller {
 			self::CONTENT_CLASSES   => [],
 			self::CTA               => [],
 			self::DESCRIPTION       => '',
+			self::ENABLE_PAGINATION => true,
 			self::LAYOUT            => Content_Loop_Block::LAYOUT_ROW,
 			self::LEADIN            => '',
 			self::POSTS             => [],
