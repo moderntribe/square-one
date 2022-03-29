@@ -13,10 +13,10 @@ get_header();
 		<?php if ( have_posts() ) {
 			// Featured posts
 			if ( $c->is_page_one() && ! empty( $c->get_content_loop_featured_args() ) ) {
-				get_template_part( 'components/blocks/content_loop/content_loop', null, $c->get_content_loop_featured_args() );
+				get_template_part( 'components/blocks/content_loop/content_loop', '', $c->get_content_loop_featured_args() );
 			}
 
-			get_template_part( 'components/blocks/content_loop/content_loop', null, $c->get_content_loop_args() );
+			get_template_part( 'components/blocks/content_loop/content_loop', '', $c->get_content_loop_args() );
 		} else {
 			get_template_part( 'components/no_results/no_results', 'index' );
 		} ?>
