@@ -121,7 +121,7 @@ class Index_Controller extends Abstract_Controller {
 		return array_filter( [
 			Subheader_Controller::TITLE         => $term->name,
 			Subheader_Controller::DESCRIPTION   => $term->description,
-			Subheader_Controller::HERO_IMAGE_ID => $taxonomy->get_meta( Taxonomy_Archive_Settings::HERO_IMAGE )['ID'] ?? [],
+			Subheader_Controller::HERO_IMAGE_ID => $taxonomy->get_meta( Taxonomy_Archive_Settings::HERO_IMAGE )['ID'] ?? 0,
 		] );
 	}
 
@@ -129,7 +129,7 @@ class Index_Controller extends Abstract_Controller {
 		return array_filter( [
 			Subheader_Controller::TITLE         => $this->post_settings->get_setting( Post_Archive_Settings::TITLE, '' ),
 			Subheader_Controller::DESCRIPTION   => $this->post_settings->get_setting( Post_Archive_Settings::DESCRIPTION, '' ),
-			Subheader_Controller::HERO_IMAGE_ID => $this->post_settings->get_setting( Post_Archive_Settings::HERO_IMAGE, [] )['ID'] ?? [],
+			Subheader_Controller::HERO_IMAGE_ID => $this->post_settings->get_setting( Post_Archive_Settings::HERO_IMAGE, [] )['ID'] ?? 0,
 		] );
 	}
 
