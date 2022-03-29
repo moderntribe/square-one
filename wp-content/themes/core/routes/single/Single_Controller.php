@@ -18,10 +18,15 @@ class Single_Controller extends Abstract_Controller {
 	use Page_Title;
 	use Primary_Term;
 
-	/**
-	 * @var int|string
-	 */
-	public $sidebar_id = '';
+	public const SIDEBAR_ID = 'sidebar_id';
+
+	protected string $sidebar_id;
+
+	public function __construct( array $args = [] ) {
+		$args = $this->parse_args( $args );
+
+		$this->sidebar_id = (string) $args[ self::SIDEBAR_ID ];
+	}
 
 	public function get_subheader_args(): array {
 		global $post;
@@ -83,6 +88,16 @@ class Single_Controller extends Abstract_Controller {
 				Image_Controller::IMG_ALT_TEXT => ! empty( $alt_text ) ? $alt_text : '',
 				Image_Controller::HTML         => ! empty( $caption ) ? '<figcaption class="item-single__featured-image-caption t-caption">' . wp_get_attachment_caption( $image_id ) . '</figcaption>' : '',
 			];
+	}
+
+	public function get_sidebar_id(): string {
+		return $this->sidebar_id;
+	}
+
+	protected function defaults(): array {
+		return [
+			self::SIDEBAR_ID => '',
+		];
 	}
 
 }
