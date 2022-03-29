@@ -9,7 +9,7 @@ trait With_Pagination_Helper {
 	}
 
 	public function is_page_one(): bool {
-		return 1 === $this->get_current_page();
+		return $this->get_current_page() <= 1;
 	}
 
 }
