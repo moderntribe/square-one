@@ -22,11 +22,11 @@ class Content_Loop_Controller extends Abstract_Controller {
 	public const CONTENT_CLASSES   = 'content_classes';
 	public const CTA               = 'cta';
 	public const DESCRIPTION       = 'description';
+	public const ENABLE_PAGINATION = 'enable_pagination';
 	public const LAYOUT            = 'layout';
 	public const LEADIN            = 'leadin';
 	public const POSTS             = 'posts';
 	public const TITLE             = 'title';
-	public const ENABLE_PAGINATION = 'enable_pagination';
 
 	/**
 	 * @var string[]
