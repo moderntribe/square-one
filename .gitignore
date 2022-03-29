@@ -34,6 +34,7 @@ local-config.php
 cache-config.php
 tests-config.php
 build-process.php
+wp-content/db.php
 wp-content/uploads/
 wp-content/blogs.dir/
 wp-content/upgrade/
@@ -142,5 +143,5 @@ phpcs.xml
 
 
 
-# Added by so cli 
+# Added by so cli
 *.local.php
