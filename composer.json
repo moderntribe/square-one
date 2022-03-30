@@ -82,6 +82,10 @@
   ],
   "require": {
     "php": "^7.4",
+    "ext-exif":"*",
+    "ext-gd": "*",
+    "ext-imagick": "*",
+    "ext-intl":"*",
     "ext-json": "*",
     "advanced-custom-fields/advanced-custom-fields-pro": "*",
     "gravityforms/gravityforms": "*",
