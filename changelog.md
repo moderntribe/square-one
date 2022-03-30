@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## 2022.03
+* Updated: Misc config updates for Dokku and Docker nginx & PHP.
 * Fixed: Gravity Forms filter parameter types changed for v2.5 and above.
 * Updated WordPress: 5.9.2 / new tests dump.sql
 * Updated plugins: ACF, TEC, Gravity Forms, Yoast
