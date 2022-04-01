@@ -15,7 +15,7 @@ abstract class Abstract_Controller {
 	 * @throws \DI\DependencyException
 	 * @throws \DI\NotFoundException
 	 *
-	 * @return \Tribe\Project\Templates\Components\Abstract_Controller
+	 * @return static
 	 */
 	public static function factory( array $args = [] ): Abstract_Controller {
 		return tribe_project()->container()->make( static::class, [ 'args' => $args ] );
