@@ -5,5 +5,10 @@ use Tribe\Project\Blocks\Types\Hero\Hero_Model;
 /**
  * @var array $args ACF block data..
  */
-$model = new Hero_Model( $args['block'] );
-get_template_part( 'components/blocks/hero/hero', null, $model->get_data() );
+$model = tribe_project()->container()->make( Hero_Model::class, $args );
+
+get_template_part(
+	'components/blocks/hero/hero',
+	'',
+	$model->get_data()
+);

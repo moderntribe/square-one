@@ -5,10 +5,10 @@ use Tribe\Project\Blocks\Types\Interstitial\Interstitial_Model;
 /**
  * @var array $args ACF block data..
  */
-$model = new Interstitial_Model( $args['block'] );
+$model = tribe_project()->container()->make( Interstitial_Model::class, $args );
 
 get_template_part(
 	'components/blocks/interstitial/interstitial',
-	null,
+	'',
 	$model->get_data()
 );
