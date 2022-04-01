@@ -13,9 +13,9 @@ get_header();
 			<div class="search-results__container">
 				<h1 class="h2 search-results__title"><?php _e( 'Search', 'tribe' ); ?></h1>
 
-				<?php get_template_part( 'components/search_form/search_form', null, $c->get_search_form_args() ); ?>
+				<?php get_template_part( 'components/search_form/search_form', '', $c->get_search_form_args() ); ?>
 
-				<?php get_template_part( 'components/text/text', null, $c->get_results_text_args() ); ?>
+				<?php get_template_part( 'components/text/text', '', $c->get_results_text_args() ); ?>
 
 				<?php
 				if ( have_posts() ) :
@@ -35,6 +35,6 @@ do_action( 'get_sidebar', null );
 get_template_part(
 	'components/sidebar/sidebar',
 	'index',
-	[ Sidebar_Controller::SIDEBAR_ID => $c->sidebar_id ]
+	[ Sidebar_Controller::SIDEBAR_ID => $c->get_sidebar_id() ]
 );
 get_footer();
