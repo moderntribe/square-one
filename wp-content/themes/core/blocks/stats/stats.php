@@ -3,7 +3,7 @@
 use Tribe\Project\Blocks\Types\Stats\Stats_Model;
 
 /**
- * @var array $args ACF block data..
+ * @var array $args ACF block data.
  */
 $model = tribe_project()->container()->make( Stats_Model::class, $args );
 

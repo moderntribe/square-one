@@ -3,7 +3,7 @@
 use Tribe\Project\Blocks\Types\Gallery_Slider\Gallery_Slider_Model;
 
 /**
- * @var array $args ACF block data..
+ * @var array $args ACF block data.
  */
 $model = tribe_project()->container()->make( Gallery_Slider_Model::class, $args );
 

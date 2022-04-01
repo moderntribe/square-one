@@ -3,7 +3,7 @@
 use Tribe\Project\Blocks\Types\Interstitial\Interstitial_Model;
 
 /**
- * @var array $args ACF block data..
+ * @var array $args ACF block data.
  */
 $model = tribe_project()->container()->make( Interstitial_Model::class, $args );
 

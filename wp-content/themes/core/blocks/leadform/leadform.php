@@ -3,7 +3,7 @@
 use Tribe\Project\Blocks\Types\Lead_Form\Lead_Form_Model;
 
 /**
- * @var array $args ACF block data..
+ * @var array $args ACF block data.
  */
 $model = tribe_project()->container()->make( Lead_Form_Model::class, $args );
 
