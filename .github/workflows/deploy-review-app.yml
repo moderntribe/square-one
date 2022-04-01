@@ -14,6 +14,7 @@ jobs:
     uses: moderntribe/actions/.github/workflows/create-review-app.yml@v1
     with:
       app_name: sq1
+      pr_number: ${{ github.event.number }}
     secrets:
       github_pat_token: ${{ secrets.GH_BOT_TOKEN }}
       server: ${{ secrets.TEST_DOMAIN }}
@@ -25,6 +26,7 @@ jobs:
     with:
       app_name: sq1
       branch: ${{ github.event.pull_request.head.ref }}
+      pr_number: ${{ github.event.number }}
       is_review_app: true
     secrets:
       github_pat_token: ${{ secrets.GH_BOT_TOKEN }}
@@ -37,6 +39,7 @@ jobs:
     uses: moderntribe/actions/.github/workflows/delete-review-app.yml@v1
     with:
       app_name: sq1
+      pr_number: ${{ github.event.number }}
     secrets:
       github_pat_token: ${{ secrets.GH_BOT_TOKEN }}
       server: ${{ secrets.TEST_DOMAIN }}

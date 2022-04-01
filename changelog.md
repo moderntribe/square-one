@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 * Fixed: .editorconfig incorrect tabbing for PHP files (thanks Caleb).
 * Fixed: Missing pagination on the content loop block component.
 * Fixed: Visibility of public $sidebar_id's in all controllers.
+* Updated: Misc config updates for Dokku and Docker nginx & PHP.
 * Fixed: Gravity Forms filter parameter types changed for v2.5 and above.
 * Updated WordPress: 5.9.2 / new tests dump.sql
 * Updated plugins: ACF, TEC, Gravity Forms, Yoast
