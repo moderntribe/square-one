@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2022.04
+* Changed: all block models are now instantiated with the container to support auto wiring.
+
 ## 2022.03
 * Updated: Misc config updates for Dokku and Docker nginx & PHP.
 * Fixed: Gravity Forms filter parameter types changed for v2.5 and above.
