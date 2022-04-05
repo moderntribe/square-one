@@ -67,4 +67,4 @@ jobs:
           composer install --prefer-dist --no-progress --no-suggest --optimize-autoloader
 
       - name: PHPStan
-        run: ./vendor/bin/phpcs --memory-limit=512M
+        run: ./vendor/bin/phpstan --memory-limit=512M
