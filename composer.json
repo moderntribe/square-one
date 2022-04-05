@@ -89,7 +89,7 @@
     "ext-json": "*",
     "advanced-custom-fields/advanced-custom-fields-pro": "*",
     "gravityforms/gravityforms": "*",
-    "guzzlehttp/psr7": "^1.4",
+    "guzzlehttp/psr7": "^2.2",
     "humanmade/s3-uploads": "2.2.1",
     "johnbillion/extended-cpts": "^4.0",
     "johnpbloch/wordpress-core": "5.9.2",
