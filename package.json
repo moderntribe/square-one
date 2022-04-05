@@ -168,7 +168,7 @@
     "gulp-uglify": "^3.0.1",
     "identity-obj-proxy": "^3.0.0",
     "ifdef-loader": "^2.1.4",
-    "jest": "^25.1.0",
+    "jest": "^27.5.1",
     "jest-cli": "^25.1.0",
     "jest-environment-jsdom": "^24.9.0",
     "jest-environment-jsdom-global": "^1.2.0",
