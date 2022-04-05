@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2022.04
+* Changed: all block models are now instantiated with the container to support dependency injection.
+
 ## 2022.03
 * Fixed: Refactor index controller to use proper meta fetching objects and general code clean up.
 * Fixed: Show same header logic on the Post Tag archive as the Category Archive.
