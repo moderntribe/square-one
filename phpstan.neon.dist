@@ -10,6 +10,10 @@ parameters:
 		- vendor/php-stubs/wordpress-stubs/wordpress-stubs.php
 		- vendor/php-stubs/acf-pro-stubs/acf-pro-stubs.php
 	tmpDir: .phpstan-cache/
-	checkAlwaysTrueStrictComparison: true
 	ignoreErrors:
 		- '#^Function yoast_get_primary_term_id not found.$#'
+
+	checkAlwaysTrueStrictComparison: true
+
+	# Unfortunately, DocBlocks can't be relied upon in WordPress.
+	treatPhpDocTypesAsCertain: false
