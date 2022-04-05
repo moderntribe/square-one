@@ -8538,10 +8538,10 @@ jest-each@^25.5.0:
     jest-util "^25.5.0"
     pretty-format "^25.5.0"
 
-jest-environment-jsdom-global@^1.2.0:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/jest-environment-jsdom-global/-/jest-environment-jsdom-global-1.2.1.tgz#392052d4d23ae6fada88b0513146e2e979a6aaaf"
-  integrity sha512-XK/ddDfv8rURHoyfZwmhePv1mof3XFlPvkGfywIYU5Ype4/S/SRA0KNAdma9CuLV/KI+1jQh5BrGM3AqpJ/jRA==
+jest-environment-jsdom-global@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/jest-environment-jsdom-global/-/jest-environment-jsdom-global-3.0.0.tgz#a1c021d94232cc72b5fbf5b44639ac66b0ba4542"
+  integrity sha512-+7ZNxuB/35ybGug9vMaBYontqI7T8KhnUU55wtT5OYw6GRfDn2Vzak2YRvBwFjdm0so0Qz7KAL6NtEB0r+3x+g==
 
 jest-environment-jsdom@^24.9.0:
   version "24.9.0"
