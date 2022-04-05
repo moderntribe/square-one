@@ -169,7 +169,7 @@
     "identity-obj-proxy": "^3.0.0",
     "ifdef-loader": "^2.1.4",
     "jest": "^25.1.0",
-    "jest-cli": "^25.1.0",
+    "jest-cli": "^27.5.1",
     "jest-environment-jsdom": "^24.9.0",
     "jest-environment-jsdom-global": "^1.2.0",
     "json2php": "0.0.4",
