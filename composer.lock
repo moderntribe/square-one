@@ -1362,16 +1362,16 @@
         },
         {
             "name": "moderntribe/tribe-libs",
-            "version": "3.4.12",
+            "version": "3.4.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moderntribe/tribe-libs.git",
-                "reference": "cc807620b2f48795a622ce79c6cac692523b01f0"
+                "reference": "1d63f2e172d44a3e9df456e2b0ac3513dbf80fa2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/tribe-libs/zipball/cc807620b2f48795a622ce79c6cac692523b01f0",
-                "reference": "cc807620b2f48795a622ce79c6cac692523b01f0",
+                "url": "https://api.github.com/repos/moderntribe/tribe-libs/zipball/1d63f2e172d44a3e9df456e2b0ac3513dbf80fa2",
+                "reference": "1d63f2e172d44a3e9df456e2b0ac3513dbf80fa2",
                 "shasum": ""
             },
             "require": {
@@ -1480,9 +1480,9 @@
             "description": "A library for use on Modern Tribe service projects.",
             "support": {
                 "issues": "https://github.com/moderntribe/tribe-libs/issues",
-                "source": "https://github.com/moderntribe/tribe-libs/tree/3.4.12"
+                "source": "https://github.com/moderntribe/tribe-libs/tree/3.4.13"
             },
-            "time": "2022-03-24T20:03:05+00:00"
+            "time": "2022-04-05T14:10:27+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -5691,16 +5691,16 @@
         },
         {
             "name": "moderntribe/coding-standards",
-            "version": "v2.1.3",
+            "version": "v2.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moderntribe/coding-standards.git",
-                "reference": "5a0a7c7bf274d95d32f022d1bd05e16db5d96818"
+                "reference": "ac1aadcabeabfd33b6e5d2d9ed43c009c7a2485f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/coding-standards/zipball/5a0a7c7bf274d95d32f022d1bd05e16db5d96818",
-                "reference": "5a0a7c7bf274d95d32f022d1bd05e16db5d96818",
+                "url": "https://api.github.com/repos/moderntribe/coding-standards/zipball/ac1aadcabeabfd33b6e5d2d9ed43c009c7a2485f",
+                "reference": "ac1aadcabeabfd33b6e5d2d9ed43c009c7a2485f",
                 "shasum": ""
             },
             "require": {
@@ -5740,9 +5740,9 @@
             ],
             "support": {
                 "issues": "https://github.com/moderntribe/coding-standards/issues",
-                "source": "https://github.com/moderntribe/coding-standards/tree/v2.1.3"
+                "source": "https://github.com/moderntribe/coding-standards/tree/v2.1.4"
             },
-            "time": "2022-03-14T16:48:45+00:00"
+            "time": "2022-04-04T22:46:50+00:00"
         },
         {
             "name": "mustache/mustache",
