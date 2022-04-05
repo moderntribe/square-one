@@ -140,7 +140,7 @@ dev/tests/tests/_support/_generated/
 ###############
 phpcs.xml
 .phpcs-cache
-
+.phpstan-cache
 
 
 # Added by so cli

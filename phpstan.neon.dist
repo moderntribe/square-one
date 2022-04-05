@@ -1,0 +1,15 @@
+parameters:
+	level: 0
+	paths:
+		- wp-content/themes/core/
+		- wp-content/plugins/core/
+		- wp-content/mu-plugins/
+	excludePaths:
+		- vendor
+	bootstrapFiles:
+		- vendor/php-stubs/wordpress-stubs/wordpress-stubs.php
+		- vendor/php-stubs/acf-pro-stubs/acf-pro-stubs.php
+	tmpDir: .phpstan-cache/
+	checkAlwaysTrueStrictComparison: true
+	ignoreErrors:
+		- '#^Function yoast_get_primary_term_id not found.$#'
