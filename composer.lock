@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8faa814fb2d2a2ed0187f916a62374a1",
+    "content-hash": "3f901192d88e4b0b561d4d4249d2fcd3",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -3651,15 +3651,15 @@
         },
         {
             "name": "wpackagist-plugin/limit-login-attempts-reloaded",
-            "version": "2.23.2",
+            "version": "2.24.0",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/limit-login-attempts-reloaded/",
-                "reference": "tags/2.23.2"
+                "reference": "tags/2.24.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/limit-login-attempts-reloaded.2.23.2.zip"
+                "url": "https://downloads.wordpress.org/plugin/limit-login-attempts-reloaded.2.24.0.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -10131,5 +10131,5 @@
     "platform-overrides": {
         "php": "7.4.7"
     },
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.2.0"
 }
