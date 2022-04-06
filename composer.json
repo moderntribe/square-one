@@ -152,6 +152,11 @@
         "type:wordpress-plugin"
       ],
       "wp-content/plugins/s3-uploads": [ "humanmade/S3-Uploads" ]
+    },
+    "patches": {
+      "php-stubs/wordpress-stubs": {
+        "Replace duplicate call for wp_set_password(), wp_hash_password(), and wp_check_password().": "dev/patches/wordpress-stubs.patch"
+      }
     }
   },
   "autoload": {
