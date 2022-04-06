@@ -3,7 +3,7 @@
 use Tribe\Project\Templates\Components\accordion\Accordion_Controller;
 
 /**
- * @var $args
+ * @var array $args
  */
 $c = Accordion_Controller::factory( $args );
 ?>

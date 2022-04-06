@@ -382,14 +382,14 @@ class Image_Controller extends Abstract_Controller {
 				continue;
 			}
 
-			$attribute[] = $this->build_srcset_string( ...$src );
+			$attribute[] = $this->build_srcset_string( $src[0], $src[1], $src[2] );
 		}
 
 		// If there are no sizes available after all that work, fallback to the original full size image.
 		if ( empty( $attribute ) ) {
 			$src = wp_get_attachment_image_src( $this->img_id, 'full' );
 			if ( $src ) {
-				$attribute[] = $this->build_srcset_string( ...$src );
+				$attribute[] = $this->build_srcset_string( $src[0], $src[1], $src[2] );
 			}
 		}
 
