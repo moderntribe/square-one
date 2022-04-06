@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "75b90386f9b8a3f390b995ff0a541908",
+    "content-hash": "369c1013d8959f7d6f7db45a31ac4781",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -1670,8 +1670,8 @@
             ],
             "description": "This is a simple ACF Add-on field allowing the creation of color swatches that behave as radio buttons.",
             "support": {
-                "source": "https://github.com/nickforddev/acf-swatch/tree/1.0.7",
-                "issues": "https://github.com/nickforddev/acf-swatch/issues"
+                "source": "https://github.com/nickforddesign/acf-swatch/tree/1.0.7",
+                "issues": "https://github.com/nickforddesign/acf-swatch/issues"
             },
             "time": "2018-11-29T16:23:16+00:00"
         },
