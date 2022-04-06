@@ -184,11 +184,11 @@ class Walker_Nav_Menu_Primary extends Walker_Nav_Menu {
 			$tag_name = 'button';
 		}
 
-		$item_output  = $args->before;
+		$item_output  = $args->before; // @phpstan-ignore-line (WordPress doesn't list the $args property)
 		$item_output .= '<' . $tag_name . $attributes . '>';
-		$item_output .= $args->link_before . $title . $args->link_after;
+		$item_output .= $args->link_before . $title . $args->link_after; // @phpstan-ignore-line (WordPress doesn't list the $args property)
 		$item_output .= '</' . $tag_name . '>';
-		$item_output .= $args->after;
+		$item_output .= $args->after; // @phpstan-ignore-line (WordPress doesn't list the $args property)
 
 		/**
 		 * Filters a menu item's starting output.

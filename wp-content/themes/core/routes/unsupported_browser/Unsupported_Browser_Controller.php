@@ -29,14 +29,14 @@ class Unsupported_Browser_Controller extends Abstract_Controller {
 		return esc_url( trailingslashit( get_template_directory_uri() ) . 'assets/img/theme/legacy-browser/' . $filename );
 	}
 
-	public function get_logo_url(): array {
+	public function get_logo_url(): string {
 		$custom_logo_id = get_theme_mod( 'custom_logo' );
-		$image          = wp_get_attachment_image_src( $custom_logo_id, 'full' );
+		$image          = wp_get_attachment_image_url( $custom_logo_id, 'full' );
 		if ( $image ) {
 			return $image;
 		}
 
-		return [];
+		return '';
 	}
 
 }
