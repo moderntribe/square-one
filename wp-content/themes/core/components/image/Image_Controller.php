@@ -96,7 +96,7 @@ class Image_Controller extends Abstract_Controller {
 	/** @var string This is the main src registered image size */
 	private string $src_size;
 
-	/** @var mixed[][] This is registered sizes array for srcset */
+	/** @var string[] This is registered sizes array for srcset */
 	private array $srcset_sizes;
 
 	/** @var string This is the srcset sizes attribute string used if auto is false */

@@ -22,7 +22,7 @@ class Walker_Nav_Menu_Primary extends Walker_Nav_Menu {
 	 *
 	 * @param string $output Passed by reference. Used to append additional content.
 	 * @param int    $depth  Depth of menu item. Used for padding.
-	 * @param array  $args   An array of wp_nav_menu() arguments.
+	 * @param array|\stdClass  $args   An array of wp_nav_menu() arguments.
 	 *
 	 * @see   Walker::start_lvl()
 	 *
@@ -54,11 +54,11 @@ class Walker_Nav_Menu_Primary extends Walker_Nav_Menu {
 	/**
 	 * Starts the element output.
 	 *
-	 * @param string $output Passed by reference. Used to append additional content.
-	 * @param object $item   Menu item data object.
-	 * @param int    $depth  Depth of menu item. Used for padding.
-	 * @param array  $args   An array of wp_nav_menu() arguments.
-	 * @param int    $id     Current item ID.
+	 * @param string           $output Passed by reference. Used to append additional content.
+	 * @param object           $item   Menu item data object.
+	 * @param int              $depth  Depth of menu item. Used for padding.
+	 * @param array|\stdClass  $args   An array of wp_nav_menu() arguments.
+	 * @param int              $id     Current item ID.
 	 *
 	 * @see   Walker::start_el()
 	 *
