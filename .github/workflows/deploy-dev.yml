@@ -44,12 +44,9 @@ jobs:
           rm -rf wp-content/plugins/panel-builder/.git
 
       # Setup node version
-      - name: Setup node version
-        id: nvm
-        run: echo ::set-output name=NODE_VERSION::$(cat .nvmrc)
       - uses: actions/setup-node@v2
         with:
-          node-version: ${{ steps.nvm.outputs.NODE_VERSION }}
+          node-version-file: "${{ env.BUILD_FOLDER }}/.nvmrc"
 
       # Cache node_modules TODO
 
