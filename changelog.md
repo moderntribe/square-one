@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2022.04
+* Changed: all block models are now instantiated with the container to support dependency injection.
+
+## 2022.03
+* Fixed: Refactor index controller to use proper meta fetching objects and general code clean up.
+* Fixed: Show same header logic on the Post Tag archive as the Category Archive.
+* Added: Ignore the Query Monitor plugin's automatically created db.php file.
+* Added: Pagination Helper Trait.
+* Fixed: .editorconfig incorrect tabbing for PHP files (thanks Caleb).
+* Fixed: Missing pagination on the content loop block component.
+* Fixed: Visibility of public $sidebar_id's in all controllers.
+* Updated: Misc config updates for Dokku and Docker nginx & PHP.
+* Fixed: Gravity Forms filter parameter types changed for v2.5 and above.
+* Updated WordPress: 5.9.2 / new tests dump.sql
+* Updated plugins: ACF, TEC, Gravity Forms, Yoast
+* Updated: Tribe Libs to 3.4.12
+* Fixed: Corrects parameter type for P2P cache method
+* Fixed: Adds styling for nested lists in t-sink context
+* Changed: Replaced `msawicki/acf-menu-chooser` with a forked https://github.com/moderntribe/acf-menu-chooser that includes security fixes and is also added to packagist.
+* Updated: ACF (5.12), Tribe Libs (3.4.10), Redirection (5.2.3), Yoast (18.2), TEC (5.14.0.4)
+* Updated: Aligns accordion component with WAI-ARIA standard
+* Fixed: Jetpack sync calls the `all_plugins` filter outside of a screen context, causing fatal errors in our force plugin activation MU plugin when using multisite.
+* Added: Enable/disable scrolling behavior on accordion blocks
+
 ## 2022.02
 * Updated: Coding standards to v2.1.2, PHP8 sniffer fixes.
 * Updated: Added composer patches to allowed composer plugins.
@@ -27,7 +51,7 @@ All notable changes to this project will be documented in this file.
 * Added: Section Nav component & block.
 * Added: generic navigation component.
 * Updated: Node & NPM to latest LTS (v16.13.1), updated node package versions where supported.
-* Fixed: A posible PHP fatal when a anv menu is cached, but empty and the cache layer returns an unexpected boolean instead of an empty string.
+* Fixed: A possible PHP fatal when a nav menu is cached, but empty and the cache layer returns an unexpected boolean instead of an empty string.
 * Fixed: Several minor deprecation warnings in the webpack config.
 * Fixed: prevented preloading of current document when a dependency alias is enqueued in the footer
 * Added: support to preload dependencies of aliases

@@ -36,6 +36,7 @@ tab_width = 4
 
 [wp-content/{plugins,themes}/core/**.php]
 indent_style = tab
+indent_size = 4
 ij_formatter_off_tag = @formatter:off
 ij_formatter_on_tag = @formatter:on
 ij_formatter_tags_enabled = false

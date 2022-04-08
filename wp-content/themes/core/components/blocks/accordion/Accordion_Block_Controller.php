@@ -25,6 +25,7 @@ class Accordion_Block_Controller extends Abstract_Controller {
 	public const LEADIN            = 'leadin';
 	public const ROWS              = 'rows';
 	public const TITLE             = 'title';
+	public const SCROLL_TO         = 'scroll_to';
 
 	/**
 	 * @var string[]
@@ -52,6 +53,11 @@ class Accordion_Block_Controller extends Abstract_Controller {
 	private array $cta;
 
 	/**
+	 * @var bool Whether scrolling is enabled
+	 */
+	private bool $scroll_to;
+
+	/**
 	 * @var \Tribe\Project\Templates\Models\Accordion_Row[]
 	 */
 	private array $rows;
@@ -73,6 +79,7 @@ class Accordion_Block_Controller extends Abstract_Controller {
 		$this->leadin            = (string) $args[ self::LEADIN ];
 		$this->rows              = (array) $args[ self::ROWS ];
 		$this->title             = (string) $args[ self::TITLE ];
+		$this->scroll_to         = (bool) $args[ self::SCROLL_TO ];
 	}
 
 	public function get_classes(): string {
@@ -114,7 +121,8 @@ class Accordion_Block_Controller extends Abstract_Controller {
 
 	public function get_content_args(): array {
 		return [
-			Accordion_Controller::ROWS => $this->rows,
+			Accordion_Controller::ROWS      => $this->rows,
+			Accordion_Controller::SCROLL_TO => $this->scroll_to,
 		];
 	}
 

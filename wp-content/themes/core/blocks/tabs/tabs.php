@@ -5,5 +5,10 @@ use Tribe\Project\Blocks\Types\Tabs\Tabs_Model;
 /**
  * @var array $args ACF block data.
  */
-$model = new Tabs_Model( $args['block'] );
-get_template_part( 'components/blocks/tabs/tabs', null, $model->get_data() );
+$model = tribe_project()->container()->make( Tabs_Model::class, $args );
+
+get_template_part(
+	'components/blocks/tabs/tabs',
+	'',
+	$model->get_data()
+);

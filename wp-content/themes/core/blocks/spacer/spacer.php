@@ -3,7 +3,12 @@
 use Tribe\Project\Blocks\Types\Spacer\Spacer_Model;
 
 /**
- * @var array $args ACF block data..
+ * @var array $args ACF block data.
  */
-$model = new Spacer_Model( $args['block'] );
-get_template_part( 'components/blocks/spacer/spacer', null, $model->get_data() );
+$model = tribe_project()->container()->make( Spacer_Model::class, $args );
+
+get_template_part(
+	'components/blocks/spacer/spacer',
+	'',
+	$model->get_data()
+);

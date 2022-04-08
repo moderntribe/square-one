@@ -5,5 +5,10 @@ use Tribe\Project\Blocks\Types\Quote\Quote_Model;
 /**
  * @var array $args ACF block data.
  */
-$model = new Quote_Model( $args['block'] );
-get_template_part( 'components/blocks/quote/quote', null, $model->get_data() );
+$model = tribe_project()->container()->make( Quote_Model::class, $args );
+
+get_template_part(
+	'components/blocks/quote/quote',
+	'',
+	$model->get_data()
+);
