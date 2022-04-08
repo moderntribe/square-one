@@ -10,7 +10,7 @@ on:
 
 jobs:
   create_review_app:
-    if: (github.event_name == 'pull_request' && github.event.action == 'opened' || github.event.action == 'synchronize')
+    if: (github.event_name == 'pull_request' && github.event.action == 'opened' || github.event.action == 'synchronize') && contains(github.event.pull_request.labels.*.name, 'Launch Environment')
     uses: moderntribe/actions/.github/workflows/create-review-app.yml@v1
     with:
       app_name: sq1
@@ -21,7 +21,7 @@ jobs:
       ssh_private_key: ${{ secrets.DOKKU_DEPLOY_KEY }}
 
   deploy_review_app:
-    if: (github.event_name == 'pull_request' && github.event.action == 'opened' || github.event.action == 'synchronize')
+    if: (github.event_name == 'pull_request' && github.event.action == 'opened' || github.event.action == 'synchronize') && contains(github.event.pull_request.labels.*.name, 'Launch Environment')
     uses: moderntribe/square-one/.github/workflows/dokku-deploy.yml@main
     with:
       app_name: sq1
@@ -35,7 +35,7 @@ jobs:
       slack_webhook: ${{ secrets.SLACK_WEBHOOK }}
 
   destroy_review_app:
-    if: (github.event_name == 'pull_request' && github.event.action == 'closed')
+    if: (github.event_name == 'pull_request' && github.event.action == 'closed') && contains(github.event.pull_request.labels.*.name, 'Launch Environment')
     uses: moderntribe/actions/.github/workflows/delete-review-app.yml@v1
     with:
       app_name: sq1
