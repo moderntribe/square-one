@@ -67,7 +67,7 @@ jobs:
         run: |
           php -r "file_exists( 'local-config.php' ) || copy( 'local-config-sample.php', 'local-config.php' );"
           php -r "file_exists( 'local-config.json' ) || copy( 'local-config-sample.json', 'local-config.json' );"
-          echo "define( 'WP_ENVIRONMENT_TYPE', ${{env.ENVIROMENT}} );" >> local-config.php
+          echo "define( 'WP_ENVIRONMENT_TYPE', ${{env.ENVIRONMENT}} );" >> local-config.php
 
       ##########
       ### DEPLOY: Use the WPE git deploy hook method. TLDR; rsync our repo on their repo and push.
