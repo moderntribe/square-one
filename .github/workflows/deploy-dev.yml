@@ -128,5 +128,5 @@ jobs:
         run: |
           echo 'Deploying ${{env.GITHUB_REF}} to ${{env.ENVIRONMENT}}'
           git add -Av
-          git commit --allow-empty -m 'Deploying ${env.BRANCH_NAME} to ${env.ENVIRONMENT}'
+          git commit --allow-empty -m 'Deploying ${{env.BRANCH_NAME}} to ${{env.ENVIRONMENT}}'
           git push origin master
