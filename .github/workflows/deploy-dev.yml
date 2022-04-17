@@ -64,7 +64,7 @@ jobs:
         run: |
           php -r "file_exists( 'local-config.php' ) || copy( 'local-config-sample.php', 'local-config.php' );"
           php -r "file_exists( 'local-config.json' ) || copy( 'local-config-sample.json', 'local-config.json' );"
-          echo "define( 'WP_ENVIRONMENT_TYPE', ${{env.ENVIROMENT}} );" >> local-config.php
+          echo "define( 'WP_ENVIRONMENT_TYPE', ${{env.ENVIRONMENT}} );" >> local-config.php
 
       ##########
       ### DEPLOY: Use the WPE git deploy hook method. TLDR; rsync our repo on their repo and push.
@@ -128,5 +128,5 @@ jobs:
         run: |
           echo 'Deploying ${{env.GITHUB_REF}} to ${{env.ENVIRONMENT}}'
           git add -Av
-          git commit --allow-empty -m 'Deploying ${env.BRANCH_NAME} to ${env.ENVIRONMENT}'
+          git commit --allow-empty -m 'Deploying ${{env.BRANCH_NAME}} to ${{env.ENVIRONMENT}}'
           git push origin master

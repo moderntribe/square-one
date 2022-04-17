@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## 2022.04
+* Fixed: deploy commit messages via GitHub actions now display the branch and environment instead of the variables.
 * Changed: all block models are now instantiated with the container to support dependency injection.
 
 ## 2022.03
