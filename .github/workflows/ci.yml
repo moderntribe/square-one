@@ -26,7 +26,7 @@ jobs:
       COMPOSE_FILE: docker-compose.yml:docker-compose.gh.yml
 
     steps:
-      - name: Setup PHP, with composer and extensions
+      - name: Set up PHP, with composer and extensions
         uses: shivammathur/setup-php@v2 #https://github.com/shivammathur/setup-php
         env:
           COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
