@@ -87,10 +87,6 @@ jobs:
       - name: Install gulp-cli
         run: npm install gulp-cli -g
 
-      - name: Get yarn cache directory
-        id: yarn-cache-dir
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-
       - name: Install node modules
         run: yarn install --frozen-lockfile --prefer-offline
 
