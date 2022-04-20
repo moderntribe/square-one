@@ -39,7 +39,7 @@ jobs:
         with:
           php-version: ${{ matrix.php-versions }}
           extensions: ${{ env.php_extensions }}
-          key: ${{ matrix.operating-system }}-${{ env.cache_version }}-phpextensions-${{ matrix.php-versions }}
+          key: ${{ matrix.operating-system }}-${{ env.cache_version }}-php-extensions-${{ matrix.php-versions }}
 
       - name: Cache PHP extensions
         if: ${{ steps.filter.outputs.wpcontent == 'true' }}
