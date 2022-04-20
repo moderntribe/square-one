@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## 2022.04
+* Updated: Webpack & related configs for React HMR / Example react app dev.
 * Fixed: deploy commit messages via GitHub actions now display the branch and environment instead of the variables.
 * Changed: all block models are now instantiated with the container to support dependency injection.
 
@@ -53,7 +54,7 @@ All notable changes to this project will be documented in this file.
 * Added: generic navigation component.
 * Updated: Node & NPM to latest LTS (v16.13.1), updated node package versions where supported.
 * Fixed: A possible PHP fatal when a nav menu is cached, but empty and the cache layer returns an unexpected boolean instead of an empty string.
-* Fixed: Several minor deprecation warnings in the webpack config.
+* Fixed: Several minor deprecation warnings in the webpack .
 * Fixed: prevented preloading of current document when a dependency alias is enqueued in the footer
 * Added: support to preload dependencies of aliases
 
