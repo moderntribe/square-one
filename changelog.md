@@ -54,7 +54,7 @@ All notable changes to this project will be documented in this file.
 * Added: generic navigation component.
 * Updated: Node & NPM to latest LTS (v16.13.1), updated node package versions where supported.
 * Fixed: A possible PHP fatal when a nav menu is cached, but empty and the cache layer returns an unexpected boolean instead of an empty string.
-* Fixed: Several minor deprecation warnings in the webpack .
+* Fixed: Several minor deprecation warnings in the webpack config.
 * Fixed: prevented preloading of current document when a dependency alias is enqueued in the footer
 * Added: support to preload dependencies of aliases
 
