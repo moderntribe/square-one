@@ -9,6 +9,7 @@ jobs:
       matrix:
         operating-system: [ ubuntu-latest ]
         php-versions: [ '7.4' ]
+        composer-cache: [ 'dev' ]
     env:
       cache_version: 0 # increment to flush all caches
       php_extensions: tokenizer, xmlwriter, simplexml
@@ -31,7 +32,7 @@ jobs:
               - added|modified: 'wp-content/themes/core/**/*.php'
               - added|modified: 'wp-content/mu-plugins/**/*.php'
 
-      - name: Setup PHP extension cache
+      - name: Set up PHP extension cache
         if: ${{ steps.filter.outputs.wpcontent == 'true' }}
         id: cache-php-extensions
         uses: shivammathur/cache-extensions@v1
@@ -42,13 +43,13 @@ jobs:
 
       - name: Cache PHP extensions
         if: ${{ steps.filter.outputs.wpcontent == 'true' }}
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
           path: ${{ steps.cache-php-extensions.outputs.dir }}
           key: ${{ steps.cache-php-extensions.outputs.key }}
           restore-keys: ${{ steps.cache-php-extensions.outputs.key }}
 
-      - name: Setup PHP
+      - name: Set up PHP
         if: ${{ steps.filter.outputs.wpcontent == 'true' }}
         uses: shivammathur/setup-php@v2
         with:
@@ -67,14 +68,14 @@ jobs:
         id: composer-cache
         run: echo "::set-output name=dir::$(composer config cache-files-dir)"
 
-      - name: Check for Cached Composer Dependencies
+      - name: Cache composer dependencies
         if: ${{ steps.filter.outputs.wpcontent == 'true' }}
         id: cache-composer-dependencies
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-${{ env.cache_version }}-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: ${{ runner.os }}-${{ env.cache_version }}-composer-
+          key: ${{ runner.os }}-${{ env.cache_version }}-${{ matrix.composer-cache }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-${{ env.cache_version }}-${{ matrix.composer-cache }}-composer
 
       - name: Install composer dependencies
         if: ${{ steps.filter.outputs.wpcontent == 'true' }}
