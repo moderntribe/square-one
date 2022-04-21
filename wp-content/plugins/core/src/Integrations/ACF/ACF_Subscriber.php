@@ -8,7 +8,7 @@ class ACF_Subscriber extends Abstract_Subscriber {
 
 	public function register(): void {
 		add_action( 'acf/render_field', function ( $field ): void {
-			$this->container->get( Max_Length_Counter::class )->add_counter_div( $field );
+			$this->container->get( Max_Length_Counter::class )->add_counter_div( (array) $field );
 		} );
 
 		add_action( 'acf/input/admin_footer', function (): void {
