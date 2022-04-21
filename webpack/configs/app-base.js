@@ -4,6 +4,30 @@
 const path = require( 'path' );
 const webpack = require( 'webpack' );
 
+/**
+ * Internal Dependencies
+ */
+const localConfig = require( './local' );
+
+const devServerConfig = {
+	port: 9000,
+	hot: true,
+	host: localConfig.proxy,
+	headers: {
+		'Access-Control-Allow-Origin': '*',
+	},
+};
+
+if ( localConfig.protocol === 'https' ) {
+	devServerConfig.server = {
+		type: 'https',
+		options: {
+			key: `${ localConfig.certs_path }/${ localConfig.proxy }.key`,
+			cert: `${ localConfig.certs_path }/${ localConfig.proxy }.crt`,
+		},
+	};
+}
+
 module.exports = {
 	resolve: {
 		extensions: [ '.js', '.jsx', '.json', '.pcss' ],
@@ -12,14 +36,7 @@ module.exports = {
 		modules: [ path.resolve( `${ __dirname }/../../`, 'node_modules' ) ],
 	},
 	devtool: 'eval-source-map',
-	devServer: {
-		disableHostCheck: true,
-		headers: {
-			'Access-Control-Allow-Origin': '*',
-		},
-		port: 3000,
-		hot: true,
-	},
+	devServer: devServerConfig,
 	plugins: [
 		new webpack.IgnorePlugin( {
 			resourceRegExp: /^\.\/locale$/,
@@ -28,7 +45,6 @@ module.exports = {
 		new webpack.LoaderOptionsPlugin( {
 			debug: true,
 		} ),
-		new webpack.HotModuleReplacementPlugin(),
 	],
 	module: {
 		rules: [
