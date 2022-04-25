@@ -4,12 +4,14 @@ All notable changes to this project will be documented in this file.
 
 ## 2022.04
 * Added: An ACF helper class (`tribe-counter-wrapper`) that triggers a maxlength counter on the field.
+* Added: node and composer caching for GitHub actions
+* Updated: Webpack & related configs for React HMR / Example react app dev.
 * Fixed: deploy commit messages via GitHub actions now display the branch and environment instead of the variables.
 * Changed: all block models are now instantiated with the container to support dependency injection.
 
 ## 2022.03
 * Fixed: Refactor index controller to use proper meta fetching objects and general code clean up.
-* Fixed: Show same header logic on the Post Tag archive as the Category Archive.
+* Fixed: Show same header logic on the Post Tag archive as the git Category Archive.
 * Added: Ignore the Query Monitor plugin's automatically created db.php file.
 * Added: Pagination Helper Trait.
 * Fixed: .editorconfig incorrect tabbing for PHP files (thanks Caleb).

@@ -26,7 +26,7 @@ jobs:
       COMPOSE_FILE: docker-compose.yml:docker-compose.gh.yml
 
     steps:
-      - name: Setup PHP, with composer and extensions
+      - name: Set up PHP, with composer and extensions
         uses: shivammathur/setup-php@v2 #https://github.com/shivammathur/setup-php
         env:
           COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -78,30 +78,17 @@ jobs:
         run: docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-fpm composer install --optimize-autoloader -d /application/www
         working-directory: dev/docker
 
-      - name: Setup node
-        id: nvm
-        run: echo ::set-output name=NODE_VERSION::$(cat .nvmrc)
-      - uses: actions/setup-node@v2
+      - name: Set up node
+        uses: actions/setup-node@v2
         with:
-          node-version: ${{ steps.nvm.outputs.NODE_VERSION }}
+          node-version-file: '.nvmrc'
+          cache: 'yarn'
 
       - name: Install gulp-cli
         run: npm install gulp-cli -g
 
-      - name: Get yarn cache directory
-        id: yarn-cache-dir
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-
-      - name: Cache node modules
-        id: cache-node-modules
-        uses: actions/cache@v1
-        with:
-          path: ${{ steps.yarn-cache-dir.outputs.dir }}
-          key: ${{ runner.os }}-${{ env.cache_version }}-node-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: ${{ runner.os }}-${{ env.cache_version }}-node-
-
       - name: Install node modules
-        run: yarn install --frozen-lockfile
+        run: yarn install --frozen-lockfile --prefer-offline
 
       - name: Build assets
         run: npm run server_dist

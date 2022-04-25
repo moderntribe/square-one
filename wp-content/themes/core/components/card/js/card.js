@@ -9,7 +9,6 @@
 import delegate from 'delegate';
 import * as tools from 'utils/tools';
 
-
 /* Maximum amount of time between mousedown & mouseup to be considered a true click */
 const MOUSEUP_THRESHOLD = 200;
 

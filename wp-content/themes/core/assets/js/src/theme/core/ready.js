@@ -7,6 +7,7 @@
 import _ from 'lodash';
 import { on, ready } from 'utils/events';
 import applyBrowserClasses from 'utils/dom/apply-browser-classes';
+
 // @EXAMPLE_REACT_APP
 
 // import * as tools from 'utils/tools';
