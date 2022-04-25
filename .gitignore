@@ -18,7 +18,8 @@ pimple.json
 
 # IDE generated files #
 ######################
-.vscode
+.vscode/*
+!.vscode/extensions.json
 
 # Vim generated files #
 #######################
