@@ -68,7 +68,7 @@ class Form_Markup {
 		} elseif ( $field['type'] === 'select' ) {
 			$classes .= ' gf-select';
 			// Not Chosen, regular select
-			if ( array_key_exists( 'enableEnhancedUI', $field ) && ! $field['enableEnhancedUI'] ) {
+			if ( empty( $field['enableEnhancedUI'] ) ) {
 				$classes .= ' gf-select-no-chosen';
 			}
 		} elseif ( $field['type'] === 'checkbox' ) {
