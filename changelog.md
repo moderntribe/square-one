@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## 2022.04
+* Fixed: Remove autoprefixer run from cssnano task as it erroneously strips line-clamp properties.
 * Added: An ACF helper class (`tribe-counter-wrapper`) that triggers a maxlength counter on the field.
 * Added: node and composer caching for GitHub actions
 * Updated: Webpack & related configs for React HMR / Example react app dev.
