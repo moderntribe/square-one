@@ -5,7 +5,7 @@ namespace Tribe\Project\Assets\Theme;
 class JS_Config {
 
 	/**
-	 * @var string[]
+	 * @var array<string, bool|string>
 	 */
 	private array $data;
 

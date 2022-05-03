@@ -3,13 +3,14 @@
 namespace Tribe\Project\Assets;
 
 use Tribe\Libs\Container\Abstract_Subscriber;
+use \WP_Theme;
 
 class Assets_Subscriber extends Abstract_Subscriber {
 
 	public function register(): void {
 		$theme = wp_get_theme();
 
-		if ( ! empty( $theme ) ) {
+		if ( $theme instanceof WP_Theme && $theme->exists() ) {
 			$checks = [
 				$theme->get_stylesheet(),
 				$theme->parent() ? $theme->parent()->get_stylesheet() : null,

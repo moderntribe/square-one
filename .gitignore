@@ -141,7 +141,8 @@ dev/tests/tests/_support/_generated/
 ###############
 phpcs.xml
 .phpcs-cache
-
+phpstan.neon
+.phpstan-cache
 
 
 # Added by so cli

@@ -50,7 +50,7 @@ class Gradients {
 	 *
 	 * This is the format expected by the block editor.
 	 *
-	 * @return string[]
+	 * @return array<int, array<string, (int|string)>>
 	 *
 	 * @see https://developer.wordpress.org/block-editor/developers/themes/theme-support/#block-gradient-presets
 	 */

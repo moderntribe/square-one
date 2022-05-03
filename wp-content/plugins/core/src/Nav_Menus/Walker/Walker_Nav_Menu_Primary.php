@@ -22,7 +22,7 @@ class Walker_Nav_Menu_Primary extends Walker_Nav_Menu {
 	 *
 	 * @param string $output Passed by reference. Used to append additional content.
 	 * @param int    $depth  Depth of menu item. Used for padding.
-	 * @param array  $args   An array of wp_nav_menu() arguments.
+	 * @param array|\stdClass  $args   An array of wp_nav_menu() arguments.
 	 *
 	 * @see   Walker::start_lvl()
 	 *
@@ -54,11 +54,11 @@ class Walker_Nav_Menu_Primary extends Walker_Nav_Menu {
 	/**
 	 * Starts the element output.
 	 *
-	 * @param string $output Passed by reference. Used to append additional content.
-	 * @param object $item   Menu item data object.
-	 * @param int    $depth  Depth of menu item. Used for padding.
-	 * @param array  $args   An array of wp_nav_menu() arguments.
-	 * @param int    $id     Current item ID.
+	 * @param string           $output Passed by reference. Used to append additional content.
+	 * @param object           $item   Menu item data object.
+	 * @param int              $depth  Depth of menu item. Used for padding.
+	 * @param array|\stdClass  $args   An array of wp_nav_menu() arguments.
+	 * @param int              $id     Current item ID.
 	 *
 	 * @see   Walker::start_el()
 	 *
@@ -184,11 +184,11 @@ class Walker_Nav_Menu_Primary extends Walker_Nav_Menu {
 			$tag_name = 'button';
 		}
 
-		$item_output  = $args->before;
+		$item_output  = $args->before; // @phpstan-ignore-line (WordPress doesn't list the $args property)
 		$item_output .= '<' . $tag_name . $attributes . '>';
-		$item_output .= $args->link_before . $title . $args->link_after;
+		$item_output .= $args->link_before . $title . $args->link_after; // @phpstan-ignore-line (WordPress doesn't list the $args property)
 		$item_output .= '</' . $tag_name . '>';
-		$item_output .= $args->after;
+		$item_output .= $args->after; // @phpstan-ignore-line (WordPress doesn't list the $args property)
 
 		/**
 		 * Filters a menu item's starting output.

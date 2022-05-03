@@ -129,7 +129,7 @@ class Links extends Block_Config implements Cta_Field {
 				'label'       => esc_html__( 'Link List Title', 'tribe' ),
 				'name'        => self::LINKS_TITLE,
 				'type'        => 'text',
-				'placeholder' => esc_html( 'Link List Title (optional)', 'tribe' ),
+				'placeholder' => esc_html__( 'Link List Title (optional)', 'tribe' ),
 				'wrapper'     => [
 					'class' => 'tribe-acf-hide-label',
 				],

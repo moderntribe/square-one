@@ -7,9 +7,6 @@ use Tribe\Project\Templates\Routes\index\Index_Controller;
 
 class Page_Controller extends Index_Controller {
 
-	/**
-	 * @var int|string
-	 */
 	public string $sidebar_id = '';
 
 	public function get_subheader_args(): array {

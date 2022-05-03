@@ -57,7 +57,7 @@ class Search_Controller extends Index_Controller {
 	}
 
 	/**
-	 * @return \Tribe\Project\Templates\Components\Deferred_Component[]
+	 * @return array<string,mixed>
 	 */
 	public function get_card_args(): array {
 		$uuid = uniqid( 'p-' );

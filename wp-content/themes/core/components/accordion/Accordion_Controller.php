@@ -86,7 +86,7 @@ class Accordion_Controller extends Abstract_Controller {
 	private array $row_header_container_classes;
 
 	/**
-	 * @var array<int, string[][]>
+	 * @var array<array<string, string>>
 	 */
 	private array $row_ids;
 

@@ -1,4 +1,4 @@
-name: PHP Composer and Codesniffer
+name: PHP Composer, Codesniffer, and Static Analysis
 
 on: pull_request
 
@@ -86,3 +86,7 @@ jobs:
       - name: PHPCS
         if: ${{ steps.filter.outputs.wpcontent == 'true' }}
         run: ./vendor/bin/phpcs --standard=./phpcs.xml.dist ${{ steps.filter.outputs.wpcontent_files }}
+
+      - name: Static Analysis
+        if: ${{ steps.filter.outputs.wpcontent == 'true' }}
+        run: ./vendor/bin/phpstan --memory-limit=512M

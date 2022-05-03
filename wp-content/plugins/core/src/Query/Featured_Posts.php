@@ -26,7 +26,7 @@ class Featured_Posts {
 		if ( empty( $featured_post_objects_array ) ) {
 			return;
 		}
-		/** @var $post \WP_Post */
+		/** @var \WP_Post $post */
 		foreach ( $featured_post_objects_array as $post ) {
 			$featured_post_ids_array[] = $post->ID;
 		}

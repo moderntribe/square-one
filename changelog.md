@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file.
 * Updated: Webpack & related configs for React HMR / Example react app dev.
 * Fixed: deploy commit messages via GitHub actions now display the branch and environment instead of the variables.
 * Changed: all block models are now instantiated with the container to support dependency injection.
+* Added: PHPStan for static analysis.
 * Added: Recommended Extensions for VS Code.
 
 ## 2022.03

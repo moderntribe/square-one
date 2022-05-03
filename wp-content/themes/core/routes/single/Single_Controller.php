@@ -94,6 +94,12 @@ class Single_Controller extends Abstract_Controller {
 		return $this->sidebar_id;
 	}
 
+	public function get_author_id(): string {
+		global $post;
+
+		return $post->post_author;
+	}
+
 	protected function defaults(): array {
 		return [
 			self::SIDEBAR_ID => '',
