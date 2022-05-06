@@ -48,7 +48,7 @@ class Buttons_Block_Controller extends Abstract_Controller {
 			return array_key_exists( 'g-cta', $row );
 		} );
 
-		if ( empty( $rows ) ) {
+		if ( 0 === count( $rows ) ) {
 			return [];
 		}
 

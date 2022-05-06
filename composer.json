@@ -20,7 +20,8 @@
       "composer/installers": true,
       "ffraenz/private-composer-installer": true,
       "johnpbloch/wordpress-core-installer": true,
-      "cweagans/composer-patches": true
+      "cweagans/composer-patches": true,
+      "phpstan/extension-installer": true
     }
   },
   "description": "Modern Tribe's Square One WordPress setup",
@@ -134,7 +135,12 @@
     "mockery/mockery": "^1.3",
     "moderntribe/coding-standards": "^2.0",
     "php-http/httplug": "^1.1",
+    "php-stubs/acf-pro-stubs": "^5.12",
+    "php-stubs/wordpress-tests-stubs": "^5.8",
+    "phpstan/extension-installer": "^1.1",
+    "phpstan/phpstan": "^1.5",
     "phpunit/phpunit": "^8.0 || ^9.0 <9.5",
+    "szepeviktor/phpstan-wordpress": "^1.0",
     "wp-cli/wp-cli": "^2.5.0"
   },
   "extra": {
@@ -146,6 +152,11 @@
         "type:wordpress-plugin"
       ],
       "wp-content/plugins/s3-uploads": [ "humanmade/S3-Uploads" ]
+    },
+    "patches": {
+      "php-stubs/wordpress-stubs": {
+        "Replace duplicate call for wp_set_password(), wp_hash_password(), and wp_check_password().": "dev/patches/wordpress-stubs.patch"
+      }
     }
   },
   "autoload": {

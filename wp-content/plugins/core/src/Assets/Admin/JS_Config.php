@@ -5,7 +5,7 @@ namespace Tribe\Project\Assets\Admin;
 class JS_Config {
 
 	/**
-	 * @var string[]
+	 * @var array<string,array|bool|string>
 	 */
 	private array $data;
 

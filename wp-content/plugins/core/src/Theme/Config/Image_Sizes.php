@@ -20,7 +20,7 @@ class Image_Sizes {
 	public const SOCIAL_SHARE_TWITTER   = 'social-share-twitter';
 
 	/**
-	 * @var array<string, int|bool>
+	 * @var array<string, array<string, int|bool>>
 	 */
 	private array $sizes = [
 		self::SQUARE_XSMALL          => [
@@ -91,7 +91,7 @@ class Image_Sizes {
 		self::SOCIAL_SHARE_TWITTER   => [
 			'width'  => 1024,
 			'height' => 512,
-			'crop'   => true,
+			'crop'   => false,
 		],
 	];
 

@@ -65,10 +65,11 @@ trait Breadcrumbs {
 	 * @return void
 	 */
 	protected function get_taxonomy_archive_breadcrumbs(): void {
+		/* @var \WP_Query $wp_query */
 		global $wp_query;
 
 		// Bail early if no taxonomy.
-		if ( empty( $wp_query->queried_object->term_id ) ) {
+		if ( empty( $wp_query->queried_object->term_id ) || empty( $wp_query->queried_object->taxonomy ) ) {
 			return;
 		}
 
