@@ -2,7 +2,7 @@
  *
  * Component: Image
  *
- * This file is just a clearing-house, see the css directory
+ * This file is just a clearing-house, see the js directory
  * and edit the source files found there.
  *
  * ----------------------------------------------------------------------------- */
