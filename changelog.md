@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file.
 
+* Fixed: Images lazy loaded via LazySizes are now loaded before printing.
+
 ## 2022.04
 * Fixed: Remove autoprefixer run from cssnano task as it erroneously strips line-clamp properties.
 * Added: An ACF helper class (`tribe-counter-wrapper`) that triggers a maxlength counter on the field.
