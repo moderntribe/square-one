@@ -34,7 +34,7 @@ class Theme_Subscriber extends Abstract_Subscriber {
 	}
 
 	private function media(): void {
-		$this->image_wrap();
+		$this->image_attrs();
 		$this->image_links();
 		$this->oembed();
 	}
