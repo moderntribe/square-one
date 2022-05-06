@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ## 2022.05
 * Fixed: Prevent WP Core from adding `loading="lazy"` to our image component `<img />` tags.
+* Updated: Remove old TinyMCE image tag filtering and related unit test.
 
 ## 2022.04
 * Fixed: Remove autoprefixer run from cssnano task as it erroneously strips line-clamp properties.
