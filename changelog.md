@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2022.05
+* Fixed: Prevent WP Core from adding `loading="lazy"` to our image component `<img />` tags.
+
 ## 2022.04
 * Fixed: Remove autoprefixer run from cssnano task as it erroneously strips line-clamp properties.
 * Added: An ACF helper class (`tribe-counter-wrapper`) that triggers a maxlength counter on the field.

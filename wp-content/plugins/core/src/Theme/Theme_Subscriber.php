@@ -9,6 +9,7 @@ use Tribe\Project\Theme\Branding\Login_Screen;
 use Tribe\Project\Theme\Config\Image_Sizes;
 use Tribe\Project\Theme\Config\Supports;
 use Tribe\Project\Theme\Config\Web_Fonts;
+use Tribe\Project\Theme\Media\Image_Attributes;
 use Tribe\Project\Theme\Media\Image_Wrap;
 use Tribe\Project\Theme\Media\Oembed_Filter;
 
@@ -77,13 +78,10 @@ class Theme_Subscriber extends Abstract_Subscriber {
 		}, 10, 0 );
 	}
 
-	private function image_wrap(): void {
-		add_filter( 'the_content', function ( $html ) {
-			return $this->container->get( Image_Wrap::class )->customize_wp_image_non_captioned_output( (string) $html );
-		}, 12, 1 );
-		add_filter( 'the_content', function ( $html ) {
-			return $this->container->get( Image_Wrap::class )->customize_wp_image_captioned_output( (string) $html );
-		}, 12, 1 );
+	private function image_attrs(): void {
+		add_filter( 'wp_img_tag_add_loading_attr', function ( $value, string $image, string $context ) {
+			return $this->container->get( Image_Attributes::class )->customize_wp_image_loading_attr( $value, $image, $context );
+		}, 10, 3 );
 	}
 
 	private function image_links(): void {
