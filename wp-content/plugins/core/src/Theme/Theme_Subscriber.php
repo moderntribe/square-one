@@ -10,7 +10,6 @@ use Tribe\Project\Theme\Config\Image_Sizes;
 use Tribe\Project\Theme\Config\Supports;
 use Tribe\Project\Theme\Config\Web_Fonts;
 use Tribe\Project\Theme\Media\Image_Attributes;
-use Tribe\Project\Theme\Media\Image_Wrap;
 use Tribe\Project\Theme\Media\Oembed_Filter;
 
 class Theme_Subscriber extends Abstract_Subscriber {
