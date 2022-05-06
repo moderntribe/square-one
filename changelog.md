@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2022.05
+* Fixed: Prevent WP Core from adding `loading="lazy"` to our image component `<img />` tags.
+* Updated: Remove old TinyMCE image tag filtering and related unit test.
 * Fixed: Images lazy loaded via LazySizes are now loaded before printing.
 
 ## 2022.04
