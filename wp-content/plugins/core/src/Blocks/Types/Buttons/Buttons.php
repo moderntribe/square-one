@@ -72,7 +72,7 @@ class Buttons extends Block_Config implements Cta_Field {
 	/**
 	 * @return \Tribe\Libs\ACF\Repeater
 	 */
-	protected function get_links_section(): \Tribe\Libs\ACF\Repeater {
+	protected function get_links_section(): Repeater {
 		$group = new Repeater( self::NAME . '_' . self::BUTTONS );
 
 		$group->set_attributes( [

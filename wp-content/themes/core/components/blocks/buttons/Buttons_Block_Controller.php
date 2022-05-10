@@ -4,7 +4,7 @@ namespace Tribe\Project\Templates\Components\blocks\buttons;
 
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
-use Tribe\Project\Templates\Components\link\Link_Controller;
+use Tribe\Project\Templates\Models\Collections\Button_Collection;
 
 class Buttons_Block_Controller extends Abstract_Controller {
 
@@ -17,10 +17,7 @@ class Buttons_Block_Controller extends Abstract_Controller {
 	 */
 	private array $attrs;
 
-	/**
-	 * @var string[]
-	 */
-	private array $buttons;
+	private Button_Collection $buttons;
 
 	/**
 	 * @var string[]
@@ -31,7 +28,7 @@ class Buttons_Block_Controller extends Abstract_Controller {
 		$args = $this->parse_args( $args );
 
 		$this->attrs   = (array) $args[ self::ATTRS ];
-		$this->buttons = (array) $args[ self::BUTTONS ];
+		$this->buttons = $args[ self::BUTTONS ];
 		$this->classes = (array) $args[ self::CLASSES ];
 	}
 
@@ -43,31 +40,14 @@ class Buttons_Block_Controller extends Abstract_Controller {
 		return Markup_Utils::concat_attrs( $this->attrs );
 	}
 
-	public function get_buttons(): array {
-		$rows = array_filter( $this->buttons, static function ( $row ) {
-			return array_key_exists( 'g-cta', $row );
-		} );
-
-		if ( 0 === count( $rows ) ) {
-			return [];
-		}
-
-		return array_map( static function ( $row ) {
-			return [
-				Link_Controller::URL            => $row['g-cta']['link']['url'] ?? '',
-				Link_Controller::CONTENT        => $row['g-cta']['link']['title'] ?? '',
-				Link_Controller::TARGET         => $row['g-cta']['link']['target'] ?? '',
-				Link_Controller::ADD_ARIA_LABEL => $row['g-cta']['add_aria_label'] ?? '',
-				Link_Controller::ARIA_LABEL     => $row['g-cta']['aria_label'] ?? '',
-				Link_Controller::CLASSES        => [ 'b-links__list-link' ],
-			];
-		}, $rows );
+	public function get_buttons(): Button_Collection {
+		return $this->buttons;
 	}
 
 	protected function defaults(): array {
 		return [
 			self::ATTRS   => [],
-			self::BUTTONS => [],
+			self::BUTTONS => new Button_Collection(),
 			self::CLASSES => [],
 		];
 	}
