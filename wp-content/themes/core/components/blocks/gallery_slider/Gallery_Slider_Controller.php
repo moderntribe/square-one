@@ -199,7 +199,7 @@ class Gallery_Slider_Controller extends Abstract_Controller {
 			self::CLASSES           => [],
 			self::CONTAINER_CLASSES => [],
 			self::CONTENT_CLASSES   => [],
-			self::CTA               => new Link( [] ),
+			self::CTA               => new Link(),
 			self::DESCRIPTION       => '',
 			self::GALLERY           => [],
 			self::IMAGE_RATIO       => self::FIXED,
