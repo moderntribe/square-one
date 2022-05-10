@@ -11,4 +11,8 @@ class Tab_Collection extends DataTransferObjectCollection {
 		return new self( Tab::arrayOf( $tabs ) );
 	}
 
+	public function current(): Tab {
+		return parent::current();
+	}
+
 }

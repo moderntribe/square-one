@@ -11,4 +11,8 @@ class Statistic_Collection extends DataTransferObjectCollection {
 		return new self( Statistic::arrayOf( $stats ) );
 	}
 
+	public function current(): Statistic {
+		return parent::current();
+	}
+
 }

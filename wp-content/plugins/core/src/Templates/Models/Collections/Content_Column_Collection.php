@@ -11,4 +11,8 @@ class Content_Column_Collection extends DataTransferObjectCollection {
 		return new self( Content_Column::arrayOf( $columns ) );
 	}
 
+	public function current(): Content_Column {
+		return parent::current();
+	}
+
 }
