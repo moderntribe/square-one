@@ -2,15 +2,11 @@
 
 namespace Tribe\Project\Templates\Models;
 
-class Tab {
+use Tribe\Libs\Field_Models\Field_Model;
 
-	public string $label;
+class Tab extends Field_Model {
 
-	public string $content;
-
-	public function __construct( string $label, string $content ) {
-		$this->label   = $label;
-		$this->content = $content;
-	}
+	public string $tab_label;
+	public string $tab_content;
 
 }
