@@ -10,7 +10,7 @@ skip_output:
 
 # alias for the phpcs command
 x-phpcs: &phpcs
-  run: ./vendor/bin/phpcs -s --standard=./phpcs.xml.dist {staged_files}
+  run: php -l -d error_reporting=24575 ./vendor/bin/phpcs -s --standard=./phpcs.xml.dist {staged_files}
 
 # phpcs
 pre-commit:
