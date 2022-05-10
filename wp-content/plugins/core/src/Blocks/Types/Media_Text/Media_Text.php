@@ -68,8 +68,7 @@ class Media_Text extends Block_Config implements Cta_Field {
 								'target' => '',
 							],
 						],
-						//Images are output as IDs so it's sort of hard to get an image value for preview
-						self::IMAGE       => 0,
+						self::IMAGE       => [],
 					],
 				],
 			],
@@ -133,7 +132,7 @@ class Media_Text extends Block_Config implements Cta_Field {
 					'label'             => __( 'Image', 'tribe' ),
 					'name'              => self::IMAGE,
 					'type'              => 'image',
-					'return_format'     => 'id',
+					'return_format'     => 'array',
 					'preview_size'      => 'medium',
 					'conditional_logic' => [
 						[
