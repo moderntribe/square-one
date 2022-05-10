@@ -21,8 +21,7 @@ class Icon_Grid extends Block_Config implements Cta_Field {
 	public const LAYOUT_INLINE = 'inline';
 	public const LAYOUT_LIST   = 'list';
 
-	public const SECTION_ICONS    = 's-icons';
-	public const SECTION_SETTINGS = 's-settings';
+	public const SECTION_ICONS = 's-icons';
 
 	public const TITLE       = 'title';
 	public const DESCRIPTION = 'description';
@@ -118,7 +117,7 @@ class Icon_Grid extends Block_Config implements Cta_Field {
 				'label'         => esc_html__( 'Icon Image', 'tribe' ),
 				'name'          => self::ICON_IMAGE,
 				'type'          => 'image',
-				'return_format' => 'id',
+				'return_format' => 'array',
 				'preview_size'  => 'medium',
 				'instructions'  => esc_html__( 'Recommended image size: 100px wide with any aspect ratio.', 'tribe' ),
 			] )
