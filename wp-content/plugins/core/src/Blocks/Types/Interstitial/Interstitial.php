@@ -85,7 +85,7 @@ class Interstitial extends Block_Config implements Cta_Field {
 				 'label'         => __( 'Background Image', 'tribe' ),
 				 'name'          => self::IMAGE,
 				 'type'          => 'image',
-				 'return_format' => 'id',
+				 'return_format' => 'array',
 			 ] ) );
 
 		$this->add_section( new Field_Section( self::SECTION_APPEARANCE, __( 'Appearance', 'tribe' ), 'accordion' ) )
