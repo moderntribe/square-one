@@ -2,6 +2,7 @@
 
 namespace Tribe\Project\Templates\Routes\index;
 
+use Tribe\Libs\Field_Models\Models\Image;
 use Tribe\Libs\Taxonomy\Term_Object;
 use Tribe\Project\Blocks\Types\Content_Loop\Content_Loop;
 use Tribe\Project\Object_Meta\Post_Archive_Featured_Settings;
@@ -119,17 +120,17 @@ class Index_Controller extends Abstract_Controller {
 		$taxonomy = Term_Object::factory( $term->term_id );
 
 		return array_filter( [
-			Subheader_Controller::TITLE         => $term->name,
-			Subheader_Controller::DESCRIPTION   => $term->description,
-			Subheader_Controller::HERO_IMAGE_ID => $taxonomy->get_meta( Taxonomy_Archive_Settings::HERO_IMAGE )['ID'] ?? 0,
+			Subheader_Controller::TITLE       => $term->name,
+			Subheader_Controller::DESCRIPTION => $term->description,
+			Subheader_Controller::HERO_IMAGE  => new Image( (array) $taxonomy->get_meta( Taxonomy_Archive_Settings::HERO_IMAGE ) ),
 		] );
 	}
 
 	protected function get_subheader_front_page_args(): array {
 		return array_filter( [
-			Subheader_Controller::TITLE         => $this->post_settings->get_setting( Post_Archive_Settings::TITLE, '' ),
-			Subheader_Controller::DESCRIPTION   => $this->post_settings->get_setting( Post_Archive_Settings::DESCRIPTION, '' ),
-			Subheader_Controller::HERO_IMAGE_ID => $this->post_settings->get_setting( Post_Archive_Settings::HERO_IMAGE, [] )['ID'] ?? 0,
+			Subheader_Controller::TITLE       => $this->post_settings->get_setting( Post_Archive_Settings::TITLE, '' ),
+			Subheader_Controller::DESCRIPTION => $this->post_settings->get_setting( Post_Archive_Settings::DESCRIPTION, '' ),
+			Subheader_Controller::HERO_IMAGE  => new Image( $this->post_settings->get_setting( Post_Archive_Settings::HERO_IMAGE, [] ) ),
 		] );
 	}
 
