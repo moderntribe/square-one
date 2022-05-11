@@ -102,7 +102,7 @@ class Hero extends Block_Config implements Cta_Field {
 					 'label'         => esc_html__( 'Image', 'tribe' ),
 					 'name'          => self::IMAGE,
 					 'type'          => 'image',
-					 'return_format' => 'id',
+					 'return_format' => 'array',
 					 'instructions'  => esc_html__( 'Landscape orientation recommended. Minimum 1700px wide.', 'tribe' ),
 					 'wrapper'       => [
 						 'class' => 'tribe-acf-hide-label',
