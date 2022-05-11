@@ -13,8 +13,8 @@ class Quote extends Block_Config {
 
 	public const NAME = 'quote';
 
-	public const QUOTE      = 'text';
-	public const GROUP_CITE = 'g-cite';
+	public const QUOTE      = 'quote_text';
+	public const GROUP_CITE = 'citation';
 	public const CITE_NAME  = 'cite_name';
 	public const CITE_TITLE = 'cite_title';
 	public const CITE_IMAGE = 'cite_image';
@@ -53,8 +53,9 @@ class Quote extends Block_Config {
 						self::GROUP_CITE => [
 							self::CITE_NAME  => esc_html__( 'John Doe', 'tribe' ),
 							self::CITE_TITLE => esc_html__( 'Chief Executive', 'tribe' ),
-							self::IMAGE      => 0,
+							self::CITE_IMAGE => [],
 						],
+						self::IMAGE      => [],
 					],
 				],
 			],
@@ -138,7 +139,7 @@ class Quote extends Block_Config {
 					'label'         => __( 'Image', 'tribe' ),
 					'name'          => self::IMAGE,
 					'type'          => 'image',
-					'return_format' => 'id',
+					'return_format' => 'array',
 					'preview_size'  => 'medium',
 					'wrapper'       => [
 						'class' => 'tribe-acf-hide-label',
@@ -174,7 +175,7 @@ class Quote extends Block_Config {
 			'label'         => __( 'Photo', 'tribe' ),
 			'name'          => self::CITE_IMAGE,
 			'type'          => 'image',
-			'return_format' => 'id',
+			'return_format' => 'array',
 			'preview_size'  => Image_Sizes::SQUARE_XSMALL,
 		] );
 
