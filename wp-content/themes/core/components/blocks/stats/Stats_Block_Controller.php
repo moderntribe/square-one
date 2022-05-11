@@ -179,7 +179,7 @@ class Stats_Block_Controller extends Abstract_Controller {
 				'b-stats__leadin',
 				'h6',
 			],
-			Text_Controller::CONTENT => $this->leadin ?? '',
+			Text_Controller::CONTENT => $this->leadin,
 		] );
 	}
 
@@ -191,7 +191,7 @@ class Stats_Block_Controller extends Abstract_Controller {
 				'b-stats__title',
 				'h3',
 			],
-			Text_Controller::CONTENT => $this->title ?? '',
+			Text_Controller::CONTENT => $this->title,
 		] );
 	}
 
@@ -203,15 +203,11 @@ class Stats_Block_Controller extends Abstract_Controller {
 				't-sink',
 				's-sink',
 			],
-			Container_Controller::CONTENT => $this->description ?? '',
+			Container_Controller::CONTENT => $this->description,
 		] );
 	}
 
-	private function get_cta(): ?Deferred_Component {
-		if ( ! $this->cta->link->url ) {
-			return null;
-		}
-
+	private function get_cta(): Deferred_Component {
 		return defer_template_part( 'components/link/link', null, [
 			Link_Controller::URL            => $this->cta->link->url,
 			Link_Controller::CONTENT        => $this->cta->link->title ?: $this->cta->link->url,
