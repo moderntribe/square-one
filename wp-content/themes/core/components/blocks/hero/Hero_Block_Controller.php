@@ -3,6 +3,7 @@
 namespace Tribe\Project\Templates\Components\blocks\hero;
 
 use Tribe\Libs\Field_Models\Models\Cta;
+use Tribe\Libs\Field_Models\Models\Image;
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Blocks\Types\Hero\Hero as Hero_Block;
 use Tribe\Project\Templates\Components\Abstract_Controller;
@@ -48,13 +49,12 @@ class Hero_Block_Controller extends Abstract_Controller {
 	 */
 	private array $content_classes;
 
-	private Cta $cta;
-
 	/**
 	 * @var string[]
 	 */
 	private array $media_classes;
-	private int $media;
+	private Cta $cta;
+	private Image $media;
 	private string $description;
 	private string $layout;
 	private string $leadin;
@@ -74,7 +74,7 @@ class Hero_Block_Controller extends Abstract_Controller {
 		$this->description       = (string) $args[ self::DESCRIPTION ];
 		$this->layout            = (string) $args[ self::LAYOUT ];
 		$this->leadin            = (string) $args[ self::LEADIN ];
-		$this->media             = (int) $args[ self::MEDIA ];
+		$this->media             = $args[ self::MEDIA ];
 		$this->media_classes     = (array) $args[ self::MEDIA_CLASSES ];
 		$this->title             = (string) $args[ self::TITLE ];
 	}
@@ -123,12 +123,12 @@ class Hero_Block_Controller extends Abstract_Controller {
 	}
 
 	public function get_image_args(): array {
-		if ( empty( $this->media ) ) {
+		if ( ! $this->media->id ) {
 			return [];
 		}
 
 		return [
-			Image_Controller::IMG_ID       => $this->media,
+			Image_Controller::IMG_ID       => $this->media->id,
 			Image_Controller::AS_BG        => true,
 			Image_Controller::AUTO_SHIM    => false,
 			Image_Controller::USE_LAZYLOAD => true,
@@ -153,7 +153,7 @@ class Hero_Block_Controller extends Abstract_Controller {
 			self::DESCRIPTION       => '',
 			self::LAYOUT            => Hero_Block::LAYOUT_LEFT,
 			self::LEADIN            => '',
-			self::MEDIA             => 0,
+			self::MEDIA             => new Image(),
 			self::MEDIA_CLASSES     => [],
 			self::TITLE             => '',
 		];
