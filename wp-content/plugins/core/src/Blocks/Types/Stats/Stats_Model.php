@@ -10,9 +10,6 @@ use Tribe\Project\Templates\Models\Collections\Statistic_Collection;
 
 class Stats_Model extends Base_Model {
 
-	/**
-	 * @return array
-	 */
 	public function get_data(): array {
 		return [
 			Stats_Block_Controller::ATTRS         => $this->get_attrs(),
