@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 
 ## 2022.05
+* Added: Brings in the [square1-field-models](https://github.com/moderntribe/square1-field-models) library.
+* Updated: WordPress to 5.9.3, ACF to 5.12.2 and Yoast to 18.8.
+* Fixed: Hides deprecation notices when running lefthook phpcs, which appear if you're running PHP8.1 locally.
+* Fixed: Converts all blocks/components to use Field Models, where appropriate.
 * Fixed: Prevent WP Core from adding `loading="lazy"` to our image component `<img />` tags.
 * Updated: Remove old TinyMCE image tag filtering and related unit test.
 * Fixed: Images lazy loaded via LazySizes are now loaded before printing.
