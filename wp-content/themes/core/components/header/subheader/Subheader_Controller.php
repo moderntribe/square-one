@@ -67,7 +67,7 @@ class Subheader_Controller extends Abstract_Controller {
 	}
 
 	public function get_classes(): string {
-		if ( ! $this->hero_image->id ) {
+		if ( $this->hero_image->id ) {
 			$this->classes[] = 'c-subheader--has-image';
 			$this->classes[] = 't-theme--light';
 		}
