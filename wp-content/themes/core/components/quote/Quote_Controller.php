@@ -43,7 +43,7 @@ class Quote_Controller extends Abstract_Controller {
 
 	public function has_quote(): bool {
 		return (bool) array_filter(
-			$this->quote->toArray(),
+			$this->quote->except( 'cite_image' )->toArray(),
 			static fn( $v ) =>
 				is_array( $v ) ? array_filter( $v ) : ! empty( $v )
 		);
