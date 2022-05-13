@@ -11,16 +11,15 @@ $c = Quote_Controller::factory( $args );
 
 <blockquote <?php echo $c->get_classes(); ?> <?php echo $c->get_attrs(); ?>>
 	<?php if ( $c->has_quote() ) : ?>
-		<?php if ( ! empty( $c->get_quote()->quote_text ) ) {
-			get_template_part( 'components/text/text', '', [
-				Text_Controller::TAG     => 'h2',
-				Text_Controller::CLASSES => [
-					'c-quote__text',
-					'h4',
-				],
-				Text_Controller::CONTENT => esc_html( $c->get_quote()->quote_text ),
-			] );
-		} ?>
+		<?php get_template_part( 'components/text/text', '', [
+			Text_Controller::TAG     => 'h2',
+			Text_Controller::CLASSES => [
+				'c-quote__text',
+				'h4',
+			],
+			Text_Controller::CONTENT => esc_html( $c->get_quote()->quote_text ),
+		] );
+		?>
 
 		<cite class="c-quote__cite">
 			<?php if ( ! empty( ( $c->get_image_args() ) ) ) {
@@ -28,18 +27,13 @@ $c = Quote_Controller::factory( $args );
 			} ?>
 
 			<span class="c-quote__cite-text">
-				<?php if ( ! empty( $c->get_quote()->cite_name ) ) : ?>
-					<span class="c-quote__cite-name">
-						<?php echo esc_html( $c->get_quote()->cite_name ); ?>
-					</span>
-				<?php endif; ?>
-				<?php if ( ! empty( $c->get_quote()->cite_title ) ) : ?>
-					<span class="c-quote__cite-title">
-						<?php echo esc_html( $c->get_quote()->cite_title ); ?>
-					</span>
-				<?php endif; ?>
+				<span class="c-quote__cite-name">
+					<?php echo esc_html( $c->get_quote()->cite_name ); ?>
+				</span>
+				<span class="c-quote__cite-title">
+					<?php echo esc_html( $c->get_quote()->cite_title ); ?>
+				</span>
 			</span>
-
 		</cite>
 	<?php endif; ?>
 </blockquote>
