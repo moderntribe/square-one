@@ -2,16 +2,12 @@
 
 namespace Tribe\Project\Templates\Models;
 
-class Social_Link {
+use Tribe\Libs\Field_Models\Field_Model;
 
-	public string $key;
-	public string $url;
-	public string $title;
+class Social_Link extends Field_Model {
 
-	public function __construct( string $key, string $url, string $title ) {
-		$this->key   = $key;
-		$this->url   = $url;
-		$this->title = $title;
-	}
+	public string $class = '';
+	public string $url   = '';
+	public string $title = '';
 
 }

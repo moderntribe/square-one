@@ -17,10 +17,9 @@ class Links extends Block_Config implements Cta_Field {
 
 	public const NAME = 'links';
 
-	public const SECTION_CONTENT = 's-content';
-	public const LEAD_IN         = 'leadin';
-	public const TITLE           = 'title';
-	public const DESCRIPTION     = 'description';
+	public const LEAD_IN     = 'leadin';
+	public const TITLE       = 'title';
+	public const DESCRIPTION = 'description';
 
 	public const SECTION_LINKS = 's-links';
 	public const LINKS_TITLE   = 'links_title';

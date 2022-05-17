@@ -4,6 +4,7 @@ namespace Tribe\Project\Templates\Components\accordion;
 
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
+use Tribe\Project\Templates\Models\Collections\Accordion_Row_Collection;
 
 /**
  * Class Accordion
@@ -90,10 +91,7 @@ class Accordion_Controller extends Abstract_Controller {
 	 */
 	private array $row_ids;
 
-	/**
-	 * @var \Tribe\Project\Templates\Models\Accordion_Row[]
-	 */
-	private array $rows;
+	private Accordion_Row_Collection $rows;
 	private string $row_content_name;
 	private string $row_header_name;
 	private string $row_header_tag;
@@ -113,14 +111,14 @@ class Accordion_Controller extends Abstract_Controller {
 		$this->row_header_container_classes  = (array) $args[ self::ROW_HEADER_CONTAINER_CLASSES ];
 		$this->row_header_name               = (string) $args[ self::ROW_HEADER_NAME ];
 		$this->row_header_tag                = (string) $args[ self::ROW_HEADER_TAG ];
-		$this->rows                          = (array) $args[ self::ROWS ];
+		$this->rows                          = $args[ self::ROWS ];
 
 		$this->container_attrs['data-scrollto'] = (bool) $args[ self::SCROLL_TO ];
 
 		$this->row_ids = array_map( static fn() => [
 			'content_id' => uniqid( 'accordion-content-' ),
 			'header_id'  => uniqid( 'accordion-header-' ),
-		], $this->rows );
+		], $this->rows->toArray() );
 	}
 
 	public function get_row_content_attrs( int $row_key ): string {
@@ -130,10 +128,7 @@ class Accordion_Controller extends Abstract_Controller {
 		], $this->row_content_attrs ) );
 	}
 
-	/**
-	 * @return \Tribe\Project\Templates\Models\Accordion_Row[]
-	 */
-	public function get_rows(): array {
+	public function get_rows(): Accordion_Row_Collection {
 		return $this->rows;
 	}
 
@@ -180,10 +175,20 @@ class Accordion_Controller extends Abstract_Controller {
 		return $this->row_header_tag;
 	}
 
+	/**
+	 * @TODO This isn't called anywhere.
+	 *
+	 * @return string
+	 */
 	public function get_row_content_name(): string {
 		return $this->row_content_name;
 	}
 
+	/**
+	 * @TODO This isn't called anywhere.
+	 *       
+	 * @return string
+	 */
 	public function get_row_header_name(): string {
 		return $this->row_header_name;
 	}
@@ -192,7 +197,7 @@ class Accordion_Controller extends Abstract_Controller {
 		return [
 			self::CONTAINER_ATTRS               => [],
 			self::CONTAINER_CLASSES             => [],
-			self::ROWS                          => [],
+			self::ROWS                          => new Accordion_Row_Collection(),
 			self::ROW_CLASSES                   => [],
 			self::ROW_CONTENT_ATTRS             => [],
 			self::ROW_CONTENT_CLASSES           => [],

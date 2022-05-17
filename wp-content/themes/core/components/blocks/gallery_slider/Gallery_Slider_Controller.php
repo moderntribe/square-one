@@ -2,6 +2,7 @@
 
 namespace Tribe\Project\Templates\Components\blocks\gallery_slider;
 
+use Tribe\Libs\Field_Models\Models\Link;
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\container\Container_Controller;
@@ -31,7 +32,6 @@ class Gallery_Slider_Controller extends Abstract_Controller {
 	public const VARIABLE = 'variable';
 
 	public const CAPTION_DISPLAY_SHOW = 'caption_display_show';
-	public const CAPTION_DISPLAY_HIDE = 'caption_display_hide';
 
 	/**
 	 * @var string[]
@@ -53,10 +53,7 @@ class Gallery_Slider_Controller extends Abstract_Controller {
 	 */
 	private array $content_classes;
 
-	/**
-	 * @var string[]
-	 */
-	private array $cta;
+	private Link $cta;
 
 	/**
 	 * @var string[]
@@ -64,7 +61,6 @@ class Gallery_Slider_Controller extends Abstract_Controller {
 	private array $gallery;
 	private string $caption_display;
 	private string $description;
-	private string $id;
 	private string $image_ratio;
 	private string $title;
 
@@ -76,16 +72,11 @@ class Gallery_Slider_Controller extends Abstract_Controller {
 		$this->classes           = (array) $args[ self::CLASSES ];
 		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
 		$this->content_classes   = (array) $args[ self::CONTENT_CLASSES ];
-		$this->cta               = (array) $args[ self::CTA ];
+		$this->cta               = $args[ self::CTA ];
 		$this->description       = (string) $args[ self::DESCRIPTION ];
 		$this->gallery           = (array) $args[ self::GALLERY ];
-		$this->id                = uniqid();
 		$this->image_ratio       = (string) $args[ self::IMAGE_RATIO ];
 		$this->title             = (string) $args[ self::TITLE ];
-	}
-
-	public function get_block_id(): string {
-		return $this->id;
 	}
 
 	public function get_classes(): string {
@@ -208,7 +199,7 @@ class Gallery_Slider_Controller extends Abstract_Controller {
 			self::CLASSES           => [],
 			self::CONTAINER_CLASSES => [],
 			self::CONTENT_CLASSES   => [],
-			self::CTA               => [],
+			self::CTA               => new Link(),
 			self::DESCRIPTION       => '',
 			self::GALLERY           => [],
 			self::IMAGE_RATIO       => self::FIXED,
@@ -275,7 +266,7 @@ class Gallery_Slider_Controller extends Abstract_Controller {
 	private function get_image_caption( int $slide_id ): ?Deferred_Component {
 		$thumbnail_image = get_posts( [ 'p' => $slide_id, 'post_type' => 'attachment' ] );
 
-		if ( empty( $thumbnail_image[0] ) ) {
+		if ( empty( $thumbnail_image[0]->post_excerpt ) ) {
 			return null;
 		}
 
@@ -283,7 +274,7 @@ class Gallery_Slider_Controller extends Abstract_Controller {
 			Text_Controller::CLASSES => [
 				'b-gallery-slider__meta-caption',
 			],
-			Text_Controller::CONTENT => esc_html( $thumbnail_image[0]->post_excerpt ?? '' ) ,
+			Text_Controller::CONTENT => esc_html( $thumbnail_image[0]->post_excerpt ),
 		] );
 	}
 
@@ -317,20 +308,15 @@ class Gallery_Slider_Controller extends Abstract_Controller {
 		] );
 	}
 
-	/**
-	 * @return \Tribe\Project\Templates\Components\Deferred_Component
-	 */
-	private function get_cta(): Deferred_Component {
-		$cta = wp_parse_args( $this->cta, [
-			'content' => '',
-			'url'     => '',
-			'target'  => '',
-		] );
+	private function get_cta(): ?Deferred_Component {
+		if ( ! $this->cta->url ) {
+			return null;
+		}
 
 		return defer_template_part( 'components/link/link', null, [
-			Link_Controller::URL     => $cta['url'],
-			Link_Controller::CONTENT => $cta['content'] ?: $cta['url'],
-			Link_Controller::TARGET  => $cta['target'],
+			Link_Controller::URL     => $this->cta->url,
+			Link_Controller::CONTENT => $this->cta->title ?: $this->cta->url,
+			Link_Controller::TARGET  => $this->cta->target,
 			Link_Controller::CLASSES => [
 				'c-block__cta-link',
 				'a-btn',

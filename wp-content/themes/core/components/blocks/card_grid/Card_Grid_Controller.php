@@ -2,6 +2,7 @@
 
 namespace Tribe\Project\Templates\Components\blocks\card_grid;
 
+use Tribe\Libs\Field_Models\Models\Cta;
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Blocks\Types\Card_Grid\Card_Grid;
 use Tribe\Project\Templates\Components\Abstract_Controller;
@@ -43,10 +44,7 @@ class Card_Grid_Controller extends Abstract_Controller {
 	 */
 	private array $container_classes;
 
-	/**
-	 * @var string[]
-	 */
-	private array $cta;
+	private Cta $cta;
 
 	/**
 	 * @var string[]
@@ -75,7 +73,7 @@ class Card_Grid_Controller extends Abstract_Controller {
 		$this->attrs             = (array) $args[ self::ATTRS ];
 		$this->classes           = (array) $args[ self::CLASSES ];
 		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
-		$this->cta               = (array) $args[ self::CTA ];
+		$this->cta               = $args[ self::CTA ];
 		$this->description       = (string) $args[ self::DESCRIPTION ];
 		$this->layout            = (string) $args[ self::LAYOUT ];
 		$this->leadin            = (string) $args[ self::LEADIN ];
@@ -211,7 +209,7 @@ class Card_Grid_Controller extends Abstract_Controller {
 			self::ATTRS             => [],
 			self::CLASSES           => [],
 			self::CONTAINER_CLASSES => [],
-			self::CTA               => [],
+			self::CTA               => new Cta(),
 			self::DESCRIPTION       => '',
 			self::LAYOUT            => Card_Grid::LAYOUT_STACKED,
 			self::LEADIN            => '',
@@ -266,20 +264,12 @@ class Card_Grid_Controller extends Abstract_Controller {
 	}
 
 	private function get_cta(): Deferred_Component {
-		$cta = wp_parse_args( $this->cta, [
-			'content'        => '',
-			'url'            => '',
-			'target'         => '',
-			'add_aria_label' => false,
-			'aria_label'     => '',
-		] );
-
 		return defer_template_part( 'components/link/link', null, [
-			Link_Controller::URL            => $cta['url'],
-			Link_Controller::CONTENT        => $cta['content'] ?: $cta['url'],
-			Link_Controller::TARGET         => $cta['target'],
-			Link_Controller::ADD_ARIA_LABEL => $cta['add_aria_label'],
-			Link_Controller::ARIA_LABEL     => $cta['aria_label'],
+			Link_Controller::URL            => $this->cta->link->url,
+			Link_Controller::CONTENT        => $this->cta->link->title ?: $this->cta->link->url,
+			Link_Controller::TARGET         => $this->cta->link->target,
+			Link_Controller::ADD_ARIA_LABEL => $this->cta->add_aria_label,
+			Link_Controller::ARIA_LABEL     => $this->cta->aria_label,
 			Link_Controller::CLASSES        => [
 				'c-block__cta-link',
 				'a-btn',

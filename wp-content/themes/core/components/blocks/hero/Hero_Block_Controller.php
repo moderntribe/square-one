@@ -2,6 +2,8 @@
 
 namespace Tribe\Project\Templates\Components\blocks\hero;
 
+use Tribe\Libs\Field_Models\Models\Cta;
+use Tribe\Libs\Field_Models\Models\Image;
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Blocks\Types\Hero\Hero as Hero_Block;
 use Tribe\Project\Templates\Components\Abstract_Controller;
@@ -50,13 +52,9 @@ class Hero_Block_Controller extends Abstract_Controller {
 	/**
 	 * @var string[]
 	 */
-	private array $cta;
-
-	/**
-	 * @var string[]
-	 */
 	private array $media_classes;
-	private int $media;
+	private Cta $cta;
+	private Image $media;
 	private string $description;
 	private string $layout;
 	private string $leadin;
@@ -72,11 +70,11 @@ class Hero_Block_Controller extends Abstract_Controller {
 		$this->classes           = (array) $args[ self::CLASSES ];
 		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
 		$this->content_classes   = (array) $args[ self::CONTENT_CLASSES ];
-		$this->cta               = (array) $args[ self::CTA ];
+		$this->cta               = $args[ self::CTA ];
 		$this->description       = (string) $args[ self::DESCRIPTION ];
 		$this->layout            = (string) $args[ self::LAYOUT ];
 		$this->leadin            = (string) $args[ self::LEADIN ];
-		$this->media             = (int) $args[ self::MEDIA ];
+		$this->media             = $args[ self::MEDIA ];
 		$this->media_classes     = (array) $args[ self::MEDIA_CLASSES ];
 		$this->title             = (string) $args[ self::TITLE ];
 	}
@@ -125,12 +123,12 @@ class Hero_Block_Controller extends Abstract_Controller {
 	}
 
 	public function get_image_args(): array {
-		if ( empty( $this->media ) ) {
+		if ( ! $this->media->id ) {
 			return [];
 		}
 
 		return [
-			Image_Controller::IMG_ID       => $this->media,
+			Image_Controller::IMG_ID       => $this->media->id,
 			Image_Controller::AS_BG        => true,
 			Image_Controller::AUTO_SHIM    => false,
 			Image_Controller::USE_LAZYLOAD => true,
@@ -151,11 +149,11 @@ class Hero_Block_Controller extends Abstract_Controller {
 			self::CLASSES           => [ 'c-block--full-bleed' ],
 			self::CONTAINER_CLASSES => [],
 			self::CONTENT_CLASSES   => [],
-			self::CTA               => [],
+			self::CTA               => new Cta(),
 			self::DESCRIPTION       => '',
 			self::LAYOUT            => Hero_Block::LAYOUT_LEFT,
 			self::LEADIN            => '',
-			self::MEDIA             => 0,
+			self::MEDIA             => new Image(),
 			self::MEDIA_CLASSES     => [],
 			self::TITLE             => '',
 		];
@@ -177,7 +175,7 @@ class Hero_Block_Controller extends Abstract_Controller {
 				'b-hero__leadin',
 				'h6',
 			],
-			Text_Controller::CONTENT => $this->leadin ?? '',
+			Text_Controller::CONTENT => $this->leadin,
 		] );
 	}
 
@@ -189,7 +187,7 @@ class Hero_Block_Controller extends Abstract_Controller {
 				'b-hero__title',
 				'h3',
 			],
-			Text_Controller::CONTENT => $this->title ?? '',
+			Text_Controller::CONTENT => $this->title,
 		] );
 	}
 
@@ -201,25 +199,17 @@ class Hero_Block_Controller extends Abstract_Controller {
 				't-sink',
 				's-sink',
 			],
-			Container_Controller::CONTENT => $this->description ?? '',
+			Container_Controller::CONTENT => $this->description,
 		] );
 	}
 
 	private function get_cta(): Deferred_Component {
-		$cta = wp_parse_args( $this->cta, [
-			'content'        => '',
-			'url'            => '',
-			'target'         => '',
-			'add_aria_label' => false,
-			'aria_label'     => '',
-		] );
-
 		return defer_template_part( 'components/link/link', null, [
-			Link_Controller::URL            => $cta['url'],
-			Link_Controller::CONTENT        => $cta['content'] ?: $cta['url'],
-			Link_Controller::TARGET         => $cta['target'],
-			Link_Controller::ADD_ARIA_LABEL => $cta['add_aria_label'],
-			Link_Controller::ARIA_LABEL     => $cta['aria_label'],
+			Link_Controller::URL            => $this->cta->link->url,
+			Link_Controller::CONTENT        => $this->cta->link->title ?: $this->cta->link->url,
+			Link_Controller::TARGET         => $this->cta->link->target,
+			Link_Controller::ADD_ARIA_LABEL => $this->cta->add_aria_label,
+			Link_Controller::ARIA_LABEL     => $this->cta->aria_label,
 			Link_Controller::CLASSES        => [
 				'c-block__cta-link',
 				'a-btn',

@@ -18,7 +18,7 @@ class Taxonomy_Archive_Settings extends ACF\ACF_Meta_Group {
 
 	public function get_group_config(): array {
 		$group = new ACF\Group( self::NAME, $this->object_types );
-		$group->set( 'title', __( 'Archive Settings', 'tribe' ) );
+		$group->set( 'title', esc_html__( 'Archive Settings', 'tribe' ) );
 
 		$group->add_field( $this->get_hero_field() );
 
@@ -27,10 +27,11 @@ class Taxonomy_Archive_Settings extends ACF\ACF_Meta_Group {
 
 	private function get_hero_field(): ACF\Field {
 		return new ACF\Field( self::NAME . '_' . self::HERO_IMAGE, [
-			'label'        => __( 'Hero Image', 'tribe' ),
-			'name'         => self::HERO_IMAGE,
-			'type'         => 'image',
-			'instructions' => __( 'The hero image for this taxonomy\'s archive', 'tribe' ),
+			'label'         => esc_html__( 'Hero Image', 'tribe' ),
+			'name'          => self::HERO_IMAGE,
+			'type'          => 'image',
+			'return_format' => 'array',
+			'instructions'  => esc_html__( 'The hero image for this taxonomy\'s archive', 'tribe' ),
 		] );
 	}
 

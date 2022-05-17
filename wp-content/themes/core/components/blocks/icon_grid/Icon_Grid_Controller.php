@@ -2,6 +2,7 @@
 
 namespace Tribe\Project\Templates\Components\blocks\icon_grid;
 
+use Tribe\Libs\Field_Models\Models\Cta;
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\card\Card_Controller;
@@ -11,6 +12,7 @@ use Tribe\Project\Templates\Components\Deferred_Component;
 use Tribe\Project\Templates\Components\image\Image_Controller;
 use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Templates\Components\text\Text_Controller;
+use Tribe\Project\Templates\Models\Collections\Icon_Collection;
 
 class Icon_Grid_Controller extends Abstract_Controller {
 
@@ -45,19 +47,8 @@ class Icon_Grid_Controller extends Abstract_Controller {
 	 */
 	private array $content_classes;
 
-	/**
-	 * @var string[]
-	 */
-	private array $cta;
-
-	/**
-	 * ACF Repeater Values.
-	 *
-	 * @see \Tribe\Project\Blocks\Types\Icon_Grid\Icon_Grid::get_icon_section()
-	 *
-	 * @var mixed[]
-	 */
-	private array $icons;
+	private Cta $cta;
+	private Icon_Collection $icons;
 	private string $description;
 	private string $layout;
 	private string $leadin;
@@ -70,9 +61,9 @@ class Icon_Grid_Controller extends Abstract_Controller {
 		$this->classes           = (array) $args[ self::CLASSES ];
 		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
 		$this->content_classes   = (array) $args[ self::CONTENT_CLASSES ];
-		$this->cta               = (array) $args[ self::CTA ];
+		$this->cta               = $args[ self::CTA ];
 		$this->description       = (string) $args[ self::DESCRIPTION ];
-		$this->icons             = (array) $args[ self::ICONS ];
+		$this->icons             = $args[ self::ICONS ];
 		$this->layout            = (string) $args[ self::LAYOUT ];
 		$this->leadin            = (string) $args[ self::LEADIN ];
 		$this->title             = (string) $args[ self::TITLE ];
@@ -120,20 +111,12 @@ class Icon_Grid_Controller extends Abstract_Controller {
 	}
 
 	public function get_cta(): Deferred_Component {
-		$cta = wp_parse_args( $this->cta, [
-			'content'        => '',
-			'url'            => '',
-			'target'         => '',
-			'add_aria_label' => false,
-			'aria_label'     => '',
-		] );
-
 		return defer_template_part( 'components/link/link', null, [
-			Link_Controller::URL            => $cta['url'],
-			Link_Controller::CONTENT        => $cta['content'] ?: $cta['url'],
-			Link_Controller::TARGET         => $cta['target'],
-			Link_Controller::ADD_ARIA_LABEL => $cta['add_aria_label'],
-			Link_Controller::ARIA_LABEL     => $cta['aria_label'],
+			Link_Controller::URL            => $this->cta->link->url,
+			Link_Controller::CONTENT        => $this->cta->link->title ?: $this->cta->link->url,
+			Link_Controller::TARGET         => $this->cta->link->target,
+			Link_Controller::ADD_ARIA_LABEL => $this->cta->add_aria_label,
+			Link_Controller::ARIA_LABEL     => $this->cta->aria_label,
 			Link_Controller::CLASSES        => [
 				'c-block__cta-link',
 				'a-btn',
@@ -146,7 +129,7 @@ class Icon_Grid_Controller extends Abstract_Controller {
 	public function get_icon_card_args(): array {
 		$cards = [];
 
-		if ( empty( $this->icons ) ) {
+		if ( ! $this->icons->count() ) {
 			return $cards;
 		}
 
@@ -162,14 +145,14 @@ class Icon_Grid_Controller extends Abstract_Controller {
 					[
 						Text_Controller::TAG     => 'h3',
 						Text_Controller::CLASSES => [ 'h5' ],
-						Text_Controller::CONTENT => $card['icon_title'] ?? '',
+						Text_Controller::CONTENT => $card->icon_title,
 					]
 				),
 				Card_Controller::DESCRIPTION     => defer_template_part(
 					'components/container/container',
 					null,
 					[
-						Container_Controller::CONTENT => wpautop( $card['icon_description'] ) ?? '',
+						Container_Controller::CONTENT => wpautop( $card->icon_description ),
 						Container_Controller::CLASSES => [ 't-sink', 's-sink' ],
 					],
 				),
@@ -177,7 +160,7 @@ class Icon_Grid_Controller extends Abstract_Controller {
 					'components/image/image',
 					null,
 					[
-						Image_Controller::IMG_ID       => $card['icon_image'] ?? null,
+						Image_Controller::IMG_ID       => $card->icon_image->id,
 						Image_Controller::AS_BG        => false,
 						Image_Controller::SRC_SIZE     => 'medium_large',
 						Image_Controller::SRCSET_SIZES => [
@@ -190,11 +173,11 @@ class Icon_Grid_Controller extends Abstract_Controller {
 					'components/link/link',
 					null,
 					[
-						Link_Controller::CONTENT        => $card['g-cta']['link']['title'] ?? '',
-						Link_Controller::URL            => $card['g-cta']['link']['url'] ?? '',
-						Link_Controller::TARGET         => $card['g-cta']['link']['target'] ?? '',
-						Link_Controller::ADD_ARIA_LABEL => $card['g-cta']['add_aria_label'] ?? '',
-						Link_Controller::ARIA_LABEL     => $card['g-cta']['aria_label'] ?? '',
+						Link_Controller::URL            => $card->cta->link->url,
+						Link_Controller::CONTENT        => $card->cta->link->title,
+						Link_Controller::TARGET         => $card->cta->link->target,
+						Link_Controller::ADD_ARIA_LABEL => $card->cta->add_aria_label,
+						Link_Controller::ARIA_LABEL     => $card->cta->aria_label,
 						Link_Controller::CLASSES        => [ 'a-cta', 'is-target-link' ],
 					]
 				),
@@ -210,9 +193,9 @@ class Icon_Grid_Controller extends Abstract_Controller {
 			self::CLASSES           => [],
 			self::CONTAINER_CLASSES => [],
 			self::CONTENT_CLASSES   => [],
-			self::CTA               => [],
+			self::CTA               => new Cta(),
 			self::DESCRIPTION       => '',
-			self::ICONS             => [],
+			self::ICONS             => new Icon_Collection(),
 			self::LAYOUT            => '',
 			self::LEADIN            => '',
 			self::TITLE             => '',

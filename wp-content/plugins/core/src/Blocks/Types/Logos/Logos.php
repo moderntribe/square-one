@@ -119,17 +119,20 @@ class Logos extends Block_Config implements Cta_Field {
 			'label'         => __( 'Logo Image', 'tribe' ),
 			'name'          => self::LOGO_IMAGE,
 			'type'          => 'image',
-			'return_format' => 'id',
+			'return_format' => 'array',
 			'preview_size'  => 'medium',
-			'instructions'  => __( 'Recommended image size: 200px tall with any aspect ratio.', 'tribe' ),
+			'instructions'  => esc_html__( 'Recommended image size: 200px tall with any aspect ratio.', 'tribe' ),
 		] );
+
 		$group->add_field( $logo_image );
 
 		$logo_link = new Field( self::LOGO_LINK, [
-			'label' => __( 'Logo Link', 'tribe' ),
-			'name'  => self::LOGO_LINK,
-			'type'  => 'link',
+			'label'       => __( 'Logo Link', 'tribe' ),
+			'name'        => self::LOGO_LINK,
+			'type'        => 'link',
+			'return_type' => 'array',
 		] );
+
 		$group->add_field( $logo_link );
 
 		return $group;

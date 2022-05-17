@@ -1,40 +1,39 @@
 <?php declare(strict_types=1);
 
 use Tribe\Project\Templates\Components\quote\Quote_Controller;
+use Tribe\Project\Templates\Components\text\Text_Controller;
 
 /**
  * @var array $args Arguments passed to the template
  */
 $c = Quote_Controller::factory( $args );
-
-// TODO: Convert the hard-coded quote `h2` to a text component.
 ?>
 
 <blockquote <?php echo $c->get_classes(); ?> <?php echo $c->get_attrs(); ?>>
-	<?php if ( ! empty( $c->get_quote() ) ) { ?>
-		<h2 class="c-quote__text h4"><?php echo esc_html( $c->get_quote() ); ?></h2>
-	<?php } ?>
+	<?php if ( $c->has_quote() ) : ?>
+		<?php get_template_part( 'components/text/text', '', [
+			Text_Controller::TAG     => 'h2',
+			Text_Controller::CLASSES => [
+				'c-quote__text',
+				'h4',
+			],
+			Text_Controller::CONTENT => esc_html( $c->get_quote()->quote_text ),
+		] );
+		?>
 
-	<?php if ( $c->has_citation() ) { ?>
 		<cite class="c-quote__cite">
 			<?php if ( ! empty( ( $c->get_image_args() ) ) ) {
 				get_template_part( 'components/image/image', null, $c->get_image_args() );
 			} ?>
 
 			<span class="c-quote__cite-text">
-				<?php if ( ! empty( $c->get_cite_name() ) ) { ?>
-					<span class="c-quote__cite-name">
-						<?php echo esc_html( $c->get_cite_name() ); ?>
-					</span>
-				<?php } ?>
-				<?php if ( ! empty( $c->get_cite_title() ) ) { ?>
-					<span class="c-quote__cite-title">
-						<?php echo esc_html( $c->get_cite_title() ); ?>
-					</span>
-				<?php } ?>
+				<span class="c-quote__cite-name">
+					<?php echo esc_html( $c->get_quote()->cite_name ); ?>
+				</span>
+				<span class="c-quote__cite-title">
+					<?php echo esc_html( $c->get_quote()->cite_title ); ?>
+				</span>
 			</span>
-
 		</cite>
-	<?php } ?>
-
+	<?php endif; ?>
 </blockquote>

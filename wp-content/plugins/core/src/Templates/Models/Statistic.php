@@ -2,20 +2,11 @@
 
 namespace Tribe\Project\Templates\Models;
 
-class Statistic {
+use Tribe\Libs\Field_Models\Field_Model;
 
-	public string $value;
-	public string $label;
+class Statistic extends Field_Model {
 
-	/**
-	 * Statistic constructor.
-	 *
-	 * @param string $value
-	 * @param string $label
-	 */
-	public function __construct( string $value, string $label ) {
-		$this->value = $value;
-		$this->label = $label;
-	}
+	public string $row_value = '';
+	public string $row_label = '';
 
 }

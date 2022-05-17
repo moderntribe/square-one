@@ -2,6 +2,7 @@
 
 namespace Tribe\Project\Templates\Components\blocks\content_columns;
 
+use Tribe\Libs\Field_Models\Models\Cta;
 use Tribe\Libs\Utils\Markup_Utils;
 use \Tribe\Project\Blocks\Types\Content_Columns\Content_Columns;
 use Tribe\Project\Templates\Components\Abstract_Controller;
@@ -10,6 +11,7 @@ use Tribe\Project\Templates\Components\content_block\Content_Block_Controller;
 use Tribe\Project\Templates\Components\Deferred_Component;
 use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Templates\Components\text\Text_Controller;
+use Tribe\Project\Templates\Models\Collections\Content_Column_Collection;
 use Tribe\Project\Templates\Models\Content_Column;
 
 class Content_Columns_Block_Controller extends Abstract_Controller {
@@ -51,19 +53,12 @@ class Content_Columns_Block_Controller extends Abstract_Controller {
 	 */
 	private array $content_classes;
 
-	/**
-	 * @var string[]
-	 */
-	private array $cta;
+	private Cta $cta;
 	private string $content_align;
 	private string $description;
 	private string $leadin;
 	private string $title;
-
-	/**
-	 * @var \Tribe\Project\Templates\Models\Content_Column[]
-	 */
-	private array $columns;
+	private Content_Column_Collection $columns;
 
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
@@ -71,11 +66,11 @@ class Content_Columns_Block_Controller extends Abstract_Controller {
 		$this->attrs             = (array) $args[ self::ATTRS ];
 		$this->classes           = (array) $args[ self::CLASSES ];
 		$this->column_classes    = (array) $args[ self::COLUMN_CLASSES ];
-		$this->columns           = (array) $args[ self::COLUMNS ];
+		$this->columns           = $args[ self::COLUMNS ];
 		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
 		$this->content_align     = (string) $args[ self::CONTENT_ALIGN ];
 		$this->content_classes   = (array) $args[ self::CONTENT_CLASSES ];
-		$this->cta               = (array) $args[ self::CTA ];
+		$this->cta               = $args[ self::CTA ];
 		$this->description       = (string) $args[ self::DESCRIPTION ];
 		$this->leadin            = (string) $args[ self::LEADIN ];
 		$this->title             = (string) $args[ self::TITLE ];
@@ -111,7 +106,7 @@ class Content_Columns_Block_Controller extends Abstract_Controller {
 				'components/text/text',
 				null,
 				[
-					Text_Controller::CONTENT => esc_html( $column->get_title() ),
+					Text_Controller::CONTENT => esc_html( $column->col_title ),
 					Text_Controller::TAG     => $title_tag,
 					Text_Controller::CLASSES => $title_classes,
 				]
@@ -120,18 +115,18 @@ class Content_Columns_Block_Controller extends Abstract_Controller {
 				'components/container/container',
 				null,
 				[
-					Container_Controller::CONTENT => wp_kses_post( $column->get_content() ),
+					Container_Controller::CONTENT => wp_kses_post( $column->col_content ),
 				]
 			),
 			Content_Block_Controller::CTA     => defer_template_part(
 				'components/link/link',
 				null,
 				[
-					Link_Controller::CONTENT        => $column->get_cta()[ Link_Controller::CONTENT ],
-					Link_Controller::URL            => $column->get_cta()[ Link_Controller::URL ],
-					Link_Controller::TARGET         => $column->get_cta()[ Link_Controller::TARGET ],
-					Link_Controller::ADD_ARIA_LABEL => $column->get_cta()[ Link_Controller::ADD_ARIA_LABEL ],
-					Link_Controller::ARIA_LABEL     => $column->get_cta()[ Link_Controller::ARIA_LABEL ],
+					Link_Controller::CONTENT        => $column->cta->link->title,
+					Link_Controller::URL            => $column->cta->link->url,
+					Link_Controller::TARGET         => $column->cta->link->target,
+					Link_Controller::ADD_ARIA_LABEL => $column->cta->add_aria_label,
+					Link_Controller::ARIA_LABEL     => $column->cta->aria_label,
 					Link_Controller::CLASSES        => [
 						'a-btn',
 						'a-btn--has-icon-after',
@@ -152,7 +147,7 @@ class Content_Columns_Block_Controller extends Abstract_Controller {
 		return Markup_Utils::concat_attrs( $this->attrs );
 	}
 
-	public function get_columns(): array {
+	public function get_columns(): Content_Column_Collection {
 		return $this->columns;
 	}
 
@@ -175,12 +170,12 @@ class Content_Columns_Block_Controller extends Abstract_Controller {
 		return [
 			self::ATTRS             => [],
 			self::CLASSES           => [],
-			self::COLUMNS           => [],
+			self::COLUMNS           => new Content_Column_Collection(),
 			self::COLUMN_CLASSES    => [],
 			self::CONTAINER_CLASSES => [],
 			self::CONTENT_ALIGN     => Content_Columns::CONTENT_ALIGN_CENTER,
 			self::CONTENT_CLASSES   => [],
-			self::CTA               => [],
+			self::CTA               => new Cta(),
 			self::DESCRIPTION       => '',
 			self::LEADIN            => '',
 			self::TITLE             => '',
@@ -203,7 +198,7 @@ class Content_Columns_Block_Controller extends Abstract_Controller {
 				'b-content-columns__leadin',
 				'h6',
 			],
-			Text_Controller::CONTENT => $this->leadin ?? '',
+			Text_Controller::CONTENT => $this->leadin,
 		] );
 	}
 
@@ -215,7 +210,7 @@ class Content_Columns_Block_Controller extends Abstract_Controller {
 				'b-content-columns__title',
 				'h3',
 			],
-			Text_Controller::CONTENT => $this->title ?? '',
+			Text_Controller::CONTENT => $this->title,
 		] );
 	}
 
@@ -227,25 +222,21 @@ class Content_Columns_Block_Controller extends Abstract_Controller {
 				't-sink',
 				's-sink',
 			],
-			Container_Controller::CONTENT => $this->description ?? '',
+			Container_Controller::CONTENT => $this->description,
 		] );
 	}
 
-	private function get_cta(): Deferred_Component {
-		$cta = wp_parse_args( $this->cta, [
-			'content'        => '',
-			'url'            => '',
-			'target'         => '',
-			'add_aria_label' => false,
-			'aria_label'     => '',
-		] );
+	private function get_cta(): ?Deferred_Component {
+		if ( ! $this->cta->link->url ) {
+			return null;
+		}
 
 		return defer_template_part( 'components/link/link', null, [
-			Link_Controller::URL            => $cta['url'],
-			Link_Controller::CONTENT        => $cta['content'] ?: $cta['url'],
-			Link_Controller::TARGET         => $cta['target'],
-			Link_Controller::ADD_ARIA_LABEL => $cta['add_aria_label'],
-			Link_Controller::ARIA_LABEL     => $cta['aria_label'],
+			Link_Controller::URL            => $this->cta->link->url,
+			Link_Controller::CONTENT        => $this->cta->link->title ?: $this->cta->link->url,
+			Link_Controller::TARGET         => $this->cta->link->target,
+			Link_Controller::ADD_ARIA_LABEL => $this->cta->add_aria_label,
+			Link_Controller::ARIA_LABEL     => $this->cta->aria_label,
 			Link_Controller::CLASSES        => [
 				'c-block__cta-link',
 				'a-btn',

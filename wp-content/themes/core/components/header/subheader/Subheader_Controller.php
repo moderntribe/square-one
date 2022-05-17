@@ -2,6 +2,7 @@
 
 namespace Tribe\Project\Templates\Components\header\subheader;
 
+use Tribe\Libs\Field_Models\Models\Image;
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\image\Image_Controller;
@@ -20,7 +21,7 @@ class Subheader_Controller extends Abstract_Controller {
 	public const CONTAINER_CLASSES = 'container_classes';
 	public const CONTENT_CLASSES   = 'content_classes';
 	public const DESCRIPTION       = 'description';
-	public const HERO_IMAGE_ID     = 'hero_image';
+	public const HERO_IMAGE        = 'hero_image';
 	public const MEDIA_CLASSES     = 'media_classes';
 	public const TITLE             = 'title';
 
@@ -48,7 +49,7 @@ class Subheader_Controller extends Abstract_Controller {
 	 * @var string[]
 	 */
 	private array $media_classes;
-	private int $hero_image_id;
+	private Image $hero_image;
 	private string $description;
 	private string $title;
 
@@ -60,13 +61,13 @@ class Subheader_Controller extends Abstract_Controller {
 		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
 		$this->content_classes   = (array) $args[ self::CONTENT_CLASSES ];
 		$this->description       = (string) $args[ self::DESCRIPTION ];
-		$this->hero_image_id     = (int) $args[ self::HERO_IMAGE_ID ];
+		$this->hero_image        = $args[ self::HERO_IMAGE ];
 		$this->media_classes     = (array) $args[ self::MEDIA_CLASSES ];
 		$this->title             = (string) $args[ self::TITLE ];
 	}
 
 	public function get_classes(): string {
-		if ( ! empty( $this->hero_image_id ) ) {
+		if ( $this->hero_image->id ) {
 			$this->classes[] = 'c-subheader--has-image';
 			$this->classes[] = 't-theme--light';
 		}
@@ -107,12 +108,12 @@ class Subheader_Controller extends Abstract_Controller {
 	}
 
 	public function get_image_args(): array {
-		if ( empty( $this->hero_image_id ) ) {
+		if ( ! $this->hero_image->id ) {
 			return [];
 		}
 
 		return [
-			Image_Controller::IMG_ID       => $this->hero_image_id,
+			Image_Controller::IMG_ID       => $this->hero_image->id,
 			Image_Controller::AUTO_SHIM    => false,
 			Image_Controller::USE_LAZYLOAD => true,
 			Image_Controller::CLASSES      => [ 'c-image--overlay', 'c-image--object-fit' ],
@@ -132,7 +133,7 @@ class Subheader_Controller extends Abstract_Controller {
 			self::CONTAINER_CLASSES => [],
 			self::CONTENT_CLASSES   => [],
 			self::DESCRIPTION       => '',
-			self::HERO_IMAGE_ID     => 0,
+			self::HERO_IMAGE        => new Image(),
 			self::MEDIA_CLASSES     => [],
 			self::TITLE             => '',
 		];

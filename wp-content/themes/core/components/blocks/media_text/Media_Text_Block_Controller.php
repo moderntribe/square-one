@@ -2,6 +2,8 @@
 
 namespace Tribe\Project\Templates\Components\blocks\media_text;
 
+use Tribe\Libs\Field_Models\Models\Cta;
+use Tribe\Libs\Field_Models\Models\Image;
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Blocks\Types\Media_Text\Media_Text as Media_Text_Block;
 use Tribe\Project\Templates\Components\Abstract_Controller;
@@ -50,16 +52,13 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 	 */
 	private array $content_classes;
 
-	/**
-	 * @var string[]
-	 */
-	private array $cta;
+	private Cta $cta;
 
 	/**
 	 * @var string[]
 	 */
 	private array $media_classes;
-	private int $image;
+	private Image $image;
 	private string $description;
 	private string $layout;
 	private string $leadin;
@@ -79,12 +78,12 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 		$this->media_classes     = (array) $args[ self::MEDIA_CLASSES ];
 		$this->content_classes   = (array) $args[ self::CONTENT_CLASSES ];
 		$this->media_type        = (string) $args[ self::MEDIA_TYPE ];
-		$this->image             = (int) $args[ self::IMAGE ];
+		$this->image             = $args[ self::IMAGE ];
 		$this->video             = (string) $args[ self::VIDEO ];
 		$this->title             = (string) $args[ self::TITLE ];
 		$this->leadin            = (string) $args[ self::LEADIN ];
 		$this->description       = (string) $args[ self::DESCRIPTION ];
-		$this->cta               = (array) $args[ self::CTA ];
+		$this->cta               = $args[ self::CTA ];
 	}
 
 	public function get_classes(): string {
@@ -137,11 +136,8 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 		];
 	}
 
-	/**
-	 * @return array
-	 */
 	public function get_image_args(): array {
-		if ( ! $this->image ) {
+		if ( ! $this->image->id ) {
 			return [];
 		}
 
@@ -162,7 +158,7 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 		}
 
 		return [
-			Image_Controller::IMG_ID       => $this->image,
+			Image_Controller::IMG_ID       => $this->image->id,
 			Image_Controller::SRC_SIZE     => $src_size,
 			Image_Controller::SRCSET_SIZES => $srcset_sizes,
 		];
@@ -182,9 +178,9 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 			self::CLASSES           => [],
 			self::CONTAINER_CLASSES => [],
 			self::CONTENT_CLASSES   => [],
-			self::CTA               => [],
+			self::CTA               => new Cta(),
 			self::DESCRIPTION       => '',
-			self::IMAGE             => 0,
+			self::IMAGE             => new Image(),
 			self::LAYOUT            => Media_Text_Block::MEDIA_LEFT,
 			self::LEADIN            => '',
 			self::MEDIA_CLASSES     => [],
@@ -204,9 +200,6 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 		];
 	}
 
-	/**
-	 * @return \Tribe\Project\Templates\Components\Deferred_Component
-	 */
 	private function get_leadin(): Deferred_Component {
 		return defer_template_part( 'components/text/text', null, [
 			Text_Controller::CLASSES => [
@@ -218,9 +211,6 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 		] );
 	}
 
-	/**
-	 * @return \Tribe\Project\Templates\Components\Deferred_Component
-	 */
 	private function get_title(): Deferred_Component {
 		return defer_template_part( 'components/text/text', null, [
 			Text_Controller::TAG     => 'h2',
@@ -233,9 +223,6 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 		] );
 	}
 
-	/**
-	 * @return \Tribe\Project\Templates\Components\Deferred_Component
-	 */
 	private function get_content(): Deferred_Component {
 		return defer_template_part( 'components/container/container', null, [
 			Container_Controller::CLASSES => [
@@ -248,24 +235,13 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 		] );
 	}
 
-	/**
-	 * @return \Tribe\Project\Templates\Components\Deferred_Component
-	 */
 	private function get_cta(): Deferred_Component {
-		$cta = wp_parse_args( $this->cta, [
-			'content'        => '',
-			'url'            => '',
-			'target'         => '',
-			'add_aria_label' => false,
-			'aria_label'     => '',
-		] );
-
 		return defer_template_part( 'components/link/link', null, [
-			Link_Controller::URL            => $cta['url'],
-			Link_Controller::CONTENT        => $cta['content'] ?: $cta['url'],
-			Link_Controller::TARGET         => $cta['target'],
-			Link_Controller::ADD_ARIA_LABEL => $cta['add_aria_label'],
-			Link_Controller::ARIA_LABEL     => $cta['aria_label'],
+			Link_Controller::URL            => $this->cta->link->url,
+			Link_Controller::CONTENT        => $this->cta->link->title ?: $this->cta->link->url,
+			Link_Controller::TARGET         => $this->cta->link->target,
+			Link_Controller::ADD_ARIA_LABEL => $this->cta->add_aria_label,
+			Link_Controller::ARIA_LABEL     => $this->cta->aria_label,
 			Link_Controller::CLASSES        => [
 				'c-block__cta-link',
 				'a-btn',
