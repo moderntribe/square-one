@@ -41,9 +41,9 @@ class Quote_Controller extends Abstract_Controller {
 		return Markup_Utils::concat_attrs( $this->attrs );
 	}
 
-	public function has_citation(): bool {
+	public function has_quote(): bool {
 		return (bool) array_filter(
-			$this->quote->citation->toArray(),
+			$this->quote->except( 'cite_image' )->toArray(),
 			static fn( $v ) =>
 				is_array( $v ) ? array_filter( $v ) : ! empty( $v )
 		);
@@ -54,7 +54,7 @@ class Quote_Controller extends Abstract_Controller {
 	}
 
 	public function get_image_args(): array {
-		$image_id = $this->quote->citation->cite_image->id;
+		$image_id = $this->quote->cite_image->id;
 
 		if ( empty( $image_id ) ) {
 			return [];

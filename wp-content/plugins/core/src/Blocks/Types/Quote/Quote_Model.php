@@ -13,17 +13,10 @@ class Quote_Model extends Base_Model {
 		return [
 			Quote_Block_Controller::ATTRS   => $this->get_attrs(),
 			Quote_Block_Controller::CLASSES => $this->get_classes(),
-			Quote_Block_Controller::QUOTE   => $this->get_quote(),
+			Quote_Block_Controller::QUOTE   => new QuoteFieldModel( $this->get( Quote::QUOTE_GROUP, [] ) ),
 			Quote_Block_Controller::MEDIA   => new Image( $this->get( Quote::IMAGE, [] ) ),
 			Quote_Block_Controller::LAYOUT  => $this->get( Quote::LAYOUT, Quote::MEDIA_OVERLAY ),
 		];
-	}
-
-	protected function get_quote(): QuoteFieldModel {
-		return new QuoteFieldModel( [
-			'quote_text' => $this->get( Quote::QUOTE, '' ),
-			'citation'   => $this->get( Quote::GROUP_CITE, [] ),
-		] );
 	}
 
 }
