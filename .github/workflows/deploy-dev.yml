@@ -58,6 +58,7 @@ jobs:
         with:
           node-version-file: "${{ env.BUILD_FOLDER }}/.nvmrc"
           cache: 'yarn'
+          cache-dependency-path: "${{ env.BUILD_FOLDER }}/yarn.lock"
 
       # Yarn Install and Build
       - name: Yarn install and build
