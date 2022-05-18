@@ -45,8 +45,11 @@ class Object_Meta_Definer implements Definer_Interface {
 				] ),
 
 			Taxonomy_Archive_Settings::class                    => DI\autowire()
-				->constructorParameter( 'object_types', static fn( ContainerInterface $c ) => [
-					'taxonomies' => [ Category::NAME, Post_Tag::NAME ],
+				->constructorParameter( 'object_types', static fn() => [
+					'taxonomies' => [
+						Category::NAME,
+						Post_Tag::NAME,
+					],
 				] ),
 		];
 	}
