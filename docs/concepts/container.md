@@ -153,15 +153,24 @@ like `foo.bar`.
 
 
 ```php
-<?php
+<?php declare(strict_types=1);
+
 // .phpstorm.meta.php
-namespace PHPSTORM_META
-{
-    override(\Psr\Container\ContainerInterface::get(0), map([
-        '' => '@',
-    ]));
-    override(\DI\Container::get(0), map([
-        '' => '@',
-    ]));
+namespace PHPSTORM_META {
+
+	override( \Psr\Container\ContainerInterface::get( 0 ), map( [
+		'' => '@',
+	] ) );
+	override( \DI\Container::get( 0 ), map( [
+		'' => '@',
+	] ) );
+	override( \DI\FactoryInterface::make( 0 ), map( [
+		'' => '@',
+	] ) );
+	override( \DI\Container::make( 0 ), map( [
+		'' => '@',
+	] ) );
 }
 ```
+
+> NOTE: Vscode users can also use the file above with the [PHP Intelephense extension](https://marketplace.visualstudio.com/items?itemName=bmewburn.vscode-intelephense-client) installed.
