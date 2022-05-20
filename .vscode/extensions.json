@@ -6,7 +6,8 @@
     "recommendations": [
         "EditorConfig.EditorConfig",
         "xdebug.php-debug",
-        "valeryanm.vscode-phpsab"
+        "valeryanm.vscode-phpsab",
+        "bmewburn.vscode-intelephense-client"
     ],
     // List of extensions recommended by VS Code that should not be recommended for users of this workspace.
     "unwantedRecommendations": [
