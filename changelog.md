@@ -3,7 +3,8 @@
 All notable changes to this project will be documented in this file.
 
 ## 2022.05
-* Updated: Recommended extentions for VS Code to include PHP Intelephense. 
+* Fixed: Prevent PHPStan from running out of memory during CI runs.
+* Updated: Recommended extensions for VS Code to include PHP Intelephense. 
 * Updated: `.phpstorm.meta.php` code completion documentation.
 * Fixed: Ensure setup-node github action can find the yarn.lock file for caching.
 * Updated: Ensure object meta definers are using autowiring for automatic dependency injection. 
