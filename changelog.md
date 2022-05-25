@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## 2022.05
+* Fixed: Use PHP to prefix commits with a jira ticket, avoiding different shell environments.
 * Updated: Recommended extentions for VS Code to include PHP Intelephense. 
 * Updated: `.phpstorm.meta.php` code completion documentation.
 * Fixed: Ensure setup-node github action can find the yarn.lock file for caching.

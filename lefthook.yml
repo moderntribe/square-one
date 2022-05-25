@@ -29,5 +29,5 @@ pre-commit:
 # prefix with jira ticket
 prepare-commit-msg:
   scripts:
-    "prefix_with_jira_ticket":
-      runner: bash
+    "prefix-with-jira-ticket.php":
+      runner: php
