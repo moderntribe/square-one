@@ -57,9 +57,9 @@ function is_protected_branch( string $branch ): bool {
  *      @type string $2 The source of the commit: message, template, merge, squash, commit.
  * }
  */
-$commit_file    = $argv[1];
-$commit_source  = $argv[2];
-$commit_message = file_get_contents( $commit_file );
+$commit_file    = $argv[1] ?? '';
+$commit_source  = $argv[2] ?? '';
+$commit_message = is_writable( $commit_file ) ? file_get_contents( $commit_file ) : '';
 $branch         = exec( 'git symbolic-ref --short HEAD' );
 
 if ( $commit_message && $branch && is_valid_commit_source( $commit_source ) && ! is_protected_branch( $branch ) ) {
