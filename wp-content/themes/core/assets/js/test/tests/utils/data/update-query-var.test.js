@@ -41,7 +41,7 @@ describe( 'updateQueryVar', () => {
 		expect( updateQueryVar( key, value, url ) ).toBe( expectedUrl );
 	} );
 
-	it ( 'do not add a key that is set to undefined', () => {
+	it( 'do not add a key that is set to undefined', () => {
 		const url = 'http://localhost/';
 		const key = 'param1';
 		const value = undefined;
