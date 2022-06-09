@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 * Fixed: `update-query-var.js` can now properly remove keys with `undefined` values.
 
 ## 2022.05
+* Fixed: Use PHP to prefix commits with a jira ticket, avoiding different shell environments.
 * Fixed: Prevent PHPStan from running out of memory during CI runs.
 * Updated: Recommended extensions for VS Code to include PHP Intelephense. 
 * Added: Access to the container in integration tests via `$this->container`.
