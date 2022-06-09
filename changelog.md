@@ -6,6 +6,8 @@ All notable changes to this project will be documented in this file.
 * Fixed: `update-query-var.js` can now properly remove keys with `undefined` values.
 
 ## 2022.05
+* Fixed: Prevent PHPStan from running out of memory during CI runs.
+* Updated: Recommended extensions for VS Code to include PHP Intelephense. 
 * Added: Access to the container in integration tests via `$this->container`.
 * Updated: Recommended extentions for VS Code to include PHP Intelephense. 
 * Updated: `.phpstorm.meta.php` code completion documentation.
