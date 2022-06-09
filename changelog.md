@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2022.06
+* Fixed: `update-query-var.js` can now properly remove keys with `undefined` values.
+
 ## 2022.05
 * Fixed: Use PHP to prefix commits with a jira ticket, avoiding different shell environments.
 * Updated: Recommended extentions for VS Code to include PHP Intelephense. 
