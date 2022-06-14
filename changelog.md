@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## 2022.06
+* Added: [phpstan/phpstan-mockery](https://github.com/phpstan/phpstan-mockery)
 * Fixed: Tab block controller throwing type errors.
 * Fixed: `update-query-var.js` can now properly remove keys with `undefined` values.
 

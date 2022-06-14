@@ -140,6 +140,7 @@
     "php-stubs/wordpress-tests-stubs": "^5.8",
     "phpstan/extension-installer": "^1.1",
     "phpstan/phpstan": "^1.5",
+    "phpstan/phpstan-mockery": "^1.1",
     "phpunit/phpunit": "^8.0 || ^9.0 <9.5",
     "szepeviktor/phpstan-wordpress": "^1.0",
     "wp-cli/wp-cli": "^2.5.0"
