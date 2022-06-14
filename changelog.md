@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ## 2022.06
 * Fixed: `update-query-var.js` can now properly remove keys with `undefined` values.
+* Updated: WordPress to 6.0, misc plugin updates.
 
 ## 2022.05
 * Updated: Recommended extentions for VS Code to include PHP Intelephense. 
