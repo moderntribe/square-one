@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## 2022.06
+* Fixed: Blocks added below floated elements in Gutenberg should now properly clear on both the frontend and backend.
 * Fixed: Tab block controller throwing type errors.
 * Fixed: `update-query-var.js` can now properly remove keys with `undefined` values.
 
