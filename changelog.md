@@ -3,10 +3,16 @@
 All notable changes to this project will be documented in this file.
 
 ## 2022.06
+* Added: [phpstan/phpstan-mockery](https://github.com/phpstan/phpstan-mockery)
+* Fixed: Tab block controller throwing type errors.
 * Fixed: `update-query-var.js` can now properly remove keys with `undefined` values.
 * Updated: WordPress to 6.0, misc plugin updates.
 
 ## 2022.05
+* Fixed: Use PHP to prefix commits with a jira ticket, avoiding different shell environments.
+* Fixed: Prevent PHPStan from running out of memory during CI runs.
+* Updated: Recommended extensions for VS Code to include PHP Intelephense. 
+* Added: Access to the container in integration tests via `$this->container`.
 * Updated: Recommended extentions for VS Code to include PHP Intelephense. 
 * Updated: `.phpstorm.meta.php` code completion documentation.
 * Fixed: Ensure setup-node github action can find the yarn.lock file for caching.
