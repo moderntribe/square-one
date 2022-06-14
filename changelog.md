@@ -3,10 +3,10 @@
 All notable changes to this project will be documented in this file.
 
 ## 2022.06
+* Updated: WordPress to 6.0, misc plugin updates.
 * Added: [phpstan/phpstan-mockery](https://github.com/phpstan/phpstan-mockery)
 * Fixed: Tab block controller throwing type errors.
 * Fixed: `update-query-var.js` can now properly remove keys with `undefined` values.
-* Updated: WordPress to 6.0, misc plugin updates.
 
 ## 2022.05
 * Fixed: Use PHP to prefix commits with a jira ticket, avoiding different shell environments.
