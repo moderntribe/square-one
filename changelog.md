@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## 2022.06
+* Fixed: Remove `SECTION_CONTENT` constant from `Stats Block`.
 * Fixed: Blocks added below floated elements in Gutenberg should now properly clear on both the frontend and backend.
 * Fixed: Gravity Forms spin.js spinner should now properly work for paginated forms.
 * Added: [phpstan/phpstan-mockery](https://github.com/phpstan/phpstan-mockery)
