@@ -1,0 +1,45 @@
+
+/* -----------------------------------------------------------------------------
+ *
+ * Block Editor
+ * Core Columns Block Styles & Overrides
+ *
+ * Styles applicable to this block in the block editor.
+ *
+ * ----------------------------------------------------------------------------- */
+
+.wp-block[data-type^="core/columns"] {
+
+	.wp-block[data-type^="core/column"] {
+
+		.editor-styles-wrapper .s-sink & {
+
+			> h1,
+			> h2,
+			> h3,
+			> h4,
+			> h5,
+			> h6 {
+				margin-bottom: var(--spacer-30);
+				width: 100%;
+
+				&:not(:first-child) {
+					margin-top: var(--spacer-30);
+				}
+
+				@media (--viewport-full) {
+					margin-bottom: var(--spacer-40);
+
+					&:not(:first-child) {
+						margin-top: var(--spacer-40);
+					}
+				}
+			}
+
+			p {
+				width: 100%;
+				margin-bottom: var(--spacer-40);
+			}
+		}
+	}
+}

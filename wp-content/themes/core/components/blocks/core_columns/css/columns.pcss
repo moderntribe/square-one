@@ -1,0 +1,124 @@
+.wp-block-columns {
+	display: flex;
+	box-sizing: border-box;
+	flex-wrap: wrap;
+	margin: var(--spacer-40) auto;
+
+	&.are-vertically-aligned-top {
+		align-items: flex-start;
+	}
+
+	&.are-vertically-aligned-center {
+		align-items: center;
+	}
+
+	&.are-vertically-aligned-bottom {
+		align-items: flex-end;
+	}
+
+	&.is-not-stacked-on-mobile {
+		flex-wrap: nowrap;
+	}
+
+	&.is-not-stacked-on-mobile > .wp-block-column {
+		flex-basis: 0;
+		flex-grow: 1;
+	}
+
+	&.is-not-stacked-on-mobile > .wp-block-column[style*=flex-basis] {
+		flex-grow: 0;
+	}
+
+	&.is-not-stacked-on-mobile > .wp-block-column:not(:first-child) {
+		margin-left: var(--spacer-50);
+	}
+
+	@media (--viewport-medium) {
+		flex-wrap: nowrap;
+	}
+}
+
+/* -------------------------------------------------------------------------
+ * Column
+ * ------------------------------------------------------------------------- */
+.wp-block-column {
+	flex-grow: 1;
+	min-width: 0;
+	word-break: break-word;
+	overflow-wrap: break-word;
+
+	&.is-vertically-aligned-top {
+		align-self: flex-start;
+	}
+
+	&.is-vertically-aligned-center {
+		align-self: center;
+	}
+
+	&.is-vertically-aligned-bottom {
+		align-self: flex-end;
+	}
+
+	&.is-vertically-aligned-top,
+	&.is-vertically-aligned-center,
+	&.is-vertically-aligned-bottom {
+		width: 100%;
+	}
+
+	:not(.is-not-stacked-on-mobile) & {
+		@media (--viewport-medium-max) {
+			flex-basis: 100% !important;
+		}
+
+		@media (--viewport-medium) {
+			flex-basis: 0;
+			flex-grow: 1;
+
+			&:not(:only-child) {
+				flex-basis: calc(50% - calc(var(--spacer-50) / 2));
+				flex-grow: 0;
+			}
+
+			&:nth-child(even) {
+				margin-left: var(--spacer-50);
+			}
+
+			&:not(:first-child) {
+				margin-left: var(--spacer-50);
+			}
+
+			&[style*=flex-basis] {
+				flex-grow: 0;
+			}
+		}
+	}
+
+	~ .wp-block-column {
+		margin-top: var(--spacer-40);
+
+		@media (--viewport-medium) {
+			margin-top: 0;
+		}
+	}
+
+	> *:first-child {
+		margin-top: 0 !important;
+	}
+
+	/* Child Blocks */
+
+	/* Question - Do we want/need this? */
+	.wp-block-image {
+		max-width: 100%;
+
+		.block-editor-block-list__layout & {
+			margin-top: var(--spacer-30);
+			margin-bottom: var(--spacer-30);
+
+			@media (--viewport-full) {
+				margin-top: var(--spacer-40);
+				margin-bottom: var(--spacer-40);
+			}
+		}
+	}
+}

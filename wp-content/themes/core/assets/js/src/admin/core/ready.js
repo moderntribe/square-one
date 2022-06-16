@@ -14,6 +14,7 @@ import plugins from './plugins';
 import viewportDims from './viewport-dims';
 import editor from '../editor';
 import blockStyles from './block-styles';
+import columnsBlock from 'components/blocks/core_columns';
 
 import { on, ready } from 'utils/events';
 
@@ -60,6 +61,8 @@ const init = () => {
  */
 
 const domReady = () => {
+	columnsBlock();
+
 	ready( init );
 };
 
