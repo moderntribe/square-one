@@ -10,6 +10,7 @@ class SquareOneChromeExampleCest extends Base_Webdriver_Cest {
 		$I->amOnPage( '/' );
 		$I->click( '#wp-admin-bar-customize a' );
 		$I->makeScreenshot();
+        $I->waitForElementVisible( '#accordion-section-title_tagline', 20 );
 		$I->click( '#accordion-section-title_tagline' );
 		$I->waitForElementVisible( '#_customize-input-blogname', 20 );
 		$I->fillField( '#_customize-input-blogname', $site_title );
