@@ -5,12 +5,13 @@ class SquareOneChromeExampleCest extends Base_Webdriver_Cest {
 	public function i_can_set_the_site_title_in_the_customizer( WebDriverTester $I ) {
 		$site_title = 'This is a test';
 
-		$I->makeScreenshot();
 		$I->loginAsAdmin();
 		$I->amOnPage( '/' );
-		$I->click( '#wp-admin-bar-customize a' );
+		$I->waitForPageLoad( 20 );
 		$I->makeScreenshot();
+		$I->click( '#wp-admin-bar-customize > a' );
         $I->waitForElementVisible( '#accordion-section-title_tagline', 60 );
+		$I->makeScreenshot();
 		$I->click( '#accordion-section-title_tagline' );
 		$I->waitForElementVisible( '#_customize-input-blogname', 20 );
 		$I->fillField( '#_customize-input-blogname', $site_title );
