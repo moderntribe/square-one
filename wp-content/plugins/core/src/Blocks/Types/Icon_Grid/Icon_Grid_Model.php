@@ -20,7 +20,7 @@ class Icon_Grid_Model extends Base_Model {
 		return [
 			Icon_Grid_Controller::ATTRS       => $this->get_attrs(),
 			Icon_Grid_Controller::CLASSES     => $this->get_classes(),
-			Icon_Grid_Controller::LAYOUT      => $this->get( Icon_Grid::LAYOUT, [] ),
+			Icon_Grid_Controller::LAYOUT      => $this->get( Icon_Grid::LAYOUT, '' ),
 			Icon_Grid_Controller::TITLE       => $this->get( Icon_Grid::TITLE, '' ),
 			Icon_Grid_Controller::LEADIN      => $this->get( Icon_Grid::LEADIN, '' ),
 			Icon_Grid_Controller::DESCRIPTION => $this->get( Icon_Grid::DESCRIPTION, '' ),
