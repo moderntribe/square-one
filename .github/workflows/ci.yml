@@ -20,7 +20,7 @@ jobs:
         php-versions: [ '7.4' ]
 
     env:
-      cache_version: 2 # increment to flush all caches
+      cache_version: 3 # increment to flush all caches
       PROJECT_ID: square1
       COMPOSE_INTERACTIVE_NO_CLI: 1
       COMPOSE_FILE: docker-compose.yml:docker-compose.gh.yml
