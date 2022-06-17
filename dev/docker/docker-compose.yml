@@ -20,7 +20,7 @@ x-memcached: &memcached
   image: memcached:alpine
 
 x-chrome: &chrome
-  image: 'selenium/standalone-chrome:3.141.59'
+  image: selenium/standalone-chrome:4.2
   volumes:
     - '/dev/shm:/dev/shm'
   ports:
