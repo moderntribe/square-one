@@ -17,10 +17,9 @@ class Stats extends Block_Config implements Cta_Field {
 
 	public const NAME = 'stats';
 
-	public const SECTION_CONTENT = 's-content';
-	public const LEAD_IN         = 'leadin';
-	public const TITLE           = 'title';
-	public const DESCRIPTION     = 'description';
+	public const LEAD_IN     = 'leadin';
+	public const TITLE       = 'title';
+	public const DESCRIPTION = 'description';
 
 	public const LAYOUT         = 'layout';
 	public const LAYOUT_INLINE  = 'inline';
