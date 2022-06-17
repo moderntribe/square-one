@@ -3,7 +3,7 @@
 use Tribe\Project\Blocks\Types\Icon_Grid\Icon_Grid_Model;
 
 /**
- * @var array $args ACF block data.
+ * @var array $block ACF block data.
  */
 $model = tribe_project()->container()->make( Icon_Grid_Model::class, [ 'block' => $block ] );
 
