@@ -31,7 +31,7 @@ class Follow_Controller extends Abstract_Controller {
 	}
 
 	public function get_social_links(): Social_Link_Collection {
-		$links = array_map( function ( $social_site ) {
+		$links = array_filter( array_map( function ( $social_site ) {
 			$url = $this->settings->get_setting( $social_site );
 
 			if ( ! $url ) {
@@ -44,7 +44,7 @@ class Follow_Controller extends Abstract_Controller {
 			$link->class = $social_site;
 
 			return $link->toArray();
-		}, $this->social_keys );
+		}, $this->social_keys ) );
 
 		return Social_Link_Collection::create( $links );
 	}
